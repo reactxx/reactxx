@@ -1,11 +1,9 @@
 ﻿{
   "compileOnSave": true,
   "compilerOptions": {
-    //"target": "es6",
     "target": "es2017",
     "rootDir": ".",
     "outDir": "lib-native",
-
 
     "baseUrl": ".",
     "paths": {
@@ -16,7 +14,7 @@
       "muix-styles/web/*": [ "node_modules/muix-styles/lib/web/*" ]
     },
 
-    //"importHelpers": true, https://github.com/facebook/react-native/issues/16858
+    "importHelpers": true, //https://github.com/facebook/react-native/issues/16858
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
     "downlevelIteration": true,
@@ -24,8 +22,6 @@
     "strict": true,
     "noImplicitReturns": true,
     "strictFunctionTypes": false,
-
-    "experimentalDecorators": true,
     "noImplicitAny": false,
     "jsx": "react-native",
     "lib": [

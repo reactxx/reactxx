@@ -13,3 +13,7 @@ call jspm update
 
 rmdir %root%\node_modules\@types\node /s /q
 
+copy D:\muix\test\$blacklist.js d:\muix\test\node_modules\metro-bundler\src\blacklist.js /y
+
+call npm link gulp
+

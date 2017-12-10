@@ -9,7 +9,7 @@ jss.options.createGenerateClassName = createGenerateClassName
 jss.options.insertionPoint = 'insertion-point-jss'
 
 
-export const FelaLike: React.SFC<{}> = props => <JssProvider jss={jss}>{props.children}</JssProvider>
+export const Styles: React.SFC<{}> = props => <JssProvider jss={jss}>{props.children}</JssProvider>
 
 const felaSheet = jss.createStyleSheet({}, { index: 999999, meta: 'fela-like' }).attach()
 
@@ -20,8 +20,6 @@ const felaSheet = jss.createStyleSheet({}, { index: 999999, meta: 'fela-like' })
 
 let counter = 0
 const cache = {}
-
-//export const overrideCSS = (classNames: string, css: CSSProperties) => classNames + ' ' + renderCSS(css)
 
 export const ruleToClassNames = (css: React.CSSProperties) => {
   if (!css) return ''
@@ -55,7 +53,6 @@ export const sheetToClassSheet = <TKey extends string>(sheet: Partial<Record<TKe
   for (const p in sheet) res[p] = ruleToClassNames(sheet[p])
   return res
 }
-
 
 //let css = renderCSS({ padding: 10, margin: '10px', display: 'flex' })
 //css = renderCSS({ padding: 10, margin: '12px' })

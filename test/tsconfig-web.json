@@ -26,7 +26,6 @@
     "noImplicitReturns": true,
     "strictFunctionTypes": false,
 
-    "experimentalDecorators": true,
     "noImplicitAny": false,
     "jsx": "react",
     "lib": [

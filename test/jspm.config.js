@@ -35,7 +35,7 @@ SystemJS.config({
     "lodash": "npm:lodash@4.17.4",
     "material-ui": "npm:material-ui@1.0.0-beta.23",
     "muix-icons": "npm:muix-icons@0.1.38",
-    "muix-styles": "npm:muix-styles@0.1.15",
+    "muix-styles": "npm:muix-styles@0.1.20",
     "os": "npm:jspm-nodelibs-os@0.2.2",
     "path": "npm:jspm-nodelibs-path@0.2.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",
@@ -601,19 +601,19 @@ SystemJS.config({
         "safe-buffer": "npm:safe-buffer@5.1.1"
       }
     },
-    "npm:muix-styles@0.1.15": {
+    "npm:muix-styles@0.1.20": {
       "map": {
         "react-dom": "npm:react-dom@16.2.0",
         "core-js": "npm:core-js@2.5.2",
         "material-ui": "npm:material-ui@1.0.0-beta.23",
         "muix-icons": "npm:muix-icons@0.1.38",
         "deepmerge": "npm:deepmerge@2.0.1",
-        "warning": "npm:warning@3.0.0",
         "recompose": "npm:recompose@0.26.0",
         "jss": "npm:jss@9.3.3",
+        "warning": "npm:warning@3.0.0",
+        "tslib": "npm:tslib@1.8.1",
         "jss-preset-default": "npm:jss-preset-default@4.0.1",
-        "react-jss": "npm:react-jss@8.1.0",
-        "tslib": "npm:tslib@1.8.1"
+        "react-jss": "npm:react-jss@8.1.0"
       }
     }
   }
