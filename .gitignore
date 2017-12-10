@@ -286,3 +286,13 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+
+*.js
+
+**/node_modules/
+**/jspm_packages/
+**/trash/
+**/deploy/
+**/package-lock.json
+!**/jspm.config.js

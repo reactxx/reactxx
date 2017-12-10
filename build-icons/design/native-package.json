@@ -1,0 +1,23 @@
+{
+  "name": "muix-icons-n",
+  "version": "0.1.22",
+  "description": "cross platform icons, EXPO edition",
+  "registry": "npm",
+  "main": "index.js",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PavelPZ/reactx-icons.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "icons"
+  ],
+  "author": "pzika@langmaster.cz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PavelPZ/reactx-icons/issues"
+  },
+  "homepage": "https://github.com/PavelPZ/reactx-icons#readme"
+}

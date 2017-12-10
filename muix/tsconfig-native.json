@@ -1,0 +1,52 @@
+﻿{
+  "compileOnSave": true,
+  "compilerOptions": {
+    //"target": "es6",
+    "target": "es2017",
+    "outDir": "deploy/es",
+
+    "baseUrl": ".",
+    "paths": {
+      "muix/styles/current/*": [ "src/styles/native/*" ],
+      "muix/styles/web/*": [ "src/styles/web/*" ],
+      "muix/styles/common/*": [ "src/styles/common/*" ],
+      "muix/styles/native/*": [ "src/styles/native/*" ],
+
+      "muix/primitives/current/*": [ "src/primitives/native/*" ],
+      "muix/primitives/common/*": [ "src/primitives/common/*" ],
+      "muix/primitives/web/*": [ "src/primitives/web/*" ],
+      "muix/primitives/native/*": [ "src/primitives/native/*" ],
+
+      "muix/components/web/*": [ "src/components/web/*" ],
+      "muix/components/current/*": [ "src/components/native/*" ],
+      "muix/components/common/*": [ "src/components/common/*" ],
+      "muix/components/native/*": [ "src/components/native/*" ],
+
+      "test/*": [ "src/test/*" ]
+    },
+
+    //"importHelpers": true, https://github.com/facebook/react-native/issues/16858
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": false,
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": false,
+
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "jsx": "react-native",
+    "lib": [
+      "dom",
+      "es2015",
+      "esnext.asynciterable"
+    ]
+  },
+  "include": [ "./src/**/*" ],
+  "exclude": [
+    "jspm_packages",
+    "node_modules",
+    "deploy"
+  ]
+}

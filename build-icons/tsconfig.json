@@ -1,0 +1,32 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es5",
+    "module": "system",
+    "inlineSourceMap": true,
+    "inlineSources": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "muix-icons/*": [ "muix-icons/es/*" ]
+    },
+
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "strict": false,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": false,
+
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es2015",
+      "esnext.asynciterable"
+    ]
+  },
+  "exclude": [
+    "deploy/es",
+    "node_modules",
+    "jspm_packages"
+  ]
+}

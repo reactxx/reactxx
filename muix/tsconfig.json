@@ -1,0 +1,56 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es5",
+    "module": "system",
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "importHelpers": true,
+    "outDir": "deploy/lib",
+
+    //"declaration": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "muix/styles/current/*": [ "src/styles/web/*" ],
+      "muix/styles/web/*": [ "src/styles/web/*" ],
+      "muix/styles/common/*": [ "src/styles/common/*" ],
+      "muix/styles/native/*": [ "src/styles/native/*" ],
+
+      "muix/primitives/current/*": [ "src/primitives/web/*" ],
+      "muix/primitives/common/*": [ "src/primitives/common/*" ],
+      "muix/primitives/web/*": [ "src/primitives/web/*" ],
+      "muix/primitives/native/*": [ "src/primitives/native/*" ],
+
+      "muix/components/web/*": [ "src/components/web/*" ],
+      "muix/components/current/*": [ "src/components/web/*" ],
+      "muix/components/common/*": [ "src/components/common/*" ],
+      "muix/components/native/*": [ "src/components/native/*" ],
+
+      "test/*": [ "src/test/*" ]
+    },
+
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": false,
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": false,
+
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es2015",
+      "esnext.asynciterable"
+    ]
+  },
+  "include": [ "./src/**/*" ],
+  "exclude": [
+    "jspm_packages",
+    "node_modules",
+    "deploy"
+  ]
+}

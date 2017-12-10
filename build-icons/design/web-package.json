@@ -1,0 +1,24 @@
+{
+  "name": "muix-icons-w",
+  "version": "0.1.22",
+  "description": "cross platform icons, WEB edition",
+  "registry": "npm",
+  "main": "index.js",
+  "jspmPackage": true,
+  "format": "cjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muix/build-icons.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "icons"
+  ],
+  "author": "pzika@langmaster.cz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/muix/build-icons/issues"
+  },
+  "homepage": "https://github.com/muix/build-icons#readme"
+}
