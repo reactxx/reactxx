@@ -296,3 +296,4 @@ __pycache__/
 **/deploy/
 **/package-lock.json
 !**/jspm.config.js
+build-icons/design/mdi-react/
