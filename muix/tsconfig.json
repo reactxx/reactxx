@@ -8,8 +8,6 @@
     "importHelpers": true,
     "outDir": "deploy/lib",
 
-    //"declaration": true,
-
     "baseUrl": ".",
     "paths": {
       "muix/styles/current/*": [ "src/styles/web/*" ],
@@ -51,6 +49,7 @@
   "exclude": [
     "jspm_packages",
     "node_modules",
-    "deploy"
+    "deploy",
+    "trash"
   ]
 }

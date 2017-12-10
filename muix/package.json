@@ -17,6 +17,7 @@
   "jspm": {
     "name": "muix",
     "main": "",
+    "dependencies": {},
     "devDependencies": {}
   }
 }

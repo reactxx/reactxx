@@ -69,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="deploy\es\native\index.js" />
-    <Content Include="design\mdi-react-lm\scripts\generate - Copy.js" />
     <Content Include="design\native-package.json" />
     <Content Include="design\web-package.json" />
     <Content Include="design\mdi-react-lm\package.json" />
@@ -91,7 +90,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore" />
     <Content Include="design\mdi-react-lm\scripts\generate.js" />
     <Content Include="Web.config" />
   </ItemGroup>

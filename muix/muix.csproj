@@ -89,10 +89,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore" />
     <Content Include="App.js" />
-    <Content Include="assets\icon.png" />
-    <Content Include="assets\splash.png" />
     <Content Include="jspm.config.js" />
     <Content Include="src\styles\common\links.html" />
     <Content Include="Web.config" />

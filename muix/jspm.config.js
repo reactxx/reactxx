@@ -10,9 +10,6 @@ SystemJS.config({
     "": {
       "defaultExtension": "js"
     }
-  },
-  map: {
-    "muix-icons-web": "npm:muix-icons@0.1.27"
   }
 });
 

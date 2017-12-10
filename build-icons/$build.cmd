@@ -1,4 +1,4 @@
-set root=d:\mui-x\build-icons\
+set root=d:\muix\build-icons\
 
 d:
 cd %root%deploy\

@@ -1,10 +1,10 @@
 ﻿{
   "compileOnSave": true,
   "compilerOptions": {
-    //"target": "es6",
     "target": "es2017",
     "outDir": "deploy/es",
 
+    "rootDir": "src",
     "baseUrl": ".",
     "paths": {
       "muix/styles/current/*": [ "src/styles/native/*" ],
@@ -25,7 +25,7 @@
       "test/*": [ "src/test/*" ]
     },
 
-    //"importHelpers": true, https://github.com/facebook/react-native/issues/16858
+    "importHelpers": true, //https://github.com/facebook/react-native/issues/16858
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
     "downlevelIteration": true,
@@ -47,6 +47,7 @@
   "exclude": [
     "jspm_packages",
     "node_modules",
-    "deploy"
+    "deploy",
+    "trash"
   ]
 }

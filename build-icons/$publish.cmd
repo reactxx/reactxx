@@ -1,9 +1,9 @@
-set root=d:\mui-x\build-icons\
+set root=d:\muix\build-icons\
 
 d:
 
-rem cd %root%
-rem call $build
+cd %root%
+call $build
 
 copy %root%README.md %root%deploy/README.md
 cd %root%deploy
@@ -13,5 +13,5 @@ cd %root%deploy
 call npm.cmd publish
 cd %root%deploy
 
-rem cd %root%
-rem call $refresh
+cd %root%
+call $refresh
