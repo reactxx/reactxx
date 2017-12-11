@@ -78,6 +78,7 @@
     <Content Include="%24refresh.cmd" />
     <Content Include="%24compile.cmd" />
     <None Include="packages.config" />
+    <Content Include="src\links.html" />
     <Content Include="tsconfig.json" />
     <Content Include="tsconfig-native.json" />
     <Content Include="tsconfig-web.json" />
