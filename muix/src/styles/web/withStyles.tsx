@@ -11,7 +11,7 @@ import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
 
 import { sheetToClassSheet } from './inline-styles'
-import { toPlatformSheetLow, toRuleLow } from 'muix/styles/common/toPlatform'
+import { toPlatformSheetLow, toRuleLow } from 'muix-styles/common/toPlatform'
 
 import { ButtonClassKey } from 'material-ui/Button/Button'
 
@@ -25,7 +25,7 @@ Order of FELA x JSS <style>'s tag:
 
 3. react app root is JssProvider:
 import JssProvider from 'react-jss/lib/JssProvider'
-import { jss } from 'muix/styles/common/withStyles'
+import { jss } from 'muix-styles/common/withStyles'
 <JssProvider jss={jss}>
 </JssProvider> 
 

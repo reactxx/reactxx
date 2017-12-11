@@ -2,7 +2,7 @@
 
 import { Dimensions, PixelRatio } from 'react-native'
 
-import { toPlatformTypographyOptionsLow } from 'muix/styles/common/toPlatform'
+import { toPlatformTypographyOptionsLow } from 'muix-styles/common/toPlatform'
 
 
 const toRule = (style: Mui.RuleUntyped, isNative: boolean) => {

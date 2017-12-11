@@ -9,7 +9,7 @@ import zIndex from 'material-ui/styles/zIndex'
 import spacing from 'material-ui/styles/spacing'
 
 import { toPlatformSheetLow } from './toPlatform'
-import { createTypographyNative, createTypographyWeb, shadowsNative, shadowsWeb } from 'muix/styles/current/createMuiTheme'
+import { createTypographyNative, createTypographyWeb, shadowsNative, shadowsWeb } from 'muix-styles/current/createMuiTheme'
 
 export const platformOverrides = (source: Mui.OverridesNew) => {
   if (!source) return null

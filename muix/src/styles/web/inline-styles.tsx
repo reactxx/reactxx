@@ -44,7 +44,7 @@ export const ruleToClassNames = (css: React.CSSProperties) => {
     }
     classes.push(cls)
   }
-  return classes.join(' ')
+  return classes.join(' ') + ' x y z'
 }
 
 export const sheetToClassSheet = <TKey extends string>(sheet: Partial<Record<TKey, React.CSSProperties>>) => {

@@ -3,7 +3,7 @@ import React from 'react'
 
 import muiCreateTypography from 'material-ui/styles/createTypography' 
 import shadows_w from 'material-ui/styles/shadows'
-import { emptyTypography, emptyShadowsNative } from 'muix/styles/common/empties'
+import { emptyTypography, emptyShadowsNative } from 'muix-styles/common/empties'
 
 export const createTypographyWeb = muiCreateTypography
 export const createTypographyNative = (palette, options) => emptyTypography //as Mui.native.TypographyOptionsCreator

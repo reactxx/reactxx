@@ -81,7 +81,6 @@
     <Content Include="tsconfig.json" />
     <Content Include="tsconfig-native.json" />
     <Content Include="tsconfig-web.json" />
-    <Content Include="src\typings-shared\mui-last-d.ts.tar" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -98,8 +97,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="App.tsx" />
-    <TypeScriptCompile Include="index.tsx" />
+    <TypeScriptCompile Include="src\test\App.tsx" />
+    <TypeScriptCompile Include="src\test\index.tsx" />
+    <TypeScriptCompile Include="src\test\styles\index.tsx" />
     <TypeScriptCompile Include="src\typings-shared\material-icons.d.ts" />
     <TypeScriptCompile Include="src\typings-shared\material-ui-helper.d.ts" />
     <TypeScriptCompile Include="src\typings-shared\material-ui.d.ts" />

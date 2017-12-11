@@ -10,4 +10,6 @@ const AppComp: React.SFC = props => {
   return <h3 className={classes}>{Play} = {MDI.icons.Play} = {classes} = {classes2}</h3>
 }
 
-export const init = () => ReactDOM.render(<AppComp />, document.getElementById('content')) 
+export default AppComp
+
+

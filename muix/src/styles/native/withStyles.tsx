@@ -4,11 +4,11 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 //import mui_withStyles, { StyleRules, StyleRulesCallback, WithStyles, WithStylesOptions, StyledComponentProps } from 'material-ui/styles/withStyles'
 //import { StyleRules as muiStyleRules} from 'material-ui/styles/withStyles'
 import { MuiThemeContextTypes } from './MuiThemeProvider'
-import createMuiTheme from 'muix/styles/common/createMuiTheme'
+import createMuiTheme from 'muix-styles/common/createMuiTheme'
 import warning from 'invariant'
 import pure from 'recompose/pure'
 import { View } from 'react-native'
-import { toPlatformSheetLow, toRuleLow } from 'muix/styles/common/toPlatform'
+import { toPlatformSheetLow, toRuleLow } from 'muix-styles/common/toPlatform'
 
 let defaultTheme: Mui.Theme
 const getDefaultTheme = () => defaultTheme || (defaultTheme = createMuiTheme())

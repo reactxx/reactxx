@@ -1,21 +1,23 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es5",
+    "module": "system",
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "importHelpers": true,
     "rootDir": ".",
-    "outDir": "lib-native",
-
+    "outDir": "lib-web",
 
     "baseUrl": ".",
     "paths": {
-      "muix-icons/current/*": [ "node_modules/muix-icons/es/native/index" ],
+      "muix-icons/current/*": [ "node_modules/muix-icons/lib/web/index" ],
 
-      "muix-styles/current/*": [ "node_modules/muix-styles/es/native/*" ],
-      "muix-styles/native/*": [ "node_modules/muix-styles/es/native/*" ],
-      "muix-styles/web/*": [ "node_modules/muix-styles/lib/web/*" ]
+      "muix-styles/current/*": [ "node_modules/muix-styles/lib/web/*" ],
+      "muix-styles/web/*": [ "node_modules/muix-styles/lib/web/*" ],
+      "muix-styles/native/*": [ "node_modules/muix-styles/es/native/*" ]
     },
 
-    "importHelpers": true, //https://github.com/facebook/react-native/issues/16858
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
     "downlevelIteration": true,
@@ -24,9 +26,8 @@
     "noImplicitReturns": true,
     "strictFunctionTypes": false,
 
-    "experimentalDecorators": true,
     "noImplicitAny": false,
-    "jsx": "react-native",
+    "jsx": "react",
     "lib": [
       "dom",
       "es2015",

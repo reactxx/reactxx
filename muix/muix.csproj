@@ -70,6 +70,10 @@
   <ItemGroup>
     <Content Include=".babelrc" />
     <Content Include="app.json" />
+    <Content Include="assets\icon.png" />
+    <Content Include="assets\splash.png" />
+    <Content Include="gulpfile.js" />
+    <Content Include="index.html" />
     <Content Include="package.json" />
     <Content Include="%24publish.cmd" />
     <Content Include="deploy\styles\package.json" />
@@ -90,7 +94,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App.js" />
     <Content Include="jspm.config.js" />
     <Content Include="src\styles\common\links.html" />
     <Content Include="Web.config" />
@@ -112,6 +115,9 @@
     <TypeScriptCompile Include="src\styles\native\MuiThemeProvider.ts" />
     <TypeScriptCompile Include="src\styles\native\shadows.ts" />
     <TypeScriptCompile Include="src\styles\native\withStyles.tsx" />
+    <TypeScriptCompile Include="src\test\App.tsx" />
+    <TypeScriptCompile Include="src\test\index.tsx" />
+    <TypeScriptCompile Include="src\test\styles\index.tsx" />
     <TypeScriptCompile Include="src\typings-shared\material-icons.d.ts" />
     <TypeScriptCompile Include="src\typings-shared\material-ui-helper.d.ts" />
     <TypeScriptCompile Include="src\typings-shared\material-ui.d.ts" />
@@ -158,6 +164,9 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>call "c:\Program Files (x86)\Microsoft SDKs\TypeScript\2.6\tsc.exe" --p d:\muix\muix\tsconfig-web.json</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

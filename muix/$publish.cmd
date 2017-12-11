@@ -13,3 +13,4 @@ call "c:\Program Files (x86)\Microsoft SDKs\TypeScript\2.6\tsc.exe" --p d:\muix\
 
 rem publish packages
 call %root%$publish_ styles
+
