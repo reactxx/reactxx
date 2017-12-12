@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import RN from 'react-native'
+import ReactN from 'react-native'
 
 import { sheetCreator } from 'muix-styles/common/withStyles'
 

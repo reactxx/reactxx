@@ -11,9 +11,9 @@ const toRule = (style: Mui.TRuleSetX, isNative: boolean) => {
   return { ...rest, ...(isNative ? native : web) } as Mui.TRuleSet
 }
 
-const toPlatformSheet = <R extends Mui.Shape>(rules: Mui.Sheet<R>, isNative: boolean) => {
+const toPlatformSheet = <R extends Mui.Shape>(rules: Mui.SheetX<R>, isNative: boolean) => {
   if (!rules) return null
-  const res: Mui.PlatformSheet<R> = {} as any
+  const res: Mui.Sheet<R> = {} as any
   for (const p in rules) res[p] = toRule(rules[p], isNative)
   return res
 }
@@ -214,7 +214,7 @@ const fontSizeNormalizerDefault = (size: number) => {
     return size;
 }
 
-//RN unit are dp: https://stackoverflow.com/questions/34493372/what-is-the-default-unit-of-style-in-react-native
+//ReactN unit are dp: https://stackoverflow.com/questions/34493372/what-is-the-default-unit-of-style-in-react-native
 //http://typecast.com/blog/a-more-modern-scale-for-web-typography
 //const fontSizesNative = {
 //  display4: 32,

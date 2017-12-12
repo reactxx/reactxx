@@ -13,12 +13,12 @@ const shadow = (deep: number) => {
     shadowOffset: {
       height: 0.6 * deep,
     },
-  } as RN.ViewStyle
+  } as ReactN.ViewStyle
 }
 
 let elev = 0.25
 
-export const shadows: Array<RN.ViewStyle> = [
+export const shadows: Array<ReactN.ViewStyle> = [
   //{ elevation: 1, shadowOpacity: 0, shadowOffset: { width: 0, height: 1 }, shadowColor: 'rgba(0, 0, 0, 0.2)', shadowRadius: 3 },
   {},
   ...range(1, 25).map(idx => shadow(idx))

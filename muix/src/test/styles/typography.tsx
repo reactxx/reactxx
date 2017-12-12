@@ -58,7 +58,7 @@ const theme = createMuiTheme({
         colorAccent: { color: cyan.A700, fontWeight: '500', fontSize: 18 },
         display2: { color: cyan.A700 },
       }
-    } as Mui.PartialSheet<Typography.Shape>
+    } as Mui.PartialSheetX<Typography.Shape>
   }
 })
 

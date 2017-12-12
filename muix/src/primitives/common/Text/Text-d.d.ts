@@ -3,9 +3,9 @@
   type ClassKeyText = 'root' 
 
   type Shape = Overwrite<Mui.DefaultEmptyShape, {
-    common: Record<ClassKeyText, RN.TextStyle>
-    style: RN.TextStyle
-    propsNative: RN.TextProperties
+    common: Record<ClassKeyText, ReactN.TextStyle>
+    style: ReactN.TextStyle
+    propsNative: ReactN.TextProperties
 
   }>
 

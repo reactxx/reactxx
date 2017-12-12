@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import RN from 'react-native'
+import ReactN from 'react-native'
 
 import { classNames, withStyles } from 'muix-styles/web/withStyles'
 import { sheet } from 'muix-primitives/common/View/View' 

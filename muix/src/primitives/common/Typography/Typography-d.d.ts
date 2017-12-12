@@ -3,8 +3,8 @@
   type ClassKey = Mui.TypographyClassKey | 'root' | 'alignLeft' | 'alignCenter' | 'alignRight' | 'gutterBottom' | 'paragraph' | 'colorInherit' | 'colorSecondary' | 'colorAccent' | 'colorPrimary' | 'colorError'
 
   type Shape = Overwrite<Mui.DefaultEmptyShape, {
-    common: Record<ClassKey, RN.TextStyle> & { noWrap?: any /*RN.TextProperties*/ }
-    style: RN.TextStyle
+    common: Record<ClassKey, ReactN.TextStyle> & { noWrap?: any /*ReactN.TextProperties*/ }
+    style: ReactN.TextStyle
     props: {
       align?: Mui.PropTypes.Alignment
       color?: Mui.PropTypes.Color | 'secondary' | 'error'
@@ -13,6 +13,6 @@
       paragraph?: boolean
       type?: Mui.TypographyClassKey
     }
-    propsNative: RN.TextProperties
+    propsNative: ReactN.TextProperties
   }>
 }

@@ -2,7 +2,7 @@
 
   type TextStyleKeys = 'display1' | 'display2' | 'display3' | 'display4' | 'headline' | 'title' | 'subheading' | 'body1' | 'body2' | 'caption'
   //type TypographyClassKey = TextStyleKeys | 'button' //| 'root'
-  type TypographyShape = Overwrite<Mui.DefaultEmptyShape, { common: Record<TypographyClassKey, RN.TextStyle> }>
+  type TypographyShape = Overwrite<Mui.DefaultEmptyShape, { common: Record<TypographyClassKey, ReactN.TextStyle> }>
 
   //from mui\styles\createTypography.d.ts
   namespace web {
@@ -14,14 +14,14 @@
       fontWeightRegular: FontWeight
       fontWeightMedium: FontWeight
     }
-    type FontWeight = RN.TextStyle['fontWeight']
+    type FontWeight = ReactN.TextStyle['fontWeight']
     //type TypographyStyle = CSSProperties
     type Typography = {[type in TypographyClassKey]: React.CSSProperties } & FontStyle
     //type TypographyOptions = Partial<Typography>
     type TypographyOptionsCreator = TypographyOptions | ((palette: Palette) => TypographyOptions)
   }
   //namespace native {
-  //  type Font = { fontFamily: string; fontWeight: RN.TextStyle['fontWeight'] }
+  //  type Font = { fontFamily: string; fontWeight: ReactN.TextStyle['fontWeight'] }
   //  type FontKey = 'light' | 'regular' | 'medium'
   //  type FontStyleLow = {
   //    fontSize: number
@@ -31,8 +31,8 @@
   //  }
   //  type FontStyle =  FontStyleLow & { fontsNative: Record<FontKey, Font> }
   //  type FontStylePartial = Partial<FontStyleLow> & { fontsNative?: PartialRecord<FontKey, Partial<Font>> }
-  //  type Typography = {[type in TypographyClassKey]: RN.TextStyle } & FontStyle
-  //  type TypographyOptions = {[type in TypographyClassKey]?: RN.TextStyle } & FontStylePartial
+  //  type Typography = {[type in TypographyClassKey]: ReactN.TextStyle } & FontStyle
+  //  type TypographyOptions = {[type in TypographyClassKey]?: ReactN.TextStyle } & FontStylePartial
   //  type TypographyOptionsCreator = TypographyOptions | ((palette: Mui.Palette) => TypographyOptions)
   //}
 

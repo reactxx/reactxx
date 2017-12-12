@@ -4,7 +4,7 @@
   type KeyText = MuiButtonBase.KeyText | 'rootLabel' | 'denseLabel' | 'disabledLabel' | 'flatLabelPrimary' | 'flatLabelAccent' | 'flatLabelContrast' | 'raisedLabelAccent' | 'raisedLabelContrast' | 'raisedLabelPrimary'
 
   type Shape = Overwrite<Mui.DefaultEmptyShape, {
-    native: Record<KeyText, RN.TextStyle> & Record<KeyView, RN.ViewStyle>
+    native: Record<KeyText, ReactN.TextStyle> & Record<KeyView, ReactN.ViewStyle>
     props: {
       color?: Mui.PropTypes.Color | 'contrast' | 'default'
       dense?: boolean
@@ -13,7 +13,7 @@
       raised?: boolean
       rootRef?: React.Ref<any>
     }
-    propsNative: RN.TouchableOpacityProperties
+    propsNative: ReactN.TouchableOpacityProperties
   }>
 
 }

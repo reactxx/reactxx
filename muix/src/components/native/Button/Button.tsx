@@ -92,7 +92,7 @@ const button: Mui.CodeSFCNative<MuiButton.Shape> = props => {
   } = props
 
   const flat = !raised && !fab
-  const viewStyle = classNames<RN.ViewStyle>(
+  const viewStyle = classNames<ReactN.ViewStyle>(
     classes.root,
     (raised || fab) && classes.raised,
     fab && classes.fab,
@@ -102,7 +102,7 @@ const button: Mui.CodeSFCNative<MuiButton.Shape> = props => {
     raised && disabled && classes.raisedDisable,
     style,
   )
-  const textStyle = classNames<RN.TextStyle>(
+  const textStyle = classNames<ReactN.TextStyle>(
     classes.rootLabel,
     flat && color === 'accent' && classes.flatLabelAccent,
     flat && color === 'contrast' && classes.flatLabelContrast,

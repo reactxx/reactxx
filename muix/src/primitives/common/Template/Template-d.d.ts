@@ -4,13 +4,13 @@
   type ClassKeyText = 'text' 
 
   type Shape = Overwrite<Mui.DefaultEmptyShape, {
-    common: Record<ClassKeyView, RN.ViewStyle> & Record<ClassKeyText, RN.TextStyle>
+    common: Record<ClassKeyView, ReactN.ViewStyle> & Record<ClassKeyText, ReactN.TextStyle>
     native: {}
     web: ''
-    style: RN.ViewStyle
+    style: ReactN.ViewStyle
     props: {}
     propsWeb: React.HTMLAttributes<HTMLDivElement>
-    propsNative: RN.ViewProperties
+    propsNative: ReactN.ViewProperties
   }>
 
 }

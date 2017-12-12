@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import RN from 'react-native'
+import ReactN from 'react-native'
 
 export const toRuleLow = (style: Mui.TRuleSetX, isNative: boolean) => {
   if (!style) return null
@@ -32,14 +32,14 @@ const native = {
   root: { color: 'green' }
 }
 */
-export const toPlatformSheetLow = (rules: Mui.PartialSheet<Mui.Shape>, isNative: boolean) => {
+export const toPlatformSheetLow = (rules: Mui.PartialSheetX<Mui.Shape>, isNative: boolean) => {
   if (!rules) return null
   const res = { ...(isNative ? rules.native : rules.web) }
   for (const p in rules.common) {
     const common = toRuleLow(rules.common[p], isNative)
     res[p] = !!res[p] ? { ...common, ...res[p] } : common
   }
-  return res as Mui.PlatformSheet<Mui.Shape>
+  return res as Mui.Sheet<Mui.Shape>
 }
 
 export const toPlatformTypographyOptionsLow = (options: Mui.TypographyOptions, isNative: boolean) => {

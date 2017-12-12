@@ -1,4 +1,4 @@
-import RN from 'react-native'
+import ReactN from 'react-native'
 import React from 'react'
 
 import Typography from 'material-ui/Typography/Typography'

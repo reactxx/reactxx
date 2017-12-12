@@ -1,5 +1,5 @@
 import React from 'react'
-import RN from 'react-native'
+import ReactN from 'react-native'
 
 import createTypographyN from 'muix-styles/native/createTypography'
 import shadows_n from 'muix-styles/native/shadows'

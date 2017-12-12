@@ -4,13 +4,13 @@
   type KeyText = 'disabledLabel'
 
   type Shape = Overwrite<Mui.DefaultEmptyShape, {
-    native: Record<KeyView, RN.ViewStyle>
+    native: Record<KeyView, ReactN.ViewStyle>
     props: {
       disabled?: boolean
       disableRipple?: boolean
       disableFocusRipple?: boolean;
       rootRef?: React.Ref<any>
     }
-    propsNative: RN.TouchableOpacityProperties
+    propsNative: ReactN.TouchableOpacityProperties
  }>
 }
