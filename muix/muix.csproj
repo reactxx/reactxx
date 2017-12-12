@@ -113,6 +113,7 @@
     <TypeScriptCompile Include="src\components\native\Button\Button.tsx" />
     <TypeScriptCompile Include="src\components\web\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\web\Button\Button.tsx" />
+    <TypeScriptCompile Include="src\navigation\index.tsx" />
     <TypeScriptCompile Include="src\primitives\common\Icon\Icon-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\common\Icon\Icon.tsx" />
     <TypeScriptCompile Include="src\primitives\common\ScrollView\ScrollView-d.d.ts" />
@@ -156,10 +157,10 @@
     <TypeScriptCompile Include="src\test\primitives\text-view.tsx" />
     <TypeScriptCompile Include="src\test\styles\index.tsx" />
     <TypeScriptCompile Include="src\test\styles\typography.tsx" />
-    <TypeScriptCompile Include="src\typings-shared\material-icons.d.ts" />
-    <TypeScriptCompile Include="src\typings-shared\material-ui-helper.d.ts" />
-    <TypeScriptCompile Include="src\typings-shared\material-ui.d.ts" />
-    <TypeScriptCompile Include="src\typings-shared\typings.d.ts" />
+    <TypeScriptCompile Include="src\typings\shared\material-icons.d.ts" />
+    <TypeScriptCompile Include="src\typings\shared\material-ui-helper.d.ts" />
+    <TypeScriptCompile Include="src\typings\shared\material-ui.d.ts" />
+    <TypeScriptCompile Include="src\typings\shared\typings.d.ts" />
     <TypeScriptCompile Include="src\typings\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="src\styles\web\createMuiTheme.ts" />
     <TypeScriptCompile Include="src\styles\web\inline-styles.tsx" />

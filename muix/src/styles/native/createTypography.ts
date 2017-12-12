@@ -5,10 +5,10 @@ import { Dimensions, PixelRatio } from 'react-native'
 import { toPlatformTypographyOptionsLow } from 'muix-styles/common/toPlatform'
 
 
-const toRule = (style: Mui.RuleUntyped, isNative: boolean) => {
+const toRule = (style: Mui.TRuleSetX, isNative: boolean) => {
   if (!style) return null
   const { web, native, ...rest } = style
-  return { ...rest, ...(isNative ? native : web) } as Mui.PlatformRuleUntyped
+  return { ...rest, ...(isNative ? native : web) } as Mui.TRuleSet
 }
 
 const toPlatformSheet = <R extends Mui.Shape>(rules: Mui.Sheet<R>, isNative: boolean) => {

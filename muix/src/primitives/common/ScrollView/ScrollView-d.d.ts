@@ -2,7 +2,7 @@
 
   type ClassKeyView = 'root' 
 
-  type Shape = Overwrite<Mui.EmptyShape, {
+  type Shape = Overwrite<Mui.DefaultEmptyShape, {
     common: Record<ClassKeyView, RN.ViewStyle>
     native: {}
     web: ''

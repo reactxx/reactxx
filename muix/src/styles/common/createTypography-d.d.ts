@@ -2,7 +2,7 @@
 
   type TextStyleKeys = 'display1' | 'display2' | 'display3' | 'display4' | 'headline' | 'title' | 'subheading' | 'body1' | 'body2' | 'caption'
   //type TypographyClassKey = TextStyleKeys | 'button' //| 'root'
-  type TypographyShape = Overwrite<Mui.EmptyShape, { common: Record<TypographyClassKey, RN.TextStyle> }>
+  type TypographyShape = Overwrite<Mui.DefaultEmptyShape, { common: Record<TypographyClassKey, RN.TextStyle> }>
 
   //from mui\styles\createTypography.d.ts
   namespace web {

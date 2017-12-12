@@ -24,13 +24,13 @@
     //MuiTemplate: MuiTemplate.Shape
   }
 
-  type Names = keyof Shapes
+  type Names = string //keyof Shapes
 
 
   interface WithStylesOptions {
     flip?: boolean
     withTheme?: boolean
-    name?: string
+    name?: Names
   }
 
   interface RNIconStyle {
@@ -38,36 +38,77 @@
     fontSize?: number
   }
 
-  type CSSProperties = React.CSSProperties //& { [propertyName: string]: any }
+  /* Terminology
 
-  //*********** RULE typing
-  //available native styles
-  type NativeCSS = RN.TextStyle | RN.ViewStyle | RN.ImageStyle | RNIconStyle
+  */
 
-  //cross platform style. It contains: 
-  //- commonStyle<T>: styles, common to Web and Native
-  //- 'native' and 'web' props for platform specific styles
-  type Rule<T extends NativeCSS> = { native?: T; web?: CSSProperties } & commonStyle<T>
-  type RuleUntyped = Rule<RN.TextStyle>
-  //result of transformation cross platform styles to platform specific style
-  type PlatformRule<T extends NativeCSS> = T | CSSProperties
-  type PlatformRuleUntyped = NativeCSS | CSSProperties
 
-  //select native props from web CSS. E.g. commonStyle<RN.TextStyle> could be used both for native <Text> and web <span>
-  type commonStyle<TNative> = TakeFrom<TNative, keyof React.CSSPropertiesLow & keyof TNative>
-  //type webUsableInNative = Diff<keyof React.CSSPropertiesLow, 'transform'> //transform native prop is not compatible with web
+  //*********** ruleset typing
+  //*** Platform specific ruleset
+  type RuleSetNative = RN.TextStyle | RN.ViewStyle | RN.ImageStyle | RNIconStyle
+  type RuleSetWeb = React.CSSProperties
+
+  //*** Platform specific Web **OR** Native ruleset
+  type RuleSet<T extends RuleSetNative> = T | RuleSetWeb
+
+  //*** cross platform Web **AND** Native ruleset
+  // It's easy to get platform specific ruleset for e.g. 'const stylex: RuleSetX<RN.TextStyle>':
+  //   const {web, native, ...rest} = stylex
+  //   const txtWeb = <span style={{...rest, ...web}}/> 
+  //   const txtNative = <Text style={{...rest, ...native}}/>
+
+  type RuleSetX<T extends RuleSetNative> = commonStyle<T> & {
+    native?: T;
+    web?: RuleSetWeb
+  }
+
+  /*Example 1:
+    const view: RuleSetX<RN.ViewStyle> = {}
+    view.overflow = 'scroll' //ERROR, only "visible" | "hidden" are valid for RN.ViewStyle['overflow']
+    view.overflow = 'hidden' //OK
+    view.color = 'red' //ERROR, RN.ViewStyle does not contain 'color' prop
+  Example 2:
+    const text: RuleSetX<RN.TextStyle> = {}
+    text.color = 'red' //OK, RN.TextStyle contains 'color' prop
+  Example 3:
+    //following style ruleset instances have the same result: overflow=visible for native and overflow=auto for web
+    const ruleset: RuleSetX<RN.ViewStyle> = {
+      overflow: 'visible',
+      web: {
+        overflow: 'auto',
+      }
+    }
+    const ruleset2: RuleSetX<RN.ViewStyle> = {
+      native: {
+        overflow: 'visible',
+      },
+      web: {
+        overflow: 'auto',
+      }
+    }
+  */
+
+  // common props names for T-native type and React.CSSProperties type
+  type commonProps<T extends RuleSetNative> = keyof React.CSSPropertiesLow & keyof T
+  // type which contains native props, which are in React.CSSProperties too
+  type commonStyle<T extends RuleSetNative> = TakeFrom<T, commonProps<T>>
+
+  //Helpers
+  type TRuleSetX = RuleSetX<RN.TextStyle>
+  type TRuleSet = RuleSetNative | RuleSetWeb
 
   //*********** RULES typing NEW
   interface Shape {
-    common: Record<string, NativeCSS>
-    native: Record<string, NativeCSS>
+    common: Record<string, RuleSetNative>
+    native: Record<string, RuleSetNative>
     web: string | null
-    style: NativeCSS
+    style: RuleSetNative
     props: {}
     propsNative: { style?: {}, onPress?: (ev?) => void }
     propsWeb: { style?: {}, onClick?: (ev?) => void }
   }
-  interface EmptyShape extends Shape {
+  //Helpers
+  interface DefaultEmptyShape extends Shape {
     common: {}
     native: {}
     web: null
@@ -88,16 +129,16 @@
   //type getPropsNative<R extends Shape> = R['propsNative']
 
   type Sheet<R extends Shape> = {
-    common: {[P in keyof getCommon<R>]: Rule<getCommon<R>[P]>}
+    common: {[P in keyof getCommon<R>]: RuleSetX<getCommon<R>[P]>}
     native: getNative<R>
-    web: {[P in getWeb<R>]: CSSProperties}
+    web: {[P in getWeb<R>]: RuleSetWeb}
   }
   type PartialSheet<R extends Shape> = {[P in keyof Sheet<R>]?: Partial<Sheet<R>[P]>}
 
   type SheetProps<R extends Shape> = {
-    classes?: {[P in keyof getCommon<R>]?: Rule<getCommon<R>[P]>}
+    classes?: {[P in keyof getCommon<R>]?: RuleSetX<getCommon<R>[P]>}
     classesNative?: Partial<getNative<R>>
-    classesWeb?: {[P in getWeb<R>]?: CSSProperties}
+    classesWeb?: {[P in getWeb<R>]?: RuleSetWeb}
   }
 
   //*********** RULES typing
@@ -114,7 +155,7 @@
   type PlatformSheetCreator<R extends Shape> = PlatformSheet<R> | ((theme: Mui.Theme) => PlatformSheet<R>)
 
   //platform specific rules (expanded from cross platform rules)
-  type PlatformSheetWeb<R extends Shape> = Record<keyof getCommon<R>, CSSProperties> & getWeb<R>
+  type PlatformSheetWeb<R extends Shape> = Record<keyof getCommon<R>, RuleSetWeb> & getWeb<R>
   type PlatformSheetNative<R extends Shape> = {[P in keyof getCommon<R>]: getCommon<R>[P]} & getNative<R>
   type PlatformSheet<R extends Shape> = PlatformSheetWeb<R> | PlatformSheetNative<R> //{[P in keyof R]: CSSProperties | R[P]} //PlatformSheetWeb<R> | PlatformSheetNative<R>
 
@@ -128,7 +169,7 @@
   type PropsLow<R extends Shape> = { innerRef?: (node) => void } & getProps<R>
 
   //cross platform Component, used in web and native application (created by withStyles)
-  type Props<R extends Shape> = PropsLow<R> & SheetProps<R> & { /*classes?: PartialSheet<R>;*/ style?: Rule<getStyle<R>>; web?: getPropsWeb<R>; native?: getPropsNative<R>; onPress?: () => void; onClick?: (ev: React.SyntheticEvent<HTMLElement>) => void }
+  type Props<R extends Shape> = PropsLow<R> & SheetProps<R> & { /*classes?: PartialSheet<R>;*/ style?: RuleSetX<getStyle<R>>; web?: getPropsWeb<R>; native?: getPropsNative<R>; onPress?: () => void; onClick?: (ev: React.SyntheticEvent<HTMLElement>) => void }
   type ComponentType<R extends Shape> = React.ComponentType<Props<R>>
   type SFC<R extends Shape> = React.SFC<Props<R>>
 
@@ -138,8 +179,8 @@
 
 
   //Component's code (passed to withStyles)
-  type CodeProps<R extends Shape> = PropsLow<R> & { classes: PlatformSheet<R>; style?: CSSProperties | getStyle<R>; theme: Mui.Theme; flip: boolean; } & (getPropsWeb<R> | getPropsNative<R>)
-  type CodePropsWeb<R extends Shape> = PropsLow<R> & { classes: ClassSheetWeb<R>; style?: CSSProperties; theme: Mui.Theme; flip: boolean; onClick?: (ev: React.SyntheticEvent<HTMLElement>) => void } & getPropsWeb<R>
+  type CodeProps<R extends Shape> = PropsLow<R> & { classes: PlatformSheet<R>; style?: RuleSetWeb | getStyle<R>; theme: Mui.Theme; flip: boolean; } & (getPropsWeb<R> | getPropsNative<R>)
+  type CodePropsWeb<R extends Shape> = PropsLow<R> & { classes: ClassSheetWeb<R>; style?: RuleSetWeb; theme: Mui.Theme; flip: boolean; onClick?: (ev: React.SyntheticEvent<HTMLElement>) => void } & getPropsWeb<R>
   type CodePropsNative<R extends Shape> = PropsLow<R> & { classes: PlatformSheetNative<R>; style?: getStyle<R>; theme: Mui.Theme; flip: boolean; onPress?: (ev?) => void } & getPropsNative<R>
 
   type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
@@ -153,11 +194,11 @@
   //*************************************************
 
   //original mui typings
-  type muiSheet<ClassKey extends string = string> = Record<ClassKey, CSSProperties>
+  type muiSheet<ClassKey extends string = string> = Record<ClassKey, RuleSetWeb>
   type muiSheetCreator<ClassKey extends string = string> = muiSheet<ClassKey> | ((theme: Mui.Theme) => muiSheet<ClassKey>)
   type muiClassSheet<ClassKey extends string = string> = Record<ClassKey, string>
   interface muiCodeProps<ClassKey extends string = string> { classes: muiClassSheet<ClassKey>; theme?: Mui.Theme }
-  interface muiProps<ClassKey extends string = string> { classes?: Partial<muiClassSheet<ClassKey>>; innerRef?: React.Ref<any>; style?: CSSProperties }
+  interface muiProps<ClassKey extends string = string> { classes?: Partial<muiClassSheet<ClassKey>>; innerRef?: React.Ref<any>; style?: RuleSetWeb }
   type muiWithStyles = <ClassKey extends string>(style: muiSheetCreator<ClassKey>, options?: WithStylesOptions) => <P>(component: muiCodeComponentType<P, ClassKey>) => muiComponentType<P, ClassKey>
   type muiCodeComponentType<P, ClassKey extends string> = React.ComponentType<P & muiCodeProps<ClassKey>>
   type muiComponentType<P, ClassKey extends string> = React.ComponentType<P & muiProps<ClassKey>>

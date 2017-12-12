@@ -60,12 +60,12 @@ export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.PlatformShee
   return pure(Style)
 }
 
-export const toRule = <T extends Mui.NativeCSS>(style: Mui.Rule<T>) => toRuleLow(style, true) as T
+export const toRule = <T extends Mui.RuleSetNative>(style: Mui.RuleSetX<T>) => toRuleLow(style, true) as T
 export const toPlatformSheet = <R extends Mui.Shape>(rules: Mui.PartialSheet<R>) => toPlatformSheetLow(rules, true) as Mui.PlatformSheetNative<R>
 
 export default withStyles
 
-export const classNames = <T extends Mui.NativeCSS>(...styles: Array<T | T[]>) => {
+export const classNames = <T extends Mui.RuleSetNative>(...styles: Array<T | T[]>) => {
   if (!styles) return null
   return Object.assign({}, ...styles.filter(p => !!p).map(p => {
     if (Array.isArray(p)) return Object.assign({}, ...p)

@@ -2,7 +2,7 @@
 
   type ClassKey = 'root' 
 
-  type Shape = Overwrite<Mui.EmptyShape, {
+  type Shape = Overwrite<Mui.DefaultEmptyShape, {
     common: Record<ClassKey, RN.ViewStyle>
   }>
 

@@ -1,10 +1,10 @@
 ﻿import React from 'react'
 import RN from 'react-native'
 
-export const toRuleLow = (style: Mui.RuleUntyped, isNative: boolean) => {
+export const toRuleLow = (style: Mui.TRuleSetX, isNative: boolean) => {
   if (!style) return null
   const { web, native, ...rest } = style
-  return { ...rest, ...(isNative ? native : web) } as Mui.PlatformRuleUntyped
+  return { ...rest, ...(isNative ? native : web) } as Mui.TRuleSet
 }
 
 /* INPUT

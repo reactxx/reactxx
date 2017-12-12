@@ -2,7 +2,7 @@
 
   type ClassKey = Mui.TypographyClassKey | 'root' | 'alignLeft' | 'alignCenter' | 'alignRight' | 'gutterBottom' | 'paragraph' | 'colorInherit' | 'colorSecondary' | 'colorAccent' | 'colorPrimary' | 'colorError'
 
-  type Shape = Overwrite<Mui.EmptyShape, {
+  type Shape = Overwrite<Mui.DefaultEmptyShape, {
     common: Record<ClassKey, RN.TextStyle> & { noWrap?: any /*RN.TextProperties*/ }
     style: RN.TextStyle
     props: {

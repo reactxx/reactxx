@@ -3,7 +3,7 @@
   type Colors = 'inherit' | 'accent' | 'action' | 'contrast' | 'disabled' | 'error' | 'primary';
   type ClassKey = 'root' | 'colorAccent' | 'colorAction' | 'colorContrast' | 'colorDisabled' | 'colorError' | 'colorPrimary' | 'colorInherit'
 
-  type Shape = Overwrite<Mui.EmptyShape, {
+  type Shape = Overwrite<Mui.DefaultEmptyShape, {
     common: Record<ClassKey, Mui.RNIconStyle>
     style: Mui.RNIconStyle
     props: {
