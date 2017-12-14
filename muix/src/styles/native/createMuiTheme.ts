@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactN from 'react-native'
+import { toPlatformSheetLow, toRuleLow } from 'muix-styles/common/toPlatform'
 
-import createTypographyN from 'muix-styles/native/createTypography'
-import shadows_n from 'muix-styles/native/shadows'
-import { emptyTypography, emptyShadowsWeb } from 'muix-styles/common/empties'
+export const toRule = <T extends Mui.RuleSetNative>(style: Mui.RuleSetX<T>) => toRuleLow(style, true) as T
+export const toPlatformSheet = <R extends Mui.Shape>(rules: Mui.PartialSheetX<R>) => toPlatformSheetLow(rules, true) as Mui.SheetNative<R>
 
-export const createTypographyWeb = (palette, options) => emptyTypography
-export const createTypographyNative = createTypographyN
+import createTypographyNative from 'muix-styles/native/createTypography'
+import shadowsNative from 'muix-styles/native/shadows'
 
-export const shadowsNative = shadows_n
-export const shadowsWeb = emptyShadowsWeb
+export const createTypography = createTypographyNative
+export const shadows = shadowsNative //.map(n => ({ native: n } as Mui.RuleSetX<ReactN.TextStyle>))
+

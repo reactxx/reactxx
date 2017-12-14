@@ -1,12 +1,13 @@
 ﻿import React from 'react'
 import { Platform, View, Text } from 'react-native'
 
-import { withStyles, classNames, toRule } from 'muix-styles/native/withStyles'
+import { withStyles, classNames } from 'muix-styles/native/withStyles'
+import { toRule } from 'muix-styles/native/createMuiTheme'
 import { sheetCreator } from 'muix-styles/common/withStyles'
 
 import ButtonBase from '../ButtonBase/ButtonBase'
 
-const sheet = sheetCreator<MuiButton.Shape>(({ typographyNative: typo, palette, spacing, shadowsNative }) => ({
+const sheet = sheetCreator<MuiButton.Shape>(({ typographyNative: typo, palette, spacing, shadowsNew }) => ({
   native: {
     root: {
       alignItems: 'center',
@@ -32,14 +33,14 @@ const sheet = sheetCreator<MuiButton.Shape>(({ typographyNative: typo, palette, 
 
     raised: {
       backgroundColor: palette.grey[300],
-      ...shadowsNative[2],
+      ...shadowsNew[2],
     },
-    raisedActive: shadowsNative[8],
+    raisedActive: shadowsNew[8],
     raisedPrimary: { backgroundColor: palette.primary[500] },
     raisedAccent: { backgroundColor: palette.secondary.A200, },
 
     raisedDisable: {
-      ...shadowsNative[0],
+      ...shadowsNew[0],
       backgroundColor: palette.text.divider,
     },
 
@@ -54,9 +55,9 @@ const sheet = sheetCreator<MuiButton.Shape>(({ typographyNative: typo, palette, 
       width: 56,
       height: 56,
       borderRadius: 56 / 2,
-      ...shadowsNative[6],
+      ...shadowsNew[6],
     },
-    fabActive: shadowsNative[12],
+    fabActive: shadowsNew[12],
     rootLabel: {
       ...typo.button,
       color: palette.text.primary,

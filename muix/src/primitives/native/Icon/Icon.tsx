@@ -1,6 +1,7 @@
 ﻿import React from 'react'
 
-import { withStyles, classNames, toPlatformSheet } from 'muix-styles/native/withStyles'
+import { withStyles, classNames } from 'muix-styles/native/withStyles'
+import { toPlatformSheet } from 'muix-styles/native/createMuiTheme'
 
 import { MaterialCommunityIcons as MIcon } from '@expo/vector-icons'
 

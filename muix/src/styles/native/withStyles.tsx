@@ -8,7 +8,7 @@ import createMuiTheme from 'muix-styles/common/createMuiTheme'
 import warning from 'invariant'
 import pure from 'recompose/pure'
 import { View } from 'react-native'
-import { toPlatformSheetLow, toRuleLow } from 'muix-styles/common/toPlatform'
+import { toPlatformSheet, toRule } from 'muix-styles/native/createMuiTheme'
 
 let defaultTheme: Mui.Theme
 const getDefaultTheme = () => defaultTheme || (defaultTheme = createMuiTheme())
@@ -31,8 +31,6 @@ const styleCreator = <R extends Mui.Shape>(styleOrCreator: Mui.PlatformSheetCrea
   const styles = (typeof styleOrCreator === 'function' ? styleOrCreator(theme) : styleOrCreator) as Mui.SheetNative<R>
   return styleOverride(styles, overrides, name)
 }
-
-//export const sheetCreator = <R extends Mui.Shape>(sheetGetter: Mui.SheetGetter<R>) => (theme: Mui.Theme) => toPlatformSheet(sheetGetter(theme) as Mui.PartialSheet<R>)
 
 export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.PlatformSheetCreator<R>, options?: Mui.WithStylesOptions) => (Component: Mui.CodeComponentType<R>) => {
   const Style: Mui.SFCX<R> = (props, context: Mui.TMuiThemeContextValue) => {
@@ -59,9 +57,6 @@ export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.PlatformShee
   hoistNonReactStatics(Style, Component as any)
   return pure(Style)
 }
-
-export const toRule = <T extends Mui.RuleSetNative>(style: Mui.RuleSetX<T>) => toRuleLow(style, true) as T
-export const toPlatformSheet = <R extends Mui.Shape>(rules: Mui.PartialSheetX<R>) => toPlatformSheetLow(rules, true) as Mui.SheetNative<R>
 
 export default withStyles
 

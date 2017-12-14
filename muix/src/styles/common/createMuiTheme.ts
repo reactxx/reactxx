@@ -8,8 +8,10 @@ import transitions from 'material-ui/styles/transitions'
 import zIndex from 'material-ui/styles/zIndex'
 import spacing from 'material-ui/styles/spacing'
 
-import { toPlatformSheetLow } from './toPlatform'
-import { createTypographyNative, createTypographyWeb, shadowsNative, shadowsWeb } from 'muix-styles/current/createMuiTheme'
+import { toPlatformSheetLow, toRuleLow } from './toPlatform'
+import { createTypography as createTypographyOld, shadows, toRule, toPlatformSheet } from 'muix-styles/current/createMuiTheme'
+
+//import { sheetCreator } from 'muix-styles/common/withStyles'
 
 export const platformOverrides = (source: Mui.OverridesNew) => {
   if (!source) return null
@@ -18,50 +20,94 @@ export const platformOverrides = (source: Mui.OverridesNew) => {
   return result
 }
 
-const getTypographyOptions = (optionsOrCreator: Mui.TypographyOptionsCreator) => {
+const createTypography = (palette: Mui.Palette, optionOrCreator: Mui.nw.TypographyOptionsCreatorX) => {
+  const {
+    fontSize = 14, // px
+    htmlFontSize = 16, // 16px is the default font-size used by browsers on the html element.
+    fontWeightLightNew = {
+      fontWeight: '300',
+      native: { fontFamily: 'Roboto_Light' }
+    } as Mui.TextStyleX,
+    fontWeightMediumNew = {
+      fontWeight: '500',
+      native: { fontFamily: 'Roboto_Medium' }
+    } as Mui.TextStyleX,
+    fontWeightRegularNew = {
+      fontWeight: '400',
+      native: { fontFamily: 'Roboto' }
+    } as Mui.TextStyleX,
+    fontFamily = '"Roboto", "Helvetica", "Arial", sans-serif',
+    //fontsNative: fontsNativeInit,
+    //fontSizeNormalizerNative = fontSizeNormalizerDefault,
+    fontAssetPathNative = 'libs/rw-mui-n/fonts/',
+    ...other
+  } = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Mui.nw.TypographyOptionsX
 
-  const getOptions = (options, isNative: boolean) => {
-    if (!options) return {}
-    const { fontFamily, fontSize, fontWeightLight, fontWeightRegular, fontWeightMedium, htmlFontSize, fontSizeNormalizerNative, fontAssetPathNative, ...rest } = options
-    return {
-      ...(isNative ? { htmlFontSize, fontSize, fontSizeNormalizerNative, fontAssetPathNative } : { htmlFontSize, fontSize, fontFamily, fontWeightLight, fontWeightRegular, fontWeightMedium }),
-      ...toPlatformSheetLow({ common: rest }, isNative) as any
-    }
-  }
+  const typographyOptions = getTypographyOptions(optionOrCreator)
 
-  if (typeof optionsOrCreator == 'function') {
-    return { optionsWeb: ((palette => getOptions(optionsOrCreator(palette), false))) as Mui.web.TypographyOptionsCreator /*Mui.web.TypographyOptionsCreator*/, optionsNative: (palette => getOptions(optionsOrCreator(palette), true)) as Mui.native.TypographyOptionsCreator }
-  } else
-    return { optionsWeb: getOptions(optionsOrCreator, false) as Mui.web.TypographyOptionsCreator, optionsNative: getOptions(optionsOrCreator, true) as Mui.native.TypographyOptionsCreator }
+  return createTypographyOld(palette, typographyOptions)
+
 }
 
-function createMuiTheme(options: Mui.ThemeOptions = {}) { 
+const getTypographyOptions = (optionsOrCreator: Mui.nw.TypographyOptionsCreatorX) => {
+
+  const getOptions = (options: Mui.nw.TypographyOptionsX) => {
+
+    let res: Mui.nw.TypographyOptions = {}
+
+    if (options) {
+      const { fontFamily, fontSize, htmlFontSize, fontSizeNormalizerNative, fontAssetPathNative, ...rulesX } = options
+
+      const rules: PartialRecord<Mui.nw.typoStyle, ReactN.TextStyle> = {}
+      for (const p in rulesX) rules[p] = toRule(rulesX[p])
+
+      res = {
+        fontFamily, fontSize, htmlFontSize, fontSizeNormalizerNative, fontAssetPathNative,
+        ...rules
+      }
+    }
+    return res
+  }
+
+  let res: Mui.nw.TypographyOptionsCreator = {}
+
+  if (optionsOrCreator) {
+    if (typeof optionsOrCreator == 'function') res = palette => getOptions(optionsOrCreator(palette))
+    else res = getOptions(optionsOrCreator)
+  }
+
+  return res
+}
+
+function createMuiTheme(options: Mui.ThemeOptions = {}) {
   const {
     palette: paletteInput = {},
     breakpoints: breakpointsInput = {},
     mixins: mixinsInput = {},
-    typography: typographyInput,
-    shadows: shadowsInput,
-    shadowsNative: shadowsNativeInput,
+    //typography: typographyInput,
+    typographyNew,
+    shadowsNew: shadowsNewInputX,
+    //shadowsNative: shadowsNativeInput,
     overridesNew, //XPlatform format
     overrides, //ignored
     ...other
   } = options
 
+  const shadowsNewInput = shadowsNewInputX && shadowsNewInputX.map(rsx => toRule(rsx) as Mui.ViewStyleCommon)
+
   const palette = createPalette(paletteInput)
   const breakpoints = createBreakpoints(breakpointsInput)
-
-  const typographyOptions = getTypographyOptions(typographyInput)
 
   const muiTheme: Mui.Theme = {
     direction: 'ltr',
     palette,
-    typography: createTypographyWeb(palette, typographyOptions.optionsWeb),
-    typographyNative: createTypographyNative(palette, typographyOptions.optionsNative),
+    typography: createTypography(palette, typographyNew),
+    //typographyNative: createTypographyNative(palette, typographyOptions.optionsNative),
     mixins: createMixins(breakpoints, spacing, mixinsInput),
     breakpoints,
-    shadows: shadowsInput || shadowsWeb,
-    shadowsNative: shadowsNativeInput || shadowsNative,
+    shadows: (shadowsNewInput || shadows).map(rsx => (toRuleLow(rsx, false) as React.CSSProperties).boxShadow),
+    shadowsNew: shadowsNewInput || shadows,
+    //shadowsNative: shadowsNativeInput || shadowsNative,
     overrides: platformOverrides(overridesNew),
     nativeSheetCache: [],
     ...(deepmerge(
@@ -78,7 +124,7 @@ function createMuiTheme(options: Mui.ThemeOptions = {}) {
   }
 
   warning(
-    muiTheme.shadows.length === 25 && muiTheme.shadowsNative.length === 25,
+    muiTheme.shadows.length === 25 && muiTheme.shadowsNew.length === 25,
     'Material-UI: the shadows array provided to createMuiTheme should support 25 elevations.',
   )
 

@@ -1,15 +1,16 @@
 import React from 'react'
-import JssProvider from 'react-jss/lib/JssProvider'
-import { create } from 'jss';
-import preset from 'jss-preset-default';
+//import JssProvider from 'react-jss/lib/JssProvider'
+//import { create } from 'jss';
+//import preset from 'jss-preset-default';
+import { jss } from './withStyles';
 import createGenerateClassName from 'material-ui/styles/createGenerateClassName'
 
-const jss = create(preset())
-jss.options.createGenerateClassName = createGenerateClassName
-jss.options.insertionPoint = 'insertion-point-jss'
+//const jss = create(preset())
+//jss.options.createGenerateClassName = createGenerateClassName
+//jss.options.insertionPoint = 'insertion-point-jss'
 
 
-export const Styles: React.SFC<{}> = props => <JssProvider jss={jss}>{props.children}</JssProvider>
+//export const Styles: React.SFC<{}> = props => <JssProvider jss={jss}>{props.children}</JssProvider>
 
 const felaSheet = jss.createStyleSheet({}, { index: 999999, meta: 'fela-like' }).attach()
 

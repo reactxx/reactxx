@@ -1,12 +1,14 @@
 import ReactN from 'react-native'
 import React from 'react'
 
-import muiCreateTypography from 'material-ui/styles/createTypography' 
-import shadows_w from 'material-ui/styles/shadows'
-import { emptyTypography, emptyShadowsNative } from 'muix-styles/common/empties'
+import CreateTypographyWeb from 'material-ui/styles/createTypography' 
+import shadowsStrings from 'material-ui/styles/shadows'
 
-export const createTypographyWeb = muiCreateTypography
-export const createTypographyNative = (palette, options) => emptyTypography //as Mui.native.TypographyOptionsCreator
-export const shadowsNative = emptyShadowsNative
-export const shadowsWeb = shadows_w
+import { toPlatformSheetLow, toRuleLow } from 'muix-styles/common/toPlatform'
+
+export const createTypography = CreateTypographyWeb
+export const shadows = shadowsStrings.map(s => ({ boxShadow: s } as Mui.ViewStyleCommon))
+
+export const toRule = (style: Mui.TRuleSetX) => toRuleLow(style, false) as React.CSSProperties
+export const toPlatformSheet = <R extends Mui.Shape>(rules: Mui.PartialSheetX<R>) => toPlatformSheetLow(rules, false) as Mui.SheetWeb<R>
 

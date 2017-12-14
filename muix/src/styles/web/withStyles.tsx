@@ -11,9 +11,11 @@ import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
 
 import { sheetToClassSheet } from './inline-styles'
-import { toPlatformSheetLow, toRuleLow } from 'muix-styles/common/toPlatform'
 
 import { ButtonClassKey } from 'material-ui/Button/Button'
+
+import { toRule, toPlatformSheet } from 'muix-styles/web/createMuiTheme'
+
 
 /*
 Order of FELA x JSS <style>'s tag:
@@ -31,9 +33,9 @@ import { jss } from 'muix-styles/common/withStyles'
 
 */
 
-const jss = create(preset())
+export const jss = create(preset())
 jss.options.createGenerateClassName = createGenerateClassName
-jss.options.insertionPoint = 'insertion-point-jss'
+//jss.options.insertionPoint = 'insertion-point-jss'
 
 export const Styler: React.SFC<{}> = props => <JssProvider jss={jss}>{props.children}</JssProvider>
 
@@ -41,7 +43,7 @@ const origWithStyles = withStylesMui as Mui.muiWithStyles
 
 type webKeys<R extends Mui.Shape> = Mui.getWeb<R> | keyof Mui.getCommon<R>
 
-export const beforeWithStyles = <R extends Mui.Shape>(Component: Mui.muiComponentType<Mui.getProps<R>, webKeys<R>>) => {
+export const withStylesX = <R extends Mui.Shape>(Component: Mui.muiComponentType<Mui.getProps<R>, webKeys<R>>) => {
   type TKey = webKeys<R>
   const res: Mui.SFCX<R> = props => {
     const { classes: common, classesNative, classesWeb, style, web, native, onClick: onClickInit, onPress: onPressInit, ...rest } = props as Mui.PropsX<Mui.Shape>
@@ -55,11 +57,8 @@ export const beforeWithStyles = <R extends Mui.Shape>(Component: Mui.muiComponen
 }
 
 export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.PlatformSheetCreator<R>, options?: Mui.WithStylesOptions) => (comp: Mui.muiComponentType<Mui.getProps<R>, webKeys<R>>) => {
-  return beforeWithStyles<R>(origWithStyles(styleOrCreator, options)(comp as Mui.muiCodeComponentType<Mui.getProps<R>, webKeys<R>>))
+  return withStylesX<R>(origWithStyles(styleOrCreator, options)(comp as Mui.muiCodeComponentType<Mui.getProps<R>, webKeys<R>>))
 }
-
-export const toRule = (style: Mui.TRuleSetX) => toRuleLow(style, false) as React.CSSProperties
-export const toPlatformSheet = <R extends Mui.Shape>(rules: Mui.PartialSheetX<R>) => toPlatformSheetLow(rules, false) as Mui.SheetWeb<R>
 
 //export const sheetCreator = <R extends Mui.Shape>(styleOrCreator: Mui.SheetGetter<R>) => {
 //  const styleOrCreatorEx: Mui.PlatformSheetCreator<R> = (theme: Mui.Theme) => {

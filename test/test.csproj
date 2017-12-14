@@ -78,7 +78,7 @@
     <Content Include="%24refresh.cmd" />
     <Content Include="%24compile.cmd" />
     <None Include="packages.config" />
-    <Content Include="src\links.html" />
+    <Content Include="links.html" />
     <Content Include="tsconfig.json" />
     <Content Include="tsconfig-native.json" />
     <Content Include="tsconfig-web.json" />
@@ -96,18 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="src\test\App.tsx" />
-    <TypeScriptCompile Include="src\test\index.tsx" />
-    <TypeScriptCompile Include="src\test\styles\index.tsx" />
-    <TypeScriptCompile Include="src\typings-shared\material-icons.d.ts" />
-    <TypeScriptCompile Include="src\typings-shared\material-ui-helper.d.ts" />
-    <TypeScriptCompile Include="src\typings-shared\material-ui.d.ts" />
-    <TypeScriptCompile Include="src\typings-shared\typings.d.ts" />
-    <TypeScriptCompile Include="src\typings\createTypography-d.d.ts" />
-    <TypeScriptCompile Include="src\typings\material-ui-ex.d.ts" />
-    <TypeScriptCompile Include="src\typings\withStyles-d.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

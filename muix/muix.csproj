@@ -139,6 +139,7 @@
     <TypeScriptCompile Include="src\primitives\web\View\View.tsx" />
     <TypeScriptCompile Include="src\styles\common\createMuiTheme.ts" />
     <TypeScriptCompile Include="src\styles\common\createTypography-d.d.ts" />
+    <TypeScriptCompile Include="src\styles\common\createTypography.ts" />
     <TypeScriptCompile Include="src\styles\common\empties.ts" />
     <TypeScriptCompile Include="src\styles\common\toPlatform.ts" />
     <TypeScriptCompile Include="src\styles\common\withStyles-d.d.ts" />

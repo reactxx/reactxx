@@ -18,11 +18,11 @@ const shadow = (deep: number) => {
 
 let elev = 0.25
 
-export const shadows: Array<ReactN.ViewStyle> = [
+export const shadows: Mui.ThemeShadows = [
   //{ elevation: 1, shadowOpacity: 0, shadowOffset: { width: 0, height: 1 }, shadowColor: 'rgba(0, 0, 0, 0.2)', shadowRadius: 3 },
   {},
   ...range(1, 25).map(idx => shadow(idx))
 ]
 
-export type Shadows = typeof shadows
+//export type Shadows = typeof shadows
 export default shadows

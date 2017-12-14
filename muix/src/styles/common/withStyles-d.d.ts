@@ -1,35 +1,12 @@
 ﻿declare namespace Mui {
 
-  //*********** CONSTS
-  //const enum Names {
-  //  Icon = 'MuiIcon',
-  //  Typography = 'MuiTypography',
-  //  ButtonBase = 'MuiButtonBase',
-  //  Button = 'MuiButton',
-  //  View = 'MuiView',
-  //  Text = 'MuiText',
-  //  Template = 'MuiTemplate',
-  //  ScrollView = 'MuiScrollView',
-  //}
-
   interface Shapes {
-    //MuiIcon: MuiIcon.Shape
-    //MuiTypography: Typography.Shape
-    //MuiButtonBase: MuiButtonBase.Shape
-    //MuiButton: MuiButton.Shape
-    //MuiView: MuiView.Shape
-    //MuiText: MuiText.Shape
-    //MuiScrollView: MuiScrollView.Shape
-
-    //MuiTemplate: MuiTemplate.Shape
   }
-
-  type Names = string //keyof Shapes
 
   /******************************************
     RULE SET
 
-    term for CSS in JS ruleset, e.g.
+    Term for CSS in JS ruleset, e.g.
     const ruleset = {
       color: 'red',
       display: 'none'
@@ -47,15 +24,20 @@
   //   const txtWeb = <span style={{...rest, ...web}}/> 
   //   const txtNative = <Text style={{...rest, ...native}}/>
 
-  type RuleSetX<T extends RuleSetNative> = commonStyle<T> & {
+  type RuleSetX<T extends RuleSetNative> = commonCSSProperties<T> & {
     native?: T;
     web?: RuleSetWeb
   }
 
-  // common props names for T-native type and React.CSSProperties type
-  type commonProps<T extends RuleSetNative> = keyof React.CSSPropertiesLow & keyof T
-  // type which contains native props, which are in React.CSSProperties too
-  type commonStyle<T extends RuleSetNative> = TakeFrom<T, commonProps<T>>
+  // common props names for native style and web React.CSSProperties
+  type commonCSSPropertiesNames<T extends RuleSetNative> = keyof React.CSSPropertiesLow & keyof T
+  // type which contains native props, which are also in React.CSSProperties
+  type commonCSSProperties<T extends RuleSetNative> = TakeFrom<T, commonCSSPropertiesNames<T>>
+
+  type TextStyleCommon = commonCSSProperties<ReactN.TextStyle>
+  type ViewStyleCommon = commonCSSProperties<ReactN.ViewStyle>
+  type TextStyleX = RuleSetX<ReactN.TextStyle>
+  type ViewStyleX = RuleSetX<ReactN.ViewStyle>
 
   /* ruleset usage examples
   Example 1:

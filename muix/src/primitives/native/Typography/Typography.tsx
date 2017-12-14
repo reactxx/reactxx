@@ -3,7 +3,8 @@ import React from 'react'
 import { capitalizeFirstLetter } from 'material-ui/utils/helpers'
 import { Text as TextRN } from 'react-native'
 
-import { toRule, withStyles, classNames } from 'muix-styles/native/withStyles'
+import { withStyles, classNames } from 'muix-styles/native/withStyles'
+import { toRule } from 'muix-styles/native/createMuiTheme'
 import { sheetCreator } from 'muix-styles/common/withStyles'
 
 export const sheet = sheetCreator<Typography.Shape>(({ typographyNative: typo, palette, spacing }) => ({
