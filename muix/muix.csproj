@@ -140,9 +140,9 @@
     <TypeScriptCompile Include="src\primitives\web\Text\Text.tsx" />
     <TypeScriptCompile Include="src\primitives\web\Typography\Typography.tsx" />
     <TypeScriptCompile Include="src\primitives\web\View\View.tsx" />
+    <TypeScriptCompile Include="src\styles\common\index.ts" />
     <TypeScriptCompile Include="src\styles\native\index.ts" />
     <TypeScriptCompile Include="src\styles\web\index.ts" />
-    <TypeScriptCompile Include="src\typings\createTypography-d.d.ts" />
     <TypeScriptCompile Include="src\typings\withStyles-d.d.ts" />
     <TypeScriptCompile Include="src\styles\native\createTypography.ts" />
     <TypeScriptCompile Include="src\styles\native\expoLoadFonts.ts" />
@@ -167,9 +167,7 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\styles\common\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

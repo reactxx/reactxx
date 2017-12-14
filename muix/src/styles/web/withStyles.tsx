@@ -12,8 +12,6 @@ import JssProvider from 'react-jss/lib/JssProvider'
 
 import { sheetToClassSheet } from './inline-styles'
 
-import { ButtonClassKey } from 'material-ui/Button/Button'
-
 import { toRule, toPlatformSheet } from 'muix-styles/web/index'
 
 
@@ -39,25 +37,23 @@ jss.options.createGenerateClassName = createGenerateClassName
 
 export const Styler: React.SFC<{}> = props => <JssProvider jss={jss}>{props.children}</JssProvider>
 
-const origWithStyles = withStylesMui as Mui.muiWithStyles
-
 type webKeys<R extends Mui.Shape> = Mui.getWeb<R> | keyof Mui.getCommon<R>
 
 export const withStylesX = <R extends Mui.Shape>(Component: Mui.muiComponentType<Mui.getProps<R>, webKeys<R>>) => {
   type TKey = webKeys<R>
   const res: Mui.SFCX<R> = props => {
-    const { classes: common, classesNative, classesWeb, style, web, native, onClick: onClickInit, onPress: onPressInit, ...rest } = props as Mui.PropsX<Mui.Shape>
-    const sheet = { common, native: classesNative, web: classesWeb} as Mui.PartialSheetX<R>
+    const { classes: common, classesNative, classesWeb, style, web, native, onClick, onPress: onPressInit, ...rest } = props as Mui.PropsX<Mui.Shape>
+    const sheet = { common, /*native: classesNative,*/ web: classesWeb} as Mui.PartialSheetX<R>
     const classes = sheetToClassSheet(toPlatformSheet(sheet) as Mui.SheetWeb<R>)
-    const onPress = onPressInit || onClickInit //|| (props.native && props.native['onPress']) || (props.web && props.web['onClick'])
-    const webProps = { ...rest, ...web, style: toRule(style), classes, onPress} as (Mui.getProps<R> & Mui.muiProps<TKey>) 
+    const onPress = onPressInit || onClick 
+    const webProps = { ...rest, ...web, style: toRule(style), classes, onPress, } as (Mui.getProps<R> & Mui.muiProps<TKey>) 
     return <Component {...webProps} />
   }
   return hoistNonReactStatics(res, Component)
 }
 
 export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.PlatformSheetCreator<R>, options?: Mui.WithStylesOptions) => (comp: Mui.muiComponentType<Mui.getProps<R>, webKeys<R>>) => {
-  return withStylesX<R>(origWithStyles(styleOrCreator, options)(comp as Mui.muiCodeComponentType<Mui.getProps<R>, webKeys<R>>))
+  return withStylesX<R>(withStylesMui(styleOrCreator, options)(comp as Mui.muiCodeComponentType<Mui.getProps<R>, webKeys<R>>))
 }
 
 export const classNames = _classnames
