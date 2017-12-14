@@ -14,7 +14,7 @@ import { sheetToClassSheet } from './inline-styles'
 
 import { ButtonClassKey } from 'material-ui/Button/Button'
 
-import { toRule, toPlatformSheet } from 'muix-styles/web/platform'
+import { toRule, toPlatformSheet } from 'muix-styles/web/index'
 
 
 /*

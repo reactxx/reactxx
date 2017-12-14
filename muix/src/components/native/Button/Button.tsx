@@ -2,8 +2,8 @@
 import { Platform, View, Text } from 'react-native'
 
 import { withStyles, classNames } from 'muix-styles/native/withStyles'
-import { toRule } from 'muix-styles/native/platform'
-import { sheetCreator } from 'muix-styles/common/platform'
+import { toRule } from 'muix-styles/native/index'
+import { sheetCreator } from 'muix-styles/common/index'
 
 import ButtonBase from '../ButtonBase/ButtonBase'
 

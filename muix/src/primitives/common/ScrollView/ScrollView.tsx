@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { sheetCreator } from 'muix-styles/common/platform'
+import { sheetCreator } from 'muix-styles/common/index'
 
 export const sheet = sheetCreator<MuiScrollView.Shape>(({ palette }) => ({
   common: {

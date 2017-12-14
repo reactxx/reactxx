@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 import range from 'lodash/range'
 
-import { toPlatformSheetX, toRuleX } from 'muix-styles/common/platform'
+import { toPlatformSheetX, toRuleX } from 'muix-styles/common/index'
 
 import createTypographyNative from 'muix-styles/native/createTypography'
 

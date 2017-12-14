@@ -140,10 +140,10 @@
     <TypeScriptCompile Include="src\primitives\web\Text\Text.tsx" />
     <TypeScriptCompile Include="src\primitives\web\Typography\Typography.tsx" />
     <TypeScriptCompile Include="src\primitives\web\View\View.tsx" />
-    <TypeScriptCompile Include="src\styles\common\platform.ts" />
+    <TypeScriptCompile Include="src\styles\native\index.ts" />
+    <TypeScriptCompile Include="src\styles\web\index.ts" />
     <TypeScriptCompile Include="src\typings\createTypography-d.d.ts" />
     <TypeScriptCompile Include="src\typings\withStyles-d.d.ts" />
-    <TypeScriptCompile Include="src\styles\native\platform.ts" />
     <TypeScriptCompile Include="src\styles\native\createTypography.ts" />
     <TypeScriptCompile Include="src\styles\native\expoLoadFonts.ts" />
     <TypeScriptCompile Include="src\styles\native\MuiThemeProvider.ts" />
@@ -161,14 +161,15 @@
     <TypeScriptCompile Include="src\typings\shared\material-ui.d.ts" />
     <TypeScriptCompile Include="src\typings\shared\typings.d.ts" />
     <TypeScriptCompile Include="src\typings\material-ui-ex.d.ts" />
-    <TypeScriptCompile Include="src\styles\web\platform.ts" />
     <TypeScriptCompile Include="src\styles\web\inline-styles.tsx" />
     <TypeScriptCompile Include="src\styles\web\withStyles.tsx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="src\styles\common\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

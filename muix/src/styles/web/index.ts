@@ -4,7 +4,7 @@ import React from 'react'
 import CreateTypographyWeb from 'material-ui/styles/createTypography' 
 import shadowsStrings from 'material-ui/styles/shadows'
 
-import { toPlatformSheetX, toRuleX } from 'muix-styles/common/platform'
+import { toPlatformSheetX, toRuleX } from 'muix-styles/common/index'
 
 export const createTypography = CreateTypographyWeb
 export const shadows = shadowsStrings.map(s => ({ boxShadow: s } as Mui.ViewStyleCommon))

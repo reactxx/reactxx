@@ -3,7 +3,7 @@
 //jspm build ./app-native/snack/mui/index.js ./app-native/snack/mui/bundle.js
 import React from 'react'
 //import { View, Text, ScrollView } from 'react-native'
-import createMuiTheme from 'muix-styles/common/platform'
+import createMuiTheme from 'muix-styles/common/index'
 import Typography from 'muix-primitives/current/Typography/Typography'
 import MuiThemeProvider from 'muix-styles/native/MuiThemeProvider'
 import orange from 'material-ui/colors/orange'

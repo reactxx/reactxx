@@ -8,7 +8,7 @@ import transitions from 'material-ui/styles/transitions'
 import zIndex from 'material-ui/styles/zIndex'
 import spacing from 'material-ui/styles/spacing'
 
-import { createTypography, shadows, toRule, toPlatformSheet } from 'muix-styles/current/platform'
+import { createTypography, shadows, toRule, toPlatformSheet } from 'muix-styles/current/index'
 
 export const sheetCreator = <R extends Mui.Shape>(sheetGetter: Mui.SheetGetter<R>) => (theme: Mui.Theme) => toPlatformSheet(sheetGetter(theme) as Mui.PartialSheetX<R>)
 

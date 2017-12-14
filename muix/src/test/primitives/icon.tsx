@@ -1,7 +1,7 @@
 import React from 'react'
 import Icon, { iconColor, iconSize } from 'muix-primitives/current/Icon/Icon'
 import MuiThemeProvider from 'muix-styles/native/MuiThemeProvider'
-import createMuiTheme from 'muix-styles/common/platform'
+import createMuiTheme from 'muix-styles/common/index'
 import color from 'material-ui/colors/orange'
 
 import { View, Text } from 'react-native'

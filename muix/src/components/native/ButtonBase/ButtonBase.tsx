@@ -3,7 +3,7 @@ import { View, TouchableWithoutFeedback, Animated, Easing, Platform, Text, Layou
 
 import { withStyles, classNames } from 'muix-styles/native/withStyles'
 
-import { sheetCreator } from 'muix-styles/common/platform'
+import { sheetCreator } from 'muix-styles/common/index'
 
 const sheet = sheetCreator<MuiButtonBase.Shape>(({ palette }) => ({
   native: {
