@@ -4,8 +4,8 @@ import { capitalizeFirstLetter } from 'material-ui/utils/helpers'
 import { Text as TextRN } from 'react-native'
 
 import { withStyles, classNames } from 'muix-styles/native/withStyles'
-import { toRule } from 'muix-styles/native/createMuiTheme'
-import { sheetCreator } from 'muix-styles/common/withStyles'
+import { toRule } from 'muix-styles/native/platform'
+import { sheetCreator } from 'muix-styles/common/platform'
 
 export const sheet = sheetCreator<Typography.Shape>(({ typographyNative: typo, palette, spacing }) => ({
   common: {

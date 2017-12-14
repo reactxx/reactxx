@@ -92,6 +92,9 @@
     <Content Include="src\primitives\web\fonts\Roboto-Light.ttf" />
     <Content Include="src\primitives\web\fonts\Roboto-Medium.ttf" />
     <Content Include="src\primitives\web\fonts\Roboto-Regular.ttf" />
+    <Content Include="src\styles\native\fonts\Roboto-Light.ttf" />
+    <Content Include="src\styles\native\fonts\Roboto-Medium.ttf" />
+    <Content Include="src\styles\native\fonts\Roboto-Regular.ttf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -137,18 +140,13 @@
     <TypeScriptCompile Include="src\primitives\web\Text\Text.tsx" />
     <TypeScriptCompile Include="src\primitives\web\Typography\Typography.tsx" />
     <TypeScriptCompile Include="src\primitives\web\View\View.tsx" />
-    <TypeScriptCompile Include="src\styles\common\createMuiTheme.ts" />
-    <TypeScriptCompile Include="src\styles\common\createTypography-d.d.ts" />
-    <TypeScriptCompile Include="src\styles\common\createTypography.ts" />
-    <TypeScriptCompile Include="src\styles\common\empties.ts" />
-    <TypeScriptCompile Include="src\styles\common\toPlatform.ts" />
-    <TypeScriptCompile Include="src\styles\common\withStyles-d.d.ts" />
-    <TypeScriptCompile Include="src\styles\common\withStyles.tsx" />
-    <TypeScriptCompile Include="src\styles\native\createMuiTheme.ts" />
+    <TypeScriptCompile Include="src\styles\common\platform.ts" />
+    <TypeScriptCompile Include="src\typings\createTypography-d.d.ts" />
+    <TypeScriptCompile Include="src\typings\withStyles-d.d.ts" />
+    <TypeScriptCompile Include="src\styles\native\platform.ts" />
     <TypeScriptCompile Include="src\styles\native\createTypography.ts" />
     <TypeScriptCompile Include="src\styles\native\expoLoadFonts.ts" />
     <TypeScriptCompile Include="src\styles\native\MuiThemeProvider.ts" />
-    <TypeScriptCompile Include="src\styles\native\shadows.ts" />
     <TypeScriptCompile Include="src\styles\native\withStyles.tsx" />
     <TypeScriptCompile Include="src\test\App.tsx" />
     <TypeScriptCompile Include="src\test\components\button.tsx" />
@@ -163,7 +161,7 @@
     <TypeScriptCompile Include="src\typings\shared\material-ui.d.ts" />
     <TypeScriptCompile Include="src\typings\shared\typings.d.ts" />
     <TypeScriptCompile Include="src\typings\material-ui-ex.d.ts" />
-    <TypeScriptCompile Include="src\styles\web\createMuiTheme.ts" />
+    <TypeScriptCompile Include="src\styles\web\platform.ts" />
     <TypeScriptCompile Include="src\styles\web\inline-styles.tsx" />
     <TypeScriptCompile Include="src\styles\web\withStyles.tsx" />
   </ItemGroup>

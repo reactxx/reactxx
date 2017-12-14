@@ -1,7 +1,14 @@
-//https://github.com/alekhurst/react-native-elevated-view/blob/master/index.js
-
-import { Platform } from 'react-native'
+import React from 'react'
+import ReactN from 'react-native'
 import range from 'lodash/range'
+
+import { toPlatformSheetX, toRuleX } from 'muix-styles/common/platform'
+
+import createTypographyNative from 'muix-styles/native/createTypography'
+
+export const toRule = <T extends Mui.RuleSetNative>(style: Mui.RuleSetX<T>) => toRuleX(style, true) as T
+export const toPlatformSheet = <R extends Mui.Shape>(rules: Mui.PartialSheetX<R>) => toPlatformSheetX(rules, true) as Mui.SheetNative<R>
+export const createTypography = createTypographyNative
 
 const round = (value: number) => Math.round(value * 1e5) / 1e5
 const shadow = (deep: number) => {
@@ -24,5 +31,6 @@ export const shadows: Mui.ThemeShadows = [
   ...range(1, 25).map(idx => shadow(idx))
 ]
 
-//export type Shadows = typeof shadows
-export default shadows
+
+
+

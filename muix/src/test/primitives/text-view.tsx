@@ -4,7 +4,7 @@
 //jspm build ./app-native/snack/mui/index.js ./app-native/snack/mui/bundle.js
 import React from 'react'
 //import { View, Text, ScrollView } from 'react-native'
-import createMuiTheme from 'muix-styles/common/createMuiTheme'
+import createMuiTheme from 'muix-styles/common/platform'
 import orange from 'material-ui/colors/orange'
 import green from 'material-ui/colors/green'
 import cyan from 'material-ui/colors/cyan'

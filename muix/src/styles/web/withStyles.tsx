@@ -14,7 +14,7 @@ import { sheetToClassSheet } from './inline-styles'
 
 import { ButtonClassKey } from 'material-ui/Button/Button'
 
-import { toRule, toPlatformSheet } from 'muix-styles/web/createMuiTheme'
+import { toRule, toPlatformSheet } from 'muix-styles/web/platform'
 
 
 /*
@@ -59,13 +59,5 @@ export const withStylesX = <R extends Mui.Shape>(Component: Mui.muiComponentType
 export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.PlatformSheetCreator<R>, options?: Mui.WithStylesOptions) => (comp: Mui.muiComponentType<Mui.getProps<R>, webKeys<R>>) => {
   return withStylesX<R>(origWithStyles(styleOrCreator, options)(comp as Mui.muiCodeComponentType<Mui.getProps<R>, webKeys<R>>))
 }
-
-//export const sheetCreator = <R extends Mui.Shape>(styleOrCreator: Mui.SheetGetter<R>) => {
-//  const styleOrCreatorEx: Mui.PlatformSheetCreator<R> = (theme: Mui.Theme) => {
-//    if (typeof styleOrCreator == 'function') return toPlatformSheet(styleOrCreator(theme) as Mui.PartialSheet<R>)
-//    else return styleOrCreator
-//  }
-//  return styleOrCreatorEx
-//}
 
 export const classNames = _classnames
