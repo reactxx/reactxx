@@ -9,6 +9,6 @@ import { toPlatformSheetX, toRuleX } from 'muix-styles/common/index'
 export const createTypography = CreateTypographyWeb
 export const shadows = shadowsStrings.map(s => ({ boxShadow: s } as Mui.ViewStyleCommon))
 
-export const toRule = (style: Mui.TRuleSetX) => toRuleX(style, false) as React.CSSProperties
+export const toRule = (style: Mui.TRulesetX) => toRuleX(style, false) as React.CSSProperties
 export const toPlatformSheet = <R extends Mui.Shape>(rules: Mui.PartialSheetX<R>) => toPlatformSheetX(rules, false) as Mui.SheetWeb<R>
 

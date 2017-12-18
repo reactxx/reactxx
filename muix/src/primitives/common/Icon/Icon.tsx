@@ -24,7 +24,7 @@ export const sheet = sheetCreator<MuiIcon.Shape>(({ palette }) => ({
   web: null
 }))
 
-export const getClasses = <T extends Mui.RuleSetNative | string>({ classes, color = 'inherit', children, theme, innerRef, style, ...rest }: Mui.CodeProps<MuiIcon.Shape>) => {
+export const getClasses = <T extends Mui.CSSPropertiesNative | string>({ classes, color = 'inherit', children, theme, innerRef, style, ...rest }: Mui.CodeProps<MuiIcon.Shape>) => {
   const childs = React.Children.toArray(children)
   warning(childs.length == 1 && typeof childs[0] === 'string', 'single child as string needed')
   return {

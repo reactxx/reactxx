@@ -6,7 +6,7 @@
   type Shape = Overwrite<Mui.DefaultEmptyShape, {
     common: Record<ClassKeyView, ReactN.ViewStyle> & Record<ClassKeyText, ReactN.TextStyle>
     native: {}
-    web: ''
+    web: null
     style: ReactN.ViewStyle
     props: {}
     propsWeb: React.HTMLAttributes<HTMLDivElement>

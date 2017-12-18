@@ -10,12 +10,12 @@ import spacing from 'material-ui/styles/spacing'
 
 import { createTypography, shadows, toRule, toPlatformSheet } from 'muix-styles/current/index'
 
-export const sheetCreator = <R extends Mui.Shape>(sheetGetter: Mui.SheetGetter<R>) => (theme: Mui.Theme) => toPlatformSheet(sheetGetter(theme) as Mui.PartialSheetX<R>)
+export const sheetCreator = <R extends Mui.Shape>(sheetGetter: Mui.SheetXCreator<R>) => (theme: Mui.Theme) => toPlatformSheet(sheetGetter(theme) as Mui.PartialSheetX<R>)
 
-export const toRuleX = (style: Mui.TRuleSetX, isNative: boolean) => {
+export const toRuleX = (style: Mui.TRulesetX, isNative: boolean) => {
   if (!style) return null
   const { web, native, ...rest } = style
-  return { ...rest, ...(isNative ? native : web) } as Mui.TRuleSet
+  return { ...rest, ...(isNative ? native : web) } as Mui.TRuleset
 }
 
 /* INPUT
