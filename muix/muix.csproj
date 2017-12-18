@@ -78,7 +78,7 @@
     <Content Include="%24publish.cmd" />
     <Content Include="deploy\styles\package.json" />
     <Content Include="%24publish_.cmd" />
-    <Content Include="deploy\README.md" />
+    <Content Include="deploy\styles\README.md" />
     <None Include="packages.config" />
     <Content Include="README.md" />
     <Content Include="src\styles\native\theme.json" />

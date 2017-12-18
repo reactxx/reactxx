@@ -2,7 +2,7 @@
 
 import { Dimensions, PixelRatio } from 'react-native'
 
-export default function createTypography(palette: Mui.Palette, optionOrCreator: Mui.nw.TypographyOptionsCreator) {
+export default function createTypography(palette: Mui.Palette, optionOrCreator: Mui.nw.TypographyOptionsOrCreator) {
   const {
     fontWeightLightNew,
     fontWeightMediumNew,

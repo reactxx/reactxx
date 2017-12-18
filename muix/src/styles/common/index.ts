@@ -8,46 +8,24 @@ import transitions from 'material-ui/styles/transitions'
 import zIndex from 'material-ui/styles/zIndex'
 import spacing from 'material-ui/styles/spacing'
 
+//platform specific functions
 import { createTypography, shadows, toRule, toPlatformSheet } from 'muix-styles/current/index'
 
-export const sheetCreator = <R extends Mui.Shape>(sheetGetter: Mui.SheetXCreator<R>) => (theme: Mui.Theme) => toPlatformSheet(sheetGetter(theme) as Mui.PartialSheetX<R>)
+//create platform specific sheet from cross platform sheet creator
+export const sheetCreator = <R extends Mui.Shape>(sheetXCreator: Mui.SheetXCreator<R>) => (theme: Mui.Theme) => toPlatformSheet(sheetXCreator(theme) as Mui.PartialSheetX<R>)
 
-export const toRuleX = (style: Mui.TRulesetX, isNative: boolean) => {
+//create platform specific sheet from cross platform sheet creator
+export const toPlatformRuleSetX = (style: Mui.TRulesetX, isNative: boolean) => {
   if (!style) return null
   const { web, native, ...rest } = style
   return { ...rest, ...(isNative ? native : web) } as Mui.TRuleset
 }
 
-/* INPUT
-const sheet = {
-  common: {
-    root: {
-      color: 'red',
-      web: { color: 'blue' },
-      native: { color: 'yellow' }
-    }
-  },
-  native: {
-    root: { color: 'green' }
-  },
-  web: {
-    root: { }
-  }
-}
-//OUTPUT for WEB
-const web = {
-  root: {color: 'blue'}
-}
-//OUTPUT for NATIVE
-const native = {
-  root: { color: 'green' }
-}
-*/
 export const toPlatformSheetX = (rules: Mui.PartialSheetX<Mui.Shape>, isNative: boolean) => {
   if (!rules) return null
   const res = { ...(isNative ? rules.native : rules.web) }
   for (const p in rules.common) {
-    const common = toRuleX(rules.common[p], isNative)
+    const common = toPlatformRuleSetX(rules.common[p], isNative)
     res[p] = !!res[p] ? { ...common, ...res[p] } : common
   }
   return res as Mui.Sheet<Mui.Shape>
@@ -60,10 +38,12 @@ const getOverridesX = (source: Mui.OverridesNew) => {
   return result
 }
 
-const createTypographyX = (palette: Mui.Palette, optionOrCreator: Mui.nw.TypographyOptionsCreatorX) => {
+const createTypographyX = (palette: Mui.Palette, optionOrCreator: Mui.nw.TypographyOptionsOrCreatorX) => {
+  //get cross platform options
   const {
     fontSize = 14, // px
     htmlFontSize = 16, // 16px is the default font-size used by browsers on the html element.
+    //cross platform font weights
     fontWeightLightNew = {
       fontWeight: '300',
       native: { fontFamily: 'Roboto_Light' }
@@ -76,18 +56,23 @@ const createTypographyX = (palette: Mui.Palette, optionOrCreator: Mui.nw.Typogra
       fontWeight: '400',
       native: { fontFamily: 'Roboto' }
     } as Mui.TextStyleX,
+    //web fontFamily
     fontFamily = '"Roboto", "Helvetica", "Arial", sans-serif',
-    fontAssetPathNative = 'libs/rw-mui-n/fonts/',
+    //native font assets path
+    fontAssetPathNative = 'native/fonts/',
     ...other
   } = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Mui.nw.TypographyOptionsX
 
+  //convert x-platform to platform specific
   const typographyOptions = getTypographyOptions(optionOrCreator)
 
+  //pass platform specific options to platform specific "createTypography"
   return createTypography(palette, typographyOptions)
 
 }
 
-const getTypographyOptions = (optionsOrCreator: Mui.nw.TypographyOptionsCreatorX) => {
+//convert cross platform typography option or creator to platform specific
+const getTypographyOptions = (optionsOrCreator: Mui.nw.TypographyOptionsOrCreatorX) => {
 
   const getOptions = (options: Mui.nw.TypographyOptionsX) => {
 
@@ -97,7 +82,7 @@ const getTypographyOptions = (optionsOrCreator: Mui.nw.TypographyOptionsCreatorX
       const { fontFamily, fontSize, htmlFontSize, fontSizeNormalizerNative, fontAssetPathNative, ...rulesX } = options
 
       const rules: PartialRecord<Mui.nw.typoStyle, ReactN.TextStyle> = {}
-      for (const p in rulesX) rules[p] = toRule(rulesX[p])
+      for (const p in rulesX) rules[p] = toRule(rulesX[p]) //toRule is platform specific
 
       res = {
         fontFamily, fontSize, htmlFontSize, fontSizeNormalizerNative, fontAssetPathNative,
@@ -107,7 +92,7 @@ const getTypographyOptions = (optionsOrCreator: Mui.nw.TypographyOptionsCreatorX
     return res
   }
 
-  let res: Mui.nw.TypographyOptionsCreator = {}
+  let res: Mui.nw.TypographyOptionsOrCreator = {}
 
   if (optionsOrCreator) {
     if (typeof optionsOrCreator == 'function') res = palette => getOptions(optionsOrCreator(palette))
@@ -117,37 +102,45 @@ const getTypographyOptions = (optionsOrCreator: Mui.nw.TypographyOptionsCreatorX
   return res
 }
 
+//create theme from new Mui.ThemeOptions cross platform format
+//resulting theme is (for web) compatible with material-ui
 function createMuiTheme(options: Mui.ThemeOptions = {}) {
   const {
     palette: paletteInput = {},
     breakpoints: breakpointsInput = {},
     mixins: mixinsInput = {},
-    //typography: typographyInput,
+
+    //use cross platform typography options instead
     typographyNew,
-    shadowsNew: shadowsNewInputX,
-    //shadowsNative: shadowsNativeInput,
-    overridesNew, //XPlatform format
-    overrides, //ignored
+    typography: xxx1, //ignored
+
+    //use cross platform shadows options instead
+    shadowsNew: shadowsNewInputX, 
+    shadows: xxx2, //ignored
+
+    //use cross platform overrides options instead
+    overridesNew,
+    overrides: xxx3, //ignored 
+
     ...other
   } = options
 
+  //convert cross platform shadows to platform specific shadows
   const shadowsNewInput = shadowsNewInputX && shadowsNewInputX.map(rsx => toRule(rsx) as Mui.ViewStyleCommon)
 
   const palette = createPalette(paletteInput)
   const breakpoints = createBreakpoints(breakpointsInput)
 
   const muiTheme: Mui.Theme = {
-    direction: 'ltr',
-    palette,
-    typography: createTypographyX(palette, typographyNew),
-    //typographyNative: createTypographyNative(palette, typographyOptions.optionsNative),
-    mixins: createMixins(breakpoints, spacing, mixinsInput),
-    breakpoints,
-    shadows: (shadowsNewInput || shadows).map(rsx => (toRuleX(rsx, false) as React.CSSProperties).boxShadow),
-    shadowsNew: shadowsNewInput || shadows,
-    //shadowsNative: shadowsNativeInput || shadowsNative,
-    overrides: getOverridesX(overridesNew),
-    nativeSheetCache: [],
+    direction: 'ltr', //the same for web and native
+    palette, //the same for web and native
+    typography: createTypographyX(palette, typographyNew), //platform specific typography (compatible with material-ui)
+    mixins: createMixins(breakpoints, spacing, mixinsInput), //the same for web and native
+    breakpoints, //the same for web and native
+    shadows: (shadowsNewInput || shadows).map(rsx => (toPlatformRuleSetX(rsx, false) as React.CSSProperties).boxShadow), // material-ui compatible shadows
+    shadowsNew: shadowsNewInput || shadows, //platform specific new shadow format (not compatible with material-ui)
+    overrides: getOverridesX(overridesNew), //platform specific overrides (compatible with material-ui)
+    nativeSheetCache: [], //helper cache for native only
     ...(deepmerge(
       {
         transitions,
@@ -163,7 +156,7 @@ function createMuiTheme(options: Mui.ThemeOptions = {}) {
 
   warning(
     muiTheme.shadows.length === 25 && muiTheme.shadowsNew.length === 25,
-    'Material-UI: the shadows array provided to createMuiTheme should support 25 elevations.',
+    'MUIX: the shadows array provided to createMuiTheme should support 25 elevations.',
   )
 
   return muiTheme
