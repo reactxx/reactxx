@@ -1,6 +1,8 @@
 # muix
 material-ui addin which allows creation of material-ui compatible React-Native components
 
+*Notice: whole project is in very early stage*
+
 **Application code**
 ```
 export const App = props => <View style={{ marginTop: 24 }}>
