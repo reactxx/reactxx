@@ -13,16 +13,17 @@ Feasibility study for React-Native material-ui
 - material-ui component coding methodology is applicable for native components too
 
 ## Primary aim of this project
-1. [x] explore the possibility of single codebase (including single ```npm package``` format etc.) for web and native
-2. [x] to have common theming and styling for web and native (contained in material-ui [styles](https://github.com/mui-org/material-ui/tree/v1-beta/src/styles) and [colors](https://github.com/mui-org/material-ui/tree/v1-beta/src/colors) directories)
+- [x] strong Typescript support
+- [x] explore the possibility of single codebase (including single ```npm package``` format etc.) for web and native
+- [x] to have common theming and styling for web and native (contained in material-ui [styles](https://github.com/mui-org/material-ui/tree/v1-beta/src/styles) and [colors](https://github.com/mui-org/material-ui/tree/v1-beta/src/colors) directories)
 
-**To have a few primitives (beyond material-ui content), alowing creation of cross platform ```Hallo world``` application**
-- [x] Icon (uses SVG )
-Following components are do not realize their react-native functionality. It only allows to replace HTML ```<div>``` or ```<span>``` tags
+**To have a few primitives (beyond material-ui content), alowing creation of cross platform Hallo world application**
+- [x] [materialdesignicons.com](https://materialdesignicons.com/) icons (SVG for web, font icons for native)
+
+Following components do not realize their react-native functionality. It only allows to replace HTML ```<div>``` or ```<span>``` tags
 - [x] View
 - [x] Text
 - [x] ScrollView
-
 
 **To realize components which I need for my application:**
 - [x] ButtonBase
