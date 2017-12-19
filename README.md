@@ -21,7 +21,7 @@ Feasibility study for React-Native material-ui
 **2. To have a few primitives (beyond material-ui), alowing creation of cross platform *Hallo world* application**
 - [x] [materialdesignicons.com](https://materialdesignicons.com/) icons (SVG icons for web, font icons for native)
 
-*Following components do not realize their react-native functionality. They only allows to replace HTML ```<div>``` or ```<span>``` tags*
+*The following components do not realize their react-native functionality. They only allows to replace HTML ```<div>``` or ```<span>``` tags*
 - [x] View
 - [ ] Text
 - [ ] ScrollView
@@ -36,8 +36,8 @@ Feasibility study for React-Native material-ui
 - [ ] Papers
 
 ## TODO
-- [ ] document *single codebase* idea
-- [ ] web and native examples for already finished components
+- [ ] to document *single codebase* idea
+- [ ] to create web and native examples for already finished components
 
 ## material-ui requests:
 - ```export const jss = create(preset());``` in [withStyles.js](https://github.com/mui-org/material-ui/blob/v1-beta/src/styles/withStyles.js)
