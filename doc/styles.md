@@ -3,19 +3,22 @@
 
 ## Terminology
 
-**Rule**: CSS in JS rule, e.g. ```color: red```
+### Rule 
+Platform specific rule, e.g. ```color: red```
 
-**Ruleset**: CSS in JS ruleset, e.g. 
+### Ruleset
+Platform specific ruleset, e.g. 
   ```
   const ruleset = {
       color: 'red',
       display: 'none'
   }
   ```
-**RulesetX**: cross platform Ruleset. 
+### RulesetX
+cross platform Ruleset. 
 For every react-natie style (ViewStyle, TextStyle, ImageStyle) it contains:
 - cross platform rules, which are common for web and native (e.g. overflow:'hidden')
-- platform specific rules (overflow:'auto' is not valid for native)
+- platform specific rules (overflow:'auto' for web, it is not valid for native)
 
 *Example 1*
 ```
@@ -55,3 +58,41 @@ For every react-natie style (ViewStyle, TextStyle, ImageStyle) it contains:
       },
     }
 ```
+
+### Sheet
+Platform specific collection of named rulesets, e.g.
+```
+    const sheet = {
+      root: { // 'root' ruleset
+        marginTop: 10,
+        backgroundColor: 'blue'
+      },
+      label; { // 'label' ruleset
+        color: 'red'
+      }
+    }
+```
+
+### SheetX
+Cross platform Sheet. In material-ui, every component has its default *Sheet* (in material-ui it is called *styles*).
+Cross platform component could have different ruleset collection for web and for native, e.g.:
+```
+  const sheetX = {
+    common: { 
+      raised: { // both web and native variant of component use 'raised' ruleset
+        backgroundColor: 'gray',
+        web: {
+          color: 'white',
+        },
+      }
+    },
+    native: {
+      raisedLabel: { // only native variant of component uses 'raisedLabel' ruleset
+        color: 'gray',
+      }
+    }
+  }
+```
+
+## Idea
+
