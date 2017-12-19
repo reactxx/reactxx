@@ -21,14 +21,14 @@ Cross platform Ruleset. It contains:
 
 *Example 1*
 ```
-    const view: RulesetX<ReactN.ViewStyle> = {} // cross platform Ruleset for native ViewStyle
+    const view: RulesetX<ReactN.ViewStyle> = {} // cross platform Ruleset where native version is ViewStyle
     view.overflow = 'scroll' //ERROR, only "visible" or "hidden" are valid values for react native
     view.overflow = 'hidden' //OK
     view.color = 'red' //ERROR, ReactN.ViewStyle does not contain 'color' rule
 ```
 *Example 2*
 ```
-    const text: RulesetX<ReactN.TextStyle> = {} // cross platform Ruleset for native TextStyle
+    const text: RulesetX<ReactN.TextStyle> = {} // cross platform Ruleset where native version is TextStyle
     text.color = 'red' //OK, react native contains 'color' rule
 ```
 *Example 3*
