@@ -28,6 +28,9 @@ Cross platform Ruleset. It contains:
       web: {
         color: 'red', // OK, color: 'red' is valid for web
         overflow: 'scroll', // OK, overflow: 'scroll' is valid for web
+      },
+      native: {
+        backgroundColor: 'lightgray' //different background color for native
       }
     } 
 ```
