@@ -8,7 +8,7 @@ Platform specific rule, e.g. ```color: red```
 
 ### Ruleset
 Platform specific ruleset, e.g. 
-  ```
+  ```js
   const ruleset = {
       color: 'red',
       display: 'none'
@@ -20,7 +20,7 @@ Cross platform Ruleset. It contains:
 - platform specific part
 
 *Example 1*
-```
+```js
     const view = { // cross platform Ruleset where native version inherits from react native ViewStyle
       overflow: 'scroll', //ERROR, only "visible" or "hidden" are valid values for react native ViewStyle
       color: 'red', //ERROR, react native ViewStyle does not contain 'color' rule property
@@ -32,13 +32,13 @@ Cross platform Ruleset. It contains:
     } 
 ```
 *Example 2*
-```
+```js
     const text = { // cross platform Ruleset where native version inherits from ReactNative.TextStyle
       color: 'red' //OK, react native TextStyle contains 'color' rule
     } 
 ```
 *Example 3*
-```
+```js
     //following rulesets have the same result: 'overflow:visible' for react-native and 'overflow:auto' for web
     const ruleset: RulesetX<ReactN.ViewStyle> = {
       overflow: 'visible',
@@ -66,7 +66,7 @@ Cross platform Ruleset. It contains:
 
 ### Sheet
 Platform specific collection of named rulesets, e.g.
-```
+```js
     const sheet = {
       root: { // 'root' ruleset
         marginTop: 10,
@@ -81,7 +81,7 @@ Platform specific collection of named rulesets, e.g.
 ### SheetX
 Cross platform Sheet. 
 
-```
+```js
   const sheetX = {
     common: { 
       raised: { // both web and native version of component use 'raised' ruleset
