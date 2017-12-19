@@ -1,4 +1,5 @@
 # Common theming and styling for web and native
+*styles* add-in is very small, it contains only 600 lines of Typescript code
 
 ## Terminology
 
