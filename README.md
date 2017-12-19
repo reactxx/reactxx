@@ -17,8 +17,8 @@ Feasibility study for React-Native material-ui
 2. [x] to have common theming and styling for web and native (contained in material-ui [styles](https://github.com/mui-org/material-ui/tree/v1-beta/src/styles) and [colors](https://github.com/mui-org/material-ui/tree/v1-beta/src/colors) directories)
 
 **To have a few primitives (beyond material-ui content), alowing creation of cross platform ```Hallo world``` application**
+- [x] Icon (uses SVG )
 Following components are do not realize their react-native functionality. It only allows to replace HTML ```<div>``` or ```<span>``` tags
-- [x] Icon
 - [x] View
 - [x] Text
 - [x] ScrollView
