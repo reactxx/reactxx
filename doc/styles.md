@@ -22,8 +22,8 @@ Cross platform Ruleset. It contains:
 *Example 1*
 ```js
     const view = { // cross platform Ruleset where native version inherits from react native ViewStyle
-      overflow: 'scroll', //ERROR, only "visible" or "hidden" are valid values for react native ViewStyle
-      color: 'red', //ERROR, react native ViewStyle does not contain 'color' rule property
+      //overflow: 'scroll', //ERROR, only "visible" or "hidden" are valid values for react native ViewStyle
+      //color: 'red', //ERROR, react native ViewStyle does not contain 'color' rule property
       overflow: 'hidden', //OK
       web: {
         color: 'red', // OK, color: 'red' is valid for web
