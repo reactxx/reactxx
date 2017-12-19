@@ -1,5 +1,27 @@
 # muix
-material-ui addin which allows creation of React-Native components, compatible with material-ui
+material-ui addin which allows creation of material-ui compatible React-Native components
+
+**Application code**
+```
+export const App = props => <View style={{ marginTop: 24 }}>
+  <Button color='primary' raised onClick={ev => alert('Hallo Button')}>Hallo Button</Button> 
+</View>
+```
+
+**Native app (powered by [EXPO](https://expo.io/))**
+```
+import {App} from './root'
+import Expo from 'expo'
+Expo.registerRootComponent(app)
+```
+
+**Web app**
+```
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {App} from './root'
+ReactDOM.render(<App />, document.getElementById('content')) 
+```
 
 ## Motivation
 - with React and React Native, web app can share most of its logic with native iOS and Android apps, but the view layer needs to be implemented separately for each platform
