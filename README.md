@@ -4,7 +4,7 @@ Tiny material-ui add-in which allows creation of material-ui compatible React-Na
 *Notice: whole project is in very early stage*
 
 **Application code**
-```
+```jsx
 export const App = props => <View style={{ marginTop: 24 }}>
   <Button color='primary' raised classes={{label:{color: 'maroon'}}} onClick={ev => alert('Hallo Button')}>
     Hallo Button
@@ -13,14 +13,14 @@ export const App = props => <View style={{ marginTop: 24 }}>
 ```
 
 **Native app (powered by [EXPO](https://expo.io/))**
-```
+```js
 import {App} from './root'
 import Expo from 'expo'
 Expo.registerRootComponent(app)
 ```
 
 **Web app**
-```
+```js
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {App} from './root'
