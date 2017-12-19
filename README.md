@@ -15,7 +15,7 @@ Feasibility study for React-Native material-ui
 ## Primary aim of this project
 - [x] strong Typescript support
 - [x] explore the possibility of single codebase (including single ```npm package``` format etc.) for web and native
-- [x] to have common theming and styling for web and native (contained in material-ui [styles](https://github.com/mui-org/material-ui/tree/v1-beta/src/styles) and [colors](https://github.com/mui-org/material-ui/tree/v1-beta/src/colors) directories)
+- [x] to have common theming and styling for web and native (i.e. provide cross platform functionality contained in material-ui [styles](https://github.com/mui-org/material-ui/tree/v1-beta/src/styles) and [colors](https://github.com/mui-org/material-ui/tree/v1-beta/src/colors) directories)
 
 **To have a few primitives (beyond material-ui content), alowing creation of cross platform Hallo world application**
 - [x] [materialdesignicons.com](https://materialdesignicons.com/) icons (SVG for web, font icons for native)
