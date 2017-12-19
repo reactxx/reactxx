@@ -36,7 +36,8 @@ Feasibility study for React-Native material-ui
 - [ ] Papers
 
 ## TODO
-- 
+- [ ] document *single codebase* idea
+- [ ] web and native examples for already finished components
 
 ## material-ui requests:
 - ```export const jss = create(preset());``` in [withStyles.js](https://github.com/mui-org/material-ui/blob/v1-beta/src/styles/withStyles.js)
