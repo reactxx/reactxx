@@ -16,13 +16,13 @@ Feasibility study for React-Native material-ui
 - [x] explore the possibility of single codebase (including single ```npm package``` format etc.) for web and native
 - [x] to have common theming and styling for web and native (contained in material-ui [styles](https://github.com/mui-org/material-ui/tree/v1-beta/src/styles) and [colors](https://github.com/mui-org/material-ui/tree/v1-beta/src/colors) directories)
 
-**- to have a few new primitives (beyond material-ui content), alowing creation of cross platform ```Hallo world``` application**
+**to have a few new primitives (beyond material-ui content), alowing creation of cross platform ```Hallo world``` application**
 - [x] Icon
 - [x] View
 - [x] Text
 - [x] ScrollView
-**- to realize components which I need for my application:**
 
+**to realize components which I need for my application:**
 - [x] ButtonBase
 - [x] Button
 - [ ] IconButton
