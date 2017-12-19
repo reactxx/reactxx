@@ -49,7 +49,7 @@ const buttonBase: Mui.CodeSFCNative<MuiButtonBase.Shape> = props => {
   </TouchableWithoutFeedback>
 }
 
-class RippleEffect extends React.PureComponent<{ style: ReactN.ViewStyle, theme: Mui.nw_xxx.ThemeNew }> {
+class RippleEffect extends React.PureComponent<{ style: ReactN.ViewStyle, theme: Mui.ThemeNew }> {
   state: Partial<LayoutRectangle> = {}
   scaleValue = new Animated.Value(0.01)
   maxOpacity = this.props.style.opacity || 0.12

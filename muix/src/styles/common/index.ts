@@ -13,7 +13,7 @@ import spacing from 'material-ui/styles/spacing'
 import { createTypography, shadows, toPlatformRuleSet, toPlatformSheet } from 'muix-styles/current/index'
 
 //create platform specific sheet from cross platform sheet creator
-export const sheetCreator = <R extends Mui.Shape>(sheetXCreator: Mui.SheetXCreator<R>) => (theme: Mui.nw_xxx.ThemeNew) => toPlatformSheet(sheetXCreator(theme as Mui.nw_xxx.ThemeNew) as Mui.PartialSheetX<R>)
+export const sheetCreator = <R extends Mui.Shape>(sheetXCreator: Mui.SheetXCreator<R>) => (theme: Mui.ThemeNew) => toPlatformSheet(sheetXCreator(theme as Mui.ThemeNew) as Mui.PartialSheetX<R>)
 
 //create platform specific ruleset from cross platform ruleset
 export const toPlatformRuleSetX = (style: Mui.TRulesetX, isNative: boolean) => {
@@ -41,7 +41,7 @@ const getOverridesX = (source: Mui.OverridesNew) => {
   return result
 }
 
-const createTypographyX = (palette: Mui.Palette, optionOrCreator: Mui.nw_xxx.TypographyOptionsOrCreatorX) => {
+const createTypographyX = (palette: Mui.Palette, optionOrCreator: Mui.TypographyOptionsOrCreatorX) => {
   //get cross platform options
   const {
     fontSize = 14, // px
@@ -64,27 +64,27 @@ const createTypographyX = (palette: Mui.Palette, optionOrCreator: Mui.nw_xxx.Typ
     //native font assets path
     fontAssetPathNative = 'native/fonts/',
     ...other
-  } = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Mui.nw_xxx.TypographyOptionsX
+  } = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Mui.TypographyOptionsX
 
   //convert x-platform to platform specific
   const typographyOptions = getTypographyOptionOrCreatorX(optionOrCreator)
 
   //pass platform specific options to platform specific "createTypography"
-  return createTypography(palette, typographyOptions) as Mui.nw_xxx.TypographyNew
+  return createTypography(palette, typographyOptions) as Mui.TypographyNew
 
 }
 
 //convert cross platform typography optionsOrCreator to platform specific optionsOrCreator
-const getTypographyOptionOrCreatorX = (optionsOrCreatorX: Mui.nw_xxx.TypographyOptionsOrCreatorX) => {
+const getTypographyOptionOrCreatorX = (optionsOrCreatorX: Mui.TypographyOptionsOrCreatorX) => {
 
-  const getOptionX = (optionsX: Mui.nw_xxx.TypographyOptionsX) => {
+  const getOptionX = (optionsX: Mui.TypographyOptionsX) => {
 
-    let res: Mui.nw_xxx.TypographyOptionsNew = {}
+    let res: Mui.TypographyOptionsNew = {}
 
     if (optionsX) {
       const { fontFamily, fontSize, htmlFontSize, fontSizeNormalizerNative, fontAssetPathNative, ...rulesX } = optionsX
 
-      const rules: PartialRecord<Mui.nw_xxx.typoStyle, ReactN.TextStyle> = {}
+      const rules: PartialRecord<Mui.typoStyle, ReactN.TextStyle> = {}
       for (const p in rulesX) rules[p] = toPlatformRuleSet(rulesX[p]) //toPlatformRuleSet is platform specific
 
       res = {
@@ -95,7 +95,7 @@ const getTypographyOptionOrCreatorX = (optionsOrCreatorX: Mui.nw_xxx.TypographyO
     return res
   }
 
-  let res: Mui.nw_xxx.TypographyOptionsOrCreator = {}
+  let res: Mui.TypographyOptionsOrCreator = {}
 
   if (optionsOrCreatorX) {
     if (typeof optionsOrCreatorX == 'function') res = palette => getOptionX(optionsOrCreatorX(palette))
@@ -134,7 +134,7 @@ function createMuiTheme(options: Mui.ThemeOptions = {}) {
   const palette = createPalette(paletteInput)
   const breakpoints = createBreakpoints(breakpointsInput)
 
-  const muiTheme: Mui.nw_xxx.ThemeNew = {
+  const muiTheme: Mui.ThemeNew = {
     direction: 'ltr', //the same for web and native
     palette, //the same for web and native
     typography: createTypographyX(palette, typographyNew), //platform specific typography (compatible with material-ui)
@@ -154,7 +154,7 @@ function createMuiTheme(options: Mui.ThemeOptions = {}) {
       {
         clone: false, // No need to clone deep
       },
-    )) as Mui.nw_xxx.ThemeNew,
+    )) as Mui.ThemeNew,
   }
 
   warning(

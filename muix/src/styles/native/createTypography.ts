@@ -2,7 +2,7 @@
 
 import { Dimensions, PixelRatio } from 'react-native'
 
-export default function createTypography(palette: Mui.Palette, optionOrCreator: Mui.nw_xxx.TypographyOptionsOrCreator) {
+export default function createTypography(palette: Mui.Palette, optionOrCreator: Mui.TypographyOptionsOrCreator) {
   const {
     fontWeightLightNew,
     fontWeightMediumNew,
@@ -10,11 +10,11 @@ export default function createTypography(palette: Mui.Palette, optionOrCreator: 
     fontSizeNormalizerNative,
     fontSize,
     ...other
-  } = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Mui.nw_xxx.TypographyOptionsNew
+  } = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Mui.TypographyOptionsNew
 
 
   //http://typecast.com/blog/a-more-modern-scale-for-web-typography
-  const sheet: Mui.nw_xxx.TypographyOptionsNew = {
+  const sheet: Mui.TypographyOptionsNew = {
     fontWeightLight: fontWeightLightNew.fontWeight,
     fontWeightRegular: fontWeightRegularNew.fontWeight,
     fontWeightMedium: fontWeightMediumNew.fontWeight,
@@ -90,7 +90,7 @@ export default function createTypography(palette: Mui.Palette, optionOrCreator: 
     {
       clone: false, // No need to clone deep
     },
-  ) as Mui.nw_xxx.TypographyNew
+  ) as Mui.TypographyNew
 }
 
 const enum fontSizesNative {

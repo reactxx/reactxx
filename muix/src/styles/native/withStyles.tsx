@@ -8,7 +8,7 @@ import pure from 'recompose/pure'
 import { View } from 'react-native'
 import { toPlatformSheet, toPlatformRuleSet } from 'muix-styles/native/index'
 
-let defaultTheme: Mui.nw_xxx.ThemeNew
+let defaultTheme: Mui.ThemeNew
 const getDefaultTheme = () => defaultTheme || (defaultTheme = createMuiTheme())
 
 export const Styler: React.SFC<{}> = props => <View>{props.children}</View>
@@ -24,7 +24,7 @@ const styleOverride = <R extends Mui.Shape>(renderedClasses: Mui.SheetNative<R>,
   return stylesWithOverrides as Mui.SheetNative<R>
 }
 
-const styleCreator = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreator<R>, theme: Mui.nw_xxx.ThemeNew, name?: string) => {
+const styleCreator = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreator<R>, theme: Mui.ThemeNew, name?: string) => {
   const overrides = (theme.overrides && name && theme.overrides[name]) as Mui.SheetNative<R>
   const styles = (typeof styleOrCreator === 'function' ? styleOrCreator(theme) : styleOrCreator) as Mui.SheetNative<R>
   return styleOverride(styles, overrides, name)
