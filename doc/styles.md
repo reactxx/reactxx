@@ -74,7 +74,8 @@ Platform specific collection of named rulesets, e.g.
 ```
 
 ### SheetX
-Cross platform Sheet. In material-ui, every component has its default *Sheet* (in material-ui it is called *styles*).
+Cross platform Sheet.
+
 Cross platform component could have different ruleset collection for web and for native, e.g.:
 ```
   const sheetX = {
