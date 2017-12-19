@@ -73,22 +73,26 @@ Platform specific collection of named rulesets, e.g.
 ```
 
 ### SheetX
-Cross platform Sheet.
+Cross platform Sheet. 
 
-Cross platform component can have different ruleset collection for web and for native, e.g.:
 ```
   const sheetX = {
     common: { 
-      raised: { // both web and native variant of component use 'raised' ruleset
+      raised: { // both web and native version of component use 'raised' ruleset
         backgroundColor: 'gray',
         web: {
           color: 'white',
         },
-      }
+      },
+      //... other common rulesets
     },
     native: {
-      raisedLabel: { // only native variant of component uses 'raisedLabel' ruleset
+      raisedLabel: { // only native version of component uses 'raisedLabel' ruleset
         color: 'gray',
+      }
+    },
+    web: { 
+      label: { // only web version of component uses 'label' ruleset
       }
     }
   }
