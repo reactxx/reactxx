@@ -12,10 +12,10 @@ Feasibility study for React-Native material-ui
 - material-ui has high quality open source codebase
 - material-ui component coding methodology is applicable for native components too
 
-## Primary aim of this project
-**1. basic**
-- [x] strong Typescript support
-- [x] explore the possibility of single codebase (including single ```npm package``` format etc.) for web and native
+## Primary aims of this project
+**1. Basic**
+- [x] to support Typescript 
+- [x] to explore the possibility of single codebase (including single ```npm package``` format etc.) for web and native
 - [x] to have common theming and styling for web and native (i.e. provide cross platform functionality contained in material-ui [styles](https://github.com/mui-org/material-ui/tree/v1-beta/src/styles) and [colors](https://github.com/mui-org/material-ui/tree/v1-beta/src/colors) directories)
 
 **2. To have a few primitives (beyond material-ui content), alowing creation of cross platform *Hallo world* application**
