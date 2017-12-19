@@ -40,7 +40,7 @@ ReactDOM.render(<App />, document.getElementById('content'))
 
 ## Primary aims of this project
 **1. Basic**
-- [x] to support Typescript 
+- [x] to support Typescript (redesign material-ui TS typing with respect of React Native)
 - [x] to explore the possibility of single codebase (including single ```npm package``` format etc.) for web and native
 - [x] to have common theming and styling for web and native (i.e. provide cross platform functionality contained in material-ui [styles](https://github.com/mui-org/material-ui/tree/v1-beta/src/styles) and [colors](https://github.com/mui-org/material-ui/tree/v1-beta/src/colors) directories)
 
