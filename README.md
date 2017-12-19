@@ -18,10 +18,10 @@ Feasibility study for React-Native material-ui
 - [x] to explore the possibility of single codebase (including single ```npm package``` format etc.) for web and native
 - [x] to have common theming and styling for web and native (i.e. provide cross platform functionality contained in material-ui [styles](https://github.com/mui-org/material-ui/tree/v1-beta/src/styles) and [colors](https://github.com/mui-org/material-ui/tree/v1-beta/src/colors) directories)
 
-**2. To have a few primitives (beyond material-ui content), alowing creation of cross platform *Hallo world* application**
-- [x] [materialdesignicons.com](https://materialdesignicons.com/) icons (SVG for web, font icons for native)
+**2. To have a few primitives (beyond material-ui), alowing creation of cross platform *Hallo world* application**
+- [x] [materialdesignicons.com](https://materialdesignicons.com/) icons (SVG icons for web, font icons for native)
 
-*Following components do not realize their react-native functionality. It only allows to replace HTML ```<div>``` or ```<span>``` tags*
+*Following components do not realize their react-native functionality. They only allows to replace HTML ```<div>``` or ```<span>``` tags*
 - [x] View
 - [ ] Text
 - [ ] ScrollView
