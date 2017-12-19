@@ -6,9 +6,9 @@ import createMuiTheme from 'muix-styles/common/index'
 import warning from 'invariant'
 import pure from 'recompose/pure'
 import { View } from 'react-native'
-import { toPlatformSheet, toRule } from 'muix-styles/native/index'
+import { toPlatformSheet, toPlatformRuleSet } from 'muix-styles/native/index'
 
-let defaultTheme: Mui.Theme
+let defaultTheme: Mui.nw.ThemeNew
 const getDefaultTheme = () => defaultTheme || (defaultTheme = createMuiTheme())
 
 export const Styler: React.SFC<{}> = props => <View>{props.children}</View>
@@ -24,7 +24,7 @@ const styleOverride = <R extends Mui.Shape>(renderedClasses: Mui.SheetNative<R>,
   return stylesWithOverrides as Mui.SheetNative<R>
 }
 
-const styleCreator = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreator<R>, theme: Mui.Theme, name?: string) => {
+const styleCreator = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreator<R>, theme: Mui.nw.ThemeNew, name?: string) => {
   const overrides = (theme.overrides && name && theme.overrides[name]) as Mui.SheetNative<R>
   const styles = (typeof styleOrCreator === 'function' ? styleOrCreator(theme) : styleOrCreator) as Mui.SheetNative<R>
   return styleOverride(styles, overrides, name)
@@ -45,7 +45,7 @@ export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreat
       toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>),
       name)
 
-    const newProps = { ...other, ...native, theme, classes, style: toRule(style), flip: typeof flip === 'boolean' ? flip : theme.direction === 'rtl' } as Mui.CodePropsNative<R>
+    const newProps = { ...other, ...native, theme, classes, style: toPlatformRuleSet(style), flip: typeof flip === 'boolean' ? flip : theme.direction === 'rtl' } as Mui.CodePropsNative<R>
     if (onPress || onClick) newProps.onPress = onPress || onClick
 
     return <Component {...newProps } />

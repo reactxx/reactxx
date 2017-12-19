@@ -6,7 +6,7 @@ import { toPlatformSheetX, toPlatformRuleSetX } from 'muix-styles/common/index'
 
 import createTypographyNative from 'muix-styles/native/createTypography'
 
-export const toRule = <T extends Mui.CSSPropertiesNative>(style: Mui.RulesetX<T>) => toPlatformRuleSetX(style, true) as T
+export const toPlatformRuleSet = <T extends Mui.CSSPropertiesNative>(style: Mui.RulesetX<T>) => toPlatformRuleSetX(style, true) as T
 export const toPlatformSheet = <R extends Mui.Shape>(rules: Mui.PartialSheetX<R>) => toPlatformSheetX(rules, true) as Mui.SheetNative<R>
 export const createTypography = createTypographyNative
 

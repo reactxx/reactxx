@@ -10,13 +10,13 @@ class MuiThemeProvider extends React.Component<Mui.IMuiThemeProps> {
     this.localTheme = this.mergeOuterLocalTheme(context.theme)
   }
 
-  localTheme: Mui.Theme
+  localTheme: Mui.nw.ThemeNew
 
   getChildContext(): Mui.TMuiThemeContextValue {
     return { theme: this.localTheme }
   }
 
-  mergeOuterLocalTheme(outerTheme: Mui.Theme) {
+  mergeOuterLocalTheme(outerTheme: Mui.nw.ThemeNew) {
     const { props: { theme } } = this
     if (typeof theme === 'function') return theme(outerTheme)
     if (!outerTheme) return theme

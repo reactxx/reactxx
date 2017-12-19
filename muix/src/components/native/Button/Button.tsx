@@ -2,12 +2,12 @@
 import { Platform, View, Text } from 'react-native'
 
 import { withStyles, classNames } from 'muix-styles/native/withStyles'
-import { toRule } from 'muix-styles/native/index'
+import { toPlatformRuleSet } from 'muix-styles/native/index'
 import { sheetCreator } from 'muix-styles/common/index'
 
 import ButtonBase from '../ButtonBase/ButtonBase'
 
-const sheet = sheetCreator<MuiButton.Shape>(({ typographyNative: typo, palette, spacing, shadowsNew }) => ({
+const sheet = sheetCreator<MuiButton.Shape>(({ typography: typo, palette, spacing, shadowsNew }) => ({
   native: {
     root: {
       alignItems: 'center',
@@ -29,7 +29,7 @@ const sheet = sheetCreator<MuiButton.Shape>(({ typographyNative: typo, palette, 
       minHeight: 32,
     },
 
-    flatPrimary: {}, flatAccent: {}, flatContrast: {}, colorInherit: {}, raisedContrast: {},
+    //flatPrimary: {}, flatAccent: {}, flatContrast: {}, colorInherit: {}, raisedContrast: {},
 
     raised: {
       backgroundColor: palette.grey[300],

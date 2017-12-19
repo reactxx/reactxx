@@ -12,7 +12,7 @@ import JssProvider from 'react-jss/lib/JssProvider'
 
 import { sheetToClassSheet } from './inline-styles'
 
-import { toRule, toPlatformSheet } from 'muix-styles/web/index'
+import { toPlatformRuleSet, toPlatformSheet } from 'muix-styles/web/index'
 
 
 /*
@@ -46,14 +46,15 @@ export const withStylesX = <R extends Mui.Shape>(Component: Mui.muiComponentType
     const sheet = { common, /*native: classesNative,*/ web: classesWeb} as Mui.PartialSheetX<R>
     const classes = sheetToClassSheet(toPlatformSheet(sheet) as Mui.SheetWeb<R>)
     const onPress = onPressInit || onClick 
-    const webProps = { ...rest, ...web, style: toRule(style), classes, onPress, } as (Mui.getProps<R> & Mui.muiProps<TKey>) 
+    const webProps = { ...rest, ...web, style: toPlatformRuleSet(style), classes, onPress, } as (Mui.getProps<R> & Mui.muiProps<TKey>) 
     return <Component {...webProps} />
   }
   return hoistNonReactStatics(res, Component)
 }
 
 export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreator<R>, options?: Mui.WithStylesOptions) => (comp: Mui.muiComponentType<Mui.getProps<R>, webKeys<R>>) => {
-  return withStylesX<R>(withStylesMui(styleOrCreator, options)(comp as Mui.muiCodeComponentType<Mui.getProps<R>, webKeys<R>>))
+  const withStyles = withStylesMui as any as Mui.muiWithStyles
+  return withStylesX<R>(withStyles(styleOrCreator, options)(comp as Mui.muiCodeComponentType<Mui.getProps<R>, webKeys<R>>))
 }
 
 export const classNames = _classnames

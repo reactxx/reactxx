@@ -4,10 +4,10 @@ import { capitalizeFirstLetter } from 'material-ui/utils/helpers'
 import { Text as TextRN } from 'react-native'
 
 import { withStyles, classNames } from 'muix-styles/native/withStyles'
-import { toRule } from 'muix-styles/native/index'
+import { toPlatformRuleSet } from 'muix-styles/native/index'
 import { sheetCreator } from 'muix-styles/common/index'
 
-export const sheet = sheetCreator<Typography.Shape>(({ typographyNative: typo, palette, spacing }) => ({
+export const sheet = sheetCreator<Typography.Shape>(({ typography: typo, palette, spacing }) => ({
   common: {
     root: { margin: 0, },
     display4: typo.display4,
@@ -62,7 +62,7 @@ const typography: Mui.CodeSFCNative<Typography.Shape> = (props => {
     gutterBottom && classes.gutterBottom,
     paragraph && classes.paragraph,
     align !== 'inherit' && classes[`align${capitalizeFirstLetter(align)}`],
-    toRule(style)
+    toPlatformRuleSet(style)
   )
 
   //console.log(type, classes[type], actStyle)
