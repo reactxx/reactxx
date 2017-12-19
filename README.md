@@ -1,5 +1,5 @@
 # muix
-Feasibility study for React-Native material-ui
+material-ui addin which allows creation of React-Native components, compatible with material-ui
 
 ## Motivation
 - with React and React Native, web app can share most of its logic with native iOS and Android apps, but the view layer needs to be implemented separately for each platform
