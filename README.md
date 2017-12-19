@@ -6,7 +6,7 @@ Tiny material-ui add-in which allows creation of material-ui compatible React-Na
 **Application code**
 ```
 export const App = props => <View style={{ marginTop: 24 }}>
-  <Button color='primary' raised onClick={ev => alert('Hallo Button')}>Hallo Button</Button> 
+  <Button color='primary' raised classes={{label:{color: 'maroon'}}} onClick={ev => alert('Hallo Button')}>Hallo Button</Button> 
 </View>
 ```
 
