@@ -23,8 +23,8 @@ Feasibility study for React-Native material-ui
 
 *Following components do not realize their react-native functionality. It only allows to replace HTML ```<div>``` or ```<span>``` tags*
 - [x] View
-- [x] Text
-- [x] ScrollView
+- [ ] Text
+- [ ] ScrollView
 
 **3. To realize components which I need for my application:**
 - [x] ButtonBase
