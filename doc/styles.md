@@ -76,7 +76,7 @@ Platform specific collection of named rulesets, e.g.
 ### SheetX
 Cross platform Sheet.
 
-Cross platform component could have different ruleset collection for web and for native, e.g.:
+Cross platform component can have different ruleset collection for web and for native, e.g.:
 ```
   const sheetX = {
     common: { 
