@@ -1,5 +1,5 @@
 # muix
-material-ui addin which allows creation of material-ui compatible React-Native components
+Tiny material-ui add-in which allows creation of material-ui compatible React-Native components
 
 *Notice: whole project is in very early stage*
 
