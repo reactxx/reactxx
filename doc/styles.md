@@ -16,20 +16,26 @@ Platform specific ruleset, e.g.
   ```
 ### RulesetX
 Cross platform Ruleset. It contains:
-- cross platform part, which are common for web and native
+- cross platform part, which are common for web and native. Because there are three main native styles (ViewStyle, TextStyle, ImageStyle) this common part has three different versions
 - platform specific part
 
 *Example 1*
 ```
-    const view: RulesetX<ReactN.ViewStyle> = {} // cross platform Ruleset where native version is ViewStyle
-    view.overflow = 'scroll' //ERROR, only "visible" or "hidden" are valid values for react native
-    view.overflow = 'hidden' //OK
-    view.color = 'red' //ERROR, ReactN.ViewStyle does not contain 'color' rule
+    const view = { // cross platform Ruleset where native version inherits from react native ViewStyle
+      overflow: 'scroll', //ERROR, only "visible" or "hidden" are valid values for react native ViewStyle
+      color: 'red', //ERROR, react native ViewStyle does not contain 'color' rule property
+      overflow: 'hidden', //OK
+      web: {
+        color: 'red', // OK, color: 'red' is valid for web
+        overflow: 'scroll', // OK, overflow: 'scroll' is valid for web
+      }
+    } 
 ```
 *Example 2*
 ```
-    const text: RulesetX<ReactN.TextStyle> = {} // cross platform Ruleset where native version is TextStyle
-    text.color = 'red' //OK, react native contains 'color' rule
+    const text = { // cross platform Ruleset where native version inherits from ReactNative.TextStyle
+      color: 'red' //OK, react native TextStyle contains 'color' rule
+    } 
 ```
 *Example 3*
 ```
