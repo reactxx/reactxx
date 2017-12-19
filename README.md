@@ -63,6 +63,7 @@ ReactDOM.render(<App />, document.getElementById('content'))
 
 ## TODO
 - [ ] to document *single codebase* idea
+- [ ] to document *common theming and styling for web and native* idea
 - [ ] to create web and native examples for already finished components
 
 ## material-ui requests:
