@@ -1,1 +1,1 @@
-#Single codebase (including single npm package format) for web and native
+# Single codebase for web and native
