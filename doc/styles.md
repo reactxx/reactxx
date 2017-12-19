@@ -43,13 +43,13 @@ Cross platform Ruleset. It contains:
 *Example 3*
 ```js
     //following rulesets have the same result: 'overflow:visible' for react-native and 'overflow:auto' for web
-    const ruleset: RulesetX<ReactN.ViewStyle> = {
+    const ruleset = {
       overflow: 'visible',
       web: {
         overflow: 'auto',
       }
     }
-    const ruleset2: RulesetX<ReactN.ViewStyle> = {
+    const ruleset2 = {
       native: {
         overflow: 'visible',
       },
@@ -59,7 +59,7 @@ Cross platform Ruleset. It contains:
     }
 
     //error example
-    const ruleset2: RulesetX<ReactN.ViewStyle> = {
+    const ruleset2 = {
       overflow: 'auto', //ERROR: only "visible" | "hidden" are valid values for ReactN.ViewStyle['overflow'] rule
       native: {
         overflow: 'visible',
@@ -102,6 +102,7 @@ Cross platform Sheet.
     },
     web: { 
       label: { // only web version of component uses 'label' ruleset
+        fontWeight: '500'
       }
     }
   }
