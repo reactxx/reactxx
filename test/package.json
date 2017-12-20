@@ -1,13 +1,13 @@
 {
   "main": "lib-native/src/test/App.js",
   "name": "test",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "dependencies": {
-    "expo": "^23.0.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
-    "react": "16.0.0",
     "deepmerge": "^2.0.1",
+    "expo": "^23.0.0",
+    "react": "16.0.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
     "recompose": "^0.26.0",
     "tslib": "^1.8.0",
     "warning": "^3.0.0"
@@ -18,7 +18,6 @@
     "@types/react-dom": "^16.0.3",
     "@types/react-native": "PavelPZ/reactx-types-react-native",
     "babel-plugin-module-resolver": "^3.0.0",
-    "muix-styles": "^0.1.17",
     "muix-icons": "^0.1.0"
   },
   "jspm": {
@@ -50,7 +49,7 @@
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
-      "react": "npm:react@^16.0.0",
+      "react": "npm:react",
       "react-dom": "npm:react-dom@^16.0.0",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
