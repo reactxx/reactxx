@@ -1,0 +1,25 @@
+{
+  "name": "@types/react-native",
+  "version": "0.1.1",
+  "description": "@types/react like version of TypeScript definitions for react-native",
+  "registry": "npm",
+  "main": "",
+  "devDependencies": {
+    "@types/react": "PavelPZ/reactx-types-react"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PavelPZ/reactx-types-react-native.git"
+  },
+  "keywords": [
+    "react-native",
+    "typescript"
+  ],
+  "author": "pzika@langmaster.cz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PavelPZ/reactx-types-react-native/issues"
+  },
+  "homepage": "https://github.com/PavelPZ/reactx-types-react-native#readme",
+  "readme": "https://github.com/PavelPZ/reactx-types-react-native#readme"
+}

@@ -14,10 +14,7 @@
     "warning": "^3.0.0"
   },
   "devDependencies": {
-    "@types/expo": "PavelPZ/reactx-types-expo",
-    "@types/react": "PavelPZ/reactx-types-react",
     "@types/react-dom": "^16.0.3",
-    "@types/react-native": "PavelPZ/reactx-types-react-native",
     "babel-plugin-module-resolver": "^3.0.0",
     "muix-icons": "^0.1.0"
   },
