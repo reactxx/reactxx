@@ -108,5 +108,9 @@ Cross platform Sheet.
   }
 ```
 
+### React component props
+
+
+
 ## Idea
 
