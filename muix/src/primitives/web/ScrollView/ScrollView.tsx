@@ -1,8 +1,8 @@
 ﻿import ReactN from 'react-native'
 import React from 'react'
 
-import { classNames, withStyles } from 'muix-styles/web/withStyles'
-import { sheet } from 'muix-primitives/common/ScrollView/ScrollView' 
+import { classNames, withStyles } from 'muix-styles-web'
+import { sheet } from '../../common/ScrollView/ScrollView' 
 
 //type TT = Record<(keyof Mui.getCommon<MuiScrollView.Shape>) & Mui.getWeb<MuiScrollView.Shape>, string>
 //let x: {[P in keyof TT]: string}

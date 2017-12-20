@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 
-import { classNames, withStyles } from 'muix-styles/native/withStyles'
-import { sheet } from 'muix-primitives/common/Template/Template' 
+import { classNames, withStyles } from 'muix-styles'
+import { sheet } from '../../common/Template/Template' 
 import { View } from 'react-native' 
 
 const template: Mui.CodeSFCNative<MuiTemplate.Shape> = props => {

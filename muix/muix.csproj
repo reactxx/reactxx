@@ -79,6 +79,10 @@
     <Content Include="deploy\styles\package.json" />
     <Content Include="%24publish_.cmd" />
     <Content Include="deploy\styles\README.md" />
+    <Content Include="deploy\primitives\package.json" />
+    <Content Include="deploy\primitives\README.md" />
+    <Content Include="deploy\components\package.json" />
+    <Content Include="deploy\components\README.md" />
     <None Include="packages.config" />
     <Content Include="README.md" />
     <Content Include="src\styles\native\theme.json" />
@@ -117,7 +121,7 @@
     <TypeScriptCompile Include="src\components\web\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
-    <TypeScriptCompile Include="src\primitives\common\Icon\Icon-d.d.ts" />
+    <TypeScriptCompile Include="src\typings\Icon-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\common\Icon\Icon.tsx" />
     <TypeScriptCompile Include="src\primitives\common\ScrollView\ScrollView-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\common\ScrollView\ScrollView.tsx" />
@@ -129,12 +133,14 @@
     <TypeScriptCompile Include="src\primitives\common\View\View-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\common\View\View.tsx" />
     <TypeScriptCompile Include="src\primitives\native\Icon\Icon.tsx" />
+    <TypeScriptCompile Include="src\primitives\native\index.tsx" />
     <TypeScriptCompile Include="src\primitives\native\ScrollView\ScrollView.tsx" />
     <TypeScriptCompile Include="src\primitives\native\Template\Template.tsx" />
     <TypeScriptCompile Include="src\primitives\native\Text\Text.tsx" />
     <TypeScriptCompile Include="src\primitives\native\Typography\Typography.tsx" />
     <TypeScriptCompile Include="src\primitives\native\View\View.tsx" />
     <TypeScriptCompile Include="src\primitives\web\Icon\Icon.tsx" />
+    <TypeScriptCompile Include="src\primitives\web\index.tsx" />
     <TypeScriptCompile Include="src\primitives\web\ScrollView\ScrollView.tsx" />
     <TypeScriptCompile Include="src\primitives\web\Template\Template.tsx" />
     <TypeScriptCompile Include="src\primitives\web\Text\Text.tsx" />

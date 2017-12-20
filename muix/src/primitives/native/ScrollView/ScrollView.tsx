@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 
-import { classNames, withStyles } from 'muix-styles/native/withStyles'
-import { sheet } from 'muix-primitives/common/ScrollView/ScrollView'
+import { classNames, withStyles } from 'muix-styles'
+import { sheet } from '../../common/ScrollView/ScrollView'
 import { ScrollView as ScrollViewRN } from 'react-native' 
 
 const scrollView: Mui.CodeSFCNative<MuiScrollView.Shape> = props => {

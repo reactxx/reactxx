@@ -4,14 +4,14 @@
   "main": "deploy/es/test/App.js",
   "private": true,
   "dependencies": {
-    "expo": "^24.0.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
-    "react": "16.0.0",
     "deepmerge": "^2.0.1",
+    "expo": "^24.0.0",
+    "muix-icons": "^0.1.0",
+    "react": "16.2.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
     "recompose": "^0.26.0",
     "tslib": "^1.8.0",
-    "warning": "^3.0.0",
-    "muix-icons": "^0.1.0"
+    "warning": "^3.0.0"
   },
   "devDependencies": {
     "@types/expo": "PavelPZ/reactx-types-expo",
@@ -19,17 +19,26 @@
     "@types/react-dom": "^16.0.3",
     "@types/react-native": "PavelPZ/reactx-types-react-native",
     "babel-plugin-module-resolver": "^3.0.0",
-    "material-ui": "^1.0.0-beta.23"
+    "material-ui": "^1.0.0-beta.24"
   },
   "jspm": {
     "name": "muix",
     "main": "lib-web/src/test/index.js",
     "dependencies": {
-      "material-ui": "npm:material-ui@^1.0.0-beta.23",
+      "classnames": "npm:classnames@^2.2.5",
+      "hoist-non-react-statics": "npm:hoist-non-react-statics@^2.3.1",
+      "jss-camel-case": "npm:jss-camel-case@^6.0.0",
+      "jss-default-unit": "npm:jss-default-unit@^8.0.2",
+      "jss-global": "npm:jss-global@^3.0.0",
+      "jss-nested": "npm:jss-nested@^6.0.1",
+      "jss-props-sort": "npm:jss-props-sort@^6.0.0",
+      "jss-vendor-prefixer": "npm:jss-vendor-prefixer@^7.0.0",
+      "material-ui": "npm:material-ui@^1.0.0-beta.24",
       "core-js": "npm:core-js@^2.5.1",
       "deepmerge": "npm:deepmerge@^2.0.1",
       "muix-icons": "npm:muix-icons@^0.1.0",
       "recompose": "npm:recompose@^0.26.0",
+      "tslib": "npm:tslib@^1.8.1",
       "warning": "npm:warning@^3.0.0",
       "jss-preset-default": "npm:jss-preset-default@^4.0.1",
       "react-jss": "npm:react-jss@^8.1.0"
@@ -51,7 +60,7 @@
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
-      "react": "npm:react@^16.0.0",
+      "react": "npm:react",
       "react-dom": "npm:react-dom@^16.0.0",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
@@ -86,6 +95,14 @@
       },
       "npm:safe-buffer@5.1.1": {
         "browser": "index.js"
+      },
+      "npm:tslib@1.8.1": {
+        "format": "cjs",
+        "meta": {
+          "tslib.js": {
+            "esModule": true
+          }
+        }
       }
     }
   }

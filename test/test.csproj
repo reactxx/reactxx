@@ -77,6 +77,8 @@
     <Content Include="package.json" />
     <Content Include="%24refresh.cmd" />
     <Content Include="%24compile.cmd" />
+    <Content Include="%24relink.cmd" />
+    <Content Include="%24link.cmd" />
     <None Include="packages.config" />
     <Content Include="links.html" />
     <Content Include="tsconfig.json" />
@@ -99,6 +101,23 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\test\App.tsx" />
+    <TypeScriptCompile Include="src\test\components\button.tsx" />
+    <TypeScriptCompile Include="src\test\icons\index.tsx" />
+    <TypeScriptCompile Include="src\test\index.tsx" />
+    <TypeScriptCompile Include="src\test\primitives\icon.tsx" />
+    <TypeScriptCompile Include="src\test\primitives\text-view.tsx" />
+    <TypeScriptCompile Include="src\test\styles\index.tsx" />
+    <TypeScriptCompile Include="src\test\styles\typography.tsx" />
+    <TypeScriptCompile Include="typings\Icon-d.d.ts" />
+    <TypeScriptCompile Include="typings\material-ui-ex.d.ts" />
+    <TypeScriptCompile Include="typings\shared\material-icons.d.ts" />
+    <TypeScriptCompile Include="typings\shared\material-ui-helper.d.ts" />
+    <TypeScriptCompile Include="typings\shared\material-ui.d.ts" />
+    <TypeScriptCompile Include="typings\shared\typings.d.ts" />
+    <TypeScriptCompile Include="typings\withStyles-d.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -13,9 +13,14 @@
     "paths": {
       "muix-icons/current/*": [ "node_modules/muix-icons/lib/web/index" ],
 
-      "muix-styles/current/*": [ "node_modules/muix-styles/lib/web/*" ],
-      "muix-styles/web/*": [ "node_modules/muix-styles/lib/web/*" ],
-      "muix-styles/native/*": [ "node_modules/muix-styles/es/native/*" ]
+
+      "muix-styles": [ "node_modules/muix-styles/lib/web/index" ],
+      "muix-styles-web": [ "node_modules/muix-styles/lib/web/index" ],
+      "muix-styles-native": [ "node_modules/muix-styles/lib/native/index" ]
+
+      //"muix-styles/current/*": [ "node_modules/muix-styles/lib/web/*" ],
+      //"muix-styles/web/*": [ "node_modules/muix-styles/lib/web/*" ],
+      //"muix-styles/native/*": [ "node_modules/muix-styles/es/native/*" ]
     },
 
     "allowSyntheticDefaultImports": true,

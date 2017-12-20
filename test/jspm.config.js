@@ -23,7 +23,7 @@ SystemJS.config({
     "buffer": "npm:jspm-nodelibs-buffer@0.2.3",
     "child_process": "npm:jspm-nodelibs-child_process@0.2.1",
     "constants": "npm:jspm-nodelibs-constants@0.2.1",
-    "core-js": "npm:core-js@2.5.2",
+    "core-js": "npm:core-js@2.5.3",
     "crypto": "npm:jspm-nodelibs-crypto@0.2.1",
     "deepmerge": "npm:deepmerge@2.0.1",
     "domain": "npm:jspm-nodelibs-domain@0.2.1",
@@ -31,7 +31,7 @@ SystemJS.config({
     "fs": "npm:jspm-nodelibs-fs@0.2.1",
     "http": "npm:jspm-nodelibs-http@0.2.0",
     "https": "npm:jspm-nodelibs-https@0.2.2",
-    "jss": "npm:jss@9.3.3",
+    "jss": "npm:jss@9.4.0",
     "lodash": "npm:lodash@4.17.4",
     "material-ui": "npm:material-ui@1.0.0-beta.23",
     "muix-icons": "npm:muix-icons@0.1.38",
@@ -56,22 +56,22 @@ SystemJS.config({
         "deepmerge": "npm:deepmerge@2.0.1",
         "recompose": "npm:recompose@0.26.0",
         "warning": "npm:warning@3.0.0",
-        "react-event-listener": "npm:react-event-listener@0.5.1",
+        "react-event-listener": "npm:react-event-listener@0.5.2",
         "react-transition-group": "npm:react-transition-group@2.2.1",
         "babel-runtime": "npm:babel-runtime@6.26.0",
         "prop-types": "npm:prop-types@15.6.0",
         "lodash": "npm:lodash@4.17.4",
         "brcast": "npm:brcast@3.0.1",
-        "dom-helpers": "npm:dom-helpers@3.2.1",
+        "dom-helpers": "npm:dom-helpers@3.3.1",
         "keycode": "npm:keycode@2.1.9",
         "jss-preset-default": "npm:jss-preset-default@4.0.1",
         "react-scrollbar-size": "npm:react-scrollbar-size@2.0.2",
         "react-popper": "npm:react-popper@0.7.4",
         "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
         "scroll": "npm:scroll@2.0.1",
-        "react-jss": "npm:react-jss@8.1.0",
+        "react-jss": "npm:react-jss@8.2.0",
         "react-flow-types": "npm:react-flow-types@0.2.0-beta.6",
-        "jss": "npm:jss@9.3.3",
+        "jss": "npm:jss@9.4.0",
         "classnames": "npm:classnames@2.2.5",
         "normalize-scroll-left": "npm:normalize-scroll-left@0.1.2"
       }
@@ -92,24 +92,16 @@ SystemJS.config({
     "npm:react-transition-group@2.2.1": {
       "map": {
         "warning": "npm:warning@3.0.0",
-        "dom-helpers": "npm:dom-helpers@3.2.1",
+        "dom-helpers": "npm:dom-helpers@3.3.1",
         "loose-envify": "npm:loose-envify@1.3.1",
         "prop-types": "npm:prop-types@15.6.0",
         "classnames": "npm:classnames@2.2.5",
         "chain-function": "npm:chain-function@1.0.0"
       }
     },
-    "npm:react-event-listener@0.5.1": {
-      "map": {
-        "babel-runtime": "npm:babel-runtime@6.26.0",
-        "warning": "npm:warning@3.0.0",
-        "fbjs": "npm:fbjs@0.8.16",
-        "prop-types": "npm:prop-types@15.6.0"
-      }
-    },
     "npm:babel-runtime@6.26.0": {
       "map": {
-        "core-js": "npm:core-js@2.5.2",
+        "core-js": "npm:core-js@2.5.3",
         "regenerator-runtime": "npm:regenerator-runtime@0.11.1"
       }
     },
@@ -151,29 +143,13 @@ SystemJS.config({
       "map": {
         "babel-runtime": "npm:babel-runtime@6.26.0",
         "prop-types": "npm:prop-types@15.6.0",
-        "react-event-listener": "npm:react-event-listener@0.5.1"
+        "react-event-listener": "npm:react-event-listener@0.5.2"
       }
     },
     "npm:react-popper@0.7.4": {
       "map": {
         "prop-types": "npm:prop-types@15.6.0",
         "popper.js": "npm:popper.js@1.13.0"
-      }
-    },
-    "npm:react-jss@8.1.0": {
-      "map": {
-        "jss-preset-default": "npm:jss-preset-default@4.0.1",
-        "prop-types": "npm:prop-types@15.6.0",
-        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
-        "jss": "npm:jss@9.3.3",
-        "theming": "npm:theming@1.2.1"
-      }
-    },
-    "npm:jss@9.3.3": {
-      "map": {
-        "symbol-observable": "npm:symbol-observable@1.1.0",
-        "warning": "npm:warning@3.0.0",
-        "is-in-browser": "npm:is-in-browser@1.1.3"
       }
     },
     "npm:loose-envify@1.3.1": {
@@ -183,22 +159,16 @@ SystemJS.config({
     },
     "npm:jss-preset-default@4.0.1": {
       "map": {
-        "jss-extend": "npm:jss-extend@6.0.1",
+        "jss-extend": "npm:jss-extend@6.1.0",
         "jss-camel-case": "npm:jss-camel-case@6.0.0",
-        "jss-expand": "npm:jss-expand@5.0.0",
+        "jss-expand": "npm:jss-expand@5.1.0",
         "jss-props-sort": "npm:jss-props-sort@6.0.0",
         "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0",
         "jss-compose": "npm:jss-compose@5.0.0",
         "jss-template": "npm:jss-template@1.0.0",
-        "jss-default-unit": "npm:jss-default-unit@8.0.0",
+        "jss-default-unit": "npm:jss-default-unit@8.0.2",
         "jss-nested": "npm:jss-nested@6.0.1",
         "jss-global": "npm:jss-global@3.0.0"
-      }
-    },
-    "npm:jss-extend@6.0.1": {
-      "map": {
-        "warning": "npm:warning@3.0.0",
-        "is-observable": "npm:is-observable@0.2.0"
       }
     },
     "npm:scroll@2.0.1": {
@@ -237,24 +207,6 @@ SystemJS.config({
         "stream-browserify": "npm:stream-browserify@2.0.1"
       }
     },
-    "npm:theming@1.2.1": {
-      "map": {
-        "brcast": "npm:brcast@3.0.1",
-        "prop-types": "npm:prop-types@15.6.0",
-        "is-plain-object": "npm:is-plain-object@2.0.4",
-        "is-function": "npm:is-function@1.0.1"
-      }
-    },
-    "npm:jss-expand@5.0.0": {
-      "map": {
-        "is-observable": "npm:is-observable@0.2.0"
-      }
-    },
-    "npm:jss-default-unit@8.0.0": {
-      "map": {
-        "is-observable": "npm:is-observable@0.2.0"
-      }
-    },
     "npm:jss-vendor-prefixer@7.0.0": {
       "map": {
         "css-vendor": "npm:css-vendor@0.3.8"
@@ -275,11 +227,6 @@ SystemJS.config({
       "map": {
         "encoding": "npm:encoding@0.1.12",
         "is-stream": "npm:is-stream@1.1.0"
-      }
-    },
-    "npm:is-observable@0.2.0": {
-      "map": {
-        "symbol-observable": "npm:symbol-observable@0.2.4"
       }
     },
     "npm:css-vendor@0.3.8": {
@@ -604,16 +551,77 @@ SystemJS.config({
     "npm:muix-styles@0.1.20": {
       "map": {
         "react-dom": "npm:react-dom@16.2.0",
-        "core-js": "npm:core-js@2.5.2",
-        "material-ui": "npm:material-ui@1.0.0-beta.23",
+        "core-js": "npm:core-js@2.5.3",
+        "material-ui": "npm:material-ui@1.0.0-beta.24",
         "muix-icons": "npm:muix-icons@0.1.38",
         "deepmerge": "npm:deepmerge@2.0.1",
         "recompose": "npm:recompose@0.26.0",
-        "jss": "npm:jss@9.3.3",
+        "jss": "npm:jss@9.4.0",
         "warning": "npm:warning@3.0.0",
         "tslib": "npm:tslib@1.8.1",
         "jss-preset-default": "npm:jss-preset-default@4.0.1",
-        "react-jss": "npm:react-jss@8.1.0"
+        "react-jss": "npm:react-jss@8.2.0"
+      }
+    },
+    "npm:material-ui@1.0.0-beta.24": {
+      "map": {
+        "jss-preset-default": "npm:jss-preset-default@4.0.1",
+        "jss": "npm:jss@9.4.0",
+        "react-jss": "npm:react-jss@8.2.0",
+        "recompose": "npm:recompose@0.26.0",
+        "warning": "npm:warning@3.0.0",
+        "deepmerge": "npm:deepmerge@2.0.1",
+        "lodash": "npm:lodash@4.17.4",
+        "babel-runtime": "npm:babel-runtime@6.26.0",
+        "react-scrollbar-size": "npm:react-scrollbar-size@2.0.2",
+        "classnames": "npm:classnames@2.2.5",
+        "normalize-scroll-left": "npm:normalize-scroll-left@0.1.2",
+        "scroll": "npm:scroll@2.0.1",
+        "react-transition-group": "npm:react-transition-group@2.2.1",
+        "brcast": "npm:brcast@3.0.1",
+        "keycode": "npm:keycode@2.1.9",
+        "react-event-listener": "npm:react-event-listener@0.5.2",
+        "react-popper": "npm:react-popper@0.7.4",
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
+        "prop-types": "npm:prop-types@15.6.0",
+        "dom-helpers": "npm:dom-helpers@3.3.1"
+      }
+    },
+    "npm:react-jss@8.2.0": {
+      "map": {
+        "jss": "npm:jss@9.4.0",
+        "jss-preset-default": "npm:jss-preset-default@4.0.1",
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
+        "prop-types": "npm:prop-types@15.6.0",
+        "theming": "npm:theming@1.3.0"
+      }
+    },
+    "npm:jss@9.4.0": {
+      "map": {
+        "warning": "npm:warning@3.0.0",
+        "symbol-observable": "npm:symbol-observable@1.1.0",
+        "is-in-browser": "npm:is-in-browser@1.1.3"
+      }
+    },
+    "npm:react-event-listener@0.5.2": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.26.0",
+        "warning": "npm:warning@3.0.0",
+        "prop-types": "npm:prop-types@15.6.0",
+        "fbjs": "npm:fbjs@0.8.16"
+      }
+    },
+    "npm:jss-extend@6.1.0": {
+      "map": {
+        "warning": "npm:warning@3.0.0"
+      }
+    },
+    "npm:theming@1.3.0": {
+      "map": {
+        "brcast": "npm:brcast@3.0.1",
+        "prop-types": "npm:prop-types@15.6.0",
+        "is-function": "npm:is-function@1.0.1",
+        "is-plain-object": "npm:is-plain-object@2.0.4"
       }
     }
   }

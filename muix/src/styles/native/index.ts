@@ -2,9 +2,9 @@ import React from 'react'
 import ReactN from 'react-native'
 import range from 'lodash/range'
 
-import { toPlatformSheetX, toPlatformRuleSetX } from 'muix-styles/common/index'
+import { toPlatformSheetX, toPlatformRuleSetX } from '../common/index'
 
-import createTypographyNative from 'muix-styles/native/createTypography'
+import createTypographyNative from '../native/createTypography'
 
 export const toPlatformRuleSet = <T extends Mui.CSSPropertiesNative>(style: Mui.RulesetX<T>) => toPlatformRuleSetX(style, true) as T
 export const toPlatformSheet = <R extends Mui.Shape>(rules: Mui.PartialSheetX<R>) => toPlatformSheetX(rules, true) as Mui.SheetNative<R>
@@ -31,6 +31,8 @@ export const shadows: Mui.ThemeShadows = [
   ...range(1, 25).map(idx => shadow(idx))
 ]
 
+export { sheetCreator, default as createMuiTheme } from '../common/index'
 
+export { classNames, withStyles, Styler } from './withStyles'
 
-
+export { default as MuiThemeProvider } from './MuiThemeProvider'

@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 
-import { classNames, withStyles } from 'muix-styles/native/withStyles'
-import { sheet } from 'muix-primitives/common/View/View' 
+import { classNames, withStyles } from 'muix-styles'
+import { sheet } from '../../common/View/View' 
 import { View as RNView } from 'react-native' 
 
 const view: Mui.CodeSFCNative<MuiView.Shape> = props => {

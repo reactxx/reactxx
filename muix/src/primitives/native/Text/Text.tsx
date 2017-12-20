@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 
-import { classNames, withStyles } from 'muix-styles/native/withStyles'
-import { sheet } from 'muix-primitives/common/Text/Text' 
+import { classNames, withStyles } from 'muix-styles'
+import { sheet } from '../../common/Text/Text' 
 import { Text as RNText } from 'react-native' 
 
 const text: Mui.CodeSFCNative<MuiText.Shape> = props => {

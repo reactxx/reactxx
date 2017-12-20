@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from 'muix-components/current/Button/Button'
+import Button from 'muix-components/Button/Button'
 import { Styler, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 //import color from 'material-ui/colors/orange'
 

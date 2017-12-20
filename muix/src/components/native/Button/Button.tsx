@@ -1,9 +1,7 @@
 ﻿import React from 'react'
 import { Platform, View, Text } from 'react-native'
 
-import { withStyles, classNames } from 'muix-styles/native/withStyles'
-import { toPlatformRuleSet } from 'muix-styles/native/index'
-import { sheetCreator } from 'muix-styles/common/index'
+import { withStyles, classNames, toPlatformRuleSet, sheetCreator } from 'muix-styles'
 
 import ButtonBase from '../ButtonBase/ButtonBase'
 

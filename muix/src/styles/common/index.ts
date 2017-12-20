@@ -10,7 +10,7 @@ import zIndex from 'material-ui/styles/zIndex'
 import spacing from 'material-ui/styles/spacing'
 
 //platform specific code
-import { createTypography, shadows, toPlatformRuleSet, toPlatformSheet } from 'muix-styles/current/index'
+import { createTypography, shadows, toPlatformRuleSet, toPlatformSheet } from 'muix-styles'
 
 //create platform specific sheet from cross platform sheet creator
 export const sheetCreator = <R extends Mui.Shape>(sheetXCreator: Mui.SheetXCreator<R>) => (theme: Mui.ThemeNew) => toPlatformSheet(sheetXCreator(theme as Mui.ThemeNew) as Mui.PartialSheetX<R>)

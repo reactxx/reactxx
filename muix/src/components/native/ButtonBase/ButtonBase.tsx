@@ -1,9 +1,7 @@
 ﻿import React from 'react'
 import { View, TouchableWithoutFeedback, Animated, Easing, Platform, Text, LayoutRectangle } from 'react-native';
 
-import { withStyles, classNames } from 'muix-styles/native/withStyles'
-
-import { sheetCreator } from 'muix-styles/common/index'
+import { sheetCreator, withStyles, classNames } from 'muix-styles'
 
 const sheet = sheetCreator<MuiButtonBase.Shape>(({ palette }) => ({
   native: {

@@ -11,11 +11,19 @@
 
     "baseUrl": ".",
     "paths": {
-      "muix-icons/current/*": [ "node_modules/muix-icons/lib/web/index" ],
+      "muix-icons/*": [ "node_modules/muix-icons/es/native/index" ],
 
-      "muix-styles/current/*": [ "node_modules/muix-styles/lib/web/*" ],
-      "muix-styles/web/*": [ "node_modules/muix-styles/lib/web/*" ],
-      "muix-styles/native/*": [ "node_modules/muix-styles/es/native/*" ]
+      "muix-styles": [ "node_modules/muix-styles/es/native/index" ],
+      "muix-styles-web": [ "node_modules/muix-styles/es/web/index" ],
+      "muix-styles-native": [ "node_modules/muix-styles/es/native/index" ],
+
+      "muix-primitives": [ "node_modules/muix-primitives/es/native/index" ],
+
+      "muix-components/*": [ "node_modules/muix-components/es/native/*" ]
+
+      //"muix-styles/current/*": [ "node_modules/muix-styles/lib/web/*" ],
+      //"muix-styles/web/*": [ "node_modules/muix-styles/lib/web/*" ],
+      //"muix-styles/native/*": [ "node_modules/muix-styles/es/native/*" ]
     },
 
     "allowSyntheticDefaultImports": true,

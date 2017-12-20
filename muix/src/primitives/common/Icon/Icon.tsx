@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 
 import { capitalizeFirstLetter } from 'material-ui/utils/helpers'
-import { sheetCreator } from 'muix-styles/common/index'
+import { sheetCreator } from 'muix-styles'
 
 import warning from 'warning' 
 

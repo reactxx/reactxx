@@ -14,4 +14,6 @@ call %tsc% --p %root%tsconfig-native.json -d
 
 rem *** npm package publishing
 call %root%$publish_ styles
+call %root%$publish_ primitives
+call %root%$publish_ components
 

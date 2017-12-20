@@ -1,8 +1,8 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { classNames, withStyles } from 'muix-styles/web/withStyles'
-import { sheet } from 'muix-primitives/common/Text/Text' 
+import { classNames, withStyles } from 'muix-styles-web'
+import { sheet } from '../../common/Text/Text' 
 
 const text: Mui.CodeSFCWeb<MuiText.Shape> = props => {
   const { classes, innerRef, ...rest } = props 

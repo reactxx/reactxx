@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { MuiThemeContextTypes } from './MuiThemeProvider'
-import createMuiTheme from 'muix-styles/common/index'
+import createMuiTheme from '../common/index'
 import warning from 'invariant'
 import pure from 'recompose/pure'
 import { View } from 'react-native'
-import { toPlatformSheet, toPlatformRuleSet } from 'muix-styles/native/index'
+import { toPlatformSheet, toPlatformRuleSet } from '../native/index'
 
 let defaultTheme: Mui.ThemeNew
 const getDefaultTheme = () => defaultTheme || (defaultTheme = createMuiTheme())
@@ -31,7 +31,7 @@ const styleCreator = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreator<R>
 }
 
 export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreator<R>, options?: Mui.WithStylesOptions) => (Component: Mui.CodeComponentType<R>) => {
-  const Style: Mui.SFCX<R> = (props, context: Mui.TMuiThemeContextValue) => {
+  const Styled: Mui.SFCX<R> = (props, context: Mui.TMuiThemeContextValue) => {
     const { flip, name } = options
     const { classes: common, classesNative, classesWeb, style, web, native, onClick, onPress, ...other } = props as Mui.PropsX<Mui.Shape>//as any //without any: does not works in TS
 
@@ -41,7 +41,7 @@ export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreat
     if (!cacheItem) theme.nativeSheetCache.push(cacheItem = { key: styleOrCreator, value: styleCreator(styleOrCreator, theme, name) })
 
     const classes = styleOverride(
-      cacheItem.value, //styleCreator(styleOrCreator, theme, name),
+      cacheItem.value,
       toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>),
       name)
 
@@ -50,10 +50,10 @@ export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreat
 
     return <Component {...newProps } />
   }
-  Style.contextTypes = MuiThemeContextTypes
-  Style['options'] = options
-  hoistNonReactStatics(Style, Component as any)
-  return pure(Style)
+  Styled.contextTypes = MuiThemeContextTypes
+  Styled['options'] = options
+  hoistNonReactStatics(Styled, Component as any)
+  return pure(Styled)
 }
 
 export default withStyles

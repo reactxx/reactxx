@@ -12,7 +12,7 @@ import JssProvider from 'react-jss/lib/JssProvider'
 
 import { sheetToClassSheet } from './inline-styles'
 
-import { toPlatformRuleSet, toPlatformSheet } from 'muix-styles/web/index'
+import { toPlatformRuleSet, toPlatformSheet } from 'muix-styles'
 
 
 /*

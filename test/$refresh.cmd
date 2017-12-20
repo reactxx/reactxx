@@ -17,3 +17,5 @@ copy D:\muix\test\$blacklist.js d:\muix\test\node_modules\metro-bundler\src\blac
 
 call npm link gulp
 
+call npm link 
+
