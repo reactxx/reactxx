@@ -3,7 +3,9 @@ Tiny material-ui add-in which allows creation of material-ui compatible React-Na
 
 *Notice: whole project is in very early stage*
 
-**Application code**
+## Example
+
+**Common application code**
 ```jsx
 export const App = props => <View style={{ marginTop: 24 }}>
   <Button color='primary' raised classes={{label:{color: 'maroon'}}} onClick={ev => alert('Hallo Button')}>
@@ -40,14 +42,14 @@ ReactDOM.render(<App />, document.getElementById('content'))
 
 ## Primary aims of this project
 **1. Basic**
-- [x] to support Typescript (redesign material-ui TS typing with respect of React Native)
+- [x] to support Typescript (and redesign material-ui TS typing with respect of React Native)
 - [x] to explore the possibility of single codebase (including single ```npm package``` format etc.) for web and native
 - [x] to have common theming and styling for web and native (i.e. provide cross platform functionality contained in material-ui [styles](https://github.com/mui-org/material-ui/tree/v1-beta/src/styles) and [colors](https://github.com/mui-org/material-ui/tree/v1-beta/src/colors) directories)
 
 **2. To have a few primitives (beyond material-ui), alowing creation of cross platform *Hallo world* application**
 - [x] [materialdesignicons.com](https://materialdesignicons.com/) icons (SVG icons for web, font icons for native)
 
-*The following components do not realize their react-native functionality. They only allows to replace HTML ```<div>``` or ```<span>``` tags*
+*The following components do not realize their react-native functionality. They only allows to replace HTML ```<div>``` or ```<span>``` tags by cross platform way*
 - [x] View
 - [ ] Text
 - [ ] ScrollView
