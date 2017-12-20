@@ -1,5 +1,6 @@
 import Expo from 'expo'
 import React from 'react'
+import ReactN from 'react-native'
 import { Text } from 'react-native'
 
 const text = async () => 'ASYNC'

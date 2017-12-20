@@ -33,7 +33,7 @@ import { jss } from 'muix-styles/common/withStyles'
 
 export const jss = create(preset())
 jss.options.createGenerateClassName = createGenerateClassName
-//jss.options.insertionPoint = 'insertion-point-jss'
+jss.options.insertionPoint = 'insertion-point-jss'
 
 export const Styler: React.SFC<{}> = props => <JssProvider jss={jss}>{props.children}</JssProvider>
 

@@ -2,7 +2,7 @@
 import React from 'react'
 
 import MuiButtonBase from 'material-ui/ButtonBase/ButtonBase'
-import { withStylesX } from 'muix-styles-web'
+import { withStylesX } from 'muix-styles/web'
 
 const ButtonBase = withStylesX<MuiButtonBase.Shape>(MuiButtonBase as any)
 

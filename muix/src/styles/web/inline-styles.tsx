@@ -12,7 +12,10 @@ import createGenerateClassName from 'material-ui/styles/createGenerateClassName'
 
 //export const Styles: React.SFC<{}> = props => <JssProvider jss={jss}>{props.children}</JssProvider>
 
-const felaSheet = jss.createStyleSheet({}, { index: 999999, meta: 'fela-like' }).attach()
+//const felaSheet = jss.createStyleSheet({}, { index: 999999, meta: 'fela-like' }).attach()
+
+let felaSheet = null
+const createFelaSheet = () => felaSheet || (felaSheet = jss.createStyleSheet({}, { index: 999999, meta: 'fela-like' }).attach())
 
 //debugger
 //const rule = jss.createRule('aaa', { display: 'flex', padding: 10 })
@@ -38,7 +41,7 @@ export const ruleToClassNames = (css: React.CSSProperties) => {
         if (!cls) {
           cls = rule.selector.substr(1)
           cache[key] = cls
-          felaSheet.insertRule(rule)
+          createFelaSheet().insertRule(rule)
         }
         break
       }

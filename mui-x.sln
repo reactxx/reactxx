@@ -9,11 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "build-icons", "build-icons\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{6B47010E-3A7D-48A9-B556-7775FCC75E78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "muix-types-expo", "types-expo\muix-types-expo.csproj", "{EADDF7D4-C2BF-4966-B0AD-B2BC95602598}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "types-expo", "types-expo\types-expo.csproj", "{EADDF7D4-C2BF-4966-B0AD-B2BC95602598}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "muix-types-react", "types-react\muix-types-react.csproj", "{2DB75A4A-FE51-4B4D-8A0B-2751C96D3DF0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "types-react", "types-react\types-react.csproj", "{2DB75A4A-FE51-4B4D-8A0B-2751C96D3DF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "muix-types-react-native", "types-react-native\muix-types-react-native.csproj", "{3860A03E-2A8B-414E-BADD-DC935AC216FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "types-react-native", "types-react-native\types-react-native.csproj", "{3860A03E-2A8B-414E-BADD-DC935AC216FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{69DC2C05-29A6-46A9-AF1E-CECEE459CB07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{21F14E62-69A7-470C-A490-FF15A67824EA} = {69DC2C05-29A6-46A9-AF1E-CECEE459CB07}
+		{EADDF7D4-C2BF-4966-B0AD-B2BC95602598} = {69DC2C05-29A6-46A9-AF1E-CECEE459CB07}
+		{2DB75A4A-FE51-4B4D-8A0B-2751C96D3DF0} = {69DC2C05-29A6-46A9-AF1E-CECEE459CB07}
+		{3860A03E-2A8B-414E-BADD-DC935AC216FE} = {69DC2C05-29A6-46A9-AF1E-CECEE459CB07}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DBB3A9DC-0A4B-40A7-B600-3305ADDDFE1A}

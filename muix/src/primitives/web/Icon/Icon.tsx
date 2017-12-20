@@ -1,6 +1,6 @@
 ﻿import React from 'react'
 
-import { classNames, withStyles } from 'muix-styles-web'
+import { classNames, withStyles } from 'muix-styles/web'
 import { getClasses, sheet } from '../../common/Icon/Icon' 
 
 import SvgIcon, { SvgIconProps } from 'material-ui/SvgIcon/SvgIcon'

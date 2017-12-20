@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { Play } from 'muix-icons/current/Play'
-import { ruleToClassNames } from 'muix-styles-web'
+import { ruleToClassNames } from 'muix-styles/web'
 
 const AppComp: React.SFC = props => {
   const classes = ruleToClassNames({ color: 'red' })

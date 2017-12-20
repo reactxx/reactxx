@@ -9,19 +9,11 @@
     "paths": {
       "muix-icons/current/*": [ "node_modules/muix-icons/es/native/index" ],
 
+      "muix-styles/web": [ "src/styles/web/index" ],
+      "muix-styles/native": [ "src/styles/native/index" ],
       "muix-styles": [ "src/styles/native/index" ],
-      "muix-styles-web": [ "src/styles/web/index" ],
-      "muix-styles-native": [ "src/styles/native/index" ],
-      //"muix-styles/current/*": [ "src/styles/web/*" ],
-      //"muix-styles/web/*": [ "src/styles/web/*" ],
-      //"muix-styles/common/*": [ "src/styles/common/*" ],
-      //"muix-styles/native/*": [ "src/styles/native/*" ],
 
       "muix-primitives": [ "src/primitives/native/index" ],
-      //"muix-primitives/current/*": [ "src/primitives/web/*" ],
-      //"muix-primitives/common/*": [ "src/primitives/common/*" ],
-      //"muix-primitives/web/*": [ "src/primitives/web/*" ],
-      //"muix-primitives/native/*": [ "src/primitives/native/*" ],
 
       "muix-components/web/*": [ "src/components/web/*" ],
       "muix-components/current/*": [ "src/components/web/*" ],

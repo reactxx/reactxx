@@ -1,6 +1,7 @@
-set root=d:\muix\muix\
+set root=d:\muix\test\
+set tsc="c:\Program Files (x86)\Microsoft SDKs\TypeScript\2.6\tsc.exe"
 
 d:
 
-call "c:\Program Files (x86)\Microsoft SDKs\TypeScript\2.6\tsc.exe" --p d:\muix\test\tsconfig-web.json
-call "c:\Program Files (x86)\Microsoft SDKs\TypeScript\2.6\tsc.exe" --p d:\muix\test\tsconfig-native.json
+call %tsc% --p %root%tsconfig-web.json
+call %tsc% --p %root%tsconfig-native.json -d

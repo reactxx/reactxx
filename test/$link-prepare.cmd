@@ -22,3 +22,4 @@ call yarn link
 
 cd %root%types-react-native
 call yarn link
+
