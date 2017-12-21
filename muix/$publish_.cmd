@@ -13,8 +13,8 @@ rmdir %root%deploy\%package%\lib\native /s /q
 del %root%deploy\%package%\es\web\*.js /s /q
 
 rem *** publish
-rem call npm.cmd version patch
-rem call npm.cmd publish
+call npm.cmd version patch
+call npm.cmd publish
 
 cd %root%deploy/%package%
 call yarn link

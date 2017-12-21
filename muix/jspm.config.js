@@ -12,8 +12,9 @@ SystemJS.config({
     }
   },
   map: {
-    "muix-styles/current": "deploy/lib/styles/web",
-    "muix-styles": "deploy/lib/styles"
+    "muix-styles": "deploy/lib/styles/web/index",
+    "muix-styles/web": "deploy/lib/styles/web/index",
+    "muix-primitives": "deploy/lib/primitives/web/index",
   }
 });
 
