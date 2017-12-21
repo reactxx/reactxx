@@ -16,6 +16,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "types-react-native", "types-react-native\types-react-native.csproj", "{3860A03E-2A8B-414E-BADD-DC935AC216FE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{69DC2C05-29A6-46A9-AF1E-CECEE459CB07}"
+	ProjectSection(SolutionItems) = preProject
+		$publish-libs.cmd = $publish-libs.cmd
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,15 +39,12 @@ Global
 		{6B47010E-3A7D-48A9-B556-7775FCC75E78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B47010E-3A7D-48A9-B556-7775FCC75E78}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EADDF7D4-C2BF-4966-B0AD-B2BC95602598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EADDF7D4-C2BF-4966-B0AD-B2BC95602598}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EADDF7D4-C2BF-4966-B0AD-B2BC95602598}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EADDF7D4-C2BF-4966-B0AD-B2BC95602598}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2DB75A4A-FE51-4B4D-8A0B-2751C96D3DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DB75A4A-FE51-4B4D-8A0B-2751C96D3DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DB75A4A-FE51-4B4D-8A0B-2751C96D3DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DB75A4A-FE51-4B4D-8A0B-2751C96D3DF0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3860A03E-2A8B-414E-BADD-DC935AC216FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3860A03E-2A8B-414E-BADD-DC935AC216FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3860A03E-2A8B-414E-BADD-DC935AC216FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3860A03E-2A8B-414E-BADD-DC935AC216FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

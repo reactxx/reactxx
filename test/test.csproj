@@ -75,11 +75,12 @@
     <Content Include="%24blacklist.js" />
     <Content Include="jspm.config.js" />
     <Content Include="package.json" />
-    <Content Include="%24refresh.cmd" />
+    <Content Include="%24refresh-all.cmd" />
     <Content Include="%24compile.cmd" />
     <Content Include="%24relink.cmd" />
     <Content Include="%24link.cmd" />
     <Content Include="%24link-prepare.cmd" />
+    <Content Include="%24refresh-libs.cmd" />
     <None Include="packages.config" />
     <Content Include="links.html" />
     <Content Include="tsconfig.json" />
