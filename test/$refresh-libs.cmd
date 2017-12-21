@@ -1,25 +1,14 @@
 set root=D:\muix\test\
+set url=https://github.com/mui-x/muix/blob/master/types/
 
 d:
 
-yarn upgrade muix-styles --latest
-yarn upgrade muix-primitives --latest
-yarn upgrade muix-components --latest
-
 cd %root%
-rmdir node_modules /s /q
-cd %root%\jspm_packages
-rmdir npm /s /q
 
-cd %root%
-call npm install
-call jspm update
+call yarn upgrade muix-styles muix-primitives muix-components %url%expo/types-expo-0.1.1.tgz?raw=true %url%types/react/types-react-0.1.1.tgz?raw=true %url%types/react-native/types-react-native-0.1.1.tgz?raw=true --latest
 
-rmdir %root%\node_modules\@types\node /s /q
+cd %root%node_modules\@types
+rmdir node /s /q
 
-copy D:\muix\test\$blacklist.js d:\muix\test\node_modules\metro-bundler\src\blacklist.js /y
-
-call npm link gulp
-
-call npm link 
-
+cd %root%node_modules\@types\react-dom
+rmdir node_modules  /s /q

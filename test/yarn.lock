@@ -9,9 +9,9 @@
     lodash "^4.17.4"
     react-native-vector-icons "4.4.2"
 
-"@types/expo@https://github.com/mui-x/muix/blob/master/types-expo/types-expo-0.1.1.tgz?raw=true":
+"@types/expo@https://github.com/mui-x/muix/blob/master/types/expo/types-expo-0.1.1.tgz?raw=true":
   version "0.1.1"
-  resolved "https://github.com/mui-x/muix/blob/master/types-expo/types-expo-0.1.1.tgz?raw=true#ce32a8aefed4afbe494d58abd89bbdd6bdfa2ea4"
+  resolved "https://github.com/mui-x/muix/blob/master/types/expo/types-expo-0.1.1.tgz?raw=true#e72a226bd56444cdbbc7375021f5344191c91bc6"
 
 "@types/node@*":
   version "8.5.2"
@@ -24,17 +24,17 @@
     "@types/node" "*"
     "@types/react" "*"
 
-"@types/react-native@https://github.com/mui-x/muix/blob/master/types-react-native/types-react-native-0.1.1.tgz?raw=true":
+"@types/react-native@https://github.com/mui-x/muix/blob/master/types/react-native/types-react-native-0.1.1.tgz?raw=true":
   version "0.1.1"
-  resolved "https://github.com/mui-x/muix/blob/master/types-react-native/types-react-native-0.1.1.tgz?raw=true#801d19025e945f1151851ebf81b174d3c1d9b4f0"
+  resolved "https://github.com/mui-x/muix/blob/master/types/react-native/types-react-native-0.1.1.tgz?raw=true#d2c9b6579234f4c27de40491e69e8d776f6b5d82"
 
 "@types/react@*":
   version "16.0.31"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.31.tgz#5285da62f3ac62b797f6d0729a1d6181f3180c3e"
 
-"@types/react@https://github.com/mui-x/muix/blob/master/types-react/types-react-0.1.1.tgz?raw=true":
+"@types/react@https://github.com/mui-x/muix/blob/master/types/react/types-react-0.1.1.tgz?raw=true":
   version "0.1.1"
-  resolved "https://github.com/mui-x/muix/blob/master/types-react/types-react-0.1.1.tgz?raw=true#e7ce9d4fb63ae342299fbc5b841189a6789819f7"
+  resolved "https://github.com/mui-x/muix/blob/master/types/react/types-react-0.1.1.tgz?raw=true#0ed21cbd40ad68d73f935260b215037edc9a5248"
 
 abbrev@1:
   version "1.1.1"
@@ -2662,9 +2662,9 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
-muix-components@^0.1.22:
-  version "0.1.22"
-  resolved "https://registry.yarnpkg.com/muix-components/-/muix-components-0.1.22.tgz#93c448777afd8ccc1c5829dd973d0750cfd0f411"
+muix-components@^0.1.23:
+  version "0.1.23"
+  resolved "https://registry.yarnpkg.com/muix-components/-/muix-components-0.1.23.tgz#fbc203856b3d703f2c51a3a3b9e7ba6ab04b35e8"
   dependencies:
     deepmerge "^2.0.1"
     expo "^23.0.0"
@@ -2678,9 +2678,9 @@ muix-icons@^0.1.38:
   version "0.1.38"
   resolved "https://registry.yarnpkg.com/muix-icons/-/muix-icons-0.1.38.tgz#d35fc7e76561430cf9182ab7ca8e7dbd90cd695d"
 
-muix-primitives@^0.1.22:
-  version "0.1.22"
-  resolved "https://registry.yarnpkg.com/muix-primitives/-/muix-primitives-0.1.22.tgz#0eab23a98f2c09690d5b25cdf5e6cc2a7ef7c331"
+muix-primitives@^0.1.23:
+  version "0.1.23"
+  resolved "https://registry.yarnpkg.com/muix-primitives/-/muix-primitives-0.1.23.tgz#796921337408a25ae355790ef93a7882cc2099ab"
   dependencies:
     deepmerge "^2.0.1"
     expo "^23.0.0"
@@ -2690,9 +2690,9 @@ muix-primitives@^0.1.22:
     tslib "^1.8.1"
     warning "^3.0.0"
 
-muix-styles@^0.1.22:
-  version "0.1.22"
-  resolved "https://registry.yarnpkg.com/muix-styles/-/muix-styles-0.1.22.tgz#ea8d09cc9883b827f495666e652b761bb41423bc"
+muix-styles@^0.1.23:
+  version "0.1.23"
+  resolved "https://registry.yarnpkg.com/muix-styles/-/muix-styles-0.1.23.tgz#663ea6398c553c53a78871cc12dd4083e0a72778"
   dependencies:
     deepmerge "^2.0.1"
     expo "^23.0.0"

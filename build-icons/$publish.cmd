@@ -9,8 +9,8 @@ cd %root%deploy
 call npm.cmd version patch
 cd %root%deploy
 
-rem call npm.cmd publish
-rem cd %root%deploy
+call npm.cmd publish
 
+cd %root%deploy
 call yarn link
 
