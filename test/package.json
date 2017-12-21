@@ -11,12 +11,19 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
     "recompose": "^0.26.0",
     "tslib": "^1.8.0",
-    "warning": "^3.0.0"
+    "warning": "^3.0.0",
+    "muix-styles": "^0.1.22",
+    "muix-primitives": "^0.1.22",
+    "muix-components": "^0.1.22",
+    "muix-icons": "^0.1.38",
+    "muix": "^0.1.21"
   },
   "devDependencies": {
+    "@types/expo": "https://github.com/mui-x/muix/blob/master/types-expo/types-expo-0.1.1.tgz?raw=true",
+    "@types/react": "https://github.com/mui-x/muix/blob/master/types-react/types-react-0.1.1.tgz?raw=true",
+    "@types/react-native": "https://github.com/mui-x/muix/blob/master/types-react-native/types-react-native-0.1.1.tgz?raw=true",
     "@types/react-dom": "^16.0.3",
-    "babel-plugin-module-resolver": "^3.0.0",
-    "muix-icons": "^0.1.0"
+    "babel-plugin-module-resolver": "^3.0.0"
   },
   "jspm": {
     "name": "test",
@@ -26,7 +33,8 @@
       "muix-components": "npm:muix-components@0.1.21",
       "muix-icons": "npm:muix-icons@0.1.40",
       "muix-primitives": "npm:muix-primitives@0.1.21",
-      "muix-styles": "npm:muix-styles@0.1.22"
+      "muix-styles": "npm:muix-styles@0.1.22",
+      "muix": "npm:muix@0.1.0"
     },
     "devDependencies": {},
     "peerDependencies": {

@@ -3,8 +3,5 @@
   "version": "0.1.1",
   "description": "@types/react like version of TypeScript definitions for react-native",
   "registry": "npm",
-  "main": "index.d.ts",
-  "dependencies": { },
-  "author": "pzika@langmaster.cz",
-  "license": "ISC"
+  "dependencies": { }
 }

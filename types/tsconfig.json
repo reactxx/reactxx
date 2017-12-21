@@ -1,0 +1,29 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es5",
+
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": false,
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": false,
+    "baseUrl": ".",
+    "paths": {
+      "react": [ "react/index" ]
+    },
+    "typeRoots": [ "react" ],
+    "noImplicitAny": false,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es2015",
+      "esnext.asynciterable"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

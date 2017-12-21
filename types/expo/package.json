@@ -1,0 +1,7 @@
+{
+  "name": "@types/expo",
+  "version": "0.1.1",
+  "description": "Expo typescript definition",
+  "registry": "npm",
+  "dependencies": {}
+}

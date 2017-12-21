@@ -1,0 +1,7 @@
+{
+  "name": "@types/react",
+  "version": "0.1.1",
+  "description": "React-native compatible patch of TypeScript definitions for React",
+  "registry": "npm",
+  "dependencies": {}
+}
