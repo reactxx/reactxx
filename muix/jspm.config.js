@@ -15,6 +15,13 @@ SystemJS.config({
     "muix-styles": "deploy/lib/styles/web/index",
     "muix-styles/web": "deploy/lib/styles/web/index",
     "muix-primitives": "deploy/lib/primitives/web/index",
+    "muix-components": "deploy/lib/components/web",
+    "jss-props-sort": "npm:jss-props-sort@6.0.0",
+    "jss-default-unit": "npm:jss-default-unit@8.0.2",
+    "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0",
+    "jss-nested": "npm:jss-nested@6.0.1",
+    "jss-camel-case": "npm:jss-camel-case@6.0.0",
+    "jss-global": "npm:jss-global@3.0.0"
   }
 });
 
@@ -24,12 +31,6 @@ SystemJS.config({
     "npm:*.json"
   ],
   map: {
-    "jss-props-sort": "npm:jss-props-sort@6.0.0",
-    "jss-default-unit": "npm:jss-default-unit@8.0.2",
-    "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0",
-    "jss-nested": "npm:jss-nested@6.0.1",
-    "jss-camel-case": "npm:jss-camel-case@6.0.0",
-    "jss-global": "npm:jss-global@3.0.0",
     "classnames": "npm:classnames@2.2.5",
     "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
     "jss-preset-default": "npm:jss-preset-default@4.0.1",
@@ -48,7 +49,7 @@ SystemJS.config({
     "jss": "npm:jss@9.4.0",
     "lodash": "npm:lodash@4.17.4",
     "material-ui": "npm:material-ui@1.0.0-beta.24",
-    "muix-icons": "npm:muix-icons@0.1.38",
+    "muix-icons": "npm:muix-icons@0.1.44",
     "os": "npm:jspm-nodelibs-os@0.2.2",
     "path": "npm:jspm-nodelibs-path@0.2.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",

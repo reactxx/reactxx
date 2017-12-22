@@ -11,7 +11,7 @@
 
     "baseUrl": ".",
     "paths": {
-      "muix-icons/current/*": [ "node_modules/muix-icons/lib/web/index" ],
+      "muix-icons/*": [ "node_modules/muix-icons/es/native/index" ],
 
       "muix-styles/web": [ "src/styles/web/index" ],
       "muix-styles/native": [ "src/styles/native/index" ],

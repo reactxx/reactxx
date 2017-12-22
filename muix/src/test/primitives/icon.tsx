@@ -1,6 +1,6 @@
 import React from 'react'
 import { Icon, iconColor, iconSize } from 'muix-primitives'
-import { Styler, MuiThemeProvider, createMuiTheme } from 'muix-styles'
+import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 import color from 'material-ui/colors/orange'
 
 import { View, Text } from 'react-native'
@@ -31,7 +31,7 @@ const theme = createMuiTheme({
 })
 
 const app: React.SFC = props =>
-  <Styler>
+  <AppContainer>
     <View style={{ marginTop: 24 }}>
       <Icon children={MDI.icons.ArrowDownBoldBox} />
       <Icon children={MDI.icons.ArrowDownBoldBox} color='inherit' />
@@ -50,7 +50,7 @@ const app: React.SFC = props =>
         <Icon children={MDI.icons.ArrowDownBoldBox} />
       </MuiThemeProvider>
     </View>
-  </Styler>
+  </AppContainer>
 
 class app2 extends React.Component { render() { return <Text>HALLO</Text> } }
 

@@ -15,7 +15,7 @@ import createGenerateClassName from 'material-ui/styles/createGenerateClassName'
 //const felaSheet = jss.createStyleSheet({}, { index: 999999, meta: 'fela-like' }).attach()
 
 let felaSheet = null
-const createFelaSheet = () => felaSheet || (felaSheet = jss.createStyleSheet({}, { index: 999999, meta: 'fela-like' }).attach())
+const createFelaSheet = () => felaSheet || (felaSheet = jss.createStyleSheet({}, { index: 999999, meta: 'atomic-classes' }).attach())
 
 //debugger
 //const rule = jss.createRule('aaa', { display: 'flex', padding: 10 })
@@ -29,27 +29,43 @@ export const ruleToClassNames = (css: React.CSSProperties) => {
   if (!css) return ''
   const classes: string[] = []
   for (var p in css) {
-    let key = p + '|' + css[p]
+    let key = p + '|' + css[p].toString()
     let cls = cache[key]
     if (!cls) {
       const id = `f${counter++}`
-      const rule = jss.createRule(id, { [p]: css[p] }) //could replace padding:10 to padding:10px
-      const st = rule.style
-      for (var pp in st) {
-        key = pp + '|' + st[pp]
-        cls = cache[key]
-        if (!cls) {
-          cls = rule.selector.substr(1)
-          cache[key] = cls
-          createFelaSheet().insertRule(rule)
-        }
-        break
-      }
+      cls = createFelaSheet().addRule(id, { [p]: css[p] }).selector.substr(1)
+      cache[key] = cls
     }
     classes.push(cls)
   }
-  return classes.join(' ') + ' x y z'
+  return classes.join(' ')
 }
+
+//export const ruleToClassNamesOld = (css: React.CSSProperties) => {
+//  if (!css) return ''
+//  const classes: string[] = []
+//  for (var p in css) {
+//    let key = p + '|' + css[p]
+//    let cls = cache[key]
+//    if (!cls) {
+//      const id = `f${counter++}`
+//      const rule = jss.createRule(id, { [p]: css[p] }) //could replace padding:10 to padding:10px
+//      const st = rule.style
+//      for (var pp in st) {
+//        key = pp + '|' + st[pp]
+//        cls = cache[key]
+//        if (!cls) {
+//          cls = rule.selector.substr(1)
+//          cache[key] = cls
+//          createFelaSheet().insertRule(rule)
+//        }
+//        break
+//      }
+//    }
+//    classes.push(cls)
+//  }
+//  return classes.join(' ')
+//}
 
 export const sheetToClassSheet = <TKey extends string>(sheet: Partial<Record<TKey, React.CSSProperties>>) => {
   if (!sheet) return null

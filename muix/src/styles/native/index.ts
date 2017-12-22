@@ -33,6 +33,6 @@ export const shadows: Mui.ThemeShadows = [
 
 export { sheetCreator, default as createMuiTheme } from '../common/index'
 
-export { classNames, withStyles, Styler } from './withStyles'
+export { classNames, withStyles, AppContainer } from './withStyles'
 
 export { default as MuiThemeProvider } from './MuiThemeProvider'

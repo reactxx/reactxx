@@ -6,7 +6,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 import _classnames from 'classnames'
 
 import createGenerateClassName from 'material-ui/styles/createGenerateClassName'
-import { create } from 'jss';
+import jssDefault, { create } from 'jss';
 import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
 
@@ -14,28 +14,10 @@ import { sheetToClassSheet } from './inline-styles'
 
 import { toPlatformRuleSet, toPlatformSheet } from 'muix-styles'
 
-
-/*
-Order of FELA x JSS <style>'s tag:
-1. .html file
-  <!-- insertion-point-jss -->  <-- JSS sheet's
-  <style data-fela-type="RULE" type="text/css" id="fela-rules"></style> <-- FELA sheets
-
-2. create jss instance, as in rw-mui-w/styles/withStyles, doc in https://material-ui-next.com/customization/css-in-js/
-
-3. react app root is JssProvider:
-import JssProvider from 'react-jss/lib/JssProvider'
-import { jss } from 'muix-styles/common/withStyles'
-<JssProvider jss={jss}>
-</JssProvider> 
-
-*/
-
 export const jss = create(preset())
 jss.options.createGenerateClassName = createGenerateClassName
-jss.options.insertionPoint = 'insertion-point-jss'
 
-export const Styler: React.SFC<{}> = props => <JssProvider jss={jss}>{props.children}</JssProvider>
+export const AppContainer: React.SFC<{}> = props => <JssProvider jss={jss}>{props.children}</JssProvider>
 
 type webKeys<R extends Mui.Shape> = Mui.getWeb<R> | keyof Mui.getCommon<R>
 

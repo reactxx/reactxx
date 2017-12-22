@@ -25,7 +25,6 @@ export default function createTypography(palette: Mui.Palette, optionOrCreator: 
     //web fontFamily
     fontFamily = '"Roboto", "Helvetica", "Arial", sans-serif',
     //native font assets path
-    fontAssetPathNative = 'native/fonts/',
     fontSizeNormalizerNative = fontSizeNormalizerDefault,
     ...other
   } = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Mui.TypographyOptionsNew

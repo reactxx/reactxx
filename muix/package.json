@@ -32,7 +32,7 @@
       "material-ui": "npm:material-ui@^1.0.0-beta.24",
       "core-js": "npm:core-js@^2.5.1",
       "deepmerge": "npm:deepmerge@^2.0.1",
-      "muix-icons": "npm:muix-icons@^0.1.0",
+      "muix-icons": "npm:muix-icons@^0.1.44",
       "recompose": "npm:recompose@^0.26.0",
       "tslib": "npm:tslib@^1.8.1",
       "warning": "npm:warning@^3.0.0"

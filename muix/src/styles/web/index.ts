@@ -2,6 +2,7 @@ import ReactN from 'react-native'
 import React from 'react'
 
 export { default as createTypography } from 'material-ui/styles/createTypography' 
+
 import muiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 export const MuiThemeProvider = muiThemeProvider as any as React.ComponentType<Mui.IMuiThemeProps>
 
@@ -15,6 +16,6 @@ export const toPlatformSheet = <R extends Mui.Shape>(rules: Mui.PartialSheetX<R>
 
 export { sheetCreator, default as createMuiTheme } from '../common/index'
 
-export { classNames, withStyles, withStylesX, Styler } from './withStyles'
+export { classNames, withStyles, withStylesX, AppContainer } from './withStyles'
 
 export { ruleToClassNames } from './inline-styles'

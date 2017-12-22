@@ -677,7 +677,13 @@ declare module 'expo' {
   class BlurView extends React.Component<BlurViewProps> { }
   //#endregion
 
-  class AppLoading extends React.Component { }
+  interface AppLoadingProps {
+    startAsync?: Promise<any>
+    onError?: (error:string) => void
+    onFinish ?: () => void
+  }
+
+  class AppLoading extends React.Component<AppLoadingProps> { }
 
   //#region BarCodeScanner
   interface BarCodeScannerProps {
