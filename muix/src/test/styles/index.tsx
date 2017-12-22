@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { Play } from 'muix-icons/current/Play'
+import { Play } from 'muix-icons/Play'
 import { ruleToClassNames } from 'muix-styles/web'
 
 const AppComp: React.SFC = props => {

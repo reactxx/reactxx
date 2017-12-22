@@ -298,3 +298,4 @@ __pycache__/
 !**/jspm.config.js
 build-icons/design/mdi-react/
 !**/$blacklist.js
+!**/package.json

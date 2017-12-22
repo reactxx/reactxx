@@ -31,10 +31,11 @@ SystemJS.config({
     "https": "npm:jspm-nodelibs-https@0.2.2",
     "jss": "npm:jss@9.4.0",
     "lodash": "npm:lodash@4.17.4",
-    "muix-components": "npm:muix-components@0.1.21",
-    "muix-icons": "npm:muix-icons@0.1.40",
-    "muix-primitives": "npm:muix-primitives@0.1.21",
-    "muix-styles": "npm:muix-styles@0.1.22",
+    "muix": "npm:muix@0.1.27",
+    "muix-components": "npm:muix-components@0.1.29",
+    "muix-icons": "npm:muix-icons@0.1.41",
+    "muix-primitives": "npm:muix-primitives@0.1.29",
+    "muix-styles": "npm:muix-styles@0.1.30",
     "os": "npm:jspm-nodelibs-os@0.2.2",
     "path": "npm:jspm-nodelibs-path@0.2.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",
@@ -48,23 +49,6 @@ SystemJS.config({
     "zlib": "npm:jspm-nodelibs-zlib@0.2.3"
   },
   packages: {
-    "npm:muix-styles@0.1.22": {
-      "map": {
-        "jss-preset-default": "npm:jss-preset-default@4.0.1",
-        "deepmerge": "npm:deepmerge@2.0.1",
-        "jss-global": "npm:jss-global@3.0.0",
-        "warning": "npm:warning@3.0.0",
-        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
-        "recompose": "npm:recompose@0.26.0",
-        "react-jss": "npm:react-jss@8.2.0",
-        "muix-icons": "npm:muix-icons@0.1.40",
-        "material-ui": "npm:material-ui@1.0.0-beta.24",
-        "tslib": "npm:tslib@1.8.1",
-        "core-js": "npm:core-js@2.5.3",
-        "jss": "npm:jss@9.4.0",
-        "classnames": "npm:classnames@2.2.5"
-      }
-    },
     "npm:jss-preset-default@4.0.1": {
       "map": {
         "jss-global": "npm:jss-global@3.0.0",
@@ -76,7 +60,7 @@ SystemJS.config({
         "jss-props-sort": "npm:jss-props-sort@6.0.0",
         "jss-nested": "npm:jss-nested@6.0.1",
         "jss-camel-case": "npm:jss-camel-case@6.0.0",
-        "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0",
+        "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0"
       }
     },
     "npm:recompose@0.26.0": {
@@ -118,7 +102,6 @@ SystemJS.config({
         "react-scrollbar-size": "npm:react-scrollbar-size@2.0.2",
         "dom-helpers": "npm:dom-helpers@3.3.1",
         "scroll": "npm:scroll@2.0.1",
-
         "jss-global": "npm:jss-global@3.0.0",
         "jss-template": "npm:jss-template@1.0.0",
         "jss-expand": "npm:jss-expand@5.1.0",
@@ -128,7 +111,7 @@ SystemJS.config({
         "jss-props-sort": "npm:jss-props-sort@6.0.0",
         "jss-nested": "npm:jss-nested@6.0.1",
         "jss-camel-case": "npm:jss-camel-case@6.0.0",
-        "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0",
+        "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0"
       }
     },
     "npm:warning@3.0.0": {
@@ -607,6 +590,23 @@ SystemJS.config({
       "map": {
         "inherits": "npm:inherits@2.0.3",
         "safe-buffer": "npm:safe-buffer@5.1.1"
+      }
+    },
+    "npm:muix-styles@0.1.30": {
+      "map": {
+        "classnames": "npm:classnames@2.2.5",
+        "jss-global": "npm:jss-global@3.0.0",
+        "core-js": "npm:core-js@2.5.3",
+        "warning": "npm:warning@3.0.0",
+        "react-jss": "npm:react-jss@8.2.0",
+        "jss": "npm:jss@9.4.0",
+        "material-ui": "npm:material-ui@1.0.0-beta.24",
+        "recompose": "npm:recompose@0.26.0",
+        "tslib": "npm:tslib@1.8.1",
+        "jss-preset-default": "npm:jss-preset-default@4.0.1",
+        "muix-icons": "npm:muix-icons@0.1.41",
+        "deepmerge": "npm:deepmerge@2.0.1",
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1"
       }
     }
   }

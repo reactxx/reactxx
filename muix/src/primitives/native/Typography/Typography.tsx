@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactN from 'react-native'
 
 import { capitalizeFirstLetter } from 'material-ui/utils/helpers'
 import { Text as TextRN } from 'react-native'

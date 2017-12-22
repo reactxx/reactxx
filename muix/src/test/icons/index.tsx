@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { Play } from 'muix-icons/current/Play'
+import { Text } from 'muix-primitives'
 
-const AppComp: React.SFC = props => {
-  return null
-}
+import { Play } from 'muix-icons/Play'
+
+const AppComp: React.SFC = props => <Text>
+  Play icon: {Play}
+ </Text>
 
 export default AppComp
 

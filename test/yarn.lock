@@ -2662,9 +2662,9 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
-muix-components@^0.1.23:
-  version "0.1.23"
-  resolved "https://registry.yarnpkg.com/muix-components/-/muix-components-0.1.23.tgz#fbc203856b3d703f2c51a3a3b9e7ba6ab04b35e8"
+muix-components@^0.1.29:
+  version "0.1.29"
+  resolved "https://registry.yarnpkg.com/muix-components/-/muix-components-0.1.29.tgz#411e18f787fb49719e3b5d39cf0db866b84377a3"
   dependencies:
     deepmerge "^2.0.1"
     expo "^23.0.0"
@@ -2678,9 +2678,9 @@ muix-icons@^0.1.38:
   version "0.1.38"
   resolved "https://registry.yarnpkg.com/muix-icons/-/muix-icons-0.1.38.tgz#d35fc7e76561430cf9182ab7ca8e7dbd90cd695d"
 
-muix-primitives@^0.1.23:
-  version "0.1.23"
-  resolved "https://registry.yarnpkg.com/muix-primitives/-/muix-primitives-0.1.23.tgz#796921337408a25ae355790ef93a7882cc2099ab"
+muix-primitives@^0.1.29:
+  version "0.1.29"
+  resolved "https://registry.yarnpkg.com/muix-primitives/-/muix-primitives-0.1.29.tgz#82df8132553b459ec6306a8fcb0d95b3f4e3e5e4"
   dependencies:
     deepmerge "^2.0.1"
     expo "^23.0.0"
@@ -2690,9 +2690,9 @@ muix-primitives@^0.1.23:
     tslib "^1.8.1"
     warning "^3.0.0"
 
-muix-styles@^0.1.23:
-  version "0.1.23"
-  resolved "https://registry.yarnpkg.com/muix-styles/-/muix-styles-0.1.23.tgz#663ea6398c553c53a78871cc12dd4083e0a72778"
+muix-styles@^0.1.30:
+  version "0.1.30"
+  resolved "https://registry.yarnpkg.com/muix-styles/-/muix-styles-0.1.30.tgz#6989e15a403be17879334570c1487df71078d814"
   dependencies:
     deepmerge "^2.0.1"
     expo "^23.0.0"
@@ -2702,9 +2702,9 @@ muix-styles@^0.1.23:
     tslib "^1.8.1"
     warning "^3.0.0"
 
-muix@^0.1.21:
-  version "0.1.21"
-  resolved "https://registry.yarnpkg.com/muix/-/muix-0.1.21.tgz#20e163a4bf58f65de39533f67e460d9e3f0320c2"
+muix@^0.1.27:
+  version "0.1.27"
+  resolved "https://registry.yarnpkg.com/muix/-/muix-0.1.27.tgz#4008086cb72c3bbdd3c7c85b4c882c49567cf51e"
   dependencies:
     deepmerge "^2.0.1"
     expo "^23.0.0"

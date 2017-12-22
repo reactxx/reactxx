@@ -5,6 +5,8 @@
     "rootDir": "src",
     "outDir": "deploy/es",
 
+    //"declaration": true,
+
     "baseUrl": ".",
     "paths": {
       "muix-icons/current/*": [ "node_modules/muix-icons/es/native/index" ],

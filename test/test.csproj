@@ -106,13 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\test\App.tsx" />
-    <TypeScriptCompile Include="src\test\components\button.tsx" />
-    <TypeScriptCompile Include="src\test\icons\index.tsx" />
     <TypeScriptCompile Include="src\test\index.tsx" />
-    <TypeScriptCompile Include="src\test\primitives\icon.tsx" />
-    <TypeScriptCompile Include="src\test\primitives\text-view.tsx" />
-    <TypeScriptCompile Include="src\test\styles\index.tsx" />
-    <TypeScriptCompile Include="src\test\styles\typography.tsx" />
     <TypeScriptCompile Include="typings\Icon-d.d.ts" />
     <TypeScriptCompile Include="typings\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="typings\shared\material-icons.d.ts" />

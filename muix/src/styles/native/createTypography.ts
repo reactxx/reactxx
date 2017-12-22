@@ -4,20 +4,38 @@ import { Dimensions, PixelRatio } from 'react-native'
 
 export default function createTypography(palette: Mui.Palette, optionOrCreator: Mui.TypographyOptionsOrCreator) {
   const {
-    fontWeightLightNew,
-    fontWeightMediumNew,
-    fontWeightRegularNew,
-    fontSizeNormalizerNative,
-    fontSize,
+    fontSize = 14, // px
+    htmlFontSize = 16, // 16px is the default font-size used by browsers on the html element.
+    //cross platform font weights
+    fontWeightLightNew = {
+      fontWeight: '300',
+      fontFamily: 'Roboto_Light'
+    } as Mui.TextStyleCommon,
+    fontWeightLight = '300',
+    fontWeightMediumNew = {
+      fontWeight: '500',
+      fontFamily: 'Roboto_Medium'
+    } as Mui.TextStyleCommon,
+    fontWeightMedium = '500',
+    fontWeightRegularNew = {
+      fontWeight: '400',
+      fontFamily: 'Roboto'
+    } as Mui.TextStyleCommon,
+    fontWeightRegular = '400',
+    //web fontFamily
+    fontFamily = '"Roboto", "Helvetica", "Arial", sans-serif',
+    //native font assets path
+    fontAssetPathNative = 'native/fonts/',
+    fontSizeNormalizerNative = fontSizeNormalizerDefault,
     ...other
   } = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Mui.TypographyOptionsNew
 
 
   //http://typecast.com/blog/a-more-modern-scale-for-web-typography
   const sheet: Mui.TypographyOptionsNew = {
-    fontWeightLight: fontWeightLightNew.fontWeight,
-    fontWeightRegular: fontWeightRegularNew.fontWeight,
-    fontWeightMedium: fontWeightMediumNew.fontWeight,
+    fontWeightLight,
+    fontWeightRegular,
+    fontWeightMedium,
     fontWeightLightNew,
     fontWeightRegularNew,
     fontWeightMediumNew,
@@ -28,24 +46,20 @@ export default function createTypography(palette: Mui.Palette, optionOrCreator: 
       fontSize: fontSizeNormalizerNative(fontSizesNative.display4),
       color: palette.text.secondary,
       ...fontWeightLightNew,
-      //marginLeft: -.06 * htmlFontSize,
     },
     display3: {
       fontSize: fontSizeNormalizerNative(fontSizesNative.display3),
       ...fontWeightRegularNew,
-      //marginLeft: -.04 * htmlFontSize,
       color: palette.text.secondary,
     },
     display2: {
       fontSize: fontSizeNormalizerNative(fontSizesNative.display2),
       ...fontWeightRegularNew,
-      //marginLeft: -.04 * htmlFontSize,
       color: palette.text.secondary,
     },
     display1: {
       fontSize: fontSizeNormalizerNative(fontSizesNative.display1),
       ...fontWeightRegularNew,
-      //marginLeft: -.04 * htmlFontSize,
       color: palette.text.secondary,
     },
     headline: {

@@ -1,14 +1,16 @@
 import Expo from 'expo'
-import React from 'react'
-import { Text } from 'react-native'
+//import React from 'react'
+//import { Text } from 'react-native'
 
-const text = async () => 'ASYNC'
+//const text = async () => 'ASYNC'
 
-const app = () => {
-  text().then(res => alert(res))
-  return <Text style={{ fontSize: 32, fontWeight: '500', color: 'red' }}>HALLO WORLD x</Text>
-}
+//const app = () => {
+//  text().then(res => alert(res))
+//  return <Text style={{ fontSize: 32, fontWeight: '500', color: 'red' }}>HALLO WORLD x</Text>
+//}
 
-Expo.registerRootComponent(app)
+import App from './root'
+
+Expo.registerRootComponent(App)
 
 

@@ -7,15 +7,7 @@
 
     "baseUrl": ".",
     "paths": {
-      "muix-icons/*": [ "node_modules/muix-icons/es/native/index" ],
-
-      "muix-styles/web": [ "node_modules/muix-styles/es/web/index" ],
-      "muix-styles/native": [ "node_modules/muix-styles/es/native/index" ],
-      "muix-styles": [ "node_modules/muix-styles/es/native/index" ],
-
-      "muix-primitives": [ "node_modules/muix-primitives/es/native/index" ],
-
-      "muix-components/*": [ "node_modules/muix-components/es/native/*" ]
+      "muix": [ "node_modules/muix/es/root" ]
     },
 
     "importHelpers": true, //https://github.com/facebook/react-native/issues/16858

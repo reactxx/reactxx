@@ -9,9 +9,11 @@
     [
       "module-resolver",
       {
+        "root": [ "." ],
         "alias": {
-          "muix-icons/current/*": "muix-icons/es/native/*",
-          "muix-icons/*": "muix-icons/es/*"
+          "muix-primitives": "./deploy/es/primitives/native",
+          "muix-styles": "./deploy/es/styles/native",
+          "^muix-icons/(.+)": "muix-icons"
         }
       }
     ]

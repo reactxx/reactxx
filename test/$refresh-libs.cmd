@@ -5,7 +5,8 @@ d:
 
 cd %root%
 
-call yarn upgrade muix-styles muix-primitives muix-components %url%expo/types-expo-0.1.1.tgz?raw=true %url%types/react/types-react-0.1.1.tgz?raw=true %url%types/react-native/types-react-native-0.1.1.tgz?raw=true --latest
+call npm update muix-icons muix-styles muix-primitives muix-components muix %url%expo/types-expo-0.1.1.tgz?raw=true %url%types/react/types-react-0.1.1.tgz?raw=true %url%types/react-native/types-react-native-0.1.1.tgz?raw=true --latest
+call jspm update muix-icons muix-styles muix-primitives muix-components muix 
 
 cd %root%node_modules\@types
 rmdir node /s /q

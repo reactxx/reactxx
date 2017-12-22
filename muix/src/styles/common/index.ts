@@ -1,3 +1,6 @@
+import React from 'react'
+import ReactN from 'react-native'
+
 import deepmerge from 'deepmerge' // < 1kb payload overhead when lodash/merge is > 3kb.
 import warning from 'warning'
 
@@ -134,16 +137,19 @@ function createMuiTheme(options: Mui.ThemeOptions = {}) {
   const palette = createPalette(paletteInput)
   const breakpoints = createBreakpoints(breakpointsInput)
 
+  const typographyOptionOrCreator = getTypographyOptionOrCreatorX(typographyNew) 
+
   const muiTheme: Mui.ThemeNew = {
-    direction: 'ltr', //the same for web and native
-    palette, //the same for web and native
-    typography: createTypographyX(palette, typographyNew), //platform specific typography (compatible with material-ui)
+    direction: 'ltr', //the same format and value for web and native
+    palette, //the same format and value for web and native
+    //typography: createTypographyX(palette, typographyNew), //the same format, different values for web and native
+    typography: createTypography(palette, typographyOptionOrCreator), //the same format, different values for web and native
     mixins: createMixins(breakpoints, spacing, mixinsInput), //the same for web and native
-    breakpoints, //the same for web and native
-    shadows: (shadowsNewInput || shadows).map(rsx => (toPlatformRuleSetX(rsx, false) as React.CSSProperties).boxShadow), // material-ui compatible shadows
-    shadowsNew: shadowsNewInput || shadows, //platform specific new shadow format (not compatible with material-ui)
-    overrides: getOverridesX(overridesNew), //platform specific overrides (compatible with material-ui)
-    nativeSheetCache: [], //helper cache for native only
+    breakpoints, //the same format and value for web and native
+    shadows: (shadowsNewInput || shadows).map(rsx => (toPlatformRuleSetX(rsx, false) as React.CSSProperties).boxShadow), // for material-ui only
+    shadowsNew: shadowsNewInput || shadows, //the same format, different values for web and native
+    overrides: getOverridesX(overridesNew), //the same format, different values for web and native
+    nativeSheetCache: [], //sheet cache (for native only)
     ...(deepmerge(
       {
         transitions,
