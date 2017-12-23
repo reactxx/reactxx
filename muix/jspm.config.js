@@ -49,7 +49,7 @@ SystemJS.config({
     "jss": "npm:jss@9.4.0",
     "lodash": "npm:lodash@4.17.4",
     "material-ui": "npm:material-ui@1.0.0-beta.24",
-    "muix-icons": "npm:muix-icons@0.1.44",
+    "muix-icons": "npm:muix-icons@0.1.50",
     "os": "npm:jspm-nodelibs-os@0.2.2",
     "path": "npm:jspm-nodelibs-path@0.2.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",

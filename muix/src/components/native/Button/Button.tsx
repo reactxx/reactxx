@@ -1,11 +1,12 @@
 ﻿import React from 'react'
+import ReactN from 'react-native'
 import { Platform, View, Text } from 'react-native'
 
 import { withStyles, classNames, toPlatformRuleSet, sheetCreator } from 'muix-styles'
 
 import ButtonBase from '../ButtonBase/ButtonBase'
 
-const sheet = sheetCreator<MuiButton.Shape>(({ typography: typo, palette, spacing, shadowsNew }) => ({
+const sheet = sheetCreator<MuiButton.Shape>(({ typography: typo, palette, spacing, shadowsNew }) => ({ 
   native: {
     root: {
       alignItems: 'center',

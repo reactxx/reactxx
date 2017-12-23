@@ -1,16 +1,19 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es5",
+    "module": "system",
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "importHelpers": true,
     "rootDir": ".",
-    "outDir": "deploy/es",
+    "outDir": "deploy/lib",
 
     "baseUrl": ".",
     "paths": {
       "muix": [ "node_modules/muix/es/root" ]
     },
 
-    "importHelpers": true, //https://github.com/facebook/react-native/issues/16858
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
     "downlevelIteration": true,
@@ -18,8 +21,9 @@
     "strict": true,
     "noImplicitReturns": true,
     "strictFunctionTypes": false,
+
     "noImplicitAny": false,
-    "jsx": "react-native",
+    "jsx": "react",
     "lib": [
       "dom",
       "es2015",

@@ -86,6 +86,7 @@
     <Content Include="deploy\components\README.md" />
     <Content Include="deploy\test\package.json" />
     <Content Include="deploy\test\README.md" />
+    <Content Include="%24refresh-libs.cmd" />
     <None Include="packages.config" />
     <Content Include="README.md" />
     <Content Include="src\styles\native\theme.json" />
@@ -96,9 +97,6 @@
     <Content Include="src\primitives\native\fonts\Roboto-Light.ttf" />
     <Content Include="src\primitives\native\fonts\Roboto-Medium.ttf" />
     <Content Include="src\primitives\native\fonts\Roboto-Regular.ttf" />
-    <Content Include="src\primitives\web\fonts\Roboto-Light.ttf" />
-    <Content Include="src\primitives\web\fonts\Roboto-Medium.ttf" />
-    <Content Include="src\primitives\web\fonts\Roboto-Regular.ttf" />
     <Content Include="assets\fonts\Roboto-Light.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -131,7 +129,9 @@
     <TypeScriptCompile Include="src\components\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
     <TypeScriptCompile Include="src\test\App.tsx" />
-    <TypeScriptCompile Include="src\test\root.tsx" />
+    <TypeScriptCompile Include="src\test\common\root.tsx" />
+    <TypeScriptCompile Include="src\test\native\index.tsx" />
+    <TypeScriptCompile Include="src\test\web\index.tsx" />
     <TypeScriptCompile Include="src\typings\Icon-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\common\Icon\Icon.tsx" />
     <TypeScriptCompile Include="src\primitives\common\ScrollView\ScrollView-d.d.ts" />
@@ -165,13 +165,13 @@
     <TypeScriptCompile Include="src\styles\native\expoLoadFonts.ts" />
     <TypeScriptCompile Include="src\styles\native\MuiThemeProvider.ts" />
     <TypeScriptCompile Include="src\styles\native\withStyles.tsx" />
-    <TypeScriptCompile Include="src\test\components\button.tsx" />
-    <TypeScriptCompile Include="src\test\icons\index.tsx" />
+    <TypeScriptCompile Include="src\test\common\components\button.tsx" />
+    <TypeScriptCompile Include="src\test\common\icons\index.tsx" />
     <TypeScriptCompile Include="src\test\index.tsx" />
-    <TypeScriptCompile Include="src\test\primitives\icon.tsx" />
-    <TypeScriptCompile Include="src\test\primitives\text-view.tsx" />
-    <TypeScriptCompile Include="src\test\styles\index.tsx" />
-    <TypeScriptCompile Include="src\test\styles\typography.tsx" />
+    <TypeScriptCompile Include="src\test\common\primitives\icon.tsx" />
+    <TypeScriptCompile Include="src\test\common\primitives\text-view.tsx" />
+    <None Include="src\test\common\styles\index.tsx_" />
+    <TypeScriptCompile Include="src\test\common\styles\typography.tsx" />
     <TypeScriptCompile Include="src\typings\shared\material-icons.d.ts" />
     <TypeScriptCompile Include="src\typings\shared\material-ui-helper.d.ts" />
     <TypeScriptCompile Include="src\typings\shared\material-ui.d.ts" />

@@ -1,4 +1,6 @@
 ﻿import React from 'react'
+import ReactN from 'react-native'
+
 import { View, TouchableWithoutFeedback, Animated, Easing, Platform, Text, LayoutRectangle } from 'react-native';
 
 import { sheetCreator, withStyles, classNames } from 'muix-styles'

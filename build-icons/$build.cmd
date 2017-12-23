@@ -2,12 +2,11 @@ set root=d:\muix\build-icons\
 
 d:
 cd %root%deploy\
-rmdir lib /s /q
-md lib
-md lib\web
+del *.js *.ts /q
 rmdir es /s /q
 md es
-md es\native
+
+pause
 
 cd %root%design\
 rmdir mdi-react /s /q

@@ -2,6 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import withStylesMui from 'material-ui/styles/withStyles'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import _classnames from 'classnames'
 
@@ -14,10 +15,12 @@ import { sheetToClassSheet } from './inline-styles'
 
 import { toPlatformRuleSet, toPlatformSheet } from 'muix-styles'
 
+import { getDefaultTheme } from '../common/index'
+
 export const jss = create(preset())
 jss.options.createGenerateClassName = createGenerateClassName
 
-export const AppContainer: React.SFC<{}> = props => <JssProvider jss={jss}>{props.children}</JssProvider>
+export const AppContainer: React.SFC<{}> = props => <MuiThemeProvider theme={getDefaultTheme()}><JssProvider jss={jss}>{props.children}</JssProvider></MuiThemeProvider>
 
 type webKeys<R extends Mui.Shape> = Mui.getWeb<R> | keyof Mui.getCommon<R>
 

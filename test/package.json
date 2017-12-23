@@ -7,17 +7,16 @@
     "deepmerge": "^2.0.1",
     "expo": "^24.0.0",
     "material-ui": "^1.0.0-beta.24",
-    "muix-icons": "^0.1.42",
+    "muix": "^0.1.37",
+    "muix-components": "^0.1.40",
+    "muix-icons": "^0.1.50",
+    "muix-primitives": "^0.1.41",
+    "muix-styles": "^0.1.43",
     "react": "16.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
     "recompose": "^0.26.0",
     "tslib": "^1.8.0",
-    "warning": "^3.0.0",
-
-    "muix": "^0.1.27",
-    "muix-components": "^0.1.29",
-    "muix-primitives": "^0.1.29",
-    "muix-styles": "^0.1.30"
+    "warning": "^3.0.0"
   },
   "devDependencies": {
     "@types/expo": "https://github.com/mui-x/muix/blob/master/types/expo/types-expo-0.1.1.tgz?raw=true",
@@ -31,11 +30,12 @@
     "main": "lib-web/src/test/index.js",
     "version": "0.0.0",
     "dependencies": {
-      "muix-components": "npm:muix-components@^0.1.0",
-      "muix-icons": "npm:muix-icons@^0.1.0",
-      "muix-primitives": "npm:muix-primitives@^0.1.0",
-      "muix-styles": "npm:muix-styles@^0.1.0",
-      "muix": "npm:muix@^0.1.0"
+      "muix-components": "npm:muix-components@^0.1.40",
+      "muix-icons": "npm:muix-icons@^0.1.50",
+      "muix-primitives": "npm:muix-primitives@^0.1.41",
+      "muix-styles": "npm:muix-styles@^0.1.43",
+      "muix": "npm:muix@^0.1.37",
+      "tslib": "npm:tslib@^1.8.1"
     },
     "devDependencies": {},
     "peerDependencies": {

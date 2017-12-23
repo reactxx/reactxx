@@ -5,11 +5,12 @@ rem *** prepare package
 cd %root%deploy/%package%
 rmdir es /s /q
 md es
-rmdir lib /s /q
-md lib
+del *.js *.ts /s /q
+
 xcopy /s /q %root%deploy\es\%package%\*.* %root%deploy\%package%\es\
-xcopy /s /q %root%deploy\lib\%package%\*.* %root%deploy\%package%\lib\
-rmdir %root%deploy\%package%\lib\native /s /q
+xcopy /s /q %root%deploy\lib\%package%\*.* %root%deploy\%package%\
+
+rmdir %root%deploy\%package%\native /s /q
 del %root%deploy\%package%\es\web\*.js /s /q
 
 rem *** publish

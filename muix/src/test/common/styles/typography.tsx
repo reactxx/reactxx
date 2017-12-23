@@ -35,11 +35,11 @@ const theme = createMuiTheme({
   }
 })
 
-const app = () => <Typography classes={{ root: { fontWeight: '500', textDecorationLine: 'line-through', color: 'blue' } }}>TEXT</Typography>
+const app2 = () => <Typography classes={{ root: { fontWeight: '500', textDecorationLine: 'line-through', color: 'blue' } }}>TEXT</Typography>
 
-const app2 = () => <ScrollView>
+const app = () => <ScrollView>
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>noWrap</Typography>
-  <Typography noWrap style={{ width: 200 }}>noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap </Typography>
+  <Typography noWrap style={{ width: 200, flexShrink:0 }}>noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap </Typography>
   {/**/}
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>MARGINS</Typography>
   <Typography paragraph>paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph </Typography>

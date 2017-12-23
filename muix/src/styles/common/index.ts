@@ -44,37 +44,6 @@ const getOverridesX = (source: Mui.OverridesNew) => {
   return result
 }
 
-//const createTypographyX = (palette: Mui.Palette, optionOrCreator: Mui.TypographyOptionsOrCreatorX) => {
-//  //get cross platform options
-//  const {
-//    fontSize = 14, // px
-//    htmlFontSize = 16, // 16px is the default font-size used by browsers on the html element.
-//    //cross platform font weights
-//    fontWeightLightNew = {
-//      fontWeight: '300',
-//      native: { fontFamily: 'Roboto_Light' }
-//    } as Mui.TextStyleX,
-//    fontWeightMediumNew = {
-//      fontWeight: '500',
-//      native: { fontFamily: 'Roboto_Medium' }
-//    } as Mui.TextStyleX,
-//    fontWeightRegularNew = {
-//      fontWeight: '400',
-//      native: { fontFamily: 'Roboto' }
-//    } as Mui.TextStyleX,
-//    //web fontFamily
-//    fontFamily = '"Roboto", "Helvetica", "Arial", sans-serif',
-//    ...other
-//  } = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Mui.TypographyOptionsX
-
-//  //convert x-platform to platform specific
-//  const typographyOptions = getTypographyOptionOrCreatorX(optionOrCreator)
-
-//  //pass platform specific options to platform specific "createTypography"
-//  return createTypography(palette, typographyOptions) as Mui.TypographyNew
-
-//}
-
 //convert cross platform typography optionsOrCreator to platform specific optionsOrCreator
 const getTypographyOptionOrCreatorX = (optionsOrCreatorX: Mui.TypographyOptionsOrCreatorX) => {
 
@@ -105,6 +74,9 @@ const getTypographyOptionOrCreatorX = (optionsOrCreatorX: Mui.TypographyOptionsO
 
   return res
 }
+
+let defaultTheme: Mui.ThemeNew
+export const getDefaultTheme = () => defaultTheme || (defaultTheme = createMuiTheme())
 
 //create theme from cross platform ThemeOptions
 //resulting theme is (for web) compatible with material-ui

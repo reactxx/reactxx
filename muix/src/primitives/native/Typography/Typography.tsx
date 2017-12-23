@@ -64,7 +64,7 @@ const typography: Mui.CodeSFCNative<Typography.Shape> = (props => {
     toPlatformRuleSet(style)
   )
 
-  console.log(classes.root, actStyle)
+  //console.log(classes.root, actStyle)
   return <TextRN style={actStyle} {...(noWrap && classes.noWrap) } {...other} />
 })
 

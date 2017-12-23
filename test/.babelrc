@@ -9,7 +9,10 @@
     [
       "module-resolver",
       {
+        "root": [ "." ],
         "alias": {
+          "^muix-icons/(.+)": "muix-icons",
+          "assets": "./assets"
         }
       }
     ]

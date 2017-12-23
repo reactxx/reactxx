@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import hoistNonReactStatics from 'hoist-non-react-statics'
-import { MuiThemeContextTypes } from './MuiThemeProvider'
-import createMuiTheme from '../common/index'
+import MuiThemeProvider, { MuiThemeContextTypes } from './MuiThemeProvider'
+import { getDefaultTheme } from '../common/index'
 import warning from 'invariant'
 import pure from 'recompose/pure'
 import { View } from 'react-native'
@@ -10,13 +10,11 @@ import { toPlatformSheet, toPlatformRuleSet } from '../native/index'
 import loadFonts from './expoLoadFonts'
 import { AppLoading } from 'expo'
 
-let defaultTheme: Mui.ThemeNew
-const getDefaultTheme = () => defaultTheme || (defaultTheme = createMuiTheme())
-
 export class AppContainer extends React.PureComponent {
   state = { isReady: false }
   render() {
-    if (this.state.isReady) return React.Children.only(this.props.children)
+    //console.log('AppContainer COUNT: ', React.Children.count(this.props.children))
+    if (this.state.isReady) return <MuiThemeProvider theme={getDefaultTheme()}>{React.Children.only(this.props.children)}</MuiThemeProvider>
     return <AppLoading
       startAsync={loadFonts}
       onFinish={() => this.setState({ isReady: true })}
@@ -31,7 +29,6 @@ const styleOverride = <R extends Mui.Shape>(renderedClasses: Mui.SheetNative<R>,
   const stylesWithOverrides = { ...renderedClasses as untyped }  //destructor does not work with generics
   Object.keys(classesProp).forEach(key => {
     warning(!!stylesWithOverrides[key], `Material-UI: you are trying to override a style that does not exist.\r\nFix the '${key}' key of 'theme.overrides.${name}'.`)
-    console.log('2', stylesWithOverrides[key], classesProp[key])
     stylesWithOverrides[key] = { ...stylesWithOverrides[key], ...(classesProp as untyped)[key] };
   })
   return stylesWithOverrides as Mui.SheetNative<R>
@@ -68,7 +65,7 @@ export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreat
   Styled.contextTypes = MuiThemeContextTypes
   Styled['options'] = options
   hoistNonReactStatics(Styled, Component as any)
-  return pure(Styled)
+  return pure(Styled) as Mui.ComponentTypeX<R>
 }
 
 export default withStyles

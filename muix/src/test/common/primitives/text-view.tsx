@@ -13,13 +13,12 @@ import cyan from 'material-ui/colors/cyan'
 
 import { Text, View, ScrollView } from 'muix-primitives'
 
-const H2: React.SFC = (() => '\n') as any as React.SFC
+//const H2: React.SFC = (() => '\n') as any as React.SFC
 const P: React.SFC = props => {
   const { children, ...rest } = props
-  return [
-    <Text key={1} { ...rest }>{children}{'\n'}</Text>,
-    <Text key={2} style={{ lineHeight: 5 }}>{'\n'}</Text>
-  ] as any
+  return <Text style={{ marginBottom: 8 }}>
+    {children}
+  </Text>
 }
 
 const app = () => {
@@ -33,19 +32,19 @@ const app = () => {
   return <ScrollView style={{ paddingTop: 24 }}>
     <Text>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</Text>
     <Text>
-      ?? ?? ?? ?? ?? ?? ?? afsd fas df asd sd f asd fasd f asdf asd f asdf asd f asdf asd fa sdf asd fasd f asdf as f asdf asdf
-      <Text style={{ backgroundColor: 'red', color: 'white', lineHeight: 40 }}>40 40 40 40 40 40 40 TITLE:  asd f asdf asd f sad fsa df sad fsa df asdf sad f sadf asd fsda f sdaf</Text>
+      afsd fas df asd sd f asd fasd f asdf asd f asdf asd f asdf asd fa sdf asd fasd f asdf as f asdf asdf
+      <Text style={{ backgroundColor: 'red', color: 'white' }}>40 40 40 40 40 40 40 TITLE:  asd f asdf asd f sad fsa df sad fsa df asdf sad f sadf asd fsda f sdaf</Text>
       ?? ?? ?? ?? ?? ?? ?? ?? afsd fas df asd sd f asd fasd f asdf asd f asdf asd f asdf asd fa sdf asd fasd f asdf as f asdf asdf
-      <Text style={{ lineHeight: 30 }}>30 30 30 30 30 30 30 {'\n'}20 20 asd f asd fsad f asdf sad f</Text>
-      ?? ?? ?? ?? ?? ?? ?? ?? afsd fas df {'\n'}asd sd f asd fasd f asdf asd f asdf asd f asdf asd fa sdf asd fasd f asdf as f asdf asdf
-      <Text style={{ lineHeight: 10 }}>
+      <Text>20 20 asd f asd fsad f asdf sad f</Text>
+      afsd fas df asd sd f asd fasd f asdf asd f asdf asd f asdf asd fa sdf asd fasd f asdf as f asdf asdf
+      <Text>
         10 10 10 10 10 10 10 10 10 text text text text text text text text text text text text
         text text text text text text text text text text text text
       </Text>
-      <Text style={{ lineHeight: 20 }}>20 20 20 </Text>
+      <Text>20 20 20 </Text>
     </Text>
     <Text>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</Text>
-    <Text>TITLE:{'\n'}</Text>
+    <Text>TITLE:</Text>
     <P>
       text text text text text text text text text text text text
       text text text text text text text text text text text text
@@ -100,8 +99,8 @@ const converter = (getMarkup: () => JSX.Element | JSX.Element[]) => {
   try {
     (React as any)['createElement'] = (type: string, pars, ...children) => {
       const { __source, style: {
-        margin, marginTop, marginBottom, marginLeft, marginRight, 
-        padding, paddingTop, paddingBottom, paddingLeft, paddingRight, 
+        margin, marginTop, marginBottom, marginLeft, marginRight,
+        padding, paddingTop, paddingBottom, paddingLeft, paddingRight,
         borderColor, borderWidth, borderStyle,
         color, backgroundColor, fontSize, fontWeight, fontStyle, textDecorationLine,
         ...styleRest },

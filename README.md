@@ -71,5 +71,10 @@ ReactDOM.render(<App />, document.getElementById('content'))
 ## material-ui requests:
 - ```export const jss = create(preset());``` in [withStyles.js](https://github.com/mui-org/material-ui/blob/v1-beta/src/styles/withStyles.js)
 - functional ```classes``` attribute, see [9443](https://github.com/mui-org/material-ui/issues/9443)
-- shadows: ```React.CSSProperties[]``` instead of ```string[]```, e.g. ```shadows[1] = {boxShadow: '...'}```
-- Typography: ```Typography.fontWeightLight x Regular x Medium: React.CSSProperties``` instead of number, e.g. ```Typography.fontWeightLight = { fontSize: '400' }```
+- shadows: is arrai of React.CSSProperties instead of arrau of string, e.g. ```shadows[1] = {boxShadow: '...'}```
+- Typography: ```Typography.fontWeightLight x Regular x Medium``` nas : React.CSSProperties type instead of number, e.g. ```Typography.fontWeightLight = { fontSize: '400' }```
+
+## Limits:
+- "textTransform: 'uppercase'" rule, e.g. for typography.button
+- <Typography color='primary' classes={{root:{color:'blue'}}}>: for Native has "color='primary'" higher priority over classes.root. Solution: web atomic classes ala Fela
+- <Text>{'\n'}</Text>
