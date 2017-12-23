@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@expo/vector-icons@^6.2.0":
+"@expo/vector-icons@^6.2.2":
   version "6.2.2"
   resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-6.2.2.tgz#441edb58a52c0f4e5b4aba1e6f8da1e87cea7e11"
   dependencies:
@@ -612,7 +612,7 @@ babel-plugin-transform-es3-property-literals@^6.8.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-exponentiation-operator@^6.24.1:
+babel-plugin-transform-exponentiation-operator@^6.24.1, babel-plugin-transform-exponentiation-operator@^6.5.0:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-exponentiation-operator/-/babel-plugin-transform-exponentiation-operator-6.24.1.tgz#2ab0c9c7f3098fa48907772bb813fe41e8de3a0e"
   dependencies:
@@ -1454,11 +1454,11 @@ expand-range@^1.8.1:
   dependencies:
     fill-range "^2.1.0"
 
-expo@^23.0.0:
-  version "23.0.6"
-  resolved "https://registry.yarnpkg.com/expo/-/expo-23.0.6.tgz#8cb2c3992b385eb5866cc91f25f159420258d19a"
+expo@^24.0.0:
+  version "24.0.2"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-24.0.2.tgz#3ff9784afd9efbb8eb739289aa53290ddf31a5a5"
   dependencies:
-    "@expo/vector-icons" "^6.2.0"
+    "@expo/vector-icons" "^6.2.2"
     babel-preset-expo "^4.0.0"
     fbemitter "^2.1.1"
     invariant "^2.2.2"
@@ -2452,8 +2452,8 @@ makeerror@1.0.x:
     tmpl "1.0.x"
 
 material-ui@^1.0.0-beta.24:
-  version "1.0.0-beta.24"
-  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-beta.24.tgz#a51452d0486f88fd7f13ebed869793f298aa800c"
+  version "1.0.0-beta.25"
+  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-beta.25.tgz#9d5bf97cebc553a5bca28e490823943d9ffb0ebc"
   dependencies:
     babel-runtime "^6.26.0"
     brcast "^3.0.1"
@@ -2515,7 +2515,7 @@ methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
 
-metro-bundler@^0.20.1:
+metro-bundler@^0.20.0:
   version "0.20.3"
   resolved "https://registry.yarnpkg.com/metro-bundler/-/metro-bundler-0.20.3.tgz#0ded01b64e8963117017b106f75b83cfc34f3656"
   dependencies:
@@ -2662,57 +2662,25 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
-muix-components@^0.1.29:
-  version "0.1.29"
-  resolved "https://registry.yarnpkg.com/muix-components/-/muix-components-0.1.29.tgz#411e18f787fb49719e3b5d39cf0db866b84377a3"
-  dependencies:
-    deepmerge "^2.0.1"
-    expo "^23.0.0"
-    react "16.0.0"
-    react-native "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz"
-    recompose "^0.26.0"
-    tslib "^1.8.1"
-    warning "^3.0.0"
+muix-components@^0.1.42:
+  version "0.1.44"
+  resolved "https://registry.yarnpkg.com/muix-components/-/muix-components-0.1.44.tgz#df42989ebfe2f2b92da2156c1433dd9fdd4bf8da"
 
-muix-icons@^0.1.38:
-  version "0.1.38"
-  resolved "https://registry.yarnpkg.com/muix-icons/-/muix-icons-0.1.38.tgz#d35fc7e76561430cf9182ab7ca8e7dbd90cd695d"
+muix-icons@^0.1.50:
+  version "0.1.50"
+  resolved "https://registry.yarnpkg.com/muix-icons/-/muix-icons-0.1.50.tgz#c5ee440182d04fd6dc0ebf90ebc5197039ca476a"
 
-muix-primitives@^0.1.29:
-  version "0.1.29"
-  resolved "https://registry.yarnpkg.com/muix-primitives/-/muix-primitives-0.1.29.tgz#82df8132553b459ec6306a8fcb0d95b3f4e3e5e4"
-  dependencies:
-    deepmerge "^2.0.1"
-    expo "^23.0.0"
-    react "16.0.0"
-    react-native "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz"
-    recompose "^0.26.0"
-    tslib "^1.8.1"
-    warning "^3.0.0"
+muix-primitives@^0.1.43:
+  version "0.1.45"
+  resolved "https://registry.yarnpkg.com/muix-primitives/-/muix-primitives-0.1.45.tgz#2934409edef4d2fdff5bd5e944594fccd8c58bdb"
 
-muix-styles@^0.1.30:
-  version "0.1.30"
-  resolved "https://registry.yarnpkg.com/muix-styles/-/muix-styles-0.1.30.tgz#6989e15a403be17879334570c1487df71078d814"
-  dependencies:
-    deepmerge "^2.0.1"
-    expo "^23.0.0"
-    react "16.0.0"
-    react-native "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz"
-    recompose "^0.26.0"
-    tslib "^1.8.1"
-    warning "^3.0.0"
+muix-styles@^0.1.45:
+  version "0.1.47"
+  resolved "https://registry.yarnpkg.com/muix-styles/-/muix-styles-0.1.47.tgz#d89de759bf355e70c5ae4dccc28ce759cc66d5b1"
 
-muix@^0.1.27:
-  version "0.1.27"
-  resolved "https://registry.yarnpkg.com/muix/-/muix-0.1.27.tgz#4008086cb72c3bbdd3c7c85b4c882c49567cf51e"
-  dependencies:
-    deepmerge "^2.0.1"
-    expo "^23.0.0"
-    react "16.0.0"
-    react-native "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz"
-    recompose "^0.26.0"
-    tslib "^1.8.1"
-    warning "^3.0.0"
+muix@^0.1.39:
+  version "0.1.41"
+  resolved "https://registry.yarnpkg.com/muix/-/muix-0.1.41.tgz#b204da91408284ef14610fa2a06c886e2c5b254d"
 
 multiparty@3.3.2:
   version "3.3.2"
@@ -3202,9 +3170,9 @@ react-native-vector-icons@4.4.2:
     prop-types "^15.5.10"
     yargs "^8.0.2"
 
-"react-native@https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz":
-  version "0.50.3"
-  resolved "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz#4c1f6efcf4d8a7726b8efe4501053165bbfaeb32"
+"react-native@https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz":
+  version "0.51.0"
+  resolved "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz#aa7b9c20266b844bfc916aa2e4ddb51036d2b83c"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"
@@ -3212,6 +3180,7 @@ react-native-vector-icons@4.4.2:
     babel-plugin-syntax-trailing-function-commas "^6.20.0"
     babel-plugin-transform-async-to-generator "6.16.0"
     babel-plugin-transform-class-properties "^6.18.0"
+    babel-plugin-transform-exponentiation-operator "^6.5.0"
     babel-plugin-transform-flow-strip-types "^6.21.0"
     babel-plugin-transform-object-rest-spread "^6.20.2"
     babel-register "^6.24.1"
@@ -3232,7 +3201,7 @@ react-native-vector-icons@4.4.2:
     graceful-fs "^4.1.3"
     inquirer "^3.0.6"
     lodash "^4.16.6"
-    metro-bundler "^0.20.1"
+    metro-bundler "^0.20.0"
     mime "^1.3.4"
     minimist "^1.2.0"
     mkdirp "^0.5.1"
@@ -3248,7 +3217,7 @@ react-native-vector-icons@4.4.2:
     react-clone-referenced-element "^1.0.1"
     react-devtools-core "^2.5.0"
     react-timer-mixin "^0.13.2"
-    regenerator-runtime "^0.9.5"
+    regenerator-runtime "^0.11.0"
     rimraf "^2.5.4"
     semver "^5.0.3"
     shell-quote "1.6.1"
@@ -3364,10 +3333,6 @@ regenerate@^1.2.1:
 regenerator-runtime@^0.11.0:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
-
-regenerator-runtime@^0.9.5:
-  version "0.9.6"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.9.6.tgz#d33eb95d0d2001a4be39659707c51b0cb71ce029"
 
 regenerator-transform@^0.10.0:
   version "0.10.1"
@@ -3913,7 +3878,7 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
-tslib@^1.8.0, tslib@^1.8.1:
+tslib@^1.8.0:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.8.1.tgz#6946af2d1d651a7b1863b531d6e5afa41aa44eac"
 

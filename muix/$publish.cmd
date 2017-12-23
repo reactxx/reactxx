@@ -14,7 +14,11 @@ call %tsc% --p %root%tsconfig-native.json -d
 
 rem *** npm package publishing
 call %root%$publish_ styles
+xcopy %root%src\styles\native\fonts %root%deploy\styles\es\native\fonts /s /q /i 
+xcopy %root%src\styles\native\fonts %root%deploy\es\styles\native\fonts /s /q /i 
+
 call %root%$publish_ primitives
 call %root%$publish_ components
 call %root%$publish_ test
 
+D:\muix\muix\src\styles\native\createTypography.ts

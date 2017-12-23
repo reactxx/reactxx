@@ -24,13 +24,6 @@
   "jspm": {
     "name": "muix",
     "main": "lib-web/src/test/index.js",
-    "overrides": {
-      "npm:muix-icons@^0.1.50": {
-        "directories": {
-          "lib": "release"
-        }
-      }
-    },
     "dependencies": {
       "classnames": "npm:classnames@^2.2.5",
       "hoist-non-react-statics": "npm:hoist-non-react-statics@^2.3.1",

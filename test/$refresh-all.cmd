@@ -9,7 +9,7 @@ rmdir npm /s /q
 
 cd %root%
 call yarn upgrade
-call jspm update
+call jspm install
 
 rmdir %root%node_modules\@types\node /s /q
 rmdir %root%node_modules\@types\react-dom\node_modules  /s /q
