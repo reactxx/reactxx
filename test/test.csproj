@@ -81,15 +81,6 @@
     <Content Include="%24link.cmd" />
     <Content Include="%24link-prepare.cmd" />
     <Content Include="%24refresh-libs.cmd" />
-    <Content Include="assets\fonts\Roboto-Light.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\fonts\Roboto-Medium.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\fonts\Roboto-Regular.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="packages.config" />
     <Content Include="links.html" />
     <Content Include="tsconfig.json" />

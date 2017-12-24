@@ -97,15 +97,6 @@
     <Content Include="src\primitives\native\fonts\Roboto-Light.ttf" />
     <Content Include="src\primitives\native\fonts\Roboto-Medium.ttf" />
     <Content Include="src\primitives\native\fonts\Roboto-Regular.ttf" />
-    <Content Include="assets\fonts\Roboto-Light.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\fonts\Roboto-Medium.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\fonts\Roboto-Regular.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="src\styles\native\fonts\Roboto-Light.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

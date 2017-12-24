@@ -5,7 +5,4 @@ import MuixApp from 'muix'
 import { Play } from 'muix-icons/Play'
 import { View, Text } from 'muix-primitives'
 
-export const App: React.SFC = () => <View><Text>{Play}</Text><MuixApp /></View>
-
-
-
+export const App: React.SFC = () => <View><Text>{Play} {Play}</Text><MuixApp /> <MuixApp /></View>
