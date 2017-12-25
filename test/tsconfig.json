@@ -7,7 +7,8 @@
 
     "baseUrl": ".",
     "paths": {
-      "muix": [ "node_modules/muix/es/root" ]
+      "muix": [ "node_modules/muix/es/native/index" ],
+      "muix-primitives": [ "node_modules/muix-primitives/es/native/index" ]
     },
 
     "importHelpers": true, //https://github.com/facebook/react-native/issues/16858

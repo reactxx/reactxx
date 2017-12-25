@@ -9,5 +9,3 @@ import { App } from '../root'
 //}
 
 Expo.registerRootComponent(App)
-
-
