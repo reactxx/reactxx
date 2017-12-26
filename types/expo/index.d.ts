@@ -678,7 +678,7 @@ declare module 'expo' {
   //#endregion
 
   interface AppLoadingProps {
-    startAsync?: Promise<any>
+    startAsync?: () => Promise<any>
     onError?: (error:string) => void
     onFinish ?: () => void
   }
