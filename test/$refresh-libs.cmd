@@ -11,7 +11,7 @@ call jspm install npm:muix-icons npm:muix-styles npm:muix-primitives npm:muix-co
 cd %root%
 
 call npm update muix-icons muix-styles muix-primitives muix-components muix 
-call npm install %url%expo/types-expo-0.1.1.tgz?raw=true %url%react/types-react-0.1.1.tgz?raw=true %url%react-native/types-react-native-0.1.1.tgz?raw=true 
+call npm update %url%expo/types-expo-0.1.1.tgz?raw=true %url%react/types-react-0.1.1.tgz?raw=true %url%react-native/types-react-native-0.1.1.tgz?raw=true 
 
 cd %root%node_modules\@types
 rmdir node /s /q
