@@ -10,7 +10,7 @@ call jspm install
 
 cd %root%
 
-call npm install %url%expo/types-expo-0.1.1.tgz?raw=true %url%react/types-react-0.1.1.tgz?raw=true %url%react-native/types-react-native-0.1.1.tgz?raw=true 
+call npm update %url%expo/types-expo-0.1.1.tgz?raw=true %url%react/types-react-0.1.1.tgz?raw=true %url%react-native/types-react-native-0.1.1.tgz?raw=true 
 call npm update muix-icons 
 
 cd %root%node_modules\@types
