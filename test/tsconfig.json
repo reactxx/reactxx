@@ -6,12 +6,12 @@
     "inlineSourceMap": true,
     "inlineSources": true,
     "importHelpers": true,
-    "rootDir": ".",
+    "rootDir": "src",
     "outDir": "deploy/lib",
 
     "baseUrl": ".",
     "paths": {
-      "muix": [ "node_modules/muix/es/root" ],
+      "muix": [ "node_modules/muix/es/common/root" ],
       "muix-components/*": [ "node_modules/muix-components/es/native/*" ]
     },
 
@@ -34,6 +34,7 @@
   "exclude": [
     "jspm_packages",
     "node_modules",
-    "deploy"
+    "deploy",
+    "trash"
   ]
 }

@@ -168,9 +168,7 @@
     <TypeScriptCompile Include="src\test\web\index.tsx" />
     <TypeScriptCompile Include="src\test\common\primitives\icon.tsx" />
     <TypeScriptCompile Include="src\test\common\primitives\text-view.tsx" />
-    <None Include="src\test\common\styles\index.tsx_" />
     <TypeScriptCompile Include="src\test\common\styles\typography.tsx" />
-    <TypeScriptCompile Include="src\typings\shared\material-icons.d.ts" />
     <TypeScriptCompile Include="src\typings\shared\material-ui-helper.d.ts" />
     <TypeScriptCompile Include="src\typings\shared\material-ui.d.ts" />
     <TypeScriptCompile Include="src\typings\shared\typings.d.ts" />
@@ -181,9 +179,7 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\typings\styles\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

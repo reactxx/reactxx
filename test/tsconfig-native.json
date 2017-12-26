@@ -2,12 +2,13 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es2017",
-    "rootDir": ".",
+    "rootDir": "src",
     "outDir": "deploy/es",
 
     "baseUrl": ".",
     "paths": {
-      "muix": [ "node_modules/muix/es/root" ]
+      "muix": [ "node_modules/muix/es/root" ],
+      "muix-icons/*": [ "node_modules/muix-icons/es/index" ]
     },
 
     "importHelpers": true, //https://github.com/facebook/react-native/issues/16858
@@ -29,6 +30,7 @@
   "exclude": [
     "jspm_packages",
     "node_modules",
-    "deploy"
+    "deploy",
+    "trash"
   ]
 }

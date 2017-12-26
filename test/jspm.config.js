@@ -31,11 +31,11 @@ SystemJS.config({
     "https": "npm:jspm-nodelibs-https@0.2.2",
     "jss": "npm:jss@9.4.0",
     "lodash": "npm:lodash@4.17.4",
-    "muix": "npm:muix@0.1.54",
-    "muix-components": "npm:muix-components@0.1.66",
-    "muix-icons": "npm:muix-icons@0.1.51",
-    "muix-primitives": "npm:muix-primitives@0.1.58",
-    "muix-styles": "npm:muix-styles@0.1.63",
+    "muix": "npm:muix@0.1.55",
+    "muix-components": "npm:muix-components@0.1.68",
+    "muix-icons": "npm:muix-icons@0.1.52",
+    "muix-primitives": "npm:muix-primitives@0.1.60",
+    "muix-styles": "npm:muix-styles@0.1.65",
     "os": "npm:jspm-nodelibs-os@0.2.2",
     "path": "npm:jspm-nodelibs-path@0.2.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",
@@ -592,55 +592,55 @@ SystemJS.config({
         "safe-buffer": "npm:safe-buffer@5.1.1"
       }
     },
-    "npm:muix-styles@0.1.63": {
+    "npm:muix-styles@0.1.65": {
       "map": {
-        "muix-icons": "npm:muix-icons@0.1.51",
-        "tslib": "npm:tslib@1.8.1",
-        "classnames": "npm:classnames@2.2.5",
-        "core-js": "npm:core-js@2.5.3",
-        "recompose": "npm:recompose@0.26.0",
-        "warning": "npm:warning@3.0.0",
-        "deepmerge": "npm:deepmerge@2.0.1",
-        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
-        "jss": "npm:jss@9.4.0",
-        "jss-preset-default": "npm:jss-preset-default@4.0.1",
-        "material-ui": "npm:material-ui@1.0.0-beta.25",
+        "muix-icons": "npm:muix-icons@0.1.52",
         "jss-global": "npm:jss-global@3.0.0",
-        "react-jss": "npm:react-jss@8.2.0"
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
+        "jss-preset-default": "npm:jss-preset-default@4.0.1",
+        "react-jss": "npm:react-jss@8.2.0",
+        "warning": "npm:warning@3.0.0",
+        "core-js": "npm:core-js@2.5.3",
+        "classnames": "npm:classnames@2.2.5",
+        "material-ui": "npm:material-ui@1.0.0-beta.25",
+        "recompose": "npm:recompose@0.26.0",
+        "deepmerge": "npm:deepmerge@2.0.1",
+        "jss": "npm:jss@9.4.0",
+        "tslib": "npm:tslib@1.8.1"
       }
     },
-    "npm:muix-primitives@0.1.58": {
+    "npm:muix-components@0.1.68": {
       "map": {
-        "muix-icons": "npm:muix-icons@0.1.51",
-        "tslib": "npm:tslib@1.8.1",
-        "classnames": "npm:classnames@2.2.5",
-        "core-js": "npm:core-js@2.5.3",
-        "recompose": "npm:recompose@0.26.0",
-        "warning": "npm:warning@3.0.0",
-        "deepmerge": "npm:deepmerge@2.0.1",
-        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
-        "jss": "npm:jss@9.4.0",
-        "jss-preset-default": "npm:jss-preset-default@4.0.1",
-        "material-ui": "npm:material-ui@1.0.0-beta.25",
+        "muix-icons": "npm:muix-icons@0.1.52",
         "jss-global": "npm:jss-global@3.0.0",
-        "react-jss": "npm:react-jss@8.2.0"
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
+        "jss-preset-default": "npm:jss-preset-default@4.0.1",
+        "react-jss": "npm:react-jss@8.2.0",
+        "warning": "npm:warning@3.0.0",
+        "core-js": "npm:core-js@2.5.3",
+        "classnames": "npm:classnames@2.2.5",
+        "material-ui": "npm:material-ui@1.0.0-beta.25",
+        "recompose": "npm:recompose@0.26.0",
+        "deepmerge": "npm:deepmerge@2.0.1",
+        "jss": "npm:jss@9.4.0",
+        "tslib": "npm:tslib@1.8.1"
       }
     },
-    "npm:muix-components@0.1.66": {
+    "npm:muix-primitives@0.1.60": {
       "map": {
-        "muix-icons": "npm:muix-icons@0.1.51",
-        "tslib": "npm:tslib@1.8.1",
-        "classnames": "npm:classnames@2.2.5",
-        "core-js": "npm:core-js@2.5.3",
-        "recompose": "npm:recompose@0.26.0",
-        "warning": "npm:warning@3.0.0",
-        "deepmerge": "npm:deepmerge@2.0.1",
-        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
-        "jss": "npm:jss@9.4.0",
-        "jss-preset-default": "npm:jss-preset-default@4.0.1",
-        "material-ui": "npm:material-ui@1.0.0-beta.25",
+        "muix-icons": "npm:muix-icons@0.1.52",
         "jss-global": "npm:jss-global@3.0.0",
-        "react-jss": "npm:react-jss@8.2.0"
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
+        "jss-preset-default": "npm:jss-preset-default@4.0.1",
+        "react-jss": "npm:react-jss@8.2.0",
+        "warning": "npm:warning@3.0.0",
+        "core-js": "npm:core-js@2.5.3",
+        "classnames": "npm:classnames@2.2.5",
+        "material-ui": "npm:material-ui@1.0.0-beta.25",
+        "recompose": "npm:recompose@0.26.0",
+        "deepmerge": "npm:deepmerge@2.0.1",
+        "jss": "npm:jss@9.4.0",
+        "tslib": "npm:tslib@1.8.1"
       }
     }
   }

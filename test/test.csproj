@@ -105,9 +105,17 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\root.tsx" />
-    <TypeScriptCompile Include="src\test\App.tsx" />
-    <TypeScriptCompile Include="src\test\index.tsx" />
+    <TypeScriptCompile Include="src\common\components\button.tsx" />
+    <TypeScriptCompile Include="src\common\icons\index.tsx" />
+    <TypeScriptCompile Include="src\common\primitives\icon.tsx" />
+    <TypeScriptCompile Include="src\common\primitives\text-view.tsx" />
+    <TypeScriptCompile Include="src\common\root.tsx" />
+    <TypeScriptCompile Include="src\common\styles\typography.tsx" />
+    <TypeScriptCompile Include="src\native\App.tsx" />
+    <TypeScriptCompile Include="src\web\index.tsx" />
+    <TypeScriptCompile Include="trash\root.tsx" />
+    <TypeScriptCompile Include="trash\test\App.tsx" />
+    <TypeScriptCompile Include="trash\test\index.tsx" />
     <TypeScriptCompile Include="typings\styles\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="typings\shared\material-icons.d.ts" />
     <TypeScriptCompile Include="typings\shared\material-ui-helper.d.ts" />

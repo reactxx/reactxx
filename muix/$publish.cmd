@@ -7,14 +7,15 @@ cd %root%deploy
 rmdir lib /s /q
 rmdir es /s /q
 
+cd %root%
 call $compile
 
 rem *** npm package publishing
 call %root%$publish_ components true
 
 call %root%$publish_ styles
+rmdir %root%deploy\styles\es\native\fonts /s /q
 xcopy %root%src\styles\native\fonts %root%deploy\styles\es\native\fonts /s /q /i 
-xcopy %root%src\styles\native\fonts %root%deploy\es\styles\native\fonts /s /q /i 
 
 call %root%$publish_ primitives
 call %root%$publish_ test
