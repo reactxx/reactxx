@@ -1,4 +1,5 @@
 import React from 'react'
+import { icons } from 'muix-icons/index'
 import { Icon, iconColor, iconSize } from 'muix-primitives'
 import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 import color from 'material-ui/colors/orange'
@@ -33,21 +34,21 @@ const theme = createMuiTheme({
 const app: React.SFC = props =>
   <AppContainer>
     <View style={{ marginTop: 24 }}>
-      <Icon children={MDI.icons.ArrowDownBoldBox} />
-      <Icon children={MDI.icons.ArrowDownBoldBox} color='inherit' />
-      <Icon children={MDI.icons.ArrowDownBoldBox} color='accent' />
-      <Icon children={MDI.icons.ArrowDownBoldBox} color='action' />
+      <Icon children={icons.ArrowDownBoldBox} />
+      <Icon children={icons.ArrowDownBoldBox} color='inherit' />
+      <Icon children={icons.ArrowDownBoldBox} color='accent' />
+      <Icon children={icons.ArrowDownBoldBox} color='action' />
       <View style={{ backgroundColor: 'darkgray', padding: 5 }}>
-        <Icon children={MDI.icons.ArrowDownBoldBox} color='contrast' />
+        <Icon children={icons.ArrowDownBoldBox} color='contrast' />
       </View>
-      <Icon children={MDI.icons.ArrowDownBoldBox} color='disabled' />
-      <Icon children={MDI.icons.ArrowDownBoldBox} color='error' />
-      <Icon children={MDI.icons.ArrowDownBoldBox} color='primary' />
-      <Icon children={MDI.icons.ArrowDownBoldBox} style={iconColor('brown')} />
-      <Icon children={MDI.icons.ArrowDownBoldBox} classes={{ colorInherit: iconColor('green') }} />
-      <Icon children={MDI.icons.ArrowDownBoldBox} classes={{ root: iconSize(32) }} />
+      <Icon children={icons.ArrowDownBoldBox} color='disabled' />
+      <Icon children={icons.ArrowDownBoldBox} color='error' />
+      <Icon children={icons.ArrowDownBoldBox} color='primary' />
+      <Icon children={icons.ArrowDownBoldBox} style={iconColor('brown')} />
+      <Icon children={icons.ArrowDownBoldBox} classes={{ colorInherit: iconColor('green') }} />
+      <Icon children={icons.ArrowDownBoldBox} classes={{ root: iconSize(32) }} />
       <MuiThemeProvider theme={theme}>
-        <Icon children={MDI.icons.ArrowDownBoldBox} />
+        <Icon children={icons.ArrowDownBoldBox} />
       </MuiThemeProvider>
     </View>
   </AppContainer>

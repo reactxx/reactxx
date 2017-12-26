@@ -108,13 +108,12 @@
     <TypeScriptCompile Include="src\root.tsx" />
     <TypeScriptCompile Include="src\test\App.tsx" />
     <TypeScriptCompile Include="src\test\index.tsx" />
-    <TypeScriptCompile Include="typings\Icon-d.d.ts" />
-    <TypeScriptCompile Include="typings\material-ui-ex.d.ts" />
+    <TypeScriptCompile Include="typings\styles\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="typings\shared\material-icons.d.ts" />
     <TypeScriptCompile Include="typings\shared\material-ui-helper.d.ts" />
     <TypeScriptCompile Include="typings\shared\material-ui.d.ts" />
     <TypeScriptCompile Include="typings\shared\typings.d.ts" />
-    <TypeScriptCompile Include="typings\withStyles-d.d.ts" />
+    <TypeScriptCompile Include="typings\styles\withStyles-d.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,3 +1,6 @@
-import app from '../common/root'
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-export default app
+import App from '../common/root'
+
+export const init = () => ReactDOM.render(<App />, document.getElementById('content')) 

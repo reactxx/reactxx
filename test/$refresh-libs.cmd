@@ -6,7 +6,6 @@ d:
 cd %root%\jspm_packages
 rmdir npm /s /q
 cd %root%
-rem call jspm update npm:muix-icons
 call jspm install npm:muix-icons npm:muix-styles npm:muix-primitives npm:muix-components npm:muix 
 
 cd %root%

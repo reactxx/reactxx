@@ -44,7 +44,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="deploy\es\native\index.js" />
     <Content Include="design\native-package.json" />
     <Content Include="design\web-package.json" />
     <Content Include="design\mdi-react-lm\package.json" />
@@ -75,12 +74,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="deploy\es\native\icons-native.d.ts" />
-    <TypeScriptCompile Include="deploy\es\native\index.d.ts" />
     <TypeScriptCompile Include="index.tsx" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="deploy\lib\" />
+    <Folder Include="deploy\es\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

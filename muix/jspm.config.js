@@ -9,110 +9,6 @@ SystemJS.config({
   packages: {
     "": {
       "defaultExtension": "js"
-    }
-  },
-  map: {
-    "muix-styles": "deploy/lib/styles/web/index",
-    "muix-styles/web": "deploy/lib/styles/web/index",
-    "muix-primitives": "deploy/lib/primitives/web/index",
-    "muix-components": "deploy/lib/components/web",
-    "jss-props-sort": "npm:jss-props-sort@6.0.0",
-    "jss-default-unit": "npm:jss-default-unit@8.0.2",
-    "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0",
-    "jss-nested": "npm:jss-nested@6.0.1",
-    "jss-camel-case": "npm:jss-camel-case@6.0.0",
-    "jss-global": "npm:jss-global@3.0.0"
-  }
-});
-
-SystemJS.config({
-  packageConfigPaths: [
-    "npm:@*/*.json",
-    "npm:*.json"
-  ],
-  map: {
-    "classnames": "npm:classnames@2.2.5",
-    "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
-    "jss-preset-default": "npm:jss-preset-default@4.0.1",
-    "assert": "npm:jspm-nodelibs-assert@0.2.1",
-    "buffer": "npm:jspm-nodelibs-buffer@0.2.3",
-    "child_process": "npm:jspm-nodelibs-child_process@0.2.1",
-    "constants": "npm:jspm-nodelibs-constants@0.2.1",
-    "core-js": "npm:core-js@2.5.3",
-    "crypto": "npm:jspm-nodelibs-crypto@0.2.1",
-    "deepmerge": "npm:deepmerge@2.0.1",
-    "domain": "npm:jspm-nodelibs-domain@0.2.1",
-    "events": "npm:jspm-nodelibs-events@0.2.2",
-    "fs": "npm:jspm-nodelibs-fs@0.2.1",
-    "http": "npm:jspm-nodelibs-http@0.2.0",
-    "https": "npm:jspm-nodelibs-https@0.2.2",
-    "jss": "npm:jss@9.4.0",
-    "lodash": "npm:lodash@4.17.4",
-    "material-ui": "npm:material-ui@1.0.0-beta.24",
-    "muix-icons": "npm:muix-icons@0.1.50",
-    "os": "npm:jspm-nodelibs-os@0.2.2",
-    "path": "npm:jspm-nodelibs-path@0.2.3",
-    "process": "npm:jspm-nodelibs-process@0.2.1",
-    "react": "npm:react@16.2.0",
-    "react-dom": "npm:react-dom@16.2.0",
-    "react-jss": "npm:react-jss@8.2.0",
-    "recompose": "npm:recompose@0.26.0",
-    "stream": "npm:jspm-nodelibs-stream@0.2.1",
-    "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.2",
-    "tslib": "npm:tslib@1.8.1",
-    "url": "npm:jspm-nodelibs-url@0.2.1",
-    "util": "npm:jspm-nodelibs-util@0.2.2",
-    "vm": "npm:jspm-nodelibs-vm@0.2.1",
-    "warning": "npm:warning@3.0.0",
-    "zlib": "npm:jspm-nodelibs-zlib@0.2.3"
-  },
-  packages: {
-    "npm:recompose@0.26.0": {
-      "map": {
-        "symbol-observable": "npm:symbol-observable@1.1.0",
-        "change-emitter": "npm:change-emitter@0.1.6",
-        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
-        "fbjs": "npm:fbjs@0.8.16"
-      }
-    },
-    "npm:warning@3.0.0": {
-      "map": {
-        "loose-envify": "npm:loose-envify@1.3.1"
-      }
-    },
-    "npm:prop-types@15.6.0": {
-      "map": {
-        "loose-envify": "npm:loose-envify@1.3.1",
-        "fbjs": "npm:fbjs@0.8.16",
-        "object-assign": "npm:object-assign@4.1.1"
-      }
-    },
-    "npm:fbjs@0.8.16": {
-      "map": {
-        "core-js": "npm:core-js@1.2.7",
-        "loose-envify": "npm:loose-envify@1.3.1",
-        "ua-parser-js": "npm:ua-parser-js@0.7.17",
-        "object-assign": "npm:object-assign@4.1.1",
-        "promise": "npm:promise@7.3.1",
-        "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1",
-        "setimmediate": "npm:setimmediate@1.0.5"
-      }
-    },
-    "npm:react-transition-group@2.2.1": {
-      "map": {
-        "dom-helpers": "npm:dom-helpers@3.2.1",
-        "loose-envify": "npm:loose-envify@1.3.1",
-        "prop-types": "npm:prop-types@15.6.0",
-        "warning": "npm:warning@3.0.0",
-        "classnames": "npm:classnames@2.2.5",
-        "chain-function": "npm:chain-function@1.0.0"
-      }
-    },
-    "npm:babel-runtime@6.26.0": {
-      "map": {
-        "core-js": "npm:core-js@2.5.3",
-        "regenerator-runtime": "npm:regenerator-runtime@0.11.1"
-      }
     },
     "npm:react@16.2.0": {
       "map": {
@@ -130,89 +26,15 @@ SystemJS.config({
         "object-assign": "npm:object-assign@4.1.1"
       }
     },
-    "npm:react-popper@0.7.4": {
-      "map": {
-        "prop-types": "npm:prop-types@15.6.0",
-        "popper.js": "npm:popper.js@1.13.0"
-      }
-    },
-    "npm:loose-envify@1.3.1": {
-      "map": {
-        "js-tokens": "npm:js-tokens@3.0.2"
-      }
-    },
-    "npm:react-scrollbar-size@2.0.2": {
-      "map": {
-        "babel-runtime": "npm:babel-runtime@6.26.0",
-        "prop-types": "npm:prop-types@15.6.0",
-        "react-event-listener": "npm:react-event-listener@0.5.2"
-      }
-    },
-    "npm:jss-preset-default@4.0.1": {
-      "map": {
-        "jss-compose": "npm:jss-compose@5.0.0",
-        "jss-default-unit": "npm:jss-default-unit@8.0.2",
-        "jss-camel-case": "npm:jss-camel-case@6.0.0",
-        "jss-global": "npm:jss-global@3.0.0",
-        "jss-nested": "npm:jss-nested@6.0.1",
-        "jss-template": "npm:jss-template@1.0.0",
-        "jss-extend": "npm:jss-extend@6.1.0",
-        "jss-props-sort": "npm:jss-props-sort@6.0.0",
-        "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0",
-        "jss-expand": "npm:jss-expand@5.1.0"
-      }
-    },
-    "npm:promise@7.3.1": {
-      "map": {
-        "asap": "npm:asap@2.0.6"
-      }
-    },
-    "npm:isomorphic-fetch@2.2.1": {
-      "map": {
-        "whatwg-fetch": "npm:whatwg-fetch@2.0.3",
-        "node-fetch": "npm:node-fetch@1.7.3"
-      }
-    },
     "npm:jspm-nodelibs-stream@0.2.1": {
       "map": {
         "stream-browserify": "npm:stream-browserify@2.0.1"
-      }
-    },
-    "npm:scroll@2.0.1": {
-      "map": {
-        "rafl": "npm:rafl@1.2.2"
-      }
-    },
-    "npm:jss-compose@5.0.0": {
-      "map": {
-        "warning": "npm:warning@3.0.0"
-      }
-    },
-    "npm:jss-nested@6.0.1": {
-      "map": {
-        "warning": "npm:warning@3.0.0"
-      }
-    },
-    "npm:jss-template@1.0.0": {
-      "map": {
-        "warning": "npm:warning@3.0.0"
       }
     },
     "npm:stream-browserify@2.0.1": {
       "map": {
         "inherits": "npm:inherits@2.0.3",
         "readable-stream": "npm:readable-stream@2.3.3"
-      }
-    },
-    "npm:node-fetch@1.7.3": {
-      "map": {
-        "encoding": "npm:encoding@0.1.12",
-        "is-stream": "npm:is-stream@1.1.0"
-      }
-    },
-    "npm:rafl@1.2.2": {
-      "map": {
-        "global": "npm:global@4.3.2"
       }
     },
     "npm:readable-stream@2.3.3": {
@@ -224,11 +46,6 @@ SystemJS.config({
         "core-util-is": "npm:core-util-is@1.0.2",
         "safe-buffer": "npm:safe-buffer@5.1.1",
         "process-nextick-args": "npm:process-nextick-args@1.0.7"
-      }
-    },
-    "npm:jss-vendor-prefixer@7.0.0": {
-      "map": {
-        "css-vendor": "npm:css-vendor@0.3.8"
       }
     },
     "npm:jspm-nodelibs-buffer@0.2.3": {
@@ -246,18 +63,6 @@ SystemJS.config({
         "http-browserify": "npm:stream-http@2.7.2"
       }
     },
-    "npm:encoding@0.1.12": {
-      "map": {
-        "iconv-lite": "npm:iconv-lite@0.4.19"
-      }
-    },
-    "npm:global@4.3.2": {
-      "map": {
-        "process": "npm:process@0.5.2",
-        "min-document": "npm:min-document@2.19.0",
-        "node-min-document": "npm:min-document@2.19.0"
-      }
-    },
     "npm:jspm-nodelibs-zlib@0.2.3": {
       "map": {
         "browserify-zlib": "npm:browserify-zlib@0.1.4"
@@ -266,16 +71,6 @@ SystemJS.config({
     "npm:jspm-nodelibs-url@0.2.1": {
       "map": {
         "url": "npm:url@0.11.0"
-      }
-    },
-    "npm:is-plain-object@2.0.4": {
-      "map": {
-        "isobject": "npm:isobject@3.0.1"
-      }
-    },
-    "npm:css-vendor@0.3.8": {
-      "map": {
-        "is-in-browser": "npm:is-in-browser@1.1.3"
       }
     },
     "npm:string_decoder@1.0.3": {
@@ -302,11 +97,6 @@ SystemJS.config({
       "map": {
         "readable-stream": "npm:readable-stream@2.3.3",
         "pako": "npm:pako@0.2.9"
-      }
-    },
-    "npm:min-document@2.19.0": {
-      "map": {
-        "dom-walk": "npm:dom-walk@0.1.1"
       }
     },
     "npm:url@0.11.0": {
@@ -537,6 +327,216 @@ SystemJS.config({
       "map": {
         "inherits": "npm:inherits@2.0.3",
         "safe-buffer": "npm:safe-buffer@5.1.1"
+      }
+    }
+  },
+  map: {
+    "muix-styles": "deploy/lib/styles/web/index",
+    "muix-styles/web": "deploy/lib/styles/web/index",
+    "muix-primitives": "deploy/lib/primitives/web/index",
+    "muix-components": "deploy/lib/components/web",
+    "jss-props-sort": "npm:jss-props-sort@6.0.0",
+    "jss-default-unit": "npm:jss-default-unit@8.0.2",
+    "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0",
+    "jss-nested": "npm:jss-nested@6.0.1",
+    "jss-camel-case": "npm:jss-camel-case@6.0.0",
+    "jss-global": "npm:jss-global@3.0.0",
+    "assert": "npm:jspm-nodelibs-assert@0.2.1",
+    "buffer": "npm:jspm-nodelibs-buffer@0.2.3",
+    "child_process": "npm:jspm-nodelibs-child_process@0.2.1",
+    "constants": "npm:jspm-nodelibs-constants@0.2.1",
+    "crypto": "npm:jspm-nodelibs-crypto@0.2.1",
+    "domain": "npm:jspm-nodelibs-domain@0.2.1",
+    "events": "npm:jspm-nodelibs-events@0.2.2",
+    "fs": "npm:jspm-nodelibs-fs@0.2.1",
+    "http": "npm:jspm-nodelibs-http@0.2.0",
+    "https": "npm:jspm-nodelibs-https@0.2.2",
+    "jss": "npm:jss@9.4.0",
+    "lodash": "npm:lodash@4.17.4",
+    "os": "npm:jspm-nodelibs-os@0.2.2",
+    "path": "npm:jspm-nodelibs-path@0.2.3",
+    "process": "npm:jspm-nodelibs-process@0.2.1",
+    "react": "npm:react@16.2.0",
+    "react-dom": "npm:react-dom@16.2.0",
+    "stream": "npm:jspm-nodelibs-stream@0.2.1",
+    "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.2",
+    "url": "npm:jspm-nodelibs-url@0.2.1",
+    "util": "npm:jspm-nodelibs-util@0.2.2",
+    "vm": "npm:jspm-nodelibs-vm@0.2.1",
+    "zlib": "npm:jspm-nodelibs-zlib@0.2.3"
+  }
+});
+
+SystemJS.config({
+  packageConfigPaths: [
+    "npm:@*/*.json",
+    "npm:*.json"
+  ],
+  map: {
+    "classnames": "npm:classnames@2.2.5",
+    "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
+    "jss-preset-default": "npm:jss-preset-default@4.0.1",
+    "core-js": "npm:core-js@2.5.3",
+    "deepmerge": "npm:deepmerge@2.0.1",
+    "material-ui": "npm:material-ui@1.0.0-beta.24",
+    "muix-icons": "npm:muix-icons@0.1.52",
+    "react-jss": "npm:react-jss@8.2.0",
+    "recompose": "npm:recompose@0.26.0",
+    "tslib": "npm:tslib@1.8.1",
+    "warning": "npm:warning@3.0.0"
+  },
+  packages: {
+    "npm:recompose@0.26.0": {
+      "map": {
+        "symbol-observable": "npm:symbol-observable@1.1.0",
+        "change-emitter": "npm:change-emitter@0.1.6",
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
+        "fbjs": "npm:fbjs@0.8.16"
+      }
+    },
+    "npm:warning@3.0.0": {
+      "map": {
+        "loose-envify": "npm:loose-envify@1.3.1"
+      }
+    },
+    "npm:prop-types@15.6.0": {
+      "map": {
+        "loose-envify": "npm:loose-envify@1.3.1",
+        "fbjs": "npm:fbjs@0.8.16",
+        "object-assign": "npm:object-assign@4.1.1"
+      }
+    },
+    "npm:fbjs@0.8.16": {
+      "map": {
+        "core-js": "npm:core-js@1.2.7",
+        "loose-envify": "npm:loose-envify@1.3.1",
+        "ua-parser-js": "npm:ua-parser-js@0.7.17",
+        "object-assign": "npm:object-assign@4.1.1",
+        "promise": "npm:promise@7.3.1",
+        "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1",
+        "setimmediate": "npm:setimmediate@1.0.5"
+      }
+    },
+    "npm:react-transition-group@2.2.1": {
+      "map": {
+        "dom-helpers": "npm:dom-helpers@3.2.1",
+        "loose-envify": "npm:loose-envify@1.3.1",
+        "prop-types": "npm:prop-types@15.6.0",
+        "warning": "npm:warning@3.0.0",
+        "classnames": "npm:classnames@2.2.5",
+        "chain-function": "npm:chain-function@1.0.0"
+      }
+    },
+    "npm:babel-runtime@6.26.0": {
+      "map": {
+        "core-js": "npm:core-js@2.5.3",
+        "regenerator-runtime": "npm:regenerator-runtime@0.11.1"
+      }
+    },
+    "npm:react-popper@0.7.4": {
+      "map": {
+        "prop-types": "npm:prop-types@15.6.0",
+        "popper.js": "npm:popper.js@1.13.0"
+      }
+    },
+    "npm:loose-envify@1.3.1": {
+      "map": {
+        "js-tokens": "npm:js-tokens@3.0.2"
+      }
+    },
+    "npm:react-scrollbar-size@2.0.2": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.26.0",
+        "prop-types": "npm:prop-types@15.6.0",
+        "react-event-listener": "npm:react-event-listener@0.5.2"
+      }
+    },
+    "npm:jss-preset-default@4.0.1": {
+      "map": {
+        "jss-compose": "npm:jss-compose@5.0.0",
+        "jss-default-unit": "npm:jss-default-unit@8.0.2",
+        "jss-camel-case": "npm:jss-camel-case@6.0.0",
+        "jss-global": "npm:jss-global@3.0.0",
+        "jss-nested": "npm:jss-nested@6.0.1",
+        "jss-template": "npm:jss-template@1.0.0",
+        "jss-extend": "npm:jss-extend@6.1.0",
+        "jss-props-sort": "npm:jss-props-sort@6.0.0",
+        "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0",
+        "jss-expand": "npm:jss-expand@5.1.0"
+      }
+    },
+    "npm:promise@7.3.1": {
+      "map": {
+        "asap": "npm:asap@2.0.6"
+      }
+    },
+    "npm:isomorphic-fetch@2.2.1": {
+      "map": {
+        "whatwg-fetch": "npm:whatwg-fetch@2.0.3",
+        "node-fetch": "npm:node-fetch@1.7.3"
+      }
+    },
+    "npm:scroll@2.0.1": {
+      "map": {
+        "rafl": "npm:rafl@1.2.2"
+      }
+    },
+    "npm:jss-compose@5.0.0": {
+      "map": {
+        "warning": "npm:warning@3.0.0"
+      }
+    },
+    "npm:jss-nested@6.0.1": {
+      "map": {
+        "warning": "npm:warning@3.0.0"
+      }
+    },
+    "npm:jss-template@1.0.0": {
+      "map": {
+        "warning": "npm:warning@3.0.0"
+      }
+    },
+    "npm:node-fetch@1.7.3": {
+      "map": {
+        "encoding": "npm:encoding@0.1.12",
+        "is-stream": "npm:is-stream@1.1.0"
+      }
+    },
+    "npm:rafl@1.2.2": {
+      "map": {
+        "global": "npm:global@4.3.2"
+      }
+    },
+    "npm:jss-vendor-prefixer@7.0.0": {
+      "map": {
+        "css-vendor": "npm:css-vendor@0.3.8"
+      }
+    },
+    "npm:encoding@0.1.12": {
+      "map": {
+        "iconv-lite": "npm:iconv-lite@0.4.19"
+      }
+    },
+    "npm:global@4.3.2": {
+      "map": {
+        "process": "npm:process@0.5.2",
+        "min-document": "npm:min-document@2.19.0",
+        "node-min-document": "npm:min-document@2.19.0"
+      }
+    },
+    "npm:is-plain-object@2.0.4": {
+      "map": {
+        "isobject": "npm:isobject@3.0.1"
+      }
+    },
+    "npm:css-vendor@0.3.8": {
+      "map": {
+        "is-in-browser": "npm:is-in-browser@1.1.3"
+      }
+    },
+    "npm:min-document@2.19.0": {
+      "map": {
+        "dom-walk": "npm:dom-walk@0.1.1"
       }
     },
     "npm:material-ui@1.0.0-beta.24": {

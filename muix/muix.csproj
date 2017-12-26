@@ -87,6 +87,7 @@
     <Content Include="deploy\test\package.json" />
     <Content Include="deploy\test\README.md" />
     <Content Include="%24refresh-libs.cmd" />
+    <Content Include="%24compile.cmd" />
     <None Include="packages.config" />
     <Content Include="README.md" />
     <Content Include="src\styles\native\theme.json" />
@@ -128,11 +129,8 @@
     <TypeScriptCompile Include="src\components\web\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
-    <TypeScriptCompile Include="src\test\App.tsx" />
+    <TypeScriptCompile Include="src\test\native\App.tsx" />
     <TypeScriptCompile Include="src\test\common\root.tsx" />
-    <TypeScriptCompile Include="src\test\native\index.tsx" />
-    <TypeScriptCompile Include="src\test\web\index.tsx" />
-    <TypeScriptCompile Include="src\typings\Icon-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\common\Icon\Icon.tsx" />
     <TypeScriptCompile Include="src\primitives\common\ScrollView\ScrollView-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\common\ScrollView\ScrollView.tsx" />
@@ -140,7 +138,7 @@
     <TypeScriptCompile Include="src\primitives\common\Template\Template.tsx" />
     <TypeScriptCompile Include="src\primitives\common\Text\Text-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\common\Text\Text.tsx" />
-    <TypeScriptCompile Include="src\primitives\common\Typography\Typography-d.d.ts" />
+    <TypeScriptCompile Include="src\primitives\common\Typography\Typography.ts" />
     <TypeScriptCompile Include="src\primitives\common\View\View-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\common\View\View.tsx" />
     <TypeScriptCompile Include="src\primitives\native\Icon\Icon.tsx" />
@@ -160,14 +158,14 @@
     <TypeScriptCompile Include="src\styles\common\index.ts" />
     <TypeScriptCompile Include="src\styles\native\index.ts" />
     <TypeScriptCompile Include="src\styles\web\index.ts" />
-    <TypeScriptCompile Include="src\typings\withStyles-d.d.ts" />
+    <TypeScriptCompile Include="src\typings\shared\withStyles-d.d.ts" />
     <TypeScriptCompile Include="src\styles\native\createTypography.ts" />
     <TypeScriptCompile Include="src\styles\native\expoLoadFonts.ts" />
     <TypeScriptCompile Include="src\styles\native\MuiThemeProvider.ts" />
     <TypeScriptCompile Include="src\styles\native\withStyles.tsx" />
     <TypeScriptCompile Include="src\test\common\components\button.tsx" />
     <TypeScriptCompile Include="src\test\common\icons\index.tsx" />
-    <TypeScriptCompile Include="src\test\index.tsx" />
+    <TypeScriptCompile Include="src\test\web\index.tsx" />
     <TypeScriptCompile Include="src\test\common\primitives\icon.tsx" />
     <TypeScriptCompile Include="src\test\common\primitives\text-view.tsx" />
     <None Include="src\test\common\styles\index.tsx_" />
@@ -176,14 +174,16 @@
     <TypeScriptCompile Include="src\typings\shared\material-ui-helper.d.ts" />
     <TypeScriptCompile Include="src\typings\shared\material-ui.d.ts" />
     <TypeScriptCompile Include="src\typings\shared\typings.d.ts" />
-    <TypeScriptCompile Include="src\typings\material-ui-ex.d.ts" />
+    <TypeScriptCompile Include="src\typings\shared\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="src\styles\web\inline-styles.tsx" />
     <TypeScriptCompile Include="src\styles\web\withStyles.tsx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="src\typings\styles\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

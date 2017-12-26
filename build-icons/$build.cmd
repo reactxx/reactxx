@@ -6,8 +6,6 @@ del *.js *.ts /q
 rmdir es /s /q
 md es
 
-pause
-
 cd %root%design\
 rmdir mdi-react /s /q
 
