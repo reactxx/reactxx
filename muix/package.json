@@ -7,7 +7,7 @@
     "deepmerge": "^2.0.1",
     "expo": "^24.0.0",
     "material-ui": "^1.0.0-beta.24",
-    "muix-icons": "^0.1.50",
+    "muix-icons": "^0.1.52",
     "react": "16.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
     "recompose": "^0.26.0",
