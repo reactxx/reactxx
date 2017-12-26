@@ -8,4 +8,5 @@ rem *** TS compilation
 call %tsc% --p %root%tsconfig-web.json
 call %tsc% --p %root%tsconfig-native.json -d
 
+rmdir %root%deploy\es\styles\native\fonts /s /q
 xcopy %root%src\styles\native\fonts %root%deploy\es\styles\native\fonts /s /q /i 

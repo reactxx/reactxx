@@ -4,5 +4,5 @@
   "description": "React-native compatible patch of TypeScript definitions for React",
   "registry": "npm",
   "dependencies": {},
-  "files": [ "index.d.ts", "globals.d.ts" ]
+  "files": [ "index.d.ts", "global.d.ts" ]
 }
