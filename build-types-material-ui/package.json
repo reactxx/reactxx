@@ -1,0 +1,19 @@
+{
+  "name": "reactx-mui-ts-export",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "git+https://github.com/PavelPZ/reactx-types-react.git",
+    "@types/react-dom": "^16.0.3",
+    "dts-generator": "^2.1.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "typescript": "^2.6.2"
+  }
+}

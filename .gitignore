@@ -299,3 +299,4 @@ __pycache__/
 build-icons/design/mdi-react/
 !**/$blacklist.js
 !**/package.json
+build-types-material-ui/material-ui

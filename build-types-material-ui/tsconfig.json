@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "moduleResolution": "node",
+
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": false,
+    "noImplicitAny": false,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es2015",
+      "esnext.asynciterable"
+    ]
+  },
+  "include": [
+    "**/*"
+    //"mui-d.d.ts"
+    //"material-ui/styles/**/*",
+    //"material-ui/colors/**/*",
+    //"DeepPartial.d.ts",
+    //"mui-d.d.ts"
+    //  //"index.d.ts",
+    //  //"colors/common.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "typescript.d.ts"
+  ]
+}
