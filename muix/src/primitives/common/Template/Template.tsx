@@ -3,8 +3,8 @@ import ReactN from 'react-native'
 
 import { sheetCreator } from 'muix-styles'
 
-type ClassKeyView = 'root'
-type ClassKeyText = 'text'
+export type ClassKeyView = 'root'
+export type ClassKeyText = 'text'
 
 export type Shape = Overwrite<Mui.DefaultEmptyShape, {
   common: Record<ClassKeyView, ReactN.ViewStyle> & Record<ClassKeyText, ReactN.TextStyle>

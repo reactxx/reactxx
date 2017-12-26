@@ -2,7 +2,7 @@
 
 import { toPlatformSheet } from 'muix-styles'
 
-type ClassKey = 'root'
+export type ClassKey = 'root'
 
 export type Shape = Overwrite<Mui.DefaultEmptyShape, {
   common: Record<ClassKey, ReactN.ViewStyle>

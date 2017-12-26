@@ -7,6 +7,7 @@ import { withStyles, classNames, toPlatformRuleSet, sheetCreator } from 'muix-st
 import { Shape } from '../../common/Button/Button'
 import ButtonBase from '../ButtonBase/ButtonBase'
 
+export type ButtonShape = Shape
 
 const sheet = sheetCreator<Shape>(({ typography: typo, palette, spacing, shadowsNew }) => ({ 
   native: {

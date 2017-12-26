@@ -6,6 +6,8 @@ import { View, TouchableWithoutFeedback, Animated, Easing, Platform, Text, Layou
 
 import { sheetCreator, withStyles, classNames } from 'muix-styles'
 
+export type ButtonBaseShape = Shape
+
 const sheet = sheetCreator<Shape>(({ palette }) => ({
   native: {
     ripple: {
