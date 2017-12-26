@@ -65,7 +65,7 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\index.tsx" />
+    <TypeScriptCompile Include="src\index.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
