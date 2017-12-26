@@ -1,5 +1,5 @@
 import React from 'react'
-//import Button from 'muix-components/Button/Button'
+import Button from 'muix-components/Button/Button'
 import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 //import color from 'material-ui/colors/orange'
 
@@ -17,12 +17,11 @@ import { View } from 'react-native'
 //  }
 //})
 
-const app: React.SFC = props => null
-  //<AppContainer>
-  //  <View style={{ marginTop: 24 }}>
-  //    <Button color='primary' raised onClick={ev => ev && ev.preventDefault()}>Hallo Button</Button> 
-  //  </View>
-  //</AppContainer>
+const app: React.SFC = props => <AppContainer>
+    <View style={{ marginTop: 24 }}>
+      <Button color='primary' raised onClick={ev => ev && ev.preventDefault()}>Hallo Button</Button> 
+    </View>
+  </AppContainer>
 
 export default app
 //export default app2

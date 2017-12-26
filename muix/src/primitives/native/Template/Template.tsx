@@ -2,14 +2,14 @@
 import ReactN from 'react-native'
 
 import { classNames, withStyles } from 'muix-styles'
-import { sheet } from '../../common/Template/Template' 
+import { sheet, Shape } from '../../common/Template/Template' 
 import { View } from 'react-native' 
 
-const template: Mui.CodeSFCNative<MuiTemplate.Shape> = props => {
+const template: Mui.CodeSFCNative<Shape> = props => {
   const { classes, style, ...rest } = props
   return <View style={classNames(classes.root, style)}  {...rest}/>
 }
 
-const Template = withStyles<MuiTemplate.Shape>(sheet, { name: 'MuiTemplate' })(template)
+const Template = withStyles<Shape>(sheet, { name: 'MuiTemplate' })(template)
 
 export default Template

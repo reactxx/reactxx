@@ -26,5 +26,5 @@ rem *** publish
 call npm.cmd version patch
 call npm.cmd publish
 
-cd %root%deploy/%package%
-call yarn link
+rem cd %root%deploy/%package%
+rem call yarn link

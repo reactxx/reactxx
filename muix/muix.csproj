@@ -132,14 +132,10 @@
     <TypeScriptCompile Include="src\test\native\App.tsx" />
     <TypeScriptCompile Include="src\test\common\root.tsx" />
     <TypeScriptCompile Include="src\primitives\common\Icon\Icon.tsx" />
-    <TypeScriptCompile Include="src\primitives\common\ScrollView\ScrollView-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\common\ScrollView\ScrollView.tsx" />
-    <TypeScriptCompile Include="src\primitives\common\Template\Template-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\common\Template\Template.tsx" />
-    <TypeScriptCompile Include="src\primitives\common\Text\Text-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\common\Text\Text.tsx" />
     <TypeScriptCompile Include="src\primitives\common\Typography\Typography.ts" />
-    <TypeScriptCompile Include="src\primitives\common\View\View-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\common\View\View.tsx" />
     <TypeScriptCompile Include="src\primitives\native\Icon\Icon.tsx" />
     <TypeScriptCompile Include="src\primitives\native\index.tsx" />

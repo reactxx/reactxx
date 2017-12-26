@@ -2,18 +2,13 @@
 import React from 'react'
 
 import { classNames, withStyles } from 'muix-styles/web'
-import { sheet } from '../../common/ScrollView/ScrollView' 
+import { sheet, Shape } from '../../common/ScrollView/ScrollView' 
 
-//type TT = Record<(keyof Mui.getCommon<MuiScrollView.Shape>) & Mui.getWeb<MuiScrollView.Shape>, string>
-//let x: {[P in keyof TT]: string}
-
-type t = Mui.SheetWeb<MuiScrollView.Shape>
-
-const scrollView: Mui.CodeSFCWeb<MuiScrollView.Shape> = props => {
+const scrollView: Mui.CodeSFCWeb<Shape> = props => {
   const { classes, ...rest } = props 
   return <div className={classNames(classes.root)} {...rest} />
 }
 
-const ScrollView = withStyles<MuiScrollView.Shape>(sheet, { name: 'MuiScrollView' })(scrollView)
+const ScrollView = withStyles<Shape>(sheet, { name: 'MuiScrollView' })(scrollView)
 
 export default ScrollView
