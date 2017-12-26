@@ -122,8 +122,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\components\common\ButtonBase\ButtonBase-d.d.ts" />
-    <TypeScriptCompile Include="src\components\common\Button\Button-d.d.ts" />
+    <TypeScriptCompile Include="src\components\common\ButtonBase\ButtonBase.ts" />
+    <TypeScriptCompile Include="src\components\common\Button\Button.ts" />
     <TypeScriptCompile Include="src\components\native\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\native\Button\Button.tsx" />
     <TypeScriptCompile Include="src\components\web\ButtonBase\ButtonBase.tsx" />

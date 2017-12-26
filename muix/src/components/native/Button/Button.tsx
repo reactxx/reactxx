@@ -4,9 +4,11 @@ import { Platform, View, Text } from 'react-native'
 
 import { withStyles, classNames, toPlatformRuleSet, sheetCreator } from 'muix-styles'
 
+import { Shape } from '../../common/Button/Button'
 import ButtonBase from '../ButtonBase/ButtonBase'
 
-const sheet = sheetCreator<MuiButton.Shape>(({ typography: typo, palette, spacing, shadowsNew }) => ({ 
+
+const sheet = sheetCreator<Shape>(({ typography: typo, palette, spacing, shadowsNew }) => ({ 
   native: {
     root: {
       alignItems: 'center',
@@ -78,7 +80,7 @@ const sheet = sheetCreator<MuiButton.Shape>(({ typography: typo, palette, spacin
   web: {},
 }))
 
-const button: Mui.CodeSFCNative<MuiButton.Shape> = props => {
+const button: Mui.CodeSFCNative<Shape> = props => {
   const {
     children,
     classes,
@@ -125,7 +127,7 @@ const button: Mui.CodeSFCNative<MuiButton.Shape> = props => {
 }
 
 
-const Button = withStyles<MuiButton.Shape>(sheet, { name: 'MuiButton' })(button)
+const Button = withStyles<Shape>(sheet, { name: 'MuiButton' })(button)
 
 
 //const btn = <Button classes={{ root: {}, denseLabel: { color: '' } }} color='accent' onClick={null} />
