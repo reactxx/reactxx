@@ -15,7 +15,7 @@
     "warning": "^3.0.0"
   },
   "devDependencies": {
-    "@types/expo": "https://github.com/mui-x/muix/blob/master/types/expo/types-expo-0.1.1.tgz?raw=true",
+    "@types/expo": "https://github.com/mui-x/muix/blob/master/types/expo/types-expo-0.1.2.tgz?raw=true",
     "@types/react": "https://github.com/mui-x/muix/blob/master/types/react/types-react-0.1.1.tgz?raw=true",
     "@types/react-dom": "^16.0.3",
     "@types/react-native": "https://github.com/mui-x/muix/blob/master/types/react-native/types-react-native-0.1.1.tgz?raw=true",
