@@ -70,7 +70,6 @@
   <ItemGroup>
     <Content Include="expo\package.json" />
     <Content Include="package.json" />
-    <None Include="packages.config" />
     <Content Include="react\package.json" />
     <Content Include="react-native\package.json" />
     <Content Include="tsconfig.json" />

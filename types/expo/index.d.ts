@@ -49,6 +49,14 @@ declare module 'expo' {
     function setGroup(groupType: string, groupNames: object): void
   }
 
+  interface AppLoadingProps {
+    startAsync?: () => Promise<any>
+    onError?: (error: string) => void
+    onFinish?: () => void
+  }
+
+  class AppLoading extends React.Component<AppLoadingProps> { }
+
   /** This module provides an interface to Expo’s asset system. An asset is any file that lives alongside the source code of your app that the app needs at runtime. Examples include images, fonts and sounds. Expo’s asset system integrates with React Native’s, so that you can refer to files with require('path/to/file'). This is how you refer to static image files in React Native for use in an Image component, for example. */
   class Asset {
     // The asset class has properties that these, but I believe that these are the only ones meant to be public.
@@ -97,8 +105,7 @@ declare module 'expo' {
 
         /** Populated exactly once when an error forces the object to unload. */
         error?: string
-      } |
-      {
+      } | {
         isLoaded: true,
         androidImplementation?: string,
 
@@ -311,22 +318,6 @@ declare module 'expo' {
       shouldDuckAndroid: boolean
     }
 
-    type SoundStatus =
-      {
-        isLoaded: false
-      } | {
-        isLoaded: true,
-        isPlaying: boolean,
-        durationMillis: number,
-        positionMillis: number,
-        rate: number,
-        shouldCorrectPitch: boolean,
-        volume: number,
-        isMuted: boolean,
-        isLooping: boolean,
-        didJustFinish: boolean
-      }
-
     function setIsEnabledAsync(value: boolean): Promise<void>
     function setAudioModeAsync(mode: AudioMode): Promise<void>
 
@@ -359,31 +350,141 @@ declare module 'expo' {
         downloadFirst?: boolean
       ): Promise<{ sound: Sound, status: PlaybackStatus }>
 
-      getStatusAsync(): Promise<SoundStatus>
-      setOnPlaybackStatusUpdate(onPlaybackStatusUpdate?: (status: PlaybackStatus) => void): void
+      // Methods below are shared with the Video class. The code is duplicated here in expo.d.ts because I couldn't figure a way to share it.
 
+      /**
+       * Gets the `PlaybackStatus` of the `playbackObject`.
+       *
+       * Returns a `Promise` that is fulfilled with the `PlaybackStatus` of the `playbackObject`.
+       */
+      getStatusAsync(): Promise<PlaybackStatus>
+
+      /**
+       * Loads the media from source into memory and prepares it for playing. This must be called before calling setStatusAsync() or any of the convenience set status methods. This method can only be called if the playbackObject is in an unloaded state.
+       *
+       * Returns a `Promise` that is fulfilled with the `PlaybackStatus` of the `playbackObject` once it is loaded, or rejects if loading failed. The `Promise` will also reject if the `playbackObject` was already loaded. See below for details on `PlaybackStatus`.
+       */
       loadAsync(
+        /**
+         * The source of the media. The following forms are supported:
+         * - A dictionary of the form `{ uri: 'http://path/to/file' }` with a network URL pointing to a media file on the web.
+         * - `require('path/to/file')` for a media file asset in the source code directory.
+         * - An `Expo.Asset object` for a media file asset.
+         */
         source: PlaybackSource,
-        /** Default: `{}`. */
+
+        /** The initial intended `PlaybackStatusToSet` of the `playbackObject`, whose values will override the default initial playback status. This value defaults to `{}` if no parameter is passed. See below for details on `PlaybackStatusToSet` and the default initial playback status. */
         initialStatus?: PlaybackStatusToSet,
-        /** Default: `true`. */
+
+        /** If set to `true`, the system will attempt to download the resource to the device before loading. This value defaults to true. Note that at the moment, this will only work for sources of the form `require('path/to/file')` or `Expo.Asset` objects. */
         downloadFirst?: boolean
       ): Promise<PlaybackStatus>
 
-      unloadAsync(): Promise<PlaybackStatus>
-
-      setStatusAsync(status: PlaybackStatusToSet): Promise<PlaybackStatus>
-
-      playAsync(): Promise<PlaybackStatus>
-      playFromPositionAsync(positionMillis: number): Promise<PlaybackStatus>
+      /** This is equivalent to `playbackObject.setStatusAsync({ shouldPlay: false })`. */
       pauseAsync(): Promise<PlaybackStatus>
+
+      /**
+       * This is equivalent to `playbackObject.setStatusAsync({ shouldPlay: true })`.
+       *
+       * Playback may not start immediately after calling this function for reasons such as buffering. Make sure to update your UI based on the `isPlaying` and `isBuffering` properties of the `PlaybackStatus`.
+       */
+      playAsync(): Promise<PlaybackStatus>
+
+      /**
+       * This is equivalent to `playbackObject.setStatusAsync({ shouldPlay: true, positionMillis: millis })`.
+       *
+       * Playback may not start immediately after calling this function for reasons such as buffering. Make sure to update your UI based on the isPlaying and `isBuffering` properties of the `PlaybackStatus`.
+       */
+      playFromPositionAsync(
+        /** The desired position of playback in milliseconds. */
+        positionMillis: number,
+
+        /** This is equivalent to `playbackObject.setStatusAsync({ positionMillis: millis, seekMillisToleranceBefore: toleranceMillisBefore, seekMillisToleranceAfter: toleranceMillisAfter })`. The tolerances are used only on iOS. */
+        tolerances?: {
+          toleranceMillisBefore: number,
+          toleranceMillisAfter: number
+        }
+      ): Promise<PlaybackStatus>
+
+      /**
+       * Replays the item. When using `playFromPositionAsync(0)` the item is seeked to the position at `0` ms. On iOS this method uses internal implementation of the player and is able to play the item from the beginning immediately.
+       *
+       * Returns a `Promise` that is fulfilled with the `PlaybackStatus` of the `playbackObject` once the new status has been set successfully, or rejects if setting the new status failed.
+       */
+      replayAsync(
+        /** The new `PlaybackStatusToSet` of the `playbackObject`, whose values will override the current playback status. */
+        status: PlaybackStatusToSet
+      ): Promise<PlaybackStatus>
+
+      /** This is equivalent to `playbackObject.setStatusAsync({ isLooping: value })`. */
+      setIsLoopingAsync(
+        /** A boolean describing if the media should play once (`false`) or loop indefinitely (`true`). */
+        isLooping: boolean
+      ): Promise<PlaybackStatus>
+
+      /** This is equivalent to `playbackObject.setStatusAsync({ isMuted: value })`. */
+      setIsMutedAsync(
+        /**  A boolean describing if the audio of this media should be muted. */
+        isMuted: boolean
+      ): Promise<PlaybackStatus>
+
+      /**
+       * Sets a function to be called regularly with the `PlaybackStatus` of the `playbackObject`. See below for details on `PlaybackStatus` and an example use case of this function.
+       *
+       * `onPlaybackStatusUpdate` will be called whenever a call to the API for this `playbackObject` completes (such as `setStatusAsync()`, `getStatusAsync()`, or `unloadAsync()`), and will also be called at regular intervals while the media is in the loaded state. Set `progressUpdateIntervalMillis` via `setStatusAsync()` or `setProgressUpdateIntervalAsync()` to modify the interval with which `onPlaybackStatusUpdate` is called while loaded.
+       */
+      setOnPlaybackStatusUpdate(
+        /** A function taking a single parameter `PlaybackStatus`. */
+        onPlaybackStatusUpdate?: (status: PlaybackStatus) => void
+      ): void
+
+      /** This is equivalent to `playbackObject.setStatusAsync({ positionMillis: millis })`. */
+      setPositionAsync(
+        positionMillis: number,
+
+        /** This is equivalent to `playbackObject.setStatusAsync({ positionMillis: millis, seekMillisToleranceBefore: toleranceMillisBefore, seekMillisToleranceAfter: toleranceMillisAfter })`. The tolerances are used only on iOS. */
+        tolerances?: {
+          toleranceMillisBefore: number,
+          toleranceMillisAfter: number
+        }
+      ): Promise<PlaybackStatus>
+
+      /** This is equivalent to `playbackObject.setStatusAsync({ progressUpdateIntervalMillis: millis })`. */
+      setProgressUpdateIntervalAsync(
+        /** The new minimum interval in milliseconds between calls of `onPlaybackStatusUpdate`. */
+        progressUpdateIntervalMillis: number
+      ): Promise<PlaybackStatus>
+
+      /** This is equivalent to `playbackObject.setStatusAsync({ rate: value, shouldCorrectPitch: shouldCorrectPitch })`. */
+      setRateAsync(
+        /** The desired playback rate of the media. This value must be between `0.0` and `32.0`. Only available on Android API version 23 and later and iOS. */
+        rate: number,
+
+        /** A boolean describing if we should correct the pitch for a changed rate. If set to `true`, the pitch of the audio will be corrected (so a rate different than `1.0` will timestretch the audio). */
+        shouldCorrectPitch: boolean
+      ): Promise<PlaybackStatus>
+
+      /** Sets a new `PlaybackStatusToSet` on the `playbackObject`. This method can only be called if the media has been loaded. Return a `Promise` that is fulfilled with the `PlaybackStatus` of the `playbackObject` once the new status has been set successfully, or rejects if setting the new status failed. */
+      setStatusAsync(
+        /** The new `PlaybackStatusToSet` of the `playbackObject`, whose values will override the current playback status. */
+        status: PlaybackStatusToSet
+      ): Promise<PlaybackStatus>
+
+      /** This is equivalent to `playbackObject.setStatusAsync({ volume: value })`. */
+      setVolumeAsync(
+        /** A number between `0.0` (silence) and `1.0` (maximum volume). */
+        volume: number
+      ): Promise<PlaybackStatus>
+
+      /** This is equivalent to `playbackObject.setStatusAsync({ shouldPlay: false, positionMillis: 0 })`. */
       stopAsync(): Promise<PlaybackStatus>
-      setPositionAsync(positionMillis: number): Promise<PlaybackStatus>
-      setRateAsync(rate: number, shouldCorrectPitch: boolean): Promise<PlaybackStatus>
-      setVolumeAsync(volume: number): Promise<PlaybackStatus>
-      setIsMutedAsync(isMuted: boolean): Promise<PlaybackStatus>
-      setIsLoopingAsync(isLooping: boolean): Promise<PlaybackStatus>
-      setProgressUpdateIntervalAsync(progressUpdateIntervalMillis: number): Promise<PlaybackStatus>
+
+      /**
+       * Unloads the media from memory. `loadAsync()` must be called again in order to be able to play the media.
+       *
+       * Returns a `Promise` that is fulfilled with the `PlaybackStatus` of the `playbackObject` once it is unloaded, or rejects if unloading failed. See below for details on `PlaybackStatus`.
+       */
+      unloadAsync(): Promise<PlaybackStatus>
     }
 
     class Recording {
@@ -674,16 +775,8 @@ declare module 'expo' {
     tint: 'light' | 'default' | 'dark'
   }
 
-  class BlurView extends React.Component<BlurViewProps> { }
+  class BlurView extends Component<BlurViewProps> { }
   //#endregion
-
-  interface AppLoadingProps {
-    startAsync?: () => Promise<any>
-    onError?: (error:string) => void
-    onFinish ?: () => void
-  }
-
-  class AppLoading extends React.Component<AppLoadingProps> { }
 
   //#region BarCodeScanner
   interface BarCodeScannerProps {
@@ -693,8 +786,48 @@ declare module 'expo' {
     style: ViewStyle
   }
 
-  class BarCodeScanner extends React.Component<BarCodeScannerProps> { }
+  class BarCodeScanner extends Component<BarCodeScannerProps> { }
   //#endregion
+
+  /** Use TouchID/FaceID (iOS) or the Fingerprint API (Android) to authenticate the user with a fingerprint scan. */
+  namespace Fingerprint {
+    // interface FingerprintAuthenticationSuccess {
+    //   success: true
+    // }
+
+    // interface FingerprintAuthenticationFailure {
+    //   success: false,
+    //     /** Error code in the case where authentication fails. */
+    //   error: string
+    // }
+
+    // type FingerprintAuthenticationResult = FingerprintAuthenticationSuccess | FingerprintAuthenticationFailure
+
+    type FingerprintAuthenticationResult =
+      {
+        success: true
+      } | {
+        success: false,
+        /** Error code in the case where authentication fails. */
+        error: string
+      }
+
+    /**
+     * Attempts to authenticate via Fingerprint. Android: When using the fingerprint module on Android, you need to provide a UI component to prompt the user to scan their fingerprint, as the OS has no default alert for it.
+     *
+     * @param promptMessage A message that is shown alongside the TouchID/FaceID prompt. (iOS only)
+     */
+    function authenticateAsync(promptMessage?: string): Promise<FingerprintAuthenticationResult>
+
+    /** Cancels the fingerprint authentication flow. (Android only) */
+    function cancelAuthenticate(): void
+
+    /** Determine whether the Fingerprint scanner is available on the device. */
+    function hasHardwareAsync(): Promise<boolean>
+
+    /** Determine whether the device has saved fingerprints to use for authentication. */
+    function isEnrolledAsync(): Promise<boolean>
+  }
 
   //#region GLView
   // TODO: better defs because there is no complete documentation. I did it from the code.
@@ -703,10 +836,10 @@ declare module 'expo' {
     msaaSamples: number
   }
 
-  class GLView extends React.Component<GLViewProps, { msaaSamples: number }> { }
+  class GLView extends Component<GLViewProps, { msaaSamples: number }> { }
   //#endregion
 
-  class KeepAwake extends React.Component {
+  class KeepAwake extends Component {
     static activate(): void
     static deactivate(): void
   }
@@ -779,7 +912,7 @@ declare module 'expo' {
     maxZoomLevel?: number
   }
 
-  class MapView extends React.Component<MapViewProps, any> {
+  class MapView extends Component<MapViewProps, any> {
     static Animated: any
     static AnimatedRegion: any
   }
@@ -871,78 +1004,14 @@ declare module 'expo' {
       onPress?: Function
     }
 
-    class Marker extends React.Component<MarkerProps, any> { }
-    class Polyline extends React.Component<MapPolylineProps, any> { }
-    class Polygon extends React.Component<MapPolygonProps, any> { }
-    class Circle extends React.Component<MapCircleProps, any> { }
-    class UrlTile extends React.Component<MapUrlTitleProps, any> { }
-    class Callout extends React.Component<MapCalloutProps, any> { }
+    class Marker extends Component<MarkerProps, any> { }
+    class Polyline extends Component<MapPolylineProps, any> { }
+    class Polygon extends Component<MapPolygonProps, any> { }
+    class Circle extends Component<MapCircleProps, any> { }
+    class UrlTile extends Component<MapUrlTitleProps, any> { }
+    class Callout extends Component<MapCalloutProps, any> { }
   }
   //#endregion
-
-  /**
-   * Expo Video
-   */
-  interface VideoLoad {
-    duration: number
-    currentTime: number
-    canPlayReverse: boolean
-    canPlayFastForward: boolean
-    canPlaySlowForward: boolean
-    canPlaySlowReverse: boolean
-    canStepBackward: boolean
-    canStepForward: boolean
-    naturalSize: {
-      width: number;
-      heigth: number;
-      orientation: 'landscape' | 'portrait'
-    }
-  }
-  type VideoError =
-    {
-      code: any,
-      domain: any
-    } | {
-      what: any,
-      extra: any
-    }
-
-  interface VideoProgress {
-    currentTime: number
-    playableDuration: number
-  }
-
-  interface VideoSeek {
-    currentTime: number
-    seekTime: number
-  }
-
-  interface VideoProps {
-    source: any    // TODO: better def: string|*require(file)*
-    fullscreen?: boolean
-    resizeMode?: string    // TODO: resize mode instead of general string
-    repeat?: boolean
-    paused?: boolean
-    volume?: number
-    muted?: boolean
-    rate?: number
-    onLoadStart?: (param: { uri: string }) => any
-    onLoad?: (load: VideoLoad) => any
-    onError?: (error: { error: VideoError }) => any
-    onProgress?: (progress: VideoProgress) => any
-    onSeek?: (seek: VideoSeek) => any
-    onEnd?: () => any
-  }
-
-  class Video extends React.Component<VideoProps> {
-    static RESIZE_MODE_CONTAIN: string
-    static RESIZE_MODE_COVER: string
-    static RESIZE_MODE_STRETCH: string
-
-    seek(time: string): void
-    presentFullscreenPlayer(): void
-    dismissFullscreenPlayer(): void
-  }
 
   namespace DocumentPicker {
     interface Options {
@@ -1003,7 +1072,7 @@ declare module 'expo' {
       setMediaCachePolicy(iOS: MediaCachePolicy): any
     }
 
-    function withNativeAd(component: React.Component<{
+    function withNativeAd(component: Component<{
       icon?: string;
       coverImage?: string;
       title?: string;
@@ -1011,7 +1080,7 @@ declare module 'expo' {
       description?: string;
       callToActionText?: string;
       socialContext?: string;
-    }, any>): React.Component<{ adsManager: NativeAdsManager }, { ad: any, canRequestAds: boolean }>
+    }, any>): Component<{ adsManager: NativeAdsManager }, { ad: any, canRequestAds: boolean }>
 
     /**
      * Banner View
@@ -1025,7 +1094,7 @@ declare module 'expo' {
       onError: () => any
     }
 
-    class BannerView extends React.Component<BannerViewProps> { }
+    class BannerView extends Component<BannerViewProps> { }
 
     /**
      * Ad Settings
@@ -1251,9 +1320,8 @@ declare module 'expo' {
     const SYSTEM_BRIGHTNESS: PermissionType
   }
 
-  /** Register Root Component. Useful when using function like react-redux connect for example. */
-  // TODO: verify if it's a good idea or not to use generics.
-  function registerRootComponent(componentType: React.ComponentType): void
+  /** Sets the main component for Expo to use for your app. */
+  function registerRootComponent(component: React.ComponentType<any>): void
 
   namespace ScreenOrientation {
     namespace Orientation {
@@ -1619,6 +1687,325 @@ declare module 'expo' {
     function addNewVersionListenerExperimental(listener: Function): EventSubscription
   }
 
+  //#region Video
+  namespace Video {
+    type PlaybackSource = AV.PlaybackSource
+    type PlaybackStatus = AV.PlaybackStatus
+    type PlaybackStatusToSet = AV.PlaybackStatusToSet
+
+    type FullscreenUpdateEvent = {
+      fullscreenUpdate: 0 | 1 | 2 | 3,
+      status: AV.PlaybackStatus
+    }
+
+    type NaturalSize = {
+      width: number,
+      height: number,
+      orientation: 'portrait' | 'landscape'
+    }
+
+    type ReadyForDisplayEvent = {
+      naturalSize: NaturalSize,
+      status: AV.PlaybackStatus
+    }
+
+    type ResizeMode = 'contain' | 'cover' | 'stretch'
+  }
+
+  interface VideoLoad {
+    duration: number
+    currentTime: number
+    canPlayReverse: boolean
+    canPlayFastForward: boolean
+    canPlaySlowForward: boolean
+    canPlaySlowReverse: boolean
+    canStepBackward: boolean
+    canStepForward: boolean
+    naturalSize: {
+      width: number;
+      heigth: number;
+      orientation: 'landscape' | 'portrait'
+    }
+  }
+
+  type VideoError =
+    {
+      code: any,
+      domain: any
+    } | {
+      what: any,
+      extra: any
+    }
+
+  interface VideoProgress {
+    currentTime: number
+    playableDuration: number
+  }
+
+  interface VideoSeek {
+    currentTime: number
+    seekTime: number
+  }
+
+  /** See the AV documentation for more information. https://docs.expo.io/versions/latest/sdk/av.html */
+  interface VideoProps {
+    // Source stuff
+    /**
+     * The source of the video data to display. If this prop is null, or left blank, the video component will display nothing.
+     *
+     * Note that this can also be set on the ref via loadAsync(); see below or the AV documentation for further information.
+     *
+     * The following forms for the source are supported:
+     *
+     * - A dictionary of the form `{ uri: 'http://path/to/file' }` with a network URL pointing to a video file on the web.
+     * - `require('path/to/file')` for a video file asset in the source code directory.
+     * - An `Expo.Asset` object for a video file asset.
+     */
+    source?: AV.PlaybackSource
+
+    /**
+     * The source of an optional image to display over the video while it is loading. The following forms are supported:
+     *
+     * - A dictionary of the form `{ uri: 'http://path/to/file' }` with a network URL pointing to a image file on the web.
+     * - `require('path/to/file')` for an image file asset in the source code directory.
+     */
+    posterSource?: { uri: string } | number
+
+    // Callbacks
+    /** A function to be called regularly with the PlaybackStatus of the video. You will likely be using this a lot. */
+    onPlaybackStatusUpdate?: (status: AV.PlaybackStatus) => void
+
+    /** A function to be called when the video begins to be loaded into memory. Called without any arguments. */
+    onLoadStart?: () => void
+
+    /** A function to be called once the video has been loaded. The data is streamed so all of it may not have been fetched yet, just enough to render the first frame. The function is called with the `PlaybackStatus` of the video as its parameter. */
+    onLoad?: (status: AV.PlaybackStatus) => void
+
+    /** A function to be called if load or playback have encountered a fatal error. The function is passed a single error message string as a parameter. Errors sent here are also set on `playbackStatus.error` that are passed into the `onPlaybackStatusUpdate` callback. */
+    onError?: (error: string) => void
+
+    /**
+     * A function to be called when the video is ready for display. Note that this function gets called whenever the video’s natural size changes. The function is passed a dictionary with the following key-value pairs:
+     *
+     * - `naturalSize`: a dictionary with the following key-value pairs:
+     *   - `width`: a number describing the width in pixels of the video data.
+     *   - `height`: a number describing the height in pixels of the video data.
+     *   - `orientation`: a string describing the natural orientation of the video data, either 'portrait' or 'landscape'.
+     * - `status`: the PlaybackStatus of the video; see the AV documentation for further information.
+     */
+    onReadyForDisplay?: (event: Video.ReadyForDisplayEvent) => void
+
+    /**
+     * A function to be called when the state of the native iOS fullscreen view changes (controlled via the presentIOSFullscreenPlayer() and dismissIOSFullscreenPlayer() methods on the Video’s ref). The function is passed a dictionary with the following key-value pairs:
+     *
+     * - `fullscreenUpdate`: a number taking one of the following values:
+     *   - `Expo.Video.IOS_FULLSCREEN_UPDATE_PLAYER_WILL_PRESENT`: describing that the fullscreen player is about to present.
+     *   - `Expo.Video.IOS_FULLSCREEN_UPDATE_PLAYER_DID_PRESENT`: describing that the fullscreen player just finished presenting.
+     *   - `Expo.Video.IOS_FULLSCREEN_UPDATE_PLAYER_WILL_DISMISS`: describing that the fullscreen player is about to dismiss.
+     *   - `Expo.Video.IOS_FULLSCREEN_UPDATE_PLAYER_DID_DISMISS`: describing that the fullscreen player just finished dismissing.
+     * - `status`: the PlaybackStatus of the video; see the AV documentation for further information.
+     */
+    onIOSFullscreenUpdate?: (event: Video.FullscreenUpdateEvent) => void
+
+    // UI stuff
+    /** A boolean which, if set to true, will display native playback controls (such as play and pause) within the Video component. If you’d prefer to use custom controls, you can write them yourself, and/or check out the Videoplayer component. https://github.com/expo/videoplayer */
+    useNativeControls?: boolean
+
+    /**
+     * A string describing how the video should be scaled for display in the component view bounds. Must be one of the following values:
+     *
+     * - `Expo.Video.RESIZE_MODE_STRETCH` - Stretch to fill component bounds.
+     * - `Expo.Video.RESIZE_MODE_CONTAIN` - Fit within component bounds while preserving aspect ratio.
+     * - `Expo.Video.RESIZE_MODE_COVER` - Fill component bounds while preserving aspect ratio.
+     */
+    resizeMode?: Video.ResizeMode
+
+    /** A boolean which, if set to true, will display an image (whose source is set via the prop posterSource) while the video is loading. */
+    usePoster?: boolean
+
+    // Playback API
+    /** A dictionary setting a new `PlaybackStatusToSet` on the video. */
+    status?: AV.PlaybackStatusToSet
+    progressUpdateIntervalMillis?: number
+
+    /** The desired position of playback in milliseconds. */
+    positionMillis?: number
+
+    /** A boolean describing if the media is supposed to play. Playback may not start immediately after setting this value for reasons such as buffering. Make sure to update your UI based on the `isPlaying` and `isBuffering` properties of the `PlaybackStatus`. */
+    shouldPlay?: boolean
+
+    /** The desired playback rate of the media. This value must be between `0.0` and `32.0`. Only available on Android API version 23 and later and iOS. */
+    rate?: number
+
+    /** A boolean describing if we should correct the pitch for a changed rate. If set to `true`, the pitch of the audio will be corrected (so a rate different than `1.0` will timestretch the audio). */
+    shouldCorrectPitch?: boolean
+    volume?: number
+
+    /** A boolean describing if the audio of this media should be muted. */
+    isMuted?: boolean
+
+    /** A boolean describing if the media should play once (`false`) or loop indefinitely (`true`). */
+    isLooping?: boolean
+
+    // Required by react-native
+    scaleX?: number
+    scaleY?: number
+    translateX?: number
+    translateY?: number
+    rotation?: number
+  }
+
+  class Video extends Component<VideoProps> {
+    static RESIZE_MODE_CONTAIN: string
+    static RESIZE_MODE_COVER: string
+    static RESIZE_MODE_STRETCH: string
+
+    seek(time: string): void
+
+    /** (iOS only) This presents a fullscreen view of your video component on top of your app’s UI. Note that even if `useNativeControls` is set to `false`, native controls will be visible in fullscreen mode. Implementing a custom fullscreen mode is necessary if you want fullscreen on Android and/or with custom controls overlayed. */
+    presentFullscreenPlayer(): Promise<AV.PlaybackStatus>
+
+    /** (iOS only) This dismisses the fullscreen video view. */
+    dismissFullscreenPlayer(): Promise<AV.PlaybackStatus>
+
+    // Methods below are shared with the Sound class. The code is duplicated here in expo.d.ts because I couldn't figure a way to share it.
+
+    /**
+     * Gets the `PlaybackStatus` of the `playbackObject`.
+     *
+     * Returns a `Promise` that is fulfilled with the `PlaybackStatus` of the `playbackObject`.
+     */
+    getStatusAsync(): Promise<AV.PlaybackStatus>
+
+    /**
+     * Loads the media from source into memory and prepares it for playing. This must be called before calling setStatusAsync() or any of the convenience set status methods. This method can only be called if the playbackObject is in an unloaded state.
+     *
+     * Returns a `Promise` that is fulfilled with the `PlaybackStatus` of the `playbackObject` once it is loaded, or rejects if loading failed. The `Promise` will also reject if the `playbackObject` was already loaded. See below for details on `PlaybackStatus`.
+     */
+    loadAsync(
+      /**
+       * The source of the media. The following forms are supported:
+       * - A dictionary of the form `{ uri: 'http://path/to/file' }` with a network URL pointing to a media file on the web.
+       * - `require('path/to/file')` for a media file asset in the source code directory.
+       * - An `Expo.Asset object` for a media file asset.
+       */
+      source: AV.PlaybackSource,
+
+      /** The initial intended `PlaybackStatusToSet` of the `playbackObject`, whose values will override the default initial playback status. This value defaults to `{}` if no parameter is passed. See below for details on `PlaybackStatusToSet` and the default initial playback status. */
+      initialStatus?: AV.PlaybackStatusToSet,
+
+      /** If set to `true`, the system will attempt to download the resource to the device before loading. This value defaults to true. Note that at the moment, this will only work for sources of the form `require('path/to/file')` or `Expo.Asset` objects. */
+      downloadFirst?: boolean
+    ): Promise<AV.PlaybackStatus>
+
+    /** This is equivalent to `playbackObject.setStatusAsync({ shouldPlay: false })`. */
+    pauseAsync(): Promise<AV.PlaybackStatus>
+
+    /**
+     * This is equivalent to `playbackObject.setStatusAsync({ shouldPlay: true })`.
+     *
+     * Playback may not start immediately after calling this function for reasons such as buffering. Make sure to update your UI based on the `isPlaying` and `isBuffering` properties of the `PlaybackStatus`.
+     */
+    playAsync(): Promise<AV.PlaybackStatus>
+
+    /**
+     * This is equivalent to `playbackObject.setStatusAsync({ shouldPlay: true, positionMillis: millis })`.
+     *
+     * Playback may not start immediately after calling this function for reasons such as buffering. Make sure to update your UI based on the isPlaying and `isBuffering` properties of the `PlaybackStatus`.
+     */
+    playFromPositionAsync(
+      /** The desired position of playback in milliseconds. */
+      positionMillis: number,
+
+      /** This is equivalent to `playbackObject.setStatusAsync({ positionMillis: millis, seekMillisToleranceBefore: toleranceMillisBefore, seekMillisToleranceAfter: toleranceMillisAfter })`. The tolerances are used only on iOS. */
+      tolerances?: {
+        toleranceMillisBefore: number,
+        toleranceMillisAfter: number
+      }
+    ): Promise<AV.PlaybackStatus>
+
+    /**
+     * Replays the item. When using `playFromPositionAsync(0)` the item is seeked to the position at `0` ms. On iOS this method uses internal implementation of the player and is able to play the item from the beginning immediately.
+     *
+     * Returns a `Promise` that is fulfilled with the `PlaybackStatus` of the `playbackObject` once the new status has been set successfully, or rejects if setting the new status failed.
+     */
+    replayAsync(
+      /** The new `PlaybackStatusToSet` of the `playbackObject`, whose values will override the current playback status. */
+      status: AV.PlaybackStatusToSet
+    ): Promise<AV.PlaybackStatus>
+
+    /** This is equivalent to `playbackObject.setStatusAsync({ isLooping: value })`. */
+    setIsLoopingAsync(
+      /** A boolean describing if the media should play once (`false`) or loop indefinitely (`true`). */
+      isLooping: boolean
+    ): Promise<AV.PlaybackStatus>
+
+    /** This is equivalent to `playbackObject.setStatusAsync({ isMuted: value })`. */
+    setIsMutedAsync(
+      /**  A boolean describing if the audio of this media should be muted. */
+      isMuted: boolean
+    ): Promise<AV.PlaybackStatus>
+
+    /**
+     * Sets a function to be called regularly with the `PlaybackStatus` of the `playbackObject`. See below for details on `PlaybackStatus` and an example use case of this function.
+     *
+     * `onPlaybackStatusUpdate` will be called whenever a call to the API for this `playbackObject` completes (such as `setStatusAsync()`, `getStatusAsync()`, or `unloadAsync()`), and will also be called at regular intervals while the media is in the loaded state. Set `progressUpdateIntervalMillis` via `setStatusAsync()` or `setProgressUpdateIntervalAsync()` to modify the interval with which `onPlaybackStatusUpdate` is called while loaded.
+     */
+    setOnPlaybackStatusUpdate(
+      /** A function taking a single parameter `PlaybackStatus`. */
+      onPlaybackStatusUpdate?: (status: AV.PlaybackStatus) => void
+    ): void
+
+    /** This is equivalent to `playbackObject.setStatusAsync({ positionMillis: millis })`. */
+    setPositionAsync(
+      positionMillis: number,
+
+      /** This is equivalent to `playbackObject.setStatusAsync({ positionMillis: millis, seekMillisToleranceBefore: toleranceMillisBefore, seekMillisToleranceAfter: toleranceMillisAfter })`. The tolerances are used only on iOS. */
+      tolerances?: {
+        toleranceMillisBefore: number,
+        toleranceMillisAfter: number
+      }
+    ): Promise<AV.PlaybackStatus>
+
+    /** This is equivalent to `playbackObject.setStatusAsync({ progressUpdateIntervalMillis: millis })`. */
+    setProgressUpdateIntervalAsync(
+      /** The new minimum interval in milliseconds between calls of `onPlaybackStatusUpdate`. */
+      progressUpdateIntervalMillis: number
+    ): Promise<AV.PlaybackStatus>
+
+    /** This is equivalent to `playbackObject.setStatusAsync({ rate: value, shouldCorrectPitch: shouldCorrectPitch })`. */
+    setRateAsync(
+      /** The desired playback rate of the media. This value must be between `0.0` and `32.0`. Only available on Android API version 23 and later and iOS. */
+      rate: number,
+
+      /** A boolean describing if we should correct the pitch for a changed rate. If set to `true`, the pitch of the audio will be corrected (so a rate different than `1.0` will timestretch the audio). */
+      shouldCorrectPitch: boolean
+    ): Promise<AV.PlaybackStatus>
+
+    /** Sets a new `PlaybackStatusToSet` on the `playbackObject`. This method can only be called if the media has been loaded. Return a `Promise` that is fulfilled with the `PlaybackStatus` of the `playbackObject` once the new status has been set successfully, or rejects if setting the new status failed. */
+    setStatusAsync(
+      /** The new `PlaybackStatusToSet` of the `playbackObject`, whose values will override the current playback status. */
+      status: AV.PlaybackStatusToSet
+    ): Promise<AV.PlaybackStatus>
+
+    /** This is equivalent to `playbackObject.setStatusAsync({ volume: value })`. */
+    setVolumeAsync(
+      /** A number between `0.0` (silence) and `1.0` (maximum volume). */
+      volume: number
+    ): Promise<AV.PlaybackStatus>
+
+    /** This is equivalent to `playbackObject.setStatusAsync({ shouldPlay: false, positionMillis: 0 })`. */
+    stopAsync(): Promise<AV.PlaybackStatus>
+
+    /**
+     * Unloads the media from memory. `loadAsync()` must be called again in order to be able to play the media.
+     *
+     * Returns a `Promise` that is fulfilled with the `PlaybackStatus` of the `playbackObject` once it is unloaded, or rejects if unloading failed. See below for details on `PlaybackStatus`.
+     */
+    unloadAsync(): Promise<AV.PlaybackStatus>
+  }
+  //#endregion
+
   namespace WebBrowser {
     function openBrowserAsync(url: string): Promise<{ type: 'cancelled' | 'dismissed' }>
     function dismissBrowser(): Promise<{ type: 'dismissed' }>
@@ -1680,15 +2067,21 @@ declare module '@expo/vector-icons' {
     name: 'acrobat' | 'amazon' | 'android' | 'angellist' | 'aol' | 'appnet' | 'appstore' | 'bitbucket' | 'bitcoin' | 'blogger' | 'buffer' | 'cal' | 'call' | 'cart' | 'chrome' | 'cloudapp' | 'creativecommons' | 'delicious' | 'digg' | 'disqus' | 'dribbble' | 'dropbox' | 'drupal' | 'dwolla' | 'email' | 'eventasaurus' | 'eventbrite' | 'eventful' | 'evernote' | 'facebook' | 'fivehundredpx' | 'flattr' | 'flickr' | 'forrst' | 'foursquare' | 'github' | 'gmail' | 'google' | 'googleplay' | 'googleplus' | 'gowalla' | 'grooveshark' | 'guest' | 'html5' | 'ie' | 'instagram' | 'instapaper' | 'intensedebate' | 'itunes' | 'klout' | 'lanyrd' | 'lastfm' | 'lego' | 'linkedin' | 'lkdto' | 'logmein' | 'macstore' | 'meetup' | 'myspace' | 'ninetyninedesigns' | 'openid' | 'opentable' | 'paypal' | 'persona' | 'pinboard' | 'pinterest' | 'plancast' | 'plurk' | 'pocket' | 'podcast' | 'posterous' | 'print' | 'quora' | 'reddit' | 'rss' | 'scribd' | 'skype' | 'smashing' | 'songkick' | 'soundcloud' | 'spotify' | 'stackoverflow' | 'statusnet' | 'steam' | 'stripe' | 'stumbleupon' | 'tumblr' | 'twitter' | 'viadeo' | 'vimeo' | 'vk' | 'weibo' | 'wikipedia' | 'windows' | 'wordpress' | 'xing' | 'yahoo' | 'ycombinator' | 'yelp' | 'youtube'
   }
 
-  class Entypo extends Component<EntypoProps> { }
-  class EvilIcons extends Component<EvilIconsProps> { }
-  class Feather extends Component<FeatherProps> { }
-  class FontAwesome extends Component<FontAwesomeProps> { }
-  class Foundation extends Component<FoundationProps> { }
-  class Ionicons extends Component<IoniconsProps> { }
-  class MaterialCommunityIcons extends Component<MaterialCommunityIconsProps> { }
-  class MaterialIcons extends Component<MaterialIconsProps> { }
-  class Octicons extends Component<OcticonsProps> { }
-  class SimpleLineIcons extends Component<SimpleLineIconsProps> { }
-  class Zocial extends Component<ZocialProps> { }
+  abstract class BaseIconsComponent<Props> extends Component<Props> {
+    static Button: any
+    static font: any
+    static glyphMap: any
+  }
+
+  class Entypo extends BaseIconsComponent<EntypoProps> { }
+  class EvilIcons extends BaseIconsComponent<EvilIconsProps> { }
+  class Feather extends BaseIconsComponent<FeatherProps> { }
+  class FontAwesome extends BaseIconsComponent<FontAwesomeProps> { }
+  class Foundation extends BaseIconsComponent<FoundationProps> { }
+  class Ionicons extends BaseIconsComponent<IoniconsProps> { }
+  class MaterialCommunityIcons extends BaseIconsComponent<MaterialCommunityIconsProps> { }
+  class MaterialIcons extends BaseIconsComponent<MaterialIconsProps> { }
+  class Octicons extends BaseIconsComponent<OcticonsProps> { }
+  class SimpleLineIcons extends BaseIconsComponent<SimpleLineIconsProps> { }
+  class Zocial extends BaseIconsComponent<ZocialProps> { }
 }
