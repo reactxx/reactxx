@@ -12,16 +12,16 @@ export default function createTypography(palette: Mui.Palette, optionOrCreator: 
       fontFamily: 'Roboto_Light'
     } as Mui.TextStyleCommon,
     fontWeightLight = '300',
-    fontWeightMediumNew = {
-      fontWeight: '500',
-      fontFamily: 'Roboto_Medium'
-    } as Mui.TextStyleCommon,
-    fontWeightMedium = '500',
     fontWeightRegularNew = {
       fontWeight: '400',
       fontFamily: 'Roboto'
     } as Mui.TextStyleCommon,
     fontWeightRegular = '400',
+    fontWeightMediumNew = {
+      fontWeight: '500',
+      fontFamily: 'Roboto_Medium'
+    } as Mui.TextStyleCommon,
+    fontWeightMedium = '500',
     //web fontFamily
     fontFamily = '"Roboto", "Helvetica", "Arial", sans-serif',
     //native font assets path

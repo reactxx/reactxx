@@ -120,7 +120,7 @@ const button: Mui.CodeSFCNative<Shape> = props => {
   //console.log(viewStyle, textStyle)
 
   const childs = React.Children.toArray(children).map((ch, idx) => {
-    if (typeof ch === 'string' || typeof ch === 'number') return <Text key={idx} style={textStyle}>{ch}</Text>
+    if (typeof ch === 'string' || typeof ch === 'number') return <Text key={idx} style={textStyle}>{ch.toString().toUpperCase()}</Text>
     else return React.cloneElement(ch, { ...ch.props, style: { ...textStyle, ...ch.props.style || null } })
   })
 

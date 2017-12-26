@@ -3,10 +3,13 @@
   "compilerOptions": {
     "target": "es5",
     "module": "system",
+    "rootDir": "src",
+    "outDir": "deploy",
+
+    "moduleResolution": "node",
+
     "inlineSourceMap": true,
     "inlineSources": true,
-    "rootDir": "src",
-    "outDir": "deploy/lib",
 
     "jsx": "react",
     "lib": [

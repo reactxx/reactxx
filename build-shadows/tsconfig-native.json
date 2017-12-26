@@ -1,12 +1,11 @@
 ﻿{
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "es5",
-    "module": "system",
-    "inlineSourceMap": true,
-    "inlineSources": true,
+    "target": "es2017",
     "rootDir": "src",
-    "outDir": "deploy/lib",
+    "outDir": "deploy/es",
+
+    "moduleResolution": "node",
 
     "jsx": "react",
     "lib": [

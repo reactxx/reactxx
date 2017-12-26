@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "types", "types\types.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "build-types-material-ui", "build-types-material-ui\build-types-material-ui.csproj", "{EF7A4603-8230-43D0-A39B-94F6F255D111}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "build-shadows", "build-shadows\build-shadows.csproj", "{D7C88865-CFBB-4BEB-A427-59C0B95115BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{EF7A4603-8230-43D0-A39B-94F6F255D111}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF7A4603-8230-43D0-A39B-94F6F255D111}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF7A4603-8230-43D0-A39B-94F6F255D111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7C88865-CFBB-4BEB-A427-59C0B95115BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7C88865-CFBB-4BEB-A427-59C0B95115BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7C88865-CFBB-4BEB-A427-59C0B95115BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7C88865-CFBB-4BEB-A427-59C0B95115BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{21F14E62-69A7-470C-A490-FF15A67824EA} = {69DC2C05-29A6-46A9-AF1E-CECEE459CB07}
 		{243C870C-4D5B-4784-AE34-D67139327694} = {69DC2C05-29A6-46A9-AF1E-CECEE459CB07}
 		{EF7A4603-8230-43D0-A39B-94F6F255D111} = {69DC2C05-29A6-46A9-AF1E-CECEE459CB07}
+		{D7C88865-CFBB-4BEB-A427-59C0B95115BC} = {69DC2C05-29A6-46A9-AF1E-CECEE459CB07}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DBB3A9DC-0A4B-40A7-B600-3305ADDDFE1A}

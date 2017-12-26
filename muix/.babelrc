@@ -12,6 +12,7 @@
         "root": [ "." ],
         "alias": {
           "muix-primitives": "./deploy/es/primitives/native",
+          "muix-components": "./deploy/es/components/native",
           "muix-styles": "./deploy/es/styles/native",
           "^muix-icons/(.+)": "muix-icons"
         }

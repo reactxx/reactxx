@@ -1,1 +1,1 @@
-# reactx-icons
+# muix-icons
