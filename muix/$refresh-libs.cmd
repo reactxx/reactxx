@@ -17,5 +17,3 @@ cd %root%node_modules\@types
 rmdir node /s /q
 
 call %root%$compile
-
-call npm update https://github.com/mui-x/muix/blob/master/types/expo/types-expo-0.1.2.tgz?raw=true
