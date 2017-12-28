@@ -18,7 +18,7 @@ import { View } from 'muix-primitives'
 //})
 
 const app: React.SFC = props => <AppContainer>
-  <View style={{ marginTop: 24 }}>
+  <View style={{ marginTop: 60 }}>
     <Button color='primary' raised onClick={ev => ev && ev.preventDefault()}>Hallo Button</Button>
   </View>
 </AppContainer>

@@ -4,6 +4,8 @@ import range from 'lodash/range'
 
 import { toPlatformSheetX, toPlatformRuleSetX } from '../common/index'
 
+import getShadows from 'muix-shadows'
+
 export { default as createTypography } from '../native/createTypography'
 
 export const toPlatformRuleSet = <T extends Mui.CSSPropertiesNative>(style: Mui.RulesetX<T>) => toPlatformRuleSetX(style, true) as T
@@ -22,11 +24,12 @@ const shadow = (deep: number) => ({
 
 let elev = 0.25
 
-export const shadows: Mui.ThemeShadows = [
-  //{ elevation: 1, shadowOpacity: 0, shadowOffset: { width: 0, height: 1 }, shadowColor: 'rgba(0, 0, 0, 0.2)', shadowRadius: 3 },
-  {},
-  ...range(1, 25).map(idx => shadow(idx))
-]
+export const shadows: ReactN.ViewStyle[] = getShadows()
+//  [
+//  //{ elevation: 1, shadowOpacity: 0, shadowOffset: { width: 0, height: 1 }, shadowColor: 'rgba(0, 0, 0, 0.2)', shadowRadius: 3 },
+//  {},
+//  ...range(1, 25).map(idx => shadow(idx))
+//]
 
 export { sheetCreator, default as createMuiTheme } from '../common/index'
 

@@ -5,11 +5,11 @@ import { Platform, View, Text } from 'react-native'
 import { withStyles, classNames, toPlatformRuleSet, sheetCreator } from 'muix-styles'
 
 import { Shape } from '../../common/Button/Button'
-import ButtonBase from '../ButtonBase/ButtonBase'
+import ButtonBase, { buttonBase } from '../ButtonBase/ButtonBase'
 
 export type ButtonShape = Shape
 
-const sheet = sheetCreator<Shape>(({ typography: typo, palette, spacing, shadowsNew }) => ({ 
+const sheet = sheetCreator<Shape>(({ typography: typo, palette, spacing, shadowsNew }) => ({
   native: {
     root: {
       alignItems: 'center',
@@ -47,9 +47,9 @@ const sheet = sheetCreator<Shape>(({ typography: typo, palette, spacing, shadows
     },
 
     ripple: {
-      backgroundColor: palette.common.black,
-      opacity: 0.12,
-    }, 
+      //backgroundColor: palette.common.black, opacity: 0.12,
+      backgroundColor: 'white', opacity: 0.7,
+    },
 
     fab: {
       padding: 0,
@@ -81,56 +81,128 @@ const sheet = sheetCreator<Shape>(({ typography: typo, palette, spacing, shadows
   web: {},
 }))
 
-const button: Mui.CodeSFCNative<Shape> = props => {
-  const {
-    children,
-    classes,
-    color = 'default',
-    dense,
-    disabled,
-    fab,
-    style,
-    raised,
-    ...other
-  } = props
+class button extends buttonBase<Shape> {
 
-  const flat = !raised && !fab
-  const viewStyle = classNames<ReactN.ViewStyle>(
-    classes.root,
-    (raised || fab) && classes.raised,
-    fab && classes.fab,
-    !flat && color === 'accent' && classes.raisedAccent,
-    !flat && color === 'primary' && classes.raisedPrimary,
-    dense && classes.dense,
-    raised && disabled && classes.raisedDisable,
-    style,
-  )
-  const textStyle = classNames<ReactN.TextStyle>(
-    classes.rootLabel,
-    flat && color === 'accent' && classes.flatLabelAccent,
-    flat && color === 'contrast' && classes.flatLabelContrast,
-    flat && color === 'primary' && classes.flatLabelPrimary,
-    !flat && color === 'accent' && classes.raisedLabelAccent,
-    !flat && color === 'contrast' && classes.raisedLabelContrast,
-    !flat && color === 'primary' && classes.raisedLabelPrimary,
-    dense && classes.denseLabel,
-    disabled && classes.disabledLabel,
-  )
+  render() {
 
-  //console.log(viewStyle, textStyle)
+    const {
+      children,
+      classes,
+      color = 'default',
+      dense,
+      disabled,
+      fab,
+      style,
+      raised,
+      ...other
+    } = this.props
 
-  const childs = React.Children.toArray(children).map((ch, idx) => {
-    if (typeof ch === 'string' || typeof ch === 'number') return <Text key={idx} style={textStyle}>{ch.toString().toUpperCase()}</Text>
-    else return React.cloneElement(ch, { ...ch.props, style: { ...textStyle, ...ch.props.style || null } })
-  })
+    const flat = !raised && !fab
 
-  return <ButtonBase style={viewStyle} disabled={disabled} {...other}>{childs}</ButtonBase>
+    const textStyle = classNames<ReactN.TextStyle>(
+      classes.rootLabel,
+      flat && color === 'accent' && classes.flatLabelAccent,
+      flat && color === 'contrast' && classes.flatLabelContrast,
+      flat && color === 'primary' && classes.flatLabelPrimary,
+      !flat && color === 'accent' && classes.raisedLabelAccent,
+      !flat && color === 'contrast' && classes.raisedLabelContrast,
+      !flat && color === 'primary' && classes.raisedLabelPrimary,
+      dense && classes.denseLabel,
+      disabled && classes.disabledLabel,
+    )
+
+    //console.log(viewStyle, textStyle)
+
+    const childs = React.Children.toArray(children).map((ch, idx) => {
+      if (typeof ch === 'string' || typeof ch === 'number') return <Text key={idx} style={textStyle}>{ch.toString().toUpperCase()}</Text>
+      else return React.cloneElement(ch, { ...ch.props, style: { ...textStyle, ...ch.props.style || null } })
+    })
+
+    return this.doRender(childs)
+  }
+
+  getRootStyle() {
+    const {
+      classes,
+      color = 'default',
+      dense,
+      disabled,
+      fab,
+      style,
+      raised,
+    } = this.props
+
+    const flat = !raised && !fab
+    const active = this.state.active === true
+
+    return classNames<ReactN.ViewStyle>(
+      classes.root,
+      (raised || fab) && classes.raised,
+      fab && classes.fab,
+      !flat && color === 'accent' && classes.raisedAccent,
+      !flat && color === 'primary' && classes.raisedPrimary,
+      dense && classes.dense,
+      raised && disabled && classes.raisedDisable,
+      active && raised && !disabled && classes.raisedActive,
+      active && fab && !disabled && classes.fabActive,
+      style,
+    )
+  }
 }
 
+//const button: Mui.CodeSFCNative<Shape> = props => {
 
+//  const {
+//    children,
+//    classes,
+//    color = 'default',
+//    dense,
+//    disabled,
+//    fab,
+//    style,
+//    raised,
+//    ...other
+//  } = props
+
+//  const flat = !raised && !fab
+//  const viewStyle = classNames<ReactN.ViewStyle>(
+//    classes.root,
+//    (raised || fab) && classes.raised,
+//    fab && classes.fab,
+//    !flat && color === 'accent' && classes.raisedAccent,
+//    !flat && color === 'primary' && classes.raisedPrimary,
+//    dense && classes.dense,
+//    raised && disabled && classes.raisedDisable,
+//    style,
+//  )
+//  const textStyle = classNames<ReactN.TextStyle>(
+//    classes.rootLabel,
+//    flat && color === 'accent' && classes.flatLabelAccent,
+//    flat && color === 'contrast' && classes.flatLabelContrast,
+//    flat && color === 'primary' && classes.flatLabelPrimary,
+//    !flat && color === 'accent' && classes.raisedLabelAccent,
+//    !flat && color === 'contrast' && classes.raisedLabelContrast,
+//    !flat && color === 'primary' && classes.raisedLabelPrimary,
+//    dense && classes.denseLabel,
+//    disabled && classes.disabledLabel,
+//  )
+
+//  //console.log(viewStyle, textStyle)
+
+//  const childs = React.Children.toArray(children).map((ch, idx) => {
+//    if (typeof ch === 'string' || typeof ch === 'number') return <Text key={idx} style={textStyle}>{ch.toString().toUpperCase()}</Text>
+//    else return React.cloneElement(ch, { ...ch.props, style: { ...textStyle, ...ch.props.style || null } })
+//  })
+
+//  return <ButtonBase style={viewStyle} disabled={disabled} {...other}>{childs}</ButtonBase>
+//}
+
+
+//const Button = withStyles<Shape>(sheet, { name: 'MuiButton' })(button)
 const Button = withStyles<Shape>(sheet, { name: 'MuiButton' })(button)
 
 
 //const btn = <Button classes={{ root: {}, denseLabel: { color: '' } }} color='accent' onClick={null} />
 
+//export default Button
 export default Button
