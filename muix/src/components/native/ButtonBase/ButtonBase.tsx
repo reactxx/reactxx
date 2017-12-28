@@ -57,7 +57,6 @@ export class buttonBase<R extends Shape> extends React.Component<Mui.CodePropsNa
 
   state: { active?: boolean } = {}
   scaleValue = new Animated.Value(minRippleSize)
-  //maxOpacity = (this.props.style && this.props.style.opacity) || 0.35
   opacityValue = new Animated.Value(0)
   scale: Animated.CompositeAnimation
   opacity: Animated.CompositeAnimation
@@ -89,8 +88,8 @@ export class buttonBase<R extends Shape> extends React.Component<Mui.CodePropsNa
         top: - (radius - height / 2),
         width: radius * 2,
         height: radius * 2,
-        borderRadius: radius,
-        transform: [{ scale: scaleValue as any}],
+        borderRadius: radius, //inValue.interpolate({ inputRange: [0, 1], outputRange: [0, radius] }) as any,
+        transform: [{ scale: scaleValue as any }],
         opacity: opacityValue as any,
       } as ReactN.ViewStyle
 
