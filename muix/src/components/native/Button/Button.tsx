@@ -48,7 +48,7 @@ const sheet = sheetCreator<Shape>(({ typography: typo, palette, spacing, shadows
 
     ripple: {
       //backgroundColor: palette.common.black, opacity: 0.12,
-      backgroundColor: 'white', opacity: 0.7,
+      backgroundColor: 'white', opacity: 0.35,
     },
 
     fab: {

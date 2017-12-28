@@ -11,8 +11,8 @@ export type ButtonBaseShape = Shape
 const sheet = sheetCreator<Shape>(({ palette }) => ({
   native: {
     ripple: {
-      backgroundColor: palette.common.black,
-      opacity: 0.12,
+      backgroundColor: palette.common.white,
+      opacity: 0.35,
     },
     root: {
       alignItems: 'center',
@@ -57,25 +57,25 @@ export class buttonBase<R extends Shape> extends React.Component<Mui.CodePropsNa
 
   state: { active?: boolean } = {}
   scaleValue = new Animated.Value(minRippleSize)
-  maxOpacity = (this.props.style && this.props.style.opacity) || 0.35
-  opacityValue = new Animated.Value(this.maxOpacity)
+  //maxOpacity = (this.props.style && this.props.style.opacity) || 0.35
+  opacityValue = new Animated.Value(0)
   scale: Animated.CompositeAnimation
   opacity: Animated.CompositeAnimation
   rect: Partial<LayoutRectangle> = {}
 
   clear() {
-    const { scale, opacity, maxOpacity } = this
+    const { scale, opacity } = this
     if (scale) scale.stop(); delete this.scale
     if (opacity) opacity.stop(); delete this.opacity
     this.scaleValue.setValue(minRippleSize);
-    this.opacityValue.setValue(maxOpacity);
+    this.opacityValue.setValue(0);
   }
 
   onPressedIn = (() => this.setState({ active: true })).bind(this)
   onPressedOut = (() => this.setState({ active: false })).bind(this)
 
   doRender(children: React.ReactNode) {
-    const { scaleValue, opacityValue, onPressedIn, onPressedOut, rect: { width, height }, state: { active }, props: { style, disabled, onPress, classes, theme, innerRef, disableRipple } } = this
+    const { scaleValue, opacityValue, onPressedIn, onPressedOut, rect: { width, height }, state: { active }, props: { style, disabled, onPress, classes: { ripple }, theme, innerRef, disableRipple } } = this
 
     const renderRipple = () => {
       if (disabled || disableRipple || !width || !height || typeof active == 'undefined') return null
@@ -83,7 +83,7 @@ export class buttonBase<R extends Shape> extends React.Component<Mui.CodePropsNa
       const radius = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2))
 
       const style = {
-        ...classes.ripple,
+        ...ripple,
         position: 'absolute',
         left: -(radius - width / 2),
         top: - (radius - height / 2),
@@ -101,6 +101,7 @@ export class buttonBase<R extends Shape> extends React.Component<Mui.CodePropsNa
 
     if (active === true) {
       this.clear()
+      opacityValue.setValue(ripple.opacity)
       this.scale = Animated.timing(scaleValue, {
         toValue: 1,
         duration: theme.transitions.duration.short,
