@@ -104,8 +104,13 @@ export class buttonBase<R extends Shape> extends React.Component<Mui.CodePropsNa
       this.scale = Animated.timing(scaleValue, {
         toValue: 1,
         duration: theme.transitions.duration.short,
-        //easing: Easing.out(Easing.exp), 
-        easing: Easing.bezier(0.0, 0.0, 0.2, 1),
+        //http://xaedes.de/dev/transitions/
+        //http://cubic-bezier.com
+        //easing: Easing.inOut(Easing.exp),
+        //easing: Easing.inOut(Easing.cubic),
+        //easing: Easing.bezier(.71, 0, .14, 1),
+        //easing: Easing.bezier(0.0, 0.0, 0.9, 1),
+        easing: Easing.linear,
         useNativeDriver: Platform.OS === 'android',
       })
       this.scale.start()
