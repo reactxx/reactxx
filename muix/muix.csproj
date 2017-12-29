@@ -123,13 +123,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\components\common\ButtonBase\ButtonBase.ts" />
-    <TypeScriptCompile Include="src\components\common\Button\Button.ts" />
+    <TypeScriptCompile Include="src\components\common\ButtonBase\ButtonBase.d.ts" />
+    <TypeScriptCompile Include="src\components\common\Button\Button.d.ts" />
     <TypeScriptCompile Include="src\components\native\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\native\Button\Button.tsx" />
     <TypeScriptCompile Include="src\components\web\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
+    <TypeScriptCompile Include="src\primitives\common\Icon\Icon-d.d.ts" />
     <TypeScriptCompile Include="src\test\common\components\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\index.tsx" />
@@ -175,7 +176,6 @@
     <TypeScriptCompile Include="src\typings\shared\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="src\styles\web\inline-styles.tsx" />
     <TypeScriptCompile Include="src\styles\web\withStyles.tsx" />
-    <TypeScriptCompile Include="src\typings\components-d.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

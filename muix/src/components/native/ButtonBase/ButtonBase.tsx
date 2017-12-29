@@ -1,14 +1,14 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
-import { Shape } from '../../common/ButtonBase/ButtonBase'
+//import { Shape } from '../../common/ButtonBase/ButtonBase'
 
 import { View, TouchableWithoutFeedback, Animated, Easing, Platform, Text, LayoutRectangle } from 'react-native';
 
 import { sheetCreator, withStyles, classNames } from 'muix-styles'
 
-export type ButtonBaseShape = Shape
+//export type ButtonBaseShape = Shape
 
-const sheet = sheetCreator<Shape>(({ palette }) => ({
+const sheet = sheetCreator<ButtonBase.Shape>(({ palette }) => ({
   native: {
     ripple: {
       backgroundColor: palette.common.white,
@@ -53,7 +53,7 @@ const sheet = sheetCreator<Shape>(({ palette }) => ({
 
 const minRippleSize = 0.01
 
-export class buttonBase<R extends Shape> extends React.Component<Mui.CodePropsNative<R>> {
+export class buttonBase<R extends ButtonBase.Shape> extends React.Component<Mui.CodePropsNative<R>> {
 
   state: { active?: boolean } = {}
   scaleValue = new Animated.Value(minRippleSize)
@@ -207,7 +207,7 @@ export class buttonBase<R extends Shape> extends React.Component<Mui.CodePropsNa
 //}
 
 //const ButtonBase = withStyles<Shape>(sheet, { name: 'MuiButtonBase' })(buttonBase)
-const ButtonBase = withStyles<Shape>(sheet, { name: 'MuiButtonBase' })(buttonBase)
+const ButtonBase = withStyles<ButtonBase.Shape>(sheet, { name: 'MuiButtonBase' })(buttonBase)
 
 //const b = <ButtonBase style={{}} onClick={null} />
 

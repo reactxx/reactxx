@@ -47,7 +47,7 @@ export const toPlatformSheetX = (rules: Mui.PartialSheetX<Mui.Shape>, isNative: 
 }
 
 //create platform specific Overrides from cross platform Overrides
-const getOverridesX = (theme: Mui.ThemeNew, source: Mui.OverridesNew) => {
+const getOverridesX = (theme: Mui.ThemeNew, source: Mui.ThemeValueOrCreator<Mui.OverridesNew>) => {
   if (!source) return null
   if (typeof source === 'function') source = source(theme)
   const result: Mui.Overrides = {}

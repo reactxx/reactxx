@@ -6,7 +6,7 @@
   "dependencies": {
     "deepmerge": "^2.0.1",
     "expo": "^24.0.0",
-    "muix-icons": "^0.1.55",
+    "muix-icons": "^0.1.58",
     "muix-shadows": "^0.1.16",
     "react": "16.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
@@ -34,7 +34,7 @@
       "material-ui": "npm:material-ui@^1.0.0-beta.25",
       "core-js": "npm:core-js@^2.5.1",
       "deepmerge": "npm:deepmerge@^2.0.1",
-      "muix-icons": "npm:muix-icons@^0.1.55",
+      "muix-icons": "npm:muix-icons@^0.1.58",
       "recompose": "npm:recompose@^0.26.0",
       "tslib": "npm:tslib@^1.8.1",
       "warning": "npm:warning@^3.0.0"

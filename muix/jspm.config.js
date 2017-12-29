@@ -61,7 +61,7 @@ SystemJS.config({
     "core-js": "npm:core-js@2.5.3",
     "deepmerge": "npm:deepmerge@2.0.1",
     "material-ui": "npm:material-ui@1.0.0-beta.24",
-    "muix-icons": "npm:muix-icons@0.1.55",
+    "muix-icons": "npm:muix-icons@0.1.58",
     "react-jss": "npm:react-jss@8.2.0",
     "recompose": "npm:recompose@0.26.0",
     "tslib": "npm:tslib@1.8.1",

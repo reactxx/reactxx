@@ -3,11 +3,11 @@ import React from 'react'
 
 import MuiButtonBase from 'material-ui/ButtonBase/ButtonBase'
 import { withStylesX } from 'muix-styles/web'
-import { Shape } from '../../common/ButtonBase/ButtonBase'
+//import { Shape } from '../../common/ButtonBase/ButtonBase'
 
-export type ButtonBaseShape = Shape
+//export type ButtonBaseShape = Shape
 
-const ButtonBase = withStylesX<Shape>(MuiButtonBase as any)
+const ButtonBase = withStylesX<ButtonBase.Shape>(MuiButtonBase as any)
 
 export default ButtonBase
 

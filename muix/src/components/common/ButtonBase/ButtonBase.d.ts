@@ -11,3 +11,10 @@ declare namespace ButtonBase {
     propsNative: ReactN.TouchableOpacityProperties
   }>
 }
+
+declare namespace Mui {
+  interface Shapes {
+    MuiButton?: Mui.SheetXOrCreator<Button.Shape>
+  }
+}
+

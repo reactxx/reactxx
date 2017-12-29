@@ -12,4 +12,4 @@ export { Shape as TypographyShape } from '../common/Typography/Typography'
 
 
 export { default as Icon } from './Icon/Icon'
-export { iconColor, iconSize, Shape as IconShape } from '../common/Icon/Icon' 
+export { iconColor, iconSize } from '../common/Icon/Icon' 

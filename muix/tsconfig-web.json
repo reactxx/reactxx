@@ -52,11 +52,8 @@
       "esnext.asynciterable"
     ]
   },
-  "include": [ "./src/**/*" ],
-  "exclude": [
-    "jspm_packages",
-    "node_modules",
-    "deploy",
-    "trash"
+  "include": [
+    "src/**/*",
+    "node_modules/muix-icons/typings.d.ts"
   ]
 }

@@ -32,7 +32,7 @@ const theme = createMuiTheme({
         display2: { color: cyan.A700 },
       }
     } as Mui.PartialSheetX<TypographyShape>
-  }
+  } as any
 })
 
 const app2 = () => <Typography classes={{ root: { fontWeight: '500', textDecorationLine: 'line-through', color: 'blue' } }}>TEXT</Typography>
