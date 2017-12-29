@@ -9,6 +9,8 @@ export interface INativeShadow {
 }
 const android = [0, 2, 4, 7, 10, 13, 16, 18, 20, 22, 24, 26, 28, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
 
+const defaultShadow: INativeShadow = { shadowColor: 'transparent', shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0, shadowRadius: 0, elevation: 0 }
+
 const iosW = (deep: number) => {
   switch (deep) {
     case 0: case 1: return 0
@@ -40,7 +42,7 @@ const iosRadius = (deep: number) => {
 }
 
 const getNativeShadow = (deep) => {
-  if (deep == 0) return {} as INativeShadow
+  if (deep == 0) return defaultShadow
   return {
     shadowColor: 'black',
     shadowOffset: { width: iosW(deep), height: iosH(deep) },

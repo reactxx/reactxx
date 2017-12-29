@@ -7,10 +7,10 @@ export const sheet = sheetCreator<MuixScrollView.Shape>(({ palette }) => ({
   common: {
     root: {
       web: {
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'auto',
-        height: '100%',
+        flex: 1,
+        overflowX: 'hidden',
+        overflowY: 'auto',
+        WebkitOverflowScrolling: 'touch',
       }
     },
     text: {}

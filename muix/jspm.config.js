@@ -31,7 +31,7 @@ SystemJS.config({
     "npm:*.json"
   ],
   map: {
-    "muix-shadows": "npm:muix-shadows@0.1.16",
+    "muix-shadows": "npm:muix-shadows@0.1.17",
     "assert": "npm:jspm-nodelibs-assert@0.2.1",
     "buffer": "npm:jspm-nodelibs-buffer@0.2.3",
     "child_process": "npm:jspm-nodelibs-child_process@0.2.1",

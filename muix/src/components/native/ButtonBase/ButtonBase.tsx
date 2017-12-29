@@ -90,6 +90,8 @@ export class buttonBase<R extends MuixButtonBase.Shape> extends React.Component<
       this.opacity.start(() => this.clear())
     }
 
+    //console.log(this.getRootStyle())
+
     return <TouchableWithoutFeedback disabled={disabled} onPress={onPress} onPressIn={onPressedIn} onPressOut={onPressedOut} onLayout={({ nativeEvent: { layout } }) => this.rect = layout} ref={div => innerRef && innerRef(div)} >
       <View style={this.getRootStyle()}>
         {renderRipple()}

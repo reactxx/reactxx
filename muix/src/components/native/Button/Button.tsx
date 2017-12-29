@@ -45,7 +45,10 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
     },
 
     fab: {
-      padding: 0,
+      paddingTop: 0,
+      paddingBottom: 0,
+      paddingLeft: 0,
+      paddingRight: 0,
       minWidth: 0,
       width: 56,
       height: 56,
@@ -53,10 +56,12 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
       ...shadowsNew[6],
     },
     fabActive: shadowsNew[12],
+
     mini: {
       width: 40,
       height: 40,
-    }
+      borderRadius: 40 / 2,
+    },
   },
   native: {
     ripple: {
@@ -117,14 +122,14 @@ class button extends buttonBase<MuixButton.Shape> {
       disabled && classes.disabledLabel,
     )
 
-    //console.log(viewStyle, textStyle)
+    console.log(this.getRootStyle(), textStyle)
 
     const childs = React.Children.toArray(children).map((ch, idx) => {
       if (typeof ch === 'string' || typeof ch === 'number') return <Text key={idx} style={textStyle}>{ch.toString().toUpperCase()}</Text>
       else return React.cloneElement(ch, { ...ch.props, style: { ...textStyle, ...ch.props.style || null } })
     })
 
-    return this.doRender(childs, classes[`${color}FlatRipple`])
+    return this.doRender(childs, flat ? classes[`${color}FlatRipple`] : (color === 'default' ? classes.defaultFlatRipple : null))
   }
 
   getRootStyle() {
@@ -145,12 +150,12 @@ class button extends buttonBase<MuixButton.Shape> {
     return classNames<ReactN.ViewStyle>(
       classes.root,
       (raised || fab) && classes.raised,
-      mini && classes.mini,
       fab && classes.fab,
+      mini && classes.mini,
       !flat && color === 'accent' && classes.raisedAccent,
       !flat && color === 'primary' && classes.raisedPrimary,
       dense && classes.dense,
-      raised && disabled && classes.raisedDisable,
+      (raised || fab) && disabled && classes.raisedDisable,
       active && raised && !disabled && classes.raisedActive,
       active && fab && !disabled && classes.fabActive,
       style,
