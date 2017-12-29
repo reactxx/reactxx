@@ -2,7 +2,7 @@
 
 import { Dimensions, PixelRatio } from 'react-native'
 
-export default function createTypography(palette: Mui.Palette, optionOrCreator: Mui.TypographyOptionsOrCreator) {
+export default function createTypography(palette: Muix.Palette, optionOrCreator: Muix.TypographyOptionsOrCreator) {
   const {
     fontSize = 14, // px
     htmlFontSize = 16, // 16px is the default font-size used by browsers on the html element.
@@ -10,28 +10,28 @@ export default function createTypography(palette: Mui.Palette, optionOrCreator: 
     fontWeightLightNew = {
       fontWeight: '300',
       fontFamily: 'Roboto_Light'
-    } as Mui.TextStyleCommon,
+    } as Muix.TextStyleCommon,
     fontWeightLight = '300',
     fontWeightRegularNew = {
       fontWeight: '400',
       fontFamily: 'Roboto'
-    } as Mui.TextStyleCommon,
+    } as Muix.TextStyleCommon,
     fontWeightRegular = '400',
     fontWeightMediumNew = {
       fontWeight: '500',
       fontFamily: 'Roboto_Medium'
-    } as Mui.TextStyleCommon,
+    } as Muix.TextStyleCommon,
     fontWeightMedium = '500',
     //web fontFamily
     fontFamily = '"Roboto", "Helvetica", "Arial", sans-serif',
     //native font assets path
     fontSizeNormalizerNative = fontSizeNormalizerDefault,
     ...other
-  } = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Mui.TypographyOptionsNew
+  } = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Muix.TypographyOptionsNew
 
 
   //http://typecast.com/blog/a-more-modern-scale-for-web-typography
-  const sheet: Mui.TypographyOptionsNew = {
+  const sheet: Muix.TypographyOptionsNew = {
     fontWeightLight,
     fontWeightRegular,
     fontWeightMedium,
@@ -103,7 +103,7 @@ export default function createTypography(palette: Mui.Palette, optionOrCreator: 
     {
       clone: false, // No need to clone deep
     },
-  ) as Mui.TypographyNew
+  ) as Muix.TypographyNew
 }
 
 const enum fontSizesNative {

@@ -11,7 +11,9 @@ const theme = createMuiTheme({
   overridesNew: theme => ({
     MuiButton: {
       common: {
-        margin: theme.spacing.unit
+        root: {
+          margin: theme.spacing.unit
+        }
       }
     },
   })

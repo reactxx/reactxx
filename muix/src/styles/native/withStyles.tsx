@@ -23,27 +23,27 @@ export class AppContainer extends React.PureComponent<AppContainerProps> {
   }
 }
 
-const styleOverride = <R extends Mui.Shape>(renderedClasses: Mui.SheetNative<R>, classesProp: Mui.SheetNative<R>, name: string) => {
-  type untyped = Mui.SheetNative<Mui.Shape>
+const styleOverride = <R extends Muix.Shape>(renderedClasses: Muix.SheetNative<R>, classesProp: Muix.SheetNative<R>, name: string) => {
+  type untyped = Muix.SheetNative<Muix.Shape>
   if (!classesProp) return renderedClasses
   const stylesWithOverrides = { ...renderedClasses as untyped }  //destructor does not work with generics
   Object.keys(classesProp).forEach(key => {
     warning(!!stylesWithOverrides[key], `Material-UI: you are trying to override a style that does not exist.\r\nFix the '${key}' key of 'theme.overrides.${name}'.`)
     stylesWithOverrides[key] = { ...stylesWithOverrides[key], ...(classesProp as untyped)[key] };
   })
-  return stylesWithOverrides as Mui.SheetNative<R>
+  return stylesWithOverrides as Muix.SheetNative<R>
 }
 
-const styleCreator = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreator<R>, theme: Mui.ThemeNew, name?: string) => {
-  const overrides = (theme.overrides && name && theme.overrides[name]) as Mui.SheetNative<R>
-  const styles = (typeof styleOrCreator === 'function' ? styleOrCreator(theme) : styleOrCreator) as Mui.SheetNative<R>
+const styleCreator = <R extends Muix.Shape>(styleOrCreator: Muix.SheetOrCreator<R>, theme: Muix.ThemeNew, name?: string) => {
+  const overrides = (theme.overrides && name && theme.overrides[name]) as Muix.SheetNative<R>
+  const styles = (typeof styleOrCreator === 'function' ? styleOrCreator(theme) : styleOrCreator) as Muix.SheetNative<R>
   return styleOverride(styles, overrides, name)
 }
 
-export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreator<R>, options?: Mui.WithStylesOptions) => (Component: Mui.CodeComponentType<R>) => {
-  const Styled: Mui.SFCX<R> = (props, context: Mui.TMuiThemeContextValue) => {
+export const withStyles = <R extends Muix.Shape>(styleOrCreator: Muix.SheetOrCreator<R>, options?: Muix.WithStylesOptions) => (Component: Muix.CodeComponentType<R>) => {
+  const Styled: Muix.SFCX<R> = (props, context: Muix.TMuiThemeContextValue) => {
     const { flip, name } = options
-    const { classes: common, classesNative, classesWeb, style, web, native, onClick, onPress, ...other } = props as Mui.PropsX<Mui.Shape>
+    const { classes: common, classesNative, classesWeb, style, web, native, onClick, onPress, ...other } = props as Muix.PropsX<Muix.Shape>
 
     const theme = context.theme || getDefaultTheme()
 
@@ -58,7 +58,7 @@ export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreat
       //toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>),
       name)
 
-    const newProps = { ...other, ...native, theme, classes, style: toPlatformRuleSet(style), flip: typeof flip === 'boolean' ? flip : theme.direction === 'rtl' } as Mui.CodePropsNative<R>
+    const newProps = { ...other, ...native, theme, classes, style: toPlatformRuleSet(style), flip: typeof flip === 'boolean' ? flip : theme.direction === 'rtl' } as Muix.CodePropsNative<R>
     if (onPress || onClick) newProps.onPress = onPress || onClick
 
     return <Component {...newProps } />
@@ -66,12 +66,12 @@ export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreat
   Styled.contextTypes = MuiThemeContextTypes
   Styled['options'] = options
   hoistNonReactStatics(Styled, Component as any)
-  return pure(Styled) as Mui.ComponentTypeX<R>
+  return pure(Styled) as Muix.ComponentTypeX<R>
 }
 
 export default withStyles
 
-export const classNames = <T extends Mui.CSSPropertiesNative>(...styles: Array<T | T[]>) => {
+export const classNames = <T extends Muix.CSSPropertiesNative>(...styles: Array<T | T[]>) => {
   if (!styles) return null
   return Object.assign({}, ...styles.filter(p => !!p).map(p => {
     if (Array.isArray(p)) return Object.assign({}, ...p)

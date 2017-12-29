@@ -2,13 +2,13 @@
 import ReactN from 'react-native'
 
 import { classNames, withStyles } from 'muix-styles/web'
-import { sheet, Shape } from '../../common/Template/Template' 
+import { sheet } from '../../common/Template/Template' 
 
-const template: Mui.CodeSFCWeb<Shape> = props => {
+const template: Muix.CodeSFCWeb<MuixTemplate.Shape> = props => {
   const { classes, ...rest } = props 
   return <div className={classNames(classes.root)} {...rest} />
 }
 
-const Template = withStyles<Shape>(sheet, { name: 'MuiTemplate' })(template)
+const Template = withStyles<MuixTemplate.Shape>(sheet, { name: 'MuiTemplate' })(template)
 
 export default Template

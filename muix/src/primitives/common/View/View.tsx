@@ -2,13 +2,7 @@
 
 import { toPlatformSheet } from 'muix-styles'
 
-export type ClassKey = 'root'
-
-export type Shape = Overwrite<Mui.DefaultEmptyShape, {
-  common: Record<ClassKey, ReactN.ViewStyle>
-}>
-
-export const sheet: Mui.SheetOrCreator<Shape> = theme => toPlatformSheet<Shape>({
+export const sheet: Muix.SheetOrCreator<MuixView.Shape> = theme => toPlatformSheet<MuixView.Shape>({
   common: {
     root: {
       web: {

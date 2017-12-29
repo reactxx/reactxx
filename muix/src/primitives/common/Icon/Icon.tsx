@@ -7,10 +7,10 @@ import { sheetCreator } from 'muix-styles'
 
 import warning from 'warning' 
 
-export const iconColor = (color: string) => ({ native: { color }, web: { fill: color } } as Mui.RNIconStyle)
-export const iconSize = (size: number) => ({ native: { fontSize: size }, web: { width: size, height: size } } as Mui.RNIconStyle)
+export const iconColor = (color: string) => ({ native: { color }, web: { fill: color } } as Muix.RNIconStyle)
+export const iconSize = (size: number) => ({ native: { fontSize: size }, web: { width: size, height: size } } as Muix.RNIconStyle)
 
-export const sheet = sheetCreator<Icon.Shape>(({ palette }) => ({
+export const sheet = sheetCreator<MuixIcon.Shape>(({ palette }) => ({
   common: {
     root: iconSize(24),
     colorAccent: iconColor(palette.secondary.A200),
@@ -25,7 +25,7 @@ export const sheet = sheetCreator<Icon.Shape>(({ palette }) => ({
   web: null
 }))
 
-export const getClasses = <T extends Mui.CSSPropertiesNative | string>({ classes, color = 'inherit', children, theme, innerRef, style, ...rest }: Mui.CodeProps<Icon.Shape>) => {
+export const getClasses = <T extends Muix.CSSPropertiesNative | string>({ classes, color = 'inherit', children, theme, innerRef, style, ...rest }: Muix.CodeProps<MuixIcon.Shape>) => {
   const childs = React.Children.toArray(children)
   warning(childs.length == 1 && typeof childs[0] === 'string', 'single child as string needed')
   return {

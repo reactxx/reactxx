@@ -11,7 +11,7 @@ const theme = createMuiTheme({
       common: {
         colorInherit: iconColor(color[500]),
       }
-    } as Mui.PartialSheetX<Icon.Shape>,
+    } as Muix.PartialSheetX<MuixIcon.Shape>,
   }
 })
 

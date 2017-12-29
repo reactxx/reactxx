@@ -3,20 +3,7 @@ import ReactN from 'react-native'
 
 import { sheetCreator } from 'muix-styles'
 
-export type ClassKeyView = 'root'
-export type ClassKeyText = 'text'
-
-export type Shape = Overwrite<Mui.DefaultEmptyShape, {
-  common: Record<ClassKeyView, ReactN.ViewStyle> & Record<ClassKeyText, ReactN.TextStyle>
-  native: {}
-  web: null
-  style: ReactN.ViewStyle
-  props: {}
-  propsWeb: React.HTMLAttributes<HTMLDivElement>
-  propsNative: ReactN.ViewProperties
-}>
-
-export const sheet = sheetCreator<Shape>(({ palette }) => ({
+export const sheet = sheetCreator<MuixTemplate.Shape>(({ palette }) => ({
   common: {
     root: {
       display: 'flex',

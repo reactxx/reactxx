@@ -8,7 +8,7 @@ import { withStylesX } from 'muix-styles/web'
 //export type ButtonShape = Shape
 
 //const Button = withStyles<MuiButton.Shape>(styles, { name: Mui.Names.Typography })(MuiButton)
-const Button = withStylesX<Button.Shape>(MuiButton)
+const Button = withStylesX<MuixButton.Shape>(MuiButton)
 
 //const x = <Button classes={{ common: {}, native: {} }} onClick={ev => ev && ev.preventDefault()} />
 

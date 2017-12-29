@@ -23,28 +23,28 @@ jss.options.createGenerateClassName = createGenerateClassName
 
 export const AppContainer: React.SFC<AppContainerProps> = props => <MuiThemeProvider theme={createMuiTheme(props.themeOptions) as Theme}><JssProvider jss={jss}>{props.children}</JssProvider></MuiThemeProvider>
 
-type webKeys<R extends Mui.Shape> = Mui.getWeb<R> | keyof Mui.getCommon<R>
+type webKeys<R extends Muix.Shape> = Muix.getWeb<R> | keyof Muix.getCommon<R>
 
-export const withStylesX = <R extends Mui.Shape>(Component: Mui.muiComponentType<Mui.getProps<R>, webKeys<R>>) => {
+export const withStylesX = <R extends Muix.Shape>(Component: Muix.muiComponentType<Muix.getProps<R>, webKeys<R>>) => {
   type TKey = webKeys<R>
-  const res: Mui.SFCX<R> = (props, context: Mui.TMuiThemeContextValue) => {
-    const { classes: common, classesNative, classesWeb, style, web, native, onClick, onPress: onPressInit, ...rest } = props as Mui.PropsX<Mui.Shape>
-    const sheet = { common, /*native: classesNative,*/ web: classesWeb } as Mui.PartialSheetX<R>
+  const res: Muix.SFCX<R> = (props, context: Muix.TMuiThemeContextValue) => {
+    const { classes: common, classesNative, classesWeb, style, web, native, onClick, onPress: onPressInit, ...rest } = props as Muix.PropsX<Muix.Shape>
+    const sheet = { common, /*native: classesNative,*/ web: classesWeb } as Muix.PartialSheetX<R>
 
     const theme = context.theme || getDefaultTheme()
 
     //const classes = sheetToClassSheet(toPlatformSheet(sheet) as Mui.SheetWeb<R>)
-    const classes = sheetToClassSheet(classesPropsToSheet(theme, props) as Mui.SheetWeb<R>)
+    const classes = sheetToClassSheet(classesPropsToSheet(theme, props) as Muix.SheetWeb<R>)
     const onPress = onPressInit || onClick 
-    const webProps = { ...rest, ...web, style: toPlatformRuleSet(style), classes, onPress, } as (Mui.getProps<R> & Mui.muiProps<TKey>) 
+    const webProps = { ...rest, ...web, style: toPlatformRuleSet(style), classes, onPress, } as (Muix.getProps<R> & Muix.muiProps<TKey>) 
     return <Component {...webProps} />
   }
   return hoistNonReactStatics(res, Component)
 }
 
-export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreator<R>, options?: Mui.WithStylesOptions) => (comp: Mui.muiComponentType<Mui.getProps<R>, webKeys<R>>) => {
-  const withStyles = withStylesMui as any as Mui.muiWithStyles
-  return withStylesX<R>(withStyles(styleOrCreator, options)(comp as Mui.muiCodeComponentType<Mui.getProps<R>, webKeys<R>>))
+export const withStyles = <R extends Muix.Shape>(styleOrCreator: Muix.SheetOrCreator<R>, options?: Muix.WithStylesOptions) => (comp: Muix.muiComponentType<Muix.getProps<R>, webKeys<R>>) => {
+  const withStyles = withStylesMui as any as Muix.muiWithStyles
+  return withStylesX<R>(withStyles(styleOrCreator, options)(comp as Muix.muiCodeComponentType<Muix.getProps<R>, webKeys<R>>))
 }
 
 export const classNames = _classnames

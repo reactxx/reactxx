@@ -2,16 +2,7 @@
 
 import { toPlatformSheet } from 'muix-styles'
 
-export type ClassKeyText = 'root'
-
-export type Shape = Overwrite<Mui.DefaultEmptyShape, {
-  common: Record<ClassKeyText, ReactN.TextStyle>
-  style: ReactN.TextStyle
-  propsNative: ReactN.TextProperties
-
-}>
-
-export const sheet: Mui.SheetOrCreator<Shape> = theme => toPlatformSheet<Shape>({
+export const sheet: Muix.SheetOrCreator<MuixText.Shape> = theme => toPlatformSheet<MuixText.Shape>({
   common: {
     root: {
       web: {

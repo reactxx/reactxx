@@ -8,7 +8,7 @@ import orange from 'material-ui/colors/orange'
 import green from 'material-ui/colors/green'
 import cyan from 'material-ui/colors/cyan'
 
-import { View, ScrollView, Typography, TypographyShape } from 'muix-primitives'
+import { View, ScrollView, Typography} from 'muix-primitives'
 
 const theme = createMuiTheme({
   typography: palette => ({
@@ -31,8 +31,8 @@ const theme = createMuiTheme({
         colorAccent: { color: cyan.A700, fontWeight: '500', fontSize: 18 },
         display2: { color: cyan.A700 },
       }
-    } as Mui.PartialSheetX<TypographyShape>
-  } as any
+    }
+  }
 })
 
 const app2 = () => <Typography classes={{ root: { fontWeight: '500', textDecorationLine: 'line-through', color: 'blue' } }}>TEXT</Typography>

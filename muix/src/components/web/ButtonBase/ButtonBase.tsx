@@ -7,7 +7,7 @@ import { withStylesX } from 'muix-styles/web'
 
 //export type ButtonBaseShape = Shape
 
-const ButtonBase = withStylesX<ButtonBase.Shape>(MuiButtonBase as any)
+const ButtonBase = withStylesX<MuixButtonBase.Shape>(MuiButtonBase as any)
 
 export default ButtonBase
 

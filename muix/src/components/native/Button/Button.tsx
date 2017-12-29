@@ -4,13 +4,12 @@ import { Platform, View, Text } from 'react-native'
 
 import { withStyles, classNames, toPlatformRuleSet, sheetCreator } from 'muix-styles'
 
-//import { Shape } from '../../common/Button/Button'
 import ButtonBase, { buttonBase } from '../ButtonBase/ButtonBase'
 
 //export type ButtonShape = Shape
 
-const sheet = sheetCreator<Button.Shape>(({ typography: typo, palette, spacing, shadowsNew }) => ({
-  native: {
+const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spacing, shadowsNew }) => ({
+  common: {
     root: {
       alignItems: 'center',
       justifyContent: 'center',
@@ -31,8 +30,6 @@ const sheet = sheetCreator<Button.Shape>(({ typography: typo, palette, spacing, 
       minHeight: 32,
     },
 
-    //flatPrimary: {}, flatAccent: {}, flatContrast: {}, colorInherit: {}, raisedContrast: {},
-
     raised: {
       backgroundColor: palette.grey[300],
       ...shadowsNew[2],
@@ -46,11 +43,6 @@ const sheet = sheetCreator<Button.Shape>(({ typography: typo, palette, spacing, 
       backgroundColor: palette.text.divider,
     },
 
-    ripple: {
-      //backgroundColor: palette.common.black, opacity: 0.12,
-      backgroundColor: 'white', opacity: 0.35,
-    },
-
     fab: {
       padding: 0,
       minWidth: 0,
@@ -60,6 +52,12 @@ const sheet = sheetCreator<Button.Shape>(({ typography: typo, palette, spacing, 
       ...shadowsNew[6],
     },
     fabActive: shadowsNew[12],
+  },
+  native: {
+    ripple: {
+      //backgroundColor: palette.common.black, opacity: 0.12,
+      backgroundColor: 'white', opacity: 0.35,
+    },
     rootLabel: {
       ...typo.button,
       color: palette.text.primary,
@@ -77,11 +75,19 @@ const sheet = sheetCreator<Button.Shape>(({ typography: typo, palette, spacing, 
     disabledLabel: { color: palette.action.disabled, },
 
   },
-  common: {},
-  web: {},
+  web: {
+    colorInherit: {},
+    flatAccent: {},
+    flatContrast: {},
+    flatPrimary: {},
+    raisedContrast: {},
+  }, //defined in material-ui only
 }))
 
-class button extends buttonBase<Button.Shape> {
+let xx: Muix.getPropsWeb<MuixButton.Shape>
+let x: Muix.CodePropsNative<MuixButton.Shape>
+
+class button extends buttonBase<MuixButton.Shape> {
 
   render() {
 
@@ -199,7 +205,7 @@ class button extends buttonBase<Button.Shape> {
 
 
 //const Button = withStyles<Shape>(sheet, { name: 'MuiButton' })(button)
-const Button = withStyles<Button.Shape>(sheet, { name: 'MuiButton' })(button)
+const Button = withStyles<MuixButton.Shape>(sheet, { name: 'MuiButton' })(button)
 
 
 //const btn = <Button classes={{ root: {}, denseLabel: { color: '' } }} color='accent' onClick={null} />

@@ -130,6 +130,11 @@
     <TypeScriptCompile Include="src\components\web\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
+    <TypeScriptCompile Include="src\primitives\typings\Text-d.d.ts" />
+    <TypeScriptCompile Include="src\primitives\typings\View-d.d..ts" />
+    <TypeScriptCompile Include="src\primitives\typings\Template-d.d.ts" />
+    <TypeScriptCompile Include="src\primitives\typings\Typography-d.d.ts" />
+    <TypeScriptCompile Include="src\primitives\typings\ScrollView-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\Icon-d.d.ts" />
     <TypeScriptCompile Include="src\test\common\components\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />
@@ -140,7 +145,6 @@
     <TypeScriptCompile Include="src\primitives\common\ScrollView\ScrollView.tsx" />
     <TypeScriptCompile Include="src\primitives\common\Template\Template.tsx" />
     <TypeScriptCompile Include="src\primitives\common\Text\Text.tsx" />
-    <TypeScriptCompile Include="src\primitives\common\Typography\Typography.ts" />
     <TypeScriptCompile Include="src\primitives\common\View\View.tsx" />
     <TypeScriptCompile Include="src\primitives\native\Icon\Icon.tsx" />
     <TypeScriptCompile Include="src\primitives\native\index.tsx" />
