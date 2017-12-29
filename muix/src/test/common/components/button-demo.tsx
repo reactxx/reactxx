@@ -5,8 +5,6 @@ import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 
 import { ScrollView, View, Icon } from 'muix-primitives'
 
-//import Cancel from 'material-ui/svg-icons/Cancel'
-
 const theme = createMuiTheme({
   overridesNew: theme => ({
     MuiButton: {
@@ -20,7 +18,6 @@ const theme = createMuiTheme({
 })
 
 const rootView: ReactN.ViewStyle = { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingTop: 24, flex: 1, /*alignItems: 'flex-start'  shifts button label*/ }
-//const rootView: ReactN.ViewStyle = { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingTop: 24 }
 
 const app2: React.SFC = props => <AppContainer themeOptions={{ overridesNew: theme => ({ MuiButton: { common: { root: { margin: theme.spacing.unit, flexShrink: 0 } } } }) }}>
   <View classes={{ root: rootView }} >
