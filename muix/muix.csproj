@@ -88,6 +88,7 @@
     <Content Include="deploy\test\README.md" />
     <Content Include="%24refresh-libs.cmd" />
     <Content Include="%24compile.cmd" />
+    <Content Include="%24start.cmd" />
     <None Include="packages.config" />
     <Content Include="README.md" />
     <Content Include="src\styles\native\theme.json" />
@@ -129,6 +130,7 @@
     <TypeScriptCompile Include="src\components\web\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
+    <TypeScriptCompile Include="src\test\common\components\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\index.tsx" />
     <TypeScriptCompile Include="src\test\native\App.tsx" />
@@ -173,6 +175,7 @@
     <TypeScriptCompile Include="src\typings\shared\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="src\styles\web\inline-styles.tsx" />
     <TypeScriptCompile Include="src\styles\web\withStyles.tsx" />
+    <TypeScriptCompile Include="src\typings\components-d.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

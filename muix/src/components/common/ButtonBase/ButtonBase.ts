@@ -1,15 +1,13 @@
-﻿import ReactN from 'react-native'
+﻿//import ReactN from 'react-native'
+//import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
+declare namespace ButtonBase {
 
-export type ButtonBaseKeyView = 'ripple' | 'root'
-export type ButtonBaseKeyText = 'disabledLabel'
+  type ButtonBaseKeyView = 'ripple' | 'root'
+  type ButtonBaseKeyText = 'disabledLabel'
 
-export type Shape = Overwrite<Mui.DefaultEmptyShape, {
-  native: Record<ButtonBaseKeyView, ReactN.ViewStyle>
-  props: {
-    disabled?: boolean
-    disableRipple?: boolean
-    disableFocusRipple?: boolean;
-    rootRef?: React.Ref<any>
-  }
-  propsNative: ReactN.TouchableOpacityProperties
-}>
+  type Shape = Overwrite<Mui.DefaultEmptyShape, {
+    native: Record<ButtonBaseKeyView, ReactN.ViewStyle>
+    props: Mui.ButtonBaseProps
+    propsNative: ReactN.TouchableOpacityProperties
+  }>
+}

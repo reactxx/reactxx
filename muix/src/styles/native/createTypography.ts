@@ -126,7 +126,8 @@ const enum fontSizesNative {
 
 //https://github.com/react-native-training/react-native-elements/blob/master/src/helpers/normalizeText.js
 
-const fontSizeNormalizerDefault = (size: number) => {
+const fontSizeNormalizerDefault = (size: number) => size
+const fontSizeNormalizerDefault_ = (size: number) => {
   const pixelRatio = PixelRatio.get()
   const deviceHeight = Dimensions.get('window').height
   const deviceWidth = Dimensions.get('window').width

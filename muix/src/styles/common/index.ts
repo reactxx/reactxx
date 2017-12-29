@@ -15,8 +15,18 @@ import spacing from 'material-ui/styles/spacing'
 //platform specific code
 import { createTypography, shadows, toPlatformRuleSet, toPlatformSheet } from 'muix-styles'
 
+export interface AppContainerProps {
+  themeOptions?: Mui.ThemeOptions
+}
+
+export const classesPropsToSheet = (theme:Mui.ThemeNew, props: Mui.PropsX<Mui.Shape>) => {
+  const create = prop => (typeof prop==='function' ? prop(theme) : prop)
+  const { classes, classesNative, classesWeb } = props as Mui.PropsX<Mui.Shape>
+  return toPlatformSheet({ common: create(classes), native: create(classesNative), web: create(classesWeb) }) as Mui.PartialSheetX<Mui.Shape> 
+}
+
 //create platform specific sheet from cross platform sheet creator
-export const sheetCreator = <R extends Mui.Shape>(sheetXCreator: Mui.SheetXCreator<R>) => (theme: Mui.ThemeNew) => toPlatformSheet(sheetXCreator(theme as Mui.ThemeNew) as Mui.PartialSheetX<R>)
+export const sheetCreator = <R extends Mui.Shape>(sheetXCreator: Mui.ThemeCreator<Mui.SheetX<R>>) => (theme: Mui.ThemeNew) => toPlatformSheet(sheetXCreator(theme as Mui.ThemeNew) as Mui.PartialSheetX<R>)
 
 //create platform specific ruleset from cross platform ruleset
 export const toPlatformRuleSetX = (style: Mui.TRulesetX, isNative: boolean) => {
@@ -37,8 +47,9 @@ export const toPlatformSheetX = (rules: Mui.PartialSheetX<Mui.Shape>, isNative: 
 }
 
 //create platform specific Overrides from cross platform Overrides
-const getOverridesX = (source: Mui.OverridesNew) => {
+const getOverridesX = (theme: Mui.ThemeNew, source: Mui.OverridesNew) => {
   if (!source) return null
+  if (typeof source === 'function') source = source(theme)
   const result: Mui.Overrides = {}
   for (const p in source) result[p] = toPlatformSheet(source[p])
   return result
@@ -118,7 +129,6 @@ function createMuiTheme(options: Mui.ThemeOptions = {}) {
     breakpoints, //the same format and value for web and native
     shadows: (shadowsNewInput || shadows).map(rsx => (toPlatformRuleSetX(rsx, false) as React.CSSProperties).boxShadow), // for material-ui only
     shadowsNew: shadowsNewInput || shadows, //the same format, different values for web and native
-    overrides: getOverridesX(overridesNew), //the same format, different values for web and native
     nativeSheetCache: [], //sheet cache (for native only)
     ...(deepmerge(
       {
@@ -132,6 +142,10 @@ function createMuiTheme(options: Mui.ThemeOptions = {}) {
       },
     )) as Mui.ThemeNew,
   }
+
+
+  muiTheme.overrides = getOverridesX(muiTheme, overridesNew), //the same format, different values for web and native
+
 
   warning(
     muiTheme.shadows.length === 25 && muiTheme.shadowsNew.length === 25,

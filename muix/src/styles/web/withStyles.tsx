@@ -16,21 +16,25 @@ import { sheetToClassSheet } from './inline-styles'
 
 import { toPlatformRuleSet, toPlatformSheet } from 'muix-styles'
 
-import { getDefaultTheme } from '../common/index'
+import createMuiTheme, { AppContainerProps, classesPropsToSheet, getDefaultTheme } from '../common/index'
 
 export const jss = create(preset())
 jss.options.createGenerateClassName = createGenerateClassName
 
-export const AppContainer: React.SFC<{}> = props => <MuiThemeProvider theme={getDefaultTheme() as Theme}><JssProvider jss={jss}>{props.children}</JssProvider></MuiThemeProvider>
+export const AppContainer: React.SFC<AppContainerProps> = props => <MuiThemeProvider theme={createMuiTheme(props.themeOptions) as Theme}><JssProvider jss={jss}>{props.children}</JssProvider></MuiThemeProvider>
 
 type webKeys<R extends Mui.Shape> = Mui.getWeb<R> | keyof Mui.getCommon<R>
 
 export const withStylesX = <R extends Mui.Shape>(Component: Mui.muiComponentType<Mui.getProps<R>, webKeys<R>>) => {
   type TKey = webKeys<R>
-  const res: Mui.SFCX<R> = props => {
+  const res: Mui.SFCX<R> = (props, context: Mui.TMuiThemeContextValue) => {
     const { classes: common, classesNative, classesWeb, style, web, native, onClick, onPress: onPressInit, ...rest } = props as Mui.PropsX<Mui.Shape>
-    const sheet = { common, /*native: classesNative,*/ web: classesWeb} as Mui.PartialSheetX<R>
-    const classes = sheetToClassSheet(toPlatformSheet(sheet) as Mui.SheetWeb<R>)
+    const sheet = { common, /*native: classesNative,*/ web: classesWeb } as Mui.PartialSheetX<R>
+
+    const theme = context.theme || getDefaultTheme()
+
+    //const classes = sheetToClassSheet(toPlatformSheet(sheet) as Mui.SheetWeb<R>)
+    const classes = sheetToClassSheet(classesPropsToSheet(theme, props) as Mui.SheetWeb<R>)
     const onPress = onPressInit || onClick 
     const webProps = { ...rest, ...web, style: toPlatformRuleSet(style), classes, onPress, } as (Mui.getProps<R> & Mui.muiProps<TKey>) 
     return <Component {...webProps} />

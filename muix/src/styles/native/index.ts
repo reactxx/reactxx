@@ -25,11 +25,6 @@ const shadow = (deep: number) => ({
 let elev = 0.25
 
 export const shadows: ReactN.ViewStyle[] = getShadows()
-//  [
-//  //{ elevation: 1, shadowOpacity: 0, shadowOffset: { width: 0, height: 1 }, shadowColor: 'rgba(0, 0, 0, 0.2)', shadowRadius: 3 },
-//  {},
-//  ...range(1, 25).map(idx => shadow(idx))
-//]
 
 export { sheetCreator, default as createMuiTheme } from '../common/index'
 

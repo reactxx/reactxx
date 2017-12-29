@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import MuiThemeProvider, { MuiThemeContextTypes } from './MuiThemeProvider'
-import { getDefaultTheme } from '../common/index'
+import createMuiTheme, { AppContainerProps, getDefaultTheme, classesPropsToSheet } from '../common/index'
 import warning from 'invariant'
 import pure from 'recompose/pure'
 import { View } from 'react-native'
@@ -10,11 +10,11 @@ import { toPlatformSheet, toPlatformRuleSet } from '../native/index'
 import loadFonts from './expoLoadFonts'
 import { AppLoading } from 'expo'
 
-export class AppContainer extends React.PureComponent {
+export class AppContainer extends React.PureComponent<AppContainerProps> {
   state = { isReady: false }
   render() {
     //console.log('AppContainer COUNT: ', React.Children.count(this.props.children))
-    if (this.state.isReady) return <MuiThemeProvider theme={getDefaultTheme()}>{React.Children.only(this.props.children)}</MuiThemeProvider>
+    if (this.state.isReady) return <MuiThemeProvider theme={createMuiTheme(this.props.themeOptions)}>{React.Children.only(this.props.children)}</MuiThemeProvider>
     return <AppLoading
       startAsync={loadFonts}
       onFinish={() => this.setState({ isReady: true })}
@@ -54,7 +54,8 @@ export const withStyles = <R extends Mui.Shape>(styleOrCreator: Mui.SheetOrCreat
 
     const classes = styleOverride(
       cacheItem.value,
-      toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>),
+      classesPropsToSheet(theme, props),
+      //toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>),
       name)
 
     const newProps = { ...other, ...native, theme, classes, style: toPlatformRuleSet(style), flip: typeof flip === 'boolean' ? flip : theme.direction === 'rtl' } as Mui.CodePropsNative<R>
