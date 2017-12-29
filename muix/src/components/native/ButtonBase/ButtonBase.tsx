@@ -43,8 +43,9 @@ export class buttonBase<R extends MuixButtonBase.Shape> extends React.Component<
   onPressedIn = (() => this.setState({ active: true })).bind(this)
   onPressedOut = (() => this.setState({ active: false })).bind(this)
 
-  doRender(children: React.ReactNode) {
-    const { scaleValue, opacityValue, onPressedIn, onPressedOut, rect: { width, height }, state: { active }, props: { style, disabled, onPress, classes: { ripple }, theme, innerRef, disableRipple } } = this
+  doRender(children: React.ReactNode, ripple: ReactN.ViewStyle) {
+    const { scaleValue, opacityValue, onPressedIn, onPressedOut, rect: { width, height }, state: { active }, props: { style, disabled, onPress, classes, theme, innerRef, disableRipple } } = this
+    if (!ripple) ripple = classes.ripple
 
     const renderRipple = () => {
       if (disabled || disableRipple || !width || !height || typeof active == 'undefined') return null
@@ -107,7 +108,8 @@ export class buttonBase<R extends MuixButtonBase.Shape> extends React.Component<
   }
 
   render() {
-    return this.doRender(this.props.children)
+    const { props: { classes: { ripple }, children }} = this
+    return this.doRender(children, ripple)
   }
 }
 

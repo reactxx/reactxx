@@ -1,6 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 import { Platform, View, Text } from 'react-native'
+import { fade } from 'material-ui/styles/colorManipulator'
 
 import { withStyles, classNames, toPlatformRuleSet, sheetCreator } from 'muix-styles'
 
@@ -52,11 +53,14 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
       ...shadowsNew[6],
     },
     fabActive: shadowsNew[12],
+    mini: {
+      width: 40,
+      height: 40,
+    }
   },
   native: {
     ripple: {
-      //backgroundColor: palette.common.black, opacity: 0.12,
-      backgroundColor: 'white', opacity: 0.35,
+      backgroundColor: palette.common.white, opacity: 0.35,
     },
     rootLabel: {
       ...typo.button,
@@ -72,20 +76,16 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
     raisedLabelContrast: { color: palette.getContrastText(palette.primary[500]), },
     raisedLabelPrimary: { color: palette.getContrastText(palette.primary[500]), },
 
+    accentFlatRipple: { backgroundColor: fade(palette.secondary.A200, 0.4), opacity: 0.8 },
+    primaryFlatRipple: { backgroundColor: fade(palette.primary[500], 0.4), opacity: 0.8 },
+    contrastFlatRipple: { backgroundColor: fade(palette.getContrastText(palette.primary[500]), 0.4), opacity: 0.8 },
+    defaultFlatRipple: { backgroundColor: palette.grey[500], opacity: 0.8 },
+
     disabledLabel: { color: palette.action.disabled, },
 
   },
-  web: {
-    colorInherit: {},
-    flatAccent: {},
-    flatContrast: {},
-    flatPrimary: {},
-    raisedContrast: {},
-  }, //defined in material-ui only
+  web: { } as any, //defined in material-ui only
 }))
-
-let xx: Muix.getPropsWeb<MuixButton.Shape>
-let x: Muix.CodePropsNative<MuixButton.Shape>
 
 class button extends buttonBase<MuixButton.Shape> {
 
@@ -124,7 +124,7 @@ class button extends buttonBase<MuixButton.Shape> {
       else return React.cloneElement(ch, { ...ch.props, style: { ...textStyle, ...ch.props.style || null } })
     })
 
-    return this.doRender(childs)
+    return this.doRender(childs, classes[`${color}FlatRipple`])
   }
 
   getRootStyle() {
@@ -135,6 +135,7 @@ class button extends buttonBase<MuixButton.Shape> {
       disabled,
       fab,
       style,
+      mini,
       raised,
     } = this.props
 
@@ -144,6 +145,7 @@ class button extends buttonBase<MuixButton.Shape> {
     return classNames<ReactN.ViewStyle>(
       classes.root,
       (raised || fab) && classes.raised,
+      mini && classes.mini,
       fab && classes.fab,
       !flat && color === 'accent' && classes.raisedAccent,
       !flat && color === 'primary' && classes.raisedPrimary,
@@ -156,59 +158,6 @@ class button extends buttonBase<MuixButton.Shape> {
   }
 }
 
-//const button: Mui.CodeSFCNative<Shape> = props => {
-
-//  const {
-//    children,
-//    classes,
-//    color = 'default',
-//    dense,
-//    disabled,
-//    fab,
-//    style,
-//    raised,
-//    ...other
-//  } = props
-
-//  const flat = !raised && !fab
-//  const viewStyle = classNames<ReactN.ViewStyle>(
-//    classes.root,
-//    (raised || fab) && classes.raised,
-//    fab && classes.fab,
-//    !flat && color === 'accent' && classes.raisedAccent,
-//    !flat && color === 'primary' && classes.raisedPrimary,
-//    dense && classes.dense,
-//    raised && disabled && classes.raisedDisable,
-//    style,
-//  )
-//  const textStyle = classNames<ReactN.TextStyle>(
-//    classes.rootLabel,
-//    flat && color === 'accent' && classes.flatLabelAccent,
-//    flat && color === 'contrast' && classes.flatLabelContrast,
-//    flat && color === 'primary' && classes.flatLabelPrimary,
-//    !flat && color === 'accent' && classes.raisedLabelAccent,
-//    !flat && color === 'contrast' && classes.raisedLabelContrast,
-//    !flat && color === 'primary' && classes.raisedLabelPrimary,
-//    dense && classes.denseLabel,
-//    disabled && classes.disabledLabel,
-//  )
-
-//  //console.log(viewStyle, textStyle)
-
-//  const childs = React.Children.toArray(children).map((ch, idx) => {
-//    if (typeof ch === 'string' || typeof ch === 'number') return <Text key={idx} style={textStyle}>{ch.toString().toUpperCase()}</Text>
-//    else return React.cloneElement(ch, { ...ch.props, style: { ...textStyle, ...ch.props.style || null } })
-//  })
-
-//  return <ButtonBase style={viewStyle} disabled={disabled} {...other}>{childs}</ButtonBase>
-//}
-
-
-//const Button = withStyles<Shape>(sheet, { name: 'MuiButton' })(button)
 const Button = withStyles<MuixButton.Shape>(sheet, { name: 'MuiButton' })(button)
 
-
-//const btn = <Button classes={{ root: {}, denseLabel: { color: '' } }} color='accent' onClick={null} />
-
-//export default Button
 export default Button
