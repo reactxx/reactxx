@@ -123,14 +123,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\components\common\ButtonBase\ButtonBase.d.ts" />
-    <TypeScriptCompile Include="src\components\common\Button\Button.d.ts" />
+    <TypeScriptCompile Include="src\components\typings\ButtonBase-d.d.ts" />
+    <TypeScriptCompile Include="src\components\typings\Button-d.d.ts" />
     <TypeScriptCompile Include="src\components\native\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\native\Button\Button.tsx" />
     <TypeScriptCompile Include="src\components\web\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
-    <TypeScriptCompile Include="src\primitives\common\Icon\Icon-d.d.ts" />
+    <TypeScriptCompile Include="src\primitives\typings\Icon-d.d.ts" />
     <TypeScriptCompile Include="src\test\common\components\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\index.tsx" />
@@ -159,7 +159,7 @@
     <TypeScriptCompile Include="src\styles\common\index.ts" />
     <TypeScriptCompile Include="src\styles\native\index.ts" />
     <TypeScriptCompile Include="src\styles\web\index.ts" />
-    <TypeScriptCompile Include="src\typings\shared\withStyles-d.d.ts" />
+    <TypeScriptCompile Include="src\styles\typings\withStyles-d.d.ts" />
     <TypeScriptCompile Include="src\styles\native\createTypography.ts" />
     <TypeScriptCompile Include="src\styles\native\expoLoadFonts.ts" />
     <TypeScriptCompile Include="src\styles\native\MuiThemeProvider.ts" />
@@ -170,10 +170,10 @@
     <TypeScriptCompile Include="src\test\common\primitives\icon.tsx" />
     <TypeScriptCompile Include="src\test\common\primitives\text-view.tsx" />
     <TypeScriptCompile Include="src\test\common\styles\typography.tsx" />
-    <TypeScriptCompile Include="src\typings\shared\material-ui-helper.d.ts" />
-    <TypeScriptCompile Include="src\typings\shared\material-ui.d.ts" />
-    <TypeScriptCompile Include="src\typings\shared\typings.d.ts" />
-    <TypeScriptCompile Include="src\typings\shared\material-ui-ex.d.ts" />
+    <TypeScriptCompile Include="src\styles\typings\material-ui-helper.d.ts" />
+    <TypeScriptCompile Include="src\styles\typings\material-ui.d.ts" />
+    <TypeScriptCompile Include="src\typings.d.ts" />
+    <TypeScriptCompile Include="src\styles\typings\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="src\styles\web\inline-styles.tsx" />
     <TypeScriptCompile Include="src\styles\web\withStyles.tsx" />
   </ItemGroup>

@@ -22,6 +22,12 @@ echo 2 "%webroot%"
 rmdir %root%deploy\%package%\native /s /q
 del %root%deploy\%package%\es\web\*.js /s /q
 
+rmdir %root%deploy\%package%\typings /s /q
+xcopy %root%src\%package%\typings %root%deploy\%package%\typings /s /q /i 
+rmdir %root%deploy\%package%\es\typings /s /q
+xcopy %root%src\%package%\typings %root%deploy\%package%\es\typings /s /q /i 
+
+
 rem *** publish
 call npm.cmd version patch
 call npm.cmd publish

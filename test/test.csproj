@@ -112,17 +112,13 @@
     <TypeScriptCompile Include="src\common\root.tsx" />
     <TypeScriptCompile Include="src\common\styles\typography.tsx" />
     <TypeScriptCompile Include="src\native\App.tsx" />
+    <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\web\index.tsx" />
     <TypeScriptCompile Include="trash\root.tsx" />
     <TypeScriptCompile Include="trash\test\App.tsx" />
     <TypeScriptCompile Include="trash\test\index.tsx" />
-    <TypeScriptCompile Include="typings\styles\material-ui-ex.d.ts" />
-    <TypeScriptCompile Include="typings\shared\material-icons.d.ts" />
-    <TypeScriptCompile Include="typings\shared\material-ui-helper.d.ts" />
-    <TypeScriptCompile Include="typings\shared\material-ui.d.ts" />
-    <TypeScriptCompile Include="typings\shared\typings.d.ts" />
-    <TypeScriptCompile Include="typings\styles\withStyles-d.d.ts" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
