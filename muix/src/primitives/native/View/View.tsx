@@ -7,7 +7,7 @@ import { View as RNView } from 'react-native'
 
 const view: Muix.CodeSFCNative<MuixView.Shape> = props => {
   const { classes, style, innerRef, ...rest } = props
-  return <RNView style={classNames(classes.root, style)} ref={div => innerRef && innerRef(div)} {...rest} />
+  return <RNView style={classNames(style, classes.root)} ref={div => innerRef && innerRef(div)} {...rest} />
 }
 
 const View = withStyles<MuixView.Shape>(sheet, { name: 'MuiView' })(view)

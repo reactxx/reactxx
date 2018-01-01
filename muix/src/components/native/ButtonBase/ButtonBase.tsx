@@ -104,8 +104,8 @@ export class buttonBase<R extends MuixButtonBase.Shape> extends React.Component<
     const { props: { style, classes } } = this
     //let x: Muix.CodePropsNative<MuixButtonBase.Shape>['classes']
     return classNames<ReactN.ViewStyle>(
-      classes.root,
       style,
+      classes.root,
     )
   }
 

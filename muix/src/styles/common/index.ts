@@ -19,10 +19,10 @@ export interface AppContainerProps {
   themeOptions?: Muix.ThemeOptions
 }
 
-export const classesPropsToSheet = (theme:Muix.ThemeNew, props: Muix.PropsX<Muix.Shape>) => {
-  const create = prop => (typeof prop==='function' ? prop(theme) : prop)
+export const classesPropsToSheet = (theme: Muix.ThemeNew, props: Muix.PropsX<Muix.Shape>) => {
+  const applyTheme = valueOrCreator => (typeof valueOrCreator === 'function' ? valueOrCreator(theme) : valueOrCreator)
   const { classes, classesNative, classesWeb } = props as Muix.PropsX<Muix.Shape>
-  return toPlatformSheet({ common: create(classes), native: create(classesNative), web: create(classesWeb) }) as Muix.PartialSheetX<Muix.Shape> 
+  return toPlatformSheet({ common: applyTheme(classes), native: applyTheme(classesNative), web: applyTheme(classesWeb) }) as Muix.PartialSheetX<Muix.Shape>
 }
 
 //create platform specific sheet from cross platform sheet creator
@@ -31,8 +31,8 @@ export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCrea
 //create platform specific ruleset from cross platform ruleset
 export const toPlatformRuleSetX = (style: Muix.TRulesetX, isNative: boolean) => {
   if (!style) return null
-  const { web, native, ...rest } = style
-  return { ...rest, ...(isNative ? native : web) } as Muix.TRuleset
+  const { web, native, rulesetPatch, ...rest } = style
+  return { ...rest, ...(isNative ? native : web), ...(isNative ? { rulesetPatch } : rulesetPatch) } as Muix.TRuleset
 }
 
 //create platform specific sheet from cross platform sheet
@@ -69,7 +69,7 @@ const getTypographyOptionOrCreatorX = (optionsOrCreatorX: Muix.TypographyOptions
       for (const p in rulesX) rules[p] = toPlatformRuleSet(rulesX[p]) //toPlatformRuleSet is platform specific
 
       res = {
-        fontFamily, fontSize, htmlFontSize, fontSizeNormalizerNative, 
+        fontFamily, fontSize, htmlFontSize, fontSizeNormalizerNative,
         ...rules
       }
     }
@@ -102,7 +102,7 @@ function createMuiTheme(options: Muix.ThemeOptions = {}) {
     typography: xxx1, //ignored
 
     //use cross platform shadows options instead
-    shadowsNew: shadowsNewInputX, 
+    shadowsNew: shadowsNewInputX,
     shadows: xxx2, //ignored
 
     //use cross platform overrides options instead
@@ -118,7 +118,7 @@ function createMuiTheme(options: Muix.ThemeOptions = {}) {
   const palette = createPalette(paletteInput)
   const breakpoints = createBreakpoints(breakpointsInput)
 
-  const typographyOptionOrCreator = getTypographyOptionOrCreatorX(typographyNew) 
+  const typographyOptionOrCreator = getTypographyOptionOrCreatorX(typographyNew)
 
   const muiTheme: Muix.ThemeNew = {
     direction: 'ltr', //the same format and value for web and native
@@ -147,10 +147,10 @@ function createMuiTheme(options: Muix.ThemeOptions = {}) {
   muiTheme.overrides = getOverridesX(muiTheme, overridesNew), //the same format, different values for web and native
 
 
-  warning(
-    muiTheme.shadows.length === 25 && muiTheme.shadowsNew.length === 25,
-    'MUIX: the shadows array provided to createMuiTheme should support 25 elevations.',
-  )
+    warning(
+      muiTheme.shadows.length === 25 && muiTheme.shadowsNew.length === 25,
+      'MUIX: the shadows array provided to createMuiTheme should support 25 elevations.',
+    )
 
   return muiTheme
 }

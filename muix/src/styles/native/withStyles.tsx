@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import deepmerge from 'deepmerge'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import MuiThemeProvider, { MuiThemeContextTypes } from './MuiThemeProvider'
 import createMuiTheme, { AppContainerProps, getDefaultTheme, classesPropsToSheet } from '../common/index'
@@ -23,40 +24,44 @@ export class AppContainer extends React.PureComponent<AppContainerProps> {
   }
 }
 
-const styleOverride = <R extends Muix.Shape>(renderedClasses: Muix.SheetNative<R>, classesProp: Muix.SheetNative<R>, name: string) => {
-  type untyped = Muix.SheetNative<Muix.Shape>
-  if (!classesProp) return renderedClasses
-  const stylesWithOverrides = { ...renderedClasses as untyped }  //destructor does not work with generics
-  Object.keys(classesProp).forEach(key => {
-    warning(!!stylesWithOverrides[key], `Material-UI: you are trying to override a style that does not exist.\r\nFix the '${key}' key of 'theme.overrides.${name}'.`)
-    stylesWithOverrides[key] = { ...stylesWithOverrides[key], ...(classesProp as untyped)[key] };
-  })
-  return stylesWithOverrides as Muix.SheetNative<R>
-}
+const mergeSheet = <R extends Muix.Shape>(source: Muix.SheetNative<R>, modify: Muix.SheetNative<R>/*, name: string*/) => modify ? deepmerge(source, modify) as Muix.SheetNative<R> : source
+//  type untyped = Muix.SheetNative<Muix.Shape>
+//  if (!modify) return source
 
-const styleCreator = <R extends Muix.Shape>(styleOrCreator: Muix.SheetOrCreator<R>, theme: Muix.ThemeNew, name?: string) => {
+//  const result = { ...source as untyped }  //destructor does not work with generics
+//  Object.keys(modify).forEach(key => {
+//    warning(!!result[key], `Material-UI: you are trying to override a style that does not exist.\r\nFix the '${key}' key of 'theme.overrides.${name}'.`)
+//    result[key] = { ...result[key], ...(modify as untyped)[key] };
+//  })
+//  return result as Muix.SheetNative<R>
+//}
+
+const getSheet = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, theme: Muix.ThemeNew, name?: string) => {
   const overrides = (theme.overrides && name && theme.overrides[name]) as Muix.SheetNative<R>
-  const styles = (typeof styleOrCreator === 'function' ? styleOrCreator(theme) : styleOrCreator) as Muix.SheetNative<R>
-  return styleOverride(styles, overrides, name)
+  const styles = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator) as Muix.SheetNative<R>
+  return mergeSheet(styles, overrides)
 }
 
-export const withStyles = <R extends Muix.Shape>(styleOrCreator: Muix.SheetOrCreator<R>, options?: Muix.WithStylesOptions) => (Component: Muix.CodeComponentType<R>) => {
+export const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, options?: Muix.WithStylesOptions) => (Component: Muix.CodeComponentType<R>) => {
   const Styled: Muix.SFCX<R> = (props, context: Muix.TMuiThemeContextValue) => {
     const { flip, name } = options
     const { classes: common, classesNative, classesWeb, style, web, native, onClick, onPress, ...other } = props as Muix.PropsX<Muix.Shape>
 
     const theme = context.theme || getDefaultTheme()
 
-    let cacheItem = theme.nativeSheetCache.find(it => it.key === styleOrCreator)
-    if (!cacheItem) theme.nativeSheetCache.push(cacheItem = { key: styleOrCreator, value: styleCreator(styleOrCreator, theme, name) })
+    //apply theme to sheet AND merge with theme.overrides
+    let cacheItem = theme.nativeSheetCache.find(it => it.sheetOrCreator === sheetOrCreator)
+    if (!cacheItem) theme.nativeSheetCache.push(cacheItem = { sheetOrCreator: sheetOrCreator, sheet: getSheet(sheetOrCreator, theme, name) })
 
     //console.log('1', toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>))
 
-    const classes = styleOverride(
-      cacheItem.value,
-      classesPropsToSheet(theme, props),
-      //toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>),
-      name)
+    //apply classes
+    const classes = mergeSheet(
+      cacheItem.sheet,
+      classesPropsToSheet(theme, props))
+
+    //add name to classes
+    for (const p in classes) classes[p].selfName = p
 
     const newProps = { ...other, ...native, theme, classes, style: toPlatformRuleSet(style), flip: typeof flip === 'boolean' ? flip : theme.direction === 'rtl' } as Muix.CodePropsNative<R>
     if (onPress || onClick) newProps.onPress = onPress || onClick
@@ -71,11 +76,35 @@ export const withStyles = <R extends Muix.Shape>(styleOrCreator: Muix.SheetOrCre
 
 export default withStyles
 
-export const classNames = <T extends Muix.CSSPropertiesNative>(...styles: Array<T | T[]>) => {
-  if (!styles) return null
-  return Object.assign({}, ...styles.filter(p => !!p).map(p => {
-    if (Array.isArray(p)) return Object.assign({}, ...p)
-    else return p
-  })) as T
+export const classNames = <T extends Muix.CSSPropertiesNative>(style: T, ...ruleSets: Array<T>) => {
+  if (!ruleSets) return null
+  //extract ruleset patches
+  const patched: { [selfName: string]: T } = {}
+  const list: T[] = []
+  ruleSets.map(r => {
+    const { selfName, rulesetPatch, ...rest } = r as any
+    const patch = patched[selfName]
+    patched[selfName] = patch ? { ...rest, ...patch as any } : rest
+    list.push(patched[selfName])
+    if (!r.rulesetPatch) return
+    for (const p in r.rulesetPatch) {
+      const newPatch = r.rulesetPatch[p]
+      const name = extractRulesetPatchName(p)
+      const patch = patched[name]
+      patched[name] = patch ? { ...patch as any, ...newPatch } : newPatch
+    }
+  })
+  //merge
+  return Object.assign({}, ...list) as T
 }
+const extractRulesetPatchName = (name: string) => name
+
+//export const classNamess = <T extends Muix.CSSPropertiesNative>(...ruleSets: Array<T | T[]>) => {
+//  if (!ruleSets) return null
+
+//  return Object.assign({}, ...ruleSets.filter(p => !!p).map(p => {
+//    if (Array.isArray(p)) return Object.assign({}, ...p)
+//    else return p
+//  })) as T
+//}
 

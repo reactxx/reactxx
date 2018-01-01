@@ -7,7 +7,7 @@ import { Text as RNText } from 'react-native'
 
 const text: Muix.CodeSFCNative<MuixText.Shape> = props => {
   const { classes, style, innerRef, ...rest } = props
-  return <RNText style={classNames<ReactN.TextStyle>(classes.root, style)} ref={div => innerRef && innerRef(div)} {...rest} />
+  return <RNText style={classNames<ReactN.TextStyle>(style, classes.root)} ref={div => innerRef && innerRef(div)} {...rest} />
 }
 
 const Text = withStyles<MuixText.Shape>(sheet, { name: 'MuiText' })(text)

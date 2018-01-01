@@ -31,14 +31,30 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
       minHeight: 32,
     },
 
+    flatPrimary: {
+      rulesetPatch: {
+        '& $label': { color: palette.primary[500] },
+        '& $ripple': { backgroundColor: fade(palette.primary[500], 0.4), opacity: 0.8 },
+      }
+    },
     raised: {
       backgroundColor: palette.grey[300],
       ...shadowsNew[2],
     },
     raisedActive: shadowsNew[8],
-    raisedPrimary: { backgroundColor: palette.primary[500] },
-    raisedAccent: { backgroundColor: palette.secondary.A200, },
 
+    raisedPrimary: {
+      backgroundColor: palette.primary[500],
+      rulesetPatch: {
+        '& $label': { color: palette.getContrastText(palette.primary[500]) },
+      }
+    },
+    raisedAccent: {
+      backgroundColor: palette.secondary.A200,
+      rulesetPatch: {
+        '& $label': { color: palette.getContrastText(palette.secondary.A200), },
+      }
+    },
     raisedDisable: {
       ...shadowsNew[0],
       backgroundColor: palette.text.divider,
@@ -62,14 +78,14 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
       height: 40,
       borderRadius: 40 / 2,
     },
+    label: {//#label:true,
+      ...typo.button,
+      color: palette.text.primary,
+    },
   },
   native: {
     ripple: {
       backgroundColor: palette.common.white, opacity: 0.35,
-    },
-    rootLabel: {
-      ...typo.button,
-      color: palette.text.primary,
     },
     denseLabel: { fontSize: typo.fontSizeNormalizerNative(typo.fontSize - 1), },
 
@@ -111,7 +127,8 @@ class button extends buttonBase<MuixButton.Shape> {
     const flat = !raised && !fab
 
     const textStyle = classNames<ReactN.TextStyle>(
-      classes.rootLabel,
+      null,
+      classes.label,
       flat && color === 'accent' && classes.flatLabelAccent,
       flat && color === 'contrast' && classes.flatLabelContrast,
       flat && color === 'primary' && classes.flatLabelPrimary,
@@ -148,6 +165,7 @@ class button extends buttonBase<MuixButton.Shape> {
     const active = this.state.active === true
 
     return classNames<ReactN.ViewStyle>(
+      style,
       classes.root,
       (raised || fab) && classes.raised,
       fab && classes.fab,
@@ -158,7 +176,6 @@ class button extends buttonBase<MuixButton.Shape> {
       (raised || fab) && disabled && classes.raisedDisable,
       active && raised && !disabled && classes.raisedActive,
       active && fab && !disabled && classes.fabActive,
-      style,
     )
   }
 }
