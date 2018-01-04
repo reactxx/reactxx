@@ -2,10 +2,11 @@
 import ReactN from 'react-native'
 import { Platform, View, Text } from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
+import { capitalizeFirstLetter } from 'material-ui/utils/helpers';
 
-import { withStyles, classNames, toPlatformRuleSet, sheetCreator } from 'muix-styles'
+import { withStyles, classNames2, toPlatformRuleSet, sheetCreator } from 'muix-styles/native'
 
-import ButtonBase, { buttonBase } from '../ButtonBase/ButtonBase'
+import { ButtonBaseLow } from '../ButtonBase/ButtonBase'
 
 //export type ButtonShape = Shape
 
@@ -29,19 +30,49 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
       paddingRight: spacing.unit,
       minWidth: 64,
       minHeight: 32,
+      rulesetPatch: {
+        '& $label': { fontSize: typo.fontSizeNormalizerNative(typo.fontSize - 1), },
+      }
     },
 
+    disabled: {
+      rulesetPatch: {
+        '& $label': { color: palette.action.disabled, },
+      }
+    },
+
+    flat: {
+      rulesetPatch: {
+        '& $ripple': { backgroundColor: palette.grey[500], opacity: 0.8 },
+      }
+    },
     flatPrimary: {
       rulesetPatch: {
         '& $label': { color: palette.primary[500] },
-        '& $ripple': { backgroundColor: fade(palette.primary[500], 0.4), opacity: 0.8 },
+        '& $ripple': { backgroundColor: fade(palette.primary[500], 0.4), opacity: 0.8 }, 
       }
     },
+    flatAccent: {
+      rulesetPatch: {
+        '& $label': { color: palette.secondary.A200 },
+        '& $ripple': { backgroundColor: fade(palette.secondary.A200, 0.4), opacity: 0.8 },
+      }
+    },
+    flatContrast: {
+      rulesetPatch: {
+        '& $label': { color: palette.getContrastText(palette.primary[500]) },
+        '& $ripple': { backgroundColor: fade(palette.getContrastText(palette.primary[500]), 0.4), opacity: 0.8 },
+      }
+    },
+
+
     raised: {
       backgroundColor: palette.grey[300],
       ...shadowsNew[2],
+      rulesetPatch: {
+        '& $active': shadowsNew[8],
+      }
     },
-    raisedActive: shadowsNew[8],
 
     raisedPrimary: {
       backgroundColor: palette.primary[500],
@@ -58,6 +89,14 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
     raisedDisable: {
       ...shadowsNew[0],
       backgroundColor: palette.text.divider,
+      rulesetPatch: {
+        '& $label': { color: palette.getContrastText(palette.primary[500]) },
+      }
+    },
+    raisedContrast: {
+      rulesetPatch: {
+        '& $label': { color: palette.getContrastText(palette.primary[500]), },
+      }
     },
 
     fab: {
@@ -70,15 +109,18 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
       height: 56,
       borderRadius: 56 / 2,
       ...shadowsNew[6],
+      rulesetPatch: {
+        '& $active': shadowsNew[12],
+      }
     },
-    fabActive: shadowsNew[12],
+    active: {},
 
     mini: {
       width: 40,
       height: 40,
       borderRadius: 40 / 2,
     },
-    label: {//#label:true,
+    label: {
       ...typo.button,
       color: palette.text.primary,
     },
@@ -87,97 +129,49 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
     ripple: {
       backgroundColor: palette.common.white, opacity: 0.35,
     },
-    denseLabel: { fontSize: typo.fontSizeNormalizerNative(typo.fontSize - 1), },
-
-    flatLabelPrimary: { color: palette.primary[500], },
-    flatLabelAccent: { color: palette.secondary.A200, },
-    flatLabelContrast: { color: palette.getContrastText(palette.primary[500]), },
-
-    raisedLabelAccent: { color: palette.getContrastText(palette.secondary.A200), },
-    raisedLabelContrast: { color: palette.getContrastText(palette.primary[500]), },
-    raisedLabelPrimary: { color: palette.getContrastText(palette.primary[500]), },
-
-    accentFlatRipple: { backgroundColor: fade(palette.secondary.A200, 0.4), opacity: 0.8 },
-    primaryFlatRipple: { backgroundColor: fade(palette.primary[500], 0.4), opacity: 0.8 },
-    contrastFlatRipple: { backgroundColor: fade(palette.getContrastText(palette.primary[500]), 0.4), opacity: 0.8 },
-    defaultFlatRipple: { backgroundColor: palette.grey[500], opacity: 0.8 },
-
-    disabledLabel: { color: palette.action.disabled, },
-
   },
   web: { } as any, //defined in material-ui only
 }))
 
-class button extends buttonBase<MuixButton.Shape> {
+const button: Muix.CodeSFCNative<MuixButton.Shape> = props => {
 
-  render() {
+  const { children, classes, color = 'default', dense, fab, style, raised, mini, ...rest } = props
+  const { disabled } = rest //disabled must be propagated to ButtonBaseLow
 
-    const {
-      children,
-      classes,
-      color = 'default',
-      dense,
-      disabled,
-      fab,
-      style,
-      raised,
-      ...other
-    } = this.props
+  const isFlat = !raised && !fab
+  const Color = capitalizeFirstLetter(color)
 
-    const flat = !raised && !fab
+  const context = {}
+  const viewStyle = classNames2<ReactN.ViewStyle>( 
+    context,
+    classes.root,
+    !isFlat && classes.raised,
+    isFlat && classes.flat,
+    !isFlat && classes[`raised${Color}`],
+    fab && classes.fab,
+    isFlat && classes[`flat${Color}`],
+    mini && classes.mini,
+    dense && classes.dense,
+    !isFlat && disabled && classes.raisedDisable,
+    isFlat && disabled && classes.disabled,
+    style,
+  )
 
-    const textStyle = classNames<ReactN.TextStyle>(
-      null,
-      classes.label,
-      flat && color === 'accent' && classes.flatLabelAccent,
-      flat && color === 'contrast' && classes.flatLabelContrast,
-      flat && color === 'primary' && classes.flatLabelPrimary,
-      !flat && color === 'accent' && classes.raisedLabelAccent,
-      !flat && color === 'contrast' && classes.raisedLabelContrast,
-      !flat && color === 'primary' && classes.raisedLabelPrimary,
-      dense && classes.denseLabel,
-      disabled && classes.disabledLabel,
-    )
+  const rippleStyle = classNames2<ReactN.ViewStyle>(context, classes.ripple)
+  const activeStyle = classNames2<ReactN.ViewStyle>(context, !disabled && classes.active)
+  const labelStyle = classNames2<ReactN.ViewStyle>(context, classes.label)
 
-    console.log(this.getRootStyle(), textStyle)
+  //console.log('button classes', context)
+  //console.log(labelStyle)
 
-    const childs = React.Children.toArray(children).map((ch, idx) => {
-      if (typeof ch === 'string' || typeof ch === 'number') return <Text key={idx} style={textStyle}>{ch.toString().toUpperCase()}</Text>
-      else return React.cloneElement(ch, { ...ch.props, style: { ...textStyle, ...ch.props.style || null } })
-    })
+  const childs = React.Children.toArray(children).map((ch, idx) => {
+    if (typeof ch === 'string' || typeof ch === 'number') return <Text key={idx} style={labelStyle}>{ch.toString().toUpperCase()}</Text>
+    else return React.cloneElement(ch, { ...ch.props, style: { ...labelStyle, ...ch.props.style || null } })
+  })
 
-    return this.doRender(childs, flat ? classes[`${color}FlatRipple`] : (color === 'default' ? classes.defaultFlatRipple : null))
-  }
-
-  getRootStyle() {
-    const {
-      classes,
-      color = 'default',
-      dense,
-      disabled,
-      fab,
-      style,
-      mini,
-      raised,
-    } = this.props
-
-    const flat = !raised && !fab
-    const active = this.state.active === true
-
-    return classNames<ReactN.ViewStyle>(
-      style,
-      classes.root,
-      (raised || fab) && classes.raised,
-      fab && classes.fab,
-      mini && classes.mini,
-      !flat && color === 'accent' && classes.raisedAccent,
-      !flat && color === 'primary' && classes.raisedPrimary,
-      dense && classes.dense,
-      (raised || fab) && disabled && classes.raisedDisable,
-      active && raised && !disabled && classes.raisedActive,
-      active && fab && !disabled && classes.fabActive,
-    )
-  }
+  return <ButtonBaseLow viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} {...rest}>
+    {childs}
+  </ButtonBaseLow>
 }
 
 const Button = withStyles<MuixButton.Shape>(sheet, { name: 'MuiButton' })(button)

@@ -23,7 +23,13 @@ const sheet = sheetCreator<MuixButtonBase.Shape>(({ palette }) => ({
 
 const minRippleSize = 0.01
 
-export class buttonBase<R extends MuixButtonBase.Shape> extends React.Component<Muix.CodePropsNative<R> & Muix.CodePropsNative<MuixButtonBase.Shape>> {
+export interface ButtonBaseStyles {
+  viewStyle: ReactN.ViewStyle
+  activeStyle: ReactN.ViewStyle
+  rippleStyle: ReactN.ViewStyle
+}
+
+export class ButtonBaseLow<R extends MuixButtonBase.Shape> extends React.Component<ButtonBaseStyles & Muix.CodePropsNative<R> & Muix.CodePropsNative<MuixButtonBase.Shape>> {
 
   state: { active?: boolean } = {}
   scaleValue = new Animated.Value(minRippleSize)
@@ -43,17 +49,17 @@ export class buttonBase<R extends MuixButtonBase.Shape> extends React.Component<
   onPressedIn = (() => this.setState({ active: true })).bind(this)
   onPressedOut = (() => this.setState({ active: false })).bind(this)
 
-  doRender(children: React.ReactNode, ripple: ReactN.ViewStyle) {
-    const { scaleValue, opacityValue, onPressedIn, onPressedOut, rect: { width, height }, state: { active }, props: { style, disabled, onPress, classes, theme, innerRef, disableRipple } } = this
-    if (!ripple) ripple = classes.ripple
+  render() {
+    const { scaleValue, opacityValue, onPressedIn, onPressedOut, rect: { width, height }, state: { active }, props: { children, viewStyle, rippleStyle, activeStyle, disabled, onPress, theme, innerRef, disableRipple } } = this
 
     const renderRipple = () => {
+
       if (disabled || disableRipple || !width || !height || typeof active == 'undefined') return null
 
       const radius = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2))
 
       const style = {
-        ...ripple,
+        ...rippleStyle as ReactN.ViewStyle,
         position: 'absolute',
         left: -(radius - width / 2),
         top: - (radius - height / 2),
@@ -64,14 +70,14 @@ export class buttonBase<R extends MuixButtonBase.Shape> extends React.Component<
         opacity: opacityValue as any,
       } as ReactN.ViewStyle
 
-      //console.log(radius, style, this.props)
+      //console.log('renderRipple', style)
 
       return <Animated.View style={style} />
     }
 
     if (active === true) {
       this.clear()
-      opacityValue.setValue(ripple.opacity)
+      opacityValue.setValue(rippleStyle.opacity)
       this.scale = Animated.timing(scaleValue, {
         toValue: 1,
         duration: theme.transitions.duration.short,
@@ -90,32 +96,23 @@ export class buttonBase<R extends MuixButtonBase.Shape> extends React.Component<
       this.opacity.start(() => this.clear())
     }
 
-    //console.log(this.getRootStyle())
-
+    
     return <TouchableWithoutFeedback disabled={disabled} onPress={onPress} onPressIn={onPressedIn} onPressOut={onPressedOut} onLayout={({ nativeEvent: { layout } }) => this.rect = layout} ref={div => innerRef && innerRef(div)} >
-      <View style={this.getRootStyle()}>
+      <View style={Object.assign({}, viewStyle, false/*active*/ ? activeStyle : null)}>
         {renderRipple()}
         {children}
       </View>
     </TouchableWithoutFeedback>
   }
 
-  getRootStyle() {
-    const { props: { style, classes } } = this
-    //let x: Muix.CodePropsNative<MuixButtonBase.Shape>['classes']
-    return classNames<ReactN.ViewStyle>(
-      style,
-      classes.root,
-    )
-  }
-
-  render() {
-    const { props: { classes: { ripple }, children }} = this
-    return this.doRender(children, ripple)
-  }
 }
 
-//let y: Muix.getCommon<MuixButtonBase.Shape>
+const buttonBase: Muix.CodeSFCNative<MuixButtonBase.Shape> = props => {
+  const { style, classes, ...rest } = props
+  const viewStyle = classNames<ReactN.ViewStyle>(style, classes.root)
+  const rippleStyle = classNames<ReactN.ViewStyle>(null, classes.ripple)
+  return <ButtonBaseLow viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} {...rest} />
+}
 
 const ButtonBase = withStyles<MuixButtonBase.Shape>(sheet, { name: 'MuiButtonBase' })(buttonBase)
 

@@ -21,9 +21,13 @@ const rootView: ReactN.ViewStyle = { flexDirection: 'row', flexWrap: 'wrap', jus
 
 const app2: React.SFC = props => <AppContainer themeOptions={{ overridesNew: theme => ({ MuiButton: { common: { root: { margin: theme.spacing.unit, flexShrink: 0 } } } }) }}>
   <View classes={{ root: rootView }} >
-    <Button raised color="primary">
+    <Button raised disabled>
       Primary
     </Button>
+    <Button fab mini disabled>
+      <Icon>{MuixIcons.Delete}</Icon>
+    </Button>
+
   </View>
 </AppContainer>
 
@@ -38,9 +42,8 @@ const app: React.SFC = props => <AppContainer themeOptions={{ overridesNew: them
         Accent
       </Button>
       <View style={{ backgroundColor: theme.palette.common.black }}>
-        <Button color="contrast" >
-          Contrast
-      </Button>
+        <Button color="contrast" >Contrast</Button>
+        <Button color="contrast" disabled >Contrast</Button>
       </View>
       <Button disabled >
         Disabled

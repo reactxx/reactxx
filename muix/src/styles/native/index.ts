@@ -11,15 +11,15 @@ export { default as createTypography } from '../native/createTypography'
 export const toPlatformRuleSet = <T extends Muix.CSSPropertiesNative>(style: Muix.RulesetX<T>) => toPlatformRuleSetX(style, true) as T
 export const toPlatformSheet = <R extends Muix.Shape>(rules: Muix.PartialSheetX<R>) => toPlatformSheetX(rules, true) as Muix.SheetNative<R>
 
-const round = (value: number) => Math.round(value * 1e5) / 1e5
-const shadow = (deep: number) => ({
-  elevation: round(elev = elev + 0.25),
-  shadowOpacity: 0.24, //round(0.0015 * deep + 0.18),
-  shadowRadius: round(0.54 * deep),
-  shadowOffset: {
-    height: 0.6 * deep,
-  },
-} as ReactN.ViewStyle)
+//const round = (value: number) => Math.round(value * 1e5) / 1e5
+//const shadow = (deep: number) => ({
+//  elevation: round(elev = elev + 0.25),
+//  shadowOpacity: 0.24, //round(0.0015 * deep + 0.18),
+//  shadowRadius: round(0.54 * deep),
+//  shadowOffset: {
+//    height: 0.6 * deep,
+//  },
+//} as ReactN.ViewStyle)
 
 
 let elev = 0.25
@@ -28,6 +28,6 @@ export const shadows: ReactN.ViewStyle[] = getShadows()
 
 export { sheetCreator, default as createMuiTheme } from '../common/index'
 
-export { classNames, withStyles, AppContainer } from './withStyles'
+export { classNames, classNames2, withStyles, AppContainer } from './withStyles'
 
 export { default as MuiThemeProvider } from './MuiThemeProvider'

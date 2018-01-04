@@ -42,7 +42,7 @@ export const withStylesX = <R extends Muix.Shape>(Component: Muix.muiComponentTy
   return hoistNonReactStatics(res, Component)
 }
 
-export const withStyles = <R extends Muix.Shape>(styleOrCreator: Muix.SheetOrCreator<R>, options?: Muix.WithStylesOptions) => (comp: Muix.muiComponentType<Muix.getProps<R>, webKeys<R>>) => {
+export const withStyles = <R extends Muix.Shape>(styleOrCreator: Muix.SheetOrCreator<R>, options?: Muix.WithStylesOptionsNew) => (comp: Muix.muiComponentType<Muix.getProps<R>, webKeys<R>>) => {
   const withStyles = withStylesMui as any as Muix.muiWithStyles
   return withStylesX<R>(withStyles(styleOrCreator, options)(comp as Muix.muiCodeComponentType<Muix.getProps<R>, webKeys<R>>))
 }
