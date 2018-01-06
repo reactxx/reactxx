@@ -6,19 +6,14 @@ import { View, TouchableWithoutFeedback, Animated, Easing, Platform, Text, Layou
 import { sheetCreator, withStyles, classNames } from 'muix-styles'
 
 const sheet = sheetCreator<MuixButtonBase.Shape>(({ palette }) => ({
-  common: {
-    root: {
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
+  root: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  native: {
-    ripple: {
-      backgroundColor: palette.common.white,
-      opacity: 0.35,
-    },
+  ripple: {
+    backgroundColor: palette.common.white,
+    opacity: 0.35,
   },
-  web: {}
 }))
 
 const minRippleSize = 0.01
@@ -65,7 +60,7 @@ export class ButtonBaseLow<R extends MuixButtonBase.Shape> extends React.Compone
         top: - (radius - height / 2),
         width: radius * 2,
         height: radius * 2,
-        borderRadius: radius, 
+        borderRadius: radius,
         transform: [{ scale: scaleValue as any }],
         opacity: opacityValue as any,
       } as ReactN.ViewStyle
@@ -96,7 +91,7 @@ export class ButtonBaseLow<R extends MuixButtonBase.Shape> extends React.Compone
       this.opacity.start(() => this.clear())
     }
 
-    
+
     return <TouchableWithoutFeedback disabled={disabled} onPress={onPress} onPressIn={onPressedIn} onPressOut={onPressedOut} onLayout={({ nativeEvent: { layout } }) => this.rect = layout} ref={div => innerRef && innerRef(div)} >
       <View style={Object.assign({}, viewStyle, false/*active*/ ? activeStyle : null)}>
         {renderRipple()}

@@ -24,7 +24,7 @@ export class AppContainer extends React.PureComponent<AppContainerProps> {
   }
 }
 
-const mergeSheet = <R extends Muix.Shape>(source: Muix.SheetNative<R>, modify: Muix.SheetNative<R>/*, name: string*/) => modify ? deepmerge(source, modify) as Muix.SheetNative<R> : source
+const mergeSheet = <R extends Muix.Shape>(source: Muix.SheetNative<R>, modifier: Muix.SheetNative<R>/*, name: string*/) => modifier ? deepmerge(source, modifier) as Muix.SheetNative<R> : source
 //  type untyped = Muix.SheetNative<Muix.Shape>
 //  if (!modify) return source
 
@@ -51,7 +51,7 @@ export const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCre
 
     //apply theme to sheet AND merge with theme.overrides
     let cacheItem = theme.nativeSheetCache.find(it => it.sheetOrCreator === sheetOrCreator)
-    if (!cacheItem) theme.nativeSheetCache.push(cacheItem = { sheetOrCreator: sheetOrCreator, sheet: getSheet(sheetOrCreator, theme, name) })
+    if (!cacheItem) theme.nativeSheetCache.push(cacheItem = { sheetOrCreator, sheet: getSheet(sheetOrCreator, theme, name) })
 
     //console.log('1', toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>))
 
@@ -61,7 +61,7 @@ export const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCre
       classesPropsToSheet(theme, props))
 
     //add name to classes
-    for (const p in classes) classes[p].selfName = p
+    for (const p in classes) classes[p].$name = p
 
     const newProps = { ...other, ...native, theme, classes, style: toPlatformRuleSet(style), flip: typeof flip === 'boolean' ? flip : theme.direction === 'rtl' } as Muix.CodePropsNative<R>
     if (onPress || onClick) newProps.onPress = onPress || onClick
@@ -76,7 +76,9 @@ export const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCre
 
 export default withStyles
 
-export const classNames = <T extends Muix.CSSPropertiesNative>(style: T, ...ruleSets: Array<T>) => {
+type CSSPropertiesNative = Muix.CSSPropertiesNative & Muix.RulesetPatchNative<Muix.Shape>
+
+export const classNames = <T extends CSSPropertiesNative>(style: T, ...ruleSets: Array<T>) => {
   if (!ruleSets) return null
   //console.log('classNames, ruleSets', ruleSets)
   //extract ruleset patches
@@ -84,14 +86,14 @@ export const classNames = <T extends Muix.CSSPropertiesNative>(style: T, ...rule
   const list: T[] = []
   ruleSets.map(r => {
     if (!r) return
-    const { selfName, rulesetPatch } = r
-    const patch = patched[selfName]
+    const { $name, $patch } = r
+    const patch = patched[$name]
     //console.log('classNames, patch', patch)
-    patched[selfName] = patch ? Object.assign(r, patch) : r
-    list.push(patched[selfName])
-    if (!r.rulesetPatch) return
-    for (const p in r.rulesetPatch) {
-      const patch = r.rulesetPatch[p] as T
+    patched[$name] = patch ? Object.assign(r, patch) : r
+    list.push(patched[$name])
+    if (!r.$patch) return
+    for (const p in r.$patch) {
+      const patch = r.$patch[p] as T
       const name = extractRulesetPatchName(p)
       const rule = patched[name]
       patched[name] = rule ? Object.assign(rule, patch) : patch
@@ -101,12 +103,12 @@ export const classNames = <T extends Muix.CSSPropertiesNative>(style: T, ...rule
 
   //merge
   const res = Object.assign({}, ...list, style) as T
-  delete res.rulesetPatch; delete res.selfName
+  delete res.$patch; delete res.$name
   return res
 }
 const extractRulesetPatchName = (name: string) => name.split('$')[1]
 
-export const classNames2 = <T extends Muix.CSSPropertiesNative>(patched: { [selfName: string]: T }, ...ruleSets: Array<T>) => {
+export const classNames2 = <T extends CSSPropertiesNative>(patched: { [selfName: string]: T }, ...ruleSets: Array<T>) => {
   if (!ruleSets) return null
   //console.log('classNames, ruleSets', ruleSets)
   //extract ruleset patches
@@ -114,18 +116,18 @@ export const classNames2 = <T extends Muix.CSSPropertiesNative>(patched: { [self
   const list: T[] = []
   ruleSets.map(r => {
     if (!r) return
-    const { selfName, rulesetPatch } = r
-    if (!selfName) { //e.g. 'style' as last argument
+    const { $name, $patch } = r
+    if (!$name) { //e.g. 'style' as last argument
       list.push(r)
       return
     }
-    const patch = patched[selfName]
+    const patch = patched[$name]
     //console.log('classNames, patch', patch)
-    patched[selfName] = patch ? Object.assign(r, patch) : r
-    list.push(patched[selfName])
-    if (!r.rulesetPatch) return
-    for (const p in r.rulesetPatch) {
-      const patch = r.rulesetPatch[p] as T
+    patched[$name] = patch ? Object.assign(r, patch) : r
+    list.push(patched[$name])
+    if (!r.$patch) return
+    for (const p in r.$patch) {
+      const patch = r.$patch[p] as T
       const name = extractRulesetPatchName(p)
       const rule = patched[name]
       patched[name] = rule ? Object.assign(rule, patch) : patch
@@ -135,7 +137,7 @@ export const classNames2 = <T extends Muix.CSSPropertiesNative>(patched: { [self
 
   //merge
   const res = Object.assign({}, ...list) as T
-  delete res.rulesetPatch; delete res.selfName
+  delete res.$patch; delete res.$name
   return res
 }
 

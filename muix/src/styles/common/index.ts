@@ -26,13 +26,13 @@ export const classesPropsToSheet = (theme: Muix.ThemeNew, props: Muix.PropsX<Mui
 }
 
 //create platform specific sheet from cross platform sheet creator
-export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCreator<Muix.SheetX<R>>) => (theme: Muix.ThemeNew) => toPlatformSheet(sheetXCreator(theme as Muix.ThemeNew) as Muix.PartialSheetX<R>)
+export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCreator<Muix.SheetX<R>>) => ((theme: Muix.ThemeNew) => toPlatformSheet(sheetXCreator(theme as Muix.ThemeNew) as Muix.PartialSheetX<R>)) as Muix.SheetCreator<R>
 
 //create platform specific ruleset from cross platform ruleset
 export const toPlatformRuleSetX = (style: Muix.TRulesetX, isNative: boolean) => {
   if (!style) return null
-  const { web, native, rulesetPatch, ...rest } = style
-  return { ...rest, ...(isNative ? native : web), ...(isNative ? { rulesetPatch } : rulesetPatch) } as Muix.TRuleset
+  const { $web, $native, $patch, ...rest } = style
+  return { ...rest, ...(isNative ? $native : $web), ...(isNative ? { $patch } : $patch) } as Muix.TRuleset
 }
 
 //create platform specific sheet from cross platform sheet

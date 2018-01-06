@@ -8,7 +8,7 @@ import orange from 'material-ui/colors/orange'
 import green from 'material-ui/colors/green'
 import cyan from 'material-ui/colors/cyan'
 
-import { View, ScrollView, Typography} from 'muix-primitives'
+import { View, ScrollView, Typography } from 'muix-primitives'
 
 const theme = createMuiTheme({
   typography: palette => ({
@@ -27,10 +27,8 @@ const theme = createMuiTheme({
   },
   overridesNew: {
     MuiTypography: {
-      common: {
-        colorAccent: { color: cyan.A700, fontWeight: '500', fontSize: 18 },
-        display2: { color: cyan.A700 },
-      }
+      colorAccent: { color: cyan.A700, fontWeight: '500', fontSize: 18 },
+      display2: { color: cyan.A700 },
     }
   }
 })
@@ -39,7 +37,7 @@ const app2 = () => <Typography classes={{ root: { fontWeight: '500', textDecorat
 
 const app = () => <ScrollView>
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>noWrap</Typography>
-  <Typography noWrap style={{ width: 200, flexShrink:0 }}>noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap </Typography>
+  <Typography noWrap style={{ width: 200, flexShrink: 0 }}>noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap </Typography>
   {/**/}
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>MARGINS</Typography>
   <Typography paragraph>paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph </Typography>

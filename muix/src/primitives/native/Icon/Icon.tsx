@@ -11,6 +11,9 @@ const icon: Muix.CodeSFCNative<MuixIcon.Shape> = props => {
   return <MIcon name={name as any} style={classNames(style as Muix.RNIconStyle, ...iconClass)} ref={div => innerRef && innerRef(div)} {...rest} />
 }
 
+let t: Muix.SheetNative<MuixIcon.Shape>
+
+
 const Icon = withStyles<MuixIcon.Shape>(sheet, { name: 'MuiIcon' })(icon)
 
 export default Icon

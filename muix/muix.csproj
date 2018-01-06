@@ -136,9 +136,12 @@
     <TypeScriptCompile Include="src\primitives\typings\Typography-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\ScrollView-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\Icon-d.d.ts" />
+    <TypeScriptCompile Include="src\styles\common\utils.ts" />
+    <TypeScriptCompile Include="src\styles\typings\withStyles2-d.d.ts" />
     <TypeScriptCompile Include="src\test\common\components\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\index.tsx" />
+    <TypeScriptCompile Include="src\test\common\styles\test.ts" />
     <TypeScriptCompile Include="src\test\native\App.tsx" />
     <TypeScriptCompile Include="src\test\common\root.tsx" />
     <TypeScriptCompile Include="src\primitives\common\Icon\Icon.tsx" />
