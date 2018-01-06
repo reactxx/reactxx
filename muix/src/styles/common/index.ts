@@ -26,24 +26,21 @@ export const classesPropsToSheet = (theme: Muix.ThemeNew, props: Muix.PropsX<Mui
 }
 
 //create platform specific sheet from cross platform sheet creator
-export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCreator<Muix.SheetX<R>>) => ((theme: Muix.ThemeNew) => toPlatformSheet(sheetXCreator(theme as Muix.ThemeNew) as Muix.PartialSheetX<R>)) as Muix.SheetCreator<R>
+export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCreator<Muix.SheetX<R>>) => ((theme: Muix.ThemeNew) => toPlatformSheet(sheetXCreator(theme) as Muix.PartialSheetX<R>)) as Muix.SheetCreator<R>
 
 //create platform specific ruleset from cross platform ruleset
 export const toPlatformRuleSetX = (style: Muix.TRulesetX, isNative: boolean) => {
   if (!style) return null
-  const { $web, $native, $patch, ...rest } = style
-  return { ...rest, ...(isNative ? $native : $web), ...(isNative ? { $patch } : $patch) } as Muix.TRuleset
+  const { $web, $native, $override, $overrides, ...rest } = style
+  return { ...rest, ...(isNative ? $native : $web), $patch: toPlatformSheetX($override, isNative), $overrides: getOverridesX(null, $overrides) } as Muix.TRuleset
 }
 
 //create platform specific sheet from cross platform sheet
-export const toPlatformSheetX = (rules: Muix.PartialSheetX<Muix.Shape>, isNative: boolean) => {
-  if (!rules) return null
-  const res = { ...(isNative ? rules.native : rules.web) }
-  for (const p in rules.common) {
-    const common = toPlatformRuleSetX(rules.common[p], isNative)
-    res[p] = !!res[p] ? { ...common, ...res[p] } : common
-  }
-  return res as Muix.Sheet<Muix.Shape>
+export const toPlatformSheetX = (sheet: Muix.PartialSheetX<Muix.Shape>, isNative: boolean) => {
+  if (!sheet) return null
+  const res: Muix.Sheet<Muix.Shape> = {}
+  for (const p in sheet) res[p] = toPlatformRuleSetX(sheet[p], isNative)
+  return res
 }
 
 //create platform specific Overrides from cross platform Overrides
@@ -143,14 +140,9 @@ function createMuiTheme(options: Muix.ThemeOptions = {}) {
     )) as Muix.ThemeNew,
   }
 
+  muiTheme.overrides = getOverridesX(muiTheme, overridesNew) //the same format, different values for web and native
 
-  muiTheme.overrides = getOverridesX(muiTheme, overridesNew), //the same format, different values for web and native
-
-
-    warning(
-      muiTheme.shadows.length === 25 && muiTheme.shadowsNew.length === 25,
-      'MUIX: the shadows array provided to createMuiTheme should support 25 elevations.',
-    )
+  warning(muiTheme.shadows.length === 25 && muiTheme.shadowsNew.length === 25, 'MUIX: the shadows array provided to createMuiTheme should support 25 elevations.' )
 
   return muiTheme
 }

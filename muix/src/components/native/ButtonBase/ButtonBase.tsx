@@ -24,7 +24,7 @@ export interface ButtonBaseStyles {
   rippleStyle: ReactN.ViewStyle
 }
 
-export class ButtonBaseLow<R extends MuixButtonBase.Shape> extends React.Component<ButtonBaseStyles & Muix.CodePropsNative<R> & Muix.CodePropsNative<MuixButtonBase.Shape>> {
+export class ButtonBaseLow<R extends MuixButtonBase.Shape> extends React.Component<ButtonBaseStyles & Muix.CodePropsNative<R>> { //  React.Component<ButtonBaseStyles & Muix.CodePropsNative<R> & Muix.CodePropsNative<MuixButtonBase.Shape>> {
 
   state: { active?: boolean } = {}
   scaleValue = new Animated.Value(minRippleSize)
@@ -102,11 +102,14 @@ export class ButtonBaseLow<R extends MuixButtonBase.Shape> extends React.Compone
 
 }
 
+let t: Muix.CodePropsNative<MuixButtonBase.Shape>
+
+
 const buttonBase: Muix.CodeSFCNative<MuixButtonBase.Shape> = props => {
   const { style, classes, ...rest } = props
   const viewStyle = classNames<ReactN.ViewStyle>(style, classes.root)
   const rippleStyle = classNames<ReactN.ViewStyle>(null, classes.ripple)
-  return <ButtonBaseLow viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} {...rest} />
+  return <ButtonBaseLow viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} {...rest} />
 }
 
 const ButtonBase = withStyles<MuixButtonBase.Shape>(sheet, { name: 'MuiButtonBase' })(buttonBase)

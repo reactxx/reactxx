@@ -73,7 +73,7 @@
     <Content Include="app.json" />
     <Content Include="assets\icon.png" />
     <Content Include="assets\splash.png" />
-    <Content Include="gulpfile.js" />
+    <None Include="gulpfile.js_" />
     <Content Include="index.html" />
     <Content Include="package.json" />
     <Content Include="%24publish.cmd" />
