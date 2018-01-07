@@ -6,14 +6,7 @@ import { sheetCreator, AppContainer, MuiThemeProvider } from 'muix-styles'
 import { withStyles } from '../../styles/common/withStyles'
 import { ruleToClassNames } from '../../styles/web/fela'
 
-type Shape = Overwrite<Muix.DefaultEmptyShape, {
-  common: Muix.ShapeViews<'root' | 'primary' | 'secondary'> & Muix.ShapeTexts<'label'>
-  native: Muix.ShapeViews<'rootNative'> & Muix.ShapeTexts<'textNative'>
-  web: 'webText'
-  props: { primary?: boolean }
-}>
-
-const sheet = sheetCreator<Shape>(({ palette, typography: type }) => ({
+const sheet = sheetCreator<testStyles.Shape>(({ palette, typography: type }) => ({
   root: {
     width: 180, height: 50, margin: 10, padding:10,
     display: 'flex', justifyContent: 'center', alignItems: 'center',
@@ -22,18 +15,22 @@ const sheet = sheetCreator<Shape>(({ palette, typography: type }) => ({
       TestStyles: {
         primary: {
           backgroundColor: 'green',
-          $override: {
-            label: { color: 'maroon' }
+          $overrides: {
+            label: {
+              $web: {
+                color: 'maroon'
+              }
+            }
           }
         },
         secondary: {
           backgroundColor: 'black',
-          $override: {
+          $overrides: {
             label: { color: 'pink' }
           }
         },
       }
-    } as any
+    }
   },
   primary: {
     backgroundColor: palette.primary[500],
@@ -51,15 +48,12 @@ const sheet = sheetCreator<Shape>(({ palette, typography: type }) => ({
   label: {
     color: palette.common.white
   },
-  rootNative: {
-  },
-  textNative: {
-  },
-  webText: {
-  }
+  rootNative: { },
+  textNative: { },
+  webText: {}
 }))
 
-const testStyles: Muix.CodeSFCWeb<Shape> = props => {
+const testStyles: Muix.CodeSFCWeb<testStyles.Shape> = props => {
   const { classes, getStyleWithSideEffect, theme, flip, innerRef, primary, children, style, ...rest } = props
 
   const rootStyles = getStyleWithSideEffect( // getStyleWithSideEffect now knowns, which rulesets are actualy used, so it can use their $overrides and $childOverrides props
@@ -79,7 +73,7 @@ const testStyles: Muix.CodeSFCWeb<Shape> = props => {
 }
 
 
-const TestStyles = withStyles<Shape>(sheet, { name: 'TestStyles' as any })(testStyles)
+const TestStyles = withStyles<testStyles.Shape>(sheet, { name: 'TestStyles' as any })(testStyles)
 
 const App: React.SFC = props => <AppContainer>
   <div>
