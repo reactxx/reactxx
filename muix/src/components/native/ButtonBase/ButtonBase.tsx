@@ -24,7 +24,7 @@ export interface ButtonBaseStyles {
   rippleStyle: ReactN.ViewStyle
 }
 
-export class ButtonBaseLow<R extends MuixButtonBase.Shape> extends React.Component<ButtonBaseStyles & Muix.CodePropsNative<R>> { //  React.Component<ButtonBaseStyles & Muix.CodePropsNative<R> & Muix.CodePropsNative<MuixButtonBase.Shape>> {
+export class ButtonBaseLow<R extends MuixButtonBase.Shape> extends React.Component<ButtonBaseStyles & Muix.CodePropsNative<R>> { 
 
   state: { active?: boolean } = {}
   scaleValue = new Animated.Value(minRippleSize)

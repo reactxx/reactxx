@@ -12,14 +12,15 @@ import { create } from 'jss';
 import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
 
-import { sheetToClassSheet } from './inline-styles'
+import { sheetToClassNames } from './inline-styles'
 
 import { toPlatformRuleSet, toPlatformSheet } from 'muix-styles'
 
-import createMuiTheme, { AppContainerProps, classesPropsToSheet, getDefaultTheme } from '../common/index'
+import createMuiTheme, { AppContainerProps, classesToPlatformSheet, getDefaultTheme } from '../common/index'
 
 export const jss = create(preset())
 jss.options.createGenerateClassName = createGenerateClassName
+jss.options.insertionPoint = 'insertion-point-jss'
 
 export const AppContainer: React.SFC<AppContainerProps> = props => <MuiThemeProvider theme={createMuiTheme(props.themeOptions) as Theme}><JssProvider jss={jss}>{props.children}</JssProvider></MuiThemeProvider>
 
@@ -27,14 +28,12 @@ type webKeys<R extends Muix.Shape> = Muix.getWeb<R> | keyof Muix.getCommon<R>
 
 export const withStylesX = <R extends Muix.Shape>(Component: Muix.muiComponentType<Muix.getProps<R>, webKeys<R>>) => {
   type TKey = webKeys<R>
-  const res: Muix.SFCX<R> = (props, context: Muix.TMuiThemeContextValue) => {
-    const { classes: common, classesNative, classesWeb, style, web, native, onClick, onPress: onPressInit, ...rest } = props as Muix.PropsX<Muix.Shape>
-    const sheet = { common, /*native: classesNative,*/ web: classesWeb } as Muix.PartialSheetX<R>
+  const res: Muix.SFCX<R> = (props, context: Muix.MuiThemeContextValue) => {
+    const { classes: _classes, style, web, native, onClick, onPress: onPressInit, ...rest } = props as Muix.PropsX<Muix.Shape>
 
     const theme = context.theme || getDefaultTheme()
 
-    //const classes = sheetToClassSheet(toPlatformSheet(sheet) as Mui.SheetWeb<R>)
-    const classes = sheetToClassSheet(classesPropsToSheet(theme, props) as Muix.SheetWeb<R>)
+    const classes = sheetToClassNames(classesToPlatformSheet(theme, _classes) as Muix.SheetWeb<R>)
     const onPress = onPressInit || onClick 
     const webProps = { ...rest, ...web, style: toPlatformRuleSet(style), classes, onPress, } as (Muix.getProps<R> & Muix.muiProps<TKey>) 
     return <Component {...webProps} />

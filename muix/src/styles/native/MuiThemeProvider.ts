@@ -1,18 +1,16 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import pure from 'recompose/pure'
-
-export const MuiThemeContextTypes = { theme: PropTypes.any }
+import { MuiThemeContextTypes } from '../common/index'
 
 class MuiThemeProvider extends React.Component<Muix.IMuiThemeProps> {
-  constructor(props, context: Muix.TMuiThemeContextValue) {
+  constructor(props, context: Muix.MuiThemeContextValue) {
     super(props, context)
     this.localTheme = this.mergeOuterLocalTheme(context.theme)
   }
 
   localTheme: Muix.ThemeNew
 
-  getChildContext(): Muix.TMuiThemeContextValue {
+  getChildContext(): Muix.MuiThemeContextValue {
     return { theme: this.localTheme }
   }
 

@@ -7,7 +7,8 @@ import { View } from 'react-native'
 
 const template: Muix.CodeSFCNative<MuixTemplate.Shape> = props => {
   const { classes, style, ...rest } = props
-  return <View style={classNames(style, classes.root)}  {...rest}/>
+  const viewStyle = props.getStyleWithSideEffect(classes.root) as ReactN.ViewStyle
+  return <View style={{ ...viewStyle, ...style } }  {...rest} />
 }
 
 const Template = withStyles<MuixTemplate.Shape>(sheet, { name: 'MuiTemplate' })(template)

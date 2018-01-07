@@ -54,6 +54,7 @@
   },
   "include": [
     "src/**/*",
-    "node_modules/muix-icons/typings.d.ts"
+    "node_modules/muix-icons/typings.d.ts",
+    "node_modules/fela/index.d.ts"
   ]
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactN from 'react-native'
+import PropTypes from 'prop-types'
 
 import deepmerge from 'deepmerge' // < 1kb payload overhead when lodash/merge is > 3kb.
 import warning from 'warning'
@@ -19,10 +20,9 @@ export interface AppContainerProps {
   themeOptions?: Muix.ThemeOptions
 }
 
-export const classesPropsToSheet = (theme: Muix.ThemeNew, props: Muix.PropsX<Muix.Shape>) => {
-  const applyTheme = valueOrCreator => (typeof valueOrCreator === 'function' ? valueOrCreator(theme) : valueOrCreator)
-  const { classes, classesNative, classesWeb } = props as Muix.PropsX<Muix.Shape>
-  return toPlatformSheet({ common: applyTheme(classes), native: applyTheme(classesNative), web: applyTheme(classesWeb) }) as Muix.PartialSheetX<Muix.Shape>
+export const classesToPlatformSheet = (theme: Muix.ThemeNew, classes: Muix.ThemeValueOrCreator<Muix.PartialSheetX<Muix.Shape>>) => {
+  const sheetx = typeof classes === 'function' ? classes(theme) : classes
+  return toPlatformSheet(sheetx) as Muix.Sheet<Muix.Shape> //Muix.PartialSheetX<Muix.Shape>
 }
 
 //create platform specific sheet from cross platform sheet creator
@@ -31,8 +31,8 @@ export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCrea
 //create platform specific ruleset from cross platform ruleset
 export const toPlatformRuleSetX = (style: Muix.TRulesetX, isNative: boolean) => {
   if (!style) return null
-  const { $web, $native, $override, $overrides, ...rest } = style
-  return { ...rest, ...(isNative ? $native : $web), $patch: toPlatformSheetX($override, isNative), $overrides: getOverridesX(null, $overrides) } as Muix.TRuleset
+  const { $web, $native, $overrides, $childOverrides, ...rest } = style
+  return { ...rest, ...(isNative ? $native : $web), $override: toPlatformSheetX($overrides, isNative), $overrides: getOverridesX(null, $childOverrides) } as Muix.TRuleset
 }
 
 //create platform specific sheet from cross platform sheet
@@ -83,6 +83,9 @@ const getTypographyOptionOrCreatorX = (optionsOrCreatorX: Muix.TypographyOptions
   return res
 }
 
+export const MuiThemeContextTypes = { theme: PropTypes.any }
+export const MuiOverridesContextTypes = { overrides: PropTypes.any }
+
 let defaultTheme: Muix.ThemeNew
 export const getDefaultTheme = () => defaultTheme || (defaultTheme = createMuiTheme())
 
@@ -126,7 +129,7 @@ function createMuiTheme(options: Muix.ThemeOptions = {}) {
     breakpoints, //the same format and value for web and native
     shadows: (shadowsNewInput || shadows).map(rsx => (toPlatformRuleSetX(rsx, false) as React.CSSProperties).boxShadow), // for material-ui only
     shadowsNew: shadowsNewInput || shadows, //the same format, different values for web and native
-    nativeSheetCache: [], //sheet cache (for native only)
+    $sheetCache: [], //sheet cache (for native only)
     ...(deepmerge(
       {
         transitions,
@@ -142,7 +145,7 @@ function createMuiTheme(options: Muix.ThemeOptions = {}) {
 
   muiTheme.overrides = getOverridesX(muiTheme, overridesNew) //the same format, different values for web and native
 
-  warning(muiTheme.shadows.length === 25 && muiTheme.shadowsNew.length === 25, 'MUIX: the shadows array provided to createMuiTheme should support 25 elevations.' )
+  warning(muiTheme.shadows.length === 25 && muiTheme.shadowsNew.length === 25, 'MUIX: the shadows array provided to createMuiTheme should support 25 elevations.')
 
   return muiTheme
 }

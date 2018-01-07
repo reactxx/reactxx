@@ -4,7 +4,7 @@ import { Platform, View, Text } from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalizeFirstLetter } from 'material-ui/utils/helpers';
 
-import { withStyles, classNames2, toPlatformRuleSet, sheetCreator } from 'muix-styles'
+import { withStyles, toPlatformRuleSet, sheetCreator } from 'muix-styles'
 
 import { ButtonBaseLow } from '../ButtonBase/ButtonBase'
 
@@ -26,7 +26,7 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
     paddingLeft: spacing.unit * 2,
     paddingRight: spacing.unit * 2,
     borderRadius: 2,
-    $overrides: {
+    $childOverrides: {
       MuiIcon: { root: { fontSize: 24, } },
       MuiText: { root: { ...typo.button, color: palette.text.primary, } },
     }
@@ -38,64 +38,64 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
     paddingRight: spacing.unit,
     minWidth: 64,
     minHeight: 32,
-    $overrides: {
+    $childOverrides: {
       MuiText: { root: { fontSize: typo.fontSizeNormalizerNative(typo.fontSize - 1), } }
     }
   },
 
   disabled: {
-    $overrides: muixTextIcon({ color: palette.action.disabled, })
+    $childOverrides: muixTextIcon({ color: palette.action.disabled, })
   },
 
   flat: {
-    $override: {
+    $overrides: {
       ripple: { backgroundColor: palette.grey[500], opacity: 0.8 },
     }
   },
   flatPrimary: {
-    $override: {
+    $overrides: {
       ripple: { backgroundColor: fade(palette.primary[500], 0.4), opacity: 0.8 },
     },
-    $overrides: muixTextIcon({ color: palette.primary[500], })
+    $childOverrides: muixTextIcon({ color: palette.primary[500], })
   },
   flatAccent: {
-    $override: {
+    $overrides: {
       ripple: { backgroundColor: fade(palette.secondary.A200, 0.4), opacity: 0.8 },
     },
-    $overrides: muixTextIcon({ color: palette.secondary.A200, })
+    $childOverrides: muixTextIcon({ color: palette.secondary.A200, })
   },
   flatContrast: {
-    $override: {
+    $overrides: {
       ripple: { backgroundColor: fade(palette.getContrastText(palette.primary[500]), 0.4), opacity: 0.8 },
     },
-    $overrides: muixTextIcon({ color: palette.getContrastText(palette.primary[500]), })
+    $childOverrides: muixTextIcon({ color: palette.getContrastText(palette.primary[500]), })
   },
 
 
   raised: {
     backgroundColor: palette.grey[300],
     ...shadowsNew[2],
-    $override: {
+    $overrides: {
       active: shadowsNew[8],
     }
   },
 
   raisedPrimary: {
     backgroundColor: palette.primary[500],
-    $overrides: muixTextIcon({ color: palette.getContrastText(palette.primary[500]), })
+    $childOverrides: muixTextIcon({ color: palette.getContrastText(palette.primary[500]), })
 
   },
   raisedAccent: {
     backgroundColor: palette.secondary.A200,
-    $overrides: muixTextIcon({ color: palette.getContrastText(palette.secondary.A200), })
+    $childOverrides: muixTextIcon({ color: palette.getContrastText(palette.secondary.A200), })
   },
   raisedDisable: {
     ...shadowsNew[0],
     backgroundColor: palette.text.divider,
-    $overrides: muixTextIcon({ color: palette.getContrastText(palette.primary[500]), })
+    $childOverrides: muixTextIcon({ color: palette.getContrastText(palette.primary[500]), })
   },
   raisedContrast: {
-    $overrides: muixTextIcon({ color: palette.getContrastText(palette.primary[500]), })
+    $childOverrides: muixTextIcon({ color: palette.getContrastText(palette.primary[500]), })
   },
 
   fab: {
@@ -108,7 +108,7 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
     height: 56,
     borderRadius: 56 / 2,
     ...shadowsNew[6],
-    $override: {
+    $overrides: {
       active: shadowsNew[12],
     }
   },
@@ -129,15 +129,14 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
 
 const button: Muix.CodeSFCNative<MuixButton.Shape> = props => {
 
-  const { children, classes, color = 'default', dense, fab, style, raised, mini, ...rest } = props
+  const { children, classes, color = 'default', dense, fab, style, raised, mini, getStyleWithSideEffect, ...rest } = props
   const { disabled } = rest //disabled must be propagated to ButtonBaseLow
 
   const isFlat = !raised && !fab
   const Color = capitalizeFirstLetter(color)
 
   const context = {}
-  const viewStyle = classNames2<ReactN.ViewStyle>(
-    context,
+  const viewStyle = getStyleWithSideEffect(
     classes.root,
     !isFlat && classes.raised,
     isFlat && classes.flat,
@@ -148,11 +147,10 @@ const button: Muix.CodeSFCNative<MuixButton.Shape> = props => {
     dense && classes.dense,
     !isFlat && disabled && classes.raisedDisable,
     isFlat && disabled && classes.disabled,
-    style,
-  )
+  ) as ReactN.ViewStyle
 
-  const rippleStyle = classNames2<ReactN.ViewStyle>(context, classes.ripple)
-  const activeStyle = classNames2<ReactN.ViewStyle>(context, !disabled && classes.active)
+  const rippleStyle = getStyleWithSideEffect(classes.ripple) as ReactN.ViewStyle
+  const activeStyle = getStyleWithSideEffect(!disabled && classes.active) as ReactN.ViewStyle
   //const labelStyle = classNames2<ReactN.ViewStyle>(context, classes.label)
 
   //console.log('button classes', context)
@@ -164,7 +162,7 @@ const button: Muix.CodeSFCNative<MuixButton.Shape> = props => {
   //})
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 
-  return <ButtonBaseLow viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} {...rest}>
+  return <ButtonBaseLow viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} getStyleWithSideEffect={null} {...rest}>
     {childs}
   </ButtonBaseLow>
 }
