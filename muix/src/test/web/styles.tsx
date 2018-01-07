@@ -60,9 +60,9 @@ const sheet = sheetCreator<Shape>(({ palette, typography: type }) => ({
 }))
 
 const testStyles: Muix.CodeSFCWeb<Shape> = props => {
-  const { classes, getStyleWithSideEffect, theme, flip, innerRef, primary, children, ...rest } = props
+  const { classes, getStyleWithSideEffect, theme, flip, innerRef, primary, children, style, ...rest } = props
 
-  const rootStyles = getStyleWithSideEffect( // getStyleWithSideEffect now knowns, which rulesets are actualy used. 
+  const rootStyles = getStyleWithSideEffect( // getStyleWithSideEffect now knowns, which rulesets are actualy used, so it can use their $overrides and $childOverrides props
     classes.root,
     primary === true && classes.primary,
     primary === false && classes.secondary,
@@ -71,7 +71,7 @@ const testStyles: Muix.CodeSFCWeb<Shape> = props => {
   const labelStyles = getStyleWithSideEffect(
     classes.label,
   )
-  return <div className={ruleToClassNames(rootStyles)} {...rest}>
+  return <div className={ruleToClassNames(rootStyles)} style={style} {...rest}>
     <div className={ruleToClassNames(labelStyles)}>
       {children}
     </div>
