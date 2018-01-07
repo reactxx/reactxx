@@ -32,7 +32,7 @@ export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCrea
 export const toPlatformRuleSetX = (style: Muix.TRulesetX, isNative: boolean) => {
   if (!style) return null
   const { $web, $native, $overrides, $childOverrides, ...rest } = style
-  return { ...rest, ...(isNative ? $native : $web), $override: toPlatformSheetX($overrides, isNative), $overrides: getOverridesX(null, $childOverrides) } as Muix.TRuleset
+  return { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheetX($overrides, isNative), $childOverrides: getOverridesX(null, $childOverrides) } as Muix.TRuleset
 }
 
 //create platform specific sheet from cross platform sheet

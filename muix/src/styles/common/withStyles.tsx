@@ -19,14 +19,13 @@ export const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCre
     newProps: Muix.CodeProps<R>
     usedChildOverrides: Muix.Sheets = {}
     codeClasses: Muix.Sheet<R>
-    theme: Muix.ThemeNew
 
     constructor(props: Muix.PropsX<R>, context: TContext) {
       super(props, context)
       const { flip, name } = options
       const { classes: _classes, style, web, native, onClick, onPress, ...other } = props as Muix.PropsX<Muix.Shape>
 
-      const theme = this.theme = this.context.theme || getDefaultTheme()
+      const theme = this.context.theme || getDefaultTheme()
 
       //caching aplyThemeToSheet result in theme.$sheetCache prop
       let cacheItem = theme.$sheetCache.find(it => it.sheetOrCreator === sheetOrCreator)
@@ -41,11 +40,12 @@ export const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCre
       // Could be called in <Component> render method. Side effect:
       // - use sheet..$override to modify self sheet 
       // - sheet..$overrides to modify children sheet
-      const classesProp = typeof _classes === 'function' ? _classes(this.theme) : _classes
+      const classesProp = typeof _classes === 'function' ? _classes(theme) : _classes
       const usedOverrides = {}
       const getStyleWithSideEffect: Muix.TClassnames = (...rulesets/*all used rulesets*/) => {
         rulesets.forEach(ruleset => { // acumulate $overrides and $childOverrides
           if (!ruleset) return
+          console.log(ruleset, ruleset.$overrides)
           mergeOverride(usedOverrides, ruleset.$overrides)
           mergeOverride(this.usedChildOverrides, ruleset.$childOverrides)
         })

@@ -18,7 +18,7 @@ const sheet = sheetCreator<Shape>(({ palette, typography: type }) => ({
     width: 180, height: 50, margin: 10, padding:10,
     display: 'flex', justifyContent: 'center', alignItems: 'center',
     backgroundColor: palette.grey.A200,
-    $childOverrides: {
+    $childOverrides: { 
       TestStyles: {
         primary: {
           backgroundColor: 'green',
@@ -96,4 +96,12 @@ const App: React.SFC = props => <AppContainer>
 
 export default App
 /*
+    <TestStyles primary>BLUE/YELLOW</TestStyles>
+    <TestStyles primary={false}>RED/LIGHTGRAY</TestStyles>
+    <TestStyles>GRAY</TestStyles>
+    <TestStyles classes={theme => ({ root: { backgroundColor: theme.palette.grey.A100 } })}>
+      <TestStyles primary>GREEN/MAROON</TestStyles>
+      <TestStyles primary={false}>BLACK/PINK</TestStyles>
+      <TestStyles primary classes={theme => ({ label: { color: 'orange' } })}>GREEN/ORANGE</TestStyles>
+    </TestStyles>
 */
