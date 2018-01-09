@@ -6,8 +6,10 @@ import { sheet } from '../../common/ScrollView/ScrollView'
 import { ScrollViewWeb } from '../for-components'
 
 const scrollView: Muix.CodeSFCWeb<MuixScrollView.Shape> = props => {
-  const { classes, theme, flip, innerRef, getStyleWithSideEffect, className, ...rest } = props
-  return <ScrollViewWeb className={getStyleWithSideEffect(classes.root)} contentContainerStyle={getStyleWithSideEffect(classes.contentContainerStyle)} $web={rest} />
+  const { classes, theme, flip, innerRef, getStyleWithSideEffect, className, children, ...rest } = props
+  return <ScrollViewWeb
+    className={getStyleWithSideEffect(classes.root)} contentContainerStyle={getStyleWithSideEffect(classes.contentContainerStyle)}
+    $web={rest} children={children} />
 }
 
 const ScrollView = withStyles<MuixScrollView.Shape>(sheet, { name: 'MuiScrollView' })(scrollView)

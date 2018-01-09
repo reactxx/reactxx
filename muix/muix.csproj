@@ -179,7 +179,7 @@
     <TypeScriptCompile Include="src\test\common\components\button.tsx" />
     <TypeScriptCompile Include="src\test\common\icons\index.tsx" />
     <TypeScriptCompile Include="src\test\common\test-styles-d.d.ts" />
-    <TypeScriptCompile Include="src\test\common\styles.tsx" />
+    <TypeScriptCompile Include="src\test\common\styles\component-x.tsx" />
     <TypeScriptCompile Include="src\test\web\index.tsx" />
     <TypeScriptCompile Include="src\test\common\primitives\icon.tsx" />
     <TypeScriptCompile Include="src\test\common\primitives\text-view.tsx" />

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { fade } from 'material-ui/styles/colorManipulator'
 
 import { withStyles, sheetCreator, AppContainer, MuiThemeProvider, } from 'muix-styles'
-import { ScrollViewX, ViewX, TextX, } from 'muix-primitives'
+import { ScrollView, ViewX, TextX, } from 'muix-primitives'
 
 
 const sheet = sheetCreator<testStyles.Shape>(({ palette, typography: type }) => ({
@@ -16,12 +16,13 @@ const sheet = sheetCreator<testStyles.Shape>(({ palette, typography: type }) => 
         primary: {
           backgroundColor: 'green',
           $overrides: {
+            //the same as "label: {color: 'maroon'}"
             label: {
               $web: {
                 color: 'maroon'
               },
               $native: {
-                color: 'brown'
+                color: 'maroon'
               }
             }
           }
@@ -51,9 +52,6 @@ const sheet = sheetCreator<testStyles.Shape>(({ palette, typography: type }) => 
   label: {
     color: palette.common.white
   },
-  rootNative: {},
-  textNative: {},
-  webText: {}
 }))
 
 const testStyles: Muix.CodeSFCWeb<testStyles.Shape> = props => {
@@ -81,21 +79,26 @@ const testStyles: Muix.CodeSFCWeb<testStyles.Shape> = props => {
 const TestStyles = withStyles<testStyles.Shape>(sheet, { name: 'TestStyles' as any })(testStyles)
 
 const App: React.SFC = props => <AppContainer>
-  <ScrollViewX contentContainerStyle={{ backgroundColor: 'yellow' }}>
+  <ScrollView classes={{ contentContainerStyle: { backgroundColor: 'yellow' } }}>
+    <TestStyles primary>BLUE/YELLOW</TestStyles>
+    <TestStyles primary={false}>RED/LIGHTGRAY</TestStyles>
+    <TestStyles>GRAY</TestStyles>
     <TestStyles classes={theme => ({ root: { backgroundColor: theme.palette.grey.A100 } })}>
       <TestStyles primary>GREEN/MAROON</TestStyles>
+      <TestStyles primary={false}>BLACK/PINK</TestStyles>
+      <TestStyles primary classes={theme => ({ label: { color: 'orange' } })}>GREEN/ORANGE</TestStyles>
     </TestStyles>
-  </ScrollViewX>
+  </ScrollView>
 </AppContainer>
 
 export default App
 /*
     <TestStyles primary>BLUE/YELLOW</TestStyles>
-              <TestStyles primary={false}>RED/LIGHTGRAY</TestStyles>
-              <TestStyles>GRAY</TestStyles>
-              <TestStyles classes={theme => ({ root: { backgroundColor: theme.palette.grey.A100 } })}>
-                <TestStyles primary>GREEN/MAROON</TestStyles>
-                <TestStyles primary={false}>BLACK/PINK</TestStyles>
-                <TestStyles primary classes={theme => ({ label: { color: 'orange' } })}>GREEN/ORANGE</TestStyles>
-              </TestStyles>
-              */
+    <TestStyles primary={false}>RED/LIGHTGRAY</TestStyles>
+    <TestStyles>GRAY</TestStyles>
+    <TestStyles classes={theme => ({ root: { backgroundColor: theme.palette.grey.A100 } })}>
+      <TestStyles primary>GREEN/MAROON</TestStyles>
+      <TestStyles primary={false}>BLACK/PINK</TestStyles>
+      <TestStyles primary classes={theme => ({ label: { color: 'orange' } })}>GREEN/ORANGE</TestStyles>
+    </TestStyles>
+*/

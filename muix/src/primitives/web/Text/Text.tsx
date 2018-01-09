@@ -6,8 +6,8 @@ import { sheet } from '../../common/Text/Text'
 import { TextWeb } from '../for-components'
 
 const text: Muix.CodeSFCWeb<MuixText.Shape> = props => {
-  const { classes, theme, flip, innerRef, getStyleWithSideEffect, className, ...rest } = props
-  return <TextWeb className={getStyleWithSideEffect(classes.root) as React.CSSProperties} $web={rest} />
+  const { classes, theme, flip, innerRef, getStyleWithSideEffect, className, children, ...rest } = props
+  return <TextWeb className={getStyleWithSideEffect(classes.root) as React.CSSProperties} $web={rest} children={children} />
 }
 
 const Text = withStyles<MuixText.Shape>(sheet, { name: 'MuiText' })(text)

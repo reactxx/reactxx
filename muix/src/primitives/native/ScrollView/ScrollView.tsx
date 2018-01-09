@@ -6,8 +6,10 @@ import { sheet } from '../../common/ScrollView/ScrollView'
 import { ScrollViewNative } from '../for-components'
 
 const scrollView: Muix.CodeSFCNative<MuixScrollView.Shape> = props => {
-  const { classes, theme, flip, innerRef, getStyleWithSideEffect, ...rest } = props
-  return <ScrollViewNative className={getStyleWithSideEffect(classes.root) as ReactN.ScrollViewStyle} contentContainerStyle={getStyleWithSideEffect(classes.contentContainerStyle) as ReactN.ViewStyle} $native={rest} />
+  const { classes, theme, flip, innerRef, getStyleWithSideEffect, children, ...rest } = props
+  return <ScrollViewNative
+    className={getStyleWithSideEffect(classes.root) as ReactN.ScrollViewStyle} contentContainerStyle={getStyleWithSideEffect(classes.contentContainerStyle) as ReactN.ViewStyle}
+    $native={rest} children={children} />
 }
 
 const ScrollView = withStyles<MuixScrollView.Shape>(sheet, { name: 'MuiScrollView' })(scrollView)
