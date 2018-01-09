@@ -3,15 +3,11 @@ import React from 'react'
 
 import { classNames, withStyles } from 'muix-styles/web'
 import { sheet } from '../../common/ScrollView/ScrollView'
-import View from '../View/View'
+import { ScrollViewWeb } from '../for-components'
 
 const scrollView: Muix.CodeSFCWeb<MuixScrollView.Shape> = props => {
-  const { classes, children, ...rest } = props
-  return <div className={classNames(classes.root)} {...rest}>
-    <View>
-      {children}
-    </View>
-  </div>
+  const { classes, theme, flip, innerRef, getStyleWithSideEffect, className, ...rest } = props
+  return <ScrollViewWeb className={getStyleWithSideEffect(classes.root) as React.CSSProperties} {...rest} />
 }
 
 const ScrollView = withStyles<MuixScrollView.Shape>(sheet, { name: 'MuiScrollView' })(scrollView)

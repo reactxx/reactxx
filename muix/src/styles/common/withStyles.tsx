@@ -4,16 +4,7 @@ import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme, classe
 import { toPlatformSheet, toPlatformRuleSet } from 'muix-styles'
 import warning from 'invariant'
 
-//apply theme to sheet AND merge it with theme.overrides
-const aplyThemeToSheet = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, theme: Muix.ThemeNew, name?: string) => {
-  const overrides = (theme.overrides && name && theme.overrides[name]) as Muix.Sheet<R>
-  const styles = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator)
-  return overrides ? deepMerges(false, {}, styles, overrides) : styles //deepMerge only when needed
-}
-
-type TContext = Muix.MuiThemeContextValue & Muix.MuiOverridesContext
-
-export const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, options: Muix.WithStylesOptionsNew) => (Component: Muix.CodeComponentType<R>) => {
+const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, options: Muix.WithStylesOptionsNew) => (Component: Muix.CodeComponentType<R>) => {
 
   class Styled extends React.PureComponent<Muix.PropsX<R>> {
     newProps: Muix.CodeProps<R>
@@ -33,13 +24,13 @@ export const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCre
 
       //console.log('1', toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>))
 
-      const fromParentContext = context.overrides && context.overrides[options.name]
-      this.codeClasses = fromParentContext ? deepMerges(false, {}, cacheItem.fromTheme, fromParentContext) : cacheItem.fromTheme
+      const fromParentContext = context.childOverrides && context.childOverrides[options.name]
+      this.codeClasses = fromParentContext ? deepMerges(false, {}, cacheItem.fromTheme, fromParentContext) : cacheItem.fromTheme // modify static sheet 
       for (const p in this.codeClasses) this.codeClasses[p].$name = p // assign name to ruleSets. $name is used in getStyleWithSideEffect to recognize used rulesets
 
-      // Could be called in <Component> render method. Side effect:
+      // Could be called in <Component> render method to compute component styles. Side effects:
       // - use sheet..$overrides to modify self sheet
-      // - sheet..$childOverrides to modify children sheet
+      // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides)
       const classesProp = typeof _classes === 'function' ? _classes(theme) : _classes
       const usedOverrides = {}
       const getStyleWithSideEffect: Muix.TClassnames = (...rulesets/*all used rulesets*/) => {
@@ -48,19 +39,19 @@ export const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCre
           mergeOverride(usedOverrides, ruleset.$overrides)
           mergeOverride(this.usedChildOverrides, ruleset.$childOverrides) //modify react context for 
         })
-        const res: typeof rulesets[0] = {}
+        const rulesetResult: typeof rulesets[0] = {}
         rulesets.forEach(ruleset => {
           if (!ruleset) return
-          deepMerges(true, res, /*ruleset, used in Component render*/ruleset, /*modify it with used overrides*/usedOverrides[ruleset.$name], /*force classes prop, it cannot be overrided */classesProp && classesProp[ruleset.$name])
+          deepMerges(true, rulesetResult, /*ruleset, used in Component render*/ruleset, /*modify it with used $overrides*/usedOverrides[ruleset.$name], /*force using classes component property, its rulesets cannot be overrided */classesProp && classesProp[ruleset.$name])
         })
-        return res
+        return rulesetResult
       }
 
       this.newProps = { ...other, ...(window.isWeb ? web : native), theme, style: toPlatformRuleSet(style), flip: typeof flip === 'boolean' ? flip : theme.direction === 'rtl', getStyleWithSideEffect} as Muix.CodeProps<R>
       if (onPress || onClick) this.newProps.onPress = onPress || onClick
     }
 
-    getChildContext() { return { overrides: this.usedChildOverrides /*usedChildOverrides is modified during Component render, where getStyleWithSideEffect is called*/ } }
+    getChildContext() { return { overrides: this.usedChildOverrides /*usedChildOverrides is modified during Component render (where getStyleWithSideEffect is called)*/ } }
 
     render() {
       this.newProps.classes = this.codeClasses 
@@ -75,6 +66,19 @@ export const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCre
   return Styled
 }
 
+export default withStyles
+
+//********************* HELPERS
+type TContext = Muix.MuiThemeContextValue & Muix.MuiOverridesContext
+
+//apply theme to sheet AND merge it with theme.overrides
+const aplyThemeToSheet = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, theme: Muix.ThemeNew, name?: string) => {
+  const overrides = (theme.overrides && name && theme.overrides[name]) as Muix.Sheet<R>
+  const styles = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator)
+  return overrides ? deepMerges(false, {}, styles, overrides) : styles //deepMerge only when needed
+}
+
+// merge named values
 const mergeOverride = (result, patches) => {
   if (!patches) return
   for (const p in patches) {
@@ -84,6 +88,7 @@ const mergeOverride = (result, patches) => {
   }
 }
 
+//simple deep merge
 const deepMerge = (skipSystem: boolean, target, source) => {
   if (!source) return target
   if (isObject(target) && isObject(source))
@@ -104,50 +109,4 @@ const deepMerges = (skipSystem: boolean, target, ...sources) => {
   return target
 }
 const isObject = item => item && typeof item === 'object' && !Array.isArray(item)
-
-export default withStyles
-
-//type CSSPropertiesNative = Muix.CSSPropertiesNative & Muix.RulesetOverridesNative<Muix.Shape>
-
-//export const classNames = <T extends CSSPropertiesNative>(override, overrides: Muix.Sheets, ...ruleSets: Array<T>) => {
-//  if (!ruleSets) return null
-//  //console.log('classNames, ruleSets', ruleSets)
-//  //extract ruleset patches
-//  const list: T[] = []
-//  ruleSets.map(r => {
-//    if (!r) return
-//    const { $name, $overrides, $childOverrides } = r
-//    if (!$name) { //e.g. 'style' as last argument
-//      list.push(r)
-//      return
-//    }
-//    const patch = override[$name]
-//    //console.log('classNames, patch', patch)
-//    override[$name] = patch ? Object.assign(r, patch) : r
-//    list.push(override[$name])
-//    if (!r.$overrides) return
-//    for (const p in r.$overrides) {
-//      const patch = r.$overrides[p] as T
-//      const name = p
-//      const rule = override[name]
-//      override[name] = rule ? Object.assign(rule, patch) : patch
-//      //if (name == 'label') console.log(rule, patched[name])
-//    }
-//  })
-
-//  //merge
-//  const res = Object.assign({}, ...list) as T
-//  delete res.$overrides; delete res.$name
-//  return res
-//}
-
-
-//export const classNamess = <T extends Muix.CSSPropertiesNative>(...ruleSets: Array<T | T[]>) => {
-//  if (!ruleSets) return null
-
-//  return Object.assign({}, ...ruleSets.filter(p => !!p).map(p => {
-//    if (Array.isArray(p)) return Object.assign({}, ...p)
-//    else return p
-//  })) as T
-//}
 

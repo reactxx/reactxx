@@ -3,11 +3,11 @@ import ReactN from 'react-native'
 
 import { classNames, withStyles } from 'muix-styles'
 import { sheet } from '../../common/Text/Text' 
-import { Text as RNText } from 'react-native' 
+import { TextNative } from '../for-components'
 
 const text: Muix.CodeSFCNative<MuixText.Shape> = props => {
-  const { classes, style, innerRef, ...rest } = props
-  return <RNText style={classNames<ReactN.TextStyle>(style, classes.root)} ref={div => innerRef && innerRef(div)} {...rest} />
+  const { classes, theme, flip, innerRef, getStyleWithSideEffect, ...rest } = props
+  return <TextNative className={getStyleWithSideEffect(classes.root) as ReactN.TextStyle} {...rest} />
 }
 
 const Text = withStyles<MuixText.Shape>(sheet, { name: 'MuiText' })(text)

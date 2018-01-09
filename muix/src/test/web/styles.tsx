@@ -2,9 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { fade } from 'material-ui/styles/colorManipulator'
 
-import { sheetCreator, AppContainer, MuiThemeProvider } from 'muix-styles'
-import { withStyles } from '../../styles/common/withStyles'
-import { ruleToClassNames } from '../../styles/web/fela'
+import { sheetCreator, AppContainer, MuiThemeProvider, } from 'muix-styles'
+import { ScrollView, View, Text,  } from 'muix-primitives'
+import withStyles from '../../styles/common/withStyles'
+import { rulesetToClassNames } from 'muix-styles/web'
 
 const sheet = sheetCreator<testStyles.Shape>(({ palette, typography: type }) => ({
   root: {
@@ -56,7 +57,7 @@ const sheet = sheetCreator<testStyles.Shape>(({ palette, typography: type }) => 
 const testStyles: Muix.CodeSFCWeb<testStyles.Shape> = props => {
   const { classes, getStyleWithSideEffect, theme, flip, innerRef, primary, children, style, ...rest } = props
 
-  const rootStyles = getStyleWithSideEffect( // getStyleWithSideEffect now knowns, which rulesets are actualy used, so it can use their $overrides and $childOverrides props
+  const rootStyles = getStyleWithSideEffect( // getStyleWithSideEffect now knowns, which rulesets are actualy used. So it can use their $overrides and $childOverrides props
     classes.root,
     primary === true && classes.primary,
     primary === false && classes.secondary,
@@ -65,8 +66,8 @@ const testStyles: Muix.CodeSFCWeb<testStyles.Shape> = props => {
   const labelStyles = getStyleWithSideEffect(
     classes.label,
   )
-  return <div className={ruleToClassNames(rootStyles)} style={style} {...rest}>
-    <div className={ruleToClassNames(labelStyles)}>
+  return <div className={rulesetToClassNames(rootStyles)} style={style} {...rest}>
+    <div className={rulesetToClassNames(labelStyles)}>
       {children}
     </div>
   </div>
@@ -76,16 +77,16 @@ const testStyles: Muix.CodeSFCWeb<testStyles.Shape> = props => {
 const TestStyles = withStyles<testStyles.Shape>(sheet, { name: 'TestStyles' as any })(testStyles)
 
 const App: React.SFC = props => <AppContainer>
-  <div>
+  <ScrollView>
     <TestStyles primary>BLUE/YELLOW</TestStyles>
     <TestStyles primary={false}>RED/LIGHTGRAY</TestStyles>
-    <TestStyles>GRAY</TestStyles>
+    <TestStyles>GRAY/WHITE</TestStyles>
     <TestStyles classes={theme => ({ root: { backgroundColor: theme.palette.grey.A100 } })}>
       <TestStyles primary>GREEN/MAROON</TestStyles>
       <TestStyles primary={false}>BLACK/PINK</TestStyles>
       <TestStyles primary classes={theme => ({ label: { color: 'orange' } })}>GREEN/ORANGE</TestStyles>
     </TestStyles>
-  </div>
+  </ScrollView>
 </AppContainer>
 
 export default App

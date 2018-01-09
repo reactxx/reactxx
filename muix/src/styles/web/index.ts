@@ -18,4 +18,4 @@ export { sheetCreator, default as createMuiTheme } from '../common/index'
 
 export { classNames, withStyles, withStylesX, AppContainer } from './withStyles'
 
-export { rulesetToClassNames } from './inline-styles'
+export { rulesetsToClassNames, rulesetToClassNames } from './fela'

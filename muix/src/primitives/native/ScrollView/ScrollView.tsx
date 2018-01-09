@@ -3,12 +3,11 @@ import ReactN from 'react-native'
 
 import { classNames, withStyles } from 'muix-styles'
 import { sheet } from '../../common/ScrollView/ScrollView'
-import { ScrollView as ScrollViewRN } from 'react-native' 
+import { ScrollViewNative } from '../for-components'
 
 const scrollView: Muix.CodeSFCNative<MuixScrollView.Shape> = props => {
-  const { classes, style, ...rest } = props
-  //console.log('scrollView: ', classNames(style, classes.root))
-  return <ScrollViewRN style={classNames(style, classes.root)} {...rest} contentContainerStyle={{}} />
+  const { classes, theme, flip, innerRef, getStyleWithSideEffect, ...rest } = props
+  return <ScrollViewNative className={getStyleWithSideEffect(classes.root) as ReactN.TextStyle} {...rest} />
 }
 
 const ScrollView = withStyles<MuixScrollView.Shape>(sheet, { name: 'MuiScrollView' })(scrollView)
