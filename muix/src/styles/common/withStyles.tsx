@@ -25,12 +25,13 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       //console.log('1', toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>))
 
       const fromParentContext = context.childOverrides && context.childOverrides[options.name]
+      console.log(fromParentContext)
       this.codeClasses = fromParentContext ? deepMerges(false, {}, cacheItem.fromTheme, fromParentContext) : cacheItem.fromTheme // modify static sheet 
       for (const p in this.codeClasses) this.codeClasses[p].$name = p // assign name to ruleSets. $name is used in getStyleWithSideEffect to recognize used rulesets
 
       // Could be called in <Component> render method to compute component styles. Side effects:
       // - use sheet..$overrides to modify self sheet
-      // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides)
+      // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
       const classesProp = typeof _classes === 'function' ? _classes(theme) : _classes
       const usedOverrides = {}
       const getStyleWithSideEffect: Muix.TClassnames = (...rulesets/*all used rulesets*/) => {
@@ -51,7 +52,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       if (onPress || onClick) this.newProps.onPress = onPress || onClick
     }
 
-    getChildContext() { return { overrides: this.usedChildOverrides /*usedChildOverrides is modified during Component render (where getStyleWithSideEffect is called)*/ } }
+    getChildContext() { return { childOverrides: this.usedChildOverrides /*usedChildOverrides is modified during Component render (where getStyleWithSideEffect is called)*/ } }
 
     render() {
       this.newProps.classes = this.codeClasses 

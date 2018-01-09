@@ -4,13 +4,13 @@ import React from 'react'
 import warning from 'warning'
 import { rulesetsToClassNames } from 'muix-styles/web'
 
-const ViewWebStyle: React.CSSProperties = {
+const viewStyle: React.CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
   alignItems: 'stretch',
   borderWidth: 0,
   borderStyle: 'solid',
   boxSizing: 'border-box',
-  display: 'flex',
-  flexDirection: 'column',
   margin: 0,
   padding: 0,
   position: 'relative',
@@ -20,16 +20,15 @@ const ViewWebStyle: React.CSSProperties = {
 }
 
 export const ViewWeb: React.SFC<Primitives.Web> = props => {
-  const { style, className, ...rest } = props
-  return <div className={rulesetsToClassNames(ViewWebStyle, className)} style={style} {...rest} />
+  const { style, className, $web, children } = props
+  return <div className={rulesetsToClassNames(viewStyle, className)} style={style} {...$web} children={children} />
 }
 
-const TextWebStyle = {
+const textStyles = {
   root: {
     borderWidth: 0,
     boxSizing: 'border-box',
     color: 'inherit',
-    display: 'inline',
     font: 'inherit',
     fontFamily: 'System',
     fontSize: 14,
@@ -60,13 +59,16 @@ const TextWebStyle = {
 }
 
 export const TextWeb: React.SFC<Primitives.Web & { numberOfLines?: number; notSelectable?: boolean; pressable?: boolean }> = props => {
-  const { style, className, numberOfLines, notSelectable, pressable, ...rest } = props
-  return <div className={'mui-text ' + rulesetsToClassNames(TextWebStyle.root, className, notSelectable && TextWebStyle.notSelectable, pressable && TextWebStyle.pressable, numberOfLines === 1 && TextWebStyle.singleLineStyle)} style={style} {...rest} />
+  const { style, className, numberOfLines, notSelectable, pressable, $web, children } = props
+  return <div
+    className={'mui-text ' + rulesetsToClassNames(textStyles.root, className, notSelectable && textStyles.notSelectable, pressable && textStyles.pressable, numberOfLines === 1 && textStyles.singleLineStyle)}
+    style={style} {...$web} children={children} />
 }
 
-const ScrollViewWebStyle = {
+//https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
+const scrollViewStyles = {
   base: {
-    flex: 1,
+    flexGrow: 1,
     overflowX: 'hidden',
     overflowY: 'auto',
     WebkitOverflowScrolling: 'touch',
@@ -74,6 +76,10 @@ const ScrollViewWebStyle = {
     // Creates a new layer with its own backing surface that can significantly
     // improve scroll performance.
     transform: [{ translateZ: 0 }]
+  } as React.CSSProperties,
+  container: {
+    flexGrow: 0,
+    flexShrink:0,
   } as React.CSSProperties,
   baseHorizontal: {
     flexDirection: 'row',
@@ -86,10 +92,10 @@ const ScrollViewWebStyle = {
 }
 
 export const ScrollViewWeb: React.SFC<Primitives.Web & { horizontal?: boolean; contentContainerStyle?: React.CSSProperties }> = props => {
-  const { style, className, horizontal, children, contentContainerStyle, ...rest } = props
+  const { style, className, horizontal, children, contentContainerStyle, $web } = props
   checkChildLayoutProps(style); checkChildLayoutProps(className)
-  return <div className={rulesetsToClassNames(ScrollViewWebStyle.base, horizontal && ScrollViewWebStyle.baseHorizontal, className)} style={style} {...rest}>
-    <div className={rulesetsToClassNames(ViewWebStyle, contentContainerStyle, horizontal && ScrollViewWebStyle.contentContainerHorizontal)}>
+  return <div className={rulesetsToClassNames(viewStyle, scrollViewStyles.base, horizontal && scrollViewStyles.baseHorizontal, className)} style={style} {...$web}>
+    <div className={rulesetsToClassNames(viewStyle, scrollViewStyles.container, contentContainerStyle, horizontal && scrollViewStyles.contentContainerHorizontal)}>
       {children}
     </div>
   </div>
@@ -100,4 +106,8 @@ const checkChildLayoutProps = (css: React.CSSProperties) => {
   const childLayoutProps = ['alignItems', 'justifyContent'].filter(prop => css && css[prop] !== undefined)
   warning(childLayoutProps.length === 0, `ScrollView child layout (${JSON.stringify(childLayoutProps)}) must be applied through the contentContainerStyle prop.`)
 }
+
+export const ViewX = ViewWeb as React.SFC<Primitives.ViewX>
+export const TextX = TextWeb as React.SFC<Primitives.TextX>
+export const ScrollViewX = ScrollViewWeb as React.SFC<Primitives.ScrollViewX>
 

@@ -7,7 +7,7 @@ import { TextNative } from '../for-components'
 
 const text: Muix.CodeSFCNative<MuixText.Shape> = props => {
   const { classes, theme, flip, innerRef, getStyleWithSideEffect, ...rest } = props
-  return <TextNative className={getStyleWithSideEffect(classes.root) as ReactN.TextStyle} {...rest} />
+  return <TextNative className={getStyleWithSideEffect(classes.root) as ReactN.TextStyle} $native={rest} />
 }
 
 const Text = withStyles<MuixText.Shape>(sheet, { name: 'MuiText' })(text)

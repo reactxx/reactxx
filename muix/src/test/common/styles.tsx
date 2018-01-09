@@ -2,17 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { fade } from 'material-ui/styles/colorManipulator'
 
-import { sheetCreator, AppContainer, MuiThemeProvider, } from 'muix-styles'
-import { ScrollView, View, Text,  } from 'muix-primitives'
-import withStyles from '../../styles/common/withStyles'
-import { rulesetToClassNames } from 'muix-styles/web'
+import { withStyles, sheetCreator, AppContainer, MuiThemeProvider, } from 'muix-styles'
+import { ScrollViewX, ViewX, TextX, } from 'muix-primitives'
+
 
 const sheet = sheetCreator<testStyles.Shape>(({ palette, typography: type }) => ({
   root: {
-    width: 180, height: 50, margin: 10, padding:10,
-    display: 'flex', justifyContent: 'center', alignItems: 'center',
+    minWidth: 150, margin: 10, padding: 10,
+    justifyContent: 'center', alignItems: 'center',
     backgroundColor: palette.grey.A200,
-    $childOverrides: { 
+    $childOverrides: {
       TestStyles: {
         primary: {
           backgroundColor: 'green',
@@ -20,6 +19,9 @@ const sheet = sheetCreator<testStyles.Shape>(({ palette, typography: type }) => 
             label: {
               $web: {
                 color: 'maroon'
+              },
+              $native: {
+                color: 'brown'
               }
             }
           }
@@ -38,7 +40,7 @@ const sheet = sheetCreator<testStyles.Shape>(({ palette, typography: type }) => 
     $overrides: {
       label: { color: 'yellow' }
     }
-    
+
   },
   secondary: {
     backgroundColor: palette.secondary[500],
@@ -49,8 +51,8 @@ const sheet = sheetCreator<testStyles.Shape>(({ palette, typography: type }) => 
   label: {
     color: palette.common.white
   },
-  rootNative: { },
-  textNative: { },
+  rootNative: {},
+  textNative: {},
   webText: {}
 }))
 
@@ -66,37 +68,34 @@ const testStyles: Muix.CodeSFCWeb<testStyles.Shape> = props => {
   const labelStyles = getStyleWithSideEffect(
     classes.label,
   )
-  return <div className={rulesetToClassNames(rootStyles)} style={style} {...rest}>
-    <div className={rulesetToClassNames(labelStyles)}>
-      {children}
-    </div>
-  </div>
+
+  const ch = React.Children.toArray(children)
+
+  return <ViewX className={rootStyles} style={style}>
+    {ch.length == 1 && typeof ch[0] === 'string' ? <TextX className={labelStyles}>{children}</TextX> : children}
+  </ViewX>
 }
+//{ch.length == 1 && typeof ch[0] === 'string' ? <TextX className={labelStyles}>{children}</TextX> : children}
 
 
 const TestStyles = withStyles<testStyles.Shape>(sheet, { name: 'TestStyles' as any })(testStyles)
 
 const App: React.SFC = props => <AppContainer>
-  <ScrollView>
-    <TestStyles primary>BLUE/YELLOW</TestStyles>
-    <TestStyles primary={false}>RED/LIGHTGRAY</TestStyles>
-    <TestStyles>GRAY/WHITE</TestStyles>
+  <ScrollViewX contentContainerStyle={{ backgroundColor: 'yellow' }}>
     <TestStyles classes={theme => ({ root: { backgroundColor: theme.palette.grey.A100 } })}>
       <TestStyles primary>GREEN/MAROON</TestStyles>
-      <TestStyles primary={false}>BLACK/PINK</TestStyles>
-      <TestStyles primary classes={theme => ({ label: { color: 'orange' } })}>GREEN/ORANGE</TestStyles>
     </TestStyles>
-  </ScrollView>
+  </ScrollViewX>
 </AppContainer>
 
 export default App
 /*
     <TestStyles primary>BLUE/YELLOW</TestStyles>
-    <TestStyles primary={false}>RED/LIGHTGRAY</TestStyles>
-    <TestStyles>GRAY</TestStyles>
-    <TestStyles classes={theme => ({ root: { backgroundColor: theme.palette.grey.A100 } })}>
-      <TestStyles primary>GREEN/MAROON</TestStyles>
-      <TestStyles primary={false}>BLACK/PINK</TestStyles>
-      <TestStyles primary classes={theme => ({ label: { color: 'orange' } })}>GREEN/ORANGE</TestStyles>
-    </TestStyles>
-*/
+              <TestStyles primary={false}>RED/LIGHTGRAY</TestStyles>
+              <TestStyles>GRAY</TestStyles>
+              <TestStyles classes={theme => ({ root: { backgroundColor: theme.palette.grey.A100 } })}>
+                <TestStyles primary>GREEN/MAROON</TestStyles>
+                <TestStyles primary={false}>BLACK/PINK</TestStyles>
+                <TestStyles primary classes={theme => ({ label: { color: 'orange' } })}>GREEN/ORANGE</TestStyles>
+              </TestStyles>
+              */

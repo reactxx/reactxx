@@ -84,7 +84,7 @@ const getTypographyOptionOrCreatorX = (optionsOrCreatorX: Muix.TypographyOptions
 }
 
 export const MuiThemeContextTypes = { theme: PropTypes.any }
-export const MuiOverridesContextTypes = { overrides: PropTypes.any }
+export const MuiOverridesContextTypes = { childOverrides: PropTypes.any }
 
 let defaultTheme: Muix.ThemeNew
 export const getDefaultTheme = () => defaultTheme || (defaultTheme = createMuiTheme())

@@ -1,33 +1,23 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "es5",
-    "module": "system",
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "importHelpers": true,
+    "target": "es2017",
     "rootDir": "src",
-    "outDir": "deploy/lib",
+    "outDir": "deploy/es",
+
+    //"declaration": true,
 
     "baseUrl": ".",
     "paths": {
-      "muix-icons/*": [ "node_modules/muix-icons/index" ],
+      "muix-icons/*": [ "node_modules/muix-icons/es/index" ],
 
       "muix-styles/web": [ "src/styles/web/index" ],
       "muix-styles/native": [ "src/styles/native/index" ],
-      "muix-styles": [ "src/styles/web/index" ],
-      //"muix-styles/current/*": [ "src/styles/web/*" ],
-      //"muix-styles/web/*": [ "src/styles/web/*" ],
-      //"muix-styles/common/*": [ "src/styles/common/*" ],
-      //"muix-styles/native/*": [ "src/styles/native/*" ],
+      "muix-styles": [ "src/styles/native/index" ],
 
-      "muix-primitives": [ "src/primitives/web/index" ],
-      //"muix-primitives/current/*": [ "src/primitives/web/*" ],
-      //"muix-primitives/common/*": [ "src/primitives/common/*" ],
-      //"muix-primitives/web/*": [ "src/primitives/web/*" ],
-      //"muix-primitives/native/*": [ "src/primitives/native/*" ],
+      "muix-primitives": [ "src/primitives/native/index" ],
 
-      "muix-components/*": [ "src/components/web/*" ],
+      "muix-components/*": [ "src/components/native/*" ],
       //"muix-components/current/*": [ "src/components/web/*" ],
       //"muix-components/common/*": [ "src/components/common/*" ],
       //"muix-components/native/*": [ "src/components/native/*" ],
@@ -35,6 +25,7 @@
       "test/*": [ "src/test/*" ]
     },
 
+    "importHelpers": true, //https://github.com/facebook/react-native/issues/16858
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
     "downlevelIteration": true,
@@ -45,7 +36,7 @@
 
     "experimentalDecorators": true,
     "noImplicitAny": false,
-    "jsx": "react",
+    "jsx": "react-native",
     "lib": [
       "dom",
       "es2015",
@@ -54,7 +45,7 @@
   },
   "include": [
     "src/**/*",
-    "node_modules/muix-icons/typings.d.ts",
+    "node_modules/muix-icons/es/typings.d.ts",
     "node_modules/fela/index.d.ts"
   ]
 }
