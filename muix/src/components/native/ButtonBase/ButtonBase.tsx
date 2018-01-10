@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { View, TouchableWithoutFeedback, Animated, Easing, Platform, Text, LayoutRectangle } from 'react-native';
+import { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRectangle } from 'react-native'
 
 import { sheetCreator, withStyles, classNames } from 'muix-styles'
 
@@ -24,7 +24,7 @@ export interface ButtonBaseStyles {
   rippleStyle: ReactN.ViewStyle
 }
 
-export class ButtonBaseLow<R extends MuixButtonBase.Shape> extends React.Component<ButtonBaseStyles & Muix.CodePropsNative<R>> { 
+export class RippleEffect<R extends MuixButtonBase.Shape> extends React.Component<ButtonBaseStyles & Muix.CodePropsNative<R>> { 
 
   state: { active?: boolean } = {}
   scaleValue = new Animated.Value(minRippleSize)
@@ -109,7 +109,7 @@ const buttonBase: Muix.CodeSFCNative<MuixButtonBase.Shape> = props => {
   const { style, classes, ...rest } = props
   const viewStyle = classNames<ReactN.ViewStyle>(style, classes.root)
   const rippleStyle = classNames<ReactN.ViewStyle>(null, classes.ripple)
-  return <ButtonBaseLow viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} {...rest} />
+  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} {...rest} />
 }
 
 const ButtonBase = withStyles<MuixButtonBase.Shape>(sheet, { name: 'MuiButtonBase' })(buttonBase)

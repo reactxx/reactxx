@@ -35,6 +35,12 @@ export const toPlatformRuleSetX = (style: Muix.TRulesetX, isNative: boolean) => 
   return { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheetX($overrides, isNative), $childOverrides: getOverridesX(null, $childOverrides) } as Muix.CSSProperties
 }
 
+export const clearSystemProps = obj => {
+  if (!obj) return obj
+  delete obj.$overrides; delete obj.$childOverrides; delete obj.$name; delete obj.$web; delete obj.$native
+  return obj
+}
+
 //create platform specific sheet from cross platform sheet
 export const toPlatformSheetX = (sheet: Muix.PartialSheetX<Muix.Shape>, isNative: boolean) => {
   if (!sheet) return null

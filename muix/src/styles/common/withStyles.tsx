@@ -1,7 +1,7 @@
 import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme, classesToPlatformSheet } from '../common/index'
-import { toPlatformSheet, toPlatformRuleSet } from 'muix-styles'
+import { toPlatformSheet, toPlatformRuleSet, clearSystemProps } from 'muix-styles'
 import warning from 'invariant'
 
 const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, options: Muix.WithStylesOptionsNew) => (Component: Muix.CodeComponentType<R>) => {
@@ -24,6 +24,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
 
       //console.log('1', toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>))
 
+      console.log('context.childOverrides', context.childOverrides)
       const fromParentContext = context.childOverrides && context.childOverrides[options.name]
       //console.log(fromParentContext)
       this.codeClasses = fromParentContext ? deepMerges(false, {}, cacheItem.fromTheme, fromParentContext) : cacheItem.fromTheme // modify static sheet 
@@ -40,6 +41,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
           mergeOverride(usedOverrides, ruleset.$overrides)
           mergeOverride(this.usedChildOverrides, ruleset.$childOverrides) //modify react context for 
         })
+        console.log('this.usedChildOverrides', this.usedChildOverrides)
         const rulesetResult: typeof rulesets[0] = {}
         rulesets.forEach(ruleset => {
           if (!ruleset) return
@@ -48,7 +50,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
         return rulesetResult
       }
 
-      this.newProps = { ...other, ...(window.isWeb ? web : native), theme, style: toPlatformRuleSet(style), flip: typeof flip === 'boolean' ? flip : theme.direction === 'rtl', getStyleWithSideEffect} as Muix.CodeProps<R>
+      this.newProps = { ...other, ...(window.isWeb ? web : native), theme, style: clearSystemProps(toPlatformRuleSet(style)), flip: typeof flip === 'boolean' ? flip : theme.direction === 'rtl', getStyleWithSideEffect} as Muix.CodeProps<R>
       if (onPress || onClick) this.newProps.onPress = onPress || onClick
     }
 

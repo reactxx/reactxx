@@ -24,14 +24,23 @@ export const ViewWeb: React.SFC<Primitives.Web> = props => {
   return <div className={rulesetsToClassNames(viewStyle, className)} style={style} {...$web} children={children} />
 }
 
+export const IconWeb: React.SFC<Primitives.Web<SVGSVGElement> & { data: string }> = props => {
+  const { style, className, $web, data, children } = props
+  const { viewBox = '0 0 24 24', ...other } = $web
+  return <svg className={rulesetsToClassNames(viewStyle, className)} focusable='false' viewBox={viewBox} {...other as any}>
+    {children ? children : <path d={data} />}
+  </svg>
+}
+
+
 const textStyles = {
   root: {
     borderWidth: 0,
     boxSizing: 'border-box',
     color: 'inherit',
     font: 'inherit',
-    fontFamily: 'System',
-    fontSize: 14,
+    //fontFamily: 'System',
+    //fontSize: 'inherit',
     margin: 0,
     padding: 0,
     textDecorationLine: 'none',
@@ -79,7 +88,7 @@ const scrollViewStyles = {
   } as React.CSSProperties,
   container: {
     flexGrow: 0,
-    flexShrink:0,
+    flexShrink: 0,
   } as React.CSSProperties,
   baseHorizontal: {
     flexDirection: 'row',
@@ -107,6 +116,7 @@ const checkChildLayoutProps = (css: React.CSSProperties) => {
   warning(childLayoutProps.length === 0, `ScrollView child layout (${JSON.stringify(childLayoutProps)}) must be applied through the contentContainerStyle prop.`)
 }
 
+export const IconX = IconWeb as React.SFC<Primitives.IconX>
 export const ViewX = ViewWeb as React.SFC<Primitives.ViewX>
 export const TextX = TextWeb as React.SFC<Primitives.TextX>
 export const ScrollViewX = ScrollViewWeb as React.SFC<Primitives.ScrollViewX>

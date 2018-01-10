@@ -14,7 +14,7 @@ import { toPlatformSheetX, toPlatformRuleSetX } from '../common/index'
 export const toPlatformRuleSet = (style: Muix.TRulesetX) => toPlatformRuleSetX(style, false) as React.CSSProperties
 export const toPlatformSheet = <R extends Muix.Shape>(rules: Muix.PartialSheetX<R>) => toPlatformSheetX(rules, false) as Muix.SheetWeb<R>
 
-export { sheetCreator, default as createMuiTheme } from '../common/index'
+export { clearSystemProps, sheetCreator, default as createMuiTheme } from '../common/index'
 
 export { classNames, withStyles as withStylesOld, withStylesX, AppContainer } from './withStyles'
 

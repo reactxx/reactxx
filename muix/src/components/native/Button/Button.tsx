@@ -1,12 +1,14 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
-import { Platform, View, Text } from 'react-native'
+//import { Platform, View, Text } from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalizeFirstLetter } from 'material-ui/utils/helpers';
 
 import { withStyles, toPlatformRuleSet, sheetCreator } from 'muix-styles'
 
-import { ButtonBaseLow } from '../ButtonBase/ButtonBase'
+import { Text  } from 'muix-primitives'
+
+import { RippleEffect } from '../ButtonBase/ButtonBase'
 
 //export type ButtonShape = Shape
 const muixTextIcon = (root: ReactN.TextStyle) => ({
@@ -127,7 +129,7 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
 }))
 
 
-const button: Muix.CodeSFCNative<MuixButton.Shape> = props => {
+const button: Muix.CodeSFCNative<MuixButton.Shape> = (props, context) => {
 
   const { children, classes, color = 'default', dense, fab, style, raised, mini, getStyleWithSideEffect, ...rest } = props
   const { disabled } = rest //disabled must be propagated to ButtonBaseLow
@@ -135,7 +137,6 @@ const button: Muix.CodeSFCNative<MuixButton.Shape> = props => {
   const isFlat = !raised && !fab
   const Color = capitalizeFirstLetter(color)
 
-  const context = {}
   const viewStyle = getStyleWithSideEffect(
     classes.root,
     !isFlat && classes.raised,
@@ -151,6 +152,7 @@ const button: Muix.CodeSFCNative<MuixButton.Shape> = props => {
 
   const rippleStyle = getStyleWithSideEffect(classes.ripple) as ReactN.ViewStyle
   const activeStyle = getStyleWithSideEffect(!disabled && classes.active) as ReactN.ViewStyle
+
   //const labelStyle = classNames2<ReactN.ViewStyle>(context, classes.label)
 
   //console.log('button classes', context)
@@ -162,9 +164,9 @@ const button: Muix.CodeSFCNative<MuixButton.Shape> = props => {
   //})
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 
-  return <ButtonBaseLow viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} getStyleWithSideEffect={null} {...rest}>
+  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} getStyleWithSideEffect={null} {...rest}>
     {childs}
-  </ButtonBaseLow>
+  </RippleEffect>
 }
 
 const Button = withStyles<MuixButton.Shape>(sheet, { name: 'MuiButton' })(button)
