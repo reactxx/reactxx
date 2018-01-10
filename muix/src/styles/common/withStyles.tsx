@@ -1,7 +1,7 @@
 import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme, classesToPlatformSheet } from '../common/index'
-import { toPlatformSheet, toPlatformRuleSet, clearSystemProps } from 'muix-styles'
+import { toPlatformRuleSet, clearSystemProps } from 'muix-styles'
 import warning from 'invariant'
 
 const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, options: Muix.WithStylesOptionsNew) => (Component: Muix.CodeComponentType<R>) => {
@@ -24,7 +24,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
 
       //console.log('1', toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>))
 
-      console.log('context.childOverrides', context.childOverrides)
+      //console.log('context.childOverrides', context.childOverrides)
       const fromParentContext = context.childOverrides && context.childOverrides[options.name]
       //console.log(fromParentContext)
       this.codeClasses = fromParentContext ? deepMerges(false, {}, cacheItem.fromTheme, fromParentContext) : cacheItem.fromTheme // modify static sheet 
@@ -33,7 +33,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       // Could be called in <Component> render method to compute component styles. Side effects:
       // - use sheet..$overrides to modify self sheet
       // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
-      const classesProp = typeof _classes === 'function' ? _classes(theme) : _classes
+      const classesProp = classesToPlatformSheet(theme, _classes)//typeof _classes === 'function' ? _classes(theme) : _classes
       const usedOverrides = {}
       const getStyleWithSideEffect: Muix.TClassnames = (...rulesets/*all used rulesets*/) => {
         rulesets.forEach(ruleset => { // acumulate $overrides and $childOverrides

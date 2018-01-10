@@ -27,7 +27,7 @@ export const ViewWeb: React.SFC<Primitives.Web> = props => {
 export const IconWeb: React.SFC<Primitives.Web<SVGSVGElement> & { data: string }> = props => {
   const { style, className, $web, data, children } = props
   const { viewBox = '0 0 24 24', ...other } = $web
-  return <svg className={rulesetsToClassNames(viewStyle, className)} focusable='false' viewBox={viewBox} {...other as any}>
+  return <svg className={rulesetsToClassNames(viewStyle, className)} style={style} focusable='false' viewBox={viewBox} {...other as any}>
     {children ? children : <path d={data} />}
   </svg>
 }

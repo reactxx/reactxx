@@ -15,6 +15,11 @@ const theme = createMuiTheme({
   }
 })
 
+const app2: React.SFC = props => <AppContainer>
+  <Icon children={MuixIcons.ArrowDownBoldBox} style={iconColor('brown')} />
+</AppContainer>
+
+
 const app: React.SFC = props =>
   <AppContainer>
     <View style={{ marginTop: 24 }}>
@@ -39,8 +44,6 @@ const app: React.SFC = props =>
       </MuiThemeProvider>
     </View>
   </AppContainer>
-
-class app2 extends React.Component { render() { return <Text>HALLO</Text> } }
 
 export default app
 //export default app2

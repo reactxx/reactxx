@@ -1,5 +1,3 @@
-//*** inspired by https://github.com/necolas/react-native-web
-
 import React from 'react'
 import { View as RNView, Text as RNText, ScrollView as RNScrollView } from 'react-native'
 import { MaterialCommunityIcons as RNIcon, MaterialCommunityIconsProps } from '@expo/vector-icons'

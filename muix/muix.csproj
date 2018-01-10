@@ -152,10 +152,8 @@
     <TypeScriptCompile Include="src\primitives\common\ScrollView\ScrollView.tsx" />
     <TypeScriptCompile Include="src\primitives\common\Text\Text.tsx" />
     <TypeScriptCompile Include="src\primitives\common\View\View.tsx" />
-    <None Include="src\primitives\native\Icon\Icon.tsx_" />
     <TypeScriptCompile Include="src\primitives\native\index.tsx" />
     <TypeScriptCompile Include="src\primitives\native\Typography\Typography.tsx" />
-    <None Include="src\primitives\web\Icon\Icon.tsx_" />
     <TypeScriptCompile Include="src\primitives\web\index.tsx" />
     <TypeScriptCompile Include="src\primitives\web\Typography\Typography.tsx" />
     <TypeScriptCompile Include="src\styles\common\index.ts" />
