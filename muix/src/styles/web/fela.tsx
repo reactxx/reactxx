@@ -14,7 +14,7 @@ const plugins = {
     pluginPrefixer(),
     pluginFallbackValue(),
     pluginLvha(),
-    pluginRtl(),
+    //pluginRtl(),
   ]
 }
 

@@ -17,7 +17,7 @@ const getTextIconColor = (color:string) => ({
 } as Muix.SheetsX)
 
 
-const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spacing, shadowsNew }) => ({
+const sheet = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spacing, shadowsNew }) => ({
   root: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -28,8 +28,9 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
     paddingLeft: spacing.unit * 2,
     paddingRight: spacing.unit * 2,
     borderRadius: 2,
+    margin: isLeft !== undefined ? spacing.unit : undefined,
     $childOverrides: {
-      MuiIcon: { root: { fontSize: 24, } },
+      MuiIcon: { root: { fontSize: 24, ...(isLeft === true ? { marginRight: spacing.unit } : (isLeft === false ? { marginLeft: spacing.unit} : {} )) } },
       MuiText: { root: { ...typo.button, color: palette.text.primary, } },
     }
   },
@@ -168,6 +169,8 @@ const button: Muix.CodeSFCNative<MuixButton.Shape> = (props, context) => {
   </RippleEffect>
 }
 
-const Button = withStyles<MuixButton.Shape>(sheet, { name: 'MuiButton' })(button)
+const Button = withStyles<MuixButton.Shape>(sheet(), { name: 'MuiButton' })(button)
+export const ButtonIconLeft = withStyles<MuixButton.Shape>(sheet(true), { name: 'MuiButtonIconLeft' })(button)
+export const ButtonIconRight = withStyles<MuixButton.Shape>(sheet(false), { name: 'MuiButtonIconRight' })(button)
 
 export default Button

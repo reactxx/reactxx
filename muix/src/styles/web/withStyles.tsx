@@ -17,7 +17,7 @@ import { sheetToClassSheet } from './fela'
 
 import { toPlatformRuleSet, toPlatformSheet } from 'muix-styles'
 
-import createMuiTheme, { AppContainerProps, classesToPlatformSheet, getDefaultTheme } from '../common/index'
+import createMuiTheme, { AppContainerProps, classesToPlatformSheet, getDefaultTheme, MuiThemeContextTypes } from '../common/index'
 
 export const jss = create(preset())
 jss.options.createGenerateClassName = createGenerateClassName
@@ -36,8 +36,9 @@ export const muiCompatible = <R extends Muix.Shape>(Component: Muix.muiComponent
 
     const classes = sheetToClassSheet(classesToPlatformSheet(theme, _classes) as Muix.SheetWeb<R>)
     const onPress = onPressInit || onClick 
-    const webProps = { ...rest, ...web, style: toPlatformRuleSet(style), classes, onPress, } as (Muix.getProps<R> & Muix.muiProps<TKey>) 
+    const webProps = { ...rest, ...web, style: toPlatformRuleSet(style), classes, onPress, theme, } as (Muix.getProps<R> & Muix.muiProps<TKey>) 
     return <Component {...webProps} />
   }
+  Styled.contextTypes = MuiThemeContextTypes
   return hoistNonReactStatics(Styled, Component)
 }

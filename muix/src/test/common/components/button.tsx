@@ -1,5 +1,6 @@
 import React from 'react'
-import Button from 'muix-components/Button/Button'
+import Button, { ButtonIconLeft, ButtonIconRight } from 'muix-components/Button/Button'
+import { Icon } from 'muix-primitives'
 import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 //import color from 'material-ui/colors/orange'
 
@@ -19,7 +20,8 @@ import { View } from 'muix-primitives'
 
 const app: React.SFC = props => <AppContainer>
   <View style={{ margin: 40 }}>
-    <Button color='primary' raised onClick={ev => ev && ev.preventDefault()}>Hallo Button</Button>
+    <ButtonIconLeft color='primary' raised onClick={ev => ev && ev.preventDefault()} style={{ margin: 10 }}><Icon children={MuixIcons.ArrowDownBoldBox} />Hallo Icon Left Button</ButtonIconLeft>
+    <ButtonIconRight color='primary' raised onClick={ev => ev && ev.preventDefault()}>Hallo Icon Right Button<Icon children={MuixIcons.ArrowDownBoldBox} /></ButtonIconRight>
   </View>
 </AppContainer>
 

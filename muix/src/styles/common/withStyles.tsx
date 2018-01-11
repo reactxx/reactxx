@@ -4,6 +4,7 @@ import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme, classe
 import { toPlatformRuleSet, clearSystemProps } from 'muix-styles'
 import warning from 'invariant'
 
+
 const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, options: Muix.WithStylesOptionsNew) => (Component: Muix.CodeComponentType<R>) => {
 
   class Styled extends React.PureComponent<Muix.PropsX<R>> {
