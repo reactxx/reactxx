@@ -96,7 +96,7 @@ let defaultTheme: Muix.ThemeNew
 export const getDefaultTheme = () => defaultTheme || (defaultTheme = createMuiTheme())
 
 //create theme from cross platform ThemeOptions
-//resulting theme is (for web) compatible with material-ui
+//resulting theme is compatible with material-ui
 function createMuiTheme(options: Muix.ThemeOptions = {}) {
   const {
     palette: paletteInput = {},
@@ -105,17 +105,17 @@ function createMuiTheme(options: Muix.ThemeOptions = {}) {
 
     //use cross platform typography options instead
     typographyNew,
-    typography: xxx1, //ignored
+    typography: ignored1, //ignored, use cross platform typographyNew instead
 
     //use cross platform shadows options instead
     shadowsNew: shadowsNewInputX,
-    shadows: xxx2, //ignored
+    shadows: ignored2, //ignored, use cross platform shadowsNew instead
 
     //use cross platform overrides options instead
     overridesNew,
-    overrides: xxx3, //ignored 
+    overrides: ignored3, //ignored , use cross platform overridesNew instead
 
-    ...other
+    ...other //contains direction, transitions, spacing, zIndex
   } = options
 
   //convert cross platform shadows to platform specific shadows
@@ -127,29 +127,22 @@ function createMuiTheme(options: Muix.ThemeOptions = {}) {
   const typographyOptionOrCreator = getTypographyOptionOrCreatorX(typographyNew)
 
   const muiTheme: Muix.ThemeNew = {
-    direction: 'ltr', //the same format and value for web and native
-    palette, //the same format and value for web and native
-    //typography: createTypographyX(palette, typographyNew), //the same format, different values for web and native
-    typography: createTypography(palette, typographyOptionOrCreator), //the same format, different values for web and native
-    mixins: createMixins(breakpoints, spacing, mixinsInput), //the same for web and native
-    breakpoints, //the same format and value for web and native
+    direction: 'ltr', //the same value for web and native
+    palette, //the same value for web and native
+    typography: createTypography(palette, typographyOptionOrCreator), //different value for web and native
+    mixins: createMixins(breakpoints, spacing, mixinsInput), //the same value for web and native
+    breakpoints, //the same value for web and native
     shadows: (shadowsNewInput || shadows).map(rsx => (toPlatformRuleSetX(rsx, false) as React.CSSProperties).boxShadow), // for material-ui only
-    shadowsNew: shadowsNewInput || shadows, //the same format, different values for web and native
+    shadowsNew: shadowsNewInput || shadows, //different value for web and native
     $sheetCache: [], //sheet cache (for native only)
     ...(deepmerge(
-      {
-        transitions,
-        spacing,
-        zIndex,
-      },
+      { transitions, spacing, zIndex, },
       other,
-      {
-        clone: false, // No need to clone deep
-      },
+      { clone: false }, // No need to clone deep
     )) as Muix.ThemeNew,
   }
 
-  muiTheme.overrides = getOverridesX(muiTheme, overridesNew) //the same format, different values for web and native
+  muiTheme.overrides = getOverridesX(muiTheme, overridesNew) //different value for web and native
 
   warning(muiTheme.shadows.length === 25 && muiTheme.shadowsNew.length === 25, 'MUIX: the shadows array provided to createMuiTheme should support 25 elevations.')
 

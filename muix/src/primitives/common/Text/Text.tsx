@@ -3,8 +3,8 @@
 import { TextX } from 'muix-primitives'
 import { withStyles, sheetCreator } from 'muix-styles'
 
-export const sheet = sheetCreator<MuixText.Shape>(() => ({
-  root: { }
+export const sheet = sheetCreator<MuixText.Shape>(({ typography: typo }) => ({
+  root: typo.fontWeightRegularNew
 }))
 
 const text: Muix.CodeSFC<MuixText.Shape> = props => {

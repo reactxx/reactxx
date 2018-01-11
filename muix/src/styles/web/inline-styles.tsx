@@ -1,3 +1,5 @@
+//DEPRECATED, USED fela.js INSTEAD
+
 import React from 'react'
 //import JssProvider from 'react-jss/lib/JssProvider'
 //import { create } from 'jss';

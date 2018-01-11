@@ -6,14 +6,14 @@ import { capitalizeFirstLetter } from 'material-ui/utils/helpers';
 
 import { withStyles, toPlatformRuleSet, sheetCreator } from 'muix-styles'
 
-import { Text  } from 'muix-primitives'
+import { Text, iconColor } from 'muix-primitives'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 
 //export type ButtonShape = Shape
-const muixTextIcon = (root: ReactN.TextStyle) => ({
-  MuiText: { root },
-  MuiIcon: { root },
+const getTextIconColor = (color:string) => ({
+  MuiText: { root: {color} },
+  MuiIcon: { root: iconColor(color) },
 } as Muix.SheetsX)
 
 
@@ -46,7 +46,7 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
   },
 
   disabled: {
-    $childOverrides: muixTextIcon({ color: palette.action.disabled, })
+    $childOverrides: getTextIconColor(palette.action.disabled)
   },
 
   flat: {
@@ -58,19 +58,19 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
     $overrides: {
       ripple: { backgroundColor: fade(palette.primary[500], 0.4), opacity: 0.8 },
     },
-    $childOverrides: muixTextIcon({ color: palette.primary[500], })
+    $childOverrides: getTextIconColor(palette.primary[500])
   },
   flatAccent: {
     $overrides: {
       ripple: { backgroundColor: fade(palette.secondary.A200, 0.4), opacity: 0.8 },
     },
-    $childOverrides: muixTextIcon({ color: palette.secondary.A200, })
+    $childOverrides: getTextIconColor(palette.secondary.A200)
   },
   flatContrast: {
     $overrides: {
       ripple: { backgroundColor: fade(palette.getContrastText(palette.primary[500]), 0.4), opacity: 0.8 },
     },
-    $childOverrides: muixTextIcon({ color: palette.getContrastText(palette.primary[500]), })
+    $childOverrides: getTextIconColor(palette.getContrastText(palette.primary[500]))
   },
 
 
@@ -84,20 +84,19 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
 
   raisedPrimary: {
     backgroundColor: palette.primary[500],
-    $childOverrides: muixTextIcon({ color: palette.getContrastText(palette.primary[500]), })
-
+    $childOverrides: getTextIconColor(palette.getContrastText(palette.primary[500]))
   },
   raisedAccent: {
     backgroundColor: palette.secondary.A200,
-    $childOverrides: muixTextIcon({ color: palette.getContrastText(palette.secondary.A200), })
+    $childOverrides: getTextIconColor(palette.getContrastText(palette.secondary.A200))
   },
   raisedDisable: {
     ...shadowsNew[0],
     backgroundColor: palette.text.divider,
-    $childOverrides: muixTextIcon({ color: palette.getContrastText(palette.primary[500]), })
+    $childOverrides: getTextIconColor(palette.getContrastText(palette.primary[500]))
   },
   raisedContrast: {
-    $childOverrides: muixTextIcon({ color: palette.getContrastText(palette.primary[500]), })
+    $childOverrides: getTextIconColor(palette.getContrastText(palette.primary[500]))
   },
 
   fab: {

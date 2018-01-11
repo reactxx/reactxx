@@ -16,7 +16,7 @@ export const toPlatformSheet = <R extends Muix.Shape>(rules: Muix.PartialSheetX<
 
 export { clearSystemProps, sheetCreator, default as createMuiTheme } from '../common/index'
 
-export { classNames, withStyles as withStylesOld, withStylesX, AppContainer } from './withStyles'
+export { muiCompatible, AppContainer } from './withStyles'
 
 export { rulesetsToClassNames, rulesetToClassNames } from './fela'
 

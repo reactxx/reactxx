@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRectangle } from 'react-native'
 
-import { sheetCreator, withStyles, classNames } from 'muix-styles'
+import { sheetCreator, withStyles } from 'muix-styles'
 
 const sheet = sheetCreator<MuixButtonBase.Shape>(({ palette }) => ({
   root: {
@@ -106,10 +106,10 @@ let t: Muix.CodePropsNative<MuixButtonBase.Shape>
 
 
 const buttonBase: Muix.CodeSFCNative<MuixButtonBase.Shape> = props => {
-  const { style, classes, ...rest } = props
-  const viewStyle = classNames<ReactN.ViewStyle>(style, classes.root)
-  const rippleStyle = classNames<ReactN.ViewStyle>(null, classes.ripple)
-  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} {...rest} />
+  const { style, classes, getStyleWithSideEffect, ...rest } = props
+  const viewStyle = getStyleWithSideEffect(classes.root) as ReactN.ViewStyle
+  const rippleStyle = getStyleWithSideEffect(classes.ripple) as ReactN.ViewStyle
+  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} getStyleWithSideEffect={null} {...rest} />
 }
 
 const ButtonBase = withStyles<MuixButtonBase.Shape>(sheet, { name: 'MuiButtonBase' })(buttonBase)

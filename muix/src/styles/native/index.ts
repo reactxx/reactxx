@@ -28,7 +28,7 @@ export const shadows: ReactN.ViewStyle[] = getShadows()
 
 export { sheetCreator, clearSystemProps, default as createMuiTheme } from '../common/index'
 
-export { classNames, classNames2, withStyles as withStylesOld, AppContainer } from './withStyles'
+export { AppContainer } from './withStyles'
 
 export { default as MuiThemeProvider } from './MuiThemeProvider'
 

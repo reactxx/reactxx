@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { capitalizeFirstLetter } from 'material-ui/utils/helpers'
 import { Text as TextRN } from 'react-native'
 
-import { sheetCreator, toPlatformRuleSet, withStyles, classNames } from 'muix-styles'
+import { sheetCreator, toPlatformRuleSet, withStyles } from 'muix-styles'
 
 export const sheet = sheetCreator<MuixTypography.Shape>(({ typography: typo, palette, spacing }) => ({
   root: { margin: 0, },
@@ -47,21 +47,21 @@ const typography: Muix.CodeSFCNative<MuixTypography.Shape> = (props => {
     type = 'body1',
     style,
     theme,
+    getStyleWithSideEffect,
     ...other
   } = props
 
-  const actStyle = classNames(
+  const actStyle = getStyleWithSideEffect(
     classes.root,
     classes[type],
     color !== 'default' && classes[`color${capitalizeFirstLetter(color)}`],
     gutterBottom && classes.gutterBottom,
     paragraph && classes.paragraph,
     align !== 'inherit' && classes[`align${capitalizeFirstLetter(align)}`],
-    toPlatformRuleSet(style)
   )
 
   //console.log(classes.root, actStyle)
-  return <TextRN style={actStyle} {...(noWrap && classes.noWrap) } {...other} />
+  return <TextRN style={[actStyle, style]} {...(noWrap && classes.noWrap) } {...other} />
 })
 
 const Typography = withStyles<MuixTypography.Shape>(sheet, { name: 'MuiTypography' })(typography)

@@ -2,8 +2,8 @@
 import React from 'react'
 
 import MuiButton from 'material-ui/Button/Button'
-import { withStylesX } from 'muix-styles/web'
+import { muiCompatible } from 'muix-styles/web'
 
-const Button = withStylesX<MuixButton.Shape>(MuiButton)
+const Button = muiCompatible<MuixButton.Shape>(MuiButton)
 
 export default Button

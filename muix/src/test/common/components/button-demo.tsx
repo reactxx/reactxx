@@ -18,66 +18,7 @@ const theme = createMuiTheme({
 const rootView: ReactN.ViewStyle = { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', padding: 10, flex: 1, /*alignItems: 'flex-start'  shifts button label*/ }
 
 const app2: React.SFC = props => <AppContainer themeOptions={{ overridesNew: theme => ({ MuiButton: { root: { margin: theme.spacing.unit, flexShrink: 0 } } }) }}>
-  <ScrollView>
-    <View classes={{ root: rootView }} >
-      <Button>Default</Button>
-      <Button color="primary" >Primary</Button>
-      <Button color="accent" >
-        Accent
-      </Button>
-      <Button disabled >
-        Disabled
-      </Button>
-      <Button href="#flat-buttons" >
-        Link
-      </Button>
-      <Button disabled href="/" >
-        Link disabled
-      </Button>
-      <Button dense >
-        Dense
-      </Button>
-      <Button onClick={() => alert('here I am')} >
-        Does something
-      </Button>
-    </View>
-    <View classes={{ root: rootView }} style={{ backgroundColor: theme.palette.common.black }}>
-      <Button color="contrast" >Contrast</Button>
-      <Button color="contrast" disabled >Contrast</Button>
-    </View>
-    <View classes={{ root: rootView }} >
-      <Button raised>
-        Default
-      </Button>
-      <Button raised color="primary">
-        Primary
-      </Button>
-      <Button raised color="accent">
-        Accent
-      </Button>
-      <Button raised color="contrast">
-        Contrast
-      </Button>
-      <Button raised color="accent" disabled>
-        Disabled
-      </Button>
-      {/*<input
-        accept="image/*"
-        className={classes.input}
-        id="raised-button-file"
-        multiple
-        type="file"
-      />
-      <label htmlFor="raised-button-file">
-        <Button raised component="span">
-          Upload
-        </Button>
-      </label>*/}
-      <Button raised dense>
-        Dense
-      </Button>
-    </View>
-  </ScrollView>
+   <Button fab color="accent"><Icon>{MuixIcons.Pencil}</Icon></Button>
 </AppContainer>
 
 const app: React.SFC = props => <AppContainer themeOptions={{ overridesNew: theme => ({ MuiButton: { root: { margin: theme.spacing.unit, flexShrink: 0 } } }) }}>
@@ -147,9 +88,7 @@ const app: React.SFC = props => <AppContainer themeOptions={{ overridesNew: them
       <Button fab mini color="primary">
         <Icon>{MuixIcons.Plus}</Icon>
       </Button>
-      <Button fab color="accent">
-        <Icon>{MuixIcons.Pencil}</Icon>
-      </Button>
+      <Button fab color="accent"><Icon>{MuixIcons.Pencil}</Icon></Button>
       <Button fab mini color="accent">
         <Icon>{MuixIcons.Pencil}</Icon>
       </Button>
@@ -163,5 +102,5 @@ const app: React.SFC = props => <AppContainer themeOptions={{ overridesNew: them
   </ScrollView>
 </AppContainer >
 
-//export default app
-export default app2
+export default app
+//export default app2
