@@ -66,13 +66,13 @@ const getTypographyOptionOrCreatorX = (optionsOrCreatorX: Muix.TypographyOptions
     let res: Muix.TypographyOptionsNew = {}
 
     if (optionsX) {
-      const { fontFamily, fontSize, htmlFontSize, fontSizeNormalizerNative, ...rulesX } = optionsX
+      const { fontFamily, fontSize, htmlFontSize, ...rulesX } = optionsX
 
       const rules: PartialRecord<Muix.typoStyle, ReactN.TextStyle> = {}
       for (const p in rulesX) rules[p] = toPlatformRuleSet(rulesX[p]) //toPlatformRuleSet is platform specific
 
       res = {
-        fontFamily, fontSize, htmlFontSize, fontSizeNormalizerNative,
+        fontFamily, fontSize, htmlFontSize,
         ...rules
       }
     }

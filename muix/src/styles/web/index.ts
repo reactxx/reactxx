@@ -1,7 +1,7 @@
 import ReactN from 'react-native'
 import React from 'react'
 
-export { default as createTypography } from 'material-ui/styles/createTypography' 
+import createTypographyMui from 'material-ui/styles/createTypography' 
 
 import muiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 export const MuiThemeProvider = muiThemeProvider as any as React.ComponentType<Muix.IMuiThemeProps>
@@ -21,3 +21,12 @@ export { muiCompatible, AppContainer } from './withStyles'
 export { rulesetsToClassNames, rulesetToClassNames } from './fela'
 
 export { default as withStyles } from '../common/withStyles'
+
+export const createTypography = (palette: Muix.Palette, optionOrCreator: Muix.TypographyOptionsOrCreator) => {
+  const res = createTypographyMui(palette, optionOrCreator)
+  return Object.assign(res, {
+    fontWeightLightNew: { fontWeight: res.fontWeightLight, fontFamily: res.fontFamily },
+    fontWeightRegularNew: { fontWeight: res.fontWeightRegular, fontFamily: res.fontFamily },
+    fontWeightMediumNew: { fontWeight: res.fontWeightMedium, fontFamily: res.fontFamily }
+  })
+}

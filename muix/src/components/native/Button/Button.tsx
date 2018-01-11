@@ -41,7 +41,7 @@ const sheet = sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spaci
     minWidth: 64,
     minHeight: 32,
     $childOverrides: {
-      MuiText: { root: { fontSize: typo.fontSizeNormalizerNative(typo.fontSize - 1), } }
+      MuiText: { root: { fontSize: typo.fontSize, } }
     }
   },
 

@@ -27,7 +27,7 @@ export const sheet = sheetCreator<MuixTypography.Shape>(({ typography: typo, pal
     ellipsizeMode: 'tail',
     numberOfLines: 1
   } as any,
-  gutterBottom: { marginBottom: typo.fontSizeNormalizerNative(0.35 * 16) },
+  gutterBottom: { marginBottom: 0.35 * 16 },
   paragraph: { marginBottom: spacing.unit * 2, },
   colorInherit: { color: undefined, },
   colorPrimary: { color: palette.primary[500], },
