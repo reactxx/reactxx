@@ -27,7 +27,7 @@ export const ViewWeb: React.SFC<Primitives.Web> = props => {
 export const IconWeb: React.SFC<Primitives.Web<SVGSVGElement> & { data: string }> = props => {
   const { style, className, $web, data, children } = props
   const { viewBox = '0 0 24 24', ...other } = $web
-  return <svg className={rulesetsToClassNames(className, {fill: 'currentColor'})} style={style} focusable='false' viewBox={viewBox} {...other as any}>
+  return <svg className={rulesetsToClassNames(className, { fill: 'currentColor' })} style={style} focusable='false' viewBox={viewBox} {...other as any}>
     {children ? children : <path d={data} />}
   </svg>
 }
@@ -35,12 +35,12 @@ export const IconWeb: React.SFC<Primitives.Web<SVGSVGElement> & { data: string }
 
 const textStyles = {
   root: {
-    borderWidth: 0,
+    //borderWidth: 0,
     boxSizing: 'border-box',
     color: 'inherit',
     font: 'inherit',
-    margin: 0,
-    padding: 0,
+    //margin: 0,
+    //padding: 0,
     textDecorationLine: 'none',
     whiteSpace: 'pre-wrap',
     wordWrap: 'break-word',
@@ -73,6 +73,7 @@ export const TextWeb: React.SFC<Primitives.Web & { numberOfLines?: number; notSe
 }
 
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
+//https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
 const scrollViewStyles = {
   base: {
     flexGrow: 1,

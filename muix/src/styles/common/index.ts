@@ -32,7 +32,10 @@ export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCrea
 export const toPlatformRuleSetX = (style: Muix.TRulesetX, isNative: boolean) => {
   if (!style) return null
   const { $web, $native, $overrides, $childOverrides, ...rest } = style
-  return { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheetX($overrides, isNative), $childOverrides: getOverridesX(null, $childOverrides) } as Muix.CSSProperties
+  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheetX($overrides, isNative), $childOverrides: getOverridesX(null, $childOverrides) } 
+  if (!res.$overrides) delete res.$overrides
+  if (!res.$childOverrides) delete res.$childOverrides
+  return res as Muix.CSSProperties
 }
 
 export const clearSystemProps = obj => {

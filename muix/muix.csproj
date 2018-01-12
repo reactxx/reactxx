@@ -140,7 +140,7 @@
     <TypeScriptCompile Include="src\primitives\web\for-components.tsx" />
     <TypeScriptCompile Include="src\styles\common\utils.ts" />
     <TypeScriptCompile Include="src\styles\common\withStyles.tsx" />
-    <TypeScriptCompile Include="src\styles\typings\withStyles2-d.d.ts" />
+    <None Include="src\styles\typings\withStyles2-d.d.ts_" />
     <TypeScriptCompile Include="src\styles\web\fela.tsx" />
     <TypeScriptCompile Include="src\test\common\components\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />

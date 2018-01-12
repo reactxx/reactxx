@@ -6,7 +6,7 @@ import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 
 import { View } from 'muix-primitives'
 
-//import Cancel from 'material-ui/svg-icons/Cancel'
+//import Cancel from 'material-ui/svg-icons/Cancel' 
 
 //const theme = createMuiTheme({
 //  overrides: {
@@ -19,9 +19,11 @@ import { View } from 'muix-primitives'
 //})
 
 const app: React.SFC = props => <AppContainer>
-  <View style={{ margin: 40 }}>
-    <ButtonIconLeft color='primary' raised onClick={ev => ev && ev.preventDefault()} style={{ margin: 10 }}><Icon children={MuixIcons.ArrowDownBoldBox} />Hallo Icon Left Button</ButtonIconLeft>
-    <ButtonIconRight color='primary' raised onClick={ev => ev && ev.preventDefault()}>Hallo Icon Right Button<Icon children={MuixIcons.ArrowDownBoldBox} /></ButtonIconRight>
+  <View style={{ padding: 10, backgroundColor: 'lightgray' }}>
+    <View style={{ padding: 10, backgroundColor: 'yellow' }}>
+      <ButtonIconLeft color='primary' raised onClick={ev => ev && ev.preventDefault()} style={{ marginBottom: 10 }}><Icon children={MuixIcons.ArrowDownBoldBox} />Hallo Icon Left Button</ButtonIconLeft>
+      <ButtonIconRight color='primary' raised onClick={ev => ev && ev.preventDefault()}>Hallo Icon Right Button<Icon children={MuixIcons.ArrowDownBoldBox} /></ButtonIconRight>
+    </View>
   </View>
 </AppContainer>
 

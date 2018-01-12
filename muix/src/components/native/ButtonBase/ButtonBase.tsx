@@ -45,7 +45,7 @@ export class RippleEffect<R extends MuixButtonBase.Shape> extends React.Componen
   onPressedOut = (() => this.setState({ active: false })).bind(this)
 
   render() {
-    const { scaleValue, opacityValue, onPressedIn, onPressedOut, rect: { width, height }, state: { active }, props: { children, viewStyle, rippleStyle, activeStyle, disabled, onPress, theme, innerRef, disableRipple } } = this
+    const { scaleValue, opacityValue, onPressedIn, onPressedOut, rect: { width, height }, state: { active }, props: { children, viewStyle, rippleStyle, activeStyle, disabled, onPress, theme, innerRef, disableRipple, style } } = this
 
     const renderRipple = () => {
 
@@ -93,7 +93,7 @@ export class RippleEffect<R extends MuixButtonBase.Shape> extends React.Componen
 
 
     return <TouchableWithoutFeedback disabled={disabled} onPress={onPress} onPressIn={onPressedIn} onPressOut={onPressedOut} onLayout={({ nativeEvent: { layout } }) => this.rect = layout} ref={div => innerRef && innerRef(div)} >
-      <View style={Object.assign({}, viewStyle, false/*active*/ ? activeStyle : null)}>
+      <View style={Object.assign({}, viewStyle, style, false/*active*/ ? activeStyle : null)}>
         {renderRipple()}
         {children}
       </View>

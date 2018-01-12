@@ -27,8 +27,9 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
 
       //console.log('context.childOverrides', context.childOverrides)
       const fromParentContext = context.childOverrides && context.childOverrides[options.name]
-      //console.log(fromParentContext)
+      console.log('fromParentContext: ',fromParentContext)
       this.codeClasses = fromParentContext ? deepMerges(false, {}, cacheItem.fromTheme, fromParentContext) : cacheItem.fromTheme // modify static sheet 
+      //console.log('cacheItem.fromTheme: ',cacheItem.fromTheme)
       for (const p in this.codeClasses) this.codeClasses[p].$name = p // assign name to ruleSets. $name is used in getStyleWithSideEffect to recognize used rulesets
 
       // Could be called in <Component> render method to compute component styles. Side effects:
@@ -37,12 +38,13 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       const classesProp = classesToPlatformSheet(theme, _classes)//typeof _classes === 'function' ? _classes(theme) : _classes
       const usedOverrides = {}
       const getStyleWithSideEffect: Muix.TClassnames = (...rulesets/*all used rulesets*/) => {
+        //console.log('getStyleWithSideEffect', rulesets)
         rulesets.forEach(ruleset => { // acumulate $overrides and $childOverrides
           if (!ruleset) return
           mergeOverride(usedOverrides, ruleset.$overrides)
           mergeOverride(this.usedChildOverrides, ruleset.$childOverrides) //modify react context for 
         })
-        //console.log('this.usedChildOverrides', this.usedChildOverrides)
+        console.log('this.usedChildOverrides', this.usedChildOverrides)
         const rulesetResult: typeof rulesets[0] = {}
         rulesets.forEach(ruleset => {
           if (!ruleset) return
@@ -78,8 +80,11 @@ type TContext = Muix.MuiThemeContextValue & Muix.MuiOverridesContext
 //apply theme to sheet AND merge it with theme.overrides
 const aplyThemeToSheet = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, theme: Muix.ThemeNew, name?: string) => {
   const overrides = (theme.overrides && name && theme.overrides[name]) as Muix.Sheet<R>
-  const styles = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator)
-  return overrides ? deepMerges(false, {}, styles, overrides) : styles //deepMerge only when needed
+  console.log('###BEFORE', overrides)
+  const styles = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator) 
+  const res = overrides ? deepMerges(false, {}, styles, overrides) : styles //deepMerge only when needed
+  console.log('###AFTER', res.root)
+  return res
 }
 
 // merge named values
