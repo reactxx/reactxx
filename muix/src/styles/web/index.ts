@@ -21,6 +21,7 @@ export { muiCompatible, AppContainer } from './withStyles'
 export { rulesetsToClassNames, rulesetToClassNames } from './fela'
 
 export { default as withStyles } from '../common/withStyles'
+export * from '../common/withStyles'
 export { default as MuiThemeProvider } from '../common/MuiThemeProvider'
 
 export const createTypography = (palette: Muix.Palette, optionOrCreator: Muix.TypographyOptionsOrCreator) => {

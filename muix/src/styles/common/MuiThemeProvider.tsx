@@ -1,6 +1,6 @@
 import React from 'react'
 import { MuiThemeContextTypes } from './index'
-import { MuiThemeProviderInner } from 'muix-styles'
+import { MuiThemeProviderInner, deepMerge } from 'muix-styles'
 
 class MuiThemeProvider extends React.PureComponent<Muix.IMuiThemeProps> {
 
@@ -18,9 +18,8 @@ class MuiThemeProvider extends React.PureComponent<Muix.IMuiThemeProps> {
   mergeOuterLocalTheme(outerTheme: Muix.ThemeNew) {
     const { props: { theme } } = this
     if (typeof theme === 'function') return theme(outerTheme)
+    if (outerTheme && theme.overrides) deepMerge(theme.overrides, outerTheme.overrides)
     return theme
-    //if (!outerTheme) return theme
-    //return { ...outerTheme, ...theme };
   }
 
   render() {

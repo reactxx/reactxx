@@ -21,7 +21,6 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       const { classes: _classes, style, web, native, onClick, ...other } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb
       const onPressNative = native && (native as any).onPress
       const onClickWeb: Muix.TOnClickWeb = web && (web as any).onClick
-      const click = onClickWeb || onPressNative || onClick
 
       let theme = context.theme || getDefaultTheme()
 
@@ -64,8 +63,9 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       }
 
       this.newProps = { ...other, ...(window.isWeb ? web : native), theme, style: clearSystemProps(toPlatformRuleSet(style)), flip: typeof flip === 'boolean' ? flip : theme.direction === 'rtl', getStyleWithSideEffect } as Muix.CodeProps<R>
-      this.newProps.onPress = onPressNative || click
-      this.newProps.onClick = onClickWeb || onClick
+      if (window.isWeb) this.newProps.onClick = onClickWeb || onClick
+      else this.newProps.onPress = onPressNative || onClick
+      
     }
 
     getChildContext() { return { childOverrides: this.usedChildOverrides /*usedChildOverrides is modified during Component render (where getStyleWithSideEffect is called)*/ } }
@@ -104,19 +104,19 @@ const mergeOverride = (result, patches) => {
   for (const p in patches) {
     const patch = patches[p]; if (!patch) continue
     if (!result[p]) result[p] = {}
-    deepMerge(false, result[p], patch)
+    deepMerge(result[p], patch, false)
   }
 }
 
 //simple deep merge
-const deepMerge = (skipSystem: boolean, target, source) => {
+export const deepMerge = (target, source, skipSystem = false) => {
   if (!source) return target
   if (isObject(target) && isObject(source))
     for (const key in source) {
       if (skipSystem && key[0] === '$') continue //skip $override, $overrides and $name props
       if (isObject(source[key])) {
         if (!target[key]) target[key] = {}
-        deepMerge(skipSystem, target[key], source[key])
+        deepMerge(target[key], source[key], skipSystem)
       } else
         target[key] = source[key]
     }
@@ -125,7 +125,7 @@ const deepMerge = (skipSystem: boolean, target, source) => {
   return target
 }
 const deepMerges = (skipSystem: boolean, target, ...sources) => {
-  sources.forEach(source => deepMerge(skipSystem, target, source))
+  sources.forEach(source => deepMerge(target, source, skipSystem))
   return target
 }
 const isObject = item => item && typeof item === 'object' && !Array.isArray(item)

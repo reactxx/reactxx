@@ -8,23 +8,29 @@ import { ScrollView, View, Icon, Text } from 'muix-primitives'
 const theme = createMuiTheme({
   overridesNew: theme => ({
     MuiButton: {
-      root: {
-        margin: theme.spacing.unit
+      raisedAccent: {
+        backgroundColor: 'brown',
+        $web: { '&:hover': { backgroundColor: 'brown' } }
       }
-    },
+    }
   })
 })
 
-const rootView: ReactN.ViewStyle = { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', padding: 10 }
+const rootView: ReactN.ViewStyle = { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'stretch', padding: 10 }
 
 const app2: React.SFC = props => (
-  <Button color='accent' raised classes={theme => ({ raisedAccent: { backgroundColor: 'green' } })} >classes</Button>
+  <View classes={{ root: rootView }} >
+    <Button color='accent' raised classes={theme => ({ raisedAccent: { backgroundColor: 'green', $web: { '&:hover': { backgroundColor: 'green', } } } })} >classes</Button>
+    <MuiThemeProvider theme={theme}>
+      <Button color='accent' raised>theme</Button>
+    </MuiThemeProvider>
+  </View>
 )
 
 const root = { root: { margin: theme.spacing.unit } }
+//const root = {  }
 export const overridesNew: Muix.ThemeValueOrCreator<Muix.OverridesNew> = theme => ({ MuiButton: root, MuiButtonIconLeft: root, MuiButtonIconRight: root })
 
-//<AppContainer themeOptions={{ overridesNew: theme => ({ MuiButton: root, MuiButtonIconLeft: root, MuiButtonIconRight: root }) }}>
 const app: React.SFC = props => <ScrollView>
   <View classes={{ root: rootView }} >
     <Button>Default</Button>
@@ -66,7 +72,10 @@ const app: React.SFC = props => <ScrollView>
     <ButtonIconRight color='primary' disabled raised >Icon Right<Icon children={MuixIcons.ArrowDownBoldBox} /></ButtonIconRight>
   </View>
   <View classes={{ root: rootView }} >
-    <Button color='accent' raised classes={theme => ({ raisedAccent: { backgroundColor: 'green' } })} >classes</Button>
+    <Button color='accent' raised classes={theme => ({ raisedAccent: { backgroundColor: 'green', $web: { '&:hover': { backgroundColor: 'green', } } } })} >classes</Button>
+    <MuiThemeProvider theme={theme}>
+      <Button color='accent' raised>theme</Button>
+    </MuiThemeProvider>
   </View>
 </ScrollView>
 
