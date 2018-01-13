@@ -6,7 +6,7 @@ import { withStyles, sheetCreator, AppContainer, MuiThemeProvider, } from 'muix-
 import { ScrollView, ViewX, TextX, } from 'muix-primitives'
 
 
-const sheet = sheetCreator<testStyles.Shape>(({ palette, typography: type }) => ({
+const sheet = sheetCreator<testStyles.Shape>(({ palette, typographyX: typoX }) => ({
   root: {
     minWidth: 150, margin: 10, padding: 10,
     justifyContent: 'center', alignItems: 'center',
@@ -36,6 +36,7 @@ const sheet = sheetCreator<testStyles.Shape>(({ palette, typography: type }) => 
       }
     }
   },
+  style: {},
   primary: {
     backgroundColor: palette.primary[500],
     $overrides: {
@@ -61,6 +62,7 @@ const testStyles: Muix.CodeSFC<testStyles.Shape> = props => {
     classes.root,
     primary === true && classes.primary,
     primary === false && classes.secondary,
+    classes.style,
   )
 
   const labelStyles = getStyleWithSideEffect(

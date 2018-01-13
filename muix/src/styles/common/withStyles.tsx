@@ -42,7 +42,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       // - use sheet..$overrides to modify self sheet
       // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
       const classesProp = classesToPlatformSheet(theme, _classes)
-      //if (classesProp) console.log(classesProp)
+      if (classesProp) console.log('### classesProp', classesProp)
       const usedOverrides = {}
       const getStyleWithSideEffect: Muix.TClassnames = (...rulesets/*all used rulesets*/) => {
         //console.log('getStyleWithSideEffect', rulesets)
@@ -55,9 +55,9 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
         const rulesetResult: typeof rulesets[0] = {}
         rulesets.forEach(ruleset => {
           if (!ruleset) return
-          //if (classesProp && ruleset.$name=='root') console.log('### BEFORE', rulesetResult)
+          if (classesProp && ruleset.$name=='root') console.log('### BEFORE', rulesetResult)
           deepMerges(true, rulesetResult, /*ruleset, used in Component render*/ruleset, /*modify it with used $overrides*/usedOverrides[ruleset.$name], /*force using classes component property, its rulesets cannot be overrided */classesProp && classesProp[ruleset.$name])
-          //if (classesProp && ruleset.$name == 'root') console.log('### AFTER', rulesetResult)
+          if (classesProp && ruleset.$name == 'root') console.log('### AFTER', rulesetResult)
         })
         return rulesetResult
       }

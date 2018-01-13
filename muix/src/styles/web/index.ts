@@ -24,11 +24,13 @@ export { default as withStyles } from '../common/withStyles'
 export * from '../common/withStyles'
 export { default as MuiThemeProvider } from '../common/MuiThemeProvider'
 
-export const createTypography = (palette: Muix.Palette, optionOrCreator: Muix.TypographyOptionsOrCreator) => {
-  const res = createTypographyMui(palette, optionOrCreator)
-  return Object.assign(res, {
-    fontWeightLightNew: { fontWeight: res.fontWeightLight, fontFamily: res.fontFamily },
-    fontWeightRegularNew: { fontWeight: res.fontWeightRegular, fontFamily: res.fontFamily },
-    fontWeightMediumNew: { fontWeight: res.fontWeightMedium, fontFamily: res.fontFamily }
-  })
-}
+export { default as createTypography } from '../common/createTypography'
+
+//export const createTypography = (palette: Muix.Palette, optionOrCreator: Muix.TypographyOptionsOrCreator) => {
+//  const res = createTypographyMui(palette, optionOrCreator)
+//  return Object.assign(res, {
+//    fontWeightLightNew: { fontWeight: res.fontWeightLight, fontFamily: res.fontFamily },
+//    fontWeightRegularNew: { fontWeight: res.fontWeightRegular, fontFamily: res.fontFamily },
+//    fontWeightMediumNew: { fontWeight: res.fontWeightMedium, fontFamily: res.fontFamily }
+//  })
+//}

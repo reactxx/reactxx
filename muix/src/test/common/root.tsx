@@ -13,11 +13,11 @@ import { ScrollView, View, Text, Typography } from 'muix-primitives'
 import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 import Button from 'muix-components/Button/Button'
 
-const apps: { title: string; app: React.ComponentType, overridesNew?: Muix.ThemeValueOrCreator<Muix.OverridesNew> }[] = [
+const apps: { title: string; app: React.ComponentType, overridesNew?: Muix.ThemeValueOrCreator<Muix.OverridesX> }[] = [
+  { title: 'Typography', app: TypographyTest },
   { title: 'ButtonDemo', app: ButtonDemo, overridesNew },
   { title: 'Button', app: ButtonTest },
   { title: 'Icons', app: Icons },
-  { title: 'Typography', app: TypographyTest },
   { title: 'TextView', app: TextView },
   { title: 'Icon', app: Icon },
   //{ title: 'Shadows', app: Shadows },
@@ -44,8 +44,8 @@ class AppRoot extends React.Component {
       <Typography type='display2' >{apps[appIndex].title}</Typography>
       <App />
     </View>
-    const root2 = <ButtonDemo />
-    return <AppContainer key={appIndex} themeOptions={{ overridesNew: apps[appIndex].overridesNew }}>
+    const root2 = <TypographyTest />
+    return <AppContainer key={appIndex} themeOptions={{ overridesX: apps[appIndex].overridesNew }}>
       {root}
     </AppContainer>
   }

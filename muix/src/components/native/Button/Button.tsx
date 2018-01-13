@@ -17,7 +17,7 @@ const getTextIconColor = (color: string) => ({
 } as Muix.SheetsX)
 
 
-const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spacing, shadowsNew }) => ({
+const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
   root: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -31,9 +31,10 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
     borderRadius: 2,
     $childOverrides: {
       MuiIcon: { root: { fontSize: 24, ...(isLeft === true ? { marginRight: spacing.unit } : (isLeft === false ? { marginLeft: spacing.unit } : {})) } },
-      MuiText: { root: { ...typo.button, color: palette.text.primary, } },
+      MuiText: { root: { ...typoX.button, color: palette.text.primary, } },
     },
   },
+  style: {},
   dense: {
     paddingTop: spacing.unit - 1,
     paddingBottom: spacing.unit - 1,
@@ -42,7 +43,7 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
     minWidth: 64,
     minHeight: 32,
     $childOverrides: {
-      MuiText: { root: { fontSize: typo.fontSize, } }
+      MuiText: { root: { fontSize: typoX.fontSize, } }
     }
   },
 
@@ -149,6 +150,7 @@ const button: Muix.CodeSFCNative<MuixButton.Shape> = (props, context) => {
     dense && classes.dense,
     !isFlat && disabled && classes.raisedDisable,
     isFlat && disabled && classes.disabled,
+    classes.style,
   ) as ReactN.ViewStyle
 
   //console.log('### viewStyle: ', viewStyle)

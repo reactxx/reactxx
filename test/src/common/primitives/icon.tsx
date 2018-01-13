@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, iconSize } from 'muix-primitives'
+import { Icon } from 'muix-primitives'
 import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 import color from 'material-ui/colors/orange'
 
@@ -44,8 +44,8 @@ const app: React.SFC = props =>
       <Icon children={MuixIcons.ArrowDownBoldBox} color='error' />
       <Icon children={MuixIcons.ArrowDownBoldBox} color='primary' />
       <Icon children={MuixIcons.ArrowDownBoldBox} style={{ color: 'brown' }} />
-      <Icon children={MuixIcons.ArrowDownBoldBox} classes={{ colorInherit: { color: 'green' } }} />
-      <Icon children={MuixIcons.ArrowDownBoldBox} classes={{ root: { fontSize: 32) }} />
+      <Icon children={MuixIcons.ArrowDownBoldBox} classes={{ style: { color: 'green' } }} />
+      <Icon children={MuixIcons.ArrowDownBoldBox} classes={{ style: { fontSize: 32 } }} />
       <MuiThemeProvider theme={theme}>
         <Icon children={MuixIcons.ArrowDownBoldBox} />
       </MuiThemeProvider>

@@ -25,15 +25,15 @@ const theme = createMuiTheme({
     primary: orange,
     secondary: green
   },
-  overridesNew: {
+  overridesX: {
     MuiTypography: {
-      colorAccent: { color: cyan.A700, fontWeight: '500', fontSize: 18 },
+      colorAccent: { color: cyan.A700, fontWeight: '500', fontSize: 18 }, 
       display2: { color: cyan.A700 },
     }
   }
 })
 
-const app2 = () => <Typography classes={{ root: { fontWeight: '500', textDecorationLine: 'line-through', color: 'blue' } }}>TEXT</Typography>
+const app2 = () => <Typography classes={{ style: { fontWeight: '500', textDecorationLine: 'line-through', color: 'blue', marginTop:24 } }}>TEXT</Typography>
 
 const app = () => <ScrollView>
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>noWrap</Typography>
@@ -74,7 +74,7 @@ const app = () => <ScrollView>
   <Typography type='display4'>display4</Typography>
   {/**/}
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>WITH CLASSES</Typography>
-  <Typography classes={{ root: { fontWeight: '500', textDecorationLine: 'line-through', color: 'blue' } }}>TEXT</Typography>
+  <Typography classes={{ style: { fontWeight: '500', textDecorationLine: 'line-through', color: 'blue' } }}>TEXT</Typography>
   {/**/}
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>WITH THEME</Typography>
   <MuiThemeProvider theme={theme}>
@@ -85,12 +85,10 @@ const app = () => <ScrollView>
       <Typography type='display2' >display2</Typography>
       <Typography color='accent' >accent</Typography>
       <Typography color='accent' style={{ color: 'red' }} >accent red</Typography>
-      <Typography color='primary' classes={{ root: { fontWeight: '500', textDecorationLine: 'line-through' } }}>primary, WITH CLASSES</Typography>
+      <Typography color='primary' classes={{ style: { fontWeight: '500', textDecorationLine: 'line-through' } }}>primary, WITH CLASSES</Typography>
     </View>
   </MuiThemeProvider>
 </ScrollView>
 
 export default app
-
-//<Typography>Colors</Typography>
-//<Text>{JSON.stringify(createMuiTheme({}), null, 2)}</Text>
+//export default app2

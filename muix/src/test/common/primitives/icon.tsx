@@ -6,7 +6,7 @@ import orange from 'material-ui/colors/orange'
 import { Text, View } from 'muix-primitives'
 
 const theme = createMuiTheme({
-  overridesNew: {
+  overridesX: {
     MuiIcon: {
       colorInherit: { color: orange[500] },
     }

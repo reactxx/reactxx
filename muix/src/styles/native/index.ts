@@ -6,7 +6,7 @@ import { toPlatformSheetX, toPlatformRuleSetX } from '../common/index'
 
 import getShadows from 'muix-shadows'
 
-export { default as createTypography } from '../native/createTypography'
+export { default as createTypography } from '../common/createTypography'
 
 export const toPlatformRuleSet = <T extends Muix.CSSPropertiesNative>(style: Muix.RulesetX<T>) => toPlatformRuleSetX(style, true) as T
 export const toPlatformSheet = <R extends Muix.Shape>(rules: Muix.PartialSheetX<R>) => toPlatformSheetX(rules, true) as Muix.SheetNative<R>

@@ -9,6 +9,7 @@ import warning from 'warning'
 
 export const sheet = sheetCreator<MuixIcon.Shape>(({ palette }) => ({
   root: { fontSize: 24 },
+  style: {},
   colorAccent: { color: palette.secondary.A200 },
   colorAction: { color: palette.action.active },
   colorContrast: { color: palette.getContrastText(palette.primary[500]) },
@@ -23,7 +24,7 @@ const icon: Muix.CodeSFC<MuixIcon.Shape> = props => {
   const childs = React.Children.toArray(children)
   warning(childs.length == 1 && typeof childs[0] === 'string', 'single child as string expected')
   const data = childs[0] as MuixIcons
-  const iconClass = getStyleWithSideEffect(classes.root, classes[`color${capitalizeFirstLetter(color)}`])
+  const iconClass = getStyleWithSideEffect(classes.root, classes[`color${capitalizeFirstLetter(color)}`], classes.style)
   return <IconX className={iconClass} style={style} $native={rest as any} $web={rest as any} data={data}/>
 }
 

@@ -6,7 +6,7 @@ import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 import { ScrollView, View, Icon, Text } from 'muix-primitives'
 
 const theme = createMuiTheme({
-  overridesNew: theme => ({
+  overridesX: theme => ({
     MuiButton: {
       raisedAccent: {
         backgroundColor: 'brown',
@@ -29,7 +29,7 @@ const app2: React.SFC = props => (
 
 const root = { root: { margin: theme.spacing.unit } }
 //const root = {  }
-export const overridesNew: Muix.ThemeValueOrCreator<Muix.OverridesNew> = theme => ({ MuiButton: root, MuiButtonIconLeft: root, MuiButtonIconRight: root })
+export const overridesNew: Muix.ThemeValueOrCreator<Muix.OverridesX> = theme => ({ MuiButton: root, MuiButtonIconLeft: root, MuiButtonIconRight: root })
 
 const app: React.SFC = props => <ScrollView>
   <View classes={{ root: rootView }} >

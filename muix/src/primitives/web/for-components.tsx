@@ -2,18 +2,41 @@ import React from 'react'
 import warning from 'warning'
 import { rulesetsToClassNames } from 'muix-styles/web'
 
+export const TypographyNative: React.SFC<Primitives.Typography> = props => {
+  const { style, className, $noWrapStyle, $type, $web, children } = props
+  const tagName = headlineMapping[$type]
+  return React.createElement(
+    tagName || 'div',
+    {
+      className: rulesetsToClassNames(viewStyle, $noWrapStyle, className),
+      style: style,
+      ...$web
+    },
+    children)
+}
+const headlineMapping = {
+  display4: 'h1',
+  display3: 'h1',
+  display2: 'h1',
+  display1: 'h1',
+  headline: 'h1',
+  title: 'h2',
+  subheading: 'h3',
+  body2: 'aside',
+  body1: 'p',
+}
+
+
+
 const viewStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'stretch',
   flexBasis: 'auto',
-  flexShrink:0,
+  flexShrink: 0,
 
   boxSizing: 'border-box',
   position: 'relative',
-  //zIndex: 0,
-  //minHeight: 0,
-  //minWidth: 0
 }
 
 export const ViewWeb: React.SFC<Primitives.Web> = props => {
@@ -31,23 +54,13 @@ export const IconWeb: React.SFC<Primitives.Web<SVGSVGElement> & { data: string }
   </svg>
 }
 
-
 const textStyles = {
   root: {
-    //borderWidth: 0,
     boxSizing: 'border-box',
-    //color: 'inherit',
-    //font: 'inherit',
-    //margin: 0,
-    //padding: 0,
-    //textDecorationLine: 'none',
     whiteSpace: 'pre-wrap',
     wordWrap: 'break-word',
     '& .mui-text': { //high level Text is block element, inner Texts are inline elements
       display: 'inline',
-      //fontFamily: 'inherit',
-      //fontSize: 'inherit',
-      //whiteSpace: 'inherit',
     },
   },
   notSelectable: {
@@ -117,4 +130,4 @@ export const IconX = IconWeb as React.SFC<Primitives.IconX>
 export const ViewX = ViewWeb as React.SFC<Primitives.ViewX>
 export const TextX = TextWeb as React.SFC<Primitives.TextX>
 export const ScrollViewX = ScrollViewWeb as React.SFC<Primitives.ScrollViewX>
-
+export const TypographyNativeX = TypographyNative as React.SFC<Primitives.Typography>
