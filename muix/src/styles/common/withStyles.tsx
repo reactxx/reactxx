@@ -31,7 +31,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
 
       //console.log('1', toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>))
 
-      console.log(name, 'context.childOverrides', context.childOverrides)
+      //console.log(name, 'context.childOverrides', context.childOverrides)
       const fromParentContext = context.childOverrides && context.childOverrides[options.name]
       //console.log('fromParentContext: ',fromParentContext)
       this.codeClasses = fromParentContext ? deepMerges(false, {}, cacheItem.fromTheme, fromParentContext) : cacheItem.fromTheme // modify static sheet 

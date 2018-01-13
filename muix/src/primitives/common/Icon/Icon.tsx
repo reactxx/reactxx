@@ -34,16 +34,16 @@ const Icon = withStyles<MuixIcon.Shape>(sheet, { name: 'MuiIcon' })(icon)
 
 export default Icon
 
-export const getClasses = <T extends Muix.CSSPropertiesNative | string>({ classes, color = 'inherit', children, theme, innerRef, style, ...rest }: Muix.CodeProps<MuixIcon.Shape>) => {
-  const childs = React.Children.toArray(children)
-  warning(childs.length == 1 && typeof childs[0] === 'string', 'single child as string expected')
-  return {
-    name: childs[0] as MuixIcons,
-    classes: {
-      iconClass: [classes.root, classes[`color${capitalizeFirstLetter(color)}`]] as T[]
-    },
-    rest,
-    style,
-    innerRef
-  }
-}
+//export const getClasses = <T extends Muix.CSSPropertiesNative | string>({ classes, color = 'inherit', children, theme, innerRef, style, ...rest }: Muix.CodeProps<MuixIcon.Shape>) => {
+//  const childs = React.Children.toArray(children)
+//  warning(childs.length == 1 && typeof childs[0] === 'string', 'single child as string expected')
+//  return {
+//    name: childs[0] as MuixIcons,
+//    classes: {
+//      iconClass: [classes.root, classes[`color${capitalizeFirstLetter(color)}`]] as T[]
+//    },
+//    rest,
+//    style,
+//    innerRef
+//  }
+//}
