@@ -138,6 +138,7 @@
     <TypeScriptCompile Include="src\primitives\typings\ScrollView-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\Icon-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\web\for-components.tsx" />
+    <TypeScriptCompile Include="src\styles\common\MuiThemeProvider.ts" />
     <TypeScriptCompile Include="src\styles\common\utils.ts" />
     <TypeScriptCompile Include="src\styles\common\withStyles.tsx" />
     <None Include="src\styles\typings\withStyles2-d.d.ts_" />
@@ -168,12 +169,14 @@
     <TypeScriptCompile Include="src\test\common\icons\index.tsx" />
     <TypeScriptCompile Include="src\test\common\test-styles-d.d.ts" />
     <TypeScriptCompile Include="src\test\common\styles\component-x.tsx" />
+    <TypeScriptCompile Include="src\test\native\layout\root.tsx" />
     <TypeScriptCompile Include="src\test\web\index.tsx" />
     <TypeScriptCompile Include="src\test\common\primitives\icon.tsx" />
     <TypeScriptCompile Include="src\test\common\primitives\text-view.tsx" />
     <TypeScriptCompile Include="src\test\common\styles\typography.tsx" />
     <TypeScriptCompile Include="src\styles\typings\material-ui-helper.d.ts" />
     <TypeScriptCompile Include="src\styles\typings\material-ui.d.ts" />
+    <TypeScriptCompile Include="src\test\web\layout\root.tsx" />
     <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\styles\typings\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="src\styles\web\inline-styles.tsx" />

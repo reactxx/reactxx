@@ -137,7 +137,6 @@ function createMuiTheme(options: Muix.ThemeOptions = {}) {
     breakpoints, //the same value for web and native
     shadows: (shadowsNewInput || shadows).map(rsx => (toPlatformRuleSetX(rsx, false) as React.CSSProperties).boxShadow), // for material-ui only
     shadowsNew: shadowsNewInput || shadows, //different value for web and native
-    $sheetCache: [], //sheet cache (for native only)
     ...(deepmerge(
       { transitions, spacing, zIndex, },
       other,

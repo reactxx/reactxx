@@ -4,7 +4,7 @@ import React from 'react'
 import createTypographyMui from 'material-ui/styles/createTypography' 
 
 import muiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-export const MuiThemeProvider = muiThemeProvider as any as React.ComponentType<Muix.IMuiThemeProps>
+export const MuiThemeProviderInner = muiThemeProvider as any as React.ComponentType<Muix.IMuiThemeProps>
 
 import shadowsStrings from 'material-ui/styles/shadows'
 export const shadows = shadowsStrings.map(s => ({ boxShadow: s } as Muix.ViewStyleCommon))
@@ -21,6 +21,7 @@ export { muiCompatible, AppContainer } from './withStyles'
 export { rulesetsToClassNames, rulesetToClassNames } from './fela'
 
 export { default as withStyles } from '../common/withStyles'
+export { default as MuiThemeProvider } from '../common/MuiThemeProvider'
 
 export const createTypography = (palette: Muix.Palette, optionOrCreator: Muix.TypographyOptionsOrCreator) => {
   const res = createTypographyMui(palette, optionOrCreator)

@@ -20,7 +20,8 @@ export const toPlatformSheet = <R extends Muix.Shape>(rules: Muix.PartialSheetX<
 //    height: 0.6 * deep,
 //  },
 //} as ReactN.ViewStyle)
-
+export { default as MuiThemeProvider } from '../common/MuiThemeProvider'
+export const MuiThemeProviderInner: React.ComponentType<Muix.IMuiThemeProps> = null
 
 let elev = 0.25
 
@@ -29,7 +30,5 @@ export const shadows: ReactN.ViewStyle[] = getShadows()
 export { sheetCreator, clearSystemProps, default as createMuiTheme } from '../common/index'
 
 export { AppContainer } from './withStyles'
-
-export { default as MuiThemeProvider } from './MuiThemeProvider'
 
 export { default as withStyles } from '../common/withStyles'

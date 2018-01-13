@@ -27,18 +27,20 @@ export const AppContainer: React.SFC<AppContainerProps> = props => <MuiThemeProv
 
 type webKeys<R extends Muix.Shape> = Muix.getWeb<R> | keyof Muix.getCommon<R>
 
-export const muiCompatible = <R extends Muix.Shape>(Component: Muix.muiComponentType<Muix.getProps<R>, webKeys<R>>) => {
-  type TKey = webKeys<R>
+type TMuiProps<R extends Muix.Shape> = R['propsWeb']
+
+export const muiCompatible = <R extends Muix.Shape>(Component: React.ComponentType<TMuiProps<R>>) => {
   const Styled: Muix.SFCX<R> = (props, context: Muix.MuiThemeContextValue) => {
-    const { classes: _classes, style, web, native, onClick, onPress: onPressInit, ...rest } = props as Muix.PropsX<Muix.Shape>
+    const { classes: _classes, style, web, native, onClick, ...rest } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb
+
+    const click = (web && web.onClick) || onClick
 
     const theme = context.theme || getDefaultTheme()
 
     const classes = sheetToClassSheet(classesToPlatformSheet(theme, _classes) as Muix.SheetWeb<R>)
-    const onPress = onPressInit || onClick 
-    const webProps = { ...rest, ...web, style: toPlatformRuleSet(style), classes, onPress, theme, } as (Muix.getProps<R> & Muix.muiProps<TKey>) 
+    const webProps = { ...rest, ...web, style: toPlatformRuleSet(style), classes, onClick: click, theme, } as TMuiProps<R>
     return <Component {...webProps} />
   }
   Styled.contextTypes = MuiThemeContextTypes
-  return hoistNonReactStatics(Styled, Component)
+  return Styled
 }

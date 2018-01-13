@@ -1,5 +1,6 @@
 import React from 'react'
-import { MuiThemeContextTypes } from '../common/index'
+import { MuiThemeContextTypes } from './index'
+import { MuiThemeProviderInner } from 'muix-styles'
 
 class MuiThemeProvider extends React.PureComponent<Muix.IMuiThemeProps> {
 
@@ -23,7 +24,8 @@ class MuiThemeProvider extends React.PureComponent<Muix.IMuiThemeProps> {
   }
 
   render() {
-    return React.Children.only(this.props.children)
+    const child = React.Children.only(this.props.children)
+    return MuiThemeProviderInner ? <MuiThemeProviderInner theme={this.localTheme}>{child} </MuiThemeProviderInner> : child
   }
 
   static childContextTypes = MuiThemeContextTypes

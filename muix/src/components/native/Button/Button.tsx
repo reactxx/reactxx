@@ -114,7 +114,6 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
       active: shadowsNew[12],
     }
   },
-  active: {},
 
   mini: {
     width: 40,
@@ -125,7 +124,9 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
     backgroundColor: palette.common.white, opacity: 0.35,
   },
   colorInherit: {},
-  label: {}
+  label: {},
+  active: {},
+  keyboardFocused: {}
 }))
 
 
@@ -149,6 +150,8 @@ const button: Muix.CodeSFCNative<MuixButton.Shape> = (props, context) => {
     !isFlat && disabled && classes.raisedDisable,
     isFlat && disabled && classes.disabled,
   ) as ReactN.ViewStyle
+
+  //console.log('### viewStyle: ', viewStyle)
 
   const rippleStyle = getStyleWithSideEffect(classes.ripple) as ReactN.ViewStyle
   const activeStyle = getStyleWithSideEffect(!disabled && classes.active) as ReactN.ViewStyle

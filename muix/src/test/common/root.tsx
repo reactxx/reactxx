@@ -1,50 +1,61 @@
 import React from 'react'
 
 import Icons from './icons/index'
-import Typography from './styles/typography'
+import TypographyTest from './styles/typography'
 import TextView from './primitives/text-view'
 import Icon from './primitives/icon'
 import ButtonTest from './components/button'
 import Shadows from './shadows/index'
 import ComponentX from './styles/component-x'
-import ButtonDemo from './components/button-demo'
+import ButtonDemo, { overridesNew } from './components/button-demo'
 
-import { ScrollView, View, Text } from 'muix-primitives'
-import { AppContainer } from 'muix-styles'
+import { ScrollView, View, Text, Typography } from 'muix-primitives'
+import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 import Button from 'muix-components/Button/Button'
 
-const apps: { title: string; app: React.ComponentType }[] = [
+const apps: { title: string; app: React.ComponentType, overridesNew?: Muix.ThemeValueOrCreator<Muix.OverridesNew> }[] = [
+  { title: 'ButtonDemo', app: ButtonDemo, overridesNew },
   { title: 'Button', app: ButtonTest },
   { title: 'Icons', app: Icons },
-  { title: 'Typography', app: Typography },
+  { title: 'Typography', app: TypographyTest },
   { title: 'TextView', app: TextView },
   { title: 'Icon', app: Icon },
   //{ title: 'Shadows', app: Shadows },
   { title: 'ComponentX', app: ComponentX },
-  { title: 'ButtonDemo', app: ButtonDemo },
 ]
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark', // Switching the dark mode on is a single property value change.
+  }
+})
 
 class AppRoot extends React.Component {
   state = { appIndex: 0, rtl: false, light: false }
   render() {
-    const App = apps[this.state.appIndex].app
-    return <AppContainer>
-      <View>
-        <View classes={{ root: { flexDirection: 'row', flexWrap: 'wrap' } }}>
-          {apps.map((app, idx) => <AppItem idx={idx} active={idx === this.state.appIndex} />)}
+    const { appIndex } = this.state
+    const App = apps[appIndex].app
+    const root = <View style={{ flex: 1, paddingTop:24 }}>
+      <MuiThemeProvider theme={theme}>
+        <View classes={theme => ({ root: { flexDirection: 'row', flexWrap: 'wrap', backgroundColor: theme.palette.background.appBar } })}>
+          {apps.map((app, idx) => <AppItem key={idx} idx={idx} active={idx === appIndex} appRoot={this} />)}
         </View>
-        <App />
-      </View>
+      </MuiThemeProvider>
+      <Typography type='display2' >{apps[appIndex].title}</Typography>
+      <App />
+    </View>
+    const root2 = <ButtonDemo />
+    return <AppContainer key={appIndex} themeOptions={{ overridesNew: apps[appIndex].overridesNew }}>
+      {root2}
     </AppContainer>
   }
 }
 
-class AppItem extends React.PureComponent<{ idx: number; active: boolean }> {
+class AppItem extends React.PureComponent<{ idx: number; active: boolean; appRoot: AppRoot }> {
   render() {
-    const { idx, active } = this.props
-    return <Button color='primary' disabled={active}>{apps[idx].title}</Button>
+    const { idx, active, appRoot } = this.props
+    return <Button color='primary' disabled={active} onClick={() => appRoot.setState(state => ({ ...state, appIndex: idx }))}>{apps[idx].title}</Button>
   }
 }
 
-//const app: React.SFC = () => <AppRoot />
 export default AppRoot

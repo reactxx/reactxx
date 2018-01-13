@@ -8,11 +8,9 @@ const viewStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'stretch',
-  //borderWidth: 0,
-  //borderStyle: 'solid',
+  flexBasis: 'auto',
+
   boxSizing: 'border-box',
-  //margin: 0,
-  //padding: 0,
   position: 'relative',
   zIndex: 0,
   minHeight: 0,
@@ -76,6 +74,7 @@ export const TextWeb: React.SFC<Primitives.Web & { numberOfLines?: number; notSe
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
 const scrollViewStyles = {
   base: {
+    flexBasis: 0,
     flexGrow: 1,
     overflowX: 'hidden',
     overflowY: 'auto',
@@ -86,8 +85,8 @@ const scrollViewStyles = {
     transform: [{ translateZ: 0 }]
   } as React.CSSProperties,
   container: {
-    flexGrow: 0,
     flexShrink: 0,
+    flexGrow: 0,
   } as React.CSSProperties,
   baseHorizontal: {
     flexDirection: 'row',
