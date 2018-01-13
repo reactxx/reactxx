@@ -6,14 +6,14 @@ import { capitalizeFirstLetter } from 'material-ui/utils/helpers';
 
 import { withStyles, toPlatformRuleSet, sheetCreator } from 'muix-styles'
 
-import { Text, iconColor } from 'muix-primitives'
+import { Text } from 'muix-primitives'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 
 //export type ButtonShape = Shape
 const getTextIconColor = (color: string) => ({
   MuiText: { root: { color } },
-  MuiIcon: { root: iconColor(color) },
+  MuiIcon: { root: { color: color } },
 } as Muix.SheetsX)
 
 

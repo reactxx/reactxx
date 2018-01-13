@@ -12,7 +12,7 @@ import { View } from 'muix-primitives'
 //  overrides: {
 //    [Mui.Names.Icon]: {
 //      common: {
-//        colorInherit: iconColor(color[500]), 
+//        colorInherit: {color: color[500]), 
 //      }
 //    } as Mui.Sheet<MuiIcon.ISheet>
 //  }

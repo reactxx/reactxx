@@ -7,17 +7,14 @@ import { IconX } from 'muix-primitives'
 
 import warning from 'warning'
 
-export const iconColor = (color: string) => ({ $native: { color }, $web: { fill: color } } as Muix.TextStyleCommon)
-export const iconSize = (size: number) => ({ $native: { fontSize: size }, $web: { width: size, height: size } } as Muix.TextStyleCommon)
-
 export const sheet = sheetCreator<MuixIcon.Shape>(({ palette }) => ({
-  root: iconSize(24),
-  colorAccent: iconColor(palette.secondary.A200),
-  colorAction: iconColor(palette.action.active),
-  colorContrast: iconColor(palette.getContrastText(palette.primary[500])),
-  colorDisabled: iconColor(palette.action.disabled),
-  colorError: iconColor(palette.error[500]),
-  colorPrimary: iconColor(palette.primary[500]),
+  root: { fontSize: 24 },
+  colorAccent: { color: palette.secondary.A200 },
+  colorAction: { color: palette.action.active },
+  colorContrast: { color: palette.getContrastText(palette.primary[500]) },
+  colorDisabled: { color: palette.action.disabled },
+  colorError: { color: palette.error[500] },
+  colorPrimary: { color: palette.primary[500] },
   colorInherit: {},
 }))
 

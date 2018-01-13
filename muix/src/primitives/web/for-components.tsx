@@ -7,7 +7,6 @@ const viewStyle: React.CSSProperties = {
   flexDirection: 'column',
   alignItems: 'stretch',
   flexBasis: 'auto',
-
   flexShrink:0,
 
   boxSizing: 'border-box',
@@ -25,6 +24,8 @@ export const ViewWeb: React.SFC<Primitives.Web> = props => {
 export const IconWeb: React.SFC<Primitives.Web<SVGSVGElement> & { data: string }> = props => {
   const { style, className, $web, data, children } = props
   const { viewBox = '0 0 24 24', ...other } = $web
+  if (className && className.fontSize) { className.height = className.width = className.fontSize; delete className.fontSize }
+  if (style && style.fontSize) { style.height = style.width = style.fontSize; delete style.fontSize }
   return <svg className={rulesetsToClassNames(className, { fill: 'currentColor' })} style={style} focusable='false' viewBox={viewBox} {...other as any}>
     {children ? children : <path d={data} />}
   </svg>
