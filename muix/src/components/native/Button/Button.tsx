@@ -6,18 +6,18 @@ import { capitalizeFirstLetter } from 'material-ui/utils/helpers';
 
 import { withStyles, toPlatformRuleSet, sheetCreator } from 'muix-styles'
 
-import { Text } from 'muix-primitives'
+import { Text, iconColor } from 'muix-primitives'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 
 //export type ButtonShape = Shape
 const getTextIconColor = (color: string) => ({
   MuiText: { root: { color } },
-  MuiIcon: { root: { color: color } },
+  MuiIcon: { root: iconColor(color) },
 } as Muix.SheetsX)
 
 
-const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
+const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typography: typo, palette, spacing, shadowsNew }) => ({
   root: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -31,10 +31,9 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
     borderRadius: 2,
     $childOverrides: {
       MuiIcon: { root: { fontSize: 24, ...(isLeft === true ? { marginRight: spacing.unit } : (isLeft === false ? { marginLeft: spacing.unit } : {})) } },
-      MuiText: { root: { ...typoX.button, color: palette.text.primary, } },
+      MuiText: { root: { ...typo.button, color: palette.text.primary, } },
     },
   },
-  style: {},
   dense: {
     paddingTop: spacing.unit - 1,
     paddingBottom: spacing.unit - 1,
@@ -43,7 +42,7 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
     minWidth: 64,
     minHeight: 32,
     $childOverrides: {
-      MuiText: { root: { fontSize: typoX.fontSize, } }
+      MuiText: { root: { fontSize: typo.fontSize, } }
     }
   },
 
@@ -115,6 +114,7 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
       active: shadowsNew[12],
     }
   },
+  active: {},
 
   mini: {
     width: 40,
@@ -125,9 +125,7 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
     backgroundColor: palette.common.white, opacity: 0.35,
   },
   colorInherit: {},
-  label: {},
-  active: {},
-  keyboardFocused: {}
+  label: {}
 }))
 
 
@@ -150,10 +148,7 @@ const button: Muix.CodeSFCNative<MuixButton.Shape> = (props, context) => {
     dense && classes.dense,
     !isFlat && disabled && classes.raisedDisable,
     isFlat && disabled && classes.disabled,
-    classes.style,
   ) as ReactN.ViewStyle
-
-  //console.log('### viewStyle: ', viewStyle)
 
   const rippleStyle = getStyleWithSideEffect(classes.ripple) as ReactN.ViewStyle
   const activeStyle = getStyleWithSideEffect(!disabled && classes.active) as ReactN.ViewStyle
