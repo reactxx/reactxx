@@ -73,7 +73,7 @@ const typography: Muix.CodeSFCNative<MuixTypography.Shape> = (props => {
     ...rest
   } = props
 
-  console.log('### typography', color, classes)
+  //console.log('### typography', color, classes)
 
   const className = getStyleWithSideEffect(
     classes.root,
@@ -85,7 +85,7 @@ const typography: Muix.CodeSFCNative<MuixTypography.Shape> = (props => {
     classes.style,
   )
 
-  console.log(className)
+  //console.log(className)
   return <TypographyNativeX
     className={className} style={style}
     $native={rest as ReactN.ScrollViewProperties} $web={rest as React.HTMLAttributes<HTMLDivElement>}
