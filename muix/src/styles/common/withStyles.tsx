@@ -4,10 +4,6 @@ import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme, classe
 import { toPlatformRuleSet, clearSystemProps } from 'muix-styles'
 import warning from 'invariant'
 
-//export const getOnClick = (props: Muix.PropsX<Muix.Shape>) => {
-//  const { classes: _classes, style, web, native, onClick, onPress, ...other } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickX
-//}
-
 const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, options: Muix.WithStylesOptionsNew) => (Component: Muix.CodeComponentType<R>) => {
 
   class Styled extends React.PureComponent<Muix.PropsX<R>> {
@@ -80,7 +76,9 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
     static options = options
   }
   hoistNonReactStatics(Styled, Component as any)
-  return Styled
+  //return Styled: error when compiling with "declaration": true in tsconfig.json
+  const styled: any = Styled 
+  return styled as React.ComponentClass<Muix.PropsX<R>>
 }
 
 export default withStyles

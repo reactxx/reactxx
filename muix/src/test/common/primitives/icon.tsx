@@ -4,6 +4,7 @@ import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 import orange from 'material-ui/colors/orange'
 
 import { Text, View } from 'muix-primitives'
+import { ArrowDownBoldBox } from 'muix-icons/ArrowDownBoldBox'
 
 const theme = createMuiTheme({
   overridesX: {
@@ -19,10 +20,10 @@ const app2: React.SFC = props => <AppContainer>
 
 
 const app: React.SFC = props => <View style={{ flexShrink: 0 }}>
-  <Icon children={MuixIcons.ArrowDownBoldBox} onClick={() => alert('Here I am')} />
-  <Icon children={MuixIcons.ArrowDownBoldBox} color='inherit' />
-  <Icon children={MuixIcons.ArrowDownBoldBox} color='accent' />
-  <Icon children={MuixIcons.ArrowDownBoldBox} color='action' />
+  <Icon children={ArrowDownBoldBox} onClick={() => alert('Here I am')} />
+  <Icon children={ArrowDownBoldBox} color='inherit' />
+  <Icon children={ArrowDownBoldBox} color='accent' />
+  <Icon children={ArrowDownBoldBox} color='action' />
   <View style={{ backgroundColor: 'darkgray', padding: 5 }}>
     <Icon children={MuixIcons.ArrowDownBoldBox} color='contrast' />
   </View>

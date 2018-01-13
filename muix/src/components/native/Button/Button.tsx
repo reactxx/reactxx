@@ -1,6 +1,6 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
-//import { Platform, View, Text } from 'react-native'
+
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalizeFirstLetter } from 'material-ui/utils/helpers';
 

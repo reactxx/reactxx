@@ -10,8 +10,9 @@ forfiles /P %npm% /M muix-icons* /C "cmd /c if @isdir==TRUE rmdir /s /q @file"
 forfiles /P %npm% /M muix-styles* /C "cmd /c if @isdir==TRUE rmdir /s /q @file"
 forfiles /P %npm% /M muix-primitives* /C "cmd /c if @isdir==TRUE rmdir /s /q @file"
 forfiles /P %npm% /M muix-components* /C "cmd /c if @isdir==TRUE rmdir /s /q @file"
+forfiles /P %npm% /M muix-shadows* /C "cmd /c if @isdir==TRUE rmdir /s /q @file"
 cd %root%
-call jspm install npm:muix-icons npm:muix-styles npm:muix-primitives npm:muix-components npm:muix 
+call jspm install npm:muix-icons npm:muix-shadows npm:muix-styles npm:muix-primitives npm:muix-components npm:muix 
 
 
 set npm=%root%node_modules\
@@ -22,12 +23,14 @@ rmdir %npm%muix-icons /s /q
 rmdir %npm%muix-styles /s /q
 rmdir %npm%muix-primitives /s /q
 rmdir %npm%muix-components /s /q
+rmdir %npm%muix-shadows /s /q
 
 cd %root%
-call npm install muix-icons muix-styles muix-primitives muix-components muix %url%expo/types-expo-0.1.1.tgz?raw=true %url%react/types-react-0.1.1.tgz?raw=true %url%react-native/types-react-native-0.1.1.tgz?raw=true 
+call npm install muix-icons muix-shadows muix-styles muix-primitives muix-components muix %url%expo/types-expo-0.1.1.tgz?raw=true %url%react/types-react-0.1.1.tgz?raw=true %url%react-native/types-react-native-0.1.1.tgz?raw=true 
 
 cd %root%node_modules\@types
 rmdir node /s /q
 
 copy D:\muix\test\$blacklist.js d:\muix\test\node_modules\metro-bundler\src\blacklist.js /y
 
+call %root%$compile

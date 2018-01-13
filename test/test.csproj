@@ -77,9 +77,9 @@
     <Content Include="package.json" />
     <Content Include="%24refresh-all.cmd" />
     <Content Include="%24compile.cmd" />
-    <Content Include="%24relink.cmd" />
-    <Content Include="%24link.cmd" />
-    <Content Include="%24link-prepare.cmd" />
+    <Content Include="trash\%24relink.cmd" />
+    <Content Include="trash\%24link.cmd" />
+    <Content Include="trash\%24link-prepare.cmd" />
     <Content Include="%24refresh-libs.cmd" />
     <None Include="packages.config" />
     <Content Include="links.html" />
@@ -105,18 +105,21 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\common\components\button-demo.tsx" />
     <TypeScriptCompile Include="src\common\components\button.tsx" />
     <TypeScriptCompile Include="src\common\icons\index.tsx" />
     <TypeScriptCompile Include="src\common\primitives\icon.tsx" />
     <TypeScriptCompile Include="src\common\primitives\text-view.tsx" />
     <TypeScriptCompile Include="src\common\root.tsx" />
+    <TypeScriptCompile Include="src\common\shadows\index.tsx" />
+    <TypeScriptCompile Include="src\common\shadows\native.tsx" />
+    <TypeScriptCompile Include="src\common\styles\component-x.tsx" />
+    <TypeScriptCompile Include="src\common\styles\test.ts" />
     <TypeScriptCompile Include="src\common\styles\typography.tsx" />
+    <TypeScriptCompile Include="src\common\test-styles-d.d.ts" />
     <TypeScriptCompile Include="src\native\App.tsx" />
     <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\web\index.tsx" />
-    <TypeScriptCompile Include="trash\root.tsx" />
-    <TypeScriptCompile Include="trash\test\App.tsx" />
-    <TypeScriptCompile Include="trash\test\index.tsx" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

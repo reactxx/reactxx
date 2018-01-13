@@ -8,7 +8,7 @@ import orange from 'material-ui/colors/orange'
 import green from 'material-ui/colors/green'
 import cyan from 'material-ui/colors/cyan'
 
-import { View, ScrollView, Typography, TypographyShape } from 'muix-primitives'
+import { View, ScrollView, Typography } from 'muix-primitives'
 
 const theme = createMuiTheme({
   typography: palette => ({
@@ -25,21 +25,19 @@ const theme = createMuiTheme({
     primary: orange,
     secondary: green
   },
-  overridesNew: {
+  overridesX: {
     MuiTypography: {
-      common: {
-        colorAccent: { color: cyan.A700, fontWeight: '500', fontSize: 18 },
-        display2: { color: cyan.A700 },
-      }
-    } as Mui.PartialSheetX<TypographyShape>
+      colorAccent: { color: cyan.A700, fontWeight: '500', fontSize: 18 }, 
+      display2: { color: cyan.A700 },
+    }
   }
 })
 
-const app2 = () => <Typography classes={{ root: { fontWeight: '500', textDecorationLine: 'line-through', color: 'blue' } }}>TEXT</Typography>
+const app2 = () => <Typography classes={{ style: { fontWeight: '500', textDecorationLine: 'line-through', color: 'blue', marginTop:24 } }}>TEXT</Typography>
 
 const app = () => <ScrollView>
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>noWrap</Typography>
-  <Typography noWrap style={{ width: 200, flexShrink:0 }}>noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap </Typography>
+  <Typography noWrap style={{ width: 200, flexShrink: 0 }}>noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap </Typography>
   {/**/}
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>MARGINS</Typography>
   <Typography paragraph>paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph </Typography>
@@ -76,7 +74,7 @@ const app = () => <ScrollView>
   <Typography type='display4'>display4</Typography>
   {/**/}
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>WITH CLASSES</Typography>
-  <Typography classes={{ root: { fontWeight: '500', textDecorationLine: 'line-through', color: 'blue' } }}>TEXT</Typography>
+  <Typography classes={{ style: { fontWeight: '500', textDecorationLine: 'line-through', color: 'blue' } }}>TEXT</Typography>
   {/**/}
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>WITH THEME</Typography>
   <MuiThemeProvider theme={theme}>
@@ -87,12 +85,10 @@ const app = () => <ScrollView>
       <Typography type='display2' >display2</Typography>
       <Typography color='accent' >accent</Typography>
       <Typography color='accent' style={{ color: 'red' }} >accent red</Typography>
-      <Typography color='primary' classes={{ root: { fontWeight: '500', textDecorationLine: 'line-through' } }}>primary, WITH CLASSES</Typography>
+      <Typography color='primary' classes={{ style: { fontWeight: '500', textDecorationLine: 'line-through' } }}>primary, WITH CLASSES</Typography>
     </View>
   </MuiThemeProvider>
 </ScrollView>
 
 export default app
-
-//<Typography>Colors</Typography>
-//<Text>{JSON.stringify(createMuiTheme({}), null, 2)}</Text>
+//export default app2

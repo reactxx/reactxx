@@ -1,4 +1,6 @@
 import React from 'react'
+import ReactN from 'react-native'
+
 import { View as RNView, Text as RNText, ScrollView as RNScrollView } from 'react-native'
 import { MaterialCommunityIcons as RNIcon, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'

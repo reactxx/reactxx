@@ -6,7 +6,7 @@
     "privacy": "public",
     "sdkVersion": "24.0.0",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "primaryColor": "#cccccc",
     "icon": "./assets/icon.png",
     "splash": {

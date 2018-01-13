@@ -31,9 +31,15 @@
       "esnext.asynciterable"
     ]
   },
+  "include": [
+    "src/**/*",
+    "node_modules/muix-icons/typings.d.ts",
+    "node_modules/muix-styles/typings/**/*",
+    "node_modules/muix-components/typings/**/*",
+    "node_modules/muix-primitives/typings/**/*",
+  ],
   "exclude": [
     "jspm_packages",
-    "node_modules",
     "deploy",
     "trash"
   ]

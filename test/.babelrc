@@ -11,7 +11,8 @@
       {
         "root": [ "." ],
         "alias": {
-          "^muix-icons/(.+)": "muix-icons"
+          "^muix-icons/(.+)": "muix-icons/es",
+          "muix-components": "muix-components/es/native"
         }
       }
     ]

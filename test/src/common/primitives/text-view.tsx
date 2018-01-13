@@ -3,17 +3,13 @@
 //https://github.com/alekhurst/react-native-elevated-view/blob/master/index.js
 //jspm build ./app-native/snack/mui/index.js ./app-native/snack/mui/bundle.js
 import React from 'react'
-//import { View, Text, ScrollView } from 'react-native'
 import { createMuiTheme, MuiThemeProvider } from 'muix-styles'
 import orange from 'material-ui/colors/orange'
 import green from 'material-ui/colors/green'
 import cyan from 'material-ui/colors/cyan'
 
-//import { toPlatformTypographyOptions } from 'muix/styles/createTypography'
-
 import { Text, View, ScrollView } from 'muix-primitives'
 
-//const H2: React.SFC = (() => '\n') as any as React.SFC
 const P: React.SFC = props => {
   const { children, ...rest } = props
   return <Text style={{ marginBottom: 8 }}>
@@ -22,15 +18,8 @@ const P: React.SFC = props => {
 }
 
 const app = () => {
-  //parser(() => [<div style={{ marginBottom: 10 }} onClick={() => alert('HALLO')}>
-  //  <h2>header</h2>
-  //  <p color='red'>
-  //    text text text
-  //    <b>asdasdf</b>
-  //  </p>
-  //</div>, <i>ITALIC</i>])
   return <ScrollView style={{ paddingTop: 24 }}>
-    <Text>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</Text>
+    <Text onClick={() => alert('Here I am')}>do something</Text>
     <Text>
       afsd fas df asd sd f asd fasd f asdf asd f asdf asd f asdf asd fa sdf asd fasd f asdf as f asdf asdf
       <Text style={{ backgroundColor: 'red', color: 'white' }}>40 40 40 40 40 40 40 TITLE:  asd f asdf asd f sad fsa df sad fsa df asdf sad f sadf asd fsda f sdaf</Text>

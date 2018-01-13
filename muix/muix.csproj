@@ -134,7 +134,7 @@
     <TypeScriptCompile Include="src\primitives\native\for-components.tsx" />
     <TypeScriptCompile Include="src\primitives\typings\primitives.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\Text-d.d.ts" />
-    <TypeScriptCompile Include="src\primitives\typings\View-d.d..ts" />
+    <TypeScriptCompile Include="src\primitives\typings\View-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\Typography-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\ScrollView-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\Icon-d.d.ts" />
