@@ -130,6 +130,7 @@
     <TypeScriptCompile Include="src\components\web\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
+    <TypeScriptCompile Include="src\primitives\common\Typography\Typography.tsx" />
     <TypeScriptCompile Include="src\primitives\native\for-components.tsx" />
     <TypeScriptCompile Include="src\primitives\typings\primitives.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\Text-d.d.ts" />
@@ -138,6 +139,8 @@
     <TypeScriptCompile Include="src\primitives\typings\ScrollView-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\Icon-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\web\for-components.tsx" />
+    <TypeScriptCompile Include="src\styles\common\createTypography.ts" />
+    <TypeScriptCompile Include="src\styles\common\MuiThemeProvider.tsx" />
     <TypeScriptCompile Include="src\styles\common\utils.ts" />
     <TypeScriptCompile Include="src\styles\common\withStyles.tsx" />
     <None Include="src\styles\typings\withStyles2-d.d.ts_" />
@@ -153,16 +156,16 @@
     <TypeScriptCompile Include="src\primitives\common\Text\Text.tsx" />
     <TypeScriptCompile Include="src\primitives\common\View\View.tsx" />
     <TypeScriptCompile Include="src\primitives\native\index.tsx" />
-    <TypeScriptCompile Include="src\primitives\native\Typography\Typography.tsx" />
+    <None Include="src\primitives\native\Typography\Typography.tsx__" />
     <TypeScriptCompile Include="src\primitives\web\index.tsx" />
-    <TypeScriptCompile Include="src\primitives\web\Typography\Typography.tsx" />
+    <None Include="src\primitives\web\Typography\Typography.tsx__" />
     <TypeScriptCompile Include="src\styles\common\index.ts" />
     <TypeScriptCompile Include="src\styles\native\index.ts" />
     <TypeScriptCompile Include="src\styles\web\index.ts" />
     <TypeScriptCompile Include="src\styles\typings\withStyles-d.d.ts" />
-    <TypeScriptCompile Include="src\styles\native\createTypography.ts" />
+    <None Include="src\styles\native\createTypography.ts_" />
     <TypeScriptCompile Include="src\styles\native\expoLoadFonts.ts" />
-    <TypeScriptCompile Include="src\styles\native\MuiThemeProvider.ts" />
+    <None Include="src\styles\native\MuiThemeProvider.ts_" />
     <TypeScriptCompile Include="src\styles\native\withStyles.tsx" />
     <TypeScriptCompile Include="src\test\common\components\button.tsx" />
     <TypeScriptCompile Include="src\test\common\icons\index.tsx" />

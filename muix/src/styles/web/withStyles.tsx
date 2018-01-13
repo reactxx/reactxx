@@ -1,11 +1,8 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-//import withStylesMui from 'material-ui/styles/withStyles'
-//import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Theme } from 'material-ui/styles/createMuiTheme'
 import hoistNonReactStatics from 'hoist-non-react-statics'
-//import _classnames from 'classnames'
 
 import createGenerateClassName from 'material-ui/styles/createGenerateClassName'
 import { create } from 'jss';
@@ -15,9 +12,7 @@ import JssProvider from 'react-jss/lib/JssProvider'
 //import { sheetToClassNames } from './inline-styles'
 import { sheetToClassSheet } from './fela'
 
-import { toPlatformRuleSet, toPlatformSheet, MuiThemeProvider } from 'muix-styles'
-
-import createMuiTheme, { AppContainerProps, classesToPlatformSheet, getDefaultTheme, MuiThemeContextTypes } from '../common/index'
+import { classesToPlatformSheet, getDefaultTheme, MuiThemeContextTypes, AppContainerProps, createMuiTheme, toPlatformRuleSet, toPlatformSheet, MuiThemeProvider } from 'muix-styles'
 
 export const jss = create(preset())
 jss.options.createGenerateClassName = createGenerateClassName

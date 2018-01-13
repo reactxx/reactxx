@@ -14,6 +14,7 @@ const sheet = sheetCreator<MuixButtonBase.Shape>(({ palette }) => ({
     backgroundColor: palette.common.white,
     opacity: 0.35,
   },
+  style: {},
 }))
 
 const minRippleSize = 0.01
@@ -107,7 +108,7 @@ let t: Muix.CodePropsNative<MuixButtonBase.Shape>
 
 const buttonBase: Muix.CodeSFCNative<MuixButtonBase.Shape> = props => {
   const { style, classes, getStyleWithSideEffect, ...rest } = props
-  const viewStyle = getStyleWithSideEffect(classes.root) as ReactN.ViewStyle
+  const viewStyle = getStyleWithSideEffect(classes.root, classes.style) as ReactN.ViewStyle
   const rippleStyle = getStyleWithSideEffect(classes.ripple) as ReactN.ViewStyle
   return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} getStyleWithSideEffect={null} {...rest} />
 }

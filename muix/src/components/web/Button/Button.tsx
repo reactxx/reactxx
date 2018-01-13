@@ -1,7 +1,7 @@
 ﻿import ReactN from 'react-native'
 import React from 'react'
 
-import MuiButton from 'material-ui/Button/Button'
+import MuiButton, { ButtonProps} from 'material-ui/Button/Button'
 import { muiCompatible } from 'muix-styles/web'
 import withContext from 'recompose/withContext'
 import PropTypes from 'prop-types'
