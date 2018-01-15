@@ -10,7 +10,7 @@ export const sheet = sheetCreator<MuixView.Shape>(() => ({
 }))
 
 const view: Muix.CodeSFC<MuixView.Shape> = props => {
-  const { classes, theme, flip, innerRef, getStyleWithSideEffect, children, style, ...rest } = props
+  const { classes, theme, flip, getStyleWithSideEffect, children, style, ...rest } = props
   return <ViewX className={getStyleWithSideEffect(classes.root, classes.style)} $web={rest as React.HTMLAttributes<HTMLDivElement>} $native={rest as ReactN.ViewProperties} children={children} style={style} />
 }
 

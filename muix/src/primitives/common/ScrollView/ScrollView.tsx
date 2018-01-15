@@ -11,7 +11,7 @@ export const sheet = sheetCreator<MuixScrollView.Shape>(() => ({
 }))
 
 const scrollView: Muix.CodeSFC<MuixScrollView.Shape> = props => {
-  const { classes, theme, flip, innerRef, getStyleWithSideEffect, children, style, ...rest } = props
+  const { classes, theme, flip, getStyleWithSideEffect, children, style, ...rest } = props
   return <ScrollViewX
     className={getStyleWithSideEffect(classes.root, classes.style)} contentContainerStyle={getStyleWithSideEffect(classes.contentContainerStyle)}
     style={style} $native={rest as ReactN.ScrollViewProperties} $web={rest as React.HTMLAttributes<HTMLDivElement>} children={children} />

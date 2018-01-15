@@ -68,7 +68,7 @@ const typography: Muix.CodeSFCNative<MuixTypography.Shape> = (props => {
     type = 'body1',
     style,
     getStyleWithSideEffect,
-    theme, flip, innerRef,
+    theme, flip, 
     children,
     ...rest
   } = props

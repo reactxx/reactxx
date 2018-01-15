@@ -123,12 +123,37 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\components\common\Divider\Divider.tsx" />
+    <TypeScriptCompile Include="src\components\common\Drawer\Drawer.tsx" />
+    <TypeScriptCompile Include="src\components\common\Hidden\Hidden.tsx" />
+    <TypeScriptCompile Include="src\components\common\IconButton\IconButton.tsx" />
+    <TypeScriptCompile Include="src\components\common\Toolbar\Toolbar.tsx" />
+    <TypeScriptCompile Include="src\components\common\AppBar\AppBar.tsx" />
+    <TypeScriptCompile Include="src\components\native\Divider\Divider.tsx" />
+    <TypeScriptCompile Include="src\components\native\Hidden\Hidden.tsx" />
+    <TypeScriptCompile Include="src\components\native\IconButton\IconButton.tsx" />
+    <TypeScriptCompile Include="src\components\native\Toolbar\Toolbar.tsx" />
+    <TypeScriptCompile Include="src\components\native\AppBar\AppBar.tsx" />
+    <TypeScriptCompile Include="src\components\native\Drawer\Drawer.tsx" />
+    <TypeScriptCompile Include="src\components\typings\IconButton-d.d.ts" />
+    <TypeScriptCompile Include="src\components\typings\Hidden-d.d.ts" />
+    <TypeScriptCompile Include="src\components\typings\AppBar-d.d.ts" />
+    <TypeScriptCompile Include="src\components\typings\Toolbar-d.d.ts" />
+    <TypeScriptCompile Include="src\components\typings\Divider-d.d.ts" />
+    <TypeScriptCompile Include="src\components\typings\ResponsibleDrawer-d.d.ts" />
+    <TypeScriptCompile Include="src\components\typings\Drawer-d.d.ts" />
     <TypeScriptCompile Include="src\components\typings\ButtonBase-d.d.ts" />
     <TypeScriptCompile Include="src\components\typings\Button-d.d.ts" />
     <TypeScriptCompile Include="src\components\native\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\native\Button\Button.tsx" />
     <TypeScriptCompile Include="src\components\web\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\web\Button\Button.tsx" />
+    <TypeScriptCompile Include="src\components\web\Divider\Divider.tsx" />
+    <TypeScriptCompile Include="src\components\web\Hidden\Hidden.tsx" />
+    <TypeScriptCompile Include="src\components\web\IconButton\IconButton.tsx" />
+    <TypeScriptCompile Include="src\components\web\Toolbar\Toolbar.tsx" />
+    <TypeScriptCompile Include="src\components\web\AppBar\AppBar.tsx" />
+    <TypeScriptCompile Include="src\components\web\Drawer\Drawer.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
     <TypeScriptCompile Include="src\primitives\common\Typography\Typography.tsx" />
     <TypeScriptCompile Include="src\primitives\native\for-components.tsx" />
@@ -143,7 +168,6 @@
     <TypeScriptCompile Include="src\styles\common\MuiThemeProvider.tsx" />
     <TypeScriptCompile Include="src\styles\common\utils.ts" />
     <TypeScriptCompile Include="src\styles\common\withStyles.tsx" />
-    <None Include="src\styles\typings\withStyles2-d.d.ts_" />
     <TypeScriptCompile Include="src\styles\web\fela.tsx" />
     <TypeScriptCompile Include="src\test\common\components\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />
