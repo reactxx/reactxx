@@ -90,7 +90,7 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<MuixResponsibleDra
       <ViewX className={classes.appFrame}>
         <AppBar classNameInCode={classes.appBar} >
           <Toolbar>
-            <IconButton color="contrast" onClick={this.handleDrawerToggle} classNameInCode={classes.navIconHide} >
+            <IconButton color="contrast" onClick={this.handleDrawerToggle} classNameInCode={classes.navIconHide} > 
               <TextX>MenuIcon</TextX>
               {/*<MenuIcon />*/}
             </IconButton>

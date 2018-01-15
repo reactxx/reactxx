@@ -26,7 +26,7 @@ type TMuiProps<R extends Muix.Shape> = R['propsWeb']
 
 export const muiCompatible = <R extends Muix.Shape>(Component: React.ComponentType<TMuiProps<R>>) => {
   const Styled: Muix.SFCX<R> = (props, context: Muix.MuiThemeContextValue) => {
-    const { classes: _classes, classesInCode, style, web, native, onClick, ...rest } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb
+    const { classes: _classes, classesInCode, style, web, native, onClick, classNameInCode, ...rest } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb 
 
     const click = (web && web.onClick) || onClick
 

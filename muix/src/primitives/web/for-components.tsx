@@ -27,8 +27,6 @@ const headlineMapping = {
   body1: 'p',
 }
 
-
-
 const viewStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
