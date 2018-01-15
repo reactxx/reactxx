@@ -1,7 +1,6 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
+import ResponsibleDrawer from '../../common/ResponsibleDrawer/ResponsibleDrawer'
 
-export default class Drawer extends React.PureComponent<Muix.CodeProps<MuixDrawer.Shape>> {
-  render() { return null }
-}
-
+const responsibleDrawer = ResponsibleDrawer
+export default responsibleDrawer

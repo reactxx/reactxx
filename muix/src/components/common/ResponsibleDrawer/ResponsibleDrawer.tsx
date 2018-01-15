@@ -4,8 +4,8 @@ import { withStyles, sheetCreator } from 'muix-styles'
 import { ViewX, TextX, Typography } from 'muix-primitives'
 
 import Drawer from 'muix-components/Drawer/Drawer';
-import AppBar from 'muix-components/Drawer/Drawer';
-import Toolbar from 'muix-components/Drawer/Drawer';
+import AppBar from 'muix-components/AppBar/AppBar';
+import Toolbar from 'muix-components/Toolbar/Toolbar';
 import IconButton from 'muix-components/IconButton/IconButton';
 import Hidden from 'muix-components/Hidden/Hidden';
 import Divider from 'muix-components/Divider/Divider';
@@ -88,9 +88,10 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<MuixResponsibleDra
 
     return <ViewX className={classes.root}>
       <ViewX className={classes.appFrame}>
-        <AppBar classesInCode={classes.appBar}>
+        <AppBar classNameInCode={classes.appBar} >
           <Toolbar>
-            <IconButton color="contrast" onClick={this.handleDrawerToggle} classesInCode={{ root: classes.navIconHide }} >
+            <IconButton color="contrast" onClick={this.handleDrawerToggle} classNameInCode={classes.navIconHide} >
+              <TextX>MenuIcon</TextX>
               {/*<MenuIcon />*/}
             </IconButton>
             <Typography color='inherit' noWrap>
