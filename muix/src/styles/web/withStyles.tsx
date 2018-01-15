@@ -26,13 +26,13 @@ type TMuiProps<R extends Muix.Shape> = R['propsWeb']
 
 export const muiCompatible = <R extends Muix.Shape>(Component: React.ComponentType<TMuiProps<R>>) => {
   const Styled: Muix.SFCX<R> = (props, context: Muix.MuiThemeContextValue) => {
-    const { classes: _classes, style, web, native, onClick, ...rest } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb
+    const { classes: _classes, classesInCode, style, web, native, onClick, ...rest } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb
 
     const click = (web && web.onClick) || onClick
 
     const theme = context.theme || getDefaultTheme()
 
-    const classes = sheetToClassSheet(classesToPlatformSheet(theme, _classes) as Muix.SheetWeb<R>)
+    const classes = sheetToClassSheet((classesToPlatformSheet(theme, _classes) || classesInCode) as Muix.SheetWeb<R>)
     const webProps = { ...rest, ...web, style: toPlatformRuleSet(style), classes, onClick: click, theme, } as TMuiProps<R>
     return <Component {...webProps} />
   }

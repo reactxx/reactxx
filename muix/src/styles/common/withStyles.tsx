@@ -14,7 +14,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
     constructor(props: Muix.PropsX<R>, context: TContext) {
       super(props, context)
       const { flip, name } = options
-      const { classes: _classes, style, web, native, onClick, ...other } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb
+      const { classes: _classes, classesInCode, style, web, native, onClick, ...other } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb
       const onPressNative = native && (native as any).onPress
       const onClickWeb: Muix.TOnClickWeb = web && (web as any).onClick
 
@@ -37,7 +37,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       // Could be called in <Component> render method to compute component styles. Side effects:
       // - use sheet..$overrides to modify self sheet
       // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
-      const classesProp = classesToPlatformSheet(theme, _classes)
+      const classesProp = classesToPlatformSheet(theme, _classes) || classesInCode
       //if (classesProp) console.log('### classesProp', classesProp)
       const usedOverrides = {}
       const getStyleWithSideEffect: Muix.TClassnames = (...rulesets/*all used rulesets*/) => {

@@ -124,12 +124,14 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\components\common\Divider\Divider.tsx" />
+    <TypeScriptCompile Include="src\components\common\ResponsibleDrawer\ResponsibleDrawer.tsx" />
     <TypeScriptCompile Include="src\components\common\Drawer\Drawer.tsx" />
     <TypeScriptCompile Include="src\components\common\Hidden\Hidden.tsx" />
     <TypeScriptCompile Include="src\components\common\IconButton\IconButton.tsx" />
     <TypeScriptCompile Include="src\components\common\Toolbar\Toolbar.tsx" />
     <TypeScriptCompile Include="src\components\common\AppBar\AppBar.tsx" />
     <TypeScriptCompile Include="src\components\native\Divider\Divider.tsx" />
+    <TypeScriptCompile Include="src\components\native\ResponsibleDrawer\ResponsibleDrawer.tsx" />
     <TypeScriptCompile Include="src\components\native\Hidden\Hidden.tsx" />
     <TypeScriptCompile Include="src\components\native\IconButton\IconButton.tsx" />
     <TypeScriptCompile Include="src\components\native\Toolbar\Toolbar.tsx" />
@@ -149,6 +151,7 @@
     <TypeScriptCompile Include="src\components\web\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\components\web\Divider\Divider.tsx" />
+    <TypeScriptCompile Include="src\components\web\ResponsibleDrawer\ResponsibleDrawer.tsx" />
     <TypeScriptCompile Include="src\components\web\Hidden\Hidden.tsx" />
     <TypeScriptCompile Include="src\components\web\IconButton\IconButton.tsx" />
     <TypeScriptCompile Include="src\components\web\Toolbar\Toolbar.tsx" />

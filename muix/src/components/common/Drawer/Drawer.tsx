@@ -7,4 +7,16 @@ export const sheet = sheetCreator<MuixDrawer.Shape>(({ typographyX: typoX, spaci
   root: {
   },
   style: {},
+  hidden: {},
+  docked: {},
+  paper: {},
+  paperAnchorLeft: {},
+  paperAnchorRight: {},
+  paperAnchorTop: {},
+  paperAnchorBottom: {},
+  paperAnchorDockedLeft: {},
+  paperAnchorDockedTop: {},
+  paperAnchorDockedRight: {},
+  paperAnchorDockedBottom: {},
+  modal: {},
 }))
