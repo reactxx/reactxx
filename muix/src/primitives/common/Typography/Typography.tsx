@@ -87,7 +87,7 @@ const typography: Muix.CodeSFCNative<MuixTypography.Shape> = (props => {
 
   //console.log(className)
   return <TypographyNativeX
-    className={className} style={style}
+    classNameInCode={className} style={style}
     $native={rest as ReactN.ScrollViewProperties} $web={rest as React.HTMLAttributes<HTMLDivElement>}
     $type={type}
     $noWrapStyle={noWrap && classes.noWrap}

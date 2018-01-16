@@ -1,6 +1,6 @@
 ﻿declare namespace Primitives {
   type PropsLow<T extends Muix.CSSProperties, P extends {}, W extends {} = React.HTMLAttributes<HTMLDivElement>> = {
-    className?: T
+    classNameInCode?: T
     style?: T
     $native?: Partial<OmitFrom<P, 'style' | 'contentContainerStyle'>>
     $web?: W

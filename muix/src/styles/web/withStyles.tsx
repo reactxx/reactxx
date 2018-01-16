@@ -10,7 +10,7 @@ import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
 
 //import { sheetToClassNames } from './inline-styles'
-import { sheetToClassSheet } from './fela'
+import { sheetToClassSheet, rulesetToClassNames } from './fela'
 
 import { classesToPlatformSheet, getDefaultTheme, MuiThemeContextTypes, AppContainerProps, createMuiTheme, toPlatformRuleSet, toPlatformSheet, MuiThemeProvider } from 'muix-styles'
 
@@ -33,7 +33,7 @@ export const muiCompatible = <R extends Muix.Shape>(Component: React.ComponentTy
     const theme = context.theme || getDefaultTheme()
 
     const classes = sheetToClassSheet((classesToPlatformSheet(theme, _classes) || classesInCode) as Muix.SheetWeb<R>)
-    const webProps = { ...rest, ...web, style: toPlatformRuleSet(style), classes, onClick: click, theme, } as TMuiProps<R>
+    const webProps = { ...rest, ...web, style: toPlatformRuleSet(style), classes, onClick: click, theme, className: rulesetToClassNames(classNameInCode as React.CSSProperties) } as TMuiProps<R>
     return <Component {...webProps} />
   }
   Styled.contextTypes = MuiThemeContextTypes

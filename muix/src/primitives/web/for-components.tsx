@@ -4,12 +4,12 @@ import warning from 'warning'
 import { rulesetsToClassNames } from 'muix-styles/web'
 
 export const TypographyNative: React.SFC<Primitives.Typography> = props => {
-  const { style, className, $noWrapStyle, $type, $web, children } = props
+  const { style, classNameInCode, $noWrapStyle, $type, $web, children } = props
   const tagName = headlineMapping[$type]
   return React.createElement(
     tagName || 'div',
     {
-      className: rulesetsToClassNames(viewStyle, $noWrapStyle, className),
+      className: rulesetsToClassNames(viewStyle, $noWrapStyle, classNameInCode),
       style: style,
       ...$web
     },
@@ -39,16 +39,16 @@ const viewStyle: React.CSSProperties = {
 }
 
 export const ViewWeb: React.SFC<Primitives.Web> = props => {
-  const { style, className, $web, children } = props
-  return <div className={rulesetsToClassNames(viewStyle, className)} style={style} {...$web} children={children} />
+  const { style, classNameInCode, $web, children } = props
+  return <div className={rulesetsToClassNames(viewStyle, classNameInCode)} style={style} {...$web} children={children} />
 }
 
 export const IconWeb: React.SFC<Primitives.Web<SVGSVGElement> & { data: string }> = props => {
-  const { style, className, $web, data, children } = props
+  const { style, classNameInCode, $web, data, children } = props
   const { viewBox = '0 0 24 24', ...other } = $web
-  if (className && className.fontSize) { className.height = className.width = className.fontSize; delete className.fontSize }
+  if (classNameInCode && classNameInCode.fontSize) { classNameInCode.height = classNameInCode.width = classNameInCode.fontSize; delete classNameInCode.fontSize }
   if (style && style.fontSize) { style.height = style.width = style.fontSize; delete style.fontSize }
-  return <svg className={rulesetsToClassNames(className, { fill: 'currentColor' })} style={style} focusable='false' viewBox={viewBox} {...other as any}>
+  return <svg className={rulesetsToClassNames(classNameInCode, { fill: 'currentColor' })} style={style} focusable='false' viewBox={viewBox} {...other as any}>
     {children ? children : <path d={data} />}
   </svg>
 }
@@ -77,9 +77,9 @@ const textStyles = {
 }
 
 export const TextWeb: React.SFC<Primitives.Web & { numberOfLines?: number; notSelectable?: boolean; pressable?: boolean }> = props => {
-  const { style, className, numberOfLines, notSelectable, pressable, $web, children } = props
+  const { style, classNameInCode, numberOfLines, notSelectable, pressable, $web, children } = props
   return <div
-    className={'mui-text ' + rulesetsToClassNames(textStyles.root, className, notSelectable && textStyles.notSelectable, pressable && textStyles.pressable, numberOfLines === 1 && textStyles.singleLineStyle)}
+    className={'mui-text ' + rulesetsToClassNames(textStyles.root, classNameInCode, notSelectable && textStyles.notSelectable, pressable && textStyles.pressable, numberOfLines === 1 && textStyles.singleLineStyle)}
     style={style} {...$web} children={children} />
 }
 
@@ -110,9 +110,9 @@ const scrollViewStyles = {
 }
 
 export const ScrollViewWeb: React.SFC<Primitives.Web & { horizontal?: boolean; contentContainerStyle?: React.CSSProperties }> = props => {
-  const { style, className, horizontal, children, contentContainerStyle, $web } = props
-  checkChildLayoutProps(style); checkChildLayoutProps(className)
-  return <div className={rulesetsToClassNames(viewStyle, scrollViewStyles.base, horizontal && scrollViewStyles.baseHorizontal, className)} style={style} {...$web}>
+  const { style, classNameInCode, horizontal, children, contentContainerStyle, $web } = props
+  checkChildLayoutProps(style); checkChildLayoutProps(classNameInCode)
+  return <div className={rulesetsToClassNames(viewStyle, scrollViewStyles.base, horizontal && scrollViewStyles.baseHorizontal, classNameInCode)} style={style} {...$web}>
     <div className={rulesetsToClassNames(viewStyle, scrollViewStyles.container, contentContainerStyle, horizontal && scrollViewStyles.contentContainerHorizontal)}>
       {children}
     </div>

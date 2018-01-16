@@ -25,7 +25,7 @@ const icon: Muix.CodeSFC<MuixIcon.Shape> = props => {
   warning(childs.length == 1 && typeof childs[0] === 'string', 'single child as string expected')
   const data = childs[0] as MuixIcons
   const iconClass = getStyleWithSideEffect(classes.root, classes[`color${capitalizeFirstLetter(color)}`], classes.style)
-  return <IconX className={iconClass} style={style} $native={rest as any} $web={rest as any} data={data}/>
+  return <IconX classNameInCode={iconClass} style={style} $native={rest as any} $web={rest as any} data={data}/>
 }
 
 const Icon = withStyles<MuixIcon.Shape>(sheet, { name: 'MuiIcon' })(icon)

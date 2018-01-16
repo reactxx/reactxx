@@ -1,6 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 import { withStyles, sheetCreator } from 'muix-styles'
+import { rulesetToClassNames } from 'muix-styles/web'
 import { ViewX, TextX, Typography } from 'muix-primitives'
 
 import Drawer from 'muix-components/Drawer/Drawer';
@@ -75,23 +76,23 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<MuixResponsibleDra
 
     const { classes, theme, getStyleWithSideEffect } = this.props
 
-    const drawer = <ViewX>
-      <ViewX className={classes.drawerHeader}>
+    const drawer = <div>
+      <div className={rulesetToClassNames(classes.drawerHeader)}>
         <TextX>drawerHeader</TextX>
-      </ViewX>
+      </div>
       <Divider />
       <TextX>mailFolderListItems</TextX>
       <Divider />
       <TextX>otherMailFolderListItems</TextX>
-    </ViewX>
+    </div>
 
 
-    return <ViewX className={classes.root}>
-      <ViewX className={classes.appFrame}>
+    return <div className={rulesetToClassNames(classes.root)}>
+      <div className={rulesetToClassNames(classes.appFrame)}>
         <AppBar classNameInCode={classes.appBar} >
           <Toolbar>
             <IconButton color="contrast" onClick={this.handleDrawerToggle} classNameInCode={classes.navIconHide} > 
-              <TextX>MenuIcon</TextX>
+              <TextX>X</TextX>
               {/*<MenuIcon />*/}
             </IconButton>
             <Typography color='inherit' noWrap>
@@ -106,19 +107,18 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<MuixResponsibleDra
             open={this.state.mobileOpen}
             classesInCode={{ paper: classes.drawerPaper }}
             onClose={this.handleDrawerToggle}
-            ModalProps={{ keepMounted: true, /*Better open performance on mobile*/ }}
-          >
+            ModalProps={{ keepMounted: true, /*Better open performance on mobile*/ }}>
             {drawer}
           </Drawer>
         </Hidden>
         <Hidden smDown implementation="css">
           <Drawer type="permanent" open classesInCode={{ paper: classes.drawerPaper }}>{drawer}</Drawer>
         </Hidden>
-        <ViewX className={classes.content}>
+        <div className={rulesetToClassNames(classes.content)}>
           <Typography noWrap>You think water moves fast? You should see ice.</Typography>
-        </ViewX>
-      </ViewX>
-    </ViewX>
+        </div>
+      </div>
+    </div>
   }
 }
 

@@ -71,8 +71,8 @@ const testStyles: Muix.CodeSFC<testStyles.Shape> = props => {
 
   const ch = React.Children.toArray(children)
 
-  return <ViewX className={rootStyles} style={style}>
-    {ch.length == 1 && typeof ch[0] === 'string' ? <TextX className={labelStyles}>{children}</TextX> : children}
+  return <ViewX classNameInCode={rootStyles} style={style}>
+    {ch.length == 1 && typeof ch[0] === 'string' ? <TextX classNameInCode={labelStyles}>{children}</TextX> : children}
   </ViewX>
 }
 //{ch.length == 1 && typeof ch[0] === 'string' ? <TextX className={labelStyles}>{children}</TextX> : children}

@@ -46,9 +46,9 @@ class AppRoot extends React.Component {
       <Typography type='display2' >{apps[appIndex].title}</Typography>
       <App />
     </View>
-    const root2 = <TypographyTest />
+    const root2 = <ResponsibleDrawer />
     return <AppContainer key={appIndex} themeOptions={{ overridesX: apps[appIndex].overridesNew }}>
-      {root}
+      {root2}
     </AppContainer>
   }
 }
