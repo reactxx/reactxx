@@ -1,44 +1,52 @@
 import React from 'react';
 import List from 'material-ui/List';
-import IconButton from 'material-ui/IconButton';
 
-import Drawer from 'material-ui/Drawer';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import Hidden from 'material-ui/Hidden';
-import Divider from 'material-ui/Divider';
+//import IconButton from 'material-ui/IconButton'
+//import Drawer from 'material-ui/Drawer'
+//import AppBar from 'material-ui/AppBar'
+//import Toolbar from 'material-ui/Toolbar'
+//import Typography from 'material-ui/Typography'
+//import Hidden from 'material-ui/Hidden'
+//import Divider from 'material-ui/Divider'
+//import { withStyles } from 'material-ui/styles';
 
-//import Drawer from 'muix-components/Drawer/Drawer'
-//import AppBar from 'muix-components/AppBar/AppBar'
-//import Toolbar from 'muix-components/Toolbar/Toolbar'
-//import { Typography } from 'muix-primitives'
-//import Hidden from 'muix-components/Hidden/Hidden'
-//import Divider from 'muix-components/Divider/Divider'
+import Drawer from 'muix-components/Drawer/Drawer'
+import AppBar from 'muix-components/AppBar/AppBar'
+import Toolbar from 'muix-components/Toolbar/Toolbar'
+import { Typography } from 'muix-primitives'
+import Hidden from 'muix-components/Hidden/Hidden'
+import Divider from 'muix-components/Divider/Divider'
+import IconButton from 'muix-components/IconButton/IconButton'
 
-import { withStyles } from 'material-ui/styles';
 
 import { rulesetToClassNames } from 'muix-styles/web'
-import { AppContainer, sheetCreator } from 'muix-styles'
+import { AppContainer, sheetCreator, withStyles } from 'muix-styles'
 import { ViewX } from 'muix-primitives'
 
 const drawerWidth = 240;
 
+type Shape = Overwrite<Muix.DefaultEmptyShape, {
+  common: Muix.ShapeViews<'root' | 'appFrame' | 'appBar' | 'drawerHeader' | 'drawerPaper' | 'content'>
+  propsNative: {}
+  propsWeb: {}
+}>
 
-//const sheet = sheetCreator<any>(({ typographyX: typoX, spacing, breakpoints, mixins, palette }) => ({
-const styles = theme => ({
+const styles = sheetCreator<Shape>(theme => ({
+  //const styles = theme => ({
   root: {
     width: '100%',
+    flex: 1,
     //height: 430,
-    marginTop: theme.spacing.unit * 3,
+    //marginTop: theme.spacing.unit * 3,
     zIndex: 1,
-    overflow: 'hidden',
+    $web: {
+      overflow: 'hidden',
+    },
+    position: 'relative',
   },
   appFrame: {
-    position: 'relative',
-    display: 'flex',
-    width: '100%',
-    height: '100%',
+    //width: '100%',
+    //height: '100%',
   },
   appBar: {
     marginLeft: drawerWidth,
@@ -46,22 +54,11 @@ const styles = theme => ({
       width: `calc(100% - ${drawerWidth}px)`,
     },
   },
-  navIconHide: {
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
+  drawerHeader: {
+    $web: theme.mixins.toolbar,
   },
-  navIconShow: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
-    },
-    [theme.breakpoints.up('lg')]: {
-      display: 'none',
-    }
-  },
-  drawerHeader: theme.mixins.toolbar,
   drawerPaper: {
-    width: 250, 
+    width: 250,
     [theme.breakpoints.up('md')]: {
       width: drawerWidth,
       position: 'relative',
@@ -79,125 +76,85 @@ const styles = theme => ({
       marginTop: 64,
     },
   },
-  showMobile: {
-    [theme.breakpoints.up('sm')]: {
-      display:'none'
-    }
-  },
-  showTablet: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none'
-    },
-    [theme.breakpoints.up('md')]: {
-      display: 'none'
-    },
-  },
-  showTabletMobile: {
-    [theme.breakpoints.up('md')]: {
-      display: 'none'
-    }
-  },
-  showDesktop: {
-    [theme.breakpoints.down('md')]: {
-      display: 'none'
-    }
-  },
-});
+}))
 
 const impl = 'css'
 
-class ResponsiveDrawer extends React.Component<any> {
+class ResponsiveDrawer extends React.Component<Muix.CodeProps<Shape>> {
   state = {
     mobileOpen: false,
-    //tabletOpen: false
-  };
-  myStyle = styles(this.props.theme)
-  root = rulesetToClassNames(this.myStyle.root as any)
-  appFrame = rulesetToClassNames(this.myStyle.appFrame as any)
-  appBar = rulesetToClassNames(this.myStyle.appBar as any)
-  navIconHide = rulesetToClassNames(this.myStyle.navIconHide as any)
-  content = rulesetToClassNames(this.myStyle.content as any)
-  drawerPaper = rulesetToClassNames(this.myStyle.drawerPaper as any)
-  drawerHeader = rulesetToClassNames(this.myStyle.drawerHeader as any)
-  navIconShow = rulesetToClassNames(this.myStyle.navIconShow as any)
-  showTablet = rulesetToClassNames(this.myStyle.showTablet as any)
-  showDesktop = rulesetToClassNames(this.myStyle.showDesktop as any)
-  showMobile = rulesetToClassNames(this.myStyle.showMobile as any)
-  showTabletMobile = rulesetToClassNames(this.myStyle.showTabletMobile as any)
+    tabletOpen: false
+  }
 
   handleMobileToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
 
-  handleTabletDrawerToggle = () => {
-    this.setState({ tabletOpen: !this.state.mobileOpen });
+  handleTabletToggle = () => {
+    this.setState({ tabletOpen: !this.state.tabletOpen });
   };
 
   render() {
     const { classes, theme } = this.props;
 
-    const drawer = <div>
-      <div className={this.drawerHeader} >
-        <IconButton onClick={this.handleMobileToggle} className={this.showTablet}>x</IconButton>
-      </div>
+    const drawer = <ViewX>
+      <ViewX classNameInCode={classes.drawerHeader} >
+        <Hidden smDown mdUp>
+          <IconButton onClick={this.handleTabletToggle}>x</IconButton>
+        </Hidden>
+      </ViewX>
       <Divider />
       <List>mailFolderListItems</List>
       <Divider />
       <List>otherMailFolderListItems</List>
-    </div>
+    </ViewX>
 
 
-    return (
-      <div className={this.root}>
-        <div className={this.appFrame}>
-          <AppBar className={this.appBar}>
-            <Toolbar>
-              <IconButton color="contrast" onClick={this.handleMobileToggle} className={this.showTabletMobile}>x</IconButton>
-              <Typography type="title" color="inherit" noWrap>
-                Responsive drawer
-              </Typography>
-            </Toolbar>
-          </AppBar>
+    return <ViewX classNameInCode={classes.root}>
+      <AppBar classNameInCode={classes.appBar}>
+        <Toolbar>
           <Hidden smUp>
-            <Drawer
-              type="temporary"
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-              classes={{ paper: this.drawerPaper, }}
-              open={this.state.mobileOpen}
-              onClose={this.handleMobileToggle}
-              ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
-              }}>
-              {drawer}
-            </Drawer>
+            <IconButton color="contrast" onClick={this.handleMobileToggle}>x</IconButton>
           </Hidden>
-          <Hidden only={['md']}>
-            <Drawer
-              type="persistent"
-              open={this.state.mobileOpen}
-              onClose={this.handleTabletDrawerToggle}
-              classes={{ paper: this.drawerPaper, }}>
-              {drawer}
-            </Drawer>
+          <Hidden smDown mdUp>
+            <IconButton color="contrast" onClick={this.handleTabletToggle}>x</IconButton>
           </Hidden>
-          <Hidden mdDown>
-            <Drawer
-              type="permanent"
-              open
-              classes={{ paper: this.drawerPaper, }}>
-              {drawer}
-            </Drawer>
-          </Hidden>
-          <main className={this.content}>
-            <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
-          </main>
-        </div>
-      </div>
-    );
+          <Typography type="title" color="inherit" noWrap>
+            Responsive drawer
+              </Typography>
+        </Toolbar>
+      </AppBar>
+      <Hidden smUp>
+        <Drawer
+          type="temporary"
+          anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+          classesInCode={{ paper: classes.drawerPaper, }}
+          open={this.state.mobileOpen}
+          onClose={this.handleMobileToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}>
+          {drawer}
+        </Drawer>
+      </Hidden>
+      <Hidden smDown mdUp>
+        <Drawer type="persistent" open={this.state.tabletOpen} onClose={this.handleTabletToggle} classesInCode={{ paper: classes.drawerPaper, }}>
+          {drawer}
+        </Drawer>
+      </Hidden>
+      <Hidden mdDown>
+        <Drawer type="permanent" open classesInCode={{ paper: classes.drawerPaper, }}>
+          {drawer}
+        </Drawer>
+      </Hidden>
+      <ViewX classNameInCode={classes.content}>
+        <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
+      </ViewX>
+    </ViewX>
   }
 }
 
-const Root = withStyles(styles as any, { withTheme: true })(ResponsiveDrawer);
+const Root = withStyles(styles, { name: '' as any })(ResponsiveDrawer);
 
 const app: React.SFC = () => <AppContainer>
   <Root />
@@ -205,4 +162,5 @@ const app: React.SFC = () => <AppContainer>
 
 export default app
 
-//          <div className={'showMobile ' + this.showMobile}>
+      //<ViewX classNameInCode={classes.appFrame}>
+      //</ViewX>

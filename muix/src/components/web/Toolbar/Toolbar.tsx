@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 
 import { muiCompatible } from 'muix-styles/web'
-import MuiIconButton from 'material-ui/IconButton/IconButton'
+import MuiToolbar from 'material-ui/Toolbar/Toolbar'
 
-const IconButton = muiCompatible<MuixIconButton.Shape>(MuiIconButton)
-export default IconButton
+const Toolbar = muiCompatible<MuixIconButton.Shape>(MuiToolbar)
+export default Toolbar

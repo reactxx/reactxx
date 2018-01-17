@@ -200,6 +200,7 @@
     <TypeScriptCompile Include="src\test\common\test-styles-d.d.ts" />
     <TypeScriptCompile Include="src\test\common\styles\component-x.tsx" />
     <TypeScriptCompile Include="src\test\web\responsible-drawer.tsx" />
+    <TypeScriptCompile Include="src\test\web\responsible-drawer-1.tsx" />
     <TypeScriptCompile Include="src\test\web\index.tsx" />
     <TypeScriptCompile Include="src\test\common\primitives\icon.tsx" />
     <TypeScriptCompile Include="src\test\common\primitives\text-view.tsx" />
