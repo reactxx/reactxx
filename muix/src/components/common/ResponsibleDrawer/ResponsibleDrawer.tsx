@@ -4,19 +4,19 @@ import { withStyles, sheetCreator } from 'muix-styles'
 import { rulesetToClassNames } from 'muix-styles/web'
 import { ViewX, TextX, Typography } from 'muix-primitives'
 
-import Drawer from 'muix-components/Drawer/Drawer';
-import AppBar from 'muix-components/AppBar/AppBar';
-import Toolbar from 'muix-components/Toolbar/Toolbar';
-import IconButton from 'muix-components/IconButton/IconButton';
-import Hidden from 'muix-components/Hidden/Hidden';
-import Divider from 'muix-components/Divider/Divider';
+import Drawer from 'muix-components/Drawer/Drawer'
+import AppBar from 'muix-components/AppBar/AppBar'
+import Toolbar from 'muix-components/Toolbar/Toolbar'
+import IconButton from 'muix-components/IconButton/IconButton'
+import Hidden from 'muix-components/Hidden/Hidden'
+import Divider from 'muix-components/Divider/Divider'
 
 const drawerWidth = 240
 
 export const sheet = sheetCreator<MuixResponsibleDrawer.Shape>(({ typographyX: typoX, spacing, breakpoints, mixins, palette }) => ({
   root: {
     width: '100%',
-    height: 430,
+    //height: 430,
     marginTop: spacing.unit * 3,
     zIndex: 1,
     overflow: 'hidden',

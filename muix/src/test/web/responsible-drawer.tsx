@@ -1,19 +1,31 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
+import List from 'material-ui/List';
+import IconButton from 'material-ui/IconButton';
+
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import List from 'material-ui/List';
 import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
 import Hidden from 'material-ui/Hidden';
 import Divider from 'material-ui/Divider';
 
+//import Drawer from 'muix-components/Drawer/Drawer'
+//import AppBar from 'muix-components/AppBar/AppBar'
+//import Toolbar from 'muix-components/Toolbar/Toolbar'
+//import { Typography } from 'muix-primitives'
+//import Hidden from 'muix-components/Hidden/Hidden'
+//import Divider from 'muix-components/Divider/Divider'
+
+import { withStyles } from 'material-ui/styles';
+
 import { rulesetToClassNames } from 'muix-styles/web'
-import { AppContainer } from 'muix-styles'
+import { AppContainer, sheetCreator } from 'muix-styles'
+import { ViewX } from 'muix-primitives'
 
 const drawerWidth = 240;
 
+
+//const sheet = sheetCreator<any>(({ typographyX: typoX, spacing, breakpoints, mixins, palette }) => ({
 const styles = theme => ({
   root: {
     width: '100%',
@@ -29,7 +41,6 @@ const styles = theme => ({
     height: '100%',
   },
   appBar: {
-    position: 'absolute',
     marginLeft: drawerWidth,
     [theme.breakpoints.up('md')]: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -40,9 +51,17 @@ const styles = theme => ({
       display: 'none',
     },
   },
+  navIconShow: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+    [theme.breakpoints.up('lg')]: {
+      display: 'none',
+    }
+  },
   drawerHeader: theme.mixins.toolbar,
   drawerPaper: {
-    width: 250,
+    width: 250, 
     [theme.breakpoints.up('md')]: {
       width: drawerWidth,
       position: 'relative',
@@ -60,13 +79,37 @@ const styles = theme => ({
       marginTop: 64,
     },
   },
+  showMobile: {
+    [theme.breakpoints.up('sm')]: {
+      display:'none'
+    }
+  },
+  showTablet: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    },
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    },
+  },
+  showTabletMobile: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    }
+  },
+  showDesktop: {
+    [theme.breakpoints.down('md')]: {
+      display: 'none'
+    }
+  },
 });
 
-
+const impl = 'css'
 
 class ResponsiveDrawer extends React.Component<any> {
   state = {
     mobileOpen: false,
+    //tabletOpen: false
   };
   myStyle = styles(this.props.theme)
   root = rulesetToClassNames(this.myStyle.root as any)
@@ -75,25 +118,33 @@ class ResponsiveDrawer extends React.Component<any> {
   navIconHide = rulesetToClassNames(this.myStyle.navIconHide as any)
   content = rulesetToClassNames(this.myStyle.content as any)
   drawerPaper = rulesetToClassNames(this.myStyle.drawerPaper as any)
-  //content = rulesetToClassNames(this.myStyle.content as any)
+  drawerHeader = rulesetToClassNames(this.myStyle.drawerHeader as any)
+  navIconShow = rulesetToClassNames(this.myStyle.navIconShow as any)
+  showTablet = rulesetToClassNames(this.myStyle.showTablet as any)
+  showDesktop = rulesetToClassNames(this.myStyle.showDesktop as any)
+  showMobile = rulesetToClassNames(this.myStyle.showMobile as any)
+  showTabletMobile = rulesetToClassNames(this.myStyle.showTabletMobile as any)
 
-
-  handleDrawerToggle = () => {
+  handleMobileToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
+  };
+
+  handleTabletDrawerToggle = () => {
+    this.setState({ tabletOpen: !this.state.mobileOpen });
   };
 
   render() {
     const { classes, theme } = this.props;
 
-    const drawer = (
-      <div>
-        <div className={classes.drawerHeader} />
-        <Divider />
-        <List>mailFolderListItems</List>
-        <Divider />
-        <List>otherMailFolderListItems</List>
+    const drawer = <div>
+      <div className={this.drawerHeader} >
+        <IconButton onClick={this.handleMobileToggle} className={this.showTablet}>x</IconButton>
       </div>
-    );
+      <Divider />
+      <List>mailFolderListItems</List>
+      <Divider />
+      <List>otherMailFolderListItems</List>
+    </div>
 
 
     return (
@@ -101,43 +152,39 @@ class ResponsiveDrawer extends React.Component<any> {
         <div className={this.appFrame}>
           <AppBar className={this.appBar}>
             <Toolbar>
-              <IconButton
-                color="contrast"
-                aria-label="open drawer"
-                onClick={this.handleDrawerToggle}
-                className={this.navIconHide}
-              >
-                x
-              </IconButton>
+              <IconButton color="contrast" onClick={this.handleMobileToggle} className={this.showTabletMobile}>x</IconButton>
               <Typography type="title" color="inherit" noWrap>
                 Responsive drawer
               </Typography>
             </Toolbar>
           </AppBar>
-          <Hidden mdUp>
+          <Hidden smUp>
             <Drawer
               type="temporary"
               anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+              classes={{ paper: this.drawerPaper, }}
               open={this.state.mobileOpen}
-              classes={{
-                paper: this.drawerPaper,
-              }}
-              onClose={this.handleDrawerToggle}
+              onClose={this.handleMobileToggle}
               ModalProps={{
                 keepMounted: true, // Better open performance on mobile.
-              }}
-            >
+              }}>
               {drawer}
             </Drawer>
           </Hidden>
-          <Hidden smDown implementation="css">
+          <Hidden only={['md']}>
+            <Drawer
+              type="persistent"
+              open={this.state.mobileOpen}
+              onClose={this.handleTabletDrawerToggle}
+              classes={{ paper: this.drawerPaper, }}>
+              {drawer}
+            </Drawer>
+          </Hidden>
+          <Hidden mdDown>
             <Drawer
               type="permanent"
               open
-              classes={{
-                paper: this.drawerPaper,
-              }}
-            >
+              classes={{ paper: this.drawerPaper, }}>
               {drawer}
             </Drawer>
           </Hidden>
@@ -153,8 +200,9 @@ class ResponsiveDrawer extends React.Component<any> {
 const Root = withStyles(styles as any, { withTheme: true })(ResponsiveDrawer);
 
 const app: React.SFC = () => <AppContainer>
-  <Root/>
+  <Root />
 </AppContainer>
 
-export default Root 
+export default app
 
+//          <div className={'showMobile ' + this.showMobile}>

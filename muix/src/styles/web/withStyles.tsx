@@ -18,7 +18,10 @@ export const jss = create(preset())
 jss.options.createGenerateClassName = createGenerateClassName
 jss.options.insertionPoint = 'insertion-point-jss'
 
-export const AppContainer: React.SFC<AppContainerProps> = props => <MuiThemeProvider theme={createMuiTheme(props.themeOptions)}><JssProvider jss={jss}>{props.children}</JssProvider></MuiThemeProvider>
+export const AppContainer: React.SFC<AppContainerProps> = props => {
+  debugger
+  return <JssProvider jss={jss}><MuiThemeProvider theme={createMuiTheme(props.themeOptions)}>{props.children}</MuiThemeProvider></JssProvider>
+}
 
 type webKeys<R extends Muix.Shape> = Muix.getWeb<R> | keyof Muix.getCommon<R>
 

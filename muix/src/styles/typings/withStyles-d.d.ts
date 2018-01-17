@@ -266,7 +266,7 @@
     //onClick?: (ev: React.SyntheticEvent<HTMLElement>) => void
     classes?: ThemeValueOrCreator<PartialSheetX<R>> //cross platform sheet for web and native 
     classesInCode?: PartialSheetInCode<R> //cross platform sheet when using component in other component
-    classNameInCode?: getStyle<R> | CSSPropertiesWeb
+    classNameInCode?: CSSProperties
   }
   type PartialSheetInCode<R extends Shape> = PartialRecord<keyof getCommon<R> | getWeb<R> | keyof getNative<R>, CSSProperties> // common and web and native
 
