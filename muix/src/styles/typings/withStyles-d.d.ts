@@ -154,7 +154,7 @@
 
   type getStyle<R extends Shape> = R['style']
 
-  type getProps<R extends Shape> = R['props']
+  type getProps<R extends Shape> = Partial<OmitFrom<R['props'],'className'>>
   type getPropsWeb<R extends Shape> = OmitFrom<R['propsWeb'], 'style' | 'className'>
   type getPropsNative<R extends Shape> = OmitFrom<R['propsNative'], ('style' | 'classes')>
 
