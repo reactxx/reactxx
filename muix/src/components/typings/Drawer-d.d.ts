@@ -1,12 +1,12 @@
 ﻿declare namespace MuixDrawer {
 
-  type modalProps = 'root' | 'hidden' | 'style'
+  type modalProps = 'root' | 'hidden'
 
   type Shape = Overwrite<Muix.DefaultEmptyShape, {
     common: Muix.ShapeViews<modalProps | 'docked'
     | 'paper' | 'paperAnchorLeft' | 'paperAnchorRight' | 'paperAnchorTop' | 'paperAnchorBottom' | 'paperAnchorDockedLeft' | 'paperAnchorDockedTop' | 'paperAnchorDockedRight' | 'paperAnchorDockedBottom'
     | 'modal'>
-    props: Partial<OmitFrom<Muix.DrawerProps, 'classes' | 'style' | 'className'>>
+    props: Muix.DrawerProps
   }>
 
 }

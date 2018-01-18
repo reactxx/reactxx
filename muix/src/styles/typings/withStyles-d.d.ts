@@ -154,9 +154,9 @@
 
   type getStyle<R extends Shape> = R['style']
 
-  type getProps<R extends Shape> = Partial<OmitFrom<R['props'],'className'>>
-  type getPropsWeb<R extends Shape> = OmitFrom<R['propsWeb'], 'style' | 'className'>
-  type getPropsNative<R extends Shape> = OmitFrom<R['propsNative'], ('style' | 'classes')>
+  type getProps<R extends Shape> = R['props']
+  type getPropsWeb<R extends Shape> = R['propsWeb']
+  type getPropsNative<R extends Shape> = R['propsNative']
 
   //**** helpers
   interface DefaultEmptyShape extends Shape {
@@ -258,16 +258,15 @@
 
   //**** cross platform Component props (Component is created by 'withStyles' ) 
 
-  type PropsX<R extends Shape> = PropsLow<R> & {
+  type PropsX<R extends Shape> = Partial<Overwrite<getProps<R>,{
     style?: RulesetX<getStyle<R>> //cross platform style
-    web?: getPropsWeb<R> //web specific style
-    native?: getPropsNative<R> //native specific style
-    //onPress?: () => void
-    //onClick?: (ev: React.SyntheticEvent<HTMLElement>) => void
-    classes?: ThemeValueOrCreator<PartialSheetX<R>> //cross platform sheet for web and native 
-    classesInCode?: PartialSheetInCode<R> //cross platform sheet when using component in other component
-    classNameInCode?: CSSProperties
-  }
+    $web?: Partial<getPropsWeb<R>> //web specific style
+    $native?: Partial<getPropsNative<R>> //native specific style
+    classes?: ThemeValueOrCreator<PartialSheetX<R>> | PartialSheetInCode<R>//cross platform sheet for web and native 
+    //classes?: PartialSheetInCode<R> //cross platform sheet when using component in other component
+    classNamePropX?: CSSProperties | RulesetX<getStyle<R>>
+    //className?: CSSProperties
+  }>>
   type PartialSheetInCode<R extends Shape> = PartialRecord<keyof getCommon<R> | getWeb<R> | keyof getNative<R>, CSSProperties> // common and web and native
 
   type ComponentTypeX<R extends Shape> = React.ComponentType<PropsX<R>>
@@ -276,20 +275,19 @@
   //**** Component's code (passed to withStyles)
 
   // component code for web
-  type CodePropsWeb<R extends Shape> = Overwrite<PropsLow<R>, { classes: SheetWeb<R>; style?: CSSPropertiesWeb; theme: Muix.ThemeNew; flip: boolean; getStyleWithSideEffect: Muix.TClassnamesWeb }> & getPropsWeb<R>
+  type CodePropsWeb<R extends Shape> = Overwrite<getProps<R> & getPropsWeb<R>, { className: CSSPropertiesWeb & RulesetOverrides<R>; classes: SheetWeb<R>; style: CSSPropertiesWeb; theme: Muix.ThemeNew; flip: boolean; getStyleWithSideEffect: Muix.TClassnamesWeb }>
   type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
   // component code for native
-  type CodePropsNative<R extends Shape> = Overwrite<PropsLow<R>, { classes: SheetNative<R>; style?: getStyle<R>; theme: Muix.ThemeNew; flip: boolean; getStyleWithSideEffect: Muix.TClassnamesNative }> & getPropsNative<R>
+  type CodePropsNative<R extends Shape> = Overwrite<getProps<R> & getPropsNative<R>, { className: getStyle<R> & RulesetOverrides<R>; classes: SheetNative<R>; style: getStyle<R>; theme: Muix.ThemeNew; flip: boolean; getStyleWithSideEffect: Muix.TClassnamesNative }>
   type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
   type CodeComponentNative<R extends Shape> = React.ComponentClass<CodePropsNative<R>>
 
   //**** Helpers
   type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
-  type PropsLow<R extends Shape> = getProps<R>
 
   //some code for components could be shared for web and native
-  type CodeProps<R extends Shape> = Overwrite<PropsLow<R>, { classes: Sheet<R>; style?: CSSPropertiesWeb | getStyle<R>; theme: Muix.ThemeNew; flip: boolean; getStyleWithSideEffect: Muix.TClassnames}> & (getPropsWeb<R> | getPropsNative<R>)
+  type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), { className: (CSSPropertiesWeb | getStyle<R>) & RulesetOverrides<R>, classes: Sheet<R>; style: CSSPropertiesWeb | getStyle<R>; theme: Muix.ThemeNew; flip: boolean; getStyleWithSideEffect: Muix.TClassnames}>
   type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
 

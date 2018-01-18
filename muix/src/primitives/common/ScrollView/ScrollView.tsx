@@ -7,14 +7,14 @@ import { ScrollViewX } from 'muix-primitives'
 export const sheet = sheetCreator<MuixScrollView.Shape>(() => ({
   root: {},
   contentContainerStyle: {},
-  style: {},
+  
 }))
 
 const scrollView: Muix.CodeSFC<MuixScrollView.Shape> = props => {
-  const { classes, theme, flip, getStyleWithSideEffect, children, style, ...rest } = props
+  const { classes, theme, flip, getStyleWithSideEffect, children, style, className, ...rest } = props
   return <ScrollViewX
-    classNameInCode={getStyleWithSideEffect(classes.root, classes.style)} contentContainerStyle={getStyleWithSideEffect(classes.contentContainerStyle)}
-    style={style} $native={rest as ReactN.ScrollViewProperties} $web={rest as React.HTMLAttributes<HTMLDivElement>} children={children} />
+    className={getStyleWithSideEffect(classes.root, className)} contentContainerStyle={getStyleWithSideEffect(classes.contentContainerStyle)}
+    style={style} $native={rest as ReactN.ScrollViewProperties} $web={rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>} children={children} />
 }
 
 const ScrollView = withStyles<MuixScrollView.Shape>(sheet, { name: 'MuiScrollView' })(scrollView)

@@ -2,7 +2,7 @@
   type ClassKeyText = 'root'
 
   type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeTexts<'root' | 'style'>
+    common: Muix.ShapeTexts<'root'>
     style: ReactN.TextStyle
     props: Muix.TOnClickWeb
     propsNative: ReactN.TextProperties

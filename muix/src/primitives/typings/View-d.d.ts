@@ -2,7 +2,7 @@
   export type ClassKey = 'root'
 
   export type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeViews<'root' | 'style'>
+    common: Muix.ShapeViews<'root'>
   }>
 
 }

@@ -13,10 +13,8 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
 
     constructor(props: Muix.PropsX<R>, context: TContext) {
       super(props, context)
-      const { flip, name } = options
-      const { classes: _classes, classesInCode, style, web, native, onClick, ...other } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb
-      const onPressNative = native && (native as any).onPress
-      const onClickWeb: Muix.TOnClickWeb = web && (web as any).onClick
+      const { flip: flipProp, name } = options
+      const { classes: classesPropX, style, $web, $native, onClick, classNamePropX, ...other } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb
 
       let theme = context.theme || getDefaultTheme()
 
@@ -37,7 +35,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       // Could be called in <Component> render method to compute component styles. Side effects:
       // - use sheet..$overrides to modify self sheet
       // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
-      const classesProp = classesToPlatformSheet(theme, _classes) || classesInCode
+      const classesProp = classesToPlatformSheet(theme, classesPropX as Muix.ThemeValueOrCreator<Muix.PartialSheetX<R>>)
       //if (classesProp) console.log('### classesProp', classesProp)
       const usedOverrides = {}
       const getStyleWithSideEffect: Muix.TClassnames = (...rulesets/*all used rulesets*/) => {
@@ -52,15 +50,23 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
         rulesets.forEach(ruleset => {
           if (!ruleset) return
           //if (classesProp && ruleset.$name=='root') console.log('### BEFORE', rulesetResult)
-          deepMerges(true, rulesetResult, /*ruleset, used in Component render*/ruleset, /*modify it with used $overrides*/usedOverrides[ruleset.$name], /*force using classes component property, its rulesets cannot be overrided */classesProp && classesProp[ruleset.$name])
+          deepMerges(true, rulesetResult,
+            ruleset, //ruleset, used in Component render
+            usedOverrides[ruleset.$name], //modify it with used $overrides
+            classesProp && ruleset.$name && classesProp[ruleset.$name], //force using classes component property (it has highter priority)
+          )
           //if (classesProp && ruleset.$name == 'root') console.log('### AFTER', rulesetResult)
         })
         return rulesetResult
       }
 
-      this.newProps = { ...other, ...(window.isWeb ? web : native), theme, style: clearSystemProps(toPlatformRuleSet(style)), flip: typeof flip === 'boolean' ? flip : theme.direction === 'rtl', getStyleWithSideEffect } as Muix.CodeProps<R>
-      if (window.isWeb) this.newProps.onClick = onClickWeb || onClick
-      else this.newProps.onPress = onPressNative || onClick
+      const className = toPlatformRuleSet(classNamePropX as Muix.TRulesetX)
+      const flip = typeof flipProp === 'boolean' ? flipProp : theme.direction === 'rtl'
+
+      this.newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style)), className, flip, getStyleWithSideEffect } as Muix.CodeProps<R>
+
+      if (window.isWeb) this.newProps.onClick = ($web && ($web as any).onClick) || onClick
+      else this.newProps.onPress = ($native && ($native as any).onPress) || onClick
       
     }
 

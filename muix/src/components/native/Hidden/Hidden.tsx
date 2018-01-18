@@ -1,7 +1,14 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-export default class Hidden extends React.PureComponent<Muix.CodeProps<MuixHidden.Shape>> {
+import { withStyles } from 'muix-styles'
+import { sheet } from '../../common/Hidden/Hidden'
+
+class hidden extends React.PureComponent<Muix.CodeProps<MuixHidden.Shape>> {
   render() { return null }
 }
+
+const Hidden = withStyles<MuixHidden.Shape>(sheet, { name: 'MuiHidden' })(hidden)
+
+export default Hidden 
 

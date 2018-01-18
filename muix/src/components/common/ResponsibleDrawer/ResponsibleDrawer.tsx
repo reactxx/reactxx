@@ -21,7 +21,7 @@ export const sheet = sheetCreator<MuixResponsibleDrawer.Shape>(({ typographyX: t
     zIndex: 1,
     overflow: 'hidden',
   },
-  style: {},
+  
   appFrame: {
     position: 'relative',
     width: '100%',
@@ -89,9 +89,9 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<MuixResponsibleDra
 
     return <div className={rulesetToClassNames(classes.root)}>
       <div className={rulesetToClassNames(classes.appFrame)}>
-        <AppBar classNameInCode={classes.appBar} >
+        <AppBar classNamePropX={classes.appBar} >
           <Toolbar>
-            <IconButton color="contrast" onClick={this.handleDrawerToggle} classNameInCode={classes.navIconHide} > 
+            <IconButton color="contrast" onClick={this.handleDrawerToggle} classNamePropX={classes.navIconHide} > 
               <TextX>X</TextX>
               {/*<MenuIcon />*/}
             </IconButton>
@@ -105,14 +105,14 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<MuixResponsibleDra
             type="temporary"
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={this.state.mobileOpen}
-            classesInCode={{ paper: classes.drawerPaper }}
+            classes={{ paper: classes.drawerPaper }}
             onClose={this.handleDrawerToggle}
             ModalProps={{ keepMounted: true, /*Better open performance on mobile*/ }}>
             {drawer}
           </Drawer>
         </Hidden>
         <Hidden smDown implementation="css">
-          <Drawer type="permanent" open classesInCode={{ paper: classes.drawerPaper }}>{drawer}</Drawer>
+          <Drawer type="permanent" open classes={{ paper: classes.drawerPaper }}>{drawer}</Drawer>
         </Hidden>
         <div className={rulesetToClassNames(classes.content)}>
           <Typography noWrap>You think water moves fast? You should see ice.</Typography>

@@ -4,7 +4,7 @@ declare namespace MuixButtonBase {
 
   type Shape = Overwrite<Muix.DefaultEmptyShape, {
     common: Muix.ShapeViews<'root'>
-    native: Muix.ShapeViews<'style' | 'ripple'>
+    native: Muix.ShapeViews<'ripple'>
     props: Muix.ButtonBaseProps & Muix.TOnClickWeb
     propsNative: ReactN.TouchableOpacityProperties
     web: string

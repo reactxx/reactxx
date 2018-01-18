@@ -1,7 +1,13 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-export default class Divider extends React.PureComponent<Muix.CodeProps<MuixDivider.Shape>> {
+import { withStyles } from 'muix-styles'
+import { sheet } from '../../common/Divider/Divider'
+
+class divider extends React.PureComponent<Muix.CodeProps<MuixDivider.Shape>> {
   render() { return null }
 }
 
+const Divider = withStyles<MuixDivider.Shape>(sheet, { name: 'MuiDivider' })(divider)
+
+export default Divider 

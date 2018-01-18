@@ -36,7 +36,7 @@ const sheet = sheetCreator<testStyles.Shape>(({ palette, typographyX: typoX }) =
       }
     }
   },
-  style: {},
+  
   primary: {
     backgroundColor: palette.primary[500],
     $overrides: {
@@ -62,7 +62,6 @@ const testStyles: Muix.CodeSFC<testStyles.Shape> = props => {
     classes.root,
     primary === true && classes.primary,
     primary === false && classes.secondary,
-    classes.style,
   )
 
   const labelStyles = getStyleWithSideEffect(
@@ -71,8 +70,8 @@ const testStyles: Muix.CodeSFC<testStyles.Shape> = props => {
 
   const ch = React.Children.toArray(children)
 
-  return <ViewX classNameInCode={rootStyles} style={style}>
-    {ch.length == 1 && typeof ch[0] === 'string' ? <TextX classNameInCode={labelStyles}>{children}</TextX> : children}
+  return <ViewX className={rootStyles} style={style}>
+    {ch.length == 1 && typeof ch[0] === 'string' ? <TextX className={labelStyles}>{children}</TextX> : children}
   </ViewX>
 }
 //{ch.length == 1 && typeof ch[0] === 'string' ? <TextX className={labelStyles}>{children}</TextX> : children}

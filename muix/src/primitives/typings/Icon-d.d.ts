@@ -8,7 +8,7 @@
   }
 
   type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeTexts<'root' | 'style' | 'colorAccent' | 'colorAction' | 'colorContrast' | 'colorDisabled' | 'colorError' | 'colorPrimary' | 'colorInherit'>
+    common: Muix.ShapeTexts<'root' | 'colorAccent' | 'colorAction' | 'colorContrast' | 'colorDisabled' | 'colorError' | 'colorPrimary' | 'colorInherit'>
     style: ReactN.TextStyle
     props: IconProperties & Muix.TOnClickWeb
   }>

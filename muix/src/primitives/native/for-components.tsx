@@ -6,28 +6,28 @@ import { MaterialCommunityIcons as RNIcon, MaterialCommunityIconsProps } from '@
 import warning from 'warning'
 
 export const TypographyNative: React.SFC<Primitives.Typography> = props => {
-  const { style, classNameInCode, $noWrapStyle, $type, $native, children } = props
-  return <RNText style={[classNameInCode, style]} {...$noWrapStyle} {...$native} children={children} />
+  const { style, className, $noWrapStyle, $type, $native, children } = props
+  return <RNText style={[className, style]} {...$noWrapStyle} {...$native} children={children} />
 }
 
 export const ViewNative: React.SFC<Primitives.View> = props => {
-  const { style, classNameInCode, $native, children } = props
-  return <RNView style={[classNameInCode, style]} {...$native} children={children} />
+  const { style, className, $native, children } = props
+  return <RNView style={[className, style]} {...$native} children={children} />
 }
 
 export const TextNative: React.SFC<Primitives.Text> = props => {
-  const { style, classNameInCode, $native, children } = props
-  return <RNText style={[classNameInCode, style]} {...$native} children={children} />
+  const { style, className, $native, children } = props
+  return <RNText style={[className, style]} {...$native} children={children} />
 }
 
 export const ScrollViewNative: React.SFC<Primitives.ScrollView> = props => {
-  const { style, classNameInCode, $native, children, contentContainerStyle } = props
-  return <RNScrollView style={[classNameInCode, style]} {...$native} children={children} contentContainerStyle={contentContainerStyle as ReactN.ViewStyle} />
+  const { style, className, $native, children, contentContainerStyle } = props
+  return <RNScrollView style={[className, style]} {...$native} children={children} contentContainerStyle={contentContainerStyle as ReactN.ViewStyle} />
 }
 
 export const IconNative: React.SFC<Primitives.Icon> = props => {
-  const { style, classNameInCode, $native, data } = props
-  return <RNIcon name={data as MaterialCommunityIconsProps['name']} style={[classNameInCode, style]} {...$native} />
+  const { style, className, $native, data } = props
+  return <RNIcon name={data as MaterialCommunityIconsProps['name']} style={[className, style]} {...$native} />
 }
 
 export const IconX = IconNative as React.SFC<Primitives.IconX>

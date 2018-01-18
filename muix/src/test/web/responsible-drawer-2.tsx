@@ -98,7 +98,7 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<Shape>> {
     const { classes, theme } = this.props;
 
     const drawer = <ViewX>
-      <ViewX classNameInCode={classes.drawerHeader} >
+      <ViewX className={classes.drawerHeader} >
         <Hidden smDown mdUp>
           <IconButton onClick={this.handleTabletToggle}>x</IconButton>
         </Hidden>
@@ -110,8 +110,8 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<Shape>> {
     </ViewX>
 
 
-    return <ViewX classNameInCode={classes.root}>
-      <AppBar classNameInCode={classes.appBar}>
+    return <ViewX className={classes.root}>
+      <AppBar classNamePropX={classes.appBar}>
         <Toolbar>
           <Hidden smUp>
             <IconButton color="contrast" onClick={this.handleMobileToggle}>x</IconButton>
@@ -128,7 +128,7 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<Shape>> {
         <Drawer
           type="temporary"
           anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-          classesInCode={{ paper: classes.drawerPaper, }}
+          classes={{ paper: classes.drawerPaper, }}
           open={this.state.mobileOpen}
           onClose={this.handleMobileToggle}
           ModalProps={{
@@ -138,16 +138,16 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<Shape>> {
         </Drawer>
       </Hidden>
       <Hidden smDown mdUp>
-        <Drawer type="persistent" open={this.state.tabletOpen} onClose={this.handleTabletToggle} classesInCode={{ paper: classes.drawerPaper, }}>
+        <Drawer type="persistent" open={this.state.tabletOpen} onClose={this.handleTabletToggle} classes={{ paper: classes.drawerPaper, }}>
           {drawer}
         </Drawer>
       </Hidden>
       <Hidden mdDown>
-        <Drawer type="permanent" open classesInCode={{ paper: classes.drawerPaper, }}>
+        <Drawer type="permanent" open classes={{ paper: classes.drawerPaper, }}>
           {drawer}
         </Drawer>
       </Hidden>
-      <ViewX classNameInCode={classes.content}>
+      <ViewX className={classes.content}>
         <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
       </ViewX>
     </ViewX>

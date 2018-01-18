@@ -1,7 +1,7 @@
 ﻿declare namespace MuixResponsibleDrawer {
 
   type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeViews<'root' | 'style' | 'appFrame' | 'appBar' | 'navIconHide' | 'drawerHeader' | 'drawerPaper' | 'content'>
+    common: Muix.ShapeViews<'root' | 'appFrame' | 'appBar' | 'navIconHide' | 'drawerHeader' | 'drawerPaper' | 'content'>
     propsNative: {}
     propsWeb: {}
   }>

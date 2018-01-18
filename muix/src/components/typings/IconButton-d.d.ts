@@ -1,15 +1,15 @@
 ﻿declare namespace MuixIconButton {
 
   type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeViews<'root' | 'style'>
-    props: Partial<OmitFrom<Muix.IconButtonProps, 'classes' | 'style' | 'className'>>
+    common: Muix.ShapeViews<'root'>
+    props: Muix.IconButtonProps
   }>
 
 }
 
 declare namespace Muix {
   interface SheetsX {
-    MuixIconButton?: Muix.SheetXOrCreator<Shape>
+    MuiIconButton?: Muix.SheetXOrCreator<Shape>
   }
 }
 

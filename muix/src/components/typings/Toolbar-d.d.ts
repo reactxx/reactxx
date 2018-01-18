@@ -1,15 +1,15 @@
 ﻿declare namespace MuixToolbar {
 
   type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeViews<'root' | 'style'>
-    props: Partial<OmitFrom<Muix.ToolbarProps, 'classes' | 'style' | 'className'>>
+    common: Muix.ShapeViews<'root'>
+    props: Muix.ToolbarProps
   }>
 
 }
 
 declare namespace Muix {
   interface SheetsX {
-    MuixToolbar?: Muix.SheetXOrCreator<Shape>
+    MuiToolbar?: Muix.SheetXOrCreator<Shape>
   }
 }
 

@@ -34,7 +34,7 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
       MuiText: { root: { ...typoX.button, color: palette.text.primary, } },
     },
   },
-  style: {},
+  
   dense: {
     paddingTop: spacing.unit - 1,
     paddingBottom: spacing.unit - 1,
@@ -150,7 +150,6 @@ const button: Muix.CodeSFCNative<MuixButton.Shape> = (props, context) => {
     dense && classes.dense,
     !isFlat && disabled && classes.raisedDisable,
     isFlat && disabled && classes.disabled,
-    classes.style,
   ) as ReactN.ViewStyle
 
   //console.log('### viewStyle: ', viewStyle)

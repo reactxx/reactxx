@@ -1,15 +1,15 @@
 ﻿declare namespace MuixDivider {
 
   type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeViews<'root' | 'style'>
-    props: Partial<OmitFrom<Muix.DividerProps, 'classes' | 'style' | 'className'>>
+    common: Muix.ShapeViews<'root'>
+    props: Muix.DividerProps
     propsWeb: React.HTMLAttributes<HTMLHRElement>
   }>
 }
 
 declare namespace Muix {
   interface SheetsX {
-    MuixDivider?: Muix.SheetXOrCreator<Shape>
+    MuiDivider?: Muix.SheetXOrCreator<Shape>
   }
 }
 

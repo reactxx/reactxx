@@ -6,5 +6,5 @@ import { ViewX, TextX } from 'muix-primitives'
 export const sheet = sheetCreator<MuixDivider.Shape>(({ typographyX: typoX, spacing, breakpoints, mixins, palette }) => ({
   root: {
   },
-  style: {},
+  
 }))
