@@ -8,6 +8,7 @@ import { TypographyNativeX } from 'muix-primitives'
 import { sheetCreator, withStyles } from 'muix-styles'
 
 export const sheet = sheetCreator<MuixTypography.Shape>(({ typographyX: typoX, palette, spacing }) => ({
+  $animations: {},
   root: {
     margin: 0,
     $web: { display: 'block' }

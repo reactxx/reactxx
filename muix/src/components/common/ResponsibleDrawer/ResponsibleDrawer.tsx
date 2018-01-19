@@ -14,6 +14,7 @@ import Divider from 'muix-components/Divider/Divider'
 const drawerWidth = 240
 
 export const sheet = sheetCreator<MuixResponsibleDrawer.Shape>(({ typographyX: typoX, spacing, breakpoints, mixins, palette }) => ({
+  $animations: {},
   root: {
     width: '100%',
     //height: 430,
@@ -89,9 +90,9 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<MuixResponsibleDra
 
     return <div className={rulesetToClassNames(classes.root)}>
       <div className={rulesetToClassNames(classes.appFrame)}>
-        <AppBar classNamePropX={classes.appBar} >
+        <AppBar className={classes.appBar} >
           <Toolbar>
-            <IconButton color="contrast" onClick={this.handleDrawerToggle} classNamePropX={classes.navIconHide} > 
+            <IconButton color="contrast" onClick={this.handleDrawerToggle} className={classes.navIconHide} > 
               <TextX>X</TextX>
               {/*<MenuIcon />*/}
             </IconButton>

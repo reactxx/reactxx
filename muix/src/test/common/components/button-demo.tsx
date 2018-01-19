@@ -10,7 +10,7 @@ const theme = createMuiTheme({
     MuiButton: {
       raisedAccent: {
         backgroundColor: 'brown',
-        $web: { '&:hover': { backgroundColor: 'brown' } }
+        $web: { '&:hover': { backgroundColor: 'brown' } } as any
       }
     }
   })

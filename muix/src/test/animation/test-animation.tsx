@@ -6,80 +6,50 @@ import { withStyles, sheetCreator, AppContainer, MuiThemeProvider, } from 'muix-
 import { ScrollView, ViewX, TextX, } from 'muix-primitives'
 
 
-const sheet = sheetCreator<testStyles.Shape>(({ palette, typographyX: typoX }) => ({
-  root: {
-    minWidth: 150, margin: 10, padding: 10,
-    justifyContent: 'center', alignItems: 'center',
-    backgroundColor: palette.grey.A200,
-    $childOverrides: {
-      TestStyles: {
-        primary: {
-          backgroundColor: 'green',
-          $overrides: {
-            //the same as "label: {color: 'maroon'}"
-            label: {
-              $web: {
-                color: 'maroon'
-              },
-              $native: {
-                color: 'maroon'
-              }
-            }
-          }
+const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
+  $animations: {
+    root: {
+      anim1: {
+        opacity: [0, 1],
+        backgroundColor: ['green', 'red'],
+        transform: [
+          { perspective: [0, 0] }
+        ],
+        $native: {
+          transform: [
+            { translateX: [0, 200] },
+            { translateY: [0, 100] },
+            { scale: [20, 0, 1] }
+          ]
         },
-        secondary: {
-          backgroundColor: 'black',
-          $overrides: {
-            label: { color: 'pink' }
-          }
+        $web: {
+          transform: ['translate(0px, 0px) scale(20) skew(-20deg)', 'translate(200px, 100px) scale(0) skew(0)']
         },
-      }
-    }
-  },
-  
-  primary: {
-    backgroundColor: palette.primary[500],
-    $overrides: {
-      label: { color: 'yellow' }
-    }
+        $easing: transitions.easing.sharp,
+        $duration: transitions.duration.leavingScreen,
+        $delay: 1
+      },
+      anim2: {
 
-  },
-  secondary: {
-    backgroundColor: palette.secondary[500],
-    $overrides: {
-      label: { color: 'lightgray' }
+      },
     }
   },
-  label: {
-    color: palette.common.white
-  },
-  $animations: {}
 }))
 
-const testStyles: Muix.CodeSFC<testStyles.Shape> = props => {
+const testAnimation: Muix.CodeSFC<testAnimation.Shape> = props => {
   const { classes, getStyleWithSideEffect, theme, flip, primary, children, style, className, ...rest } = props
 
   const rootStyles = getStyleWithSideEffect( // getStyleWithSideEffect now knowns, which rulesets are actualy used. So it can use their $overrides and $childOverrides props
-    classes.root,
-    primary === true && classes.primary,
-    primary === false && classes.secondary,
     className,
+    classes.$animations.root.anim1
   )
 
-  const labelStyles = getStyleWithSideEffect(
-    classes.label,
-  )
-
-  const ch = React.Children.toArray(children)
-
-  return <ViewX className={rootStyles} style={style}>
-    {ch.length == 1 && typeof ch[0] === 'string' ? <TextX className={labelStyles}>{children}</TextX> : children}
-  </ViewX>
+  return null
 }
 //{ch.length == 1 && typeof ch[0] === 'string' ? <TextX className={labelStyles}>{children}</TextX> : children}
 
 
-const TestStyles = withStyles<testStyles.Shape>(sheet, { name: 'TestStyles' as any })(testStyles)
+const TestStyles = withStyles<testAnimation.Shape>(sheet, { name: 'TestStyles' as any })(testAnimation)
 
 const App: React.SFC = props => <AppContainer>
   <ScrollView classes={{ contentContainerStyle: { backgroundColor: 'yellow' } }}>

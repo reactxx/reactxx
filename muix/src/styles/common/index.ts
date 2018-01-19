@@ -47,8 +47,11 @@ export const clearSystemProps = obj => {
 //create platform specific sheet from cross platform sheet
 export const toPlatformSheetX = (sheet: Muix.PartialSheetX<Muix.Shape>, isNative: boolean) => {
   if (!sheet) return null
-  const res: Muix.Sheet<Muix.Shape> = {}
-  for (const p in sheet) res[p] = toPlatformRuleSetX(sheet[p], isNative)
+  const res: Muix.Sheet<Muix.Shape> = { $animations: undefined }
+  for (const p in sheet) {
+    if (p === '$animations') res[p] = toPlatformSheetX(sheet[p], isNative)
+    res[p] = toPlatformRuleSetX(sheet[p], isNative)
+  }
   return res
 }
 

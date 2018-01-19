@@ -32,6 +32,7 @@ type Shape = Overwrite<Muix.DefaultEmptyShape, {
 }>
 
 const styles = sheetCreator<Shape>(theme => ({
+  $animations: {},
   //const styles = theme => ({
   root: {
     width: '100%',
@@ -111,7 +112,7 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<Shape>> {
 
 
     return <ViewX className={classes.root}>
-      <AppBar classNamePropX={classes.appBar}>
+      <AppBar className={classes.appBar}>
         <Toolbar>
           <Hidden smUp>
             <IconButton color="contrast" onClick={this.handleMobileToggle}>x</IconButton>

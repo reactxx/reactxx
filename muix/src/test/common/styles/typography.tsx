@@ -33,7 +33,7 @@ const theme = createMuiTheme({
   }
 })
 
-const app2 = () => <Typography classNamePropX={{ fontWeight: '500', textDecorationLine: 'line-through', color: 'blue', marginTop:24 }}>TEXT</Typography>
+const app2 = () => <Typography className={{ fontWeight: '500', textDecorationLine: 'line-through', color: 'blue', marginTop:24 }}>TEXT</Typography>
 
 const app = () => <ScrollView>
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>noWrap</Typography>
@@ -74,7 +74,7 @@ const app = () => <ScrollView>
   <Typography type='display4'>display4</Typography>
   {/**/}
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>WITH CLASSES</Typography>
-  <Typography classNamePropX={{ fontWeight: '500', textDecorationLine: 'line-through', color: 'blue' }}>TEXT</Typography>
+  <Typography className={{ fontWeight: '500', textDecorationLine: 'line-through', color: 'blue' }}>TEXT</Typography>
   {/**/}
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>WITH THEME</Typography>
   <MuiThemeProvider theme={theme}>
@@ -85,10 +85,10 @@ const app = () => <ScrollView>
       <Typography type='display2' >display2</Typography>
       <Typography color='accent' >accent</Typography>
       <Typography color='accent' style={{ color: 'red' }} >accent red</Typography>
-      <Typography color='primary' classNamePropX={{ fontWeight: '500', textDecorationLine: 'line-through' }}>primary, WITH CLASSES</Typography>
+      <Typography color='primary' className={{ fontWeight: '500', textDecorationLine: 'line-through' }}>primary, WITH CLASSES</Typography>
     </View>
   </MuiThemeProvider>
 </ScrollView>
 
-//export default app
-export default app2
+export default app
+//export default app2

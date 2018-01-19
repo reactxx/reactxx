@@ -24,14 +24,14 @@ type webKeys<R extends Muix.Shape> = Muix.getWeb<R> | keyof Muix.getCommon<R>
 
 export const muiCompatible = <R extends Muix.Shape>(Component: React.ComponentType<Muix.getPropsWeb<R>>) => {
   const Styled: Muix.SFCX<R> = (props, context: Muix.MuiThemeContextValue) => {
-    const { classes: _classes, style, $web, $native, onClick, classNamePropX, ...rest } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb 
+    const { classes: _classes, style, $web, $native, onClick, className, ...rest } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb 
 
     const click = ($web && $web.onClick) || onClick
 
     const theme = context.theme || getDefaultTheme()
 
     const classes = sheetToClassSheet((classesToPlatformSheet(theme, _classes as Muix.ThemeValueOrCreator<Muix.PartialSheetX<R>>)) as Muix.SheetWeb<R>)
-    const webProps = { ...rest, ...$web, style: toPlatformRuleSet(style), classes, onClick: click, theme, className: rulesetToClassNames(classNamePropX as React.CSSProperties) } as Muix.getPropsWeb<R>
+    const webProps = { ...rest, ...$web, style: toPlatformRuleSet(style), classes, onClick: click, theme, className: rulesetToClassNames(className as React.CSSProperties) } as Muix.getPropsWeb<R>
     return <Component {...webProps} />
   }
   Styled.contextTypes = MuiThemeContextTypes

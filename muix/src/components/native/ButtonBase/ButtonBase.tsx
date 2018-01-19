@@ -6,6 +6,7 @@ import { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRecta
 import { sheetCreator, withStyles } from 'muix-styles'
 
 const sheet = sheetCreator<MuixButtonBase.Shape>(({ palette }) => ({
+  $animations: {},
   root: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -106,10 +107,10 @@ let t: Muix.CodePropsNative<MuixButtonBase.Shape>
 
 
 const buttonBase: Muix.CodeSFCNative<MuixButtonBase.Shape> = props => {
-  const { style, classes, getStyleWithSideEffect, ...rest } = props
-  const viewStyle = getStyleWithSideEffect(classes.root) as ReactN.ViewStyle
+  const { style, classes, getStyleWithSideEffect, className, ...rest } = props
+  const viewStyle = getStyleWithSideEffect(classes.root, className) as ReactN.ViewStyle
   const rippleStyle = getStyleWithSideEffect(classes.ripple) as ReactN.ViewStyle
-  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} getStyleWithSideEffect={null} {...rest} style={null}/>
+  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} className={null} getStyleWithSideEffect={null} {...rest} style={null}/>
 }
 
 const ButtonBase = withStyles<MuixButtonBase.Shape>(sheet, { name: 'MuiButtonBase' })(buttonBase)

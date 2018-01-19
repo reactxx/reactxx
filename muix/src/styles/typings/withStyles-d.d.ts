@@ -108,6 +108,7 @@
     //**** sheet constrains
     common: Record<string, CSSPropertiesNative> // native ruleset types for rulesets, which are used in both web and native component code
     native: Record<string, CSSPropertiesNative> // native ruleset types for rulesets, which are used only in native code
+    animation: Record<string, Record<string, CSSPropertiesNative>>
     web: string | null // ruleset names, which are used only in web code
     //**** native style constrain
     style: CSSPropertiesNative // for native: type of component style property (for web, style has always React.CSSProperties type)
@@ -149,6 +150,7 @@
 
   //**** Shape getters
   type getCommon<R extends Shape> = R['common']
+  type getAnimation<R extends Shape> = R['animation']
   type getNative<R extends Shape> = R['native']
   type getWeb<R extends Shape> = R['web']
 
@@ -163,6 +165,7 @@
     common: {}
     native: {}
     web: null
+    animation: {}
     props: {}
     style: ReactN.ViewStyle
     propsNative: ReactN.ViewProperties
@@ -186,8 +189,10 @@
   *******************************************/
 
   //**** Platform specific sheets
-  type SheetWeb<R extends Shape> = Record<(keyof getCommon<R>) | getWeb<R>, CSSPropertiesWeb & RulesetOverridesWeb<R>> // common and web 
-  type SheetNative<R extends Shape> = {[P in keyof getCommon<R>]: getCommon<R>[P] & RulesetOverridesNative<R>} & {[P in keyof getNative<R>]: getNative<R>[P] & RulesetOverridesNative<R>} //common and native
+  type SheetWeb<R extends Shape> = Record<(keyof getCommon<R>) | getWeb<R>, CSSPropertiesWeb & RulesetOverridesWeb<R>> & { $animations: SheetAnimationWeb<R> }
+  type SheetAnimationWeb<R extends Shape> = {[P in keyof getAnimation<R>]: AnimationsWeb<getAnimation<R>[P]>}
+  type SheetNative<R extends Shape> = {[P in keyof getCommon<R>]: getCommon<R>[P] & RulesetOverridesNative<R>} & {[P in keyof getNative<R>]: getNative<R>[P] & RulesetOverridesNative<R>} & { $animations: SheetAnimationNative<R> }
+  type SheetAnimationNative<R extends Shape> = {[P in keyof getAnimation<R>]: AnimationsNative<getAnimation<R>[P]>}
 
   //**** cross platform sheet for web and native
   //type SheetX<R extends Shape> = {
@@ -196,8 +201,8 @@
   //  web: SheetXWeb<R>
   //}
 
-  type SheetX<R extends Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>
-  type PartialSheetX<R extends Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>>
+  type SheetX<R extends Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & { $animations: SheetXAnimation<R> }
+  type PartialSheetX<R extends Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & SheetXAnimation<R>> & { $animations?: Partial<SheetXAnimation<R>> }
 
   type SheetXCreator<R extends Shape> = (par: ThemeNew) => SheetX<R>
   type SheetXOrCreator<R extends Shape> = ThemeValueOrCreator<PartialSheetX<R>>
@@ -212,14 +217,15 @@
   type SheetXCommon<R extends Shape> = {[P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R>}
   type SheetXNative<R extends Shape> = {[P in keyof getNative<R>]: getNative<R>[P] & RulesetOverridesX<R>}
   type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: CSSPropertiesWeb & RulesetOverridesX<R>}
+  type SheetXAnimation<R extends Shape> = {[P in keyof getAnimation<R>]: Animations<getAnimation<R>[P]>}
 
   type RulesetOverridesX<R extends Shape> = { $overrides?: PartialSheetX<R>; $childOverrides?: SheetsX; $name?: string }
   type RulesetOverrides<R extends Shape> = { $overrides?: Sheet<R>; $childOverrides?: Sheets; $name?: string }
   type RulesetOverridesWeb<R extends Shape> = { $overrides?: SheetWeb<R>; $childOverrides?: SheetsWeb; $name?: string }
   type RulesetOverridesNative<R extends Shape> = { $overrides?: SheetNative<R>; $childOverrides?: SheetsNative; $name?: string }
-  type TClassnames = (...rulesets: RulesetOverrides<Shape>[]) => CSSProperties
-  type TClassnamesNative = (...rulesets: Muix.RulesetOverridesNative<MuixView.Shape>[]) => Muix.CSSPropertiesNative
-  type TClassnamesWeb = (...rulesets: Muix.RulesetOverridesWeb<MuixView.Shape>[]) => Muix.CSSPropertiesWeb
+  type TClassnames = (...rulesets: (RulesetOverrides<Shape> & CSSProperties)[]) => CSSProperties
+  type TClassnamesNative = (...rulesets: (Muix.RulesetOverridesNative<MuixView.Shape> | ReactN.TextStyle)[]) => Muix.CSSPropertiesNative
+  type TClassnamesWeb = (...rulesets: (Muix.RulesetOverridesWeb<MuixView.Shape> & CSSPropertiesWeb)[]) => Muix.CSSPropertiesWeb
 
   /* SheetXCreator examples
   const sheet = theme => {
@@ -264,7 +270,7 @@
     $native?: Partial<getPropsNative<R>> //native specific style
     classes?: ThemeValueOrCreator<PartialSheetX<R>> | PartialSheetInCode<R>//cross platform sheet for web and native 
     //classes?: PartialSheetInCode<R> //cross platform sheet when using component in other component
-    classNamePropX?: CSSProperties | RulesetX<getStyle<R>>
+    className?: CSSProperties | RulesetX<getStyle<R>>
     //className?: CSSProperties
   }>>
   type PartialSheetInCode<R extends Shape> = PartialRecord<keyof getCommon<R> | getWeb<R> | keyof getNative<R>, CSSProperties> // common and web and native
@@ -275,11 +281,11 @@
   //**** Component's code (passed to withStyles)
 
   // component code for web
-  type CodePropsWeb<R extends Shape> = Overwrite<getProps<R> & getPropsWeb<R>, { className: CSSPropertiesWeb & RulesetOverrides<R>; classes: SheetWeb<R>; style: CSSPropertiesWeb; theme: Muix.ThemeNew; flip: boolean; getStyleWithSideEffect: Muix.TClassnamesWeb }>
+  type CodePropsWeb<R extends Shape> = Overwrite<getProps<R> & getPropsWeb<R>, { className: CSSPropertiesWeb; classes: SheetWeb<R>; style: CSSPropertiesWeb; theme: Muix.ThemeNew; flip: boolean; getStyleWithSideEffect: Muix.TClassnamesWeb }>
   type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
   // component code for native
-  type CodePropsNative<R extends Shape> = Overwrite<getProps<R> & getPropsNative<R>, { className: getStyle<R> & RulesetOverrides<R>; classes: SheetNative<R>; style: getStyle<R>; theme: Muix.ThemeNew; flip: boolean; getStyleWithSideEffect: Muix.TClassnamesNative }>
+  type CodePropsNative<R extends Shape> = Overwrite<getProps<R> & getPropsNative<R>, { className: getStyle<R>; classes: SheetNative<R>; style: getStyle<R>; theme: Muix.ThemeNew; flip: boolean; getStyleWithSideEffect: Muix.TClassnamesNative }>
   type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
   type CodeComponentNative<R extends Shape> = React.ComponentClass<CodePropsNative<R>>
 
@@ -287,7 +293,7 @@
   type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
 
   //some code for components could be shared for web and native
-  type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), { className: (CSSPropertiesWeb | getStyle<R>) & RulesetOverrides<R>, classes: Sheet<R>; style: CSSPropertiesWeb | getStyle<R>; theme: Muix.ThemeNew; flip: boolean; getStyleWithSideEffect: Muix.TClassnames}>
+  type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), { className: CSSPropertiesWeb | getStyle<R>, classes: Sheet<R>; style: CSSPropertiesWeb | getStyle<R>; theme: Muix.ThemeNew; flip: boolean; getStyleWithSideEffect: Muix.TClassnames}>
   type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
 

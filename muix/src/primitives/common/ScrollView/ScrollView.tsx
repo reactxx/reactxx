@@ -5,6 +5,7 @@ import { withStyles, sheetCreator } from 'muix-styles'
 import { ScrollViewX } from 'muix-primitives'
 
 export const sheet = sheetCreator<MuixScrollView.Shape>(() => ({
+  $animations: {},
   root: {},
   contentContainerStyle: {},
   

@@ -20,8 +20,18 @@ const plugins = {
 }
 
 const renderer = createRenderer(plugins)
-render(renderer)
 
+renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html
+  height: '100%',
+  width: '100%',
+  margin: 0,
+  padding: 0,
+  overflow: 'hidden',
+}, 'html, body, #content')
+renderer.renderStatic({fontFamily: 'Roboto'}, 'body')
+renderer.renderStatic({ display: 'flex', flexDirection: 'column', alignItems: 'stretch'}, '#content')
+
+render(renderer)
 
 //Converts ruleset to blank delimited atomic classes
 export const rulesetToClassNames = (ruleset: React.CSSProperties) => ruleset ? renderer.renderRule(() => ruleset, {}) : ''

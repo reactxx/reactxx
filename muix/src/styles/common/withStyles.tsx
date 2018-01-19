@@ -14,7 +14,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
     constructor(props: Muix.PropsX<R>, context: TContext) {
       super(props, context)
       const { flip: flipProp, name } = options
-      const { classes: classesPropX, style, $web, $native, onClick, classNamePropX, ...other } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb
+      const { classes: classesPropX, style, $web, $native, onClick, className: classesNamePropX, ...other } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb
 
       let theme = context.theme || getDefaultTheme()
 
@@ -60,7 +60,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
         return rulesetResult
       }
 
-      const className = toPlatformRuleSet(classNamePropX as Muix.TRulesetX)
+      const className = toPlatformRuleSet(classesNamePropX as Muix.TRulesetX)
       const flip = typeof flipProp === 'boolean' ? flipProp : theme.direction === 'rtl'
 
       this.newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style)), className, flip, getStyleWithSideEffect } as Muix.CodeProps<R>

@@ -48,7 +48,7 @@ export default function createTypography(palette: Muix.Palette, optionOrCreator:
     return optionX ? deepMerge(res, optionX) : res
   }
 
-  const sheetX: Record<string, Muix.TextStyleX> = {
+  const sheetX: Muix.PartialSheetX<MuixTypography.Shape> = {
     fontWeightLightNew,
     fontWeightRegularNew,
     fontWeightMediumNew,
@@ -63,7 +63,7 @@ export default function createTypography(palette: Muix.Palette, optionOrCreator:
     body1: getWebProps(fontWeightRegularNew, body1, fontSizesNative.body1, mui.body1),
     caption: getWebProps(fontWeightRegularNew, caption, fontSizesNative.caption, mui.caption),
     button: getWebProps(fontWeightMediumNew, button, fontSize, mui.button),
-  }
+  } as any
 
   const sheet = toPlatformSheet(sheetX)
 

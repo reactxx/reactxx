@@ -37,7 +37,7 @@ class AppRoot extends React.Component {
   render() {
     const { appIndex } = this.state
     const App = apps[appIndex].app
-    const root = <View style={{ flex: 1, paddingTop:24 }}>
+    const root = <View style={{ flex: 1, paddingTop: 24 }}>
       <MuiThemeProvider theme={theme}>
         <View classes={theme => ({ root: { flexDirection: 'row', flexWrap: 'wrap', backgroundColor: theme.palette.background.appBar, flexShrink: 0 } })}>
           {apps.map((app, idx) => <AppItem key={idx} idx={idx} active={idx === appIndex} appRoot={this} />)}
@@ -46,9 +46,9 @@ class AppRoot extends React.Component {
       <Typography type='display2' >{apps[appIndex].title}</Typography>
       <App />
     </View>
-    const root2 = <TypographyTest />
+    const root2 = <ResponsibleDrawer />
     return <AppContainer key={appIndex} themeOptions={{ overridesX: apps[appIndex].overridesNew }}>
-      {root2}
+      {root}
     </AppContainer>
   }
 }
