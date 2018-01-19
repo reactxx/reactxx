@@ -3,7 +3,7 @@
   type ClassKeyView = 'root'
 
   type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeScrollViews<'root' > & Muix.ShapeViews<'contentContainerStyle'>
+    common: Muix.ShapeScrollViews<'root'> & Muix.ShapeViews<'contentContainerStyle'>
     style: ReactN.ViewStyle
     props: { horizontal?: boolean } 
     propsWeb: React.HTMLAttributes<HTMLDivElement>

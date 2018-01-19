@@ -11,20 +11,27 @@ declare namespace Muix {
 
   type Animations<T extends Record<string, CSSPropertiesNative>> = {[P in keyof T]: Animation<T[P]>}
 
-  type Animation<T extends CSSPropertiesNative> = ToPairs<T, commonCSSPropertiesNames<T> & AnimatedPropsNative> & {
-    transform?: Array<TNativeTransform>
-    $native?: ToPairs<T, keyof T & AnimatedPropsNative> & { transform?: TNativeTransform[] }
-    $web?: ToPairs<CSSPropertiesWeb, AnimatedPropsWeb>
+  interface AnimationConfig {
     $easing?: string
     $duration?: number
     $delay?: number
   }
 
-  type AnimationsWeb<T extends Record<string, CSSPropertiesNative>> = {[P in keyof T]: AnimationWeb}
-  type AnimationsNative<T extends Record<string, CSSPropertiesNative>> = {[P in keyof T]: AnimationNative<T[P]>}
+  type Animation<T extends CSSPropertiesNative> = ToPairs<T, commonCSSPropertiesNames<T> & AnimatedPropsNative> & {
+    transform?: Array<TNativeTransform>
+    $native?: ToPairs<T, keyof T & AnimatedPropsNative> & { transform?: TNativeTransform[] }
+    $web?: ToPairs<CSSPropertiesWeb, AnimatedPropsWeb>
+  } & AnimationConfig
 
-  interface AnimationWeb { }
-  interface AnimationNative<T extends CSSPropertiesNative> { }
+  interface AnimationsDriver {
+  }
+
+  interface AnimationsWeb<T extends Record<string, CSSPropertiesNative>> extends AnimationsDriver {
+    className: {[P in keyof T]: string}
+  }
+  interface AnimationsNative<T extends Record<string, CSSPropertiesNative>> extends AnimationsDriver {
+    className: {[P in keyof T]: T[P]}
+  }
 
 }
 

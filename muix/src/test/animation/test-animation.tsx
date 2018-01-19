@@ -34,44 +34,48 @@ const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
       },
     }
   },
+  root: {}
 }))
 
 const testAnimation: Muix.CodeSFC<testAnimation.Shape> = props => {
-  const { classes, getStyleWithSideEffect, theme, flip, primary, children, style, className, ...rest } = props
+  const { classes, getStyleWithSideEffect, theme, flip, primary, children, style, className, getAnimations, ...rest } = props
 
-  const rootStyles = getStyleWithSideEffect( // getStyleWithSideEffect now knowns, which rulesets are actualy used. So it can use their $overrides and $childOverrides props
+  const animations = getAnimations()
+
+  const rootStyles = getStyleWithSideEffect( // getStyleWithSideEffect now knows, which rulesets are actualy used. So it can use their $overrides and $childOverrides props
+    classes.root,
     className,
-    classes.$animations.root.anim1
+    animations.root.className.anim1
   )
 
   return null
 }
 //{ch.length == 1 && typeof ch[0] === 'string' ? <TextX className={labelStyles}>{children}</TextX> : children}
+//let x: Muix.PartialSheetX<testAnimation.Shape>
 
 
-const TestStyles = withStyles<testAnimation.Shape>(sheet, { name: 'TestStyles' as any })(testAnimation)
+const TestAnimation = withStyles<testAnimation.Shape>(sheet, { name: 'TestAnimation' as any })(testAnimation)
 
 const App: React.SFC = props => <AppContainer>
-  <ScrollView classes={{ contentContainerStyle: { backgroundColor: 'yellow' } }}>
-    <TestStyles primary>BLUE/YELLOW</TestStyles>
-    <TestStyles primary={false}>RED/LIGHTGRAY</TestStyles>
-    <TestStyles>GRAY</TestStyles>
-    <TestStyles classes={theme => ({ root: { backgroundColor: theme.palette.grey.A100 } })}>
-      <TestStyles primary>GREEN/MAROON</TestStyles>
-      <TestStyles primary={false}>BLACK/PINK</TestStyles>
-      <TestStyles primary classes={theme => ({ label: { color: 'orange' } })}>GREEN/ORANGE</TestStyles>
-    </TestStyles>
+  <ScrollView classes={theme => ({ contentContainerStyle: { backgroundColor: 'yellow' } })}>
+    <TestAnimation primary>BLUE/YELLOW</TestAnimation>
+    <TestAnimation primary={false}>RED/LIGHTGRAY</TestAnimation>
+    <TestAnimation>GRAY</TestAnimation>
+    <TestAnimation classes={theme => ({ root: { backgroundColor: 'yellow' } } )}>
+      <TestAnimation primary>GREEN/MAROON</TestAnimation>
+      <TestAnimation primary={false}>BLACK/PINK</TestAnimation>
+    </TestAnimation>
   </ScrollView>
 </AppContainer>
 
 export default App
 /*
-    <TestStyles primary>BLUE/YELLOW</TestStyles>
-    <TestStyles primary={false}>RED/LIGHTGRAY</TestStyles>
-    <TestStyles>GRAY</TestStyles>
-    <TestStyles classes={theme => ({ root: { backgroundColor: theme.palette.grey.A100 } })}>
-      <TestStyles primary>GREEN/MAROON</TestStyles>
-      <TestStyles primary={false}>BLACK/PINK</TestStyles>
-      <TestStyles primary classes={theme => ({ label: { color: 'orange' } })}>GREEN/ORANGE</TestStyles>
-    </TestStyles>
+    <TestAnimation primary>BLUE/YELLOW</TestAnimation>
+    <TestAnimation primary={false}>RED/LIGHTGRAY</TestAnimation>
+    <TestAnimation>GRAY</TestAnimation>
+    <TestAnimation classes={theme => ({ root: { backgroundColor: theme.palette.grey.A100 } })}>
+      <TestAnimation primary>GREEN/MAROON</TestAnimation>
+      <TestAnimation primary={false}>BLACK/PINK</TestAnimation>
+      <TestAnimation primary classes={theme => ({ label: { color: 'orange' } })}>GREEN/ORANGE</TestAnimation>
+    </TestAnimation>
 */

@@ -29,7 +29,7 @@ declare namespace Muix {
     $sheetCache: Array<SheetCacheItem>
   }
 
-  type SheetCacheItem = { sheetOrCreator: Muix.SheetOrCreator<Muix.Shape>; fromTheme: Muix.Sheet<Muix.Shape> }
+  type SheetCacheItem = { sheetOrCreator: Muix.SheetOrCreator<Muix.Shape>; fromTheme: Muix.Sheet<Muix.Shape>; animations: any }
   type ShadowsNative = ReactN.ViewStyle[]
 
   type OverridesX = {
