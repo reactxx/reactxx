@@ -123,6 +123,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\animation\common\index.tsx" />
+    <TypeScriptCompile Include="src\animation\native\index.tsx" />
+    <TypeScriptCompile Include="src\animation\web\index.tsx" />
     <TypeScriptCompile Include="src\components\common\Divider\Divider.tsx" />
     <TypeScriptCompile Include="src\components\common\ResponsibleDrawer\ResponsibleDrawer.tsx" />
     <TypeScriptCompile Include="src\components\common\Drawer\Drawer.tsx" />
@@ -179,7 +182,7 @@
     <TypeScriptCompile Include="src\test\common\components\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\index.tsx" />
-    <TypeScriptCompile Include="src\test\animation\animation-d.d.ts" />
+    <TypeScriptCompile Include="src\animation\typings\animation.d.ts" />
     <TypeScriptCompile Include="src\test\native\animation.tsx" />
     <TypeScriptCompile Include="src\test\native\App.tsx" />
     <TypeScriptCompile Include="src\test\common\root.tsx" />

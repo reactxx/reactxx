@@ -108,7 +108,7 @@
     //**** sheet constrains
     common: Record<string, CSSPropertiesNative> // native ruleset types for rulesets, which are used in both web and native component code
     native: Record<string, CSSPropertiesNative> // native ruleset types for rulesets, which are used only in native code
-    animation: Record<string, Record<string, CSSPropertiesNative>>
+    animation: Animation.AnimationsShape
     web: string | null // ruleset names, which are used only in web code
     //**** native style constrain
     style: CSSPropertiesNative // for native: type of component style property (for web, style has always React.CSSProperties type)
@@ -199,8 +199,8 @@
   //  web: SheetXWeb<R>
   //}
 
-  type SheetX<R extends Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & { $animations?: SheetXAnimation<R> }
-  type PartialSheetX<R extends Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & { $animations?: Partial<SheetXAnimation<R>> }
+  type SheetX<R extends Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & { $animations?: Animation.AnimationsSheetX<getAnimation<R>> }
+  type PartialSheetX<R extends Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & { $animations?: Partial<Animation.AnimationsSheetX<getAnimation<R>>> }
 
   type SheetXCreator<R extends Shape> = (par: ThemeNew) => SheetX<R>
   type SheetXOrCreator<R extends Shape> = ThemeValueOrCreator<PartialSheetX<R>>
@@ -215,7 +215,6 @@
   type SheetXCommon<R extends Shape> = {[P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R>}
   type SheetXNative<R extends Shape> = {[P in keyof getNative<R>]: getNative<R>[P] & RulesetOverridesX<R>}
   type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: CSSPropertiesWeb & RulesetOverridesX<R>}
-  type SheetXAnimation<R extends Shape> = {[P in keyof getAnimation<R>]: Animations<getAnimation<R>[P]>}
 
   type RulesetOverridesX<R extends Shape> = { $overrides?: PartialSheetX<R>; $childOverrides?: SheetsX; $name?: string }
   type RulesetOverrides<R extends Shape> = { $overrides?: Sheet<R>; $childOverrides?: Sheets; $name?: string }
@@ -224,14 +223,6 @@
   type StyleWithSideEffect = (...rulesets: (RulesetOverrides<Shape> & (CSSProperties | string))[]) => CSSProperties
   type StyleWithSideEffectNative = (...rulesets: (RulesetOverridesNative<MuixView.Shape> | ReactN.TextStyle)[]) => CSSPropertiesNative
   type StyleWithSideEffectWeb = (...rulesets: (RulesetOverridesWeb<MuixView.Shape> & CSSPropertiesWeb)[]) => CSSPropertiesWeb
-
-  type SheetAnimationsWeb<R extends Shape> = {[P in keyof getAnimation<R>]: AnimationsWeb<getAnimation<R>[P]>}
-  type SheetAnimationsNative<R extends Shape> = {[P in keyof getAnimation<R>]: AnimationsNative<getAnimation<R>[P]>}
-  type SheetAnimations<R extends Shape> = SheetAnimationsWeb<R> | SheetAnimationsNative<R>
-
-  type GetAnimations<R extends Shape> = () => SheetAnimations<R>
-  type GetAnimationsWeb<R extends Shape> = () => SheetAnimationsWeb<R>
-  type GetAnimationsNative<R extends Shape> = () => SheetAnimationsNative<R>
 
   /* SheetXCreator examples
   const sheet = theme => {
@@ -257,7 +248,7 @@
   type SheetCreator<R extends Shape> = ThemeCreator<Sheet<R>>
 
   //type PartialSheetX<R extends Shape> = {[P in keyof SheetX<R>]?: Partial<SheetX<R>[P]>}
-  type Sheet<R extends Shape> = SheetWeb<R> | SheetNative<R>
+  type Sheet<R extends Shape> = (SheetWeb<R> | SheetNative<R>) & { $animations?: Animation.AnimationsSheetX<getAnimation<R>> }
   type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
 
   type ClassSheetWeb<R extends Shape> = {[P in keyof SheetWeb<R>]: string} //For web: rule-set is converted to css class names (single class for every rule)
@@ -287,11 +278,11 @@
   //**** Component's code (passed to withStyles)
 
   // component code for web
-  type CodePropsWeb<R extends Shape> = Overwrite<getProps<R> & getPropsWeb<R>, { className: CSSPropertiesWeb; classes: SheetWeb<R>; style: CSSPropertiesWeb; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffectWeb; getAnimations: GetAnimationsWeb<R> }>
+  type CodePropsWeb<R extends Shape> = Overwrite<getProps<R> & getPropsWeb<R>, { className: CSSPropertiesWeb; classes: SheetWeb<R>; style: CSSPropertiesWeb; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffectWeb; getAnimations: Animation.GetAnimationsWeb<getAnimation<R>> }>
   type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
   // component code for native
-  type CodePropsNative<R extends Shape> = Overwrite<getProps<R> & getPropsNative<R>, { className: getStyle<R>; classes: SheetNative<R>; style: getStyle<R>; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffectNative; getAnimations: GetAnimationsNative<R> }>
+  type CodePropsNative<R extends Shape> = Overwrite<getProps<R> & getPropsNative<R>, { className: getStyle<R>; classes: SheetNative<R>; style: getStyle<R>; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffectNative; getAnimations: Animation.GetAnimationsNative<getAnimation<R>> }>
   type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
   type CodeComponentNative<R extends Shape> = React.ComponentClass<CodePropsNative<R>>
 
@@ -299,7 +290,7 @@
   type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
 
   //some code for components could be shared for web and native
-  type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), { className: CSSPropertiesWeb | getStyle<R>, classes: Sheet<R>; style: CSSPropertiesWeb | getStyle<R>; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffect; getAnimations: GetAnimations<R>}>
+  type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), { className: CSSPropertiesWeb | getStyle<R>, classes: Sheet<R>; style: CSSPropertiesWeb | getStyle<R>; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffect; getAnimations: Animation.GetAnimations<getAnimation<R>>}>
   type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
 

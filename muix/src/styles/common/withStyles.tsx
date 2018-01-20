@@ -3,6 +3,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme, classesToPlatformSheet } from '../common/index'
 import { toPlatformRuleSet, clearSystemProps } from 'muix-styles'
 import warning from 'invariant'
+import { Animations } from 'muix-animation'
 
 const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, options: Muix.WithStylesOptionsNew) => (Component: Muix.CodeComponentType<R>) => {
 
@@ -21,7 +22,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       //caching aplyThemeToSheet result in actual theme (in its .$sheetCache prop)
       if (!theme.$sheetCache) theme.$sheetCache = []
       let cacheItem = theme.$sheetCache.find(it => it.sheetOrCreator === sheetOrCreator)
-      if (!cacheItem) theme.$sheetCache.push(cacheItem = aplyThemeToSheet(sheetOrCreator, theme, name))
+      if (!cacheItem) theme.$sheetCache.push(cacheItem = aplyThemeToSheet(sheetOrCreator, theme, name, this))
 
       //console.log('1', toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>))
 
@@ -94,13 +95,13 @@ export default withStyles
 type TContext = Muix.MuiThemeContextValue & Muix.MuiOverridesContext
 
 //apply theme to sheet AND merge it with theme.overrides
-const aplyThemeToSheet = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, theme: Muix.ThemeNew, name?: string) => {
+const aplyThemeToSheet = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, theme: Muix.ThemeNew, name: string, component:React.Component) => {
   const overrides = (theme.overrides && name && theme.overrides[name]) as Muix.Sheet<R>
   //console.log('###BEFORE', overrides)
-  const styles = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator) 
-  const res = overrides ? deepMerges(false, {}, styles, overrides) : styles //deepMerge only when needed
+  const styles = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator)
+  const res: Muix.Sheet<R> = overrides ? deepMerges(false, {}, styles, overrides) : styles //deepMerge only when needed
   //console.log('###AFTER', res.root)
-  return { sheetOrCreator, fromTheme: res, animations: null } as Muix.SheetCacheItem
+  return { sheetOrCreator, fromTheme: res, animations: new Animations(res.$animations, component) } as Muix.SheetCacheItem
 }
 
 // merge named values

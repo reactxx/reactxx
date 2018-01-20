@@ -7,9 +7,9 @@ import { ScrollView, ViewX, TextX, } from 'muix-primitives'
 
 
 const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
-  $animations: {
-    root: {
-      anim1: {
+  $animations: { //AnimationSheet
+    root: { //Animations
+      anim1: { //Animation
         opacity: [0, 1],
         backgroundColor: ['green', 'red'],
         transform: [
@@ -25,13 +25,13 @@ const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
         $web: {
           transform: ['translate(0px, 0px) scale(20) skew(-20deg)', 'translate(200px, 100px) scale(0) skew(0)']
         },
-        $easing: transitions.easing.sharp,
-        $duration: transitions.duration.leavingScreen,
-        $delay: 1
       },
       anim2: {
 
       },
+      $easing: transitions.easing.sharp,
+      $duration: transitions.duration.leavingScreen,
+      $delay: 1
     }
   },
   root: {}
@@ -45,7 +45,7 @@ const testAnimation: Muix.CodeSFC<testAnimation.Shape> = props => {
   const rootStyles = getStyleWithSideEffect( // getStyleWithSideEffect now knows, which rulesets are actualy used. So it can use their $overrides and $childOverrides props
     classes.root,
     className,
-    animations.root.className.anim1
+    animations.drivers.root.className.anim1 //.root.className.anim1
   )
 
   return null
