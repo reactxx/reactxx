@@ -33,7 +33,7 @@ export const toPlatformRuleSetX = (style: Muix.TRulesetX, isNative: boolean) => 
   if (!style) return null
   if (!style.$web && !style.$native && !style.$overrides && !style.$childOverrides) return style //optimalization
   const { $web, $native, $overrides, $childOverrides, ...rest } = style
-  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheetX($overrides, isNative), $childOverrides: getOverridesX(null, $childOverrides) } 
+  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheetX($overrides, isNative), $childOverrides: getOverridesX(null, $childOverrides) }
   if (!res.$overrides) delete res.$overrides; if (!res.$childOverrides) delete res.$childOverrides //remove NULL or UNDEFINED
   return res as Muix.CSSProperties
 }
@@ -48,11 +48,15 @@ export const clearSystemProps = obj => {
 
 //create platform specific sheet from cross platform sheet
 export const toPlatformSheetX = (sheet: Muix.PartialSheetX<Muix.Shape>, isNative: boolean) => {
-  if (!sheet) return null
-  const res: Muix.Sheet<Muix.Shape> = { $animations: undefined }
+  if (typeof sheet !== 'object') return sheet
+  const res: Muix.Sheet<Muix.Shape> = { }
   for (const p in sheet) {
-    if (p === '$animations') res[p] = toPlatformSheetX(sheet[p], isNative)
-    res[p] = toPlatformRuleSetX(sheet[p], isNative)
+    if (p === '$animations') {
+      const animSrc = sheet[p]
+      const animDest = res[p] = {}
+      for (const pp in animSrc) animDest[pp] = toPlatformSheetX(animSrc[pp], isNative)
+    } else
+      res[p] = toPlatformRuleSetX(sheet[p], isNative)
   }
   return res
 }

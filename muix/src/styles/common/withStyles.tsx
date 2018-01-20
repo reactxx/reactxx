@@ -1,7 +1,7 @@
 import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme, classesToPlatformSheet } from '../common/index'
-import { toPlatformRuleSet, clearSystemProps } from 'muix-styles'
+import { toPlatformRuleSet, toPlatformSheet, clearSystemProps } from 'muix-styles'
 import warning from 'invariant'
 import { Animations } from 'muix-animation'
 
@@ -11,6 +11,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
     newProps: Muix.CodeProps<R>
     usedChildOverrides: Muix.Sheets = {}
     codeClasses: Muix.Sheet<R>
+    animations: Animation.Animations<{}>
 
     constructor(props: Muix.PropsX<R>, context: TContext) {
       super(props, context)
@@ -22,7 +23,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       //caching aplyThemeToSheet result in actual theme (in its .$sheetCache prop)
       if (!theme.$sheetCache) theme.$sheetCache = []
       let cacheItem = theme.$sheetCache.find(it => it.sheetOrCreator === sheetOrCreator)
-      if (!cacheItem) theme.$sheetCache.push(cacheItem = aplyThemeToSheet(sheetOrCreator, theme, name, this))
+      if (!cacheItem) theme.$sheetCache.push(cacheItem = aplyThemeToSheet(sheetOrCreator, theme, name))
 
       //console.log('1', toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>))
 
@@ -62,10 +63,12 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
         return rulesetResult
       }
 
+      const getAnimations = () => this.animations ? this.animations : this.animations = new Animations(cacheItem.fromTheme.$animations, this)
+
       const className = toPlatformRuleSet(classesNamePropX as Muix.TRulesetX)
       const flip = typeof flipProp === 'boolean' ? flipProp : theme.direction === 'rtl'
 
-      this.newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style)), className, flip, getStyleWithSideEffect, getAnimations: () => cacheItem.animations } as Muix.CodeProps<R>
+      this.newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style)), className, flip, getStyleWithSideEffect, getAnimations } as Muix.CodeProps<R>
 
       if (window.isWeb) this.newProps.onClick = ($web && ($web as any).onClick) || onClick
       else this.newProps.onPress = ($native && ($native as any).onPress) || onClick
@@ -95,13 +98,13 @@ export default withStyles
 type TContext = Muix.MuiThemeContextValue & Muix.MuiOverridesContext
 
 //apply theme to sheet AND merge it with theme.overrides
-const aplyThemeToSheet = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, theme: Muix.ThemeNew, name: string, component:React.Component) => {
+const aplyThemeToSheet = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, theme: Muix.ThemeNew, name: string) => {
   const overrides = (theme.overrides && name && theme.overrides[name]) as Muix.Sheet<R>
   //console.log('###BEFORE', overrides)
   const styles = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator)
   const res: Muix.Sheet<R> = overrides ? deepMerges(false, {}, styles, overrides) : styles //deepMerge only when needed
   //console.log('###AFTER', res.root)
-  return { sheetOrCreator, fromTheme: res, animations: new Animations(res.$animations, component) } as Muix.SheetCacheItem
+  return { sheetOrCreator, fromTheme: res } as Muix.SheetCacheItem
 }
 
 // merge named values

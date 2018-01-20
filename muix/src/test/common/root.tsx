@@ -8,6 +8,7 @@ import ButtonTest from './components/button'
 import ResponsibleDrawer from './components/responsible-drawer'
 import Shadows from './shadows/index'
 import ComponentX from './styles/component-x'
+import Animation from './animation/test-animation'
 import ButtonDemo, { overridesNew } from './components/button-demo'
 
 import { ScrollView, View, Text, Typography } from 'muix-primitives'
@@ -15,6 +16,7 @@ import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 import Button from 'muix-components/Button/Button'
 
 const apps: { title: string; app: React.ComponentType, overridesNew?: Muix.ThemeValueOrCreator<Muix.OverridesX> }[] = [
+  { title: 'Animation', app: Animation },
   { title: 'ResponsibleDrawer', app: ResponsibleDrawer },
   { title: 'Typography', app: TypographyTest },
   { title: 'ButtonDemo', app: ButtonDemo, overridesNew },
@@ -46,9 +48,9 @@ class AppRoot extends React.Component {
       <Typography type='display2' >{apps[appIndex].title}</Typography>
       <App />
     </View>
-    const root2 = <ResponsibleDrawer />
+    const root2 = <Animation />
     return <AppContainer key={appIndex} themeOptions={{ overridesX: apps[appIndex].overridesNew }}>
-      {root}
+      {root2}
     </AppContainer>
   }
 }

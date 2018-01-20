@@ -1,10 +1,9 @@
 declare namespace testAnimation {
   type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeTexts<'root'>
+    common: Muix.ShapeTexts<'root' | 'drawer'>
     animation: {
-      root: Muix.ShapeViews<'anim1'> & Muix.ShapeTexts<'anim2'>
+      animDrawer: Muix.ShapeViews<'slide'> & Muix.ShapeTexts<'opacity'>
     }
-    props: { primary?: boolean }
   }>
 }
 

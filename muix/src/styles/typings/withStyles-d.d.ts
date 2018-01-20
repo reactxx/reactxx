@@ -199,8 +199,8 @@
   //  web: SheetXWeb<R>
   //}
 
-  type SheetX<R extends Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & { $animations?: Animation.AnimationsSheetX<getAnimation<R>> }
-  type PartialSheetX<R extends Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & { $animations?: Partial<Animation.AnimationsSheetX<getAnimation<R>>> }
+  type SheetX<R extends Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & { $animations?: Animation.AnimationsX<getAnimation<R>> }
+  type PartialSheetX<R extends Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & { $animations?: Partial<Animation.AnimationsX<getAnimation<R>>> }
 
   type SheetXCreator<R extends Shape> = (par: ThemeNew) => SheetX<R>
   type SheetXOrCreator<R extends Shape> = ThemeValueOrCreator<PartialSheetX<R>>
@@ -220,7 +220,7 @@
   type RulesetOverrides<R extends Shape> = { $overrides?: Sheet<R>; $childOverrides?: Sheets; $name?: string }
   type RulesetOverridesWeb<R extends Shape> = { $overrides?: SheetWeb<R>; $childOverrides?: SheetsWeb; $name?: string }
   type RulesetOverridesNative<R extends Shape> = { $overrides?: SheetNative<R>; $childOverrides?: SheetsNative; $name?: string }
-  type StyleWithSideEffect = (...rulesets: (RulesetOverrides<Shape> & (CSSProperties | string))[]) => CSSProperties
+  type StyleWithSideEffect = (...rulesets: (RulesetOverrides<Shape> & CSSProperties)[]) => CSSProperties
   type StyleWithSideEffectNative = (...rulesets: (RulesetOverridesNative<MuixView.Shape> | ReactN.TextStyle)[]) => CSSPropertiesNative
   type StyleWithSideEffectWeb = (...rulesets: (RulesetOverridesWeb<MuixView.Shape> & CSSPropertiesWeb)[]) => CSSPropertiesWeb
 
@@ -248,7 +248,7 @@
   type SheetCreator<R extends Shape> = ThemeCreator<Sheet<R>>
 
   //type PartialSheetX<R extends Shape> = {[P in keyof SheetX<R>]?: Partial<SheetX<R>[P]>}
-  type Sheet<R extends Shape> = (SheetWeb<R> | SheetNative<R>) & { $animations?: Animation.AnimationsSheetX<getAnimation<R>> }
+  type Sheet<R extends Shape> = (SheetWeb<R> | SheetNative<R>) & { $animations?: Animation.AnimationsX<getAnimation<R>> }
   type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
 
   type ClassSheetWeb<R extends Shape> = {[P in keyof SheetWeb<R>]: string} //For web: rule-set is converted to css class names (single class for every rule)

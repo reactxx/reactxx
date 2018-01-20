@@ -175,9 +175,8 @@
     <TypeScriptCompile Include="src\styles\common\utils.ts" />
     <TypeScriptCompile Include="src\styles\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\styles\web\fela.tsx" />
-    <TypeScriptCompile Include="src\test\animation\animation.ts" />
-    <TypeScriptCompile Include="src\test\animation\test-animation.tsx" />
-    <TypeScriptCompile Include="src\test\animation\test-animation-d.d.ts" />
+    <TypeScriptCompile Include="src\test\common\animation\test-animation.tsx" />
+    <TypeScriptCompile Include="src\test\common\animation\test-animation-d.d.ts" />
     <TypeScriptCompile Include="src\test\common\components\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\test\common\components\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />
