@@ -75,7 +75,7 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<MuixResponsibleDra
 
   render() {
 
-    const { classes, theme, getStyleWithSideEffect } = this.props
+    const { classes, theme, getStyleWithSideEffect, getAnimations } = this.props
 
     const drawer = <div>
       <div className={rulesetToClassNames(classes.drawerHeader)}>

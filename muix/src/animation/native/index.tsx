@@ -18,7 +18,7 @@ export class AnimationDriver<T extends Animation.AnimationShape> extends Animati
         transformPairs.forEach(pair => transform.push(animatedRuleset(pair, this.value)))
       }
     }
-    this.config = { delay: $delay, duration: $duration, easing: $easing, toValue: null }
+    this.config = { delay: $delay, duration: $duration, toValue: null }
   }
   value: ReactN.Animated.Value
   config: Animated.TimingAnimationConfig

@@ -8,6 +8,7 @@ import { Animations } from 'muix-animation'
 const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, options: Muix.WithStylesOptionsNew) => (Component: Muix.CodeComponentType<R>) => {
 
   class Styled extends React.PureComponent<Muix.PropsX<R>> {
+  //class Styled extends React.Component<Muix.PropsX<R>> {
     newProps: Muix.CodeProps<R>
     usedChildOverrides: Muix.Sheets = {}
     codeClasses: Muix.Sheet<R>
@@ -73,6 +74,10 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       if (window.isWeb) this.newProps.onClick = ($web && ($web as any).onClick) || onClick
       else this.newProps.onPress = ($native && ($native as any).onPress) || onClick
       
+    }
+
+    componentWillReceiveProps(oldProp, newProp) {
+      if (oldProp==newProp) return
     }
 
     getChildContext() { return { childOverrides: this.usedChildOverrides /*usedChildOverrides is modified during Component render (where getStyleWithSideEffect is called)*/ } }

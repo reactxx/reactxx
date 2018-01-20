@@ -17,16 +17,15 @@ export abstract class AnimationLow<T extends Animation.AnimationShape> implement
     this.opened = sheet.$opened ? 1 : 0
   }
   opened: 0 | 1 = 0
-  open() {
-    if (this.opened) return
-    this.opened = 1
-    this.doOpen(true)
+  set(isOpen: boolean) {
+    if (!!isOpen === !!this.opened) return
+    this.opened = isOpen ? 1 : 0
+    if (isOpen) this.open(); else this.close()
+    this.doOpen(isOpen)
   }
-  close() {
-    if (!this.opened) return
-    this.opened = 0
-    this.doOpen(false)
-  }
+  toggle() { this.set(!this.opened) }
+  open() { this.set(true) }
+  close() { this.set(false) }
   className: Animation.Sheet<T>
   abstract doOpen(opened: boolean) //platform specific action: forceUpdate for web, Animated.value.setValue for native
 }

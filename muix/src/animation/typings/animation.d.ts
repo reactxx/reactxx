@@ -3,7 +3,7 @@
 declare namespace Animation {
 
   type AnimatedPropsNative = 'paddingLeft' | 'paddingTop' | 'opacity'
-  type AnimatedPropsWeb = 'marginBottom' | 'transform'
+  type AnimatedPropsWeb = 'marginBottom' | 'transform' //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
 
   type ToPairs<T, K extends keyof T = keyof T> = {[P in K]?: [T[P], T[P]]}
 
@@ -39,8 +39,10 @@ declare namespace Animation {
 
   interface Animation<T extends AnimationShape> {
     opened?: 0 | 1
-    open()
+    open() 
     close()
+    set(isOpen: boolean)
+    toggle()
     className: Sheet<T>
   }
 

@@ -107,10 +107,10 @@ let t: Muix.CodePropsNative<MuixButtonBase.Shape>
 
 
 const buttonBase: Muix.CodeSFCNative<MuixButtonBase.Shape> = props => {
-  const { style, classes, getStyleWithSideEffect, className, ...rest } = props
+  const { style, classes, getStyleWithSideEffect, className, getAnimations, ...rest } = props
   const viewStyle = getStyleWithSideEffect(classes.root, className) as ReactN.ViewStyle
   const rippleStyle = getStyleWithSideEffect(classes.ripple) as ReactN.ViewStyle
-  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} className={null} getStyleWithSideEffect={null} {...rest} style={null}/>
+  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} className={null} getStyleWithSideEffect={null} getAnimations={null} {...rest} style={null}/>
 }
 
 const ButtonBase = withStyles<MuixButtonBase.Shape>(sheet, { name: 'MuiButtonBase' })(buttonBase)

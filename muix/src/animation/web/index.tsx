@@ -5,14 +5,19 @@ export { Animations } from '../common/index'
 export class AnimationDriver<T extends Animation.AnimationShape> extends AnimationLow<T> implements Animation.AnimationWeb<T> {
   constructor(sheet: Animation.AnimationX<T>, public owner: Animations<{}>) {
     super(sheet, owner)
-    const rulesets0 = {}, rulesets1 = {}
-    this.bothClassName = [{} as any, {} as any]
     const { $delay, $duration, $easing, $opened, ...rest } = sheet as Animation.AnimationX<{}>
+    const config = {
+      transitionDuration: `${$duration || 1000}ms`,
+      transitionTimingFunction: $easing || 'ease-in',
+      transitionDelay: `${$delay || 0}ms`,
+    }
+    //const rulesets0 = { ...config }, rulesets1 = { ...config}
+    this.bothClassName = [{} as any, {} as any]
     for (const propsName in rest) {
       if (propsName.startsWith('$')) continue
       const pairs: Animation.RuleSetX<ReactN.TextProperties> = rest[propsName]
       const transformPairs = pairs.transform
-      const ruleset0: Muix.CSSPropertiesWeb = {}, ruleset1: Muix.CSSPropertiesWeb = {}
+      const ruleset0: Muix.CSSPropertiesWeb = { }, ruleset1: Muix.CSSPropertiesWeb = { }
       animatedRuleset(pairs, ruleset0, ruleset1, false, transformPairs)
       if (transformPairs) {
         let transform0 = '', transform1 = ''
@@ -30,9 +35,12 @@ export class AnimationDriver<T extends Animation.AnimationShape> extends Animati
         ruleset0['transform'] = transform0
         ruleset1['transform'] = transform1
       }
-      this.bothClassName[0][propsName] = rulesets0
-      this.bothClassName[1][propsName] = rulesets1
+      const transitionProperty = Object.keys(ruleset0).join(', ')
+      this.bothClassName[0][propsName] = { ...ruleset0, ...config, transitionProperty }
+      this.bothClassName[1][propsName] = { ...ruleset1, ...config, transitionProperty }
     }
+    //const x = JSON.stringify(this.bothClassName, null, 2)
+    //debugger
     this.className = this.bothClassName[$opened ? 1 : 0]
   }
   className: Animation.SheetWeb<T>
@@ -49,8 +57,8 @@ const animatedRuleset = (ruleset, r0, r1, inTransform: boolean, ignoredProp?) =>
     const pair: Animation.Pair = ruleset[propName]
     if (pair === ignoredProp) continue
     if (inTransform) {
-      r0.value = `${propName}(${pair[0]})`
-      r1.value = `${propName}(${pair[1]})`
+      r0.value = `${propName}(${pair[0]}px)`
+      r1.value = `${propName}(${pair[1]}px)`
     } else {
       r0[propName] = pair[0]
       r1[propName] = pair[1]
