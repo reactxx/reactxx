@@ -57,9 +57,7 @@ const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
 
 class testAnimation extends React.Component<Muix.CodeProps<testAnimation.Shape>> {
   render() {
-    const { classes, getStyleWithSideEffect, theme, flip, children, style, className, getAnimations, ...rest } = this.props
-
-    const animations = getAnimations()
+    const { classes, getStyleWithSideEffect, theme, flip, children, style, className, animations, ...rest } = this.props
 
     const rootStyles = getStyleWithSideEffect( // getStyleWithSideEffect now knows, which rulesets are actualy used. So it can use their $overrides and $childOverrides props
       classes.root,
@@ -71,10 +69,10 @@ class testAnimation extends React.Component<Muix.CodeProps<testAnimation.Shape>>
       animations.drivers.animDrawer.className.slide //.root.className.anim1
     ) as ReactN.ViewStyle
 
-    return <div key={1} style={rootStyles}>
-      <div key={2} style={{ position: 'absolute', right: 0, width: 300, backgroundColor: 'yellow' }} onClick={() => animations.drivers.animDrawer.toggle()}>DO DRAWER</div>
-      <div key={3} style={drawerStyles}/>
-    </div>
+    return <View key={1} style={rootStyles}>
+      <Text key={2} style={{ position: 'absolute', right: 0, width: 300, backgroundColor: 'yellow' }} onClick={() => animations.drivers.animDrawer.toggle()}>DO DRAWER</Text>
+      <View key={3} style={drawerStyles}/>
+    </View>
   }
 }
 let count = 0 
@@ -89,13 +87,3 @@ const App: React.SFC = props => <View style={{ flex: 1 }}>
 </View>
 
 export default App
-/*
-    <TestAnimation primary>BLUE/YELLOW</TestAnimation>
-    <TestAnimation primary={false}>RED/LIGHTGRAY</TestAnimation>
-    <TestAnimation>GRAY</TestAnimation>
-    <TestAnimation classes={theme => ({ root: { backgroundColor: theme.palette.grey.A100 } })}>
-      <TestAnimation primary>GREEN/MAROON</TestAnimation>
-      <TestAnimation primary={false}>BLACK/PINK</TestAnimation>
-      <TestAnimation primary classes={theme => ({ label: { color: 'orange' } })}>GREEN/ORANGE</TestAnimation>
-    </TestAnimation>
-*/

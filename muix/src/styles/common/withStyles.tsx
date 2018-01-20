@@ -8,83 +8,73 @@ import { Animations } from 'muix-animation'
 const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, options: Muix.WithStylesOptionsNew) => (Component: Muix.CodeComponentType<R>) => {
 
   class Styled extends React.PureComponent<Muix.PropsX<R>> {
-  //class Styled extends React.Component<Muix.PropsX<R>> {
-    newProps: Muix.CodeProps<R>
     usedChildOverrides: Muix.Sheets = {}
     codeClasses: Muix.Sheet<R>
     animations: Animation.Animations<{}>
+    theme: Muix.ThemeNew
+    cacheItem: Muix.SheetCacheItem
 
     constructor(props: Muix.PropsX<R>, context: TContext) {
       super(props, context)
-      const { flip: flipProp, name } = options
-      const { classes: classesPropX, style, $web, $native, onClick, className: classesNamePropX, ...other } = props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb
 
-      let theme = context.theme || getDefaultTheme()
+      const theme = this.theme = context.theme || getDefaultTheme()
 
-      //caching aplyThemeToSheet result in actual theme (in its .$sheetCache prop)
+      //*** caching aplyThemeToSheet result in actual theme (in its .$sheetCache prop)
       if (!theme.$sheetCache) theme.$sheetCache = []
       let cacheItem = theme.$sheetCache.find(it => it.sheetOrCreator === sheetOrCreator)
       if (!cacheItem) theme.$sheetCache.push(cacheItem = aplyThemeToSheet(sheetOrCreator, theme, name))
+      this.cacheItem = cacheItem
 
-      //console.log('1', toPlatformSheet({ common, native: classesNative, web: classesWeb } as Mui.PartialSheetX<R>))
-
-      //console.log(name, 'context.childOverrides', context.childOverrides)
+      //*** apply childOverrides from context
       const fromParentContext = context.childOverrides && context.childOverrides[options.name]
-      //console.log('fromParentContext: ',fromParentContext)
       this.codeClasses = fromParentContext ? deepMerges(false, {}, cacheItem.fromTheme, fromParentContext) : cacheItem.fromTheme // modify static sheet 
-
-      //console.log('cacheItem.fromTheme: ',cacheItem.fromTheme)
       for (const p in this.codeClasses) this.codeClasses[p].$name = p // assign name to ruleSets. $name is used in getStyleWithSideEffect to recognize used rulesets
 
-      // Could be called in <Component> render method to compute component styles. Side effects:
-      // - use sheet..$overrides to modify self sheet
-      // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
-      const classesProp = classesToPlatformSheet(theme, classesPropX as Muix.ThemeValueOrCreator<Muix.PartialSheetX<R>>)
-      //if (classesProp) console.log('### classesProp', classesProp)
-      const usedOverrides = {}
-      const getStyleWithSideEffect: Muix.StyleWithSideEffect = (...rulesets/*all used rulesets*/) => {
-        //console.log('getStyleWithSideEffect', rulesets)
-        rulesets.forEach(ruleset => { // acumulate $overrides and $childOverrides
-          if (!ruleset) return
-          mergeOverride(usedOverrides, ruleset.$overrides)
-          mergeOverride(this.usedChildOverrides, ruleset.$childOverrides) //modify react context for 
-        })
-        //console.log('this.usedChildOverrides', this.usedChildOverrides)
-        const rulesetResult: typeof rulesets[0] = {}
-        rulesets.forEach(ruleset => {
-          if (!ruleset) return
-          //if (classesProp && ruleset.$name=='root') console.log('### BEFORE', rulesetResult)
-          deepMerges(true, rulesetResult,
-            ruleset, //ruleset, used in Component render
-            usedOverrides[ruleset.$name], //modify it with used $overrides
-            classesProp && ruleset.$name && classesProp[ruleset.$name], //force using classes component property (it has highter priority)
-          )
-          //if (classesProp && ruleset.$name == 'root') console.log('### AFTER', rulesetResult)
-        })
-        return rulesetResult
-      }
-
-      const getAnimations = () => this.animations ? this.animations : this.animations = new Animations(cacheItem.fromTheme.$animations, this)
-
-      const className = toPlatformRuleSet(classesNamePropX as Muix.TRulesetX)
-      const flip = typeof flipProp === 'boolean' ? flipProp : theme.direction === 'rtl'
-
-      this.newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style)), className, flip, getStyleWithSideEffect, getAnimations } as Muix.CodeProps<R>
-
-      if (window.isWeb) this.newProps.onClick = ($web && ($web as any).onClick) || onClick
-      else this.newProps.onPress = ($native && ($native as any).onPress) || onClick
-      
-    }
-
-    componentWillReceiveProps(oldProp, newProp) {
-      if (oldProp==newProp) return
+      //*** init animations
+      this.animations = new Animations(cacheItem.fromTheme.$animations, this)
     }
 
     getChildContext() { return { childOverrides: this.usedChildOverrides /*usedChildOverrides is modified during Component render (where getStyleWithSideEffect is called)*/ } }
 
     render() {
-      this.newProps.classes = this.codeClasses
-      return <Component {...this.newProps } />
+      const { flip: flipProp, name } = options
+      const { theme, cacheItem, animations } = this
+      const { classes: classesPropX, style, $web, $native, onClick, className: classesNamePropX, ...other } = this.props as Muix.PropsX<Muix.Shape> & Muix.TOnClickWeb
+
+      //***getStyleWithSideEffect
+      // Could be called in <Component> render method to compute component styles. Side effects:
+      // - use sheet..$overrides to modify self sheet
+      // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
+      const classesProp = classesToPlatformSheet(theme, classesPropX as Muix.ThemeValueOrCreator<Muix.PartialSheetX<R>>)
+      const usedOverrides = {}
+      const getStyleWithSideEffect: Muix.StyleWithSideEffect = (...rulesets/*all used rulesets*/) => {
+        rulesets.forEach(ruleset => { // acumulate $overrides and $childOverrides
+          if (!ruleset) return
+          mergeOverride(usedOverrides, ruleset.$overrides)
+          mergeOverride(this.usedChildOverrides, ruleset.$childOverrides) //modify react context for 
+        })
+        //apply used $overrides ans classes prop
+        const rulesetResult: typeof rulesets[0] = {}
+        rulesets.forEach(ruleset => {
+          if (!ruleset) return
+          deepMerges(true, rulesetResult,
+            ruleset, //ruleset, used in Component render
+            usedOverrides[ruleset.$name], //modify it with used $overrides
+            classesProp && ruleset.$name && classesProp[ruleset.$name], //force using classes component property (it has highter priority)
+          )
+        })
+        return rulesetResult
+      }
+
+      const className = toPlatformRuleSet(classesNamePropX as Muix.TRulesetX)
+      const flip = typeof flipProp === 'boolean' ? flipProp : theme.direction === 'rtl'
+
+      const newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style)), className, flip, getStyleWithSideEffect, animations } as Muix.CodeProps<R>
+      if (window.isWeb) newProps.onClick = ($web && ($web as any).onClick) || onClick
+      else newProps.onPress = ($native && ($native as any).onPress) || onClick
+
+      newProps.classes = this.codeClasses
+      return <Component {...newProps } />
     }
 
     static contextTypes = { ...MuiThemeContextTypes, ...MuiOverridesContextTypes }
@@ -92,7 +82,6 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
     static options = options
   }
   hoistNonReactStatics(Styled, Component as any)
-  //return Styled: error when compiling with "declaration": true in tsconfig.json
   const styled: any = Styled 
   return styled as React.ComponentClass<Muix.PropsX<R>>
 }

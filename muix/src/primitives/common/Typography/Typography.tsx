@@ -69,7 +69,7 @@ const typography: Muix.CodeSFC<MuixTypography.Shape> = (props => {
     type = 'body1',
     style,
     getStyleWithSideEffect,
-    getAnimations,
+    animations,
     theme, flip, 
     children,
     className,

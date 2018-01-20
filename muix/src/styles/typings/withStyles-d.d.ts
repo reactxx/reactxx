@@ -278,11 +278,11 @@
   //**** Component's code (passed to withStyles)
 
   // component code for web
-  type CodePropsWeb<R extends Shape> = Overwrite<getProps<R> & getPropsWeb<R>, { className: CSSPropertiesWeb; classes: SheetWeb<R>; style: CSSPropertiesWeb; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffectWeb; getAnimations: Animation.GetAnimationsWeb<getAnimation<R>> }>
+  type CodePropsWeb<R extends Shape> = Overwrite<getProps<R> & getPropsWeb<R>, { className: CSSPropertiesWeb; classes: SheetWeb<R>; style: CSSPropertiesWeb; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffectWeb; animations: Animation.AnimationsWeb<getAnimation<R>> }>
   type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
   // component code for native
-  type CodePropsNative<R extends Shape> = Overwrite<getProps<R> & getPropsNative<R>, { className: getStyle<R>; classes: SheetNative<R>; style: getStyle<R>; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffectNative; getAnimations: Animation.GetAnimationsNative<getAnimation<R>> }>
+  type CodePropsNative<R extends Shape> = Overwrite<getProps<R> & getPropsNative<R>, { className: getStyle<R>; classes: SheetNative<R>; style: getStyle<R>; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffectNative; animations: Animation.AnimationsNative<getAnimation<R>> }>
   type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
   type CodeComponentNative<R extends Shape> = React.ComponentClass<CodePropsNative<R>>
 
@@ -290,7 +290,7 @@
   type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
 
   //some code for components could be shared for web and native
-  type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), { className: CSSPropertiesWeb | getStyle<R>, classes: Sheet<R>; style: CSSPropertiesWeb | getStyle<R>; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffect; getAnimations: Animation.GetAnimations<getAnimation<R>>}>
+  type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), { className: CSSPropertiesWeb | getStyle<R>, classes: Sheet<R>; style: CSSPropertiesWeb | getStyle<R>; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffect; animations: Animation.Animations<getAnimation<R>>}>
   type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
 

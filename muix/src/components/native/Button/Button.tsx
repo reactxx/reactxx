@@ -142,7 +142,7 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
 
 const button: Muix.CodeSFCNative<MuixButton.Shape> = (props, context) => {
 
-  const { children, classes, color = 'default', dense, fab, raised, mini, getStyleWithSideEffect, className, getAnimations, ...rest } = props
+  const { children, classes, color = 'default', dense, fab, raised, mini, getStyleWithSideEffect, className, animations, ...rest } = props
   const { disabled } = rest //disabled must be propagated to ButtonBaseLow
 
   const isFlat = !raised && !fab
@@ -169,7 +169,7 @@ const button: Muix.CodeSFCNative<MuixButton.Shape> = (props, context) => {
 
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 
-  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} className={null} getStyleWithSideEffect={null} getAnimations={null} {...rest}>
+  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} className={null} getStyleWithSideEffect={null} animations={null} {...rest}>
     {childs}
   </RippleEffect>
 }

@@ -65,9 +65,9 @@ declare namespace Animation {
   //type SheetAnimationsNative<R extends AnimationsShape> = {[P in keyof R]: AnimationNative<R[P]>}
   //type SheetAnimations<R extends AnimationsShape> = SheetAnimationsWeb<R> | SheetAnimationsNative<R>
 
-  type GetAnimations<R extends AnimationsShape> = () => Animations<R>
-  type GetAnimationsWeb<R extends AnimationsShape> = () => AnimationsWeb<R>
-  type GetAnimationsNative<R extends AnimationsShape> = () => AnimationsNative<R>
+  //type GetAnimations<R extends AnimationsShape> = () => Animations<R>
+  //type GetAnimationsWeb<R extends AnimationsShape> = () => AnimationsWeb<R>
+  //type GetAnimationsNative<R extends AnimationsShape> = () => AnimationsNative<R>
 
 }
 
