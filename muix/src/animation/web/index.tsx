@@ -1,10 +1,10 @@
-import { AnimationLow, Animations } from '../common/index'
+import { AnimationLow } from '../common/index'
 import { sheetToClassSheet } from 'muix-styles/web'
-export { Animations } from '../common/index'
+export { getAnimations } from '../common/index'
 
 export class AnimationDriver<T extends Animation.AnimationShape> extends AnimationLow<T> implements Animation.AnimationWeb<T> {
-  constructor(sheet: Animation.AnimationX<T>, public owner: Animations<{}>) {
-    super(sheet, owner)
+  constructor(sheet: Animation.AnimationX<T>, public statefullComponent: React.Component) {
+    super(sheet, statefullComponent)
     const { $delay, $duration, $easing, $opened, ...rest } = sheet as Animation.AnimationX<{}>
     const config = {
       transitionDuration: `${$duration || 1000}ms`,
@@ -41,13 +41,13 @@ export class AnimationDriver<T extends Animation.AnimationShape> extends Animati
     }
     //const x = JSON.stringify(this.bothClassName, null, 2)
     //debugger
-    this.className = this.bothClassName[$opened ? 1 : 0]
+    this.sheet = this.bothClassName[$opened ? 1 : 0]
   }
-  className: Animation.SheetWeb<T>
+  sheet: Animation.SheetWeb<T>
   private bothClassName: Animation.SheetWeb<T>[]
   doOpen(opened: boolean) {
-    this.className = this.bothClassName[opened ? 1 : 0]
-    this.owner.statefullComponent.forceUpdate()
+    this.sheet = this.bothClassName[opened ? 1 : 0]
+    this.statefullComponent.forceUpdate()
   }
 }
 
@@ -57,12 +57,14 @@ const animatedRuleset = (ruleset, r0, r1, inTransform: boolean, ignoredProp?) =>
     const pair: Animation.Pair = ruleset[propName]
     if (pair === ignoredProp) continue
     if (inTransform) {
-      r0.value = `${propName}(${pair[0]}px)`
-      r1.value = `${propName}(${pair[1]}px)`
+      const px = pixTransforms[propName] ? 'px' : ''
+      r0.value = `${propName}(${pair[0]}${px})`
+      r1.value = `${propName}(${pair[1]}${px})`
     } else {
       r0[propName] = pair[0]
       r1[propName] = pair[1]
     }
   }
 }
+const pixTransforms = { translateX: true, translateY: true}
 

@@ -5,7 +5,7 @@ import TypographyTest from './styles/typography'
 import TextView from './primitives/text-view'
 import Icon from './primitives/icon'
 import ButtonTest from './components/button'
-import ResponsibleDrawer from './components/responsible-drawer'
+//import ResponsibleDrawer from './components/responsible-drawer'
 import Shadows from './shadows/index'
 import ComponentX from './styles/component-x'
 import Animation from './animation/test-animation'
@@ -17,7 +17,7 @@ import Button from 'muix-components/Button/Button'
 
 const apps: { title: string; app: React.ComponentType, overridesNew?: Muix.ThemeValueOrCreator<Muix.OverridesX> }[] = [
   { title: 'Animation', app: Animation },
-  { title: 'ResponsibleDrawer', app: ResponsibleDrawer },
+  //{ title: 'ResponsibleDrawer', app: ResponsibleDrawer },
   { title: 'Typography', app: TypographyTest },
   { title: 'ButtonDemo', app: ButtonDemo, overridesNew },
   { title: 'Button', app: ButtonTest },
@@ -39,6 +39,7 @@ class AppRoot extends React.Component {
   render() {
     const { appIndex } = this.state
     const App = apps[appIndex].app
+    console.log('######')  
     const root = <View style={{ flex: 1, paddingTop: 24 }}>
       <MuiThemeProvider theme={theme}>
         <View classes={theme => ({ root: { flexDirection: 'row', flexWrap: 'wrap', backgroundColor: theme.palette.background.appBar, flexShrink: 0 } })}>

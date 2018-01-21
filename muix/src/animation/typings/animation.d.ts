@@ -2,9 +2,6 @@
 //https://github.com/facebook/react-native/blob/master/Libraries/Animated/src/NativeAnimatedHelper.js
 declare namespace Animation {
 
-  type AnimatedPropsNative = 'paddingLeft' | 'paddingTop' | 'opacity'
-  type AnimatedPropsWeb = 'marginBottom' | 'transform' //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
-
   type ToPairs<T, K extends keyof T = keyof T> = {[P in K]?: [T[P], T[P]]}
 
   type TNativeTransform = ToPairs<ReactN.PerpectiveTransform> | ToPairs<ReactN.RotateTransform> | ToPairs<ReactN.RotateXTransform> | ToPairs<ReactN.RotateYTransform> | ToPairs<ReactN.RotateZTransform> | ToPairs<ReactN.ScaleTransform> |
@@ -21,37 +18,31 @@ declare namespace Animation {
     $opened?: boolean
   }
 
-  type RuleSetX<T extends Muix.CSSPropertiesNative> = ToPairs<T, Muix.commonCSSPropertiesNames<T> & AnimatedPropsNative> & {
+  type RuleSetX<T extends Muix.CSSPropertiesNative> = ToPairs<T, Muix.commonCSSPropertiesNames<T>> & {
     transform?: Array<TNativeTransform>
-    $native?: ToPairs<T, keyof T & AnimatedPropsNative> & { transform?: TNativeTransform[] }
-    $web?: ToPairs<Muix.CSSPropertiesWeb, AnimatedPropsWeb>
+    $native?: ToPairs<T, Diff<keyof T, 'transform'>> & { transform?: TNativeTransform[] }
+    $web?: ToPairs<Muix.CSSPropertiesWeb, keyof React.CSSPropertiesLow> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
   }
 
-  interface Animations<T extends AnimationsShape> {
-    drivers: {[P in keyof T]: Animation<T[P]>}
-  }
-  interface AnimationsWeb<T extends AnimationsShape> {
-    drivers: {[P in keyof T]: AnimationWeb<T>}
-  }
-  interface AnimationsNative<T extends AnimationsShape> {
-    drivers: {[P in keyof T]: AnimationNative<T[P]>}
-  }
+  type Animations<T extends AnimationsShape> = {[P in keyof T]: Animation<T[P]> }
+  type AnimationsWeb<T extends AnimationsShape> = {[P in keyof T]: AnimationWeb<T[P]> }
+  type AnimationsNative<T extends AnimationsShape> = {[P in keyof T]: AnimationNative<T[P]> }
 
   interface Animation<T extends AnimationShape> {
-    opened?: 0 | 1
+    opened: boolean
     open() 
     close()
     set(isOpen: boolean)
     toggle()
-    className: Sheet<T>
+    sheet: Sheet<T>
   }
 
   interface AnimationWeb<T extends AnimationShape> extends Animation<T> {
-    className: SheetWeb<T>
+    sheet: SheetWeb<T>
   }
   interface AnimationNative<T extends AnimationShape> extends Animation<T> {
     value: ReactN.Animated.Value
-    className: SheetNative<T>
+    sheet: SheetNative<T>
   }
 
   type SheetWeb<T extends AnimationShape> = {[P in keyof T]: Muix.CSSPropertiesWeb}
@@ -60,14 +51,5 @@ declare namespace Animation {
 
   type AnimationShape = Record<string, Muix.CSSPropertiesNative>
   type AnimationsShape = Record<string, AnimationShape>
-
-  //type SheetAnimationsWeb<R extends AnimationsShape> = {[P in keyof R]: AnimationWeb<R[P]>}
-  //type SheetAnimationsNative<R extends AnimationsShape> = {[P in keyof R]: AnimationNative<R[P]>}
-  //type SheetAnimations<R extends AnimationsShape> = SheetAnimationsWeb<R> | SheetAnimationsNative<R>
-
-  //type GetAnimations<R extends AnimationsShape> = () => Animations<R>
-  //type GetAnimationsWeb<R extends AnimationsShape> = () => AnimationsWeb<R>
-  //type GetAnimationsNative<R extends AnimationsShape> = () => AnimationsNative<R>
-
 }
 

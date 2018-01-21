@@ -9,6 +9,7 @@ export default function createTypography(palette: Muix.Palette, optionOrCreator:
     fontSize = 14, // px
     htmlFontSize = 16, // 16px is the default font-size used by browsers on the html element.
     fontFamily = '"Roboto", "Helvetica", "Arial", sans-serif',
+    //fontFamily = 'Roboto',
     //cross platform font weights
     fontWeightLightNew = {
       fontWeight: '300',
@@ -31,14 +32,14 @@ export default function createTypography(palette: Muix.Palette, optionOrCreator:
   } = options
 
 
-  const getWebProps = (weightX: Muix.TextStyleX, optionX: Muix.TextStyleX, webFontSize: number, mui: React.CSSProperties) => {
+  const getWebProps = (weightX: Muix.TextStyleX, optionX: Muix.TextStyleX, nativeFontSize: number, mui: React.CSSProperties) => {
     const { color, fontWeight, fontFamily, ...rest } = mui
     const res = {
       fontWeight: weightX.fontWeight,
       color,
       $native: {
         fontFamily: weightX.$native.fontFamily,
-        fontSize: webFontSize,
+        fontSize: nativeFontSize,
       },
       $web: {
         fontFamily: weightX.$web.fontFamily,

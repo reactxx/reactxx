@@ -1,31 +1,29 @@
-import { AnimationDriver } from 'muix-animation'
+import { AnimationDriver } from 'muix-animation' //NATIVE (npm config) or WEB (jspm config) driver
 
-export class Animations<T extends Animation.AnimationsShape> implements Animation.Animations<T> {
-  constructor(sheet: Animation.AnimationsX<T>, public statefullComponent: React.Component) {
-    this.drivers = {} as any
-    if (!sheet) return
-    for (const p in sheet) {
-      if (p.startsWith('$')) continue
-      this.drivers[p] = new AnimationDriver(sheet[p], this)
-    }
+export const getAnimations = <T extends Animation.AnimationsShape>(sheet: Animation.AnimationsX<T>, statefullComponent: React.Component) => {
+  const drivers: {[P in keyof T]: Animation.Animation<T[P]>} = {} as any
+  if (!sheet) return null
+  for (const p in sheet) {
+    if (p.startsWith('$')) continue
+    drivers[p] = new AnimationDriver(sheet[p], statefullComponent)
   }
-  drivers: {[P in keyof T]: Animation.Animation<T[P]>}
+  return drivers
 }
 
 export abstract class AnimationLow<T extends Animation.AnimationShape> implements Animation.Animation<T> {
-  constructor(sheet: Animation.AnimationX<T>, owner: Animations<{}>) {
-    this.opened = sheet.$opened ? 1 : 0
+  constructor(sheet: Animation.AnimationX<T>, statefullComponent: React.Component) {
+    this.opened = sheet.$opened
   }
-  opened: 0 | 1 = 0
+  opened = false
   set(isOpen: boolean) {
-    if (!!isOpen === !!this.opened) return
-    this.opened = isOpen ? 1 : 0
+    if (isOpen === this.opened) return
+    this.opened = isOpen
     if (isOpen) this.open(); else this.close()
     this.doOpen(isOpen)
   }
   toggle() { this.set(!this.opened) }
   open() { this.set(true) }
   close() { this.set(false) }
-  className: Animation.Sheet<T>
+  sheet: Animation.Sheet<T>
   abstract doOpen(opened: boolean) //platform specific action: forceUpdate for web, Animated.value.setValue for native
 }

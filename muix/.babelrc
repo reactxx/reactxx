@@ -15,6 +15,7 @@
           "muix-components": "./deploy/es/components/native",
           "muix-styles/native": "./deploy/es/styles/native",
           "muix-styles": "./deploy/es/styles/native",
+          "muix-animation": "./deploy/es/animation/native",
           "^muix-icons/(.+)": "muix-icons"
         }
       }

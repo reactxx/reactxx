@@ -3,7 +3,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme, classesToPlatformSheet } from '../common/index'
 import { toPlatformRuleSet, toPlatformSheet, clearSystemProps } from 'muix-styles'
 import warning from 'invariant'
-import { Animations } from 'muix-animation'
+import { getAnimations } from 'muix-animation'
 
 const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, options: Muix.WithStylesOptionsNew) => (Component: Muix.CodeComponentType<R>) => {
 
@@ -22,7 +22,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       //*** caching aplyThemeToSheet result in actual theme (in its .$sheetCache prop)
       if (!theme.$sheetCache) theme.$sheetCache = []
       let cacheItem = theme.$sheetCache.find(it => it.sheetOrCreator === sheetOrCreator)
-      if (!cacheItem) theme.$sheetCache.push(cacheItem = aplyThemeToSheet(sheetOrCreator, theme, name))
+      if (!cacheItem) theme.$sheetCache.push(cacheItem = aplyThemeToSheet(sheetOrCreator, theme, options.name))
       this.cacheItem = cacheItem
 
       //*** apply childOverrides from context
@@ -31,7 +31,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       for (const p in this.codeClasses) this.codeClasses[p].$name = p // assign name to ruleSets. $name is used in getStyleWithSideEffect to recognize used rulesets
 
       //*** init animations
-      this.animations = new Animations(cacheItem.fromTheme.$animations, this)
+      this.animations = getAnimations(cacheItem.fromTheme.$animations, this)
     }
 
     getChildContext() { return { childOverrides: this.usedChildOverrides /*usedChildOverrides is modified during Component render (where getStyleWithSideEffect is called)*/ } }
@@ -47,7 +47,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
       const classesProp = classesToPlatformSheet(theme, classesPropX as Muix.ThemeValueOrCreator<Muix.PartialSheetX<R>>)
       const usedOverrides = {}
-      const getStyleWithSideEffect: Muix.StyleWithSideEffect = (...rulesets/*all used rulesets*/) => {
+      const getStyleWithSideEffect: Muix.StyleWithSideEffect = (...rulesets/*all used rulesets*/) => { // calling getStyleWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
         rulesets.forEach(ruleset => { // acumulate $overrides and $childOverrides
           if (!ruleset) return
           mergeOverride(usedOverrides, ruleset.$overrides)
@@ -88,16 +88,18 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
 
 export default withStyles
 
-//********************* HELPERS
+
+//*************************************************************** 
+// HELPERS
+//***************************************************************
+
 type TContext = Muix.MuiThemeContextValue & Muix.MuiOverridesContext
 
 //apply theme to sheet AND merge it with theme.overrides
 const aplyThemeToSheet = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, theme: Muix.ThemeNew, name: string) => {
   const overrides = (theme.overrides && name && theme.overrides[name]) as Muix.Sheet<R>
-  //console.log('###BEFORE', overrides)
   const styles = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator)
   const res: Muix.Sheet<R> = overrides ? deepMerges(false, {}, styles, overrides) : styles //deepMerge only when needed
-  //console.log('###AFTER', res.root)
   return { sheetOrCreator, fromTheme: res } as Muix.SheetCacheItem
 }
 
@@ -131,5 +133,6 @@ const deepMerges = (skipSystem: boolean, target, ...sources) => {
   sources.forEach(source => deepMerge(target, source, skipSystem))
   return target
 }
-const isObject = item => item && typeof item === 'object' && !Array.isArray(item)
+const isObject = item => item && typeof item === 'object' && !Array.isArray(item) && typeof item['_interpolation'] != 'function' //typeof item['_interpolation'] != 'function' prevent to merge ReactNative's Animated.Value.interpolate prop
+
 

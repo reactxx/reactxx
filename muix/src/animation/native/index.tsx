@@ -1,12 +1,12 @@
 import { Animated } from 'react-native'
-import { AnimationLow, Animations } from '../common/index'
-export { Animations } from '../common/index'
+import { AnimationLow } from '../common/index'
+export { getAnimations } from '../common/index'
 
 export class AnimationDriver<T extends Animation.AnimationShape> extends AnimationLow<T> implements Animation.AnimationNative<T> {
-  constructor(sheet: Animation.AnimationX<T>, owner: Animations<{}>) {
-    super(sheet, owner)
+  constructor(sheet: Animation.AnimationX<T>, statefullComponent: React.Component) {
+    super(sheet, statefullComponent)
     this.value = new Animated.Value(this.opened ? 1 : 0)
-    const rulesets = this.className = {} as any
+    const rulesets = this.sheet = {} as any
     const { $delay, $duration, $easing, $opened, ...rest } = sheet as Animation.AnimationX<{}>
     for (const propsName in rest) {
       if (propsName.startsWith('$')) continue
@@ -22,12 +22,12 @@ export class AnimationDriver<T extends Animation.AnimationShape> extends Animati
   }
   value: ReactN.Animated.Value
   config: Animated.TimingAnimationConfig
-  className: Animation.SheetNative<T>
+  sheet: Animation.SheetNative<T>
   protected bothClassName: {[P in keyof T]: T[P]}[]
   doOpen(opened: boolean) {
     const { value, config } = this
     value.stopAnimation()
-    Animated.timing(value, { ...config, toValue: opened ? 0 : 1 }).start()
+    Animated.timing(value, { ...config, toValue: opened ? 1 : 0 }).start()
   }
 }
 
@@ -38,6 +38,7 @@ const animatedRuleset = (ruleset, value: Animated.Value, ignoredProp?) => {
     const pair = ruleset[propName]
     if (pair === ignoredProp) continue
     res[propName] = value.interpolate({ inputRange: [0, 1], outputRange: pair })
+    //res[propName] = { animated:'$animated', inputRange: [0, 1], outputRange: pair }
   }
   return res
 }
