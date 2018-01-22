@@ -6,9 +6,11 @@
     $web?: W
   }
 
+  type ViewProperties = ReactN.ViewProperties & { onPress?: ReactN.TextProperties['onPress'] }
+
   type Web<W extends {} = React.HTMLAttributes<HTMLDivElement>> = PropsLow<React.CSSProperties, {}, W>
-  type View = PropsLow<ReactN.ViewStyle, ReactN.ViewProperties>
-  type ViewX = PropsLow<ReactN.ViewStyle | React.CSSProperties, ReactN.ViewProperties>
+  type View = PropsLow<ReactN.ViewStyle, ViewProperties> 
+  type ViewX = PropsLow<ReactN.ViewStyle | React.CSSProperties, ViewProperties> 
   type Text = PropsLow<ReactN.TextStyle, ReactN.TextProperties>
   type TextX = PropsLow<ReactN.TextStyle | React.CSSProperties, ReactN.TextProperties>
   type ScrollView = PropsLow<ReactN.ScrollViewStyle, ReactN.ScrollViewProperties> & { contentContainerStyle?: ReactN.ViewStyle }

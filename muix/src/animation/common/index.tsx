@@ -35,7 +35,7 @@ export const getGaps = (modifier: string, $duration: number) => {
     const mores = modifier.trim().split('-')
     const error = `-<number> | <number>- | <number>-<number> (where number is in <0..100> interval and first number must be less then the second) expected but "${modifier}" found`
     warning(mores.length == 2, error)
-    const ints = mores.map((m, idx) => m ? parseFloat(m) / 100 * $duration : 0)
+    const ints = mores.map(m => m ? parseFloat(m.replace('%','')) / 100 * $duration : 0)
     if (ints[0] === 0) { rightGap = $duration - ints[1] }
     else if (ints[1] === 0) leftGap = ints[0]
     else { leftGap = ints[0]; rightGap = $duration - ints[1] }

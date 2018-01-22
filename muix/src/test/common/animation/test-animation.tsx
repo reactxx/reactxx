@@ -5,57 +5,21 @@ import { fade } from 'material-ui/styles/colorManipulator'
 import { withStyles, sheetCreator, AppContainer, MuiThemeProvider, } from 'muix-styles'
 import { View, Text, AnimatedView } from 'muix-primitives'
 
-//import { Animated } from 'react-native'
-//const AnimatedView: React.ComponentClass<ReactN.ViewProperties> = Animated.View
-//const AnimatedView: React.ComponentClass<ReactN.ViewProperties> = View
-
 import { keyFrameToClassNames } from 'muix-styles/web'
-
-//const keyframeName = keyFrameToClassNames({
-//  '0%': { transform: 'translateX(-5000px)' },
-//  '1%': { transform: 'translateX(0px)' },
-//  '100%': { transform: 'translateX(0px)' },
-//})
-
-//const keyframeName2 = keyFrameToClassNames({
-//  '0%': { transform: 'translateX(-5000px)' },
-//  '1%': { transform: 'translateX(0px)' },
-//  '100%': { transform: 'translateX(0px)' },
-//})
-
-//const keyframeName3 = keyFrameToClassNames({
-//  '0%': { transform: 'translateX (-5000px)' },
-//  '1%': { transform: 'translateX (0px)' },
-//  '100%': { transform: 'translateX (0px)' },
-//})
-
-//alert([keyframeName, keyframeName2, keyframeName3])
 
 const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({ 
   $animations: { // different Animations
-    animDrawer: { // single Animation (single Animated.Value for NATIVE)
-      slide: { // animation ruleset
+    mobile: { // single Animation (single Animated.Value for NATIVE)
+      drawer: { // animation ruleset
         transform: [
           { translateX: [-200, 0] }
         ],
-        //$native: {
-        //  transform: [
-        //    { translateX: [-300, 0] },
-        //  ]
-        //},
-        //$web: { //the same as { translateX: [0, -200] }
-        //  transform: ['translateX(0px)', 'translateX(-200px)']
-        //},
       },
-      opacity: {
+      backDrop: {
         opacity: [0, 0.4],
-        //width: [0, 0.4, '-40'],
-        //height: [0, 0.4, '40-'],
-        //left: [0, 0.4, '10-70'],
         transform: [
           { translateX: [-5000, 0] },
-          //{ translateY: [10, 0] },
-          '-1'
+          '-1' // shortcut for 0%-1%. Another possibility: 30- (shortcut for 30%-100%), 30-60 (shortcut for 30%-60%)
         ],
       },
       $easing: transitions.easing.sharp,
@@ -66,35 +30,25 @@ const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
   },
   root: {
     flex: 1,
-    position: 'relative',
-    backgroundColor: 'white', //without background does not work zIndex in Native
+    backgroundColor: 'white', //childs zIndex (in Native) does not work without parent background
   },
   backDrop: {
     position: 'absolute',
-    flex: 1,
-    bottom: 0,
-    top: 0,
-    left: 0,
-    right: 0,
+    bottom: 0, top: 0, left: 0, right: 0,
     backgroundColor: 'black',
-    zIndex: 1
+    zIndex: 3
   },
   drawer: {
     position: 'absolute',
-    bottom: 0,
-    top: 0,
-    width: 200,
+    bottom: 0, top: 0, width: 200,
     backgroundColor: 'lightgreen',
     zIndex: 5
   },
-  button: {
+  content: {
     position: 'absolute',
-    right: 0,
-    width: 300,
-    backgroundColor: 'yellow',
-    marginTop: 24,
-    zIndex: 11
-  }
+    bottom: 0, top: 0, left: 0, right: 0,
+    zIndex: 1
+  },
 }))
 
 class testAnimation extends React.Component<Muix.CodeProps<testAnimation.Shape>> {
@@ -105,26 +59,27 @@ class testAnimation extends React.Component<Muix.CodeProps<testAnimation.Shape>>
       classes.root,
       className,
     ) as ReactN.ViewStyle
-    const backDrop = getStyleWithSideEffect( // calling getStyleWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
+    const backDrop = getStyleWithSideEffect( 
       classes.backDrop,
-      animations.animDrawer.sheet.opacity
+      animations.mobile.sheet.backDrop
     ) as ReactN.ViewStyle
-    const drawer = getStyleWithSideEffect( // getStyleWithSideEffect now knows, which rulesets are actualy used. So it can use their $overrides and $childOverrides props
+    const drawer = getStyleWithSideEffect( 
       classes.drawer,
-      animations.animDrawer.sheet.slide
+      animations.mobile.sheet.drawer
     ) as ReactN.ViewStyle
-    const button = getStyleWithSideEffect(classes.button) as ReactN.TextStyle
+    const content = getStyleWithSideEffect(
+      classes.content,
+    ) as ReactN.ViewStyle
 
     //console.log('======================================================\n', root, classes.button, backDrop, drawer)
-    return <View key={1} className={root}>
-      <AnimatedView key={1} style={backDrop} />
-      <Text key={2} className={button} onClick={() => animations.animDrawer.toggle()}>DO DRAWER</Text>
-      <AnimatedView key={3} style={drawer} />
-      <Text key={4}>asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf </Text>
+    return <View key={1} className={root} style={{ $native: { marginTop:24 } }}>
+      <AnimatedView key={1} className={backDrop} onClick={() => animations.mobile.close()} />
+      <AnimatedView key={3} className={drawer} />
+      <View key={4} className={content}>
+        <Text key={2} onClick={() => animations.mobile.toggle()} style={{ textAlign: 'right' }}>DO DRAWER</Text>
+        <Text>asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf </Text>
+      </View>
     </View>
-    //return <AnimatedView key={1} style={rootStyles}>
-    //  <AnimatedView key={3} style={drawerStyles} />
-    //</AnimatedView>
   }
 }
 
@@ -135,7 +90,3 @@ const App: React.SFC = props => <View style={{ flex: 1 }}>
 </View>
 
 export default App
-
-//      <Text key={2} className={{ position: 'absolute', right: 0, width: 300, backgroundColor: 'yellow' }} onClick={() => animations.animDrawer.toggle()}>DO DRAWER</Text>
-
-

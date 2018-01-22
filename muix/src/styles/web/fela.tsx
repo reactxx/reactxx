@@ -29,6 +29,7 @@ renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html
   overflow: 'hidden',
 }, 'html, body, #content')
 renderer.renderStatic({fontFamily: 'Roboto'}, 'body')
+renderer.renderStatic({ boxSizing: 'border-box' }, '*')
 renderer.renderStatic({ display: 'flex', flexDirection: 'column', alignItems: 'stretch'}, '#content')
 
 render(renderer)

@@ -2,6 +2,7 @@
   export type ClassKey = 'root'
 
   export type Shape = Overwrite<Muix.DefaultEmptyShape, {
+    props: Muix.TOnClickWeb
     common: Muix.ShapeViews<'root'>
   }>
 

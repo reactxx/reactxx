@@ -34,7 +34,6 @@ const viewStyle: React.CSSProperties = {
   flexBasis: 'auto',
   flexShrink: 0,
 
-  boxSizing: 'border-box',
   position: 'relative',
 }
 
@@ -55,7 +54,6 @@ export const IconWeb: React.SFC<Primitives.Web<SVGSVGElement> & { data: string }
 
 const textStyles = {
   root: {
-    boxSizing: 'border-box',
     whiteSpace: 'pre-wrap',
     wordWrap: 'break-word',
     '& .mui-text': { //high level Text is block element, inner Texts are inline elements

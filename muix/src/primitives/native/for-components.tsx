@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { View as RNView, Text as RNText, ScrollView as RNScrollView, Animated } from 'react-native'
+import { View as RNView, Text as RNText, ScrollView as RNScrollView, Animated, TouchableWithoutFeedback } from 'react-native'
 import { MaterialCommunityIcons as RNIcon, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
@@ -12,12 +12,16 @@ export const TypographyNative: React.SFC<Primitives.Typography> = props => {
 
 export const ViewNative: React.SFC<Primitives.View> = props => {
   const { style, className, $native, children } = props
-  return <RNView style={[className, style]} {...$native} children={children} />
+  const onPress = $native && $native.onPress; delete $native.onPress
+  const res = <RNView style={[className, style]} {...$native} children={children} />
+  return onPress ? <TouchableWithoutFeedback onPress={onPress}>{res}</TouchableWithoutFeedback> : res
 }
 
 export const AnimatedViewNative: React.SFC<Primitives.View> = props => {
   const { style, className, $native, children } = props
-  return <Animated.View style={[className, style]} {...$native} children={children} />
+  const onPress = $native && $native.onPress; delete $native.onPress
+  const res = <Animated.View style={[className, style]} {...$native} children={children} />
+  return onPress ? <TouchableWithoutFeedback onPress={onPress}>{res}</TouchableWithoutFeedback> : res
 }
 
 export const TextNative: React.SFC<Primitives.Text> = props => {

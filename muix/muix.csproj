@@ -126,9 +126,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="src\animation\common\index.tsx" />
     <TypeScriptCompile Include="src\animation\native\index.tsx" />
-    <TypeScriptCompile Include="src\animation\web\index__.tsx" />
     <TypeScriptCompile Include="src\animation\web\index.tsx" />
-    <TypeScriptCompile Include="src\animation\web\index_.tsx" />
     <TypeScriptCompile Include="src\components\common\Divider\Divider.tsx" />
     <TypeScriptCompile Include="src\components\common\ResponsibleDrawer\ResponsibleDrawer.tsx" />
     <TypeScriptCompile Include="src\components\common\Drawer\Drawer.tsx" />

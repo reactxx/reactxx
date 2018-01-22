@@ -39,7 +39,7 @@ class AppRoot extends React.Component {
   render() {
     const { appIndex } = this.state
     const App = apps[appIndex].app
-    console.log('######')  
+    //console.log('######')  
     const root = <View style={{ flex: 1, paddingTop: 24 }}>
       <MuiThemeProvider theme={theme}>
         <View classes={theme => ({ root: { flexDirection: 'row', flexWrap: 'wrap', backgroundColor: theme.palette.background.appBar, flexShrink: 0 } })}>
