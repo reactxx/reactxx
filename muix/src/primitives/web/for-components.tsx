@@ -130,3 +130,5 @@ export const ViewX = ViewWeb as React.SFC<Primitives.ViewX>
 export const TextX = TextWeb as React.SFC<Primitives.TextX>
 export const ScrollViewX = ScrollViewWeb as React.SFC<Primitives.ScrollViewX>
 export const TypographyNativeX = TypographyNative as React.SFC<Primitives.Typography>
+export const AnimatedViewX = ViewX
+export const AnimatedView = ViewX

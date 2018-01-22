@@ -25,7 +25,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       if (!cacheItem) theme.$sheetCache.push(cacheItem = aplyThemeToSheet(sheetOrCreator, theme, options.name))
       this.cacheItem = cacheItem
 
-      if (options.name === 'MuiText') console.log(cacheItem)
+      //if (options.name === 'MuiText') console.log(cacheItem)
 
       //*** apply childOverrides from context
       const fromParentContext = context.childOverrides && context.childOverrides[options.name]

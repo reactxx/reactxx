@@ -1,7 +1,7 @@
-import { AnimationLow } from '../common/index'
+import { AnimationLow, getAnimations, getGaps } from '../common/index'
+export { getAnimations } from '../common/index'
 import warning from 'warning'
 import { sheetToClassSheet, keyFrameToClassNames } from 'muix-styles/web'
-export { getAnimations } from '../common/index'
 
 export class AnimationDriver<T extends Animation.AnimationShape> extends AnimationLow<T> implements Animation.AnimationWeb<T> {
   constructor(sheet: Animation.AnimationX<T>, public statefullComponent: React.Component) {
@@ -32,23 +32,10 @@ export class AnimationDriver<T extends Animation.AnimationShape> extends Animati
         setTransition(propName, modifier)
       }
       const setTransition = (propName: string, modifier: string) => {
-        let leftGap = 0, rightGap = 0
-        if (modifier) {
-          const mores = modifier.trim().split('-')
-          const error = `-<number> | <number>- | <number>-<number> (where number is in <0..100> interval and first number must be less then the second) expected but "${modifier}" found`
-          warning(mores.length == 2, error)
-          const ints = mores.map((m, idx) => m ? parseFloat(m) / 100 * $duration : 0)
-          if (ints[0] === 0) { rightGap = $duration - ints[1] }
-          else if (ints[1] === 0) leftGap = ints[0]
-          else { leftGap = ints[0]; rightGap = $duration - ints[1] }
-          warning(rightGap >= 0 && leftGap >= 0 && rightGap + leftGap < $duration, error)
-        }
-        const duration = $duration - rightGap - leftGap
+        let { leftGap, rightGap, duration} = getGaps(modifier, $duration)
         leftGap += $delay; rightGap += $delay
-        transitions1.push(`${propName} ${duration}ms${leftGap ? ' ' + leftGap + 'ms' : ''}`)
         transitions0.push(`${propName} ${duration}ms${rightGap ? ' ' + rightGap + 'ms' : ''}`)
-        //transitions1.push(`${propName} ${duration}ms ${leftGap}ms`)
-        //transitions0.push(`${propName} ${duration}ms ${rightGap}ms`)
+        transitions1.push(`${propName} ${duration}ms${leftGap ? ' ' + leftGap + 'ms' : ''}`)
       }
 
       for (const propName in pairs) {

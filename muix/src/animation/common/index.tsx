@@ -1,4 +1,5 @@
 import { AnimationDriver } from 'muix-animation' //NATIVE (npm config) or WEB (jspm config) driver
+import warning from 'warning'
 
 export const getAnimations = <T extends Animation.AnimationsShape>(sheet: Animation.AnimationsX<T>, statefullComponent: React.Component) => {
   const drivers: {[P in keyof T]: Animation.Animation<T[P]>} = {} as any
@@ -26,4 +27,20 @@ export abstract class AnimationLow<T extends Animation.AnimationShape> implement
   close() { this.set(false) }
   sheet: Animation.Sheet<T>
   abstract doOpen(toOpened: boolean) //platform specific action: forceUpdate for web, Animated.value.setValue for native
+}
+
+export const getGaps = (modifier: string, $duration: number) => {
+  let leftGap = 0, rightGap = 0
+  if (modifier) {
+    const mores = modifier.trim().split('-')
+    const error = `-<number> | <number>- | <number>-<number> (where number is in <0..100> interval and first number must be less then the second) expected but "${modifier}" found`
+    warning(mores.length == 2, error)
+    const ints = mores.map((m, idx) => m ? parseFloat(m) / 100 * $duration : 0)
+    if (ints[0] === 0) { rightGap = $duration - ints[1] }
+    else if (ints[1] === 0) leftGap = ints[0]
+    else { leftGap = ints[0]; rightGap = $duration - ints[1] }
+    warning(rightGap >= 0 && leftGap >= 0 && rightGap + leftGap < $duration, error)
+  }
+  const duration = $duration - rightGap - leftGap
+  return { leftGap, rightGap, duration}
 }

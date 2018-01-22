@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { View as RNView, Text as RNText, ScrollView as RNScrollView } from 'react-native'
+import { View as RNView, Text as RNText, ScrollView as RNScrollView, Animated } from 'react-native'
 import { MaterialCommunityIcons as RNIcon, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
@@ -13,6 +13,11 @@ export const TypographyNative: React.SFC<Primitives.Typography> = props => {
 export const ViewNative: React.SFC<Primitives.View> = props => {
   const { style, className, $native, children } = props
   return <RNView style={[className, style]} {...$native} children={children} />
+}
+
+export const AnimatedViewNative: React.SFC<Primitives.View> = props => {
+  const { style, className, $native, children } = props
+  return <Animated.View style={[className, style]} {...$native} children={children} />
 }
 
 export const TextNative: React.SFC<Primitives.Text> = props => {
@@ -32,6 +37,7 @@ export const IconNative: React.SFC<Primitives.Icon> = props => {
 
 export const IconX = IconNative as React.SFC<Primitives.IconX>
 export const ViewX = ViewNative as React.SFC<Primitives.ViewX>
+export const AnimatedViewX = AnimatedViewNative as React.SFC<Primitives.ViewX>
 export const TextX = TextNative as React.SFC<Primitives.TextX>
 export const ScrollViewX = ScrollViewNative as React.SFC<Primitives.ScrollViewX>
 export const TypographyNativeX = TypographyNative as React.SFC<Primitives.Typography>

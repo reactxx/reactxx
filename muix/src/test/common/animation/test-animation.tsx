@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom'
 import { fade } from 'material-ui/styles/colorManipulator'
 
 import { withStyles, sheetCreator, AppContainer, MuiThemeProvider, } from 'muix-styles'
-import { View, Text } from 'muix-primitives'
+import { View, Text, AnimatedView } from 'muix-primitives'
+
 //import { Animated } from 'react-native'
 //const AnimatedView: React.ComponentClass<ReactN.ViewProperties> = Animated.View
-const AnimatedView: React.ComponentClass<ReactN.ViewProperties> = View
+//const AnimatedView: React.ComponentClass<ReactN.ViewProperties> = View
+
 import { keyFrameToClassNames } from 'muix-styles/web'
 
 //const keyframeName = keyFrameToClassNames({
@@ -29,7 +31,7 @@ import { keyFrameToClassNames } from 'muix-styles/web'
 
 //alert([keyframeName, keyframeName2, keyframeName3])
 
-const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
+const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({ 
   $animations: { // different Animations
     animDrawer: { // single Animation (single Animated.Value for NATIVE)
       slide: { // animation ruleset
@@ -57,8 +59,9 @@ const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
         ],
       },
       $easing: transitions.easing.sharp,
-      $duration: 250,
-      $opened: false
+      $duration: 300,
+      $opened: false,
+      //$delay: 2000
     }
   },
   root: {
@@ -112,9 +115,9 @@ class testAnimation extends React.Component<Muix.CodeProps<testAnimation.Shape>>
     ) as ReactN.ViewStyle
     const button = getStyleWithSideEffect(classes.button) as ReactN.TextStyle
 
-    console.log('======================================================\n', root, classes.button, backDrop, drawer)
+    //console.log('======================================================\n', root, classes.button, backDrop, drawer)
     return <View key={1} className={root}>
-      <AnimatedView key={1} style={{ ...backDrop }} />
+      <AnimatedView key={1} style={backDrop} />
       <Text key={2} className={button} onClick={() => animations.animDrawer.toggle()}>DO DRAWER</Text>
       <AnimatedView key={3} style={drawer} />
       <Text key={4}>asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf </Text>
