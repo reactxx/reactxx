@@ -25,5 +25,5 @@ export abstract class AnimationLow<T extends Animation.AnimationShape> implement
   open() { this.set(true) }
   close() { this.set(false) }
   sheet: Animation.Sheet<T>
-  abstract doOpen(opened: boolean) //platform specific action: forceUpdate for web, Animated.value.setValue for native
+  abstract doOpen(toOpened: boolean) //platform specific action: forceUpdate for web, Animated.value.setValue for native
 }

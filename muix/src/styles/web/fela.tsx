@@ -41,6 +41,7 @@ export const rulesetsToClassNames = (...rulesets: React.CSSProperties[]) => {
   if (rulesets.length == 1) return rulesetToClassNames(rulesets[0])
   return rulesetToClassNames(Object.assign({}, ...rulesets))
 }
+export const keyFrameToClassNames = (keyFrame: React.CSSProperties) => keyFrame ? renderer.renderKeyframe(() => keyFrame, {}) : ''
 
 
 //Converts sheet to named atomic classes

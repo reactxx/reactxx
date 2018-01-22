@@ -92,6 +92,7 @@
     <None Include="packages.config" />
     <Content Include="README.md" />
     <Content Include="src\styles\native\theme.json" />
+    <Content Include="StyleSheet1.css" />
     <Content Include="tsconfig-native.json" />
     <Content Include="tsconfig-web.json" />
     <Content Include="tsconfig.json" />
@@ -125,7 +126,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="src\animation\common\index.tsx" />
     <TypeScriptCompile Include="src\animation\native\index.tsx" />
+    <TypeScriptCompile Include="src\animation\web\index__.tsx" />
     <TypeScriptCompile Include="src\animation\web\index.tsx" />
+    <TypeScriptCompile Include="src\animation\web\index_.tsx" />
     <TypeScriptCompile Include="src\components\common\Divider\Divider.tsx" />
     <TypeScriptCompile Include="src\components\common\ResponsibleDrawer\ResponsibleDrawer.tsx" />
     <TypeScriptCompile Include="src\components\common\Drawer\Drawer.tsx" />

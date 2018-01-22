@@ -2,12 +2,11 @@
 import ReactN from 'react-native'
 
 import { TextX } from 'muix-primitives'
-import { withStyles, sheetCreator } from 'muix-styles'
+import { withStyles, sheetCreator, toPlatformRuleSet, toPlatformSheet } from 'muix-styles'
 
 export const sheet = sheetCreator<MuixText.Shape>(({ typographyX: typoX }) => ({
   $animations: {},
   root: typoX.fontWeightRegularNew,
-  
 }))
 
 const text: Muix.CodeSFC<MuixText.Shape> = props => {

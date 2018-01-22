@@ -42,7 +42,7 @@ export const createAnimations = (props) => null
 
 export const clearSystemProps = obj => {
   if (!obj) return obj
-  delete obj.$overrides; delete obj.$childOverrides; delete obj.$name; delete obj.$web; delete obj.$native
+  delete obj.$overrides; delete obj.$childOverrides; delete obj.$name; delete obj.$web; delete obj.$native 
   return obj
 }
 

@@ -2,10 +2,12 @@
 //https://github.com/facebook/react-native/blob/master/Libraries/Animated/src/NativeAnimatedHelper.js
 declare namespace Animation {
 
-  type ToPairs<T, K extends keyof T = keyof T> = {[P in K]?: [T[P], T[P]]}
+  type ToPairs<T, K extends keyof T = keyof T> = {[P in K]?: [T[P], T[P]] | [T[P], T[P], string]}
 
-  type TNativeTransform = ToPairs<ReactN.PerpectiveTransform> | ToPairs<ReactN.RotateTransform> | ToPairs<ReactN.RotateXTransform> | ToPairs<ReactN.RotateYTransform> | ToPairs<ReactN.RotateZTransform> | ToPairs<ReactN.ScaleTransform> |
-    ToPairs<ReactN.ScaleXTransform> | ToPairs<ReactN.ScaleYTransform> | ToPairs<ReactN.TranslateXTransform> | ToPairs<ReactN.TranslateYTransform> | ToPairs<ReactN.SkewXTransform> | ToPairs<ReactN.SkewYTransform>
+  type ToPairsTransform<T, K extends keyof T = keyof T> = {[P in K]?: [T[P], T[P]]}
+
+  type TNativeTransform = string | ToPairsTransform<ReactN.PerpectiveTransform> | ToPairsTransform<ReactN.RotateTransform> | ToPairsTransform<ReactN.RotateXTransform> | ToPairsTransform<ReactN.RotateYTransform> | ToPairsTransform<ReactN.RotateZTransform> | ToPairsTransform<ReactN.ScaleTransform> |
+    ToPairsTransform<ReactN.ScaleXTransform> | ToPairsTransform<ReactN.ScaleYTransform> | ToPairsTransform<ReactN.TranslateXTransform> | ToPairsTransform<ReactN.TranslateYTransform> | ToPairsTransform<ReactN.SkewXTransform> | ToPairsTransform<ReactN.SkewYTransform>
   type Pair = [number | string, number | string]
 
   type AnimationsX<T extends AnimationsShape> = {[P in keyof T]: AnimationX<T[P]>}

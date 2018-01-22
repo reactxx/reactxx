@@ -18,16 +18,16 @@ export class AnimationDriver<T extends Animation.AnimationShape> extends Animati
         transformPairs.forEach(pair => transform.push(animatedRuleset(pair, this.value)))
       }
     }
-    this.config = { delay: $delay, duration: $duration, toValue: null }
+    this.config = { delay: $delay, duration: $duration, toValue: null, isInteraction: true }
   }
   value: ReactN.Animated.Value
   config: Animated.TimingAnimationConfig
   sheet: Animation.SheetNative<T>
   protected bothClassName: {[P in keyof T]: T[P]}[]
-  doOpen(opened: boolean) {
+  doOpen(toOpened: boolean) {
     const { value, config } = this
     value.stopAnimation()
-    Animated.timing(value, { ...config, toValue: opened ? 1 : 0 }).start()
+    Animated.timing(value, { ...config, toValue: toOpened ? 1 : 0 }).start()
   }
 }
 
@@ -35,9 +35,16 @@ const animatedRuleset = (ruleset, value: Animated.Value, ignoredProp?) => {
   const res = {}
   for (const propName in ruleset) {
     if (propName.startsWith('$')) continue
-    const pair = ruleset[propName]
+    let pair: any[] = ruleset[propName]
     if (pair === ignoredProp) continue
-    res[propName] = value.interpolate({ inputRange: [0, 1], outputRange: pair })
+    if (pair.length == 3) {
+      const more: string = pair[2]
+      const mores: any = more.split(',').map(p => p.split('=').map((v, idx) => idx == 0 ? parseFloat(v) : v))
+      pair = pair.splice(0, 2)
+      //console.log({ inputRange: [0, ...mores[0], 1], outputRange: [pair[0], ...mores[1], pair[1]] })
+      res[propName] = value.interpolate({ inputRange: [0, ...mores[0], 1], outputRange: [pair[0], ...mores[1], pair[1]] })
+    } else
+      res[propName] = value.interpolate({ inputRange: [0, 1], outputRange: pair })
     //res[propName] = { animated:'$animated', inputRange: [0, 1], outputRange: pair }
   }
   return res
