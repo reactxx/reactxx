@@ -72,24 +72,24 @@ export class AnimationDriver<T extends Animation.AnimationShape> extends Animati
   }
 }
 
-const getKeyFrameObject = (frames: [number, string, any][]) => {
-  if (frames.length == 0) return null
-  frames = frames.sort((a, b) => a[0] - b[0])
-  const res0 = {}, res1 = {}
-  let lastRule, lastIdx = -1
-  frames.forEach(rule => {
-    const frame = rule[0]
-    if (frame < 0 || frame > 1 || rule[0] < lastIdx) return //error
-    if (frame > lastIdx) {
-      res1[`${frame * 100}%`] = lastRule = {}
-      res0[`${(1 - frame) * 100}%`] = lastRule
-    }
-    lastIdx = frame
-    if (lastRule['transform'] && rule[1] == 'transform') lastRule['transform'] += ', ' + rule[2]
-    else lastRule[rule[1]] = rule[2]
-  })
-  return [res0, res1]
-}
+//const getKeyFrameObject = (frames: [number, string, any][]) => {
+//  if (frames.length == 0) return null
+//  frames = frames.sort((a, b) => a[0] - b[0])
+//  const res0 = {}, res1 = {}
+//  let lastRule, lastIdx = -1
+//  frames.forEach(rule => {
+//    const frame = rule[0]
+//    if (frame < 0 || frame > 1 || rule[0] < lastIdx) return //error
+//    if (frame > lastIdx) {
+//      res1[`${frame * 100}%`] = lastRule = {}
+//      res0[`${(1 - frame) * 100}%`] = lastRule
+//    }
+//    lastIdx = frame
+//    if (lastRule['transform'] && rule[1] == 'transform') lastRule['transform'] += ', ' + rule[2]
+//    else lastRule[rule[1]] = rule[2]
+//  })
+//  return [res0, res1]
+//}
 
 const pixTransforms = { translateX: true, translateY: true }
 
