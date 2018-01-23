@@ -20,6 +20,7 @@ export const ViewNative: React.SFC<Primitives.View> = props => {
 export const AnimatedViewNative: React.SFC<Primitives.View> = props => {
   const { style, className, $native, children } = props
   const onPress = $native && $native.onPress; delete $native.onPress
+  //console.log(JSON.stringify({ ...className },null,2))
   const res = <Animated.View style={[className, style]} {...$native} children={children} />
   return onPress ? <TouchableWithoutFeedback onPress={onPress}>{res}</TouchableWithoutFeedback> : res
 }

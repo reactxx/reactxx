@@ -2,31 +2,47 @@ import { AnimationDriver } from 'muix-animation' //NATIVE (npm config) or WEB (j
 import warning from 'warning'
 
 export const getAnimations = <T extends Animation.AnimationsShape>(sheet: Animation.AnimationsX<T>, statefullComponent: React.Component) => {
-  const drivers: {[P in keyof T]: Animation.Animation<T[P]>} = {} as any
+  const drivers: Animation.Animations<T> = {} as any
   if (!sheet) return null
   for (const p in sheet) {
     if (p.startsWith('$')) continue
-    drivers[p] = new AnimationDriver(sheet[p], statefullComponent)
+    drivers[p] = new AnimationDriver(sheet[p], drivers)
   }
+  drivers.reset = (caller?: Animation.Animation<{}>) => {
+    for (const p in drivers) {
+      const driver = drivers[p]
+      if (driver === caller || !driver.reset) continue
+      driver.reset()
+    }
+  }
+  drivers.statefullComponent = statefullComponent
   return drivers
 }
 
+//export const resetAnimations = (anims) => { for (const p in anims) anims[p].reset() }
+
 export abstract class AnimationLow<T extends Animation.AnimationShape> implements Animation.Animation<T> {
-  constructor(sheet: Animation.AnimationX<T>, statefullComponent: React.Component) {
-    this.opened = sheet.$opened
+  constructor(sheet: Animation.AnimationX<T>, public animations: Animation.Animations<{}>) {
+    this.opened = !!sheet.$opened
+    const { $delay = 0, $duration = 0, $easing = 'ease-in', $opened} = sheet
+    this.$config = { $delay, $duration, $easing, $opened }
   }
+  $config: Animation.AnimationConfig
   opened = false
   set(isOpen: boolean) {
-    if (isOpen === this.opened) return
-    this.opened = isOpen
-    if (isOpen) this.open(); else this.close()
+    //if (isOpen === this.opened) return
+    //this.opened = isOpen
+    //if (isOpen) this.open(); else this.close()
+    this.animations.reset(this)
     this.doOpen(isOpen)
   }
   toggle() { this.set(!this.opened) }
   open() { this.set(true) }
   close() { this.set(false) }
   sheet: Animation.Sheet<T>
+  reset() { }
   abstract doOpen(toOpened: boolean) //platform specific action: forceUpdate for web, Animated.value.setValue for native
+  //reset() { this.opened = this.sheet.$opened }
 }
 
 export const getGaps = (modifier: string, $duration: number) => {

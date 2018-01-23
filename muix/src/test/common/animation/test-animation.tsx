@@ -49,7 +49,7 @@ const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
   },
   drawer: {
     position: 'absolute',
-    bottom: 0, top: 0, width: 200,
+    bottom: 0, top: 0, left:0, width: 200,
     backgroundColor: 'lightgreen',
     zIndex: 5
   },
@@ -89,7 +89,6 @@ const drawerLayout: Muix.CodeSFC<testAnimation.Shape> = props => {
   const close = () => tablet ? animations.tablet.close() : animations.mobile.close()
   const opened = tablet && animations.tablet.opened || mobile && animations.mobile.opened || desktop
 
-
   const root = getStyleWithSideEffect( // calling getStyleWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
     classes.root,
     mobile && classes.mobile,
@@ -114,18 +113,22 @@ const drawerLayout: Muix.CodeSFC<testAnimation.Shape> = props => {
     tablet && animations.tablet.sheet.content,
   ) as ReactN.ViewStyle
 
-  //console.log('======================================================\n', root, classes.button, backDrop, drawer)
+  //console.log('### DRAWER STATE opened=', opened(), ', mobile(is-opened)=', mobile, animations.mobile.opened, ', tablet=(is-opened)', tablet, animations.tablet.opened, ) 
+  //console.log('======================================================\n', root, classes.button, backDrop, drawer) 
   return <View className={root}>
-    <AnimatedView key={1} className={backDrop} onClick={close} />
-    <AnimatedView key={2} className={drawer}>
-      <Text className={getStyleWithSideEffect(classes.closeButton)} onClick={close} style={{ ...btnStyle, textAlign: 'right' }}>CLOSE</Text>
+    <AnimatedView key={1} className={backDrop} onClick={close} >
+      <Text style={{ marginTop:60 }}>{JSON.stringify(backDrop, null, 2)}</Text>
     </AnimatedView>
-    <View key={3} className={content}>
-      <View key={1} className={getStyleWithSideEffect(classes.openButton)} style={{flexDirection: 'row', display: opened ? 'none' : 'flex' }}>
+    <AnimatedView key={2} className={drawer}>
+      <Text className={getStyleWithSideEffect(classes.closeButton, { ...btnStyle, textAlign: 'right' })} onClick={close} >CLOSE</Text>
+      <Text style={{ marginTop: 60 }}>{JSON.stringify(drawer, null, 2)}</Text>
+    </AnimatedView>
+    <AnimatedView key={3} className={content}>
+      <View key={1} className={getStyleWithSideEffect(classes.openButton, { flexDirection: 'row', display: opened ? 'none' : 'flex' })} >
         <Text onClick={open} className={{ ...btnStyle, alignSelf: 'flex-start' }}>OPEN</Text>
       </View>
-      <Text key={2}>asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf asdf asdf asdf asd f assdf </Text>
-    </View>
+      <Text style={{ marginTop: 120 }}>{JSON.stringify(content, null, 2)}'\n'{JSON.stringify(content.left, null, 2)}</Text>
+    </AnimatedView>
   </View>
 }
 

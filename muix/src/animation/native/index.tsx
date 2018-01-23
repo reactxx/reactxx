@@ -1,13 +1,13 @@
 import { Animated } from 'react-native'
 import { AnimationLow, getGaps, getAnimations } from '../common/index'
-export { getAnimations } from '../common/index'
+export * from '../common/index'
 
 export class AnimationDriver<T extends Animation.AnimationShape> extends AnimationLow<T> implements Animation.AnimationNative<T> {
-  constructor(sheet: Animation.AnimationX<T>, statefullComponent: React.Component) {
-    super(sheet, statefullComponent)
-    this.value = new Animated.Value(this.opened ? 1 : 0)
+  constructor(sheet: Animation.AnimationX<T>, public animations: Animation.Animations<{}>) {
+    super(sheet, animations)
+    const { $delay, $duration, $easing, $opened } = this.$config
+    this.value = new Animated.Value($opened ? 1 : 0)
     const rulesets = this.sheet = {} as any
-    const { $delay = 0, $duration = 0, $easing = 'ease-in', $opened, ...rest } = sheet as Animation.AnimationX<{}>
 
     let useNativeDriver = true
 
@@ -35,9 +35,9 @@ export class AnimationDriver<T extends Animation.AnimationShape> extends Animati
       }
     }
 
-    for (const propsName in rest) {
+    for (const propsName in sheet) {
       if (propsName.startsWith('$')) continue
-      const pairs: Animation.RuleSetX<ReactN.TextProperties> = rest[propsName]
+      const pairs: Animation.RuleSetX<ReactN.TextProperties> = sheet[propsName]
       const transformPairs = pairs.transform
       const ruleset = rulesets[propsName] = {}
       for (const propName2 in pairs) {
@@ -62,16 +62,22 @@ export class AnimationDriver<T extends Animation.AnimationShape> extends Animati
     }
 
     //console.log(rulesets)
-    this.config = { delay: $delay, duration: $duration, toValue: null, useNativeDriver }
+    this.animConfig = { delay: $delay, duration: $duration, toValue: null, useNativeDriver }
   }
   value: ReactN.Animated.Value
-  config: Animated.TimingAnimationConfig
+  animConfig: Animated.TimingAnimationConfig
   sheet: Animation.SheetNative<T>
+  
   protected bothClassName: {[P in keyof T]: T[P]}[]
+  reset() { this.value.stopAnimation(); this.value.setValue(this.opened ? 1 : 0) }
   doOpen(toOpened: boolean) {
-    const { value, config } = this
-    value.stopAnimation()
-    Animated.timing(value, { ...config, toValue: toOpened ? 1 : 0 }).start()
+    const { value, animConfig } = this
+    Animated.timing(value, { ...animConfig, toValue: toOpened ? 1 : 0 }).start(({ finished }) => {
+      if (!finished) return
+      this.opened = toOpened
+      this.animations.statefullComponent.forceUpdate()
+    })
+    
   }
 }
 

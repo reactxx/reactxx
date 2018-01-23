@@ -26,9 +26,11 @@ declare namespace Animation {
     $web?: ToPairs<Muix.CSSPropertiesWeb, keyof React.CSSPropertiesLow> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
   }
 
-  type Animations<T extends AnimationsShape> = {[P in keyof T]: Animation<T[P]> }
-  type AnimationsWeb<T extends AnimationsShape> = {[P in keyof T]: AnimationWeb<T[P]> }
-  type AnimationsNative<T extends AnimationsShape> = {[P in keyof T]: AnimationNative<T[P]> }
+  type Animations<T extends AnimationsShape> = {[P in keyof T]: Animation<T[P]> } & AnimationsEx
+  type AnimationsWeb<T extends AnimationsShape> = {[P in keyof T]: AnimationWeb<T[P]> } & AnimationsEx
+  type AnimationsNative<T extends AnimationsShape> = {[P in keyof T]: AnimationNative<T[P]> } & AnimationsEx
+
+  type AnimationsEx = { reset: (caller?: Animation.Animation<{}>) => void; statefullComponent: React.Component }
 
   interface Animation<T extends AnimationShape> {
     opened: boolean
@@ -36,7 +38,9 @@ declare namespace Animation {
     close()
     set(isOpen: boolean)
     toggle()
+    reset()
     sheet: Sheet<T>
+    animations: Animations<{}>
   }
 
   interface AnimationWeb<T extends AnimationShape> extends Animation<T> {
@@ -47,9 +51,9 @@ declare namespace Animation {
     sheet: SheetNative<T>
   }
 
-  type SheetWeb<T extends AnimationShape> = {[P in keyof T]: Muix.CSSPropertiesWeb}
-  type SheetNative<T extends AnimationShape> = {[P in keyof T]: T[P]}
-  type Sheet<T extends AnimationShape> = {[P in keyof T]: (T[P] | Muix.CSSPropertiesWeb)}
+  type SheetWeb<T extends AnimationShape> = {[P in keyof T]: Muix.CSSPropertiesWeb} & AnimationConfig
+  type SheetNative<T extends AnimationShape> = {[P in keyof T]: T[P]} & AnimationConfig
+  type Sheet<T extends AnimationShape> = {[P in keyof T]: (T[P] | Muix.CSSPropertiesWeb) } & AnimationConfig
 
   type AnimationShape = Record<string, Muix.CSSPropertiesNative>
   type AnimationsShape = Record<string, AnimationShape>
