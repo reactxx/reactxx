@@ -301,4 +301,3 @@ build-icons/design/mdi-react/
 !**/package.json
 build-types-material-ui/material-ui
 
-!**/typings/**/*
