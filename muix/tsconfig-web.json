@@ -20,6 +20,7 @@
       //"muix-styles/web/*": [ "src/styles/web/*" ],
       //"muix-styles/common/*": [ "src/styles/common/*" ],
       //"muix-styles/native/*": [ "src/styles/native/*" ],
+      "muix-animation": [ "src/animation/web/index" ],
 
       "muix-primitives": [ "src/primitives/web/index" ],
       //"muix-primitives/current/*": [ "src/primitives/web/*" ],

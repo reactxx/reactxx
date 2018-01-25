@@ -12,6 +12,7 @@ SystemJS.config({
     }
   },
   map: {
+    "muix-animation": "deploy/lib/animation/web/index",
     "muix-styles": "deploy/lib/styles/web/index",
     "muix-styles/web": "deploy/lib/styles/web/index",
     "muix-primitives": "deploy/lib/primitives/web/index",

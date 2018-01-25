@@ -88,5 +88,8 @@ type TakeFrom<T, K extends keyof T> = {[P in K]: T[P]}
 
 type PartialRecord<K extends string, T> = { [P in K]?: T; };
 
-
 type OmitFrom<T, K extends string> = {[P in Diff<keyof T, K>]: T[P]}
+
+type NoPartial<T> = {
+  [P in keyof T]: T[P];
+};

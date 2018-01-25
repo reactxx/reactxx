@@ -36,7 +36,7 @@ const sheet = sheetCreator<testStyles.Shape>(({ palette, typographyX: typoX }) =
       }
     }
   },
-  style: {},
+  
   primary: {
     backgroundColor: palette.primary[500],
     $overrides: {
@@ -53,16 +53,17 @@ const sheet = sheetCreator<testStyles.Shape>(({ palette, typographyX: typoX }) =
   label: {
     color: palette.common.white
   },
+  $animations: {}
 }))
 
 const testStyles: Muix.CodeSFC<testStyles.Shape> = props => {
-  const { classes, getStyleWithSideEffect, theme, flip, innerRef, primary, children, style, ...rest } = props
+  const { classes, getStyleWithSideEffect, theme, flip, primary, children, style, className, animations, ...rest } = props
 
   const rootStyles = getStyleWithSideEffect( // getStyleWithSideEffect now knowns, which rulesets are actualy used. So it can use their $overrides and $childOverrides props
     classes.root,
     primary === true && classes.primary,
     primary === false && classes.secondary,
-    classes.style,
+    className,
   )
 
   const labelStyles = getStyleWithSideEffect(

@@ -8,11 +8,12 @@ import { TypographyNativeX } from 'muix-primitives'
 import { sheetCreator, withStyles } from 'muix-styles'
 
 export const sheet = sheetCreator<MuixTypography.Shape>(({ typographyX: typoX, palette, spacing }) => ({
+  $animations: {},
   root: {
     margin: 0,
     $web: { display: 'block' }
   },
-  style: {},
+  
   display4: typoX.display4,
   display3: typoX.display3,
   display2: typoX.display2,
@@ -57,7 +58,7 @@ export const sheet = sheetCreator<MuixTypography.Shape>(({ typographyX: typoX, p
   colorError: { color: palette.error.A400, },
 }))
 
-const typography: Muix.CodeSFCNative<MuixTypography.Shape> = (props => {
+const typography: Muix.CodeSFC<MuixTypography.Shape> = (props => {
   const {
     align = 'inherit',
     classes,
@@ -68,30 +69,32 @@ const typography: Muix.CodeSFCNative<MuixTypography.Shape> = (props => {
     type = 'body1',
     style,
     getStyleWithSideEffect,
-    theme, flip, innerRef,
+    animations,
+    theme, flip, 
     children,
+    className,
     ...rest
   } = props
 
   //console.log('### typography', color, classes)
 
-  const className = getStyleWithSideEffect(
+  const classNameRes = getStyleWithSideEffect(
     classes.root,
     classes[type],
     color !== 'default' && classes[`color${capitalizeFirstLetter(color)}`],
     gutterBottom && classes.gutterBottom,
     paragraph && classes.paragraph,
     align !== 'inherit' && classes[`align${capitalizeFirstLetter(align)}`],
-    classes.style,
+    className,
   )
 
   //console.log(className)
   return <TypographyNativeX
-    className={className} style={style}
-    $native={rest as ReactN.ScrollViewProperties} $web={rest as React.HTMLAttributes<HTMLDivElement>}
+    className={classNameRes as ReactN.TextStyle} style={style as ReactN.TextStyle}
+    $native={rest as Primitives.TypographyX['$native']} $web={rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>}
     $type={type}
     $noWrapStyle={noWrap && classes.noWrap}
-    children={children} />
+    children={children} /> as any
 })
 
 const Typography = withStyles<MuixTypography.Shape>(sheet, { name: 'MuiTypography' })(typography)

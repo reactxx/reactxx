@@ -15,6 +15,8 @@
       "muix-styles/native": [ "src/styles/native/index" ],
       "muix-styles": [ "src/styles/native/index" ],
 
+      "muix-animation": [ "src/animation/native/index" ],
+
       "muix-primitives": [ "src/primitives/native/index" ],
 
       "muix-components/*": [ "src/components/native/*" ],

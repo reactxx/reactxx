@@ -1,19 +1,30 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { ViewX } from 'muix-primitives'
+import { ViewX, AnimatedViewX } from 'muix-primitives'
 import { withStyles, sheetCreator } from 'muix-styles'
 
 export const sheet = sheetCreator<MuixView.Shape>(() => ({
+  $animations: {},
   root: {},
-  style: {},
+
 }))
 
 const view: Muix.CodeSFC<MuixView.Shape> = props => {
-  const { classes, theme, flip, innerRef, getStyleWithSideEffect, children, style, ...rest } = props
-  return <ViewX className={getStyleWithSideEffect(classes.root, classes.style)} $web={rest as React.HTMLAttributes<HTMLDivElement>} $native={rest as ReactN.ViewProperties} children={children} style={style} />
+  let { classes, theme, flip, getStyleWithSideEffect, children, style, className, animations, ...rest } = props
+  const $web = rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>
+  const $native = rest as ReactN.ViewProperties
+  return <ViewX className={getStyleWithSideEffect(classes.root, className)} $web={$web} $native={$native} children={children} style={style} />
 }
 
-const View = withStyles<MuixView.Shape>(sheet, { name: 'MuiView' })(view)
+const animatedView: Muix.CodeSFC<MuixView.Shape> = props => {
+  const { classes, theme, flip, getStyleWithSideEffect, children, style, className, animations, ...rest } = props
+  const $web = rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>
+  const $native = rest as ReactN.ViewProperties
+  return <AnimatedViewX className={getStyleWithSideEffect(classes.root, className)} $web={$web} $native={$native} children={children} style={style} />
+}
 
+export const AnimatedView = withStyles<MuixView.Shape>(sheet, { name: 'MuiAnimatedView' })(animatedView)
+
+const View = withStyles<MuixView.Shape>(sheet, { name: 'MuiView' })(view)
 export default View

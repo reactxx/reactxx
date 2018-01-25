@@ -18,7 +18,7 @@ export { clearSystemProps, sheetCreator, default as createMuiTheme, AppContainer
 
 export { muiCompatible, AppContainer } from './withStyles'
 
-export { rulesetsToClassNames, rulesetToClassNames } from './fela'
+export * from './fela'
 
 export { default as withStyles } from '../common/withStyles'
 export * from '../common/withStyles'

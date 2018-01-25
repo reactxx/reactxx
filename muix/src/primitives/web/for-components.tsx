@@ -27,8 +27,6 @@ const headlineMapping = {
   body1: 'p',
 }
 
-
-
 const viewStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
@@ -36,7 +34,6 @@ const viewStyle: React.CSSProperties = {
   flexBasis: 'auto',
   flexShrink: 0,
 
-  boxSizing: 'border-box',
   position: 'relative',
 }
 
@@ -57,7 +54,6 @@ export const IconWeb: React.SFC<Primitives.Web<SVGSVGElement> & { data: string }
 
 const textStyles = {
   root: {
-    boxSizing: 'border-box',
     whiteSpace: 'pre-wrap',
     wordWrap: 'break-word',
     '& .mui-text': { //high level Text is block element, inner Texts are inline elements
@@ -132,3 +128,5 @@ export const ViewX = ViewWeb as React.SFC<Primitives.ViewX>
 export const TextX = TextWeb as React.SFC<Primitives.TextX>
 export const ScrollViewX = ScrollViewWeb as React.SFC<Primitives.ScrollViewX>
 export const TypographyNativeX = TypographyNative as React.SFC<Primitives.Typography>
+export const AnimatedViewX = ViewX
+export const AnimatedView = ViewX

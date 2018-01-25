@@ -7,7 +7,13 @@
     "inlineSources": true,
     "importHelpers": true,
     "rootDir": "src",
+<<<<<<< HEAD
     "outDir": "deploy/lib",
+=======
+    "outDir": "deploy/es",
+
+    //"declaration": true,
+>>>>>>> developer
 
     "baseUrl": ".",
     "paths": {
@@ -15,6 +21,7 @@
 
       "muix-styles/web": [ "src/styles/web/index" ],
       "muix-styles/native": [ "src/styles/native/index" ],
+<<<<<<< HEAD
       "muix-styles": [ "src/styles/web/index" ],
       //"muix-styles/current/*": [ "src/styles/web/*" ],
       //"muix-styles/web/*": [ "src/styles/web/*" ],
@@ -28,6 +35,15 @@
       //"muix-primitives/native/*": [ "src/primitives/native/*" ],
 
       "muix-components/*": [ "src/components/web/*" ],
+=======
+      "muix-styles": [ "src/styles/native/index" ],
+
+      "muix-animation": [ "src/animation/native/index" ],
+
+      "muix-primitives": [ "src/primitives/native/index" ],
+
+      "muix-components/*": [ "src/components/native/*" ],
+>>>>>>> developer
       //"muix-components/current/*": [ "src/components/web/*" ],
       //"muix-components/common/*": [ "src/components/common/*" ],
       //"muix-components/native/*": [ "src/components/native/*" ],
