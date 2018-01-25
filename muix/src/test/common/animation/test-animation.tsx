@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom'
 import { withStyles, sheetCreator } from 'muix-styles'
 import { View, Text, AnimatedView } from 'muix-primitives'
 
+const debugDuration = 300
+
 const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
   $animations: { // different Animations
     mobile: { // single Animation (single Animated.Value for NATIVE)
@@ -20,7 +22,7 @@ const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
         ],
       },
       $easing: transitions.easing.sharp,
-      $duration: 300,
+      $duration: debugDuration,
       $opened: false,
     },
     tablet: {
@@ -33,7 +35,7 @@ const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
         left: [0, 200]
       },
       $easing: transitions.easing.sharp,
-      $duration: 300,
+      $duration: debugDuration,
       $opened: true,
     }
   },
@@ -131,7 +133,6 @@ const drawerLayout: Muix.CodeSFC<testAnimation.Shape> = props => {
     </AnimatedView>
   </View>
 }
-
 const DrawerLayout = withStyles<testAnimation.Shape>(sheet, { name: 'TestAnimation' as any })(drawerLayout)
 
 class App extends React.Component {

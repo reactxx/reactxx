@@ -61,7 +61,6 @@ export class AnimationDriver<T extends Animation.AnimationShape> extends Animati
       }
     }
 
-    //console.log(rulesets)
     this.animConfig = { delay: $delay, duration: $duration, toValue: null, useNativeDriver }
   }
   value: ReactN.Animated.Value
@@ -72,6 +71,7 @@ export class AnimationDriver<T extends Animation.AnimationShape> extends Animati
   reset() { this.value.stopAnimation(); this.value.setValue(this.opened ? 1 : 0) }
   doOpen(toOpened: boolean) {
     const { value, animConfig } = this
+    //console.log('useNativeDriver: ', animConfig.useNativeDriver)
     Animated.timing(value, { ...animConfig, toValue: toOpened ? 1 : 0 }).start(({ finished }) => {
       if (!finished) return
       this.opened = toOpened
