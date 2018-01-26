@@ -36,7 +36,7 @@ const sheet = sheetCreator<testStyles.Shape>(({ palette, typographyX: typoX }) =
       }
     }
   },
-  style: {},
+  
   primary: {
     backgroundColor: palette.primary[500],
     $overrides: {
@@ -62,7 +62,6 @@ const testStyles: Muix.CodeSFC<testStyles.Shape> = props => {
     classes.root,
     primary === true && classes.primary,
     primary === false && classes.secondary,
-    classes.style,
   )
 
   const labelStyles = getStyleWithSideEffect(

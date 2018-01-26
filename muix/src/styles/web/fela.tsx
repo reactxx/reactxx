@@ -20,6 +20,18 @@ const plugins = {
 }
 
 const renderer = createRenderer(plugins)
+
+renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html
+  height: '100%',
+  width: '100%',
+  margin: 0,
+  padding: 0,
+  overflow: 'hidden',
+}, 'html, body, #content')
+renderer.renderStatic({fontFamily: 'Roboto'}, 'body')
+renderer.renderStatic({ boxSizing: 'border-box' }, '*')
+renderer.renderStatic({ display: 'flex', flexDirection: 'column', alignItems: 'stretch'}, '#content')
+
 render(renderer)
 
 //Converts ruleset to blank delimited atomic classes
@@ -30,6 +42,7 @@ export const rulesetsToClassNames = (...rulesets: React.CSSProperties[]) => {
   if (rulesets.length == 1) return rulesetToClassNames(rulesets[0])
   return rulesetToClassNames(Object.assign({}, ...rulesets))
 }
+export const keyFrameToClassNames = (keyFrame: React.CSSProperties) => keyFrame ? renderer.renderKeyframe(() => keyFrame, {}) : ''
 
 
 //Converts sheet to named atomic classes

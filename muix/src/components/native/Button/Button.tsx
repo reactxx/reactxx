@@ -18,6 +18,9 @@ const getTextIconColor = (color: string) => ({
 
 
 const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
+
+  $animations: {},
+
   root: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -33,8 +36,14 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
       MuiIcon: { root: { fontSize: 24, ...(isLeft === true ? { marginRight: spacing.unit } : (isLeft === false ? { marginLeft: spacing.unit } : {})) } },
       MuiText: { root: { ...typoX.button, color: palette.text.primary, } },
     },
+    //$animation: {
+    //  paddingTop: [spacing.unit, spacing.unit * 2],
+    //  $native: {
+    //    transform: [{ perspective: [0, 1] }]
+    //  }
+    //}
   },
-  style: {},
+
   dense: {
     paddingTop: spacing.unit - 1,
     paddingBottom: spacing.unit - 1,
@@ -133,7 +142,7 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
 
 const button: Muix.CodeSFCNative<MuixButton.Shape> = (props, context) => {
 
-  const { children, classes, color = 'default', dense, fab, raised, mini, getStyleWithSideEffect, ...rest } = props
+  const { children, classes, color = 'default', dense, fab, raised, mini, getStyleWithSideEffect, className, animations, ...rest } = props
   const { disabled } = rest //disabled must be propagated to ButtonBaseLow
 
   const isFlat = !raised && !fab
@@ -150,7 +159,7 @@ const button: Muix.CodeSFCNative<MuixButton.Shape> = (props, context) => {
     dense && classes.dense,
     !isFlat && disabled && classes.raisedDisable,
     isFlat && disabled && classes.disabled,
-    classes.style,
+    className,
   ) as ReactN.ViewStyle
 
   //console.log('### viewStyle: ', viewStyle)
@@ -160,7 +169,7 @@ const button: Muix.CodeSFCNative<MuixButton.Shape> = (props, context) => {
 
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 
-  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} getStyleWithSideEffect={null} {...rest}>
+  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} className={null} getStyleWithSideEffect={null} animations={null} {...rest}>
     {childs}
   </RippleEffect>
 }

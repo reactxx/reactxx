@@ -8,8 +8,9 @@ import { IconX } from 'muix-primitives'
 import warning from 'warning'
 
 export const sheet = sheetCreator<MuixIcon.Shape>(({ palette }) => ({
+  $animations: {},
   root: { fontSize: 24 },
-  style: {},
+  
   colorAccent: { color: palette.secondary.A200 },
   colorAction: { color: palette.action.active },
   colorContrast: { color: palette.getContrastText(palette.primary[500]) },
@@ -20,11 +21,11 @@ export const sheet = sheetCreator<MuixIcon.Shape>(({ palette }) => ({
 }))
 
 const icon: Muix.CodeSFC<MuixIcon.Shape> = props => {
-  const { classes, theme, flip, innerRef, getStyleWithSideEffect, style, children, color = 'inherit', ...rest } = props
+  const { classes, theme, flip, getStyleWithSideEffect, style, children, color = 'inherit', className, animations, ...rest } = props
   const childs = React.Children.toArray(children)
   warning(childs.length == 1 && typeof childs[0] === 'string', 'single child as string expected')
   const data = childs[0] as MuixIcons
-  const iconClass = getStyleWithSideEffect(classes.root, classes[`color${capitalizeFirstLetter(color)}`], classes.style)
+  const iconClass = getStyleWithSideEffect(classes.root, classes[`color${capitalizeFirstLetter(color)}`], className)
   return <IconX className={iconClass} style={style} $native={rest as any} $web={rest as any} data={data}/>
 }
 

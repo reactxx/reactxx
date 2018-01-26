@@ -1,10 +1,11 @@
 ﻿import ReactN from 'react-native'
 import React from 'react'
 
-import MuiButton, { ButtonProps} from 'material-ui/Button/Button'
-import { muiCompatible } from 'muix-styles/web'
-import withContext from 'recompose/withContext'
+import MuiButton from 'material-ui/Button/Button'
 import PropTypes from 'prop-types'
+import { muiCompatible } from 'muix-styles/web'
+
+import withContext from 'recompose/withContext'
 
 const Button = muiCompatible<MuixButton.Shape>(MuiButton)
 
