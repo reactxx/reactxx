@@ -18,8 +18,8 @@ declare module 'css-in-js' {
 
 declare module 'jss' {
   export const create
-  export const GenerateClassName
-  export const JSSOptions
+  export type GenerateClassName<T> = any
+  export type JSSOptions = any
   export const StyleSheet
 }
 

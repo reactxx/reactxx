@@ -113,25 +113,61 @@ declare namespace Muix {
     background: ShadeBackground;
   }
 
+  export interface PaletteColor {
+    light: string;
+    main: string;
+    dark: string;
+    contrastText: string;
+  }
+  type PaletteType = 'light' | 'dark';
 
   interface Palette {
     common: CommonColors;
-    type: Contrast;
-    primary: Color;
-    secondary: Color;
-    error: Color;
+    type: PaletteType;
+    contrastThreshold: number;
+    tonalOffset: number;
+    primary: PaletteColor;
+    secondary: PaletteColor;
+    error: PaletteColor;
     grey: Color;
-    shades: {
-      dark: Shade;
-      light: Shade;
+    types: {
+      dark: TypeObject;
+      light: TypeObject;
     };
-    text: ShadeText;
-    input: ShadeInput;
-    action: ShadeAction;
-    background: ShadeBackground;
+    text: TypeText;
+    action: TypeAction;
+    background: TypeBackground;
     getContrastText: (color: string) => string;
   }
 
+  export interface TypeObject {
+    text: TypeText;
+    action: TypeAction;
+    background: TypeBackground;
+  }
+
+  interface TypeText {
+    primary: string;
+    secondary: string;
+    disabled: string;
+    hint: string;
+  }
+
+  interface TypeAction {
+    active: string;
+    hover: string;
+    selected: string;
+    disabled: string;
+    disabledBackground: string;
+  }
+
+  interface TypeBackground {
+    default: string;
+    paper: string;
+    appBar: string;
+    status: string;
+    avatar: string;
+  }
 
   type PartialShade = {
     [P in keyof Shade]?: Partial<Shade[P]>;
@@ -3187,7 +3223,7 @@ declare namespace Muix {
 
   namespace PropTypes {
     type Alignment = 'inherit' | 'left' | 'center' | 'right' | 'justify';
-    type Color = 'inherit' | 'primary' | 'accent' | 'default';
+    type Color = 'inherit' | 'primary' | 'secondary' | 'default';
     type Margin = 'none' | 'dense' | 'normal';
   }
 

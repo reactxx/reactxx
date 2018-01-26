@@ -15,23 +15,13 @@
 
       "muix-styles/web": [ "src/styles/web/index" ],
       "muix-styles/native": [ "src/styles/native/index" ],
-      "muix-styles": [ "src/styles/web/index" ],
-      //"muix-styles/current/*": [ "src/styles/web/*" ],
-      //"muix-styles/web/*": [ "src/styles/web/*" ],
-      //"muix-styles/common/*": [ "src/styles/common/*" ],
-      //"muix-styles/native/*": [ "src/styles/native/*" ],
-      "muix-animation": [ "src/animation/web/index" ],
+      "muix-styles": [ "src/styles/native/index" ],
 
-      "muix-primitives": [ "src/primitives/web/index" ],
-      //"muix-primitives/current/*": [ "src/primitives/web/*" ],
-      //"muix-primitives/common/*": [ "src/primitives/common/*" ],
-      //"muix-primitives/web/*": [ "src/primitives/web/*" ],
-      //"muix-primitives/native/*": [ "src/primitives/native/*" ],
+      "muix-animation": [ "src/animation/native/index" ],
 
-      "muix-components/*": [ "src/components/web/*" ],
-      //"muix-components/current/*": [ "src/components/web/*" ],
-      //"muix-components/common/*": [ "src/components/common/*" ],
-      //"muix-components/native/*": [ "src/components/native/*" ],
+      "muix-primitives": [ "src/primitives/native/index" ],
+
+      "muix-components/*": [ "src/components/native/*" ],
 
       "test/*": [ "src/test/*" ]
     },
