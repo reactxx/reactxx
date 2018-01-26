@@ -18,6 +18,9 @@ declare module 'css-in-js' {
 
 declare module 'jss' {
   export const create
+  export const GenerateClassName
+  export const JSSOptions
+  export const StyleSheet
 }
 
 declare module 'jss-preset-default' {

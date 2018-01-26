@@ -1,4 +1,4 @@
-set root=d:\muix\muix\
+set root=c:\muix\muix\
 
 d:
 
@@ -16,5 +16,5 @@ rmdir %root%node_modules\@types\react-dom\node_modules  /s /q
 
 copy %root%$blacklist.js %root%node_modules\metro-bundler\src\blacklist.js /y
 
-call npm link gulp
+rem call npm link gulp
 
