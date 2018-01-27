@@ -52,10 +52,18 @@ export const sheet = sheetCreator<MuixTypography.Shape>(({ typographyX: typoX, p
   colorInherit: {
     $web: { color: 'inherit', }
   },
-  colorPrimary: { color: palette.primary[500], },
-  colorSecondary: { color: palette.text.secondary }, 
-  colorAccent: { color: palette.secondary.A400, },
-  colorError: { color: palette.error.A400, },
+  colorPrimary: {
+    color: palette.primary.main,
+  },
+  colorSecondary: {
+    color: palette.secondary.main,
+  },
+  colorTextSecondary: {
+    color: palette.text.secondary,
+  },
+  colorError: {
+    color: palette.error.main,
+  },
 }))
 
 const typography: Muix.CodeSFC<MuixTypography.Shape> = (props => {
