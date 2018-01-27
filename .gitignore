@@ -298,3 +298,5 @@ build-icons/design/mdi-react/
 !**/package.json
 build-types-material-ui/material-ui
 
+!build-types-material-ui/dts-generator.js
+!build-types-material-ui/node_modules$dts-generator$index.js
