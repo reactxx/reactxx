@@ -5,6 +5,15 @@
 declare namespace Muix {
 
 
+  //************* mui/material-ui/styles/createGenerateClassName
+
+
+  interface GenerateClassNameOptions {
+    dangerouslyUseGlobalCSS?: boolean;
+    productionPrefix?: string;
+  }
+
+
   //************* mui/material-ui/styles/createBreakpoints
   type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
@@ -14,23 +23,25 @@ declare namespace Muix {
   interface Breakpoints {
     keys: Breakpoint[];
     values: BreakpointValues;
-    up: (key: Breakpoint  |  number) => string;
-    down: (key: Breakpoint  |  number) => string;
+    up: (key: Breakpoint | number) => string;
+    down: (key: Breakpoint | number) => string;
     between: (start: Breakpoint, end: Breakpoint) => string;
     only: (key: Breakpoint) => string;
     width: (key: Breakpoint) => number;
   }
 
 
-  type BreakpointsOptions = Partial<{
-    unit: string;
-    step: number;
-  } & Breakpoints>;
+  type BreakpointsOptions = Partial<
+    {
+      unit: string;
+      step: number;
+    } & Breakpoints
+    >;
 
 
   //************* mui/material-ui/styles/spacing
   interface Spacing {
-    unit: number
+    unit: number;
   }
 
 
@@ -56,70 +67,60 @@ declare namespace Muix {
   interface CommonColors {
     black: string;
     white: string;
-    transparent: string;
-    fullBlack: string;
-    darkBlack: string;
-    lightBlack: string;
-    minBlack: string;
-    faintBlack: string;
-    fullWhite: string;
-    darkWhite: string;
-    lightWhite: string;
   }
 
 
   //************* mui/material-ui/styles/createPalette
 
 
-  interface ShadeText {
+  interface TypeText {
     primary: string;
     secondary: string;
     disabled: string;
     hint: string;
-    icon: string;
-    divider: string;
-    lightDivider: string;
   }
 
 
-  interface ShadeInput {
-    bottomLine: string;
-    helperText: string;
-    labelText: string;
-    inputText: string;
-    disabled: string;
-  }
-
-
-  interface ShadeAction {
+  interface TypeAction {
     active: string;
+    hover: string;
+    selected: string;
     disabled: string;
+    disabledBackground: string;
   }
 
 
-  interface ShadeBackground {
+  interface TypeBackground {
     default: string;
     paper: string;
-    appBar: string;
-    contentFrame: string;
-    status: string;
   }
 
 
-  interface Shade {
-    text: ShadeText;
-    input: ShadeInput;
-    action: ShadeAction;
-    background: ShadeBackground;
+  type PaletteColorOptions = SimplePaletteColorOptions | Partial<Color>;
+
+
+  interface SimplePaletteColorOptions {
+    light?: string;
+    main: string;
+    dark?: string;
+    contrastText?: string;
   }
 
-  export interface PaletteColor {
+
+  interface PaletteColor {
     light: string;
     main: string;
     dark: string;
     contrastText: string;
   }
-  type PaletteType = 'light' | 'dark';
+
+
+  interface TypeObject {
+    text: TypeText;
+    action: TypeAction;
+    background: TypeBackground;
+  }
+
 
   interface Palette {
     common: CommonColors;
@@ -130,67 +131,30 @@ declare namespace Muix {
     secondary: PaletteColor;
     error: PaletteColor;
     grey: Color;
-    types: {
-      dark: TypeObject;
-      light: TypeObject;
-    };
     text: TypeText;
+    divider: string;
     action: TypeAction;
     background: TypeBackground;
     getContrastText: (color: string) => string;
   }
 
-  export interface TypeObject {
-    text: TypeText;
-    action: TypeAction;
-    background: TypeBackground;
-  }
 
-  interface TypeText {
-    primary: string;
-    secondary: string;
-    disabled: string;
-    hint: string;
-  }
-
-  interface TypeAction {
-    active: string;
-    hover: string;
-    selected: string;
-    disabled: string;
-    disabledBackground: string;
-  }
-
-  interface TypeBackground {
-    default: string;
-    paper: string;
-    appBar: string;
-    status: string;
-    avatar: string;
-  }
-
-  type PartialShade = {
-    [P in keyof Shade]?: Partial<Shade[P]>;
-  };
+  type PartialTypeObject = {[P in keyof TypeObject]?: Partial<TypeObject[P]> };
 
   type ColorPartial = Partial<Color>;
 
 
   interface PaletteOptions {
     common?: Partial<CommonColors>;
-    type?: Contrast;
-    primary?: ColorPartial;
-    secondary?: ColorPartial;
-    error?: ColorPartial;
+    type?: PaletteType;
+    primary?: PaletteColorOptions;
+    secondary?: PaletteColorOptions;
+    error?: PaletteColorOptions;
     grey?: ColorPartial;
-    shades?: {
-      dark?: PartialShade;
-      light?: PartialShade;
-    };
-    text?: Partial<ShadeText>;
-    input?: Partial<ShadeInput>;
-    action?: Partial<ShadeAction>;
-    background?: Partial<ShadeBackground>;
+    text?: Partial<TypeText>;
+    divider?: string;
+    action?: Partial<TypeAction>;
+    background?: Partial<TypeBackground>;
     getContrastText?: (color: string) => string;
   }
 
@@ -250,7 +214,7 @@ declare namespace Muix {
     duration: Duration;
     create(
       props: string | string[],
-      options?: Partial<{ duration: number; easing: string; delay: number }>
+      options?: Partial<{ duration: number; easing: string; delay: number }>,
     ): string;
     getAutoHeightDuration(height: number): number;
   }
@@ -261,7 +225,7 @@ declare namespace Muix {
     duration?: Partial<Duration>;
     create?: (
       props: string | string[],
-      options?: Partial<{ duration: number; easing: string; delay: number }>
+      options?: Partial<{ duration: number; easing: string; delay: number }>,
     ) => string;
     getAutoHeightDuration?: (height: number) => number;
   }
@@ -308,7 +272,7 @@ declare namespace Muix {
 
 
   interface TypographyUtils {
-    pxToRem: (px: number) => string
+    pxToRem: (px: number) => string;
   }
 
 
@@ -321,14 +285,9 @@ declare namespace Muix {
   //************* mui/material-ui/styles/zIndex
   interface ZIndex {
     mobileStepper: number;
-    menu: number;
     appBar: number;
-    drawerOverlay: number;
-    navDrawer: number;
-    dialogOverlay: number;
-    dialog: number;
-    layer: number;
-    popover: number;
+    drawer: number;
+    modal: number;
     snackbar: number;
     tooltip: number;
   }
@@ -340,11 +299,9 @@ declare namespace Muix {
   //************* mui/material-ui/Paper/Paper
 
 
-  interface PaperProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    PaperClassKey
-    > {
-    component?: string | React.ComponentType<PaperProps>;
+  interface PaperProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, PaperClassKey> {
+    component?: React.ReactType<PaperProps>;
     elevation?: number;
     square?: boolean;
   }
@@ -377,17 +334,13 @@ declare namespace Muix {
     | 'shadow21'
     | 'shadow22'
     | 'shadow23'
-    | 'shadow24'
-    ;
+    | 'shadow24';
 
 
   //************* mui/material-ui/AppBar/AppBar
 
 
-  interface AppBarProps extends StandardProps<
-    PaperProps,
-    AppBarClassKey
-    > {
+  interface AppBarProps extends StandardProps<PaperProps, AppBarClassKey> {
     color?: PropTypes.Color;
     position?: 'static' | 'fixed' | 'absolute';
   }
@@ -400,75 +353,102 @@ declare namespace Muix {
     | 'positionStatic'
     | 'colorDefault'
     | 'colorPrimary'
-    | 'colorAccent'
-    ;
+    | 'colorSecondary';
 
 
   //************* mui/material-ui/Avatar/Avatar
 
 
-  interface AvatarProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    AvatarClassKey
-    > {
+  interface AvatarProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, AvatarClassKey> {
     alt?: string;
     childrenClassName?: string;
-    component?: string | React.ComponentType<AvatarProps>;
-    imgProps?: Object;
+    component?: React.ReactType<AvatarProps>;
+    imgProps?: React.HtmlHTMLAttributes<HTMLImageElement>;
     sizes?: string;
     src?: string;
     srcSet?: string;
   }
 
 
-  type AvatarClassKey =
-    | 'root'
-    | 'colorDefault'
-    | 'img'
-    ;
+  type AvatarClassKey = 'root' | 'colorDefault' | 'img';
+
+
+  //************* mui/material-ui/internal/transition
+
+
+  type TransitionDuration = number | { enter: number; exit: number };
+
+  type TransitionCallback = (element: HTMLElement) => void;
+
+
+  interface TransitionHandlers {
+    onEnter: TransitionCallback;
+    onEntering: TransitionCallback;
+    onEntered: TransitionCallback;
+    onExit: TransitionCallback;
+    onExiting: TransitionCallback;
+    onExited: TransitionCallback;
+  }
+
+
+  interface TransitionProps extends Partial<TransitionHandlers> {
+    children: React.ReactElement<any> | Function;
+    style?: React.CSSProperties;
+    className?: string;
+    in: boolean;
+    appear?: boolean;
+    unmountOnExit?: boolean;
+  }
+
+
+  //************* mui/material-ui/transitions/Fade
+
+
+  interface FadeProps extends TransitionProps {
+    theme?: Theme;
+    timeout?: TransitionDuration;
+  }
 
 
   //************* mui/material-ui/Modal/Backdrop
 
 
-  interface BackdropProps extends StandardProps<{}, BackdropClassKey> {
+  interface BackdropProps
+    extends StandardProps<
+    React.HTMLAttributes<HTMLDivElement> & Partial<FadeProps>,
+    BackdropClassKey
+    > {
     invisible?: boolean;
     onClick?: React.ReactEventHandler<{}>;
-    [prop: string]: any;
+    open: boolean;
+    transitionDuration?: TransitionDuration;
   }
 
 
-  type BackdropClassKey =
-    | 'root'
-    | 'invisible'
-    ;
+  type BackdropClassKey = 'root' | 'invisible';
 
 
   //************* mui/material-ui/Badge/Badge
 
 
-  interface BadgeProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    BadgeClassKey
-    > {
+  interface BadgeProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, BadgeClassKey> {
     badgeContent: React.ReactNode;
     children: React.ReactNode;
-    color?: PropTypes.Color;
+    color?: PropTypes.Color | 'error';
+    component?: React.ReactType<BadgeProps>;
   }
 
 
-  type BadgeClassKey =
-    | 'root'
-    | 'badge'
-    | 'colorPrimary'
-    | 'colorAccent'
-    ;
+  type BadgeClassKey = 'root' | 'badge' | 'colorPrimary' | 'colorSecondary';
 
 
   //************* mui/material-ui/BottomNavigation/BottomNavigation
 
 
-  interface BottomNavigationProps extends StandardProps<
+  interface BottomNavigationProps
+    extends StandardProps<
     React.HTMLAttributes<HTMLDivElement>,
     BottomNavigationClassKey,
     'onChange'
@@ -480,45 +460,37 @@ declare namespace Muix {
   }
 
 
-  type BottomNavigationClassKey =
-    | 'root'
-    ;
+  type BottomNavigationClassKey = 'root';
 
 
   //************* mui/material-ui/ButtonBase/ButtonBase
 
 
-  interface ButtonBaseProps extends StandardProps<
+  interface ButtonBaseProps
+    extends StandardProps<
     React.AnchorHTMLAttributes<HTMLElement> & React.ButtonHTMLAttributes<HTMLElement>,
     ButtonBaseClassKey
     > {
     centerRipple?: boolean;
-    component?: string | React.ComponentType<ButtonBaseProps>;
+    component?: React.ReactType<ButtonBaseProps>;
     disableRipple?: boolean;
     focusRipple?: boolean;
     keyboardFocusedClassName?: string;
     onKeyboardFocus?: React.FocusEventHandler<any>;
-    rootRef?: React.Ref<any>;
   }
 
 
-  type ButtonBaseClassKey =
-    | 'root'
-    | 'disabled'
-    ;
+  type ButtonBaseClassKey = 'root' | 'disabled';
 
 
   //************* mui/material-ui/ButtonBase/index
 
 
-  //************* mui/material-ui/BottomNavigation/BottomNavigationButton
+  //************* mui/material-ui/BottomNavigation/BottomNavigationAction
 
 
-  interface BottomNavigationButtonProps extends StandardProps<
-    ButtonBaseProps,
-    BottomNavigationButtonClassKey,
-    'onChange'
-    > {
+  interface BottomNavigationActionProps
+    extends StandardProps<ButtonBaseProps, BottomNavigationActionClassKey, 'onChange'> {
     icon?: string | React.ReactElement<any>;
     label?: React.ReactNode;
     onChange?: (event: React.ChangeEvent<{}>, value: any) => void;
@@ -529,36 +501,31 @@ declare namespace Muix {
   }
 
 
-  type BottomNavigationButtonClassKey =
+  type BottomNavigationActionClassKey =
     | ButtonBaseClassKey
     | 'selected'
     | 'selectedIconOnly'
     | 'wrapper'
     | 'label'
     | 'selectedLabel'
-    | 'hiddenLabel'
-    | 'icon'
-    ;
+    | 'hiddenLabel';
 
 
   //************* mui/material-ui/Button/Button
 
 
-  interface ButtonProps extends StandardProps<
-    ButtonBaseProps,
-    ButtonClassKey,
-    'component'
-    > {
-    color?: PropTypes.Color | 'contrast';
-    component?: string | React.ComponentType<ButtonProps>;
-    dense?: boolean;
+  interface ButtonProps extends StandardProps<ButtonBaseProps, ButtonClassKey, 'component'> {
+    color?: PropTypes.Color;
+    component?: React.ReactType<ButtonProps>;
     disabled?: boolean;
     disableFocusRipple?: boolean;
     disableRipple?: boolean;
     fab?: boolean;
+    fullWidth?: boolean;
     href?: string;
     mini?: boolean;
     raised?: boolean;
+    size?: 'small' | 'medium' | 'large'
     type?: string;
   }
 
@@ -568,16 +535,13 @@ declare namespace Muix {
     | 'dense'
     | 'label'
     | 'flatPrimary'
-    | 'flatAccent'
-    | 'flatContrast'
+    | 'flatSecondary'
     | 'colorInherit'
     | 'raised'
     | 'keyboardFocused'
     | 'raisedPrimary'
-    | 'raisedAccent'
-    | 'raisedContrast'
-    | 'fab'
-    ;
+    | 'raisedSecondary'
+    | 'fab';
 
 
   //************* mui/material-ui/Paper/index
@@ -586,117 +550,85 @@ declare namespace Muix {
   //************* mui/material-ui/Card/Card
 
 
-  interface CardProps extends StandardProps<
-    PaperProps,
-    CardClassKey
-    > {
+  interface CardProps extends StandardProps<PaperProps, CardClassKey> {
     raised?: boolean;
   }
 
 
-  type CardClassKey =
-    | PaperClassKey
-    ;
+  type CardClassKey = PaperClassKey;
 
 
   //************* mui/material-ui/Card/CardActions
 
 
-  interface CardActionsProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    CardActionsClassKey
-    > {
+  interface CardActionsProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, CardActionsClassKey> {
     disableActionSpacing?: boolean;
   }
 
 
-  type CardActionsClassKey =
-    | 'root'
-    | 'action'
-    ;
+  type CardActionsClassKey = 'root' | 'action';
 
 
   //************* mui/material-ui/Card/CardContent
 
 
-  interface CardContentProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    CardContentClassKey
-    > { }
+  interface CardContentProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, CardContentClassKey> {
+    component?: React.ReactType<CardContentProps>;
+  }
 
 
-  type CardContentClassKey =
-    | 'root'
-    ;
+  type CardContentClassKey = 'root';
 
 
   //************* mui/material-ui/Card/CardHeader
 
 
-  interface CardHeaderProps extends StandardProps<
-    CardContentProps,
-    CardHeaderClassKey,
-    'title'
-    > {
+  interface CardHeaderProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, CardHeaderClassKey, 'title'> {
     action?: React.ReactNode;
     avatar?: React.ReactNode;
+    component?: React.ReactType<CardHeaderProps>;
     subheader?: React.ReactNode;
     title?: React.ReactNode;
   }
 
 
-  type CardHeaderClassKey =
-    | CardContentClassKey
-    | 'avatar'
-    | 'content'
-    | 'title'
-    | 'subheader'
-    ;
+  type CardHeaderClassKey = 'root' | 'avatar' | 'content' | 'title' | 'subheader';
 
 
   //************* mui/material-ui/Card/CardMedia
 
 
-  interface CardMediaProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    CardMediaClassKey
-    > {
-    component?: string | React.ComponentType<CardMediaProps>;
+  interface CardMediaProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, CardMediaClassKey> {
+    component?: React.ReactType<CardMediaProps>;
     image?: string;
     src?: string;
   }
 
 
-  type CardMediaClassKey =
-    | 'root'
-    ;
+  type CardMediaClassKey = 'root';
 
 
   //************* mui/material-ui/IconButton/IconButton
 
 
-  interface IconButtonProps extends StandardProps<
-    ButtonBaseProps,
-    IconButtonClassKey
-    > {
-    buttonRef?: React.Ref<any>;
-    color?: PropTypes.Color | 'contrast';
+  interface IconButtonProps extends StandardProps<ButtonBaseProps, IconButtonClassKey> {
+    color?: PropTypes.Color;
     disabled?: boolean;
     disableRipple?: boolean;
-    rootRef?: React.Ref<any>;
   }
 
 
   type IconButtonClassKey =
     | ButtonBaseClassKey
-    | 'colorAccent'
-    | 'colorContrast'
     | 'colorPrimary'
+    | 'colorSecondary'
     | 'colorInherit'
     | 'label'
-    | 'icon'
-    | 'keyboardFocused'
-    ;
+    | 'icon';
 
 
   //************* mui/material-ui/IconButton/index
@@ -705,11 +637,8 @@ declare namespace Muix {
   //************* mui/material-ui/internal/SwitchBase
 
 
-  interface SwitchBaseProps extends StandardProps<
-    IconButtonProps,
-    SwitchBaseClassKey,
-    'onChange'
-    > {
+  interface SwitchBaseProps
+    extends StandardProps<IconButtonProps, SwitchBaseClassKey, 'onChange'> {
     checked?: boolean | string;
     checkedClassName?: string;
     checkedIcon?: React.ReactNode;
@@ -729,16 +658,10 @@ declare namespace Muix {
   }
 
 
-  type SwitchBaseClassKey =
-    | 'root'
-    | 'default'
-    | 'checked'
-    | 'disabled'
-    | 'input'
-    ;
+  type SwitchBaseClassKey = 'root' | 'default' | 'checked' | 'disabled' | 'input';
 
 
-  type SwitchBase = React.Component<SwitchBaseProps>
+  type SwitchBase = React.Component<SwitchBaseProps>;
 
 
   interface CreateSwitchBaseOptions {
@@ -751,25 +674,19 @@ declare namespace Muix {
   //************* mui/material-ui/Checkbox/Checkbox
 
 
-  interface CheckboxProps extends StandardProps<
-    SwitchBaseProps,
-    CheckboxClassKey
-    > { }
+  interface CheckboxProps extends StandardProps<SwitchBaseProps, CheckboxClassKey> { }
 
 
-  type CheckboxClassKey =
-    | SwitchBaseClassKey
-    ;
+  type CheckboxClassKey = SwitchBaseClassKey;
 
 
   //************* mui/material-ui/Chip/Chip
 
 
-  interface ChipProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    ChipClassKey
-    > {
+  interface ChipProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, ChipClassKey> {
     avatar?: React.ReactElement<any>;
+    component?: React.ReactType<ChipProps>;
     deleteIcon?: React.ReactElement<any>;
     label?: React.ReactNode;
     onDelete?: React.EventHandler<any>;
@@ -784,22 +701,19 @@ declare namespace Muix {
     | 'avatar'
     | 'avatarChildren'
     | 'label'
-    | 'deleteIcon'
-    ;
+    | 'deleteIcon';
 
 
   //************* mui/material-ui/Progress/CircularProgress
 
 
-  interface CircularProgressProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    CircularProgressClassKey
-    > {
-    color?: 'primary' | 'accent' | 'inherit';
+  interface CircularProgressProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, CircularProgressClassKey> {
+    color?: 'primary' | 'secondary' | 'inherit';
     max?: number;
     min?: number;
     mode?: 'determinate' | 'indeterminate';
-    size?: number;
+    size?: number | string;
     thickness?: number;
     value?: number;
   }
@@ -807,110 +721,92 @@ declare namespace Muix {
 
   type CircularProgressClassKey =
     | 'root'
-    | 'primaryColor'
-    | 'accentColor'
+    | 'colorPrimary'
+    | 'colorSecondary'
     | 'svg'
     | 'indeterminateSvg'
     | 'circle'
     | 'indeterminateCircle'
-    | 'determinateCircle'
-    ;
-
-
-  //************* mui/material-ui/internal/transition
-
-
-  type TransitionDuration = number | { enter: number, exit: number };
-
-  type TransitionCallback = (element: HTMLElement) => void;
-
-
-  interface TransitionHandlers {
-    onEnter: TransitionCallback;
-    onEntering: TransitionCallback;
-    onEntered: TransitionCallback;
-    onExit: TransitionCallback;
-    onExiting: TransitionCallback;
-    onExited: TransitionCallback;
-  }
-
-
-  interface TransitionProps extends Partial<TransitionHandlers> {
-    children: React.ReactElement<any>;
-    style?: React.CSSProperties;
-    className?: string;
-    in: boolean;
-    appear?: boolean;
-    unmountOnExit?: boolean;
-  }
+    | 'determinateCircle';
 
 
   //************* mui/material-ui/transitions/Collapse
 
 
-  interface CollapseProps extends StandardProps<
-    TransitionProps,
-    CollapseClassKey,
-    'children'
-    > {
+  interface CollapseProps
+    extends StandardProps<TransitionProps, CollapseClassKey, 'children'> {
     children?: React.ReactNode;
     collapsedHeight?: string;
-    component?: string | React.ComponentType<CollapseProps>;
-    containerProps?: Object;
+    component?: React.ReactType<CollapseProps>;
     theme?: Theme;
     timeout?: TransitionDuration | 'auto';
   }
 
 
-  type CollapseClassKey =
-    | 'container'
-    | 'entered'
-    ;
+  type CollapseClassKey = 'container' | 'entered';
 
 
   //************* mui/material-ui/Dialog/DialogActions
 
 
-  interface DialogActionsProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    DialogActionsClassKey
-    > { }
+  interface DialogActionsProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, DialogActionsClassKey> { }
 
 
-  type DialogActionsClassKey =
-    | 'root'
-    | 'action'
-    | 'button'
-    ;
+  type DialogActionsClassKey = 'root' | 'action' | 'button';
+
+
+  //************* mui/material-ui/Portal/Portal
+
+
+  interface PortalProps {
+    children: React.ReactElement<any>;
+    container?: React.ReactInstance | (() => React.ReactInstance);
+    onRendered?: () => void;
+  }
+
+
+	default class Portal extends React.Component<PortalProps> { }
+
+
+  //************* mui/material-ui/Portal/index
 
 
   //************* mui/material-ui/Modal/Modal
 
 
-  interface ModalProps extends StandardProps<
-    React.HtmlHTMLAttributes<HTMLDivElement> & Partial<TransitionHandlers>,
+  interface ModalProps
+    extends StandardProps<
+    React.HtmlHTMLAttributes<HTMLDivElement> & Partial<PortalProps>,
     ModalClassKey
     > {
-    BackdropClassName?: string;
-    BackdropComponent?: string | React.ComponentType<BackdropProps>;
-    BackdropInvisible?: boolean;
-    BackdropTransitionDuration?: TransitionDuration;
-    disableBackdrop?: boolean;
-    ignoreBackdropClick?: boolean;
-    ignoreEscapeKeyUp?: boolean;
+    BackdropComponent?: React.ReactType<BackdropProps>;
+    BackdropProps?: BackdropProps;
+    disableAutoFocus?: boolean;
+    disableBackdropClick?: boolean;
+    disableEnforceFocus?: boolean;
+    disableEscapeKeyDown?: boolean;
+    disableRestoreFocus?: boolean;
+    hideBackdrop?: boolean;
     keepMounted?: boolean;
-    modalManager?: Object;
+    manager?: ModalManager;
     onBackdropClick?: React.ReactEventHandler<{}>;
     onClose?: React.ReactEventHandler<{}>;
-    onEscapeKeyUp?: React.ReactEventHandler<{}>;
-    show?: boolean;
+    onEscapeKeyDown?: React.ReactEventHandler<{}>;
+    open: boolean;
   }
 
 
-  type ModalClassKey =
-    | 'root'
-    | 'hidden'
-    ;
+  type ModalClassKey = 'root' | 'hidden';
+
+
+  //************* mui/material-ui/Modal/ModalManager
+  declare class ModalManager {
+    constructor(opts?: { hideSiblingNodes?: boolean; handleContainerOverflow?: boolean });
+    add(modal: any, container: any): number;
+    remove(modal: any): void;
+    isTopModal(modal: any): boolean;
+  }
 
 
   //************* mui/material-ui/Modal/index
@@ -919,20 +815,12 @@ declare namespace Muix {
   //************* mui/material-ui/Dialog/Dialog
 
 
-  interface DialogProps extends StandardProps<
-    ModalProps,
-    DialogClassKey,
-    'onBackdropClick' | 'onEscapeKeyUp'
-    > {
+  interface DialogProps
+    extends StandardProps<ModalProps & Partial<TransitionHandlers>, DialogClassKey, 'children'> {
+    children?: React.ReactNode;
     fullScreen?: boolean;
     fullWidth?: boolean;
-    ignoreBackdropClick?: boolean;
-    ignoreEscapeKeyUp?: boolean;
-    maxWidth?: 'xs' | 'sm' | 'md';
-    onBackdropClick?: Function;
-    onClose?: React.EventHandler<any>;
-    onEscapeKeyUp?: Function;
-    open?: boolean;
+    maxWidth?: 'xs' | 'sm' | 'md' | false;
     transition?: React.ReactType;
     transitionDuration?: TransitionDuration;
   }
@@ -946,74 +834,54 @@ declare namespace Muix {
     | 'paperWidthSm'
     | 'paperWidthMd'
     | 'fullWidth'
-    | 'fullScreen'
-    ;
+    | 'fullScreen';
 
 
   //************* mui/material-ui/Dialog/DialogContent
 
 
-  interface DialogContentProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    DialogContentClassKey
-    > { }
+  interface DialogContentProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, DialogContentClassKey> { }
 
 
-  type DialogContentClassKey =
-    | 'root'
-    ;
+  type DialogContentClassKey = 'root';
 
 
   //************* mui/material-ui/Dialog/DialogContentText
 
 
-  interface DialogContentTextProps extends StandardProps<
-    React.HTMLAttributes<HTMLParagraphElement>,
-    DialogContentTextClassKey
-    > { }
+  interface DialogContentTextProps
+    extends StandardProps<React.HTMLAttributes<HTMLParagraphElement>, DialogContentTextClassKey> { }
 
 
-  type DialogContentTextClassKey =
-    | 'root'
-    ;
+  type DialogContentTextClassKey = 'root';
 
 
   //************* mui/material-ui/Dialog/DialogTitle
 
 
-  interface DialogTitleProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    DialogTitleClassKey
-    > {
+  interface DialogTitleProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, DialogTitleClassKey> {
     disableTypography?: boolean;
   }
 
 
-  type DialogTitleClassKey =
-    | 'root'
-    ;
+  type DialogTitleClassKey = 'root';
 
 
   //************* mui/material-ui/Divider/Divider
 
 
-  interface DividerProps extends StandardProps<
-    React.HTMLAttributes<HTMLHRElement>,
-    DividerClassKey
-    > {
+  interface DividerProps
+    extends StandardProps<React.HTMLAttributes<HTMLHRElement>, DividerClassKey> {
     absolute?: boolean;
+    component?: React.ReactType<DividerProps>;
     inset?: boolean;
     light?: boolean;
   }
 
 
-  type DividerClassKey =
-    | 'root'
-    | 'default'
-    | 'inset'
-    | 'light'
-    | 'absolute'
-    ;
+  type DividerClassKey = 'root' | 'default' | 'inset' | 'light' | 'absolute';
 
 
   //************* mui/material-ui/transitions/Slide
@@ -1029,15 +897,18 @@ declare namespace Muix {
   //************* mui/material-ui/Drawer/Drawer
 
 
-  interface DrawerProps extends StandardProps<
-    ModalProps,
-    DrawerClassKey
+  interface DrawerProps
+    extends StandardProps<
+    ModalProps & Partial<TransitionHandlers>,
+    DrawerClassKey,
+    'open' | 'children'
     > {
     anchor?: 'left' | 'top' | 'right' | 'bottom';
+    children?: React.ReactNode;
     elevation?: number;
-    ModalProps?: ModalProps
+    ModalProps?: Partial<ModalProps>;
     open?: boolean;
-    SlideProps?: SlideProps;
+    SlideProps?: Partial<SlideProps>;
     theme?: Theme;
     transitionDuration?: TransitionDuration;
     type?: 'permanent' | 'persistent' | 'temporary';
@@ -1056,18 +927,15 @@ declare namespace Muix {
     | 'paperAnchorDockedTop'
     | 'paperAnchorDockedRight'
     | 'paperAnchorDockedBottom'
-    | 'modal'
-    ;
+    | 'modal';
 
 
   //************* mui/material-ui/Form/FormControl
 
 
-  interface FormControlProps extends StandardProps<
-    React.HtmlHTMLAttributes<HTMLDivElement>,
-    FormControlClassKey
-    > {
-    component?: string | React.ComponentType<FormControlProps>;
+  interface FormControlProps
+    extends StandardProps<React.HtmlHTMLAttributes<HTMLDivElement>, FormControlClassKey> {
+    component?: React.ReactType<FormControlProps>;
     disabled?: boolean;
     error?: boolean;
     fullWidth?: boolean;
@@ -1078,18 +946,14 @@ declare namespace Muix {
   }
 
 
-  type FormControlClassKey =
-    | 'root'
-    | 'marginNormal'
-    | 'marginDense'
-    | 'fullWidth'
-    ;
+  type FormControlClassKey = 'root' | 'marginNormal' | 'marginDense' | 'fullWidth';
 
 
   //************* mui/material-ui/Form/FormControlLabel
 
 
-  interface FormControlLabelProps extends StandardProps<
+  interface FormControlLabelProps
+    extends StandardProps<
     React.LabelHTMLAttributes<HTMLLabelElement>,
     FormControlLabelClassKey,
     'onChange'
@@ -1105,59 +969,40 @@ declare namespace Muix {
   }
 
 
-  type FormControlLabelClassKey =
-    | 'root'
-    | 'disabled'
-    | 'label'
-    ;
+  type FormControlLabelClassKey = 'root' | 'disabled' | 'label';
 
 
   //************* mui/material-ui/Form/FormGroup
 
 
-  interface FormGroupProps extends StandardProps<
-    React.HtmlHTMLAttributes<HTMLDivElement>,
-    FormGroupClassKey
-    > {
+  interface FormGroupProps
+    extends StandardProps<React.HtmlHTMLAttributes<HTMLDivElement>, FormGroupClassKey> {
     row?: boolean;
   }
 
 
-  type FormGroupClassKey =
-    | 'root'
-    | 'row'
-    ;
+  type FormGroupClassKey = 'root' | 'row';
 
 
   //************* mui/material-ui/Form/FormHelperText
 
 
-  interface FormHelperTextProps extends StandardProps<
-    React.HTMLAttributes<HTMLParagraphElement>,
-    FormHelperTextClassKey
-    > {
+  interface FormHelperTextProps
+    extends StandardProps<React.HTMLAttributes<HTMLParagraphElement>, FormHelperTextClassKey> {
     disabled?: boolean;
     error?: boolean;
     margin?: 'dense';
   }
 
 
-  type FormHelperTextClassKey =
-    | 'root'
-    | 'dense'
-    | 'error'
-    | 'disabled'
-    ;
+  type FormHelperTextClassKey = 'root' | 'dense' | 'error' | 'disabled';
 
 
   //************* mui/material-ui/Form/FormLabel
 
 
-  interface FormLabelProps extends StandardProps<
-    FormLabelBaseProps,
-    FormLabelClassKey
-    > {
-    component?: string | React.ComponentType<FormLabelBaseProps>;
+  interface FormLabelProps extends StandardProps<FormLabelBaseProps, FormLabelClassKey> {
+    component?: React.ReactType<FormLabelBaseProps>;
     disabled?: boolean;
     error?: boolean;
     focused?: boolean;
@@ -1168,30 +1013,26 @@ declare namespace Muix {
   type FormLabelBaseProps = React.LabelHTMLAttributes<HTMLLabelElement>;
 
 
-  type FormLabelClassKey =
-    | 'root'
-    | 'focused'
-    | 'error'
-    | 'disabled'
-    ;
+  type FormLabelClassKey = 'root' | 'focused' | 'error' | 'disabled';
 
 
   //************* mui/material-ui/Hidden/Hidden
 
 
   interface HiddenProps extends StandardProps<{}, never> {
-    only?: Breakpoint | Array<Breakpoint>;
-    xsUp?: boolean;
-    smUp?: boolean;
-    mdUp?: boolean;
+    implementation?: 'js' | 'css';
+    initialWidth?: Breakpoint;
+    lgDown?: boolean;
     lgUp?: boolean;
+    mdDown?: boolean;
+    mdUp?: boolean;
+    only?: Breakpoint | Array<Breakpoint>;
+    smDown?: boolean;
+    smUp?: boolean;
+    xlDown?: boolean;
     xlUp?: boolean;
     xsDown?: boolean;
-    smDown?: boolean;
-    mdDown?: boolean;
-    lgDown?: boolean;
-    xlDown?: boolean;
-    implementation?: 'js' | 'css';
+    xsUp?: boolean;
   }
 
 
@@ -1201,7 +1042,13 @@ declare namespace Muix {
   type GridItemsAlignment = 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
 
 
-  type GridContentAlignment = 'stretch' | 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
+  type GridContentAlignment =
+    | 'stretch'
+    | 'center'
+    | 'flex-start'
+    | 'flex-end'
+    | 'space-between'
+    | 'space-around';
 
 
   type GridDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse';
@@ -1224,7 +1071,8 @@ declare namespace Muix {
   type GridSize = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
 
-  interface GridProps extends StandardProps<
+  interface GridProps
+    extends StandardProps<
     React.HTMLAttributes<HTMLElement> & Partial<Record<Breakpoint, boolean | GridSize>>,
     GridClassKey,
     'hidden'
@@ -1279,8 +1127,7 @@ declare namespace Muix {
     | 'grid-xs-9'
     | 'grid-xs-10'
     | 'grid-xs-11'
-    | 'grid-xs-12'
-    ;
+    | 'grid-xs-12';
 
 
   type StrippedProps =
@@ -1300,27 +1147,22 @@ declare namespace Muix {
     | 'sm'
     | 'md'
     | 'lg'
-    | 'xl'
-    ;
+    | 'xl';
 
 
   //************* mui/material-ui/GridList/GridList
 
 
-  interface GridListProps extends StandardProps<
-    React.HTMLAttributes<HTMLUListElement>,
-    GridListClassKey
-    > {
+  interface GridListProps
+    extends StandardProps<React.HTMLAttributes<HTMLUListElement>, GridListClassKey> {
     cellHeight?: number | 'auto';
     cols?: number;
-    component?: string | React.ComponentType<GridListProps>;
+    component?: React.ReactType<GridListProps>;
     spacing?: number;
   }
 
 
-  type GridListClassKey =
-    | 'root'
-    ;
+  type GridListClassKey = 'root';
 
 
   //************* mui/material-ui/GridList/GridListTileBar
@@ -1346,74 +1188,60 @@ declare namespace Muix {
     | 'title'
     | 'subtitle'
     | 'actionIconPositionLeft'
-    | 'childImg'
-    ;
+    | 'childImg';
 
 
   //************* mui/material-ui/GridList/GridListTile
 
 
-  interface GridListTileProps extends StandardProps<
-    React.HTMLAttributes<HTMLLIElement>,
-    GridListTileClassKey
-    > {
+  interface GridListTileProps
+    extends StandardProps<React.HTMLAttributes<HTMLLIElement>, GridListTileClassKey> {
     cols?: number;
-    component?: string | React.ComponentType<GridListTileProps>;
+    component?: React.ReactType<GridListTileProps>;
     rows?: number;
   }
 
 
-  type GridListTileClassKey =
-    | 'root'
-    | 'tile'
-    | 'imgFullHeight'
-    | 'imgFullWidth'
-    ;
+  type GridListTileClassKey = 'root' | 'tile' | 'imgFullHeight' | 'imgFullWidth';
 
 
   //************* mui/material-ui/Icon/Icon
 
 
-  interface IconProps extends StandardProps<
-    React.HTMLAttributes<HTMLSpanElement>,
-    IconClassKey
-    > {
-    color?: PropTypes.Color | 'action' | 'contrast' | 'disabled' | 'error';
+  interface IconProps
+    extends StandardProps<React.HTMLAttributes<HTMLSpanElement>, IconClassKey> {
+    color?: PropTypes.Color | 'action' | 'disabled' | 'error';
   }
 
 
   type IconClassKey =
     | 'root'
-    | 'colorAccent'
+    | 'colorSecondary'
     | 'colorAction'
-    | 'colorContrast'
     | 'colorDisabled'
     | 'colorError'
     | 'colorPrimary'
-    ;
+    | 'fontSize';
 
 
   //************* mui/material-ui/Input/InputAdornment
 
 
   interface InputAdornmentProps extends StandardProps<{}, InputAdornmentClassKey> {
-    component?: string | React.ComponentType<InputAdornmentProps>;
+    component?: React.ReactType<InputAdornmentProps>;
     disableTypography?: boolean;
     position: 'start' | 'end';
   }
 
 
-  type InputAdornmentClassKey =
-    | 'root'
-    | 'positionStart'
-    | 'positionEnd'
-    ;
+  type InputAdornmentClassKey = 'root' | 'positionStart' | 'positionEnd';
 
 
   //************* mui/material-ui/Input/Input
 
 
-  interface InputProps extends StandardProps<
+  interface InputProps
+    extends StandardProps<
     React.HTMLAttributes<HTMLDivElement>,
     InputClassKey,
     'onChange' | 'onKeyUp' | 'onKeyDown' | 'defaultValue'
@@ -1427,7 +1255,7 @@ declare namespace Muix {
     error?: boolean;
     fullWidth?: boolean;
     id?: string;
-    inputComponent?: string | React.ComponentType<InputProps>;
+    inputComponent?: React.ReactType<InputProps>;
     inputProps?:
     | React.TextareaHTMLAttributes<HTMLTextAreaElement>
     | React.InputHTMLAttributes<HTMLInputElement>;
@@ -1472,21 +1300,64 @@ declare namespace Muix {
     | 'inputSingleline'
     | 'inputSearch'
     | 'inputMultiline'
-    | 'fullWidth'
-    ;
+    | 'fullWidth';
+
+
+  //************* mui/material-ui/styles/withStyles
+
+
+	/**
+	 * This is basically the API of JSS. It defines a Map<string, CSS>,
+	 * where
+	 *
+	 * - the `keys` are the class (names) that will be created
+	 * - the `values` are objects that represent CSS rules (`React.CSSProperties`).
+	 */
+  type StyleRules<ClassKey extends string = string> = Record<ClassKey, React.CSSProperties>;
+
+
+  type StyleRulesCallback<ClassKey extends string = string> = (
+    theme: Theme,
+  ) => StyleRules<ClassKey>;
+
+
+  interface StylesCreator {
+    create(theme: Theme, name: string): StyleRules;
+    options: { index: number };
+    themingEnabled: boolean;
+  }
+
+
+  interface WithStylesOptions {
+    flip?: boolean;
+    withTheme?: boolean;
+    name?: string;
+  }
+
+
+  type ClassNameMap<ClassKey extends string = string> = Record<ClassKey, string>;
+
+
+  interface WithStyles<ClassKey extends string = string> {
+    classes: ClassNameMap<ClassKey>;
+    theme?: Theme;
+  }
+
+
+  interface StyledComponentProps<ClassKey extends string = string> {
+    classes?: Partial<ClassNameMap<ClassKey>>;
+    innerRef?: React.Ref<any>;
+  }
 
 
   //************* mui/material-ui/Input/InputLabel
 
 
-  interface InputLabelProps extends StandardProps<
-    FormLabelProps,
-    InputLabelClassKey
-    > {
+  interface InputLabelProps extends StandardProps<FormLabelProps, InputLabelClassKey> {
     disableAnimation?: boolean;
     disabled?: boolean;
     error?: boolean;
-    FormControlClasses?: Object;
+    FormControlClasses?: Partial<ClassNameMap<FormLabelClassKey>>;
     focused?: boolean;
     required?: boolean;
     shrink?: boolean;
@@ -1498,18 +1369,15 @@ declare namespace Muix {
     | 'formControl'
     | 'labelDense'
     | 'shrink'
-    | 'animated'
-    ;
+    | 'animated';
 
 
   //************* mui/material-ui/Progress/LinearProgress
 
 
-  interface LinearProgressProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    LinearProgressClassKey
-    > {
-    color?: 'primary' | 'accent';
+  interface LinearProgressProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, LinearProgressClassKey> {
+    color?: 'primary' | 'secondary';
     mode?: 'determinate' | 'indeterminate' | 'buffer' | 'query';
     value?: number;
     valueBuffer?: number;
@@ -1521,9 +1389,9 @@ declare namespace Muix {
     | 'primaryColor'
     | 'primaryColorBar'
     | 'primaryDashed'
-    | 'accentColor'
-    | 'accentColorBar'
-    | 'accentDashed'
+    | 'secondaryColor'
+    | 'secondaryColorBar'
+    | 'secondaryDashed'
     | 'bar'
     | 'dashed'
     | 'bufferBar2'
@@ -1532,33 +1400,22 @@ declare namespace Muix {
     | 'indeterminateBar1'
     | 'indeterminateBar2'
     | 'determinateBar1'
-    | 'bufferBar1'
-    | 'bufferBar2Primary'
-    | 'bufferBar2Accent'
-    ;
+    | 'bufferBar1';
 
 
   //************* mui/material-ui/List/List
 
 
-  interface ListProps extends StandardProps<
-    React.HTMLAttributes<HTMLUListElement>,
-    ListClassKey
-    > {
-    component?: string | React.ComponentType<ListProps>;
+  interface ListProps
+    extends StandardProps<React.HTMLAttributes<HTMLUListElement>, ListClassKey> {
+    component?: React.ReactType<ListProps>;
     dense?: boolean;
     disablePadding?: boolean;
-    rootRef?: React.Ref<any>;
     subheader?: React.ReactElement<any>;
   }
 
 
-  type ListClassKey =
-    | 'root'
-    | 'padding'
-    | 'dense'
-    | 'subheader'
-    ;
+  type ListClassKey = 'root' | 'padding' | 'dense' | 'subheader';
 
 
   //************* mui/material-ui/List/ListItemAvatar
@@ -1567,22 +1424,20 @@ declare namespace Muix {
   interface ListItemAvatarProps extends StandardProps<{}, ListItemAvatarClassKey> { }
 
 
-  type ListItemAvatarClassKey =
-    | 'root'
-    | 'icon'
-    ;
+  type ListItemAvatarClassKey = 'root' | 'icon';
 
 
   //************* mui/material-ui/List/ListItem
 
 
-  interface ListItemProps extends StandardProps<
+  interface ListItemProps
+    extends StandardProps<
     ButtonBaseProps & React.LiHTMLAttributes<HTMLElement>,
     ListItemClassKey,
     'component'
     > {
     button?: boolean;
-    component?: string | React.ComponentType<ListItemProps>;
+    component?: React.ReactType<ListItemProps>;
     dense?: boolean;
     disabled?: boolean;
     disableGutters?: boolean;
@@ -1599,8 +1454,7 @@ declare namespace Muix {
     | 'divider'
     | 'gutters'
     | 'button'
-    | 'secondaryAction'
-    ;
+    | 'secondaryAction';
 
 
   //************* mui/material-ui/List/ListItemIcon
@@ -1609,29 +1463,24 @@ declare namespace Muix {
   interface ListItemIconProps extends StandardProps<{}, ListItemIconClassKey> { }
 
 
-  type ListItemIconClassKey =
-    | 'root'
-    ;
+  type ListItemIconClassKey = 'root';
 
 
   //************* mui/material-ui/List/ListItemSecondaryAction
 
 
-  interface ListItemSecondaryActionProps extends StandardProps<{}, ListItemSecondaryActionClassKey> { }
+  interface ListItemSecondaryActionProps
+    extends StandardProps<{}, ListItemSecondaryActionClassKey> { }
 
 
-  type ListItemSecondaryActionClassKey =
-    | 'root'
-    ;
+  type ListItemSecondaryActionClassKey = 'root';
 
 
   //************* mui/material-ui/List/ListItemText
 
 
-  interface ListItemTextProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    ListItemTextClassKey
-    > {
+  interface ListItemTextProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, ListItemTextClassKey> {
     disableTypography?: boolean;
     inset?: boolean;
     primary?: React.ReactNode;
@@ -1643,32 +1492,24 @@ declare namespace Muix {
     | 'root'
     | 'inset'
     | 'dense'
-    | 'text'
-    | 'textDense'
-    ;
+    | 'primary'
+    | 'secondary'
+    | 'textDense';
 
 
   //************* mui/material-ui/List/ListSubheader
 
 
-  interface ListSubheaderProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    ListSubheaderClassKey
-    > {
-    component?: string | React.ComponentType<ListSubheaderProps>;
+  interface ListSubheaderProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, ListSubheaderClassKey> {
+    component?: React.ReactType<ListSubheaderProps>;
     color?: 'default' | 'primary' | 'inherit';
     inset?: boolean;
     disableSticky?: boolean;
   }
 
 
-  type ListSubheaderClassKey =
-    | 'root'
-    | 'colorPrimary'
-    | 'colorInherit'
-    | 'inset'
-    | 'sticky'
-    ;
+  type ListSubheaderClassKey = 'root' | 'colorPrimary' | 'colorInherit' | 'inset' | 'sticky';
 
 
   //************* mui/material-ui/Popover/Popover
@@ -1689,37 +1530,32 @@ declare namespace Muix {
   type PopoverReference = 'anchorEl' | 'anchorPosition';
 
 
-  interface PopoverProps extends StandardProps<
-    ModalProps & Partial<TransitionHandlers>,
-    PopoverClassKey,
-    'onClose'
-    > {
-    anchorEl?: Object;
+  interface PopoverProps
+    extends StandardProps<ModalProps & Partial<TransitionHandlers>, PopoverClassKey, 'children'> {
+    action?: (actions: PopoverActions) => void;
+    anchorEl?: HTMLElement;
     anchorOrigin?: PopoverOrigin;
     anchorPosition?: PopoverPosition;
     anchorReference?: PopoverReference;
+    children?: React.ReactNode;
     elevation?: number;
-    enteredClassName?: string;
-    enteringClassName?: string;
-    exitedClassName?: string;
-    exitingClassName?: string;
-    getContentAnchorEl?: Function;
+    getContentAnchorEl?: (element: HTMLElement) => HTMLElement;
     marginThreshold?: number;
     modal?: boolean;
-    onClose?: Function;
-    open?: boolean;
     PaperProps?: Partial<PaperProps>;
     role?: string;
-    theme?: Object;
     transformOrigin?: PopoverOrigin;
+    transition?: React.ReactType;
     transitionDuration?: TransitionDuration;
   }
 
 
-  type PopoverClassKey =
-    | ModalClassKey
-    | 'paper'
-    ;
+  type PopoverClassKey = ModalClassKey | 'paper';
+
+
+  interface PopoverActions {
+    updatePosition(): void;
+  }
 
 
   //************* mui/material-ui/Popover/index
@@ -1731,58 +1567,39 @@ declare namespace Muix {
   //************* mui/material-ui/Menu/MenuList
 
 
-  interface MenuListProps extends StandardProps<
-    ListProps,
-    MenuListClassKey,
-    'onKeyDown'
-    > {
+  interface MenuListProps extends StandardProps<ListProps, MenuListClassKey, 'onKeyDown'> {
     onKeyDown?: React.ReactEventHandler<React.KeyboardEvent<any>>;
   }
 
 
-  type MenuListClassKey =
-    | ListClassKey
-    ;
+  type MenuListClassKey = ListClassKey;
 
 
   //************* mui/material-ui/Menu/Menu
 
 
-  interface MenuProps extends StandardProps<
-    PopoverProps & Partial<TransitionHandlers>,
-    MenuClassKey
-    > {
+  interface MenuProps
+    extends StandardProps<PopoverProps & Partial<TransitionHandlers>, MenuClassKey> {
     anchorEl?: HTMLElement;
     MenuListProps?: MenuListProps;
-    onClose?: React.EventHandler<any>;
-    open?: boolean;
     transitionDuration?: TransitionDuration;
   }
 
 
-  type MenuClassKey =
-    | PopoverClassKey
-    | 'root'
-    ;
+  type MenuClassKey = PopoverClassKey | 'root';
 
 
   //************* mui/material-ui/Menu/MenuItem
 
 
-  interface MenuItemProps extends StandardProps<
-    ListItemProps,
-    MenuItemClassKey
-    > {
-    component?: string | React.ComponentType<MenuItemProps>;
+  interface MenuItemProps extends StandardProps<ListItemProps, MenuItemClassKey> {
+    component?: React.ReactType<MenuItemProps>;
     role?: string;
     selected?: boolean;
   }
 
 
-  type MenuItemClassKey =
-    | ListItemClassKey
-    | 'selected'
-    ;
+  type MenuItemClassKey = ListItemClassKey | 'selected';
 
 
   //************* mui/material-ui/Button/index
@@ -1791,10 +1608,7 @@ declare namespace Muix {
   //************* mui/material-ui/MobileStepper/MobileStepper
 
 
-  interface MobileStepperProps extends StandardProps<
-    PaperProps,
-    MobileStepperClassKey
-    > {
+  interface MobileStepperProps extends StandardProps<PaperProps, MobileStepperClassKey> {
     activeStep?: number;
     backButton: React.ReactElement<any>;
     nextButton: React.ReactElement<any>;
@@ -1812,56 +1626,30 @@ declare namespace Muix {
     | 'dots'
     | 'dot'
     | 'dotActive'
-    | 'progress'
-    ;
+    | 'progress';
 
 
   //************* mui/material-ui/Radio/Radio
 
 
-  interface RadioProps extends StandardProps<
-    SwitchBaseProps,
-    RadioClassKey
-    > {
-    checked?: boolean | string;
-    checkedClassName?: string;
-    checkedIcon?: React.ReactNode;
-    defaultChecked?: boolean;
-    disabled?: boolean;
-    disabledClassName?: string;
-    disableRipple?: boolean;
-    icon?: React.ReactNode;
-    inputProps?: Object;
-    inputRef?: React.Ref<any>;
-    name?: string;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
-    tabIndex?: number;
-    value?: string;
-  }
+  interface RadioProps extends StandardProps<SwitchBaseProps, RadioClassKey> { }
 
 
-  type RadioClassKey =
-    | SwitchBaseClassKey
-    ;
+  type RadioClassKey = SwitchBaseClassKey;
 
 
   //************* mui/material-ui/Radio/RadioGroup
 
 
-  interface RadioGroupProps extends StandardProps<
-    FormGroupProps,
-    RadioGroupClassKey,
-    'onChange'
-    > {
+  interface RadioGroupProps
+    extends StandardProps<FormGroupProps, RadioGroupClassKey, 'onChange'> {
     name?: string;
     onChange?: (event: React.ChangeEvent<{}>, value: string) => void;
     value?: string;
   }
 
 
-  type RadioGroupClassKey =
-    | FormGroupClassKey
-    ;
+  type RadioGroupClassKey = FormGroupClassKey;
 
 
   //************* mui/material-ui/Input/index
@@ -1873,29 +1661,22 @@ declare namespace Muix {
   //************* mui/material-ui/Select/Select
 
 
-  interface SelectProps extends StandardProps<
-    InputProps,
-    SelectClassKey,
-    'value'
-    > {
+  interface SelectProps extends StandardProps<InputProps, SelectClassKey, 'value'> {
     autoWidth?: boolean;
     displayEmpty?: boolean;
     input?: React.ReactNode;
     MenuProps?: Partial<MenuProps>;
     multiple?: boolean;
     native?: boolean;
-    renderValue?: Function;
+    onClose?: (event: React.ChangeEvent<{}>) => void;
+    onOpen?: (event: React.ChangeEvent<{}>) => void;
+    open?: boolean;
+    renderValue?: (value: SelectProps['value']) => React.ReactNode;
     value?: Array<string | number> | string | number;
   }
 
 
-  type SelectClassKey =
-    | 'root'
-    | 'select'
-    | 'selectMenu'
-    | 'disabled'
-    | 'icon'
-    ;
+  type SelectClassKey = 'root' | 'select' | 'selectMenu' | 'disabled' | 'icon';
 
 
   //************* mui/material-ui/Select/SelectInput
@@ -1909,22 +1690,36 @@ declare namespace Muix {
     name?: string;
     native: boolean;
     onBlur?: React.FocusEventHandler<any>;
-    onChange?: (event: React.ChangeEvent<{}>, child: React.ReactNode) => void,
+    onChange?: (event: React.ChangeEvent<{}>, child: React.ReactNode) => void;
+    onClose?: (event: React.ChangeEvent<{}>) => void;
     onFocus?: React.FocusEventHandler<any>;
+    onOpen?: (event: React.ChangeEvent<{}>) => void;
+    open?: boolean;
     readOnly?: boolean;
-    renderValue?: Function;
-    selectRef?: Function;
+    renderValue?: (value: SelectInputProps['value']) => React.ReactNode;
+    selectRef?: (
+      ref: HTMLSelectElement | { node: HTMLInputElement; value: SelectInputProps['value'] },
+    ) => void;
     value?: string | number | Array<string | number>;
   }
 
 
-  type SelectInputClassKey =
-    | 'root'
-    | 'select'
-    | 'selectMenu'
-    | 'disabled'
-    | 'icon'
-    ;
+  type SelectInputClassKey = 'root' | 'select' | 'selectMenu' | 'disabled' | 'icon';
+
+
+  //************* mui/material-ui/Snackbar/SnackbarContent
+
+
+  interface SnackbarContentProps extends StandardProps<PaperProps, SnackbarContentClassKey> {
+    action?: React.ReactElement<any>;
+    message: React.ReactElement<any> | string;
+  }
+
+
+  type SnackbarContentClassKey = PaperClassKey | 'message' | 'action';
+
+
+  //************* mui/material-ui/Snackbar/index
 
 
   //************* mui/material-ui/Snackbar/Snackbar
@@ -1936,7 +1731,8 @@ declare namespace Muix {
   };
 
 
-  interface SnackbarProps extends StandardProps<
+  interface SnackbarProps
+    extends StandardProps<
     React.HTMLAttributes<HTMLDivElement> & Partial<TransitionHandlers>,
     SnackbarClassKey
     > {
@@ -1949,7 +1745,7 @@ declare namespace Muix {
     onMouseLeave?: React.MouseEventHandler<any>;
     open: boolean;
     resumeHideDuration?: number;
-    SnackbarContentProps?: Object;
+    SnackbarContentProps?: Partial<SnackbarContentProps>;
     transition?: React.ReactType;
     transitionDuration?: TransitionDuration;
   }
@@ -1962,75 +1758,16 @@ declare namespace Muix {
     | 'anchorTopRight'
     | 'anchorBottomRight'
     | 'anchorTopLeft'
-    | 'anchorBottomLeft'
-    ;
-
-
-  //************* mui/material-ui/Snackbar/SnackbarContent
-
-
-  interface SnackbarContentProps extends StandardProps<
-    PaperProps,
-    SnackbarContentClassKey
-    > {
-    action?: React.ReactElement<any>;
-    message: React.ReactElement<any> | string;
-  }
-
-
-  type SnackbarContentClassKey =
-    | PaperClassKey
-    | 'message'
-    | 'action'
-    ;
-
-
-  //************* mui/material-ui/styles/withStyles
-
-
-	/**
-	   * This is basically the API of JSS. It defines a Map<string, CSS>,
-	   * where
-	   *
-	   * - the `keys` are the class (names) that will be created
-	   * - the `values` are objects that represent CSS rules (`React.CSSProperties`).
-	   */
-  type StyleRules<ClassKey extends string = string> = Record<ClassKey, React.CSSProperties>;
-
-
-  type StyleRulesCallback<ClassKey extends string = string> = (theme: Theme) => StyleRules<ClassKey>;
-
-
-  interface WithStylesOptions {
-    flip?: boolean;
-    withTheme?: boolean;
-    name?: string;
-  }
-
-
-  type ClassNameMap<ClassKey extends string = string> = Record<ClassKey, string>;
-
-
-  interface WithStyles<ClassKey extends string = string> {
-    classes: ClassNameMap<ClassKey>
-    theme?: Theme
-  }
-
-
-  interface StyledComponentProps<ClassKey extends string = string> {
-    classes?: Partial<ClassNameMap<ClassKey>>;
-    innerRef?: React.Ref<any>;
-  }
+    | 'anchorBottomLeft';
 
 
   //************* mui/material-ui/SvgIcon/SvgIcon
 
 
-  interface SvgIconProps extends StandardProps<
-    React.SVGProps<SVGSVGElement>,
-    SvgIconClassKey
-    > {
-    color?: PropTypes.Color | 'action' | 'contrast' | 'disabled' | 'error';
+  interface SvgIconProps
+    extends StandardProps<React.SVGProps<SVGSVGElement>, SvgIconClassKey> {
+    color?: PropTypes.Color | 'action' | 'disabled' | 'error';
+    nativeColor?: string;
     titleAccess?: string;
     viewBox?: string;
   }
@@ -2038,78 +1775,49 @@ declare namespace Muix {
 
   type SvgIconClassKey =
     | 'root'
-    | 'colorAccent'
+    | 'colorSecondary'
     | 'colorAction'
-    | 'colorContrast'
     | 'colorDisabled'
     | 'colorError'
     | 'colorPrimary'
-    ;
+    | 'fontSize';
 
 
   //************* mui/material-ui/Switch/Switch
 
 
-  interface SwitchProps extends StandardProps<
-    SwitchBaseProps,
-    SwitchClassKey
-    > {
-    checked?: boolean | string;
-    checkedClassName?: string;
-    checkedIcon?: React.ReactNode;
-    defaultChecked?: boolean;
-    disabled?: boolean;
-    disabledClassName?: string;
-    disableRipple?: boolean;
-    icon?: React.ReactNode;
-    inputProps?: object;
-    name?: string;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
-    tabIndex?: number;
-    value?: string;
-  }
+  interface SwitchProps extends StandardProps<SwitchBaseProps, SwitchClassKey> { }
 
 
-  type SwitchClassKey =
-    | SwitchBaseClassKey
-    | 'bar'
-    | 'icon'
-    ;
+  type SwitchClassKey = SwitchBaseClassKey | 'bar' | 'icon';
 
 
   //************* mui/material-ui/Tabs/Tab
 
 
-  interface TabProps extends StandardProps<
-    ButtonBaseProps,
-    TabClassKey,
-    'onChange'
-    > {
+  interface TabProps extends StandardProps<ButtonBaseProps, TabClassKey, 'onChange'> {
     disabled?: boolean;
     fullWidth?: boolean;
     icon?: string | React.ReactElement<any>;
     value?: any;
     label?: React.ReactNode;
-    onChange?: (
-      event: React.ChangeEvent<{ checked: boolean }>,
-      value: any
-    ) => void;
+    onChange?: (event: React.ChangeEvent<{ checked: boolean }>, value: any) => void;
     onClick?: React.EventHandler<any>;
     selected?: boolean;
-    style?: object;
-    textColor?: string | 'accent' | 'primary' | 'inherit';
+    style?: React.CSSProperties;
+    textColor?: string | 'secondary' | 'primary' | 'inherit';
   }
 
 
   type TabClassKey =
     | ButtonBaseClassKey
     | 'rootLabelIcon'
-    | 'rootAccent'
-    | 'rootAccentSelected'
-    | 'rootAccentDisabled'
     | 'rootPrimary'
     | 'rootPrimarySelected'
     | 'rootPrimaryDisabled'
+    | 'rootSecondary'
+    | 'rootSecondarySelected'
+    | 'rootSecondaryDisabled'
     | 'rootInherit'
     | 'rootInheritSelected'
     | 'rootInheritDisabled'
@@ -2117,65 +1825,34 @@ declare namespace Muix {
     | 'wrapper'
     | 'labelContainer'
     | 'label'
-    | 'labelWrapped'
-    ;
+    | 'labelWrapped';
 
 
   //************* mui/material-ui/Tabs/TabIndicator
 
 
-  interface TabIndicatorProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    TabIndicatorClassKey
-    > {
-    color: 'accent' | 'primary' | string;
+  interface TabIndicatorProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, TabIndicatorClassKey> {
+    color: 'secondary' | 'primary' | string;
     style: { left: number; width: number };
   }
 
 
-  type TabIndicatorClassKey =
-    | 'root'
-    | 'colorAccent'
-    | 'colorPrimary'
-    ;
+  type TabIndicatorClassKey = 'root' | 'colorSecondary' | 'colorPrimary';
 
 
   //************* mui/material-ui/Table/Table
 
 
-  interface TableProps extends StandardProps<
-    TableBaseProps,
-    TableClassKey
-    > {
-    component?: string | React.ComponentType<TableBaseProps>;
+  interface TableProps extends StandardProps<TableBaseProps, TableClassKey> {
+    component?: React.ReactType<TableBaseProps>;
   }
 
 
   type TableBaseProps = React.TableHTMLAttributes<HTMLTableElement>;
 
 
-  type TableClassKey =
-    | 'root'
-    ;
-
-
-  //************* mui/material-ui/Table/TableBody
-
-
-  interface TableBodyProps extends StandardProps<
-    TableBodyBaseProps,
-    TableBodyClassKey
-    > {
-    component?: string | React.ComponentType<TableBodyBaseProps>;
-  }
-
-
-  type TableBodyBaseProps = React.HTMLAttributes<HTMLTableSectionElement>;
-
-
-  type TableBodyClassKey =
-    | 'root'
-    ;
+  type TableClassKey = 'root';
 
 
   //************* mui/material-ui/Table/TableCell
@@ -2189,77 +1866,33 @@ declare namespace Muix {
 	 * Since it is not decided via prop, we have create loose typings
 	 * here.
 	 */
-  interface TableCellProps extends StandardProps<
-    TableCellBaseProps,
-    TableCellClassKey
-    > {
-    component?: string | React.ComponentType<TableCellBaseProps>;
+  interface TableCellProps extends StandardProps<TableCellBaseProps, TableCellClassKey> {
+    component?: React.ReactType<TableCellBaseProps>;
     padding?: Padding;
     numeric?: boolean;
+    type?: Type;
   }
 
 
-  type TableCellBaseProps =
-    & React.ThHTMLAttributes<HTMLTableHeaderCellElement>
-    & React.TdHTMLAttributes<HTMLTableDataCellElement>
-    ;
+  type TableCellBaseProps = React.ThHTMLAttributes<HTMLTableHeaderCellElement> &
+    React.TdHTMLAttributes<HTMLTableDataCellElement>;
 
 
-  type Padding =
-    | 'default'
-    | 'checkbox'
-    | 'dense'
-    | 'none'
-    ;
+  type Padding = 'default' | 'checkbox' | 'dense' | 'none';
+
+
+  type Type = 'head' | 'body' | 'footer';
 
 
   type TableCellClassKey =
     | 'root'
     | 'numeric'
-    | 'head'
+    | 'typeHead'
+    | 'typeBody'
+    | 'typeFooter'
     | 'paddingDefault'
-    | 'paddingCompact'
-    | 'paddingCheckbox'
-    | 'footer'
-    ;
-
-
-  //************* mui/material-ui/Table/TableFooter
-
-
-  interface TableFooterProps extends StandardProps<
-    TableFooterBaseProps,
-    TableFooterClassKey
-    > {
-    component?: string | React.ComponentType<TableFooterBaseProps>;
-  }
-
-
-  type TableFooterBaseProps = React.HTMLAttributes<HTMLTableSectionElement>;
-
-
-  type TableFooterClassKey =
-    | 'root'
-    ;
-
-
-  //************* mui/material-ui/Table/TableHead
-
-
-  interface TableHeadProps extends StandardProps<
-    TableHeadBaseProps,
-    TableHeadClassKey
-    > {
-    component?: string | React.ComponentType<TableHeadBaseProps>;
-  }
-
-
-  type TableHeadBaseProps = React.HTMLAttributes<HTMLTableSectionElement>;
-
-
-  type TableHeadClassKey =
-    | 'root'
-    ;
+    | 'paddingDense'
+    | 'paddingCheckbox';
 
 
   //************* mui/material-ui/Table/TablePagination
@@ -2273,14 +1906,15 @@ declare namespace Muix {
   }
 
 
-  interface TablePaginationProps extends StandardProps<
-    TablePaginationBaseProps,
-    TablePaginationClassKey
-    > {
-    component?: string | React.ComponentType<TablePaginationBaseProps>;
+  interface TablePaginationProps
+    extends StandardProps<TablePaginationBaseProps, TablePaginationClassKey> {
+    Actions?: React.ReactType<TablePaginationBaseProps>;
+    backIconButtonProps?: IconButtonProps;
+    component?: React.ReactType<TablePaginationBaseProps>;
     count: number;
     labelDisplayedRows?: (paginationInfo: LabelDisplayedRowsArgs) => React.ReactNode;
     labelRowsPerPage?: React.ReactNode;
+    nextIconButtonProps?: IconButtonProps;
     onChangePage: (event: React.MouseEvent<HTMLButtonElement> | null, page: number) => void;
     onChangeRowsPerPage?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
     page: number;
@@ -2299,19 +1933,14 @@ declare namespace Muix {
     | 'caption'
     | 'input'
     | 'selectRoot'
-    | 'select'
-    | 'actions'
-    ;
+    | 'select';
 
 
   //************* mui/material-ui/Table/TableRow
 
 
-  interface TableRowProps extends StandardProps<
-    TableRowBaseProps,
-    TableRowClassKey
-    > {
-    component?: string | React.ComponentType<TableRowBaseProps>;
+  interface TableRowProps extends StandardProps<TableRowBaseProps, TableRowClassKey> {
+    component?: React.ReactType<TableRowBaseProps>;
     hover?: boolean;
     selected?: boolean;
   }
@@ -2320,55 +1949,38 @@ declare namespace Muix {
   type TableRowBaseProps = React.HTMLAttributes<HTMLTableRowElement>;
 
 
-  type TableRowClassKey =
-    | 'root'
-    | 'head'
-    | 'footer'
-    | 'hover'
-    | 'selected'
-    ;
+  type TableRowClassKey = 'root' | 'typeHead' | 'typeFooter' | 'hover' | 'selected';
 
 
   //************* mui/material-ui/Table/TableSortLabel
 
 
-  interface TableSortLabelProps extends StandardProps<
-    ButtonBaseProps,
-    TableSortLabelClassKey
-    > {
+  interface TableSortLabelProps
+    extends StandardProps<ButtonBaseProps, TableSortLabelClassKey> {
     active?: boolean;
     direction?: 'asc' | 'desc';
   }
 
 
-  type TableSortLabelClassKey =
-    | ButtonBaseClassKey
-    | 'active'
-    | 'icon'
-    | 'desc'
-    | 'asc'
-    ;
+  type TableSortLabelClassKey = ButtonBaseClassKey | 'active' | 'icon' | 'desc' | 'asc';
 
 
   //************* mui/material-ui/Tabs/Tabs
 
 
-  interface TabsProps extends StandardProps<
-    ButtonBaseProps,
-    TabsClassKey,
-    'onChange'
-    > {
+  interface TabsProps extends StandardProps<ButtonBaseProps, TabsClassKey, 'onChange'> {
+    action?: (actions: TabsActions) => void;
     buttonClassName?: string;
     centered?: boolean;
     children?: React.ReactNode;
     fullWidth?: boolean;
     indicatorClassName?: string;
-    indicatorColor?: 'accent' | 'primary' | string;
-    onChange: (event: React.ChangeEvent<{}>, value: any) => void;
+    indicatorColor?: 'secondary' | 'primary' | string;
+    onChange?: (event: React.ChangeEvent<{}>, value: any) => void;
     scrollable?: boolean;
     scrollButtons?: 'auto' | 'on' | 'off';
-    TabScrollButton?: React.ReactType,
-    textColor?: 'accent' | 'primary' | 'inherit' | string;
+    TabScrollButton?: React.ReactType;
+    textColor?: 'secondary' | 'primary' | 'inherit' | string;
     value: any;
     width?: string;
   }
@@ -2380,32 +1992,32 @@ declare namespace Muix {
     | 'scrollingContainer'
     | 'fixed'
     | 'scrollable'
-    | 'centered'
-    ;
+    | 'centered';
+
+
+  interface TabsActions {
+    updateIndicator(): void;
+  }
 
 
   //************* mui/material-ui/Tabs/TabScrollButton
 
 
-  interface TabScrollButtonProps extends StandardProps<
-    ButtonBaseProps,
-    TabScrollButtonClassKey
-    > {
+  interface TabScrollButtonProps
+    extends StandardProps<ButtonBaseProps, TabScrollButtonClassKey> {
     direction?: 'left' | 'right';
     visible?: boolean;
   }
 
 
-  type TabScrollButtonClassKey =
-    | ButtonBaseClassKey
-    | 'root'
-    ;
+  type TabScrollButtonClassKey = ButtonBaseClassKey | 'root';
 
 
   //************* mui/material-ui/Input/Textarea
 
 
-  interface TextareaProps extends StandardProps<
+  interface TextareaProps
+    extends StandardProps<
     React.TextareaHTMLAttributes<HTMLTextAreaElement>,
     TextareaClassKey,
     'rows'
@@ -2419,38 +2031,26 @@ declare namespace Muix {
   }
 
 
-  type TextareaClassKey =
-    | 'root'
-    | 'shadow'
-    | 'textarea'
-    ;
+  type TextareaClassKey = 'root' | 'shadow' | 'textarea';
 
 
   //************* mui/material-ui/Toolbar/Toolbar
 
 
-  interface ToolbarProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    ToolbarClassKey
-    > {
+  interface ToolbarProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, ToolbarClassKey> {
     disableGutters?: boolean;
   }
 
 
-  type ToolbarClassKey =
-    | 'root'
-    | 'gutters'
-    ;
+  type ToolbarClassKey = 'root' | 'gutters';
 
 
   //************* mui/material-ui/Tooltip/Tooltip
 
 
-  interface TooltipProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    TooltipClassKey,
-    'title'
-    > {
+  interface TooltipProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, TooltipClassKey, 'title'> {
     children: React.ReactElement<any>;
     disableTriggerFocus?: boolean;
     disableTriggerHover?: boolean;
@@ -2474,7 +2074,7 @@ declare namespace Muix {
     | 'top-end'
     | 'top-start'
     | 'top';
-    PopperProps?: object;
+    PopperProps?: Partial<PopperProps>;
     title: React.ReactNode;
   }
 
@@ -2488,20 +2088,41 @@ declare namespace Muix {
     | 'tooltipRight'
     | 'tooltipTop'
     | 'tooltipBottom'
-    | 'tooltipOpen'
-    ;
+    | 'tooltipOpen';
+
+
+  interface PopperProps extends IPopperProps {
+    PopperClassName: string;
+  }
+
+
+  //************* mui/material-ui/ButtonBase/TouchRipple
+
+
+  interface TouchRippleProps
+    extends StandardProps<TransitionGroup.TransitionGroupProps, TouchRippleClassKey> {
+    center?: boolean;
+  }
+
+
+  type TouchRippleClassKey =
+    | 'root'
+    | 'wrapper'
+    | 'wrapperLeaving'
+    | 'wrapperPulsating'
+    | 'ripple'
+    | 'rippleVisible'
+    | 'rippleFast';
 
 
   //************* mui/material-ui/Typography/Typography
 
 
-  interface TypographyProps extends StandardProps<
-    React.HTMLAttributes<HTMLElement>,
-    TypographyClassKey
-    > {
+  interface TypographyProps
+    extends StandardProps<React.HTMLAttributes<HTMLElement>, TypographyClassKey> {
     align?: PropTypes.Alignment;
-    color?: PropTypes.Color | 'secondary' | 'error';
-    component?: string | React.ComponentType<TypographyProps>;
+    color?: PropTypes.Color | 'textSecondary' | 'error';
+    component?: React.ReactType<TypographyProps>;
     gutterBottom?: boolean;
     headlineMapping?: {[type in TextStyle]: string };
     noWrap?: boolean;
@@ -2532,8 +2153,7 @@ declare namespace Muix {
     | 'paragraph'
     | 'colorInherit'
     | 'colorSecondary'
-    | 'colorAccent'
-    ;
+    | 'colorTextSecondary';
 
 
   //************* mui/material-ui/styles/overrides
@@ -2550,7 +2170,7 @@ declare namespace Muix {
     MuiBackdrop: BackdropClassKey;
     MuiBadge: BadgeClassKey;
     MuiBottomNavigation: BottomNavigationClassKey;
-    MuiBottomNavigationButton: BottomNavigationButtonClassKey;
+    MuiBottomNavigationAction: BottomNavigationActionClassKey;
     MuiButton: ButtonClassKey;
     MuiButtonBase: ButtonBaseClassKey;
     // MuiCard: CardClassKey;
@@ -2610,10 +2230,7 @@ declare namespace Muix {
     MuiTab: TabClassKey;
     MuiTabIndicator: TabIndicatorClassKey;
     MuiTable: TableClassKey;
-    MuiTableBody: TableBodyClassKey;
     MuiTableCell: TableCellClassKey;
-    MuiTableFooter: TableFooterClassKey;
-    MuiTableHead: TableHeadClassKey;
     MuiTablePagination: TablePaginationClassKey;
     MuiTableRow: TableRowClassKey;
     MuiTableSortLabel: TableSortLabelClassKey;
@@ -2623,8 +2240,9 @@ declare namespace Muix {
     // MuiTextField: TextFieldClassKey;
     MuiToolbar: ToolbarClassKey;
     MuiTooltip: TooltipClassKey;
+    MuiTouchRipple: TouchRippleClassKey;
     MuiTypography: TypographyClassKey;
-  }
+  };
 
 
   //************* mui/material-ui/styles/createMuiTheme
@@ -2661,12 +2279,21 @@ declare namespace Muix {
   }
 
 
+  //************* mui/material-ui/styles/jssPreset
+
+
   //************* mui/material-ui/styles/MuiThemeProvider
+
+
+  interface SheetManagerTheme {
+    refs: number;
+    sheet: StyleSheet<string>;
+  }
 
 
   interface MuiThemeProviderProps {
     theme: Theme | ((outer: Theme | null) => Theme);
-    sheetsManager?: Object;
+    sheetsManager?: Map<StylesCreator, Map<Theme, SheetManagerTheme>>;
     children: React.ReactNode;
   }
 
@@ -2675,11 +2302,8 @@ declare namespace Muix {
 
 
   interface WithTheme {
-    theme: Theme
+    theme: Theme;
   }
-
-
-  //************* mui/material-ui/styles/createGenerateClassName
 
 
   //************* mui/material-ui/styles/index
@@ -2753,32 +2377,24 @@ declare namespace Muix {
   //************* mui/material-ui/ExpansionPanel/ExpansionPanel
 
 
-  interface ExpansionPanelProps extends StandardProps<
-    PaperProps,
-    ExpansionPanelClassKey
-    > {
+  interface ExpansionPanelProps
+    extends StandardProps<PaperProps, ExpansionPanelClassKey, 'onChange'> {
     CollapseProps?: React.ComponentType<CollapseProps>;
     defaultExpanded?: boolean;
     disabled?: boolean;
     expanded?: boolean;
-    onChange?: React.ReactEventHandler<{}>;
+    onChange?: (event: React.ChangeEvent<{}>, expanded: boolean) => void;
   }
 
 
-  type ExpansionPanelClassKey =
-    | PaperClassKey
-    | 'disabled'
-    | 'expanded'
-    ;
+  type ExpansionPanelClassKey = PaperClassKey | 'disabled' | 'expanded';
 
 
   //************* mui/material-ui/ExpansionPanel/ExpansionPanelSummary
 
 
-  interface ExpansionPanelSummaryProps extends StandardProps<
-    ButtonBaseProps,
-    ExpansionPanelSummaryClassKey
-    > {
+  interface ExpansionPanelSummaryProps
+    extends StandardProps<ButtonBaseProps, ExpansionPanelSummaryClassKey> {
     disabled?: boolean;
     expanded?: boolean;
     expandIcon?: React.ReactNode;
@@ -2794,61 +2410,33 @@ declare namespace Muix {
     | 'content'
     | 'contentExpanded'
     | 'expandIcon'
-    | 'expandIconExpanded'
-    ;
+    | 'expandIconExpanded';
 
 
   //************* mui/material-ui/ExpansionPanel/ExpansionPanelDetails
 
 
-  interface ExpansionPanelDetailsProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    ExpansionPanelDetailsClassKey
-    > { }
+  interface ExpansionPanelDetailsProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, ExpansionPanelDetailsClassKey> { }
 
 
-  type ExpansionPanelDetailsClassKey =
-    | 'root'
-    ;
+  type ExpansionPanelDetailsClassKey = 'root';
 
 
   //************* mui/material-ui/ExpansionPanel/ExpansionPanelActions
 
 
-  interface ExpansionPanelActionsProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    ExpansionPanelActionsClassKey
-    > { }
+  interface ExpansionPanelActionsProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, ExpansionPanelActionsClassKey> { }
 
 
-  type ExpansionPanelActionsClassKey =
-    | 'root'
-    | 'action'
-    ;
+  type ExpansionPanelActionsClassKey = 'root' | 'action';
 
 
   //************* mui/material-ui/ExpansionPanel/index
 
 
   //************* mui/material-ui/Form/index
-
-
-  //************* mui/material-ui/Hidden/HiddenJs
-
-
-  interface HiddenJsProps {
-    only?: Breakpoint | Array<Breakpoint>;
-    xsUp?: boolean;
-    smUp?: boolean;
-    mdUp?: boolean;
-    lgUp?: boolean;
-    xlUp?: boolean;
-    xsDown?: boolean;
-    smDown?: boolean;
-    mdDown?: boolean;
-    lgDown?: boolean;
-    xlDown?: boolean;
-  }
 
 
   //************* mui/material-ui/Hidden/index
@@ -2860,16 +2448,30 @@ declare namespace Muix {
   //************* mui/material-ui/Grid/index
 
 
+  //************* mui/material-ui/GridList/index
+
+
+  //************* mui/material-ui/MobileStepper/index
+
+
   //************* mui/material-ui/Progress/index
 
 
   //************* mui/material-ui/Radio/index
 
 
+  //************* mui/material-ui/Reboot/Reboot
+
+
+  interface RebootProps {
+    children?: React.ReactElement<any>;
+  }
+
+
+  //************* mui/material-ui/Reboot/index
+
+
   //************* mui/material-ui/Select/index
-
-
-  //************* mui/material-ui/Snackbar/index
 
 
   //************* mui/material-ui/Stepper/Stepper
@@ -2878,34 +2480,24 @@ declare namespace Muix {
   type Orientation = 'horizontal' | 'vertical';
 
 
-  interface StepperProps extends StandardProps<
-    PaperProps,
-    StepperClasskey
-    > {
-    activeStep?: number,
-    alternativeLabel?: boolean,
-    children: React.ReactNode,
-    connector?: React.ReactElement<any> | React.ReactNode,
-    nonLinear?: boolean,
-    orientation?: Orientation,
+  interface StepperProps extends StandardProps<PaperProps, StepperClasskey> {
+    activeStep?: number;
+    alternativeLabel?: boolean;
+    children: React.ReactNode;
+    connector?: React.ReactElement<any> | React.ReactNode;
+    nonLinear?: boolean;
+    orientation?: Orientation;
   }
 
 
-  type StepperClasskey =
-    | PaperClassKey
-    | 'root'
-    | 'horizontal'
-    | 'vertical'
-    ;
+  type StepperClasskey = PaperClassKey | 'root' | 'horizontal' | 'vertical';
 
 
   //************* mui/material-ui/Stepper/Step
 
 
-  interface StepProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    StepClasskey
-    > {
+  interface StepProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, StepClasskey> {
     active?: boolean;
     alternativeLabel?: boolean;
     children?: React.ReactNode;
@@ -2918,11 +2510,7 @@ declare namespace Muix {
   }
 
 
-  type StepClasskey =
-    | 'root'
-    | 'horizontal'
-    | 'alternativeLabel'
-    ;
+  type StepClasskey = 'root' | 'horizontal' | 'alternativeLabel';
 
 
   //************* mui/material-ui/Stepper/StepButton
@@ -2931,36 +2519,26 @@ declare namespace Muix {
   type StepButtonIcon = React.ReactElement<any> | string | number;
 
 
-  interface StepButtonProps extends StandardProps<
-    ButtonBaseProps,
-    StepButtonClasskey
-    > {
+  interface StepButtonProps extends StandardProps<ButtonBaseProps, StepButtonClasskey> {
     active?: boolean;
     alternativeLabel?: boolean;
-    children: React.ReactElement<any>;
     completed?: boolean;
     disabled?: boolean;
     icon?: StepButtonIcon;
     last?: boolean;
     optional?: React.ReactNode;
-    orientation: Orientation;
+    orientation?: Orientation;
   }
 
 
-  type StepButtonClasskey =
-    | ButtonBaseClassKey
-    | 'root'
-    | 'alternativeLabel'
-    ;
+  type StepButtonClasskey = ButtonBaseClassKey | 'root' | 'alternativeLabel';
 
 
   //************* mui/material-ui/Stepper/StepContent
 
 
-  interface StepContentProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    StepContentClasskey
-    > {
+  interface StepContentProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, StepContentClasskey> {
     active?: boolean;
     alternativeLabel?: boolean;
     children: React.ReactNode;
@@ -2968,25 +2546,19 @@ declare namespace Muix {
     last?: boolean;
     optional?: boolean;
     orientation?: Orientation;
-    transition?: Function;
+    transition?: React.ComponentType<TransitionProps>;
     transitionDuration?: TransitionDuration | 'auto';
   }
 
 
-  type StepContentClasskey =
-    | 'root'
-    | 'last'
-    | 'transition'
-    ;
+  type StepContentClasskey = 'root' | 'last' | 'transition';
 
 
   //************* mui/material-ui/Stepper/StepLabel
 
 
-  interface StepLabelProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    StepLabelClasskey
-    > {
+  interface StepLabelProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, StepLabelClasskey> {
     active?: boolean;
     alternativeLabel?: boolean;
     children: React.ReactNode;
@@ -3009,8 +2581,7 @@ declare namespace Muix {
     | 'iconContainer'
     | 'iconContainerNoAlternative'
     | 'alternativeLabelRoot'
-    | 'alternativeLabel'
-    ;
+    | 'alternativeLabel';
 
 
   //************* mui/material-ui/Stepper/index
@@ -3082,6 +2653,39 @@ declare namespace Muix {
   //************* mui/material-ui/Switch/index
 
 
+  //************* mui/material-ui/Table/TableFooter
+
+
+  interface TableFooterProps extends TableFooterBaseProps {
+    component?: React.ReactType<TableFooterBaseProps>;
+  }
+
+
+  type TableFooterBaseProps = React.HTMLAttributes<HTMLTableSectionElement>;
+
+
+  //************* mui/material-ui/Table/TableHead
+
+
+  interface TableHeadProps extends TableHeadBaseProps {
+    component?: React.ReactType<TableHeadBaseProps>;
+  }
+
+
+  type TableHeadBaseProps = React.HTMLAttributes<HTMLTableSectionElement>;
+
+
+  //************* mui/material-ui/Table/TableBody
+
+
+  interface TableBodyProps extends TableBodyBaseProps {
+    component?: React.ReactType<TableBodyBaseProps>;
+  }
+
+
+  type TableBodyBaseProps = React.HTMLAttributes<HTMLTableSectionElement>;
+
+
   //************* mui/material-ui/Table/index
 
 
@@ -3094,11 +2698,8 @@ declare namespace Muix {
   //************* mui/material-ui/TextField/TextField
 
 
-  interface TextFieldProps extends StandardProps<
-    FormControlProps,
-    TextFieldClassKey,
-    'onChange' | 'defaultValue'
-    > {
+  interface TextFieldProps
+    extends StandardProps<FormControlProps, TextFieldClassKey, 'onChange' | 'defaultValue'> {
     autoComplete?: string;
     autoFocus?: boolean;
     children?: React.ReactNode;
@@ -3122,7 +2723,6 @@ declare namespace Muix {
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
     placeholder?: string;
     required?: boolean;
-    rootRef?: React.Ref<any>;
     rows?: string | number;
     rowsMax?: string | number;
     select?: boolean;
@@ -3132,9 +2732,7 @@ declare namespace Muix {
   }
 
 
-  type TextFieldClassKey =
-    | FormControlClassKey
-    ;
+  type TextFieldClassKey = FormControlClassKey;
 
 
   //************* mui/material-ui/TextField/index
@@ -3155,10 +2753,10 @@ declare namespace Muix {
   }
 
 
-  //************* mui/material-ui/transitions/Fade
+  //************* mui/material-ui/transitions/Zoom
 
 
-  interface FadeProps extends TransitionProps {
+  interface ZoomProps extends TransitionProps {
     theme?: Theme;
     timeout?: TransitionDuration;
   }
@@ -3175,16 +2773,17 @@ declare namespace Muix {
 	 * certain `classes`, on which one can also set a top-level `className` and inline
 	 * `style`.
 	 */
-  type StandardProps<C, ClassKey extends string, Removals extends keyof C = never> =
-    & Omit<C & { classes: any }, 'classes' | Removals>
-    & StyledComponentProps<ClassKey>
-    & {
+  type StandardProps<C, ClassKey extends string, Removals extends keyof C = never> = Omit<
+    C & { classes: any },
+    'classes' | Removals
+    > &
+    StyledComponentProps<ClassKey> & {
       className?: string;
       style?: Partial<React.CSSProperties>;
-    }
+    };
 
 
-  type Contrast = 'light' | 'dark';
+  type PaletteType = 'light' | 'dark';
 
   interface Color {
     50: string;
@@ -3201,7 +2800,6 @@ declare namespace Muix {
     A200: string;
     A400: string;
     A700: string;
-    contrastDefaultColor: Contrast;
   }
 
 
@@ -3211,10 +2809,8 @@ declare namespace Muix {
 	 */
 
   /** @internal */
-  type Diff<T extends string, U extends string> = (
-    {[P in T]: P } &
-    {[P in U]: never } & { [x: string]: never }
-  )[T];
+  type Diff<T extends string, U extends string> = ({[P in T]: P } &
+    {[P in U]: never } & { [x: string]: never })[T];
 
 
   /** @internal */
@@ -3228,19 +2824,44 @@ declare namespace Muix {
   }
 
 
-  //************* mui/material-ui/GridList/index
+  //************* mui/material-ui/Hidden/HiddenCss
 
 
-  //************* mui/material-ui/internal/Portal
-
-
-  interface PortalProps {
-    open?: boolean;
+  interface HiddenCssProps {
+    lgDown?: boolean;
+    lgUp?: boolean;
+    mdDown?: boolean;
+    mdUp?: boolean;
+    only?: Breakpoint | Array<Breakpoint>;
+    smDown?: boolean;
+    smUp?: boolean;
+    xlDown?: boolean;
+    xlUp?: boolean;
+    xsDown?: boolean;
+    xsUp?: boolean;
   }
 
 
+  //************* mui/material-ui/Hidden/HiddenJs
 
-  //************* mui/material-ui/MobileStepper/index
+
+  interface HiddenJsProps {
+    initialWidth?: Breakpoint;
+    lgDown?: boolean;
+    lgUp?: boolean;
+    mdDown?: boolean;
+    mdUp?: boolean;
+    only?: Breakpoint | Array<Breakpoint>;
+    smDown?: boolean;
+    smUp?: boolean;
+    xlDown?: boolean;
+    xlUp?: boolean;
+    xsDown?: boolean;
+    xsUp?: boolean;
+  }
+
+
+  //************* mui/material-ui/Modal/manageAriaHidden
 
 
   //************* mui/material-ui/Stepper/StepConnector
@@ -3249,19 +2870,14 @@ declare namespace Muix {
   type StepConnectorIcon = React.ReactElement<any> | string | number;
 
 
-  interface StepConnectorProps extends StandardProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    StepConnectorClasskey
-    > {
-    alternativeLabel?: boolean,
-    orientation?: Orientation,
+  interface StepConnectorProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, StepConnectorClasskey> {
+    alternativeLabel?: boolean;
+    orientation?: Orientation;
   }
 
 
-  type StepConnectorClasskey =
-    | 'root'
-    | 'alternativeLabel'
-    ;
+  type StepConnectorClasskey = 'root' | 'alternativeLabel';
 
 
   //************* mui/material-ui/styles/colorManipulator
@@ -3275,19 +2891,41 @@ declare namespace Muix {
 
   //************* mui/material-ui/styles/themeListener
   // This is using the API from https://github.com/vesparny/brcast
-  interface MuiContext {
-    getState(): Object;
-    subscribe(callback: Function): Function;
+  interface Broadcast<S> {
+    setState(state: S): void;
+    getState(): S;
+    subscribe(callback: (state: S) => void): number;
+    unsubscribe(subscriptionId: number): void;
   }
 
 
-  interface ThemeListener {
-    contextTypes: {
-      'material-ui': object;
-    };
-    initial(context: Object): Object;
-    subscribe(context: Object, callback: Function): Function;
+  interface MuiContext<S> {
+    __THEMING__?: Broadcast<S>;
   }
+
+
+  interface ThemeListener<S = {}> {
+    initial(context: MuiContext<S>): S | null;
+    subscribe(context: MuiContext<S>, callback: (state: S) => void): number | null;
+    unsubscribe(context: MuiContext<S>, subscriptionId: number): void;
+  }
+
+
+  //************* mui/material-ui/Table/TablePaginationActions
+
+
+  interface TablePaginationActionsProps
+    extends StandardProps<React.HTMLAttributes<HTMLDivElement>, TablePaginationActionsClassKey> {
+    backIconButtonProps?: IconButtonProps;
+    count: number;
+    nextIconButtonProps?: IconButtonProps;
+    onChangePage: (event: React.MouseEvent<HTMLButtonElement> | null, page: number) => void;
+    page: number;
+    rowsPerPage: number;
+  }
+
+
+  type TablePaginationActionsClassKey = 'root';
 
 
   //************* mui/material-ui/test-utils/createMount
@@ -3311,7 +2949,6 @@ declare namespace Muix {
 
   interface ShallowOptions {
     shallow: typeof shallow;
-    otherContext: Object;
     dive: boolean;
     untilSelector: EnzymeSelector;
   }
@@ -3335,13 +2972,23 @@ declare namespace Muix {
   //************* mui/material-ui/utils/helpers
 
 
+  type ChainedFunction = ((...args: any[]) => void) | undefined | null;
+
+
   //************* mui/material-ui/utils/keyboardFocus
 
 
-  //************* mui/material-ui/utils/manageAriaHidden
-
-
   //************* mui/material-ui/utils/reactHelpers
+
+
+  type NamedMuiComponent = React.ComponentType<{}> & { muiName: string };
+
+
+  interface NamedMuiElement {
+    type: NamedMuiComponent;
+    props: StandardProps<{}, never>;
+    key: string | number | null;
+  }
 
 
   //************* mui/material-ui/utils/requirePropFactory

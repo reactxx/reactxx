@@ -64,7 +64,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="DeepPartial.d.ts" />
     <TypeScriptCompile Include="index.ts" />
-    <TypeScriptCompile Include="mui-ui.d.ts" />
+    <TypeScriptCompile Include="material-ui.d.ts" />
     <TypeScriptCompile Include="typescript.d.ts" />
   </ItemGroup>
   <ItemGroup>

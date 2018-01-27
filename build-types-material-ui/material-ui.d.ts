@@ -766,7 +766,7 @@ interface ZIndex {
 	}
 
 
-	default class Portal extends React.Component<PortalProps> {}
+	//default class Portal extends React.Component<PortalProps> {}
 
 
 //************* mui/material-ui/Portal/index
