@@ -1,4 +1,4 @@
-set root=c:\muix\muix\
+set root=d:\muix\muix\
 
 d:
 
