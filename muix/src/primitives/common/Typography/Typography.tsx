@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { capitalizeFirstLetter } from 'material-ui/utils/helpers'
+import { capitalize } from 'material-ui/utils/helpers'
 import { TypographyNativeX } from 'muix-primitives'
 //import { Text as TextRN } from 'react-native'
 
@@ -89,10 +89,10 @@ const typography: Muix.CodeSFC<MuixTypography.Shape> = (props => {
   const classNameRes = getStyleWithSideEffect(
     classes.root,
     classes[type],
-    color !== 'default' && classes[`color${capitalizeFirstLetter(color)}`],
+    color !== 'default' && classes[`color${capitalize(color)}`],
     gutterBottom && classes.gutterBottom,
     paragraph && classes.paragraph,
-    align !== 'inherit' && classes[`align${capitalizeFirstLetter(align)}`],
+    align !== 'inherit' && classes[`align${capitalize(align)}`],
     className,
   )
 

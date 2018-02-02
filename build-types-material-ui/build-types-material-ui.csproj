@@ -23,7 +23,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.7</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,9 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="DeepPartial.d.ts" />
+    <TypeScriptCompile Include="index-d.d.ts" />
     <TypeScriptCompile Include="index.ts" />
     <TypeScriptCompile Include="material-ui.d.ts" />
     <TypeScriptCompile Include="typescript.d.ts" />
+    <TypeScriptCompile Include="typings.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

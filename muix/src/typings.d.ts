@@ -20,7 +20,7 @@ declare module 'jss' {
   export const create
   export type GenerateClassName<T> = any
   export type JSSOptions = any
-  export const StyleSheet
+  export type StyleSheet<T> = any
 }
 
 declare module 'jss-preset-default' {

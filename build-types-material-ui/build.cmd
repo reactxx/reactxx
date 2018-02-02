@@ -1,16 +1,21 @@
-set root=D:\muix\build-types-material-ui\
-d:
-cd d:\temp
+set drive=c
+
+set root=%drive%:\muix\build-types-material-ui\
+
+%drive%:
+cd %drive%:\temp
+
+pause
 
 rmdir material-ui /s /q
 
 call git clone -b v1-beta --single-branch https://github.com/mui-org/material-ui.git
 
-cd d:\temp\material-ui
+cd %drive%:\temp\material-ui
 
 rename src material-ui
 
-cd d:\temp\material-ui\material-ui
+cd %drive%:\temp\material-ui\material-ui
 
 del *.js /s /q
 del *.spec.* /s /q
@@ -19,9 +24,9 @@ rmdir %root%material-ui /s /q
 
 cd %root%
 
-move d:\temp\material-ui\material-ui %root%material-ui
+move %drive%:\temp\material-ui\material-ui %root%material-ui
 pause
-rmdir d:\temp\material-ui /s /q
+rmdir %drive%:\temp\material-ui /s /q
 
 cd %root%
 rmdir node_modules /s /q

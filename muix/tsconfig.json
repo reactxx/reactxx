@@ -22,12 +22,10 @@
       "muix-primitives": [ "src/primitives/native/index" ],
 
       "muix-components/*": [ "src/components/native/*" ],
-      //"muix-components/current/*": [ "src/components/web/*" ],
-      //"muix-components/common/*": [ "src/components/common/*" ],
-      //"muix-components/native/*": [ "src/components/native/*" ],
-
       "test/*": [ "src/test/*" ]
     },
+
+    "esModuleInterop": true,
 
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,

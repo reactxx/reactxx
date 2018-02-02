@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { capitalizeFirstLetter } from 'material-ui/utils/helpers'
+import { capitalize } from 'material-ui/utils/helpers'
 import { withStyles, sheetCreator } from 'muix-styles'
 import { IconX } from 'muix-primitives'
 
@@ -9,15 +9,31 @@ import warning from 'warning'
 
 export const sheet = sheetCreator<MuixIcon.Shape>(({ palette }) => ({
   $animations: {},
-  root: { fontSize: 24 },
-  
-  colorAccent: { color: palette.secondary.A200 },
-  colorAction: { color: palette.action.active },
-  colorContrast: { color: palette.getContrastText(palette.primary[500]) },
-  colorDisabled: { color: palette.action.disabled },
-  colorError: { color: palette.error[500] },
-  colorPrimary: { color: palette.primary[500] },
-  colorInherit: {},
+  root: {
+    fontSize: 24,
+    $web: {
+      userSelect: 'none',
+    }
+  },
+  colorPrimary: {
+    color: palette.primary.main,
+  },
+  colorSecondary: {
+    color: palette.secondary.main,
+  },
+  colorAction: {
+    color: palette.action.active,
+  },
+  colorDisabled: {
+    color: palette.action.disabled,
+  },
+  colorError: {
+    color: palette.error.main,
+  },
+  fontSize: {
+    width: 16,
+    height: 16,
+  },
 }))
 
 const icon: Muix.CodeSFC<MuixIcon.Shape> = props => {
@@ -25,7 +41,7 @@ const icon: Muix.CodeSFC<MuixIcon.Shape> = props => {
   const childs = React.Children.toArray(children)
   warning(childs.length == 1 && typeof childs[0] === 'string', 'single child as string expected')
   const data = childs[0] as MuixIcons
-  const iconClass = getStyleWithSideEffect(classes.root, classes[`color${capitalizeFirstLetter(color)}`], className)
+  const iconClass = getStyleWithSideEffect(classes.root, classes[`color${capitalize(color)}`], className)
   return <IconX className={iconClass} style={style} $native={rest as any} $web={rest as any} data={data}/>
 }
 

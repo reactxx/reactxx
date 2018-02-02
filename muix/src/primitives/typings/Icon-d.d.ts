@@ -1,6 +1,6 @@
 ﻿declare namespace MuixIcon {
 
-  type Colors = 'inherit' | 'accent' | 'action' | 'contrast' | 'disabled' | 'error' | 'primary'
+  type Colors = 'inherit' | 'secondary' | 'action' | 'disabled' | 'error' | 'primary'
 
   interface IconProperties {
     color?: Colors
@@ -8,7 +8,7 @@
   }
 
   type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeTexts<'root' | 'colorAccent' | 'colorAction' | 'colorContrast' | 'colorDisabled' | 'colorError' | 'colorPrimary' | 'colorInherit'>
+    common: Muix.ShapeTexts<'root' | 'colorSecondary' | 'colorAction' | 'colorDisabled' | 'colorError' | 'colorPrimary'>
     style: ReactN.TextStyle
     props: IconProperties & Muix.TOnClickWeb
   }>

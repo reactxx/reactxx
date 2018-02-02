@@ -53,7 +53,7 @@ const app = () => <ScrollView>
   <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>COLORS</Typography>
   <Typography>undefined</Typography>
   <Typography color='inherit'>inherit</Typography>
-  <Typography color='accent'>accent</Typography>
+  <Typography color='secondary'>accent</Typography>
   <Typography color='error'>error</Typography>
   <Typography color='default'>default</Typography>
   <Typography color='secondary'>secondary</Typography>
@@ -83,8 +83,8 @@ const app = () => <ScrollView>
       <Typography color='primary'>primary</Typography>
       <Typography type='caption' >caption</Typography>
       <Typography type='display2' >display2</Typography>
-      <Typography color='accent' >accent</Typography>
-      <Typography color='accent' style={{ color: 'red' }} >accent red</Typography>
+      <Typography color='secondary' >accent</Typography>
+      <Typography color='secondary' style={{ color: 'red' }} >accent red</Typography>
       <Typography color='primary' className={{ fontWeight: '500', textDecorationLine: 'line-through' }}>primary, WITH CLASSES</Typography>
     </View>
   </MuiThemeProvider>

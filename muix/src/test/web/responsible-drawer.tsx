@@ -115,10 +115,10 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<Shape>> {
       <AppBar className={classes.appBar}>
         <Toolbar>
           <Hidden smUp>
-            <IconButton color="contrast" onClick={this.handleMobileToggle}>x</IconButton>
+            <IconButton /*color="contrast"*/ onClick={this.handleMobileToggle}>x</IconButton>
           </Hidden>
           <Hidden smDown mdUp>
-            <IconButton color="contrast" onClick={this.handleTabletToggle}>x</IconButton>
+            <IconButton /*color="contrast"*/ onClick={this.handleTabletToggle}>x</IconButton>
           </Hidden>
           <Typography type="title" color="inherit" noWrap>
             Responsive drawer

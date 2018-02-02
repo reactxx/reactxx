@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 
 import { fade } from 'material-ui/styles/colorManipulator'
-import { capitalizeFirstLetter } from 'material-ui/utils/helpers';
+import { capitalize } from 'material-ui/utils/helpers';
 
 import { withStyles, toPlatformRuleSet, sheetCreator } from 'muix-styles'
 
@@ -147,7 +147,7 @@ const button: Muix.CodeSFCNative<MuixButton.Shape> = (props, context) => {
   const { disabled } = rest //disabled must be propagated to ButtonBaseLow
 
   const isFlat = !raised && !fab
-  const Color = capitalizeFirstLetter(color)
+  const Color = capitalize(color)
 
   const viewStyle = getStyleWithSideEffect(
     classes.root,

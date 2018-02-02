@@ -42,7 +42,7 @@ class AppRoot extends React.Component {
     //console.log('######')  
     const root = <View style={{ flex: 1, paddingTop: 24 }}>
       <MuiThemeProvider theme={theme}>
-        <View classes={theme => ({ root: { flexDirection: 'row', flexWrap: 'wrap', backgroundColor: theme.palette.background.appBar, flexShrink: 0 } })}>
+        <View classes={theme => ({ root: { flexDirection: 'row', flexWrap: 'wrap', backgroundColor: theme.palette.background.default, flexShrink: 0 } })}>
           {apps.map((app, idx) => <AppItem key={idx} idx={idx} active={idx === appIndex} appRoot={this} />)}
         </View>
       </MuiThemeProvider>
