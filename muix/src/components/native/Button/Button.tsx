@@ -143,8 +143,13 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
 
 const button: Muix.CodeSFCNative<MuixButton.Shape> = (props, context) => {
 
-  const { children, classes, color = 'default', fab, raised, mini, getStyleWithSideEffect, className, animations, ...rest } = props
+
+  var x = props.mini
+  const { children, classes, color = 'default', variant, mini, getStyleWithSideEffect, className, animations, ...rest } = props
   const { disabled } = rest //disabled must be propagated to ButtonBaseLow
+
+  const fab = variant == 'fab'
+  const raised = variant == 'raised'
 
   const isFlat = !raised && !fab
   const Color = capitalize(color)

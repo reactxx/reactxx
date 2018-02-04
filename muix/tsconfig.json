@@ -25,7 +25,7 @@
       "test/*": [ "src/test/*" ]
     },
 
-    "esModuleInterop": true,
+    //"esModuleInterop": true,
 
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
@@ -48,5 +48,6 @@
     "src/**/*",
     "node_modules/muix-icons/typings.d.ts",
     "node_modules/fela/index.d.ts"
+    //"node_modules/material-ui/**/*"
   ]
 }

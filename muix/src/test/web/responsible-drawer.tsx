@@ -120,14 +120,14 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<Shape>> {
           <Hidden smDown mdUp>
             <IconButton /*color="contrast"*/ onClick={this.handleTabletToggle}>x</IconButton>
           </Hidden>
-          <Typography type="title" color="inherit" noWrap>
+          <Typography variant="title" color="inherit" noWrap>
             Responsive drawer
               </Typography>
         </Toolbar>
       </AppBar>
       <Hidden smUp>
         <Drawer
-          type="temporary"
+          variant="temporary"
           anchor={theme.direction === 'rtl' ? 'right' : 'left'}
           classes={{ paper: classes.drawerPaper, }}
           open={this.state.mobileOpen}
@@ -139,12 +139,12 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<Shape>> {
         </Drawer>
       </Hidden>
       <Hidden smDown mdUp>
-        <Drawer type="persistent" open={this.state.tabletOpen} onClose={this.handleTabletToggle} classes={{ paper: classes.drawerPaper, }}>
+        <Drawer variant="persistent" open={this.state.tabletOpen} onClose={this.handleTabletToggle} classes={{ paper: classes.drawerPaper, }}>
           {drawer}
         </Drawer>
       </Hidden>
       <Hidden mdDown>
-        <Drawer type="permanent" open classes={{ paper: classes.drawerPaper, }}>
+        <Drawer variant="permanent" open classes={{ paper: classes.drawerPaper, }}>
           {drawer}
         </Drawer>
       </Hidden>

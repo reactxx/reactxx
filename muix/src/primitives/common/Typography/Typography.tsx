@@ -74,7 +74,7 @@ const typography: Muix.CodeSFC<MuixTypography.Shape> = (props => {
     gutterBottom,
     noWrap,
     paragraph,
-    type = 'body1',
+    variant = 'body1',
     style,
     getStyleWithSideEffect,
     animations,
@@ -88,7 +88,7 @@ const typography: Muix.CodeSFC<MuixTypography.Shape> = (props => {
 
   const classNameRes = getStyleWithSideEffect(
     classes.root,
-    classes[type],
+    classes[variant],
     color !== 'default' && classes[`color${capitalize(color)}`],
     gutterBottom && classes.gutterBottom,
     paragraph && classes.paragraph,
@@ -100,7 +100,7 @@ const typography: Muix.CodeSFC<MuixTypography.Shape> = (props => {
   return <TypographyNativeX
     className={classNameRes as ReactN.TextStyle} style={style as ReactN.TextStyle}
     $native={rest as Primitives.TypographyX['$native']} $web={rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>}
-    $type={type}
+    $type={variant}
     $noWrapStyle={noWrap && classes.noWrap}
     children={children} /> as any
 })

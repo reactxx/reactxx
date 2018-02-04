@@ -103,7 +103,8 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<MuixResponsibleDra
         </AppBar>
         <Hidden mdUp>
           <Drawer
-            type="temporary"
+            
+            variant="temporary"
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={this.state.mobileOpen}
             classes={{ paper: classes.drawerPaper }}
@@ -113,7 +114,7 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<MuixResponsibleDra
           </Drawer>
         </Hidden>
         <Hidden smDown implementation="css">
-          <Drawer type="permanent" open classes={{ paper: classes.drawerPaper }}>{drawer}</Drawer>
+          <Drawer variant="permanent" open classes={{ paper: classes.drawerPaper }}>{drawer}</Drawer>
         </Hidden>
         <div className={rulesetToClassNames(classes.content)}>
           <Typography noWrap>You think water moves fast? You should see ice.</Typography>
@@ -125,73 +126,3 @@ class ResponsiveDrawer extends React.Component<Muix.CodeProps<MuixResponsibleDra
 
 export default withStyles(sheet, { name: 'MuiResponsiveDrawer' })(ResponsiveDrawer);
 
-/*
-  render() {
-    const { classes, theme } = this.props;
-
-    const drawer = (
-      <ViewX>
-        <ViewX className={classes.drawerHeader}>
-          <TextX>drawerHeader</TextX>
-        </ViewX>
-        <Divider />
-        <TextX>mailFolderListItems</TextX>
-        <Divider />
-        <TextX>otherMailFolderListItems</TextX>
-      </ViewX>
-    );
-
-    return (
-      <ViewX className={classes.root}>
-        <ViewX className={classes.appFrame}>
-          <AppBar className={classes.appBar}>
-            <Toolbar>
-              <IconButton
-                color="contrast"
-                aria-label="open drawer"
-                onClick={this.handleDrawerToggle}
-                className={classes.navIconHide}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography type="title" color="inherit" noWrap>
-                Responsive drawer
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          <Hidden mdUp>
-            <Drawer
-              type="temporary"
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-              open={this.state.mobileOpen}
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              onClose={this.handleDrawerToggle}
-              ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
-              }}
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-          <Hidden smDown implementation="css">
-            <Drawer
-              type="permanent"
-              open
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-          <main className={classes.content}>
-            <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
-          </main>
-        </ViewX>
-      </ViewX>
-    );
-  }
-
-*/

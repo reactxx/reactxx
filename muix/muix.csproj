@@ -174,6 +174,11 @@
     <TypeScriptCompile Include="src\styles\common\createTypography.ts" />
     <TypeScriptCompile Include="src\styles\common\MuiThemeProvider.tsx" />
     <TypeScriptCompile Include="src\styles\common\withStyles.tsx" />
+    <TypeScriptCompile Include="src\styles\typings\jss\index.d.ts" />
+    <TypeScriptCompile Include="src\styles\typings\react-transition-group\CSSTransition.d.ts" />
+    <TypeScriptCompile Include="src\styles\typings\react-transition-group\index.d.ts" />
+    <TypeScriptCompile Include="src\styles\typings\react-transition-group\Transition.d.ts" />
+    <TypeScriptCompile Include="src\styles\typings\react-transition-group\TransitionGroup.d.ts" />
     <TypeScriptCompile Include="src\styles\web\fela.tsx" />
     <TypeScriptCompile Include="src\test\common\animation\test-animation.tsx" />
     <TypeScriptCompile Include="src\test\common\animation\test-animation-d.d.ts" />

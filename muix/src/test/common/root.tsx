@@ -6,7 +6,7 @@ import TextView from './primitives/text-view'
 import Icon from './primitives/icon'
 import ButtonTest from './components/button'
 //import ResponsibleDrawer from './components/responsible-drawer'
-import Shadows from './shadows/index'
+//import Shadows from './shadows/index'
 import ComponentX from './styles/component-x'
 import Animation from './animation/test-animation'
 import ButtonDemo, { overridesNew } from './components/button-demo'
@@ -46,7 +46,7 @@ class AppRoot extends React.Component {
           {apps.map((app, idx) => <AppItem key={idx} idx={idx} active={idx === appIndex} appRoot={this} />)}
         </View>
       </MuiThemeProvider>
-      <Typography type='display2' >{apps[appIndex].title}</Typography>
+      <Typography variant='display2' >{apps[appIndex].title}</Typography>
       <App />
     </View>
     const root2 = <Animation />

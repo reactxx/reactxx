@@ -3,6 +3,7 @@ import { AnimationLow, getGaps, getAnimations } from '../common/index'
 export * from '../common/index'
 
 export class AnimationDriver<T extends Animation.AnimationShape> extends AnimationLow<T> implements Animation.AnimationNative<T> {
+
   constructor(sheet: Animation.AnimationX<T>, public animations: Animation.Animations<{}>) {
     super(sheet, animations)
     const { $delay, $duration, $easing, $opened } = this.$config

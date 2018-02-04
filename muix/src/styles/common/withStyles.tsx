@@ -76,9 +76,14 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       const className = toPlatformRuleSet(classesNamePropX as Muix.TRulesetX)
       const flip = typeof flipProp === 'boolean' ? flipProp : theme.direction === 'rtl'
 
-      const newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style)), classes: this.codeClasses, className, flip, getStyleWithSideEffect, animations } as Muix.CodeProps<R>
-      if (window.isWeb) newProps.onClick = ($web && ($web as any).onClick) || onClick
-      else newProps.onPress = ($native && ($native as any).onPress) || onClick
+      const newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style)), classes: this.codeClasses, className, flip, getStyleWithSideEffect, animations } as Muix.CodeProps<R> & {onClick, onPress}
+      if (window.isWeb) {
+        const cl = ($web && ($web as any).onClick) || onClick
+        if (cl) newProps.onClick = cl
+      } else {
+        const cl = ($native && ($native as any).onPress) || onClick
+        newProps.onPress = cl
+      }
 
       //newProps.classes = this.codeClasses
       return <Component {...newProps } />

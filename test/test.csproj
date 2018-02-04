@@ -70,7 +70,6 @@
   <ItemGroup>
     <Content Include=".babelrc" />
     <Content Include="app.json" />
-    <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="%24blacklist.js" />
     <Content Include="jspm.config.js" />
@@ -103,23 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="src\common\components\button-demo.tsx" />
-    <TypeScriptCompile Include="src\common\components\button.tsx" />
-    <TypeScriptCompile Include="src\common\icons\index.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\icon.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\text-view.tsx" />
-    <TypeScriptCompile Include="src\common\root.tsx" />
-    <TypeScriptCompile Include="src\common\shadows\index.tsx" />
-    <TypeScriptCompile Include="src\common\shadows\native.tsx" />
-    <TypeScriptCompile Include="src\common\styles\component-x.tsx" />
-    <TypeScriptCompile Include="src\common\styles\test.ts" />
-    <TypeScriptCompile Include="src\common\styles\typography.tsx" />
-    <TypeScriptCompile Include="src\common\test-styles-d.d.ts" />
-    <TypeScriptCompile Include="src\native\App.tsx" />
-    <TypeScriptCompile Include="src\typings.d.ts" />
-    <TypeScriptCompile Include="src\web\index.tsx" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

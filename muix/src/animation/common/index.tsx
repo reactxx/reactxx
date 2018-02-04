@@ -6,7 +6,7 @@ export const getAnimations = <T extends Animation.AnimationsShape>(sheet: Animat
   if (!sheet) return null
   for (const p in sheet) {
     if (p.startsWith('$')) continue
-    drivers[p] = new AnimationDriver(sheet[p], drivers)
+    drivers[p] = new AnimationDriver(sheet[p], drivers) as Animation.Animation<Animation.AnimationShape> as any
   }
   drivers.reset = (caller?: Animation.Animation<{}>) => {
     for (const p in drivers) {

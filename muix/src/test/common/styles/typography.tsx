@@ -36,21 +36,21 @@ const theme = createMuiTheme({
 const app2 = () => <Typography className={{ fontWeight: '500', textDecorationLine: 'line-through', color: 'blue', marginTop:24 }}>TEXT</Typography>
 
 const app = () => <ScrollView>
-  <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>noWrap</Typography>
+  <Typography paragraph variant='headline' style={{ textDecorationLine: 'underline' }}>noWrap</Typography>
   <Typography noWrap style={{ width: 200, flexShrink: 0 }}>noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap noWrap </Typography>
   {/**/}
-  <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>MARGINS</Typography>
+  <Typography paragraph variant='headline' style={{ textDecorationLine: 'underline' }}>MARGINS</Typography>
   <Typography paragraph>paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph </Typography>
   <Typography paragraph>paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph paragraph </Typography>
   <Typography gutterBottom>gutterBottom gutterBottom gutterBottom gutterBottom gutterBottom gutterBottom gutterBottom gutterBottom gutterBottom gutterBottom gutterBottom </Typography>
   <Typography gutterBottom>gutterBottom gutterBottom gutterBottom gutterBottom gutterBottom gutterBottom gutterBottom gutterBottom gutterBottom gutterBottom gutterBottom </Typography>
   {/**/}
-  <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>FONTS (native only)</Typography>
+  <Typography paragraph variant='headline' style={{ textDecorationLine: 'underline' }}>FONTS (native only)</Typography>
   <Typography style={{ fontFamily: 'Roboto' }}>Roboto</Typography>
   <Typography style={{ fontFamily: 'Roboto_Light' }}>Roboto_Light</Typography>
   <Typography style={{ fontFamily: 'Roboto_Medium' }}>Roboto_Medium</Typography>
   {/**/}
-  <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>COLORS</Typography>
+  <Typography paragraph variant='headline' style={{ textDecorationLine: 'underline' }}>COLORS</Typography>
   <Typography>undefined</Typography>
   <Typography color='inherit'>inherit</Typography>
   <Typography color='secondary'>accent</Typography>
@@ -59,30 +59,30 @@ const app = () => <ScrollView>
   <Typography color='secondary'>secondary</Typography>
   <Typography color='primary'>primary</Typography>
   {/**/}
-  <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>TYPES</Typography>
+  <Typography paragraph variant='headline' style={{ textDecorationLine: 'underline' }}>TYPES</Typography>
   <Typography>undefined</Typography>
-  <Typography type='body1' align="right">body1, align=right</Typography>
-  <Typography type='body2' align="center">body2, align=center</Typography>
-  <Typography type='button' align="left">button, align=left</Typography>
-  <Typography type='caption'>caption</Typography>
-  <Typography paragraph type='headline'>headline</Typography>
-  <Typography type='subheading'>subheading</Typography>
-  <Typography type='title'>title</Typography>
-  <Typography type='display1'>display1</Typography>
-  <Typography type='display2'>display2</Typography>
-  <Typography type='display3'>display3</Typography>
-  <Typography type='display4'>display4</Typography>
+  <Typography variant='body1' align="right">body1, align=right</Typography>
+  <Typography variant='body2' align="center">body2, align=center</Typography>
+  <Typography variant='button' align="left">button, align=left</Typography>
+  <Typography variant='caption'>caption</Typography>
+  <Typography paragraph variant='headline'>headline</Typography>
+  <Typography variant='subheading'>subheading</Typography>
+  <Typography variant='title'>title</Typography>
+  <Typography variant='display1'>display1</Typography>
+  <Typography variant='display2'>display2</Typography>
+  <Typography variant='display3'>display3</Typography>
+  <Typography variant='display4'>display4</Typography>
   {/**/}
-  <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>WITH CLASSES</Typography>
+  <Typography paragraph variant='headline' style={{ textDecorationLine: 'underline' }}>WITH CLASSES</Typography>
   <Typography className={{ fontWeight: '500', textDecorationLine: 'line-through', color: 'blue' }}>TEXT</Typography>
   {/**/}
-  <Typography paragraph type='headline' style={{ textDecorationLine: 'underline' }}>WITH THEME</Typography>
+  <Typography paragraph variant='headline' style={{ textDecorationLine: 'underline' }}>WITH THEME</Typography>
   <MuiThemeProvider theme={theme}>
     <View>
       <Typography color='secondary'>secondary</Typography>
       <Typography color='primary'>primary</Typography>
-      <Typography type='caption' >caption</Typography>
-      <Typography type='display2' >display2</Typography>
+      <Typography variant='caption' >caption</Typography>
+      <Typography variant='display2' >display2</Typography>
       <Typography color='secondary' >accent</Typography>
       <Typography color='secondary' style={{ color: 'red' }} >accent red</Typography>
       <Typography color='primary' className={{ fontWeight: '500', textDecorationLine: 'line-through' }}>primary, WITH CLASSES</Typography>
