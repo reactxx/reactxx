@@ -8,7 +8,8 @@ import { ScrollView, View, Icon, Text } from 'muix-primitives'
 const theme = createMuiTheme({
   overridesX: theme => ({
     MuiButton: {
-      raisedAccent: {
+      
+      raisedSecondary: {
         backgroundColor: 'brown',
         $web: { '&:hover': { backgroundColor: 'brown' } } as any
       }

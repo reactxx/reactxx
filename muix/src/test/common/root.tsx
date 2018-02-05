@@ -51,7 +51,7 @@ class AppRoot extends React.Component {
     </View>
     const root2 = <Animation />
     return <AppContainer key={appIndex} themeOptions={{ overridesX: apps[appIndex].overridesNew }}>
-      {root2}
+      {root}
     </AppContainer>
   }
 }
@@ -64,3 +64,19 @@ class AppItem extends React.PureComponent<{ idx: number; active: boolean; appRoo
 }
 
 export default AppRoot
+
+
+//const x = 'xxxx'
+
+//enum E { a = 'aaa' }
+
+//type TT = {[p in E]: string }
+
+//const tt: TT = { aaa: 'xxx' }
+
+//interface I {
+//  [x]: number
+//  [E.a]: number
+//}
+
+//const i: I = { xxxx: 5, aaa: 4 }

@@ -45,7 +45,7 @@
       "muix-shadows": "npm:muix-shadows@^0.1.17",
       "prop-types": "npm:prop-types@^15.6.0",
       "react-jss": "npm:react-jss@^8.1.0",
-      "material-ui": "npm:material-ui@^1.0.0-beta.31",
+      "material-ui": "npm:material-ui@next",
       "core-js": "npm:core-js@^2.5.1",
       "deepmerge": "npm:deepmerge@^2.0.1",
       "muix-icons": "npm:muix-icons@^0.1.58",
@@ -66,12 +66,12 @@
       "fs": "npm:jspm-nodelibs-fs@^0.2.0",
       "http": "npm:jspm-nodelibs-http@^0.2.0",
       "https": "npm:jspm-nodelibs-https@^0.2.0",
-      "jss": "npm:jss@^9.0.0",
+      "jss": "npm:jss@^9.5.1",
       "lodash": "npm:lodash@^4.17.0",
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
-      "react": "npm:react",
+      "react": "npm:react@^16.0.0",
       "react-dom": "npm:react-dom@^16.0.0",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
@@ -95,7 +95,7 @@
           "test.js"
         ]
       },
-      "npm:lodash@4.17.4": {
+      "npm:lodash@4.17.5": {
         "map": {
           "buffer": "@empty",
           "process": "@empty"
