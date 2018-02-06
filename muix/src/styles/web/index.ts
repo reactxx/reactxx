@@ -7,7 +7,7 @@ import muiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 export const MuiThemeProviderInner = muiThemeProvider as any as React.ComponentType<Muix.IMuiThemeProps>
 
 import shadowsStrings from 'material-ui/styles/shadows'
-export const shadows = shadowsStrings.map(s => ({ boxShadow: s } as Muix.ViewStyleCommon))
+export const shadows = shadowsStrings.map(s => ({ boxShadow: s } as Muix.commonViewRuleset))
 
 import { toPlatformSheetX, toPlatformRuleSetX } from '../common/index'
 

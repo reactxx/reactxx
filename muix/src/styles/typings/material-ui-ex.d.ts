@@ -19,8 +19,8 @@ declare namespace Muix {
     fontWeightMedium: React.CSSProperties['fontWeight']
   }
 
-  type TypographyOptionsX = {[type in typoStyle]?: TextStyleX } & Partial<FontStyleNew>
-  type TypographyX = {[type in typoStyle]: TextStyleX } & FontStyleNew
+  type TypographyOptionsX = {[type in typoStyle]?: TextRulesetX } & Partial<FontStyleNew>
+  type TypographyX = {[type in typoStyle]: TextRulesetX } & FontStyleNew
   type TypographyOptionsOrCreatorX = TypographyOptionsX | ((palette: Muix.Palette) => TypographyOptionsX)
 
   type ThemeNew = Theme & {
@@ -39,7 +39,7 @@ declare namespace Muix {
   //type OverridesNewOrCreator = OverridesNew | ((theme: ThemeNew) => OverridesNew)
 
   type ThemeShadowsX = RulesetX<ReactN.ViewStyle>[]
-  type ThemeShadows = ViewStyleCommon[]
+  type ThemeShadows = commonViewRuleset[]
 
   interface ThemeOptions {
     shadowsX?: ThemeShadowsX

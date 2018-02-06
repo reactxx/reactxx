@@ -15,24 +15,24 @@ export default function createTypography(palette: Muix.Palette, optionOrCreator:
       fontWeight: '300',
       $web: { fontFamily },
       $native: { fontFamily: 'Roboto_Light' },
-    } as Muix.TextStyleX,
+    } as Muix.TextRulesetX,
     fontWeightRegularNew = {
       fontWeight: '400',
       $web: { fontFamily },
       $native: { fontFamily: 'Roboto' },
-    } as Muix.TextStyleX,
+    } as Muix.TextRulesetX,
     fontWeightMediumNew = {
       fontWeight: '500',
       $web: { fontFamily },
       $native: { fontFamily: 'Roboto_Medium' },
-    } as Muix.TextStyleX,
+    } as Muix.TextRulesetX,
     display1, display2, display3, display4, headline, title, subheading, body1, body2, caption, button,
     pxToRem = mui.pxToRem,
     ...other
   } = options
 
 
-  const getWebProps = (weightX: Muix.TextStyleX, optionX: Muix.TextStyleX, nativeFontSize: number, mui: React.CSSProperties) => {
+  const getWebProps = (weightX: Muix.TextRulesetX, optionX: Muix.TextRulesetX, nativeFontSize: number, mui: React.CSSProperties) => {
     const { color, fontWeight, fontFamily, ...rest } = mui
     const res = {
       fontWeight: weightX.fontWeight,
@@ -45,7 +45,7 @@ export default function createTypography(palette: Muix.Palette, optionOrCreator:
         fontFamily: weightX.$web.fontFamily,
         ...mui,
       }
-    } as Muix.TextStyleX
+    } as Muix.TextRulesetX
     return optionX ? deepMerge(res, optionX) : res
   }
 

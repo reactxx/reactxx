@@ -35,7 +35,7 @@ export const toPlatformRuleSetX = (style: Muix.TRulesetX, isNative: boolean) => 
   const { $web, $native, $overrides, $childOverrides, ...rest } = style
   const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheetX($overrides, isNative), $childOverrides: getOverridesX(null, $childOverrides) }
   if (!res.$overrides) delete res.$overrides; if (!res.$childOverrides) delete res.$childOverrides //remove NULL or UNDEFINED
-  return res as Muix.CSSProperties
+  return res as Muix.Ruleset
 }
 
 export const createAnimations = (props) => null
@@ -131,7 +131,7 @@ function createMuiTheme(options: Muix.ThemeOptions = {}) {
   } = options
 
   //convert cross platform shadows to platform specific shadows
-  const shadowsNewInput = shadowsNewInputX && shadowsNewInputX.map(rsx => toPlatformRuleSet(rsx) as Muix.ViewStyleCommon)
+  const shadowsNewInput = shadowsNewInputX && shadowsNewInputX.map(rsx => toPlatformRuleSet(rsx) as Muix.commonViewRuleset)
 
   const palette = createPalette(paletteInput)
   const breakpoints = createBreakpoints(breakpointsInput)

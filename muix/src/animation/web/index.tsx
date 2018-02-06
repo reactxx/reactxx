@@ -18,7 +18,7 @@ export class AnimationDriver<T extends Animation.AnimationShape> extends Animati
       const pairs: Animation.RuleSetX<ReactN.TextProperties> = sheet[propsName]
       const transformPairs = pairs.transform
 
-      const rulesets: Muix.CSSPropertiesWeb[] = [{}, {}], transforms = ['', ''], range = [0, 1], transitions0 = [], transitions1 = []
+      const rulesets: Muix.RulesetWeb[] = [{}, {}], transforms = ['', ''], range = [0, 1], transitions0 = [], transitions1 = []
 
       const addTransformString = (pair, modifier: string) => {
         range.forEach(idx => rulesets[idx]['transform'] = pair[idx])

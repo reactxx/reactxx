@@ -20,10 +20,10 @@ declare namespace Animation {
     $opened?: boolean
   }
 
-  type RuleSetX<T extends Muix.CSSPropertiesNative> = ToPairs<T, Muix.commonCSSPropertiesNames<T>> & {
+  type RuleSetX<T extends Muix.RulesetNative> = ToPairs<T, Muix.commonRuleNames<T>> & {
     transform?: Array<TNativeTransform>
     $native?: ToPairs<T, Diff<keyof T, 'transform'>> & { transform?: TNativeTransform[] }
-    $web?: ToPairs<Muix.CSSPropertiesWeb, keyof React.CSSPropertiesLow> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
+    $web?: ToPairs<Muix.RulesetWeb, keyof React.CSSPropertiesLow> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
   }
 
   type Animations<T extends AnimationsShape> = {[P in keyof T]: Animation<T[P]> } & AnimationsEx
@@ -51,11 +51,11 @@ declare namespace Animation {
     sheet: SheetNative<T>
   }
 
-  type SheetWeb<T extends AnimationShape> = {[P in keyof T]: Muix.CSSPropertiesWeb} & AnimationConfig
+  type SheetWeb<T extends AnimationShape> = {[P in keyof T]: Muix.RulesetWeb} & AnimationConfig
   type SheetNative<T extends AnimationShape> = {[P in keyof T]: T[P]} & AnimationConfig
-  type Sheet<T extends AnimationShape> = {[P in keyof T]: (T[P] | Muix.CSSPropertiesWeb) } & AnimationConfig
+  type Sheet<T extends AnimationShape> = {[P in keyof T]: (T[P] | Muix.RulesetWeb) } & AnimationConfig
 
-  type AnimationShape = Record<string, Muix.CSSPropertiesNative>
+  type AnimationShape = Record<string, Muix.RulesetNative>
   type AnimationsShape = Record<string, AnimationShape>
 }
 

@@ -20,14 +20,14 @@
   //type RulesetPatch = { $patch?: { [rulesetName: string]: {} }; $name?:string }
 
   //**** Platform specific ruleset
-  type CSSPropertiesWeb = React.CSSProperties
-  type CSSPropertiesNative = ReactN.TextStyle | ReactN.ViewStyle | ReactN.ImageStyle | ReactN.ScrollViewStyle | RNIconStyle
+  type RulesetWeb = React.CSSProperties
+  type RulesetNative = ReactN.TextStyle | ReactN.ViewStyle | ReactN.ImageStyle | ReactN.ScrollViewStyle | RNIconStyle
 
   //**** cross platform ruleset for web and native
 
-  type RulesetX<T extends CSSPropertiesNative, R extends Shape = DefaultEmptyShape> = commonCSSProperties<T> & RulesetOverridesX<R> & {
+  type RulesetX<T extends RulesetNative, R extends Shape = DefaultEmptyShape> = commonRuleset<T> & RulesetOverridesX<R> & {
     $native?: T
-    $web?: CSSPropertiesWeb
+    $web?: RulesetWeb
   }  
   // It's easy to use 'cross platform ruleset' in native or web code:
   //   const stylex: RulesetX<ReactN.TextStyle> = ...
@@ -36,13 +36,18 @@
   //   const txtNative = <Text style={{...rest, ...native}}/>
 
   // rule names, common for native and web
-  type commonCSSPropertiesNames<T extends CSSPropertiesNative> = keyof React.CSSPropertiesLow & keyof T
-  // type which contain native rules existing for web too
-  type commonCSSProperties<T extends CSSPropertiesNative> = TakeFrom<T, commonCSSPropertiesNames<T>>
+  type commonRuleNames<T extends RulesetNative> = keyof React.CSSPropertiesLow & keyof T
+  // native rules, which are compatible with web
+  type commonRuleset<T extends RulesetNative> = TakeFrom<T, commonRuleNames<T>>
 
-  type TextStyleCommon = commonCSSProperties<ReactN.TextStyle>
-  type ViewStyleCommon = commonCSSProperties<ReactN.ViewStyle>
-  type TextStyleX = RulesetX<ReactN.TextStyle>
+  //type TextStyleCommon = commonRuleset<ReactN.TextStyle>
+  type commonViewRuleset = commonRuleset<ReactN.ViewStyle>
+  type TextRulesetX = RulesetX<ReactN.TextStyle>
+
+  type TRulesetX = RulesetX<ReactN.TextStyle>
+  type Ruleset = RulesetNative | RulesetWeb
+  interface RNIconStyle { color?: string; fontSize?: number }
+
 
   /* ruleset usage examples
   Example 1:
@@ -82,10 +87,6 @@
   */
 
   //**** Helpers
-  type TRulesetX = RulesetX<ReactN.TextStyle>
-  type CSSProperties = CSSPropertiesNative | CSSPropertiesWeb
-  type Ruleset<T extends CSSPropertiesNative> = T | CSSPropertiesWeb
-  interface RNIconStyle { color?: string; fontSize?: number }
 
   /******************************************
     COMPONENT SHAPE
@@ -106,12 +107,12 @@
   type TOnClickWeb = { onClick?: React.MouseEventHandler<HTMLElement> }
   interface Shape {
     //**** sheet constrains
-    common: Record<string, CSSPropertiesNative> // native ruleset types for rulesets, which are used in both web and native component code
-    native: Record<string, CSSPropertiesNative> // native ruleset types for rulesets, which are used only in native code
+    common: Record<string, RulesetNative> // native ruleset types for rulesets, which are used in both web and native component code
+    native: Record<string, RulesetNative> // native ruleset types for rulesets, which are used only in native code
     animation: Animation.AnimationsShape
     web: string | null // ruleset names, which are used only in web code
     //**** native style constrain
-    style: CSSPropertiesNative // for native: type of component style property (for web, style has always React.CSSProperties type)
+    style: RulesetNative // for native: type of component style property (for web, style has always React.CSSProperties type)
     //**** component property constrains
     props: {} //common (web and native) props
     propsNative: { style?: {} } //native props only
@@ -189,7 +190,7 @@
   *******************************************/
 
   //**** Platform specific sheets
-  type SheetWeb<R extends Shape> = Record<(keyof getCommon<R>) | getWeb<R>, CSSPropertiesWeb & RulesetOverridesWeb<R>> //& { $animations: SheetAnimationWeb<R> }
+  type SheetWeb<R extends Shape> = Record<(keyof getCommon<R>) | getWeb<R>, RulesetWeb & RulesetOverridesWeb<R>> //& { $animations: SheetAnimationWeb<R> }
   type SheetNative<R extends Shape> = {[P in keyof getCommon<R>]: getCommon<R>[P] & RulesetOverridesNative<R>} & {[P in keyof getNative<R>]: getNative<R>[P] & RulesetOverridesNative<R>} //& { $animations: SheetAnimationNative<R> }
 
   //**** cross platform sheet for web and native
@@ -214,15 +215,15 @@
 
   type SheetXCommon<R extends Shape> = {[P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R>}
   type SheetXNative<R extends Shape> = {[P in keyof getNative<R>]: getNative<R>[P] & RulesetOverridesX<R>}
-  type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: CSSPropertiesWeb & RulesetOverridesX<R>}
+  type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: RulesetWeb & RulesetOverridesX<R>}
 
   interface RulesetOverridesX<R extends Shape> { $overrides?: PartialSheetX<R>; $childOverrides?: SheetsX; $name?: string }
   interface RulesetOverrides<R extends Shape> { $overrides?: Sheet<R>; $childOverrides?: Sheets; $name?: string }
   interface RulesetOverridesWeb<R extends Shape> { $overrides?: SheetWeb<R>; $childOverrides?: SheetsWeb; $name?: string }
   interface RulesetOverridesNative<R extends Shape> { $overrides?: SheetNative<R>; $childOverrides?: SheetsNative; $name?: string }
-  type StyleWithSideEffect = (...rulesets: (RulesetOverrides<Shape> & CSSProperties)[]) => CSSProperties
-  type StyleWithSideEffectNative = (...rulesets: (RulesetOverridesNative<MuixView.Shape> | ReactN.TextStyle)[]) => CSSPropertiesNative
-  type StyleWithSideEffectWeb = (...rulesets: (RulesetOverridesWeb<MuixView.Shape> & CSSPropertiesWeb)[]) => CSSPropertiesWeb
+  type StyleWithSideEffect = (...rulesets: (RulesetOverrides<Shape> & Ruleset)[]) => Ruleset
+  type StyleWithSideEffectNative = (...rulesets: (RulesetOverridesNative<MuixView.Shape> | ReactN.TextStyle)[]) => RulesetNative
+  type StyleWithSideEffectWeb = (...rulesets: (RulesetOverridesWeb<MuixView.Shape> & RulesetWeb)[]) => RulesetWeb
 
   /* SheetXCreator examples
   const sheet = theme => {
@@ -267,10 +268,10 @@
     $native?: Partial<getPropsNative<R>> //native specific style
     classes?: ThemeValueOrCreator<PartialSheetX<R>> | PartialSheetInCode<R>//cross platform sheet for web and native 
     //classes?: PartialSheetInCode<R> //cross platform sheet when using component in other component
-    className?: CSSProperties | RulesetX<getStyle<R>>
+    className?: Ruleset | RulesetX<getStyle<R>>
     //className?: CSSProperties
   }>>
-  type PartialSheetInCode<R extends Shape> = PartialRecord<keyof getCommon<R> | getWeb<R> | keyof getNative<R>, CSSProperties> // common and web and native
+  type PartialSheetInCode<R extends Shape> = PartialRecord<keyof getCommon<R> | getWeb<R> | keyof getNative<R>, Ruleset> // common and web and native
 
   type ComponentTypeX<R extends Shape> = React.ComponentType<PropsX<R>>
   type SFCX<R extends Shape> = React.SFC<PropsX<R>>
@@ -278,7 +279,7 @@
   //**** Component's code (passed to withStyles)
 
   // component code for web
-  type CodePropsWeb<R extends Shape> = Overwrite<getProps<R> & getPropsWeb<R>, { className: CSSPropertiesWeb; classes: SheetWeb<R>; style: CSSPropertiesWeb; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffectWeb; animations: Animation.AnimationsWeb<getAnimation<R>> }>
+  type CodePropsWeb<R extends Shape> = Overwrite<getProps<R> & getPropsWeb<R>, { className: RulesetWeb; classes: SheetWeb<R>; style: RulesetWeb; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffectWeb; animations: Animation.AnimationsWeb<getAnimation<R>> }>
   type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
   // component code for native
@@ -290,7 +291,7 @@
   type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
 
   //some code for components could be shared for web and native
-  type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), { className: CSSPropertiesWeb | getStyle<R>, classes: Sheet<R>; style: CSSPropertiesWeb | getStyle<R>; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffect; animations: Animation.Animations<getAnimation<R>>}>
+  type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), { className: RulesetWeb | getStyle<R>, classes: Sheet<R>; style: RulesetWeb | getStyle<R>; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffect; animations: Animation.Animations<getAnimation<R>>}>
   type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
 
@@ -303,11 +304,11 @@
     name: keyof SheetsX
   }
 
-  type muiSheet<ClassKey extends string = string> = Record<ClassKey, CSSPropertiesWeb>
+  type muiSheet<ClassKey extends string = string> = Record<ClassKey, RulesetWeb>
   type muiSheetCreator<ClassKey extends string = string> = ThemeValueOrCreator<muiSheet<ClassKey>> // | ((theme: Mui.ThemeNew) => muiSheet<ClassKey>)
   type muiClassSheet<ClassKey extends string = string> = Record<ClassKey, string>
   interface muiCodeProps<ClassKey extends string = string> { classes: muiClassSheet<ClassKey>; theme?: ThemeNew }
-  interface muiProps<ClassKey extends string = string> { classes?: Partial<muiClassSheet<ClassKey>>; innerRef?: React.Ref<any>; style?: CSSPropertiesWeb }
+  interface muiProps<ClassKey extends string = string> { classes?: Partial<muiClassSheet<ClassKey>>; innerRef?: React.Ref<any>; style?: RulesetWeb }
   type muiWithStyles = <ClassKey extends string>(style: muiSheetCreator<ClassKey>, options?: WithStylesOptionsNew) => <P>(component: muiCodeComponentType<P, ClassKey>) => muiComponentType<P, ClassKey>
   type muiCodeComponentType<P, ClassKey extends string> = React.ComponentType<P & muiCodeProps<ClassKey>>
   type muiComponentType<P, ClassKey extends string> = React.ComponentType<P & muiProps<ClassKey>>
