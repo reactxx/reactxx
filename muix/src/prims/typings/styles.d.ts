@@ -1,9 +1,11 @@
-﻿declare namespace Muix {
+﻿declare namespace Prims {
 
   interface SheetsX { }
   type SheetsWeb = {[P in keyof SheetsX]: SheetWeb<Shape>}
   type SheetsNative = {[P in keyof SheetsX]: SheetNative<Shape>}
   type Sheets = SheetsWeb | SheetsNative
+
+  interface ThemeNew { }
 
   /******************************************
     RULESET
@@ -28,7 +30,7 @@
   type RulesetX<T extends CSSPropertiesNative, R extends Shape = DefaultEmptyShape> = commonCSSProperties<T> & RulesetOverridesX<R> & {
     $native?: T
     $web?: CSSPropertiesWeb
-  }  
+  }
   // It's easy to use 'cross platform ruleset' in native or web code:
   //   const stylex: RulesetX<ReactN.TextStyle> = ...
   //   const {web, native, ...rest} = stylex
@@ -261,7 +263,7 @@
 
   //**** cross platform Component props (Component is created by 'withStyles' ) 
 
-  type PropsX<R extends Shape> = Partial<Overwrite<getProps<R>,{
+  type PropsX<R extends Shape> = Partial<Overwrite<getProps<R>, {
     style?: RulesetX<getStyle<R>> //cross platform style
     $web?: Partial<getPropsWeb<R>> //web specific style
     $native?: Partial<getPropsNative<R>> //native specific style
@@ -290,26 +292,8 @@
   type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
 
   //some code for components could be shared for web and native
-  type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), { className: CSSPropertiesWeb | getStyle<R>, classes: Sheet<R>; style: CSSPropertiesWeb | getStyle<R>; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffect; animations: Animation.Animations<getAnimation<R>>}>
+  type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), { className: CSSPropertiesWeb | getStyle<R>, classes: Sheet<R>; style: CSSPropertiesWeb | getStyle<R>; theme: ThemeNew; flip: boolean; getStyleWithSideEffect: StyleWithSideEffect; animations: Animation.Animations<getAnimation<R>> }>
   type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
-
-  /*************************************************
-    original material-ui typings
-  *************************************************/
-
-  interface WithStylesOptionsNew {
-    flip?: boolean
-    name: keyof SheetsX
-  }
-
-  type muiSheet<ClassKey extends string = string> = Record<ClassKey, CSSPropertiesWeb>
-  type muiSheetCreator<ClassKey extends string = string> = ThemeValueOrCreator<muiSheet<ClassKey>> // | ((theme: Mui.ThemeNew) => muiSheet<ClassKey>)
-  type muiClassSheet<ClassKey extends string = string> = Record<ClassKey, string>
-  interface muiCodeProps<ClassKey extends string = string> { classes: muiClassSheet<ClassKey>; theme?: ThemeNew }
-  interface muiProps<ClassKey extends string = string> { classes?: Partial<muiClassSheet<ClassKey>>; innerRef?: React.Ref<any>; style?: CSSPropertiesWeb }
-  type muiWithStyles = <ClassKey extends string>(style: muiSheetCreator<ClassKey>, options?: WithStylesOptionsNew) => <P>(component: muiCodeComponentType<P, ClassKey>) => muiComponentType<P, ClassKey>
-  type muiCodeComponentType<P, ClassKey extends string> = React.ComponentType<P & muiCodeProps<ClassKey>>
-  type muiComponentType<P, ClassKey extends string> = React.ComponentType<P & muiProps<ClassKey>>
 
 }
