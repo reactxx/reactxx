@@ -7,14 +7,14 @@
     children?: MuixIcons
   }
 
-  type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeTexts<'root' | 'colorSecondary' | 'colorAction' | 'colorDisabled' | 'colorError' | 'colorPrimary'>
+  type Shape = Muix.OverwriteShape<{
+    common: Muix2.ShapeTexts<'root' | 'colorSecondary' | 'colorAction' | 'colorDisabled' | 'colorError' | 'colorPrimary'>
     style: ReactN.TextStyle
-    props: IconProperties & Muix.TOnClickWeb
+    props: IconProperties & Muix2.TOnClickWeb
   }>
 }
 
-declare namespace Muix {
+declare namespace Muix2 {
   interface SheetsX {
     MuiIcon?: Muix.SheetXOrCreator<MuixIcon.Shape>
   }

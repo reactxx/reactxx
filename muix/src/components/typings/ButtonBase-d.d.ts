@@ -2,18 +2,18 @@
 //import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
 declare namespace MuixButtonBase {
 
-  type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeViews<'root'>
-    native: Muix.ShapeViews<'ripple'>
-    props: Muix.ButtonBaseProps & Muix.TOnClickWeb
+  type Shape = Muix.OverwriteShape<{
+    common: Muix2.ShapeViews<'root'>
+    native: Muix2.ShapeViews<'ripple'>
+    props: Muix.ButtonBaseProps & Muix2.TOnClickWeb
     propsNative: ReactN.TouchableOpacityProperties
     web: string
   }>
 }
 
-declare namespace Muix {
+declare namespace Muix2 {
   interface SheetsX {
-    MuiButtonBase?: Muix.PartialSheetX<Shape>
+    MuiButtonBase?: Muix2.PartialSheetX<Shape>
   }
 }
 

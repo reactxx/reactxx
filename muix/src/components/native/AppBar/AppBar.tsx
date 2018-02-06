@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { withStyles } from 'muix-styles'
 import { sheet } from '../../common/AppBar/AppBar'
 
-class appBar extends React.PureComponent<Muix.CodeProps<MuixAppBar.Shape>> {
+class appBar extends React.PureComponent<Muix2.CodeProps<MuixAppBar.Shape>> {
   render() { return null }
 }
 

@@ -1,15 +1,15 @@
 ﻿declare namespace MuixHidden {
 
-  type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeViews<'root'>
+  type Shape = Muix.OverwriteShape<{
+    common: Muix2.ShapeViews<'root'>
     props: Muix.HiddenProps
   }>
 
 }
 
-declare namespace Muix {
+declare namespace Muix2 {
   interface SheetsX {
-    MuiHidden?: Muix.SheetXOrCreator<Shape>
+    MuiHidden?: Muix.SheetXOrCreator<MuixHidden.Shape>
   }
 }
 

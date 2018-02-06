@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { withStyles } from 'muix-styles'
 import { sheet } from '../../common/Toolbar/Toolbar'
 
-class toolbar extends React.PureComponent<Muix.CodeProps<MuixToolbar.Shape>> {
+class toolbar extends React.PureComponent<Muix2.CodeProps<MuixToolbar.Shape>> {
   render() { return null }
 }
 

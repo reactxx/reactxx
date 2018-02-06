@@ -14,7 +14,7 @@ import { RippleEffect } from '../ButtonBase/ButtonBase'
 const getTextIconColor = (color: string) => ({
   MuiText: { root: { color } },
   MuiIcon: { root: { color: color } },
-} as Muix.SheetsX)
+} as Muix2.SheetsX)
 
 
 const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
@@ -141,7 +141,7 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
 }))
 
 
-const button: Muix.CodeSFCNative<MuixButton.Shape> = (props, context) => {
+const button: Muix2.CodeSFCNative<MuixButton.Shape> = (props, context) => {
 
 
   var x = props.mini

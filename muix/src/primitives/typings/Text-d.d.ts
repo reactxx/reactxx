@@ -1,16 +1,16 @@
 ﻿declare namespace MuixText {
   type ClassKeyText = 'root'
 
-  type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeTexts<'root'>
+  type Shape = Muix.OverwriteShape<{
+    common: Muix2.ShapeTexts<'root'>
     style: ReactN.TextStyle
-    props: Muix.TOnClickWeb
+    props: Muix2.TOnClickWeb
     propsNative: ReactN.TextProperties
   }>
 
 }
 
-declare namespace Muix {
+declare namespace Muix2 {
   interface SheetsX {
     MuiText?: Muix.SheetXOrCreator<MuixText.Shape>
   }

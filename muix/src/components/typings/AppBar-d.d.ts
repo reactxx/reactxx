@@ -1,15 +1,15 @@
 ﻿declare namespace MuixAppBar {
 
-  type Shape = Overwrite<Muix.DefaultEmptyShape, {
-    common: Muix.ShapeViews<'root'>
+  type Shape = Muix.OverwriteShape<{
+    common: Muix2.ShapeViews<'root'>
     props: Muix.AppBarProps
   }>
 
 }
 
-declare namespace Muix {
+declare namespace Muix2 {
   interface SheetsX {
-    MuiAppBar?: Muix.SheetXOrCreator<Shape>
+    MuiAppBar?: Muix.SheetXOrCreator<MuixAppBar.Shape>
   }
 }
 

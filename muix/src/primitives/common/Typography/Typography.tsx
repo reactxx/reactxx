@@ -66,7 +66,7 @@ export const sheet = sheetCreator<MuixTypography.Shape>(({ typographyX: typoX, p
   },
 }))
 
-const typography: Muix.CodeSFC<MuixTypography.Shape> = (props => {
+const typography: Muix2.CodeSFC<MuixTypography.Shape> = (props => {
   const {
     align = 'inherit',
     classes,

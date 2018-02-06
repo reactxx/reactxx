@@ -36,7 +36,7 @@ export const sheet = sheetCreator<MuixIcon.Shape>(({ palette }) => ({
   },
 }))
 
-const icon: Muix.CodeSFC<MuixIcon.Shape> = props => {
+const icon: Muix2.CodeSFC<MuixIcon.Shape> = props => {
   const { classes, theme, flip, getStyleWithSideEffect, style, children, color = 'inherit', className, animations, ...rest } = props
   const childs = React.Children.toArray(children)
   warning(childs.length == 1 && typeof childs[0] === 'string', 'single child as string expected')

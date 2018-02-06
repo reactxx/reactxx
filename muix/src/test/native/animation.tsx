@@ -50,9 +50,9 @@ interface ITransition {
   setOpened(isOpen?: boolean)
 }
 
-type Animation<T extends Muix.RulesetNative> = Muix.RulesetX<T> & { $easing?: string, $duration?: number, $delay?: number }
+type Animation<T extends Muix2.RulesetNative> = Muix2.RulesetX<T> & { $easing?: string, $duration?: number, $delay?: number }
 
-const transitionCreate = (par: (theme: Muix.Theme) => Muix.RulesetX<ReactN.ViewStyle> & { $easing?: string, $duration?: number, $delay?: number }) => null as ITransition
+const transitionCreate = (par: (theme: Muix.Theme) => Muix2.RulesetX<ReactN.ViewStyle> & { $easing?: string, $duration?: number, $delay?: number }) => null as ITransition
 
 const transition1 = transitionCreate(
   theme => ({

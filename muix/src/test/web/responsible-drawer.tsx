@@ -25,8 +25,8 @@ import { ViewX } from 'muix-primitives'
 
 const drawerWidth = 240;
 
-type Shape = Overwrite<Muix.DefaultEmptyShape, {
-  common: Muix.ShapeViews<'root' | 'appFrame' | 'appBar' | 'drawerHeader' | 'drawerPaper' | 'content'>
+type Shape = Muix.OverwriteShape<{
+  common: Muix2.ShapeViews<'root' | 'appFrame' | 'appBar' | 'drawerHeader' | 'drawerPaper' | 'content'>
   propsNative: {}
   propsWeb: {}
 }>
@@ -81,7 +81,7 @@ const styles = sheetCreator<Shape>(theme => ({
 
 const impl = 'css'
 
-class ResponsiveDrawer extends React.Component<Muix.CodeProps<Shape>> {
+class ResponsiveDrawer extends React.Component<Muix2.CodeProps<Shape>> {
   state = {
     mobileOpen: false,
     tabletOpen: false

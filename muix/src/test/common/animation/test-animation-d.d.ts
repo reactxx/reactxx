@@ -1,19 +1,19 @@
 declare namespace testAnimation {
-  type Shape = Overwrite<Muix.DefaultEmptyShape, {
+  type Shape = Muix.OverwriteShape<{
     props: {
       mobile?: boolean
       tablet?: boolean
       desktop?: boolean
     }
-    common: Muix.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop'> & Muix.ShapeTexts<'openButton' | 'closeButton'>
+    common: Muix2.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop'> & Muix2.ShapeTexts<'openButton' | 'closeButton'>
     animation: {
-      mobile: Muix.ShapeViews<'drawer' | 'backDrop'>,
-      tablet: Muix.ShapeViews<'drawer' | 'content'>,
+      mobile: Muix2.ShapeViews<'drawer' | 'backDrop'>,
+      tablet: Muix2.ShapeViews<'drawer' | 'content'>,
     }
   }>
 }
 
-declare namespace Muix {
+declare namespace Muix2 {
   interface SheetsX {
     TestStyles?: Muix.SheetXOrCreator<testStyles.Shape>
   }

@@ -56,7 +56,7 @@ const sheet = sheetCreator<testStyles.Shape>(({ palette, typographyX: typoX }) =
   $animations: {}
 }))
 
-const testStyles: Muix.CodeSFC<testStyles.Shape> = props => {
+const testStyles: Muix2.CodeSFC<testStyles.Shape> = props => {
   const { classes, getStyleWithSideEffect, theme, flip, primary, children, style, className, animations, ...rest } = props
 
   const rootStyles = getStyleWithSideEffect( // getStyleWithSideEffect now knowns, which rulesets are actualy used. So it can use their $overrides and $childOverrides props
