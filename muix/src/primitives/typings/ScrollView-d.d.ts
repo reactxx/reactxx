@@ -3,7 +3,7 @@
   type ClassKeyView = 'root'
 
   type Shape = Muix.OverwriteShape<{
-    common: Muix2.ShapeScrollViews<'root'> & Muix2.ShapeViews<'contentContainerStyle'>
+    common: Prim5s.ShapeScrollViews<'root'> & Prim5s.ShapeViews<'contentContainerStyle'>
     style: ReactN.ViewStyle
     props: { horizontal?: boolean } 
     propsWeb: React.HTMLAttributes<HTMLDivElement>
@@ -12,7 +12,7 @@
 
 }
 
-declare namespace Muix2 {
+declare namespace Prim5s {
   interface SheetsX {
     MuiScrollView?: Muix.SheetXOrCreator<MuixScrollView.Shape>
   }

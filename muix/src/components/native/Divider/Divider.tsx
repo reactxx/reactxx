@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { withStyles } from 'muix-styles'
 import { sheet } from '../../common/Divider/Divider'
 
-class divider extends React.PureComponent<Muix2.CodeProps<MuixDivider.Shape>> {
+class divider extends React.PureComponent<Prim5s.CodeProps<MuixDivider.Shape>> {
   render() { return null }
 }
 

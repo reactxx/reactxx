@@ -1,11 +1,11 @@
 declare namespace testStyles {
   type Shape = Muix.OverwriteShape<{
-    common: Muix2.ShapeViews<'root' | 'primary' | 'secondary'> & Muix2.ShapeTexts<'label'>
+    common: Prim5s.ShapeViews<'root' | 'primary' | 'secondary'> & Prim5s.ShapeTexts<'label'>
     props: { primary?: boolean }
   }>
 }
 
-declare namespace Muix2 {
+declare namespace Prim5s {
   interface SheetsX {
     TestStyles?: Muix.SheetXOrCreator<testStyles.Shape>
   }

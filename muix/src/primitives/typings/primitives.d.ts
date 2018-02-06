@@ -1,5 +1,5 @@
 ﻿declare namespace Primitives {
-  type PropsLow<T extends Muix2.Ruleset, P extends {}, W extends {} = React.HTMLAttributes<HTMLDivElement>> = {
+  type PropsLow<T extends Prim5s.Ruleset, P extends {}, W extends {} = React.HTMLAttributes<HTMLDivElement>> = {
     className?: T
     style?: T
     $native?: Partial<OmitFrom<P, 'contentContainerStyle'>>

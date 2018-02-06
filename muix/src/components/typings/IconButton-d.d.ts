@@ -1,13 +1,13 @@
 ﻿declare namespace MuixIconButton {
 
   type Shape = Muix.OverwriteShape<{
-    common: Muix2.ShapeViews<'root'>
+    common: Prim5s.ShapeViews<'root'>
     props: Muix.IconButtonProps
   }>
 
 }
 
-declare namespace Muix2 {
+declare namespace Prim5s {
   interface SheetsX {
     MuiIconButton?: Muix.SheetXOrCreator<MuixIconButton.Shape>
   }

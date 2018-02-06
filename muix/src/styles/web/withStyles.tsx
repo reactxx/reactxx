@@ -20,18 +20,18 @@ jss.options.insertionPoint = 'insertion-point-jss'
 
 export const AppContainer: React.SFC<AppContainerProps> = props => <JssProvider jss={jss}><MuiThemeProvider theme={createMuiTheme(props.themeOptions)}>{props.children}</MuiThemeProvider></JssProvider>
 
-type webKeys<R extends Muix.Shape> = Muix2.getWeb<R> | keyof Muix2.getCommon<R>
+type webKeys<R extends Muix.Shape> = Prim5s.getWeb<R> | keyof Prim5s.getCommon<R>
 
-export const muiCompatible = <R extends Muix.Shape>(Component: React.ComponentType<Muix2.getPropsWeb<R>>) => {
-  const Styled: Muix2.SFCX<R> = (props, context: Muix.MuiThemeContextValue) => {
-    const { classes: _classes, style, $web, $native, onClick, className, ...rest } = props as Muix2.PropsX<Muix.Shape> & Muix2.TOnClickWeb 
+export const muiCompatible = <R extends Muix.Shape>(Component: React.ComponentType<Prim5s.getPropsWeb<R>>) => {
+  const Styled: Prim5s.SFCX<R> = (props, context: Muix.MuiThemeContextValue) => {
+    const { classes: _classes, style, $web, $native, onClick, className, ...rest } = props as Prim5s.PropsX<Muix.Shape> & Prim5s.TOnClickWeb 
 
     const click = ($web && $web.onClick) || onClick
 
     const theme = context.theme || getDefaultTheme()
 
-    const classes = sheetToClassSheet((classesToPlatformSheet(theme, _classes as Muix.ThemeValueOrCreator<Muix2.PartialSheetX<R>>)) as Muix2.SheetWeb<R>)
-    const webProps = { ...rest, ...$web, style: toPlatformRuleSet(style), classes, onClick: click, theme, className: rulesetToClassNames(className as React.CSSProperties) } as Muix2.getPropsWeb<R>
+    const classes = sheetToClassSheet((classesToPlatformSheet(theme, _classes as Muix.ThemeValueOrCreator<Prim5s.PartialSheetX<R>>)) as Prim5s.SheetWeb<R>)
+    const webProps = { ...rest, ...$web, style: toPlatformRuleSet(style), classes, onClick: click, theme, className: rulesetToClassNames(className as React.CSSProperties) } as Prim5s.getPropsWeb<R>
     return <Component {...webProps} />
   }
   Styled.contextTypes = MuiThemeContextTypes

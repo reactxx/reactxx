@@ -1,13 +1,13 @@
 ﻿declare namespace MuixResponsibleDrawer {
 
   type Shape = Muix.OverwriteShape<{
-    common: Muix2.ShapeViews<'root' | 'appFrame' | 'appBar' | 'navIconHide' | 'drawerHeader' | 'drawerPaper' | 'content'>
+    common: Prim5s.ShapeViews<'root' | 'appFrame' | 'appBar' | 'navIconHide' | 'drawerHeader' | 'drawerPaper' | 'content'>
     propsNative: {}
     propsWeb: {}
   }>
 }
 
-declare namespace Muix2 {
+declare namespace Prim5s {
   interface SheetsX {
     MuiResponsiveDrawer?: Muix.SheetXOrCreator<MuixResponsibleDrawer.Shape>
   }

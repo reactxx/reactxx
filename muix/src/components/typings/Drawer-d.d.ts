@@ -3,7 +3,7 @@
   type modalProps = 'root' | 'hidden'
 
   type Shape = Muix.OverwriteShape<{
-    common: Muix2.ShapeViews<modalProps | 'docked'
+    common: Prim5s.ShapeViews<modalProps | 'docked'
     | 'paper' | 'paperAnchorLeft' | 'paperAnchorRight' | 'paperAnchorTop' | 'paperAnchorBottom' | 'paperAnchorDockedLeft' | 'paperAnchorDockedTop' | 'paperAnchorDockedRight' | 'paperAnchorDockedBottom'
     | 'modal'>
     props: Muix.DrawerProps
@@ -11,7 +11,7 @@
 
 }
 
-declare namespace Muix2 {
+declare namespace Prim5s {
   interface SheetsX {
     MuiDrawer?: Muix.SheetXOrCreator<MuixDrawer.Shape>
   }

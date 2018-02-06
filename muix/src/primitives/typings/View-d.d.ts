@@ -2,13 +2,13 @@
   export type ClassKey = 'root'
 
   export type Shape = Muix.OverwriteShape<{
-    props: Muix2.TOnClickWeb
-    common: Muix2.ShapeViews<'root'>
+    props: Prim5s.TOnClickWeb
+    common: Prim5s.ShapeViews<'root'>
   }>
 
 }
 
-declare namespace Muix2 {
+declare namespace Prim5s {
   interface SheetsX {
     MuiView?: Muix.SheetXOrCreator<MuixView.Shape>
     MuiAnimatedView?: Muix.SheetXOrCreator<MuixView.Shape>

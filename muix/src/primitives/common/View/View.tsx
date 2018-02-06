@@ -10,14 +10,14 @@ export const sheet = sheetCreator<MuixView.Shape>(() => ({
 
 }))
 
-const view: Muix2.CodeSFC<MuixView.Shape> = props => {
+const view: Prim5s.CodeSFC<MuixView.Shape> = props => {
   let { classes, theme, flip, getStyleWithSideEffect, children, style, className, animations, ...rest } = props
   const $web = rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>
   const $native = rest as ReactN.ViewProperties
   return <ViewX className={getStyleWithSideEffect(classes.root, className)} $web={$web} $native={$native} children={children} style={style} />
 }
 
-const animatedView: Muix2.CodeSFC<MuixView.Shape> = props => {
+const animatedView: Prim5s.CodeSFC<MuixView.Shape> = props => {
   const { classes, theme, flip, getStyleWithSideEffect, children, style, className, animations, ...rest } = props
   const $web = rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>
   const $native = rest as ReactN.ViewProperties

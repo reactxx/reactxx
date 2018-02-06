@@ -6,21 +6,21 @@ declare namespace Muix {
 
   interface WithStylesOptionsNew {
     flip?: boolean
-    name: keyof Muix2.SheetsX
+    name: keyof Prim5s.SheetsX
   }
 
-  type muiSheet<ClassKey extends string = string> = Record<ClassKey, Muix2.RulesetWeb>
+  type muiSheet<ClassKey extends string = string> = Record<ClassKey, Prim5s.RulesetWeb>
   type muiSheetCreator<ClassKey extends string = string> = ThemeValueOrCreator<muiSheet<ClassKey>>
   type muiClassSheet<ClassKey extends string = string> = Record<ClassKey, string>
   interface muiCodeProps<ClassKey extends string = string> { classes: muiClassSheet<ClassKey>; theme?: Muix.Theme }
-  interface muiProps<ClassKey extends string = string> { classes?: Partial<muiClassSheet<ClassKey>>; innerRef?: React.Ref<any>; style?: Muix2.RulesetWeb }
+  interface muiProps<ClassKey extends string = string> { classes?: Partial<muiClassSheet<ClassKey>>; innerRef?: React.Ref<any>; style?: Prim5s.RulesetWeb }
   type muiWithStyles = <ClassKey extends string>(style: muiSheetCreator<ClassKey>, options?: WithStylesOptionsNew) => <P>(component: muiCodeComponentType<P, ClassKey>) => muiComponentType<P, ClassKey>
   type muiCodeComponentType<P, ClassKey extends string> = React.ComponentType<P & muiCodeProps<ClassKey>>
   type muiComponentType<P, ClassKey extends string> = React.ComponentType<P & muiProps<ClassKey>>
 
 
   //**** helpers
-  interface Shape extends Muix2.Shape {
+  interface Shape extends Prim5s.Shape {
     theme: Muix.ThemeNew
   }
   interface DefaultEmptyShape extends Shape {
@@ -35,11 +35,11 @@ declare namespace Muix {
 
   type OverwriteShape<R extends Partial<Muix.Shape>> = Overwrite<Muix.DefaultEmptyShape, R>
 
-  type SheetXCreator<R extends Shape> = ThemeCreator<Muix2.SheetX<R>>
-  type SheetXOrCreator<R extends Shape> = ThemeValueOrCreator<Muix2.PartialSheetX<R>>
+  type SheetXCreator<R extends Shape> = ThemeCreator<Prim5s.SheetX<R>>
+  type SheetXOrCreator<R extends Shape> = ThemeValueOrCreator<Prim5s.PartialSheetX<R>>
 
-  type SheetOrCreator<R extends Shape> = ThemeValueOrCreator<Muix2.Sheet<R>>
-  type SheetCreator<R extends Shape> = ThemeCreator<Muix2.Sheet<R>>
+  type SheetOrCreator<R extends Shape> = ThemeValueOrCreator<Prim5s.Sheet<R>>
+  type SheetCreator<R extends Shape> = ThemeCreator<Prim5s.Sheet<R>>
 
 
   type ThemeCreator<T> = (theme: ThemeNew) => T
@@ -48,7 +48,7 @@ declare namespace Muix {
 
   interface IMuiThemeProps { theme: ThemeNew | ((theme: ThemeNew) => ThemeNew) }
   type MuiThemeContextValue = { theme: ThemeNew }
-  type MuiOverridesContext = { childOverrides: Muix2.Sheets }
+  type MuiOverridesContext = { childOverrides: Prim5s.Sheets }
 
   type typoStyle = Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'
 
@@ -65,8 +65,8 @@ declare namespace Muix {
     fontWeightMedium: React.CSSProperties['fontWeight']
   }
 
-  type TypographyOptionsX = {[type in typoStyle]?: Muix2.TextRulesetX } & Partial<FontStyleNew>
-  type TypographyX = {[type in typoStyle]: Muix2.TextRulesetX } & FontStyleNew
+  type TypographyOptionsX = {[type in typoStyle]?: Prim5s.TextRulesetX } & Partial<FontStyleNew>
+  type TypographyX = {[type in typoStyle]: Prim5s.TextRulesetX } & FontStyleNew
   type TypographyOptionsOrCreatorX = TypographyOptionsX | ((palette: Palette) => TypographyOptionsX)
 
   interface ThemeNew extends Theme {
@@ -75,17 +75,17 @@ declare namespace Muix {
     $sheetCache: Array<SheetCacheItem>
   }
 
-  type SheetCacheItem = { sheetOrCreator: Muix.SheetOrCreator<Muix.Shape>; fromTheme: Muix2.Sheet<Muix.Shape> }
+  type SheetCacheItem = { sheetOrCreator: Muix.SheetOrCreator<Muix.Shape>; fromTheme: Prim5s.Sheet<Muix.Shape> }
   type ShadowsNative = ReactN.ViewStyle[]
 
   type OverridesX = {
-    [Name in keyof Muix2.SheetsX]?: Muix2.SheetsX[Name]
+    [Name in keyof Prim5s.SheetsX]?: Prim5s.SheetsX[Name]
   }
 
   //type OverridesNewOrCreator = OverridesNew | ((theme: ThemeNew) => OverridesNew)
 
-  type ThemeShadowsX = Muix2.RulesetX<ReactN.ViewStyle>[]
-  type ThemeShadows = Muix2.commonViewRuleset[]
+  type ThemeShadowsX = Prim5s.RulesetX<ReactN.ViewStyle>[]
+  type ThemeShadows = Prim5s.commonViewRuleset[]
 
   interface ThemeOptions {
     shadowsX?: ThemeShadowsX

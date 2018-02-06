@@ -1,13 +1,13 @@
 ﻿declare namespace MuixToolbar {
 
   type Shape = Muix.OverwriteShape<{
-    common: Muix2.ShapeViews<'root'>
+    common: Prim5s.ShapeViews<'root'>
     props: Muix.ToolbarProps
   }>
 
 }
 
-declare namespace Muix2 {
+declare namespace Prim5s {
   interface SheetsX {
     MuiToolbar?: Muix.SheetXOrCreator<MuixToolbar.Shape>
   }

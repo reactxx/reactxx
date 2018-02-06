@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { withStyles } from 'muix-styles'
 import { sheet } from '../../common/Drawer/Drawer'
 
-class drawer extends React.PureComponent<Muix2.CodeProps<MuixDrawer.Shape>> {
+class drawer extends React.PureComponent<Prim5s.CodeProps<MuixDrawer.Shape>> {
   render() { return null }
 }
 

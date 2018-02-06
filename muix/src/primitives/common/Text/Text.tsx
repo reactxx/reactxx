@@ -9,7 +9,7 @@ export const sheet = sheetCreator<MuixText.Shape>(({ typographyX: typoX }) => ({
   root: typoX.fontWeightRegularNew,
 }))
 
-const text: Muix2.CodeSFC<MuixText.Shape> = props => {
+const text: Prim5s.CodeSFC<MuixText.Shape> = props => {
   const { classes, theme, flip, getStyleWithSideEffect, style, children, className, animations, ...rest } = props
   return <TextX className={getStyleWithSideEffect(classes.root, className)} style={style} $native={rest as ReactN.TextProperties} $web={rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>} children={children} />
 }

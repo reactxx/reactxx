@@ -2,7 +2,7 @@
   //type ClassKey = Muix.TypographyClassKey | 'root' | 'alignLeft' | 'alignCenter' | 'alignRight' | 'gutterBottom' | 'paragraph' | 'colorInherit' | 'colorSecondary' | 'colorAccent' | 'colorPrimary' | 'colorError'
 
   type Shape = Muix.OverwriteShape<{
-    common: Muix2.ShapeTexts<Muix.TypographyClassKey | 'root' | 'alignLeft' | 'alignCenter' | 'alignRight' | 'gutterBottom' | 'paragraph' | 'colorPrimary' | 'colorError'> & { noWrap?: any /*ReactN.TextProperties*/ }
+    common: Prim5s.ShapeTexts<Muix.TypographyClassKey | 'root' | 'alignLeft' | 'alignCenter' | 'alignRight' | 'gutterBottom' | 'paragraph' | 'colorPrimary' | 'colorError'> & { noWrap?: any /*ReactN.TextProperties*/ }
     style: ReactN.TextStyle
     props: Muix.TypographyProps
     /*{
@@ -18,7 +18,7 @@
 
 }
 
-declare namespace Muix2 {
+declare namespace Prim5s {
   interface SheetsX {
     MuiTypography?: Muix.SheetXOrCreator<MuixTypography.Shape>
   }

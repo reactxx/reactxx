@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactN from 'react-native'
 import PropTypes from 'prop-types'
 
 import deepmerge from 'deepmerge' // < 1kb payload overhead when lodash/merge is > 3kb.
@@ -20,22 +19,22 @@ export interface AppContainerProps {
   themeOptions?: Muix.ThemeOptions
 }
 
-export const classesToPlatformSheet = (theme: Muix.ThemeNew, classes: Muix.ThemeValueOrCreator<Muix2.PartialSheetX<Muix.Shape>>) => {
+export const classesToPlatformSheet = (theme: Muix.ThemeNew, classes: Muix.ThemeValueOrCreator<Prim5s.PartialSheetX<Muix.Shape>>) => {
   const sheetx = typeof classes === 'function' ? classes(theme) : classes
-  return toPlatformSheet(sheetx) as Muix2.Sheet<Muix.Shape> //Muix.PartialSheetX<Muix.Shape>
+  return toPlatformSheet(sheetx) as Prim5s.Sheet<Muix.Shape> //Muix.PartialSheetX<Muix.Shape>
 }
 
 //create platform specific sheet from cross platform sheet creator
-export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCreator<Muix2.SheetX<R>>) => ((theme: Muix.ThemeNew) => toPlatformSheet(sheetXCreator(theme) as Muix2.PartialSheetX<R>)) as Muix.SheetCreator<R>
+export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCreator<Prim5s.SheetX<R>>) => ((theme: Muix.ThemeNew) => toPlatformSheet(sheetXCreator(theme) as Prim5s.PartialSheetX<R>)) as Muix.SheetCreator<R>
 
 //create platform specific ruleset from cross platform ruleset
-export const toPlatformRuleSetX = (style: Muix2.TRulesetX, isNative: boolean) => {
+export const toPlatformRuleSetX = (style: Prim5s.TRulesetX, isNative: boolean) => {
   if (!style) return null
   if (!style.$web && !style.$native && !style.$overrides && !style.$childOverrides) return style //optimalization
   const { $web, $native, $overrides, $childOverrides, ...rest } = style
   const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheetX($overrides, isNative), $childOverrides: getOverridesX(null, $childOverrides) }
   if (!res.$overrides) delete res.$overrides; if (!res.$childOverrides) delete res.$childOverrides //remove NULL or UNDEFINED
-  return res as Muix2.Ruleset
+  return res as Prim5s.Ruleset
 }
 
 export const createAnimations = (props) => null
@@ -47,9 +46,9 @@ export const clearSystemProps = obj => {
 }
 
 //create platform specific sheet from cross platform sheet
-export const toPlatformSheetX = (sheet: Muix2.PartialSheetX<Muix.Shape>, isNative: boolean) => {
+export const toPlatformSheetX = (sheet: Prim5s.PartialSheetX<Muix.Shape>, isNative: boolean) => {
   if (typeof sheet !== 'object') return sheet
-  const res: Muix2.Sheet<Muix.Shape> = { }
+  const res: Prim5s.Sheet<Muix.Shape> = { }
   for (const p in sheet) {
     if (p === '$animations') {
       const animSrc = sheet[p]
@@ -69,37 +68,6 @@ const getOverridesX = (theme: Muix.ThemeNew, source: Muix.ThemeValueOrCreator<Mu
   for (const p in source) result[p] = toPlatformSheet(source[p])
   return result
 }
-
-////convert cross platform typography optionsOrCreator to platform specific optionsOrCreator
-//const getTypographyOptionOrCreatorX = (optionsOrCreatorX: Muix.TypographyOptionsOrCreatorX) => {
-
-//  const getOptionX = (optionsX: Muix.TypographyOptionsX) => {
-
-//    let res: Muix.TypographyOptionsNew = {}
-
-//    if (optionsX) {
-//      const { fontFamily, fontSize, htmlFontSize, ...rulesX } = optionsX
-
-//      const rules: PartialRecord<Muix.typoStyle, ReactN.TextStyle> = {}
-//      for (const p in rulesX) rules[p] = toPlatformRuleSet(rulesX[p]) //toPlatformRuleSet is platform specific
-
-//      res = {
-//        fontFamily, fontSize, htmlFontSize,
-//        ...rules
-//      }
-//    }
-//    return res
-//  }
-
-//  let res: Muix.TypographyOptionsOrCreator = {}
-
-//  if (optionsOrCreatorX) {
-//    if (typeof optionsOrCreatorX == 'function') res = palette => getOptionX(optionsOrCreatorX(palette))
-//    else res = getOptionX(optionsOrCreatorX)
-//  }
-
-//  return res
-//}
 
 export const MuiThemeContextTypes = { theme: PropTypes.any }
 export const MuiOverridesContextTypes = { childOverrides: PropTypes.any }
@@ -131,7 +99,7 @@ function createMuiTheme(options: Muix.ThemeOptions = {}) {
   } = options
 
   //convert cross platform shadows to platform specific shadows
-  const shadowsNewInput = shadowsNewInputX && shadowsNewInputX.map(rsx => toPlatformRuleSet(rsx) as Muix2.commonViewRuleset)
+  const shadowsNewInput = shadowsNewInputX && shadowsNewInputX.map(rsx => toPlatformRuleSet(rsx) as Prim5s.commonViewRuleset)
 
   const palette = createPalette(paletteInput)
   const breakpoints = createBreakpoints(breakpointsInput)

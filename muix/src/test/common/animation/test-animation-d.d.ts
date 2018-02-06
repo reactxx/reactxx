@@ -5,15 +5,15 @@ declare namespace testAnimation {
       tablet?: boolean
       desktop?: boolean
     }
-    common: Muix2.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop'> & Muix2.ShapeTexts<'openButton' | 'closeButton'>
+    common: Prim5s.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop'> & Prim5s.ShapeTexts<'openButton' | 'closeButton'>
     animation: {
-      mobile: Muix2.ShapeViews<'drawer' | 'backDrop'>,
-      tablet: Muix2.ShapeViews<'drawer' | 'content'>,
+      mobile: Prim5s.ShapeViews<'drawer' | 'backDrop'>,
+      tablet: Prim5s.ShapeViews<'drawer' | 'content'>,
     }
   }>
 }
 
-declare namespace Muix2 {
+declare namespace Prim5s {
   interface SheetsX {
     TestStyles?: Muix.SheetXOrCreator<testStyles.Shape>
   }
