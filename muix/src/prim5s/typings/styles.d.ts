@@ -198,6 +198,8 @@
 
   type ThemeCreator<R extends Shape, T> = (theme: getTheme<R>) => T
   type ThemeValueOrCreator<R extends Shape, T> = T | ThemeCreator<R, T>
+  type SheetCreator<R extends Shape> = ThemeCreator<R, Prim5s.Sheet<R>>
+
 
   //type SheetXCommon<R extends Shape> = {[P in keyof getCommon<R>]: RulesetX<getCommon<R>[P]>}
   //type SheetXNative<R extends Shape> = getNative<R>
@@ -256,10 +258,8 @@
     style?: RulesetX<getStyle<R>> //cross platform style
     $web?: Partial<getPropsWeb<R>> //web specific style
     $native?: Partial<getPropsNative<R>> //native specific style
-    classes?: ThemeValueOrCreator<R, PartialSheetX<R>> | PartialSheetInCode<R>//cross platform sheet for web and native 
-    //classes?: PartialSheetInCode<R> //cross platform sheet when using component in other component
-    className?: Ruleset | RulesetX<getStyle<R>>
-    //className?: CSSProperties
+    classes?: ThemeValueOrCreator<R, PartialSheetX<R>> /*cross platform sheet*/ | PartialSheetInCode<R> /*platform specific sheet when (when component is used in other component)*/
+    className?: RulesetX<getStyle<R>> //| Ruleset
   }>>
   type PartialSheetInCode<R extends Shape> = PartialRecord<keyof getCommon<R> | getWeb<R> | keyof getNative<R>, Ruleset> // common and web and native
 

@@ -162,6 +162,7 @@
     <TypeScriptCompile Include="src\components\web\AppBar\AppBar.tsx" />
     <TypeScriptCompile Include="src\components\web\Drawer\Drawer.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
+    <TypeScriptCompile Include="src\prim5s\common\index.ts" />
     <TypeScriptCompile Include="src\primitives\common\Typography\Typography.tsx" />
     <TypeScriptCompile Include="src\primitives\native\for-components.tsx" />
     <TypeScriptCompile Include="src\primitives\typings\primitives.d.ts" />
