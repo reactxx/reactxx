@@ -24,7 +24,7 @@ export const getAnimations = <T extends Animation.Shapes>(sheets: Animation.Shee
   return drivers
 }
 
-export abstract class DriverLow<T extends Animation.Shape>  {
+export abstract class DriverLow<T extends Animation.Shape> implements Animation.Driver<T> {
   constructor(sheet: Animation.SheetX<T>, public animations: Animation.Drivers<{}>) {
     this.opened = !!sheet.$opened
     const { $delay = 0, $duration = 0, $easing = 'ease-in', $opened} = sheet

@@ -1,6 +1,6 @@
 import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
-import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme, classesToPlatformSheet } from './index'
+import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme, classesToPlatformSheet, applyTheme } from './index'
 import { toPlatformRuleSet, toPlatformSheet, clearSystemProps } from 'muix-styles'
 import warning from 'invariant'
 import { getAnimations } from 'muix-animation'
@@ -72,8 +72,8 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
         return rulesetResult
       }
 
-      const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as Prim5s.TRulesetX
-      const className = toPlatformRuleSet(cn)
+      //const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as Prim5s.TRulesetX
+      const className = toPlatformRuleSet(applyTheme(theme, rulesetX))
       const flip = typeof flipProp === 'boolean' ? flipProp : theme.direction === 'rtl'
 
       const newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style)), classes: this.codeClasses, className, flip, getRulesetWithSideEffect, animations } as Prim5s.CodeProps<R> & {onClick, onPress}
@@ -110,7 +110,7 @@ type TContext = Prim5s.MuiThemeContextValue & Prim5s.MuiOverridesContext
 //apply theme to sheet AND merge it with theme.overrides
 const aplyThemeToSheet = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreator<R>, theme: Prim5s.Theme, name: string) => {
   const override = (theme.overrides && name && theme.overrides[name])// as Prim5s.Sheet<R>
-  const sheet = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator)
+  const sheet = applyTheme(theme, sheetOrCreator)
   const res: Prim5s.Sheet<R> = override ? deepMerges(false, {}, sheet, override) : sheet //deepMerge only when needed
   return { sheetOrCreator, fromTheme: res } as Prim5s.SheetCacheItem
 }

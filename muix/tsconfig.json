@@ -17,11 +17,12 @@
       "muix-styles/native": [ "src/styles/native/index" ],
       "muix-styles": [ "src/styles/native/index" ],
 
-      "muix-animation": [ "src/animation/native/index" ],
+      "muix-animation": [ "src/animation/web/index" ],
 
-      "muix-primitives": [ "src/primitives/native/index" ],
+      "muix-primitives": [ "src/primitives/web/index" ],
+      "muix-prim5s": [ "src/prim5s/web/index" ],
 
-      "muix-components/*": [ "src/components/native/*" ],
+      "muix-components/*": [ "src/components/web/*" ],
       "test/*": [ "src/test/*" ]
     },
 

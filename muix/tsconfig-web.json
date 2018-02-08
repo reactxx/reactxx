@@ -1,5 +1,5 @@
 ﻿{
-  "compileOnSave": true,
+  "compileOnSave": false,
   "compilerOptions": {
     "target": "es5",
     "module": "system",
@@ -17,14 +17,16 @@
       "muix-styles/native": [ "src/styles/native/index" ],
       "muix-styles": [ "src/styles/native/index" ],
 
-      "muix-animation": [ "src/animation/native/index" ],
+      "muix-animation": [ "src/animation/web/index" ],
 
-      "muix-primitives": [ "src/primitives/native/index" ],
+      "muix-primitives": [ "src/primitives/v/index" ],
+      "muix-prim5s": [ "src/prim5s/web/index" ],
 
-      "muix-components/*": [ "src/components/native/*" ],
-
+      "muix-components/*": [ "src/components/v/*" ],
       "test/*": [ "src/test/*" ]
     },
+
+    //"esModuleInterop": true,
 
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
@@ -47,5 +49,6 @@
     "src/**/*",
     "node_modules/muix-icons/typings.d.ts",
     "node_modules/fela/index.d.ts"
+    //"node_modules/material-ui/**/*"
   ]
 }
