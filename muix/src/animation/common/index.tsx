@@ -1,14 +1,19 @@
-import { AnimationDriver } from 'muix-animation' //NATIVE (npm config) or WEB (jspm config) driver
+import { Driver } from 'muix-animation' //NATIVE (npm config) or WEB (jspm config) driver
 import warning from 'warning'
 
-export const getAnimations = <T extends Animation.AnimationsShape>(sheet: Animation.AnimationsX<T>, statefullComponent: React.Component) => {
-  const drivers: Animation.Animations<T> = {} as any
-  if (!sheet) return null
-  for (const p in sheet) {
+//export type AnimationsRecord<T extends Animation.Shapes> = {[P in keyof T]: AnimationLow<T[P]> }
+//export type Animations<T extends Animation.Shapes> = AnimationsRecord<T> & AnimationsEx
+//export type AnimationsEx = { reset: (caller?: AnimationLow<{}>) => void; statefullComponent: React.Component }
+
+
+export const getAnimations = <T extends Animation.Shapes>(sheets: Animation.SheetsX<T>, statefullComponent: React.Component) => {
+  if (!sheets) return null
+  const drivers: Animation.Drivers<T> = {} as any
+  for (const p in sheets) {
     if (p.startsWith('$')) continue
-    drivers[p] = new AnimationDriver(sheet[p], drivers) as Animation.Animation<Animation.AnimationShape> as any
+    drivers[p] = new Driver(sheets[p], drivers) as any
   }
-  drivers.reset = (caller?: Animation.Animation<{}>) => {
+  drivers.reset = (caller?: Animation.Driver<{}>) => {
     for (const p in drivers) {
       const driver = drivers[p]
       if (driver === caller || !driver.reset) continue
@@ -19,8 +24,8 @@ export const getAnimations = <T extends Animation.AnimationsShape>(sheet: Animat
   return drivers
 }
 
-export abstract class AnimationLow<T extends Animation.AnimationShape> implements Animation.Animation<T> {
-  constructor(sheet: Animation.AnimationX<T>, public animations: Animation.Animations<{}>) {
+export abstract class DriverLow<T extends Animation.Shape>  {
+  constructor(sheet: Animation.SheetX<T>, public animations: Animation.Drivers<{}>) {
     this.opened = !!sheet.$opened
     const { $delay = 0, $duration = 0, $easing = 'ease-in', $opened} = sheet
     this.$config = { $delay, $duration, $easing, $opened }

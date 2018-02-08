@@ -10,7 +10,7 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
   class Styled extends React.PureComponent<Prim5s.PropsX<R>> {
     usedChildOverrides: Prim5s.Sheets = {}
     codeClasses: Prim5s.Sheet<R>
-    animations: Animation.Animations<{}>
+    animations: Animation.Drivers<{}>
     theme: Prim5s.getTheme<R>
     cacheItem: Prim5s.SheetCacheItem
 

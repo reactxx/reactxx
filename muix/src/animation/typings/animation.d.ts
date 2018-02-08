@@ -10,9 +10,6 @@ declare namespace Animation {
     ToPairsTransform<ReactN.ScaleXTransform> | ToPairsTransform<ReactN.ScaleYTransform> | ToPairsTransform<ReactN.TranslateXTransform> | ToPairsTransform<ReactN.TranslateYTransform> | ToPairsTransform<ReactN.SkewXTransform> | ToPairsTransform<ReactN.SkewYTransform>
   type Pair = [number | string, number | string]
 
-  type AnimationsX<T extends AnimationsShape> = {[P in keyof T]: AnimationX<T[P]>}
-  type AnimationX<T extends AnimationShape> = {[P in keyof T]: RuleSetX<T[P]>} & AnimationConfig
-
   interface AnimationConfig {
     $easing?: string
     $duration?: number
@@ -26,13 +23,13 @@ declare namespace Animation {
     $web?: ToPairs<Prim5s.RulesetWeb, keyof React.CSSPropertiesLow> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
   }
 
-  type Animations<T extends AnimationsShape> = {[P in keyof T]: Animation<T[P]> } & AnimationsEx
-  type AnimationsWeb<T extends AnimationsShape> = {[P in keyof T]: AnimationWeb<T[P]> } & AnimationsEx
-  type AnimationsNative<T extends AnimationsShape> = {[P in keyof T]: AnimationNative<T[P]> } & AnimationsEx
+  type Drivers<T extends Shapes> = {[P in keyof T]: Driver<T[P]> } & AnimationsEx
+  type DriversWeb<T extends Shapes> = {[P in keyof T]: DriverWeb<T[P]> } & AnimationsEx
+  type DriversNative<T extends Shapes> = {[P in keyof T]: DriverNative<T[P]> } & AnimationsEx
 
-  type AnimationsEx = { reset: (caller?: Animation.Animation<{}>) => void; statefullComponent: React.Component }
+  type AnimationsEx = { reset: (caller?: Animation.Driver<{}>) => void; statefullComponent: React.Component }
 
-  interface Animation<T extends AnimationShape> {
+  interface Driver<T extends Shape> {
     opened: boolean
     open() 
     close()
@@ -40,22 +37,25 @@ declare namespace Animation {
     toggle()
     reset()
     sheet: Sheet<T>
-    animations: Animations<{}>
+    animations: Drivers<{}>
   }
 
-  interface AnimationWeb<T extends AnimationShape> extends Animation<T> {
+  interface DriverWeb<T extends Shape> extends Driver<T> {
     sheet: SheetWeb<T>
   }
-  interface AnimationNative<T extends AnimationShape> extends Animation<T> {
+  interface DriverNative<T extends Shape> extends Driver<T> {
     value: ReactN.Animated.Value
     sheet: SheetNative<T>
   }
 
-  type SheetWeb<T extends AnimationShape> = {[P in keyof T]: Prim5s.RulesetWeb} & AnimationConfig
-  type SheetNative<T extends AnimationShape> = {[P in keyof T]: T[P]} & AnimationConfig
-  type Sheet<T extends AnimationShape> = {[P in keyof T]: (T[P] | Prim5s.RulesetWeb) } & AnimationConfig
+  type SheetWeb<T extends Shape> = {[P in keyof T]: Prim5s.RulesetWeb} & AnimationConfig
+  type SheetNative<T extends Shape> = {[P in keyof T]: T[P]} & AnimationConfig
+  type Sheet<T extends Shape> = {[P in keyof T]: (T[P] | Prim5s.RulesetWeb) } & AnimationConfig
 
-  type AnimationShape = Record<string, Prim5s.RulesetNative>
-  type AnimationsShape = Record<string, AnimationShape>
+  type SheetsX<T extends Shapes> = {[P in keyof T]: SheetX<T[P]>}
+  type SheetX<T extends Shape> = {[P in keyof T]: RuleSetX<T[P]>} & AnimationConfig
+
+  type Shape = Record<string, Prim5s.RulesetNative>
+  type Shapes = Record<string, Shape>
 }
 

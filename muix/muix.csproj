@@ -204,7 +204,6 @@
     <TypeScriptCompile Include="src\styles\common\index.ts" />
     <TypeScriptCompile Include="src\styles\native\index.ts" />
     <TypeScriptCompile Include="src\styles\web\index.ts" />
-    <TypeScriptCompile Include="src\styles\typings\withStyles-d.d.ts" />
     <None Include="src\styles\native\createTypography.ts_" />
     <TypeScriptCompile Include="src\styles\native\expoLoadFonts.ts" />
     <None Include="src\styles\native\MuiThemeProvider.ts_" />

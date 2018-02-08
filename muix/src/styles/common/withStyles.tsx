@@ -10,7 +10,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
   class Styled extends React.PureComponent<Prim5s.PropsX<R>> {
     usedChildOverrides: Prim5s.Sheets = {}
     codeClasses: Prim5s.Sheet<R>
-    animations: Animation.Animations<{}>
+    animations: Animation.Drivers<{ }>
     theme: Muix.Theme
     cacheItem: Prim5s.SheetCacheItem
 
