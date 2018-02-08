@@ -145,7 +145,7 @@ const button: Prim5s.CodeSFCNative<MuixButton.Shape> = (props, context) => {
 
 
   var x = props.mini
-  const { children, classes, color = 'default', variant, mini, getStyleWithSideEffect, className, animations, ...rest } = props
+  const { children, classes, color = 'default', variant, mini, getRulesetWithSideEffect, className, animations, ...rest } = props
   const { disabled } = rest //disabled must be propagated to ButtonBaseLow
 
   const fab = variant == 'fab'
@@ -154,7 +154,7 @@ const button: Prim5s.CodeSFCNative<MuixButton.Shape> = (props, context) => {
   const isFlat = !raised && !fab
   const Color = capitalize(color)
 
-  const viewStyle = getStyleWithSideEffect(
+  const viewStyle = getRulesetWithSideEffect(
     classes.root,
     !isFlat && classes.raised,
     isFlat && classes.flat,
@@ -173,12 +173,12 @@ const button: Prim5s.CodeSFCNative<MuixButton.Shape> = (props, context) => {
 
   //console.log('### viewStyle: ', viewStyle)
 
-  const rippleStyle = getStyleWithSideEffect(classes.ripple) as ReactN.ViewStyle
-  const activeStyle = getStyleWithSideEffect(!disabled && classes.active) as ReactN.ViewStyle
+  const rippleStyle = getRulesetWithSideEffect(classes.ripple) as ReactN.ViewStyle
+  const activeStyle = getRulesetWithSideEffect(!disabled && classes.active) as ReactN.ViewStyle
 
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 
-  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} className={null} getStyleWithSideEffect={null} animations={null} {...rest}>
+  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} className={null} getRulesetWithSideEffect={null} animations={null} {...rest}>
     {childs}
   </RippleEffect>
 }

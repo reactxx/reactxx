@@ -69,13 +69,13 @@ declare namespace Muix {
   type TypographyX = {[type in typoStyle]: Prim5s.TextRulesetX } & FontStyleNew
   type TypographyOptionsOrCreatorX = TypographyOptionsX | ((palette: Palette) => TypographyOptionsX)
 
-  interface ThemeNew extends Theme {
+  interface ThemeNew extends Theme, Prim5s.Theme {
     shadowsNew: ThemeShadows
     typographyX: TypographyX
-    $sheetCache: Array<SheetCacheItem>
+    //$sheetCache: Array<SheetCacheItem>
   }
 
-  type SheetCacheItem = { sheetOrCreator: Muix.SheetOrCreator<Muix.Shape>; fromTheme: Prim5s.Sheet<Muix.Shape> }
+  //type SheetCacheItem = { sheetOrCreator: Muix.SheetOrCreator<Muix.Shape>; fromTheme: Prim5s.Sheet<Muix.Shape> }
   type ShadowsNative = ReactN.ViewStyle[]
 
   type OverridesX = {

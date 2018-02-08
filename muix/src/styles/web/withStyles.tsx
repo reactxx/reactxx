@@ -24,14 +24,16 @@ type webKeys<R extends Muix.Shape> = Prim5s.getWeb<R> | keyof Prim5s.getCommon<R
 
 export const muiCompatible = <R extends Muix.Shape>(Component: React.ComponentType<Prim5s.getPropsWeb<R>>) => {
   const Styled: Prim5s.SFCX<R> = (props, context: Muix.MuiThemeContextValue) => {
-    const { classes: _classes, style, $web, $native, onClick, className, ...rest } = props as Prim5s.PropsX<Muix.Shape> & Prim5s.TOnClickWeb 
+    const { classes: _classes, style, $web, $native, onClick, className: rulesetX, ...rest } = props as Prim5s.PropsX<Muix.Shape> & Prim5s.TOnClickWeb 
 
     const click = ($web && $web.onClick) || onClick
 
     const theme = context.theme || getDefaultTheme()
 
+    const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as React.CSSProperties
+
     const classes = sheetToClassSheet((classesToPlatformSheet(theme, _classes as Muix.ThemeValueOrCreator<Prim5s.PartialSheetX<R>>)) as Prim5s.SheetWeb<R>)
-    const webProps = { ...rest, ...$web, style: toPlatformRuleSet(style), classes, onClick: click, theme, className: rulesetToClassNames(className as React.CSSProperties) } as Prim5s.getPropsWeb<R>
+    const webProps = { ...rest, ...$web, style: toPlatformRuleSet(style), classes, onClick: click, theme, className: rulesetToClassNames(cn) } as Prim5s.getPropsWeb<R>
     return <Component {...webProps} />
   }
   Styled.contextTypes = MuiThemeContextTypes

@@ -19,8 +19,6 @@ export const getAnimations = <T extends Animation.AnimationsShape>(sheet: Animat
   return drivers
 }
 
-//export const resetAnimations = (anims) => { for (const p in anims) anims[p].reset() }
-
 export abstract class AnimationLow<T extends Animation.AnimationShape> implements Animation.Animation<T> {
   constructor(sheet: Animation.AnimationX<T>, public animations: Animation.Animations<{}>) {
     this.opened = !!sheet.$opened

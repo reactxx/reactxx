@@ -1,4 +1,4 @@
-import { AnimationLow, getAnimations, getGaps } from '../common/index'
+import { AnimationLow, getGaps } from '../common/index'
 export * from '../common/index'
 import warning from 'warning'
 import { sheetToClassSheet, keyFrameToClassNames } from 'muix-styles/web'

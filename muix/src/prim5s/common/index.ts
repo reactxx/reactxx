@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import warning from 'warning'
 
 //platform specific code
 import { toPlatformRuleSet, toPlatformSheet } from 'muix-styles'
@@ -60,3 +61,14 @@ const getOverridesX = (theme, source: Muix.ThemeValueOrCreator<Muix.OverridesX>)
 
 export const MuiThemeContextTypes = { theme: PropTypes.any }
 export const MuiOverridesContextTypes = { childOverrides: PropTypes.any }
+
+export const initPrim5s = (createTheme: (par) => any) => _createTheme = createTheme
+
+let _createTheme: (par) => any = null
+export const createTheme = (par?) => {
+  warning(!!_createTheme, '')
+  return _createTheme(par)
+}
+let defaultTheme
+export const getDefaultTheme = () => defaultTheme || (defaultTheme = createTheme())
+

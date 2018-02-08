@@ -1,5 +1,27 @@
 ﻿declare namespace Prim5s {
 
+  interface WithStylesOptionsNew {
+    name: keyof SheetsX
+    flip?:boolean
+  }
+
+  type SheetCacheItem = { sheetOrCreator: SheetOrCreator<Shape>; fromTheme: Sheet<Shape> }
+
+  interface Theme {
+    direction: Direction
+    overridesNew?: Overrides 
+    $sheetCache: Array<SheetCacheItem>
+  }
+
+  type Direction = 'ltr' | 'rtl';
+
+  type MuiThemeContextValue = { theme: Theme }
+  type MuiOverridesContext = { childOverrides: Sheets }
+
+  type Overrides = {
+    [Name in keyof Prim5s.SheetsX]?: Prim5s.Sheets[Name]
+  }
+
   interface SheetsX { }
   type SheetsWeb = {[P in keyof SheetsX]: SheetWeb<Shape>}
   type SheetsNative = {[P in keyof SheetsX]: SheetNative<Shape>}
@@ -117,7 +139,7 @@
     props: {} //common (web and native) props
     propsNative: { style?: {} } //native props only
     propsWeb: React.HTMLAttributes<HTMLElement>//web props only
-    theme: {}
+    theme: Theme
   }
 
   type ShapeTexts<P extends string> = {[p in P]: ReactN.TextStyle}
@@ -198,7 +220,8 @@
 
   type ThemeCreator<R extends Shape, T> = (theme: getTheme<R>) => T
   type ThemeValueOrCreator<R extends Shape, T> = T | ThemeCreator<R, T>
-  type SheetCreator<R extends Shape> = ThemeCreator<R, Prim5s.Sheet<R>>
+  type SheetCreator<R extends Shape> = ThemeCreator<R, Sheet<R>>
+  type SheetOrCreator<R extends Shape> = ThemeValueOrCreator<R, Sheet<R>>
 
 
   //type SheetXCommon<R extends Shape> = {[P in keyof getCommon<R>]: RulesetX<getCommon<R>[P]>}
@@ -255,11 +278,11 @@
   //**** cross platform Component props (Component is created by 'withStyles' ) 
 
   type PropsX<R extends Shape> = Partial<Overwrite<getProps<R>, {
-    style?: RulesetX<getStyle<R>> //cross platform style
+    style?: ThemeValueOrCreator<R, RulesetX<getStyle<R>>> //cross platform style
     $web?: Partial<getPropsWeb<R>> //web specific style
     $native?: Partial<getPropsNative<R>> //native specific style
-    classes?: ThemeValueOrCreator<R, PartialSheetX<R>> /*cross platform sheet*/ | PartialSheetInCode<R> /*platform specific sheet when (when component is used in other component)*/
-    className?: RulesetX<getStyle<R>> //| Ruleset
+    classes?: ThemeValueOrCreator<R, PartialSheetX<R>> /*cross platform sheet*/ | PartialSheetInCode<R> /*platform specific sheet (when component is used in other component)*/
+    className?: ThemeValueOrCreator<R, RulesetX<getStyle<R>>> /*cross platform root ruleset*/ | Ruleset /*platform specific root ruleset (when component is used in other component)*/
   }>>
   type PartialSheetInCode<R extends Shape> = PartialRecord<keyof getCommon<R> | getWeb<R> | keyof getNative<R>, Ruleset> // common and web and native
 
@@ -269,11 +292,11 @@
   //**** Component's code (passed to withStyles)
 
   // component code for web
-  type CodePropsWeb<R extends Shape> = Overwrite<getProps<R> & getPropsWeb<R>, { className: RulesetWeb; classes: SheetWeb<R>; style: RulesetWeb; theme: getTheme<R>; flip: boolean; getStyleWithSideEffect: StyleWithSideEffectWeb; animations: Animation.AnimationsWeb<getAnimation<R>> }>
+  type CodePropsWeb<R extends Shape> = Overwrite<getProps<R> & getPropsWeb<R>, { className: RulesetWeb; classes: SheetWeb<R>; style: RulesetWeb; theme: getTheme<R>; flip: boolean; getRulesetWithSideEffect: StyleWithSideEffectWeb; animations: Animation.AnimationsWeb<getAnimation<R>> }>
   type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
   // component code for native
-  type CodePropsNative<R extends Shape> = Overwrite<getProps<R> & getPropsNative<R>, { className: getStyle<R>; classes: SheetNative<R>; style: getStyle<R>; theme: getTheme<R>; flip: boolean; getStyleWithSideEffect: StyleWithSideEffectNative; animations: Animation.AnimationsNative<getAnimation<R>> }>
+  type CodePropsNative<R extends Shape> = Overwrite<getProps<R> & getPropsNative<R>, { className: getStyle<R>; classes: SheetNative<R>; style: getStyle<R>; theme: getTheme<R>; flip: boolean; getRulesetWithSideEffect: StyleWithSideEffectNative; animations: Animation.AnimationsNative<getAnimation<R>> }>
   type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
   type CodeComponentNative<R extends Shape> = React.ComponentClass<CodePropsNative<R>>
 
@@ -281,7 +304,7 @@
   type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
 
   //some code for components could be shared for web and native
-  type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), { className: RulesetWeb | getStyle<R>, classes: Sheet<R>; style: RulesetWeb | getStyle<R>; theme: getTheme<R>; flip: boolean; getStyleWithSideEffect: StyleWithSideEffect; animations: Animation.Animations<getAnimation<R>> }>
+  type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), { className: RulesetWeb | getStyle<R>, classes: Sheet<R>; style: RulesetWeb | getStyle<R>; theme: getTheme<R>; flip: boolean; getRulesetWithSideEffect: StyleWithSideEffect; animations: Animation.Animations<getAnimation<R>> }>
   type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
 

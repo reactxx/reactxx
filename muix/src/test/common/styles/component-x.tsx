@@ -57,16 +57,16 @@ const sheet = sheetCreator<testStyles.Shape>(({ palette, typographyX: typoX }) =
 }))
 
 const testStyles: Prim5s.CodeSFC<testStyles.Shape> = props => {
-  const { classes, getStyleWithSideEffect, theme, flip, primary, children, style, className, animations, ...rest } = props
+  const { classes, getRulesetWithSideEffect, theme, flip, primary, children, style, className, animations, ...rest } = props
 
-  const rootStyles = getStyleWithSideEffect( // getStyleWithSideEffect now knowns, which rulesets are actualy used. So it can use their $overrides and $childOverrides props
+  const rootStyles = getRulesetWithSideEffect( // getRulesetWithSideEffect now knowns, which rulesets are actualy used. So it can use their $overrides and $childOverrides props
     classes.root,
     primary === true && classes.primary,
     primary === false && classes.secondary,
     className,
   )
 
-  const labelStyles = getStyleWithSideEffect(
+  const labelStyles = getRulesetWithSideEffect(
     classes.label,
   )
 

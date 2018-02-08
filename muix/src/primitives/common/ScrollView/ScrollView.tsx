@@ -12,9 +12,9 @@ export const sheet = sheetCreator<MuixScrollView.Shape>(() => ({
 }))
 
 const scrollView: Prim5s.CodeSFC<MuixScrollView.Shape> = props => {
-  const { classes, theme, flip, getStyleWithSideEffect, children, style, className, animations, ...rest } = props
+  const { classes, theme, flip, getRulesetWithSideEffect, children, style, className, animations, ...rest } = props
   return <ScrollViewX
-    className={getStyleWithSideEffect(classes.root, className)} contentContainerStyle={getStyleWithSideEffect(classes.contentContainerStyle)}
+    className={getRulesetWithSideEffect(classes.root, className)} contentContainerStyle={getRulesetWithSideEffect(classes.contentContainerStyle)}
     style={style} $native={rest as ReactN.ScrollViewProperties} $web={rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>} children={children} />
 }
 

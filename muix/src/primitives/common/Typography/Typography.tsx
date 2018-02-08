@@ -76,7 +76,7 @@ const typography: Prim5s.CodeSFC<MuixTypography.Shape> = (props => {
     paragraph,
     variant = 'body1',
     style,
-    getStyleWithSideEffect,
+    getRulesetWithSideEffect,
     animations,
     theme, flip, 
     children,
@@ -86,7 +86,7 @@ const typography: Prim5s.CodeSFC<MuixTypography.Shape> = (props => {
 
   //console.log('### typography', color, classes)
 
-  const classNameRes = getStyleWithSideEffect(
+  const classNameRes = getRulesetWithSideEffect(
     classes.root,
     classes[variant],
     color !== 'default' && classes[`color${capitalize(color)}`],
