@@ -1,7 +1,6 @@
 import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
-import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme, classesToPlatformSheet, applyTheme } from './index'
-import { toPlatformRuleSet, toPlatformSheet, clearSystemProps } from 'muix-styles'
+import { toPlatformRuleSet, toPlatformSheet, clearSystemProps, MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme, classesToPlatformSheet, applyTheme } from './index'
 import warning from 'invariant'
 import { getAnimations } from 'muix-animation'
 
@@ -76,7 +75,7 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
       const className = toPlatformRuleSet(applyTheme(theme, rulesetX))
       const flip = typeof flipProp === 'boolean' ? flipProp : theme.direction === 'rtl'
 
-      const newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style)), classes: this.codeClasses, className, flip, getRulesetWithSideEffect, animations } as Prim5s.CodeProps<R> & {onClick, onPress}
+      const newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(applyTheme(theme,style))), classes: this.codeClasses, className, flip, getRulesetWithSideEffect, animations } as Prim5s.CodeProps<R> & {onClick, onPress}
       if (window.isWeb) {
         const cl = ($web && ($web as any).onClick) || onClick
         if (cl) newProps.onClick = cl
