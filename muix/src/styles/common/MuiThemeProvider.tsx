@@ -9,13 +9,13 @@ class MuiThemeProvider extends React.PureComponent<Muix.IMuiThemeProps> {
     this.localTheme = this.mergeOuterLocalTheme(context.theme)
   }
 
-  localTheme: Muix.ThemeNew
+  localTheme: Muix.Theme
 
   getChildContext(): Muix.MuiThemeContextValue {
     return { theme: this.localTheme }
   }
 
-  mergeOuterLocalTheme(outerTheme: Muix.ThemeNew) {
+  mergeOuterLocalTheme(outerTheme: Muix.Theme) {
     const { props: { theme } } = this
     if (typeof theme === 'function') return theme(outerTheme)
     if (outerTheme && theme.overrides) deepMerge(theme.overrides, outerTheme.overrides)

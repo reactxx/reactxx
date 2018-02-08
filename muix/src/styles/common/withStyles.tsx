@@ -11,7 +11,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
     usedChildOverrides: Prim5s.Sheets = {}
     codeClasses: Prim5s.Sheet<R>
     animations: Animation.Animations<{}>
-    theme: Muix.ThemeNew
+    theme: Muix.Theme
     cacheItem: Prim5s.SheetCacheItem
 
     constructor(props: Prim5s.PropsX<R>, context: TContext) {
@@ -108,7 +108,7 @@ export default withStyles
 type TContext = Muix.MuiThemeContextValue & Muix.MuiOverridesContext
 
 //apply theme to sheet AND merge it with theme.overrides
-const aplyThemeToSheet = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, theme: Muix.ThemeNew, name: string) => {
+const aplyThemeToSheet = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, theme: Muix.Theme, name: string) => {
   const overrides = (theme.overrides && name && theme.overrides[name]) as Prim5s.Sheet<R>
   const styles = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator)
   const res: Prim5s.Sheet<R> = overrides ? deepMerges(false, {}, styles, overrides) : styles //deepMerge only when needed

@@ -9,7 +9,7 @@
 
   interface Theme {
     direction: Direction
-    overridesNew?: Overrides 
+    overrides?: Overrides 
     $sheetCache: Array<SheetCacheItem>
   }
 

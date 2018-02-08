@@ -21,7 +21,7 @@ declare namespace Muix {
 
   //**** helpers
   interface Shape extends Prim5s.Shape {
-    theme: Muix.ThemeNew
+    theme: Muix.Theme
   }
   interface DefaultEmptyShape extends Shape {
     common: {}
@@ -42,12 +42,12 @@ declare namespace Muix {
   type SheetCreator<R extends Shape> = ThemeCreator<Prim5s.Sheet<R>>
 
 
-  type ThemeCreator<T> = (theme: ThemeNew) => T
+  type ThemeCreator<T> = (theme: Theme) => T
   type ThemeValueOrCreator<T> = T | ThemeCreator<T>
 
 
-  interface IMuiThemeProps { theme: ThemeNew | ((theme: ThemeNew) => ThemeNew) }
-  type MuiThemeContextValue = { theme: ThemeNew }
+  interface IMuiThemeProps { theme: Theme | ((theme: Theme) => Theme) }
+  type MuiThemeContextValue = { theme: Theme }
   type MuiOverridesContext = { childOverrides: Prim5s.Sheets }
 
   type typoStyle = Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'
@@ -69,7 +69,8 @@ declare namespace Muix {
   type TypographyX = {[type in typoStyle]: Prim5s.TextRulesetX } & FontStyleNew
   type TypographyOptionsOrCreatorX = TypographyOptionsX | ((palette: Palette) => TypographyOptionsX)
 
-  interface ThemeNew extends Theme, Prim5s.Theme {
+  //interface Theme extends Theme, Prim5s.Theme {
+  interface Theme extends Prim5s.Theme {
     shadowsNew: ThemeShadows
     typographyX: TypographyX
     //$sheetCache: Array<SheetCacheItem>
@@ -82,7 +83,7 @@ declare namespace Muix {
     [Name in keyof Prim5s.SheetsX]?: Prim5s.SheetsX[Name]
   }
 
-  //type OverridesNewOrCreator = OverridesNew | ((theme: ThemeNew) => OverridesNew)
+  //type OverridesNewOrCreator = OverridesNew | ((theme: Theme) => OverridesNew)
 
   type ThemeShadowsX = Prim5s.RulesetX<ReactN.ViewStyle>[]
   type ThemeShadows = Prim5s.commonViewRuleset[]

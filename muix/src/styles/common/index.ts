@@ -19,13 +19,13 @@ export interface AppContainerProps {
   themeOptions?: Muix.ThemeOptions
 }
 
-export const classesToPlatformSheet = (theme: Muix.ThemeNew, classes: Muix.ThemeValueOrCreator<Prim5s.PartialSheetX<Muix.Shape>>) => {
+export const classesToPlatformSheet = (theme: Muix.Theme, classes: Muix.ThemeValueOrCreator<Prim5s.PartialSheetX<Muix.Shape>>) => {
   const sheetx = typeof classes === 'function' ? classes(theme) : classes
   return toPlatformSheet(sheetx) as Prim5s.Sheet<Muix.Shape> //Muix.PartialSheetX<Muix.Shape>
 }
 
 //create platform specific sheet from cross platform sheet creator
-export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCreator<Prim5s.SheetX<R>>) => ((theme: Muix.ThemeNew) => toPlatformSheet(sheetXCreator(theme) as Prim5s.PartialSheetX<R>)) as Muix.SheetCreator<R>
+export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCreator<Prim5s.SheetX<R>>) => ((theme: Muix.Theme) => toPlatformSheet(sheetXCreator(theme) as Prim5s.PartialSheetX<R>)) as Muix.SheetCreator<R>
 
 //create platform specific ruleset from cross platform ruleset
 export const toPlatformRuleSetX = (style: Prim5s.TRulesetX, isNative: boolean) => {
@@ -61,7 +61,7 @@ export const toPlatformSheetX = (sheet: Prim5s.PartialSheetX<Muix.Shape>, isNati
 }
 
 //create platform specific Overrides from cross platform Overrides
-const getOverridesX = (theme: Muix.ThemeNew, source: Muix.ThemeValueOrCreator<Muix.OverridesX>) => {
+const getOverridesX = (theme: Muix.Theme, source: Muix.ThemeValueOrCreator<Muix.OverridesX>) => {
   if (!source) return null
   if (typeof source === 'function') source = source(theme)
   const result: Muix.Overrides = {}
@@ -72,7 +72,7 @@ const getOverridesX = (theme: Muix.ThemeNew, source: Muix.ThemeValueOrCreator<Mu
 export const MuiThemeContextTypes = { theme: PropTypes.any }
 export const MuiOverridesContextTypes = { childOverrides: PropTypes.any }
 
-let defaultTheme: Muix.ThemeNew
+let defaultTheme: Muix.Theme
 export const getDefaultTheme = () => defaultTheme || (defaultTheme = createMuiTheme())
 
 //create theme from cross platform ThemeOptions
@@ -106,7 +106,7 @@ function createMuiTheme(options: Muix.ThemeOptions = {}) {
 
   //const typographyOptionOrCreator = getTypographyOptionOrCreatorX(typographyNew)
 
-  const muiTheme: Muix.ThemeNew = {
+  const muiTheme: Muix.Theme = {
     direction: 'ltr', //the same value for web and native
     palette, //the same value for web and native
     ...createTypography(palette, typographyX), //different fields for web and native (typography and typographyX)
@@ -118,7 +118,7 @@ function createMuiTheme(options: Muix.ThemeOptions = {}) {
       { transitions, spacing, zIndex, },
       other,
       { clone: false }, // No need to clone deep
-    )) as Muix.ThemeNew,
+    )) as Muix.Theme,
   }
 
   muiTheme.overrides = getOverridesX(muiTheme, overridesX) //different value for web and native

@@ -109,7 +109,7 @@ type TContext = Prim5s.MuiThemeContextValue & Prim5s.MuiOverridesContext
 
 //apply theme to sheet AND merge it with theme.overrides
 const aplyThemeToSheet = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreator<R>, theme: Prim5s.Theme, name: string) => {
-  const override = (theme.overridesNew && name && theme.overridesNew[name])// as Prim5s.Sheet<R>
+  const override = (theme.overrides && name && theme.overrides[name])// as Prim5s.Sheet<R>
   const sheet = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator)
   const res: Prim5s.Sheet<R> = override ? deepMerges(false, {}, sheet, override) : sheet //deepMerge only when needed
   return { sheetOrCreator, fromTheme: res } as Prim5s.SheetCacheItem
