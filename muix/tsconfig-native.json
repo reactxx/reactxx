@@ -18,6 +18,7 @@
       "muix-animation": [ "src/animation/native/index" ],
 
       "muix-primitives": [ "src/primitives/native/index" ],
+      "muix-prim5s": [ "src/prim5s/native/index" ],
 
       "muix-components/*": [ "src/components/native/*" ],
       //"muix-components/current/*": [ "src/components/web/*" ],

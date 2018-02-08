@@ -37,7 +37,7 @@ export const ScrollViewNative: React.SFC<PrimComps.ScrollView> = props => {
 
 export const IconNative: React.SFC<PrimComps.Icon> = props => {
   const { style, className, $native, data } = props
-  return <RNIcon name={data as MaterialCommunityIconsProps['name']} style={[className, style]} {...$native} />
+  return <RNIcon name={data as string as MaterialCommunityIconsProps['name']} style={[className, style]} {...$native} />
 }
 
 export const IconX = IconNative as React.SFC<PrimComps.IconX>
