@@ -1,9 +1,9 @@
 import { DriverLow, getGaps } from '../common/animation'
-export * from '../common/animation'
 import warning from 'warning'
-import { sheetToClassSheet, keyFrameToClassNames } from 'muix-styles/web'
+import { sheetToClassSheet, keyFrameToClassNames } from './fela'
 
 export class Driver<T extends Animation.Shape> extends DriverLow<T> implements Animation.DriverWeb<T>  {
+
   constructor(sheet: Animation.SheetX<T>, public animations: Animation.Drivers<{}>) {
     super(sheet, animations)
     const { $delay, $duration, $easing, $opened } = this.$config

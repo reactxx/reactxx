@@ -5,11 +5,6 @@ import { View as RNView, Text as RNText, ScrollView as RNScrollView, Animated, T
 import { MaterialCommunityIcons as RNIcon, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
-export const TypographyNative: React.SFC<PrimComps.Typography> = props => {
-  const { style, className, $noWrapStyle, $type, $native, children } = props
-  return <RNText style={[className, style]} {...$noWrapStyle} {...$native} children={children} />
-}
-
 export const ViewNative: React.SFC<PrimComps.View> = props => {
   const { style, className, $native, children } = props
   const onPress = $native && $native.onPress; if (onPress) delete $native.onPress
@@ -45,4 +40,3 @@ export const ViewX = ViewNative as React.SFC<PrimComps.ViewX>
 export const AnimatedViewX = AnimatedViewNative as React.SFC<PrimComps.ViewX>
 export const TextX = TextNative as React.SFC<PrimComps.TextX>
 export const ScrollViewX = ScrollViewNative as React.SFC<PrimComps.ScrollViewX>
-export const TypographyNativeX = TypographyNative as React.SFC<PrimComps.Typography>

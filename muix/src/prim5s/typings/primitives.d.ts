@@ -1,4 +1,4 @@
-﻿declare namespace Primitives {
+﻿declare namespace PrimComps {
   type PropsLow<T extends Prim5s.Ruleset, P extends {}, W extends {} = React.HTMLAttributes<HTMLDivElement>> = {
     className?: T
     style?: T

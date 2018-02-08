@@ -99,7 +99,7 @@ const typography: Prim5s.CodeSFC<MuixTypography.Shape> = (props => {
   //console.log(className)
   return <TypographyNativeX
     className={classNameRes as ReactN.TextStyle} style={style as ReactN.TextStyle}
-    $native={rest as Primitives.TypographyX['$native']} $web={rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>}
+    $native={rest as PrimComps.TypographyX['$native']} $web={rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>}
     $type={variant}
     $noWrapStyle={noWrap && classes.noWrap}
     children={children} /> as any

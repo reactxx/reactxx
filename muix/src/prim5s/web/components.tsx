@@ -1,31 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
-import { rulesetsToClassNames } from 'muix-styles/web'
-
-export const TypographyNative: React.SFC<PrimComps.Typography> = props => {
-  const { style, className, $noWrapStyle, $type, $web, children } = props
-  const tagName = headlineMapping[$type]
-  return React.createElement(
-    tagName || 'div',
-    {
-      className: rulesetsToClassNames(viewStyle, $noWrapStyle, className),
-      style: style,
-      ...$web
-    },
-    children)
-}
-const headlineMapping = {
-  display4: 'h1',
-  display3: 'h1',
-  display2: 'h1',
-  display1: 'h1',
-  headline: 'h1',
-  title: 'h2',
-  subheading: 'h3',
-  body2: 'aside',
-  body1: 'p',
-}
+import { rulesetsToClassNames } from './fela'
 
 const viewStyle: React.CSSProperties = {
   display: 'flex',
@@ -127,6 +103,5 @@ export const IconX = IconWeb as React.SFC<PrimComps.IconX>
 export const ViewX = ViewWeb as React.SFC<PrimComps.ViewX>
 export const TextX = TextWeb as React.SFC<PrimComps.TextX>
 export const ScrollViewX = ScrollViewWeb as React.SFC<PrimComps.ScrollViewX>
-export const TypographyNativeX = TypographyNative as React.SFC<PrimComps.Typography>
 export const AnimatedViewX = ViewX
 export const AnimatedView = ViewX

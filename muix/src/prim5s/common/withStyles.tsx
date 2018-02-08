@@ -2,7 +2,7 @@ import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { toPlatformRuleSet, toPlatformSheet, clearSystemProps, MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme, classesToPlatformSheet, applyTheme } from './index'
 import warning from 'invariant'
-import { getAnimations } from 'muix-animation'
+import { getAnimations } from './animation'
 
 const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreator<R>, options: Prim5s.WithStylesOptionsNew) => (Component: Prim5s.CodeComponentType<R>) => {
 
