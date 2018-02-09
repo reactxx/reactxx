@@ -47,7 +47,7 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
       const { classes: classesPropX, style, $web, $native, onClick, className: rulesetX, ...other } = this.props as Prim5s.PropsX<Prim5s.Shape> & Prim5s.TOnClickWeb
       const cacheItem = theme[name]
 
-      //****************************  getRulesetWithSideEffect
+      //****************************  getRulesetWithSideEffect 
       // Could be called in <Component> render method to compute component styles. Side effects:
       // - use sheet..$overrides to modify self sheet
       // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 

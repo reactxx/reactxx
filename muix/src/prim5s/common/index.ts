@@ -20,7 +20,7 @@ export const toPlatformRuleSet = (style: Prim5s.TRulesetX) => {
   const { $web, $native, $overrides, $childOverrides, ...rest } = style
   const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $childOverrides: toPlatformSheets(null, $childOverrides) }
   if (!res.$overrides) delete res.$overrides; if (!res.$childOverrides) delete res.$childOverrides //remove NULL or UNDEFINED
-  return res as Prim5s.Ruleset
+  return res as Prim5s.Ruleset 
 }
 
 export const createAnimations = (props) => null

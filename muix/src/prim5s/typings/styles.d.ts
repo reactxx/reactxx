@@ -189,7 +189,7 @@
     const sheet = {
       root: {
         marginTop: 10,
-        backgroundColor: 'blue'
+        backgroundColor: 'blue' 
       },
       label; {
         color: 'red'
