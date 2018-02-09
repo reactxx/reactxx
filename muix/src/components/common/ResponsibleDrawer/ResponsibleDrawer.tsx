@@ -14,7 +14,6 @@ import Divider from 'muix-components/Divider/Divider'
 const drawerWidth = 240
 
 export const sheet = sheetCreator<MuixResponsibleDrawer.Shape>(({ typographyX: typoX, spacing, breakpoints, mixins, palette }) => ({
-  $animations: {},
   root: {
     width: '100%',
     //height: 430,

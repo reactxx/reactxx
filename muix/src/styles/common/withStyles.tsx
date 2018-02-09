@@ -12,7 +12,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
     codeClasses: Prim5s.Sheet<R>
     animations: Animation.Drivers<{ }>
     theme: Muix.Theme
-    cacheItem: Prim5s.SheetCacheItem
+    cacheItem: Muix.SheetCacheItem
 
     constructor(props: Prim5s.PropsX<R>, context: TContext) {
       super(props, context)
@@ -112,7 +112,7 @@ const aplyThemeToSheet = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCrea
   const overrides = (theme.overrides && name && theme.overrides[name]) as Prim5s.Sheet<R>
   const styles = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator)
   const res: Prim5s.Sheet<R> = overrides ? deepMerges(false, {}, styles, overrides) : styles //deepMerge only when needed
-  return { sheetOrCreator, fromTheme: res } as Prim5s.SheetCacheItem
+  return { sheetOrCreator, fromTheme: res } as Muix.SheetCacheItem
 }
 
 // merge named values

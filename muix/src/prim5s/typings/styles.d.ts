@@ -5,27 +5,26 @@
     flip?:boolean
   }
 
-  type SheetCacheItem = { sheetOrCreator: SheetOrCreator<Shape>; fromTheme: Sheet<Shape> }
-
   interface Theme {
     direction: Direction
-    overrides?: Overrides 
-    $sheetCache: Array<SheetCacheItem>
+    overrides?: Sheets 
   }
+
+  type ThemeX = Overwrite<Theme, {
+    overrides?: SheetsX 
+  }>
+
+  type ThemeXOption = Partial<ThemeX>
 
   type Direction = 'ltr' | 'rtl';
 
   type MuiThemeContextValue = { theme: Theme }
   type MuiOverridesContext = { childOverrides: Sheets }
 
-  type Overrides = {
-    [Name in keyof SheetsX]?: Sheets[Name]
-  }
-
   interface SheetsX { }
-  type SheetsWeb = {[P in keyof SheetsX]: SheetWeb<Shape>}
-  type SheetsNative = {[P in keyof SheetsX]: SheetNative<Shape>}
-  type Sheets = SheetsWeb | SheetsNative
+  type SheetsWeb = {[P in keyof SheetsX]?: SheetWeb<Shape>}
+  type SheetsNative = {[P in keyof SheetsX]?: SheetNative<Shape>}
+  type Sheets = {[P in keyof SheetsX]?: Sheet<Shape>}//  SheetsWeb | SheetsNative
 
   /******************************************
     RULESET
@@ -204,7 +203,7 @@
   type SheetNative<R extends Shape> = {[P in keyof getCommon<R>]: getCommon<R>[P] & RulesetOverridesNative<R>} & {[P in keyof getNative<R>]: getNative<R>[P] & RulesetOverridesNative<R>} & { $animations?: Animation.SheetsX<getAnimation<R>>  }
 
   type ClassSheetWeb<R extends Shape> = {[P in keyof SheetWeb<R>]: string} //For web: rule-set is converted to css class names (single class for every rule)
-  type Sheet<R extends Shape> = (SheetWeb<R> | SheetNative<R>) //& { $animations?: Animation.AnimationsX<getAnimation<R>> }
+  type Sheet<R extends Shape = Shape> = (SheetWeb<R> | SheetNative<R>) 
   type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
   type TSheetX = SheetX<Shape>
 
@@ -224,7 +223,7 @@
   type ThemeCreator<R extends Shape, T> = (theme: getTheme<R>) => T
   type ThemeValueOrCreator<R extends Shape, T> = T | ThemeCreator<R, T>
   type SheetCreator<R extends Shape> = ThemeCreator<R, Sheet<R>>
-  type SheetOrCreator<R extends Shape> = ThemeValueOrCreator<R, Sheet<R>>
+  type SheetOrCreator<R extends Shape = Shape> = ThemeValueOrCreator<R, Sheet<R>>
 
 
   //type SheetXCommon<R extends Shape> = {[P in keyof getCommon<R>]: RulesetX<getCommon<R>[P]>}
@@ -300,6 +299,7 @@
     animations: Animation.DriversWeb<getAnimation<R>>
   }>
   type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
+
 
   // component code for native
   type CodePropsNative<R extends Shape> = Overwrite<getProps<R> & getPropsNative<R>, {

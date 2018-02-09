@@ -5,7 +5,6 @@ import { ViewX, TextX } from 'muix-primitives'
 
 
 export const sheet = sheetCreator<MuixAppBar.Shape>(({ typographyX: typoX, spacing, breakpoints, mixins, palette }) => ({
-  $animations: {},
   root: {
   },
   

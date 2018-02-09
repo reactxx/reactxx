@@ -5,6 +5,7 @@ import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
 import { withStyles, toPlatformRuleSet, sheetCreator } from 'muix-styles'
+//import { withStyles, toPlatformRuleSet, sheetCreator } from 'muix-prim5s'
 
 import { Text } from 'muix-primitives'
 
@@ -13,13 +14,11 @@ import { RippleEffect } from '../ButtonBase/ButtonBase'
 //export type ButtonShape = Shape
 const getTextIconColor = (color: string) => ({
   MuiText: { root: { color } },
-  MuiIcon: { root: { color: color } },
+  MuiIcon: { root: { color } },
 } as Prim5s.SheetsX)
 
 
 const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
-
-  $animations: {},
 
   root: {
     flexDirection: 'row',
@@ -37,28 +36,9 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
       MuiIcon: { root: { lineHeight: 1.4 * 16, fontSize: 24, ...(isLeft === true ? { marginRight: spacing.unit } : (isLeft === false ? { marginLeft: spacing.unit } : {})) } },
       MuiText: { root: { ...typoX.button, color: palette.text.primary, } },
     },
-    //$animation: {
-    //  paddingTop: [spacing.unit, spacing.unit * 2],
-    //  $native: {
-    //    transform: [{ perspective: [0, 1] }]
-    //  }
-    //}
   },
 
-  //dense: {
-  //  paddingTop: spacing.unit - 1,
-  //  paddingBottom: spacing.unit - 1,
-  //  paddingLeft: spacing.unit,
-  //  paddingRight: spacing.unit,
-  //  minWidth: 64,
-  //  minHeight: 32,
-  //  $childOverrides: {
-  //    MuiText: { root: { fontSize: typoX.fontSize, } }
-  //  }
-  //},
-
   disabled: {
-    //$childOverrides: getTextIconColor(palette.action.disabled)
     $childOverrides: getTextIconColor(palette.action.disabled)
   },
 
@@ -79,12 +59,6 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
     },
     $childOverrides: getTextIconColor(palette.secondary.light)
   },
-  //flatContrast: {
-  //  $overrides: {
-  //    ripple: { backgroundColor: fade(palette.getContrastText(palette.primary[500]), 0.4), opacity: 0.8 },
-  //  },
-  //  $childOverrides: getTextIconColor(palette.getContrastText(palette.primary[500]))
-  //},
 
   raised: {
     backgroundColor: palette.grey[300],

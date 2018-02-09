@@ -32,7 +32,6 @@ type Shape = Muix.OverwriteShape<{
 }>
 
 const styles = sheetCreator<Shape>(theme => ({
-  $animations: {},
   //const styles = theme => ({
   root: {
     width: '100%',

@@ -6,8 +6,8 @@ export interface AppContainerProps {
   themeOptions?: Muix.ThemeOptions
 }
 
-export const classesToPlatformSheet = <R extends Prim5s.Shape>(theme: Prim5s.getTheme<R>, classes: Prim5s.ThemeValueOrCreator<R, Prim5s.PartialSheetX<R>>) => 
-  toPlatformSheet(applyTheme(theme, classes)) as Prim5s.Sheet<Prim5s.Shape>
+//export const classesToPlatformSheet = <R extends Prim5s.Shape>(theme: Prim5s.getTheme<R>, classes: Prim5s.ThemeValueOrCreator<R, Prim5s.PartialSheetX<R>>) => 
+//  toPlatformSheet(applyTheme(theme, classes)) as Prim5s.Sheet<Prim5s.Shape>
 
 //create platform specific sheet from cross platform sheet creator
 export const sheetCreator = <R extends Prim5s.Shape>(sheetXCreator: Prim5s.ThemeCreator<R, Prim5s.SheetX<R>>) => (theme => toPlatformSheet(sheetXCreator(theme) as Prim5s.PartialSheetX<R>)) as Prim5s.SheetCreator<R>
@@ -18,7 +18,7 @@ export const toPlatformRuleSet = (style: Prim5s.TRulesetX) => {
   const isNative = !window.isWeb
   if (!style.$web && !style.$native && !style.$overrides && !style.$childOverrides) return style //optimalization
   const { $web, $native, $overrides, $childOverrides, ...rest } = style
-  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $childOverrides: toPlatformOverrides(null, $childOverrides) }
+  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $childOverrides: toPlatformSheets(null, $childOverrides) }
   if (!res.$overrides) delete res.$overrides; if (!res.$childOverrides) delete res.$childOverrides //remove NULL or UNDEFINED
   return res as Prim5s.Ruleset
 }
@@ -36,7 +36,7 @@ export const applyTheme = <R extends Prim5s.Shape, T>(theme: Prim5s.getTheme<R>,
 //create platform specific sheet from cross platform sheet
 export const toPlatformSheet = (sheet: Prim5s.PartialSheetX<Prim5s.Shape>) => {
   if (typeof sheet !== 'object') return sheet
-  const res: Prim5s.Sheet<Prim5s.Shape> = { }
+  const res: Prim5s.Sheet = { }
   for (const p in sheet) {
     if (p === '$animations') {
       const animSrc = sheet[p]
@@ -49,11 +49,10 @@ export const toPlatformSheet = (sheet: Prim5s.PartialSheetX<Prim5s.Shape>) => {
 }
 
 //create platform specific Overrides from cross platform Overrides
-const toPlatformOverrides = (theme, source: Muix.ThemeValueOrCreator<Muix.OverridesX>) => {
-  if (!source) return null
-  //if (typeof source === 'function') source = source(theme)
+const toPlatformSheets = (theme, sheets: Muix.ThemeValueOrCreator<Muix.OverridesX>) => {
+  if (!sheets) return null
   const result: Muix.Overrides = {}
-  for (const p in applyTheme(theme, source)) result[p] = toPlatformSheet(source[p])
+  for (const p in applyTheme(theme, sheets)) result[p] = toPlatformSheet(sheets[p])
   return result
 }
 

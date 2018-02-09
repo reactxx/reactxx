@@ -6,7 +6,6 @@ import { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRecta
 import { sheetCreator, withStyles } from 'muix-styles'
 
 const sheet = sheetCreator<MuixButtonBase.Shape>(({ palette }) => ({
-  $animations: {},
   root: {
     alignItems: 'center',
     justifyContent: 'center',

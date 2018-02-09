@@ -5,7 +5,6 @@ import { ViewX, AnimatedViewX } from 'muix-primitives'
 import { withStyles, sheetCreator } from 'muix-styles'
 
 export const sheet = sheetCreator<MuixView.Shape>(() => ({
-  $animations: {},
   root: {},
 
 }))

@@ -8,7 +8,6 @@ import { IconX } from 'muix-primitives'
 import warning from 'warning'
 
 export const sheet = sheetCreator<MuixIcon.Shape>(({ palette }) => ({
-  $animations: {},
   root: {
     fontSize: 24,
     $web: {
