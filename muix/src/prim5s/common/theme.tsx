@@ -38,6 +38,6 @@ export class ThemeProvider extends React.PureComponent<Prim5s.ThemeProviderProps
 
 export const AppContainer: React.SFC<Prim5s.AppContainerProps> = props => {
   themerProps = props.themerProps
-  return React.Children.only(props.children)
+  return <ThemeProvider theme={getDefaultTheme()}>{props.children}</ThemeProvider>
 }
 let themerProps: Prim5s.ThemerProps & { defaultTheme?: Prim5s.Theme }

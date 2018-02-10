@@ -1,6 +1,6 @@
 import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
-import { toPlatformRuleSet, toPlatformSheet, applyTheme } from './index'
+import { toPlatformRuleSet, toPlatformSheet, applyTheme, deepMerge } from './index'
 import { MuiThemeContextTypes, MuiCascadingContextTypes, getDefaultTheme } from './theme'
 import warning from 'invariant'
 import { getAnimations } from './animation'
@@ -111,8 +111,8 @@ const createRulesetWithCascadingMerger = (classesProp: Prim5s.Sheet, usedChildCa
   const res: Prim5s.MergeRulesetWithCascading = (...rulesets/*all used rulesets*/) => {
     rulesets.forEach(ruleset => { // acumulate $cascading and $childCascading
       if (!ruleset) return
-      mergeOverride(usedCascading, ruleset.$cascading)
-      mergeOverride(usedChildCascading, ruleset.$childCascading) //modify react context with child component overriding
+      mergeCascading(usedCascading, ruleset.$cascading)
+      mergeCascading(usedChildCascading, ruleset.$childCascading) //modify react context with child component overriding
     })
     //apply used $cascading and classes prop
     const rulesetResult: typeof rulesets[0] = {}
@@ -121,15 +121,13 @@ const createRulesetWithCascadingMerger = (classesProp: Prim5s.Sheet, usedChildCa
       deepMerges(true, rulesetResult,
         ruleset, //ruleset, used in Component render
         usedCascading[ruleset.$name], //modify it with used $cascading
-        classesProp && ruleset.$name && classesProp[ruleset.$name], //force using classes component property (it has highter priority)
+        classesProp && ruleset.$name && classesProp[ruleset.$name], //force using classes component property (it has hight priority)
       )
     })
     return rulesetResult
   }
   return res
 }
-
-
 
 //*************************************************************** 
 // HELPERS
@@ -139,13 +137,15 @@ type TContext = Prim5s.MuiThemeContextValue & Prim5s.MuiCascadingContext
 
 //apply theme to sheet AND merge it with theme.cascading
 const aplyThemeToSheet = (sheetOrCreator: Prim5s.SheetOrCreator, theme: ThemeWithCache, name: string) => {
+  //already in cache?
   let res: Prim5s.Sheet = theme.$sheetCache && theme.$sheetCache[name]
   if (res) return res
-
-  const override = (theme.overrides && theme.overrides[name])
-  const sheet = applyTheme(theme, sheetOrCreator)
+  
+  const sheet = applyTheme(theme, sheetOrCreator) //apply theme to sheet
+  const override = (theme.overrides && theme.overrides[name]) //find sheet override in theme
   res = override ? deepMerges(false, {}, sheet, override) : sheet //deepMerge only when needed
 
+  //put to cache
   if (!theme.$sheetCache) theme.$sheetCache = {}
   theme.$sheetCache[name] = res
 
@@ -153,7 +153,7 @@ const aplyThemeToSheet = (sheetOrCreator: Prim5s.SheetOrCreator, theme: ThemeWit
 }
 
 // merge named values
-const mergeOverride = (result, patches) => {
+const mergeCascading = (result, patches) => {
   if (!patches) return
   for (const p in patches) {
     const patch = patches[p]; if (!patch) continue
@@ -162,26 +162,9 @@ const mergeOverride = (result, patches) => {
   }
 }
 
-//simple deep merge
-export const deepMerge = (target, source, skipSystem = false) => {
-  if (!source) return target
-  if (isObject(target) && isObject(source))
-    for (const key in source) {
-      if (skipSystem && key[0] === '$') continue //skip $override, $cascading and $name props
-      if (isObject(source[key])) {
-        if (!target[key]) target[key] = {}
-        deepMerge(target[key], source[key], skipSystem)
-      } else
-        target[key] = source[key]
-    }
-  else
-    throw 'deepMerge: cannot merge object and non object'
-  return target
-}
 const deepMerges = (skipSystem: boolean, target, ...sources) => {
   sources.forEach(source => deepMerge(target, source, skipSystem))
   return target
 }
-const isObject = item => item && typeof item === 'object' && !Array.isArray(item) && typeof item['_interpolation'] != 'function' //typeof item['_interpolation'] != 'function' prevent to merge ReactNative's Animated.Value.interpolate prop
 
 

@@ -34,7 +34,7 @@ export const toPlatformSheet = (sheet: Prim5s.PartialSheetX<Prim5s.Shape>) => {
 }
 
 //create platform specific sheets from cross platform one
-const toPlatformSheets = (theme, sheets: Prim5s.FromThemeValueOrCreator<Prim5s.Shape, Prim5s.SheetsX>) => {
+const toPlatformSheets = (theme:Prim5s.Theme, sheets: Prim5s.FromThemeValueOrCreator<Prim5s.Shape, Prim5s.SheetsX>) => {
   if (!sheets) return null
   const result: Prim5s.Sheets = {}
   for (const p in applyTheme(theme, sheets)) result[p] = toPlatformSheet(sheets[p])
@@ -44,15 +44,20 @@ const toPlatformSheets = (theme, sheets: Prim5s.FromThemeValueOrCreator<Prim5s.S
 export const MuiThemeContextTypes = { theme: PropTypes.any }
 export const MuiCascadingContextTypes = { childCascading: PropTypes.any }
 
-export const init = (_themeProps: Prim5s.ThemerProps) => themerProps = _themeProps
-
-let themerProps: Prim5s.ThemerProps & { defaultTheme?: Prim5s.Theme}
-export const createTheme: Prim5s.ThemeCreator = options => {
-  warning(!!themerProps, 'Missing AppContainer component')
-  return themerProps.creator(options)
+//simple deep merge
+export const deepMerge = (target, source, skipSystem = false) => {
+  if (!source) return target
+  if (isObject(target) && isObject(source))
+    for (const key in source) {
+      if (skipSystem && key[0] === '$') continue //skip $override, $cascading and $name props
+      if (isObject(source[key])) {
+        if (!target[key]) target[key] = {}
+        deepMerge(target[key], source[key], skipSystem)
+      } else
+        target[key] = source[key]
+    }
+  else
+    throw 'deepMerge: cannot merge object and non object'
+  return target
 }
-export const getDefaultTheme = () => {
-  warning(!!themerProps, 'Missing AppContainer component')
-  themerProps.defaultTheme || (themerProps.defaultTheme = createTheme(themerProps.defaultOptions))
-}
-
+const isObject = item => item && typeof item === 'object' && !Array.isArray(item) && typeof item['_interpolation'] != 'function' //typeof item['_interpolation'] != 'function' prevent to merge ReactNative's Animated.Value.interpolate prop

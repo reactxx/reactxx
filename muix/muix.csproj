@@ -163,7 +163,7 @@
     <TypeScriptCompile Include="src\components\web\Drawer\Drawer.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
     <TypeScriptCompile Include="src\prim5s\common\animation.tsx" />
-    <TypeScriptCompile Include="src\prim5s\common\theme.ts" />
+    <TypeScriptCompile Include="src\prim5s\common\theme.tsx" />
     <TypeScriptCompile Include="src\prim5s\common\index.ts" />
     <TypeScriptCompile Include="src\prim5s\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\prim5s\native\animation.tsx" />
