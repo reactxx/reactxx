@@ -108,10 +108,10 @@ let t: Prim5s.CodePropsNative<MuixButtonBase.Shape>
 
 
 const buttonBase: Prim5s.CodeSFCNative<MuixButtonBase.Shape> = props => {
-  const { style, classes, getRulesetWithSideEffect, className, animations, ...rest } = props
-  const viewStyle = getRulesetWithSideEffect(classes.root, className) as ReactN.ViewStyle
-  const rippleStyle = getRulesetWithSideEffect(classes.ripple) as ReactN.ViewStyle
-  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} className={null} getRulesetWithSideEffect={null} animations={null} {...rest} style={null}/>
+  const { style, classes, mergeRulesetWithCascading, className, animations, ...rest } = props
+  const viewStyle = mergeRulesetWithCascading(classes.root, className) as ReactN.ViewStyle
+  const rippleStyle = mergeRulesetWithCascading(classes.ripple) as ReactN.ViewStyle
+  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} className={null} mergeRulesetWithCascading={null} animations={null} {...rest} style={null}/>
 }
 
 const ButtonBase = withStyles<MuixButtonBase.Shape>(sheet, { name: 'MuiButtonBase' })(buttonBase)

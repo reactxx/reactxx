@@ -11,7 +11,7 @@ export const shadows = shadowsStrings.map(s => ({ boxShadow: s } as Prim5s.commo
 
 import { toPlatformSheetX, toPlatformRuleSetX } from '../common/index'
 
-export const toPlatformRuleSet = (style: Prim5s.TRulesetX) => toPlatformRuleSetX(style, false) as React.CSSProperties
+export const toPlatformRuleSet = (style: Prim5s.RulesetX) => toPlatformRuleSetX(style, false) as React.CSSProperties
 export const toPlatformSheet = <R extends Muix.Shape>(rules: Prim5s.PartialSheetX<R>) => toPlatformSheetX(rules, false) as Prim5s.SheetWeb<R>
 
 export { clearSystemProps, sheetCreator, default as createMuiTheme, AppContainerProps, classesToPlatformSheet, getDefaultTheme, MuiThemeContextTypes } from '../common/index'

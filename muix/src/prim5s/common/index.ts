@@ -2,38 +2,23 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import warning from 'warning'
 
-export interface AppContainerProps {
-  themeOptions?: Muix.ThemeOptions
-}
+//create platform specific sheet from cross platform one
+export const sheetCreator = <R extends Prim5s.Shape>(sheetXCreator: Prim5s.FromThemeCreator<R, Prim5s.SheetX<R>>) => (theme => toPlatformSheet(sheetXCreator(theme) as Prim5s.PartialSheetX<R>)) as Prim5s.SheetCreator<R>
 
-//export const classesToPlatformSheet = <R extends Prim5s.Shape>(theme: Prim5s.getTheme<R>, classes: Prim5s.ThemeValueOrCreator<R, Prim5s.PartialSheetX<R>>) => 
-//  toPlatformSheet(applyTheme(theme, classes)) as Prim5s.Sheet<Prim5s.Shape>
-
-//create platform specific sheet from cross platform sheet creator
-export const sheetCreator = <R extends Prim5s.Shape>(sheetXCreator: Prim5s.ThemeCreator<R, Prim5s.SheetX<R>>) => (theme => toPlatformSheet(sheetXCreator(theme) as Prim5s.PartialSheetX<R>)) as Prim5s.SheetCreator<R>
-
-//create platform specific ruleset from cross platform ruleset
-export const toPlatformRuleSet = (style: Prim5s.TRulesetX) => {
+//create platform specific ruleset from cross platform one
+export const toPlatformRuleSet = (style: Prim5s.RulesetX) => {
   if (!style) return null
   const isNative = !window.isWeb
-  if (!style.$web && !style.$native && !style.$overrides && !style.$childOverrides) return style //optimalization
-  const { $web, $native, $overrides, $childOverrides, ...rest } = style
-  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $childOverrides: toPlatformSheets(null, $childOverrides) }
+  if (!style.$web && !style.$native && !style.$cascading && !style.$childCascading) return style //optimalization
+  const { $web, $native, $cascading, $childCascading, ...rest } = style
+  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($cascading), $childOverrides: toPlatformSheets(null, $childCascading) }
   if (!res.$overrides) delete res.$overrides; if (!res.$childOverrides) delete res.$childOverrides //remove NULL or UNDEFINED
   return res as Prim5s.Ruleset 
 }
 
-export const createAnimations = (props) => null
+export const applyTheme = <T>(theme: Prim5s.Theme, valueOrCreator: Prim5s.FromThemeValueOrCreator<Prim5s.Shape, T>) => typeof valueOrCreator === 'function' ? valueOrCreator(theme) : valueOrCreator
 
-export const clearSystemProps = obj => {
-  if (!obj) return obj
-  delete obj.$overrides; delete obj.$childOverrides; delete obj.$name; delete obj.$web; delete obj.$native 
-  return obj
-}
-
-export const applyTheme = <R extends Prim5s.Shape, T>(theme: Prim5s.getTheme<R>, valueOrCreator: Prim5s.ThemeValueOrCreator<R, T>) => typeof valueOrCreator === 'function' ? valueOrCreator(theme) : valueOrCreator
-
-//create platform specific sheet from cross platform sheet
+//create platform specific sheet from cross platform one
 export const toPlatformSheet = (sheet: Prim5s.PartialSheetX<Prim5s.Shape>) => {
   if (typeof sheet !== 'object') return sheet
   const res: Prim5s.Sheet = { }
@@ -48,24 +33,26 @@ export const toPlatformSheet = (sheet: Prim5s.PartialSheetX<Prim5s.Shape>) => {
   return res
 }
 
-//create platform specific Overrides from cross platform Overrides
-const toPlatformSheets = (theme, sheets: Muix.ThemeValueOrCreator<Muix.OverridesX>) => {
+//create platform specific sheets from cross platform one
+const toPlatformSheets = (theme, sheets: Prim5s.FromThemeValueOrCreator<Prim5s.Shape, Prim5s.SheetsX>) => {
   if (!sheets) return null
-  const result: Muix.Overrides = {}
+  const result: Prim5s.Sheets = {}
   for (const p in applyTheme(theme, sheets)) result[p] = toPlatformSheet(sheets[p])
   return result
 }
 
 export const MuiThemeContextTypes = { theme: PropTypes.any }
-export const MuiOverridesContextTypes = { childOverrides: PropTypes.any }
+export const MuiCascadingContextTypes = { childCascading: PropTypes.any }
 
-export const initPrimities = (createTheme: (par) => any) => _createTheme = createTheme
+export const init = (_themeProps: Prim5s.ThemerProps) => themerProps = _themeProps
 
-let _createTheme: (par) => any = null
-export const createTheme = (par?) => {
-  warning(!!_createTheme, 'Missing initPrimities call')
-  return _createTheme(par)
+let themerProps: Prim5s.ThemerProps & { defaultTheme?: Prim5s.Theme}
+export const createTheme: Prim5s.ThemeCreator = options => {
+  warning(!!themerProps, 'Missing AppContainer component')
+  return themerProps.creator(options)
 }
-let defaultTheme
-export const getDefaultTheme = () => defaultTheme || (defaultTheme = createTheme())
+export const getDefaultTheme = () => {
+  warning(!!themerProps, 'Missing AppContainer component')
+  themerProps.defaultTheme || (themerProps.defaultTheme = createTheme(themerProps.defaultOptions))
+}
 

@@ -53,11 +53,11 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
       // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
       const classesProp = classesToPlatformSheet(theme, classesPropX as Muix.ThemeValueOrCreator<Prim5s.PartialSheetX<R>>)
       const usedOverrides = {}
-      const getRulesetWithSideEffect: Prim5s.StyleWithSideEffect = (...rulesets/*all used rulesets*/) => { // calling getRulesetWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
+      const mergeRulesetWithCascading: Prim5s.MergeRulesetWithCascading = (...rulesets/*all used rulesets*/) => { // calling getRulesetWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
         rulesets.forEach(ruleset => { // acumulate $overrides and $childOverrides
           if (!ruleset) return
-          mergeOverride(usedOverrides, ruleset.$overrides)
-          mergeOverride(this.usedChildOverrides, ruleset.$childOverrides) //modify react context for 
+          mergeOverride(usedOverrides, ruleset.$cascading)
+          mergeOverride(this.usedChildOverrides, ruleset.$childCascading) //modify react context for 
         })
         //apply used $overrides and classes prop
         const rulesetResult: typeof rulesets[0] = {}
@@ -72,11 +72,11 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
         return rulesetResult
       }
 
-      const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as Prim5s.TRulesetX
+      const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as Prim5s.RulesetX
       const className = toPlatformRuleSet(cn)
       const flip = typeof flipProp === 'boolean' ? flipProp : theme.direction === 'rtl'
 
-      const newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style)), classes: this.codeClasses, className, flip, getRulesetWithSideEffect, animations } as Prim5s.CodeProps<R> & {onClick, onPress}
+      const newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style)), classes: this.codeClasses, className, flip, mergeRulesetWithCascading, animations } as Prim5s.CodeProps<R> & {onClick, onPress}
       if (window.isWeb) {
         const cl = ($web && ($web as any).onClick) || onClick
         if (cl) newProps.onClick = cl

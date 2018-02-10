@@ -163,11 +163,13 @@
     <TypeScriptCompile Include="src\components\web\Drawer\Drawer.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
     <TypeScriptCompile Include="src\prim5s\common\animation.tsx" />
+    <TypeScriptCompile Include="src\prim5s\common\theme.ts" />
     <TypeScriptCompile Include="src\prim5s\common\index.ts" />
     <TypeScriptCompile Include="src\prim5s\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\prim5s\native\animation.tsx" />
     <TypeScriptCompile Include="src\prim5s\native\components.tsx" />
     <TypeScriptCompile Include="src\prim5s\native\index.ts" />
+    <TypeScriptCompile Include="src\prim5s\typings\theme.d.ts" />
     <TypeScriptCompile Include="src\prim5s\web\animation.tsx" />
     <TypeScriptCompile Include="src\prim5s\web\fela.tsx" />
     <TypeScriptCompile Include="src\prim5s\web\components.tsx" />
@@ -181,7 +183,7 @@
     <TypeScriptCompile Include="src\primitives\typings\ScrollView-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\Icon-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\web\for-components.tsx" />
-    <TypeScriptCompile Include="src\prim5s\typings\styles.d.ts" />
+    <TypeScriptCompile Include="src\prim5s\typings\sheets.d.ts" />
     <TypeScriptCompile Include="src\styles\common\createTypography.ts" />
     <TypeScriptCompile Include="src\styles\common\MuiThemeProvider.tsx" />
     <TypeScriptCompile Include="src\styles\common\withStyles.tsx" />

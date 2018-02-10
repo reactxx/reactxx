@@ -9,8 +9,8 @@ export const sheet = sheetCreator<MuixText.Shape>(({ typographyX: typoX }) => ({
 }))
 
 const text: Prim5s.CodeSFC<MuixText.Shape> = props => {
-  const { classes, theme, flip, getRulesetWithSideEffect, style, children, className, animations, ...rest } = props
-  return <TextX className={getRulesetWithSideEffect(classes.root, className)} style={style} $native={rest as ReactN.TextProperties} $web={rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>} children={children} />
+  const { classes, theme, flip, mergeRulesetWithCascading, style, children, className, animations, ...rest } = props
+  return <TextX className={mergeRulesetWithCascading(classes.root, className)} style={style} $native={rest as ReactN.TextProperties} $web={rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>} children={children} />
 }
 
 const Text = withStyles<MuixText.Shape>(sheet, { name: 'MuiText' })(text)

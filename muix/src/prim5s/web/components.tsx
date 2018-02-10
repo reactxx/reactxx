@@ -13,12 +13,12 @@ const viewStyle: React.CSSProperties = {
   position: 'relative',
 }
 
-const ViewWeb: React.SFC<PrimComps.Web> = props => {
+const view: React.SFC<PrimComps.Web> = props => {
   const { style, className, $web, children } = props
   return <div className={rulesetsToClassNames(viewStyle, className)} style={style} {...$web} children={children} />
 }
 
-const IconWeb: React.SFC<PrimComps.Web<SVGSVGElement> & { data: MuixIcons }> = props => {
+const icon: React.SFC<PrimComps.Web<SVGSVGElement> & { data: MuixIcons }> = props => {
   const { style, className, $web, data, children } = props
   const { viewBox = '0 0 24 24', ...other } = $web
   if (className && className.fontSize) { className.height = className.width = className.fontSize; delete className.fontSize }
@@ -50,7 +50,7 @@ const textStyles = {
   } as React.CSSProperties
 }
 
-const TextWeb: React.SFC<PrimComps.Web & { numberOfLines?: number; notSelectable?: boolean; pressable?: boolean }> = props => {
+const text: React.SFC<PrimComps.Web & { numberOfLines?: number; notSelectable?: boolean; pressable?: boolean }> = props => {
   const { style, className, numberOfLines, notSelectable, pressable, $web, children } = props
   return <div
     className={'mui-text ' + rulesetsToClassNames(textStyles.root, className, notSelectable && textStyles.notSelectable, pressable && textStyles.pressable, numberOfLines === 1 && textStyles.singleLineStyle)}
@@ -83,7 +83,7 @@ const scrollViewStyles = {
   } as React.CSSProperties
 }
 
-const ScrollViewWeb: React.SFC<PrimComps.Web & { horizontal?: boolean; contentContainerStyle?: React.CSSProperties }> = props => {
+const scrollView: React.SFC<PrimComps.Web & { horizontal?: boolean; contentContainerStyle?: React.CSSProperties }> = props => {
   const { style, className, horizontal, children, contentContainerStyle, $web } = props
   checkChildLayoutProps(style); checkChildLayoutProps(className)
   return <div className={rulesetsToClassNames(viewStyle, scrollViewStyles.base, horizontal && scrollViewStyles.baseHorizontal, className)} style={style} {...$web}>
@@ -99,9 +99,9 @@ const checkChildLayoutProps = (css: React.CSSProperties) => {
   warning(childLayoutProps.length === 0, `ScrollView child layout (${JSON.stringify(childLayoutProps)}) must be applied through the contentContainerStyle prop.`)
 }
 
-export const Icon = IconWeb as React.SFC<PrimComps.IconX>
-export const View = ViewWeb as React.SFC<PrimComps.ViewX>
-export const Text = TextWeb as React.SFC<PrimComps.TextX>
-export const ScrollView = ScrollViewWeb as React.SFC<PrimComps.ScrollViewX>
+export const Icon = icon as React.SFC<PrimComps.IconX>
+export const View = view as React.SFC<PrimComps.ViewX>
+export const Text = text as React.SFC<PrimComps.TextX>
+export const ScrollView = scrollView as React.SFC<PrimComps.ScrollViewX>
 export const AnimatedView = View
 

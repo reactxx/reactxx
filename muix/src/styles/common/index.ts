@@ -28,11 +28,11 @@ export const classesToPlatformSheet = (theme: Muix.Theme, classes: Muix.ThemeVal
 export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCreator<Prim5s.SheetX<R>>) => ((theme: Muix.Theme) => toPlatformSheet(sheetXCreator(theme) as Prim5s.PartialSheetX<R>)) as Muix.SheetCreator<R>
 
 //create platform specific ruleset from cross platform ruleset
-export const toPlatformRuleSetX = (style: Prim5s.TRulesetX, isNative: boolean) => {
+export const toPlatformRuleSetX = (style: Prim5s.RulesetX, isNative: boolean) => {
   if (!style) return null
-  if (!style.$web && !style.$native && !style.$overrides && !style.$childOverrides) return style //optimalization
-  const { $web, $native, $overrides, $childOverrides, ...rest } = style
-  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheetX($overrides, isNative), $childOverrides: getOverridesX(null, $childOverrides) }
+  if (!style.$web && !style.$native && !style.$cascading && !style.$childCascading) return style //optimalization
+  const { $web, $native, $cascading, $childCascading, ...rest } = style
+  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheetX($cascading, isNative), $childOverrides: getOverridesX(null, $childCascading) }
   if (!res.$overrides) delete res.$overrides; if (!res.$childOverrides) delete res.$childOverrides //remove NULL or UNDEFINED
   return res as Prim5s.Ruleset
 }
