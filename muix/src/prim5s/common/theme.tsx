@@ -29,7 +29,8 @@ export class ThemeProvider extends React.PureComponent<Prim5s.ThemeProviderProps
   }
 
   render() {
-    return React.Children.only(this.props.children)
+    //return React.Children.only(this.props.children)
+    return this.props.children
   }
 
   static childContextTypes = MuiThemeContextTypes

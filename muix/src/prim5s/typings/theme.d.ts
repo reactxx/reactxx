@@ -19,7 +19,7 @@
     defaultOptions?: ThemeOptionsX
   }
 
-  type ThemeCreator = (options: ThemeOptionsX) => Theme
+  type ThemeCreator = (options?: ThemeOptionsX) => Theme
 
   interface ThemeProviderProps { theme: Theme | ((theme: Theme) => Theme) }
   interface AppContainerProps { themerProps: ThemerProps }

@@ -1,13 +1,13 @@
 import { sheetCreator } from '../common/index'
 import withStyles from '../common/withStyles'
-import { text } from 'muix-prim5s'
+import { text } from 'muix-prim5s' 
 
 export const textSheet = sheetCreator<Prim5s.TextShape>({
   root: {
     $web: {
       whiteSpace: 'pre-wrap',
       wordWrap: 'break-word',
-      '& .mui-text': { //high level Text is block element, inner Texts are inline elements
+      '& .base-text': { //high level Text is block element, inner Texts are inline elements
         display: 'inline',
       },
     },

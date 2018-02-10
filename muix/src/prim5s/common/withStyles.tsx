@@ -2,13 +2,13 @@ import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { toPlatformRuleSet, toPlatformSheet, applyTheme, deepMerge } from './index'
 import { MuiThemeContextTypes, MuiCascadingContextTypes, getDefaultTheme } from './theme'
-import warning from 'invariant'
+import warning from 'warning'
 import { getAnimations } from './animation'
 
 const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreator<R>, options: Prim5s.WithStylesOptionsNew) => (Component: Prim5s.CodeComponentType<R>) => {
 
   const { name } = options
-  warning(!!name || allNames[name], `Empty or duplicated withStyle options.name: "${name}"`)
+  //warning(!!name || allNames[name], `Empty or duplicated withStyle options.name: "${name}"`)
   allNames[name] = true
 
   class Styled extends React.PureComponent<Prim5s.PropsX<R>> {

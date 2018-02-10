@@ -1,5 +1,5 @@
 declare namespace Prim5s {
-  interface Theme extends Muix.Theme { }
+  //interface Theme extends Muix.Theme { }
 }
 declare namespace Muix {
 

@@ -135,7 +135,7 @@
     style?: FromThemeValueOrCreator<R, RulesetX<getStyle<R>>> //cross platform style
     $web?: Partial<getPropsWeb<R>> //web specific style
     $native?: Partial<getPropsNative<R>> //native specific style
-    classes?: FromThemeValueOrCreator<R, PartialSheetX<R>> /*cross platform sheet*/ | PartialSheetInCode<R> /*platform specific sheet (when component is used in other component)*/
+    classes?: FromThemeValueOrCreator<R, PartialSheetX<R> | PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
     className?: FromThemeValueOrCreator<R, RulesetX<getStyle<R>>> /*cross platform root ruleset*/ | Ruleset /*platform specific root ruleset (when component is used in other component)*/
   }>>
   type PartialSheetInCode<R extends Shape> = PartialRecord<keyof getCommon<R> | getWeb<R> | keyof getNative<R>, Ruleset> // common and web and native

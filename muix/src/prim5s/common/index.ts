@@ -41,9 +41,6 @@ const toPlatformSheets = (theme:Prim5s.Theme, sheets: Prim5s.FromThemeValueOrCre
   return result
 }
 
-export const MuiThemeContextTypes = { theme: PropTypes.any }
-export const MuiCascadingContextTypes = { childCascading: PropTypes.any }
-
 //simple deep merge
 export const deepMerge = (target, source, skipSystem = false) => {
   if (!source) return target

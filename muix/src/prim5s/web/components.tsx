@@ -31,9 +31,9 @@ const icon: React.SFC<PrimComps.Web<SVGSVGElement> & { data: MuixIcons }> = prop
 }
 
 export const text: Prim5s.CodeSFCWeb<Prim5s.TextShape> = props => {
-  const { style, classes, className, numberOfLines, onClick, mergeRulesetWithCascading, ...rest } = props
+  const { style, classes, className, numberOfLines, onClick, mergeRulesetWithCascading, flip, theme, ...rest } = props
   const rootStyle = mergeRulesetWithCascading(classes.root, onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle, className)
-  return <div className={'base-text ' + rulesetsToClassNames(rootStyle)} style={style} {...rest} />
+  return <div className={'base-text ' + rulesetsToClassNames(rootStyle)} style={style} onClick={onClick} {...rest} />
 }
 
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties

@@ -1,6 +1,7 @@
 declare namespace Prim5s {
   type TextShape = OverwriteShape<{
-    common: ShapeTexts<'root' | 'singleLineStyle' >
+    common: ShapeTexts<'root' | 'singleLineStyle'>
+    style: ReactN.TextStyle,
     web: 'pressable'
     props: { numberOfLines?: number } & TOnClickWeb
     propsWeb: React.HTMLAttributes<HTMLSpanElement>
