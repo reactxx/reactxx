@@ -1,3 +1,6 @@
+declare namespace Prim5s {
+  interface Theme extends Muix.Theme { }
+}
 declare namespace Muix {
 
   /*************************************************
@@ -70,7 +73,7 @@ declare namespace Muix {
   type TypographyOptionsOrCreatorX = TypographyOptionsX | ((palette: Palette) => TypographyOptionsX)
 
   //interface Theme extends Theme, Prim5s.Theme {
-  interface Theme extends Prim5s.Theme {
+  interface Theme {
     shadowsNew: ThemeShadows
     typographyX: TypographyX
     $sheetCache: Array<SheetCacheItem>

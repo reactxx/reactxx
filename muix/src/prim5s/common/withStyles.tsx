@@ -22,7 +22,7 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
 
       const theme: ThemeWithCache = this.theme = context.theme || getDefaultTheme()
 
-      //*** caching aplyThemeToSheet result in actual theme (in its .$sheetCache prop)
+      //*** caching aplyThemeToSheet result in actual theme (in its .$sheetsCache prop)
       const cacheItem = aplyThemeToSheet(sheetOrCreator, theme, name)
 
       //if (options.name === 'MuiText') console.log(cacheItem)
@@ -99,7 +99,7 @@ const clearSystemProps = obj => {
 export default withStyles
 
 interface ThemeWithCache extends Prim5s.Theme {
-  $sheetCache?: Prim5s.Sheets
+  $sheetsCache?: Prim5s.Sheets
 }
 
 //****************************  getRulesetWithSideEffect
@@ -138,7 +138,7 @@ type TContext = Prim5s.MuiThemeContextValue & Prim5s.MuiCascadingContext
 //apply theme to sheet AND merge it with theme.cascading
 const aplyThemeToSheet = (sheetOrCreator: Prim5s.SheetOrCreator, theme: ThemeWithCache, name: string) => {
   //already in cache?
-  let res: Prim5s.Sheet = theme.$sheetCache && theme.$sheetCache[name]
+  let res: Prim5s.Sheet = theme.$sheetsCache && theme.$sheetsCache[name]
   if (res) return res
   
   const sheet = applyTheme(theme, sheetOrCreator) //apply theme to sheet
@@ -146,8 +146,8 @@ const aplyThemeToSheet = (sheetOrCreator: Prim5s.SheetOrCreator, theme: ThemeWit
   res = override ? deepMerges(false, {}, sheet, override) : sheet //deepMerge only when needed
 
   //put to cache
-  if (!theme.$sheetCache) theme.$sheetCache = {}
-  theme.$sheetCache[name] = res
+  if (!theme.$sheetsCache) theme.$sheetsCache = {}
+  theme.$sheetsCache[name] = res
 
   return res
 }

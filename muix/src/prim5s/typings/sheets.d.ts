@@ -60,6 +60,13 @@
   type ShapeScrollViews<P extends string> = {[p in P]: ReactN.ScrollViewStyle}
   type ShapeIcons<P extends string> = {[p in P]: RNIconStyle}
   type ShapeImages<P extends string> = {[p in P]: ReactN.ImageStyle}
+  type OverwriteShape<R extends Partial<Shape>> = Overwrite<{
+    common: {}; native: {}, web: null
+    animation: {}
+    style: ReactN.ViewStyle
+    props: {}; propsNative: ReactN.ViewProperties; propsWeb: {}
+    theme: Theme
+  }, R>
 
   //******************** Shape getters
   type getCommon<R extends Shape> = R['common']
@@ -82,8 +89,8 @@
 
   //Cross platform sheet helpers
   type SheetXCommon<R extends Shape> = {[P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R>}
-  type SheetXNative<R extends Shape> = {[P in keyof getNative<R>]: getNative<R>[P] & SheetCascadingX<R>}
-  type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: RulesetWeb & SheetCascadingX<R>}
+  type SheetXNative<R extends Shape> = {[P in keyof getNative<R>]: (getNative<R>[P] & SheetCascadingX<R>)}
+  type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: (RulesetWeb) } //& SheetCascadingX<R>)}
   //Cascading parts of the sheet
   interface SheetCascadingX<R extends Shape> { $cascading?: PartialSheetX<R>; $childCascading?: SheetsX; $name?: string }
 

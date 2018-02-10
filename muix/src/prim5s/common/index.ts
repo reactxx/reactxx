@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import warning from 'warning'
 
 //create platform specific sheet from cross platform one
-export const sheetCreator = <R extends Prim5s.Shape>(sheetXCreator: Prim5s.FromThemeCreator<R, Prim5s.SheetX<R>>) => (theme => toPlatformSheet(sheetXCreator(theme) as Prim5s.PartialSheetX<R>)) as Prim5s.SheetCreator<R>
+export const sheetCreator = <R extends Prim5s.Shape>(sheetXCreator: Prim5s.FromThemeValueOrCreator<R, Prim5s.SheetX<R>>) => (theme => toPlatformSheet(applyTheme(theme, sheetXCreator) as Prim5s.PartialSheetX<R>)) as Prim5s.SheetCreator<R>
 
 //create platform specific ruleset from cross platform one
 export const toPlatformRuleSet = (style: Prim5s.RulesetX) => {

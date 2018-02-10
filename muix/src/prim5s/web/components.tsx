@@ -2,6 +2,8 @@ import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
 import { rulesetsToClassNames } from './fela'
+import { sheetCreator } from '../common/index'
+import { textSheet } from '../common/components'
 
 const viewStyle: React.CSSProperties = {
   display: 'flex',
@@ -28,33 +30,10 @@ const icon: React.SFC<PrimComps.Web<SVGSVGElement> & { data: MuixIcons }> = prop
   </svg>
 }
 
-const textStyles = {
-  root: {
-    whiteSpace: 'pre-wrap',
-    wordWrap: 'break-word',
-    '& .mui-text': { //high level Text is block element, inner Texts are inline elements
-      display: 'inline',
-    },
-  },
-  notSelectable: {
-    userSelect: 'none'
-  },
-  pressable: {
-    cursor: 'pointer'
-  },
-  singleLineStyle: {
-    maxWidth: '100%',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap'
-  } as React.CSSProperties
-}
-
-const text: React.SFC<PrimComps.Web & { numberOfLines?: number; notSelectable?: boolean; pressable?: boolean }> = props => {
-  const { style, className, numberOfLines, notSelectable, pressable, $web, children } = props
-  return <div
-    className={'mui-text ' + rulesetsToClassNames(textStyles.root, className, notSelectable && textStyles.notSelectable, pressable && textStyles.pressable, numberOfLines === 1 && textStyles.singleLineStyle)}
-    style={style} {...$web} children={children} />
+export const text: Prim5s.CodeSFCWeb<Prim5s.TextShape> = props => {
+  const { style, classes, className, numberOfLines, onClick, mergeRulesetWithCascading, ...rest } = props
+  const rootStyle = mergeRulesetWithCascading(classes.root, onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle, className)
+  return <div className={'base-text ' + rulesetsToClassNames(rootStyle)} style={style} {...rest} />
 }
 
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
@@ -101,7 +80,6 @@ const checkChildLayoutProps = (css: React.CSSProperties) => {
 
 export const Icon = icon as React.SFC<PrimComps.IconX>
 export const View = view as React.SFC<PrimComps.ViewX>
-export const Text = text as React.SFC<PrimComps.TextX>
 export const ScrollView = scrollView as React.SFC<PrimComps.ScrollViewX>
 export const AnimatedView = View
 

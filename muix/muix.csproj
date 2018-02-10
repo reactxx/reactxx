@@ -169,6 +169,7 @@
     <TypeScriptCompile Include="src\prim5s\native\animation.tsx" />
     <TypeScriptCompile Include="src\prim5s\native\components.tsx" />
     <TypeScriptCompile Include="src\prim5s\native\index.ts" />
+    <TypeScriptCompile Include="src\prim5s\typings\components.d.ts" />
     <TypeScriptCompile Include="src\prim5s\typings\theme.d.ts" />
     <TypeScriptCompile Include="src\prim5s\web\animation.tsx" />
     <TypeScriptCompile Include="src\prim5s\web\fela.tsx" />
