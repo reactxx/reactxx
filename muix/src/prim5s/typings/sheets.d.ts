@@ -49,8 +49,8 @@
     animation: Animation.Shapes
     //**** component property constrains
     props: {} //common (web and native) props
-    propsNative: { style?: {} } //native only props 
-    propsWeb: React.HTMLAttributes<HTMLElement>//web only props
+    propsNative: { } //native only props 
+    propsWeb: React.HTMLAttributes<Element>//web only props
     theme: Theme
   }
 
@@ -64,7 +64,7 @@
     common: {}; native: {}, web: null
     animation: {}
     style: ReactN.ViewStyle
-    props: {}; propsNative: ReactN.ViewProperties; propsWeb: {}
+    props: {}; propsNative: ReactN.ViewProperties; propsWeb: React.HTMLAttributes<HTMLElement>
     theme: Theme
   }, R>
 
@@ -90,7 +90,7 @@
   //Cross platform sheet helpers
   type SheetXCommon<R extends Shape> = {[P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R>}
   type SheetXNative<R extends Shape> = {[P in keyof getNative<R>]: (getNative<R>[P] & SheetCascadingX<R>)}
-  type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: (RulesetWeb) } //& SheetCascadingX<R>)}
+  type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: (RulesetWeb & SheetCascadingX<R>)}
   //Cascading parts of the sheet
   interface SheetCascadingX<R extends Shape> { $cascading?: PartialSheetX<R>; $childCascading?: SheetsX; $name?: string }
 
