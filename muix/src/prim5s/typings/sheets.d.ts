@@ -1,7 +1,8 @@
 ﻿declare namespace Prim5s {
 
   interface RNIconStyle { color?: string; fontSize?: number }
-  type TOnClickWeb = { onClick?: React.MouseEventHandler<HTMLElement> }
+  type OnClick = { onClick?: React.MouseEventHandler<Element> }
+  type OnPress = { onPress?: () => void }
   interface WithStylesOptionsNew {
     name: keyof SheetsX
     flip?: boolean
@@ -49,7 +50,7 @@
     animation: Animation.Shapes
     //**** component property constrains
     props: {} //common (web and native) props
-    propsNative: { } //native only props 
+    propsNative: {} //native only props 
     propsWeb: React.HTMLAttributes<Element>//web only props
     theme: Theme
   }
@@ -89,8 +90,8 @@
 
   //Cross platform sheet helpers
   type SheetXCommon<R extends Shape> = {[P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R>}
-  type SheetXNative<R extends Shape> = {[P in keyof getNative<R>]: (getNative<R>[P] & SheetCascadingX<R>)}
-  type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: (RulesetWeb & SheetCascadingX<R>)}
+  type SheetXNative<R extends Shape> = {[P in keyof getNative<R>]: (getNative<R>[P] & SheetCascadingX<R>) }
+  type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: (RulesetWeb & SheetCascadingX<R>) }
   //Cascading parts of the sheet
   interface SheetCascadingX<R extends Shape> { $cascading?: PartialSheetX<R>; $childCascading?: SheetsX; $name?: string }
 
@@ -153,7 +154,7 @@
     flip: boolean
     mergeRulesetWithCascading: MergeRulesetWithCascadingWeb
     animations: Animation.DriversWeb<getAnimation<R>>
-  }>
+  } & OnClick>
   type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
 
@@ -166,7 +167,7 @@
     flip: boolean
     mergeRulesetWithCascading: MergeRulesetWithCascadingNative
     animations: Animation.DriversNative<getAnimation<R>>
-  }>
+  } & OnPress>
   type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
   type CodeComponentNative<R extends Shape> = React.ComponentClass<CodePropsNative<R>>
 
@@ -175,13 +176,13 @@
 
   //some code for components could be shared for web and native
   type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), {
-    className: RulesetWeb | getStyle<R>,
-    classes: Sheet<R>;
-    style: RulesetWeb | getStyle<R>;
-    theme: getTheme<R>; flip: boolean;
-    mergeRulesetWithCascading: MergeRulesetWithCascading;
+    className: RulesetWeb | getStyle<R>
+    classes: Sheet<R>
+    style: RulesetWeb | getStyle<R>
+    theme: getTheme<R>; flip: boolean
+    mergeRulesetWithCascading: MergeRulesetWithCascading
     animations: Animation.Drivers<getAnimation<R>>
-  }>
+  } & OnPress & OnClick>
   type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
 

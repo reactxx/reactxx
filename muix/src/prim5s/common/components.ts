@@ -1,19 +1,16 @@
 import { sheetCreator } from '../common/index'
 import withStyles from '../common/withStyles'
-import { text, view, icon, scrollView } from 'muix-prim5s'
+import { text, view, icon, scrollView } from 'muix-prim5s' //import platform specific component code
 
 export const textSheet = sheetCreator<Prim5s.TextShape>({
   root: {
     $web: {
       whiteSpace: 'pre-wrap',
       wordWrap: 'break-word',
-      [`& .${Prim5s.CompNames.Text}`]: { //high level Text is block element, inner Texts are inline elements
+      [`& .${Prim5s.CompNames.Text}`]: { //high level Text is block element, inner Texts are inline elements. <Prim5s.CompNames.Text> is className for Text component root div element.
         display: 'inline',
       },
     },
-  },
-  pressable: {
-    cursor: 'pointer'
   },
   singleLineStyle: {
     $web: {
@@ -22,7 +19,10 @@ export const textSheet = sheetCreator<Prim5s.TextShape>({
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap'
     }
-  }
+  },
+  pressable: { //web only
+    cursor: 'pointer'
+  },
 })
 
 const webViewRuleset = {

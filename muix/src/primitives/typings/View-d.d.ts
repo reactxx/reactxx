@@ -2,7 +2,7 @@
   export type ClassKey = 'root'
 
   export type Shape = Muix.OverwriteShape<{
-    props: Prim5s.TOnClickWeb
+    props: Prim5s.OnClick
     common: Prim5s.ShapeViews<'root'>
   }>
 

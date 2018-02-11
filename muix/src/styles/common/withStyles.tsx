@@ -45,7 +45,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
     render() {
       const { flip: flipProp, name } = options
       const { theme, cacheItem, animations } = this
-      const { classes: classesPropX, style, $web, $native, onClick, className: rulesetX, ...other } = this.props as Prim5s.PropsX<Muix.Shape> & Prim5s.TOnClickWeb
+      const { classes: classesPropX, style, $web, $native, onClick, className: rulesetX, ...other } = this.props as Prim5s.PropsX<Muix.Shape> & Prim5s.OnClick
 
       //****************************  getRulesetWithSideEffect
       // Could be called in <Component> render method to compute component styles. Side effects:

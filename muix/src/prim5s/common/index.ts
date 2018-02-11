@@ -3,7 +3,10 @@ import PropTypes from 'prop-types'
 import warning from 'warning'
 
 //create platform specific sheet from cross platform one
-export const sheetCreator = <R extends Prim5s.Shape>(sheetXCreator: Prim5s.FromThemeValueOrCreator<R, Prim5s.SheetX<R>>) => (theme => toPlatformSheet(applyTheme(theme, sheetXCreator) as Prim5s.PartialSheetX<R>)) as Prim5s.SheetCreator<R>
+export const sheetCreator = <R extends Prim5s.Shape>(sheetXCreator: Prim5s.FromThemeValueOrCreator<R, Prim5s.SheetX<R>>) => {
+  if (typeof sheetXCreator === 'function') return (theme => toPlatformSheet(applyTheme(theme, sheetXCreator))) as Prim5s.SheetCreator<R>
+  return toPlatformSheet(sheetXCreator) as Prim5s.Sheet<R>
+}
 
 //create platform specific ruleset from cross platform one
 export const toPlatformRuleSet = (style: Prim5s.RulesetX) => {
@@ -16,7 +19,8 @@ export const toPlatformRuleSet = (style: Prim5s.RulesetX) => {
   return res as Prim5s.Ruleset 
 }
 
-export const applyTheme = <T>(theme: Prim5s.Theme, valueOrCreator: Prim5s.FromThemeValueOrCreator<Prim5s.Shape, T>) => typeof valueOrCreator === 'function' ? valueOrCreator(theme) : valueOrCreator
+export const applyTheme = <T>(theme: Prim5s.Theme | (() => Prim5s.Theme), valueOrCreator: Prim5s.FromThemeValueOrCreator<Prim5s.Shape, T>) =>
+  typeof valueOrCreator === 'function' ? valueOrCreator(typeof theme === 'function' ? theme() : theme) : valueOrCreator
 
 //create platform specific sheet from cross platform one
 export const toPlatformSheet = (sheet: Prim5s.PartialSheetX<Prim5s.Shape>) => {

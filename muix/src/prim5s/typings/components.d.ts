@@ -12,13 +12,14 @@ declare namespace Prim5s {
     common: ShapeTexts<'root' | 'singleLineStyle'>
     style: ReactN.TextStyle,
     web: 'pressable'
-    props: { numberOfLines?: number } & TOnClickWeb
+    props: { numberOfLines?: number } & OnClick
     propsWeb: React.HTMLAttributes<HTMLSpanElement>
     propsNative: ReactN.TextProperties
   }>
   type ViewShape = OverwriteShape<{
     common: ShapeViews<'root'>
     style: ReactN.ViewStyle,
+    props: OnClick
     propsWeb: React.HTMLAttributes<HTMLDivElement>
     propsNative: ReactN.ViewProperties
   }>
@@ -26,7 +27,7 @@ declare namespace Prim5s {
   type IconShape = OverwriteShape<{
     common: ShapeTexts<'root'>
     style: ReactN.TextStyle,
-    props: { data: string } & TOnClickWeb
+    props: { data: string } & OnClick
     propsWeb: React.SVGAttributes<SVGElement>
     //from node_modules\@types\expo\index.d.ts, BaseIconProps
     propsNative: {

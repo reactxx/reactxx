@@ -20,53 +20,55 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
     constructor(props: Prim5s.PropsX<R>, context: TContext) {
       super(props, context)
 
-      const theme: ThemeWithCache = this.theme = context.theme || getDefaultTheme()
+      //const theme: ThemeWithCache = this.theme = context.theme || getDefaultTheme()
 
       //*** caching aplyThemeToSheet result in actual theme (in its .$sheetsCache prop)
-      const cacheItem = aplyThemeToSheet(sheetOrCreator, theme, name)
+      const staticSheet = aplyThemeToSheet(sheetOrCreator, this.themeGetter, name)
 
       //if (options.name === 'MuiText') console.log(cacheItem)
 
       //*** apply childCascading from context
       const fromParentContext = context.childCascading && context.childCascading[name]
-      this.withParentContext = fromParentContext ? deepMerges(false, {}, cacheItem, fromParentContext) : cacheItem // modify static sheet 
+      this.withParentContext = fromParentContext ? deepMerges(false, {}, staticSheet, fromParentContext) : staticSheet // modify static sheet 
       for (const p in this.withParentContext) this.withParentContext[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
 
       //*** init animations
-      this.animations = getAnimations(cacheItem.$animations, this)
+      this.animations = getAnimations(staticSheet.$animations, this)
     }
 
     getChildContext() { return { childCascading: this.usedChildCascading /*usedChildCascading is modified during Component render (where getRulesetWithSideEffect is called)*/ } }
 
-    componentWillReceiveProps() {
-      this.animations.reset()
+    componentWillReceiveProps() { this.animations.reset() }
+
+    themeGetter() {
+      if (this.theme) return this.theme
+      return this.theme = this.context.theme || getDefaultTheme()
     }
 
     render() {
       const { flip: flipProp, name } = options
-      const { theme, animations } = this
-      const { classes: classesPropX, style, $web, $native, onClick, className: rulesetX, ...other } = this.props as Prim5s.PropsX & Prim5s.TOnClickWeb
-      const cacheItem = theme[name]
+      const { animations, theme } = this
+      const { classes: classesPropX, style, $web, $native, onClick, className: rulesetX, ...other } = this.props as Prim5s.PropsX & Prim5s.OnClick
 
       //****************************  getRulesetWithSideEffect 
       // Could be called in <Component> render method to compute component styles. Side effects:
       // - use sheet..$cascading to modify self sheet
       // - sheet..$childCascading to modify children sheet (passed to children via context.childCascading) 
-      const classesProp = toPlatformSheet(applyTheme(theme, classesPropX as Prim5s.FromThemeValueOrCreator<R, Prim5s.PartialSheetX<R>>))
+      const classesProp = toPlatformSheet(applyTheme(this.themeGetter, classesPropX as Prim5s.FromThemeValueOrCreator<R, Prim5s.PartialSheetX<R>>))
       // calling getRulesetWithSideEffect signals which rulesets are used. So it can use their $cascading and $childCascading props to modify self sheet and child sheets
       const mergeRulesetWithCascading = createRulesetWithCascadingMerger(classesProp, this.usedChildCascading)
 
       //const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as Prim5s.TRulesetX
-      const className = toPlatformRuleSet(applyTheme(theme, rulesetX))
-      const flip = typeof flipProp === 'boolean' ? flipProp : theme.direction === 'rtl'
+      const className = toPlatformRuleSet(applyTheme(this.themeGetter, rulesetX))
+      const flip = typeof flipProp === 'boolean' ? flipProp : (theme && theme.direction === 'rtl')
 
       const newProps = {
         ...other, ...(window.isWeb ? $web : $native), theme,
         flip, mergeRulesetWithCascading, animations,
         classes: this.withParentContext, //all code component, for root lower priority than className and style. Classes are used by getRulesetWithSideEffect prop in Component.render
         className, //code root by means of className (web) or style (native)
-        style: clearSystemProps(toPlatformRuleSet(applyTheme(theme, style))), //code root by means of style (higher priority than className)
-      } as Prim5s.CodeProps<R> & { onClick, onPress }
+        style: clearSystemProps(toPlatformRuleSet(applyTheme(this.themeGetter, style))), //code root by means of style (higher priority than className)
+      } as Prim5s.CodeProps<R>
 
       if (window.isWeb) {
         const cl = ($web && ($web as any).onClick) || onClick
@@ -136,11 +138,16 @@ const createRulesetWithCascadingMerger = (classesProp: Prim5s.Sheet, usedChildCa
 type TContext = Prim5s.MuiThemeContextValue & Prim5s.MuiCascadingContext
 
 //apply theme to sheet AND merge it with theme.cascading
-const aplyThemeToSheet = (sheetOrCreator: Prim5s.SheetOrCreator, theme: ThemeWithCache, name: string) => {
+const aplyThemeToSheet = (sheetOrCreator: Prim5s.SheetOrCreator, themerCreator: () => ThemeWithCache, name: string) => {
+
+  if (typeof sheetOrCreator != 'function') return sheetOrCreator
+
+  const theme = themerCreator()
+
   //already in cache?
   let res: Prim5s.Sheet = theme.$sheetsCache && theme.$sheetsCache[name]
   if (res) return res
-  
+
   const sheet = applyTheme(theme, sheetOrCreator) //apply theme to sheet
   const override = (theme.overrides && theme.overrides[name]) //find sheet override in theme
   res = override ? deepMerges(false, {}, sheet, override) : sheet //deepMerge only when needed

@@ -10,7 +10,7 @@
   type Shape = Muix.OverwriteShape<{
     common: Prim5s.ShapeTexts<'root' | 'colorSecondary' | 'colorAction' | 'colorDisabled' | 'colorError' | 'colorPrimary'>
     style: ReactN.TextStyle
-    props: IconProperties & Prim5s.TOnClickWeb
+    props: IconProperties & Prim5s.OnClick
   }>
 }
 

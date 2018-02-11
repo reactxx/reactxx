@@ -5,38 +5,36 @@ import { View as RNView, Text as RNText, ScrollView as RNScrollView, Animated, T
 import { MaterialCommunityIcons as RNIcon, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
-const ViewNative: React.SFC<PrimComps.View> = props => {
-  const { style, className, $native, children } = props
-  const onPress = $native && $native.onPress; if (onPress) delete $native.onPress
-  const res = <RNView style={[className, style]} {...$native} children={children} />
+export const view: Prim5s.CodeSFCNative<Prim5s.ViewShape> = props => {
+  const { style, classes, className, mergeRulesetWithCascading, flip, theme, onPress, animations, ...rest } = props
+  const rootStyle = mergeRulesetWithCascading(classes.root, className, style) as ReactN.ViewStyle
+  const res = <RNView style={rootStyle} {...rest} />
   return onPress ? <TouchableWithoutFeedback onPress={onPress}>{res}</TouchableWithoutFeedback> : res
 }
 
-const AnimatedViewNative: React.SFC<PrimComps.View> = props => {
-  const { style, className, $native, children } = props
-  const onPress = $native && $native.onPress; if (onPress) delete $native.onPress
-  //console.log(JSON.stringify({ ...className },null,2))
-  const res = <Animated.View style={[className, style]} {...$native} children={children} />
+export const animatedView: Prim5s.CodeSFCNative<Prim5s.ViewShape> = props => {
+  const { style, classes, className, mergeRulesetWithCascading, flip, theme, onPress, animations, ...rest } = props
+  const rootStyle = mergeRulesetWithCascading(classes.root, className, style) as ReactN.ViewStyle
+  const res = <Animated.View style={rootStyle} {...rest} />
   return onPress ? <TouchableWithoutFeedback onPress={onPress}>{res}</TouchableWithoutFeedback> : res
 }
 
-const TextNative: React.SFC<PrimComps.Text> = props => {
-  const { style, className, $native, children } = props
-  return <RNText style={[className, style]} {...$native} children={children} />
+export const text: Prim5s.CodeSFCNative<Prim5s.TextShape> = props => {
+  const { style, classes, className, mergeRulesetWithCascading, flip, theme, animations, ...rest } = props
+  const rootStyle = mergeRulesetWithCascading(classes.root, className, style) as ReactN.TextStyle
+  return <RNText style={rootStyle} {...rest} />
 }
 
-const ScrollViewNative: React.SFC<PrimComps.ScrollView> = props => {
-  const { style, className, $native, children, contentContainerStyle } = props
-  return <RNScrollView style={[className, style]} {...$native} children={children} contentContainerStyle={contentContainerStyle as ReactN.ViewStyle} />
+export const scrollView: Prim5s.CodeSFCNative<Prim5s.ScrollViewShape> = props => {
+  const { style, classes, className, mergeRulesetWithCascading, flip, theme, animations, ...rest } = props
+  const rootStyle = mergeRulesetWithCascading(classes.root, className, style) as ReactN.ScrollViewStyle
+  const containerStyle = mergeRulesetWithCascading(classes.container) as ReactN.ViewStyle
+  return <RNScrollView style={rootStyle} contentContainerStyle={containerStyle} {...rest}/>
 }
 
-const IconNative: React.SFC<PrimComps.Icon> = props => {
-  const { style, className, $native, data } = props
-  return <RNIcon name={data as string as MaterialCommunityIconsProps['name']} style={[className, style]} {...$native} />
+export const icon: Prim5s.CodeSFCNative<Prim5s.IconShape> = props => {
+  const { style, classes, className, mergeRulesetWithCascading, flip, theme, animations, data, ...rest } = props
+  const rootStyle = mergeRulesetWithCascading(classes.root, className, style) as ReactN.TextStyle
+  return <RNIcon name={data as MaterialCommunityIconsProps['name']} style={[rootStyle]} {...rest} />
 }
 
-export const Icon = IconNative as React.SFC<PrimComps.IconX>
-export const View = ViewNative as React.SFC<PrimComps.ViewX>
-export const AnimatedView = AnimatedViewNative as React.SFC<PrimComps.ViewX>
-export const Text = TextNative as React.SFC<PrimComps.TextX>
-export const ScrollView = ScrollViewNative as React.SFC<PrimComps.ScrollViewX>

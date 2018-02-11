@@ -24,7 +24,7 @@ type webKeys<R extends Muix.Shape> = Prim5s.getWeb<R> | keyof Prim5s.getCommon<R
 
 export const muiCompatible = <R extends Muix.Shape>(Component: React.ComponentType<Prim5s.getPropsWeb<R>>) => {
   const Styled: Prim5s.SFCX<R> = (props, context: Muix.MuiThemeContextValue) => {
-    const { classes: _classes, style, $web, $native, onClick, className: rulesetX, ...rest } = props as Prim5s.PropsX<Muix.Shape> & Prim5s.TOnClickWeb 
+    const { classes: _classes, style, $web, $native, onClick, className: rulesetX, ...rest } = props as Prim5s.PropsX<Muix.Shape> & Prim5s.OnClick 
 
     const click = ($web && $web.onClick) || onClick
 
