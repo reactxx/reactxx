@@ -1,15 +1,30 @@
 import React from 'react'
 import { Text, AppContainer } from 'muix-prim5s'
 
-const AppNoTheme: React.SFC = props => <Text className={{ color: 'red', fontWeight: 'normal' }} style={{ fontWeight: 'bold' }} classes={{ root: { textDecoration: 'underline', color: 'blue' } }}>HALLO WOLD 1
-    <Text onClick={() => alert('blue click')} className={{ color: 'blue' }} style={{ fontWeight: 'bold' }} classes={{ root: { textDecoration: 'underline' } }}>HALLO WOLD 2</Text>
+const AppNoTheme: React.SFC = props => <Text className={{ color: 'red', fontWeight: 'normal' }} style={{ fontWeight: 'bold' }} classes={{ root: { textDecoration: 'underline', color: 'blue' } }}>
+  red, bold, underline{' '}
+  <Text onClick={() => alert('blue click')} className={{ color: 'blue', fontWeight: 'bold' }} style={{ fontWeight: 'normal' }} classes={{ root: { textDecoration: 'underline' } }}>
+    blue, underline, pointer cursor (is clickable)
   </Text>
+</Text>
 
 const App: React.SFC = props => <AppContainer themerProps={{ creator: () => ({ direction: 'ltr' }) }}>
-  <Text className={theme => ({ color: 'red' })} style={theme => ({ fontWeight: 'bold' })} classes={theme => ({ root: { textDecoration: 'underline' } })}>HALLO WOLD 1
-    <Text onClick={() => alert('blue click')} className={theme => ({ color: 'blue' })} style={theme => ({ fontWeight: 'bold' })} classes={theme => ({ root: { textDecoration: 'underline' } })}>HALLO WOLD 2</Text>
+  <Text className={theme => ({ color: 'red', fontWeight: 'bold', textDecoration: 'underline' })}>
+    red, bold, underline
+  </Text>
+  <Text onClick={() => alert('blue click')} style={theme => ({ color: 'blue', fontWeight: 'normal', textDecoration: 'underline' })} >
+    blue, underline, on new line, pointer cursor (is clickable)
   </Text>
 </AppContainer>
 
-export default App
+const AppThemeOverride: React.SFC = props => <AppContainer themerProps={{ creator: () => ({ direction: 'ltr', overrides: { BaseText: { root: {}} } }) }}>
+  <Text className={theme => ({ color: 'red', fontWeight: 'bold', textDecoration: 'underline' })}>
+    red, bold, underline
+  </Text>
+  <Text onClick={() => alert('blue click')} style={theme => ({ color: 'blue', fontWeight: 'normal', textDecoration: 'underline' })} >
+    blue, underline, on new line, pointer cursor (is clickable)
+  </Text>
+</AppContainer>
 
+
+export default App

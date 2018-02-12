@@ -40,10 +40,10 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
 
     componentWillReceiveProps() { this.animations.reset() }
 
-    themeGetter() {
+    themeGetter = (() => {
       if (this.theme) return this.theme
       return this.theme = this.context.theme || getDefaultTheme()
-    }
+    }).bind(this)
 
     render() {
       const { flip: flipProp, name } = options
