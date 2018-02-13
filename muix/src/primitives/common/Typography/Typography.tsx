@@ -75,7 +75,7 @@ const typography: Prim5s.CodeSFC<MuixTypography.Shape> = (props => {
     paragraph,
     variant = 'body1',
     style,
-    mergeRulesetWithCascading,
+    mergeRulesetWithOverrides,
     animations,
     theme, flip, 
     children,
@@ -85,7 +85,7 @@ const typography: Prim5s.CodeSFC<MuixTypography.Shape> = (props => {
 
   //console.log('### typography', color, classes)
 
-  const classNameRes = mergeRulesetWithCascading(
+  const classNameRes = mergeRulesetWithOverrides(
     classes.root,
     classes[variant],
     color !== 'default' && classes[`color${capitalize(color)}`],

@@ -11,8 +11,8 @@
 
   type Direction = 'ltr' | 'rtl';
 
-  type MuiThemeContextValue = { theme: Theme }
-  type MuiCascadingContext = { childCascading: Sheets }
+  type ThemeContextValue = { theme: Theme }
+  type OverridesContext = { childOverrides: Sheets }
 
   interface ThemerProps {
     creator: ThemeCreator

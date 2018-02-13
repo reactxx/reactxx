@@ -74,7 +74,7 @@ class ResponsiveDrawer extends React.Component<Prim5s.CodeProps<MuixResponsibleD
 
   render() {
 
-    const { classes, theme, mergeRulesetWithCascading, animations } = this.props
+    const { classes, theme, mergeRulesetWithOverrides, animations } = this.props
 
     const drawer = <div>
       <div className={rulesetToClassNames(classes.drawerHeader)}>

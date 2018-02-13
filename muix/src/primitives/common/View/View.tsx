@@ -10,17 +10,17 @@ export const sheet = sheetCreator<MuixView.Shape>(() => ({
 }))
 
 const view: Prim5s.CodeSFC<MuixView.Shape> = props => {
-  let { classes, theme, flip, mergeRulesetWithCascading, children, style, className, animations, ...rest } = props
+  let { classes, theme, flip, mergeRulesetWithOverrides, children, style, className, animations, ...rest } = props
   const $web = rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>
   const $native = rest as ReactN.ViewProperties
-  return <ViewX className={mergeRulesetWithCascading(classes.root, className)} $web={$web} $native={$native} children={children} style={style} />
+  return <ViewX className={mergeRulesetWithOverrides(classes.root, className)} $web={$web} $native={$native} children={children} style={style} />
 }
 
 const animatedView: Prim5s.CodeSFC<MuixView.Shape> = props => {
-  const { classes, theme, flip, mergeRulesetWithCascading, children, style, className, animations, ...rest } = props
+  const { classes, theme, flip, mergeRulesetWithOverrides, children, style, className, animations, ...rest } = props
   const $web = rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>
   const $native = rest as ReactN.ViewProperties
-  return <AnimatedViewX className={mergeRulesetWithCascading(classes.root, className)} $web={$web} $native={$native} children={children} style={style} />
+  return <AnimatedViewX className={mergeRulesetWithOverrides(classes.root, className)} $web={$web} $native={$native} children={children} style={style} />
 }
 
 export const AnimatedView = withStyles<MuixView.Shape>(sheet, { name: 'MuiAnimatedView' })(animatedView)

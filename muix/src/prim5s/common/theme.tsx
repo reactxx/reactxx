@@ -4,7 +4,7 @@ import warning from 'warning'
 import { applyTheme } from './index'
 
 export const MuiThemeContextTypes = { theme: PropTypes.any }
-export const MuiCascadingContextTypes = { childCascading: PropTypes.any }
+export const MuiOverridesContextTypes = { childOverrides: PropTypes.any }
 
 export const createTheme: Prim5s.ThemeCreator = options => {
   warning(!!themerProps, 'Missing AppContainer component')
@@ -24,7 +24,7 @@ export class ThemeProvider extends React.PureComponent<Prim5s.ThemeProviderProps
 
   localTheme: Prim5s.Theme
 
-  getChildContext(): Prim5s.MuiThemeContextValue {
+  getChildContext(): Prim5s.ThemeContextValue {
     return { theme: this.localTheme }
   }
 

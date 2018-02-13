@@ -6,14 +6,14 @@ import { sheetCreator } from '../common/index'
 import { textSheet } from '../common/components'
 
 export const view: Prim5s.CodeSFCWeb<Prim5s.ViewShape> = props => {
-  const { style, classes, className, mergeRulesetWithCascading, flip, theme, animations, ...rest } = props
-  const rootStyle = mergeRulesetWithCascading(classes.root, className)
+  const { style, classes, className, mergeRulesetWithOverrides, flip, theme, animations, ...rest } = props
+  const rootStyle = mergeRulesetWithOverrides(classes.root, className)
   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest} />
 }
 
 export const icon: Prim5s.CodeSFCWeb<Prim5s.IconShape> = props => {
-  const { style, classes, className, data, mergeRulesetWithCascading, flip, theme, animations, viewBox, children/*ignore children*/, ...rest } = props
-  const rootStyle = mergeRulesetWithCascading(classes.root, className)
+  const { style, classes, className, data, mergeRulesetWithOverrides, flip, theme, animations, viewBox, children/*ignore children*/, ...rest } = props
+  const rootStyle = mergeRulesetWithOverrides(classes.root, className)
   //replace fontSize with width x height
   if (rootStyle.fontSize) { rootStyle.height = rootStyle.width = rootStyle.fontSize; delete rootStyle.fontSize }
   if (style && style.fontSize) { style.height = style.width = style.fontSize; delete style.fontSize }
@@ -23,15 +23,15 @@ export const icon: Prim5s.CodeSFCWeb<Prim5s.IconShape> = props => {
 }
 
 export const text: Prim5s.CodeSFCWeb<Prim5s.TextShape> = props => {
-  const { style, classes, className, numberOfLines, mergeRulesetWithCascading, flip, theme, animations, ...rest } = props
-  const rootStyle = mergeRulesetWithCascading(classes.root, props.onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle, className)
+  const { style, classes, className, numberOfLines, mergeRulesetWithOverrides, flip, theme, animations, ...rest } = props
+  const rootStyle = mergeRulesetWithOverrides(classes.root, props.onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle, className)
   return <div className={Prim5s.CompNames.Text + ' ' + rulesetsToClassNames(rootStyle)} style={style} {...rest} />
 }
 
 export const scrollView: Prim5s.CodeSFCWeb<Prim5s.ScrollViewShape> = props => {
-  const { style, classes, className, horizontal, mergeRulesetWithCascading, flip, theme, animations, children, ...rest } = props
-  const rootStyle = mergeRulesetWithCascading(classes.root, horizontal && classes.rootHorizontal, className)
-  const containerStyle = mergeRulesetWithCascading(classes.container, horizontal && classes.containerHorizontal)
+  const { style, classes, className, horizontal, mergeRulesetWithOverrides, flip, theme, animations, children, ...rest } = props
+  const rootStyle = mergeRulesetWithOverrides(classes.root, horizontal && classes.rootHorizontal, className)
+  const containerStyle = mergeRulesetWithOverrides(classes.container, horizontal && classes.containerHorizontal)
   //checkChildLayoutProps(style); checkChildLayoutProps(className)
   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest}>
     <div className={rulesetsToClassNames(containerStyle)}>

@@ -11,9 +11,9 @@ export const sheet = sheetCreator<MuixScrollView.Shape>(() => ({
 }))
 
 const scrollView: Prim5s.CodeSFC<MuixScrollView.Shape> = props => {
-  const { classes, theme, flip, mergeRulesetWithCascading, children, style, className, animations, ...rest } = props
+  const { classes, theme, flip, mergeRulesetWithOverrides, children, style, className, animations, ...rest } = props
   return <ScrollViewX
-    className={mergeRulesetWithCascading(classes.root, className)} contentContainerStyle={mergeRulesetWithCascading(classes.contentContainerStyle)}
+    className={mergeRulesetWithOverrides(classes.root, className)} contentContainerStyle={mergeRulesetWithOverrides(classes.contentContainerStyle)}
     style={style} $native={rest as ReactN.ScrollViewProperties} $web={rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>} children={children} />
 }
 

@@ -47,10 +47,10 @@ declare namespace Prim5s {
   }>
 
   interface SheetsX {
-    [CompNames.Text]?: SheetOrCreator<TextShape>
-    [CompNames.View]?: SheetOrCreator<ViewShape>
-    [CompNames.AnimatedView]?: SheetOrCreator<AnimatedViewShape>
-    [CompNames.Icon]?: SheetOrCreator<IconShape>
-    [CompNames.ScrollView]?: SheetOrCreator<ScrollViewShape>
+    [CompNames.Text]?: PartialSheetX<TextShape>
+    [CompNames.View]?: PartialSheetX<ViewShape>
+    [CompNames.AnimatedView]?: PartialSheetX<AnimatedViewShape>
+    [CompNames.Icon]?: PartialSheetX<IconShape>
+    [CompNames.ScrollView]?: PartialSheetX<ScrollViewShape>
   }
 }

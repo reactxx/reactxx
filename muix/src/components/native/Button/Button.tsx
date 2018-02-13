@@ -32,54 +32,54 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
     paddingRight: spacing.unit * 2,
     borderRadius: 2,
     color: palette.text.primary,
-    $childCascading: {
+    $childOverrides: {
       MuiIcon: { root: { lineHeight: 1.4 * 16, fontSize: 24, ...(isLeft === true ? { marginRight: spacing.unit } : (isLeft === false ? { marginLeft: spacing.unit } : {})) } },
       MuiText: { root: { ...typoX.button, color: palette.text.primary, } },
     },
   },
 
   disabled: {
-    $childCascading: getTextIconColor(palette.action.disabled)
+    $childOverrides: getTextIconColor(palette.action.disabled)
   },
 
   flat: {
-    $cascading: {
+    $overrides: {
       ripple: { backgroundColor: palette.grey[500], opacity: 0.8 },
     }
   },
   flatPrimary: {
-    $cascading: {
+    $overrides: {
       ripple: { backgroundColor: fade(palette.primary[500], 0.4), opacity: 0.8 },
     },
-    $childCascading: getTextIconColor(palette.primary[500])
+    $childOverrides: getTextIconColor(palette.primary[500])
   },
   flatSecondary: {
-    $cascading: {
+    $overrides: {
       ripple: { backgroundColor: fade(palette.secondary.light, 0.4), opacity: 0.8 },
     },
-    $childCascading: getTextIconColor(palette.secondary.light)
+    $childOverrides: getTextIconColor(palette.secondary.light)
   },
 
   raised: {
     backgroundColor: palette.grey[300],
     ...shadowsNew[2],
-    $cascading: {
+    $overrides: {
       active: shadowsNew[8],
     }
   },
   raisedPrimary: {
     backgroundColor: palette.primary.main,
-    $childCascading: getTextIconColor(palette.primary.contrastText)
+    $childOverrides: getTextIconColor(palette.primary.contrastText)
   },
   raisedSecondary: {
     backgroundColor: palette.secondary.main,
-    $childCascading: getTextIconColor(palette.secondary.contrastText)
+    $childOverrides: getTextIconColor(palette.secondary.contrastText)
   },
   raisedDisable: {
     ...shadowsNew[0],
     backgroundColor: palette.action.disabledBackground,
     //$childOverrides: getTextIconColor(palette.action.disabled),
-    $childCascading: getTextIconColor('gray'),
+    $childOverrides: getTextIconColor('gray'),
   },
   raisedContrast: {
     $childOverrides: getTextIconColor(palette.getContrastText(palette.primary[500]))
@@ -95,7 +95,7 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
     height: 56,
     borderRadius: 56 / 2,
     ...shadowsNew[6],
-    $cascading: {
+    $overrides: {
       active: shadowsNew[12],
     }
   },
@@ -119,7 +119,7 @@ const button: Prim5s.CodeSFCNative<MuixButton.Shape> = (props, context) => {
 
 
   var x = props.mini
-  const { children, classes, color = 'default', variant, mini, mergeRulesetWithCascading, className, animations, ...rest } = props
+  const { children, classes, color = 'default', variant, mini, mergeRulesetWithOverrides, className, animations, ...rest } = props
   const { disabled } = rest //disabled must be propagated to ButtonBaseLow
 
   const fab = variant == 'fab'
@@ -128,7 +128,7 @@ const button: Prim5s.CodeSFCNative<MuixButton.Shape> = (props, context) => {
   const isFlat = !raised && !fab
   const Color = capitalize(color)
 
-  const viewStyle = mergeRulesetWithCascading(
+  const viewStyle = mergeRulesetWithOverrides(
     classes.root,
     !isFlat && classes.raised,
     isFlat && classes.flat,
@@ -147,12 +147,12 @@ const button: Prim5s.CodeSFCNative<MuixButton.Shape> = (props, context) => {
 
   //console.log('### viewStyle: ', viewStyle)
 
-  const rippleStyle = mergeRulesetWithCascading(classes.ripple) as ReactN.ViewStyle
-  const activeStyle = mergeRulesetWithCascading(!disabled && classes.active) as ReactN.ViewStyle
+  const rippleStyle = mergeRulesetWithOverrides(classes.ripple) as ReactN.ViewStyle
+  const activeStyle = mergeRulesetWithOverrides(!disabled && classes.active) as ReactN.ViewStyle
 
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 
-  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} className={null} mergeRulesetWithCascading={null} animations={null} {...rest}>
+  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} className={null} mergeRulesetWithOverrides={null} animations={null} {...rest}>
     {childs}
   </RippleEffect>
 }

@@ -25,7 +25,7 @@
       $native?: T // native specific rules
       $web?: RulesetWeb // web specific rules
     } &
-    SheetCascadingX<R> // sheet overriding, 
+    SheetOverridesX<R> // sheet overriding, 
 
   // rule names, common for native and web
   type commonRuleNames<T extends RulesetNative> = keyof React.CSSPropertiesLow & keyof T
@@ -95,32 +95,33 @@
 
   //Cross platform sheet helpers
   type SheetXCommon<R extends Shape> = {[P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R>}
-  type SheetXNative<R extends Shape> = {[P in keyof getNative<R>]: (getNative<R>[P] & SheetCascadingX<R>) }
-  type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: (RulesetWeb & SheetCascadingX<R>) }
-  //Cascading parts of the sheet
-  interface SheetCascadingX<R extends Shape> { $cascading?: PartialSheetX<R>; $childCascading?: SheetsX; $name?: string }
+  type SheetXNative<R extends Shape> = {[P in keyof getNative<R>]: (getNative<R>[P] & SheetOverridesX<R>) }
+  type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: (RulesetWeb & SheetOverridesX<R>) }
+  //Overrides parts of the sheet
+  interface SheetOverridesX<R extends Shape> { $overrides?: PartialSheetX<R>; $childOverrides?: SheetsX; $name?: string }
 
   //******************** Platform specific sheets
-  type SheetWeb<R extends Shape = Shape> = Record<(keyof getCommon<R>) | getWeb<R>, RulesetWeb & SheetCascadingWeb<R>> & { $animations?: Animation.SheetsX<getAnimation<R>> }
-  type SheetNative<R extends Shape = Shape> = {[P in keyof getCommon<R>]: getCommon<R>[P] & SheetCascadingNative<R>} & {[P in keyof getNative<R>]: getNative<R>[P] & SheetCascadingNative<R>} & { $animations?: Animation.SheetsX<getAnimation<R>> }
+  type SheetWeb<R extends Shape = Shape> = Record<(keyof getCommon<R>) | getWeb<R>, RulesetWeb & SheetOverridesWeb<R>> & { $animations?: Animation.SheetsX<getAnimation<R>> }
+  type SheetNative<R extends Shape = Shape> = {[P in keyof getCommon<R>]: getCommon<R>[P] & SheetOverridesNative<R>} & {[P in keyof getNative<R>]: getNative<R>[P] & SheetOverridesNative<R>} & { $animations?: Animation.SheetsX<getAnimation<R>> }
   type Sheet<R extends Shape = Shape> = SheetWeb<R> | SheetNative<R>
   type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
 
-  //Cascading parts of the sheet
-  interface SheetCascading<R extends Shape> { $cascading?: Sheet<R>; $childCascading?: Sheets; $name?: string }
-  interface SheetCascadingWeb<R extends Shape> { $cascading?: SheetWeb<R>; $childCascading?: SheetsWeb; $name?: string }
-  interface SheetCascadingNative<R extends Shape> { $overrides?: SheetNative<R>; $childCascading?: SheetsNative; $name?: string }
+  //Overrides parts of the sheet
+  interface SheetOverrides<R extends Shape> { $overrides?: Sheet<R>; $childOverrides?: Sheets; $name?: string }
+  interface SheetOverridesWeb<R extends Shape> { $overrides?: SheetWeb<R>; $childOverrides?: SheetsWeb; $name?: string }
+  interface SheetOverridesNative<R extends Shape> { $overrides?: SheetNative<R>; $childOverrides?: SheetsNative; $name?: string }
 
   //******************** Sheet and Theme Creators
   type FromThemeCreator<R extends Shape, T> = (theme: getTheme<R>) => T
   type FromThemeValueOrCreator<R extends Shape, T> = T | FromThemeCreator<R, T>
   type SheetCreator<R extends Shape> = FromThemeCreator<R, Sheet<R>>
   type SheetOrCreator<R extends Shape = Shape> = FromThemeValueOrCreator<R, Sheet<R>>
+  //type SheetOrCreatorX<R extends Shape = Shape> = FromThemeValueOrCreator<R, PartialSheetX<R>>
 
   //******************** Sheet GETTERs
-  type MergeRulesetWithCascading = (...rulesets: (SheetCascading<Shape> & Ruleset)[]) => Ruleset
-  type MergeRulesetWithCascadingNative = (...rulesets: (SheetCascadingNative<MuixView.Shape> | ReactN.TextStyle)[]) => RulesetNative
-  type MergeRulesetWithCascadingWeb = (...rulesets: (SheetCascadingWeb<MuixView.Shape> & RulesetWeb)[]) => RulesetWeb
+  type MergeRulesetWithOverrides = (...rulesets: (SheetOverrides<Shape> & Ruleset)[]) => Ruleset
+  type MergeRulesetWithOverridesNative = (...rulesets: (SheetOverridesNative<MuixView.Shape> | ReactN.TextStyle)[]) => RulesetNative
+  type MergeRulesetWithOverridesWeb = (...rulesets: (SheetOverridesWeb<MuixView.Shape> & RulesetWeb)[]) => RulesetWeb
 
 
   /******************************************
@@ -157,7 +158,7 @@
     classes: SheetWeb<R>; style: RulesetWeb
     theme: getTheme<R>
     flip: boolean
-    mergeRulesetWithCascading: MergeRulesetWithCascadingWeb
+    mergeRulesetWithOverrides: MergeRulesetWithOverridesWeb
     animations: Animation.DriversWeb<getAnimation<R>>
   } & OnPressAllWeb>
   type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
@@ -170,7 +171,7 @@
     style: getStyle<R>
     theme: getTheme<R>
     flip: boolean
-    mergeRulesetWithCascading: MergeRulesetWithCascadingNative
+    mergeRulesetWithOverrides: MergeRulesetWithOverridesNative
     animations: Animation.DriversNative<getAnimation<R>>
   } & OnPressAllNative>
   type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
@@ -185,7 +186,7 @@
     classes: Sheet<R>
     style: RulesetWeb | getStyle<R>
     theme: getTheme<R>; flip: boolean
-    mergeRulesetWithCascading: MergeRulesetWithCascading
+    mergeRulesetWithOverrides: MergeRulesetWithOverrides
     animations: Animation.Drivers<getAnimation<R>>
   } & (OnPressAllNative | OnPressAllWeb)>
   type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>

@@ -12,9 +12,9 @@ export const sheetCreator = <R extends Prim5s.Shape>(sheetXCreator: Prim5s.FromT
 export const toPlatformRuleSet = (style: Prim5s.RulesetX) => {
   if (!style) return null
   const isNative = !window.isWeb
-  if (!style.$web && !style.$native && !style.$cascading && !style.$childCascading) return style //optimalization
-  const { $web, $native, $cascading, $childCascading, ...rest } = style
-  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($cascading), $childOverrides: toPlatformSheets(null, $childCascading) }
+  if (!style.$web && !style.$native && !style.$overrides && !style.$childOverrides) return style //optimalization
+  const { $web, $native, $overrides, $childOverrides, ...rest } = style
+  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $childOverrides: toPlatformSheets(null, $childOverrides) }
   if (!res.$overrides) delete res.$overrides; if (!res.$childOverrides) delete res.$childOverrides //remove NULL or UNDEFINED
   return res as Prim5s.Ruleset 
 }
@@ -50,7 +50,7 @@ export const deepMerge = (target, source, skipSystem = false) => {
   if (!source) return target
   if (isObject(target) && isObject(source))
     for (const key in source) {
-      if (skipSystem && key[0] === '$') continue //skip $override, $cascading and $name props
+      if (skipSystem && key[0] === '$') continue //skip $override, $childOverride and $name props
       if (isObject(source[key])) {
         if (!target[key]) target[key] = {}
         deepMerge(target[key], source[key], skipSystem)

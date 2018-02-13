@@ -1,7 +1,7 @@
 import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { toPlatformRuleSet, toPlatformSheet, applyTheme, deepMerge } from './index'
-import { MuiThemeContextTypes, MuiCascadingContextTypes, getDefaultTheme } from './theme'
+import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme } from './theme'
 import warning from 'warning'
 import { getAnimations } from './animation'
 
@@ -12,7 +12,7 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
   allNames[name] = true
 
   class Styled extends React.PureComponent<Prim5s.PropsX<R>> {
-    usedChildCascading: Prim5s.Sheets = {}
+    usedChildOverrides: Prim5s.Sheets = {}
     withParentContext: Prim5s.Sheet
     animations: Animation.Drivers<{}>
     theme: Prim5s.getTheme<R>
@@ -27,8 +27,8 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
 
       //if (options.name === 'MuiText') console.log(cacheItem)
 
-      //*** apply childCascading from context
-      const fromParentContext = context.childCascading && context.childCascading[name]
+      //*** apply childOverrides from context
+      const fromParentContext = context.childOverrides && context.childOverrides[name]
       this.withParentContext = fromParentContext ? deepMerges(false, {}, staticSheet, fromParentContext) : staticSheet // modify static sheet 
       for (const p in this.withParentContext) this.withParentContext[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
 
@@ -36,7 +36,7 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
       this.animations = getAnimations(staticSheet.$animations, this)
     }
 
-    getChildContext() { return { childCascading: this.usedChildCascading /*usedChildCascading is modified during Component render (where getRulesetWithSideEffect is called)*/ } }
+    getChildContext() { return { childOverrides: this.usedChildOverrides /*usedChildOverrides is modified during Component render (where getRulesetWithSideEffect is called)*/ } }
 
     componentWillReceiveProps() { this.animations.reset() }
 
@@ -52,11 +52,11 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
 
       //****************************  getRulesetWithSideEffect 
       // Could be called in <Component> render method to compute component styles. Side effects:
-      // - use sheet..$cascading to modify self sheet
-      // - sheet..$childCascading to modify children sheet (passed to children via context.childCascading) 
+      // - use sheet..$overrides to modify self sheet
+      // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
       const classesProp = toPlatformSheet(applyTheme(this.themeGetter, classesPropX as Prim5s.FromThemeValueOrCreator<R, Prim5s.PartialSheetX<R>>))
-      // calling getRulesetWithSideEffect signals which rulesets are used. So it can use their $cascading and $childCascading props to modify self sheet and child sheets
-      const mergeRulesetWithCascading = createRulesetWithCascadingMerger(classesProp, this.usedChildCascading)
+      // calling getRulesetWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
+      const mergeRulesetWithOverrides = createRulesetWithOverridesMerger(classesProp, this.usedChildOverrides)
 
       //const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as Prim5s.TRulesetX
       const className = toPlatformRuleSet(applyTheme(this.themeGetter, rulesetX))
@@ -64,7 +64,7 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
 
       const codeProps = {
         ...other, ...(window.isWeb ? $web : $native), theme,
-        flip, mergeRulesetWithCascading, animations,
+        flip, mergeRulesetWithOverrides, animations,
         classes: this.withParentContext, //all code component, for root lower priority than className and style. Classes are used by getRulesetWithSideEffect prop in Component.render
         className, //code root by means of className (web) or style (native)
         style: clearSystemProps(toPlatformRuleSet(applyTheme(this.themeGetter, style))), //code root by means of style (higher priority than className)
@@ -76,8 +76,8 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
       return <Component {...codeProps} />
     }
 
-    static contextTypes = { ...MuiThemeContextTypes, ...MuiCascadingContextTypes }
-    static childContextTypes = MuiCascadingContextTypes
+    static contextTypes = { ...MuiThemeContextTypes, ...MuiOverridesContextTypes }
+    static childContextTypes = MuiOverridesContextTypes
     static options = options
   }
   hoistNonReactStatics(Styled, Component as any)
@@ -116,26 +116,41 @@ const toPlatformEvents = ($web: Prim5s.OnPressAllWeb, $native: Prim5s.OnPressAll
 
 //****************************  getRulesetWithSideEffect
 // Could be called in <Component> render method to compute component styles. Side effects:
-// - use sheet..$cascading to modify self sheet
-// - sheet..$childCascading to modify children sheet (passed to children via context.childCascading) 
-const createRulesetWithCascadingMerger = (classesProp: Prim5s.Sheet, usedChildCascading: Prim5s.Sheets) => {
-  const usedCascading: Prim5s.Sheet = {}
-  const res: Prim5s.MergeRulesetWithCascading = (...rulesets/*all used rulesets*/) => {
-    rulesets.forEach(ruleset => { // acumulate $cascading and $childCascading
+// - use sheet..$overrides to modify self sheet
+// - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides)
+const createRulesetWithOverridesMerger = (classesProp: Prim5s.Sheet, usedChildOverrides: Prim5s.Sheets) => {
+  const usedOverrides: Prim5s.Sheet = {}
+  const res: Prim5s.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
+    let single = undefined //optimalization: rulesets contains ony not empty item
+    rulesets.forEach(ruleset => { // acumulate $overrides and $childOverrides
       if (!ruleset) return
-      mergeCascading(usedCascading, ruleset.$cascading)
-      mergeCascading(usedChildCascading, ruleset.$childCascading) //modify react context with child component overriding
+      if (single === undefined) single = ruleset //first not empty
+      else if (single !== null) single = null //second not empty
+      mergeOverrides(usedOverrides, ruleset.$overrides)
+      mergeOverrides(usedChildOverrides, ruleset.$childOverrides) //modify react context with child component overriding
     })
-    //apply used $cascading and classes prop
+    if (single === undefined) return {}
     const rulesetResult: typeof rulesets[0] = {}
-    rulesets.forEach(ruleset => {
-      if (!ruleset) return
-      deepMerges(true, rulesetResult,
-        ruleset, //ruleset, used in Component render
-        usedCascading[ruleset.$name], //modify it with used $cascading
-        classesProp && ruleset.$name && classesProp[ruleset.$name], //force using classes component property (it has hight priority)
-      )
-    })
+    if (single) {
+      //nothing to merge?
+      const other = [
+        single, // ruleset, used in Component render
+        usedOverrides[single.$name], //... modify it with used $overrides
+        classesProp && single.$name && classesProp[single.$name] //... and force using classes component property (it has hight priority)
+      ]
+      if (other.filter(s => !!s).length<=1) return single //otimalization: nothing to merge
+      deepMerges(true, rulesetResult, ...other)
+    }
+    //apply used $overrides and classes prop
+    else
+      rulesets.forEach(ruleset => {
+        if (!ruleset) return
+        deepMerges(true, rulesetResult,
+          ruleset, //ruleset, used in Component render
+          usedOverrides[ruleset.$name], //modify it with used $overrides
+          classesProp && ruleset.$name && classesProp[ruleset.$name], //force using classes component property (it has hight priority)
+        )
+      })
     return rulesetResult
   }
   return res
@@ -145,9 +160,9 @@ const createRulesetWithCascadingMerger = (classesProp: Prim5s.Sheet, usedChildCa
 // HELPERS
 //***************************************************************
 
-type TContext = Prim5s.MuiThemeContextValue & Prim5s.MuiCascadingContext
+type TContext = Prim5s.ThemeContextValue & Prim5s.OverridesContext
 
-//apply theme to sheet AND merge it with theme.cascading
+//apply theme to sheet AND merge it with theme.overrides
 const aplyThemeToSheet = (sheetOrCreator: Prim5s.SheetOrCreator, themerCreator: () => ThemeWithCache, name: string) => {
 
   if (typeof sheetOrCreator != 'function') return sheetOrCreator
@@ -170,7 +185,7 @@ const aplyThemeToSheet = (sheetOrCreator: Prim5s.SheetOrCreator, themerCreator: 
 }
 
 // merge named values
-const mergeCascading = (result, patches) => {
+const mergeOverrides = (result, patches) => {
   if (!patches) return
   for (const p in patches) {
     const patch = patches[p]; if (!patch) continue
@@ -180,6 +195,7 @@ const mergeCascading = (result, patches) => {
 }
 
 const deepMerges = (skipSystem: boolean, target, ...sources) => {
+  //if (!sources || !sources.find(s => !!s)) return target 
   sources.forEach(source => deepMerge(target, source, skipSystem))
   return target
 }

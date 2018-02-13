@@ -61,17 +61,17 @@ const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
     zIndex: 1
   },
   mobile: {
-    $cascading: {
+    $overrides: {
       closeButton: { display: 'none' },
     }
   },
   tablet: {
-    $cascading: {
+    $overrides: {
       backDrop: { display: 'none' },
     }
   },
   desktop: {
-    $cascading: {
+    $overrides: {
       closeButton: { display: 'none' },
       openButton: { display: 'none' },
       backDrop: { display: 'none' },
@@ -85,13 +85,13 @@ const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
 const btnStyle = {color: 'blue', padding: 10}
 
 const drawerLayout: Prim5s.CodeSFC<testAnimation.Shape> = props => {
-  const { classes, mergeRulesetWithCascading, theme, flip, children, style, className, animations, mobile, tablet, desktop, ...rest } = props
+  const { classes, mergeRulesetWithOverrides, theme, flip, children, style, className, animations, mobile, tablet, desktop, ...rest } = props
 
   const open = () => tablet ? animations.tablet.open() : animations.mobile.open()
   const close = () => tablet ? animations.tablet.close() : animations.mobile.close()
   const opened = tablet && animations.tablet.opened || mobile && animations.mobile.opened || desktop
 
-  const root = mergeRulesetWithCascading( // calling getRulesetWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
+  const root = mergeRulesetWithOverrides( // calling getRulesetWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
     classes.root,
     mobile && classes.mobile,
     tablet && classes.tablet,
@@ -99,18 +99,18 @@ const drawerLayout: Prim5s.CodeSFC<testAnimation.Shape> = props => {
     className,
   ) as ReactN.ViewStyle
 
-  const backDrop = mergeRulesetWithCascading(
+  const backDrop = mergeRulesetWithOverrides(
     classes.backDrop,
     mobile && animations.mobile.sheet.backDrop,
   ) as ReactN.ViewStyle
 
-  const drawer = mergeRulesetWithCascading(
+  const drawer = mergeRulesetWithOverrides(
     classes.drawer,
     mobile && animations.mobile.sheet.drawer,
     tablet && animations.tablet.sheet.drawer,
   ) as ReactN.ViewStyle
 
-  const content = mergeRulesetWithCascading(
+  const content = mergeRulesetWithOverrides(
     classes.content,
     tablet && animations.tablet.sheet.content,
   ) as ReactN.ViewStyle
@@ -122,11 +122,11 @@ const drawerLayout: Prim5s.CodeSFC<testAnimation.Shape> = props => {
       <Text style={{ marginTop:60 }}>{JSON.stringify(backDrop, null, 2)}</Text>
     </AnimatedView>
     <AnimatedView key={2} className={drawer}>
-      <Text className={mergeRulesetWithCascading(classes.closeButton, { ...btnStyle, textAlign: 'right' })} onClick={close} >CLOSE</Text>
+      <Text className={mergeRulesetWithOverrides(classes.closeButton, { ...btnStyle, textAlign: 'right' })} onClick={close} >CLOSE</Text>
       <Text style={{ marginTop: 60 }}>{JSON.stringify(drawer, null, 2)}</Text>
     </AnimatedView>
     <AnimatedView key={3} className={content}>
-      <View key={1} className={mergeRulesetWithCascading(classes.openButton, { flexDirection: 'row', display: opened ? 'none' : 'flex' })} >
+      <View key={1} className={mergeRulesetWithOverrides(classes.openButton, { flexDirection: 'row', display: opened ? 'none' : 'flex' })} >
         <Text onClick={open} className={{ ...btnStyle, alignSelf: 'flex-start' }}>OPEN</Text>
       </View>
       <Text style={{ marginTop: 120 }}>{JSON.stringify(content, null, 2)}'\n'{JSON.stringify(content.left, null, 2)}</Text>
