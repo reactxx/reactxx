@@ -4,7 +4,7 @@
   type Shape = Muix.OverwriteShape<{
     common: Prim5s.ShapeTexts<'root'>
     style: ReactN.TextStyle
-    props: Prim5s.OnClick
+    props: Prim5s.OnPressAllWeb
     propsNative: ReactN.TextProperties
   }>
 

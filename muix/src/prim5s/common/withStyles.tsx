@@ -48,7 +48,7 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
     render() {
       const { flip: flipProp, name } = options
       const { animations, theme } = this
-      const { classes: classesPropX, style, $web, $native, onClick, className: rulesetX, ...other } = this.props as Prim5s.PropsX & Prim5s.OnClick
+      const { classes: classesPropX, style, $web, $native, onPress, onLongPress, onPressIn, onPressOut, className: rulesetX, ...other } = this.props as Prim5s.PropsX & Prim5s.OnPressAllX
 
       //****************************  getRulesetWithSideEffect 
       // Could be called in <Component> render method to compute component styles. Side effects:
@@ -62,7 +62,7 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
       const className = toPlatformRuleSet(applyTheme(this.themeGetter, rulesetX))
       const flip = typeof flipProp === 'boolean' ? flipProp : (theme && theme.direction === 'rtl')
 
-      const newProps = {
+      const codeProps = {
         ...other, ...(window.isWeb ? $web : $native), theme,
         flip, mergeRulesetWithCascading, animations,
         classes: this.withParentContext, //all code component, for root lower priority than className and style. Classes are used by getRulesetWithSideEffect prop in Component.render
@@ -70,16 +70,10 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
         style: clearSystemProps(toPlatformRuleSet(applyTheme(this.themeGetter, style))), //code root by means of style (higher priority than className)
       } as Prim5s.CodeProps<R>
 
-      if (window.isWeb) {
-        const cl = ($web && ($web as any).onClick) || onClick
-        if (cl) newProps.onClick = cl
-      } else {
-        const cl = ($native && ($native as any).onPress) || onClick
-        newProps.onPress = cl
-      }
+      toPlatformEvents($web, $native as Prim5s.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
 
       //newProps.classes = this.codeClasses
-      return <Component {...newProps} />
+      return <Component {...codeProps} />
     }
 
     static contextTypes = { ...MuiThemeContextTypes, ...MuiCascadingContextTypes }
@@ -102,6 +96,22 @@ export default withStyles
 
 interface ThemeWithCache extends Prim5s.Theme {
   $sheetsCache?: Prim5s.Sheets
+}
+
+const toPlatformEvents = ($web: Prim5s.OnPressAllWeb, $native: Prim5s.OnPressAllNative, propsX: Prim5s.OnPressAllX, codeProps: Prim5s.CodeProps) => {
+  const { onPress, onLongPress, onPressIn, onPressOut } = propsX
+  if (window.isWeb) {
+    const cp = codeProps as Prim5s.CodePropsWeb
+    const cl = $web && $web.onClick || onPress; if (cl) cp.onClick = cl
+    const cl2 = $web && $web.onMouseDown || onPressIn; if (cl2) cp.onMouseDown = cl2
+    const cl3 = $web && $web.onMouseUp || onPressOut; if (cl3) cp.onMouseUp = cl3
+  } else {
+    const cp = codeProps as Prim5s.CodePropsNative
+    const cl = $native && $native.onPress || onPress; if (cl) cp.onPress = cl
+    const cl1 = $native && $native.onLongPress || onLongPress; if (cl1) cp.onLongPress = cl1
+    const cl2 = $native && $native.onPressIn || onPressIn; if (cl2) cp.onPressIn = cl2
+    const cl3 = $native && $native.onPressOut || onPressOut; if (cl3) cp.onPressOut = cl3
+  }
 }
 
 //****************************  getRulesetWithSideEffect

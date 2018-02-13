@@ -5,19 +5,19 @@ import { View as RNView, Text as RNText, ScrollView as RNScrollView, Animated, T
 import { MaterialCommunityIcons as RNIcon, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
-export const view: Prim5s.CodeSFCNative<Prim5s.ViewShape> = props => {
-  const { style, classes, className, mergeRulesetWithCascading, flip, theme, onPress, animations, ...rest } = props
+const anyView = (isAnim: boolean) => (props => {
+  const View = isAnim ? Animated.View : RNView
+  const { style, classes, className, mergeRulesetWithCascading, flip, theme, onPress, onLongPress, onPressIn, onPressOut, animations, ...rest } = props
   const rootStyle = mergeRulesetWithCascading(classes.root, className, style) as ReactN.ViewStyle
-  const res = <RNView style={rootStyle} {...rest} />
-  return onPress ? <TouchableWithoutFeedback onPress={onPress}>{res}</TouchableWithoutFeedback> : res
-}
+  const presses = onPress || onLongPress || onPressIn || onPressOut ? { onPress, onLongPress, onPressIn, onPressOut } : null
+  const res = <View style={rootStyle} {...rest} />
+  return presses ? <TouchableWithoutFeedback {...presses}>{res}</TouchableWithoutFeedback> : res
+}) as Prim5s.CodeSFCNative<Prim5s.ViewShape>
 
-export const animatedView: Prim5s.CodeSFCNative<Prim5s.ViewShape> = props => {
-  const { style, classes, className, mergeRulesetWithCascading, flip, theme, onPress, animations, ...rest } = props
-  const rootStyle = mergeRulesetWithCascading(classes.root, className, style) as ReactN.ViewStyle
-  const res = <Animated.View style={rootStyle} {...rest} />
-  return onPress ? <TouchableWithoutFeedback onPress={onPress}>{res}</TouchableWithoutFeedback> : res
-}
+
+export const view = anyView(false)
+
+export const animatedView = anyView(true)
 
 export const text: Prim5s.CodeSFCNative<Prim5s.TextShape> = props => {
   const { style, classes, className, mergeRulesetWithCascading, flip, theme, animations, ...rest } = props
@@ -29,7 +29,7 @@ export const scrollView: Prim5s.CodeSFCNative<Prim5s.ScrollViewShape> = props =>
   const { style, classes, className, mergeRulesetWithCascading, flip, theme, animations, ...rest } = props
   const rootStyle = mergeRulesetWithCascading(classes.root, className, style) as ReactN.ScrollViewStyle
   const containerStyle = mergeRulesetWithCascading(classes.container) as ReactN.ViewStyle
-  return <RNScrollView style={rootStyle} contentContainerStyle={containerStyle} {...rest}/>
+  return <RNScrollView style={rootStyle} contentContainerStyle={containerStyle} {...rest} />
 }
 
 export const icon: Prim5s.CodeSFCNative<Prim5s.IconShape> = props => {

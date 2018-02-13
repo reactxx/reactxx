@@ -178,7 +178,7 @@
     <TypeScriptCompile Include="src\prim5s\web\index.ts" />
     <TypeScriptCompile Include="src\primitives\common\Typography\Typography.tsx" />
     <TypeScriptCompile Include="src\primitives\native\for-components.tsx" />
-    <TypeScriptCompile Include="src\prim5s\typings\primitives.d.ts" />
+    <TypeScriptCompile Include="src\primitives\typings\primitives.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\Text-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\View-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\Typography-d.d.ts" />
@@ -199,6 +199,8 @@
     <TypeScriptCompile Include="src\test\common\animation\test-animation-d.d.ts" />
     <TypeScriptCompile Include="src\test\common\components\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\test\common\components\button-demo.tsx" />
+    <TypeScriptCompile Include="src\test\common\prim5s\doc\home-d.d.ts" />
+    <TypeScriptCompile Include="src\test\common\prim5s\doc\home.tsx" />
     <TypeScriptCompile Include="src\test\common\prim5s\index.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\index.tsx" />

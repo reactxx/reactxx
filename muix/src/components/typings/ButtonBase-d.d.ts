@@ -5,7 +5,7 @@ declare namespace MuixButtonBase {
   type Shape = Muix.OverwriteShape<{
     common: Prim5s.ShapeViews<'root'>
     native: Prim5s.ShapeViews<'ripple'>
-    props: Muix.ButtonBaseProps & Prim5s.OnClick
+    props: Muix.ButtonBaseProps & Prim5s.OnPressAllWeb
     propsNative: ReactN.TouchableOpacityProperties
     web: string
   }>

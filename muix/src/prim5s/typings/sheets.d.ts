@@ -1,8 +1,13 @@
 ﻿declare namespace Prim5s {
 
   interface RNIconStyle { color?: string; fontSize?: number }
-  type OnClick = { onClick?: React.MouseEventHandler<Element> }
-  type OnPress = { onPress?: () => void }
+
+  type MouseEvent = (event?: React.MouseEvent<Element>) => void
+  interface OnPressX { onPress?: MouseEvent; onLongPress: () => void }
+  interface OnPressAllX extends OnPressX { onPressIn?: MouseEvent; onPressOut?: MouseEvent }
+  interface OnPressAllWeb { onClick?: React.MouseEventHandler<Element>; onMouseDown?: React.MouseEventHandler<Element>; onMouseUp?: React.MouseEventHandler<Element> }
+  interface OnPressAllNative { onPress?: () => void; onPressIn?: () => void; onPressOut?: () => void; onLongPress: () => void }
+
   interface WithStylesOptionsNew {
     name: keyof SheetsX
     flip?: boolean
@@ -133,7 +138,7 @@
   //******************** cross platform Component props (Component is created by 'withStyles' ) 
 
   type PropsX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>, {
-    style?: FromThemeValueOrCreator<R, RulesetX<getStyle<R>>> //cross platform style
+    style?: FromThemeValueOrCreator<R, RulesetX<getStyle<R>>> | RulesetWeb | getStyle<R> //cross platform style
     $web?: Partial<getPropsWeb<R>> //web specific style
     $native?: Partial<getPropsNative<R>> //native specific style
     classes?: FromThemeValueOrCreator<R, PartialSheetX<R> | PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
@@ -147,19 +152,19 @@
   //******************** Component's code (passed to withStyles)
 
   // component code for web
-  type CodePropsWeb<R extends Shape> = Overwrite<getProps<R> & getPropsWeb<R>, {
+  type CodePropsWeb<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsWeb<R>, {
     className: RulesetWeb
     classes: SheetWeb<R>; style: RulesetWeb
     theme: getTheme<R>
     flip: boolean
     mergeRulesetWithCascading: MergeRulesetWithCascadingWeb
     animations: Animation.DriversWeb<getAnimation<R>>
-  } & OnClick>
+  } & OnPressAllWeb>
   type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
 
   // component code for native
-  type CodePropsNative<R extends Shape> = Overwrite<getProps<R> & getPropsNative<R>, {
+  type CodePropsNative<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsNative<R>, {
     className: getStyle<R>
     classes: SheetNative<R>
     style: getStyle<R>
@@ -167,7 +172,7 @@
     flip: boolean
     mergeRulesetWithCascading: MergeRulesetWithCascadingNative
     animations: Animation.DriversNative<getAnimation<R>>
-  } & OnPress>
+  } & OnPressAllNative>
   type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
   type CodeComponentNative<R extends Shape> = React.ComponentClass<CodePropsNative<R>>
 
@@ -175,14 +180,14 @@
   type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
 
   //some code for components could be shared for web and native
-  type CodeProps<R extends Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), {
+  type CodeProps<R extends Shape = Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), {
     className: RulesetWeb | getStyle<R>
     classes: Sheet<R>
     style: RulesetWeb | getStyle<R>
     theme: getTheme<R>; flip: boolean
     mergeRulesetWithCascading: MergeRulesetWithCascading
     animations: Animation.Drivers<getAnimation<R>>
-  } & OnPress & OnClick>
+  } & (OnPressAllNative | OnPressAllWeb)>
   type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
 
