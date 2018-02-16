@@ -7,7 +7,7 @@ export const textSheet = sheetCreator<Prim5s.TextShape>({
     $web: {
       whiteSpace: 'pre-wrap',
       wordWrap: 'break-word',
-      [`& .${Prim5s.CompNames.Text}`]: { //high level Text is block element, inner Texts are inline elements. <Prim5s.CompNames.Text> is className for Text component root div element.
+      [`& .${Prim5s.CompNames.Text}`]: { //high level Text is block element, inner Texts are inline elements. <Prim5s.CompNames.Text> is className for Text component root div.
         display: 'inline',
       },
     },
@@ -20,7 +20,7 @@ export const textSheet = sheetCreator<Prim5s.TextShape>({
       whiteSpace: 'nowrap'
     }
   },
-  pressable: { //web only
+  pressable: { //web only ruleset
     cursor: 'pointer'
   },
 })
