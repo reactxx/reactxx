@@ -1,4 +1,4 @@
-import { AnimationDriver } from 'muix-prim5s' //NATIVE (npm config) or WEB (jspm config) driver
+import { AnimationDriver } from 'reactxx' //NATIVE (npm config) or WEB (jspm config) driver
 import warning from 'warning'
 
 //export type AnimationsRecord<T extends Animation.Shapes> = {[P in keyof T]: AnimationLow<T[P]> }
@@ -33,9 +33,6 @@ export abstract class DriverLow<T extends Animation.Shape> implements Animation.
   $config: Animation.AnimationConfig
   opened = false
   set(isOpen: boolean) {
-    //if (isOpen === this.opened) return
-    //this.opened = isOpen
-    //if (isOpen) this.open(); else this.close()
     this.animations.reset(this)
     this.doOpen(isOpen)
   }
@@ -45,7 +42,6 @@ export abstract class DriverLow<T extends Animation.Shape> implements Animation.
   sheet: Animation.Sheet<T>
   reset() { }
   abstract doOpen(toOpened: boolean) //platform specific action: forceUpdate for web, Animated.value.setValue for native
-  //reset() { this.opened = this.sheet.$opened }
 }
 
 export const getGaps = (modifier: string, $duration: number) => {

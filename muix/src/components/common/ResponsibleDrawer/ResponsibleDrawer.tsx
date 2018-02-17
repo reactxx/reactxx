@@ -63,7 +63,7 @@ export const sheet = sheetCreator<MuixResponsibleDrawer.Shape>(({ typographyX: t
   },
 }))
 
-class ResponsiveDrawer extends React.Component<Prim5s.CodeProps<MuixResponsibleDrawer.Shape>> {
+class ResponsiveDrawer extends React.Component<ReactXX.CodeProps<MuixResponsibleDrawer.Shape>> {
   state = {
     mobileOpen: false,
   }

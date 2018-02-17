@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, AppContainer } from 'muix-prim5s'
+import { Text, AppContainer } from 'reactxx'
 
 const AppNoTheme: React.SFC = props => <Text className={{ color: 'red', fontWeight: 'normal' }} style={{ fontWeight: 'bold' }} classes={{ root: { textDecoration: 'underline', color: 'blue' } }}>
   red, bold, underline{' '}

@@ -12,27 +12,27 @@ const anyView = (isAnim: boolean) => (props => {
   const presses = onPress || onLongPress || onPressIn || onPressOut ? { onPress, onLongPress, onPressIn, onPressOut } : null
   const res = <View style={rootStyle} {...rest} />
   return presses ? <TouchableWithoutFeedback {...presses}>{res}</TouchableWithoutFeedback> : res
-}) as Prim5s.CodeSFCNative<Prim5s.ViewShape>
+}) as ReactXX.CodeSFCNative<ReactXX.ViewShape>
 
 
 export const view = anyView(false)
 
 export const animatedView = anyView(true)
 
-export const text: Prim5s.CodeSFCNative<Prim5s.TextShape> = props => {
+export const text: ReactXX.CodeSFCNative<ReactXX.TextShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, flip, theme, animations, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.TextStyle
   return <RNText style={rootStyle} {...rest} />
 }
 
-export const scrollView: Prim5s.CodeSFCNative<Prim5s.ScrollViewShape> = props => {
+export const scrollView: ReactXX.CodeSFCNative<ReactXX.ScrollViewShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, flip, theme, animations, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.ScrollViewStyle
   const containerStyle = mergeRulesetWithOverrides(classes.container) as ReactN.ViewStyle
   return <RNScrollView style={rootStyle} contentContainerStyle={containerStyle} {...rest} />
 }
 
-export const icon: Prim5s.CodeSFCNative<Prim5s.IconShape> = props => {
+export const icon: ReactXX.CodeSFCNative<ReactXX.IconShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, flip, theme, animations, data, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.TextStyle
   return <RNIcon name={data as MaterialCommunityIconsProps['name']} style={[rootStyle]} {...rest} />

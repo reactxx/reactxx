@@ -3,29 +3,29 @@ import PropTypes from 'prop-types'
 import warning from 'warning'
 
 //create platform specific sheet from cross platform one
-export const sheetCreator = <R extends Prim5s.Shape>(sheetXCreator: Prim5s.FromThemeValueOrCreator<R, Prim5s.SheetX<R>>) => {
-  if (typeof sheetXCreator === 'function') return (theme => toPlatformSheet(applyTheme(theme, sheetXCreator))) as Prim5s.SheetCreator<R>
-  return toPlatformSheet(sheetXCreator) as Prim5s.Sheet<R>
+export const sheetCreator = <R extends ReactXX.Shape>(sheetXCreator: ReactXX.FromThemeValueOrCreator<R, ReactXX.SheetX<R>>) => {
+  if (typeof sheetXCreator === 'function') return (theme => toPlatformSheet(applyTheme(theme, sheetXCreator))) as ReactXX.SheetCreator<R>
+  return toPlatformSheet(sheetXCreator) as ReactXX.Sheet<R>
 }
 
 //create platform specific ruleset from cross platform one
-export const toPlatformRuleSet = (style: Prim5s.RulesetX) => {
+export const toPlatformRuleSet = (style: ReactXX.RulesetX) => {
   if (!style) return null
   const isNative = !window.isWeb
   if (!style.$web && !style.$native && !style.$overrides && !style.$childOverrides) return style //optimalization
   const { $web, $native, $overrides, $childOverrides, ...rest } = style
   const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $childOverrides: toPlatformSheets(null, $childOverrides) }
   if (!res.$overrides) delete res.$overrides; if (!res.$childOverrides) delete res.$childOverrides //remove NULL or UNDEFINED
-  return res as Prim5s.Ruleset 
+  return res as ReactXX.Ruleset 
 }
 
-export const applyTheme = <T>(theme: Prim5s.Theme | (() => Prim5s.Theme), valueOrCreator: Prim5s.FromThemeValueOrCreator<Prim5s.Shape, T>) =>
+export const applyTheme = <T>(theme: ReactXX.Theme | (() => ReactXX.Theme), valueOrCreator: ReactXX.FromThemeValueOrCreator<ReactXX.Shape, T>) =>
   typeof valueOrCreator === 'function' ? valueOrCreator(typeof theme === 'function' ? theme() : theme) : valueOrCreator
 
 //create platform specific sheet from cross platform one
-export const toPlatformSheet = (sheet: Prim5s.PartialSheetX<Prim5s.Shape>) => {
+export const toPlatformSheet = (sheet: ReactXX.PartialSheetX<ReactXX.Shape>) => {
   if (typeof sheet !== 'object') return sheet
-  const res: Prim5s.Sheet = { }
+  const res: ReactXX.Sheet = { }
   for (const p in sheet) {
     if (p === '$animations') {
       const animSrc = sheet[p]
@@ -38,9 +38,9 @@ export const toPlatformSheet = (sheet: Prim5s.PartialSheetX<Prim5s.Shape>) => {
 }
 
 //create platform specific sheets from cross platform one
-const toPlatformSheets = (theme:Prim5s.Theme, sheets: Prim5s.FromThemeValueOrCreator<Prim5s.Shape, Prim5s.SheetsX>) => {
+const toPlatformSheets = (theme:ReactXX.Theme, sheets: ReactXX.FromThemeValueOrCreator<ReactXX.Shape, ReactXX.SheetsX>) => {
   if (!sheets) return null
-  const result: Prim5s.Sheets = {}
+  const result: ReactXX.Sheets = {}
   for (const p in applyTheme(theme, sheets)) result[p] = toPlatformSheet(sheets[p])
   return result
 }

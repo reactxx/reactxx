@@ -7,12 +7,12 @@ import muiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 export const MuiThemeProviderInner = muiThemeProvider as any as React.ComponentType<Muix.IMuiThemeProps>
 
 import shadowsStrings from 'material-ui/styles/shadows'
-export const shadows = shadowsStrings.map(s => ({ boxShadow: s } as Prim5s.commonViewRuleset))
+export const shadows = shadowsStrings.map(s => ({ boxShadow: s } as ReactXX.commonViewRuleset))
 
 import { toPlatformSheetX, toPlatformRuleSetX } from '../common/index'
 
-export const toPlatformRuleSet = (style: Prim5s.RulesetX) => toPlatformRuleSetX(style, false) as React.CSSProperties
-export const toPlatformSheet = <R extends Muix.Shape>(rules: Prim5s.PartialSheetX<R>) => toPlatformSheetX(rules, false) as Prim5s.SheetWeb<R>
+export const toPlatformRuleSet = (style: ReactXX.RulesetX) => toPlatformRuleSetX(style, false) as React.CSSProperties
+export const toPlatformSheet = <R extends Muix.Shape>(rules: ReactXX.PartialSheetX<R>) => toPlatformSheetX(rules, false) as ReactXX.SheetWeb<R>
 
 export { clearSystemProps, sheetCreator, default as createMuiTheme, AppContainerProps, classesToPlatformSheet, getDefaultTheme, MuiThemeContextTypes } from '../common/index'
 

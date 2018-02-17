@@ -1,13 +1,14 @@
 import { sheetCreator } from '../common/index'
 import withStyles from '../common/withStyles'
-import { text, view, icon, scrollView } from 'muix-prim5s' //import platform specific component code
+import { text, view, icon, scrollView } from 'reactxx' //import platform specific component code
 
-export const textSheet = sheetCreator<Prim5s.TextShape>({
+export const textSheet = sheetCreator<ReactXX.TextShape>({
   root: {
     $web: {
       whiteSpace: 'pre-wrap',
+      //backgroundColor:'white',
       wordWrap: 'break-word',
-      [`& .${Prim5s.CompNames.Text}`]: { //high level Text is block element, inner Texts are inline elements. <Prim5s.CompNames.Text> is className for Text component root div.
+      [`& .${ReactXX.CompNames.Text}`]: { //high level Text is block element, inner Texts are inline elements. <ReactXX.CompNames.Text> is className for Text component root div.
         display: 'inline',
       },
     },
@@ -32,26 +33,28 @@ const webViewRuleset = {
   flexBasis: 'auto',
   flexShrink: 0,
 
+  //backgroundColor: 'white',
   position: 'relative',
-} as Prim5s.RulesetWeb
+} as ReactXX.RulesetWeb
 
-export const viewSheet = sheetCreator<Prim5s.ViewShape>({
+export const viewSheet = sheetCreator<ReactXX.ViewShape>({
   root: {
     $web: webViewRuleset
   }
 })
 
-export const iconSheet = sheetCreator<Prim5s.IconShape>({
+export const iconSheet = sheetCreator<ReactXX.IconShape>({
   root: {
     $web: {
       fill: 'currentColor',
+      fontSize: 24,
     }
   }
 })
 
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
-export const scrollViewSheet = sheetCreator<Prim5s.ScrollViewShape>({
+export const scrollViewSheet = sheetCreator<ReactXX.ScrollViewShape>({
   root: {
     $web: {
       ...webViewRuleset,
@@ -83,8 +86,13 @@ export const scrollViewSheet = sheetCreator<Prim5s.ScrollViewShape>({
   }
 })
 
-export const Text = withStyles<Prim5s.TextShape>(textSheet, { name: Prim5s.CompNames.Text })(text)
-export const View = withStyles<Prim5s.ViewShape>(viewSheet, { name: Prim5s.CompNames.View })(view)
-export const AnimatedView = withStyles<Prim5s.AnimatedViewShape>(viewSheet, { name: Prim5s.CompNames.AnimatedView })(view)
-export const Icon = withStyles<Prim5s.IconShape>(iconSheet, { name: Prim5s.CompNames.Icon })(icon)
-export const ScrollView = withStyles<Prim5s.ScrollViewShape>(scrollViewSheet, { name: Prim5s.CompNames.ScrollView })(scrollView)
+
+export const xxxx = withStyles<ReactXX.TextShape>(textSheet, { name: ReactXX.CompNames.Text })
+
+
+
+export const Text = withStyles<ReactXX.TextShape>(textSheet, { name: ReactXX.CompNames.Text })(text)
+export const View = withStyles<ReactXX.ViewShape>(viewSheet, { name: ReactXX.CompNames.View })(view)
+export const AnimatedView = withStyles<ReactXX.AnimatedViewShape>(viewSheet, { name: ReactXX.CompNames.AnimatedView })(view)
+export const Icon = withStyles<ReactXX.IconShape>(iconSheet, { name: ReactXX.CompNames.Icon })(icon)
+export const ScrollView = withStyles<ReactXX.ScrollViewShape>(scrollViewSheet, { name: ReactXX.CompNames.ScrollView })(scrollView)

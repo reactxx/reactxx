@@ -12,8 +12,8 @@ import getShadows from 'muix-shadows'
 
 export { default as createTypography } from '../common/createTypography'
 
-export const toPlatformRuleSet = <T extends Prim5s.RulesetNative>(style: Prim5s.RulesetX<T>) => toPlatformRuleSetX(style, true) as T
-export const toPlatformSheet = <R extends Muix.Shape>(rules: Prim5s.PartialSheetX<R>) => toPlatformSheetX(rules, true) as Prim5s.SheetNative<R>
+export const toPlatformRuleSet = <T extends ReactXX.RulesetNative>(style: ReactXX.RulesetX<T>) => toPlatformRuleSetX(style, true) as T
+export const toPlatformSheet = <R extends Muix.Shape>(rules: ReactXX.PartialSheetX<R>) => toPlatformSheetX(rules, true) as ReactXX.SheetNative<R>
 
 //const round = (value: number) => Math.round(value * 1e5) / 1e5
 //const shadow = (deep: number) => ({

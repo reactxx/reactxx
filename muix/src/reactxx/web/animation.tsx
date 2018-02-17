@@ -18,7 +18,7 @@ export class Driver<T extends Animation.Shape> extends DriverLow<T> implements A
       const pairs: Animation.RuleSetX<ReactN.TextProperties> = sheet[propsName]
       const transformPairs = pairs.transform
 
-      const rulesets: Prim5s.RulesetWeb[] = [{}, {}], transforms = ['', ''], range = [0, 1], transitions0 = [], transitions1 = []
+      const rulesets: ReactXX.RulesetWeb[] = [{}, {}], transforms = ['', ''], range = [0, 1], transitions0 = [], transitions1 = []
 
       const addTransformString = (pair, modifier: string) => {
         range.forEach(idx => rulesets[idx]['transform'] = pair[idx])
@@ -77,10 +77,10 @@ export class Driver<T extends Animation.Shape> extends DriverLow<T> implements A
   doOpen(opened: boolean) {
     const { $delay, $duration } = this.$config
     if (this.runningTimer) clearTimeout(this.runningTimer)
+    this.opened = opened
     this.runningTimer = setTimeout(() => {
       delete this.runningTimer
-      this.opened = opened
-      this.animations.statefullComponent.forceUpdate()
+      //this.animations.statefullComponent.forceUpdate()
     }, $delay + $duration)
     this.sheet = this.bothClassName[opened ? 1 : 0]
     this.animations.statefullComponent.forceUpdate()

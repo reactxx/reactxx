@@ -50,9 +50,9 @@ interface ITransition {
   setOpened(isOpen?: boolean)
 }
 
-type Animation<T extends Prim5s.RulesetNative> = Prim5s.RulesetX<T> & { $easing?: string, $duration?: number, $delay?: number }
+type Animation<T extends ReactXX.RulesetNative> = ReactXX.RulesetX<T> & { $easing?: string, $duration?: number, $delay?: number }
 
-const transitionCreate = (par: (theme: Muix.Theme) => Prim5s.RulesetX<ReactN.ViewStyle> & { $easing?: string, $duration?: number, $delay?: number }) => null as ITransition
+const transitionCreate = (par: (theme: Muix.Theme) => ReactXX.RulesetX<ReactN.ViewStyle> & { $easing?: string, $duration?: number, $delay?: number }) => null as ITransition
 
 const transition1 = transitionCreate(
   theme => ({

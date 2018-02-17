@@ -1,5 +1,5 @@
 ﻿{
-  "compileOnSave": false,
+  "compileOnSave": true,
   "compilerOptions": {
     "target": "es5",
     "module": "system",
@@ -19,10 +19,10 @@
 
       "muix-animation": [ "src/animation/web/index" ],
 
-      "muix-primitives": [ "src/primitives/v/index" ],
-      "muix-prim5s": [ "src/prim5s/web/index" ],
+      "muix-primitives": [ "src/primitives/web/index" ],
+      "reactxx": [ "src/reactxx/web/index" ],
 
-      "muix-components/*": [ "src/components/v/*" ],
+      "muix-components/*": [ "src/components/web/*" ],
       "test/*": [ "src/test/*" ]
     },
 

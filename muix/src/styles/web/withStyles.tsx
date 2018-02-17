@@ -20,11 +20,11 @@ jss.options.insertionPoint = 'insertion-point-jss'
 
 export const AppContainer: React.SFC<AppContainerProps> = props => <JssProvider jss={jss}><MuiThemeProvider theme={createMuiTheme(props.themeOptions)}>{props.children}</MuiThemeProvider></JssProvider>
 
-type webKeys<R extends Muix.Shape> = Prim5s.getWeb<R> | keyof Prim5s.getCommon<R>
+type webKeys<R extends Muix.Shape> = ReactXX.getWeb<R> | keyof ReactXX.getCommon<R>
 
-export const muiCompatible = <R extends Muix.Shape>(Component: React.ComponentType<Prim5s.getPropsWeb<R>>) => {
-  const Styled: Prim5s.SFCX<R> = (props, context: Muix.MuiThemeContextValue) => {
-    const { classes: _classes, style, $web, $native, onClick, className: rulesetX, ...rest } = props as Prim5s.PropsX<Muix.Shape> & Prim5s.OnPressAllWeb 
+export const muiCompatible = <R extends Muix.Shape>(Component: React.ComponentType<ReactXX.getPropsWeb<R>>) => {
+  const Styled: ReactXX.SFCX<R> = (props, context: Muix.MuiThemeContextValue) => {
+    const { classes: _classes, style, $web, $native, onClick, className: rulesetX, ...rest } = props as ReactXX.PropsX<Muix.Shape> & ReactXX.OnPressAllWeb 
 
     const click = ($web && $web.onClick) || onClick
 
@@ -32,8 +32,8 @@ export const muiCompatible = <R extends Muix.Shape>(Component: React.ComponentTy
 
     const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as React.CSSProperties
 
-    const classes = sheetToClassSheet((classesToPlatformSheet(theme, _classes as Muix.ThemeValueOrCreator<Prim5s.PartialSheetX<R>>)) as Prim5s.SheetWeb<R>)
-    const webProps = { ...rest, ...$web, style: toPlatformRuleSet(style), classes, onClick: click, theme, className: rulesetToClassNames(cn) } as Prim5s.getPropsWeb<R>
+    const classes = sheetToClassSheet((classesToPlatformSheet(theme, _classes as Muix.ThemeValueOrCreator<ReactXX.PartialSheetX<R>>)) as ReactXX.SheetWeb<R>)
+    const webProps = { ...rest, ...$web, style: toPlatformRuleSet(style), classes, onClick: click, theme, className: rulesetToClassNames(cn) } as ReactXX.getPropsWeb<R>
     return <Component {...webProps} />
   }
   Styled.contextTypes = MuiThemeContextTypes

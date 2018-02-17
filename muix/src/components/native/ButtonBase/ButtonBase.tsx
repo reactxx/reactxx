@@ -27,7 +27,7 @@ export interface ButtonBaseStyles {
 
 //let t: Muix.CodePropsNative<MuixButtonBase.Shape>
 
-export class RippleEffect extends React.Component<ButtonBaseStyles & Partial<Prim5s.CodePropsNative<MuixButtonBase.Shape>>> { 
+export class RippleEffect extends React.Component<ButtonBaseStyles & Partial<ReactXX.CodePropsNative<MuixButtonBase.Shape>>> { 
 
   state: { active?: boolean } = {}
   scaleValue = new Animated.Value(minRippleSize)
@@ -104,10 +104,10 @@ export class RippleEffect extends React.Component<ButtonBaseStyles & Partial<Pri
 
 }
 
-let t: Prim5s.CodePropsNative<MuixButtonBase.Shape>
+let t: ReactXX.CodePropsNative<MuixButtonBase.Shape>
 
 
-const buttonBase: Prim5s.CodeSFCNative<MuixButtonBase.Shape> = props => {
+const buttonBase: ReactXX.CodeSFCNative<MuixButtonBase.Shape> = props => {
   const { style, classes, mergeRulesetWithOverrides, className, animations, ...rest } = props
   const viewStyle = mergeRulesetWithOverrides(classes.root, className) as ReactN.ViewStyle
   const rippleStyle = mergeRulesetWithOverrides(classes.ripple) as ReactN.ViewStyle

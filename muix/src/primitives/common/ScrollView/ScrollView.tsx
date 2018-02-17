@@ -10,7 +10,7 @@ export const sheet = sheetCreator<MuixScrollView.Shape>(() => ({
   
 }))
 
-const scrollView: Prim5s.CodeSFC<MuixScrollView.Shape> = props => {
+const scrollView: ReactXX.CodeSFC<MuixScrollView.Shape> = props => {
   const { classes, theme, flip, mergeRulesetWithOverrides, children, style, className, animations, ...rest } = props
   return <ScrollViewX
     className={mergeRulesetWithOverrides(classes.root, className)} contentContainerStyle={mergeRulesetWithOverrides(classes.contentContainerStyle)}

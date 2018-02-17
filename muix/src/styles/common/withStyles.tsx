@@ -5,16 +5,16 @@ import { toPlatformRuleSet, toPlatformSheet, clearSystemProps } from 'muix-style
 import warning from 'invariant'
 import { getAnimations } from 'muix-animation'
 
-const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, options: Muix.WithStylesOptionsNew) => (Component: Prim5s.CodeComponentType<R>) => {
+const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, options: Muix.WithStylesOptionsNew) => (Component: ReactXX.CodeComponentType<R>) => {
 
-  class Styled extends React.PureComponent<Prim5s.PropsX<R>> {
-    usedChildOverrides: Prim5s.Sheets = {}
-    codeClasses: Prim5s.Sheet<R>
+  class Styled extends React.PureComponent<ReactXX.PropsX<R>> {
+    usedChildOverrides: ReactXX.Sheets = {}
+    codeClasses: ReactXX.Sheet<R>
     animations: Animation.Drivers<{ }>
     theme: Muix.Theme
     cacheItem: Muix.SheetCacheItem
 
-    constructor(props: Prim5s.PropsX<R>, context: TContext) {
+    constructor(props: ReactXX.PropsX<R>, context: TContext) {
       super(props, context)
 
       const theme = this.theme = context.theme || getDefaultTheme()
@@ -45,15 +45,15 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
     render() {
       const { flip: flipProp, name } = options
       const { theme, cacheItem, animations } = this
-      const { classes: classesPropX, style, $web, $native, onClick, className: rulesetX, ...other } = this.props as Prim5s.PropsX<Muix.Shape> & Prim5s.OnPressAllWeb
+      const { classes: classesPropX, style, $web, $native, onClick, className: rulesetX, ...other } = this.props as ReactXX.PropsX<Muix.Shape> & ReactXX.OnPressAllWeb
 
       //****************************  getRulesetWithSideEffect
       // Could be called in <Component> render method to compute component styles. Side effects:
       // - use sheet..$overrides to modify self sheet
       // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
-      const classesProp = classesToPlatformSheet(theme, classesPropX as Muix.ThemeValueOrCreator<Prim5s.PartialSheetX<R>>)
+      const classesProp = classesToPlatformSheet(theme, classesPropX as Muix.ThemeValueOrCreator<ReactXX.PartialSheetX<R>>)
       const usedOverrides = {}
-      const mergeRulesetWithOverrides: Prim5s.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => { // calling getRulesetWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
+      const mergeRulesetWithOverrides: ReactXX.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => { // calling getRulesetWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
         rulesets.forEach(ruleset => { // acumulate $overrides and $childOverrides
           if (!ruleset) return
           mergeOverrides(usedOverrides, ruleset.$overrides)
@@ -72,11 +72,11 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
         return rulesetResult
       }
 
-      const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as Prim5s.RulesetX
+      const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as ReactXX.RulesetX
       const className = toPlatformRuleSet(cn)
       const flip = typeof flipProp === 'boolean' ? flipProp : theme.direction === 'rtl'
 
-      const newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style)), classes: this.codeClasses, className, flip, mergeRulesetWithOverrides, animations } as Prim5s.CodeProps<R> & {onClick, onPress}
+      const newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style)), classes: this.codeClasses, className, flip, mergeRulesetWithOverrides, animations } as ReactXX.CodeProps<R> & {onClick, onPress}
       if (window.isWeb) {
         const cl = ($web && ($web as any).onClick) || onClick
         if (cl) newProps.onClick = cl
@@ -95,7 +95,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
   }
   hoistNonReactStatics(Styled, Component as any)
   const styled: any = Styled
-  return styled as React.ComponentClass<Prim5s.PropsX<R>>
+  return styled as React.ComponentClass<ReactXX.PropsX<R>>
 }
 
 export default withStyles
@@ -109,9 +109,9 @@ type TContext = Muix.MuiThemeContextValue & Muix.MuiOverridesContext
 
 //apply theme to sheet AND merge it with theme.overrides
 const aplyThemeToSheet = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>, theme: Muix.Theme, name: string) => {
-  const overrides = (theme.overrides && name && theme.overrides[name]) as Prim5s.Sheet<R>
+  const overrides = (theme.overrides && name && theme.overrides[name]) as ReactXX.Sheet<R>
   const styles = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator)
-  const res: Prim5s.Sheet<R> = overrides ? deepMerges(false, {}, styles, overrides) : styles //deepMerge only when needed
+  const res: ReactXX.Sheet<R> = overrides ? deepMerges(false, {}, styles, overrides) : styles //deepMerge only when needed
   return { sheetOrCreator, fromTheme: res } as Muix.SheetCacheItem
 }
 

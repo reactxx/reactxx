@@ -8,13 +8,13 @@
   }
 
   type Shape = Muix.OverwriteShape<{
-    common: Prim5s.ShapeTexts<'root' | 'colorSecondary' | 'colorAction' | 'colorDisabled' | 'colorError' | 'colorPrimary'>
+    common: ReactXX.ShapeTexts<'root' | 'colorSecondary' | 'colorAction' | 'colorDisabled' | 'colorError' | 'colorPrimary'>
     style: ReactN.TextStyle
-    props: IconProperties & Prim5s.OnPressAllWeb
+    props: IconProperties & ReactXX.OnPressAllWeb
   }>
 }
 
-declare namespace Prim5s {
+declare namespace ReactXX {
   interface SheetsX {
     MuiIcon?: Muix.SheetXOrCreator<MuixIcon.Shape>
   }

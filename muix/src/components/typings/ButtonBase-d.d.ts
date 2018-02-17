@@ -3,17 +3,17 @@
 declare namespace MuixButtonBase {
 
   type Shape = Muix.OverwriteShape<{
-    common: Prim5s.ShapeViews<'root'>
-    native: Prim5s.ShapeViews<'ripple'>
-    props: Muix.ButtonBaseProps & Prim5s.OnPressAllWeb
+    common: ReactXX.ShapeViews<'root'>
+    native: ReactXX.ShapeViews<'ripple'>
+    props: Muix.ButtonBaseProps & ReactXX.OnPressAllWeb
     propsNative: ReactN.TouchableOpacityProperties
     web: string
   }>
 }
 
-declare namespace Prim5s {
+declare namespace ReactXX {
   interface SheetsX {
-    MuiButtonBase?: Prim5s.PartialSheetX<Shape>
+    MuiButtonBase?: ReactXX.PartialSheetX<Shape>
   }
 }
 

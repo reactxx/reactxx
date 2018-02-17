@@ -20,7 +20,7 @@
       "muix-animation": [ "src/animation/web/index" ],
 
       "muix-primitives": [ "src/primitives/web/index" ],
-      "muix-prim5s": [ "src/prim5s/web/index" ],
+      "reactxx": [ "src/reactxx/web/index" ],
 
       "muix-components/*": [ "src/components/web/*" ],
       "test/*": [ "src/test/*" ]

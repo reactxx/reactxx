@@ -1,4 +1,4 @@
-declare namespace Prim5s {
+declare namespace ReactXX {
 
   const enum CompNames {
     Text = 'BaseText',

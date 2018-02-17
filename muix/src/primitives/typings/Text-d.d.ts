@@ -2,15 +2,15 @@
   type ClassKeyText = 'root'
 
   type Shape = Muix.OverwriteShape<{
-    common: Prim5s.ShapeTexts<'root'>
+    common: ReactXX.ShapeTexts<'root'>
     style: ReactN.TextStyle
-    props: Prim5s.OnPressAllWeb
+    props: ReactXX.OnPressAllWeb
     propsNative: ReactN.TextProperties
   }>
 
 }
 
-declare namespace Prim5s {
+declare namespace ReactXX {
   interface SheetsX {
     MuiText?: Muix.SheetXOrCreator<MuixText.Shape>
   }

@@ -1,16 +1,16 @@
 ﻿declare namespace MuixButton {
 
   type Shape = Muix.OverwriteShape<{
-    common: Prim5s.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini'>
-    native: Prim5s.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'>
+    common: ReactXX.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini'>
+    native: ReactXX.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'>
     web: 'label' | 'colorInherit' | 'keyboardFocused'
-    props: Muix.ButtonProps & Prim5s.OnPressAllWeb
+    props: Muix.ButtonProps & ReactXX.OnPressAllWeb
     propsNative: ReactN.TouchableOpacityProperties
   }>
 
 }
 
-declare namespace Prim5s {
+declare namespace ReactXX {
   interface SheetsX {
     MuiButton?: Muix.SheetXOrCreator<MuixButton.Shape>
     MuiButtonIconLeft?: Muix.SheetXOrCreator<MuixButton.Shape>

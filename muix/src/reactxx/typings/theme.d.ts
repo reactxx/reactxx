@@ -1,4 +1,4 @@
-﻿declare namespace Prim5s {
+﻿declare namespace ReactXX {
 
   interface Theme {
     direction: Direction

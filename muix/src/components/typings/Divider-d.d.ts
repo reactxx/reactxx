@@ -1,13 +1,13 @@
 ﻿declare namespace MuixDivider {
 
   type Shape = Muix.OverwriteShape<{
-    common: Prim5s.ShapeViews<'root'>
+    common: ReactXX.ShapeViews<'root'>
     props: Muix.DividerProps
     propsWeb: React.HTMLAttributes<HTMLHRElement>
   }>
 }
 
-declare namespace Prim5s {
+declare namespace ReactXX {
   interface SheetsX {
     MuiDivider?: Muix.SheetXOrCreator<MuixDivider.Shape>
   }

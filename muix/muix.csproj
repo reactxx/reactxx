@@ -162,20 +162,20 @@
     <TypeScriptCompile Include="src\components\web\AppBar\AppBar.tsx" />
     <TypeScriptCompile Include="src\components\web\Drawer\Drawer.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
-    <TypeScriptCompile Include="src\prim5s\common\animation.tsx" />
-    <TypeScriptCompile Include="src\prim5s\common\components.ts" />
-    <TypeScriptCompile Include="src\prim5s\common\theme.tsx" />
-    <TypeScriptCompile Include="src\prim5s\common\index.ts" />
-    <TypeScriptCompile Include="src\prim5s\common\withStyles.tsx" />
-    <TypeScriptCompile Include="src\prim5s\native\animation.tsx" />
-    <TypeScriptCompile Include="src\prim5s\native\components.tsx" />
-    <TypeScriptCompile Include="src\prim5s\native\index.ts" />
-    <TypeScriptCompile Include="src\prim5s\typings\components.d.ts" />
-    <TypeScriptCompile Include="src\prim5s\typings\theme.d.ts" />
-    <TypeScriptCompile Include="src\prim5s\web\animation.tsx" />
-    <TypeScriptCompile Include="src\prim5s\web\fela.tsx" />
-    <TypeScriptCompile Include="src\prim5s\web\components.tsx" />
-    <TypeScriptCompile Include="src\prim5s\web\index.ts" />
+    <TypeScriptCompile Include="src\reactxx\common\animation.tsx" />
+    <TypeScriptCompile Include="src\reactxx\common\components.ts" />
+    <TypeScriptCompile Include="src\reactxx\common\theme.tsx" />
+    <TypeScriptCompile Include="src\reactxx\common\index.ts" />
+    <TypeScriptCompile Include="src\reactxx\common\withStyles.tsx" />
+    <TypeScriptCompile Include="src\reactxx\native\animation.tsx" />
+    <TypeScriptCompile Include="src\reactxx\native\components.tsx" />
+    <TypeScriptCompile Include="src\reactxx\native\index.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\components.d.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\theme.d.ts" />
+    <TypeScriptCompile Include="src\reactxx\web\animation.tsx" />
+    <TypeScriptCompile Include="src\reactxx\web\fela.tsx" />
+    <TypeScriptCompile Include="src\reactxx\web\components.tsx" />
+    <TypeScriptCompile Include="src\reactxx\web\index.ts" />
     <TypeScriptCompile Include="src\primitives\common\Typography\Typography.tsx" />
     <TypeScriptCompile Include="src\primitives\native\for-components.tsx" />
     <TypeScriptCompile Include="src\primitives\typings\primitives.d.ts" />
@@ -185,7 +185,7 @@
     <TypeScriptCompile Include="src\primitives\typings\ScrollView-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\typings\Icon-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\web\for-components.tsx" />
-    <TypeScriptCompile Include="src\prim5s\typings\sheets.d.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\sheets.d.ts" />
     <TypeScriptCompile Include="src\styles\common\createTypography.ts" />
     <TypeScriptCompile Include="src\styles\common\MuiThemeProvider.tsx" />
     <TypeScriptCompile Include="src\styles\common\withStyles.tsx" />
@@ -199,12 +199,12 @@
     <TypeScriptCompile Include="src\test\common\animation\test-animation-d.d.ts" />
     <TypeScriptCompile Include="src\test\common\components\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\test\common\components\button-demo.tsx" />
-    <TypeScriptCompile Include="src\test\common\prim5s\doc\home-d.d.ts" />
-    <TypeScriptCompile Include="src\test\common\prim5s\doc\home.tsx" />
-    <TypeScriptCompile Include="src\test\common\prim5s\index.tsx" />
+    <TypeScriptCompile Include="src\test\common\reactxx\doc\home-d.d.ts" />
+    <TypeScriptCompile Include="src\test\common\reactxx\doc\home.tsx" />
+    <TypeScriptCompile Include="src\test\common\reactxx\index.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\index.tsx" />
-    <TypeScriptCompile Include="src\prim5s\typings\animation.d.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\animation.d.ts" />
     <TypeScriptCompile Include="src\test\native\animation.tsx" />
     <TypeScriptCompile Include="src\test\native\App.tsx" />
     <TypeScriptCompile Include="src\test\common\root.tsx" />
@@ -240,6 +240,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="deploy\reactxx\" />
     <Folder Include="src\animation\typings\" />
   </ItemGroup>
   <PropertyGroup>

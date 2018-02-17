@@ -6,7 +6,7 @@ import { applyTheme } from './index'
 export const MuiThemeContextTypes = { theme: PropTypes.any }
 export const MuiOverridesContextTypes = { childOverrides: PropTypes.any }
 
-export const createTheme: Prim5s.ThemeCreator = options => {
+export const createTheme: ReactXX.ThemeCreator = options => {
   warning(!!themerProps, 'Missing AppContainer component')
   return themerProps.creator(options)
 }
@@ -15,16 +15,16 @@ export const getDefaultTheme = () => {
   return themerProps.defaultTheme || (themerProps.defaultTheme = createTheme(themerProps.defaultOptions))
 }
 
-export class ThemeProvider extends React.PureComponent<Prim5s.ThemeProviderProps> {
+export class ThemeProvider extends React.PureComponent<ReactXX.ThemeProviderProps> {
 
   constructor(props, context: Muix.MuiThemeContextValue) {
     super(props, context)
     this.localTheme = applyTheme(context.theme || getDefaultTheme(), props.theme)
   }
 
-  localTheme: Prim5s.Theme
+  localTheme: ReactXX.Theme
 
-  getChildContext(): Prim5s.ThemeContextValue {
+  getChildContext(): ReactXX.ThemeContextValue {
     return { theme: this.localTheme }
   }
 
@@ -37,8 +37,8 @@ export class ThemeProvider extends React.PureComponent<Prim5s.ThemeProviderProps
   static contextTypes = MuiThemeContextTypes
 }
 
-export const AppContainer: React.SFC<Prim5s.AppContainerProps> = props => {
+export const AppContainer: React.SFC<ReactXX.AppContainerProps> = props => {
   themerProps = props.themerProps
   return <ThemeProvider theme={getDefaultTheme()}>{props.children}</ThemeProvider>
 }
-let themerProps: Prim5s.ThemerProps & { defaultTheme?: Prim5s.Theme }
+let themerProps: ReactXX.ThemerProps & { defaultTheme?: ReactXX.Theme }

@@ -5,19 +5,19 @@ import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme } from 
 import warning from 'warning'
 import { getAnimations } from './animation'
 
-const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreator<R>, options: Prim5s.WithStylesOptionsNew) => (Component: Prim5s.CodeComponentType<R>) => {
+const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCreator<R>, options: ReactXX.WithStylesOptionsNew) => (Component: ReactXX.CodeComponentType<R>) => {
 
   const { name } = options
   //warning(!!name || allNames[name], `Empty or duplicated withStyle options.name: "${name}"`)
   allNames[name] = true
 
-  class Styled extends React.PureComponent<Prim5s.PropsX<R>> {
-    usedChildOverrides: Prim5s.Sheets = {}
-    withParentContext: Prim5s.Sheet
+  class Styled extends React.PureComponent<ReactXX.PropsX<R>> {
+    usedChildOverrides: ReactXX.Sheets = {}
+    withParentContext: ReactXX.Sheet
     animations: Animation.Drivers<{}>
-    theme: Prim5s.getTheme<R>
+    theme: ReactXX.getTheme<R>
 
-    constructor(props: Prim5s.PropsX<R>, context: TContext) {
+    constructor(props: ReactXX.PropsX<R>, context: TContext) {
       super(props, context)
 
       //const theme: ThemeWithCache = this.theme = context.theme || getDefaultTheme()
@@ -38,7 +38,7 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
 
     getChildContext() { return { childOverrides: this.usedChildOverrides /*usedChildOverrides is modified during Component render (where getRulesetWithSideEffect is called)*/ } }
 
-    componentWillReceiveProps() { this.animations.reset() }
+    componentWillReceiveProps() { this.animations && this.animations.reset() }
 
     themeGetter = (() => {
       if (this.theme) return this.theme
@@ -48,17 +48,17 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
     render() {
       const { flip: flipProp, name } = options
       const { animations, theme } = this
-      const { classes: classesPropX, style, $web, $native, onPress, onLongPress, onPressIn, onPressOut, className: rulesetX, ...other } = this.props as Prim5s.PropsX & Prim5s.OnPressAllX
+      const { classes: classesPropX, style, $web, $native, onPress, onLongPress, onPressIn, onPressOut, className: rulesetX, ...other } = this.props as ReactXX.PropsX & ReactXX.OnPressAllX
 
       //****************************  getRulesetWithSideEffect 
       // Could be called in <Component> render method to compute component styles. Side effects:
       // - use sheet..$overrides to modify self sheet
       // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
-      const classesProp = toPlatformSheet(applyTheme(this.themeGetter, classesPropX as Prim5s.FromThemeValueOrCreator<R, Prim5s.PartialSheetX<R>>))
+      const classesProp = toPlatformSheet(applyTheme(this.themeGetter, classesPropX as ReactXX.FromThemeValueOrCreator<R, ReactXX.PartialSheetX<R>>))
       // calling getRulesetWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
       const mergeRulesetWithOverrides = createRulesetWithOverridesMerger(classesProp, this.usedChildOverrides)
 
-      //const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as Prim5s.TRulesetX
+      //const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as ReactXX.TRulesetX
       const className = toPlatformRuleSet(applyTheme(this.themeGetter, rulesetX))
       const flip = typeof flipProp === 'boolean' ? flipProp : (theme && theme.direction === 'rtl')
 
@@ -68,9 +68,9 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
         classes: this.withParentContext, //all code component, for root lower priority than className and style. Classes are used by getRulesetWithSideEffect prop in Component.render
         className, //code root by means of className (web) or style (native)
         style: clearSystemProps(toPlatformRuleSet(applyTheme(this.themeGetter, style))), //code root by means of style (higher priority than className)
-      } as Prim5s.CodeProps<R>
+      } as ReactXX.CodeProps<R>
 
-      toPlatformEvents($web, $native as Prim5s.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
+      toPlatformEvents($web, $native as ReactXX.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
 
       //newProps.classes = this.codeClasses
       return <Component {...codeProps} />
@@ -82,7 +82,7 @@ const withStyles = <R extends Prim5s.Shape>(sheetOrCreator: Prim5s.SheetOrCreato
   }
   hoistNonReactStatics(Styled, Component as any)
   const styled: any = Styled
-  return styled as React.ComponentClass<Prim5s.PropsX<R>>
+  return styled as React.ComponentClass<ReactXX.PropsX<R>>
 }
 const allNames = {}
 
@@ -94,19 +94,19 @@ const clearSystemProps = obj => {
 
 export default withStyles
 
-interface ThemeWithCache extends Prim5s.Theme {
-  $sheetsCache?: Prim5s.Sheets
+interface ThemeWithCache extends ReactXX.Theme {
+  $sheetsCache?: ReactXX.Sheets
 }
 
-const toPlatformEvents = ($web: Prim5s.OnPressAllWeb, $native: Prim5s.OnPressAllNative, propsX: Prim5s.OnPressAllX, codeProps: Prim5s.CodeProps) => {
+const toPlatformEvents = ($web: ReactXX.OnPressAllWeb, $native: ReactXX.OnPressAllNative, propsX: ReactXX.OnPressAllX, codeProps: ReactXX.CodeProps) => {
   const { onPress, onLongPress, onPressIn, onPressOut } = propsX
   if (window.isWeb) {
-    const cp = codeProps as Prim5s.CodePropsWeb
+    const cp = codeProps as ReactXX.CodePropsWeb
     const cl = $web && $web.onClick || onPress; if (cl) cp.onClick = cl
     const cl2 = $web && $web.onMouseDown || onPressIn; if (cl2) cp.onMouseDown = cl2
     const cl3 = $web && $web.onMouseUp || onPressOut; if (cl3) cp.onMouseUp = cl3
   } else {
-    const cp = codeProps as Prim5s.CodePropsNative
+    const cp = codeProps as ReactXX.CodePropsNative
     const cl = $native && $native.onPress || onPress; if (cl) cp.onPress = cl
     const cl1 = $native && $native.onLongPress || onLongPress; if (cl1) cp.onLongPress = cl1
     const cl2 = $native && $native.onPressIn || onPressIn; if (cl2) cp.onPressIn = cl2
@@ -118,9 +118,9 @@ const toPlatformEvents = ($web: Prim5s.OnPressAllWeb, $native: Prim5s.OnPressAll
 // Could be called in <Component> render method to compute component styles. Side effects:
 // - use sheet..$overrides to modify self sheet
 // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides)
-const createRulesetWithOverridesMerger = (classesProp: Prim5s.Sheet, usedChildOverrides: Prim5s.Sheets) => {
-  const usedOverrides: Prim5s.Sheet = {}
-  const res: Prim5s.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
+const createRulesetWithOverridesMerger = (classesProp: ReactXX.Sheet, usedChildOverrides: ReactXX.Sheets) => {
+  const usedOverrides: ReactXX.Sheet = {}
+  const res: ReactXX.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
     let single = undefined //optimalization: rulesets contains ony not empty item
     rulesets.forEach(ruleset => { // acumulate $overrides and $childOverrides
       if (!ruleset) return
@@ -160,17 +160,17 @@ const createRulesetWithOverridesMerger = (classesProp: Prim5s.Sheet, usedChildOv
 // HELPERS
 //***************************************************************
 
-type TContext = Prim5s.ThemeContextValue & Prim5s.OverridesContext
+type TContext = ReactXX.ThemeContextValue & ReactXX.OverridesContext
 
 //apply theme to sheet AND merge it with theme.overrides
-const aplyThemeToSheet = (sheetOrCreator: Prim5s.SheetOrCreator, themerCreator: () => ThemeWithCache, name: string) => {
+const aplyThemeToSheet = (sheetOrCreator: ReactXX.SheetOrCreator, themerCreator: () => ThemeWithCache, name: string) => {
 
   if (typeof sheetOrCreator != 'function') return sheetOrCreator
 
   const theme = themerCreator()
 
   //already in cache?
-  let res: Prim5s.Sheet = theme.$sheetsCache && theme.$sheetsCache[name]
+  let res: ReactXX.Sheet = theme.$sheetsCache && theme.$sheetsCache[name]
   if (res) return res
 
   const sheet = applyTheme(theme, sheetOrCreator) //apply theme to sheet

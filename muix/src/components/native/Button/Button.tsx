@@ -5,7 +5,7 @@ import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
 import { withStyles, toPlatformRuleSet, sheetCreator } from 'muix-styles'
-//import { withStyles, toPlatformRuleSet, sheetCreator } from 'muix-prim5s'
+//import { withStyles, toPlatformRuleSet, sheetCreator } from 'reactxx'
 
 import { Text } from 'muix-primitives'
 
@@ -15,7 +15,7 @@ import { RippleEffect } from '../ButtonBase/ButtonBase'
 const getTextIconColor = (color: string) => ({
   MuiText: { root: { color } },
   MuiIcon: { root: { color } },
-} as Prim5s.SheetsX)
+} as ReactXX.SheetsX)
 
 
 const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
@@ -115,7 +115,7 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
 }))
 
 
-const button: Prim5s.CodeSFCNative<MuixButton.Shape> = (props, context) => {
+const button: ReactXX.CodeSFCNative<MuixButton.Shape> = (props, context) => {
 
 
   var x = props.mini

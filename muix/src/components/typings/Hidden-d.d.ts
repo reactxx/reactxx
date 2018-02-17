@@ -1,13 +1,13 @@
 ﻿declare namespace MuixHidden {
 
   type Shape = Muix.OverwriteShape<{
-    common: Prim5s.ShapeViews<'root'>
+    common: ReactXX.ShapeViews<'root'>
     props: Muix.HiddenProps
   }>
 
 }
 
-declare namespace Prim5s {
+declare namespace ReactXX {
   interface SheetsX {
     MuiHidden?: Muix.SheetXOrCreator<MuixHidden.Shape>
   }

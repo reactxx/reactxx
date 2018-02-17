@@ -17,10 +17,10 @@ declare namespace Animation {
     $opened?: boolean
   }
 
-  type RuleSetX<T extends Prim5s.RulesetNative> = ToPairs<T, Prim5s.commonRuleNames<T>> & {
+  type RuleSetX<T extends ReactXX.RulesetNative> = ToPairs<T, ReactXX.commonRuleNames<T>> & {
     transform?: Array<TNativeTransform>
     $native?: ToPairs<T, Diff<keyof T, 'transform'>> & { transform?: TNativeTransform[] }
-    $web?: ToPairs<Prim5s.RulesetWeb, keyof React.CSSPropertiesLow> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
+    $web?: ToPairs<ReactXX.RulesetWeb, keyof React.CSSPropertiesLow> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
   }
 
   type Drivers<T extends Shapes> = {[P in keyof T]: Driver<T[P]> } & AnimationsEx
@@ -48,14 +48,14 @@ declare namespace Animation {
     sheet: SheetNative<T>
   }
 
-  type SheetWeb<T extends Shape> = {[P in keyof T]: Prim5s.RulesetWeb} & AnimationConfig
+  type SheetWeb<T extends Shape> = {[P in keyof T]: ReactXX.RulesetWeb} & AnimationConfig
   type SheetNative<T extends Shape> = {[P in keyof T]: T[P]} & AnimationConfig
-  type Sheet<T extends Shape> = {[P in keyof T]: (T[P] | Prim5s.RulesetWeb) } & AnimationConfig
+  type Sheet<T extends Shape> = {[P in keyof T]: (T[P] | ReactXX.RulesetWeb) } & AnimationConfig
 
   type SheetsX<T extends Shapes> = {[P in keyof T]: SheetX<T[P]>}
   type SheetX<T extends Shape> = {[P in keyof T]: RuleSetX<T[P]>} & AnimationConfig
 
-  type Shape = Record<string, Prim5s.RulesetNative>
+  type Shape = Record<string, ReactXX.RulesetNative>
   type Shapes = Record<string, Shape>
 }
 

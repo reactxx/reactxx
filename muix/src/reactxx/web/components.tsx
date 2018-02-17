@@ -5,13 +5,13 @@ import { rulesetsToClassNames } from './fela'
 import { sheetCreator } from '../common/index'
 import { textSheet } from '../common/components'
 
-export const view: Prim5s.CodeSFCWeb<Prim5s.ViewShape> = props => {
+export const view: ReactXX.CodeSFCWeb<ReactXX.ViewShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, flip, theme, animations, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className)
   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest} />
 }
 
-export const icon: Prim5s.CodeSFCWeb<Prim5s.IconShape> = props => {
+export const icon: ReactXX.CodeSFCWeb<ReactXX.IconShape> = props => {
   const { style, classes, className, data, mergeRulesetWithOverrides, flip, theme, animations, viewBox, children/*ignore children*/, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className)
   //replace fontSize with width x height
@@ -22,13 +22,13 @@ export const icon: Prim5s.CodeSFCWeb<Prim5s.IconShape> = props => {
   </svg>
 }
 
-export const text: Prim5s.CodeSFCWeb<Prim5s.TextShape> = props => {
+export const text: ReactXX.CodeSFCWeb<ReactXX.TextShape> = props => {
   const { style, classes, className, numberOfLines, mergeRulesetWithOverrides, flip, theme, animations, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, props.onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle, className)
-  return <div className={Prim5s.CompNames.Text + ' ' + rulesetsToClassNames(rootStyle)} style={style} {...rest} />
+  return <div className={ReactXX.CompNames.Text + ' ' + rulesetsToClassNames(rootStyle)} style={style} {...rest} />
 }
 
-export const scrollView: Prim5s.CodeSFCWeb<Prim5s.ScrollViewShape> = props => {
+export const scrollView: ReactXX.CodeSFCWeb<ReactXX.ScrollViewShape> = props => {
   const { style, classes, className, horizontal, mergeRulesetWithOverrides, flip, theme, animations, children, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, horizontal && classes.rootHorizontal, className)
   const containerStyle = mergeRulesetWithOverrides(classes.container, horizontal && classes.containerHorizontal)

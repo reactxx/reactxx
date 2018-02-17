@@ -1,4 +1,4 @@
-﻿declare namespace Prim5s {
+﻿declare namespace ReactXX {
 
   interface RNIconStyle { color?: string; fontSize?: number }
 
@@ -6,7 +6,7 @@
   interface OnPressX { onPress?: MouseEvent; onLongPress: () => void }
   interface OnPressAllX extends OnPressX { onPressIn?: MouseEvent; onPressOut?: MouseEvent }
   interface OnPressAllWeb { onClick?: React.MouseEventHandler<Element>; onMouseDown?: React.MouseEventHandler<Element>; onMouseUp?: React.MouseEventHandler<Element> }
-  interface OnPressAllNative { onPress?: () => void; onPressIn?: () => void; onPressOut?: () => void; onLongPress: () => void }
+  interface OnPressAllNative { onPress: () => void; onPressIn: () => void; onPressOut: () => void; onLongPress: () => void }
 
   interface WithStylesOptionsNew {
     name: keyof SheetsX
@@ -155,7 +155,8 @@
   // component code for web
   type CodePropsWeb<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsWeb<R>, {
     className: RulesetWeb
-    classes: SheetWeb<R>; style: RulesetWeb
+    classes: SheetWeb<R>
+    style: RulesetWeb
     theme: getTheme<R>
     flip: boolean
     mergeRulesetWithOverrides: MergeRulesetWithOverridesWeb

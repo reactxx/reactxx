@@ -15,24 +15,24 @@ export default function createTypography(palette: Muix.Palette, optionOrCreator:
       fontWeight: '300',
       $web: { fontFamily },
       $native: { fontFamily: 'Roboto_Light' },
-    } as Prim5s.TextRulesetX,
+    } as ReactXX.TextRulesetX,
     fontWeightRegularNew = {
       fontWeight: '400',
       $web: { fontFamily },
       $native: { fontFamily: 'Roboto' },
-    } as Prim5s.TextRulesetX,
+    } as ReactXX.TextRulesetX,
     fontWeightMediumNew = {
       fontWeight: '500',
       $web: { fontFamily },
       $native: { fontFamily: 'Roboto_Medium' },
-    } as Prim5s.TextRulesetX,
+    } as ReactXX.TextRulesetX,
     display1, display2, display3, display4, headline, title, subheading, body1, body2, caption, button,
     pxToRem = mui.pxToRem,
     ...other
   } = options
 
 
-  const getWebProps = (weightX: Prim5s.TextRulesetX, optionX: Prim5s.TextRulesetX, nativeFontSize: number, mui: React.CSSProperties) => {
+  const getWebProps = (weightX: ReactXX.TextRulesetX, optionX: ReactXX.TextRulesetX, nativeFontSize: number, mui: React.CSSProperties) => {
     const { color, fontWeight, fontFamily, ...rest } = mui
     const res = {
       fontWeight: weightX.fontWeight,
@@ -45,11 +45,11 @@ export default function createTypography(palette: Muix.Palette, optionOrCreator:
         fontFamily: weightX.$web.fontFamily,
         ...mui,
       }
-    } as Prim5s.TextRulesetX
+    } as ReactXX.TextRulesetX
     return optionX ? deepMerge(res, optionX) : res
   }
 
-  const sheetX: Prim5s.PartialSheetX<MuixTypography.Shape> = {
+  const sheetX: ReactXX.PartialSheetX<MuixTypography.Shape> = {
     fontWeightLightNew,
     fontWeightRegularNew,
     fontWeightMediumNew,

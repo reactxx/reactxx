@@ -9,7 +9,7 @@ import ButtonTest from './components/button'
 //import Shadows from './shadows/index'
 import ComponentX from './styles/component-x'
 import Animation from './animation/test-animation'
-import Prim5s from './prim5s/index'
+import ReactXX from './reactxx/index'
 import ButtonDemo, { overridesNew } from './components/button-demo'
 
 import { ScrollView, View, Text, Typography } from 'muix-primitives'
@@ -65,7 +65,7 @@ class AppItem extends React.PureComponent<{ idx: number; active: boolean; appRoo
 }
 
 export default AppRoot
-//export default Prim5s
+//export default ReactXX
 
 
 //const x = 'xxxx'
