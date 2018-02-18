@@ -109,6 +109,8 @@
     <Content Include="src\styles\native\fonts\Roboto-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="src\doc\home.md" />
+    <Content Include="src\doc\home - Copy.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -161,6 +163,7 @@
     <TypeScriptCompile Include="src\components\web\Toolbar\Toolbar.tsx" />
     <TypeScriptCompile Include="src\components\web\AppBar\AppBar.tsx" />
     <TypeScriptCompile Include="src\components\web\Drawer\Drawer.tsx" />
+    <TypeScriptCompile Include="src\doc\home.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\animation.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\components.ts" />

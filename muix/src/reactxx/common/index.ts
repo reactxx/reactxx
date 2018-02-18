@@ -1,3 +1,4 @@
+// Framework for creating components in both react and react-native.
 import React from 'react'
 import PropTypes from 'prop-types'
 import warning from 'warning'

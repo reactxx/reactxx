@@ -16,7 +16,7 @@ SystemJS.config({
     "muix-styles": "deploy/lib/styles/web/index",
     "muix-styles/web": "deploy/lib/styles/web/index",
     "muix-primitives": "deploy/lib/primitives/web/index",
-    "muix-prim5s": "deploy/lib/prim5s/web/index",
+    "reactxx": "deploy/lib/reactxx/web/index",
     "muix-components": "deploy/lib/components/web",
     "jss-props-sort": "npm:jss-props-sort@6.0.0",
     "jss-default-unit": "npm:jss-default-unit@8.0.2",

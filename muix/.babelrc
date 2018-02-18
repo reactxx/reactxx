@@ -11,6 +11,7 @@
       {
         "root": [ "." ],
         "alias": {
+          "reactxx": "./deploy/es/reactxx/native",
           "muix-primitives": "./deploy/es/primitives/native",
           "muix-components": "./deploy/es/components/native",
           "muix-styles/native": "./deploy/es/styles/native",

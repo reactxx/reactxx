@@ -55,15 +55,29 @@ const expandedPanel: ReactXX.CodeSFC<DocHome.ExpandedPanelShape> = props => {
   const headerStyle = mergeRulesetWithOverrides(classes.header)
   const contentStyle = mergeRulesetWithOverrides(classes.content, openClose.sheet.content) as ReactN.ViewStyle
   const iconStyle = mergeRulesetWithOverrides(classes.icon, openClose.sheet.icon) as ReactN.TextStyle
-  return <div style={{ height: '0px', overflow:'hidden' }}>
-    zzzzz
-  </div>
+  return <View className={rootStyle} style={style}>
+    <View className={headerStyle}>
+      {typeof title === 'string' ? <Text numberOfLines={1}>{title}</Text> : title}
+      <Icon data={MuixIcons.ArrowExpandDown} className={iconStyle} onPress={() => openClose.toggle()} />
+    </View>
+    <View className={contentStyle}>
+        {children}
+    </View>
+  </View>
 }
 
 const ExpandedPanel = withStyles<DocHome.ExpandedPanelShape>(expandedPanelSheet, { name: 'DocHome$ExpandedPanelShape' })(expandedPanel)
 
-const App: React.SFC = () => <div style={{ height: '0px', overflow: 'hidden' }}>
-  zzzzz
-  </div>
+const App: React.SFC = () => <ScrollView classes={{ container: { padding: 10 } }}>
+  <Text>Text before, text before, text before, text before, text before, text before, text before, text before, text before, text before, text before</Text>
+  <ExpandedPanel title='Default panel header'>
+    <Text className={{ flexShrink:1 }}>Content Content Content Content Content Content </Text>
+  </ExpandedPanel>
+  <Text>Text between, text between, text between, text between, text between, text between, text between, text between, text between, text between, text between</Text>
+  <ExpandedPanel title={<Text>Custom panel</Text>}>
+    <Text>Content Content Content Content Content Content </Text>
+  </ExpandedPanel>
+  <Text>Text after, text after, text after, text after, text after, text after, text after, text after, text after, text after, text after</Text>
+</ScrollView>
 
 export default App
