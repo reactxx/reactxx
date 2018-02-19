@@ -35,6 +35,6 @@ export const scrollView: ReactXX.CodeSFCNative<ReactXX.ScrollViewShape> = props 
 export const icon: ReactXX.CodeSFCNative<ReactXX.IconShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, flip, theme, animations, data, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.TextStyle
-  return <RNIcon name={data as MaterialCommunityIconsProps['name']} style={[rootStyle]} {...rest} />
+  return <RNIcon name={data as MaterialCommunityIconsProps['name']} style={rootStyle} {...rest} />
 }
 
