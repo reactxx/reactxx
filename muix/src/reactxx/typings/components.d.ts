@@ -6,6 +6,9 @@ declare namespace ReactXX {
     Icon = 'ReactXX$Icon',
     ScrollView = 'ReactXX$ScrollView',
     AnimatedView = 'ReactXX$AnimatedView',
+    AnimatedIcon = 'ReactXX$AnimatedIcon',
+    AnimatedText = 'ReactXX$AnimatedText',
+    AnimatedScrollView = 'ReactXX$AnimatedScrollView',
   }
 
   type TextShape = OverwriteShape<{
@@ -16,6 +19,7 @@ declare namespace ReactXX {
     propsWeb: React.HTMLAttributes<HTMLSpanElement>
     propsNative: ReactN.TextProperties
   }>
+
   type ViewShape = OverwriteShape<{
     common: ShapeViews<'root'>
     style: ReactN.ViewStyle,
@@ -23,8 +27,8 @@ declare namespace ReactXX {
     propsWeb: React.HTMLAttributes<HTMLDivElement>
     propsNative: ReactN.ViewProperties
   }>
-  type AnimatedViewShape = ViewShape
-  type IconShape = OverwriteShape<{
+
+    type IconShape = OverwriteShape<{
     common: ShapeTexts<'root'>
     style: ReactN.TextStyle,
     props: { data: string } & OnPressX
@@ -35,6 +39,7 @@ declare namespace ReactXX {
       color?: string
     }
   }>
+
   type ScrollViewShape = OverwriteShape<{
     common: ShapeScrollViews<'root' | 'container'>
     web: 'rootHorizontal' | 'containerHorizontal'
@@ -48,9 +53,12 @@ declare namespace ReactXX {
 
   interface SheetsX {
     [CompNames.Text]?: PartialSheetX<TextShape>
+    [CompNames.AnimatedText]?: PartialSheetX<TextShape>
     [CompNames.View]?: PartialSheetX<ViewShape>
-    [CompNames.AnimatedView]?: PartialSheetX<AnimatedViewShape>
+    [CompNames.AnimatedView]?: PartialSheetX<ViewShape>
     [CompNames.Icon]?: PartialSheetX<IconShape>
+    [CompNames.AnimatedIcon]?: PartialSheetX<IconShape>
     [CompNames.ScrollView]?: PartialSheetX<ScrollViewShape>
+    [CompNames.AnimatedScrollView]?: PartialSheetX<ScrollViewShape>
   }
 }

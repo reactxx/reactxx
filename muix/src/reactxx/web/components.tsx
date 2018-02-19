@@ -41,6 +41,9 @@ export const scrollView: ReactXX.CodeSFCWeb<ReactXX.ScrollViewShape> = props => 
 }
 
 export const animatedView = view
+export const animatedIcon = icon
+export const animatedText = text
+export const animatedScrollView = scrollView
 
 //const checkChildLayoutProps = (css: React.CSSProperties) => {
 //  if (/*process.env.NODE_ENV === 'production' ||*/ !css) return

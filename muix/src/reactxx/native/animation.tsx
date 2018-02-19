@@ -73,9 +73,9 @@ export class Driver<T extends Animation.Shape> extends DriverLow<T> implements A
   doOpen(toOpened: boolean) {
     const { value, animConfig } = this
     //console.log('useNativeDriver: ', animConfig.useNativeDriver)
+    this.opened = toOpened
     Animated.timing(value, { ...animConfig, toValue: toOpened ? 1 : 0 }).start(({ finished }) => {
       if (!finished) return
-      this.opened = toOpened
       this.animations.statefullComponent.forceUpdate()
     })
     
