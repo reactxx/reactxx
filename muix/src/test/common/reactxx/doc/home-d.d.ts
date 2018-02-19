@@ -1,4 +1,9 @@
 declare namespace DocHome {
+
+  const enum CompNames {
+    ExpandPanel = 'DocHome$ExpandedPanelShape'
+  }
+
   type ExpandedPanelShape = ReactXX.OverwriteShape<{
     common: ReactXX.ShapeViews<'root' | 'header' | 'content'> & ReactXX.ShapeTexts<'icon'>
     animation: {
@@ -10,6 +15,6 @@ declare namespace DocHome {
 
 declare namespace ReactXX {
   interface SheetsX {
-    DocHome$ExpandedPanelShape?: PartialSheetX<DocHome.ExpandedPanelShape>
+    [DocHome.CompNames.ExpandPanel]?: PartialSheetX<DocHome.ExpandedPanelShape>
   }
 }

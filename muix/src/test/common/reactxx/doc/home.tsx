@@ -21,7 +21,7 @@ export const expandedPanelSheet = sheetCreator<DocHome.ExpandedPanelShape>({
   },
   root: {
     marginTop: 10, marginBottom: 10,
-    borderWidth: 1, borderColor: 'darkblue', borderStyle: 'solid'
+    borderWidth: 1, borderColor: 'darkblue', borderStyle: 'solid' 
   },
   header: {
     padding: 10,
@@ -76,7 +76,7 @@ const expandedPanel: ReactXX.CodeSFC<DocHome.ExpandedPanelShape> = props => {
       <AnimatedIconLow name={MDI.ArrowExpandDown} style={iconStyle} onPress={() => openClose.toggle()} />
 */
 
-const ExpandedPanel = withStyles<DocHome.ExpandedPanelShape>(expandedPanelSheet, { name: 'DocHome$ExpandedPanelShape' })(expandedPanel)
+const ExpandedPanel = withStyles<DocHome.ExpandedPanelShape>(expandedPanelSheet, { name: DocHome.CompNames.ExpandPanel })(expandedPanel)
 
 const App: React.SFC = () => <ScrollView classes={{ container: { padding: 10 } }}>
   <Text>Text before, text before, text before, text before, text before, text before, text before, text before, text before, text before, text before</Text>

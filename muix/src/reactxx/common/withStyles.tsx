@@ -34,7 +34,7 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
         try {
           this.withParentContext[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
         } catch {
-          console.log('*** ERROR propName: ', p) 
+          console.log('*** ERROR propName: ', p)
         }
       }
 
