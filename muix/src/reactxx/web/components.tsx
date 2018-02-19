@@ -40,6 +40,8 @@ export const scrollView: ReactXX.CodeSFCWeb<ReactXX.ScrollViewShape> = props => 
   </div>
 }
 
+export const animatedView = view
+
 //const checkChildLayoutProps = (css: React.CSSProperties) => {
 //  if (/*process.env.NODE_ENV === 'production' ||*/ !css) return
 //  const childLayoutProps = ['alignItems', 'justifyContent'].filter(prop => css && css[prop] !== undefined)

@@ -8,7 +8,7 @@ import { AppLoading } from 'expo'
 
 import { toPlatformSheetX, toPlatformRuleSetX } from '../common/index'
 
-import getShadows from 'muix-shadows'
+import getShadows from 'reactxx-shadows'
 
 export { default as createTypography } from '../common/createTypography'
 

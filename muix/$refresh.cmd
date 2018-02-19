@@ -14,7 +14,7 @@ call jspm install
 rmdir %root%node_modules\@types\node /s /q
 rmdir %root%node_modules\@types\react-dom\node_modules  /s /q
 
-copy %root%$blacklist.js %root%node_modules\metro-bundler\src\blacklist.js /y
+copy %root%$blacklist.js %root%node_modules\metro\src\blacklist.js /y
 
 rem call npm link gulp
 

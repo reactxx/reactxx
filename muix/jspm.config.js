@@ -23,7 +23,9 @@ SystemJS.config({
     "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0",
     "jss-nested": "npm:jss-nested@6.0.1",
     "jss-camel-case": "npm:jss-camel-case@6.0.0",
-    "jss-global": "npm:jss-global@3.0.0"
+    "jss-global": "npm:jss-global@3.0.0",
+    "reactxx-shadows": "npm:reactxx-shadows@0.1.17",
+    "reactxx-mdi": "npm:reactxx-mdi@0.1.58"
   }
 });
 
@@ -41,7 +43,6 @@ SystemJS.config({
     "fela-plugin-lvha": "npm:fela-plugin-lvha@5.0.15",
     "fela-plugin-prefixer": "npm:fela-plugin-prefixer@5.0.16",
     "fela-plugin-unit": "npm:fela-plugin-unit@5.0.15",
-    "muix-shadows": "npm:muix-shadows@0.1.17",
     "assert": "npm:jspm-nodelibs-assert@0.2.1",
     "buffer": "npm:jspm-nodelibs-buffer@0.2.3",
     "child_process": "npm:jspm-nodelibs-child_process@0.2.1",
@@ -60,6 +61,8 @@ SystemJS.config({
     "prop-types": "npm:prop-types@15.6.0",
     "react": "npm:react@16.2.0",
     "react-dom": "npm:react-dom@16.2.0",
+    "reactxx-mdi": "npm:reactxx-mdi@0.1.59",
+    "reactxx-shadows": "npm:reactxx-shadows@0.1.18",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.2",
     "url": "npm:jspm-nodelibs-url@0.2.1",
@@ -72,7 +75,6 @@ SystemJS.config({
     "core-js": "npm:core-js@2.5.3",
     "deepmerge": "npm:deepmerge@2.0.1",
     "material-ui": "npm:material-ui@next",
-    "muix-icons": "npm:muix-icons@0.1.58",
     "react-jss": "npm:react-jss@8.2.1",
     "recompose": "npm:recompose@0.26.0",
     "tslib": "npm:tslib@1.8.1",

@@ -2294,7 +2294,7 @@ declare namespace Muix {
 
   interface SheetManagerTheme {
     refs: number;
-    sheet: JSS.StyleSheet<string>;
+    sheet: JSS.StyleSheet<string>; //LM
   }
 
 

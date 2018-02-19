@@ -32,7 +32,7 @@ export const expandedPanelSheet = sheetCreator<DocHome.ExpandedPanelShape>({
       },
     },
     $childOverrides: {
-      BaseText: {
+      [ReactXX.CompNames.Text]: {
         root: {
           fontSize: 24, fontWeight: 'bold', color: 'white', flexGrow: 1,
         },
@@ -56,15 +56,16 @@ const expandedPanel: ReactXX.CodeSFC<DocHome.ExpandedPanelShape> = props => {
   const rootStyle = mergeRulesetWithOverrides(classes.root, className)
   const headerStyle = mergeRulesetWithOverrides(classes.header)
   const contentStyle = mergeRulesetWithOverrides(classes.content, openClose.sheet.content) as ReactN.ViewStyle
+  delete contentStyle.height
   const iconStyle = mergeRulesetWithOverrides(classes.icon, openClose.sheet.icon) as ReactN.TextStyle
   return <View className={rootStyle} style={style}>
     <View className={headerStyle}>
       {typeof title === 'string' ? <Text numberOfLines={1}>{title}</Text> : title}
-      <Icon data={MuixIcons.ArrowExpandDown} className={iconStyle} onPress={() => openClose.toggle()} />
+      <Icon data={MDI.ArrowExpandDown} className={iconStyle} onPress={() => openClose.toggle()} />
     </View>
-    <View className={contentStyle}>
+    <AnimatedView className={contentStyle}>
       {children}
-    </View>
+    </AnimatedView>
   </View>
 }
 

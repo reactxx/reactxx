@@ -4,7 +4,7 @@ import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 import orange from 'material-ui/colors/orange'
 
 import { Text, View } from 'muix-primitives'
-import { ArrowDownBoldBox } from 'muix-icons/ArrowDownBoldBox'
+import { ArrowDownBoldBox } from 'reactxx-mdi/ArrowDownBoldBox'
 
 const theme = createMuiTheme({
   overridesX: {
@@ -15,7 +15,7 @@ const theme = createMuiTheme({
 })
 
 const app2: React.SFC = props => <AppContainer>
-  <Icon children={MuixIcons.ArrowDownBoldBox} style={{ color: 'brown' }} classes={{ root: { fontSize: 36 } }} />
+  <Icon children={MDI.ArrowDownBoldBox} style={{ color: 'brown' }} classes={{ root: { fontSize: 36 } }} />
 </AppContainer>
 
 
@@ -25,18 +25,18 @@ const app: React.SFC = props => <View style={{ flexShrink: 0 }}>
   <Icon children={ArrowDownBoldBox} color='secondary' />
   <Icon children={ArrowDownBoldBox} color='action' />
   <View style={{ backgroundColor: 'darkgray', padding: 5 }}>
-    <Icon children={MuixIcons.ArrowDownBoldBox} /*color='contrast'*/ />
+    <Icon children={MDI.ArrowDownBoldBox} /*color='contrast'*/ />
   </View>
-  <Icon children={MuixIcons.ArrowDownBoldBox} color='disabled' />
-  <Icon children={MuixIcons.ArrowDownBoldBox} color='error' />
-  <Icon children={MuixIcons.ArrowDownBoldBox} color='primary' />
-  <Icon children={MuixIcons.ArrowDownBoldBox} style={{ color: 'brown' }} />
-  <Icon children={MuixIcons.ArrowDownBoldBox} classes={{ root: { color: 'green' } }} />
-  <Icon children={MuixIcons.ArrowDownBoldBox} classes={{ root: { fontSize: 32 } }} />
+  <Icon children={MDI.ArrowDownBoldBox} color='disabled' />
+  <Icon children={MDI.ArrowDownBoldBox} color='error' />
+  <Icon children={MDI.ArrowDownBoldBox} color='primary' />
+  <Icon children={MDI.ArrowDownBoldBox} style={{ color: 'brown' }} />
+  <Icon children={MDI.ArrowDownBoldBox} classes={{ root: { color: 'green' } }} />
+  <Icon children={MDI.ArrowDownBoldBox} classes={{ root: { fontSize: 32 } }} />
   <MuiThemeProvider theme={theme}>
     <View>
-      <Icon children={MuixIcons.ArrowDownBoldBox} />
-      <Icon children={MuixIcons.ArrowDownBoldBox} classes={{ root: { color: orange[200] } }} />
+      <Icon children={MDI.ArrowDownBoldBox} />
+      <Icon children={MDI.ArrowDownBoldBox} classes={{ root: { color: orange[200] } }} />
     </View>
   </MuiThemeProvider>
 </View>

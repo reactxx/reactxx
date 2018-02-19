@@ -9,7 +9,7 @@
 
     "baseUrl": ".",
     "paths": {
-      "muix-icons/*": [ "node_modules/muix-icons/es/index" ],
+      "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ],
 
       "muix-styles/web": [ "src/styles/web/index" ],
       "muix-styles/native": [ "src/styles/native/index" ],
@@ -48,7 +48,7 @@
   },
   "include": [
     "src/**/*",
-    "node_modules/muix-icons/es/typings.d.ts",
+    "node_modules/reactxx-mdi/es/typings.d.ts",
     "node_modules/fela/index.d.ts"
   ]
 }

@@ -4,7 +4,7 @@
 
   interface IconProperties {
     color?: Colors
-    children?: MuixIcons
+    children?: MDI
   }
 
   type Shape = Muix.OverwriteShape<{

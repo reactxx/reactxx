@@ -2515,7 +2515,7 @@ declare class ModalManager {
 
 	interface SheetManagerTheme {
 	  refs: number;
-	  sheet: StyleSheet<string>;
+    sheet: JSS.StyleSheet<string>;
 	}
 
 

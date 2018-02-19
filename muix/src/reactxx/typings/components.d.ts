@@ -1,11 +1,11 @@
 declare namespace ReactXX {
 
   const enum CompNames {
-    Text = 'BaseText',
-    View = 'BaseView',
-    Icon = 'BaseIcon',
-    ScrollView = 'BaseScrollView',
-    AnimatedView = 'BaseAnimatedView',
+    Text = 'ReactXX$Text',
+    View = 'ReactXX$View',
+    Icon = 'ReactXX$Icon',
+    ScrollView = 'ReactXX$ScrollView',
+    AnimatedView = 'ReactXX$AnimatedView',
   }
 
   type TextShape = OverwriteShape<{

@@ -47,14 +47,14 @@ for (let svgFile of svgFiles) {
 
   //webTSDef.push(`declare module 'muix-icons/web/${name}' { export const ${name}: MDI.icons }`);
   //nativeTSDef.push(`declare module 'muix-icons/native/${name}' { export const ${name}: MDI.icons }`);
-  currentTSDef.push(`declare module 'muix-icons/${name}' { export const ${name}: MuixIcons }`);
+  currentTSDef.push(`declare module 'reactxx-mdi/${name}' { export const ${name}: MDI }`);
   webEnum.push(`${name} = '${path}',`);
   nativeEnum.push(`${name} = '${value}',`);
   nativeConst.push(`export const ${name} = '${value}';`);
 
 
   fs.writeFileSync(`${outputPath}${subDirWeb}typings.d.ts`, `
-declare const enum MuixIcons {
+declare const enum MDI {
 ${webEnum.join('\n')}
 }
 `);
@@ -68,7 +68,7 @@ ${currentTSDef.join('\n')}
 `);
 
   fs.writeFileSync(`${outputPath}${subDirNative}typings.d.ts`, `
-declare const enum MuixIcons {
+declare const enum MDI {
 ${nativeEnum.join('\n')}
 }
 `);

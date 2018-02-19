@@ -5,7 +5,7 @@
   "private": false,
   "dependencies": {
     "deepmerge": "^2.0.1",
-    "expo": "^24.0.0",
+    "expo": "25.0.0",
     "material-ui": "^1.0.0-beta.25",
     "muix": "^0.1.63",
     "muix-components": "^0.1.78",
@@ -13,8 +13,8 @@
     "muix-primitives": "^0.1.69",
     "muix-shadows": "^0.1.17",
     "muix-styles": "^0.1.74",
-    "react": "16.0.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
+    "react": "16.2.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "recompose": "^0.26.0",
     "tslib": "^1.8.0",
     "warning": "^3.0.0"

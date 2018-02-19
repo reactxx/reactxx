@@ -47,7 +47,7 @@
     <Content Include="package.json" />
     <Content Include="generate.cmd" />
     <Content Include="build.cmd" />
-    <Content Include="tsconfig.json" />
+    <None Include="tsconfig.json_" />
     <Content Include="README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

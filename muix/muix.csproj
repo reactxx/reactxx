@@ -192,7 +192,7 @@
     <TypeScriptCompile Include="src\styles\common\createTypography.ts" />
     <TypeScriptCompile Include="src\styles\common\MuiThemeProvider.tsx" />
     <TypeScriptCompile Include="src\styles\common\withStyles.tsx" />
-    <TypeScriptCompile Include="src\styles\typings\index.d.ts" />
+    <TypeScriptCompile Include="src\styles\typings\popper.js.d.ts" />
     <TypeScriptCompile Include="src\styles\typings\jss\index.d.ts" />
     <TypeScriptCompile Include="src\styles\typings\react-popper.d.ts" />
     <TypeScriptCompile Include="src\styles\typings\react-transition-group\CSSTransition.d.ts" />

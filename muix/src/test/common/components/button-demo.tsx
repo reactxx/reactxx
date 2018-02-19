@@ -58,19 +58,19 @@ const app: React.SFC = props => <ScrollView>
     <Button variant='raised' size='small'>Dense</Button>
   </View>
   <View classes={{ root: rootView }} >
-    <Button variant='fab' color="primary"><Icon>{MuixIcons.Plus}</Icon></Button>
-    <Button variant='fab' mini color="primary"><Icon>{MuixIcons.Plus}</Icon></Button>
-    <Button variant='fab' color="secondary"><Icon>{MuixIcons.Pencil}</Icon></Button>
-    <Button variant='fab' mini color="secondary"><Icon>{MuixIcons.Pencil}</Icon></Button>
-    <Button variant='fab' disabled><Icon>{MuixIcons.Delete}</Icon></Button>
-    <Button variant='fab' mini disabled><Icon>{MuixIcons.Delete}</Icon></Button>
+    <Button variant='fab' color="primary"><Icon>{MDI.Plus}</Icon></Button>
+    <Button variant='fab' mini color="primary"><Icon>{MDI.Plus}</Icon></Button>
+    <Button variant='fab' color="secondary"><Icon>{MDI.Pencil}</Icon></Button>
+    <Button variant='fab' mini color="secondary"><Icon>{MDI.Pencil}</Icon></Button>
+    <Button variant='fab' disabled><Icon>{MDI.Delete}</Icon></Button>
+    <Button variant='fab' mini disabled><Icon>{MDI.Delete}</Icon></Button>
   </View>
   <View classes={{ root: rootView }} >
-    <ButtonIconLeft color='secondary' variant='raised' ><Icon children={MuixIcons.ArrowDownBoldBox} />Icon Left</ButtonIconLeft>
-    <ButtonIconLeft color='primary' variant='raised' ><Icon children={MuixIcons.ArrowDownBoldBox} />Icon Left</ButtonIconLeft>
-    <ButtonIconRight color='default' variant='raised' >Icon Right<Icon children={MuixIcons.ArrowDownBoldBox} /></ButtonIconRight>
-    <ButtonIconRight color='secondary' size='small' variant='raised' >Icon Right<Icon children={MuixIcons.ArrowDownBoldBox} /></ButtonIconRight>
-    <ButtonIconRight color='primary' disabled variant='raised' >Icon Right<Icon children={MuixIcons.ArrowDownBoldBox} /></ButtonIconRight>
+    <ButtonIconLeft color='secondary' variant='raised' ><Icon children={MDI.ArrowDownBoldBox} />Icon Left</ButtonIconLeft>
+    <ButtonIconLeft color='primary' variant='raised' ><Icon children={MDI.ArrowDownBoldBox} />Icon Left</ButtonIconLeft>
+    <ButtonIconRight color='default' variant='raised' >Icon Right<Icon children={MDI.ArrowDownBoldBox} /></ButtonIconRight>
+    <ButtonIconRight color='secondary' size='small' variant='raised' >Icon Right<Icon children={MDI.ArrowDownBoldBox} /></ButtonIconRight>
+    <ButtonIconRight color='primary' disabled variant='raised' >Icon Right<Icon children={MDI.ArrowDownBoldBox} /></ButtonIconRight>
   </View>
   <View classes={{ root: rootView }} >
     <Button color='secondary' variant='raised' classes={theme => ({ raisedSecondary: { backgroundColor: 'green', $web: { '&:hover': { backgroundColor: 'green', } } } })} >classes</Button>

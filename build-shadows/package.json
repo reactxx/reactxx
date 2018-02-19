@@ -6,7 +6,7 @@
   "devDependencies": {
     "@types/react": "^16.0.28",
     "@types/react-dom": "^16.0.3",
-    "material-ui": "^1.0.0-beta.25"
+    "material-ui": "next"
   },
   "author": "",
   "license": "ISC",

@@ -1,6 +1,6 @@
 import { sheetCreator } from '../common/index'
 import withStyles from '../common/withStyles'
-import { text, view, icon, scrollView } from 'reactxx' //import platform specific component code
+import { text, view, icon, scrollView, animatedView } from 'reactxx' //import platform specific component code
 
 export const textSheet = sheetCreator<ReactXX.TextShape>({
   root: {
@@ -86,13 +86,8 @@ export const scrollViewSheet = sheetCreator<ReactXX.ScrollViewShape>({
   }
 })
 
-
-export const xxxx = withStyles<ReactXX.TextShape>(textSheet, { name: ReactXX.CompNames.Text })
-
-
-
 export const Text = withStyles<ReactXX.TextShape>(textSheet, { name: ReactXX.CompNames.Text })(text)
 export const View = withStyles<ReactXX.ViewShape>(viewSheet, { name: ReactXX.CompNames.View })(view)
-export const AnimatedView = withStyles<ReactXX.AnimatedViewShape>(viewSheet, { name: ReactXX.CompNames.AnimatedView })(view)
+export const AnimatedView = withStyles<ReactXX.AnimatedViewShape>(viewSheet, { name: ReactXX.CompNames.AnimatedView })(animatedView)
 export const Icon = withStyles<ReactXX.IconShape>(iconSheet, { name: ReactXX.CompNames.Icon })(icon)
 export const ScrollView = withStyles<ReactXX.ScrollViewShape>(scrollViewSheet, { name: ReactXX.CompNames.ScrollView })(scrollView)
