@@ -60,7 +60,7 @@ const expandedPanel: ReactXX.CodeSFC<DocHome.ExpandedPanelShape> = props => {
   return <View className={rootStyle} style={style}>
     <View className={headerStyle} childClasses={{ [ReactXX.CompNames.Text]: { root: headerLabelStyle }}}>
       {typeof title === 'string' ? <Text numberOfLines={1}>{title}</Text> : title}
-      <AnimatedIcon data={MDI.ArrowExpandDown} className={iconStyle} onPress={() => openClose.toggle()} />
+      <AnimatedIcon data={MDI.ArrowExpandDown} className={iconStyle} onPress={() => openClose.toggle()} /> 
     </View>
     <AnimatedView className={contentStyle}>
       {children}

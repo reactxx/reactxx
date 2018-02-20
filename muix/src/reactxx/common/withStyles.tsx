@@ -143,7 +143,7 @@ const createRulesetWithOverridesMerger = (classesProp: ReactXX.Sheet) => { //, u
         usedOverrides[single.$name], //... modify it with used $overrides
         classesProp && single.$name && classesProp[single.$name] //... and force using classes component property (it has hight priority)
       ]
-      if (other.filter(s => !!s).length <= 1) return clearSystemProps(single) //otimalization: nothing to merge
+      if (other.filter(s => !!s).length <= 1) return clearSystemProps({ ...single }) //otimalization: nothing to merge
       deepMerges(true, rulesetResult, ...other)
     }
     //apply used $overrides and classes prop
