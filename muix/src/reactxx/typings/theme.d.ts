@@ -5,9 +5,8 @@
     //overrides?: Sheets
   }
 
-  type ThemeOptionsX = Partial<Overwrite<Theme, {
-    overrides?: SheetsX
-  }>>
+  interface ThemeOptionsX {
+  }
 
   type Direction = 'ltr' | 'rtl';
 

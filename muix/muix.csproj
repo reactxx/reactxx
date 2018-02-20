@@ -164,6 +164,15 @@
     <TypeScriptCompile Include="src\components\web\AppBar\AppBar.tsx" />
     <TypeScriptCompile Include="src\components\web\Drawer\Drawer.tsx" />
     <TypeScriptCompile Include="src\doc\home.tsx" />
+    <TypeScriptCompile Include="src\mui\common\createTypography.ts" />
+    <TypeScriptCompile Include="src\mui\common\createMuiTheme.ts" />
+    <TypeScriptCompile Include="src\mui\native\ButtonBase\ButtonBase.tsx" />
+    <TypeScriptCompile Include="src\mui\native\Button\Button.tsx" />
+    <TypeScriptCompile Include="src\mui\typings\Button-d.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\ButtonBase-d.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\theme.d.ts" />
+    <TypeScriptCompile Include="src\mui\web\ButtonBase\ButtonBase.tsx" />
+    <TypeScriptCompile Include="src\mui\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\animation.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\components.ts" />
@@ -199,11 +208,11 @@
     <TypeScriptCompile Include="src\styles\typings\react-transition-group\index.d.ts" />
     <TypeScriptCompile Include="src\styles\typings\react-transition-group\Transition.d.ts" />
     <TypeScriptCompile Include="src\styles\typings\react-transition-group\TransitionGroup.d.ts" />
-    <TypeScriptCompile Include="src\styles\web\fela.tsx" />
     <TypeScriptCompile Include="src\test\common\animation\test-animation.tsx" />
     <TypeScriptCompile Include="src\test\common\animation\test-animation-d.d.ts" />
     <TypeScriptCompile Include="src\test\common\components\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\test\common\components\button-demo.tsx" />
+    <TypeScriptCompile Include="src\test\common\mui\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\common\reactxx\doc\home.tsx" />
     <TypeScriptCompile Include="src\test\common\reactxx\doc\home-d.d.ts" />
     <TypeScriptCompile Include="src\test\common\reactxx\index.tsx" />
@@ -237,9 +246,9 @@
     <TypeScriptCompile Include="src\styles\typings\material-ui-helper.d.ts" />
     <TypeScriptCompile Include="src\styles\typings\material-ui.d.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
-    <TypeScriptCompile Include="src\styles\typings\material-ui-ex.d.ts" />
+    <TypeScriptCompile Include="src\styles\typings\react-transition-group\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="src\styles\web\inline-styles.tsx" />
-    <TypeScriptCompile Include="src\styles\web\withStyles.tsx" />
+    <TypeScriptCompile Include="src\mui\web\index.tsx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

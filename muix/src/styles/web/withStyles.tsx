@@ -10,7 +10,7 @@ import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
 
 //import { sheetToClassNames } from './inline-styles'
-import { sheetToClassSheet, rulesetToClassNames } from './fela'
+import { sheetToClassSheet, rulesetToClassNames } from '../../reactxx/web/fela'
 
 import { classesToPlatformSheet, getDefaultTheme, MuiThemeContextTypes, AppContainerProps, createMuiTheme, toPlatformRuleSet, toPlatformSheet, MuiThemeProvider } from 'muix-styles'
 

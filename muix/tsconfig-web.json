@@ -21,6 +21,7 @@
 
       "muix-primitives": [ "src/primitives/web/index" ],
       "reactxx": [ "src/reactxx/web/index" ],
+      "reactxx/web": [ "src/reactxx/web/index" ],
 
       "muix-components/*": [ "src/components/web/*" ],
       "test/*": [ "src/test/*" ]

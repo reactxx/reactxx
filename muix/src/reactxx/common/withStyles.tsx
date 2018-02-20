@@ -1,7 +1,7 @@
 import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { toPlatformRuleSet, toPlatformSheet, applyTheme, deepMerge } from './index'
-import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme } from './theme'
+import { ThemeContextTypes, OverridesContextTypes, getDefaultTheme } from './theme'
 import warning from 'warning'
 import { getAnimations } from './animation'
 
@@ -22,14 +22,9 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
 
       const childClasses = applyTheme(this.themeGetter, props.childClasses)
       this.usedChildOverrides = context.childOverrides && props.childClasses ? deepMerges(false, {}, context.childOverrides, childClasses) : context.childOverrides || childClasses
-      //this.usedChildOverrides = context.childOverrides ? { ...context.childOverrides } : {}
-
-      //const theme: ThemeWithCache = this.theme = context.theme || getDefaultTheme()
 
       //*** caching aplyThemeToSheet result in actual theme (in its .$sheetsCache prop)
       const staticSheet = aplyThemeToSheet(sheetOrCreator, this.themeGetter, name)
-
-      //if (options.name === 'MuiText') console.log(cacheItem)
 
       //*** apply childOverrides from context
       const fromParentContext = context.childOverrides && context.childOverrides[name]
@@ -40,7 +35,7 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
       this.animations = getAnimations(staticSheet.$animations, this)
     }
 
-    getChildContext() { return { childOverrides: this.usedChildOverrides /*usedChildOverrides is modified during Component render (where getRulesetWithSideEffect is called)*/ } }
+    getChildContext() { return { childOverrides: this.usedChildOverrides /*usedChildOverrides is modified during Component render (where getRulesetWithSideEffect is called)*/ } as ReactXX.OverridesContext }
 
     componentWillReceiveProps() { this.animations && this.animations.reset() }
 
@@ -50,9 +45,9 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
     }).bind(this)
 
     render() {
-      const { flip: flipProp, name } = options
+      const { flip: flipProp } = options
       const { animations, theme } = this
-      const { classes: classesPropX, style, $web, $native, onPress, onLongPress, onPressIn, onPressOut, className: rulesetX, childClasses, ...other } = this.props as ReactXX.PropsX & ReactXX.OnPressAllX
+      const { classes: classesPropX, style, $web, $native, onPress, onLongPress, onPressIn, onPressOut, className: classNameX, childClasses, ...other } = this.props as ReactXX.PropsX & ReactXX.OnPressAllX
 
       //****************************  getRulesetWithSideEffect 
       // Could be called in <Component> render method to compute component styles. Side effects:
@@ -63,7 +58,7 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
       const mergeRulesetWithOverrides = createRulesetWithOverridesMerger(classesProp)
 
       //const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as ReactXX.TRulesetX
-      const className = toPlatformRuleSet(applyTheme(this.themeGetter, rulesetX))
+      const className = toPlatformRuleSet(applyTheme(this.themeGetter, classNameX))
       const flip = typeof flipProp === 'boolean' ? flipProp : (theme && theme.direction === 'rtl')
 
       const codeProps = {
@@ -81,8 +76,8 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
       return <Component {...codeProps} />
     }
 
-    static contextTypes = { ...MuiThemeContextTypes, ...MuiOverridesContextTypes }
-    static childContextTypes = MuiOverridesContextTypes
+    static contextTypes = { ...ThemeContextTypes, ...OverridesContextTypes }
+    static childContextTypes = OverridesContextTypes
     static options = options
   }
   hoistNonReactStatics(Styled, Component as any)
@@ -103,7 +98,7 @@ interface ThemeWithCache extends ReactXX.Theme {
   $sheetsCache?: ReactXX.Sheets
 }
 
-const toPlatformEvents = ($web: ReactXX.OnPressAllWeb, $native: ReactXX.OnPressAllNative, propsX: ReactXX.OnPressAllX, codeProps: ReactXX.CodeProps) => {
+export const toPlatformEvents = ($web: ReactXX.OnPressAllWeb, $native: ReactXX.OnPressAllNative, propsX: ReactXX.OnPressAllX, codeProps: ReactXX.CodeProps) => {
   const { onPress, onLongPress, onPressIn, onPressOut } = propsX
   if (window.isWeb) {
     const cp = codeProps as ReactXX.CodePropsWeb
