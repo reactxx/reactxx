@@ -98,7 +98,7 @@
   type SheetXNative<R extends Shape> = {[P in keyof getNative<R>]: (getNative<R>[P] & SheetOverridesX<R>) }
   type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: (RulesetWeb & SheetOverridesX<R>) }
   //Overrides parts of the sheet
-  interface SheetOverridesX<R extends Shape> { $overrides?: PartialSheetX<R>; $childOverrides?: SheetsX; $name?: string }
+  interface SheetOverridesX<R extends Shape> { $overrides?: PartialSheetX<R>; $name?: string }
 
   //******************** Platform specific sheets
   type SheetWeb<R extends Shape = Shape> = Record<(keyof getCommon<R>) | getWeb<R>, RulesetWeb & SheetOverridesWeb<R>> & { $animations?: Animation.SheetsX<getAnimation<R>> }
@@ -107,9 +107,9 @@
   type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
 
   //Overrides parts of the sheet
-  interface SheetOverrides<R extends Shape> { $overrides?: Sheet<R>; $childOverrides?: Sheets; $name?: string }
-  interface SheetOverridesWeb<R extends Shape> { $overrides?: SheetWeb<R>; $childOverrides?: SheetsWeb; $name?: string }
-  interface SheetOverridesNative<R extends Shape> { $overrides?: SheetNative<R>; $childOverrides?: SheetsNative; $name?: string }
+  interface SheetOverrides<R extends Shape> { $overrides?: Sheet<R>; $name?: string }
+  interface SheetOverridesWeb<R extends Shape> { $overrides?: SheetWeb<R>; $name?: string }
+  interface SheetOverridesNative<R extends Shape> { $overrides?: SheetNative<R>; $name?: string }
 
   //******************** Sheet and Theme Creators
   type FromThemeCreator<R extends Shape, T> = (theme: getTheme<R>) => T
@@ -143,6 +143,7 @@
     $web?: Partial<getPropsWeb<R>> //web specific style
     $native?: Partial<getPropsNative<R>> //native specific style
     classes?: FromThemeValueOrCreator<R, PartialSheetX<R> | PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
+    childClasses?: FromThemeValueOrCreator<R, SheetsX> | Sheets
     className?: FromThemeValueOrCreator<R, RulesetX<getStyle<R>>> /*cross platform root ruleset*/ | Ruleset /*platform specific root ruleset (when component is used in other component)*/
   }>>
   type PartialSheetInCode<R extends Shape> = PartialRecord<keyof getCommon<R> | getWeb<R> | keyof getNative<R>, Ruleset> // common and web and native

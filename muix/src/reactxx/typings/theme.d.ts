@@ -2,7 +2,7 @@
 
   interface Theme {
     direction: Direction
-    overrides?: Sheets
+    //overrides?: Sheets
   }
 
   type ThemeOptionsX = Partial<Overwrite<Theme, {

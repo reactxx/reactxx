@@ -12,13 +12,17 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
   allNames[name] = true
 
   class Styled extends React.PureComponent<ReactXX.PropsX<R>> {
-    usedChildOverrides: ReactXX.Sheets = {}
+    usedChildOverrides: ReactXX.Sheets
     withParentContext: ReactXX.Sheet
     animations: Animation.Drivers<{}>
     theme: ReactXX.getTheme<R>
 
     constructor(props: ReactXX.PropsX<R>, context: TContext) {
       super(props, context)
+
+      const childClasses = applyTheme(this.themeGetter, props.childClasses)
+      this.usedChildOverrides = context.childOverrides && props.childClasses ? deepMerges(false, {}, context.childOverrides, childClasses) : context.childOverrides || childClasses
+      //this.usedChildOverrides = context.childOverrides ? { ...context.childOverrides } : {}
 
       //const theme: ThemeWithCache = this.theme = context.theme || getDefaultTheme()
 
@@ -30,13 +34,7 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
       //*** apply childOverrides from context
       const fromParentContext = context.childOverrides && context.childOverrides[name]
       this.withParentContext = fromParentContext ? deepMerges(false, {}, staticSheet, fromParentContext) : staticSheet // modify static sheet 
-      for (const p in this.withParentContext) {
-        try {
-          this.withParentContext[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
-        } catch {
-          console.log('*** ERROR propName: ', p)
-        }
-      }
+      for (const p in this.withParentContext) this.withParentContext[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
 
       //*** init animations
       this.animations = getAnimations(staticSheet.$animations, this)
@@ -54,7 +52,7 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
     render() {
       const { flip: flipProp, name } = options
       const { animations, theme } = this
-      const { classes: classesPropX, style, $web, $native, onPress, onLongPress, onPressIn, onPressOut, className: rulesetX, ...other } = this.props as ReactXX.PropsX & ReactXX.OnPressAllX
+      const { classes: classesPropX, style, $web, $native, onPress, onLongPress, onPressIn, onPressOut, className: rulesetX, childClasses, ...other } = this.props as ReactXX.PropsX & ReactXX.OnPressAllX
 
       //****************************  getRulesetWithSideEffect 
       // Could be called in <Component> render method to compute component styles. Side effects:
@@ -62,7 +60,7 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
       // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
       const classesProp = toPlatformSheet(applyTheme(this.themeGetter, classesPropX as ReactXX.FromThemeValueOrCreator<R, ReactXX.PartialSheetX<R>>))
       // calling getRulesetWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
-      const mergeRulesetWithOverrides = createRulesetWithOverridesMerger(classesProp, this.usedChildOverrides)
+      const mergeRulesetWithOverrides = createRulesetWithOverridesMerger(classesProp)
 
       //const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as ReactXX.TRulesetX
       const className = toPlatformRuleSet(applyTheme(this.themeGetter, rulesetX))
@@ -95,7 +93,7 @@ const allNames = {}
 
 const clearSystemProps = obj => {
   if (!obj) return obj
-  delete obj.$overrides; delete obj.$childOverrides; delete obj.$name; delete obj.$web; delete obj.$native
+  delete obj.$overrides; /*delete obj.$childOverrides;*/ delete obj.$name; delete obj.$web; delete obj.$native
   return obj
 }
 
@@ -125,16 +123,16 @@ const toPlatformEvents = ($web: ReactXX.OnPressAllWeb, $native: ReactXX.OnPressA
 // Could be called in <Component> render method to compute component styles. Side effects:
 // - use sheet..$overrides to modify self sheet
 // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides)
-const createRulesetWithOverridesMerger = (classesProp: ReactXX.Sheet, usedChildOverrides: ReactXX.Sheets) => {
+const createRulesetWithOverridesMerger = (classesProp: ReactXX.Sheet) => { //, usedChildOverrides: ReactXX.Sheets) => {
   const usedOverrides: ReactXX.Sheet = {}
   const res: ReactXX.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
     let single = undefined //optimalization: rulesets contains ony not empty item
-    rulesets.forEach(ruleset => { // acumulate $overrides and $childOverrides
+    rulesets.forEach(ruleset => { // acumulate $overrides //and $childOverrides
       if (!ruleset) return
       if (single === undefined) single = ruleset //first not empty
       else if (single !== null) single = null //second not empty
       mergeOverrides(usedOverrides, ruleset.$overrides)
-      mergeOverrides(usedChildOverrides, ruleset.$childOverrides) //modify react context with child component overriding
+      //mergeOverrides(usedChildOverrides, ruleset.$childOverrides) //modify react context with child component overriding
     })
     if (single === undefined) return {}
     const rulesetResult: typeof rulesets[0] = {}
@@ -180,9 +178,10 @@ const aplyThemeToSheet = (sheetOrCreator: ReactXX.SheetOrCreator, themerCreator:
   let res: ReactXX.Sheet = theme.$sheetsCache && theme.$sheetsCache[name]
   if (res) return res
 
-  const sheet = applyTheme(theme, sheetOrCreator) //apply theme to sheet
-  const override = (theme.overrides && theme.overrides[name]) //find sheet override in theme
-  res = override ? deepMerges(false, {}, sheet, override) : sheet //deepMerge only when needed
+  //const sheet = applyTheme(theme, sheetOrCreator) //apply theme to sheet
+  //const override = (theme.overrides && theme.overrides[name]) //find sheet override in theme
+  //res = override ? deepMerges(false, {}, sheet, override) : sheet //deepMerge only when needed
+  res = applyTheme(theme, sheetOrCreator) //apply theme to sheet
 
   //put to cache
   if (!theme.$sheetsCache) theme.$sheetsCache = {}

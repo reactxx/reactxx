@@ -33,14 +33,10 @@ export const expandedPanelSheet = sheetCreator<DocHome.ExpandedPanelShape>({
         color: 'white', flexGrow: 0, flexShrink: 0,
         $web: { cursor: 'pointer' }
       },
-    },
-    $childOverrides: {
-      [ReactXX.CompNames.Text]: {
-        root: {
-          fontSize: 24, fontWeight: 'bold', color: 'white', flexGrow: 1,
-        },
+      headerLabel: {
+        fontSize: 24, fontWeight: 'bold', color: 'white', flexGrow: 1,
       }
-    }
+    },
   },
   content: {
     //minHeight: 0,
@@ -48,9 +44,8 @@ export const expandedPanelSheet = sheetCreator<DocHome.ExpandedPanelShape>({
     //backgroundColor: 'white'
     //padding: 10,
   },
-  icon: {
-
-  },
+  icon: { },
+  headerLabel: {},
 })
 
 
@@ -60,9 +55,10 @@ const expandedPanel: ReactXX.CodeSFC<DocHome.ExpandedPanelShape> = props => {
   const headerStyle = mergeRulesetWithOverrides(classes.header)
   const contentStyle = mergeRulesetWithOverrides(classes.content, openClose.sheet.content) as ReactN.ViewStyle
   const iconStyle = mergeRulesetWithOverrides(classes.icon, openClose.sheet.icon) as ReactN.TextStyle
+  const headerLabelStyle = mergeRulesetWithOverrides(classes.headerLabel) as ReactN.TextStyle
 
   return <View className={rootStyle} style={style}>
-    <View className={headerStyle}>
+    <View className={headerStyle} childClasses={{ [ReactXX.CompNames.Text]: { root: headerLabelStyle }}}>
       {typeof title === 'string' ? <Text numberOfLines={1}>{title}</Text> : title}
       <AnimatedIcon data={MDI.ArrowExpandDown} className={iconStyle} onPress={() => openClose.toggle()} />
     </View>

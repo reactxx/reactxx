@@ -1,9 +1,9 @@
 ﻿declare namespace MuixButton {
 
   type Shape = Muix.OverwriteShape<{
-    common: ReactXX.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini'>
-    native: ReactXX.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'>
-    web: 'label' | 'colorInherit' | 'keyboardFocused'
+    common: ReactXX.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini' | 'label'>
+    native: ReactXX.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & ReactXX.ShapeTexts<'labelIcon'>
+    web: 'colorInherit' | 'keyboardFocused'
     props: Muix.ButtonProps & ReactXX.OnPressAllWeb
     propsNative: ReactN.TouchableOpacityProperties
   }>

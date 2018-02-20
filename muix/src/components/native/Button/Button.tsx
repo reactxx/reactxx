@@ -13,9 +13,9 @@ import { RippleEffect } from '../ButtonBase/ButtonBase'
 
 //export type ButtonShape = Shape
 const getTextIconColor = (color: string) => ({
-  MuiText: { root: { color } },
-  MuiIcon: { root: { color } },
-} as ReactXX.SheetsX)
+  label: { color },
+  labelIcon: {color },
+} as ReactXX.PartialSheetX<MuixButton.Shape>)
 
 
 const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
@@ -32,14 +32,14 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
     paddingRight: spacing.unit * 2,
     borderRadius: 2,
     color: palette.text.primary,
-    $childOverrides: {
-      MuiIcon: { root: { lineHeight: 1.4 * 16, fontSize: 24, ...(isLeft === true ? { marginRight: spacing.unit } : (isLeft === false ? { marginLeft: spacing.unit } : {})) } },
-      MuiText: { root: { ...typoX.button, color: palette.text.primary, } },
+    $overrides: {
+      labelIcon: { lineHeight: 1.4 * 16, fontSize: 24, ...(isLeft === true ? { marginRight: spacing.unit } : (isLeft === false ? { marginLeft: spacing.unit } : {})) },
+      label: { ...typoX.button, color: palette.text.primary, },
     },
   },
 
   disabled: {
-    $childOverrides: getTextIconColor(palette.action.disabled)
+    $overrides: getTextIconColor(palette.action.disabled)
   },
 
   flat: {
@@ -50,14 +50,16 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
   flatPrimary: {
     $overrides: {
       ripple: { backgroundColor: fade(palette.primary[500], 0.4), opacity: 0.8 },
+      ...getTextIconColor(palette.primary[500])
     },
-    $childOverrides: getTextIconColor(palette.primary[500])
+    //$childOverrides: getTextIconColor(palette.primary[500])
   },
   flatSecondary: {
     $overrides: {
       ripple: { backgroundColor: fade(palette.secondary.light, 0.4), opacity: 0.8 },
+      ...getTextIconColor(palette.secondary.light)
     },
-    $childOverrides: getTextIconColor(palette.secondary.light)
+    //$childOverrides: getTextIconColor(palette.secondary.light)
   },
 
   raised: {
@@ -69,20 +71,20 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
   },
   raisedPrimary: {
     backgroundColor: palette.primary.main,
-    $childOverrides: getTextIconColor(palette.primary.contrastText)
+    $overrides: getTextIconColor(palette.primary.contrastText)
   },
   raisedSecondary: {
     backgroundColor: palette.secondary.main,
-    $childOverrides: getTextIconColor(palette.secondary.contrastText)
+    $overrides: getTextIconColor(palette.secondary.contrastText)
   },
   raisedDisable: {
     ...shadowsNew[0],
     backgroundColor: palette.action.disabledBackground,
     //$childOverrides: getTextIconColor(palette.action.disabled),
-    $childOverrides: getTextIconColor('gray'),
+    $overrides: getTextIconColor('gray'),
   },
   raisedContrast: {
-    $childOverrides: getTextIconColor(palette.getContrastText(palette.primary[500]))
+    $overrides: getTextIconColor(palette.getContrastText(palette.primary[500]))
   },
 
   fab: {
@@ -106,10 +108,12 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
     borderRadius: 40 / 2,
   },
   ripple: {
-    backgroundColor: palette.common.white, opacity: 0.35,
+    backgroundColor: palette.common.white,
+    opacity: 0.35,
   },
   colorInherit: {},
   label: {},
+  labelIcon: {},
   active: {},
   keyboardFocused: {}
 }))

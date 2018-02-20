@@ -17,7 +17,7 @@ const App: React.SFC = props => <AppContainer themerProps={{ creator: () => ({ d
   </Text>
 </AppContainer>
 
-const AppThemeOverride: React.SFC = props => <AppContainer themerProps={{ creator: () => ({ direction: 'ltr', overrides: { [ReactXX.CompNames.Text]: { root: {}} } }) }}>
+const AppThemeOverride: React.SFC = props => <AppContainer themerProps={{ creator: () => ({ direction: 'ltr', /*overrides: { [ReactXX.CompNames.Text]: { root: {}} }*/ }) }}>
   <Text className={theme => ({ color: 'red', fontWeight: 'bold', textDecoration: 'underline' })}>
     red, bold, underline
   </Text>

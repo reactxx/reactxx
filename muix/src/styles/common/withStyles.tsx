@@ -57,7 +57,7 @@ const withStyles = <R extends Muix.Shape>(sheetOrCreator: Muix.SheetOrCreator<R>
         rulesets.forEach(ruleset => { // acumulate $overrides and $childOverrides
           if (!ruleset) return
           mergeOverrides(usedOverrides, ruleset.$overrides)
-          mergeOverrides(this.usedChildOverrides, ruleset.$childOverrides) //modify react context for 
+          //mergeOverrides(this.usedChildOverrides, ruleset.$childOverrides) //modify react context for 
         })
         //apply used $overrides and classes prop
         const rulesetResult: typeof rulesets[0] = {}

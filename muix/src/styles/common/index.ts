@@ -30,10 +30,10 @@ export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCrea
 //create platform specific ruleset from cross platform ruleset
 export const toPlatformRuleSetX = (style: ReactXX.RulesetX, isNative: boolean) => {
   if (!style) return null
-  if (!style.$web && !style.$native && !style.$overrides && !style.$childOverrides) return style //optimalization
-  const { $web, $native, $overrides, $childOverrides, ...rest } = style
-  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheetX($overrides, isNative), $childOverrides: getOverridesX(null, $childOverrides) }
-  if (!res.$overrides) delete res.$overrides; if (!res.$childOverrides) delete res.$childOverrides //remove NULL or UNDEFINED
+  if (!style.$web && !style.$native && !style.$overrides /*&& !style.$childOverrides*/) return style //optimalization
+  const { $web, $native, $overrides, /*$childOverrides,*/ ...rest } = style
+  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheetX($overrides, isNative), /*$childOverrides: getOverridesX(null, $childOverrides)*/ }
+  if (!res.$overrides) delete res.$overrides; //if (!res.$childOverrides) delete res.$childOverrides //remove NULL or UNDEFINED
   return res as ReactXX.Ruleset
 }
 
@@ -41,7 +41,7 @@ export const createAnimations = (props) => null
 
 export const clearSystemProps = obj => {
   if (!obj) return obj
-  delete obj.$overrides; delete obj.$childOverrides; delete obj.$name; delete obj.$web; delete obj.$native 
+  delete obj.$overrides; /*delete obj.$childOverrides;*/ delete obj.$name; delete obj.$web; delete obj.$native 
   return obj
 }
 

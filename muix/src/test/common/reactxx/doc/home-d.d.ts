@@ -5,7 +5,7 @@ declare namespace DocHome {
   }
 
   type ExpandedPanelShape = ReactXX.OverwriteShape<{
-    common: ReactXX.ShapeViews<'root' | 'header' | 'content'> & ReactXX.ShapeTexts<'icon'>
+    common: ReactXX.ShapeViews<'root' | 'header' | 'content'> & ReactXX.ShapeTexts<'icon' | 'headerLabel'>
     animation: {
       openClose: ReactXX.ShapeViews<'content'> & ReactXX.ShapeTexts<'icon'>
     }
