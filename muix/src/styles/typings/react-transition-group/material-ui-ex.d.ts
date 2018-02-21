@@ -1,6 +1,3 @@
-declare namespace ReactXX {
-  //interface Theme extends Muix.Theme { }
-}
 declare namespace Muix {
 
   /*************************************************
@@ -24,25 +21,25 @@ declare namespace Muix {
 
   //**** helpers
   interface Shape extends ReactXX.Shape {
-    theme: Muix.Theme
+    //theme: Muix.Theme
   }
-  interface DefaultEmptyShape extends Shape {
-    common: {}
-    native: {}
-    web: null
-    animation: {}
-    props: {}
-    style: ReactN.ViewStyle
-    propsNative: ReactN.ViewProperties
-  }
+  //interface DefaultEmptyShape extends Shape {
+  //  common: {}
+  //  native: {}
+  //  web: null
+  //  animation: {}
+  //  props: {}
+  //  style: ReactN.ViewStyle
+  //  propsNative: ReactN.ViewProperties
+  //}
 
-  type OverwriteShape<R extends Partial<Muix.Shape>> = Overwrite<Muix.DefaultEmptyShape, R>
+  //type OverwriteShape<R extends Partial<ReactXX.Shape>> = Overwrite<Muix.DefaultEmptyShape, R>
 
-  type SheetXCreator<R extends Shape> = ThemeCreator<ReactXX.SheetX<R>>
-  type SheetXOrCreator<R extends Shape> = ThemeValueOrCreator<ReactXX.PartialSheetX<R>>
+  //type SheetXCreator<R extends Shape> = ThemeCreator<ReactXX.SheetX<R>>
+  //type SheetXOrCreator<R extends Shape> = ThemeValueOrCreator<ReactXX.PartialSheetX<R>>
 
-  type SheetOrCreator<R extends Shape> = ThemeValueOrCreator<ReactXX.Sheet<R>>
-  type SheetCreator<R extends Shape> = ThemeCreator<ReactXX.Sheet<R>>
+  //type SheetOrCreator<R extends Shape> = ThemeValueOrCreator<ReactXX.Sheet<R>>
+  //type SheetCreator<R extends Shape> = ThemeCreator<ReactXX.Sheet<R>>
 
 
   type ThemeCreator<T> = (theme: Theme) => T
@@ -78,7 +75,7 @@ declare namespace Muix {
     $sheetCache: Array<SheetCacheItem>
   }
 
-  type SheetCacheItem = { sheetOrCreator: Muix.SheetOrCreator<Muix.Shape>; fromTheme: ReactXX.Sheet<Muix.Shape> }
+  type SheetCacheItem = { sheetOrCreator: ReactXX.SheetOrCreator; fromTheme: ReactXX.Sheet<ReactXX.Shape> }
   type ShadowsNative = ReactN.ViewStyle[]
 
   type OverridesX = {

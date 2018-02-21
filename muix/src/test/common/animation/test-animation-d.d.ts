@@ -1,5 +1,5 @@
 declare namespace testAnimation {
-  type Shape = Muix.OverwriteShape<{
+  type Shape = ReactXX.OverwriteShape<{
     props: {
       mobile?: boolean
       tablet?: boolean
@@ -15,6 +15,6 @@ declare namespace testAnimation {
 
 declare namespace ReactXX {
   interface SheetsX {
-    TestStyles?: Muix.SheetXOrCreator<testStyles.Shape>
+    TestStyles?: ReactXX.PartialSheetX<testStyles.Shape>
   }
 }

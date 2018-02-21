@@ -1,7 +1,7 @@
 ﻿declare namespace MuixText {
   type ClassKeyText = 'root'
 
-  type Shape = Muix.OverwriteShape<{
+  type Shape = ReactXX.OverwriteShape<{
     common: ReactXX.ShapeTexts<'root'>
     style: ReactN.TextStyle
     props: ReactXX.OnPressAllWeb
@@ -12,7 +12,7 @@
 
 declare namespace ReactXX {
   interface SheetsX {
-    MuiText?: Muix.SheetXOrCreator<MuixText.Shape>
+    MuiText?: ReactXX.PartialSheetX<MuixText.Shape>
   }
 }
 

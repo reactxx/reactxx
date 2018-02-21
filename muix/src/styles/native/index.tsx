@@ -13,7 +13,7 @@ import getShadows from 'reactxx-shadows'
 export { default as createTypography } from '../common/createTypography'
 
 export const toPlatformRuleSet = <T extends ReactXX.RulesetNative>(style: ReactXX.RulesetX<T>) => toPlatformRuleSetX(style, true) as T
-export const toPlatformSheet = <R extends Muix.Shape>(rules: ReactXX.PartialSheetX<R>) => toPlatformSheetX(rules, true) as ReactXX.SheetNative<R>
+export const toPlatformSheet = <R extends ReactXX.Shape>(rules: ReactXX.PartialSheetX<R>) => toPlatformSheetX(rules, true) as ReactXX.SheetNative<R>
 
 //const round = (value: number) => Math.round(value * 1e5) / 1e5
 //const shadow = (deep: number) => ({

@@ -19,13 +19,13 @@ export interface AppContainerProps {
   themeOptions?: Muix.ThemeOptions
 }
 
-export const classesToPlatformSheet = (theme: Muix.Theme, classes: Muix.ThemeValueOrCreator<ReactXX.PartialSheetX<Muix.Shape>>) => {
+export const classesToPlatformSheet = (theme: Muix.Theme, classes: Muix.ThemeValueOrCreator<ReactXX.PartialSheetX<ReactXX.Shape>>) => {
   const sheetx = typeof classes === 'function' ? classes(theme) : classes
-  return toPlatformSheet(sheetx) as ReactXX.Sheet<Muix.Shape> //Muix.PartialSheetX<Muix.Shape>
+  return toPlatformSheet(sheetx) as ReactXX.Sheet<ReactXX.Shape> //Muix.PartialSheetX<ReactXX.Shape>
 }
 
 //create platform specific sheet from cross platform sheet creator
-export const sheetCreator = <R extends Muix.Shape>(sheetXCreator: Muix.ThemeCreator<ReactXX.SheetX<R>>) => ((theme: Muix.Theme) => toPlatformSheet(sheetXCreator(theme) as ReactXX.PartialSheetX<R>)) as Muix.SheetCreator<R>
+export const sheetCreator = <R extends ReactXX.Shape>(sheetXCreator: Muix.ThemeCreator<ReactXX.SheetX<R>>) => ((theme: Muix.Theme) => toPlatformSheet(sheetXCreator(theme) as ReactXX.PartialSheetX<R>)) as ReactXX.SheetOrCreator<R>
 
 //create platform specific ruleset from cross platform ruleset
 export const toPlatformRuleSetX = (style: ReactXX.RulesetX, isNative: boolean) => {
@@ -46,14 +46,14 @@ export const clearSystemProps = obj => {
 }
 
 //create platform specific sheet from cross platform sheet
-export const toPlatformSheetX = (sheet: ReactXX.PartialSheetX<Muix.Shape>, isNative: boolean) => {
+export const toPlatformSheetX = (sheet: ReactXX.PartialSheetX<ReactXX.Shape>, isNative: boolean) => {
   if (typeof sheet !== 'object') return sheet
-  const res: ReactXX.Sheet<Muix.Shape> = { }
+  const res: ReactXX.Sheet<ReactXX.Shape> = { }
   for (const p in sheet) {
     if (p === '$animations') {
       const animSrc = sheet[p]
       const animDest = res[p] = {}
-      for (const pp in animSrc) animDest[pp] = toPlatformSheetX(animSrc[pp], isNative)
+      for (const pp in animSrc) animDest[pp] = toPlatformSheetX(animSrc[pp] as any, isNative)
     } else
       res[p] = toPlatformRuleSetX(sheet[p], isNative)
   }

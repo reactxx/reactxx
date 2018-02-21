@@ -1,6 +1,6 @@
 ﻿declare namespace MuixToolbar {
 
-  type Shape = Muix.OverwriteShape<{
+  type Shape = ReactXX.OverwriteShape<{
     common: ReactXX.ShapeViews<'root'>
     props: Muix.ToolbarProps
   }>
@@ -9,7 +9,7 @@
 
 declare namespace ReactXX {
   interface SheetsX {
-    MuiToolbar?: Muix.SheetXOrCreator<MuixToolbar.Shape>
+    MuiToolbar?: ReactXX.PartialSheetX<MuixToolbar.Shape>
   }
 }
 

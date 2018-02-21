@@ -2,7 +2,7 @@
 
   type modalProps = 'root' | 'hidden'
 
-  type Shape = Muix.OverwriteShape<{
+  type Shape = ReactXX.OverwriteShape<{
     common: ReactXX.ShapeViews<modalProps | 'docked'
     | 'paper' | 'paperAnchorLeft' | 'paperAnchorRight' | 'paperAnchorTop' | 'paperAnchorBottom' | 'paperAnchorDockedLeft' | 'paperAnchorDockedTop' | 'paperAnchorDockedRight' | 'paperAnchorDockedBottom'
     | 'modal'>
@@ -13,7 +13,7 @@
 
 declare namespace ReactXX {
   interface SheetsX {
-    MuiDrawer?: Muix.SheetXOrCreator<MuixDrawer.Shape>
+    MuiDrawer?: ReactXX.PartialSheetX<MuixDrawer.Shape>
   }
 }
 

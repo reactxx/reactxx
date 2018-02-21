@@ -15,8 +15,8 @@
   type TextX = PropsLow<ReactN.TextStyle | React.CSSProperties, ReactN.TextProperties>
   type ScrollView = PropsLow<ReactN.ScrollViewStyle, ReactN.ScrollViewProperties> & { contentContainerStyle?: ReactN.ViewStyle }
   type ScrollViewX = PropsLow<ReactN.ScrollViewStyle | React.CSSProperties, ReactN.ScrollViewProperties> & { contentContainerStyle?: ReactN.ViewStyle | React.CSSProperties }
-  type Icon = PropsLow<ReactN.TextStyle, { color?: string; size?: number }> & { data?: MDI }
-  type IconX = PropsLow<ReactN.TextStyle | React.CSSProperties, { color?: string; size?: number }> & { data?: MDI }
+  type Icon = PropsLow<ReactN.TextStyle, ReactN.TextProperties/*{ color?: string; size?: number }*/> & { data?: MDI }
+  type IconX = PropsLow<ReactN.TextStyle | React.CSSProperties, ReactN.TextProperties/*{ color?: string; size?: number }*/> & { data?: MDI }
   type Typography = PropsLow<ReactN.TextStyle, ReactN.TextProperties> & { $noWrapStyle, $type: string }
   type TypographyX = PropsLow<ReactN.TextStyle | React.CSSProperties, ReactN.TextProperties> 
 

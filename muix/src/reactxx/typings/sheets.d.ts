@@ -1,6 +1,6 @@
 ﻿declare namespace ReactXX {
 
-  interface RNIconStyle { color?: string; fontSize?: number }
+  //interface RNIconStyle { color?: string; fontSize?: number }
 
   type MouseEvent = (event?: React.MouseEvent<Element>) => void
   interface OnPressX { onPress?: MouseEvent; onLongPress: () => void }
@@ -24,9 +24,9 @@
     {
       $native?: T // native specific rules
       $web?: RulesetWeb // web specific rules
-      $propsWeb?: Partial<getPropsWeb<R>> //web specific props
-      $propsNative?: Partial<getPropsNative<R>> //native specific props
-      $props?: Partial<getProps<R>> //common props
+      //$propsWeb?: Partial<getPropsWeb<R>> //web specific props
+      //$propsNative?: Partial<getPropsNative<R>> //native specific props
+      //$props?: Partial<getProps<R>> //common props
     } &
     SheetOverridesX<R> // sheet overriding, 
 
@@ -41,7 +41,7 @@
 
   //******************** Platform specific ruleset
   type RulesetWeb = React.CSSProperties
-  type RulesetNative = ReactN.TextStyle | ReactN.ViewStyle | ReactN.ImageStyle | ReactN.ScrollViewStyle | RNIconStyle
+  type RulesetNative = ReactN.TextStyle | ReactN.ViewStyle | ReactN.ImageStyle | ReactN.ScrollViewStyle //| RNIconStyle
   type Ruleset = RulesetNative | RulesetWeb
 
   /******************************************
@@ -60,21 +60,21 @@
     props: {} //common (web and native) props
     propsNative: {} //native only props 
     propsWeb: React.HTMLAttributes<Element>//web only props
-    theme: Theme
+    //theme: Theme
   }
 
   //******************** Helpers for Shape.common and Shape.native definitin
   type ShapeTexts<P extends string> = {[p in P]: ReactN.TextStyle}
   type ShapeViews<P extends string> = {[p in P]: ReactN.ViewStyle}
   type ShapeScrollViews<P extends string> = {[p in P]: ReactN.ScrollViewStyle}
-  type ShapeIcons<P extends string> = {[p in P]: RNIconStyle}
+  //type ShapeIcons<P extends string> = {[p in P]: RNIconStyle}
   type ShapeImages<P extends string> = {[p in P]: ReactN.ImageStyle}
   type OverwriteShape<R extends Partial<Shape>> = Overwrite<{
     common: {}; native: {}, web: null
-    animation: {}
     style: ReactN.ViewStyle
     props: {}; propsNative: ReactN.ViewProperties; propsWeb: React.HTMLAttributes<HTMLElement>
-    theme: Theme
+    animation: {}
+    //theme: Theme
   }, R>
 
   //******************** Shape getters
@@ -86,7 +86,7 @@
   type getProps<R extends Shape> = R['props']
   type getPropsWeb<R extends Shape> = R['propsWeb']
   type getPropsNative<R extends Shape> = R['propsNative']
-  type getTheme<R extends Shape> = R['theme']
+  //type getTheme<R extends Shape> = R['theme']
 
   /******************************************
     COMPONENT SHEET
@@ -94,7 +94,7 @@
 
   //******************** Cross platform sheet
   type SheetX<R extends Shape = Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & { $animations?: Animation.SheetsX<getAnimation<R>> }
-  type PartialSheetX<R extends Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & { $animations?: Partial<Animation.SheetsX<getAnimation<R>>> }
+  type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & { $animations?: Partial<Animation.SheetsX<getAnimation<R>>> }
 
   //Cross platform sheet helpers
   type SheetXCommon<R extends Shape> = {[P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R>}
@@ -115,10 +115,10 @@
   interface SheetOverridesNative<R extends Shape> { $overrides?: SheetNative<R>; $name?: string }
 
   //******************** Sheet and Theme Creators
-  type FromThemeCreator<R extends Shape, T> = (theme: getTheme<R>) => T
-  type FromThemeValueOrCreator<R extends Shape, T> = T | FromThemeCreator<R, T>
-  type SheetCreator<R extends Shape> = FromThemeCreator<R, Sheet<R>>
-  type SheetOrCreator<R extends Shape = Shape> = FromThemeValueOrCreator<R, Sheet<R>>
+  type FromThemeCreator<T> = (theme: ReactXX.Theme/*getTheme<R>*/) => T
+  type FromThemeValueOrCreator<T> = T | FromThemeCreator<T>
+  type SheetCreator<R extends Shape> = FromThemeCreator<Sheet<R>>
+  type SheetOrCreator<R extends Shape = Shape> = FromThemeValueOrCreator<Sheet<R>>
   //type SheetOrCreatorX<R extends Shape = Shape> = FromThemeValueOrCreator<R, PartialSheetX<R>>
 
   //******************** Sheet GETTERs
@@ -142,12 +142,12 @@
   //******************** cross platform Component props (Component is created by 'withStyles' ) 
 
   type PropsX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>, {
-    style?: FromThemeValueOrCreator<R, RulesetX<getStyle<R>>> | RulesetWeb | getStyle<R> //cross platform style
+    style?: FromThemeValueOrCreator<RulesetX<getStyle<R>>> | RulesetWeb | getStyle<R> //cross platform style
     $web?: Partial<getPropsWeb<R>> //web specific style
     $native?: Partial<getPropsNative<R>> //native specific style
-    classes?: FromThemeValueOrCreator<R, PartialSheetX<R> | PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
-    childClasses?: FromThemeValueOrCreator<R, SheetsX> | Sheets
-    className?: FromThemeValueOrCreator<R, RulesetX<getStyle<R>>> /*cross platform root ruleset*/ | Ruleset /*platform specific root ruleset (when component is used in other component)*/
+    classes?: FromThemeValueOrCreator<PartialSheetX<R> | PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
+    childClasses?: FromThemeValueOrCreator<SheetsX> | Sheets
+    className?: FromThemeValueOrCreator<RulesetX<getStyle<R>>> /*cross platform root ruleset*/ | Ruleset /*platform specific root ruleset (when component is used in other component)*/
   }>>
   type PartialSheetInCode<R extends Shape> = PartialRecord<keyof getCommon<R> | getWeb<R> | keyof getNative<R>, Ruleset> // common and web and native
 
@@ -161,7 +161,7 @@
     className: RulesetWeb
     classes: SheetWeb<R>
     style: RulesetWeb
-    theme: getTheme<R>
+    theme: Theme
     flip: boolean
     mergeRulesetWithOverrides: MergeRulesetWithOverridesWeb
     animations: Animation.DriversWeb<getAnimation<R>>
@@ -174,7 +174,7 @@
     className: getStyle<R>
     classes: SheetNative<R>
     style: getStyle<R>
-    theme: getTheme<R>
+    theme: Theme
     flip: boolean
     mergeRulesetWithOverrides: MergeRulesetWithOverridesNative
     animations: Animation.DriversNative<getAnimation<R>>
@@ -190,7 +190,8 @@
     className: RulesetWeb | getStyle<R>
     classes: Sheet<R>
     style: RulesetWeb | getStyle<R>
-    theme: getTheme<R>; flip: boolean
+    theme: Theme
+    flip: boolean
     mergeRulesetWithOverrides: MergeRulesetWithOverrides
     animations: Animation.Drivers<getAnimation<R>>
   } & (OnPressAllNative | OnPressAllWeb)>

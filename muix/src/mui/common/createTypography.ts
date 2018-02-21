@@ -48,7 +48,12 @@ export default function createTypography(palette: Muix.Palette, optionOrCreator:
     return optionX ? deepMerge(res, optionX) : res
   }
 
-  const sheetX: ReactXX.PartialSheetX<MuixTypography.Shape> = {
+  type Shape = ReactXX.OverwriteShape<{
+    common: ReactXX.ShapeTexts<Muix.Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'> & { noWrap?: any /*ReactN.TextProperties*/ }
+  }>
+
+
+  const sheetX: ReactXX.SheetX<Shape> = {
     fontWeightLightNew,
     fontWeightRegularNew,
     fontWeightMediumNew,
@@ -63,7 +68,7 @@ export default function createTypography(palette: Muix.Palette, optionOrCreator:
     body1: getWebProps(fontWeightRegularNew, body1, fontSizesNative.body1, mui.body1),
     caption: getWebProps(fontWeightRegularNew, caption, fontSizesNative.caption, mui.caption),
     button: getWebProps(fontWeightMediumNew, button, fontSize, mui.button),
-  } as any
+  } 
 
   const sheet = toPlatformSheet(sheetX)
 
@@ -76,7 +81,7 @@ export default function createTypography(palette: Muix.Palette, optionOrCreator:
       htmlFontSize,
       fontFamily,
       pxToRem,
-      ...sheet
+      ...sheet as any
     } as Muix.Typography,
     typographyX: {
       fontSize,

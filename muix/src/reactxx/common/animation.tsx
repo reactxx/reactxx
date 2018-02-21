@@ -1,10 +1,5 @@
-import { AnimationDriver } from 'reactxx' //NATIVE (npm config) or WEB (jspm config) driver
+import { AnimationDriver } from 'reactxx' //NATIVE or WEB animation driver
 import warning from 'warning'
-
-//export type AnimationsRecord<T extends Animation.Shapes> = {[P in keyof T]: AnimationLow<T[P]> }
-//export type Animations<T extends Animation.Shapes> = AnimationsRecord<T> & AnimationsEx
-//export type AnimationsEx = { reset: (caller?: AnimationLow<{}>) => void; statefullComponent: React.Component }
-
 
 export const getAnimations = <T extends Animation.Shapes>(sheets: Animation.SheetsX<T>, statefullComponent: React.Component) => {
   if (!sheets) return null
@@ -48,7 +43,7 @@ export const getGaps = (modifier: string, $duration: number) => {
   let leftGap = 0, rightGap = 0
   if (modifier) {
     const mores = modifier.trim().split('-')
-    const error = `-<number> | <number>- | <number>-<number> (where number is in <0..100> interval and first number must be less then the second) expected but "${modifier}" found`
+    const error = `Expected -<number> | <number>- | <number>-<number> (where number can end with '%' and is in <0..100> interval), but "${modifier}" found`
     warning(mores.length == 2, error)
     const ints = mores.map(m => m ? parseFloat(m.replace('%','')) / 100 * $duration : 0)
     if (ints[0] === 0) { rightGap = $duration - ints[1] }

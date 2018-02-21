@@ -1,5 +1,5 @@
 declare namespace testStyles {
-  type Shape = Muix.OverwriteShape<{
+  type Shape = ReactXX.OverwriteShape<{
     common: ReactXX.ShapeViews<'root' | 'primary' | 'secondary'> & ReactXX.ShapeTexts<'label'>
     props: { primary?: boolean }
   }>
@@ -7,6 +7,6 @@ declare namespace testStyles {
 
 declare namespace ReactXX {
   interface SheetsX {
-    TestStyles?: Muix.SheetXOrCreator<testStyles.Shape>
+    TestStyles?: ReactXX.PartialSheetX<testStyles.Shape>
   }
 }

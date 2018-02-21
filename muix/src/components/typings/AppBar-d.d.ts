@@ -1,6 +1,6 @@
 ﻿declare namespace MuixAppBar {
 
-  type Shape = Muix.OverwriteShape<{
+  type Shape = ReactXX.OverwriteShape<{
     common: ReactXX.ShapeViews<'root'>
     props: Muix.AppBarProps
   }>
@@ -9,7 +9,7 @@
 
 declare namespace ReactXX {
   interface SheetsX {
-    MuiAppBar?: Muix.SheetXOrCreator<MuixAppBar.Shape>
+    MuiAppBar?: ReactXX.PartialSheetX<MuixAppBar.Shape>
   }
 }
 

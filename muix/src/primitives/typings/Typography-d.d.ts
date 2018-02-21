@@ -1,8 +1,8 @@
 ﻿declare namespace MuixTypography{
   //type ClassKey = Muix.TypographyClassKey | 'root' | 'alignLeft' | 'alignCenter' | 'alignRight' | 'gutterBottom' | 'paragraph' | 'colorInherit' | 'colorSecondary' | 'colorAccent' | 'colorPrimary' | 'colorError'
 
-  type Shape = Muix.OverwriteShape<{
-    common: ReactXX.ShapeTexts<Muix.TypographyClassKey | 'root' | 'alignLeft' | 'alignCenter' | 'alignRight' | 'gutterBottom' | 'paragraph' | 'colorPrimary' | 'colorError'> & { noWrap?: any /*ReactN.TextProperties*/ }
+  type Shape = ReactXX.OverwriteShape<{
+    common: ReactXX.ShapeTexts<Muix.TypographyClassKey | 'alignLeft' | 'alignCenter' | 'alignRight' | 'gutterBottom' | 'paragraph' | 'colorPrimary' | 'colorError'> & { noWrap?: any /*ReactN.TextProperties*/ }
     style: ReactN.TextStyle
     props: Muix.TypographyProps
     /*{
@@ -20,7 +20,7 @@
 
 declare namespace ReactXX {
   interface SheetsX {
-    MuiTypography?: Muix.SheetXOrCreator<MuixTypography.Shape>
+    MuiTypography?: ReactXX.PartialSheetX<MuixTypography.Shape>
   }
 }
 

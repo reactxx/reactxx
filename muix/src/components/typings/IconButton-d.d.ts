@@ -1,6 +1,6 @@
 ﻿declare namespace MuixIconButton {
 
-  type Shape = Muix.OverwriteShape<{
+  type Shape = ReactXX.OverwriteShape<{
     common: ReactXX.ShapeViews<'root'>
     props: Muix.IconButtonProps
   }>
@@ -9,7 +9,7 @@
 
 declare namespace ReactXX {
   interface SheetsX {
-    MuiIconButton?: Muix.SheetXOrCreator<MuixIconButton.Shape>
+    MuiIconButton?: ReactXX.PartialSheetX<MuixIconButton.Shape>
   }
 }
 

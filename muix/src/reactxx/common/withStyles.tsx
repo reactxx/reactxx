@@ -15,7 +15,7 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
     usedChildOverrides: ReactXX.Sheets
     withParentContext: ReactXX.Sheet
     animations: Animation.Drivers<{}>
-    theme: ReactXX.getTheme<R>
+    theme: ReactXX.Theme //ReactXX.getTheme<R>
 
     constructor(props: ReactXX.PropsX<R>, context: TContext) {
       super(props, context)
@@ -53,7 +53,7 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
       // Could be called in <Component> render method to compute component styles. Side effects:
       // - use sheet..$overrides to modify self sheet
       // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
-      const classesProp = toPlatformSheet(applyTheme(this.themeGetter, classesPropX as ReactXX.FromThemeValueOrCreator<R, ReactXX.PartialSheetX<R>>))
+      const classesProp = toPlatformSheet(applyTheme(this.themeGetter, classesPropX))
       // calling getRulesetWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
       const mergeRulesetWithOverrides = createRulesetWithOverridesMerger(classesProp)
 

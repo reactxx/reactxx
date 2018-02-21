@@ -25,7 +25,7 @@
 
 //const drawerWidth = 240;
 
-//type Shape = Muix.OverwriteShape<{
+//type Shape = ReactXX.OverwriteShape<{
 //  common: Muix.ShapeViews<'root' | 'appFrame' | 'appBar' | 'drawerHeader' | 'drawerPaper' | 'content'>
 //  propsNative: {}
 //  propsWeb: {}

@@ -1,6 +1,6 @@
 ﻿declare namespace MuixButton {
 
-  type Shape = Muix.OverwriteShape<{
+  type Shape = ReactXX.OverwriteShape<{
     common: ReactXX.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini' | 'label'>
     native: ReactXX.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & ReactXX.ShapeTexts<'labelIcon'>
     web: 'colorInherit' | 'keyboardFocused'
@@ -12,9 +12,9 @@
 
 declare namespace ReactXX {
   interface SheetsX {
-    MuiButton?: Muix.SheetXOrCreator<MuixButton.Shape>
-    MuiButtonIconLeft?: Muix.SheetXOrCreator<MuixButton.Shape>
-    MuiButtonIconRight?: Muix.SheetXOrCreator<MuixButton.Shape>
+    MuiButton?: ReactXX.PartialSheetX<MuixButton.Shape>
+    MuiButtonIconLeft?: ReactXX.PartialSheetX<MuixButton.Shape>
+    MuiButtonIconRight?: ReactXX.PartialSheetX<MuixButton.Shape>
   }
 }
 

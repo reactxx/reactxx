@@ -2,7 +2,7 @@
 //import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
 declare namespace MuixButtonBase {
 
-  type Shape = Muix.OverwriteShape<{
+  type Shape = ReactXX.OverwriteShape<{
     common: ReactXX.ShapeViews<'root'>
     native: ReactXX.ShapeViews<'ripple'>
     props: Muix.ButtonBaseProps & ReactXX.OnPressAllWeb

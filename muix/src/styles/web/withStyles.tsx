@@ -33,7 +33,7 @@ export const muiCompatible = <R extends Muix.Shape>(Component: React.ComponentTy
     const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as React.CSSProperties
 
     const classes = sheetToClassSheet((classesToPlatformSheet(theme, _classes as Muix.ThemeValueOrCreator<ReactXX.PartialSheetX<R>>)) as ReactXX.SheetWeb<R>)
-    const webProps = { ...rest, ...$web, style: toPlatformRuleSet(style), classes, onClick: click, theme, className: rulesetToClassNames(cn) } as ReactXX.getPropsWeb<R>
+    const webProps = { ...rest, ...$web, style: toPlatformRuleSet(style as any), classes, onClick: click, theme, className: rulesetToClassNames(cn) } as ReactXX.getPropsWeb<R>
     return <Component {...webProps} />
   }
   Styled.contextTypes = MuiThemeContextTypes

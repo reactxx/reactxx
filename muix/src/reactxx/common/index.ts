@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import warning from 'warning'
 
 //create platform specific sheet from cross platform one
-export const sheetCreator = <R extends ReactXX.Shape>(sheetXCreator: ReactXX.FromThemeValueOrCreator<R, ReactXX.SheetX<R>>) => {
+export const sheetCreator = <R extends ReactXX.Shape>(sheetXCreator: ReactXX.FromThemeValueOrCreator<ReactXX.SheetX<R>>) => {
   if (typeof sheetXCreator === 'function') return (theme => toPlatformSheet(applyTheme(theme, sheetXCreator))) as ReactXX.SheetCreator<R>
-  return toPlatformSheet(sheetXCreator) as ReactXX.Sheet<R>
+  return toPlatformSheet(sheetXCreator) //as ReactXX.Sheet<R>
 }
 
 //create platform specific ruleset from cross platform one
@@ -20,26 +20,26 @@ export const toPlatformRuleSet = (style: ReactXX.RulesetX) => {
   return res as ReactXX.Ruleset 
 }
 
-export const applyTheme = <T>(theme: ReactXX.Theme | (() => ReactXX.Theme), valueOrCreator: ReactXX.FromThemeValueOrCreator<ReactXX.Shape, T>) =>
+export const applyTheme = <T>(theme: ReactXX.Theme | (() => ReactXX.Theme), valueOrCreator: ReactXX.FromThemeValueOrCreator<T> | any) =>
   typeof valueOrCreator === 'function' ? valueOrCreator(typeof theme === 'function' ? theme() : theme) : valueOrCreator
 
 //create platform specific sheet from cross platform one
-export const toPlatformSheet = (sheet: ReactXX.PartialSheetX<ReactXX.Shape>) => {
+export const toPlatformSheet = <R extends ReactXX.Shape>(sheet: ReactXX.SheetX<R>) => {
   if (typeof sheet !== 'object') return sheet
-  const res: ReactXX.Sheet = { }
+  const res = { }
   for (const p in sheet) {
     if (p === '$animations') {
       const animSrc = sheet[p]
-      const animDest = res[p] = {}
-      for (const pp in animSrc) animDest[pp] = toPlatformSheet(animSrc[pp])
+      const animDest = res[p] = {} as any
+      for (const pp in animSrc) animDest[pp] = toPlatformSheet(animSrc[pp] as any)
     } else
       res[p] = toPlatformRuleSet(sheet[p])
   }
-  return res
+  return res as ReactXX.Sheet<R>
 }
 
 //create platform specific sheets from cross platform one
-const toPlatformSheets = (theme:ReactXX.Theme, sheets: ReactXX.FromThemeValueOrCreator<ReactXX.Shape, ReactXX.SheetsX>) => {
+const toPlatformSheets = (theme:ReactXX.Theme, sheets: ReactXX.FromThemeValueOrCreator<ReactXX.SheetsX>) => {
   if (!sheets) return null
   const result: ReactXX.Sheets = {}
   for (const p in applyTheme(theme, sheets)) result[p] = toPlatformSheet(sheets[p])
