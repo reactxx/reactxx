@@ -12,10 +12,10 @@ import { RippleEffect } from '../ButtonBase/ButtonBase'
 const getTextIconColor = (color: string) => ({
   label: { color },
   labelIcon: {color },
-} as ReactXX.PartialSheetX<MuixButton.Shape>)
+} as ReactXX.PartialSheetX<MuiButton.Shape>)
 
 
-const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
+const sheets = (isLeft?: boolean) => sheetCreator<MuiButton.Shape>(({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
 
   root: {
     flexDirection: 'row',
@@ -113,7 +113,7 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
 }))
 
 
-const button: ReactXX.CodeSFCNative<MuixButton.Shape> = (props, context) => {
+const button: ReactXX.CodeSFCNative<MuiButton.Shape> = (props, context) => {
 
 
   //var x = props.mini
@@ -161,8 +161,8 @@ const button: ReactXX.CodeSFCNative<MuixButton.Shape> = (props, context) => {
   </RippleWithOverrides>
 }
 
-const Button = withStyles<MuixButton.Shape>(sheets(), { name: MuiButton.CompNames.Button })(button)
-export const ButtonIconStart = withStyles<MuixButton.Shape>(sheets(true), { name: MuiButton.CompNames.ButtonIconLeft })(button)
-export const ButtonIconEnd = withStyles<MuixButton.Shape>(sheets(false), { name: MuiButton.CompNames.ButtonIconRight })(button)
+const Button = withStyles<MuiButton.Shape>(sheets(), { name: MuiButton.CompNames.Button })(button)
+export const ButtonIconStart = withStyles<MuiButton.Shape>(sheets(true), { name: MuiButton.CompNames.ButtonIconLeft })(button)
+export const ButtonIconEnd = withStyles<MuiButton.Shape>(sheets(false), { name: MuiButton.CompNames.ButtonIconRight })(button)
 
 export default Button
