@@ -20,11 +20,11 @@ jss.options.insertionPoint = 'insertion-point-jss'
 
 export const AppContainer: React.SFC<AppContainerProps> = props => <JssProvider jss={jss}><MuiThemeProvider theme={createMuiTheme(props.themeOptions)}>{props.children}</MuiThemeProvider></JssProvider>
 
-type webKeys<R extends Muix.Shape> = ReactXX.getWeb<R> | keyof ReactXX.getCommon<R>
+type webKeys<R extends ReactXX.Shape> = ReactXX.getWeb<R> | keyof ReactXX.getCommon<R>
 
-export const muiCompatible = <R extends Muix.Shape>(Component: React.ComponentType<ReactXX.getPropsWeb<R>>) => {
+export const muiCompatible = <R extends ReactXX.Shape>(Component: React.ComponentType<ReactXX.getPropsWeb<R>>) => {
   const Styled: ReactXX.SFCX<R> = (props, context: Muix.MuiThemeContextValue) => {
-    const { classes: _classes, style, $web, $native, onClick, className: rulesetX, ...rest } = props as ReactXX.PropsX<Muix.Shape> & ReactXX.OnPressAllWeb 
+    const { classes: _classes, style, $web, $native, onClick, className: rulesetX, ...rest } = props as ReactXX.PropsX<ReactXX.Shape> & ReactXX.OnPressAllWeb 
 
     const click = ($web && $web.onClick) || onClick
 

@@ -18,34 +18,9 @@ declare namespace Muix {
   type muiCodeComponentType<P, ClassKey extends string> = React.ComponentType<P & muiCodeProps<ClassKey>>
   type muiComponentType<P, ClassKey extends string> = React.ComponentType<P & muiProps<ClassKey>>
 
-
-  //**** helpers
-  interface Shape extends ReactXX.Shape {
-    //theme: Muix.Theme
-  }
-  //interface DefaultEmptyShape extends Shape {
-  //  common: {}
-  //  native: {}
-  //  web: null
-  //  animation: {}
-  //  props: {}
-  //  style: ReactN.ViewStyle
-  //  propsNative: ReactN.ViewProperties
-  //}
-
-  //type OverwriteShape<R extends Partial<ReactXX.Shape>> = Overwrite<Muix.DefaultEmptyShape, R>
-
-  //type SheetXCreator<R extends Shape> = ThemeCreator<ReactXX.SheetX<R>>
-  //type SheetXOrCreator<R extends Shape> = ThemeValueOrCreator<ReactXX.PartialSheetX<R>>
-
-  //type SheetOrCreator<R extends Shape> = ThemeValueOrCreator<ReactXX.Sheet<R>>
-  //type SheetCreator<R extends Shape> = ThemeCreator<ReactXX.Sheet<R>>
-
-
   type ThemeCreator<T> = (theme: Theme) => T
   type ThemeValueOrCreator<T> = T | ThemeCreator<T>
-
-
+  
   interface IMuiThemeProps { theme: Theme | ((theme: Theme) => Theme) }
   type MuiThemeContextValue = { theme: Theme }
   type MuiOverridesContext = { childOverrides: ReactXX.Sheets }
