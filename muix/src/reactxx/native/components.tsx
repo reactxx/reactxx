@@ -41,10 +41,10 @@ export const animatedScrollView = anyScrollView(true)
 
 const AnimatedIconLow = Animated.createAnimatedComponent(MaterialCommunityIcons)
 const anyIcon = (isAnim: boolean) => (props => {
-  const ActIcon = isAnim ? AnimatedIconLow : MaterialCommunityIcons 
-  const { style, classes, className, mergeRulesetWithOverrides, flip, theme, animations, data, ...rest } = props
+  const ActIcon = isAnim ? AnimatedIconLow : MaterialCommunityIcons
+  const { style, classes, className, mergeRulesetWithOverrides, flip, theme, animations, data, children, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.TextStyle
-  return <ActIcon name={data as MaterialCommunityIconsProps['name']} style={rootStyle} {...rest} />
+  return <ActIcon name={(data || children as string) as MaterialCommunityIconsProps['name']} style={rootStyle} {...rest} />
 }) as ReactXX.CodeSFCNative<ReactXX.IconShape>
 
 export const icon = anyIcon(false)

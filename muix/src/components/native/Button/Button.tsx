@@ -84,7 +84,7 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
     $overrides: getTextIconColor('gray'),
   },
   raisedContrast: {
-    $overrides: getTextIconColor(palette.getContrastText(palette.primary[500]))
+    $overrides: getTextIconColor(palette.primary.contrastText)
   },
 
   fab: {

@@ -223,6 +223,7 @@
     <TypeScriptCompile Include="src\test\common\animation\test-animation-d.d.ts" />
     <TypeScriptCompile Include="src\test\common\components\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\test\common\components\button-demo.tsx" />
+    <TypeScriptCompile Include="src\test\common\mui\button-demo - Copy.tsx" />
     <TypeScriptCompile Include="src\test\common\mui\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\common\reactxx\doc\home.tsx" />
     <TypeScriptCompile Include="src\test\common\reactxx\doc\home-d.d.ts" />

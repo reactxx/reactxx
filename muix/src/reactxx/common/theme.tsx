@@ -1,7 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import warning from 'warning'
 import { applyTheme } from './index'
+
+import PropTypes from 'prop-types'
+import withContext from 'recompose/withContext'
 
 export const ThemeContextTypes = { theme: PropTypes.any }
 export const OverridesContextTypes = { childOverrides: PropTypes.any }
@@ -13,6 +15,10 @@ export const createTheme: ReactXX.ThemeCreator = options => {
 export const getDefaultTheme = () => {
   warning(!!themerProps, 'Missing AppContainer component')
   return themerProps.defaultTheme || (themerProps.defaultTheme = createTheme(themerProps.defaultOptions))
+}
+
+export const addOverrides = <T extends {}>(component: React.ComponentType<T>, getChildOverrides: (props: T) => ReactXX.Sheet) => {
+  return withContext(OverridesContextTypes, (props: T) => ({ childOverrides: getChildOverrides(props) }))(component) as React.ComponentType<T>
 }
 
 export class ThemeProvider extends React.PureComponent<ReactXX.ThemeProviderProps> {

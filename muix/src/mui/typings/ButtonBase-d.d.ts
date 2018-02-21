@@ -2,7 +2,9 @@
 //import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
 declare namespace MuiButtonBase {
 
-  const ButtonBaseName = 'MuixButtonBase'
+  const enum CompNames {
+    ButtonBase = 'MuixButtonBase',
+  }
 
   type Shape = ReactXX.OverwriteShape<{
     common: ReactXX.ShapeViews<'root'>
@@ -14,7 +16,7 @@ declare namespace MuiButtonBase {
 
 declare namespace ReactXX {
   interface SheetsX {
-    [MuiButtonBase.ButtonBaseName]?: ReactXX.PartialSheetX<Shape>
+    [MuiButtonBase.CompNames.ButtonBase]?: ReactXX.PartialSheetX<Shape>
   }
 }
 

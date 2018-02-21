@@ -18,11 +18,9 @@ const theme = createMuiTheme({
 
 const rootView: ReactN.ViewStyle = { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'stretch', padding: 10 }
 
-const app2: React.SFC = props => (
-  <View classes={{ root: rootView }} >
-    <Button color='secondary' variant='raised' classes={theme => ({ raisedSecondary: { backgroundColor: 'green', $web: { '&:hover': { backgroundColor: 'green', } } } })} >classes</Button>
-  </View>
-)
+const app2: React.SFC = props => <AppContainer>
+  <Button color="secondary" variant='raised' classes={theme => ({ raisedSecondary: { backgroundColor: 'green', $web: { '&:hover': { backgroundColor: 'green', } } } })} >classes</Button>
+  </AppContainer>
 
 //const root = { root: { margin: theme.spacing.unit } }
 //const root = {  }
@@ -78,6 +76,6 @@ const app: React.SFC = props => <AppContainer>
   </ScrollView>
 </AppContainer>
 
-//export default app
-export default app2
+export default app
+//export default app2
 

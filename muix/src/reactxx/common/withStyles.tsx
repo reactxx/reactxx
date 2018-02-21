@@ -84,15 +84,15 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
   const styled: any = Styled
   return styled as React.ComponentClass<ReactXX.PropsX<R>>
 }
+export default withStyles
+
 const allNames = {}
 
 const clearSystemProps = obj => {
   if (!obj) return obj
-  delete obj.$overrides; /*delete obj.$childOverrides;*/ delete obj.$name; delete obj.$web; delete obj.$native
+  delete obj.$overrides; delete obj.$name; delete obj.$web; delete obj.$native
   return obj
 }
-
-export default withStyles
 
 interface ThemeWithCache extends ReactXX.Theme {
   $sheetsCache?: ReactXX.Sheets
