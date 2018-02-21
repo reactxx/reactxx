@@ -212,13 +212,13 @@
     <TypeScriptCompile Include="src\styles\common\createTypography.ts" />
     <TypeScriptCompile Include="src\styles\common\MuiThemeProvider.tsx" />
     <TypeScriptCompile Include="src\styles\common\withStyles.tsx" />
-    <TypeScriptCompile Include="src\mui\typings\packages\popper.js.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\packages\jss.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\packages\react-popper.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\packages\react-transition-group\CSSTransition.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\packages\react-transition-group\index.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\packages\react-transition-group\Transition.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\packages\react-transition-group\TransitionGroup.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\libs\popper.js.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\libs\jss.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\libs\react-popper.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\libs\react-transition-group\CSSTransition.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\libs\react-transition-group\index.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\libs\react-transition-group\Transition.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\libs\react-transition-group\TransitionGroup.d.ts" />
     <TypeScriptCompile Include="src\test\common\animation\test-animation.tsx" />
     <TypeScriptCompile Include="src\test\common\animation\test-animation-d.d.ts" />
     <TypeScriptCompile Include="src\test\common\components\responsible-drawer.tsx" />
@@ -254,10 +254,10 @@
     <TypeScriptCompile Include="src\test\common\primitives\icon.tsx" />
     <TypeScriptCompile Include="src\test\common\primitives\text-view.tsx" />
     <TypeScriptCompile Include="src\test\common\styles\typography.tsx" />
-    <TypeScriptCompile Include="src\mui\typings\packages\mui\material-ui-helper.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\packages\mui\material-ui.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\libs\mui\material-ui-helper.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\libs\mui\material-ui.d.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\packages\mui\material-ui-ex.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\libs\mui\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="src\styles\web\inline-styles.tsx" />
     <TypeScriptCompile Include="src\mui\web\index.tsx" />
   </ItemGroup>
