@@ -24,6 +24,9 @@
     {
       $native?: T // native specific rules
       $web?: RulesetWeb // web specific rules
+      $propsWeb?: Partial<getPropsWeb<R>> //web specific props
+      $propsNative?: Partial<getPropsNative<R>> //native specific props
+      $props?: Partial<getProps<R>> //common props
     } &
     SheetOverridesX<R> // sheet overriding, 
 

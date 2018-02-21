@@ -4,9 +4,6 @@ import ReactN from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
-//import withContext from 'recompose/withContext'
-//import PropTypes from 'prop-types'
-
 import { Text, withStyles, toPlatformRuleSet, sheetCreator, addOverrides } from 'reactxx'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
@@ -31,7 +28,6 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
     paddingLeft: spacing.unit * 2,
     paddingRight: spacing.unit * 2,
     borderRadius: 2,
-    //backgroundColor: palette.text.primary,
     $overrides: {
       labelIcon: { lineHeight: 1.4 * 16, fontSize: 24, ...(isLeft === true ? { marginRight: spacing.unit } : (isLeft === false ? { marginLeft: spacing.unit } : {})) },
       label: { ...typoX.button, color: palette.text.primary, },
@@ -52,14 +48,12 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuixButton.Shape>(({ typograph
       ripple: { backgroundColor: fade(palette.primary.main, 0.4), opacity: 0.8 },
       ...getTextIconColor(palette.primary.main)
     },
-    //$childOverrides: getTextIconColor(palette.primary[500])
   },
   flatSecondary: {
     $overrides: {
       ripple: { backgroundColor: fade(palette.secondary.light, 0.4), opacity: 0.8 },
       ...getTextIconColor(palette.secondary.main)
     },
-    //$childOverrides: getTextIconColor(palette.secondary.light)
   },
 
   raised: {
@@ -131,7 +125,7 @@ const button: ReactXX.CodeSFCNative<MuixButton.Shape> = (props, context) => {
 
   const isFlat = !raised && !fab
 
-  const viewStyle = mergeRulesetWithOverrides(
+  const rootStyle = mergeRulesetWithOverrides(
     classes.root,
     !isFlat && classes.raised,
     isFlat && classes.flat,
@@ -162,13 +156,13 @@ const button: ReactXX.CodeSFCNative<MuixButton.Shape> = (props, context) => {
     [ReactXX.CompNames.Text]: { root: labelStyle },
   }))
 
-  return <RippleWithOverrides viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} className={null} mergeRulesetWithOverrides={null} animations={null} {...rest}>
+  return <RippleWithOverrides viewStyle={rootStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} className={null} mergeRulesetWithOverrides={null} animations={null} {...rest}>
     {childs}
   </RippleWithOverrides>
 }
 
 const Button = withStyles<MuixButton.Shape>(sheets(), { name: MuiButton.CompNames.Button })(button)
-export const ButtonIconLeft = withStyles<MuixButton.Shape>(sheets(true), { name: MuiButton.CompNames.ButtonIconLeft })(button)
-export const ButtonIconRight = withStyles<MuixButton.Shape>(sheets(false), { name: MuiButton.CompNames.ButtonIconRight })(button)
+export const ButtonIconStart = withStyles<MuixButton.Shape>(sheets(true), { name: MuiButton.CompNames.ButtonIconLeft })(button)
+export const ButtonIconEnd = withStyles<MuixButton.Shape>(sheets(false), { name: MuiButton.CompNames.ButtonIconRight })(button)
 
 export default Button

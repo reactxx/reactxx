@@ -1,5 +1,5 @@
 import React from 'react'
-import Button, { ButtonIconLeft, ButtonIconRight } from 'reactxx-mui/Button/Button'
+import Button, { ButtonIconStart, ButtonIconEnd } from 'reactxx-mui/Button/Button'
 import { AppContainer, createMuiTheme } from 'reactxx-mui/index'
 //import color from 'material-ui/colors/orange'
 
@@ -61,11 +61,11 @@ const app: React.SFC = props => <AppContainer>
       <Button variant='fab' mini disabled><Icon>{MDI.Delete}</Icon></Button>
     </View>
     <View classes={{ root: rootView }} >
-      <ButtonIconLeft color='secondary' variant='raised' ><Icon data={MDI.ArrowDownBoldBox} />Icon Left</ButtonIconLeft>
-      <ButtonIconLeft color='primary' variant='raised' ><Icon data={MDI.ArrowDownBoldBox} />Icon Left</ButtonIconLeft>
-      <ButtonIconRight color='default' variant='raised' >Icon Right<Icon data={MDI.ArrowDownBoldBox} /></ButtonIconRight>
-      <ButtonIconRight color='secondary' size='small' variant='raised' >Icon Right<Icon data={MDI.ArrowDownBoldBox} /></ButtonIconRight>
-      <ButtonIconRight color='primary' disabled variant='raised' >Icon Right<Icon data={MDI.ArrowDownBoldBox} /></ButtonIconRight>
+      <ButtonIconStart color='secondary' variant='raised' ><Icon data={MDI.ArrowDownBoldBox} />Icon Left</ButtonIconStart>
+      <ButtonIconStart color='primary' variant='raised' ><Icon data={MDI.ArrowDownBoldBox} />Icon Left</ButtonIconStart>
+      <ButtonIconEnd color='default' variant='raised' >Icon Right<Icon data={MDI.ArrowDownBoldBox} /></ButtonIconEnd>
+      <ButtonIconEnd color='secondary' size='small' variant='raised' >Icon Right<Icon data={MDI.ArrowDownBoldBox} /></ButtonIconEnd>
+      <ButtonIconEnd color='primary' disabled variant='raised' >Icon Right<Icon data={MDI.ArrowDownBoldBox} /></ButtonIconEnd>
     </View>
     <View classes={{ root: rootView }} >
       <Button color='secondary' variant='raised' classes={theme => ({ raisedSecondary: { backgroundColor: 'green', $web: { '&:hover': { backgroundColor: 'green', } } } })} >classes</Button>
