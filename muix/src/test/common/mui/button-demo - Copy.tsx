@@ -21,6 +21,9 @@ const rootView: ReactN.ViewStyle = { flexDirection: 'row', flexWrap: 'wrap', jus
 const app2: React.SFC = props => (
   <View classes={{ root: rootView }} >
     <Button color='secondary' variant='raised' classes={theme => ({ raisedSecondary: { backgroundColor: 'green', $web: { '&:hover': { backgroundColor: 'green', } } } })} >classes</Button>
+    <ThemeProvider theme={theme}>
+      <Button color='secondary' variant='raised'>theme</Button>
+    </ThemeProvider>
   </View>
 )
 
@@ -78,6 +81,6 @@ const app: React.SFC = props => <AppContainer>
   </ScrollView>
 </AppContainer>
 
-//export default app
-export default app2
+export default app
+//export default app2
 

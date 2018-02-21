@@ -4,10 +4,7 @@ import ReactN from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
-import { withStyles, toPlatformRuleSet, sheetCreator } from 'muix-styles'
-//import { withStyles, toPlatformRuleSet, sheetCreator } from 'reactxx'
-
-import { Text } from 'muix-primitives'
+import { Text, withStyles, toPlatformRuleSet, sheetCreator } from 'reactxx'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 

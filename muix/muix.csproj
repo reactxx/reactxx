@@ -111,6 +111,15 @@
     </Content>
     <Content Include="src\doc\home.md" />
     <Content Include="src\doc\home - Copy.md" />
+    <Content Include="src\mui\native\fonts\Roboto-Light.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\mui\native\fonts\Roboto-Medium.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\mui\native\fonts\Roboto-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -168,6 +177,8 @@
     <TypeScriptCompile Include="src\mui\common\createMuiTheme.ts" />
     <TypeScriptCompile Include="src\mui\native\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\mui\native\Button\Button.tsx" />
+    <TypeScriptCompile Include="src\mui\native\expoLoadFonts.ts" />
+    <TypeScriptCompile Include="src\mui\native\index.tsx" />
     <TypeScriptCompile Include="src\mui\typings\Button-d.d.ts" />
     <TypeScriptCompile Include="src\mui\typings\ButtonBase-d.d.ts" />
     <TypeScriptCompile Include="src\mui\typings\theme.d.ts" />

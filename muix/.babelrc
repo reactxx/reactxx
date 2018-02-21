@@ -12,12 +12,14 @@
         "root": [ "." ],
         "alias": {
           "reactxx": "./deploy/es/reactxx/native",
+          "^reactxx-mdi/(.+)": "reactxx-mdi",
+          "reactxx-mui": "./deploy/es/mui/native",
+
           "muix-primitives": "./deploy/es/primitives/native",
           "muix-components": "./deploy/es/components/native",
           "muix-styles/native": "./deploy/es/styles/native",
           "muix-styles": "./deploy/es/styles/native",
-          "muix-animation": "./deploy/es/animation/native",
-          "^reactxx-mdi/(.+)": "reactxx-mdi"
+          "muix-animation": "./deploy/es/animation/native"
         }
       }
     ]

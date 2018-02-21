@@ -16,7 +16,6 @@ SystemJS.config({
     "muix-styles": "deploy/lib/styles/web/index",
     "muix-styles/web": "deploy/lib/styles/web/index",
     "muix-primitives": "deploy/lib/primitives/web/index",
-    "reactxx": "deploy/lib/reactxx/web/index",
     "muix-components": "deploy/lib/components/web",
     "jss-props-sort": "npm:jss-props-sort@6.0.0",
     "jss-default-unit": "npm:jss-default-unit@8.0.2",
@@ -24,8 +23,12 @@ SystemJS.config({
     "jss-nested": "npm:jss-nested@6.0.1",
     "jss-camel-case": "npm:jss-camel-case@6.0.0",
     "jss-global": "npm:jss-global@3.0.0",
+
+    "reactxx/web": "deploy/lib/reactxx/web/index",
+    "reactxx": "deploy/lib/reactxx/web/index",
+    "reactxx-mui": "deploy/lib/mui/web",
     "reactxx-shadows": "npm:reactxx-shadows@0.1.17",
-    "reactxx-mdi": "npm:reactxx-mdi@0.1.58"
+    "reactxx-mdi": "npm:reactxx-mdi@0.1.58",
   }
 });
 

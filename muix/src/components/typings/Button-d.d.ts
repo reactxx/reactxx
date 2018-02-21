@@ -4,7 +4,7 @@
     common: ReactXX.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini' | 'label'>
     native: ReactXX.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & ReactXX.ShapeTexts<'labelIcon'>
     web: 'colorInherit' | 'keyboardFocused'
-    props: Muix.ButtonProps & ReactXX.OnPressAllWeb
+    props: Muix.ButtonProps & ReactXX.OnPressAllX
     propsNative: ReactN.TouchableOpacityProperties
   }>
 

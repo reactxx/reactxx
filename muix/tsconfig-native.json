@@ -10,6 +10,9 @@
     "baseUrl": ".",
     "paths": {
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ],
+      "reactxx": [ "src/reactxx/native/index" ],
+
+      "reactxx-mui/*": [ "src/mui/native/*" ],
 
       "muix-styles/web": [ "src/styles/web/index" ],
       "muix-styles/native": [ "src/styles/native/index" ],
@@ -19,8 +22,6 @@
 
       "muix-primitives": [ "src/primitives/native/index" ],
 
-      "reactxx": [ "src/reactxx/native/index" ],
-      "reactxx/web": [ "src/reactxx/web/index" ],
 
       "muix-components/*": [ "src/components/native/*" ],
       //"muix-components/current/*": [ "src/components/web/*" ],

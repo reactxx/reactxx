@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactN from 'react-native'
 
 import hoistNonReactStatics from 'hoist-non-react-statics'
 

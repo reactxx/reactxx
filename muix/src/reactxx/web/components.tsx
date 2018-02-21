@@ -18,7 +18,7 @@ export const icon: ReactXX.CodeSFCWeb<ReactXX.IconShape> = props => {
   if (rootStyle.fontSize) { rootStyle.height = rootStyle.width = rootStyle.fontSize; delete rootStyle.fontSize }
   if (style && style.fontSize) { style.height = style.width = style.fontSize; delete style.fontSize }
   return <svg className={rulesetsToClassNames(rootStyle)} style={style} focusable='false' viewBox={viewBox || '0 0 24 24'} {...rest}>
-    <path d={data} />
+    <path d={data || children as string} />
   </svg>
 }
 

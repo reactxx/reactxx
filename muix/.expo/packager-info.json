@@ -1,8 +1,8 @@
 {
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 10900,
+  "packagerPid": 7052,
   "expoServerNgrokUrl": "https://7z-e5j.pzika.muix.exp.direct",
   "packagerNgrokUrl": "https://packager.7z-e5j.pzika.muix.exp.direct",
-  "ngrokPid": 4404
+  "ngrokPid": 10164
 }
