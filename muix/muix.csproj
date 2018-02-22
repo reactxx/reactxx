@@ -186,6 +186,7 @@
     <TypeScriptCompile Include="src\mui\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\animation.tsx" />
+    <TypeScriptCompile Include="src\reactxx\common\media.ts" />
     <TypeScriptCompile Include="src\reactxx\common\components.ts" />
     <TypeScriptCompile Include="src\reactxx\common\theme.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\index.ts" />
@@ -193,7 +194,9 @@
     <TypeScriptCompile Include="src\reactxx\native\animation.tsx" />
     <TypeScriptCompile Include="src\reactxx\native\components.tsx" />
     <TypeScriptCompile Include="src\reactxx\native\index.ts" />
+    <TypeScriptCompile Include="src\reactxx\native\media.d.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\components.d.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\media.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\theme.d.ts" />
     <TypeScriptCompile Include="src\reactxx\web\animation.tsx" />
     <TypeScriptCompile Include="src\reactxx\web\fela.tsx" />
@@ -209,6 +212,7 @@
     <TypeScriptCompile Include="src\primitives\typings\Icon-d.d.ts" />
     <TypeScriptCompile Include="src\primitives\web\for-components.tsx" />
     <TypeScriptCompile Include="src\reactxx\typings\sheets.d.ts" />
+    <TypeScriptCompile Include="src\reactxx\web\media.ts" />
     <TypeScriptCompile Include="src\styles\common\createTypography.ts" />
     <TypeScriptCompile Include="src\styles\common\MuiThemeProvider.tsx" />
     <TypeScriptCompile Include="src\styles\common\withStyles.tsx" />

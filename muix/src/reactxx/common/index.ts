@@ -13,9 +13,9 @@ export const sheetCreator = <R extends ReactXX.Shape>(sheetXCreator: ReactXX.Fro
 export const toPlatformRuleSet = (style: ReactXX.RulesetX) => {
   if (!style) return null
   const isNative = !window.isWeb
-  if (!style.$web && !style.$native && !style.$overrides /*&& !style.$childOverrides*/) return style //optimalization
-  const { $web, $native, $overrides, /*$childOverrides,*/ ...rest } = style
-  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides)/*, $childOverrides: toPlatformSheets(null, $childOverrides)*/ }
+  if (!style.$media && !style.$web && !style.$native && !style.$overrides /*&& !style.$childOverrides*/) return style //optimalization
+  const { $web, $native, $overrides, /*$childOverrides,*/$media, ...rest } = style
+  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $media: toPlatformSheet($media as any) }
   if (!res.$overrides) delete res.$overrides //remove NULL or UNDEFINED if (!res.$childOverrides) delete res.$childOverrides 
   return res as ReactXX.Ruleset 
 }

@@ -28,7 +28,8 @@
       //$propsNative?: Partial<getPropsNative<R>> //native specific props
       //$props?: Partial<getProps<R>> //common props
     } &
-    SheetOverridesX<R> // sheet overriding, 
+    SheetOverridesX<R> & // sheet overriding, 
+    { $media?: Media.MediaSheetX<T, R> }
 
   // rule names, common for native and web
   type commonRuleNames<T extends RulesetNative> = keyof React.CSSPropertiesLow & keyof T
@@ -98,8 +99,8 @@
 
   //Cross platform sheet helpers
   type SheetXCommon<R extends Shape> = {[P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R>}
-  type SheetXNative<R extends Shape> = {[P in keyof getNative<R>]: (getNative<R>[P] & SheetOverridesX<R>) }
-  type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: (RulesetWeb & SheetOverridesX<R>) }
+  type SheetXNative<R extends Shape> = {[P in keyof getNative<R>]: (getNative<R>[P] & SheetOverridesX<R> & { $media?: Media.MediaSheetXNative<getNative<R>[P], R> }) }
+  type SheetXWeb<R extends Shape> = {[P in getWeb<R>]: (RulesetWeb & SheetOverridesX<R> & { $media?: Media.MediaSheetXWeb<R> }) }
   //Overrides parts of the sheet
   interface SheetOverridesX<R extends Shape> { $overrides?: PartialSheetX<R>; $name?: string }
 

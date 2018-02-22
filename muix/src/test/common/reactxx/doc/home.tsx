@@ -10,7 +10,6 @@ export const expandedPanelSheet = sheetCreator<DocHome.ExpandedPanelShape>({
         height: [0, 50],
       },
       icon: {
-        //height: [24, 30],
         transform: [
           { rotate: ['0deg', '180deg'] }
         ]
@@ -21,7 +20,15 @@ export const expandedPanelSheet = sheetCreator<DocHome.ExpandedPanelShape>({
   },
   root: {
     marginTop: 10, marginBottom: 10,
-    borderWidth: 1, borderColor: 'darkblue', borderStyle: 'solid' 
+    borderWidth: 1, borderColor: 'darkblue', borderStyle: 'solid',
+    $media: {
+      '-480': {
+      },
+      '480-1024': {
+      },
+      '1024-': {
+      }
+    }
   },
   header: {
     padding: 10,
