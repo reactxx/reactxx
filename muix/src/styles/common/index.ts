@@ -30,10 +30,10 @@ export const sheetCreator = <R extends ReactXX.Shape>(sheetXCreator: Muix.ThemeC
 //create platform specific ruleset from cross platform ruleset
 export const toPlatformRuleSetX = (style: ReactXX.RulesetX, isNative: boolean) => {
   if (!style) return null
-  if (!style.$web && !style.$native && !style.$overrides /*&& !style.$childOverrides*/) return style //optimalization
-  const { $web, $native, $overrides, /*$childOverrides,*/ ...rest } = style
+  if (!style.$web && !style.$native && !style.$overrides) return style //optimalization
+  const { $web, $native, $overrides, ...rest } = style
   const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheetX($overrides, isNative), /*$childOverrides: getOverridesX(null, $childOverrides)*/ }
-  if (!res.$overrides) delete res.$overrides; //if (!res.$childOverrides) delete res.$childOverrides //remove NULL or UNDEFINED
+  if (!res.$overrides) delete res.$overrides; //remove NULL or UNDEFINED
   return res as ReactXX.Ruleset
 }
 
@@ -55,7 +55,7 @@ export const toPlatformSheetX = (sheet: ReactXX.PartialSheetX<ReactXX.Shape>, is
       const animDest = res[p] = {}
       for (const pp in animSrc) animDest[pp] = toPlatformSheetX(animSrc[pp] as any, isNative)
     } else
-      res[p] = toPlatformRuleSetX(sheet[p], isNative)
+      res[p] = toPlatformRuleSetX(sheet[p], isNative) as any
   }
   return res
 }

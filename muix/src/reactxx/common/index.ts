@@ -13,10 +13,15 @@ export const sheetCreator = <R extends ReactXX.Shape>(sheetXCreator: ReactXX.Fro
 export const toPlatformRuleSet = (style: ReactXX.RulesetX) => {
   if (!style) return null
   const isNative = !window.isWeb
-  if (!style.$media && !style.$web && !style.$native && !style.$overrides /*&& !style.$childOverrides*/) return style //optimalization
-  const { $web, $native, $overrides, /*$childOverrides,*/$media, ...rest } = style
-  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $media: toPlatformSheet($media as any) }
-  if (!res.$overrides) delete res.$overrides //remove NULL or UNDEFINED if (!res.$childOverrides) delete res.$childOverrides 
+  if (!style.$mediaq && !style.$web && !style.$native && !style.$overrides && !style.$props) return style //optimalization
+  const { $web, $native, $overrides, $mediaq, $props: $propsX, ...rest } = style
+  let $props:any = $propsX
+  if ($propsX && ($propsX.$native && isNative || $propsX.$web && !isNative)) {
+    const { $native: $propsNative, $web: $propsWeb, ...restProps } = $propsX
+    $props = { ...restProps, ...(isNative ? $propsNative : $propsWeb)}
+  }
+  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $media: toPlatformSheet($mediaq as any), $props }
+  if (!res.$overrides) delete res.$overrides; if (!res.$props) delete res.$props //remove NULL or UNDEFINED
   return res as ReactXX.Ruleset 
 }
 

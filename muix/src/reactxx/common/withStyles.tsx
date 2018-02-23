@@ -1,6 +1,7 @@
 import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { toPlatformRuleSet, toPlatformSheet, applyTheme, deepMerge } from './index'
+import { ComponentsMediaQ } from './media-q'
 import { ThemeContextTypes, OverridesContextTypes, getDefaultTheme } from './theme'
 import warning from 'warning'
 import { getAnimations } from './animation'
@@ -16,6 +17,7 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
     withParentContext: ReactXX.Sheet
     animations: Animation.Drivers<{}>
     theme: ReactXX.Theme //ReactXX.getTheme<R>
+    media: ComponentsMediaQ
 
     constructor(props: ReactXX.PropsX<R>, context: TContext) {
       super(props, context)
@@ -33,11 +35,14 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
 
       //*** init animations
       this.animations = getAnimations(staticSheet.$animations, this)
+      //*** init media queries
+      this.media = new ComponentsMediaQ(this)
     }
 
     getChildContext() { return { childOverrides: this.usedChildOverrides /*usedChildOverrides is modified during Component render (where getRulesetWithSideEffect is called)*/ } as ReactXX.OverridesContext }
 
     componentWillReceiveProps() { this.animations && this.animations.reset() }
+    componentWillUnmount() { this.media.unsubscribe() }
 
     themeGetter = (() => {
       if (this.theme) return this.theme
@@ -47,7 +52,9 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
     render() {
       const { flip: flipProp } = options
       const { animations, theme } = this
-      const { classes: classesPropX, style, $web, $native, onPress, onLongPress, onPressIn, onPressOut, className: classNameX, childClasses, ...other } = this.props as ReactXX.PropsX & ReactXX.OnPressAllX
+      const { classes: classesPropX, style, $web, $native, onPress, onLongPress, onPressIn, onPressOut, className: classNameX, childClasses, ignore, ...other } = this.props as ReactXX.PropsX & ReactXX.OnPressAllX
+
+      if (ignore) return null
 
       //****************************  getRulesetWithSideEffect 
       // Could be called in <Component> render method to compute component styles. Side effects:
@@ -55,7 +62,7 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
       // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides) 
       const classesProp = toPlatformSheet(applyTheme(this.themeGetter, classesPropX))
       // calling getRulesetWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
-      const mergeRulesetWithOverrides = createRulesetWithOverridesMerger(classesProp)
+      const mergeRulesetWithOverrides = createRulesetWithOverridesMerger(classesProp, this.media)
 
       //const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as ReactXX.TRulesetX
       const className = toPlatformRuleSet(applyTheme(this.themeGetter, classNameX))
@@ -64,9 +71,9 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
       const codeProps = {
         ...other, ...(window.isWeb ? $web : $native), theme,
         flip, mergeRulesetWithOverrides, animations,
-        classes: this.withParentContext, //all code component, for root lower priority than className and style. Classes are used by getRulesetWithSideEffect prop in Component.render
-        className: className, //code root by means of className (web) or style (native)
-        style: toPlatformRuleSet(applyTheme(this.themeGetter, style)), //code root by means of style (higher priority than className)
+        classes: this.withParentContext, 
+        className: className, 
+        style: toPlatformRuleSet(applyTheme(this.themeGetter, style)), 
       } as ReactXX.CodeProps<R>
 
       toPlatformEvents($web, $native as ReactXX.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
@@ -90,8 +97,8 @@ const allNames = {}
 
 const clearSystemProps = obj => {
   if (!obj) return obj
-  delete obj.$overrides; delete obj.$name; delete obj.$web; delete obj.$native
-  return obj
+  const { $overrides, $name, $web, $native, $mediaq, ...rest } = obj as ReactXX.RulesetX
+  return rest
 }
 
 interface ThemeWithCache extends ReactXX.Theme {
@@ -118,16 +125,16 @@ export const toPlatformEvents = ($web: ReactXX.OnPressAllWeb, $native: ReactXX.O
 // Could be called in <Component> render method to compute component styles. Side effects:
 // - use sheet..$overrides to modify self sheet
 // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides)
-const createRulesetWithOverridesMerger = (classesProp: ReactXX.Sheet) => { //, usedChildOverrides: ReactXX.Sheets) => {
+const createRulesetWithOverridesMerger = (classesProp: ReactXX.Sheet, media: ComponentsMediaQ) => { //, usedChildOverrides: ReactXX.Sheets) => {
   const usedOverrides: ReactXX.Sheet = {}
+  media.unsubscribe() //release media notifications
   const res: ReactXX.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
-    let single = undefined //optimalization: rulesets contains ony not empty item
-    rulesets.forEach(ruleset => { // acumulate $overrides //and $childOverrides
+    let single = undefined //optimalization: rulesets contains just single non empty item
+    rulesets.forEach(ruleset => { // acumulate $overrides 
       if (!ruleset) return
-      if (single === undefined) single = ruleset //first not empty
-      else if (single !== null) single = null //second not empty
+      if (single === undefined) single = ruleset //first 
+      else if (single !== null) single = null //second 
       mergeOverrides(usedOverrides, ruleset.$overrides)
-      //mergeOverrides(usedChildOverrides, ruleset.$childOverrides) //modify react context with child component overriding
     })
     if (single === undefined) return {}
     const rulesetResult: typeof rulesets[0] = {}
@@ -138,7 +145,7 @@ const createRulesetWithOverridesMerger = (classesProp: ReactXX.Sheet) => { //, u
         usedOverrides[single.$name], //... modify it with used $overrides
         classesProp && single.$name && classesProp[single.$name] //... and force using classes component property (it has hight priority)
       ]
-      if (other.filter(s => !!s).length <= 1) return clearSystemProps({ ...single }) //otimalization: nothing to merge
+      if (other.filter(s => !!s).length === 1) return clearSystemProps(media.processRuleset({ ...single })) //otimalization: nothing to merge
       deepMerges(true, rulesetResult, ...other)
     }
     //apply used $overrides and classes prop
@@ -151,7 +158,7 @@ const createRulesetWithOverridesMerger = (classesProp: ReactXX.Sheet) => { //, u
           classesProp && ruleset.$name && classesProp[ruleset.$name], //force using classes component property (it has hight priority)
         )
       })
-    return clearSystemProps(rulesetResult)
+    return clearSystemProps(media.processRuleset(rulesetResult))
   }
   return res
 }
