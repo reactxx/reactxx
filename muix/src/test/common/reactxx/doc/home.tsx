@@ -57,7 +57,7 @@ export const expandedPanelSheet = sheetCreator<DocHome.ExpandedPanelShape>({
 
 
 const expandedPanel: ReactXX.CodeSFC<DocHome.ExpandedPanelShape> = props => {
-  const { style, classes, className, mergeRulesetWithOverrides, flip, theme, animations: { openClose }, title, children, ...rest } = props
+  const { style, classes, className, mergeRulesetWithOverrides, theme, animations: { openClose }, title, children, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className)
   const headerStyle = mergeRulesetWithOverrides(classes.header)
   const contentStyle = mergeRulesetWithOverrides(classes.content, openClose.sheet.content) as ReactN.ViewStyle

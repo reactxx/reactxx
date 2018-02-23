@@ -57,7 +57,7 @@ const sheet = sheetCreator<testStyles.Shape>(({ palette, typographyX: typoX }) =
 }))
 
 const testStyles: ReactXX.CodeSFC<testStyles.Shape> = props => {
-  const { classes, mergeRulesetWithOverrides, theme, flip, primary, children, style, className, animations, ...rest } = props
+  const { classes, mergeRulesetWithOverrides, theme, primary, children, style, className, animations, ...rest } = props
 
   const rootStyles = mergeRulesetWithOverrides( // getRulesetWithSideEffect now knowns, which rulesets are actualy used. So it can use their $overrides and $childOverrides props
     classes.root,

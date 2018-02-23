@@ -18,6 +18,8 @@ declare namespace ReactXX {
     props: { numberOfLines?: number } & OnPressX
     propsWeb: React.HTMLAttributes<HTMLSpanElement>
     propsNative: ReactN.TextProperties
+    nameType: CompNames.Text
+    componentTheme: { xxx?:string}
   }>
 
   type ViewShape = OverwriteShape<{
@@ -26,9 +28,10 @@ declare namespace ReactXX {
     props: OnPressAllX
     propsWeb: React.HTMLAttributes<HTMLDivElement>
     propsNative: ReactN.ViewProperties
+    nameType: CompNames.View
   }>
 
-    type IconShape = OverwriteShape<{
+  type IconShape = OverwriteShape<{
     common: ShapeTexts<'root'>
     style: ReactN.TextStyle,
     props: { data: string } & OnPressX
@@ -38,6 +41,7 @@ declare namespace ReactXX {
       size?: number
       color?: string
     }
+    nameType: CompNames.Icon
   }>
 
   type ScrollViewShape = OverwriteShape<{
@@ -49,6 +53,7 @@ declare namespace ReactXX {
     }
     propsWeb: React.HTMLAttributes<HTMLDivElement>
     propsNative: ReactN.ScrollViewProperties
+    nameType: CompNames.ScrollView
   }>
 
   interface SheetsX {

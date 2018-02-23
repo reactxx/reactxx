@@ -1,7 +1,10 @@
 ﻿declare namespace ReactXX {
 
+  interface ComponentsTheme { }
+
   interface Theme {
     direction: Direction
+    //components?: ComponentsTheme
     //overrides?: Sheets
   }
 
@@ -11,7 +14,7 @@
   type Direction = 'ltr' | 'rtl';
 
   type ThemeContextValue = { theme: Theme }
-  type OverridesContext = { childOverrides: Sheets }
+  type ThemeExContextValue = { themeEx: { theme: Theme; childOverrides: Sheets; componentsTheme: ComponentsTheme } }
 
   interface ThemerProps {
     creator: ThemeCreator

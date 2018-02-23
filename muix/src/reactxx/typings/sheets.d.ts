@@ -8,11 +8,15 @@
   interface OnPressAllWeb { onClick?: React.MouseEventHandler<Element>; onMouseDown?: React.MouseEventHandler<Element>; onMouseUp?: React.MouseEventHandler<Element> }
   interface OnPressAllNative { onPress: () => void; onPressIn: () => void; onPressOut: () => void; onLongPress: () => void }
 
-  interface WithStylesOptionsNew {
+  interface WithStylesOptionsNew<TName extends (string | null) = null> {
     name: keyof SheetsX
     flip?: boolean
   }
 
+  //type WithStylesOptionsNew2<R extends Shape = Shape> = getComponentTheme<R> & {
+  //  name: getNameType<R>
+  //  flip?: boolean
+  //}
   /******************************************
     RULESET
   *******************************************/
@@ -24,9 +28,6 @@
     {
       $native?: T // native specific rules
       $web?: RulesetWeb // web specific rules
-      //$propsWeb?: Partial<getPropsWeb<R>> //web specific props
-      //$propsNative?: Partial<getPropsNative<R>> //native specific props
-      //$props?: Partial<getProps<R>> //common props
     } &
     RulesetAddInX<T, R> // sheet addIn: overriding, media query 
 
@@ -61,6 +62,9 @@
     props: {} //common (web and native) props
     propsNative: {} //native only props 
     propsWeb: React.HTMLAttributes<Element>//web only props
+    //**** type of component name
+    nameType: string | null
+    componentsTheme: {}
   }
 
   //******************** Helpers for Shape.common and Shape.native definitin
@@ -73,6 +77,8 @@
     style: ReactN.ViewStyle
     props: {}; propsNative: ReactN.ViewProperties; propsWeb: React.HTMLAttributes<HTMLElement>
     animation: {}
+    nameType: null
+    componentsTheme: {}
   }, R>
 
   //******************** Shape getters
@@ -84,6 +90,8 @@
   type getProps<R extends Shape> = R['props'] & { ignore?: boolean }
   type getPropsWeb<R extends Shape> = R['propsWeb']
   type getPropsNative<R extends Shape> = R['propsNative']
+  type getNameType<R extends Shape> = R['nameType']
+  type getComponentsTheme<R extends Shape> = R['componentsTheme'] //& { name: string }
 
   /******************************************
     COMPONENT SHEET
@@ -112,10 +120,14 @@
   type RulesetWithAddInNative<T extends RulesetNative = {}, R extends Shape = Shape> = T & { $overrides?: SheetNative<R>; $name?: string; $props?: PropsInRulesetNative<R> }
 
   //******************** Sheet and Theme Creators
-  type FromThemeCreator<T> = (theme: ReactXX.Theme/*getTheme<R>*/) => T
+  type FromThemeCreator<T> = (theme: ReactXX.Theme) => T
   type FromThemeValueOrCreator<T> = T | FromThemeCreator<T>
-  type SheetCreator<R extends Shape> = FromThemeCreator<Sheet<R>>
-  type SheetOrCreator<R extends Shape = Shape> = FromThemeValueOrCreator<Sheet<R>>
+
+  type FromThemeCreator2<R extends Shape, T> = (theme: ReactXX.Theme, compTheme?: getComponentsTheme<R>) => T
+  type FromThemeValueOrCreator2<R extends Shape, T> = T | FromThemeCreator2<R, T>
+
+  type SheetCreator<R extends Shape> = FromThemeCreator2<R, Sheet<R>>
+  type SheetOrCreator<R extends Shape = Shape> = FromThemeValueOrCreator2<R, Sheet<R>>
   //type SheetOrCreatorX<R extends Shape = Shape> = FromThemeValueOrCreator<R, PartialSheetX<R>>
 
   //******************** Sheet GETTERs
@@ -131,6 +143,7 @@
   type SheetsWeb = {[P in keyof SheetsX]?: SheetWeb}
   type SheetsNative = {[P in keyof SheetsX]?: SheetNative}
   type Sheets = {[P in keyof SheetsX]?: Sheet}//  SheetsWeb | SheetsNative
+  
 
   /******************************************
      COMPONENT TYPING
@@ -159,7 +172,7 @@
     classes: SheetWeb<R>
     style: RulesetWeb
     theme: Theme
-    flip: boolean
+    //flip: boolean
     mergeRulesetWithOverrides: MergeRulesetWithOverridesWeb
     animations: Animation.DriversWeb<getAnimation<R>>
   } & OnPressAllWeb>
@@ -172,7 +185,7 @@
     classes: SheetNative<R>
     style: getStyle<R>
     theme: Theme
-    flip: boolean
+    //flip: boolean
     mergeRulesetWithOverrides: MergeRulesetWithOverridesNative
     animations: Animation.DriversNative<getAnimation<R>>
   } & OnPressAllNative>
@@ -185,7 +198,7 @@
     classes: Sheet<R>
     style: RulesetWeb | getStyle<R>
     theme: Theme
-    flip: boolean
+    //flip: boolean
     mergeRulesetWithOverrides: MergeRulesetWithOverrides
     animations: Animation.Drivers<getAnimation<R>>
     ignore?:boolean //?? why ??

@@ -77,7 +77,7 @@ const typography: ReactXX.CodeSFC<MuixTypography.Shape> = (props => {
     style,
     mergeRulesetWithOverrides,
     animations,
-    theme, flip, 
+    theme, 
     children,
     className,
     ...rest

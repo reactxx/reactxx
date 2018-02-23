@@ -23,7 +23,7 @@ declare namespace Animation {
     $web?: ToPairs<ReactXX.RulesetWeb, keyof React.CSSPropertiesLow> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
   }
 
-  type Drivers<T extends Shapes> = {[P in keyof T]: Driver<T[P]> } & AnimationsEx
+  type Drivers<T extends Shapes = Shapes> = {[P in keyof T]: Driver<T[P]> } & AnimationsEx
   type DriversWeb<T extends Shapes> = {[P in keyof T]: DriverWeb<T[P]> } & AnimationsEx
   type DriversNative<T extends Shapes> = {[P in keyof T]: DriverNative<T[P]> } & AnimationsEx
 

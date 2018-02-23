@@ -76,7 +76,7 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
       const className = toPlatformRuleSet(cn)
       const flip = typeof flipProp === 'boolean' ? flipProp : theme.direction === 'rtl'
 
-      const newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style as any)), classes: this.codeClasses, className, flip, mergeRulesetWithOverrides, animations } as ReactXX.CodeProps<R> & {onClick, onPress}
+      const newProps = { ...other, ...(window.isWeb ? $web : $native), theme, style: clearSystemProps(toPlatformRuleSet(style as any)), classes: this.codeClasses, className, mergeRulesetWithOverrides, animations } as ReactXX.CodeProps<R> & {onClick, onPress}
       if (window.isWeb) {
         const cl = ($web && ($web as any).onClick) || onClick
         if (cl) newProps.onClick = cl

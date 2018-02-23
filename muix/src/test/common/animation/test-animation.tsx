@@ -85,7 +85,7 @@ const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
 const btnStyle = {color: 'blue', padding: 10}
 
 const drawerLayout: ReactXX.CodeSFC<testAnimation.Shape> = props => {
-  const { classes, mergeRulesetWithOverrides, theme, flip, children, style, className, animations, mobile, tablet, desktop, ...rest } = props
+  const { classes, mergeRulesetWithOverrides, theme, children, style, className, animations, mobile, tablet, desktop, ...rest } = props
 
   const open = () => tablet ? animations.tablet.open() : animations.mobile.open()
   const close = () => tablet ? animations.tablet.close() : animations.mobile.close()

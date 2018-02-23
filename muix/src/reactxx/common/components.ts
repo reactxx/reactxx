@@ -1,6 +1,32 @@
 import { sheetCreator } from '../common/index'
-import withStyles from '../common/withStyles'
+import withStyles, { withStylesEx } from '../common/withStyles'
 import { text, view, icon, scrollView, animatedView, animatedIcon, animatedText, animatedScrollView } from 'reactxx' //import platform specific component code
+
+const textHOC = withStylesEx<ReactXX.TextShape>(ReactXX.CompNames.Text, null, (theme, options) => ({
+  root: {
+    $web: {
+      whiteSpace: 'pre-wrap',
+      //backgroundColor:'white',
+      wordWrap: 'break-word',
+      [`& .${ReactXX.CompNames.Text}`]: { //high level Text is block element, inner Texts are inline elements. <ReactXX.CompNames.Text> is className for Text component root div.
+        display: 'inline',
+      },
+    },
+  },
+  singleLineStyle: {
+    $web: {
+      maxWidth: '100%',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    }
+  },
+  pressable: { //web only ruleset
+    cursor: 'pointer'
+  },
+}))
+
+export const Text2 = textHOC(text)
 
 export const textSheet = sheetCreator<ReactXX.TextShape>({
   root: {

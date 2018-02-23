@@ -15,7 +15,7 @@ export * from '../common/createMuiTheme'
 import { sheetToClassSheet, rulesetToClassNames } from 'reactxx/web'
 import { createMuiTheme } from '../common/createMuiTheme'
 
-import { getDefaultTheme, ThemeContextTypes, OverridesContextTypes, toPlatformRuleSet, toPlatformSheet, AppContainer as ReactXXAppContainer, toPlatformEvents, applyTheme } from 'reactxx' //, MuiThemeProvider } from 'muix-styles'
+import { getDefaultTheme, ThemeContextTypes, ThemeExContextTypes, toPlatformRuleSet, toPlatformSheet, AppContainer as ReactXXAppContainer, toPlatformEvents, applyTheme } from 'reactxx' //, MuiThemeProvider } from 'muix-styles'
 
 export const jss = create(preset())
 jss.options.createGenerateClassName = createGenerateClassName

@@ -10,14 +10,14 @@ export const sheet = sheetCreator<MuixView.Shape>(() => ({
 }))
 
 const view: ReactXX.CodeSFC<MuixView.Shape> = props => {
-  let { classes, theme, flip, mergeRulesetWithOverrides, children, style, className, animations, ...rest } = props
+  let { classes, theme, mergeRulesetWithOverrides, children, style, className, animations, ...rest } = props
   const $web = rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>
   const $native = rest as ReactN.ViewProperties
   return <ViewX className={mergeRulesetWithOverrides(classes.root, className)} $web={$web} $native={$native} children={children} style={style} />
 }
 
 const animatedView: ReactXX.CodeSFC<MuixView.Shape> = props => {
-  const { classes, theme, flip, mergeRulesetWithOverrides, children, style, className, animations, ...rest } = props
+  const { classes, theme, mergeRulesetWithOverrides, children, style, className, animations, ...rest } = props
   const $web = rest as NoPartial<React.HTMLAttributes<HTMLDivElement>>
   const $native = rest as ReactN.ViewProperties
   return <AnimatedViewX className={mergeRulesetWithOverrides(classes.root, className)} $web={$web} $native={$native} children={children} style={style} />
