@@ -96,7 +96,8 @@ export const withStylesEx = <R extends ReactXX.Shape>(_name: ReactXX.getNameType
   }
   hoistNonReactStatics(Styled, Component as any)
   const styled: any = Styled
-  return (props => <Styled {...props}/>) as React.ComponentType<ReactXX.PropsX<R>>
+  return styled as React.ComponentType<ReactXX.PropsX<R>>
+  //return (props => <Styled {...props}/>) as React.ComponentType<ReactXX.PropsX<R>>
 }
 
 const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCreator<R>, options: ReactXX.WithStylesOptionsNew<ReactXX.getNameType<R>>) => (Component: ReactXX.CodeComponentType<R>) => {
