@@ -22,7 +22,7 @@ class Modify extends React.Component {
   render() {
     return <>
       <hr />
-      <Modifier modify={value => value}>
+      <Modifier modify={value => ({ ...value, theme: value.theme + '*M*' })}>
         <Fragment />
       </Modifier>
     </>

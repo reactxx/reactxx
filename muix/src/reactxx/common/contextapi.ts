@@ -17,6 +17,8 @@ interface Channel<T> {
   getValue: () => T
 }
 
+const enum Roles { provider, consumer, modifier }
+
 export const createContextLib = <T>(defaultValue: T, _channelId?: string) => {
 
   const channelId = _channelId || 'channel-' + uid++
@@ -24,54 +26,68 @@ export const createContextLib = <T>(defaultValue: T, _channelId?: string) => {
 
   class ComponentLow extends React.Component<ModifierProps<T>, { value }> {
 
-    //*************** PROVIDER part
-    pSubscribers = []
-    pChildContext
-
-    pInitChildContext(isModifier:boolean) {
-      return {
-        [channelId]: {
-          subscribe: subscriber => {
-            this.pSubscribers.push(subscriber)
-            return () => this.pSubscribers = this.pSubscribers.filter(s => s !== subscriber)
-          },
-          getValue: () => {
-            if (isModifier) return this.sInitFromParent()
-            const { props: { initValue } } = this
-            return initValue || defaultValue
-          }
-        } as Channel<T>
+    constructor(p, s, protected role: Roles) {
+      super(p, s)
+      if (this.role != Roles.consumer) {
+        this.pSubscribers = []
+        this.pChildContext = {
+          [channelId]: {
+            subscribe: subscriber => {
+              this.pSubscribers.push(subscriber)
+              return () => this.pSubscribers = this.pSubscribers.filter(s => s !== subscriber)
+            },
+            getValue: () => {
+              if (this.role == Roles.modifier) return this.mModifiedValue
+              const { props: { initValue } } = this
+              return initValue || defaultValue
+            }
+          } as Channel<T>
+        }
+      }
+      if (this.role != Roles.provider) {
+        this.sSelector = this.props.selector
+        this.sChannel = this.context[channelId]
+        const val = this.sChannel ? this.sChannel.getValue() : defaultValue
+        if (this.role == Roles.modifier) {
+          this.mModify = this.props.modify
+          this.mModifiedValue = this.mModify(val)
+        }
+        const value = this.sSelector ? this.sSelector(val) : val
+        this.state = { value }
       }
     }
 
-    pGetChildContext() { return this.pChildContext }
+    mModifiedValue: T
+    mModify: (data: T) => T
 
-    pComponentWillReceiveProps(nextProps: ProviderProps<T>) {
+    pSubscribers: Subscription<T>[]
+    pChildContext
+
+    sChannel: Channel<T>
+    sUnsubscribe: Unsubscribe
+    sSelector: (data: T) => {}
+
+    //*************** PROVIDER part
+
+    componentWillReceiveProps(nextProps: ProviderProps<T>) {
+      if (this.role === Roles.consumer) return
       const { pSubscribers, props: { initValue } } = this
       if (initValue === nextProps.initValue) return
       pSubscribers.forEach(s => s(nextProps.initValue))
     }
 
     //*************** CONSUMER part (with SELECTOR possibility)
-    sChannel: Channel<T>
-    sUnsubscribe: Unsubscribe
-    sSelector: (data: T) => {}
 
-    sInitFromParent(): any {
-      const { sSelector, sChannel } = this
-      const val = sChannel ? sChannel.getValue() : defaultValue
-      return sSelector ? sSelector(val) : val
-    }
-
-    sComponentDidMount() {
-      const { sSelector, pSubscribers, sChannel, state: { value }, props: { modify } } = this
+    componentDidMount() {
+      if (this.role === Roles.provider) return
+      const { sSelector, pSubscribers, sChannel, state: { value }, mModify } = this
       if (!sChannel) {
         warning(this.props.isQuiet, '<Consumer> or <Modifier> was rendered outside the context of its <Provider>')
         return
       }
       this.sUnsubscribe = sChannel.subscribe(sBroadcastValue => {
-        if (pSubscribers && modify) { //modifier
-          sBroadcastValue = modify(sBroadcastValue)
+        if (this.role === Roles.modifier) { //modifier
+          this.mModifiedValue = sBroadcastValue = mModify(sBroadcastValue)
           pSubscribers.forEach(s => s(sBroadcastValue))
         }
         if (!sSelector)
@@ -86,11 +102,14 @@ export const createContextLib = <T>(defaultValue: T, _channelId?: string) => {
       })
     }
 
-    sComponentWillUnmount() {
+    componentWillUnmount() {
+      if (this.role === Roles.provider) return
       if (this.sUnsubscribe) this.sUnsubscribe()
     }
 
-    sRender() {
+    render() {
+      if (this.role === Roles.provider) return this.props.children
+
       const { props: { children }, state: { value } } = this
       if (typeof children === 'function') return (children as React.SFC)(value)
       else return children
@@ -99,43 +118,22 @@ export const createContextLib = <T>(defaultValue: T, _channelId?: string) => {
   }
 
   class Provider extends ComponentLow {
-    pSubscribers = []
-    pChildContext = this.pInitChildContext(false)
-
+    constructor(p, s) { super(p, s, Roles.provider) }
     getChildContext() { return this.pChildContext }
-    componentWillReceiveProps(nextProps) { this.pComponentWillReceiveProps(nextProps) }
-    render() { return this.props.children }
 
     static childContextTypes = contextType
   }
 
   class Modifier extends ComponentLow {
-    pSubscribers = []
-    pChildContext = this.pInitChildContext(true)
-
+    constructor(p, s) { super(p, s, Roles.modifier) }
     getChildContext() { return this.pChildContext }
-    componentWillReceiveProps(nextProps) { this.pComponentWillReceiveProps(nextProps) }
-
-    sSelector = this.props.selector
-    sChannel = this.context[channelId]
-    state = { value: this.sInitFromParent() }
-
-    componentDidMount() { this.sComponentDidMount() }
-    componentWillUnmount() { this.sComponentWillUnmount() }
-    render() { return this.sRender() }
 
     static childContextTypes = contextType
     static contextTypes = contextType
   }
 
   class Consumer extends ComponentLow {
-    sSelector = this.props.selector
-    sChannel = this.context[channelId]
-    state = { value: this.sInitFromParent() }
-
-    componentDidMount() { this.sComponentDidMount() }
-    componentWillUnmount() { this.sComponentWillUnmount() }
-    render() { return this.sRender() }
+    constructor(p, s) { super(p, s, Roles.consumer) }
 
     static contextTypes = contextType
   }
