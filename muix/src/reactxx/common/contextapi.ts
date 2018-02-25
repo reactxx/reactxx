@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 import warning from 'warning'
 
 interface ProviderProps<T> { initValue?: T }
-interface ConsumerProps<T> { isQuiet?: boolean; selector?: (data: T) => {} }
-interface ModifierProps<T> extends ProviderProps<T>, ConsumerProps<T> { modify: (data: T) => T }
+export interface ConsumerProps<T, TSel extends {} = {}> { isQuiet?: boolean; selector?: (data: T) => TSel; render?: (selected: TSel) => React.ReactNode }
+export interface ModifierProps<T, TSel extends {} = {}> extends ConsumerProps<T, TSel> { modify: (data: T) => T }
 
 type Subscribe<T> = (subscription: Subscription<T>) => Unsubscribe
 type Subscription<T> = (data: T) => void
@@ -24,7 +24,7 @@ export const createContextLib = <T>(defaultValue: T, _channelId?: string) => {
   const channelId = _channelId || 'channel-' + uid++
   const contextType = { [channelId]: PropTypes.any }
 
-  class ComponentLow extends React.Component<ModifierProps<T>, { value }> {
+  class ComponentLow extends React.Component<ModifierProps<T> & ProviderProps<T>, { value }> {
 
     constructor(p, s, protected role: Roles) {
       super(p, s)
@@ -37,7 +37,7 @@ export const createContextLib = <T>(defaultValue: T, _channelId?: string) => {
               return () => this.pSubscribers = this.pSubscribers.filter(s => s !== subscriber)
             },
             getValue: () => {
-              if (this.role == Roles.modifier) return this.mModifiedValue
+              if (this.role === Roles.modifier) return this.mModifiedValue
               const { props: { initValue } } = this
               return initValue || defaultValue
             }
@@ -48,7 +48,7 @@ export const createContextLib = <T>(defaultValue: T, _channelId?: string) => {
         this.sSelector = this.props.selector
         this.sChannel = this.context[channelId]
         const val = this.sChannel ? this.sChannel.getValue() : defaultValue
-        if (this.role == Roles.modifier) {
+        if (this.role === Roles.modifier) {
           this.mModify = this.props.modify
           this.mModifiedValue = this.mModify(val)
         }
@@ -70,7 +70,7 @@ export const createContextLib = <T>(defaultValue: T, _channelId?: string) => {
     //*************** PROVIDER part
 
     componentWillReceiveProps(nextProps: ProviderProps<T>) {
-      if (this.role === Roles.consumer) return
+      if (this.role !== Roles.provider) return
       const { pSubscribers, props: { initValue } } = this
       if (initValue === nextProps.initValue) return
       pSubscribers.forEach(s => s(nextProps.initValue))
@@ -110,7 +110,8 @@ export const createContextLib = <T>(defaultValue: T, _channelId?: string) => {
     render() {
       if (this.role === Roles.provider) return this.props.children
 
-      const { props: { children }, state: { value } } = this
+      const { props: { children, render }, state: { value } } = this
+      if (render) return render(value)
       if (typeof children === 'function') return (children as React.SFC)(value)
       else return children
     }

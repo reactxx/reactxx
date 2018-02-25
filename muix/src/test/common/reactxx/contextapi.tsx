@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { createContextLib } from '../../../reactxx/common/contextapi'
+import { createContextLib, ConsumerProps } from '../../../reactxx/common/contextapi'
 
 
 interface Context {
@@ -10,6 +10,10 @@ interface Context {
 }
 
 const { Consumer, Modifier, Provider } = createContextLib<Context>({ theme: '', componentTheme: {}, overrides: {} })
+
+const Consumer1 = Consumer as React.ComponentClass<ConsumerProps<Context, { themex: string }>>
+const Consumer2 = Consumer as React.ComponentClass<ConsumerProps<Context, { theme: string; componentTheme: string }>>
+const Consumer3 = Consumer as React.ComponentClass<ConsumerProps<Context, { theme: string; overrides: string }>>
 
 class Comp extends React.PureComponent<{ id: string; title?: string; theme?: string, componentTheme?: string, overrides?: string }> {
   render() {
@@ -37,17 +41,17 @@ class Dummy extends React.PureComponent {
 
 const Fragment: React.SFC = () => <>
   <Dummy key={1}>
-    <Consumer key={1} selector={v => ({ theme: v.theme })}>
-      {v => <Comp id='1' theme={v.theme} />}
-    </Consumer>
-    <Consumer key={2} selector={v => ({ theme: v.theme, componentTheme: v.componentTheme.c1 })}>
-      {v => <Comp id='2' theme={v.theme} componentTheme={v.componentTheme} />}
-    </Consumer>
+    <Consumer1 key={1} selector={v => ({ themex: v.theme })} render={v =>
+      <Comp id='1' theme={v.themex} />
+    } />
+    <Consumer2 key={2} selector={v => ({ theme: v.theme, componentTheme: v.componentTheme.c1 })} render={v => 
+      <Comp id='2' theme={v.theme} componentTheme={v.componentTheme} />
+    } />
   </Dummy>
   <Dummy key={2}>
-    <Consumer key={3} selector={v => ({ theme: v.theme, overrides: v.overrides.o2 })}>
-      {v => <Comp id='3' theme={v.theme} overrides={v.overrides} />}
-    </Consumer>
+    <Consumer3 key={3} selector={v => ({ theme: v.theme, overrides: v.overrides.o2 })} render={v => 
+      <Comp id='3' theme={v.theme} overrides={v.overrides} />
+    } />
   </Dummy>
 </>
 
@@ -61,6 +65,11 @@ class App extends React.Component<any, Context> {
       <a href='#' onClick={() => this.setState({ ...st, componentTheme: { ...st.componentTheme, c1: st.componentTheme.c1 + '-c1' } })}>MODIFY comp-th 1</a> |
       <a href='#' onClick={() => this.setState({ ...st, overrides: { ...st.overrides, o2: st.overrides.o2 + '-o2' } })}>MODIFY over 2</a> |
       <a href='#' onClick={() => this.forceUpdate()}>FORCE update</a> |
+      <hr />
+      <Modifier modify={value => ({ ...value, componentTheme: { ...value.componentTheme, c1: value.componentTheme.c1 + '@M@' }})}>
+        <Fragment />
+      </Modifier>
+
       <hr />
       <Fragment/>
       {/*
