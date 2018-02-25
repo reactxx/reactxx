@@ -25,7 +25,7 @@ export const toPlatformRuleSet = (style: ReactXX.RulesetX) => {
   return res as ReactXX.Ruleset 
 }
 
-export const applyTheme = <T>(theme: ReactXX.Theme | (() => ReactXX.Theme), valueOrCreator: ReactXX.FromThemeValueOrCreator<T> | any) =>
+export const applyTheme = <T>(theme: ReactXX.Theme | (() => ReactXX.Theme), valueOrCreator: ReactXX.FromThemeValueOrCreator<T> | any, componentTheme?: {}) =>
   typeof valueOrCreator === 'function' ? valueOrCreator(typeof theme === 'function' ? theme() : theme) : valueOrCreator
 
 //create platform specific sheet from cross platform one

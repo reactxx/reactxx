@@ -1,6 +1,7 @@
-﻿declare namespace ReactXX {
+﻿//https://github.com/ReactTraining/react-broadcast/blob/next/modules/createContext.js
+declare namespace ReactXX {
 
-  interface ComponentsTheme { }
+  type ComponentsTheme = { [name: string]: {} }
 
   interface Theme {
     direction: Direction

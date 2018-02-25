@@ -186,6 +186,10 @@
     <TypeScriptCompile Include="src\mui\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\animation.tsx" />
+    <TypeScriptCompile Include="src\reactxx\common\contextapi-lib - Copy.ts" />
+    <TypeScriptCompile Include="src\reactxx\common\contextapi-orig.ts" />
+    <TypeScriptCompile Include="src\reactxx\common\contextWithSelect.ts" />
+    <TypeScriptCompile Include="src\reactxx\common\contextapi-lib.ts" />
     <TypeScriptCompile Include="src\reactxx\common\media-q.ts" />
     <TypeScriptCompile Include="src\reactxx\common\components.ts" />
     <TypeScriptCompile Include="src\reactxx\common\theme.tsx" />

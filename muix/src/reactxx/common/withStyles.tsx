@@ -11,7 +11,7 @@ const sheetCreator = <R extends ReactXX.Shape>(sheetXCreator: ReactXX.FromThemeV
   return toPlatformSheet(sheetXCreator) //as ReactXX.Sheet<R>
 }
 
-export const withStylesEx = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R>, options: ReactXX.getComponentsTheme<R>, sheetXCreator: ReactXX.FromThemeValueOrCreator2<R, ReactXX.SheetX<R>>) => (Component: ReactXX.CodeComponentType<R>) => {
+export const withStylesEx = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R>, _options: ReactXX.FromThemeValueOrCreator<ReactXX.getComponentsTheme<R>>, sheetXCreator: ReactXX.FromThemeValueOrCreator2<R, ReactXX.SheetX<R>>) => (Component: ReactXX.CodeComponentType<R>) => {
 
   const name = _name as string
   const sheetOrCreator = sheetCreator(sheetXCreator)
@@ -22,10 +22,13 @@ export const withStylesEx = <R extends ReactXX.Shape>(_name: ReactXX.getNameType
     animations: Animation.Drivers
     theme: ReactXX.Theme 
     media: ComponentsMediaQ
+    componentsTheme: ReactXX.getComponentsTheme<R>
+    context: TContext
 
     constructor(props: ReactXX.PropsX<R>, context: TContext) {
       super(props, context)
 
+      const options = this.componentsTheme = applyTheme(this.themeGetter, _options)
       const childClasses = applyTheme(this.themeGetter, props.childClasses)
       const childOverrides = context.themeEx && context.themeEx.childOverrides
       this.usedChildOverrides = childOverrides && props.childClasses ? deepMerges(false, {}, childOverrides, childClasses) : childOverrides || childClasses
@@ -51,11 +54,10 @@ export const withStylesEx = <R extends ReactXX.Shape>(_name: ReactXX.getNameType
 
     themeGetter = (() => {
       if (this.theme) return this.theme
-      return this.theme = this.context.theme || getDefaultTheme()
+      return this.theme = (this.context.themeEx && this.context.themeEx.theme) || getDefaultTheme()
     }).bind(this)
 
     render() {
-      //const { flip: flipProp } = options
       const { animations, theme } = this
       const { classes: classesPropX, style, $web, $native, onPress, onLongPress, onPressIn, onPressOut, className: classNameX, childClasses, ignore, ...other } = this.props as ReactXX.PropsX & ReactXX.OnPressAllX
 
@@ -90,11 +92,11 @@ export const withStylesEx = <R extends ReactXX.Shape>(_name: ReactXX.getNameType
 
     static contextTypes = { ...ThemeContextTypes, ...ThemeExContextTypes }
     static childContextTypes = ThemeExContextTypes
-    static options = options
+    static options = _options//options
   }
   hoistNonReactStatics(Styled, Component as any)
   const styled: any = Styled
-  return styled as React.ComponentClass<ReactXX.PropsX<R>>
+  return (props => <Styled {...props}/>) as React.ComponentType<ReactXX.PropsX<R>>
 }
 
 const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCreator<R>, options: ReactXX.WithStylesOptionsNew<ReactXX.getNameType<R>>) => (Component: ReactXX.CodeComponentType<R>) => {
