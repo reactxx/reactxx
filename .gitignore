@@ -287,18 +287,24 @@ __pycache__/
 
 *.js
 
+*/deploy/*
+!muix/deploy/mui
+muix/deploy/mui/*
+!muix/deploy/reactxx
+muix/deploy/reactxx/*
+!muix/deploy/appstate
+muix/deploy/appstate/*
+
 
 **/node_modules/
 **/jspm_packages/
 **/trash/
-!**/deploy/**/package.json
-!**/deploy/**/readme.md
-**/deploy/*
 **/package-lock.json
 build-icons/design/mdi-react/
 !**/jspm.config.js
 !**/$blacklist.js
 !**/package.json
+!**/readme.md
 build-types-material-ui/material-ui
 
 !build-types-material-ui/dts-generator.js
