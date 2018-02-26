@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { createContext, ConsumerComp, ModifierComp } from '../../../reactxx/common/contextapi'
+import { createContext, ConsumerComp, ModifierComp } from 'reactxx-appstate'
 
 
 interface Context {
@@ -57,7 +57,7 @@ class App extends React.Component<any, Context> {
   state = { theme: 'theme', overrides: { c1: 'c1', c2: 'c2' } }
   render() {
     console.log('APP')
-    return <Provider initValue={this.state}>
+    return <Provider value={this.state}>
       <a href='#' onClick={() => this.setState(st => ({ ...st, theme: st.theme + '-t' }))}>MODIFY THEME</a> |
       <a href='#' onClick={() => this.setState(st => ({ ...st, overrides: { ...st.overrides, c1: st.overrides.c1 + '-c1' } }))}>MODIFY c1</a> |
       <a href='#' onClick={() => this.setState(st => ({ ...st, overrides: { ...st.overrides, c2: st.overrides.c2 + '-c2' } }))}>MODIFY c2</a> |

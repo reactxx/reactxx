@@ -186,8 +186,8 @@
     <TypeScriptCompile Include="src\mui\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\animation.tsx" />
-    <TypeScriptCompile Include="src\reactxx\common\contextapi-orig.ts" />
-    <TypeScriptCompile Include="src\reactxx\common\contextapi.ts" />
+    <TypeScriptCompile Include="src\appstate\contextapi-orig.ts" />
+    <TypeScriptCompile Include="src\appstate\index.ts" />
     <TypeScriptCompile Include="src\reactxx\common\media-q.ts" />
     <TypeScriptCompile Include="src\reactxx\common\components.ts" />
     <TypeScriptCompile Include="src\reactxx\common\theme.tsx" />
@@ -230,7 +230,7 @@
     <TypeScriptCompile Include="src\test\common\components\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\test\common\components\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\common\mui\button-demo.tsx" />
-    <TypeScriptCompile Include="src\test\common\reactxx\contextapi.tsx" />
+    <TypeScriptCompile Include="src\test\web\appstate\index.tsx" />
     <TypeScriptCompile Include="src\test\common\reactxx\doc\home.tsx" />
     <TypeScriptCompile Include="src\test\common\reactxx\doc\home-d.d.ts" />
     <TypeScriptCompile Include="src\test\common\reactxx\index.tsx" />

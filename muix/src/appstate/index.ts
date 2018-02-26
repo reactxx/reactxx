@@ -4,9 +4,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import warning from 'warning'
 
-interface ProviderProps<T> { initValue?: T }
-interface ConsumerProps<T, TSel> { isQuiet?: boolean; selector?: (data: T) => TSel; render?: (selected: TSel) => React.ReactNode }
-interface ModifierProps<T, TSel> extends ConsumerProps<T, TSel> { modify: (data: T) => T }
+interface ProviderProps<T> { value?: T }
+interface ConsumerProps<T, TSel = {}> { quiet?: boolean; selector?: (data: T) => TSel; render?: (selected: TSel) => React.ReactNode }
+interface ModifierProps<T, TSel = {}> extends ConsumerProps<T, TSel> { modify: (data: T) => T }
 
 export type ConsumerComp<T, TSel> = React.ComponentClass<ConsumerProps<T, TSel>>
 export type ModifierComp<T, TSel> = React.ComponentClass<ModifierProps<T, TSel>>
@@ -56,7 +56,7 @@ export const createContext = <T>(defaultValue: T, _channelId?: string) => {
             },
             getInitValue: () => {
               if (this.role === Roles.modifier) return this.mModifiedValue
-              else return this.props.initValue || defaultValue
+              else return this.props.value || defaultValue
             }
           } as Channel<T>
         }
@@ -93,9 +93,9 @@ export const createContext = <T>(defaultValue: T, _channelId?: string) => {
     componentWillReceiveProps(nextProps: ProviderProps<T>) {
       if (this.role !== Roles.provider) return
       //for providers (provider & modifier)
-      const { pSubscribers, props: { initValue } } = this
-      if (initValue === nextProps.initValue) return
-      pSubscribers.forEach(s => s(nextProps.initValue))
+      const { pSubscribers, props: { value } } = this
+      if (value === nextProps.value) return
+      pSubscribers.forEach(s => s(nextProps.value))
     }
 
     //*************** CONSUMER part (with SELECTOR possibility)
@@ -104,7 +104,7 @@ export const createContext = <T>(defaultValue: T, _channelId?: string) => {
       if (this.role === Roles.provider) return
       const { sSelector, pSubscribers, sChannel, state: { value }, mModify } = this
       if (!sChannel) {
-        warning(this.props.isQuiet, '<Consumer> or <Modifier> was rendered outside the context of its <Provider>')
+        warning(this.props.quiet, '<Consumer> or <Modifier> was rendered outside the context of its <Provider>')
         return
       }
       this.sUnsubscribe = sChannel.subscribe(sBroadcastValue => {

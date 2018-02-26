@@ -7,6 +7,6 @@ import ReactDOM from 'react-dom'
 //import App from '../common/reactxx/index'
 //import App from '../common/reactxx/doc/home'
 //import App from '../common/mui/button-demo'
-import App from '../web/reactxx/contextapi'
+import App from '../web/appstate/index'
 
 export const init = () => ReactDOM.render(<App />, document.getElementById('content')) 

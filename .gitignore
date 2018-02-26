@@ -287,13 +287,16 @@ __pycache__/
 
 *.js
 
+
 **/node_modules/
 **/jspm_packages/
 **/trash/
-**/deploy/
+!**/deploy/**/package.json
+!**/deploy/**/readme.md
+**/deploy/*
 **/package-lock.json
-!**/jspm.config.js
 build-icons/design/mdi-react/
+!**/jspm.config.js
 !**/$blacklist.js
 !**/package.json
 build-types-material-ui/material-ui

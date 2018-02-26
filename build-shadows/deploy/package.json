@@ -1,0 +1,30 @@
+{
+  "name": "reactxx-shadows",
+  "version": "0.1.18",
+  "description": "cross platform shadows",
+  "registry": "npm",
+  "main": "es/index",
+  "jspmPackage": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reactxx/reactxx.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "icons"
+  ],
+  "dependencies": {},
+  "author": "pzika@langmaster.cz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mui-x/muix/issues"
+  },
+  "homepage": "https://github.com/mui-x/muix#readme",
+  "jspm": {
+    "name": "reactxx-shadows",
+    "main": "index",
+    "dependencies": {},
+    "map": {}
+  }
+}

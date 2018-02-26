@@ -1,0 +1,33 @@
+{
+  "name": "reactxx-mdi",
+  "version": "0.1.59",
+  "description": "cross platform MDI icons",
+  "registry": "npm",
+  "main": "es/index.js",
+  "jspmPackage": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reactxx.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "shadows"
+  ],
+  "dependencies": {},
+  "map": {
+    "./*": "./es/index"
+  },
+  "author": "pzika@langmaster.cz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mui-x/muix/issues"
+  },
+  "homepage": "https://github.com/mui-x/muix#readme",
+  "jspm": {
+    "name": "reactxx-icons",
+    "main": "index.js",
+    "dependencies": {},
+    "map": {}
+  }
+}

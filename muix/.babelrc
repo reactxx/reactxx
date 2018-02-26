@@ -14,6 +14,7 @@
           "reactxx": "./deploy/es/reactxx/native",
           "^reactxx-mdi/(.+)": "reactxx-mdi",
           "reactxx-mui": "./deploy/es/mui/native",
+          "reactxx-appstate": "./deploy/es/appstate",
 
           "muix-primitives": "./deploy/es/primitives/native",
           "muix-components": "./deploy/es/components/native",

@@ -13,6 +13,7 @@
     "paths": {
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/index" ],
       "reactxx-mui/*": [ "src/mui/web/*" ],
+      "reactxx-appstate": [ "src/appstate/index" ],
 
       "reactxx": [ "src/reactxx/web/index" ],
       "reactxx/web": [ "src/reactxx/web/index" ],
