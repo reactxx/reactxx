@@ -10,6 +10,7 @@ declare namespace DocHome {
       openClose: ReactXX.ShapeViews<'content'> & ReactXX.ShapeTexts<'icon'>
     }
     props: { title: React.ReactNode }
+    nameType: CompNames.ExpandPanel
   }>
 }
 

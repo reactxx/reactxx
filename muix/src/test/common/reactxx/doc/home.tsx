@@ -1,9 +1,9 @@
 import React from 'react'
-import { withStyles, sheetCreator, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
+import { withStylesEx, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
 
 import { Animated } from 'react-native'
 
-export const expandedPanelSheet = sheetCreator<DocHome.ExpandedPanelShape>({
+const expandedPanelSheet: ReactXX.CreateSheetX<DocHome.ExpandedPanelShape> = {
   $animations: {
     openClose: {
       content: {
@@ -53,7 +53,7 @@ export const expandedPanelSheet = sheetCreator<DocHome.ExpandedPanelShape>({
   },
   icon: { },
   headerLabel: {},
-})
+}
 
 
 //modifyThemeStates(state, null, theme => [modifyThemeState<ReactXX.TextShape>(state, theme, ReactXX.CompNames.Text, (theme, par) => ({ root: headerLabelStyle }))])}
@@ -81,7 +81,7 @@ const expandedPanel: ReactXX.CodeSFC<DocHome.ExpandedPanelShape> = props => {
       <AnimatedIconLow name={MDI.ArrowExpandDown} style={iconStyle} onPress={() => openClose.toggle()} />
 */
 
-const ExpandedPanel = withStyles<DocHome.ExpandedPanelShape>(expandedPanelSheet, { name: DocHome.CompNames.ExpandPanel })(expandedPanel)
+const ExpandedPanel = withStylesEx<DocHome.ExpandedPanelShape>(DocHome.CompNames.ExpandPanel, expandedPanelSheet)(expandedPanel)
 
 const App: React.SFC = () => <ScrollView classes={{ container: { padding: 10 } }}>
   <Text>Text before, text before, text before, text before, text before, text before, text before, text before, text before, text before, text before</Text>

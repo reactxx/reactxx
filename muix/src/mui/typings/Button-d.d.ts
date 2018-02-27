@@ -12,15 +12,16 @@
     web: 'colorInherit' | 'keyboardFocused'
     props: Muix.ButtonProps & ReactXX.OnPressAllX
     propsNative: ReactN.TouchableOpacityProperties
+    nameType: CompNames.Button | CompNames.ButtonIconLeft | CompNames.ButtonIconRight
   }>
 
 }
 
 declare namespace ReactXX {
   interface SheetsX {
-    [MuiButton.CompNames.Button]?: ReactXX.SheetOrCreator<MuiButton.Shape>
-    [MuiButton.CompNames.ButtonIconLeft]?: ReactXX.SheetOrCreator<MuiButton.Shape>
-    [MuiButton.CompNames.ButtonIconRight]?: ReactXX.SheetOrCreator<MuiButton.Shape>
+    [MuiButton.CompNames.Button]?: ReactXX.PartialSheetX<MuiButton.Shape>
+    [MuiButton.CompNames.ButtonIconLeft]?: ReactXX.PartialSheetX<MuiButton.Shape>
+    [MuiButton.CompNames.ButtonIconRight]?: ReactXX.PartialSheetX<MuiButton.Shape>
   }
 }
 

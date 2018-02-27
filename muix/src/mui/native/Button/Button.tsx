@@ -4,18 +4,17 @@ import ReactN from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
-import { Text, withStyles, toPlatformRuleSet, sheetCreator, ThemeModifier, addOverrides } from 'reactxx'
+import { Text, withStylesEx, toPlatformRuleSet, addOverrides } from 'reactxx'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 
-//export type ButtonShape = Shape
 const getTextIconColor = (color: string) => ({
   label: { color },
   labelIcon: {color },
 } as ReactXX.PartialSheetX<MuiButton.Shape>)
 
 
-const sheets = (isLeft?: boolean) => sheetCreator<MuiButton.Shape>(({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
+const sheets: (isLeft?: boolean) => ReactXX.CreateSheetX<MuiButton.Shape> = isLeft => ({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
 
   root: {
     flexDirection: 'row',
@@ -109,8 +108,8 @@ const sheets = (isLeft?: boolean) => sheetCreator<MuiButton.Shape>(({ typography
   label: {},
   labelIcon: {},
   active: {},
-  keyboardFocused: {}
-}))
+  keyboardFocused: {},
+})
 
 
 const button: ReactXX.CodeSFCNative<MuiButton.Shape> = (props, context) => {
@@ -162,8 +161,8 @@ const button: ReactXX.CodeSFCNative<MuiButton.Shape> = (props, context) => {
   </RippleWithOverrides>
 }
 
-const Button = withStyles<MuiButton.Shape>(sheets(), { name: MuiButton.CompNames.Button })(button)
-export const ButtonIconStart = withStyles<MuiButton.Shape>(sheets(true), { name: MuiButton.CompNames.ButtonIconLeft })(button)
-export const ButtonIconEnd = withStyles<MuiButton.Shape>(sheets(false), { name: MuiButton.CompNames.ButtonIconRight })(button)
+const Button = withStylesEx<MuiButton.Shape>(MuiButton.CompNames.Button, sheets())(button)
+export const ButtonIconStart = withStylesEx<MuiButton.Shape>(MuiButton.CompNames.ButtonIconLeft, sheets(true))(button)
+export const ButtonIconEnd = withStylesEx<MuiButton.Shape>(MuiButton.CompNames.ButtonIconRight, sheets(false))(button)
 
 export default Button

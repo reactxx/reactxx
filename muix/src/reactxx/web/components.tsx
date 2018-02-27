@@ -2,7 +2,6 @@ import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
 import { rulesetsToClassNames } from './fela'
-import { sheetCreator } from '../common/index'
 
 export const view: ReactXX.CodeSFCWeb<ReactXX.ViewShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, ...rest } = props

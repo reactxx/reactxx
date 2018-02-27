@@ -5,11 +5,11 @@ import PropTypes from 'prop-types'
 import warning from 'warning'
 
 interface ProviderProps<T> { value?: T }
-interface ConsumerProps<T, TSel = any> { quiet?: boolean; selector?: (data: T) => TSel; render?: (selected: TSel) => React.ReactNode }
-interface ModifierProps<T, TSel = any> extends ConsumerProps<T, TSel> { modify: (data: T) => T }
+interface ConsumerProps<T, TSel extends {} = any> { quiet?: boolean; selector?: (data: T) => TSel; render?: (selected: TSel) => React.ReactNode }
+interface ModifierProps<T, TSel extends {} = any> extends ConsumerProps<T, TSel> { modify: (data: T) => T }
 
-export type ConsumerType<T, TSel> = React.ComponentClass<ConsumerProps<T, TSel>>
-export type ModifierType<T, TSel> = React.ComponentClass<ModifierProps<T, TSel>>
+export type ConsumerType<T, TSel> = React.ComponentType<ConsumerProps<T, TSel>>
+export type ModifierType<T, TSel> = React.ComponentType<ModifierProps<T, TSel>>
 
 type Subscribe<T> = (subscription: Subscription<T>) => Unsubscribe
 type Subscription<T> = (data: T) => void
@@ -22,13 +22,9 @@ interface Channel<T> {
 
 const enum Roles { provider, consumer, modifier }
 
-/**
- * /
- * @param defaultValue
- * @param _channelId
-
+/*
 Extends new react (v16.3) context api ideas:
-- Consumer has "selector" (inspired by Redux). Consumer is waked up only when shallowEq of selected value returns false
+- Consumer has "selector" (inspired by Redux). Consumer is rendered only when shallowEq of selected value returns false
 - Modifier as another component which createContext returns. It behavs as both Provider and Consumer. 
   Modifier:
   - modify input value 

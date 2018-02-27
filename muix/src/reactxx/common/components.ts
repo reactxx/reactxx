@@ -1,10 +1,9 @@
-import { sheetCreator } from '../common/index'
 import { withStylesEx } from '../common/withStyles'
 import { text, view, icon, scrollView, animatedView, animatedIcon, animatedText, animatedScrollView } from 'reactxx' //import platform specific component code
 
-type TCreator<R extends ReactXX.Shape> = ReactXX.FromThemeValueOrCreator2<R, ReactXX.SheetX<R>>
+//type TCreator<R extends ReactXX.Shape> = ReactXX.FromThemeValueOrCreator2<R, ReactXX.SheetX<R>>
 
-const textSheet = {
+const textSheet: ReactXX.CreateSheetX<ReactXX.TextShape> = {
   root: {
     $web: {
       whiteSpace: 'pre-wrap',
@@ -25,7 +24,7 @@ const textSheet = {
   pressable: { //web only ruleset
     cursor: 'pointer'
   },
-} as TCreator<ReactXX.TextShape>
+}
 
 const webViewRuleset = {
   display: 'flex',
@@ -36,24 +35,24 @@ const webViewRuleset = {
   position: 'relative',
 } as ReactXX.RulesetWeb
 
-const viewSheet = {
+const viewSheet: ReactXX.CreateSheetX<ReactXX.ViewShape> = {
   root: {
     $web: webViewRuleset
   }
-} as TCreator<ReactXX.ViewShape>
+}
 
-const iconSheet = {
+const iconSheet: ReactXX.CreateSheetX<ReactXX.IconShape> = {
   root: {
     fontSize: 24,
     $web: {
       fill: 'currentColor',
     }
   }
-} as TCreator<ReactXX.IconShape>
+}
 
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
-const scrollViewSheet = {
+const scrollViewSheet: ReactXX.CreateSheetX<ReactXX.ScrollViewShape> = {
   root: {
     $web: {
       ...webViewRuleset,
@@ -83,7 +82,7 @@ const scrollViewSheet = {
       flexDirection: 'row'
     }
   }
-} as TCreator<ReactXX.ScrollViewShape>
+}
 
 export const Text = withStylesEx<ReactXX.TextShape>(ReactXX.CompNames.Text, textSheet)(text)
 export const AnimatedText = withStylesEx<ReactXX.TextShape>(ReactXX.CompNames.AnimatedText, textSheet)(animatedText)

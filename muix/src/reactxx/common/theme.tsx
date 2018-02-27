@@ -7,12 +7,11 @@ import { toPlatformSheet } from './index'
 
 export { ConsumerType } from 'reactxx-appstate'
 
-//const { Provider, Modifier, Consumer } = createContext<ReactXX.ThemeStates>({ theme: {} as any, childOverrides: {}, themePars: {} })
-const { Provider, Modifier, Consumer } = createContext<ReactXX.ThemeStatesX>({ themePars: {}} as any)
+const { Provider, Modifier, Consumer } = createContext<ReactXX.ThemeStatesX>({ theme: {} as any, overrides: {} })
 
 export const ThemeProvider = Provider
 export const AppContainer = Provider
-export const ThemeModifier = Modifier as ModifierType<ReactXX.ThemeStatesX, ReactXX.ThemeStateX>
+export const ThemeModifier = Modifier as ModifierType<ReactXX.ThemeStatesX, ReactXX.ThemeStatesX>
 export const ThemeConsumer = Consumer
 
 export const addOverrides = <T extends {}>(Component: React.ComponentType<T>, overrides: ReactXX.OverridesX) => {
@@ -20,7 +19,6 @@ export const addOverrides = <T extends {}>(Component: React.ComponentType<T>, ov
     <Component {...props}/>
   </ThemeModifier>) as React.ComponentType<T>
 }
-  
   
 //Get platform component sheet (from creator and theme)
 export const toPlatformFromSheetCreator = <R extends ReactXX.Shape>(componentName: string, theme: ReactXX.Theme, createSheetX: ReactXX.CreateSheetX<R>) => {
@@ -44,7 +42,7 @@ export const modifierSelector = (componentName: string) => (themeStates: ReactXX
   return res
 }
 
-const expandOverrides = (theme: ReactXX.Theme, overrides: ReactXX.OverridesX) => {
+export const expandOverrides = (theme: ReactXX.Theme, overrides: ReactXX.OverridesX) => {
   if (!overrides) return null
   const res = {}
   for (const componentName in overrides) {

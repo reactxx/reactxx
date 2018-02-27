@@ -3,12 +3,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import warning from 'warning'
 
-//create platform specific sheet from cross platform one
-export const sheetCreator = <R extends ReactXX.Shape>(sheetXCreator: ReactXX.FromThemeValueOrCreator<ReactXX.SheetX<R>>) => {
-  if (typeof sheetXCreator === 'function') return (theme => toPlatformSheet(applyTheme(theme, sheetXCreator))) as ReactXX.SheetCreator<R>
-  return toPlatformSheet(sheetXCreator) //as ReactXX.Sheet<R>
-}
-
 //create platform specific ruleset from cross platform one
 export const toPlatformRuleSet = (style: ReactXX.RulesetX) => {
   if (!style) return null
@@ -25,8 +19,8 @@ export const toPlatformRuleSet = (style: ReactXX.RulesetX) => {
   return res as ReactXX.Ruleset 
 }
 
-export const applyTheme = <T>(theme: ReactXX.Theme | (() => ReactXX.Theme), valueOrCreator: ReactXX.FromThemeValueOrCreator<T> | any, componentTheme?: {}) =>
-  typeof valueOrCreator === 'function' ? valueOrCreator(typeof theme === 'function' ? theme() : theme) : valueOrCreator
+//export const applyTheme = <T>(theme: ReactXX.Theme | (() => ReactXX.Theme), valueOrCreator: ReactXX.FromThemeValueOrCreator<T> | any, componentTheme?: {}) =>
+//  typeof valueOrCreator === 'function' ? valueOrCreator(typeof theme === 'function' ? theme() : theme) : valueOrCreator
 
 
 export const applyTheme2 = <T>(valueOrCreator: T | ((theme: ReactXX.Theme) => T), theme: ReactXX.Theme) =>
@@ -48,12 +42,12 @@ export const toPlatformSheet = <R extends ReactXX.Shape>(sheet: ReactXX.SheetX<R
 }
 
 //create platform specific sheets from cross platform one
-const toPlatformSheets = (theme:ReactXX.Theme, sheets: ReactXX.FromThemeValueOrCreator<ReactXX.SheetsX>) => {
-  if (!sheets) return null
-  const result: ReactXX.Sheets = {}
-  for (const p in applyTheme(theme, sheets)) result[p] = toPlatformSheet(sheets[p])
-  return result
-}
+//const toPlatformSheets = (theme:ReactXX.Theme, sheets: ReactXX.FromThemeValueOrCreator<ReactXX.SheetsX>) => {
+//  if (!sheets) return null
+//  const result: ReactXX.Sheets = {}
+//  for (const p in applyTheme(theme, sheets)) result[p] = toPlatformSheet(sheets[p])
+//  return result
+//}
 
 //simple deep merge
 export const deepMerge = (target, source, skipSystem = false) => {

@@ -3,7 +3,7 @@
 declare namespace MuiButtonBase {
 
   const enum CompNames {
-    ButtonBase = 'MuixButtonBase',
+    ButtonBase = 'MuiButtonBase',
   }
 
   type Shape = ReactXX.OverwriteShape<{
@@ -11,12 +11,13 @@ declare namespace MuiButtonBase {
     native: ReactXX.ShapeViews<'ripple'>
     props: Muix.ButtonBaseProps //& ReactXX.OnPressAllWeb
     propsNative: ReactN.TouchableOpacityProperties
+    nameType: CompNames.ButtonBase
   }>
 }
 
 declare namespace ReactXX {
   interface SheetsX {
-    [MuiButtonBase.CompNames.ButtonBase]?: ReactXX.PartialSheetX<Shape>
+    [MuiButtonBase.CompNames.ButtonBase]?: ReactXX.PartialSheetX<MuiButtonBase.Shape>
   }
 }
 
