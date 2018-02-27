@@ -12,7 +12,7 @@
 
 declare namespace ReactXX {
   interface SheetsX {
-    MuiButton?: ReactXX.PartialSheetX<MuixButton.Shape>
+    //MuiButton?: ReactXX.PartialSheetX<MuixButton.Shape>
     MuiButtonIconLeft?: ReactXX.PartialSheetX<MuixButton.Shape>
     MuiButtonIconRight?: ReactXX.PartialSheetX<MuixButton.Shape>
   }

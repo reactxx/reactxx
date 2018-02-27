@@ -22,7 +22,7 @@ export const addOverrides = <T extends {}>(Component: React.ComponentType<T>, ov
 }
   
   
-  //Get platform component sheet (from creator and theme)
+//Get platform component sheet (from creator and theme)
 export const toPlatformFromSheetCreator = <R extends ReactXX.Shape>(componentName: string, theme: ReactXX.Theme, createSheetX: ReactXX.CreateSheetX<R>) => {
   //try to get platform specific component sheet from cache (from theme.themePars.componentName.$cache)
   let themePar = theme.themePars[componentName]

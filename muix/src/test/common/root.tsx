@@ -10,7 +10,7 @@ import ButtonTest from './components/button'
 import ComponentX from './styles/component-x'
 import Animation from './animation/test-animation'
 import ReactXX from './reactxx/index'
-import ButtonDemo, { overridesNew } from './components/button-demo'
+//import ButtonDemo, { overridesNew } from './components/button-demo'
 
 import { ScrollView, View, Text, Typography } from 'muix-primitives'
 import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
@@ -20,7 +20,7 @@ const apps: { title: string; app: React.ComponentType, overridesNew?: Muix.Theme
   { title: 'Animation', app: Animation },
   //{ title: 'ResponsibleDrawer', app: ResponsibleDrawer },
   { title: 'Typography', app: TypographyTest },
-  { title: 'ButtonDemo', app: ButtonDemo, overridesNew },
+  //{ title: 'ButtonDemo', app: ButtonDemo, overridesNew },
   { title: 'Button', app: ButtonTest },
   { title: 'Icons', app: Icons },
   { title: 'TextView', app: TextView },

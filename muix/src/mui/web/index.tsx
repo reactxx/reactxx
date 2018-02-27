@@ -3,8 +3,7 @@ import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
 import createGenerateClassName from 'material-ui/styles/createGenerateClassName'
-import muiWithStyle from 'material-ui/styles/withStyles'
-import muiButton from 'material-ui/Button/Button'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { create } from 'jss';
 import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
@@ -15,54 +14,37 @@ export * from '../common/createMuiTheme'
 import { sheetToClassSheet, rulesetToClassNames } from 'reactxx/web'
 import { createMuiTheme } from '../common/createMuiTheme'
 
-//import { toPlatformRuleSet, toPlatformSheet, toPlatformEvents, applyTheme } from 'reactxx' //, MuiThemeProvider } from 'muix-styles'
-import { ThemeProvider } from 'reactxx' 
+import { toPlatformRuleSet, toPlatformSheet, toPlatformEvents } from 'reactxx'
+import { ThemeProvider } from 'reactxx'
 
 export const jss = create(preset())
 jss.options.createGenerateClassName = createGenerateClassName
 jss.options.insertionPoint = 'insertion-point-jss'
 
-export const AppContainer: React.SFC = props => <JssProvider jss={jss}><ThemeProvider value={{ theme: createMuiTheme(), overrides: {} }}>{props.children}</ThemeProvider></JssProvider>
+export const AppContainer: React.SFC = props => <JssProvider jss={jss}><MuiThemeProvider theme={createMuiTheme()}>{props.children}</MuiThemeProvider></JssProvider>
 
 type webKeys<R extends ReactXX.Shape> = ReactXX.getWeb<R> | keyof ReactXX.getCommon<R>
 
 export const muiCompatible = <R extends ReactXX.Shape>(Component: Muix.muiComponentType<ReactXX.getPropsWeb<R>, webKeys<R>>) => {
-  return null as React.ComponentClass<ReactXX.PropsX<R>>
 
-  //class Styled extends React.PureComponent<ReactXX.PropsX<R>> {
-  //  render() {
-  //    const { classes: classesPropX, style, $web, $native, onPress, onLongPress, onPressIn, onPressOut, className: classNameX, ...other } = this.props as ReactXX.PropsX & ReactXX.OnPressAllX
-  //    const theme = this.context.theme || getDefaultTheme()
+  const Styled: ReactXX.SFCX<R> = props => {
 
-  //    const classes = sheetToClassSheet(toPlatformSheet(applyTheme(theme, classesPropX as any)))
+    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, modifyThemeState, ...other } = props as (ReactXX.PropsX & ReactXX.OnPressAllX)
 
-  //    const codeProps = {
-  //      ...other, ...$web,
-  //      theme: theme,
-  //      style: toPlatformRuleSet(applyTheme(theme, style)),
-  //      className: rulesetToClassNames(applyTheme(theme, classNameX)),
-  //      classes: classes
-  //    } //as any //ReactXX.getPropsWeb<R> & webKeys<R>
+    const classes = toPlatformSheet(classesX as ReactXX.SheetX)
 
-  //    toPlatformEvents($web, $native as ReactXX.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps as any)
+    const codeProps = {
+      ...other, ...$web,
+      style: toPlatformRuleSet(styleX as ReactXX.RulesetX),
+      className: rulesetToClassNames(toPlatformRuleSet(classNameX as ReactXX.RulesetX)),
+      classes: classes
+    }
 
-  //    return <Component {...codeProps as any}/>
-  //  }
-  //  static contextTypes = { ...ThemeContextTypes }
-  //}
+    toPlatformEvents($web, $native as ReactXX.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps as any)
 
-  //const Styled_: ReactXX.SFCX<R> = (props, context: Muix.MuiThemeContextValue) => {
-  //  const { classes: _classes, style, $web, $native, onClick, className: rulesetX, ...rest } = props as ReactXX.PropsX<ReactXX.Shape> & ReactXX.OnPressAllWeb 
+    return <Component {...codeProps as any} />
+  }
 
-  //  const click = ($web && $web.onClick) || onClick
+  return Styled
 
-  //  const theme = context.theme || getDefaultTheme()
-
-  //  const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as React.CSSProperties
-
-  //  const classes = null //sheetToClassSheet((classesToPlatformSheet(theme, _classes as Muix.ThemeValueOrCreator<ReactXX.PartialSheetX<R>>)) as ReactXX.SheetWeb<R>)
-  //  const webProps = null //{ ...rest, ...$web, style: toPlatformRuleSet(style), classes, onClick: click, theme, className: rulesetToClassNames(cn) } as ReactXX.getPropsWeb<R>
-  //  return <Component {...webProps} />
-  //}
-  //return Styled
 }

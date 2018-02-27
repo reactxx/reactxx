@@ -33,7 +33,7 @@ export const applyTheme2 = <T>(valueOrCreator: T | ((theme: ReactXX.Theme) => T)
   typeof valueOrCreator === 'function' ? valueOrCreator(theme) : valueOrCreator
 
 //create platform specific sheet from cross platform one
-export const toPlatformSheet = <R extends ReactXX.Shape>(sheet: ReactXX.SheetX<R>) => {
+export const toPlatformSheet = <R extends ReactXX.Shape>(sheet: ReactXX.SheetX<R> | ReactXX.PartialSheetX<R>) => {
   if (typeof sheet !== 'object') return sheet
   const res = { }
   for (const p in sheet) {

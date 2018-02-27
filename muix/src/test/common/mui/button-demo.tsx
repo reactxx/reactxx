@@ -1,6 +1,7 @@
 import React from 'react'
 import Button, { ButtonIconStart, ButtonIconEnd } from 'reactxx-mui/Button/Button'
 import { AppContainer, createMuiTheme } from 'reactxx-mui/index'
+
 //import color from 'material-ui/colors/orange'
 
 import { ScrollView, View, Icon, Text, ThemeModifier } from 'reactxx'
@@ -68,8 +69,8 @@ const app: React.SFC = props => <AppContainer>
       <ButtonIconEnd color='primary' disabled variant='raised' >Icon Right<Icon data={MDI.ArrowDownBoldBox} /></ButtonIconEnd>
     </View>
     <View classes={{ root: rootView }} >
-      <Button color='secondary' variant='raised' classes={theme => ({ raisedSecondary: { backgroundColor: 'green', $web: { '&:hover': { backgroundColor: 'green', } } } })} >classes</Button>
-      <ThemeModifier modify={state => ({ ...state, theme:theme}) }>
+      <Button color='secondary' variant='raised' classes={{ raisedSecondary: { backgroundColor: 'green', $web: { '&:hover': { backgroundColor: 'red', } } } }} >classes</Button>
+      <ThemeModifier modify={state => ({ theme: theme, overrides: { ...state.overrides, [MuiButton.CompNames.Button]: null } })}>
         <Button color='secondary' variant='raised'>theme</Button>
       </ThemeModifier>
     </View>
@@ -79,3 +80,4 @@ const app: React.SFC = props => <AppContainer>
 export default app
 //export default app2
 
+//{ raisedSecondary: { backgroundColor: 'maroon', $web: { '&:hover': { backgroundColor: 'orange', } } } }

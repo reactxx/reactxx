@@ -3,8 +3,7 @@ declare namespace ReactXX {
 
   type ThemePars = { [name: string]: {} }
   type OverridesX = { [name: string]: CreateSheetX }
-  type CreateSheetX<R extends Shape = Shape> = SheetX<R> | ((theme: ReactXX.Theme, themePar) => SheetX<R>)
-  type CreateSheet<R extends Shape = Shape> = Sheet<R> | ((theme: ReactXX.Theme, themePar) => Sheet<R>)
+  type CreateSheetX<R extends Shape = Shape> = SheetX<R> | ((theme: ReactXX.Theme, themePar) => PartialSheetX<R>)
 
   interface Theme {
     direction: Direction
@@ -20,13 +19,8 @@ declare namespace ReactXX {
 
   type ThemeContextValue = { theme: Theme }
   type ThemeStatesX = { theme: Theme; overrides?: OverridesX }
-  type ThemeStateX<R extends Shape = Shape> = { theme: Theme; override?: SheetX<R> }
+  type ThemeStateX<R extends Shape = Shape> = { theme: Theme; override?: PartialSheetX<R> }
   type ThemeModifier = (state: ThemeStatesX) => ThemeStatesX
-
-  type SheetFromThemeStateX<R extends Shape> = FromThemeValueOrCreator<SheetX<R>>
-  type SheetFromThemeState<R extends Shape> = FromThemeValueOrCreator<Sheet<R>>
-
-  //type ThemeExContextValue = { themeEx: { theme: Theme; childOverrides: Sheets; componentsTheme: ThemePars } }
 
   interface ThemerProps {
     creator: ThemeCreator

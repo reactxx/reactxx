@@ -1,7 +1,7 @@
 ﻿declare namespace MuiButton {
 
   const enum CompNames {
-    Button = 'MuixButton',
+    Button = 'MuiButton',
     ButtonIconLeft = 'MuixButtonIconLeft',
     ButtonIconRight = 'MuixButtonIconRight',
   }
