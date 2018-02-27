@@ -52,7 +52,7 @@
   "include": [
     "src/**/*",
     "node_modules/reactxx-mdi/typings.d.ts",
-    "node_modules/fela/index.d.ts"
+    "node_modules/fela/index.d.ts",
     //"node_modules/popper.js/index.d.ts",
     //"node_modules/react-popper/react-popper.d.ts"
     //"node_modules/material-ui/**/*"

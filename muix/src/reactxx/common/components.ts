@@ -85,11 +85,11 @@ const scrollViewSheet = {
   }
 } as TCreator<ReactXX.ScrollViewShape>
 
-export const Text = withStylesEx<ReactXX.TextShape>(ReactXX.CompNames.Text, null, textSheet)(text)
-export const AnimatedText = withStylesEx<ReactXX.TextShape>(ReactXX.CompNames.AnimatedText, null, textSheet)(animatedText)
-export const View = withStylesEx<ReactXX.ViewShape>(ReactXX.CompNames.View, null, viewSheet)(view)
-export const AnimatedView = withStylesEx<ReactXX.ViewShape>(ReactXX.CompNames.AnimatedView, null, viewSheet)(animatedView)
-export const Icon = withStylesEx<ReactXX.IconShape>(ReactXX.CompNames.Icon, null, iconSheet)(icon)
-export const AnimatedIcon = withStylesEx<ReactXX.IconShape>(ReactXX.CompNames.AnimatedIcon, null, iconSheet)(animatedIcon)
-export const ScrollView = withStylesEx<ReactXX.ScrollViewShape>(ReactXX.CompNames.ScrollView, null, scrollViewSheet)(scrollView)
-export const AnimatedScrollView = withStylesEx<ReactXX.ScrollViewShape>(ReactXX.CompNames.AnimatedScrollView, null, scrollViewSheet)(animatedScrollView)
+export const Text = withStylesEx<ReactXX.TextShape>(ReactXX.CompNames.Text, textSheet)(text)
+export const AnimatedText = withStylesEx<ReactXX.TextShape>(ReactXX.CompNames.AnimatedText, textSheet)(animatedText)
+export const View = withStylesEx<ReactXX.ViewShape>(ReactXX.CompNames.View, viewSheet)(view)
+export const AnimatedView = withStylesEx<ReactXX.ViewShape>(ReactXX.CompNames.AnimatedView, viewSheet)(animatedView)
+export const Icon = withStylesEx<ReactXX.IconShape>(ReactXX.CompNames.Icon, iconSheet)(icon)
+export const AnimatedIcon = withStylesEx<ReactXX.IconShape>(ReactXX.CompNames.AnimatedIcon, iconSheet)(animatedIcon)
+export const ScrollView = withStylesEx<ReactXX.ScrollViewShape>(ReactXX.CompNames.ScrollView, scrollViewSheet)(scrollView)
+export const AnimatedScrollView = withStylesEx<ReactXX.ScrollViewShape>(ReactXX.CompNames.AnimatedScrollView, scrollViewSheet)(animatedScrollView)

@@ -1,12 +1,16 @@
 ﻿//https://github.com/ReactTraining/react-broadcast/blob/next/modules/createContext.js
 declare namespace ReactXX {
 
-  type ComponentsTheme = { [name: string]: {} }
+  type ThemePars = { [name: string]: {} }
+  type OverridesX = { [name: string]: CreateSheetX }
+  type CreateSheetX<R extends Shape = Shape> = SheetX<R> | ((theme: ReactXX.Theme, themePar) => SheetX<R>)
+  type CreateSheet<R extends Shape = Shape> = Sheet<R> | ((theme: ReactXX.Theme, themePar) => Sheet<R>)
 
   interface Theme {
     direction: Direction
     //components?: ComponentsTheme
-    //overrides?: Sheets
+    themePars: ThemePars
+    //overridesNew?: FromThemeValueOrCreator<Sheets>
   }
 
   interface ThemeOptionsX {
@@ -15,7 +19,14 @@ declare namespace ReactXX {
   type Direction = 'ltr' | 'rtl';
 
   type ThemeContextValue = { theme: Theme }
-  type ThemeExContextValue = { themeEx: { theme: Theme; childOverrides: Sheets; componentsTheme: ComponentsTheme } }
+  type ThemeStatesX = { theme: Theme; overrides?: OverridesX }
+  type ThemeStateX<R extends Shape = Shape> = { theme: Theme; override?: SheetX<R> }
+  type ThemeModifier = (state: ThemeStatesX) => ThemeStatesX
+
+  type SheetFromThemeStateX<R extends Shape> = FromThemeValueOrCreator<SheetX<R>>
+  type SheetFromThemeState<R extends Shape> = FromThemeValueOrCreator<Sheet<R>>
+
+  //type ThemeExContextValue = { themeEx: { theme: Theme; childOverrides: Sheets; componentsTheme: ThemePars } }
 
   interface ThemerProps {
     creator: ThemeCreator

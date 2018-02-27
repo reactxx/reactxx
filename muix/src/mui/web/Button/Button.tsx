@@ -8,12 +8,8 @@ import { addOverrides } from 'reactxx'
 
 const Button = muiCompatible<MuiButton.Shape>(MuiButton)
 
-export const ButtonIconStart = muiCompatible<MuiButton.Shape>(addOverrides(MuiButton, (props: any) => ({ [ReactXX.CompNames.Icon]: { root: { marginRight: props.theme.spacing.unit } } })))
+export const ButtonIconStart = muiCompatible<MuiButton.Shape>(addOverrides(MuiButton, { [ReactXX.CompNames.Icon]: theme => ({ root: { marginRight: theme.spacing.unit } } as ReactXX.SheetX<ReactXX.IconShape>) }))
 
-export const ButtonIconEnd = muiCompatible<MuiButton.Shape>(addOverrides(MuiButton, (props: any) => ({ [ReactXX.CompNames.Icon]: { root: { marginLeft: props.theme.spacing.unit } } })))
-
-//export const ButtonIconRight2 = muiCompatible<MuiButton.Shape>(withContext({ childOverrides: PropTypes.any }, props => ({
-//  childOverrides: { [ReactXX.CompNames.Icon]: { root: { marginLeft: props.theme.spacing.unit } } } //hack
-//}))(MuiButton))
+export const ButtonIconEnd = muiCompatible<MuiButton.Shape>(addOverrides(MuiButton, { [ReactXX.CompNames.Icon]: theme => ({ root: { marginLeft: theme.spacing.unit } } as ReactXX.SheetX<ReactXX.IconShape>) }))
 
 export default Button

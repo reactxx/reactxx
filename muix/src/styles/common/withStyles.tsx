@@ -72,7 +72,7 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
         return rulesetResult
       }
 
-      const cn = (typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as ReactXX.RulesetX
+      const cn = null //(typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as ReactXX.RulesetX
       const className = toPlatformRuleSet(cn)
       const flip = typeof flipProp === 'boolean' ? flipProp : theme.direction === 'rtl'
 
@@ -109,8 +109,8 @@ type TContext = Muix.MuiThemeContextValue & Muix.MuiOverridesContext
 
 //apply theme to sheet AND merge it with theme.overrides
 const aplyThemeToSheet = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCreator, theme: Muix.Theme, name: string) => {
-  const overrides = (theme.overrides && name && theme.overrides[name]) as ReactXX.Sheet<R>
-  const styles = (typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator)
+  const overrides = null //(theme.overrides && name && theme.overrides[name]) as ReactXX.Sheet<R>
+  const styles = null //(typeof sheetOrCreator === 'function' ? sheetOrCreator(theme) : sheetOrCreator)
   const res: ReactXX.Sheet<R> = overrides ? deepMerges(false, {}, styles, overrides) : styles //deepMerge only when needed
   return { sheetOrCreator, fromTheme: res } as Muix.SheetCacheItem
 }

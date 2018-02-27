@@ -73,6 +73,12 @@
     <Content Include="app.json" />
     <Content Include="assets\icon.png" />
     <Content Include="assets\splash.png" />
+    <Content Include="deploy\reactxx\package.json" />
+    <Content Include="deploy\reactxx\README.md" />
+    <Content Include="deploy\mui\package.json" />
+    <Content Include="deploy\mui\README.md" />
+    <Content Include="deploy\appstate\package.json" />
+    <Content Include="deploy\appstate\README.md" />
     <None Include="gulpfile.js_" />
     <Content Include="index.html" />
     <Content Include="package.json" />
@@ -138,40 +144,16 @@
     <TypeScriptCompile Include="src\animation\common\index.tsx" />
     <TypeScriptCompile Include="src\animation\native\index.tsx" />
     <TypeScriptCompile Include="src\animation\web\index.tsx" />
-    <TypeScriptCompile Include="src\components\common\Divider\Divider.tsx" />
     <TypeScriptCompile Include="src\components\common\ResponsibleDrawer\ResponsibleDrawer.tsx" />
-    <TypeScriptCompile Include="src\components\common\Drawer\Drawer.tsx" />
-    <TypeScriptCompile Include="src\components\common\Hidden\Hidden.tsx" />
-    <TypeScriptCompile Include="src\components\common\IconButton\IconButton.tsx" />
-    <TypeScriptCompile Include="src\components\common\Toolbar\Toolbar.tsx" />
-    <TypeScriptCompile Include="src\components\common\AppBar\AppBar.tsx" />
-    <TypeScriptCompile Include="src\components\native\Divider\Divider.tsx" />
     <TypeScriptCompile Include="src\components\native\ResponsibleDrawer\ResponsibleDrawer.tsx" />
-    <TypeScriptCompile Include="src\components\native\Hidden\Hidden.tsx" />
-    <TypeScriptCompile Include="src\components\native\IconButton\IconButton.tsx" />
-    <TypeScriptCompile Include="src\components\native\Toolbar\Toolbar.tsx" />
-    <TypeScriptCompile Include="src\components\native\AppBar\AppBar.tsx" />
-    <TypeScriptCompile Include="src\components\native\Drawer\Drawer.tsx" />
-    <TypeScriptCompile Include="src\components\typings\IconButton-d.d.ts" />
-    <TypeScriptCompile Include="src\components\typings\Hidden-d.d.ts" />
-    <TypeScriptCompile Include="src\components\typings\AppBar-d.d.ts" />
-    <TypeScriptCompile Include="src\components\typings\Toolbar-d.d.ts" />
-    <TypeScriptCompile Include="src\components\typings\Divider-d.d.ts" />
     <TypeScriptCompile Include="src\components\typings\ResponsibleDrawer-d.d.ts" />
-    <TypeScriptCompile Include="src\components\typings\Drawer-d.d.ts" />
     <TypeScriptCompile Include="src\components\typings\ButtonBase-d.d.ts" />
     <TypeScriptCompile Include="src\components\typings\Button-d.d.ts" />
     <TypeScriptCompile Include="src\components\native\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\native\Button\Button.tsx" />
     <TypeScriptCompile Include="src\components\web\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\components\web\Button\Button.tsx" />
-    <TypeScriptCompile Include="src\components\web\Divider\Divider.tsx" />
     <TypeScriptCompile Include="src\components\web\ResponsibleDrawer\ResponsibleDrawer.tsx" />
-    <TypeScriptCompile Include="src\components\web\Hidden\Hidden.tsx" />
-    <TypeScriptCompile Include="src\components\web\IconButton\IconButton.tsx" />
-    <TypeScriptCompile Include="src\components\web\Toolbar\Toolbar.tsx" />
-    <TypeScriptCompile Include="src\components\web\AppBar\AppBar.tsx" />
-    <TypeScriptCompile Include="src\components\web\Drawer\Drawer.tsx" />
     <TypeScriptCompile Include="src\doc\home.tsx" />
     <TypeScriptCompile Include="src\mui\common\createTypography.ts" />
     <TypeScriptCompile Include="src\mui\common\createMuiTheme.ts" />
@@ -184,6 +166,7 @@
     <TypeScriptCompile Include="src\mui\typings\theme.d.ts" />
     <TypeScriptCompile Include="src\mui\web\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\mui\web\Button\Button.tsx" />
+    <TypeScriptCompile Include="src\mui\web\index-d.d.ts" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\animation.tsx" />
     <TypeScriptCompile Include="src\appstate\contextapi-orig.ts" />
@@ -272,7 +255,6 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="deploy\reactxx\" />
     <Folder Include="src\animation\typings\" />
     <Folder Include="src\styles\typings\" />
   </ItemGroup>

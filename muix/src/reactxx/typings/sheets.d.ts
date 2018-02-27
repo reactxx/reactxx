@@ -87,11 +87,11 @@
   type getNative<R extends Shape> = R['native']
   type getWeb<R extends Shape> = R['web']
   type getStyle<R extends Shape> = R['style']
-  type getProps<R extends Shape> = R['props'] & { ignore?: boolean }
+  type getProps<R extends Shape> = R['props']
   type getPropsWeb<R extends Shape> = R['propsWeb']
   type getPropsNative<R extends Shape> = R['propsNative']
   type getNameType<R extends Shape> = R['nameType']
-  type getComponentsTheme<R extends Shape> = R['componentsTheme'] //& { name: string }
+  type getComponentsTheme<R extends Shape = Shape> = R['componentsTheme'] //& { name: string }
 
   /******************************************
     COMPONENT SHEET
@@ -155,8 +155,10 @@
     style?: FromThemeValueOrCreator<RulesetX<getStyle<R>>> | RulesetWeb | getStyle<R> //cross platform style
     $web?: Partial<getPropsWeb<R>> //web specific style
     $native?: Partial<getPropsNative<R>> //native specific style
+    ignore?: boolean
     classes?: FromThemeValueOrCreator<PartialSheetX<R> | PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
-    childClasses?: FromThemeValueOrCreator<SheetsX> | Sheets
+    modifyThemeState?: ReactXX.ThemeModifier
+    //childClasses?: FromThemeValueOrCreator<SheetsX> | Sheets
     className?: FromThemeValueOrCreator<RulesetX<getStyle<R>>> /*cross platform root ruleset*/ | Ruleset /*platform specific root ruleset (when component is used in other component)*/
   }>>
   type PartialSheetInCode<R extends Shape> = PartialRecord<keyof getCommon<R> | getWeb<R> | keyof getNative<R>, Ruleset> // common and web and native
@@ -201,7 +203,7 @@
     //flip: boolean
     mergeRulesetWithOverrides: MergeRulesetWithOverrides
     animations: Animation.Drivers<getAnimation<R>>
-    ignore?:boolean //?? why ??
+    this?:boolean //?? why ??
   } & (OnPressAllNative | OnPressAllWeb)>
   type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>

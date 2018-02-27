@@ -5,11 +5,11 @@ import PropTypes from 'prop-types'
 import warning from 'warning'
 
 interface ProviderProps<T> { value?: T }
-interface ConsumerProps<T, TSel = {}> { quiet?: boolean; selector?: (data: T) => TSel; render?: (selected: TSel) => React.ReactNode }
-interface ModifierProps<T, TSel = {}> extends ConsumerProps<T, TSel> { modify: (data: T) => T }
+interface ConsumerProps<T, TSel = any> { quiet?: boolean; selector?: (data: T) => TSel; render?: (selected: TSel) => React.ReactNode }
+interface ModifierProps<T, TSel = any> extends ConsumerProps<T, TSel> { modify: (data: T) => T }
 
-export type ConsumerComp<T, TSel> = React.ComponentClass<ConsumerProps<T, TSel>>
-export type ModifierComp<T, TSel> = React.ComponentClass<ModifierProps<T, TSel>>
+export type ConsumerType<T, TSel> = React.ComponentClass<ConsumerProps<T, TSel>>
+export type ModifierType<T, TSel> = React.ComponentClass<ModifierProps<T, TSel>>
 
 type Subscribe<T> = (subscription: Subscription<T>) => Unsubscribe
 type Subscription<T> = (data: T) => void
@@ -66,7 +66,7 @@ export const createContext = <T>(defaultValue: T, _channelId?: string) => {
         this.sChannel = this.context[channelId]
         let val = this.sChannel ? this.sChannel.getInitValue() : defaultValue
         if (this.role === Roles.modifier) {
-          this.mModify = this.props.modify
+          this.mModify = this.props.modify || (theme => theme)
           val = this.mModifiedValue = this.mModify(val)
         }
         const value = this.sSelector ? this.sSelector(val) : val
@@ -109,8 +109,11 @@ export const createContext = <T>(defaultValue: T, _channelId?: string) => {
       }
       this.sUnsubscribe = sChannel.subscribe(sBroadcastValue => {
         if (this.role === Roles.modifier) { //modifier
-          this.mModifiedValue = sBroadcastValue = mModify(sBroadcastValue)
-          pSubscribers.forEach(s => s(sBroadcastValue))
+          sBroadcastValue = mModify(sBroadcastValue)
+          if (this.mModifiedValue !== sBroadcastValue) {
+            this.mModifiedValue = sBroadcastValue
+            pSubscribers.forEach(s => s(sBroadcastValue))
+          }
         }
         if (!sSelector)
           //without selector:

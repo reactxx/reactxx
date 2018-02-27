@@ -11,7 +11,7 @@ export const view: ReactXX.CodeSFCWeb<ReactXX.ViewShape> = props => {
 }
 
 export const icon: ReactXX.CodeSFCWeb<ReactXX.IconShape> = props => {
-  const { style, classes, className, data, mergeRulesetWithOverrides, theme, animations, viewBox, children/*ignore children*/, ...rest } = props
+  const { style, classes, className, data, mergeRulesetWithOverrides, theme, animations, viewBox, children/*this children*/, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className)
   //replace fontSize with width x height
   if (rootStyle.fontSize) { rootStyle.height = rootStyle.width = rootStyle.fontSize; delete rootStyle.fontSize }

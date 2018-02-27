@@ -1,6 +1,4 @@
-﻿//import ReactN from 'react-native'
-//import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
-declare namespace MuixButtonBase {
+﻿declare namespace MuixButtonBase {
 
   type Shape = ReactXX.OverwriteShape<{
     common: ReactXX.ShapeViews<'root'>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { createContext, ConsumerComp, ModifierComp } from 'reactxx-appstate'
+import { createContext, ConsumerType, ModifierType } from 'reactxx-appstate'
 
 
 interface Context {
@@ -11,10 +11,10 @@ interface Context {
 const { Consumer, Modifier, Provider } = createContext<Context>({ theme: '', overrides: {} })
 
 // selector & render props typing
-const Consumer1 = Consumer as ConsumerComp<Context, { themex: string }>
-const Consumer2 = Consumer as ConsumerComp<Context, { theme: string; c1: string }>
-const Consumer3 = Consumer as ConsumerComp<Context, { theme: string; c2: string }>
-const Modifier1 = Modifier as ModifierComp<Context, { c2: string }>
+const Consumer1 = Consumer as ConsumerType<Context, { themex: string }>
+const Consumer2 = Consumer as ConsumerType<Context, { theme: string; c1: string }>
+const Consumer3 = Consumer as ConsumerType<Context, { theme: string; c2: string }>
+const Modifier1 = Modifier as ModifierType<Context, { c2: string }>
 
 class Dump extends React.PureComponent<{ id: string; title?: string; theme?: string, c1?: string, c2?: string }> {
   render() {

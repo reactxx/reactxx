@@ -1,50 +1,55 @@
 import React from 'react'
 import warning from 'warning'
-import { applyTheme } from './index'
 
-import PropTypes from 'prop-types'
-import withContext from 'recompose/withContext'
+import { createContext, ModifierType } from 'reactxx-appstate'
 
-export const ThemeContextTypes = { theme: PropTypes.any }
-export const ThemeExContextTypes = { themeEx: PropTypes.any }
+import { toPlatformSheet } from './index'
 
-export const createTheme: ReactXX.ThemeCreator = options => {
-  warning(!!themerProps, 'Missing AppContainer component')
-  return themerProps.creator(options)
+export { ConsumerType } from 'reactxx-appstate'
+
+//const { Provider, Modifier, Consumer } = createContext<ReactXX.ThemeStates>({ theme: {} as any, childOverrides: {}, themePars: {} })
+const { Provider, Modifier, Consumer } = createContext<ReactXX.ThemeStatesX>({ themePars: {}} as any)
+
+export const ThemeProvider = Provider
+export const AppContainer = Provider
+export const ThemeModifier = Modifier as ModifierType<ReactXX.ThemeStatesX, ReactXX.ThemeStateX>
+export const ThemeConsumer = Consumer
+
+export const addOverrides = <T extends {}>(Component: React.ComponentType<T>, overrides: ReactXX.OverridesX) => {
+  return ((props: T) => <ThemeModifier modify={state => ({ ...state, overrides: { ...state.overrides, ...expandOverrides(state.theme, overrides) } })}>
+    <Component {...props}/>
+  </ThemeModifier>) as React.ComponentType<T>
 }
-export const getDefaultTheme = () => {
-  warning(!!themerProps, 'Missing AppContainer component')
-  return themerProps.defaultTheme || (themerProps.defaultTheme = createTheme(themerProps.defaultOptions))
+  
+  
+  //Get platform component sheet (from creator and theme)
+export const toPlatformFromSheetCreator = <R extends ReactXX.Shape>(componentName: string, theme: ReactXX.Theme, createSheetX: ReactXX.CreateSheetX<R>) => {
+  //try to get platform specific component sheet from cache (from theme.themePars.componentName.$cache)
+  let themePar = theme.themePars[componentName]
+  if (!themePar) themePar = theme.themePars[componentName] = {}
+  let res = themePar['$cache'] as ReactXX.Sheet<R>
+  if (res) return res
+  //create sheet
+  res = toPlatformSheet(typeof createSheetX === 'function' ? createSheetX(theme, themePar) : createSheetX)
+  themePar['$cache'] = res
+  return res
 }
 
-export const addOverrides = <T extends {}>(component: React.ComponentType<T>, getChildOverrides: (props: T) => ReactXX.Sheet) => {
-  return withContext(ThemeExContextTypes, (props: T) => ({ childOverrides: getChildOverrides(props) }))(component) as React.ComponentType<T>
+//Get "component override" from actual "theme app state"
+export const modifierSelector = (componentName: string) => (themeStates: ReactXX.ThemeStatesX) => {
+  const { theme, overrides } = themeStates
+  const res: ReactXX.ThemeStateX = { theme }
+  const override = overrides && overrides[componentName]; if (!override) return res
+  res.override = typeof override != 'function' ? override : override(theme, theme.themePars[componentName])
+  return res
 }
 
-export class ThemeProvider extends React.PureComponent<ReactXX.ThemeProviderProps> {
-
-  constructor(props, context: ReactXX.ThemeContextValue) {
-    super(props, context)
-    this.localTheme = applyTheme(context.theme || getDefaultTheme(), props.theme)
+const expandOverrides = (theme: ReactXX.Theme, overrides: ReactXX.OverridesX) => {
+  if (!overrides) return null
+  const res = {}
+  for (const componentName in overrides) {
+    const override = overrides[componentName]; if (!override) return res
+    res[componentName] = typeof override != 'function' ? override : override(theme, theme.themePars[componentName])
   }
-
-  localTheme: ReactXX.Theme
-
-  getChildContext(): ReactXX.ThemeContextValue {
-    return { theme: this.localTheme }
-  }
-
-  render() {
-    //return React.Children.only(this.props.children)
-    return this.props.children
-  }
-
-  static childContextTypes = ThemeContextTypes
-  static contextTypes = ThemeContextTypes
+  return res
 }
-
-export const AppContainer: React.SFC<ReactXX.AppContainerProps> = props => {
-  themerProps = props.themerProps
-  return <ThemeProvider theme={getDefaultTheme()}>{props.children}</ThemeProvider>
-}
-let themerProps: ReactXX.ThemerProps & { defaultTheme?: ReactXX.Theme }

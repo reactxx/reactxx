@@ -1,5 +1,5 @@
 import React from 'react'
-import { withStyles, sheetCreator, Text, View, AnimatedView, AnimatedIcon, ScrollView} from 'reactxx'
+import { withStyles, sheetCreator, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
 
 import { Animated } from 'react-native'
 
@@ -56,6 +56,8 @@ export const expandedPanelSheet = sheetCreator<DocHome.ExpandedPanelShape>({
 })
 
 
+//modifyThemeStates(state, null, theme => [modifyThemeState<ReactXX.TextShape>(state, theme, ReactXX.CompNames.Text, (theme, par) => ({ root: headerLabelStyle }))])}
+
 const expandedPanel: ReactXX.CodeSFC<DocHome.ExpandedPanelShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations: { openClose }, title, children, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className)
@@ -65,7 +67,7 @@ const expandedPanel: ReactXX.CodeSFC<DocHome.ExpandedPanelShape> = props => {
   const headerLabelStyle = mergeRulesetWithOverrides(classes.headerLabel) as ReactN.TextStyle
 
   return <View className={rootStyle} style={style}>
-    <View className={headerStyle} childClasses={{ [ReactXX.CompNames.Text]: { root: headerLabelStyle }}}>
+    <View className={headerStyle} /*modifyThemeState={theme => ({ ...theme, overridesNew: { ...theme.overridesNew, [ReactXX.CompNames.Text]: { root: headerLabelStyle}}})}*/>
       {typeof title === 'string' ? <Text numberOfLines={1}>{title}</Text> : title}
       <AnimatedIcon data={MDI.ArrowExpandDown} className={iconStyle} onPress={() => openClose.toggle()} /> 
     </View>

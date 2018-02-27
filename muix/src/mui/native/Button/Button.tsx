@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
-import { Text, withStyles, toPlatformRuleSet, sheetCreator, addOverrides } from 'reactxx'
+import { Text, withStyles, toPlatformRuleSet, sheetCreator, ThemeModifier, addOverrides } from 'reactxx'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 
@@ -146,15 +146,16 @@ const button: ReactXX.CodeSFCNative<MuiButton.Shape> = (props, context) => {
 
   const rippleStyle = mergeRulesetWithOverrides(classes.ripple) as ReactN.ViewStyle
   const activeStyle = mergeRulesetWithOverrides(!disabled && classes.active) as ReactN.ViewStyle
-  const labelStyle = mergeRulesetWithOverrides(classes.label) as ReactN.TextStyle
-  const iconStyle = mergeRulesetWithOverrides(classes.labelIcon) as ReactN.TextStyle
+  //const labelStyle = mergeRulesetWithOverrides(classes.label) 
+  const iconOverride = { root: mergeRulesetWithOverrides(classes.labelIcon) } as  ReactXX.SheetX
+  const labelOverride = { root: mergeRulesetWithOverrides(classes.label) } as ReactXX.SheetX
 
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 
-  const RippleWithOverrides = addOverrides(RippleEffect, props => ({
-    [ReactXX.CompNames.Icon]: { root: iconStyle },
-    [ReactXX.CompNames.Text]: { root: labelStyle },
-  }))
+  const RippleWithOverrides = addOverrides(RippleEffect, {
+    [ReactXX.CompNames.Icon]: iconOverride,
+    [ReactXX.CompNames.Text]: labelOverride,
+  })
 
   return <RippleWithOverrides viewStyle={rootStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} className={null} mergeRulesetWithOverrides={null} animations={null} {...rest}>
     {childs}

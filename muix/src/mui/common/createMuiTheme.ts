@@ -18,9 +18,6 @@ import createTypography from './createTypography'
 
 import { toPlatformRuleSet } from 'reactxx'
 
-//let defaultTheme: Muix.Theme
-//export const getDefaultTheme = () => defaultTheme || (defaultTheme = createMuiTheme())
-
 //create theme from cross platform ThemeOptions
 //resulting theme is compatible with material-ui
 export const createMuiTheme = (options: Muix.ThemeOptions = {}) => {
@@ -52,7 +49,7 @@ export const createMuiTheme = (options: Muix.ThemeOptions = {}) => {
 
   //const typographyOptionOrCreator = getTypographyOptionOrCreatorX(typographyNew)
 
-  const muiTheme: Muix.Theme = {
+  const muiTheme: ReactXX.Theme = {
     direction: 'ltr', //the same value for web and native
     palette, //the same value for web and native
     ...createTypography(palette, typographyX), //different fields for web and native (typography and typographyX)
@@ -64,7 +61,7 @@ export const createMuiTheme = (options: Muix.ThemeOptions = {}) => {
       { transitions, spacing, zIndex, },
       other,
       { clone: false }, // No need to clone deep
-    )) as Muix.Theme,
+    )) as ReactXX.Theme,
   }
 
   //muiTheme.overrides = getOverridesX(muiTheme, overridesX) //different value for web and native
