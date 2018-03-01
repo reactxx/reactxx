@@ -60,7 +60,7 @@ declare namespace Muix {
   //type OverridesNewOrCreator = OverridesNew | ((theme: Theme) => OverridesNew)
 
   type ThemeShadowsX = ReactXX.RulesetX<ReactN.ViewStyle>[]
-  type ThemeShadows = ReactXX.commonViewRuleset[]
+  type ThemeShadows = ReactXX.ViewRulesetCommonX[]
 
   interface ThemeOptions {
     shadowsX?: ThemeShadowsX

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import hoistNonReactStatics from 'hoist-non-react-statics'
+//import hoistNonReactStatics from 'hoist-non-react-statics'
 
 import createGenerateClassName from 'material-ui/styles/createGenerateClassName'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -13,7 +13,6 @@ import { ModifierType } from 'reactxx-appstate'
 
 export * from '../common/createMuiTheme'
 
-//import { sheetToClassNames } from './inline-styles'
 import { sheetToClassSheet, rulesetToClassNames } from 'reactxx/web'
 import { createMuiTheme } from '../common/createMuiTheme'
 

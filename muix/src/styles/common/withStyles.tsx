@@ -69,7 +69,7 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
             classesProp && ruleset.$name && classesProp[ruleset.$name], //force using classes component property (it has highter priority)
           )
         })
-        return rulesetResult
+        return rulesetResult as ReactXX.RulesetX
       }
 
       const cn = null //(typeof rulesetX == 'function' ? rulesetX(theme) : rulesetX) as ReactXX.RulesetX

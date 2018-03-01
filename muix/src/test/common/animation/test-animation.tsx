@@ -97,12 +97,12 @@ const drawerLayout: ReactXX.CodeSFC<testAnimation.Shape> = props => {
     tablet && classes.tablet,
     desktop && classes.desktop,
     className,
-  ) as ReactN.ViewStyle
+  ) as ReactXX.ViewRulesetX
 
   const backDrop = mergeRulesetWithOverrides(
     classes.backDrop,
     mobile && animations.mobile.sheet.backDrop,
-  ) as ReactN.ViewStyle
+  ) as ReactXX.ViewRulesetX
 
   const drawer = mergeRulesetWithOverrides(
     classes.drawer,
@@ -113,7 +113,7 @@ const drawerLayout: ReactXX.CodeSFC<testAnimation.Shape> = props => {
   const content = mergeRulesetWithOverrides(
     classes.content,
     tablet && animations.tablet.sheet.content,
-  ) as ReactN.ViewStyle
+  ) as ReactXX.ViewRulesetX
 
   //console.log('### DRAWER STATE opened=', opened(), ', mobile(is-opened)=', mobile, animations.mobile.opened, ', tablet=(is-opened)', tablet, animations.tablet.opened, ) 
   //console.log('======================================================\n', root, classes.button, backDrop, drawer) 
@@ -122,11 +122,11 @@ const drawerLayout: ReactXX.CodeSFC<testAnimation.Shape> = props => {
       <Text style={{ marginTop:60 }}>{JSON.stringify(backDrop, null, 2)}</Text>
     </AnimatedView>
     <AnimatedView key={2} className={drawer}>
-      <Text className={mergeRulesetWithOverrides(classes.closeButton, { ...btnStyle, textAlign: 'right' })} onClick={close} >CLOSE</Text>
+      <Text className={mergeRulesetWithOverrides(classes.closeButton, { ...btnStyle, textAlign: 'right' }) as ReactXX.TextRulesetX} onClick={close} >CLOSE</Text>
       <Text style={{ marginTop: 60 }}>{JSON.stringify(drawer, null, 2)}</Text>
     </AnimatedView>
     <AnimatedView key={3} className={content}>
-      <View key={1} className={mergeRulesetWithOverrides(classes.openButton, { flexDirection: 'row', display: opened ? 'none' : 'flex' })} >
+      <View key={1} className={mergeRulesetWithOverrides(classes.openButton, { flexDirection: 'row', display: opened ? 'none' : 'flex' }) as ReactXX.ViewRulesetX} >
         <Text onClick={open} className={{ ...btnStyle, alignSelf: 'flex-start' }}>OPEN</Text>
       </View>
       <Text style={{ marginTop: 120 }}>{JSON.stringify(content, null, 2)}'\n'{JSON.stringify(content.left, null, 2)}</Text>

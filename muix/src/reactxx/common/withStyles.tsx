@@ -1,6 +1,6 @@
 import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
-import { toPlatformRuleSet, toPlatformSheet, applyTheme2, deepMerge } from './index'
+import { toPlatformRuleSet, toPlatformSheet, deepMerge } from './index'
 import { ComponentsMediaQ } from './media-q'
 import warning from 'warning'
 import { getAnimations } from './animation'
@@ -11,12 +11,17 @@ export const withStylesEx = <R extends ReactXX.Shape>(_name: ReactXX.getNameType
 
   const name = _name as string
 
-  type TStyled = ReactXX.PropsX & ReactXX.ThemeStateX 
+  type TStyled = ReactXX.PropsX & ReactXX.ThemeStateX
 
   class Styled extends React.PureComponent<TStyled> {
     classes: ReactXX.Sheet
     animations: Animation.Drivers
     media: ComponentsMediaQ
+
+    constructor(p, c) {
+      super(p, c)
+      this.componentWillReceiveProps()
+    }
 
     componentWillReceiveProps() {
       this.animations && this.animations.reset()
@@ -44,9 +49,9 @@ export const withStylesEx = <R extends ReactXX.Shape>(_name: ReactXX.getNameType
 
       if (ignore) return null
 
-      const className = toPlatformRuleSet(applyTheme2(classNameX as ReactXX.RulesetX, theme))
-      const classes = toPlatformSheet(applyTheme2(classesX as ReactXX.SheetX, theme))
-      const style = toPlatformRuleSet(applyTheme2<ReactXX.RulesetX>(styleX as ReactXX.RulesetX, theme))
+      const className: ReactXX.Ruleset = toPlatformRuleSet(applyTheme(name, classNameX, theme))
+      const classes: ReactXX.Sheet = toPlatformSheet(applyTheme(name, classesX, theme))
+      const style: ReactXX.Ruleset = toPlatformRuleSet(applyTheme(name, styleX, theme))
 
 
       // calling createRulesetWithOverridesMerger signals which rulesets are used. So it can use their $overrides to modify self sheet
@@ -71,7 +76,7 @@ export const withStylesEx = <R extends ReactXX.Shape>(_name: ReactXX.getNameType
   }
   hoistNonReactStatics(Styled, Component as any)
 
-  return (props => <ThemeModifier modify={props.modifyThemeState} selector={modifierSelector(name)} render={themeState => 
+  return (props => <ThemeModifier modify={props.modifyThemeState} selector={modifierSelector(name)} render={themeState =>
     <Styled {...themeState} {...props} />
   } />) as React.ComponentType<ReactXX.PropsX<R>>
 
@@ -101,7 +106,7 @@ export const toPlatformEvents = ($web: ReactXX.OnPressAllWeb, $native: ReactXX.O
 // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides)
 const createRulesetWithOverridesMerger = (classesProp: ReactXX.Sheet, media: ComponentsMediaQ) => { //, usedChildOverrides: ReactXX.Sheets) => {
   const usedOverrides: ReactXX.Sheet = {}
-  media.unsubscribe() //release media notifications
+  if (media) media.unsubscribe() //release media notifications
   const res: ReactXX.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
     let single = undefined //optimalization: rulesets contains just single non empty item
     rulesets.forEach(ruleset => { // acumulate $overrides 
@@ -119,7 +124,7 @@ const createRulesetWithOverridesMerger = (classesProp: ReactXX.Sheet, media: Com
         usedOverrides[single.$name], //... modify it with used $overrides
         classesProp && single.$name && classesProp[single.$name] //... and force using classes component property (it has hight priority)
       ]
-      if (other.filter(s => !!s).length === 1) return clearSystemProps(media.processRuleset({ ...single })) //otimalization: nothing to merge
+      if (other.filter(s => !!s).length === 1) return clearSystemProps(media ? media.processRuleset({ ...single }) : { ...single }) //otimalization: nothing to merge
       deepMerges(true, rulesetResult, ...other)
     }
     //apply used $overrides and classes prop
@@ -132,7 +137,7 @@ const createRulesetWithOverridesMerger = (classesProp: ReactXX.Sheet, media: Com
           classesProp && ruleset.$name && classesProp[ruleset.$name], //force using classes component property (it has hight priority)
         )
       })
-    return clearSystemProps(media.processRuleset(rulesetResult))
+    return clearSystemProps(media ? media.processRuleset(rulesetResult) : rulesetResult)
   }
   return res
 }
@@ -140,6 +145,9 @@ const createRulesetWithOverridesMerger = (classesProp: ReactXX.Sheet, media: Com
 //*************************************************************** 
 // HELPERS
 //***************************************************************
+const applyTheme = (name: string, valueOrCreator: any | ((theme: ReactXX.Theme, themePar) => any), theme: ReactXX.Theme) =>
+  typeof valueOrCreator === 'function' ? valueOrCreator(theme, theme.themePars[name]) : valueOrCreator
+
 
 
 // merge named values

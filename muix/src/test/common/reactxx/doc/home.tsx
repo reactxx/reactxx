@@ -60,13 +60,13 @@ const expandedPanelSheet: ReactXX.CreateSheetX<DocHome.ExpandedPanelShape> = {
 
 const expandedPanel: ReactXX.CodeSFC<DocHome.ExpandedPanelShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations: { openClose }, title, children, ...rest } = props
-  const rootStyle = mergeRulesetWithOverrides(classes.root, className)
-  const headerStyle = mergeRulesetWithOverrides(classes.header)
+  const rootStyle = mergeRulesetWithOverrides(classes.root, className) as ReactN.ViewStyle
+  const headerStyle = mergeRulesetWithOverrides(classes.header) as ReactN.ViewStyle
   const contentStyle = mergeRulesetWithOverrides(classes.content, openClose.sheet.content) as ReactN.ViewStyle
   const iconStyle = mergeRulesetWithOverrides(classes.icon, openClose.sheet.icon) as ReactN.TextStyle
   const headerLabelStyle = mergeRulesetWithOverrides(classes.headerLabel) as ReactN.TextStyle
 
-  return <View className={rootStyle} style={style}>
+  return <View className={rootStyle} style={style as ReactXX.ViewStyle}>
     <View className={headerStyle} /*modifyThemeState={theme => ({ ...theme, overridesNew: { ...theme.overridesNew, [ReactXX.CompNames.Text]: { root: headerLabelStyle}}})}*/>
       {typeof title === 'string' ? <Text numberOfLines={1}>{title}</Text> : title}
       <AnimatedIcon data={MDI.ArrowExpandDown} className={iconStyle} onPress={() => openClose.toggle()} /> 

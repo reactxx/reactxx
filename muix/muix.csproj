@@ -182,6 +182,7 @@
     <TypeScriptCompile Include="src\reactxx\typings\media-q.d.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\components.d.ts" />
     <TypeScriptCompile Include="src\reactxx\native\media-q.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\common-style.d.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\theme.d.ts" />
     <TypeScriptCompile Include="src\reactxx\web\animation.tsx" />
     <TypeScriptCompile Include="src\reactxx\web\fela.tsx" />

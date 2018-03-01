@@ -1,6 +1,7 @@
 declare namespace ReactXX {
 
   const enum CompNames {
+    textClassName = 'reactxx-text',
     Text = 'ReactXX$Text',
     View = 'ReactXX$View',
     Icon = 'ReactXX$Icon',

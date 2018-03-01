@@ -22,8 +22,8 @@ export const icon: ReactXX.CodeSFCWeb<ReactXX.IconShape> = props => {
 
 export const text: ReactXX.CodeSFCWeb<ReactXX.TextShape> = props => {
   const { style, classes, className, numberOfLines, mergeRulesetWithOverrides, theme, animations, ...rest } = props
-  const rootStyle = mergeRulesetWithOverrides(classes.root, props.onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle, className)
-  return <div className={ReactXX.CompNames.Text + ' ' + rulesetsToClassNames(rootStyle)} style={style} {...rest} />
+  const rootStyle = mergeRulesetWithOverrides(classes.root, props.onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle, className) 
+  return <div className={ReactXX.CompNames.textClassName + ' ' + rulesetsToClassNames(rootStyle)} style={style} {...rest} />
 }
 
 export const scrollView: ReactXX.CodeSFCWeb<ReactXX.ScrollViewShape> = props => {

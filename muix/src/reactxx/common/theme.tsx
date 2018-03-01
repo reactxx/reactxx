@@ -7,7 +7,7 @@ import { toPlatformSheet } from './index'
 
 export { ConsumerType } from 'reactxx-appstate'
 
-const { Provider, Modifier, Consumer } = createContext<ReactXX.ThemeStatesX>({ theme: {} as any, overrides: {} })
+const { Provider, Modifier, Consumer } = createContext<ReactXX.ThemeStatesX>({ theme: { themePars: {} } as any, overrides: {} })
 
 export const ThemeProvider = Provider
 export const AppContainer = Provider

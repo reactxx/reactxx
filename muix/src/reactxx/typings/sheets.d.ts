@@ -1,7 +1,5 @@
 ﻿declare namespace ReactXX {
 
-  //interface RNIconStyle { color?: string; fontSize?: number }
-
   type MouseEvent = (event?: React.MouseEvent<Element>) => void
   interface OnPressX { onPress?: MouseEvent; onLongPress: () => void }
   interface OnPressAllX extends OnPressX { onPressIn?: MouseEvent; onPressOut?: MouseEvent }
@@ -13,10 +11,6 @@
     flip?: boolean
   }
 
-  //type WithStylesOptionsNew2<R extends Shape = Shape> = getComponentTheme<R> & {
-  //  name: getNameType<R>
-  //  flip?: boolean
-  //}
   /******************************************
     RULESET
   *******************************************/
@@ -37,13 +31,13 @@
   // native rules, which are compatible with web
   type commonRules<T extends RulesetNative> = TakeFrom<T, commonRuleNames<T>>
 
-  //type TextStyleCommon = commonRuleset<ReactN.TextStyle>
-  type commonViewRuleset = commonRules<ReactN.ViewStyle>
+  type ViewRulesetCommonX = commonRules<ReactN.ViewStyle>
+  type ViewRulesetX = RulesetX<ReactN.ViewStyle>
   type TextRulesetX = RulesetX<ReactN.TextStyle>
 
   //******************** Platform specific ruleset
   type RulesetWeb = React.CSSProperties //??? https://github.com/programbo/cssproperties/blob/master/css-properties.d.ts
-  type RulesetNative = ReactN.TextStyle | ReactN.ViewStyle | ReactN.ImageStyle | ReactN.ScrollViewStyle //| RNIconStyle
+  type RulesetNative = ReactN.TextStyle | ReactN.ViewStyle | ReactN.ImageStyle | ReactN.ScrollViewStyle
   type Ruleset = RulesetNative | RulesetWeb
 
   /******************************************
@@ -55,7 +49,7 @@
     native: Record<string, RulesetNative> // ruleset types, which are used only in native code
     web: string | null // ruleset names, which are used only in web code (its type is always React.CSSProperties)
     //******************** native style constrain
-    style: RulesetNative // for native: type of component style property (for web, style has always React.CSSProperties type)
+    style: ReactN.ViewStyle // for native: type of component style property (for web, style has always React.CSSProperties type)
     //**** animation shape
     animation: Animation.Shapes
     //**** component property constrains
@@ -152,16 +146,15 @@
   //******************** cross platform Component props (Component is created by 'withStyles' ) 
 
   type PropsX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>, {
-    style?: FromThemeValueOrCreator<RulesetX<getStyle<R>>> | RulesetWeb | getStyle<R> //cross platform style
+    style?: CreateRulesetX<R> //| RulesetWeb | getStyle<R> //cross platform style
     $web?: Partial<getPropsWeb<R>> //web specific style
     $native?: Partial<getPropsNative<R>> //native specific style
     ignore?: boolean
-    classes?: FromThemeValueOrCreator<PartialSheetX<R> | PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
+    classes?: PartialCreateSheetX<R> //| PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
     modifyThemeState?: ReactXX.ThemeModifier
-    //childClasses?: FromThemeValueOrCreator<SheetsX> | Sheets
-    className?: FromThemeValueOrCreator<RulesetX<getStyle<R>>> /*cross platform root ruleset*/ | Ruleset /*platform specific root ruleset (when component is used in other component)*/
+    className?: CreateRulesetX<R> /*cross platform root ruleset*/ //| RulesetWeb | getStyle<R> /*platform specific root ruleset (when component is used in other component)*/
   }>>
-  type PartialSheetInCode<R extends Shape> = PartialRecord<keyof getCommon<R> | getWeb<R> | keyof getNative<R>, Ruleset> // common and web and native
+  //type PartialSheetInCode<R extends Shape> = PartialRecord<keyof getCommon<R> | getWeb<R> | keyof getNative<R>, Ruleset> // common and web and native
 
   type ComponentTypeX<R extends Shape> = React.ComponentType<PropsX<R>>
   type SFCX<R extends Shape> = React.SFC<PropsX<R>>

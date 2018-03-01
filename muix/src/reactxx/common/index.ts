@@ -7,7 +7,7 @@ import warning from 'warning'
 export const toPlatformRuleSet = (style: ReactXX.RulesetX) => {
   if (!style) return null
   const isNative = !window.isWeb
-  if (!style.$mediaq && !style.$web && !style.$native && !style.$overrides && !style.$props) return style //optimalization
+  if (!style.$mediaq && !style.$web && !style.$native && !style.$overrides && !style.$props) return style as ReactXX.Ruleset//optimalization
   const { $web, $native, $overrides, $mediaq, $props: $propsX, ...rest } = style
   let $props:any = $propsX
   if ($propsX && ($propsX.$native && isNative || $propsX.$web && !isNative)) {
@@ -22,9 +22,6 @@ export const toPlatformRuleSet = (style: ReactXX.RulesetX) => {
 //export const applyTheme = <T>(theme: ReactXX.Theme | (() => ReactXX.Theme), valueOrCreator: ReactXX.FromThemeValueOrCreator<T> | any, componentTheme?: {}) =>
 //  typeof valueOrCreator === 'function' ? valueOrCreator(typeof theme === 'function' ? theme() : theme) : valueOrCreator
 
-
-export const applyTheme2 = <T>(valueOrCreator: T | ((theme: ReactXX.Theme) => T), theme: ReactXX.Theme) =>
-  typeof valueOrCreator === 'function' ? valueOrCreator(theme) : valueOrCreator
 
 //create platform specific sheet from cross platform one
 export const toPlatformSheet = <R extends ReactXX.Shape>(sheet: ReactXX.SheetX<R> | ReactXX.PartialSheetX<R>) => {
