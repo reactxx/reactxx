@@ -7,9 +7,10 @@ import { getAnimations } from './animation'
 
 import { ThemeModifier, modifierSelector, toPlatformFromSheetCreator } from './theme'
 
-export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R>, createSheetX: ReactXX.CreateSheetX<R>) => (Component: ReactXX.CodeComponentType<R>) => {
+export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R>, createSheetX: ReactXX.CreateSheetX<R>, themePar?: ReactXX.getComponentsTheme<R>) => (Component: ReactXX.CodeComponentType<R>) => {
 
   const name = _name as string
+  themePars[name] = themePar
 
   type TStyled = ReactXX.PropsX & ReactXX.ThemeStateX
 
@@ -84,6 +85,8 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
   //const styled: any = Styled
   //return styled as React.ComponentType<ReactXX.PropsX<R>>
 }
+
+export const themePars: {[Name in keyof ReactXX.SheetsX]?: {} } = {}
 
 export const toPlatformEvents = ($web: ReactXX.OnPressAllWeb, $native: ReactXX.OnPressAllNative, propsX: ReactXX.OnPressAllX, codeProps: ReactXX.CodeProps) => {
   const { onPress, onLongPress, onPressIn, onPressOut } = propsX

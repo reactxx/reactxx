@@ -4,7 +4,7 @@ declare namespace ReactXX {
   type ThemePars = { [name: string]: {} }
   type OverridesX = { [name: string]: PartialCreateSheetX }
   type PartialCreateSheetX<R extends Shape = Shape> = PartialSheetX<R> | ((theme: ReactXX.Theme, themePar) => PartialSheetX<R>)
-  type CreateSheetX<R extends Shape = Shape> = SheetX<R> | ((theme: ReactXX.Theme, themePar) => SheetX<R>)
+  type CreateSheetX<R extends Shape = Shape> = SheetX<R> | ((theme: ReactXX.Theme, themePar: getComponentsTheme<R>) => SheetX<R>)
   type CreateRulesetX<R extends Shape = Shape> = RulesetX<getStyle<R>> | ((theme: ReactXX.Theme, themePar) => RulesetX<getStyle<R>>)
 
   interface Theme {

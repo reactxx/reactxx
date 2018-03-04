@@ -15,7 +15,11 @@ declare namespace testAnimation {
       mobile: ReactXX.ShapeViews<'drawer' | 'backDrop'>,
       tablet: ReactXX.ShapeViews<'drawer' | 'content'>,
     },
-    nameType: Consts.Drawer
+    componentsTheme: {
+      drawerWidths: [number, number, number],
+      animationDuration: number,
+    },
+    nameType: Consts.Drawer,
   }>
 }
 

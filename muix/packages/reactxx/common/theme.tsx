@@ -4,10 +4,11 @@ import warning from 'warning'
 import { createContext, ModifierType } from 'reactxx-appstate'
 
 import { toPlatformSheet } from './index'
+import { themePars } from './withStyles'
 
 export { ConsumerType } from 'reactxx-appstate'
 
-const { Provider, Modifier, Consumer } = createContext<ReactXX.ThemeStatesX>({ theme: { themePars: {} } as any, overrides: {} })
+const { Provider, Modifier, Consumer } = createContext<ReactXX.ThemeStatesX>(() => ({ theme: { themePars } as any, overrides: {} }))
 
 export const ThemeProvider = Provider
 export const AppContainer = Provider

@@ -33,10 +33,11 @@ Extends new react (v16.3) context api ideas:
 - Consumer and Modifier has render prop for simplier Typescript typing
  */
 
-export const createContext = <T>(defaultValue: T, _channelId?: string) => {
+export const createContext = <T>(_defaultValue: T | (() => T), _channelId?: string) => {
 
   const channelId = _channelId || 'channel-' + uid++
   const contextType = { [channelId]: PropTypes.any }
+  const getDefaultValue = () => typeof _defaultValue === 'function' ? (_defaultValue = _defaultValue()) : _defaultValue
 
   class ComponentLow extends React.Component<ModifierProps<T> & ProviderProps<T>, { value }> {
 
@@ -52,7 +53,7 @@ export const createContext = <T>(defaultValue: T, _channelId?: string) => {
             },
             getInitValue: () => {
               if (this.role === Roles.modifier) return this.mModifiedValue
-              else return this.props.value || defaultValue
+              else return this.props.value || getDefaultValue()
             }
           } as Channel<T>
         }
@@ -60,7 +61,7 @@ export const createContext = <T>(defaultValue: T, _channelId?: string) => {
       if (this.role != Roles.provider) {
         this.sSelector = this.props.selector
         this.sChannel = this.context[channelId]
-        let val = this.sChannel ? this.sChannel.getInitValue() : defaultValue
+        let val = this.sChannel ? this.sChannel.getInitValue() : getDefaultValue()
         if (this.role === Roles.modifier) {
           this.mModify = this.props.modify || (theme => theme)
           val = this.mModifiedValue = this.mModify(val)
