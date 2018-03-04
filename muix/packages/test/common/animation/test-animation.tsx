@@ -1,12 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { withStyles, sheetCreator } from 'muix-styles'
-import { View, Text, AnimatedView } from 'muix-primitives'
+import { withStylesEx, View, Text, AnimatedView } from 'reactxx'
 
 const debugDuration = 300
 
-const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
+const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = {
   $animations: { // different Animations
     mobile: { // single Animation (single Animated.Value for NATIVE)
       drawer: { // animation ruleset for specific component
@@ -18,10 +17,10 @@ const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
         opacity: [0, 0.4],
         transform: [
           { translateX: [-5000, 0] },
-          '0%-0.5%' // the same as shortcut '-0.5'
+          '-0.5' // means 0%-0.5%
         ],
       },
-      $easing: transitions.easing.sharp,
+      //$easing: transitions.easing.sharp,
       $duration: debugDuration,
       $opened: false,
     },
@@ -34,7 +33,7 @@ const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
       content: {
         left: [0, 200]
       },
-      $easing: transitions.easing.sharp,
+      //$easing: transitions.easing.sharp,
       $duration: debugDuration,
       $opened: true,
     }
@@ -80,7 +79,7 @@ const sheet = sheetCreator<testAnimation.Shape>(({ transitions, palette }) => ({
   },
   openButton: {},
   closeButton: {},
-}))
+})
 
 const btnStyle = {color: 'blue', padding: 10}
 

@@ -141,9 +141,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="packages\animation\common\index.tsx" />
-    <TypeScriptCompile Include="packages\animation\native\index.tsx" />
-    <TypeScriptCompile Include="packages\animation\web\index.tsx" />
+    <TypeScriptCompile Include="packages\reactxx\typings\animation.d.ts" />
     <TypeScriptCompile Include="packages\components\common\ResponsibleDrawer\ResponsibleDrawer.tsx" />
     <TypeScriptCompile Include="packages\components\native\ResponsibleDrawer\ResponsibleDrawer.tsx" />
     <TypeScriptCompile Include="packages\components\typings\ResponsibleDrawer-d.d.ts" />
@@ -183,7 +181,9 @@
     <TypeScriptCompile Include="packages\reactxx\typings\components.d.ts" />
     <TypeScriptCompile Include="packages\reactxx\native\media-q.ts" />
     <TypeScriptCompile Include="packages\reactxx\typings\common-style.d.ts" />
+    <TypeScriptCompile Include="packages\reactxx\typings\sheets.d.ts" />
     <TypeScriptCompile Include="packages\reactxx\typings\theme.d.ts" />
+    <TypeScriptCompile Include="packages\reactxx\typings\typings.d.ts" />
     <TypeScriptCompile Include="packages\reactxx\web\animation.tsx" />
     <TypeScriptCompile Include="packages\reactxx\web\fela.tsx" />
     <TypeScriptCompile Include="packages\reactxx\web\components.tsx" />
@@ -197,7 +197,6 @@
     <TypeScriptCompile Include="packages\primitives\typings\ScrollView-d.d.ts" />
     <TypeScriptCompile Include="packages\primitives\typings\Icon-d.d.ts" />
     <TypeScriptCompile Include="packages\primitives\web\for-components.tsx" />
-    <None Include="packages\reactxx\typings\sheets.d.ts_" />
     <TypeScriptCompile Include="packages\reactxx\web\media-q.ts" />
     <TypeScriptCompile Include="packages\styles\common\createTypography.ts" />
     <TypeScriptCompile Include="packages\styles\common\MuiThemeProvider.tsx" />
@@ -209,8 +208,8 @@
     <TypeScriptCompile Include="packages\mui\typings\libs\react-transition-group\index.d.ts" />
     <TypeScriptCompile Include="packages\mui\typings\libs\react-transition-group\Transition.d.ts" />
     <TypeScriptCompile Include="packages\mui\typings\libs\react-transition-group\TransitionGroup.d.ts" />
-    <TypeScriptCompile Include="packages\test\common\animation\test-animation.tsx" />
     <TypeScriptCompile Include="packages\test\common\animation\test-animation-d.d.ts" />
+    <TypeScriptCompile Include="packages\test\common\animation\test-animation.tsx" />
     <TypeScriptCompile Include="packages\test\common\components\responsible-drawer.tsx" />
     <TypeScriptCompile Include="packages\test\common\components\button-demo.tsx" />
     <TypeScriptCompile Include="packages\test\common\mui\button-demo.tsx" />
@@ -220,7 +219,6 @@
     <TypeScriptCompile Include="packages\test\common\reactxx\index.tsx" />
     <TypeScriptCompile Include="packages\test\common\shadows\native.tsx" />
     <TypeScriptCompile Include="packages\test\common\shadows\index.tsx" />
-    <TypeScriptCompile Include="packages\reactxx\typings\animation.d.ts" />
     <TypeScriptCompile Include="packages\test\native\animation.tsx" />
     <TypeScriptCompile Include="packages\test\native\App.tsx" />
     <TypeScriptCompile Include="packages\test\common\root.tsx" />
@@ -255,7 +253,6 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="packages\animation\typings\" />
     <Folder Include="packages\styles\typings\" />
   </ItemGroup>
   <PropertyGroup>

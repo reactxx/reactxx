@@ -78,6 +78,7 @@
     <Content Include="react-native\types-react-native-0.1.1.tgz" />
     <Content Include="react\types-react-0.1.1.tgz" />
     <Content Include="reactxx\package.json" />
+    <Content Include="reactxx\types-reactxx-0.1.1.tgz" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

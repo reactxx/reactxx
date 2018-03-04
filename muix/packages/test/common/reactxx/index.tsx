@@ -109,10 +109,10 @@ For "View" element:
     Component: props => {
       const text: ReactXX.TextRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10, margin: 10, width: 300 }
       return <ScrollView horizontal>
-        <Text className={text}>{LoremIpsum(40)}</Text>
-        <Text className={text}>{LoremIpsum(40)}</Text>
-        <Text className={text}>{LoremIpsum(40)}</Text>
-        <Text className={text}>{LoremIpsum(40)}</Text>
+        <Text className={text}>111 {LoremIpsum(40)}</Text>
+        <Text className={text}>222 {LoremIpsum(40)}</Text>
+        <Text className={text}>333 {LoremIpsum(40)}</Text>
+        <Text className={text}>444 {LoremIpsum(40)}</Text>
       </ScrollView>
     }
   },
@@ -155,7 +155,7 @@ const AppThemeOverride: React.SFC = props => <AppContainer>
   </Text>
 </AppContainer>
 
-const App = primitives.$07.Component
+const App = primitives.$06.Component
 export default App
 
 const E01$01_: Example = {

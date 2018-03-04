@@ -19,8 +19,6 @@
       "muix-styles/native": [ "packages/styles/native/index" ],
       "muix-styles": [ "packages/styles/native/index" ],
 
-      "muix-animation": [ "packages/animation/native/index" ],
-
       "muix-primitives": [ "packages/primitives/native/index" ],
 
 

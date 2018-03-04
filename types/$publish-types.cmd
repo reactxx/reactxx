@@ -10,5 +10,5 @@ call npm pack
 cd %root%expo
 call npm pack
 
-cd %root%reactxx
-call npm pack
+rem cd %root%reactxx
+rem call npm pack

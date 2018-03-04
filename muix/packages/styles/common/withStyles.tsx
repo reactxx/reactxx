@@ -3,7 +3,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 import { MuiThemeContextTypes, MuiOverridesContextTypes, getDefaultTheme, classesToPlatformSheet } from './index'
 import { toPlatformRuleSet, toPlatformSheet, clearSystemProps } from 'muix-styles'
 import warning from 'invariant'
-import { getAnimations } from 'muix-animation'
+//import { getAnimations } from 'muix-animation'
 
 const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCreator<R>, options: Muix.WithStylesOptionsNew) => (Component: ReactXX.CodeComponentType<R>) => {
 
@@ -33,7 +33,7 @@ const withStyles = <R extends ReactXX.Shape>(sheetOrCreator: ReactXX.SheetOrCrea
       for (const p in this.codeClasses) this.codeClasses[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
 
       //*** init animations
-      this.animations = getAnimations(cacheItem.fromTheme.$animations, this)
+      this.animations = null //getAnimations(cacheItem.fromTheme.$animations, this)
     }
 
     getChildContext() { return { childOverrides: this.usedChildOverrides /*usedChildOverrides is modified during Component render (where getRulesetWithSideEffect is called)*/ } }

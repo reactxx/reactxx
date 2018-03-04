@@ -1,5 +1,5 @@
 set root=D:\reactxx\muix\
-set url=https://cdn.rawgit.com/reactxx/reactxx/130a66a2/types/
+set url=https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/
 
 d:
 
@@ -9,10 +9,11 @@ set npm=%root%node_modules\
 rmdir %npm%@types\expo /s /q
 rmdir %npm%@types\react /s /q
 rmdir %npm%@types\react-native /s /q
-rmdir %npm%@types\reactxx-shared /s /q
+rem rmdir %npm%@types\reactxx /s /q
 rmdir %npm%reactxx-mdi /s /q
 rmdir %npm%reactxx-shadows /s /q
-call npm install reactxx-mdi reactxx-shadows %url%expo/types-expo-0.1.1.tgz %url%react/types-react-0.1.1.tgz %url%react-native/types-react-native-0.1.1.tgz %url%reactxx/types-reactxx-shared-0.1.1.tgz
+rem call npm install reactxx-mdi reactxx-shadows %url%expo/types-expo-0.1.1.tgz %url%react/types-react-0.1.1.tgz %url%react-native/types-react-native-0.1.1.tgz %url%reactxx/types-reactxx-0.1.1.tgz
+call npm install reactxx-mdi reactxx-shadows %url%expo/types-expo-0.1.1.tgz %url%react/types-react-0.1.1.tgz %url%react-native/types-react-native-0.1.1.tgz
 
 cd %root%node_modules\@types
 rmdir node /s /q
