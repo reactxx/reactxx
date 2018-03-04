@@ -74,6 +74,10 @@
     <Content Include="react-native\package.json" />
     <Content Include="tsconfig.json" />
     <Content Include="%24publish-types.cmd" />
+    <Content Include="expo\types-expo-0.1.1.tgz" />
+    <Content Include="react-native\types-react-native-0.1.1.tgz" />
+    <Content Include="react\types-react-0.1.1.tgz" />
+    <Content Include="reactxx\package.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -91,6 +95,8 @@
     <TypeScriptCompile Include="expo\index.d.ts" />
     <TypeScriptCompile Include="index.d.ts" />
     <TypeScriptCompile Include="react-native\index.d.ts" />
+    <TypeScriptCompile Include="reactxx\sheets.d.ts" />
+    <TypeScriptCompile Include="reactxx\typings.d.ts" />
     <TypeScriptCompile Include="react\global.d.ts" />
     <TypeScriptCompile Include="react\index.d.ts" />
   </ItemGroup>

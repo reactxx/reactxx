@@ -16,11 +16,11 @@
     "warning": "^3.0.0"
   },
   "devDependencies": {
-    "@types/expo": "https://cdn.rawgit.com/reactxx/reactxx/29c62cad/types/expo/types-expo-0.1.1.tgz",
-    "@types/react": "https://cdn.rawgit.com/reactxx/reactxx/29c62cad/types/react/types-react-0.1.1.tgz",
-    "@types/react-native": "https://cdn.rawgit.com/reactxx/reactxx/29c62cad/types/react-native/types-react-native-0.1.1.tgz",
-    "@types/reactxx-shared": "",
+    "@types/expo": "https://cdn.rawgit.com/reactxx/reactxx/130a66a2/types/expo/types-expo-0.1.1.tgz",
+    "@types/react": "https://cdn.rawgit.com/reactxx/reactxx/130a66a2/types/react/types-react-0.1.1.tgz",
     "@types/react-dom": "^16.0.3",
+    "@types/react-native": "https://cdn.rawgit.com/reactxx/reactxx/130a66a2/types/react-native/types-react-native-0.1.1.tgz",
+    "@types/reactxx-shared": "https://cdn.rawgit.com/reactxx/reactxx/130a66a2/types/reactxx/types-reactxx-shared-0.1.1.tgz",
     "babel-plugin-module-resolver": "^3.0.0",
     "fela": "^6.1.3"
   },

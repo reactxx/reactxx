@@ -197,7 +197,7 @@
     <TypeScriptCompile Include="packages\primitives\typings\ScrollView-d.d.ts" />
     <TypeScriptCompile Include="packages\primitives\typings\Icon-d.d.ts" />
     <TypeScriptCompile Include="packages\primitives\web\for-components.tsx" />
-    <TypeScriptCompile Include="packages\reactxx\typings\sheets.d.ts" />
+    <None Include="packages\reactxx\typings\sheets.d.ts_" />
     <TypeScriptCompile Include="packages\reactxx\web\media-q.ts" />
     <TypeScriptCompile Include="packages\styles\common\createTypography.ts" />
     <TypeScriptCompile Include="packages\styles\common\MuiThemeProvider.tsx" />
@@ -247,7 +247,6 @@
     <TypeScriptCompile Include="packages\test\common\styles\typography.tsx" />
     <TypeScriptCompile Include="packages\mui\typings\libs\mui\material-ui-helper.d.ts" />
     <TypeScriptCompile Include="packages\mui\typings\libs\mui\material-ui.d.ts" />
-    <TypeScriptCompile Include="packages\typings.d.ts" />
     <TypeScriptCompile Include="packages\mui\typings\libs\mui\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="packages\styles\web\inline-styles.tsx" />
     <TypeScriptCompile Include="packages\mui\web\index.tsx" />

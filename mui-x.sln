@@ -10,9 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{6B47010E-3A7D-48A9-B556-7775FCC75E78}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{69DC2C05-29A6-46A9-AF1E-CECEE459CB07}"
-	ProjectSection(SolutionItems) = preProject
-		$publish-types.cmd = $publish-types.cmd
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "types", "types\types.csproj", "{243C870C-4D5B-4784-AE34-D67139327694}"
 EndProject
