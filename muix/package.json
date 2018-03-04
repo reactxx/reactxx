@@ -27,7 +27,7 @@
   },
   "jspm": {
     "name": "muix",
-    "main": "lib-web/src/test/index.js",
+    "main": "lib-web/packages/test/index.js",
     "dependencies": {
       "classnames": "npm:classnames@^2.2.5",
       "fela-dom": "npm:fela-dom@^7.0.4",

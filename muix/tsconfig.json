@@ -6,28 +6,28 @@
     "inlineSourceMap": true,
     "inlineSources": true,
     "importHelpers": true,
-    "rootDir": "src",
+    "rootDir": "packages",
     "outDir": "deploy/lib",
 
     "baseUrl": ".",
     "paths": {
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/index" ],
-      "reactxx-mui/*": [ "src/mui/web/*" ],
-      "reactxx-appstate": [ "src/appstate/index" ],
+      "reactxx-mui/*": [ "packages/mui/web/*" ],
+      "reactxx-appstate": [ "packages/appstate/index" ],
 
-      "reactxx": [ "src/reactxx/web/index" ],
-      "reactxx/web": [ "src/reactxx/web/index" ],
+      "reactxx": [ "packages/reactxx/web/index" ],
+      "reactxx/web": [ "packages/reactxx/web/index" ],
 
-      "muix-styles/web": [ "src/styles/web/index" ],
-      "muix-styles/native": [ "src/styles/native/index" ],
-      "muix-styles": [ "src/styles/native/index" ],
+      "muix-styles/web": [ "packages/styles/web/index" ],
+      "muix-styles/native": [ "packages/styles/native/index" ],
+      "muix-styles": [ "packages/styles/native/index" ],
 
-      "muix-animation": [ "src/animation/web/index" ],
+      "muix-animation": [ "packages/animation/web/index" ],
 
-      "muix-primitives": [ "src/primitives/web/index" ],
+      "muix-primitives": [ "packages/primitives/web/index" ],
 
-      "muix-components/*": [ "src/components/web/*" ],
-      "test/*": [ "src/test/*" ]
+      "muix-components/*": [ "packages/components/web/*" ],
+      "test/*": [ "packages/test/*" ]
     },
 
     //"esModuleInterop": true,
@@ -50,7 +50,7 @@
     ]
   },
   "include": [
-    "src/**/*",
+    "packages/**/*",
     "node_modules/reactxx-mdi/typings.d.ts",
     "node_modules/fela/index.d.ts",
     //"node_modules/popper.js/index.d.ts",

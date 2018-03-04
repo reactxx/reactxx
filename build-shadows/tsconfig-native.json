@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es2017",
-    "rootDir": "src",
+    "rootDir": "packages",
     "outDir": "deploy/es",
 
     "moduleResolution": "node",

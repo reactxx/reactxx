@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "system",
-    "rootDir": "src",
+    "rootDir": "packages",
     "outDir": "deploy",
 
     "moduleResolution": "node",

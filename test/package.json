@@ -28,7 +28,7 @@
   },
   "jspm": {
     "name": "test",
-    "main": "lib-web/src/test/index.js",
+    "main": "lib-web/packages/test/index.js",
     "version": "0.1.0",
     "dependencies": {
       "fela-dom": "npm:fela-dom@^7.0.4",

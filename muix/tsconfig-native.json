@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es2017",
-    "rootDir": "src",
+    "rootDir": "packages",
     "outDir": "deploy/es",
 
     //"declaration": true,
@@ -10,26 +10,26 @@
     "baseUrl": ".",
     "paths": {
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ],
-      "reactxx": [ "src/reactxx/native/index" ],
-      "reactxx-appstate": [ "src/appstate/index" ],
+      "reactxx": [ "packages/reactxx/native/index" ],
+      "reactxx-appstate": [ "packages/appstate/index" ],
 
-      "reactxx-mui/*": [ "src/mui/native/*" ],
+      "reactxx-mui/*": [ "packages/mui/native/*" ],
 
-      "muix-styles/web": [ "src/styles/web/index" ],
-      "muix-styles/native": [ "src/styles/native/index" ],
-      "muix-styles": [ "src/styles/native/index" ],
+      "muix-styles/web": [ "packages/styles/web/index" ],
+      "muix-styles/native": [ "packages/styles/native/index" ],
+      "muix-styles": [ "packages/styles/native/index" ],
 
-      "muix-animation": [ "src/animation/native/index" ],
+      "muix-animation": [ "packages/animation/native/index" ],
 
-      "muix-primitives": [ "src/primitives/native/index" ],
+      "muix-primitives": [ "packages/primitives/native/index" ],
 
 
-      "muix-components/*": [ "src/components/native/*" ],
-      //"muix-components/current/*": [ "src/components/web/*" ],
-      //"muix-components/common/*": [ "src/components/common/*" ],
-      //"muix-components/native/*": [ "src/components/native/*" ],
+      "muix-components/*": [ "packages/components/native/*" ],
+      //"muix-components/current/*": [ "packages/components/web/*" ],
+      //"muix-components/common/*": [ "packages/components/common/*" ],
+      //"muix-components/native/*": [ "packages/components/native/*" ],
 
-      "test/*": [ "src/test/*" ]
+      "test/*": [ "packages/test/*" ]
     },
 
     "importHelpers": true, //https://github.com/facebook/react-native/issues/16858
@@ -51,7 +51,7 @@
     ]
   },
   "include": [
-    "src/**/*",
+    "packages/**/*",
     "node_modules/reactxx-mdi/es/typings.d.ts",
     "node_modules/fela/index.d.ts"
   ]
