@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRectangle } from 'react-native'
 
-import { withStylesEx } from 'reactxx'
+import { withStyles } from 'reactxx'
 
 const sheet: ReactXX.CreateSheetX<MuiButtonBase.Shape> = ({ palette }) => ({
   root: {
@@ -109,6 +109,6 @@ const buttonBase: ReactXX.CodeSFCNative<MuiButtonBase.Shape> = props => {
   return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} className={null} mergeRulesetWithOverrides={null} animations={null} {...rest} style={null}/>
 }
 
-const ButtonBase = withStylesEx<MuiButtonBase.Shape>(MuiButtonBase.CompNames.ButtonBase, sheet)(buttonBase)
+const ButtonBase = withStyles<MuiButtonBase.Shape>(MuiButtonBase.CompNames.ButtonBase, sheet)(buttonBase)
 
 export default ButtonBase

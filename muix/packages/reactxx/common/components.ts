@@ -1,4 +1,4 @@
-import { withStylesEx } from '../common/withStyles'
+import { withStyles } from '../common/withStyles'
 import { text, view, icon, scrollView, animatedView, animatedIcon, animatedText, animatedScrollView } from 'reactxx' //import platform specific component code
 
 const textSheet: ReactXX.CreateSheetX<ReactXX.TextShape> = {
@@ -82,14 +82,14 @@ const scrollViewSheet: ReactXX.CreateSheetX<ReactXX.ScrollViewShape> = {
   }
 }
 
-export const Text = withStylesEx<ReactXX.TextShape>(ReactXX.CompNames.Text, textSheet)(text)
-export const AnimatedText = withStylesEx<ReactXX.TextShape>(ReactXX.CompNames.AnimatedText, textSheet)(animatedText)
-export const View = withStylesEx<ReactXX.ViewShape>(ReactXX.CompNames.View, viewSheet)(view)
-export const AnimatedView = withStylesEx<ReactXX.ViewShape>(ReactXX.CompNames.AnimatedView, viewSheet)(animatedView)
-export const Icon = withStylesEx<ReactXX.IconShape>(ReactXX.CompNames.Icon, iconSheet)(icon)
-export const AnimatedIcon = withStylesEx<ReactXX.IconShape>(ReactXX.CompNames.AnimatedIcon, iconSheet)(animatedIcon)
-export const ScrollView = withStylesEx<ReactXX.ScrollViewShape>(ReactXX.CompNames.ScrollView, scrollViewSheet)(scrollView)
-export const AnimatedScrollView = withStylesEx<ReactXX.ScrollViewShape>(ReactXX.CompNames.AnimatedScrollView, scrollViewSheet)(animatedScrollView)
+export const Text = withStyles<ReactXX.TextShape>(ReactXX.CompNames.Text, textSheet)(text)
+export const AnimatedText = withStyles<ReactXX.TextShape>(ReactXX.CompNames.AnimatedText, textSheet)(animatedText)
+export const View = withStyles<ReactXX.ViewShape>(ReactXX.CompNames.View, viewSheet)(view)
+export const AnimatedView = withStyles<ReactXX.ViewShape>(ReactXX.CompNames.AnimatedView, viewSheet)(animatedView)
+export const Icon = withStyles<ReactXX.IconShape>(ReactXX.CompNames.Icon, iconSheet)(icon)
+export const AnimatedIcon = withStyles<ReactXX.IconShape>(ReactXX.CompNames.AnimatedIcon, iconSheet)(animatedIcon)
+export const ScrollView = withStyles<ReactXX.ScrollViewShape>(ReactXX.CompNames.ScrollView, scrollViewSheet)(scrollView)
+export const AnimatedScrollView = withStyles<ReactXX.ScrollViewShape>(ReactXX.CompNames.AnimatedScrollView, scrollViewSheet)(animatedScrollView)
 
 export const LoremIpsum = (words: 5 | 10 | 20 | 40 | 80 | 160) => {
   switch (words) {

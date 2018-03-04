@@ -1,5 +1,5 @@
 import React from 'react'
-import { withStylesEx, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
+import { withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
 
 import { Animated } from 'react-native'
 
@@ -81,7 +81,7 @@ const expandedPanel: ReactXX.CodeSFC<DocHome.ExpandedPanelShape> = props => {
       <AnimatedIconLow name={MDI.ArrowExpandDown} style={iconStyle} onPress={() => openClose.toggle()} />
 */
 
-const ExpandedPanel = withStylesEx<DocHome.ExpandedPanelShape>(DocHome.CompNames.ExpandPanel, expandedPanelSheet)(expandedPanel)
+const ExpandedPanel = withStyles<DocHome.ExpandedPanelShape>(DocHome.CompNames.ExpandPanel, expandedPanelSheet)(expandedPanel)
 
 const App: React.SFC = () => <ScrollView classes={{ container: { padding: 10 } }}>
   <Text>Text before, text before, text before, text before, text before, text before, text before, text before, text before, text before, text before</Text>

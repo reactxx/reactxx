@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { withStylesEx, View, Text, AnimatedView } from 'reactxx'
+import { withStyles, View, Text, AnimatedView } from 'reactxx'
 
 const debugDuration = 300
 
 const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = {
   $animations: { // different Animations
-    mobile: { // single Animation (single Animated.Value for NATIVE)
+    mobile: { // single Animation (= single Animated.Value for NATIVE)
       drawer: { // animation ruleset for specific component
         transform: [
           { translateX: [-200, 0] }
@@ -79,7 +79,7 @@ const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = {
   },
   openButton: {},
   closeButton: {},
-})
+}
 
 const btnStyle = {color: 'blue', padding: 10}
 
@@ -117,22 +117,22 @@ const drawerLayout: ReactXX.CodeSFC<testAnimation.Shape> = props => {
   //console.log('### DRAWER STATE opened=', opened(), ', mobile(is-opened)=', mobile, animations.mobile.opened, ', tablet=(is-opened)', tablet, animations.tablet.opened, ) 
   //console.log('======================================================\n', root, classes.button, backDrop, drawer) 
   return <View className={root}>
-    <AnimatedView key={1} className={backDrop} onClick={close} >
+    <AnimatedView key={1} className={backDrop} onPress={close} >
       <Text style={{ marginTop:60 }}>{JSON.stringify(backDrop, null, 2)}</Text>
     </AnimatedView>
     <AnimatedView key={2} className={drawer}>
-      <Text className={mergeRulesetWithOverrides(classes.closeButton, { ...btnStyle, textAlign: 'right' }) as ReactXX.TextRulesetX} onClick={close} >CLOSE</Text>
+      <Text className={mergeRulesetWithOverrides(classes.closeButton, { ...btnStyle, textAlign: 'right' }) as ReactXX.TextRulesetX} onPress={close} >CLOSE</Text>
       <Text style={{ marginTop: 60 }}>{JSON.stringify(drawer, null, 2)}</Text>
     </AnimatedView>
     <AnimatedView key={3} className={content}>
       <View key={1} className={mergeRulesetWithOverrides(classes.openButton, { flexDirection: 'row', display: opened ? 'none' : 'flex' }) as ReactXX.ViewRulesetX} >
-        <Text onClick={open} className={{ ...btnStyle, alignSelf: 'flex-start' }}>OPEN</Text>
+        <Text onPress={open} className={{ ...btnStyle, alignSelf: 'flex-start' }}>OPEN</Text>
       </View>
       <Text style={{ marginTop: 120 }}>{JSON.stringify(content, null, 2)}'\n'{JSON.stringify(content.left, null, 2)}</Text>
     </AnimatedView>
   </View>
 }
-const DrawerLayout = withStyles<testAnimation.Shape>(sheet, { name: 'TestAnimation' as any })(drawerLayout)
+const DrawerLayout = withStyles<testAnimation.Shape>(testAnimation.Consts.Drawer, sheet)(drawerLayout)
 
 class App extends React.Component {
   state = { mobile: true, tablet: false, desktop: false }
@@ -140,9 +140,9 @@ class App extends React.Component {
     const initState = { mobile: false, tablet: false, desktop: false }
     return <View className={{ flex: 1, $native: { marginTop: 24 } }}>
       <View className={{ flexDirection: 'row' }}>
-        <Text onClick={() => this.setState({ ...initState, mobile: true })} style={btnStyle}>MOBILE</Text>
-        <Text onClick={() => this.setState({ ...initState, tablet: true })} style={btnStyle}>TABLET</Text>
-        <Text onClick={() => this.setState({ ...initState, desktop: true })} style={btnStyle}>DESKTOP</Text>
+        <Text onPress={() => this.setState({ ...initState, mobile: true })} style={btnStyle}>MOBILE</Text>
+        <Text onPress={() => this.setState({ ...initState, tablet: true })} style={btnStyle}>TABLET</Text>
+        <Text onPress={() => this.setState({ ...initState, desktop: true })} style={btnStyle}>DESKTOP</Text>
       </View>
       <DrawerLayout {...this.state} />
     </View>

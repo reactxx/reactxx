@@ -1,4 +1,9 @@
 declare namespace testAnimation {
+
+  const enum Consts {
+    Drawer = 'test$animation$drawer'
+  }
+
   type Shape = ReactXX.OverwriteShape<{
     props: {
       mobile?: boolean
@@ -9,7 +14,8 @@ declare namespace testAnimation {
     animation: {
       mobile: ReactXX.ShapeViews<'drawer' | 'backDrop'>,
       tablet: ReactXX.ShapeViews<'drawer' | 'content'>,
-    }
+    },
+    nameType: Consts.Drawer
   }>
 }
 

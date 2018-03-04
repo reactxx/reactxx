@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
-import { Text, withStylesEx, toPlatformRuleSet, addOverrides } from 'reactxx'
+import { Text, withStyles, toPlatformRuleSet, addOverrides } from 'reactxx'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 
@@ -161,8 +161,8 @@ const button: ReactXX.CodeSFCNative<MuiButton.Shape> = (props, context) => {
   </RippleWithOverrides>
 }
 
-const Button = withStylesEx<MuiButton.Shape>(MuiButton.CompNames.Button, sheets())(button)
-export const ButtonIconStart = withStylesEx<MuiButton.Shape>(MuiButton.CompNames.ButtonIconLeft, sheets(true))(button)
-export const ButtonIconEnd = withStylesEx<MuiButton.Shape>(MuiButton.CompNames.ButtonIconRight, sheets(false))(button)
+const Button = withStyles<MuiButton.Shape>(MuiButton.CompNames.Button, sheets())(button)
+export const ButtonIconStart = withStyles<MuiButton.Shape>(MuiButton.CompNames.ButtonIconLeft, sheets(true))(button)
+export const ButtonIconEnd = withStyles<MuiButton.Shape>(MuiButton.CompNames.ButtonIconRight, sheets(false))(button)
 
 export default Button

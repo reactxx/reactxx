@@ -7,7 +7,7 @@ import { getAnimations } from './animation'
 
 import { ThemeModifier, modifierSelector, toPlatformFromSheetCreator } from './theme'
 
-export const withStylesEx = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R>, createSheetX: ReactXX.CreateSheetX<R>) => (Component: ReactXX.CodeComponentType<R>) => {
+export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R>, createSheetX: ReactXX.CreateSheetX<R>) => (Component: ReactXX.CodeComponentType<R>) => {
 
   const name = _name as string
 
