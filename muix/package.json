@@ -19,6 +19,7 @@
     "@types/expo": "https://cdn.rawgit.com/reactxx/reactxx/29c62cad/types/expo/types-expo-0.1.1.tgz",
     "@types/react": "https://cdn.rawgit.com/reactxx/reactxx/29c62cad/types/react/types-react-0.1.1.tgz",
     "@types/react-native": "https://cdn.rawgit.com/reactxx/reactxx/29c62cad/types/react-native/types-react-native-0.1.1.tgz",
+    "@types/reactxx-shared": "",
     "@types/react-dom": "^16.0.3",
     "babel-plugin-module-resolver": "^3.0.0",
     "fela": "^6.1.3"

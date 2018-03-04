@@ -1,5 +1,5 @@
 {
-  "name": "@types/reactxx-types",
+  "name": "@types/reactxx-shared",
   "version": "0.1.1",
   "description": "shared ReactXX type definition",
   "registry": "npm",
