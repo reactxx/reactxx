@@ -31,6 +31,6 @@ call npm install muix-icons muix-shadows muix-styles muix-primitives muix-compon
 cd %root%node_modules\@types
 rmdir node /s /q
 
-copy D:\muix\test\$blacklist.js d:\muix\test\node_modules\metro-bundler\src\blacklist.js /y
+copy D:\muix\test\$blacklist.js d:\reactxx\test\node_modules\metro-bundler\src\blacklist.js /y
 
 call %root%$compile

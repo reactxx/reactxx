@@ -1,4 +1,4 @@
-set root=d:\muix\muix\
+set root=d:\reactxx\muix\
 
 d:
 

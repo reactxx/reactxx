@@ -1,8 +1,8 @@
 {
   "name": "@types/expo",
   "version": "0.1.1",
-  "description": "Expo typescript definition",
+  "description": "Expo typescript definition from https://github.com/janaagaard75/expo-and-typescript/blob/master/src/expo.d.ts",
   "registry": "npm",
   "dependencies": {},
-  "files": ["index.d.ts"]
+  "files": [ "index.d.ts" ]
 }

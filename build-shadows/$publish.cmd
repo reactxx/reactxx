@@ -1,4 +1,4 @@
-set root=d:\muix\build-shadows\
+set root=d:\reactxx\build-shadows\
 set tsc="c:\Program Files (x86)\Microsoft SDKs\TypeScript\2.6\tsc.exe"
 
 d:

@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const outputPath = 'd:/muix/build-icons/';
+const outputPath = 'd:/reactxx/build-icons/';
 const subDirWeb = 'deploy/';
 const subDirNative = 'deploy/es/';
 

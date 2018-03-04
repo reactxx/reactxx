@@ -8,7 +8,7 @@
 
     "baseUrl": ".",
     "paths": {
-      "muix-icons/*": [ "muix-icons/es/*" ]
+      "reactxx-mdi/*": [ "reactxx-mdi/es/*" ]
     },
 
     "allowSyntheticDefaultImports": true,

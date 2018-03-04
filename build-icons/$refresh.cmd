@@ -1,4 +1,4 @@
-set root=d:\muix\build-icons\
+set root=d:\reactxx\build-icons\
 
 d:
 cd %root%

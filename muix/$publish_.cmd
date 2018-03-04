@@ -1,4 +1,4 @@
-set root=d:\muix\muix\
+set root=d:\reactxx\muix\
 set package=%1
 set webroot=%2
 

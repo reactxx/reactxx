@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    //"module": "system",
+    //"importHelpers": true,
+    //"moduleResolution": "node",
+    //"esModuleInterop": true,
+
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": false,
+    "noImplicitAny": false,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "esnext",
+      "esnext.asynciterable"
+    ]
+  }
+  //"include": [
+  //  "material-ui/**/*",
+  //  "index.ts",
+  //  "index-d.d.ts",
+  //  "material-ui.d.ts",
+  //  "typings/**/*",
+  //  "DeepPartial.d.ts"
+  //  //"node_modules/popper.js/index.d.ts"
+  //],
+
+  //"exclude": [
+  //  //"node_modules",
+  //  //"material-ui",
+  //  //"typescript.d.ts"
+  //]
+}

@@ -1,6 +1,6 @@
 set drive=d
 
-set root=%drive%:\muix\build-types-material-ui\
+set root=%drive%:\reactxx\build-types-material-ui\
 %drive%:
 
 cd %root%
