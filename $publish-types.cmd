@@ -1,9 +1,9 @@
 d:
-cd D:\muix\types\react-native
+cd D:\reactxx\types\react-native
 call npm pack
 
-cd D:\muix\types\react
+cd D:\reactxx\types\react
 call npm pack
 
-cd D:\muix\types\expo
+cd D:\reactxx\types\expo
 call npm pack

@@ -1,7 +1,7 @@
 {
   "name": "@types/react-native",
   "version": "0.1.1",
-  "description": "@types/react like version of TypeScript definitions for react-native",
+  "description": "@types/react like version of TypeScript definitions for react-native (with 'export as namespace ReactN')",
   "registry": "npm",
   "dependencies": {},
   "files": [ "index.d.ts" ]

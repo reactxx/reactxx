@@ -73,6 +73,7 @@
     <Content Include="react\package.json" />
     <Content Include="react-native\package.json" />
     <Content Include="tsconfig.json" />
+    <Content Include="%24publish-types.cmd" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

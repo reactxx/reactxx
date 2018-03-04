@@ -1,0 +1,8 @@
+{
+  "name": "@types/reactxx-types",
+  "version": "0.1.1",
+  "description": "shared ReactXX type definition",
+  "registry": "npm",
+  "dependencies": {},
+  "files": [ "sheets.d.ts" ]
+}
