@@ -15,3 +15,5 @@ class BreakPointWeb extends BreakPoint {
 }
 
 export const createBreakPoint = (breakPoint: number) => new BreakPointWeb(breakPoint)
+
+export const getWindowWidth = () => window.innerWidth
