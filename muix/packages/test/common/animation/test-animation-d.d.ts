@@ -4,18 +4,25 @@ declare namespace testAnimation {
     Drawer = 'test$animation$drawer'
   }
 
+  interface RenderProps {
+    style: ReactXX.RulesetX
+    opened: boolean
+    iconData: string,
+    onPress: 
+  }
+
   type Shape = ReactXX.OverwriteShape<{
+    common: ReactXX.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop' > & ReactXX.ShapeTexts<'openButton' | 'closeButton'>
     props: {
-      renderContent?: () => JSX.Element
-      renderDrawer?: () => JSX.Element
+      renderContent: (props: RenderProps) => JSX.Element
+      renderDrawer: (props: RenderProps) => JSX.Element
     }
     mediaq: 'mobile' | 'tablet' | 'desktop'
-    common: ReactXX.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop' | 'openButtonContainer'> & ReactXX.ShapeTexts<'openButton' | 'closeButton'>
     animation: {
       mobile: ReactXX.ShapeViews<'drawer' | 'backDrop'>
       tablet: ReactXX.ShapeViews<'drawer' | 'content'>
     },
-    themePar: {
+    themePar: { //type of parameter
       drawerWidths: [number, number, number] //drawer width for Mobile, tablet and desktop
       breakpoints: [number, number ] //media query breakpoints between mobile x tablet and tablet x desktop
       animationDuration: number //animation duration for mobile and tablet

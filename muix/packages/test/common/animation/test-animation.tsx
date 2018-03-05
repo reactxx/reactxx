@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { withStyles, View, Text, AnimatedView } from 'reactxx'
+import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } from 'reactxx'
 
+/*testAnimation sheet creator pars: defined in const ResponsibleDrawer = withStyles*/
 const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = (theme, themePar) => ({
   $mediaq: {
     mobile: [null, themePar.breakpoints[0]],
@@ -19,7 +20,7 @@ const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = (theme, themePar) => ({
         opacity: [0, 0.4],
         transform: [
           { translateX: [-5000, 0] },
-          '-0.5' // means 0%-0.5%
+          '-0.5' // means 0%-0.5% of animation duration
         ],
       },
       $duration: themePar.animationDuration,
@@ -51,7 +52,6 @@ const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = (theme, themePar) => ({
   drawer: {
     position: 'absolute',
     bottom: 0, top: 0, left: 0,
-    backgroundColor: 'lightgreen',
     zIndex: 5
   },
   content: {
@@ -80,14 +80,14 @@ const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = (theme, themePar) => ({
       drawer: { width: themePar.drawerWidths[2] },
     }
   },
-  openButtonContainer: { padding: 10, alignSelf: 'flex-start', flexDirection: 'row'},
-  openButton: { color: 'blue' },
-  closeButton: { color: 'blue', padding: 10, alignSelf: 'flex-end' },
+  openButton: {},
+  closeButton: {},
 })
 
 const responsibleDrawer: ReactXX.CodeSFC<testAnimation.Shape> = props => {
-  const { classes, mergeRulesetWithOverrides, theme, children, style, className, animations, mediaq: { state: mediaState }, ...rest } = props
+  const { classes, mergeRulesetWithOverrides, theme, children, style, className, animations, mediaq, renderContent, renderDrawer, ...rest } = props
 
+  const mediaState = mediaq.state
   const openDrawer = () => mediaState.tablet ? animations.tablet.open() : animations.mobile.open()
   const closeDrawer = () => mediaState.tablet ? animations.tablet.close() : animations.mobile.close()
   const drawerOpened = mediaState.tablet && animations.tablet.opened || mediaState.mobile && animations.mobile.opened || mediaState.desktop
@@ -118,39 +118,46 @@ const responsibleDrawer: ReactXX.CodeSFC<testAnimation.Shape> = props => {
 
   const closeButton = mergeRulesetWithOverrides(classes.closeButton) as ReactXX.TextRulesetX
 
-  const openButton = mergeRulesetWithOverrides(classes.openButton) as ReactXX.TextRulesetX
-
-  const openButtonContainer = mergeRulesetWithOverrides(
-    classes.openButtonContainer,
-    { display: drawerOpened ? 'none' : 'flex' }
-  ) as ReactXX.ViewRulesetX
+  const openButton = mergeRulesetWithOverrides(classes.openButton, { display: drawerOpened ? 'none' : 'flex' }) as ReactXX.TextRulesetX
 
   return <View className={root}>
     <AnimatedView key={1} className={backDrop} onPress={closeDrawer} >
       <Text style={{ marginTop: 60 }}>{JSON.stringify(backDrop, null, 2)}</Text>
     </AnimatedView>
     <AnimatedView key={2} className={drawer}>
-      <Text className={closeButton} onPress={closeDrawer}>CLOSE</Text>
-      <Text style={{ marginTop: 60 }}>{JSON.stringify(drawer, null, 2)}</Text>
+      {renderDrawer({ iconData: MDI.Close, onPress: closeDrawer, opened: drawerOpened, style: closeButton })}
     </AnimatedView>
     <AnimatedView key={3} className={content}>
-      <View key={1} className={openButtonContainer} >
-        <Text onPress={openDrawer} className={openButton}>OPEN</Text>
-      </View>
-      <Text style={{ marginTop: 120 }}>{JSON.stringify(content, null, 2)}</Text>
+      {renderContent({ iconData: MDI.Menu, onPress: openDrawer, opened: drawerOpened, style: openButton })}
     </AnimatedView>
   </View>
 }
 const ResponsibleDrawer = withStyles<testAnimation.Shape>(testAnimation.Consts.Drawer, sheet, { animationDuration: 300, drawerWidths: [250, 300, 400], breakpoints: [480, 1024] })(responsibleDrawer)
 
 
-const App: React.SFC = () => <ResponsibleDrawer className={{ flex: 1, $native: { marginTop: 24 } }} renderContent={
-  () => <>
-    
-  </>
-} renderDrawer={
-  () => <>
-  </>
+//*************************** Application with ResponsibleDrawer
+const button = {
+  color: 'white',
+  fontSize: 28,
+  $web: { cursor: 'pointer' }
+} as ReactXX.RulesetX
+
+const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} renderDrawer={
+  ({ style, iconData, onPress }) => <ScrollView classes={{ container: { flex:1, backgroundColor: 'lightgray'} }}>
+    <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, padding: 10, backgroundColor: 'gray', }}>
+      <Text className={{ flexGrow: 1, color: 'white' }}>{LoremIpsum(2)}</Text>
+      <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />
+    </View>
+    <Text className={{ padding: 10 }}>{LoremIpsum(80)}</Text>
+  </ScrollView>
+} renderContent={
+  ({ style, iconData, onPress }) => <ScrollView classes={{ container: { flex: 1 } }}>
+    <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}>
+      <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />
+      <Text className={{ color: 'white', fontWeight: 'bold', marginLeft:10, }}>{LoremIpsum(5)}</Text>
+    </View>
+    <Text className={{ padding: 10 }}>{LoremIpsum(80)}</Text>
+  </ScrollView>
 } />
 
 export default App

@@ -91,8 +91,9 @@ export const AnimatedIcon = withStyles<ReactXX.IconShape>(ReactXX.CompNames.Anim
 export const ScrollView = withStyles<ReactXX.ScrollViewShape>(ReactXX.CompNames.ScrollView, scrollViewSheet)(scrollView)
 export const AnimatedScrollView = withStyles<ReactXX.ScrollViewShape>(ReactXX.CompNames.AnimatedScrollView, scrollViewSheet)(animatedScrollView)
 
-export const LoremIpsum = (words: 5 | 10 | 20 | 40 | 80 | 160) => {
+export const LoremIpsum = (words: 2 | 5 | 10 | 20 | 40 | 80 | 160) => {
   switch (words) {
+    case 2: return 'Lorem ipsum.'
     case 5: return 'Lorem ipsum dolor sit amet.'
     case 10: return 'Lorem ipsum dolor sit amet, usu vocibus eleifend accommodare te.'
     case 20: return 'Lorem ipsum dolor sit amet, ei eius elitr numquam mei, ubique utamur pericula ad mel! Quo at dicta lobortis salutatus.'

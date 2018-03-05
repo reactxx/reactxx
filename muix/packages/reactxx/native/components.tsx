@@ -7,7 +7,7 @@ import warning from 'warning'
 
 const anyView = (isAnim: boolean) => (props => {
   const ActView = isAnim ? Animated.View : View
-  const { style, classes, className, mergeRulesetWithOverrides, theme, onPress, onLongPress, onPressIn, onPressOut, animations, ...rest } = props
+  const { style, classes, className, mergeRulesetWithOverrides, theme, onPress, onLongPress, onPressIn, onPressOut, animations, mediaq, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.ViewStyle
   const presses = onPress || onLongPress || onPressIn || onPressOut ? { onPress, onLongPress, onPressIn, onPressOut } : null
   const res = <ActView style={rootStyle} {...rest} />
@@ -20,7 +20,7 @@ export const animatedView = anyView(true)
 
 const anyText = (isAnim: boolean) => (props => {
   const ActText = isAnim ? Animated.Text : Text
-  const { style, classes, className, mergeRulesetWithOverrides, theme, animations, ...rest } = props
+  const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq,...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.TextStyle
   return <ActText style={rootStyle} {...rest} />
 }) as ReactXX.CodeSFCNative<ReactXX.TextShape>
@@ -30,7 +30,7 @@ export const animatedText = anyText(true)
 
 const anyScrollView = (isAnim: boolean) => (props => {
   const ActScrollView = isAnim ? Animated.ScrollView : ScrollView
-  const { style, classes, className, mergeRulesetWithOverrides, theme, animations, ...rest } = props
+  const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq,...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.ScrollViewStyle
   const containerStyle = mergeRulesetWithOverrides(classes.container) as ReactN.ViewStyle
   return <ActScrollView style={rootStyle} contentContainerStyle={containerStyle} {...rest} />
@@ -42,7 +42,7 @@ export const animatedScrollView = anyScrollView(true)
 const AnimatedIconLow = Animated.createAnimatedComponent(MaterialCommunityIcons)
 const anyIcon = (isAnim: boolean) => (props => {
   const ActIcon = isAnim ? AnimatedIconLow : MaterialCommunityIcons
-  const { style, classes, className, mergeRulesetWithOverrides, theme, animations, data, children, ...rest } = props
+  const { style, classes, className, mergeRulesetWithOverrides, theme, animations, data, children, mediaq,...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.TextStyle
   return <ActIcon name={(data || children as string) as MaterialCommunityIconsProps['name']} style={rootStyle} {...rest} />
 }) as ReactXX.CodeSFCNative<ReactXX.IconShape>
