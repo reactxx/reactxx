@@ -4,12 +4,15 @@ import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } fr
 
 /*testAnimation sheet creator pars: defined in const ResponsibleDrawer = withStyles*/
 const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = (theme, themePar) => ({
+
   $mediaq: {
     mobile: [null, themePar.breakpoints[0]],
     tablet: [themePar.breakpoints[0], themePar.breakpoints[1]],
     desktop: [themePar.breakpoints[1], null],
   },
+
   $animations: { // different Animations
+
     mobile: { // single Animation (= single Animated.Value for NATIVE)
       drawer: { // animation ruleset for specific component
         transform: [
@@ -26,6 +29,7 @@ const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = (theme, themePar) => ({
       $duration: themePar.animationDuration,
       $opened: false,
     },
+
     tablet: {
       drawer: {
         transform: [
@@ -39,6 +43,7 @@ const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = (theme, themePar) => ({
       $opened: true,
     }
   },
+
   root: {
     flex: 1,
     backgroundColor: 'white', //childs zIndex (in Native) does not work without parent background
@@ -142,8 +147,10 @@ const button = {
   $web: { cursor: 'pointer' }
 } as ReactXX.RulesetX
 
+//modifyThemeState={themeState => ({ ...themeState, theme: { ...themeState.theme, themePars: { ...themeState.theme.themePars, [testAnimation.Consts.Drawer]: { ...themeState.theme.themePars[testAnimation.Consts.Drawer], animationDuration:1000} } } })}
+
 const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} renderDrawer={
-  ({ style, iconData, onPress }) => <ScrollView classes={{ container: { flex:1, backgroundColor: 'lightgray'} }}>
+  ({ style, iconData, onPress }) => <ScrollView classes={{ container: { flex: 1, backgroundColor: 'lightgray' } }}>
     <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, padding: 10, backgroundColor: 'gray', }}>
       <Text className={{ flexGrow: 1, color: 'white' }}>{LoremIpsum(2)}</Text>
       <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />
@@ -154,9 +161,9 @@ const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTo
   ({ style, iconData, onPress }) => <ScrollView classes={{ container: { flex: 1 } }}>
     <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}>
       <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />
-      <Text className={{ color: 'white', fontWeight: 'bold', marginLeft:10, }}>{LoremIpsum(5)}</Text>
+      <Text className={{ color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(5)}</Text>
     </View>
-    <Text className={{ padding: 10 }}>{LoremIpsum(80)}</Text>
+    <Text className={{ padding: 10, $mediaq: { '800-1248': { color: 'red' } } }}>{LoremIpsum(80)}</Text>
   </ScrollView>
 } />
 

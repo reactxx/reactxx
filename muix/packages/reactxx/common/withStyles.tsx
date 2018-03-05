@@ -129,7 +129,7 @@ const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => {
     } else //apply used $overrides and classes prop
       rulesets.forEach(ruleset => {
         if (!ruleset) return
-        deepMerges(true, rulesetResult,
+        deepMerges(true, rulesetResult, //deepMerges(false, due to $media2 merging
           ruleset, //ruleset, used in Component render
           usedOverrides[ruleset.$name], //modify it with used $overrides
         )
