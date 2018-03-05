@@ -1,4 +1,13 @@
 declare namespace MediaQ {
+
+  type Shape = string
+
+  type NotifySheetX<TState extends string> = {[P in TState]: [number | null, number | null]}
+
+  interface ComponentsMediaQ<TState extends string> {
+    state: {[P in TState]: boolean}
+  }
+  
   interface SheetX<T extends ReactXX.RulesetNative = ReactN.TextStyle, R extends ReactXX.Shape = ReactXX.Shape> {
     [query: string]: ReactXX.RulesetX<T, R>
   }

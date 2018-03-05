@@ -155,7 +155,7 @@ const AppThemeOverride: React.SFC = props => <AppContainer>
   </Text>
 </AppContainer>
 
-const App = primitives.$06.Component
+const App = primitives.$07.Component
 export default App
 
 const E01$01_: Example = {

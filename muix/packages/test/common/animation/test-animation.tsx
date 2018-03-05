@@ -4,6 +4,11 @@ import ReactDOM from 'react-dom'
 import { withStyles, View, Text, AnimatedView } from 'reactxx'
 
 const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = (theme, themePar) => ({
+  $mediaq: {
+    mobile: [null, themePar[0]],
+    tablet: [themePar[0], themePar[1]],
+    desktop: [themePar[1], null],
+  },
   $animations: { // different Animations
     mobile: { // single Animation (= single Animated.Value for NATIVE)
       drawer: { // animation ruleset for specific component
@@ -76,73 +81,84 @@ const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = (theme, themePar) => ({
       drawer: { width: themePar.drawerWidths[2] },
     }
   },
-  openButton: { color: 'blue', padding: 10 },
-  closeButton: { color: 'blue', padding: 10 },
+  openButtonContainer: { padding: 10, alignSelf: 'flex-start', flexDirection: 'row'},
+  openButton: { color: 'blue' },
+  closeButton: { color: 'blue', padding: 10, alignSelf: 'flex-end' },
 })
 
-const drawerLayout: ReactXX.CodeSFC<testAnimation.Shape> = props => {
-  const { classes, mergeRulesetWithOverrides, theme, children, style, className, animations, mobile, tablet, desktop, ...rest } = props
+const responsibleDrawer: ReactXX.CodeSFC<testAnimation.Shape> = props => {
+  const { classes, mergeRulesetWithOverrides, theme, children, style, className, animations, mediaq: { state: mediaState }, ...rest } = props
 
-  const open = () => tablet ? animations.tablet.open() : animations.mobile.open()
-  const close = () => tablet ? animations.tablet.close() : animations.mobile.close()
-  const opened = tablet && animations.tablet.opened || mobile && animations.mobile.opened || desktop
+  const openDrawer = () => mediaState.tablet ? animations.tablet.open() : animations.mobile.open()
+  const closeDrawer = () => mediaState.tablet ? animations.tablet.close() : animations.mobile.close()
+  const drawerOpened = mediaState.tablet && animations.tablet.opened || mediaState.mobile && animations.mobile.opened || mediaState.desktop
 
-  const root = mergeRulesetWithOverrides( // calling getRulesetWithSideEffect signals which rulesets are used. So it can use their $overrides and $childOverrides props to modify self sheet and child sheets
+  const root = mergeRulesetWithOverrides( // calling mergeRulesetWithOverrides signals which rulesets are used. So it can use their $overrides to modify sheet
     classes.root,
-    mobile && classes.mobile,
-    tablet && classes.tablet,
-    desktop && classes.desktop,
+    mediaState.mobile && classes.mobile,
+    mediaState.tablet && classes.tablet,
+    mediaState.desktop && classes.desktop,
     className,
   ) as ReactXX.ViewRulesetX
 
   const backDrop = mergeRulesetWithOverrides(
     classes.backDrop,
-    mobile && animations.mobile.sheet.backDrop,
+    mediaState.mobile && animations.mobile.sheet.backDrop,
   ) as ReactXX.ViewRulesetX
 
   const drawer = mergeRulesetWithOverrides(
     classes.drawer,
-    mobile && animations.mobile.sheet.drawer,
-    tablet && animations.tablet.sheet.drawer,
+    mediaState.mobile && animations.mobile.sheet.drawer,
+    mediaState.tablet && animations.tablet.sheet.drawer,
   ) as ReactXX.ViewRulesetX
 
   const content = mergeRulesetWithOverrides(
     classes.content,
-    tablet && animations.tablet.sheet.content,
+    mediaState.tablet && animations.tablet.sheet.content,
+  ) as ReactXX.ViewRulesetX
+
+  const closeButton = mergeRulesetWithOverrides(classes.closeButton) as ReactXX.TextRulesetX
+
+  const openButton = mergeRulesetWithOverrides(classes.openButton) as ReactXX.TextRulesetX
+
+  const openButtonContainer = mergeRulesetWithOverrides(
+    classes.openButtonContainer,
+    { display: drawerOpened ? 'none' : 'flex' }
   ) as ReactXX.ViewRulesetX
 
   return <View className={root}>
-    <AnimatedView key={1} className={backDrop} onPress={close} >
+    <AnimatedView key={1} className={backDrop} onPress={closeDrawer} >
       <Text style={{ marginTop: 60 }}>{JSON.stringify(backDrop, null, 2)}</Text>
     </AnimatedView>
     <AnimatedView key={2} className={drawer}>
-      <Text className={mergeRulesetWithOverrides(classes.closeButton, { ...btnStyle, textAlign: 'right' }) as ReactXX.TextRulesetX} onPress={close} >CLOSE</Text>
+      <Text className={closeButton} onPress={closeDrawer}>CLOSE</Text>
       <Text style={{ marginTop: 60 }}>{JSON.stringify(drawer, null, 2)}</Text>
     </AnimatedView>
     <AnimatedView key={3} className={content}>
-      <View key={1} className={mergeRulesetWithOverrides(classes.openButton, { flexDirection: 'row', display: opened ? 'none' : 'flex' }) as ReactXX.ViewRulesetX} >
-        <Text onPress={open} className={{ ...btnStyle, alignSelf: 'flex-start' }}>OPEN</Text>
+      <View key={1} className={openButtonContainer} >
+        <Text onPress={openDrawer} className={openButton}>OPEN</Text>
       </View>
       <Text style={{ marginTop: 120 }}>{JSON.stringify(content, null, 2)}</Text>
     </AnimatedView>
   </View>
 }
-const DrawerLayout = withStyles<testAnimation.Shape>(testAnimation.Consts.Drawer, sheet, { animationDuration: 300, drawerWidths: [250, 300, 400] })(drawerLayout)
+const ResponsibleDrawer = withStyles<testAnimation.Shape>(testAnimation.Consts.Drawer, sheet, { animationDuration: 300, drawerWidths: [250, 300, 400], breakpoints: [480, 1024] })(responsibleDrawer)
 
-const btnStyle: ReactXX.RulesetX<ReactN.TextStyle> = { color: 'blue', padding: 10 }
 
 class App extends React.Component {
-  state = { mobile: true, tablet: false, desktop: false }
+  //state = { mobile: true, tablet: false, desktop: false }
   render() {
-    const initState = { mobile: false, tablet: false, desktop: false }
-    return <View className={{ flex: 1, $native: { marginTop: 24 } }}>
-      <View className={{ flexDirection: 'row' }}>
-        <Text onPress={() => this.setState({ ...initState, mobile: true })} className={btnStyle}>MOBILE</Text>
-        <Text onPress={() => this.setState({ ...initState, tablet: true })} className={btnStyle}>TABLET</Text>
-        <Text onPress={() => this.setState({ ...initState, desktop: true })} className={btnStyle}>DESKTOP</Text>
-      </View>
-      <DrawerLayout {...this.state} />
-    </View>
+    //const btnStyle: ReactXX.RulesetX<ReactN.TextStyle> = { color: 'blue', padding: 10 }
+    //const initState = { mobile: false, tablet: false, desktop: false }
+    return <ResponsibleDrawer className={{ flex: 1, $native: { marginTop: 24 } }} />
+    //<View className={{ flex: 1, $native: { marginTop: 24 } }}>
+    //  <View className={{ flexDirection: 'row' }}>
+    //    <Text onPress={() => this.setState({ ...initState, mobile: true })} className={btnStyle}>MOBILE</Text>
+    //    <Text onPress={() => this.setState({ ...initState, tablet: true })} className={btnStyle}>TABLET</Text>
+    //    <Text onPress={() => this.setState({ ...initState, desktop: true })} className={btnStyle}>DESKTOP</Text>
+    //  </View>
+    //  <ResponsibleDrawer className={{ flex: 1, $native: { marginTop: 24 } }} />
+    //</View>
   }
 }
 export default App

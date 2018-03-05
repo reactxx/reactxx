@@ -1,11 +1,17 @@
 import warning from 'warning'
 
-import { deepMerges, createBreakPoint /*platform dependent*/, getWindowWidth /*platform dependent*/} from 'reactxx'
+import { deepMerges, createBreakPoint /*platform dependent*/, getWindowWidth /*platform dependent*/ } from 'reactxx'
 
-export class ComponentsMediaQ {
-  constructor(private component: React.Component) { }
-  componentId = ComponentsMediaQ.componentsMediaCount++
-  breaks: boolean[] = []
+export class ComponentsMediaQ<TState extends string = string> implements MediaQ.ComponentsMediaQ<TState> {
+  constructor(private component: React.Component, notifySheet: MediaQ.NotifySheetX<TState>) {
+    if (!notifySheet) return
+
+  }
+
+  state: {[P in TState]: boolean}
+
+  private componentId = ComponentsMediaQ.componentsMediaCount++
+  private breaks: boolean[] = []
 
   unsubscribe() {
     for (const idx in this.breaks) unSubscribe(parseInt(idx), this.componentId)

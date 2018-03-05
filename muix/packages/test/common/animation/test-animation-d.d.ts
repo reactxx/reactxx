@@ -5,19 +5,21 @@ declare namespace testAnimation {
   }
 
   type Shape = ReactXX.OverwriteShape<{
-    props: {
-      mobile?: boolean
-      tablet?: boolean
-      desktop?: boolean
-    }
-    common: ReactXX.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop'> & ReactXX.ShapeTexts<'openButton' | 'closeButton'>
+    //props: {
+    //  mobile?: boolean
+    //  tablet?: boolean
+    //  desktop?: boolean
+    //}
+    mediaq: 'mobile' | 'tablet' | 'desktop'
+    common: ReactXX.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop' | 'openButtonContainer'> & ReactXX.ShapeTexts<'openButton' | 'closeButton'>
     animation: {
       mobile: ReactXX.ShapeViews<'drawer' | 'backDrop'>,
       tablet: ReactXX.ShapeViews<'drawer' | 'content'>,
     },
-    componentsTheme: {
-      drawerWidths: [number, number, number],
-      animationDuration: number,
+    themePar: {
+      drawerWidths: [number, number, number], //drawer width for Mobile, tablet and desktop
+      breakpoints: [number, number ], //media query breakpoints between mobile x tablet and tablet x desktop
+      animationDuration: number, //animation duration for mobile and tablet
     },
     nameType: Consts.Drawer,
   }>
