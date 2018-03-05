@@ -14,7 +14,7 @@ export const toPlatformRuleSet = (style: ReactXX.RulesetX) => {
     const { $native: $propsNative, $web: $propsWeb, ...restProps } = $propsX
     $props = { ...restProps, ...(isNative ? $propsNative : $propsWeb)}
   }
-  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $media: toPlatformSheet($mediaq as any), $props }
+  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $mediaq: toPlatformSheet($mediaq as any), $props }
   if (!res.$overrides) delete res.$overrides; if (!res.$props) delete res.$props //remove NULL or UNDEFINED
   return res as ReactXX.Ruleset 
 }

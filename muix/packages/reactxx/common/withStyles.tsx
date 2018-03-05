@@ -1,7 +1,7 @@
 import React from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { toPlatformRuleSet, toPlatformSheet, deepMerge } from './index'
-import { ComponentsMediaQ } from './media-q'
+import { ComponentsMediaQ /*platform dependent*/ } from 'reactxx'
 import warning from 'warning'
 import { getAnimations } from './animation'
 
@@ -36,15 +36,15 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
       const classes: ReactXX.Sheet = toPlatformSheet(applyTheme(name, classesX, theme))
 
       this.classes = override || classes ? deepMerges(false, {}, staticSheet, override, classes) : staticSheet // modify static sheet 
-      for (const p in this.classes) this.classes[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
+      for (const p in this.classes) if (!p.startsWith('$')) this.classes[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
 
       //*** init animations
       this.animations = getAnimations(staticSheet.$animations, this)
       //*** init media queries
-      this.mediaq = new ComponentsMediaQ<ReactXX.getMediaQ<R>>(this, this.classes.$mediaq as MediaQ.NotifySheetX<ReactXX.getMediaQ<R>>)
+      this.mediaq = new ComponentsMediaQ<ReactXX.getMediaQ<R>>(this)
 
     }
-    componentWillUnmount() { this.mediaq.unsubscribe() }
+    componentWillUnmount() { this.mediaq.destroy() }
 
     render() {
       const { animations, mediaq } = this
@@ -56,7 +56,9 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
       const style: ReactXX.Ruleset = toPlatformRuleSet(applyTheme(name, styleX, theme))
 
       // calling createRulesetWithOverridesMerger signals which rulesets are used. So it can use their $overrides to modify self sheet
-      const mergeRulesetWithOverrides = createRulesetWithOverridesMerger(this.mediaq)
+      const mergeRulesetWithOverrides = createRulesetWithOverridesMerger(mediaq)
+
+      mediaq.setNotifyBreakpoints(this.classes.$mediaq as MediaQ.NotifySheetX<ReactXX.getMediaQ<R>>) //release media notifications
 
       //const flip = typeof flipProp === 'boolean' ? flipProp : (theme && theme.direction === 'rtl')
 
@@ -110,8 +112,6 @@ export const toPlatformEvents = ($web: ReactXX.OnPressAllWeb, $native: ReactXX.O
 // - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides)
 const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => { 
   const usedOverrides: ReactXX.Sheet = {}
-  //if (media)
-  media.unsubscribe() //release media notifications
   const res: ReactXX.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
     let single = undefined //optimalization: rulesets contains just single non empty item => no deepMerge is needed
     rulesets.forEach(ruleset => { // acumulate $overrides from used rulesets
@@ -124,7 +124,7 @@ const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => {
     const rulesetResult: typeof rulesets[0] = {}
     if (single) {
       const override = usedOverrides[single.$name]
-      if (!override) return clearSystemProps(media ? media.processRuleset({ ...single }) : { ...single }) //otimalization: nothing to merge
+      if (!override) return clearSystemProps(media.processRuleset({ ...single })) //otimalization: nothing to merge
       deepMerges(true, rulesetResult, single, override)
     } else //apply used $overrides and classes prop
       rulesets.forEach(ruleset => {
@@ -134,7 +134,7 @@ const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => {
           usedOverrides[ruleset.$name], //modify it with used $overrides
         )
       })
-    return clearSystemProps(media ? media.processRuleset(rulesetResult) : rulesetResult)
+    return clearSystemProps(media.processRuleset(rulesetResult))
   }
   return res
 }

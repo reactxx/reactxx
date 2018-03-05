@@ -21,7 +21,7 @@ const expandedPanelSheet: ReactXX.CreateSheetX<DocHome.ExpandedPanelShape> = {
   root: {
     marginTop: 10, marginBottom: 10,
     borderWidth: 1, borderColor: 'darkblue', borderStyle: 'solid',
-    $media: {
+    $mediaq: {
       '-480': {
       },
       '480-1024': {

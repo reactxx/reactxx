@@ -1,13 +1,12 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 
 import { withStyles, View, Text, AnimatedView } from 'reactxx'
 
 const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = (theme, themePar) => ({
   $mediaq: {
-    mobile: [null, themePar[0]],
-    tablet: [themePar[0], themePar[1]],
-    desktop: [themePar[1], null],
+    mobile: [null, themePar.breakpoints[0]],
+    tablet: [themePar.breakpoints[0], themePar.breakpoints[1]],
+    desktop: [themePar.breakpoints[1], null],
   },
   $animations: { // different Animations
     mobile: { // single Animation (= single Animated.Value for NATIVE)
@@ -145,20 +144,13 @@ const responsibleDrawer: ReactXX.CodeSFC<testAnimation.Shape> = props => {
 const ResponsibleDrawer = withStyles<testAnimation.Shape>(testAnimation.Consts.Drawer, sheet, { animationDuration: 300, drawerWidths: [250, 300, 400], breakpoints: [480, 1024] })(responsibleDrawer)
 
 
-class App extends React.Component {
-  //state = { mobile: true, tablet: false, desktop: false }
-  render() {
-    //const btnStyle: ReactXX.RulesetX<ReactN.TextStyle> = { color: 'blue', padding: 10 }
-    //const initState = { mobile: false, tablet: false, desktop: false }
-    return <ResponsibleDrawer className={{ flex: 1, $native: { marginTop: 24 } }} />
-    //<View className={{ flex: 1, $native: { marginTop: 24 } }}>
-    //  <View className={{ flexDirection: 'row' }}>
-    //    <Text onPress={() => this.setState({ ...initState, mobile: true })} className={btnStyle}>MOBILE</Text>
-    //    <Text onPress={() => this.setState({ ...initState, tablet: true })} className={btnStyle}>TABLET</Text>
-    //    <Text onPress={() => this.setState({ ...initState, desktop: true })} className={btnStyle}>DESKTOP</Text>
-    //  </View>
-    //  <ResponsibleDrawer className={{ flex: 1, $native: { marginTop: 24 } }} />
-    //</View>
-  }
-}
+const App: React.SFC = () => <ResponsibleDrawer className={{ flex: 1, $native: { marginTop: 24 } }} renderContent={
+  () => <>
+    
+  </>
+} renderDrawer={
+  () => <>
+  </>
+} />
+
 export default App

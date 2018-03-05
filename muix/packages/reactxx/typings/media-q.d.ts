@@ -1,11 +1,15 @@
 declare namespace MediaQ {
 
+  const enum Consts {
+    maxBreakpoint = 10000000
+  }
+
   type Shape = string
 
   type NotifySheetX<TState extends string> = {[P in TState]: [number | null, number | null]}
 
   interface ComponentsMediaQ<TState extends string> {
-    state: {[P in TState]: boolean}
+    state: {[P in TState]?: boolean}
   }
   
   interface SheetX<T extends ReactXX.RulesetNative = ReactN.TextStyle, R extends ReactXX.Shape = ReactXX.Shape> {
@@ -19,5 +23,7 @@ declare namespace MediaQ {
   interface SheetXNative<T extends ReactXX.RulesetNative = ReactN.TextStyle, R extends ReactXX.Shape = ReactXX.Shape> {
     [query: string]: T & ReactXX.RulesetAddInX<T, R>
   }
+
+  interface Patch { start: number; end: number; ruleset: ReactXX.RulesetWithAddIn }
 
 }
