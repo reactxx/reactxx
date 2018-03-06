@@ -84,6 +84,7 @@ export class Driver<T extends Animation.Shape> extends DriverLow<T> implements A
     }, $delay + $duration)
     this.sheet = this.bothClassName[opened ? 1 : 0]
     this.animations.statefullComponent.forceUpdate()
+    //this.animations.statefullComponent.setState(st => ({ x: new Date().getTime() }))
   }
 }
 

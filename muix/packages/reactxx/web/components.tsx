@@ -9,6 +9,14 @@ export const view: ReactXX.CodeSFCWeb<ReactXX.ViewShape> = props => {
   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest} />
 }
 
+//export class view extends React.PureComponent<ReactXX.CodePropsWeb<ReactXX.ViewShape>> {
+//  render() {
+//    const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq, ...rest } = this.props
+//    const rootStyle = mergeRulesetWithOverrides(classes.root, className)
+//    return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest} />
+//  }
+//}
+
 export const icon: ReactXX.CodeSFCWeb<ReactXX.IconShape> = props => {
   const { style, classes, className, data, mergeRulesetWithOverrides, theme, animations, viewBox, children/*this children*/, mediaq,...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className)

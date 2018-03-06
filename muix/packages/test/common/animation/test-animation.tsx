@@ -1,6 +1,12 @@
 import React from 'react'
 
 import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } from 'reactxx'
+import { createContext, ConsumerType } from 'reactxx-appstate'
+
+const { Provider, Consumer } = createContext<testAnimation.RenderProps>(null)
+
+type TestConsumerType = ConsumerType<testAnimation.RenderProps, testAnimation.RenderProps>
+type TestAnimationType = React.ComponentClass<ReactXX.PropsX<testAnimation.Shape>> & { LayoutChanged?: TestConsumerType }
 
 /*testAnimation sheet creator pars: defined in const ResponsibleDrawer = withStyles*/
 const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = (theme, themePar) => ({
@@ -90,7 +96,7 @@ const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = (theme, themePar) => ({
 })
 
 const responsibleDrawer: ReactXX.CodeSFC<testAnimation.Shape> = props => {
-  const { classes, mergeRulesetWithOverrides, theme, children, style, className, animations, mediaq, renderContent, renderDrawer, ...rest } = props
+  const { classes, mergeRulesetWithOverrides, theme, children, style, className, animations, mediaq, drawer: drawerNode, ...rest } = props
 
   const mediaState = mediaq.state
   const openDrawer = () => mediaState.tablet ? animations.tablet.open() : animations.mobile.open()
@@ -126,19 +132,21 @@ const responsibleDrawer: ReactXX.CodeSFC<testAnimation.Shape> = props => {
   const openButton = mergeRulesetWithOverrides(classes.openButton, { display: drawerOpened ? 'none' : 'flex' }) as ReactXX.TextRulesetX
 
   return <View className={root}>
-    <AnimatedView key={1} className={backDrop} onPress={closeDrawer} >
-      <Text style={{ marginTop: 60 }}>{JSON.stringify(backDrop, null, 2)}</Text>
-    </AnimatedView>
+    <AnimatedView key={1} className={backDrop} onPress={closeDrawer} />
     <AnimatedView key={2} className={drawer}>
-      {renderDrawer({ iconData: MDI.Close, onPress: closeDrawer, opened: drawerOpened, style: closeButton })}
+      <Provider value={{ iconData: MDI.Close, onPress: closeDrawer, opened: drawerOpened, style: closeButton }}>
+        {drawerNode}
+      </Provider>
     </AnimatedView>
     <AnimatedView key={3} className={content}>
-      {renderContent({ iconData: MDI.Menu, onPress: openDrawer, opened: drawerOpened, style: openButton })}
+      <Provider value={{ iconData: MDI.Menu, onPress: openDrawer, opened: drawerOpened, style: openButton }}>
+        {children}
+      </Provider>
     </AnimatedView>
   </View>
 }
-const ResponsibleDrawer = withStyles<testAnimation.Shape>(testAnimation.Consts.Drawer, sheet, { animationDuration: 300, drawerWidths: [250, 300, 400], breakpoints: [480, 1024] })(responsibleDrawer)
-
+const ResponsibleDrawer = (withStyles<testAnimation.Shape>(testAnimation.Consts.Drawer, sheet, { animationDuration: 300, drawerWidths: [250, 300, 400], breakpoints: [480, 1024] })(responsibleDrawer)) as TestAnimationType
+ResponsibleDrawer.LayoutChanged = Consumer as TestConsumerType
 
 //*************************** Application with ResponsibleDrawer
 const button = {
@@ -149,22 +157,25 @@ const button = {
 
 //modifyThemeState={themeState => ({ ...themeState, theme: { ...themeState.theme, themePars: { ...themeState.theme.themePars, [testAnimation.Consts.Drawer]: { ...themeState.theme.themePars[testAnimation.Consts.Drawer], animationDuration:1000} } } })}
 
-const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} renderDrawer={
-  ({ style, iconData, onPress }) => <ScrollView classes={{ container: { flex: 1, backgroundColor: 'lightgray' } }}>
+const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={
+  <ScrollView classes={{ container: { flex: 1, backgroundColor: 'lightgray' } }}>
     <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, padding: 10, backgroundColor: 'gray', }}>
       <Text className={{ flexGrow: 1, color: 'white' }}>{LoremIpsum(2)}</Text>
-      <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />
+      <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />} />
     </View>
     <Text className={{ padding: 10 }}>{LoremIpsum(80)}</Text>
   </ScrollView>
-} renderContent={
-  ({ style, iconData, onPress }) => <ScrollView classes={{ container: { flex: 1 } }}>
+}>
+
+  <ScrollView classes={{ container: { flex: 1 } }}>
     <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}>
-      <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />
-      <Text className={{ color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(5)}</Text>
+      <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />} />
+      <Text numberOfLines={1} className={{ flexGrow: 1, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(5)}</Text>
+      <Text className={{ flexShrink:0, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(2)}</Text>
     </View>
     <Text className={{ padding: 10, $mediaq: { '800-1248': { color: 'red' } } }}>{LoremIpsum(80)}</Text>
   </ScrollView>
-} />
+
+</ResponsibleDrawer>
 
 export default App

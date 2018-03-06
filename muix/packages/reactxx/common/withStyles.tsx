@@ -7,6 +7,7 @@ import { getAnimations } from './animation'
 
 import { ThemeModifier, modifierSelector, toPlatformFromSheetCreator } from './theme'
 
+//http://jamesknelson.com/should-i-use-shouldcomponentupdate/
 export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R>, createSheetX: ReactXX.CreateSheetX<R>, themePar?: ReactXX.getThemePar<R>) => (Component: ReactXX.CodeComponentType<R>) => {
 
   const name = _name as string
@@ -44,6 +45,7 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
       this.mediaq = new ComponentsMediaQ<ReactXX.getMediaQ<R>>(this)
 
     }
+
     componentWillUnmount() { this.mediaq.destroy() }
 
     render() {
@@ -74,19 +76,22 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
 
       toPlatformEvents($web, $native as ReactXX.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
 
+      renderCount++
+
       return <Component {...codeProps} />
     }
 
   }
   hoistNonReactStatics(Styled, Component as any)
 
+
   return (props => <ThemeModifier modify={props.modifyThemeState} selector={modifierSelector(name)} render={themeState =>
     <Styled {...themeState} {...props} />
   } />) as React.ComponentType<ReactXX.PropsX<R>>
 
-  //const styled: any = Styled
-  //return styled as React.ComponentType<ReactXX.PropsX<R>>
 }
+
+let renderCount = 0
 
 export const themePars: {[Name in keyof ReactXX.SheetsX]?: {} } = {}
 
@@ -106,10 +111,10 @@ export const toPlatformEvents = ($web: ReactXX.OnPressAllWeb, $native: ReactXX.O
   }
 }
 
-//****************************  getRulesetWithSideEffect
+//****************************  createRulesetWithOverridesMerger
 // Could be called in <Component> render method to compute component styles. Side effects:
-// - use sheet..$overrides to modify self sheet
-// - sheet..$childOverrides to modify children sheet (passed to children via context.childOverrides)
+// - use sheet.ruleset.$overrides to modify self sheet
+// - use sheet.ruleset.$mediaq to modify ruleset 
 const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => { 
   const usedOverrides: ReactXX.Sheet = {}
   const res: ReactXX.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
@@ -126,7 +131,7 @@ const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => {
       const override = usedOverrides[single.$name]
       if (!override) return clearSystemProps(media.processRuleset({ ...single })) //otimalization: nothing to merge
       deepMerges(true, rulesetResult, single, override)
-    } else //apply used $overrides and classes prop
+    } else //apply used $overrides
       rulesets.forEach(ruleset => {
         if (!ruleset) return
         deepMerges(true, rulesetResult, //deepMerges(false, due to $media2 merging
@@ -145,8 +150,6 @@ const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => {
 const applyTheme = (name: string, valueOrCreator: any | ((theme: ReactXX.Theme, themePar) => any), theme: ReactXX.Theme) =>
   typeof valueOrCreator === 'function' ? valueOrCreator(theme, theme.themePars[name]) : valueOrCreator
 
-
-
 // merge named values
 const mergeOverrides = (result, patches) => {
   if (!patches) return
@@ -158,7 +161,6 @@ const mergeOverrides = (result, patches) => {
 }
 
 export const deepMerges = (skipSystem: boolean, target, ...sources) => {
-  //if (!sources || !sources.find(s => !!s)) return target 
   sources.forEach(source => deepMerge(target, source, skipSystem))
   return target
 }
@@ -167,4 +169,32 @@ const clearSystemProps = obj => {
   if (!obj) return obj
   const { $overrides, $name, $web, $native, $mediaq, ...rest } = obj as ReactXX.RulesetX
   return rest
+}
+
+class PureComponent<T> extends React.Component<T> {
+  shouldComponentUpdate(nextProps, nextState, nextContext: any) {
+    return !shallowEqual(this.state, nextState) || !shallowEqual(this.props, nextProps) || (this.props && nextProps && (!shallowEqual((this.props as any).className, nextProps.className) || !shallowEqual((this.props as any).style, nextProps.style)))
+  }
+}
+
+const shallowEqual = (objA: {}, objB: {}, ignoreStyle?: boolean) => {
+  if (objA === objB) return true
+
+  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) return false
+
+  const keysA = Object.keys(objA); if (keysA.length !== Object.keys(objB).length) return false
+
+  // Test for A's keys different from B.
+  var bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);
+  for (let i = 0; i < keysA.length; i++) {
+    const prop = keysA[i]
+    if (prop.startsWith('on')) continue
+    if (ignoreStyle && (prop === 'className' || prop === 'style')) continue
+    if (!bHasOwnProperty(prop) || objA[prop] !== objB[prop]) {
+      //console.log(prop)
+      return false
+    }
+  }
+
+  return true;
 }

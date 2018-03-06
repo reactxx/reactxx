@@ -1,7 +1,5 @@
 import warning from 'warning'
 
-import { deepMerges } from 'reactxx'
-
 export abstract class ComponentsMediaQLow<TState extends string = string>  {
 
   constructor(protected component: React.Component) { }
@@ -49,6 +47,7 @@ export class BreakPoint {
   notify() {
     const { subscribers } = this
     for (const p in subscribers) subscribers[p].forceUpdate()
+    //for (const p in subscribers) subscribers[p].setState(st => ({ x: new Date().getTime() }))
   }
 }
 

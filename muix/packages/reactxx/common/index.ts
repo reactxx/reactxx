@@ -19,10 +19,6 @@ export const toPlatformRuleSet = (style: ReactXX.RulesetX) => {
   return res as ReactXX.Ruleset 
 }
 
-//export const applyTheme = <T>(theme: ReactXX.Theme | (() => ReactXX.Theme), valueOrCreator: ReactXX.FromThemeValueOrCreator<T> | any, componentTheme?: {}) =>
-//  typeof valueOrCreator === 'function' ? valueOrCreator(typeof theme === 'function' ? theme() : theme) : valueOrCreator
-
-
 //create platform specific sheet from cross platform one
 export const toPlatformSheet = <R extends ReactXX.Shape>(sheet: ReactXX.SheetX<R> | ReactXX.PartialSheetX<R>) => {
   if (typeof sheet !== 'object') return sheet
@@ -37,14 +33,6 @@ export const toPlatformSheet = <R extends ReactXX.Shape>(sheet: ReactXX.SheetX<R
   }
   return res as ReactXX.Sheet<R>
 }
-
-//create platform specific sheets from cross platform one
-//const toPlatformSheets = (theme:ReactXX.Theme, sheets: ReactXX.FromThemeValueOrCreator<ReactXX.SheetsX>) => {
-//  if (!sheets) return null
-//  const result: ReactXX.Sheets = {}
-//  for (const p in applyTheme(theme, sheets)) result[p] = toPlatformSheet(sheets[p])
-//  return result
-//}
 
 //simple deep merge
 export const deepMerge = (target, source, skipSystem = false) => {

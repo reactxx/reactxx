@@ -8,14 +8,14 @@ declare namespace testAnimation {
     style: ReactXX.RulesetX
     opened: boolean
     iconData: string,
-    onPress: 
+    onPress: ReactXX.MouseEvent
   }
 
   type Shape = ReactXX.OverwriteShape<{
     common: ReactXX.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop' > & ReactXX.ShapeTexts<'openButton' | 'closeButton'>
     props: {
-      renderContent: (props: RenderProps) => JSX.Element
-      renderDrawer: (props: RenderProps) => JSX.Element
+      //renderContent: (props: RenderProps) => JSX.Element
+      drawer: JSX.Element
     }
     mediaq: 'mobile' | 'tablet' | 'desktop'
     animation: {
