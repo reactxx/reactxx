@@ -162,3 +162,8 @@ const E01$01_: Example = {
   title: '',
   Component: props => null
 }
+
+
+let t: ReactXX.ThemeStateX2
+
+t[ReactXX.CompNames.ScrollView].override.container

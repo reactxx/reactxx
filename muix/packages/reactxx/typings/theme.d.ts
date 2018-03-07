@@ -21,6 +21,10 @@ declare namespace ReactXX {
 
   type ThemeContextValue = { theme: Theme }
   type ThemeStatesX = { theme: Theme; overrides?: OverridesX }
+
+  type ThemeCompX<R extends Shape = Shape> = { override?: PartialSheetX<R>, par?: ReactXX.getThemePar<R> }
+  type ThemeStateX2 = { theme: Theme } & {[P in keyof Shapes]?: ThemeCompX<Shapes[P]> }
+
   type ThemeStateX<R extends Shape = Shape> = { theme: Theme; override?: PartialSheetX<R> }
   type ThemeModifier = (state: ThemeStatesX) => ThemeStatesX
 

@@ -16,5 +16,8 @@ declare namespace ReactXX {
   interface SheetsX {
     MuiScrollView?: ReactXX.PartialSheetX<MuixScrollView.Shape>
   }
+  interface Shapes {
+    MuiScrollView?: MuixScrollView.Shape
+  }
 }
 

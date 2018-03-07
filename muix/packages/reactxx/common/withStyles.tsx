@@ -93,7 +93,7 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
 
 let renderCount = 0
 
-export const themePars: {[Name in keyof ReactXX.SheetsX]?: {} } = {}
+export const themePars: {[Name in keyof ReactXX.Shapes]?: ReactXX.getThemePar<ReactXX.Shapes[Name]> } = {}
 
 export const toPlatformEvents = ($web: ReactXX.OnPressAllWeb, $native: ReactXX.OnPressAllNative, propsX: ReactXX.OnPressAllX, codeProps: ReactXX.CodeProps) => {
   const { onPress, onLongPress, onPressIn, onPressOut } = propsX

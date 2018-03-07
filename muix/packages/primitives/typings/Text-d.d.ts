@@ -14,5 +14,8 @@ declare namespace ReactXX {
   interface SheetsX {
     MuiText?: ReactXX.PartialSheetX<MuixText.Shape>
   }
+  interface Shapes {
+    MuiText?: MuixText.Shape
+  }
 }
 

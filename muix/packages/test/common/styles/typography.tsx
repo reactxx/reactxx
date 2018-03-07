@@ -19,7 +19,7 @@ const theme = createMuiTheme({
       native: {
         fontSize: 22,
       }
-    }
+    },
   }),
   palette: {
     primary: orange,

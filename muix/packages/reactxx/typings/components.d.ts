@@ -66,4 +66,14 @@ declare namespace ReactXX {
     [CompNames.ScrollView]?: PartialSheetX<ScrollViewShape>
     [CompNames.AnimatedScrollView]?: PartialSheetX<ScrollViewShape>
   }
+  interface Shapes {
+    [CompNames.Text]?: TextShape
+    [CompNames.AnimatedText]?: TextShape
+    [CompNames.View]?: ViewShape
+    [CompNames.AnimatedView]?: ViewShape
+    [CompNames.Icon]?: IconShape
+    [CompNames.AnimatedIcon]?: IconShape
+    [CompNames.ScrollView]?: ScrollViewShape
+    [CompNames.AnimatedScrollView]?: ScrollViewShape
+  }
 }

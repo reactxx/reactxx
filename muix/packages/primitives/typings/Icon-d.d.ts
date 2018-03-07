@@ -18,5 +18,8 @@ declare namespace ReactXX {
   interface SheetsX {
     MuiIcon?: ReactXX.PartialSheetX<MuixIcon.Shape>
   }
+  interface Shapes {
+    MuiIcon?: MuixIcon.Shape
+  }
 }
 

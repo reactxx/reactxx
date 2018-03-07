@@ -11,5 +11,8 @@ declare namespace ReactXX {
   interface SheetsX {
     MuiResponsiveDrawer?: ReactXX.PartialSheetX<MuixResponsibleDrawer.Shape>
   }
+  interface Shapes {
+    MuiResponsiveDrawer?: MuixResponsibleDrawer.Shape
+  }
 }
 

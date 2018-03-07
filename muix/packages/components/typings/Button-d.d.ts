@@ -16,5 +16,10 @@ declare namespace ReactXX {
     MuiButtonIconLeft?: ReactXX.PartialSheetX<MuixButton.Shape>
     MuiButtonIconRight?: ReactXX.PartialSheetX<MuixButton.Shape>
   }
+  interface Shapes {
+    //MuiButton?: ReactXX.PartialSheetX<MuixButton.Shape>
+    MuiButtonIconLeft?: MuixButton.Shape
+    MuiButtonIconRight?: MuixButton.Shape
+  }
 }
 

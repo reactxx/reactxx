@@ -6,7 +6,7 @@ declare namespace Muix {
 
   interface WithStylesOptionsNew {
     flip?: boolean
-    name: keyof ReactXX.SheetsX
+    name: keyof ReactXX.Shapes
   }
 
   type muiSheet<ClassKey extends string = string> = Record<ClassKey, ReactXX.RulesetWeb>
@@ -54,7 +54,7 @@ declare namespace Muix {
   type ShadowsNative = ReactN.ViewStyle[]
 
   type OverridesX = {
-    [Name in keyof ReactXX.SheetsX]?: ReactXX.SheetsX[Name]
+    [Name in keyof ReactXX.Shapes]?: ReactXX.PartialSheetX<ReactXX.Shapes[Name]>
   }
 
   //type OverridesNewOrCreator = OverridesNew | ((theme: Theme) => OverridesNew)

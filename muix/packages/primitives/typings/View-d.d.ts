@@ -13,5 +13,9 @@ declare namespace ReactXX {
     MuiView?: ReactXX.PartialSheetX<MuixView.Shape>
     MuiAnimatedView?: ReactXX.PartialSheetX<MuixView.Shape>
   }
+  interface Shapes {
+    MuiView?: MuixView.Shape
+    MuiAnimatedView?: MuixView.Shape
+  }
 }
 

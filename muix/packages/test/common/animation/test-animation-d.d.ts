@@ -34,4 +34,7 @@ declare namespace ReactXX {
   interface SheetsX {
     TestStyles?: ReactXX.PartialSheetX<testStyles.Shape>
   }
+  interface Shapes {
+    TestStyles?: testStyles.Shape
+  }
 }
