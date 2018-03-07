@@ -25,16 +25,18 @@ jss.options.insertionPoint = 'insertion-point-jss'
 export const AppContainer: React.SFC = props => {
   const theme = createMuiTheme()
   return <JssProvider jss={jss}>
-    <ThemeProvider value={{ theme: theme, overrides: {} }}>
+    <ThemeProvider value={{ theme: {} as any }}>
       <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
     </ThemeProvider>
   </JssProvider>
 }
 
-export const ThemeModifierX: ModifierType<ReactXX.ThemeStatesX, ReactXX.ThemeStatesX> = props => <ThemeModifier {...props} render={themeState => {
-  const { theme, overrides} = themeState
-  theme.overrides = expandOverrides(theme, overrides)
-  return <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
+export const ThemeModifierX: ModifierType<ReactXX.ThemeState, ReactXX.ThemeState> = props => <ThemeModifier {...props} render={themeState => {
+  return null
+  //TODO THEME
+  //const { theme, overrides} = themeState
+  //theme.overrides = expandOverrides(themeState)
+  //return <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
 }} />
 
 

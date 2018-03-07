@@ -1,7 +1,7 @@
 import { withStyles } from '../common/withStyles'
 import { text, view, icon, scrollView, animatedView, animatedIcon, animatedText, animatedScrollView } from 'reactxx' //import platform specific component code
 
-const textSheet: ReactXX.CreateSheetX<ReactXX.TextShape> = {
+const textSheet: ReactXX.SheetCreatorX<ReactXX.TextShape> = {
   root: {
     $web: {
       whiteSpace: 'pre-wrap',
@@ -33,13 +33,13 @@ const webViewRuleset = {
   position: 'relative',
 } as ReactXX.RulesetWeb
 
-const viewSheet: ReactXX.CreateSheetX<ReactXX.ViewShape> = {
+const viewSheet: ReactXX.SheetCreatorX<ReactXX.ViewShape> = {
   root: {
     $web: webViewRuleset
   }
 }
 
-const iconSheet: ReactXX.CreateSheetX<ReactXX.IconShape> = {
+const iconSheet: ReactXX.SheetCreatorX<ReactXX.IconShape> = {
   root: {
     fontSize: 24,
     flexShrink: 0,
@@ -51,7 +51,7 @@ const iconSheet: ReactXX.CreateSheetX<ReactXX.IconShape> = {
 
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
-const scrollViewSheet: ReactXX.CreateSheetX<ReactXX.ScrollViewShape> = {
+const scrollViewSheet: ReactXX.SheetCreatorX<ReactXX.ScrollViewShape> = {
   root: {
     $web: {
       ...webViewRuleset,

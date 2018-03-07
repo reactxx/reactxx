@@ -3,7 +3,7 @@ import { withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from '
 
 import { Animated } from 'react-native'
 
-const expandedPanelSheet: ReactXX.CreateSheetX<DocHome.ExpandedPanelShape> = {
+const expandedPanelSheet: ReactXX.SheetCreatorX<DocHome.ExpandedPanelShape> = {
   $animations: {
     openClose: {
       content: {

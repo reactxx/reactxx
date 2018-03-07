@@ -32,9 +32,9 @@ declare namespace testAnimation {
 
 declare namespace ReactXX {
   interface SheetsX {
-    TestStyles?: ReactXX.PartialSheetX<testStyles.Shape>
+    [testAnimation.Consts.Drawer]?: ReactXX.PartialSheetX<testAnimation.Shape>
   }
   interface Shapes {
-    TestStyles?: testStyles.Shape
+    [testAnimation.Consts.Drawer]?: testAnimation.Shape
   }
 }

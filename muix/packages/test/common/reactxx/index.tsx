@@ -164,6 +164,6 @@ const E01$01_: Example = {
 }
 
 
-let t: ReactXX.ThemeStateX2
+let t: ReactXX.ThemeState
 
 t[ReactXX.CompNames.ScrollView].override.container

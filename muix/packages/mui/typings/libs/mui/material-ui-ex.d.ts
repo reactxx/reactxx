@@ -47,10 +47,10 @@ declare namespace Muix {
   interface Theme {
     shadowsNew: ThemeShadows
     typographyX: TypographyX
-    $sheetCache: Array<SheetCacheItem>
+    //$sheetCache: Array<SheetCacheItem>
   }
 
-  type SheetCacheItem = { sheetOrCreator: ReactXX.SheetOrCreator; fromTheme: ReactXX.Sheet<ReactXX.Shape> }
+  //type SheetCacheItem = { sheetOrCreator: ReactXX.SheetOrCreator; fromTheme: ReactXX.Sheet<ReactXX.Shape> }
   type ShadowsNative = ReactN.ViewStyle[]
 
   type OverridesX = {

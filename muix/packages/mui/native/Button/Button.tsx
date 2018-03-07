@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
-import { Text, withStyles, toPlatformRuleSet, addOverrides } from 'reactxx'
+import { Text, withStyles, toPlatformRuleSet, themeOverrideModifier, ThemeModifier } from 'reactxx'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 
@@ -14,7 +14,7 @@ const getTextIconColor = (color: string) => ({
 } as ReactXX.PartialSheetX<MuiButton.Shape>)
 
 
-const sheets: (isLeft?: boolean) => ReactXX.CreateSheetX<MuiButton.Shape> = isLeft => ({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
+const sheets: (isLeft?: boolean) => ReactXX.SheetCreatorX<MuiButton.Shape> = isLeft => ({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
 
   root: {
     flexDirection: 'row',
@@ -151,10 +151,11 @@ const button: ReactXX.CodeSFCNative<MuiButton.Shape> = (props, context) => {
 
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 
-  const RippleWithOverrides = addOverrides(RippleEffect, {
-    [ReactXX.CompNames.Icon]: iconOverride,
-    [ReactXX.CompNames.Text]: labelOverride,
-  })
+  const RippleWithOverrides: React.SFC<MuiButtonBase.RippleEfectProps> = props => <ThemeModifier
+    modify={themeOverrideModifier<ReactXX.IconShape, ReactXX.TextShape>(ReactXX.CompNames.Icon, iconOverride, ReactXX.CompNames.Text, labelOverride)}>
+    <RippleEffect {...props}/>
+  </ThemeModifier>
+
 
   return <RippleWithOverrides viewStyle={rootStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} className={null} mergeRulesetWithOverrides={null} animations={null} {...rest}>
     {childs}

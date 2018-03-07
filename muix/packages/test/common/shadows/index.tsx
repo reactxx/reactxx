@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { ScrollView, View, Text } from 'muix-primitives'
+//import { ScrollView, View, Text } from 'muix-primitives'
 
 import shadows from 'material-ui/styles/shadows'
 //import { IShadow } from 'muix-shadows'

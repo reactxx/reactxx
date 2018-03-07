@@ -5,7 +5,7 @@ import { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRecta
 
 import { withStyles } from 'reactxx'
 
-const sheet: ReactXX.CreateSheetX<MuiButtonBase.Shape> = ({ palette }) => ({
+const sheet: ReactXX.SheetCreatorX<MuiButtonBase.Shape> = ({ palette }) => ({
   root: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -19,13 +19,7 @@ const sheet: ReactXX.CreateSheetX<MuiButtonBase.Shape> = ({ palette }) => ({
 
 const minRippleSize = 0.01
 
-export interface ButtonBaseStyles {
-  viewStyle: ReactN.ViewStyle
-  activeStyle: ReactN.ViewStyle
-  rippleStyle: ReactN.ViewStyle
-}
-
-export class RippleEffect extends React.Component<ButtonBaseStyles & Partial<ReactXX.CodePropsNative<MuiButtonBase.Shape>>> { 
+export class RippleEffect extends React.Component<MuiButtonBase.RippleEfectProps> { 
 
   state: { active?: boolean } = {}
   scaleValue = new Animated.Value(minRippleSize)

@@ -13,6 +13,15 @@ declare namespace MuiButtonBase {
     propsNative: ReactN.TouchableOpacityProperties
     nameType: CompNames.ButtonBase
   }>
+
+  export interface ButtonBaseStyles {
+    viewStyle: ReactN.ViewStyle
+    activeStyle: ReactN.ViewStyle
+    rippleStyle: ReactN.ViewStyle
+  }
+
+  type RippleEfectProps = ButtonBaseStyles & Partial<ReactXX.CodePropsNative<MuiButtonBase.Shape>>
+
 }
 
 declare namespace ReactXX {

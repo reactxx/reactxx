@@ -5,15 +5,15 @@ import { ComponentsMediaQ /*platform dependent*/ } from 'reactxx'
 import warning from 'warning'
 import { getAnimations } from './animation'
 
-import { ThemeModifier, modifierSelector, toPlatformFromSheetCreator } from './theme'
+import { ThemeModifier, themeCompCreate } from './theme'
 
 //http://jamesknelson.com/should-i-use-shouldcomponentupdate/
-export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R>, createSheetX: ReactXX.CreateSheetX<R>, themePar?: ReactXX.getThemePar<R>) => (Component: ReactXX.CodeComponentType<R>) => {
+export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R>, createSheetX: ReactXX.SheetCreatorX<R>, themePar?: ReactXX.getThemePar<R>) => (Component: ReactXX.CodeComponentType<R>) => {
 
   const name = _name as string
   themePars[name] = themePar
 
-  type TStyled = ReactXX.PropsX & ReactXX.ThemeStateX
+  type TStyled = ReactXX.PropsX & ReactXX.ThemeCompSelectedX
 
   class Styled extends React.PureComponent<TStyled> {
     classes: ReactXX.Sheet
@@ -28,13 +28,17 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
     componentWillReceiveProps() {
       this.animations && this.animations.reset()
 
-      const { theme, override, classes: classesX } = this.props
+      const { theme, themePar, override, classes: classesX } = this.props
+      //const theme = themeState.theme
+      //const pars = themeState[name] as ReactXX.ThemeCompX<R>
+      //const override = pars && pars.override
+      //const par = pars && pars.par
 
       //*** get platform component sheet (from creator and actual theme)
-      const staticSheet = toPlatformFromSheetCreator(name, theme, createSheetX)
+      const staticSheet = toPlatformSheet(applyTheme(theme, themePar, createSheetX))
 
       //*** apply "component override" from actual "theme app state"
-      const classes: ReactXX.Sheet = toPlatformSheet(applyTheme(name, classesX, theme))
+      const classes: ReactXX.Sheet = toPlatformSheet(applyTheme(theme, themePar, classesX, ))
 
       this.classes = override || classes ? deepMerges(false, {}, staticSheet, override, classes) : staticSheet // modify static sheet 
       for (const p in this.classes) if (!p.startsWith('$')) this.classes[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
@@ -50,12 +54,13 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
 
     render() {
       const { animations, mediaq } = this
-      const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, theme, override, modifyThemeState, ...other } = this.props as TStyled & ReactXX.OnPressAllX
+      const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, theme, override, themePar, modifyThemeState, ...other } = this.props as TStyled & ReactXX.OnPressAllX
+      //const theme = themeState.theme
 
       if (ignore) return null
 
-      const className: ReactXX.Ruleset = toPlatformRuleSet(applyTheme(name, classNameX, theme))
-      const style: ReactXX.Ruleset = toPlatformRuleSet(applyTheme(name, styleX, theme))
+      const className: ReactXX.Ruleset = toPlatformRuleSet(applyTheme(theme, themePar, classNameX))
+      const style: ReactXX.Ruleset = toPlatformRuleSet(applyTheme(theme, themePar, styleX))
 
       // calling createRulesetWithOverridesMerger signals which rulesets are used. So it can use their $overrides to modify self sheet
       const mergeRulesetWithOverrides = createRulesetWithOverridesMerger(mediaq)
@@ -85,11 +90,26 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
   hoistNonReactStatics(Styled, Component as any)
 
 
-  return (props => <ThemeModifier modify={props.modifyThemeState} selector={modifierSelector(name)} render={themeState =>
-    <Styled {...themeState} {...props} />
+  return (props => <ThemeModifier modify={props.modifyThemeState} selector={modifierSelector(name)} render={selectedThemeState =>
+    <Styled {...selectedThemeState} {...props} />
   } />) as React.ComponentType<ReactXX.PropsX<R>>
 
 }
+
+const modifierSelector = (componentName: string) => (themeStates: ReactXX.ThemeState) => ({ theme: themeStates.theme, ...themeStates[componentName] } as ReactXX.ThemeCompSelectedX)
+
+//const toPlatformFromSheetCreator = <R extends ReactXX.Shape>(componentName: string, themeState: ReactXX.ThemeStateX2, createSheetX: ReactXX.SheetCreatorX<R>) => {
+//  //try to get platform specific component sheet from cache (from theme.themePars.componentName.$cache)
+//  //let themePar = theme.themePars[componentName]
+//  //if (!themePar) themePar = theme.themePars[componentName] = {}
+//  //let res = themePar['$cache'] as ReactXX.Sheet<R>
+//  //if (res) return res
+//  //create sheet
+//  const res = toPlatformSheet(typeof createSheetX === 'function' ? createSheetX(theme, par) : createSheetX)
+//  //themePar['$cache'] = res
+//  return res
+//}
+
 
 let renderCount = 0
 
@@ -115,7 +135,7 @@ export const toPlatformEvents = ($web: ReactXX.OnPressAllWeb, $native: ReactXX.O
 // Could be called in <Component> render method to compute component styles. Side effects:
 // - use sheet.ruleset.$overrides to modify self sheet
 // - use sheet.ruleset.$mediaq to modify ruleset 
-const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => { 
+const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => {
   const usedOverrides: ReactXX.Sheet = {}
   const res: ReactXX.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
     let single = undefined //optimalization: rulesets contains just single non empty item => no deepMerge is needed
@@ -147,8 +167,9 @@ const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => {
 //*************************************************************** 
 // HELPERS
 //***************************************************************
-const applyTheme = (name: string, valueOrCreator: any | ((theme: ReactXX.Theme, themePar) => any), theme: ReactXX.Theme) =>
-  typeof valueOrCreator === 'function' ? valueOrCreator(theme, theme.themePars[name]) : valueOrCreator
+function applyTheme<T>(theme: ReactXX.ThemeX, themePar, creator: T | ((theme: ReactXX.ThemeX, themePar) => T)) {
+  return typeof creator === 'function' ? creator(theme, themePar) : creator
+}
 
 // merge named values
 const mergeOverrides = (result, patches) => {

@@ -10,7 +10,7 @@ type TestConsumerType = ConsumerType<testAnimation.RenderProps, testAnimation.Re
 type TestAnimationType = React.ComponentClass<ReactXX.PropsX<testAnimation.Shape>> & { LayoutChanged?: TestConsumerType }
 
 /*testAnimation sheet creator pars: defined in const ResponsibleDrawer = withStyles*/
-const sheet: ReactXX.CreateSheetX<testAnimation.Shape> = (theme, themePar) => ({
+const sheet: ReactXX.SheetCreatorX<testAnimation.Shape> = (theme, themePar) => ({
 
   // (## 3 ##) define ResponsibleDrawer sheet, parametrized by theme (not used here) and component's themePar
 
