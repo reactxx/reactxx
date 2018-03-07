@@ -42,6 +42,7 @@ const viewSheet: ReactXX.CreateSheetX<ReactXX.ViewShape> = {
 const iconSheet: ReactXX.CreateSheetX<ReactXX.IconShape> = {
   root: {
     fontSize: 24,
+    flexShrink: 0,
     $web: {
       fill: 'currentColor',
     }

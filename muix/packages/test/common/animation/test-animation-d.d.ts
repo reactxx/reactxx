@@ -6,7 +6,6 @@ declare namespace testAnimation {
 
   interface RenderProps {
     style: ReactXX.RulesetX
-    opened: boolean
     iconData: string,
     onPress: ReactXX.MouseEvent
   }
