@@ -1,3 +1,5 @@
+[![Edit doc](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/reactxx/reactxx/tree/master/doc?module=%2Fsrc%2FApp.tsx)
+
 # muix
 Tiny material-ui add-in which allows creation of material-ui compatible React-Native components
 
