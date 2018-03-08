@@ -3,7 +3,7 @@ import React from 'react'
 import { createContext, ConsumerType, ModifierType } from 'reactxx-stateman'
 
 
-interface Context {
+export interface Context {
   theme: string
   overrides: { c1?: string; c2?: string }
 }

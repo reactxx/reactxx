@@ -5,7 +5,7 @@
     "rootDir": "src",
     "outDir": "deploy/es",
 
-    //"declaration": true,
+    "declaration": true,
 
     "baseUrl": ".",
     "paths": {

@@ -16,7 +16,7 @@
       "reactxx-stateman": [ "src/stateman/index" ],
 
       "reactxx": [ "src/reactxx/web/index" ],
-      "reactxx/web": [ "src/reactxx/web/index" ],
+      "reactxx/web": [ "src/reactxx/web/index" ]
     },
 
     //"esModuleInterop": true,

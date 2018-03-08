@@ -28,7 +28,7 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
 }
 
 
-class BreakPointWeb extends BreakPoint {
+export class BreakPointWeb extends BreakPoint {
   constructor(breakPoint: number) {
     super(breakPoint)
     this.mediaQuery = window.matchMedia(`(min-width: ${breakPoint}px)`)

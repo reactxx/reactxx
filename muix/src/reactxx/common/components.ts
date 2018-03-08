@@ -1,3 +1,5 @@
+import React from 'react'
+import ReactN from 'react-native'
 import { withStyles } from '../common/withStyles'
 import { text, view, icon, scrollView, animatedView, animatedIcon, animatedText, animatedScrollView } from 'reactxx' //import platform specific component code
 

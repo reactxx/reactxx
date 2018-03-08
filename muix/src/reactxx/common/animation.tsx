@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { AnimationDriver } from 'reactxx' //NATIVE or WEB animation driver
 import warning from 'warning'
 

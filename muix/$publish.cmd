@@ -11,12 +11,15 @@ cd %root%
 call $compile
 
 rem *** npm package publishing
-call %root%$publish_ components true
+call %root%$publish_ stateman
+call %root%$publish_ reactxx
 
-call %root%$publish_ styles
-rmdir %root%deploy\styles\es\native\fonts /s /q
-xcopy %root%src\styles\native\fonts %root%deploy\styles\es\native\fonts /s /q /i 
+call %root%$publish_ mui true
+rmdir %root%deploy\mui\es\native\fonts /s /q
+xcopy %root%src\mui\native\fonts %root%deploy\mui\es\native\fonts /s /q /i 
 
-call %root%$publish_ primitives
-call %root%$publish_ test
+
+
+
+
 

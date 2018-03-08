@@ -1,7 +1,8 @@
 import React from 'react'
+import ReactN from 'react-native'
 import warning from 'warning'
 
-import { createContext, ModifierType, ConsumerType } from 'reactxx-stateman'
+import { createContext, ModifierType, ConsumerType, ProviderProps, ConsumerProps, ModifierProps } from 'reactxx-stateman'
 
 import { toPlatformSheet } from './index'
 import { themePars } from './withStyles'
@@ -12,13 +13,6 @@ export const ThemeProvider = Provider
 export const AppContainer = Provider
 export const ThemeModifier = Modifier as ModifierType<ReactXX.ThemeState, ReactXX.ThemeCompSelectedX>
 export const ThemeConsumer = Consumer
-
-//export const addOverrides = <T extends {}>(Component: React.ComponentType<T>, overrides: ReactXX.ThemeStateX2) => {
-//  return ((props: T) => <ThemeModifier modify={state => ({ ...state, overrides: { ...state.overrides, ...expandOverrides(state.theme, overrides) } })}>
-//    <Component {...props} />
-//  </ThemeModifier>) as React.ComponentType<T>
-//}
-
 
 export const themeCompModifier = <Shape1 extends ReactXX.Shape, Shape2 extends ReactXX.Shape = never, Shape3 extends ReactXX.Shape = never>(name1: ReactXX.getNameType<Shape1>, comp1: ReactXX.ThemeCompCreatorX<Shape1>, name2?: ReactXX.getNameType<Shape2>, comp2?: ReactXX.ThemeCompCreatorX<Shape2>, name3?: ReactXX.getNameType<Shape3>, comp3?: ReactXX.ThemeCompCreatorX<Shape3>) => (themeState: ReactXX.ThemeState) => {
   const theme = themeState.theme

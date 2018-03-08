@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactN from 'react-native'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { toPlatformRuleSet, toPlatformSheet, deepMerge } from './index'
 import { ComponentsMediaQ /*platform dependent*/ } from 'reactxx'
@@ -29,10 +30,6 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
       this.animations && this.animations.reset()
 
       const { theme, themePar, override, classes: classesX } = this.props
-      //const theme = themeState.theme
-      //const pars = themeState[name] as ReactXX.ThemeCompX<R>
-      //const override = pars && pars.override
-      //const par = pars && pars.par
 
       //*** get platform component sheet (from creator and actual theme)
       const staticSheet = toPlatformSheet(applyTheme(theme, themePar, createSheetX))

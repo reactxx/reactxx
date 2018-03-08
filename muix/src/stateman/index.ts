@@ -4,9 +4,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import warning from 'warning'
 
-interface ProviderProps<T> { value?: T }
-interface ConsumerProps<T, TSel extends {} = any> { quiet?: boolean; selector?: (data: T) => TSel; render?: (selected: TSel) => React.ReactNode }
-interface ModifierProps<T, TSel extends {} = any> extends ConsumerProps<T, TSel> { modify: (data: T) => T }
+export interface ProviderProps<T> { value?: T }
+export interface ConsumerProps<T, TSel extends {} = any> { quiet?: boolean; selector?: (data: T) => TSel; render?: (selected: TSel) => React.ReactNode }
+export interface ModifierProps<T, TSel extends {} = any> extends ConsumerProps<T, TSel> { modify: (data: T) => T }
 
 export type ConsumerType<T, TSel> = React.ComponentType<ConsumerProps<T, TSel>>
 export type ModifierType<T, TSel> = React.ComponentType<ModifierProps<T, TSel>>

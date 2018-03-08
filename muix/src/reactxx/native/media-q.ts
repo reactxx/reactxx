@@ -40,7 +40,7 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
   
 }
 
-class BreakPointNative extends BreakPoint {
+export class BreakPointNative extends BreakPoint {
   constructor(breakPoint: number) {
     super(breakPoint)
   }
