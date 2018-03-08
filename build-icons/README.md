@@ -1,6 +1,12 @@
 # reactxx-mdi
 MDI essentials for both react and react-native (based on https://materialdesignicons.com/)
 
+Single npm package for both EXPO REACT NATIVE project and REACT web project
+
+
+## Installation for both Expo project and react Web project
+
+```npm install reactxx-mdi --save```
 
 ## For web
 
@@ -13,7 +19,7 @@ const App = props => <svg><path d={Play} /></svg>
 export default App
 ```
 
-### using Typescript ```const enum {...}``` (no import)
+### using Typescript ```const enum MDI``` (no import)
 ```typescript
 import React from 'react'
 
@@ -33,7 +39,7 @@ const App = props => <MaterialCommunityIcons name={Play}/>
 export default App
 ```
 
-### using Typescript ```const enum {...}``` (no import)
+### using Typescript ```const enum MDI``` (no import)
 ```typescript
 import React from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
@@ -41,3 +47,4 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 const App = props => <MaterialCommunityIcons name={MDI.Play}/>
 export default App
 ```
+

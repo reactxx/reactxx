@@ -1,6 +1,7 @@
 ﻿interface Window {
   isWeb:boolean
 }
+
 declare module 'fela-plugin-rtl' {
   const def
   export default def

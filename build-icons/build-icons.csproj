@@ -44,6 +44,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="deploy\es\index.js" />
     <Content Include="design\native-package.json" />
     <Content Include="design\web-package.json" />
     <Content Include="design\mdi-react-lm\package.json" />
@@ -53,9 +54,9 @@
     <Content Include="%24refresh.cmd" />
     <Content Include="deploy\package.json" />
     <Content Include="%24publish.cmd" />
-    <Content Include="README.md" />
     <Content Include="%24build.cmd" />
     <Content Include="tsconfig.json" />
+    <Content Include="README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -74,11 +75,11 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="deploy\es\index.d.ts" />
+    <TypeScriptCompile Include="deploy\es\typings.d.ts" />
     <TypeScriptCompile Include="index.tsx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="deploy\es\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

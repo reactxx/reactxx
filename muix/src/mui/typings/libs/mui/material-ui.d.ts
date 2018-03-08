@@ -4,9 +4,6 @@
  * Changes to this file may cause incorrect behavior and will be lost if the code is regenerated.
 */
 
-type _TransitionProps = any
-type TransitionActions = any
-
 declare namespace Muix {
 
 

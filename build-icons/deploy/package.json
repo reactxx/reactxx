@@ -1,6 +1,6 @@
 {
   "name": "reactxx-mdi",
-  "version": "0.1.61",
+  "version": "0.1.62",
   "description": "MDI icons essentials for both react and react-native",
   "registry": "npm",
   "main": "es/index.js",

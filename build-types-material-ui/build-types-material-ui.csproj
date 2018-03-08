@@ -269,6 +269,7 @@
     <TypeScriptCompile Include="material-ui\utils\requirePropFactory.d.ts" />
     <TypeScriptCompile Include="material-ui\utils\withWidth.d.ts" />
     <TypeScriptCompile Include="typings\jss.d.ts" />
+    <TypeScriptCompile Include="typings\material-ui-helper.d.ts" />
     <TypeScriptCompile Include="typings\popper.js.d.ts" />
     <TypeScriptCompile Include="typings\react-popper.d.ts" />
     <TypeScriptCompile Include="typings\react-transition-group\CSSTransition.d.ts" />
