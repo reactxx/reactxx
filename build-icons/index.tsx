@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 import { Play } from 'reactxx-mdi/Play'
 
-const AppComp: React.SFC = props => <h3>{Play} = {''/*MuixIcons.Play*/} </h3>
+const AppComp: React.SFC = props => <h3>{Play} = {MDI.Play} </h3>
 
 export const init = () => ReactDOM.render(<AppComp />, document.getElementById('content'))
 
