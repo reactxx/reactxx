@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { createContext, ConsumerType, ModifierType } from 'reactxx-appstate'
+import { createContext, ConsumerType, ModifierType } from 'reactxx-stateman'
 
 
 interface Context {

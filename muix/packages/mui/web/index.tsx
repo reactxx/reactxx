@@ -7,8 +7,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { create } from 'jss';
 import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
-import { ThemeProvider, ThemeModifier, expandOverrides } from 'reactxx'
-import { ModifierType } from 'reactxx-appstate'
+import { ThemeProvider, ThemeModifier } from 'reactxx'
+import { ModifierType } from 'reactxx-stateman'
 
 
 export * from '../common/createMuiTheme'
@@ -32,13 +32,27 @@ export const AppContainer: React.SFC = props => {
 }
 
 export const ThemeModifierX: ModifierType<ReactXX.ThemeState, ReactXX.ThemeState> = props => <ThemeModifier {...props} render={themeState => {
-  return null
+  return props.children
   //TODO THEME
   //const { theme, overrides} = themeState
   //theme.overrides = expandOverrides(themeState)
   //return <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
 }} />
 
+//Get platform component sheet (from creator and theme)
+const expandOverrides = (themeState: ReactXX.ThemeState) => {
+  if (!themeState) return null
+  const theme = themeState.theme
+  const res = { theme }
+  for (const componentName in themeState) {
+    if (componentName == ReactXX.Consts.themeXPropName) continue
+    const themeComp: ReactXX.ThemeCompX = themeState[componentName]; if (!themeComp) return res
+    const { override, themePar } = themeComp
+    //TODO THEME
+    //res[componentName] = typeof override != 'function' ? override : override(theme, themePar)
+  }
+  return res
+}
 
 type webKeys<R extends ReactXX.Shape> = ReactXX.getWeb<R> | keyof ReactXX.getCommon<R>
 

@@ -1,12 +1,10 @@
 import React from 'react'
 import warning from 'warning'
 
-import { createContext, ModifierType } from 'reactxx-appstate'
+import { createContext, ModifierType, ConsumerType } from 'reactxx-stateman'
 
 import { toPlatformSheet } from './index'
 import { themePars } from './withStyles'
-
-export { ConsumerType } from 'reactxx-appstate'
 
 const { Provider, Modifier, Consumer } = createContext<ReactXX.ThemeState>(() => ({ theme: { type: 'ThemeX' } }))
 
@@ -21,20 +19,6 @@ export const ThemeConsumer = Consumer
 //  </ThemeModifier>) as React.ComponentType<T>
 //}
 
-//Get platform component sheet (from creator and theme)
-export const expandOverrides = (themeState: ReactXX.ThemeState) => {
-  if (!themeState) return null
-  const theme = themeState.theme
-  const res = { theme }
-  for (const componentName in themeState) {
-    if (componentName == ReactXX.Consts.themeXPropName) continue
-    const themeComp: ReactXX.ThemeCompX = themeState[componentName]; if (!themeComp) return res
-    const { override, themePar } = themeComp
-    //TODO THEME
-    //res[componentName] = typeof override != 'function' ? override : override(theme, themePar)
-  }
-  return res
-}
 
 export const themeCompModifier = <Shape1 extends ReactXX.Shape, Shape2 extends ReactXX.Shape = never, Shape3 extends ReactXX.Shape = never>(name1: ReactXX.getNameType<Shape1>, comp1: ReactXX.ThemeCompCreatorX<Shape1>, name2?: ReactXX.getNameType<Shape2>, comp2?: ReactXX.ThemeCompCreatorX<Shape2>, name3?: ReactXX.getNameType<Shape3>, comp3?: ReactXX.ThemeCompCreatorX<Shape3>) => (themeState: ReactXX.ThemeState) => {
   const theme = themeState.theme

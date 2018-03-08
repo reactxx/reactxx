@@ -143,8 +143,8 @@
     <TypeScriptCompile Include="packages\mui\web\Button\Button.tsx" />
     <TypeScriptCompile Include="packages\mui\web\index-d.d.ts" />
     <TypeScriptCompile Include="packages\reactxx\common\animation.tsx" />
-    <TypeScriptCompile Include="packages\appstate\contextapi-orig.ts" />
-    <TypeScriptCompile Include="packages\appstate\index.ts" />
+    <TypeScriptCompile Include="packages\stateman\contextapi-orig.ts" />
+    <TypeScriptCompile Include="packages\stateman\index.ts" />
     <TypeScriptCompile Include="packages\reactxx\common\media-q.ts" />
     <TypeScriptCompile Include="packages\reactxx\common\components.ts" />
     <TypeScriptCompile Include="packages\reactxx\common\theme.tsx" />

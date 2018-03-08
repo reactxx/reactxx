@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom'
 //import App from './responsible-drawer'
 //import App from '../common/reactxx/doc/home'
 //import App from '../common/mui/button-demo'
-//import App from '../web/appstate/index'
+//import App from '../web/stateman/index'
 //import App from '../common/reactxx/index'
 import App from '../common/animation/test-animation'
 

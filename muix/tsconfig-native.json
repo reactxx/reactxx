@@ -11,7 +11,7 @@
     "paths": {
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ],
       "reactxx": [ "packages/reactxx/native/index" ],
-      "reactxx-appstate": [ "packages/appstate/index" ],
+      "reactxx-stateman": [ "packages/stateman/index" ],
 
       "reactxx-mui/*": [ "packages/mui/native/*" ],
 

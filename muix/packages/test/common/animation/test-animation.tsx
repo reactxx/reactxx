@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } from 'reactxx'
-import { createContext, ConsumerType } from 'reactxx-appstate'
+import { createContext, ConsumerType } from 'reactxx-stateman'
 
 // (## 1 ##) Provider, Consumer component for syncing Open x Close buttons with drawer state
 const { Provider, Consumer } = createContext<testAnimation.RenderProps>(null)
