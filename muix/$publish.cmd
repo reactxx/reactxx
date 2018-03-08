@@ -15,7 +15,7 @@ call %root%$publish_ components true
 
 call %root%$publish_ styles
 rmdir %root%deploy\styles\es\native\fonts /s /q
-xcopy %root%packages\styles\native\fonts %root%deploy\styles\es\native\fonts /s /q /i 
+xcopy %root%src\styles\native\fonts %root%deploy\styles\es\native\fonts /s /q /i 
 
 call %root%$publish_ primitives
 call %root%$publish_ test

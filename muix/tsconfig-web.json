@@ -6,26 +6,17 @@
     "inlineSourceMap": true,
     "inlineSources": true,
     "importHelpers": true,
-    "rootDir": "packages",
+    "rootDir": "src",
     "outDir": "deploy/lib",
 
     "baseUrl": ".",
     "paths": {
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/index" ],
-      "reactxx-mui/*": [ "packages/mui/web/*" ],
-      "reactxx-stateman": [ "packages/stateman/index" ],
+      "reactxx-mui/*": [ "src/mui/web/*" ],
+      "reactxx-stateman": [ "src/stateman/index" ],
 
-      "reactxx": [ "packages/reactxx/web/index" ],
-      "reactxx/web": [ "packages/reactxx/web/index" ],
-
-      "muix-styles/web": [ "packages/styles/web/index" ],
-      "muix-styles/native": [ "packages/styles/native/index" ],
-      "muix-styles": [ "packages/styles/native/index" ],
-
-      "muix-primitives": [ "packages/primitives/web/index" ],
-
-      "muix-components/*": [ "packages/components/web/*" ],
-      "test/*": [ "packages/test/*" ]
+      "reactxx": [ "src/reactxx/web/index" ],
+      "reactxx/web": [ "src/reactxx/web/index" ],
     },
 
     //"esModuleInterop": true,
@@ -48,7 +39,7 @@
     ]
   },
   "include": [
-    "packages/**/*",
+    "src/**/*",
     "node_modules/reactxx-mdi/typings.d.ts",
     "node_modules/fela/index.d.ts"
     //"node_modules/@types/reactxx/**/*"

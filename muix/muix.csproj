@@ -77,8 +77,8 @@
     <Content Include="deploy\reactxx\README.md" />
     <Content Include="deploy\mui\package.json" />
     <Content Include="deploy\mui\README.md" />
-    <Content Include="deploy\appstate\package.json" />
-    <Content Include="deploy\appstate\README.md" />
+    <Content Include="deploy\stateman\package.json" />
+    <Content Include="deploy\stateman\README.md" />
     <None Include="gulpfile.js_" />
     <Content Include="index.html" />
     <Content Include="package.json" />

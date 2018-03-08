@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es2017",
-    "rootDir": "packages",
+    "rootDir": "src",
     "outDir": "deploy/es",
 
     //"declaration": true,
@@ -10,24 +10,9 @@
     "baseUrl": ".",
     "paths": {
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ],
-      "reactxx": [ "packages/reactxx/native/index" ],
-      "reactxx-stateman": [ "packages/stateman/index" ],
-
-      "reactxx-mui/*": [ "packages/mui/native/*" ],
-
-      "muix-styles/web": [ "packages/styles/web/index" ],
-      "muix-styles/native": [ "packages/styles/native/index" ],
-      "muix-styles": [ "packages/styles/native/index" ],
-
-      "muix-primitives": [ "packages/primitives/native/index" ],
-
-
-      "muix-components/*": [ "packages/components/native/*" ],
-      //"muix-components/current/*": [ "packages/components/web/*" ],
-      //"muix-components/common/*": [ "packages/components/common/*" ],
-      //"muix-components/native/*": [ "packages/components/native/*" ],
-
-      "test/*": [ "packages/test/*" ]
+      "reactxx": [ "src/reactxx/native/index" ],
+      "reactxx-stateman": [ "src/stateman/index" ],
+      "reactxx-mui/*": [ "src/mui/native/*" ],
     },
 
     "importHelpers": true, //https://github.com/facebook/react-native/issues/16858
@@ -49,7 +34,7 @@
     ]
   },
   "include": [
-    "packages/**/*",
+    "src/**/*",
     "node_modules/reactxx-mdi/es/typings.d.ts",
     "node_modules/fela/index.d.ts"
   ]

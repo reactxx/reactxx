@@ -1,9 +1,0 @@
-{
-  "name": "muix-components",
-  "version": "0.1.0",
-  "description": "cross platform components",  
-  "registry": "npm",
-  "jspmPackage": true,
-  "dependencies": {
-  }
-}
