@@ -1,7 +1,7 @@
 {
-  "name": "muix-components",
+  "name": "reactxx",
   "version": "0.1.0",
-  "description": "cross platform components",  
+  "description": "Framework which enables creation of visual components for both react and react-native",
   "registry": "npm",
   "jspmPackage": true,
   "dependencies": {

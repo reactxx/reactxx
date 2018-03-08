@@ -1,7 +1,7 @@
 {
-  "name": "muix-components",
+  "name": "reactxx-mui",
   "version": "0.1.0",
-  "description": "cross platform components",  
+  "description": "material-ui for both native and web",  
   "registry": "npm",
   "jspmPackage": true,
   "dependencies": {
