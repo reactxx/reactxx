@@ -1,12 +1,12 @@
 # reactxx-mdi
 MDI essentials for both react and react-native (based on https://materialdesignicons.com/)
 
-Single npm package for both EXPO REACT NATIVE project and REACT web project
 
-
-## Installation for both Expo project and react Web project
+## Installation
 
 ```npm install reactxx-mdi --save```
+
+reactxx-mdi is common npm package for both EXPO react-native project and react web project
 
 ## For web
 
@@ -47,4 +47,3 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 const App = props => <MaterialCommunityIcons name={MDI.Play}/>
 export default App
 ```
-
