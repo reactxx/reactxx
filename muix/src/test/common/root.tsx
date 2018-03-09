@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 
 //import Icons from './icons/index'
 //import TypographyTest from './styles/typography'
@@ -8,7 +8,7 @@ import React from 'react'
 //import ResponsibleDrawer from './components/responsible-drawer'
 //import Shadows from './shadows/index'
 //import ComponentX from './styles/component-x'
-import Animation from './animation/test-animation'
+import Animation from './reactxx/responsible-drawer/test-animation'
 import ReactXX from './reactxx/index'
 //import ButtonDemo, { overridesNew } from './components/button-demo'
 

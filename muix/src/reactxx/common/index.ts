@@ -1,5 +1,5 @@
 // Framework for creating components in both react and react-native.
-import React from 'react'
+import * as React from 'react'
 import ReactN from 'react-native'
 import PropTypes from 'prop-types'
 import warning from 'warning'

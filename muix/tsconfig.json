@@ -1,24 +1,26 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es5",
+    "module": "umd",
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "importHelpers": true,
     "rootDir": "src",
-    "outDir": "deploy/es",
-
-    "declaration": true,
+    "outDir": "deploy/lib",
 
     "baseUrl": ".",
     "paths": {
-      "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ],
-
-      "reactxx": [ "src/reactxx/native/index" ],
-      "reactxx/web": [ "src/reactxx/web/index" ],
-
+      "reactxx-mdi/*": [ "node_modules/reactxx-mdi/index" ],
+      "reactxx-mui/*": [ "src/mui/web/*" ],
       "reactxx-stateman": [ "src/stateman/index" ],
-      "reactxx-mui/*": [ "src/mui/native/*" ]
+
+      "reactxx": [ "src/reactxx/web/index" ],
+      "reactxx/web": [ "src/reactxx/web/index" ]
     },
 
-    "importHelpers": true, //https://github.com/facebook/react-native/issues/16858
+    //"esModuleInterop": true,
+
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
     "downlevelIteration": true,
@@ -29,7 +31,7 @@
 
     "experimentalDecorators": true,
     "noImplicitAny": false,
-    "jsx": "react-native",
+    "jsx": "react",
     "lib": [
       "dom",
       "es2015",
@@ -38,7 +40,11 @@
   },
   "include": [
     "src/**/*",
-    "node_modules/reactxx-mdi/es/typings.d.ts",
+    "node_modules/reactxx-mdi/typings.d.ts",
     "node_modules/fela/index.d.ts"
+    //"node_modules/@types/reactxx/**/*"
+    //"node_modules/popper.js/index.d.ts",
+    //"node_modules/react-popper/react-popper.d.ts"
+    //"node_modules/material-ui/**/*"
   ]
 }

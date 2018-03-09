@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import ReactN from 'react-native'
 
 import { View, Text, ScrollView, Animated, TouchableWithoutFeedback } from 'react-native'

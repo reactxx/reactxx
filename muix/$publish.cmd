@@ -17,9 +17,3 @@ call %root%$publish_ reactxx
 call %root%$publish_ mui true
 rmdir %root%deploy\mui\es\native\fonts /s /q
 xcopy %root%src\mui\native\fonts %root%deploy\mui\es\native\fonts /s /q /i 
-
-
-
-
-
-

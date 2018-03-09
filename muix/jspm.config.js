@@ -26,7 +26,7 @@ SystemJS.config({
 
     "reactxx/web": "deploy/lib/reactxx/web/index",
     "reactxx": "deploy/lib/reactxx/web/index",
-    "reactxx-appstate": "deploy/lib/appstate/index",
+    "reactxx-stateman": "deploy/lib/stateman/index",
     "reactxx-mui": "deploy/lib/mui/web",
     "reactxx-shadows": "npm:reactxx-shadows@0.1.17",
     "reactxx-mdi": "npm:reactxx-mdi@0.1.58",

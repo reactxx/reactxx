@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 
 import { createContext, ConsumerType, ModifierType } from 'reactxx-stateman'
 

@@ -5,8 +5,6 @@
     "rootDir": "src",
     "outDir": "deploy/es",
 
-    "declaration": true,
-
     "baseUrl": ".",
     "paths": {
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ],

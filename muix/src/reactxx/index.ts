@@ -76,11 +76,11 @@ export const createContext = <T>(_defaultValue: T | (() => T), _channelId?: stri
     mModifiedValue: T
     mModify: (data: T) => T //freeze modify prop
 
-    //provider fields (for Provider and Modifier)
+    //provider fields
     pSubscribers: Subscription<T>[]
     pChildContext
 
-    //consumer fields (for Consumer and Modifier)
+    //consumer fields
     sChannel: Channel<T>
     sUnsubscribe: Unsubscribe
     sSelector: (data: T) => {} //freeze selector prop
@@ -97,20 +97,14 @@ export const createContext = <T>(_defaultValue: T | (() => T), _channelId?: stri
 
     //*************** CONSUMER part (with SELECTOR possibility)
 
-    //shouldComponentUpdate(nextProps, nextState) {
-    //  if (this.role === Roles.provider) return true
-    //  return !shallowEqual(this.state, nextState)
-    //}
-
     componentDidMount() {
       if (this.role === Roles.provider) return
-      const { sChannel } = this
+      const { sSelector, pSubscribers, sChannel, state: { value }, mModify } = this
       if (!sChannel) {
         warning(this.props.quiet, '<Consumer> or <Modifier> was rendered outside the context of its <Provider>')
         return
       }
       this.sUnsubscribe = sChannel.subscribe(sBroadcastValue => {
-        const { sSelector, pSubscribers, state: { value }, mModify } = this
         if (this.role === Roles.modifier) { //modifier
           sBroadcastValue = mModify ? mModify(sBroadcastValue) : sBroadcastValue
           if (this.mModifiedValue !== sBroadcastValue) {

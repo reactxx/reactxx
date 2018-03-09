@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 
 import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } from 'reactxx'
 import { createContext, ConsumerType } from 'reactxx-stateman'

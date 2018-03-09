@@ -1,9 +1,8 @@
 {
   "name": "reactxx",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "Framework which enables creation of visual components for both react and react-native",
   "registry": "npm",
   "jspmPackage": true,
-  "dependencies": {
-  }
+  "dependencies": {}
 }
