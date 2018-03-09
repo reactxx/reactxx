@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "umd",
-    "outDir": "build/dist",
+    "outDir": "deploy/lib",
     "moduleResolution": "node",
     "target": "es5",
     "lib": [ "es6", "dom" ],
