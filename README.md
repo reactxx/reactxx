@@ -17,3 +17,6 @@ Framework which enables creation of visual components for both **react** and **r
 - [ ] move CSS in JS media query extension to helper package
 - [x] simple primitives (Text, View, Icon, ScrollView, AnimatedText, AnimatedView, AnimatedIcon, AnimatedScrollView)
 
+
+
+[![Edit reactxx-kitchen-sink](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/reactxx/reactxx/tree/master/reactxx-kitchen-sink?initialpath=%2Froot&module=%2Fsrc%2Froot%2Fapp.tsx)
