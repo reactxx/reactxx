@@ -1,16 +1,16 @@
 import * as React from 'react'
 
 import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } from 'reactxx'
-import { createContext, ConsumerType } from 'reactxx-stateman'
+import { createContext, ConsumerType as StateConsumerType } from 'reactxx-stateman'
 
 // (## 1 ##) Provider, Consumer component for syncing Open x Close buttons with drawer state
-const { Provider, Consumer } = createContext<testAnimation.RenderProps>(null)
+const { Provider, Consumer } = createContext<ReactXXResponsibleDrawer.RenderProps>(null)
 
-type TestConsumerType = ConsumerType<testAnimation.RenderProps, testAnimation.RenderProps>
-type TestAnimationType = React.ComponentClass<ReactXX.PropsX<testAnimation.Shape>> & { LayoutChanged?: TestConsumerType }
+type ConsumerType = StateConsumerType<ReactXXResponsibleDrawer.RenderProps, ReactXXResponsibleDrawer.RenderProps>
+type AnimationType = React.ComponentClass<ReactXX.PropsX<ReactXXResponsibleDrawer.Shape>> & { LayoutChanged?: ConsumerType }
 
-/*testAnimation sheet creator pars: defined in const ResponsibleDrawer = withStyles*/
-const sheet: ReactXX.SheetCreatorX<testAnimation.Shape> = (theme, themePar) => ({
+/*ResponsibleDrawer sheet creator pars: defined in const ResponsibleDrawer = withStyles*/
+const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, themePar) => ({
 
   // (## 3 ##) define ResponsibleDrawer sheet, parametrized by theme (not used here) and component's themePar
 
@@ -98,7 +98,7 @@ const sheet: ReactXX.SheetCreatorX<testAnimation.Shape> = (theme, themePar) => (
   closeButton: {},
 })
 
-const responsibleDrawer: ReactXX.CodeSFC<testAnimation.Shape> = props => {
+const responsibleDrawer: ReactXX.CodeSFC<ReactXXResponsibleDrawer.Shape> = props => {
   const { classes, mergeRulesetWithOverrides, theme, children, style, className, animations, mediaq, drawer: drawerNode, ...rest } = props
 
   const mediaState = mediaq.state // (## 2 ##) actual media width
@@ -151,8 +151,8 @@ const responsibleDrawer: ReactXX.CodeSFC<testAnimation.Shape> = props => {
 }
 
 // (## 3 ##) HOC ResponsibleDrawer component with default themePar's (animationDuration etc.)
-const ResponsibleDrawer = (withStyles<testAnimation.Shape>(testAnimation.Consts.Drawer, sheet, { animationDuration: 300, drawerWidths: [250, 300, 400], breakpoints: [480, 1024] })(responsibleDrawer)) as TestAnimationType
-ResponsibleDrawer.LayoutChanged = Consumer as TestConsumerType
+const ResponsibleDrawer = (withStyles<ReactXXResponsibleDrawer.Shape>(ReactXXResponsibleDrawer.Consts.Drawer, sheet, { animationDuration: 300, drawerWidths: [250, 300, 400], breakpoints: [480, 1024] })(responsibleDrawer)) as AnimationType
+ResponsibleDrawer.LayoutChanged = Consumer as ConsumerType
 
 
 

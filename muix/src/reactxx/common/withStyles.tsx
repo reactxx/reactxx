@@ -84,8 +84,8 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
     }
 
   }
-  hoistNonReactStatics(Styled, Component as any)
 
+  hoistNonReactStatics(Styled, Component as any)
 
   return (props => <ThemeModifier modify={props.modifyThemeState} selector={modifierSelector(name)} render={selectedThemeState =>
     <Styled {...selectedThemeState} {...props} />

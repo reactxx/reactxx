@@ -7,12 +7,9 @@
     "deepmerge": "^2.0.1",
     "expo": "25.0.0",
     "material-ui": "^1.0.0-beta.25",
-    "muix": "^0.1.63",
-    "muix-components": "^0.1.78",
-    "muix-icons": "^0.1.58",
-    "muix-primitives": "^0.1.69",
-    "muix-shadows": "^0.1.17",
-    "muix-styles": "^0.1.74",
+    "reactxx": "^0.1.11",
+    "reactxx-stateman": "^0.1.21",
+    "reactxx-mdi": "^0.1.62",
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "recompose": "^0.26.0",
@@ -20,10 +17,10 @@
     "warning": "^3.0.0"
   },
   "devDependencies": {
-    "@types/expo": "https://github.com/mui-x/muix/blob/master/types/expo/types-expo-0.1.1.tgz?raw=true",
-    "@types/react": "https://github.com/mui-x/muix/blob/master/types/react/types-react-0.1.1.tgz?raw=true",
+    "@types/expo": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/expo/types-expo-0.1.1.tgz",
+    "@types/react": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/react/types-react-0.1.1.tgz",
+    "@types/react-native": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/react-native/types-react-native-0.1.1.tgz",
     "@types/react-dom": "^16.0.3",
-    "@types/react-native": "https://github.com/mui-x/muix/blob/master/types/react-native/types-react-native-0.1.1.tgz?raw=true",
     "babel-plugin-module-resolver": "^3.0.0"
   },
   "jspm": {

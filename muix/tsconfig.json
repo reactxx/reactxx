@@ -19,7 +19,7 @@
       "reactxx/web": [ "src/reactxx/web/index" ]
     },
 
-    //"esModuleInterop": true,
+    "esModuleInterop": true,
 
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
@@ -28,9 +28,9 @@
     "strict": true,
     "noImplicitReturns": true,
     "strictFunctionTypes": false,
-
     "experimentalDecorators": true,
     "noImplicitAny": false,
+
     "jsx": "react",
     "lib": [
       "dom",

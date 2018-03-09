@@ -9,12 +9,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7FBE4680-8F69-417A-9163-98D24A58B8EF}</ProjectGuid>
+    <ProjectGuid>{484B0FEE-0B6A-4396-9919-015A2DBC9172}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>muix</RootNamespace>
-    <AssemblyName>muix</AssemblyName>
+    <RootNamespace>reactxx_kitchen_sink</RootNamespace>
+    <AssemblyName>reactxx-kitchen-sink</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -68,47 +68,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="%24blacklist.js" />
-    <Content Include=".babelrc" />
-    <Content Include="app.json" />
-    <Content Include="assets\icon.png" />
-    <Content Include="assets\splash.png" />
-    <Content Include="deploy\reactxx\package.json" />
-    <Content Include="deploy\reactxx\README.md" />
-    <Content Include="deploy\mui\package.json" />
-    <Content Include="deploy\mui\README.md" />
-    <Content Include="deploy\stateman\package.json" />
-    <Content Include="deploy\stateman\README.md" />
-    <Content Include="%24publish - Copy.cmd" />
-    <None Include="gulpfile.js_" />
-    <Content Include="index.html" />
     <Content Include="package.json" />
-    <Content Include="%24publish.cmd" />
-    <Content Include="%24publish_.cmd" />
-    <Content Include="%24refresh-libs.cmd" />
-    <Content Include="%24compile.cmd" />
-    <Content Include="%24start.cmd" />
     <None Include="packages.config" />
-    <Content Include="README.md" />
-    <Content Include="StyleSheet1.css" />
-    <Content Include="tsconfig-native.json" />
-    <Content Include="tsconfig-web.json" />
     <Content Include="tsconfig.json" />
-    <Content Include="%24refresh.cmd" />
-    <Content Include="src\doc\home.md" />
-    <Content Include="src\doc\home - Copy.md" />
-    <Content Include="src\mui\native\fonts\Roboto-Light.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="src\mui\native\fonts\Roboto-Medium.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="src\mui\native\fonts\Roboto-Regular.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="src\stateman\README.md" />
-    <Content Include="src\reactxx\README.md" />
-    <Content Include="src\mui\README.md" />
+    <Content Include="tsconfig.test.json" />
+    <Content Include="tslint.json" />
+    <Content Include="README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -117,80 +82,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="jspm.config.js" />
+    <Content Include="src\logo.svg" />
+    <Content Include="src\registerServiceWorker.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\reactxx\typings\animation.d.ts" />
-    <TypeScriptCompile Include="src\doc\home.tsx" />
-    <TypeScriptCompile Include="src\mui\common\createTypography.ts" />
-    <TypeScriptCompile Include="src\mui\common\createMuiTheme.ts" />
-    <TypeScriptCompile Include="src\mui\native\ButtonBase\ButtonBase.tsx" />
-    <TypeScriptCompile Include="src\mui\native\Button\Button.tsx" />
-    <TypeScriptCompile Include="src\mui\native\expoLoadFonts.ts" />
-    <TypeScriptCompile Include="src\mui\native\index.tsx" />
-    <TypeScriptCompile Include="src\mui\typings\Button-d.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\ButtonBase-d.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\theme.d.ts" />
-    <TypeScriptCompile Include="src\mui\web\ButtonBase\ButtonBase.tsx" />
-    <TypeScriptCompile Include="src\mui\web\Button\Button.tsx" />
-    <TypeScriptCompile Include="src\mui\web\index-d.d.ts" />
-    <TypeScriptCompile Include="src\reactxx\common\animation.tsx" />
-    <TypeScriptCompile Include="src\stateman\index.ts" />
-    <TypeScriptCompile Include="src\reactxx\common\media-q.ts" />
-    <TypeScriptCompile Include="src\reactxx\common\components.ts" />
-    <TypeScriptCompile Include="src\reactxx\common\theme.tsx" />
-    <TypeScriptCompile Include="src\reactxx\common\index.ts" />
-    <TypeScriptCompile Include="src\reactxx\common\withStyles.tsx" />
-    <TypeScriptCompile Include="src\reactxx\native\animation.tsx" />
-    <TypeScriptCompile Include="src\reactxx\native\components.tsx" />
-    <TypeScriptCompile Include="src\reactxx\native\index.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\media-q.d.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\components.d.ts" />
-    <TypeScriptCompile Include="src\reactxx\native\media-q.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\common-style.d.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\sheets.d.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\theme.d.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\typings.d.ts" />
-    <TypeScriptCompile Include="src\reactxx\web\animation.tsx" />
-    <TypeScriptCompile Include="src\reactxx\web\fela.tsx" />
-    <TypeScriptCompile Include="src\reactxx\web\components.tsx" />
-    <TypeScriptCompile Include="src\reactxx\web\index.ts" />
-    <TypeScriptCompile Include="src\reactxx\web\media-q.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\popper.js.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\jss.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\react-popper.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\react-transition-group\CSSTransition.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\react-transition-group\index.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\react-transition-group\Transition.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\react-transition-group\TransitionGroup.d.ts" />
-    <TypeScriptCompile Include="src\test\common\mui\button-demo.tsx" />
-    <TypeScriptCompile Include="src\test\common\reactxx\responsible-drawer\responsible-drawer-d.d.ts" />
-    <TypeScriptCompile Include="src\test\common\reactxx\responsible-drawer\responsible-drawer.tsx" />
-    <TypeScriptCompile Include="src\test\common\stateman\index.tsx" />
-    <TypeScriptCompile Include="src\test\web\appstate\index.tsx" />
-    <TypeScriptCompile Include="src\test\common\reactxx\doc\home.tsx" />
-    <TypeScriptCompile Include="src\test\common\reactxx\doc\home-d.d.ts" />
-    <TypeScriptCompile Include="src\test\common\reactxx\index.tsx" />
-    <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />
-    <TypeScriptCompile Include="src\test\common\shadows\index.tsx" />
-    <TypeScriptCompile Include="src\test\native\animation.tsx" />
-    <TypeScriptCompile Include="src\test\native\App.tsx" />
-    <TypeScriptCompile Include="src\test\common\root.tsx" />
-    <TypeScriptCompile Include="src\test\web\index.tsx" />
-    <TypeScriptCompile Include="src\mui\typings\libs\mui\material-ui-helper.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\mui\material-ui.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\mui\material-ui-ex.d.ts" />
-    <TypeScriptCompile Include="src\mui\web\index.tsx" />
+    <TypeScriptCompile Include="src\App.test.tsx" />
+    <TypeScriptCompile Include="src\App.tsx" />
+    <TypeScriptCompile Include="src\index.tsx" />
+    <TypeScriptCompile Include="src\registerServiceWorker.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\test\common\animation\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -206,9 +112,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>53247</DevelopmentServerPort>
+          <DevelopmentServerPort>53647</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53247/</IISUrl>
+          <IISUrl>http://localhost:53308/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -225,10 +131,6 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
-  <PropertyGroup>
-    <PostBuildEvent>rem call "c:\Program Files (x86)\Microsoft SDKs\TypeScript\2.6\tsc.exe" --p d:\muix\muix\tsconfig-web.json
-rem call "c:\Program Files (x86)\Microsoft SDKs\TypeScript\2.6\tsc.exe" --p d:\muix\muix\tsconfig-native.json</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -310,3 +310,5 @@ build-types-material-ui/material-ui
 !build-types-material-ui/dts-generator.js
 !build-types-material-ui/node_modules$dts-generator$index.js
 !build-icons/design/mdi-react-lm/scripts/generate.js
+
+reactxx-kitchen-sink/build

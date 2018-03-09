@@ -14,7 +14,7 @@
           "reactxx": "./deploy/es/reactxx/native",
           "^reactxx-mdi/(.+)": "reactxx-mdi",
           "reactxx-mui": "./deploy/es/mui/native",
-          "reactxx-appstate": "./deploy/es/appstate"
+          "reactxx-stateman": "./deploy/es/stateman"
         }
       }
     ]

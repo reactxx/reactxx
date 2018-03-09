@@ -7,9 +7,10 @@
 
     "baseUrl": ".",
     "paths": {
-      "muix": [ "node_modules/muix/es/root" ],
-      "muix-icons/*": [ "node_modules/muix-icons/es/index" ]
+      "reactxx-mdi/*": [ "node_modules/reactxx-mdi/index" ]
     },
+
+    "esModuleInterop": true,
 
     "importHelpers": true, //https://github.com/facebook/react-native/issues/16858
     "allowSyntheticDefaultImports": true,
@@ -29,10 +30,8 @@
   },
   "include": [
     "src/**/*",
-    "node_modules/muix-icons/es/typings.d.ts",
-    "node_modules/muix-styles/typings/**/*",
-    "node_modules/muix-components/typings/**/*",
-    "node_modules/muix-primitives/typings/**/*"
+    "node_modules/reactxx-mdi/typings.d.ts",
+    "node_modules/reactxx/typings/**/*"
   ],
   "exclude": [
     "jspm_packages",

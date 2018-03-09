@@ -1,7 +1,7 @@
-declare namespace testAnimation {
+declare namespace ReactXXResponsibleDrawer {
 
   const enum Consts {
-    Drawer = 'test$animation$drawer'
+    Drawer = 'comps$responsibledrawer'
   }
 
   interface RenderProps {
@@ -32,9 +32,9 @@ declare namespace testAnimation {
 
 declare namespace ReactXX {
   interface SheetsX {
-    [testAnimation.Consts.Drawer]?: ReactXX.PartialSheetX<testAnimation.Shape>
+    [ReactXXResponsibleDrawer.Consts.Drawer]?: ReactXX.PartialSheetX<ReactXXResponsibleDrawer.Shape>
   }
   interface Shapes {
-    [testAnimation.Consts.Drawer]?: testAnimation.Shape
+    [ReactXXResponsibleDrawer.Consts.Drawer]?: ReactXXResponsibleDrawer.Shape
   }
 }

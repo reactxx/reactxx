@@ -12,7 +12,7 @@ import * as React from 'react'
 import { createContext, ConsumerType } from 'reactxx-stateman'
 
 //Global APP state
-interface State { colors: { background: string, color: string }, title: string }
+export interface State { colors: { background: string, color: string }, title: string }
 
 //title and color substate
 interface TextStateProps { color: string; title: string }

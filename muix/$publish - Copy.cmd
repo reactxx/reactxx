@@ -14,6 +14,6 @@ rem *** npm package publishing
 call %root%$publish_ stateman
 call %root%$publish_ reactxx
 
-rem call %root%$publish_ mui true
-rem rmdir %root%deploy\mui\es\native\fonts /s /q
-rem xcopy %root%src\mui\native\fonts %root%deploy\mui\es\native\fonts /s /q /i 
+call %root%$publish_ mui true
+rmdir %root%deploy\mui\es\native\fonts /s /q
+xcopy %root%src\mui\native\fonts %root%deploy\mui\es\native\fonts /s /q /i 

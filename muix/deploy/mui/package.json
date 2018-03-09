@@ -1,6 +1,6 @@
 {
   "name": "reactxx-mui",
-  "version": "0.1.3",
+  "version": "0.1.7",
   "description": "material-ui for both native and web",
   "registry": "npm",
   "jspmPackage": true,

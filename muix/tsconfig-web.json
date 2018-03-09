@@ -19,7 +19,7 @@
       "reactxx/web": [ "src/reactxx/web/index" ]
     },
 
-    //"esModuleInterop": true,
+    "esModuleInterop": true,
 
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
