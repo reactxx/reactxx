@@ -1,6 +1,7 @@
 {
   "name": "reactxx-kitchen-sink",
   "version": "0.1.0",
+  "main": "src/index.tsx",
   "private": true,
   "dependencies": {
     "react": "^16.2.0",
