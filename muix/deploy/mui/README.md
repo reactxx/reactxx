@@ -1,3 +1,3 @@
-# reactxx
+# reactxx-mui
 
 TODO

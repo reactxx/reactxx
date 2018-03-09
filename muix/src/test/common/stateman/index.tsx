@@ -1,5 +1,7 @@
 //******************************************
 // 
+// https://github.com/reactxx/reactxx/blob/master/muix/src/test/common/stateman/index.tsx
+//
 // Both reactxx-stateman and RenderCounter component in this example uses React render props extensively. 
 // See https://reactjs.org/docs/render-props.html for details
 // 
