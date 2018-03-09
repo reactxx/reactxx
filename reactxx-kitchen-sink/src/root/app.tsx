@@ -1,11 +1,13 @@
 import * as React from 'react';
 
+import { Text } from 'reactxx';
+
 class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1 className="App-title">Welcome to React</h1>
-        To get started, edit <code>src/App.tsx</code> and save to reload.
+        <h1 className="App-title">Welcome to React app</h1>
+        <Text>Hallo</Text>
       </div>
     );
   }

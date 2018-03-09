@@ -124,6 +124,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\reactxx\index.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\animation.d.ts" />
     <TypeScriptCompile Include="src\doc\home.tsx" />
     <TypeScriptCompile Include="src\mui\common\createTypography.ts" />

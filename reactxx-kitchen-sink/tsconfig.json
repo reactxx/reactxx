@@ -5,15 +5,18 @@
     "target": "es5",
     "lib": [ "es6", "dom" ],
     "baseUrl": ".",
+    "paths": {
+      "reactxx": [ "node_modules/reactxx/index" ]
+    },
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
+    "importHelpers": true,
 
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
 
     "moduleResolution": "node",
-    "rootDir": "src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": false,
     "noImplicitThis": false,

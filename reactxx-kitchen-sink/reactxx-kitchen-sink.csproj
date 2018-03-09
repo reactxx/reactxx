@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
+    <Content Include="%24refresh.cmd" />
     <None Include="packages.config" />
     <Content Include="tsconfig.json" />
     <Content Include="tsconfig.test.json" />
@@ -82,22 +83,22 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="src\logo.svg" />
-    <Content Include="src\registerServiceWorker.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\App.test.tsx" />
-    <TypeScriptCompile Include="src\App.tsx" />
-    <TypeScriptCompile Include="src\typings.d.ts" />
+    <TypeScriptCompile Include="src\root\app.tsx" />
+    <TypeScriptCompile Include="src\root\registerServiceWorker.ts" />
+    <TypeScriptCompile Include="src\root\typings.d.ts" />
     <TypeScriptCompile Include="src\index.tsx" />
-    <TypeScriptCompile Include="src\registerServiceWorker.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\primitives\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

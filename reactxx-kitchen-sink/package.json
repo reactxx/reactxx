@@ -7,7 +7,8 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts-ts": "2.13.0",
-    "reactxx": "^0.1.11"
+    "reactxx": "^0.1.12",
+    "tslib": "^1.9.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -16,12 +17,10 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
-    "@types/jest": "^22.2.0",
-    "@types/node": "^9.4.7",
     "@types/expo": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/expo/types-expo-0.1.1.tgz",
     "@types/react": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/react/types-react-0.1.1.tgz",
-    "@types/react-native": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/react-native/types-react-native-0.1.1.tgz",
     "@types/react-dom": "^16.0.3",
+    "@types/react-native": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/react-native/types-react-native-0.1.1.tgz",
     "typescript": "^2.7.2"
   }
 }
