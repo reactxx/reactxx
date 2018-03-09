@@ -18,3 +18,6 @@ Inspired by **react 16.3** context api and by @mjackson's polyfill on https://gi
 ### Brings new Modifier component:
 - **Modifier** act like both Provider and Consumer
 - its ```modify``` prop allows modifying current state. Modifier then sends this modified value down to component hiearchy
+
+## Example
+[![Edit 92vp73oj3y](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/92vp73oj3y?module=%2Fsrc%2Fapp.tsx)
