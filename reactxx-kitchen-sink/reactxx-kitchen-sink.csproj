@@ -93,6 +93,13 @@
     <TypeScriptCompile Include="src\root\registerServiceWorker.ts" />
     <TypeScriptCompile Include="src\root\typings.d.ts" />
     <TypeScriptCompile Include="src\index.tsx" />
+    <TypeScriptCompile Include="src\typings\animation.d.ts" />
+    <TypeScriptCompile Include="src\typings\common-style.d.ts" />
+    <TypeScriptCompile Include="src\typings\components.d.ts" />
+    <TypeScriptCompile Include="src\typings\media-q.d.ts" />
+    <TypeScriptCompile Include="src\typings\sheets.d.ts" />
+    <TypeScriptCompile Include="src\typings\theme.d.ts" />
+    <TypeScriptCompile Include="src\typings\typings.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
