@@ -23,5 +23,5 @@ Inspired by **react 16.3** context api and by @mjackson's polyfill on https://gi
 
 [![Edit 92vp73oj3y](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/92vp73oj3y?module=%2Fsrc%2Fapp.tsx)
 
-Both reactxx-stateman and RenderCounter component in following example uses **React render props** extensively. 
-See https://reactjs.org/docs/render-props.html for details
+*Notice: Both reactxx-stateman and RenderCounter component in following example uses **React render props** extensively. 
+See https://reactjs.org/docs/render-props.html for details*
