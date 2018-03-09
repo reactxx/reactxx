@@ -89,17 +89,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\responsible-drawer\responsible-drawer-d.d.ts" />
+    <TypeScriptCompile Include="src\responsible-drawer\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\root\app.tsx" />
     <TypeScriptCompile Include="src\root\registerServiceWorker.ts" />
     <TypeScriptCompile Include="src\root\typings.d.ts" />
     <TypeScriptCompile Include="src\index.tsx" />
-    <TypeScriptCompile Include="src\typings\animation.d.ts" />
-    <TypeScriptCompile Include="src\typings\common-style.d.ts" />
-    <TypeScriptCompile Include="src\typings\components.d.ts" />
-    <TypeScriptCompile Include="src\typings\media-q.d.ts" />
-    <TypeScriptCompile Include="src\typings\sheets.d.ts" />
-    <TypeScriptCompile Include="src\typings\theme.d.ts" />
-    <TypeScriptCompile Include="src\typings\typings.d.ts" />
+    <TypeScriptCompile Include="src\typings\mdi\typings.d.ts" />
+    <TypeScriptCompile Include="src\typings\reactxx\animation.d.ts" />
+    <TypeScriptCompile Include="src\typings\reactxx\common-style.d.ts" />
+    <TypeScriptCompile Include="src\typings\reactxx\components.d.ts" />
+    <TypeScriptCompile Include="src\typings\reactxx\media-q.d.ts" />
+    <TypeScriptCompile Include="src\typings\reactxx\sheets.d.ts" />
+    <TypeScriptCompile Include="src\typings\reactxx\theme.d.ts" />
+    <TypeScriptCompile Include="src\typings\reactxx\typings.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
