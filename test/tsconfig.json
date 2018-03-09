@@ -11,9 +11,9 @@
     },
 
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
 
     "importHelpers": true, //https://github.com/facebook/react-native/issues/16858
-    "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
     "downlevelIteration": true,
     "moduleResolution": "node",

@@ -92,6 +92,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="src\App.test.tsx" />
     <TypeScriptCompile Include="src\App.tsx" />
+    <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\index.tsx" />
     <TypeScriptCompile Include="src\registerServiceWorker.ts" />
   </ItemGroup>
