@@ -99,7 +99,7 @@ const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, the
 })
 
 const responsibleDrawer: ReactXX.CodeSFC<ReactXXResponsibleDrawer.Shape> = props => {
-  const { classes, mergeRulesetWithOverrides, theme, children, style, className, animations, mediaq, drawer: drawerNode } = props
+  const { classes, mergeRulesetWithOverrides, children, className, animations, mediaq, drawer: drawerNode } = props
 
   const mediaState = mediaq.state // (## 2 ##) actual media width
 
