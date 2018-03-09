@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
+    "module": "umd",
     "outDir": "build/dist",
-    "module": "esnext",
+    "moduleResolution": "node",
     "target": "es5",
     "lib": [ "es6", "dom" ],
     "baseUrl": ".",
@@ -16,7 +17,6 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
 
-    "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": false,
     "noImplicitThis": false,
