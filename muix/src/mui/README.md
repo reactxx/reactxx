@@ -6,5 +6,5 @@ material-ui ReactXX bridge and material-ui compatible native components
 
 ## TODO
 - [ ] KitchenSink app for web and native
-- [x] theme
+- [x] share mui theme
 - [x] ButtonBase and Button
