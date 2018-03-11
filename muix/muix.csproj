@@ -128,7 +128,7 @@
     <TypeScriptCompile Include="src\ks\common\responsible-drawer\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\ks\common\root.tsx" />
     <TypeScriptCompile Include="src\ks\native\index.tsx" />
-    <TypeScriptCompile Include="src\ks\typings\mdi\typings.d.ts" />
+    <TypeScriptCompile Include="src\ks\typings\mdi\web.d.ts" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\animation.d.ts" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.d.ts" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\components.d.ts" />
@@ -138,7 +138,6 @@
     <TypeScriptCompile Include="src\ks\typings\reactxx\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\web\index.tsx" />
     <TypeScriptCompile Include="src\ks\web\registerServiceWorker.ts" />
-    <TypeScriptCompile Include="src\reactxx\index.ts" />
     <TypeScriptCompile Include="src\doc\home.tsx" />
     <TypeScriptCompile Include="src\mui\common\createTypography.ts" />
     <TypeScriptCompile Include="src\mui\common\createMuiTheme.ts" />
@@ -153,6 +152,7 @@
     <TypeScriptCompile Include="src\mui\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\mui\web\index-d.d.ts" />
     <TypeScriptCompile Include="src\reactxx\common\animation.tsx" />
+    <None Include="src\reactxx\index.ts_" />
     <TypeScriptCompile Include="src\stateman\index.ts" />
     <TypeScriptCompile Include="src\reactxx\common\media-q.ts" />
     <TypeScriptCompile Include="src\reactxx\common\components.ts" />

@@ -33,6 +33,10 @@
     ]
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "node_modules/reactxx-mdi/es/typings.d.ts"
+  ],
+  "exclude": [
+    "src/ks/typings/mdi/web.d.ts" 
   ]
 }

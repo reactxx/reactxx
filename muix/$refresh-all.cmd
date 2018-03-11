@@ -11,8 +11,6 @@ cd %root%
 call yarn install
 call jspm install
 
-rem rmdir %root%node_modules\@types\node /s /q
-
 rmdir %root%node_modules\@types\react-dom\node_modules  /s /q
 rmdir %root%node_modules\@types\react-transition-group\node_modules  /s /q
 

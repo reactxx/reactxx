@@ -51,4 +51,4 @@ export class BreakPoint {
   }
 }
 
-const breaks: BreakPoint[] = []
+export const breaks: BreakPoint[] = []

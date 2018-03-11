@@ -1,4 +1,4 @@
-import { BreakPoint, ComponentsMediaQLow } from '../common/media-q'
+import { BreakPoint, ComponentsMediaQLow, breaks } from '../common/media-q'
 import { deepMerges } from 'reactxx'
 import warning from 'warning'
 import { Dimensions  } from 'react-native'
@@ -37,8 +37,9 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
 
   getWindowWidth() { return Dimensions.get('window').width}
 
-  
 }
+
+Dimensions.addEventListener('change', arg => breaks.forEach(br => br.notify()))
 
 export class BreakPointNative extends BreakPoint {
   constructor(breakPoint: number) {

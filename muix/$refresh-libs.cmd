@@ -31,6 +31,7 @@ call yarn add %url%expo/types-expo-0.1.1.tgz %url%react/types-react-0.1.1.tgz %u
 
 rmdir %root%node_modules\@types\react-dom\node_modules  /s /q
 rmdir %root%node_modules\@types\react-transition-group\node_modules  /s /q
+
 copy %root%$blacklist.js %root%node_modules\metro\src\blacklist.js /y
 
 rem call %root%$compile
