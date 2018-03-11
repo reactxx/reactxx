@@ -12,6 +12,7 @@
     "reactxx": "^0.1.28",
     "tslib": "1.9.0",
 
+    "fela": "*",
     "fela-dom": "*",
     "fela-plugin-extend": "*",
     "fela-plugin-fallback-value": "*",
