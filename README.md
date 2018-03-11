@@ -12,7 +12,7 @@ Framework which enables creation of visual components for both **react** and **r
 
 ## Examples
 
-- [Responsible drawer](https://codesandbox.io/embed/github/reactxx/reactxx/tree/master/reactxx-kitchen-sink?module=%2Fsrc%2Fcommon%2Fresponsible-drawer%2Fresponsible-drawer.tsx&view=preview) - Code for both Drawer component and example application are 100% cross platform (React Native EXPO app comming soon...)
+- [Responsible drawer](https://codesandbox.io/embed/github/reactxx/reactxx/tree/master/reactxx-kitchen-sink?autoresize=1&codemirror=1&fontsize=12&module=%2Fsrc%2Fcommon%2Fresponsible-drawer%2Fresponsible-drawer.tsx&view=preview) - Code for both Drawer component and example application are 100% cross platform (React Native EXPO app comming soon...)
 
 ## TODO
 
