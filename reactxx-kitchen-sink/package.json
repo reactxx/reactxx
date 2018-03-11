@@ -22,5 +22,11 @@
     "@types/react-dom": "^16.0.3",
     "@types/react-native": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/react-native/types-react-native-0.1.1.tgz",
     "typescript": "^2.7.2"
+  },
+  "jspm": {
+    "name": "reactxx-kitchen-sink",
+    "main": "reactxx-kitchen-sink.js",
+    "dependencies": {},
+    "devDependencies": {}
   }
 }
