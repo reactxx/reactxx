@@ -184,7 +184,8 @@ const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTo
   <ScrollView classes={{ container: { flex: 1, backgroundColor: 'lightgray' } }}>
     <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, padding: 10, backgroundColor: 'gray', }}>
       <Text className={{ flexGrow: 1, color: 'white' }}>{LoremIpsum(2)}</Text>
-      <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />} /> {/* (## 1 ##) rerender Icon when Provider notify (hide x display)*/}
+      {/* (## 1 ##) rerender Icon when Provider notifies (hide x display it): */}
+      <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />} />
     </View>
     <Text className={{ padding: 10 }}>{LoremIpsum(80)}</Text>
   </ScrollView>
@@ -192,12 +193,16 @@ const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTo
 
   <ScrollView classes={{ container: { flex: 1 } }}> {/* content */}
     <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}>
-      <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />} /> {/* (## 1 ##) rerender Icon when Provider notify (hide x display)*/}
+      <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />} />
+      {/* (## 1 ##) rerender Icon when Provider notifies (hide x display) :*/}
       <Text numberOfLines={1} className={{ flexGrow: 1, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(10)}</Text>
       <Text className={{ flexShrink: 0, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(2)}</Text>
     </View>
-    <Text className={{ fontSize: 18, margin: 40, color: 'red' }}>{window.isWeb ? 'Change browser window width' : 'Rotate your device'} to see different Drawer's behavior for MOBILE, TABLET and DESKTOP</Text>
-    <Text className={{ padding: 10, $mediaq: { '800-1248': { color: 'lightgray' } } }}>{LoremIpsum(80)}</Text> {/* just for fun: change to red color for 800px-1248px media width. For web, converted by FELA to @media query CSS selector */}
+    <Text className={{ fontSize: 18, margin: 40, color: 'red' }}>
+      {window.isWeb ? 'Change browser window width' : 'Rotate your device'} to see different Drawer's behavior for MOBILE, TABLET and DESKTOP
+    </Text>
+    {/* just for fun: change to red color for 800px-1248px media width. For web, converted by FELA to @media query CSS selector: */}
+    <Text className={{ padding: 10, $mediaq: { '800-1248': { color: 'lightgray' } } }}>{LoremIpsum(80)}</Text>
   </ScrollView>
 
 </ResponsibleDrawer>
