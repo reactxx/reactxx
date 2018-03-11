@@ -79,7 +79,6 @@
     <Content Include="deploy\mui\README.md" />
     <Content Include="deploy\stateman\package.json" />
     <Content Include="deploy\stateman\README.md" />
-    <Content Include="%24publish - Copy.cmd" />
     <None Include="gulpfile.js_" />
     <Content Include="index.html" />
     <Content Include="package.json" />
@@ -94,7 +93,7 @@
     <Content Include="tsconfig-native.json" />
     <Content Include="tsconfig-web.json" />
     <Content Include="tsconfig.json" />
-    <Content Include="%24refresh.cmd" />
+    <Content Include="%24refresh-all.cmd" />
     <Content Include="src\doc\home.md" />
     <Content Include="src\doc\home - Copy.md" />
     <Content Include="src\mui\native\fonts\Roboto-Light.ttf">
@@ -124,8 +123,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\ks\common\hallo-world.tsx" />
+    <TypeScriptCompile Include="src\ks\common\responsible-drawer\responsible-drawer-d.d.ts" />
+    <TypeScriptCompile Include="src\ks\common\responsible-drawer\responsible-drawer.tsx" />
+    <TypeScriptCompile Include="src\ks\common\root.tsx" />
+    <TypeScriptCompile Include="src\ks\native\index.tsx" />
+    <TypeScriptCompile Include="src\ks\typings\mdi\typings.d.ts" />
+    <TypeScriptCompile Include="src\ks\typings\reactxx\animation.d.ts" />
+    <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.d.ts" />
+    <TypeScriptCompile Include="src\ks\typings\reactxx\components.d.ts" />
+    <TypeScriptCompile Include="src\ks\typings\reactxx\media-q.d.ts" />
+    <TypeScriptCompile Include="src\ks\typings\reactxx\sheets.d.ts" />
+    <TypeScriptCompile Include="src\ks\typings\reactxx\theme.d.ts" />
+    <TypeScriptCompile Include="src\ks\typings\reactxx\typings.d.ts" />
+    <TypeScriptCompile Include="src\ks\web\index.tsx" />
+    <TypeScriptCompile Include="src\ks\web\registerServiceWorker.ts" />
     <TypeScriptCompile Include="src\reactxx\index.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\animation.d.ts" />
     <TypeScriptCompile Include="src\doc\home.tsx" />
     <TypeScriptCompile Include="src\mui\common\createTypography.ts" />
     <TypeScriptCompile Include="src\mui\common\createMuiTheme.ts" />
@@ -149,13 +162,7 @@
     <TypeScriptCompile Include="src\reactxx\native\animation.tsx" />
     <TypeScriptCompile Include="src\reactxx\native\components.tsx" />
     <TypeScriptCompile Include="src\reactxx\native\index.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\media-q.d.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\components.d.ts" />
     <TypeScriptCompile Include="src\reactxx\native\media-q.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\common-style.d.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\sheets.d.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\theme.d.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\typings.d.ts" />
     <TypeScriptCompile Include="src\reactxx\web\animation.tsx" />
     <TypeScriptCompile Include="src\reactxx\web\fela.tsx" />
     <TypeScriptCompile Include="src\reactxx\web\components.tsx" />
@@ -169,8 +176,6 @@
     <TypeScriptCompile Include="src\mui\typings\libs\react-transition-group\Transition.d.ts" />
     <TypeScriptCompile Include="src\mui\typings\libs\react-transition-group\TransitionGroup.d.ts" />
     <TypeScriptCompile Include="src\test\common\mui\button-demo.tsx" />
-    <TypeScriptCompile Include="src\test\common\reactxx\responsible-drawer\responsible-drawer-d.d.ts" />
-    <TypeScriptCompile Include="src\test\common\reactxx\responsible-drawer\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\test\common\stateman\index.tsx" />
     <TypeScriptCompile Include="src\test\web\appstate\index.tsx" />
     <TypeScriptCompile Include="src\test\common\reactxx\doc\home.tsx" />

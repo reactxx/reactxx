@@ -8,7 +8,7 @@ import * as React from 'react'
 //import ResponsibleDrawer from './components/responsible-drawer'
 //import Shadows from './shadows/index'
 //import ComponentX from './styles/component-x'
-import Animation from './reactxx/responsible-drawer/responsible-drawer'
+//import Animation from './reactxx/responsible-drawer/responsible-drawer'
 import ReactXX from './reactxx/index'
 //import ButtonDemo, { overridesNew } from './components/button-demo'
 
@@ -17,7 +17,7 @@ import ReactXX from './reactxx/index'
 //import Button from 'muix-components/Button/Button'
 
 const apps: { title: string; app: React.ComponentType, overridesNew?: Muix.ThemeValueOrCreator<Muix.OverridesX> }[] = [
-  { title: 'Animation', app: Animation },
+  //{ title: 'Animation', app: Animation },
   //{ title: 'ResponsibleDrawer', app: ResponsibleDrawer },
   //{ title: 'Typography', app: TypographyTest },
   //{ title: 'ButtonDemo', app: ButtonDemo, overridesNew },

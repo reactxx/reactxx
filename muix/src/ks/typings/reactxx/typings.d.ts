@@ -7,8 +7,6 @@ declare module 'fela-plugin-rtl' {
   export default def
 }
 
-declare function require(name: string): any;
-
 declare module "fbemitter" {
   export type EventSubscription = any
 }

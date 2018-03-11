@@ -29,7 +29,7 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
     componentWillReceiveProps() {
       this.animations && this.animations.reset()
 
-      const { theme, themePar, override, classes: classesX } = this.props
+      const { theme, themePar = themePars[name], override, classes: classesX } = this.props
 
       //*** get platform component sheet (from creator and actual theme)
       const staticSheet = toPlatformSheet(applyTheme(theme, themePar, createSheetX))

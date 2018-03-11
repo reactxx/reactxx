@@ -27,10 +27,10 @@ renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html
   margin: 0,
   padding: 0,
   overflow: 'hidden',
-}, 'html, body, #content')
+}, 'html, body, #root')
 renderer.renderStatic({fontFamily: 'Roboto'}, 'body')
 renderer.renderStatic({ boxSizing: 'border-box' }, '*')
-renderer.renderStatic({ display: 'flex', flexDirection: 'column', alignItems: 'stretch' }, '#content')
+renderer.renderStatic({ display: 'flex', flexDirection: 'column', alignItems: 'stretch' }, '#root')
 
 render(renderer)
 

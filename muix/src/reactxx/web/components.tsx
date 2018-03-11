@@ -3,10 +3,6 @@ import ReactN from 'react-native'
 import warning from 'warning'
 import { rulesetsToClassNames } from './fela'
 
-import { Play } from 'reactxx-mdi/Play'
-const AppComp: React.SFC = props => <svg><path d={Play} /></svg>
-
-
 export const view: ReactXX.CodeSFCWeb<ReactXX.ViewShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq,...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className)

@@ -2,8 +2,9 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es5",
-    "module": "umd",
+    "module": "commonjs",
     "moduleResolution": "node",
+
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
 
@@ -20,7 +21,7 @@
     "strict": true,
     "strictFunctionTypes": false,
     "noImplicitAny": false,
-    "noUnusedLocals": true,
+    //"noUnusedLocals": true,
 
     "baseUrl": ".",
     "paths": {
@@ -39,12 +40,6 @@
     ]
   },
   "include": [
-    "src/**/*",
-    "node_modules/reactxx-mdi/typings.d.ts",
-    "node_modules/fela/index.d.ts"
-    //"node_modules/@types/reactxx/**/*"
-    //"node_modules/popper.js/index.d.ts",
-    //"node_modules/react-popper/react-popper.d.ts"
-    //"node_modules/material-ui/**/*"
+    "src/**/*"
   ]
 }

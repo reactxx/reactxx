@@ -72,12 +72,12 @@
     <Content Include="index.html" />
     <Content Include="jspm.config.js" />
     <Content Include="package.json" />
-    <Content Include="%24refresh.cmd" />
     <Content Include=".babelrc" />
     <Content Include="app.json" />
     <Content Include="%24compile-run-expo.cmd" />
     <Content Include="%24refresh-libs.cmd" />
     <Content Include="%24compile.cmd" />
+    <Content Include="%24refresh-all.cmd" />
     <None Include="packages.config" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />

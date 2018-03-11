@@ -12,24 +12,16 @@ SystemJS.config({
     }
   },
   map: {
-    "muix-animation": "deploy/lib/animation/web/index",
-    "muix-styles": "deploy/lib/styles/web/index",
-    "muix-styles/web": "deploy/lib/styles/web/index",
-    "muix-primitives": "deploy/lib/primitives/web/index",
-    "muix-components": "deploy/lib/components/web",
-    "jss-props-sort": "npm:jss-props-sort@6.0.0",
-    "jss-default-unit": "npm:jss-default-unit@8.0.2",
-    "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0",
-    "jss-nested": "npm:jss-nested@6.0.1",
-    "jss-camel-case": "npm:jss-camel-case@6.0.0",
-    "jss-global": "npm:jss-global@3.0.0",
-
-    "reactxx/web": "deploy/lib/reactxx/web/index",
+    //"jss-props-sort": "npm:jss-props-sort@6.0.0",
+    //"jss-default-unit": "npm:jss-default-unit@8.0.2",
+    //"jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0",
+    //"jss-nested": "npm:jss-nested@6.0.1",
+    //"jss-camel-case": "npm:jss-camel-case@6.0.0",
+    //"jss-global": "npm:jss-global@3.0.0",
     "reactxx": "deploy/lib/reactxx/web/index",
+    "reactxx/web": "deploy/lib/reactxx/web/index",
     "reactxx-stateman": "deploy/lib/stateman/index",
-    "reactxx-mui": "deploy/lib/mui/web",
-    "reactxx-shadows": "npm:reactxx-shadows@0.1.17",
-    "reactxx-mdi": "npm:reactxx-mdi@0.1.58",
+    "reactxx-mui": "deploy/lib/mui/web"
   }
 });
 
@@ -39,6 +31,8 @@ SystemJS.config({
     "npm:*.json"
   ],
   map: {
+    "reactxx-shadows": "npm:reactxx-shadows@0.1.18",
+    "reactxx-mdi": "npm:reactxx-mdi@0.1.62",
     "fela-plugin-rtl": "npm:fela-plugin-rtl@1.0.6",
     "fela": "npm:fela@6.1.3",
     "fela-dom": "npm:fela-dom@7.0.4",
@@ -65,10 +59,9 @@ SystemJS.config({
     "prop-types": "npm:prop-types@15.6.0",
     "react": "npm:react@16.2.0",
     "react-dom": "npm:react-dom@16.2.0",
-    "reactxx-mdi": "npm:reactxx-mdi@0.1.59",
-    "reactxx-shadows": "npm:reactxx-shadows@0.1.18",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.2",
+    "tslib": "npm:tslib@1.9.0",
     "url": "npm:jspm-nodelibs-url@0.2.1",
     "util": "npm:jspm-nodelibs-util@0.2.2",
     "vm": "npm:jspm-nodelibs-vm@0.2.1",
@@ -81,7 +74,6 @@ SystemJS.config({
     "material-ui": "npm:material-ui@next",
     "react-jss": "npm:react-jss@8.2.1",
     "recompose": "npm:recompose@0.26.0",
-    "tslib": "npm:tslib@1.8.1",
     "warning": "npm:warning@3.0.0"
   },
   packages: {
@@ -618,7 +610,8 @@ SystemJS.config({
         "react-event-listener": "npm:react-event-listener@0.5.3",
         "jss": "npm:jss@9.4.0",
         "normalize-scroll-left": "npm:normalize-scroll-left@0.1.2",
-        "lodash": "npm:lodash@4.17.5"
+        "lodash": "npm:lodash@4.17.5",
+        "react-lifecycles-compat": "npm:react-lifecycles-compat@1.0.2"
       }
     },
     "npm:react-jss@8.2.1": {

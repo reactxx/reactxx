@@ -9,6 +9,7 @@
     "paths": {
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ],
       "reactxx": [ "src/reactxx/native/index" ],
+      "reactxx/web": [ "src/reactxx/web/index" ],
       "reactxx-stateman": [ "src/stateman/index" ],
       "reactxx-mui/*": [ "src/mui/native/*" ]
     },
@@ -32,8 +33,6 @@
     ]
   },
   "include": [
-    "src/**/*",
-    "node_modules/reactxx-mdi/es/typings.d.ts",
-    "node_modules/fela/index.d.ts"
+    "src/**/*"
   ]
 }

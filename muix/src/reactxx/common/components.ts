@@ -1,7 +1,7 @@
 import * as React from 'react'
 import ReactN from 'react-native'
 import { withStyles } from '../common/withStyles'
-import { text, view, icon, scrollView, animatedView, animatedIcon, animatedText, animatedScrollView } from 'reactxx' //import platform specific component code
+import { text, view, icon, scrollView, animatedView, animatedIcon, animatedText, animatedScrollView } from 'reactxx/web' //import platform specific component code
 
 const textSheet: ReactXX.SheetCreatorX<ReactXX.TextShape> = {
   root: {

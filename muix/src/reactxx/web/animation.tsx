@@ -78,7 +78,7 @@ export class Driver<T extends Animation.Shape> extends DriverLow<T> implements A
     const { $delay, $duration } = this.$config
     if (this.runningTimer) clearTimeout(this.runningTimer)
     this.opened = opened
-    this.runningTimer = setTimeout(() => {
+    this.runningTimer = window.setTimeout(() => {
       delete this.runningTimer
       //this.animations.statefullComponent.forceUpdate()
     }, $delay + $duration)
