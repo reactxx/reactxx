@@ -1,4 +1,6 @@
 {
+  "compileOnSave": true,
+
   "compilerOptions": {
 
     "module": "umd",
@@ -11,9 +13,9 @@
 
     "rootDir": "src",
     "jsx": "react",
-    "allowJs": true,
 
-    "sourceMap": false,
+    "inlineSourceMap": true,
+    "inlineSources": true,
     "importHelpers": true,
 
     "strictNullChecks": false,
