@@ -3,6 +3,9 @@ import * as React from 'react'
 import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } from 'reactxx'
 import { createContext, ConsumerType as StateConsumerType } from 'reactxx-stateman'
 
+import { Close } from 'reactxx-mdi/Close'
+import { Menu } from 'reactxx-mdi/Menu'
+
 // (## 1 ##) Provider, Consumer component for syncing Open x Close buttons with drawer state
 const { Provider, Consumer } = createContext<ReactXXResponsibleDrawer.RenderProps>(null)
 
@@ -138,12 +141,12 @@ const responsibleDrawer: ReactXX.CodeSFC<ReactXXResponsibleDrawer.Shape> = props
   return <View className={root}>
     <AnimatedView key={1} className={backDrop} onPress={closeDrawer} />
     <AnimatedView key={2} className={drawer}>
-      <Provider value={{ iconData: MDI.Close, onPress: closeDrawer, style: closeButton }}> {/* (## 1 ##) Notify inner Consumer (i.e. ResponsibleDrawer.LayoutChanged component) that some of props (mainly style) changed */}
+      <Provider value={{ iconData: Close, onPress: closeDrawer, style: closeButton }}> {/* (## 1 ##) Notify inner Consumer (i.e. ResponsibleDrawer.LayoutChanged component) that some of props (mainly style) changed */}
         {drawerNode}
       </Provider>
     </AnimatedView>
     <AnimatedView key={3} className={content}>
-      <Provider value={{ iconData: MDI.Menu, onPress: openDrawer, style: openButton }}>
+      <Provider value={{ iconData: Menu, onPress: openDrawer, style: openButton }}>
         {children}
       </Provider>
     </AnimatedView>
@@ -151,7 +154,7 @@ const responsibleDrawer: ReactXX.CodeSFC<ReactXXResponsibleDrawer.Shape> = props
 }
 
 // (## 3 ##) HOC ResponsibleDrawer component with default themePar's (animationDuration etc.)
-const ResponsibleDrawer = (withStyles<ReactXXResponsibleDrawer.Shape>(ReactXXResponsibleDrawer.Consts.Drawer, sheet, { animationDuration: 300, drawerWidths: [250, 300, 400], breakpoints: [480, 1024] })(responsibleDrawer)) as AnimationType
+const ResponsibleDrawer = (withStyles<ReactXXResponsibleDrawer.Shape>('comps$responsibledrawer' as any/*ReactXXResponsibleDrawer.Consts.Drawer*/, sheet, { animationDuration: 300, drawerWidths: [250, 300, 400], breakpoints: [480, 1024] })(responsibleDrawer)) as AnimationType
 ResponsibleDrawer.LayoutChanged = Consumer as ConsumerType
 
 
@@ -178,7 +181,8 @@ const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTo
       <Text numberOfLines={1} className={{ flexGrow: 1, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(10)}</Text>
       <Text className={{ flexShrink:0, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(2)}</Text>
     </View>
-    <Text className={{ padding: 10, $mediaq: { '800-1248': { color: 'red' } } }}>{LoremIpsum(80)}</Text> {/* just for fun: change to red color for 800px-1248px media width. For web, converted by FELA to @media query CSS selector */}
+    <Text className={{ fontSize: 18, margin: 40, color:'red' }}>{window.isWeb ? 'Change browser window width' : 'Rotate your device'} to see different Drawer's behavior for MOBILE, TABLET and DESKTOP</Text>
+    <Text className={{ padding: 10, $mediaq: { '800-1248': { color: 'lightgray' } } }}>{LoremIpsum(80)}</Text> {/* just for fun: change to red color for 800px-1248px media width. For web, converted by FELA to @media query CSS selector */}
   </ScrollView>
 
 </ResponsibleDrawer>

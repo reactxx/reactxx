@@ -49,9 +49,9 @@ SystemJS.config({
     "process": "npm:jspm-nodelibs-process@0.2.1",
     "react": "npm:react@16.2.0",
     "react-dom": "npm:react-dom@16.2.0",
-    "reactxx": "npm:reactxx@0.1.32",
+    "reactxx": "npm:reactxx@0.1.33",
     "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
-    "reactxx-stateman": "npm:reactxx-stateman@0.1.46",
+    "reactxx-stateman": "npm:reactxx-stateman@0.1.47",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.2",
     "tslib": "npm:tslib@1.9.0",
@@ -62,22 +62,6 @@ SystemJS.config({
     "zlib": "npm:jspm-nodelibs-zlib@0.2.3"
   },
   packages: {
-    "npm:reactxx@0.1.32": {
-      "map": {
-        "fela-dom": "npm:fela-dom@7.0.5",
-        "fela": "npm:fela@6.1.4",
-        "fela-plugin-rtl": "npm:fela-plugin-rtl@1.0.6",
-        "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@5.0.16",
-        "fela-plugin-prefixer": "npm:fela-plugin-prefixer@5.0.17",
-        "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
-        "fela-plugin-lvha": "npm:fela-plugin-lvha@5.0.15",
-        "fela-plugin-unit": "npm:fela-plugin-unit@5.0.15",
-        "fela-plugin-extend": "npm:fela-plugin-extend@6.0.3",
-        "jss-preset-default": "npm:jss-preset-default@4.3.0",
-        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.5.0",
-        "reactxx-stateman": "npm:reactxx-stateman@0.1.46"
-      }
-    },
     "npm:react-dom@16.2.0": {
       "map": {
         "fbjs": "npm:fbjs@0.8.16",
@@ -195,13 +179,6 @@ SystemJS.config({
       "map": {
         "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
         "bowser": "npm:bowser@1.9.2"
-      }
-    },
-    "npm:reactxx-stateman@0.1.46": {
-      "map": {
-        "prop-types": "npm:prop-types@15.6.1",
-        "tslib": "npm:tslib@1.9.0",
-        "warning": "npm:warning@3.0.0"
       }
     },
     "npm:jss-nested@6.0.1": {
@@ -574,6 +551,29 @@ SystemJS.config({
       "map": {
         "inherits": "npm:inherits@2.0.3",
         "safe-buffer": "npm:safe-buffer@5.1.1"
+      }
+    },
+    "npm:reactxx@0.1.33": {
+      "map": {
+        "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
+        "reactxx-stateman": "npm:reactxx-stateman@0.1.47",
+        "fela-plugin-rtl": "npm:fela-plugin-rtl@1.0.6",
+        "fela": "npm:fela@6.1.4",
+        "fela-plugin-prefixer": "npm:fela-plugin-prefixer@5.0.17",
+        "fela-plugin-unit": "npm:fela-plugin-unit@5.0.15",
+        "fela-dom": "npm:fela-dom@7.0.5",
+        "fela-plugin-extend": "npm:fela-plugin-extend@6.0.3",
+        "fela-plugin-lvha": "npm:fela-plugin-lvha@5.0.15",
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.5.0",
+        "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@5.0.16",
+        "jss-preset-default": "npm:jss-preset-default@4.3.0"
+      }
+    },
+    "npm:reactxx-stateman@0.1.47": {
+      "map": {
+        "tslib": "npm:tslib@1.9.0",
+        "prop-types": "npm:prop-types@15.6.1",
+        "warning": "npm:warning@3.0.0"
       }
     }
   }
