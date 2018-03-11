@@ -151,7 +151,7 @@ const responsibleDrawer: ReactXX.CodeSFC<ReactXXResponsibleDrawer.Shape> = props
 }
 
 // (## 3 ##) HOC ResponsibleDrawer component with default themePar's (animationDuration etc.)
-const ResponsibleDrawer = (withStyles<ReactXXResponsibleDrawer.Shape>(ReactXXResponsibleDrawer.Consts.Drawer, sheet, { animationDuration: 300, drawerWidths: [250, 300, 400], breakpoints: [480, 1024] })(responsibleDrawer)) as AnimationType
+const ResponsibleDrawer = (withStyles<ReactXXResponsibleDrawer.Shape>('comps$responsibledrawer'/*ReactXXResponsibleDrawer.Consts.Drawer*/, sheet, { animationDuration: 300, drawerWidths: [250, 300, 400], breakpoints: [480, 1024] })(responsibleDrawer)) as AnimationType
 ResponsibleDrawer.LayoutChanged = Consumer as ConsumerType
 
 

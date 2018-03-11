@@ -31,10 +31,7 @@ declare namespace ReactXXResponsibleDrawer {
 }
 
 declare namespace ReactXX {
-  interface SheetsX {
-    [ReactXXResponsibleDrawer.Consts.Drawer]?: ReactXX.PartialSheetX<ReactXXResponsibleDrawer.Shape>
-  }
   interface Shapes {
-    [ReactXXResponsibleDrawer.Consts.Drawer]?: ReactXXResponsibleDrawer.Shape
+    ['comps$responsibledrawer'/*ReactXXResponsibleDrawer.Consts.Drawer*/]?: ReactXXResponsibleDrawer.Shape
   }
 }
