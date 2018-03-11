@@ -68,6 +68,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="index.html" />
+    <Content Include="jspm.config.js" />
     <Content Include="package.json" />
     <Content Include="%24refresh.cmd" />
     <None Include="packages.config" />
@@ -75,6 +77,7 @@
     <Content Include="tsconfig.test.json" />
     <Content Include="tslint.json" />
     <Content Include="README.md" />
+    <Content Include="tsconfig - Copy.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -89,12 +92,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\responsible-drawer\responsible-drawer-d.d.ts" />
-    <TypeScriptCompile Include="src\responsible-drawer\responsible-drawer.tsx" />
+    <TypeScriptCompile Include="src\common\hallo-world.tsx" />
+    <TypeScriptCompile Include="src\common\responsible-drawer\responsible-drawer-d.d.ts" />
+    <TypeScriptCompile Include="src\common\responsible-drawer\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\root\app.tsx" />
     <TypeScriptCompile Include="src\root\registerServiceWorker.ts" />
     <TypeScriptCompile Include="src\root\typings.d.ts" />
-    <TypeScriptCompile Include="src\index.tsx" />
+    <TypeScriptCompile Include="src\web\index.tsx" />
     <TypeScriptCompile Include="src\typings\mdi\typings.d.ts" />
     <TypeScriptCompile Include="src\typings\reactxx\animation.d.ts" />
     <TypeScriptCompile Include="src\typings\reactxx\common-style.d.ts" />
