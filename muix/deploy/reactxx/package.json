@@ -1,6 +1,6 @@
 {
   "name": "reactxx",
-  "version": "0.1.29",
+  "version": "0.1.32",
   "main": "web/index.js",
   "jspmPackage": true,
   "description": "Framework which enables creation of visual components for both react and react-native",

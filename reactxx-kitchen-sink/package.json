@@ -34,7 +34,19 @@
       "core-js": "npm:core-js@^2.5.3",
       "react-dom": "npm:react-dom@^16.2.0",
       "reactxx": "npm:reactxx@^0.1.28",
-      "tslib": "npm:tslib@1.9.0"
+      "tslib": "npm:tslib@^1.9.0",
+      "fela-dom": "npm:fela-dom",
+      "fela-plugin-extend": "npm:fela-plugin-extend",
+      "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value",
+      "fela-plugin-lvha": "npm:fela-plugin-lvha",
+      "fela-plugin-prefixer": "npm:fela-plugin-prefixer",
+      "fela-plugin-rtl": "npm:fela-plugin-rtl",
+      "fela-plugin-unit": "npm:fela-plugin-unit",
+      "hoist-non-react-statics": "npm:hoist-non-react-statics",
+      "jss-preset-default": "npm:jss-preset-default",
+      "reactxx-mdi": "npm:reactxx-mdi",
+      "reactxx-stateman": "npm:reactxx-stateman",
+      "warning": "npm:warning"
     },
     "devDependencies": {},
     "peerDependencies": {
@@ -93,3 +105,4 @@
     }
   }
 }
+

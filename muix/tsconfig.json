@@ -1,31 +1,38 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
     "rootDir": "src",
-    "outDir": "deploy/es",
+    "outDir": "deploy/lib",
+    "jsx": "react",
+
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "importHelpers": true,
+
+    "strictNullChecks": false,
+    "downlevelIteration": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "noImplicitAny": false,
+    //"noUnusedLocals": true,
 
     "baseUrl": ".",
     "paths": {
-      "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ],
-      "reactxx": [ "src/reactxx/native/index" ],
-      "reactxx/web": [ "src/reactxx/web/index" ],
+      "reactxx-mdi/*": [ "node_modules/reactxx-mdi/index" ],
+      "reactxx-mui/*": [ "src/mui/web/*" ],
       "reactxx-stateman": [ "src/stateman/index" ],
-      "reactxx-mui/*": [ "src/mui/native/*" ]
+
+      "reactxx": [ "src/reactxx/web/index" ],
+      "reactxx/web": [ "src/reactxx/web/index" ]
     },
 
-    "importHelpers": true,
-    "allowSyntheticDefaultImports": true,
-    "strictNullChecks": false,
-    "downlevelIteration": true,
-    "moduleResolution": "node",
-    "strict": true,
-    "noImplicitReturns": true,
-    "strictFunctionTypes": false,
-
-    "experimentalDecorators": true,
-    "noImplicitAny": false,
-    "jsx": "react-native",
     "lib": [
       "dom",
       "es2015",
@@ -33,10 +40,6 @@
     ]
   },
   "include": [
-    "src/**/*",
-    "node_modules/reactxx-mdi/es/typings.d.ts"
-  ],
-  "exclude": [
-    "src/ks/typings/mdi/web.d.ts" 
+    "src/**/*"
   ]
 }
