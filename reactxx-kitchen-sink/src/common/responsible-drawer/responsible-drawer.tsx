@@ -181,6 +181,7 @@ const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTo
       <Text numberOfLines={1} className={{ flexGrow: 1, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(10)}</Text>
       <Text className={{ flexShrink:0, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(2)}</Text>
     </View>
+    <Text className={{ fontSize: 32, margin: 40 }}>Resize window width to see different Drawer behavior for MOBILE, TABLET and DESKTOP</Text>
     <Text className={{ padding: 10, $mediaq: { '800-1248': { color: 'red' } } }}>{LoremIpsum(80)}</Text> {/* just for fun: change to red color for 800px-1248px media width. For web, converted by FELA to @media query CSS selector */}
   </ScrollView>
 
