@@ -1,34 +1,50 @@
 {
   "compileOnSave": true,
+
   "compilerOptions": {
-    "target": "es2017",
-    "rootDir": "src",
-    "outDir": "deploy/es",
 
-    "baseUrl": ".",
-    "paths": {
-      "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ]
-    },
+    "module": "umd",
+    "outDir": "deploy/lib",
+    "moduleResolution": "node",
+    "target": "es5",
 
-    "importHelpers": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+
+    "rootDir": "src",
+    "jsx": "react",
+
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "importHelpers": true,
+
     "strictNullChecks": false,
     "downlevelIteration": true,
-    "moduleResolution": "node",
     "strict": true,
-    "noImplicitReturns": true,
     "strictFunctionTypes": false,
-
-    "experimentalDecorators": true,
     "noImplicitAny": false,
-    "jsx": "react-native",
+    "noUnusedLocals": true,
+
+    "baseUrl": ".",
+
     "lib": [
       "dom",
-      "es2015",
+      "es5",
+      "es6",
       "esnext.asynciterable"
     ]
+
   },
   "include": [
     "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts"
   ]
 }

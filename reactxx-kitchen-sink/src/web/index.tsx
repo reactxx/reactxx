@@ -2,8 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 //import registerServiceWorker from './registerServiceWorker';
 
-// import App from '../common/responsible-drawer/responsible-drawer'
-import App from '../common/hallo-world';
+import App from '../common/root';
 
 ReactDOM.render(<App />, document.getElementById('root')); 
 

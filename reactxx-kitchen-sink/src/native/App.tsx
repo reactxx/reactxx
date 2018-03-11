@@ -1,6 +1,6 @@
 import Expo from 'expo'
 
-import App from '../common/hallo-world';
+import App from '../common/root';
 
 Expo.registerRootComponent(App) 
 

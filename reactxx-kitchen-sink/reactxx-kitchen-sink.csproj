@@ -95,6 +95,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\common\root.tsx" />
     <TypeScriptCompile Include="src\common\hallo-world.tsx" />
     <TypeScriptCompile Include="src\common\responsible-drawer\responsible-drawer-d.d.ts" />
     <TypeScriptCompile Include="src\common\responsible-drawer\responsible-drawer.tsx" />

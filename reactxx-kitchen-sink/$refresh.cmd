@@ -8,7 +8,7 @@ cd %root%jspm_packages
 rmdir npm /s /q
 
 cd %root%
-call npm install
+call yarn install
 call jspm install
 
 rmdir %root%node_modules\@types\node /s /q
