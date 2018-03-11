@@ -18,8 +18,6 @@ cd %root%node_modules\@types
 rmdir node /s /q
 
 
-rem %root%\jspm_packages
-rem rmdir npm /s /q
 rem https://superuser.com/questions/764348/using-wildcards-with-the-rmdir-or-rd-command
 set npm=%root%jspm_packages\npm\
 forfiles /P %npm% /M reactxx-mdi* /C "cmd /c if @isdir==TRUE rmdir /s /q @file"
@@ -33,5 +31,6 @@ call yarn add %url%expo/types-expo-0.1.1.tgz %url%react/types-react-0.1.1.tgz %u
 
 rmdir %root%node_modules\@types\react-dom\node_modules  /s /q
 rmdir %root%node_modules\@types\react-transition-group\node_modules  /s /q
+copy %root%$blacklist.js %root%node_modules\metro\src\blacklist.js /y
 
-call %root%$compile
+rem call %root%$compile

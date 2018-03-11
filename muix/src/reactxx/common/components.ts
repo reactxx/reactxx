@@ -1,14 +1,14 @@
 import * as React from 'react'
 import ReactN from 'react-native'
 import { withStyles } from '../common/withStyles'
-import { text, view, icon, scrollView, animatedView, animatedIcon, animatedText, animatedScrollView } from 'reactxx/web' //import platform specific component code
+import { text, view, icon, scrollView, animatedView, animatedIcon, animatedText, animatedScrollView } from 'reactxx' //import platform specific component code
 
 const textSheet: ReactXX.SheetCreatorX<ReactXX.TextShape> = {
   root: {
     $web: {
       whiteSpace: 'pre-wrap',
       wordWrap: 'break-word',
-      [`& .${ReactXX.CompNames.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. <ReactXX.CompNames.Text> is className for Text component root div.
+      [`& .${ReactXX.CompNames.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. ReactXX.CompNames.Text is className for Text component root div.
         display: 'inline',
       },
     },

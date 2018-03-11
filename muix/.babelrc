@@ -11,8 +11,9 @@
       {
         "root": [ "." ],
         "alias": {
+          "^reactxx-mdi/(.+)": "reactxx-mdi/es",
+
           "reactxx": "./deploy/es/reactxx/native",
-          "^reactxx-mdi/(.+)": "reactxx-mdi",
           "reactxx-mui": "./deploy/es/mui/native",
           "reactxx-stateman": "./deploy/es/stateman"
         }

@@ -2,8 +2,9 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es5",
-    "module": "umd",
+    "module": "commonjs",
     "moduleResolution": "node",
+
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
 
@@ -28,8 +29,8 @@
       "reactxx-mui/*": [ "src/mui/web/*" ],
       "reactxx-stateman": [ "src/stateman/index" ],
 
-      "reactxx/web": [ "src/reactxx/web/index" ],
-      "reactxx": [ "src/reactxx/web/index" ]
+      "reactxx": [ "src/reactxx/web/index" ],
+      "reactxx/web": [ "src/reactxx/web/index" ]
     },
 
     "lib": [

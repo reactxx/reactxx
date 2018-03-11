@@ -2,9 +2,9 @@
   "name": "reactxx-all",
   "version": "0.1.0",
   "main": "deploy/es/ks/native/index.js",
-  "private": true,
   "dependencies": {
     "expo": "^25.0.0",
+    "material-ui": "^1.0.0-beta.37",
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "reactxx-mdi": "^0.1.62",
@@ -20,8 +20,7 @@
     "@types/react-native": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/react-native/types-react-native-0.1.1.tgz",
     "@types/warning": "^3.0.0",
     "babel-plugin-module-resolver": "^3.0.0",
-    "fela": "^6.1.3",
-    "material-ui": "^1.0.0-beta.37"
+    "fela": "^6.1.3"
   },
   "jspm": {
     "name": "reactxx-all",
