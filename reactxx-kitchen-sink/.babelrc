@@ -1,0 +1,21 @@
+{
+  "presets": [ "babel-preset-expo" ],
+  "env": {
+    "development": {
+      "plugins": [ "transform-react-jsx-source" ]
+    }
+  },
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": [ "." ],
+        "alias": {
+          "reactxx": "reactxx/es/native",
+          "^reactxx-mdi/(.+)": "reactxx-mdi/es/native/index",
+          "reactxx-stateman": "reactxx-stateman/es"
+        }
+      }
+    ]
+  ]
+}

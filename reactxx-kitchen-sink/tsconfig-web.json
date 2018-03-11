@@ -1,0 +1,50 @@
+{
+  "compileOnSave": true,
+
+  "compilerOptions": {
+
+    "module": "umd",
+    "outDir": "deploy/lib",
+    "moduleResolution": "node",
+    "target": "es5",
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "rootDir": "src",
+    "jsx": "react",
+
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "importHelpers": true,
+
+    "strictNullChecks": false,
+    "downlevelIteration": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+
+    "baseUrl": ".",
+
+    "lib": [
+      "dom",
+      "es5",
+      "es6",
+      "esnext.asynciterable"
+    ]
+
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts"
+  ]
+}

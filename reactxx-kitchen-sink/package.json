@@ -3,19 +3,21 @@
   "version": "0.1.0",
   "main": "src/web/index.tsx",
   "dependencies": {
-    "react": "^16.2.0",
+    "react": "16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts-ts": "2.13.0",
     "reactxx": "^0.1.15",
     "tslib": "1.9.0"
   },
-  "_main": "deploy/es/native/index.js",
+  "_main": "deploy/es/native/App.js",
   "_dependencies": {
-    "expo": "^25.0.0",
-    "react": "16.2.0",
+    "expo": "25.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
+    "react-scripts-ts": "2.13.0",
+    "react-dom": "^16.2.0",
+    "react": "16.2.0",
     "reactxx": "^0.1.15",
-    "tslib": "^1.8.0",
+    "tslib": "^1.8.0"
   },
   "private": true,
   "scripts": {
@@ -29,6 +31,7 @@
     "@types/react": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/react/types-react-0.1.1.tgz",
     "@types/react-dom": "^16.0.3",
     "@types/react-native": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/react-native/types-react-native-0.1.1.tgz",
+    "babel-plugin-module-resolver": "^3.0.0"
   },
   "jspm": {
     "name": "reactxx-kitchen-sink",

@@ -73,11 +73,14 @@
     <Content Include="jspm.config.js" />
     <Content Include="package.json" />
     <Content Include="%24refresh.cmd" />
+    <Content Include=".babelrc" />
+    <Content Include="app.json" />
     <None Include="packages.config" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />
     <Content Include="README.md" />
-    <Content Include="tsconfig - Copy.json" />
+    <Content Include="tsconfig-web.json" />
+    <Content Include="tsconfig-native.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -96,6 +99,7 @@
     <TypeScriptCompile Include="src\common\responsible-drawer\responsible-drawer-d.d.ts" />
     <TypeScriptCompile Include="src\common\responsible-drawer\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\index.tsx" />
+    <TypeScriptCompile Include="src\native\App.tsx" />
     <TypeScriptCompile Include="src\web\registerServiceWorker.ts" />
     <TypeScriptCompile Include="src\web\index.tsx" />
     <TypeScriptCompile Include="src\typings\mdi\typings.d.ts" />

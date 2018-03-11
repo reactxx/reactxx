@@ -10,10 +10,10 @@
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ],
       "reactxx": [ "src/reactxx/native/index" ],
       "reactxx-stateman": [ "src/stateman/index" ],
-      "reactxx-mui/*": [ "src/mui/native/*" ],
+      "reactxx-mui/*": [ "src/mui/native/*" ]
     },
 
-    "importHelpers": true, //https://github.com/facebook/react-native/issues/16858
+    "importHelpers": true,
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
     "downlevelIteration": true,
