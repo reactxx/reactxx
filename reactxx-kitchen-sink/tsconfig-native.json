@@ -1,5 +1,6 @@
 ﻿{
   "compileOnSave": true,
+
   "compilerOptions": {
     "target": "es2017",
     "rootDir": "src",

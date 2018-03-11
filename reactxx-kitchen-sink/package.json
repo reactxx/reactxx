@@ -2,6 +2,7 @@
   "name": "reactxx-kitchen-sink",
   "version": "0.1.0",
   "main": "src/web/index.tsx",
+  "_main": "deploy/es/native/index.js",
   "dependencies": {
     "react": "16.2.0",
     "react-dom": "^16.2.0",
@@ -11,7 +12,6 @@
     "expo": "25.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz"
   },
-  "_main": "deploy/es/native/App.js",
   "_dependencies": {
     "expo": "25.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",

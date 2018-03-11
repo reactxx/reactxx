@@ -75,6 +75,7 @@
     <Content Include="%24refresh.cmd" />
     <Content Include=".babelrc" />
     <Content Include="app.json" />
+    <Content Include="%24compile-run-expo.cmd" />
     <None Include="packages.config" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />
@@ -100,7 +101,7 @@
     <TypeScriptCompile Include="src\common\responsible-drawer\responsible-drawer-d.d.ts" />
     <TypeScriptCompile Include="src\common\responsible-drawer\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\index.tsx" />
-    <TypeScriptCompile Include="src\native\App.tsx" />
+    <TypeScriptCompile Include="src\native\index.tsx" />
     <TypeScriptCompile Include="src\web\registerServiceWorker.ts" />
     <TypeScriptCompile Include="src\web\index.tsx" />
     <TypeScriptCompile Include="src\typings\mdi\typings.d.ts" />
