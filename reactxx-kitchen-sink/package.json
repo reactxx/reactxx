@@ -20,8 +20,8 @@
     "fela-plugin-rtl": "*",
     "fela-plugin-unit": "*",
     "hoist-non-react-statics": "*",
-    "jss-preset-default": "*"
-
+    "jss-preset-default": "*",
+    "warning": "*"
   },
   "private": true,
   "scripts": {
