@@ -3,6 +3,9 @@ import * as React from 'react'
 import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } from 'reactxx'
 import { createContext, ConsumerType as StateConsumerType } from 'reactxx-stateman'
 
+import { Close } from 'reactxx-mdi/Close'
+import { Menu } from 'reactxx-mdi/Menu'
+
 // (## 1 ##) Provider, Consumer component for syncing Open x Close buttons with drawer state
 const { Provider, Consumer } = createContext<ReactXXResponsibleDrawer.RenderProps>(null)
 
@@ -138,12 +141,12 @@ const responsibleDrawer: ReactXX.CodeSFC<ReactXXResponsibleDrawer.Shape> = props
   return <View className={root}>
     <AnimatedView key={1} className={backDrop} onPress={closeDrawer} />
     <AnimatedView key={2} className={drawer}>
-      <Provider value={{ iconData: MDI.Close, onPress: closeDrawer, style: closeButton }}> {/* (## 1 ##) Notify inner Consumer (i.e. ResponsibleDrawer.LayoutChanged component) that some of props (mainly style) changed */}
+      <Provider value={{ iconData: Close, onPress: closeDrawer, style: closeButton }}> {/* (## 1 ##) Notify inner Consumer (i.e. ResponsibleDrawer.LayoutChanged component) that some of props (mainly style) changed */}
         {drawerNode}
       </Provider>
     </AnimatedView>
     <AnimatedView key={3} className={content}>
-      <Provider value={{ iconData: MDI.Menu, onPress: openDrawer, style: openButton }}>
+      <Provider value={{ iconData: Menu, onPress: openDrawer, style: openButton }}>
         {children}
       </Provider>
     </AnimatedView>
