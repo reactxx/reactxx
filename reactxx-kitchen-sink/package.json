@@ -7,7 +7,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts-ts": "2.13.0",
-    "reactxx": "^0.1.12",
+    "reactxx": "^0.1.13",
     "tslib": "^1.9.0"
   },
   "scripts": {

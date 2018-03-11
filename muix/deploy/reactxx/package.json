@@ -1,6 +1,6 @@
 {
   "name": "reactxx",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "main": "index.js",
   "description": "Framework which enables creation of visual components for both react and react-native",
   "registry": "npm",

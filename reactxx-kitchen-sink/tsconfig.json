@@ -1,29 +1,27 @@
 {
   "compilerOptions": {
-    "module": "umd",
-    "outDir": "deploy/lib",
-    "moduleResolution": "node",
     "target": "es5",
-    "lib": [ "es6", "dom" ],
-    "baseUrl": ".",
-    "paths": {
-      "reactxx": [ "node_modules/reactxx/index" ]
-    },
-    "sourceMap": true,
-    "allowJs": true,
-    "jsx": "react",
-    "importHelpers": true,
-
+    "module": "umd",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
 
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": false,
-    "noImplicitThis": false,
-    "noImplicitAny": false,
+    "rootDir": "src",
+    "outDir": "deploy/lib",
+    "jsx": "react",
+
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "importHelpers": true,
+
     "strictNullChecks": false,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "downlevelIteration": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+
+    "baseUrl": "."
   },
   "include": [
     "src/**/*"

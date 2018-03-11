@@ -1,3 +1,5 @@
+window.isWeb = false
+
 export { Driver as AnimationDriver } from './animation'
 export * from './components'
 export * from './media-q'

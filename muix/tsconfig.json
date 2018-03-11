@@ -3,11 +3,24 @@
   "compilerOptions": {
     "target": "es5",
     "module": "umd",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "rootDir": "src",
+    "outDir": "deploy/lib",
+    "jsx": "react",
+
     "inlineSourceMap": true,
     "inlineSources": true,
     "importHelpers": true,
-    "rootDir": "src",
-    "outDir": "deploy/lib",
+
+    "strictNullChecks": false,
+    "downlevelIteration": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
 
     "baseUrl": ".",
     "paths": {
@@ -19,19 +32,6 @@
       "reactxx/web": [ "src/reactxx/web/index" ]
     },
 
-    "esModuleInterop": true,
-
-    "allowSyntheticDefaultImports": true,
-    "strictNullChecks": false,
-    "downlevelIteration": true,
-    "moduleResolution": "node",
-    "strict": true,
-    "noImplicitReturns": true,
-    "strictFunctionTypes": false,
-    "experimentalDecorators": true,
-    "noImplicitAny": false,
-
-    "jsx": "react",
     "lib": [
       "dom",
       "es2015",

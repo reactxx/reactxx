@@ -1,3 +1,5 @@
+window.isWeb = true 
+
 export { Driver as AnimationDriver } from './animation'
 export * from './fela'
 export * from './components'
