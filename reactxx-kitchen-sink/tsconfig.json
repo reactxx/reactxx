@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "umd",
+    "target": "es6",
+    "module": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -10,9 +10,11 @@
     "outDir": "deploy/lib",
     "jsx": "react",
 
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "importHelpers": true,
+    //"inlineSourceMap": true,
+    //"inlineSources": true,
+    "sourceMap": false,
+    "noEmitHelpers": true,
+    //"importHelpers": true,
 
     "strictNullChecks": false,
     "downlevelIteration": true,
@@ -21,7 +23,16 @@
     "noImplicitAny": false,
     "noUnusedLocals": true,
 
-    "baseUrl": "."
+    "baseUrl": ".",
+
+    "lib": [
+      "dom",
+      //"es2015",
+      "es5",
+      "es6",
+      "esnext.asynciterable"
+    ]
+
   },
   "include": [
     "src/**/*"

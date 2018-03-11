@@ -74,7 +74,6 @@
     <Content Include="%24refresh.cmd" />
     <None Include="packages.config" />
     <Content Include="tsconfig.json" />
-    <Content Include="tsconfig.test.json" />
     <Content Include="tslint.json" />
     <Content Include="README.md" />
     <Content Include="tsconfig - Copy.json" />
@@ -94,10 +93,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="src\common\hallo-world.tsx" />
     <TypeScriptCompile Include="src\common\responsible-drawer\responsible-drawer-d.d.ts" />
-    <TypeScriptCompile Include="src\common\responsible-drawer\responsible-drawer.tsx" />
-    <TypeScriptCompile Include="src\root\app.tsx" />
-    <TypeScriptCompile Include="src\root\registerServiceWorker.ts" />
-    <TypeScriptCompile Include="src\root\typings.d.ts" />
+    <None Include="src\common\responsible-drawer\responsible-drawer.tsx_" />
+    <TypeScriptCompile Include="src\index.tsx" />
+    <TypeScriptCompile Include="src\web\registerServiceWorker.ts" />
     <TypeScriptCompile Include="src\web\index.tsx" />
     <TypeScriptCompile Include="src\typings\mdi\typings.d.ts" />
     <TypeScriptCompile Include="src\typings\reactxx\animation.d.ts" />
@@ -111,9 +109,7 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\primitives\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
