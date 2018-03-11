@@ -10,6 +10,10 @@ Framework which enables creation of visual components for both **react** and **r
 - [reactxx-stateman](https://github.com/reactxx/reactxx/tree/master/muix/src/stateman) - state manager inspired by react 16.3 context api
 - [reactxx-mui](https://github.com/reactxx/reactxx/tree/master/muix/src/mui) - bridge to material-ui and material-ui compatible native components
 
+## Examples
+
+- [Responsible drawer](https://codesandbox.io/embed/github/reactxx/reactxx/tree/master/reactxx-kitchen-sink?module=%2Fsrc%2Fcommon%2Fresponsible-drawer%2Fresponsible-drawer.tsx&view=preview) - Code for both Drawer component and example application are 100% cross platform
+
 ## TODO
 
 - [ ] KitchenSink for web and native
@@ -17,6 +21,3 @@ Framework which enables creation of visual components for both **react** and **r
 - [ ] move CSS in JS media query extension to helper package
 - [x] simple primitives (Text, View, Icon, ScrollView, AnimatedText, AnimatedView, AnimatedIcon, AnimatedScrollView)
 
-## Examples
-
-- [Responsible drawer](https://codesandbox.io/embed/github/reactxx/reactxx/tree/master/reactxx-kitchen-sink?module=%2Fsrc%2Fcommon%2Fresponsible-drawer%2Fresponsible-drawer.tsx&view=preview) - Code for both Drawer component and example application are 100% cross platform
