@@ -1,8 +1,8 @@
 {
   "name": "reactxx-kitchen-sink",
   "version": "0.1.0",
-  "main": "deploy/es/native/index.js",
-  "_main": "src/web/index.tsx",
+  "_main": "deploy/es/native/index.js",
+  "main": "src/web/index.tsx",
   "dependencies": {
     "expo": "25.0.0",
     "react": "16.2.0",
