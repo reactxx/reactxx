@@ -76,6 +76,8 @@
     <Content Include=".babelrc" />
     <Content Include="app.json" />
     <Content Include="%24compile-run-expo.cmd" />
+    <Content Include="%24refresh-libs.cmd" />
+    <Content Include="%24compile.cmd" />
     <None Include="packages.config" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />

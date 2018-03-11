@@ -38,6 +38,8 @@ SystemJS.config({
     "react": "npm:react@16.2.0",
     "react-dom": "npm:react-dom@16.2.0",
     "reactxx": "npm:reactxx@0.1.15",
+    "reactxx-mdi": "npm:reactxx-mdi@0.1.62",
+    "reactxx-stateman": "npm:reactxx-stateman@0.1.29",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.2",
     "tslib": "npm:tslib@1.9.0",

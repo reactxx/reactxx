@@ -6684,7 +6684,7 @@ reactxx-shadows@^0.1.18:
   version "0.1.18"
   resolved "https://registry.yarnpkg.com/reactxx-shadows/-/reactxx-shadows-0.1.18.tgz#f5650a0170a33172c9927136e632a112c68f5d5f"
 
-reactxx-stateman@^0.1.21:
+reactxx-stateman@^0.1.21, reactxx-stateman@^0.1.29:
   version "0.1.29"
   resolved "https://registry.yarnpkg.com/reactxx-stateman/-/reactxx-stateman-0.1.29.tgz#53495e78b185b45bac2857911c27843acb5c7330"
   dependencies:
