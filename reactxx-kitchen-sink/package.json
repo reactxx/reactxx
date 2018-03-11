@@ -10,7 +10,18 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-scripts-ts": "2.13.0",
     "reactxx": "^0.1.28",
-    "tslib": "1.9.0"
+    "tslib": "1.9.0",
+
+    "fela-dom": "*",
+    "fela-plugin-extend": "*",
+    "fela-plugin-fallback-value": "*",
+    "fela-plugin-lvha": "*",
+    "fela-plugin-prefixer": "*",
+    "fela-plugin-rtl": "*",
+    "fela-plugin-unit": "*",
+    "hoist-non-react-statics": "*",
+    "jss-preset-default": "*"
+
   },
   "private": true,
   "scripts": {
