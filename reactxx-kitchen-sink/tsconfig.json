@@ -10,11 +10,8 @@
     "outDir": "deploy/lib",
     "jsx": "react",
 
-    //"inlineSourceMap": true,
-    //"inlineSources": true,
     "sourceMap": false,
     "noEmitHelpers": true,
-    //"importHelpers": true,
 
     "strictNullChecks": false,
     "downlevelIteration": true,
@@ -27,7 +24,6 @@
 
     "lib": [
       "dom",
-      //"es2015",
       "es5",
       "es6",
       "esnext.asynciterable"
