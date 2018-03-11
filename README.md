@@ -19,4 +19,4 @@ Framework which enables creation of visual components for both **react** and **r
 
 
 
-[![Edit reactxx-kitchen-sink](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/github/reactxx/reactxx/tree/master/reactxx-kitchen-sink?initialpath=%2Froot%2Fapp&module=%2Fsrc%2Froot%2Fapp.tsx)
+[![Edit reactxx-kitchen-sink](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/reactxx/reactxx/tree/master/reactxx-kitchen-sink?module=%2Fsrc%2Fcommon%2Fresponsible-drawer%2Fresponsible-drawer.tsx&view=preview)
