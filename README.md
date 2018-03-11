@@ -17,6 +17,6 @@ Framework which enables creation of visual components for both **react** and **r
 - [ ] move CSS in JS media query extension to helper package
 - [x] simple primitives (Text, View, Icon, ScrollView, AnimatedText, AnimatedView, AnimatedIcon, AnimatedScrollView)
 
+## Examples
 
-
-[![Edit reactxx-kitchen-sink](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/reactxx/reactxx/tree/master/reactxx-kitchen-sink?module=%2Fsrc%2Fcommon%2Fresponsible-drawer%2Fresponsible-drawer.tsx&view=preview)
+- [Responsible drawer](https://codesandbox.io/embed/github/reactxx/reactxx/tree/master/reactxx-kitchen-sink?module=%2Fsrc%2Fcommon%2Fresponsible-drawer%2Fresponsible-drawer.tsx&view=preview) - Code for both Drawer component and example application are 100% cross platform
