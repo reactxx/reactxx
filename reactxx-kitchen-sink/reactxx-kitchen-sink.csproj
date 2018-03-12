@@ -78,7 +78,7 @@
     <Content Include="%24refresh-libs.cmd" />
     <Content Include="%24compile.cmd" />
     <Content Include="%24refresh-all.cmd" />
-    <Content Include="link.cmd" />
+    <Content Include="%24link.cmd" />
     <None Include="packages.config" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />

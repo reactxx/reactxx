@@ -16,28 +16,27 @@ const { Provider, Consumer } = createContext<ReactXXResponsibleDrawer.RenderProp
 type ConsumerType = StateConsumerType<ReactXXResponsibleDrawer.RenderProps, ReactXXResponsibleDrawer.RenderProps>
 type AnimationType = React.ComponentClass<ReactXX.PropsX<ReactXXResponsibleDrawer.Shape>> & { LayoutChanged?: ConsumerType }
 
-/*ResponsibleDrawer sheet. Is parametrized by themeComp pars: defined in const ResponsibleDrawer = withStyles*/
+// ResponsibleDrawer's sheet. 
+// It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
 const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, compThemePar) => ({
 
-  // (## 3 ##) define ResponsibleDrawer sheet, parametrized by theme (not used here) and component's compThemePar
-
-  $mediaq: { // (## 2 ##) define media query window-width breakpoints. Component receives actual width in "mediaq" prop and rerenders.
+  $mediaq: { // media query window-width breakpoints. Component receives actual width in "mediaq" prop and is rerendered when mediaq changed.
     mobile: [null, compThemePar.breakpoints[0]],
     tablet: [compThemePar.breakpoints[0], compThemePar.breakpoints[1]],
     desktop: [compThemePar.breakpoints[1], null],
   },
 
-  $animations: { // different Animations (for mobile and tablet)
+  $animations: { // different Animations (for mobile and tablet version of drawer)
 
-    mobile: { // single Animation (= single Animated.Value for NATIVE), for mobile
-      drawer: { // animation ruleset for specific component, translate drawer
+    mobile: { // single animation (= single Animated.Value for NATIVE), for mobile
+      drawer: { // animation ruleset for specific drawer element
         transform: [
           { translateX: [-compThemePar.drawerWidths[0], 0] }
         ],
       },
-      backDrop: {
+      backDrop: { //animation ruleset for backDrop element
         opacity: [0, 0.4], // change backDrop opacity
-        transform: [ // appear drawer during first 0.5% of whole animation
+        transform: [ // appear backDrop during first 0.5% of whole animation time
           { translateX: [-5000, 0] },
           '-0.5' // means 0%-0.5% of $duration
         ],
@@ -47,12 +46,12 @@ const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, com
     },
 
     tablet: { // tablet animation
-      drawer: { // translate drawer
+      drawer: { // for drawer element
         transform: [
           { translateX: [-compThemePar.drawerWidths[1], 0] }
         ],
       },
-      content: { // animate content left
+      content: { // for content element - change left
         left: [0, compThemePar.drawerWidths[1]]
       },
       $duration: compThemePar.animationDuration,
@@ -81,18 +80,18 @@ const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, com
     zIndex: 1
   },
   mobile: {
-    $overrides: { // 
+    $overrides: { // when 'mobile' ruleset is used then modify 'closeButton' and 'drawer' ruleset as follows:
       closeButton: { display: 'none' }, // modify closButton ruleset (hide it) for mobile
-      drawer: { width: compThemePar.drawerWidths[0] }, // modify drawer ruleset (set configured width) for mobile
+      drawer: { width: compThemePar.drawerWidths[0] }, // modify drawer ruleset (set width) for mobile
     }
   },
-  tablet: {
+  tablet: { // when 'tablet' ruleset is used...
     $overrides: {
       backDrop: { display: 'none' },
       drawer: { width: compThemePar.drawerWidths[1] },
     }
   },
-  desktop: {
+  desktop: { // when 'desktop' ruleset is used...
     $overrides: {
       closeButton: { display: 'none' },
       openButton: { display: 'none' },
@@ -101,26 +100,29 @@ const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, com
       drawer: { width: compThemePar.drawerWidths[2] },
     }
   },
-  openButton: {}, // openButton rulesets is modified by "mobile x tablet x desktop" $overrides props
+  // 'openButton' and 'closeButton' rulesets are defined by means of "mobile x tablet x desktop" $overrides
+  openButton: {}, 
   closeButton: {},
 })
 
+// responsibleDrawer stateless component. 
 const responsibleDrawer: ReactXX.CodeSFC<ReactXXResponsibleDrawer.Shape> = props => {
+
   const { classes, mergeRulesetWithOverrides, children, className, animations, mediaq, drawer: drawerNode } = props
 
-  const mediaState = mediaq.state // (## 2 ##) actual media width
+  const mediaState = mediaq.state // actual media width, e.g. mediaState = {mobile:false, tablet:true, desktop:false }
 
   const openDrawer = () => mediaState.tablet ? animations.tablet.open() : animations.mobile.open()
   const closeDrawer = () => mediaState.tablet ? animations.tablet.close() : animations.mobile.close()
 
-  // calling mergeRulesetWithOverrides signals which rulesets are used. So it can use their $overrides to modify sheet
+  // calling mergeRulesetWithOverrides signals which rulesets are used. So it can use their $overrides to modify other sheet's rulesets
   const root = mergeRulesetWithOverrides(
     classes.root,
-    // (## 2 ##) set actual ruleset for different window size
+    // set actual ruleset for different window size
     mediaState.mobile && classes.mobile,
     mediaState.tablet && classes.tablet,
     mediaState.desktop && classes.desktop,
-    className, // always put className at the end of ROOT ruleset merge
+    className, // always put className at the end of the ROOT ruleset
   ) as ReactXX.ViewRulesetX
 
   const backDrop = mergeRulesetWithOverrides(
@@ -149,7 +151,7 @@ const responsibleDrawer: ReactXX.CodeSFC<ReactXXResponsibleDrawer.Shape> = props
   return <View className={root}>
     <AnimatedView key={1} className={backDrop} onPress={closeDrawer} />
     <AnimatedView key={2} className={drawer}>
-      {/* (## 1 ##) Provider notifies inner Consumer's (i.e. ResponsibleDrawer.LayoutChanged component) that some of props (mainly style) changed */}
+      {/* Provider notifies inner Consumer's (i.e. ResponsibleDrawer.LayoutChanged component's) that some of their props changed */}
       <Provider value={{ iconData: Close, onPress: closeDrawer, style: closeButton }}>
         {drawerNode}
       </Provider>
@@ -162,12 +164,14 @@ const responsibleDrawer: ReactXX.CodeSFC<ReactXXResponsibleDrawer.Shape> = props
   </View>
 }
 
-// (## 3 ##) HOC ResponsibleDrawer component with default compThemePar's (animationDuration etc.)
+// HOC ResponsibleDrawer component with default compThemePar's
 const ResponsibleDrawer = (withStyles<ReactXXResponsibleDrawer.Shape>(
   'comps$responsibledrawer' as any/*ReactXXResponsibleDrawer.Consts.Drawer*/,
   sheet,
   {
-    animationDuration: 300, drawerWidths: [250, 300, 400], breakpoints: [480, 1024]
+    animationDuration: 300, // animation duration in msec
+    drawerWidths: [250, 300, 400], // different opened drawer width for mobile, tablet and desktop
+    breakpoints: [480, 1024] // media breakpoints between mobile x tablet and tablet x desktop
   })(responsibleDrawer)) as AnimationType
 
 ResponsibleDrawer.LayoutChanged = Consumer as ConsumerType
@@ -184,11 +188,11 @@ ResponsibleDrawer.LayoutChanged = Consumer as ConsumerType
 
 const button = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as ReactXX.RulesetX
 
-const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={ // drawer
+const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={ // drawer 
   <ScrollView classes={{ container: { flex: 1, backgroundColor: 'lightgray' } }}>
     <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, padding: 10, backgroundColor: 'gray', }}>
       <Text className={{ flexGrow: 1, color: 'white' }}>{LoremIpsum(2)}</Text>
-      {/* (## 1 ##) rerender Icon when Provider notifies (hide x display it): */}
+      {/* rerender only ResponsibleDrawer.LayoutChanged when Provider notifies (hide x display it): */}
       <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />} />
     </View>
     <Text className={{ padding: 10 }}>{LoremIpsum(80)}</Text>
@@ -197,15 +201,15 @@ const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTo
 
   <ScrollView classes={{ container: { flex: 1 } }}> {/* content */}
     <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}>
+      {/* rerender only ResponsibleDrawer.LayoutChanged when Provider notifies (hide x display it): */}
       <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />} />
-      {/* (## 1 ##) rerender Icon when Provider notifies (hide x display) :*/}
       <Text numberOfLines={1} className={{ flexGrow: 1, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(10)}</Text>
       <Text className={{ flexShrink: 0, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(2)}</Text>
     </View>
     <Text className={{ fontSize: 18, margin: 40, color: 'red' }}>
       {window.isWeb ? 'Change browser window width' : 'Rotate your device'} to see different Drawer's behavior for MOBILE, TABLET and DESKTOP
     </Text>
-    {/* just for fun: change to red color for 800px-1248px media width. For web, converted by FELA to @media query CSS selector: */}
+    {/* just for fun: change to red color for 800px-1248px media width */}
     <Text className={{ padding: 10, $mediaq: { '800-1248': { color: 'lightgray' } } }}>{LoremIpsum(80)}</Text>
   </ScrollView>
 
