@@ -116,7 +116,6 @@
     <TypeScriptCompile Include="src\typings\reactxx\theme.d.ts" />
     <TypeScriptCompile Include="src\typings\reactxx\typings.d.ts" />
     <TypeScriptCompile Include="src\web\index.tsx" />
-    <TypeScriptCompile Include="src\web\registerServiceWorker.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
