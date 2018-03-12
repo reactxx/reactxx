@@ -1,4 +1,4 @@
-// this code is 100% shared for web and native
+// this code is 100% shared between web and native
 
 import * as React from 'react'
 
