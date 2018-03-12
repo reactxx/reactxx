@@ -1,8 +1,13 @@
+// this code is 100% shared for web and native
+
 import * as React from 'react'
 
+// different import of 'ScrollView, View, Text, Icon, AnimatedView' components for web and native
 import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } from 'reactxx'
+
 import { createContext, ConsumerType as StateConsumerType } from 'reactxx-stateman' 
 
+// different import of 'Close, Menu' consts for web and native
 import { Close } from 'reactxx-mdi/Close'
 import { Menu } from 'reactxx-mdi/Menu'
 
