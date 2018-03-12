@@ -12,11 +12,11 @@ Framework which enables creation of visual components for both **react** and **r
 
 ## Examples
 
-- **Responsible drawer [FOR WEB](https://codesandbox.io/embed/github/reactxx/reactxx/tree/master/reactxx-kitchen-sink?autoresize=1&codemirror=1&fontsize=12&module=%2Fsrc%2Fcommon%2Fresponsible-drawer%2Fresponsible-drawer.tsx&view=preview) | [FOR NATIVE (EXPO)](https://expo.io/@pzika/reactxx-kitchen-sink)** - code sharing for both platform: **100%**
+- **Responsible drawer [FOR WEB](https://codesandbox.io/embed/github/reactxx/reactxx/tree/master/reactxx-kitchen-sink?autoresize=1&codemirror=1&fontsize=12&module=%2Fsrc%2Fcommon%2Fresponsible-drawer%2Fresponsible-drawer.tsx&view=preview) | [FOR NATIVE (EXPO)](https://expo.io/@pzika/reactxx-kitchen-sink)** - code sharing for both platforms: **100%**
 
 ## TODO
 
-- [ ] KitchenSink for web and native
+- [x] KitchenSink for web and native
 - [ ] move CSS in JS animation extension to helper package
 - [ ] move CSS in JS media query extension to helper package
 - [x] simple primitives (Text, View, Icon, ScrollView, AnimatedText, AnimatedView, AnimatedIcon, AnimatedScrollView)
