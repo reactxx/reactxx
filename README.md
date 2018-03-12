@@ -19,9 +19,9 @@ Web and native code of all examples differs only in a few lines in its index.tsx
 
 - [ ] more reactxx-kitchen-sink examples
 - [ ] split reactxx-mui into two packages: reactxx-mui-bridge and reactxx-mui-components
-- [ ] create reactxx-mui-kitchen-sink with material-ui web and native component examples
+- [ ] reactxx-mui-kitchen-sink projects with web and native material-ui's compatible component examples
 - [ ] move CSS in JS animation extension to helper package
 - [ ] move CSS in JS media query extension to helper package
-- [x] KitchenSink projects for web and native with Responsible Drawer component and app
+- [x] reactxx-kitchen-sink projects for web and native with Responsible Drawer component and app
 - [x] simple primitives (Text, View, Icon, ScrollView, AnimatedText, AnimatedView, AnimatedIcon, AnimatedScrollView)
 
