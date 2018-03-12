@@ -21,7 +21,7 @@ declare namespace ReactXXResponsibleDrawer {
       mobile: ReactXX.ShapeViews<'drawer' | 'backDrop'>
       tablet: ReactXX.ShapeViews<'drawer' | 'content'>
     },
-    themePar: { //type of parameter
+    compTheme: { //type of parameter
       drawerWidths: [number, number, number] //drawer width for Mobile, tablet and desktop
       breakpoints: [number, number ] //media query breakpoints between mobile x tablet and tablet x desktop
       animationDuration: number //animation duration for mobile and tablet

@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
-import { Text, withStyles, toPlatformRuleSet, themeOverrideModifier, ThemeModifier } from 'reactxx'
+import { Text, withStyles, toPlatformRuleSet, compThemeSheetModifier, ThemeModifier } from 'reactxx'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 
@@ -152,7 +152,7 @@ const button: ReactXX.CodeSFCNative<MuiButton.Shape> = (props, context) => {
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 
   const RippleWithOverrides: React.SFC<MuiButtonBase.RippleEfectProps> = props => <ThemeModifier
-    modify={themeOverrideModifier<ReactXX.IconShape, ReactXX.TextShape>(ReactXX.CompNames.Icon, iconOverride, ReactXX.CompNames.Text, labelOverride)}>
+    modify={compThemeSheetModifier<ReactXX.IconShape, ReactXX.TextShape>(ReactXX.CompNames.Icon, iconOverride, ReactXX.CompNames.Text, labelOverride)}>
     <RippleEffect {...props}/>
   </ThemeModifier>
 

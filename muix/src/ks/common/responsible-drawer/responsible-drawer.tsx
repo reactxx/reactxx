@@ -17,14 +17,14 @@ type ConsumerType = StateConsumerType<ReactXXResponsibleDrawer.RenderProps, Reac
 type AnimationType = React.ComponentClass<ReactXX.PropsX<ReactXXResponsibleDrawer.Shape>> & { LayoutChanged?: ConsumerType }
 
 /*ResponsibleDrawer sheet. Is parametrized by themeComp pars: defined in const ResponsibleDrawer = withStyles*/
-const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, themePar) => ({
+const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, compThemePar) => ({
 
-  // (## 3 ##) define ResponsibleDrawer sheet, parametrized by theme (not used here) and component's themePar
+  // (## 3 ##) define ResponsibleDrawer sheet, parametrized by theme (not used here) and component's compThemePar
 
   $mediaq: { // (## 2 ##) define media query window-width breakpoints. Component receives actual width in "mediaq" prop and rerenders.
-    mobile: [null, themePar.breakpoints[0]],
-    tablet: [themePar.breakpoints[0], themePar.breakpoints[1]],
-    desktop: [themePar.breakpoints[1], null],
+    mobile: [null, compThemePar.breakpoints[0]],
+    tablet: [compThemePar.breakpoints[0], compThemePar.breakpoints[1]],
+    desktop: [compThemePar.breakpoints[1], null],
   },
 
   $animations: { // different Animations (for mobile and tablet)
@@ -32,7 +32,7 @@ const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, the
     mobile: { // single Animation (= single Animated.Value for NATIVE), for mobile
       drawer: { // animation ruleset for specific component, translate drawer
         transform: [
-          { translateX: [-themePar.drawerWidths[0], 0] }
+          { translateX: [-compThemePar.drawerWidths[0], 0] }
         ],
       },
       backDrop: {
@@ -42,20 +42,20 @@ const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, the
           '-0.5' // means 0%-0.5% of $duration
         ],
       },
-      $duration: themePar.animationDuration,
+      $duration: compThemePar.animationDuration,
       $opened: false, //drawer is closed by default
     },
 
     tablet: { // tablet animation
       drawer: { // translate drawer
         transform: [
-          { translateX: [-themePar.drawerWidths[1], 0] }
+          { translateX: [-compThemePar.drawerWidths[1], 0] }
         ],
       },
       content: { // animate content left
-        left: [0, themePar.drawerWidths[1]]
+        left: [0, compThemePar.drawerWidths[1]]
       },
-      $duration: themePar.animationDuration,
+      $duration: compThemePar.animationDuration,
       $opened: true, //drawer is opened by default
     }
   },
@@ -83,13 +83,13 @@ const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, the
   mobile: {
     $overrides: { // 
       closeButton: { display: 'none' }, // modify closButton ruleset (hide it) for mobile
-      drawer: { width: themePar.drawerWidths[0] }, // modify drawer ruleset (set configured width) for mobile
+      drawer: { width: compThemePar.drawerWidths[0] }, // modify drawer ruleset (set configured width) for mobile
     }
   },
   tablet: {
     $overrides: {
       backDrop: { display: 'none' },
-      drawer: { width: themePar.drawerWidths[1] },
+      drawer: { width: compThemePar.drawerWidths[1] },
     }
   },
   desktop: {
@@ -97,8 +97,8 @@ const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, the
       closeButton: { display: 'none' },
       openButton: { display: 'none' },
       backDrop: { display: 'none' },
-      content: { left: themePar.drawerWidths[2] },
-      drawer: { width: themePar.drawerWidths[2] },
+      content: { left: compThemePar.drawerWidths[2] },
+      drawer: { width: compThemePar.drawerWidths[2] },
     }
   },
   openButton: {}, // openButton rulesets is modified by "mobile x tablet x desktop" $overrides props
@@ -162,7 +162,7 @@ const responsibleDrawer: ReactXX.CodeSFC<ReactXXResponsibleDrawer.Shape> = props
   </View>
 }
 
-// (## 3 ##) HOC ResponsibleDrawer component with default themePar's (animationDuration etc.)
+// (## 3 ##) HOC ResponsibleDrawer component with default compThemePar's (animationDuration etc.)
 const ResponsibleDrawer = (withStyles<ReactXXResponsibleDrawer.Shape>(
   'comps$responsibledrawer' as any/*ReactXXResponsibleDrawer.Consts.Drawer*/,
   sheet,

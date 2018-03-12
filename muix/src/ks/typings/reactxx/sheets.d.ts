@@ -60,7 +60,7 @@
     propsWeb: React.HTMLAttributes<Element>//web only props
     //**** type of component name
     nameType: string | null
-    themePar: {}
+    compTheme: {}
   }
 
   //interface ShapesLow { [name: string]: Shape } 
@@ -77,7 +77,7 @@
     props: {}; propsNative: ReactN.ViewProperties; propsWeb: React.HTMLAttributes<HTMLElement>
     animation: {}; mediaq: null,
     nameType: null
-    themePar: never
+    compTheme: never
   }, R>
 
   //******************** Shape getters
@@ -90,7 +90,7 @@
   type getPropsWeb<R extends Shape> = R['propsWeb']
   type getPropsNative<R extends Shape> = R['propsNative']
   type getNameType<R extends Shape> = R['nameType']
-  type getThemePar<R extends Shape = Shape> = R['themePar']
+  type getCompTheme<R extends Shape = Shape> = R['compTheme']
   type getMediaQ<R extends Shape = Shape> = R['mediaq']
 
   /******************************************

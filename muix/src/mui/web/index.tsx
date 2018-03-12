@@ -45,11 +45,11 @@ const expandOverrides = (themeState: ReactXX.ThemeState) => {
   const theme = themeState.theme
   const res = { theme }
   for (const componentName in themeState) {
-    if (componentName == ReactXX.Consts.themeXPropName) continue
+    if (componentName == 'theme') continue
     const themeComp: ReactXX.ThemeCompX = themeState[componentName]; if (!themeComp) return res
-    const { override, themePar } = themeComp
+    const { sheet, par } = themeComp
     //TODO THEME
-    //res[componentName] = typeof override != 'function' ? override : override(theme, themePar)
+    //res[componentName] = typeof override != 'function' ? override : override(theme, compThemePar)
   }
   return res
 }

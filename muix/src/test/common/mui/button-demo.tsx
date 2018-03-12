@@ -4,7 +4,7 @@ import { AppContainer, createMuiTheme } from 'reactxx-mui/index'
 
 //import color from 'material-ui/colors/orange'
 
-import { ScrollView, View, Icon, Text, themeOverrideModifier } from 'reactxx'
+import { ScrollView, View, Icon, Text, compThemeSheetModifier } from 'reactxx'
 import { ThemeModifierX } from 'reactxx-mui/index'
 
 const theme = createMuiTheme({
@@ -71,7 +71,7 @@ const app: React.SFC = props => <AppContainer>
     </View>
     <View classes={{ root: rootView }} >
       <Button color='secondary' variant='raised' classes={{ raisedSecondary: { backgroundColor: 'green', $web: { '&:hover': { backgroundColor: 'red', } } } }} >classes</Button>
-      <ThemeModifierX modify={themeOverrideModifier<MuiButton.Shape>(MuiButton.CompNames.Button, { raisedSecondary: { backgroundColor: 'red' } })}>
+      <ThemeModifierX modify={compThemeSheetModifier<MuiButton.Shape>(MuiButton.CompNames.Button, { raisedSecondary: { backgroundColor: 'red' } })}>
         <Button color='secondary' variant='raised'>theme</Button>
       </ThemeModifierX>
     </View>

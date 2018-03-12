@@ -3,13 +3,13 @@ import * as React from 'react'
 
 import MuiButton from 'material-ui/Button/Button'
 import { muiCompatible } from '../index'
-import { themeOverrideModifier, ThemeModifier } from 'reactxx'
+import { compThemeSheetModifier, ThemeModifier } from 'reactxx'
 
-const ButtonIconStartOverrides: React.SFC<Muix.ButtonProps> = props => <ThemeModifier modify={themeOverrideModifier<ReactXX.IconShape>(ReactXX.CompNames.Icon, theme => ({ root: { marginRight: theme.spacing.unit } }))}>
+const ButtonIconStartOverrides: React.SFC<Muix.ButtonProps> = props => <ThemeModifier modify={compThemeSheetModifier<ReactXX.IconShape>(ReactXX.CompNames.Icon, theme => ({ root: { marginRight: theme.spacing.unit } }))}>
   <MuiButton {...props} />
 </ThemeModifier>
 
-const ButtonIconEndOverrides: React.SFC<Muix.ButtonProps> = props => <ThemeModifier modify={themeOverrideModifier<ReactXX.IconShape>(ReactXX.CompNames.Icon, theme => ({ root: { marginLeft: theme.spacing.unit } }))}>
+const ButtonIconEndOverrides: React.SFC<Muix.ButtonProps> = props => <ThemeModifier modify={compThemeSheetModifier<ReactXX.IconShape>(ReactXX.CompNames.Icon, theme => ({ root: { marginLeft: theme.spacing.unit } }))}>
   <MuiButton {...props} />
 </ThemeModifier>
 
