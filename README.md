@@ -4,10 +4,10 @@ Framework which enables creation of visual components for both **react** and **r
 
 *Notice: the whole project is in **proof of concept** stage*
 
-## Examples
-Web and native code of all examples differs only in a few lines in its index.tsx's (see [native](https://github.com/reactxx/reactxx/blob/master/reactxx-kitchen-sink/src/native/index.tsx) and [web](https://github.com/reactxx/reactxx/blob/master/reactxx-kitchen-sink/src/web/index.tsx) versions)
+## reactxx-kitchen-sink examples
+Web and native code of all examples differs only in a few lines in root index.tsx's (see [native](https://github.com/reactxx/reactxx/blob/master/reactxx-kitchen-sink/src/native/index.tsx) and [web](https://github.com/reactxx/reactxx/blob/master/reactxx-kitchen-sink/src/web/index.tsx) versions)
 
-- **Responsible Drawer [FOR WEB](https://codesandbox.io/embed/github/PavelPZ/reactxx/tree/master/reactxx-kitchen-sink?codemirror=1&fontsize=12&module=%2Fsrc%2Fcommon%2Fresponsible-drawer%2Fresponsible-drawer.tsx&view=preview) | [FOR NATIVE (EXPO)](https://expo.io/@pzika/reactxx-kitchen-sink)**
+- **ResponsibleDrawer component: [FOR WEB](https://codesandbox.io/embed/github/PavelPZ/reactxx/tree/master/reactxx-kitchen-sink?codemirror=1&fontsize=12&module=%2Fsrc%2Fcommon%2Fresponsible-drawer%2Fresponsible-drawer.tsx&view=preview) | [FOR NATIVE (EXPO)](https://expo.io/@pzika/reactxx-kitchen-sink)**
 
 ## Helper packages
 
@@ -19,9 +19,9 @@ Web and native code of all examples differs only in a few lines in its index.tsx
 
 - [ ] more reactxx-kitchen-sink examples
 - [ ] split reactxx-mui into two packages: reactxx-mui-bridge and reactxx-mui-components
-- [ ] reactxx-mui-kitchen-sink projects with web and native material-ui's compatible component examples
+- [ ] create reactxx-mui-kitchen-sink projects with web and native material-ui's compatible component examples
 - [ ] move CSS in JS animation extension to helper package
 - [ ] move CSS in JS media query extension to helper package
-- [x] reactxx-kitchen-sink projects for web and native with Responsible Drawer component and app
+- [x] create reactxx-kitchen-sink projects for web and native with ResponsibleDrawer component example
 - [x] simple primitives (Text, View, Icon, ScrollView, AnimatedText, AnimatedView, AnimatedIcon, AnimatedScrollView)
 
