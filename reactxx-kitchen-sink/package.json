@@ -5,23 +5,12 @@
   "main": "src/web/index.tsx",
   "dependencies": {
     "expo": "25.0.0",
-    "fela": "*",
-    "fela-dom": "*",
-    "fela-plugin-extend": "*",
-    "fela-plugin-fallback-value": "*",
-    "fela-plugin-lvha": "*",
-    "fela-plugin-prefixer": "*",
-    "fela-plugin-rtl": "*",
-    "fela-plugin-unit": "*",
-    "hoist-non-react-statics": "*",
-    "jss-preset-default": "*",
     "react": "16.2.0",
     "react-dom": "^16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-scripts-ts": "2.13.0",
-    "reactxx": "^0.1.33",
-    "tslib": "1.9.0",
-    "warning": "*"
+    "reactxx": "^0.1.35",
+    "tslib": "1.9.0"
   },
   "private": true,
   "scripts": {
@@ -44,20 +33,10 @@
     "dependencies": {
       "core-js": "npm:core-js@^2.5.3",
       "react-dom": "npm:react-dom@^16.2.0",
-      "reactxx": "npm:reactxx@^0.1.33",
-      "tslib": "npm:tslib@^1.9.0",
-      "fela-dom": "npm:fela-dom",
-      "fela-plugin-extend": "npm:fela-plugin-extend",
-      "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value",
-      "fela-plugin-lvha": "npm:fela-plugin-lvha",
-      "fela-plugin-prefixer": "npm:fela-plugin-prefixer",
-      "fela-plugin-rtl": "npm:fela-plugin-rtl",
-      "fela-plugin-unit": "npm:fela-plugin-unit",
-      "hoist-non-react-statics": "npm:hoist-non-react-statics",
-      "jss-preset-default": "npm:jss-preset-default",
+      "reactxx": "npm:reactxx@^0.1.35",
       "reactxx-mdi": "npm:reactxx-mdi@^0.1.63",
-      "reactxx-stateman": "npm:reactxx-stateman@^0.1.47",
-      "warning": "npm:warning"
+      "reactxx-stateman": "npm:reactxx-stateman@^0.1.36",
+      "tslib": "npm:tslib@^1.9.0"
     },
     "devDependencies": {},
     "peerDependencies": {
@@ -115,4 +94,5 @@
       }
     }
   }
-}
+}
+

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import ReactN from 'react-native'
-import hoistNonReactStatics from 'hoist-non-react-statics'
+//import hoistNonReactStatics from 'hoist-non-react-statics'
 import { toPlatformRuleSet, toPlatformSheet, deepMerge } from './index'
 import { ComponentsMediaQ /*platform dependent*/ } from 'reactxx'
 import warning from 'warning'
@@ -85,7 +85,7 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
 
   }
 
-  hoistNonReactStatics(Styled, Component as any)
+  //hoistNonReactStatics(Styled, Component as any)
 
   return (props => <ThemeModifier quiet modify={props.modifyThemeState} selector={modifierSelector(name)} render={selectedThemeState =>
     <Styled {...selectedThemeState} {...props} />
