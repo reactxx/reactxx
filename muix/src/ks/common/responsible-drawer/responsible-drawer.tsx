@@ -6,13 +6,17 @@ import { createContext, ConsumerType as StateConsumerType } from 'reactxx-statem
 import { Close } from 'reactxx-mdi/Close'
 import { Menu } from 'reactxx-mdi/Menu'
 
-// (## 1 ##) Provider, Consumer component for syncing Open x Close buttons with drawer state
+//************************************************************************************************************
+// ResponsibleDrawer component
+//************************************************************************************************************
+
+// Provider and Consumer components for syncing visibility od Open x Close buttons with drawer open x close state
 const { Provider, Consumer } = createContext<ReactXXResponsibleDrawer.RenderProps>(null)
 
 type ConsumerType = StateConsumerType<ReactXXResponsibleDrawer.RenderProps, ReactXXResponsibleDrawer.RenderProps>
 type AnimationType = React.ComponentClass<ReactXX.PropsX<ReactXXResponsibleDrawer.Shape>> & { LayoutChanged?: ConsumerType }
 
-/*ResponsibleDrawer sheet creator pars: defined in const ResponsibleDrawer = withStyles*/
+/*ResponsibleDrawer sheet. Is parametrized by themeComp pars: defined in const ResponsibleDrawer = withStyles*/
 const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, themePar) => ({
 
   // (## 3 ##) define ResponsibleDrawer sheet, parametrized by theme (not used here) and component's themePar
