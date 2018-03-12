@@ -312,3 +312,4 @@ build-types-material-ui/material-ui
 !build-icons/design/mdi-react-lm/scripts/generate.js
 
 reactxx-kitchen-sink/build
+reactxx-kitchen-sink/src
