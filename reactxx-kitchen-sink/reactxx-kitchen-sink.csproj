@@ -78,6 +78,7 @@
     <Content Include="%24refresh-libs.cmd" />
     <Content Include="%24compile.cmd" />
     <Content Include="%24refresh-all.cmd" />
+    <Content Include="link.cmd" />
     <None Include="packages.config" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />
@@ -100,7 +101,6 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <TypeScriptCompile Include="src\common\hallo-world.tsx" />
     <TypeScriptCompile Include="src\common\responsible-drawer\responsible-drawer-d.d.ts" />
