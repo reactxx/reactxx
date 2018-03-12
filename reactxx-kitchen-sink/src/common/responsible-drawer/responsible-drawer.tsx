@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } from 'reactxx'
-import { createContext, ConsumerType as StateConsumerType } from 'reactxx-stateman'
+import { createContext, ConsumerType as StateConsumerType } from 'reactxx-stateman' 
 
 import { Close } from 'reactxx-mdi/Close'
 import { Menu } from 'reactxx-mdi/Menu'
