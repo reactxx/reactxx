@@ -18,9 +18,9 @@ Web and native code of all examples differs only in a few lines in root index.ts
 ## TODO
 
 - [ ] more reactxx-kitchen-sink examples
-- [ ] split reactxx-mui into two packages: reactxx-mui-bridge and reactxx-mui-components
 - [ ] simple boilerplate which helps to create single project for both web and native platforms
-- [ ] create reactxx-mui-kitchen-sink projects with web and native material-ui's compatible component examples
+- [ ] split reactxx-mui into two packages: reactxx-mui-bridge and reactxx-mui-components
+- [ ] create reactxx-mui-kitchen-sink project with examples of web and native material-ui's compatible component 
 - [ ] move CSS in JS animation extension to helper package
 - [ ] move CSS in JS media query extension to helper package
 - [ ] documentation
