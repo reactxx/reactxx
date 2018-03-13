@@ -66,7 +66,7 @@ const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, com
 
   root: {
     flex: 1,
-    backgroundColor: 'white', //childs zIndex (in Native) does not work without parent background
+    backgroundColor: 'white', //childs zIndex-ed elements (in Native) does not work without parent background
   },
   backDrop: {
     position: 'absolute',
@@ -170,7 +170,7 @@ const responsibleDrawer: ReactXX.CodeSFC<ReactXXResponsibleDrawer.Shape> = props
 }
 
 // HOC ResponsibleDrawer component with default compThemePar's
-const ResponsibleDrawer = (withStyles<ReactXXResponsibleDrawer.Shape>(
+export const ResponsibleDrawer = (withStyles<ReactXXResponsibleDrawer.Shape>(
   'comps$responsibledrawer' as any/*ReactXXResponsibleDrawer.Consts.Drawer*/,
   sheet,
   {
@@ -183,43 +183,48 @@ ResponsibleDrawer.LayoutChanged = Consumer as ConsumerType
 
 
 
-
-
-
-
 //************************************************************************************************************
 // Using ResponsibleDrawer in application
 //************************************************************************************************************
 
 const button = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as ReactXX.RulesetX
 
-const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={ // drawer 
-  <ScrollView classes={{ container: { flex: 1, backgroundColor: 'lightgray' } }}>
-    <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, padding: 10, backgroundColor: 'gray', }}>
-      <Text className={{ flexGrow: 1, color: 'white' }}>{LoremIpsum(2)}</Text>
-      {/* rerender only ResponsibleDrawer.LayoutChanged when Provider notifies (hide x display it): */}
-      <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />} />
-    </View>
-    <Text className={{ padding: 10 }}>{LoremIpsum(80)}</Text>
-  </ScrollView>
-}>
-
-  <ScrollView classes={{ container: { flex: 1 } }}> {/* content */}
-    <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}>
-      {/* rerender only ResponsibleDrawer.LayoutChanged when Provider notifies (hide x display it): */}
-      <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />} />
-      <Text numberOfLines={1} className={{ flexGrow: 1, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(10)}</Text>
-      <Text className={{ flexShrink: 0, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(2)}</Text>
-    </View>
-    <Text className={{ fontSize: 18, margin: 40, color: 'red' }}>
-      {window.isWeb ? 'Change browser window width' : 'Rotate your device'} to see different Drawer's behavior for MOBILE, TABLET and DESKTOP
-    </Text>
-    {/* just for fun: change to red color for 800px-1248px media width */}
-    <Text className={{ padding: 10, $mediaq: { '800-1248': { color: 'lightgray' } } }}>{LoremIpsum(80)}</Text>
-  </ScrollView>
-
+const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer/>}>
+  <Content />
 </ResponsibleDrawer>
 
+const Drawer: React.SFC = () => <ScrollView classes={{ container: { flex: 1, backgroundColor: 'lightgray' } }}>
+  <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, padding: 10, backgroundColor: 'gray', }}>
+    <Text className={{ flexGrow: 1, color: 'white' }}>{LoremIpsum(2)}</Text>
+    {/* re-render ResponsibleDrawer.LayoutChanged only when Provider notifies (hide x display it): */}
+    <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />} />
+  </View>
+  <Text className={{ padding: 10 }}>{LoremIpsum(80)}</Text>
+</ScrollView>
+
+const Content: React.SFC = () => <ScrollView classes={{ container: { flex: 1 } }}> {/* content */}
+  <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}>
+    {/* re-render ResponsibleDrawer.LayoutChanged only when Provider notifies (hide x display it): */}
+    <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />} />
+    <Text numberOfLines={1} className={{ flexGrow: 1, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(10)}</Text>
+    <Text className={{ flexShrink: 0, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(2)}</Text>
+  </View>
+  <Text className={{ fontSize: 18, margin: 40, color: 'red' }}>
+    {window.isWeb ? 'Change browser window width' : 'Rotate your device'} to see different Drawer's behavior for MOBILE, TABLET and DESKTOP
+    </Text>
+  {/* just for fun: change to lightgray color for 800px-1248px media width */}
+  <Text className={{ padding: 10, $mediaq: { '800-1248': { color: 'lightgray' } } }}>{LoremIpsum(80)}</Text>
+</ScrollView>
+
 export default App
+
+export const meta: KSink.Example = {
+  name: 'responsible-drawer/responsible-drawer',
+  title: 'ResponsibleDrawer',
+  descr: '',
+  ignoreInNavigation: true,
+  Component: App,
+}
+
 
 //modifyThemeState={themeState => ({ ...themeState, theme: { ...themeState.theme, themePars: { ...themeState.theme.themePars, [testAnimation.Consts.Drawer]: { ...themeState.theme.themePars[testAnimation.Consts.Drawer], animationDuration:1000} } } })}
