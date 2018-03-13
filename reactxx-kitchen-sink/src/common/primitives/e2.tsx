@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Text } from 'reactxx'
 
-const App: React.SFC = props => <Text className={{ fontSize: 64, $native: { fontSize: 32 }, $web: { ':hover': { textDecoration: 'underline' } } }}>
+const App: React.SFC = props => <Text className={{ fontSize: 64, $native: { fontSize: 32 }, $web: { ':hover': { textDecoration: 'underline', color: 'lightgray' } } }}>
   HALLO WORLD!
 </Text>
 

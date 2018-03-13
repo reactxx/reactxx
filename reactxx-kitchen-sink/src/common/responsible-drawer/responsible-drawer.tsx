@@ -222,7 +222,7 @@ export const meta: KSink.Example = {
   name: 'responsible-drawer/responsible-drawer',
   title: 'ResponsibleDrawer',
   descr: '',
-  ignoreInNavigation: true,
+  ignoreInNavigation: false,
   Component: App,
 }
 

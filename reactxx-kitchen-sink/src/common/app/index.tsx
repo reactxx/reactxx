@@ -10,12 +10,20 @@ import { meta as primitives5 } from '../primitives/e5'
 import { meta as primitives6 } from '../primitives/e6'
 import { meta as primitives7 } from '../primitives/e7'
 
-let navigationExample: KSink.Example
+export let navigationExample: KSink.Example
+
+export const primitives: KSink.Example[] = [
+  primitives1, primitives2, primitives3, primitives4, primitives5, primitives6, primitives7,
+]
+
+export const components: KSink.Example[] = [
+  responsibleDrawer,
+]
 
 export const examples: KSink.Example[] = [
   navigationExample = navigation,
-  responsibleDrawer,
-  primitives1, primitives2, primitives3, primitives4, primitives5, primitives6, primitives7,
+  ...components,
+  ...primitives
 ]
 
 export const nameToExample = (name: string) => name ? (examples[name] || navigationExample) : navigationExample

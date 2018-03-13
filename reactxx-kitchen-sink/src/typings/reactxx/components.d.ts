@@ -17,7 +17,7 @@ declare namespace ReactXX {
     style: ReactN.TextStyle,
     web: 'pressable'
     props: { numberOfLines?: number } & OnPressX
-    propsWeb: React.HTMLAttributes<HTMLSpanElement>
+    propsWeb: React.HTMLAttributes<HTMLSpanElement> & { url?: string }
     propsNative: ReactN.TextProperties
     nameType: CompNames.Text | CompNames.AnimatedText
   }>
@@ -34,8 +34,9 @@ declare namespace ReactXX {
   type IconShape = OverwriteShape<{
     common: ShapeTexts<'root'>
     style: ReactN.TextStyle,
+    web: 'pressable'
     props: { data: string } & OnPressX
-    propsWeb: React.SVGAttributes<SVGElement>
+    propsWeb: React.SVGAttributes<SVGElement> & { url?: string }
     //from node_modules\@types\expo\index.d.ts, BaseIconProps
     propsNative: {
       size?: number

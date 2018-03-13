@@ -18,20 +18,23 @@ export const view: ReactXX.CodeSFCWeb<ReactXX.ViewShape> = props => {
 //}
 
 export const icon: ReactXX.CodeSFCWeb<ReactXX.IconShape> = props => {
-  const { style, classes, className, data, mergeRulesetWithOverrides, theme, animations, viewBox, children/*this children*/, mediaq,...rest } = props
-  const rootStyle = mergeRulesetWithOverrides(classes.root, className)
+  const { style, classes, className, data, mergeRulesetWithOverrides, theme, animations, viewBox, children/*this children*/, mediaq, url, onClick, ...rest } = props
+  const rootStyle = mergeRulesetWithOverrides(classes.root, onClick && classes.pressable, className)
   //replace fontSize with width x height
   if (rootStyle.fontSize) { rootStyle.height = rootStyle.width = rootStyle.fontSize; delete rootStyle.fontSize }
   if (style && style.fontSize) { style.height = style.width = style.fontSize; delete style.fontSize }
-  return <svg className={rulesetsToClassNames(rootStyle)} style={style} focusable='false' viewBox={viewBox || '0 0 24 24'} {...rest}>
-    <path d={data || children as string} />
+  const svg = <svg className={rulesetsToClassNames(rootStyle)} style={style} focusable='false' viewBox={viewBox || '0 0 24 24'} onClick={url ? undefined : onClick} {...rest}>
+    {data && <path d={data} />}
+    {!data && children}
   </svg>
+  return url ? <a href={url}>{svg}</a> : svg
 }
 
 export const text: ReactXX.CodeSFCWeb<ReactXX.TextShape> = props => {
-  const { style, classes, className, numberOfLines, mergeRulesetWithOverrides, theme, animations, mediaq,...rest } = props
-  const rootStyle = mergeRulesetWithOverrides(classes.root, props.onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle, className) 
-  return <div className={ReactXX.CompNames.textClassName + ' ' + rulesetsToClassNames(rootStyle)} style={style} {...rest} {...rootStyle.$props}/>
+  const { style, classes, className, numberOfLines, mergeRulesetWithOverrides, theme, animations, mediaq, url, onClick, ...rest } = props
+  const rootStyle = mergeRulesetWithOverrides(classes.root, onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle, className) 
+  const tagProps = { className: ReactXX.CompNames.textClassName + ' ' + rulesetsToClassNames(rootStyle), style, ...rest, onClick: url ? undefined : onClick, ...rootStyle.$props }
+  return url ? <a href={url} {...tagProps} /> : <div {...tagProps}/>
 }
 
 export const scrollView: ReactXX.CodeSFCWeb<ReactXX.ScrollViewShape> = props => {

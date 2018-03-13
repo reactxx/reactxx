@@ -48,7 +48,10 @@ const iconSheet: ReactXX.SheetCreatorX<ReactXX.IconShape> = {
     $web: {
       fill: 'currentColor',
     }
-  }
+  },
+  pressable: { //web only ruleset
+    cursor: 'pointer'
+  },
 }
 
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties

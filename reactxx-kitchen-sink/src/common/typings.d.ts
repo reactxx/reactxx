@@ -1,7 +1,7 @@
 declare namespace KSink {
 
   const enum Consts {
-    navigationName = 'navigation',
+    navigationName = 'app/navigation',
   }
 
   interface Example {
