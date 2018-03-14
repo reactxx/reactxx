@@ -8,8 +8,7 @@ import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 export type GotoExample = (example: KSink.Example) => void
 
 const webGithubUrl = (ex: KSink.Example) => `https://github.com/reactxx/reactxx/blob/master/reactxx-kitchen-sink/src/common/${ex.name}.tsx`
-const webSandboxUrl = (ex: KSink.Example) => `https://codesandbox.io/s/github/reactxx/reactxx/tree/code-sandbox/reactxx-kitchen-sink?codemirror=1&fontsize=12&view=preview&module=%2Fsrc%2Fcommon%2F${ex.name.replace('/', '%2F')}.tsx`
-
+const webSandboxUrl = (ex: KSink.Example) => `https://codesandbox.io/embed/github/reactxx/reactxx/tree/code-sandbox/reactxx-kitchen-sink?codemirror=1&fontsize=12&view=preview&module=%2Fsrc%2Fcommon%2F${ex.name.replace('/', '%2F')}.tsx`
 
 class App extends React.Component<{}, KSink.Example> {
 
