@@ -12,9 +12,9 @@ import { meta as primitives7 } from '../primitives/e7'
 
 export namespace KSink {
 
-  export const Consts = {
-    navigationName: 'app/navigation',
-  }
+  //export const Consts = {
+  //  navigationName: 'app/navigation',
+  //}
 
   export interface Example {
     name: string

@@ -16,7 +16,7 @@ class App extends React.Component<{}, KSink.Example> {
   state = nameToExample((window && window.location ? window.location.pathname : null) as string);
 
   render() {
-    const content = this.state.name === KSink.Consts.navigationName ? <HomeContent /> : exampleToElement(this.state)
+    const content = this.state.name === 'app/navigation' ? <HomeContent /> : exampleToElement(this.state)
     return <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer actName={this.state.name} gotoExample={this.gotoExample} />}>
       <Content actExample={this.state}>{content}</Content>
     </ResponsibleDrawer>
@@ -46,7 +46,7 @@ const Content: React.SFC<{ actExample: KSink.Example }> = ({ children, actExampl
     <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...drawerButton, ...style }} onPress={onPress} data={iconData} />} />
     <Text className={{ fontWeight: 'bold', color: 'white', marginLeft: 15, }}>ReactXX</Text>
     <Text numberOfLines={1} className={{ flexGrow: 1, marginLeft: 15, color: 'lightgray' }}>Framework which enables creation of visual components for both react and react-native</Text>
-    {window.isWeb && actExample.name != KSink.Consts.navigationName && <Icon className={{ ...codeIcons, fontSize: 32 }} $web={{ viewBox: '0 0 1024 1024', url: webSandboxUrl(actExample) }} >{codeSandboxSVG}</Icon>}
+    {window.isWeb && actExample.name != 'app/navigation' && <Icon className={{ ...codeIcons, fontSize: 32 }} $web={{ viewBox: '0 0 1024 1024', url: webSandboxUrl(actExample) }} >{codeSandboxSVG}</Icon>}
     {window.isWeb && <Icon data={GithubCircle} className={codeIcons} $web={{ url: webGithubUrl(actExample) }} />}
   </View>
   <View className={{ flexGrow: 1, backgroundColor: 'white', padding: 15 }}>
@@ -89,7 +89,7 @@ const codeSandboxSVG = [
 export default App
 
 export const meta = {
-  name: KSink.Consts.navigationName,
+  name: 'app/navigation',
   title: 'Home',
   descr: '',
   Component: App,
