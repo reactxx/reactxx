@@ -16,7 +16,7 @@
 
     "inlineSourceMap": true,
     "inlineSources": true,
-    "importHelpers": true,
+    "importHelpers": false,
 
     "strictNullChecks": false,
     "downlevelIteration": true,
