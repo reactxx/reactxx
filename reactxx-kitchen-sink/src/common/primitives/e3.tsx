@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Text, LoremIpsum, View } from 'reactxx'
 
-const App: React.SFC = props => <View>
+const App: React.SFC = props => <View className={{flex:1}}>
   <Text className={{ fontWeight: 'bold', fontSize: 32, marginBottom: 15 }}>
     HALLO WORLD!
   </Text>

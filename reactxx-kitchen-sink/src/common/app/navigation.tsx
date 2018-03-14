@@ -17,7 +17,7 @@ class App extends React.Component<{}, KSink.Example> {
 
   render() {
     const content = this.state.name === KSink.Consts.navigationName ? <HomeContent /> : exampleToElement(this.state)
-    return <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer>{DrawerContent(this.gotoExample, this.state.name)}</Drawer>}>
+    return <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer actName={this.state.name} gotoExample={this.gotoExample} />}>
       <Content actExample={this.state}>{content}</Content>
     </ResponsibleDrawer>
   }
@@ -26,44 +26,45 @@ class App extends React.Component<{}, KSink.Example> {
 }
 
 const drawerButton = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as ReactXX.RulesetX
-const toolbar = { flexDirection: 'row', alignItems: 'center', height: 48, padding: 15, } as ReactXX.RulesetX<ReactN.ViewStyle>
+const toolbar = { flexDirection: 'row', alignItems: 'center', height: 48, padding: 15 } as ReactXX.RulesetX<ReactN.ViewStyle>
 const codeIcons = { color: 'white', marginLeft: 15, $web: { ':hover': { transform: 'scale(1.2)' } } } as ReactXX.RulesetX
 
-const Drawer: React.SFC = ({ children }) => <ScrollView classes={{ container: { flex: 1, backgroundColor: 'lightgray' } }}>
-  <View className={{ ...toolbar, backgroundColor: 'gray', marginBottom:15 }}>
+const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ children, gotoExample, actName }) => <View className={{ flex: 1 }}>
+  <View className={{ ...toolbar, backgroundColor: 'gray' }}>
     <Text className={{ flexGrow: 1 }}>{' '}</Text>
     <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...drawerButton, ...style }} onPress={onPress} data={iconData} />} />
   </View>
-  {children}
-</ScrollView>
+  <ScrollView classes={{ container: { backgroundColor: 'lightgray', paddingTop: 15, flexGrow:1 } }}>
+    <DrawerItem key={navigationExample.name} example={navigationExample} gotoExample={gotoExample} actName={actName} />
+    {DrawerGroup('Primitives', primitives, gotoExample, actName)}
+    {DrawerGroup('Components', components, gotoExample, actName)}
+  </ScrollView>
+</View>
 
-const Content: React.SFC<{ actExample: KSink.Example }> = ({ children, actExample }) => <ScrollView classes={{ container: { flex: 1 } }}> {/* content */}
+const Content: React.SFC<{ actExample: KSink.Example }> = ({ children, actExample }) => <View className={{ flex: 1 }}> {/* content */}
   <View className={{ ...toolbar, backgroundColor: 'blue' }}>
     <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...drawerButton, ...style }} onPress={onPress} data={iconData} />} />
     <Text className={{ fontWeight: 'bold', color: 'white', marginLeft: 15, }}>ReactXX</Text>
-    <Text numberOfLines={1} className={{ flexGrow: 1, marginLeft: 15, color: 'lightgray', }}> - Framework which enables creation of visual components for both react and react-native</Text>
+    <Text numberOfLines={1} className={{ flexGrow: 1, marginLeft: 15, color: 'lightgray' }}>Framework which enables creation of visual components for both react and react-native</Text>
     {window.isWeb && actExample.name != KSink.Consts.navigationName && <Icon className={{ ...codeIcons, fontSize: 32 }} $web={{ viewBox: '0 0 1024 1024', url: webSandboxUrl(actExample) }} >{codeSandboxSVG}</Icon>}
     {window.isWeb && <Icon data={GithubCircle} className={codeIcons} $web={{ url: webGithubUrl(actExample) }} />}
   </View>
   <View className={{ flexGrow: 1, backgroundColor: 'white', padding: 15 }}>
     {children}
   </View >
-</ScrollView>
+</View>
 
-const HomeContent: React.SFC = () => <View>
+const HomeContent: React.SFC = () => <View className={{ flex: 1, }}>
   <Text>Hallo world</Text>
 </View>
 
 const DrawerGroup = (title: string, items: KSink.Example[], gotoExample: GotoExample, actName: string) => <View className={{ padding: 15 }}>
-  <Text className={{ color: 'gray', fontSize: 18, marginBottom:15 }}>{title}</Text>
+  <Text className={{ color: 'gray', fontSize: 18, marginBottom: 15 }}>{title}</Text>
   {items.map(ex => ex.ignoreInNavigation ? null : <DrawerItem key={ex.name} example={ex} gotoExample={gotoExample} actName={actName} />)}
 </View>
 
-const DrawerContent = (gotoExample: GotoExample, actName: string) => <View>
-  <DrawerItem key={navigationExample.name} example={navigationExample} gotoExample={gotoExample} actName={actName} />
-  {DrawerGroup('Primitives', primitives, gotoExample, actName)}
-  {DrawerGroup('Components', components, gotoExample, actName)}
-</View>
+//const DrawerContent = (gotoExample: GotoExample, actName: string) => <View className={{ flex: 1 }}>
+//</View>
 
 const DrawerItem: React.SFC<{ example: KSink.Example, gotoExample: GotoExample, actName: string }> = ({ example, gotoExample, actName }) => {
   const isActive = actName === example.name

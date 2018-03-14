@@ -102,19 +102,19 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\common\app\index.tsx" />
     <TypeScriptCompile Include="src\common\app\navigation.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\e2.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\e7.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\e6.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\e5.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\e4.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\e3.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\e1.tsx" />
-    <TypeScriptCompile Include="src\common\typings.d.ts" />
     <TypeScriptCompile Include="src\common\hallo-world.tsx" />
+    <TypeScriptCompile Include="src\common\primitives\e1.tsx" />
+    <TypeScriptCompile Include="src\common\primitives\e2.tsx" />
+    <TypeScriptCompile Include="src\common\primitives\e3.tsx" />
+    <TypeScriptCompile Include="src\common\primitives\e4.tsx" />
+    <TypeScriptCompile Include="src\common\primitives\e5.tsx" />
+    <TypeScriptCompile Include="src\common\primitives\e6.tsx" />
+    <TypeScriptCompile Include="src\common\primitives\e7.tsx" />
     <TypeScriptCompile Include="src\common\responsible-drawer\responsible-drawer-d.d.ts" />
     <TypeScriptCompile Include="src\common\responsible-drawer\responsible-drawer.tsx" />
-    <TypeScriptCompile Include="src\common\app\index.tsx" />
+    <TypeScriptCompile Include="src\common\typings.d.ts" />
     <TypeScriptCompile Include="src\native\index.tsx" />
     <TypeScriptCompile Include="src\typings\mdi\web.d.ts" />
     <TypeScriptCompile Include="src\typings\reactxx\animation.d.ts" />

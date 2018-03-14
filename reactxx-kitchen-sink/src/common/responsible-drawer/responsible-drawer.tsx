@@ -175,7 +175,7 @@ export const ResponsibleDrawer = (withStyles<ReactXXResponsibleDrawer.Shape>(
   sheet,
   {
     animationDuration: 300, // animation duration in msec
-    drawerWidths: [250, 300, 400], // different opened drawer width for mobile, tablet and desktop
+    drawerWidths: [250, 250, 300], // different opened drawer width for mobile, tablet and desktop
     breakpoints: [480, 1024] // media breakpoints between mobile x tablet and tablet x desktop
   })(responsibleDrawer)) as AnimationType
 
