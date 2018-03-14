@@ -40,9 +40,9 @@ SystemJS.config({
     "process": "npm:jspm-nodelibs-process@0.2.1",
     "react": "npm:react@16.2.0",
     "react-dom": "npm:react-dom@16.2.0",
-    "reactxx": "npm:reactxx@0.1.37",
+    "reactxx": "npm:reactxx@0.1.38",
     "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
-    "reactxx-stateman": "npm:reactxx-stateman@0.1.50",
+    "reactxx-stateman": "npm:reactxx-stateman@0.1.51",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.2",
     "tslib": "npm:tslib@1.9.0",
@@ -555,28 +555,28 @@ SystemJS.config({
         "isobject": "npm:isobject@3.0.1"
       }
     },
-    "npm:reactxx@0.1.37": {
+    "npm:reactxx@0.1.38": {
       "map": {
         "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
-        "reactxx-stateman": "npm:reactxx-stateman@0.1.50",
-        "prop-types": "npm:prop-types@15.6.1",
+        "reactxx-stateman": "npm:reactxx-stateman@0.1.51",
         "warning": "npm:warning@3.0.0",
-        "fela-plugin-extend": "npm:fela-plugin-extend@6.0.4",
-        "fela-plugin-prefixer": "npm:fela-plugin-prefixer@5.0.18",
-        "fela-plugin-unit": "npm:fela-plugin-unit@5.0.16",
-        "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@5.0.17",
-        "tslib": "npm:tslib@1.9.0",
-        "fela-plugin-rtl": "npm:fela-plugin-rtl@1.0.6",
         "jss-preset-default": "npm:jss-preset-default@4.3.0",
-        "fela-plugin-lvha": "npm:fela-plugin-lvha@5.0.15",
+        "prop-types": "npm:prop-types@15.6.1",
         "fela": "npm:fela@6.1.5",
-        "fela-dom": "npm:fela-dom@7.0.6"
+        "fela-dom": "npm:fela-dom@7.0.6",
+        "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@5.0.17",
+        "fela-plugin-lvha": "npm:fela-plugin-lvha@5.0.15",
+        "fela-plugin-rtl": "npm:fela-plugin-rtl@1.0.6",
+        "fela-plugin-prefixer": "npm:fela-plugin-prefixer@5.0.18",
+        "fela-plugin-extend": "npm:fela-plugin-extend@6.0.4",
+        "fela-plugin-unit": "npm:fela-plugin-unit@5.0.16",
+        "tslib": "npm:tslib@1.9.0"
       }
     },
-    "npm:reactxx-stateman@0.1.50": {
+    "npm:reactxx-stateman@0.1.51": {
       "map": {
-        "prop-types": "npm:prop-types@15.6.1",
         "warning": "npm:warning@3.0.0",
+        "prop-types": "npm:prop-types@15.6.1",
         "tslib": "npm:tslib@1.9.0"
       }
     }

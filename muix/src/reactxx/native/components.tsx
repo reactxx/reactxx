@@ -1,5 +1,5 @@
-import React from 'react'
-import ReactN from 'react-native'
+import * as React from 'react'
+import * as ReactN from 'react-native'
 
 import { View as ViewRN, Text as TextRN, ScrollView as ScrollViewRN, Animated, TouchableWithoutFeedback } from 'react-native'
 import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vector-icons'

@@ -1,5 +1,5 @@
-import React from 'react'
-import ReactN from 'react-native'
+import * as React from 'react'
+import * as ReactN from 'react-native'
 import warning from 'warning'
 
 import { createContext, ModifierType, ConsumerType, ProviderProps, ConsumerProps, ModifierProps } from 'reactxx-stateman'

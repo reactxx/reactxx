@@ -1,5 +1,5 @@
 declare namespace ReactPopper {
-  //import React from "react";
+  //import * as React from "react";
   //import PopperJS from "popper.js";
 
   interface IRestProps {

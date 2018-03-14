@@ -1,4 +1,4 @@
-﻿//import ReactN from 'react-native'
+﻿//import * as ReactN from 'react-native'
 //import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
 declare namespace MuiButtonBase {
 

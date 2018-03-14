@@ -22,8 +22,7 @@ rmdir %npm%reactxx /s /q
 cd %root%
 
 rem call yarn add reactxx reactxx-mdi reactxx-stateman 
-call yarn add reactxx
-call yarn add %url%expo/types-expo-0.1.1.tgz %url%react/types-react-0.1.1.tgz %url%react-native/types-react-native-0.1.1.tgz --dev
+call yarn add reactxx %url%expo/types-expo-0.1.1.tgz %url%react/types-react-0.1.1.tgz %url%react-native/types-react-native-0.1.1.tgz --dev
 call jspm install npm:reactxx-mdi npm:reactxx-stateman npm:reactxx 
 
 rmdir %root%node_modules\@types\react-dom\node_modules  /s /q

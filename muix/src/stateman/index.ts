@@ -1,6 +1,6 @@
 //Inspired by react 16.3 context api. And by its polyfill on https://github.com/ReactTraining/react-broadcast/blob/next/modules/createContext.js
 
-import React from 'react'
+import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import warning from 'warning'
 

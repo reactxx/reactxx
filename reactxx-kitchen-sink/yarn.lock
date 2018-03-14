@@ -6805,9 +6805,9 @@ reactxx-stateman@^0.1.36:
     tslib "^1.9.0"
     warning "^3.0.0"
 
-reactxx@^0.1.37:
-  version "0.1.37"
-  resolved "https://registry.yarnpkg.com/reactxx/-/reactxx-0.1.37.tgz#a956159d1dd6117859f2bf97cd8959800a0c8ed0"
+reactxx@^0.1.38:
+  version "0.1.38"
+  resolved "https://registry.yarnpkg.com/reactxx/-/reactxx-0.1.38.tgz#15d0dc27e38128d2fe48e4f30064210355a4ce96"
   dependencies:
     fela "^6.1.4"
     fela-dom "^7.0.5"

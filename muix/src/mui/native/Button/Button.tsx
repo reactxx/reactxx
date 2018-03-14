@@ -1,5 +1,5 @@
-﻿import React from 'react'
-import ReactN from 'react-native'
+﻿import * as React from 'react'
+import * as ReactN from 'react-native'
 
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';

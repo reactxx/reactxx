@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 
 //import Icons from './icons/index'
 //import TypographyTest from './styles/typography'

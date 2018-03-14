@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 
 import { View, Text, ScrollView, Icon } from 'reactxx'
 import { examples, nameToExample, exampleToElement, primitives, components, navigationExample } from './index'

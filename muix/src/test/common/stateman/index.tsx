@@ -7,7 +7,7 @@
 // 
 //******************************************
 
-import React from 'react'
+import * as React from 'react'
 
 import { createContext, ConsumerType } from 'reactxx-stateman'
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 
 import { meta as navigation } from './navigation'
 import { meta as responsibleDrawer } from '../responsible-drawer/responsible-drawer'
