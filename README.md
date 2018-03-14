@@ -4,7 +4,7 @@ Framework which enables creation of visual components for both **react** and **r
 
 *Notice: the whole project is in **proof of concept** stage*
 
-## reactxx-kitchen-sink examples
+## reactxx-kitchensink examples
 
 **[FOR NATIVE (EXPO)](https://expo.io/@pzika/reactxx-kitchen-sink)**
 
