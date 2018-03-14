@@ -1,9 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
-import { withStyles } from '../common/withStyles'
-import { text, view, icon, scrollView, animatedView, animatedIcon, animatedText, animatedScrollView } from 'reactxx' //import platform specific component code
 
-const textSheet: ReactXX.SheetCreatorX<ReactXX.TextShape> = {
+export const textSheet: ReactXX.SheetCreatorX<ReactXX.TextShape> = {
   root: {
     $web: {
       whiteSpace: 'pre-wrap',
@@ -14,12 +12,13 @@ const textSheet: ReactXX.SheetCreatorX<ReactXX.TextShape> = {
     },
   },
   singleLineStyle: {
+    flexShrink:1,
     $web: {
       maxWidth: '100%',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap'
-    }
+    },
   },
   pressable: { //web only ruleset
     cursor: 'pointer'
@@ -33,15 +32,16 @@ const webViewRuleset = {
   flexBasis: 'auto',
   flexShrink: 0,
   position: 'relative',
-} as ReactXX.RulesetWeb
+  overflow: 'hidden',
+} as ReactXX.RulesetWeb 
 
-const viewSheet: ReactXX.SheetCreatorX<ReactXX.ViewShape> = {
+export const viewSheet: ReactXX.SheetCreatorX<ReactXX.ViewShape> = {
   root: {
     $web: webViewRuleset
   }
 }
 
-const iconSheet: ReactXX.SheetCreatorX<ReactXX.IconShape> = {
+export const iconSheet: ReactXX.SheetCreatorX<ReactXX.IconShape> = {
   root: {
     fontSize: 24,
     flexShrink: 0,
@@ -56,7 +56,7 @@ const iconSheet: ReactXX.SheetCreatorX<ReactXX.IconShape> = {
 
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
-const scrollViewSheet: ReactXX.SheetCreatorX<ReactXX.ScrollViewShape> = {
+export const scrollViewSheet: ReactXX.SheetCreatorX<ReactXX.ScrollViewShape> = {
   root: {
     $web: {
       ...webViewRuleset,
@@ -69,6 +69,9 @@ const scrollViewSheet: ReactXX.SheetCreatorX<ReactXX.ScrollViewShape> = {
       // Creates a new layer with its own backing surface that can significantly
       // improve scroll performance.
       transform: [{ translateZ: 0 }]
+    },
+    $native: {
+      flexBasis: 0,
     }
   },
   container: {
@@ -87,15 +90,6 @@ const scrollViewSheet: ReactXX.SheetCreatorX<ReactXX.ScrollViewShape> = {
     }
   }
 }
-
-export const Text = withStyles<ReactXX.TextShape>(ReactXX.CompNames.Text, textSheet)(text)
-export const AnimatedText = withStyles<ReactXX.TextShape>(ReactXX.CompNames.AnimatedText, textSheet)(animatedText)
-export const View = withStyles<ReactXX.ViewShape>(ReactXX.CompNames.View, viewSheet)(view)
-export const AnimatedView = withStyles<ReactXX.ViewShape>(ReactXX.CompNames.AnimatedView, viewSheet)(animatedView)
-export const Icon = withStyles<ReactXX.IconShape>(ReactXX.CompNames.Icon, iconSheet)(icon)
-export const AnimatedIcon = withStyles<ReactXX.IconShape>(ReactXX.CompNames.AnimatedIcon, iconSheet)(animatedIcon)
-export const ScrollView = withStyles<ReactXX.ScrollViewShape>(ReactXX.CompNames.ScrollView, scrollViewSheet)(scrollView)
-export const AnimatedScrollView = withStyles<ReactXX.ScrollViewShape>(ReactXX.CompNames.AnimatedScrollView, scrollViewSheet)(animatedScrollView)
 
 export const LoremIpsum = (words: 2 | 5 | 10 | 20 | 40 | 80 | 160) => {
   switch (words) {

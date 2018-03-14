@@ -1,12 +1,15 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { View, Text, ScrollView, Animated, TouchableWithoutFeedback } from 'react-native'
+import { View as ViewRN, Text as TextRN, ScrollView as ScrollViewRN, Animated, TouchableWithoutFeedback } from 'react-native'
 import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
+import { withStyles } from '../common/withStyles'
+import * as sheets from '../common/components'
+
 const anyView = (isAnim: boolean) => (props => {
-  const ActView = isAnim ? Animated.View : View
+  const ActView = isAnim ? Animated.View : ViewRN
   const { style, classes, className, mergeRulesetWithOverrides, theme, onPress, onLongPress, onPressIn, onPressOut, animations, mediaq, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.ViewStyle
   const presses = onPress || onLongPress || onPressIn || onPressOut ? { onPress, onLongPress, onPressIn, onPressOut } : null
@@ -15,29 +18,29 @@ const anyView = (isAnim: boolean) => (props => {
 }) as ReactXX.CodeSFCNative<ReactXX.ViewShape>
 
 
-export const view = anyView(false)
-export const animatedView = anyView(true)
+const view = anyView(false)
+const animatedView = anyView(true)
 
 const anyText = (isAnim: boolean) => (props => {
-  const ActText = isAnim ? Animated.Text : Text
+  const ActText = isAnim ? Animated.Text : TextRN
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq,...rest } = props
-  const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.TextStyle
+  const rootStyle = mergeRulesetWithOverrides(classes.root, props.numberOfLines === 1 && classes.singleLineStyle, className, style) as ReactN.TextStyle
   return <ActText style={rootStyle} {...rest} />
 }) as ReactXX.CodeSFCNative<ReactXX.TextShape>
 
-export const text = anyText(false)
-export const animatedText = anyText(true)
+const text = anyText(false)
+const animatedText = anyText(true)
 
 const anyScrollView = (isAnim: boolean) => (props => {
-  const ActScrollView = isAnim ? Animated.ScrollView : ScrollView
+  const ActScrollView = isAnim ? Animated.ScrollView : ScrollViewRN
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq,...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.ScrollViewStyle
   const containerStyle = mergeRulesetWithOverrides(classes.container) as ReactN.ViewStyle
   return <ActScrollView style={rootStyle} contentContainerStyle={containerStyle} {...rest} />
 }) as ReactXX.CodeSFCNative<ReactXX.ScrollViewShape>
 
-export const scrollView = anyScrollView(false)
-export const animatedScrollView = anyScrollView(true)
+const scrollView = anyScrollView(false)
+const animatedScrollView = anyScrollView(true)
 
 const AnimatedIconLow = Animated.createAnimatedComponent(MaterialCommunityIcons)
 const anyIcon = (isAnim: boolean) => (props => {
@@ -47,6 +50,14 @@ const anyIcon = (isAnim: boolean) => (props => {
   return <ActIcon name={(data || children as string) as MaterialCommunityIconsProps['name']} style={rootStyle} {...rest} />
 }) as ReactXX.CodeSFCNative<ReactXX.IconShape>
 
-export const icon = anyIcon(false)
-export const animatedIcon = anyIcon(true)
+const icon = anyIcon(false)
+const animatedIcon = anyIcon(true)
 
+export const Text = withStyles<ReactXX.TextShape>(ReactXX.CompNames.Text, sheets.textSheet)(text)
+export const AnimatedText = withStyles<ReactXX.TextShape>(ReactXX.CompNames.AnimatedText, sheets.textSheet)(animatedText)
+export const View = withStyles<ReactXX.ViewShape>(ReactXX.CompNames.View, sheets.viewSheet)(view)
+export const AnimatedView = withStyles<ReactXX.ViewShape>(ReactXX.CompNames.AnimatedView, sheets.viewSheet)(animatedView)
+export const Icon = withStyles<ReactXX.IconShape>(ReactXX.CompNames.Icon, sheets.iconSheet)(icon)
+export const AnimatedIcon = withStyles<ReactXX.IconShape>(ReactXX.CompNames.AnimatedIcon, sheets.iconSheet)(animatedIcon)
+export const ScrollView = withStyles<ReactXX.ScrollViewShape>(ReactXX.CompNames.ScrollView, sheets.scrollViewSheet)(scrollView)
+export const AnimatedScrollView = withStyles<ReactXX.ScrollViewShape>(ReactXX.CompNames.AnimatedScrollView, sheets.scrollViewSheet)(animatedScrollView)
