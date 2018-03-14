@@ -81,11 +81,14 @@
     <Content Include="%24link.cmd" />
     <Content Include="%24build-all.cmd" />
     <None Include="packages.config" />
+    <Content Include="public\favicon.ico" />
+    <Content Include="public\index.html" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />
     <Content Include="README.md" />
     <Content Include="tsconfig-web.json" />
     <Content Include="tsconfig-native.json" />
+    <Content Include="public\manifest.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
