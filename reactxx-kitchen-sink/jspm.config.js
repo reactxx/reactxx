@@ -30,7 +30,7 @@ SystemJS.config({
     "crypto": "npm:jspm-nodelibs-crypto@0.2.1",
     "domain": "npm:jspm-nodelibs-domain@0.2.1",
     "events": "npm:jspm-nodelibs-events@0.2.2",
-    "fela": "npm:fela@6.1.4",
+    "fela": "npm:fela@6.1.5",
     "fs": "npm:jspm-nodelibs-fs@0.2.1",
     "http": "npm:jspm-nodelibs-http@0.2.0",
     "https": "npm:jspm-nodelibs-https@0.2.2",
@@ -40,9 +40,9 @@ SystemJS.config({
     "process": "npm:jspm-nodelibs-process@0.2.1",
     "react": "npm:react@16.2.0",
     "react-dom": "npm:react-dom@16.2.0",
-    "reactxx": "npm:reactxx@0.1.35",
+    "reactxx": "npm:reactxx@0.1.36",
     "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
-    "reactxx-stateman": "npm:reactxx-stateman@0.1.48",
+    "reactxx-stateman": "npm:reactxx-stateman@0.1.49",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.2",
     "tslib": "npm:tslib@1.9.0",
@@ -52,38 +52,12 @@ SystemJS.config({
     "zlib": "npm:jspm-nodelibs-zlib@0.2.3"
   },
   packages: {
-    "npm:reactxx@0.1.35": {
-      "map": {
-        "tslib": "npm:tslib@1.9.0",
-        "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
-        "fela": "npm:fela@6.1.4",
-        "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@5.0.16",
-        "fela-plugin-prefixer": "npm:fela-plugin-prefixer@5.0.17",
-        "fela-plugin-lvha": "npm:fela-plugin-lvha@5.0.15",
-        "fela-dom": "npm:fela-dom@7.0.5",
-        "fela-plugin-extend": "npm:fela-plugin-extend@6.0.3",
-        "jss-preset-default": "npm:jss-preset-default@4.3.0",
-        "warning": "npm:warning@3.0.0",
-        "reactxx-stateman": "npm:reactxx-stateman@0.1.48",
-        "prop-types": "npm:prop-types@15.6.1",
-        "fela-plugin-rtl": "npm:fela-plugin-rtl@1.0.6",
-        "fela-plugin-unit": "npm:fela-plugin-unit@5.0.15"
-      }
-    },
     "npm:react-dom@16.2.0": {
       "map": {
         "loose-envify": "npm:loose-envify@1.3.1",
         "fbjs": "npm:fbjs@0.8.16",
         "object-assign": "npm:object-assign@4.1.1",
         "prop-types": "npm:prop-types@15.6.1"
-      }
-    },
-    "npm:fela-plugin-prefixer@5.0.17": {
-      "map": {
-        "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@5.0.16",
-        "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
-        "fast-loops": "npm:fast-loops@1.0.0",
-        "inline-style-prefixer": "npm:inline-style-prefixer@4.0.0"
       }
     },
     "npm:fbjs@0.8.16": {
@@ -105,13 +79,6 @@ SystemJS.config({
         "loose-envify": "npm:loose-envify@1.3.1"
       }
     },
-    "npm:reactxx-stateman@0.1.48": {
-      "map": {
-        "warning": "npm:warning@3.0.0",
-        "prop-types": "npm:prop-types@15.6.1",
-        "tslib": "npm:tslib@1.9.0"
-      }
-    },
     "npm:prop-types@15.6.1": {
       "map": {
         "object-assign": "npm:object-assign@4.1.1",
@@ -122,36 +89,6 @@ SystemJS.config({
     "npm:warning@3.0.0": {
       "map": {
         "loose-envify": "npm:loose-envify@1.3.1"
-      }
-    },
-    "npm:fela@6.1.4": {
-      "map": {
-        "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
-        "fela-utils": "npm:fela-utils@8.0.4",
-        "fast-loops": "npm:fast-loops@1.0.0"
-      }
-    },
-    "npm:fela-plugin-fallback-value@5.0.16": {
-      "map": {
-        "css-in-js-utils": "npm:css-in-js-utils@2.0.0"
-      }
-    },
-    "npm:fela-dom@7.0.5": {
-      "map": {
-        "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
-        "fela-utils": "npm:fela-utils@8.0.4",
-        "fast-loops": "npm:fast-loops@1.0.0"
-      }
-    },
-    "npm:fela-plugin-extend@6.0.3": {
-      "map": {
-        "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
-        "fast-loops": "npm:fast-loops@1.0.0"
-      }
-    },
-    "npm:fela-plugin-unit@5.0.15": {
-      "map": {
-        "css-in-js-utils": "npm:css-in-js-utils@2.0.0"
       }
     },
     "npm:fela-plugin-lvha@5.0.15": {
@@ -183,13 +120,6 @@ SystemJS.config({
         "rtl-css-js": "npm:rtl-css-js@1.8.0"
       }
     },
-    "npm:fela-utils@8.0.4": {
-      "map": {
-        "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
-        "fast-loops": "npm:fast-loops@1.0.0",
-        "string-hash": "npm:string-hash@1.1.3"
-      }
-    },
     "npm:loose-envify@1.3.1": {
       "map": {
         "js-tokens": "npm:js-tokens@3.0.2"
@@ -213,7 +143,7 @@ SystemJS.config({
     "npm:inline-style-prefixer@4.0.0": {
       "map": {
         "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
-        "bowser": "npm:bowser@1.9.2"
+        "bowser": "npm:bowser@1.9.3"
       }
     },
     "npm:jss@9.8.0": {
@@ -566,6 +496,88 @@ SystemJS.config({
       "map": {
         "inherits": "npm:inherits@2.0.3",
         "safe-buffer": "npm:safe-buffer@5.1.1"
+      }
+    },
+    "npm:reactxx@0.1.36": {
+      "map": {
+        "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
+        "reactxx-stateman": "npm:reactxx-stateman@0.1.49",
+        "warning": "npm:warning@3.0.0",
+        "prop-types": "npm:prop-types@15.6.1",
+        "tslib": "npm:tslib@1.9.0",
+        "jss-preset-default": "npm:jss-preset-default@4.3.0",
+        "fela-plugin-prefixer": "npm:fela-plugin-prefixer@5.0.18",
+        "fela-plugin-lvha": "npm:fela-plugin-lvha@5.0.15",
+        "fela-plugin-rtl": "npm:fela-plugin-rtl@1.0.6",
+        "fela-dom": "npm:fela-dom@7.0.6",
+        "fela-plugin-unit": "npm:fela-plugin-unit@5.0.16",
+        "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@5.0.17",
+        "fela": "npm:fela@6.1.5",
+        "fela-plugin-extend": "npm:fela-plugin-extend@6.0.4"
+      }
+    },
+    "npm:reactxx-stateman@0.1.49": {
+      "map": {
+        "warning": "npm:warning@3.0.0",
+        "prop-types": "npm:prop-types@15.6.1",
+        "tslib": "npm:tslib@1.9.0"
+      }
+    },
+    "npm:fela-plugin-prefixer@5.0.18": {
+      "map": {
+        "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
+        "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@5.0.17",
+        "isobject": "npm:isobject@3.0.1",
+        "inline-style-prefixer": "npm:inline-style-prefixer@4.0.0",
+        "fast-loops": "npm:fast-loops@1.0.0"
+      }
+    },
+    "npm:fela-dom@7.0.6": {
+      "map": {
+        "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
+        "fast-loops": "npm:fast-loops@1.0.0",
+        "fela-utils": "npm:fela-utils@8.0.5"
+      }
+    },
+    "npm:fela-plugin-unit@5.0.16": {
+      "map": {
+        "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
+        "isobject": "npm:isobject@3.0.1"
+      }
+    },
+    "npm:fela-plugin-fallback-value@5.0.17": {
+      "map": {
+        "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
+        "isobject": "npm:isobject@3.0.1"
+      }
+    },
+    "npm:fela@6.1.5": {
+      "map": {
+        "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
+        "isobject": "npm:isobject@3.0.1",
+        "fast-loops": "npm:fast-loops@1.0.0",
+        "fela-utils": "npm:fela-utils@8.0.5"
+      }
+    },
+    "npm:fela-plugin-extend@6.0.4": {
+      "map": {
+        "isobject": "npm:isobject@3.0.1",
+        "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
+        "fast-loops": "npm:fast-loops@1.0.0",
+        "fela-plugin-remove-undefined": "npm:fela-plugin-remove-undefined@5.0.19"
+      }
+    },
+    "npm:fela-utils@8.0.5": {
+      "map": {
+        "fast-loops": "npm:fast-loops@1.0.0",
+        "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
+        "string-hash": "npm:string-hash@1.1.3"
+      }
+    },
+    "npm:fela-plugin-remove-undefined@5.0.19": {
+      "map": {
+        "fela-utils": "npm:fela-utils@8.0.5",
+        "isobject": "npm:isobject@3.0.1"
       }
     }
   }
