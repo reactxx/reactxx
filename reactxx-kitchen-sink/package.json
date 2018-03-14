@@ -9,7 +9,7 @@
     "react-dom": "^16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-scripts-ts": "2.13.0",
-    "reactxx": "^0.1.36",
+    "reactxx": "^0.1.37",
     "tslib": "1.9.0"
   },
   "private": true,
@@ -33,9 +33,9 @@
     "dependencies": {
       "core-js": "npm:core-js@^2.5.3",
       "react-dom": "npm:react-dom@^16.2.0",
-      "reactxx": "npm:reactxx@^0.1.36",
+      "reactxx": "npm:reactxx@^0.1.37",
       "reactxx-mdi": "npm:reactxx-mdi@^0.1.63",
-      "reactxx-stateman": "npm:reactxx-stateman@^0.1.49",
+      "reactxx-stateman": "npm:reactxx-stateman@^0.1.50",
       "tslib": "npm:tslib@^1.9.0"
     },
     "devDependencies": {},

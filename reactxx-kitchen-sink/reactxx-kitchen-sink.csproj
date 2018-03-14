@@ -79,6 +79,7 @@
     <Content Include="%24compile.cmd" />
     <Content Include="%24refresh-all.cmd" />
     <Content Include="%24link.cmd" />
+    <Content Include="%24build-all.cmd" />
     <None Include="packages.config" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />
