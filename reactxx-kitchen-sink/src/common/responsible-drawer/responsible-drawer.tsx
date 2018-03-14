@@ -218,7 +218,7 @@ const Content: React.SFC = () => <ScrollView classes={{ container: { flex: 1 } }
 
 export default App
 
-export const meta: KSink.Example = {
+export const meta = {
   name: 'responsible-drawer/responsible-drawer',
   title: 'ResponsibleDrawer',
   descr: '',

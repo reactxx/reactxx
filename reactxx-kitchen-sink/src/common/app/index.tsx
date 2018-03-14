@@ -10,6 +10,22 @@ import { meta as primitives5 } from '../primitives/e5'
 import { meta as primitives6 } from '../primitives/e6'
 import { meta as primitives7 } from '../primitives/e7'
 
+export namespace KSink {
+
+  export const Consts = {
+    navigationName: 'app/navigation',
+  }
+
+  export interface Example {
+    name: string
+    title: string
+    ignoreInNavigation?: boolean
+    Component: React.ComponentType
+    descr?: string
+  }
+
+}
+
 export let navigationExample: KSink.Example
 
 export const primitives: KSink.Example[] = [

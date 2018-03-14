@@ -42,7 +42,7 @@ SystemJS.config({
     "react-dom": "npm:react-dom@16.2.0",
     "reactxx": "npm:reactxx@0.1.38",
     "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
-    "reactxx-stateman": "npm:reactxx-stateman@0.1.51",
+    "reactxx-stateman": "npm:reactxx-stateman@0.1.54",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.2",
     "tslib": "npm:tslib@1.9.0",
@@ -117,7 +117,7 @@ SystemJS.config({
     },
     "npm:fela-plugin-rtl@1.0.6": {
       "map": {
-        "rtl-css-js": "npm:rtl-css-js@1.8.0"
+        "rtl-css-js": "npm:rtl-css-js@1.9.0"
       }
     },
     "npm:loose-envify@1.3.1": {
@@ -558,7 +558,7 @@ SystemJS.config({
     "npm:reactxx@0.1.38": {
       "map": {
         "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
-        "reactxx-stateman": "npm:reactxx-stateman@0.1.51",
+        "reactxx-stateman": "npm:reactxx-stateman@0.1.54",
         "warning": "npm:warning@3.0.0",
         "jss-preset-default": "npm:jss-preset-default@4.3.0",
         "prop-types": "npm:prop-types@15.6.1",
@@ -573,11 +573,11 @@ SystemJS.config({
         "tslib": "npm:tslib@1.9.0"
       }
     },
-    "npm:reactxx-stateman@0.1.51": {
+    "npm:reactxx-stateman@0.1.54": {
       "map": {
-        "warning": "npm:warning@3.0.0",
         "prop-types": "npm:prop-types@15.6.1",
-        "tslib": "npm:tslib@1.9.0"
+        "tslib": "npm:tslib@1.9.0",
+        "warning": "npm:warning@3.0.0"
       }
     }
   }

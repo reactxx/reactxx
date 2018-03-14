@@ -2,10 +2,8 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es5",
-    "module": "amd",
+    "module": "commonjs",
     "moduleResolution": "node",
-
-    //"declaration": true,
 
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

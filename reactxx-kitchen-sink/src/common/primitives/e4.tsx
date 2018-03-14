@@ -25,7 +25,7 @@ const App: React.SFC = props => {
 
 export default App
 
-export const meta: KSink.Example = {
+export const meta = {
   name: 'primitives/e4',
   title: 'Layout with Flex',
   descr: '',

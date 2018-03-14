@@ -16,7 +16,7 @@ const App: React.SFC = props => {
 
 export default App
 
-export const meta: KSink.Example = {
+export const meta = {
   name: 'primitives/e7',
   title: 'Media query',
   descr: '',

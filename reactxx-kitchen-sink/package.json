@@ -1,15 +1,15 @@
 {
   "name": "reactxx-kitchen-sink",
   "version": "0.1.0",
-  "_main": "deploy/es/native/index.js",
-  "main": "src/web/index.tsx",
+  "main": "deploy/es/native/index.js",
+  "_main": "src/web/index.tsx",
   "dependencies": {
     "expo": "25.0.0",
     "react": "16.2.0",
     "react-dom": "^16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-scripts-ts": "2.13.0",
-    "reactxx": "^0.1.38",
+    "reactxx": "^0.1.39",
     "tslib": "1.9.0"
   },
   "private": true,
@@ -35,7 +35,7 @@
       "react-dom": "npm:react-dom@^16.2.0",
       "reactxx": "npm:reactxx@^0.1.38",
       "reactxx-mdi": "npm:reactxx-mdi@^0.1.63",
-      "reactxx-stateman": "npm:reactxx-stateman@^0.1.51",
+      "reactxx-stateman": "npm:reactxx-stateman@^0.1.54",
       "tslib": "npm:tslib@^1.9.0"
     },
     "devDependencies": {},

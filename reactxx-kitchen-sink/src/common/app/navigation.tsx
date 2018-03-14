@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { View, Text, ScrollView, Icon } from 'reactxx'
-import { examples, nameToExample, exampleToElement, primitives, components, navigationExample } from './index'
+import { examples, nameToExample, exampleToElement, primitives, components, navigationExample, KSink } from './index'
 import { ResponsibleDrawer } from '../responsible-drawer/responsible-drawer'
 import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 
@@ -13,7 +13,7 @@ const webSandboxUrl = (ex: KSink.Example) => `https://codesandbox.io/embed/githu
 
 class App extends React.Component<{}, KSink.Example> {
 
-  state: KSink.Example = nameToExample((window && window.location ? window.location.pathname : null) as string);
+  state = nameToExample((window && window.location ? window.location.pathname : null) as string);
 
   render() {
     const content = this.state.name === KSink.Consts.navigationName ? <HomeContent /> : exampleToElement(this.state)
@@ -88,7 +88,7 @@ const codeSandboxSVG = [
 
 export default App
 
-export const meta: KSink.Example = {
+export const meta = {
   name: KSink.Consts.navigationName,
   title: 'Home',
   descr: '',

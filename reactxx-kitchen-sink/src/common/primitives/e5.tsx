@@ -21,7 +21,7 @@ const App: React.SFC = props => {
 
 export default App
 
-export const meta: KSink.Example = {
+export const meta = {
   name: 'primitives/e5',
   title: 'Vertical ScrollView',
   descr: '',

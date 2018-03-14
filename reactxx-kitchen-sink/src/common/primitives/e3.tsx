@@ -17,7 +17,7 @@ const App: React.SFC = props => <View className={{flex:1}}>
 
 export default App
 
-export const meta: KSink.Example = {
+export const meta = {
   name: 'primitives/e3',
   title: 'Inner Text is inline element',
   descr: '',
