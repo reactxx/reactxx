@@ -4,10 +4,11 @@ Framework which enables creation of visual components for both **react** and **r
 
 *Notice: the whole project is in **proof of concept** stage*
 
-## reactxx-kitchen-sink examples
-Web and native code of all examples differs only in a few lines (see [native](https://github.com/reactxx/reactxx/blob/master/reactxx-kitchen-sink/src/native/index.tsx) and [web](https://github.com/reactxx/reactxx/blob/master/reactxx-kitchen-sink/src/web/index.tsx) index.tsx's versions)
+## reactxx-kitchensink examples
 
-- **ResponsibleDrawer component: [FOR WEB](https://codesandbox.io/embed/github/PavelPZ/reactxx/tree/master/reactxx-kitchen-sink?codemirror=1&fontsize=12&module=%2Fsrc%2Fcommon%2Fresponsible-drawer%2Fresponsible-drawer.tsx&view=preview) | [FOR NATIVE (EXPO)](https://expo.io/@pzika/reactxx-kitchen-sink)**
+**[FOR NATIVE (EXPO)](https://expo.io/@pzika/reactxx-kitchen-sink)**
+
+Web and native code of all examples differs only in a few lines (see [native](https://github.com/reactxx/reactxx/blob/master/reactxx-kitchen-sink/src/native/index.tsx) and [web](https://github.com/reactxx/reactxx/blob/master/reactxx-kitchen-sink/src/web/index.tsx) index.tsx's versions).
 
 ## Helper packages
 
