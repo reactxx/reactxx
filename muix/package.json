@@ -25,7 +25,7 @@
   },
   "jspm": {
     "name": "reactxx-all",
-    "main": "???",
+    "main": "reactxx-all.js",
     "dependencies": {
       "classnames": "npm:classnames@^2.2.5",
       "fela-dom": "npm:fela-dom@^7.0.4",

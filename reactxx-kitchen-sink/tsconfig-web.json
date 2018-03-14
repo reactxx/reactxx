@@ -3,7 +3,7 @@
 
   "compilerOptions": {
 
-    "module": "umd",
+    "module": "system",
     "outDir": "deploy/lib",
     "moduleResolution": "node",
     "target": "es5",
@@ -16,7 +16,7 @@
 
     "inlineSourceMap": true,
     "inlineSources": true,
-    "importHelpers": true,
+    "importHelpers": false,
 
     "strictNullChecks": false,
     "downlevelIteration": true,

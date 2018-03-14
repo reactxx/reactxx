@@ -3,14 +3,15 @@ import React from 'react'
 import { Text, LoremIpsum } from 'reactxx'
 
 const App: React.SFC = props => {
-  const text: ReactXX.TextRulesetX = {
+  const changeColorRuleset: ReactXX.TextRulesetX = {
     $mediaq: {
-      '-480': { color: 'red', },
+      '-480': { color: 'red', fontSize: 14 },
       '480-1024': { color: 'green', },
       '1024-': { color: 'blue', },
-    }
+    },
+    fontSize: 20,
   }
-  return <Text classes={{ root: text }}>{LoremIpsum(40)}</Text>
+  return <Text className={changeColorRuleset}>{LoremIpsum(40)}</Text>
 }
 
 export default App

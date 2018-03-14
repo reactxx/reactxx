@@ -2,8 +2,10 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "amd",
     "moduleResolution": "node",
+
+    //"declaration": true,
 
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -12,8 +14,9 @@
     "outDir": "deploy/lib",
     "jsx": "react",
 
-    "inlineSourceMap": true,
-    "inlineSources": true,
+    "sourceMap": false,
+    //"inlineSourceMap": true,
+    //"inlineSources": true,
     "importHelpers": true,
 
     "strictNullChecks": false,

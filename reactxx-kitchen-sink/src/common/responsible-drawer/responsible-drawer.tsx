@@ -1,11 +1,11 @@
 // this code is 100% shared between web and native
-
-import * as React from 'react'
+import React from 'react'
+import ReactN from 'react-native'
 
 // different import of 'ScrollView, View, Text, Icon, AnimatedView' components for web and native
 import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } from 'reactxx'
 
-import { createContext, ConsumerType as StateConsumerType } from 'reactxx-stateman' 
+import { createContext, ConsumerType as StateConsumerType, ConsumerProps } from 'reactxx-stateman' 
 
 // different import of 'Close, Menu' consts for web and native
 import { Close } from 'reactxx-mdi/Close'

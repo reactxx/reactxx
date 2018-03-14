@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
 import { rulesetsToClassNames } from './fela'

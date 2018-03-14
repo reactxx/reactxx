@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import ReactN from 'react-native'
 //import hoistNonReactStatics from 'hoist-non-react-statics'
 import { toPlatformRuleSet, toPlatformSheet, deepMerge } from './index'

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import deepmerge from 'deepmerge' // < 1kb payload overhead when lodash/merge is > 3kb.

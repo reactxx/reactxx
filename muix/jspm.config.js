@@ -1,15 +1,20 @@
 SystemJS.config({
   browserConfig: {
     "paths": {
-      "npm:": "/jspm_packages/npm/"
+      "npm:": "/jspm_packages/npm/",
+      "reactxx-all/": "/src/"
     }
   },
   nodeConfig: {
     "paths": {
-      "npm:": "jspm_packages/npm/"
+      "npm:": "jspm_packages/npm/",
+      "reactxx-all/": "src/"
     }
   },
   packages: {
+    "reactxx-all": {
+      "main": "reactxx-all.js"
+    },
     "": {
       "defaultExtension": "js"
     }

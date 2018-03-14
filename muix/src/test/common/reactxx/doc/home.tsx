@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
 
 import { Animated } from 'react-native'

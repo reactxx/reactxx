@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Animated, Easing, Text, View } from 'react-native'
 
 // ********** NATIVE

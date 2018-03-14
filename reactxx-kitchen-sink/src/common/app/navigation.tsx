@@ -1,11 +1,11 @@
-import * as React from 'react'
+import React from 'react'
 
 import { View, Text, ScrollView, Icon } from 'reactxx'
 import { examples, nameToExample, exampleToElement, primitives, components, navigationExample } from './index'
 import { ResponsibleDrawer } from '../responsible-drawer/responsible-drawer'
 import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 
-type GotoExample = (example: KSink.Example) => void
+export type GotoExample = (example: KSink.Example) => void
 
 const webGithubUrl = (ex: KSink.Example) => `https://github.com/reactxx/reactxx/blob/master/reactxx-kitchen-sink/src/common/${ex.name}.tsx`
 const webSandboxUrl = (ex: KSink.Example) => `https://codesandbox.io/embed/github/PavelPZ/reactxx/tree/master/reactxx-kitchen-sink?codemirror=1&fontsize=12&view=preview&module=%2Fsrc%2Fcommon%2F${ex.name.replace('/', '%2F')}.tsx`
@@ -59,11 +59,11 @@ const DrawerGroup = (title: string, items: KSink.Example[], gotoExample: GotoExa
   {items.map(ex => ex.ignoreInNavigation ? null : <DrawerItem key={ex.name} example={ex} gotoExample={gotoExample} actName={actName} />)}
 </View>
 
-const DrawerContent = (gotoExample: GotoExample, actName: string) => <>
+const DrawerContent = (gotoExample: GotoExample, actName: string) => <View>
   <DrawerItem key={navigationExample.name} example={navigationExample} gotoExample={gotoExample} actName={actName} />
   {DrawerGroup('Primitives', primitives, gotoExample, actName)}
   {DrawerGroup('Components', components, gotoExample, actName)}
-</>
+</View>
 
 const DrawerItem: React.SFC<{ example: KSink.Example, gotoExample: GotoExample, actName: string }> = ({ example, gotoExample, actName }) => {
   const isActive = actName === example.name

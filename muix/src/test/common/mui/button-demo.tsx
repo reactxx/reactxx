@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import Button, { ButtonIconStart, ButtonIconEnd } from 'reactxx-mui/Button/Button'
 import { AppContainer, createMuiTheme } from 'reactxx-mui/index'
 

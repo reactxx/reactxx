@@ -1,5 +1,5 @@
 ﻿import ReactN from 'react-native'
-import * as React from 'react'
+import React from 'react'
 
 import MuiButton from 'material-ui/Button/Button'
 import { muiCompatible } from '../index'

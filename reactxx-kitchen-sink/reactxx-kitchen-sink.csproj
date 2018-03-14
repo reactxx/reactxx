@@ -124,7 +124,6 @@
     <TypeScriptCompile Include="src\typings\reactxx\sheets.d.ts" />
     <TypeScriptCompile Include="src\typings\reactxx\theme.d.ts" />
     <TypeScriptCompile Include="src\typings\reactxx\typings.d.ts" />
-    <TypeScriptCompile Include="src\web\spec.tsx" />
     <TypeScriptCompile Include="src\web\index.tsx" />
   </ItemGroup>
   <PropertyGroup>

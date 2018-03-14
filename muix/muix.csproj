@@ -127,8 +127,16 @@
     <TypeScriptCompile Include="src\ks\common\app\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\app\navigation.tsx" />
     <TypeScriptCompile Include="src\ks\common\hallo-world.tsx" />
+    <TypeScriptCompile Include="src\ks\common\primitives\e1.tsx" />
+    <TypeScriptCompile Include="src\ks\common\primitives\e2.tsx" />
+    <TypeScriptCompile Include="src\ks\common\primitives\e3.tsx" />
+    <TypeScriptCompile Include="src\ks\common\primitives\e4.tsx" />
+    <TypeScriptCompile Include="src\ks\common\primitives\e5.tsx" />
+    <TypeScriptCompile Include="src\ks\common\primitives\e6.tsx" />
+    <TypeScriptCompile Include="src\ks\common\primitives\e7.tsx" />
     <TypeScriptCompile Include="src\ks\common\responsible-drawer\responsible-drawer-d.d.ts" />
     <TypeScriptCompile Include="src\ks\common\responsible-drawer\responsible-drawer.tsx" />
+    <TypeScriptCompile Include="src\ks\common\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\native\index.tsx" />
     <TypeScriptCompile Include="src\ks\typings\mdi\web.d.ts" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\animation.d.ts" />

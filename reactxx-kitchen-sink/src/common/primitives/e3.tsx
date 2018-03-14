@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Text, LoremIpsum } from 'reactxx'
+import { Text, LoremIpsum, View } from 'reactxx'
 
-const App: React.SFC = props => <>
+const App: React.SFC = props => <View>
   <Text className={{ fontWeight: 'bold', fontSize: 32, marginBottom: 15 }}>
     HALLO WORLD!
   </Text>
@@ -13,7 +13,7 @@ const App: React.SFC = props => <>
     </Text>
     {' '}{LoremIpsum(10)}
   </Text>
-</>
+</View>
 
 export default App
 

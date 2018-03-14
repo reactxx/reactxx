@@ -2,8 +2,10 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es5",
-    "module": "umd",
+    "module": "amd",
     "moduleResolution": "node",
+
+    //"declaration": true,
 
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
