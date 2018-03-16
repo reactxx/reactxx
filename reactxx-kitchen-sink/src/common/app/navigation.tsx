@@ -15,10 +15,10 @@ const sandBoxUrl = `https://codesandbox.io/embed/github/reactxx/reactxx/tree/cod
 const webGithubUrl: GetExampleUrl = (ex) => `${gitHubUrl}${ex.name}.tsx`
 const webSandboxUrl: GetExampleUrl = (ex) => {
   const name = ex.name.replace('/', '%2F')
-  return `${sandBoxUrl}module=%2Fsrc%2Fcommon%2F${name}.tsx&initialpath=${name}` 
+  return `${sandBoxUrl}module=%2Fsrc%2Fcommon%2F${name}.tsx&initialpath=${name}`
 }
 
-class App extends React.Component<{}, KSink.Example> { 
+class App extends React.Component<{}, KSink.Example> {
 
   locationExample = nameToExample((window && window.location && window.location.pathname ? window.location.pathname.substr(1) : null))
 
@@ -27,7 +27,7 @@ class App extends React.Component<{}, KSink.Example> {
   render() {
     if (this.locationExample.name !== 'app/navigation') return exampleToElement(this.locationExample)
     const content = this.state.name === 'app/navigation' ? <HomeContent /> : exampleToElement(this.state)
-    return <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer actName={this.state.name} gotoExample={this.gotoExample} />}> 
+    return <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer actName={this.state.name} gotoExample={this.gotoExample} />}>
       <Content actExample={this.state}>{content}</Content>
     </ResponsibleDrawer>
   }
@@ -35,17 +35,17 @@ class App extends React.Component<{}, KSink.Example> {
   gotoExample: GotoExample = (example => this.setState(example)).bind(this);
 }
 
-const drawerButton = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as ReactXX.RulesetX 
+const drawerButton = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as ReactXX.RulesetX
 const toolbar = { flexDirection: 'row', alignItems: 'center', height: 48, padding: 15 } as ReactXX.RulesetX<ReactN.ViewStyle>
 const codeIcons = { color: 'white', marginLeft: 15, $web: { ':hover': { transform: 'scale(1.2)' } } } as ReactXX.RulesetX
-var logo = { color: 'lightblue', $web: { borderLeftStyle: 'none', paddingRight: 10, marginRight: 10, borderRight: 'lightblue 1px solid' } };
+var logo = { flexGrow: 0, marginLeft: 5, color: 'lightblue', paddingRight: 10, marginRight: 10, borderRightColor: 'lightblue', borderRightWidth: 1, $web: { borderRightStyle: 'solid' } } as ReactXX.RulesetX
 
 const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ children, gotoExample, actName }) => <View className={{ flex: 1 }}>
   <View className={{ ...toolbar, backgroundColor: 'gray' }}>
     <Text className={{ flexGrow: 1 }}>{' '}</Text>
     <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...drawerButton, ...style }} onPress={onPress} data={iconData} />} />
   </View>
-  <ScrollView classes={{ container: { backgroundColor: 'lightgray', paddingTop: 15, flexGrow:1 } }}>
+  <ScrollView classes={{ container: { backgroundColor: 'lightgray', paddingTop: 15, flexGrow: 1 } }}>
     <DrawerItem key={navigationExample.name} example={navigationExample} gotoExample={gotoExample} actName={actName} />
     {DrawerGroup('Primitives', primitives, gotoExample, actName)}
     {DrawerGroup('Components', components, gotoExample, actName)}
@@ -55,15 +55,15 @@ const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ chil
 const Content: React.SFC<{ actExample: KSink.Example }> = ({ children, actExample }) => <View className={{ flex: 1 }}> {/* content */}
   <View className={{ ...toolbar, backgroundColor: 'blue' }}>
     <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...drawerButton, ...style }} onPress={onPress} data={iconData} />} />
-    <Text numberOfLines={1} className={{ fontWeight: 'bold', color: 'white', flexGrow: 1, marginLeft: 5, }}><Text className={logo}>ReactXX</Text>{!window.isWeb && '      '}{actExample.title}</Text>
-    {/*<Text numberOfLines={1} className={{ flexGrow: 1, marginLeft: 15, color: 'lightgray' }}>Framework which enables creation of visual components for both react and react-native</Text>*/}
+    <Text className={logo}>ReactXX</Text>
+    <Text numberOfLines={1} className={{ flexGrow: 1, flexShrink: 1, color: 'white', }}>{actExample.title}</Text>
     {window.isWeb && actExample.name != 'app/navigation' && <Icon className={{ ...codeIcons, fontSize: 32 }} $web={{ viewBox: '0 0 1024 1024', url: webSandboxUrl(actExample) }} >{codeSandboxSVG}</Icon>}
     {window.isWeb && <Icon data={GithubCircle} className={codeIcons} $web={{ url: webGithubUrl(actExample) }} />}
   </View>
   <View className={{ flexGrow: 1, backgroundColor: 'white', padding: 15 }}>
     {children}
   </View >
-</View>
+</View >
 
 const HomeContent: React.SFC = () => <View className={{ flex: 1, }}>
   <Text>Hallo world</Text>
