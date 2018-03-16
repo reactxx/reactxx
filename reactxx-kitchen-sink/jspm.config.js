@@ -1,7 +1,7 @@
 SystemJS.config({
   browserConfig: {
     "paths": {
-      "npm:": "/jspm_packages/npm/"
+      "npm:": "/reactxx/jspm_packages/npm/"
     },
     "bundles": {
       "bundle/index.js": [
