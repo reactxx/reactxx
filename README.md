@@ -6,9 +6,10 @@ Framework which enables creation of visual components for both **react** and **r
 
 ## reactxx-kitchensink examples
 
-**[FOR NATIVE (EXPO)](https://expo.io/@pzika/reactxx-kitchen-sink)**
+- **[FOR WEB](https://reactxx.github.io/reactxx/)**
+- **[FOR NATIVE (EXPO)](https://expo.io/@pzika/reactxx-kitchen-sink)**
 
-Web and native code of all examples differs only in a few lines (see [native](https://github.com/reactxx/reactxx/blob/master/reactxx-kitchen-sink/src/native/index.tsx) and [web](https://github.com/reactxx/reactxx/blob/master/reactxx-kitchen-sink/src/web/index.tsx) index.tsx's versions).
+Web and native kitchensink code differs only in a few lines (see [native](https://github.com/reactxx/reactxx/blob/master/reactxx-kitchen-sink/src/native/index.tsx) and [web](https://github.com/reactxx/reactxx/blob/master/reactxx-kitchen-sink/src/web/index.tsx) index.tsx's versions).
 
 ## Helper packages
 
