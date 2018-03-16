@@ -222,7 +222,6 @@ export const meta = {
   name: 'responsible-drawer/responsible-drawer',
   title: 'ResponsibleDrawer',
   descr: '',
-  ignoreInNavigation: false,
   Component: App,
 }
 

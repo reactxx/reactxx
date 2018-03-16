@@ -13,7 +13,7 @@ const App: React.SFC = props => {
     <View className={{ flexDirection: 'row', flexGrow: 1 }}>
       <View className={{ width: 120, backgroundColor: 'lightblue', flexGrow: 0, padding: 20 }}>
       </View>
-      <View className={{ flexShrink: 1, padding: 20, backgroundColor:'#F7F7F7' }}>
+      <View className={{ flexShrink: 1, flexGrow: 1, padding: 20, backgroundColor:'#F7F7F7' }}>
         <Text>{LoremIpsum(20)}</Text>
       </View>
     </View>
