@@ -1,0 +1,20 @@
+{
+  "main": "index.js",
+  "format": "cjs",
+  "meta": {
+    "*": {
+      "globals": {
+        "process": "process"
+      }
+    },
+    "*.json": {
+      "format": "json"
+    }
+  },
+  "map": {
+    "./server.js": {
+      "browser": "./server.browser.js"
+    },
+    "react-dom": "."
+  }
+}
