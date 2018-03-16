@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "build-shadows", "build-shad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "reactxx-kitchen-sink", "reactxx-kitchen-sink\reactxx-kitchen-sink.csproj", "{484B0FEE-0B6A-4396-9919-015A2DBC9172}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "docs", "docs\docs.csproj", "{81F83C25-CD85-48C1-9E42-58D4A2695358}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{484B0FEE-0B6A-4396-9919-015A2DBC9172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{484B0FEE-0B6A-4396-9919-015A2DBC9172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{484B0FEE-0B6A-4396-9919-015A2DBC9172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81F83C25-CD85-48C1-9E42-58D4A2695358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81F83C25-CD85-48C1-9E42-58D4A2695358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81F83C25-CD85-48C1-9E42-58D4A2695358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81F83C25-CD85-48C1-9E42-58D4A2695358}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

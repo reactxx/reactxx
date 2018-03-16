@@ -131,6 +131,9 @@
     <TypeScriptCompile Include="src\typings\reactxx\typings.d.ts" />
     <TypeScriptCompile Include="src\web\index.tsx" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bundle\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
