@@ -4,10 +4,8 @@
   "_main": "deploy/es/native/index.js",
   "main": "src/web/index.tsx",
   "dependencies": {
-    "expo": "25.0.0",
     "react": "16.2.0",
     "react-dom": "^16.2.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-scripts-ts": "2.13.0",
     "reactxx": "^0.1.40",
     "tslib": "1.9.0"
