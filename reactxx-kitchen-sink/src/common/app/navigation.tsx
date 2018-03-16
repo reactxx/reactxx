@@ -8,7 +8,7 @@ import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 export type GotoExample = (example: KSink.Example) => void
 export type GetExampleUrl = (example: KSink.Example) => string
 
-const gitHubUrlIdx = 5
+const gitHubUrlIdx = 6
 const gitHubUrl = `https://github.com/reactxx/reactxx/tree/code-sandbox-${gitHubUrlIdx}/reactxx-kitchen-sink/src/common/`
 const sandBoxUrl = `https://codesandbox.io/embed/github/reactxx/reactxx/tree/code-sandbox-${gitHubUrlIdx}/reactxx-kitchen-sink?codemirror=1&fontsize=12&` //view=preview&
 
@@ -55,7 +55,7 @@ const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ chil
 const Content: React.SFC<{ actExample: KSink.Example }> = ({ children, actExample }) => <View className={{ flex: 1 }}> {/* content */}
   <View className={{ ...toolbar, backgroundColor: 'blue' }}>
     <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...drawerButton, ...style }} onPress={onPress} data={iconData} />} />
-    <Text className={logo}>ReactXX</Text>
+    <Text className={logo}>ReactXX KitchenSink</Text>
     <Text numberOfLines={1} className={{ flexGrow: 1, flexShrink: 1, color: 'white', }}>{actExample.title}</Text>
     {window.isWeb && actExample.name != 'xapp/navigation' && <Icon className={{ ...codeIcons, fontSize: 32 }} $web={{ viewBox: '0 0 1024 1024', url: webSandboxUrl(actExample) }} >{codeSandboxSVG}</Icon>}
     {window.isWeb && <Icon data={GithubCircle} className={codeIcons} $web={{ url: webGithubUrl(actExample) }} />}
