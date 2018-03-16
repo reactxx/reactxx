@@ -80,6 +80,7 @@
     <Content Include="%24refresh-all.cmd" />
     <Content Include="%24link.cmd" />
     <Content Include="%24build-all.cmd" />
+    <Content Include="%24bundle.cmd" />
     <None Include="packages.config" />
     <Content Include="public\favicon.ico" />
     <Content Include="public\index.html" />
