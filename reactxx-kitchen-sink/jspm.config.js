@@ -1,7 +1,7 @@
 SystemJS.config({
   browserConfig: {
     "paths": {
-      "npm:": "/reactxx/jspm_packages/npm/"
+      "npm:": "/jspm_packages/npm/"
     }
   },
   nodeConfig: {
@@ -9,7 +9,6 @@ SystemJS.config({
       "npm:": "jspm_packages/npm/"
     }
   },
-  transpiler: false,
   packages: {
     "": {
       "defaultExtension": "js"
