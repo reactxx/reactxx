@@ -110,6 +110,7 @@
     <TypeScriptCompile Include="src\common\app\index.tsx" />
     <TypeScriptCompile Include="src\common\app\navigation.tsx" />
     <TypeScriptCompile Include="src\common\hallo-world.tsx" />
+    <TypeScriptCompile Include="src\common\primitives\index.tsx" />
     <TypeScriptCompile Include="src\common\primitives\e1.tsx" />
     <TypeScriptCompile Include="src\common\primitives\e2.tsx" />
     <TypeScriptCompile Include="src\common\primitives\e3.tsx" />

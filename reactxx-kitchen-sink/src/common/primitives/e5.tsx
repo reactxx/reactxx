@@ -20,10 +20,3 @@ const App: React.SFC = props => {
 }
 
 export default App
-
-export const meta = {
-  name: 'primitives/e5',
-  title: 'Vertical ScrollView',
-  descr: '',
-  Component: App
-}

@@ -2,13 +2,7 @@ import * as React from 'react'
 
 import { meta as navigation } from './navigation'
 import { meta as responsibleDrawer } from '../responsible-drawer/responsible-drawer'
-import { meta as primitives1 } from '../primitives/e1'
-import { meta as primitives2 } from '../primitives/e2'
-import { meta as primitives3 } from '../primitives/e3'
-import { meta as primitives4 } from '../primitives/e4'
-import { meta as primitives5 } from '../primitives/e5'
-import { meta as primitives6 } from '../primitives/e6'
-import { meta as primitives7 } from '../primitives/e7'
+import * as prims from '../primitives/index'
 
 export namespace KSink {
 
@@ -28,7 +22,7 @@ export namespace KSink {
 export let navigationExample: KSink.Example
 
 export const primitives: KSink.Example[] = [
-  primitives1, primitives2, primitives3, primitives4, primitives5, primitives6, primitives7,
+  prims.primitives1, prims.primitives2, prims.primitives3, prims.primitives4, prims.primitives5, prims.primitives6, prims.primitives7,
 ]
 
 export const components: KSink.Example[] = [

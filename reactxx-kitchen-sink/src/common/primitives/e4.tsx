@@ -25,10 +25,3 @@ const App: React.SFC = props => {
 
 export default App
 
-export const meta = {
-  name: 'primitives/e4',
-  title: 'Layout with Flex',
-  descr: '',
-  Component: App
-}
-//justifyContent: 'center', alignItems: 'center' 

@@ -14,9 +14,3 @@ const App: React.SFC = props => {
 
 export default App
 
-export const meta = {
-  name: 'primitives/e6',
-  title: 'Horizontal ScrollView',
-  descr: '',
-  Component: App
-}

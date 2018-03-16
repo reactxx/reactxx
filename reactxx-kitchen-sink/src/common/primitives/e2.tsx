@@ -8,9 +8,3 @@ const App: React.SFC = props => <Text className={{ fontSize: 64, $native: { font
 
 export default App
 
-export const meta = {
-  name: 'primitives/e2',
-  title: 'Platform specific rules',
-  descr: '',
-  Component: App
-}
