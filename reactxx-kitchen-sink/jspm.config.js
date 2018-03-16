@@ -2,13 +2,14 @@ SystemJS.config({
   browserConfig: {
     "paths": {
       "npm:": "/jspm_packages/npm/"
-    }
+    },
   },
   nodeConfig: {
     "paths": {
       "npm:": "jspm_packages/npm/"
     }
   },
+  transpiler: false,
   packages: {
     "": {
       "defaultExtension": "js"
