@@ -314,6 +314,6 @@ build-types-material-ui/material-ui
 reactxx-kitchen-sink/build
 muix/src/ks
 
-!docs/jspm_packages/
+!docs/reactxx/jspm_packages/
 !docs/bundle/
 !docs/bundle/index.js
