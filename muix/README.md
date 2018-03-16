@@ -1,5 +1,7 @@
 [![Edit doc](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/reactxx/reactxx/tree/master/doc?module=%2Fsrc%2FApp.tsx)
 
+Why typescript: https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935
+
 # muix
 Tiny material-ui add-in which allows creation of material-ui compatible React-Native components
 
