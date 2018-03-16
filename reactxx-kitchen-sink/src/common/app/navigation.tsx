@@ -8,24 +8,24 @@ import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 export type GotoExample = (example: KSink.Example) => void
 export type GetExampleUrl = (example: KSink.Example) => string
 
-const gitHubUrlIdx = 2
+const gitHubUrlIdx = 3
 const gitHubUrl = `https://github.com/reactxx/reactxx/tree/code-sandbox-${gitHubUrlIdx}/reactxx-kitchen-sink/src/common/`
 const sandBoxUrl = `https://codesandbox.io/embed/github/reactxx/reactxx/tree/code-sandbox-${gitHubUrlIdx}/reactxx-kitchen-sink?codemirror=1&fontsize=12&view=preview&`
 
 const webGithubUrl: GetExampleUrl = (ex) => `${gitHubUrl}${ex.name}.tsx`
 const webSandboxUrl: GetExampleUrl = (ex) => {
   const name = ex.name.replace('/', '%2F')
-  return `${sandBoxUrl}module=%2Fsrc%2Fcommon%2F${name}.tsx&initialpath=${name}`
+  return `${sandBoxUrl}module=%2Fsrc%2Fcommon%2F${name}.tsx&initialpath=${name}` 
 }
 
 class App extends React.Component<{}, KSink.Example> { 
 
-  state = nameToExample((window && window.location ? window.location.pathname.substr(1) : null) as string);
+  state = nameToExample((window && window.location && window.location.search ? window.location.search.substr(1) : null) as string);
 
   render() {
-    const content = this.state.name === 'app/navigation' ? <HomeContent /> : exampleToElement(this.state)
+    if (this.state.name !== 'app/navigation') return exampleToElement(this.state)
     return <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer actName={this.state.name} gotoExample={this.gotoExample} />}> 
-      <Content actExample={this.state}>{content}</Content>
+      <Content actExample={this.state}><HomeContent /></Content>
     </ResponsibleDrawer>
   }
 

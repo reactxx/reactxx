@@ -42,7 +42,7 @@ export const examples: KSink.Example[] = [
   ...primitives
 ]
 
-export const nameToExample = (name: string) => name ? (examples[name] || navigationExample) : navigationExample
+export const nameToExample = (name: string) => examples.find(e => e.name===name) || navigationExample
 export const exampleToElement = (ex: KSink.Example) => (<ex.Component />)
 
 const RootApp: React.SFC = props => {
