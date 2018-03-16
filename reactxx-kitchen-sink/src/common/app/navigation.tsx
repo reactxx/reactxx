@@ -6,12 +6,13 @@ import { ResponsibleDrawer } from '../responsible-drawer/responsible-drawer'
 import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 
 export type GotoExample = (example: KSink.Example) => void
+export type GetExampleUrl = (example: KSink.Example) => string
 
 const gitHubUrl = 'https://github.com/PavelPZ/reactxx/tree/master/reactxx-kitchen-sink/src/common/'
 const sandBoxUrl = 'https://codesandbox.io/embed/github/PavelPZ/reactxx/tree/master/reactxx-kitchen-sink?codemirror=1&fontsize=12&view=preview&'
 
-const webGithubUrl = (ex) => `${gitHubUrl}${ex.name}.tsx`
-const webSandboxUrl = (ex) => {
+const webGithubUrl: GetExampleUrl = (ex) => `${gitHubUrl}${ex.name}.tsx`
+const webSandboxUrl: GetExampleUrl = (ex) => {
   const name = ex.name.replace('/', '%2F')
   return `${sandBoxUrl}module=%2Fsrc%2Fcommon%2F${name}.tsx&initialpath=${name}`
 }
