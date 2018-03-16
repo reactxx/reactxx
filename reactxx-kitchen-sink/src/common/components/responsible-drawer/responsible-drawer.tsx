@@ -217,13 +217,3 @@ const Content: React.SFC = () => <ScrollView classes={{ container: { flex: 1 } }
 </ScrollView>
 
 export default App
-
-export const meta = {
-  name: 'responsible-drawer/responsible-drawer',
-  title: 'ResponsibleDrawer',
-  descr: '',
-  Component: App,
-}
-
-
-//modifyThemeState={themeState => ({ ...themeState, theme: { ...themeState.theme, themePars: { ...themeState.theme.themePars, [testAnimation.Consts.Drawer]: { ...themeState.theme.themePars[testAnimation.Consts.Drawer], animationDuration:1000} } } })}

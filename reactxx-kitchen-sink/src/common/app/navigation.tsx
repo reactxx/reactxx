@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { View, Text, ScrollView, Icon } from 'reactxx'
 import { examples, nameToExample, exampleToElement, primitives, components, navigationExample, KSink } from './index'
-import { ResponsibleDrawer } from '../responsible-drawer/responsible-drawer'
+import { ResponsibleDrawer } from '../components/responsible-drawer/responsible-drawer'
 import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 
 export type GotoExample = (example: KSink.Example) => void

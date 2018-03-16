@@ -1,8 +1,8 @@
 import * as React from 'react'
 
 import { meta as navigation } from './navigation'
-import { meta as responsibleDrawer } from '../responsible-drawer/responsible-drawer'
 import * as prims from '../primitives/index'
+import * as comps from '../components/index'
 
 export namespace KSink {
 
@@ -26,7 +26,7 @@ export const primitives: KSink.Example[] = [
 ]
 
 export const components: KSink.Example[] = [
-  responsibleDrawer,
+  comps.responsibleDrawer,
 ]
 
 export const examples: KSink.Example[] = [
