@@ -48,12 +48,18 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="bundle\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bundle\index.js" />
     <Content Include="index.html" />
     <Content Include="jspm.config.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="jspm_packages\npm\react-dom%4016.2.0.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="jspm_packages\npm\react%4016.2.0.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

@@ -57,7 +57,7 @@ const Content: React.SFC<{ actExample: KSink.Example }> = ({ children, actExampl
     <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...drawerButton, ...style }} onPress={onPress} data={iconData} />} />
     <Text className={logo}>ReactXX</Text>
     <Text numberOfLines={1} className={{ flexGrow: 1, flexShrink: 1, color: 'white', }}>{actExample.title}</Text>
-    {window.isWeb && actExample.name != 'app/navigation' && <Icon className={{ ...codeIcons, fontSize: 32 }} $web={{ viewBox: '0 0 1024 1024', url: webSandboxUrl(actExample) }} >{codeSandboxSVG}</Icon>}
+    {window.isWeb && actExample.name != 'xapp/navigation' && <Icon className={{ ...codeIcons, fontSize: 32 }} $web={{ viewBox: '0 0 1024 1024', url: webSandboxUrl(actExample) }} >{codeSandboxSVG}</Icon>}
     {window.isWeb && <Icon data={GithubCircle} className={codeIcons} $web={{ url: webGithubUrl(actExample) }} />}
   </View>
   <View className={{ flexGrow: 1, backgroundColor: 'white', padding: 15 }}>
@@ -73,9 +73,6 @@ const DrawerGroup = (title: string, items: KSink.Example[], gotoExample: GotoExa
   <Text className={{ color: 'gray', fontSize: 18, marginBottom: 15 }}>{title}</Text>
   {items.map(ex => <DrawerItem key={ex.name} example={ex} gotoExample={gotoExample} actName={actName} />)}
 </View>
-
-//const DrawerContent = (gotoExample: GotoExample, actName: string) => <View className={{ flex: 1 }}>
-//</View>
 
 const DrawerItem: React.SFC<{ example: KSink.Example, gotoExample: GotoExample, actName: string }> = ({ example, gotoExample, actName }) => {
   const isActive = actName === example.name
