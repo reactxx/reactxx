@@ -8,7 +8,7 @@ import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 export type GotoExample = (example: KSink.Example) => void
 export type GetExampleUrl = (example: KSink.Example) => string
 
-const gitHubUrlIdx = 3
+const gitHubUrlIdx = 4
 const gitHubUrl = `https://github.com/reactxx/reactxx/tree/code-sandbox-${gitHubUrlIdx}/reactxx-kitchen-sink/src/common/`
 const sandBoxUrl = `https://codesandbox.io/embed/github/reactxx/reactxx/tree/code-sandbox-${gitHubUrlIdx}/reactxx-kitchen-sink?codemirror=1&fontsize=12&view=preview&`
 
@@ -20,12 +20,15 @@ const webSandboxUrl: GetExampleUrl = (ex) => {
 
 class App extends React.Component<{}, KSink.Example> { 
 
-  state = nameToExample((window && window.location && window.location.search ? window.location.search.substr(1) : null) as string);
+  locationExample = nameToExample((window && window.location && window.location.pathname ? window.location.pathname.substr(1) : null))
+
+  state = this.locationExample
 
   render() {
-    if (this.state.name !== 'app/navigation') return exampleToElement(this.state)
+    if (this.locationExample.name !== 'app/navigation') return exampleToElement(this.locationExample)
+    const content = this.state.name === 'app/navigation' ? <HomeContent /> : exampleToElement(this.state)
     return <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer actName={this.state.name} gotoExample={this.gotoExample} />}> 
-      <Content actExample={this.state}><HomeContent /></Content>
+      <Content actExample={this.state}>{content}</Content>
     </ResponsibleDrawer>
   }
 
@@ -68,7 +71,7 @@ const HomeContent: React.SFC = () => <View className={{ flex: 1, }}>
 
 const DrawerGroup = (title: string, items: KSink.Example[], gotoExample: GotoExample, actName: string) => <View className={{ padding: 15 }}>
   <Text className={{ color: 'gray', fontSize: 18, marginBottom: 15 }}>{title}</Text>
-  {items.map(ex => ex.ignoreInNavigation ? null : <DrawerItem key={ex.name} example={ex} gotoExample={gotoExample} actName={actName} />)}
+  {items.map(ex => <DrawerItem key={ex.name} example={ex} gotoExample={gotoExample} actName={actName} />)}
 </View>
 
 //const DrawerContent = (gotoExample: GotoExample, actName: string) => <View className={{ flex: 1 }}>

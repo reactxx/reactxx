@@ -40,9 +40,9 @@ SystemJS.config({
     "process": "npm:jspm-nodelibs-process@0.2.1",
     "react": "npm:react@16.2.0",
     "react-dom": "npm:react-dom@16.2.0",
-    "reactxx": "npm:reactxx@0.1.38",
+    "reactxx": "npm:reactxx@0.1.40",
     "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
-    "reactxx-stateman": "npm:reactxx-stateman@0.1.54",
+    "reactxx-stateman": "npm:reactxx-stateman@0.1.57",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.2",
     "tslib": "npm:tslib@1.9.0",
@@ -235,7 +235,7 @@ SystemJS.config({
     },
     "npm:jspm-nodelibs-http@0.2.0": {
       "map": {
-        "http-browserify": "npm:stream-http@2.8.0"
+        "http-browserify": "npm:stream-http@2.8.1"
       }
     },
     "npm:encoding@0.1.12": {
@@ -251,15 +251,6 @@ SystemJS.config({
     "npm:jspm-nodelibs-domain@0.2.1": {
       "map": {
         "domain-browser": "npm:domain-browser@1.2.0"
-      }
-    },
-    "npm:stream-http@2.8.0": {
-      "map": {
-        "inherits": "npm:inherits@2.0.3",
-        "readable-stream": "npm:readable-stream@2.3.5",
-        "builtin-status-codes": "npm:builtin-status-codes@3.0.0",
-        "xtend": "npm:xtend@4.0.1",
-        "to-arraybuffer": "npm:to-arraybuffer@1.0.1"
       }
     },
     "npm:browserify-zlib@0.1.4": {
@@ -555,29 +546,38 @@ SystemJS.config({
         "isobject": "npm:isobject@3.0.1"
       }
     },
-    "npm:reactxx@0.1.38": {
+    "npm:reactxx@0.1.40": {
       "map": {
         "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
-        "reactxx-stateman": "npm:reactxx-stateman@0.1.54",
-        "warning": "npm:warning@3.0.0",
-        "jss-preset-default": "npm:jss-preset-default@4.3.0",
+        "reactxx-stateman": "npm:reactxx-stateman@0.1.57",
         "prop-types": "npm:prop-types@15.6.1",
-        "fela": "npm:fela@6.1.5",
-        "fela-dom": "npm:fela-dom@7.0.6",
-        "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@5.0.17",
-        "fela-plugin-lvha": "npm:fela-plugin-lvha@5.0.15",
+        "warning": "npm:warning@3.0.0",
+        "tslib": "npm:tslib@1.9.0",
+        "jss-preset-default": "npm:jss-preset-default@4.3.0",
         "fela-plugin-rtl": "npm:fela-plugin-rtl@1.0.6",
         "fela-plugin-prefixer": "npm:fela-plugin-prefixer@5.0.18",
-        "fela-plugin-extend": "npm:fela-plugin-extend@6.0.4",
+        "fela-plugin-lvha": "npm:fela-plugin-lvha@5.0.15",
         "fela-plugin-unit": "npm:fela-plugin-unit@5.0.16",
+        "fela": "npm:fela@6.1.5",
+        "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@5.0.17",
+        "fela-dom": "npm:fela-dom@7.0.6",
+        "fela-plugin-extend": "npm:fela-plugin-extend@6.0.4"
+      }
+    },
+    "npm:reactxx-stateman@0.1.57": {
+      "map": {
+        "prop-types": "npm:prop-types@15.6.1",
+        "warning": "npm:warning@3.0.0",
         "tslib": "npm:tslib@1.9.0"
       }
     },
-    "npm:reactxx-stateman@0.1.54": {
+    "npm:stream-http@2.8.1": {
       "map": {
-        "prop-types": "npm:prop-types@15.6.1",
-        "tslib": "npm:tslib@1.9.0",
-        "warning": "npm:warning@3.0.0"
+        "inherits": "npm:inherits@2.0.3",
+        "readable-stream": "npm:readable-stream@2.3.5",
+        "builtin-status-codes": "npm:builtin-status-codes@3.0.0",
+        "to-arraybuffer": "npm:to-arraybuffer@1.0.1",
+        "xtend": "npm:xtend@4.0.1"
       }
     }
   }
