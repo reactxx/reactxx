@@ -102,3 +102,16 @@ export const meta = {
   descr: '',
   Component: App,
 }
+
+
+import * as _RNE from 'react-native'
+import * as _MUIB from 'material-ui/Button/Button'
+
+declare global {
+  namespace RNN {
+    type RNE = typeof _RNE
+    type MUIB = typeof _MUIB
+    type ButtonProps = _MUIB.ButtonProps
+    const XXX: RNE
+  }
+}

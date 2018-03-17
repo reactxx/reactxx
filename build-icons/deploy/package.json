@@ -4,7 +4,6 @@
   "description": "MDI icons essentials for both react and react-native",
   "registry": "npm",
   "main": "index.js",
-  "jspmPackage": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/reactxx/reactxx.git"
@@ -23,11 +22,5 @@
   "bugs": {
     "url": "https://github.com/reactxx/reactxx"
   },
-  "homepage": "https://github.com/reactxx/reactxx#readme",
-  "jspm": {
-    "name": "reactxx-mdi",
-    "main": "index.js",
-    "dependencies": {},
-    "map": {}
-  }
+  "homepage": "https://github.com/reactxx/reactxx#readme"
 }

@@ -79,8 +79,9 @@
     <Content Include="%24compile.cmd" />
     <Content Include="%24refresh-all.cmd" />
     <Content Include="%24link.cmd" />
-    <Content Include="%24build-all.cmd" />
+    <Content Include="%24rebuild-packages.cmd" />
     <Content Include="%24bundle.cmd" />
+    <Content Include="%24publish-native-app.cmd" />
     <None Include="packages.config" />
     <Content Include="public\favicon.ico" />
     <Content Include="public\index.html" />

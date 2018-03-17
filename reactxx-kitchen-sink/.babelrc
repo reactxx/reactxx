@@ -11,9 +11,9 @@
       {
         "root": [ "." ],
         "alias": {
-          "reactxx": "reactxx/es/native",
           "^reactxx-mdi/(.+)": "reactxx-mdi/es/index",
-          "reactxx-stateman": "reactxx-stateman/es"
+          "reactxx-stateman": "reactxx-stateman/es",
+          "reactxx": "reactxx/es/native"
         }
       }
     ]

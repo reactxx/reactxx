@@ -1,3 +1,5 @@
+import React from 'react'
+
 import App1 from './responsible-drawer/responsible-drawer'
 
 export const responsibleDrawer = {
@@ -6,3 +8,13 @@ export const responsibleDrawer = {
   descr: '',
   Component: App1,
 }
+
+//const Button = x.Button
+
+const y = <RNN.XXX.Button title="" onPress={null} />
+
+//const z: MUIB = null
+
+//const prop: BPROP = null
+
+
