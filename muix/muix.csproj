@@ -164,7 +164,6 @@
     <TypeScriptCompile Include="src\mui\typings\theme.d.ts" />
     <TypeScriptCompile Include="src\mui\web\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\mui\web\Button\Button.tsx" />
-    <TypeScriptCompile Include="src\mui\web\index-d.d.ts" />
     <TypeScriptCompile Include="src\reactxx\common\animation.tsx" />
     <TypeScriptCompile Include="src\stateman\index.ts" />
     <TypeScriptCompile Include="src\reactxx\common\media-q.ts" />

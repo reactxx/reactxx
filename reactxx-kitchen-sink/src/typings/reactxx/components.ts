@@ -60,16 +60,6 @@ declare global {
       nameType: CompNames.ScrollView | CompNames.AnimatedScrollView
     }>
 
-    //interface SheetsX {
-    //  [CompNames.Text]?: PartialSheetX<TextShape>
-    //  [CompNames.AnimatedText]?: PartialSheetX<TextShape>
-    //  [CompNames.View]?: PartialSheetX<ViewShape>
-    //  [CompNames.AnimatedView]?: PartialSheetX<ViewShape>
-    //  [CompNames.Icon]?: PartialSheetX<IconShape>
-    //  [CompNames.AnimatedIcon]?: PartialSheetX<IconShape>
-    //  [CompNames.ScrollView]?: PartialSheetX<ScrollViewShape>
-    //  [CompNames.AnimatedScrollView]?: PartialSheetX<ScrollViewShape>
-    //}
     interface Shapes {
       [CompNames.Text]?: TextShape
       [CompNames.AnimatedText]?: TextShape

@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{69DC2C05-2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "types", "types\types.csproj", "{243C870C-4D5B-4784-AE34-D67139327694}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "build-types-material-ui", "build-types-material-ui\build-types-material-ui.csproj", "{EF7A4603-8230-43D0-A39B-94F6F255D111}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "obsolete-build-types-material-ui", "build-types-material-ui\obsolete-build-types-material-ui.csproj", "{EF7A4603-8230-43D0-A39B-94F6F255D111}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "build-shadows", "build-shadows\build-shadows.csproj", "{D7C88865-CFBB-4BEB-A427-59C0B95115BC}"
 EndProject

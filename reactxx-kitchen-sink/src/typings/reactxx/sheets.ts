@@ -142,10 +142,6 @@ declare global {
     /******************************************
       ALL SHEETS
     *******************************************/
-    //interface SheetsX { }
-
-    //type SheetsX2 = {[P in keyof Shapes]: PartialSheetX<Shapes[P]> }
-
     type SheetsWeb = { [P in keyof Shapes]?: SheetWeb<Shapes[P]> }
     type SheetsNative = { [P in keyof Shapes]?: SheetNative<Shapes[P]> }
     type Sheets = { [P in keyof Shapes]?: Sheet<Shapes[P]> }//  SheetsWeb | SheetsNative

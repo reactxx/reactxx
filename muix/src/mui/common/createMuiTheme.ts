@@ -35,7 +35,7 @@ export const createMuiTheme = (options: Muix.ThemeOptions = {}) => {
     shadows: ignored2, //ignored, use cross platform shadowsNew instead
 
     //use cross platform overrides options instead
-    overridesX,
+    //overridesX,
     overrides: ignored3, //ignored , use cross platform overridesNew instead
 
     ...other //contains direction, transitions, spacing, zIndex

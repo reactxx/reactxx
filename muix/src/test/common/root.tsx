@@ -16,7 +16,7 @@ import ReactXX from './reactxx/index'
 //import { AppContainer, MuiThemeProvider, createMuiTheme } from 'muix-styles'
 //import Button from 'muix-components/Button/Button'
 
-const apps: { title: string; app: React.ComponentType, overridesNew?: Muix.ThemeValueOrCreator<Muix.OverridesX> }[] = [
+const apps: { title: string; app: React.ComponentType/*, overridesNew?: Muix.ThemeValueOrCreator<Muix.OverridesX>*/ }[] = [
   //{ title: 'Animation', app: Animation },
   //{ title: 'ResponsibleDrawer', app: ResponsibleDrawer },
   //{ title: 'Typography', app: TypographyTest },
