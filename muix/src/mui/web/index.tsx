@@ -18,9 +18,9 @@ import { createMuiTheme } from '../common/createMuiTheme'
 
 import { toPlatformRuleSet, toPlatformSheet, toPlatformEvents } from 'reactxx'
 
-export const jss = create(preset())
-jss.options.createGenerateClassName = createGenerateClassName
-jss.options.insertionPoint = 'insertion-point-jss'
+export const jss = create({ ...preset(), createGenerateClassName, insertionPoint: 'insertion-point-jss'})
+//jss.options.createGenerateClassName = createGenerateClassName
+//jss.options.insertionPoint = 'insertion-point-jss'
 
 export const AppContainer: React.SFC = props => {
   const theme = createMuiTheme()

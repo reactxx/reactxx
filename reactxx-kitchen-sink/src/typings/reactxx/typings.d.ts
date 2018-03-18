@@ -7,33 +7,9 @@ declare module 'fela-plugin-rtl' {
   export default def
 }
 
-declare module "fbemitter" {
-  export type EventSubscription = any
-}
-
-declare module 'css-in-js' {
-  export const create
-}
-
-declare module 'jss' {
-  export const create
-  export type GenerateClassName<T> = any
-  export type JSSOptions = any
-  export type StyleSheet<T> = any
-}
-
 declare module 'jss-preset-default' {
   const def: any
   export default def
-}
-
-declare module 'invariant' {
-  const invariant: (condition: boolean, msg: string, ...arg: string[]) => void
-  export default invariant
-}
-
-declare module 'hoistNonReactStatics' {
-  export const any
 }
 
 declare module 'url-parse' {

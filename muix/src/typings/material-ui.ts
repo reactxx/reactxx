@@ -1,17 +1,17 @@
-import { Palette as MuiPalette } from 'material-ui/styles/createPalette'
-import { Style as MuiStyle, Typography as MuiTypography } from 'material-ui/styles/createTypography'
-import { ThemeOptions as MuiThemeOptions, Theme as MuiTheme } from 'material-ui/styles/createMuiTheme'
-import { ButtonProps as MuiButtonProps } from 'material-ui/Button/Button'
-import { ButtonBaseProps as MuiButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
+import * as pal from 'material-ui/styles/createPalette'
+import * as typo from 'material-ui/styles/createTypography'
+import * as th from 'material-ui/styles/createMuiTheme'
+import * as btn from 'material-ui/Button/Button'
+import * as btnBase from 'material-ui/ButtonBase/ButtonBase'
 
 declare global {
   namespace Mui {
-    type Palette = MuiPalette
-    type Style = MuiStyle
-    type ThemeOptions = MuiThemeOptions
-    type Typography = MuiTypography
-    type Theme = MuiTheme
-    type ButtonProps = MuiButtonProps
-    type ButtonBaseProps = MuiButtonBaseProps
+    type Palette = pal.Palette
+    type Style = typo.Style
+    type ThemeOptions = th.ThemeOptions
+    type Typography = typo.Typography
+    type Theme = th.Theme
+    type ButtonProps = btn.ButtonProps
+    type ButtonBaseProps = btnBase.ButtonBaseProps
   }
 }

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "main": "deploy/es/ks/native/index.js",
   "dependencies": {
+    "@types/jss": "^9.3.2",
     "deepmerge": "^2.1.0",
     "expo": "^25.0.0",
     "material-ui": "^1.0.0-beta.38",

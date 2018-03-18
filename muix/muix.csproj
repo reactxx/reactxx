@@ -126,6 +126,9 @@
     <TypeScriptCompile Include="src\doc\home.tsx" />
     <TypeScriptCompile Include="src\ks\common\app\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\app\navigation.tsx" />
+    <TypeScriptCompile Include="src\ks\common\components\index.tsx" />
+    <TypeScriptCompile Include="src\ks\common\components\responsible-drawer\responsible-drawer-d.d.ts" />
+    <TypeScriptCompile Include="src\ks\common\components\responsible-drawer\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\ks\common\hallo-world.tsx" />
     <TypeScriptCompile Include="src\ks\common\primitives\e1.tsx" />
     <TypeScriptCompile Include="src\ks\common\primitives\e2.tsx" />
@@ -134,17 +137,20 @@
     <TypeScriptCompile Include="src\ks\common\primitives\e5.tsx" />
     <TypeScriptCompile Include="src\ks\common\primitives\e6.tsx" />
     <TypeScriptCompile Include="src\ks\common\primitives\e7.tsx" />
-    <TypeScriptCompile Include="src\ks\common\responsible-drawer\responsible-drawer-d.d.ts" />
-    <TypeScriptCompile Include="src\ks\common\responsible-drawer\responsible-drawer.tsx" />
+    <TypeScriptCompile Include="src\ks\common\primitives\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\native\index.tsx" />
-    <TypeScriptCompile Include="src\ks\typings\mdi\web.d.ts" />
-    <TypeScriptCompile Include="src\ks\typings\reactxx\animation.d.ts" />
-    <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.d.ts" />
-    <TypeScriptCompile Include="src\ks\typings\reactxx\components.d.ts" />
-    <TypeScriptCompile Include="src\ks\typings\reactxx\media-q.d.ts" />
-    <TypeScriptCompile Include="src\ks\typings\reactxx\sheets.d.ts" />
-    <TypeScriptCompile Include="src\ks\typings\reactxx\theme.d.ts" />
+    <TypeScriptCompile Include="src\ks\try\Hello.tsx" />
+    <TypeScriptCompile Include="src\ks\try\index.tsx" />
+    <TypeScriptCompile Include="src\ks\try\package-def.d.ts" />
+    <TypeScriptCompile Include="src\ks\try\typings.d.ts" />
+    <TypeScriptCompile Include="src\ks\typings\mdi\web.ts" />
+    <TypeScriptCompile Include="src\ks\typings\reactxx\animation.ts" />
+    <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.ts" />
+    <TypeScriptCompile Include="src\ks\typings\reactxx\components.ts" />
+    <TypeScriptCompile Include="src\ks\typings\reactxx\media-q.ts" />
+    <TypeScriptCompile Include="src\ks\typings\reactxx\sheets.ts" />
+    <TypeScriptCompile Include="src\ks\typings\reactxx\theme.ts" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\web\index.tsx" />
     <TypeScriptCompile Include="src\mui\common\createTypography.ts" />
@@ -160,7 +166,6 @@
     <TypeScriptCompile Include="src\mui\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\mui\web\index-d.d.ts" />
     <TypeScriptCompile Include="src\reactxx\common\animation.tsx" />
-    <None Include="src\reactxx\index.ts_" />
     <TypeScriptCompile Include="src\stateman\index.ts" />
     <TypeScriptCompile Include="src\reactxx\common\media-q.ts" />
     <TypeScriptCompile Include="src\reactxx\common\components.ts" />
@@ -176,13 +181,6 @@
     <TypeScriptCompile Include="src\reactxx\web\components.tsx" />
     <TypeScriptCompile Include="src\reactxx\web\index.ts" />
     <TypeScriptCompile Include="src\reactxx\web\media-q.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\popper.js.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\jss.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\react-popper.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\react-transition-group\CSSTransition.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\react-transition-group\index.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\react-transition-group\Transition.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\react-transition-group\TransitionGroup.d.ts" />
     <TypeScriptCompile Include="src\test\common\mui\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\common\stateman\index.tsx" />
     <TypeScriptCompile Include="src\test\web\appstate\index.tsx" />
@@ -195,12 +193,10 @@
     <TypeScriptCompile Include="src\test\native\App.tsx" />
     <TypeScriptCompile Include="src\test\common\root.tsx" />
     <TypeScriptCompile Include="src\test\web\index.tsx" />
-    <TypeScriptCompile Include="src\mui\typings\libs\mui\material-ui-helper.d.ts" />
-    <None Include="src\mui\typings\libs\mui\material-ui.d.ts_" />
-    <TypeScriptCompile Include="src\mui\typings\libs\mui\material-ui-ex.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="src\mui\web\index.tsx" />
     <TypeScriptCompile Include="src\typings\material-ui.ts" />
-    <TypeScriptCompile Include="src\typings\react-n.ts" />
+    <TypeScriptCompile Include="src\typings\react-native.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

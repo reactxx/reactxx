@@ -128,13 +128,13 @@
     <TypeScriptCompile Include="src\try\index.tsx" />
     <TypeScriptCompile Include="src\try\package-def.d.ts" />
     <TypeScriptCompile Include="src\try\typings.d.ts" />
-    <TypeScriptCompile Include="src\typings\mdi\web.d.ts" />
-    <TypeScriptCompile Include="src\typings\reactxx\animation.d.ts" />
-    <TypeScriptCompile Include="src\typings\reactxx\common-style.d.ts" />
-    <TypeScriptCompile Include="src\typings\reactxx\components.d.ts" />
-    <TypeScriptCompile Include="src\typings\reactxx\media-q.d.ts" />
-    <TypeScriptCompile Include="src\typings\reactxx\sheets.d.ts" />
-    <TypeScriptCompile Include="src\typings\reactxx\theme.d.ts" />
+    <TypeScriptCompile Include="src\typings\mdi\web.ts" />
+    <TypeScriptCompile Include="src\typings\reactxx\animation.ts" />
+    <TypeScriptCompile Include="src\typings\reactxx\common-style.ts" />
+    <TypeScriptCompile Include="src\typings\reactxx\components.ts" />
+    <TypeScriptCompile Include="src\typings\reactxx\media-q.ts" />
+    <TypeScriptCompile Include="src\typings\reactxx\sheets.ts" />
+    <TypeScriptCompile Include="src\typings\reactxx\theme.ts" />
     <TypeScriptCompile Include="src\typings\reactxx\typings.d.ts" />
     <TypeScriptCompile Include="src\web\index.tsx" />
   </ItemGroup>
