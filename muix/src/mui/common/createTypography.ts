@@ -1,7 +1,7 @@
 ﻿import muiCreateTypography from 'material-ui/styles/createTypography'
 import { toPlatformSheet, deepMerge } from 'reactxx'
 
-export default function createTypography(palette: Muix.Palette, optionOrCreator: Muix.TypographyOptionsOrCreatorX) {
+export default function createTypography(palette: Mui.Palette, optionOrCreator: Muix.TypographyOptionsOrCreatorX) {
   const options = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Muix.TypographyOptionsX
   const mui = muiCreateTypography(palette, options)
   const {
@@ -49,7 +49,7 @@ export default function createTypography(palette: Muix.Palette, optionOrCreator:
   }
 
   type Shape = ReactXX.OverwriteShape<{
-    common: ReactXX.ShapeTexts<Muix.Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'> & { noWrap?: any /*ReactN.TextProperties*/ }
+    common: ReactXX.ShapeTexts<Mui.Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'> & { noWrap?: any /*ReactN.TextProperties*/ }
   }>
 
 
@@ -82,7 +82,7 @@ export default function createTypography(palette: Muix.Palette, optionOrCreator:
       fontFamily,
       pxToRem,
       ...sheet as any
-    } as Muix.Typography,
+    } as Mui.Typography,
     typographyX: {
       fontSize,
       htmlFontSize,

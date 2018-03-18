@@ -9,7 +9,7 @@ declare namespace MuiButtonBase {
   type Shape = ReactXX.OverwriteShape<{
     common: ReactXX.ShapeViews<'root'>
     native: ReactXX.ShapeViews<'ripple'>
-    props: Muix.ButtonBaseProps //& ReactXX.OnPressAllWeb
+    props: Mui.ButtonBaseProps //& ReactXX.OnPressAllWeb
     propsNative: ReactN.TouchableOpacityProperties
     nameType: CompNames.ButtonBase
   }>

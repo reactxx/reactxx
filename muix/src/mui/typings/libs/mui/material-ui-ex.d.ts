@@ -12,7 +12,7 @@ declare namespace Muix {
   type muiSheet<ClassKey extends string = string> = Record<ClassKey, ReactXX.RulesetWeb>
   type muiSheetCreator<ClassKey extends string = string> = ThemeValueOrCreator<muiSheet<ClassKey>>
   type muiClassSheet<ClassKey extends string = string> = Record<ClassKey, string>
-  interface muiCodeProps<ClassKey extends string = string> { classes: muiClassSheet<ClassKey>; theme?: Muix.Theme }
+  interface muiCodeProps<ClassKey extends string = string> { classes: muiClassSheet<ClassKey>; theme?: Theme }
   interface muiProps<ClassKey extends string = string> { classes?: Partial<muiClassSheet<ClassKey>>; innerRef?: React.Ref<any>; style?: ReactXX.RulesetWeb }
   type muiWithStyles = <ClassKey extends string>(style: muiSheetCreator<ClassKey>, options?: WithStylesOptionsNew) => <P>(component: muiCodeComponentType<P, ClassKey>) => muiComponentType<P, ClassKey>
   type muiCodeComponentType<P, ClassKey extends string> = React.ComponentType<P & muiCodeProps<ClassKey>>
@@ -25,7 +25,7 @@ declare namespace Muix {
   type MuiThemeContextValue = { theme: Theme }
   type MuiOverridesContext = { childOverrides: ReactXX.Sheets }
 
-  type typoStyle = Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'
+  type typoStyle = Mui.Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'
 
   interface FontStyleNew {
     fontSize: number
@@ -42,9 +42,9 @@ declare namespace Muix {
 
   type TypographyOptionsX = {[type in typoStyle]?: ReactXX.TextRulesetX } & Partial<FontStyleNew>
   type TypographyX = {[type in typoStyle]: ReactXX.TextRulesetX } & FontStyleNew
-  type TypographyOptionsOrCreatorX = TypographyOptionsX | ((palette: Palette) => TypographyOptionsX)
+  type TypographyOptionsOrCreatorX = TypographyOptionsX | ((palette: Mui.Palette) => TypographyOptionsX)
 
-  interface Theme {
+  interface Theme extends Mui.Theme {
     shadowsNew: ThemeShadows
     typographyX: TypographyX
     //$sheetCache: Array<SheetCacheItem>
@@ -62,9 +62,9 @@ declare namespace Muix {
   type ThemeShadowsX = ReactXX.RulesetX<ReactN.ViewStyle>[]
   type ThemeShadows = ReactXX.ViewRulesetCommonX[]
 
-  interface ThemeOptions {
+  interface ThemeOptions extends Mui.ThemeOptions {
     shadowsX?: ThemeShadowsX
-    overridesX?: Muix.ThemeValueOrCreator<OverridesX>
+    overridesX?: ThemeValueOrCreator<OverridesX>
     typographyX?: TypographyOptionsOrCreatorX
   }
 

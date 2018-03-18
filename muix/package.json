@@ -3,22 +3,21 @@
   "version": "0.1.0",
   "main": "deploy/es/ks/native/index.js",
   "dependencies": {
+    "deepmerge": "^2.1.0",
     "expo": "^25.0.0",
+    "material-ui": "^1.0.0-beta.38",
     "react": "16.2.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "reactxx-mdi": "^0.1.62",
     "reactxx-shadows": "^0.1.18",
     "tslib": "^1.9.0",
-    "warning": "^3.0.0",
-    "material-ui": "1.0.0-beta.37",
-    "deepmerge": "^2.1.0"
+    "warning": "^3.0.0"
   },
   "devDependencies": {
     "@types/expo": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/expo/types-expo-0.1.1.tgz",
     "@types/prop-types": "^15.5.2",
     "@types/react": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/react/types-react-0.1.1.tgz",
     "@types/react-dom": "^16.0.3",
-    "@types/react-native": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/react-native/types-react-native-0.1.1.tgz",
+    "@types/react-native": "^0.52.18",
     "@types/warning": "^3.0.0",
     "babel-plugin-module-resolver": "^3.0.0",
     "fela": "^6.1.3"

@@ -25,7 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>2.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -196,9 +196,10 @@
     <TypeScriptCompile Include="src\test\common\root.tsx" />
     <TypeScriptCompile Include="src\test\web\index.tsx" />
     <TypeScriptCompile Include="src\mui\typings\libs\mui\material-ui-helper.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\libs\mui\material-ui.d.ts" />
+    <None Include="src\mui\typings\libs\mui\material-ui.d.ts_" />
     <TypeScriptCompile Include="src\mui\typings\libs\mui\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="src\mui\web\index.tsx" />
+    <TypeScriptCompile Include="src\typings\material-ui.ts" />
     <TypeScriptCompile Include="src\typings\react-n.ts" />
   </ItemGroup>
   <ItemGroup>

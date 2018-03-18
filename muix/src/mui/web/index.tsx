@@ -60,7 +60,7 @@ export const muiCompatible = <R extends ReactXX.Shape>(Component: Muix.muiCompon
 
   const Styled: ReactXX.SFCX<R> = props => {
 
-    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, modifyThemeState, ...other } = props as (ReactXX.PropsX & ReactXX.OnPressAllX)
+    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, modifyThemeState, ...other } = props as any as (ReactXX.PropsX & ReactXX.OnPressAllX)
 
     const classes = toPlatformSheet(classesX as ReactXX.SheetX)
 
