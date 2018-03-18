@@ -55,8 +55,9 @@ const expandOverrides = (themeState: ReactXX.ThemeState) => {
 }
 
 type webKeys<R extends ReactXX.Shape> = ReactXX.getWeb<R> | keyof ReactXX.getCommon<R>
+type muiComponentType<P, ClassKey extends string> = React.ComponentType<P & Mui.StyledComponentProps<ClassKey>>
 
-export const muiCompatible = <R extends ReactXX.Shape>(Component: Muix.muiComponentType<ReactXX.getPropsWeb<R>, webKeys<R>>) => {
+export const muiCompatible = <R extends ReactXX.Shape>(Component: muiComponentType<ReactXX.getPropsWeb<R>, webKeys<R>>) => {
 
   const Styled: ReactXX.SFCX<R> = props => {
 

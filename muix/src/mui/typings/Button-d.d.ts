@@ -18,11 +18,11 @@
 }
 
 declare namespace ReactXX {
-  interface SheetsX {
-    [MuiButton.CompNames.Button]?: ReactXX.PartialSheetX<MuiButton.Shape>
-    [MuiButton.CompNames.ButtonIconLeft]?: ReactXX.PartialSheetX<MuiButton.Shape>
-    [MuiButton.CompNames.ButtonIconRight]?: ReactXX.PartialSheetX<MuiButton.Shape>
-  }
+  //interface SheetsX {
+  //  [MuiButton.CompNames.Button]?: ReactXX.PartialSheetX<MuiButton.Shape>
+  //  [MuiButton.CompNames.ButtonIconLeft]?: ReactXX.PartialSheetX<MuiButton.Shape>
+  //  [MuiButton.CompNames.ButtonIconRight]?: ReactXX.PartialSheetX<MuiButton.Shape>
+  //}
   interface Shapes {
     [MuiButton.CompNames.Button]?: MuiButton.Shape
     [MuiButton.CompNames.ButtonIconLeft]?: MuiButton.Shape

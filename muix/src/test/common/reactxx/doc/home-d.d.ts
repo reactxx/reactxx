@@ -15,9 +15,9 @@ declare namespace DocHome {
 }
 
 declare namespace ReactXX {
-  interface SheetsX {
-    [DocHome.CompNames.ExpandPanel]?: PartialSheetX<DocHome.ExpandedPanelShape>
-  }
+  //interface SheetsX {
+  //  [DocHome.CompNames.ExpandPanel]?: PartialSheetX<DocHome.ExpandedPanelShape>
+  //}
   interface Shapes {
     [DocHome.CompNames.ExpandPanel]?: DocHome.ExpandedPanelShape
   }

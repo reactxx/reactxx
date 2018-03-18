@@ -142,7 +142,7 @@ declare global {
     /******************************************
       ALL SHEETS
     *******************************************/
-    interface SheetsX { }
+    //interface SheetsX { }
 
     //type SheetsX2 = {[P in keyof Shapes]: PartialSheetX<Shapes[P]> }
 

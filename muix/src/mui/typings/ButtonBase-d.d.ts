@@ -25,9 +25,9 @@ declare namespace MuiButtonBase {
 }
 
 declare namespace ReactXX {
-  interface SheetsX {
-    [MuiButtonBase.CompNames.ButtonBase]?: ReactXX.PartialSheetX<MuiButtonBase.Shape>
-  }
+  //interface SheetsX {
+  //  [MuiButtonBase.CompNames.ButtonBase]?: ReactXX.PartialSheetX<MuiButtonBase.Shape>
+  //}
   interface Shapes {
     [MuiButtonBase.CompNames.ButtonBase]?: MuiButtonBase.Shape
   }
