@@ -199,6 +199,7 @@
     <TypeScriptCompile Include="src\mui\typings\libs\mui\material-ui.d.ts" />
     <TypeScriptCompile Include="src\mui\typings\libs\mui\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="src\mui\web\index.tsx" />
+    <TypeScriptCompile Include="src\typings\react-n.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

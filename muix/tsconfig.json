@@ -25,7 +25,7 @@
     "noImplicitReturns": true,
     "strictFunctionTypes": false,
 
-    "experimentalDecorators": true,
+     "experimentalDecorators": true,
     "noImplicitAny": false,
     "jsx": "react-native",
     "lib": [
