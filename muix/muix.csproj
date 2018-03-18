@@ -195,8 +195,8 @@
     <TypeScriptCompile Include="src\test\web\index.tsx" />
     <TypeScriptCompile Include="src\mui\typings\material-ui-ex.d.ts" />
     <TypeScriptCompile Include="src\mui\web\index.tsx" />
-    <TypeScriptCompile Include="src\typings\material-ui.ts" />
-    <TypeScriptCompile Include="src\typings\react-native.ts" />
+    <TypeScriptCompile Include="src\typings\material-ui.d.ts" />
+    <TypeScriptCompile Include="src\typings\react-native.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

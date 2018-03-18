@@ -1,8 +1,9 @@
 set drive=d:
 set root=%drive%\reactxx\types\
 %drive%
-cd %root%react-native
-call npm pack
+
+rem cd %root%react-native
+rem call npm pack
 
 cd %root%react
 call npm pack
