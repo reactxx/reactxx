@@ -145,7 +145,6 @@
     <TypeScriptCompile Include="src\ks\try\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\typings\mdi\web.ts" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.ts" />
-    <None Include="src\reactxx\typings\sheets.ts_" />
     <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\web\index.tsx" />
     <TypeScriptCompile Include="src\mui\common\createTypography.ts" />

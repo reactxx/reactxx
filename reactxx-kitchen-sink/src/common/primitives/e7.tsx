@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import { SheetsT } from 'reactxx-typings'
 import { Text, LoremIpsum, } from 'reactxx'

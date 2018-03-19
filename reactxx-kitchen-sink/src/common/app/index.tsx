@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import { meta as navigation } from './navigation'
 import * as prims from '../primitives/index'

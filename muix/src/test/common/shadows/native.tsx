@@ -1,6 +1,6 @@
 //for testing with https://snack.expo.io/
 
-import * as React from 'react'
+import React from 'react'
 
 import { ScrollView, View, Text, ViewStyle } from 'react-native'
 

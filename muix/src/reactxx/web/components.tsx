@@ -1,5 +1,5 @@
-import * as React from 'react'
-import * as ReactN from 'react-native'
+import React from 'react'
+import ReactN from 'react-native'
 import warning from 'warning'
 import { rulesetsToClassNames } from './fela'
 

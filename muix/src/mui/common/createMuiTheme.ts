@@ -1,5 +1,5 @@
-import * as React from 'react'
-import * as ReactN from 'react-native'
+import React from 'react'
+import ReactN from 'react-native'
 import { SheetsT } from 'reactxx-typings'
 
 import PropTypes from 'prop-types'

@@ -1,6 +1,6 @@
 // this code is 100% shared between web and native
-import * as React from 'react'
-import * as ReactN from 'react-native'
+import React from 'react'
+import ReactN from 'react-native'
 
 // different import of 'ScrollView, View, Text, Icon, AnimatedView' components for web and native
 import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } from 'reactxx'

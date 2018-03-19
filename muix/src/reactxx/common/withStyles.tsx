@@ -1,5 +1,5 @@
-import * as React from 'react'
-import * as ReactN from 'react-native'
+import React from 'react'
+import ReactN from 'react-native'
 //import hoistNonReactStatics from 'hoist-non-react-statics'
 import { toPlatformRuleSet, toPlatformSheet, deepMerge } from './index'
 import { ComponentsMediaQ /*platform dependent*/, } from 'reactxx'

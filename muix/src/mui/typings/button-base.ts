@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 
 import { SheetsT } from 'reactxx-typings'
-//import * as ReactN from 'react-native'
+//import ReactN from 'react-native'
 //import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
 export namespace MuiButtonBaseT {
 
