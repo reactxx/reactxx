@@ -6805,9 +6805,13 @@ reactxx-stateman@^0.1.36:
     tslib "^1.9.0"
     warning "^3.0.0"
 
-reactxx@^0.1.40:
-  version "0.1.40"
-  resolved "https://registry.yarnpkg.com/reactxx/-/reactxx-0.1.40.tgz#d61471a26e349d65dbdc28c04501fb9826f2f94f"
+reactxx-typings@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/reactxx-typings/-/reactxx-typings-0.1.1.tgz#a4f100952135e487e72c6261aeaf12a1a29ee93c"
+
+reactxx@^0.1.41:
+  version "0.1.41"
+  resolved "https://registry.yarnpkg.com/reactxx/-/reactxx-0.1.41.tgz#e1a6a0d3789c6bbc2871ee2903e928ec03b0fa96"
   dependencies:
     fela "^6.1.4"
     fela-dom "^7.0.5"
@@ -6821,6 +6825,7 @@ reactxx@^0.1.40:
     prop-types "^15.6.1"
     reactxx-mdi "^0.1.63"
     reactxx-stateman "^0.1.36"
+    reactxx-typings "^0.1.0"
     tslib "^1.9.0"
     warning "^3.0.0"
 

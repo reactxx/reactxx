@@ -11,6 +11,7 @@ import { ThemeT, CompsT, SheetsT } from 'reactxx-typings'
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 import { MuiButtonT } from '../../typings/button'
 import { MuiButtonBaseT } from '../../typings/button-base'
+import * as Mui from '../../typings/mui'
 
 const getTextIconColor = (color: string) => ({
   label: { color },

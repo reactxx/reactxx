@@ -1,14 +1,14 @@
 {
   "name": "reactxx",
-  "version": "0.1.40",
+  "version": "0.1.41",
   "main": "web/index.js",
-  "module": "es/native/index.js",
   "description": "Framework which enables creation of visual components for both react and react-native",
   "registry": "npm",
   "dependencies": {
     "tslib": "^1.9.0",
     "warning": "^3.0.0",
     "prop-types": "^15.6.1",
+    "reactxx-typings": "^0.1.0",
     "reactxx-mdi": "^0.1.63",
     "reactxx-stateman": "^0.1.36",
     "fela": "^6.1.4",

@@ -4,7 +4,7 @@ import React from 'react'
 
 import createGenerateClassName from 'material-ui/styles/createGenerateClassName'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { create } from 'jss';
+import jssShared, { create} from 'jss';
 import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
 import { ThemeProvider, ThemeModifier } from 'reactxx'
@@ -20,7 +20,9 @@ import * as Mui from '../typings/mui'
 
 import { toPlatformRuleSet, toPlatformSheet, toPlatformEvents } from 'reactxx'
 
-export const jss = create({ ...preset(), createGenerateClassName, insertionPoint: 'insertion-point-jss'})
+export type JSS = typeof jssShared
+
+export const jss: JSS = create({ ...preset(), createGenerateClassName, insertionPoint: 'insertion-point-jss' })
 //jss.options.createGenerateClassName = createGenerateClassName
 //jss.options.insertionPoint = 'insertion-point-jss'
 

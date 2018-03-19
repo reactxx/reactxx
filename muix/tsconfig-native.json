@@ -12,6 +12,7 @@
 
       "reactxx-typings": [ "src/typings/index" ],
       "reactxx-typings/mdi": [ "src/typings/mdi-native" ],
+      "reactxx-mui/typings/*": [ "src/mui/typings/*" ],
 
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ],
       "reactxx": [ "src/reactxx/native/index" ],
@@ -43,6 +44,6 @@
     "node_modules/reactxx-mdi/es/typings.d.ts"
   ],
   "exclude": [
-    "src/ks/typings/mdi/web.d.ts" 
+    "src/ks/typings/mdi/web.d.ts"
   ]
 }

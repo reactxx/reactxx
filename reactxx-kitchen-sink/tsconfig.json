@@ -31,11 +31,6 @@
       "es5",
       "es6",
       "esnext.asynciterable"
-    ],
-
-    "typeRoots": [
-      "node_modules/@types",
-      "src/try"
     ]
 
   },

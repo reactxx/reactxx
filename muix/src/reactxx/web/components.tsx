@@ -5,7 +5,7 @@ import { rulesetsToClassNames } from './fela'
 
 import { withStyles } from '../common/withStyles'
 import * as sheets from '../common/components'
-import { CompsT, SheetsT } from 'reactxx-typings'
+import { CompsT, SheetsT, ThemeT } from 'reactxx-typings'
 
 const view: SheetsT.CodeSFCWeb<CompsT.ViewShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq,...rest } = props

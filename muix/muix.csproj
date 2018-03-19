@@ -145,6 +145,7 @@
     <TypeScriptCompile Include="src\ks\try\index.tsx" />
     <TypeScriptCompile Include="src\ks\try\package-def.d.ts" />
     <TypeScriptCompile Include="src\ks\try\typings.d.ts" />
+    <TypeScriptCompile Include="src\ks\typings.d.ts" />
     <TypeScriptCompile Include="src\typings\mdi-native.ts" />
     <TypeScriptCompile Include="src\typings\mdi-web.ts" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.ts" />

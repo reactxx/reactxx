@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactN from 'react-native'
 
 import { AnimationDriver } from 'reactxx' //NATIVE or WEB animation driver
 import { Animation } from 'reactxx-typings' 

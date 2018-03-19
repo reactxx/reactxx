@@ -8,7 +8,7 @@ import { withStyles } from 'reactxx'
 import { ThemeT, SheetsT } from 'reactxx-typings'
 
 import { MuiButtonBaseT } from '../../typings/button-base'
-
+import * as Mui from '../../typings/mui'
 
 const sheet: ThemeT.SheetCreatorX<MuiButtonBaseT.Shape> = ({ palette }) => ({
   root: {
