@@ -3,7 +3,7 @@ import * as React from 'react'
 import * as ReactN from 'react-native'
 
 // different import of 'ScrollView, View, Text, Icon, AnimatedView' components for web and native
-import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } from 'reactxx'
+import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum, ThemeT } from 'reactxx'
 
 import { createContext, ConsumerType as StateConsumerType, ConsumerProps } from 'reactxx-stateman' 
 
@@ -23,7 +23,7 @@ type AnimationType = React.ComponentClass<ReactXX.PropsX<ReactXXResponsibleDrawe
 
 // ResponsibleDrawer's sheet. 
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
-const sheet: ReactXX.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, compThemePar) => ({
+const sheet: ThemeT.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, compThemePar) => ({
 
   $mediaq: { // media query window-width breakpoints. Component receives actual width in "mediaq" prop and is rerendered when mediaq changed.
     mobile: [null, compThemePar.breakpoints[0]],

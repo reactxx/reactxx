@@ -1,6 +1,7 @@
 import { DriverLow, getGaps } from '../common/animation'
 import warning from 'warning'
 import { sheetToClassSheet, keyFrameToClassNames } from './fela'
+import { Animation } from '../typings/animation' 
 
 export class Driver<T extends Animation.Shape> extends DriverLow<T> implements Animation.DriverWeb<T>  {
 

@@ -1,5 +1,7 @@
 import warning from 'warning'
 
+import { MediaQ } from '../typings/media-q'
+
 export abstract class ComponentsMediaQLow<TState extends string = string>  {
 
   constructor(protected component: React.Component) { }

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Text, LoremIpsum } from 'reactxx'
+import { Text, LoremIpsum, } from 'reactxx'
 
 const App: React.SFC = props => {
   const changeColorRuleset: ReactXX.TextRulesetX = {

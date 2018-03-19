@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Text, View, ScrollView, Icon, AppContainer, LoremIpsum } from 'reactxx'
+import { Text, View, ScrollView, Icon, AppContainer, LoremIpsum, ThemeT, CompsT } from 'reactxx'
 
 interface Example {
   title: string
@@ -164,6 +164,6 @@ const E01$01_: Example = {
 }
 
 
-let t: ReactXX.ThemeState
+let t: ThemeT.ThemeState
 
-t[ReactXX.CompNames.ScrollView].sheet.container
+t[CompsT.CompNames.ScrollView].sheet.container

@@ -4,17 +4,19 @@ import * as ReactN from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
-import { Text, withStyles, toPlatformRuleSet, compThemeSheetModifier, ThemeModifier } from 'reactxx'
+import { Text, withStyles, toPlatformRuleSet, compThemeSheetModifier, ThemeModifier, ThemeT, CompsT } from 'reactxx'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
+import { MuiButtonT } from '../../typings/button'
+import { MuiButtonBaseT } from '../../typings/button-base'
 
 const getTextIconColor = (color: string) => ({
   label: { color },
   labelIcon: {color },
-} as ReactXX.PartialSheetX<MuiButton.Shape>)
+} as ReactXX.PartialSheetX<MuiButtonT.Shape>)
 
 
-const sheets: (isLeft?: boolean) => ReactXX.SheetCreatorX<MuiButton.Shape> = isLeft => ({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
+const sheets: (isLeft?: boolean) => ThemeT.SheetCreatorX<MuiButtonT.Shape> = isLeft => ({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
 
   root: {
     flexDirection: 'row',
@@ -112,7 +114,7 @@ const sheets: (isLeft?: boolean) => ReactXX.SheetCreatorX<MuiButton.Shape> = isL
 })
 
 
-const button: ReactXX.CodeSFCNative<MuiButton.Shape> = (props, context) => {
+const button: ReactXX.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
 
 
   //var x = props.mini
@@ -151,8 +153,8 @@ const button: ReactXX.CodeSFCNative<MuiButton.Shape> = (props, context) => {
 
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 
-  const RippleWithOverrides: React.SFC<MuiButtonBase.RippleEfectProps> = props => <ThemeModifier
-    modify={compThemeSheetModifier<ReactXX.IconShape, ReactXX.TextShape>(ReactXX.CompNames.Icon, iconOverride, ReactXX.CompNames.Text, labelOverride)}>
+  const RippleWithOverrides: React.SFC<MuiButtonBaseT.RippleEfectProps> = props => <ThemeModifier
+    modify={compThemeSheetModifier<CompsT.IconShape, CompsT.TextShape>(CompsT.CompNames.Icon, iconOverride, CompsT.CompNames.Text, labelOverride)}>
     <RippleEffect {...props}/>
   </ThemeModifier>
 
@@ -162,8 +164,8 @@ const button: ReactXX.CodeSFCNative<MuiButton.Shape> = (props, context) => {
   </RippleWithOverrides>
 }
 
-const Button = withStyles<MuiButton.Shape>(MuiButton.CompNames.Button, sheets())(button)
-export const ButtonIconStart = withStyles<MuiButton.Shape>(MuiButton.CompNames.ButtonIconLeft, sheets(true))(button)
-export const ButtonIconEnd = withStyles<MuiButton.Shape>(MuiButton.CompNames.ButtonIconRight, sheets(false))(button)
+const Button = withStyles<MuiButtonT.Shape>(MuiButtonT.CompNames.Button, sheets())(button)
+export const ButtonIconStart = withStyles<MuiButtonT.Shape>(MuiButtonT.CompNames.ButtonIconLeft, sheets(true))(button)
+export const ButtonIconEnd = withStyles<MuiButtonT.Shape>(MuiButtonT.CompNames.ButtonIconRight, sheets(false))(button)
 
 export default Button

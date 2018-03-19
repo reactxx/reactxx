@@ -2,19 +2,22 @@ import * as React from 'react'
 import * as ReactN from 'react-native'
 //import hoistNonReactStatics from 'hoist-non-react-statics'
 import { toPlatformRuleSet, toPlatformSheet, deepMerge } from './index'
-import { ComponentsMediaQ /*platform dependent*/ } from 'reactxx'
+import { ComponentsMediaQ /*platform dependent*/, } from 'reactxx'
 import warning from 'warning'
 import { getAnimations } from './animation'
 
 import { ThemeModifier, compThemeCreate } from './theme'
+import { ThemeT } from '../typings/theme'
+import { Animation } from '../typings/animation'
+import { MediaQ } from '../typings/media-q'
 
 //http://jamesknelson.com/should-i-use-shouldcomponentupdate/
-export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R>, createSheetX: ReactXX.SheetCreatorX<R>, compThemePar?: ReactXX.getCompTheme<R>) => (Component: ReactXX.CodeComponentType<R>) => {
+export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R>, createSheetX: ThemeT.SheetCreatorX<R>, compThemePar?: ReactXX.getCompTheme<R>) => (Component: ReactXX.CodeComponentType<R>) => {
 
   const name = _name as string
   defaultCompThemePars[name] = compThemePar
 
-  type TStyled = ReactXX.PropsX & ReactXX.ThemeCompSelectedX
+  type TStyled = ReactXX.PropsX & ThemeT.ThemeCompSelectedX
 
   class Styled extends React.PureComponent<TStyled> {
     classes: ReactXX.Sheet
@@ -93,10 +96,10 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
 
 }
 
-const modifierSelector = (componentName: string) => (themeStates: ReactXX.ThemeState) => {
-  const compTheme = themeStates[componentName] as ReactXX.ThemeCompX
-  if (!compTheme) return { theme: themeStates.theme } as ReactXX.ThemeCompSelectedX
-  return { theme: themeStates.theme, compThemePar: compTheme.par, compThemeSheet: compTheme.sheet } as ReactXX.ThemeCompSelectedX
+const modifierSelector = (componentName: string) => (themeStates: ThemeT.ThemeState) => {
+  const compTheme = themeStates[componentName] as ThemeT.ThemeCompX
+  if (!compTheme) return { theme: themeStates.theme } as ThemeT.ThemeCompSelectedX
+  return { theme: themeStates.theme, compThemePar: compTheme.par, compThemeSheet: compTheme.sheet } as ThemeT.ThemeCompSelectedX
 }
 
 let renderCount = 0
@@ -155,7 +158,7 @@ const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => {
 //*************************************************************** 
 // HELPERS
 //***************************************************************
-function applyTheme<T>(theme: ReactXX.ThemeX, compThemePar, creator: T | ((theme: ReactXX.ThemeX, compThemePar) => T)) {
+function applyTheme<T>(theme: ThemeT.ThemeX, compThemePar, creator: T | ((theme: ThemeT.ThemeX, compThemePar) => T)) {
   return typeof creator === 'function' ? creator(theme, compThemePar) : creator
 }
 

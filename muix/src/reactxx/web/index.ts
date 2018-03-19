@@ -1,5 +1,8 @@
 window.isWeb = true
 
+export * from '../typings/theme'
+export * from '../typings/components'
+
 export * from '../common/index'
 export * from '../common/withStyles'
 export * from '../common/components'
@@ -9,4 +12,3 @@ export { Driver as AnimationDriver } from './animation'
 export * from './components'
 export * from './media-q'
 export * from './fela'
-

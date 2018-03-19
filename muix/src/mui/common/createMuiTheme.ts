@@ -13,6 +13,8 @@ import transitions from 'material-ui/styles/transitions'
 import zIndex from 'material-ui/styles/zIndex'
 import spacing from 'material-ui/styles/spacing'
 
+import { Muix } from '../typings/muix'
+
 //platform specific code
 import createTypography from './createTypography'
 
@@ -49,7 +51,7 @@ export const createMuiTheme = (options: Muix.ThemeOptions = {}) => {
 
   //const typographyOptionOrCreator = getTypographyOptionOrCreatorX(typographyNew)
 
-  const muiTheme: ReactXX.Theme = {
+  const muiTheme: Muix.Theme = {
     direction: 'ltr', //the same value for web and native
     palette, //the same value for web and native
     ...createTypography(palette, typographyX), //different fields for web and native (typography and typographyX)
@@ -61,7 +63,7 @@ export const createMuiTheme = (options: Muix.ThemeOptions = {}) => {
       { transitions, spacing, zIndex, },
       other,
       { clone: false }, // No need to clone deep
-    )) as ReactXX.Theme,
+    )) as Muix.Theme,
   }
 
   //muiTheme.overrides = getOverridesX(muiTheme, overridesX) //different value for web and native

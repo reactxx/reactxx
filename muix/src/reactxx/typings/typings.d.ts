@@ -1,4 +1,10 @@
-﻿interface Window {
+﻿declare module 'typescript-config' {
+  import { Muix } from 'reactxx-mui/typings/muix'
+  export interface Theme extends Muix.Theme { }
+  export interface ThemeOptionsX extends Muix.ThemeOptions { }
+}
+
+interface Window {
   isWeb:boolean
 }
 

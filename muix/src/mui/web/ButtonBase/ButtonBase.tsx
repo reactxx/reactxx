@@ -4,7 +4,9 @@ import * as React from 'react'
 import MuiButtonBase from 'material-ui/ButtonBase/ButtonBase'
 import { muiCompatible } from '../index'
 
-const ButtonBase = muiCompatible<MuiButtonBase.Shape>(MuiButtonBase)
+import { MuiButtonBaseT } from '../../typings/button-base'
+
+const ButtonBase = muiCompatible<MuiButtonBaseT.Shape>(MuiButtonBase)
 
 export default ButtonBase
 

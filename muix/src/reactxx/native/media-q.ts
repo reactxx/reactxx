@@ -2,7 +2,7 @@ import { BreakPoint, ComponentsMediaQLow, breaks } from '../common/media-q'
 import { deepMerges } from 'reactxx'
 import warning from 'warning'
 import { Dimensions  } from 'react-native'
-
+import { MediaQ } from '../typings/media-q'
 
 export class ComponentsMediaQ<TState extends string = string> extends ComponentsMediaQLow<TState> implements MediaQ.ComponentsMediaQ<TState>{
 

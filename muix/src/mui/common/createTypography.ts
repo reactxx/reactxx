@@ -1,5 +1,7 @@
 ﻿import muiCreateTypography from 'material-ui/styles/createTypography'
 import { toPlatformSheet, deepMerge } from 'reactxx'
+import * as Mui from '../typings/mui'
+import { Muix } from '../typings/muix'
 
 export default function createTypography(palette: Mui.Palette, optionOrCreator: Muix.TypographyOptionsOrCreatorX) {
   const options = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Muix.TypographyOptionsX

@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { Animated, Easing, Text, View } from 'react-native'
 
+import { Muix } from 'reactxx-mui/typings/muix'
+
 // ********** NATIVE
 
 const AnimatedView: React.ComponentClass<ReactN.ViewProperties> = Animated.View

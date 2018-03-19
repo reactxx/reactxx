@@ -1,5 +1,10 @@
 window.isWeb = false
 
+export * from '../typings/theme'
+export * from '../typings/components'
+export * from '../typings/media-q'
+export * from '../typings/animation'
+
 export * from '../common/index'
 export * from '../common/withStyles'
 export * from '../common/components'

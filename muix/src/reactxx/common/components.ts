@@ -1,12 +1,14 @@
 import * as React from 'react'
 import * as ReactN from 'react-native'
+import { ThemeT } from '../typings/theme'
+import { CompsT } from '../typings/components'
 
-export const textSheet: ReactXX.SheetCreatorX<ReactXX.TextShape> = {
+export const textSheet: ThemeT.SheetCreatorX<CompsT.TextShape> = {
   root: {
     $web: {
       whiteSpace: 'pre-wrap',
       wordWrap: 'break-word',
-      [`& .${ReactXX.CompNames.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. ReactXX.CompNames.Text is className for Text component root div.
+      [`& .${CompsT.CompNames.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. ReactXX.CompNames.Text is className for Text component root div.
         display: 'inline',
       },
     },
@@ -35,13 +37,13 @@ const webViewRuleset = {
   overflow: 'hidden',
 } as ReactXX.RulesetWeb 
 
-export const viewSheet: ReactXX.SheetCreatorX<ReactXX.ViewShape> = {
+export const viewSheet: ThemeT.SheetCreatorX<CompsT.ViewShape> = {
   root: {
     $web: webViewRuleset
   }
 }
 
-export const iconSheet: ReactXX.SheetCreatorX<ReactXX.IconShape> = {
+export const iconSheet: ThemeT.SheetCreatorX<CompsT.IconShape> = {
   root: {
     fontSize: 24,
     flexShrink: 0,
@@ -56,7 +58,7 @@ export const iconSheet: ReactXX.SheetCreatorX<ReactXX.IconShape> = {
 
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
-export const scrollViewSheet: ReactXX.SheetCreatorX<ReactXX.ScrollViewShape> = {
+export const scrollViewSheet: ThemeT.SheetCreatorX<CompsT.ScrollViewShape> = {
   root: {
     $web: {
       ...webViewRuleset,

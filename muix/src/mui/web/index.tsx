@@ -7,7 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { create } from 'jss';
 import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
-import { ThemeProvider, ThemeModifier } from 'reactxx'
+import { ThemeProvider, ThemeModifier, ThemeT } from 'reactxx'
 import { ModifierType } from 'reactxx-stateman'
 
 
@@ -15,6 +15,7 @@ export * from '../common/createMuiTheme'
 
 import { sheetToClassSheet, rulesetToClassNames } from 'reactxx/web'
 import { createMuiTheme } from '../common/createMuiTheme'
+import * as Mui from '../typings/mui'
 
 import { toPlatformRuleSet, toPlatformSheet, toPlatformEvents } from 'reactxx'
 
@@ -31,7 +32,7 @@ export const AppContainer: React.SFC = props => {
   </JssProvider>
 }
 
-export const ThemeModifierX: ModifierType<ReactXX.ThemeState, ReactXX.ThemeState> = props => <ThemeModifier {...props} render={themeState => {
+export const ThemeModifierX: ModifierType<ThemeT.ThemeState, ThemeT.ThemeState> = props => <ThemeModifier {...props} render={themeState => {
   return props.children
   //TODO THEME
   //const { theme, overrides} = themeState
@@ -40,13 +41,13 @@ export const ThemeModifierX: ModifierType<ReactXX.ThemeState, ReactXX.ThemeState
 }} />
 
 //Get platform component sheet (from creator and theme)
-const expandOverrides = (themeState: ReactXX.ThemeState) => {
+const expandOverrides = (themeState: ThemeT.ThemeState) => {
   if (!themeState) return null
   const theme = themeState.theme
   const res = { theme }
   for (const componentName in themeState) {
     if (componentName == 'theme') continue
-    const themeComp: ReactXX.ThemeCompX = themeState[componentName]; if (!themeComp) return res
+    const themeComp: ThemeT.ThemeCompX = themeState[componentName]; if (!themeComp) return res
     const { sheet, par } = themeComp
     //TODO THEME
     //res[componentName] = typeof override != 'function' ? override : override(theme, compThemePar)

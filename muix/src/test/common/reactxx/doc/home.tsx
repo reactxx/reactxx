@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
+import { withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView, ThemeT } from 'reactxx'
 
 import { Animated } from 'react-native'
 
-const expandedPanelSheet: ReactXX.SheetCreatorX<DocHome.ExpandedPanelShape> = {
+const expandedPanelSheet: ThemeT.SheetCreatorX<DocHome.ExpandedPanelShape> = {
   $animations: {
     openClose: {
       content: {

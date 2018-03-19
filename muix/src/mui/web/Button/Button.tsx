@@ -3,20 +3,22 @@ import * as React from 'react'
 
 import MuiButton from 'material-ui/Button/Button'
 import { muiCompatible } from '../index'
-import { compThemeSheetModifier, ThemeModifier } from 'reactxx'
+import { compThemeSheetModifier, ThemeModifier, CompsT } from 'reactxx'
+import * as Mui from '../../typings/mui'
+import { MuiButtonT } from '../../typings/button'
 
-const ButtonIconStartOverrides: React.SFC<Mui.ButtonProps> = props => <ThemeModifier modify={compThemeSheetModifier<ReactXX.IconShape>(ReactXX.CompNames.Icon, theme => ({ root: { marginRight: theme.spacing.unit } }))}>
+const ButtonIconStartOverrides: React.SFC<Mui.ButtonProps> = props => <ThemeModifier modify={compThemeSheetModifier<CompsT.IconShape>(CompsT.CompNames.Icon, theme => ({ root: { marginRight: theme.spacing.unit } }))}>
   <MuiButton {...props} />
 </ThemeModifier>
 
-const ButtonIconEndOverrides: React.SFC<Mui.ButtonProps> = props => <ThemeModifier modify={compThemeSheetModifier<ReactXX.IconShape>(ReactXX.CompNames.Icon, theme => ({ root: { marginLeft: theme.spacing.unit } }))}>
+const ButtonIconEndOverrides: React.SFC<Mui.ButtonProps> = props => <ThemeModifier modify={compThemeSheetModifier<CompsT.IconShape>(CompsT.CompNames.Icon, theme => ({ root: { marginLeft: theme.spacing.unit } }))}>
   <MuiButton {...props} />
 </ThemeModifier>
 
-export const ButtonIconStart = muiCompatible<MuiButton.Shape>(ButtonIconStartOverrides)
-export const ButtonIconEnd = muiCompatible<MuiButton.Shape>(ButtonIconEndOverrides)
+export const ButtonIconStart = muiCompatible<MuiButtonT.Shape>(ButtonIconStartOverrides)
+export const ButtonIconEnd = muiCompatible<MuiButtonT.Shape>(ButtonIconEndOverrides)
 
-const Button = muiCompatible<MuiButton.Shape>(MuiButton)
+const Button = muiCompatible<MuiButtonT.Shape>(MuiButton)
 export default Button
 
 //export const ButtonIconStart = muiCompatible<MuiButton.Shape>(addOverrides(MuiButton, { [ReactXX.CompNames.Icon]: theme => ({ root: { marginRight: theme.spacing.unit } } as ReactXX.SheetX<ReactXX.IconShape>) }))

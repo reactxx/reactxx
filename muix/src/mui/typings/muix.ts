@@ -1,8 +1,10 @@
-declare namespace Muix {
+import * as Mui from './mui'
 
-  type typoStyle = Mui.Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'
+export namespace Muix {
 
-  interface FontStyleNew {
+  export type typoStyle = Mui.Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'
+
+  export interface FontStyleNew {
     fontSize: number
     htmlFontSize: number;
     fontFamily: string
@@ -15,21 +17,21 @@ declare namespace Muix {
   //  fontWeightMedium: React.CSSProperties['fontWeight']
   //}
 
-  type TypographyOptionsX = {[type in typoStyle]?: ReactXX.TextRulesetX } & Partial<FontStyleNew>
-  type TypographyX = {[type in typoStyle]: ReactXX.TextRulesetX } & FontStyleNew
-  type TypographyOptionsOrCreatorX = TypographyOptionsX | ((palette: Mui.Palette) => TypographyOptionsX)
+  export type TypographyOptionsX = {[type in typoStyle]?: ReactXX.TextRulesetX } & Partial<FontStyleNew>
+  export type TypographyX = {[type in typoStyle]: ReactXX.TextRulesetX } & FontStyleNew
+  export type TypographyOptionsOrCreatorX = TypographyOptionsX | ((palette: Mui.Palette) => TypographyOptionsX)
 
-  type ShadowsNative = ReactN.ViewStyle[]
+  export type ShadowsNative = ReactN.ViewStyle[]
 
-  type ThemeShadowsX = ReactXX.RulesetX<ReactN.ViewStyle>[]
-  type ThemeShadows = ReactXX.ViewRulesetCommonX[]
+  export type ThemeShadowsX = ReactXX.RulesetX<ReactN.ViewStyle>[]
+  export type ThemeShadows = ReactXX.ViewRulesetCommonX[]
 
-  interface Theme extends Mui.Theme {
+  export interface Theme extends Mui.Theme {
     shadowsNew: ThemeShadows
     typographyX: TypographyX
   }
 
-  interface ThemeOptions extends Mui.ThemeOptions {
+  export interface ThemeOptions extends Mui.ThemeOptions {
     shadowsX?: ThemeShadowsX
     //overridesX?: ThemeValueOrCreator<OverridesX>
     typographyX?: TypographyOptionsOrCreatorX

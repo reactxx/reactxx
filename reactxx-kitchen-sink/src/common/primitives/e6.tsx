@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Text, View, ScrollView, LoremIpsum } from 'reactxx'
+import { Text, View, ScrollView, LoremIpsum, } from 'reactxx'
 
 const App: React.SFC = props => {
   const text: ReactXX.TextRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10, margin: 10, width: 300 }

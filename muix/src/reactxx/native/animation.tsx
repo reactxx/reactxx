@@ -2,6 +2,8 @@ import { Animated } from 'react-native'
 import { DriverLow, getGaps } from '../common/animation'
 export * from '../common/animation'
 
+import { Animation } from '../typings/animation' 
+
 export class Driver<T extends Animation.Shape> extends DriverLow<T> implements Animation.DriverNative<T>  {
 
   constructor(sheet: Animation.SheetX<T>, public animations: Animation.Drivers<{}>) {

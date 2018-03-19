@@ -3,9 +3,12 @@ import * as ReactN from 'react-native'
 
 import { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRectangle } from 'react-native'
 
-import { withStyles } from 'reactxx'
+import { withStyles, ThemeT } from 'reactxx'
 
-const sheet: ReactXX.SheetCreatorX<MuiButtonBase.Shape> = ({ palette }) => ({
+import { MuiButtonBaseT } from '../../typings/button-base'
+
+
+const sheet: ThemeT.SheetCreatorX<MuiButtonBaseT.Shape> = ({ palette }) => ({
   root: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -19,7 +22,7 @@ const sheet: ReactXX.SheetCreatorX<MuiButtonBase.Shape> = ({ palette }) => ({
 
 const minRippleSize = 0.01
 
-export class RippleEffect extends React.Component<MuiButtonBase.RippleEfectProps> { 
+export class RippleEffect extends React.Component<MuiButtonBaseT.RippleEfectProps> { 
 
   state: { active?: boolean } = {}
   scaleValue = new Animated.Value(minRippleSize)
@@ -96,13 +99,13 @@ export class RippleEffect extends React.Component<MuiButtonBase.RippleEfectProps
 
 }
 
-const buttonBase: ReactXX.CodeSFCNative<MuiButtonBase.Shape> = props => {
+const buttonBase: ReactXX.CodeSFCNative<MuiButtonBaseT.Shape> = props => {
   const { style, classes, mergeRulesetWithOverrides, className, animations, ...rest } = props
   const viewStyle = mergeRulesetWithOverrides(classes.root, className) as ReactN.ViewStyle
   const rippleStyle = mergeRulesetWithOverrides(classes.ripple) as ReactN.ViewStyle
   return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} className={null} mergeRulesetWithOverrides={null} animations={null} {...rest} style={null}/>
 }
 
-const ButtonBase = withStyles<MuiButtonBase.Shape>(MuiButtonBase.CompNames.ButtonBase, sheet)(buttonBase)
+const ButtonBase = withStyles<MuiButtonBaseT.Shape>(MuiButtonBaseT.CompNames.ButtonBase, sheet)(buttonBase)
 
 export default ButtonBase

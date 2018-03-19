@@ -145,13 +145,13 @@
     <TypeScriptCompile Include="src\ks\try\package-def.d.ts" />
     <TypeScriptCompile Include="src\ks\try\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\typings\mdi\web.ts" />
-    <TypeScriptCompile Include="src\ks\typings\reactxx\animation.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\animation.ts" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.ts" />
-    <TypeScriptCompile Include="src\ks\typings\reactxx\components.ts" />
-    <TypeScriptCompile Include="src\ks\typings\reactxx\media-q.ts" />
-    <TypeScriptCompile Include="src\ks\typings\reactxx\sheets.ts" />
-    <TypeScriptCompile Include="src\ks\typings\reactxx\theme.ts" />
-    <TypeScriptCompile Include="src\ks\typings\reactxx\typings.d.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\components.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\media-q.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\sheets.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\theme.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\web\index.tsx" />
     <TypeScriptCompile Include="src\mui\common\createTypography.ts" />
     <TypeScriptCompile Include="src\mui\common\createMuiTheme.ts" />
@@ -159,9 +159,8 @@
     <TypeScriptCompile Include="src\mui\native\Button\Button.tsx" />
     <TypeScriptCompile Include="src\mui\native\expoLoadFonts.ts" />
     <TypeScriptCompile Include="src\mui\native\index.tsx" />
-    <TypeScriptCompile Include="src\mui\typings\Button-d.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\ButtonBase-d.d.ts" />
-    <TypeScriptCompile Include="src\mui\typings\theme.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\button.ts" />
+    <TypeScriptCompile Include="src\mui\typings\button-base.ts" />
     <TypeScriptCompile Include="src\mui\web\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\mui\web\Button\Button.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\animation.tsx" />
@@ -192,9 +191,9 @@
     <TypeScriptCompile Include="src\test\native\App.tsx" />
     <TypeScriptCompile Include="src\test\common\root.tsx" />
     <TypeScriptCompile Include="src\test\web\index.tsx" />
-    <TypeScriptCompile Include="src\mui\typings\material-ui-ex.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\muix.ts" />
     <TypeScriptCompile Include="src\mui\web\index.tsx" />
-    <TypeScriptCompile Include="src\typings\material-ui.d.ts" />
+    <TypeScriptCompile Include="src\mui\typings\mui.ts" />
     <TypeScriptCompile Include="src\typings\react-native.d.ts" />
   </ItemGroup>
   <ItemGroup>

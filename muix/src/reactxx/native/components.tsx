@@ -7,6 +7,7 @@ import warning from 'warning'
 
 import { withStyles } from '../common/withStyles'
 import * as sheets from '../common/components'
+import { CompsT } from '../typings/components'
 
 const anyView = (isAnim: boolean) => (props => {
   const ActView = isAnim ? Animated.View : ViewRN
@@ -15,7 +16,7 @@ const anyView = (isAnim: boolean) => (props => {
   const presses = onPress || onLongPress || onPressIn || onPressOut ? { onPress, onLongPress, onPressIn, onPressOut } : null
   const res = <ActView style={rootStyle} {...rest} />
   return presses ? <TouchableWithoutFeedback {...presses}>{res}</TouchableWithoutFeedback> : res
-}) as ReactXX.CodeSFCNative<ReactXX.ViewShape>
+}) as ReactXX.CodeSFCNative<CompsT.ViewShape>
 
 
 const view = anyView(false)
@@ -26,7 +27,7 @@ const anyText = (isAnim: boolean) => (props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq,...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, props.numberOfLines === 1 && classes.singleLineStyle, className, style) as ReactN.TextStyle
   return <ActText style={rootStyle} {...rest} />
-}) as ReactXX.CodeSFCNative<ReactXX.TextShape>
+}) as ReactXX.CodeSFCNative<CompsT.TextShape>
 
 const text = anyText(false)
 const animatedText = anyText(true)
@@ -37,7 +38,7 @@ const anyScrollView = (isAnim: boolean) => (props => {
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.ScrollViewStyle
   const containerStyle = mergeRulesetWithOverrides(classes.container) as ReactN.ViewStyle
   return <ActScrollView style={rootStyle} contentContainerStyle={containerStyle} {...rest} />
-}) as ReactXX.CodeSFCNative<ReactXX.ScrollViewShape>
+}) as ReactXX.CodeSFCNative<CompsT.ScrollViewShape>
 
 const scrollView = anyScrollView(false)
 const animatedScrollView = anyScrollView(true)
@@ -48,16 +49,16 @@ const anyIcon = (isAnim: boolean) => (props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, data, children, mediaq,...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.TextStyle
   return <ActIcon name={(data || children as string) as MaterialCommunityIconsProps['name']} style={rootStyle} {...rest} />
-}) as ReactXX.CodeSFCNative<ReactXX.IconShape>
+}) as ReactXX.CodeSFCNative<CompsT.IconShape>
 
 const icon = anyIcon(false)
 const animatedIcon = anyIcon(true)
 
-export const Text = withStyles<ReactXX.TextShape>(ReactXX.CompNames.Text, sheets.textSheet)(text)
-export const AnimatedText = withStyles<ReactXX.TextShape>(ReactXX.CompNames.AnimatedText, sheets.textSheet)(animatedText)
-export const View = withStyles<ReactXX.ViewShape>(ReactXX.CompNames.View, sheets.viewSheet)(view)
-export const AnimatedView = withStyles<ReactXX.ViewShape>(ReactXX.CompNames.AnimatedView, sheets.viewSheet)(animatedView)
-export const Icon = withStyles<ReactXX.IconShape>(ReactXX.CompNames.Icon, sheets.iconSheet)(icon)
-export const AnimatedIcon = withStyles<ReactXX.IconShape>(ReactXX.CompNames.AnimatedIcon, sheets.iconSheet)(animatedIcon)
-export const ScrollView = withStyles<ReactXX.ScrollViewShape>(ReactXX.CompNames.ScrollView, sheets.scrollViewSheet)(scrollView)
-export const AnimatedScrollView = withStyles<ReactXX.ScrollViewShape>(ReactXX.CompNames.AnimatedScrollView, sheets.scrollViewSheet)(animatedScrollView)
+export const Text = withStyles<CompsT.TextShape>(CompsT.CompNames.Text, sheets.textSheet)(text)
+export const AnimatedText = withStyles<CompsT.TextShape>(CompsT.CompNames.AnimatedText, sheets.textSheet)(animatedText)
+export const View = withStyles<CompsT.ViewShape>(CompsT.CompNames.View, sheets.viewSheet)(view)
+export const AnimatedView = withStyles<CompsT.ViewShape>(CompsT.CompNames.AnimatedView, sheets.viewSheet)(animatedView)
+export const Icon = withStyles<CompsT.IconShape>(CompsT.CompNames.Icon, sheets.iconSheet)(icon)
+export const AnimatedIcon = withStyles<CompsT.IconShape>(CompsT.CompNames.AnimatedIcon, sheets.iconSheet)(animatedIcon)
+export const ScrollView = withStyles<CompsT.ScrollViewShape>(CompsT.CompNames.ScrollView, sheets.scrollViewSheet)(scrollView)
+export const AnimatedScrollView = withStyles<CompsT.ScrollViewShape>(CompsT.CompNames.AnimatedScrollView, sheets.scrollViewSheet)(animatedScrollView)

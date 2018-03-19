@@ -1,6 +1,10 @@
 ﻿export { }
+import { ThemeT } from './theme'
+import { Animation } from './animation'
+import { MediaQ } from './media-q'
 
 declare global {
+
   namespace ReactXX {
 
     type MouseEvent = (event?: React.MouseEvent<Element>) => void
@@ -154,13 +158,13 @@ declare global {
     //******************** cross platform Component props (Component is created by 'withStyles' ) 
 
     type PropsX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>, {
-      style?: RulesetCreatorX<R> //| RulesetWeb | getStyle<R> //cross platform style
+      style?: ThemeT.RulesetCreatorX<R> //| RulesetWeb | getStyle<R> //cross platform style
       $web?: Partial<getPropsWeb<R>> //web specific style
       $native?: Partial<getPropsNative<R>> //native specific style
       ignore?: boolean
-      classes?: PartialSheetCreatorX<R> //| PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
-      modifyThemeState?: ThemeModifier
-      className?: RulesetCreatorX<R> /*cross platform root ruleset*/ //| RulesetWeb | getStyle<R> /*platform specific root ruleset (when component is used in other component)*/
+      classes?: ThemeT.PartialSheetCreatorX<R> //| PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
+      modifyThemeState?: ThemeT.ThemeModifier
+      className?: ThemeT.RulesetCreatorX<R> /*cross platform root ruleset*/ //| RulesetWeb | getStyle<R> /*platform specific root ruleset (when component is used in other component)*/
     }>>
     //type PartialSheetInCode<R extends Shape> = PartialRecord<keyof getCommon<R> | getWeb<R> | keyof getNative<R>, Ruleset> // common and web and native
 
@@ -174,7 +178,7 @@ declare global {
       className: RulesetWeb
       classes: SheetWeb<R>
       style: RulesetWeb
-      theme: ThemeX
+      theme: ThemeT.ThemeX
       mergeRulesetWithOverrides: MergeRulesetWithOverridesWeb
       animations: Animation.DriversWeb<getAnimation<R>>
       mediaq: MediaQ.ComponentsMediaQ<getMediaQ<R>>
@@ -187,7 +191,7 @@ declare global {
       className: getStyle<R>
       classes: SheetNative<R>
       style: getStyle<R>
-      theme: ThemeX
+      theme: ThemeT.ThemeX
       //flip: boolean
       mergeRulesetWithOverrides: MergeRulesetWithOverridesNative
       animations: Animation.DriversNative<getAnimation<R>>
@@ -203,7 +207,7 @@ declare global {
       style: RulesetWeb | getStyle<R>
       //flip: boolean
       mergeRulesetWithOverrides: MergeRulesetWithOverrides
-      theme: ThemeX
+      theme: ThemeT.ThemeX
       animations: Animation.Drivers<getAnimation<R>>
       mediaq: MediaQ.ComponentsMediaQ<getMediaQ<R>>
       //this?:boolean //?? why ??
