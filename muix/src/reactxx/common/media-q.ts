@@ -1,6 +1,6 @@
 import warning from 'warning'
 
-import { MediaQ } from '../typings/media-q'
+import { MediaQ } from 'reactxx-typings'
 
 export abstract class ComponentsMediaQLow<TState extends string = string>  {
 

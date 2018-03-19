@@ -1,5 +1,7 @@
 import * as React from 'react'
-import { withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView, ThemeT } from 'reactxx'
+import { withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
+
+import { ThemeT } from 'reactxx-typings'
 
 import { Animated } from 'react-native'
 

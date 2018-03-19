@@ -1,5 +1,7 @@
 import * as React from 'react'
-import { Text, View, ScrollView, Icon, AppContainer, LoremIpsum, ThemeT, CompsT } from 'reactxx'
+import { Text, View, ScrollView, Icon, AppContainer, LoremIpsum, } from 'reactxx'
+
+import { ThemeT, CompsT } from 'reactxx-typings'
 
 interface Example {
   title: string

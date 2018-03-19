@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { AnimationDriver } from 'reactxx' //NATIVE or WEB animation driver
-import { Animation } from '../typings/animation' 
+import { Animation } from 'reactxx-typings' 
 import warning from 'warning'
 
 export const getAnimations = <T extends Animation.Shapes>(sheets: Animation.SheetsX<T>, statefullComponent: React.Component) => {

@@ -25,6 +25,9 @@
 
     "baseUrl": ".",
     "paths": {
+      "reactxx-typings": [ "src/typings" ],
+
+
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/index" ],
       "reactxx-mui/*": [ "src/mui/web/*" ],
       "reactxx-mui/typings/*": [ "src/mui/typings/*" ],

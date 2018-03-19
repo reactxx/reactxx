@@ -3,7 +3,9 @@ import * as ReactN from 'react-native'
 
 import { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRectangle } from 'react-native'
 
-import { withStyles, ThemeT } from 'reactxx'
+import { withStyles } from 'reactxx'
+
+import { ThemeT } from 'reactxx-typings'
 
 import { MuiButtonBaseT } from '../../typings/button-base'
 

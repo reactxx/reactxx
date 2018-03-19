@@ -7,9 +7,8 @@ import warning from 'warning'
 import { getAnimations } from './animation'
 
 import { ThemeModifier, compThemeCreate } from './theme'
-import { ThemeT } from '../typings/theme'
-import { Animation } from '../typings/animation'
-import { MediaQ } from '../typings/media-q'
+
+import { ThemeT, Animation, MediaQ } from 'reactxx-typings'
 
 //http://jamesknelson.com/should-i-use-shouldcomponentupdate/
 export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R>, createSheetX: ThemeT.SheetCreatorX<R>, compThemePar?: ReactXX.getCompTheme<R>) => (Component: ReactXX.CodeComponentType<R>) => {

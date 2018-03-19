@@ -4,7 +4,9 @@ import * as ReactN from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
-import { Text, withStyles, toPlatformRuleSet, compThemeSheetModifier, ThemeModifier, ThemeT, CompsT } from 'reactxx'
+import { Text, withStyles, toPlatformRuleSet, compThemeSheetModifier, ThemeModifier } from 'reactxx'
+
+import { ThemeT, CompsT } from 'reactxx-typings'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 import { MuiButtonT } from '../../typings/button'

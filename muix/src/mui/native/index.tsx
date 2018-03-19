@@ -1,7 +1,8 @@
 import * as React from 'react'
 import * as ReactN from 'react-native'
 
-import { ThemeProvider, ThemeModifier, ThemeT } from 'reactxx'
+import { ThemeProvider, ThemeModifier } from 'reactxx'
+import { ThemeT } from 'reactxx-typings'
 import { ModifierType } from 'reactxx-stateman'
 import { createMuiTheme } from '../common/createMuiTheme'
 

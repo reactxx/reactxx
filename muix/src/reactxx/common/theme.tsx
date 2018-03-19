@@ -6,7 +6,7 @@ import { createContext, ModifierType, ConsumerType, ProviderProps, ConsumerProps
 
 import { toPlatformSheet } from './index'
 import { defaultCompThemePars } from './withStyles'
-import { ThemeT } from '../typings/theme'
+import { ThemeT } from 'reactxx-typings'
 
 const { Provider, Modifier, Consumer } = createContext<ThemeT.ThemeState>(() => ({ theme: { type: 'ThemeX' } }))
 

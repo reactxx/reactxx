@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as ReactN from 'react-native'
-import { ThemeT } from '../typings/theme'
-import { CompsT } from '../typings/components'
+
+import { ThemeT, CompsT } from 'reactxx-typings'
 
 export const textSheet: ThemeT.SheetCreatorX<CompsT.TextShape> = {
   root: {

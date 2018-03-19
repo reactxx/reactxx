@@ -7,7 +7,8 @@ import warning from 'warning'
 
 import { withStyles } from '../common/withStyles'
 import * as sheets from '../common/components'
-import { CompsT } from '../typings/components'
+
+import { ThemeT, CompsT} from 'reactxx-typings'
 
 const anyView = (isAnim: boolean) => (props => {
   const ActView = isAnim ? Animated.View : ViewRN

@@ -1,8 +1,5 @@
 window.isWeb = true
 
-export * from '../typings/theme'
-export * from '../typings/components'
-
 export * from '../common/index'
 export * from '../common/withStyles'
 export * from '../common/components'
