@@ -1,4 +1,4 @@
-//import { } from './theme'
+import ReactN from 'react-native'
 
 export namespace CompsT {
 

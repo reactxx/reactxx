@@ -1,3 +1,5 @@
+import ReactN from 'react-native'
+
 export namespace MediaQ {
 
   export const enum Consts {

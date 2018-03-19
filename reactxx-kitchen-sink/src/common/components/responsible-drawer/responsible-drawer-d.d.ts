@@ -30,8 +30,8 @@ declare namespace ReactXXResponsibleDrawer {
   }>
 }
 
-declare namespace ReactXX {
-  interface Shapes {
-    ['comps$responsibledrawer'/*ReactXXResponsibleDrawer.Consts.Drawer*/]?: ReactXXResponsibleDrawer.Shape
-  }
-}
+//declare namespace ReactXX {
+//  interface Shapes {
+//    ['comps$responsibledrawer'/*ReactXXResponsibleDrawer.Consts.Drawer*/]?: ReactXXResponsibleDrawer.Shape
+//  }
+//}

@@ -1,3 +1,5 @@
+import ReactN from 'react-native'
+
 import { Animated } from 'react-native'
 import { DriverLow, getGaps } from '../common/animation'
 export * from '../common/animation'

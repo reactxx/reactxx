@@ -1,4 +1,6 @@
 import * as React from 'react'
+import ReactN from 'react-native'
+
 import { Animated, Easing, Text, View } from 'react-native'
 
 import { Muix } from 'reactxx-mui/typings/muix'

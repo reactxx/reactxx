@@ -14,8 +14,8 @@ declare namespace DocHome {
   }>
 }
 
-declare namespace ReactXX {
-  interface Shapes {
-    [DocHome.CompNames.ExpandPanel]?: DocHome.ExpandedPanelShape
-  }
-}
+//declare namespace ReactXX {
+//  interface Shapes {
+//    [DocHome.CompNames.ExpandPanel]?: DocHome.ExpandedPanelShape
+//  }
+//}

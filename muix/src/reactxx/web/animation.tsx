@@ -2,6 +2,7 @@ import { DriverLow, getGaps } from '../common/animation'
 import warning from 'warning'
 import { sheetToClassSheet, keyFrameToClassNames } from './fela'
 import { Animation } from 'reactxx-typings' 
+import ReactN from 'react-native'
 
 export class Driver<T extends Animation.Shape> extends DriverLow<T> implements Animation.DriverWeb<T>  {
 

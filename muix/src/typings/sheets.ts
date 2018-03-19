@@ -1,4 +1,6 @@
-﻿import { ThemeT } from './theme'
+﻿import ReactN from 'react-native'
+
+import { ThemeT } from './theme'
 import { Animation } from './animation'
 import { MediaQ } from './media-q'
 

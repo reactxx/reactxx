@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as ReactN from 'react-native'
 
 import { View, Text, ScrollView, Icon } from 'reactxx'
 import { examples, nameToExample, exampleToElement, primitives, components, navigationExample, KSink } from './index'

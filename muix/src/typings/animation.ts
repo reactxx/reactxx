@@ -1,3 +1,5 @@
+import ReactN from 'react-native'
+
 export namespace Animation {
   //https://engineering.salesforce.com/experiments-with-high-performance-animation-in-react-native-80a0cb7052b0
   //https://github.com/facebook/react-native/blob/master/Libraries/Animated/src/NativeAnimatedHelper.js

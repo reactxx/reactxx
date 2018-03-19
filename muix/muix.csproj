@@ -145,13 +145,9 @@
     <TypeScriptCompile Include="src\ks\try\package-def.d.ts" />
     <TypeScriptCompile Include="src\ks\try\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\typings\mdi\web.ts" />
-    <TypeScriptCompile Include="src\test\animation.ts" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.ts" />
-    <TypeScriptCompile Include="src\test\components.ts" />
-    <TypeScriptCompile Include="src\test\media-q.ts" />
-    <TypeScriptCompile Include="src\test\sheets.ts" />
-    <TypeScriptCompile Include="src\test\theme.ts" />
-    <TypeScriptCompile Include="src\test\typings.d.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\sheets.ts" />
+    <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\web\index.tsx" />
     <TypeScriptCompile Include="src\mui\common\createTypography.ts" />
     <TypeScriptCompile Include="src\mui\common\createMuiTheme.ts" />
@@ -198,7 +194,6 @@
     <TypeScriptCompile Include="src\typings\components.ts" />
     <TypeScriptCompile Include="src\typings\index.ts" />
     <TypeScriptCompile Include="src\typings\media-q.ts" />
-    <TypeScriptCompile Include="src\typings\reactn.d.ts" />
     <TypeScriptCompile Include="src\typings\sheets.ts" />
     <TypeScriptCompile Include="src\typings\theme.ts" />
   </ItemGroup>
@@ -206,7 +201,6 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\reactxx\typings\" />
     <Folder Include="src\test\common\animation\" />
   </ItemGroup>
   <PropertyGroup>
