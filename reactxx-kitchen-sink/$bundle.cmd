@@ -13,3 +13,6 @@ copy D:\reactxx\reactxx-kitchen-sink\bundle\index.js D:\reactxx\docs\bundle\inde
 del D:\reactxx\reactxx-kitchen-sink\jspm.config.js
 copy D:\reactxx\reactxx-kitchen-sink\jspm.config.js_ D:\reactxx\reactxx-kitchen-sink\jspm.config.js /y
 del D:\reactxx\reactxx-kitchen-sink\jspm.config.js_
+
+rem !!!!!!!!!!!!!!!!!!!!!
+rem in D:\reactxx\docs\jspm.config.js change "npm:": "/jspm_packages/npm/" to "npm:": "/reactxx/jspm_packages/npm/"
