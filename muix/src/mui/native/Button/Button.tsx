@@ -6,7 +6,7 @@ import { capitalize } from 'material-ui/utils/helpers';
 
 import { Text, withStyles, toPlatformRuleSet, compThemeSheetModifier, ThemeModifier } from 'reactxx'
 
-import { ThemeT, CompsT } from 'reactxx-typings'
+import { ThemeT, CompsT, SheetsT } from 'reactxx-typings'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 import { MuiButtonT } from '../../typings/button'
@@ -15,7 +15,7 @@ import { MuiButtonBaseT } from '../../typings/button-base'
 const getTextIconColor = (color: string) => ({
   label: { color },
   labelIcon: {color },
-} as ReactXX.PartialSheetX<MuiButtonT.Shape>)
+} as SheetsT.PartialSheetX<MuiButtonT.Shape>)
 
 
 const sheets: (isLeft?: boolean) => ThemeT.SheetCreatorX<MuiButtonT.Shape> = isLeft => ({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
@@ -116,7 +116,7 @@ const sheets: (isLeft?: boolean) => ThemeT.SheetCreatorX<MuiButtonT.Shape> = isL
 })
 
 
-const button: ReactXX.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
+const button: SheetsT.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
 
 
   //var x = props.mini
@@ -150,8 +150,8 @@ const button: ReactXX.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
   const rippleStyle = mergeRulesetWithOverrides(classes.ripple) as ReactN.ViewStyle
   const activeStyle = mergeRulesetWithOverrides(!disabled && classes.active) as ReactN.ViewStyle
   //const labelStyle = mergeRulesetWithOverrides(classes.label) 
-  const iconOverride = { root: mergeRulesetWithOverrides(classes.labelIcon) } as  ReactXX.SheetX
-  const labelOverride = { root: mergeRulesetWithOverrides(classes.label) } as ReactXX.SheetX
+  const iconOverride = { root: mergeRulesetWithOverrides(classes.labelIcon) } as  SheetsT.SheetX
+  const labelOverride = { root: mergeRulesetWithOverrides(classes.label) } as SheetsT.SheetX
 
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 

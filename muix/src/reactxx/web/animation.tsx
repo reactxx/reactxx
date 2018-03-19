@@ -1,7 +1,7 @@
 import { DriverLow, getGaps } from '../common/animation'
 import warning from 'warning'
 import { sheetToClassSheet, keyFrameToClassNames } from './fela'
-import { Animation } from 'reactxx-typings' 
+import { Animation, SheetsT } from 'reactxx-typings' 
 import ReactN from 'react-native'
 
 export class Driver<T extends Animation.Shape> extends DriverLow<T> implements Animation.DriverWeb<T>  {
@@ -20,7 +20,7 @@ export class Driver<T extends Animation.Shape> extends DriverLow<T> implements A
       const pairs: Animation.RuleSetX<ReactN.TextProperties> = sheet[propsName]
       const transformPairs = pairs.transform
 
-      const rulesets: ReactXX.RulesetWeb[] = [{}, {}], transforms = ['', ''], range = [0, 1], transitions0 = [], transitions1 = []
+      const rulesets: SheetsT.RulesetWeb[] = [{}, {}], transforms = ['', ''], range = [0, 1], transitions0 = [], transitions1 = []
 
       const addTransformString = (pair, modifier: string) => {
         range.forEach(idx => rulesets[idx]['transform'] = pair[idx])

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as ReactN from 'react-native'
 
-import { ThemeT, CompsT } from 'reactxx-typings'
+import { ThemeT, CompsT, SheetsT } from 'reactxx-typings'
 
 export const textSheet: ThemeT.SheetCreatorX<CompsT.TextShape> = {
   root: {
@@ -35,7 +35,7 @@ const webViewRuleset = {
   flexShrink: 0,
   position: 'relative',
   overflow: 'hidden',
-} as ReactXX.RulesetWeb 
+} as SheetsT.RulesetWeb 
 
 export const viewSheet: ThemeT.SheetCreatorX<CompsT.ViewShape> = {
   root: {

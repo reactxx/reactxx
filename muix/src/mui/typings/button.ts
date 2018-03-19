@@ -1,6 +1,8 @@
 ﻿import { ButtonProps } from './mui'
 import ReactN from 'react-native'
 
+import { SheetsT } from 'reactxx-typings'
+
 export namespace MuiButtonT {
 
   export const enum CompNames {
@@ -9,11 +11,11 @@ export namespace MuiButtonT {
     ButtonIconRight = 'MuixButtonIconRight',
   }
 
-  export type Shape = ReactXX.OverwriteShape<{
-    common: ReactXX.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini' > & ReactXX.ShapeTexts<'label'>
-    native: ReactXX.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & ReactXX.ShapeTexts<'labelIcon'>
+  export type Shape = SheetsT.OverwriteShape<{
+    common: SheetsT.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini' > & SheetsT.ShapeTexts<'label'>
+    native: SheetsT.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & SheetsT.ShapeTexts<'labelIcon'>
     web: 'colorInherit' | 'keyboardFocused'
-    props: ButtonProps & ReactXX.OnPressAllX
+    props: ButtonProps & SheetsT.OnPressAllX
     propsNative: ReactN.TouchableOpacityProperties
     nameType: CompNames.Button | CompNames.ButtonIconLeft | CompNames.ButtonIconRight
   }>

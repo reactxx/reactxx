@@ -8,20 +8,20 @@ import { getAnimations } from './animation'
 
 import { ThemeModifier, compThemeCreate } from './theme'
 
-import { ThemeT, Animation, MediaQ } from 'reactxx-typings'
+import { ThemeT, Animation, MediaQ, SheetsT } from 'reactxx-typings'
 
 //http://jamesknelson.com/should-i-use-shouldcomponentupdate/
-export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R>, createSheetX: ThemeT.SheetCreatorX<R>, compThemePar?: ReactXX.getCompTheme<R>) => (Component: ReactXX.CodeComponentType<R>) => {
+export const withStyles = <R extends SheetsT.Shape>(_name: SheetsT.getNameType<R>, createSheetX: ThemeT.SheetCreatorX<R>, compThemePar?: SheetsT.getCompTheme<R>) => (Component: SheetsT.CodeComponentType<R>) => {
 
   const name = _name as string
   defaultCompThemePars[name] = compThemePar
 
-  type TStyled = ReactXX.PropsX & ThemeT.ThemeCompSelectedX
+  type TStyled = SheetsT.PropsX & ThemeT.ThemeCompSelectedX
 
   class Styled extends React.PureComponent<TStyled> {
-    classes: ReactXX.Sheet
+    classes: SheetsT.Sheet
     animations: Animation.Drivers
-    mediaq: ComponentsMediaQ<ReactXX.getMediaQ<R>>
+    mediaq: ComponentsMediaQ<SheetsT.getMediaQ<R>>
 
     constructor(p, c) {
       super(p, c)
@@ -37,7 +37,7 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
       const staticSheet = toPlatformSheet(applyTheme(theme, compThemePar, createSheetX))
 
       //*** apply "component override" from actual "theme app state"
-      const classes: ReactXX.Sheet = toPlatformSheet(applyTheme(theme, compThemePar, classesX, ))
+      const classes: SheetsT.Sheet = toPlatformSheet(applyTheme(theme, compThemePar, classesX, ))
 
       this.classes = compThemeSheet || classes ? deepMerges(false, {}, staticSheet, compThemeSheet, classes) : staticSheet // modify static sheet 
       for (const p in this.classes) if (!p.startsWith('$')) this.classes[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
@@ -45,7 +45,7 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
       //*** init animations
       this.animations = getAnimations(staticSheet.$animations, this)
       //*** init media queries
-      this.mediaq = new ComponentsMediaQ<ReactXX.getMediaQ<R>>(this)
+      this.mediaq = new ComponentsMediaQ<SheetsT.getMediaQ<R>>(this)
 
     }
 
@@ -53,18 +53,18 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
 
     render() {
       const { animations, mediaq } = this
-      const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, theme, compThemeSheet, compThemePar, modifyThemeState, ...other } = this.props as TStyled & ReactXX.OnPressAllX
+      const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, theme, compThemeSheet, compThemePar, modifyThemeState, ...other } = this.props as TStyled & SheetsT.OnPressAllX
       //const theme = themeState.theme
 
       if (ignore) return null
 
-      const className: ReactXX.Ruleset = toPlatformRuleSet(applyTheme(theme, compThemePar, classNameX))
-      const style: ReactXX.Ruleset = toPlatformRuleSet(applyTheme(theme, compThemePar, styleX))
+      const className: SheetsT.Ruleset = toPlatformRuleSet(applyTheme(theme, compThemePar, classNameX))
+      const style: SheetsT.Ruleset = toPlatformRuleSet(applyTheme(theme, compThemePar, styleX))
 
       // calling createRulesetWithOverridesMerger signals which rulesets are used. So it can use their $overrides to modify self sheet
       const mergeRulesetWithOverrides = createRulesetWithOverridesMerger(mediaq)
 
-      mediaq.setNotifyBreakpoints(this.classes.$mediaq as MediaQ.NotifySheetX<ReactXX.getMediaQ<R>>) //release media notifications
+      mediaq.setNotifyBreakpoints(this.classes.$mediaq as MediaQ.NotifySheetX<SheetsT.getMediaQ<R>>) //release media notifications
 
       //const flip = typeof flipProp === 'boolean' ? flipProp : (theme && theme.direction === 'rtl')
 
@@ -72,13 +72,13 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
         ...other, ...(window.isWeb ? $web : $native),
         mergeRulesetWithOverrides,
         theme, animations,
-        mediaq: mediaq as MediaQ.ComponentsMediaQ<ReactXX.getMediaQ<R>>,
+        mediaq: mediaq as MediaQ.ComponentsMediaQ<SheetsT.getMediaQ<R>>,
         classes: this.classes, //available classes for mergeRulesetWithOverrides (this.classes = merge(sheet, theme.overrides[name], classes prop)
         className,
         style,
-      } as ReactXX.CodeProps<R>
+      } as SheetsT.CodeProps<R>
 
-      toPlatformEvents($web, $native as ReactXX.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
+      toPlatformEvents($web, $native as SheetsT.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
 
       renderCount++
 
@@ -91,7 +91,7 @@ export const withStyles = <R extends ReactXX.Shape>(_name: ReactXX.getNameType<R
 
   return (props => <ThemeModifier quiet modify={props.modifyThemeState} selector={modifierSelector(name)} render={selectedThemeState =>
     <Styled {...selectedThemeState} {...props} />
-  } />) as React.ComponentType<ReactXX.PropsX<R>>
+  } />) as React.ComponentType<SheetsT.PropsX<R>>
 
 }
 
@@ -103,17 +103,17 @@ const modifierSelector = (componentName: string) => (themeStates: ThemeT.ThemeSt
 
 let renderCount = 0
 
-export const defaultCompThemePars: {[Name in keyof ReactXX.Shapes]?: ReactXX.getCompTheme<ReactXX.Shapes[Name]> } = {}
+export const defaultCompThemePars: {[Name in keyof SheetsT.Shapes]?: SheetsT.getCompTheme<SheetsT.Shapes[Name]> } = {}
 
-export const toPlatformEvents = ($web: ReactXX.OnPressAllWeb, $native: ReactXX.OnPressAllNative, propsX: ReactXX.OnPressAllX, codeProps: ReactXX.CodeProps) => {
+export const toPlatformEvents = ($web: SheetsT.OnPressAllWeb, $native: SheetsT.OnPressAllNative, propsX: SheetsT.OnPressAllX, codeProps: SheetsT.CodeProps) => {
   const { onPress, onLongPress, onPressIn, onPressOut } = propsX
   if (window.isWeb) {
-    const cp = codeProps as ReactXX.CodePropsWeb
+    const cp = codeProps as SheetsT.CodePropsWeb
     const cl = $web && $web.onClick || onPress; if (cl) cp.onClick = cl
     const cl2 = $web && $web.onMouseDown || onPressIn; if (cl2) cp.onMouseDown = cl2
     const cl3 = $web && $web.onMouseUp || onPressOut; if (cl3) cp.onMouseUp = cl3
   } else {
-    const cp = codeProps as ReactXX.CodePropsNative
+    const cp = codeProps as SheetsT.CodePropsNative
     const cl = $native && $native.onPress || onPress; if (cl) cp.onPress = cl
     const cl1 = $native && $native.onLongPress || onLongPress; if (cl1) cp.onLongPress = cl1
     const cl2 = $native && $native.onPressIn || onPressIn; if (cl2) cp.onPressIn = cl2
@@ -126,8 +126,8 @@ export const toPlatformEvents = ($web: ReactXX.OnPressAllWeb, $native: ReactXX.O
 // - use sheet.ruleset.$overrides to modify self sheet
 // - use sheet.ruleset.$mediaq to modify ruleset 
 const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => {
-  const usedOverrides: ReactXX.Sheet = {}
-  const res: ReactXX.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
+  const usedOverrides: SheetsT.Sheet = {}
+  const res: SheetsT.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
     let single = undefined //optimalization: rulesets contains just single non empty item => no deepMerge is needed
     rulesets.forEach(ruleset => { // acumulate $overrides from used rulesets
       if (!ruleset) return
@@ -178,7 +178,7 @@ export const deepMerges = (skipSystem: boolean, target, ...sources) => {
 
 const clearSystemProps = obj => {
   if (!obj) return obj
-  const { $overrides, $name, $web, $native, $mediaq, ...rest } = obj as ReactXX.RulesetX
+  const { $overrides, $name, $web, $native, $mediaq, ...rest } = obj as SheetsT.RulesetX
   return rest
 }
 

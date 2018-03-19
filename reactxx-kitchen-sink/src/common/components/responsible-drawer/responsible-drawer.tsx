@@ -5,7 +5,7 @@ import * as ReactN from 'react-native'
 // different import of 'ScrollView, View, Text, Icon, AnimatedView' components for web and native
 import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } from 'reactxx'
 
-import { ThemeT} from 'reactxx-typings'
+import { ThemeT, SheetsT } from 'reactxx-typings'
 
 import { createContext, ConsumerType as StateConsumerType, ConsumerProps } from 'reactxx-stateman' 
 
@@ -14,18 +14,53 @@ import { Close } from 'reactxx-mdi/Close'
 import { Menu } from 'reactxx-mdi/Menu'
 
 //************************************************************************************************************
+// ResponsibleDrawer typings
+//************************************************************************************************************
+export namespace ResponsibleDrawerT {
+
+  export const enum Consts {
+    Drawer = 'comps$responsibledrawer'
+  }
+
+  export interface RenderProps {
+    style: SheetsT.RulesetX
+    iconData: string,
+    onPress: SheetsT.MouseEvent
+  }
+
+  export type Shape = SheetsT.OverwriteShape<{
+    common: SheetsT.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop'> & SheetsT.ShapeTexts<'openButton' | 'closeButton'>
+    props: {
+      //renderContent: (props: RenderProps) => JSX.Element
+      drawer: JSX.Element
+    }
+    mediaq: 'mobile' | 'tablet' | 'desktop'
+    animation: {
+      mobile: SheetsT.ShapeViews<'drawer' | 'backDrop'>
+      tablet: SheetsT.ShapeViews<'drawer' | 'content'>
+    },
+    compTheme: { //type of parameter
+      drawerWidths: [number, number, number] //drawer width for Mobile, tablet and desktop
+      breakpoints: [number, number] //media query breakpoints between mobile x tablet and tablet x desktop
+      animationDuration: number //animation duration for mobile and tablet
+    },
+    nameType: Consts.Drawer
+  }>
+}
+
+//************************************************************************************************************
 // ResponsibleDrawer component
 //************************************************************************************************************
 
 // Provider and Consumer components for syncing visibility od Open x Close buttons with drawer open x close state
-const { Provider, Consumer } = createContext<ReactXXResponsibleDrawer.RenderProps>(null)
+const { Provider, Consumer } = createContext<ResponsibleDrawerT.RenderProps>(null)
 
-type ConsumerType = StateConsumerType<ReactXXResponsibleDrawer.RenderProps, ReactXXResponsibleDrawer.RenderProps>
-type AnimationType = React.ComponentClass<ReactXX.PropsX<ReactXXResponsibleDrawer.Shape>> & { LayoutChanged?: ConsumerType }
+type ConsumerType = StateConsumerType<ResponsibleDrawerT.RenderProps, ResponsibleDrawerT.RenderProps>
+type AnimationType = React.ComponentClass<SheetsT.PropsX<ResponsibleDrawerT.Shape>> & { LayoutChanged?: ConsumerType }
 
 // ResponsibleDrawer's sheet. 
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
-const sheet: ThemeT.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, compThemePar) => ({
+const sheet: ThemeT.SheetCreatorX<ResponsibleDrawerT.Shape> = (theme, compThemePar) => ({
 
   $mediaq: { // media query window-width breakpoints. Component receives actual width in "mediaq" prop and is rerendered when mediaq changed.
     mobile: [null, compThemePar.breakpoints[0]],
@@ -113,7 +148,7 @@ const sheet: ThemeT.SheetCreatorX<ReactXXResponsibleDrawer.Shape> = (theme, comp
 })
 
 // responsibleDrawer stateless component. 
-const responsibleDrawer: ReactXX.CodeSFC<ReactXXResponsibleDrawer.Shape> = props => {
+const responsibleDrawer: SheetsT.CodeSFC<ResponsibleDrawerT.Shape> = props => {
 
   const { classes, mergeRulesetWithOverrides, children, className, animations, mediaq, drawer: drawerNode } = props
 
@@ -130,30 +165,30 @@ const responsibleDrawer: ReactXX.CodeSFC<ReactXXResponsibleDrawer.Shape> = props
     mediaState.tablet && classes.tablet,
     mediaState.desktop && classes.desktop,
     className, // always put className at the end of the ROOT ruleset
-  ) as ReactXX.ViewRulesetX
+  ) as SheetsT.ViewRulesetX
 
   const backDrop = mergeRulesetWithOverrides(
     classes.backDrop,
     mediaState.mobile && animations.mobile.sheet.backDrop, // backDrop animation for mobile
-  ) as ReactXX.ViewRulesetX
+  ) as SheetsT.ViewRulesetX
 
   const drawer = mergeRulesetWithOverrides(
     classes.drawer,
     mediaState.mobile && animations.mobile.sheet.drawer, // drawer animation for mobile
     mediaState.tablet && animations.tablet.sheet.drawer, // drawer animation for tablet
-  ) as ReactXX.ViewRulesetX
+  ) as SheetsT.ViewRulesetX
 
   const content = mergeRulesetWithOverrides(
     classes.content,
     mediaState.tablet && animations.tablet.sheet.content, // content animation for tablet
-  ) as ReactXX.ViewRulesetX
+  ) as SheetsT.ViewRulesetX
 
-  const closeButton = mergeRulesetWithOverrides(classes.closeButton) as ReactXX.TextRulesetX
+  const closeButton = mergeRulesetWithOverrides(classes.closeButton) as SheetsT.TextRulesetX
 
   const openButton = mergeRulesetWithOverrides(
     classes.openButton,
     { display: mediaState.tablet && animations.tablet.opened || mediaState.desktop ? 'none' : 'flex' }
-  ) as ReactXX.TextRulesetX
+  ) as SheetsT.TextRulesetX
 
   return <View className={root}>
     <AnimatedView key={1} className={backDrop} onPress={closeDrawer} />
@@ -172,7 +207,7 @@ const responsibleDrawer: ReactXX.CodeSFC<ReactXXResponsibleDrawer.Shape> = props
 }
 
 // HOC ResponsibleDrawer component with default compThemePar's
-export const ResponsibleDrawer = (withStyles<ReactXXResponsibleDrawer.Shape>(
+export const ResponsibleDrawer = (withStyles<ResponsibleDrawerT.Shape>(
   'comps$responsibledrawer' as any/*ReactXXResponsibleDrawer.Consts.Drawer*/,
   sheet,
   {
@@ -189,7 +224,7 @@ ResponsibleDrawer.LayoutChanged = Consumer as ConsumerType
 // Using ResponsibleDrawer in application
 //************************************************************************************************************
 
-const button = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as ReactXX.RulesetX
+const button = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as SheetsT.RulesetX
 
 const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer/>}>
   <Content />

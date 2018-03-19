@@ -2,7 +2,7 @@
 
 declare global {
 
-  namespace ReactXX {
+  namespace SheetsT {
 
     //React Native styles compatible with Web React.CSSProperties
 

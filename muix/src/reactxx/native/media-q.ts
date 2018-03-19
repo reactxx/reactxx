@@ -1,8 +1,8 @@
 import { BreakPoint, ComponentsMediaQLow, breaks } from '../common/media-q'
 import { deepMerges } from 'reactxx'
 import warning from 'warning'
-import { Dimensions  } from 'react-native'
-import { MediaQ } from 'reactxx-typings'
+import { Dimensions } from 'react-native'
+import { MediaQ, SheetsT } from 'reactxx-typings'
 
 export class ComponentsMediaQ<TState extends string = string> extends ComponentsMediaQLow<TState> implements MediaQ.ComponentsMediaQ<TState>{
 
@@ -14,11 +14,11 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
     this.breaks = []
   }
 
-  processRuleset(ruleset: ReactXX.RulesetWithAddIn) {
+  processRuleset(ruleset: SheetsT.RulesetWithAddIn) {
     const { $mediaq } = ruleset
     if (!$mediaq) return ruleset
     const { componentId, breaks, component } = this
-    const patches: ReactXX.RulesetWithAddIn[] = []
+    const patches: SheetsT.RulesetWithAddIn[] = []
     const width = this.getWindowWidth()
     for (const p in $mediaq) {
       const interval = p.split('-').map((i, idx) => !i ? (idx == 0 ? 0 : MediaQ.Consts.maxBreakpoint) : parseInt(i))

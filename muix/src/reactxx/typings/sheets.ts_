@@ -4,7 +4,7 @@ import { ThemeT, Animation, MediaQ } from 'reactxx-typings'
 
 declare global {
 
-  namespace ReactXX {
+  namespace SheetsT {
 
     type MouseEvent = (event?: React.MouseEvent<Element>) => void
     interface OnPressX { onPress?: MouseEvent; onLongPress: () => void }

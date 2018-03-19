@@ -5,15 +5,15 @@ import { rulesetsToClassNames } from './fela'
 
 import { withStyles } from '../common/withStyles'
 import * as sheets from '../common/components'
-import { CompsT } from 'reactxx-typings'
+import { CompsT, SheetsT } from 'reactxx-typings'
 
-const view: ReactXX.CodeSFCWeb<CompsT.ViewShape> = props => {
+const view: SheetsT.CodeSFCWeb<CompsT.ViewShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq,...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className)
   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest} />
 }
 
-const icon: ReactXX.CodeSFCWeb<CompsT.IconShape> = props => {
+const icon: SheetsT.CodeSFCWeb<CompsT.IconShape> = props => {
   const { style, classes, className, data, mergeRulesetWithOverrides, theme, animations, viewBox, children/*this children*/, mediaq, url, onClick, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, onClick && classes.pressable, className)
   //replace fontSize with width x height
@@ -26,14 +26,14 @@ const icon: ReactXX.CodeSFCWeb<CompsT.IconShape> = props => {
   return url ? <a href={url}>{svg}</a> : svg
 }
 
-const text: ReactXX.CodeSFCWeb<CompsT.TextShape> = props => {
+const text: SheetsT.CodeSFCWeb<CompsT.TextShape> = props => {
   const { style, classes, className, numberOfLines, mergeRulesetWithOverrides, theme, animations, mediaq, url, onClick, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle, className) 
   const tagProps = { className: CompsT.CompNames.textClassName + ' ' + rulesetsToClassNames(rootStyle), style, ...rest, onClick: url ? undefined : onClick, ...rootStyle.$props }
   return url ? <a href={url} {...tagProps} /> : <div {...tagProps}/>
 }
 
-const scrollView: ReactXX.CodeSFCWeb<CompsT.ScrollViewShape> = props => {
+const scrollView: SheetsT.CodeSFCWeb<CompsT.ScrollViewShape> = props => {
   const { style, classes, className, horizontal, mergeRulesetWithOverrides, theme, animations, children, mediaq,...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, horizontal && classes.rootHorizontal, className)
   const containerStyle = mergeRulesetWithOverrides(classes.container, horizontal && classes.containerHorizontal)

@@ -1,9 +1,10 @@
 import * as React from 'react'
 
+import { SheetsT } from 'reactxx-typings'
 import { Text, View, LoremIpsum } from 'reactxx'
 
 const App: React.SFC = props => {
-  const bars: ReactXX.ViewRulesetX = { flexGrow: 0, justifyContent: 'center', alignItems: 'center', height: 48, padding: 5 }
+  const bars: SheetsT.ViewRulesetX = { flexGrow: 0, justifyContent: 'center', alignItems: 'center', height: 48, padding: 5 }
   return <View className={{flex:1}}>
     <View className={{ ...bars, backgroundColor: 'lightgreen' }}>
       <Text className={{ fontSize: 32 }} numberOfLines={1}>

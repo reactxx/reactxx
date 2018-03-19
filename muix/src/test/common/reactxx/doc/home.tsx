@@ -3,9 +3,25 @@ import ReactN from 'react-native'
 
 import { withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
 
-import { ThemeT } from 'reactxx-typings'
+import { ThemeT, SheetsT } from 'reactxx-typings'
 
 import { Animated } from 'react-native'
+
+export namespace DocHome {
+
+  export const enum CompNames {
+    ExpandPanel = 'DocHome$ExpandedPanelShape'
+  }
+
+  export type ExpandedPanelShape = SheetsT.OverwriteShape<{
+    common: SheetsT.ShapeViews<'root' | 'header' | 'content'> & SheetsT.ShapeTexts<'icon' | 'headerLabel'>
+    animation: {
+      openClose: SheetsT.ShapeViews<'content'> & SheetsT.ShapeTexts<'icon'>
+    }
+    props: { title: React.ReactNode }
+    nameType: CompNames.ExpandPanel
+  }>
+}
 
 const expandedPanelSheet: ThemeT.SheetCreatorX<DocHome.ExpandedPanelShape> = {
   $animations: {
@@ -62,7 +78,7 @@ const expandedPanelSheet: ThemeT.SheetCreatorX<DocHome.ExpandedPanelShape> = {
 
 //modifyThemeStates(state, null, theme => [modifyThemeState<ReactXX.TextShape>(state, theme, ReactXX.CompNames.Text, (theme, par) => ({ root: headerLabelStyle }))])}
 
-const expandedPanel: ReactXX.CodeSFC<DocHome.ExpandedPanelShape> = props => {
+const expandedPanel: SheetsT.CodeSFC<DocHome.ExpandedPanelShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations: { openClose }, title, children, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className) as ReactN.ViewStyle
   const headerStyle = mergeRulesetWithOverrides(classes.header) as ReactN.ViewStyle
@@ -70,7 +86,7 @@ const expandedPanel: ReactXX.CodeSFC<DocHome.ExpandedPanelShape> = props => {
   const iconStyle = mergeRulesetWithOverrides(classes.icon, openClose.sheet.icon) as ReactN.TextStyle
   const headerLabelStyle = mergeRulesetWithOverrides(classes.headerLabel) as ReactN.TextStyle
 
-  return <View className={rootStyle} style={style as ReactXX.ViewStyle}>
+  return <View className={rootStyle} style={style as ReactN.ViewStyle}>
     <View className={headerStyle} /*modifyThemeState={theme => ({ ...theme, overridesNew: { ...theme.overridesNew, [ReactXX.CompNames.Text]: { root: headerLabelStyle}}})}*/>
       {typeof title === 'string' ? <Text numberOfLines={1}>{title}</Text> : title}
       <AnimatedIcon data={MDI.ArrowExpandDown} className={iconStyle} onPress={() => openClose.toggle()} /> 

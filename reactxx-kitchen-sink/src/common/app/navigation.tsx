@@ -1,6 +1,8 @@
 import * as React from 'react'
 import * as ReactN from 'react-native'
 
+import { SheetsT } from 'reactxx-typings'
+
 import { View, Text, ScrollView, Icon } from 'reactxx'
 import { examples, nameToExample, exampleToElement, primitives, components, navigationExample, KSink } from './index'
 import { ResponsibleDrawer } from '../components/responsible-drawer/responsible-drawer'
@@ -36,10 +38,10 @@ class App extends React.Component<{}, KSink.Example> {
   gotoExample: GotoExample = (example => this.setState(example)).bind(this);
 }
 
-const drawerButton = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as ReactXX.RulesetX
-const toolbar = { flexDirection: 'row', alignItems: 'center', height: 48, padding: 15 } as ReactXX.RulesetX<ReactN.ViewStyle>
-const codeIcons = { color: 'white', marginLeft: 15, $web: { ':hover': { transform: 'scale(1.2)' } } } as ReactXX.RulesetX
-var logo = { flexGrow: 0, marginLeft: 5, color: 'lightblue', paddingRight: 10, marginRight: 10, borderRightColor: 'lightblue', borderRightWidth: 1, $web: { borderRightStyle: 'solid' } } as ReactXX.RulesetX
+const drawerButton = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as SheetsT.RulesetX
+const toolbar = { flexDirection: 'row', alignItems: 'center', height: 48, padding: 15 } as SheetsT.RulesetX<ReactN.ViewStyle>
+const codeIcons = { color: 'white', marginLeft: 15, $web: { ':hover': { transform: 'scale(1.2)' } } } as SheetsT.RulesetX
+var logo = { flexGrow: 0, marginLeft: 5, color: 'lightblue', paddingRight: 10, marginRight: 10, borderRightColor: 'lightblue', borderRightWidth: 1, $web: { borderRightStyle: 'solid' } } as SheetsT.RulesetX
 
 const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ children, gotoExample, actName }) => <View className={{ flex: 1 }}>
   <View className={{ ...toolbar, backgroundColor: 'gray' }}>

@@ -5,6 +5,8 @@ import { Animated, Easing, Text, View } from 'react-native'
 
 import { Muix } from 'reactxx-mui/typings/muix'
 
+import { SheetsT } from 'reactxx-typings'
+
 // ********** NATIVE
 
 const AnimatedView: React.ComponentClass<ReactN.ViewProperties> = Animated.View
@@ -54,9 +56,9 @@ interface ITransition {
   setOpened(isOpen?: boolean)
 }
 
-type Animation<T extends ReactXX.RulesetNative> = ReactXX.RulesetX<T> & { $easing?: string, $duration?: number, $delay?: number }
+type Animation<T extends SheetsT.RulesetNative> = SheetsT.RulesetX<T> & { $easing?: string, $duration?: number, $delay?: number }
 
-const transitionCreate = (par: (theme: Muix.Theme) => ReactXX.RulesetX<ReactN.ViewStyle> & { $easing?: string, $duration?: number, $delay?: number }) => null as ITransition
+const transitionCreate = (par: (theme: Muix.Theme) => SheetsT.RulesetX<ReactN.ViewStyle> & { $easing?: string, $duration?: number, $delay?: number }) => null as ITransition
 
 const transition1 = transitionCreate(
   theme => ({

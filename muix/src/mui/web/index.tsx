@@ -10,8 +10,7 @@ import JssProvider from 'react-jss/lib/JssProvider'
 import { ThemeProvider, ThemeModifier } from 'reactxx'
 import { ModifierType } from 'reactxx-stateman'
 
-import { ThemeT } from 'reactxx-typings'
-
+import { ThemeT, SheetsT } from 'reactxx-typings'
 
 export * from '../common/createMuiTheme'
 
@@ -57,25 +56,25 @@ const expandOverrides = (themeState: ThemeT.ThemeState) => {
   return res
 }
 
-type webKeys<R extends ReactXX.Shape> = ReactXX.getWeb<R> | keyof ReactXX.getCommon<R>
+type webKeys<R extends SheetsT.Shape> = SheetsT.getWeb<R> | keyof SheetsT.getCommon<R>
 type muiComponentType<P, ClassKey extends string> = React.ComponentType<P & Mui.StyledComponentProps<ClassKey>>
 
-export const muiCompatible = <R extends ReactXX.Shape>(Component: muiComponentType<ReactXX.getPropsWeb<R>, webKeys<R>>) => {
+export const muiCompatible = <R extends SheetsT.Shape>(Component: muiComponentType<SheetsT.getPropsWeb<R>, webKeys<R>>) => {
 
-  const Styled: ReactXX.SFCX<R> = props => {
+  const Styled: SheetsT.SFCX<R> = props => {
 
-    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, modifyThemeState, ...other } = props as any as (ReactXX.PropsX & ReactXX.OnPressAllX)
+    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, modifyThemeState, ...other } = props as any as (SheetsT.PropsX & SheetsT.OnPressAllX)
 
-    const classes = toPlatformSheet(classesX as ReactXX.SheetX)
+    const classes = toPlatformSheet(classesX as SheetsT.SheetX)
 
     const codeProps = {
       ...other, ...$web,
-      style: toPlatformRuleSet(styleX as ReactXX.RulesetX),
-      className: rulesetToClassNames(toPlatformRuleSet(classNameX as ReactXX.RulesetX)),
+      style: toPlatformRuleSet(styleX as SheetsT.RulesetX),
+      className: rulesetToClassNames(toPlatformRuleSet(classNameX as SheetsT.RulesetX)),
       classes: classes
     }
 
-    toPlatformEvents($web, $native as ReactXX.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps as any)
+    toPlatformEvents($web, $native as SheetsT.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps as any)
 
     return <Component {...codeProps as any} />
   }
