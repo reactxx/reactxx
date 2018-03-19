@@ -79,6 +79,8 @@
     <Content Include="deploy\mui\README.md" />
     <Content Include="deploy\stateman\package.json" />
     <Content Include="deploy\stateman\README.md" />
+    <Content Include="deploy\typings\package.json" />
+    <Content Include="deploy\typings\README.md" />
     <None Include="gulpfile.js_" />
     <Content Include="index.html" />
     <Content Include="package.json" />
@@ -143,7 +145,8 @@
     <TypeScriptCompile Include="src\ks\try\index.tsx" />
     <TypeScriptCompile Include="src\ks\try\package-def.d.ts" />
     <TypeScriptCompile Include="src\ks\try\typings.d.ts" />
-    <TypeScriptCompile Include="src\ks\typings\mdi\web.ts" />
+    <TypeScriptCompile Include="src\typings\mdi-native.ts" />
+    <TypeScriptCompile Include="src\typings\mdi-web.ts" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\web\index.tsx" />

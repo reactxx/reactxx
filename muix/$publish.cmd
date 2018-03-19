@@ -11,6 +11,7 @@ cd %root%
 call $compile
 
 rem *** npm package publishing
+call %root%$publish_ typings
 call %root%$publish_ stateman
 call %root%$publish_ reactxx
 

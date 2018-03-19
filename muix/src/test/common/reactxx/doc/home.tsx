@@ -4,6 +4,7 @@ import ReactN from 'react-native'
 import { withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
 
 import { ThemeT, SheetsT } from 'reactxx-typings'
+import { MDI } from 'reactxx-typings/mdi'
 
 import { Animated } from 'react-native'
 

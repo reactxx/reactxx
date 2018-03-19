@@ -11,6 +11,8 @@ import { ThemeModifierX } from 'reactxx-mui/index'
 
 import { MuiButtonT } from 'reactxx-mui/typings/button'
 
+import { MDI } from 'reactxx-typings/mdi'
+
 const theme = createMuiTheme({
   //overridesX: theme => ({
   //  [MuiButton.CompNames.Button]: {

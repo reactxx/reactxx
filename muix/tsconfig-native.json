@@ -9,6 +9,10 @@
 
     "baseUrl": ".",
     "paths": {
+
+      "reactxx-typings": [ "src/typings/index" ],
+      "reactxx-typings/mdi": [ "src/typings/mdi-native" ],
+
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ],
       "reactxx": [ "src/reactxx/native/index" ],
       "reactxx/web": [ "src/reactxx/web/index" ],
