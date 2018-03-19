@@ -11,7 +11,7 @@ import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 export type GotoExample = (example: KSink.Example) => void
 export type GetExampleUrl = (example: KSink.Example) => string
 
-const gitHubUrlIdx = 6
+const gitHubUrlIdx = 7
 const gitHubUrl = `https://github.com/reactxx/reactxx/tree/code-sandbox-${gitHubUrlIdx}/reactxx-kitchen-sink/src/common/`
 const sandBoxUrl = `https://codesandbox.io/embed/github/reactxx/reactxx/tree/code-sandbox-${gitHubUrlIdx}/reactxx-kitchen-sink?codemirror=1&fontsize=12&` //view=preview&
 
