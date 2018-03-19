@@ -5,12 +5,12 @@ import { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRecta
 
 import { withStyles } from 'reactxx'
 
-import { ThemeT, SheetsT } from 'reactxx-typings'
+import { TTheme, TSheets } from 'reactxx-typings'
 
 import { MuiButtonBaseT } from '../../typings/button-base'
 import * as Mui from '../../typings/mui'
 
-const sheet: ThemeT.SheetCreatorX<MuiButtonBaseT.Shape> = ({ palette }) => ({
+const sheet: TTheme.SheetCreatorX<MuiButtonBaseT.Shape> = ({ palette }) => ({
   root: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -101,7 +101,7 @@ export class RippleEffect extends React.Component<MuiButtonBaseT.RippleEfectProp
 
 }
 
-const buttonBase: SheetsT.CodeSFCNative<MuiButtonBaseT.Shape> = props => {
+const buttonBase: TSheets.CodeSFCNative<MuiButtonBaseT.Shape> = props => {
   const { style, classes, mergeRulesetWithOverrides, className, animations, ...rest } = props
   const viewStyle = mergeRulesetWithOverrides(classes.root, className) as ReactN.ViewStyle
   const rippleStyle = mergeRulesetWithOverrides(classes.ripple) as ReactN.ViewStyle

@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
 
-import { ThemeT, SheetsT } from 'reactxx-typings'
+import { TTheme, TSheets } from 'reactxx-typings'
 import { MDI } from 'reactxx-typings/mdi'
 
 import { Animated } from 'react-native'
@@ -14,17 +14,17 @@ export namespace DocHome {
     ExpandPanel = 'DocHome$ExpandedPanelShape'
   }
 
-  export type ExpandedPanelShape = SheetsT.OverwriteShape<{
-    common: SheetsT.ShapeViews<'root' | 'header' | 'content'> & SheetsT.ShapeTexts<'icon' | 'headerLabel'>
+  export type ExpandedPanelShape = TSheets.OverwriteShape<{
+    common: TSheets.ShapeViews<'root' | 'header' | 'content'> & TSheets.ShapeTexts<'icon' | 'headerLabel'>
     animation: {
-      openClose: SheetsT.ShapeViews<'content'> & SheetsT.ShapeTexts<'icon'>
+      openClose: TSheets.ShapeViews<'content'> & TSheets.ShapeTexts<'icon'>
     }
     props: { title: React.ReactNode }
     nameType: CompNames.ExpandPanel
   }>
 }
 
-const expandedPanelSheet: ThemeT.SheetCreatorX<DocHome.ExpandedPanelShape> = {
+const expandedPanelSheet: TTheme.SheetCreatorX<DocHome.ExpandedPanelShape> = {
   $animations: {
     openClose: {
       content: {
@@ -79,7 +79,7 @@ const expandedPanelSheet: ThemeT.SheetCreatorX<DocHome.ExpandedPanelShape> = {
 
 //modifyThemeStates(state, null, theme => [modifyThemeState<ReactXX.TextShape>(state, theme, ReactXX.CompNames.Text, (theme, par) => ({ root: headerLabelStyle }))])}
 
-const expandedPanel: SheetsT.CodeSFC<DocHome.ExpandedPanelShape> = props => {
+const expandedPanel: TSheets.CodeSFC<DocHome.ExpandedPanelShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations: { openClose }, title, children, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className) as ReactN.ViewStyle
   const headerStyle = mergeRulesetWithOverrides(classes.header) as ReactN.ViewStyle

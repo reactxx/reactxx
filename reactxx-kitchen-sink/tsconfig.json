@@ -2,48 +2,38 @@
   "compileOnSave": true,
 
   "compilerOptions": {
-
-    "module": "commonjs",
-    "outDir": "deploy/lib",
-    "moduleResolution": "node",
-    "target": "es5",
-
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-
+    "target": "es2017",
     "rootDir": "src",
-    "jsx": "react",
-
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "importHelpers": true,
-
-    "strictNullChecks": false,
-    "downlevelIteration": true,
-    "strict": true,
-    "strictFunctionTypes": false,
-    "noImplicitAny": false,
+    "outDir": "deploy/es",
 
     "baseUrl": ".",
+    "paths": {
+      "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ]
+    },
 
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": false,
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": false,
+
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "jsx": "react-native",
     "lib": [
       "dom",
-      "es5",
-      "es6",
+      "es2015",
       "esnext.asynciterable"
     ]
-
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "node_modules/reactxx-mdi/es/typings.d.ts"
   ],
   "exclude": [
-    "node_modules",
-    "build",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts"
+    "src/typings/mdi/web.d.ts"
   ]
 }

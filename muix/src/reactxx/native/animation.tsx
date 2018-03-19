@@ -4,11 +4,11 @@ import { Animated } from 'react-native'
 import { DriverLow, getGaps } from '../common/animation'
 export * from '../common/animation'
 
-import { Animation } from 'reactxx-typings' 
+import { TAnimation } from 'reactxx-typings' 
 
-export class Driver<T extends Animation.Shape> extends DriverLow<T> implements Animation.DriverNative<T>  {
+export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements TAnimation.DriverNative<T>  {
 
-  constructor(sheet: Animation.SheetX<T>, public animations: Animation.Drivers<{}>) {
+  constructor(sheet: TAnimation.SheetX<T>, public animations: TAnimation.Drivers<{}>) {
     super(sheet, animations)
     const { $delay, $duration, $easing, $opened } = this.$config
     this.value = new Animated.Value($opened ? 1 : 0)
@@ -42,7 +42,7 @@ export class Driver<T extends Animation.Shape> extends DriverLow<T> implements A
 
     for (const propsName in sheet) {
       if (propsName.startsWith('$')) continue
-      const pairs: Animation.RuleSetX<ReactN.TextProperties> = sheet[propsName]
+      const pairs: TAnimation.RuleSetX<ReactN.TextProperties> = sheet[propsName]
       const transformPairs = pairs.transform
       const ruleset = rulesets[propsName] = {}
       for (const propName2 in pairs) {
@@ -70,7 +70,7 @@ export class Driver<T extends Animation.Shape> extends DriverLow<T> implements A
   }
   value: ReactN.Animated.Value
   animConfig: Animated.TimingAnimationConfig
-  sheet: Animation.SheetNative<T>
+  sheet: TAnimation.SheetNative<T>
   
   protected bothClassName: {[P in keyof T]: T[P]}[]
   reset() { this.value.stopAnimation(); this.value.setValue(this.opened ? 1 : 0) }

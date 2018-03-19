@@ -5,15 +5,15 @@ import { rulesetsToClassNames } from './fela'
 
 import { withStyles } from '../common/withStyles'
 import * as sheets from '../common/components'
-import { CompsT, SheetsT, ThemeT } from 'reactxx-typings'
+import { TComps, TSheets, TTheme } from 'reactxx-typings'
 
-const view: SheetsT.CodeSFCWeb<CompsT.ViewShape> = props => {
+const view: TSheets.CodeSFCWeb<TComps.ViewShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq,...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className)
   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest} />
 }
 
-const icon: SheetsT.CodeSFCWeb<CompsT.IconShape> = props => {
+const icon: TSheets.CodeSFCWeb<TComps.IconShape> = props => {
   const { style, classes, className, data, mergeRulesetWithOverrides, theme, animations, viewBox, children/*this children*/, mediaq, url, onClick, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, onClick && classes.pressable, className)
   //replace fontSize with width x height
@@ -26,14 +26,14 @@ const icon: SheetsT.CodeSFCWeb<CompsT.IconShape> = props => {
   return url ? <a href={url}>{svg}</a> : svg
 }
 
-const text: SheetsT.CodeSFCWeb<CompsT.TextShape> = props => {
+const text: TSheets.CodeSFCWeb<TComps.TextShape> = props => {
   const { style, classes, className, numberOfLines, mergeRulesetWithOverrides, theme, animations, mediaq, url, onClick, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle, className) 
-  const tagProps = { className: CompsT.CompNames.textClassName + ' ' + rulesetsToClassNames(rootStyle), style, ...rest, onClick: url ? undefined : onClick, ...rootStyle.$props }
+  const tagProps = { className: TComps.CompNames.textClassName + ' ' + rulesetsToClassNames(rootStyle), style, ...rest, onClick: url ? undefined : onClick, ...rootStyle.$props }
   return url ? <a href={url} {...tagProps} /> : <div {...tagProps}/>
 }
 
-const scrollView: SheetsT.CodeSFCWeb<CompsT.ScrollViewShape> = props => {
+const scrollView: TSheets.CodeSFCWeb<TComps.ScrollViewShape> = props => {
   const { style, classes, className, horizontal, mergeRulesetWithOverrides, theme, animations, children, mediaq,...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, horizontal && classes.rootHorizontal, className)
   const containerStyle = mergeRulesetWithOverrides(classes.container, horizontal && classes.containerHorizontal)
@@ -50,14 +50,14 @@ const animatedIcon = icon
 const animatedText = text
 const animatedScrollView = scrollView
 
-export const Text = withStyles<CompsT.TextShape>(CompsT.CompNames.Text, sheets.textSheet)(text)
-export const AnimatedText = withStyles<CompsT.TextShape>(CompsT.CompNames.AnimatedText, sheets.textSheet)(animatedText)
-export const View = withStyles<CompsT.ViewShape>(CompsT.CompNames.View, sheets.viewSheet)(view)
-export const AnimatedView = withStyles<CompsT.ViewShape>(CompsT.CompNames.AnimatedView, sheets.viewSheet)(animatedView)
-export const Icon = withStyles<CompsT.IconShape>(CompsT.CompNames.Icon, sheets.iconSheet)(icon)
-export const AnimatedIcon = withStyles<CompsT.IconShape>(CompsT.CompNames.AnimatedIcon, sheets.iconSheet)(animatedIcon)
-export const ScrollView = withStyles<CompsT.ScrollViewShape>(CompsT.CompNames.ScrollView, sheets.scrollViewSheet)(scrollView)
-export const AnimatedScrollView = withStyles<CompsT.ScrollViewShape>(CompsT.CompNames.AnimatedScrollView, sheets.scrollViewSheet)(animatedScrollView)
+export const Text: TSheets.ComponentTypeX<TComps.TextShape> = withStyles(TComps.CompNames.Text, sheets.textSheet)(text)
+export const AnimatedText: TSheets.ComponentTypeX<TComps.TextShape> = withStyles(TComps.CompNames.AnimatedText, sheets.textSheet)(animatedText)
+export const View: TSheets.ComponentTypeX<TComps.ViewShape> = withStyles<TComps.ViewShape>(TComps.CompNames.View, sheets.viewSheet)(view)
+export const AnimatedView: TSheets.ComponentTypeX<TComps.ViewShape> = withStyles<TComps.ViewShape>(TComps.CompNames.AnimatedView, sheets.viewSheet)(animatedView)
+export const Icon: TSheets.ComponentTypeX<TComps.IconShape> = withStyles<TComps.IconShape>(TComps.CompNames.Icon, sheets.iconSheet)(icon)
+export const AnimatedIcon: TSheets.ComponentTypeX<TComps.IconShape> = withStyles<TComps.IconShape>(TComps.CompNames.AnimatedIcon, sheets.iconSheet)(animatedIcon)
+export const ScrollView: TSheets.ComponentTypeX<TComps.ScrollViewShape> = withStyles<TComps.ScrollViewShape>(TComps.CompNames.ScrollView, sheets.scrollViewSheet)(scrollView)
+export const AnimatedScrollView: TSheets.ComponentTypeX<TComps.ScrollViewShape> = withStyles<TComps.ScrollViewShape>(TComps.CompNames.AnimatedScrollView, sheets.scrollViewSheet)(animatedScrollView)
 
 //const checkChildLayoutProps = (css: React.CSSProperties) => {
 //  if (/*process.env.NODE_ENV === 'production' ||*/ !css) return

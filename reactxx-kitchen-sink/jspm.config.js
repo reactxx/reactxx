@@ -29,15 +29,15 @@ SystemJS.config({
     "fs": "npm:jspm-nodelibs-fs@0.2.1",
     "http": "npm:jspm-nodelibs-http@0.2.0",
     "https": "npm:jspm-nodelibs-https@0.2.2",
-    "jss": "npm:jss@9.8.0",
+    "jss": "npm:jss@9.8.1",
     "os": "npm:jspm-nodelibs-os@0.2.2",
     "path": "npm:jspm-nodelibs-path@0.2.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",
     "react": "npm:react@16.2.0",
     "react-dom": "npm:react-dom@16.2.0",
-    "reactxx": "npm:reactxx@0.1.41",
+    "reactxx": "npm:reactxx@0.1.43",
     "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
-    "reactxx-stateman": "npm:reactxx-stateman@0.1.58",
+    "reactxx-stateman": "npm:reactxx-stateman@0.1.60",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.2",
     "tslib": "npm:tslib@1.9.0",
@@ -142,13 +142,6 @@ SystemJS.config({
       "map": {
         "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
         "isobject": "npm:isobject@3.0.1"
-      }
-    },
-    "npm:jss@9.8.0": {
-      "map": {
-        "warning": "npm:warning@3.0.0",
-        "symbol-observable": "npm:symbol-observable@1.2.0",
-        "is-in-browser": "npm:is-in-browser@1.1.3"
       }
     },
     "npm:jss-template@1.0.1": {
@@ -550,29 +543,36 @@ SystemJS.config({
         "safe-buffer": "npm:safe-buffer@5.1.1"
       }
     },
-    "npm:reactxx@0.1.41": {
+    "npm:jss@9.8.1": {
       "map": {
-        "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
-        "reactxx-stateman": "npm:reactxx-stateman@0.1.58",
-        "jss-preset-default": "npm:jss-preset-default@4.3.0",
-        "tslib": "npm:tslib@1.9.0",
         "warning": "npm:warning@3.0.0",
-        "prop-types": "npm:prop-types@15.6.1",
-        "fela-plugin-rtl": "npm:fela-plugin-rtl@1.0.6",
-        "fela-plugin-lvha": "npm:fela-plugin-lvha@5.0.15",
-        "fela-plugin-prefixer": "npm:fela-plugin-prefixer@5.0.18",
-        "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@5.0.17",
-        "fela-dom": "npm:fela-dom@7.0.6",
-        "fela-plugin-unit": "npm:fela-plugin-unit@5.0.16",
-        "fela": "npm:fela@6.1.5",
-        "fela-plugin-extend": "npm:fela-plugin-extend@6.0.4",
-        "reactxx-typings": "npm:reactxx-typings@0.1.1"
+        "symbol-observable": "npm:symbol-observable@1.2.0",
+        "is-in-browser": "npm:is-in-browser@1.1.3"
       }
     },
-    "npm:reactxx-stateman@0.1.58": {
+    "npm:reactxx@0.1.43": {
       "map": {
-        "tslib": "npm:tslib@1.9.0",
+        "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
+        "reactxx-stateman": "npm:reactxx-stateman@0.1.60",
         "warning": "npm:warning@3.0.0",
+        "tslib": "npm:tslib@1.9.0",
+        "fela-plugin-unit": "npm:fela-plugin-unit@5.0.16",
+        "fela": "npm:fela@6.1.5",
+        "fela-plugin-lvha": "npm:fela-plugin-lvha@5.0.15",
+        "jss-preset-default": "npm:jss-preset-default@4.3.0",
+        "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@5.0.17",
+        "fela-plugin-rtl": "npm:fela-plugin-rtl@1.0.6",
+        "fela-dom": "npm:fela-dom@7.0.6",
+        "fela-plugin-extend": "npm:fela-plugin-extend@6.0.4",
+        "fela-plugin-prefixer": "npm:fela-plugin-prefixer@5.0.18",
+        "prop-types": "npm:prop-types@15.6.1",
+        "reactxx-typings": "npm:reactxx-typings@0.1.3"
+      }
+    },
+    "npm:reactxx-stateman@0.1.60": {
+      "map": {
+        "warning": "npm:warning@3.0.0",
+        "tslib": "npm:tslib@1.9.0",
         "prop-types": "npm:prop-types@15.6.1"
       }
     }

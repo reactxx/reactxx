@@ -2,7 +2,7 @@ import ReactN from 'react-native'
 
 import * as Mui from './mui'
 
-import { SheetsT } from 'reactxx-typings'
+import { TSheets } from 'reactxx-typings'
 
 export namespace Muix {
 
@@ -21,14 +21,14 @@ export namespace Muix {
   //  fontWeightMedium: React.CSSProperties['fontWeight']
   //}
 
-  export type TypographyOptionsX = {[type in typoStyle]?: SheetsT.TextRulesetX } & Partial<FontStyleNew>
-  export type TypographyX = {[type in typoStyle]: SheetsT.TextRulesetX } & FontStyleNew
+  export type TypographyOptionsX = {[type in typoStyle]?: TSheets.TextRulesetX } & Partial<FontStyleNew>
+  export type TypographyX = {[type in typoStyle]: TSheets.TextRulesetX } & FontStyleNew
   export type TypographyOptionsOrCreatorX = TypographyOptionsX | ((palette: Mui.Palette) => TypographyOptionsX)
 
   export type ShadowsNative = ReactN.ViewStyle[]
 
-  export type ThemeShadowsX = SheetsT.RulesetX<ReactN.ViewStyle>[]
-  export type ThemeShadows = SheetsT.ViewRulesetCommonX[]
+  export type ThemeShadowsX = TSheets.RulesetX<ReactN.ViewStyle>[]
+  export type ThemeShadows = TSheets.ViewRulesetCommonX[]
 
   export interface Theme extends Mui.Theme {
     shadowsNew: ThemeShadows

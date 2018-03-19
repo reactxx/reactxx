@@ -6,7 +6,7 @@ import { capitalize } from 'material-ui/utils/helpers';
 
 import { Text, withStyles, toPlatformRuleSet, compThemeSheetModifier, ThemeModifier } from 'reactxx'
 
-import { ThemeT, CompsT, SheetsT } from 'reactxx-typings'
+import { TTheme, TComps, TSheets } from 'reactxx-typings'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 import { MuiButtonT } from '../../typings/button'
@@ -16,10 +16,10 @@ import * as Mui from '../../typings/mui'
 const getTextIconColor = (color: string) => ({
   label: { color },
   labelIcon: {color },
-} as SheetsT.PartialSheetX<MuiButtonT.Shape>)
+} as TSheets.PartialSheetX<MuiButtonT.Shape>)
 
 
-const sheets: (isLeft?: boolean) => ThemeT.SheetCreatorX<MuiButtonT.Shape> = isLeft => ({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
+const sheets: (isLeft?: boolean) => TTheme.SheetCreatorX<MuiButtonT.Shape> = isLeft => ({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
 
   root: {
     flexDirection: 'row',
@@ -117,7 +117,7 @@ const sheets: (isLeft?: boolean) => ThemeT.SheetCreatorX<MuiButtonT.Shape> = isL
 })
 
 
-const button: SheetsT.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
+const button: TSheets.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
 
 
   //var x = props.mini
@@ -151,13 +151,13 @@ const button: SheetsT.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
   const rippleStyle = mergeRulesetWithOverrides(classes.ripple) as ReactN.ViewStyle
   const activeStyle = mergeRulesetWithOverrides(!disabled && classes.active) as ReactN.ViewStyle
   //const labelStyle = mergeRulesetWithOverrides(classes.label) 
-  const iconOverride = { root: mergeRulesetWithOverrides(classes.labelIcon) } as  SheetsT.SheetX
-  const labelOverride = { root: mergeRulesetWithOverrides(classes.label) } as SheetsT.SheetX
+  const iconOverride = { root: mergeRulesetWithOverrides(classes.labelIcon) } as  TSheets.SheetX
+  const labelOverride = { root: mergeRulesetWithOverrides(classes.label) } as TSheets.SheetX
 
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 
   const RippleWithOverrides: React.SFC<MuiButtonBaseT.RippleEfectProps> = props => <ThemeModifier
-    modify={compThemeSheetModifier<CompsT.IconShape, CompsT.TextShape>(CompsT.CompNames.Icon, iconOverride, CompsT.CompNames.Text, labelOverride)}>
+    modify={compThemeSheetModifier<TComps.IconShape, TComps.TextShape>(TComps.CompNames.Icon, iconOverride, TComps.CompNames.Text, labelOverride)}>
     <RippleEffect {...props}/>
   </ThemeModifier>
 

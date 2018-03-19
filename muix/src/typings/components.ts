@@ -1,8 +1,8 @@
 import ReactN from 'react-native'
 
-import { SheetsT } from 'reactxx-typings'
+import { TSheets } from 'reactxx-typings'
 
-export namespace CompsT {
+export namespace TComps {
 
   export const enum CompNames {
     textClassName = 'reactxx-text',
@@ -16,30 +16,30 @@ export namespace CompsT {
     AnimatedScrollView = 'ReactXX$AnimatedScrollView',
   }
 
-  export type TextShape = SheetsT.OverwriteShape<{
-    common: SheetsT.ShapeTexts<'root' | 'singleLineStyle'>
+  export type TextShape = TSheets.OverwriteShape<{
+    common: TSheets.ShapeTexts<'root' | 'singleLineStyle'>
     style: ReactN.TextStyle,
     web: 'pressable'
-    props: { numberOfLines?: number } & SheetsT.OnPressX
-    propsWeb: React.HTMLAttributes<HTMLSpanElement> & { url?: string }
+    props: { numberOfLines?: number; url?: string  } & TSheets.OnPressX
+    propsWeb: React.HTMLAttributes<HTMLSpanElement>
     propsNative: ReactN.TextProperties
     nameType: CompNames.Text | CompNames.AnimatedText
   }>
 
-  export type ViewShape = SheetsT.OverwriteShape<{
-    common: SheetsT.ShapeViews<'root'>
+  export type ViewShape = TSheets.OverwriteShape<{
+    common: TSheets.ShapeViews<'root'>
     style: ReactN.ViewStyle,
-    props: SheetsT.OnPressAllX
+    props: TSheets.OnPressAllX
     propsWeb: React.HTMLAttributes<HTMLDivElement>
     propsNative: ReactN.ViewProperties
     nameType: CompNames.View | CompNames.AnimatedView
   }>
 
-  export type IconShape = SheetsT.OverwriteShape<{
-    common: SheetsT.ShapeTexts<'root'>
+  export type IconShape = TSheets.OverwriteShape<{
+    common: TSheets.ShapeTexts<'root'>
     style: ReactN.TextStyle,
     web: 'pressable'
-    props: { data: string } & SheetsT.OnPressX
+    props: { data: string } & TSheets.OnPressX
     propsWeb: React.SVGAttributes<SVGElement> & { url?: string }
     //from node_modules\@types\expo\index.d.ts, BaseIconProps
     propsNative: {
@@ -49,8 +49,8 @@ export namespace CompsT {
     nameType: CompNames.Icon | CompNames.AnimatedIcon
   }>
 
-  export type ScrollViewShape = SheetsT.OverwriteShape<{
-    common: SheetsT.ShapeScrollViews<'root' | 'container'>
+  export type ScrollViewShape = TSheets.OverwriteShape<{
+    common: TSheets.ShapeScrollViews<'root' | 'container'>
     web: 'rootHorizontal' | 'containerHorizontal'
     style: ReactN.ScrollViewStyle
     props: {
@@ -60,6 +60,8 @@ export namespace CompsT {
     propsNative: ReactN.ScrollViewProperties
     nameType: CompNames.ScrollView | CompNames.AnimatedScrollView
   }>
+
+  export type TViewWeb = TSheets.CodeSFCWeb<TComps.ViewShape>
 
   interface Shapes {
     [CompNames.Text]?: TextShape

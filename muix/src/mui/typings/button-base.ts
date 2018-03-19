@@ -1,7 +1,7 @@
 ﻿import { ButtonBaseProps } from './mui'
 import ReactN from 'react-native'
 
-import { SheetsT } from 'reactxx-typings'
+import { TSheets } from 'reactxx-typings'
 //import ReactN from 'react-native'
 //import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
 export namespace MuiButtonBaseT {
@@ -10,9 +10,9 @@ export namespace MuiButtonBaseT {
     ButtonBase = 'MuiButtonBase',
   }
 
-  export type Shape = SheetsT.OverwriteShape<{
-    common: SheetsT.ShapeViews<'root'>
-    native: SheetsT.ShapeViews<'ripple'>
+  export type Shape = TSheets.OverwriteShape<{
+    common: TSheets.ShapeViews<'root'>
+    native: TSheets.ShapeViews<'ripple'>
     props: ButtonBaseProps //& ReactXX.OnPressAllWeb
     propsNative: ReactN.TouchableOpacityProperties
     nameType: CompNames.ButtonBase
@@ -24,7 +24,7 @@ export namespace MuiButtonBaseT {
     rippleStyle: ReactN.ViewStyle
   }
 
-  export type RippleEfectProps = ButtonBaseStyles & Partial<SheetsT.CodePropsNative<MuiButtonBaseT.Shape>>
+  export type RippleEfectProps = ButtonBaseStyles & Partial<TSheets.CodePropsNative<MuiButtonBaseT.Shape>>
 
 }
 

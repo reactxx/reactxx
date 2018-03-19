@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { ThemeProvider, ThemeModifier } from 'reactxx'
-import { ThemeT } from 'reactxx-typings'
+import { TTheme } from 'reactxx-typings'
 import { ModifierType } from 'reactxx-stateman'
 import { createMuiTheme } from '../common/createMuiTheme'
 
@@ -11,7 +11,7 @@ import { AppLoading } from 'expo'
 
 export * from '../common/createMuiTheme'
 
-export const ThemeModifierX: ModifierType<ThemeT.ThemeState, ThemeT.ThemeState> = props => <ThemeModifier {...props} render={themeState => {
+export const ThemeModifierX: ModifierType<TTheme.ThemeState, TTheme.ThemeState> = props => <ThemeModifier {...props} render={themeState => {
   return props.children
   //TODO THEME
   //const { theme, overrides} = themeState

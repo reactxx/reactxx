@@ -5,6 +5,10 @@
     "module": "commonjs",
     "moduleResolution": "node",
 
+    //"declaration": true,
+
+    //"traceResolution": true,
+
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
 
@@ -29,8 +33,10 @@
       "reactxx-typings/mdi": [ "src/typings/mdi-web" ],
 
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/index" ],
+
       "reactxx-mui/*": [ "src/mui/web/*" ],
       "reactxx-mui/typings/*": [ "src/mui/typings/*" ],
+
       "reactxx-stateman": [ "src/stateman/index" ],
 
       "reactxx": [ "src/reactxx/web/index" ],
@@ -45,5 +51,8 @@
   },
   "include": [
     "src/**/*"
+  ],
+  "exclude": [
+    "src/ks/typings.d.ts"
   ]
 }

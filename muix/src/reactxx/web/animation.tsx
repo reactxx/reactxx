@@ -1,12 +1,12 @@
 import { DriverLow, getGaps } from '../common/animation'
 import warning from 'warning'
 import { sheetToClassSheet, keyFrameToClassNames } from './fela'
-import { Animation, SheetsT } from 'reactxx-typings' 
+import { TAnimation, TSheets } from 'reactxx-typings' 
 import ReactN from 'react-native'
 
-export class Driver<T extends Animation.Shape> extends DriverLow<T> implements Animation.DriverWeb<T>  {
+export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements TAnimation.DriverWeb<T>  {
 
-  constructor(sheet: Animation.SheetX<T>, public animations: Animation.Drivers<{}>) {
+  constructor(sheet: TAnimation.SheetX<T>, public animations: TAnimation.Drivers<{}>) {
     super(sheet, animations)
     const { $delay, $duration, $easing, $opened } = this.$config
 
@@ -17,10 +17,10 @@ export class Driver<T extends Animation.Shape> extends DriverLow<T> implements A
     this.bothClassName = [{} as any, {} as any]
     for (const propsName in sheet) {
       if (propsName.startsWith('$')) continue
-      const pairs: Animation.RuleSetX<ReactN.TextProperties> = sheet[propsName]
+      const pairs: TAnimation.RuleSetX<ReactN.TextProperties> = sheet[propsName]
       const transformPairs = pairs.transform
 
-      const rulesets: SheetsT.RulesetWeb[] = [{}, {}], transforms = ['', ''], range = [0, 1], transitions0 = [], transitions1 = []
+      const rulesets: TSheets.RulesetWeb[] = [{}, {}], transforms = ['', ''], range = [0, 1], transitions0 = [], transitions1 = []
 
       const addTransformString = (pair, modifier: string) => {
         range.forEach(idx => rulesets[idx]['transform'] = pair[idx])
@@ -67,9 +67,9 @@ export class Driver<T extends Animation.Shape> extends DriverLow<T> implements A
     //debugger
     this.sheet = this.bothClassName[$opened ? 1 : 0]
   }
-  sheet: Animation.SheetWeb<T>
+  sheet: TAnimation.SheetWeb<T>
   runningTimer: number
-  private bothClassName: Animation.SheetWeb<T>[]
+  private bothClassName: TAnimation.SheetWeb<T>[]
   reset() {
     if (!this.runningTimer) return
     clearTimeout(this.runningTimer)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, ScrollView, Icon, AppContainer, LoremIpsum, } from 'reactxx'
 
-import { ThemeT, CompsT, SheetsT } from 'reactxx-typings'
+import { TTheme, TComps, TSheets } from 'reactxx-typings'
 
 interface Example {
   title: string
@@ -62,7 +62,7 @@ For "View" element:
 - valid "$native" rules: see react-native ViewStyle
 `,
     Component: props => {
-      const border: SheetsT.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', marginBottom: 20 }
+      const border: TSheets.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', marginBottom: 20 }
       return <View className={{ padding: 10 }}>
         <View className={border}>
           <Text className={{ backgroundColor: 'lightgreen', alignSelf: 'flex-start' }}>
@@ -87,7 +87,7 @@ For "View" element:
     descr: `
 `,
     Component: props => {
-      const border: SheetsT.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10 }
+      const border: TSheets.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10 }
       return <ScrollView classes={{ container: { padding: 10 } }}>
         <View className={border}>
           <Text className={{ marginTop: 10 }}>
@@ -109,7 +109,7 @@ For "View" element:
     descr: `
 `,
     Component: props => {
-      const text: SheetsT.TextRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10, margin: 10, width: 300 }
+      const text: TSheets.TextRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10, margin: 10, width: 300 }
       return <ScrollView horizontal>
         <Text className={text}>111 {LoremIpsum(40)}</Text>
         <Text className={text}>222 {LoremIpsum(40)}</Text>
@@ -124,7 +124,7 @@ For "View" element:
     descr: `
 `,
     Component: props => {
-      const text: SheetsT.TextRulesetX = {
+      const text: TSheets.TextRulesetX = {
         $mediaq: {
           '-480': { color: 'red', },
           '480-1024': { color: 'green', },
@@ -166,6 +166,6 @@ const E01$01_: Example = {
 }
 
 
-let t: ThemeT.ThemeState
+let t: TTheme.ThemeState
 
-t[CompsT.CompNames.ScrollView].sheet.container
+t[TComps.CompNames.ScrollView].sheet.container

@@ -10,7 +10,7 @@ import JssProvider from 'react-jss/lib/JssProvider'
 import { ThemeProvider, ThemeModifier } from 'reactxx'
 import { ModifierType } from 'reactxx-stateman'
 
-import { ThemeT, SheetsT } from 'reactxx-typings'
+import { TTheme, TSheets } from 'reactxx-typings'
 
 export * from '../common/createMuiTheme'
 
@@ -35,7 +35,7 @@ export const AppContainer: React.SFC = props => {
   </JssProvider>
 }
 
-export const ThemeModifierX: ModifierType<ThemeT.ThemeState, ThemeT.ThemeState> = props => <ThemeModifier {...props} render={themeState => {
+export const ThemeModifierX: ModifierType<TTheme.ThemeState, TTheme.ThemeState> = props => <ThemeModifier {...props} render={themeState => {
   return props.children
   //TODO THEME
   //const { theme, overrides} = themeState
@@ -44,13 +44,13 @@ export const ThemeModifierX: ModifierType<ThemeT.ThemeState, ThemeT.ThemeState> 
 }} />
 
 //Get platform component sheet (from creator and theme)
-const expandOverrides = (themeState: ThemeT.ThemeState) => {
+const expandOverrides = (themeState: TTheme.ThemeState) => {
   if (!themeState) return null
   const theme = themeState.theme
   const res = { theme }
   for (const componentName in themeState) {
     if (componentName == 'theme') continue
-    const themeComp: ThemeT.ThemeCompX = themeState[componentName]; if (!themeComp) return res
+    const themeComp: TTheme.ThemeCompX = themeState[componentName]; if (!themeComp) return res
     const { sheet, par } = themeComp
     //TODO THEME
     //res[componentName] = typeof override != 'function' ? override : override(theme, compThemePar)
@@ -58,25 +58,25 @@ const expandOverrides = (themeState: ThemeT.ThemeState) => {
   return res
 }
 
-type webKeys<R extends SheetsT.Shape> = SheetsT.getWeb<R> | keyof SheetsT.getCommon<R>
+type webKeys<R extends TSheets.Shape> = TSheets.getWeb<R> | keyof TSheets.getCommon<R>
 type muiComponentType<P, ClassKey extends string> = React.ComponentType<P & Mui.StyledComponentProps<ClassKey>>
 
-export const muiCompatible = <R extends SheetsT.Shape>(Component: muiComponentType<SheetsT.getPropsWeb<R>, webKeys<R>>) => {
+export const muiCompatible = <R extends TSheets.Shape>(Component: muiComponentType<TSheets.getPropsWeb<R>, webKeys<R>>) => {
 
-  const Styled: SheetsT.SFCX<R> = props => {
+  const Styled: TSheets.SFCX<R> = props => {
 
-    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, modifyThemeState, ...other } = props as any as (SheetsT.PropsX & SheetsT.OnPressAllX)
+    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, modifyThemeState, ...other } = props as any as (TSheets.PropsX & TSheets.OnPressAllX)
 
-    const classes = toPlatformSheet(classesX as SheetsT.SheetX)
+    const classes = toPlatformSheet(classesX as TSheets.SheetX)
 
     const codeProps = {
       ...other, ...$web,
-      style: toPlatformRuleSet(styleX as SheetsT.RulesetX),
-      className: rulesetToClassNames(toPlatformRuleSet(classNameX as SheetsT.RulesetX)),
+      style: toPlatformRuleSet(styleX as TSheets.RulesetX),
+      className: rulesetToClassNames(toPlatformRuleSet(classNameX as TSheets.RulesetX)),
       classes: classes
     }
 
-    toPlatformEvents($web, $native as SheetsT.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps as any)
+    toPlatformEvents($web, $native as TSheets.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps as any)
 
     return <Component {...codeProps as any} />
   }

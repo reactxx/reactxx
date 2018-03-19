@@ -111,6 +111,7 @@
     <TypeScriptCompile Include="src\common\app\index.tsx" />
     <TypeScriptCompile Include="src\common\app\navigation.tsx" />
     <TypeScriptCompile Include="src\common\components\index.tsx" />
+    <TypeScriptCompile Include="src\common\components\typo.tsx" />
     <TypeScriptCompile Include="src\common\hallo-world.tsx" />
     <TypeScriptCompile Include="src\common\primitives\index.tsx" />
     <TypeScriptCompile Include="src\common\primitives\e1.tsx" />
@@ -120,21 +121,14 @@
     <TypeScriptCompile Include="src\common\primitives\e5.tsx" />
     <TypeScriptCompile Include="src\common\primitives\e6.tsx" />
     <TypeScriptCompile Include="src\common\primitives\e7.tsx" />
-    <TypeScriptCompile Include="src\common\components\responsible-drawer\responsible-drawer-d.d.ts" />
     <TypeScriptCompile Include="src\common\components\responsible-drawer\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\common\typings.d.ts" />
     <TypeScriptCompile Include="src\native\index.tsx" />
-    <TypeScriptCompile Include="src\try\Hello.tsx" />
-    <TypeScriptCompile Include="src\try\index.tsx" />
-    <TypeScriptCompile Include="src\try\package-def.d.ts" />
-    <TypeScriptCompile Include="src\try\typings.d.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\typings\reactxx\common-style.ts" />
     <TypeScriptCompile Include="src\web\index.tsx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bundle\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

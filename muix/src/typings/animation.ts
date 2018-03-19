@@ -1,8 +1,8 @@
 import ReactN from 'react-native'
 
-import { SheetsT } from 'reactxx-typings'
+import { TSheets } from 'reactxx-typings'
 
-export namespace Animation {
+export namespace TAnimation {
   //https://engineering.salesforce.com/experiments-with-high-performance-animation-in-react-native-80a0cb7052b0
   //https://github.com/facebook/react-native/blob/master/Libraries/Animated/src/NativeAnimatedHelper.js
 
@@ -21,10 +21,10 @@ export namespace Animation {
     $opened?: boolean
   }
 
-  export type RuleSetX<T extends SheetsT.RulesetNative> = ToPairs<T, SheetsT.commonRuleNames<T>> & {
+  export type RuleSetX<T extends TSheets.RulesetNative> = ToPairs<T, TSheets.commonRuleNames<T>> & {
     transform?: Array<TNativeTransform>
     $native?: ToPairs<T, Diff<keyof T, 'transform'>> & { transform?: TNativeTransform[] }
-    $web?: ToPairs<SheetsT.RulesetWeb, keyof React.CSSPropertiesLow> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
+    $web?: ToPairs<TSheets.RulesetWeb, keyof React.CSSPropertiesLow> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
   }
 
   export type Drivers<T extends Shapes = Shapes> = { [P in keyof T]: Driver<T[P]> } & AnimationsEx
@@ -52,13 +52,13 @@ export namespace Animation {
     sheet: SheetNative<T>
   }
 
-  export type SheetWeb<T extends Shape> = { [P in keyof T]: SheetsT.RulesetWeb } & AnimationConfig
+  export type SheetWeb<T extends Shape> = { [P in keyof T]: TSheets.RulesetWeb } & AnimationConfig
   export type SheetNative<T extends Shape> = { [P in keyof T]: T[P] } & AnimationConfig
-  export type Sheet<T extends Shape> = { [P in keyof T]: (T[P] | SheetsT.RulesetWeb) } & AnimationConfig
+  export type Sheet<T extends Shape> = { [P in keyof T]: (T[P] | TSheets.RulesetWeb) } & AnimationConfig
 
   export type SheetsX<T extends Shapes> = { [P in keyof T]: SheetX<T[P]> }
   export type SheetX<T extends Shape> = { [P in keyof T]: RuleSetX<T[P]> } & AnimationConfig
 
-  export type Shape = Record<string, SheetsT.RulesetNative>
+  export type Shape = Record<string, TSheets.RulesetNative>
   export type Shapes = Record<string, Shape>
 }

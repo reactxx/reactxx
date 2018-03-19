@@ -2,17 +2,17 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { AnimationDriver } from 'reactxx' //NATIVE or WEB animation driver
-import { Animation } from 'reactxx-typings' 
+import { TAnimation } from 'reactxx-typings' 
 import warning from 'warning'
 
-export const getAnimations = <T extends Animation.Shapes>(sheets: Animation.SheetsX<T>, statefullComponent: React.Component) => {
+export const getAnimations = <T extends TAnimation.Shapes>(sheets: TAnimation.SheetsX<T>, statefullComponent: React.Component) => {
   if (!sheets) return null
-  const drivers: Animation.Drivers<T> = {} as any
+  const drivers: TAnimation.Drivers<T> = {} as any
   for (const p in sheets) {
     if (p.startsWith('$')) continue
     drivers[p] = new AnimationDriver(sheets[p], drivers) as any
   }
-  drivers.reset = (caller?: Animation.Driver<{}>) => {
+  drivers.reset = (caller?: TAnimation.Driver<{}>) => {
     for (const p in drivers) {
       const driver = drivers[p]
       if (driver === caller || !driver.reset) continue
@@ -23,13 +23,13 @@ export const getAnimations = <T extends Animation.Shapes>(sheets: Animation.Shee
   return drivers
 }
 
-export abstract class DriverLow<T extends Animation.Shape> implements Animation.Driver<T> {
-  constructor(sheet: Animation.SheetX<T>, public animations: Animation.Drivers<{}>) {
+export abstract class DriverLow<T extends TAnimation.Shape> implements TAnimation.Driver<T> {
+  constructor(sheet: TAnimation.SheetX<T>, public animations: TAnimation.Drivers<{}>) {
     this.opened = !!sheet.$opened
     const { $delay = 0, $duration = 0, $easing = 'ease-in', $opened} = sheet
     this.$config = { $delay, $duration, $easing, $opened }
   }
-  $config: Animation.AnimationConfig
+  $config: TAnimation.AnimationConfig
   opened = false
   set(isOpen: boolean) {
     this.animations.reset(this)
@@ -38,7 +38,7 @@ export abstract class DriverLow<T extends Animation.Shape> implements Animation.
   toggle() { this.set(!this.opened) }
   open() { this.set(true) }
   close() { this.set(false) }
-  sheet: Animation.Sheet<T>
+  sheet: TAnimation.Sheet<T>
   reset() { }
   abstract doOpen(toOpened: boolean) //platform specific action: forceUpdate for web, Animated.value.setValue for native
 }

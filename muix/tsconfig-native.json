@@ -40,10 +40,9 @@
     ]
   },
   "include": [
-    "src/**/*",
-    "node_modules/reactxx-mdi/es/typings.d.ts"
+    "src/**/*"
   ],
   "exclude": [
-    "src/ks/typings/mdi/web.d.ts"
+    "src/ks/typings.d.ts"
   ]
 }

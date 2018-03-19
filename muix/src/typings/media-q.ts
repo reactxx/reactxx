@@ -1,8 +1,8 @@
 import ReactN from 'react-native'
 
-import { SheetsT } from 'reactxx-typings'
+import { TSheets } from 'reactxx-typings'
 
-export namespace MediaQ {
+export namespace TMediaQ {
 
   export const enum Consts {
     maxBreakpoint = 10000000
@@ -16,18 +16,18 @@ export namespace MediaQ {
     state: { [P in TState]?: boolean }
   }
 
-  export interface SheetX<T extends SheetsT.RulesetNative = ReactN.TextStyle, R extends SheetsT.Shape = SheetsT.Shape> {
-    [query: string]: SheetsT.RulesetX<T, R>
+  export interface SheetX<T extends TSheets.RulesetNative = ReactN.TextStyle, R extends TSheets.Shape = TSheets.Shape> {
+    [query: string]: TSheets.RulesetX<T, R>
   }
 
-  export interface SheetXWeb<R extends SheetsT.Shape = SheetsT.Shape> {
-    [query: string]: React.CSSProperties & SheetsT.RulesetAddInX<never, R>
+  export interface SheetXWeb<R extends TSheets.Shape = TSheets.Shape> {
+    [query: string]: React.CSSProperties & TSheets.RulesetAddInX<never, R>
   }
 
-  export interface SheetXNative<T extends SheetsT.RulesetNative = ReactN.TextStyle, R extends SheetsT.Shape = SheetsT.Shape> {
-    [query: string]: T & SheetsT.RulesetAddInX<T, R>
+  export interface SheetXNative<T extends TSheets.RulesetNative = ReactN.TextStyle, R extends TSheets.Shape = TSheets.Shape> {
+    [query: string]: T & TSheets.RulesetAddInX<T, R>
   }
 
-  export interface Patch { start: number; end: number; ruleset: SheetsT.RulesetWithAddIn }
+  export interface Patch { start: number; end: number; ruleset: TSheets.RulesetWithAddIn }
 
 }

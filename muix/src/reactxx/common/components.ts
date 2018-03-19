@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { ThemeT, CompsT, SheetsT } from 'reactxx-typings'
+import { TTheme, TComps, TSheets } from 'reactxx-typings'
 
-export const textSheet: ThemeT.SheetCreatorX<CompsT.TextShape> = {
+export const textSheet: TTheme.SheetCreatorX<TComps.TextShape> = {
   root: {
     $web: {
       whiteSpace: 'pre-wrap',
       wordWrap: 'break-word',
-      [`& .${CompsT.CompNames.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. ReactXX.CompNames.Text is className for Text component root div.
+      [`& .${TComps.CompNames.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. ReactXX.CompNames.Text is className for Text component root div.
         display: 'inline',
       },
     },
@@ -35,15 +35,15 @@ const webViewRuleset = {
   flexShrink: 0,
   position: 'relative',
   overflow: 'hidden',
-} as SheetsT.RulesetWeb 
+} as TSheets.RulesetWeb 
 
-export const viewSheet: ThemeT.SheetCreatorX<CompsT.ViewShape> = {
+export const viewSheet: TTheme.SheetCreatorX<TComps.ViewShape> = {
   root: {
     $web: webViewRuleset
   }
 }
 
-export const iconSheet: ThemeT.SheetCreatorX<CompsT.IconShape> = {
+export const iconSheet: TTheme.SheetCreatorX<TComps.IconShape> = {
   root: {
     fontSize: 24,
     flexShrink: 0,
@@ -58,7 +58,7 @@ export const iconSheet: ThemeT.SheetCreatorX<CompsT.IconShape> = {
 
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
-export const scrollViewSheet: ThemeT.SheetCreatorX<CompsT.ScrollViewShape> = {
+export const scrollViewSheet: TTheme.SheetCreatorX<TComps.ScrollViewShape> = {
   root: {
     $web: {
       ...webViewRuleset,
@@ -93,14 +93,16 @@ export const scrollViewSheet: ThemeT.SheetCreatorX<CompsT.ScrollViewShape> = {
   }
 }
 
+export type TViewWeb = TSheets.CodeSFCWeb<TComps.ViewShape>
+
 export const LoremIpsum = (words: 2 | 5 | 10 | 20 | 40 | 80 | 160) => {
   switch (words) {
-    case 2: return 'Lorem ipsum.'
-    case 5: return 'Lorem ipsum dolor sit amet.'
-    case 10: return 'Lorem ipsum dolor sit amet, usu vocibus eleifend accommodare te.'
-    case 20: return 'Lorem ipsum dolor sit amet, ei eius elitr numquam mei, ubique utamur pericula ad mel! Quo at dicta lobortis salutatus.'
-    case 40: return 'Lorem ipsum dolor sit amet, offendit comprehensam te nam! Dicam incorrupte id his, veri ipsum singulis mel ex! Mei ei cetero convenire. Ius quas dolorem no? Te usu rebum delectus scribentur, vel an veri dissentias, mel id laboramus urbanitas et.'
-    case 80: return 'Lorem ipsum dolor sit amet, ei has audire tamquam mediocritatem, vim velit postulant eu. Mel insolens intellegebat ei. Autem tincidunt intellegebat ad duo? Est ei meliore ancillae, sea an efficiendi intellegam definitiones, eum ei oratio latine aliquando! Et eos probo volumus. Propriae deleniti et sea.Ne eam tibique detracto.Vero ullum ius id, cu nobis iuvaret nec.Wisi inciderint ad vim ? Vitae docendi interesset pro eu, ei pri tota petentium! Usu munere epicurei ei, meliore graecis et est, ne per.'
-    case 160: return 'Lorem ipsum dolor sit amet, no usu nominavi appetere, debet partem ei vis, ex nec fugit maiestatis. Te sint propriae sea, his augue labores in? Duo debet mollis ea, ut est denique eligendi copiosae! Natum ubique feugait mea eu, falli liber cotidieque sit in. Ad quo suas pertinacia dissentiunt! Legere accusata nominati et his, et eos possit copiosae, in mutat commodo constituam quo.Doctus scripta petentium per ad, cum cu dictas eleifend dissentiet, pro civibus lobortis accommodare id.Vim dolor signiferumque ea, brute propriae iudicabit ne pro, porro diceret appareat ad vix! Sea no zril noster adipisci, stet semper persequeris sit et.Mel ad cetero denique apeirian, oblique scribentur nam ne. No mollis nostrud vel.Vim te erat nemore.Sea ne meliore vivendum.Eum ex tollit ornatus! Doctus mandamus vel ex, ius ea enim intellegat, purto imperdiet sed ne.Mel electram mnesarchum instructior no. Sed audire tacimates ex, ex sit tincidunt definitionem.Usu tation consectetuer et, fabellas efficiendi eu vix.'
+    case 2: return 'Lorem ipsum. '
+    case 5: return 'Lorem ipsum dolor sit amet. '
+    case 10: return 'Lorem ipsum dolor sit amet, usu vocibus eleifend accommodare te. '
+    case 20: return 'Lorem ipsum dolor sit amet, ei eius elitr numquam mei, ubique utamur pericula ad mel! Quo at dicta lobortis salutatus. '
+    case 40: return 'Lorem ipsum dolor sit amet, offendit comprehensam te nam! Dicam incorrupte id his, veri ipsum singulis mel ex! Mei ei cetero convenire. Ius quas dolorem no? Te usu rebum delectus scribentur, vel an veri dissentias, mel id laboramus urbanitas et. '
+    case 80: return 'Lorem ipsum dolor sit amet, ei has audire tamquam mediocritatem, vim velit postulant eu. Mel insolens intellegebat ei. Autem tincidunt intellegebat ad duo? Est ei meliore ancillae, sea an efficiendi intellegam definitiones, eum ei oratio latine aliquando! Et eos probo volumus. Propriae deleniti et sea.Ne eam tibique detracto.Vero ullum ius id, cu nobis iuvaret nec.Wisi inciderint ad vim ? Vitae docendi interesset pro eu, ei pri tota petentium! Usu munere epicurei ei, meliore graecis et est, ne per. '
+    case 160: return 'Lorem ipsum dolor sit amet, no usu nominavi appetere, debet partem ei vis, ex nec fugit maiestatis. Te sint propriae sea, his augue labores in? Duo debet mollis ea, ut est denique eligendi copiosae! Natum ubique feugait mea eu, falli liber cotidieque sit in. Ad quo suas pertinacia dissentiunt! Legere accusata nominati et his, et eos possit copiosae, in mutat commodo constituam quo.Doctus scripta petentium per ad, cum cu dictas eleifend dissentiet, pro civibus lobortis accommodare id.Vim dolor signiferumque ea, brute propriae iudicabit ne pro, porro diceret appareat ad vix! Sea no zril noster adipisci, stet semper persequeris sit et.Mel ad cetero denique apeirian, oblique scribentur nam ne. No mollis nostrud vel.Vim te erat nemore.Sea ne meliore vivendum.Eum ex tollit ornatus! Doctus mandamus vel ex, ius ea enim intellegat, purto imperdiet sed ne.Mel electram mnesarchum instructior no. Sed audire tacimates ex, ex sit tincidunt definitionem.Usu tation consectetuer et, fabellas efficiendi eu vix. '
   }
 }

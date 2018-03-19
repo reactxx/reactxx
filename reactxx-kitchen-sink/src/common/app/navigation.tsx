@@ -1,12 +1,17 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { SheetsT } from 'reactxx-typings'
+import { TSheets } from 'reactxx-typings'
 
-import { View, Text, ScrollView, Icon } from 'reactxx'
-import { examples, nameToExample, exampleToElement, primitives, components, navigationExample, KSink } from './index'
+import { View, Text, ScrollView, Icon, LoremIpsum } from 'reactxx'
+import { H1, H2, H3, H4, H5, U, I, B, A, Blocquote, P } from '../components/typo'
+
+import { examples, nameToExample, exampleToElement, components, navigationExample, KSink } from './index'
+import { primitives } from '../primitives/index'
 import { ResponsibleDrawer } from '../components/responsible-drawer/responsible-drawer'
 import { GithubCircle } from 'reactxx-mdi/GithubCircle'
+
+import { TComps, TTheme } from 'reactxx-typings';
 
 export type GotoExample = (example: KSink.Example) => void
 export type GetExampleUrl = (example: KSink.Example) => string
@@ -29,7 +34,7 @@ class App extends React.Component<{}, KSink.Example> {
 
   render() {
     if (this.locationExample.name !== 'app/navigation') return exampleToElement(this.locationExample)
-    const content = this.state.name === 'app/navigation' ? <HomeContent /> : exampleToElement(this.state)
+    const content = this.state.name === 'app/navigation' ? (window.isWeb ? <HomeContentWeb /> : <HomeContentNative />): exampleToElement(this.state)
     return <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer actName={this.state.name} gotoExample={this.gotoExample} />}>
       <Content actExample={this.state}>{content}</Content>
     </ResponsibleDrawer>
@@ -38,10 +43,10 @@ class App extends React.Component<{}, KSink.Example> {
   gotoExample: GotoExample = (example => this.setState(example)).bind(this);
 }
 
-const drawerButton = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as SheetsT.RulesetX
-const toolbar = { flexDirection: 'row', alignItems: 'center', height: 48, padding: 15 } as SheetsT.RulesetX<ReactN.ViewStyle>
-const codeIcons = { color: 'white', marginLeft: 15, $web: { ':hover': { transform: 'scale(1.2)' } } } as SheetsT.RulesetX
-var logo = { flexGrow: 0, marginLeft: 5, color: 'lightblue', paddingRight: 10, marginRight: 10, borderRightColor: 'lightblue', borderRightWidth: 1, $web: { borderRightStyle: 'solid' } } as SheetsT.RulesetX
+const drawerButton = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as TSheets.RulesetX
+const toolbar = { flexDirection: 'row', alignItems: 'center', height: 48, padding: 15 } as TSheets.RulesetX<ReactN.ViewStyle>
+const codeIcons = { color: 'white', marginLeft: 15, $web: { ':hover': { transform: 'scale(1.2)' } } } as TSheets.RulesetX
+var logo = { flexGrow: 0, marginLeft: 5, color: 'lightblue', paddingRight: 10, marginRight: 10, borderRightColor: 'lightblue', borderRightWidth: 1, $web: { borderRightStyle: 'solid' } } as TSheets.RulesetX
 
 const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ children, gotoExample, actName }) => <View className={{ flex: 1 }}>
   <View className={{ ...toolbar, backgroundColor: 'gray' }}>
@@ -68,9 +73,17 @@ const Content: React.SFC<{ actExample: KSink.Example }> = ({ children, actExampl
   </View >
 </View >
 
-const HomeContent: React.SFC = () => <View className={{ flex: 1, }}>
-  <Text>Hallo world</Text>
-</View>
+const HomeContentWeb: React.SFC = () => <ScrollView classes={{ container: { paddingTop: 15, flexGrow: 1 } }}>
+  <P>{LoremIpsum(160)}</P>
+  <A url='https://expo.io/@pzika/reactxx-kitchen-sink'>{LoremIpsum(160)}</A>
+  <P>{LoremIpsum(160)}</P>
+</ScrollView>
+
+const HomeContentNative: React.SFC = () => <ScrollView classes={{ container: { paddingTop: 15, flexGrow: 1 } }}>
+  <P>{LoremIpsum(160)}</P>
+  <A url='https://reactxx.github.io/reactxx/'>{LoremIpsum(10)}</A>
+  <P>{LoremIpsum(160)}</P>
+</ScrollView>
 
 const DrawerGroup = (title: string, items: KSink.Example[], gotoExample: GotoExample, actName: string) => <View className={{ padding: 15 }}>
   <Text className={{ color: 'gray', fontSize: 18, marginBottom: 15 }}>{title}</Text>
@@ -99,11 +112,5 @@ const codeSandboxSVG = [
 
 export default App
 
-export const meta = {
-  name: 'app/navigation',
-  title: 'Home',
-  descr: '',
-  Component: App,
-}
 
 

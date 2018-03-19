@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { meta as navigation } from './navigation'
-import * as prims from '../primitives/index'
+import NavigApp from './navigation'
+import { primitives } from '../primitives/index'
 import * as comps from '../components/index'
 
 export namespace KSink {
@@ -19,18 +19,19 @@ export namespace KSink {
 
 }
 
-export let navigationExample: KSink.Example
-
-export const primitives: KSink.Example[] = [
-  prims.primitives1, prims.primitives2, prims.primitives3, prims.primitives4, prims.primitives5, prims.primitives6, prims.primitives7,
-]
+export const navigationExample = {
+  name: 'app/navigation',
+  title: 'Home',
+  descr: '',
+  Component: NavigApp,
+} as KSink.Example
 
 export const components: KSink.Example[] = [
   comps.responsibleDrawer,
 ]
 
 export const examples: KSink.Example[] = [
-  navigationExample = navigation,
+  navigationExample,
   ...components,
   ...primitives
 ]

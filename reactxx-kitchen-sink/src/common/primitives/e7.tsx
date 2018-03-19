@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { SheetsT } from 'reactxx-typings'
+import { TSheets } from 'reactxx-typings'
 import { Text, LoremIpsum, } from 'reactxx'
 
 const App: React.SFC = props => {
-  const changeColorRuleset: SheetsT.TextRulesetX = {
+  const changeColorRuleset: TSheets.TextRulesetX = {
     $mediaq: {
       '-480': { color: 'red', fontSize: 14 },
       '480-1024': { color: 'green', },
