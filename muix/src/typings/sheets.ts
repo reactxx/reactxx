@@ -38,6 +38,7 @@ export namespace TSheets {
   export type commonRules<T extends RulesetNative> = TakeFrom<T, commonRuleNames<T>>
 
   export type ViewRulesetCommonX = commonRules<ReactN.ViewStyle>
+
   export type ViewRulesetX = RulesetX<ReactN.ViewStyle>
   export type TextRulesetX = RulesetX<ReactN.TextStyle>
 

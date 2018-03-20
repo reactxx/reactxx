@@ -74,6 +74,7 @@ const Content: React.SFC<{ actExample: KSink.Example }> = ({ children, actExampl
 </View >
 
 const HomeContentWeb: React.SFC = () => <ScrollView classes={{ container: { paddingTop: 15, flexGrow: 1 } }}>
+
   <P>{LoremIpsum(160)}</P>
   <A url='https://expo.io/@pzika/reactxx-kitchen-sink'>{LoremIpsum(160)}</A>
   <P>{LoremIpsum(160)}</P>

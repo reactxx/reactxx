@@ -125,6 +125,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\basic\common\typings.ts" />
+    <TypeScriptCompile Include="src\basic\native\components.tsx" />
+    <TypeScriptCompile Include="src\basic\web\components.tsx" />
+    <TypeScriptCompile Include="src\basic\web\fela.tsx" />
     <TypeScriptCompile Include="src\doc\home.tsx" />
     <TypeScriptCompile Include="src\ks\common\app\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\app\navigation.tsx" />
