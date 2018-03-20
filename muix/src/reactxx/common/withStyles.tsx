@@ -33,7 +33,7 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
 
       const { theme, compThemePar = defaultCompThemePars[name], compThemeSheet, classes: classesX } = this.props
 
-      //*** get platform component sheet (from creator and actual theme)
+      //*** get platform dependent sheet (from creator and actual theme)
       const staticSheet = toPlatformSheet(applyTheme(theme, compThemePar, createSheetX))
 
       //*** apply "component override" from actual "theme app state"
@@ -80,8 +80,6 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
 
       toPlatformEvents($web, $native as TSheets.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
 
-      renderCount++
-
       return <Component {...codeProps} />
     }
 
@@ -101,7 +99,7 @@ const modifierSelector = (componentName: string) => (themeStates: TTheme.ThemeSt
   return { theme: themeStates.theme, compThemePar: compTheme.par, compThemeSheet: compTheme.sheet } as TTheme.ThemeCompSelectedX
 }
 
-let renderCount = 0
+//let renderCount = 0
 
 export const defaultCompThemePars: {[Name in keyof TSheets.Shapes]?: TSheets.getCompTheme<TSheets.Shapes[Name]> } = {}
 
@@ -182,30 +180,3 @@ const clearSystemProps = obj => {
   return rest
 }
 
-class PureComponent<T> extends React.Component<T> {
-  shouldComponentUpdate(nextProps, nextState, nextContext: any) {
-    return !shallowEqual(this.state, nextState) || !shallowEqual(this.props, nextProps) || (this.props && nextProps && (!shallowEqual((this.props as any).className, nextProps.className) || !shallowEqual((this.props as any).style, nextProps.style)))
-  }
-}
-
-const shallowEqual = (objA: {}, objB: {}, ignoreStyle?: boolean) => {
-  if (objA === objB) return true
-
-  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) return false
-
-  const keysA = Object.keys(objA); if (keysA.length !== Object.keys(objB).length) return false
-
-  // Test for A's keys different from B.
-  var bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);
-  for (let i = 0; i < keysA.length; i++) {
-    const prop = keysA[i]
-    if (prop.startsWith('on')) continue
-    if (ignoreStyle && (prop === 'className' || prop === 'style')) continue
-    if (!bHasOwnProperty(prop) || objA[prop] !== objB[prop]) {
-      //console.log(prop)
-      return false
-    }
-  }
-
-  return true;
-}

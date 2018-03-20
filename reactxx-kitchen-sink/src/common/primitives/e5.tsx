@@ -1,10 +1,9 @@
 import React from 'react'
 
-import { TSheets } from 'reactxx-typings'
-import { Text, View, ScrollView, LoremIpsum } from 'reactxx'
+import { TBasic, Text, View, ScrollView, LoremIpsum } from 'reactxx-basic'
 
 const App: React.SFC = props => {
-  const border: TSheets.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10 }
+  const border: TBasic.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10 }
   return <ScrollView classes={{ container: { padding: 10 } }}>
     <View className={border}>
       <Text className={{ marginTop: 10 }}>

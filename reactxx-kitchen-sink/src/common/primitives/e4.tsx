@@ -1,10 +1,9 @@
 import React from 'react'
 
-import { TSheets } from 'reactxx-typings'
-import { Text, View, LoremIpsum } from 'reactxx'
+import { TBasic, Text, View, LoremIpsum } from 'reactxx-basic'
 
 const App: React.SFC = props => {
-  const bars: TSheets.ViewRulesetX = { flexGrow: 0, justifyContent: 'center', alignItems: 'center', height: 48, padding: 5 }
+  const bars: TBasic.ViewRulesetX = { flexGrow: 0, justifyContent: 'center', alignItems: 'center', height: 48, padding: 5 }
   return <View className={{flex:1}}>
     <View className={{ ...bars, backgroundColor: 'lightgreen' }}>
       <Text className={{ fontSize: 32 }} numberOfLines={1}>

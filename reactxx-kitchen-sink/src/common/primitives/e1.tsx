@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Text } from 'reactxx'
+import { Text } from 'reactxx-basic'
 
 const App: React.SFC = props => <Text
   className={{

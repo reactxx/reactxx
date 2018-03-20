@@ -93,8 +93,6 @@ export const scrollViewSheet: TTheme.SheetCreatorX<TComps.ScrollViewShape> = {
   }
 }
 
-export type TViewWeb = TSheets.CodeSFCWeb<TComps.ViewShape>
-
 export const LoremIpsum = (words: 2 | 5 | 10 | 20 | 40 | 80 | 160) => {
   switch (words) {
     case 2: return 'Lorem ipsum. '

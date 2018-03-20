@@ -125,10 +125,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\basic\common\LoremIpsum.ts" />
+    <TypeScriptCompile Include="src\basic\common\sheets.ts" />
     <TypeScriptCompile Include="src\basic\common\typings.ts" />
+    <TypeScriptCompile Include="src\basic\common\makeXPlatform.tsx" />
     <TypeScriptCompile Include="src\basic\native\components.tsx" />
+    <TypeScriptCompile Include="src\basic\native\index.ts" />
     <TypeScriptCompile Include="src\basic\web\components.tsx" />
     <TypeScriptCompile Include="src\basic\web\fela.tsx" />
+    <TypeScriptCompile Include="src\basic\web\index.ts" />
     <TypeScriptCompile Include="src\doc\home.tsx" />
     <TypeScriptCompile Include="src\ks\common\app\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\app\navigation.tsx" />
@@ -147,10 +152,6 @@
     <TypeScriptCompile Include="src\ks\common\primitives\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\native\index.tsx" />
-    <TypeScriptCompile Include="src\ks\try\Hello.tsx" />
-    <TypeScriptCompile Include="src\ks\try\index.tsx" />
-    <TypeScriptCompile Include="src\ks\try\package-def.d.ts" />
-    <TypeScriptCompile Include="src\ks\try\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\typings.d.ts" />
     <TypeScriptCompile Include="src\typings\mdi-native.ts" />
     <TypeScriptCompile Include="src\typings\mdi-web.ts" />

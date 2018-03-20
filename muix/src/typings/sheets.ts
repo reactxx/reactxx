@@ -89,9 +89,9 @@ export namespace TSheets {
 
   //******************** Shape getters
   export type getCommon<R extends Shape> = R['common']
-  export type getAnimation<R extends Shape> = R['animation']
   export type getNative<R extends Shape> = R['native']
   export type getWeb<R extends Shape> = R['web']
+  export type getAnimation<R extends Shape> = R['animation']
   export type getStyle<R extends Shape> = R['style']
   export type getProps<R extends Shape> = R['props']
   export type getPropsWeb<R extends Shape> = R['propsWeb']
@@ -214,6 +214,7 @@ export namespace TSheets {
   } & (OnPressAllNative | OnPressAllWeb)>
   export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
+  export type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
 
   //******************** $props in rulesets
   export type PropsInRulesetX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>, {
@@ -228,8 +229,5 @@ export namespace TSheets {
   export type PropsInRulesetWeb<R extends Shape = Shape> = getProps<R> & getPropsWeb<R>
   export type PropsInRulesetNative<R extends Shape = Shape> = getProps<R> & getPropsNative<R>
   export type PropsInRuleset<R extends Shape = Shape> = getProps<R> & (getPropsNative<R> | getPropsWeb<R>)
-
-  //******************** Helpers
-  export type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
 
 }

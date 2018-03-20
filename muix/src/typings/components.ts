@@ -18,8 +18,8 @@ export namespace TComps {
 
   export type TextShape = TSheets.OverwriteShape<{
     common: TSheets.ShapeTexts<'root' | 'singleLineStyle'>
-    style: ReactN.TextStyle,
     web: 'pressable'
+    style: ReactN.TextStyle,
     props: { numberOfLines?: number; url?: string  } & TSheets.OnPressX
     propsWeb: React.HTMLAttributes<HTMLSpanElement>
     propsNative: ReactN.TextProperties
@@ -50,7 +50,7 @@ export namespace TComps {
   }>
 
   export type ScrollViewShape = TSheets.OverwriteShape<{
-    common: TSheets.ShapeScrollViews<'root' | 'container'>
+    common: TSheets.ShapeScrollViews<'root'> & TSheets.ShapeViews<'container'>
     web: 'rootHorizontal' | 'containerHorizontal'
     style: ReactN.ScrollViewStyle
     props: {
