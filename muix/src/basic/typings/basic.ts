@@ -1,6 +1,8 @@
 ﻿import ReactN from 'react-native'
 import { TCommonStyles } from './common-styles'
 
+import { TAddInConfig } from 'typescript-config'
+
 export namespace TBasic {
 
   export const enum Consts {
@@ -30,7 +32,7 @@ export namespace TBasic {
       $native?: NativeRules<T> // native specific rules
       $web?: RulesetWeb // web specific rules
     } &
-    RulesetAddInX<T, R> // sheet addIn: $wen, $native, overriding, media query etc.
+    TAddInConfig.RulesetAddInX<T, R> // sheet addIn: $wen, $native, overriding, media query etc.
 
   // rule names, common for native and web
   //export type commonRuleNames<T extends RulesetNative> = keyof React.CSSPropertiesLow & keyof T
@@ -57,10 +59,10 @@ export namespace TBasic {
   export interface ScrollViewRulesetCommonX extends TCommonStyles.ScrollViewStyle { }
   export interface ImageRulesetCommonX extends TCommonStyles.ImageStyle { }
 
-  export interface ViewRulesetX extends TCommonStyles.ViewStyle, RulesetAddInX<'View', Shape> { }
-  export interface TextRulesetX extends TCommonStyles.TextStyle, RulesetAddInX<'Text', Shape> { }
-  export interface ImageRulesetX extends TCommonStyles.ImageStyle, RulesetAddInX<'Image', Shape> { }
-  export interface ScrollViewRulesetX extends TCommonStyles.ScrollViewStyle, RulesetAddInX<'ScrollView', Shape> { }
+  export interface ViewRulesetX extends RulesetX<'View'> { }
+  export interface TextRulesetX extends RulesetX<'Text'> { }
+  export interface ImageRulesetX extends RulesetX<'Image'> { }
+  export interface ScrollViewRulesetX extends RulesetX<'ScrollView'> { }
 
   //******************** Platform specific ruleset
   export type RulesetWeb = React.CSSProperties //??? https://github.com/programbo/cssproperties/blob/master/css-properties.d.ts
@@ -91,46 +93,25 @@ export namespace TBasic {
   export type getPropsWeb<R extends Shape> = R['propsWeb']
   export type getPropsNative<R extends Shape> = R['propsNative']
 
-
-  /******************************************
-    ADDINS
-  *******************************************/
-
-  //******************** Cross platform 
-  export interface RulesetAddInX<T extends RulesetNativeIds, R extends Shape> {
-    $native?: NativeRules<T> // native specific rules
-    $web?: RulesetWeb // web specific rules
-  }
-  export interface SheetXAddIn<R extends Shape = Shape> { }
-
-  //******************** Platform specific
-  export type RulesetWithAddIn<R extends Shape = Shape> = Ruleset
-  export interface RulesetWithAddInWeb<R extends Shape = Shape> extends RulesetWeb { }
-  export type RulesetWithAddInNative<T extends RulesetNativeIds, R extends Shape = Shape> = NativeRules<T>
-
-  export interface SheetAddInWeb<R extends Shape = Shape> { }
-  export interface SheetAddInNative<R extends Shape = Shape> { }
-
-
   /******************************************
     COMPONENT SHEET
   *******************************************/
 
   //******************** Cross platform sheet
-  export type SheetX<R extends Shape = Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & SheetXAddIn<R>
-  export type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & SheetXAddIn<R>
+  export type SheetX<R extends Shape = Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & TAddInConfig.SheetXAddIn<R>
+  export type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & TAddInConfig.SheetXAddIn<R>
 
   //Cross platform sheet helpers
   export type SheetXCommon<R extends Shape> = { [P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R> }
-  export type SheetXNative<R extends Shape> = { [P in keyof getNative<R>]: (getNative<R>[P] & RulesetAddInX<getNative<R>[P], R>) }
-  export type SheetXWeb<R extends Shape> = { [P in getWeb<R>]: (RulesetWeb & RulesetAddInX<never, R>) }
+  export type SheetXNative<R extends Shape> = { [P in keyof getNative<R>]: (NativeRules<getNative<R>[P]> & TAddInConfig.RulesetAddInX<getNative<R>[P], R>) }
+  export type SheetXWeb<R extends Shape> = { [P in getWeb<R>]: (RulesetWeb & TAddInConfig.RulesetAddInX<never, R>) }
 
   //******************** Platform specific sheets
-  export type SheetWeb<R extends Shape = Shape> = Record<(keyof getCommon<R>) | getWeb<R>, RulesetWithAddInWeb<R>> & SheetAddInWeb<R>
+  export type SheetWeb<R extends Shape = Shape> = Record<(keyof getCommon<R>) | getWeb<R>, TAddInConfig.RulesetWithAddInWeb<R>> & TAddInConfig.SheetAddInWeb<R>
   export type SheetNative<R extends Shape = Shape> =
-    { [P in keyof getCommon<R>]: RulesetWithAddInNative<getCommon<R>[P], R> } &
-    { [P in keyof getNative<R>]: RulesetWithAddInNative<getNative<R>[P], R> } &
-    SheetAddInNative<R>
+    { [P in keyof getCommon<R>]: TAddInConfig.RulesetWithAddInNative<getCommon<R>[P], R> } &
+    { [P in keyof getNative<R>]: TAddInConfig.RulesetWithAddInNative<getNative<R>[P], R> } &
+    TAddInConfig.SheetAddInNative<R>
   export type Sheet<R extends Shape = Shape> = SheetWeb<R> | SheetNative<R>
   export type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
 
@@ -139,49 +120,76 @@ export namespace TBasic {
      COMPONENT TYPING
   *******************************************/
 
-  export type PropsX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>, {
-    style?: RulesetX<getStyle<R>>
-    className?: RulesetX<getStyle<R>>
-    classes?: PartialSheetX<R> //| PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
-    $web?: Partial<getPropsWeb<R>> //web specific style
-    $native?: Partial<getPropsNative<R>> //native specific style
-    ignore?: boolean
-  }>>
+  export type PropsX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>, TAddInConfig.PropX<R>>>
+  //  style?: RulesetX<getStyle<R>>
+  //  className?: RulesetX<getStyle<R>>
+  //  classes?: PartialSheetX<R> //| PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
+  //  $web?: Partial<getPropsWeb<R>> //web specific style
+  //  $native?: Partial<getPropsNative<R>> //native specific style
+  //  ignore?: boolean
+  //}>>
   export type ComponentTypeX<R extends Shape> = React.ComponentType<PropsX<R>>
   export type SFCX<R extends Shape> = React.SFC<PropsX<R>>
 
-  export type CodePropsWeb<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsWeb<R>, {
-    className: RulesetWeb
-    style: RulesetWeb
-    mergeRulesetWithOverrides
-    classes: SheetWeb<R>
-    theme
-    animations
-    mediaq
-  } & OnPressAllWeb>
+  export type CodePropsWeb<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsWeb<R>,
+    {
+      className: RulesetWeb
+      style: RulesetWeb
+      classes: SheetWeb<R>
+    } &
+    TAddInConfig.CodePropsWeb<R> &
+    OnPressAllWeb>
+  // {
+  //  className: RulesetWeb
+  //  style: RulesetWeb
+  //  classes: SheetWeb<R>
+
+  //  mergeRulesetWithOverrides
+  //  theme
+  //  animations
+  //  mediaq
+  //} & OnPressAllWeb>
   export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
-  export type CodePropsNative<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsNative<R>, {
-    className: NativeRules<getStyle<R>>
-    style: NativeRules<getStyle<R>>
-    classes: SheetNative<R>
-    theme
-    mergeRulesetWithOverrides
-    animations
-    mediaq
-  } & OnPressAllNative>
+  export type CodePropsNative<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsNative<R>,
+    {
+      className: NativeRules<getStyle<R>>
+      style: NativeRules<getStyle<R>>
+      classes: SheetNative<R>
+    } &
+    TAddInConfig.CodePropsNative<R> &
+    OnPressAllNative>
+  //  {
+  //  className: NativeRules<getStyle<R>>
+  //  style: NativeRules<getStyle<R>>
+  //  classes: SheetNative<R>
+
+  //  theme
+  //  mergeRulesetWithOverrides
+  //  animations
+  //  mediaq
+  //} & OnPressAllNative>
   export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
 
   //some code for components could be shared for web and native
-  export type CodeProps<R extends Shape = Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), {
-    className: RulesetWeb | NativeRules<getStyle<R>>
-    classes: Sheet<R>
-    style: RulesetWeb | NativeRules<getStyle<R>>
-    mergeRulesetWithOverrides
-    theme
-    animations
-    mediaq
-  } & (OnPressAllNative | OnPressAllWeb)>
+  export type CodeProps<R extends Shape = Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>),
+    {
+      className: RulesetWeb | NativeRules<getStyle<R>>
+      style: RulesetWeb | NativeRules<getStyle<R>>
+      classes: Sheet<R>
+    } &
+    TAddInConfig.CodeProps<R> &
+    (OnPressAllNative | OnPressAllWeb)>
+  //  {
+  //  className: RulesetWeb | NativeRules<getStyle<R>>
+  //  style: RulesetWeb | NativeRules<getStyle<R>>
+  //  classes: Sheet<R>
+
+  //  mergeRulesetWithOverrides
+  //  theme
+  //  animations
+  //  mediaq
+  //} & (OnPressAllNative | OnPressAllWeb)>
   export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
   export type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>

@@ -17,13 +17,13 @@ export const withStyles = <R extends TBasic.Shape>(sheetX: TBasic.SheetX<R>) => 
       const staticSheet = toPlatformSheet(sheetX)
 
       // get platform dependent classes
-      let classes: TBasic.Sheet = toPlatformSheet(classesX)
+      let classes: TBasic.Sheet = toPlatformSheet(classesX as TBasic.SheetX)
 
       // merge static sheet and classes 
       classes = classes ? deepMerges(false, {}, staticSheet, classes) : staticSheet
 
-      const className: TBasic.Ruleset = toPlatformRuleSet(classNameX)
-      const style: TBasic.Ruleset = toPlatformRuleSet(styleX)
+      const className: TBasic.Ruleset = toPlatformRuleSet(classNameX as TBasic.RulesetX)
+      const style: TBasic.Ruleset = toPlatformRuleSet(styleX as TBasic.RulesetX)
 
       const codeProps = {
         ...other, ...(window.isWeb ? $web : $native),

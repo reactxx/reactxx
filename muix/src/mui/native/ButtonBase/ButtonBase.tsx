@@ -16,8 +16,9 @@ const sheet: TTheme.SheetCreatorX<MuiButtonBaseT.Shape> = ({ palette }) => ({
     justifyContent: 'center',
   },
   ripple: {
-    backgroundColor: palette.common.white,
-    opacity: 0.35,
+    //backgroundColor: palette.common.white,
+    //opacity: 0.35,
+    
   },
   
 })

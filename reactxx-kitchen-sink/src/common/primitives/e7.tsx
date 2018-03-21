@@ -1,7 +1,8 @@
 import React from 'react'
 
 import { TSheets } from 'reactxx-typings'
-import { Text, LoremIpsum, } from 'reactxx'
+import { Text, } from 'reactxx'
+import { LoremIpsum } from 'reactxx-basic/develop'
 
 const App: React.SFC = props => {
   const changeColorRuleset: TSheets.TextRulesetX = {

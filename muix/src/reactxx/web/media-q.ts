@@ -2,10 +2,11 @@ import { BreakPoint, ComponentsMediaQLow } from '../common/media-q'
 import { deepMerges } from 'reactxx'
 import warning from 'warning'
 import { TMediaQ, TSheets } from 'reactxx-typings'
+import { TAddInConfig } from 'typescript-config'
 
 export class ComponentsMediaQ<TState extends string = string> extends ComponentsMediaQLow<TState> implements TMediaQ.ComponentsMediaQ<TState>{
 
-  processRuleset(ruleset: TSheets.RulesetWithAddIn) {
+  processRuleset(ruleset: TAddInConfig.RulesetWithAddIn) {
     const { $mediaq } = ruleset
     if (!$mediaq) return ruleset
     const { componentId, component } = this

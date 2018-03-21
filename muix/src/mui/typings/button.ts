@@ -2,6 +2,7 @@
 import ReactN from 'react-native'
 
 import { TSheets } from 'reactxx-typings'
+import { TComps, TBasic } from 'reactxx-basic/typings'
 
 export namespace MuiButtonT {
 
@@ -12,10 +13,10 @@ export namespace MuiButtonT {
   }
 
   export type Shape = TSheets.OverwriteShape<{
-    common: TSheets.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini' > & TSheets.ShapeTexts<'label'>
-    native: TSheets.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & TSheets.ShapeTexts<'labelIcon'>
+    common: TComps.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini'> & TComps.ShapeTexts<'label'>
+    native: TComps.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & TComps.ShapeTexts<'labelIcon'>
     web: 'colorInherit' | 'keyboardFocused'
-    props: ButtonProps & TSheets.OnPressAllX
+    props: ButtonProps & TBasic.OnPressAllX
     propsNative: ReactN.TouchableOpacityProperties
     nameType: CompNames.Button | CompNames.ButtonIconLeft | CompNames.ButtonIconRight
   }>

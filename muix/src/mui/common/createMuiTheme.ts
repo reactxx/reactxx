@@ -60,7 +60,7 @@ export const createMuiTheme = (options: Muix.ThemeOptions = {}) => {
     ...createTypography(palette, typographyX), //different fields for web and native (typography and typographyX)
     mixins: createMixins(breakpoints, spacing, mixinsInput), //the same value for web and native
     breakpoints, //the same value for web and native
-    shadows: (shadowsNewInput || shadows).map(rsx => (toPlatformRuleSet(rsx) as React.CSSProperties).boxShadow), // for material-ui only
+    // TODO, commented during reactxx-basic creation shadows: (shadowsNewInput || shadows).map(rsx => (toPlatformRuleSet(rsx) as React.CSSProperties).boxShadow), // for material-ui only
     shadowsNew: shadowsNewInput || shadows, //different value for web and native
     ...(deepmerge(
       { transitions, spacing, zIndex, },

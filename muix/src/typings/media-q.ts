@@ -1,6 +1,8 @@
 import ReactN from 'react-native'
 
-import { TSheets } from 'reactxx-typings'
+import { TAddInConfig } from 'typescript-config'
+
+import { TBasic } from 'reactxx-basic/typings'
 
 export namespace TMediaQ {
 
@@ -16,18 +18,18 @@ export namespace TMediaQ {
     state: { [P in TState]?: boolean }
   }
 
-  export interface SheetX<T extends TSheets.RulesetNative = ReactN.TextStyle, R extends TSheets.Shape = TSheets.Shape> {
-    [query: string]: TSheets.RulesetX<T, R>
+  export interface SheetX<T extends TBasic.RulesetNativeIds = 'Text', R extends TBasic.Shape = TBasic.Shape> {
+    [query: string]: TBasic.RulesetX<T, R>
   }
 
-  export interface SheetXWeb<R extends TSheets.Shape = TSheets.Shape> {
-    [query: string]: React.CSSProperties & TSheets.RulesetAddInX<never, R>
+  export interface SheetXWeb<R extends TBasic.Shape = TBasic.Shape> {
+    [query: string]: React.CSSProperties & TAddInConfig.RulesetAddInX<never, R>
   }
 
-  export interface SheetXNative<T extends TSheets.RulesetNative = ReactN.TextStyle, R extends TSheets.Shape = TSheets.Shape> {
-    [query: string]: T & TSheets.RulesetAddInX<T, R>
+  export interface SheetXNative<T extends TBasic.RulesetNativeIds = 'Text', R extends TBasic.Shape = TBasic.Shape> {
+    [query: string]: T & TAddInConfig.RulesetAddInX<T, R>
   }
 
-  export interface Patch { start: number; end: number; ruleset: TSheets.RulesetWithAddIn }
+  export interface Patch { start: number; end: number; ruleset: TAddInConfig.RulesetWithAddIn }
 
 }

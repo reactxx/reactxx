@@ -1,4 +1,5 @@
 ﻿import { TSheets } from 'reactxx-typings'
+import { TBasic } from 'reactxx-basic/typings'
 
 import { TThemeConfig } from 'typescript-config'
 
@@ -7,7 +8,7 @@ export namespace TTheme {
   export type PartialSheetCreatorX<R extends TSheets.Shape = TSheets.Shape> = TSheets.PartialSheetX<R> | ((themeX: ThemeX, compThemePar: TSheets.getCompTheme<R>) => TSheets.PartialSheetX<R>)
   export type SheetCreatorX<R extends TSheets.Shape = TSheets.Shape> = TSheets.SheetX<R> | ((themeX: ThemeX, compThemePar: TSheets.getCompTheme<R>) => TSheets.SheetX<R>)
   export type ThemeParCreatorX<R extends TSheets.Shape = TSheets.Shape> = TSheets.getCompTheme<R> | ((themeX: ThemeX) => TSheets.getCompTheme<R>)
-  export type RulesetCreatorX<R extends TSheets.Shape = TSheets.Shape> = TSheets.RulesetX<TSheets.getStyle<R>> | ((theme: ThemeX, compThemePar: TSheets.getCompTheme<R>) => TSheets.RulesetX<TSheets.getStyle<R>>)
+  export type RulesetCreatorX<R extends TSheets.Shape = TSheets.Shape> = TBasic.RulesetX<TBasic.getStyle<R>> | ((theme: ThemeX, compThemePar: TSheets.getCompTheme<R>) => TBasic.RulesetX<TBasic.getStyle<R>>)
 
   export interface Theme extends TThemeConfig.Theme {
     type: 'Theme'

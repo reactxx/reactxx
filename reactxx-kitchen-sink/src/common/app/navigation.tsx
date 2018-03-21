@@ -3,7 +3,8 @@ import ReactN from 'react-native'
 
 import { TSheets } from 'reactxx-typings'
 
-import { View, Text, ScrollView, Icon, LoremIpsum } from 'reactxx'
+import { View, Text, ScrollView, Icon, } from 'reactxx'
+import { LoremIpsum } from 'reactxx-basic/develop'
 import { H1, H2, H3, H4, H5, U, I, B, A, Blocquote, P } from '../components/typo'
 
 import { examples, nameToExample, exampleToElement, components, navigationExample, KSink } from './index'
@@ -11,7 +12,7 @@ import { primitives } from '../primitives/index'
 import { ResponsibleDrawer } from '../components/responsible-drawer/responsible-drawer'
 import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 
-import { TComps, TTheme } from 'reactxx-typings';
+import { TTheme } from 'reactxx-typings';
 
 export type GotoExample = (example: KSink.Example) => void
 export type GetExampleUrl = (example: KSink.Example) => string
@@ -44,7 +45,7 @@ class App extends React.Component<{}, KSink.Example> {
 }
 
 const drawerButton = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as TSheets.RulesetX
-const toolbar = { flexDirection: 'row', alignItems: 'center', height: 48, padding: 15 } as TSheets.RulesetX<ReactN.ViewStyle>
+const toolbar = { flexDirection: 'row', alignItems: 'center', height: 48, padding: 15 } as TSheets.ViewRulesetX
 const codeIcons = { color: 'white', marginLeft: 15, $web: { ':hover': { transform: 'scale(1.2)' } } } as TSheets.RulesetX
 var logo = { flexGrow: 0, marginLeft: 5, color: 'lightblue', paddingRight: 10, marginRight: 10, borderRightColor: 'lightblue', borderRightWidth: 1, $web: { borderRightStyle: 'solid' } } as TSheets.RulesetX
 

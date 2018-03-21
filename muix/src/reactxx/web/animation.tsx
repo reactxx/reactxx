@@ -17,7 +17,7 @@ export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements 
     this.bothClassName = [{} as any, {} as any]
     for (const propsName in sheet) {
       if (propsName.startsWith('$')) continue
-      const pairs: TAnimation.RuleSetX<ReactN.TextProperties> = sheet[propsName]
+      const pairs: TAnimation.RuleSetX<'Text'> = sheet[propsName]
       const transformPairs = pairs.transform
 
       const rulesets: TSheets.RulesetWeb[] = [{}, {}], transforms = ['', ''], range = [0, 1], transitions0 = [], transitions1 = []

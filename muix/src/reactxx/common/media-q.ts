@@ -2,6 +2,8 @@ import warning from 'warning'
 
 import { TMediaQ, TSheets } from 'reactxx-typings'
 
+import { TAddInConfig } from 'typescript-config'
+
 export abstract class ComponentsMediaQLow<TState extends string = string>  {
 
   constructor(protected component: React.Component) { }
@@ -15,7 +17,7 @@ export abstract class ComponentsMediaQLow<TState extends string = string>  {
     if (!notifySheet) return
     const { componentId, notifyBreaks, component } = this
     const width = this.getWindowWidth()
-    const patches: TSheets.RulesetWithAddIn[] = []
+    const patches: TAddInConfig.RulesetWithAddIn[] = []
     for (const p in notifySheet) {
       const interval = notifySheet[p].map((i, idx) => !i ? (idx == 0 ? 0 : TMediaQ.Consts.maxBreakpoint) : i)
       notifyBreaks[interval[0]] = true; notifyBreaks[interval[1]] = true
@@ -37,7 +39,7 @@ export abstract class ComponentsMediaQLow<TState extends string = string>  {
     delete breaks[breakPoint].subscribers[id]
   }
   abstract createBreakPoint(breakPoint: number): BreakPoint
-  abstract processRuleset(ruleset: TSheets.RulesetWithAddIn)
+  abstract processRuleset(ruleset: TAddInConfig.RulesetWithAddIn)
   abstract getWindowWidth() :number
   static componentsMediaCount = 0
 }

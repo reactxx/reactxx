@@ -12,4 +12,24 @@ export namespace TAddInConfig {
 
   export interface SheetAddInWeb<R extends TBasic.Shape = TBasic.Shape> { }
   export interface SheetAddInNative<R extends TBasic.Shape = TBasic.Shape> { }
+
+  export interface PropX<R extends TBasic.Shape = TBasic.Shape> {
+    style?: TBasic.RulesetX<TBasic.getStyle<R>>
+    className?: TBasic.RulesetX<TBasic.getStyle<R>>
+    classes?: TBasic.PartialSheetX<R> //| PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
+    $web?: Partial<TBasic.getPropsWeb<R>> //web specific style
+    $native?: Partial<TBasic.getPropsNative<R>> //native specific style
+    ignore?: boolean
+  }
+
+  export interface CodePropsWeb<R extends TBasic.Shape = TBasic.Shape> {
+    mergeRulesetWithOverrides
+    theme
+    animations
+    mediaq
+  }
+
+  export type CodePropsNative<R extends TBasic.Shape = TBasic.Shape> = CodePropsWeb<R>
+  export type CodeProps<R extends TBasic.Shape = TBasic.Shape> = CodePropsWeb<R>
+
 }

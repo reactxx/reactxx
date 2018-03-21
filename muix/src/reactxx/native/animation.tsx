@@ -42,7 +42,7 @@ export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements 
 
     for (const propsName in sheet) {
       if (propsName.startsWith('$')) continue
-      const pairs: TAnimation.RuleSetX<ReactN.TextProperties> = sheet[propsName]
+      const pairs: TAnimation.RuleSetX<'Text'> = sheet[propsName]
       const transformPairs = pairs.transform
       const ruleset = rulesets[propsName] = {}
       for (const propName2 in pairs) {

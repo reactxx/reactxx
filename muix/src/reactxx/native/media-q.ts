@@ -3,6 +3,7 @@ import { deepMerges } from 'reactxx'
 import warning from 'warning'
 import { Dimensions } from 'react-native'
 import { TMediaQ, TSheets } from 'reactxx-typings'
+import { TAddInConfig } from 'typescript-config'
 
 export class ComponentsMediaQ<TState extends string = string> extends ComponentsMediaQLow<TState> implements TMediaQ.ComponentsMediaQ<TState>{
 
@@ -14,11 +15,11 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
     this.breaks = []
   }
 
-  processRuleset(ruleset: TSheets.RulesetWithAddIn) {
+  processRuleset(ruleset: TAddInConfig.RulesetWithAddIn) {
     const { $mediaq } = ruleset
     if (!$mediaq) return ruleset
     const { componentId, breaks, component } = this
-    const patches: TSheets.RulesetWithAddIn[] = []
+    const patches: TAddInConfig.RulesetWithAddIn[] = []
     const width = this.getWindowWidth()
     for (const p in $mediaq) {
       const interval = p.split('-').map((i, idx) => !i ? (idx == 0 ? 0 : TMediaQ.Consts.maxBreakpoint) : parseInt(i))

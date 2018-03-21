@@ -129,6 +129,7 @@
     <TypeScriptCompile Include="src\basic\common\sheets.ts" />
     <TypeScriptCompile Include="src\basic\common\to-platform.ts" />
     <TypeScriptCompile Include="src\basic\native\develop.ts" />
+    <TypeScriptCompile Include="src\basic\native\sheets.ts" />
     <TypeScriptCompile Include="src\basic\native\to-platform.ts" />
     <TypeScriptCompile Include="src\basic\native\typings.ts" />
     <TypeScriptCompile Include="src\basic\typings\add-in-config.ts" />
@@ -140,6 +141,7 @@
     <TypeScriptCompile Include="src\basic\typings\common-styles.ts" />
     <TypeScriptCompile Include="src\basic\typings\index.ts" />
     <TypeScriptCompile Include="src\basic\web\develop.ts" />
+    <TypeScriptCompile Include="src\basic\web\sheets.ts" />
     <TypeScriptCompile Include="src\basic\web\to-platform.ts" />
     <TypeScriptCompile Include="src\basic\web\typings.ts" />
     <TypeScriptCompile Include="src\basic\web\comps.tsx" />
@@ -211,7 +213,7 @@
     <TypeScriptCompile Include="src\mui\web\index.tsx" />
     <TypeScriptCompile Include="src\mui\typings\mui.ts" />
     <TypeScriptCompile Include="src\typings\animation.ts" />
-    <TypeScriptCompile Include="src\typings\components.ts" />
+    <TypeScriptCompile Include="src\typings\CompNames.d.ts" />
     <TypeScriptCompile Include="src\typings\index.ts" />
     <TypeScriptCompile Include="src\typings\media-q.ts" />
     <TypeScriptCompile Include="src\typings\sheets.ts" />

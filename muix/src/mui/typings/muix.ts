@@ -27,7 +27,7 @@ export namespace Muix {
 
   export type ShadowsNative = ReactN.ViewStyle[]
 
-  export type ThemeShadowsX = TSheets.RulesetX<ReactN.ViewStyle>[]
+  export type ThemeShadowsX = TSheets.RulesetX<'View'>[]
   export type ThemeShadows = TSheets.ViewRulesetCommonX[]
 
   export interface Theme extends Mui.Theme {

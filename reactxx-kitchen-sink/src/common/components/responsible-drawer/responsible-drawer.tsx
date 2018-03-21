@@ -3,7 +3,8 @@ import React from 'react'
 import ReactN from 'react-native'
 
 // different import of 'ScrollView, View, Text, Icon, AnimatedView' components for web and native
-import { withStyles, ScrollView, View, Text, Icon, AnimatedView, LoremIpsum } from 'reactxx'
+import { withStyles, ScrollView, View, Text, Icon, AnimatedView, } from 'reactxx'
+import { LoremIpsum } from 'reactxx-basic/develop'
 
 import { TTheme, TSheets } from 'reactxx-typings'
 

@@ -1,7 +1,8 @@
 import React from 'react'
-import { Text, View, ScrollView, Icon, AppContainer, LoremIpsum, } from 'reactxx'
+import { Text, View, ScrollView, Icon, AppContainer, } from 'reactxx'
+import { LoremIpsum } from 'reactxx-basic/develop'
 
-import { TTheme, TComps, TSheets } from 'reactxx-typings'
+import { TTheme, TSheets } from 'reactxx-typings'
 
 interface Example {
   title: string
@@ -168,4 +169,4 @@ const E01$01_: Example = {
 
 let t: TTheme.ThemeState
 
-t[TComps.CompNames.ScrollView].sheet.container
+t[CompNames.ScrollView].sheet.container
