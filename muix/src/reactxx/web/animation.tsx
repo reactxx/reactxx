@@ -1,6 +1,6 @@
 import { DriverLow, getGaps } from '../common/animation'
 import warning from 'warning'
-import { sheetToClassSheet, keyFrameToClassNames } from './fela'
+import { keyFrameToClassNames } from './fela'
 import { TAnimation, TSheets } from 'reactxx-typings' 
 import ReactN from 'react-native'
 

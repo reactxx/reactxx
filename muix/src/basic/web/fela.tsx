@@ -39,8 +39,10 @@ export const rulesetToClassNames = (ruleset: React.CSSProperties) => ruleset ? r
 export const rulesetsToClassNames = (...rulesets: React.CSSProperties[]) => {
   if (!rulesets) return ''
   rulesets = rulesets.filter(r => !!r)
-  if (rulesets.length == 1) return rulesetToClassNames(rulesets[0])
-  return rulesetToClassNames(Object.assign({}, ...rulesets))
+  let res: string
+  if (rulesets.length == 1) res = rulesetToClassNames(rulesets[0])
+  else res = rulesetToClassNames(Object.assign({}, ...rulesets))
+  return res //rulesetToClassNames(Object.assign({}, ...rulesets))
 }
 export const keyFrameToClassNames = (keyFrame: React.CSSProperties) => keyFrame ? renderer.renderKeyframe(() => keyFrame, {}) : ''
 

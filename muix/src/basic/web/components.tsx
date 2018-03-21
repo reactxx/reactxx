@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 import warning from 'warning'
 import { rulesetsToClassNames } from './fela'
 
-import { TBasic } from '../common/typings'
+import { TBasic } from '../typings/basic'
 
 export const view: TBasic.CodeSFCWeb<TBasic.ViewShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq,...rest } = props

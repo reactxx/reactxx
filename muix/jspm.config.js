@@ -11,6 +11,7 @@ SystemJS.config({
   },
   map: {
     "reactxx-basic": "deploy/lib/basic/web/index",
+    "reactxx-basic/web": "deploy/lib/basic/web/index",
     "reactxx": "deploy/lib/reactxx/web/index",
     "reactxx/web": "deploy/lib/reactxx/web/index",
     "reactxx-stateman": "deploy/lib/stateman/index",

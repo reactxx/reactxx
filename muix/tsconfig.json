@@ -30,7 +30,7 @@
     "baseUrl": ".",
     "paths": {
       "reactxx-basic": [ "src/basic/web/index" ],
-
+      "reactxx-basic/web": [ "src/basic/web/index" ],
 
       "reactxx-typings": [ "src/typings/index" ],
       "reactxx-typings/mdi": [ "src/typings/mdi-web" ],

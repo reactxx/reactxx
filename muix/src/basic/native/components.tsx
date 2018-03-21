@@ -4,7 +4,7 @@ import ReactN, { View as ViewRN, Text as TextRN, ScrollView as ScrollViewRN, Ani
 import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
-import { TBasic } from '../common/typings'
+import { TBasic } from '../typings/basic'
 
 const anyView = (isAnim: boolean) => (props => {
   const ActView = isAnim ? Animated.View : ViewRN

@@ -57,16 +57,17 @@ export namespace TSheets {
     web: string | null // ruleset names, which are used only in web code (its export type is always React.CSSProperties)
     //******************** native style constrain
     style: ReactN.ViewStyle // for native: export type of component style property (for web, style has always React.CSSProperties type)
-    //**** animation shape
-    animation: TAnimation.Shapes
-    //**** mediaq shape
-    mediaq: TMediaQ.Shape | null
     //**** component property constrains
     props: {} //common (web and native) props
     propsNative: {} //native only props 
     propsWeb: React.HTMLAttributes<Element>//web only props
     //**** export type of component name
     nameType: string | null
+    //**** animation shape
+    animation: TAnimation.Shapes
+    //**** mediaq shape
+    mediaq: TMediaQ.Shape | null
+    //**** component theme par
     compTheme: {}
   }
 
@@ -101,43 +102,45 @@ export namespace TSheets {
   export type getMediaQ<R extends Shape = Shape> = R['mediaq']
 
   /******************************************
+    ADDINS
+  *******************************************/
+
+  //******************** Cross platform 
+  export interface RulesetAddInX<T extends RulesetNative, R extends Shape> { $overrides?: PartialSheetX<R>; $name?: string; $mediaq?: TMediaQ.SheetX<T, R>; $props?: PropsInRulesetX<R> }
+  export interface SheetXAddIn<R extends Shape = Shape> { $animations?: TAnimation.SheetsX<getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<getMediaQ<R>> }
+
+  //******************** Platform specific
+  export type RulesetWithAddIn<R extends Shape = Shape> = Ruleset & { $overrides?: Sheet<R>; $name?: string; $props?: PropsInRuleset<R>; $mediaq?: TMediaQ.NotifySheetX<getMediaQ<R>> }
+  export interface RulesetWithAddInWeb<R extends Shape = Shape> extends RulesetWeb { $overrides?: SheetWeb<R>; $name?: string; $props?: PropsInRulesetWeb<R> }
+  export type RulesetWithAddInNative<T extends RulesetNative = {}, R extends Shape = Shape> = T & { $overrides?: SheetNative<R>; $name?: string; $props?: PropsInRulesetNative<R> }
+
+  export interface SheetAddInWeb<R extends Shape = Shape> { $animations?: TAnimation.SheetsX<getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<getMediaQ<R>> }
+  export interface SheetAddInNative<R extends Shape = Shape> { $animations?: TAnimation.SheetsX<getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<getMediaQ<R>> }
+
+  /******************************************
     COMPONENT SHEET
   *******************************************/
 
   //******************** Cross platform sheet
-  export type SheetX<R extends Shape = Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & { $animations?: TAnimation.SheetsX<getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<getMediaQ<R>> }
-  export type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & { $animations?: Partial<TAnimation.SheetsX<getAnimation<R>>> }
+  export type SheetX<R extends Shape = Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & SheetXAddIn<R>
+  export type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & SheetXAddIn<R>
 
   //Cross platform sheet helpers
   export type SheetXCommon<R extends Shape> = { [P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R> }
   export type SheetXNative<R extends Shape> = { [P in keyof getNative<R>]: (getNative<R>[P] & RulesetAddInX<getNative<R>[P], R>) }
   export type SheetXWeb<R extends Shape> = { [P in getWeb<R>]: (RulesetWeb & RulesetAddInX<never, R>) }
-  //Overrides parts of the sheet
-  export interface RulesetAddInX<T extends RulesetNative, R extends Shape> { $overrides?: PartialSheetX<R>; $name?: string; $mediaq?: TMediaQ.SheetX<T, R>; $props?: PropsInRulesetX<R> }
 
   //******************** Platform specific sheets
-  export type SheetWeb<R extends Shape = Shape> = Record<(keyof getCommon<R>) | getWeb<R>, RulesetWithAddInWeb<R>> & { $animations?: TAnimation.SheetsX<getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<getMediaQ<R>> }
-  export type SheetNative<R extends Shape = Shape> = { [P in keyof getCommon<R>]: RulesetWithAddInNative<getCommon<R>[P], R> } & { [P in keyof getNative<R>]: RulesetWithAddInNative<getNative<R>[P], R> } & { $animations?: TAnimation.SheetsX<getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<getMediaQ<R>> }
+  export type SheetWeb<R extends Shape = Shape> = Record<(keyof getCommon<R>) | getWeb<R>, RulesetWithAddInWeb<R>> & SheetAddInWeb<R>
+  export type SheetNative<R extends Shape = Shape> =
+    { [P in keyof getCommon<R>]: RulesetWithAddInNative<getCommon<R>[P], R> } &
+    { [P in keyof getNative<R>]: RulesetWithAddInNative<getNative<R>[P], R> } &
+    SheetAddInNative<R>
   export type Sheet<R extends Shape = Shape> = SheetWeb<R> | SheetNative<R>
   export type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
 
-  //Overrides parts of the sheet
-  export type RulesetWithAddIn<R extends Shape = Shape> = Ruleset & { $overrides?: Sheet<R>; $name?: string; $props?: PropsInRuleset<R>; $mediaq?: TMediaQ.NotifySheetX<getMediaQ<R>> }
-  export interface RulesetWithAddInWeb<R extends Shape = Shape> extends RulesetWeb { $overrides?: SheetWeb<R>; $name?: string; $props?: PropsInRulesetWeb<R> }
-  export type RulesetWithAddInNative<T extends RulesetNative = {}, R extends Shape = Shape> = T & { $overrides?: SheetNative<R>; $name?: string; $props?: PropsInRulesetNative<R> }
 
-  //******************** Sheet and Theme Creators
-  //export type FromThemeCreator<T> = (theme: ReactXX.Theme) => T
-  //export type FromThemeValueOrCreator<T> = T | FromThemeCreator<T>
-
-  //export type FromThemeCreator2<R extends Shape, T> = (theme: ReactXX.Theme, compTheme?: getThemePar<R>) => T
-  //export type FromThemeValueOrCreator2<R extends Shape, T> = T | FromThemeCreator2<R, T>
-
-  //export type SheetCreator<R extends Shape> = FromThemeCreator2<R, Sheet<R>>
-  //export type SheetOrCreator<R extends Shape = Shape> = FromThemeValueOrCreator2<R, Sheet<R>>
-  //export type SheetOrCreatorX<R extends Shape = Shape> = FromThemeValueOrCreator<R, PartialSheetX<R>>
-
-  //******************** Sheet GETTERs
+  //******************** Ruleset Merge
   export type MergeRulesetWithOverrides = (...rulesets: RulesetWithAddIn[]) => Ruleset
   export type MergeRulesetWithOverridesNative = (...rulesets: (RulesetWithAddInNative | ReactN.TextStyle)[]) => RulesetNative
   export type MergeRulesetWithOverridesWeb = (...rulesets: RulesetWithAddInWeb[]) => RulesetWeb
@@ -148,7 +151,7 @@ export namespace TSheets {
   *******************************************/
   export type SheetsWeb = { [P in keyof Shapes]?: SheetWeb<Shapes[P]> }
   export type SheetsNative = { [P in keyof Shapes]?: SheetNative<Shapes[P]> }
-  export type Sheets = { [P in keyof Shapes]?: Sheet<Shapes[P]> }//  SheetsWeb | SheetsNative
+  export type Sheets = { [P in keyof Shapes]?: Sheet<Shapes[P]> }
 
 
   /******************************************

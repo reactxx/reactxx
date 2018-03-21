@@ -52,45 +52,51 @@ declare global {
     interface ViewStyle extends FlexStyle {
       backfaceVisibility?: "visible" | "hidden"
       backgroundColor?: string;
+      opacity?: number;
+      overflow?: "visible" | "hidden"
+      display?: "none" | "flex";
+
       borderBottomColor?: string;
       borderBottomLeftRadius?: number;
       borderBottomRightRadius?: number;
       borderBottomWidth?: number;
+
+      borderTopColor?: string;
+      borderTopLeftRadius?: number;
+      borderTopRightRadius?: number;
+      borderTopWidth?: number;
+
       borderColor?: string;
       borderLeftColor?: string;
       borderRadius?: number;
       borderRightColor?: string;
       borderRightWidth?: number;
       borderStyle?: "solid" | "dotted" | "dashed"
-      borderTopColor?: string;
-      borderTopLeftRadius?: number;
-      borderTopRightRadius?: number;
-      borderTopWidth?: number;
-      display?: "none" | "flex";
-      opacity?: number;
-      overflow?: "visible" | "hidden"
     }
 
     export interface ScrollViewStyle extends FlexStyle {
       backfaceVisibility?: "visible" | "hidden"
       backgroundColor?: string
-      borderColor?: string
-      borderRadius?: number
-      borderStyle?: "solid" | "dotted" | "dashed"
       opacity?: number
       overflow?: "visible" | "hidden"
-      borderRightColor?: string
-      borderRightWidth?: number
-      borderLeftColor?: string
-      borderLeftWidth?: number
-      borderTopColor?: string
-      borderTopWidth?: number
-      borderTopLeftRadius?: number
-      borderTopRightRadius?: number
+
       borderBottomColor?: string
       borderBottomLeftRadius?: number
       borderBottomRightRadius?: number
       borderBottomWidth?: number
+
+      borderTopColor?: string
+      borderTopLeftRadius?: number
+      borderTopRightRadius?: number
+      borderTopWidth?: number
+
+      borderColor?: string
+      borderRadius?: number
+      borderStyle?: "solid" | "dotted" | "dashed"
+      borderRightColor?: string
+      borderRightWidth?: number
+      borderLeftColor?: string
+      borderLeftWidth?: number
     }
 
     interface TextStyle extends ViewStyle {

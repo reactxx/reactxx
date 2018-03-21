@@ -14,7 +14,7 @@ import { TTheme, TSheets } from 'reactxx-typings'
 
 export * from '../common/createMuiTheme'
 
-import { sheetToClassSheet, rulesetToClassNames } from 'reactxx/web'
+import { rulesetToClassNames } from 'reactxx/web'
 import { createMuiTheme } from '../common/createMuiTheme'
 import * as Mui from '../typings/mui'
 

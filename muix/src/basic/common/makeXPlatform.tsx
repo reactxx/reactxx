@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TBasic } from './typings'
+import { TBasic } from '../typings/basic'
 
 export const makeXPlatform = <R extends TBasic.Shape>(sheetX: TBasic.SheetX<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
@@ -48,7 +48,7 @@ const mergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
   switch (rulesetResult.length) {
     case 0: return {}
     case 1: return rulesetResult[0]
-    default: return deepMerges(true, rulesetResult)
+    default: return deepMerges(true, {}, ...rulesetResult)
   }
 }
 

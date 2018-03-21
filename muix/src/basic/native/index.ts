@@ -3,11 +3,11 @@ window.isWeb = false
 import React from 'react'
 import ReactN from 'react-native'
 
-export { TBasic } from '../common/typings'
+export { TBasic } from '../typings/basic'
 export { default as LoremIpsum } from '../common/loremipsum'
 export * from '../common/makeXPlatform'
 
-import { TBasic } from '../common/typings'
+import { TBasic } from '../typings/basic'
 import * as sheets from '../common/sheets'
 import { makeXPlatform } from '../common/makeXPlatform'
 import * as Comps from './components'
