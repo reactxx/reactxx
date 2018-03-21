@@ -1,4 +1,4 @@
-﻿import { TSheets } from 'reactxx-typings'
+﻿import { TSheets } from 'reactxx'
 import { TBasic } from 'reactxx-basic/typings'
 
 import { TThemeConfig } from 'typescript-config'

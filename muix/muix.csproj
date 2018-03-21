@@ -168,6 +168,12 @@
     <TypeScriptCompile Include="src\ks\common\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\native\index.tsx" />
     <TypeScriptCompile Include="src\ks\typings.d.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\animation.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\index.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\media-q.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\sheets.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\theme.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\typescript-config.ts" />
     <TypeScriptCompile Include="src\typings\mdi-native.ts" />
     <TypeScriptCompile Include="src\typings\mdi-web.ts" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.ts" />

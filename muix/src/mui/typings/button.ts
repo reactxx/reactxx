@@ -1,7 +1,7 @@
 ﻿import { ButtonProps } from './mui'
 import ReactN from 'react-native'
 
-import { TSheets } from 'reactxx-typings'
+import { TSheets } from 'reactxx'
 import { TComps, TBasic } from 'reactxx-basic/typings'
 
 export namespace MuiButtonT {

@@ -7,10 +7,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import jssShared, { create} from 'jss';
 import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
-import { ThemeProvider, ThemeModifier } from 'reactxx'
+import { TTheme, ThemeProvider, ThemeModifier } from 'reactxx'
 import { ModifierType } from 'reactxx-stateman'
 
-import { TTheme } from 'reactxx-typings'
 import { TBasic } from 'reactxx-basic/typings'
 
 export * from '../common/createMuiTheme'

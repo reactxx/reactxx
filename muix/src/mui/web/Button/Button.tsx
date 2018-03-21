@@ -3,11 +3,10 @@ import React from 'react'
 
 import MuiButton from 'material-ui/Button/Button'
 import { muiCompatible } from '../index'
-import { compThemeSheetModifier, ThemeModifier } from 'reactxx'
+import { TTheme, compThemeSheetModifier, ThemeModifier } from 'reactxx'
 import * as Mui from '../../typings/mui'
 import { MuiButtonT } from '../../typings/button'
 
-import { TTheme } from 'reactxx-typings'
 import { TComps } from 'reactxx-basic/typings'
 
 const ButtonIconStartOverrides: React.SFC<Mui.ButtonProps> = props => <ThemeModifier modify={compThemeSheetModifier<TComps.IconShape>(CompNames.Icon, theme => ({ root: { marginRight: theme.spacing.unit } }))}>

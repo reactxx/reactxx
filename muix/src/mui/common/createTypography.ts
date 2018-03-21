@@ -3,7 +3,7 @@ import { toPlatformSheet, deepMerge } from 'reactxx-basic/to-platform'
 import * as Mui from '../typings/mui'
 import { Muix } from '../typings/muix'
 import { TBasic, TComps } from 'reactxx-basic/typings'
-import { TSheets } from 'reactxx-typings'
+import { TSheets } from 'reactxx'
 
 export default function createTypography(palette: Mui.Palette, optionOrCreator: Muix.TypographyOptionsOrCreatorX) {
   const options = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Muix.TypographyOptionsX

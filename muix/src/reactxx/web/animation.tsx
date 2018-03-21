@@ -1,9 +1,10 @@
+import ReactN from 'react-native'
+
 import { DriverLow, getGaps } from '../common/animation'
 import warning from 'warning'
 import { keyFrameToClassNames } from 'reactxx-fela'
-import { TAnimation } from 'reactxx-typings' 
+import { TAnimation } from 'reactxx' 
 import { TBasic } from 'reactxx-basic/typings' 
-import ReactN from 'react-native'
 
 export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements TAnimation.DriverWeb<T>  {
 

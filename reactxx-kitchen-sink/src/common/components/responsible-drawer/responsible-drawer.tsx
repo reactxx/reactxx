@@ -3,10 +3,9 @@ import React from 'react'
 import ReactN from 'react-native'
 
 // different import of 'ScrollView, View, Text, Icon, AnimatedView' components for web and native
-import { withStyles, ScrollView, View, Text, Icon, AnimatedView, } from 'reactxx'
+import { TTheme, TSheets, withStyles, ScrollView, View, Text, Icon, AnimatedView, } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic/develop'
 
-import { TTheme, TSheets } from 'reactxx-typings'
 import { TBasic, TComps } from 'reactxx-basic/typings'
 
 import { createContext, ConsumerType as StateConsumerType, ConsumerProps } from 'reactxx-stateman' 

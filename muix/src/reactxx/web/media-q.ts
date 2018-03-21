@@ -1,7 +1,6 @@
 import { BreakPoint, ComponentsMediaQLow } from '../common/media-q'
-import { deepMerges } from 'reactxx'
+import { TMediaQ, deepMerges } from 'reactxx'
 import warning from 'warning'
-import { TMediaQ } from 'reactxx-typings'
 import { TAddInConfig } from 'typescript-config'
 
 export class ComponentsMediaQ<TState extends string = string> extends ComponentsMediaQLow<TState> implements TMediaQ.ComponentsMediaQ<TState>{

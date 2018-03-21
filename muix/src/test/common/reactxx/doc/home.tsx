@@ -1,10 +1,8 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
+import { TTheme, TSheets, withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
 
-import { TTheme } from 'reactxx-typings'
-import { TSheets } from 'reactxx-typings'
 import { TBasic, TComps } from 'reactxx-basic/typings'
 import { MDI } from 'reactxx-typings/mdi'
 

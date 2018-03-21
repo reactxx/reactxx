@@ -4,7 +4,7 @@ import { Animated } from 'react-native'
 import { DriverLow, getGaps } from '../common/animation'
 export * from '../common/animation'
 
-import { TAnimation } from 'reactxx-typings' 
+import { TAnimation } from 'reactxx' 
 
 export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements TAnimation.DriverNative<T>  {
 

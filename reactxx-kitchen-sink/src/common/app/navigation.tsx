@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { TBasic } from 'reactxx-basic/typings'
 
-import { View, Text, ScrollView, Icon, } from 'reactxx'
+import { TTheme, View, Text, ScrollView, Icon, } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic/develop'
 import { H1, H2, H3, H4, H5, U, I, B, A, Blocquote, P } from '../components/typo'
 
@@ -11,8 +11,6 @@ import { examples, nameToExample, exampleToElement, components, navigationExampl
 import { primitives } from '../primitives/index'
 import { ResponsibleDrawer } from '../components/responsible-drawer/responsible-drawer'
 import { GithubCircle } from 'reactxx-mdi/GithubCircle'
-
-import { TTheme } from 'reactxx-typings';
 
 export type GotoExample = (example: KSink.Example) => void
 export type GetExampleUrl = (example: KSink.Example) => string

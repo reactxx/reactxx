@@ -1,8 +1,7 @@
 import React from 'react'
-import { Text, View, ScrollView, Icon, AppContainer, } from 'reactxx'
+import { TTheme, Text, View, ScrollView, Icon, AppContainer, } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic/develop'
 
-import { TTheme } from 'reactxx-typings'
 import { TBasic } from 'reactxx-basic/typings'
 
 interface Example {

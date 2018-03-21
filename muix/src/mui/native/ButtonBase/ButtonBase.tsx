@@ -3,9 +3,8 @@ import ReactN from 'react-native'
 
 import { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRectangle } from 'react-native'
 
-import { withStyles } from 'reactxx'
+import { TTheme, withStyles } from 'reactxx'
 
-import { TTheme } from 'reactxx-typings'
 import { TBasic } from 'reactxx-basic/typings'
 
 import { MuiButtonBaseT } from '../../typings/button-base'

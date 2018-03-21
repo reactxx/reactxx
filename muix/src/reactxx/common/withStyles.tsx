@@ -2,13 +2,12 @@ import React from 'react'
 import ReactN from 'react-native'
 //import hoistNonReactStatics from 'hoist-non-react-statics'
 import { toPlatformRuleSet, toPlatformSheet, deepMerge } from 'reactxx-basic/to-platform'
-import { ComponentsMediaQ /*platform dependent*/, } from 'reactxx'
+import { TTheme, TAnimation, TMediaQ, TSheets, ComponentsMediaQ /*platform dependent*/, } from 'reactxx'
 import warning from 'warning'
 import { getAnimations } from './animation'
 
 import { ThemeModifier, compThemeCreate } from './theme'
 
-import { TTheme, TAnimation, TMediaQ, TSheets } from 'reactxx-typings'
 import { TBasic } from 'reactxx-basic/typings'
 
 //http://jamesknelson.com/should-i-use-shouldcomponentupdate/

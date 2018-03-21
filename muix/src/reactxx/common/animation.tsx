@@ -1,9 +1,8 @@
 import React from 'react'
 import ReactN from 'react-native'
-
-import { AnimationDriver } from 'reactxx' //NATIVE or WEB animation driver
-import { TAnimation } from 'reactxx-typings' 
 import warning from 'warning'
+
+import { TAnimation, AnimationDriver } from 'reactxx' //NATIVE or WEB animation driver
 
 export const getAnimations = <T extends TAnimation.Shapes>(sheets: TAnimation.SheetsX<T>, statefullComponent: React.Component) => {
   if (!sheets) return null
