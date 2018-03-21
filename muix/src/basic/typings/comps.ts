@@ -1,6 +1,6 @@
 ﻿import ReactN from 'react-native'
 
-import { TWebNative } from './web-native'
+import { TCommonStyles } from './common-styles'
 import { TBasic } from './basic'
 
 export namespace TComps {

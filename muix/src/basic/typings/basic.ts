@@ -1,5 +1,5 @@
 ﻿import ReactN from 'react-native'
-import { TWebNative } from './web-native'
+import { TCommonStyles } from './common-styles'
 
 export namespace TBasic {
 
@@ -26,6 +26,10 @@ export namespace TBasic {
 
   export type RulesetX<T extends RulesetNativeIds = 'Text', R extends Shape = Shape> =
     commonRules<T> & // native rules which are compatible with web
+    {
+      $native?: NativeRules<T> // native specific rules
+      $web?: RulesetWeb // web specific rules
+    } &
     RulesetAddInX<T, R> // sheet addIn: $wen, $native, overriding, media query etc.
 
   // rule names, common for native and web
@@ -34,10 +38,10 @@ export namespace TBasic {
   //export type commonRules<T extends RulesetNative> = TakeFrom<T, commonRuleNames<T>>
 
   export type commonRules<T extends RulesetNativeIds> =
-    T extends 'Text' ? TWebNative.TextStyle :
-    T extends 'Image' ? TWebNative.ImageStyle :
-    T extends 'ScrollView' ? TWebNative.ScrollViewStyle :
-    T extends 'View' ? TWebNative.ViewStyle :
+    T extends 'Text' ? TCommonStyles.TextStyle :
+    T extends 'Image' ? TCommonStyles.ImageStyle :
+    T extends 'ScrollView' ? TCommonStyles.ScrollViewStyle :
+    T extends 'View' ? TCommonStyles.ViewStyle :
     never
 
   export type NativeRules<T extends RulesetNativeIds> =
@@ -48,15 +52,15 @@ export namespace TBasic {
     never
 
 
-  export interface ViewRulesetCommonX extends TWebNative.ViewStyle { }
-  export interface TextRulesetCommonX extends TWebNative.TextStyle { }
-  export interface ScrollViewRulesetCommonX extends TWebNative.ScrollViewStyle { }
-  export interface ImageRulesetCommonX extends TWebNative.ImageStyle { }
+  export interface ViewRulesetCommonX extends TCommonStyles.ViewStyle { }
+  export interface TextRulesetCommonX extends TCommonStyles.TextStyle { }
+  export interface ScrollViewRulesetCommonX extends TCommonStyles.ScrollViewStyle { }
+  export interface ImageRulesetCommonX extends TCommonStyles.ImageStyle { }
 
-  export interface ViewRulesetX extends TWebNative.ViewStyle, RulesetAddInX<'View', Shape> { }
-  export interface TextRulesetX extends TWebNative.TextStyle, RulesetAddInX<'Text', Shape> { }
-  export interface ImageRulesetX extends TWebNative.ImageStyle, RulesetAddInX<'Image', Shape> { }
-  export interface ScrollViewRulesetX extends TWebNative.ScrollViewStyle, RulesetAddInX<'ScrollView', Shape> { }
+  export interface ViewRulesetX extends TCommonStyles.ViewStyle, RulesetAddInX<'View', Shape> { }
+  export interface TextRulesetX extends TCommonStyles.TextStyle, RulesetAddInX<'Text', Shape> { }
+  export interface ImageRulesetX extends TCommonStyles.ImageStyle, RulesetAddInX<'Image', Shape> { }
+  export interface ScrollViewRulesetX extends TCommonStyles.ScrollViewStyle, RulesetAddInX<'ScrollView', Shape> { }
 
   //******************** Platform specific ruleset
   export type RulesetWeb = React.CSSProperties //??? https://github.com/programbo/cssproperties/blob/master/css-properties.d.ts

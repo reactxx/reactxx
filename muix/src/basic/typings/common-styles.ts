@@ -1,4 +1,4 @@
-﻿export namespace TWebNative {
+﻿export namespace TCommonStyles {
 
   //React Native styles compatible with Web React.CSSProperties
 

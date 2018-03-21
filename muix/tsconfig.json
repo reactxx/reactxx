@@ -29,8 +29,9 @@
 
     "baseUrl": ".",
     "paths": {
-      "reactxx-basic": [ "src/basic/web/index" ],
-      "reactxx-basic/web": [ "src/basic/web/index" ],
+      "reactxx-fela": [ "src/fela/index" ],
+
+      "reactxx-basic/*": [ "src/basic/web/*" ],
 
       "reactxx-typings": [ "src/typings/index" ],
       "reactxx-typings/mdi": [ "src/typings/mdi-web" ],

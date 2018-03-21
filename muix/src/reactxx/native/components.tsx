@@ -9,7 +9,7 @@ import * as sheets from '../common/components'
 
 import { TComps, TSheets } from 'reactxx-typings'
 
-import * as Comps from '../../basic/native/components'
+import * as Comps from '../../basic/native/comps'
 
 const anyView = (isAnim: boolean) => (props => {
   const ActView = isAnim ? Animated.View : ViewRN

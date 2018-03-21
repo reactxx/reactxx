@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
-import { rulesetsToClassNames } from './fela'
+import { rulesetsToClassNames } from 'reactxx-fela'
 
 import { withStyles } from '../common/withStyles'
 import * as sheets from '../common/components'
 import { TComps, TSheets, TTheme } from 'reactxx-typings'
 
-import * as Comps from '../../basic/web/components'
+import * as Comps from '../../basic/web/comps'
 
 const view: TSheets.CodeSFCWeb<TComps.ViewShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq,...rest } = props

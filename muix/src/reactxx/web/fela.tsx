@@ -1,1 +1,1 @@
-export { rulesetsToClassNames, rulesetToClassNames, keyFrameToClassNames } from 'reactxx-basic/web'
+export * from 'reactxx-fela'

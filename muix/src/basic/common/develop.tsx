@@ -1,4 +1,6 @@
-const LoremIpsum = (words: 2 | 5 | 10 | 20 | 40 | 80 | 160) => {
+import React from 'react'
+
+export const LoremIpsum = (words: 2 | 5 | 10 | 20 | 40 | 80 | 160) => {
   switch (words) {
     case 2: return 'Lorem ipsum. '
     case 5: return 'Lorem ipsum dolor sit amet. '
@@ -10,4 +12,19 @@ const LoremIpsum = (words: 2 | 5 | 10 | 20 | 40 | 80 | 160) => {
   }
 }
 
-export default LoremIpsum
+
+//Helper components, counts number of its render() method calls
+export class RenderCounter extends React.Component {
+  counter = 0
+  render() {
+    this.counter++
+    return (this.props.children as React.SFC<any>)({
+      renderCount: <span style={{ color: 'gray', fontWeight: 'normal' }}> {` (renders: ${this.counter})`}</span>
+    })
+  }
+}
+
+//RenderCounter example:
+const RenderCounterExample: React.SFC = () => <RenderCounter>
+  {({ renderCount }) => <div>Render counter example: {renderCount}</div>}
+</RenderCounter>

@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
-import { rulesetsToClassNames } from './fela'
+import { rulesetsToClassNames } from 'reactxx-fela'
 
 import { TBasic } from '../typings/basic'
-import { TComps } from '../typings/components'
+import { TComps } from '../typings/comps'
 
 export const view: TBasic.CodeSFCWeb<TComps.ViewShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq,...rest } = props

@@ -1,7 +1,9 @@
 ﻿declare module 'typescript-config' {
   import { Muix } from 'reactxx-mui/typings/muix'
-  export interface Theme extends Muix.Theme { }
-  export interface ThemeOptionsX extends Muix.ThemeOptions { }
+  namespace TTypescriptConfig {
+    export interface Theme extends Muix.Theme { }
+  }
+  export default TTypescriptConfig
 }
 
 interface Window {

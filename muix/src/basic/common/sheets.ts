@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { TBasic } from '../typings/basic'
-import { TComps } from '../typings/components'
+import { TComps } from '../typings/comps'
 
 export const textSheet: TBasic.SheetX<TComps.TextShape> = {
   root: {

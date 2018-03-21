@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { Text, LoremIpsum, View } from 'reactxx-basic'
+import { Text, View } from 'reactxx-basic/index'
+import { LoremIpsum } from 'reactxx-basic/develop'
 
 const App: React.SFC = props => <View className={{flex:1 }}>
   <Text className={{ fontWeight: 'bold', fontSize: 32, marginBottom: 15 }}>

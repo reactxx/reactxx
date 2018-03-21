@@ -5,7 +5,7 @@ import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vecto
 import warning from 'warning'
 
 import { TBasic } from '../typings/basic'
-import { TComps } from '../typings/components'
+import { TComps } from '../typings/comps'
 
 const anyView = (isAnim: boolean) => (props => {
   const ActView = isAnim ? Animated.View : ViewRN
