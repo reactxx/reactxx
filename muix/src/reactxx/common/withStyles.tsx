@@ -12,15 +12,15 @@ import { TTheme, TAnimation, TMediaQ, TSheets } from 'reactxx-typings'
 import { TBasic } from 'reactxx-basic/typings'
 
 //http://jamesknelson.com/should-i-use-shouldcomponentupdate/
-export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R>, createSheetX: TTheme.SheetCreatorX<R>, compThemePar?: TSheets.getCompTheme<R>) => (Component: TSheets.CodeComponentType<R>) => {
+export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R>, createSheetX: TTheme.SheetCreatorX<R>, compThemePar?: TSheets.getCompTheme<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
   const name = _name as string
   defaultCompThemePars[name] = compThemePar
 
-  type TStyled = TSheets.PropsX & TTheme.ThemeCompSelectedX
+  type TStyled = TBasic.PropsX & TTheme.ThemeCompSelectedX
 
   class Styled extends React.PureComponent<TStyled> {
-    classes: TSheets.Sheet
+    classes: TBasic.Sheet
     animations: TAnimation.Drivers
     mediaq: ComponentsMediaQ<TSheets.getMediaQ<R>>
 
@@ -38,7 +38,7 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
       const staticSheet = toPlatformSheet(applyTheme(theme, compThemePar, createSheetX))
 
       //*** apply "component override" from actual "theme app state"
-      const classes: TSheets.Sheet = toPlatformSheet(applyTheme(theme, compThemePar, classesX, ))
+      const classes: TBasic.Sheet = toPlatformSheet(applyTheme(theme, compThemePar, classesX, ))
 
       this.classes = compThemeSheet || classes ? deepMerges(false, {}, staticSheet, compThemeSheet, classes) : staticSheet // modify static sheet 
       for (const p in this.classes) if (!p.startsWith('$')) this.classes[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
@@ -54,13 +54,13 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
 
     render() {
       const { animations, mediaq } = this
-      const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, theme, compThemeSheet, compThemePar, modifyThemeState, ...other } = this.props as TStyled & TSheets.OnPressAllX
+      const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, theme, compThemeSheet, compThemePar, modifyThemeState, ...other } = this.props as TStyled & TBasic.OnPressAllX
       //const theme = themeState.theme
 
       if (ignore) return null
 
-      const className: TSheets.Ruleset = toPlatformRuleSet(applyTheme(theme, compThemePar, classNameX))
-      const style: TSheets.Ruleset = toPlatformRuleSet(applyTheme(theme, compThemePar, styleX))
+      const className: TBasic.Ruleset = toPlatformRuleSet(applyTheme(theme, compThemePar, classNameX))
+      const style: TBasic.Ruleset = toPlatformRuleSet(applyTheme(theme, compThemePar, styleX))
 
       // calling createRulesetWithOverridesMerger signals which rulesets are used. So it can use their $overrides to modify self sheet
       const mergeRulesetWithOverrides = createRulesetWithOverridesMerger(mediaq)
@@ -77,9 +77,9 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
         classes: this.classes, //available classes for mergeRulesetWithOverrides (this.classes = merge(sheet, theme.overrides[name], classes prop)
         className,
         style,
-      } as TSheets.CodeProps<R>
+      } as TBasic.CodeProps<R>
 
-      toPlatformEvents($web, $native as TSheets.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
+      toPlatformEvents($web, $native as TBasic.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
 
       return <Component {...codeProps} />
     }
@@ -90,7 +90,7 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
 
   return (props => <ThemeModifier quiet modify={props.modifyThemeState} selector={modifierSelector(name)} render={selectedThemeState =>
     <Styled {...selectedThemeState} {...props} />
-  } />) as React.ComponentType<TSheets.PropsX<R>>
+  } />) as React.ComponentType<TBasic.PropsX<R>>
 
 }
 
@@ -104,15 +104,15 @@ const modifierSelector = (componentName: string) => (themeStates: TTheme.ThemeSt
 
 export const defaultCompThemePars: {[Name in keyof TSheets.Shapes]?: TSheets.getCompTheme<TSheets.Shapes[Name]> } = {}
 
-export const toPlatformEvents = ($web: TSheets.OnPressAllWeb, $native: TSheets.OnPressAllNative, propsX: TSheets.OnPressAllX, codeProps: TSheets.CodeProps) => {
+export const toPlatformEvents = ($web: TBasic.OnPressAllWeb, $native: TBasic.OnPressAllNative, propsX: TBasic.OnPressAllX, codeProps: TBasic.CodeProps) => {
   const { onPress, onLongPress, onPressIn, onPressOut } = propsX
   if (window.isWeb) {
-    const cp = codeProps as TSheets.CodePropsWeb
+    const cp = codeProps as TBasic.CodePropsWeb
     const cl = $web && $web.onClick || onPress; if (cl) cp.onClick = cl
     const cl2 = $web && $web.onMouseDown || onPressIn; if (cl2) cp.onMouseDown = cl2
     const cl3 = $web && $web.onMouseUp || onPressOut; if (cl3) cp.onMouseUp = cl3
   } else {
-    const cp = codeProps as TSheets.CodePropsNative
+    const cp = codeProps as TBasic.CodePropsNative
     const cl = $native && $native.onPress || onPress; if (cl) cp.onPress = cl
     const cl1 = $native && $native.onLongPress || onLongPress; if (cl1) cp.onLongPress = cl1
     const cl2 = $native && $native.onPressIn || onPressIn; if (cl2) cp.onPressIn = cl2
@@ -125,7 +125,7 @@ export const toPlatformEvents = ($web: TSheets.OnPressAllWeb, $native: TSheets.O
 // - use sheet.ruleset.$overrides to modify self sheet
 // - use sheet.ruleset.$mediaq to modify ruleset 
 const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => {
-  const usedOverrides: TSheets.Sheet = {}
+  const usedOverrides: TBasic.Sheet = {}
   const res: TSheets.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
     let single = undefined //optimalization: rulesets contains just single non empty item => no deepMerge is needed
     rulesets.forEach(ruleset => { // acumulate $overrides from used rulesets
@@ -177,7 +177,7 @@ export const deepMerges = (skipSystem: boolean, target, ...sources) => {
 
 const clearSystemProps = obj => {
   if (!obj) return obj
-  const { $overrides, $name, $web, $native, $mediaq, ...rest } = obj as TSheets.RulesetX
+  const { $overrides, $name, $web, $native, $mediaq, ...rest } = obj as TBasic.RulesetX
   return rest
 }
 

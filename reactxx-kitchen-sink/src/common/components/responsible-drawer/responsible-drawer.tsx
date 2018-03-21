@@ -6,8 +6,8 @@ import ReactN from 'react-native'
 import { withStyles, ScrollView, View, Text, Icon, AnimatedView, } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic/develop'
 
-import { TTheme } from 'reactxx-typings'
-import { TSheets } from 'reactxx-typings'
+import { TTheme, TSheets } from 'reactxx-typings'
+import { TBasic, TComps } from 'reactxx-basic/typings'
 
 import { createContext, ConsumerType as StateConsumerType, ConsumerProps } from 'reactxx-stateman' 
 
@@ -25,21 +25,21 @@ export namespace ResponsibleDrawerT {
   }
 
   export interface RenderProps {
-    style: TSheets.RulesetX
+    style: TBasic.RulesetX
     iconData: string,
-    onPress: TSheets.MouseEvent
+    onPress: TBasic.MouseEvent
   }
 
   export type Shape = TSheets.OverwriteShape<{
-    common: TSheets.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop'> & TSheets.ShapeTexts<'openButton' | 'closeButton'>
+    common: TComps.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop'> & TComps.ShapeTexts<'openButton' | 'closeButton'>
     props: {
       //renderContent: (props: RenderProps) => JSX.Element
       drawer: JSX.Element
     }
     mediaq: 'mobile' | 'tablet' | 'desktop'
     animation: {
-      mobile: TSheets.ShapeViews<'drawer' | 'backDrop'>
-      tablet: TSheets.ShapeViews<'drawer' | 'content'>
+      mobile: TComps.ShapeViews<'drawer' | 'backDrop'>
+      tablet: TComps.ShapeViews<'drawer' | 'content'>
     },
     compTheme: { //type of parameter
       drawerWidths: [number, number, number] //drawer width for Mobile, tablet and desktop
@@ -58,7 +58,7 @@ export namespace ResponsibleDrawerT {
 const { Provider, Consumer } = createContext<ResponsibleDrawerT.RenderProps>(null)
 
 type ConsumerType = StateConsumerType<ResponsibleDrawerT.RenderProps, ResponsibleDrawerT.RenderProps>
-type AnimationType = React.ComponentClass<TSheets.PropsX<ResponsibleDrawerT.Shape>> & { LayoutChanged?: ConsumerType }
+type AnimationType = React.ComponentClass<TBasic.PropsX<ResponsibleDrawerT.Shape>> & { LayoutChanged?: ConsumerType }
 
 // ResponsibleDrawer's sheet. 
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
@@ -150,7 +150,7 @@ const sheet: TTheme.SheetCreatorX<ResponsibleDrawerT.Shape> = (theme, compThemeP
 })
 
 // responsibleDrawer stateless component. 
-const responsibleDrawer: TSheets.CodeSFC<ResponsibleDrawerT.Shape> = props => {
+const responsibleDrawer: TBasic.CodeSFC<ResponsibleDrawerT.Shape> = props => {
 
   const { classes, mergeRulesetWithOverrides, children, className, animations, mediaq, drawer: drawerNode } = props
 
@@ -167,30 +167,30 @@ const responsibleDrawer: TSheets.CodeSFC<ResponsibleDrawerT.Shape> = props => {
     mediaState.tablet && classes.tablet,
     mediaState.desktop && classes.desktop,
     className, // always put className at the end of the ROOT ruleset
-  ) as TSheets.ViewRulesetX
+  ) as TBasic.ViewRulesetX
 
   const backDrop = mergeRulesetWithOverrides(
     classes.backDrop,
     mediaState.mobile && animations.mobile.sheet.backDrop, // backDrop animation for mobile
-  ) as TSheets.ViewRulesetX
+  ) as TBasic.ViewRulesetX
 
   const drawer = mergeRulesetWithOverrides(
     classes.drawer,
     mediaState.mobile && animations.mobile.sheet.drawer, // drawer animation for mobile
     mediaState.tablet && animations.tablet.sheet.drawer, // drawer animation for tablet
-  ) as TSheets.ViewRulesetX
+  ) as TBasic.ViewRulesetX
 
   const content = mergeRulesetWithOverrides(
     classes.content,
     mediaState.tablet && animations.tablet.sheet.content, // content animation for tablet
-  ) as TSheets.ViewRulesetX
+  ) as TBasic.ViewRulesetX
 
-  const closeButton = mergeRulesetWithOverrides(classes.closeButton) as TSheets.TextRulesetX
+  const closeButton = mergeRulesetWithOverrides(classes.closeButton) as TBasic.TextRulesetX
 
   const openButton = mergeRulesetWithOverrides(
     classes.openButton,
     { display: mediaState.tablet && animations.tablet.opened || mediaState.desktop ? 'none' : 'flex' }
-  ) as TSheets.TextRulesetX
+  ) as TBasic.TextRulesetX
 
   return <View className={root}>
     <AnimatedView key={1} className={backDrop} onPress={closeDrawer} />
@@ -226,7 +226,7 @@ ResponsibleDrawer.LayoutChanged = Consumer as ConsumerType
 // Using ResponsibleDrawer in application
 //************************************************************************************************************
 
-const button = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as TSheets.RulesetX
+const button = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as TBasic.RulesetX
 
 const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer/>}>
   <Content />

@@ -4,13 +4,13 @@ import ReactN from 'react-native'
 import PropTypes from 'prop-types'
 import warning from 'warning'
 
-import { TSheets } from 'reactxx-typings'
+import { TBasic } from 'reactxx-basic/typings'
 
 //create platform specific ruleset from cross platform one
-export const toPlatformRuleSet = (style: TSheets.RulesetX) => {
+export const toPlatformRuleSet = (style: TBasic.RulesetX) => {
   if (!style) return null
   const isNative = !window.isWeb
-  if (!style.$mediaq && !style.$web && !style.$native && !style.$overrides && !style.$props) return style as TSheets.Ruleset//optimalization
+  if (!style.$mediaq && !style.$web && !style.$native && !style.$overrides && !style.$props) return style as TBasic.Ruleset//optimalization
   const { $web, $native, $overrides, $mediaq, $props: $propsX, ...rest } = style
   let $props:any = $propsX
   if ($propsX && ($propsX.$native && isNative || $propsX.$web && !isNative)) {
@@ -19,11 +19,11 @@ export const toPlatformRuleSet = (style: TSheets.RulesetX) => {
   }
   const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $mediaq: toPlatformSheet($mediaq as any), $props }
   if (!res.$overrides) delete res.$overrides; if (!res.$props) delete res.$props //remove NULL or UNDEFINED
-  return res as TSheets.Ruleset 
+  return res as TBasic.Ruleset 
 }
 
 //create platform specific sheet from cross platform one
-export const toPlatformSheet = <R extends TSheets.Shape>(sheet: TSheets.SheetX<R> | TSheets.PartialSheetX<R>) => {
+export const toPlatformSheet = <R extends TBasic.Shape>(sheet: TBasic.SheetX<R> | TBasic.PartialSheetX<R>) => {
   if (typeof sheet !== 'object') return sheet
   const res = { }
   for (const p in sheet) {
@@ -34,7 +34,7 @@ export const toPlatformSheet = <R extends TSheets.Shape>(sheet: TSheets.SheetX<R
     } else
       res[p] = toPlatformRuleSet(sheet[p])
   }
-  return res as TSheets.Sheet<R>
+  return res as TBasic.Sheet<R>
 }
 
 //simple deep merge

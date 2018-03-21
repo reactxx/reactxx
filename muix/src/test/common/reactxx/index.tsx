@@ -3,7 +3,7 @@ import { Text, View, ScrollView, Icon, AppContainer, } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic/develop'
 
 import { TTheme } from 'reactxx-typings'
-import { TSheets } from 'reactxx-typings'
+import { TBasic } from 'reactxx-basic/typings'
 
 interface Example {
   title: string
@@ -64,7 +64,7 @@ For "View" element:
 - valid "$native" rules: see react-native ViewStyle
 `,
     Component: props => {
-      const border: TSheets.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', marginBottom: 20 }
+      const border: TBasic.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', marginBottom: 20 }
       return <View className={{ padding: 10 }}>
         <View className={border}>
           <Text className={{ backgroundColor: 'lightgreen', alignSelf: 'flex-start' }}>
@@ -89,7 +89,7 @@ For "View" element:
     descr: `
 `,
     Component: props => {
-      const border: TSheets.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10 }
+      const border: TBasic.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10 }
       return <ScrollView classes={{ container: { padding: 10 } }}>
         <View className={border}>
           <Text className={{ marginTop: 10 }}>
@@ -111,7 +111,7 @@ For "View" element:
     descr: `
 `,
     Component: props => {
-      const text: TSheets.TextRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10, margin: 10, width: 300 }
+      const text: TBasic.TextRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10, margin: 10, width: 300 }
       return <ScrollView horizontal>
         <Text className={text}>111 {LoremIpsum(40)}</Text>
         <Text className={text}>222 {LoremIpsum(40)}</Text>
@@ -126,7 +126,7 @@ For "View" element:
     descr: `
 `,
     Component: props => {
-      const text: TSheets.TextRulesetX = {
+      const text: TBasic.TextRulesetX = {
         $mediaq: {
           '-480': { color: 'red', },
           '480-1024': { color: 'green', },

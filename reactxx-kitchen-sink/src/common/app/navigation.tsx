@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TSheets } from 'reactxx-typings'
+import { TBasic } from 'reactxx-basic/typings'
 
 import { View, Text, ScrollView, Icon, } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic/develop'
@@ -44,10 +44,10 @@ class App extends React.Component<{}, KSink.Example> {
   gotoExample: GotoExample = (example => this.setState(example)).bind(this);
 }
 
-const drawerButton = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as TSheets.RulesetX
-const toolbar = { flexDirection: 'row', alignItems: 'center', height: 48, padding: 15 } as TSheets.ViewRulesetX
-const codeIcons = { color: 'white', marginLeft: 15, $web: { ':hover': { transform: 'scale(1.2)' } } } as TSheets.RulesetX
-var logo = { flexGrow: 0, marginLeft: 5, color: 'lightblue', paddingRight: 10, marginRight: 10, borderRightColor: 'lightblue', borderRightWidth: 1, $web: { borderRightStyle: 'solid' } } as TSheets.RulesetX
+const drawerButton = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as TBasic.RulesetX
+const toolbar = { flexDirection: 'row', alignItems: 'center', height: 48, padding: 15 } as TBasic.ViewRulesetX
+const codeIcons = { color: 'white', marginLeft: 15, $web: { ':hover': { transform: 'scale(1.2)' } } } as TBasic.RulesetX
+var logo = { flexGrow: 0, marginLeft: 5, color: 'lightblue', paddingRight: 10, marginRight: 10, borderRightColor: 'lightblue', borderRightWidth: 1, $web: { borderRightStyle: 'solid' } } as TBasic.RulesetX
 
 const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ children, gotoExample, actName }) => <View className={{ flex: 1 }}>
   <View className={{ ...toolbar, backgroundColor: 'gray' }}>

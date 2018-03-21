@@ -1,6 +1,5 @@
 import ReactN from 'react-native'
 
-import { TSheets } from 'reactxx-typings'
 import { TBasic } from 'reactxx-basic/typings'
 
 export namespace TAnimation {
@@ -25,7 +24,7 @@ export namespace TAnimation {
   export type RuleSetX<T extends TBasic.RulesetNativeIds> = ToPairs<TBasic.commonRules<T>> & {
     transform?: Array<TNativeTransform>
     $native?: ToPairs<TBasic.NativeRules<T>, Diff<keyof TBasic.NativeRules<T>, 'transform'>> & { transform?: TNativeTransform[] }
-    $web?: ToPairs<TSheets.RulesetWeb, keyof React.CSSPropertiesLow> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
+    $web?: ToPairs<TBasic.RulesetWeb, keyof React.CSSPropertiesLow> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
   }
 
   export type Drivers<T extends Shapes = Shapes> = { [P in keyof T]: Driver<T[P]> } & AnimationsEx
@@ -53,9 +52,9 @@ export namespace TAnimation {
     sheet: SheetNative<T>
   }
 
-  export type SheetWeb<T extends Shape> = { [P in keyof T]: TSheets.RulesetWeb } & AnimationConfig
+  export type SheetWeb<T extends Shape> = { [P in keyof T]: TBasic.RulesetWeb } & AnimationConfig
   export type SheetNative<T extends Shape> = { [P in keyof T]: TBasic.NativeRules<T[P]> } & AnimationConfig
-  export type Sheet<T extends Shape> = { [P in keyof T]: (TBasic.NativeRules<T[P]> | TSheets.RulesetWeb) } & AnimationConfig
+  export type Sheet<T extends Shape> = { [P in keyof T]: (TBasic.NativeRules<T[P]> | TBasic.RulesetWeb) } & AnimationConfig
 
   export type SheetsX<T extends Shapes> = { [P in keyof T]: SheetX<T[P]> }
   export type SheetX<T extends Shape> = { [P in keyof T]: RuleSetX<T[P]> } & AnimationConfig

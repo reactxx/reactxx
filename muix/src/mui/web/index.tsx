@@ -11,7 +11,7 @@ import { ThemeProvider, ThemeModifier } from 'reactxx'
 import { ModifierType } from 'reactxx-stateman'
 
 import { TTheme } from 'reactxx-typings'
-import { TSheets } from 'reactxx-typings'
+import { TBasic } from 'reactxx-basic/typings'
 
 export * from '../common/createMuiTheme'
 
@@ -59,25 +59,25 @@ const expandOverrides = (themeState: TTheme.ThemeState) => {
   return res
 }
 
-type webKeys<R extends TSheets.Shape> = TSheets.getWeb<R> | keyof TSheets.getCommon<R>
+type webKeys<R extends TBasic.Shape> = TBasic.getWeb<R> | keyof TBasic.getCommon<R>
 type muiComponentType<P, ClassKey extends string> = React.ComponentType<P & Mui.StyledComponentProps<ClassKey>>
 
-export const muiCompatible = <R extends TSheets.Shape>(Component: muiComponentType<TSheets.getPropsWeb<R>, webKeys<R>>) => {
+export const muiCompatible = <R extends TBasic.Shape>(Component: muiComponentType<TBasic.getPropsWeb<R>, webKeys<R>>) => {
 
-  const Styled: TSheets.SFCX<R> = props => {
+  const Styled: TBasic.SFCX<R> = props => {
 
-    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, modifyThemeState, ...other } = props as any as (TSheets.PropsX & TSheets.OnPressAllX)
+    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, modifyThemeState, ...other } = props as any as (TBasic.PropsX & TBasic.OnPressAllX)
 
-    const classes = toPlatformSheet(classesX as TSheets.SheetX)
+    const classes = toPlatformSheet(classesX as TBasic.SheetX)
 
     const codeProps = {
       ...other, ...$web,
-      style: toPlatformRuleSet(styleX as TSheets.RulesetX),
-      className: rulesetToClassNames(toPlatformRuleSet(classNameX as TSheets.RulesetX)),
+      style: toPlatformRuleSet(styleX as TBasic.RulesetX),
+      className: rulesetToClassNames(toPlatformRuleSet(classNameX as TBasic.RulesetX)),
       classes: classes
     }
 
-    toPlatformEvents($web, $native as TSheets.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps as any)
+    toPlatformEvents($web, $native as TBasic.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps as any)
 
     return <Component {...codeProps as any} />
   }

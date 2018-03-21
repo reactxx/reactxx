@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
-import { TSheets } from 'reactxx-typings'
+
+import { TBasic } from 'reactxx-basic/typings'
 
 import PropTypes from 'prop-types'
 
@@ -47,7 +48,7 @@ export const createMuiTheme = (options: Muix.ThemeOptions = {}) => {
   } = options
 
   //convert cross platform shadows to platform specific shadows
-  const shadowsNewInput = shadowsNewInputX && shadowsNewInputX.map(rsx => toPlatformRuleSet(rsx) as TSheets.ViewRulesetCommonX)
+  const shadowsNewInput = shadowsNewInputX && shadowsNewInputX.map(rsx => toPlatformRuleSet(rsx) as TBasic.ViewRulesetCommonX)
 
   const palette = createPalette(paletteInput)
   const breakpoints = createBreakpoints(breakpointsInput)

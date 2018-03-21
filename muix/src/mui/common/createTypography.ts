@@ -2,6 +2,7 @@
 import { toPlatformSheet, deepMerge } from 'reactxx'
 import * as Mui from '../typings/mui'
 import { Muix } from '../typings/muix'
+import { TBasic, TComps } from 'reactxx-basic/typings'
 import { TSheets } from 'reactxx-typings'
 
 export default function createTypography(palette: Mui.Palette, optionOrCreator: Muix.TypographyOptionsOrCreatorX) {
@@ -17,24 +18,24 @@ export default function createTypography(palette: Mui.Palette, optionOrCreator: 
       fontWeight: '300',
       $web: { fontFamily },
       $native: { fontFamily: 'Roboto_Light' },
-    } as TSheets.TextRulesetX,
+    } as TBasic.TextRulesetX,
     fontWeightRegularNew = {
       fontWeight: '400',
       $web: { fontFamily },
       $native: { fontFamily: 'Roboto' },
-    } as TSheets.TextRulesetX,
+    } as TBasic.TextRulesetX,
     fontWeightMediumNew = {
       fontWeight: '500',
       $web: { fontFamily },
       $native: { fontFamily: 'Roboto_Medium' },
-    } as TSheets.TextRulesetX,
+    } as TBasic.TextRulesetX,
     display1, display2, display3, display4, headline, title, subheading, body1, body2, caption, button,
     pxToRem = mui.pxToRem,
     ...other
   } = options
 
 
-  const getWebProps = (weightX: TSheets.TextRulesetX, optionX: TSheets.TextRulesetX, nativeFontSize: number, mui: React.CSSProperties) => {
+  const getWebProps = (weightX: TBasic.TextRulesetX, optionX: TBasic.TextRulesetX, nativeFontSize: number, mui: React.CSSProperties) => {
     const { color, fontWeight, fontFamily, ...rest } = mui
     const res = {
       fontWeight: weightX.fontWeight,
@@ -47,16 +48,16 @@ export default function createTypography(palette: Mui.Palette, optionOrCreator: 
         fontFamily: weightX.$web.fontFamily,
         ...mui,
       }
-    } as TSheets.TextRulesetX
+    } as TBasic.TextRulesetX
     return optionX ? deepMerge(res, optionX) : res
   }
 
   type Shape = TSheets.OverwriteShape<{
-    common: TSheets.ShapeTexts<Mui.Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'> & { noWrap?: any /*ReactN.TextProperties*/ }
+    common: TComps.ShapeTexts<Mui.Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'> & { noWrap?: any /*ReactN.TextProperties*/ }
   }>
 
 
-  const sheetX: TSheets.SheetX<Shape> = {
+  const sheetX: TBasic.SheetX<Shape> = {
     fontWeightLightNew,
     fontWeightRegularNew,
     fontWeightMediumNew,

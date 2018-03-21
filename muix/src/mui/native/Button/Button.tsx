@@ -7,8 +7,7 @@ import { capitalize } from 'material-ui/utils/helpers';
 import { Text, withStyles, toPlatformRuleSet, compThemeSheetModifier, ThemeModifier } from 'reactxx'
 
 import { TTheme } from 'reactxx-typings'
-import { TSheets } from 'reactxx-typings'
-import { TComps } from 'reactxx-basic/typings'
+import { TComps, TBasic } from 'reactxx-basic/typings'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 import { MuiButtonT } from '../../typings/button'
@@ -18,7 +17,7 @@ import * as Mui from '../../typings/mui'
 const getTextIconColor = (color: string) => ({
   label: { color },
   labelIcon: {color },
-} as TSheets.PartialSheetX<MuiButtonT.Shape>)
+} as TBasic.PartialSheetX<MuiButtonT.Shape>)
 
 
 const sheets: (isLeft?: boolean) => TTheme.SheetCreatorX<MuiButtonT.Shape> = isLeft => ({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
@@ -119,7 +118,7 @@ const sheets: (isLeft?: boolean) => TTheme.SheetCreatorX<MuiButtonT.Shape> = isL
 })
 
 
-const button: TSheets.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
+const button: TBasic.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
 
 
   //var x = props.mini
@@ -153,8 +152,8 @@ const button: TSheets.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
   const rippleStyle = mergeRulesetWithOverrides(classes.ripple) as ReactN.ViewStyle
   const activeStyle = mergeRulesetWithOverrides(!disabled && classes.active) as ReactN.ViewStyle
   //const labelStyle = mergeRulesetWithOverrides(classes.label) 
-  const iconOverride = { root: mergeRulesetWithOverrides(classes.labelIcon) } as TSheets.Sheet
-  const labelOverride = { root: mergeRulesetWithOverrides(classes.label) } as TSheets.Sheet
+  const iconOverride = { root: mergeRulesetWithOverrides(classes.labelIcon) } as TBasic.Sheet
+  const labelOverride = { root: mergeRulesetWithOverrides(classes.label) } as TBasic.Sheet
 
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 
