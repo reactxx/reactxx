@@ -1,12 +1,11 @@
 ﻿import ReactN from 'react-native'
 
-import { TCommonStyles } from './common-styles'
 import { TBasic } from './basic'
 
 export namespace TComps {
 
   /******************************************
-    PRIMITIVE'S SHAPES
+    HELPERS FOR SHAPE's DEFINITION
   *******************************************/
 
   export type ShapeTexts<P extends string> = { [p in P]: 'Text' }
@@ -14,6 +13,10 @@ export namespace TComps {
   export type ShapeScrollViews<P extends string> = { [p in P]: 'ScrollView' }
   export type ShapeImages<P extends string> = { [p in P]: 'Image' }
 
+
+  /******************************************
+    PRIMITIVE'S SHAPES
+  *******************************************/
 
   export interface TextShape {
     common: ShapeTexts<'root' | 'singleLineStyle'>

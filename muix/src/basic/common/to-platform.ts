@@ -24,10 +24,10 @@ export const deepMerges = (skipSystem: boolean, target, ...sources) => {
   return target
 }
 
-//interface RulesetAddInX { $overrides ?; $name ?; $mediaq ?; $props? }
+interface RulesetX extends TBasic.RulesetX { $overrides?; $name?; $mediaq?; $props? }
 
 //create platform specific ruleset from cross platform one
-export const toPlatformRuleSet = (style: TBasic.RulesetX) => {
+export const toPlatformRuleSet = (style: RulesetX) => {
   if (!style) return null
   const isNative = !window.isWeb
   if (!style.$mediaq && !style.$web && !style.$native && !style.$overrides && !style.$props) return style as TBasic.Ruleset//optimalization

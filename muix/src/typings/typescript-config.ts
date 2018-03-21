@@ -2,10 +2,16 @@
 import { TAnimation } from './animation'
 import { TMediaQ } from './media-q'
 import { TTheme } from './theme'
-import { TBasic, TAddInConfig } from 'reactxx-basic/typings'
+import { TBasic } from 'reactxx-basic/typings'
+import { Muix } from 'reactxx-mui/typings/muix'
 
 export namespace TAddInConfig {
-  //******************** Cross platform 
+
+  /******************************************
+    ADD INS
+  *******************************************/
+
+  //******************** Cross platform
   export interface RulesetAddInX<T extends TBasic.RulesetNativeIds, R extends TBasic.Shape> { $overrides?: TBasic.PartialSheetX<R>; $name?: string; $mediaq?: TMediaQ.SheetX<T, R>; $props?: TSheets.PropsInRulesetX<R> }
   export interface SheetXAddIn<R extends TSheets.Shape = TSheets.Shape> { $animations?: TAnimation.SheetsX<TSheets.getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<TSheets.getMediaQ<R>> }
 
@@ -17,6 +23,12 @@ export namespace TAddInConfig {
   export interface SheetAddInWeb<R extends TSheets.Shape = TSheets.Shape> { $animations?: TAnimation.SheetsX<TSheets.getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<TSheets.getMediaQ<R>> }
   export interface SheetAddInNative<R extends TSheets.Shape = TSheets.Shape> { $animations?: TAnimation.SheetsX<TSheets.getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<TSheets.getMediaQ<R>> }
 
+
+  /******************************************
+    COMPONENT PROPS
+  *******************************************/
+
+  //******************** Cross platform 
   export interface PropX<R extends TBasic.Shape = TBasic.Shape> {
     style?: TTheme.RulesetCreatorX<R> //| RulesetWeb | getStyle<R> //cross platform style
     $web?: Partial<TBasic.getPropsWeb<R>> //web specific style
@@ -27,6 +39,7 @@ export namespace TAddInConfig {
     className?: TTheme.RulesetCreatorX<R> /*cross platform root ruleset*/ //| RulesetWeb | getStyle<R> /*platform specific root ruleset (when component is used in other component)*/
   }
 
+  //******************** Platform specific
   export interface CodePropsWeb<R extends TBasic.Shape = TBasic.Shape> {
     theme: TTheme.ThemeX
     mergeRulesetWithOverrides: TSheets.MergeRulesetWithOverridesWeb
@@ -47,4 +60,8 @@ export namespace TAddInConfig {
     mediaq: TMediaQ.ComponentsMediaQ<TSheets.getMediaQ<R>>
   }
 
+}
+
+export namespace TThemeConfig {
+  export interface Theme extends Muix.Theme { }
 }

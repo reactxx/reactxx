@@ -15,11 +15,11 @@ import { TBasic } from 'reactxx-basic/typings'
 
 export * from '../common/createMuiTheme'
 
-import { rulesetToClassNames } from 'reactxx/web'
 import { createMuiTheme } from '../common/createMuiTheme'
 import * as Mui from '../typings/mui'
 
-import { toPlatformRuleSet, toPlatformSheet, toPlatformEvents } from 'reactxx'
+import { toPlatformRuleSet, toPlatformSheet, toPlatformEvents } from 'reactxx-basic/to-platform'
+import { rulesetToClassNames } from 'reactxx-fela'
 
 export type JSS = typeof jssShared
 

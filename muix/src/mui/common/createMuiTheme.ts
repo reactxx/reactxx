@@ -22,7 +22,7 @@ import { Muix } from '../typings/muix'
 //platform specific code
 import createTypography from './createTypography'
 
-import { toPlatformRuleSet } from 'reactxx'
+import { toPlatformRuleSet } from 'reactxx-basic/to-platform'
 
 //create theme from cross platform ThemeOptions
 //resulting theme is compatible with material-ui

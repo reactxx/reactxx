@@ -4,7 +4,7 @@ import warning from 'warning'
 
 import { createContext, ModifierType, ConsumerType, ProviderProps, ConsumerProps, ModifierProps } from 'reactxx-stateman'
 
-import { toPlatformSheet } from './index'
+import { toPlatformSheet } from 'reactxx-basic/to-platform'
 import { defaultCompThemePars } from './withStyles'
 import { TTheme, TSheets } from 'reactxx-typings'
 

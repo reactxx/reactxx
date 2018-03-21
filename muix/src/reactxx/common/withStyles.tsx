@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 //import hoistNonReactStatics from 'hoist-non-react-statics'
-import { toPlatformRuleSet, toPlatformSheet, deepMerge } from './index'
+import { toPlatformRuleSet, toPlatformSheet, deepMerge } from 'reactxx-basic/to-platform'
 import { ComponentsMediaQ /*platform dependent*/, } from 'reactxx'
 import warning from 'warning'
 import { getAnimations } from './animation'

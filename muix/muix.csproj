@@ -131,8 +131,9 @@
     <TypeScriptCompile Include="src\basic\native\develop.ts" />
     <TypeScriptCompile Include="src\basic\native\sheets.ts" />
     <TypeScriptCompile Include="src\basic\native\to-platform.ts" />
+    <TypeScriptCompile Include="src\basic\native\typescript-config.ts" />
     <TypeScriptCompile Include="src\basic\native\typings.ts" />
-    <TypeScriptCompile Include="src\basic\typings\add-in-config.ts" />
+    <TypeScriptCompile Include="src\basic\typings\typescript-config.ts" />
     <TypeScriptCompile Include="src\basic\typings\comps.ts" />
     <TypeScriptCompile Include="src\basic\typings\basic.ts" />
     <TypeScriptCompile Include="src\basic\common\withStyles.tsx" />
@@ -143,6 +144,7 @@
     <TypeScriptCompile Include="src\basic\web\develop.ts" />
     <TypeScriptCompile Include="src\basic\web\sheets.ts" />
     <TypeScriptCompile Include="src\basic\web\to-platform.ts" />
+    <TypeScriptCompile Include="src\basic\web\typescript-config.ts" />
     <TypeScriptCompile Include="src\basic\web\typings.ts" />
     <TypeScriptCompile Include="src\basic\web\comps.tsx" />
     <TypeScriptCompile Include="src\fela\index.ts" />
@@ -166,7 +168,6 @@
     <TypeScriptCompile Include="src\ks\common\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\native\index.tsx" />
     <TypeScriptCompile Include="src\ks\typings.d.ts" />
-    <TypeScriptCompile Include="src\typings\theme-config.ts" />
     <TypeScriptCompile Include="src\typings\mdi-native.ts" />
     <TypeScriptCompile Include="src\typings\mdi-web.ts" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.ts" />
@@ -185,16 +186,13 @@
     <TypeScriptCompile Include="src\reactxx\common\animation.tsx" />
     <TypeScriptCompile Include="src\stateman\index.ts" />
     <TypeScriptCompile Include="src\reactxx\common\media-q.ts" />
-    <TypeScriptCompile Include="src\reactxx\common\components.ts" />
     <TypeScriptCompile Include="src\reactxx\common\theme.tsx" />
-    <TypeScriptCompile Include="src\reactxx\common\index.ts" />
     <TypeScriptCompile Include="src\reactxx\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\reactxx\native\animation.tsx" />
     <TypeScriptCompile Include="src\reactxx\native\components.tsx" />
     <TypeScriptCompile Include="src\reactxx\native\index.ts" />
     <TypeScriptCompile Include="src\reactxx\native\media-q.ts" />
     <TypeScriptCompile Include="src\reactxx\web\animation.tsx" />
-    <TypeScriptCompile Include="src\reactxx\web\fela.tsx" />
     <TypeScriptCompile Include="src\reactxx\web\components.tsx" />
     <TypeScriptCompile Include="src\reactxx\web\index.ts" />
     <TypeScriptCompile Include="src\reactxx\web\media-q.ts" />
@@ -218,7 +216,7 @@
     <TypeScriptCompile Include="src\typings\media-q.ts" />
     <TypeScriptCompile Include="src\typings\sheets.ts" />
     <TypeScriptCompile Include="src\typings\theme.ts" />
-    <TypeScriptCompile Include="src\typings\add-in-config.ts" />
+    <TypeScriptCompile Include="src\typings\typescript-config.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

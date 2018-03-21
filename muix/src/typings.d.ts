@@ -1,7 +1,6 @@
 ﻿declare module 'typescript-config' {
-  import { TAddInConfig } from 'reactxx-typings'
-  import { TThemeConfig } from 'reactxx-typings'
-  export { TAddInConfig, TThemeConfig}
+  //export { TThemeConfig, TAddInConfig } from 'reactxx-basic/typescript-config'
+  export { TThemeConfig, TAddInConfig } from 'reactxx-typings'
 }
 
 interface Window {

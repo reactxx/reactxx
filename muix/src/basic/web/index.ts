@@ -5,6 +5,8 @@ import { TBasic } from '../typings/basic'
 import { TComps } from '../typings/comps'
 import * as sheets from '../common/sheets'
 import { withStyles } from '../common/withStyles'
+
+//  platform specific code
 import * as Comps from './comps'
 
 export const Text: TBasic.ComponentTypeX<TComps.TextShape> = withStyles(sheets.textSheet)(Comps.text)
