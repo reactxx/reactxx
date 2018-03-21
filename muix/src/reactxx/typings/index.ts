@@ -1,3 +1,4 @@
+export const fake = 0
 export { TAnimation } from './animation'
 export { TMediaQ } from './media-q'
 export { TTheme } from './theme'
