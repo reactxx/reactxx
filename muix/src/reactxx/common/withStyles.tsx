@@ -9,6 +9,7 @@ import { getAnimations } from './animation'
 import { ThemeModifier, compThemeCreate } from './theme'
 
 import { TTheme, TAnimation, TMediaQ, TSheets } from 'reactxx-typings'
+import { TBasic } from 'reactxx-basic/typings'
 
 //http://jamesknelson.com/should-i-use-shouldcomponentupdate/
 export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R>, createSheetX: TTheme.SheetCreatorX<R>, compThemePar?: TSheets.getCompTheme<R>) => (Component: TSheets.CodeComponentType<R>) => {

@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { TSheets } from 'reactxx-typings'
 import { ScrollView } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic/develop'
 import { H1, H2, H3, H4, H5, U, I, B, A, Blocquote, P } from '../components/typo'

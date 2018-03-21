@@ -120,17 +120,13 @@ export namespace TBasic {
      COMPONENT TYPING
   *******************************************/
 
+  //******************** Cross platform sheet
   export type PropsX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>, TAddInConfig.PropX<R>>>
-  //  style?: RulesetX<getStyle<R>>
-  //  className?: RulesetX<getStyle<R>>
-  //  classes?: PartialSheetX<R> //| PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
-  //  $web?: Partial<getPropsWeb<R>> //web specific style
-  //  $native?: Partial<getPropsNative<R>> //native specific style
-  //  ignore?: boolean
-  //}>>
   export type ComponentTypeX<R extends Shape> = React.ComponentType<PropsX<R>>
   export type SFCX<R extends Shape> = React.SFC<PropsX<R>>
 
+  //******************** Platform specific sheets
+  export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
   export type CodePropsWeb<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsWeb<R>,
     {
       className: RulesetWeb
@@ -139,18 +135,8 @@ export namespace TBasic {
     } &
     TAddInConfig.CodePropsWeb<R> &
     OnPressAllWeb>
-  // {
-  //  className: RulesetWeb
-  //  style: RulesetWeb
-  //  classes: SheetWeb<R>
 
-  //  mergeRulesetWithOverrides
-  //  theme
-  //  animations
-  //  mediaq
-  //} & OnPressAllWeb>
-  export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
-
+  export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
   export type CodePropsNative<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsNative<R>,
     {
       className: NativeRules<getStyle<R>>
@@ -159,19 +145,11 @@ export namespace TBasic {
     } &
     TAddInConfig.CodePropsNative<R> &
     OnPressAllNative>
-  //  {
-  //  className: NativeRules<getStyle<R>>
-  //  style: NativeRules<getStyle<R>>
-  //  classes: SheetNative<R>
-
-  //  theme
-  //  mergeRulesetWithOverrides
-  //  animations
-  //  mediaq
-  //} & OnPressAllNative>
-  export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
 
   //some code for components could be shared for web and native
+  export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
+  export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
+  export type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
   export type CodeProps<R extends Shape = Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>),
     {
       className: RulesetWeb | NativeRules<getStyle<R>>
@@ -180,18 +158,5 @@ export namespace TBasic {
     } &
     TAddInConfig.CodeProps<R> &
     (OnPressAllNative | OnPressAllWeb)>
-  //  {
-  //  className: RulesetWeb | NativeRules<getStyle<R>>
-  //  style: RulesetWeb | NativeRules<getStyle<R>>
-  //  classes: Sheet<R>
-
-  //  mergeRulesetWithOverrides
-  //  theme
-  //  animations
-  //  mediaq
-  //} & (OnPressAllNative | OnPressAllWeb)>
-  export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
-  export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
-  export type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
 
 }

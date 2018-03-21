@@ -10,7 +10,8 @@ import JssProvider from 'react-jss/lib/JssProvider'
 import { ThemeProvider, ThemeModifier } from 'reactxx'
 import { ModifierType } from 'reactxx-stateman'
 
-import { TTheme, TSheets } from 'reactxx-typings'
+import { TTheme } from 'reactxx-typings'
+import { TSheets } from 'reactxx-typings'
 
 export * from '../common/createMuiTheme'
 

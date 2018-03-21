@@ -1,6 +1,6 @@
 import warning from 'warning'
 
-import { TMediaQ, TSheets } from 'reactxx-typings'
+import { TMediaQ } from 'reactxx-typings'
 
 import { TAddInConfig } from 'typescript-config'
 

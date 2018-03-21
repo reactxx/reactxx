@@ -6,7 +6,8 @@ import ReactN from 'react-native'
 import { withStyles, ScrollView, View, Text, Icon, AnimatedView, } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic/develop'
 
-import { TTheme, TSheets } from 'reactxx-typings'
+import { TTheme } from 'reactxx-typings'
+import { TSheets } from 'reactxx-typings'
 
 import { createContext, ConsumerType as StateConsumerType, ConsumerProps } from 'reactxx-stateman' 
 

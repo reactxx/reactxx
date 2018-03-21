@@ -5,7 +5,8 @@ import { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRecta
 
 import { withStyles } from 'reactxx'
 
-import { TTheme, TSheets } from 'reactxx-typings'
+import { TTheme } from 'reactxx-typings'
+import { TSheets } from 'reactxx-typings'
 
 import { MuiButtonBaseT } from '../../typings/button-base'
 import * as Mui from '../../typings/mui'

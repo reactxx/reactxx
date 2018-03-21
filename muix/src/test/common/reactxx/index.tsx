@@ -2,7 +2,8 @@ import React from 'react'
 import { Text, View, ScrollView, Icon, AppContainer, } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic/develop'
 
-import { TTheme, TSheets } from 'reactxx-typings'
+import { TTheme } from 'reactxx-typings'
+import { TSheets } from 'reactxx-typings'
 
 interface Example {
   title: string

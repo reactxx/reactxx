@@ -1,11 +1,12 @@
 import React from 'react'
 
-import { TSheets } from 'reactxx-typings'
-import { Text, } from 'reactxx'
+import { TBasic } from 'reactxx-basic/typings'
 import { LoremIpsum } from 'reactxx-basic/develop'
 
+import { Text, } from 'reactxx'
+
 const App: React.SFC = props => {
-  const changeColorRuleset: TSheets.TextRulesetX = {
+  const changeColorRuleset: TBasic.TextRulesetX = {
     $mediaq: {
       '-480': { color: 'red', fontSize: 14 },
       '480-1024': { color: 'green', },
