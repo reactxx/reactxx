@@ -4,14 +4,15 @@ import warning from 'warning'
 import { rulesetsToClassNames } from './fela'
 
 import { TBasic } from '../typings/basic'
+import { TComps } from '../typings/components'
 
-export const view: TBasic.CodeSFCWeb<TBasic.ViewShape> = props => {
+export const view: TBasic.CodeSFCWeb<TComps.ViewShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq,...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className)
   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest} />
 }
 
-export const icon: TBasic.CodeSFCWeb<TBasic.IconShape> = props => {
+export const icon: TBasic.CodeSFCWeb<TComps.IconShape> = props => {
   const { style, classes, className, data, mergeRulesetWithOverrides, theme, animations, viewBox, children/*this children*/, mediaq, url, onClick, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, onClick && classes.pressable, className)
   //replace fontSize with width x height
@@ -24,14 +25,14 @@ export const icon: TBasic.CodeSFCWeb<TBasic.IconShape> = props => {
   return url ? <a href={url}>{svg}</a> : svg
 }
 
-export const text: TBasic.CodeSFCWeb<TBasic.TextShape> = props => {
+export const text: TBasic.CodeSFCWeb<TComps.TextShape> = props => {
   const { style, classes, className, numberOfLines, mergeRulesetWithOverrides, theme, animations, mediaq, url, onClick, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle, className) 
   const tagProps = { className: TBasic.Consts.textClassName + ' ' + rulesetsToClassNames(rootStyle), style, ...rest, onClick: url ? undefined : onClick, ...rootStyle.$props }
   return url ? <a href={url} {...tagProps} /> : <div {...tagProps}/>
 }
 
-export const scrollView: TBasic.CodeSFCWeb<TBasic.ScrollViewShape> = props => {
+export const scrollView: TBasic.CodeSFCWeb<TComps.ScrollViewShape> = props => {
   const { style, classes, className, horizontal, mergeRulesetWithOverrides, theme, animations, children, mediaq,...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, horizontal && classes.rootHorizontal, className)
   const containerStyle = mergeRulesetWithOverrides(classes.container, horizontal && classes.containerHorizontal)

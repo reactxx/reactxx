@@ -2,8 +2,9 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { TBasic } from '../typings/basic'
+import { TComps } from '../typings/components'
 
-export const textSheet: TBasic.SheetX<TBasic.TextShape> = {
+export const textSheet: TBasic.SheetX<TComps.TextShape> = {
   root: {
     $web: {
       whiteSpace: 'pre-wrap',
@@ -37,13 +38,13 @@ const webViewRuleset = {
   overflow: 'hidden',
 } as TBasic.RulesetWeb 
 
-export const viewSheet: TBasic.SheetX<TBasic.ViewShape> = {
+export const viewSheet: TBasic.SheetX<TComps.ViewShape> = {
   root: {
     $web: webViewRuleset
   }
 }
 
-export const iconSheet: TBasic.SheetX<TBasic.IconShape> = {
+export const iconSheet: TBasic.SheetX<TComps.IconShape> = {
   root: {
     fontSize: 24,
     flexShrink: 0,
@@ -58,7 +59,7 @@ export const iconSheet: TBasic.SheetX<TBasic.IconShape> = {
 
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
-export const scrollViewSheet: TBasic.SheetX<TBasic.ScrollViewShape> = {
+export const scrollViewSheet: TBasic.SheetX<TComps.ScrollViewShape> = {
   root: {
     $web: {
       ...webViewRuleset,

@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { TBasic } from '../typings/basic'
 
-export const makeXPlatform = <R extends TBasic.Shape>(sheetX: TBasic.SheetX<R>) => (Component: TBasic.CodeComponentType<R>) => {
+export const withStyles = <R extends TBasic.Shape>(sheetX: TBasic.SheetX<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
     class Styled extends React.PureComponent<TBasic.PropsX> {
 

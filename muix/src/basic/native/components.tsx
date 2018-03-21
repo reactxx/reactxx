@@ -5,6 +5,7 @@ import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vecto
 import warning from 'warning'
 
 import { TBasic } from '../typings/basic'
+import { TComps } from '../typings/components'
 
 const anyView = (isAnim: boolean) => (props => {
   const ActView = isAnim ? Animated.View : ViewRN
@@ -13,7 +14,7 @@ const anyView = (isAnim: boolean) => (props => {
   const presses = onPress || onLongPress || onPressIn || onPressOut ? { onPress, onLongPress, onPressIn, onPressOut } : null
   const res = <ActView style={rootStyle} {...rest} />
   return presses ? <TouchableWithoutFeedback {...presses}>{res}</TouchableWithoutFeedback> : res
-}) as TBasic.CodeSFCNative<TBasic.ViewShape>
+}) as TBasic.CodeSFCNative<TComps.ViewShape>
 
 
 const anyText = (isAnim: boolean) => (props => {
@@ -27,7 +28,7 @@ const anyText = (isAnim: boolean) => (props => {
   }).catch(err => warning(false, `An error occurred: ${err}, ${url}`))
 
   return <ActText style={rootStyle} {...rest} onPress={onPress} />
-}) as TBasic.CodeSFCNative<TBasic.TextShape>
+}) as TBasic.CodeSFCNative<TComps.TextShape>
 
 
 const anyScrollView = (isAnim: boolean) => (props => {
@@ -36,7 +37,7 @@ const anyScrollView = (isAnim: boolean) => (props => {
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.ScrollViewStyle
   const containerStyle = mergeRulesetWithOverrides(classes.container) as ReactN.ViewStyle
   return <ActScrollView style={rootStyle} contentContainerStyle={containerStyle} {...rest} />
-}) as TBasic.CodeSFCNative<TBasic.ScrollViewShape>
+}) as TBasic.CodeSFCNative<TComps.ScrollViewShape>
 
 const AnimatedIconLow = Animated.createAnimatedComponent(MaterialCommunityIcons)
 const anyIcon = (isAnim: boolean) => (props => {
@@ -44,7 +45,7 @@ const anyIcon = (isAnim: boolean) => (props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, data, children, mediaq, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className, style) as ReactN.TextStyle
   return <ActIcon name={(data || children as string) as MaterialCommunityIconsProps['name']} style={rootStyle} {...rest} />
-}) as TBasic.CodeSFCNative<TBasic.IconShape>
+}) as TBasic.CodeSFCNative<TComps.IconShape>
 
 export const view = anyView(false)
 export const animatedView = anyView(true)

@@ -25,7 +25,7 @@ export namespace TBasic {
   //*************** cross platform ruleset for web and native
 
   export type RulesetX<T extends RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    commonRules2<T> & // native rules which are compatible with web
+    commonRules<T> & // native rules which are compatible with web
     RulesetAddInX<T, R> // sheet addIn: $wen, $native, overriding, media query etc.
 
   // rule names, common for native and web
@@ -33,7 +33,7 @@ export namespace TBasic {
   // native rules, which are compatible with web
   //export type commonRules<T extends RulesetNative> = TakeFrom<T, commonRuleNames<T>>
 
-  export type commonRules2<T extends RulesetNativeIds> =
+  export type commonRules<T extends RulesetNativeIds> =
     T extends 'Text' ? TWebNative.TextStyle :
     T extends 'Image' ? TWebNative.ImageStyle :
     T extends 'ScrollView' ? TWebNative.ScrollViewStyle :
@@ -102,7 +102,7 @@ export namespace TBasic {
   //******************** Platform specific
   export type RulesetWithAddIn<R extends Shape = Shape> = Ruleset
   export interface RulesetWithAddInWeb<R extends Shape = Shape> extends RulesetWeb { }
-  export type RulesetWithAddInNative<T extends RulesetNativeIds, R extends Shape = Shape> = T
+  export type RulesetWithAddInNative<T extends RulesetNativeIds, R extends Shape = Shape> = NativeRules<T>
 
   export interface SheetAddInWeb<R extends Shape = Shape> { }
   export interface SheetAddInNative<R extends Shape = Shape> { }
@@ -158,8 +158,8 @@ export namespace TBasic {
   export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
   export type CodePropsNative<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsNative<R>, {
-    className: getStyle<R>
-    style: getStyle<R>
+    className: NativeRules<getStyle<R>>
+    style: NativeRules<getStyle<R>>
     classes: SheetNative<R>
     theme
     mergeRulesetWithOverrides
@@ -170,9 +170,9 @@ export namespace TBasic {
 
   //some code for components could be shared for web and native
   export type CodeProps<R extends Shape = Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), {
-    className: RulesetWeb | getStyle<R>
+    className: RulesetWeb | NativeRules<getStyle<R>>
     classes: Sheet<R>
-    style: RulesetWeb | getStyle<R>
+    style: RulesetWeb | NativeRules<getStyle<R>>
     mergeRulesetWithOverrides
     theme
     animations
@@ -182,59 +182,4 @@ export namespace TBasic {
   export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
   export type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
 
-
-  /******************************************
-    PRIMITIVE'S SHAPES
-  *******************************************/
-
-  export type ShapeTexts<P extends string> = { [p in P]: 'Text' }
-  export type ShapeViews<P extends string> = { [p in P]: 'View' }
-  export type ShapeScrollViews<P extends string> = { [p in P]: 'ScrollView' }
-  export type ShapeImages<P extends string> = { [p in P]: 'Image' }
-
-
-  export interface TextShape {
-    common: ShapeTexts<'root' | 'singleLineStyle'>
-    web: 'pressable'
-    native: null
-    style: 'Text'
-    props: { numberOfLines?: number; url?: string } & OnPressX
-    propsWeb: React.HTMLAttributes<HTMLSpanElement>
-    propsNative: ReactN.TextProperties
-  }
-
-  export interface ViewShape {
-    common: ShapeViews<'root'>
-    web: null
-    native: null
-    style: 'View'
-    props: OnPressAllX
-    propsWeb: React.HTMLAttributes<HTMLDivElement>
-    propsNative: ReactN.ViewProperties
-  }
-
-  export interface IconShape {
-    common: ShapeViews<'root'>
-    web: 'pressable'
-    native: null
-    style: 'Text'
-    props: { data: string } & OnPressX
-    propsWeb: React.SVGAttributes<SVGElement> & { url?: string }
-    propsNative: {
-      size?: number
-      color?: string
-    }
-  }
-
-  export interface ScrollViewShape {
-    common: ShapeScrollViews<'root'> & ShapeViews<'container'>
-    web: 'rootHorizontal' | 'containerHorizontal'
-    native: null
-    style: 'ScrollView'
-    props: {
-      horizontal?: boolean
-    }
-    propsWeb: React.HTMLAttributes<HTMLDivElement>
-    propsNative: ReactN.ScrollViewProperties
-  }
 }
