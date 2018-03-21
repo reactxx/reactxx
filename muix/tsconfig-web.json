@@ -33,7 +33,6 @@
 
       "reactxx-basic/*": [ "src/basic/web/*" ],
 
-      "reactxx-typings": [ "src/typings/index" ],
       "reactxx-typings/mdi": [ "src/typings/mdi-web" ],
 
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/index" ],

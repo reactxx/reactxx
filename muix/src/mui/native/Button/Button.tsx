@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
-import { TTheme, Text, withStyles, compThemeSheetModifier, ThemeModifier } from 'reactxx'
+import { TTheme, CompNames, Text, withStyles, compThemeSheetModifier, ThemeModifier } from 'reactxx'
 
 import { TComps, TBasic } from 'reactxx-basic/typings'
 

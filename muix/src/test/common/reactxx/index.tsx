@@ -1,5 +1,5 @@
 import React from 'react'
-import { TTheme, Text, View, ScrollView, Icon, AppContainer, } from 'reactxx'
+import { TTheme, CompNames, Text, View, ScrollView, Icon, AppContainer, } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic/develop'
 
 import { TBasic } from 'reactxx-basic/typings'

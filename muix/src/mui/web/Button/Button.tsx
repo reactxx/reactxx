@@ -3,7 +3,7 @@ import React from 'react'
 
 import MuiButton from 'material-ui/Button/Button'
 import { muiCompatible } from '../index'
-import { TTheme, compThemeSheetModifier, ThemeModifier } from 'reactxx'
+import { TTheme, CompNames, compThemeSheetModifier, ThemeModifier } from 'reactxx'
 import * as Mui from '../../typings/mui'
 import { MuiButtonT } from '../../typings/button'
 

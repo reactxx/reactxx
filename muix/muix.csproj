@@ -216,13 +216,6 @@
     <TypeScriptCompile Include="src\mui\typings\muix.ts" />
     <TypeScriptCompile Include="src\mui\web\index.tsx" />
     <TypeScriptCompile Include="src\mui\typings\mui.ts" />
-    <TypeScriptCompile Include="src\typings\animation.ts" />
-    <TypeScriptCompile Include="src\typings\CompNames.d.ts" />
-    <TypeScriptCompile Include="src\typings\index.ts" />
-    <TypeScriptCompile Include="src\typings\media-q.ts" />
-    <TypeScriptCompile Include="src\typings\sheets.ts" />
-    <TypeScriptCompile Include="src\typings\theme.ts" />
-    <TypeScriptCompile Include="src\typings\typescript-config.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

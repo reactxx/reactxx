@@ -7,6 +7,8 @@ import * as Comps from 'reactxx-basic/comps'
 import * as sheets from 'reactxx-basic/sheets'
 import { TBasic, TComps } from 'reactxx-basic/typings'
 
+import { CompNames } from 'reactxx'
+
 export const Text: TBasic.ComponentTypeX<TComps.TextShape> = withStyles(CompNames.Text, sheets.textSheet)(Comps.text)
 export const AnimatedText: TBasic.ComponentTypeX<TComps.TextShape> = withStyles(CompNames.AnimatedText, sheets.textSheet)(Comps.animatedText)
 export const View: TBasic.ComponentTypeX<TComps.ViewShape> = withStyles(CompNames.View, sheets.viewSheet)(Comps.view)
