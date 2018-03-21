@@ -1,6 +1,6 @@
 ﻿import { TSheets } from 'reactxx-typings'
 
-import TTypescriptConfig from 'typescript-config'
+import { TThemeConfig } from 'typescript-config'
 
 export namespace TTheme {
 
@@ -9,7 +9,7 @@ export namespace TTheme {
   export type ThemeParCreatorX<R extends TSheets.Shape = TSheets.Shape> = TSheets.getCompTheme<R> | ((themeX: ThemeX) => TSheets.getCompTheme<R>)
   export type RulesetCreatorX<R extends TSheets.Shape = TSheets.Shape> = TSheets.RulesetX<TSheets.getStyle<R>> | ((theme: ThemeX, compThemePar: TSheets.getCompTheme<R>) => TSheets.RulesetX<TSheets.getStyle<R>>)
 
-  export interface Theme extends TTypescriptConfig.Theme {
+  export interface Theme extends TThemeConfig.Theme {
     type: 'Theme'
   }
   export type ThemeX = Partial<Overwrite<Theme, { type: 'ThemeX' }>>

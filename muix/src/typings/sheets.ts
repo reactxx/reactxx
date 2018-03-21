@@ -4,6 +4,8 @@ import { TTheme } from './theme'
 import { TAnimation } from './animation'
 import { TMediaQ } from './media-q'
 
+import { TAddInConfig } from 'typescript-config'
+
 export namespace TSheets {
 
   export type MouseEvent = (event?: React.MouseEvent<Element>) => void

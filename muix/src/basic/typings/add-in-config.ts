@@ -1,6 +1,6 @@
 ﻿import { TBasic } from './basic'
 
-export namespace TTypescriptConfig {
+export namespace TAddInConfig {
   //******************** Cross platform 
   export interface RulesetAddInX<T extends TBasic.RulesetNativeIds, R extends TBasic.Shape> { }
   export interface SheetXAddIn<R extends TBasic.Shape = TBasic.Shape> { }
