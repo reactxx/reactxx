@@ -79,10 +79,10 @@
     <Content Include="deploy\mui\README.md" />
     <Content Include="deploy\stateman\package.json" />
     <Content Include="deploy\stateman\README.md" />
-    <Content Include="deploy\typings\package.json" />
-    <Content Include="deploy\typings\README.md" />
     <Content Include="deploy\basic\package.json" />
     <Content Include="deploy\basic\README.md" />
+    <Content Include="deploy\fela\package.json" />
+    <Content Include="deploy\fela\README.md" />
     <None Include="gulpfile.js_" />
     <Content Include="index.html" />
     <Content Include="package.json" />
@@ -130,11 +130,7 @@
     <TypeScriptCompile Include="src\basic\common\develop.tsx" />
     <TypeScriptCompile Include="src\basic\common\sheets.ts" />
     <TypeScriptCompile Include="src\basic\common\to-platform.ts" />
-    <TypeScriptCompile Include="src\basic\native\develop.ts" />
-    <TypeScriptCompile Include="src\basic\native\sheets.ts" />
     <TypeScriptCompile Include="src\basic\native\to-platform.ts" />
-    <TypeScriptCompile Include="src\basic\native\typescript-config.ts" />
-    <TypeScriptCompile Include="src\basic\native\typings.ts" />
     <TypeScriptCompile Include="src\basic\typings\typescript-config.ts" />
     <TypeScriptCompile Include="src\basic\typings\comps.ts" />
     <TypeScriptCompile Include="src\basic\typings\basic.ts" />
@@ -143,11 +139,7 @@
     <TypeScriptCompile Include="src\basic\native\index.ts" />
     <TypeScriptCompile Include="src\basic\typings\common-styles.ts" />
     <TypeScriptCompile Include="src\basic\typings\index.ts" />
-    <TypeScriptCompile Include="src\basic\web\develop.ts" />
-    <TypeScriptCompile Include="src\basic\web\sheets.ts" />
     <TypeScriptCompile Include="src\basic\web\to-platform.ts" />
-    <TypeScriptCompile Include="src\basic\web\typescript-config.ts" />
-    <TypeScriptCompile Include="src\basic\web\typings.ts" />
     <TypeScriptCompile Include="src\basic\web\comps.tsx" />
     <TypeScriptCompile Include="src\fela\index.ts" />
     <TypeScriptCompile Include="src\basic\web\index.ts" />

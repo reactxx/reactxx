@@ -2,14 +2,12 @@ import React from 'react'
 import ReactN from 'react-native'
 import * as Cfg from 'typescript-config'
 
-import { toPlatformRuleSet, toPlatformSheet, deepMerge } from 'reactxx-basic/to-platform'
+import { TBasic, toPlatformRuleSet, toPlatformSheet, deepMerge } from 'reactxx-basic'
 import { TTheme, TAnimation, TMediaQ, TSheets, ComponentsMediaQ /*platform dependent*/, } from 'reactxx'
 import warning from 'warning'
 import { getAnimations } from './animation'
 
 import { ThemeModifier, compThemeCreate } from './theme'
-
-import { TBasic } from 'reactxx-basic/typings'
 
 //http://jamesknelson.com/should-i-use-shouldcomponentupdate/
 export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R>, createSheetX: TTheme.SheetCreatorX<R>, compThemePar?: TSheets.getCompTheme<R>) => (Component: TBasic.CodeComponentType<R>) => {

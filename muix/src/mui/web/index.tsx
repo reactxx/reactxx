@@ -11,14 +11,12 @@ import JssProvider from 'react-jss/lib/JssProvider'
 import { TTheme, ThemeProvider, ThemeModifier } from 'reactxx'
 import { ModifierType } from 'reactxx-stateman'
 
-import { TBasic } from 'reactxx-basic/typings'
-
 export * from '../common/createMuiTheme'
 
 import { createMuiTheme } from '../common/createMuiTheme'
 import * as Mui from '../typings/mui'
 
-import { toPlatformRuleSet, toPlatformSheet, toPlatformEvents } from 'reactxx-basic/to-platform'
+import { TBasic, toPlatformRuleSet, toPlatformSheet, toPlatformEvents } from 'reactxx-basic'
 import { rulesetToClassNames } from 'reactxx-fela'
 
 export type JSS = typeof jssShared

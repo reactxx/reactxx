@@ -1,6 +1,6 @@
 import ReactN from 'react-native'
 
-import { TBasic } from 'reactxx-basic/typings'
+import { TBasic } from 'reactxx-basic'
 
 export namespace TAnimation {
   //https://engineering.salesforce.com/experiments-with-high-performance-animation-in-react-native-80a0cb7052b0

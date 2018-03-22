@@ -2,7 +2,7 @@
 import { TAnimation } from './animation'
 import { TMediaQ } from './media-q'
 import { TTheme } from './theme'
-import { TBasic } from 'reactxx-basic/typings'
+import { TBasic } from 'reactxx-basic'
 import { Muix } from 'reactxx-mui/typings/muix'
 
 export namespace TAddInConfig {

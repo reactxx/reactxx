@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { TTheme, TSheets, withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
 
-import { TBasic, TComps } from 'reactxx-basic/typings'
+import { TBasic, TComps } from 'reactxx-basic'
 import MDI from 'reactxx-mdi'
 
 import { Animated } from 'react-native'

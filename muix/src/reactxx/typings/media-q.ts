@@ -2,7 +2,7 @@ import ReactN from 'react-native'
 
 import { TAddInConfig } from 'typescript-config'
 
-import { TBasic } from 'reactxx-basic/typings'
+import { TBasic } from 'reactxx-basic'
 
 export namespace TMediaQ {
 

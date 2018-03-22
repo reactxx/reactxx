@@ -1,6 +1,6 @@
 {
   "name": "reactxx",
-  "version": "0.1.44",
+  "version": "0.1.48",
   "main": "web/index.js",
   "description": "Framework which enables creation of visual components for both react and react-native",
   "registry": "npm",
@@ -8,18 +8,8 @@
     "tslib": "^1.9.0",
     "warning": "^3.0.0",
     "prop-types": "^15.6.1",
-    "reactxx-typings": "^0.1.0",
-    "reactxx-mdi": "^0.1.67",
-    "reactxx-stateman": "^0.1.36",
-    "fela": "^6.1.4",
-    "fela-dom": "^7.0.5",
-    "fela-plugin-extend": "^6.0.3",
-    "fela-plugin-fallback-value": "^5.0.16",
-    "fela-plugin-lvha": "^5.0.15",
-    "fela-plugin-prefixer": "^5.0.17",
-    "fela-plugin-rtl": "^1.0.6",
-    "fela-plugin-unit": "^5.0.15",
-    "jss-preset-default": "^4.3.0"
+    "reactxx-basic": "^0.1.0",
+    "reactxx-stateman": "^0.1.36"
   },
   "author": "pzika@langmaster.cz",
   "license": "ISC"

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TBasic } from 'reactxx-basic/typings'
+import { toPlatformRuleSet, TBasic } from 'reactxx-basic'
 
 import PropTypes from 'prop-types'
 
@@ -21,8 +21,6 @@ import { Muix } from '../typings/muix'
 
 //platform specific code
 import createTypography from './createTypography'
-
-import { toPlatformRuleSet } from 'reactxx-basic/to-platform'
 
 //create theme from cross platform ThemeOptions
 //resulting theme is compatible with material-ui

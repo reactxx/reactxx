@@ -1,8 +1,6 @@
 import React from 'react'
 
-import { Text, View } from 'reactxx-basic/index'
-import { LoremIpsum } from 'reactxx-basic/develop'
-import { TBasic } from 'reactxx-basic/typings'
+import { LoremIpsum, TBasic, Text, View } from 'reactxx-basic'
 
 const App: React.SFC = props => {
   const bars: TBasic.ViewRulesetX = { flexGrow: 0, justifyContent: 'center', alignItems: 'center', height: 48, padding: 5 }

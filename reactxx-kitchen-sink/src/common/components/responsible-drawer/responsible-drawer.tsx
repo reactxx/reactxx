@@ -5,9 +5,7 @@ import * as Cfg from 'typescript-config'
 
 // different import of 'ScrollView, View, Text, Icon, AnimatedView' components for web and native
 import { TTheme, TSheets, withStyles, ScrollView, View, Text, Icon, AnimatedView, } from 'reactxx'
-import { LoremIpsum } from 'reactxx-basic/develop'
-
-import { TBasic, TComps } from 'reactxx-basic/typings'
+import { TBasic, TComps, LoremIpsum } from 'reactxx-basic'
 
 import { createContext, ConsumerType as StateConsumerType, ConsumerProps } from 'reactxx-stateman' 
 

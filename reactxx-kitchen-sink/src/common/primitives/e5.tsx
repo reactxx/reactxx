@@ -1,8 +1,6 @@
 import React from 'react'
 
-import { Text, View, ScrollView } from 'reactxx-basic/index'
-import { TBasic } from 'reactxx-basic/typings'
-import { LoremIpsum } from 'reactxx-basic/develop'
+import { LoremIpsum, TBasic, Text, View, ScrollView } from 'reactxx-basic'
 
 const App: React.SFC = props => {
   const border: TBasic.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10 }

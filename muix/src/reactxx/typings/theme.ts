@@ -1,5 +1,5 @@
 ﻿import { TSheets } from 'reactxx'
-import { TBasic } from 'reactxx-basic/typings'
+import { TBasic } from 'reactxx-basic'
 
 import { TThemeConfig } from 'typescript-config'
 

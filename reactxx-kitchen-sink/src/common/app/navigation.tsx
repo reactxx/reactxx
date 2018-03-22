@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TBasic } from 'reactxx-basic/typings'
+import { TBasic, LoremIpsum } from 'reactxx-basic'
 
 import { TTheme, View, Text, ScrollView, Icon, } from 'reactxx'
-import { LoremIpsum } from 'reactxx-basic/develop'
 import { H1, H2, H3, H4, H5, U, I, B, A, Blocquote, P } from '../components/typo'
 
 import { examples, nameToExample, exampleToElement, components, navigationExample, KSink } from './index'

@@ -25,6 +25,10 @@
     "noImplicitAny": false,
 
     "baseUrl": ".",
+    "paths": {
+      //"reactxx-mdi": [ "node_modules/reactxx-mdi/es/index" ],
+      "reactxx-basic/*": [ "node_modules/reactxx-basic/web/*" ]
+    },
 
     "lib": [
       "dom",

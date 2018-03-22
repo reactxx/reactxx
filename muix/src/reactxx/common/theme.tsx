@@ -6,10 +6,9 @@ import warning from 'warning'
 
 import { createContext, ModifierType, ConsumerType, ProviderProps, ConsumerProps, ModifierProps } from 'reactxx-stateman'
 
-import { toPlatformSheet } from 'reactxx-basic/to-platform'
+import { TCommonStyles, toPlatformSheet } from 'reactxx-basic'
 import { defaultCompThemePars } from './withStyles'
 import { TTheme, TSheets } from 'reactxx'
-import { TCommonStyles } from 'reactxx-basic/typings'
 
 const { Provider, Modifier, Consumer } = createContext<TTheme.ThemeState>(() => ({ theme: { type: 'ThemeX' } }))
 

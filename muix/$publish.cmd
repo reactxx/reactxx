@@ -11,11 +11,12 @@ cd %root%
 call $compile
 
 rem *** npm package publishing
+call %root%$publish_ fela
 call %root%$publish_ basic
-rem call %root%$publish_ typings
 call %root%$publish_ stateman
 call %root%$publish_ reactxx
 
 rem call %root%$publish_ mui true
 rem rmdir %root%deploy\mui\es\native\fonts /s /q
 rem xcopy %root%src\mui\native\fonts %root%deploy\mui\es\native\fonts /s /q /i 
+

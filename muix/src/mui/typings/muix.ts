@@ -2,7 +2,7 @@ import ReactN from 'react-native'
 
 import * as Mui from './mui'
 
-import { TBasic } from 'reactxx-basic/typings'
+import { TBasic } from 'reactxx-basic'
 
 export namespace Muix {
 

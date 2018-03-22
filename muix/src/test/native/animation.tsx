@@ -5,7 +5,7 @@ import { Animated, Easing, Text, View } from 'react-native'
 
 import { Muix } from 'reactxx-mui/typings/muix'
 
-import { TBasic } from 'reactxx-basic/typings'
+import { TBasic } from 'reactxx-basic'
 
 // ********** NATIVE
 

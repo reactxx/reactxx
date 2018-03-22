@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { TBasic } from 'reactxx-basic/typings'
-import { LoremIpsum } from 'reactxx-basic/develop'
+import { LoremIpsum, TBasic } from 'reactxx-basic'
 
 import { Text, } from 'reactxx'
 

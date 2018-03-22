@@ -7,7 +7,7 @@ import { capitalize } from 'material-ui/utils/helpers';
 
 import { TTheme, CompNames, Text, withStyles, compThemeSheetModifier, ThemeModifier } from 'reactxx'
 
-import { TComps, TBasic } from 'reactxx-basic/typings'
+import { TComps, TBasic } from 'reactxx-basic'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 import { MuiButtonT } from '../../typings/button'

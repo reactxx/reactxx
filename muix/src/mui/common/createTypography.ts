@@ -1,8 +1,7 @@
 ﻿import muiCreateTypography from 'material-ui/styles/createTypography'
-import { toPlatformSheet, deepMerge } from 'reactxx-basic/to-platform'
+import { TBasic, TComps , toPlatformSheet, deepMerge } from 'reactxx-basic'
 import * as Mui from '../typings/mui'
 import { Muix } from '../typings/muix'
-import { TBasic, TComps } from 'reactxx-basic/typings'
 import { TSheets } from 'reactxx'
 
 export default function createTypography(palette: Mui.Palette, optionOrCreator: Muix.TypographyOptionsOrCreatorX) {
