@@ -11,6 +11,8 @@
     "paths": {
       "reactxx-fela": [ "src/fela/index" ],
 
+      "reactxx-mdi": [ "node_modules/reactxx-mdi/es/index" ],
+
       "reactxx-basic/*": [ "src/basic/web/*" ],
 
       "reactxx-mui/typings/*": [ "src/mui/typings/*" ],
@@ -18,7 +20,9 @@
       "reactxx": [ "src/reactxx/native/index" ],
       "reactxx/web": [ "src/reactxx/web/index" ],
       "reactxx-stateman": [ "src/stateman/index" ],
-      "reactxx-mui/*": [ "src/mui/native/*" ]
+      "reactxx-mui/*": [ "src/mui/native/*" ],
+
+      "typescript-config": [ "src/reactxx/native/index" ]
     },
 
     "importHelpers": true,

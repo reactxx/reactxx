@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
+import * as Cfg from 'typescript-config'
+
 import warning from 'warning'
 
 import { createContext, ModifierType, ConsumerType, ProviderProps, ConsumerProps, ModifierProps } from 'reactxx-stateman'
@@ -7,6 +9,7 @@ import { createContext, ModifierType, ConsumerType, ProviderProps, ConsumerProps
 import { toPlatformSheet } from 'reactxx-basic/to-platform'
 import { defaultCompThemePars } from './withStyles'
 import { TTheme, TSheets } from 'reactxx'
+import { TCommonStyles } from 'reactxx-basic/typings'
 
 const { Provider, Modifier, Consumer } = createContext<TTheme.ThemeState>(() => ({ theme: { type: 'ThemeX' } }))
 

@@ -1,7 +1,10 @@
 import React from 'react'
 import ReactN from 'react-native'
+import * as Cfg from 'typescript-config'
 
 import { TBasic } from '../typings/basic'
+
+
 
 export const toPlatformEvents = ($web: TBasic.OnPressAllWeb, $native: TBasic.OnPressAllNative, propsX: TBasic.OnPressAllX, codeProps: TBasic.CodeProps) => {
   const { onPress, onLongPress, onPressIn, onPressOut } = propsX
@@ -24,7 +27,7 @@ export const deepMerges = (skipSystem: boolean, target, ...sources) => {
   return target
 }
 
-interface RulesetX extends TBasic.RulesetX { $overrides?; $name?; $mediaq?; $props? }
+export interface RulesetX extends TBasic.RulesetX { $overrides?; $name?; $mediaq?; $props? }
 
 //create platform specific ruleset from cross platform one
 export const toPlatformRuleSet = (style: RulesetX) => {

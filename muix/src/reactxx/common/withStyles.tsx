@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
-//import hoistNonReactStatics from 'hoist-non-react-statics'
+import * as Cfg from 'typescript-config'
+
 import { toPlatformRuleSet, toPlatformSheet, deepMerge } from 'reactxx-basic/to-platform'
 import { TTheme, TAnimation, TMediaQ, TSheets, ComponentsMediaQ /*platform dependent*/, } from 'reactxx'
 import warning from 'warning'

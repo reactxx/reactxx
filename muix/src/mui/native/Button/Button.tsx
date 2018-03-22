@@ -1,5 +1,6 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
+import * as Cfg from 'typescript-config'
 
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';

@@ -1,10 +1,11 @@
 import React from 'react'
 import ReactN from 'react-native'
+import * as Cfg from 'typescript-config'
 
 import { TBasic } from '../typings/basic'
 import { toPlatformEvents, deepMerges, toPlatformSheet, toPlatformRuleSet } from './to-platform'
 
-export const withStyles = <R extends TBasic.Shape>(sheetX: TBasic.SheetX<R>) => (Component: TBasic.CodeComponentType<R>) => {
+export const withStyles = <R extends TBasic.Shape>(sheetX: TBasic.SheetX<R>) => (Component: TBasic.CodeComponentType<R>) => { 
 
     class Styled extends React.PureComponent<TBasic.PropsX> {
 
@@ -33,6 +34,8 @@ export const withStyles = <R extends TBasic.Shape>(sheetX: TBasic.SheetX<R>) => 
         mergeRulesetWithOverrides
       } as TBasic.CodeProps<R>
 
+      //console.log(JSON.stringify(codeProps))
+
       toPlatformEvents($web, $native as TBasic.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
 
       return <Component {...codeProps} />
@@ -46,10 +49,19 @@ export const withStyles = <R extends TBasic.Shape>(sheetX: TBasic.SheetX<R>) => 
 
 const mergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
   const rulesetResult = rulesets.filter(r => !!r)
+  let res
   switch (rulesetResult.length) {
-    case 0: return {}
-    case 1: return rulesetResult[0]
-    default: return deepMerges(true, {}, ...rulesetResult)
+    case 0: res = {}; break
+    case 1: res = rulesetResult[0]; break
+    default: res = deepMerges(true, {}, ...rulesetResult); break
   }
+  delete res.$mediaq
+  return res
+}
+
+const clearSystemProps = obj => {
+  if (!obj) return obj
+  const { $overrides, $name, $web, $native, $mediaq, ...rest } = obj as TBasic.RulesetX
+  return rest
 }
 

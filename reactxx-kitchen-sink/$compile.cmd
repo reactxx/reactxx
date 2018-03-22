@@ -1,5 +1,5 @@
 set root=d:\reactxx\reactxx-kitchen-sink\
-set tsc="c:\Program Files (x86)\Microsoft SDKs\TypeScript\2.7\tsc.exe"
+set tsc="c:\Program Files (x86)\Microsoft SDKs\TypeScript\2.8\tsc.exe"
 
 d:
 

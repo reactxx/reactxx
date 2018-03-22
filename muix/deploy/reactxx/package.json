@@ -1,6 +1,6 @@
 {
   "name": "reactxx",
-  "version": "0.1.43",
+  "version": "0.1.44",
   "main": "web/index.js",
   "description": "Framework which enables creation of visual components for both react and react-native",
   "registry": "npm",
@@ -9,7 +9,7 @@
     "warning": "^3.0.0",
     "prop-types": "^15.6.1",
     "reactxx-typings": "^0.1.0",
-    "reactxx-mdi": "^0.1.63",
+    "reactxx-mdi": "^0.1.67",
     "reactxx-stateman": "^0.1.36",
     "fela": "^6.1.4",
     "fela-dom": "^7.0.5",

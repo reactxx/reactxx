@@ -1,4 +1,5 @@
 import React from 'react'
+import * as Cfg from 'typescript-config'
 
 //import hoistNonReactStatics from 'hoist-non-react-statics'
 

@@ -3,8 +3,8 @@ set root=d:\reactxx\reactxx-kitchen-sink\
 d:
 
 cd %root%
-rem rmdir node_modules /s /q
-rem call yarn install
+rmdir node_modules /s /q
+call yarn install
 
 cd %root%jspm_packages
 rmdir npm /s /q
