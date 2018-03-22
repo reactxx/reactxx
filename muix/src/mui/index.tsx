@@ -11,10 +11,10 @@ import JssProvider from 'react-jss/lib/JssProvider'
 import { TTheme, ThemeProvider, ThemeModifier } from 'reactxx'
 import { ModifierType } from 'reactxx-stateman'
 
-export * from '../common/createMuiTheme'
+export * from './common/createMuiTheme'
 
-import { createMuiTheme } from '../common/createMuiTheme'
-import * as Mui from '../typings/mui'
+import { createMuiTheme } from './common/createMuiTheme'
+import * as Mui from './typings/mui'
 
 import { TBasic, toPlatformRuleSet, toPlatformSheet, toPlatformEvents } from 'reactxx-basic'
 import { rulesetToClassNames } from 'reactxx-fela'

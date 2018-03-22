@@ -8,7 +8,7 @@
 
     "baseUrl": ".",
     "paths": {
-      "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ]
+      "typescript-config": [ "node_modules/reactxx/es/typings/typescript-config" ]
     },
 
     "importHelpers": true,
@@ -31,9 +31,15 @@
   },
   "include": [
     "src/**/*",
-    "node_modules/reactxx-mdi/es/typings.d.ts"
+    "node_modules/reactxx-mdi/**/*"
   ],
   "exclude": [
-    "src/typings/mdi/web.d.ts" 
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts"
   ]
 }

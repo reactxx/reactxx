@@ -1,9 +1,4 @@
-﻿//declare module 'typescript-config' {
-//  //export { TThemeConfig, TAddInConfig } from 'reactxx-basic/typescript-config'
-//  export { TThemeConfig, TAddInConfig } from 'reactxx'
-//}
-
-interface Window {
+﻿interface Window {
   isWeb:boolean
 }
 

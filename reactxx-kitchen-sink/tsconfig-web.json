@@ -25,6 +25,9 @@
     "noImplicitAny": false,
 
     "baseUrl": ".",
+    "paths": {
+      "typescript-config": [ "node_modules/reactxx/typings/typescript-config" ]
+    },
 
     "lib": [
       "dom",

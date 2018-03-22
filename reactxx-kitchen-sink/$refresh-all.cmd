@@ -4,7 +4,8 @@ d:
 
 cd %root%
 rmdir node_modules /s /q
-call yarn install
+rem call yarn install
+call npm install
 
 cd %root%jspm_packages
 rmdir npm /s /q
@@ -16,4 +17,4 @@ rmdir %root%node_modules\@types\react-transition-group\node_modules  /s /q
 
 copy %root%$blacklist.js %root%node_modules\metro\src\blacklist.js /y
 
-call %root%$compile
+rem call %root%$compile

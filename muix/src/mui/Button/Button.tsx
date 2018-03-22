@@ -5,8 +5,8 @@ import * as Cfg from 'typescript-config'
 import MuiButton from 'material-ui/Button/Button'
 import { muiCompatible } from '../index'
 import { TTheme, CompNames, compThemeSheetModifier, ThemeModifier } from 'reactxx'
-import * as Mui from '../../typings/mui'
-import { MuiButtonT } from '../../typings/button'
+import * as Mui from '../typings/mui'
+import { MuiButtonT } from '../typings/button'
 
 import { TComps, TBasic } from 'reactxx-basic'
 

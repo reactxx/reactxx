@@ -10,29 +10,28 @@ md es
 del *.js *.ts /s /q
 
 xcopy /s /q %root%deploy\es\%package%\*.* %root%deploy\%package%\es\
-
-IF "%webroot%"=="true" (
-xcopy /s /q %root%deploy\lib\%package%\web\*.* %root%deploy\%package%\ 
-echo 1 "%webroot%"
-) ELSE (
 xcopy /s /q %root%deploy\lib\%package%\*.* %root%deploy\%package%\
-echo 2 "%webroot%"
+
+IF "%package%"=="mui" (
+rmdir %root%deploy\%package%\es\Button /s /q
+rmdir %root%deploy\%package%\es\ButtonBase /s /q
+cd %root%deploy\%package%\es
+del *.js *.ts /q
+echo 1 "%package%"
 )
+
+cd %root%deploy/%package%
 
 rmdir %root%deploy\%package%\native /s /q
 del %root%deploy\%package%\es\web\*.js /s /q
 
-rmdir %root%deploy\%package%\typings /s /q
-xcopy %root%src\%package%\typings %root%deploy\%package%\typings /s /q /i 
-rmdir %root%deploy\%package%\es\typings /s /q
-xcopy %root%src\%package%\typings %root%deploy\%package%\es\typings /s /q /i 
+rem rmdir %root%deploy\%package%\typings /s /q
+rem xcopy %root%src\%package%\typings %root%deploy\%package%\typings /s /q /i 
+rem rmdir %root%deploy\%package%\es\typings /s /q
+rem xcopy %root%src\%package%\typings %root%deploy\%package%\es\typings /s /q /i 
 
 copy %root%src\%package%\README.md %root%deploy\%package%\README.md
-
 
 rem *** publish
 call npm.cmd version patch
 call npm.cmd publish
-
-rem cd %root%deploy/%package%
-rem call yarn link

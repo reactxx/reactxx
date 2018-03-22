@@ -15,7 +15,8 @@
           "reactxx-mdi": "reactxx-mdi/es/index",
           "reactxx-stateman": "./deploy/es/stateman",
           "reactxx": "./deploy/es/reactxx/native",
-          "reactxx-basic": "./deploy/es/basic/native"
+          "reactxx-basic": "./deploy/es/basic/native",
+          "reactxx-mui": "./deploy/es/mui/native"
         }
       }
     ]

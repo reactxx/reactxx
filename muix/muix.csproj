@@ -181,8 +181,8 @@
     <TypeScriptCompile Include="src\mui\native\index.tsx" />
     <TypeScriptCompile Include="src\mui\typings\button.ts" />
     <TypeScriptCompile Include="src\mui\typings\button-base.ts" />
-    <TypeScriptCompile Include="src\mui\web\ButtonBase\ButtonBase.tsx" />
-    <TypeScriptCompile Include="src\mui\web\Button\Button.tsx" />
+    <TypeScriptCompile Include="src\mui\ButtonBase\ButtonBase.tsx" />
+    <TypeScriptCompile Include="src\mui\Button\Button.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\animation.tsx" />
     <TypeScriptCompile Include="src\stateman\index.ts" />
     <TypeScriptCompile Include="src\reactxx\common\media-q.ts" />
@@ -208,7 +208,7 @@
     <TypeScriptCompile Include="src\test\common\root.tsx" />
     <TypeScriptCompile Include="src\test\web\index.tsx" />
     <TypeScriptCompile Include="src\mui\typings\muix.ts" />
-    <TypeScriptCompile Include="src\mui\web\index.tsx" />
+    <TypeScriptCompile Include="src\mui\index.tsx" />
     <TypeScriptCompile Include="src\mui\typings\mui.ts" />
   </ItemGroup>
   <ItemGroup>

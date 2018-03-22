@@ -8,5 +8,5 @@ cd %root%
 call %tsc% --p %root%tsconfig-web.json -d
 call %tsc% --p %root%tsconfig-native.json -d
 
-rem rmdir %root%deploy\es\mui\native\fonts /s /q
-rem xcopy %root%src\mui\native\fonts %root%deploy\es\mui\native\fonts /s /q /i 
+rmdir %root%deploy\es\mui\native\fonts /s /q
+xcopy %root%src\mui\native\fonts %root%deploy\es\mui\native\fonts /s /q /i 

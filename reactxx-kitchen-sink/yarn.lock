@@ -6718,9 +6718,18 @@ react@16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-reactxx-basic@^0.1.0, reactxx-basic@^0.1.5:
+reactxx-basic@^0.1.0:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/reactxx-basic/-/reactxx-basic-0.1.5.tgz#d1a7223a9d203f412118d2a2832ca22126c367bb"
+  dependencies:
+    reactxx-fela "^0.1.0"
+    reactxx-mdi "^0.1.63"
+    tslib "^1.9.0"
+    warning "^3.0.0"
+
+reactxx-basic@^0.1.9:
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/reactxx-basic/-/reactxx-basic-0.1.9.tgz#59b54f5d463741795276a3623fd1c5a442870829"
   dependencies:
     reactxx-fela "^0.1.0"
     reactxx-mdi "^0.1.63"
@@ -6741,6 +6750,10 @@ reactxx-mdi@^0.1.67:
   version "0.1.67"
   resolved "https://registry.yarnpkg.com/reactxx-mdi/-/reactxx-mdi-0.1.67.tgz#9614fc830df57b9dfd0e711d7967bdf07ed7d95b"
 
+reactxx-mui@^0.1.10:
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/reactxx-mui/-/reactxx-mui-0.1.10.tgz#dd24179d3a3087a982b78bc147264f183f796fc1"
+
 reactxx-stateman@^0.1.36:
   version "0.1.40"
   resolved "https://registry.yarnpkg.com/reactxx-stateman/-/reactxx-stateman-0.1.40.tgz#8bed725b9d1cb8e9009207dbb4aeb864cc757afe"
@@ -6749,17 +6762,17 @@ reactxx-stateman@^0.1.36:
     tslib "^1.9.0"
     warning "^3.0.0"
 
-reactxx-stateman@^0.1.66:
-  version "0.1.66"
-  resolved "https://registry.yarnpkg.com/reactxx-stateman/-/reactxx-stateman-0.1.66.tgz#eb497c7819f04df763248b7096a769200d93dee8"
+reactxx-stateman@^0.1.69:
+  version "0.1.69"
+  resolved "https://registry.yarnpkg.com/reactxx-stateman/-/reactxx-stateman-0.1.69.tgz#e83dfa74dd336ef002f74690056dbedcb8354230"
   dependencies:
     prop-types "^15.6.1"
     tslib "^1.9.0"
     warning "^3.0.0"
 
-reactxx@^0.1.48:
-  version "0.1.48"
-  resolved "https://registry.yarnpkg.com/reactxx/-/reactxx-0.1.48.tgz#f67cf0d8556e6b38846e1f09fab24c69bec953ae"
+reactxx@^0.1.51:
+  version "0.1.51"
+  resolved "https://registry.yarnpkg.com/reactxx/-/reactxx-0.1.51.tgz#fec25f3b50586102b68ef15e4f9ab42fcd1cc3fc"
   dependencies:
     prop-types "^15.6.1"
     reactxx-basic "^0.1.0"

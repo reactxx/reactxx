@@ -41,7 +41,7 @@
 
       "reactxx-stateman": [ "src/stateman/index" ],
 
-      "reactxx-mui/*": [ "src/mui/web/*" ]
+      "reactxx-mui/*": [ "src/mui/*" ]
     },
 
     "lib": [

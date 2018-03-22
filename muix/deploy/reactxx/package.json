@@ -1,6 +1,6 @@
 {
   "name": "reactxx",
-  "version": "0.1.48",
+  "version": "0.1.52",
   "main": "web/index.js",
   "description": "Framework which enables creation of visual components for both react and react-native",
   "registry": "npm",
@@ -8,8 +8,8 @@
     "tslib": "^1.9.0",
     "warning": "^3.0.0",
     "prop-types": "^15.6.1",
-    "reactxx-basic": "^0.1.0",
-    "reactxx-stateman": "^0.1.36"
+    "reactxx-basic": "^0.1.10",
+    "reactxx-stateman": "^0.1.70"
   },
   "author": "pzika@langmaster.cz",
   "license": "ISC"

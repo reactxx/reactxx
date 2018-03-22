@@ -12,7 +12,7 @@ import { createContext, ConsumerType as StateConsumerType, ConsumerProps } from 
 // different import of 'Close, Menu' consts for web and native
 import MDI from 'reactxx-mdi'
 //import { Close } from 'reactxx-mdi/Close'
-//import { Menu } from 'reactxx-mdi/Menu'
+import { Menu } from 'reactxx-mdi/Menu'
 
 //************************************************************************************************************
 // ResponsibleDrawer typings
@@ -200,7 +200,7 @@ const responsibleDrawer: TBasic.CodeSFC<ResponsibleDrawerT.Shape> = props => {
       </Provider>
     </AnimatedView>
     <AnimatedView key={3} className={content}>
-      <Provider value={{ iconData: MDI.Menu, onPress: openDrawer, style: openButton }}>
+      <Provider value={{ iconData: Menu, onPress: openDrawer, style: openButton }}>
         {children}
       </Provider>
     </AnimatedView>

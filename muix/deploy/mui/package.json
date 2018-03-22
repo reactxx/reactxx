@@ -1,16 +1,11 @@
 {
   "name": "reactxx-mui",
-  "version": "0.1.7",
+  "main": "",
+  "version": "0.1.11",
   "description": "material-ui for both native and web",
   "registry": "npm",
-  "jspmPackage": true,
   "dependencies": {
-
-  },
-  "jspm": {
-    "name": "reactxx-mui",
-    "main": "index.js",
-    "dependencies": {},
-    "map": {}
+    "reactxx": "^0.1.52",
+    "material-ui": "^1.0.0-beta.38"
   }
 }
