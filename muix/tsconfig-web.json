@@ -29,20 +29,19 @@
 
     "baseUrl": ".",
     "paths": {
-
       "typescript-config": [ "src/reactxx/web/index" ],
 
       "reactxx-fela": [ "src/fela/index" ],
 
-      "reactxx-basic/*": [ "src/basic/web/*" ],
+      "reactxx-basic": [ "src/basic/web/index" ],
 
-      "reactxx-mui/*": [ "src/mui/web/*" ],
       "reactxx-mui/typings/*": [ "src/mui/typings/*" ],
+
+      "reactxx": [ "src/reactxx/native/index" ],
 
       "reactxx-stateman": [ "src/stateman/index" ],
 
-      "reactxx": [ "src/reactxx/web/index" ],
-      "reactxx/web": [ "src/reactxx/web/index" ]
+      "reactxx-mui/*": [ "src/mui/web/*" ]
     },
 
     "lib": [

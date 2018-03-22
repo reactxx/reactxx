@@ -9,20 +9,21 @@
 
     "baseUrl": ".",
     "paths": {
+      "typescript-config": [ "src/reactxx/native/index" ],
+
       "reactxx-fela": [ "src/fela/index" ],
 
       "reactxx-mdi": [ "node_modules/reactxx-mdi/es/index" ],
 
-      "reactxx-basic/*": [ "src/basic/web/*" ],
+      "reactxx-basic": [ "src/basic/native/index" ],
 
       "reactxx-mui/typings/*": [ "src/mui/typings/*" ],
 
       "reactxx": [ "src/reactxx/native/index" ],
-      "reactxx/web": [ "src/reactxx/web/index" ],
-      "reactxx-stateman": [ "src/stateman/index" ],
-      "reactxx-mui/*": [ "src/mui/native/*" ],
 
-      "typescript-config": [ "src/reactxx/native/index" ]
+      "reactxx-stateman": [ "src/stateman/index" ],
+
+      "reactxx-mui/*": [ "src/mui/native/*" ]
     },
 
     "importHelpers": true,

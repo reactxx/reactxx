@@ -11,10 +11,10 @@ SystemJS.config({
   },
   map: {
     "reactxx-fela": "deploy/lib/fela/index",
-    "reactxx-basic": "deploy/lib/basic/web",
+    "reactxx-basic": "deploy/lib/basic/web/index",
     "reactxx": "deploy/lib/reactxx/web/index",
-    "reactxx/web": "deploy/lib/reactxx/web/index",
     "reactxx-stateman": "deploy/lib/stateman/index",
+
     "reactxx-mui": "deploy/lib/mui/web"
   }
 });
