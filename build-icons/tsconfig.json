@@ -8,7 +8,7 @@
 
     "baseUrl": ".",
     "paths": {
-      "reactxx-mdi/*": [ "reactxx-mdi/es/*" ]
+      "reactxx-mdi": [ "deploy" ]
     },
 
     "allowSyntheticDefaultImports": true,
@@ -26,6 +26,7 @@
   },
   "exclude": [
     "deploy/es",
+    "design",
     "node_modules",
     "jspm_packages"
   ]

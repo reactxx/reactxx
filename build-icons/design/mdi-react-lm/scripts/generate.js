@@ -27,7 +27,7 @@ for (let svgFile of svgFiles) {
   // Skip on empty path
   if (!path) continue;
 
-  const fileContent =
+  const fileContent2 =
     `(function (factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         var v = factory(require, exports);
@@ -43,6 +43,10 @@ for (let svgFile of svgFiles) {
 });
 `
 
+  const fileContent = `"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.${name} = '${path}';`
+
   fs.writeFileSync(`${outputPath}${subDirWeb}${name}.js`, fileContent);
 
   //webTSDef.push(`declare module 'muix-icons/web/${name}' { export const ${name}: MDI.icons }`);
@@ -51,29 +55,39 @@ for (let svgFile of svgFiles) {
   webEnum.push(`${name} = '${path}',`);
   nativeEnum.push(`${name} = '${value}',`);
   nativeConst.push(`export const ${name} = '${value}';`);
-
-
-  fs.writeFileSync(`${outputPath}${subDirWeb}typings.d.ts`, `
-declare const enum MDI {
-${webEnum.join('\n')}
 }
-`);
 
-  fs.writeFileSync(`${outputPath}${subDirWeb}index.d.ts`, `
+const MDIConst = consts => `
+declare module 'reactxx-mdi' {
+const enum MDI {
+${consts}
+}
+export default MDI
+}
+`;
+
+//fs.writeFileSync(`${outputPath}${subDirWeb}typings.ts`, `
+//export const enum MDI {
+//${webEnum.join('\n')}
+//}
+//`);
+
+fs.writeFileSync(`${outputPath}${subDirWeb}index.d.ts`, `
+${MDIConst(webEnum.join('\n'))}
 ${currentTSDef.join('\n')}
 `);
 
-  fs.writeFileSync(`${outputPath}${subDirNative}index.d.ts`, `
+fs.writeFileSync(`${outputPath}${subDirNative}index.d.ts`, `
+${MDIConst(nativeEnum.join('\n'))}
 ${currentTSDef.join('\n')}
 `);
 
-  fs.writeFileSync(`${outputPath}${subDirNative}typings.d.ts`, `
-declare const enum MDI {
-${nativeEnum.join('\n')}
-}
-`);
+//fs.writeFileSync(`${outputPath}${subDirNative}typings.ts`, `
+//export const enum MDI {
+//${nativeEnum.join('\n')}
+//}
+//`);
 
-  fs.writeFileSync(`${outputPath}${subDirNative}index.js`, `
+fs.writeFileSync(`${outputPath}${subDirNative}index.js`, `
 ${nativeConst.join('\n')}
 `);
-}

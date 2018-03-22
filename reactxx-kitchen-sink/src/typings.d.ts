@@ -1,8 +1,6 @@
 ﻿declare module 'typescript-config' {
-  namespace TTypescriptConfig {
-    export interface Theme { }
-  }
-  export { TTypescriptConfig }
+  //export { TThemeConfig, TAddInConfig } from 'reactxx-basic/typescript-config'
+  export { TThemeConfig, TAddInConfig } from 'reactxx'
 }
 
 interface Window {

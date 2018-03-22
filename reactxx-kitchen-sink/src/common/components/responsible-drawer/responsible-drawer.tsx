@@ -11,8 +11,9 @@ import { TBasic, TComps } from 'reactxx-basic/typings'
 import { createContext, ConsumerType as StateConsumerType, ConsumerProps } from 'reactxx-stateman' 
 
 // different import of 'Close, Menu' consts for web and native
-import { Close } from 'reactxx-mdi/Close'
-import { Menu } from 'reactxx-mdi/Menu'
+import MDI from 'reactxx-mdi'
+//import { Close } from 'reactxx-mdi/Close'
+//import { Menu } from 'reactxx-mdi/Menu'
 
 //************************************************************************************************************
 // ResponsibleDrawer typings
@@ -195,12 +196,12 @@ const responsibleDrawer: TBasic.CodeSFC<ResponsibleDrawerT.Shape> = props => {
     <AnimatedView key={1} className={backDrop} onPress={closeDrawer} />
     <AnimatedView key={2} className={drawer}>
       {/* Provider notifies inner Consumer's (i.e. ResponsibleDrawer.LayoutChanged component's) that some of their props changed */}
-      <Provider value={{ iconData: Close, onPress: closeDrawer, style: closeButton }}>
+      <Provider value={{ iconData: MDI.Close, onPress: closeDrawer, style: closeButton }}>
         {drawerNode}
       </Provider>
     </AnimatedView>
     <AnimatedView key={3} className={content}>
-      <Provider value={{ iconData: Menu, onPress: openDrawer, style: openButton }}>
+      <Provider value={{ iconData: MDI.Menu, onPress: openDrawer, style: openButton }}>
         {children}
       </Provider>
     </AnimatedView>

@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom' 
 
+import MDI from 'reactxx-mdi'
+
 import { Play } from 'reactxx-mdi/Play'
 
 const AppComp: React.SFC = props => <h3>{Play} = {MDI.Play} </h3>

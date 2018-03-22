@@ -4,7 +4,9 @@
   "description": "material-ui for both native and web",
   "registry": "npm",
   "jspmPackage": true,
-  "dependencies": {},
+  "dependencies": {
+
+  },
   "jspm": {
     "name": "reactxx-mui",
     "main": "index.js",

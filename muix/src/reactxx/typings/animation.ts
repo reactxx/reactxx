@@ -24,7 +24,7 @@ export namespace TAnimation {
   export type RuleSetX<T extends TBasic.RulesetNativeIds> = ToPairs<TBasic.commonRules<T>> & {
     transform?: Array<TNativeTransform>
     $native?: ToPairs<TBasic.NativeRules<T>, Diff<keyof TBasic.NativeRules<T>, 'transform'>> & { transform?: TNativeTransform[] }
-    $web?: ToPairs<TBasic.RulesetWeb, keyof React.CSSPropertiesLow> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
+    $web?: ToPairs<TBasic.RulesetWeb, keyof React.CSSProperties> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
   }
 
   export type Drivers<T extends Shapes = Shapes> = { [P in keyof T]: Driver<T[P]> } & AnimationsEx

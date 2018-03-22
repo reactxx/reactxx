@@ -25,7 +25,7 @@
   version "15.5.2"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.2.tgz#3c6b8dceb2906cc87fe4358e809f9d20c8d59be1"
 
-"@types/react-dom@^16.0.3":
+"@types/react-dom@^16.0.4":
   version "16.0.4"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.4.tgz#2e8fd45f5443780ed49bf2cdd9809e6091177a7d"
   dependencies:
@@ -47,10 +47,6 @@
 "@types/react@*":
   version "16.0.40"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.40.tgz#caabc2296886f40b67f6fc80f0f3464476461df9"
-
-"@types/react@https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/react/types-react-0.1.1.tgz":
-  version "0.1.1"
-  resolved "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/react/types-react-0.1.1.tgz#414eee648ad745b2492226cf34a62913462e402c"
 
 "@types/warning@^3.0.0":
   version "3.0.0"
@@ -1421,9 +1417,9 @@ react@16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-reactxx-mdi@^0.1.62:
-  version "0.1.62"
-  resolved "https://registry.yarnpkg.com/reactxx-mdi/-/reactxx-mdi-0.1.62.tgz#7fdf6a32e2d71d42753e2d4a5e25ee5135c872eb"
+reactxx-mdi@^0.1.67:
+  version "0.1.67"
+  resolved "https://registry.yarnpkg.com/reactxx-mdi/-/reactxx-mdi-0.1.67.tgz#9614fc830df57b9dfd0e711d7967bdf07ed7d95b"
 
 reactxx-shadows@^0.1.18:
   version "0.1.18"

@@ -81,6 +81,8 @@
     <Content Include="deploy\stateman\README.md" />
     <Content Include="deploy\typings\package.json" />
     <Content Include="deploy\typings\README.md" />
+    <Content Include="deploy\basic\package.json" />
+    <Content Include="deploy\basic\README.md" />
     <None Include="gulpfile.js_" />
     <Content Include="index.html" />
     <Content Include="package.json" />

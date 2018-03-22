@@ -76,7 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="deploy\es\index.d.ts" />
-    <TypeScriptCompile Include="deploy\es\typings.d.ts" />
+    <TypeScriptCompile Include="deploy\index.d.ts" />
     <TypeScriptCompile Include="index.tsx" />
   </ItemGroup>
   <ItemGroup />

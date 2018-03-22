@@ -6,7 +6,6 @@ export { TSheets } from './sheets'
 export * from './typescript-config'
 
 export const enum CompNames {
-  textClassName = 'reactxx-text',
   Text = 'ReactXX$Text',
   View = 'ReactXX$View',
   Icon = 'ReactXX$Icon',

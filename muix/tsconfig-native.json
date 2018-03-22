@@ -13,7 +13,6 @@
 
       "reactxx-basic/*": [ "src/basic/web/*" ],
 
-      "reactxx-typings/mdi": [ "src/typings/mdi-native" ],
       "reactxx-mui/typings/*": [ "src/mui/typings/*" ],
 
       "reactxx-mdi/*": [ "node_modules/reactxx-mdi/es/index" ],
