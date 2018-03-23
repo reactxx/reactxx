@@ -12,11 +12,11 @@ import { createContext, ConsumerType as StateConsumerType, ConsumerProps } from 
 //******* Two possibilities how to use get icon data:
 
 // for Typescript only. Typescript replaces e.g. MDI.Close by its value on EVERY MDI.Close's occurence.
-// for Native: MDI.Close = 'Close'
+// for Native: MDI.Close = 'close'
 // for SVG Web: MDI.Close = 'M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z'
 import MDI from 'reactxx-mdi'
 
-// Menu variable contains correct platform specific value 
+// 'Menu' variable contains correct platform specific value 
 import { Menu } from 'reactxx-mdi/Menu'
 
 
