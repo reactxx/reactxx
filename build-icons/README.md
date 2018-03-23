@@ -13,7 +13,6 @@ reactxx-mdi is common npm package for both EXPO react-native project and react w
 ### using Typescript's ```const enum MDI```
 Typescript replaces e.g. ```MDI.Close``` by its SVG value on **EVERY** MDI.Close's occurence.
 
-No ```import MDI from 'reactxx-mdi'``` is generated to Javascript 
 
 ```typescript
 import React from 'react'
@@ -24,6 +23,8 @@ export default App
 ```
 
 Transpiled Javascript ES6 code:
+
+No ```import MDI from 'reactxx-mdi'``` is generated to Javascript 
 ```javascript
 import React from 'react'
 
@@ -62,6 +63,8 @@ export default App
 ```
 
 Transpiled Javascript ES6 code:
+
+No ```import MDI from 'reactxx-mdi'``` is generated to Javascript 
 ```javascript
 import React from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
