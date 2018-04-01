@@ -5,12 +5,17 @@ import * as Cfg from 'typescript-config'
 import { TBasic } from '../typings/basic'
 import { toPlatformEvents, deepMerges, toPlatformSheet, toPlatformRuleSet } from './to-platform'
 
-export const withStyles = <R extends TBasic.Shape>(sheetX: TBasic.SheetX<R>) => (Component: TBasic.CodeComponentType<R>) => { 
+export const withStyles = <R extends TBasic.Shape>(sheetX: TBasic.SheetX<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
-    class Styled extends React.PureComponent<TBasic.PropsX> {
+  class Styled extends React.PureComponent<TBasic.PropsX> {
+
+  //class Styled extends React.Component<TBasic.PropsX<R>> {
+
+  //  componentWillReceiveProps(nextProps: TBasic.PropsX) {
+  //  }
 
     render() {
-      const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, ...other } = this.props as TBasic.PropsX & TBasic.OnPressAllX
+      const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, ...other } = this.props as any as TBasic.PropsX & TBasic.OnPressAllX
 
       if (ignore) return null
 
@@ -65,3 +70,12 @@ const clearSystemProps = obj => {
   return rest
 }
 
+
+
+//class x<T> {
+//  public Sum(): number
+//  public Sum(transform: (value?: T, index?: number, list?: T[]) => number): number
+//  public Sum(transform?: (value?: T, index?: number, list?: T[]) => number): number {
+//    return 0
+//  }
+//}

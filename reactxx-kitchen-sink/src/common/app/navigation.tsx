@@ -38,7 +38,7 @@ class App extends React.Component<{}, KSink.Example> {
     </ResponsibleDrawer>
   }
 
-  gotoExample: GotoExample = (example => this.setState(example)).bind(this);
+  gotoExample: GotoExample = example => this.setState(example)
 }
 
 const drawerButton = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as TBasic.RulesetX

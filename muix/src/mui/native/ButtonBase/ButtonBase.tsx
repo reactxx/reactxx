@@ -43,8 +43,8 @@ export class RippleEffect extends React.Component<MuiButtonBaseT.RippleEfectProp
     this.opacityValue.setValue(0);
   }
 
-  onPressedIn = (() => this.setState({ active: true })).bind(this)
-  onPressedOut = (() => this.setState({ active: false })).bind(this)
+  onPressedIn = () => this.setState({ active: true })
+  onPressedOut = () => this.setState({ active: false })
 
   render() {
     const { scaleValue, opacityValue, onPressedIn, onPressedOut, rect: { width, height }, state: { active }, props: { children, viewStyle, rippleStyle, activeStyle, disabled, onPress, theme, disableRipple, style } } = this
