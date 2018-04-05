@@ -35,7 +35,7 @@ export namespace TAddInConfig {
     $native?: Partial<TBasic.getPropsNative<R>> //native specific style
     ignore?: boolean
     classes?: TTheme.PartialSheetCreatorX<R> //| PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
-    modifyThemeState?: TTheme.ThemeModifier
+    //modifyThemeState?: TTheme.ThemeModifier
     className?: TTheme.RulesetCreatorX<R> /*cross platform root ruleset*/ //| RulesetWeb | getStyle<R> /*platform specific root ruleset (when component is used in other component)*/
   }
 

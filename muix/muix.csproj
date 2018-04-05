@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\basic\common\develop.tsx" />
+    <TypeScriptCompile Include="src\basic\common\react163.ts" />
     <TypeScriptCompile Include="src\basic\common\sheets.ts" />
     <TypeScriptCompile Include="src\basic\common\to-platform.ts" />
     <TypeScriptCompile Include="src\basic\native\to-platform.ts" />
@@ -162,6 +163,8 @@
     <TypeScriptCompile Include="src\ks\common\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\native\index.tsx" />
     <TypeScriptCompile Include="src\ks\typings.d.ts" />
+    <TypeScriptCompile Include="src\reactxx\common\theme2.tsx" />
+    <None Include="src\reactxx\common\withStyles.tsx_" />
     <TypeScriptCompile Include="src\reactxx\typings\animation.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\index.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\media-q.ts" />

@@ -1,5 +1,6 @@
 import { BreakPoint, ComponentsMediaQLow, breaks } from '../common/media-q'
-import { TMediaQ, deepMerges } from 'reactxx'
+import { TMediaQ } from 'reactxx'
+import { deepMerges } from 'reactxx-basic'
 import warning from 'warning'
 import { Dimensions } from 'react-native'
 import { TAddInConfig } from 'typescript-config'
@@ -8,8 +9,8 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
 
   private breaks: boolean[] = []
   
-  destroy() {
-    super.destroy()
+  close() {
+    super.close()
     for (const idx in this.breaks) this.unSubscribe(parseInt(idx), this.componentId)
     this.breaks = []
   }

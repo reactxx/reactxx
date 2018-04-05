@@ -23,7 +23,7 @@ export const navigationExample = {
   name: 'app/navigation',
   title: 'Home',
   descr: '',
-  Component: NavigApp,
+  Component: NavigApp as any,
 } as KSink.Example
 
 export const components: KSink.Example[] = [

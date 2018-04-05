@@ -1,5 +1,6 @@
 import { BreakPoint, ComponentsMediaQLow } from '../common/media-q'
-import { TMediaQ, deepMerges } from 'reactxx'
+import { TMediaQ } from 'reactxx'
+import { deepMerges } from 'reactxx-basic'
 import warning from 'warning'
 import { TAddInConfig } from 'typescript-config'
 

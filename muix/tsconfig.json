@@ -29,6 +29,7 @@
 
     "baseUrl": ".",
     "paths": {
+
       "typescript-config": [ "src/reactxx/web/index" ],
 
       "reactxx-fela": [ "src/fela/index" ],

@@ -120,7 +120,7 @@ export namespace TBasic {
      COMPONENT TYPING
   *******************************************/
 
-  //******************** Cross platform sheet
+  //******************** Cross platform component types
   export type PropsX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>, TAddInConfig.PropX<R>>>
   export type ComponentTypeX<R extends Shape> = React.ComponentType<PropsX<R>>
   export type SFCX<R extends Shape> = React.SFC<PropsX<R>>

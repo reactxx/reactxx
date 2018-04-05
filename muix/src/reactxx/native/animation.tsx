@@ -1,14 +1,14 @@
 import ReactN from 'react-native'
 
 import { Animated } from 'react-native'
-import { DriverLow, getGaps } from '../common/animation'
+import { DriverLow, getGaps, Animations } from '../common/animation'
 export * from '../common/animation'
 
 import { TAnimation } from 'reactxx' 
 
 export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements TAnimation.DriverNative<T>  {
 
-  constructor(sheet: TAnimation.SheetX<T>, public animations: TAnimation.Drivers<{}>) {
+  constructor(sheet: TAnimation.SheetX<T>, public animations: Animations) {
     super(sheet, animations)
     const { $delay, $duration, $easing, $opened } = this.$config
     this.value = new Animated.Value($opened ? 1 : 0)

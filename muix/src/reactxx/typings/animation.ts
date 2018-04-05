@@ -27,11 +27,11 @@ export namespace TAnimation {
     $web?: ToPairs<TBasic.RulesetWeb, keyof React.CSSProperties> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
   }
 
-  export type Drivers<T extends Shapes = Shapes> = { [P in keyof T]: Driver<T[P]> } & AnimationsEx
-  export type DriversWeb<T extends Shapes> = { [P in keyof T]: DriverWeb<T[P]> } & AnimationsEx
-  export type DriversNative<T extends Shapes> = { [P in keyof T]: DriverNative<T[P]> } & AnimationsEx
+  export interface Drivers<T extends Shapes = Shapes> extends AnimationsEx { sheets: { [P in keyof T]: Driver<T[P]> } }
+  export interface DriversWeb<T extends Shapes> extends AnimationsEx { sheets: { [P in keyof T]: DriverWeb<T[P]> } }
+  export interface DriversNative<T extends Shapes> extends AnimationsEx { sheets: { [P in keyof T]: DriverNative<T[P]> } }
 
-  export type AnimationsEx = { reset: (caller?: Driver<{}>) => void; statefullComponent: React.Component }
+  export interface AnimationsEx { open: (sheetsDef: TAnimation.SheetsX<TAnimation.Shapes>) => void; close: (caller?: Driver<{}>) => void; statefullComponent: React.Component }
 
   export interface Driver<T extends Shape> {
     opened: boolean
@@ -41,7 +41,7 @@ export namespace TAnimation {
     toggle()
     reset()
     sheet: Sheet<T>
-    animations: Drivers<{}>
+    //animations: Drivers<{}>
   }
 
   export interface DriverWeb<T extends Shape> extends Driver<T> {

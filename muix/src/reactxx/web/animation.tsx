@@ -1,6 +1,6 @@
 import ReactN from 'react-native'
 
-import { DriverLow, getGaps } from '../common/animation'
+import { DriverLow, getGaps, Animations } from '../common/animation'
 import warning from 'warning'
 import { keyFrameToClassNames } from 'reactxx-fela'
 import { TAnimation } from 'reactxx' 
@@ -8,7 +8,7 @@ import { TBasic } from 'reactxx-basic'
 
 export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements TAnimation.DriverWeb<T>  {
 
-  constructor(sheet: TAnimation.SheetX<T>, public animations: TAnimation.Drivers<{}>) {
+  constructor(sheet: TAnimation.SheetX<T>, public animations: Animations) {
     super(sheet, animations)
     const { $delay, $duration, $easing, $opened } = this.$config
 

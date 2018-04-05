@@ -80,7 +80,7 @@ const expandedPanelSheet: TTheme.SheetCreatorX<DocHome.ExpandedPanelShape> = {
 //modifyThemeStates(state, null, theme => [modifyThemeState<ReactXX.TextShape>(state, theme, ReactXX.CompNames.Text, (theme, par) => ({ root: headerLabelStyle }))])}
 
 const expandedPanel: TBasic.CodeSFC<DocHome.ExpandedPanelShape> = props => {
-  const { style, classes, className, mergeRulesetWithOverrides, theme, animations: { openClose }, title, children, ...rest } = props
+  const { style, classes, className, mergeRulesetWithOverrides, theme, animations: { sheets: { openClose } }, title, children, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className) as TBasic.ViewRulesetX
   const headerStyle = mergeRulesetWithOverrides(classes.header) as TBasic.ViewRulesetX
   const contentStyle = mergeRulesetWithOverrides(classes.content, openClose.sheet.content) as TBasic.ViewRulesetX

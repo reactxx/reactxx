@@ -172,9 +172,9 @@ export const createContext = <T>(_defaultValue: T | (() => T), _channelId?: stri
   type TConsumer<TSel> = React.ComponentClass<ConsumerProps<T, TSel>>
 
   return {
-    Provider: Provider as React.ComponentClass<ProviderProps<T>>,
-    Modifier: Modifier as React.ComponentClass<ModifierProps<T>>,
-    Consumer: Consumer as React.ComponentClass<ConsumerProps<T>>,
+    Provider: Provider as any as React.ComponentClass<ProviderProps<T>>,
+    Modifier: Modifier as any as React.ComponentClass<ModifierProps<T>>,
+    Consumer: Consumer as any as React.ComponentClass<ConsumerProps<T>>,
   }
 }
 let uid = 0

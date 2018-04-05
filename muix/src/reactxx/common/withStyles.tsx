@@ -2,77 +2,66 @@ import React from 'react'
 import ReactN from 'react-native'
 import * as Cfg from 'typescript-config'
 
-import { TBasic, toPlatformRuleSet, toPlatformSheet, deepMerge } from 'reactxx-basic'
+import { TBasic, toPlatformRuleSet, toPlatformSheet, deepMerge, toPlatformEvents, deepMerges } from 'reactxx-basic'
 import { TTheme, TAnimation, TMediaQ, TSheets, ComponentsMediaQ /*platform dependent*/, } from 'reactxx'
+import { Themer, HOCState, HOCProps } from './theme2'
 import warning from 'warning'
-import { getAnimations } from './animation'
+import { Animations } from './animation'
 
-import { ThemeModifier, compThemeCreate } from './theme'
+export interface State extends HOCState {
+  animations?: Animations //TAnimation.Drivers
+  mediaq?: ComponentsMediaQ<TSheets.getMediaQ<TSheets.Shape>>
+}
 
 //http://jamesknelson.com/should-i-use-shouldcomponentupdate/
-export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R>, createSheetX: TTheme.SheetCreatorX<R>, compThemePar?: TSheets.getCompTheme<R>) => (Component: TBasic.CodeComponentType<R>) => {
+export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, compThemePar?: TSheets.getCompTheme<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
   const name = _name as string
-  defaultCompThemePars[name] = compThemePar
 
-  type TStyled = TBasic.PropsX & TTheme.ThemeCompSelectedX
+  class Styled extends React.PureComponent<HOCProps, State> {
 
-  class Styled extends React.PureComponent<TStyled> {
-    classes: TBasic.Sheet
-    animations: TAnimation.Drivers
-    mediaq: ComponentsMediaQ<TSheets.getMediaQ<R>>
-
-    constructor(p, c) {
-      super(p, c)
-      this.componentWillReceiveProps()
+    state = {
+      animations: new Animations(this),
+      mediaq: new ComponentsMediaQ<TSheets.getMediaQ<R>>(this)
     }
 
-    componentWillReceiveProps() {
-      this.animations && this.animations.reset()
-
-      const { theme, compThemePar = defaultCompThemePars[name], compThemeSheet, classes: classesX } = this.props
-
-      //*** get platform dependent sheet (from creator and actual theme)
-      const staticSheet = toPlatformSheet(applyTheme(theme, compThemePar, createSheetX))
-
-      //*** apply "component override" from actual "theme app state"
-      const classes: TBasic.Sheet = toPlatformSheet(applyTheme(theme, compThemePar, classesX, ))
-
-      this.classes = compThemeSheet || classes ? deepMerges(false, {}, staticSheet, compThemeSheet, classes) : staticSheet // modify static sheet 
-      for (const p in this.classes) if (!p.startsWith('$')) this.classes[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
-
-      //*** init animations
-      this.animations = getAnimations(staticSheet.$animations, this)
-      //*** init media queries
-      this.mediaq = new ComponentsMediaQ<TSheets.getMediaQ<R>>(this)
-
+    componentWillUnmount() {
+      this.state.mediaq.close()
+      this.state.animations.close()
     }
 
-    componentWillUnmount() { this.mediaq.destroy() }
+    static getDerivedStateFromProps = (nextProps: HOCProps, prevState: State) => {
+      if (nextProps.ignore) return {} //noop
+      const { animations, mediaq } = prevState
+      animations.close(); mediaq.close()
+      const nextState: State = Themer.applyTheme(name, sheetCreator, nextProps, prevState)
+      animations.open(nextState.classes.$animations); mediaq.open(nextState.classes.$mediaq)
+      return nextState //nextState props are merged to prevState props. So animations and mediaq props are preserved
+    }
 
     render() {
-      const { animations, mediaq } = this
-      const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, theme, compThemeSheet, compThemePar, modifyThemeState, ...other } = this.props as TStyled & TBasic.OnPressAllX
-      //const theme = themeState.theme
+      // getDerivedStateFromProps result
+      const { animations, mediaq, className, style, classes } = this.state
+
+      const {
+        classes: ignore0, className: ignore1, style: ignore2, themeComp: ignore3, // already used props
+        theme, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore,
+        ...other
+      } = this.props as HOCProps & TBasic.OnPressAllX
 
       if (ignore) return null
-
-      const className: TBasic.Ruleset = toPlatformRuleSet(applyTheme(theme, compThemePar, classNameX))
-      const style: TBasic.Ruleset = toPlatformRuleSet(applyTheme(theme, compThemePar, styleX))
 
       // calling createRulesetWithOverridesMerger signals which rulesets are used. So it can use their $overrides to modify self sheet
       const mergeRulesetWithOverrides = createRulesetWithOverridesMerger(mediaq)
 
-      mediaq.setNotifyBreakpoints(this.classes.$mediaq as TMediaQ.NotifySheetX<TSheets.getMediaQ<R>>) //release media notifications
-
-      //const flip = typeof flipProp === 'boolean' ? flipProp : (theme && theme.direction === 'rtl')
-
       const codeProps = {
-        ...other, ...(window.isWeb ? $web : $native),
+        ...other,
+        ...(window.isWeb ? $web : $native),
         mergeRulesetWithOverrides,
-        theme, animations,
-        mediaq: mediaq as TMediaQ.ComponentsMediaQ<TSheets.getMediaQ<R>>,
-        classes: this.classes, //available classes for mergeRulesetWithOverrides (this.classes = merge(sheet, theme.overrides[name], classes prop)
+        theme,
+        animations,
+        mediaq: mediaq, 
+        classes, //available classes for mergeRulesetWithOverrides (this.classes = merge(sheet, theme.overrides[name], classes prop)
         className,
         style,
       } as TBasic.CodeProps<R>
@@ -84,38 +73,8 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
 
   }
 
-  //hoistNonReactStatics(Styled, Component as any)
+  return Themer.withTheme(name, Styled, sheetCreator, compThemePar)
 
-  return (props => <ThemeModifier quiet modify={props.modifyThemeState} selector={modifierSelector(name)} render={selectedThemeState =>
-    <Styled {...selectedThemeState} {...props} />
-  } />) as React.ComponentType<TBasic.PropsX<R>>
-
-}
-
-const modifierSelector = (componentName: string) => (themeStates: TTheme.ThemeState) => {
-  const compTheme = themeStates[componentName] as TTheme.ThemeCompX
-  if (!compTheme) return { theme: themeStates.theme } as TTheme.ThemeCompSelectedX
-  return { theme: themeStates.theme, compThemePar: compTheme.par, compThemeSheet: compTheme.sheet } as TTheme.ThemeCompSelectedX
-}
-
-//let renderCount = 0
-
-export const defaultCompThemePars: {[Name in keyof TSheets.Shapes]?: TSheets.getCompTheme<TSheets.Shapes[Name]> } = {}
-
-export const toPlatformEvents = ($web: TBasic.OnPressAllWeb, $native: TBasic.OnPressAllNative, propsX: TBasic.OnPressAllX, codeProps: TBasic.CodeProps) => {
-  const { onPress, onLongPress, onPressIn, onPressOut } = propsX
-  if (window.isWeb) {
-    const cp = codeProps as TBasic.CodePropsWeb
-    const cl = $web && $web.onClick || onPress; if (cl) cp.onClick = cl
-    const cl2 = $web && $web.onMouseDown || onPressIn; if (cl2) cp.onMouseDown = cl2
-    const cl3 = $web && $web.onMouseUp || onPressOut; if (cl3) cp.onMouseUp = cl3
-  } else {
-    const cp = codeProps as TBasic.CodePropsNative
-    const cl = $native && $native.onPress || onPress; if (cl) cp.onPress = cl
-    const cl1 = $native && $native.onLongPress || onLongPress; if (cl1) cp.onLongPress = cl1
-    const cl2 = $native && $native.onPressIn || onPressIn; if (cl2) cp.onPressIn = cl2
-    const cl3 = $native && $native.onPressOut || onPressOut; if (cl3) cp.onPressOut = cl3
-  }
 }
 
 //****************************  createRulesetWithOverridesMerger
@@ -154,9 +113,6 @@ const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => {
 //*************************************************************** 
 // HELPERS
 //***************************************************************
-function applyTheme<T>(theme: TTheme.ThemeX, compThemePar, creator: T | ((theme: TTheme.ThemeX, compThemePar) => T)) {
-  return typeof creator === 'function' ? creator(theme, compThemePar) : creator
-}
 
 // merge named values
 const mergeOverrides = (result, patches) => {
@@ -166,11 +122,6 @@ const mergeOverrides = (result, patches) => {
     if (!result[p]) result[p] = {}
     deepMerge(result[p], patch, false)
   }
-}
-
-export const deepMerges = (skipSystem: boolean, target, ...sources) => {
-  sources.forEach(source => deepMerge(target, source, skipSystem))
-  return target
 }
 
 const clearSystemProps = obj => {

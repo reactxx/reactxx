@@ -8,12 +8,13 @@ export abstract class ComponentsMediaQLow<TState extends string = string>  {
 
   constructor(protected component: React.Component) { }
 
-  destroy() {
+  close() {
     for (const idx in this.notifyBreaks) this.unSubscribe(parseInt(idx), this.componentId)
     this.notifyBreaks = []
+    this.state = { }
   }
 
-  setNotifyBreakpoints(notifySheet: TMediaQ.NotifySheetX<TState>) {
+  open(notifySheet: TMediaQ.NotifySheetX<TState>) {
     if (!notifySheet) return
     const { componentId, notifyBreaks, component } = this
     const width = this.getWindowWidth()

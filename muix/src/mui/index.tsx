@@ -8,7 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import jssShared, { create} from 'jss';
 import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
-import { TTheme, ThemeProvider, ThemeModifier } from 'reactxx'
+import { TTheme, ThemeProvider, ThemeModifier, Themer } from 'reactxx'
 import { ModifierType } from 'reactxx-stateman'
 
 export * from './common/createMuiTheme'
@@ -28,9 +28,9 @@ export const jss: JSS = create({ ...preset(), createGenerateClassName, insertion
 export const AppContainer: React.SFC = props => {
   const theme = createMuiTheme()
   return <JssProvider jss={jss}>
-    <ThemeProvider value={{ theme: {} as any }}>
+    <Themer.Modifier theme={{} as TTheme.ThemeX }>
       <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
-    </ThemeProvider>
+    </Themer.Modifier>
   </JssProvider>
 }
 
@@ -64,7 +64,7 @@ export const muiCompatible = <R extends TBasic.Shape>(Component: muiComponentTyp
 
   const Styled: TBasic.SFCX<R> = props => {
 
-    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, modifyThemeState, ...other } = props as any as (TBasic.PropsX & TBasic.OnPressAllX)
+    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, ...other } = props as any as (TBasic.PropsX & TBasic.OnPressAllX)
 
     const classes = toPlatformSheet(classesX as TBasic.SheetX)
 

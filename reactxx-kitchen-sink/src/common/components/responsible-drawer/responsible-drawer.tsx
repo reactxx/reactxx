@@ -63,7 +63,7 @@ export namespace ResponsibleDrawerT {
 const { Provider, Consumer } = createContext<ResponsibleDrawerT.RenderProps>(null)
 
 type ConsumerType = StateConsumerType<ResponsibleDrawerT.RenderProps, ResponsibleDrawerT.RenderProps>
-type AnimationType = React.ComponentClass<TBasic.PropsX<ResponsibleDrawerT.Shape>> & { LayoutChanged?: ConsumerType }
+type AnimationType = React.ComponentType<TBasic.PropsX<ResponsibleDrawerT.Shape>> & { LayoutChanged?: ConsumerType }
 
 // ResponsibleDrawer's sheet. 
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
@@ -157,12 +157,12 @@ const sheet: TTheme.SheetCreatorX<ResponsibleDrawerT.Shape> = (theme, compThemeP
 // responsibleDrawer stateless component. 
 const responsibleDrawer: TBasic.CodeSFC<ResponsibleDrawerT.Shape> = props => {
 
-  const { classes, mergeRulesetWithOverrides, children, className, animations, mediaq, drawer: drawerNode } = props
+  const { classes, mergeRulesetWithOverrides, children, className, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaq, drawer: drawerNode } = props
 
   const mediaState = mediaq.state // actual media width, e.g. mediaState = {mobile:false, tablet:true, desktop:false }
 
-  const openDrawer = () => mediaState.tablet ? animations.tablet.open() : animations.mobile.open()
-  const closeDrawer = () => mediaState.tablet ? animations.tablet.close() : animations.mobile.close()
+  const openDrawer = () => mediaState.tablet ? animTablet.open() : animMobile.open()
+  const closeDrawer = () => mediaState.tablet ? animTablet.close() : animMobile.close()
 
   // calling mergeRulesetWithOverrides signals which rulesets are used. So it can use their $overrides to modify other sheet's rulesets
   const root = mergeRulesetWithOverrides(
@@ -176,25 +176,25 @@ const responsibleDrawer: TBasic.CodeSFC<ResponsibleDrawerT.Shape> = props => {
 
   const backDrop = mergeRulesetWithOverrides(
     classes.backDrop,
-    mediaState.mobile && animations.mobile.sheet.backDrop, // backDrop animation for mobile
+    mediaState.mobile && animMobile.sheet.backDrop, // backDrop animation for mobile
   ) as TBasic.ViewRulesetX
 
   const drawer = mergeRulesetWithOverrides(
     classes.drawer,
-    mediaState.mobile && animations.mobile.sheet.drawer, // drawer animation for mobile
-    mediaState.tablet && animations.tablet.sheet.drawer, // drawer animation for tablet
+    mediaState.mobile && animMobile.sheet.drawer, // drawer animation for mobile
+    mediaState.tablet && animTablet.sheet.drawer, // drawer animation for tablet
   ) as TBasic.ViewRulesetX
 
   const content = mergeRulesetWithOverrides(
     classes.content,
-    mediaState.tablet && animations.tablet.sheet.content, // content animation for tablet
+    mediaState.tablet && animTablet.sheet.content, // content animation for tablet
   ) as TBasic.ViewRulesetX
 
   const closeButton = mergeRulesetWithOverrides(classes.closeButton) as TBasic.TextRulesetX
 
   const openButton = mergeRulesetWithOverrides(
     classes.openButton,
-    { display: mediaState.tablet && animations.tablet.opened || mediaState.desktop ? 'none' : 'flex' }
+    { display: mediaState.tablet && animTablet.opened || mediaState.desktop ? 'none' : 'flex' }
   ) as TBasic.TextRulesetX
 
   return <View className={root}>
@@ -224,7 +224,6 @@ export const ResponsibleDrawer = (withStyles<ResponsibleDrawerT.Shape>(
   })(responsibleDrawer)) as AnimationType
 
 ResponsibleDrawer.LayoutChanged = Consumer as ConsumerType
-
 
 
 //************************************************************************************************************
