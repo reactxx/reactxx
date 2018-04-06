@@ -31,7 +31,7 @@ export namespace TAnimation {
   export interface DriversWeb<T extends Shapes> extends AnimationsEx { sheets: { [P in keyof T]: DriverWeb<T[P]> } }
   export interface DriversNative<T extends Shapes> extends AnimationsEx { sheets: { [P in keyof T]: DriverNative<T[P]> } }
 
-  export interface AnimationsEx { open: (sheetsDef: TAnimation.SheetsX<TAnimation.Shapes>) => void; close: (caller?: Driver<{}>) => void; statefullComponent: React.Component }
+  export interface AnimationsEx { init: (sheetsDef: TAnimation.SheetsX<TAnimation.Shapes>) => void; destroy: (caller?: Driver<{}>) => void; statefullComponent: React.Component }
 
   export interface Driver<T extends Shape> {
     opened: boolean

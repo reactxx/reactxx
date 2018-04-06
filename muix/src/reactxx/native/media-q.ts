@@ -9,8 +9,8 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
 
   private breaks: boolean[] = []
   
-  close() {
-    super.close()
+  destroy() {
+    super.destroy()
     for (const idx in this.breaks) this.unSubscribe(parseInt(idx), this.componentId)
     this.breaks = []
   }

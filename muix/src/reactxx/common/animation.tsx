@@ -7,15 +7,15 @@ import { TAnimation, AnimationDriver } from 'reactxx' //NATIVE or WEB animation 
 export class Animations<T extends TAnimation.Shapes = TAnimation.Shapes> implements TAnimation.Drivers<T> {
   constructor(public statefullComponent: React.Component) { }
   sheets: { [P in keyof T]: TAnimation.Driver<T[P]> }
-  close(caller?: TAnimation.Driver<{}>) {
+  destroy(caller?: TAnimation.Driver<{}>) {
     for (const p in this.sheets) {
       const driver = this.sheets[p]
       if (driver === caller || !driver.reset) continue
       driver.reset()
     }
-    delete this.sheets
+    //delete this.sheets
   }
-  open(sheetsDef: TAnimation.SheetsX<TAnimation.Shapes>) {
+  init(sheetsDef: TAnimation.SheetsX<TAnimation.Shapes>) {
     if (!sheetsDef) return
     const sheets = {}
     for (const p in sheetsDef) {
@@ -53,7 +53,7 @@ export abstract class DriverLow<T extends TAnimation.Shape> implements TAnimatio
   $config: TAnimation.AnimationConfig
   opened = false
   set(isOpen: boolean) {
-    this.animations.close(this)
+    this.animations.destroy(this)
     this.doOpen(isOpen)
   }
   toggle() { this.set(!this.opened) }

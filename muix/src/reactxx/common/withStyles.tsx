@@ -8,9 +8,9 @@ import { Themer, HOCState, HOCProps } from './theme2'
 import warning from 'warning'
 import { Animations } from './animation'
 
-export interface State extends HOCState {
+export interface State<R extends TSheets.Shape = TSheets.Shape> extends HOCState<R> {
   animations?: Animations //TAnimation.Drivers
-  mediaq?: ComponentsMediaQ<TSheets.getMediaQ<TSheets.Shape>>
+  mediaq?: ComponentsMediaQ<TSheets.getMediaQ<R>>
 }
 
 //http://jamesknelson.com/should-i-use-shouldcomponentupdate/
@@ -18,30 +18,35 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
 
   const name = _name as string
 
-  class Styled extends React.PureComponent<HOCProps, State> {
+  class Styled extends React.PureComponent<HOCProps, State<R>> {
 
-    state = {
+    state: State<R> = {
       animations: new Animations(this),
-      mediaq: new ComponentsMediaQ<TSheets.getMediaQ<R>>(this)
+      mediaq: new ComponentsMediaQ<TSheets.getMediaQ<R>>(this) 
     }
 
     componentWillUnmount() {
-      this.state.mediaq.close()
-      this.state.animations.close()
+      this.state.mediaq.destroy()
+      this.state.animations.destroy()
     }
 
     static getDerivedStateFromProps = (nextProps: HOCProps, prevState: State) => {
       if (nextProps.ignore) return {} //noop
       const { animations, mediaq } = prevState
-      animations.close(); mediaq.close()
+      animations.destroy()
       const nextState: State = Themer.applyTheme(name, sheetCreator, nextProps, prevState)
-      animations.open(nextState.classes.$animations); mediaq.open(nextState.classes.$mediaq)
-      return nextState //nextState props are merged to prevState props. So animations and mediaq props are preserved
+      animations.init(nextState.classes.$animations)
+      return nextState // nextState props are merged to prevState props. So animations and mediaq props are preserved
     }
 
     render() {
+
+      //if (name === 'comps$responsibledrawer')
+      //  debugger
       // getDerivedStateFromProps result
       const { animations, mediaq, className, style, classes } = this.state
+
+      mediaq.destroy(); mediaq.init(classes.$mediaq)
 
       const {
         classes: ignore0, className: ignore1, style: ignore2, themeComp: ignore3, // already used props
@@ -60,7 +65,7 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
         mergeRulesetWithOverrides,
         theme,
         animations,
-        mediaq: mediaq, 
+        mediaq: mediaq as TMediaQ.ComponentsMediaQ<TSheets.getMediaQ<R>>,
         classes, //available classes for mergeRulesetWithOverrides (this.classes = merge(sheet, theme.overrides[name], classes prop)
         className,
         style,

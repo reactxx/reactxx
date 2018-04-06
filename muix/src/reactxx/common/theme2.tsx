@@ -1,4 +1,4 @@
-import React, { createContext } from 'react'
+import React from 'react'
 import ReactN from 'react-native'
 import { TBasic, toPlatformSheet, toPlatformRuleSet, deepMerges } from 'reactxx-basic'
 
@@ -21,12 +21,12 @@ export interface ThemeWithCompX {
 
 export type HOCProps = TBasic.PropsX & ThemeWithCompX
 
-export interface HOCState {
-  classes: TBasic.Sheet
-  className: TBasic.Ruleset
-  style: TBasic.Ruleset
+export interface HOCState<R extends TSheets.Shape = TSheets.Shape> {
+  classes?: TBasic.Sheet<R>
+  className?: TBasic.Ruleset
+  style?: TBasic.Ruleset
   // following props can check cachedStaticSheet validity in withTheme HOC
-  actTheme: TTheme.ThemeX // actual theme
+  actTheme?: TTheme.ThemeX // actual theme
   actThemeComp?: ThemeCompX // actual themeComp
 }
 
@@ -41,7 +41,7 @@ export interface ComponentTypeWithModifier<R extends TSheets.Shape> extends Reac
 
 //************ CODE
 
-const { Provider, Consumer } = createContext<ThemeWithCompsX>({ theme: { type: 'ThemeX' } })
+const { Provider, Consumer } = React.createContext<ThemeWithCompsX>({ theme: { type: 'ThemeX' } })
 
 // withTheme HOC, used in withStyles HOC
 const withTheme = <R extends TSheets.Shape>(name: string, Component: React.ComponentClass<HOCProps>, createSheetX: TTheme.SheetCreatorX<R>, compThemePar?: TSheets.getCompTheme<R>) => {
@@ -64,28 +64,28 @@ const withTheme = <R extends TSheets.Shape>(name: string, Component: React.Compo
 // compute classes, clasName and style (platform dependent and themed)
 const applyTheme = (name: string, createSheetX: TTheme.SheetCreatorX, nextProps: HOCProps, prevState: HOCState) => {
 
-  let themedStaticSheet: TBasic.Sheet
+  let cachedStaticSheet: TBasic.Sheet
 
   const { theme, themeComp, themeComp: { par = defaultCompThemePars[name], sheet }, classes, className, style } = nextProps
 
   // cachedStaticSheet validity test:
-  if (prevState.actTheme === theme && prevState.actThemeComp === themeComp) themedStaticSheet = themeComp.cachedStaticSheet
-  else {
+  if (prevState.actTheme === theme && prevState.actThemeComp === themeComp) cachedStaticSheet = themeComp.cachedStaticSheet
+  else { // create new
 
     //*** get platform dependent sheet (from creator, actual theme and actual themeCompPar)
     const staticSheet = toPlatformSheet(callCreator(theme, par, createSheetX))
 
-    themedStaticSheet = themeComp.cachedStaticSheet = sheet ? deepMerges(false, {}, staticSheet, sheet) : staticSheet
+    cachedStaticSheet = themeComp.cachedStaticSheet = sheet ? deepMerges(false, {}, staticSheet, sheet) : staticSheet
   }
 
-  const actSheet: TBasic.Sheet = classes ? deepMerges(false, {}, themedStaticSheet, toPlatformSheet(callCreator(theme, par, classes))) : themedStaticSheet
+  const actSheet: TBasic.Sheet = classes ? deepMerges(false, {}, cachedStaticSheet, toPlatformSheet(callCreator(theme, par, classes))) : cachedStaticSheet
   for (const p in actSheet) if (!p.startsWith('$')) actSheet[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
 
   const nextState: HOCState = {
     classes: actSheet,
     className: toPlatformRuleSet(callCreator(theme, par, className)),
     style: toPlatformRuleSet(callCreator(theme, par, style)),
-    // save actual theme and themeComp to state: 
+    // save actual themeComps to state:
     actTheme: theme,
     actThemeComp: themeComp,
   }
@@ -93,32 +93,32 @@ const applyTheme = (name: string, createSheetX: TTheme.SheetCreatorX, nextProps:
   return nextState
 }
 
-// comp theme modifier
+// modify comp part of theme 
 const compThemeModifier: <R extends TSheets.Shape>(name: string) => React.SFC<ComponentTypeWithModifierProps<R>> = name => ({ sheet, par, children }) => <Consumer>
   {themeProps => {
-    const newTheme: ThemeWithCompsX = { theme: themeProps.theme }
+    const themeComps: ThemeWithCompsX = { theme: themeProps.theme }
     // clone ThemeCompX's (without 
     for (const p in themeProps) if (p != 'theme' && p != name) {
       const { sheet, par } = themeProps[p] as ThemeCompX
-      newTheme[p] = { sheet, par }
+      themeComps[p] = { sheet, par }
     }
     const old: ThemeCompX = themeProps[name] || {}
-    newTheme[name] = { sheet: sheet || old.sheet, par: par || old.par } as ThemeCompX
-    return <Provider value={newTheme}>{children}</Provider>
+    themeComps[name] = { sheet: sheet || old.sheet, par: par || old.par } as ThemeCompX
+    return <Provider value={themeComps}>{children}</Provider>
   }}
 </Consumer>
 
 // theme modifier
-const themeModifier: React.SFC<{ theme: TTheme.ThemeX | ((theme: TTheme.ThemeX) => TTheme.ThemeX) }> = ({ theme, children }) => <Consumer>
+const themeModifier: React.SFC<{ theme: TTheme.ThemeX | ((t: TTheme.ThemeX) => TTheme.ThemeX) }> = ({ theme, children }) => <Consumer>
   {themeProps => {
     theme = typeof theme === 'function' ? theme(themeProps.theme) : theme
-    const newTheme: ThemeWithCompsX = { theme }
+    const themeComps: ThemeWithCompsX = { theme }
     // clone ThemeCompX's, without cachedStaticSheet
     for (const p in themeProps) if (p != 'theme') {
       const { sheet, par } = themeProps[p] as ThemeCompX
-      newTheme[p] = { sheet, par }
+      themeComps[p] = { sheet, par }
     }
-    return <Provider value={newTheme}>{children}</Provider>
+    return <Provider value={themeComps}>{children}</Provider>
   }}
 </Consumer>
 
