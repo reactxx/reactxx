@@ -217,7 +217,7 @@ const responsibleDrawer: TBasic.CodeSFC<ResponsibleDrawerT.Shape> = props => {
 export const ResponsibleDrawer = (withStyles<ResponsibleDrawerT.Shape>(
   'comps$responsibledrawer' as any/*ReactXXResponsibleDrawer.Consts.Drawer*/,
   sheet,
-  {
+  { //component's theme pars:
     animationDuration: 300, // animation duration in msec
     drawerWidths: [250, 250, 300], // different opened drawer width for mobile, tablet and desktop
     breakpoints: [480, 1024] // media breakpoints between mobile x tablet and tablet x desktop
