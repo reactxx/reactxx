@@ -76,19 +76,17 @@ export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements 
     if (!this.runningTimer) return
     clearTimeout(this.runningTimer)
     delete this.runningTimer
-    this.sheet = this.bothClassName[this.opened ? 1 : 0]
+    //this.sheet = this.bothClassName[this.opened ? 1 : 0]
   }
   doOpen(opened: boolean) {
     const { $delay, $duration } = this.$config
     if (this.runningTimer) clearTimeout(this.runningTimer)
     this.opened = opened
+    this.sheet = this.bothClassName[opened ? 1 : 0]
     this.runningTimer = window.setTimeout(() => {
       delete this.runningTimer
-      //this.animations.statefullComponent.forceUpdate()
     }, $delay + $duration)
-    this.sheet = this.bothClassName[opened ? 1 : 0]
     this.animations.statefullComponent.forceUpdate()
-    //this.animations.statefullComponent.setState(st => ({ x: new Date().getTime() }))
   }
 }
 
