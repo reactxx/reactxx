@@ -6,23 +6,37 @@ import { TAddInConfig } from 'typescript-config'
 
 export class ComponentsMediaQ<TState extends string = string> extends ComponentsMediaQLow<TState> implements TMediaQ.ComponentsMediaQ<TState>{
 
+  /*
+    decode $mediaq part of ruleset, e.g.
+    {
+      $mediaq: {
+        '-480': { fontSize: '24', color:'blue' },
+        '480-1024': { fontSize: '32', color:'red' },
+      }
+    }
+  */
   processRuleset(ruleset: TAddInConfig.RulesetWithAddIn) {
     const { $mediaq } = ruleset
-    if (!$mediaq) return ruleset
+    if (!$mediaq) return ruleset //no $mediaq
     const { componentId, component } = this
     let patches: TMediaQ.Patch[] = []
-    const width = this.getWindowWidth()
+    //const width = this.getWindowWidth()
     for (const p in $mediaq) {
       const interval = p.split('-').map((i, idx) => !i ? (idx == 0 ? 0 : TMediaQ.Consts.maxBreakpoint) : parseInt(i))
       warning(interval.length == 2, `E.g. '-480' or '480-1024' or '1024-' expected, ${p} found`)
       patches.push({ start: interval[0], end: interval[1], ruleset: $mediaq[p] })
     }
-    //no subscribe for web platform (media query CSS is used)
-    if (patches.length === 0) return ruleset
-    //for web: modify add media query ruleset selector
-    patches = addMediaQuerySelector(patches)
-    //merge
-    return deepMerges(true, {}, ruleset, ...patches)
+    if (patches.length === 0) return ruleset //empty $mediaq
+
+    /* create Fela media part of ruleset, e.g. 
+      mediaRuleset = {
+        '@media (max-width: 479px)': { fontSize: '24', color:'blue' },
+        '@media (min-width: 480px) and (max-width: 1023px)': { fontSize: '32', color:'red' }
+      }
+    */
+    const mediaRuleset = patches.map(p => ({ [intervalToSelector(p.start, p.end)]: p.ruleset }))
+    //merge with source ruleset
+    return deepMerges(true, {}, ruleset, ...mediaRuleset)
   }
 
   createBreakPoint(breakPoint: number) { return new BreakPointWeb(breakPoint) }
@@ -44,10 +58,8 @@ export class BreakPointWeb extends BreakPoint {
   private mediaQuery: MediaQueryList
 }
 
-const addMediaQuerySelector = (patchs: TMediaQ.Patch[]) => patchs.map(p => ({ [intervalToSelector(p.start, p.end)]: p.ruleset } as any))
-
 const intervalToSelector = (start: number, end: number) => {
-  if (start === 0) return `@media (max-width: ${end-1}px)`
+  if (start === 0) return `@media (max-width: ${end - 1}px)`
   if (end === TMediaQ.Consts.maxBreakpoint) return `@media (min-width: ${start}px)`
   return `@media (min-width: ${start}px) and (max-width: ${end - 1}px)`
 }

@@ -46,12 +46,14 @@ export const toPlatformSheet = <R extends TBasic.Shape>(sheet: TBasic.SheetX<R> 
   if (typeof sheet !== 'object') return sheet
   const res = {}
   for (const p in sheet) {
-    if (p === '$animations') {
-      const animSrc = sheet[p]
+    const sheet$p = sheet[p]
+    if (p === '$animations') { // sheets
       const animDest = res[p] = {} as any
-      for (const pp in animSrc) animDest[pp] = toPlatformSheet(animSrc[pp] as any)
-    } else
-      res[p] = toPlatformRuleSet(sheet[p])
+      for (const pp in sheet$p) animDest[pp] = toPlatformSheet(sheet$p[pp] as any)
+    } else if (p === '$mediaq') { // media breakpoints
+      res[p] = sheet$p
+    } else // ruleset
+      res[p] = toPlatformRuleSet(sheet$p)
   }
   return res as TBasic.Sheet<R>
 }
@@ -72,4 +74,4 @@ export const deepMerge = (target, source, skipSystem = false) => {
     throw 'deepMerge: cannot merge object and non object'
   return target
 }
-const isObject = item => item && typeof item === 'object' && !Array.isArray(item) && typeof item['_interpolation'] != 'function' //typeof item['_interpolation'] != 'function' prevent to merge ReactNative's Animated.Value.interpolate prop
+const isObject = item => item && typeof item === 'object' && !Array.isArray(item) && typeof item['_interpolation'] != 'function' //HACK: typeof item['_interpolation'] != 'function' prevent to merge ReactNative's Animated.Value.interpolate prop

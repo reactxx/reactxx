@@ -31,13 +31,12 @@ export namespace TAddInConfig {
 
   //******************** Cross platform 
   export interface PropX<R extends TBasic.Shape = TBasic.Shape> {
-    style?: TTheme.RulesetCreatorX<R> //| RulesetWeb | getStyle<R> //cross platform style
+    style?: TTheme.RulesetCreatorX<R> //cross platform style
     $web?: Partial<TBasic.getPropsWeb<R>> //web specific style
     $native?: Partial<TBasic.getPropsNative<R>> //native specific style
     ignore?: boolean
-    classes?: TTheme.PartialSheetCreatorX<R> //| PartialSheetInCode<R>> /*cross platform sheet*/  /*platform specific sheet (when component is used in other component)*/
-    //modifyThemeState?: TTheme.ThemeModifier
-    className?: TTheme.RulesetCreatorX<R> /*cross platform root ruleset*/ //| RulesetWeb | getStyle<R> /*platform specific root ruleset (when component is used in other component)*/
+    classes?: TTheme.PartialSheetCreatorX<R> // cross platform sheet
+    className?: TTheme.RulesetCreatorX<R> // cross platform root ruleset
   }
 
   //******************** Platform specific

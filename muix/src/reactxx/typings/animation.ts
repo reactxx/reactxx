@@ -24,7 +24,7 @@ export namespace TAnimation {
   export type RuleSetX<T extends TBasic.RulesetNativeIds> = ToPairs<TBasic.commonRules<T>> & {
     transform?: Array<TNativeTransform>
     $native?: ToPairs<TBasic.NativeRules<T>, Diff<keyof TBasic.NativeRules<T>, 'transform'>> & { transform?: TNativeTransform[] }
-    $web?: ToPairs<TBasic.RulesetWeb, keyof TBasic.RulesetWeb> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
+    $web?: ToPairs<TBasic.RulesetWeb> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
   }
 
   export interface Drivers<T extends Shapes = Shapes> extends AnimationsEx { sheets: { [P in keyof T]: Driver<T[P]> } }
@@ -41,7 +41,6 @@ export namespace TAnimation {
     toggle()
     reset()
     sheet: Sheet<T>
-    //animations: Drivers<{}>
   }
 
   export interface DriverWeb<T extends Shape> extends Driver<T> {
