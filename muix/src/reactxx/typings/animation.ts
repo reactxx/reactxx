@@ -21,9 +21,9 @@ export namespace TAnimation {
     $opened?: boolean
   }
 
-  export type RuleSetX<T extends TBasic.RulesetNativeIds> = ToPairs<TBasic.commonRules<T>> & {
+  export type RuleSetX<T extends TBasic.RulesetNativeIds> = ToPairs<TBasic.rulesetCommon<T>> & {
     transform?: Array<TNativeTransform>
-    $native?: ToPairs<TBasic.NativeRules<T>, Diff<keyof TBasic.NativeRules<T>, 'transform'>> & { transform?: TNativeTransform[] }
+    $native?: ToPairs<TBasic.RulesetNative<T>, Diff<keyof TBasic.RulesetNative<T>, 'transform'>> & { transform?: TNativeTransform[] }
     $web?: ToPairs<TBasic.RulesetWeb> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
   }
 
@@ -52,8 +52,8 @@ export namespace TAnimation {
   }
 
   export type SheetWeb<T extends Shape> = { [P in keyof T]: TBasic.RulesetWeb } & AnimationConfig
-  export type SheetNative<T extends Shape> = { [P in keyof T]: TBasic.NativeRules<T[P]> } & AnimationConfig
-  export type Sheet<T extends Shape> = { [P in keyof T]: (TBasic.NativeRules<T[P]> | TBasic.RulesetWeb) } & AnimationConfig
+  export type SheetNative<T extends Shape> = { [P in keyof T]: TBasic.RulesetNative<T[P]> } & AnimationConfig
+  export type Sheet<T extends Shape> = { [P in keyof T]: (TBasic.RulesetNative<T[P]> | TBasic.RulesetWeb) } & AnimationConfig
 
   export type SheetsX<T extends Shapes> = { [P in keyof T]: SheetX<T[P]> }
   export type SheetX<T extends Shape> = { [P in keyof T]: RuleSetX<T[P]> } & AnimationConfig

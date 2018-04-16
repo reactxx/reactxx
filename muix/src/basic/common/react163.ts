@@ -1,7 +1,7 @@
 import * as React from "react"
 
-declare module "react" {
-  type Provider<T> = React.ComponentType<{
+/*declare module "react" {
+  type Provider<T> = ComponentType<{
     value: T
     children?: ReactNode
   }>
@@ -21,4 +21,4 @@ declare module "react" {
   interface ComponentClass<P = {}> {
     getDerivedStateFromProps: (nextProps: P, prevState) => {}
   }
-}
+}*/

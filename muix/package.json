@@ -45,9 +45,7 @@
       "deepmerge": "npm:deepmerge@^2.0.1",
       "reactxx-mdi": "npm:reactxx-mdi@^0.1.67",
       "tslib": "npm:tslib@^1.9.0",
-      "warning": "npm:warning@^3.0.0",
-      "react-dom": "npm:react-dom@16.3.1",
-      "react": "npm:react@16.3.0"
+      "warning": "npm:warning@^3.0.0"
     },
     "devDependencies": {},
     "peerDependencies": {
@@ -66,6 +64,8 @@
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
+      "react": "npm:react@16.3.2",
+      "react-dom": "npm:react-dom@16.3.2",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
       "url": "npm:jspm-nodelibs-url@^0.2.0",

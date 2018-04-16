@@ -6,11 +6,6 @@ import { TAddInConfig } from 'typescript-config'
 
 export namespace TBasic {
 
-  export type TPlatformWeb = 'web'
-  export type TPlatformNative = 'native'
-  export type TPlatformBoth = 'both'
-  export type TPlatform = TPlatformWeb | TPlatformNative | TPlatformBoth
-
   export const enum Consts {
     textClassName = 'reactxx-text'
   }
@@ -33,37 +28,26 @@ export namespace TBasic {
   //*************** cross platform ruleset for web and native
 
   export type RulesetX<T extends RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    commonRules<T> & // native rules which are compatible with web
+    rulesetCommon<T> & // native rules which are compatible with web
     {
-      $native?: NativeRules<T> // native specific rules
+      $native?: RulesetNative<T> // native specific rules
       $web?: RulesetWeb // web specific rules
     } &
-    TAddInConfig.RulesetAddInX<T, R> // sheet addIn: $wen, $native, overriding, media query etc.
+    TAddInConfig.RulesetAddInX<T, R> // sheet addIn: sheet overriding, media query etc.
 
-  // rule names, common for native and web
-  //export type commonRuleNames<T extends RulesetNative> = keyof React.CSSPropertiesLow & keyof T
-  // native rules, which are compatible with web
-  //export type commonRules<T extends RulesetNative> = TakeFrom<T, commonRuleNames<T>>
-
-  export type commonRules<T extends RulesetNativeIds> =
+  export type rulesetCommon<T extends RulesetNativeIds> =
     T extends 'Text' ? TCommonStyles.TextStyle :
     T extends 'Image' ? TCommonStyles.ImageStyle :
     T extends 'ScrollView' ? TCommonStyles.ScrollViewStyle :
     T extends 'View' ? TCommonStyles.ViewStyle :
     never
 
-  export type NativeRules<T extends RulesetNativeIds> =
+  export type RulesetNative<T extends RulesetNativeIds> =
     T extends 'Text' ? ReactN.TextStyle :
     T extends 'Image' ? ReactN.ImageStyle :
     T extends 'ScrollView' ? ReactN.ScrollViewStyle :
     T extends 'View' ? ReactN.ViewStyle :
     never
-
-
-  //export interface ViewRulesetCommonX extends TCommonStyles.ViewStyle { }
-  //export interface TextRulesetCommonX extends TCommonStyles.TextStyle { }
-  //export interface ScrollViewRulesetCommonX extends TCommonStyles.ScrollViewStyle { }
-  //export interface ImageRulesetCommonX extends TCommonStyles.ImageStyle { }
 
   export interface ViewRulesetX extends RulesetX<'View'> { }
   export interface TextRulesetX extends RulesetX<'Text'> { }
@@ -72,9 +56,9 @@ export namespace TBasic {
 
   //******************** Platform specific ruleset
   export type RulesetWeb = CSS.Properties & { [P in CSS.SimplePseudos]?: CSS.Properties } & TAddInConfig.RulesetWithAddInAny // TAddInConfig.RulesetWithAddInWeb yield to error: recursive type using itself 
-  export type RulesetNative = (ReactN.TextStyle | ReactN.ViewStyle | ReactN.ImageStyle | ReactN.ScrollViewStyle) & TAddInConfig.RulesetWithAddInAny
-  export type Ruleset = RulesetWeb | RulesetNative
-  
+  export type rulesetNative = (ReactN.TextStyle | ReactN.ViewStyle | ReactN.ImageStyle | ReactN.ScrollViewStyle) & TAddInConfig.RulesetWithAddInAny
+  export type Ruleset = RulesetWeb | rulesetNative
+
   /******************************************
     COMPONENT SHAPE
   *******************************************/
@@ -108,7 +92,7 @@ export namespace TBasic {
 
   //Cross platform sheet helpers
   export type SheetXCommon<R extends Shape> = { [P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R> }
-  export type SheetXNative<R extends Shape> = { [P in keyof getNative<R>]: (NativeRules<getNative<R>[P]> & TAddInConfig.RulesetAddInX<getNative<R>[P], R>) }
+  export type SheetXNative<R extends Shape> = { [P in keyof getNative<R>]: (RulesetNative<getNative<R>[P]> & TAddInConfig.RulesetAddInX<getNative<R>[P], R>) }
   export type SheetXWeb<R extends Shape> = { [P in getWeb<R>]: (RulesetWeb & TAddInConfig.RulesetAddInX<never, R>) }
 
   //******************** Platform specific sheets
@@ -129,11 +113,12 @@ export namespace TBasic {
 
   //******************** Cross platform component types
   export type PropsX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>, TAddInConfig.PropX<R>>>
+
   export type ComponentTypeX<R extends Shape> = React.ComponentType<PropsX<R>>
   export type SFCX<R extends Shape> = React.SFC<PropsX<R>>
 
   //******************** Platform specific sheets
-  export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
+  // *** web
   export type CodePropsWeb<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsWeb<R>,
     {
       className: RulesetWeb
@@ -143,28 +128,33 @@ export namespace TBasic {
     TAddInConfig.CodePropsWeb<R> &
     OnPressAllWeb>
 
-  export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
+  export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
+
+  // *** native
   export type CodePropsNative<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsNative<R>,
     {
-      className: NativeRules<getStyle<R>>
-      style: NativeRules<getStyle<R>>
+      className: RulesetNative<getStyle<R>>
+      style: RulesetNative<getStyle<R>>
       classes: SheetNative<R>
     } &
     TAddInConfig.CodePropsNative<R> &
     OnPressAllNative>
 
-  //some code for components could be shared for web and native
-  export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
-  export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
-  export type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
+  export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
+
+  // *** web or native
   export type CodeProps<R extends Shape = Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>),
     {
-      className: RulesetWeb | NativeRules<getStyle<R>>
-      style: RulesetWeb | NativeRules<getStyle<R>>
+      className: RulesetWeb | RulesetNative<getStyle<R>>
+      style: RulesetWeb | RulesetNative<getStyle<R>>
       classes: Sheet<R>
     } &
     TAddInConfig.CodeProps<R> &
     (OnPressAllNative | OnPressAllWeb)>
+
+  export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
+  export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
+  export type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
 
   //export type CodeProps<R extends Shape = Shape> = TActPlatform extends TWebPlatform ? CodePropsWeb<R> : CodePropsNative<R>
   //export type CodeProps<R extends Shape = Shape> = CodePropsWeb<R> | CodePropsNative<R>

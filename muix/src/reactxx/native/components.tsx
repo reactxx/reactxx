@@ -2,9 +2,9 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { withStyles } from '../common/withStyles'
+import { CompNames } from '../typings/index'
 
 import { TBasic, TComps, text, textSheet, animatedText, view, viewSheet, animatedView, icon, iconSheet, animatedIcon, scrollView, scrollViewSheet, animatedScrollView } from 'reactxx-basic'
-import { CompNames } from 'reactxx'
 
 export const Text: TBasic.ComponentTypeX<TComps.TextShape> = withStyles(CompNames.Text, textSheet)(text)
 export const AnimatedText: TBasic.ComponentTypeX<TComps.TextShape> = withStyles(CompNames.AnimatedText, textSheet)(animatedText)

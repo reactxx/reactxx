@@ -53,8 +53,8 @@ SystemJS.config({
     "path": "npm:jspm-nodelibs-path@0.2.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",
     "prop-types": "npm:prop-types@15.6.1",
-    "react": "npm:react@16.3.0",
-    "react-dom": "npm:react-dom@16.3.1",
+    "react": "npm:react@16.3.2",
+    "react-dom": "npm:react-dom@16.3.2",
     "react-jss": "npm:react-jss@8.3.3",
     "reactxx-mdi": "npm:reactxx-mdi@0.1.63",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
@@ -369,7 +369,7 @@ SystemJS.config({
     },
     "npm:encoding@0.1.12": {
       "map": {
-        "iconv-lite": "npm:iconv-lite@0.4.19"
+        "iconv-lite": "npm:iconv-lite@0.4.21"
       }
     },
     "npm:jspm-nodelibs-buffer@0.2.3": {
@@ -444,51 +444,26 @@ SystemJS.config({
       "map": {
         "inherits": "npm:inherits@2.0.3",
         "browserify-sign": "npm:browserify-sign@4.0.4",
-        "diffie-hellman": "npm:diffie-hellman@5.0.2",
-        "create-ecdh": "npm:create-ecdh@4.0.0",
-        "create-hmac": "npm:create-hmac@1.1.6",
-        "create-hash": "npm:create-hash@1.1.3",
-        "public-encrypt": "npm:public-encrypt@4.0.0",
+        "diffie-hellman": "npm:diffie-hellman@5.0.3",
+        "create-ecdh": "npm:create-ecdh@4.0.1",
+        "create-hmac": "npm:create-hmac@1.1.7",
+        "create-hash": "npm:create-hash@1.2.0",
+        "public-encrypt": "npm:public-encrypt@4.0.2",
         "pbkdf2": "npm:pbkdf2@3.0.14",
         "randomfill": "npm:randomfill@1.0.4",
-        "browserify-cipher": "npm:browserify-cipher@1.0.0",
+        "browserify-cipher": "npm:browserify-cipher@1.0.1",
         "randombytes": "npm:randombytes@2.0.6"
-      }
-    },
-    "npm:diffie-hellman@5.0.2": {
-      "map": {
-        "randombytes": "npm:randombytes@2.0.6",
-        "miller-rabin": "npm:miller-rabin@4.0.1",
-        "bn.js": "npm:bn.js@4.11.8"
       }
     },
     "npm:browserify-sign@4.0.4": {
       "map": {
         "inherits": "npm:inherits@2.0.3",
-        "create-hash": "npm:create-hash@1.1.3",
-        "create-hmac": "npm:create-hmac@1.1.6",
+        "create-hash": "npm:create-hash@1.2.0",
+        "create-hmac": "npm:create-hmac@1.1.7",
         "browserify-rsa": "npm:browserify-rsa@4.0.1",
         "elliptic": "npm:elliptic@6.4.0",
         "bn.js": "npm:bn.js@4.11.8",
-        "parse-asn1": "npm:parse-asn1@5.1.0"
-      }
-    },
-    "npm:create-hmac@1.1.6": {
-      "map": {
-        "create-hash": "npm:create-hash@1.1.3",
-        "inherits": "npm:inherits@2.0.3",
-        "safe-buffer": "npm:safe-buffer@5.1.1",
-        "cipher-base": "npm:cipher-base@1.0.4",
-        "ripemd160": "npm:ripemd160@2.0.1",
-        "sha.js": "npm:sha.js@2.4.11"
-      }
-    },
-    "npm:create-hash@1.1.3": {
-      "map": {
-        "inherits": "npm:inherits@2.0.3",
-        "cipher-base": "npm:cipher-base@1.0.4",
-        "ripemd160": "npm:ripemd160@2.0.1",
-        "sha.js": "npm:sha.js@2.4.11"
+        "parse-asn1": "npm:parse-asn1@5.1.1"
       }
     },
     "npm:randombytes@2.0.6": {
@@ -502,35 +477,13 @@ SystemJS.config({
         "safe-buffer": "npm:safe-buffer@5.1.1"
       }
     },
-    "npm:public-encrypt@4.0.0": {
-      "map": {
-        "create-hash": "npm:create-hash@1.1.3",
-        "randombytes": "npm:randombytes@2.0.6",
-        "browserify-rsa": "npm:browserify-rsa@4.0.1",
-        "bn.js": "npm:bn.js@4.11.8",
-        "parse-asn1": "npm:parse-asn1@5.1.0"
-      }
-    },
     "npm:pbkdf2@3.0.14": {
       "map": {
         "safe-buffer": "npm:safe-buffer@5.1.1",
-        "create-hash": "npm:create-hash@1.1.3",
-        "create-hmac": "npm:create-hmac@1.1.6",
+        "create-hash": "npm:create-hash@1.2.0",
+        "create-hmac": "npm:create-hmac@1.1.7",
         "ripemd160": "npm:ripemd160@2.0.1",
         "sha.js": "npm:sha.js@2.4.11"
-      }
-    },
-    "npm:create-ecdh@4.0.0": {
-      "map": {
-        "elliptic": "npm:elliptic@6.4.0",
-        "bn.js": "npm:bn.js@4.11.8"
-      }
-    },
-    "npm:browserify-cipher@1.0.0": {
-      "map": {
-        "browserify-des": "npm:browserify-des@1.0.0",
-        "evp_bytestokey": "npm:evp_bytestokey@1.0.3",
-        "browserify-aes": "npm:browserify-aes@1.2.0"
       }
     },
     "npm:browserify-rsa@4.0.1": {
@@ -553,14 +506,7 @@ SystemJS.config({
         "hmac-drbg": "npm:hmac-drbg@1.0.1",
         "hash.js": "npm:hash.js@1.1.3",
         "minimalistic-crypto-utils": "npm:minimalistic-crypto-utils@1.0.1",
-        "minimalistic-assert": "npm:minimalistic-assert@1.0.0"
-      }
-    },
-    "npm:browserify-des@1.0.0": {
-      "map": {
-        "cipher-base": "npm:cipher-base@1.0.4",
-        "inherits": "npm:inherits@2.0.3",
-        "des.js": "npm:des.js@1.0.0"
+        "minimalistic-assert": "npm:minimalistic-assert@1.0.1"
       }
     },
     "npm:cipher-base@1.0.4": {
@@ -573,15 +519,6 @@ SystemJS.config({
       "map": {
         "safe-buffer": "npm:safe-buffer@5.1.1",
         "md5.js": "npm:md5.js@1.3.4"
-      }
-    },
-    "npm:parse-asn1@5.1.0": {
-      "map": {
-        "browserify-aes": "npm:browserify-aes@1.2.0",
-        "create-hash": "npm:create-hash@1.1.3",
-        "evp_bytestokey": "npm:evp_bytestokey@1.0.3",
-        "pbkdf2": "npm:pbkdf2@3.0.14",
-        "asn1.js": "npm:asn1.js@4.10.1"
       }
     },
     "npm:ripemd160@2.0.1": {
@@ -599,27 +536,27 @@ SystemJS.config({
     "npm:hmac-drbg@1.0.1": {
       "map": {
         "hash.js": "npm:hash.js@1.1.3",
-        "minimalistic-assert": "npm:minimalistic-assert@1.0.0",
+        "minimalistic-assert": "npm:minimalistic-assert@1.0.1",
         "minimalistic-crypto-utils": "npm:minimalistic-crypto-utils@1.0.1"
       }
     },
     "npm:hash.js@1.1.3": {
       "map": {
         "inherits": "npm:inherits@2.0.3",
-        "minimalistic-assert": "npm:minimalistic-assert@1.0.0"
+        "minimalistic-assert": "npm:minimalistic-assert@1.0.1"
       }
     },
     "npm:des.js@1.0.0": {
       "map": {
         "inherits": "npm:inherits@2.0.3",
-        "minimalistic-assert": "npm:minimalistic-assert@1.0.0"
+        "minimalistic-assert": "npm:minimalistic-assert@1.0.1"
       }
     },
     "npm:asn1.js@4.10.1": {
       "map": {
         "bn.js": "npm:bn.js@4.11.8",
         "inherits": "npm:inherits@2.0.3",
-        "minimalistic-assert": "npm:minimalistic-assert@1.0.0"
+        "minimalistic-assert": "npm:minimalistic-assert@1.0.1"
       }
     },
     "npm:hash-base@2.0.2": {
@@ -631,14 +568,6 @@ SystemJS.config({
       "map": {
         "inherits": "npm:inherits@2.0.3",
         "safe-buffer": "npm:safe-buffer@5.1.1"
-      }
-    },
-    "npm:react-dom@16.3.1": {
-      "map": {
-        "loose-envify": "npm:loose-envify@1.3.1",
-        "fbjs": "npm:fbjs@0.8.16",
-        "prop-types": "npm:prop-types@15.6.1",
-        "object-assign": "npm:object-assign@4.1.1"
       }
     },
     "npm:readable-stream@2.3.6": {
@@ -675,19 +604,96 @@ SystemJS.config({
     "npm:browserify-aes@1.2.0": {
       "map": {
         "cipher-base": "npm:cipher-base@1.0.4",
-        "create-hash": "npm:create-hash@1.1.3",
+        "create-hash": "npm:create-hash@1.2.0",
         "evp_bytestokey": "npm:evp_bytestokey@1.0.3",
         "inherits": "npm:inherits@2.0.3",
         "safe-buffer": "npm:safe-buffer@5.1.1",
         "buffer-xor": "npm:buffer-xor@1.0.3"
       }
     },
-    "npm:react@16.3.0": {
+    "npm:react-dom@16.3.2": {
+      "map": {
+        "object-assign": "npm:object-assign@4.1.1",
+        "prop-types": "npm:prop-types@15.6.1",
+        "fbjs": "npm:fbjs@0.8.16",
+        "loose-envify": "npm:loose-envify@1.3.1"
+      }
+    },
+    "npm:iconv-lite@0.4.21": {
+      "map": {
+        "safer-buffer": "npm:safer-buffer@2.1.2"
+      }
+    },
+    "npm:create-hash@1.2.0": {
+      "map": {
+        "inherits": "npm:inherits@2.0.3",
+        "md5.js": "npm:md5.js@1.3.4",
+        "cipher-base": "npm:cipher-base@1.0.4",
+        "ripemd160": "npm:ripemd160@2.0.1",
+        "sha.js": "npm:sha.js@2.4.11"
+      }
+    },
+    "npm:create-hmac@1.1.7": {
+      "map": {
+        "inherits": "npm:inherits@2.0.3",
+        "safe-buffer": "npm:safe-buffer@5.1.1",
+        "create-hash": "npm:create-hash@1.2.0",
+        "cipher-base": "npm:cipher-base@1.0.4",
+        "ripemd160": "npm:ripemd160@2.0.1",
+        "sha.js": "npm:sha.js@2.4.11"
+      }
+    },
+    "npm:diffie-hellman@5.0.3": {
+      "map": {
+        "randombytes": "npm:randombytes@2.0.6",
+        "bn.js": "npm:bn.js@4.11.8",
+        "miller-rabin": "npm:miller-rabin@4.0.1"
+      }
+    },
+    "npm:public-encrypt@4.0.2": {
+      "map": {
+        "randombytes": "npm:randombytes@2.0.6",
+        "create-hash": "npm:create-hash@1.2.0",
+        "bn.js": "npm:bn.js@4.11.8",
+        "browserify-rsa": "npm:browserify-rsa@4.0.1",
+        "parse-asn1": "npm:parse-asn1@5.1.1"
+      }
+    },
+    "npm:create-ecdh@4.0.1": {
+      "map": {
+        "bn.js": "npm:bn.js@4.11.8",
+        "elliptic": "npm:elliptic@6.4.0"
+      }
+    },
+    "npm:browserify-cipher@1.0.1": {
+      "map": {
+        "evp_bytestokey": "npm:evp_bytestokey@1.0.3",
+        "browserify-des": "npm:browserify-des@1.0.1",
+        "browserify-aes": "npm:browserify-aes@1.2.0"
+      }
+    },
+    "npm:browserify-des@1.0.1": {
+      "map": {
+        "cipher-base": "npm:cipher-base@1.0.4",
+        "inherits": "npm:inherits@2.0.3",
+        "des.js": "npm:des.js@1.0.0"
+      }
+    },
+    "npm:parse-asn1@5.1.1": {
+      "map": {
+        "browserify-aes": "npm:browserify-aes@1.2.0",
+        "evp_bytestokey": "npm:evp_bytestokey@1.0.3",
+        "create-hash": "npm:create-hash@1.2.0",
+        "pbkdf2": "npm:pbkdf2@3.0.14",
+        "asn1.js": "npm:asn1.js@4.10.1"
+      }
+    },
+    "npm:react@16.3.2": {
       "map": {
         "fbjs": "npm:fbjs@0.8.16",
+        "object-assign": "npm:object-assign@4.1.1",
         "loose-envify": "npm:loose-envify@1.3.1",
-        "prop-types": "npm:prop-types@15.6.1",
-        "object-assign": "npm:object-assign@4.1.1"
+        "prop-types": "npm:prop-types@15.6.1"
       }
     }
   }

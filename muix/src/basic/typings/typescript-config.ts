@@ -13,7 +13,7 @@ export namespace TAddInConfig {
   //******************** Platform specific
   export type RulesetWithAddIn<R extends TBasic.Shape = TBasic.Shape> = TBasic.Ruleset
   export interface RulesetWithAddInWeb<R extends TBasic.Shape = TBasic.Shape> extends TBasic.RulesetWeb { }
-  export type RulesetWithAddInNative<T extends TBasic.RulesetNativeIds = 'Text', R extends TBasic.Shape = TBasic.Shape> = TBasic.NativeRules<T>
+  export type RulesetWithAddInNative<T extends TBasic.RulesetNativeIds = 'Text', R extends TBasic.Shape = TBasic.Shape> = TBasic.RulesetNative<T>
 
   export interface SheetAddInWeb<R extends TBasic.Shape = TBasic.Shape> { }
   export interface SheetAddInNative<R extends TBasic.Shape = TBasic.Shape> { }

@@ -7,7 +7,7 @@ import * as Cfg from 'typescript-config'
 import { TTheme, TSheets, withStyles, ScrollView, View, Text, Icon, AnimatedView, } from 'reactxx'
 import { TBasic, TComps, LoremIpsum } from 'reactxx-basic'
 
-import { createContext, ConsumerType as StateConsumerType, ConsumerProps } from 'reactxx-stateman' 
+//import { createContext, ConsumerType as StateConsumerType, ConsumerProps } from 'reactxx-stateman' 
 
 //******* Two possibilities how to use get icon data:
 
@@ -38,18 +38,17 @@ export namespace TResponsibleDrawer {
   export type Shape = TSheets.OverwriteShape<{
     common: TComps.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop'> & TComps.ShapeTexts<'openButton' | 'closeButton'>
     props: {
-      //renderContent: (props: RenderProps) => JSX.Element
-      drawer: JSX.Element
+      drawer: JSX.Element //drawer content
     }
-    mediaq: 'mobile' | 'tablet' | 'desktop'
-    animation: {
-      mobile: TComps.ShapeViews<'drawer' | 'backDrop'>
-      tablet: TComps.ShapeViews<'drawer' | 'content'>
+    mediaq: 'mobile' | 'tablet' | 'desktop' // media query breakpoints names
+    animation: { //animation sheets
+      mobile: TComps.ShapeViews<'drawer' | 'backDrop'> // mobile animation sheet
+      tablet: TComps.ShapeViews<'drawer' | 'content'> // tablet animation sheet
     },
-    compTheme: { //type of parameter
-      drawerWidths: [number, number, number] //drawer width for Mobile, tablet and desktop
+    compTheme: { // component theme parameters
+      drawerWidths: [number, number, number] //drawer width for mobile, tablet and desktop
       breakpoints: [number, number] //media query breakpoints between mobile x tablet and tablet x desktop
-      animationDuration: number //animation duration for mobile and tablet
+      animationDuration: number //drawer animation duration for mobile and tablet
     },
     nameType: Consts.Drawer
   }>
@@ -59,11 +58,11 @@ export namespace TResponsibleDrawer {
 // ResponsibleDrawer component
 //************************************************************************************************************
 
-// Provider and Consumer components for syncing visibility od Open x Close buttons with drawer open x close state
-const { Provider, Consumer } = createContext<TResponsibleDrawer.RenderProps>(null)
+// Provider and Consumer for syncing visibility of <Open x Close buttons> with <drawer open x close state>
+const { Provider, Consumer } = React.createContext<TResponsibleDrawer.RenderProps>({} as any)
 
-type ConsumerType = StateConsumerType<TResponsibleDrawer.RenderProps, TResponsibleDrawer.RenderProps>
-type AnimationType = React.ComponentType<TBasic.PropsX<TResponsibleDrawer.Shape>> & { LayoutChanged?: ConsumerType }
+//type ConsumerType = StateConsumerType<TResponsibleDrawer.RenderProps, TResponsibleDrawer.RenderProps>
+type AnimationType = React.ComponentType<TBasic.PropsX<TResponsibleDrawer.Shape>> & { LayoutChanged?: typeof Consumer }
 
 // ResponsibleDrawer's sheet. 
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
@@ -91,7 +90,7 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, compThemeP
         ],
       },
       $duration: compThemePar.animationDuration,
-      $opened: false, //drawer is closed by default
+      $opened: false, //drawer is closed by default for mobile
     },
 
     tablet: { // tablet animation
@@ -104,7 +103,7 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, compThemeP
         left: [0, compThemePar.drawerWidths[1]]
       },
       $duration: compThemePar.animationDuration,
-      $opened: true, //drawer is opened by default
+      $opened: true, //drawer is opened by default for tablet
     }
   },
 
@@ -168,9 +167,9 @@ const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = props => {
   const root = mergeRulesetWithOverrides(
     classes.root,
     // set actual ruleset for different window size
-    mediaState.mobile && classes.mobile,
-    mediaState.tablet && classes.tablet,
-    mediaState.desktop && classes.desktop,
+    mediaState.mobile && classes.mobile, // => use mobile.$overrides when mediaState.mobile===true
+    mediaState.tablet && classes.tablet, // => use tablet.$overrides when mediaState.mobile===true
+    mediaState.desktop && classes.desktop, // => use desktop.$overrides when mediaState.mobile===true
     className, // always put className at the end of the ROOT ruleset
   ) as TBasic.ViewRulesetX
 
@@ -213,17 +212,17 @@ const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = props => {
   </View>
 }
 
-// HOC ResponsibleDrawer component with default compThemePar's
+// HOC ResponsibleDrawer component 
 export const ResponsibleDrawer = (withStyles<TResponsibleDrawer.Shape>(
   TResponsibleDrawer.Consts.Drawer, //'comps$responsibledrawer' as any/*TResponsibleDrawer.Consts.Drawer*/,
   sheet,
-  { //component's theme pars:
-    animationDuration: 300, // animation duration in msec
+  { //default compThemePar's pars. Could be changed
+    animationDuration: 300, // drawer animation duration in msec
     drawerWidths: [250, 250, 300], // different opened drawer width for mobile, tablet and desktop
     breakpoints: [480, 1024] // media breakpoints between mobile x tablet and tablet x desktop
   })(responsibleDrawer)) as AnimationType
 
-ResponsibleDrawer.LayoutChanged = Consumer as ConsumerType
+ResponsibleDrawer.LayoutChanged = Consumer
 
 
 //************************************************************************************************************
@@ -240,7 +239,9 @@ const Drawer: React.SFC = () => <ScrollView classes={{ container: { flex: 1, bac
   <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, padding: 10, backgroundColor: 'gray', }}>
     <Text className={{ flexGrow: 1, color: 'white' }}>{LoremIpsum(2)}</Text>
     {/* re-render ResponsibleDrawer.LayoutChanged only when Provider notifies (hide x display it): */}
-    <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />} />
+    <ResponsibleDrawer.LayoutChanged> 
+      {({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />}
+    </ResponsibleDrawer.LayoutChanged>
   </View>
   <Text className={{ padding: 10 }}>{LoremIpsum(80)}</Text>
 </ScrollView>
@@ -248,7 +249,9 @@ const Drawer: React.SFC = () => <ScrollView classes={{ container: { flex: 1, bac
 const Content: React.SFC = () => <ScrollView classes={{ container: { flex: 1 } }}> {/* content */}
   <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}>
     {/* re-render ResponsibleDrawer.LayoutChanged only when Provider notifies (hide x display it): */}
-    <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />} />
+    <ResponsibleDrawer.LayoutChanged> 
+      {({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />}
+    </ResponsibleDrawer.LayoutChanged>
     <Text numberOfLines={1} className={{ flexGrow: 1, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(10)}</Text>
     <Text className={{ flexShrink: 0, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(2)}</Text>
   </View>

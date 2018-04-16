@@ -27,13 +27,12 @@ export namespace TSheets {
     compTheme?: {}
   }
 
-  //export interface ShapesLow { [name: string]: Shape } 
   export interface Shapes { }
 
   //******************** Helpers for Shape.common and Shape.native definitin
   export type OverwriteShape<R extends Partial<Shape>> = Overwrite<{
     common: {}; native: {}; web: null
-    style: 'View'//ReactN.ViewStyle
+    style: 'View'
     props: {}; propsNative: ReactN.ViewProperties; propsWeb: React.HTMLAttributes<HTMLElement>
     animation: {}; mediaq: null,
     nameType: null
@@ -48,16 +47,16 @@ export namespace TSheets {
 
   //******************** Ruleset Merge
   export type MergeRulesetWithOverrides = (...rulesets: TAddInConfig.RulesetWithAddIn[]) => TBasic.Ruleset
-  export type MergeRulesetWithOverridesNative = (...rulesets: (TAddInConfig.RulesetWithAddInNative | ReactN.TextStyle)[]) => TBasic.RulesetNative
+  export type MergeRulesetWithOverridesNative = (...rulesets: (TAddInConfig.RulesetWithAddInNative | ReactN.TextStyle)[]) => TBasic.rulesetNative
   export type MergeRulesetWithOverridesWeb = (...rulesets: TAddInConfig.RulesetWithAddInWeb[]) => TBasic.RulesetWeb
 
 
   /******************************************
     ALL SHEETS
   *******************************************/
-  export type SheetsWeb = { [P in keyof Shapes]?: TBasic.SheetWeb<Shapes[P]> }
-  export type SheetsNative = { [P in keyof Shapes]?: TBasic.SheetNative<Shapes[P]> }
-  export type Sheets = { [P in keyof Shapes]?: TBasic.Sheet<Shapes[P]> }
+  //export type SheetsWeb = { [P in keyof Shapes]?: TBasic.SheetWeb<Shapes[P]> }
+  //export type SheetsNative = { [P in keyof Shapes]?: TBasic.SheetNative<Shapes[P]> }
+  //export type Sheets = { [P in keyof Shapes]?: TBasic.Sheet<Shapes[P]> }
 
   //******************** $props in rulesets
   export type PropsInRulesetX<R extends Shape = Shape> = Partial<Overwrite<TBasic.getProps<R>, {

@@ -37,8 +37,6 @@ SystemJS.config({
     "os": "npm:jspm-nodelibs-os@0.2.2",
     "path": "npm:jspm-nodelibs-path@0.2.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",
-    "react": "npm:react@16.2.0",
-    "react-dom": "npm:react-dom@16.2.0",
     "reactxx": "npm:reactxx@0.1.51",
     "reactxx-basic": "npm:reactxx-basic@0.1.9",
     "reactxx-fela": "npm:reactxx-fela@0.1.9",

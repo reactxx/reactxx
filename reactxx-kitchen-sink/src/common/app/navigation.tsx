@@ -49,7 +49,9 @@ var logo = { flexGrow: 0, marginLeft: 5, color: 'lightblue', paddingRight: 10, m
 const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ children, gotoExample, actName }) => <View className={{ flex: 1 }}>
   <View className={{ ...toolbar, backgroundColor: 'gray' }}>
     <Text className={{ flexGrow: 1 }}>{' '}</Text>
-    <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...drawerButton, ...style }} onPress={onPress} data={iconData} />} />
+    <ResponsibleDrawer.LayoutChanged> 
+      {({ style, onPress, iconData }) => <Icon className={{ ...drawerButton, ...style }} onPress={onPress} data={iconData} />}
+    </ResponsibleDrawer.LayoutChanged>
   </View>
   <ScrollView classes={{ container: { backgroundColor: 'lightgray', paddingTop: 15, flexGrow: 1 } }}>
     <DrawerItem key={navigationExample.name} example={navigationExample} gotoExample={gotoExample} actName={actName} />
@@ -60,7 +62,9 @@ const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ chil
 
 const Content: React.SFC<{ actExample: KSink.Example }> = ({ children, actExample }) => <View className={{ flex: 1 }}> {/* content */}
   <View className={{ ...toolbar, backgroundColor: 'blue' }}>
-    <ResponsibleDrawer.LayoutChanged render={({ style, onPress, iconData }) => <Icon className={{ ...drawerButton, ...style }} onPress={onPress} data={iconData} />} />
+    <ResponsibleDrawer.LayoutChanged> 
+      {({ style, onPress, iconData }) => <Icon className={{ ...drawerButton, ...style }} onPress={onPress} data={iconData} />}
+    </ResponsibleDrawer.LayoutChanged>
     <Text className={logo}>ReactXX KitchenSink</Text>
     <Text numberOfLines={1} className={{ flexGrow: 1, flexShrink: 1, color: 'white', }}>{actExample.title}</Text>
     {window.isWeb && actExample.name != 'xapp/navigation' && <Icon className={{ ...codeIcons, fontSize: 32 }} $web={{ viewBox: '0 0 1024 1024', url: webSandboxUrl(actExample) }} >{codeSandboxSVG}</Icon>}
