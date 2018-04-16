@@ -71,7 +71,7 @@ export const muiCompatible = <R extends TBasic.Shape>(Component: muiComponentTyp
     const codeProps = {
       ...other, ...$web,
       style: toPlatformRuleSet(styleX as TBasic.RulesetX),
-      className: rulesetToClassNames(toPlatformRuleSet(classNameX as TBasic.RulesetX)),
+      className: rulesetToClassNames(toPlatformRuleSet(classNameX as TBasic.RulesetX) as React.CSSProperties),
       classes: classes
     }
 

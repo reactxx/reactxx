@@ -16,9 +16,10 @@ export namespace TAddInConfig {
   export interface SheetXAddIn<R extends TSheets.Shape = TSheets.Shape> { $animations?: TAnimation.SheetsX<TSheets.getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<TSheets.getMediaQ<R>> }
 
   //******************** Platform specific
-  export type RulesetWithAddIn<R extends TSheets.Shape = TSheets.Shape> = TBasic.Ruleset & { $overrides?: TBasic.Sheet<R>; $name?: string; $props?: TSheets.PropsInRuleset<R>; $mediaq?: TMediaQ.NotifySheetX<TSheets.getMediaQ<R>> }
   export interface RulesetWithAddInWeb<R extends TSheets.Shape = TSheets.Shape> extends TBasic.RulesetWeb { $overrides?: TBasic.SheetWeb<R>; $name?: string; $props?: TSheets.PropsInRulesetWeb<R> }
-  export type RulesetWithAddInNative<T extends TBasic.RulesetNativeIds = 'Text', R extends TSheets.Shape = TSheets.Shape> = T & { $overrides?: TBasic.SheetNative<R>; $name?: string; $props?: TSheets.PropsInRulesetNative<R> }
+  export type RulesetWithAddInNative<T extends TBasic.RulesetNativeIds = 'Text', R extends TSheets.Shape = TSheets.Shape> = TBasic.NativeRules<T> & { $overrides?: TBasic.SheetNative<R>; $name?: string; $props?: TSheets.PropsInRulesetNative<R> }
+  export type RulesetWithAddIn<T extends TBasic.RulesetNativeIds = 'Text', R extends TSheets.Shape = TSheets.Shape> = (RulesetWithAddInNative<T, R> | RulesetWithAddInWeb<R>) & { $mediaq?: TMediaQ.SheetX<T, R> }
+  export interface RulesetWithAddInAny { $overrides?; $name?; $props?}
 
   export interface SheetAddInWeb<R extends TSheets.Shape = TSheets.Shape> { $animations?: TAnimation.SheetsX<TSheets.getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<TSheets.getMediaQ<R>> }
   export interface SheetAddInNative<R extends TSheets.Shape = TSheets.Shape> { $animations?: TAnimation.SheetsX<TSheets.getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<TSheets.getMediaQ<R>> }

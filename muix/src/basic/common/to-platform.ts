@@ -2,19 +2,15 @@ import React from 'react'
 import ReactN from 'react-native'
 import * as Cfg from 'typescript-config'
 
-import { TBasic } from '../typings/basic'
+import { TBasic, isType } from '../typings/basic'
 
-
-
-export const toPlatformEvents = ($web: TBasic.OnPressAllWeb, $native: TBasic.OnPressAllNative, propsX: TBasic.OnPressAllX, codeProps: TBasic.CodeProps) => {
+export const toPlatformEvents = ($web: TBasic.OnPressAllWeb, $native: TBasic.OnPressAllNative, propsX: TBasic.OnPressAllX, cp: TBasic.CodeProps) => {
   const { onPress, onLongPress, onPressIn, onPressOut } = propsX
-  if (window.isWeb) {
-    const cp = codeProps as TBasic.CodePropsWeb
+  if (isType<TBasic.CodePropsWeb>(cp)) {
     const cl = $web && $web.onClick || onPress; if (cl) cp.onClick = cl
     const cl2 = $web && $web.onMouseDown || onPressIn; if (cl2) cp.onMouseDown = cl2
     const cl3 = $web && $web.onMouseUp || onPressOut; if (cl3) cp.onMouseUp = cl3
-  } else {
-    const cp = codeProps as TBasic.CodePropsNative
+  } else if (isType<TBasic.CodePropsNative>(cp)) {
     const cl = $native && $native.onPress || onPress; if (cl) cp.onPress = cl
     const cl1 = $native && $native.onLongPress || onLongPress; if (cl1) cp.onLongPress = cl1
     const cl2 = $native && $native.onPressIn || onPressIn; if (cl2) cp.onPressIn = cl2
@@ -40,7 +36,7 @@ export const toPlatformRuleSet = (style: RulesetX) => {
     const { $native: $propsNative, $web: $propsWeb, ...restProps } = $propsX
     $props = { ...restProps, ...(isNative ? $propsNative : $propsWeb) }
   }
-  const res = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $mediaq: toPlatformSheet($mediaq as any), $props }
+  const res:any = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $mediaq: toPlatformSheet($mediaq as any), $props }
   if (!res.$overrides) delete res.$overrides; if (!res.$props) delete res.$props //remove NULL or UNDEFINED
   return res as TBasic.Ruleset
 }

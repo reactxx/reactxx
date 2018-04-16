@@ -4,6 +4,8 @@ import { LoremIpsum } from 'reactxx-basic'
 
 import { TBasic } from 'reactxx-basic'
 
+const XX: React.CSSProperties = {}
+
 interface Example {
   title: string
   descr?: string

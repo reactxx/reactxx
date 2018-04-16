@@ -15,7 +15,7 @@ export const textSheet: TBasic.SheetX<TComps.TextShape> = {
     },
   },
   singleLineStyle: {
-    flexShrink:1,
+    flexShrink: 1,
     $web: {
       maxWidth: '100%',
       overflow: 'hidden',
@@ -36,7 +36,7 @@ const webViewRuleset = {
   flexShrink: 0,
   position: 'relative',
   overflow: 'hidden',
-} as TBasic.RulesetWeb 
+} as TBasic.RulesetWeb
 
 export const viewSheet: TBasic.SheetX<TComps.ViewShape> = {
   root: {
@@ -71,7 +71,7 @@ export const scrollViewSheet: TBasic.SheetX<TComps.ScrollViewShape> = {
       // Enable hardware compositing in modern browsers.
       // Creates a new layer with its own backing surface that can significantly
       // improve scroll performance.
-      transform: [{ translateZ: 0 }]
+      transform: 'translateZ(0)'
     },
     $native: {
       flexBasis: 0,
@@ -81,15 +81,11 @@ export const scrollViewSheet: TBasic.SheetX<TComps.ScrollViewShape> = {
     $web: webViewRuleset,
   },
   rootHorizontal: {
-    $web: {
-      flexDirection: 'row',
-      overflowX: 'auto',
-      overflowY: 'hidden'
-    },
+    flexDirection: 'row',
+    overflowX: 'auto',
+    overflowY: 'hidden'
   },
   containerHorizontal: {
-    $web: {
-      flexDirection: 'row'
-    }
+    flexDirection: 'row'
   }
 }

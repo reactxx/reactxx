@@ -23,7 +23,7 @@ import { Menu } from 'reactxx-mdi/Menu'
 //************************************************************************************************************
 // ResponsibleDrawer typings
 //************************************************************************************************************
-export namespace ResponsibleDrawerT {
+export namespace TResponsibleDrawer {
 
   export const enum Consts {
     Drawer = 'comps$responsibledrawer'
@@ -60,14 +60,14 @@ export namespace ResponsibleDrawerT {
 //************************************************************************************************************
 
 // Provider and Consumer components for syncing visibility od Open x Close buttons with drawer open x close state
-const { Provider, Consumer } = createContext<ResponsibleDrawerT.RenderProps>(null)
+const { Provider, Consumer } = createContext<TResponsibleDrawer.RenderProps>(null)
 
-type ConsumerType = StateConsumerType<ResponsibleDrawerT.RenderProps, ResponsibleDrawerT.RenderProps>
-type AnimationType = React.ComponentType<TBasic.PropsX<ResponsibleDrawerT.Shape>> & { LayoutChanged?: ConsumerType }
+type ConsumerType = StateConsumerType<TResponsibleDrawer.RenderProps, TResponsibleDrawer.RenderProps>
+type AnimationType = React.ComponentType<TBasic.PropsX<TResponsibleDrawer.Shape>> & { LayoutChanged?: ConsumerType }
 
 // ResponsibleDrawer's sheet. 
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
-const sheet: TTheme.SheetCreatorX<ResponsibleDrawerT.Shape> = (theme, compThemePar) => ({
+const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, compThemePar) => ({
 
   $mediaq: { // media query window-width breakpoints. Component receives actual width in "mediaq" prop and is rerendered when mediaq changed.
     mobile: [null, compThemePar.breakpoints[0]],
@@ -155,7 +155,7 @@ const sheet: TTheme.SheetCreatorX<ResponsibleDrawerT.Shape> = (theme, compThemeP
 })
 
 // responsibleDrawer stateless component. 
-const responsibleDrawer: TBasic.CodeSFC<ResponsibleDrawerT.Shape> = props => {
+const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = props => {
 
   const { classes, mergeRulesetWithOverrides, children, className, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaq, drawer: drawerNode } = props
 
@@ -214,8 +214,8 @@ const responsibleDrawer: TBasic.CodeSFC<ResponsibleDrawerT.Shape> = props => {
 }
 
 // HOC ResponsibleDrawer component with default compThemePar's
-export const ResponsibleDrawer = (withStyles<ResponsibleDrawerT.Shape>(
-  'comps$responsibledrawer' as any/*ReactXXResponsibleDrawer.Consts.Drawer*/,
+export const ResponsibleDrawer = (withStyles<TResponsibleDrawer.Shape>(
+  TResponsibleDrawer.Consts.Drawer, //'comps$responsibledrawer' as any/*TResponsibleDrawer.Consts.Drawer*/,
   sheet,
   { //component's theme pars:
     animationDuration: 300, // animation duration in msec

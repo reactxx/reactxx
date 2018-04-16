@@ -110,7 +110,7 @@ class RView extends React.PureComponent {
       <div style={{}}>
         <span>My Sliding Box</span>
       </div>
-      <div style={[rInitValue2, rConfig, rTargetValue2]}>
+      <div style={{ ...rInitValue2, ...rConfig, ...rTargetValue2 }}>
         <span>My Sliding Box</span>
       </div>
     </div>

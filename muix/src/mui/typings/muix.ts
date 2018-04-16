@@ -2,7 +2,7 @@ import ReactN from 'react-native'
 
 import * as Mui from './mui'
 
-import { TBasic } from 'reactxx-basic'
+import { TBasic, TCommonStyles } from 'reactxx-basic'
 
 export namespace Muix {
 
@@ -28,7 +28,7 @@ export namespace Muix {
   export type ShadowsNative = ReactN.ViewStyle[]
 
   export type ThemeShadowsX = TBasic.RulesetX<'View'>[]
-  export type ThemeShadows = TBasic.ViewRulesetCommonX[]
+  export type ThemeShadows = TCommonStyles.ViewStyle[]
 
   export interface Theme extends Mui.Theme {
     shadowsNew: ThemeShadows

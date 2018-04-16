@@ -29,7 +29,7 @@ const theme = createMuiTheme({
 const rootView: TBasic.ViewRulesetX = { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'stretch', padding: 10 }
 
 const app2: React.SFC = props => <AppContainer>
-  <Button color="secondary" variant='raised' classes={theme => ({ raisedSecondary: { backgroundColor: 'green', $web: { '&:hover': { backgroundColor: 'green', } } } })} >classes</Button>
+  <Button color="secondary" variant='raised' classes={theme => ({ raisedSecondary: { backgroundColor: 'green', $web: { ':hover': { backgroundColor: 'green', } } } })} >classes</Button>
   </AppContainer>
 
 //const root = { root: { margin: theme.spacing.unit } }
@@ -78,7 +78,7 @@ const app: React.SFC = props => <AppContainer>
       <ButtonIconEnd color='primary' disabled variant='raised' >Icon Right<Icon data={MDI.ArrowDownBoldBox} /></ButtonIconEnd>
     </View>
     <View classes={{ root: rootView }} >
-      <Button color='secondary' variant='raised' classes={{ raisedSecondary: { backgroundColor: 'green', $web: { '&:hover': { backgroundColor: 'red', } } } }} >classes</Button>
+      <Button color='secondary' variant='raised' classes={{ raisedSecondary: { backgroundColor: 'green', $web: { ':hover': { backgroundColor: 'red', } } } }} >classes</Button>
       <ThemeModifierX modify={compThemeSheetModifier<MuiButtonT.Shape>(MuiButtonT.CompNames.Button, { raisedSecondary: { backgroundColor: 'red' } })}>
         <Button color='secondary' variant='raised'>theme</Button>
       </ThemeModifierX>

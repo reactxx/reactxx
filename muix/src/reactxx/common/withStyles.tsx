@@ -100,7 +100,7 @@ const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => {
     const rulesetResult: typeof rulesets[0] = {}
     if (single) {
       const override = usedOverrides[single.$name]
-      if (!override) return clearSystemProps(media.processRuleset({ ...single })) //otimalization: nothing to merge
+      if (!override) return clearSystemProps(media.processRuleset({ ...single })) // optimalization: nothing to merge
       deepMerges(true, rulesetResult, single, override)
     } else //apply used $overrides
       rulesets.forEach(ruleset => {

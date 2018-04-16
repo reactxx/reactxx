@@ -25,6 +25,7 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
       const interval = p.split('-').map((i, idx) => !i ? (idx == 0 ? 0 : TMediaQ.Consts.maxBreakpoint) : parseInt(i))
       warning(interval.length == 2, `E.g. '-480' or '480-1024' or '1024-' expected, ${p} found`)
       breaks[interval[0]] = true; breaks[interval[1]] = true
+      const x = $mediaq[p]
       if (width >= interval[0] && width < interval[1]) patches.push($mediaq[p])
     }
     //subscribe for watching changes

@@ -32,6 +32,8 @@
 
       "typescript-config": [ "src/reactxx/web/index" ],
 
+      "platform-config": [ "src/reactxx/web/platform" ],
+
       "reactxx-fela": [ "src/fela/index" ],
 
       "reactxx-basic": [ "src/basic/web/index" ],

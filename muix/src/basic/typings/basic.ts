@@ -1,9 +1,15 @@
 ﻿import ReactN from 'react-native'
 import { TCommonStyles } from './common-styles'
+import * as CSS from 'csstype'
 
 import { TAddInConfig } from 'typescript-config'
 
 export namespace TBasic {
+
+  export type TPlatformWeb = 'web'
+  export type TPlatformNative = 'native'
+  export type TPlatformBoth = 'both'
+  export type TPlatform = TPlatformWeb | TPlatformNative | TPlatformBoth
 
   export const enum Consts {
     textClassName = 'reactxx-text'
@@ -54,10 +60,10 @@ export namespace TBasic {
     never
 
 
-  export interface ViewRulesetCommonX extends TCommonStyles.ViewStyle { }
-  export interface TextRulesetCommonX extends TCommonStyles.TextStyle { }
-  export interface ScrollViewRulesetCommonX extends TCommonStyles.ScrollViewStyle { }
-  export interface ImageRulesetCommonX extends TCommonStyles.ImageStyle { }
+  //export interface ViewRulesetCommonX extends TCommonStyles.ViewStyle { }
+  //export interface TextRulesetCommonX extends TCommonStyles.TextStyle { }
+  //export interface ScrollViewRulesetCommonX extends TCommonStyles.ScrollViewStyle { }
+  //export interface ImageRulesetCommonX extends TCommonStyles.ImageStyle { }
 
   export interface ViewRulesetX extends RulesetX<'View'> { }
   export interface TextRulesetX extends RulesetX<'Text'> { }
@@ -65,11 +71,10 @@ export namespace TBasic {
   export interface ScrollViewRulesetX extends RulesetX<'ScrollView'> { }
 
   //******************** Platform specific ruleset
-  export type RulesetWeb = React.CSSProperties //??? https://github.com/programbo/cssproperties/blob/master/css-properties.d.ts
-  export type RulesetNative = ReactN.TextStyle | ReactN.ViewStyle | ReactN.ImageStyle | ReactN.ScrollViewStyle
-  export type Ruleset = RulesetNative | RulesetWeb
-
-
+  export type RulesetWeb = CSS.Properties & { [P in CSS.SimplePseudos]?: CSS.Properties } & TAddInConfig.RulesetWithAddInAny // TAddInConfig.RulesetWithAddInWeb yield to error: recursive type using itself 
+  export type RulesetNative = (ReactN.TextStyle | ReactN.ViewStyle | ReactN.ImageStyle | ReactN.ScrollViewStyle) & TAddInConfig.RulesetWithAddInAny
+  export type Ruleset = RulesetWeb | RulesetNative
+  
   /******************************************
     COMPONENT SHAPE
   *******************************************/
@@ -112,6 +117,8 @@ export namespace TBasic {
     { [P in keyof getCommon<R>]: TAddInConfig.RulesetWithAddInNative<getCommon<R>[P], R> } &
     { [P in keyof getNative<R>]: TAddInConfig.RulesetWithAddInNative<getNative<R>[P], R> } &
     TAddInConfig.SheetAddInNative<R>
+
+  //export type Sheet<R extends Shape = Shape, T extends TPlatform = never> = T extends TPlatformWeb ? SheetWeb<R> : T extends TPlatformNative ? SheetNative<R> : SheetWeb<R> | SheetNative<R>
   export type Sheet<R extends Shape = Shape> = SheetWeb<R> | SheetNative<R>
   export type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
 
@@ -159,4 +166,10 @@ export namespace TBasic {
     TAddInConfig.CodeProps<R> &
     (OnPressAllNative | OnPressAllWeb)>
 
+  //export type CodeProps<R extends Shape = Shape> = TActPlatform extends TWebPlatform ? CodePropsWeb<R> : CodePropsNative<R>
+  //export type CodeProps<R extends Shape = Shape> = CodePropsWeb<R> | CodePropsNative<R>
+
 }
+
+export function isType<TWeb>(arg): arg is TWeb { return window.isWeb }
+export function isNativeType<TNative>(arg): arg is TNative { return !window.isWeb }

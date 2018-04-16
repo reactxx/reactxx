@@ -47,8 +47,9 @@ declare module 'url-parse' {
 }
 
 //https://github.com/Microsoft/TypeScript/issues/12215#issuecomment-307871458
-type Diff<T extends string, U extends string> = ({[P in T]: P } & {[P in U]: never } & { [x: string]: never })[T]
-type Omit<T, K extends keyof T> = {[P in Diff<keyof T, K>]: T[P]}
+type Diff<T, U> = T extends U ? never : T
+type Omit<T, K extends keyof T> = { [P in Diff<keyof T, K>]: T[P] }
+type OmitPartial<T, K extends keyof T> = { [P in Diff<keyof T, K>]?: T[P] }
 type Overwrite<T, U> = {[P in Diff<keyof T, keyof U>]: T[P]} & U
 type PartialOverwrite<T, U> = {[P in Diff<keyof T, keyof U>]?: T[P]} & Partial<U>
 type TakeFrom<T, K extends keyof T> = {[P in K]: T[P]}
@@ -56,10 +57,8 @@ type TakeFrom<T, K extends keyof T> = {[P in K]: T[P]}
 //https://schneidenbach.gitbooks.io/typescript-cookbook/get-the-return-type-of-a-function.html
 //nameOf, return type of function, 
 
-type PartialRecord<K extends string, T> = { [P in K]?: T; };
+//type PartialRecord<K extends string, T> = { [P in K]?: T; };
 
-type OmitFrom<T, K extends string> = {[P in Diff<keyof T, K>]: T[P]}
+//type OmitFrom<T, K extends string> = {[P in Diff<keyof T, K>]: T[P]}
 
-type NoPartial<T> = {
-  [P in keyof T]: T[P];
-};
+//type NoPartial<T> = { [P in keyof T]: T[P] }
