@@ -7,14 +7,9 @@
     "expo": "26.0.0",
     "react": "16.3.0-alpha.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-26.0.0.tar.gz",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.3.2",
     "react-scripts-ts": "2.13.0",
-    "reactxx": "^0.1.52",
-    "reactxx-mui": "^0.1.11",
-    "reactxx-basic": "^0.1.10",
     "reactxx-fela": "^0.1.9",
-    "reactxx-mdi": "^0.1.67",
-    "reactxx-stateman": "^0.1.70",
     "tslib": "1.9.0"
   },
   "private": true,
@@ -32,20 +27,28 @@
     "@types/react-native": "^0.52.18",
     "@types/warning": "^3.0.0",
     "babel-plugin-module-resolver": "^3.1.0",
-    "material-ui": "^1.0.0-beta.37"
+    "material-ui": "^1.0.0-beta.37",
+    "reactxx": "^0.1.54",
+    "reactxx-animation": "^0.1.2",
+    "reactxx-basic": "^0.1.12",
+    "reactxx-mdi": "^0.1.67",
+    "reactxx-mediaq": "^0.1.2",
+    "reactxx-mui": "^0.1.13",
+    "reactxx-stateman": "^0.1.72"
   },
   "jspm": {
     "name": "reactxx-kitchen-sink",
     "main": "web/index.js",
     "dependencies": {
       "core-js": "npm:core-js@2.5.3",
-      "react-dom": "npm:react-dom@^16.3.0",
-      "reactxx": "npm:reactxx@^0.1.51",
-      "reactxx-fela": "npm:reactxx-fela@^0.1.9",
+      "reactxx-basic": "npm:reactxx-basic@^0.1.12",
+      "reactxx-fela": "npm:reactxx-fela@^0.1.12",
       "reactxx-mdi": "npm:reactxx-mdi@^0.1.67",
-      "reactxx-mui": "npm:reactxx-mui@^0.1.10",
-      "reactxx-stateman": "npm:reactxx-stateman@^0.1.69",
-      "reactxx-basic": "npm:reactxx-basic@^0.1.9",
+      "reactxx-animation": "npm:reactxx-animation@^0.1.2",
+      "reactxx-mediaq": "npm:reactxx-mediaq@^0.1.2",
+      "reactxx-stateman": "npm:reactxx-stateman@^0.1.72",
+      "reactxx": "npm:reactxx@^0.1.54",
+      "reactxx-mui": "npm:reactxx-mui@^0.1.13",
       "tslib": "npm:tslib@^1.9.0"
     },
     "devDependencies": {},
@@ -57,14 +60,16 @@
       "crypto": "npm:jspm-nodelibs-crypto@^0.2.0",
       "domain": "npm:jspm-nodelibs-domain@^0.2.0",
       "events": "npm:jspm-nodelibs-events@^0.2.0",
-      "fela": "npm:fela@^6.0.0",
+      "fela": "npm:fela@^6.1.6",
       "fs": "npm:jspm-nodelibs-fs@^0.2.0",
       "http": "npm:jspm-nodelibs-http@^0.2.0",
       "https": "npm:jspm-nodelibs-https@^0.2.0",
+      "jss": "npm:jss@^9.0.0",
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
-      "react": "npm:react@^16.2.0",
+      "react": "npm:react@^16.0.0",
+      "react-dom": "npm:react-dom@^16.3.2",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
       "url": "npm:jspm-nodelibs-url@^0.2.0",
@@ -86,6 +91,12 @@
         "ignore": [
           "test.js"
         ]
+      },
+      "npm:lodash@4.17.5": {
+        "map": {
+          "buffer": "@empty",
+          "process": "@empty"
+        }
       },
       "npm:pbkdf2@3.0.14": {
         "main": "browser.js"

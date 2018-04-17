@@ -2,33 +2,40 @@
   "compileOnSave": true,
 
   "compilerOptions": {
-    "target": "es2017",
+
+    "module": "commonjs",
+    "outDir": "deploy/lib",
+    "moduleResolution": "node",
+    "target": "es5",
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
     "rootDir": "src",
-    "outDir": "deploy/es",
+    "jsx": "react",
+
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "importHelpers": false,
+
+    "strictNullChecks": false,
+    "downlevelIteration": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "noImplicitAny": false,
 
     "baseUrl": ".",
     "paths": {
-      "typescript-config": [ "node_modules/reactxx/es/typings/typescript-config" ],
-      "reactxx-mdi": [ "node_modules/reactxx-mdi/es/index" ]
+      //"typescript-config": [ "node_modules/reactxx/typings/typescript-config" ]
     },
 
-    "importHelpers": true,
-    "allowSyntheticDefaultImports": true,
-    "strictNullChecks": false,
-    "downlevelIteration": true,
-    "moduleResolution": "node",
-    "strict": true,
-    "noImplicitReturns": true,
-    "strictFunctionTypes": false,
-
-    "experimentalDecorators": true,
-    "noImplicitAny": false,
-    "jsx": "react-native",
     "lib": [
       "dom",
-      "es2015",
+      "es5",
+      "es6",
       "esnext.asynciterable"
     ]
+
   },
   "include": [
     "src/**/*"

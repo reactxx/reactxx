@@ -3,6 +3,12 @@ import warning from 'warning'
 
 import { rulesetsToClassNames } from 'reactxx-fela'
 
+import { withStyles } from '../common/withStyles'
+import { TBasic } from '../typings/basic'
+import { TComps } from '../typings/comps'
+import { CompNames } from '../typings/index'
+import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comps-sheets'
+
 const view: TBasic.CodeSFCWeb<TComps.ViewShape> = props => {
   const { style, classes, className, mergeRulesetWithOverrides, theme, animations, mediaq, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, className)
@@ -45,13 +51,6 @@ const animatedView = view
 const animatedIcon = icon
 const animatedText = text
 const animatedScrollView = scrollView
-
-
-import { withStyles } from '../common/withStyles'
-import { TBasic } from '../typings/basic'
-import { TComps } from '../typings/comps'
-import { CompNames } from '../typings/index'
-import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comps-sheets'
 
 export const Text: TBasic.ComponentTypeX<TComps.TextShape> = withStyles(CompNames.Text, textSheet)(text)
 export const AnimatedText: TBasic.ComponentTypeX<TComps.TextShape> = withStyles(CompNames.AnimatedText, textSheet)(animatedText)

@@ -1,7 +1,7 @@
 {
   "name": "reactxx-mui",
   "main": "",
-  "version": "0.1.12",
+  "version": "0.1.14",
   "description": "material-ui for both native and web",
   "registry": "npm",
   "dependencies": {

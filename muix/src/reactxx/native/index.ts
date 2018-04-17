@@ -1,3 +1,4 @@
+window.isWeb = false
 export * from '../common/withStyles'
 export * from '../common/theme'
 export * from '../common/theme2'

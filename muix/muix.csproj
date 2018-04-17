@@ -83,6 +83,10 @@
     <Content Include="deploy\basic\README.md" />
     <Content Include="deploy\fela\package.json" />
     <Content Include="deploy\fela\README.md" />
+    <Content Include="deploy\animation\package.json" />
+    <Content Include="deploy\animation\README.md" />
+    <Content Include="deploy\mediaq\package.json" />
+    <Content Include="deploy\mediaq\README.md" />
     <None Include="gulpfile.js_" />
     <Content Include="index.html" />
     <Content Include="package.json" />
