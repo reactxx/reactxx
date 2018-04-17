@@ -1,8 +1,9 @@
 ﻿import ReactN from 'react-native'
 import React from 'react'
-//import * as Cfg from 'typescript-config'
-
 import MuiButtonBase from 'material-ui/ButtonBase/ButtonBase'
+
+import { TAddInConfig } from 'reactxx'
+
 import { muiCompatible } from '../index'
 
 import { MuiButtonBaseT } from '../typings/button-base'

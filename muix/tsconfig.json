@@ -1,52 +1,45 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-
-    //"declaration": true,
-
-    //"traceResolution": true,
-
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-
+    "target": "es2017",
     "rootDir": "src",
-    "outDir": "deploy/lib",
-    "jsx": "react",
+    "outDir": "deploy/es",
 
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "importHelpers": true,
-
-    "strictNullChecks": false,
-    "downlevelIteration": true,
-    "strict": true,
-    "strictFunctionTypes": false,
-    "noImplicitAny": false,
-    //"noUnusedLocals": true,
+    "declaration": true,
 
     "baseUrl": ".",
     "paths": {
-
-      //"typescript-config": [ "src/reactxx/web/index" ],
-
-      "platform-config": [ "src/reactxx/web/platform" ],
+      "typescript-config": [ "src/reactxx/native/index" ],
 
       "reactxx-fela": [ "src/fela/index" ],
 
-      "reactxx-animation": [ "src/animation/web/index" ],
-      "reactxx-mediaq": [ "src/mediaq/web/index" ],
+      "reactxx-mdi": [ "node_modules/reactxx-mdi/es/index" ],
+
+      "reactxx-animation": [ "src/animation/native/index" ],
+      "reactxx-mediaq": [ "src/mediaq/native/index" ],
       "reactxx-basic": [ "src/basic/index" ],
 
-      "reactxx": [ "src/reactxx/web/index" ],
+      "reactxx-mui/typings/*": [ "src/mui/typings/*" ],
+
+      "reactxx": [ "src/reactxx/native/index" ],
 
       "reactxx-stateman": [ "src/stateman/index" ],
 
-      "reactxx-mui/*": [ "src/mui/*" ]
+      "reactxx-mui/*": [ "src/mui/native/*" ]
     },
 
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": false,
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": false,
+
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "jsx": "react-native",
     "lib": [
       "dom",
       "es2015",
@@ -54,8 +47,7 @@
     ]
   },
   "include": [
-    "src/**/*",
-    "node_modules/reactxx-mdi/typings.ts"
+    "src/**/*"
   ],
   "exclude": [
     "src/ks/typings.d.ts"

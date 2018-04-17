@@ -2,8 +2,7 @@
 
 import { TAnimation } from 'reactxx-animation'
 
-import { TAddInConfig } from './add-in'
-import { TBasic } from './basic'
+import { TBasic, TAddInConfig } from './basic'
 import { TMediaQ } from './media-q'
 
 export namespace TSheets {

@@ -1,12 +1,7 @@
 ﻿import React from 'react'
-import ReactN from 'react-native'
-//import * as Cfg from 'typescript-config'
+import ReactN, { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRectangle } from 'react-native'
 
-import { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRectangle } from 'react-native'
-
-import { TTheme, withStyles } from 'reactxx'
-
-import { TBasic } from 'reactxx'
+import { TBasic, ComponentTypeWithModifier, TTheme, withStyles } from 'reactxx'
 
 import { MuiButtonBaseT } from '../../typings/button-base'
 import * as Mui from '../../typings/mui'

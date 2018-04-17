@@ -1,13 +1,9 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
-//import * as Cfg from 'typescript-config'
-
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
-import { TTheme, CompNames, Text, withStyles, compThemeSheetModifier, ThemeModifier } from 'reactxx'
-
-import { TComps, TBasic } from 'reactxx'
+import { TComps, ComponentTypeWithModifier, TBasic, TTheme, CompNames, Text, withStyles, compThemeSheetModifier, ThemeModifier } from 'reactxx'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 import { MuiButtonT } from '../../typings/button'

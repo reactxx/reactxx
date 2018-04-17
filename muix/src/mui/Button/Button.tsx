@@ -1,14 +1,12 @@
 ﻿import ReactN from 'react-native'
 import React from 'react'
-//import * as Cfg from 'typescript-config'
-
 import MuiButton from 'material-ui/Button/Button'
+
+import { TComps, TBasic, TAddInConfig, TTheme, CompNames, compThemeSheetModifier, ThemeModifier } from 'reactxx'
+
 import { muiCompatible } from '../index'
-import { TTheme, CompNames, compThemeSheetModifier, ThemeModifier } from 'reactxx'
 import * as Mui from '../typings/mui'
 import { MuiButtonT } from '../typings/button'
-
-import { TComps, TBasic } from 'reactxx'
 
 const ButtonIconStartOverrides: React.SFC<Mui.ButtonProps> = props => <ThemeModifier modify={compThemeSheetModifier<TComps.IconShape>(CompNames.Icon, theme => ({ root: { marginRight: theme.spacing.unit } }))}>
   <MuiButton {...props} />

@@ -1,23 +1,19 @@
 import React from 'react'
-//import * as Cfg from 'typescript-config'
-
-//import hoistNonReactStatics from 'hoist-non-react-statics'
-
 import createGenerateClassName from 'material-ui/styles/createGenerateClassName'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import jssShared, { create} from 'jss';
 import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
-import { TTheme, ThemeProvider, ThemeModifier, Themer } from 'reactxx'
+
 import { ModifierType } from 'reactxx-stateman'
+import { TTheme, TAddInConfig, ThemeProvider, ThemeModifier, Themer, TBasic, toPlatformRuleSet, toPlatformSheet } from 'reactxx'
+import { toPlatformEvents } from 'reactxx-basic'
+import { rulesetToClassNames } from 'reactxx-fela'
 
 export * from './common/createMuiTheme'
-
 import { createMuiTheme } from './common/createMuiTheme'
 import * as Mui from './typings/mui'
 
-import { TBasic, toPlatformRuleSet, toPlatformSheet, toPlatformEvents } from 'reactxx'
-import { rulesetToClassNames } from 'reactxx-fela'
 
 export type JSS = typeof jssShared
 

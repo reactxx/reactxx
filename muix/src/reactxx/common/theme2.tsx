@@ -2,7 +2,9 @@ import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
 
-import { toPlatformSheet, toPlatformRuleSet, deepMerges } from './to-platform'
+import { deepMerges } from 'reactxx-basic'
+
+import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
 import { TBasic } from '../typings/basic'
 import { TTheme } from '../typings/theme'
 import { TSheets } from '../typings/sheets'
@@ -81,14 +83,14 @@ const applyTheme = (name: string, createSheetX: TTheme.SheetCreatorX, nextProps:
   const actSheet: TBasic.Sheet = classes ? deepMerges(false, {}, cachedStaticSheet, toPlatformSheet(callCreator(theme, par, classes))) : cachedStaticSheet
   for (const p in actSheet) if (!p.startsWith('$')) actSheet[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
 
-  const nextState: HOCState = {
+  const nextState = {
     classes: actSheet,
     className: toPlatformRuleSet(callCreator(theme, par, className)),
     style: toPlatformRuleSet(callCreator(theme, par, style)),
     // save actual themeComps to state:
     actTheme: theme,
     actThemeComp: themeComp,
-  }
+  } as HOCState
 
   return nextState
 }

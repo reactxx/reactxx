@@ -2,11 +2,13 @@ import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
 
-import { toPlatformEvents, deepMerge } from 'reactxx-basic'
+import { toPlatformEvents, deepMerge, deepMerges } from 'reactxx-basic'
 import { Animations } from 'reactxx-animation'
 import { ComponentsMediaQ, TMediaQ } from 'reactxx-mediaq'
+import { TAddInConfig, ComponentTypeWithModifier } from 'reactxx'
 
-import { toPlatformSheet, toPlatformRuleSet, deepMerges } from './to-platform'
+
+import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
 import { TBasic } from '../typings/basic'
 import { TSheets } from '../typings/sheets'
 import { TTheme } from '../typings/theme'

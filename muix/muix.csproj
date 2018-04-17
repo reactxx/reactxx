@@ -172,8 +172,7 @@
     <TypeScriptCompile Include="src\reactxx\typings\media-q.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\sheets.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\theme.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\add-in.ts" />
-    <None Include="src\reactxx\typings\typescript-config.ts_" />
+    <None Include="src\reactxx\typings\add-in.ts_" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\web\index.tsx" />

@@ -19,6 +19,7 @@ export * from '../common/createMuiTheme'
 //  //return <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
 //}} />
 
+export const ThemeModifierX = null
 
 export class AppContainer extends React.PureComponent {
   state = { isReady: false }
