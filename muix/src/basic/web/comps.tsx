@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
-import * as Cfg from 'typescript-config'
-
 import warning from 'warning'
+
 import { rulesetsToClassNames } from 'reactxx-fela'
 
 import { TBasic } from '../typings/basic'

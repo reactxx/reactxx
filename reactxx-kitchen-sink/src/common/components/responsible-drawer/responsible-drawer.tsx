@@ -1,7 +1,7 @@
 // this code is 100% shared between web and native
 import React from 'react'
 import ReactN from 'react-native'
-import * as Cfg from 'typescript-config'
+//import * as Cfg from 'typescript-config'
 
 // different import of 'ScrollView, View, Text, Icon, AnimatedView' components for web and native
 import { TTheme, TSheets, withStyles, ScrollView, View, Text, Icon, AnimatedView, } from 'reactxx'

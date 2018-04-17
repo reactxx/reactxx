@@ -2,10 +2,10 @@
 import ReactN from 'react-native'
 import * as CSS from 'csstype'
 
-import { Types } from 'reactxx-basic2'
-import { TAddInConfig } from '../typings/typescript-config'
+import { Types, TCommonStyles } from 'reactxx-basic2'
+import { TAddInConfig } from './add-in'
 
-import { TCommonStyles } from './common-styles'
+//import { TCommonStyles } from './common-styles'
 
 export namespace TBasic {
 

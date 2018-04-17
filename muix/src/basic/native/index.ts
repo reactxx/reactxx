@@ -25,5 +25,5 @@ export * from './to-platform'
 export * from '../common/develop'
 export * from '../common/comps-sheets'
 export * from '../typings/index'
-export * from '../typings/typescript-config'
+//export * from '../typings/typescript-config'
 

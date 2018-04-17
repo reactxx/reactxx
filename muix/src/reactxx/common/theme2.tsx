@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactN from 'react-native'
-import { TBasic, toPlatformSheet, toPlatformRuleSet, deepMerges } from 'reactxx-basic'
+import warning from 'warning'
 
+import { toPlatformSheet, toPlatformRuleSet, deepMerges } from './to-platform'
+import { TBasic } from '../typings/basic'
 import { TTheme } from '../typings/theme'
 import { TSheets } from '../typings/sheets'
-
-import warning from 'warning'
 
 //************ TYPINGS
 

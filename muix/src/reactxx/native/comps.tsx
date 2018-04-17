@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactN, { View as ViewRN, Text as TextRN, ScrollView as ScrollViewRN, Animated, TouchableWithoutFeedback, Linking } from 'react-native'
-//import * as Cfg from 'typescript-config'
-
 import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
+import { withStyles } from '../common/withStyles'
 import { TBasic } from '../typings/basic'
 import { TComps } from '../typings/comps'
+import { CompNames } from '../typings/index'
+import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comps-sheets'
 
 const anyView = (isAnim: boolean) => (props => {
   const ActView = isAnim ? Animated.View : ViewRN
@@ -48,12 +49,20 @@ const anyIcon = (isAnim: boolean) => (props => {
   return <ActIcon name={(data || children as string) as MaterialCommunityIconsProps['name']} style={rootStyle} {...rest} />
 }) as TBasic.CodeSFCNative<TComps.IconShape>
 
-export const view = anyView(false)
-export const animatedView = anyView(true)
-export const text = anyText(false)
-export const animatedText = anyText(true)
-export const scrollView = anyScrollView(false)
-export const animatedScrollView = anyScrollView(true)
-export const icon = anyIcon(false)
-export const animatedIcon = anyIcon(true)
+const view = anyView(false)
+const animatedView = anyView(true)
+const text = anyText(false)
+const animatedText = anyText(true)
+const scrollView = anyScrollView(false)
+const animatedScrollView = anyScrollView(true)
+const icon = anyIcon(false)
+const animatedIcon = anyIcon(true)
 
+export const Text: TBasic.ComponentTypeX<TComps.TextShape> = withStyles(CompNames.Text, textSheet)(text)
+export const AnimatedText: TBasic.ComponentTypeX<TComps.TextShape> = withStyles(CompNames.AnimatedText, textSheet)(animatedText)
+export const View: TBasic.ComponentTypeX<TComps.ViewShape> = withStyles(CompNames.View, viewSheet)(view)
+export const AnimatedView: TBasic.ComponentTypeX<TComps.ViewShape> = withStyles(CompNames.AnimatedView, viewSheet)(animatedView)
+export const Icon: TBasic.ComponentTypeX<TComps.IconShape> = withStyles(CompNames.Icon, iconSheet)(icon)
+export const AnimatedIcon: TBasic.ComponentTypeX<TComps.IconShape> = withStyles(CompNames.AnimatedIcon, iconSheet)(animatedIcon)
+export const ScrollView: TBasic.ComponentTypeX<TComps.ScrollViewShape> = withStyles(CompNames.ScrollView, scrollViewSheet)(scrollView)
+export const AnimatedScrollView: TBasic.ComponentTypeX<TComps.ScrollViewShape> = withStyles(CompNames.AnimatedScrollView, scrollViewSheet)(animatedScrollView)

@@ -1,5 +1,5 @@
 ﻿import { TSheets } from './sheets'
-import { TAnimation } from './animation'
+import { TAnimation } from 'reactxx-animation'
 import { TMediaQ } from './media-q'
 import { TTheme } from './theme'
 import { TBasic } from 'reactxx-basic'

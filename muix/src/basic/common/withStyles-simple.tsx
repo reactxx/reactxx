@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactN from 'react-native'
-import * as Cfg from 'typescript-config'
+//import * as Cfg from 'typescript-config'
 
 import { TBasic } from '../typings/basic'
 import { toPlatformEvents, deepMerges, toPlatformSheet, toPlatformRuleSet } from './to-platform'

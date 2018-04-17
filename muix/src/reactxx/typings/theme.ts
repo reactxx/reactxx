@@ -1,7 +1,7 @@
 ﻿import { TSheets } from 'reactxx'
-import { TBasic } from 'reactxx-basic'
 
-import { TThemeConfig } from 'typescript-config'
+import { TThemeConfig } from './add-in'
+import { TBasic } from './basic'
 
 export namespace TTheme {
 

@@ -2,7 +2,6 @@ import ReactN from 'react-native'
 
 import { Types } from 'reactxx-basic2'
 
-export const fake = 0
 export namespace TAnimation {
   //https://engineering.salesforce.com/experiments-with-high-performance-animation-in-react-native-80a0cb7052b0
   //https://github.com/facebook/react-native/blob/master/Libraries/Animated/src/NativeAnimatedHelper.js
@@ -62,3 +61,4 @@ export namespace TAnimation {
   export type Shape = Record<string, Types.RulesetNativeIds>
   export type Shapes = Record<string, Shape>
 }
+export const fake = 0

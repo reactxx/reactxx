@@ -1,9 +1,9 @@
 ﻿import ReactN from 'react-native'
 
-import { TAddInConfig } from 'typescript-config'
-import { TBasic } from 'reactxx-basic'
+import { TAnimation } from 'reactxx-animation'
 
-import { TAnimation } from './animation'
+import { TAddInConfig } from './add-in'
+import { TBasic } from './basic'
 import { TMediaQ } from './media-q'
 
 export namespace TSheets {
