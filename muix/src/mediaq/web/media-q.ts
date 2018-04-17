@@ -1,7 +1,6 @@
 import warning from 'warning'
 
-import { deepMerges } from 'reactxx-basic'
-import { TAddInConfig } from 'typescript-config'
+import { deepMerges, Types } from 'reactxx-basic2'
 
 import { TMediaQ } from '../typings/media-q'
 import { BreakPoint, ComponentsMediaQLow } from '../common/media-q'
@@ -19,14 +18,15 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
       }
     }
   */
-  processRuleset(ruleset: TAddInConfig.RulesetWithAddIn) {
+  processRuleset(ruleset: TMediaQ.RulesetWithAddIn) {
     const { $mediaq } = ruleset
     if (!$mediaq) return ruleset //no $mediaq
     const { componentId, component } = this
-    let patches: TMediaQ.Patch[] = []
+    let patches: Patch[] = []
     for (const p in $mediaq) {
       const interval = p.split('-').map((i, idx) => !i ? (idx == 0 ? 0 : TMediaQ.Consts.maxBreakpoint) : parseInt(i))
       warning(interval.length == 2, `E.g. '-480' or '480-1024' or '1024-' expected, ${p} found`)
+      const pp = $mediaq[p]
       patches.push({ start: interval[0], end: interval[1], ruleset: $mediaq[p] })
     }
     if (patches.length === 0) return ruleset //empty $mediaq
@@ -66,3 +66,5 @@ const intervalToSelector = (start: number, end: number) => {
   if (end === TMediaQ.Consts.maxBreakpoint) return `@media (min-width: ${start}px)`
   return `@media (min-width: ${start}px) and (max-width: ${end - 1}px)`
 }
+
+interface Patch { start: number; end: number; ruleset: Types.Ruleset }

@@ -1,7 +1,6 @@
 import warning from 'warning'
 
-import { TMediaQ } from 'reactxx'
-import { TAddInConfig } from 'typescript-config'
+import { TMediaQ } from '../typings/media-q'
 
 export abstract class ComponentsMediaQLow<TState extends string = string>  {
 
@@ -38,7 +37,7 @@ export abstract class ComponentsMediaQLow<TState extends string = string>  {
     delete breaks[breakPoint].subscribers[id]
   }
   abstract createBreakPoint(breakPoint: number): BreakPoint
-  abstract processRuleset(ruleset: TAddInConfig.RulesetWithAddIn)
+  abstract processRuleset(ruleset: TMediaQ.RulesetWithAddIn)
   abstract getWindowWidth() :number
   static componentsMediaCount = 0
 }

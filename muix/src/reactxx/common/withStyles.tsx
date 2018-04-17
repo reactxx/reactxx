@@ -1,12 +1,16 @@
 import React from 'react'
 import ReactN from 'react-native'
-import * as Cfg from 'typescript-config'
-
-import { TBasic, toPlatformRuleSet, toPlatformSheet, deepMerge, toPlatformEvents, deepMerges } from 'reactxx-basic'
-import { TTheme, TAnimation, TMediaQ, TSheets, ComponentsMediaQ /*platform dependent*/, } from 'reactxx'
-import { Themer, HOCState, HOCProps } from './theme2'
 import warning from 'warning'
-import { Animations } from './animation'
+
+import { TBasic, toPlatformRuleSet, deepMerge, toPlatformEvents, deepMerges } from 'reactxx-basic'
+//import { Animations } from './animation'
+import { Animations } from 'reactxx-animation'
+import { ComponentsMediaQ, TMediaQ } from 'reactxx-mediaq'
+
+import { TSheets } from '../typings/sheets'
+import { TTheme } from '../typings/theme'
+import { Themer, HOCState, HOCProps } from './theme2'
+
 
 export interface State<R extends TSheets.Shape = TSheets.Shape> extends HOCState<R> {
   animations?: Animations //TAnimation.Drivers
@@ -97,7 +101,7 @@ const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => {
       mergeOverrides(usedOverrides, ruleset.$overrides)
     })
     if (single === undefined) return {} //no not empty ruleset
-    const rulesetResult: typeof rulesets[0] = {}
+    const rulesetResult = {}
     if (single) {
       const override = usedOverrides[single.$name]
       if (!override) return clearSystemProps(media.processRuleset({ ...single })) // optimalization: nothing to merge

@@ -8,7 +8,7 @@ import { createContext, ModifierType, ConsumerType, ProviderProps, ConsumerProps
 
 
 
-import { TCommonStyles, toPlatformSheet } from 'reactxx-basic'
+import { TCommonStyles } from 'reactxx-basic'
 //import { defaultCompThemePars } from './withStyles'
 import { TTheme, TSheets } from 'reactxx'
 

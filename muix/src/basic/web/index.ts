@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { withStyles } from '../common/withStyles'
-import * as sheet from '../common/sheets'
+import { withStyles } from '../common/withStyles-simple'
+import * as sheet from '../common/comps-sheets'
 import { TBasic } from '../typings/basic'
 import { TComps } from '../typings/comps'
 
@@ -23,7 +23,7 @@ export { withStyles }
 export * from './comps'
 export * from './to-platform'
 export * from '../common/develop'
-export * from '../common/sheets'
+export * from '../common/comps-sheets'
 export * from '../typings/index'
 export * from '../typings/typescript-config'
 

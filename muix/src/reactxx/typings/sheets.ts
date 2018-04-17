@@ -47,7 +47,7 @@ export namespace TSheets {
 
   //******************** Ruleset Merge
   export type MergeRulesetWithOverrides = (...rulesets: TAddInConfig.RulesetWithAddIn[]) => TBasic.Ruleset
-  export type MergeRulesetWithOverridesNative = (...rulesets: (TAddInConfig.RulesetWithAddInNative | ReactN.TextStyle)[]) => TBasic.rulesetNative
+  export type MergeRulesetWithOverridesNative = (...rulesets: (TAddInConfig.RulesetWithAddInNative | ReactN.TextStyle)[]) => TBasic.RulesetNative
   export type MergeRulesetWithOverridesWeb = (...rulesets: TAddInConfig.RulesetWithAddInWeb[]) => TBasic.RulesetWeb
 
 

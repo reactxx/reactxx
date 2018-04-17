@@ -1,8 +1,11 @@
-﻿import ReactN from 'react-native'
-import { TCommonStyles } from './common-styles'
+﻿import React from 'react'
+import ReactN from 'react-native'
 import * as CSS from 'csstype'
 
+import { Types } from 'reactxx-basic2'
 import { TAddInConfig } from 'typescript-config'
+
+import { TCommonStyles } from './common-styles'
 
 export namespace TBasic {
 
@@ -27,48 +30,35 @@ export namespace TBasic {
 
   //*************** cross platform ruleset for web and native
 
-  export type RulesetX<T extends RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    rulesetCommon<T> & // native rules which are compatible with web
-    {
-      $native?: RulesetNative<T> // native specific rules
-      $web?: RulesetWeb // web specific rules
-    } &
+  export type RulesetX<T extends Types.RulesetNativeIds = 'Text', R extends Shape = Shape> =
+    Types.RulesetX<T> &
     TAddInConfig.RulesetAddInX<T, R> // sheet addIn: sheet overriding, media query etc.
-
-  export type rulesetCommon<T extends RulesetNativeIds> =
-    T extends 'Text' ? TCommonStyles.TextStyle :
-    T extends 'Image' ? TCommonStyles.ImageStyle :
-    T extends 'ScrollView' ? TCommonStyles.ScrollViewStyle :
-    T extends 'View' ? TCommonStyles.ViewStyle :
-    never
-
-  export type RulesetNative<T extends RulesetNativeIds> =
-    T extends 'Text' ? ReactN.TextStyle :
-    T extends 'Image' ? ReactN.ImageStyle :
-    T extends 'ScrollView' ? ReactN.ScrollViewStyle :
-    T extends 'View' ? ReactN.ViewStyle :
-    never
-
   export interface ViewRulesetX extends RulesetX<'View'> { }
   export interface TextRulesetX extends RulesetX<'Text'> { }
   export interface ImageRulesetX extends RulesetX<'Image'> { }
   export interface ScrollViewRulesetX extends RulesetX<'ScrollView'> { }
 
   //******************** Platform specific ruleset
+  export type RulesetNative<T extends Types.RulesetNativeIds = never> =
+    T extends 'Text' ? ReactN.TextStyle :
+    T extends 'Image' ? ReactN.ImageStyle :
+    T extends 'ScrollView' ? ReactN.ScrollViewStyle :
+    T extends 'View' ? ReactN.ViewStyle :
+    (ReactN.TextStyle | ReactN.ViewStyle | ReactN.ImageStyle | ReactN.ScrollViewStyle) & TAddInConfig.RulesetWithAddInAny
+
   export type RulesetWeb = CSS.Properties & { [P in CSS.SimplePseudos]?: CSS.Properties } & TAddInConfig.RulesetWithAddInAny // TAddInConfig.RulesetWithAddInWeb yield to error: recursive type using itself 
-  export type rulesetNative = (ReactN.TextStyle | ReactN.ViewStyle | ReactN.ImageStyle | ReactN.ScrollViewStyle) & TAddInConfig.RulesetWithAddInAny
-  export type Ruleset = RulesetWeb | rulesetNative
+  export type Ruleset = RulesetWeb | RulesetNative
 
   /******************************************
     COMPONENT SHAPE
   *******************************************/
   export interface Shape {
     //**** sheet constrains
-    common: Record<string, RulesetNativeIds> // rulesets (and their native type), which are used in both web and native component code. Rules and its valid values must be compatible with native.
-    native: Record<string, RulesetNativeIds> // ruleset types, which are used only in native code
+    common: Record<string, Types.RulesetNativeIds> // rulesets (and their native type), which are used in both web and native component code. Rules and its valid values must be compatible with native.
+    native: Record<string, Types.RulesetNativeIds> // ruleset types, which are used only in native code
     web: string | null // ruleset names, which are used only in web code (its export type is always React.CSSProperties)
     //******************** native style constrain
-    style: RulesetNativeIds // for native: export type of component style property (for web, style has always React.CSSProperties type)
+    style: Types.RulesetNativeIds // for native: export type of component style property (for web, style has always React.CSSProperties type)
     //**** component property constrains
     props: {} //common (web and native) props
     propsNative: {} //native only props 
@@ -162,4 +152,4 @@ export namespace TBasic {
 }
 
 export function isType<TWeb>(arg): arg is TWeb { return window.isWeb }
-export function isNativeType<TNative>(arg): arg is TNative { return !window.isWeb }
+

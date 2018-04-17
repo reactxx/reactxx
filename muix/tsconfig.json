@@ -36,9 +36,13 @@
 
       "reactxx-fela": [ "src/fela/index" ],
 
+      "reactxx-animation": [ "src/animation/web/index" ],
+      "reactxx-mediaq": [ "src/mediaq/web/index" ],
+      "reactxx-basic2": [ "src/basic2/index" ],
+
       "reactxx-basic": [ "src/basic/web/index" ],
 
-      "reactxx": [ "src/reactxx/native/index" ],
+      "reactxx": [ "src/reactxx/web/index" ],
 
       "reactxx-stateman": [ "src/stateman/index" ],
 

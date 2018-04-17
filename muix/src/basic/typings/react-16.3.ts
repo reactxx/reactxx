@@ -1,6 +1,6 @@
 import * as React from "react"
 
-/*declare module "react" {
+declare module "react" {
   type Provider<T> = ComponentType<{
     value: T
     children?: ReactNode
@@ -18,7 +18,4 @@ import * as React from "react"
 
   const createContext: <T>(defaultValue: T, calculateChangedBits?: (prev: T, next: T) => number) => Context<T>
 
-  interface ComponentClass<P = {}> {
-    getDerivedStateFromProps: (nextProps: P, prevState) => {}
-  }
-}*/
+}
