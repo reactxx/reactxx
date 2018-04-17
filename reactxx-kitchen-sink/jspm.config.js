@@ -40,14 +40,14 @@ SystemJS.config({
     "process": "npm:jspm-nodelibs-process@0.2.1",
     "react": "npm:react@16.3.2",
     "react-dom": "npm:react-dom@16.3.2",
-    "reactxx": "npm:reactxx@0.1.54",
-    "reactxx-animation": "npm:reactxx-animation@0.1.2",
-    "reactxx-basic": "npm:reactxx-basic@0.1.12",
-    "reactxx-fela": "npm:reactxx-fela@0.1.12",
+    "reactxx": "npm:reactxx@0.1.55",
+    "reactxx-animation": "npm:reactxx-animation@0.1.3",
+    "reactxx-basic": "npm:reactxx-basic@0.1.13",
+    "reactxx-fela": "npm:reactxx-fela@0.1.13",
     "reactxx-mdi": "npm:reactxx-mdi@0.1.67",
-    "reactxx-mediaq": "npm:reactxx-mediaq@0.1.2",
-    "reactxx-mui": "npm:reactxx-mui@0.1.13",
-    "reactxx-stateman": "npm:reactxx-stateman@0.1.72",
+    "reactxx-mediaq": "npm:reactxx-mediaq@0.1.3",
+    "reactxx-mui": "npm:reactxx-mui@0.1.14",
+    "reactxx-stateman": "npm:reactxx-stateman@0.1.73",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.2",
     "tslib": "npm:tslib@1.9.0",
@@ -385,66 +385,6 @@ SystemJS.config({
         "prop-types": "npm:prop-types@15.6.1"
       }
     },
-    "npm:reactxx@0.1.54": {
-      "map": {
-        "reactxx-basic": "npm:reactxx-basic@0.1.12",
-        "reactxx-animation": "npm:reactxx-animation@0.1.2",
-        "reactxx-mediaq": "npm:reactxx-mediaq@0.1.2",
-        "reactxx-stateman": "npm:reactxx-stateman@0.1.72",
-        "warning": "npm:warning@3.0.0",
-        "prop-types": "npm:prop-types@15.6.1",
-        "tslib": "npm:tslib@1.9.0"
-      }
-    },
-    "npm:reactxx-mui@0.1.13": {
-      "map": {
-        "reactxx": "npm:reactxx@0.1.54",
-        "material-ui": "npm:material-ui@1.0.0-beta.42"
-      }
-    },
-    "npm:reactxx-mediaq@0.1.2": {
-      "map": {
-        "reactxx-fela": "npm:reactxx-fela@0.1.12",
-        "reactxx-basic": "npm:reactxx-basic@0.1.12",
-        "warning": "npm:warning@3.0.0",
-        "tslib": "npm:tslib@1.9.0"
-      }
-    },
-    "npm:reactxx-animation@0.1.2": {
-      "map": {
-        "reactxx-fela": "npm:reactxx-fela@0.1.12",
-        "reactxx-basic": "npm:reactxx-basic@0.1.12",
-        "warning": "npm:warning@3.0.0",
-        "tslib": "npm:tslib@1.9.0"
-      }
-    },
-    "npm:reactxx-basic@0.1.12": {
-      "map": {
-        "react-dom": "npm:react-dom@16.3.2",
-        "warning": "npm:warning@3.0.0",
-        "tslib": "npm:tslib@1.9.0"
-      }
-    },
-    "npm:reactxx-fela@0.1.12": {
-      "map": {
-        "fela-dom": "npm:fela-dom@7.0.7",
-        "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@5.0.17",
-        "fela-plugin-rtl": "npm:fela-plugin-rtl@1.0.6",
-        "fela-plugin-prefixer": "npm:fela-plugin-prefixer@5.0.18",
-        "tslib": "npm:tslib@1.9.0",
-        "fela-plugin-extend": "npm:fela-plugin-extend@6.0.5",
-        "fela": "npm:fela@6.1.7",
-        "fela-plugin-lvha": "npm:fela-plugin-lvha@5.0.15",
-        "fela-plugin-unit": "npm:fela-plugin-unit@5.0.16"
-      }
-    },
-    "npm:reactxx-stateman@0.1.72": {
-      "map": {
-        "warning": "npm:warning@3.0.0",
-        "prop-types": "npm:prop-types@15.6.1",
-        "tslib": "npm:tslib@1.9.0"
-      }
-    },
     "npm:fela-dom@7.0.7": {
       "map": {
         "css-in-js-utils": "npm:css-in-js-utils@2.0.0",
@@ -764,6 +704,67 @@ SystemJS.config({
         "safe-buffer": "npm:safe-buffer@5.1.1",
         "inherits": "npm:inherits@2.0.3",
         "buffer-xor": "npm:buffer-xor@1.0.3"
+      }
+    },
+    "npm:reactxx-mediaq@0.1.3": {
+      "map": {
+        "reactxx-fela": "npm:reactxx-fela@0.1.13",
+        "reactxx-basic": "npm:reactxx-basic@0.1.13",
+        "warning": "npm:warning@3.0.0",
+        "tslib": "npm:tslib@1.9.0"
+      }
+    },
+    "npm:reactxx-mui@0.1.14": {
+      "map": {
+        "reactxx": "npm:reactxx@0.1.55",
+        "material-ui": "npm:material-ui@1.0.0-beta.42"
+      }
+    },
+    "npm:reactxx-animation@0.1.3": {
+      "map": {
+        "reactxx-fela": "npm:reactxx-fela@0.1.13",
+        "reactxx-basic": "npm:reactxx-basic@0.1.13",
+        "warning": "npm:warning@3.0.0",
+        "tslib": "npm:tslib@1.9.0"
+      }
+    },
+    "npm:reactxx@0.1.55": {
+      "map": {
+        "reactxx-basic": "npm:reactxx-basic@0.1.13",
+        "reactxx-animation": "npm:reactxx-animation@0.1.3",
+        "reactxx-mediaq": "npm:reactxx-mediaq@0.1.3",
+        "reactxx-stateman": "npm:reactxx-stateman@0.1.73",
+        "reactxx-mdi": "npm:reactxx-mdi@0.1.67",
+        "warning": "npm:warning@3.0.0",
+        "prop-types": "npm:prop-types@15.6.1",
+        "tslib": "npm:tslib@1.9.0"
+      }
+    },
+    "npm:reactxx-fela@0.1.13": {
+      "map": {
+        "fela-plugin-extend": "npm:fela-plugin-extend@6.0.5",
+        "fela-plugin-prefixer": "npm:fela-plugin-prefixer@5.0.18",
+        "fela-plugin-rtl": "npm:fela-plugin-rtl@1.0.6",
+        "fela": "npm:fela@6.1.7",
+        "tslib": "npm:tslib@1.9.0",
+        "fela-dom": "npm:fela-dom@7.0.7",
+        "fela-plugin-unit": "npm:fela-plugin-unit@5.0.16",
+        "fela-plugin-lvha": "npm:fela-plugin-lvha@5.0.15",
+        "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@5.0.17"
+      }
+    },
+    "npm:reactxx-stateman@0.1.73": {
+      "map": {
+        "warning": "npm:warning@3.0.0",
+        "prop-types": "npm:prop-types@15.6.1",
+        "tslib": "npm:tslib@1.9.0"
+      }
+    },
+    "npm:reactxx-basic@0.1.13": {
+      "map": {
+        "warning": "npm:warning@3.0.0",
+        "tslib": "npm:tslib@1.9.0",
+        "react-dom": "npm:react-dom@16.3.2"
       }
     }
   }
