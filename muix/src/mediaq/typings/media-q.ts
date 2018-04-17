@@ -1,6 +1,6 @@
 import ReactN from 'react-native'
 
-import { Types } from 'reactxx-basic2'
+import { Types } from 'reactxx-basic'
 
 export const fake = 0
 export namespace TMediaQ {

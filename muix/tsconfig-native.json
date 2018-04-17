@@ -17,9 +17,7 @@
 
       "reactxx-animation": [ "src/animation/native/index" ],
       "reactxx-mediaq": [ "src/mediaq/native/index" ],
-      "reactxx-basic2": [ "src/basic2/index" ],
-
-      "reactxx-basic": [ "src/basic/native/index" ],
+      "reactxx-basic": [ "src/basic/index" ],
 
       "reactxx-mui/typings/*": [ "src/mui/typings/*" ],
 

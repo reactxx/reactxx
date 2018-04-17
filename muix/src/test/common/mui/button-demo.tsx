@@ -13,7 +13,7 @@ import { MuiButtonT } from 'reactxx-mui/typings/button'
 
 import MDI from 'reactxx-mdi'
 
-import { TBasic } from 'reactxx-basic'
+import { TBasic } from 'reactxx'
 
 const theme = createMuiTheme({
   //overridesX: theme => ({

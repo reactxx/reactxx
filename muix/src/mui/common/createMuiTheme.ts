@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { toPlatformRuleSet, TBasic, TCommonStyles } from 'reactxx-basic'
+import { toPlatformRuleSet, TBasic } from 'reactxx'
+import { TCommonStyles } from 'reactxx-basic'
 
 import PropTypes from 'prop-types'
 

@@ -1,7 +1,7 @@
 import { Dimensions } from 'react-native'
 import warning from 'warning'
 
-import { deepMerges } from 'reactxx-basic2'
+import { deepMerges } from 'reactxx-basic'
 
 import { BreakPoint, ComponentsMediaQLow, breaks } from '../common/media-q'
 import { TMediaQ } from '../typings/media-q'

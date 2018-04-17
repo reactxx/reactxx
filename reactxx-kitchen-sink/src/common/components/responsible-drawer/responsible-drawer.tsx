@@ -4,8 +4,8 @@ import ReactN from 'react-native'
 //import * as Cfg from 'typescript-config'
 
 // different import of 'ScrollView, View, Text, Icon, AnimatedView' components for web and native
-import { TTheme, TSheets, withStyles, ScrollView, View, Text, Icon, AnimatedView, } from 'reactxx'
-import { TBasic, TComps, LoremIpsum } from 'reactxx-basic'
+import { TBasic, TComps, TTheme, TSheets, withStyles, ScrollView, View, Text, Icon, AnimatedView, } from 'reactxx'
+import { LoremIpsum } from 'reactxx-basic'
 
 //import { createContext, ConsumerType as StateConsumerType, ConsumerProps } from 'reactxx-stateman' 
 

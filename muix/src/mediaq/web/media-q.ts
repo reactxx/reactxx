@@ -1,6 +1,6 @@
 import warning from 'warning'
 
-import { deepMerges, Types } from 'reactxx-basic2'
+import { deepMerges, Types } from 'reactxx-basic'
 
 import { TMediaQ } from '../typings/media-q'
 import { BreakPoint, ComponentsMediaQLow } from '../common/media-q'

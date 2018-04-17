@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 
 import { TSheets } from 'reactxx'
-import { TComps, TBasic } from 'reactxx-basic'
+import { TComps, TBasic } from 'reactxx'
 //import ReactN from 'react-native'
 //import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
 export namespace MuiButtonBaseT {

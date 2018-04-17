@@ -11,8 +11,7 @@ SystemJS.config({
   },
   map: {
     "reactxx-fela": "deploy/lib/fela/index",
-    "reactxx-basic": "deploy/lib/basic/web/index",
-    "reactxx-basic2": "deploy/lib/basic2/index",
+    "reactxx-basic": "deploy/lib/basic/index",
     "reactxx-animation": "deploy/lib/animation/web/index",
     "reactxx-mediaq": "deploy/lib/mediaq/web/index",
     "reactxx": "deploy/lib/reactxx/web/index",

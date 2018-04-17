@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
 
-import { toPlatformEvents, deepMerge } from 'reactxx-basic2'
+import { toPlatformEvents, deepMerge } from 'reactxx-basic'
 import { Animations } from 'reactxx-animation'
 import { ComponentsMediaQ, TMediaQ } from 'reactxx-mediaq'
 

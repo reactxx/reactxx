@@ -1,6 +1,6 @@
 import ReactN from 'react-native'
 
-import { Types } from 'reactxx-basic2'
+import { Types } from 'reactxx-basic'
 
 import { TAddInConfig } from './add-in'
 import { TBasic } from './basic'

@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 import * as CSS from 'csstype'
 
-import { Types, TCommonStyles } from 'reactxx-basic2'
+import { Types, TCommonStyles } from 'reactxx-basic'
 import { TAddInConfig } from './add-in'
 
 //import { TCommonStyles } from './common-styles'

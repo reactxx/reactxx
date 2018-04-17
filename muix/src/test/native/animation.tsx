@@ -5,8 +5,8 @@ import { Animated, Easing, Text, View } from 'react-native'
 
 import { Muix } from 'reactxx-mui/typings/muix'
 
-import { TBasic } from 'reactxx-basic'
-import { Types } from 'reactxx-basic2'
+import { TBasic } from 'reactxx'
+import { Types } from 'reactxx-basic'
 
 // ********** NATIVE
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { TBasic, Text, View, ScrollView } from 'reactxx'
-import { LoremIpsum } from 'reactxx-basic2'
+import { LoremIpsum } from 'reactxx-basic'
 
 const App: React.SFC = props => {
   const border: TBasic.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10 }

@@ -2,7 +2,8 @@ import ReactN from 'react-native'
 
 import * as Mui from './mui'
 
-import { TBasic, TCommonStyles } from 'reactxx-basic'
+import { TBasic } from 'reactxx'
+import { TCommonStyles } from 'reactxx-basic'
 
 export namespace Muix {
 
