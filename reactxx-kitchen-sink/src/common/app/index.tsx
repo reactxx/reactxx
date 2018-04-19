@@ -2,6 +2,7 @@ import React from 'react'
 
 import NavigApp from './navigation'
 import { primitives } from '../primitives/index'
+import { component } from '../component/index'
 import * as comps from '../components/index'
 
 export namespace KSink {
@@ -33,7 +34,8 @@ export const components: KSink.Example[] = [
 export const examples: KSink.Example[] = [
   navigationExample,
   ...components,
-  ...primitives
+  ...primitives,
+  ...component
 ]
 
 export const nameToExample = (name: string) => examples.find(e => e.name===name) || navigationExample

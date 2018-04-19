@@ -8,6 +8,7 @@ import { H1, H2, H3, H4, H5, U, I, B, A, Blocquote, P } from '../components/typo
 
 import { examples, nameToExample, exampleToElement, components, navigationExample, KSink } from './index'
 import { primitives } from '../primitives/index'
+import { component } from '../component/index'
 import { ResponsibleDrawer } from '../components/responsible-drawer/responsible-drawer'
 import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 
@@ -56,6 +57,7 @@ const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ chil
   <ScrollView classes={{ container: { backgroundColor: 'lightgray', paddingTop: 15, flexGrow: 1 } }}>
     <DrawerItem key={navigationExample.name} example={navigationExample} gotoExample={gotoExample} actName={actName} />
     {DrawerGroup('Primitives', primitives, gotoExample, actName)}
+    {DrawerGroup('Component', component, gotoExample, actName)}
     {DrawerGroup('Components', components, gotoExample, actName)}
   </ScrollView>
 </View>

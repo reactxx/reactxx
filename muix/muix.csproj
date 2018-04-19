@@ -135,6 +135,7 @@
     <TypeScriptCompile Include="src\animation\native\animation.tsx" />
     <TypeScriptCompile Include="src\animation\native\index.ts" />
     <TypeScriptCompile Include="src\animation\typings\animation.ts" />
+    <TypeScriptCompile Include="src\animation\typings\typings.d.ts" />
     <TypeScriptCompile Include="src\animation\web\animation.tsx" />
     <TypeScriptCompile Include="src\animation\web\index.ts" />
     <TypeScriptCompile Include="src\basic\common\develop.tsx" />
@@ -148,6 +149,8 @@
     <TypeScriptCompile Include="src\ks\common\components\typo.tsx" />
     <TypeScriptCompile Include="src\ks\common\components\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\components\responsible-drawer\responsible-drawer.tsx" />
+    <TypeScriptCompile Include="src\ks\common\component\e1.tsx" />
+    <TypeScriptCompile Include="src\ks\common\component\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\hallo-world.tsx" />
     <TypeScriptCompile Include="src\ks\common\primitives\e1.tsx" />
     <TypeScriptCompile Include="src\ks\common\primitives\e2.tsx" />
@@ -165,6 +168,7 @@
     <TypeScriptCompile Include="src\mediaq\native\index.ts" />
     <TypeScriptCompile Include="src\mediaq\native\media-q.ts" />
     <TypeScriptCompile Include="src\mediaq\typings\media-q.ts" />
+    <TypeScriptCompile Include="src\mediaq\typings\typings.d.ts" />
     <TypeScriptCompile Include="src\mediaq\web\index.ts" />
     <TypeScriptCompile Include="src\mediaq\web\media-q.ts" />
     <TypeScriptCompile Include="src\reactxx\common\comps-sheets.ts" />

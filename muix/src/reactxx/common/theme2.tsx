@@ -25,7 +25,7 @@ export type HOCProps = TBasic.PropsX & ThemeWithCompX
 
 export interface HOCState<R extends TSheets.Shape = TSheets.Shape> {
   classes?: TBasic.Sheet<R>
-  className?: TBasic.Ruleset
+  className_?: TBasic.Ruleset
   style?: TBasic.Ruleset
   // following props can check cachedStaticSheet validity in withTheme HOC
   actTheme?: TTheme.ThemeX // actual theme
@@ -85,7 +85,7 @@ const applyTheme = (name: string, createSheetX: TTheme.SheetCreatorX, nextProps:
 
   const nextState = {
     classes: actSheet,
-    className: toPlatformRuleSet(callCreator(theme, par, className)),
+    className_: toPlatformRuleSet(callCreator(theme, par, className)),
     style: toPlatformRuleSet(callCreator(theme, par, style)),
     // save actual themeComps to state:
     actTheme: theme,

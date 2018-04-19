@@ -99,10 +99,10 @@ export class RippleEffect extends React.Component<MuiButtonBaseT.RippleEfectProp
 }
 
 const buttonBase: TBasic.CodeSFCNative<MuiButtonBaseT.Shape> = props => {
-  const { style, classes, mergeRulesetWithOverrides, className, animations, ...rest } = props
-  const viewStyle = mergeRulesetWithOverrides(classes.root, className) as ReactN.ViewStyle
+  const { style, classes, mergeRulesetWithOverrides, className_, animations, ...rest } = props
+  const viewStyle = mergeRulesetWithOverrides(classes.root, className_) as ReactN.ViewStyle
   const rippleStyle = mergeRulesetWithOverrides(classes.ripple) as ReactN.ViewStyle
-  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} className={null} mergeRulesetWithOverrides={null} animations={null} {...rest} style={null}/>
+  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} className_={null} mergeRulesetWithOverrides={null} animations={null} {...rest} style={null}/>
 }
 
 const ButtonBase = withStyles<MuiButtonBaseT.Shape>(MuiButtonBaseT.CompNames.ButtonBase, sheet)(buttonBase)

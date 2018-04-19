@@ -120,7 +120,7 @@ export namespace TBasic {
   // *** web
   export type CodePropsWeb<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsWeb<R>,
     {
-      className: RulesetWeb
+      className_: RulesetWeb
       style: RulesetWeb
       classes: SheetWeb<R>
     } &
@@ -132,7 +132,7 @@ export namespace TBasic {
   // *** native
   export type CodePropsNative<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsNative<R>,
     {
-      className: RulesetNative<getStyle<R>>
+      className_: RulesetNative<getStyle<R>>
       style: RulesetNative<getStyle<R>>
       classes: SheetNative<R>
     } &
@@ -144,7 +144,7 @@ export namespace TBasic {
   // *** web or native
   export type CodeProps<R extends Shape = Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>),
     {
-      className: RulesetWeb | RulesetNative<getStyle<R>>
+      className_: RulesetWeb | RulesetNative<getStyle<R>>
       style: RulesetWeb | RulesetNative<getStyle<R>>
       classes: Sheet<R>
     } &
