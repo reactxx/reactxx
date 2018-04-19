@@ -25,7 +25,6 @@ export type HOCProps = TBasic.PropsX & ThemeWithCompX
 
 export interface HOCState<R extends TSheets.Shape = TSheets.Shape> {
   classes?: TBasic.Sheet<R>
-  className_?: TBasic.Ruleset
   style?: TBasic.Ruleset
   // following props can check cachedStaticSheet validity in withTheme HOC
   actTheme?: TTheme.ThemeX // actual theme
@@ -78,14 +77,17 @@ const applyTheme = (name: string, createSheetX: TTheme.SheetCreatorX, nextProps:
     const staticSheet = toPlatformSheet(callCreator(theme, par, createSheetX))
 
     cachedStaticSheet = themeComp.cachedStaticSheet = sheet ? deepMerges(false, {}, staticSheet, sheet) : staticSheet
+
+    warning(cachedStaticSheet.root, `Missing "root" ruleset in "${name}" component sheet`)
   }
 
-  const actSheet: TBasic.Sheet = classes ? deepMerges(false, {}, cachedStaticSheet, toPlatformSheet(callCreator(theme, par, classes))) : cachedStaticSheet
+  const root = className && { root: toPlatformRuleSet(callCreator(theme, par, className)) }
+
+  const actSheet: TBasic.Sheet = classes || root ? deepMerges(false, {}, cachedStaticSheet, toPlatformSheet(callCreator(theme, par, classes)), root) : cachedStaticSheet
   for (const p in actSheet) if (!p.startsWith('$')) actSheet[p].$name = p // assign name to ruleSets. $name is used in getRulesetWithSideEffect to recognize used rulesets
 
   const nextState = {
     classes: actSheet,
-    className_: toPlatformRuleSet(callCreator(theme, par, className)),
     style: toPlatformRuleSet(callCreator(theme, par, style)),
     // save actual themeComps to state:
     actTheme: theme,

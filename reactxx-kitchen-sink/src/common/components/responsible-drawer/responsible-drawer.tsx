@@ -150,7 +150,7 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, compThemeP
 })
 
 // responsibleDrawer stateless component. 
-const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, mergeRulesetWithOverrides, children, className_, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaq, drawer: drawerNode }) => {
+const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, mergeRulesetWithOverrides, children, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaq, drawer: drawerNode }) => {
 
   const mediaState = mediaq.state // actual media width, e.g. mediaState = {mobile:false, tablet:true, desktop:false }
 
@@ -164,7 +164,6 @@ const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, 
     mediaState.mobile && classes.mobile, // => use mobile.$overrides when mediaState.mobile===true
     mediaState.tablet && classes.tablet, // => use tablet.$overrides when mediaState.mobile===true
     mediaState.desktop && classes.desktop, // => use desktop.$overrides when mediaState.mobile===true
-    className_, // always put className at the end of the ROOT ruleset
   ) as TBasic.ViewRulesetX
 
   const backDrop = mergeRulesetWithOverrides(

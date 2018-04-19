@@ -118,7 +118,7 @@ const button: TBasic.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
 
 
   //var x = props.mini
-  const { children, classes, color = 'default', variant, mini, mergeRulesetWithOverrides, className_, animations, ...rest } = props
+  const { children, classes, color = 'default', variant, mini, mergeRulesetWithOverrides, animations, ...rest } = props
   const { disabled } = rest //disabled must be propagated to ButtonBaseLow
 
   const fab = variant == 'fab'
@@ -140,7 +140,6 @@ const button: TBasic.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
     !isFlat && disabled && classes.raisedDisable,
     isFlat && disabled && classes.disabled,
 
-    className_,
   ) as ReactN.ViewStyle
 
   //console.log('### viewStyle: ', viewStyle)
@@ -159,7 +158,7 @@ const button: TBasic.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
   </ThemeModifier>
 
 
-  return <RippleWithOverrides viewStyle={rootStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} className_={null} mergeRulesetWithOverrides={null} animations={null} {...rest}>
+  return <RippleWithOverrides viewStyle={rootStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} mergeRulesetWithOverrides={null} animations={null} {...rest}>
     {childs}
   </RippleWithOverrides>
 }

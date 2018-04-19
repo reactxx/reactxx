@@ -38,6 +38,8 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
     }
 
     static getDerivedStateFromProps = (nextProps: HOCProps, prevState: State) => {
+      //if (name === 'comp$label')
+        //debugger
       if (nextProps.ignore) return {} //noop
       const { animations, mediaq } = prevState
       animations.destroy()
@@ -48,10 +50,10 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
 
     render() {
 
-      //if (name === 'comps$responsibledrawer')
+      //if (name === 'comp$label')
       //  debugger
-      // getDerivedStateFromProps result
-      const { animations, mediaq, className_, style, classes } = this.state
+
+      const { animations, mediaq, style, classes } = this.state
 
       mediaq.destroy(); mediaq.init(classes.$mediaq)
 
@@ -74,7 +76,6 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
         animations,
         mediaq: mediaq as TMediaQ.ComponentsMediaQ<TSheets.getMediaQ<R>>,
         classes, //available classes for mergeRulesetWithOverrides (this.classes = merge(sheet, theme.overrides[name], classes prop)
-        className_,
         style,
       } as TBasic.CodeProps<R>
 
