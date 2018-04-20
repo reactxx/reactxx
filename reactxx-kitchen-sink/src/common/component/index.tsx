@@ -10,7 +10,7 @@ const comp1 = {
 
 const comp2 = {
   name: 'component/e2',
-  title: 'Sheet overrides',
+  title: 'Sheet\'s $overrides',
   descr: '',
   Component: App2
 } as KSink.Example

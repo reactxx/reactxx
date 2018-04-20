@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-// different import of components for web and native
+import { Types } from 'reactxx-basic'
 import { TBasic, TAddInConfig, TComps, TTheme, TSheets, withStyles, ScrollView, View, Text, Icon, AnimatedView, } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
 
@@ -28,7 +28,7 @@ export namespace TResponsibleDrawer {
   export interface RenderProps {
     style: TBasic.RulesetX
     iconData: string,
-    onPress: TBasic.MouseEvent
+    onPress: Types.MouseEvent
   }
 
   export type Shape = TSheets.OverwriteShape<{

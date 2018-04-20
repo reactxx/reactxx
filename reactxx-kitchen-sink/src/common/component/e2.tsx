@@ -28,6 +28,7 @@ type LabelShape = TSheets.OverwriteShape<{
 *************************/
 
 const sheet: TBasic.SheetX<LabelShape> = {
+  // ruleset placeholders:
   root: {
     padding: 5,
     flexDirection: 'row',
@@ -40,7 +41,8 @@ const sheet: TBasic.SheetX<LabelShape> = {
   },
   label: {
   },
-  // 
+
+  // ruleset flags - overrides placeholders when used
   normalVariant: {
     $overrides: {
       root: {
@@ -70,7 +72,8 @@ const sheet: TBasic.SheetX<LabelShape> = {
         borderWidth: 0,
       },
       label: {
-        color: 'blue'
+        color: 'blue',
+        fontWeight: 'bold'
       },
     }
   },
@@ -115,7 +118,7 @@ const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
   </View>
   <H4>STYLING</H4>
   <View className={{ flexDirection: 'row', flexWrap: 'wrap', alignContent: 'space-between', justifyContent: 'space-between' }}>
-    <Label variant='outline' classes={{ outlineVariant: { $overrides: { root: { borderWidth: 3, borderRadius: 5 }, label: { color: 'green' } } } } }>THIN BORDER</Label>
+    <Label variant='outline' classes={{ outlineVariant: { $overrides: { root: { borderWidth: 3, borderRadius: 10 }, label: { color: 'green' } } } } }>THIN BORDER</Label>
   </View>
 
 </ScrollView >

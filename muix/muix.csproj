@@ -87,7 +87,7 @@
     <Content Include="deploy\animation\README.md" />
     <Content Include="deploy\mediaq\package.json" />
     <Content Include="deploy\mediaq\README.md" />
-    <None Include="gulpfile.js_" />
+    <Content Include="text.txt" />
     <Content Include="index.html" />
     <Content Include="package.json" />
     <Content Include="%24publish.cmd" />

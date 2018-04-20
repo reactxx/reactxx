@@ -1,4 +1,4 @@
-﻿//TODO
+﻿//TODO - remove to MUI package
 import { Muix } from 'reactxx-mui/typings/muix'
 
 import React from 'react'
@@ -12,25 +12,21 @@ import { TAnimation } from 'reactxx-animation'
 import { TMediaQ } from './media-q'
 import { TTheme } from './theme'
 
-//import { TAddInConfig } from './add-in'
-
-//import { TCommonStyles } from './common-styles'
-
 export namespace TBasic {
 
   export const enum Consts {
     textClassName = 'reactxx-text'
   }
 
-  export type MouseEvent = (event?: React.MouseEvent<Element>) => void
+  //export type MouseEvent = (event?: React.MouseEvent<Element>) => void
 
-  export interface OnPressX { onPress?: MouseEvent; onLongPress: () => void }
-  export interface OnPressAllX extends OnPressX { onPressIn?: MouseEvent; onPressOut?: MouseEvent }
+  //export interface OnPressX { onPress?: MouseEvent; onLongPress: () => void }
+  //export interface OnPressAllX extends OnPressX { onPressIn?: MouseEvent; onPressOut?: MouseEvent }
 
-  export interface OnPressAllWeb { onClick?: React.MouseEventHandler<Element>; onMouseDown?: React.MouseEventHandler<Element>; onMouseUp?: React.MouseEventHandler<Element> }
-  export interface OnPressAllNative { onPress: () => void; onPressIn: () => void; onPressOut: () => void; onLongPress: () => void }
+  //export interface OnPressAllWeb { onClick?: React.MouseEventHandler<Element>; onMouseDown?: React.MouseEventHandler<Element>; onMouseUp?: React.MouseEventHandler<Element> }
+  //export interface OnPressAllNative { onPress: () => void; onPressIn: () => void; onPressOut: () => void; onLongPress: () => void }
 
-  export type RulesetNativeIds = 'Text' | 'View' | 'Image' | 'ScrollView'
+  //export type RulesetNativeIds = 'Text' | 'View' | 'Image' | 'ScrollView'
 
 
   /******************************************
@@ -124,7 +120,7 @@ export namespace TBasic {
       classes: SheetWeb<R>
     } &
     TAddInConfig.CodePropsWeb<R> &
-    OnPressAllWeb>
+    Types.OnPressAllWeb>
 
   export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
@@ -135,7 +131,7 @@ export namespace TBasic {
       classes: SheetNative<R>
     } &
     TAddInConfig.CodePropsNative<R> &
-    OnPressAllNative>
+    Types.OnPressAllNative>
 
   export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
 
@@ -146,7 +142,7 @@ export namespace TBasic {
       classes: Sheet<R>
     } &
     TAddInConfig.CodeProps<R> &
-    (OnPressAllNative | OnPressAllWeb)>
+    (Types.OnPressAllNative | Types.OnPressAllWeb)>
 
   export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
@@ -163,13 +159,13 @@ export namespace TAddInConfig {
   *******************************************/
 
   //******************** Cross platform
-  export interface RulesetAddInX<T extends TBasic.RulesetNativeIds, R extends TBasic.Shape> { $overrides?: TBasic.PartialSheetX<R>; $name?: string; $mediaq?: TMediaQ.SheetX<T, R>; $props?: TSheets.PropsInRulesetX<R> }
+  export interface RulesetAddInX<T extends Types.RulesetNativeIds, R extends TBasic.Shape> { $overrides?: TBasic.PartialSheetX<R>; $name?: string; $mediaq?: TMediaQ.SheetX<T, R>; $props?: TSheets.PropsInRulesetX<R> }
   export interface SheetXAddIn<R extends TSheets.Shape = TSheets.Shape> { $animations?: TAnimation.SheetsX<TSheets.getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<TSheets.getMediaQ<R>> }
 
   //******************** Platform specific
   export interface RulesetWithAddInWeb<R extends TSheets.Shape = TSheets.Shape> extends TBasic.RulesetWeb { $overrides?: TBasic.SheetWeb<R>; $name?: string; $props?: TSheets.PropsInRulesetWeb<R> }
-  export type RulesetWithAddInNative<T extends TBasic.RulesetNativeIds = 'Text', R extends TSheets.Shape = TSheets.Shape> = TBasic.RulesetNative<T> & { $overrides?: TBasic.SheetNative<R>; $name?: string; $props?: TSheets.PropsInRulesetNative<R> }
-  export type RulesetWithAddIn<T extends TBasic.RulesetNativeIds = 'Text', R extends TSheets.Shape = TSheets.Shape> = (RulesetWithAddInNative<T, R> | RulesetWithAddInWeb<R>) & { $mediaq?: TMediaQ.SheetX<T, R> }
+  export type RulesetWithAddInNative<T extends Types.RulesetNativeIds = 'Text', R extends TSheets.Shape = TSheets.Shape> = TBasic.RulesetNative<T> & { $overrides?: TBasic.SheetNative<R>; $name?: string; $props?: TSheets.PropsInRulesetNative<R> }
+  export type RulesetWithAddIn<T extends Types.RulesetNativeIds = 'Text', R extends TSheets.Shape = TSheets.Shape> = (RulesetWithAddInNative<T, R> | RulesetWithAddInWeb<R>) & { $mediaq?: TMediaQ.SheetX<T, R> }
   export interface RulesetWithAddInAny { $overrides?; $name?; $props?}
 
   export interface SheetAddInWeb<R extends TSheets.Shape = TSheets.Shape> { $animations?: TAnimation.SheetsX<TSheets.getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<TSheets.getMediaQ<R>> }

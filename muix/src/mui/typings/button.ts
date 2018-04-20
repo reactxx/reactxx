@@ -1,8 +1,8 @@
 ﻿import { ButtonProps } from './mui'
 import ReactN from 'react-native'
 
-import { TSheets } from 'reactxx'
-import { TComps, TBasic } from 'reactxx'
+import { TComps, TBasic, TSheets } from 'reactxx'
+import { Types } from 'reactxx-basic'
 
 export namespace MuiButtonT {
 
@@ -16,7 +16,7 @@ export namespace MuiButtonT {
     common: TComps.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini'> & TComps.ShapeTexts<'label'>
     native: TComps.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & TComps.ShapeTexts<'labelIcon'>
     web: 'colorInherit' | 'keyboardFocused'
-    props: ButtonProps & TBasic.OnPressAllX
+    props: ButtonProps & Types.OnPressAllX
     propsNative: ReactN.TouchableOpacityProperties
     nameType: CompNames.Button | CompNames.ButtonIconLeft | CompNames.ButtonIconRight
   }>

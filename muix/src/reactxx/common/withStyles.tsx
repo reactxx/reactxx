@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
 
-import { toPlatformEvents, deepMerge, deepMerges } from 'reactxx-basic'
+import { Types, toPlatformEvents, deepMerge, deepMerges } from 'reactxx-basic'
 import { Animations } from 'reactxx-animation'
 import { ComponentsMediaQ, TMediaQ } from 'reactxx-mediaq'
 import { TAddInConfig, ComponentTypeWithModifier } from 'reactxx'
@@ -61,7 +61,7 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
         classes: ignore0, className: ignore1, style: ignore2, themeComp: ignore3, // already used props
         theme, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore,
         ...other
-      } = this.props as HOCProps & TBasic.OnPressAllX
+      } = this.props as HOCProps & Types.OnPressAllX
 
       if (ignore) return null
 
@@ -79,7 +79,7 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
         style,
       } as TBasic.CodeProps<R>
 
-      toPlatformEvents($web, $native as TBasic.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
+      toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
 
       return <Component {...codeProps} />
     }
