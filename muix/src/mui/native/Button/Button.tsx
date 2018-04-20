@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
-import { TComps, ComponentTypeWithModifier, TBasic, TTheme, CompNames, Text, withStyles, compThemeSheetModifier, ThemeModifier } from 'reactxx'
+import { TComps, ComponentTypeWithModifier, TBasic, TTheme, CompNames, Text, withStyles } from 'reactxx'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 import { MuiButtonT } from '../../typings/button'
@@ -152,10 +152,12 @@ const button: TBasic.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
 
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 
-  const RippleWithOverrides: React.SFC<MuiButtonBaseT.RippleEfectProps> = props => <ThemeModifier
-    modify={compThemeSheetModifier<TComps.IconShape, TComps.TextShape>(CompNames.Icon, iconOverride, CompNames.Text, labelOverride)}>
-    <RippleEffect {...props}/>
-  </ThemeModifier>
+  //const RippleWithOverrides: React.SFC<MuiButtonBaseT.RippleEfectProps> = props => <ThemeModifier
+  //  modify={compThemeSheetModifier<TComps.IconShape, TComps.TextShape>(CompNames.Icon, iconOverride, CompNames.Text, labelOverride)}>
+  //  <RippleEffect {...props}/>
+  //</ThemeModifier>
+  //TODO
+  const RippleWithOverrides: React.SFC<MuiButtonBaseT.RippleEfectProps> = props => null
 
 
   return <RippleWithOverrides viewStyle={rootStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} mergeRulesetWithOverrides={null} animations={null} {...rest}>

@@ -6,7 +6,7 @@ import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
 
 import { ModifierType } from 'reactxx-stateman'
-import { TTheme, TAddInConfig, ThemeProvider, ThemeModifier, Themer, TBasic, toPlatformRuleSet, toPlatformSheet } from 'reactxx'
+import { TTheme, TAddInConfig, Themer, TBasic, toPlatformRuleSet, toPlatformSheet } from 'reactxx'
 import { Types, toPlatformEvents } from 'reactxx-basic'
 import { rulesetToClassNames } from 'reactxx-fela'
 
@@ -30,13 +30,13 @@ export const AppContainer: React.SFC = props => {
   </JssProvider>
 }
 
-export const ThemeModifierX: ModifierType<TTheme.ThemeState, TTheme.ThemeState> = props => <ThemeModifier {...props} render={themeState => {
-  return props.children
-  //TODO THEME
-  //const { theme, overrides} = themeState
-  //theme.overrides = expandOverrides(themeState)
-  //return <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
-}} />
+//export const ThemeModifierX: ModifierType<TTheme.ThemeState, TTheme.ThemeState> = props => <ThemeModifier {...props} render={themeState => {
+//  return props.children
+//  //TODO THEME
+//  //const { theme, overrides} = themeState
+//  //theme.overrides = expandOverrides(themeState)
+//  //return <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
+//}} />
 
 //Get platform component sheet (from creator and theme)
 const expandOverrides = (themeState: TTheme.ThemeState) => {

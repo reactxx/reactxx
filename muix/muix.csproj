@@ -173,15 +173,13 @@
     <TypeScriptCompile Include="src\mediaq\web\index.ts" />
     <TypeScriptCompile Include="src\mediaq\web\media-q.ts" />
     <TypeScriptCompile Include="src\reactxx\common\comps-sheets.ts" />
-    <TypeScriptCompile Include="src\reactxx\common\theme2.tsx" />
+    <TypeScriptCompile Include="src\reactxx\common\theme.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\to-platform.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\basic.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\comps.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\index.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\media-q.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\sheets.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\theme.ts" />
-    <None Include="src\reactxx\typings\add-in.ts_" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\web\index.tsx" />
@@ -196,7 +194,7 @@
     <TypeScriptCompile Include="src\mui\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\mui\Button\Button.tsx" />
     <TypeScriptCompile Include="src\stateman\index.ts" />
-    <TypeScriptCompile Include="src\reactxx\common\theme.tsx" />
+    <None Include="src\reactxx\common\theme.tsx_" />
     <TypeScriptCompile Include="src\reactxx\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\reactxx\native\comps.tsx" />
     <TypeScriptCompile Include="src\reactxx\native\index.ts" />

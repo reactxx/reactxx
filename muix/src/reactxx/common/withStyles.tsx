@@ -11,7 +11,7 @@ import { TAddInConfig, ComponentTypeWithModifier } from 'reactxx'
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
 import { TBasic } from '../typings/basic'
 import { TTheme } from '../typings/theme'
-import { Themer, HOCState, HOCProps } from './theme2'
+import { Themer, HOCState, HOCProps } from './theme'
 
 
 export interface State<R extends TBasic.Shape = TBasic.Shape> extends HOCState<R> {
