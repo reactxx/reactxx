@@ -1,7 +1,7 @@
 ﻿import { ButtonProps } from './mui'
 import ReactN from 'react-native'
 
-import { TComps, TBasic, TSheets } from 'reactxx'
+import { TComps, TBasic } from 'reactxx'
 import { Types } from 'reactxx-basic'
 
 export namespace MuiButtonT {
@@ -12,7 +12,7 @@ export namespace MuiButtonT {
     ButtonIconRight = 'MuixButtonIconRight',
   }
 
-  export type Shape = TSheets.OverwriteShape<{
+  export type Shape = TBasic.OverwriteShape<{
     common: TComps.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini'> & TComps.ShapeTexts<'label'>
     native: TComps.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & TComps.ShapeTexts<'labelIcon'>
     web: 'colorInherit' | 'keyboardFocused'

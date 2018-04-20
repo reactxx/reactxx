@@ -10,18 +10,17 @@ import { TAddInConfig, ComponentTypeWithModifier } from 'reactxx'
 
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
 import { TBasic } from '../typings/basic'
-import { TSheets } from '../typings/sheets'
 import { TTheme } from '../typings/theme'
 import { Themer, HOCState, HOCProps } from './theme2'
 
 
-export interface State<R extends TSheets.Shape = TSheets.Shape> extends HOCState<R> {
+export interface State<R extends TBasic.Shape = TBasic.Shape> extends HOCState<R> {
   animations?: Animations //TAnimation.Drivers
-  mediaq?: ComponentsMediaQ<TSheets.getMediaQ<R>>
+  mediaq?: ComponentsMediaQ<TBasic.getMediaQ<R>>
 }
 
 //http://jamesknelson.com/should-i-use-shouldcomponentupdate/
-export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, compThemePar?: TSheets.getCompTheme<R>) => (Component: TBasic.CodeComponentType<R>) => {
+export const withStyles = <R extends TBasic.Shape>(_name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, compThemePar?: TBasic.getCompTheme<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
   const name = _name as string
 
@@ -29,7 +28,7 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
 
     state: State<R> = {
       animations: new Animations(this),
-      mediaq: new ComponentsMediaQ<TSheets.getMediaQ<R>>(this) 
+      mediaq: new ComponentsMediaQ<TBasic.getMediaQ<R>>(this) 
     }
 
     componentWillUnmount() {
@@ -74,7 +73,7 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
         mergeRulesetWithOverrides,
         theme,
         animations,
-        mediaq: mediaq as TMediaQ.ComponentsMediaQ<TSheets.getMediaQ<R>>,
+        mediaq: mediaq as TMediaQ.ComponentsMediaQ<TBasic.getMediaQ<R>>,
         classes, //available classes for mergeRulesetWithOverrides (this.classes = merge(sheet, theme.overrides[name], classes prop)
         style,
       } as TBasic.CodeProps<R>
@@ -96,7 +95,7 @@ export const withStyles = <R extends TSheets.Shape>(_name: TSheets.getNameType<R
 // - use sheet.ruleset.$mediaq to modify ruleset 
 const createRulesetWithOverridesMerger = (media: ComponentsMediaQ) => {
   const usedOverrides: TBasic.Sheet = {}
-  const res: TSheets.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
+  const res: TBasic.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
     let single = undefined //optimalization: rulesets contains just single non empty item => no deepMerge is needed
     rulesets.forEach(ruleset => { // acumulate $overrides from used rulesets
       if (!ruleset) return

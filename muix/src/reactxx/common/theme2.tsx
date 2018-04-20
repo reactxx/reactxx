@@ -7,14 +7,13 @@ import { deepMerges } from 'reactxx-basic'
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
 import { TBasic } from '../typings/basic'
 import { TTheme } from '../typings/theme'
-import { TSheets } from '../typings/sheets'
 
 //************ TYPINGS
 
 // Component part of 
-export interface ThemeCompX<R extends TSheets.Shape = TSheets.Shape> { sheet?: TBasic.PartialSheetX<R>, par?: TSheets.getCompTheme<R>, cachedStaticSheet?: TBasic.Sheet }
+export interface ThemeCompX<R extends TBasic.Shape = TBasic.Shape> { sheet?: TBasic.PartialSheetX<R>, par?: TBasic.getCompTheme<R>, cachedStaticSheet?: TBasic.Sheet }
 
-export type ThemeWithCompsX = { theme: TTheme.ThemeX } & { [P in keyof TSheets.Shapes]?: ThemeCompX<TSheets.Shapes[P]> }
+export type ThemeWithCompsX = { theme: TTheme.ThemeX } & { [P in keyof TBasic.Shapes]?: ThemeCompX<TBasic.Shapes[P]> }
 
 export interface ThemeWithCompX {
   theme: TTheme.ThemeX // theme from ThemeProvider
@@ -23,7 +22,7 @@ export interface ThemeWithCompX {
 
 export type HOCProps = TBasic.PropsX & ThemeWithCompX
 
-export interface HOCState<R extends TSheets.Shape = TSheets.Shape> {
+export interface HOCState<R extends TBasic.Shape = TBasic.Shape> {
   classes?: TBasic.Sheet<R>
   style?: TBasic.Ruleset
   // following props can check cachedStaticSheet validity in withTheme HOC
@@ -31,12 +30,12 @@ export interface HOCState<R extends TSheets.Shape = TSheets.Shape> {
   actThemeComp?: ThemeCompX // actual themeComp
 }
 
-export interface ComponentTypeWithModifierProps<R extends TSheets.Shape> {
+export interface ComponentTypeWithModifierProps<R extends TBasic.Shape> {
   sheet?: TBasic.PartialSheetX<R>
-  par?: TSheets.getCompTheme<R>
+  par?: TBasic.getCompTheme<R>
 }
 
-export interface ComponentTypeWithModifier<R extends TSheets.Shape> extends React.SFC<TBasic.PropsX<R>> {
+export interface ComponentTypeWithModifier<R extends TBasic.Shape> extends React.SFC<TBasic.PropsX<R>> {
   Modifier: React.SFC<ComponentTypeWithModifierProps<R>>
 }
 
@@ -45,7 +44,7 @@ export interface ComponentTypeWithModifier<R extends TSheets.Shape> extends Reac
 const { Provider, Consumer } = React.createContext<ThemeWithCompsX>({ theme: { type: 'ThemeX' } })
 
 // withTheme HOC, used in withStyles HOC
-const withTheme = <R extends TSheets.Shape>(name: string, Component: React.ComponentClass<HOCProps>, createSheetX: TTheme.SheetCreatorX<R>, compThemePar?: TSheets.getCompTheme<R>) => {
+const withTheme = <R extends TBasic.Shape>(name: string, Component: React.ComponentClass<HOCProps>, createSheetX: TTheme.SheetCreatorX<R>, compThemePar?: TBasic.getCompTheme<R>) => {
 
   defaultCompThemePars[name] = compThemePar
 
@@ -98,7 +97,7 @@ const applyTheme = (name: string, createSheetX: TTheme.SheetCreatorX, nextProps:
 }
 
 // modify comp part of theme 
-const compThemeModifier: <R extends TSheets.Shape>(name: string) => React.SFC<ComponentTypeWithModifierProps<R>> = name => ({ sheet, par, children }) => <Consumer>
+const compThemeModifier: <R extends TBasic.Shape>(name: string) => React.SFC<ComponentTypeWithModifierProps<R>> = name => ({ sheet, par, children }) => <Consumer>
   {themeProps => {
     const themeComps: ThemeWithCompsX = { theme: themeProps.theme }
     // clone ThemeCompX's (without 
@@ -127,7 +126,7 @@ const themeModifier: React.SFC<{ theme: TTheme.ThemeX | ((t: TTheme.ThemeX) => T
 </Consumer>
 
 //default compThemePars from "withStyles" component definition
-const defaultCompThemePars: { [Name in keyof TSheets.Shapes]?: TSheets.getCompTheme<TSheets.Shapes[Name]> } = {}
+const defaultCompThemePars: { [Name in keyof TBasic.Shapes]?: TBasic.getCompTheme<TBasic.Shapes[Name]> } = {}
 
 function callCreator<T>(theme: TTheme.ThemeX, compThemePar, creator: T | ((theme: TTheme.ThemeX, compThemePar) => T)) {
   return typeof creator === 'function' ? creator(theme, compThemePar) : creator

@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { Types } from 'reactxx-basic'
-import { TBasic, TAddInConfig, TComps, TTheme, TSheets, withStyles, ScrollView, View, Text, Icon, AnimatedView, } from 'reactxx'
+import { TAddInConfig, TComps, TTheme, TBasic, withStyles, ScrollView, View, Text, Icon, AnimatedView, } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
 
 //******* Two possibilities how to use get icon data:
@@ -31,7 +31,7 @@ export namespace TResponsibleDrawer {
     onPress: Types.MouseEvent
   }
 
-  export type Shape = TSheets.OverwriteShape<{
+  export type Shape = TBasic.OverwriteShape<{
     common: TComps.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop'> & TComps.ShapeTexts<'openButton' | 'closeButton'>
     props: {
       drawer: JSX.Element //drawer content

@@ -5,7 +5,7 @@ import { Properties } from 'csstype'
 
 import { createContext, ModifierType, ConsumerType, ProviderProps, ConsumerProps, ModifierProps } from 'reactxx-stateman'
 import { TCommonStyles } from 'reactxx-basic'
-import { TAddInConfig, TTheme, TSheets } from 'reactxx'
+import { TAddInConfig, TTheme, TBasic } from 'reactxx'
 
 const { Provider, Modifier, Consumer } = createContext<TTheme.ThemeState>(() => ({ theme: { type: 'ThemeX' } }))
 
@@ -14,21 +14,21 @@ export const AppContainer = Provider
 export const ThemeModifier = Modifier as ModifierType<TTheme.ThemeState, TTheme.ThemeCompSelectedX>
 export const ThemeConsumer = Consumer
 
-export const compThemeModifier = <Shape1 extends TSheets.Shape, Shape2 extends TSheets.Shape = never, Shape3 extends TSheets.Shape = never>(name1: TSheets.getNameType<Shape1>, comp1: TTheme.ThemeCompCreatorX<Shape1>, name2?: TSheets.getNameType<Shape2>, comp2?: TTheme.ThemeCompCreatorX<Shape2>, name3?: TSheets.getNameType<Shape3>, comp3?: TTheme.ThemeCompCreatorX<Shape3>) => (themeState: TTheme.ThemeState) => {
+export const compThemeModifier = <Shape1 extends TBasic.Shape, Shape2 extends TBasic.Shape = never, Shape3 extends TBasic.Shape = never>(name1: TBasic.getNameType<Shape1>, comp1: TTheme.ThemeCompCreatorX<Shape1>, name2?: TBasic.getNameType<Shape2>, comp2?: TTheme.ThemeCompCreatorX<Shape2>, name3?: TBasic.getNameType<Shape3>, comp3?: TTheme.ThemeCompCreatorX<Shape3>) => (themeState: TTheme.ThemeState) => {
   const theme = themeState.theme
   const res: TTheme.ThemeState = { ...themeState, [name1]: compThemeCreate(theme, comp1) }
   if (name2) res[name2 as string] = compThemeCreate(theme, comp2)
   if (name3) res[name3 as string] = compThemeCreate(theme, comp3)
   return res
 }
-export const compThemeParModifier = <Shape1 extends TSheets.Shape, Shape2 extends TSheets.Shape = never, Shape3 extends TSheets.Shape = never>(name1: TSheets.getNameType<Shape1>, comp1: TTheme.ThemeParCreatorX<Shape1>, name2?: TSheets.getNameType<Shape2>, comp2?: TTheme.ThemeParCreatorX<Shape2>, name3?: TSheets.getNameType<Shape3>, comp3?: TTheme.ThemeParCreatorX<Shape3>) => (themeState: TTheme.ThemeState) => {
+export const compThemeParModifier = <Shape1 extends TBasic.Shape, Shape2 extends TBasic.Shape = never, Shape3 extends TBasic.Shape = never>(name1: TBasic.getNameType<Shape1>, comp1: TTheme.ThemeParCreatorX<Shape1>, name2?: TBasic.getNameType<Shape2>, comp2?: TTheme.ThemeParCreatorX<Shape2>, name3?: TBasic.getNameType<Shape3>, comp3?: TTheme.ThemeParCreatorX<Shape3>) => (themeState: TTheme.ThemeState) => {
   const theme = themeState.theme
   const res: TTheme.ThemeState = { ...themeState, [name1]: { ...themeState[name1 as string], par: compThemeParCreate(theme, comp1) } }
   if (name2) res[name2 as string] = { ...themeState[name2 as string], par: compThemeParCreate(theme, comp2) }
   if (name3) res[name3 as string] = { ...themeState[name3 as string], par: compThemeParCreate(theme, comp3) }
   return res
 }
-export const compThemeSheetModifier = <Shape1 extends TSheets.Shape, Shape2 extends TSheets.Shape = never, Shape3 extends TSheets.Shape = never>(name1: TSheets.getNameType<Shape1>, comp1: TTheme.PartialSheetCreatorX<Shape1>, name2?: TSheets.getNameType<Shape2>, comp2?: TTheme.PartialSheetCreatorX<Shape2>, name3?: TSheets.getNameType<Shape3>, comp3?: TTheme.PartialSheetCreatorX<Shape3>) => (themeState: TTheme.ThemeState) => {
+export const compThemeSheetModifier = <Shape1 extends TBasic.Shape, Shape2 extends TBasic.Shape = never, Shape3 extends TBasic.Shape = never>(name1: TBasic.getNameType<Shape1>, comp1: TTheme.PartialSheetCreatorX<Shape1>, name2?: TBasic.getNameType<Shape2>, comp2?: TTheme.PartialSheetCreatorX<Shape2>, name3?: TBasic.getNameType<Shape3>, comp3?: TTheme.PartialSheetCreatorX<Shape3>) => (themeState: TTheme.ThemeState) => {
   const theme = themeState.theme
 
   const c1 = themeState[name1 as string] as TTheme.ThemeCompX<Shape1>
@@ -47,7 +47,7 @@ export const compThemeSheetModifier = <Shape1 extends TSheets.Shape, Shape2 exte
   return res
 }
 
-export const compThemeParCreate = <R extends TSheets.Shape>(theme: TTheme.ThemeX, par: TTheme.ThemeParCreatorX<R>) => typeof par === 'function' ? par(theme) : par
-export const compThemeSheetCreate = <R extends TSheets.Shape>(theme: TTheme.ThemeX, compThemePar: TSheets.getCompTheme<R>, sheet: TTheme.PartialSheetCreatorX<R>) => typeof sheet === 'function' ? sheet(theme, compThemePar) : sheet
-export const compThemeCreate = <R extends TSheets.Shape>(theme: TTheme.ThemeX, comp: TTheme.ThemeCompCreatorX<R>) => { const par = compThemeParCreate(theme, comp.par); return { par, sheet: compThemeSheetCreate(theme, par, comp.sheet) } as TTheme.ThemeCompX<R> }
+export const compThemeParCreate = <R extends TBasic.Shape>(theme: TTheme.ThemeX, par: TTheme.ThemeParCreatorX<R>) => typeof par === 'function' ? par(theme) : par
+export const compThemeSheetCreate = <R extends TBasic.Shape>(theme: TTheme.ThemeX, compThemePar: TBasic.getCompTheme<R>, sheet: TTheme.PartialSheetCreatorX<R>) => typeof sheet === 'function' ? sheet(theme, compThemePar) : sheet
+export const compThemeCreate = <R extends TBasic.Shape>(theme: TTheme.ThemeX, comp: TTheme.ThemeCompCreatorX<R>) => { const par = compThemeParCreate(theme, comp.par); return { par, sheet: compThemeSheetCreate(theme, par, comp.sheet) } as TTheme.ThemeCompX<R> }
 

@@ -1,7 +1,6 @@
 ﻿import { ButtonBaseProps } from './mui'
 import ReactN from 'react-native'
 
-import { TSheets } from 'reactxx'
 import { TComps, TBasic } from 'reactxx'
 //import ReactN from 'react-native'
 //import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
@@ -11,7 +10,7 @@ export namespace MuiButtonBaseT {
     ButtonBase = 'MuiButtonBase',
   }
 
-  export type Shape = TSheets.OverwriteShape<{
+  export type Shape = TBasic.OverwriteShape<{
     common: TComps.ShapeViews<'root'>
     native: TComps.ShapeViews<'ripple'>
     props: ButtonBaseProps //& ReactXX.OnPressAllWeb

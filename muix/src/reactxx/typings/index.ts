@@ -1,7 +1,6 @@
 export const fake = 0
 export { TMediaQ } from './media-q'
 export { TTheme } from './theme'
-export { TSheets } from './sheets'
 export { TBasic, TAddInConfig, TThemeConfig } from './basic'
 export { TComps } from './comps'
 //export * from './typescript-config'

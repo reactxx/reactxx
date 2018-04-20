@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { TSheets, TComps, TTheme, TBasic, Text, View, ScrollView, Icon, withStyles } from 'reactxx'
+import { TComps, TTheme, TBasic, Text, View, ScrollView, Icon, withStyles } from 'reactxx'
 import MDI from 'reactxx-mdi'
 
 import { H4 } from '../components/typo'
@@ -15,7 +15,7 @@ const enum Consts {
 
 // 
 type Variant = 'normal' | 'outline' | 'link'
-type LabelShape = TSheets.OverwriteShape<{
+type LabelShape = TBasic.OverwriteShape<{
   common: TComps.ShapeViews<'root' | 'normalVariant' | 'outlineVariant' | 'linkVariant'> & TComps.ShapeTexts<'label'>,
   props: {
     variant: Variant,

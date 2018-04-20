@@ -3,7 +3,6 @@ import { TBasic, TComps , toPlatformSheet } from 'reactxx'
 import { deepMerge } from 'reactxx-basic'
 import * as Mui from '../typings/mui'
 import { Muix } from '../typings/muix'
-import { TSheets } from 'reactxx'
 
 export default function createTypography(palette: Mui.Palette, optionOrCreator: Muix.TypographyOptionsOrCreatorX) {
   const options = (typeof optionOrCreator === 'function' ? optionOrCreator(palette) : (optionOrCreator || {})) as Muix.TypographyOptionsX
@@ -52,7 +51,7 @@ export default function createTypography(palette: Mui.Palette, optionOrCreator: 
     return optionX ? deepMerge(res, optionX) : res
   }
 
-  type Shape = TSheets.OverwriteShape<{
+  type Shape = TBasic.OverwriteShape<{
     common: TComps.ShapeTexts<Mui.Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'> & { noWrap?: any /*ReactN.TextProperties*/ }
   }>
 
