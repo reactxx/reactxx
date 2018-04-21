@@ -39,19 +39,19 @@ export const AppContainer: React.SFC = props => {
 //}} />
 
 //Get platform component sheet (from creator and theme)
-const expandOverrides = (themeState: TTheme.ThemeState) => {
-  if (!themeState) return null
-  const theme = themeState.theme
-  const res = { theme }
-  for (const componentName in themeState) {
-    if (componentName == 'theme') continue
-    const themeComp: TTheme.ThemeCompX = themeState[componentName]; if (!themeComp) return res
-    const { sheet, par } = themeComp
-    //TODO THEME
-    //res[componentName] = typeof override != 'function' ? override : override(theme, compThemePar)
-  }
-  return res
-}
+//const expandOverrides = (themeState: TTheme.ThemeState) => {
+//  if (!themeState) return null
+//  const theme = themeState.theme
+//  const res = { theme }
+//  for (const componentName in themeState) {
+//    if (componentName == 'theme') continue
+//    const themeComp: TTheme.ThemeCompX = themeState[componentName]; if (!themeComp) return res
+//    const { sheet, par } = themeComp
+//    //TODO THEME
+//    //res[componentName] = typeof override != 'function' ? override : override(theme, compThemePar)
+//  }
+//  return res
+//}
 
 type webKeys<R extends TBasic.Shape> = TBasic.getWeb<R> | keyof TBasic.getCommon<R>
 type muiComponentType<P, ClassKey extends string> = React.ComponentType<P & Mui.StyledComponentProps<ClassKey>>

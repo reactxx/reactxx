@@ -2,11 +2,11 @@ import warning from 'warning'
 
 import { deepMerges, Types } from 'reactxx-basic'
 
-import { TMediaQ } from '../typings/media-q'
 import { BreakPoint, ComponentsMediaQLow } from '../common/media-q'
+import * as MediaQ from '../common/media-q2'
 
 
-export class ComponentsMediaQ<TState extends string = string> extends ComponentsMediaQLow<TState> implements TMediaQ.ComponentsMediaQ<TState>{
+export class ComponentsMediaQ<TState extends string = string> extends ComponentsMediaQLow<TState> {
 
   /*
     decode $mediaq part of ruleset, e.g.
@@ -18,13 +18,13 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
       }
     }
   */
-  processRuleset(ruleset: TMediaQ.RulesetWithAddIn) {
+  processRuleset(ruleset: MediaQ.RulesetWithAddIn) {
     const { $mediaq } = ruleset
     if (!$mediaq) return ruleset //no $mediaq
     const { componentId, component } = this
     let patches: Patch[] = []
     for (const p in $mediaq) {
-      const interval = p.split('-').map((i, idx) => !i ? (idx == 0 ? 0 : TMediaQ.Consts.maxBreakpoint) : parseInt(i))
+      const interval = p.split('-').map((i, idx) => !i ? (idx == 0 ? 0 : MediaQ.Consts.maxBreakpoint) : parseInt(i))
       warning(interval.length == 2, `E.g. '-480' or '480-1024' or '1024-' expected, ${p} found`)
       const pp = $mediaq[p]
       patches.push({ start: interval[0], end: interval[1], ruleset: $mediaq[p] })
@@ -63,7 +63,7 @@ export class BreakPointWeb extends BreakPoint {
 
 const intervalToSelector = (start: number, end: number) => {
   if (start === 0) return `@media (max-width: ${end - 1}px)`
-  if (end === TMediaQ.Consts.maxBreakpoint) return `@media (min-width: ${start}px)`
+  if (end === MediaQ.Consts.maxBreakpoint) return `@media (min-width: ${start}px)`
   return `@media (min-width: ${start}px) and (max-width: ${end - 1}px)`
 }
 

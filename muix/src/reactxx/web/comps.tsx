@@ -10,13 +10,13 @@ import { CompNames } from '../typings/index'
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comps-sheets'
 
 const view: TBasic.CodeSFCWeb<TComps.ViewShape> = props => {
-  const { style, classes, mergeRulesetWithOverrides, theme, animations, mediaq, ...rest } = props
+  const { style, classes, mergeRulesetWithOverrides, theme, animations, $mediaqCode, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root)
   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest} />
 }
 
 const icon: TBasic.CodeSFCWeb<TComps.IconShape> = props => {
-  const { style, classes, data, mergeRulesetWithOverrides, theme, animations, viewBox, children/*this children*/, mediaq, url, onClick, ...rest } = props
+  const { style, classes, data, mergeRulesetWithOverrides, theme, animations, viewBox, children/*this children*/, $mediaqCode, url, onClick, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, onClick && classes.pressable)
   //replace fontSize with width x height
   if (rootStyle.fontSize) { rootStyle.height = rootStyle.width = rootStyle.fontSize; delete rootStyle.fontSize }
@@ -29,14 +29,14 @@ const icon: TBasic.CodeSFCWeb<TComps.IconShape> = props => {
 }
 
 const text: TBasic.CodeSFCWeb<TComps.TextShape> = props => {
-  const { style, classes, numberOfLines, mergeRulesetWithOverrides, theme, animations, mediaq, url, onClick, ...rest } = props
+  const { style, classes, numberOfLines, mergeRulesetWithOverrides, theme, animations, $mediaqCode, url, onClick, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle)
   const tagProps = { className: TBasic.Consts.textClassName + ' ' + rulesetsToClassNames(rootStyle), style, ...rest, onClick: url ? undefined : onClick, ...rootStyle.$props }
   return url ? <a href={url} {...tagProps} /> : <div {...tagProps} />
 }
 
 const scrollView: TBasic.CodeSFCWeb<TComps.ScrollViewShape> = props => {
-  const { style, classes, horizontal, mergeRulesetWithOverrides, theme, animations, children, mediaq, ...rest } = props
+  const { style, classes, horizontal, mergeRulesetWithOverrides, theme, animations, children, $mediaqCode, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, horizontal && classes.rootHorizontal)
   const containerStyle = mergeRulesetWithOverrides(classes.container, horizontal && classes.containerHorizontal)
   //checkChildLayoutProps(style); checkChildLayoutProps(className)

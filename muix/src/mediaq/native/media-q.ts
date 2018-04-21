@@ -4,9 +4,9 @@ import warning from 'warning'
 import { deepMerges } from 'reactxx-basic'
 
 import { BreakPoint, ComponentsMediaQLow, breaks } from '../common/media-q'
-import { TMediaQ } from '../typings/media-q'
+import * as MediaQ from '../common/media-q2'
 
-export class ComponentsMediaQ<TState extends string = string> extends ComponentsMediaQLow<TState> implements TMediaQ.ComponentsMediaQ<TState>{
+export class ComponentsMediaQ<TState extends string = string> extends ComponentsMediaQLow<TState> {
 
   private breaks: boolean[] = []
   
@@ -16,14 +16,14 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
     this.breaks = []
   }
 
-  processRuleset(ruleset: TMediaQ.RulesetWithAddIn) {
+  processRuleset(ruleset: MediaQ.RulesetWithAddIn) {
     const { $mediaq } = ruleset
     if (!$mediaq) return ruleset
     const { componentId, breaks, component } = this
-    const patches: TMediaQ.RulesetWithAddIn[] = []
+    const patches: MediaQ.RulesetWithAddIn[] = []
     const width = this.getWindowWidth()
     for (const p in $mediaq) {
-      const interval = p.split('-').map((i, idx) => !i ? (idx == 0 ? 0 : TMediaQ.Consts.maxBreakpoint) : parseInt(i))
+      const interval = p.split('-').map((i, idx) => !i ? (idx == 0 ? 0 : MediaQ.Consts.maxBreakpoint) : parseInt(i))
       warning(interval.length == 2, `E.g. '-480' or '480-1024' or '1024-' expected, ${p} found`)
       breaks[interval[0]] = true; breaks[interval[1]] = true
       const x = $mediaq[p]

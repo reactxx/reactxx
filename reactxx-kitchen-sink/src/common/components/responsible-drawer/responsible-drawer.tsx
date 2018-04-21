@@ -2,6 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { Types } from 'reactxx-basic'
+import * as MediaQ from 'reactxx-mediaq'
 import { TAddInConfig, TComps, TTheme, TBasic, withStyles, ScrollView, View, Text, Icon, AnimatedView, Themer } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
 
@@ -31,9 +32,9 @@ export namespace TResponsibleDrawer {
     onPress: Types.MouseEvent
   }
 
-  export interface Variant {
+  export interface Variant extends MediaQ.SheetAddIn<TBasic.getMediaQ<Shape>>{
     drawerWidths: [number, number, number] //drawer width for mobile, tablet and desktop
-    breakpoints: [number, number] //media query breakpoints between mobile x tablet and tablet x desktop
+    //breakpoints: [number, number] //media query breakpoints between mobile x tablet and tablet x desktop
     animationDuration: number //drawer animation duration for mobile and tablet
   }
   export interface Props extends Variant {
@@ -42,7 +43,7 @@ export namespace TResponsibleDrawer {
 
 
   export type Shape = TBasic.OverwriteShape<{
-    common: TComps.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop'> & TComps.ShapeTexts<'openButton' | 'closeButton'>
+    common: TComps.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content'> & TComps.ShapeTexts<'openButton' | 'closeButton'>
     props: Props
     mediaq: 'mobile' | 'tablet' | 'desktop' // media query breakpoints names
     animation: { //animation sheets
@@ -66,131 +67,114 @@ type AnimationType = React.ComponentType<TBasic.PropsX<TResponsibleDrawer.Shape>
 
 // ResponsibleDrawer's sheet. 
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
-const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) => ({
+const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) => {
 
-  $mediaq: { // media query window-width breakpoints. Component receives actual width in "mediaq" prop and is rerendered when mediaq changed.
-    mobile: [null, variant.breakpoints[0]],
-    tablet: [variant.breakpoints[0], variant.breakpoints[1]],
-    desktop: [variant.breakpoints[1], null],
-  },
+  const { animationDuration, drawerWidths, $mediaqCode } = variant
+  const { mobile: isMobile, tablet: isTablet, desktop: isDesktop } = MediaQ.toCode($mediaqCode)
 
-  $animations: { // different Animations (for mobile and tablet version of drawer)
+  return {
 
-    mobile: { // single animation (= single Animated.Value for NATIVE), for mobile
-      drawer: { // animation ruleset for specific drawer element
-        transform: [
-          { translateX: [-variant.drawerWidths[0], 0] }
-        ],
+    $animations: { // different Animations (for mobile and tablet version of drawer)
+
+      mobile: { // single animation (= single Animated.Value for NATIVE), for mobile
+        drawer: { // animation ruleset for specific drawer element
+          transform: [
+            { translateX: [-drawerWidths[0], 0] }
+          ],
+        },
+        backDrop: { //animation ruleset for backDrop element
+          opacity: [0, 0.4], // change backDrop opacity
+          transform: [ // appear backDrop during first 0.5% of whole animation time
+            { translateX: [-5000, 0] },
+            '-0.5' // means 0%-0.5% of $duration
+          ],
+        },
+        $duration: animationDuration,
+        $opened: false, //drawer is closed by default for mobile
       },
-      backDrop: { //animation ruleset for backDrop element
-        opacity: [0, 0.4], // change backDrop opacity
-        transform: [ // appear backDrop during first 0.5% of whole animation time
-          { translateX: [-5000, 0] },
-          '-0.5' // means 0%-0.5% of $duration
-        ],
-      },
-      $duration: variant.animationDuration,
-      $opened: false, //drawer is closed by default for mobile
+
+      tablet: { // tablet animation
+        drawer: { // for drawer element
+          transform: [
+            { translateX: [-drawerWidths[1], 0] }
+          ],
+        },
+        content: { // for content element - change left
+          left: [0, drawerWidths[1]]
+        },
+        $duration: animationDuration,
+        $opened: true, //drawer is opened by default for tablet 
+      }
     },
 
-    tablet: { // tablet animation
-      drawer: { // for drawer element
-        transform: [
-          { translateX: [-variant.drawerWidths[1], 0] }
-        ],
-      },
-      content: { // for content element - change left
-        left: [0, variant.drawerWidths[1]]
-      },
-      $duration: variant.animationDuration,
-      $opened: true, //drawer is opened by default for tablet
-    }
-  },
-
-  root: {
-    flex: 1,
-    backgroundColor: 'white', //childs zIndex-ed elements (in Native) does not work without parent background
-  },
-  backDrop: {
-    position: 'absolute',
-    bottom: 0, top: 0, left: 0, right: 0,
-    backgroundColor: 'black',
-    zIndex: 3
-  },
-  drawer: {
-    position: 'absolute',
-    bottom: 0, top: 0, left: 0,
-    zIndex: 5
-  },
-  content: {
-    position: 'absolute',
-    bottom: 0, top: 0, left: 0, right: 0,
-    zIndex: 1
-  },
-  mobile: {
-    $overrides: { // when 'mobile' ruleset is used then modify 'closeButton' and 'drawer' ruleset as follows:
-      closeButton: { display: 'none' }, // modify closButton ruleset (hide it) for mobile
-      drawer: { width: variant.drawerWidths[0] }, // modify drawer ruleset (set width) for mobile
-    }
-  },
-  tablet: { // when 'tablet' ruleset is used...
-    $overrides: {
-      backDrop: { display: 'none' },
-      drawer: { width: variant.drawerWidths[1] },
-    }
-  },
-  desktop: { // when 'desktop' ruleset is used...
-    $overrides: {
-      closeButton: { display: 'none' },
-      openButton: { display: 'none' },
-      backDrop: { display: 'none' },
-      content: { left: variant.drawerWidths[2] },
-      drawer: { width: variant.drawerWidths[2] },
-    }
-  },
-  // 'openButton' and 'closeButton' rulesets are defined by means of "mobile x tablet x desktop" $overrides
-  openButton: {},
-  closeButton: {},
-})
+    root: {
+      flex: 1,
+      backgroundColor: 'white', //childs zIndex-ed elements (in Native) does not work without parent background
+    },
+    backDrop: {
+      position: 'absolute',
+      bottom: 0, top: 0, left: 0, right: 0,
+      backgroundColor: 'black',
+      zIndex: 3,
+      ...(isDesktop || isTablet) ? { display: 'none' } : null,
+    },
+    drawer: {
+      position: 'absolute',
+      bottom: 0, top: 0, left: 0,
+      zIndex: 5,
+      ...isMobile ? { width: drawerWidths[0] } : null,
+      ...isTablet ? { width: drawerWidths[1] } : null,
+      ...isDesktop ? { width: drawerWidths[2] } : null,
+    },
+    content: {
+      position: 'absolute',
+      bottom: 0, top: 0, left: 0, right: 0,
+      zIndex: 1,
+      ...isDesktop ? { left: drawerWidths[2] } : null,
+    },
+    openButton: {
+      ...isDesktop ? { display: 'none' } : null, 
+    },
+    closeButton: {
+      ...(isDesktop || isMobile) ? { display: 'none' } : null,
+    },
+  }
+}
 
 // responsibleDrawer stateless component. 
-const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, mergeRulesetWithOverrides, children, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaq, drawer: drawerNode }) => {
+const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, mergeRulesetWithOverrides, children, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, $mediaqCode, drawer: drawerNode }) => {
 
-  const mediaState = mediaq.state // actual media width, e.g. mediaState = {mobile:false, tablet:true, desktop:false }
-
-  const openDrawer = () => mediaState.tablet ? animTablet.open() : animMobile.open()
-  const closeDrawer = () => mediaState.tablet ? animTablet.close() : animMobile.close()
+  const { mobile: isMobile, tablet: isTablet, desktop: isDesktop } = MediaQ.toCode($mediaqCode)
+ 
+  const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
+  const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()
 
   // calling mergeRulesetWithOverrides signals which rulesets are used. So it can use their $overrides to modify other sheet's rulesets
   const root = mergeRulesetWithOverrides(
     classes.root,
-    // set actual ruleset for different window size
-    mediaState.mobile && classes.mobile, // => use mobile.$overrides when mediaState.mobile===true
-    mediaState.tablet && classes.tablet, // => use tablet.$overrides when mediaState.mobile===true
-    mediaState.desktop && classes.desktop, // => use desktop.$overrides when mediaState.mobile===true
   ) as TBasic.ViewRulesetX
 
   const backDrop = mergeRulesetWithOverrides(
     classes.backDrop,
-    mediaState.mobile && animMobile.sheet.backDrop, // backDrop animation for mobile
+    isMobile && animMobile.sheet.backDrop, // backDrop animation for mobile
   ) as TBasic.ViewRulesetX
 
   const drawer = mergeRulesetWithOverrides(
     classes.drawer,
-    mediaState.mobile && animMobile.sheet.drawer, // drawer animation for mobile
-    mediaState.tablet && animTablet.sheet.drawer, // drawer animation for tablet
+    isMobile && animMobile.sheet.drawer, // drawer animation for mobile
+    isTablet && animTablet.sheet.drawer, // drawer animation for tablet
   ) as TBasic.ViewRulesetX
 
   const content = mergeRulesetWithOverrides(
     classes.content,
-    mediaState.tablet && animTablet.sheet.content, // content animation for tablet
+    isTablet && animTablet.sheet.content, // content animation for tablet
   ) as TBasic.ViewRulesetX
 
   const closeButton = mergeRulesetWithOverrides(classes.closeButton) as TBasic.TextRulesetX
 
   const openButton = mergeRulesetWithOverrides(
     classes.openButton,
-    { display: mediaState.tablet && animTablet.opened || mediaState.desktop ? 'none' : 'flex' }
+    { display: (isTablet && animTablet.opened) || isDesktop ? 'none' : 'flex' }
   ) as TBasic.TextRulesetX
 
   return <View className={root}>
@@ -217,12 +201,17 @@ export const ResponsibleDrawer = (withStyles<TResponsibleDrawer.Shape>(
   TResponsibleDrawer.Consts.Drawer,
   sheet,
   {
-    getVariant: ({ animationDuration, breakpoints, drawerWidths }) => ({ animationDuration, breakpoints, drawerWidths }),
-    variantToString: ({ animationDuration, breakpoints, drawerWidths }) => Themer.variantToString(animationDuration, breakpoints[0], breakpoints[1], drawerWidths[0], drawerWidths[1], drawerWidths[2]),
+    getVariant: ({ animationDuration, $mediaqCode, drawerWidths }) => ({ animationDuration, $mediaqCode, drawerWidths }),
+    variantToString: ({ animationDuration, $mediaqCode, drawerWidths }) => Themer.variantToString(animationDuration, $mediaqCode.mobile, $mediaqCode.tablet, $mediaqCode.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
     defaultProps: {
       animationDuration: 300,
       drawerWidths: [250, 250, 300],
-      breakpoints: [480, 1024]
+      //breakpoints: [480, 1024],
+      $mediaq: {
+        mobile: [null, 480],
+        tablet: [480, 1024],
+        desktop: [1024, null],
+      }
     }
   }
 )(responsibleDrawer)) as AnimationType

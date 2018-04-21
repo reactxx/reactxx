@@ -3,6 +3,7 @@ import ReactN from 'react-native'
 import warning from 'warning'
 
 import { Types, deepMerges } from 'reactxx-basic'
+import { MediaQ_AppContainer } from 'reactxx-mediaq'
 
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
 import { TBasic, TAddInConfig } from '../typings/basic'
@@ -11,14 +12,14 @@ import { TTheme } from '../typings/theme'
 //************ TYPINGS
 
 // Component part of 
-export interface ThemeCompX<R extends TBasic.Shape = TBasic.Shape> { sheet?: TBasic.PartialSheetX<R>, par?: TBasic.get_$CompTheme<R>, staticSheet?: TBasic.Sheet }
+//export interface ThemeCompX<R extends TBasic.Shape = TBasic.Shape> { sheet?: TBasic.PartialSheetX<R>, par?: TBasic.get_$CompTheme<R>, staticSheet?: TBasic.Sheet }
 
-export type ThemeWithCompsX = { theme: TTheme.ThemeX } & { [P in keyof TBasic.Shapes]?: ThemeCompX<TBasic.Shapes[P]> }
+//export type ThemeWithCompsX = { theme: TTheme.ThemeX } & { [P in keyof TBasic.Shapes]?: ThemeCompX<TBasic.Shapes[P]> }
 
-export interface ThemeWithCompX {
-  theme: TTheme.ThemeX // theme from ThemeProvider
-  themeComp?: ThemeCompX // themeComp from ThemeProvider
-}
+//export interface ThemeWithCompX {
+//  theme: TTheme.ThemeX // theme from ThemeProvider
+//  themeComp?: ThemeCompX // themeComp from ThemeProvider
+//}
 
 export type HOCProps<R extends TBasic.Shape = TBasic.Shape> = TBasic.PropsX<R> & Types.OnPressAllX & {
   theme: TTheme.ThemeX // theme from ThemeProvider
@@ -35,10 +36,10 @@ export interface HOCState<R extends TBasic.Shape = TBasic.Shape> {
   //actThemeComp?: ThemeCompX // actual themeComp
 }
 
-export interface ComponentTypeWithModifierProps<R extends TBasic.Shape> {
-  sheet?: TBasic.PartialSheetX<R>
-  par?: TBasic.get_$CompTheme<R>
-}
+//export interface ComponentTypeWithModifierProps<R extends TBasic.Shape> {
+//  sheet?: TBasic.PartialSheetX<R>
+//  par?: TBasic.get_$CompTheme<R>
+//}
 
 export interface ComponentTypeWithModifier<R extends TBasic.Shape> extends TBasic.SFCX<R> {
   PropsModifier: React.ComponentType<TBasic.getProps<R>>
@@ -49,9 +50,9 @@ export interface ComponentTypeWithModifier<R extends TBasic.Shape> extends TBasi
 const { Provider: ThemeProvider, Consumer: ThemeConsumer } = React.createContext<TTheme.ThemeBase>({ type: 'ThemeX', $cache: {} })
 //ThemeProvider.displayName = 'ThemeProvider'; ThemeConsumer.displayName = 'ThemeConsumer'
 
-const withTheme = <R extends TBasic.Shape>(name: string, options: TTheme.WithStyleOptions<R>, createSheetX: TTheme.SheetCreatorX<R>, Component: React.ComponentClass<HOCProps<R>>) => {
+const withTheme = <R extends TBasic.Shape>(name: string, options: TTheme.WithStyleOptions<R>, createSheetX: TTheme.SheetCreatorX<R>, Component: React.ComponentType<HOCProps<R>>) => {
 
-  const res = ((outerProps: TBasic.PropsX) => <ThemeConsumer>
+  const res = ((inputProps: TBasic.PropsX) => <ThemeConsumer>
     {theme => {
       let sheet: TBasic.SheetX<R>
       if (!theme) theme = { type: 'ThemeX', $cache: {} }
@@ -61,7 +62,7 @@ const withTheme = <R extends TBasic.Shape>(name: string, options: TTheme.WithSty
         staticSheet = toPlatformSheet(createSheetX)
       } else {
         if (options.getVariant) {
-          variant = options.getVariant(outerProps)
+          variant = options.getVariant(inputProps as TBasic.PropsX<R>)
           const variantCacheId = options.variantToString && options.variantToString(variant)
           if (variantCacheId) {
             let compCache = theme.$cache[name]
@@ -74,8 +75,8 @@ const withTheme = <R extends TBasic.Shape>(name: string, options: TTheme.WithSty
       }
       //if (name === 'comps$responsibledrawer')
       //  debugger
-      const codeProps = { ...outerProps, theme, staticSheet, variant } as HOCProps<R>
-      return <Component {...codeProps} />
+      const outputProps = { ...inputProps, theme, staticSheet, variant } as HOCProps<R>
+      return <Component {...outputProps} />
     }}
   </ThemeConsumer>
   ) as TBasic.SFCX<R>
@@ -86,9 +87,12 @@ const withTheme = <R extends TBasic.Shape>(name: string, options: TTheme.WithSty
 }
 
 // compute classes, clasName and style (platform dependent and themed)
-const applyTheme = (name: string, nextProps: HOCProps, prevState: HOCState) => {
+const computeClasses = (name: string, props: HOCProps) => {
 
-  const { theme, staticSheet, classes, className, style, variant } = nextProps
+  const {
+    theme, staticSheet, variant, // added by withTheme
+    classes, className, style
+  } = props
 
   const root = className && { root: toPlatformRuleSet(callCreator(theme, variant, className)) }
 
@@ -122,8 +126,10 @@ const compThemeModifier: <R extends TBasic.Shape>(name: string) => React.SFC<Com
   }}
 </Consumer>*/
 
+type ThemePars = { theme: TTheme.ThemeX | ((t: TTheme.ThemeX) => TTheme.ThemeX) }
+
 // theme modifier
-const themeModifier: React.SFC<{ theme: TTheme.ThemeX | ((t: TTheme.ThemeX) => TTheme.ThemeX) }> = ({ theme, children }) => <ThemeConsumer>
+const ThemeModifier: React.SFC<ThemePars> = ({ theme, children }) => <ThemeConsumer>
   {oldTheme => {
     theme = typeof theme === 'function' ? theme(oldTheme) : theme
     //const themeComps: ThemeWithCompsX = { theme }
@@ -143,10 +149,13 @@ function callCreator<T>(theme: TTheme.ThemeX, variant, creator: T | ((theme: TTh
   return typeof creator === 'function' ? creator(theme, variant) : creator
 }
 
-const AppContainer = themeModifier
+const AppContainer: React.SFC<ThemePars> = props =>
+  <MediaQ_AppContainer>
+    <ThemeModifier {...props} />
+  </MediaQ_AppContainer>
 
 const variantToString = (...pars: Object[]) => pars.map(p => p.toString()).join('$')
 
 //************ EXPORT
 
-export const Themer = { withTheme, applyTheme, AppContainer, Modifier: themeModifier, variantToString }
+export const Themer = { withTheme, computeClasses, AppContainer, Modifier: ThemeModifier, variantToString }

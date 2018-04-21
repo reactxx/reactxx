@@ -6,6 +6,7 @@ import ReactN from 'react-native'
 import * as CSS from 'csstype'
 
 import { Types, TCommonStyles } from 'reactxx-basic'
+import * as MediaQ from 'reactxx-mediaq'
 
 import { TAnimation } from 'reactxx-animation'
 import { TMediaQ } from './media-q'
@@ -61,10 +62,10 @@ export namespace TBasic {
     //**** animation shape
     animation?: TAnimation.Shapes
     //**** mediaq shape
-    mediaq?: TMediaQ.Shape | null
+    mediaq?: string | null
     //**** component theme par
     variant?: {}
-    _$compTheme?: {}
+    //_$compTheme?: {}
   }
   export type getCommon<R extends Shape> = R['common']
   export type getNative<R extends Shape> = R['native']
@@ -75,7 +76,7 @@ export namespace TBasic {
   export type getPropsNative<R extends Shape> = R['propsNative']
   export type getAnimation<R extends Shape> = R['animation']
   export type getNameType<R extends Shape> = R['nameType']
-  export type get_$CompTheme<R extends Shape = Shape> = R['_$compTheme']
+  //export type get_$CompTheme<R extends Shape = Shape> = R['_$compTheme']
   export type getVariant<R extends Shape = Shape> = R['variant']
   export type getMediaQ<R extends Shape = Shape> = R['mediaq']
 
@@ -183,9 +184,9 @@ export namespace TBasic {
      OBSOLETE
   *******************************************/
 
-  export type MergeRulesetWithOverrides = (...rulesets: TAddInConfig.RulesetWithAddIn[]) => TBasic.Ruleset
-  export type MergeRulesetWithOverridesNative = (...rulesets: (TAddInConfig.RulesetWithAddInNative | ReactN.TextStyle)[]) => TBasic.RulesetNative
-  export type MergeRulesetWithOverridesWeb = (...rulesets: TAddInConfig.RulesetWithAddInWeb[]) => TBasic.RulesetWeb
+  export type MergeRulesetWithOverrides = (...rulesets: (TAddInConfig.RulesetWithAddIn | boolean)[]) => TBasic.Ruleset
+  export type MergeRulesetWithOverridesNative = (...rulesets: (TAddInConfig.RulesetWithAddInNative | ReactN.TextStyle | boolean)[]) => TBasic.RulesetNative
+  export type MergeRulesetWithOverridesWeb = (...rulesets: (TAddInConfig.RulesetWithAddInWeb | boolean)[]) => TBasic.RulesetWeb
 }
 
 export function isType<TWeb>(arg): arg is TWeb { return window.isWeb }
@@ -198,7 +199,7 @@ export namespace TAddInConfig {
 
   //******************** Cross platform
   export interface RulesetAddInX<T extends Types.RulesetNativeIds, R extends TBasic.Shape> { $overrides?: TBasic.PartialSheetX<R>; $name?: string; $mediaq?: TMediaQ.SheetX<T, R>; $props?: TBasic.PropsInRulesetX<R> }
-  export interface SheetXAddIn<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<TBasic.getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<TBasic.getMediaQ<R>> }
+  export interface SheetXAddIn<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<TBasic.getAnimation<R>> }
 
   //******************** Platform specific
   export interface RulesetWithAddInWeb<R extends TBasic.Shape = TBasic.Shape> extends TBasic.RulesetWeb { $overrides?: TBasic.SheetWeb<R>; $name?: string; $props?: TBasic.PropsInRulesetWeb<R> }
@@ -206,8 +207,8 @@ export namespace TAddInConfig {
   export type RulesetWithAddIn<T extends Types.RulesetNativeIds = 'Text', R extends TBasic.Shape = TBasic.Shape> = (RulesetWithAddInNative<T, R> | RulesetWithAddInWeb<R>) & { $mediaq?: TMediaQ.SheetX<T, R> }
   export interface RulesetWithAddInAny { $overrides?; $name?; $props?}
 
-  export interface SheetAddInWeb<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<TBasic.getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<TBasic.getMediaQ<R>> }
-  export interface SheetAddInNative<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<TBasic.getAnimation<R>>, $mediaq?: TMediaQ.NotifySheetX<TBasic.getMediaQ<R>> }
+  export interface SheetAddInWeb<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<TBasic.getAnimation<R>> }
+  export interface SheetAddInNative<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<TBasic.getAnimation<R>> }
 
 
   /******************************************
@@ -215,7 +216,7 @@ export namespace TAddInConfig {
   *******************************************/
 
   //******************** Cross platform 
-  export interface PropX<R extends TBasic.Shape = TBasic.Shape> {
+  export interface PropX<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.SheetAddInX<TBasic.getMediaQ<R>>, MediaQ.SheetAddIn<TBasic.getMediaQ<R>> {
     style?: TTheme.RulesetCreatorX<R> //cross platform style
     $web?: Partial<TBasic.getPropsWeb<R>> //web specific style
     $native?: Partial<TBasic.getPropsNative<R>> //native specific style
@@ -225,27 +226,25 @@ export namespace TAddInConfig {
   }
 
   //******************** Platform specific
-  export interface CodePropsWeb<R extends TBasic.Shape = TBasic.Shape> {
+  export interface CodePropsWeb<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.SheetAddIn<TBasic.getMediaQ<R>> {
     theme: TTheme.ThemeX
     variant: TBasic.getVariant<R>
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesWeb
     animations: TAnimation.DriversWeb<TBasic.getAnimation<R>>
-    mediaq: TMediaQ.ComponentsMediaQ<TBasic.getMediaQ<R>>
+    
   }
 
-  export interface CodePropsNative<R extends TBasic.Shape = TBasic.Shape> {
+  export interface CodePropsNative<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.SheetAddIn<TBasic.getMediaQ<R>> {
     theme: TTheme.ThemeX
     variant: TBasic.getVariant<R>
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesNative
     animations: TAnimation.DriversNative<TBasic.getAnimation<R>>
-    mediaq: TMediaQ.ComponentsMediaQ<TBasic.getMediaQ<R>>
   }
-  export interface CodeProps<R extends TBasic.Shape = TBasic.Shape> {
+  export interface CodeProps<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.SheetAddIn<TBasic.getMediaQ<R>> {
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides
     theme: TTheme.ThemeX
     variant: TBasic.getVariant<R>
     animations: TAnimation.Drivers<TBasic.getAnimation<R>>
-    mediaq: TMediaQ.ComponentsMediaQ<TBasic.getMediaQ<R>>
   }
 
 }
