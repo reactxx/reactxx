@@ -20,17 +20,29 @@ export interface State<R extends TBasic.Shape = TBasic.Shape> extends HOCState<R
   mediaq?: ComponentsMediaQ<TBasic.getMediaQ<R>>
 }
 
+export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, options?: TTheme.WithStyleOptions<R>) => (Component: TBasic.CodeComponentType<R>) =>
+  withComponentProps<R>(
+    name,
+    options,
+    Themer.withTheme<R>(
+      name,
+      options,
+      sheetCreator,
+      withSheet<R>(
+        name,
+        options,
+        Component
+      ),
+    ),
+  )
 
-//http://jamesknelson.com/should-i-use-shouldcomponentupdate/
-export const withStyles = <R extends TBasic.Shape>(_name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, options?: TTheme.WithStyleOptions<R>) => (Component: TBasic.CodeComponentType<R>) => {
+/*************
+* PRIVATE
+**************/
 
-  const name = _name as string
-  const { Provider: ComponentPropsProvider, Consumer: ComponentPropsConsumer } = React.createContext<TBasic.getProps<R>>(null)
-
-  //ComponentPropsProvider.displayName = 'ComponentPropsProvider'; ComponentPropsConsumer.displayName = 'ComponentPropsConsumer'
+const withSheet = <R extends TBasic.Shape>(name: string, options: TTheme.WithStyleOptions<R>, Component: TBasic.CodeComponentType<R>) =>
 
   class Styled extends React.PureComponent<HOCProps<R>, State<R>> {
-  //class Styled extends React.Component<HOCProps<R>, State<R>> {
 
     state: State<R> = {
       animations: new Animations(this),
@@ -54,20 +66,6 @@ export const withStyles = <R extends TBasic.Shape>(_name: TBasic.getNameType<R>,
       animations.init(nextState.classes.$animations)
       return nextState // nextState props are merged to prevState props. So animations and mediaq props are preserved
     }
-
-    //getSnapshotBeforeUpdate(prevProps, prevState) {
-    //  if (name === 'comps$responsibledrawer')
-    //    debugger
-    //  return name
-    //}
-    //componentDidUpdate(prevProps, prevState, snapshot) {
-    //  if (name === 'comps$responsibledrawer')
-    //    debugger
-    //}
-
-    //getSnapshotBeforeUpdate(prevProps, prevState) {
-    //  return ''
-    //}
 
     render() {
 
@@ -110,9 +108,12 @@ export const withStyles = <R extends TBasic.Shape>(_name: TBasic.getNameType<R>,
 
   }
 
-  const WithTheme = Themer.withTheme<R>(name, Styled, sheetCreator, options)
 
-  const res: TBasic.SFCX<R> = outerProps => <ComponentPropsConsumer>
+const withComponentProps = <R extends TBasic.Shape>(name: string, options: TTheme.WithStyleOptions<R>, WithTheme: TBasic.SFCX<R>) => {
+
+  const { Provider: ComponentPropsProvider, Consumer: ComponentPropsConsumer } = React.createContext<TBasic.getProps<R>>(null)
+
+  const res: TBasic.SFCX<R> & { ComponentPropsProvider?: React.Provider<TBasic.PropsX<R>> } = outerProps => <ComponentPropsConsumer>
     {modifiedProps => {
       if (modifiedProps && outerProps) outerProps = deepMerges(false, {}, outerProps, modifiedProps)
       return <WithTheme {...outerProps} />
@@ -120,11 +121,10 @@ export const withStyles = <R extends TBasic.Shape>(_name: TBasic.getNameType<R>,
   </ComponentPropsConsumer>
 
   res.displayName = name
-
+  res.ComponentPropsProvider = ComponentPropsProvider
   if (options && options.defaultProps) res.defaultProps = options.defaultProps as any
 
   return res
-
 }
 
 //****************************  createRulesetWithOverridesMerger

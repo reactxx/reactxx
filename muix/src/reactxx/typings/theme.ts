@@ -2,7 +2,7 @@
 
 export namespace TTheme {
 
-  export interface WithStyleOptions<R extends TBasic.Shape> {
+  export interface WithStyleOptions<R extends TBasic.Shape =  TBasic.Shape> {
     getVariant?: (props: TBasic.getProps<R>) => TBasic.getVariant<R>
     variantToString?: (variant: TBasic.getVariant<R>) => string
     defaultProps?: Partial<TBasic.getProps<R>>

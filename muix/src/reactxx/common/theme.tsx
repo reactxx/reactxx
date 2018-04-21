@@ -49,7 +49,7 @@ export interface ComponentTypeWithModifier<R extends TBasic.Shape> extends TBasi
 const { Provider: ThemeProvider, Consumer: ThemeConsumer } = React.createContext<TTheme.ThemeBase>({ type: 'ThemeX', $cache: {} })
 //ThemeProvider.displayName = 'ThemeProvider'; ThemeConsumer.displayName = 'ThemeConsumer'
 
-const withTheme = <R extends TBasic.Shape>(name: string, Component: React.ComponentClass<HOCProps<R>>, createSheetX: TTheme.SheetCreatorX<R>, options?: TTheme.WithStyleOptions<R>) => {
+const withTheme = <R extends TBasic.Shape>(name: string, options: TTheme.WithStyleOptions<R>, createSheetX: TTheme.SheetCreatorX<R>, Component: React.ComponentClass<HOCProps<R>>) => {
 
   const res = ((outerProps: TBasic.PropsX) => <ThemeConsumer>
     {theme => {

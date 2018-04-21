@@ -125,7 +125,7 @@ export namespace TBasic {
   export type PropsX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>, TAddInConfig.PropX<R>>>
 
   export type ComponentTypeX<R extends Shape> = React.ComponentType<PropsX<R>>
-  export type SFCX<R extends Shape> = React.SFC<PropsX<R>>
+  export type SFCX<R extends Shape = Shape> = React.SFC<PropsX<R>>
 
   //******************** Platform specific sheets
   // *** web
@@ -161,7 +161,7 @@ export namespace TBasic {
 
   export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
-  export type CodeComponentType<R extends Shape> = React.ComponentType<CodeProps<R>>
+  export type CodeComponentType<R extends Shape = TBasic.Shape> = React.ComponentType<CodeProps<R>>
 
   /******************************************
      $props IN RULESETs
