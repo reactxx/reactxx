@@ -2,6 +2,7 @@
 import React from 'react'
 import MuiButton from 'material-ui/Button/Button'
 
+import { Types } from 'reactxx-basic'
 import { TComps, TBasic, TAddInConfig, TTheme, CompNames } from 'reactxx'
 
 import { muiCompatible } from '../index'

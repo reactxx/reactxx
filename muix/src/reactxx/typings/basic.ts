@@ -63,7 +63,8 @@ export namespace TBasic {
     //**** mediaq shape
     mediaq?: TMediaQ.Shape | null
     //**** component theme par
-    compTheme?: {}
+    variant?: {}
+    _$compTheme?: {}
   }
   export type getCommon<R extends Shape> = R['common']
   export type getNative<R extends Shape> = R['native']
@@ -74,7 +75,8 @@ export namespace TBasic {
   export type getPropsNative<R extends Shape> = R['propsNative']
   export type getAnimation<R extends Shape> = R['animation']
   export type getNameType<R extends Shape> = R['nameType']
-  export type getCompTheme<R extends Shape = Shape> = R['compTheme']
+  export type get_$CompTheme<R extends Shape = Shape> = R['_$compTheme']
+  export type getVariant<R extends Shape = Shape> = R['variant']
   export type getMediaQ<R extends Shape = Shape> = R['mediaq']
 
   export interface Shapes { }
@@ -86,7 +88,8 @@ export namespace TBasic {
     props: {}; propsNative: ReactN.ViewProperties; propsWeb: React.HTMLAttributes<HTMLElement>
     animation: {}; mediaq: null,
     nameType: null
-    compTheme: never
+    variant: never
+    _$compTheme: never
   }, R>
 
   /******************************************
@@ -224,6 +227,7 @@ export namespace TAddInConfig {
   //******************** Platform specific
   export interface CodePropsWeb<R extends TBasic.Shape = TBasic.Shape> {
     theme: TTheme.ThemeX
+    variant: TBasic.getVariant<R>
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesWeb
     animations: TAnimation.DriversWeb<TBasic.getAnimation<R>>
     mediaq: TMediaQ.ComponentsMediaQ<TBasic.getMediaQ<R>>
@@ -231,6 +235,7 @@ export namespace TAddInConfig {
 
   export interface CodePropsNative<R extends TBasic.Shape = TBasic.Shape> {
     theme: TTheme.ThemeX
+    variant: TBasic.getVariant<R>
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesNative
     animations: TAnimation.DriversNative<TBasic.getAnimation<R>>
     mediaq: TMediaQ.ComponentsMediaQ<TBasic.getMediaQ<R>>
@@ -238,6 +243,7 @@ export namespace TAddInConfig {
   export interface CodeProps<R extends TBasic.Shape = TBasic.Shape> {
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides
     theme: TTheme.ThemeX
+    variant: TBasic.getVariant<R>
     animations: TAnimation.Drivers<TBasic.getAnimation<R>>
     mediaq: TMediaQ.ComponentsMediaQ<TBasic.getMediaQ<R>>
   }

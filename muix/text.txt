@@ -3,15 +3,25 @@
 - simple CSS cascading (element selector only) alternative
 - caching functional Sheet
 
-# CHANGES
+# CHANGES NEW
 
 ## Sheet variant
 SheetVariant: interface
 optimalization: toSheetVariantCache: null | SheetVariant => string
 if toSheetVariantCache!=null: sheet is cached in Theme
 
-## NO $overrides, mergeRulesetWithOverrides
-
 ## Cascading props
 - for every component special Provider x Consumer
 - including classes, className etc. => better than MUI Theme.overrides
+
+## Media state and Active to HOC withStyle component state
+
+# REMOVE OLD
+
+## NO $overrides, rename mergeRulesetWithOverrides
+
+
+
+
+
+

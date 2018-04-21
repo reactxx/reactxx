@@ -3,7 +3,8 @@ import ReactN from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 
-import { TComps, ComponentTypeWithModifier, TBasic, TTheme, CompNames, Text, withStyles } from 'reactxx'
+import { Types } from 'reactxx-basic'
+import { TComps, ComponentTypeWithModifier, TBasic, TAddInConfig, TTheme, CompNames, Text, withStyles } from 'reactxx'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 import { MuiButtonT } from '../../typings/button'

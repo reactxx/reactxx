@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { Types } from 'reactxx-basic'
-import { TAddInConfig, TComps, TTheme, TBasic, withStyles, ScrollView, View, Text, Icon, AnimatedView, } from 'reactxx'
+import { TAddInConfig, TComps, TTheme, TBasic, withStyles, ScrollView, View, Text, Icon, AnimatedView, Themer } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
 
 //******* Two possibilities how to use get icon data:
@@ -25,27 +25,31 @@ export namespace TResponsibleDrawer {
     Drawer = 'comps$responsibledrawer'
   }
 
-  export interface RenderProps {
+  export interface IconRenderProps {
     style: TBasic.RulesetX
     iconData: string,
     onPress: Types.MouseEvent
   }
 
+  export interface Variant {
+    drawerWidths: [number, number, number] //drawer width for mobile, tablet and desktop
+    breakpoints: [number, number] //media query breakpoints between mobile x tablet and tablet x desktop
+    animationDuration: number //drawer animation duration for mobile and tablet
+  }
+  export interface Props extends Variant {
+    drawer: JSX.Element //drawer content
+  }
+
+
   export type Shape = TBasic.OverwriteShape<{
     common: TComps.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content' | 'mobile' | 'tablet' | 'desktop'> & TComps.ShapeTexts<'openButton' | 'closeButton'>
-    props: {
-      drawer: JSX.Element //drawer content
-    }
+    props: Props
     mediaq: 'mobile' | 'tablet' | 'desktop' // media query breakpoints names
     animation: { //animation sheets
       mobile: TComps.ShapeViews<'drawer' | 'backDrop'> // mobile animation sheet
       tablet: TComps.ShapeViews<'drawer' | 'content'> // tablet animation sheet
-    },
-    compTheme: { // component theme parameters
-      drawerWidths: [number, number, number] //drawer width for mobile, tablet and desktop
-      breakpoints: [number, number] //media query breakpoints between mobile x tablet and tablet x desktop
-      animationDuration: number //drawer animation duration for mobile and tablet
-    },
+    }
+    variant: Variant
     nameType: Consts.Drawer
   }>
 }
@@ -55,19 +59,19 @@ export namespace TResponsibleDrawer {
 //************************************************************************************************************
 
 // Provider and Consumer for syncing visibility of <Open x Close buttons> with <drawer open x close state>
-const { Provider, Consumer } = React.createContext<TResponsibleDrawer.RenderProps>({} as any)
+const { Provider, Consumer } = React.createContext<TResponsibleDrawer.IconRenderProps>({} as any)
 
 //type ConsumerType = StateConsumerType<TResponsibleDrawer.RenderProps, TResponsibleDrawer.RenderProps>
 type AnimationType = React.ComponentType<TBasic.PropsX<TResponsibleDrawer.Shape>> & { LayoutChanged?: typeof Consumer }
 
 // ResponsibleDrawer's sheet. 
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
-const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, compThemePar) => ({
+const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) => ({
 
   $mediaq: { // media query window-width breakpoints. Component receives actual width in "mediaq" prop and is rerendered when mediaq changed.
-    mobile: [null, compThemePar.breakpoints[0]],
-    tablet: [compThemePar.breakpoints[0], compThemePar.breakpoints[1]],
-    desktop: [compThemePar.breakpoints[1], null],
+    mobile: [null, variant.breakpoints[0]],
+    tablet: [variant.breakpoints[0], variant.breakpoints[1]],
+    desktop: [variant.breakpoints[1], null],
   },
 
   $animations: { // different Animations (for mobile and tablet version of drawer)
@@ -75,7 +79,7 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, compThemeP
     mobile: { // single animation (= single Animated.Value for NATIVE), for mobile
       drawer: { // animation ruleset for specific drawer element
         transform: [
-          { translateX: [-compThemePar.drawerWidths[0], 0] }
+          { translateX: [-variant.drawerWidths[0], 0] }
         ],
       },
       backDrop: { //animation ruleset for backDrop element
@@ -85,20 +89,20 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, compThemeP
           '-0.5' // means 0%-0.5% of $duration
         ],
       },
-      $duration: compThemePar.animationDuration,
+      $duration: variant.animationDuration,
       $opened: false, //drawer is closed by default for mobile
     },
 
     tablet: { // tablet animation
       drawer: { // for drawer element
         transform: [
-          { translateX: [-compThemePar.drawerWidths[1], 0] }
+          { translateX: [-variant.drawerWidths[1], 0] }
         ],
       },
       content: { // for content element - change left
-        left: [0, compThemePar.drawerWidths[1]]
+        left: [0, variant.drawerWidths[1]]
       },
-      $duration: compThemePar.animationDuration,
+      $duration: variant.animationDuration,
       $opened: true, //drawer is opened by default for tablet
     }
   },
@@ -126,13 +130,13 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, compThemeP
   mobile: {
     $overrides: { // when 'mobile' ruleset is used then modify 'closeButton' and 'drawer' ruleset as follows:
       closeButton: { display: 'none' }, // modify closButton ruleset (hide it) for mobile
-      drawer: { width: compThemePar.drawerWidths[0] }, // modify drawer ruleset (set width) for mobile
+      drawer: { width: variant.drawerWidths[0] }, // modify drawer ruleset (set width) for mobile
     }
   },
   tablet: { // when 'tablet' ruleset is used...
     $overrides: {
       backDrop: { display: 'none' },
-      drawer: { width: compThemePar.drawerWidths[1] },
+      drawer: { width: variant.drawerWidths[1] },
     }
   },
   desktop: { // when 'desktop' ruleset is used...
@@ -140,12 +144,12 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, compThemeP
       closeButton: { display: 'none' },
       openButton: { display: 'none' },
       backDrop: { display: 'none' },
-      content: { left: compThemePar.drawerWidths[2] },
-      drawer: { width: compThemePar.drawerWidths[2] },
+      content: { left: variant.drawerWidths[2] },
+      drawer: { width: variant.drawerWidths[2] },
     }
   },
   // 'openButton' and 'closeButton' rulesets are defined by means of "mobile x tablet x desktop" $overrides
-  openButton: {}, 
+  openButton: {},
   closeButton: {},
 })
 
@@ -205,18 +209,25 @@ const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, 
   </View>
 }
 
+//<div>{count++}</div>
+//let count = 0
+
 // HOC ResponsibleDrawer component 
 export const ResponsibleDrawer = (withStyles<TResponsibleDrawer.Shape>(
-  TResponsibleDrawer.Consts.Drawer, //'comps$responsibledrawer' as any/*TResponsibleDrawer.Consts.Drawer*/,
+  TResponsibleDrawer.Consts.Drawer,
   sheet,
-  { //default compThemePar's pars. Could be changed
-    animationDuration: 300, // drawer animation duration in msec
-    drawerWidths: [250, 250, 300], // different opened drawer width for mobile, tablet and desktop
-    breakpoints: [480, 1024] // media breakpoints between mobile x tablet and tablet x desktop
-  })(responsibleDrawer)) as AnimationType
+  {
+    getVariant: ({ animationDuration, breakpoints, drawerWidths }) => ({ animationDuration, breakpoints, drawerWidths }),
+    variantToString: ({ animationDuration, breakpoints, drawerWidths }) => Themer.variantToString(animationDuration, breakpoints[0], breakpoints[1], drawerWidths[0], drawerWidths[1], drawerWidths[2]),
+    defaultProps: {
+      animationDuration: 300,
+      drawerWidths: [250, 250, 300],
+      breakpoints: [480, 1024]
+    }
+  }
+)(responsibleDrawer)) as AnimationType
 
 ResponsibleDrawer.LayoutChanged = Consumer
-
 
 //************************************************************************************************************
 // Using ResponsibleDrawer in application
@@ -224,7 +235,8 @@ ResponsibleDrawer.LayoutChanged = Consumer
 
 const button = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as TBasic.RulesetX
 
-const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer/>}>
+//const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer/>}>
+const App: React.SFC = () => <ResponsibleDrawer drawer={drawer}>
   <Content />
 </ResponsibleDrawer>
 
@@ -232,17 +244,19 @@ const Drawer: React.SFC = () => <ScrollView classes={{ container: { flex: 1, bac
   <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, padding: 10, backgroundColor: 'gray', }}>
     <Text className={{ flexGrow: 1, color: 'white' }}>{LoremIpsum(2)}</Text>
     {/* re-render ResponsibleDrawer.LayoutChanged only when Provider notifies (hide x display it): */}
-    <ResponsibleDrawer.LayoutChanged> 
+    <ResponsibleDrawer.LayoutChanged>
       {({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />}
     </ResponsibleDrawer.LayoutChanged>
   </View>
   <Text className={{ padding: 10 }}>{LoremIpsum(80)}</Text>
 </ScrollView>
 
+const drawer = <Drawer />
+
 const Content: React.SFC = () => <ScrollView classes={{ container: { flex: 1 } }}> {/* content */}
   <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}>
     {/* re-render ResponsibleDrawer.LayoutChanged only when Provider notifies (hide x display it): */}
-    <ResponsibleDrawer.LayoutChanged> 
+    <ResponsibleDrawer.LayoutChanged>
       {({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />}
     </ResponsibleDrawer.LayoutChanged>
     <Text numberOfLines={1} className={{ flexGrow: 1, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(10)}</Text>

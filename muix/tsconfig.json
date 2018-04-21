@@ -5,7 +5,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
 
-    //"declaration": true,
+    "declaration": true,
 
     //"traceResolution": true,
 

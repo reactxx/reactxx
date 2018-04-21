@@ -42,8 +42,10 @@ export const deepMerge = (target, source, skipSystem = false) => {
       } else
         target[key] = source[key]
     }
-  else
+  else {
+    debugger
     throw 'deepMerge: cannot merge object and non object'
+  }
   return target
 }
 const isObject = item => item && typeof item === 'object' && !Array.isArray(item) && typeof item['_interpolation'] != 'function' //HACK: typeof item['_interpolation'] != 'function' prevent to merge ReactNative's Animated.Value.interpolate prop

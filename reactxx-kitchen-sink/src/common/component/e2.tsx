@@ -1,6 +1,7 @@
 import React from 'react'
+import ReactN from 'react-native'
 
-import { TComps, TTheme, TBasic, Text, View, ScrollView, Icon, withStyles } from 'reactxx'
+import { TComps, TTheme, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStyles, ComponentTypeWithModifier } from 'reactxx'
 import MDI from 'reactxx-mdi'
 
 import { H4 } from '../components/typo'
@@ -9,7 +10,7 @@ import { H4 } from '../components/typo'
 * TYPINGS
 *************************/
 
-const enum Consts {
+export const enum Consts {
   Label = 'comp$label2' //unique component name
 }
 

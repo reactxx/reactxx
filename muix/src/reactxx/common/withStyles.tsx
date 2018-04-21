@@ -1,17 +1,18 @@
 import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
+import PropTypes from 'prop-types'
 
 import { Types, toPlatformEvents, deepMerge, deepMerges } from 'reactxx-basic'
 import { Animations } from 'reactxx-animation'
 import { ComponentsMediaQ, TMediaQ } from 'reactxx-mediaq'
-import { TAddInConfig, ComponentTypeWithModifier } from 'reactxx'
+//import { TAddInConfig, ComponentTypeWithModifier } from 'reactxx'
 
 
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
-import { TBasic } from '../typings/basic'
+import { TBasic, TAddInConfig } from '../typings/basic'
 import { TTheme } from '../typings/theme'
-import { Themer, HOCState, HOCProps } from './theme'
+import { Themer, HOCState, HOCProps, ComponentTypeWithModifier } from './theme'
 
 
 export interface State<R extends TBasic.Shape = TBasic.Shape> extends HOCState<R> {
@@ -19,48 +20,69 @@ export interface State<R extends TBasic.Shape = TBasic.Shape> extends HOCState<R
   mediaq?: ComponentsMediaQ<TBasic.getMediaQ<R>>
 }
 
+
 //http://jamesknelson.com/should-i-use-shouldcomponentupdate/
-export const withStyles = <R extends TBasic.Shape>(_name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, compThemePar?: TBasic.getCompTheme<R>) => (Component: TBasic.CodeComponentType<R>) => {
+export const withStyles = <R extends TBasic.Shape>(_name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, options?: TTheme.WithStyleOptions<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
   const name = _name as string
+  const { Provider: ComponentPropsProvider, Consumer: ComponentPropsConsumer } = React.createContext<TBasic.getProps<R>>(null)
 
-  class Styled extends React.PureComponent<HOCProps, State<R>> {
+  //ComponentPropsProvider.displayName = 'ComponentPropsProvider'; ComponentPropsConsumer.displayName = 'ComponentPropsConsumer'
+
+  class Styled extends React.PureComponent<HOCProps<R>, State<R>> {
+  //class Styled extends React.Component<HOCProps<R>, State<R>> {
 
     state: State<R> = {
       animations: new Animations(this),
-      mediaq: new ComponentsMediaQ<TBasic.getMediaQ<R>>(this) 
+      mediaq: new ComponentsMediaQ<TBasic.getMediaQ<R>>(this),
     }
 
     componentWillUnmount() {
+      //if (name === 'comps$responsibledrawer')
+      //  debugger
       this.state.mediaq.destroy()
       this.state.animations.destroy()
     }
 
     static getDerivedStateFromProps = (nextProps: HOCProps, prevState: State) => {
-      //if (name === 'comp$label')
-        //debugger
+      //if (name === 'comps$responsibledrawer')
+      //  debugger
       if (nextProps.ignore) return {} //noop
       const { animations, mediaq } = prevState
       animations.destroy()
-      const nextState: State = Themer.applyTheme(name, sheetCreator, nextProps, prevState)
+      const nextState: State = Themer.applyTheme(name, nextProps, prevState)
       animations.init(nextState.classes.$animations)
       return nextState // nextState props are merged to prevState props. So animations and mediaq props are preserved
     }
 
+    //getSnapshotBeforeUpdate(prevProps, prevState) {
+    //  if (name === 'comps$responsibledrawer')
+    //    debugger
+    //  return name
+    //}
+    //componentDidUpdate(prevProps, prevState, snapshot) {
+    //  if (name === 'comps$responsibledrawer')
+    //    debugger
+    //}
+
+    //getSnapshotBeforeUpdate(prevProps, prevState) {
+    //  return ''
+    //}
+
     render() {
 
-      //if (name === 'comp$label')
+      //if (name === 'comps$responsibledrawer')
       //  debugger
 
-      const { animations, mediaq, style, classes } = this.state
+      const { animations, mediaq, style, classes, variant } = this.state
 
       mediaq.destroy(); mediaq.init(classes.$mediaq)
 
       const {
-        classes: ignore0, className: ignore1, style: ignore2, themeComp: ignore3, // already used props
+        classes: ignore0, className: ignore1, style: ignore2, staticSheet: ignore3, variant: ignore4, // already processed props
         theme, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore,
         ...other
-      } = this.props as HOCProps & Types.OnPressAllX
+      } = this.props as HOCProps
 
       if (ignore) return null
 
@@ -72,6 +94,7 @@ export const withStyles = <R extends TBasic.Shape>(_name: TBasic.getNameType<R>,
         ...(window.isWeb ? $web : $native),
         mergeRulesetWithOverrides,
         theme,
+        variant,
         animations,
         mediaq: mediaq as TMediaQ.ComponentsMediaQ<TBasic.getMediaQ<R>>,
         classes, //available classes for mergeRulesetWithOverrides (this.classes = merge(sheet, theme.overrides[name], classes prop)
@@ -83,9 +106,24 @@ export const withStyles = <R extends TBasic.Shape>(_name: TBasic.getNameType<R>,
       return <Component {...codeProps} />
     }
 
+    static displayName = 'withStyles'
+
   }
 
-  return Themer.withTheme(name, Styled, sheetCreator, compThemePar)
+  const WithTheme = Themer.withTheme<R>(name, Styled, sheetCreator, options)
+
+  const res: TBasic.SFCX<R> = outerProps => <ComponentPropsConsumer>
+    {modifiedProps => {
+      if (modifiedProps && outerProps) outerProps = deepMerges(false, {}, outerProps, modifiedProps)
+      return <WithTheme {...outerProps} />
+    }}
+  </ComponentPropsConsumer>
+
+  res.displayName = name
+
+  if (options && options.defaultProps) res.defaultProps = options.defaultProps as any
+
+  return res
 
 }
 
