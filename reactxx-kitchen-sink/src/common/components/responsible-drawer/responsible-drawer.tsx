@@ -70,7 +70,7 @@ type AnimationType = React.ComponentType<TBasic.PropsX<TResponsibleDrawer.Shape>
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
 const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) => {
 
-  const { animationDuration, drawerWidths, $mediaqCode: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } } = variant
+  const { animationDuration, drawerWidths, mediaqCode: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } } = variant
 
   return {
 
@@ -142,9 +142,9 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =
 }
 
 // responsibleDrawer stateless component. 
-const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, mergeRulesetWithOverrides, children, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, $mediaqCode: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, drawer: drawerNode }) => {
+const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, mergeRulesetWithOverrides, children, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqCode: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, drawer: drawerNode }) => {
 
-  //const { mobile: isMobile, tablet: isTablet, desktop: isDesktop } = MediaQ.toCode($mediaqCode)
+  //const { mobile: isMobile, tablet: isTablet, desktop: isDesktop } = MediaQ.toCode(mediaqCode)
  
   const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()
@@ -201,9 +201,9 @@ export const ResponsibleDrawer = (withStyles<TResponsibleDrawer.Shape>(
   TResponsibleDrawer.Consts.Drawer,
   sheet,
   {
-    getVariant: ({ animationDuration, $mediaqCode, drawerWidths }) => ({ animationDuration, $mediaqCode, drawerWidths }),
-    //getVariant: props => { const x = props.$mediaqCode; return null },
-    variantToString: ({ animationDuration, $mediaqCode, drawerWidths }) => variantToString(animationDuration, $mediaqCode.mobile, $mediaqCode.tablet, $mediaqCode.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
+    getVariant: ({ animationDuration, mediaqCode, drawerWidths }) => ({ animationDuration, mediaqCode, drawerWidths }),
+    //getVariant: props => { const x = props.mediaqCode; return null },
+    variantToString: ({ animationDuration, mediaqCode, drawerWidths }) => variantToString(animationDuration, mediaqCode.mobile, mediaqCode.tablet, mediaqCode.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
     defaultProps: {
       animationDuration: 300,
       drawerWidths: [250, 250, 300],

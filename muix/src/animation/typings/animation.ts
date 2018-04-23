@@ -55,7 +55,7 @@ export namespace TAnimation {
   export type SheetNative<T extends Shape> = { [P in keyof T]: Types.RulesetNative<T[P]> } & AnimationConfig
   export type Sheet<T extends Shape> = { [P in keyof T]: (Types.RulesetNative<T[P]> | Types.RulesetWeb) } & AnimationConfig
 
-  export type SheetsX<T extends Shapes> = { [P in keyof T]: SheetX<T[P]> }
+  export type SheetsX<T extends Shapes = Shapes> = { [P in keyof T]: SheetX<T[P]> }
   export type SheetX<T extends Shape> = { [P in keyof T]: RuleSetX<T[P]> } & AnimationConfig
 
   export type Shape = Record<string, Types.RulesetNativeIds>

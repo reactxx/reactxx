@@ -4,7 +4,7 @@ import warning from 'warning'
 import PropTypes from 'prop-types'
 
 import { Types, toPlatformEvents, deepMerge, deepMerges } from 'reactxx-basic'
-import { Animations } from 'reactxx-animation'
+import { Animations, TAnimation } from 'reactxx-animation'
 import * as MediaQ from 'reactxx-mediaq'
 //import { TAddInConfig, ComponentTypeWithModifier } from 'reactxx'
 
@@ -50,18 +50,19 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
                 return MediaQConsumer_RenderIfNeeded(observedBits2, () => {
                   const mediaNotifyRecord = observedBits2 === 0 ? null : MediaQ.mediaqActualizetNotifyBreakpoints(usedNotifyBreakpoints)
                   const outputProps3 = prepareSheet(name, sheetCreator, options, outputProps2, mediaNotifyRecord)
+                  type TOutputProps3 = typeof outputProps3
 
                   // ******* 4. MEDIAQ SHEET, meta-code: if (some of rulesets in outputProps3.classes's sheet contains $mediaq) (outputProps3, changed global-breakpoints) => outputProps4
                   const { usedSheetBreakpoints, observedBits: observedBits3 } = MediaQ.mediaqGetSheetBreakpoints(outputProps3.classes as MediaQ.MediaQSheet)
 
                   return MediaQConsumer_RenderIfNeeded(observedBits3, () => {
-                    const outputProps4 = observedBits3 === 0 ? outputProps3 : MediaQ.mediaqActualizeSheetBreakpoints(outputProps3 as { classes: MediaQ.MediaQSheet }, usedSheetBreakpoints) as typeof outputProps3
+                    const outputProps4 = observedBits3 === 0 ? outputProps3 : MediaQ.mediaqActualizeSheetBreakpoints(outputProps3 as { classes: MediaQ.MediaQSheet }, usedSheetBreakpoints) as TOutputProps3
                     // ******* 5. ANIMATION, meta-code: if (outputProps4.$animations) outputProps4.$animations => animations
-                    return AnimationsComponent_RenderIfNeeded(outputProps4.classes.$animations, animations => {
+                    return AnimationsComponent_RenderIfNeeded(outputProps4.classes.$animations as TAnimation.SheetsX, animations => {
                       // ******* 6. CODE COMPONENT, meta-code: (use outputProps4 and animations in component code)
                       if (outputProps4.classes.$preserve) outputProps4.classes = { ...outputProps4.classes }
                       clearSystemProps(outputProps4.classes)
-                      return <Component {...outputProps4 as TBasic.CodeProps<R>} />
+                      return <Component {...outputProps4 as TBasic.CodeProps<R>} animations={animations} />
                     })
                   })
 
@@ -94,7 +95,7 @@ const mergePropsFromConsumer = <T extends {}>(props: T, modifier) => {
   return (modifier && props ? deepMerges(false, {}, props, modifier) : props) as T
 }
 
-const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions, props: TBasic.PropsX & { theme: TTheme.ThemeX } & MediaQ.CodeProps, $mediaqCode: MediaQ.CodePropsItems) => {
+const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions, props: TBasic.PropsX & { theme: TTheme.ThemeX } & MediaQ.CodeProps, mediaqCode: MediaQ.CodePropsItems) => {
 
   const { theme, classes, className, style, $mediaq: ignore1, ...rest } = props
 
@@ -105,7 +106,7 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
     staticSheet = toPlatformSheet(createSheetX)
   } else {
     if (options.getVariant) {
-      const propsWithMediaQ = $mediaqCode ? { ...props, $mediaqCode} : props
+      const propsWithMediaQ = mediaqCode ? { ...props, mediaqCode} : props
       variant = options.getVariant(propsWithMediaQ)
       const variantCacheId = options.variantToString && options.variantToString(variant)
       if (variantCacheId) {
@@ -133,8 +134,8 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
     style: toPlatformRuleSet(callCreator(theme, variant, style)),
     variant,
     mergeRulesetWithOverrides,
-    $mediaqCode,
-  } as TBasic.CodeProps
+    mediaqCode,
+  } as TBasic.CodeProps & { $animations?: TAnimation.SheetsX }
 }
 const callCreator = <T extends {}>(theme: TTheme.ThemeBase, variant, creator: T | ((theme: TTheme.ThemeBase, variant) => T)) => typeof creator === 'function' ? creator(theme, variant) : creator
 
@@ -148,7 +149,7 @@ interface AnimState {
   refreshCounter: number
 }
 interface AnimProps {
-  $initAnimations
+  $initAnimations: TAnimation.SheetsX
   children: (animations: Animations) => React.ReactNode
 }
 class AnimationsComponent extends React.PureComponent<AnimProps, AnimState> {
@@ -173,7 +174,7 @@ class AnimationsComponent extends React.PureComponent<AnimProps, AnimState> {
 
 }
 
-const AnimationsComponent_RenderIfNeeded = ($animations, child: (newProp) => React.ReactElement<any>) => {
+const AnimationsComponent_RenderIfNeeded = ($animations: TAnimation.SheetsX, child: (newProp) => React.ReactElement<any>) => {
   return !$animations ? child(null) : <AnimationsComponent $initAnimations={$animations}>
     {animations => child(animations)}
   </AnimationsComponent>
@@ -195,7 +196,7 @@ const mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides = (...rulesets
 
 const clearSystemProps = obj => {
   if (!obj) return obj
-  const { $overrides, $name, $web, $native, $mediaq, $preserve, ...rest } = obj as TBasic.RulesetX & { $preserve}
+  const { $overrides, $name, $web, $native, $mediaq, $preserve, $animations, ...rest } = obj as TBasic.RulesetX & { $preserve, $animations}
   return rest
 }
 

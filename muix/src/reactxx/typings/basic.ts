@@ -97,8 +97,8 @@ export namespace TBasic {
   *******************************************/
 
   //******************** Cross platform sheet
-  export type SheetX<R extends Shape = Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & TAddInConfig.SheetXAddIn<R>
-  export type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & TAddInConfig.SheetXAddIn<R>
+  export type SheetX<R extends Shape = Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & TAddInConfig.SheetAddInX<R>
+  export type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & TAddInConfig.SheetAddInX<R>
 
   //Cross platform sheet helpers
   export type SheetXCommon<R extends Shape> = { [P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R> }
@@ -106,13 +106,12 @@ export namespace TBasic {
   export type SheetXWeb<R extends Shape> = { [P in getWeb<R>]: (RulesetWeb & TAddInConfig.RulesetAddInX<never, R>) }
 
   //******************** Platform specific sheets
-  export type SheetWeb<R extends Shape = Shape> = Record<(keyof getCommon<R>) | getWeb<R>, TAddInConfig.RulesetWithAddInWeb<R>> & TAddInConfig.SheetAddInWeb<R>
+  export type SheetWeb<R extends Shape = Shape> = Record<(keyof getCommon<R>) | getWeb<R>, TAddInConfig.RulesetWithAddInWeb<R>> //& TAddInConfig.SheetAddInWeb<R>
   export type SheetNative<R extends Shape = Shape> =
     { [P in keyof getCommon<R>]: TAddInConfig.RulesetWithAddInNative<getCommon<R>[P], R> } &
-    { [P in keyof getNative<R>]: TAddInConfig.RulesetWithAddInNative<getNative<R>[P], R> } &
-    TAddInConfig.SheetAddInNative<R>
+    { [P in keyof getNative<R>]: TAddInConfig.RulesetWithAddInNative<getNative<R>[P], R> } 
+    //TAddInConfig.SheetAddInNative<R>
 
-  //export type Sheet<R extends Shape = Shape, T extends TPlatform = never> = T extends TPlatformWeb ? SheetWeb<R> : T extends TPlatformNative ? SheetNative<R> : SheetWeb<R> | SheetNative<R>
   export type Sheet<R extends Shape = Shape> = SheetWeb<R> | SheetNative<R>
   export type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
 
@@ -198,7 +197,7 @@ export namespace TAddInConfig {
 
   //******************** Cross platform
   export interface RulesetAddInX<T extends Types.RulesetNativeIds, R extends TBasic.Shape> extends MediaQ.MediaQRulesetPartX<T> { $overrides?: TBasic.PartialSheetX<R>; $name?: string; $props?: TBasic.PropsInRulesetX<R> }
-  export interface SheetXAddIn<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<TBasic.getAnimation<R>> }
+  export interface SheetAddInX<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<TBasic.getAnimation<R>> }
 
   //******************** Platform specific
   export interface RulesetWithAddInWeb<R extends TBasic.Shape = TBasic.Shape> extends TBasic.RulesetWeb, MediaQ.MediaQRulesetPart { $overrides?: TBasic.SheetWeb<R>; $name?: string; $props?: TBasic.PropsInRulesetWeb<R> }
@@ -206,8 +205,8 @@ export namespace TAddInConfig {
   export type RulesetWithAddIn<T extends Types.RulesetNativeIds = 'Text', R extends TBasic.Shape = TBasic.Shape> = (RulesetWithAddInNative<T, R> | RulesetWithAddInWeb<R>)
   export interface RulesetWithAddInAny { $overrides?; $name?; $props?}
 
-  export interface SheetAddInWeb<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<TBasic.getAnimation<R>> }
-  export interface SheetAddInNative<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<TBasic.getAnimation<R>> }
+  //export interface SheetAddInWeb<R extends TBasic.Shape = TBasic.Shape> { } //$animations?: TAnimation.SheetsX<TBasic.getAnimation<R>> }
+  //export interface SheetAddInNative<R extends TBasic.Shape = TBasic.Shape> { } //$animations?: TAnimation.SheetsX<TBasic.getAnimation<R>> }
 
 
   /******************************************

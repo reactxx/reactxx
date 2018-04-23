@@ -60,7 +60,7 @@ export type NotifyIntervalX<TState extends string> = { [P in TState]: [number | 
 
 export type NotifyIntervalDecoded<TState extends string = string> = { [P in TState]: [Breakpoint, Breakpoint] }
 
-export interface CodeProps<TState extends string = string> { $mediaqCode?: CodePropsItems<TState> }
+export interface CodeProps<TState extends string = string> { mediaqCode?: CodePropsItems<TState> }
 export type CodePropsItems<TState extends string = string> = { [P in TState]: boolean }
 
 

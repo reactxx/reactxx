@@ -36,7 +36,7 @@ const sheet: TTheme.SheetCreatorX<Shape> = (theme, variant) => ({
       '480-1024': { color: 'blue' },
       '1024-': { color: 'green' },
     },
-    fontSize: variant.$mediaqCode.small ? 24 : 48
+    fontSize: variant.mediaqCode.small ? 24 : 48
   }
 })
 
@@ -58,8 +58,8 @@ export const Label = withStyles<Shape>(
   Consts.Label,
   sheet,
   {
-    getVariant: ({ $mediaqCode }) => ({ $mediaqCode }),
-    variantToString: ({ $mediaqCode }) => $mediaqCode.small.toString(),
+    getVariant: ({ mediaqCode }) => ({ mediaqCode }),
+    variantToString: ({ mediaqCode }) => mediaqCode.small.toString(),
     defaultProps: {
       $mediaq: {
         small: [0, 800]

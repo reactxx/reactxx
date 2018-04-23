@@ -69,7 +69,7 @@ const withSheet = <R extends TBasic.Shape>(name: string, options: TTheme.WithSty
       const { animations } = prevState
       animations.destroy()
       const nextState: State = Themer.computeClasses(name, nextProps)
-      animations.init(nextState.classes.$animations)
+      //animations.init(nextState.classes.$animations)
       return nextState // nextState props are merged to prevState props. So animations and mediaq props are preserved
     }
 
@@ -84,7 +84,7 @@ const withSheet = <R extends TBasic.Shape>(name: string, options: TTheme.WithSty
 
       const {
         classes: ignore0, className: ignore1, style: ignore2, staticSheet: ignore3, variant: ignore4, $mediaq: ignore5, // already processed props
-        theme, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, //$mediaqCode,
+        theme, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, //mediaqCode,
         ...other
       } = this.props as Themer.HOCProps
 
@@ -100,7 +100,7 @@ const withSheet = <R extends TBasic.Shape>(name: string, options: TTheme.WithSty
         theme,
         variant,
         animations,
-        //$mediaqCode,
+        //mediaqCode,
         //mediaq: mediaq as TMediaQ.ComponentsMediaQ<TBasic.getMediaQ<R>>,
         classes, //available classes for mergeRulesetWithOverrides (this.classes = merge(sheet, theme.overrides[name], classes prop)
         style,
