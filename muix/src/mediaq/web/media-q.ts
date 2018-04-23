@@ -5,6 +5,18 @@ import { deepMerges, Types } from 'reactxx-basic'
 import { BreakPoint, ComponentsMediaQLow } from '../common/media-q'
 import * as MediaQ from '../common/media-q2'
 
+export const processRuleset = (ruleset: MediaQ.RulesetWithAddIn) => {
+  const { $mediaq, ...mediaRuleset } = ruleset
+  if (!$mediaq) return ruleset //no $mediaq
+  for (const p in $mediaq) {
+    const interval = p.split('-').map((i, idx) => !i ? (idx == 0 ? 0 : MediaQ.Consts.maxBreakpoint) : parseInt(i))
+    warning(interval.length == 2, `E.g. '-480' or '480-1024' or '1024-' expected, ${p} found`)
+    mediaRuleset[intervalToSelector(interval[0], interval[1])] = $mediaq[p]
+  }
+  return mediaRuleset as Types.Ruleset
+}
+
+
 
 export class ComponentsMediaQ<TState extends string = string> extends ComponentsMediaQLow<TState> {
 
@@ -19,27 +31,14 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
     }
   */
   processRuleset(ruleset: MediaQ.RulesetWithAddIn) {
-    const { $mediaq } = ruleset
+    const { $mediaq, ...mediaRuleset } = ruleset
     if (!$mediaq) return ruleset //no $mediaq
-    const { componentId, component } = this
-    let patches: Patch[] = []
     for (const p in $mediaq) {
       const interval = p.split('-').map((i, idx) => !i ? (idx == 0 ? 0 : MediaQ.Consts.maxBreakpoint) : parseInt(i))
       warning(interval.length == 2, `E.g. '-480' or '480-1024' or '1024-' expected, ${p} found`)
-      const pp = $mediaq[p]
-      patches.push({ start: interval[0], end: interval[1], ruleset: $mediaq[p] })
+      mediaRuleset[intervalToSelector(interval[0], interval[1])] = $mediaq[p]
     }
-    if (patches.length === 0) return ruleset //empty $mediaq
-
-    /* create Fela media part of ruleset, e.g. 
-      mediaRuleset = {
-        '@media (max-width: 479px)': { fontSize: '24', color:'blue' },
-        '@media (min-width: 480px) and (max-width: 1023px)': { fontSize: '32', color:'red' }
-      }
-    */
-    const mediaRuleset = patches.map(p => ({ [intervalToSelector(p.start, p.end)]: p.ruleset }))
-    //merge with source ruleset
-    return deepMerges(true, {}, ruleset, ...mediaRuleset)
+    return mediaRuleset as Types.Ruleset
   }
 
   createBreakPoint(breakPoint: number) { return new BreakPointWeb(breakPoint) }
@@ -66,5 +65,3 @@ const intervalToSelector = (start: number, end: number) => {
   if (end === MediaQ.Consts.maxBreakpoint) return `@media (min-width: ${start}px)`
   return `@media (min-width: ${start}px) and (max-width: ${end - 1}px)`
 }
-
-interface Patch { start: number; end: number; ruleset: Types.Ruleset }

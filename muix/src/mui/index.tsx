@@ -6,7 +6,7 @@ import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
 
 import { ModifierType } from 'reactxx-stateman'
-import { TTheme, TAddInConfig, Themer, TBasic, toPlatformRuleSet, toPlatformSheet } from 'reactxx'
+import { TTheme, TAddInConfig, TBasic, toPlatformRuleSet, toPlatformSheet, ThemeModifier } from 'reactxx'
 import { Types, toPlatformEvents } from 'reactxx-basic'
 import { rulesetToClassNames } from 'reactxx-fela'
 
@@ -24,9 +24,9 @@ export const jss: JSS = create({ ...preset(), createGenerateClassName, insertion
 export const AppContainer: React.SFC = props => {
   const theme = createMuiTheme()
   return <JssProvider jss={jss}>
-    <Themer.Modifier theme={{} as TTheme.ThemeX }>
+    <ThemeModifier theme={{} as TTheme.ThemeX }>
       <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
-    </Themer.Modifier>
+    </ThemeModifier>
   </JssProvider>
 }
 

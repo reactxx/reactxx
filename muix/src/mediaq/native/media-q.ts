@@ -6,6 +6,11 @@ import { deepMerges } from 'reactxx-basic'
 import { BreakPoint, ComponentsMediaQLow, breaks } from '../common/media-q'
 import * as MediaQ from '../common/media-q2'
 
+export const processRuleset = (ruleset: MediaQ.RulesetWithAddIn) => {
+
+}
+
+
 export class ComponentsMediaQ<TState extends string = string> extends ComponentsMediaQLow<TState> {
 
   private breaks: boolean[] = []
@@ -27,7 +32,7 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
       warning(interval.length == 2, `E.g. '-480' or '480-1024' or '1024-' expected, ${p} found`)
       breaks[interval[0]] = true; breaks[interval[1]] = true
       const x = $mediaq[p]
-      if (width >= interval[0] && width < interval[1]) patches.push($mediaq[p])
+      if (width >= interval[0] && width < interval[1]) patches.push($mediaq[p] as any)
     }
     //subscribe for watching changes
     for (const idx in breaks) this.subscribe(parseInt(idx), componentId, component)

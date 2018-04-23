@@ -50,36 +50,34 @@ export interface ComponentTypeWithModifier<R extends TBasic.Shape> extends TBasi
 const { Provider: ThemeProvider, Consumer: ThemeConsumer } = React.createContext<TTheme.ThemeBase>({ type: 'ThemeX', $cache: {} })
 //ThemeProvider.displayName = 'ThemeProvider'; ThemeConsumer.displayName = 'ThemeConsumer'
 
-const withTheme = <R extends TBasic.Shape>(name: string, options: TTheme.WithStyleOptions<R>, createSheetX: TTheme.SheetCreatorX<R>, Component: React.ComponentType<HOCProps<R>>) => {
+export const withTheme = <R extends TBasic.Shape>(Component: React.ComponentType<HOCProps<R>>) => {//name: string, options: TTheme.WithStyleOptions<R>, createSheetX: TTheme.SheetCreatorX<R>, Component: React.ComponentType<HOCProps<R>>) => {
 
   const res = ((inputProps: TBasic.PropsX) => <ThemeConsumer>
     {theme => {
-      let sheet: TBasic.SheetX<R>
       if (!theme) theme = { type: 'ThemeX', $cache: {} }
-      let staticSheet: TBasic.Sheet
-      let variant = null
-      if (typeof createSheetX !== 'function') {
-        staticSheet = toPlatformSheet(createSheetX)
-      } else {
-        if (options.getVariant) {
-          variant = options.getVariant(inputProps as TBasic.PropsX<R>)
-          const variantCacheId = options.variantToString && options.variantToString(variant)
-          if (variantCacheId) {
-            let compCache = theme.$cache[name]
-            if (!compCache) theme.$cache[name] = compCache = {}
-            staticSheet = compCache[variantCacheId]
-            if (!staticSheet) compCache[variantCacheId] = staticSheet = toPlatformSheet(callCreator(theme, variant, createSheetX))
-          } else
-            staticSheet = toPlatformSheet(callCreator(theme, variant, createSheetX))
-        }
-      }
+      //let staticSheet: TBasic.Sheet
+      //let variant = null
+      //if (typeof createSheetX !== 'function') {
+      //  staticSheet = toPlatformSheet(createSheetX)
+      //} else {
+      //  if (options.getVariant) {
+      //    variant = options.getVariant(inputProps as TBasic.PropsX<R>)
+      //    const variantCacheId = options.variantToString && options.variantToString(variant)
+      //    if (variantCacheId) {
+      //      let compCache = theme.$cache[name]
+      //      if (!compCache) theme.$cache[name] = compCache = {}
+      //      staticSheet = compCache[variantCacheId]
+      //      if (!staticSheet) compCache[variantCacheId] = staticSheet = toPlatformSheet(callCreator(theme, variant, createSheetX))
+      //    } else
+      //      staticSheet = toPlatformSheet(callCreator(theme, variant, createSheetX))
+      //  }
+      //}
       //if (name === 'comps$responsibledrawer')
       //  debugger
-      const outputProps = { ...inputProps, theme, staticSheet, variant } as HOCProps<R>
+      const outputProps = { ...inputProps, theme } as HOCProps<R>
       return <Component {...outputProps} />
     }}
-  </ThemeConsumer>
-  ) as TBasic.SFCX<R>
+  </ThemeConsumer>) as TBasic.SFCX<R> // React.ComponentType<HOCProps<R>>
 
   res.displayName = 'withTheme'
 
@@ -87,7 +85,7 @@ const withTheme = <R extends TBasic.Shape>(name: string, options: TTheme.WithSty
 }
 
 // compute classes, clasName and style (platform dependent and themed)
-const computeClasses = (name: string, props: HOCProps) => {
+export const computeClasses = (name: string, props: HOCProps) => {
 
   const {
     theme, staticSheet, variant, // added by withTheme
@@ -126,10 +124,10 @@ const compThemeModifier: <R extends TBasic.Shape>(name: string) => React.SFC<Com
   }}
 </Consumer>*/
 
-type ThemePars = { theme: TTheme.ThemeX | ((t: TTheme.ThemeX) => TTheme.ThemeX) }
+export type ThemePars = { theme: TTheme.ThemeX | ((t: TTheme.ThemeX) => TTheme.ThemeX) }
 
 // theme modifier
-const ThemeModifier: React.SFC<ThemePars> = ({ theme, children }) => <ThemeConsumer>
+export const ThemeModifier: React.SFC<ThemePars> = ({ theme, children }) => <ThemeConsumer>
   {oldTheme => {
     theme = typeof theme === 'function' ? theme(oldTheme) : theme
     //const themeComps: ThemeWithCompsX = { theme }
@@ -149,13 +147,10 @@ function callCreator<T>(theme: TTheme.ThemeX, variant, creator: T | ((theme: TTh
   return typeof creator === 'function' ? creator(theme, variant) : creator
 }
 
-const AppContainer: React.SFC<ThemePars> = props =>
+export const AppContainer: React.SFC<ThemePars> = props =>
   <MediaQ_AppContainer>
     <ThemeModifier {...props} />
   </MediaQ_AppContainer>
 
-const variantToString = (...pars: Object[]) => pars.map(p => p.toString()).join('$')
+export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()).join('$')
 
-//************ EXPORT
-
-export const Themer = { withTheme, computeClasses, AppContainer, Modifier: ThemeModifier, variantToString }

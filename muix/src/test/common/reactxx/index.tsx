@@ -1,5 +1,5 @@
 import React from 'react'
-import { TTheme, CompNames, Text, View, ScrollView, Icon, Themer } from 'reactxx'
+import { TTheme, CompNames, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
 
 import { TBasic } from 'reactxx'
@@ -142,23 +142,23 @@ For "View" element:
 
 }
 
-const TestApp: React.SFC = props => <Themer.AppContainer theme={{}}>
+const TestApp: React.SFC = props => <AppContainer theme={{}}>
   <Text className={theme => ({ color: 'red', fontWeight: 'bold', textDecoration: 'underline' })}>
     red, bold, underline
   </Text>
   <Text onPress={() => alert('blue click')} style={theme => ({ color: 'blue', fontWeight: 'normal', textDecoration: 'underline' })} >
     blue, underline, on new line, pointer cursor (is clickable)
   </Text>
-</Themer.AppContainer>
+</AppContainer>
 
-const AppThemeOverride: React.SFC = props => <Themer.AppContainer theme={{}}>
+const AppThemeOverride: React.SFC = props => <AppContainer theme={{}}>
   <Text className={theme => ({ color: 'red', fontWeight: 'bold', textDecoration: 'underline' })}>
     red, bold, underline
   </Text>
   <Text onPress={() => alert('blue click')} style={theme => ({ color: 'blue', fontWeight: 'normal', textDecoration: 'underline' })} >
     blue, underline, on new line, pointer cursor (is clickable)
   </Text>
-</Themer.AppContainer>
+</AppContainer>
 
 const App = primitives.$07.Component
 export default App

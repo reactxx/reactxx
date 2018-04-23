@@ -9,7 +9,6 @@ import { Types, TCommonStyles } from 'reactxx-basic'
 import * as MediaQ from 'reactxx-mediaq'
 
 import { TAnimation } from 'reactxx-animation'
-import { TMediaQ } from './media-q'
 import { TTheme } from './theme'
 
 export namespace TBasic {
@@ -198,13 +197,13 @@ export namespace TAddInConfig {
   *******************************************/
 
   //******************** Cross platform
-  export interface RulesetAddInX<T extends Types.RulesetNativeIds, R extends TBasic.Shape> { $overrides?: TBasic.PartialSheetX<R>; $name?: string; $mediaq?: TMediaQ.SheetX<T, R>; $props?: TBasic.PropsInRulesetX<R> }
+  export interface RulesetAddInX<T extends Types.RulesetNativeIds, R extends TBasic.Shape> { $overrides?: TBasic.PartialSheetX<R>; $name?: string; $mediaq?: MediaQ.SheetX<T>; $props?: TBasic.PropsInRulesetX<R> }
   export interface SheetXAddIn<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<TBasic.getAnimation<R>> }
 
   //******************** Platform specific
   export interface RulesetWithAddInWeb<R extends TBasic.Shape = TBasic.Shape> extends TBasic.RulesetWeb { $overrides?: TBasic.SheetWeb<R>; $name?: string; $props?: TBasic.PropsInRulesetWeb<R> }
   export type RulesetWithAddInNative<T extends Types.RulesetNativeIds = 'Text', R extends TBasic.Shape = TBasic.Shape> = TBasic.RulesetNative<T> & { $overrides?: TBasic.SheetNative<R>; $name?: string; $props?: TBasic.PropsInRulesetNative<R> }
-  export type RulesetWithAddIn<T extends Types.RulesetNativeIds = 'Text', R extends TBasic.Shape = TBasic.Shape> = (RulesetWithAddInNative<T, R> | RulesetWithAddInWeb<R>) & { $mediaq?: TMediaQ.SheetX<T, R> }
+  export type RulesetWithAddIn<T extends Types.RulesetNativeIds = 'Text', R extends TBasic.Shape = TBasic.Shape> = (RulesetWithAddInNative<T, R> | RulesetWithAddInWeb<R>) & { $mediaq?: MediaQ.SheetX<T> }
   export interface RulesetWithAddInAny { $overrides?; $name?; $props?}
 
   export interface SheetAddInWeb<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<TBasic.getAnimation<R>> }
@@ -216,7 +215,7 @@ export namespace TAddInConfig {
   *******************************************/
 
   //******************** Cross platform 
-  export interface PropX<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.SheetAddInX<TBasic.getMediaQ<R>>, MediaQ.SheetAddIn<TBasic.getMediaQ<R>> {
+  export interface PropX<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.SheetAddInX<TBasic.getMediaQ<R>> { //, MediaQ.SheetAddIn<TBasic.getMediaQ<R>> {
     style?: TTheme.RulesetCreatorX<R> //cross platform style
     $web?: Partial<TBasic.getPropsWeb<R>> //web specific style
     $native?: Partial<TBasic.getPropsNative<R>> //native specific style
@@ -226,7 +225,7 @@ export namespace TAddInConfig {
   }
 
   //******************** Platform specific
-  export interface CodePropsWeb<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.SheetAddIn<TBasic.getMediaQ<R>> {
+  export interface CodePropsWeb<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.SheetCodeAddIn<TBasic.getMediaQ<R>> {
     theme: TTheme.ThemeX
     variant: TBasic.getVariant<R>
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesWeb
@@ -234,13 +233,13 @@ export namespace TAddInConfig {
     
   }
 
-  export interface CodePropsNative<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.SheetAddIn<TBasic.getMediaQ<R>> {
+  export interface CodePropsNative<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.SheetCodeAddIn<TBasic.getMediaQ<R>> {
     theme: TTheme.ThemeX
     variant: TBasic.getVariant<R>
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesNative
     animations: TAnimation.DriversNative<TBasic.getAnimation<R>>
   }
-  export interface CodeProps<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.SheetAddIn<TBasic.getMediaQ<R>> {
+  export interface CodeProps<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.SheetCodeAddIn<TBasic.getMediaQ<R>> {
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides
     theme: TTheme.ThemeX
     variant: TBasic.getVariant<R>

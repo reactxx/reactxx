@@ -1,4 +1,19 @@
-﻿# PROBLEMS TO SOLVE
+﻿# withStyle
+
+1. withTheme: just theme, no staticSheet and variant
+** NO (use theme variant instead):  theme has defaultProps: {[compName:string]: value | theme => value}
+
+2. withComponentProps
+
+3. withMediaQ: with using $mediaq(theme) and parametter: onFinish(name, sheetCreator, options):  (props, NotifySheetCode) => breakpointsFrom(staticSheet, classes, className)
+- Notify breakpoints consumer (result is NotifySheetCode)
+- call rulesetBreakpoints = onFinish (props, NotifySheetCode)
+- ruleset.mediaq breakpoints consumer (compute observedBits from rulesetBreakpoints). Result is all breakpoints (byValue version?)
+
+4. withSheet: including staticSheet and variant
+
+
+# PROBLEMS TO SOLVE
 - better functional Sheet (not only theme but component props too)
 - simple CSS cascading (element selector only) alternative
 - caching functional Sheet

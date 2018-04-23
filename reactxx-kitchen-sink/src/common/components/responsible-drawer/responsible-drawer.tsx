@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { Types } from 'reactxx-basic'
 import * as MediaQ from 'reactxx-mediaq'
-import { TAddInConfig, TComps, TTheme, TBasic, withStyles, ScrollView, View, Text, Icon, AnimatedView, Themer } from 'reactxx'
+import { TAddInConfig, TComps, TTheme, TBasic, withStyles, ScrollView, View, Text, Icon, AnimatedView, variantToString } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
 
 //******* Two possibilities how to use get icon data:
@@ -32,7 +32,7 @@ export namespace TResponsibleDrawer {
     onPress: Types.MouseEvent
   }
 
-  export interface Variant extends MediaQ.SheetAddIn<TBasic.getMediaQ<Shape>>{
+  export interface Variant extends MediaQ.SheetCodeAddIn<TBasic.getMediaQ<Shape>>{
     drawerWidths: [number, number, number] //drawer width for mobile, tablet and desktop
     //breakpoints: [number, number] //media query breakpoints between mobile x tablet and tablet x desktop
     animationDuration: number //drawer animation duration for mobile and tablet
@@ -69,8 +69,7 @@ type AnimationType = React.ComponentType<TBasic.PropsX<TResponsibleDrawer.Shape>
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
 const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) => {
 
-  const { animationDuration, drawerWidths, $mediaqCode } = variant
-  const { mobile: isMobile, tablet: isTablet, desktop: isDesktop } = MediaQ.toCode($mediaqCode)
+  const { animationDuration, drawerWidths, $mediaqCode: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } } = variant
 
   return {
 
@@ -142,9 +141,9 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =
 }
 
 // responsibleDrawer stateless component. 
-const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, mergeRulesetWithOverrides, children, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, $mediaqCode, drawer: drawerNode }) => {
+const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, mergeRulesetWithOverrides, children, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, $mediaqCode: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, drawer: drawerNode }) => {
 
-  const { mobile: isMobile, tablet: isTablet, desktop: isDesktop } = MediaQ.toCode($mediaqCode)
+  //const { mobile: isMobile, tablet: isTablet, desktop: isDesktop } = MediaQ.toCode($mediaqCode)
  
   const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()
@@ -202,7 +201,7 @@ export const ResponsibleDrawer = (withStyles<TResponsibleDrawer.Shape>(
   sheet,
   {
     getVariant: ({ animationDuration, $mediaqCode, drawerWidths }) => ({ animationDuration, $mediaqCode, drawerWidths }),
-    variantToString: ({ animationDuration, $mediaqCode, drawerWidths }) => Themer.variantToString(animationDuration, $mediaqCode.mobile, $mediaqCode.tablet, $mediaqCode.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
+    variantToString: ({ animationDuration, $mediaqCode, drawerWidths }) => variantToString(animationDuration, $mediaqCode.mobile, $mediaqCode.tablet, $mediaqCode.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
     defaultProps: {
       animationDuration: 300,
       drawerWidths: [250, 250, 300],

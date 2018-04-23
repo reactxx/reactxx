@@ -5,46 +5,50 @@ import PropTypes from 'prop-types'
 
 import { Types, toPlatformEvents, deepMerge, deepMerges } from 'reactxx-basic'
 import { Animations } from 'reactxx-animation'
-import * as MediaQ  from 'reactxx-mediaq'
+import * as MediaQ from 'reactxx-mediaq'
 //import { TAddInConfig, ComponentTypeWithModifier } from 'reactxx'
 
 
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
 import { TBasic, TAddInConfig } from '../typings/basic'
 import { TTheme } from '../typings/theme'
-import { Themer, HOCState, HOCProps, ComponentTypeWithModifier } from './theme'
+import * as Themer from './theme'
 
 
-export interface State<R extends TBasic.Shape = TBasic.Shape> extends HOCState<R> {
+export interface State<R extends TBasic.Shape = TBasic.Shape> extends Themer.HOCState<R> {
   animations?: Animations //TAnimation.Drivers
-  mediaq?: MediaQ.ComponentsMediaQ<TBasic.getMediaQ<R>>
+ // mediaq?: MediaQ.ComponentsMediaQ<TBasic.getMediaQ<R>>
 }
 
-export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, options?: TTheme.WithStyleOptions<R>) => (Component: TBasic.CodeComponentType<R>) =>
-  withComponentProps<R>( // merge props with ComponentPropsProvider.value
-    name,
-    options,
-    MediaQ.withMediaQ<TBasic.PropsX<R>>( // replace $media with $mediaCode
-      Themer.withTheme<TBasic.Shape>( // convert TBasic.PropsX<R> to HOCProps<R>
-        name,
-        options,
-        sheetCreator,
-        withSheet<R>( // 
-          name,
-          options,
-          Component
-        )
-      ) as React.ComponentType<MediaQ.SheetAddIn<TBasic.getMediaQ<R>>>
-    ),
-  )
+export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, options?: TTheme.WithStyleOptions<R>) => (Component: TBasic.CodeComponentType<R>) => {
+  //let provider
+  //const res = Themer.withTheme<TBasic.Shape>( // convert TBasic.PropsX<R> to HOCProps<R>
+  //  withComponentProps<R>( // merge props with ComponentPropsProvider.value
+  //    name,
+  //    options,
+  //    prov => provider = prov,
+  //    MediaQ.withMediaQ<TBasic.PropsX<R>>( // replace $media with $mediaCode
+  //      null,
+  //      withSheet<R>( // 
+  //        name,
+  //        options,
+  //        Component
+  //      )
+  //    ) as React.ComponentType<Themer.HOCProps<R>>
+  //  ),
+  //) as TBasic.SFCX<R> & {ComponentPropsProvider?: React.Provider<TBasic.PropsX<R>> }
+  //res.displayName = name
+  //res.ComponentPropsProvider = provider
+  return null as TBasic.SFCX<R> & { ComponentPropsProvider?: React.Provider<TBasic.PropsX<R>> }
+}
 
 /*************
 * PRIVATE
 **************/
 
-const withSheet = <R extends TBasic.Shape>(name: string, options: TTheme.WithStyleOptions<R>, Component: TBasic.CodeComponentType<R>) =>
+const withSheet = <R extends TBasic.Shape>(name: string, options: TTheme.WithStyleOptions<R>, Component: TBasic.CodeComponentType<R>) => {
 
-  class Styled extends React.PureComponent<HOCProps<R>, State<R>> {
+  class Styled extends React.PureComponent<Themer.HOCProps<R>, State<R>> {
 
     state: State<R> = {
       animations: new Animations(this),
@@ -58,11 +62,11 @@ const withSheet = <R extends TBasic.Shape>(name: string, options: TTheme.WithSty
       this.state.animations.destroy()
     }
 
-    static getDerivedStateFromProps = (nextProps: HOCProps, prevState: State) => {
+    static getDerivedStateFromProps = (nextProps: Themer.HOCProps, prevState: State) => {
       //if (name === 'comps$responsibledrawer')
       //  debugger
       if (nextProps.ignore) return {} //noop
-      const { animations, mediaq } = prevState
+      const { animations } = prevState
       animations.destroy()
       const nextState: State = Themer.computeClasses(name, nextProps)
       animations.init(nextState.classes.$animations)
@@ -80,9 +84,9 @@ const withSheet = <R extends TBasic.Shape>(name: string, options: TTheme.WithSty
 
       const {
         classes: ignore0, className: ignore1, style: ignore2, staticSheet: ignore3, variant: ignore4, $mediaq: ignore5, // already processed props
-        theme, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, $mediaqCode,
+        theme, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, //$mediaqCode,
         ...other
-      } = this.props as HOCProps
+      } = this.props as Themer.HOCProps
 
       if (ignore) return null
 
@@ -96,7 +100,7 @@ const withSheet = <R extends TBasic.Shape>(name: string, options: TTheme.WithSty
         theme,
         variant,
         animations,
-        $mediaqCode,
+        //$mediaqCode,
         //mediaq: mediaq as TMediaQ.ComponentsMediaQ<TBasic.getMediaQ<R>>,
         classes, //available classes for mergeRulesetWithOverrides (this.classes = merge(sheet, theme.overrides[name], classes prop)
         style,
@@ -111,21 +115,27 @@ const withSheet = <R extends TBasic.Shape>(name: string, options: TTheme.WithSty
 
   }
 
+  return Styled
 
-const withComponentProps = <R extends TBasic.Shape>(name: string, options: TTheme.WithStyleOptions<R>, WithTheme: TBasic.SFCX<R>) => {
+}
+
+
+const withComponentProps = <R extends TBasic.Shape>(name: string, options: TTheme.WithStyleOptions<R>, providerRef: (provider) => void, Component: React.ComponentType<Themer.HOCProps<R>>) => {
 
   const { Provider: ComponentPropsProvider, Consumer: ComponentPropsConsumer } = React.createContext<TBasic.getProps<R>>(null)
 
-  const res: TBasic.SFCX<R> & { ComponentPropsProvider?: React.Provider<TBasic.PropsX<R>> } = inputProps => <ComponentPropsConsumer>
+  providerRef(ComponentPropsProvider)
+
+  const res: React.SFC<Themer.HOCProps<R>> & { ComponentPropsProvider?: React.Provider<TBasic.PropsX<R>> } = inputProps => <ComponentPropsConsumer>
     {modifiedProps => {
       const outputProps = modifiedProps && inputProps ? deepMerges(false, {}, inputProps, modifiedProps) : inputProps
-      return <WithTheme {...outputProps} />
+      return <Component {...outputProps} />
     }}
   </ComponentPropsConsumer>
 
-  res.displayName = name
-  res.ComponentPropsProvider = ComponentPropsProvider
-  if (options && options.defaultProps) res.defaultProps = options.defaultProps as any
+  //res.displayName = 'withComponentProps'
+  //res.ComponentPropsProvider = ComponentPropsProvider
+  //if (options && options.defaultProps) res.defaultProps = options.defaultProps as any
 
   return res
 }
@@ -134,7 +144,7 @@ const withComponentProps = <R extends TBasic.Shape>(name: string, options: TThem
 // Could be called in <Component> render method to compute component styles. Side effects:
 // - use sheet.ruleset.$overrides to modify self sheet
 // - use sheet.ruleset.$mediaq to modify ruleset 
-const createRulesetWithOverridesMerger = (media: MediaQ.ComponentsMediaQ) => {
+const createRulesetWithOverridesMerger = (media: any /*MediaQ.ComponentsMediaQ*/) => {
   const usedOverrides: TBasic.Sheet = {}
   const res: TBasic.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
     let single = undefined //optimalization: rulesets contains just single non empty item => no deepMerge is needed

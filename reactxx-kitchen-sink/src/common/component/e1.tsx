@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TComps, TTheme, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStyles, ComponentTypeWithModifier } from 'reactxx'
+import { TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStyles } from 'reactxx'
 import MDI from 'reactxx-mdi'
 
 import { H4 } from '../components/typo'
