@@ -6,7 +6,7 @@ import { deepMerges } from 'reactxx-basic'
 import { BreakPoint, ComponentsMediaQLow, breaks } from '../common/media-q'
 import * as MediaQ from '../common/media-q2'
 
-export const processRuleset = (ruleset: MediaQ.RulesetWithAddIn) => {
+export const processRuleset = (ruleset: any) => {
 
 }
 
@@ -21,11 +21,11 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
     this.breaks = []
   }
 
-  processRuleset(ruleset: MediaQ.RulesetWithAddIn) {
+  processRuleset(ruleset: any) {
     const { $mediaq } = ruleset
     if (!$mediaq) return ruleset
     const { componentId, breaks, component } = this
-    const patches: MediaQ.RulesetWithAddIn[] = []
+    const patches: any[] = []
     const width = this.getWindowWidth()
     for (const p in $mediaq) {
       const interval = p.split('-').map((i, idx) => !i ? (idx == 0 ? 0 : MediaQ.Consts.maxBreakpoint) : parseInt(i))

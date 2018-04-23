@@ -57,7 +57,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
                   const { usedSheetBreakpoints, observedBits: observedBits3 } = MediaQ.mediaqGetSheetBreakpoints(outputProps3)
 
                   return MediaQConsumer_RenderIfNeeded(observedBits3, () => {
-                    const outputProps4 = observedBits3 === 0 ? outputProps3 : MediaQ.mediaqActualizeSheetBreakpoints(outputProps3.classes as MediaQ.ComponentSheet, usedSheetBreakpoints) as typeof outputProps3
+                    const outputProps4 = observedBits3 === 0 ? outputProps3 : MediaQ.mediaqActualizeSheetBreakpoints(outputProps3.classes as MediaQ.MediaQSheet, usedSheetBreakpoints) as typeof outputProps3
                     // ******* 5. ANIMATION, meta-code: if (outputProps4.$animations) outputProps4.$animations => animations
                     return AnimationsComponent_RenderIfNeeded(outputProps4.classes.$animations, animations => {
                       // ******* 6. CODE COMPONENT, meta-code: (use outputProps4 and animations in component code)
@@ -93,7 +93,7 @@ const mergePropsFromConsumer = <T extends {}>(props: T, modifier) => {
   return (modifier && props ? deepMerges(false, {}, props, modifier) : props) as T
 }
 
-const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions, props: TBasic.PropsX & { theme: TTheme.ThemeX }, $mediaqCode: MediaQ.NotifySheetCode) => {
+const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions, props: TBasic.PropsX & { theme: TTheme.ThemeX }, $mediaqCode: MediaQ.CodePropsItems) => {
 
   const { theme, classes, className, style, $mediaq: ignore1, ...rest } = props
 

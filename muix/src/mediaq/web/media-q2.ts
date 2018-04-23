@@ -1,4 +1,4 @@
-import { Breakpoint, refresh, RulesetCodeItem, Consts } from '../common/media-q2'
+import { Breakpoint, refresh, RulesetDecoded, Consts } from '../common/media-q2'
 
 export const onSubscribe = (b: Breakpoint, inRuleset: boolean) => {
   if (inRuleset) return // generate FELA media query ruleset
@@ -14,7 +14,7 @@ export const onSubscribe = (b: Breakpoint, inRuleset: boolean) => {
   mediaQuery.addListener(onChange)
 }
 
-export const modifyRuleset = (ruleset: {}, items: RulesetCodeItem[]) => {
+export const modifyRuleset = (ruleset: {}, items: RulesetDecoded[]) => {
   if (!items) return ruleset
   const res = {...ruleset}
   items.forEach(it => res[intervalToSelector(it.from.value, it.to.value)] = it.ruleset)

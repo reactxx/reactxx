@@ -3,6 +3,8 @@ import warning from 'warning'
 
 import * as MediaQ from '../common/media-q2'
 
+//export type RulesetWithAddIn = Types.Ruleset & { $mediaq?: Sheet }
+
 export interface Breakpoint2 {
   id: number // 0..31
   value: number  // e.g. 1024
@@ -47,7 +49,7 @@ export abstract class ComponentsMediaQLow<TState extends string = string>  {
     this.state = {}
   }
 
-  init(notifySheet: MediaQ.NotifySheetX<TState>) {
+  init(notifySheet: MediaQ.NotifyIntervalX<TState>) {
     if (!notifySheet) return
     const { componentId, notifyBreaks, component } = this
     const width = this.getWindowWidth()
@@ -72,7 +74,7 @@ export abstract class ComponentsMediaQLow<TState extends string = string>  {
     delete breaks[breakPoint].subscribers[id]
   }
   abstract createBreakPoint(breakPoint: number): BreakPoint
-  abstract processRuleset(ruleset: MediaQ.RulesetWithAddIn)
+  abstract processRuleset(ruleset: any)
   abstract getWindowWidth(): number
   static componentsMediaCount = 0
 }

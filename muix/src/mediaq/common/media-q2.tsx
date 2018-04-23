@@ -4,38 +4,46 @@ import warning from 'warning'
 import { Types } from 'reactxx-basic'
 import { onSubscribe, modifyRuleset } from 'reactxx-mediaq' // import platform dependent code
 
-export type RulesetWithAddInX<T extends Types.RulesetNativeIds = 'Text'> = Types.Ruleset & { $mediaq?: SheetX<T> }
+/************************
+* RULESET TYPINGS
+*************************/
 
-export type RulesetWithAddIn = Types.Ruleset & { $mediaq?: Sheet }
+//*** Cross platform:
 
-export type RulesetWithAddInCode = RulesetCode[]
+// Ruleset
+export type RulesetWithAddInX<T extends Types.RulesetNativeIds = 'Text'> = Types.RulesetX & MediaQRulesetPartX<T>
 
-
-export interface SheetX<T extends Types.RulesetNativeIds = 'Text'> {
-  [query: string]: Types.RulesetX<T>
+// $mediaq ruleset part. 'query' has '-640' or '640-1024' or '1024-' format
+export interface MediaQRulesetPartX<T extends Types.RulesetNativeIds = 'Text'> {
+  $mediaq?: { [query: string]: Types.RulesetX<T> }
 }
 
-export interface Sheet {
-  [query: string]: Types.Ruleset
+//*** Platform dependent
+export type MediaQSheet = { [rulesetName: string]: RulesetWithAddIn }
+
+export type RulesetWithAddIn = Types.Ruleset & MediaQRulesetPart
+
+export interface MediaQRulesetPart {
+  $mediaq?: { [query: string]: Types.Ruleset }
 }
 
-export interface RulesetCodeItem {
+//*** decoded MediaQSheet
+export interface MediaQRulesetDecoded {
+  rulesetName: string // ruleset name in sheet
+  items: RulesetDecoded[] // decoded MediaQRulesetPartX
+}
+
+export interface RulesetDecoded {
   from: Breakpoint
   to: Breakpoint
   ruleset: Types.Ruleset
 }
-export interface RulesetCode {
-  rulesetName: string
-  items: RulesetCodeItem[]
-}
 
-export type ComponentSheet<T extends string = string> = Record<T, any>
+/************************
+* NOTIFY TYPINGS
+*************************/
 
-export interface ComponentSheetUsed {
-  [rulesetName: string]: RulesetWithAddInCode
-}
-
-
+//*** breakpoint
 export const enum Consts {
   maxBreakpoint = 10000000
 }
@@ -46,14 +54,19 @@ export interface Breakpoint {
   active?: boolean
 }
 
-export type NotifySheetX<TState extends string> = { [P in TState]: [number | null, number | null] }
-export type SheetAddInX<TState extends string = string> = { theme?, $mediaq?: NotifySheetX<TState> | ((theme) => NotifySheetX<TState>) }
+//***  MediaQ Notify properties
+export type PropsX<TState extends string = string> = { theme?, $mediaq?: NotifyIntervalX<TState> | ((theme) => NotifyIntervalX<TState>) }
+export type NotifyIntervalX<TState extends string> = { [P in TState]: [number | null, number | null] }
 
-export type NotifySheet<TState extends string = string> = { [P in TState]: [Breakpoint, Breakpoint] }
-export type SheetAddIn<TState extends string = string> = { theme?, $mediaqCode?: NotifySheetCode<TState> }
+export type NotifyIntervalDecoded<TState extends string = string> = { [P in TState]: [Breakpoint, Breakpoint] }
 
-export type NotifySheetCode<TState extends string = string> = { [P in TState]: boolean }
-export type SheetCodeAddIn<TState extends string = string> = { $mediaqCode?: NotifySheetCode<TState> }
+export type CodeProps<TState extends string = string> = { $mediaqCode?: CodePropsItems<TState> }
+export type CodePropsItems<TState extends string = string> = { [P in TState]: boolean }
+
+
+/************************
+* EXPORTED
+*************************/
 
 export class MediaQ_AppContainer extends React.Component {
   constructor() {
@@ -75,11 +88,11 @@ export const refresh = () => {
 }
 
 
-export const mediaqGetNotifyBreakpoints = <T extends string>(props: SheetAddInX<T>) => {
-  const { $mediaq, ...rest } = props as SheetAddInX
-  if (!$mediaq) return { usedNotifyBreakpoints: null as NotifySheet<T>, observedBits: 0 }
+export const mediaqGetNotifyBreakpoints = <T extends string>(props: PropsX<T>) => {
+  const { $mediaq, ...rest } = props as PropsX
+  if (!$mediaq) return { usedNotifyBreakpoints: null as NotifyIntervalDecoded<T>, observedBits: 0 }
   const mediaq = typeof $mediaq === 'function' ? $mediaq(rest.theme) : $mediaq
-  const newMedia = {} as NotifySheet<T>
+  const newMedia = {} as NotifyIntervalDecoded<T>
   let observedBits = 0
   for (const p in mediaq)
     newMedia[p] = mediaq[p].map((i, idx) => {
@@ -92,9 +105,9 @@ export const mediaqGetNotifyBreakpoints = <T extends string>(props: SheetAddInX<
   return { usedNotifyBreakpoints: newMedia, observedBits: observedBits }
 }
 
-export const mediaqActualizetNotifyBreakpoints = <T extends string>(sheet: NotifySheet<T>) => {
-  if (!sheet) return null as NotifySheetCode<T>
-  const res = {} as NotifySheetCode<T>
+export const mediaqActualizetNotifyBreakpoints = <T extends string>(sheet: NotifyIntervalDecoded<T>) => {
+  if (!sheet) return null as CodePropsItems<T>
+  const res = {} as CodePropsItems<T>
   for (const p in sheet) {
     const sheetp = sheet[p]
     res[p] = sheetp[0].active && !sheetp[1].active
@@ -102,14 +115,14 @@ export const mediaqActualizetNotifyBreakpoints = <T extends string>(sheet: Notif
   return res
 }
 
-export const mediaqGetSheetBreakpoints = (sheet: ComponentSheet) => {
+export const mediaqGetSheetBreakpoints = (sheet: MediaQSheet) => {
   if (!sheet) return null
   let observedBits = 0
-  const res: RulesetCode[] = []
+  const res: MediaQRulesetDecoded[] = []
   for (const p in sheet) {
     const rs = sheet[p]
     if (!rs.$mediaq) continue
-    const rsCode: RulesetCode = { rulesetName: p, items: [] }
+    const rsCode: MediaQRulesetDecoded = { rulesetName: p, items: [] }
     for (const pm in rs.$mediaq) {
       const interval = pm.split('-').map((i, idx) => {
         if (!i) return idx == 0 ? BMin : BMax
@@ -117,7 +130,7 @@ export const mediaqGetSheetBreakpoints = (sheet: ComponentSheet) => {
         observedBits = observedBits | 1 << breakpoint.id
         return breakpoint
       })
-      const rsCodeItem: RulesetCodeItem = {
+      const rsCodeItem: RulesetDecoded = {
         from: interval[0],
         to: interval[1],
         ruleset: rs.$mediaq[pm]
@@ -128,10 +141,10 @@ export const mediaqGetSheetBreakpoints = (sheet: ComponentSheet) => {
   return { usedSheetBreakpoints: observedBits === 0 ? null : res, observedBits: observedBits }
 }
 
-export const mediaqActualizeSheetBreakpoints = (prop: ComponentSheetUsed, usedSheetBreakpoints: RulesetCode[]) => {
+export const mediaqActualizeSheetBreakpoints = (prop: MediaQSheet, usedSheetBreakpoints: MediaQRulesetDecoded[]) => {
   if (!usedSheetBreakpoints) return prop
   let classes
-  const res = {
+  const res: MediaQSheet = {
     ...prop, classes: classes = { ...prop.classes }
   }
   usedSheetBreakpoints.forEach(used => {
@@ -142,49 +155,15 @@ export const mediaqActualizeSheetBreakpoints = (prop: ComponentSheetUsed, usedSh
   return res
 }
 
-
-//export const withMediaQ = <TProps extends SheetAddInX>(onFinish: () => any, Component: React.ComponentType<SheetAddIn>) => {
-
-//  const res: React.SFC<TProps> = props => {
-//    const { $mediaq, ...rest } = props as SheetAddInX
-//    if (!$mediaq) return <Component {...rest} />
-//    const mediaq = typeof $mediaq === 'function' ? $mediaq(rest.theme) : $mediaq
-//    const newMedia: NotifySheet = {}
-//    let observedBits = 0
-//    for (const p in mediaq)
-//      newMedia[p] = mediaq[p].map((i, idx) => {
-//        if (!i) return idx == 0 ? BMin : BMax
-//        const breakpoint = subscribe(i)
-//        observedBits = observedBits | 1 << breakpoint.id
-//        return breakpoint
-//      }) as [Breakpoint, Breakpoint]
-//    return <context.Consumer unstable_observedBits={observedBits}>
-//      {breakpoints => {
-//        const outputProps = rest
-//        return <Component {...outputProps} $mediaqCode={newMedia} />
-//      }}
-//    </context.Consumer>
-//  }
-
-//  return res
-//}
-
-//export const toCode = <TState extends string = string>(sheet: NotifySheet<TState>) => {
-//  const res = {} as NotifySheetCode<TState>
-//  for (const p in sheet) {
-//    const sheetp = sheet[p]
-//    res[p] = sheetp[0].active && !sheetp[1].active
-//  }
-//  return res
-//}
-
-//*********************************
+/************************
+* PRIVATE
+*************************/
 
 const subscribe = (value: number, inRuleset: boolean) => {
   warning(breakpoints, 'reactxx-mediaq: missing MediaQ_AppContainer component in your application root')
   let b = byValue[value]
   if (!b) {
-    warning(breakpoints.length > 31, 'reactxx-mediaq: too many different breakpoints (max 32 allowed)')
+    warning(breakpoints.length <= 31, 'reactxx-mediaq: too many different breakpoints (max 32 allowed)')
     breakpoints.push(b = { id: breakpoints.length, value })
     byValue[value] = b
     onSubscribe(b, inRuleset)

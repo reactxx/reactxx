@@ -32,7 +32,7 @@ export namespace TResponsibleDrawer {
     onPress: Types.MouseEvent
   }
 
-  export interface Variant extends MediaQ.SheetCodeAddIn<TBasic.getMediaQ<Shape>>{
+  export interface Variant extends MediaQ.CodeProps<TBasic.getMediaQ<Shape>>{
     drawerWidths: [number, number, number] //drawer width for mobile, tablet and desktop
     //breakpoints: [number, number] //media query breakpoints between mobile x tablet and tablet x desktop
     animationDuration: number //drawer animation duration for mobile and tablet

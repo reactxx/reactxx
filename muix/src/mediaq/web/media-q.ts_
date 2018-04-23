@@ -5,7 +5,7 @@ import { deepMerges, Types } from 'reactxx-basic'
 import { BreakPoint, ComponentsMediaQLow } from '../common/media-q'
 import * as MediaQ from '../common/media-q2'
 
-export const processRuleset = (ruleset: MediaQ.RulesetWithAddIn) => {
+export const processRuleset = (ruleset: any) => {
   const { $mediaq, ...mediaRuleset } = ruleset
   if (!$mediaq) return ruleset //no $mediaq
   for (const p in $mediaq) {
@@ -30,7 +30,7 @@ export class ComponentsMediaQ<TState extends string = string> extends Components
       }
     }
   */
-  processRuleset(ruleset: MediaQ.RulesetWithAddIn) {
+  processRuleset(ruleset: any) {
     const { $mediaq, ...mediaRuleset } = ruleset
     if (!$mediaq) return ruleset //no $mediaq
     for (const p in $mediaq) {

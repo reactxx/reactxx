@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 
 import { TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon } from 'reactxx'
 import { withStyles, ThemeProvider } from '../../reactxx/common/withStyles2'
-import { MediaQ_AppContainer } from 'reactxx-mediaq'
+import { MediaQSheet, MediaQ_AppContainer } from 'reactxx-mediaq'
 
 /************************
 * TYPINGS
@@ -68,9 +68,20 @@ export const Label = withStyles<LabelShape>(Consts.Label, sheet)(label)
 *
 *************************************************
 *************************************************/
+const classes = (theme, par) => ({
+  root: {
+    $mediaq: {
+      '-480': { color: 'red' },
+      '480-1024': { color: 'blue' },
+      '1024-': { color: 'green' },
+    },
+    fontSize: par.$mediaqCode.small ? 24 : 48
+  }
+})
+
 const App: React.SFC = props => <MediaQ_AppContainer>
   <ThemeProvider value={{ type: 'ThemeX', $cache: {} }}>
-    <Text>Label 1</Text>
+    <Text classes={classes} $mediaq={{small: [0, 800]} as any}>Label 1</Text>
   </ThemeProvider>
 </MediaQ_AppContainer>
 
