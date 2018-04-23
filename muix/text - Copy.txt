@@ -1,0 +1,45 @@
+﻿import React from "react";
+import { render } from "react-dom";
+
+let sval = 0;
+let provider = null;
+
+setInterval(() => {
+  sval++;
+  //if (provider) provider.forceUpdate();
+  if (provider) provider.setState({x:1});
+}, 2000)
+
+const { Consumer, Provider } = React.createContext(
+  {sval:0},
+  (oldProps, newProps) => {
+    const res = newProps.sval % 2 === 0 ? 10 : 1;
+    //console.log(oldProps.sval, newProps.sval, res);
+    return res
+  }
+);
+
+class StateProvider extends React.Component {
+  componentDidMount() {
+    provider = this;
+  }
+
+  render() {
+    return <Provider value={{ sval }}>{this.props.children}</Provider>;
+  }
+}
+
+render(
+  <StateProvider initialState={{ value: 0 }}>
+    <Consumer unstable_observedBits={11}>
+      {state => <p>{state.sval}</p>}
+    </Consumer>
+    <Consumer unstable_observedBits={1}>
+      {state => <p>{state.sval}</p>}
+    </Consumer>
+    <Consumer unstable_observedBits={10}>
+      {state => <p>{state.sval}</p>}
+    </Consumer>
+  </StateProvider>,
+  document.getElementById("root")
+);

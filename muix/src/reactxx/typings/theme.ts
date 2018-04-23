@@ -1,9 +1,11 @@
-﻿import { TBasic, TThemeConfig } from './basic'
+﻿import * as MediaQ from 'reactxx-mediaq'
+
+import { TBasic, TThemeConfig } from './basic'
 
 export namespace TTheme {
 
   export interface WithStyleOptions<R extends TBasic.Shape =  TBasic.Shape> {
-    getVariant?: (props: TBasic.PropsX<R>) => TBasic.getVariant<R>
+    getVariant?: (props: TBasic.PropsX<R> & MediaQ.CodeProps<TBasic.getMediaQ<R>>) => TBasic.getVariant<R>
     variantToString?: (variant: TBasic.getVariant<R>) => string
     defaultProps?: Partial<TBasic.PropsX<R>>
   }

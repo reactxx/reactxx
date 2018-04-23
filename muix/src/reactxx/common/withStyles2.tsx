@@ -29,8 +29,6 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
 
   return class Styled extends React.PureComponent<TBasic.PropsX<R>> {
 
-    animInstance
-
     render() {
       // ******* 1. THEME, meta-code: (this.props, theme) => outputProps1
       return <themeContext.Consumer>
@@ -54,10 +52,10 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
                   const outputProps3 = prepareSheet(name, sheetCreator, options, outputProps2, mediaNotifyRecord)
 
                   // ******* 4. MEDIAQ SHEET, meta-code: if (some of rulesets in outputProps3.classes's sheet contains $mediaq) (outputProps3, changed global-breakpoints) => outputProps4
-                  const { usedSheetBreakpoints, observedBits: observedBits3 } = MediaQ.mediaqGetSheetBreakpoints(outputProps3)
+                  const { usedSheetBreakpoints, observedBits: observedBits3 } = MediaQ.mediaqGetSheetBreakpoints(outputProps3.classes as MediaQ.MediaQSheet)
 
                   return MediaQConsumer_RenderIfNeeded(observedBits3, () => {
-                    const outputProps4 = observedBits3 === 0 ? outputProps3 : MediaQ.mediaqActualizeSheetBreakpoints(outputProps3.classes as MediaQ.MediaQSheet, usedSheetBreakpoints) as typeof outputProps3
+                    const outputProps4 = observedBits3 === 0 ? outputProps3 : MediaQ.mediaqActualizeSheetBreakpoints(outputProps3 as { classes: MediaQ.MediaQSheet }, usedSheetBreakpoints) as typeof outputProps3
                     // ******* 5. ANIMATION, meta-code: if (outputProps4.$animations) outputProps4.$animations => animations
                     return AnimationsComponent_RenderIfNeeded(outputProps4.classes.$animations, animations => {
                       // ******* 6. CODE COMPONENT, meta-code: (use outputProps4 and animations in component code)
@@ -78,8 +76,9 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       </themeContext.Consumer>
     }
 
-    static displayName = name
-    static ComponentPropsProvider = ComponentPropsProvider
+    public static displayName = name
+    public static ComponentPropsProvider = ComponentPropsProvider
+    public static defaultProps = options && options.defaultProps
   }
 
 }
@@ -93,7 +92,7 @@ const mergePropsFromConsumer = <T extends {}>(props: T, modifier) => {
   return (modifier && props ? deepMerges(false, {}, props, modifier) : props) as T
 }
 
-const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions, props: TBasic.PropsX & { theme: TTheme.ThemeX }, $mediaqCode: MediaQ.CodePropsItems) => {
+const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions, props: TBasic.PropsX & { theme: TTheme.ThemeX } & MediaQ.CodeProps, $mediaqCode: MediaQ.CodePropsItems) => {
 
   const { theme, classes, className, style, $mediaq: ignore1, ...rest } = props
 
@@ -104,7 +103,8 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
     staticSheet = toPlatformSheet(createSheetX)
   } else {
     if (options.getVariant) {
-      variant = options.getVariant(props)
+      const propsWithMediaQ = $mediaqCode ? { ...props, $mediaqCode} : props
+      variant = options.getVariant(propsWithMediaQ)
       const variantCacheId = options.variantToString && options.variantToString(variant)
       if (variantCacheId) {
         let compCache = theme.$cache[name]

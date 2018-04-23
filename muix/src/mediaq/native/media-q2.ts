@@ -1,7 +1,7 @@
 import { Dimensions } from 'react-native'
 
 import { deepMerge } from 'reactxx-basic'
-import { Breakpoint, RulesetDecoded, refresh, breakpoints } from '../common/media-q2'
+import { Breakpoint, RulesetDecoded, refresh, mediaQBreaks } from '../common/media-q2'
 
 export const onSubscribe = (b: Breakpoint, inRuleset: boolean) => b.active = b.value >= Dimensions.get('window').width
 
@@ -18,7 +18,7 @@ export const modifyRuleset = (ruleset: {}, items: RulesetDecoded[]) => {
 Dimensions.addEventListener('change', arg => {
   const width = Dimensions.get('window').width
   let doRefresh = false
-  breakpoints.forEach(b => {
+  mediaQBreaks.forEach(b => {
     const newActive = b.value >= width
     if (newActive === b.active) return
     doRefresh = true

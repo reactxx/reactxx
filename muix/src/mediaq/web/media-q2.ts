@@ -1,7 +1,6 @@
 import { Breakpoint, refresh, RulesetDecoded, Consts } from '../common/media-q2'
 
 export const onSubscribe = (b: Breakpoint, inRuleset: boolean) => {
-  if (inRuleset) return // generate FELA media query ruleset
   const mediaQuery = window.matchMedia(`(min-width: ${b.value}px)`)
   b.active = mediaQuery.matches
   const onChange = (q: MediaQueryList) => {

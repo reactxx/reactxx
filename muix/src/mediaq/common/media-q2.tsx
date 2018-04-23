@@ -60,7 +60,7 @@ export type NotifyIntervalX<TState extends string> = { [P in TState]: [number | 
 
 export type NotifyIntervalDecoded<TState extends string = string> = { [P in TState]: [Breakpoint, Breakpoint] }
 
-export type CodeProps<TState extends string = string> = { $mediaqCode?: CodePropsItems<TState> }
+export interface CodeProps<TState extends string = string> { $mediaqCode?: CodePropsItems<TState> }
 export type CodePropsItems<TState extends string = string> = { [P in TState]: boolean }
 
 
@@ -69,22 +69,24 @@ export type CodePropsItems<TState extends string = string> = { [P in TState]: bo
 *************************/
 
 export class MediaQ_AppContainer extends React.Component {
-  constructor() {
-    super(null)
+  constructor(props) {
+    super(props)
     warning(!appContainer, 'Only single mediaq.AppContainer component instance allowed')
     appContainer = this
-    breakpoints = []
+    mediaQBreaks = []
   }
+  state = { mediaQBreaks }
   render() {
-    return <context.Provider value={breakpoints}>
+    return <context.Provider value={this.state}>
       {this.props.children}
     </context.Provider>
   }
 }
 
 export const refresh = () => {
-  breakpoints = [...breakpoints] // change reference for <context.Provider value={breakpoints}>
-  appContainer.forceUpdate()
+  //breakpoints = [...breakpoints] // change reference for <context.Provider value={breakpoints}>
+  //setTimeout(() => appContainer.setState({ mediaQBreaks }), 1)
+  appContainer.setState({ mediaQBreaks })
 }
 
 
@@ -98,7 +100,7 @@ export const mediaqGetNotifyBreakpoints = <T extends string>(props: PropsX<T>) =
     newMedia[p] = mediaq[p].map((i, idx) => {
       if (!i) return idx == 0 ? BMin : BMax
       const breakpoint = subscribe(i, false)
-      observedBits = observedBits | 1 << breakpoint.id
+      observedBits |= 1 << breakpoint.id
       return breakpoint
     }) as [Breakpoint, Breakpoint]
 
@@ -123,11 +125,12 @@ export const mediaqGetSheetBreakpoints = (sheet: MediaQSheet) => {
     const rs = sheet[p]
     if (!rs.$mediaq) continue
     const rsCode: MediaQRulesetDecoded = { rulesetName: p, items: [] }
+    res.push(rsCode)
     for (const pm in rs.$mediaq) {
       const interval = pm.split('-').map((i, idx) => {
         if (!i) return idx == 0 ? BMin : BMax
         const breakpoint = subscribe(parseInt(i), true)
-        observedBits = observedBits | 1 << breakpoint.id
+        observedBits |= 1 << breakpoint.id
         return breakpoint
       })
       const rsCodeItem: RulesetDecoded = {
@@ -137,19 +140,20 @@ export const mediaqGetSheetBreakpoints = (sheet: MediaQSheet) => {
       }
       rsCode.items.push(rsCodeItem)
     }
+    delete rs.$mediaq
   }
   return { usedSheetBreakpoints: observedBits === 0 ? null : res, observedBits: observedBits }
 }
 
-export const mediaqActualizeSheetBreakpoints = (prop: MediaQSheet, usedSheetBreakpoints: MediaQRulesetDecoded[]) => {
+export const mediaqActualizeSheetBreakpoints = (prop: { classes: MediaQSheet }, usedSheetBreakpoints: MediaQRulesetDecoded[]) => {
   if (!usedSheetBreakpoints) return prop
   let classes
   const res: MediaQSheet = {
     ...prop, classes: classes = { ...prop.classes }
   }
   usedSheetBreakpoints.forEach(used => {
-    const ruleset = classes[used.rulesetName]
-    warning(ruleset, `Missing ruleset ${used.rulesetName}`)
+    const ruleset = classes[used.rulesetName];
+    warning(ruleset, `Missing ruleset ${used.rulesetName}`); //`
     classes[used.rulesetName] = modifyRuleset(ruleset, used.items)
   })
   return res
@@ -160,23 +164,28 @@ export const mediaqActualizeSheetBreakpoints = (prop: MediaQSheet, usedSheetBrea
 *************************/
 
 const subscribe = (value: number, inRuleset: boolean) => {
-  warning(breakpoints, 'reactxx-mediaq: missing MediaQ_AppContainer component in your application root')
+  warning(mediaQBreaks, 'reactxx-mediaq: missing MediaQ_AppContainer component in your application root')
+  if (inRuleset && window.isWeb) return { id: -1, value } // generate FELA media query ruleset
   let b = byValue[value]
   if (!b) {
-    warning(breakpoints.length <= 31, 'reactxx-mediaq: too many different breakpoints (max 32 allowed)')
-    breakpoints.push(b = { id: breakpoints.length, value })
+    warning(mediaQBreaks.length <= 31, 'reactxx-mediaq: too many different breakpoints (max 32 allowed)')
+    mediaQBreaks.push(b = { id: mediaQBreaks.length, value })
     byValue[value] = b
     onSubscribe(b, inRuleset)
   }
   return b
 }
 
-export let breakpoints: Breakpoint[]
+export let mediaQBreaks: Breakpoint[]
 let byValue: Breakpoint[] = []
 let counter = 0
 let appContainer: MediaQ_AppContainer
 
-const context = React.createContext<Breakpoint[]>([], (prev, next) => {
+const context = React.createContext<{ mediaQBreaks: Breakpoint[] }>({ mediaQBreaks: [] })
+const context2 = React.createContext<{ mediaQBreaks: Breakpoint[] }>({ mediaQBreaks: [] }, (_prev, _next) => {
+  if (!_prev || !_prev.mediaQBreaks) _prev = { mediaQBreaks: [] }
+  const prev = _prev.mediaQBreaks; const next = _next.mediaQBreaks
+
   let res = 0
   for (let i = 0; i < Math.max(prev.length, next.length); i++) {
     if (i >= prev.length) res = res | 1 << next[i].id

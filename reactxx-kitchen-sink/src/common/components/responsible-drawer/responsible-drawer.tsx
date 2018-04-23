@@ -34,10 +34,11 @@ export namespace TResponsibleDrawer {
 
   export interface Variant extends MediaQ.CodeProps<TBasic.getMediaQ<Shape>>{
     drawerWidths: [number, number, number] //drawer width for mobile, tablet and desktop
-    //breakpoints: [number, number] //media query breakpoints between mobile x tablet and tablet x desktop
     animationDuration: number //drawer animation duration for mobile and tablet
   }
-  export interface Props extends Variant {
+  export interface Props {
+    drawerWidths: [number, number, number] //drawer width for mobile, tablet and desktop
+    animationDuration: number //drawer animation duration for mobile and tablet
     drawer: JSX.Element //drawer content
   }
 
@@ -201,6 +202,7 @@ export const ResponsibleDrawer = (withStyles<TResponsibleDrawer.Shape>(
   sheet,
   {
     getVariant: ({ animationDuration, $mediaqCode, drawerWidths }) => ({ animationDuration, $mediaqCode, drawerWidths }),
+    //getVariant: props => { const x = props.$mediaqCode; return null },
     variantToString: ({ animationDuration, $mediaqCode, drawerWidths }) => variantToString(animationDuration, $mediaqCode.mobile, $mediaqCode.tablet, $mediaqCode.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
     defaultProps: {
       animationDuration: 300,

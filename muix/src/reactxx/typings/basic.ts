@@ -76,8 +76,8 @@ export namespace TBasic {
   export type getAnimation<R extends Shape> = R['animation']
   export type getNameType<R extends Shape> = R['nameType']
   //export type get_$CompTheme<R extends Shape = Shape> = R['_$compTheme']
-  export type getVariant<R extends Shape = Shape> = R['variant']
   export type getMediaQ<R extends Shape = Shape> = R['mediaq']
+  export type getVariant<R extends Shape = Shape> = R['variant']
 
   export interface Shapes { }
 
