@@ -45,7 +45,10 @@ const sheet: TTheme.SheetCreatorX<Shape> = (theme, variant) => ({
 *************************/
 const label: TBasic.CodeSFC<Shape> = ({ classes, mergeRulesetWithOverrides, children, style }) => {
   const root = mergeRulesetWithOverrides(classes.root) as TBasic.ViewRulesetX
-  return <Text className={root}>{children}</Text>
+  return <View>
+    <Text>Constant</Text>
+    <Text className={root}>{children}</Text>
+  </View>
 }
 
 /************************
@@ -56,6 +59,7 @@ export const Label = withStyles<Shape>(
   sheet,
   {
     getVariant: ({ $mediaqCode }) => ({ $mediaqCode }),
+    variantToString: ({ $mediaqCode }) => $mediaqCode.small.toString(),
     defaultProps: {
       $mediaq: {
         small: [0, 800]

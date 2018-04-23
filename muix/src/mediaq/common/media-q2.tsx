@@ -140,7 +140,6 @@ export const mediaqGetSheetBreakpoints = (sheet: MediaQSheet) => {
       }
       rsCode.items.push(rsCodeItem)
     }
-    delete rs.$mediaq
   }
   return { usedSheetBreakpoints: observedBits === 0 ? null : res, observedBits: observedBits }
 }

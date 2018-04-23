@@ -59,6 +59,8 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
                     // ******* 5. ANIMATION, meta-code: if (outputProps4.$animations) outputProps4.$animations => animations
                     return AnimationsComponent_RenderIfNeeded(outputProps4.classes.$animations, animations => {
                       // ******* 6. CODE COMPONENT, meta-code: (use outputProps4 and animations in component code)
+                      if (outputProps4.classes.$preserve) outputProps4.classes = { ...outputProps4.classes }
+                      clearSystemProps(outputProps4.classes)
                       return <Component {...outputProps4 as TBasic.CodeProps<R>} />
                     })
                   })
@@ -110,7 +112,10 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
         let compCache = theme.$cache[name]
         if (!compCache) theme.$cache[name] = compCache = {}
         staticSheet = compCache[variantCacheId]
-        if (!staticSheet) compCache[variantCacheId] = staticSheet = toPlatformSheet(callCreator(theme, variant, createSheetX))
+        if (!staticSheet) {
+          compCache[variantCacheId] = staticSheet = toPlatformSheet(callCreator(theme, variant, createSheetX));
+          (staticSheet as any).$preserve = true
+        }
       } else
         staticSheet = toPlatformSheet(callCreator(theme, variant, createSheetX))
     }
@@ -187,3 +192,10 @@ const mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides = (...rulesets
   })
   return res
 }
+
+const clearSystemProps = obj => {
+  if (!obj) return obj
+  const { $overrides, $name, $web, $native, $mediaq, $preserve, ...rest } = obj as TBasic.RulesetX & { $preserve}
+  return rest
+}
+

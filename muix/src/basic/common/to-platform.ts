@@ -35,6 +35,7 @@ export const deepMerge = (target, source, skipSystem = false) => {
   if (!source) return target
   if (isObject(target) && isObject(source))
     for (const key in source) {
+      if (key==='$preserve') continue
       if (skipSystem && key[0] === '$' && key !== '$mediaq') continue //skip $override, $childOverride and $name props
       if (isObject(source[key])) {
         if (!target[key]) target[key] = {}
