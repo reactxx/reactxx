@@ -1,4 +1,4 @@
-import { Breakpoint, refresh, RulesetDecoded, Consts } from '../common/media-q2'
+import { Breakpoint, refresh, RulesetDecoded, Consts } from '../common/media-q'
 
 export const onSubscribe = (b: Breakpoint, inRuleset: boolean) => {
   const mediaQuery = window.matchMedia(`(min-width: ${b.value}px)`)
