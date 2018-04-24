@@ -1,7 +1,7 @@
 import { Dimensions } from 'react-native'
 
 import { deepMerge } from 'reactxx-basic'
-import { Breakpoint, RulesetDecoded, refresh, mediaQBreaks } from '../common/media-q2'
+import { Breakpoint, RulesetDecoded, refresh, mediaQBreaks } from '../common/media-q'
 
 export const onSubscribe = (b: Breakpoint, inRuleset: boolean) => b.active = b.value >= Dimensions.get('window').width
 

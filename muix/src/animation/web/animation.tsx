@@ -40,8 +40,8 @@ export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements 
       const setTransition = (propName: string, modifier: string) => {
         let { leftGap, rightGap, duration} = getGaps(modifier, $duration)
         leftGap += $delay; rightGap += $delay
-        transitions0.push(`${propName} ${duration}ms${rightGap ? ' ' + rightGap + 'ms' : ''}`)
-        transitions1.push(`${propName} ${duration}ms${leftGap ? ' ' + leftGap + 'ms' : ''}`)
+        transitions0.push(`${propName} ${duration}ms${rightGap ? ` ${rightGap}ms` : ''}`)
+        transitions1.push(`${propName} ${duration}ms${leftGap ? ` ${leftGap}ms` : ''}`)
       }
 
       for (const propName in pairs) {

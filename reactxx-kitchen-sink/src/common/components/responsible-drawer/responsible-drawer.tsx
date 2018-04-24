@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { Types } from 'reactxx-basic'
 import * as MediaQ from 'reactxx-mediaq'
-import { TAddInConfig, TComps, TTheme, TBasic, withStyles, ScrollView, View, Text, Icon, AnimatedView, variantToString } from 'reactxx'
+import { TAddInConfig, TComps, TTheme, TBasic, withStyles, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
 
 //******* Two possibilities how to use get icon data:
@@ -32,7 +32,7 @@ export namespace TResponsibleDrawer {
     onPress: Types.MouseEvent
   }
 
-  export interface Variant extends MediaQ.CodeProps<TBasic.getMediaQ<Shape>>{
+  export interface Variant extends MediaQ.CodeProps<TBasic.getMediaQ<Shape>> {
     drawerWidths: [number, number, number] //drawer width for mobile, tablet and desktop
     animationDuration: number //drawer animation duration for mobile and tablet
   }
@@ -133,7 +133,7 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =
       ...isDesktop ? { left: drawerWidths[2] } : null,
     },
     openButton: {
-      ...isDesktop ? { display: 'none' } : null, 
+      ...isDesktop ? { display: 'none' } : null,
     },
     closeButton: {
       ...(isDesktop || isMobile) ? { display: 'none' } : null,
@@ -145,7 +145,7 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =
 const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, mergeRulesetWithOverrides, children, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqCode: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, drawer: drawerNode }) => {
 
   //const { mobile: isMobile, tablet: isTablet, desktop: isDesktop } = MediaQ.toCode(mediaqCode)
- 
+
   const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()
 
@@ -226,9 +226,11 @@ ResponsibleDrawer.LayoutChanged = Consumer
 const button = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as TBasic.RulesetX
 
 //const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer/>}>
-const App: React.SFC = () => <ResponsibleDrawer drawer={drawer}>
-  <Content />
-</ResponsibleDrawer>
+const App: React.SFC = () => <AppContainer>
+  <ResponsibleDrawer drawer={drawer}>
+    <Content />
+  </ResponsibleDrawer>
+</AppContainer>
 
 const Drawer: React.SFC = () => <ScrollView classes={{ container: { flex: 1, backgroundColor: 'lightgray' } }}>
   <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, padding: 10, backgroundColor: 'gray', }}>

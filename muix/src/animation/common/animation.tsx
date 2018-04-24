@@ -5,25 +5,49 @@ import warning from 'warning'
 import { AnimationDriver } from 'reactxx-animation' //NATIVE or WEB animation driver
 import { TAnimation } from '../typings/animation'
 
-export class Animations<T extends TAnimation.Shapes = TAnimation.Shapes> implements TAnimation.Drivers<T> {
-  constructor(public statefullComponent: React.Component) { }
-  sheets: { [P in keyof T]: TAnimation.Driver<T[P]> }
-  destroy(caller?: TAnimation.Driver<{}>) {
-    for (const p in this.sheets) {
-      const driver = this.sheets[p]
-      if (driver === caller || !driver.reset) continue
-      driver.reset()
-    }
-    //delete this.sheets
+export interface AnimState<T extends TAnimation.Shapes = TAnimation.Shapes> {
+  animations?: Animations<T>
+  self: React.Component<{}, AnimState<T>>
+  refreshCounter: number
+}
+export interface AnimProps<T extends TAnimation.Shapes = TAnimation.Shapes> {
+  $initAnimations: TAnimation.SheetsX<T>
+  children: (animations: Animations<T>) => React.ReactNode
+}
+
+export class AnimationsComponent<T extends TAnimation.Shapes = TAnimation.Shapes> extends React.Component<AnimProps<T>, AnimState<T>> {
+
+  animations: Animations<T>
+
+  render() {
+    const { animations, props: { $initAnimations } } = this
+    if (animations) animations.reset()
+    delete this.animations
+    this.animations = new Animations(this, $initAnimations)
+    return this.props.children(this.animations)
   }
-  init(sheetsDef: TAnimation.SheetsX<TAnimation.Shapes>) {
+
+}
+
+export class Animations<T extends TAnimation.Shapes = TAnimation.Shapes> implements TAnimation.Drivers<T> {
+
+  constructor(public statefullComponent: React.Component, sheetsDef: TAnimation.SheetsX<T>) {
     if (!sheetsDef) return
-    const sheets = {}
+    const sheets: any = {}
     for (const p in sheetsDef) {
       if (p.startsWith('$')) continue
       sheets[p] = new AnimationDriver(sheetsDef[p], this)
     }
-    this.sheets = sheets as any
+    this.sheets = sheets
+  }
+  sheets: { [P in keyof T]: TAnimation.Driver<T[P]> }
+
+  reset(justRunning?: TAnimation.Driver<{}>) {
+    for (const p in this.sheets) {
+      const driver = this.sheets[p]
+      if (!driver.reset || driver === justRunning) continue
+      driver.reset()
+    }
   }
 }
 
@@ -54,7 +78,7 @@ export abstract class DriverLow<T extends TAnimation.Shape> implements TAnimatio
   $config: TAnimation.AnimationConfig
   opened = false
   set(isOpen: boolean) {
-    this.animations.destroy(this)
+    this.animations.reset(this)
     this.doOpen(isOpen)
   }
   toggle() { this.set(!this.opened) }

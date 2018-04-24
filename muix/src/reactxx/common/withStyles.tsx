@@ -4,7 +4,7 @@ import warning from 'warning'
 import PropTypes from 'prop-types'
 
 import { Types, toPlatformEvents, deepMerge, deepMerges } from 'reactxx-basic'
-import { Animations, TAnimation } from 'reactxx-animation'
+import { Animations, TAnimation, AnimationsComponent } from 'reactxx-animation'
 import * as MediaQ from 'reactxx-mediaq'
 //import { TAddInConfig, ComponentTypeWithModifier } from 'reactxx'
 
@@ -111,12 +111,12 @@ const addThemeToProps = <T extends {}>(props: T, theme: TTheme.ThemeX) => {
 }
 
 const mergePropsFromConsumer = <T extends {}>(props: T, modifier) => {
-  return (modifier && props ? deepMerges(false, {}, props, modifier) : props) as T
+  return (modifier && props ? deepMerges(false, {}, props, modifier) : props) as T & Types.OnPressAllX
 }
 
-const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions, props: TBasic.PropsX & { theme: TTheme.ThemeX } & MediaQ.CodeProps, mediaqCode: MediaQ.CodePropsItems) => {
+const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions, props: TBasic.PropsX & { theme: TTheme.ThemeX } & MediaQ.CodeProps & Types.OnPressAllX, mediaqCode: MediaQ.CodePropsItems) => {
 
-  const { theme, classes, className, style, $mediaq: ignore1, ...rest } = props
+  const { theme, classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, ...rest } = props
 
   //** STATIC SHEET
   let staticSheet: TBasic.Sheet
@@ -153,8 +153,9 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
   const actSheet: TBasic.Sheet = classes || root ? deepMerges(false, {}, staticSheet, toPlatformSheet(callCreator(theme, variant, classes)), root) : staticSheet
   //for (const p in actSheet) if (!p.startsWith('$')) actSheet[p].$name = p // assign name to ruleSets. $name is used in mergeRulesetWithOverrides to recognize used rulesets
 
+
   //** RETURN platform dependent props for pure component code
-  return {
+  const outputProps = {
     ...rest,
     classes: actSheet,
     style: toPlatformRuleSet(callCreator(theme, variant, style)),
@@ -162,42 +163,15 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
     mergeRulesetWithOverrides,
     mediaqCode,
   } as TBasic.CodeProps & { $animations?: TAnimation.SheetsX }
+
+  toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, outputProps)
+
+  return outputProps
 }
 const callCreator = <T extends {}>(theme: TTheme.ThemeBase, variant, creator: T | ((theme: TTheme.ThemeBase, variant) => T)) => typeof creator === 'function' ? creator(theme, variant) : creator
 
 const MediaQConsumer_RenderIfNeeded = <T extends {}>(observedBits: number, child: () => React.ReactElement<T>) => {
   return observedBits === 0 ? child() : <MediaQ.MediaQConsumer unstable_observedBits={observedBits}>{breakpoints => child()}</MediaQ.MediaQConsumer>
-}
-
-interface AnimState {
-  animations?: Animations //TAnimation.Drivers
-  self: React.Component<{}, AnimState>
-  refreshCounter: number
-}
-interface AnimProps {
-  $initAnimations: TAnimation.SheetsX
-  children: (animations: Animations) => React.ReactNode
-}
-class AnimationsComponent extends React.PureComponent<AnimProps, AnimState> {
-
-  state: AnimState = { self: this, refreshCounter: 0 }
-
-  static getDerivedStateFromProps = (nextProps: AnimProps, prevState: AnimState) => {
-    if (prevState.animations) prevState.animations.destroy()
-    delete prevState.animations
-    const newAnimations = new Animations(prevState.self as any)
-    newAnimations.init(nextProps.$initAnimations)
-    return { animations: newAnimations } as AnimState
-  }
-
-  refresh() {
-    this.setState(({ refreshCounter }) => ({ refreshCounter: refreshCounter + 1 }))
-  }
-
-  render() {
-    return this.props.children(this.state.animations)
-  }
-
 }
 
 const AnimationsComponent_RenderIfNeeded = ($animations: TAnimation.SheetsX, child: (newProp) => React.ReactElement<any>) => {
@@ -216,6 +190,7 @@ const mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides = (...rulesets
       case 1: res = deepMerges(true, {}, res, ruleset); break
       default: deepMerges(true, res, ruleset); break
     }
+    count++
   })
   return res
 }

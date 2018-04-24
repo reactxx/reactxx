@@ -2,6 +2,7 @@ import React from 'react'
 import warning from 'warning'
 
 import { Types } from 'reactxx-basic'
+
 import { onSubscribe, modifyRuleset } from 'reactxx-mediaq' // import platform dependent code
 
 /************************
@@ -73,6 +74,7 @@ export class MediaQ_AppContainer extends React.Component {
     super(props)
     warning(!appContainer, 'Only single mediaq.AppContainer component instance allowed')
     appContainer = this
+    mediaQBreaks = []
   }
   render() {
     return <context.Provider value={mediaQBreaks.map(b => b.active)}>
@@ -81,7 +83,10 @@ export class MediaQ_AppContainer extends React.Component {
   }
 }
 
-export const refresh = () => appContainer.forceUpdate()
+export const refresh = () => {
+  checkAppContainer()
+  appContainer.forceUpdate()
+}
 
 export const mediaqGetNotifyBreakpoints = <T extends string>(props: PropsX<T>) => {
   const { $mediaq, ...rest } = props as PropsX
@@ -155,8 +160,10 @@ export const mediaqActualizeSheetBreakpoints = (prop: { classes: MediaQSheet }, 
 * PRIVATE
 *************************/
 
+const checkAppContainer = () => warning(mediaQBreaks, 'reactxx-mediaq: missing MediaQ_AppContainer component in your application root')
+
 const subscribe = (value: number, inRuleset: boolean) => {
-  warning(mediaQBreaks, 'reactxx-mediaq: missing MediaQ_AppContainer component in your application root')
+  checkAppContainer()
   if (inRuleset && window.isWeb) return { id: -1, value } // generate FELA media query ruleset
   let b = byValue[value]
   if (!b) {
@@ -168,7 +175,7 @@ const subscribe = (value: number, inRuleset: boolean) => {
   return b
 }
 
-export let mediaQBreaks: Breakpoint[] = []
+export let mediaQBreaks: Breakpoint[]
 let byValue: Breakpoint[] = []
 let counter = 0
 let appContainer: MediaQ_AppContainer

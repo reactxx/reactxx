@@ -6,7 +6,7 @@ import { TBasic } from '../typings/basic'
 
 //create platform specific ruleset from cross platform one
 export const toPlatformRuleSet = (style: TBasic.RulesetX) => {
-  if (!style) return null
+  if (!style) return style
   const isNative = !window.isWeb
   if (!style.$mediaq && !style.$web && !style.$native && !style.$overrides && !style.$props) return style
   const { $web, $native, $overrides, $mediaq, $props: $propsX, ...rest } = style

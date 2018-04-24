@@ -4,6 +4,7 @@ import NavigApp from './navigation'
 import { primitives } from '../primitives/index'
 import { component } from '../component/index'
 import * as comps from '../components/index'
+import { AppContainer } from 'reactxx'
 
 export namespace KSink {
 
@@ -44,7 +45,7 @@ export const exampleToElement = (ex: KSink.Example) => (<ex.Component />)
 const RootApp: React.SFC = props => {
   const name = (window.location ? window.location.pathname : null) as string
   const example = nameToExample(name)
-  return exampleToElement(example)
+  return <AppContainer>{exampleToElement(example)}</AppContainer>
 };
 
 export default RootApp
