@@ -89,7 +89,6 @@ export namespace TBasic {
     animation: {}; mediaq: null,
     nameType: null
     variant: never
-    _$compTheme: never
   }, R>
 
   /******************************************
@@ -219,6 +218,7 @@ export namespace TAddInConfig {
     $web?: Partial<TBasic.getPropsWeb<R>> //web specific style
     $native?: Partial<TBasic.getPropsNative<R>> //native specific style
     ignore?: boolean
+    CONSTANT?:boolean,
     classes?: TTheme.PartialSheetCreatorX<R> // cross platform sheet
     className?: TTheme.RulesetCreatorX<R> // cross platform root ruleset
   }

@@ -17,6 +17,7 @@ export const enum Consts {
 // 
 export type Shape = TBasic.OverwriteShape<{
   common: TComps.ShapeTexts<'root'>,
+  style: 'Text'
   mediaq: 'small'
   props: {
   },
@@ -45,10 +46,7 @@ const sheet: TTheme.SheetCreatorX<Shape> = (theme, variant) => ({
 *************************/
 const label: TBasic.CodeSFC<Shape> = ({ classes, mergeRulesetWithOverrides, children, style }) => {
   const root = mergeRulesetWithOverrides(classes.root) as TBasic.ViewRulesetX
-  return <View>
-    <Text>Constant</Text>
-    <Text className={root}>{children}</Text>
-  </View>
+  return <Text className={root}>{children}</Text>
 }
 
 /************************
@@ -79,9 +77,15 @@ export const Label = withStyles<Shape>(
 
 const App: React.SFC = props => <MediaQ.MediaQ_AppContainer>
   <ThemeProvider value={{ type: 'ThemeX', $cache: {} }}>
-    <Label>Label 1</Label>
+    <Label.PropsProvider CONSTANT>
+      <View CONSTANT>
+        <Label>Label 1</Label>
+        <Label>Label 2</Label>
+        <Label className={{ fontStyle: 'italic' }}>Label 3</Label>
+      </View>
+    </Label.PropsProvider>
   </ThemeProvider>
-</MediaQ.MediaQ_AppContainer>
+</MediaQ.MediaQ_AppContainer >
 
 export default App
 

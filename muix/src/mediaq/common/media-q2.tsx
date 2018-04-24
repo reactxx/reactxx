@@ -73,22 +73,15 @@ export class MediaQ_AppContainer extends React.Component {
     super(props)
     warning(!appContainer, 'Only single mediaq.AppContainer component instance allowed')
     appContainer = this
-    mediaQBreaks = []
   }
-  state = { mediaQBreaks }
   render() {
-    return <context.Provider value={this.state}>
+    return <context.Provider value={mediaQBreaks.map(b => b.active)}>
       {this.props.children}
     </context.Provider>
   }
 }
 
-export const refresh = () => {
-  //breakpoints = [...breakpoints] // change reference for <context.Provider value={breakpoints}>
-  //setTimeout(() => appContainer.setState({ mediaQBreaks }), 1)
-  appContainer.setState({ mediaQBreaks })
-}
-
+export const refresh = () => appContainer.forceUpdate()
 
 export const mediaqGetNotifyBreakpoints = <T extends string>(props: PropsX<T>) => {
   const { $mediaq, ...rest } = props as PropsX
@@ -175,21 +168,17 @@ const subscribe = (value: number, inRuleset: boolean) => {
   return b
 }
 
-export let mediaQBreaks: Breakpoint[]
+export let mediaQBreaks: Breakpoint[] = []
 let byValue: Breakpoint[] = []
 let counter = 0
 let appContainer: MediaQ_AppContainer
 
-const context = React.createContext<{ mediaQBreaks: Breakpoint[] }>({ mediaQBreaks: [] })
-const context2 = React.createContext<{ mediaQBreaks: Breakpoint[] }>({ mediaQBreaks: [] }, (_prev, _next) => {
-  if (!_prev || !_prev.mediaQBreaks) _prev = { mediaQBreaks: [] }
-  const prev = _prev.mediaQBreaks; const next = _next.mediaQBreaks
-
+const context = React.createContext<boolean[]>([], (prev, next) => {
   let res = 0
   for (let i = 0; i < Math.max(prev.length, next.length); i++) {
-    if (i >= prev.length) res = res | 1 << next[i].id
-    else if (i >= next.length) res = res | 1 << prev[i].id
-    else if (prev[i].active !== next[i].active) res = res | 1 << prev[i].id
+    if (i >= prev.length) res = res | 1 << i
+    else if (i >= next.length) res = res | 1 << i
+    else if (prev[i] !== next[i]) res = res | 1 << i
   }
   return res
 })

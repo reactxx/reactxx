@@ -25,9 +25,18 @@ export const ThemeProvider = themeContext.Provider
 
 export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, options?: TTheme.WithStyleOptions<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
-  const { Provider: ComponentPropsProvider, Consumer: ComponentPropsConsumer } = React.createContext<TBasic.getProps<R>>(null)
+  const { Provider: ComponentPropsProvider, Consumer: ComponentPropsConsumer } = React.createContext<TBasic.PropsX<R>>(null)
 
-  return class Styled extends React.PureComponent<TBasic.PropsX<R>> {
+  const PropsProvider: React.SFC<TBasic.PropsX> = props => {
+    const { children, ...rest } = props
+    return <ComponentPropsProvider value={rest as TBasic.PropsX<R>}>{children}</ComponentPropsProvider>
+  }
+
+  return class Styled extends React.Component<TBasic.PropsX<R>> {
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+      return !nextProps.CONSTANT
+    }
 
     render() {
       // ******* 1. THEME, meta-code: (this.props, theme) => outputProps1
@@ -61,7 +70,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
                     return AnimationsComponent_RenderIfNeeded(outputProps4.classes.$animations as TAnimation.SheetsX, animations => {
                       // ******* 6. CODE COMPONENT, meta-code: (use outputProps4 and animations in component code)
                       if (outputProps4.classes.$preserve) outputProps4.classes = { ...outputProps4.classes }
-                      clearSystemProps(outputProps4.classes)
+                      outputProps4.classes = clearSystemProps(outputProps4.classes)
                       return <Component {...outputProps4 as TBasic.CodeProps<R>} animations={animations} />
                     })
                   })
@@ -80,7 +89,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
     }
 
     public static displayName = name
-    public static ComponentPropsProvider = ComponentPropsProvider
+    public static PropsProvider = PropsProvider
     public static defaultProps = options && options.defaultProps
   }
 
@@ -101,26 +110,33 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
 
   //** STATIC SHEET
   let staticSheet: TBasic.Sheet
+  let getStaticSheet: () => TBasic.Sheet
+  let variantCacheId
   let variant = null
   if (typeof createSheetX !== 'function') {
-    staticSheet = toPlatformSheet(createSheetX)
+    variantCacheId = '#static#'
+    getStaticSheet = () => toPlatformSheet(createSheetX)
   } else {
     if (options.getVariant) {
       const propsWithMediaQ = mediaqCode ? { ...props, mediaqCode} : props
       variant = options.getVariant(propsWithMediaQ)
-      const variantCacheId = options.variantToString && options.variantToString(variant)
+      variantCacheId = options.variantToString && options.variantToString(variant)
       if (variantCacheId) {
-        let compCache = theme.$cache[name]
-        if (!compCache) theme.$cache[name] = compCache = {}
-        staticSheet = compCache[variantCacheId]
-        if (!staticSheet) {
-          compCache[variantCacheId] = staticSheet = toPlatformSheet(callCreator(theme, variant, createSheetX));
-          (staticSheet as any).$preserve = true
-        }
-      } else
+        getStaticSheet = () => toPlatformSheet(callCreator(theme, variant, createSheetX))
+      } else {
+        //getVariant!=null && variantToString==null => NO CACHING
         staticSheet = toPlatformSheet(callCreator(theme, variant, createSheetX))
+      }
     }
   }
+  if (!staticSheet) {
+    let compCache = theme.$cache[name]
+    if (!compCache) theme.$cache[name] = compCache = {}
+    staticSheet = compCache[variantCacheId]
+    if (!staticSheet) compCache[variantCacheId] = staticSheet = getStaticSheet();
+  }
+  (staticSheet as any).$preserve = true
+
 
   //** MERGE staticSheet with classes and className
   const root = className && { root: toPlatformRuleSet(callCreator(theme, variant, className)) }
@@ -196,7 +212,7 @@ const mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides = (...rulesets
 
 const clearSystemProps = obj => {
   if (!obj) return obj
-  const { $overrides, $name, $web, $native, $mediaq, $preserve, $animations, ...rest } = obj as TBasic.RulesetX & { $preserve, $animations}
+  const { $overrides, $name, $web, $native, $mediaq, $preserve, $animations, CONSTANT, ...rest } = obj as TBasic.RulesetX & { $preserve, $animations, CONSTANT}
   return rest
 }
 
