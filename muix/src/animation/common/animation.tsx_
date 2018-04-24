@@ -2,43 +2,54 @@ import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
 
-import { AnimationDriver } from 'reactxx-animation' //NATIVE or WEB animation driver 
+import { AnimationDriver } from 'reactxx-animation' //NATIVE or WEB animation driver
 import { TAnimation } from '../typings/animation'
 
-export interface AnimState {
-  sheets?: { [name: string]: TAnimation.Driver }
-  self: AnimationsComponent
+export type Drivers<T extends TAnimation.Shapes> = { [P in keyof T]: TAnimation.Driver<T[P]> }
+
+export interface AnimState<T extends TAnimation.Shapes = TAnimation.Shapes> {
+  self: AnimationsComponent<T>
+  sheets?: Drivers<T>
 }
-export interface AnimProps {
-  $initAnimations: TAnimation.SheetsX
-  children: (animations: TAnimation.Drivers) => React.ReactNode
+export interface AnimProps<T extends TAnimation.Shapes = TAnimation.Shapes> {
+  comp?: React.ComponentType<any>
+  $initAnimations: TAnimation.SheetsX<T>
+  //children: (animations: Animations<T>) => React.ReactNode
 }
 
-export class AnimationsComponent extends React.Component<AnimProps, AnimState> {
+export class AnimationsComponent<T extends TAnimation.Shapes = TAnimation.Shapes> extends React.Component<AnimProps<T>, AnimState<T>> {
 
-  state: AnimState = { self: this }
+  constructor(props) {
+    super(props)
+  }
+
+  state: AnimState<T> = { self: this }
+  statefullComponent = this
 
   static getDerivedStateFromProps(nextProps: AnimProps, prevState: AnimState): Partial<AnimState> {
-    if (!nextProps.$initAnimations) return { sheets: null }
-    const $anim = nextProps.$initAnimations
-    const sheets:{ [name: string]: TAnimation.Driver } = {}
-    const self = prevState.self
-    for (const p in $anim) {
+    prevState.self.reset()
+    const { $initAnimations } = nextProps
+    if (!$initAnimations) return { sheets: null }
+
+    const sheets: any = {}
+    for (const p in $initAnimations) {
       if (p.startsWith('$')) continue
-      const parent: TAnimation.Drivers = { statefullComponent: self, reset: self.reset, sheets: self.state.sheets }
-      sheets[p] = new AnimationDriver($anim[p], parent)
+      sheets[p] = new AnimationDriver($initAnimations[p], prevState.self as any)
     }
     return { sheets }
   }
 
   render() {
-    return this.props.children({ statefullComponent: this, reset: this.reset, sheets: this.state.sheets })
+    const Comp = this.props.comp
+    return <Comp animations={{ reset: this.reset, sheets: this.state.sheets, statefullComponent: this }} />
+    //return this.props.children({ reset: this.reset, sheets: this.state.sheets, statefullComponent: this })
   }
 
   reset = (justRunning?: TAnimation.Driver<{}>) => {
-    const anim = this.state.sheets
-    for (const p in anim) {
-      const driver = anim[p]
+    const sheets = this.state && this.state.sheets
+    if (!sheets) return
+    for (const p in sheets) {
+      const driver = sheets[p]
       if (!driver.reset || driver === justRunning) continue
       driver.reset()
     }
@@ -87,7 +98,7 @@ export class Animations<T extends TAnimation.Shapes = TAnimation.Shapes> impleme
 //}
 
 export abstract class DriverLow<T extends TAnimation.Shape> implements TAnimation.Driver<T> {
-  constructor(sheet: TAnimation.SheetX<T>, public animations: TAnimation.Drivers) {
+  constructor(sheet: TAnimation.SheetX<T>, public animations: Animations) {
     this.opened = !!sheet.$opened
     const { $delay = 0, $duration = 0, $easing = 'ease-in', $opened } = sheet
     this.$config = { $delay, $duration, $easing, $opened }

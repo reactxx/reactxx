@@ -1,0 +1,245 @@
+import React from 'react'
+import ReactN from 'react-native'
+import warning from 'warning'
+import PropTypes from 'prop-types'
+
+import { Types, toPlatformEvents, deepMerge, deepMerges } from 'reactxx-basic'
+import { Animations, TAnimation, AnimationsComponent } from 'reactxx-animation'
+import * as MediaQ from 'reactxx-mediaq'
+//import { TAddInConfig, ComponentTypeWithModifier } from 'reactxx'
+
+
+import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
+import { TBasic, TAddInConfig } from '../typings/basic'
+import { TTheme } from '../typings/theme'
+
+
+
+//export interface State<R extends TBasic.Shape = TBasic.Shape> extends Themer.HOCState<R> {
+//  animations?: Animations //TAnimation.Drivers
+//  self: React.Component<{}, State<R>>
+//}
+
+const themeContext = React.createContext<TTheme.ThemeX>({ type: 'ThemeX', $cache: {} })
+
+export const ThemeProvider = themeContext.Provider
+
+export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, options?: TTheme.WithStyleOptions<R>) => (Component: TBasic.CodeComponentType<R>) => {
+
+  const { Provider: ComponentPropsProvider, Consumer: ComponentPropsConsumer } = React.createContext<TBasic.PropsX<R>>(null)
+
+  const PropsProvider: React.SFC<TBasic.PropsX> = props => {
+    const { children, ...rest } = props
+    return <ComponentPropsProvider value={rest as TBasic.PropsX<R>}>{children}</ComponentPropsProvider>
+  }
+
+  class renderProps extends React.Component<any> {
+    constructor(props) {
+      super(props)
+    }
+    render() {
+      //if (name === 'comps$responsibledrawer')
+      //  debugger
+      if (outputProps4.classes.$preserve) outputProps4.classes = { ...outputProps4.classes }
+      outputProps4.classes = clearSystemProps(outputProps4.classes)
+      return <Component key={33333} {...outputProps4 as TBasic.CodeProps<R>} animations={this.props.animations} />
+    }
+    static displayName = 'withStylesRenderProps'
+  }
+
+  let outputProps4
+
+  return class Styled extends React.Component<TBasic.PropsX<R>> {
+
+    constructor(props) {
+      super(props)
+      if (name) return
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+      return !nextProps.CONSTANT
+    }
+
+    render() {
+      // ******* 1. THEME, meta-code: (this.props, theme) => outputProps1
+      return <themeContext.Consumer>
+        {theme => {
+          //if (name === 'comps$responsibledrawer')
+          //  debugger
+          const outputProps1 = addThemeToProps(this.props, theme)
+          type TOutputProps1 = typeof outputProps1
+
+          // ******* 2. COMPONENT PROPS, meta-code: (outputProps1, propsModifier) => outputProps2
+          const WithComponentProps = (outputProps1 => <ComponentPropsConsumer>
+            {propsModifier => {
+              const outputProps2 = mergePropsFromConsumer(outputProps1, propsModifier)
+              type TOutputProps2 = typeof outputProps2
+
+              // ******* 3. MEDIAQ NOTIFY, meta-code: if (outputProps2.$mediaq) (outputProps2, changed global-breakpoints) => outputProps3
+              const WithMediaQNotify = (outputProps2 => {
+
+                const { usedNotifyBreakpoints, observedBits: observedBits2 } = MediaQ.mediaqGetNotifyBreakpoints(outputProps2)
+
+                return MediaQConsumer_RenderIfNeeded(observedBits2, () => {
+                  const mediaNotifyRecord = observedBits2 === 0 ? null : MediaQ.mediaqActualizetNotifyBreakpoints(usedNotifyBreakpoints)
+                  const outputProps3 = prepareSheet(name, sheetCreator, options, outputProps2, mediaNotifyRecord)
+                  type TOutputProps3 = typeof outputProps3
+
+                  // ******* 4. MEDIAQ SHEET, meta-code: if (some of rulesets in outputProps3.classes's sheet contains $mediaq) (outputProps3, changed global-breakpoints) => outputProps4
+                  const { usedSheetBreakpoints, observedBits: observedBits3 } = MediaQ.mediaqGetSheetBreakpoints(outputProps3.classes as MediaQ.MediaQSheet)
+
+                  return MediaQConsumer_RenderIfNeeded(observedBits3, () => {
+                    //outputProps4 = observedBits3 === 0 ? outputProps3 : MediaQ.mediaqActualizeSheetBreakpoints(outputProps3 as { classes: MediaQ.MediaQSheet }, usedSheetBreakpoints) as TOutputProps3
+                    //return AnimationsComponent_RenderIfNeeded(outputProps4.classes.$animations as TAnimation.SheetsX, renderProps)
+                    const outputProps4 = observedBits3 === 0 ? outputProps3 : MediaQ.mediaqActualizeSheetBreakpoints(outputProps3 as { classes: MediaQ.MediaQSheet }, usedSheetBreakpoints) as TOutputProps3
+                    // ******* 5. ANIMATION, meta-code: if (outputProps4.$animations) outputProps4.$animations => animations
+                    return AnimationsComponent_RenderIfNeeded(outputProps4.classes.$animations as TAnimation.SheetsX, animations => {
+                      // ******* 6. CODE COMPONENT, meta-code: (use outputProps4 and animations in component code)
+                      if (outputProps4.classes.$preserve) outputProps4.classes = { ...outputProps4.classes }
+                      outputProps4.classes = clearSystemProps(outputProps4.classes)
+                      return <Component {...outputProps4 as TBasic.CodeProps<R>} animations={animations} />
+                    })
+                  })
+
+                })
+
+              }) as React.SFC<TOutputProps2>
+
+              return <WithMediaQNotify {...outputProps2} />
+            }}
+          </ComponentPropsConsumer>) as React.SFC<TOutputProps1>
+
+          return <WithComponentProps {...outputProps1} />
+        }}
+      </themeContext.Consumer>
+    }
+
+    //renderProps: React.SFC<any> = ({ animations }) => {
+    //  const { outputProps4 } = this
+    //  if (outputProps4.classes.$preserve) outputProps4.classes = { ...outputProps4.classes }
+    //  outputProps4.classes = clearSystemProps(outputProps4.classes)
+    //  return <Component {...outputProps4 as TBasic.CodeProps<R>} animations={animations} />
+    //}
+    //outputProps4
+
+    public static displayName = name
+    public static PropsProvider = PropsProvider
+    public static defaultProps = options && options.defaultProps
+  }
+
+}
+
+export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()).join('$')
+
+export const AppContainer: React.SFC<{ theme?: TTheme.ThemeX }> = props => <MediaQ.MediaQ_AppContainer>
+  <ThemeProvider value={props.theme || { type: 'ThemeX', $cache: {} }}>
+    {props.children}
+  </ThemeProvider>
+</MediaQ.MediaQ_AppContainer>
+
+
+const addThemeToProps = <T extends {}>(props: T, theme: TTheme.ThemeX) => {
+  if (!theme) theme = { type: 'ThemeX', $cache: {} }
+  return Object.assign({ theme }, props)
+}
+
+const mergePropsFromConsumer = <T extends {}>(props: T, modifier) => {
+  return (modifier && props ? deepMerges(false, {}, props, modifier) : props) as T & Types.OnPressAllX
+}
+
+const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions, props: TBasic.PropsX & { theme: TTheme.ThemeX } & MediaQ.CodeProps & Types.OnPressAllX, mediaqCode: MediaQ.CodePropsItems) => {
+
+  const { theme, classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, ...rest } = props
+
+  //** STATIC SHEET
+  let staticSheet: TBasic.Sheet
+  let getStaticSheet: () => TBasic.Sheet
+  let variantCacheId
+  let variant = null
+  if (typeof createSheetX !== 'function') {
+    variantCacheId = '#static#'
+    getStaticSheet = () => toPlatformSheet(createSheetX)
+  } else {
+    if (options.getVariant) {
+      const propsWithMediaQ = mediaqCode ? { ...props, mediaqCode } : props
+      variant = options.getVariant(propsWithMediaQ)
+      variantCacheId = options.variantToString && options.variantToString(variant)
+      if (variantCacheId) {
+        getStaticSheet = () => toPlatformSheet(callCreator(theme, variant, createSheetX))
+      } else {
+        //getVariant!=null && variantToString==null => NO CACHING
+        staticSheet = toPlatformSheet(callCreator(theme, variant, createSheetX))
+      }
+    }
+  }
+  if (!staticSheet) {
+    let compCache = theme.$cache[name]
+    if (!compCache) theme.$cache[name] = compCache = {}
+    staticSheet = compCache[variantCacheId]
+    if (!staticSheet) compCache[variantCacheId] = staticSheet = getStaticSheet();
+  }
+  (staticSheet as any).$preserve = true
+
+
+  //** MERGE staticSheet with classes and className
+  const root = className && { root: toPlatformRuleSet(callCreator(theme, variant, className)) }
+  //const actSheet: TBasic.Sheet = classes || root ? deepMerges(false, {}, staticSheet, toPlatformSheet(callCreator(theme, variant, classes)), root) : staticSheet
+  const actSheet = classes || root ? deepMerges(false, {}, staticSheet, toPlatformSheet(callCreator(theme, variant, classes)), root) : staticSheet
+  //for (const p in actSheet) if (!p.startsWith('$')) actSheet[p].$name = p // assign name to ruleSets. $name is used in mergeRulesetWithOverrides to recognize used rulesets
+
+  //** RETURN platform dependent props for pure component code
+  const outputProps = {
+    ...rest,
+    classes: actSheet,
+    style: toPlatformRuleSet(callCreator(theme, variant, style)),
+    variant,
+    mergeRulesetWithOverrides,
+    mediaqCode,
+  } as TBasic.CodeProps & { $animations?: TAnimation.SheetsX }
+
+  toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, outputProps)
+
+  return outputProps
+}
+const callCreator = <T extends {}>(theme: TTheme.ThemeBase, variant, creator: T | ((theme: TTheme.ThemeBase, variant) => T)) => typeof creator === 'function' ? creator(theme, variant) : creator
+
+const MediaQConsumer_RenderIfNeeded = <T extends {}>(observedBits: number, child: () => React.ReactElement<T>) => {
+  return observedBits === 0 ? child() : <MediaQ.MediaQConsumer unstable_observedBits={observedBits}>{breakpoints => child()}</MediaQ.MediaQConsumer>
+}
+
+const AnimationsComponent_RenderIfNeeded = ($animations: TAnimation.SheetsX, Child: React.ComponentType<any> /*(newProp) => React.ReactElement<any>*/) => {
+  if (!$animations) return <Child />
+  return <AnimationsComponent $initAnimations={$animations} comp={Child} />
+}
+//{ animations => child(animations) }
+
+const mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
+  let count = 0
+  let res
+  rulesets.forEach((ruleset: TAddInConfig.RulesetWithAddIn) => { // acumulate $overrides from used rulesets
+    if (!ruleset) return
+    switch (count) {
+      case 0: res = ruleset; break
+      case 1: res = deepMerges(true, {}, res, ruleset); break
+      default: deepMerges(true, res, ruleset); break
+    }
+    count++
+  })
+  return res
+}
+
+const clearSystemProps = obj => {
+  if (!obj) return obj
+  for (const p in obj) {
+    if (p.startsWith('$')) { delete obj[p]; continue }
+    const subObj = obj[p]
+    for (const pp in subObj) {
+      if (pp.startsWith('$')) delete subObj[pp]
+    }
+  }
+  return obj
+  //const { $overrides, $name, $web, $native, $mediaq, $preserve, $animations, CONSTANT, ...rest } = obj as TBasic.SheetX //& { $preserve }
+  //const { $overrides, $name, $web, $native, $mediaq, $preserve, $animations, CONSTANT, ...rest } = obj as TBasic.SheetX //& { $preserve }
+  //return rest
+}
+

@@ -132,6 +132,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\animation\common\animation.tsx_" />
     <TypeScriptCompile Include="src\animation\common\animation.tsx" />
     <TypeScriptCompile Include="src\animation\native\animation.tsx" />
     <TypeScriptCompile Include="src\animation\native\index.ts" />
@@ -147,6 +148,7 @@
     <TypeScriptCompile Include="src\doc\home.tsx" />
     <TypeScriptCompile Include="src\ks\common\app\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\app\navigation.tsx" />
+    <None Include="src\ks\common\components\responsible-drawer\responsible-drawer.tsx_" />
     <TypeScriptCompile Include="src\ks\common\components\typo.tsx" />
     <TypeScriptCompile Include="src\ks\common\components\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\components\responsible-drawer\responsible-drawer.tsx" />
@@ -175,6 +177,7 @@
     <TypeScriptCompile Include="src\mediaq\web\media-q.ts" />
     <TypeScriptCompile Include="src\reactxx\common\comps-sheets.ts" />
     <TypeScriptCompile Include="src\reactxx\common\to-platform.ts" />
+    <None Include="src\reactxx\common\withStyles.tsx_" />
     <TypeScriptCompile Include="src\reactxx\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\reactxx\typings\basic.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\comps.ts" />

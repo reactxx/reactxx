@@ -229,7 +229,6 @@ export namespace TAddInConfig {
     variant: TBasic.getVariant<R>
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesWeb
     animations: TAnimation.DriversWeb<TBasic.getAnimation<R>>
-    
   }
 
   export interface CodePropsNative<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.CodeProps<TBasic.getMediaQ<R>> {

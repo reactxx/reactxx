@@ -142,18 +142,15 @@ export const mediaqGetSheetBreakpoints = (sheet: MediaQSheet) => {
   return { usedSheetBreakpoints: observedBits === 0 ? null : res, observedBits: observedBits }
 }
 
-export const mediaqActualizeSheetBreakpoints = (prop: { classes: MediaQSheet }, usedSheetBreakpoints: MediaQRulesetDecoded[]) => {
-  if (!usedSheetBreakpoints) return prop
-  let classes
-  const res: MediaQSheet = {
-    ...prop, classes: classes = { ...prop.classes }
-  }
+export const mediaqActualizeSheetBreakpoints = (classesIn: MediaQSheet, usedSheetBreakpoints: MediaQRulesetDecoded[]) => {
+  if (!usedSheetBreakpoints) return classesIn
+  const classes = { ...classesIn}
   usedSheetBreakpoints.forEach(used => {
     const ruleset = classes[used.rulesetName];
     warning(ruleset, `Missing ruleset ${used.rulesetName}`); //`
     classes[used.rulesetName] = modifyRuleset(ruleset, used.items)
   })
-  return res
+  return classes
 }
 
 /************************

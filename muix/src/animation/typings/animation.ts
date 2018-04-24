@@ -33,7 +33,7 @@ export namespace TAnimation {
 
   export interface AnimationsEx { reset: (exceptOf?: Driver<{}>) => void; statefullComponent: React.Component }
 
-  export interface Driver<T extends Shape> {
+  export interface Driver<T extends Shape = Shape> {
     opened: boolean
     open()
     close()
