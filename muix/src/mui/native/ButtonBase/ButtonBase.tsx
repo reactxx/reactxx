@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN, { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRectangle } from 'react-native'
 
-import { TBasic, TAddInConfig, ComponentTypeWithModifier, TTheme, withStyles } from 'reactxx'
+import { TBasic, TAddInConfig, TTheme, withStyles } from 'reactxx'
 
 import { MuiButtonBaseT } from '../../typings/button-base'
 import * as Mui from '../../typings/mui'

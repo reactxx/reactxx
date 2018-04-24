@@ -142,7 +142,7 @@ For "View" element:
 
 }
 
-const TestApp: React.SFC = props => <AppContainer theme={{}}>
+const TestApp: React.SFC = props => <AppContainer>
   <Text className={theme => ({ color: 'red', fontWeight: 'bold', textDecoration: 'underline' })}>
     red, bold, underline
   </Text>
@@ -151,7 +151,7 @@ const TestApp: React.SFC = props => <AppContainer theme={{}}>
   </Text>
 </AppContainer>
 
-const AppThemeOverride: React.SFC = props => <AppContainer theme={{}}>
+const AppThemeOverride: React.SFC = props => <AppContainer>
   <Text className={theme => ({ color: 'red', fontWeight: 'bold', textDecoration: 'underline' })}>
     red, bold, underline
   </Text>

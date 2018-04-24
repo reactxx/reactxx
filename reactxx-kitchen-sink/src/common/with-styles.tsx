@@ -2,8 +2,8 @@ import React from 'react'
 import ReactN from 'react-native'
 import ReactDOM from 'react-dom'
 
-import { TTheme, TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon } from 'reactxx'
-import { withStyles, ThemeProvider } from '../../reactxx/common/withStyles2'
+import { TTheme, TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
+import { withStyles, ThemeProvider } from '../../reactxx/common/withStyles'
 import * as MediaQ from 'reactxx-mediaq'
 
 /************************
@@ -75,17 +75,15 @@ export const Label = withStyles<Shape>(
 *************************************************
 *************************************************/
 
-const App: React.SFC = props => <MediaQ.MediaQ_AppContainer>
-  <ThemeProvider value={{ type: 'ThemeX', $cache: {} }}>
-    <Label.PropsProvider CONSTANT>
-      <View CONSTANT>
-        <Label>Label 1</Label>
-        <Label>Label 2</Label>
-        <Label className={{ fontStyle: 'italic' }}>Label 3</Label>
-      </View>
-    </Label.PropsProvider>
-  </ThemeProvider>
-</MediaQ.MediaQ_AppContainer >
+const App: React.SFC = props => <AppContainer>
+  <Label.PropsProvider CONSTANT>
+    <View CONSTANT>
+      <Label>Label 1</Label>
+      <Label>Label 2</Label>
+      <Label className={{ fontStyle: 'italic' }}>Label 3</Label>
+    </View>
+  </Label.PropsProvider>
+</AppContainer>
 
 export default App
 

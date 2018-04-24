@@ -4,7 +4,7 @@ import warning from 'warning'
 import { rulesetsToClassNames } from 'reactxx-fela'
 
 //import { withStyles } from '../common/withStyles'
-import { withStyles } from '../common/withStyles2'
+import { withStyles } from '../common/withStyles'
 import { TBasic } from '../typings/basic'
 import { TComps } from '../typings/comps'
 import { CompNames } from '../typings/index'
