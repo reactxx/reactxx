@@ -207,7 +207,6 @@ export const ResponsibleDrawer = (withStyles<TResponsibleDrawer.Shape>(
     defaultProps: {
       animationDuration: 300,
       drawerWidths: [250, 250, 300],
-      //breakpoints: [480, 1024],
       $mediaq: {
         mobile: [null, 480],
         tablet: [480, 1024],
@@ -232,7 +231,7 @@ const App: React.SFC = () => <AppContainer>
   </ResponsibleDrawer>
 </AppContainer>
 
-const Drawer: React.SFC = () => <ScrollView classes={{ container: { flex: 1, backgroundColor: 'lightgray' } }}>
+const Drawer: React.SFC = () => <ScrollView CONSTANT classes={{ container: { flex: 1, backgroundColor: 'lightgray' } }}>
   <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, padding: 10, backgroundColor: 'gray', }}>
     <Text className={{ flexGrow: 1, color: 'white' }}>{LoremIpsum(2)}</Text>
     {/* re-render ResponsibleDrawer.LayoutChanged only when Provider notifies (hide x display it): */}
@@ -245,7 +244,7 @@ const Drawer: React.SFC = () => <ScrollView classes={{ container: { flex: 1, bac
 
 const drawer = <Drawer />
 
-const Content: React.SFC = () => <ScrollView classes={{ container: { flex: 1 } }}> {/* content */}
+const Content: React.SFC = () => <ScrollView CONSTANT classes={{ container: { flex: 1 } }}> {/* content */}
   <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}>
     {/* re-render ResponsibleDrawer.LayoutChanged only when Provider notifies (hide x display it): */}
     <ResponsibleDrawer.LayoutChanged>

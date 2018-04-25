@@ -4,7 +4,12 @@ import { TBasic, TThemeConfig } from './basic'
 
 export namespace TTheme {
 
-  export interface WithStyleOptions<R extends TBasic.Shape =  TBasic.Shape> {
+  export interface WithStyleOptions {
+    withTheme?: boolean // preference: props => component => typeof sheetCreator === 'function' => global
+    withPropsModifier?: boolean // preference: props => component => global
+  }
+
+  export interface WithStyleOptions_Component<R extends TBasic.Shape =  TBasic.Shape> extends WithStyleOptions {
     getVariant?: (props: TBasic.PropsX<R> & MediaQ.CodeProps<TBasic.getMediaQ<R>>) => TBasic.getVariant<R>
     variantToString?: (variant: TBasic.getVariant<R>) => string
     defaultProps?: Partial<TBasic.PropsX<R>>
