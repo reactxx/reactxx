@@ -15,89 +15,98 @@ const themeContext = React.createContext<TTheme.ThemeX>({ type: 'ThemeX', $cache
 
 export const ThemeProvider = themeContext.Provider
 
-export const withStyleOptions: TTheme.WithStyleOptions = {}
-
-export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, options?: TTheme.WithStyleOptions_Component<R>) => (Component: TBasic.CodeComponentType<R>) => {
+export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, _options?: TTheme.WithStyleOptions_Component<R>, overrideOptions?: TTheme.WithStyleOptions_Component<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
   type TProps = TBasic.PropsX<R>
   type ThemeResult = TProps & { theme: TTheme.ThemeX }
-  type TPropsModifierResult = ThemeResult & Types.OnPressAllX
+  type TCascadingResult = ThemeResult & Types.OnPressAllX
   type TCodeProps = Partial<Overwrite<TBasic.CodeProps<R>, { classes?: TBasic.Sheet<R> & { $animations?: TAnimation.SheetsX; $preserve?: boolean } }>>
 
   type TAnimationShape = TBasic.getAnimation<R>
   type T$Animations = TAnimation.SheetsX<TAnimationShape>
   type TAnimations = TAnimation.Drivers<TAnimationShape>
 
-  const withOptions: TTheme.WithStyleOptions = {
-    withPropsModifier: fromOptions(withStyleOptions.withPropsModifier, options ? options.withPropsModifier : undefined),
-    withTheme: fromOptions(withStyleOptions.withTheme, options ? options.withPropsModifier : undefined, typeof sheetCreator === 'function'),
-  }
+  const options: TTheme.WithStyleOptions_Component<R> = _options && overrideOptions ? deepMerge(_options, overrideOptions) : (overrideOptions ? overrideOptions : _options)
 
-  const { Provider: ComponentPropsProvider, Consumer: ComponentPropsConsumer } = withOptions.withPropsModifier ? React.createContext<TProps>(null) : {} as React.Context<TProps>
+  // compute withStyles HOC options from: global 'withStyleOptions' and component specific 'options'
+  // 1. component creator sets options.withTheme=true IF sheetCreator uses some theme info
+  // 2. app developer sets withPropsModifier IF you need <Component.PropsProvider ...> feature
+  // 3. app developer can overrides component.options by creating app specific component variant (by calling ComponentCreator(optionOverride))
+  const withOptions: TTheme.WithStyleOptions = {
+    withCascading: fromOptions(false, options ? options.withCascading : undefined), // 
+    withTheme: options ? options.withCascading : undefined
+  }
+  if (withOptions.withTheme === undefined) withOptions.withTheme = typeof sheetCreator === 'function'
+
+  const { Provider: CascadingProviderLow, Consumer: CascadingConsumer } = withOptions.withCascading ? React.createContext<TProps>(null) : {} as React.Context<TProps>
 
   return class Styled extends React.Component<TBasic.PropsX<R>> {
 
     render() {
+      //Skip withTheme?
       if (withOptions.withTheme)
         return <themeContext.Consumer>{this.THEME}</themeContext.Consumer>
       else {
         this.themeResult = this.props as ThemeResult
-        if (withOptions.withPropsModifier)
-          return <ComponentPropsConsumer>{this.PROPS_MODIFIER}</ComponentPropsConsumer>
+        // Skip propsModifier?
+        if (withOptions.withCascading)
+          return <CascadingConsumer>{this.CASCADING}</CascadingConsumer>
         else
-          return this.call_MEDIA_NOTIFY(this.themeResult as TPropsModifierResult)
+          return this.call_MEDIA_NOTIFY(this.themeResult as TCascadingResult)
       }
     }
 
     THEME = (theme: TTheme.ThemeX) => {
-      // theme from themeContext.Consumer to themeResult
+      // set theme from themeContext.Consumer to themeResult
       this.themeResult = { ...this.props as TBasic.PropsX, theme } as ThemeResult
-      //Continue
-      if (withOptions.withPropsModifier)
-        return <ComponentPropsConsumer>{this.PROPS_MODIFIER}</ComponentPropsConsumer>
+      // Skip propsModifier?
+      if (withOptions.withCascading)
+        return <CascadingConsumer>{this.CASCADING}</CascadingConsumer>
       else
-        return this.call_MEDIA_NOTIFY(this.themeResult as TPropsModifierResult)
+        return this.call_MEDIA_NOTIFY(this.themeResult as TCascadingResult)
     }
     themeResult: ThemeResult
 
-    PROPS_MODIFIER = (propsModifier: TBasic.PropsX<R>) => {
-      // props from ComponentPropsConsumer to propsModifierResult
+    CASCADING = (source: TBasic.PropsX<R>) => {
+      // set props from ComponentPropsConsumer to propsModifierResult
       const { themeResult } = this
-      const propsModifierResult = (withOptions.withPropsModifier ? (propsModifier && themeResult ? deepMerges(false, {}, themeResult, propsModifier) : themeResult) : themeResult) as TPropsModifierResult
-      return this.call_MEDIA_NOTIFY(propsModifierResult)
+      const result = (withOptions.withCascading ? (source && themeResult ? deepMerges(false, {}, themeResult, source) : themeResult) : themeResult) as TCascadingResult
+      return this.call_MEDIA_NOTIFY(result)
     }
-    propsModifierResult: { propsModifierResult: TPropsModifierResult; usedNotifyBreakpoints: MediaQ.NotifyIntervalDecoded<string>; observedBits: number }
+    cascadingResult: { cascadingResult: TCascadingResult; usedNotifyBreakpoints: MediaQ.NotifyIntervalDecoded<string>; observedBits: number }
 
     MEDIAQ_NOTIFY = () => {
+      const { cascadingResult, usedNotifyBreakpoints, observedBits: ob } = this.cascadingResult
       // actualize media record with respect to actual screen size 
-      const { propsModifierResult, usedNotifyBreakpoints, observedBits: ob } = this.propsModifierResult
       const mediaNotifyRecord = ob === 0 ? null : MediaQ.mediaqActualizetNotifyBreakpoints(usedNotifyBreakpoints)
       // prepare platform dependent sheet
-      this.platformSheet = prepareSheet(name, sheetCreator, options, propsModifierResult, mediaNotifyRecord) as TCodeProps
-      // get sheet breakpoints
-      const { usedSheetBreakpoints, observedBits } = MediaQ.mediaqGetSheetBreakpoints(this.platformSheet.classes as MediaQ.MediaQSheet)
+      this.codeProps = prepareSheet(name, sheetCreator, options, cascadingResult, mediaNotifyRecord) as TCodeProps
+      // get media breakpoints, used in sheet
+      const { usedSheetBreakpoints, observedBits } = MediaQ.mediaqGetSheetBreakpoints(this.codeProps.classes as MediaQ.MediaQSheet)
       // save
       this.mediaNotifyResult = { usedSheetBreakpoints, observedBits }
-      // listen to screen size changing
+      // observe for screen size changing
       return this.MediaQConsumer_RenderIfNeeded(observedBits, this.MEDIAQ_SHEET)
     }
     mediaNotifyResult: { usedSheetBreakpoints: MediaQ.MediaQRulesetDecoded[]; observedBits: number }
-    platformSheet: TCodeProps
+    codeProps: TCodeProps
 
     MEDIAQ_SHEET = () => {
+      const { codeProps, mediaNotifyResult: { usedSheetBreakpoints, observedBits } } = this
       // actualize sheet with respect to actual screen size 
-      const { platformSheet, mediaNotifyResult: { usedSheetBreakpoints, observedBits } } = this
-      if (observedBits !== 0) platformSheet.classes = MediaQ.mediaqActualizeSheetBreakpoints(platformSheet.classes as MediaQ.MediaQSheet, usedSheetBreakpoints) as TBasic.Sheet<R>
-      // animation wrapper
-      return this.AnimationsComponent_RenderIfNeeded(platformSheet.classes.$animations, this.ANIMATION)
+      if (observedBits !== 0) codeProps.classes = MediaQ.mediaqActualizeSheetBreakpoints(codeProps.classes as MediaQ.MediaQSheet, usedSheetBreakpoints) as TBasic.Sheet<R>
+      // returns statefull animation component, which: compute platform specific animation part of the sheet, change its state when animation opens x closes.
+      return this.AnimationsComponent_RenderIfNeeded(codeProps.classes.$animations, this.ANIMATION)
     }
 
     ANIMATION = (animations: TAnimation.Drivers) => {
-      const { platformSheet } = this
-      // optimalization: platformSheet.classes could be cached. Make its copy 
-      if (platformSheet.classes.$preserve) platformSheet.classes = { ...platformSheet.classes as any }
-      platformSheet.classes = clearSystemProps(platformSheet.classes)
-      return <Component {...platformSheet as TBasic.CodeProps<R>} animations={animations} />
+      const { codeProps } = this
+      // optimalization: when platformSheet.classes is cached, make its copy 
+      if (codeProps.classes.$preserve) codeProps.classes = { ...codeProps.classes as any }
+      // remove internal props
+      codeProps.classes = clearSystemProps(codeProps.classes)
+      // call component code
+      return <Component {...codeProps as TBasic.CodeProps<R>} animations={animations} />
     }
 
     MediaQConsumer_RenderIfNeeded(observedBits: number, child: () => React.ReactNode) {
@@ -110,12 +119,12 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       </AnimationsComponent>
     }
 
-    call_MEDIA_NOTIFY(propsModifierResult: TPropsModifierResult) {
-      // get used notify breakpoints from propsModifierResult.$mediaq
-      const { usedNotifyBreakpoints, observedBits } = MediaQ.mediaqGetNotifyBreakpoints(propsModifierResult)
+    call_MEDIA_NOTIFY(cascadingResult: TCascadingResult) {
+      // get used notify breakpoints from '$mediaq' component props
+      const { usedNotifyBreakpoints, observedBits } = MediaQ.mediaqGetNotifyBreakpoints(cascadingResult)
       // save
-      this.propsModifierResult = { propsModifierResult, usedNotifyBreakpoints, observedBits }
-      // listen to screen size changing
+      this.cascadingResult = { cascadingResult, usedNotifyBreakpoints, observedBits }
+      // observe for screen size changing (if observedBits!=0)
       return this.MediaQConsumer_RenderIfNeeded(observedBits, this.MEDIAQ_NOTIFY)
     }
 
@@ -123,12 +132,18 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       return !nextProps.CONSTANT
     }
 
-    public static displayName = name
-    public static PropsProvider: React.SFC<TProps> = !withOptions.withPropsModifier ? null : (props => {
-      const { children, ...rest } = props as TBasic.PropsX & { children?: React.ReactNode }
-      return <ComponentPropsProvider value={rest as TProps}>{children}</ComponentPropsProvider>
-    })
+    public static CascadingProvider: React.SFC<TProps> = (() => {
+      if (withOptions.withCascading) return props => {
+        const { children, ...rest } = props as TBasic.PropsX & { children?: React.ReactNode }
+        return <CascadingProviderLow value={rest as TProps}>{children}</CascadingProviderLow>
+      }
+      return process.env.NODE_ENV == 'development' ? (() => {
+        warning(false, 'PropsProvider does not exist. Set global ')
+        return null
+      }) : null
+    })()
 
+    public static displayName = name
     public static defaultProps = options && options.defaultProps
   }
 

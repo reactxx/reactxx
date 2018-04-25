@@ -6,7 +6,7 @@ export namespace TTheme {
 
   export interface WithStyleOptions {
     withTheme?: boolean // preference: props => component => typeof sheetCreator === 'function' => global
-    withPropsModifier?: boolean // preference: props => component => global
+    withCascading?: boolean // preference: props => component => global
   }
 
   export interface WithStyleOptions_Component<R extends TBasic.Shape =  TBasic.Shape> extends WithStyleOptions {

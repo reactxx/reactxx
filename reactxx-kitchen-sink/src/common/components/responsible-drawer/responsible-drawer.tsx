@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { Types } from 'reactxx-basic'
+import { Types, deepMerge } from 'reactxx-basic'
 import * as MediaQ from 'reactxx-mediaq'
 import { TAddInConfig, TComps, TTheme, TBasic, withStyles, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
@@ -196,27 +196,33 @@ const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, 
 //<div>{count++}</div>
 //let count = 0
 
-// HOC ResponsibleDrawer component 
-export const ResponsibleDrawer = (withStyles<TResponsibleDrawer.Shape>(
-  TResponsibleDrawer.Consts.Drawer,
-  sheet,
-  {
-    getVariant: ({ animationDuration, mediaqCode, drawerWidths }) => ({ animationDuration, mediaqCode, drawerWidths }),
-    //getVariant: props => { const x = props.mediaqCode; return null },
-    variantToString: ({ animationDuration, mediaqCode, drawerWidths }) => variantToString(animationDuration, mediaqCode.mobile, mediaqCode.tablet, mediaqCode.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
-    defaultProps: {
-      animationDuration: 300,
-      drawerWidths: [250, 250, 300],
-      $mediaq: {
-        mobile: [null, 480],
-        tablet: [480, 1024],
-        desktop: [1024, null],
-      }
-    }
-  }
-)(responsibleDrawer)) as AnimationType
+// return HOC ResponsibleDrawer component and its creator
+export const ResponsibleDrawerCreator = (overrideOptions: TTheme.WithStyleOptions_Component<TResponsibleDrawer.Shape>) => {
+  const ResponsibleDrawer = (withStyles<TResponsibleDrawer.Shape>(
+    TResponsibleDrawer.Consts.Drawer,
+    sheet,
+    {
+      getVariant: ({ animationDuration, mediaqCode, drawerWidths }) => ({ animationDuration, mediaqCode, drawerWidths }),
+      variantToString: ({ animationDuration, mediaqCode, drawerWidths }) => variantToString(animationDuration, mediaqCode.mobile, mediaqCode.tablet, mediaqCode.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
+      defaultProps: {
+        animationDuration: 300,
+        drawerWidths: [250, 250, 300],
+        $mediaq: {
+          mobile: [null, 480],
+          tablet: [480, 1024],
+          desktop: [1024, null],
+        }
+      },
+      withTheme: false
+    },
+    overrideOptions
+  )(responsibleDrawer)) as AnimationType
+  ResponsibleDrawer.LayoutChanged = Consumer
+  return ResponsibleDrawer
+}
 
-ResponsibleDrawer.LayoutChanged = Consumer
+export const ResponsibleDrawer = ResponsibleDrawerCreator(null)
+export const ResponsibleDrawerCascading = ResponsibleDrawerCreator({ withCascading:true })
 
 //************************************************************************************************************
 // Using ResponsibleDrawer in application

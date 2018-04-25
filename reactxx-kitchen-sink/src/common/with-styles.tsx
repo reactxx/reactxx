@@ -76,13 +76,13 @@ export const Label = withStyles<Shape>(
 *************************************************/
 
 const App: React.SFC = props => <AppContainer>
-  <Label.PropsProvider CONSTANT>
+  <Label.CascadingProvider CONSTANT>
     <View CONSTANT>
       <Label>Label 1</Label>
       <Label>Label 2</Label>
       <Label className={{ fontStyle: 'italic' }}>Label 3</Label>
     </View>
-  </Label.PropsProvider>
+  </Label.CascadingProvider>
 </AppContainer>
 
 export default App

@@ -5,7 +5,7 @@
   <title>ReactXX</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
   <!-- insertion-point-jss -->
-  <script>window.isWeb = true</script> <!-- https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/core/ExecutionEnvironment.js -->
+  <script>window.isWeb = true; window.process = {env: { NODE_ENV: 'development'}}; </script> <!-- https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/core/ExecutionEnvironment.js -->
   <style data-fela-type="RULE"></style>
 </head>
 <body>
