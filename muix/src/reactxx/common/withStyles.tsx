@@ -38,11 +38,13 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
   }
   if (withOptions.withTheme === undefined) withOptions.withTheme = typeof sheetCreator === 'function'
 
-  const { Provider: CascadingProviderLow, Consumer: CascadingConsumer } = withOptions.withCascading ? React.createContext<TProps>(null) : {} as React.Context<TProps>
+  const { Provider: CascadingProvider, Consumer: CascadingConsumer } = withOptions.withCascading ? React.createContext<TProps>(null) : {} as React.Context<TProps>
 
   return class Styled extends React.Component<TBasic.PropsX<R>> {
 
     render() {
+      //if (name === 'comp$withstyle2')
+      //  debugger 
       //Skip withTheme?
       if (withOptions.withTheme)
         return <themeContext.Consumer>{this.THEME}</themeContext.Consumer>
@@ -132,10 +134,10 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       return !nextProps.CONSTANT
     }
 
-    public static CascadingProvider: React.SFC<TProps> = (() => {
+    public static Provider: React.SFC<TProps> = (() => {
       if (withOptions.withCascading) return props => {
         const { children, ...rest } = props as TBasic.PropsX & { children?: React.ReactNode }
-        return <CascadingProviderLow value={rest as TProps}>{children}</CascadingProviderLow>
+        return <CascadingProvider value={rest as TProps}>{children}</CascadingProvider>
       }
       return process.env.NODE_ENV == 'development' ? (() => {
         warning(false, 'PropsProvider does not exist. Set global ')

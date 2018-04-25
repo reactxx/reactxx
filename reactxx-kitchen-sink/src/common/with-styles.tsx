@@ -52,7 +52,7 @@ const label: TBasic.CodeSFC<Shape> = ({ classes, mergeRulesetWithOverrides, chil
 /************************
 * EXPORTED COMPONENT
 *************************/
-export const Label = withStyles<Shape>(
+export const LabelCreator = (overrideOptions: TTheme.WithStyleOptions_Component<Shape>) => withStyles<Shape>(
   Consts.Label,
   sheet,
   {
@@ -63,8 +63,12 @@ export const Label = withStyles<Shape>(
         small: [0, 800]
       }
     }
-  }
+  },
+  overrideOptions
 )(label)
+
+export const Label = LabelCreator(null)
+export const LabelCascading = LabelCreator({ withCascading: true })
 
 
 /************************************************
@@ -76,13 +80,13 @@ export const Label = withStyles<Shape>(
 *************************************************/
 
 const App: React.SFC = props => <AppContainer>
-  <Label.CascadingProvider CONSTANT>
-    <View CONSTANT>
-      <Label>Label 1</Label>
-      <Label>Label 2</Label>
-      <Label className={{ fontStyle: 'italic' }}>Label 3</Label>
-    </View>
-  </Label.CascadingProvider>
+  <View CONSTANT>
+    <Label>Label 1</Label>
+    <LabelCascading.Provider className={{ fontStyle: 'italic' }}>
+      <LabelCascading>Label 2</LabelCascading>
+      <Label>Label 3</Label>
+    </LabelCascading.Provider>
+  </View>
 </AppContainer>
 
 export default App
