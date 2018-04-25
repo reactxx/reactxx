@@ -15,6 +15,9 @@ const themeContext = React.createContext<TTheme.ThemeX>({ type: 'ThemeX', $cache
 
 export const ThemeProvider = themeContext.Provider
 
+export const withStylesCreator = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, component: TBasic.CodeComponentType<R>, options?: TTheme.WithStyleOptions_Component<R>) =>
+  (overrideOptions?: TTheme.WithStyleOptions_Component<R>) => withStyles(name, sheetCreator, options, overrideOptions)(component)
+
 export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, _options?: TTheme.WithStyleOptions_Component<R>, overrideOptions?: TTheme.WithStyleOptions_Component<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
   type TProps = TBasic.PropsX<R>

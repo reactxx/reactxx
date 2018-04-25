@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { Types, deepMerge } from 'reactxx-basic'
 import * as MediaQ from 'reactxx-mediaq'
-import { TAddInConfig, TComps, TTheme, TBasic, withStyles, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer } from 'reactxx'
+import { TAddInConfig, TComps, TTheme, TBasic, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
 
 //******* Two possibilities how to use get icon data:
@@ -197,32 +197,26 @@ const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, 
 //let count = 0
 
 // return HOC ResponsibleDrawer component and its creator
-export const ResponsibleDrawerCreator = (overrideOptions: TTheme.WithStyleOptions_Component<TResponsibleDrawer.Shape>) => {
-  const ResponsibleDrawer = (withStyles<TResponsibleDrawer.Shape>(
-    TResponsibleDrawer.Consts.Drawer,
-    sheet,
-    {
-      getVariant: ({ animationDuration, mediaqCode, drawerWidths }) => ({ animationDuration, mediaqCode, drawerWidths }),
-      variantToString: ({ animationDuration, mediaqCode, drawerWidths }) => variantToString(animationDuration, mediaqCode.mobile, mediaqCode.tablet, mediaqCode.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
-      defaultProps: {
-        animationDuration: 300,
-        drawerWidths: [250, 250, 300],
-        $mediaq: {
-          mobile: [null, 480],
-          tablet: [480, 1024],
-          desktop: [1024, null],
-        }
-      },
-      withTheme: false
-    },
-    overrideOptions
-  )(responsibleDrawer)) as AnimationType
-  ResponsibleDrawer.LayoutChanged = Consumer
-  return ResponsibleDrawer
-}
+export const ResponsibleDrawerCreator = withStylesCreator<TResponsibleDrawer.Shape>(TResponsibleDrawer.Consts.Drawer, sheet, responsibleDrawer, {
+  getVariant: ({ animationDuration, mediaqCode, drawerWidths }) => ({ animationDuration, mediaqCode, drawerWidths }),
+  variantToString: ({ animationDuration, mediaqCode, drawerWidths }) => variantToString(animationDuration, mediaqCode.mobile, mediaqCode.tablet, mediaqCode.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
+  defaultProps: {
+    animationDuration: 300,
+    drawerWidths: [250, 250, 300],
+    $mediaq: {
+      mobile: [null, 480],
+      tablet: [480, 1024],
+      desktop: [1024, null],
+    }
+  },
+  withTheme: false
+})
 
-export const ResponsibleDrawer = ResponsibleDrawerCreator(null)
-export const ResponsibleDrawerCascading = ResponsibleDrawerCreator({ withCascading:true })
+export const ResponsibleDrawer = ResponsibleDrawerCreator(null) as AnimationType
+ResponsibleDrawer.LayoutChanged = Consumer
+
+export const ResponsibleDrawerC = ResponsibleDrawerCreator({ withCascading: true }) as AnimationType
+ResponsibleDrawerC.LayoutChanged = Consumer
 
 //************************************************************************************************************
 // Using ResponsibleDrawer in application

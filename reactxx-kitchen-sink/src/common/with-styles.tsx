@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 import ReactDOM from 'react-dom'
 
 import { TTheme, TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
-import { withStyles, ThemeProvider } from '../../reactxx/common/withStyles'
+import { withStylesCreator, ThemeProvider } from '../../reactxx/common/withStyles'
 import * as MediaQ from 'reactxx-mediaq'
 
 /************************
@@ -52,23 +52,18 @@ const label: TBasic.CodeSFC<Shape> = ({ classes, mergeRulesetWithOverrides, chil
 /************************
 * EXPORTED COMPONENT
 *************************/
-export const LabelCreator = (overrideOptions: TTheme.WithStyleOptions_Component<Shape>) => withStyles<Shape>(
-  Consts.Label,
-  sheet,
-  {
-    getVariant: ({ mediaqCode }) => ({ mediaqCode }),
-    variantToString: ({ mediaqCode }) => mediaqCode.small.toString(),
-    defaultProps: {
-      $mediaq: {
-        small: [0, 800]
-      }
+export const LabelCreator = withStylesCreator<Shape>(Consts.Label, sheet, label, {
+  getVariant: ({ mediaqCode }) => ({ mediaqCode }),
+  variantToString: ({ mediaqCode }) => mediaqCode.small.toString(),
+  defaultProps: {
+    $mediaq: {
+      small: [0, 800]
     }
-  },
-  overrideOptions
-)(label)
+  }
+})
 
 export const Label = LabelCreator(null)
-export const LabelCascading = LabelCreator({ withCascading: true })
+export const LabelC = LabelCreator({ withCascading: true })
 
 
 /************************************************
@@ -82,10 +77,10 @@ export const LabelCascading = LabelCreator({ withCascading: true })
 const App: React.SFC = props => <AppContainer>
   <View CONSTANT>
     <Label>Label 1</Label>
-    <LabelCascading.Provider className={{ fontStyle: 'italic' }}>
-      <LabelCascading>Label 2</LabelCascading>
+    <LabelC.Provider className={{ fontStyle: 'italic' }}>
+      <LabelC>Label 2</LabelC>
       <Label>Label 3</Label>
-    </LabelCascading.Provider>
+    </LabelC.Provider>
   </View>
 </AppContainer>
 
