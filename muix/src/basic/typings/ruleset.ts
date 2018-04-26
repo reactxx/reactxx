@@ -39,7 +39,7 @@ export namespace Types {
     T extends 'Image' ? TCommonStyles.ImageStyle :
     T extends 'ScrollView' ? TCommonStyles.ScrollViewStyle :
     T extends 'View' ? TCommonStyles.ViewStyle :
-    TCommonStyles.TextStyle
+    TCommonStyles.TextStyle | TCommonStyles.ViewStyle | TCommonStyles.ImageStyle | TCommonStyles.ScrollViewStyle
 
   export type RulesetNative<T extends RulesetNativeIds = never> =
     T extends 'Text' ? ReactN.TextStyle :

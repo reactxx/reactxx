@@ -52,7 +52,13 @@ type Omit<T, K extends keyof T> = { [P in Diff<keyof T, K>]: T[P] }
 type OmitPartial<T, K extends keyof T> = { [P in Diff<keyof T, K>]?: T[P] }
 type Overwrite<T, U> = {[P in Diff<keyof T, keyof U>]: T[P]} & U
 type PartialOverwrite<T, U> = {[P in Diff<keyof T, keyof U>]?: T[P]} & Partial<U>
-type TakeFrom<T, K extends keyof T> = {[P in K]: T[P]}
+type TakeFrom<T, K extends keyof T> = { [P in K]: T[P] }
+type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T[P] extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : DeepPartial<T[P]>
+};
+
 
 //https://schneidenbach.gitbooks.io/typescript-cookbook/get-the-return-type-of-a-function.html
 //nameOf, return type of function, 

@@ -11,11 +11,11 @@ import { H4 } from '../components/typo'
 *************************/
 
 export const enum Consts {
-  Label = 'comp$label1' //unique component name
+  Label = 'ks$ce1$label1' //unique component name
 }
 
 // 
-type LabelShape = TBasic.OverwriteShape<{
+type Shape = TBasic.OverwriteShape<{
   common: TComps.ShapeViews<'root'> & TComps.ShapeTexts<'label' | 'icon' | 'iconGap'>,
   props: {
     iconData: string,
@@ -27,7 +27,7 @@ type LabelShape = TBasic.OverwriteShape<{
 * SHEET
 *************************/
 
-const sheet: TBasic.SheetX<LabelShape> = {
+const sheet: TBasic.SheetX<Shape> = {
   root: {
     backgroundColor: 'blue',
     borderRadius: 2,
@@ -55,7 +55,7 @@ const sheet: TBasic.SheetX<LabelShape> = {
 /************************
 * CODE
 *************************/
-const label: TBasic.CodeSFC<LabelShape> = ({ classes, mergeRulesetWithOverrides, children, iconData, style }) => {
+const label: TBasic.CodeSFC<Shape> = ({ classes, mergeRulesetWithOverrides, children, iconData, style }) => {
   const root = mergeRulesetWithOverrides(classes.root) as TBasic.ViewRulesetX
   const hasChildren = React.Children.count(children) > 0
   const icon = iconData && mergeRulesetWithOverrides(classes.label, classes.icon, hasChildren && classes.iconGap) as TBasic.TextRulesetX
@@ -69,7 +69,7 @@ const label: TBasic.CodeSFC<LabelShape> = ({ classes, mergeRulesetWithOverrides,
 /************************
 * EXPORTED COMPONENT
 *************************/
-export const LabelCreator = withStylesCreator<LabelShape>(Consts.Label, sheet, label)
+export const LabelCreator = withStylesCreator<Shape>(Consts.Label, sheet, label)
 export const Label = LabelCreator()
 
 // allow property cascading
@@ -84,26 +84,27 @@ export const LabelC = LabelCreator({ withCascading: true })
 *************************************************
 *************************************************/
 const Section: React.SFC = ({ children }) => <View className={{ flexDirection: 'row', flexWrap: 'wrap' }}>{children}</View>
+const iconHeart = MDI.Heart
 
 const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
   <H4>Default</H4>
   <Section>
     <Label>Label 1</Label>
-    <Label iconData={MDI.Heart} />
-    <Label iconData={MDI.Heart}>Label 2</Label>
+    <Label iconData={iconHeart} />
+    <Label iconData={iconHeart}>Label 2</Label>
   </Section>
   <H4>ROOT STYLING PRECEDENCE</H4>
   <Section>
-    <Label classes={{ root: { backgroundColor: 'lightblue' } }} iconData={MDI.Heart}>Label 3</Label>
-    <Label classes={{ root: { backgroundColor: 'lightblue' } }} className={{ backgroundColor: 'red' }} iconData={MDI.Heart}>Label 4</Label>
-    <Label classes={{ root: { backgroundColor: 'lightblue' } }} className={{ backgroundColor: 'red' }} style={{ backgroundColor: 'green' }} iconData={MDI.Heart}>Label 5</Label>
+    <Label classes={{ root: { backgroundColor: 'lightblue' } }} iconData={iconHeart}>Label 3</Label>
+    <Label classes={{ root: { backgroundColor: 'lightblue' } }} className={{ backgroundColor: 'red' }} iconData={iconHeart}>Label 4</Label>
+    <Label classes={{ root: { backgroundColor: 'lightblue' } }} className={{ backgroundColor: 'red' }} style={{ backgroundColor: 'green' }} iconData={iconHeart}>Label 5</Label>
   </Section>
   <H4>DEEP STYLING WITH CLASSES</H4>
   <Section>
-    <Label classes={{ root: { padding: 30, borderRadius: 8 }, iconGap: { marginRight: 30 }, icon: { fontSize: 36, color: 'yellow' } }} iconData={MDI.Heart}>Label 6</Label>
+    <Label classes={{ root: { padding: 30, borderRadius: 8 }, iconGap: { marginRight: 30 }, icon: { fontSize: 36, color: 'yellow' } }} iconData={iconHeart}>Label 6</Label>
   </Section>
   <H4>PROPERTY CASCADING</H4>
-  <LabelC.Provider className={{ borderRadius: 12 }} iconData={MDI.Heart}>
+  <LabelC.Provider className={{ borderRadius: 12 }} iconData={iconHeart}>
     <Section>
       <LabelC>Label 7</LabelC>
       <LabelC.Provider classes={{ root: { backgroundColor: 'lightgreen', borderColor: 'darkgreen' }, label: { color: 'darkgreen' } }} iconData={MDI.Stop}>

@@ -64,7 +64,8 @@ export namespace TBasic {
     mediaq?: string | null
     //**** component theme par
     variant?: {}
-    //_$compTheme?: {}
+    //**** component theme par
+    theme?: TTheme.ThemeX
   }
   export type getCommon<R extends Shape> = R['common']
   export type getNative<R extends Shape> = R['native']
@@ -78,6 +79,7 @@ export namespace TBasic {
   //export type get_$CompTheme<R extends Shape = Shape> = R['_$compTheme']
   export type getMediaQ<R extends Shape = Shape> = R['mediaq']
   export type getVariant<R extends Shape = Shape> = R['variant']
+  export type getTheme<R extends Shape = Shape> = R['theme']
 
   export interface Shapes { }
 
@@ -88,7 +90,8 @@ export namespace TBasic {
     props: {}; propsNative: ReactN.ViewProperties; propsWeb: React.HTMLAttributes<HTMLElement>
     animation: {}; mediaq: null,
     nameType: null
-    variant: never
+    variant: never,
+    theme: TTheme.ThemeX
   }, R>
 
   /******************************************

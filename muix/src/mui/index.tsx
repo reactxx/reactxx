@@ -24,7 +24,7 @@ export const jss: JSS = create({ ...preset(), createGenerateClassName, insertion
 export const AppContainer: React.SFC = props => {
   const theme = createMuiTheme()
   return <JssProvider jss={jss}>
-    <ThemeProvider value={{ }}>
+    <ThemeProvider theme={{ }}>
       <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
     </ThemeProvider>
   </JssProvider>

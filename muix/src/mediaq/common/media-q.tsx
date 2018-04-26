@@ -56,7 +56,7 @@ export interface Breakpoint {
 }
 
 //***  MediaQ Notify properties
-export type PropsX<TState extends string = string> = { theme?, $mediaq?: NotifyIntervalX<TState> | ((theme) => NotifyIntervalX<TState>) }
+export type PropsX<TState extends string = string> = { $mediaq?: NotifyIntervalX<TState> | ((theme) => NotifyIntervalX<TState>) }
 export type NotifyIntervalX<TState extends string> = { [P in TState]: [number | null, number | null] }
 
 export type NotifyIntervalDecoded<TState extends string = string> = { [P in TState]: [Breakpoint, Breakpoint] }
@@ -88,10 +88,10 @@ export const refresh = () => {
   appContainer.forceUpdate()
 }
 
-export const mediaqGetNotifyBreakpoints = <T extends string>(props: PropsX<T>) => {
+export const mediaqGetNotifyBreakpoints = <T extends string>(props: PropsX<T>, theme) => {
   const { $mediaq, ...rest } = props as PropsX
   if (!$mediaq) return { usedNotifyBreakpoints: null as NotifyIntervalDecoded<T>, observedBits: 0 }
-  const mediaq = typeof $mediaq === 'function' ? $mediaq(rest.theme) : $mediaq
+  const mediaq = typeof $mediaq === 'function' ? $mediaq(theme) : $mediaq
   const newMedia = {} as NotifyIntervalDecoded<T>
   let observedBits = 0
   for (const p in mediaq)
