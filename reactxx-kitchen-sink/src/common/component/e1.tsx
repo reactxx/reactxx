@@ -106,11 +106,10 @@ const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
   <LabelC.Provider className={{ borderRadius: 12 }} iconData={MDI.Heart}>
     <Section>
       <LabelC>Label 7</LabelC>
-      <LabelC>Label 8</LabelC>
       <LabelC.Provider classes={{ root: { backgroundColor: 'lightgreen', borderColor: 'darkgreen' }, label: { color: 'darkgreen' } }} iconData={MDI.Stop}>
-        <LabelC>Label 9</LabelC>
-        <LabelC>Label 10</LabelC>
+        <LabelC>Label 8</LabelC>
       </LabelC.Provider>
+      <LabelC>Label 9</LabelC>
     </Section>
   </LabelC.Provider>
 </ScrollView>
