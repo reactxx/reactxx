@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
 import MDI from 'reactxx-mdi'
 
-import { H4 } from '../components/typo'
+import { H2 } from '../components/typo'
 
 /************************
 * TYPINGS
@@ -83,27 +83,27 @@ export const LabelC = LabelCreator({ withCascading: true })
 *
 *************************************************
 *************************************************/
-const Section: React.SFC = ({ children }) => <View className={{ flexDirection: 'row', flexWrap: 'wrap' }}>{children}</View>
+const Section: React.SFC = ({ children }) => <View className={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>{children}</View>
 const iconHeart = MDI.Heart
 
 const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
-  <H4>Default</H4>
+  <H2>Default</H2>
   <Section>
     <Label>Label 1</Label>
     <Label iconData={iconHeart} />
     <Label iconData={iconHeart}>Label 2</Label>
   </Section>
-  <H4>ROOT STYLING PRECEDENCE</H4>
+  <H2>ROOT STYLING PRECEDENCE</H2>
   <Section>
     <Label classes={{ root: { backgroundColor: 'lightblue' } }} iconData={iconHeart}>Label 3</Label>
     <Label classes={{ root: { backgroundColor: 'lightblue' } }} className={{ backgroundColor: 'red' }} iconData={iconHeart}>Label 4</Label>
     <Label classes={{ root: { backgroundColor: 'lightblue' } }} className={{ backgroundColor: 'red' }} style={{ backgroundColor: 'green' }} iconData={iconHeart}>Label 5</Label>
   </Section>
-  <H4>DEEP STYLING WITH CLASSES</H4>
+  <H2>DEEP STYLING WITH CLASSES</H2>
   <Section>
     <Label classes={{ root: { padding: 30, borderRadius: 8 }, iconGap: { marginRight: 30 }, icon: { fontSize: 36, color: 'yellow' } }} iconData={iconHeart}>Label 6</Label>
   </Section>
-  <H4>PROPERTY CASCADING</H4>
+  <H2>PROPERTY CASCADING</H2>
   <LabelC.Provider className={{ borderRadius: 12 }} iconData={iconHeart}>
     <Section>
       <LabelC>Label 7</LabelC>

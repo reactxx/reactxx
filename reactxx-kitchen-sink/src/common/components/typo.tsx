@@ -7,29 +7,29 @@ const typo = {
     fontSize: 32,
     fontWeight: 'bold',
     marginTop: 26,
-    marginBottom: 4,
+    marginBottom: 10,
   } as TBasic.TextRulesetX,
   H2: {
     fontSize: 26,
     fontWeight: 'bold',
     marginTop: 22,
-    marginBottom: 4,
+    marginBottom: 8,
   } as TBasic.TextRulesetX,
   H3: {
     fontSize: 22,
     fontWeight: 'bold',
     marginTop: 18,
-    marginBottom: 4,
+    marginBottom: 7,
   } as TBasic.TextRulesetX,
   H4: {
     fontSize: 18,
     marginTop: 14,
-    marginBottom: 4
+    marginBottom: 6
   } as TBasic.TextRulesetX,
   H5: {
     fontSize: 14,
     marginTop: 12,
-    marginBottom: 2
+    marginBottom: 5
   } as TBasic.TextRulesetX,
   B: {
     fontWeight: 'bold'
@@ -47,7 +47,8 @@ const typo = {
     }
   } as TBasic.TextRulesetX,
   P: {
-    marginTop: 4,
+    marginTop: 6,
+    marginBottom: 4,
   } as TBasic.TextRulesetX,
   Blocquote: {
     marginLeft: 30,
