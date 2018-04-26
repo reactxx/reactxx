@@ -29,6 +29,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
   type T$Animations = TAnimation.SheetsX<TAnimationShape>
   type TAnimations = TAnimation.Drivers<TAnimationShape>
 
+  //**** OPTIONS
   const options: TTheme.WithStyleOptions_Component<R> = _options && overrideOptions ? deepMerge(_options, overrideOptions) : (overrideOptions ? overrideOptions : _options)
 
   // compute withStyles HOC options from: global 'withStyleOptions' and component specific 'options'
@@ -41,8 +42,21 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
   }
   if (withOptions.withTheme === undefined) withOptions.withTheme = typeof sheetCreator === 'function'
 
+  //**** PROPERTY CASCADING 
   const { Provider: CascadingProvider, Consumer: CascadingConsumer } = withOptions.withCascading ? React.createContext<TProps>(null) : {} as React.Context<TProps>
 
+  const Provider: React.SFC<TProps> = props => {
+    if (withOptions.withCascading) {
+      const { children, ...rest } = props as TBasic.PropsX & { children?: React.ReactNode }
+      return <CascadingConsumer>
+        {parentsProps => <CascadingProvider value={(parentsProps && rest ? deepMerge(parentsProps, rest) : rest) as TProps}>{children}</CascadingProvider>}
+      </CascadingConsumer>
+    }
+    warning(process.env.NODE_ENV == 'development', `Component.Provider does not exist (component.name=${name}). Use <ComponentC.Provider ...><ComponentC ...> variant of component or create it (if it does not exist).`)
+    return null
+  }
+
+  //**** INNER COMPONENT
   return class Styled extends React.Component<TBasic.PropsX<R>> {
 
     render() {
@@ -137,17 +151,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       return !nextProps.CONSTANT
     }
 
-    public static Provider: React.SFC<TProps> = (() => {
-      if (withOptions.withCascading) return props => {
-        const { children, ...rest } = props as TBasic.PropsX & { children?: React.ReactNode }
-        return <CascadingProvider value={rest as TProps}>{children}</CascadingProvider>
-      }
-      return process.env.NODE_ENV == 'development' ? (() => {
-        warning(false, 'PropsProvider does not exist. Set global ')
-        return null
-      }) : null
-    })()
-
+    public static Provider = Provider
     public static displayName = name
     public static defaultProps = options && options.defaultProps
   }

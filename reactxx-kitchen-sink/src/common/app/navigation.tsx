@@ -25,11 +25,13 @@ const webSandboxUrl: GetExampleUrl = (ex) => {
   return `${sandBoxUrl}module=%2Fsrc%2Fcommon%2F${name}.tsx&initialpath=${name}`
 }
 
+const debugPath = 'component/e1'
+
 class App extends React.Component<{}, KSink.Example> {
 
-  locationExample = nameToExample((window && window.location && window.location.pathname ? window.location.pathname.substr(1) : null))
+  locationExample = nameToExample(window && window.location && window.location.pathname ? window.location.pathname.substr(1) : null)
 
-  state = this.locationExample
+  state = nameToExample(debugPath)
 
   render() {
     if (this.locationExample.name !== 'app/navigation') return exampleToElement(this.locationExample)

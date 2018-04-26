@@ -6,29 +6,29 @@ const typo = {
   H1: {
     fontSize: 32,
     fontWeight: 'bold',
-    marginTop: 16,
+    marginTop: 26,
     marginBottom: 4,
   } as TBasic.TextRulesetX,
   H2: {
     fontSize: 26,
     fontWeight: 'bold',
-    marginTop: 12,
+    marginTop: 22,
     marginBottom: 4,
   } as TBasic.TextRulesetX,
   H3: {
     fontSize: 22,
     fontWeight: 'bold',
-    marginTop: 10,
+    marginTop: 18,
     marginBottom: 4,
   } as TBasic.TextRulesetX,
   H4: {
     fontSize: 18,
-    marginTop: 8,
+    marginTop: 14,
     marginBottom: 4
   } as TBasic.TextRulesetX,
   H5: {
     fontSize: 14,
-    marginTop: 4,
+    marginTop: 12,
     marginBottom: 2
   } as TBasic.TextRulesetX,
   B: {
