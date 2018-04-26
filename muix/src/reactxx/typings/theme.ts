@@ -22,9 +22,9 @@ export namespace TTheme {
   export interface ThemeBase {
     type?: 'ThemeX'
   }
-  export interface Theme extends TThemeConfig.Theme {
-    type: 'Theme'
-  }
-  export type ThemeX = Partial<Overwrite<Theme, ThemeBase>>
+  //export interface Theme extends TThemeConfig.Theme {
+  //  type: 'Theme'
+  //}
+  //export type ThemeX = Partial<Overwrite<Theme, ThemeBase>>
   
 }

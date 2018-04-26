@@ -17,9 +17,13 @@ export const toPlatformEvents = ($web: Types.OnPressAllWeb, $native: Types.OnPre
   }
 }
 
-export const deepMerges = (skipSystem: boolean, target, ...sources) => {
+export const deepMergesSys = (skipSystem: boolean, target, ...sources) => {
   sources.forEach(source => deepMerge(target, source, skipSystem))
   return target
+}
+
+export const deepMerges = (target, ...sources) => {
+  return deepMerges(false, target, ...sources)
 }
 
 //create platform specific ruleset from cross platform one

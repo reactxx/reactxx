@@ -65,7 +65,7 @@ export namespace TBasic {
     //**** component theme par
     variant?: {}
     //**** component theme par
-    theme?: TTheme.ThemeX
+    theme?: TTheme.ThemeBase
   }
   export type getCommon<R extends Shape> = R['common']
   export type getNative<R extends Shape> = R['native']
@@ -91,7 +91,7 @@ export namespace TBasic {
     animation: {}; mediaq: null,
     nameType: null
     variant: never,
-    theme: TTheme.ThemeX
+    theme: TTheme.ThemeBase
   }, R>
 
   /******************************************
@@ -228,21 +228,21 @@ export namespace TAddInConfig {
 
   //******************** Platform specific
   export interface CodePropsWeb<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.CodeProps<TBasic.getMediaQ<R>> {
-    theme: TTheme.ThemeX
+    theme: TBasic.getTheme<R>
     variant: TBasic.getVariant<R>
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesWeb
     animations: TAnimation.DriversWeb<TBasic.getAnimation<R>>
   }
 
   export interface CodePropsNative<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.CodeProps<TBasic.getMediaQ<R>> {
-    theme: TTheme.ThemeX
+    theme: TBasic.getTheme<R>
     variant: TBasic.getVariant<R>
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesNative
     animations: TAnimation.DriversNative<TBasic.getAnimation<R>>
   }
   export interface CodeProps<R extends TBasic.Shape = TBasic.Shape> extends MediaQ.CodeProps<TBasic.getMediaQ<R>> {
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides
-    theme: TTheme.ThemeX
+    theme: TBasic.getTheme<R>
     variant: TBasic.getVariant<R>
     animations: TAnimation.Drivers<TBasic.getAnimation<R>>
   }

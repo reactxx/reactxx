@@ -1,7 +1,8 @@
 ﻿import { ButtonProps } from './mui'
 import ReactN from 'react-native'
+import { Muix } from 'reactxx-mui/typings/muix'
 
-import { TComps, TBasic } from 'reactxx'
+import { TComps, TBasic, TTheme } from 'reactxx'
 import { Types } from 'reactxx-basic'
 
 export namespace MuiButtonT {
@@ -19,6 +20,7 @@ export namespace MuiButtonT {
     props: ButtonProps & Types.OnPressAllX
     propsNative: ReactN.TouchableOpacityProperties
     nameType: CompNames.Button | CompNames.ButtonIconLeft | CompNames.ButtonIconRight
+    theme: TTheme.ThemeBase & Muix.Theme
   }>
 
 }

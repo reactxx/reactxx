@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 import warning from 'warning'
 import PropTypes from 'prop-types'
 
-import { Types, toPlatformEvents, deepMerge, deepMerges } from 'reactxx-basic'
+import { Types, toPlatformEvents, deepMerge, deepMergesSys } from 'reactxx-basic'
 import { Animations, TAnimation, AnimationsComponent } from 'reactxx-animation'
 import * as MediaQ from 'reactxx-mediaq'
 
@@ -122,7 +122,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
     CASCADING = (fromConsumer: TBasic.PropsX<R>) => {
       // set props from ComponentPropsConsumer to propsModifierResult
       const { props } = this
-      this.propsWithCascading = (withOptions.withCascading ? (fromConsumer ? deepMerges(false, {}, fromConsumer, props) : fromConsumer) : props) as TPropsWithEvents
+      this.propsWithCascading = (withOptions.withCascading ? (fromConsumer ? deepMergesSys(false, {}, fromConsumer, props) : fromConsumer) : props) as TPropsWithEvents
       return this.call_MEDIA_NOTIFY()
     }
     propsWithCascading: TPropsWithEvents
@@ -240,7 +240,7 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
 
   //** MERGE staticSheet with classes and className
   const root = className && { root: toPlatformRuleSet(callCreator(theme, variant, className)) }
-  const actSheet: TBasic.Sheet = classes || root ? deepMerges(false, {}, staticSheet, toPlatformSheet(callCreator(theme, variant, classes)), root) : staticSheet
+  const actSheet: TBasic.Sheet = classes || root ? deepMergesSys(false, {}, staticSheet, toPlatformSheet(callCreator(theme, variant, classes)), root) : staticSheet
   //for (const p in actSheet) if (!p.startsWith('$')) actSheet[p].$name = p // assign name to ruleSets. $name is used in mergeRulesetWithOverrides to recognize used rulesets
 
 
@@ -267,8 +267,8 @@ const mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides = (...rulesets
     if (!ruleset) return
     switch (count) {
       case 0: res = ruleset; break
-      case 1: res = deepMerges(true, {}, res, ruleset); break
-      default: deepMerges(true, res, ruleset); break
+      case 1: res = deepMergesSys(true, {}, res, ruleset); break
+      default: deepMergesSys(true, res, ruleset); break
     }
     count++
   })
