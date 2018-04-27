@@ -152,6 +152,7 @@
     <TypeScriptCompile Include="src\ks\common\components\typo.tsx" />
     <TypeScriptCompile Include="src\ks\common\components\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\components\responsible-drawer\responsible-drawer.tsx" />
+    <TypeScriptCompile Include="src\ks\common\component\ce2 - Copy.tsx" />
     <TypeScriptCompile Include="src\ks\common\component\ce2.tsx" />
     <TypeScriptCompile Include="src\ks\common\component\ce1.tsx" />
     <TypeScriptCompile Include="src\ks\common\component\index.tsx" />

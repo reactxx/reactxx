@@ -1,16 +1,16 @@
-﻿import * as MediaQ from 'reactxx-mediaq'
+﻿import { TMediaQ } from 'reactxx-mediaq'
 
 import { TBasic, TThemeConfig } from './basic'
 
 export namespace TTheme {
 
   export interface WithStyleOptions {
-    withTheme?: boolean // preference: props => component => typeof sheetCreator === 'function' => global
-    withCascading?: boolean // preference: props => component => global
+    withTheme?: boolean
+    withCascading?: boolean 
   }
 
   export interface WithStyleOptions_Component<R extends TBasic.Shape =  TBasic.Shape> extends WithStyleOptions {
-    getVariant?: (props: TBasic.PropsX<R> & MediaQ.CodeProps<TBasic.getMediaQ<R>>, theme?: TBasic.getTheme<R>) => TBasic.getVariant<R>
+    getVariant?: (props: TBasic.PropsX<R> & TMediaQ.CodeProps<TBasic.getMediaQ<R>>, theme?: TBasic.getTheme<R>) => TBasic.getVariant<R>
     variantToString?: (variant: TBasic.getVariant<R>) => string
     defaultProps?: Partial<TBasic.PropsX<R>>
   }

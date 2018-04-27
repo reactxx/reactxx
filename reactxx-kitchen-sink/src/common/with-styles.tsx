@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 
 import { TTheme, TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
 import { withStylesCreator, ThemeProvider } from '../../reactxx/common/withStyles'
-import * as MediaQ from 'reactxx-mediaq'
+import { TMediaQ } from 'reactxx-mediaq'
 
 /************************
 * TYPINGS
@@ -28,7 +28,7 @@ export type Shape = TBasic.OverwriteShape<{
 /************************
 * SHEET
 *************************/
-export interface Variant extends MediaQ.CodeProps<TBasic.getMediaQ<Shape>> { }
+export interface Variant extends TMediaQ.CodeProps<TBasic.getMediaQ<Shape>> { }
 
 const sheet: TTheme.SheetCreatorX<Shape> = (theme, variant) => ({
   root: {

@@ -1,4 +1,7 @@
-﻿# withStyle
+﻿# TODO
+TextC etc.
+
+# withStyle
 
 1. withTheme: just theme, no staticSheet and variant
 ** NO (use theme variant instead):  theme has defaultProps: {[compName:string]: value | theme => value}

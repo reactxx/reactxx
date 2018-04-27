@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { Types, deepMerge } from 'reactxx-basic'
-import * as MediaQ from 'reactxx-mediaq'
+import { TMediaQ } from 'reactxx-mediaq'
 import { TAddInConfig, TComps, TTheme, TBasic, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
 
@@ -32,7 +32,7 @@ export namespace TResponsibleDrawer {
     onPress: Types.MouseEvent
   }
 
-  export interface Variant extends MediaQ.CodeProps<TBasic.getMediaQ<Shape>> {
+  export interface Variant extends TMediaQ.CodeProps<TBasic.getMediaQ<Shape>> {
     drawerWidths: [number, number, number] //drawer width for mobile, tablet and desktop
     animationDuration: number //drawer animation duration for mobile and tablet
   }
@@ -143,8 +143,6 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =
 
 // responsibleDrawer stateless component. 
 const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, mergeRulesetWithOverrides, children, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqCode: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, drawer: drawerNode }) => {
-
-  //const { mobile: isMobile, tablet: isTablet, desktop: isDesktop } = MediaQ.toCode(mediaqCode)
 
   const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { Types, toPlatformEvents, deepMerge, deepMergesSys } from 'reactxx-basic'
 import { Animations, TAnimation, AnimationsComponent } from 'reactxx-animation'
-import * as MediaQ from 'reactxx-mediaq'
+import { TMediaQ, mediaqActualizetNotifyBreakpoints, mediaqActualizeSheetBreakpoints, mediaqGetNotifyBreakpoints, mediaqGetSheetBreakpoints, mediaQProviderExists, MediaQ_AppContainer, MediaQConsumer } from 'reactxx-mediaq'
 
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
 import { TBasic, TAddInConfig } from '../typings/basic'
@@ -130,22 +130,22 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
     MEDIAQ_NOTIFY = () => {
       const { usedNotifyBreakpoints, observedBits: ob } = this.mediaqGetNotifyBreakpointsResult
       // actualize media record with respect to actual screen size 
-      const mediaNotifyRecord = ob === 0 ? null : MediaQ.mediaqActualizetNotifyBreakpoints(usedNotifyBreakpoints)
+      const mediaNotifyRecord = ob === 0 ? null : mediaqActualizetNotifyBreakpoints(usedNotifyBreakpoints)
       // prepare platform dependent sheet
       this.codeProps = prepareSheet(name, sheetCreator, options, this.propsWithCascading, this.themeContext, mediaNotifyRecord) as TCodeProps
       // get media breakpoints, used in sheet
-      this.mediaqGetSheetBreakpointsResult = MediaQ.mediaqGetSheetBreakpoints(this.codeProps.classes as MediaQ.MediaQSheet)
+      this.mediaqGetSheetBreakpointsResult = mediaqGetSheetBreakpoints(this.codeProps.classes as TMediaQ.MediaQSheet)
       // observe for screen size changing
       return this.MediaQConsumer_RenderIfNeeded(this.mediaqGetSheetBreakpointsResult.observedBits, this.MEDIAQ_SHEET)
     }
-    mediaqGetNotifyBreakpointsResult: { usedNotifyBreakpoints: MediaQ.NotifyIntervalDecoded<string>; observedBits: number }
-    mediaqGetSheetBreakpointsResult: { usedSheetBreakpoints: MediaQ.MediaQRulesetDecoded[]; observedBits: number }
+    mediaqGetNotifyBreakpointsResult: { usedNotifyBreakpoints: TMediaQ.NotifyIntervalDecoded<string>; observedBits: number }
+    mediaqGetSheetBreakpointsResult: { usedSheetBreakpoints: TMediaQ.MediaQRulesetDecoded[]; observedBits: number }
     codeProps: TCodeProps
 
     MEDIAQ_SHEET = () => {
       const { codeProps, mediaqGetSheetBreakpointsResult: { usedSheetBreakpoints, observedBits } } = this
       // actualize sheet with respect to actual screen size 
-      if (observedBits !== 0) codeProps.classes = MediaQ.mediaqActualizeSheetBreakpoints(codeProps.classes as MediaQ.MediaQSheet, usedSheetBreakpoints) as TBasic.Sheet<R>
+      if (observedBits !== 0) codeProps.classes = mediaqActualizeSheetBreakpoints(codeProps.classes as TMediaQ.MediaQSheet, usedSheetBreakpoints) as TBasic.Sheet<R>
       // returns statefull animation component, which: compute platform specific animation part of the sheet, change its state when animation opens x closes.
       return this.AnimationsComponent_RenderIfNeeded(codeProps.classes.$animations, this.ANIMATION)
     }
@@ -161,7 +161,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
     }
 
     MediaQConsumer_RenderIfNeeded(observedBits: number, child: () => React.ReactNode) {
-      return observedBits === 0 ? child() : <MediaQ.MediaQConsumer unstable_observedBits={observedBits}>{child}</MediaQ.MediaQConsumer>
+      return observedBits === 0 ? child() : <MediaQConsumer unstable_observedBits={observedBits}>{child}</MediaQConsumer>
     }
 
     AnimationsComponent_RenderIfNeeded($animations: TAnimation.SheetsX, child: (animations: TAnimation.Drivers) => React.ReactElement<any>) {
@@ -172,7 +172,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
 
     call_MEDIA_NOTIFY() {
       // get used notify breakpoints from '$mediaq' component props
-      this.mediaqGetNotifyBreakpointsResult = MediaQ.mediaqGetNotifyBreakpoints(this.propsWithCascading, this.themeContext.theme)
+      this.mediaqGetNotifyBreakpointsResult = mediaqGetNotifyBreakpoints(this.propsWithCascading, this.themeContext.theme)
       // observe for screen size changing (if observedBits!=0)
       return this.MediaQConsumer_RenderIfNeeded(this.mediaqGetNotifyBreakpointsResult.observedBits, this.MEDIAQ_NOTIFY)
     }
@@ -190,17 +190,16 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
 
 export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()).join('$')
 
-export const AppContainer: React.SFC<{ theme?: ThemeCreator }> = props => <MediaQ.MediaQ_AppContainer>
-  <ThemeProvider theme={props.theme}>
-    {props.children}
-  </ThemeProvider>
-</MediaQ.MediaQ_AppContainer>
+export const AppContainer: React.SFC<{ theme?: ThemeCreator }> = props => {
+  const theme = <ThemeProvider theme={props.theme}>{props.children}</ThemeProvider>
+  return mediaQProviderExists() ? theme : <MediaQ_AppContainer>{theme}</MediaQ_AppContainer>
+}
 
 /************************
 * PRIVATE
 *************************/
 
-const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions_Component, props: TBasic.PropsX & Types.OnPressAllX, themeContext: ThemeContext, mediaqCode: MediaQ.CodePropsItems) => {
+const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions_Component, props: TBasic.PropsX & Types.OnPressAllX, themeContext: ThemeContext, mediaqCode: TMediaQ.CodePropsItems) => {
 
   const { classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, ...rest } = props
   const { theme, $cache } = (themeContext || {}) as ThemeContext

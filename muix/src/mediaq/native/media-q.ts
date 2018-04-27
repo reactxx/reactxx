@@ -1,11 +1,11 @@
 import { Dimensions } from 'react-native'
 
 import { deepMerge } from 'reactxx-basic'
-import { Breakpoint, RulesetDecoded, refresh, mediaQBreaks } from '../common/media-q'
+import { TMediaQ, refresh, mediaQBreaks } from '../common/media-q'
 
-export const onSubscribe = (b: Breakpoint, inRuleset: boolean) => b.active = b.value >= Dimensions.get('window').width
+export const onSubscribe = (b: TMediaQ.Breakpoint, inRuleset: boolean) => b.active = b.value >= Dimensions.get('window').width
 
-export const modifyRuleset = (ruleset: {}, items: RulesetDecoded[]) => {
+export const modifyRuleset = (ruleset: {}, items: TMediaQ.RulesetDecoded[]) => {
   if (!items) return ruleset
   const res = { ...ruleset }
   items.forEach(it => {
