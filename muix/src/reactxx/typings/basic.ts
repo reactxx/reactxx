@@ -216,7 +216,7 @@ export namespace TAddInConfig {
   *******************************************/
 
   //******************** Cross platform 
-  export interface PropX<R extends TBasic.Shape = TBasic.Shape> extends TMediaQ.PropsX<TBasic.getMediaQ<R>> { 
+  export interface PropX<R extends TBasic.Shape = TBasic.Shape> { 
     style?: TTheme.RulesetCreatorX<R> //cross platform style
     $web?: Partial<TBasic.getPropsWeb<R>> //web specific style
     $native?: Partial<TBasic.getPropsNative<R>> //native specific style
@@ -224,6 +224,7 @@ export namespace TAddInConfig {
     CONSTANT?:boolean,
     classes?: TTheme.PartialSheetCreatorX<R> // cross platform sheet
     className?: TTheme.RulesetCreatorX<R> // cross platform root ruleset
+    $mediaq?: TMediaQ.NotifyIntervalCreator<TBasic.getMediaQ<R>>
   }
 
   //******************** Platform specific

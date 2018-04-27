@@ -178,7 +178,6 @@
     <TypeScriptCompile Include="src\reactxx\common\comps-sheets.ts" />
     <TypeScriptCompile Include="src\reactxx\common\theme.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\to-platform.ts" />
-    <None Include="src\reactxx\common\withStyles.tsx_" />
     <TypeScriptCompile Include="src\reactxx\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\reactxx\typings\basic.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\comps.ts" />
