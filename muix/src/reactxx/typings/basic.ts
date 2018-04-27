@@ -9,7 +9,7 @@ import { Types, TCommonStyles } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
 
 import { TAnimation } from 'reactxx-animation'
-import { TTheme } from './theme'
+import { TTheme } from '../common/theme'
 
 export namespace TBasic {
 

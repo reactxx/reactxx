@@ -9,36 +9,36 @@ import { TMediaQ, mediaqActualizetNotifyBreakpoints, mediaqActualizeSheetBreakpo
 
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
 import { TBasic, TAddInConfig } from '../typings/basic'
-import { TTheme } from '../typings/theme'
+import { TTheme, ThemeProvider, ThemeConsumer } from './theme'
 
 /************************
 * THEME PROVIDER AND CONSUMER
 *************************/
 
-export type ThemeCreator<T extends TTheme.ThemeBase = TTheme.ThemeBase> = T | ((theme: T) => T)
-export type ThemeProviderTyped<T extends TTheme.ThemeBase = TTheme.ThemeBase> = React.ComponentClass<{ theme: ThemeCreator<T> }>
-export interface ThemeContext { theme?: TTheme.ThemeBase; $cache?: {} }
+//export type ThemeCreator<T extends TTheme.ThemeBase = TTheme.ThemeBase> = T | ((theme: T) => T)
+//export type ThemeProviderTyped<T extends TTheme.ThemeBase = TTheme.ThemeBase> = React.ComponentClass<{ theme: ThemeCreator<T> }>
+//export interface ThemeContext { theme?: TTheme.ThemeBase; $cache?: {} }
 
-const themeContext = React.createContext<ThemeContext>({ theme: null, $cache: {} })
+//const themeContext = React.createContext<ThemeContext>({ theme: null, $cache: {} })
 
-export class ThemeProvider extends React.Component<{ theme: ThemeCreator }> {
+//export class ThemeProvider extends React.Component<{ theme: ThemeCreator }> {
 
-  render() {
-    return <themeContext.Consumer>{this.PROVIDER}</themeContext.Consumer>
-  }
+//  render() {
+//    return <themeContext.Consumer>{this.PROVIDER}</themeContext.Consumer>
+//  }
 
-  PROVIDER = (parentContext: ThemeContext) => {
-    const { children, theme } = this.props
-    const actTheme = typeof theme === 'function' ? theme(parentContext && parentContext.theme) : theme
-    if (!this.consumerContext || actTheme !== this.consumerContext.theme)
-      this.consumerContext = { theme: actTheme, $cache: {} }
-    return <themeContext.Provider value={this.consumerContext}>{children}</themeContext.Provider>
-  }
+//  PROVIDER = (parentContext: ThemeContext) => {
+//    const { children, theme } = this.props
+//    const actTheme = typeof theme === 'function' ? theme(parentContext && parentContext.theme) : theme
+//    if (!this.consumerContext || actTheme !== this.consumerContext.theme)
+//      this.consumerContext = { theme: actTheme, $cache: {} }
+//    return <themeContext.Provider value={this.consumerContext}>{children}</themeContext.Provider>
+//  }
 
-  consumerContext: ThemeContext
-}
+//  consumerContext: ThemeContext
+//}
 
-export const ThemeProviderUntyped = ThemeProvider as React.ComponentClass<{ theme: any }>
+//export const ThemeProviderUntyped = ThemeProvider as React.ComponentClass<{ theme: any }>
 
 /************************
 * WITH STYLES
@@ -98,7 +98,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       if (!withOptions.withCascading) this.propsWithCascading = this.props as TPropsWithEvents
       //Skip withTheme?
       if (withOptions.withTheme)
-        return <themeContext.Consumer>{this.THEME}</themeContext.Consumer>
+        return <ThemeConsumer>{this.THEME}</ThemeConsumer>
       else {
         // Skip withCascading?
         if (withOptions.withCascading)
@@ -108,7 +108,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       }
     }
 
-    THEME = (themeContext: ThemeContext) => {
+    THEME = (themeContext: TTheme.ThemeContext) => {
       // set theme from themeContext.Consumer to themeResult
       this.themeContext = themeContext
       // Skip propsModifier?
@@ -117,7 +117,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       else
         return this.call_MEDIA_NOTIFY()
     }
-    themeContext: ThemeContext = {}
+    themeContext: TTheme.ThemeContext = {}
 
     CASCADING = (fromConsumer: TBasic.PropsX<R>) => {
       // set props from ComponentPropsConsumer to propsModifierResult
@@ -190,7 +190,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
 
 export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()).join('$')
 
-export const AppContainer: React.SFC<{ theme?: ThemeCreator }> = props => {
+export const AppContainer: React.SFC<{ theme?: TTheme.ThemeCreator }> = props => {
   const theme = <ThemeProvider theme={props.theme}>{props.children}</ThemeProvider>
   return mediaQProviderExists() ? theme : <MediaQ_AppContainer>{theme}</MediaQ_AppContainer>
 }
@@ -199,10 +199,10 @@ export const AppContainer: React.SFC<{ theme?: ThemeCreator }> = props => {
 * PRIVATE
 *************************/
 
-const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions_Component, props: TBasic.PropsX & Types.OnPressAllX, themeContext: ThemeContext, mediaqCode: TMediaQ.CodePropsItems) => {
+const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions_Component, props: TBasic.PropsX & Types.OnPressAllX, themeContext: TTheme.ThemeContext, mediaqCode: TMediaQ.CodePropsItems) => {
 
   const { classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, ...rest } = props
-  const { theme, $cache } = (themeContext || {}) as ThemeContext
+  const { theme, $cache } = (themeContext || {}) as TTheme.ThemeContext
 
   //** STATIC SHEET
   let staticSheet: TBasic.Sheet

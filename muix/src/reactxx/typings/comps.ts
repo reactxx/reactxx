@@ -3,6 +3,17 @@
 import { TBasic } from './basic'
 import { Types } from 'reactxx-basic'
 
+export const enum CompNames {
+  Text = 'ReactXX$Text',
+  View = 'ReactXX$View',
+  Icon = 'ReactXX$Icon',
+  ScrollView = 'ReactXX$ScrollView',
+  AnimatedView = 'ReactXX$AnimatedView',
+  AnimatedIcon = 'ReactXX$AnimatedIcon',
+  AnimatedText = 'ReactXX$AnimatedText',
+  AnimatedScrollView = 'ReactXX$AnimatedScrollView',
+}
+
 export namespace TComps {
 
   /******************************************

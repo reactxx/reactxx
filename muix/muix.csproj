@@ -152,7 +152,6 @@
     <TypeScriptCompile Include="src\ks\common\components\typo.tsx" />
     <TypeScriptCompile Include="src\ks\common\components\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\components\responsible-drawer\responsible-drawer.tsx" />
-    <TypeScriptCompile Include="src\ks\common\component\ce2 - Copy.tsx" />
     <TypeScriptCompile Include="src\ks\common\component\ce2.tsx" />
     <TypeScriptCompile Include="src\ks\common\component\ce1.tsx" />
     <TypeScriptCompile Include="src\ks\common\component\index.tsx" />
@@ -177,14 +176,13 @@
     <TypeScriptCompile Include="src\mediaq\web\index.ts" />
     <TypeScriptCompile Include="src\mediaq\web\media-q.ts" />
     <TypeScriptCompile Include="src\reactxx\common\comps-sheets.ts" />
+    <TypeScriptCompile Include="src\reactxx\common\theme.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\to-platform.ts" />
     <None Include="src\reactxx\common\withStyles.tsx_" />
     <TypeScriptCompile Include="src\reactxx\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\reactxx\typings\basic.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\comps.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\index.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\media-q.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\theme.ts" />
     <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\web\index.tsx" />

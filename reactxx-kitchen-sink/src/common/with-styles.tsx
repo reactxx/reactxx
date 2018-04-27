@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 import ReactDOM from 'react-dom'
 
 import { TTheme, TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
-import { withStylesCreator, ThemeProvider } from '../../reactxx/common/withStyles'
+import { withStylesCreator } from '../../reactxx/common/withStyles'
 import { TMediaQ } from 'reactxx-mediaq'
 
 /************************

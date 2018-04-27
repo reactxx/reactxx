@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { Types, deepMerge, deepMergesSys } from 'reactxx-basic'
-import { TComps, TTheme, ThemeCreator, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStylesCreator, ThemeProviderUntyped, ThemeProviderTyped } from 'reactxx'
+import { TComps, TTheme, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStylesCreator, ThemeProviderUntyped } from 'reactxx'
 
 import { H2, A, P } from '../components/typo'
 
@@ -30,7 +30,7 @@ type Shape = TBasic.OverwriteShape<{
   theme: Theme,
 }>
 
-const ThemeProvider = ThemeProviderUntyped as ThemeProviderTyped<Theme>
+const ThemeProvider = ThemeProviderUntyped as TTheme.ThemeProviderTyped<Theme>
 
 /************************
 * LABEL
