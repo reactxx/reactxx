@@ -1,46 +1,15 @@
 import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
-import PropTypes from 'prop-types'
 
 import { Types, toPlatformEvents, deepMerge, deepMergesSys } from 'reactxx-basic'
 import { Animations, TAnimation, AnimationsComponent } from 'reactxx-animation'
-//import { TMediaQ, mediaqActualizetNotifyBreakpoints, mediaqActualizeSheetBreakpoints, mediaqGetNotifyBreakpoints, mediaqGetSheetBreakpoints, mediaQProviderExists, MediaQ_AppContainer, MediaQConsumer } from 'reactxx-mediaq'
-
 import { TMediaQ, MediaQComponent, MediaQ_AppContainer, mediaQProviderExists } from 'reactxx-mediaq'
 
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
 import { TBasic, TAddInConfig } from '../typings/basic'
 import { TTheme, ThemeProvider, ThemeConsumer } from './theme'
 
-/************************
-* THEME PROVIDER AND CONSUMER
-*************************/
-
-//export type ThemeCreator<T extends TTheme.ThemeBase = TTheme.ThemeBase> = T | ((theme: T) => T)
-//export type ThemeProviderTyped<T extends TTheme.ThemeBase = TTheme.ThemeBase> = React.ComponentClass<{ theme: ThemeCreator<T> }>
-//export interface ThemeContext { theme?: TTheme.ThemeBase; $cache?: {} }
-
-//const themeContext = React.createContext<ThemeContext>({ theme: null, $cache: {} })
-
-//export class ThemeProvider extends React.Component<{ theme: ThemeCreator }> {
-
-//  render() {
-//    return <themeContext.Consumer>{this.PROVIDER}</themeContext.Consumer>
-//  }
-
-//  PROVIDER = (parentContext: ThemeContext) => {
-//    const { children, theme } = this.props
-//    const actTheme = typeof theme === 'function' ? theme(parentContext && parentContext.theme) : theme
-//    if (!this.consumerContext || actTheme !== this.consumerContext.theme)
-//      this.consumerContext = { theme: actTheme, $cache: {} }
-//    return <themeContext.Provider value={this.consumerContext}>{children}</themeContext.Provider>
-//  }
-
-//  consumerContext: ThemeContext
-//}
-
-//export const ThemeProviderUntyped = ThemeProvider as React.ComponentClass<{ theme: any }>
 
 /************************
 * WITH STYLES
@@ -164,7 +133,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       return !nextProps.CONSTANT
     }
 
-    public static Provider = Provider
+    public static Provider = Provider as React.ComponentClass<TProps>
     public static displayName = name
     public static defaultProps = options && options.defaultProps
   }
