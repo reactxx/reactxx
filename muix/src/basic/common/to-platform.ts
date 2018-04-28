@@ -23,7 +23,7 @@ export const deepMergesSys = (skipSystem: boolean, target, ...sources) => {
 }
 
 export const deepMerges = (target, ...sources) => {
-  return deepMerges(false, target, ...sources)
+  return deepMergesSys(false, target, ...sources)
 }
 
 //create platform specific ruleset from cross platform one

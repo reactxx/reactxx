@@ -17,7 +17,7 @@ const view: TBasic.CodeSFCWeb<TComps.ViewShape> = props => {
 }
 
 const icon: TBasic.CodeSFCWeb<TComps.IconShape> = props => {
-  const { style, classes, data, mergeRulesetWithOverrides, theme, animations, viewBox, children/*this children*/, mediaqFlags, url, onClick, ...rest } = props
+  const { style, classes, mediaqFlags, mergeRulesetWithOverrides, animations, theme, developer_log, children, data, viewBox, url, onClick, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, onClick && classes.pressable)
   //replace fontSize with width x height
   if (rootStyle.fontSize) { rootStyle.height = rootStyle.width = rootStyle.fontSize; delete rootStyle.fontSize }

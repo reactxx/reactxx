@@ -15,7 +15,8 @@ export const onSubscribe = (b: TMediaQ.Breakpoint, inRuleset: boolean) => {
 
 export const modifyRuleset = (ruleset: {}, items: TMediaQ.RulesetDecoded[]) => {
   if (!items) return ruleset
-  const res = {...ruleset}
+  //const res = {...ruleset}
+  const res = { $mediaq: undefined }
   items.forEach(it => res[intervalToSelector(it.from.value, it.to.value)] = it.ruleset)
   return res
 }

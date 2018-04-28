@@ -7,7 +7,8 @@ export const onSubscribe = (b: TMediaQ.Breakpoint, inRuleset: boolean) => b.acti
 
 export const modifyRuleset = (ruleset: {}, items: TMediaQ.RulesetDecoded[]) => {
   if (!items) return ruleset
-  const res = { ...ruleset }
+  //const res = { ...ruleset }
+  const res = { $mediaq: undefined }
   items.forEach(it => {
     if (!it.from.active || it.to.active) return
     deepMerge(res, it.ruleset)

@@ -111,8 +111,8 @@ export namespace TBasic {
   export type SheetWeb<R extends Shape = Shape> = Record<(keyof getCommon<R>) | getWeb<R>, TAddInConfig.RulesetWithAddInWeb<R>> //& TAddInConfig.SheetAddInWeb<R>
   export type SheetNative<R extends Shape = Shape> =
     { [P in keyof getCommon<R>]: TAddInConfig.RulesetWithAddInNative<getCommon<R>[P], R> } &
-    { [P in keyof getNative<R>]: TAddInConfig.RulesetWithAddInNative<getNative<R>[P], R> } 
-    //TAddInConfig.SheetAddInNative<R>
+    { [P in keyof getNative<R>]: TAddInConfig.RulesetWithAddInNative<getNative<R>[P], R> }
+  //TAddInConfig.SheetAddInNative<R>
 
   export type Sheet<R extends Shape = Shape> = SheetWeb<R> | SheetNative<R>
   export type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
@@ -123,7 +123,17 @@ export namespace TBasic {
   *******************************************/
 
   //******************** Cross platform component types
-  export type PropsX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>, TAddInConfig.PropX<R>>>
+  export type PropsX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>,
+    {
+      style?: TTheme.RulesetCreatorX<R> //cross platform style
+      $web?: Partial<TBasic.getPropsWeb<R>> //web specific style
+      $native?: Partial<TBasic.getPropsNative<R>> //native specific style
+      classes?: TTheme.PartialSheetCreatorX<R> // cross platform sheet
+      className?: TTheme.RulesetCreatorX<R> // cross platform root ruleset
+      developer_log?: boolean
+    } &
+    TAddInConfig.PropX<R>
+    >>
 
   export type ComponentTypeX<R extends Shape> = React.ComponentType<PropsX<R>>
   export type SFCX<R extends Shape = Shape> = React.SFC<PropsX<R>>
@@ -134,6 +144,7 @@ export namespace TBasic {
     {
       style: RulesetWeb
       classes: SheetWeb<R>
+      developer_log: boolean
     } &
     TAddInConfig.CodePropsWeb<R> &
     Types.OnPressAllWeb>
@@ -145,6 +156,7 @@ export namespace TBasic {
     {
       style: RulesetNative<getStyle<R>>
       classes: SheetNative<R>
+      developer_log: boolean
     } &
     TAddInConfig.CodePropsNative<R> &
     Types.OnPressAllNative>
@@ -156,6 +168,7 @@ export namespace TBasic {
     {
       style: RulesetWeb | RulesetNative<getStyle<R>>
       classes: Sheet<R>
+      developer_log: boolean
     } &
     TAddInConfig.CodeProps<R> &
     (Types.OnPressAllNative | Types.OnPressAllWeb)>
@@ -216,14 +229,9 @@ export namespace TAddInConfig {
   *******************************************/
 
   //******************** Cross platform 
-  export interface PropX<R extends TBasic.Shape = TBasic.Shape> { 
-    style?: TTheme.RulesetCreatorX<R> //cross platform style
-    $web?: Partial<TBasic.getPropsWeb<R>> //web specific style
-    $native?: Partial<TBasic.getPropsNative<R>> //native specific style
+  export interface PropX<R extends TBasic.Shape = TBasic.Shape> {
     ignore?: boolean
-    CONSTANT?:boolean,
-    classes?: TTheme.PartialSheetCreatorX<R> // cross platform sheet
-    className?: TTheme.RulesetCreatorX<R> // cross platform root ruleset
+    CONSTANT?: boolean,
     $mediaq?: TMediaQ.NotifyIntervalCreator<TBasic.getMediaQ<R>>
   }
 

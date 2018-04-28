@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
 
-import { Types, toPlatformEvents, deepMerge, deepMergesSys } from 'reactxx-basic'
+import { Types, toPlatformEvents, deepMerge, deepMergesSys, deepMerges } from 'reactxx-basic'
 import { TAnimation, AnimationsComponent } from 'reactxx-animation'
 import { TMediaQ, MediaQComponent, MediaQ_AppContainer, mediaQProviderExists } from 'reactxx-mediaq'
 
@@ -10,7 +10,7 @@ import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
 import { TBasic, TAddInConfig } from '../typings/basic'
 import { TTheme, ThemeProvider, ThemeConsumer } from './theme'
 
-
+const DEV_MODE = process.env.NODE_ENV === 'development'
 /************************
 * WITH STYLES
 *************************/
@@ -18,7 +18,7 @@ import { TTheme, ThemeProvider, ThemeConsumer } from './theme'
 export const withStylesCreator = <R extends TBasic.Shape, TStatic extends {} = {}>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, component: TBasic.CodeComponentType<R>, options?: TTheme.WithStyleOptions_Component<R>) =>
   (overrideOptions?: TTheme.WithStyleOptions_Component<R>) => withStyles<R, TStatic>(name, sheetCreator, options, overrideOptions)(component)
 
-export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}> (name: TBasic.getNameType < R >, sheetCreator: TTheme.SheetCreatorX < R >, _options ?: TTheme.WithStyleOptions_Component < R >, overrideOptions ?: TTheme.WithStyleOptions_Component<R>) => (Component: TBasic.CodeComponentType<R>) => {
+export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, _options?: TTheme.WithStyleOptions_Component<R>, overrideOptions?: TTheme.WithStyleOptions_Component<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
   type TPropsX = TBasic.PropsX<R>
 
@@ -43,7 +43,7 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}> (nam
 
     render() {
       if (withOptions.withCascading) return <CascadingConsumer>{this.CASCADING}</CascadingConsumer>
-      warning(process.env.NODE_ENV == 'development', `Component.Provider does not exist (component.name=${name}). Use <ComponentC.Provider ...><ComponentC ...> variant of component or create it (if it does not exist).`) //`
+      warning(DEV_MODE, `Component.Provider does not exist (component.name=${name}). Use <ComponentC.Provider ...><ComponentC ...> variant of component or create it (if it does not exist).`) //`
       return null
     }
 
@@ -58,18 +58,21 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}> (nam
   class Styled extends React.Component<TPropsX> {
 
     render() {
+      if (DEV_MODE && this.props.developer_log)
+        debugger
       //if (name === 'comp$withstyle2')
       //  debugger 
       //Skip withTheme?
       if (withOptions.withTheme)
         return <ThemeConsumer>{this.THEME}</ThemeConsumer>
-      else 
+      else
         return this.callCascading()
     }
 
     themeContext: TTheme.ThemeContext = {}
     propsWithCascading: TBasic.PropsX
     codeProps: TBasic.CodeProps
+    $animations: TAnimation.SheetsX
     mediaSheetPatch: TBasic.Sheet & { $animations?: TAnimation.SheetsX }
 
     THEME = (themeContext: TTheme.ThemeContext) => {
@@ -85,17 +88,29 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}> (nam
       return this.callMediaQComponent()
     }
 
-    BEFORE_ANIMATION = () => {
-      const $animations = this.mediaSheetPatch.$animations
-      return !$animations ? this.AFTER_ANIMATION(null) : <AnimationsComponent $initAnimations={$animations}>{this.AFTER_ANIMATION}</AnimationsComponent>
-    }
+    BEFORE_ANIMATION = () => !this.$animations ? this.AFTER_ANIMATION(null) : <AnimationsComponent $initAnimations={this.$animations}>{this.AFTER_ANIMATION}</AnimationsComponent>
 
     AFTER_ANIMATION = (animations: TAnimation.Drivers) => {
       const { mediaSheetPatch, codeProps } = this
+      let classes = codeProps.classes
+      delete codeProps.classes
+      if (DEV_MODE && codeProps.developer_log) console.log(
+        `### withStyles dump for ${name}\n`,
+        'theme: ', this.themeContext.theme,
+        '\npropsWithCascading: ', this.propsWithCascading,
+        '\ncodeProps: ', this.codeProps,
+        '\nclasses: ', classes,
+        '\nmediaSheetPatch: ', this.mediaSheetPatch,
+        //':\n', this.,
+      )
+      if (mediaSheetPatch) classes = deepMerges({}, classes, mediaSheetPatch)
+
+      const { style, classes, mediaqFlags, mergeRulesetWithOverrides, animations, theme, developer_log, ...rest } = codeProps
+
       // optimalization: when platformSheet.classes is cached, make its copy 
-      const res = { ...mediaSheetPatch}
+      //const res = { ...mediaSheetPatch}
       // remove internal props
-      const classes = clearSystemProps(res)
+      //const classes = clearSystemProps(res)
       // call component code
       return <Component {...codeProps as TBasic.CodeProps<R>} classes={classes as TBasic.Sheet<R>} animations={animations as TAnimation.Drivers<TBasic.getAnimation<R>>} />
     }
@@ -113,13 +128,15 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}> (nam
     callMediaQComponent = () => <MediaQComponent
       theme={this.themeContext.theme}
       $mediaq={this.propsWithCascading.$mediaq} // $mediaq containse e.g. '{ mobile: [null, 480], desktop: [480, null] }'
-      onMediaCode={mediaqFlags => { // mediaNotifyRecord is result of media evaluation, e.g. '{ mobile: true, desktop:false }.
-        // codeSheet can contain rulesets with @media prop (e.g. @media: { '640-1025': { fontSize: 24} })
+      onMediaCode={mediaqFlags => { // mediaqFlags is result of media evaluation, e.g. '{ mobile: true, desktop:false }.
         const { codeProps, sheetPatch } = prepareSheet(name, sheetCreator, options, this.propsWithCascading, this.themeContext, mediaqFlags)
+        this.$animations = sheetPatch.$animations as TAnimation.SheetsX
+        delete sheetPatch.$animations
         this.codeProps = codeProps as TBasic.CodeProps
+        // sheetPatch can contain rulesets with @media prop (e.g. @media: { '640-1025': { fontSize: 24} })
         return sheetPatch as TMediaQ.MediaQSheet
       }}
-      onSheetPatch={sheetPatch => this.mediaSheetPatch = sheetPatch} // ruleset.@media is converted to afterMediaQSheet: for WEB to FELA CSS media query rules, for Native are matching media rules merged to ruleset
+      onSheetPatch={sheetPatch => this.mediaSheetPatch = sheetPatch} // ruleset.@media is converted to mediaSheetPatch: for WEB to FELA CSS mediaquery rules, for Native is returned only matching ruleset
     >{this.BEFORE_ANIMATION}</MediaQComponent>
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -129,9 +146,9 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}> (nam
     public static Provider = Provider
     public static displayName = name
     public static defaultProps = options && options.defaultProps
-  } 
+  }
 
-  const styled: typeof Styled & TStatic = Styled as any
+  const styled: React.ComponentClass<TBasic.PropsX<R>> & { Provider: typeof Provider } & TStatic = Styled as any
   return styled
 
 }
@@ -203,7 +220,7 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
 
   toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, outputProps)
 
-  return { codeProps: outputProps, sheetPatch: actSheet}
+  return { codeProps: outputProps, sheetPatch: actSheet }
 }
 const callCreator = <T extends {}>(theme: TTheme.ThemeBase, variant, creator: T | ((theme: TTheme.ThemeBase, variant) => T)) => typeof creator === 'function' ? creator(theme, variant) : creator
 
@@ -222,11 +239,11 @@ const mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides = (...rulesets
   return res
 }
 
-const clearSystemProps = obj => {
-  if (!obj) return obj
-  const { $overrides, $name, $web, $native, $mediaq, $preserve, $animations, CONSTANT, ...rest } = obj as TBasic.RulesetX & { $preserve, $animations, CONSTANT }
-  return rest
-}
+//const clearSystemProps = obj => {
+//  if (!obj) return obj
+//  const { $overrides, $name, $web, $native, $mediaq, $preserve, $animations, CONSTANT, ...rest } = obj as TBasic.RulesetX & { $preserve, $animations, CONSTANT }
+//  return rest
+//}
 
 const fromOptions = (...bools: boolean[]) => {
   let res = undefined

@@ -103,7 +103,7 @@ export class MediaQComponent extends React.Component<TMediaQ.MediaQComponentProp
   AFTER_SHEET = () => {
     const { sheetBreakpoints: { sheetBreakpoints, observedBits, codeSheet } } = this
     // actualize sheet with respect to actual screen size 
-    const sheetPatch = observedBits !== 0 ? getSheetPatch(codeSheet, sheetBreakpoints) : codeSheet
+    const sheetPatch = getSheetPatch(observedBits===0, codeSheet, sheetBreakpoints)
     this.props.onSheetPatch(sheetPatch)
     // returns statefull animation component, which: compute platform specific animation part of the sheet, change its state when animation opens x closes.
     return this.props.children()
@@ -193,8 +193,8 @@ const getSheetBreakpoints = (sheet: TMediaQ.MediaQSheet) => {
   return { sheetBreakpoints: observedBits === 0 ? null : res, observedBits: observedBits, codeSheet: sheet }
 }
 
-const getSheetPatch = (classesIn: TMediaQ.MediaQSheet, usedSheetBreakpoints: TMediaQ.MediaQRulesetDecoded[]) => {
-  if (!usedSheetBreakpoints) return classesIn
+const getSheetPatch = (ignore: boolean, classesIn: TMediaQ.MediaQSheet, usedSheetBreakpoints: TMediaQ.MediaQRulesetDecoded[]) => {
+  if (ignore || !usedSheetBreakpoints) return null
   const classes: TMediaQ.MediaQSheet = { }
   usedSheetBreakpoints.forEach(used => {
     const ruleset = classes[used.rulesetName];
