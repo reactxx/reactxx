@@ -56,7 +56,7 @@ const labelSheet: TTheme.SheetCreatorX<Shape> = ({ color: { main, dark, constras
   },
 })
 
-const label: TBasic.CodeSFC<Shape> = ({ classes, mergeRulesetWithOverrides, children, style }) => {
+const label: TBasic.CodeSFC<Shape> = ({ system: { classes, mergeRulesetWithOverrides, style }, children}) => {
   const root = mergeRulesetWithOverrides(classes.root) as TBasic.ViewRulesetX
   const label = mergeRulesetWithOverrides(classes.label) as TBasic.TextRulesetX
   return <View className={root} style={style as TBasic.ViewRulesetX}>
@@ -90,7 +90,7 @@ const badgeSheet: TTheme.SheetCreatorX<Shape> = ({ color: { dark, constrastText 
   },
 })
 
-const badge: TBasic.CodeSFC<Shape> = ({ classes, mergeRulesetWithOverrides, children, style }) => {
+const badge: TBasic.CodeSFC<Shape> = ({ system: { classes, mergeRulesetWithOverrides, style }, children }) => {
   const root = mergeRulesetWithOverrides(classes.root) as TBasic.ViewRulesetX
   const label = mergeRulesetWithOverrides(classes.label) as TBasic.TextRulesetX
   return <View className={root} style={style as TBasic.ViewRulesetX}>

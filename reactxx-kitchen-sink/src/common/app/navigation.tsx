@@ -36,7 +36,7 @@ class App extends React.Component<{}, KSink.Example> {
   render() {
     if (this.locationExample.name !== 'app/navigation') return exampleToElement(this.locationExample)
     const content = this.state.name === 'app/navigation' ? (window.isWeb ? <HomeContentWeb /> : <HomeContentNative />) : exampleToElement(this.state)
-    return <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer actName={this.state.name} gotoExample={this.gotoExample} />} developer_log>
+    return <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer actName={this.state.name} gotoExample={this.gotoExample} />} developer_log >
       <Content actExample={this.state}>{content}</Content>
     </ResponsibleDrawer>
   }
@@ -52,7 +52,7 @@ var logo = { flexGrow: 0, marginLeft: 5, color: 'lightblue', paddingRight: 10, m
 const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ children, gotoExample, actName }) => <View className={{ flex: 1 }}>
   <View className={{ ...toolbar, backgroundColor: 'gray' }}>
     <Text className={{ flexGrow: 1 }}>{' '}</Text>
-    <ResponsibleDrawer.LayoutChanged> 
+    <ResponsibleDrawer.LayoutChanged>
       {({ style, onPress, iconData }) => <Icon className={{ ...drawerButton, ...style }} onPress={onPress} data={iconData} />}
     </ResponsibleDrawer.LayoutChanged>
   </View>
@@ -66,7 +66,7 @@ const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ chil
 
 const Content: React.SFC<{ actExample: KSink.Example }> = ({ children, actExample }) => <View className={{ flex: 1 }}> {/* content */}
   <View className={{ ...toolbar, backgroundColor: 'blue' }}>
-    <ResponsibleDrawer.LayoutChanged> 
+    <ResponsibleDrawer.LayoutChanged>
       {({ style, onPress, iconData }) => <Icon className={{ ...drawerButton, ...style }} onPress={onPress} data={iconData} />}
     </ResponsibleDrawer.LayoutChanged>
     <Text className={logo}>ReactXX KitchenSink</Text>

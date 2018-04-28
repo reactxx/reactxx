@@ -119,7 +119,7 @@ const button: TBasic.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
 
 
   //var x = props.mini
-  const { children, classes, color = 'default', variant, mini, mergeRulesetWithOverrides, animations, ...rest } = props
+  const { system: { classes, mergeRulesetWithOverrides, variant }, children, color = 'default', mini, ...rest } = props
   const { disabled } = rest //disabled must be propagated to ButtonBaseLow
 
   const fab = variant == 'fab'
@@ -161,7 +161,7 @@ const button: TBasic.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
   const RippleWithOverrides: React.SFC<MuiButtonBaseT.RippleEfectProps> = props => null
 
 
-  return <RippleWithOverrides viewStyle={rootStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} classes={null} mergeRulesetWithOverrides={null} animations={null} {...rest}>
+  return <RippleWithOverrides viewStyle={rootStyle} rippleStyle={rippleStyle} activeStyle={activeStyle} {...rest}>
     {childs}
   </RippleWithOverrides>
 }

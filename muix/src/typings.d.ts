@@ -48,7 +48,7 @@ declare module 'url-parse' {
 
 //https://github.com/Microsoft/TypeScript/issues/12215#issuecomment-307871458
 type Diff<T, U> = T extends U ? never : T
-type Omit<T, K extends keyof T> = { [P in Diff<keyof T, K>]: T[P] }
+type Omit<T, K> = { [P in Diff<keyof T, K>]: T[P] }
 type OmitPartial<T, K extends keyof T> = { [P in Diff<keyof T, K>]?: T[P] }
 type Overwrite<T, U> = {[P in Diff<keyof T, keyof U>]: T[P]} & U
 type PartialOverwrite<T, U> = {[P in Diff<keyof T, keyof U>]?: T[P]} & Partial<U>
@@ -59,6 +59,8 @@ type DeepPartial<T> = {
   : T[P] extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : DeepPartial<T[P]>
 };
 
+
+type XX = Diff<'a' | 'b', 'b' | 'd'>
 
 //https://schneidenbach.gitbooks.io/typescript-cookbook/get-the-return-type-of-a-function.html
 //nameOf, return type of function, 

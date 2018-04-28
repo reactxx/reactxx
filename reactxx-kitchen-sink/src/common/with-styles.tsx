@@ -44,7 +44,7 @@ const sheet: TTheme.SheetCreatorX<Shape> = (theme, variant) => ({
 /************************
 * CODE
 *************************/
-const label: TBasic.CodeSFC<Shape> = ({ classes, mergeRulesetWithOverrides, children, style }) => {
+const label: TBasic.CodeSFC<Shape> = ({ system: { classes, mergeRulesetWithOverrides, style }, children }) => {
   const root = mergeRulesetWithOverrides(classes.root) as TBasic.ViewRulesetX
   return <Text className={root}>{children}</Text>
 }

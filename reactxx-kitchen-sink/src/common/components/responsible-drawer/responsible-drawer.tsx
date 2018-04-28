@@ -138,7 +138,9 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =
 }
 
 // responsibleDrawer stateless component. 
-const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, mergeRulesetWithOverrides, children, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, drawer: drawerNode }) => {
+const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = props => {
+
+  const { system: { classes, mergeRulesetWithOverrides, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }}, drawer: drawerNode, children } = props
 
   const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()
@@ -251,7 +253,7 @@ const Content: React.SFC = () => <ScrollView CONSTANT classes={{ container: { fl
     {window.isWeb ? 'Change browser window width' : 'Rotate your device'} to see different Drawer's behavior for MOBILE, TABLET and DESKTOP
     </Text>
   {/* just for fun: change to lightgray color for 800px-1248px media width */}
-  <Text className={{ padding: 10, $mediaq: { '800-1248': { color: 'lightgray' } } }} developer_log>{LoremIpsum(80)}</Text>
+  <Text className={{ padding: 10, $mediaq: { '800-1248': { color: 'lightgray' } } }} >{LoremIpsum(80)}</Text>
 </ScrollView>
 
 export default App

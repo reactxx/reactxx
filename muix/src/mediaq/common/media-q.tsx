@@ -195,13 +195,13 @@ const getSheetBreakpoints = (sheet: TMediaQ.MediaQSheet) => {
 
 const getSheetPatch = (ignore: boolean, classesIn: TMediaQ.MediaQSheet, usedSheetBreakpoints: TMediaQ.MediaQRulesetDecoded[]) => {
   if (ignore || !usedSheetBreakpoints) return null
-  const classes: TMediaQ.MediaQSheet = { }
+  const classesOut: TMediaQ.MediaQSheet = { }
   usedSheetBreakpoints.forEach(used => {
-    const ruleset = classes[used.rulesetName];
+    const ruleset = classesIn[used.rulesetName];
     warning(ruleset, `Missing ruleset ${used.rulesetName}`); //`
-    classes[used.rulesetName] = modifyRuleset(ruleset, used.items)
+    classesOut[used.rulesetName] = modifyRuleset(ruleset, used.items)
   })
-  return classes
+  return classesOut
 }
 
 const checkAppContainer = () => warning(mediaQBreaks, 'reactxx-mediaq: missing MediaQ_AppContainer component in your application root')

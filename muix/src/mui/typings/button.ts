@@ -20,6 +20,7 @@ export namespace MuiButtonT {
     props: ButtonProps & Types.OnPressAllX
     propsNative: ReactN.TouchableOpacityProperties
     nameType: CompNames.Button | CompNames.ButtonIconLeft | CompNames.ButtonIconRight
+    variant: string
     theme: TTheme.ThemeBase & Muix.Theme
   }>
 

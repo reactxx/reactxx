@@ -55,7 +55,7 @@ const sheet: TBasic.SheetX<Shape> = {
 /************************
 * CODE
 *************************/
-const label: TBasic.CodeSFC<Shape> = ({ classes, mergeRulesetWithOverrides, children, iconData, style }) => {
+const label: TBasic.CodeSFC<Shape> = ({ system: { classes, style, mergeRulesetWithOverrides }, children, iconData }) => {
   const root = mergeRulesetWithOverrides(classes.root) as TBasic.ViewRulesetX
   const hasChildren = React.Children.count(children) > 0
   const icon = iconData && mergeRulesetWithOverrides(classes.label, classes.icon, hasChildren && classes.iconGap) as TBasic.TextRulesetX

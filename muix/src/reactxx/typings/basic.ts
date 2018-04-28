@@ -138,40 +138,46 @@ export namespace TBasic {
   export type ComponentTypeX<R extends Shape> = React.ComponentType<PropsX<R>>
   export type SFCX<R extends Shape = Shape> = React.SFC<PropsX<R>>
 
+
   //******************** Platform specific sheets
+  type omitPropNames = 'system' | 'style' | 'classes' | 'className' | keyof TAddInConfig.CodePropsWeb
+
   // *** web
-  export type CodePropsWeb<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsWeb<R>,
+  export type CodePropsWeb<R extends Shape = Shape> = Omit<getProps<R> & getPropsWeb<R>, omitPropNames> & Types.OnPressAllWeb & {
+    system:
     {
       style: RulesetWeb
       classes: SheetWeb<R>
       developer_log: boolean
     } &
-    TAddInConfig.CodePropsWeb<R> &
-    Types.OnPressAllWeb>
+    TAddInConfig.CodePropsWeb<R> 
+  }
 
   export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
   // *** native
-  export type CodePropsNative<R extends Shape = Shape> = Overwrite<getProps<R> & getPropsNative<R>,
+  export type CodePropsNative<R extends Shape = Shape> = Omit<getProps<R> & getPropsNative<R>, omitPropNames> & Types.OnPressAllNative & {
+    system:
     {
       style: RulesetNative<getStyle<R>>
       classes: SheetNative<R>
       developer_log: boolean
     } &
-    TAddInConfig.CodePropsNative<R> &
-    Types.OnPressAllNative>
+    TAddInConfig.CodePropsNative<R> 
+  }
 
   export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
 
   // *** web or native
-  export type CodeProps<R extends Shape = Shape> = Overwrite<getProps<R> & (getPropsNative<R> | getPropsWeb<R>),
+  export type CodeProps<R extends Shape = Shape> = Omit<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), omitPropNames> & (Types.OnPressAllNative | Types.OnPressAllWeb) & {
+    system:
     {
       style: RulesetWeb | RulesetNative<getStyle<R>>
       classes: Sheet<R>
       developer_log: boolean
     } &
-    TAddInConfig.CodeProps<R> &
-    (Types.OnPressAllNative | Types.OnPressAllWeb)>
+    TAddInConfig.CodeProps<R>
+  }
 
   export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>

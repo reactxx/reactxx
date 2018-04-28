@@ -42,7 +42,7 @@ export class RippleEffect extends React.Component<MuiButtonBaseT.RippleEfectProp
   onPressedOut = () => this.setState({ active: false })
 
   render() {
-    const { scaleValue, opacityValue, onPressedIn, onPressedOut, rect: { width, height }, state: { active }, props: { children, viewStyle, rippleStyle, activeStyle, disabled, onPress, theme, disableRipple, style } } = this
+    const { scaleValue, opacityValue, onPressedIn, onPressedOut, rect: { width, height }, state: { active }, props: { system: { theme, style }, onPress, children, viewStyle, rippleStyle, activeStyle, disabled, disableRipple } } = this
 
     const renderRipple = () => {
 
@@ -99,10 +99,10 @@ export class RippleEffect extends React.Component<MuiButtonBaseT.RippleEfectProp
 }
 
 const buttonBase: TBasic.CodeSFCNative<MuiButtonBaseT.Shape> = props => {
-  const { style, classes, mergeRulesetWithOverrides, animations, ...rest } = props
+  const { system: { style, classes, mergeRulesetWithOverrides, animations }, ...rest } = props
   const viewStyle = mergeRulesetWithOverrides(classes.root) as ReactN.ViewStyle
   const rippleStyle = mergeRulesetWithOverrides(classes.ripple) as ReactN.ViewStyle
-  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} classes={null} mergeRulesetWithOverrides={null} animations={null} {...rest} style={null}/>
+  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} {...rest}/>
 }
 
 const ButtonBase = withStyles<MuiButtonBaseT.Shape>(MuiButtonBaseT.CompNames.ButtonBase, sheet)(buttonBase)

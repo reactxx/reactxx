@@ -60,8 +60,6 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
     render() {
       if (DEV_MODE && this.props.developer_log)
         debugger
-      //if (name === 'comp$withstyle2')
-      //  debugger 
       //Skip withTheme?
       if (withOptions.withTheme)
         return <ThemeConsumer>{this.THEME}</ThemeConsumer>
@@ -92,9 +90,8 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
 
     AFTER_ANIMATION = (animations: TAnimation.Drivers) => {
       const { mediaSheetPatch, codeProps } = this
-      let classes = codeProps.classes
-      delete codeProps.classes
-      if (DEV_MODE && codeProps.developer_log) console.log(
+      let classes = codeProps.system.classes
+      if (DEV_MODE && codeProps.system.developer_log) console.log(  
         `### withStyles dump for ${name}\n`,
         'theme: ', this.themeContext.theme,
         '\npropsWithCascading: ', this.propsWithCascading,
@@ -105,14 +102,14 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
       )
       if (mediaSheetPatch) classes = deepMerges({}, classes, mediaSheetPatch)
 
-      const { style, classes, mediaqFlags, mergeRulesetWithOverrides, animations, theme, developer_log, ...rest } = codeProps
+      //const { style, classes, mediaqFlags, mergeRulesetWithOverrides, animations, theme, developer_log, ...rest } = codeProps
 
       // optimalization: when platformSheet.classes is cached, make its copy 
       //const res = { ...mediaSheetPatch}
       // remove internal props
       //const classes = clearSystemProps(res)
       // call component code
-      return <Component {...codeProps as TBasic.CodeProps<R>} classes={classes as TBasic.Sheet<R>} animations={animations as TAnimation.Drivers<TBasic.getAnimation<R>>} />
+      return <Component {...codeProps as TBasic.CodeProps<R>} system={{ ...codeProps.system, classes: classes as TBasic.Sheet<R>, animations: animations as TAnimation.Drivers<TBasic.getAnimation<R>> }} />
     }
 
     callCascading = () => {
@@ -166,7 +163,7 @@ export const AppContainer: React.SFC<{ theme?: TTheme.ThemeCreator }> = props =>
 
 const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions_Component, props: TBasic.PropsX, themeContext: TTheme.ThemeContext, mediaqFlags: TMediaQ.MediaFlags) => {
 
-  const { classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, ...rest } = props as TBasic.PropsX & Types.OnPressAllX
+  const { classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, developer_log, CONSTANT, ...rest } = props as TBasic.PropsX & Types.OnPressAllX
   const { theme, $cache } = (themeContext || {}) as TTheme.ThemeContext
 
   //** STATIC SHEET
@@ -211,11 +208,14 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
   //** RETURN platform dependent props for pure component code
   const outputProps = {
     ...rest,
-    classes: actSheet,
-    style: toPlatformRuleSet(callCreator(theme, variant, style)),
-    variant,
-    mergeRulesetWithOverrides,
-    mediaqFlags,
+    system: {
+      classes: actSheet,
+      style: toPlatformRuleSet(callCreator(theme, variant, style)),
+      variant,
+      mergeRulesetWithOverrides,
+      mediaqFlags,
+      developer_log,
+    }
   } as TBasic.CodeProps
 
   toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, outputProps)
