@@ -67,7 +67,7 @@ const { Provider, Consumer } = React.createContext<TResponsibleDrawer.IconRender
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
 const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) => {
 
-  const { animationDuration, drawerWidths, mediaqCode: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } } = variant
+  const { animationDuration, drawerWidths, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } } = variant
 
   return {
 
@@ -138,7 +138,7 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =
 }
 
 // responsibleDrawer stateless component. 
-const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, mergeRulesetWithOverrides, children, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqCode: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, drawer: drawerNode }) => {
+const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, mergeRulesetWithOverrides, children, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, drawer: drawerNode }) => {
 
   const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()
@@ -192,8 +192,8 @@ const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, 
 
 // return HOC ResponsibleDrawer component and its creator
 export const ResponsibleDrawerCreator = withStylesCreator<TResponsibleDrawer.Shape, { LayoutChanged: typeof Consumer }>(TResponsibleDrawer.Consts.Drawer, sheet, responsibleDrawer, {
-  getVariant: ({ animationDuration, mediaqCode, drawerWidths }) => ({ animationDuration, mediaqCode, drawerWidths }),
-  variantToString: ({ animationDuration, mediaqCode, drawerWidths }) => variantToString(animationDuration, mediaqCode.mobile, mediaqCode.tablet, mediaqCode.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
+  getVariant: ({ animationDuration, mediaqFlags, drawerWidths }) => ({ animationDuration, mediaqFlags, drawerWidths }),
+  variantToString: ({ animationDuration, mediaqFlags, drawerWidths }) => variantToString(animationDuration, mediaqFlags.mobile, mediaqFlags.tablet, mediaqFlags.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
   defaultProps: {
     animationDuration: 300,
     drawerWidths: [250, 250, 300],

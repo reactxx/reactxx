@@ -11,7 +11,7 @@ import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comp
 
 const anyView = (isAnim: boolean) => (props => {
   const ActView = isAnim ? Animated.View : ViewRN
-  const { style, classes, mergeRulesetWithOverrides, theme, onPress, onLongPress, onPressIn, onPressOut, animations, mediaqCode, ...rest } = props
+  const { style, classes, mergeRulesetWithOverrides, theme, onPress, onLongPress, onPressIn, onPressOut, animations, mediaqFlags, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, style) as ReactN.ViewStyle
   const presses = onPress || onLongPress || onPressIn || onPressOut ? { onPress, onLongPress, onPressIn, onPressOut } : null
   const res = <ActView style={rootStyle} {...rest} />
@@ -21,7 +21,7 @@ const anyView = (isAnim: boolean) => (props => {
 
 const anyText = (isAnim: boolean) => (props => {
   const ActText = isAnim ? Animated.Text : TextRN
-  const { style, classes, mergeRulesetWithOverrides, theme, animations, mediaqCode, url, onPress, ...rest } = props
+  const { style, classes, mergeRulesetWithOverrides, theme, animations, mediaqFlags, url, onPress, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, props.numberOfLines === 1 && classes.singleLineStyle, style) as ReactN.TextStyle
   //Link to URL
   const doPress = !url ? onPress : () => Linking.canOpenURL(url).then(supported => {
@@ -35,7 +35,7 @@ const anyText = (isAnim: boolean) => (props => {
 
 const anyScrollView = (isAnim: boolean) => (props => {
   const ActScrollView = isAnim ? Animated.ScrollView : ScrollViewRN
-  const { style, classes, mergeRulesetWithOverrides, theme, animations, mediaqCode, ...rest } = props
+  const { style, classes, mergeRulesetWithOverrides, theme, animations, mediaqFlags, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, style) as ReactN.ScrollViewStyle
   const containerStyle = mergeRulesetWithOverrides(classes.container) as ReactN.ViewStyle
   return <ActScrollView style={rootStyle} contentContainerStyle={containerStyle} {...rest} />
@@ -44,7 +44,7 @@ const anyScrollView = (isAnim: boolean) => (props => {
 const AnimatedIconLow = Animated.createAnimatedComponent(MaterialCommunityIcons)
 const anyIcon = (isAnim: boolean) => (props => {
   const ActIcon = isAnim ? AnimatedIconLow : MaterialCommunityIcons
-  const { style, classes, mergeRulesetWithOverrides, theme, animations, data, children, mediaqCode, ...rest } = props
+  const { style, classes, mergeRulesetWithOverrides, theme, animations, data, children, mediaqFlags, ...rest } = props
   const rootStyle = mergeRulesetWithOverrides(classes.root, style) as ReactN.TextStyle
   return <ActIcon name={(data || children as string) as MaterialCommunityIconsProps['name']} style={rootStyle} {...rest} />
 }) as TBasic.CodeSFCNative<TComps.IconShape>

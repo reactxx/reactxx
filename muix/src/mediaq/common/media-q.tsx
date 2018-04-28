@@ -62,7 +62,7 @@ export namespace TMediaQ {
 
   export type NotifyIntervalDecoded<TState extends string = string> = { [P in TState]: [Breakpoint, Breakpoint] }
 
-  export interface CodeProps<TState extends string = string> { mediaqCode?: MediaFlags<TState> }
+  export interface CodeProps<TState extends string = string> { mediaqFlags?: MediaFlags<TState> }
   export type MediaFlags<TState extends string = string> = { [P in TState]: boolean }
 
   export interface MediaQComponentProps {
@@ -90,9 +90,9 @@ export class MediaQComponent extends React.Component<TMediaQ.MediaQComponentProp
   AFTER_NOTIFY = () => {
     const { notifyBreakpoints, observedBits: ob } = this.getNotifyBreakpointsResult
     // actualize media record with respect to actual screen size 
-    const mediaqCode = ob === 0 ? null : getMediaCode(notifyBreakpoints)
+    const mediaqFlags = ob === 0 ? null : getMediaCode(notifyBreakpoints)
     // prepare platform dependent sheet
-    const sheet = this.props.onMediaCode(mediaqCode)
+    const sheet = this.props.onMediaCode(mediaqFlags)
     // get media breakpoints, used in sheet
     this.sheetBreakpoints = getSheetBreakpoints(sheet)
     // observe for screen size changing

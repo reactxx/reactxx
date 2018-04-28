@@ -113,9 +113,9 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}> (nam
     callMediaQComponent = () => <MediaQComponent
       theme={this.themeContext.theme}
       $mediaq={this.propsWithCascading.$mediaq} // $mediaq containse e.g. '{ mobile: [null, 480], desktop: [480, null] }'
-      onMediaCode={mediaqCode => { // mediaNotifyRecord is result of media evaluation, e.g. '{ mobile: true, desktop:false }.
+      onMediaCode={mediaqFlags => { // mediaNotifyRecord is result of media evaluation, e.g. '{ mobile: true, desktop:false }.
         // codeSheet can contain rulesets with @media prop (e.g. @media: { '640-1025': { fontSize: 24} })
-        const { codeProps, sheetPatch } = prepareSheet(name, sheetCreator, options, this.propsWithCascading, this.themeContext, mediaqCode)
+        const { codeProps, sheetPatch } = prepareSheet(name, sheetCreator, options, this.propsWithCascading, this.themeContext, mediaqFlags)
         this.codeProps = codeProps as TBasic.CodeProps
         return sheetPatch as TMediaQ.MediaQSheet
       }}
@@ -147,7 +147,7 @@ export const AppContainer: React.SFC<{ theme?: TTheme.ThemeCreator }> = props =>
 * PRIVATE
 *************************/
 
-const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions_Component, props: TBasic.PropsX, themeContext: TTheme.ThemeContext, mediaqCode: TMediaQ.MediaFlags) => {
+const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions_Component, props: TBasic.PropsX, themeContext: TTheme.ThemeContext, mediaqFlags: TMediaQ.MediaFlags) => {
 
   const { classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, ...rest } = props as TBasic.PropsX & Types.OnPressAllX
   const { theme, $cache } = (themeContext || {}) as TTheme.ThemeContext
@@ -162,7 +162,7 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
     getStaticSheet = () => toPlatformSheet(createSheetX)
   } else {
     if (options && options.getVariant) {
-      const propsWithMediaQ = mediaqCode ? { ...props, mediaqCode } : props
+      const propsWithMediaQ = mediaqFlags ? { ...props, mediaqFlags } : props
       variant = options.getVariant(propsWithMediaQ, theme)
       variantCacheId = options.variantToString && options.variantToString(variant)
       if (variantCacheId) {
@@ -198,7 +198,7 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
     style: toPlatformRuleSet(callCreator(theme, variant, style)),
     variant,
     mergeRulesetWithOverrides,
-    mediaqCode,
+    mediaqFlags,
   } as TBasic.CodeProps
 
   toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, outputProps)
