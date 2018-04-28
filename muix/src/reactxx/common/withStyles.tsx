@@ -70,6 +70,7 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}> (nam
     themeContext: TTheme.ThemeContext = {}
     propsWithCascading: TBasic.PropsX
     codeProps: TBasic.CodeProps
+    mediaSheetPatch: TBasic.Sheet & { $animations?: TAnimation.SheetsX }
 
     THEME = (themeContext: TTheme.ThemeContext) => {
       // set theme from themeContext.Consumer to themeResult
@@ -85,14 +86,14 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}> (nam
     }
 
     BEFORE_ANIMATION = () => {
-      const $animations = this.afterMediaQSheet.$animations
+      const $animations = this.mediaSheetPatch.$animations
       return !$animations ? this.AFTER_ANIMATION(null) : <AnimationsComponent $initAnimations={$animations}>{this.AFTER_ANIMATION}</AnimationsComponent>
     }
 
     AFTER_ANIMATION = (animations: TAnimation.Drivers) => {
-      const { afterMediaQSheet, codeProps } = this
+      const { mediaSheetPatch, codeProps } = this
       // optimalization: when platformSheet.classes is cached, make its copy 
-      const res = { ...afterMediaQSheet}
+      const res = { ...mediaSheetPatch}
       // remove internal props
       const classes = clearSystemProps(res)
       // call component code
@@ -111,17 +112,15 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}> (nam
 
     callMediaQComponent = () => <MediaQComponent
       theme={this.themeContext.theme}
-      notifyIntervals={this.propsWithCascading.$mediaq} // $mediaq containse e.g. '{ mobile: [null, 480], desktop: [480, null] }'
-      onNotifyRecord={mediaNotifyRecord => { // mediaNotifyRecord is result of media evaluation, e.g. '{ mobile: true, desktop:false }.
+      $mediaq={this.propsWithCascading.$mediaq} // $mediaq containse e.g. '{ mobile: [null, 480], desktop: [480, null] }'
+      onMediaCode={mediaqCode => { // mediaNotifyRecord is result of media evaluation, e.g. '{ mobile: true, desktop:false }.
         // codeSheet can contain rulesets with @media prop (e.g. @media: { '640-1025': { fontSize: 24} })
-        const { codeProps, codeSheet } = prepareSheet(name, sheetCreator, options, this.propsWithCascading, this.themeContext, mediaNotifyRecord)
+        const { codeProps, sheetPatch } = prepareSheet(name, sheetCreator, options, this.propsWithCascading, this.themeContext, mediaqCode)
         this.codeProps = codeProps as TBasic.CodeProps
-        return codeSheet as TMediaQ.MediaQSheet
+        return sheetPatch as TMediaQ.MediaQSheet
       }}
-      onAfterSheet={afterMediaQSheet => this.afterMediaQSheet = afterMediaQSheet} // ruleset.@media is converted to afterMediaQSheet: for WEB to FELA CSS media query rules, for Native are matching media rules merged to ruleset
+      onSheetPatch={sheetPatch => this.mediaSheetPatch = sheetPatch} // ruleset.@media is converted to afterMediaQSheet: for WEB to FELA CSS media query rules, for Native are matching media rules merged to ruleset
     >{this.BEFORE_ANIMATION}</MediaQComponent>
-
-    afterMediaQSheet: TBasic.Sheet & { $animations?: TAnimation.SheetsX }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
       return !nextProps.CONSTANT
@@ -148,7 +147,7 @@ export const AppContainer: React.SFC<{ theme?: TTheme.ThemeCreator }> = props =>
 * PRIVATE
 *************************/
 
-const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions_Component, props: TBasic.PropsX, themeContext: TTheme.ThemeContext, mediaqCode: TMediaQ.MediaRecord) => {
+const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions_Component, props: TBasic.PropsX, themeContext: TTheme.ThemeContext, mediaqCode: TMediaQ.MediaFlags) => {
 
   const { classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, ...rest } = props as TBasic.PropsX & Types.OnPressAllX
   const { theme, $cache } = (themeContext || {}) as TTheme.ThemeContext
@@ -204,7 +203,7 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
 
   toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, outputProps)
 
-  return { codeProps: outputProps, codeSheet: actSheet}
+  return { codeProps: outputProps, sheetPatch: actSheet}
 }
 const callCreator = <T extends {}>(theme: TTheme.ThemeBase, variant, creator: T | ((theme: TTheme.ThemeBase, variant) => T)) => typeof creator === 'function' ? creator(theme, variant) : creator
 

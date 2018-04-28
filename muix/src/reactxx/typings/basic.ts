@@ -228,24 +228,28 @@ export namespace TAddInConfig {
   }
 
   //******************** Platform specific
-  export interface CodePropsWeb<R extends TBasic.Shape = TBasic.Shape> extends TMediaQ.CodeProps<TBasic.getMediaQ<R>> {
+  export interface CodePropsWeb<R extends TBasic.Shape = TBasic.Shape> {
     theme: TBasic.getTheme<R>
     variant: TBasic.getVariant<R>
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesWeb
     animations: TAnimation.DriversWeb<TBasic.getAnimation<R>>
+    mediaqCode: TMediaQ.MediaFlags<TBasic.getMediaQ<R>>
   }
 
-  export interface CodePropsNative<R extends TBasic.Shape = TBasic.Shape> extends TMediaQ.CodeProps<TBasic.getMediaQ<R>> {
+  export interface CodePropsNative<R extends TBasic.Shape = TBasic.Shape> {
     theme: TBasic.getTheme<R>
     variant: TBasic.getVariant<R>
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesNative
     animations: TAnimation.DriversNative<TBasic.getAnimation<R>>
+    mediaqCode: TMediaQ.MediaFlags<TBasic.getMediaQ<R>>
   }
-  export interface CodeProps<R extends TBasic.Shape = TBasic.Shape> extends TMediaQ.CodeProps<TBasic.getMediaQ<R>> {
+
+  export interface CodeProps<R extends TBasic.Shape = TBasic.Shape> {
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides
     theme: TBasic.getTheme<R>
     variant: TBasic.getVariant<R>
     animations: TAnimation.Drivers<TBasic.getAnimation<R>>
+    mediaqCode: TMediaQ.MediaFlags<TBasic.getMediaQ<R>>
   }
 
 }

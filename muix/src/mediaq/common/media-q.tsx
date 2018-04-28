@@ -62,15 +62,15 @@ export namespace TMediaQ {
 
   export type NotifyIntervalDecoded<TState extends string = string> = { [P in TState]: [Breakpoint, Breakpoint] }
 
-  export interface CodeProps<TState extends string = string> { mediaqCode?: MediaRecord<TState> }
-  export type MediaRecord<TState extends string = string> = { [P in TState]: boolean }
+  export interface CodeProps<TState extends string = string> { mediaqCode?: MediaFlags<TState> }
+  export type MediaFlags<TState extends string = string> = { [P in TState]: boolean }
 
   export interface MediaQComponentProps {
     children: () => React.ReactNode
-    notifyIntervals: NotifyIntervalCreator
+    $mediaq: NotifyIntervalCreator
     theme?
-    onNotifyRecord: (mediaNotifyRecord: TMediaQ.MediaRecord) => MediaQSheet
-    onAfterSheet?: (sheet: MediaQSheet) => void
+    onMediaCode: (mediaNotifyRecord: TMediaQ.MediaFlags) => MediaQSheet
+    onSheetPatch?: (sheet: MediaQSheet) => void
   }
 
 }
@@ -81,30 +81,30 @@ export namespace TMediaQ {
 
 export class MediaQComponent extends React.Component<TMediaQ.MediaQComponentProps> {
   render() {
-    const { notifyIntervals, theme } = this.props
-    this.mediaqGetNotifyBreakpointsResult = mediaqGetNotifyBreakpoints(notifyIntervals, theme)
-    return this.MediaQConsumer_RenderIfNeeded(this.mediaqGetNotifyBreakpointsResult.observedBits, this.AFTER_NOTIFY)
+    const { $mediaq, theme } = this.props
+    this.getNotifyBreakpointsResult = getNotifyBreakpoints($mediaq, theme)
+    return this.MediaQConsumer_RenderIfNeeded(this.getNotifyBreakpointsResult.observedBits, this.AFTER_NOTIFY)
   }
-  mediaqGetNotifyBreakpointsResult: { usedNotifyBreakpoints: TMediaQ.NotifyIntervalDecoded, observedBits: number }
+  getNotifyBreakpointsResult: { notifyBreakpoints?: TMediaQ.NotifyIntervalDecoded, observedBits: number }
 
   AFTER_NOTIFY = () => {
-    const { usedNotifyBreakpoints, observedBits: ob } = this.mediaqGetNotifyBreakpointsResult
+    const { notifyBreakpoints, observedBits: ob } = this.getNotifyBreakpointsResult
     // actualize media record with respect to actual screen size 
-    const mediaNotifyRecord = ob === 0 ? null : mediaqActualizetNotifyBreakpoints(usedNotifyBreakpoints)
+    const mediaqCode = ob === 0 ? null : getMediaCode(notifyBreakpoints)
     // prepare platform dependent sheet
-    const sheet = this.props.onNotifyRecord(mediaNotifyRecord)
+    const sheet = this.props.onMediaCode(mediaqCode)
     // get media breakpoints, used in sheet
-    this.mediaqGetSheetBreakpointsResult = mediaqGetSheetBreakpoints(sheet)
+    this.sheetBreakpoints = getSheetBreakpoints(sheet)
     // observe for screen size changing
-    return this.MediaQConsumer_RenderIfNeeded(this.mediaqGetSheetBreakpointsResult.observedBits, this.AFTER_SHEET)
+    return this.MediaQConsumer_RenderIfNeeded(this.sheetBreakpoints.observedBits, this.AFTER_SHEET)
   }
-  mediaqGetSheetBreakpointsResult: { usedSheetBreakpoints: TMediaQ.MediaQRulesetDecoded[], observedBits: number, codeSheet: TMediaQ.MediaQSheet }
+  sheetBreakpoints: { sheetBreakpoints: TMediaQ.MediaQRulesetDecoded[], observedBits: number, codeSheet: TMediaQ.MediaQSheet }
 
   AFTER_SHEET = () => {
-    const { mediaqGetSheetBreakpointsResult: { usedSheetBreakpoints, observedBits, codeSheet } } = this
+    const { sheetBreakpoints: { sheetBreakpoints, observedBits, codeSheet } } = this
     // actualize sheet with respect to actual screen size 
-    const afterMediaQSheet = observedBits !== 0 ? mediaqActualizeSheetBreakpoints(codeSheet, usedSheetBreakpoints) : codeSheet
-    this.props.onAfterSheet(afterMediaQSheet)
+    const sheetPatch = observedBits !== 0 ? getSheetPatch(codeSheet, sheetBreakpoints) : codeSheet
+    this.props.onSheetPatch(sheetPatch)
     // returns statefull animation component, which: compute platform specific animation part of the sheet, change its state when animation opens x closes.
     return this.props.children()
   }
@@ -141,7 +141,7 @@ export const refresh = () => {
 * PRIVATE
 *************************/
 
-const mediaqGetNotifyBreakpoints = <T extends string>($mediaq: TMediaQ.NotifyIntervalCreator, theme) => {
+const getNotifyBreakpoints = <T extends string>($mediaq: TMediaQ.NotifyIntervalCreator, theme) => {
   if (!$mediaq) return { usedNotifyBreakpoints: null as TMediaQ.NotifyIntervalDecoded<T>, observedBits: 0 }
   const mediaq = typeof $mediaq === 'function' ? $mediaq(theme) : $mediaq
   const newMedia = {} as TMediaQ.NotifyIntervalDecoded<T>
@@ -154,12 +154,12 @@ const mediaqGetNotifyBreakpoints = <T extends string>($mediaq: TMediaQ.NotifyInt
       return breakpoint
     }) as [TMediaQ.Breakpoint, TMediaQ.Breakpoint]
 
-  return { usedNotifyBreakpoints: newMedia, observedBits: observedBits }
+  return { notifyBreakpoints: newMedia, observedBits: observedBits }
 }
 
-const mediaqActualizetNotifyBreakpoints = <T extends string>(sheet: TMediaQ.NotifyIntervalDecoded<T>) => {
-  if (!sheet) return null as TMediaQ.MediaRecord<T>
-  const res = {} as TMediaQ.MediaRecord<T>
+const getMediaCode = <T extends string>(sheet: TMediaQ.NotifyIntervalDecoded<T>) => {
+  if (!sheet) return null as TMediaQ.MediaFlags<T>
+  const res = {} as TMediaQ.MediaFlags<T>
   for (const p in sheet) {
     const sheetp = sheet[p]
     res[p] = sheetp[0].active && !sheetp[1].active
@@ -167,7 +167,7 @@ const mediaqActualizetNotifyBreakpoints = <T extends string>(sheet: TMediaQ.Noti
   return res
 }
 
-const mediaqGetSheetBreakpoints = (sheet: TMediaQ.MediaQSheet) => {
+const getSheetBreakpoints = (sheet: TMediaQ.MediaQSheet) => {
   let observedBits = 0
   const res: TMediaQ.MediaQRulesetDecoded[] = []
   for (const p in sheet) {
@@ -190,12 +190,12 @@ const mediaqGetSheetBreakpoints = (sheet: TMediaQ.MediaQSheet) => {
       rsCode.items.push(rsCodeItem)
     }
   }
-  return { usedSheetBreakpoints: observedBits === 0 ? null : res, observedBits: observedBits, codeSheet: sheet }
+  return { sheetBreakpoints: observedBits === 0 ? null : res, observedBits: observedBits, codeSheet: sheet }
 }
 
-const mediaqActualizeSheetBreakpoints = (classesIn: TMediaQ.MediaQSheet, usedSheetBreakpoints: TMediaQ.MediaQRulesetDecoded[]) => {
+const getSheetPatch = (classesIn: TMediaQ.MediaQSheet, usedSheetBreakpoints: TMediaQ.MediaQRulesetDecoded[]) => {
   if (!usedSheetBreakpoints) return classesIn
-  const classes: TMediaQ.MediaQSheet = { ...classesIn }
+  const classes: TMediaQ.MediaQSheet = { }
   usedSheetBreakpoints.forEach(used => {
     const ruleset = classes[used.rulesetName];
     warning(ruleset, `Missing ruleset ${used.rulesetName}`); //`
