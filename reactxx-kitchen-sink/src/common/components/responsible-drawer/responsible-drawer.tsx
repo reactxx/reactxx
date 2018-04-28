@@ -63,9 +63,6 @@ export namespace TResponsibleDrawer {
 // Provider and Consumer for syncing visibility of <Open x Close buttons> with <drawer open x close state>
 const { Provider, Consumer } = React.createContext<TResponsibleDrawer.IconRenderProps>({} as any)
 
-//type ConsumerType = StateConsumerType<TResponsibleDrawer.RenderProps, TResponsibleDrawer.RenderProps>
-type AnimationType = React.ComponentType<TBasic.PropsX<TResponsibleDrawer.Shape>> & { LayoutChanged?: typeof Consumer }
-
 // ResponsibleDrawer's sheet. 
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
 const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) => {
@@ -81,8 +78,7 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =
           transform: [
             { translateX: [-drawerWidths[0], 0] }
           ],
-        },
-        backDrop: { //animation ruleset for backDrop element
+        },backDrop: { //animation ruleset for backDrop element
           opacity: [0, 0.4], // change backDrop opacity
           transform: [ // appear backDrop during first 0.5% of whole animation time
             { translateX: [-5000, 0] },
@@ -195,7 +191,7 @@ const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = ({ classes, 
 //let count = 0
 
 // return HOC ResponsibleDrawer component and its creator
-export const ResponsibleDrawerCreator = withStylesCreator<TResponsibleDrawer.Shape>(TResponsibleDrawer.Consts.Drawer, sheet, responsibleDrawer, {
+export const ResponsibleDrawerCreator = withStylesCreator<TResponsibleDrawer.Shape, { LayoutChanged: typeof Consumer }>(TResponsibleDrawer.Consts.Drawer, sheet, responsibleDrawer, {
   getVariant: ({ animationDuration, mediaqCode, drawerWidths }) => ({ animationDuration, mediaqCode, drawerWidths }),
   variantToString: ({ animationDuration, mediaqCode, drawerWidths }) => variantToString(animationDuration, mediaqCode.mobile, mediaqCode.tablet, mediaqCode.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
   defaultProps: {
@@ -210,10 +206,10 @@ export const ResponsibleDrawerCreator = withStylesCreator<TResponsibleDrawer.Sha
   withTheme: false
 })
 
-export const ResponsibleDrawer = ResponsibleDrawerCreator(null) as AnimationType
+export const ResponsibleDrawer = ResponsibleDrawerCreator(null)
 ResponsibleDrawer.LayoutChanged = Consumer
 
-export const ResponsibleDrawerC = ResponsibleDrawerCreator({ withCascading: true }) as AnimationType
+export const ResponsibleDrawerC = ResponsibleDrawerCreator({ withCascading: true })
 ResponsibleDrawerC.LayoutChanged = Consumer
 
 //************************************************************************************************************

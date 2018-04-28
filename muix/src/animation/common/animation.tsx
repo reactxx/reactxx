@@ -46,27 +46,27 @@ export class AnimationsComponent extends React.Component<AnimProps, AnimState> {
 
 }
 
-export class Animations<T extends TAnimation.Shapes = TAnimation.Shapes> implements TAnimation.Drivers<T> {
+//export class Animations<T extends TAnimation.Shapes = TAnimation.Shapes> implements TAnimation.Drivers<T> {
 
-  constructor(public statefullComponent: React.Component, sheetsDef: TAnimation.SheetsX<T>) {
-    if (!sheetsDef) return
-    const sheets: any = {}
-    for (const p in sheetsDef) {
-      if (p.startsWith('$')) continue
-      sheets[p] = new AnimationDriver(sheetsDef[p], this)
-    }
-    this.sheets = sheets
-  }
-  sheets: { [P in keyof T]: TAnimation.Driver<T[P]> }
+//  constructor(public statefullComponent: React.Component, sheetsDef: TAnimation.SheetsX<T>) {
+//    if (!sheetsDef) return
+//    const sheets: any = {}
+//    for (const p in sheetsDef) {
+//      if (p.startsWith('$')) continue
+//      sheets[p] = new AnimationDriver(sheetsDef[p], this)
+//    }
+//    this.sheets = sheets
+//  }
+//  sheets: { [P in keyof T]: TAnimation.Driver<T[P]> }
 
-  reset(justRunning?: TAnimation.Driver<{}>) {
-    for (const p in this.sheets) {
-      const driver = this.sheets[p]
-      if (!driver.reset || driver === justRunning) continue
-      driver.reset()
-    }
-  }
-}
+//  reset(justRunning?: TAnimation.Driver<{}>) {
+//    for (const p in this.sheets) {
+//      const driver = this.sheets[p]
+//      if (!driver.reset || driver === justRunning) continue
+//      driver.reset()
+//    }
+//  }
+//}
 
 //export const getAnimations = <T extends TAnimation.Shapes>(sheets: TAnimation.SheetsX<T>, statefullComponent: React.Component) => {
 //  if (!sheets) return null

@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 import warning from 'warning'
 
 import { Types, toPlatformEvents, deepMerge, deepMergesSys } from 'reactxx-basic'
-import { Animations, TAnimation, AnimationsComponent } from 'reactxx-animation'
+import { TAnimation, AnimationsComponent } from 'reactxx-animation'
 import { TMediaQ, MediaQComponent, MediaQ_AppContainer, mediaQProviderExists } from 'reactxx-mediaq'
 
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
@@ -15,22 +15,15 @@ import { TTheme, ThemeProvider, ThemeConsumer } from './theme'
 * WITH STYLES
 *************************/
 
-export const withStylesCreator = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, component: TBasic.CodeComponentType<R>, options?: TTheme.WithStyleOptions_Component<R>) =>
-  (overrideOptions?: TTheme.WithStyleOptions_Component<R>) => withStyles(name, sheetCreator, options, overrideOptions)(component)
+export const withStylesCreator = <R extends TBasic.Shape, TStatic extends {} = {}>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, component: TBasic.CodeComponentType<R>, options?: TTheme.WithStyleOptions_Component<R>) =>
+  (overrideOptions?: TTheme.WithStyleOptions_Component<R>) => withStyles<R, TStatic>(name, sheetCreator, options, overrideOptions)(component)
 
-export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, _options?: TTheme.WithStyleOptions_Component<R>, overrideOptions?: TTheme.WithStyleOptions_Component<R>) => (Component: TBasic.CodeComponentType<R>) => {
+export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}> (name: TBasic.getNameType < R >, sheetCreator: TTheme.SheetCreatorX < R >, _options ?: TTheme.WithStyleOptions_Component < R >, overrideOptions ?: TTheme.WithStyleOptions_Component<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
-  type Theme = TBasic.getTheme<R>
-  type TProps = TBasic.PropsX<R>
-  type TPropsWithEvents = TProps & Types.OnPressAllX
-  type TCodeProps = TBasic.CodeProps<R> //Partial<Overwrite<TBasic.CodeProps<R>, { classes?: TBasic.Sheet<R> & { $animations?: TAnimation.SheetsX; $preserve?: boolean } }>>
-
-  type TAnimationShape = TBasic.getAnimation<R>
-  type T$Animations = TAnimation.SheetsX<TAnimationShape>
-  type TAnimations = TAnimation.Drivers<TAnimationShape>
+  type TPropsX = TBasic.PropsX<R>
 
   //**** OPTIONS
-  const options: TTheme.WithStyleOptions_Component<R> = _options && overrideOptions ? deepMerge(_options, overrideOptions) : (overrideOptions ? overrideOptions : _options)
+  const options: TTheme.WithStyleOptions_Component = _options && overrideOptions ? deepMerge(_options, overrideOptions) : (overrideOptions ? overrideOptions : _options)
 
   // compute withStyles HOC options from: global 'withStyleOptions' and component specific 'options'
   // 1. component creator sets options.withTheme=true IF sheetCreator uses some theme info
@@ -43,9 +36,10 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
   if (withOptions.withTheme === undefined) withOptions.withTheme = typeof sheetCreator === 'function'
 
   //**** PROPERTY CASCADING CONTEXT
-  const { Provider: CascadingProvider, Consumer: CascadingConsumer } = withOptions.withCascading ? React.createContext<TPropsWithEvents>(null) : {} as React.Context<TPropsWithEvents>
 
-  class Provider extends React.Component<TProps> {
+  const { Provider: CascadingProvider, Consumer: CascadingConsumer } = withOptions.withCascading ? React.createContext<TPropsX>(null) : { Provider: null, Consumer: null } as React.Context<TPropsX>
+
+  class Provider extends React.Component<TPropsX> {
 
     render() {
       if (withOptions.withCascading) return <CascadingConsumer>{this.CASCADING}</CascadingConsumer>
@@ -53,15 +47,15 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       return null
     }
 
-    CASCADING = (parentsProps: TPropsWithEvents) => {
+    CASCADING = (parentsProps: TPropsX) => {
       const { children, ...rest } = this.props as TBasic.PropsX & { children?: React.ReactNode }
-      return <CascadingProvider value={(parentsProps && rest ? deepMerge(parentsProps, rest) : rest) as TPropsWithEvents}>{children}</CascadingProvider>
+      return <CascadingProvider value={(parentsProps && rest ? deepMerge(parentsProps, rest) : rest) as TPropsX}>{children}</CascadingProvider>
     }
 
   }
 
   //**** INNER COMPONENT
-  return class Styled extends React.Component<TBasic.PropsX<R>> {
+  class Styled extends React.Component<TPropsX> {
 
     render() {
       //if (name === 'comp$withstyle2')
@@ -74,8 +68,8 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
     }
 
     themeContext: TTheme.ThemeContext = {}
-    propsWithCascading: TPropsWithEvents
-    codeProps: TCodeProps
+    propsWithCascading: TBasic.PropsX
+    codeProps: TBasic.CodeProps
 
     THEME = (themeContext: TTheme.ThemeContext) => {
       // set theme from themeContext.Consumer to themeResult
@@ -83,10 +77,10 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       return this.callCascading()
     }
 
-    AFTER_CASCADING = (fromConsumer: TBasic.PropsX<R>) => {
+    AFTER_CASCADING = (fromConsumer: TBasic.PropsX) => {
       // set props from ComponentPropsConsumer to propsModifierResult
       const { props } = this
-      this.propsWithCascading = (withOptions.withCascading ? (fromConsumer ? deepMergesSys(false, {}, fromConsumer, props) : fromConsumer) : props) as TPropsWithEvents
+      this.propsWithCascading = (withOptions.withCascading ? (fromConsumer ? deepMergesSys(false, {}, fromConsumer, props) : fromConsumer) : props) as TBasic.PropsX
       return this.callMediaQComponent()
     }
 
@@ -95,14 +89,14 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       return !$animations ? this.AFTER_ANIMATION(null) : <AnimationsComponent $initAnimations={$animations}>{this.AFTER_ANIMATION}</AnimationsComponent>
     }
 
-    AFTER_ANIMATION = (animations: TAnimation.Drivers<TBasic.getAnimation<R>>) => {
+    AFTER_ANIMATION = (animations: TAnimation.Drivers) => {
       const { afterMediaQSheet, codeProps } = this
       // optimalization: when platformSheet.classes is cached, make its copy 
       const res = { ...afterMediaQSheet}
       // remove internal props
       const classes = clearSystemProps(res)
       // call component code
-      return <Component {...codeProps} classes={classes} animations={animations} />
+      return <Component {...codeProps as TBasic.CodeProps<R>} classes={classes as TBasic.Sheet<R>} animations={animations as TAnimation.Drivers<TBasic.getAnimation<R>>} />
     }
 
     callCascading = () => {
@@ -110,7 +104,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       if (withOptions.withCascading)
         return <CascadingConsumer>{this.AFTER_CASCADING}</CascadingConsumer>
       else {
-        this.propsWithCascading = this.props as TPropsWithEvents
+        this.propsWithCascading = this.props
         return this.callMediaQComponent()
       }
     }
@@ -121,7 +115,7 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       onNotifyRecord={mediaNotifyRecord => { // mediaNotifyRecord is result of media evaluation, e.g. '{ mobile: true, desktop:false }.
         // codeSheet can contain rulesets with @media prop (e.g. @media: { '640-1025': { fontSize: 24} })
         const { codeProps, codeSheet } = prepareSheet(name, sheetCreator, options, this.propsWithCascading, this.themeContext, mediaNotifyRecord)
-        this.codeProps = codeProps as TBasic.CodeProps<R>
+        this.codeProps = codeProps as TBasic.CodeProps
         return codeSheet as TMediaQ.MediaQSheet
       }}
       onAfterSheet={afterMediaQSheet => this.afterMediaQSheet = afterMediaQSheet} // ruleset.@media is converted to afterMediaQSheet: for WEB to FELA CSS media query rules, for Native are matching media rules merged to ruleset
@@ -133,10 +127,13 @@ export const withStyles = <R extends TBasic.Shape>(name: TBasic.getNameType<R>, 
       return !nextProps.CONSTANT
     }
 
-    public static Provider = Provider as React.ComponentClass<TProps>
+    public static Provider = Provider
     public static displayName = name
     public static defaultProps = options && options.defaultProps
-  }
+  } 
+
+  const styled: typeof Styled & TStatic = Styled as any
+  return styled
 
 }
 
@@ -151,9 +148,9 @@ export const AppContainer: React.SFC<{ theme?: TTheme.ThemeCreator }> = props =>
 * PRIVATE
 *************************/
 
-const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions_Component, props: TBasic.PropsX & Types.OnPressAllX, themeContext: TTheme.ThemeContext, mediaqCode: TMediaQ.MediaRecord) => {
+const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions_Component, props: TBasic.PropsX, themeContext: TTheme.ThemeContext, mediaqCode: TMediaQ.MediaRecord) => {
 
-  const { classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, ...rest } = props
+  const { classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, ...rest } = props as TBasic.PropsX & Types.OnPressAllX
   const { theme, $cache } = (themeContext || {}) as TTheme.ThemeContext
 
   //** STATIC SHEET

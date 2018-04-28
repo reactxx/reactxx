@@ -4,7 +4,7 @@ import warning from 'warning'
 import { keyFrameToClassNames } from 'reactxx-fela'
 import { Types } from 'reactxx-basic'
 
-import { DriverLow, getGaps, Animations } from '../common/animation'
+import { DriverLow, getGaps } from '../common/animation'
 import { TAnimation } from '../typings/animation' 
 
 export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements TAnimation.DriverWeb<T>  {
