@@ -1,0 +1,3 @@
+﻿# for what is 
+withTheme: true - sheetCreator is not function and in className, classes or style props I want to use theme
+withTheme: false - sheetCreator is function and is not using theme

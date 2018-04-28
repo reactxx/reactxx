@@ -57,9 +57,15 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
   //**** INNER COMPONENT
   class Styled extends React.Component<TPropsX> {
 
+    themeContext: TTheme.ThemeContext = {}
+    propsWithCascading: TBasic.PropsX
+    codeProps: TBasic.CodeProps
+    $animations: TAnimation.SheetsX
+    mediaSheetPatch: TBasic.Sheet & { $animations?: TAnimation.SheetsX }
+
     render() {
-      if (DEV_MODE && this.props.developer_log)
-        debugger
+      //if (DEV_MODE && this.props.developer_log)
+      //  debugger
       //Skip withTheme?
       if (withOptions.withTheme)
         return <ThemeConsumer>{this.THEME}</ThemeConsumer>
@@ -67,23 +73,17 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
         return this.callCascading()
     }
 
-    themeContext: TTheme.ThemeContext = {}
-    propsWithCascading: TBasic.PropsX
-    codeProps: TBasic.CodeProps
-    $animations: TAnimation.SheetsX
-    mediaSheetPatch: TBasic.Sheet & { $animations?: TAnimation.SheetsX }
-
     THEME = (themeContext: TTheme.ThemeContext) => {
       // set theme from themeContext.Consumer to themeResult
       this.themeContext = themeContext
-      return this.callCascading()
+      return this.callCascading() //calling AFTER_CASCADING inside
     }
 
     AFTER_CASCADING = (fromConsumer: TBasic.PropsX) => {
       // set props from ComponentPropsConsumer to propsModifierResult
       const { props } = this
       this.propsWithCascading = (withOptions.withCascading ? (fromConsumer ? deepMergesSys(false, {}, fromConsumer, props) : fromConsumer) : props) as TBasic.PropsX
-      return this.callMediaQComponent()
+      return this.callMediaQComponent() // calling BEFORE_ANIMATION inside
     }
 
     BEFORE_ANIMATION = () => !this.$animations ? this.AFTER_ANIMATION(null) : <AnimationsComponent $initAnimations={this.$animations}>{this.AFTER_ANIMATION}</AnimationsComponent>
@@ -91,23 +91,20 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
     AFTER_ANIMATION = (animations: TAnimation.Drivers) => {
       const { mediaSheetPatch, codeProps } = this
       let classes = codeProps.system.classes
+
       if (DEV_MODE && codeProps.system.developer_log) console.log(  
-        `### withStyles dump for ${name}\n`,
-        'theme: ', this.themeContext.theme,
+        `### withStyles AFTER_ANIMATION for ${name}`,
+        '\ntheme: ', this.themeContext.theme,
         '\npropsWithCascading: ', this.propsWithCascading,
         '\ncodeProps: ', this.codeProps,
         '\nclasses: ', classes,
         '\nmediaSheetPatch: ', this.mediaSheetPatch,
         //':\n', this.,
       )
+
+      // apply patches
       if (mediaSheetPatch) classes = deepMerges({}, classes, mediaSheetPatch)
 
-      //const { style, classes, mediaqFlags, mergeRulesetWithOverrides, animations, theme, developer_log, ...rest } = codeProps
-
-      // optimalization: when platformSheet.classes is cached, make its copy 
-      //const res = { ...mediaSheetPatch}
-      // remove internal props
-      //const classes = clearSystemProps(res)
       // call component code
       return <Component {...codeProps as TBasic.CodeProps<R>} system={{ ...codeProps.system, classes: classes as TBasic.Sheet<R>, animations: animations as TAnimation.Drivers<TBasic.getAnimation<R>> }} />
     }
