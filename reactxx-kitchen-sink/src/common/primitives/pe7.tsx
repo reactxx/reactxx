@@ -14,7 +14,7 @@ const App: React.SFC = props => {
     },
     fontSize: 20,
   }
-  return <Text className={changeColorRuleset} developer_log>{LoremIpsum(40)}</Text>
+  return <Text className={changeColorRuleset}>{LoremIpsum(40)}</Text>
 }
 
 export default App

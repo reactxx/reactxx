@@ -65,14 +65,6 @@ export namespace TMediaQ {
   export interface CodeProps<TState extends string = string> { mediaqFlags?: MediaFlags<TState> }
   export type MediaFlags<TState extends string = string> = { [P in TState]: boolean }
 
-  //export interface MediaQComponentProps {
-  //  children: () => React.ReactNode
-  //  $mediaq: NotifyIntervalCreator
-  //  theme?
-  //  onMediaCode: (mediaNotifyRecord: TMediaQ.MediaFlags) => MediaQSheet
-  //  onSheetPatch?: (sheet: MediaQSheet) => void
-  //}
-
 }
 
 /************************

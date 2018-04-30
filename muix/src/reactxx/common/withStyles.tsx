@@ -124,67 +124,6 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
         )
       )
 
-
-    //AFTER_THEME = (newThemeContext: TTheme.ThemeContext) => {
-    //  // set theme from themeContext.Consumer to themeResult
-    //  this.themeContext = newThemeContext
-    //  return this.callCascading() //calling AFTER_CASCADING inside
-    //}
-
-    //AFTER_CASCADING = (newProps: TBasic.PropsX) => {
-    //  // set props from ComponentPropsConsumer to propsModifierResult
-    //  const { props } = this
-    //  this.propsWithCascading = (withOptions.withCascading ? (newProps ? deepMergesSys(false, {}, newProps, props) : newProps) : props) as TBasic.PropsX
-    //  return this.callMediaQComponent() // calling BEFORE_ANIMATION inside
-    //}
-
-    //BEFORE_ANIMATION = () => !this.$animations ? this.AFTER_ANIMATION(null) : <AnimationsComponent $initAnimations={this.$animations}>{this.AFTER_ANIMATION}</AnimationsComponent>
-
-    //AFTER_ANIMATION = (animations: TAnimation.Drivers) => {
-    //  const { mediaSheetPatch, codeProps } = this
-    //  let classes = codeProps.system.classes
-
-    //  if (DEV_MODE && codeProps.system.developer_log) console.log(
-    //    `### withStyles AFTER_ANIMATION for ${name}`,
-    //    '\ntheme: ', this.themeContext.theme,
-    //    '\npropsWithCascading: ', this.propsWithCascading,
-    //    '\ncodeProps: ', this.codeProps,
-    //    '\nclasses: ', classes,
-    //    '\nmediaSheetPatch: ', this.mediaSheetPatch,
-    //    //':\n', this.,
-    //  )
-
-    //  // apply patches
-    //  if (mediaSheetPatch) classes = deepMerges({}, classes, mediaSheetPatch)
-
-    //  // call component code
-    //  return <Component {...codeProps as TBasic.CodeProps<R>} system={{ ...codeProps.system, classes: classes as TBasic.Sheet<R>, animations: animations as TAnimation.Drivers<TBasic.getAnimation<R>> }} />
-    //}
-
-    //callCascading = () => {
-    //  // Skip withCascading?
-    //  if (withOptions.withCascading)
-    //    return <CascadingConsumer>{this.AFTER_CASCADING}</CascadingConsumer>
-    //  else {
-    //    this.propsWithCascading = this.props
-    //    return this.callMediaQComponent()
-    //  }
-    //}
-
-    //callMediaQComponent = () => <MediaQComponent
-    //  theme={this.themeContext.theme}
-    //  $mediaq={this.propsWithCascading.$mediaq} // $mediaq containse e.g. '{ mobile: [null, 480], desktop: [480, null] }'
-    //  onMediaCode={mediaqFlags => { // mediaqFlags is result of media evaluation, e.g. '{ mobile: true, desktop:false }.
-    //    const { codeProps, sheetPatch } = prepareSheet(name, sheetCreator, options, this.propsWithCascading, this.themeContext, mediaqFlags)
-    //    this.$animations = sheetPatch.$animations as TAnimation.SheetsX
-    //    delete sheetPatch.$animations
-    //    this.codeProps = codeProps as TBasic.CodeProps
-    //    // sheetPatch can contain rulesets with @media prop (e.g. @media: { '640-1025': { fontSize: 24} })
-    //    return sheetPatch as TMediaQ.MediaQSheet
-    //  }}
-    //  onSheetPatch={sheetPatch => this.mediaSheetPatch = sheetPatch} // ruleset.@media is converted to mediaSheetPatch: for WEB to FELA CSS mediaquery rules, for Native is returned only matching ruleset
-    //>{this.BEFORE_ANIMATION}</MediaQComponent>
-
     shouldComponentUpdate(nextProps, nextState, nextContext) {
       return !nextProps.CONSTANT
     }
@@ -251,7 +190,6 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
   //** MERGE staticSheet with classes and className
   const root = className && { root: toPlatformRuleSet(callCreator(theme, variant, className)) }
   const actSheet: TBasic.Sheet = classes || root ? deepMergesSys(false, {}, staticSheet, toPlatformSheet(callCreator(theme, variant, classes)), root) : staticSheet
-  //for (const p in actSheet) if (!p.startsWith('$')) actSheet[p].$name = p // assign name to ruleSets. $name is used in mergeRulesetWithOverrides to recognize used rulesets
 
 
   //** RETURN platform dependent props for pure component code
@@ -287,12 +225,6 @@ const mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides = (...rulesets
   })
   return res
 }
-
-//const clearSystemProps = obj => {
-//  if (!obj) return obj
-//  const { $overrides, $name, $web, $native, $mediaq, $preserve, $animations, CONSTANT, ...rest } = obj as TBasic.RulesetX & { $preserve, $animations, CONSTANT }
-//  return rest
-//}
 
 const fromOptions = (...bools: boolean[]) => {
   let res = undefined
