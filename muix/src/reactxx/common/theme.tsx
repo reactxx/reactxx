@@ -32,6 +32,19 @@ export namespace TTheme {
 
 const themeContext = React.createContext<TTheme.ThemeContext>({ theme: null, $cache: {} })
 
+export const theme = (input: () => boolean, output: (outputPar: TTheme.ThemeContext) => void, next: () => React.ReactNode) => {
+  const render = (renderPar: TTheme.ThemeContext) => {
+    output(renderPar)
+    return next()
+  }
+  const res = () => {
+    if (input()) return <ThemeConsumer>{render}</ThemeConsumer>
+    output(null)
+    return next()
+  }
+  return res
+}
+
 export class ThemeProvider extends React.Component<{ theme: TTheme.ThemeCreator }> {
 
   render() {

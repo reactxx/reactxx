@@ -87,7 +87,7 @@
     <Content Include="deploy\animation\README.md" />
     <Content Include="deploy\mediaq\package.json" />
     <Content Include="deploy\mediaq\README.md" />
-    <Content Include="text - Copy.txt" />
+    <Content Include="src\ks\common\component\text.txt" />
     <Content Include="text.txt" />
     <Content Include="index.html" />
     <Content Include="package.json" />

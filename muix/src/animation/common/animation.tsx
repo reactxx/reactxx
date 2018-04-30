@@ -5,16 +5,30 @@ import warning from 'warning'
 import { AnimationDriver } from 'reactxx-animation' //NATIVE or WEB animation driver 
 import { TAnimation } from '../typings/animation'
 
-export interface AnimState {
+export const animations = (input: () => TAnimation.SheetsX, output: (outputPar: TAnimation.Drivers) => void, next: () => React.ReactNode) => {
+  const render = (animations: TAnimation.Drivers) => {
+    output(animations)
+    return next()
+  }
+  const res = () => {
+    const $animations = input()
+    if ($animations) return <AnimationsComponent $initAnimations={$animations}>{render}</AnimationsComponent>
+    output(null)
+    return next()
+  }
+  return res
+}
+
+interface AnimState {
   sheets?: { [name: string]: TAnimation.Driver }
   self: AnimationsComponent
 }
-export interface AnimProps {
+interface AnimProps {
   $initAnimations: TAnimation.SheetsX
   children: (animations: TAnimation.Drivers) => React.ReactNode
 }
 
-export class AnimationsComponent extends React.Component<AnimProps, AnimState> {
+class AnimationsComponent extends React.Component<AnimProps, AnimState> {
 
   state: AnimState = { self: this }
 

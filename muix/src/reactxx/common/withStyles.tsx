@@ -3,12 +3,12 @@ import ReactN from 'react-native'
 import warning from 'warning'
 
 import { Types, toPlatformEvents, deepMerge, deepMergesSys, deepMerges } from 'reactxx-basic'
-import { TAnimation, AnimationsComponent } from 'reactxx-animation'
-import { TMediaQ, MediaQComponent, MediaQ_AppContainer, mediaQProviderExists } from 'reactxx-mediaq'
+import { animations, TAnimation } from 'reactxx-animation'
+import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet } from 'reactxx-mediaq'
 
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
 import { TBasic, TAddInConfig } from '../typings/basic'
-import { TTheme, ThemeProvider, ThemeConsumer } from './theme'
+import { theme, TTheme, ThemeProvider, ThemeConsumer } from './theme'
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 /************************
@@ -35,7 +35,7 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
   }
   if (withOptions.withTheme === undefined) withOptions.withTheme = typeof sheetCreator === 'function'
 
-  //**** PROPERTY CASCADING CONTEXT
+  //**** PROPERTY CASCADING 
 
   const { Provider: CascadingProvider, Consumer: CascadingConsumer } = withOptions.withCascading ? React.createContext<TPropsX>(null) : { Provider: null, Consumer: null } as React.Context<TPropsX>
 
@@ -54,6 +54,21 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
 
   }
 
+  const cascading = (input: () => TBasic.PropsX, output: (outputPar: TBasic.PropsX) => void, next: () => React.ReactNode) => {
+    let inputPar: TBasic.PropsX
+    const render = (renderPar: TBasic.PropsX) => {
+      output(renderPar ? deepMerges({}, renderPar, inputPar) : inputPar)
+      return next()
+    }
+    const res = () => {
+      inputPar = input()
+      if (withOptions.withCascading) return <CascadingConsumer>{render}</CascadingConsumer>
+      output(null)
+      return next()
+    }
+    return res
+  }
+
   //**** INNER COMPONENT
   class Styled extends React.Component<TPropsX> {
 
@@ -62,37 +77,26 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
     codeProps: TBasic.CodeProps
     $animations: TAnimation.SheetsX
     mediaSheetPatch: TBasic.Sheet & { $animations?: TAnimation.SheetsX }
+    animations: TAnimation.Drivers
 
     render() {
-      //if (DEV_MODE && this.props.developer_log)
-      //  debugger
-      //Skip withTheme?
-      if (withOptions.withTheme)
-        return <ThemeConsumer>{this.THEME}</ThemeConsumer>
-      else
-        return this.callCascading()
+      if (DEV_MODE && this.props.developer_log)
+        debugger
+      return this.renderer()
     }
 
-    THEME = (themeContext: TTheme.ThemeContext) => {
-      // set theme from themeContext.Consumer to themeResult
-      this.themeContext = themeContext
-      return this.callCascading() //calling AFTER_CASCADING inside
+    processMediaQFlagsResult = (mediaQFlags: TMediaQ.MediaFlags) => {
+      const { codeProps, sheetPatch } = prepareSheet(name, sheetCreator, options, this.propsWithCascading, this.themeContext, mediaQFlags)
+      this.$animations = sheetPatch.$animations as TAnimation.SheetsX
+      delete sheetPatch.$animations
+      this.codeProps = codeProps as TBasic.CodeProps
     }
 
-    AFTER_CASCADING = (fromConsumer: TBasic.PropsX) => {
-      // set props from ComponentPropsConsumer to propsModifierResult
-      const { props } = this
-      this.propsWithCascading = (withOptions.withCascading ? (fromConsumer ? deepMergesSys(false, {}, fromConsumer, props) : fromConsumer) : props) as TBasic.PropsX
-      return this.callMediaQComponent() // calling BEFORE_ANIMATION inside
-    }
-
-    BEFORE_ANIMATION = () => !this.$animations ? this.AFTER_ANIMATION(null) : <AnimationsComponent $initAnimations={this.$animations}>{this.AFTER_ANIMATION}</AnimationsComponent>
-
-    AFTER_ANIMATION = (animations: TAnimation.Drivers) => {
-      const { mediaSheetPatch, codeProps } = this
+    renderCode = () => {
+      const { mediaSheetPatch, codeProps, animations } = this
       let classes = codeProps.system.classes
 
-      if (DEV_MODE && codeProps.system.developer_log) console.log(  
+      if (DEV_MODE && codeProps.system.developer_log) console.log(
         `### withStyles AFTER_ANIMATION for ${name}`,
         '\ntheme: ', this.themeContext.theme,
         '\npropsWithCascading: ', this.propsWithCascading,
@@ -109,29 +113,77 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
       return <Component {...codeProps as TBasic.CodeProps<R>} system={{ ...codeProps.system, classes: classes as TBasic.Sheet<R>, animations: animations as TAnimation.Drivers<TBasic.getAnimation<R>> }} />
     }
 
-    callCascading = () => {
-      // Skip withCascading?
-      if (withOptions.withCascading)
-        return <CascadingConsumer>{this.AFTER_CASCADING}</CascadingConsumer>
-      else {
-        this.propsWithCascading = this.props
-        return this.callMediaQComponent()
-      }
-    }
+    renderer =
+      theme(() => withOptions.withTheme, themeContext => this.themeContext = themeContext || {},
+        cascading(() => this.props, propsWithCascading => this.propsWithCascading = propsWithCascading || this.props,
+          mediaQFlags(() => ({ $mediaq: this.propsWithCascading.$mediaq, theme: this.themeContext.theme }), this.processMediaQFlagsResult,
+            mediaQSheet(() => this.codeProps.system.classes as TMediaQ.MediaQSheet, mediaSheetPatch => this.mediaSheetPatch = mediaSheetPatch,
+              animations(() => this.$animations, animations => this.animations = animations, this.renderCode)
+            )
+          )
+        )
+      )
 
-    callMediaQComponent = () => <MediaQComponent
-      theme={this.themeContext.theme}
-      $mediaq={this.propsWithCascading.$mediaq} // $mediaq containse e.g. '{ mobile: [null, 480], desktop: [480, null] }'
-      onMediaCode={mediaqFlags => { // mediaqFlags is result of media evaluation, e.g. '{ mobile: true, desktop:false }.
-        const { codeProps, sheetPatch } = prepareSheet(name, sheetCreator, options, this.propsWithCascading, this.themeContext, mediaqFlags)
-        this.$animations = sheetPatch.$animations as TAnimation.SheetsX
-        delete sheetPatch.$animations
-        this.codeProps = codeProps as TBasic.CodeProps
-        // sheetPatch can contain rulesets with @media prop (e.g. @media: { '640-1025': { fontSize: 24} })
-        return sheetPatch as TMediaQ.MediaQSheet
-      }}
-      onSheetPatch={sheetPatch => this.mediaSheetPatch = sheetPatch} // ruleset.@media is converted to mediaSheetPatch: for WEB to FELA CSS mediaquery rules, for Native is returned only matching ruleset
-    >{this.BEFORE_ANIMATION}</MediaQComponent>
+
+    //AFTER_THEME = (newThemeContext: TTheme.ThemeContext) => {
+    //  // set theme from themeContext.Consumer to themeResult
+    //  this.themeContext = newThemeContext
+    //  return this.callCascading() //calling AFTER_CASCADING inside
+    //}
+
+    //AFTER_CASCADING = (newProps: TBasic.PropsX) => {
+    //  // set props from ComponentPropsConsumer to propsModifierResult
+    //  const { props } = this
+    //  this.propsWithCascading = (withOptions.withCascading ? (newProps ? deepMergesSys(false, {}, newProps, props) : newProps) : props) as TBasic.PropsX
+    //  return this.callMediaQComponent() // calling BEFORE_ANIMATION inside
+    //}
+
+    //BEFORE_ANIMATION = () => !this.$animations ? this.AFTER_ANIMATION(null) : <AnimationsComponent $initAnimations={this.$animations}>{this.AFTER_ANIMATION}</AnimationsComponent>
+
+    //AFTER_ANIMATION = (animations: TAnimation.Drivers) => {
+    //  const { mediaSheetPatch, codeProps } = this
+    //  let classes = codeProps.system.classes
+
+    //  if (DEV_MODE && codeProps.system.developer_log) console.log(
+    //    `### withStyles AFTER_ANIMATION for ${name}`,
+    //    '\ntheme: ', this.themeContext.theme,
+    //    '\npropsWithCascading: ', this.propsWithCascading,
+    //    '\ncodeProps: ', this.codeProps,
+    //    '\nclasses: ', classes,
+    //    '\nmediaSheetPatch: ', this.mediaSheetPatch,
+    //    //':\n', this.,
+    //  )
+
+    //  // apply patches
+    //  if (mediaSheetPatch) classes = deepMerges({}, classes, mediaSheetPatch)
+
+    //  // call component code
+    //  return <Component {...codeProps as TBasic.CodeProps<R>} system={{ ...codeProps.system, classes: classes as TBasic.Sheet<R>, animations: animations as TAnimation.Drivers<TBasic.getAnimation<R>> }} />
+    //}
+
+    //callCascading = () => {
+    //  // Skip withCascading?
+    //  if (withOptions.withCascading)
+    //    return <CascadingConsumer>{this.AFTER_CASCADING}</CascadingConsumer>
+    //  else {
+    //    this.propsWithCascading = this.props
+    //    return this.callMediaQComponent()
+    //  }
+    //}
+
+    //callMediaQComponent = () => <MediaQComponent
+    //  theme={this.themeContext.theme}
+    //  $mediaq={this.propsWithCascading.$mediaq} // $mediaq containse e.g. '{ mobile: [null, 480], desktop: [480, null] }'
+    //  onMediaCode={mediaqFlags => { // mediaqFlags is result of media evaluation, e.g. '{ mobile: true, desktop:false }.
+    //    const { codeProps, sheetPatch } = prepareSheet(name, sheetCreator, options, this.propsWithCascading, this.themeContext, mediaqFlags)
+    //    this.$animations = sheetPatch.$animations as TAnimation.SheetsX
+    //    delete sheetPatch.$animations
+    //    this.codeProps = codeProps as TBasic.CodeProps
+    //    // sheetPatch can contain rulesets with @media prop (e.g. @media: { '640-1025': { fontSize: 24} })
+    //    return sheetPatch as TMediaQ.MediaQSheet
+    //  }}
+    //  onSheetPatch={sheetPatch => this.mediaSheetPatch = sheetPatch} // ruleset.@media is converted to mediaSheetPatch: for WEB to FELA CSS mediaquery rules, for Native is returned only matching ruleset
+    //>{this.BEFORE_ANIMATION}</MediaQComponent>
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
       return !nextProps.CONSTANT
