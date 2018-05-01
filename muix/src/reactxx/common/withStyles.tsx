@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
 
@@ -24,11 +24,9 @@ export const withStylesCreator = <R extends TBasic.Shape, TStatic extends {} = {
 export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, _options?: TTheme.WithStyleOptions_ComponentX<R>, overrideOptions?: TTheme.WithStyleOptions_ComponentX<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
   type TPropsX = TBasic.PropsX<R>
-  //type TModifiedOptions = Partial<Overwrite<TTheme.WithStyleOptions_Component<R>, { withCascading: never }>>
-  //type TModifiedOptions = TTheme.WithStyleOptions_ComponentX<R>
 
   //*** OPTIONS
-  const options: TTheme.WithStyleOptions_ComponentX = _options && overrideOptions ? deepMerge(_options, overrideOptions) : (overrideOptions ? { ...overrideOptions } : (_options ? { ..._options } : {}))
+  const options: TTheme.WithStyleOptions_ComponentX = _options && overrideOptions ? deepMerges({}, _options, overrideOptions) : (overrideOptions ? { ...overrideOptions } : (_options ? { ..._options } : {}))
   options.withTheme = fromOptions(typeof sheetCreator === 'function', options ? options.withTheme : undefined)
 
   //**** PROPERTY CASCADING 
@@ -38,22 +36,22 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
   class Provider extends React.Component<TPropsX> {
 
     render() {
-      if (options.withCascading) return <CascadingConsumer>{this.CASCADING}</CascadingConsumer>
-      warning(DEV_MODE, `Component.Provider does not exist (component.name=${name}). Use <ComponentC.Provider ...><ComponentC ...> variant of component or create it (if it does not exist).`) //`
+      if (options.withCascading) return <CascadingConsumer>{this.CASCADING}</CascadingConsumer> 
+      warning(DEV_MODE, `Component.Provider does not exist (component.name=${name}). Use 'C' variant of the component, e.g. <LabelC.Provider><LabelC>. 'C' variant of the component is created by e.g. 'LabelCreator = withStylesCreator<Shape>(Consts.Label, sheet, label); export const LabelC = LabelCreator({ withCascading: true})'`) //`
       return null
     }
 
     CASCADING = (parentsProps: TPropsX) => {
       const { children, ...rest } = this.props as TBasic.PropsX & { children?: React.ReactNode }
-      return <CascadingProvider value={(parentsProps && rest ? deepMerge(parentsProps, rest) : rest) as TPropsX}>{children}</CascadingProvider>
-    }
+      return <CascadingProvider value={(parentsProps && rest ? deepMerges({}, parentsProps, rest) : rest) as TPropsX}>{children}</CascadingProvider>
+    } 
 
   }
 
-  const resolveDefaultProps = (def, cascad, props) => {
-    if (!def && !cascad) return props
-    const canChangeModifier = def && cascad //modifier is deepMerged => can change it
-    const modifier = def && cascad ? deepMerges({}, def, cascad) : (def ? def : cascad)
+  const resolveDefaultProps = (defaultProps, cascadingProps, props) => {
+    if (!defaultProps && !cascadingProps) return props
+    const modifier = defaultProps && cascadingProps ? deepMerges({}, defaultProps, cascadingProps) : (defaultProps ? defaultProps : cascadingProps)
+    const canChangeModifier = defaultProps && cascadingProps //modifier is deepMerged => can change it
     const res = { ...props }
     for (const p in modifier) {
       const modp = modifier[p]
@@ -205,8 +203,10 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
     } else
       getStaticSheet = () => toPlatformSheet(callCreator(theme, null, createSheetX))
   }
+  //if (!staticSheet) staticSheet = getStaticSheet()
+
   if (!staticSheet) {
-    if (!theme) staticSheet = getStaticSheet()
+    if (!$cache) staticSheet = getStaticSheet()
     else {
       let compCache = $cache[name]
       if (!compCache) $cache[name] = compCache = {}

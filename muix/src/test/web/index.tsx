@@ -9,6 +9,6 @@ import ReactDOM from 'react-dom'
 //import App from '../web/stateman/index'
 //import App from '../common/reactxx/index'
 //import App from '../common/animation/test-animation'
-import App from '../common/stateman/index'
+//import App from '../common/stateman/index'
 
-export const init = () => ReactDOM.render(<App />, document.getElementById('content')) 
+//export const init = () => ReactDOM.render(<App />, document.getElementById('content')) 

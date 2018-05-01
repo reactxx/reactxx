@@ -5,7 +5,6 @@ import jssShared, { create} from 'jss';
 import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
 
-import { ModifierType } from 'reactxx-stateman'
 import { TTheme, TAddInConfig, TBasic, toPlatformRuleSet, toPlatformSheet, ThemeProvider } from 'reactxx'
 import { Types, toPlatformEvents } from 'reactxx-basic'
 import { rulesetToClassNames } from 'reactxx-fela'

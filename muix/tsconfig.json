@@ -1,8 +1,8 @@
 {
-  //"compileOnSave": true,
+  "compileOnSave": true,
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "system",
     "moduleResolution": "node",
 
     //"declaration": true,
@@ -43,7 +43,6 @@
 
       "reactxx": [ "src/reactxx/web/index" ],
 
-      "reactxx-stateman": [ "src/stateman/index" ],
 
       "reactxx-mui/*": [ "src/mui/*" ]
     },

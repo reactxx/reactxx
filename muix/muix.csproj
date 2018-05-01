@@ -204,7 +204,6 @@
     <TypeScriptCompile Include="src\reactxx\web\comps.tsx" />
     <TypeScriptCompile Include="src\reactxx\web\index.ts" />
     <TypeScriptCompile Include="src\test\common\mui\button-demo.tsx" />
-    <TypeScriptCompile Include="src\test\common\stateman\index.tsx" />
     <TypeScriptCompile Include="src\test\web\appstate\index.tsx" />
     <TypeScriptCompile Include="src\test\common\reactxx\doc\home.tsx" />
     <TypeScriptCompile Include="src\test\common\reactxx\index.tsx" />

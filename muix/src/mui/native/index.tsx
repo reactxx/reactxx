@@ -2,7 +2,6 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { TTheme } from 'reactxx'
-import { ModifierType } from 'reactxx-stateman'
 import { createMuiTheme } from '../common/createMuiTheme'
 
 import loadFonts from './expoLoadFonts'

@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
+import { deepMerges } from 'reactxx-basic';
 import MDI from 'reactxx-mdi'
+import { TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
 
 import { H2 } from '../components/typo'
-import { deepMerges } from 'reactxx-basic';
 
 /************************
 * TYPINGS
@@ -74,7 +74,7 @@ export const LabelCreator = withStylesCreator<Shape>(Consts.Label, sheet, label)
 export const Label = LabelCreator()
 
 // allow property cascading
-export const LabelC = LabelCreator({ withCascading: true, defaultProps: { classes: { label: { color: 'lightgreen' } } } })
+export const LabelC = LabelCreator({ withCascading: true})
 
 export const LabelEx = LabelCreator({ defaultProps: { iconData: MDI.Play, classes: { label: { color: 'red' } } } })
 
@@ -89,7 +89,8 @@ export const LabelEx = LabelCreator({ defaultProps: { iconData: MDI.Play, classe
 const Section: React.SFC = ({ children }) => <View className={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>{children}</View>
 const iconHeart = MDI.Heart
 
-//const App = props => <LabelEx iconData={MDI.Stop} classes={{ label: { color: 'white' } }}>Label 11</LabelEx>
+//const App = props => <LabelC.Provider className={{ borderRadius: 12 }} iconData={iconHeart}>
+//</LabelC.Provider>
 
 const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
   <H2>Default</H2>
@@ -98,7 +99,7 @@ const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
     <Label iconData={iconHeart} />
     <Label iconData={iconHeart}>Label 2</Label>
   </Section>
-  <H2>ROOT STYLING PRECEDENCE</H2>
+  <H2>STYLING PRECEDENCE</H2>
   <Section>
     <Label classes={{ root: { backgroundColor: 'lightblue' } }} iconData={iconHeart}>Label 3</Label>
     <Label classes={{ root: { backgroundColor: 'lightblue' } }} className={{ backgroundColor: 'red' }} iconData={iconHeart}>Label 4</Label>
@@ -118,7 +119,7 @@ const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
       <LabelC>Label 9</LabelC>
     </Section>
   </LabelC.Provider>
-  <H2>LABEL WITH DEFAULT PROPS</H2>
+  <H2>LABEL WITH PROPS</H2>
   <Section>
     <LabelEx>Label 10</LabelEx>
     <LabelEx iconData={MDI.Stop} classes={{ label: { color: 'white' } }}>Label 11</LabelEx>
