@@ -5,6 +5,7 @@ import { TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStylesC
 import MDI from 'reactxx-mdi'
 
 import { H2 } from '../components/typo'
+import { deepMerges } from 'reactxx-basic';
 
 /************************
 * TYPINGS
@@ -73,7 +74,9 @@ export const LabelCreator = withStylesCreator<Shape>(Consts.Label, sheet, label)
 export const Label = LabelCreator()
 
 // allow property cascading
-export const LabelC = LabelCreator({ withCascading: true })
+export const LabelC = LabelCreator({ withCascading: true, defaultProps: { classes: { label: { color: 'lightgreen' } } } })
+
+export const LabelEx = LabelCreator({ defaultProps: { iconData: MDI.Play, classes: { label: { color: 'red' } } } })
 
 
 /************************************************
@@ -85,6 +88,8 @@ export const LabelC = LabelCreator({ withCascading: true })
 *************************************************/
 const Section: React.SFC = ({ children }) => <View className={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>{children}</View>
 const iconHeart = MDI.Heart
+
+//const App = props => <LabelEx iconData={MDI.Stop} classes={{ label: { color: 'white' } }}>Label 11</LabelEx>
 
 const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
   <H2>Default</H2>
@@ -113,7 +118,13 @@ const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
       <LabelC>Label 9</LabelC>
     </Section>
   </LabelC.Provider>
+  <H2>LABEL WITH DEFAULT PROPS</H2>
+  <Section>
+    <LabelEx>Label 10</LabelEx>
+    <LabelEx iconData={MDI.Stop} classes={{ label: { color: 'white' } }}>Label 11</LabelEx>
+  </Section>
 </ScrollView>
+
 
 export default App
 

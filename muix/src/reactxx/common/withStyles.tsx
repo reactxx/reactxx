@@ -10,6 +10,7 @@ import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
 import { TBasic, TAddInConfig } from '../typings/basic'
 import { theme, TTheme, ThemeProvider, ThemeConsumer } from './theme'
+import { Overrides } from 'material-ui/styles/overrides';
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
@@ -17,15 +18,17 @@ const DEV_MODE = process.env.NODE_ENV === 'development'
 * WITH STYLES
 *************************/
 
-export const withStylesCreator = <R extends TBasic.Shape, TStatic extends {} = {}>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, component: TBasic.CodeComponentType<R>, options?: TTheme.WithStyleOptions_Component<R>) =>
-  (overrideOptions?: TTheme.WithStyleOptions_Component<R>) => withStyles<R, TStatic>(name, sheetCreator, options, overrideOptions)(component)
+export const withStylesCreator = <R extends TBasic.Shape, TStatic extends {} = {}>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, component: TBasic.CodeComponentType<R>, options?: TTheme.WithStyleOptions_ComponentX<R>) =>
+  (overrideOptions?: TTheme.WithStyleOptions_ComponentX<R>) => withStyles<R, TStatic>(name, sheetCreator, options, overrideOptions)(component)
 
-export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, _options?: TTheme.WithStyleOptions_Component<R>, overrideOptions?: TTheme.WithStyleOptions_Component<R>) => (Component: TBasic.CodeComponentType<R>) => {
+export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, _options?: TTheme.WithStyleOptions_ComponentX<R>, overrideOptions?: TTheme.WithStyleOptions_ComponentX<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
   type TPropsX = TBasic.PropsX<R>
+  //type TModifiedOptions = Partial<Overwrite<TTheme.WithStyleOptions_Component<R>, { withCascading: never }>>
+  //type TModifiedOptions = TTheme.WithStyleOptions_ComponentX<R>
 
   //*** OPTIONS
-  const options: TTheme.WithStyleOptions_Component = _options && overrideOptions ? deepMerge(_options, overrideOptions) : (overrideOptions ? { ...overrideOptions } : (_options ? { ..._options } : {}))
+  const options: TTheme.WithStyleOptions_ComponentX = _options && overrideOptions ? deepMerge(_options, overrideOptions) : (overrideOptions ? { ...overrideOptions } : (_options ? { ..._options } : {}))
   options.withTheme = fromOptions(typeof sheetCreator === 'function', options ? options.withTheme : undefined)
 
   //**** PROPERTY CASCADING 
@@ -49,11 +52,13 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
 
   const resolveDefaultProps = (def, cascad, props) => {
     if (!def && !cascad) return props
+    const canChangeModifier = def && cascad //modifier is deepMerged => can change it
     const modifier = def && cascad ? deepMerges({}, def, cascad) : (def ? def : cascad)
-    const res = {...props}
+    const res = { ...props }
     for (const p in modifier) {
-      const propsp = res[p]
-      if (propsp) res[p] = deepMerge({}, modifier[p], propsp)
+      const modp = modifier[p]
+      const propsp = props[p]
+      if (propsp && typeof modp === 'object') res[p] = canChangeModifier ? deepMerge(modp, propsp) : deepMerges({}, modp, propsp)
       else res[p] = modifier[p]
     }
     return res
@@ -155,7 +160,6 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
 
     public static Provider = Provider
     public static displayName = name
-    //public static defaultProps = options && options.defaultProps
   }
 
   const styled: React.ComponentClass<TBasic.PropsX<R>> & { Provider: typeof Provider } & TStatic = Styled as any
@@ -174,7 +178,7 @@ export const AppContainer: React.SFC<{ theme?: TTheme.ThemeCreator }> = props =>
 * PRIVATE
 *************************/
 
-const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions_Component, props: TBasic.PropsX, themeContext: TTheme.ThemeContext, mediaqFlags: TMediaQ.MediaFlags, activeFlag: boolean) => {
+const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions_ComponentX, props: TBasic.PropsX, themeContext: TTheme.ThemeContext, mediaqFlags: TMediaQ.MediaFlags, activeFlag: boolean) => {
 
   const { classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, developer_log, CONSTANT, ...rest } = props as TBasic.PropsX & Types.OnPressAllX
   const { theme, $cache } = (themeContext || {}) as TTheme.ThemeContext

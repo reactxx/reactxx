@@ -11,10 +11,16 @@ export namespace TTheme {
     withActive?: boolean
   }
 
-  export interface WithStyleOptions_Component<R extends TBasic.Shape =  TBasic.Shape> extends WithStyleOptions {
+  export type PropsXOverwrite<R extends TBasic.Shape> = PartialOverwrite<TBasic.PropsX<R>, {
+    style?: TBasic.RulesetX<TBasic.getStyle<R>>
+    classes?: TBasic.PartialSheetX<R>
+    className?: TBasic.RulesetX<TBasic.getStyle<R>>
+  }>
+
+  export interface WithStyleOptions_ComponentX<R extends TBasic.Shape =  TBasic.Shape> extends WithStyleOptions {
     getVariant?: (props: TBasic.PropsX<R> & TMediaQ.CodeProps<TBasic.getMediaQ<R>>, theme?: TBasic.getTheme<R>) => TBasic.getVariant<R>
     variantToString?: (variant: TBasic.getVariant<R>) => string
-    defaultProps?: Partial<TBasic.PropsX<R>>
+    defaultProps?: PropsXOverwrite<R>
   }
 
   export type SheetCreatorX<R extends TBasic.Shape = TBasic.Shape> = TBasic.SheetX<R> | ((themeX: TBasic.getTheme<R>, variant: TBasic.getVariant<R>) => TBasic.SheetX<R>)
