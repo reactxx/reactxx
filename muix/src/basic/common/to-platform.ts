@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { Types } from '../typings/ruleset'
 
-export const toPlatformEvents = ($web: Types.OnPressAllWeb, $native: Types.OnPressAllNative, propsX: Types.OnPressAllX, cp: Types.OnPressAllNative | Types.OnPressAllWeb) => {
+export const toPlatformEvents = ($web: Types.OnPressAllWeb, $native: Types.OnPressAllNative, propsX: Types.OnPressAllX, cp: Types.OnPressAllNative | Types.OnPressAllWeb, setActive?: (active:boolean) => void) => {
   const { onPress, onLongPress, onPressIn, onPressOut } = propsX
   if (isType<Types.OnPressAllWeb>(cp)) {
     const cl = $web && $web.onClick || onPress; if (cl) cp.onClick = cl

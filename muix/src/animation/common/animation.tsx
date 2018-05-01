@@ -5,6 +5,10 @@ import warning from 'warning'
 import { AnimationDriver } from 'reactxx-animation' //NATIVE or WEB animation driver 
 import { TAnimation } from '../typings/animation'
 
+/************************
+* EXPORTED
+*************************/
+
 export const animations = (input: () => TAnimation.SheetsX, output: (outputPar: TAnimation.Drivers) => void, next: () => React.ReactNode) => {
   const render = (animations: TAnimation.Drivers) => {
     output(animations)

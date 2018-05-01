@@ -1,13 +1,14 @@
 ﻿import React from 'react'
 import { TMediaQ } from 'reactxx-mediaq'
 
-import { TBasic, TThemeConfig } from '../typings/basic'
+import { TBasic } from '../typings/basic'
 
 export namespace TTheme {
 
   export interface WithStyleOptions {
     withTheme?: boolean
-    withCascading?: boolean 
+    withCascading?: boolean
+    withActive?: boolean
   }
 
   export interface WithStyleOptions_Component<R extends TBasic.Shape =  TBasic.Shape> extends WithStyleOptions {

@@ -133,6 +133,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\animation\common\animation.tsx_" />
+    <TypeScriptCompile Include="src\activable\common\activable.tsx" />
+    <TypeScriptCompile Include="src\activable\native\index.ts" />
+    <TypeScriptCompile Include="src\activable\web\index.ts" />
     <TypeScriptCompile Include="src\animation\common\animation.tsx" />
     <TypeScriptCompile Include="src\animation\native\animation.tsx" />
     <TypeScriptCompile Include="src\animation\native\index.ts" />

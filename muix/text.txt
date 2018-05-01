@@ -1,38 +1,16 @@
-﻿https://medium.com/dailyjs/a-guide-to-building-a-react-component-for-npm-68f03b314753
+﻿# Default props and options
+1. 2 types of options: can or cannot be modified after withStyles call
+2. default props, correct priorities: DefaultProps => CascadingProps => Props
+
+
+https://medium.com/dailyjs/a-guide-to-building-a-react-component-for-npm-68f03b314753
 
 # TODO
 TextC etc.
 
 # withStyle
 
-1. withTheme: just theme, no staticSheet and variant
-** NO (use theme variant instead):  theme has defaultProps: {[compName:string]: value | theme => value}
-
-2. withComponentProps
-
-3. withMediaQ: with using $mediaq(theme) and parametter: onFinish(name, sheetCreator, options):  (props, NotifySheetCode) => breakpointsFrom(staticSheet, classes, className)
-- Notify breakpoints consumer (result is NotifySheetCode)
-- call rulesetBreakpoints = onFinish (props, NotifySheetCode)
-- ruleset.mediaq breakpoints consumer (compute observedBits from rulesetBreakpoints). Result is all breakpoints (byValue version?)
-
-4. withSheet: including staticSheet and variant
-
-
-# PROBLEMS TO SOLVE
-- better functional Sheet (not only theme but component props too)
-- simple CSS cascading (element selector only) alternative
-- caching functional Sheet
-
 # CHANGES NEW
-
-## Sheet variant
-SheetVariant: interface
-optimalization: toSheetVariantCache: null | SheetVariant => string
-if toSheetVariantCache!=null: sheet is cached in Theme
-
-## Cascading props
-- for every component special Provider x Consumer
-- including classes, className etc. => better than MUI Theme.overrides
 
 ## Media state and Active to HOC withStyle component state
 

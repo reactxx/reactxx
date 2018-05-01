@@ -53,4 +53,11 @@ export namespace Types {
   //export type rulesetNative = ReactN.TextStyle | ReactN.ViewStyle | ReactN.ImageStyle | ReactN.ScrollViewStyle
   export type Ruleset<T extends RulesetNativeIds = never> = RulesetWeb | RulesetNative<T>
 
+  //******************** Sheets
+  export type SheetX = { [P in string]: Types.RulesetX }
+  export type Sheet = { [P in string]: Types.Ruleset }
+  export type SheetWeb = { [P in string]: Types.RulesetWeb }
+  export type SheetNative = { [P in string]: Types.RulesetNative }
+
+
 }

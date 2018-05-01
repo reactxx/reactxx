@@ -7,6 +7,7 @@ import * as CSS from 'csstype'
 
 import { Types, TCommonStyles } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
+import { TActivable } from 'reactxx-activable'
 
 import { TAnimation } from 'reactxx-animation'
 import { TTheme } from '../common/theme'
@@ -66,6 +67,8 @@ export namespace TBasic {
     variant?: {}
     //**** component theme par
     theme?: TTheme.ThemeBase
+    //**** activable
+    activable?: boolean | never
   }
   export type getCommon<R extends Shape> = R['common']
   export type getNative<R extends Shape> = R['native']
@@ -80,6 +83,7 @@ export namespace TBasic {
   export type getMediaQ<R extends Shape = Shape> = R['mediaq']
   export type getVariant<R extends Shape = Shape> = R['variant']
   export type getTheme<R extends Shape = Shape> = R['theme']
+  export type getActivable<R extends Shape = Shape> = R['activable']
 
   export interface Shapes { }
 
@@ -92,6 +96,7 @@ export namespace TBasic {
     nameType: null
     variant: never,
     theme: TTheme.ThemeBase
+    activable: never
   }, R>
 
   /******************************************
@@ -239,6 +244,7 @@ export namespace TAddInConfig {
     ignore?: boolean
     CONSTANT?: boolean,
     $mediaq?: TMediaQ.NotifyIntervalCreator<TBasic.getMediaQ<R>>
+    $active?: TBasic.getActivable<R> extends boolean ? boolean : never
   }
 
   //******************** Platform specific
@@ -248,6 +254,7 @@ export namespace TAddInConfig {
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesWeb
     animations: TAnimation.DriversWeb<TBasic.getAnimation<R>>
     mediaqFlags: TMediaQ.MediaFlags<TBasic.getMediaQ<R>>
+    activeFlag?: TBasic.getActivable<R>
   }
 
   export interface CodePropsNative<R extends TBasic.Shape = TBasic.Shape> {
@@ -256,6 +263,7 @@ export namespace TAddInConfig {
     mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesNative
     animations: TAnimation.DriversNative<TBasic.getAnimation<R>>
     mediaqFlags: TMediaQ.MediaFlags<TBasic.getMediaQ<R>>
+    activeFlag?: TBasic.getActivable<R>
   }
 
   export interface CodeProps<R extends TBasic.Shape = TBasic.Shape> {
@@ -264,10 +272,7 @@ export namespace TAddInConfig {
     variant: TBasic.getVariant<R>
     animations: TAnimation.Drivers<TBasic.getAnimation<R>>
     mediaqFlags: TMediaQ.MediaFlags<TBasic.getMediaQ<R>>
+    activeFlag?: TBasic.getActivable<R>
   }
 
-}
-
-export namespace TThemeConfig {
-  export interface Theme extends Muix.Theme { }
 }
