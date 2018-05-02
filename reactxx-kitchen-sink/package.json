@@ -28,27 +28,27 @@
     "@types/warning": "^3.0.0",
     "babel-plugin-module-resolver": "^3.1.0",
     "material-ui": "^1.0.0-beta.37",
-    "reactxx": "^0.1.55",
-    "reactxx-animation": "^0.1.3",
-    "reactxx-basic": "^0.1.13",
+    "reactxx": "^0.1.58",
+    "reactxx-activable": "^0.1.6",
+    "reactxx-animation": "^0.1.6",
+    "reactxx-basic": "^0.1.16",
     "reactxx-mdi": "^0.1.67",
-    "reactxx-mediaq": "^0.1.3",
-    "reactxx-mui": "^0.1.14",
-    "reactxx-stateman": "^0.1.73"
+    "reactxx-mediaq": "^0.1.6",
+    "reactxx-mui": "^0.1.17"
   },
   "jspm": {
     "name": "reactxx-kitchen-sink",
     "main": "web/index.js",
     "dependencies": {
       "core-js": "npm:core-js@2.5.3",
-      "reactxx-basic": "npm:reactxx-basic@^0.1.13",
-      "reactxx-fela": "npm:reactxx-fela@^0.1.13",
+      "reactxx-basic": "npm:reactxx-basic@^0.1.16",
+      "reactxx-fela": "npm:reactxx-fela@^0.1.16",
       "reactxx-mdi": "npm:reactxx-mdi@^0.1.67",
-      "reactxx-animation": "npm:reactxx-animation@^0.1.3",
-      "reactxx-mediaq": "npm:reactxx-mediaq@^0.1.3",
-      "reactxx-stateman": "npm:reactxx-stateman@^0.1.73",
-      "reactxx": "npm:reactxx@^0.1.55",
-      "reactxx-mui": "npm:reactxx-mui@^0.1.14",
+      "reactxx-animation": "npm:reactxx-animation@^0.1.6",
+      "reactxx-mediaq": "npm:reactxx-mediaq@^0.1.6",
+      "reactxx-activable": "npm:reactxx-activable@^0.1.6",
+      "reactxx": "npm:reactxx@^0.1.58",
+      "reactxx-mui": "npm:reactxx-mui@^0.1.17",
       "tslib": "npm:tslib@^1.9.0"
     },
     "devDependencies": {},
@@ -68,8 +68,8 @@
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
-      "react": "npm:react@^16.0.0",
-      "react-dom": "npm:react-dom@^16.0.0",
+      "react": "npm:react",
+      "react-dom": "npm:react-dom",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
       "url": "npm:jspm-nodelibs-url@^0.2.0",
@@ -92,16 +92,16 @@
           "test.js"
         ]
       },
-      "npm:lodash@4.17.5": {
+      "npm:lodash@4.17.10": {
         "map": {
           "buffer": "@empty",
           "process": "@empty"
         }
       },
-      "npm:pbkdf2@3.0.14": {
+      "npm:pbkdf2@3.0.16": {
         "main": "browser.js"
       },
-      "npm:safe-buffer@5.1.1": {
+      "npm:safe-buffer@5.1.2": {
         "browser": "index.js"
       },
       "npm:tslib@1.9.0": {

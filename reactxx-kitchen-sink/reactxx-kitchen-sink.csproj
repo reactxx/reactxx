@@ -124,8 +124,8 @@
     <TypeScriptCompile Include="src\common\components\responsible-drawer\responsible-drawer.tsx" />
     <TypeScriptCompile Include="src\common\typings.d.ts" />
     <TypeScriptCompile Include="src\native\index.tsx" />
+    <TypeScriptCompile Include="src\react-16.3.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
-    <TypeScriptCompile Include="src\typings\reactxx\common-style.ts" />
     <TypeScriptCompile Include="src\web\index.tsx" />
   </ItemGroup>
   <ItemGroup />

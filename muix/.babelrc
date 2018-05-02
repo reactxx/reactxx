@@ -13,7 +13,9 @@
         "alias": {
           "^reactxx-mdi/(.+)": "reactxx-mdi/es",
           "reactxx-mdi": "reactxx-mdi/es/index",
-          "reactxx-stateman": "./deploy/es/stateman",
+          "reactxx-activable": "./deploy/es/activable",
+          "reactxx-mediaq": "./deploy/es/mediaq",
+          "reactxx-animation": "./deploy/es/animation",
           "reactxx": "./deploy/es/reactxx/native",
           "reactxx-basic": "./deploy/es/basic/native",
           "reactxx-mui": "./deploy/es/mui/native"

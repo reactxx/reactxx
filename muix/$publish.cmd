@@ -15,7 +15,8 @@ call %root%$publish_ basic
 call %root%$publish_ fela
 call %root%$publish_ mediaq
 call %root%$publish_ animation
-call %root%$publish_ stateman
+call %root%$publish_ activable
+rem call %root%$publish_ stateman
 call %root%$publish_ reactxx
 
 call %root%$publish_ mui

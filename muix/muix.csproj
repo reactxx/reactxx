@@ -96,6 +96,8 @@
     <Content Include="%24refresh-libs.cmd" />
     <Content Include="%24compile.cmd" />
     <Content Include="%24start.cmd" />
+    <Content Include="deploy\activable\package.json" />
+    <Content Include="deploy\activable\README.md" />
     <None Include="packages.config" />
     <Content Include="README.md" />
     <Content Include="StyleSheet1.css" />
@@ -146,7 +148,7 @@
     <TypeScriptCompile Include="src\basic\common\develop.tsx" />
     <TypeScriptCompile Include="src\basic\common\to-platform.ts" />
     <TypeScriptCompile Include="src\basic\typings\typings.d.ts" />
-    <TypeScriptCompile Include="src\basic\typings\react-16.3.ts" />
+    <TypeScriptCompile Include="src\ks\react-16.3.ts" />
     <TypeScriptCompile Include="src\fela\index.ts" />
     <TypeScriptCompile Include="src\doc\home.tsx" />
     <TypeScriptCompile Include="src\ks\common\app\index.tsx" />
@@ -178,6 +180,7 @@
     <TypeScriptCompile Include="src\mediaq\typings\typings.d.ts" />
     <TypeScriptCompile Include="src\mediaq\web\index.ts" />
     <TypeScriptCompile Include="src\mediaq\web\media-q.ts" />
+    <TypeScriptCompile Include="src\navigation\index.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\comps-sheets.ts" />
     <TypeScriptCompile Include="src\reactxx\common\theme.tsx" />
     <TypeScriptCompile Include="src\reactxx\common\to-platform.ts" />
@@ -185,7 +188,6 @@
     <TypeScriptCompile Include="src\reactxx\typings\basic.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\comps.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\index.ts" />
-    <TypeScriptCompile Include="src\ks\typings\reactxx\common-style.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\web\index.tsx" />
     <TypeScriptCompile Include="src\mui\common\createTypography.ts" />

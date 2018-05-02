@@ -13,8 +13,10 @@
         "alias": {
           "^reactxx-mdi/(.+)": "reactxx-mdi/es/index",
           "reactxx-mdi": "reactxx-mdi/es/index",
-          "reactxx-stateman": "reactxx-stateman/es/index",
           "reactxx-basic": "reactxx-basic/es/native/index",
+          "reactxx-activable": "reactxx-basic/es/activable/index",
+          "reactxx-animation": "reactxx-basic/es/animation/index",
+          "reactxx-mediaq": "reactxx-basic/es/mediaq/index",
           "reactxx": "reactxx/es/native/index",
           "reactxx-mui": "reactxx-mui/es/native"
         }
