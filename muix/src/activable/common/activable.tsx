@@ -61,6 +61,7 @@ export const activeSheet = (input: () => { sheet: TActivable.SheetWithAddIn, act
         else if (False) patch[p] = False
       }
       output(patch)
+      return next()
     } else {
       output(null)
       return next()

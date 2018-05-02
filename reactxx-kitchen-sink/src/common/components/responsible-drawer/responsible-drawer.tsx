@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { Types, deepMerge } from 'reactxx-basic'
+import { Types } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
-import { TAddInConfig, TComps, TTheme, TBasic, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer } from 'reactxx'
+import { TAddInConfig, TComps, TProvider, TTheme, TBasic, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
 
 //******* Two possibilities how to use get icon data:

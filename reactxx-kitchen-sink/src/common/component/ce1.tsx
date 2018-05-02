@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { deepMerges } from 'reactxx-basic';
 import MDI from 'reactxx-mdi'
-import { TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
+import { TComps, TProvider, TTheme, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
 
 import { H2 } from '../components/typo'
 
@@ -119,7 +119,8 @@ const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
       <LabelC>Label 9</LabelC>
     </Section>
   </LabelC.Provider>
-  <H2>LABEL WITH PROPS</H2>
+  <H2>LABEL WITH DEFAULT PROPS</H2>
+  {/* see 'LabelEx = LabelCreator...' above */}
   <Section>
     <LabelEx>Label 10</LabelEx>
     <LabelEx iconData={MDI.Stop} classes={{ label: { color: 'white' } }}>Label 11</LabelEx>

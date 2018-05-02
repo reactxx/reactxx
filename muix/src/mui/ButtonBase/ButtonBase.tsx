@@ -1,13 +1,14 @@
 ﻿import ReactN from 'react-native'
 import React from 'react'
-import MuiButtonBase from 'material-ui/ButtonBase/ButtonBase'
+import MuiButtonBase, { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
+import { Properties } from 'csstype'
 
-import { TAddInConfig } from 'reactxx'
+import { TAddInConfig, TProvider, TBasic, TTheme } from 'reactxx'
 
 import { muiCompatible } from '../index'
 
 import { MuiButtonBaseT } from '../typings/button-base'
-import * as Mui from '../typings/mui'
+import { Muix } from '../typings/muix'
 
 const ButtonBase = muiCompatible<MuiButtonBaseT.Shape>(MuiButtonBase)
 

@@ -18,12 +18,11 @@
       "reactxx-animation": [ "src/animation/native/index" ],
       "reactxx-mediaq": [ "src/mediaq/native/index" ],
       "reactxx-basic": [ "src/basic/index" ],
+      "reactxx-activable": [ "src/activable/web/index" ],
 
       "reactxx-mui/typings/*": [ "src/mui/typings/*" ],
 
       "reactxx": [ "src/reactxx/native/index" ],
-
-      "reactxx-stateman": [ "src/stateman/index" ],
 
       "reactxx-mui/*": [ "src/mui/native/*" ]
     },

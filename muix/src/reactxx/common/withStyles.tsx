@@ -33,7 +33,7 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
 
   const { Provider: CascadingProvider, Consumer: CascadingConsumer } = options.withCascading ? React.createContext<TPropsX>(null) : { Provider: null, Consumer: null } as React.Context<TPropsX>
 
-  class Provider extends React.Component<TPropsX> {
+  class provider extends React.Component<TPropsX> {
 
     render() {
       if (options.withCascading) return <CascadingConsumer>{this.CASCADING}</CascadingConsumer> 
@@ -156,14 +156,16 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
       return !nextProps.CONSTANT
     }
 
-    public static Provider = Provider
+    public static Provider = provider
     public static displayName = name
   }
 
-  const styled: React.ComponentClass<TBasic.PropsX<R>> & { Provider: typeof Provider } & TStatic = Styled as any
+  const styled: React.ComponentClass<TBasic.PropsX<R>> & TProvider<R> & TStatic = Styled as any
   return styled
 
 }
+
+export interface TProvider<R extends TBasic.Shape> { Provider: React.ComponentClass<TBasic.PropsX<R>> }
 
 export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()).join('$')
 

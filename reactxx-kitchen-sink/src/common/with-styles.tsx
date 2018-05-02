@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 import ReactDOM from 'react-dom'
 
-import { TTheme, TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
+import { TProvider, TTheme, TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
 import { withStylesCreator } from '../../reactxx/common/withStyles'
 import { TMediaQ } from 'reactxx-mediaq'
 

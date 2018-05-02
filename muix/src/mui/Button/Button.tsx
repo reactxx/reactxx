@@ -1,12 +1,12 @@
 ﻿import ReactN from 'react-native'
 import React from 'react'
-import MuiButton from 'material-ui/Button/Button'
+import MuiButton, { ButtonProps } from 'material-ui/Button/Button'
 
 import { Types } from 'reactxx-basic'
-import { TComps, TBasic, TAddInConfig, TTheme, CompNames } from 'reactxx'
+import { TComps, TBasic, TAddInConfig, TProvider, TTheme, CompNames } from 'reactxx'
 
 import { muiCompatible } from '../index'
-import * as Mui from '../typings/mui'
+import { Muix } from '../typings/muix'
 import { MuiButtonT } from '../typings/button'
 
 //const ButtonIconStartOverrides: React.SFC<Mui.ButtonProps> = props => <ThemeModifier modify={compThemeSheetModifier<TComps.IconShape>(CompNames.Icon, theme => ({ root: { marginRight: theme.spacing.unit } }))}>
@@ -19,9 +19,9 @@ import { MuiButtonT } from '../typings/button'
 
 //TODO
 
-const ButtonIconStartOverrides: React.SFC<Mui.ButtonProps> = props => null
+const ButtonIconStartOverrides: React.SFC<ButtonProps> = props => null
 
-const ButtonIconEndOverrides: React.SFC<Mui.ButtonProps> = props => null
+const ButtonIconEndOverrides: React.SFC<ButtonProps> = props => null
 
 
 export const ButtonIconStart = muiCompatible<MuiButtonT.Shape>(ButtonIconStartOverrides)

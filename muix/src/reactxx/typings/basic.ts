@@ -145,7 +145,7 @@ export namespace TBasic {
 
 
   //******************** Platform specific sheets
-  type omitPropNames = 'system' | 'style' | 'classes' | 'className' | keyof TAddInConfig.CodePropsWeb
+  export type omitPropNames = 'system' | 'style' | 'classes' | 'className' | keyof TAddInConfig.CodePropsWeb
 
   // *** web
   export type CodePropsWeb<R extends Shape = Shape> = Omit<getProps<R> & getPropsWeb<R>, omitPropNames> & Types.OnPressAllWeb & {

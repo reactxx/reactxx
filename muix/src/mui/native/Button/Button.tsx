@@ -2,14 +2,15 @@
 import ReactN from 'react-native'
 import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
+import { ButtonProps } from 'material-ui/Button/Button'
 
 import { Types } from 'reactxx-basic'
-import { TComps, TBasic, TAddInConfig, TTheme, CompNames, Text, withStyles } from 'reactxx'
+import { TComps, TBasic, TAddInConfig, TProvider, TTheme, CompNames, Text, withStyles } from 'reactxx'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 import { MuiButtonT } from '../../typings/button'
 import { MuiButtonBaseT } from '../../typings/button-base'
-import * as Mui from '../../typings/mui'
+import { Muix } from '../../typings/muix'
 
 const getTextIconColor = (color: string) => ({
   label: { color },
