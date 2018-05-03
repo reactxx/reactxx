@@ -1,6 +1,5 @@
 ﻿import ReactN from 'react-native'
 
-import { TBasic } from './basic'
 import { Types } from 'reactxx-basic'
 
 export const enum CompNames {
@@ -16,22 +15,16 @@ export const enum CompNames {
 
 export namespace TComps {
 
-  /******************************************
-    HELPERS FOR SHAPE's DEFINITION
-  *******************************************/
-
-  export type ShapeTexts<P extends string> = { [p in P]: 'Text' }
-  export type ShapeViews<P extends string> = { [p in P]: 'View' }
-  export type ShapeScrollViews<P extends string> = { [p in P]: 'ScrollView' }
-  export type ShapeImages<P extends string> = { [p in P]: 'Image' }
-
+  export const enum Consts {
+    textClassName = 'reactxx-text'
+  }
 
   /******************************************
     PRIMITIVE'S SHAPES
   *******************************************/
 
   export interface TextShape {
-    common: ShapeTexts<'root' | 'singleLineStyle'>
+    common: Types.ShapeTexts<'root' | 'singleLineStyle'>
     web: 'pressable'
     native: null
     style: 'Text'
@@ -41,7 +34,7 @@ export namespace TComps {
   }
 
   export interface ViewShape {
-    common: ShapeViews<'root'>
+    common: Types.ShapeViews<'root'>
     web: null
     native: null
     style: 'View'
@@ -51,7 +44,7 @@ export namespace TComps {
   }
 
   export interface IconShape {
-    common: ShapeViews<'root'>
+    common: Types.ShapeViews<'root'>
     web: 'pressable'
     native: null
     style: 'Text'
@@ -64,7 +57,7 @@ export namespace TComps {
   }
 
   export interface ScrollViewShape {
-    common: ShapeScrollViews<'root'> & ShapeViews<'container'>
+    common: Types.ShapeScrollViews<'root'> & Types.ShapeViews<'container'>
     web: 'rootHorizontal' | 'containerHorizontal'
     native: null
     style: 'ScrollView'

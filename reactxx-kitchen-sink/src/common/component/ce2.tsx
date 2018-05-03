@@ -25,7 +25,7 @@ export const enum Consts {
 }
 
 type Shape = TBasic.OverwriteShape<{
-  common: TComps.ShapeViews<'root'> & TComps.ShapeTexts<'label'>,
+  common: Types.ShapeViews<'root'> & Types.ShapeTexts<'label'>,
   nameType: Consts.Label | Consts.Badge,
   theme: Theme,
 }>
@@ -83,14 +83,10 @@ const badgeSheet: TBasic.SheetCreatorX<Shape> = ({ color: { dark, constrastText 
     borderRadius: 32 / 2,
     marginBottom: 10,
     marginRight: 10,
-    $native: {},
-    $web: {},
   },
   label: {
     color: constrastText,
     fontWeight: 'bold',
-    $native: {},
-    $web: {},
   },
 })
 

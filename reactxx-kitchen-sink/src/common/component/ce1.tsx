@@ -17,7 +17,7 @@ export const enum Consts {
 
 // 
 type Shape = TBasic.OverwriteShape<{
-  common: TComps.ShapeViews<'root'> & TComps.ShapeTexts<'label' | 'icon' | 'iconGap'>,
+  common: Types.ShapeViews<'root'> & Types.ShapeTexts<'label' | 'icon' | 'iconGap'>,
   props: {
     iconData: string,
   },

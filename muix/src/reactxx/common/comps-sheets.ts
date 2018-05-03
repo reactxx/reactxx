@@ -1,15 +1,15 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TBasic } from '../typings/basic'
+import { Types } from 'reactxx-basic'
 import { TComps } from '../typings/comps'
 
-export const textSheet: TBasic.SheetX<TComps.TextShape> = {
+export const textSheet: Types.SheetX<TComps.TextShape> = {
   root: {
     $web: {
       whiteSpace: 'pre-wrap',
       wordWrap: 'break-word',
-      [`& .${TBasic.Consts.textClassName}`]: { //high level Text is block element, inner Texts are inline elements.TBasic.Consts.textClassName is className for Text component div.
+      [`& .${TComps.Consts.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. Consts.textClassName is className for Text component div.
         display: 'inline',
       },
     },
@@ -38,15 +38,15 @@ const webViewRuleset = {
   flexShrink: 0,
   position: 'relative',
   overflow: 'hidden',
-} as TBasic.RulesetWeb
+} as Types.RulesetWeb
 
-export const viewSheet: TBasic.SheetX<TComps.ViewShape> = {
+export const viewSheet: Types.SheetX<TComps.ViewShape> = {
   root: {
     $web: webViewRuleset
   }
 }
 
-export const iconSheet: TBasic.SheetX<TComps.IconShape> = {
+export const iconSheet: Types.SheetX<TComps.IconShape> = {
   root: {
     fontSize: 24,
     flexShrink: 0,
@@ -63,7 +63,7 @@ export const iconSheet: TBasic.SheetX<TComps.IconShape> = {
 
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
-export const scrollViewSheet: TBasic.SheetX<TComps.ScrollViewShape> = {
+export const scrollViewSheet: Types.SheetX<TComps.ScrollViewShape> = {
   root: {
     $web: {
       ...webViewRuleset,

@@ -22,8 +22,9 @@ export namespace Types {
     {
       $native?: RulesetNative<T> // native specific rules
       $web?: RulesetWeb // web specific rules
-    } & TAddIn
-    
+      $props?: PropsInRulesetX<R>
+    } &
+    TAddIn
 
   export interface ViewRulesetX<TAddIn extends {} = {}> extends RulesetX<'View'> { }
   export interface TextRulesetX<TAddIn extends {} = {}> extends RulesetX<'Text'> { }
@@ -86,6 +87,11 @@ export namespace Types {
     nameType: null
   }
 
+  export type ShapeTexts<P extends string> = { [p in P]: 'Text' }
+  export type ShapeViews<P extends string> = { [p in P]: 'View' }
+  export type ShapeScrollViews<P extends string> = { [p in P]: 'ScrollView' }
+  export type ShapeImages<P extends string> = { [p in P]: 'Image' }
+
   export type OverwriteShape<R extends Shape> = PartialOverwrite<ShapeDefault, R>
 
   //******************** Sheets
@@ -93,8 +99,8 @@ export namespace Types {
   export type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>>
 
   type SheetXCommon<R extends Shape> = { [P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R> }
-  type SheetXNative<R extends Shape> = { [P in keyof getNative<R>]: RulesetNative<getNative<R>[P]> }
-  type SheetXWeb<R extends Shape> = { [P in getWeb<R>]: RulesetWeb }
+  type SheetXNative<R extends Shape> = { [P in keyof getNative<R>]: { $native?: Types.RulesetNative<Types.getNative<R>[P]> } }
+  type SheetXWeb<R extends Shape> = { [P in getWeb<R>]: { $web?: Types.RulesetWeb } }
 
   export type SheetWeb<R extends Shape = Shape> = Record<(keyof getCommon<R>) | getWeb<R>, RulesetWeb>
   export type SheetNative<R extends Shape = Shape> =

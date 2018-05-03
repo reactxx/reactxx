@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { LoremIpsum } from 'reactxx-basic'
+import { LoremIpsum, Types } from 'reactxx-basic'
 import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 import { TBasic, TTheme, View, Text, ScrollView, Icon, } from 'reactxx'
 

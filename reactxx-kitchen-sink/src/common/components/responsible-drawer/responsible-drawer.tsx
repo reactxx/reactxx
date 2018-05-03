@@ -44,12 +44,12 @@ export namespace TResponsibleDrawer {
 
 
   export type Shape = TBasic.OverwriteShape<{
-    common: TComps.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content'> & TComps.ShapeTexts<'openButton' | 'closeButton'>
+    common: Types.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content'> & Types.ShapeTexts<'openButton' | 'closeButton'>
     props: Props
     mediaq: 'mobile' | 'tablet' | 'desktop' // media query breakpoints names
     animation: { //animation sheets
-      mobile: TComps.ShapeViews<'drawer' | 'backDrop'> // mobile animation sheet
-      tablet: TComps.ShapeViews<'drawer' | 'content'> // tablet animation sheet
+      mobile: Types.ShapeViews<'drawer' | 'backDrop'> // mobile animation sheet
+      tablet: Types.ShapeViews<'drawer' | 'content'> // tablet animation sheet
     }
     variant: Variant
     nameType: Consts.Drawer

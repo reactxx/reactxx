@@ -10,10 +10,6 @@ import { TAnimation } from 'reactxx-animation'
 
 export namespace TBasic {
 
-  export const enum Consts {
-    textClassName = 'reactxx-text'
-  }
-
   /******************************************
     RULESET
   *******************************************/
@@ -29,10 +25,6 @@ export namespace TBasic {
   export interface ImageRulesetX extends RulesetX<'Image'> { }
   export interface ScrollViewRulesetX extends RulesetX<'ScrollView'> { }
 
-  //******************** Platform specific ruleset
-  export type RulesetNative<T extends Types.RulesetNativeIds> = Types.RulesetNative<T>
-  export type RulesetWeb = Types.RulesetWeb
-  export type Ruleset = Types.RulesetWeb | Types.RulesetNative
 
   /******************************************
     COMPONENT SHAPE
@@ -66,8 +58,8 @@ export namespace TBasic {
   export type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & TAddIn.SheetAddInX<R>
 
   type SheetXCommon<R extends Shape> = { [P in keyof Types.getCommon<R>]: Partial<RulesetX<Types.getCommon<R>[P], R>> }
-  type SheetXNative<R extends Shape> = { [P in keyof Types.getNative<R>]: { $native?: RulesetNative<Types.getNative<R>[P]> } & TAddIn.RulesetAddInX<Types.getNative<R>[P], R> }
-  type SheetXWeb<R extends Shape> = { [P in Types.getWeb<R>]: { $web?: RulesetWeb } & TAddIn.RulesetAddInX<Types.getNative<R>[P], R> }
+  type SheetXNative<R extends Shape> = { [P in keyof Types.getNative<R>]: { $native?: Types.RulesetNative<Types.getNative<R>[P]> } & TAddIn.RulesetAddInX<Types.getNative<R>[P], R> }
+  type SheetXWeb<R extends Shape> = { [P in Types.getWeb<R>]: { $web?: Types.RulesetWeb } & TAddIn.RulesetAddInX<Types.getNative<R>[P], R> }
 
   export type SheetCreatorX<R extends TBasic.Shape = TBasic.Shape> = Types.themeCreator<R, TBasic.SheetX<R>>
 
@@ -109,7 +101,7 @@ export namespace TAddIn {
   *******************************************/
 
   //******************** Cross platform
-  export interface RulesetAddInX<T extends Types.RulesetNativeIds, R extends TBasic.Shape> extends TMediaQ.MediaQRulesetPartX<T> { $props?: Types.PropsInRulesetX<R> }
+  export interface RulesetAddInX<T extends Types.RulesetNativeIds, R extends TBasic.Shape> extends TMediaQ.MediaQRulesetPartX<T> { }
   export interface SheetAddInX<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<TBasic.getAnimation<R>> }
 
 
@@ -127,22 +119,22 @@ export namespace TAddIn {
 
   //******************** Platform specific
   export interface CodePropsLow<R extends TBasic.Shape = TBasic.Shape> {
-    theme: Types.getTheme<R>
-    variant: Types.getVariant<R>
-    mediaqFlags: TMediaQ.MediaFlags<TBasic.getMediaQ<R>>
+    theme?: Types.getTheme<R>
+    variant?: Types.getVariant<R>
+    mediaqFlags?: TMediaQ.MediaFlags<TBasic.getMediaQ<R>>
     activeFlag?: TBasic.getActivable<R>
   }
 
   export interface CodePropsWeb<R extends TBasic.Shape = TBasic.Shape> extends CodePropsLow<R> {
-    animations: TAnimation.DriversWeb<TBasic.getAnimation<R>>
+    animations?: TAnimation.DriversWeb<TBasic.getAnimation<R>>
   }
 
   export interface CodePropsNative<R extends TBasic.Shape = TBasic.Shape> extends CodePropsLow<R> {
-    animations: TAnimation.DriversNative<TBasic.getAnimation<R>>
+    animations?: TAnimation.DriversNative<TBasic.getAnimation<R>>
   }
 
   export interface CodeProps<R extends TBasic.Shape = TBasic.Shape> extends CodePropsLow<R> {
-    animations: TAnimation.Drivers<TBasic.getAnimation<R>>
+    animations?: TAnimation.Drivers<TBasic.getAnimation<R>>
   }
 
 }

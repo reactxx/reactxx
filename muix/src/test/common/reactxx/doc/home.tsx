@@ -2,6 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { TTheme, TBasic, TComps, withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView, mergeRulesets } from 'reactxx'
+import { Types } from 'reactxx-basic'
 
 import MDI from 'reactxx-mdi'
 
@@ -14,9 +15,9 @@ export namespace DocHome {
   }
 
   export type ExpandedPanelShape = TBasic.OverwriteShape<{
-    common: TComps.ShapeViews<'root' | 'header' | 'content'> & TComps.ShapeTexts<'icon' | 'headerLabel'>
+    common: Types.ShapeViews<'root' | 'header' | 'content'> & Types.ShapeTexts<'icon' | 'headerLabel'>
     animation: {
-      openClose: TComps.ShapeViews<'content'> & TComps.ShapeTexts<'icon'>
+      openClose: Types.ShapeViews<'content'> & Types.ShapeTexts<'icon'>
     }
     props: { title: React.ReactNode }
     nameType: CompNames.ExpandPanel

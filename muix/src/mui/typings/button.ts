@@ -14,8 +14,8 @@ export namespace MuiButtonT {
   }
 
   export type Shape = TBasic.OverwriteShape<{
-    common: TComps.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini'> & TComps.ShapeTexts<'label'>
-    native: TComps.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & TComps.ShapeTexts<'labelIcon'>
+    common: Types.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini'> & Types.ShapeTexts<'label'>
+    native: Types.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & Types.ShapeTexts<'labelIcon'>
     web: 'colorInherit' | 'keyboardFocused'
     props: ButtonProps & Types.OnPressAllX
     propsNative: ReactN.TouchableOpacityProperties

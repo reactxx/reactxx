@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 
 import { Muix } from 'reactxx-mui/typings/muix'
-
+import { Types } from 'reactxx-basic'
 import { TComps, TBasic, TTheme } from 'reactxx'
 //import ReactN from 'react-native'
 //import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
@@ -13,8 +13,8 @@ export namespace MuiButtonBaseT {
   }
 
   export type Shape = TBasic.OverwriteShape<{
-    common: TComps.ShapeViews<'root'>
-    native: TComps.ShapeViews<'ripple'>
+    common: Types.ShapeViews<'root'>
+    native: Types.ShapeViews<'ripple'>
     props: ButtonBaseProps //& ReactXX.OnPressAllWeb
     propsNative: ReactN.TouchableOpacityProperties
     nameType: CompNames.ButtonBase

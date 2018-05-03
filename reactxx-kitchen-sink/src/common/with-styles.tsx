@@ -2,6 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 import ReactDOM from 'react-dom'
 
+import { Types } from 'reactxx-basic'
 import { withStylesCreator, TProvider, TTheme, TComps, TBasic, TAddIn, Text, View, ScrollView, Icon, AppContainer, mergeRulesets } from 'reactxx'
 //import { withStylesCreator } from '../../reactxx/common/withStyles'
 import { TMediaQ } from 'reactxx-mediaq'
@@ -16,7 +17,7 @@ export const enum Consts {
 
 // 
 export type Shape = TBasic.OverwriteShape<{
-  common: TComps.ShapeTexts<'root'>,
+  common: Types.ShapeTexts<'root'>,
   style: 'Text'
   mediaq: 'small'
   props: {
