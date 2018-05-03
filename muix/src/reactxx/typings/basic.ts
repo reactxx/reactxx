@@ -85,7 +85,7 @@ export namespace TBasic {
   export type getTheme<R extends Shape = Shape> = R['theme']
   export type getActivable<R extends Shape = Shape> = R['activable']
 
-  export interface Shapes { }
+  //export interface Shapes { }
 
   //******************** Helpers for Shape.common and Shape.native definitin
   export type OverwriteShape<R extends Partial<Shape>> = Overwrite<{

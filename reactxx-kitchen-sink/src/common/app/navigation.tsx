@@ -2,15 +2,14 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { LoremIpsum } from 'reactxx-basic'
-
+import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 import { TBasic, TTheme, View, Text, ScrollView, Icon, } from 'reactxx'
-import { H1, H2, H3, H4, H5, U, I, B, A, Blocquote, P } from '../components/typo'
 
+import { H1, H2, H3, H4, H5, U, I, B, A, Blocquote, P } from '../components/typo'
 import { examples, nameToExample, exampleToElement, components, navigationExample, KSink } from './index'
 import { primitives } from '../primitives/index'
 import { component } from '../component/index'
 import { ResponsibleDrawer } from '../components/responsible-drawer/responsible-drawer'
-import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 
 export type GotoExample = (example: KSink.Example) => void
 export type GetExampleUrl = (example: KSink.Example) => string
