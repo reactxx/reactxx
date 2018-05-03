@@ -2,27 +2,28 @@
 import ReactN, { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRectangle } from 'react-native'
 import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
 
-import { TBasic, TAddInConfig, TTheme, TProvider, withStyles, mergeRulesets } from 'reactxx'
+import { TBasic, TAddIn, TTheme, TProvider, withStyles, mergeRulesets } from 'reactxx'
 
 import { MuiButtonBaseT } from '../../typings/button-base'
-  import { Muix} from '../../typings/muix'
+import { Muix } from '../../typings/muix'
 
-const sheet: TTheme.SheetCreatorX<MuiButtonBaseT.Shape> = ({ palette }) => ({
+const sheet: TBasic.SheetCreatorX<MuiButtonBaseT.Shape> = ({ palette }) => ({
   root: {
     alignItems: 'center',
     justifyContent: 'center',
   },
   ripple: {
+    $native: {}
     //backgroundColor: palette.common.white,
     //opacity: 0.35,
-    
+
   },
-  
+
 })
 
 const minRippleSize = 0.01
 
-export class RippleEffect extends React.Component<MuiButtonBaseT.RippleEfectProps> { 
+export class RippleEffect extends React.Component<MuiButtonBaseT.RippleEfectProps> {
 
   state: { active?: boolean } = {}
   scaleValue = new Animated.Value(minRippleSize)
@@ -103,7 +104,7 @@ const buttonBase: TBasic.CodeSFCNative<MuiButtonBaseT.Shape> = props => {
   const { system: { style, classes, animations }, ...rest } = props
   const viewStyle = mergeRulesets<'View'>(classes.root)
   const rippleStyle = mergeRulesets<'View'>(classes.ripple)
-  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} {...rest}/>
+  return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} {...rest} />
 }
 
 const ButtonBase = withStyles<MuiButtonBaseT.Shape>(MuiButtonBaseT.CompNames.ButtonBase, sheet)(buttonBase)

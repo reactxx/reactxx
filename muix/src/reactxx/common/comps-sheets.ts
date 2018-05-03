@@ -24,7 +24,9 @@ export const textSheet: TBasic.SheetX<TComps.TextShape> = {
     },
   },
   pressable: { //web only ruleset
-    cursor: 'pointer'
+    $web: {
+      cursor: 'pointer'
+    }
   },
 }
 
@@ -53,7 +55,9 @@ export const iconSheet: TBasic.SheetX<TComps.IconShape> = {
     }
   },
   pressable: { //web only ruleset
-    cursor: 'pointer'
+    $web: {
+      cursor: 'pointer'
+    }
   },
 }
 
@@ -81,11 +85,15 @@ export const scrollViewSheet: TBasic.SheetX<TComps.ScrollViewShape> = {
     $web: webViewRuleset,
   },
   rootHorizontal: {
-    flexDirection: 'row',
-    overflowX: 'auto',
-    overflowY: 'hidden'
+    $web: {
+      flexDirection: 'row',
+      overflowX: 'auto',
+      overflowY: 'hidden'
+    }
   },
   containerHorizontal: {
-    flexDirection: 'row'
+    $web: {
+      flexDirection: 'row'
+    }
   }
 }

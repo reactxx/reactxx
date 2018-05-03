@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
+import { Types } from 'reactxx-basic'
 
 import { TBasic } from '../typings/basic'
 
@@ -8,15 +9,16 @@ import { TBasic } from '../typings/basic'
 export const toPlatformRuleSet = (style: TBasic.RulesetX) => {
   if (!style) return style
   const isNative = !window.isWeb
-  if (!style.$mediaq && !style.$web && !style.$native && !style.$overrides && !style.$props) return style
-  const { $web, $native, $overrides, $mediaq, $props: $propsX, ...rest } = style
+  if (!style.$mediaq && !style.$web && !style.$native /*&& !style.$overrides*/ && !style.$props) return style
+  const { $web, $native, /*$overrides,*/ $mediaq, $props: $propsX, ...rest } = style
   let $props: any = $propsX
   if ($propsX && ($propsX.$native && isNative || $propsX.$web && !isNative)) {
     const { $native: $propsNative, $web: $propsWeb, ...restProps } = $propsX
     $props = { ...restProps, ...(isNative ? $propsNative : $propsWeb) }
   }
-  const res:any = { ...rest, ...(isNative ? $native : $web), $overrides: toPlatformSheet($overrides), $mediaq: toPlatformSheet($mediaq as any), $props }
-  if (!res.$overrides) delete res.$overrides; if (!res.$props) delete res.$props //remove NULL or UNDEFINED
+  const res:any = { ...rest, ...(isNative ? $native : $web), /*$overrides: toPlatformSheet($overrides),*/ $mediaq: toPlatformSheet($mediaq as any), $props }
+  //if (!res.$overrides) delete res.$overrides;  //remove NULL or UNDEFINED
+  if (!res.$props) delete res.$props //remove NULL or UNDEFINED
   return res as TBasic.Ruleset
 }
 
@@ -34,5 +36,5 @@ export const toPlatformSheet = <R extends TBasic.Shape>(sheet: TBasic.SheetX<R> 
     } else // ruleset
       res[p] = toPlatformRuleSet(sheet$p)
   }
-  return res as TBasic.Sheet<R>
+  return res as Types.Sheet<R>
 }

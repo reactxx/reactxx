@@ -3,7 +3,7 @@ import React from 'react'
 import MuiButton, { ButtonProps } from 'material-ui/Button/Button'
 
 import { Types } from 'reactxx-basic'
-import { TComps, TBasic, TAddInConfig, TProvider, TTheme, CompNames } from 'reactxx'
+import { TComps, TBasic, TAddIn, TProvider, TTheme, CompNames } from 'reactxx'
 
 import { muiCompatible } from '../index'
 import { Muix } from '../typings/muix'

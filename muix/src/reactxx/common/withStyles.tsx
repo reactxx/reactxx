@@ -8,7 +8,7 @@ import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQ
 import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
 
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
-import { TBasic, TAddInConfig } from '../typings/basic'
+import { TBasic, TAddIn } from '../typings/basic'
 import { theme, TTheme, ThemeProvider, ThemeConsumer } from './theme'
 import { Overrides } from 'material-ui/styles/overrides';
 
@@ -18,10 +18,10 @@ const DEV_MODE = process.env.NODE_ENV === 'development'
 * WITH STYLES
 *************************/
 
-export const withStylesCreator = <R extends TBasic.Shape, TStatic extends {} = {}>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, component: TBasic.CodeComponentType<R>, options?: TTheme.WithStyleOptions_ComponentX<R>) =>
+export const withStylesCreator = <R extends TBasic.Shape, TStatic extends {} = {}>(name: Types.getNameType<R>, sheetCreator: TBasic.SheetCreatorX<R>, component: TBasic.CodeComponentType<R>, options?: TTheme.WithStyleOptions_ComponentX<R>) =>
   (overrideOptions?: TTheme.WithStyleOptions_ComponentX<R>) => withStyles<R, TStatic>(name, sheetCreator, options, overrideOptions)(component)
 
-export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name: TBasic.getNameType<R>, sheetCreator: TTheme.SheetCreatorX<R>, _options?: TTheme.WithStyleOptions_ComponentX<R>, overrideOptions?: TTheme.WithStyleOptions_ComponentX<R>) => (Component: TBasic.CodeComponentType<R>) => {
+export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name: Types.getNameType<R>, sheetCreator: TBasic.SheetCreatorX<R>, _options?: TTheme.WithStyleOptions_ComponentX<R>, overrideOptions?: TTheme.WithStyleOptions_ComponentX<R>) => (Component: TBasic.CodeComponentType<R>) => {
 
   type TPropsX = TBasic.PropsX<R>
 
@@ -78,7 +78,7 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
   }
 
   //**** TO PLATFORM
-  const toPlatform = (input: () => { mediaQFlags: TMediaQ.MediaFlags; activeFlag: boolean; propsWithCascading: TBasic.PropsX; themeContext: TTheme.ThemeContext }, output: (outputPar: { codeProps: TBasic.CodeProps, codeClasses: TBasic.Sheet, $animations: TAnimation.SheetsX }) => void, next: () => React.ReactNode) => {
+  const toPlatform = (input: () => { mediaQFlags: TMediaQ.MediaFlags; activeFlag: boolean; propsWithCascading: TBasic.PropsX; themeContext: TTheme.ThemeContext }, output: (outputPar: { codeProps: TBasic.CodeProps, codeClasses: Types.Sheet, $animations: TAnimation.SheetsX }) => void, next: () => React.ReactNode) => {
     const res = () => {
       const { mediaQFlags, activeFlag, propsWithCascading, themeContext } = input()
       const { codeProps, codeClasses } = prepareSheet(name, sheetCreator, options, propsWithCascading, themeContext, mediaQFlags, activeFlag)
@@ -97,16 +97,16 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
     themeContext: TTheme.ThemeContext = {}
     propsWithCascading: TBasic.PropsX
     codeProps: TBasic.CodeProps
-    codeClasses: TBasic.Sheet
+    codeClasses: Types.Sheet
     $animations: TAnimation.SheetsX
     mediaQFlags: TMediaQ.MediaFlags
-    mediaSheetPatch: TBasic.Sheet & { $animations?: TAnimation.SheetsX }
+    mediaSheetPatch: TMediaQ.MediaQSheet //Types.Sheet & { $animations?: TAnimation.SheetsX }
     activable: TActivable.ActiveResult
-    activablePatch: TBasic.Sheet
+    activablePatch: Types.Sheet
     animations: TAnimation.Drivers
 
     render() {
-      if (DEV_MODE && this.props.developer_log)
+      if (DEV_MODE && this.props.developer_flag)
         debugger
       return this.renderer()
     }
@@ -114,7 +114,7 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
     renderCodeComponent = () => {
       const { mediaSheetPatch, activablePatch, codeProps, codeClasses, animations } = this
 
-      if (DEV_MODE && codeProps.system.developer_log) console.log(
+      if (DEV_MODE && codeProps.system.developer_flag) console.log(
         `### withStyles AFTER_ANIMATION for ${name}`,
         '\ntheme: ', this.themeContext.theme,
         '\npropsWithCascading: ', this.propsWithCascading,
@@ -126,7 +126,7 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
       )
 
       // apply patches
-      let classes = codeClasses as TBasic.Sheet<R>
+      let classes = codeClasses as Types.Sheet<R>
       if (mediaSheetPatch || activablePatch) classes = deepMerges({}, codeClasses, mediaSheetPatch, activablePatch)
 
       // call component code
@@ -174,13 +174,13 @@ export const AppContainer: React.SFC<{ theme?: TTheme.ThemeCreator }> = props =>
   return mediaQProviderExists() ? theme : <MediaQ_AppContainer>{theme}</MediaQ_AppContainer>
 }
 
-export function mergeRulesets<T extends Types.RulesetNativeIds = 'View'>(...rulesets/*all used rulesets*/): TBasic.RulesetNative<T>
-export function mergeRulesets<T extends 'Web'>(...rulesets): TBasic.RulesetWeb
+export function mergeRulesets<T extends Types.RulesetNativeIds = 'View'>(...rulesets/*all used rulesets*/): Types.RulesetNative<T>
+export function mergeRulesets<T extends 'Web'>(...rulesets): Types.RulesetWeb
 export function mergeRulesets<T extends {}>(...rulesets): T
 export function mergeRulesets(...rulesets) {
   let count = 0
   let res
-  rulesets.forEach((ruleset: TAddInConfig.RulesetWithAddIn) => {
+  rulesets.forEach(ruleset => {
     if (!ruleset) return
     switch (count) {
       case 0: res = ruleset; break
@@ -196,14 +196,14 @@ export function mergeRulesets(...rulesets) {
 * PRIVATE
 *************************/
 
-const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options: TTheme.WithStyleOptions_ComponentX, props: TBasic.PropsX, themeContext: TTheme.ThemeContext, mediaqFlags: TMediaQ.MediaFlags, activeFlag: boolean) => {
+const prepareSheet = (name: string, createSheetX: TBasic.SheetCreatorX, options: TTheme.WithStyleOptions_ComponentX, props: TBasic.PropsX, themeContext: TTheme.ThemeContext, mediaqFlags: TMediaQ.MediaFlags, activeFlag: boolean) => {
 
-  const { classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, developer_log, CONSTANT, ...rest } = props as TBasic.PropsX & Types.OnPressAllX
+  const { classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, developer_flag, CONSTANT, ...rest } = props as TBasic.PropsX & Types.OnPressAllX
   const { theme, $cache } = (themeContext || {}) as TTheme.ThemeContext
 
   //** STATIC SHEET
-  let staticSheet: TBasic.Sheet
-  let getStaticSheet: () => TBasic.Sheet
+  let staticSheet: Types.Sheet
+  let getStaticSheet: () => Types.Sheet
   let variantCacheId
   let variant = null
   if (typeof createSheetX !== 'function') {
@@ -238,7 +238,7 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
 
   //** MERGE staticSheet with classes and className
   const root = className && { root: toPlatformRuleSet(callCreator(theme, variant, className)) }
-  const actSheet: TBasic.Sheet = classes || root ? deepMergesSys(false, {}, staticSheet, toPlatformSheet(callCreator(theme, variant, classes)), root) : staticSheet
+  const actSheet: Types.Sheet = classes || root ? deepMergesSys(false, {}, staticSheet, toPlatformSheet(callCreator(theme, variant, classes)), root) : staticSheet
 
 
   //** RETURN platform dependent props for pure component code
@@ -251,7 +251,7 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
       //mergeRulesetWithOverrides,
       mediaqFlags,
       activeFlag,
-      developer_log,
+      developer_flag,
     }
   } as TBasic.CodeProps
 

@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { Types, deepMerge, deepMergesSys } from 'reactxx-basic'
-import { TComps, TProvider, TTheme, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStylesCreator, ThemeProviderUntyped, mergeRulesets } from 'reactxx'
+import { TComps, TProvider, TTheme, TBasic, TAddIn, Text, View, ScrollView, Icon, withStylesCreator, ThemeProviderUntyped, mergeRulesets } from 'reactxx'
 
 import { H2, A, P } from '../components/typo'
 
@@ -36,7 +36,7 @@ const ThemeProvider = ThemeProviderUntyped as TTheme.ThemeProviderTyped<Theme>
 * LABEL
 *************************/
 
-const labelSheet: TTheme.SheetCreatorX<Shape> = ({ color: { main, dark, constrastText }, fontSize }) => ({
+const labelSheet: TBasic.SheetCreatorX<Shape> = ({ color: { main, dark, constrastText }, fontSize }) => ({
   root: {
     backgroundColor: main,
     borderRadius: 2,
@@ -72,7 +72,7 @@ export const LabelC = LabelCreator({ withCascading: true })
 * BADGE
 *************************/
 
-const badgeSheet: TTheme.SheetCreatorX<Shape> = ({ color: { dark, constrastText } }) => ({
+const badgeSheet: TBasic.SheetCreatorX<Shape> = ({ color: { dark, constrastText } }) => ({
   root: {
     backgroundColor: dark,
     padding: 0,
@@ -83,10 +83,14 @@ const badgeSheet: TTheme.SheetCreatorX<Shape> = ({ color: { dark, constrastText 
     borderRadius: 32 / 2,
     marginBottom: 10,
     marginRight: 10,
+    $native: {},
+    $web: {},
   },
   label: {
     color: constrastText,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    $native: {},
+    $web: {},
   },
 })
 

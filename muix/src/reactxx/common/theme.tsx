@@ -1,7 +1,9 @@
 ﻿import React from 'react'
-import { TMediaQ } from 'reactxx-mediaq'
 
-import { TBasic } from '../typings/basic'
+import { TMediaQ } from 'reactxx-mediaq'
+import { Types } from 'reactxx-basic'
+
+import { TBasic, TAddIn } from '../typings/basic'
 
 export namespace TTheme {
 
@@ -12,20 +14,23 @@ export namespace TTheme {
   }
 
   export type PropsXOverwrite<R extends TBasic.Shape> = PartialOverwrite<TBasic.PropsX<R>, {
-    style?: TBasic.RulesetX<TBasic.getStyle<R>>
+    style?: TBasic.RulesetX<Types.getStyle<R>>
     classes?: TBasic.PartialSheetX<R>
-    className?: TBasic.RulesetX<TBasic.getStyle<R>>
+    className?: TBasic.RulesetX<Types.getStyle<R>>
   }>
 
   export interface WithStyleOptions_ComponentX<R extends TBasic.Shape =  TBasic.Shape> extends WithStyleOptions {
-    getVariant?: (props: TBasic.PropsX<R> & TMediaQ.CodeProps<TBasic.getMediaQ<R>>, theme?: TBasic.getTheme<R>) => TBasic.getVariant<R>
-    variantToString?: (variant: TBasic.getVariant<R>) => string
+    getVariant?: (props: TBasic.PropsX<R> & TMediaQ.CodeProps<TBasic.getMediaQ<R>>, theme?: Types.getTheme<R>) => Types.getVariant<R>
+    variantToString?: (variant: Types.getVariant<R>) => string
     defaultProps?: PropsXOverwrite<R>
   }
 
-  export type SheetCreatorX<R extends TBasic.Shape = TBasic.Shape> = TBasic.SheetX<R> | ((themeX: TBasic.getTheme<R>, variant: TBasic.getVariant<R>) => TBasic.SheetX<R>)
-  export type RulesetCreatorX<R extends TBasic.Shape = TBasic.Shape> = TBasic.RulesetX<TBasic.getStyle<R>> | ((theme: TBasic.getTheme<R>, variant: TBasic.getVariant<R>) => TBasic.RulesetX<TBasic.getStyle<R>>)
-  export type PartialSheetCreatorX<R extends TBasic.Shape = TBasic.Shape> = TBasic.PartialSheetX<R> | ((themeX: TBasic.getTheme<R>, variant: TBasic.getVariant<R>) => TBasic.PartialSheetX<R>)
+  //export type SheetCreatorX<R extends TBasic.Shape = TBasic.Shape> = TBasic.SheetX<R> | ((themeX: Types.getTheme<R>, variant: Types.getVariant<R>) => TBasic.SheetX<R>)
+
+  //export type RootRulesetCreatorX<R extends TBasic.Shape = TBasic.Shape> = TBasic.RulesetX<Types.getStyle<R>> | ((theme: Types.getTheme<R>, variant: Types.getVariant<R>) => TBasic.RulesetX<Types.getStyle<R>>) //Types.RootRulesetCreatorX<R, TAddInConfig.RulesetAddInX<Types.getStyle<R>, R>>
+  //export type PartialSheetCreatorX<R extends TBasic.Shape = TBasic.Shape> = TBasic.PartialSheetX<R> | ((themeX: Types.getTheme<R>, variant: Types.getVariant<R>) => TBasic.PartialSheetX<R>) //Types.PartialSheetCreatorX<R, TAddInConfig.SheetAddInX<R>>
+
+  //type x = 
 
   export interface ThemeBase {
     type?: 'ThemeX'

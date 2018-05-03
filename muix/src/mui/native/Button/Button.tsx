@@ -5,7 +5,7 @@ import { capitalize } from 'material-ui/utils/helpers';
 import { ButtonProps } from 'material-ui/Button/Button'
 
 import { Types } from 'reactxx-basic'
-import { TComps, TBasic, TAddInConfig, TProvider, TTheme, CompNames, Text, withStyles, mergeRulesets } from 'reactxx'
+import { TComps, TBasic, TAddIn, TProvider, TTheme, CompNames, Text, withStyles, mergeRulesets } from 'reactxx'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 import { MuiButtonT } from '../../typings/button'
@@ -14,11 +14,13 @@ import { Muix } from '../../typings/muix'
 
 const getTextIconColor = (color: string) => ({
   label: { color },
-  labelIcon: {color },
+  labelIcon: {
+    $native: { color }
+  },
 } as TBasic.PartialSheetX<MuiButtonT.Shape>)
 
 
-const sheets: (isLeft?: boolean) => TTheme.SheetCreatorX<MuiButtonT.Shape> = isLeft => ({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
+const sheets: (isLeft?: boolean) => TBasic.SheetCreatorX<MuiButtonT.Shape> = isLeft => ({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
 
   root: {
     flexDirection: 'row',
@@ -38,50 +40,52 @@ const sheets: (isLeft?: boolean) => TTheme.SheetCreatorX<MuiButtonT.Shape> = isL
   },
 
   disabled: {
-    $overrides: getTextIconColor(palette.action.disabled)
+    //$overrides: getTextIconColor(palette.action.disabled)
   },
 
   flat: {
-    $overrides: {
-      ripple: { backgroundColor: palette.grey[500], opacity: 0.8 },
-    }
+    $native: {}
+    //$overrides: {
+    //  ripple: { backgroundColor: palette.grey[500], opacity: 0.8 },
+    //}
   },
   flatPrimary: {
-    $overrides: {
-      ripple: { backgroundColor: fade(palette.primary.main, 0.4), opacity: 0.8 },
-      ...getTextIconColor(palette.primary.main)
-    },
+    //$overrides: {
+    //  ripple: { backgroundColor: fade(palette.primary.main, 0.4), opacity: 0.8 },
+    //  ...getTextIconColor(palette.primary.main)
+    //},
   },
   flatSecondary: {
-    $overrides: {
-      ripple: { backgroundColor: fade(palette.secondary.light, 0.4), opacity: 0.8 },
-      ...getTextIconColor(palette.secondary.main)
-    },
+    //$overrides: {
+    //  ripple: { backgroundColor: fade(palette.secondary.light, 0.4), opacity: 0.8 },
+    //  ...getTextIconColor(palette.secondary.main)
+    //},
   },
 
   raised: {
     backgroundColor: palette.grey[300],
     ...shadowsNew[2],
-    $overrides: {
-      active: shadowsNew[8],
-    }
+    //$overrides: {
+    //  active: shadowsNew[8],
+    //}
   },
   raisedPrimary: {
     backgroundColor: palette.primary.main,
-    $overrides: getTextIconColor(palette.primary.contrastText)
+    //$overrides: getTextIconColor(palette.primary.contrastText)
   },
   raisedSecondary: {
     backgroundColor: palette.secondary.main,
-    $overrides: getTextIconColor(palette.secondary.contrastText)
+    //$overrides: getTextIconColor(palette.secondary.contrastText)
   },
   raisedDisable: {
-    ...shadowsNew[0],
-    backgroundColor: palette.action.disabledBackground,
-    //$childOverrides: getTextIconColor(palette.action.disabled),
-    $overrides: getTextIconColor(palette.action.disabled),
+    $native: {
+      ...shadowsNew[0],
+      backgroundColor: palette.action.disabledBackground,
+    }
+    //$overrides: getTextIconColor(palette.action.disabled),
   },
   raisedContrast: {
-    $overrides: getTextIconColor(palette.primary.contrastText)
+    //$overrides: getTextIconColor(palette.primary.contrastText)
   },
 
   fab: {
@@ -94,9 +98,9 @@ const sheets: (isLeft?: boolean) => TTheme.SheetCreatorX<MuiButtonT.Shape> = isL
     height: 56,
     borderRadius: 56 / 2,
     ...shadowsNew[6],
-    $overrides: {
-      active: shadowsNew[12],
-    }
+    //$overrides: {
+    //  active: shadowsNew[12],
+    //}
   },
 
   mini: {
@@ -105,14 +109,25 @@ const sheets: (isLeft?: boolean) => TTheme.SheetCreatorX<MuiButtonT.Shape> = isL
     borderRadius: 40 / 2,
   },
   ripple: {
-    backgroundColor: palette.common.white,
-    opacity: 0.35,
+    $native: {
+      backgroundColor: palette.common.white,
+      opacity: 0.35,
+    }
   },
-  colorInherit: {},
-  label: {},
-  labelIcon: {},
-  active: {},
-  keyboardFocused: {},
+  colorInherit: {
+    $web: {}
+  },
+  label: {
+  },
+  labelIcon: {
+    $native: {}
+  },
+  active: {
+    $native: {}
+  },
+  keyboardFocused: {
+    $web: {}
+  },
 })
 
 
@@ -149,8 +164,8 @@ const button: TBasic.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
   const rippleStyle = mergeRulesets<'View'>(classes.ripple)
   const activeStyle = mergeRulesets<'View'>(!disabled && classes.active)
   //const labelStyle = mergeRulesetWithOverrides(classes.label) 
-  const iconOverride = { root: mergeRulesets(classes.labelIcon) } as TBasic.Sheet
-  const labelOverride = { root: mergeRulesets(classes.label) } as TBasic.Sheet
+  const iconOverride = { root: mergeRulesets(classes.labelIcon) } as Types.Sheet
+  const labelOverride = { root: mergeRulesets(classes.label) } as Types.Sheet
 
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 

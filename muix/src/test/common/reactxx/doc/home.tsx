@@ -23,7 +23,7 @@ export namespace DocHome {
   }>
 }
 
-const expandedPanelSheet: TTheme.SheetCreatorX<DocHome.ExpandedPanelShape> = {
+const expandedPanelSheet: TBasic.SheetCreatorX<DocHome.ExpandedPanelShape> = {
   $animations: {
     openClose: {
       content: {

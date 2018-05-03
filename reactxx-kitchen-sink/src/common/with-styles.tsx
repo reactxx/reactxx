@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 import ReactDOM from 'react-dom'
 
-import { withStylesCreator, TProvider, TTheme, TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, AppContainer, mergeRulesets } from 'reactxx'
+import { withStylesCreator, TProvider, TTheme, TComps, TBasic, TAddIn, Text, View, ScrollView, Icon, AppContainer, mergeRulesets } from 'reactxx'
 //import { withStylesCreator } from '../../reactxx/common/withStyles'
 import { TMediaQ } from 'reactxx-mediaq'
 
@@ -30,7 +30,7 @@ export type Shape = TBasic.OverwriteShape<{
 *************************/
 export interface Variant extends TMediaQ.CodeProps<TBasic.getMediaQ<Shape>> { }
 
-const sheet: TTheme.SheetCreatorX<Shape> = (theme, variant) => ({
+const sheet: TBasic.SheetCreatorX<Shape> = (theme, variant) => ({
   root: {
     $mediaq: {
       '-480': { color: 'red' },

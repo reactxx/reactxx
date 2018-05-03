@@ -29,7 +29,7 @@ export const deepMerges = (target, ...sources) => {
 //create platform specific ruleset from cross platform one
 export const toPlatformRuleSet = (style: Types.RulesetX) => {
   if (!style) return null
-  if (!style.$web && !style.$native) return style as Types.Ruleset // optimalization: already platform specific
+  if (!style.$web && !style.$native) return style // optimalization: already platform specific
   const { $web, $native, ...rest } = style
   return { ...rest, ...(window.isWeb ? $web : $native) } as Types.Ruleset
 }

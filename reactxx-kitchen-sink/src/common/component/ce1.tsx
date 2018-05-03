@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { deepMerges } from 'reactxx-basic';
+import { deepMerges, Types } from 'reactxx-basic';
 import MDI from 'reactxx-mdi'
-import { TComps, TProvider, TTheme, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStylesCreator, mergeRulesets } from 'reactxx'
+import { TComps, TProvider, TTheme, TBasic, TAddIn, Text, View, ScrollView, Icon, withStylesCreator, mergeRulesets } from 'reactxx'
 
 import { H2 } from '../components/typo'
 
@@ -43,13 +43,13 @@ const sheet: TBasic.SheetX<Shape> = {
     marginRight: 10,
   },
   label: {
-    color: 'white'
+    color: 'white',
   },
   icon: {
-    fontSize: 20
+    fontSize: 20,
   },
   iconGap: {
-    marginRight: 5
+    marginRight: 5,
   },
 }
 

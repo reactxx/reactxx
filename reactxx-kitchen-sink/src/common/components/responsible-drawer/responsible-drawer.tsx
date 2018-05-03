@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { Types } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
-import { TAddInConfig, TComps, TProvider, TTheme, TBasic, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer, mergeRulesets } from 'reactxx'
+import { TAddIn, TComps, TProvider, TTheme, TBasic, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer, mergeRulesets } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
 
 //******* Two possibilities how to use get icon data:
@@ -65,7 +65,7 @@ const { Provider, Consumer } = React.createContext<TResponsibleDrawer.IconRender
 
 // ResponsibleDrawer's sheet. 
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
-const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) => {
+const sheet: TBasic.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) => {
 
   const { animationDuration, drawerWidths, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } } = variant
 

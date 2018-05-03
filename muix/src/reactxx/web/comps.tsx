@@ -32,7 +32,7 @@ const icon: TBasic.CodeSFCWeb<TComps.IconShape> = props => {
 const text: TBasic.CodeSFCWeb<TComps.TextShape> = props => {
   const { system: { style, classes }, numberOfLines, url, onClick, ...rest } = props
   const rootStyle = mergeRulesets<'Web'>(classes.root, onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle)
-  const tagProps = { className: TBasic.Consts.textClassName + ' ' + rulesetsToClassNames(rootStyle), style, ...rest, onClick: url ? undefined : onClick, ...rootStyle.$props }
+  const tagProps = { className: TBasic.Consts.textClassName + ' ' + rulesetsToClassNames(rootStyle), style, ...rest, onClick: url ? undefined : onClick } //, ...rootStyle.$props }
   return url ? <a href={url} {...tagProps} /> : <div {...tagProps} />
 }
 

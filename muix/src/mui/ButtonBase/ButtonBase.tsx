@@ -3,7 +3,7 @@ import React from 'react'
 import MuiButtonBase, { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
 import { Properties } from 'csstype'
 
-import { TAddInConfig, TProvider, TBasic, TTheme } from 'reactxx'
+import { TAddIn, TProvider, TBasic, TTheme } from 'reactxx'
 
 import { muiCompatible } from '../index'
 
