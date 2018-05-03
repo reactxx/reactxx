@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { Types, deepMerge, deepMergesSys } from 'reactxx-basic'
-import { TComps, TProvider, TTheme, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStylesCreator, ThemeProviderUntyped } from 'reactxx'
+import { TComps, TProvider, TTheme, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStylesCreator, ThemeProviderUntyped, mergeRulesets } from 'reactxx'
 
 import { H2, A, P } from '../components/typo'
 
@@ -56,9 +56,9 @@ const labelSheet: TTheme.SheetCreatorX<Shape> = ({ color: { main, dark, constras
   },
 })
 
-const label: TBasic.CodeSFC<Shape> = ({ system: { classes, mergeRulesetWithOverrides, style }, children}) => {
-  const root = mergeRulesetWithOverrides(classes.root) as TBasic.ViewRulesetX
-  const label = mergeRulesetWithOverrides(classes.label) as TBasic.TextRulesetX
+const label: TBasic.CodeSFC<Shape> = ({ system: { classes, style }, children}) => {
+  const root = mergeRulesets<TBasic.ViewRulesetX>(classes.root)
+  const label = mergeRulesets<TBasic.TextRulesetX>(classes.label)
   return <View className={root} style={style as TBasic.ViewRulesetX}>
     <Text className={label}>{children}</Text>
   </View>
@@ -90,9 +90,9 @@ const badgeSheet: TTheme.SheetCreatorX<Shape> = ({ color: { dark, constrastText 
   },
 })
 
-const badge: TBasic.CodeSFC<Shape> = ({ system: { classes, mergeRulesetWithOverrides, style }, children }) => {
-  const root = mergeRulesetWithOverrides(classes.root) as TBasic.ViewRulesetX
-  const label = mergeRulesetWithOverrides(classes.label) as TBasic.TextRulesetX
+const badge: TBasic.CodeSFC<Shape> = ({ system: { classes, style }, children }) => {
+  const root = mergeRulesets<TBasic.ViewRulesetX>(classes.root)
+  const label = mergeRulesets<TBasic.TextRulesetX>(classes.label) 
   return <View className={root} style={style as TBasic.ViewRulesetX}>
     <Text className={label}>{children}</Text>
   </View>

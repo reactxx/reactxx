@@ -4,21 +4,21 @@ import warning from 'warning'
 import { rulesetsToClassNames } from 'reactxx-fela'
 
 //import { withStyles } from '../common/withStyles'
-import { withStyles } from '../common/withStyles'
+import { withStyles, mergeRulesets } from '../common/withStyles'
 import { TBasic } from '../typings/basic'
 import { TComps } from '../typings/comps'
 import { CompNames } from '../typings/index'
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comps-sheets'
 
 const view: TBasic.CodeSFCWeb<TComps.ViewShape> = props => {
-  const { system: { style, classes, mergeRulesetWithOverrides }, ...rest } = props
-  const rootStyle = mergeRulesetWithOverrides(classes.root)
+  const { system: { style, classes }, ...rest } = props
+  const rootStyle = mergeRulesets<'Web'>(classes.root)
   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest} />
 }
 
 const icon: TBasic.CodeSFCWeb<TComps.IconShape> = props => {
-  const { system: { style, classes, mergeRulesetWithOverrides }, children, data, viewBox, url, onClick, ...rest } = props
-  const rootStyle = mergeRulesetWithOverrides(classes.root, onClick && classes.pressable)
+  const { system: { style, classes }, children, data, viewBox, url, onClick, ...rest } = props
+  const rootStyle = mergeRulesets<'Web'>(classes.root, onClick && classes.pressable)
   //replace fontSize with width x height
   if (rootStyle.fontSize) { rootStyle.height = rootStyle.width = rootStyle.fontSize; delete rootStyle.fontSize }
   if (style && style.fontSize) { style.height = style.width = style.fontSize; delete style.fontSize }
@@ -30,16 +30,16 @@ const icon: TBasic.CodeSFCWeb<TComps.IconShape> = props => {
 }
 
 const text: TBasic.CodeSFCWeb<TComps.TextShape> = props => {
-  const { system: { style, classes, mergeRulesetWithOverrides }, numberOfLines, url, onClick, ...rest } = props
-  const rootStyle = mergeRulesetWithOverrides(classes.root, onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle)
+  const { system: { style, classes }, numberOfLines, url, onClick, ...rest } = props
+  const rootStyle = mergeRulesets<'Web'>(classes.root, onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle)
   const tagProps = { className: TBasic.Consts.textClassName + ' ' + rulesetsToClassNames(rootStyle), style, ...rest, onClick: url ? undefined : onClick, ...rootStyle.$props }
   return url ? <a href={url} {...tagProps} /> : <div {...tagProps} />
 }
 
 const scrollView: TBasic.CodeSFCWeb<TComps.ScrollViewShape> = props => {
-  const { system: { style, classes, mergeRulesetWithOverrides }, children, horizontal, ...rest } = props
-  const rootStyle = mergeRulesetWithOverrides(classes.root, horizontal && classes.rootHorizontal)
-  const containerStyle = mergeRulesetWithOverrides(classes.container, horizontal && classes.containerHorizontal)
+  const { system: { style, classes }, children, horizontal, ...rest } = props
+  const rootStyle = mergeRulesets<'Web'>(classes.root, horizontal && classes.rootHorizontal)
+  const containerStyle = mergeRulesets<'Web'>(classes.container, horizontal && classes.containerHorizontal)
   //checkChildLayoutProps(style); checkChildLayoutProps(className)
   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest}>
     <div className={rulesetsToClassNames(containerStyle)}>

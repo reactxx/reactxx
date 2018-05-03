@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { deepMerges } from 'reactxx-basic';
 import MDI from 'reactxx-mdi'
-import { TComps, TProvider, TTheme, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
+import { TComps, TProvider, TTheme, TBasic, TAddInConfig, Text, View, ScrollView, Icon, withStylesCreator, mergeRulesets } from 'reactxx'
 
 import { H2 } from '../components/typo'
 
@@ -56,11 +56,11 @@ const sheet: TBasic.SheetX<Shape> = {
 /************************
 * CODE
 *************************/
-const label: TBasic.CodeSFC<Shape> = ({ system: { classes, style, mergeRulesetWithOverrides }, children, iconData }) => {
-  const root = mergeRulesetWithOverrides(classes.root) as TBasic.ViewRulesetX
+const label: TBasic.CodeSFC<Shape> = ({ system: { classes, style }, children, iconData }) => {
+  const root = mergeRulesets<TBasic.ViewRulesetX>(classes.root)
   const hasChildren = React.Children.count(children) > 0
-  const icon = iconData && mergeRulesetWithOverrides(classes.label, classes.icon, hasChildren && classes.iconGap) as TBasic.TextRulesetX
-  const label = mergeRulesetWithOverrides(classes.label) as TBasic.TextRulesetX
+  const icon = iconData && mergeRulesets<TBasic.TextRulesetX>(classes.label, classes.icon, hasChildren && classes.iconGap)
+  const label = mergeRulesets<TBasic.TextRulesetX>(classes.label)
   return <View className={root} style={style as TBasic.ViewRulesetX}>
     {iconData && <Icon data={iconData} className={icon} />}
     <Text className={label}>{children}</Text>

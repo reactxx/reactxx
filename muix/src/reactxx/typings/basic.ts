@@ -33,7 +33,7 @@ export namespace TBasic {
   export interface ScrollViewRulesetX extends RulesetX<'ScrollView'> { }
 
   //******************** Platform specific ruleset
-  export type RulesetNative<T extends Types.RulesetNativeIds = never> =
+  export type RulesetNative<T extends Types.RulesetNativeIds = never> = 
     T extends 'Text' ? ReactN.TextStyle :
     T extends 'Image' ? ReactN.ImageStyle :
     T extends 'ScrollView' ? ReactN.ScrollViewStyle :
@@ -208,9 +208,9 @@ export namespace TBasic {
      OBSOLETE
   *******************************************/
 
-  export type MergeRulesetWithOverrides = (...rulesets: (TAddInConfig.RulesetWithAddIn | boolean)[]) => TBasic.Ruleset
-  export type MergeRulesetWithOverridesNative = (...rulesets: (TAddInConfig.RulesetWithAddInNative | ReactN.TextStyle | boolean)[]) => TBasic.RulesetNative
-  export type MergeRulesetWithOverridesWeb = (...rulesets: (TAddInConfig.RulesetWithAddInWeb | boolean)[]) => TBasic.RulesetWeb
+  //export type MergeRulesetWithOverrides = (...rulesets: (TAddInConfig.RulesetWithAddIn | boolean)[]) => TBasic.Ruleset
+  //export type MergeRulesetWithOverridesNative = (...rulesets: (TAddInConfig.RulesetWithAddInNative | ReactN.TextStyle | boolean)[]) => TBasic.RulesetNative
+  //export type MergeRulesetWithOverridesWeb = (...rulesets: (TAddInConfig.RulesetWithAddInWeb | boolean)[]) => TBasic.RulesetWeb
 }
 
 export function isType<TWeb>(arg): arg is TWeb { return window.isWeb }
@@ -251,7 +251,7 @@ export namespace TAddInConfig {
   export interface CodePropsWeb<R extends TBasic.Shape = TBasic.Shape> {
     theme: TBasic.getTheme<R>
     variant: TBasic.getVariant<R>
-    mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesWeb
+    //mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesWeb
     animations: TAnimation.DriversWeb<TBasic.getAnimation<R>>
     mediaqFlags: TMediaQ.MediaFlags<TBasic.getMediaQ<R>>
     activeFlag?: TBasic.getActivable<R>
@@ -260,14 +260,14 @@ export namespace TAddInConfig {
   export interface CodePropsNative<R extends TBasic.Shape = TBasic.Shape> {
     theme: TBasic.getTheme<R>
     variant: TBasic.getVariant<R>
-    mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesNative
+    //mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverridesNative
     animations: TAnimation.DriversNative<TBasic.getAnimation<R>>
     mediaqFlags: TMediaQ.MediaFlags<TBasic.getMediaQ<R>>
     activeFlag?: TBasic.getActivable<R>
   }
 
   export interface CodeProps<R extends TBasic.Shape = TBasic.Shape> {
-    mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides
+    //mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides
     theme: TBasic.getTheme<R>
     variant: TBasic.getVariant<R>
     animations: TAnimation.Drivers<TBasic.getAnimation<R>>

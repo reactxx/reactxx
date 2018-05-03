@@ -3,7 +3,7 @@ import ReactN, { View as ViewRN, Text as TextRN, ScrollView as ScrollViewRN, Ani
 import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
-import { withStyles } from '../common/withStyles'
+import { withStyles, mergeRulesets } from '../common/withStyles'
 import { TBasic } from '../typings/basic'
 import { TComps } from '../typings/comps'
 import { CompNames } from '../typings/index'
@@ -11,8 +11,8 @@ import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comp
 
 const anyView = (isAnim: boolean) => (props => {
   const ActView = isAnim ? Animated.View : ViewRN
-  const { system: { style, classes, mergeRulesetWithOverrides }, onPress, onLongPress, onPressIn, onPressOut, ...rest } = props
-  const rootStyle = mergeRulesetWithOverrides(classes.root, style) as ReactN.ViewStyle
+  const { system: { style, classes }, onPress, onLongPress, onPressIn, onPressOut, ...rest } = props
+  const rootStyle = mergeRulesets<'View'>(classes.root, style)
   const presses = onPress || onLongPress || onPressIn || onPressOut ? { onPress, onLongPress, onPressIn, onPressOut } : null
   const res = <ActView style={rootStyle} {...rest} />
   return presses ? <TouchableWithoutFeedback {...presses}>{res}</TouchableWithoutFeedback> : res
@@ -21,8 +21,8 @@ const anyView = (isAnim: boolean) => (props => {
 
 const anyText = (isAnim: boolean) => (props => {
   const ActText = isAnim ? Animated.Text : TextRN
-  const { system: { style, classes, mergeRulesetWithOverrides }, onPress, url, ...rest } = props
-  const rootStyle = mergeRulesetWithOverrides(classes.root, props.numberOfLines === 1 && classes.singleLineStyle, style) as ReactN.TextStyle
+  const { system: { style, classes }, onPress, url, ...rest } = props
+  const rootStyle = mergeRulesets<'Text'>(classes.root, props.numberOfLines === 1 && classes.singleLineStyle, style)
   //Link to URL
   const doPress = !url ? onPress : () => Linking.canOpenURL(url).then(supported => {
     warning(supported, `Can't handle url: ${url}`)
@@ -35,17 +35,17 @@ const anyText = (isAnim: boolean) => (props => {
 
 const anyScrollView = (isAnim: boolean) => (props => {
   const ActScrollView = isAnim ? Animated.ScrollView : ScrollViewRN
-  const { system: { style, classes, mergeRulesetWithOverrides }, ...rest } = props
-  const rootStyle = mergeRulesetWithOverrides(classes.root, style) as ReactN.ScrollViewStyle
-  const containerStyle = mergeRulesetWithOverrides(classes.container) as ReactN.ViewStyle
+  const { system: { style, classes }, ...rest } = props
+  const rootStyle = mergeRulesets<'ScrollView'>(classes.root, style)
+  const containerStyle = mergeRulesets<'View'>(classes.container)
   return <ActScrollView style={rootStyle} contentContainerStyle={containerStyle} {...rest} />
 }) as TBasic.CodeSFCNative<TComps.ScrollViewShape>
 
 const AnimatedIconLow = Animated.createAnimatedComponent(MaterialCommunityIcons)
 const anyIcon = (isAnim: boolean) => (props => {
   const ActIcon = isAnim ? AnimatedIconLow : MaterialCommunityIcons
-  const { system: { style, classes, mergeRulesetWithOverrides }, data, children, ...rest } = props
-  const rootStyle = mergeRulesetWithOverrides(classes.root, style) as ReactN.TextStyle
+  const { system: { style, classes }, data, children, ...rest } = props
+  const rootStyle = mergeRulesets<'Text'>(classes.root, style)
   return <ActIcon name={(data || children as string) as MaterialCommunityIconsProps['name']} style={rootStyle} {...rest} />
 }) as TBasic.CodeSFCNative<TComps.IconShape>
 

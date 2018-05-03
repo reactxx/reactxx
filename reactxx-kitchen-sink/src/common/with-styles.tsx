@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 import ReactDOM from 'react-dom'
 
-import { withStylesCreator, TProvider, TTheme, TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
+import { withStylesCreator, TProvider, TTheme, TComps, TBasic, TAddInConfig, Text, View, ScrollView, Icon, AppContainer, mergeRulesets } from 'reactxx'
 //import { withStylesCreator } from '../../reactxx/common/withStyles'
 import { TMediaQ } from 'reactxx-mediaq'
 
@@ -44,8 +44,8 @@ const sheet: TTheme.SheetCreatorX<Shape> = (theme, variant) => ({
 /************************
 * CODE
 *************************/
-const label: TBasic.CodeSFC<Shape> = ({ system: { classes, mergeRulesetWithOverrides, style }, children }) => {
-  const root = mergeRulesetWithOverrides(classes.root) as TBasic.ViewRulesetX
+const label: TBasic.CodeSFC<Shape> = ({ system: { classes, style }, children }) => {
+  const root = mergeRulesets<TBasic.TextRulesetX>(classes.root)
   return <Text className={root}>{children}</Text>
 }
 

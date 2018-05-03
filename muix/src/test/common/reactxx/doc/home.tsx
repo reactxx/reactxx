@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TTheme, TBasic, TComps, withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
+import { TTheme, TBasic, TComps, withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView, mergeRulesets } from 'reactxx'
 
 import MDI from 'reactxx-mdi'
 
@@ -79,12 +79,12 @@ const expandedPanelSheet: TTheme.SheetCreatorX<DocHome.ExpandedPanelShape> = {
 //modifyThemeStates(state, null, theme => [modifyThemeState<ReactXX.TextShape>(state, theme, ReactXX.CompNames.Text, (theme, par) => ({ root: headerLabelStyle }))])}
 
 const expandedPanel: TBasic.CodeSFC<DocHome.ExpandedPanelShape> = props => {
-  const { system: { style, classes, mergeRulesetWithOverrides, theme, animations: { sheets: { openClose } } }, title, children, ...rest } = props
-  const rootStyle = mergeRulesetWithOverrides(classes.root) as TBasic.ViewRulesetX
-  const headerStyle = mergeRulesetWithOverrides(classes.header) as TBasic.ViewRulesetX
-  const contentStyle = mergeRulesetWithOverrides(classes.content, openClose.sheet.content) as TBasic.ViewRulesetX
-  const iconStyle = mergeRulesetWithOverrides(classes.icon, openClose.sheet.icon) as TBasic.TextRulesetX
-  const headerLabelStyle = mergeRulesetWithOverrides(classes.headerLabel) as TBasic.TextRulesetX
+  const { system: { style, classes, theme, animations: { sheets: { openClose } } }, title, children, ...rest } = props
+  const rootStyle = mergeRulesets<TBasic.ViewRulesetX>(classes.root)
+  const headerStyle = mergeRulesets<TBasic.ViewRulesetX>(classes.header)
+  const contentStyle = mergeRulesets<TBasic.ViewRulesetX>(classes.content, openClose.sheet.content)
+  const iconStyle = mergeRulesets<TBasic.TextRulesetX>(classes.icon, openClose.sheet.icon)
+  const headerLabelStyle = mergeRulesets<TBasic.TextRulesetX>(classes.headerLabel)
 
   return <View className={rootStyle} style={style as TBasic.ViewRulesetX}>
     <View className={headerStyle} /*modifyThemeState={theme => ({ ...theme, overridesNew: { ...theme.overridesNew, [ReactXX.CompNames.Text]: { root: headerLabelStyle}}})}*/>

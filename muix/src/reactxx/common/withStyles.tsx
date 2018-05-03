@@ -36,7 +36,7 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
   class provider extends React.Component<TPropsX> {
 
     render() {
-      if (options.withCascading) return <CascadingConsumer>{this.CASCADING}</CascadingConsumer> 
+      if (options.withCascading) return <CascadingConsumer>{this.CASCADING}</CascadingConsumer>
       warning(DEV_MODE, `Component.Provider does not exist (component.name=${name}). Use 'C' variant of the component, e.g. <LabelC.Provider><LabelC>. 'C' variant of the component is created by e.g. 'LabelCreator = withStylesCreator<Shape>(Consts.Label, sheet, label); export const LabelC = LabelCreator({ withCascading: true})'`) //`
       return null
     }
@@ -44,7 +44,7 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
     CASCADING = (parentsProps: TPropsX) => {
       const { children, ...rest } = this.props as TBasic.PropsX & { children?: React.ReactNode }
       return <CascadingProvider value={(parentsProps && rest ? deepMerges({}, parentsProps, rest) : rest) as TPropsX}>{children}</CascadingProvider>
-    } 
+    }
 
   }
 
@@ -174,6 +174,24 @@ export const AppContainer: React.SFC<{ theme?: TTheme.ThemeCreator }> = props =>
   return mediaQProviderExists() ? theme : <MediaQ_AppContainer>{theme}</MediaQ_AppContainer>
 }
 
+export function mergeRulesets<T extends Types.RulesetNativeIds = 'View'>(...rulesets/*all used rulesets*/): TBasic.RulesetNative<T>
+export function mergeRulesets<T extends 'Web'>(...rulesets): TBasic.RulesetWeb
+export function mergeRulesets<T extends {}>(...rulesets): T
+export function mergeRulesets(...rulesets) {
+  let count = 0
+  let res
+  rulesets.forEach((ruleset: TAddInConfig.RulesetWithAddIn) => {
+    if (!ruleset) return
+    switch (count) {
+      case 0: res = ruleset; break
+      case 1: res = deepMergesSys(true, {}, res, ruleset); break
+      default: deepMergesSys(true, res, ruleset); break
+    }
+    count++
+  })
+  return res
+}
+
 /************************
 * PRIVATE
 *************************/
@@ -230,7 +248,7 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
       classes: actSheet,
       style: toPlatformRuleSet(callCreator(theme, variant, style)),
       variant,
-      mergeRulesetWithOverrides,
+      //mergeRulesetWithOverrides,
       mediaqFlags,
       activeFlag,
       developer_log,
@@ -242,21 +260,6 @@ const prepareSheet = (name: string, createSheetX: TTheme.SheetCreatorX, options:
   return { codeProps: outputProps, codeClasses: actSheet }
 }
 const callCreator = <T extends {}>(theme: TTheme.ThemeBase, variant, creator: T | ((theme: TTheme.ThemeBase, variant) => T)) => typeof creator === 'function' ? creator(theme, variant) : creator
-
-const mergeRulesetWithOverrides: TBasic.MergeRulesetWithOverrides = (...rulesets/*all used rulesets*/) => {
-  let count = 0
-  let res
-  rulesets.forEach((ruleset: TAddInConfig.RulesetWithAddIn) => { // acumulate $overrides from used rulesets
-    if (!ruleset) return
-    switch (count) {
-      case 0: res = ruleset; break
-      case 1: res = deepMergesSys(true, {}, res, ruleset); break
-      default: deepMergesSys(true, res, ruleset); break
-    }
-    count++
-  })
-  return res
-}
 
 const fromOptions = (...bools: boolean[]) => {
   let res = undefined

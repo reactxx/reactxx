@@ -5,7 +5,7 @@ import { capitalize } from 'material-ui/utils/helpers';
 import { ButtonProps } from 'material-ui/Button/Button'
 
 import { Types } from 'reactxx-basic'
-import { TComps, TBasic, TAddInConfig, TProvider, TTheme, CompNames, Text, withStyles } from 'reactxx'
+import { TComps, TBasic, TAddInConfig, TProvider, TTheme, CompNames, Text, withStyles, mergeRulesets } from 'reactxx'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 import { MuiButtonT } from '../../typings/button'
@@ -120,7 +120,7 @@ const button: TBasic.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
 
 
   //var x = props.mini
-  const { system: { classes, mergeRulesetWithOverrides, variant }, children, color = 'default', mini, ...rest } = props
+  const { system: { classes, variant }, children, color = 'default', mini, ...rest } = props
   const { disabled } = rest //disabled must be propagated to ButtonBaseLow
 
   const fab = variant == 'fab'
@@ -128,7 +128,7 @@ const button: TBasic.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
 
   const isFlat = !raised && !fab
 
-  const rootStyle = mergeRulesetWithOverrides(
+  const rootStyle = mergeRulesets<'View'>(
     classes.root,
     !isFlat && classes.raised,
     isFlat && classes.flat,
@@ -142,15 +142,15 @@ const button: TBasic.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
     !isFlat && disabled && classes.raisedDisable,
     isFlat && disabled && classes.disabled,
 
-  ) as ReactN.ViewStyle
+  )
 
   //console.log('### viewStyle: ', viewStyle)
 
-  const rippleStyle = mergeRulesetWithOverrides(classes.ripple) as ReactN.ViewStyle
-  const activeStyle = mergeRulesetWithOverrides(!disabled && classes.active) as ReactN.ViewStyle
+  const rippleStyle = mergeRulesets<'View'>(classes.ripple)
+  const activeStyle = mergeRulesets<'View'>(!disabled && classes.active)
   //const labelStyle = mergeRulesetWithOverrides(classes.label) 
-  const iconOverride = { root: mergeRulesetWithOverrides(classes.labelIcon) } as TBasic.Sheet
-  const labelOverride = { root: mergeRulesetWithOverrides(classes.label) } as TBasic.Sheet
+  const iconOverride = { root: mergeRulesets(classes.labelIcon) } as TBasic.Sheet
+  const labelOverride = { root: mergeRulesets(classes.label) } as TBasic.Sheet
 
   const childs = React.Children.toArray(children).map((ch, idx) => typeof ch === 'string' || typeof ch === 'number' ? <Text key={idx}>{ch.toString().toUpperCase()}</Text> : ch)
 

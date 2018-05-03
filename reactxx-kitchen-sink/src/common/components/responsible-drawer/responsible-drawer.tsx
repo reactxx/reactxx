@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { Types } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
-import { TAddInConfig, TComps, TProvider, TTheme, TBasic, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer } from 'reactxx'
+import { TAddInConfig, TComps, TProvider, TTheme, TBasic, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer, mergeRulesets } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
 
 //******* Two possibilities how to use get icon data:
@@ -140,38 +140,38 @@ const sheet: TTheme.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =
 // responsibleDrawer stateless component. 
 const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = props => {
 
-  const { system: { classes, mergeRulesetWithOverrides, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }}, drawer: drawerNode, children } = props
+  const { system: { classes, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }}, drawer: drawerNode, children } = props
 
   const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()
 
   // calling mergeRulesetWithOverrides signals which rulesets are used. So it can use their $overrides to modify other sheet's rulesets
-  const root = mergeRulesetWithOverrides(
+  const root = mergeRulesets<TBasic.ViewRulesetX>(
     classes.root,
-  ) as TBasic.ViewRulesetX
+  )
 
-  const backDrop = mergeRulesetWithOverrides(
+  const backDrop = mergeRulesets<TBasic.ViewRulesetX>(
     classes.backDrop,
     isMobile && animMobile.sheet.backDrop, // backDrop animation for mobile
-  ) as TBasic.ViewRulesetX
+  )
 
-  const drawer = mergeRulesetWithOverrides(
+  const drawer = mergeRulesets<TBasic.ViewRulesetX>(
     classes.drawer,
     isMobile && animMobile.sheet.drawer, // drawer animation for mobile
     isTablet && animTablet.sheet.drawer, // drawer animation for tablet
-  ) as TBasic.ViewRulesetX
+  )
 
-  const content = mergeRulesetWithOverrides(
+  const content = mergeRulesets<TBasic.ViewRulesetX>(
     classes.content,
     isTablet && animTablet.sheet.content, // content animation for tablet
-  ) as TBasic.ViewRulesetX
+  )
 
-  const closeButton = mergeRulesetWithOverrides(classes.closeButton) as TBasic.TextRulesetX
+  const closeButton = mergeRulesets<TBasic.TextRulesetX>(classes.closeButton)
 
-  const openButton = mergeRulesetWithOverrides(
+  const openButton = mergeRulesets<TBasic.TextRulesetX>(
     classes.openButton,
     { display: (isTablet && animTablet.opened) || isDesktop ? 'none' : 'flex' }
-  ) as TBasic.TextRulesetX
+  )
 
   return <View className={root}>
     <AnimatedView key={1} className={backDrop} onPress={closeDrawer} />

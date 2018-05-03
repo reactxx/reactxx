@@ -2,7 +2,7 @@
 import ReactN, { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRectangle } from 'react-native'
 import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
 
-import { TBasic, TAddInConfig, TTheme, TProvider, withStyles } from 'reactxx'
+import { TBasic, TAddInConfig, TTheme, TProvider, withStyles, mergeRulesets } from 'reactxx'
 
 import { MuiButtonBaseT } from '../../typings/button-base'
   import { Muix} from '../../typings/muix'
@@ -100,9 +100,9 @@ export class RippleEffect extends React.Component<MuiButtonBaseT.RippleEfectProp
 }
 
 const buttonBase: TBasic.CodeSFCNative<MuiButtonBaseT.Shape> = props => {
-  const { system: { style, classes, mergeRulesetWithOverrides, animations }, ...rest } = props
-  const viewStyle = mergeRulesetWithOverrides(classes.root) as ReactN.ViewStyle
-  const rippleStyle = mergeRulesetWithOverrides(classes.ripple) as ReactN.ViewStyle
+  const { system: { style, classes, animations }, ...rest } = props
+  const viewStyle = mergeRulesets<'View'>(classes.root)
+  const rippleStyle = mergeRulesets<'View'>(classes.ripple)
   return <RippleEffect viewStyle={viewStyle} rippleStyle={rippleStyle} activeStyle={{}} {...rest}/>
 }
 
