@@ -53,7 +53,7 @@ const animatedIcon = icon
 const animatedText = text
 const animatedScrollView = scrollView
 
-export const Text: TBasic.ComponentTypeX<TComps.TextShape> = withStyles(CompNames.Text, textSheet)(text as TBasic.CodeComponentType<TComps.TextShape>)
+export const Text = withStyles<TComps.TextShape>(CompNames.Text, textSheet)(text as TBasic.CodeComponentType<TComps.TextShape>)
 export const AnimatedText: TBasic.ComponentTypeX<TComps.TextShape> = withStyles(CompNames.AnimatedText, textSheet)(animatedText as TBasic.CodeComponentType<TComps.TextShape>)
 export const View: TBasic.ComponentTypeX<TComps.ViewShape> = withStyles(CompNames.View, viewSheet)(view as TBasic.CodeComponentType<TComps.ViewShape>)
 export const AnimatedView: TBasic.ComponentTypeX<TComps.ViewShape> = withStyles(CompNames.AnimatedView, viewSheet)(animatedView as TBasic.CodeComponentType<TComps.ViewShape>)

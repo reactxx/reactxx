@@ -238,26 +238,25 @@ const prepareSheet = (name: string, createSheetX: TBasic.SheetCreatorX, options:
 
   //** MERGE staticSheet with classes and className
   const root = className && { root: toPlatformRuleSet(callCreator(theme, variant, className)) }
-  const actSheet: Types.Sheet = classes || root ? deepMergesSys(false, {}, staticSheet, toPlatformSheet(callCreator(theme, variant, classes)), root) : staticSheet
+  const codeClasses: Types.Sheet = classes || root ? deepMergesSys(false, {}, staticSheet, toPlatformSheet(callCreator(theme, variant, classes)), root) : staticSheet
 
 
   //** RETURN platform dependent props for pure component code
-  const outputProps = {
+  const codeProps = {
     ...rest,
     system: {
-      classes: actSheet,
+      classes: codeClasses,
       style: toPlatformRuleSet(callCreator(theme, variant, style)),
       variant,
-      //mergeRulesetWithOverrides,
       mediaqFlags,
       activeFlag,
       developer_flag,
     }
   } as TBasic.CodeProps
 
-  toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, outputProps)
+  toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
 
-  return { codeProps: outputProps, codeClasses: actSheet }
+  return { codeProps, codeClasses }
 }
 const callCreator = <T extends {}>(theme: TTheme.ThemeBase, variant, creator: T | ((theme: TTheme.ThemeBase, variant) => T)) => typeof creator === 'function' ? creator(theme, variant) : creator
 
