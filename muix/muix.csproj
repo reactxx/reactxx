@@ -146,6 +146,7 @@
     <TypeScriptCompile Include="src\animation\web\animation.tsx" />
     <TypeScriptCompile Include="src\animation\web\index.ts" />
     <TypeScriptCompile Include="src\basic\common\develop.tsx" />
+    <TypeScriptCompile Include="src\basic\common\cascading.tsx" />
     <TypeScriptCompile Include="src\basic\common\to-platform.ts" />
     <TypeScriptCompile Include="src\basic\typings\add-in.ts" />
     <TypeScriptCompile Include="src\basic\typings\common.ts" />
