@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 import warning from 'warning'
 
-import { Types, toPlatformEvents, deepMerge, deepMergesSys, deepMerges } from 'reactxx-basic'
+import { Types, TCommonStyles, toPlatformEvents, deepMerge, deepMergesSys, deepMerges } from 'reactxx-basic'
 import { animations, TAnimation } from 'reactxx-animation'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet } from 'reactxx-mediaq'
 import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
@@ -131,7 +131,7 @@ export const withStyles = <R extends TBasic.Shape, TStatic extends {} = {}>(name
       if (mediaSheetPatch || activablePatch) classes = deepMerges({}, codeClasses, mediaSheetPatch, activablePatch)
 
       // call component code
-      return <Component {...codeProps as TBasic.CodeProps<R>} system={{ ...codeProps.system, classes, animations: animations as TAnimation.Drivers<TBasic.getAnimation<R>> }} />
+      return <Component {...codeProps as TBasic.CodeProps<R>} system={{ ...codeProps.system, classes, animations: animations as TAnimation.Drivers<TAddIn.getAnimation<R>> }} />
     }
 
     renderer =
@@ -181,7 +181,7 @@ export const AppContainer: React.SFC<{ theme?: TTheme.ThemeCreator }> = props =>
 
 const prepareSheet = (name: string, createSheetX: TBasic.SheetCreatorX, options: TTheme.WithStyleOptions_ComponentX, props: TBasic.PropsX, themeContext: TTheme.ThemeContext, mediaqFlags: TMediaQ.MediaFlags, activeFlag: boolean) => {
 
-  const { classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, developer_flag, CONSTANT, ...rest } = props as TBasic.PropsX & Types.OnPressAllX
+  const { classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, developer_flag, CONSTANT, ...rest } = props as TBasic.PropsX & TCommonStyles.OnPressAllX
   const { theme, $cache } = (themeContext || {}) as TTheme.ThemeContext
 
   //** STATIC SHEET
@@ -237,7 +237,7 @@ const prepareSheet = (name: string, createSheetX: TBasic.SheetCreatorX, options:
     }
   } as TBasic.CodeProps
 
-  toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
+  toPlatformEvents($web, $native as TCommonStyles.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
 
   return { codeProps, codeClasses }
 }

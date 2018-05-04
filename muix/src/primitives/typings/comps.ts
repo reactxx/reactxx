@@ -1,6 +1,6 @@
 ﻿import ReactN from 'react-native'
 
-import { Types } from 'reactxx-basic'
+import { Types, TCommonStyles } from 'reactxx-basic'
 
 export const enum CompNames {
   Text = 'ReactXX$Text',
@@ -28,7 +28,7 @@ export namespace TComps {
     web: 'pressable'
     native: null
     style: 'Text'
-    props: { numberOfLines?: number; url?: string } & Types.OnPressX
+    props: { numberOfLines?: number; url?: string } & TCommonStyles.OnPressX
     propsWeb: React.HTMLAttributes<HTMLSpanElement>
     propsNative: ReactN.TextProperties
   }
@@ -38,7 +38,7 @@ export namespace TComps {
     web: null
     native: null
     style: 'View'
-    props: Types.OnPressAllX
+    props: TCommonStyles.OnPressAllX
     propsWeb: React.HTMLAttributes<HTMLDivElement>
     propsNative: ReactN.ViewProperties
   }
@@ -48,7 +48,7 @@ export namespace TComps {
     web: 'pressable'
     native: null
     style: 'Text'
-    props: { data: string } & Types.OnPressX
+    props: { data: string } & TCommonStyles.OnPressX
     propsWeb: React.SVGAttributes<SVGElement> & { url?: string }
     propsNative: {
       size?: number

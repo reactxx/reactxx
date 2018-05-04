@@ -1,7 +1,7 @@
 import React from 'react'
 import warning from 'warning'
 
-import { Types } from 'reactxx-basic'
+import { Types, TCommonStyles } from 'reactxx-basic'
 
 export namespace TActivable {
 
@@ -13,14 +13,14 @@ export namespace TActivable {
     }
   }
 
-  export type RulesetAddInX<T extends Types.RulesetNativeIds = never> = RulesetAddInLow<Types.RulesetX<T>>
-  export type RulesetX<T extends Types.RulesetNativeIds = never> = Types.RulesetX<T> & RulesetAddInX<T>
+  export type RulesetAddInX<T extends TCommonStyles.RulesetNativeIds = never> = RulesetAddInLow<Types.RulesetX<T>>
+  export type RulesetX<T extends TCommonStyles.RulesetNativeIds = never> = Types.RulesetX<T> & RulesetAddInX<T>
 
   export type SheetWithAddIn = { [P in string]: RulesetAddIn }
 
-  export type RulesetAddIn<T extends Types.RulesetNativeIds = never> = RulesetAddInLow<Types.Ruleset<T>>
-  export interface RulesetAddInWeb<T extends Types.RulesetNativeIds = never> extends RulesetAddInLow<Types.RulesetWeb> { }
-  export type RulesetAddInNative<T extends Types.RulesetNativeIds = never> = RulesetAddInLow<Types.RulesetNative<T>>
+  export type RulesetAddIn<T extends TCommonStyles.RulesetNativeIds = never> = RulesetAddInLow<TCommonStyles.Ruleset<T>>
+  export interface RulesetAddInWeb<T extends TCommonStyles.RulesetNativeIds = never> extends RulesetAddInLow<TCommonStyles.RulesetWeb> { }
+  export type RulesetAddInNative<T extends TCommonStyles.RulesetNativeIds = never> = RulesetAddInLow<TCommonStyles.RulesetNative<T>>
 
   export interface ActiveResult {
     active: boolean

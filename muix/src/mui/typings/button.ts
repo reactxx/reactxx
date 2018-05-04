@@ -4,7 +4,7 @@ import { Muix } from 'reactxx-mui/typings/muix'
 
 import { TBasic, TTheme } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
-import { Types } from 'reactxx-basic'
+import { Types, TCommonStyles } from 'reactxx-basic'
 
 export namespace MuiButtonT {
 
@@ -18,7 +18,7 @@ export namespace MuiButtonT {
     common: Types.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini'> & Types.ShapeTexts<'label'>
     native: Types.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & Types.ShapeTexts<'labelIcon'>
     web: 'colorInherit' | 'keyboardFocused'
-    props: ButtonProps & Types.OnPressAllX
+    props: ButtonProps & TCommonStyles.OnPressAllX
     propsNative: ReactN.TouchableOpacityProperties
     nameType: CompNames.Button | CompNames.ButtonIconLeft | CompNames.ButtonIconRight
     variant: string

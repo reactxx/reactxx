@@ -29,7 +29,7 @@ export type Shape = TBasic.OverwriteShape<{
 /************************
 * SHEET
 *************************/
-export interface Variant extends TMediaQ.CodeProps<TBasic.getMediaQ<Shape>> { }
+export interface Variant extends TMediaQ.CodeProps<TAddIn.getMediaQ<Shape>> { }
 
 const sheet: TBasic.SheetCreatorX<Shape> = (theme, variant) => ({
   root: {

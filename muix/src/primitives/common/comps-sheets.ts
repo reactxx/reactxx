@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { Types } from 'reactxx-basic'
+import { Types, TCommonStyles  } from 'reactxx-basic'
 import { TComps } from '../typings/comps'
 
 export const textSheet: Types.SheetX<TComps.TextShape> = {
@@ -38,7 +38,7 @@ const webViewRuleset = {
   flexShrink: 0,
   position: 'relative',
   overflow: 'hidden',
-} as Types.RulesetWeb
+} as TCommonStyles.RulesetWeb
 
 export const viewSheet: Types.SheetX<TComps.ViewShape> = {
   root: {

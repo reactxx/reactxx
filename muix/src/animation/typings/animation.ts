@@ -1,6 +1,6 @@
 import ReactN from 'react-native'
 
-import { Types } from 'reactxx-basic'
+import { Types, TCommonStyles } from 'reactxx-basic'
 
 export namespace TAnimation {
   //https://engineering.salesforce.com/experiments-with-high-performance-animation-in-react-native-80a0cb7052b0
@@ -21,10 +21,10 @@ export namespace TAnimation {
     $opened?: boolean
   }
 
-  export type RuleSetX<T extends Types.RulesetNativeIds> = ToPairs<Types.RulesetCommon<T>> & {
+  export type RuleSetX<T extends TCommonStyles.RulesetNativeIds> = ToPairs<TCommonStyles.RulesetCommon<T>> & {
     transform?: Array<TNativeTransform>
-    $native?: ToPairs<Types.RulesetNative<T>, Diff<keyof Types.RulesetNative<T>, 'transform'>> & { transform?: TNativeTransform[] }
-    $web?: ToPairs<Types.RulesetWeb> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
+    $native?: ToPairs<TCommonStyles.RulesetNative<T>, Diff<keyof TCommonStyles.RulesetNative<T>, 'transform'>> & { transform?: TNativeTransform[] }
+    $web?: ToPairs<TCommonStyles.RulesetWeb> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
   }
 
   export interface Drivers<T extends Shapes = Shapes> extends AnimationsEx { sheets: { [P in keyof T]: Driver<T[P]> } }
@@ -51,14 +51,14 @@ export namespace TAnimation {
     sheet: SheetNative<T>
   }
 
-  export type SheetWeb<T extends Shape> = { [P in keyof T]: Types.RulesetWeb } & AnimationConfig
-  export type SheetNative<T extends Shape> = { [P in keyof T]: Types.RulesetNative<T[P]> } & AnimationConfig
-  export type Sheet<T extends Shape> = { [P in keyof T]: (Types.RulesetNative<T[P]> | Types.RulesetWeb) } & AnimationConfig
+  export type SheetWeb<T extends Shape> = { [P in keyof T]: TCommonStyles.RulesetWeb } & AnimationConfig
+  export type SheetNative<T extends Shape> = { [P in keyof T]: TCommonStyles.RulesetNative<T[P]> } & AnimationConfig
+  export type Sheet<T extends Shape> = { [P in keyof T]: (TCommonStyles.RulesetNative<T[P]> | TCommonStyles.RulesetWeb) } & AnimationConfig
 
   export type SheetsX<T extends Shapes = Shapes> = { [P in keyof T]: SheetX<T[P]> }
   export type SheetX<T extends Shape> = { [P in keyof T]: RuleSetX<T[P]> } & AnimationConfig
 
-  export type Shape = Record<string, Types.RulesetNativeIds>
+  export type Shape = Record<string, TCommonStyles.RulesetNativeIds>
   export type Shapes = Record<string, Shape>
 }
 export const fake = 0

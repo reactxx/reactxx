@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { Types } from 'reactxx-basic'
+import { Types, TCommonStyles } from 'reactxx-basic'
 
 import { TBasic } from '../typings/basic'
 import { TAddIn } from '../typings/add-in'
@@ -20,7 +20,7 @@ export const toPlatformRuleSet = (style: TBasic.RulesetX) => {
   const res:any = { ...rest, ...(isNative ? $native : $web), /*$overrides: toPlatformSheet($overrides),*/ $mediaq: toPlatformSheet($mediaq as any), $props }
   //if (!res.$overrides) delete res.$overrides;  //remove NULL or UNDEFINED
   if (!res.$props) delete res.$props //remove NULL or UNDEFINED
-  return res as Types.Ruleset
+  return res as TCommonStyles.Ruleset
 }
 
 //create platform specific sheet from cross platform one

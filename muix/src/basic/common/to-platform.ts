@@ -1,15 +1,16 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { Types } from '../typings/ruleset'
+import { TCommonStyles } from '../typings/common-styles'
+import { Types } from '../typings/types'
 
-export const toPlatformEvents = ($web: Types.OnPressAllWeb, $native: Types.OnPressAllNative, propsX: Types.OnPressAllX, cp: Types.OnPressAllNative | Types.OnPressAllWeb, setActive?: (active:boolean) => void) => {
+export const toPlatformEvents = ($web: TCommonStyles.OnPressAllWeb, $native: TCommonStyles.OnPressAllNative, propsX: TCommonStyles.OnPressAllX, cp: TCommonStyles.OnPressAllNative | TCommonStyles.OnPressAllWeb, setActive?: (active:boolean) => void) => {
   const { onPress, onLongPress, onPressIn, onPressOut } = propsX
-  if (isType<Types.OnPressAllWeb>(cp)) {
+  if (isType<TCommonStyles.OnPressAllWeb>(cp)) {
     const cl = $web && $web.onClick || onPress; if (cl) cp.onClick = cl
     const cl2 = $web && $web.onMouseDown || onPressIn; if (cl2) cp.onMouseDown = cl2
     const cl3 = $web && $web.onMouseUp || onPressOut; if (cl3) cp.onMouseUp = cl3
-  } else if (isType<Types.OnPressAllNative>(cp)) {
+  } else if (isType<TCommonStyles.OnPressAllNative>(cp)) {
     const cl = $native && $native.onPress || onPress; if (cl) cp.onPress = cl
     const cl1 = $native && $native.onLongPress || onLongPress; if (cl1) cp.onLongPress = cl1
     const cl2 = $native && $native.onPressIn || onPressIn; if (cl2) cp.onPressIn = cl2
@@ -31,7 +32,7 @@ export const toPlatformRuleSet = (style: Types.RulesetX) => {
   if (!style) return null
   if (!style.$web && !style.$native) return style // optimalization: already platform specific
   const { $web, $native, ...rest } = style
-  return { ...rest, ...(window.isWeb ? $web : $native) } as Types.Ruleset
+  return { ...rest, ...(window.isWeb ? $web : $native) } as TCommonStyles.Ruleset
 }
 
 //simple deep merge
@@ -56,8 +57,8 @@ export const deepMerge = (target, source, skipSystem = false) => {
 const isObject = item => item && typeof item === 'object' && !Array.isArray(item) && typeof item['_interpolation'] != 'function' //HACK: typeof item['_interpolation'] != 'function' prevent to merge ReactNative's Animated.Value.interpolate prop
 
 
-export function mergeRulesets<T extends Types.RulesetNativeIds = 'View'>(...rulesets/*all used rulesets*/): Types.RulesetNative<T>
-export function mergeRulesets<T extends 'Web'>(...rulesets): Types.RulesetWeb
+export function mergeRulesets<T extends TCommonStyles.RulesetNativeIds = 'View'>(...rulesets/*all used rulesets*/): TCommonStyles.RulesetNative<T>
+export function mergeRulesets<T extends 'Web'>(...rulesets): TCommonStyles.RulesetWeb
 export function mergeRulesets<T extends {}>(...rulesets): T
 export function mergeRulesets(...rulesets) {
   let count = 0

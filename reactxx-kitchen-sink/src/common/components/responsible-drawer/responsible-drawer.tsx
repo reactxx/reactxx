@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { Types, mergeRulesets } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
 import { TAddIn, TProvider, TTheme, TBasic, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer } from 'reactxx'
-import { LoremIpsum } from 'reactxx-basic'
+import { LoremIpsum, TCommonStyles } from 'reactxx-basic'
 import { TComps } from 'reactxx-primitives'
 
 
@@ -31,10 +31,10 @@ export namespace TResponsibleDrawer {
   export interface IconRenderProps {
     style: TBasic.RulesetX
     iconData: string,
-    onPress: Types.MouseEvent
+    onPress: TCommonStyles.MouseEvent
   }
 
-  export interface Variant extends TMediaQ.CodeProps<TBasic.getMediaQ<Shape>> {
+  export interface Variant extends TMediaQ.CodeProps<TAddIn.getMediaQ<Shape>> {
     drawerWidths: [number, number, number] //drawer width for mobile, tablet and desktop
     animationDuration: number //drawer animation duration for mobile and tablet
   }

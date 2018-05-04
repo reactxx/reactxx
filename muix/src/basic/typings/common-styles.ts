@@ -1,4 +1,8 @@
-﻿export namespace TCommonStyles {
+﻿import React from 'react'
+import ReactN from 'react-native'
+import * as CSS from 'csstype'
+
+export namespace TCommonStyles {
 
   //React Native styles compatible with Web React.CSSProperties
 
@@ -121,5 +125,41 @@
     overflow?: "visible" | "hidden"
     opacity?: number
   }
+
+  /******************************************
+    COMMON RULESET
+  *******************************************/
+
+  export type RulesetNativeIds = 'Text' | 'View' | 'Image' | 'ScrollView'
+
+  //******************** Native ruleset which are compatible with web
+  export type RulesetCommon<T extends RulesetNativeIds> =
+    T extends 'Text' ? TCommonStyles.TextStyle :
+    T extends 'Image' ? TCommonStyles.ImageStyle :
+    T extends 'ScrollView' ? TCommonStyles.ScrollViewStyle :
+    TCommonStyles.ViewStyle
+
+  //******************** Platform specific ruleset
+  export type RulesetNative<T extends RulesetNativeIds = never> =
+    T extends 'Text' ? ReactN.TextStyle :
+    T extends 'Image' ? ReactN.ImageStyle :
+    T extends 'ScrollView' ? ReactN.ScrollViewStyle :
+    ReactN.ViewStyle
+
+  export type RulesetWeb = CSS.Properties & { [P in CSS.SimplePseudos]?: CSS.Properties }
+  export type Ruleset<T extends RulesetNativeIds = 'Text'> = RulesetWeb | RulesetNative<T>
+
+  /******************************************
+    EVENTS
+  *******************************************/
+
+  export type MouseEvent = (event?: React.MouseEvent<Element>) => void
+
+  export interface OnPressX { onPress?: MouseEvent; onLongPress: () => void }
+  export interface OnPressAllX extends OnPressX { onPressIn?: MouseEvent; onPressOut?: MouseEvent }
+
+  export interface OnPressAllWeb { onClick?: React.MouseEventHandler<Element>; onMouseDown?: React.MouseEventHandler<Element>; onMouseUp?: React.MouseEventHandler<Element> }
+  export interface OnPressAllNative { onPress: () => void; onPressIn: () => void; onPressOut: () => void; onLongPress: () => void }
+
 
 }

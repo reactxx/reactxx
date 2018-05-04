@@ -1,7 +1,7 @@
 import React from 'react'
 import warning from 'warning'
 
-import { Types } from 'reactxx-basic'
+import { Types, TCommonStyles } from 'reactxx-basic'
 
 import { onSubscribe, modifyRuleset } from 'reactxx-mediaq' // import platform dependent code
 
@@ -13,20 +13,20 @@ export namespace TMediaQ {
   //*** Cross platform:
 
   // Ruleset
-  export type RulesetWithAddInX<T extends Types.RulesetNativeIds = 'Text'> = Types.RulesetX & MediaQRulesetPartX<T>
+  export type RulesetWithAddInX<T extends TCommonStyles.RulesetNativeIds = 'Text'> = Types.RulesetX & MediaQRulesetPartX<T>
 
   // $mediaq ruleset part. 'query' has '-640' or '640-1024' or '1024-' format
-  export interface MediaQRulesetPartX<T extends Types.RulesetNativeIds = 'Text'> {
+  export interface MediaQRulesetPartX<T extends TCommonStyles.RulesetNativeIds = 'Text'> {
     $mediaq?: { [query: string]: Types.RulesetX<T> }
   }
 
   //*** Platform dependent
   export type MediaQSheet = { [P in string]: RulesetWithAddIn }
 
-  export type RulesetWithAddIn = Types.Ruleset & MediaQRulesetPart
+  export type RulesetWithAddIn = TCommonStyles.Ruleset & MediaQRulesetPart
 
   export interface MediaQRulesetPart {
-    $mediaq?: { [query: string]: Types.Ruleset }
+    $mediaq?: { [query: string]: TCommonStyles.Ruleset }
   }
 
   //*** decoded MediaQSheet
@@ -38,7 +38,7 @@ export namespace TMediaQ {
   export interface RulesetDecoded {
     from: Breakpoint
     to: Breakpoint
-    ruleset: Types.Ruleset
+    ruleset: TCommonStyles.Ruleset
   }
 
   /************************

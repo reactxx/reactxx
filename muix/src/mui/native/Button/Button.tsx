@@ -4,7 +4,7 @@ import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 import { ButtonProps } from 'material-ui/Button/Button'
 
-import { Types, mergeRulesets } from 'reactxx-basic'
+import { Types, mergeRulesets, TCommonStyles } from 'reactxx-basic'
 import { TBasic, TAddIn, TProvider, TTheme, Text, withStyles } from 'reactxx'
 import { CompNames, TComps } from 'reactxx-primitives'
 

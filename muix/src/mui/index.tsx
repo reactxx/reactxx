@@ -6,7 +6,7 @@ import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
 
 import { TTheme, TAddIn, TBasic, toPlatformRuleSet, toPlatformSheet, ThemeProvider } from 'reactxx'
-import { Types, toPlatformEvents } from 'reactxx-basic'
+import { Types, toPlatformEvents, TCommonStyles } from 'reactxx-basic'
 import { rulesetToClassNames } from 'reactxx-fela'
 
 export * from './common/createMuiTheme'
@@ -59,7 +59,7 @@ export const muiCompatible = <R extends TBasic.Shape>(Component: muiComponentTyp
 
   const Styled: TBasic.SFCX<R> = props => {
 
-    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, ...other } = props as any as (TBasic.PropsX & Types.OnPressAllX)
+    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, ...other } = props as any as (TBasic.PropsX & TCommonStyles.OnPressAllX)
 
     const classes = toPlatformSheet(classesX as TBasic.SheetX)
 
@@ -70,7 +70,7 @@ export const muiCompatible = <R extends TBasic.Shape>(Component: muiComponentTyp
       classes: classes
     }
 
-    toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps as any)
+    toPlatformEvents($web, $native as TCommonStyles.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps as any)
 
     return <Component {...codeProps as any} />
   }

@@ -6,7 +6,7 @@ import { TCommonStyles } from 'reactxx-basic'
 
 import { TAddIn } from './add-in'
 
-export namespace TBasic {
+export namespace Types {
 
   /******************************************
     RULESET
@@ -14,23 +14,14 @@ export namespace TBasic {
 
   //*************** Cross platform ruleset for web and native
 
-  export type RulesetX<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
+  export type RulesetX<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> = 
     TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
     {
       $native?: TCommonStyles.RulesetNative<T> // native specific rules
       $web?: TCommonStyles.RulesetWeb // web specific rules
       $props?: PropsInRulesetX<R>
     } &
-    TAddIn.RulesetAddInX<T, R>
-
-  //export type RulesetWithAddInX<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape, TAddIn extends {} = {}> =
-  //  RulesetCommon<T> & // native rules which are compatible with web
-  //  {
-  //    $native?: RulesetNative<T> // native specific rules
-  //    $web?: RulesetWeb // web specific rules
-  //    $props?: PropsInRulesetX<R>
-  //  } &
-  //  TAddIn
+    TAddIn.RulesetAddInX<T,R>
 
   export interface ViewRulesetX<TAddIn extends {} = {}> extends RulesetX<'View'> { }
   export interface TextRulesetX<TAddIn extends {} = {}> extends RulesetX<'Text'> { }
@@ -123,13 +114,13 @@ export namespace TBasic {
 
   //******************** Cross platform component types
 
-  export type PropsX<R extends Shape = Shape> = PartialOverwrite<getProps<R>,
+  export type PropsX<R extends Shape> = PartialOverwrite<getProps<R>,
     {
-      style?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<getStyle<R>, R>>
+      style?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<getStyle<R>, R>> 
       $web?: Partial<getPropsWeb<R>> //web specific style
       $native?: Partial<getPropsNative<R>> //native specific style
       classes?: PartialSheetCreatorX<R> // cross platform sheet
-      className?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<getStyle<R>, R>>
+      className?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<getStyle<R>, R>> 
       developer_flag?: boolean
     } & TAddIn.PropX<R>
     >
@@ -139,10 +130,10 @@ export namespace TBasic {
 
   //******************** Platform specific 
 
-  export type omitPropNames = 'system' | 'style' | 'classes' | 'className'
+  export type omitPropNames = 'system' | 'style' | 'classes' | 'className' | keyof TAddIn.CodeProps
 
   // *** web
-  export type CodePropsWeb<R extends Shape = Shape, TCodePropsWebAddIn extends {} = {}> = Omit<getProps<R> & getPropsWeb<R>, omitPropNames | keyof TCodePropsWebAddIn> & TCommonStyles.OnPressAllWeb & {
+  export type CodePropsWeb<R extends Shape = Shape, TCodePropsWebAddIn extends {} = {}> = Omit<getProps<R> & getPropsWeb<R>, omitPropNames> & TCommonStyles.OnPressAllWeb & {
     system:
     {
       style: TCommonStyles.RulesetWeb
@@ -154,7 +145,7 @@ export namespace TBasic {
   export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
   // *** native
-  export type CodePropsNative<R extends Shape = Shape> = Omit<getProps<R> & getPropsNative<R>, omitPropNames | keyof TAddIn.CodePropsNative<R>> & TCommonStyles.OnPressAllNative & {
+  export type CodePropsNative<R extends Shape = Shape> = Omit<getProps<R> & getPropsNative<R>, omitPropNames> & TCommonStyles.OnPressAllNative & {
     system:
     {
       style: TCommonStyles.RulesetNative<getStyle<R>>
@@ -166,7 +157,7 @@ export namespace TBasic {
   export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
 
   // *** web or native
-  export type CodeProps<R extends Shape = Shape> = Omit<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), omitPropNames | keyof TAddIn.CodeProps<R>> & (TCommonStyles.OnPressAllNative | TCommonStyles.OnPressAllWeb) & {
+  export type CodeProps<R extends Shape = Shape> = Omit<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), omitPropNames> & (TCommonStyles.OnPressAllNative | TCommonStyles.OnPressAllWeb) & {
     system:
     {
       style: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<getStyle<R>>
@@ -180,8 +171,8 @@ export namespace TBasic {
   export type CodeComponentType<R extends Shape = Shape> = React.ComponentType<CodeProps<R>>
 
   /******************************************
-     $props IN RULESETs
-  *******************************************/
+      $props IN RULESETs
+   *******************************************/
   export type PropsInRulesetX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>, {
     $web?: Partial<getPropsWeb<R>> //web specific style
     $native?: Partial<getPropsNative<R>> //native specific style

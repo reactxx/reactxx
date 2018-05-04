@@ -21,7 +21,7 @@ export namespace TTheme {
   }>
 
   export interface WithStyleOptions_ComponentX<R extends TBasic.Shape =  TBasic.Shape> extends WithStyleOptions {
-    getVariant?: (props: TBasic.PropsX<R> & TMediaQ.CodeProps<TBasic.getMediaQ<R>>, theme?: Types.getTheme<R>) => Types.getVariant<R>
+    getVariant?: (props: TBasic.PropsX<R> & TMediaQ.CodeProps<TAddIn.getMediaQ<R>>, theme?: Types.getTheme<R>) => Types.getVariant<R>
     variantToString?: (variant: Types.getVariant<R>) => string
     defaultProps?: PropsXOverwrite<R>
   }

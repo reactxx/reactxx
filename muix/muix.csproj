@@ -147,6 +147,7 @@
     <TypeScriptCompile Include="src\animation\web\index.ts" />
     <TypeScriptCompile Include="src\basic\common\develop.tsx" />
     <TypeScriptCompile Include="src\basic\common\to-platform.ts" />
+    <TypeScriptCompile Include="src\basic\typings\add-in.ts" />
     <TypeScriptCompile Include="src\basic\typings\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\react-16.3.ts" />
     <TypeScriptCompile Include="src\fela\index.ts" />
@@ -192,6 +193,7 @@
     <TypeScriptCompile Include="src\reactxx\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\reactxx\native\comps.tsx" />
     <TypeScriptCompile Include="src\reactxx\typings\add-in.ts" />
+    <None Include="src\reactxx\typings\basic.ts_" />
     <TypeScriptCompile Include="src\reactxx\typings\basic.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\index.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
@@ -224,7 +226,7 @@
     <TypeScriptCompile Include="src\mui\index.tsx" />
     <TypeScriptCompile Include="src\mui\typings\mui.ts" />
     <TypeScriptCompile Include="src\basic\index.ts" />
-    <TypeScriptCompile Include="src\basic\typings\ruleset.ts" />
+    <TypeScriptCompile Include="src\basic\typings\types.ts" />
     <TypeScriptCompile Include="src\basic\typings\common-styles.ts" />
   </ItemGroup>
   <ItemGroup>
