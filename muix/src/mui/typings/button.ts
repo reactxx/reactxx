@@ -1,9 +1,9 @@
 ﻿import ReactN from 'react-native'
 import { Muix } from 'reactxx-mui/typings/muix'
 
-import { TCommonStyles } from 'reactxx-basic'
+import { TCommonStyles, TCommon } from 'reactxx-basic'
 import { TComps } from 'reactxx-primitives'
-import { Types, TTheme } from 'reactxx'
+import { Types } from 'reactxx'
 
 import { ButtonProps } from './mui'
 
@@ -16,14 +16,14 @@ export namespace MuiButtonT {
   }
 
   export type Shape = Types.OverwriteShape<{
-    common: Types.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini'> & Types.ShapeTexts<'label'>
-    native: Types.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & Types.ShapeTexts<'labelIcon'>
+    common: TCommon.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini'> & TCommon.ShapeTexts<'label'>
+    native: TCommon.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & TCommon.ShapeTexts<'labelIcon'>
     web: 'colorInherit' | 'keyboardFocused'
     props: ButtonProps & TCommonStyles.OnPressAllX
     propsNative: ReactN.TouchableOpacityProperties
     nameType: CompNames.Button | CompNames.ButtonIconLeft | CompNames.ButtonIconRight
     variant: string
-    theme: TTheme.ThemeBase & Muix.Theme
+    theme: TCommon.ThemeBase & Muix.Theme
   }>
 
 }

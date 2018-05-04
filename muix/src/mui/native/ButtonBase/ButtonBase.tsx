@@ -4,7 +4,7 @@ import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
 import { Properties } from 'csstype'
 
 import { TCommonStyles, mergeRulesets } from 'reactxx-basic'
-import { Types, TAddIn, TTheme, TProvider, withStyles } from 'reactxx'
+import { Types, TAddIn, TProvider, withStyles } from 'reactxx'
 
 import { MuiButtonBaseT } from '../../typings/button-base'
 import { Muix } from '../../typings/muix'

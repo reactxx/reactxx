@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 import * as CSS from 'csstype'
 
-import { TCommonStyles } from 'reactxx-basic'
+import { TCommonStyles, TCommon } from 'reactxx-basic'
 
 import { TAddIn } from './add-in'
 
@@ -29,48 +29,16 @@ export namespace Types {
   export interface ScrollViewRulesetX<TAddIn extends {} = {}> extends RulesetX<'ScrollView'> { }
 
   //******************** Shape
-  export interface Shape extends TAddIn.Shape {
-    //**** sheet constrains
-    common?: Record<string, TCommonStyles.RulesetNativeIds> // rulesets (and their native type), which are used in both web and native component code. Rules and its valid values must be compatible with native.
-    native?: Record<string, TCommonStyles.RulesetNativeIds> // ruleset types, which are used only in native code
-    web?: string | null // ruleset names, which are used only in web code (its export type is always React.CSSProperties)
-    //******************** native style constrain
-    style?: TCommonStyles.RulesetNativeIds // for native: export type of component style property (for web, style has always React.CSSProperties type)
-    //**** component property constrains
-    props?: {} //common (web and native) props
-    propsNative?: {} //native only props 
-    propsWeb?: React.HTMLAttributes<Element>//web only props
-    //**** export type of component name
-    nameType?: string | null
-    //**** component theme par
-    variant?: {}
-    //**** component theme par
-    theme?: ThemeBase
-  }
-  export type getCommon<R extends Shape> = R['common']
-  export type getNative<R extends Shape> = R['native']
-  export type getWeb<R extends Shape> = R['web']
-  export type getStyle<R extends Shape> = R['style']
-  export type getProps<R extends Shape> = R['props']
-  export type getPropsWeb<R extends Shape> = R['propsWeb']
-  export type getPropsNative<R extends Shape> = R['propsNative']
-  export type getNameType<R extends Shape> = R['nameType']
-  export type getVariant<R extends Shape = Shape> = R['variant']
-  export type getTheme<R extends Shape = Shape> = R['theme']
+  export interface Shape extends TCommon.Shape, TAddIn.Shape { }
 
   export interface ShapeDefault extends TAddIn.ShapeDefault {
     common: {}; native: {}; web: null
     style: 'View'
     props: {}; propsNative: ReactN.ViewProperties; propsWeb: React.HTMLAttributes<HTMLElement>
     variant: never,
-    theme: ThemeBase
+    theme: TCommon.ThemeBase
     nameType: null
   }
-
-  export type ShapeTexts<P extends string> = { [p in P]: 'Text' }
-  export type ShapeViews<P extends string> = { [p in P]: 'View' }
-  export type ShapeScrollViews<P extends string> = { [p in P]: 'ScrollView' }
-  export type ShapeImages<P extends string> = { [p in P]: 'Image' }
 
   export type OverwriteShape<R extends Shape> = PartialOverwrite<ShapeDefault, R>
 
@@ -82,17 +50,17 @@ export namespace Types {
   export type SheetX<R extends Shape = Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & TAddIn.SheetAddInX<R>
   export type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & TAddIn.SheetAddInX<R>
 
-  export type SheetXCommon<R extends Shape> = { [P in keyof getCommon<R>]: Partial<RulesetX<getCommon<R>[P], R>> }
-  export type SheetXNative<R extends Shape> = { [P in keyof getNative<R>]: { $native?: TCommonStyles.RulesetNative<getNative<R>[P]> } & TAddIn.RulesetAddInX<getNative<R>[P], R> }
-  export type SheetXWeb<R extends Shape> = { [P in getWeb<R>]: { $web?: TCommonStyles.RulesetWeb } & TAddIn.RulesetAddInX<getNative<R>[P], R> }
+  export type SheetXCommon<R extends Shape> = { [P in keyof TCommon.getCommon<R>]: Partial<RulesetX<TCommon.getCommon<R>[P], R>> }
+  export type SheetXNative<R extends Shape> = { [P in keyof TCommon.getNative<R>]: { $native?: TCommonStyles.RulesetNative<TCommon.getNative<R>[P]> } & TAddIn.RulesetAddInX<TCommon.getNative<R>[P], R> }
+  export type SheetXWeb<R extends Shape> = { [P in TCommon.getWeb<R>]: { $web?: TCommonStyles.RulesetWeb } & TAddIn.RulesetAddInX<TCommon.getNative<R>[P], R> }
 
   export type SheetCreatorX<R extends Shape = Shape> = themeCreator<R, SheetX<R>>
 
   //******************** Platform specific sheet
-  export type SheetWeb<R extends Shape = Shape> = Record<(keyof getCommon<R>) | getWeb<R>, TCommonStyles.RulesetWeb>
+  export type SheetWeb<R extends Shape = Shape> = Record<(keyof TCommon.getCommon<R>) | TCommon.getWeb<R>, TCommonStyles.RulesetWeb>
   export type SheetNative<R extends Shape = Shape> =
-    { [P in keyof getCommon<R>]: TCommonStyles.RulesetNative<getCommon<R>[P]> } &
-    { [P in keyof getNative<R>]: TCommonStyles.RulesetNative<getNative<R>[P]> }
+    { [P in keyof TCommon.getCommon<R>]: TCommonStyles.RulesetNative<TCommon.getCommon<R>[P]> } &
+    { [P in keyof TCommon.getNative<R>]: TCommonStyles.RulesetNative<TCommon.getNative<R>[P]> }
 
   export type Sheet<R extends Shape = Shape> = SheetWeb<R> | SheetNative<R>
   export type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
@@ -100,13 +68,9 @@ export namespace Types {
   /******************************************
       CREATORS
    *******************************************/
-  export type themeCreator<R extends Shape, T extends {}> = T | ((theme: getTheme<R>, variant: getVariant<R>) => T)
-  export type RootRulesetCreatorX<R extends Shape = Shape, TRulesetAddIn extends {} = {}> = themeCreator<R, RulesetX<getStyle<R>, R>>
+  export type themeCreator<R extends Shape, T extends {}> = T | ((theme: TCommon.getTheme<R>, variant: TCommon.getVariant<R>) => T)
+  export type RootRulesetCreatorX<R extends Shape = Shape, TRulesetAddIn extends {} = {}> = themeCreator<R, RulesetX<TCommon.getStyle<R>, R>>
   export type PartialSheetCreatorX<R extends Shape = Shape> = themeCreator<R, PartialSheetX<R>>
-
-  export interface ThemeBase {
-    type?: 'ThemeX'
-  }
 
   /******************************************
      COMPONENT TYPING
@@ -114,13 +78,13 @@ export namespace Types {
 
   //******************** Cross platform component types
 
-  export type PropsX<R extends Shape = Shape> = PartialOverwrite<getProps<R>,
+  export type PropsX<R extends Shape = Shape> = PartialOverwrite<TCommon.getProps<R>,
     {
-      style?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<getStyle<R>, R>>
-      $web?: Partial<getPropsWeb<R>> //web specific style
-      $native?: Partial<getPropsNative<R>> //native specific style
+      style?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<TCommon.getStyle<R>, R>>
+      $web?: Partial<TCommon.getPropsWeb<R>> //web specific style
+      $native?: Partial<TCommon.getPropsNative<R>> //native specific style
       classes?: PartialSheetCreatorX<R> // cross platform sheet
-      className?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<getStyle<R>, R>>
+      className?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<TCommon.getStyle<R>, R>>
       developer_flag?: boolean
     } & TAddIn.PropX<R>
     >
@@ -133,7 +97,7 @@ export namespace Types {
   export type omitPropNames = 'system' | 'style' | 'classes' | 'className' | keyof TAddIn.CodeProps
 
   // *** web
-  export type CodePropsWeb<R extends Shape = Shape, TCodePropsWebAddIn extends {} = {}> = Omit<getProps<R> & getPropsWeb<R>, omitPropNames> & TCommonStyles.OnPressAllWeb & {
+  export type CodePropsWeb<R extends Shape = Shape, TCodePropsWebAddIn extends {} = {}> = Omit<TCommon.getProps<R> & TCommon.getPropsWeb<R>, omitPropNames> & TCommonStyles.OnPressAllWeb & {
     system:
     {
       style: TCommonStyles.RulesetWeb
@@ -145,10 +109,10 @@ export namespace Types {
   export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
   // *** native
-  export type CodePropsNative<R extends Shape = Shape> = Omit<getProps<R> & getPropsNative<R>, omitPropNames> & TCommonStyles.OnPressAllNative & {
+  export type CodePropsNative<R extends Shape = Shape> = Omit<TCommon.getProps<R> & TCommon.getPropsNative<R>, omitPropNames> & TCommonStyles.OnPressAllNative & {
     system:
     {
-      style: TCommonStyles.RulesetNative<getStyle<R>>
+      style: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
       classes: SheetNative<R>
       developer_flag: boolean
     } & TAddIn.CodePropsNative<R>
@@ -157,10 +121,10 @@ export namespace Types {
   export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
 
   // *** web or native
-  export type CodeProps<R extends Shape = Shape> = Omit<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), omitPropNames> & (TCommonStyles.OnPressAllNative | TCommonStyles.OnPressAllWeb) & {
+  export type CodeProps<R extends Shape = Shape> = Omit<TCommon.getProps<R> & (TCommon.getPropsNative<R> | TCommon.getPropsWeb<R>), omitPropNames> & (TCommonStyles.OnPressAllNative | TCommonStyles.OnPressAllWeb) & {
     system:
     {
-      style: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<getStyle<R>>
+      style: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<TCommon.getStyle<R>>
       classes: Sheet<R>
       developer_flag: boolean
     } & TAddIn.CodeProps<R>
@@ -173,14 +137,28 @@ export namespace Types {
   /******************************************
       $props IN RULESETs
    *******************************************/
-  export type PropsInRulesetX<R extends Shape = Shape> = Partial<Overwrite<getProps<R>, {
-    $web?: Partial<getPropsWeb<R>> //web specific style
-    $native?: Partial<getPropsNative<R>> //native specific style
+  export type PropsInRulesetX<R extends Shape = Shape> = Partial<Overwrite<TCommon.getProps<R>, {
+    $web?: Partial<TCommon.getPropsWeb<R>> //web specific style
+    $native?: Partial<TCommon.getPropsNative<R>> //native specific style
     style?: never
     classes?: never
     className?: never
   }>>
 
 
+  /******************************************
+      THEME
+   *******************************************/
+  export type PropsXOverwrite<R extends Types.Shape> = PartialOverwrite<Types.PropsX<R>, {
+    style?: Types.RulesetX<TCommon.getStyle<R>>
+    classes?: Types.PartialSheetX<R>
+    className?: Types.RulesetX<TCommon.getStyle<R>>
+  }>
+
+  export interface WithStyleOptions_ComponentX<R extends Types.Shape =  Types.Shape> extends TCommon.WithStyleOptions {
+    getVariant?: (props: Types.PropsX<R> & TAddIn.GetVariant<R>, theme?: TCommon.getTheme<R>) => TCommon.getVariant<R>
+    variantToString?: (variant: TCommon.getVariant<R>) => string
+    defaultProps?: PropsXOverwrite<R>
+  }
 
 }

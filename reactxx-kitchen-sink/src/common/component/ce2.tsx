@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { deepMerge, deepMergesSys, mergeRulesets } from 'reactxx-basic'
-import { TProvider, TTheme, Types, TAddIn, Text, View, ScrollView, Icon, withStylesCreator, ThemeProviderUntyped } from 'reactxx'
+import { deepMerge, deepMergesSys, mergeRulesets, TCommon, ThemeProviderUntyped } from 'reactxx-basic'
+import { TProvider, Types, TAddIn, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
 
 
@@ -12,7 +12,7 @@ import { H2, A, P } from '../components/typo'
 * TYPINGS
 *************************/
 
-export interface Theme extends TTheme.ThemeBase {
+export interface Theme extends TCommon.ThemeBase {
   color: {
     main: string
     dark: string
@@ -27,12 +27,12 @@ export const enum Consts {
 }
 
 type Shape = Types.OverwriteShape<{
-  common: Types.ShapeViews<'root'> & Types.ShapeTexts<'label'>,
+  common: TCommon.ShapeViews<'root'> & TCommon.ShapeTexts<'label'>,
   nameType: Consts.Label | Consts.Badge,
   theme: Theme,
 }>
 
-const ThemeProvider = ThemeProviderUntyped as TTheme.ThemeProviderTyped<Theme>
+const ThemeProvider = ThemeProviderUntyped as TCommon.ThemeProviderTyped<Theme>
 
 /************************
 * LABEL

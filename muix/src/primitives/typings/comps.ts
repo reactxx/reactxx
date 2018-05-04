@@ -1,6 +1,6 @@
 ﻿import ReactN from 'react-native'
 
-import { Types, TCommonStyles } from 'reactxx-basic'
+import { Types, TCommonStyles, TCommon } from 'reactxx-basic'
 
 export const enum CompNames {
   Text = 'ReactXX$Text',
@@ -24,7 +24,7 @@ export namespace TComps {
   *******************************************/
 
   export interface TextShape {
-    common: Types.ShapeTexts<'root' | 'singleLineStyle'>
+    common: TCommon.ShapeTexts<'root' | 'singleLineStyle'>
     web: 'pressable'
     native: null
     style: 'Text'
@@ -34,7 +34,7 @@ export namespace TComps {
   }
 
   export interface ViewShape {
-    common: Types.ShapeViews<'root'>
+    common: TCommon.ShapeViews<'root'>
     web: null
     native: null
     style: 'View'
@@ -44,7 +44,7 @@ export namespace TComps {
   }
 
   export interface IconShape {
-    common: Types.ShapeViews<'root'>
+    common: TCommon.ShapeViews<'root'>
     web: 'pressable'
     native: null
     style: 'Text'
@@ -57,7 +57,7 @@ export namespace TComps {
   }
 
   export interface ScrollViewShape {
-    common: Types.ShapeScrollViews<'root'> & Types.ShapeViews<'container'>
+    common: TCommon.ShapeScrollViews<'root'> & TCommon.ShapeViews<'container'>
     web: 'rootHorizontal' | 'containerHorizontal'
     native: null
     style: 'ScrollView'

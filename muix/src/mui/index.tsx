@@ -5,9 +5,9 @@ import jssShared, { create} from 'jss';
 import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
 
-import { toPlatformEvents, TCommonStyles } from 'reactxx-basic'
+import { toPlatformEvents, TCommonStyles, TCommon, ThemeProvider } from 'reactxx-basic'
 import { rulesetToClassNames } from 'reactxx-fela'
-import { TTheme, TAddIn, Types, toPlatformRuleSet, toPlatformSheet, ThemeProvider } from 'reactxx'
+import { TAddIn, Types, toPlatformRuleSet, toPlatformSheet } from 'reactxx'
 
 export * from './common/createMuiTheme'
 import { createMuiTheme } from './common/createMuiTheme'
@@ -52,10 +52,10 @@ export const AppContainer: React.SFC = props => {
 //  return res
 //}
 
-type webKeys<R extends Types.Shape> = Types.getWeb<R> | keyof Types.getCommon<R>
+type webKeys<R extends Types.Shape> = TCommon.getWeb<R> | keyof TCommon.getCommon<R>
 type muiComponentType<P, ClassKey extends string> = React.ComponentType<P & Mui.StyledComponentProps<ClassKey>>
 
-export const muiCompatible = <R extends Types.Shape>(Component: muiComponentType<Types.getPropsWeb<R>, webKeys<R>>) => {
+export const muiCompatible = <R extends Types.Shape>(Component: muiComponentType<TCommon.getPropsWeb<R>, webKeys<R>>) => {
 
   const Styled: Types.SFCX<R> = props => {
 

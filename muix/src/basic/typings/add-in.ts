@@ -28,6 +28,8 @@ export namespace TAddIn {
   export interface PropX<R extends Types.Shape = Types.Shape> { }
 
   //******************** Platform specific
+  export interface GetVariant<R extends Types.Shape = Types.Shape> { }
+
   export interface CodePropsWeb<R extends Types.Shape = Types.Shape> { }
 
   export interface CodePropsNative<R extends Types.Shape = Types.Shape> { }

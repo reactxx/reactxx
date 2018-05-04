@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactN, { Animated } from 'react-native'
 
-import { mergeRulesets } from 'reactxx-basic'
+import { mergeRulesets, TCommon } from 'reactxx-basic'
 import { TComps } from 'reactxx-primitives'
-import { TTheme, Types, withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
+import { Types, withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
 import MDI from 'reactxx-mdi'
 
 
@@ -14,9 +14,9 @@ export namespace DocHome {
   }
 
   export type ExpandedPanelShape = Types.OverwriteShape<{
-    common: Types.ShapeViews<'root' | 'header' | 'content'> & Types.ShapeTexts<'icon' | 'headerLabel'>
+    common: TCommon.ShapeViews<'root' | 'header' | 'content'> & TCommon.ShapeTexts<'icon' | 'headerLabel'>
     animation: {
-      openClose: Types.ShapeViews<'content'> & Types.ShapeTexts<'icon'>
+      openClose: TCommon.ShapeViews<'content'> & TCommon.ShapeTexts<'icon'>
     }
     props: { title: React.ReactNode }
     nameType: CompNames.ExpandPanel

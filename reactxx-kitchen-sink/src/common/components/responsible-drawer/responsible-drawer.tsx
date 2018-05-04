@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { mergeRulesets } from 'reactxx-basic'
+import { mergeRulesets, TCommon } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
-import { TAddIn, TProvider, TTheme, Types, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer } from 'reactxx'
+import { TAddIn, TProvider, Types, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer } from 'reactxx'
 import { LoremIpsum, TCommonStyles } from 'reactxx-basic'
 import { TComps } from 'reactxx-primitives'
 
@@ -46,12 +46,12 @@ export namespace TResponsibleDrawer {
 
 
   export type Shape = Types.OverwriteShape<{
-    common: Types.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content'> & Types.ShapeTexts<'openButton' | 'closeButton'>
+    common: TCommon.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content'> & TCommon.ShapeTexts<'openButton' | 'closeButton'>
     props: Props
     mediaq: 'mobile' | 'tablet' | 'desktop' // media query breakpoints names
     animation: { //animation sheets
-      mobile: Types.ShapeViews<'drawer' | 'backDrop'> // mobile animation sheet
-      tablet: Types.ShapeViews<'drawer' | 'content'> // tablet animation sheet
+      mobile: TCommon.ShapeViews<'drawer' | 'backDrop'> // mobile animation sheet
+      tablet: TCommon.ShapeViews<'drawer' | 'content'> // tablet animation sheet
     }
     variant: Variant
     nameType: Consts.Drawer

@@ -2,8 +2,8 @@ import React from 'react'
 import ReactN from 'react-native'
 import ReactDOM from 'react-dom'
 
-import { mergeRulesets } from 'reactxx-basic'
-import { withStylesCreator, TProvider, TTheme, Types, TAddIn, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
+import { mergeRulesets, TCommon } from 'reactxx-basic'
+import { withStylesCreator, TProvider, Types, TAddIn, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
 import { TMediaQ } from 'reactxx-mediaq'
 
@@ -17,7 +17,7 @@ export const enum Consts {
 
 // 
 export type Shape = Types.OverwriteShape<{
-  common: Types.ShapeTexts<'root'>,
+  common: TCommon.ShapeTexts<'root'>,
   style: 'Text'
   mediaq: 'small'
   props: {

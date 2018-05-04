@@ -1,8 +1,8 @@
 ﻿import muiCreateTypography from 'material-ui/styles/createTypography'
 
+import { deepMerge, TCommon } from 'reactxx-basic'
 import { Types, toPlatformSheet } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
-import { deepMerge } from 'reactxx-basic'
 
 import * as Mui from '../typings/mui'
 import { Muix } from '../typings/muix'
@@ -55,7 +55,7 @@ export default function createTypography(palette: Mui.Palette, optionOrCreator: 
   }
 
   type Shape = Types.OverwriteShape<{
-    common: Types.ShapeTexts<Mui.Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'> & { noWrap?: any /*ReactN.TextProperties*/ }
+    common: TCommon.ShapeTexts<Mui.Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'> & { noWrap?: any /*ReactN.TextProperties*/ }
   }>
 
 

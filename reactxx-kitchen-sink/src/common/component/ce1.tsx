@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { deepMerges, mergeRulesets } from 'reactxx-basic';
+import { deepMerges, mergeRulesets, TCommon } from 'reactxx-basic';
 import MDI from 'reactxx-mdi'
-import { TProvider, TTheme, Types, TAddIn, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
+import { TProvider, Types, TAddIn, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
 
 
@@ -19,7 +19,7 @@ export const enum Consts {
 
 // 
 type Shape = Types.OverwriteShape<{
-  common: Types.ShapeViews<'root'> & Types.ShapeTexts<'label' | 'icon' | 'iconGap'>,
+  common: TCommon.ShapeViews<'root'> & TCommon.ShapeTexts<'label' | 'icon' | 'iconGap'>,
   props: {
     iconData: string,
   },

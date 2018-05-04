@@ -1,4 +1,4 @@
-﻿import { TCommonStyles } from 'reactxx-basic'
+﻿import { TCommonStyles, TCommon } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
 import { TActivable } from 'reactxx-activable'
 import { TAnimation } from 'reactxx-animation'
@@ -48,9 +48,13 @@ export namespace TAddIn {
   }
 
   //******************** Platform specific
+  export interface GetVariant<R extends Types.Shape = Types.Shape> {
+    mediaqFlags?: TMediaQ.MediaFlags<TAddIn.getMediaQ<R>>
+  }
+
   export interface CodePropsLow<R extends Types.Shape = Types.Shape> {
-    theme?: Types.getTheme<R>
-    variant?: Types.getVariant<R>
+    theme?: TCommon.getTheme<R>
+    variant?: TCommon.getVariant<R>
     mediaqFlags?: TMediaQ.MediaFlags<getMediaQ<R>>
     activeFlag?: getActivable<R>
   }

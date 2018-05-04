@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 import warning from 'warning'
 
-import { TCommonStyles, toPlatformEvents, deepMerge, deepMergesSys, deepMerges } from 'reactxx-basic'
+import { TCommonStyles, TCommon, toPlatformEvents, deepMerge, deepMergesSys, deepMerges, ThemeProvider, ThemeConsumer, theme } from 'reactxx-basic'
 import { animations, TAnimation } from 'reactxx-animation'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet } from 'reactxx-mediaq'
 import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
@@ -10,7 +10,6 @@ import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
-import { theme, TTheme, ThemeProvider, ThemeConsumer } from './theme'
 import { Overrides } from 'material-ui/styles/overrides';
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
@@ -19,15 +18,15 @@ const DEV_MODE = process.env.NODE_ENV === 'development'
 * WITH STYLES
 *************************/
 
-export const withStylesCreator = <R extends Types.Shape, TStatic extends {} = {}>(name: Types.getNameType<R>, sheetCreator: Types.SheetCreatorX<R>, component: Types.CodeComponentType<R>, options?: TTheme.WithStyleOptions_ComponentX<R>) =>
-  (overrideOptions?: TTheme.WithStyleOptions_ComponentX<R>) => withStyles<R, TStatic>(name, sheetCreator, options, overrideOptions)(component)
+export const withStylesCreator = <R extends Types.Shape, TStatic extends {} = {}>(name: TCommon.getNameType<R>, sheetCreator: Types.SheetCreatorX<R>, component: Types.CodeComponentType<R>, options?: Types.WithStyleOptions_ComponentX<R>) =>
+  (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStyles<R, TStatic>(name, sheetCreator, options, overrideOptions)(component)
 
-export const withStyles = <R extends Types.Shape, TStatic extends {} = {}>(name: Types.getNameType<R>, sheetCreator: Types.SheetCreatorX<R>, _options?: TTheme.WithStyleOptions_ComponentX<R>, overrideOptions?: TTheme.WithStyleOptions_ComponentX<R>) => (Component: Types.CodeComponentType<R>) => {
+export const withStyles = <R extends Types.Shape, TStatic extends {} = {}>(name: TCommon.getNameType<R>, sheetCreator: Types.SheetCreatorX<R>, _options?: Types.WithStyleOptions_ComponentX<R>, overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => (Component: Types.CodeComponentType<R>) => {
 
   type TPropsX = Types.PropsX<R>
 
   //*** OPTIONS
-  const options: TTheme.WithStyleOptions_ComponentX = _options && overrideOptions ? deepMerges({}, _options, overrideOptions) : (overrideOptions ? { ...overrideOptions } : (_options ? { ..._options } : {}))
+  const options: Types.WithStyleOptions_ComponentX = _options && overrideOptions ? deepMerges({}, _options, overrideOptions) : (overrideOptions ? { ...overrideOptions } : (_options ? { ..._options } : {}))
   options.withTheme = fromOptions(typeof sheetCreator === 'function', options ? options.withTheme : undefined)
 
   //**** PROPERTY CASCADING 
@@ -79,7 +78,7 @@ export const withStyles = <R extends Types.Shape, TStatic extends {} = {}>(name:
   }
 
   //**** TO PLATFORM
-  const toPlatform = (input: () => { mediaQFlags: TMediaQ.MediaFlags; activeFlag: boolean; propsWithCascading: Types.PropsX; themeContext: TTheme.ThemeContext }, output: (outputPar: { codeProps: Types.CodeProps, codeClasses: Types.Sheet, $animations: TAnimation.SheetsX }) => void, next: () => React.ReactNode) => {
+  const toPlatform = (input: () => { mediaQFlags: TMediaQ.MediaFlags; activeFlag: boolean; propsWithCascading: Types.PropsX; themeContext: TCommon.ThemeContext }, output: (outputPar: { codeProps: Types.CodeProps, codeClasses: Types.Sheet, $animations: TAnimation.SheetsX }) => void, next: () => React.ReactNode) => {
     const res = () => {
       const { mediaQFlags, activeFlag, propsWithCascading, themeContext } = input()
       const { codeProps, codeClasses } = prepareSheet(name, sheetCreator, options, propsWithCascading, themeContext, mediaQFlags, activeFlag)
@@ -95,7 +94,7 @@ export const withStyles = <R extends Types.Shape, TStatic extends {} = {}>(name:
   //****************************
   class Styled extends React.Component<TPropsX> {
 
-    themeContext: TTheme.ThemeContext = {}
+    themeContext: TCommon.ThemeContext = {}
     propsWithCascading: Types.PropsX
     codeProps: Types.CodeProps
     codeClasses: Types.Sheet
@@ -170,7 +169,7 @@ export interface TProvider<R extends Types.Shape> { Provider: React.ComponentCla
 
 export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()).join('$')
 
-export const AppContainer: React.SFC<{ theme?: TTheme.ThemeCreator }> = props => {
+export const AppContainer: React.SFC<{ theme?: TCommon.ThemeCreator }> = props => {
   const theme = <ThemeProvider theme={props.theme}>{props.children}</ThemeProvider>
   return mediaQProviderExists() ? theme : <MediaQ_AppContainer>{theme}</MediaQ_AppContainer>
 }
@@ -179,10 +178,10 @@ export const AppContainer: React.SFC<{ theme?: TTheme.ThemeCreator }> = props =>
 * PRIVATE
 *************************/
 
-const prepareSheet = (name: string, createSheetX: Types.SheetCreatorX, options: TTheme.WithStyleOptions_ComponentX, props: Types.PropsX, themeContext: TTheme.ThemeContext, mediaqFlags: TMediaQ.MediaFlags, activeFlag: boolean) => {
+const prepareSheet = (name: string, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, props: Types.PropsX, themeContext: TCommon.ThemeContext, mediaqFlags: TMediaQ.MediaFlags, activeFlag: boolean) => {
 
   const { classes, className, style, $mediaq: ignore1, onPress, onLongPress, onPressIn, onPressOut, $web, $native, developer_flag, CONSTANT, ...rest } = props as Types.PropsX & TCommonStyles.OnPressAllX
-  const { theme, $cache } = (themeContext || {}) as TTheme.ThemeContext
+  const { theme, $cache } = (themeContext || {}) as TCommon.ThemeContext
 
   //** STATIC SHEET
   let staticSheet: Types.Sheet
@@ -241,7 +240,7 @@ const prepareSheet = (name: string, createSheetX: Types.SheetCreatorX, options: 
 
   return { codeProps, codeClasses }
 }
-const callCreator = <T extends {}>(theme: TTheme.ThemeBase, variant, creator: T | ((theme: TTheme.ThemeBase, variant) => T)) => typeof creator === 'function' ? creator(theme, variant) : creator
+const callCreator = <T extends {}>(theme: TCommon.ThemeBase, variant, creator: T | ((theme: TCommon.ThemeBase, variant) => T)) => typeof creator === 'function' ? creator(theme, variant) : creator
 
 const fromOptions = (...bools: boolean[]) => {
   let res = undefined

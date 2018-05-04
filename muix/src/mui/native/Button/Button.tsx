@@ -5,7 +5,7 @@ import { capitalize } from 'material-ui/utils/helpers';
 import { ButtonProps } from 'material-ui/Button/Button'
 
 import { mergeRulesets, TCommonStyles } from 'reactxx-basic'
-import { Types, TAddIn, TProvider, TTheme, Text, withStyles } from 'reactxx'
+import { Types, TAddIn, TProvider, Text, withStyles } from 'reactxx'
 import { CompNames, TComps } from 'reactxx-primitives'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
