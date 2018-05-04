@@ -114,7 +114,7 @@ export namespace Types {
 
   //******************** Cross platform component types
 
-  export type PropsX<R extends Shape> = PartialOverwrite<getProps<R>,
+  export type PropsX<R extends Shape = Shape> = PartialOverwrite<getProps<R>,
     {
       style?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<getStyle<R>, R>>
       $web?: Partial<getPropsWeb<R>> //web specific style

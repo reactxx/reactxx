@@ -8,7 +8,7 @@ import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQ
 import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
 
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
-import { Types } from '../typings/basic'
+import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
 import { theme, TTheme, ThemeProvider, ThemeConsumer } from './theme'
 import { Overrides } from 'material-ui/styles/overrides';
