@@ -1,8 +1,10 @@
 ﻿import React from 'react'
 import ReactN, { View, TouchableWithoutFeedback, Animated, Easing, Platform, LayoutRectangle } from 'react-native'
 import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
+import { Properties } from 'csstype'
 
-import { TBasic, TAddIn, TTheme, TProvider, withStyles, mergeRulesets } from 'reactxx'
+import { TCommonStyles, mergeRulesets } from 'reactxx-basic'
+import { TBasic, TAddIn, TTheme, TProvider, withStyles } from 'reactxx'
 
 import { MuiButtonBaseT } from '../../typings/button-base'
 import { Muix } from '../../typings/muix'

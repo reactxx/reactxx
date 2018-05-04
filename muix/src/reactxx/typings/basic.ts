@@ -8,6 +8,8 @@ import { TActivable } from 'reactxx-activable'
 
 import { TAnimation } from 'reactxx-animation'
 
+import { TAddIn } from './add-in'
+
 export namespace TBasic {
 
   /******************************************
@@ -57,9 +59,9 @@ export namespace TBasic {
   export type SheetX<R extends Shape = Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & TAddIn.SheetAddInX<R>
   export type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & TAddIn.SheetAddInX<R>
 
-  type SheetXCommon<R extends Shape> = { [P in keyof Types.getCommon<R>]: Partial<RulesetX<Types.getCommon<R>[P], R>> }
-  type SheetXNative<R extends Shape> = { [P in keyof Types.getNative<R>]: { $native?: Types.RulesetNative<Types.getNative<R>[P]> } & TAddIn.RulesetAddInX<Types.getNative<R>[P], R> }
-  type SheetXWeb<R extends Shape> = { [P in Types.getWeb<R>]: { $web?: Types.RulesetWeb } & TAddIn.RulesetAddInX<Types.getNative<R>[P], R> }
+  export type SheetXCommon<R extends Shape> = { [P in keyof Types.getCommon<R>]: Partial<RulesetX<Types.getCommon<R>[P], R>> }
+  export type SheetXNative<R extends Shape> = { [P in keyof Types.getNative<R>]: { $native?: Types.RulesetNative<Types.getNative<R>[P]> } & TAddIn.RulesetAddInX<Types.getNative<R>[P], R> }
+  export type SheetXWeb<R extends Shape> = { [P in Types.getWeb<R>]: { $web?: Types.RulesetWeb } & TAddIn.RulesetAddInX<Types.getNative<R>[P], R> }
 
   export type SheetCreatorX<R extends TBasic.Shape = TBasic.Shape> = Types.themeCreator<R, TBasic.SheetX<R>>
 
@@ -94,47 +96,3 @@ export namespace TBasic {
 
 export function isType<TWeb>(arg): arg is TWeb { return window.isWeb }
 
-export namespace TAddIn {
-
-  /******************************************
-    ADDINs
-  *******************************************/
-
-  //******************** Cross platform
-  export interface RulesetAddInX<T extends Types.RulesetNativeIds, R extends TBasic.Shape> extends TMediaQ.MediaQRulesetPartX<T> { }
-  export interface SheetAddInX<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<TBasic.getAnimation<R>> }
-
-
-  /******************************************
-    COMPONENT PROPS
-  *******************************************/
-
-  //******************** Cross platform 
-  export interface PropX<R extends TBasic.Shape = TBasic.Shape> {
-    ignore?: boolean
-    CONSTANT?: boolean,
-    $mediaq?: TMediaQ.NotifyIntervalCreator<TBasic.getMediaQ<R>>
-    $active?: TBasic.getActivable<R> extends boolean ? boolean : never
-  }
-
-  //******************** Platform specific
-  export interface CodePropsLow<R extends TBasic.Shape = TBasic.Shape> {
-    theme?: Types.getTheme<R>
-    variant?: Types.getVariant<R>
-    mediaqFlags?: TMediaQ.MediaFlags<TBasic.getMediaQ<R>>
-    activeFlag?: TBasic.getActivable<R>
-  }
-
-  export interface CodePropsWeb<R extends TBasic.Shape = TBasic.Shape> extends CodePropsLow<R> {
-    animations?: TAnimation.DriversWeb<TBasic.getAnimation<R>>
-  }
-
-  export interface CodePropsNative<R extends TBasic.Shape = TBasic.Shape> extends CodePropsLow<R> {
-    animations?: TAnimation.DriversNative<TBasic.getAnimation<R>>
-  }
-
-  export interface CodeProps<R extends TBasic.Shape = TBasic.Shape> extends CodePropsLow<R> {
-    animations?: TAnimation.Drivers<TBasic.getAnimation<R>>
-  }
-
-}

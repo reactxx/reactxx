@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "system",
     "moduleResolution": "node",
 
     //"declaration": true,
@@ -37,6 +37,7 @@
       "reactxx-fela": [ "src/fela/index" ],
 
       "reactxx-animation": [ "src/animation/web/index" ],
+      "reactxx-primitives": [ "src/primitives/web/index" ],
       "reactxx-mediaq": [ "src/mediaq/web/index" ],
       "reactxx-basic": [ "src/basic/index" ],
       "reactxx-activable": [ "src/activable/web/index" ],
@@ -54,6 +55,7 @@
     ]
   },
   "include": [
+    //"src/**/*",
     "src/**/*",
     "node_modules/reactxx-mdi/typings.ts"
   ],

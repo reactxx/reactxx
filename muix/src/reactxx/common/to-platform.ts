@@ -4,6 +4,7 @@ import ReactN from 'react-native'
 import { Types } from 'reactxx-basic'
 
 import { TBasic } from '../typings/basic'
+import { TAddIn } from '../typings/add-in'
 
 //create platform specific ruleset from cross platform one
 export const toPlatformRuleSet = (style: TBasic.RulesetX) => {
@@ -28,7 +29,7 @@ export const toPlatformSheet = <R extends TBasic.Shape>(sheet: TBasic.SheetX<R> 
   const res = {}
   for (const p in sheet) {
     const sheet$p = sheet[p]
-    if (p === '$animations') { // sheets
+    if (p === '$animations') { // animation sheets
       const animDest = res[p] = {} as any
       for (const pp in sheet$p) animDest[pp] = toPlatformSheet(sheet$p[pp] as any)
     } else if (p === '$mediaq') { // media breakpoints

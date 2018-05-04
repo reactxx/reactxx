@@ -55,4 +55,23 @@ export const deepMerge = (target, source, skipSystem = false) => {
 }
 const isObject = item => item && typeof item === 'object' && !Array.isArray(item) && typeof item['_interpolation'] != 'function' //HACK: typeof item['_interpolation'] != 'function' prevent to merge ReactNative's Animated.Value.interpolate prop
 
+
+export function mergeRulesets<T extends Types.RulesetNativeIds = 'View'>(...rulesets/*all used rulesets*/): Types.RulesetNative<T>
+export function mergeRulesets<T extends 'Web'>(...rulesets): Types.RulesetWeb
+export function mergeRulesets<T extends {}>(...rulesets): T
+export function mergeRulesets(...rulesets) {
+  let count = 0
+  let res
+  rulesets.forEach(ruleset => {
+    if (!ruleset) return
+    switch (count) {
+      case 0: res = ruleset; break
+      case 1: res = deepMergesSys(true, {}, res, ruleset); break
+      default: deepMergesSys(true, res, ruleset); break
+    }
+    count++
+  })
+  return res
+}
+
 export function isType<TWeb>(arg): arg is TWeb { return window.isWeb }

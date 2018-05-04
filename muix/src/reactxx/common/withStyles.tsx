@@ -8,7 +8,8 @@ import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQ
 import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
 
 import { toPlatformSheet, toPlatformRuleSet } from './to-platform'
-import { TBasic, TAddIn } from '../typings/basic'
+import { TBasic } from '../typings/basic'
+import { TAddIn } from '../typings/add-in'
 import { theme, TTheme, ThemeProvider, ThemeConsumer } from './theme'
 import { Overrides } from 'material-ui/styles/overrides';
 
@@ -172,24 +173,6 @@ export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()
 export const AppContainer: React.SFC<{ theme?: TTheme.ThemeCreator }> = props => {
   const theme = <ThemeProvider theme={props.theme}>{props.children}</ThemeProvider>
   return mediaQProviderExists() ? theme : <MediaQ_AppContainer>{theme}</MediaQ_AppContainer>
-}
-
-export function mergeRulesets<T extends Types.RulesetNativeIds = 'View'>(...rulesets/*all used rulesets*/): Types.RulesetNative<T>
-export function mergeRulesets<T extends 'Web'>(...rulesets): Types.RulesetWeb
-export function mergeRulesets<T extends {}>(...rulesets): T
-export function mergeRulesets(...rulesets) {
-  let count = 0
-  let res
-  rulesets.forEach(ruleset => {
-    if (!ruleset) return
-    switch (count) {
-      case 0: res = ruleset; break
-      case 1: res = deepMergesSys(true, {}, res, ruleset); break
-      default: deepMergesSys(true, res, ruleset); break
-    }
-    count++
-  })
-  return res
 }
 
 /************************

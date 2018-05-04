@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TTheme, TBasic, TComps, withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView, mergeRulesets } from 'reactxx'
-import { Types } from 'reactxx-basic'
+import { TTheme, TBasic, withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
+import { TComps } from 'reactxx-primitives'
+import { Types, mergeRulesets } from 'reactxx-basic'
 
 import MDI from 'reactxx-mdi'
 

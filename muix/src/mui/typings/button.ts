@@ -2,7 +2,8 @@
 import ReactN from 'react-native'
 import { Muix } from 'reactxx-mui/typings/muix'
 
-import { TComps, TBasic, TTheme } from 'reactxx'
+import { TBasic, TTheme } from 'reactxx'
+import { TComps } from 'reactxx-primitives'
 import { Types } from 'reactxx-basic'
 
 export namespace MuiButtonT {

@@ -3,9 +3,9 @@ import ReactN from 'react-native'
 
 import { Muix } from 'reactxx-mui/typings/muix'
 import { Types } from 'reactxx-basic'
-import { TComps, TBasic, TTheme } from 'reactxx'
-//import ReactN from 'react-native'
-//import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
+import { TBasic, TTheme } from 'reactxx'
+import { TComps } from 'reactxx-primitives'
+
 export namespace MuiButtonBaseT {
 
   export const enum CompNames {

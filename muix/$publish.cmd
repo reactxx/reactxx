@@ -12,14 +12,13 @@ call $compile
 
 rem *** npm package publishing
 call %root%$publish_ basic
-call %root%$publish_ fela
-call %root%$publish_ mediaq
-call %root%$publish_ animation
-call %root%$publish_ activable
-rem call %root%$publish_ stateman
-call %root%$publish_ reactxx
+rem call %root%$publish_ fela
+rem call %root%$publish_ mediaq
+rem call %root%$publish_ animation
+rem call %root%$publish_ activable
+rem call %root%$publish_ reactxx
 
-call %root%$publish_ mui
-rmdir %root%deploy\mui\es\native\fonts /s /q
-xcopy %root%src\mui\native\fonts %root%deploy\mui\es\native\fonts /s /q /i 
+rem call %root%$publish_ mui
+rem rmdir %root%deploy\mui\es\native\fonts /s /q
+rem xcopy %root%src\mui\native\fonts %root%deploy\mui\es\native\fonts /s /q /i 
 

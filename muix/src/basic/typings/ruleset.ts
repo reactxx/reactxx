@@ -98,9 +98,9 @@ export namespace Types {
   export type SheetX<R extends Shape = Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>
   export type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>>
 
-  type SheetXCommon<R extends Shape> = { [P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R> }
-  type SheetXNative<R extends Shape> = { [P in keyof getNative<R>]: { $native?: Types.RulesetNative<Types.getNative<R>[P]> } }
-  type SheetXWeb<R extends Shape> = { [P in getWeb<R>]: { $web?: Types.RulesetWeb } }
+  export type SheetXCommon<R extends Shape> = { [P in keyof getCommon<R>]: RulesetX<getCommon<R>[P], R> }
+  export type SheetXNative<R extends Shape> = { [P in keyof getNative<R>]: { $native?: Types.RulesetNative<Types.getNative<R>[P]> } }
+  export type SheetXWeb<R extends Shape> = { [P in getWeb<R>]: { $web?: Types.RulesetWeb } }
 
   export type SheetWeb<R extends Shape = Shape> = Record<(keyof getCommon<R>) | getWeb<R>, RulesetWeb>
   export type SheetNative<R extends Shape = Shape> =

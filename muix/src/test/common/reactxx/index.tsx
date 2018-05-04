@@ -1,6 +1,7 @@
 import React from 'react'
-import { TTheme, CompNames, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
+import { TTheme, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
+import { CompNames } from 'reactxx-primitives'
 
 import { TBasic } from 'reactxx'
 

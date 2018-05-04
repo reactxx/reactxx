@@ -1,12 +1,12 @@
 ﻿import ReactN from 'react-native'
 import React from 'react'
 import MuiButtonBase, { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
-import { Properties } from 'csstype'
 
+import { Properties } from 'csstype'
+import { TCommonStyles } from 'reactxx-basic'
 import { TAddIn, TProvider, TBasic, TTheme } from 'reactxx'
 
 import { muiCompatible } from '../index'
-
 import { MuiButtonBaseT } from '../typings/button-base'
 import { Muix } from '../typings/muix'
 

@@ -1,8 +1,10 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { Types, deepMerge, deepMergesSys } from 'reactxx-basic'
-import { TComps, TProvider, TTheme, TBasic, TAddIn, Text, View, ScrollView, Icon, withStylesCreator, ThemeProviderUntyped, mergeRulesets } from 'reactxx'
+import { Types, deepMerge, deepMergesSys, mergeRulesets } from 'reactxx-basic'
+import { TProvider, TTheme, TBasic, TAddIn, Text, View, ScrollView, Icon, withStylesCreator, ThemeProviderUntyped } from 'reactxx'
+import { TComps } from 'reactxx-primitives'
+
 
 import { H2, A, P } from '../components/typo'
 

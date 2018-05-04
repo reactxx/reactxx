@@ -2,9 +2,9 @@ import React from 'react'
 import ReactN from 'react-native'
 import ReactDOM from 'react-dom'
 
-import { Types } from 'reactxx-basic'
-import { withStylesCreator, TProvider, TTheme, TComps, TBasic, TAddIn, Text, View, ScrollView, Icon, AppContainer, mergeRulesets } from 'reactxx'
-//import { withStylesCreator } from '../../reactxx/common/withStyles'
+import { Types, mergeRulesets } from 'reactxx-basic'
+import { withStylesCreator, TProvider, TTheme, TBasic, TAddIn, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
+import { TComps } from 'reactxx-primitives'
 import { TMediaQ } from 'reactxx-mediaq'
 
 /************************

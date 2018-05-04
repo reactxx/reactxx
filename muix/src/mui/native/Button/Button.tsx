@@ -4,8 +4,9 @@ import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 import { ButtonProps } from 'material-ui/Button/Button'
 
-import { Types } from 'reactxx-basic'
-import { TComps, TBasic, TAddIn, TProvider, TTheme, CompNames, Text, withStyles, mergeRulesets } from 'reactxx'
+import { Types, mergeRulesets } from 'reactxx-basic'
+import { TBasic, TAddIn, TProvider, TTheme, Text, withStyles } from 'reactxx'
+import { CompNames, TComps } from 'reactxx-primitives'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
 import { MuiButtonT } from '../../typings/button'

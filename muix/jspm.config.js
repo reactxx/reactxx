@@ -13,9 +13,9 @@ SystemJS.config({
     "reactxx-fela": "deploy/lib/fela/index",
     "reactxx-basic": "deploy/lib/basic/index",
     "reactxx-animation": "deploy/lib/animation/web/index",
+    "reactxx-primitives": "deploy/lib/primitives/web/index",
     "reactxx-mediaq": "deploy/lib/mediaq/web/index",
     "reactxx": "deploy/lib/reactxx/web/index",
-    "reactxx-stateman": "deploy/lib/stateman/index",
     "reactxx-mui": "deploy/lib/mui/web"
   }
 });

@@ -1,6 +1,8 @@
 import React from 'react'
 
-import { TBasic, TComps, Text } from 'reactxx'
+import { TBasic, Text } from 'reactxx'
+import { TComps } from 'reactxx-primitives'
+
 
 const typo = {
   H1: {

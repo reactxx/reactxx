@@ -3,7 +3,8 @@
 import { TMediaQ } from 'reactxx-mediaq'
 import { Types } from 'reactxx-basic'
 
-import { TBasic, TAddIn } from '../typings/basic'
+import { TBasic } from '../typings/basic'
+import { TAddIn } from '../typings/add-in'
 
 export namespace TTheme {
 
