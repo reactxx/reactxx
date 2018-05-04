@@ -2,8 +2,8 @@ import React from 'react'
 import ReactN from 'react-native'
 import ReactDOM from 'react-dom'
 
-import { Types, mergeRulesets } from 'reactxx-basic'
-import { withStylesCreator, TProvider, TTheme, TBasic, TAddIn, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
+import { mergeRulesets } from 'reactxx-basic'
+import { withStylesCreator, TProvider, TTheme, Types, TAddIn, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
 import { TMediaQ } from 'reactxx-mediaq'
 
@@ -16,7 +16,7 @@ export const enum Consts {
 }
 
 // 
-export type Shape = TBasic.OverwriteShape<{
+export type Shape = Types.OverwriteShape<{
   common: Types.ShapeTexts<'root'>,
   style: 'Text'
   mediaq: 'small'
@@ -31,7 +31,7 @@ export type Shape = TBasic.OverwriteShape<{
 *************************/
 export interface Variant extends TMediaQ.CodeProps<TAddIn.getMediaQ<Shape>> { }
 
-const sheet: TBasic.SheetCreatorX<Shape> = (theme, variant) => ({
+const sheet: Types.SheetCreatorX<Shape> = (theme, variant) => ({
   root: {
     $mediaq: {
       '-480': { color: 'red' },
@@ -45,8 +45,8 @@ const sheet: TBasic.SheetCreatorX<Shape> = (theme, variant) => ({
 /************************
 * CODE
 *************************/
-const label: TBasic.CodeSFC<Shape> = ({ system: { classes, style }, children }) => {
-  const root = mergeRulesets<TBasic.TextRulesetX>(classes.root)
+const label: Types.CodeSFC<Shape> = ({ system: { classes, style }, children }) => {
+  const root = mergeRulesets<Types.TextRulesetX>(classes.root)
   return <Text className={root}>{children}</Text>
 }
 

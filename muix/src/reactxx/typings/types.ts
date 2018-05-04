@@ -6,7 +6,7 @@ import { TCommonStyles } from 'reactxx-basic'
 
 import { TAddIn } from './add-in'
 
-export namespace TBasic {
+export namespace Types {
 
   /******************************************
     RULESET
@@ -22,15 +22,6 @@ export namespace TBasic {
       $props?: PropsInRulesetX<R>
     } &
     TAddIn.RulesetAddInX<T, R>
-
-  //export type RulesetWithAddInX<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape, TAddIn extends {} = {}> =
-  //  RulesetCommon<T> & // native rules which are compatible with web
-  //  {
-  //    $native?: RulesetNative<T> // native specific rules
-  //    $web?: RulesetWeb // web specific rules
-  //    $props?: PropsInRulesetX<R>
-  //  } &
-  //  TAddIn
 
   export interface ViewRulesetX<TAddIn extends {} = {}> extends RulesetX<'View'> { }
   export interface TextRulesetX<TAddIn extends {} = {}> extends RulesetX<'Text'> { }

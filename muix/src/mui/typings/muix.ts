@@ -2,7 +2,7 @@ import ReactN from 'react-native'
 
 import * as Mui from './mui'
 
-import { TBasic } from 'reactxx'
+import { Types } from 'reactxx'
 import { TCommonStyles } from 'reactxx-basic'
 
 export namespace Muix {
@@ -22,13 +22,13 @@ export namespace Muix {
   //  fontWeightMedium: React.CSSProperties['fontWeight']
   //}
 
-  export type TypographyOptionsX = {[type in typoStyle]?: TBasic.TextRulesetX } & Partial<FontStyleNew>
-  export type TypographyX = {[type in typoStyle]: TBasic.TextRulesetX } & FontStyleNew
+  export type TypographyOptionsX = {[type in typoStyle]?: Types.TextRulesetX } & Partial<FontStyleNew>
+  export type TypographyX = {[type in typoStyle]: Types.TextRulesetX } & FontStyleNew
   export type TypographyOptionsOrCreatorX = TypographyOptionsX | ((palette: Mui.Palette) => TypographyOptionsX)
 
   export type ShadowsNative = ReactN.ViewStyle[]
 
-  export type ThemeShadowsX = TBasic.RulesetX<'View'>[]
+  export type ThemeShadowsX = Types.RulesetX<'View'>[]
   export type ThemeShadows = TCommonStyles.ViewStyle[]
 
   export interface Theme extends Mui.Theme {

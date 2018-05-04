@@ -1,13 +1,11 @@
 import React from 'react'
-import ReactN from 'react-native'
+import ReactN, { Animated } from 'react-native'
 
-import { TTheme, TBasic, withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
+import { mergeRulesets } from 'reactxx-basic'
 import { TComps } from 'reactxx-primitives'
-import { Types, mergeRulesets } from 'reactxx-basic'
-
+import { TTheme, Types, withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
 import MDI from 'reactxx-mdi'
 
-import { Animated } from 'react-native'
 
 export namespace DocHome {
 
@@ -15,7 +13,7 @@ export namespace DocHome {
     ExpandPanel = 'DocHome$ExpandedPanelShape'
   }
 
-  export type ExpandedPanelShape = TBasic.OverwriteShape<{
+  export type ExpandedPanelShape = Types.OverwriteShape<{
     common: Types.ShapeViews<'root' | 'header' | 'content'> & Types.ShapeTexts<'icon' | 'headerLabel'>
     animation: {
       openClose: Types.ShapeViews<'content'> & Types.ShapeTexts<'icon'>
@@ -25,7 +23,7 @@ export namespace DocHome {
   }>
 }
 
-const expandedPanelSheet: TBasic.SheetCreatorX<DocHome.ExpandedPanelShape> = {
+const expandedPanelSheet: Types.SheetCreatorX<DocHome.ExpandedPanelShape> = {
   $animations: {
     openClose: {
       content: {
@@ -80,15 +78,15 @@ const expandedPanelSheet: TBasic.SheetCreatorX<DocHome.ExpandedPanelShape> = {
 
 //modifyThemeStates(state, null, theme => [modifyThemeState<ReactXX.TextShape>(state, theme, ReactXX.CompNames.Text, (theme, par) => ({ root: headerLabelStyle }))])}
 
-const expandedPanel: TBasic.CodeSFC<DocHome.ExpandedPanelShape> = props => {
+const expandedPanel: Types.CodeSFC<DocHome.ExpandedPanelShape> = props => {
   const { system: { style, classes, theme, animations: { sheets: { openClose } } }, title, children, ...rest } = props
-  const rootStyle = mergeRulesets<TBasic.ViewRulesetX>(classes.root)
-  const headerStyle = mergeRulesets<TBasic.ViewRulesetX>(classes.header)
-  const contentStyle = mergeRulesets<TBasic.ViewRulesetX>(classes.content, openClose.sheet.content)
-  const iconStyle = mergeRulesets<TBasic.TextRulesetX>(classes.icon, openClose.sheet.icon)
-  const headerLabelStyle = mergeRulesets<TBasic.TextRulesetX>(classes.headerLabel)
+  const rootStyle = mergeRulesets<Types.ViewRulesetX>(classes.root)
+  const headerStyle = mergeRulesets<Types.ViewRulesetX>(classes.header)
+  const contentStyle = mergeRulesets<Types.ViewRulesetX>(classes.content, openClose.sheet.content)
+  const iconStyle = mergeRulesets<Types.TextRulesetX>(classes.icon, openClose.sheet.icon)
+  const headerLabelStyle = mergeRulesets<Types.TextRulesetX>(classes.headerLabel)
 
-  return <View className={rootStyle} style={style as TBasic.ViewRulesetX}>
+  return <View className={rootStyle} style={style as Types.ViewRulesetX}>
     <View className={headerStyle} /*modifyThemeState={theme => ({ ...theme, overridesNew: { ...theme.overridesNew, [ReactXX.CompNames.Text]: { root: headerLabelStyle}}})}*/>
       {typeof title === 'string' ? <Text numberOfLines={1}>{title}</Text> : title}
       <AnimatedIcon data={MDI.ArrowExpandDown} className={iconStyle} onPress={() => openClose.toggle()} /> 

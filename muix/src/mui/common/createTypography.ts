@@ -1,7 +1,6 @@
 ﻿import muiCreateTypography from 'material-ui/styles/createTypography'
 
-import { Types } from 'reactxx-basic'
-import { TBasic, toPlatformSheet } from 'reactxx'
+import { Types, toPlatformSheet } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
 import { deepMerge } from 'reactxx-basic'
 
@@ -21,24 +20,24 @@ export default function createTypography(palette: Mui.Palette, optionOrCreator: 
       fontWeight: '300',
       $web: { fontFamily },
       $native: { fontFamily: 'Roboto_Light' },
-    } as TBasic.TextRulesetX,
+    } as Types.TextRulesetX,
     fontWeightRegularNew = {
       fontWeight: '400',
       $web: { fontFamily },
       $native: { fontFamily: 'Roboto' },
-    } as TBasic.TextRulesetX,
+    } as Types.TextRulesetX,
     fontWeightMediumNew = {
       fontWeight: '500',
       $web: { fontFamily },
       $native: { fontFamily: 'Roboto_Medium' },
-    } as TBasic.TextRulesetX,
+    } as Types.TextRulesetX,
     display1, display2, display3, display4, headline, title, subheading, body1, body2, caption, button,
     pxToRem = mui.pxToRem,
     ...other
   } = options
 
 
-  const getWebProps = (weightX: TBasic.TextRulesetX, optionX: TBasic.TextRulesetX, nativeFontSize: number, mui: React.CSSProperties) => {
+  const getWebProps = (weightX: Types.TextRulesetX, optionX: Types.TextRulesetX, nativeFontSize: number, mui: React.CSSProperties) => {
     const { color, fontWeight, fontFamily, ...rest } = mui
     const res = {
       fontWeight: weightX.fontWeight,
@@ -51,16 +50,16 @@ export default function createTypography(palette: Mui.Palette, optionOrCreator: 
         fontFamily: weightX.$web.fontFamily,
         ...mui,
       }
-    } as TBasic.TextRulesetX
+    } as Types.TextRulesetX
     return optionX ? deepMerge(res, optionX) : res
   }
 
-  type Shape = TBasic.OverwriteShape<{
+  type Shape = Types.OverwriteShape<{
     common: Types.ShapeTexts<Mui.Style | 'fontWeightLightNew' | 'fontWeightRegularNew' | 'fontWeightMediumNew'> & { noWrap?: any /*ReactN.TextProperties*/ }
   }>
 
 
-  const sheetX: TBasic.SheetX<Shape> = {
+  const sheetX: Types.SheetX<Shape> = {
     fontWeightLightNew,
     fontWeightRegularNew,
     fontWeightMediumNew,

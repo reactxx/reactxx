@@ -1,10 +1,10 @@
-﻿import { ButtonBaseProps } from './mui'
-import ReactN from 'react-native'
+﻿import ReactN from 'react-native'
 
 import { Muix } from 'reactxx-mui/typings/muix'
-import { Types } from 'reactxx-basic'
-import { TBasic, TTheme } from 'reactxx'
+import { Types, TTheme } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
+
+import { ButtonBaseProps } from './mui'
 
 export namespace MuiButtonBaseT {
 
@@ -12,7 +12,7 @@ export namespace MuiButtonBaseT {
     ButtonBase = 'MuiButtonBase',
   }
 
-  export type Shape = TBasic.OverwriteShape<{
+  export type Shape = Types.OverwriteShape<{
     common: Types.ShapeViews<'root'>
     native: Types.ShapeViews<'ripple'>
     props: ButtonBaseProps //& ReactXX.OnPressAllWeb
@@ -27,13 +27,6 @@ export namespace MuiButtonBaseT {
     rippleStyle: ReactN.ViewStyle
   }
 
-  export type RippleEfectProps = ButtonBaseStyles & Partial<TBasic.CodePropsNative<MuiButtonBaseT.Shape>>
+  export type RippleEfectProps = ButtonBaseStyles & Partial<Types.CodePropsNative<MuiButtonBaseT.Shape>>
 
 }
-
-//declare namespace ReactXX {
-//  interface Shapes {
-//    [MuiButtonBase.CompNames.ButtonBase]?: MuiButtonBaseT.Shape
-//  }
-//}
-

@@ -5,9 +5,9 @@ import jssShared, { create} from 'jss';
 import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
 
-import { TTheme, TAddIn, TBasic, toPlatformRuleSet, toPlatformSheet, ThemeProvider } from 'reactxx'
-import { Types, toPlatformEvents, TCommonStyles } from 'reactxx-basic'
+import { toPlatformEvents, TCommonStyles } from 'reactxx-basic'
 import { rulesetToClassNames } from 'reactxx-fela'
+import { TTheme, TAddIn, Types, toPlatformRuleSet, toPlatformSheet, ThemeProvider } from 'reactxx'
 
 export * from './common/createMuiTheme'
 import { createMuiTheme } from './common/createMuiTheme'
@@ -52,21 +52,21 @@ export const AppContainer: React.SFC = props => {
 //  return res
 //}
 
-type webKeys<R extends TBasic.Shape> = Types.getWeb<R> | keyof Types.getCommon<R>
+type webKeys<R extends Types.Shape> = Types.getWeb<R> | keyof Types.getCommon<R>
 type muiComponentType<P, ClassKey extends string> = React.ComponentType<P & Mui.StyledComponentProps<ClassKey>>
 
-export const muiCompatible = <R extends TBasic.Shape>(Component: muiComponentType<Types.getPropsWeb<R>, webKeys<R>>) => {
+export const muiCompatible = <R extends Types.Shape>(Component: muiComponentType<Types.getPropsWeb<R>, webKeys<R>>) => {
 
-  const Styled: TBasic.SFCX<R> = props => {
+  const Styled: Types.SFCX<R> = props => {
 
-    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, ...other } = props as any as (TBasic.PropsX & TCommonStyles.OnPressAllX)
+    const { classes: classesX, className: classNameX, style: styleX, $web, $native, onPress, onLongPress, onPressIn, onPressOut, ignore, ...other } = props as any as (Types.PropsX & TCommonStyles.OnPressAllX)
 
-    const classes = toPlatformSheet(classesX as TBasic.SheetX)
+    const classes = toPlatformSheet(classesX as Types.SheetX)
 
     const codeProps = {
       ...other, ...$web,
-      style: toPlatformRuleSet(styleX as TBasic.RulesetX),
-      className: rulesetToClassNames(toPlatformRuleSet(classNameX as TBasic.RulesetX) as React.CSSProperties),
+      style: toPlatformRuleSet(styleX as Types.RulesetX),
+      className: rulesetToClassNames(toPlatformRuleSet(classNameX as Types.RulesetX) as React.CSSProperties),
       classes: classes
     }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { TBasic, Text } from 'reactxx'
+import { Types, Text } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
 
 
@@ -10,65 +10,65 @@ const typo = {
     fontWeight: 'bold',
     marginTop: 26,
     marginBottom: 10,
-  } as TBasic.TextRulesetX,
+  } as Types.TextRulesetX,
   H2: {
     fontSize: 26,
     fontWeight: 'bold',
     marginTop: 22,
     marginBottom: 8,
-  } as TBasic.TextRulesetX,
+  } as Types.TextRulesetX,
   H3: {
     fontSize: 22,
     fontWeight: 'bold',
     marginTop: 18,
     marginBottom: 7,
-  } as TBasic.TextRulesetX,
+  } as Types.TextRulesetX,
   H4: {
     fontSize: 18,
     marginTop: 14,
     marginBottom: 6
-  } as TBasic.TextRulesetX,
+  } as Types.TextRulesetX,
   H5: {
     fontSize: 14,
     marginTop: 12,
     marginBottom: 5
-  } as TBasic.TextRulesetX,
+  } as Types.TextRulesetX,
   B: {
     fontWeight: 'bold'
-  } as TBasic.TextRulesetX,
+  } as Types.TextRulesetX,
   I: {
     fontStyle: 'italic'
-  } as TBasic.TextRulesetX,
+  } as Types.TextRulesetX,
   U: {
     textDecorationLine: 'underline'
-  } as TBasic.TextRulesetX,
+  } as Types.TextRulesetX,
   A: {
     color: 'blue',
     $web: {
       ':hover': { textDecorationLine: 'underline' }
     }
-  } as TBasic.TextRulesetX,
+  } as Types.TextRulesetX,
   P: {
     marginTop: 6,
     marginBottom: 4,
-  } as TBasic.TextRulesetX,
+  } as Types.TextRulesetX,
   Blocquote: {
     marginLeft: 30,
     marginTop: 4,
     marginBottom: 4,
-  } as TBasic.TextRulesetX,
+  } as Types.TextRulesetX,
 }
 
-export const H1: TBasic.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.H1} />
-export const H2: TBasic.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.H2} />
-export const H3: TBasic.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.H3} />
-export const H4: TBasic.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.H4} />
-export const H5: TBasic.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.H5} />
-export const P: TBasic.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.P} />
-export const Blocquote: TBasic.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.Blocquote} />
+export const H1: Types.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.H1} />
+export const H2: Types.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.H2} />
+export const H3: Types.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.H3} />
+export const H4: Types.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.H4} />
+export const H5: Types.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.H5} />
+export const P: Types.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.P} />
+export const Blocquote: Types.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.Blocquote} />
 
-export const B: TBasic.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.B} />
-export const I: TBasic.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.I} />
-export const U: TBasic.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.U} />
-export const A: TBasic.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.A} />
+export const B: Types.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.B} />
+export const I: Types.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.I} />
+export const U: Types.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.U} />
+export const A: Types.ComponentTypeX<TComps.TextShape> = props => <Text {...props} className={typo.A} />
 

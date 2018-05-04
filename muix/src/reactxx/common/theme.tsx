@@ -1,9 +1,8 @@
 ﻿import React from 'react'
 
 import { TMediaQ } from 'reactxx-mediaq'
-import { Types } from 'reactxx-basic'
 
-import { TBasic } from '../typings/basic'
+import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
 
 export namespace TTheme {
@@ -14,14 +13,14 @@ export namespace TTheme {
     withActive?: boolean
   }
 
-  export type PropsXOverwrite<R extends TBasic.Shape> = PartialOverwrite<TBasic.PropsX<R>, {
-    style?: TBasic.RulesetX<Types.getStyle<R>>
-    classes?: TBasic.PartialSheetX<R>
-    className?: TBasic.RulesetX<Types.getStyle<R>>
+  export type PropsXOverwrite<R extends Types.Shape> = PartialOverwrite<Types.PropsX<R>, {
+    style?: Types.RulesetX<Types.getStyle<R>>
+    classes?: Types.PartialSheetX<R>
+    className?: Types.RulesetX<Types.getStyle<R>>
   }>
 
-  export interface WithStyleOptions_ComponentX<R extends TBasic.Shape =  TBasic.Shape> extends WithStyleOptions {
-    getVariant?: (props: TBasic.PropsX<R> & TMediaQ.CodeProps<TAddIn.getMediaQ<R>>, theme?: Types.getTheme<R>) => Types.getVariant<R>
+  export interface WithStyleOptions_ComponentX<R extends Types.Shape =  Types.Shape> extends WithStyleOptions {
+    getVariant?: (props: Types.PropsX<R> & TMediaQ.CodeProps<TAddIn.getMediaQ<R>>, theme?: Types.getTheme<R>) => Types.getVariant<R>
     variantToString?: (variant: Types.getVariant<R>) => string
     defaultProps?: PropsXOverwrite<R>
   }

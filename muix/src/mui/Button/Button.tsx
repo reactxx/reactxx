@@ -2,8 +2,8 @@
 import React from 'react'
 import MuiButton, { ButtonProps } from 'material-ui/Button/Button'
 
-import { Types, TCommonStyles } from 'reactxx-basic'
-import { TBasic, TAddIn, TProvider, TTheme } from 'reactxx'
+import { TCommonStyles } from 'reactxx-basic'
+import { Types, TAddIn, TProvider, TTheme } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
 
 import { muiCompatible } from '../index'

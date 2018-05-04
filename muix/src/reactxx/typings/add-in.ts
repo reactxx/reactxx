@@ -1,8 +1,8 @@
-﻿import { Types, TCommonStyles } from 'reactxx-basic'
+﻿import { TCommonStyles } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
 import { TActivable } from 'reactxx-activable'
 import { TAnimation } from 'reactxx-animation'
-import { TBasic } from './basic'
+import { Types } from './types'
 
 export namespace TAddIn {
 
@@ -11,8 +11,8 @@ export namespace TAddIn {
   *******************************************/
 
   //******************** Cross platform
-  export interface RulesetAddInX<T extends TCommonStyles.RulesetNativeIds, R extends TBasic.Shape> extends TMediaQ.MediaQRulesetPartX<T> { }
-  export interface SheetAddInX<R extends TBasic.Shape = TBasic.Shape> { $animations?: TAnimation.SheetsX<getAnimation<R>> }
+  export interface RulesetAddInX<T extends TCommonStyles.RulesetNativeIds, R extends Types.Shape> extends TMediaQ.MediaQRulesetPartX<T> { }
+  export interface SheetAddInX<R extends Types.Shape = Types.Shape> { $animations?: TAnimation.SheetsX<getAnimation<R>> }
 
 
   /******************************************
@@ -40,7 +40,7 @@ export namespace TAddIn {
   *******************************************/
 
   //******************** Cross platform 
-  export interface PropX<R extends TBasic.Shape = TBasic.Shape> {
+  export interface PropX<R extends Types.Shape = Types.Shape> {
     ignore?: boolean
     CONSTANT?: boolean,
     $mediaq?: TMediaQ.NotifyIntervalCreator<getMediaQ<R>>
@@ -48,22 +48,22 @@ export namespace TAddIn {
   }
 
   //******************** Platform specific
-  export interface CodePropsLow<R extends TBasic.Shape = TBasic.Shape> {
+  export interface CodePropsLow<R extends Types.Shape = Types.Shape> {
     theme?: Types.getTheme<R>
     variant?: Types.getVariant<R>
     mediaqFlags?: TMediaQ.MediaFlags<getMediaQ<R>>
     activeFlag?: getActivable<R>
   }
 
-  export interface CodePropsWeb<R extends TBasic.Shape = TBasic.Shape> extends CodePropsLow<R> {
+  export interface CodePropsWeb<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> {
     animations?: TAnimation.DriversWeb<getAnimation<R>>
   }
 
-  export interface CodePropsNative<R extends TBasic.Shape = TBasic.Shape> extends CodePropsLow<R> {
+  export interface CodePropsNative<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> {
     animations?: TAnimation.DriversNative<getAnimation<R>>
   }
 
-  export interface CodeProps<R extends TBasic.Shape = TBasic.Shape> extends CodePropsLow<R> {
+  export interface CodeProps<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> {
     animations?: TAnimation.Drivers<getAnimation<R>>
   }
 

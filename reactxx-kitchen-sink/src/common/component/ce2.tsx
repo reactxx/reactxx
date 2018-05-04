@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { Types, deepMerge, deepMergesSys, mergeRulesets } from 'reactxx-basic'
-import { TProvider, TTheme, TBasic, TAddIn, Text, View, ScrollView, Icon, withStylesCreator, ThemeProviderUntyped } from 'reactxx'
+import { deepMerge, deepMergesSys, mergeRulesets } from 'reactxx-basic'
+import { TProvider, TTheme, Types, TAddIn, Text, View, ScrollView, Icon, withStylesCreator, ThemeProviderUntyped } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
 
 
@@ -26,7 +26,7 @@ export const enum Consts {
   Badge = 'ks$ce3$badge',
 }
 
-type Shape = TBasic.OverwriteShape<{
+type Shape = Types.OverwriteShape<{
   common: Types.ShapeViews<'root'> & Types.ShapeTexts<'label'>,
   nameType: Consts.Label | Consts.Badge,
   theme: Theme,
@@ -38,7 +38,7 @@ const ThemeProvider = ThemeProviderUntyped as TTheme.ThemeProviderTyped<Theme>
 * LABEL
 *************************/
 
-const labelSheet: TBasic.SheetCreatorX<Shape> = ({ color: { main, dark, constrastText }, fontSize }) => ({
+const labelSheet: Types.SheetCreatorX<Shape> = ({ color: { main, dark, constrastText }, fontSize }) => ({
   root: {
     backgroundColor: main,
     borderRadius: 2,
@@ -58,10 +58,10 @@ const labelSheet: TBasic.SheetCreatorX<Shape> = ({ color: { main, dark, constras
   },
 })
 
-const label: TBasic.CodeSFC<Shape> = ({ system: { classes, style }, children}) => {
-  const root = mergeRulesets<TBasic.ViewRulesetX>(classes.root)
-  const label = mergeRulesets<TBasic.TextRulesetX>(classes.label)
-  return <View className={root} style={style as TBasic.ViewRulesetX}>
+const label: Types.CodeSFC<Shape> = ({ system: { classes, style }, children}) => {
+  const root = mergeRulesets<Types.ViewRulesetX>(classes.root)
+  const label = mergeRulesets<Types.TextRulesetX>(classes.label)
+  return <View className={root} style={style as Types.ViewRulesetX}>
     <Text className={label}>{children}</Text>
   </View>
 }
@@ -74,7 +74,7 @@ export const LabelC = LabelCreator({ withCascading: true })
 * BADGE
 *************************/
 
-const badgeSheet: TBasic.SheetCreatorX<Shape> = ({ color: { dark, constrastText } }) => ({
+const badgeSheet: Types.SheetCreatorX<Shape> = ({ color: { dark, constrastText } }) => ({
   root: {
     backgroundColor: dark,
     padding: 0,
@@ -92,10 +92,10 @@ const badgeSheet: TBasic.SheetCreatorX<Shape> = ({ color: { dark, constrastText 
   },
 })
 
-const badge: TBasic.CodeSFC<Shape> = ({ system: { classes, style }, children }) => {
-  const root = mergeRulesets<TBasic.ViewRulesetX>(classes.root)
-  const label = mergeRulesets<TBasic.TextRulesetX>(classes.label) 
-  return <View className={root} style={style as TBasic.ViewRulesetX}>
+const badge: Types.CodeSFC<Shape> = ({ system: { classes, style }, children }) => {
+  const root = mergeRulesets<Types.ViewRulesetX>(classes.root)
+  const label = mergeRulesets<Types.TextRulesetX>(classes.label) 
+  return <View className={root} style={style as Types.ViewRulesetX}>
     <Text className={label}>{children}</Text>
   </View>
 }

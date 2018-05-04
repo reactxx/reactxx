@@ -12,7 +12,7 @@ import { MuiButtonT } from 'reactxx-mui/typings/button'
 
 import MDI from 'reactxx-mdi'
 
-import { TBasic } from 'reactxx'
+import { Types } from 'reactxx'
 
 const theme = createMuiTheme({
   //overridesX: theme => ({
@@ -25,7 +25,7 @@ const theme = createMuiTheme({
   //})
 })
 
-const rootView: TBasic.ViewRulesetX = { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'stretch', padding: 10 }
+const rootView: Types.ViewRulesetX = { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'stretch', padding: 10 }
 
 const app2: React.SFC = props => <AppContainer>
   <Button color="secondary" variant='raised' classes={theme => ({ raisedSecondary: { backgroundColor: 'green', $web: { ':hover': { backgroundColor: 'green', } } } })} >classes</Button>

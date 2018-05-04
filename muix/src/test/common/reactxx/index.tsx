@@ -3,7 +3,7 @@ import { TTheme, Text, View, ScrollView, Icon, AppContainer } from 'reactxx'
 import { LoremIpsum } from 'reactxx-basic'
 import { CompNames } from 'reactxx-primitives'
 
-import { TBasic } from 'reactxx'
+import { Types } from 'reactxx'
 
 const XX: React.CSSProperties = {}
 
@@ -66,7 +66,7 @@ For "View" element:
 - valid "$native" rules: see react-native ViewStyle
 `,
     Component: props => {
-      const border: TBasic.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', marginBottom: 20 }
+      const border: Types.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', marginBottom: 20 }
       return <View className={{ padding: 10 }}>
         <View className={border}>
           <Text className={{ backgroundColor: 'lightgreen', alignSelf: 'flex-start' }}>
@@ -91,7 +91,7 @@ For "View" element:
     descr: `
 `,
     Component: props => {
-      const border: TBasic.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10 }
+      const border: Types.ViewRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10 }
       return <ScrollView classes={{ container: { padding: 10 } }}>
         <View className={border}>
           <Text className={{ marginTop: 10 }}>
@@ -113,7 +113,7 @@ For "View" element:
     descr: `
 `,
     Component: props => {
-      const text: TBasic.TextRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10, margin: 10, width: 300 }
+      const text: Types.TextRulesetX = { borderColor: 'maroon', borderWidth: 1, borderStyle: 'solid', padding: 10, margin: 10, width: 300 }
       return <ScrollView horizontal>
         <Text className={text}>111 {LoremIpsum(40)}</Text>
         <Text className={text}>222 {LoremIpsum(40)}</Text>
@@ -128,7 +128,7 @@ For "View" element:
     descr: `
 `,
     Component: props => {
-      const text: TBasic.TextRulesetX = {
+      const text: Types.TextRulesetX = {
         $mediaq: {
           '-480': { color: 'red', },
           '480-1024': { color: 'green', },

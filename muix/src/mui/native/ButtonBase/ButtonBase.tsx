@@ -4,12 +4,12 @@ import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
 import { Properties } from 'csstype'
 
 import { TCommonStyles, mergeRulesets } from 'reactxx-basic'
-import { TBasic, TAddIn, TTheme, TProvider, withStyles } from 'reactxx'
+import { Types, TAddIn, TTheme, TProvider, withStyles } from 'reactxx'
 
 import { MuiButtonBaseT } from '../../typings/button-base'
 import { Muix } from '../../typings/muix'
 
-const sheet: TBasic.SheetCreatorX<MuiButtonBaseT.Shape> = ({ palette }) => ({
+const sheet: Types.SheetCreatorX<MuiButtonBaseT.Shape> = ({ palette }) => ({
   root: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -102,7 +102,7 @@ export class RippleEffect extends React.Component<MuiButtonBaseT.RippleEfectProp
 
 }
 
-const buttonBase: TBasic.CodeSFCNative<MuiButtonBaseT.Shape> = props => {
+const buttonBase: Types.CodeSFCNative<MuiButtonBaseT.Shape> = props => {
   const { system: { style, classes, animations }, ...rest } = props
   const viewStyle = mergeRulesets<'View'>(classes.root)
   const rippleStyle = mergeRulesets<'View'>(classes.ripple)

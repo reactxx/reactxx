@@ -1,3 +1,3 @@
 export const fake = 0
-export { TBasic } from './basic'
+export { Types } from './types'
 export { TAddIn } from './add-in'

@@ -4,8 +4,8 @@ import { fade } from 'material-ui/styles/colorManipulator'
 import { capitalize } from 'material-ui/utils/helpers';
 import { ButtonProps } from 'material-ui/Button/Button'
 
-import { Types, mergeRulesets, TCommonStyles } from 'reactxx-basic'
-import { TBasic, TAddIn, TProvider, TTheme, Text, withStyles } from 'reactxx'
+import { mergeRulesets, TCommonStyles } from 'reactxx-basic'
+import { Types, TAddIn, TProvider, TTheme, Text, withStyles } from 'reactxx'
 import { CompNames, TComps } from 'reactxx-primitives'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
@@ -18,10 +18,10 @@ const getTextIconColor = (color: string) => ({
   labelIcon: {
     $native: { color }
   },
-} as TBasic.PartialSheetX<MuiButtonT.Shape>)
+} as Types.PartialSheetX<MuiButtonT.Shape>)
 
 
-const sheets: (isLeft?: boolean) => TBasic.SheetCreatorX<MuiButtonT.Shape> = isLeft => ({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
+const sheets: (isLeft?: boolean) => Types.SheetCreatorX<MuiButtonT.Shape> = isLeft => ({ typographyX: typoX, palette, spacing, shadowsNew }) => ({
 
   root: {
     flexDirection: 'row',
@@ -132,7 +132,7 @@ const sheets: (isLeft?: boolean) => TBasic.SheetCreatorX<MuiButtonT.Shape> = isL
 })
 
 
-const button: TBasic.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
+const button: Types.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
 
 
   //var x = props.mini

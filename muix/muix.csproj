@@ -194,7 +194,7 @@
     <TypeScriptCompile Include="src\reactxx\native\comps.tsx" />
     <TypeScriptCompile Include="src\reactxx\typings\add-in.ts" />
     <None Include="src\reactxx\typings\basic.ts_" />
-    <TypeScriptCompile Include="src\reactxx\typings\basic.ts" />
+    <TypeScriptCompile Include="src\reactxx\typings\types.ts" />
     <TypeScriptCompile Include="src\reactxx\typings\index.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\web\index.tsx" />

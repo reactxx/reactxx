@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { Types, TCommonStyles } from 'reactxx-basic'
+import { TCommonStyles } from 'reactxx-basic'
 
-import { TBasic } from '../typings/basic'
+import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
 
 //create platform specific ruleset from cross platform one
-export const toPlatformRuleSet = (style: TBasic.RulesetX) => {
+export const toPlatformRuleSet = (style: Types.RulesetX) => {
   if (!style) return style
   const isNative = !window.isWeb
   if (!style.$mediaq && !style.$web && !style.$native /*&& !style.$overrides*/ && !style.$props) return style
@@ -24,7 +24,7 @@ export const toPlatformRuleSet = (style: TBasic.RulesetX) => {
 }
 
 //create platform specific sheet from cross platform one
-export const toPlatformSheet = <R extends TBasic.Shape>(sheet: TBasic.SheetX<R> | TBasic.PartialSheetX<R>) => {
+export const toPlatformSheet = <R extends Types.Shape>(sheet: Types.SheetX<R> | Types.PartialSheetX<R>) => {
   if (typeof sheet !== 'object') return sheet
   const res = {}
   for (const p in sheet) {

@@ -2,7 +2,6 @@ import React from 'react'
 import ReactN from 'react-native'
 import { Animated, Easing, Text, View } from 'react-native'
 
-import { TBasic } from 'reactxx'
 import { Types, TCommonStyles } from 'reactxx-basic'
 
 import { Muix } from 'reactxx-mui/typings/muix'
@@ -57,9 +56,9 @@ interface ITransition {
   setOpened(isOpen?: boolean)
 }
 
-type Animation<T extends TCommonStyles.RulesetNativeIds> = TBasic.RulesetX<T> & { $easing?: string, $duration?: number, $delay?: number }
+type Animation<T extends TCommonStyles.RulesetNativeIds> = Types.RulesetX<T> & { $easing?: string, $duration?: number, $delay?: number }
 
-const transitionCreate = (par: (theme: Muix.Theme) => TBasic.RulesetX<'View'> & { $easing?: string, $duration?: number, $delay?: number }) => null as ITransition
+const transitionCreate = (par: (theme: Muix.Theme) => Types.RulesetX<'View'> & { $easing?: string, $duration?: number, $delay?: number }) => null as ITransition
 
 const transition1 = transitionCreate(
   theme => ({

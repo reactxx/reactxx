@@ -14,14 +14,14 @@ export namespace Types {
 
   //*************** Cross platform ruleset for web and native
 
-  export type RulesetX<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> = 
+  export type RulesetX<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
     {
       $native?: TCommonStyles.RulesetNative<T> // native specific rules
       $web?: TCommonStyles.RulesetWeb // web specific rules
       $props?: PropsInRulesetX<R>
     } &
-    TAddIn.RulesetAddInX<T,R>
+    TAddIn.RulesetAddInX<T, R>
 
   export interface ViewRulesetX<TAddIn extends {} = {}> extends RulesetX<'View'> { }
   export interface TextRulesetX<TAddIn extends {} = {}> extends RulesetX<'Text'> { }
@@ -116,11 +116,11 @@ export namespace Types {
 
   export type PropsX<R extends Shape> = PartialOverwrite<getProps<R>,
     {
-      style?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<getStyle<R>, R>> 
+      style?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<getStyle<R>, R>>
       $web?: Partial<getPropsWeb<R>> //web specific style
       $native?: Partial<getPropsNative<R>> //native specific style
       classes?: PartialSheetCreatorX<R> // cross platform sheet
-      className?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<getStyle<R>, R>> 
+      className?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<getStyle<R>, R>>
       developer_flag?: boolean
     } & TAddIn.PropX<R>
     >

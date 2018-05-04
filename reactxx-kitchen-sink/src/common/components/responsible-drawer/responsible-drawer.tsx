@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { Types, mergeRulesets } from 'reactxx-basic'
+import { mergeRulesets } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
-import { TAddIn, TProvider, TTheme, TBasic, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer } from 'reactxx'
+import { TAddIn, TProvider, TTheme, Types, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer } from 'reactxx'
 import { LoremIpsum, TCommonStyles } from 'reactxx-basic'
 import { TComps } from 'reactxx-primitives'
 
@@ -29,7 +29,7 @@ export namespace TResponsibleDrawer {
   }
 
   export interface IconRenderProps {
-    style: TBasic.RulesetX
+    style: Types.RulesetX
     iconData: string,
     onPress: TCommonStyles.MouseEvent
   }
@@ -45,7 +45,7 @@ export namespace TResponsibleDrawer {
   }
 
 
-  export type Shape = TBasic.OverwriteShape<{
+  export type Shape = Types.OverwriteShape<{
     common: Types.ShapeViews<'root' | 'drawer' | 'backDrop' | 'content'> & Types.ShapeTexts<'openButton' | 'closeButton'>
     props: Props
     mediaq: 'mobile' | 'tablet' | 'desktop' // media query breakpoints names
@@ -67,7 +67,7 @@ const { Provider, Consumer } = React.createContext<TResponsibleDrawer.IconRender
 
 // ResponsibleDrawer's sheet. 
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
-const sheet: TBasic.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) => {
+const sheet: Types.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) => {
 
   const { animationDuration, drawerWidths, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } } = variant
 
@@ -140,7 +140,7 @@ const sheet: TBasic.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =
 }
 
 // responsibleDrawer stateless component. 
-const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = props => {
+const responsibleDrawer: Types.CodeSFC<TResponsibleDrawer.Shape> = props => {
 
   const { system: { classes, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }}, drawer: drawerNode, children } = props
 
@@ -148,29 +148,29 @@ const responsibleDrawer: TBasic.CodeSFC<TResponsibleDrawer.Shape> = props => {
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()
 
   // calling mergeRulesetWithOverrides signals which rulesets are used. So it can use their $overrides to modify other sheet's rulesets
-  const root = mergeRulesets<TBasic.ViewRulesetX>(
+  const root = mergeRulesets<Types.ViewRulesetX>(
     classes.root,
   )
 
-  const backDrop = mergeRulesets<TBasic.ViewRulesetX>(
+  const backDrop = mergeRulesets<Types.ViewRulesetX>(
     classes.backDrop,
     isMobile && animMobile.sheet.backDrop, // backDrop animation for mobile
   )
 
-  const drawer = mergeRulesets<TBasic.ViewRulesetX>(
+  const drawer = mergeRulesets<Types.ViewRulesetX>(
     classes.drawer,
     isMobile && animMobile.sheet.drawer, // drawer animation for mobile
     isTablet && animTablet.sheet.drawer, // drawer animation for tablet
   )
 
-  const content = mergeRulesets<TBasic.ViewRulesetX>(
+  const content = mergeRulesets<Types.ViewRulesetX>(
     classes.content,
     isTablet && animTablet.sheet.content, // content animation for tablet
   )
 
-  const closeButton = mergeRulesets<TBasic.TextRulesetX>(classes.closeButton)
+  const closeButton = mergeRulesets<Types.TextRulesetX>(classes.closeButton)
 
-  const openButton = mergeRulesets<TBasic.TextRulesetX>(
+  const openButton = mergeRulesets<Types.TextRulesetX>(
     classes.openButton,
     { display: (isTablet && animTablet.opened) || isDesktop ? 'none' : 'flex' }
   )
@@ -220,7 +220,7 @@ ResponsibleDrawerC.LayoutChanged = Consumer
 // Using ResponsibleDrawer in application
 //************************************************************************************************************
 
-const button = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as TBasic.RulesetX
+const button = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as Types.RulesetX
 
 //const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer/>}>
 const App: React.SFC = () => <AppContainer>

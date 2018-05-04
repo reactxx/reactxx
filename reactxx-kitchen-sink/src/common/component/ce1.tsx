@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { deepMerges, Types, mergeRulesets } from 'reactxx-basic';
+import { deepMerges, mergeRulesets } from 'reactxx-basic';
 import MDI from 'reactxx-mdi'
-import { TProvider, TTheme, TBasic, TAddIn, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
+import { TProvider, TTheme, Types, TAddIn, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
 
 
@@ -18,7 +18,7 @@ export const enum Consts {
 }
 
 // 
-type Shape = TBasic.OverwriteShape<{
+type Shape = Types.OverwriteShape<{
   common: Types.ShapeViews<'root'> & Types.ShapeTexts<'label' | 'icon' | 'iconGap'>,
   props: {
     iconData: string,
@@ -30,7 +30,7 @@ type Shape = TBasic.OverwriteShape<{
 * SHEET
 *************************/
 
-const sheet: TBasic.SheetX<Shape> = {
+const sheet: Types.SheetX<Shape> = {
   root: {
     backgroundColor: 'blue',
     borderRadius: 2,
@@ -58,12 +58,12 @@ const sheet: TBasic.SheetX<Shape> = {
 /************************
 * CODE
 *************************/
-const label: TBasic.CodeSFC<Shape> = ({ system: { classes, style }, children, iconData }) => {
-  const root = mergeRulesets<TBasic.ViewRulesetX>(classes.root)
+const label: Types.CodeSFC<Shape> = ({ system: { classes, style }, children, iconData }) => {
+  const root = mergeRulesets<Types.ViewRulesetX>(classes.root)
   const hasChildren = React.Children.count(children) > 0
-  const icon = iconData && mergeRulesets<TBasic.TextRulesetX>(classes.label, classes.icon, hasChildren && classes.iconGap)
-  const label = mergeRulesets<TBasic.TextRulesetX>(classes.label)
-  return <View className={root} style={style as TBasic.ViewRulesetX}>
+  const icon = iconData && mergeRulesets<Types.TextRulesetX>(classes.label, classes.icon, hasChildren && classes.iconGap)
+  const label = mergeRulesets<Types.TextRulesetX>(classes.label)
+  return <View className={root} style={style as Types.ViewRulesetX}>
     {iconData && <Icon data={iconData} className={icon} />}
     <Text className={label}>{children}</Text>
   </View>
