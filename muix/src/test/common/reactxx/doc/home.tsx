@@ -3,7 +3,7 @@ import ReactN, { Animated } from 'react-native'
 
 import { mergeRulesets, TCommon } from 'reactxx-basic'
 import { TComps } from 'reactxx-primitives'
-import { Types, withStyles, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
+import { Types, withStylesCreator, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
 import MDI from 'reactxx-mdi'
 
 
@@ -101,7 +101,7 @@ const expandedPanel: Types.CodeSFC<DocHome.ExpandedPanelShape> = props => {
       <AnimatedIconLow name={MDI.ArrowExpandDown} style={iconStyle} onPress={() => openClose.toggle()} />
 */
 
-const ExpandedPanel = withStyles<DocHome.ExpandedPanelShape>(DocHome.CompNames.ExpandPanel, expandedPanelSheet)(expandedPanel)
+const ExpandedPanel = withStylesCreator<DocHome.ExpandedPanelShape>(DocHome.CompNames.ExpandPanel, expandedPanelSheet, expandedPanel)()
 
 const App: React.SFC = () => <ScrollView classes={{ container: { padding: 10 } }}>
   <Text>Text before, text before, text before, text before, text before, text before, text before, text before, text before, text before, text before</Text>

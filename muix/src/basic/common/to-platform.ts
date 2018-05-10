@@ -18,14 +18,21 @@ export const toPlatformEvents = ($web: TCommonStyles.OnPressAllWeb, $native: TCo
   }
 }
 
-export const deepMergesSys = (skipSystem: boolean, target, ...sources) => {
-  sources.forEach(source => deepMerge(target, source, skipSystem))
+export const deepMerges = (target, ...sources) => {
+  sources.forEach(source => deepMerge(target, source))
   return target
 }
 
-export const deepMerges = (target, ...sources) => {
-  return deepMergesSys(false, target, ...sources)
+//export const deepMerges = (target, ...sources) => {
+//  return deepMerges(false, target, ...sources)
+//}
+export const toPlatformSheet = (sheet: Types.SheetX | Types.PartialSheetX) => {
+  if (typeof sheet !== 'object') return sheet
+  const res = {}
+  for (const p in sheet) res[p] = toPlatformRuleSet(sheet[p])
+  return res as Types.Sheet
 }
+
 
 //create platform specific ruleset from cross platform one
 export const toPlatformRuleSet = (style: Types.RulesetX) => {
@@ -36,15 +43,15 @@ export const toPlatformRuleSet = (style: Types.RulesetX) => {
 }
 
 //simple deep merge
-export const deepMerge = (target, source, skipSystem = false) => {
+export const deepMerge = (target, source) => {
   if (!source) return target
   if (isObject(target) && isObject(source))
     for (const key in source) {
-      if (key==='$preserve') continue
-      if (skipSystem && key[0] === '$' && key !== '$mediaq') continue //skip $override, $childOverride and $name props
-      if (isObject(source[key])) {
+      //if (key==='$preserve') continue
+      //if (skipSystem && key[0] === '$' && key !== '$mediaq') continue //skip $override, $childOverride and $name props
+      if (isObjectLiteral(source[key])) {
         if (!target[key]) target[key] = {}
-        deepMerge(target[key], source[key], skipSystem)
+        deepMerge(target[key], source[key])
       } else
         target[key] = source[key]
     }
@@ -54,7 +61,8 @@ export const deepMerge = (target, source, skipSystem = false) => {
   }
   return target
 }
-const isObject = item => item && typeof item === 'object' && !Array.isArray(item) && typeof item['_interpolation'] != 'function' //HACK: typeof item['_interpolation'] != 'function' prevent to merge ReactNative's Animated.Value.interpolate prop
+export const isObject = item => item && typeof item === 'object' && !Array.isArray(item) && typeof item['_interpolation'] != 'function' //HACK: typeof item['_interpolation'] != 'function' prevent to merge ReactNative's Animated.Value.interpolate prop
+export const isObjectLiteral = item => isObject(item) && !item.constructor
 
 
 export function mergeRulesets<T extends TCommonStyles.RulesetNativeIds = 'View'>(...rulesets/*all used rulesets*/): TCommonStyles.RulesetNative<T>
@@ -67,8 +75,8 @@ export function mergeRulesets(...rulesets) {
     if (!ruleset) return
     switch (count) {
       case 0: res = ruleset; break
-      case 1: res = deepMergesSys(true, {}, res, ruleset); break
-      default: deepMergesSys(true, res, ruleset); break
+      case 1: res = deepMerges({}, res, ruleset); break
+      default: deepMerges(res, ruleset); break
     }
     count++
   })

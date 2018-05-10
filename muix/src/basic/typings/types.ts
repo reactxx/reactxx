@@ -47,8 +47,8 @@ export namespace Types {
   *******************************************/
 
   //******************** Cross platform sheet
-  export type SheetX<R extends Shape = Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & TAddIn.SheetAddInX<R>
-  export type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & TAddIn.SheetAddInX<R>
+  export type SheetX<R extends Shape = Shape> = SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R> & TAddIn.SheetX<R>
+  export type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & TAddIn.SheetX<R>
 
   export type SheetXCommon<R extends Shape> = { [P in keyof TCommon.getCommon<R>]: Partial<RulesetX<TCommon.getCommon<R>[P], R>> }
   export type SheetXNative<R extends Shape> = { [P in keyof TCommon.getNative<R>]: { $native?: TCommonStyles.RulesetNative<TCommon.getNative<R>[P]> } & TAddIn.RulesetAddInX<TCommon.getNative<R>[P], R> }
@@ -121,14 +121,16 @@ export namespace Types {
   export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
 
   // *** web or native
-  export type CodeProps<R extends Shape = Shape> = Omit<TCommon.getProps<R> & (TCommon.getPropsNative<R> | TCommon.getPropsWeb<R>), omitPropNames> & (TCommonStyles.OnPressAllNative | TCommonStyles.OnPressAllWeb) & {
-    system:
-    {
-      style: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<TCommon.getStyle<R>>
-      classes: Sheet<R>
-      developer_flag: boolean
-    } & TAddIn.CodeProps<R>
-  }
+  export type CodeSystemProps<R extends Shape = Shape> = {
+    style: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<TCommon.getStyle<R>>
+    classes: Sheet<R>
+    developer_flag: boolean
+  } & TAddIn.CodeProps<R>
+
+  export type CodeProps<R extends Shape = Shape> =
+    Omit<TCommon.getProps<R> & (TCommon.getPropsNative<R> | TCommon.getPropsWeb<R>), omitPropNames> &
+    (TCommonStyles.OnPressAllNative | TCommonStyles.OnPressAllWeb) &
+    { system: CodeSystemProps<R> }
 
   export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
@@ -149,7 +151,7 @@ export namespace Types {
   /******************************************
       THEME
    *******************************************/
-  export type PropsXOverwrite<R extends Types.Shape> = PartialOverwrite<Types.PropsX<R>, {
+  export type PropsXOverwrite<R extends Types.Shape = Types.Shape> = PartialOverwrite<Types.PropsX<R>, {
     style?: Types.RulesetX<TCommon.getStyle<R>>
     classes?: Types.PartialSheetX<R>
     className?: Types.RulesetX<TCommon.getStyle<R>>

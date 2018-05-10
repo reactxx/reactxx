@@ -4,7 +4,6 @@ import ReactN from 'react-native'
 import { TCommonStyles } from 'reactxx-basic'
 
 import { Types } from '../typings/types'
-import { TAddIn } from '../typings/add-in'
 
 //create platform specific ruleset from cross platform one
 export const toPlatformRuleSet = (style: Types.RulesetX) => {

@@ -67,7 +67,7 @@ export const createContext = <T>(_defaultValue: T | (() => T), _channelId?: stri
           val = this.mModifiedValue = this.mModify ? this.mModify(val) : val
         }
         const value = this.sSelector ? this.sSelector(val) : val
-        this.state = { value }
+        this.renderState = { value }
 
       }
     }
@@ -110,7 +110,7 @@ export const createContext = <T>(_defaultValue: T | (() => T), _channelId?: stri
         return
       }
       this.sUnsubscribe = sChannel.subscribe(sBroadcastValue => {
-        const { sSelector, pSubscribers, state: { value }, mModify } = this
+        const { sSelector, pSubscribers, renderState: { value }, mModify } = this
         if (this.role === Roles.modifier) { //modifier
           sBroadcastValue = mModify ? mModify(sBroadcastValue) : sBroadcastValue
           if (this.mModifiedValue !== sBroadcastValue) {
@@ -140,7 +140,7 @@ export const createContext = <T>(_defaultValue: T | (() => T), _channelId?: stri
     render() {
       if (this.role === Roles.provider) return this.props.children
 
-      const { props: { children, render }, state: { value } } = this
+      const { props: { children, render }, renderState: { value } } = this
       if (render) return render(value)
       if (typeof children === 'function') return (children as React.SFC)(value)
       else return children

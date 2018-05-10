@@ -1,8 +1,9 @@
-﻿import { TCommonStyles, TCommon } from 'reactxx-basic'
+﻿import { TCommonStyles, TCommon, TAddIn as TAddInBasic } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
 import { TActivable } from 'reactxx-activable'
 import { TAnimation } from 'reactxx-animation'
 import { Types } from './types'
+
 
 export namespace TAddIn {
 
@@ -12,7 +13,7 @@ export namespace TAddIn {
 
   //******************** Cross platform
   export interface RulesetAddInX<T extends TCommonStyles.RulesetNativeIds, R extends Types.Shape> extends TMediaQ.MediaQRulesetPartX<T> { }
-  export interface SheetAddInX<R extends Types.Shape = Types.Shape> { $animations?: TAnimation.SheetsX<getAnimation<R>> }
+  export interface SheetX<R extends Types.Shape = Types.Shape> { $animations?: TAnimation.SheetsX<getAnimation<R>> }
 
 
   /******************************************
@@ -40,9 +41,7 @@ export namespace TAddIn {
   *******************************************/
 
   //******************** Cross platform 
-  export interface PropX<R extends Types.Shape = Types.Shape> {
-    ignore?: boolean
-    CONSTANT?: boolean,
+  export interface PropX<R extends Types.Shape = Types.Shape> extends TAddInBasic.PropX<R> {
     $mediaq?: TMediaQ.NotifyIntervalCreator<getMediaQ<R>>
     $active?: getActivable<R> extends boolean ? boolean : never
   }

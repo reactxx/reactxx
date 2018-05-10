@@ -20,7 +20,7 @@ export * from '../common/createMuiTheme'
 export const ThemeModifierX = null
 
 export class AppContainer extends React.PureComponent {
-  state = { isReady: false }
+  renderState = { isReady: false }
   render() {
     //console.log('AppContainer')
     //TODO THEME

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { deepMerges, mergeRulesets, TCommon } from 'reactxx-basic';
+import { mergeRulesets, TCommon } from 'reactxx-basic';
 import MDI from 'reactxx-mdi'
 import { TProvider, Types, TAddIn, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
 import { TComps } from 'reactxx-primitives'

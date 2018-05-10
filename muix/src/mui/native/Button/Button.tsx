@@ -5,7 +5,7 @@ import { capitalize } from 'material-ui/utils/helpers';
 import { ButtonProps } from 'material-ui/Button/Button'
 
 import { mergeRulesets, TCommonStyles } from 'reactxx-basic'
-import { Types, TAddIn, TProvider, Text, withStyles } from 'reactxx'
+import { Types, TAddIn, TProvider, Text, withStylesCreator } from 'reactxx'
 import { CompNames, TComps } from 'reactxx-primitives'
 
 import { RippleEffect } from '../ButtonBase/ButtonBase'
@@ -183,8 +183,9 @@ const button: Types.CodeSFCNative<MuiButtonT.Shape> = (props, context) => {
   </RippleWithOverrides>
 }
 
-const Button = withStyles<MuiButtonT.Shape>(MuiButtonT.CompNames.Button, sheets())(button)
-export const ButtonIconStart = withStyles<MuiButtonT.Shape>(MuiButtonT.CompNames.ButtonIconLeft, sheets(true))(button)
-export const ButtonIconEnd = withStyles<MuiButtonT.Shape>(MuiButtonT.CompNames.ButtonIconRight, sheets(false))(button)
+const Button = withStylesCreator<MuiButtonT.Shape>(MuiButtonT.CompNames.Button, sheets(), button)()
+
+export const ButtonIconStart = withStylesCreator<MuiButtonT.Shape>(MuiButtonT.CompNames.ButtonIconLeft, sheets(true),button)()
+export const ButtonIconEnd = withStylesCreator<MuiButtonT.Shape>(MuiButtonT.CompNames.ButtonIconRight, sheets(false),button)()
 
 export default Button

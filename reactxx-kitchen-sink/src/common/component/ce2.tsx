@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { deepMerge, deepMergesSys, mergeRulesets, TCommon, ThemeProviderUntyped } from 'reactxx-basic'
+import { deepMerge, mergeRulesets, TCommon, ThemeProviderUntyped } from 'reactxx-basic'
 import { TProvider, Types, TAddIn, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
 
@@ -162,12 +162,12 @@ const Example1: React.SFC = props => <ThemeProvider theme={themeGreen}>
 
 class Example2 extends React.Component<{}, { toggle: boolean }> {
 
-  state = { toggle: false }
+  renderState = { toggle: false }
 
   doToggle = () => this.setState(st => ({ toggle: !st.toggle }))
 
   render() {
-    const actThemes = this.state.toggle
+    const actThemes = this.renderState.toggle
       ? [themeGreen, themeBlue, /*theme as a function of parent theme: */ theme => ({ ...theme, fontSize: 32 })]
       : [themeBlue, themeGreen, /*theme as a function of parent theme: */ theme => ({ ...theme, fontSize: 12 })]
 

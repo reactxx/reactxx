@@ -32,10 +32,10 @@ const rnInitValue2: ReactN.ViewStyle = {
 }
 
 class RNView extends React.PureComponent {
-  state = { open: false }
+  renderState = { open: false }
   render() {
     rnValue.stopAnimation()
-    Animated.timing(rnValue, { ...rnConfig, toValue: this.state.open ? 1 : 0 }).start() 
+    Animated.timing(rnValue, { ...rnConfig, toValue: this.renderState.open ? 1 : 0 }).start() 
     return <View>
       <AnimatedView style={rnInitValue}>
         <Text>My Sliding Box</Text>

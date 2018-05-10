@@ -10,7 +10,7 @@ export namespace TAddIn {
 
   //******************** Cross platform
   export interface RulesetAddInX<T extends TCommonStyles.RulesetNativeIds, R extends Types.Shape> { }
-  export interface SheetAddInX<R extends Types.Shape = Types.Shape> { }
+  export interface SheetX<R extends Types.Shape = Types.Shape> { }
 
 
   /******************************************
@@ -25,7 +25,11 @@ export namespace TAddIn {
   *******************************************/
 
   //******************** Cross platform 
-  export interface PropX<R extends Types.Shape = Types.Shape> { }
+  export enum addInProps { ignore = 'ignore', CONSTANT = 'CONSTANT'}
+  export interface PropX<R extends Types.Shape = Types.Shape> {
+    [addInProps.ignore]?: boolean
+    [addInProps.CONSTANT]?: boolean,
+  }
 
   //******************** Platform specific
   export interface GetVariant<R extends Types.Shape = Types.Shape> { }

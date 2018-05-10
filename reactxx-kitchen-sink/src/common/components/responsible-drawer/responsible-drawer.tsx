@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { mergeRulesets, TCommon } from 'reactxx-basic'
+import { mergeRulesets, TCommon, variantToString } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
-import { TAddIn, TProvider, Types, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, variantToString, AppContainer } from 'reactxx'
+import { TAddIn, TProvider, Types, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, AppContainer } from 'reactxx'
 import { LoremIpsum, TCommonStyles } from 'reactxx-basic'
 import { TComps } from 'reactxx-primitives'
 

@@ -47,6 +47,7 @@ export namespace TCommon {
 
   export interface ThemeBase {
     type?: 'ThemeX'
+    //themeName?:string
   }
 
   export interface WithStyleOptions {
@@ -55,8 +56,9 @@ export namespace TCommon {
     withActive?: boolean
   }
 
-  export type ThemeCreator<T extends ThemeBase = ThemeBase> = T | ((theme: T) => T)
-  export type ThemeProviderTyped<T extends ThemeBase = ThemeBase> = React.ComponentClass<{ theme: ThemeCreator<T> }>
+  //export type ThemeProviderProp<T extends ThemeBase = ThemeBase> = string | T
+  export type ThemeProviderProps<T extends ThemeBase = ThemeBase> = { theme: T | string | ((parentTheme: T) => T) }
+  export type ThemeProviderTyped<T extends ThemeBase = ThemeBase> = React.ComponentClass<ThemeProviderProps<T>>
   export interface ThemeContext { theme?: ThemeBase; $cache?: {} }
 
 }

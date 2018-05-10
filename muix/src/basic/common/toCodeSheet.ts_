@@ -1,0 +1,69 @@
+﻿import { Types } from '../typings/types'
+import { TCommon } from '../typings/common'
+import { TCommonStyles } from '../typings/common-styles'
+import { toPlatformRuleSet, toPlatformEvents, deepMerges } from './to-platform'
+
+const prepareSheet = (name: string, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, props: Types.PropsX, themeContext: TCommon.ThemeContext, propsPatch: TAddIn.CodeProps[]) => {
+
+  const { classes, className, style, onPress, onLongPress, onPressIn, onPressOut, $web, $native, developer_flag, CONSTANT, ...rest } = props as Types.PropsX & TCommonStyles.OnPressAllX
+  const { theme, $cache } = (themeContext || {}) as TCommon.ThemeContext
+
+  //** STATIC SHEET
+  let staticSheet: Types.Sheet
+  let getStaticSheet: () => Types.Sheet
+  let variantCacheId
+  let variant = null
+  if (typeof createSheetX !== 'function') {
+    variantCacheId = '#static#'
+    getStaticSheet = () => toPlatformSheet(createSheetX)
+  } else {
+    if (options && options.getVariant) {
+      const propsWithMediaQ = propsPatch.length > 0 ? Object.assign({}, props, ...propsPatch) : props
+      variant = options.getVariant(propsWithMediaQ, theme)
+      variantCacheId = options.variantToString && options.variantToString(variant)
+      if (variantCacheId) {
+        getStaticSheet = () => toPlatformSheet(callCreator(theme, variant, createSheetX))
+      } else {
+        //getVariant!=null && variantToString==null => NO CACHING
+        staticSheet = toPlatformSheet(callCreator(theme, variant, createSheetX))
+      }
+    } else
+      getStaticSheet = () => toPlatformSheet(callCreator(theme, null, createSheetX))
+  }
+  //if (!staticSheet) staticSheet = getStaticSheet()
+
+  if (!staticSheet) {
+    if (!$cache) staticSheet = getStaticSheet()
+    else {
+      let compCache = $cache[name]
+      if (!compCache) $cache[name] = compCache = {}
+      staticSheet = compCache[variantCacheId]
+      if (!staticSheet) compCache[variantCacheId] = staticSheet = getStaticSheet();
+      (staticSheet as any).$preserve = true
+    }
+  }
+
+  //** MERGE staticSheet with classes and className
+  const root = className && { root: toPlatformRuleSet(callCreator(theme, variant, className)) }
+  const codeClasses: Types.Sheet = classes || root ? deepMerges({}, staticSheet, toPlatformSheet(callCreator(theme, variant, classes)), root) : staticSheet
+
+
+  //** RETURN platform dependent props for pure component code
+  const systemFromPatch = propsPatch.length > 0 ? Object.assign({}, ...propsPatch) : null
+  const codeProps = {
+    ...rest,
+    system: {
+      ...systemFromPatch,
+      classes: null,
+      style: toPlatformRuleSet(callCreator(theme, variant, style)),
+      variant,
+      developer_flag,
+    }
+  } as Types.CodeProps
+
+  toPlatformEvents($web, $native as TCommonStyles.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps)
+
+  return { codeProps, codeClasses }
+}
+
+const callCreator = <T extends {}>(theme: TCommon.ThemeBase, variant, creator: T | ((theme: TCommon.ThemeBase, variant) => T)) => typeof creator === 'function' ? creator(theme, variant) : creator

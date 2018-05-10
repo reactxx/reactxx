@@ -1,8 +1,10 @@
 ﻿export * from './typings/types'
+export * from './typings/add-in'
 export * from './typings/common'
 export * from './typings/common-styles'
 export * from './common/to-platform'
 export * from './common/cascading'
 export * from './common/develop'
 export * from './common/theme'
+export * from './common/withStyles'
 
