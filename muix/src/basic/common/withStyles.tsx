@@ -2,30 +2,38 @@
 import ReactN from 'react-native'
 import warning from 'warning'
 
-import { TCommonStyles, TCommon, toPlatformEvents, toPlatformSheet, toPlatformRuleSet, deepMerges, deepModify, ThemeProvider, ThemeConsumer, theme, Cascading } from 'reactxx-basic'
-
+import { ThemeProvider, ThemeConsumer, theme } from './theme'
+import { toPlatformEvents, toPlatformSheet, toPlatformRuleSet, deepMerges, deepModify } from './to-platform'
+import { TCommon } from '../typings/common'
+import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
+import { FinalizeProps } from './finalize-props'
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
 /************************
-* TYPINGS
+* TRenderState
 *************************/
 export interface TRenderState {
-  finalProps?: Types.PropsX
-  themeContext?: TCommon.ThemeContext
+  finalProps?: Types.PropsX // processed defaultProps, cascadingProps, separated AddIn props
+  themeContext?: TCommon.ThemeContext // cascading themeContext
 
-  propsPatch?: TAddIn.CodeProps[]
-  $props?: TAddIn.PropX
-  $classes?: TAddIn.SheetX
+  addInProps?: TAddIn.PropsX // separated addIn props
+  addInClasses?: TAddIn.SheetX // separated addIn sheet
 
-  codeProps?: Types.CodeProps
-  codeSystemProps?: Types.CodeSystemProps
-  codeClasses?: Types.Sheet
-  codeClassesPatch?: Types.Sheet[]
+  propsPatch?: TAddIn.CodeProps[] // props modified by addIns 
+  codeClassesPatch?: Types.Sheet[] // classes modified by addIns 
+
+  codeProps?: Types.CodeProps // platform dependent props
+  codeSystemProps?: Types.CodeSystemProps // props, processed by code
+  codeClasses?: Types.Sheet // platform dependent classes
 }
 
+/************************
+* ADDIN
+*************************/
+// addIn configuration type
 export interface RenderAddIn {
   toPlatformSheet: (sheet: Types.SheetX | Types.PartialSheetX) => Types.Sheet
   toPlatformRuleSet: (style: Types.RulesetX) => TCommonStyles.Ruleset
@@ -33,9 +41,7 @@ export interface RenderAddIn {
   addInHOCs: (state: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
 }
 
-/************************
-* ADDIN
-*************************/
+// addIn configuration instance
 export const renderAddIn: RenderAddIn = {
   toPlatformSheet,
   toPlatformRuleSet,
@@ -60,12 +66,12 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
 
   //**** PROPERTY CASCADING 
 
-  const { cascading, provider } = Cascading<TPropsX>(options)
+  const { finalizeProps, cascadingProvider } = FinalizeProps<Types.PropsX>(options)
 
   //**** TO PLATFORM
   const toPlatform = (state: TRenderState, next: () => React.ReactNode) => {
     const res = () => {
-      prepareSheet(name, sheetCreator, options, state)
+      convertToPlatform(name, sheetCreator, options, state)
       return next()
     }
     return res
@@ -74,7 +80,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
   //****************************
   // Styled COMPONENT
   //****************************
-  class Styled extends React.Component<TPropsX> {
+  class Styled extends React.Component<Types.PropsX> {
 
     state: TRenderState = {
       propsPatch: [],
@@ -115,15 +121,14 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
     }
 
     renderer =
-      cascading(
+      finalizeProps(
         () => this.props,
-        ({ finalProps, $props }) => { this.state.finalProps = finalProps; this.state.$props = $props },
+        ({ finalProps, addInProps }) => { this.state.finalProps = finalProps; this.state.addInProps = addInProps },
         theme(
           () => ({ withTheme: options.withTheme }),
-          themeContext => this.state.themeContext = themeContext || {},
+          themeContext => this.state.themeContext = themeContext,
           renderAddIn.addInHOCsX(this.state,
             toPlatform(this.state,
-              //({ codeProps, codeClasses, codeSystemProps }) => { this.renderState.codeClasses = codeClasses; this.renderState.codeProps = codeProps; this.renderState.codeSystemProps = codeSystemProps },
               renderAddIn.addInHOCs(this.state,
                 this.renderCodeComponent
               )
@@ -136,7 +141,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
       return !nextProps.CONSTANT
     }
 
-    public static Provider = provider
+    public static Provider = cascadingProvider
     public static displayName = name
   }
 
@@ -156,17 +161,18 @@ export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()
 * PRIVATE
 *************************/
 
-const prepareSheet = (name: string, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderState) => {
+const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderState) => {
 
   const { propsPatch, finalProps } = renderState
   const { classes, className, style, onPress, onLongPress, onPressIn, onPressOut, $web, $native, developer_flag, CONSTANT, ...rest } = finalProps as Types.PropsX & TCommonStyles.OnPressAllX
   const { theme, $cache } = renderState.themeContext
 
   //** STATIC SHEET
-  let staticSheet: Types.Sheet & { __isCached?: boolean }
+  let staticSheet: Types.Sheet
   let getStaticSheet: () => Types.Sheet
   let variantCacheId
   let variant = null
+  let isCached = false
   if (typeof createSheetX !== 'function') {
     variantCacheId = '#static#'
     getStaticSheet = () => renderAddIn.toPlatformSheet(createSheetX)
@@ -188,11 +194,11 @@ const prepareSheet = (name: string, createSheetX: Types.SheetCreatorX, options: 
   }
 
   if (!staticSheet) {
+    isCached = true
     let compCache = $cache[name]
     if (!compCache) $cache[name] = compCache = {}
     staticSheet = compCache[variantCacheId]
     if (!staticSheet) compCache[variantCacheId] = staticSheet = getStaticSheet();
-    staticSheet.__isCached = true
   }
 
   //** MERGE staticSheet with classes and className
@@ -210,11 +216,12 @@ const prepareSheet = (name: string, createSheetX: Types.SheetCreatorX, options: 
 
   // separate AddIns from sheet to $classes
   let finalCodeClasses = renderState.codeClasses
-  renderState.$classes = {} as any
+  renderState.addInClasses = {} as any
   for (const p in renderState.codeClasses) {
     if (p.startsWith('$')) {
-      if (finalCodeClasses === renderState.codeClasses && renderState.codeClasses.__isCached) finalCodeClasses = { ...renderState.codeClasses } // cannot modify __isCached codeClasses => make shallow copy
-      renderState.$classes[p] = finalCodeClasses[p]
+      // cannot modify __isCached codeClasses => make shallow copy
+      if (finalCodeClasses === renderState.codeClasses && isCached) finalCodeClasses = { ...renderState.codeClasses } 
+      renderState.addInClasses[p] = finalCodeClasses[p]
       delete finalCodeClasses[p] // modify finalCodeClasses
       continue
     }

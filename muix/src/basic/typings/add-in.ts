@@ -26,7 +26,7 @@ export namespace TAddIn {
 
   //******************** Cross platform 
   export enum addInProps { ignore = 'ignore', CONSTANT = 'CONSTANT'}
-  export interface PropX<R extends Types.Shape = Types.Shape> {
+  export interface PropsX<R extends Types.Shape = Types.Shape> {
     [addInProps.ignore]?: boolean
     [addInProps.CONSTANT]?: boolean,
   }

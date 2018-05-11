@@ -1,6 +1,4 @@
 ﻿import { TCommonStyles, TCommon, TAddIn as TAddInBasic } from 'reactxx-basic'
-import { TMediaQ } from 'reactxx-mediaq'
-import { TActivable } from 'reactxx-activable'
 import { TAnimation } from 'reactxx-animation'
 import { Types } from './types'
 
@@ -12,7 +10,7 @@ export namespace TAddIn {
   *******************************************/
 
   //******************** Cross platform
-  export interface RulesetAddInX<T extends TCommonStyles.RulesetNativeIds, R extends Types.Shape> extends TMediaQ.MediaQRulesetPartX<T> { }
+  export interface RulesetAddInX<T extends TCommonStyles.RulesetNativeIds, R extends Types.Shape>  { }
   export interface SheetX<R extends Types.Shape = Types.Shape> { $animations?: TAnimation.SheetsX<getAnimation<R>> }
 
 
@@ -20,21 +18,14 @@ export namespace TAddIn {
     SHAPE
   *******************************************/
   export interface Shape {
-    //**** animation shape
     animation?: TAnimation.Shapes
-    //**** mediaq shape
-    mediaq?: string | null
-    //**** activable
-    activable?: boolean | never
   }
 
   export interface ShapeDefault {
-    animation: {}; mediaq: null; activable: never
+    animation: {}
   }
 
   export type getAnimation<R extends Shape> = R['animation']
-  export type getMediaQ<R extends Shape = Shape> = R['mediaq']
-  export type getActivable<R extends Shape = Shape> = R['activable']
 
   /******************************************
     COMPONENT PROPS
@@ -42,31 +33,21 @@ export namespace TAddIn {
 
   //******************** Cross platform 
   export interface PropsX<R extends Types.Shape = Types.Shape> extends TAddInBasic.PropsX<R> {
-    $mediaq?: TMediaQ.NotifyIntervalCreator<getMediaQ<R>>
-    $active?: getActivable<R> extends boolean ? boolean : never
   }
 
   //******************** Platform specific
   export interface GetVariant<R extends Types.Shape = Types.Shape> {
-    mediaqFlags?: TMediaQ.MediaFlags<TAddIn.getMediaQ<R>>
   }
 
-  export interface CodePropsLow<R extends Types.Shape = Types.Shape> {
-    theme?: TCommon.getTheme<R>
-    variant?: TCommon.getVariant<R>
-    mediaqFlags?: TMediaQ.MediaFlags<getMediaQ<R>>
-    activeFlag?: getActivable<R>
-  }
-
-  export interface CodePropsWeb<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> {
+  export interface CodePropsWeb<R extends Types.Shape = Types.Shape>  {
     animations?: TAnimation.DriversWeb<getAnimation<R>>
   }
 
-  export interface CodePropsNative<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> {
+  export interface CodePropsNative<R extends Types.Shape = Types.Shape> {
     animations?: TAnimation.DriversNative<getAnimation<R>>
   }
 
-  export interface CodeProps<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> {
+  export interface CodeProps<R extends Types.Shape = Types.Shape> {
     animations?: TAnimation.Drivers<getAnimation<R>>
   }
 

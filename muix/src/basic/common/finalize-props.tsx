@@ -8,11 +8,11 @@ import { TAddIn } from '../typings/add-in';
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
-export const Cascading = <TPropsX extends Types.PropsX>(options: { withCascading?: boolean; defaultProps?: Types.PropsXOverwrite }) => {
+export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCascading?: boolean; defaultProps?: Types.PropsXOverwrite }) => {
 
   const { Provider: CascadingProvider, Consumer: CascadingConsumer } = options.withCascading ? React.createContext<TPropsX>(null) : { Provider: null, Consumer: null } as React.Context<TPropsX>
 
-  class provider extends React.Component<TPropsX> {
+  class cascadingProvider extends React.Component<TPropsX> {
 
     render() {
       if (options.withCascading) return <CascadingConsumer>{this.CASCADING}</CascadingConsumer>
@@ -27,7 +27,7 @@ export const Cascading = <TPropsX extends Types.PropsX>(options: { withCascading
 
   }
 
-  const finalizeProps = (defaultProps, cascadingProps, props) => {
+  const finalize = (defaultProps, cascadingProps, props) => {
     // merge properties
     const finalProps = { ...props }
     if (defaultProps || cascadingProps) {
@@ -40,30 +40,30 @@ export const Cascading = <TPropsX extends Types.PropsX>(options: { withCascading
       }
     }
     // separate addIns props
-    const $props: any = {}
+    const addInProps: any = {}
     for (const p in finalProps) {
       if (p.startsWith('$') || p === TAddIn.addInProps.CONSTANT || p === TAddIn.addInProps.ignore) {
-        $props[p] = finalProps[p]; delete finalProps[p] // move props from finalProps to $props
+        addInProps[p] = finalProps[p]; delete finalProps[p] // move props from finalProps to $props
       }
     }
-    return { finalProps: finalProps as TPropsX, $props: $props as TAddIn.PropX }
+    return { finalProps: finalProps as TPropsX, addInProps: addInProps as TAddIn.PropsX }
   }
 
-  const cascading = (input: () => TPropsX, output: (par: { finalProps: TPropsX, $props: TAddIn.PropX }) => void, next: () => React.ReactNode) => {
-    let props: TPropsX
-    const render = (inheritedProps: TPropsX) => {
-      output(finalizeProps(options.defaultProps, inheritedProps, props))
+  const finalizeProps = (input: () => Types.PropsX, output: (par: { finalProps: Types.PropsX, addInProps: TAddIn.PropsX }) => void, next: () => React.ReactNode) => {
+    let props: Types.PropsX
+    const render = (inheritedProps: Types.PropsX) => {
+      output(finalize(options.defaultProps, inheritedProps, props))
       return next()
     }
     const res = () => {
       props = input()
       if (options.withCascading) return <CascadingConsumer>{render}</CascadingConsumer>
-      output(finalizeProps(options.defaultProps, null, props))
+      output(finalize(options.defaultProps, null, props))
       return next()
     }
     return res
   }
 
-  return { cascading, provider }
+  return { finalizeProps, cascadingProvider }
 
 }

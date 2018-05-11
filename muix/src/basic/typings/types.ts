@@ -86,7 +86,7 @@ export namespace Types {
       classes?: PartialSheetCreatorX<R> // cross platform sheet
       className?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<TCommon.getStyle<R>, R>>
       developer_flag?: boolean
-    } & TAddIn.PropX<R>
+    } & TAddIn.PropsX<R>
     >
 
   export type ComponentTypeX<R extends Shape> = React.ComponentType<PropsX<R>>
@@ -96,14 +96,20 @@ export namespace Types {
 
   export type omitPropNames = 'system' | 'style' | 'classes' | 'className' | keyof TAddIn.CodeProps
 
+  export interface CodeSystem<R extends Shape = Shape> {
+    developer_flag: boolean
+    theme: TCommon.getTheme<R>
+    variant: TCommon.getVariant<R>
+  }
   // *** web
   export type CodePropsWeb<R extends Shape = Shape, TCodePropsWebAddIn extends {} = {}> = Omit<TCommon.getProps<R> & TCommon.getPropsWeb<R>, omitPropNames> & TCommonStyles.OnPressAllWeb & {
     system:
     {
       style: TCommonStyles.RulesetWeb
       classes: SheetWeb<R>
-      developer_flag: boolean
-    } & TAddIn.CodePropsWeb<R>
+    } &
+    CodeSystem<R> &
+    TAddIn.CodePropsWeb<R>
   }
 
   export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
@@ -114,8 +120,9 @@ export namespace Types {
     {
       style: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
       classes: SheetNative<R>
-      developer_flag: boolean
-    } & TAddIn.CodePropsNative<R>
+    } &
+    CodeSystem<R> &
+    TAddIn.CodePropsNative<R>
   }
 
   export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
@@ -124,8 +131,9 @@ export namespace Types {
   export type CodeSystemProps<R extends Shape = Shape> = {
     style: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<TCommon.getStyle<R>>
     classes: Sheet<R>
-    developer_flag: boolean
-  } & TAddIn.CodeProps<R>
+  } &
+    CodeSystem<R> &
+    TAddIn.CodeProps<R>
 
   export type CodeProps<R extends Shape = Shape> =
     Omit<TCommon.getProps<R> & (TCommon.getPropsNative<R> | TCommon.getPropsWeb<R>), omitPropNames> &
