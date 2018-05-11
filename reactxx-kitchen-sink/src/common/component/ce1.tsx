@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { mergeRulesets, TCommon } from 'reactxx-basic';
+import { mergeRulesets, TCommon, Types, withStylesCreator } from 'reactxx-basic';
 import MDI from 'reactxx-mdi'
-import { TProvider, Types, TAddIn, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
-import { TComps } from 'reactxx-primitives'
+//import { TProvider, Types, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
+import { TComps, Text, View, ScrollView, Icon } from 'reactxx-primitives'
 
 
 import { H2 } from '../components/typo'
@@ -91,8 +91,10 @@ export const LabelEx = LabelCreator({ defaultProps: { iconData: MDI.Play, classe
 const Section: React.SFC = ({ children }) => <View className={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>{children}</View>
 const iconHeart = MDI.Heart
 
-//const App = props => <LabelC.Provider className={{ borderRadius: 12 }} iconData={iconHeart}>
-//</LabelC.Provider>
+const App_ = props => <>
+  <LabelEx>Label 10</LabelEx>
+  <LabelEx iconData={MDI.Stop} classes={{ label: { color: 'white' } }} developer_flag>Label 11</LabelEx>
+</>
 
 const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
   <H2>Default</H2>

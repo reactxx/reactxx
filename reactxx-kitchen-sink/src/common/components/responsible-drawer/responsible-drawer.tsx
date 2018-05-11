@@ -205,7 +205,7 @@ export const ResponsibleDrawerCreator = withStylesCreator<TResponsibleDrawer.Sha
       mobile: [null, 480],
       tablet: [480, 1024],
       desktop: [1024, null],
-    }
+    },
   },
   withTheme: false
 })

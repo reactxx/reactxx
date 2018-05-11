@@ -27,7 +27,7 @@ const minRippleSize = 0.01
 
 export class RippleEffect extends React.Component<MuiButtonBaseT.RippleEfectProps> {
 
-  renderState: { active?: boolean } = {}
+  state: { active?: boolean } = {}
   scaleValue = new Animated.Value(minRippleSize)
   opacityValue = new Animated.Value(0)
   scale: Animated.CompositeAnimation
@@ -46,7 +46,7 @@ export class RippleEffect extends React.Component<MuiButtonBaseT.RippleEfectProp
   onPressedOut = () => this.setState({ active: false })
 
   render() {
-    const { scaleValue, opacityValue, onPressedIn, onPressedOut, rect: { width, height }, renderState: { active }, props: { system: { theme, style }, onPress, children, viewStyle, rippleStyle, activeStyle, disabled, disableRipple } } = this
+    const { scaleValue, opacityValue, onPressedIn, onPressedOut, rect: { width, height }, state: { active }, props: { system: { theme, style }, onPress, children, viewStyle, rippleStyle, activeStyle, disabled, disableRipple } } = this
 
     const renderRipple = () => {
 

@@ -3,7 +3,7 @@ import ReactN, { View as ViewRN, Text as TextRN, ScrollView as ScrollViewRN, Ani
 import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
-import { Types, mergeRulesets } from 'reactxx-basic'
+import { Types, mergeRulesets, withStylesCreator } from 'reactxx-basic'
 
 import { TComps, CompNames } from '../typings/comps'
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comps-sheets'
@@ -56,3 +56,12 @@ export const scrollView = anyScrollView(false)
 export const animatedScrollView = anyScrollView(true)
 export const icon = anyIcon(false)
 export const animatedIcon = anyIcon(true)
+
+export const Text: Types.ComponentTypeX<TComps.TextShape> = withStylesCreator(CompNames.Text, textSheet, text as Types.CodeComponentType<TComps.TextShape>)()
+export const AnimatedText: Types.ComponentTypeX<TComps.TextShape> = withStylesCreator(CompNames.AnimatedText, textSheet, animatedText as Types.CodeComponentType<TComps.TextShape>)()
+export const View: Types.ComponentTypeX<TComps.ViewShape> = withStylesCreator(CompNames.View, viewSheet, view as Types.CodeComponentType<TComps.ViewShape>)()
+export const AnimatedView: Types.ComponentTypeX<TComps.ViewShape> = withStylesCreator(CompNames.AnimatedView, viewSheet, animatedView as Types.CodeComponentType<TComps.ViewShape>)()
+export const Icon: Types.ComponentTypeX<TComps.IconShape> = withStylesCreator(CompNames.Icon, iconSheet, icon as Types.CodeComponentType<TComps.IconShape>)()
+export const AnimatedIcon: Types.ComponentTypeX<TComps.IconShape> = withStylesCreator(CompNames.AnimatedIcon, iconSheet, animatedIcon as Types.CodeComponentType<TComps.IconShape>)()
+export const ScrollView: Types.ComponentTypeX<TComps.ScrollViewShape> = withStylesCreator(CompNames.ScrollView, scrollViewSheet, scrollView as Types.CodeComponentType<TComps.ScrollViewShape>)()
+export const AnimatedScrollView: Types.ComponentTypeX<TComps.ScrollViewShape> = withStylesCreator(CompNames.AnimatedScrollView, scrollViewSheet, animatedScrollView as Types.CodeComponentType<TComps.ScrollViewShape>)()

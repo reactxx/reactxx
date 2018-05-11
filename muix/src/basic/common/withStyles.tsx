@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 import warning from 'warning'
 
-import { TCommonStyles, TCommon, toPlatformEvents, toPlatformSheet, toPlatformRuleSet, deepMerges, ThemeProvider, ThemeConsumer, theme, Cascading } from 'reactxx-basic'
+import { TCommonStyles, TCommon, toPlatformEvents, toPlatformSheet, toPlatformRuleSet, deepMerges, deepModify, ThemeProvider, ThemeConsumer, theme, Cascading } from 'reactxx-basic'
 
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
@@ -13,7 +13,6 @@ const DEV_MODE = process.env.NODE_ENV === 'development'
 * TYPINGS
 *************************/
 export interface TRenderState {
-  props?: Types.PropsX
   finalProps?: Types.PropsX
   themeContext?: TCommon.ThemeContext
 
@@ -77,14 +76,9 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
   //****************************
   class Styled extends React.Component<TPropsX> {
 
-    renderState: TRenderState = {
-      props: this.props,
-      finalProps: this.props,
-      $props: {},
-      $classes: {},
+    state: TRenderState = {
       propsPatch: [],
       codeClassesPatch: [],
-      themeContext: {}
     }
 
     render() {
@@ -94,14 +88,14 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
     }
 
     renderCodeComponent = () => {
-      const { codeClassesPatch, codeProps, codeClasses, codeSystemProps } = this.renderState
+      const { codeClassesPatch, codeProps, codeClasses, codeSystemProps } = this.state
 
       if (DEV_MODE && codeSystemProps.developer_flag) {
-        const { themeContext, finalProps, propsPatch, props } = this.renderState
+        const { themeContext, finalProps, propsPatch } = this.state
         console.log(
           `### withStyles RENDER CODE for ${name}`,
-          '\nprops: ', props,
-          '\ninputProps: ', finalProps,
+          '\nprops: ', this.props,
+          '\nfinalProps: ', finalProps,
           '\ntheme: ', themeContext.theme,
           '\ncodeProps: ', codeProps,
           '\npropsPatch: ', propsPatch,
@@ -117,20 +111,20 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
       else if (codeClasses.__isCached) classes = { ...codeClasses } as Types.Sheet<R>
 
       // call component code
-      return <CodeComponent {...codeProps as Types.CodeProps<R>} system={{ ...codeSystemProps, classes }} />
+      return <CodeComponent {...codeProps as Types.CodeProps<R>} system={{ ...codeSystemProps, classes }}/>
     }
 
     renderer =
       cascading(
-        () => this.renderState.props,
-        ({ finalProps, $props }) => this.renderState.finalProps = finalProps,
+        () => this.props,
+        ({ finalProps, $props }) => { this.state.finalProps = finalProps; this.state.$props = $props },
         theme(
           () => ({ withTheme: options.withTheme }),
-          themeContext => this.renderState.themeContext = themeContext || {},
-          renderAddIn.addInHOCsX(this.renderState,
-            toPlatform(this.renderState,
+          themeContext => this.state.themeContext = themeContext || {},
+          renderAddIn.addInHOCsX(this.state,
+            toPlatform(this.state,
               //({ codeProps, codeClasses, codeSystemProps }) => { this.renderState.codeClasses = codeClasses; this.renderState.codeProps = codeProps; this.renderState.codeSystemProps = codeSystemProps },
-              renderAddIn.addInHOCs(this.renderState,
+              renderAddIn.addInHOCs(this.state,
                 this.renderCodeComponent
               )
             )
@@ -203,7 +197,16 @@ const prepareSheet = (name: string, createSheetX: Types.SheetCreatorX, options: 
 
   //** MERGE staticSheet with classes and className
   const root = className && { root: renderAddIn.toPlatformRuleSet(callCreator(theme, variant, className)) }
-  renderState.codeClasses = classes || root ? deepMerges({}, staticSheet, renderAddIn.toPlatformSheet(callCreator(theme, variant, classes)), root) : staticSheet
+  renderState.codeClasses = classes || root ? deepModify(staticSheet, renderAddIn.toPlatformSheet(callCreator(theme, variant, classes)), root) : staticSheet
+
+  if (DEV_MODE && finalProps.developer_flag) {
+    console.log(
+      `### withStyles PREPARE SHEET for ${name}`,
+      '\nstaticSheet: ', staticSheet,
+      '\nroot: ', root,
+      '\nclasses: ', classes,
+    )
+  }
 
   // separate AddIns from sheet to $classes
   let finalCodeClasses = renderState.codeClasses

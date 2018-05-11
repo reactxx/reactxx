@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
 
-export const toPlatformEvents = ($web: TCommonStyles.OnPressAllWeb, $native: TCommonStyles.OnPressAllNative, propsX: TCommonStyles.OnPressAllX, cp: TCommonStyles.OnPressAllNative | TCommonStyles.OnPressAllWeb, setActive?: (active:boolean) => void) => {
+export const toPlatformEvents = ($web: TCommonStyles.OnPressAllWeb, $native: TCommonStyles.OnPressAllNative, propsX: TCommonStyles.OnPressAllX, cp: TCommonStyles.OnPressAllNative | TCommonStyles.OnPressAllWeb, setActive?: (active: boolean) => void) => {
   const { onPress, onLongPress, onPressIn, onPressOut } = propsX
   if (isType<TCommonStyles.OnPressAllWeb>(cp)) {
     const cl = $web && $web.onClick || onPress; if (cl) cp.onClick = cl
@@ -18,14 +18,6 @@ export const toPlatformEvents = ($web: TCommonStyles.OnPressAllWeb, $native: TCo
   }
 }
 
-export const deepMerges = (target, ...sources) => {
-  sources.forEach(source => deepMerge(target, source))
-  return target
-}
-
-//export const deepMerges = (target, ...sources) => {
-//  return deepMerges(false, target, ...sources)
-//}
 export const toPlatformSheet = (sheet: Types.SheetX | Types.PartialSheetX) => {
   if (typeof sheet !== 'object') return sheet
   const res = {}
@@ -33,13 +25,30 @@ export const toPlatformSheet = (sheet: Types.SheetX | Types.PartialSheetX) => {
   return res as Types.Sheet
 }
 
-
 //create platform specific ruleset from cross platform one
 export const toPlatformRuleSet = (style: Types.RulesetX) => {
   if (!style) return null
   if (!style.$web && !style.$native) return style // optimalization: already platform specific
   const { $web, $native, ...rest } = style
   return { ...rest, ...(window.isWeb ? $web : $native) } as TCommonStyles.Ruleset
+}
+
+export const deepModify = (target, ...sources) => {
+  if (!sources.find(s => !!s)) return target
+  target = { ...target }
+  const modifiers = deepMerges({}, ...sources)
+  for (const p in modifiers) {
+    const modifiersP = modifiers[p]; const targetP = target[p]
+    target[p] = targetP && isObjectLiteral(modifiersP) ? deepMerges({}, targetP, modifiersP) : modifiersP
+  }
+  return target
+}
+
+
+
+export const deepMerges = (target, ...sources) => {
+  sources.forEach(source => deepMerge(target, source))
+  return target
 }
 
 //simple deep merge
@@ -62,7 +71,7 @@ export const deepMerge = (target, source) => {
   return target
 }
 export const isObject = item => item && typeof item === 'object' && !Array.isArray(item) && typeof item['_interpolation'] != 'function' //HACK: typeof item['_interpolation'] != 'function' prevent to merge ReactNative's Animated.Value.interpolate prop
-export const isObjectLiteral = item => isObject(item) && !item.constructor
+export const isObjectLiteral = item => isObject(item) && item.constructor !== item
 
 
 export function mergeRulesets<T extends TCommonStyles.RulesetNativeIds = 'View'>(...rulesets/*all used rulesets*/): TCommonStyles.RulesetNative<T>

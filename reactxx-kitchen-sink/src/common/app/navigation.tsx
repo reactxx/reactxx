@@ -30,13 +30,13 @@ class App extends React.Component<{}, KSink.Example> {
 
   locationExample = nameToExample(window && window.location && window.location.pathname ? window.location.pathname.substr(1) : null)
 
-  renderState = nameToExample(debugPath)
+  state = nameToExample(debugPath)
 
   render() {
     if (this.locationExample.name !== 'app/navigation') return exampleToElement(this.locationExample)
-    const content = this.renderState.name === 'app/navigation' ? (window.isWeb ? <HomeContentWeb /> : <HomeContentNative />) : exampleToElement(this.renderState)
-    return <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer actName={this.renderState.name} gotoExample={this.gotoExample} />} >
-      <Content actExample={this.renderState}>{content}</Content>
+    const content = this.state.name === 'app/navigation' ? (window.isWeb ? <HomeContentWeb /> : <HomeContentNative />) : exampleToElement(this.state)
+    return <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer actName={this.state.name} gotoExample={this.gotoExample} />}>
+      <Content actExample={this.state}>{content}</Content>
     </ResponsibleDrawer>
   }
 

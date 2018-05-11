@@ -36,7 +36,7 @@ const apps: { title: string; app: React.ComponentType/*, overridesNew?: Muix.The
 //})
 
 class AppRoot extends React.Component {
-  renderState = { appIndex: 0, rtl: false, light: false }
+  state = { appIndex: 0, rtl: false, light: false }
   render() {
     //const { appIndex } = this.state
     //const App = apps[appIndex].app

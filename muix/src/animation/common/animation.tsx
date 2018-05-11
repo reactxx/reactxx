@@ -79,7 +79,7 @@ interface AnimProps {
 
 class AnimationsComponent extends React.Component<AnimProps, AnimState> {
 
-  renderState: AnimState = { self: this }
+  state: AnimState = { self: this }
 
   static getDerivedStateFromProps(nextProps: AnimProps, prevState: AnimState): Partial<AnimState> {
     if (!nextProps.$initAnimations) return { sheets: null }
@@ -88,18 +88,18 @@ class AnimationsComponent extends React.Component<AnimProps, AnimState> {
     const self = prevState.self
     for (const p in $anim) {
       if (p.startsWith('$')) continue
-      const parent: TAnimation.Drivers = { statefullComponent: self, reset: self.reset, sheets: self.renderState.sheets }
+      const parent: TAnimation.Drivers = { statefullComponent: self, reset: self.reset, sheets: self.state.sheets }
       sheets[p] = new AnimationDriver($anim[p], parent)
     }
     return { sheets }
   }
 
   render() {
-    return this.props.children({ statefullComponent: this, reset: this.reset, sheets: this.renderState.sheets })
+    return this.props.children({ statefullComponent: this, reset: this.reset, sheets: this.state.sheets })
   }
 
   reset = (justRunning?: TAnimation.Driver<{}>) => {
-    const anim = this.renderState.sheets
+    const anim = this.state.sheets
     for (const p in anim) {
       const driver = anim[p]
       if (!driver.reset || driver === justRunning) continue

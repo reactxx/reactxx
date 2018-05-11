@@ -162,12 +162,12 @@ const Example1: React.SFC = props => <ThemeProvider theme={themeGreen}>
 
 class Example2 extends React.Component<{}, { toggle: boolean }> {
 
-  renderState = { toggle: false }
+  state = { toggle: false }
 
   doToggle = () => this.setState(st => ({ toggle: !st.toggle }))
 
   render() {
-    const actThemes = this.renderState.toggle
+    const actThemes = this.state.toggle
       ? [themeGreen, themeBlue, /*theme as a function of parent theme: */ theme => ({ ...theme, fontSize: 32 })]
       : [themeBlue, themeGreen, /*theme as a function of parent theme: */ theme => ({ ...theme, fontSize: 12 })]
 

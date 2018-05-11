@@ -86,14 +86,14 @@ interface ActivableProps {
 
 class ActivableComponent extends React.Component<ActivableProps, ActivableState> {
 
-  renderState: ActivableState = { active: false }
+  state: ActivableState = { active: false }
 
   componentDidMount() {
     if (this.props.ref) this.props.ref(this)
   }
 
   render() {
-    return this.props.children(this.renderState.active)
+    return this.props.children(this.state.active)
   }
 
   setActive = (active: boolean) => this.setState({ active })
