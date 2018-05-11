@@ -6,7 +6,7 @@ import { AppContainer, createMuiTheme } from 'reactxx-mui/index'
 
 //import color from 'material-ui/colors/orange'
 
-import { ScrollView, View, Icon, Text } from 'reactxx'
+import { ScrollView, View, Icon, Text } from 'reactxx-primitives'
 
 import { MuiButtonT } from 'reactxx-mui/typings/button'
 

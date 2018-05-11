@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Types, Text, View, ScrollView } from 'reactxx'
-import { LoremIpsum } from 'reactxx-basic'
+import { Text, View, ScrollView } from 'reactxx-primitives'
+import { Types, LoremIpsum } from 'reactxx-basic'
 
 
 const App: React.SFC = props => {

@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { mergeRulesets, TCommon, variantToString } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
-import { TAddIn, TProvider, Types, withStylesCreator, ScrollView, View, Text, Icon, AnimatedView, AppContainer } from 'reactxx'
+import { TAddIn, Types, TProvider, withStylesCreator, View, Text, Icon, AnimatedView, ScrollView, AppContainer } from 'reactxx'
 import { LoremIpsum, TCommonStyles } from 'reactxx-basic'
 import { TComps } from 'reactxx-primitives'
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text } from 'reactxx';
+import { Text } from 'reactxx-primitives';
 
 class App extends React.Component {
   render() {

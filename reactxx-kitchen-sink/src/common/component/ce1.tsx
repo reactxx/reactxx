@@ -3,7 +3,6 @@ import ReactN from 'react-native'
 
 import { mergeRulesets, TCommon, Types, withStylesCreator } from 'reactxx-basic';
 import MDI from 'reactxx-mdi'
-//import { TProvider, Types, Text, View, ScrollView, Icon, withStylesCreator } from 'reactxx'
 import { TComps, Text, View, ScrollView, Icon } from 'reactxx-primitives'
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Types, Text, View } from 'reactxx'
-import { LoremIpsum } from 'reactxx-basic'
+import { Text, View } from 'reactxx-primitives'
+import { Types, LoremIpsum } from 'reactxx-basic'
 
 const App: React.SFC = props => {
   const bars: Types.ViewRulesetX = { flexGrow: 0, justifyContent: 'center', alignItems: 'center', height: 48, padding: 5 }

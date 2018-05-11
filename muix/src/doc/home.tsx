@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { View as ViewX, Text as TextX } from 'reactxx'
+import { View as ViewX, Text as TextX } from 'reactxx-primitives'
 
 const AppWeb: React.SFC = props => <div style={{ marginTop: '20px', backgroundColor: 'red', overflow: 'scroll' }}>
   <span style={{ color: 'yellow', fontSize: '24px' }} onClick={ev => alert('hallo web world')}>HALLO WEB WORLD</span>

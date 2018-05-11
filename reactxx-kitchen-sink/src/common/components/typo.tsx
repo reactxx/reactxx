@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Types, Text } from 'reactxx'
-import { TComps } from 'reactxx-primitives'
+import { Text, TComps } from 'reactxx-primitives'
+import { Types } from 'reactxx-basic'
 
 
 const typo = {

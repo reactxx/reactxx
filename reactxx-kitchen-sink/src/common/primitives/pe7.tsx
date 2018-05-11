@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { Types } from 'reactxx'
+import { Text } from 'reactxx-primitives'
 import { LoremIpsum } from 'reactxx-basic'
 
-import { Text, } from 'reactxx'
+import { Types } from 'reactxx'
 
 const App: React.SFC = props => {
   const changeColorRuleset: Types.TextRulesetX = {

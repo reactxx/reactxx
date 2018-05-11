@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ScrollView } from 'reactxx'
+import { ScrollView } from 'reactxx-primitives'
 import { LoremIpsum } from 'reactxx-basic'
 import { H1, H2, H3, H4, H5, U, I, B, A, Blocquote, P } from '../components/typo'
 
