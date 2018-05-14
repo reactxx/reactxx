@@ -82,7 +82,7 @@ export const mediaQFlags = <T extends string>(input: () => { $mediaq: TMediaQ.No
   const res = () => {
     const { $mediaq, theme } = input()
     getNotifyBreakpointsResult = getNotifyBreakpoints($mediaq, theme)
-    if (getNotifyBreakpointsResult.observedBits !== 0) return <MediaQConsumer>{render}</MediaQConsumer>
+    if (getNotifyBreakpointsResult.observedBits !== 0) return <MediaQConsumer unstable_observedBits={getNotifyBreakpointsResult.observedBits}>{render}</MediaQConsumer>
     output(null)
     return next()
   }
@@ -108,6 +108,7 @@ export const mediaQSheet = <T extends string>(input: () => TMediaQ.MediaQSheet, 
 }
 
 export class MediaQ_AppContainer extends React.Component {
+
   constructor(props) {
     super(props)
     warning(!appContainer, 'Only single mediaq.AppContainer component instance allowed')
@@ -125,7 +126,7 @@ export const mediaQProviderExists = () => !!appContainer
 
 export const refresh = () => {
   checkAppContainer()
-  appContainer.forceUpdate()
+  appContainer.setState({})
 }
 
 
@@ -218,11 +219,8 @@ let appContainer: MediaQ_AppContainer
 
 const context = React.createContext<boolean[]>([], (prev, next) => {
   let res = 0
-  for (let i = 0; i < Math.max(prev.length, next.length); i++) {
-    if (i >= prev.length) res = res | 1 << i
-    else if (i >= next.length) res = res | 1 << i
-    else if (prev[i] !== next[i]) res = res | 1 << i
-  }
+  for (let i = 0; i < Math.max(prev.length, next.length); i++)
+    if (i >= prev.length || i >= next.length || prev[i] !== next[i]) res |= 1 << i
   return res
 })
 

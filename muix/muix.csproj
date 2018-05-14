@@ -154,12 +154,13 @@
     <TypeScriptCompile Include="src\basic\typings\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\common\animation\add-in.ts" />
     <TypeScriptCompile Include="src\ks\common\animation\types.ts" />
-    <TypeScriptCompile Include="src\ks\common\mediaq\add-in.ts" />
+    <TypeScriptCompile Include="src\mediaq\typings\add-in.ts" />
     <TypeScriptCompile Include="src\ks\common\mediaq\index.tsx" />
+    <TypeScriptCompile Include="src\ks\common\mediaq\me2.tsx" />
     <TypeScriptCompile Include="src\ks\common\mediaq\me1.tsx" />
     <TypeScriptCompile Include="src\basic\common\to-platform-all.ts" />
-    <TypeScriptCompile Include="src\ks\common\mediaq\types.ts" />
-    <TypeScriptCompile Include="src\ks\common\mediaq\withStyles.tsx" />
+    <TypeScriptCompile Include="src\mediaq\typings\types.ts" />
+    <TypeScriptCompile Include="src\mediaq\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\ks\react-16.3.ts" />
     <TypeScriptCompile Include="src\fela\index.ts" />
     <TypeScriptCompile Include="src\doc\home.tsx" />

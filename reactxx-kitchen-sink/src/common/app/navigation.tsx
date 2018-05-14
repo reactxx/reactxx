@@ -25,7 +25,7 @@ const webSandboxUrl: GetExampleUrl = (ex) => {
   return `${sandBoxUrl}module=%2Fsrc%2Fcommon%2F${name}.tsx&initialpath=${name}`
 }
 
-const debugPath = 'mediaq/me1' 
+const debugPath = 'mediaq/me2' 
 
 class App extends React.Component<{}, KSink.Example> {
 

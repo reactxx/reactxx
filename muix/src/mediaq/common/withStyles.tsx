@@ -4,8 +4,8 @@ import ReactN from 'react-native'
 import { TCommon, ThemeProvider, theme, renderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformSheet_all as toPlatformSheet, toPlatformRuleSet_all as toPlatformRuleSet } from 'reactxx-basic'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet } from 'reactxx-mediaq'
 
-import { Types } from './types'
-import { TAddIn } from './add-in'
+import { Types } from '../typings/types'
+import { TAddIn } from '../typings/add-in'
 
 /************************
 * TRenderState

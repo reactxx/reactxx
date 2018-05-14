@@ -2,10 +2,7 @@ import React from 'react'
 
 import { text, textSheet, TComps, CompNames } from 'reactxx-primitives'
 import { LoremIpsum } from 'reactxx-basic'
-import { MediaQ_AppContainer } from 'reactxx-mediaq'
-
-import { Types } from './types'
-import { withStylesCreator } from './withStyles'
+import { MediaQ_AppContainer, Types, withStylesCreator } from 'reactxx-mediaq'
 
 const App: React.SFC = props => {
   const changeColorRuleset: Types.TextRulesetX = {
@@ -15,6 +12,7 @@ const App: React.SFC = props => {
       '1024-': { color: 'blue', },
     },
     fontSize: 20,
+    margin: 10,
   }
   return <MediaQ_AppContainer>
     <Text className={changeColorRuleset} developer_flag>{LoremIpsum(40)}</Text>
