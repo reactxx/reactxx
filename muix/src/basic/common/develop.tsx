@@ -1,5 +1,7 @@
 import React from 'react'
 
+const DEV_MODE = process.env.NODE_ENV === 'development'
+
 export const LoremIpsum = (words: 2 | 5 | 10 | 20 | 40 | 80 | 160) => {
   switch (words) {
     case 2: return 'Lorem ipsum. '
@@ -14,17 +16,25 @@ export const LoremIpsum = (words: 2 | 5 | 10 | 20 | 40 | 80 | 160) => {
 
 
 //Helper components, counts number of its render() method calls
-export class RenderCounter extends React.Component {
+export class RenderCounter extends React.Component<{ children: (count: number) => React.ReactNode}> {
   counter = 0
   render() {
     this.counter++
-    return (this.props.children as React.SFC<any>)({
-      renderCount: <span style={{ color: 'gray', fontWeight: 'normal' }}> {` (renders: ${this.counter})`}</span>
-    })
+    return this.props.children(this.counter)
   }
 }
 
-//RenderCounter example:
-const RenderCounterExample: React.SFC = () => <RenderCounter>
-  {({ renderCount }) => <div>Render counter example: {renderCount}</div>}
-</RenderCounter>
+export const renderCounter = (input: () => { developer_flag: boolean }, output: (count: number) => void, next: () => React.ReactNode) => {
+  const render = (count: number) => {
+    output(count)
+    return next()
+  }
+  const res = () => {
+    const { developer_flag } = input()
+    if (developer_flag) return <RenderCounter>{render}</RenderCounter>
+    output(undefined)
+    return next()
+  }
+  return res
+}
+

@@ -29,20 +29,30 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
 
   const finalize = (defaultProps, cascadingProps, props) => {
     // merge properties
-    const finalProps = { ...props }
+    let finalProps = { ...props } as Types.PropsX
     if (defaultProps || cascadingProps) {
-      const inherited = defaultProps && cascadingProps ? deepMerges({}, defaultProps, cascadingProps) : (defaultProps ? defaultProps : cascadingProps)
-      for (const p in inherited) {
-        const finalPropsP = finalProps[p]; const inheritedP = inherited[p]
-        finalProps[p] = finalPropsP && isObjectLiteral(inheritedP) ?
-          deepMerges({}, inheritedP, finalPropsP) :
-          finalPropsP || inheritedP
-      }
+      const inherited = defaultProps && cascadingProps ? deepMerges({}, defaultProps, cascadingProps) : defaultProps || cascadingProps
+      if (inherited)
+        for (const p in inherited) {
+          const finalPropsP = finalProps[p]; const inheritedP = inherited[p]
+          finalProps[p] = finalPropsP && isObjectLiteral(inheritedP) ?
+            deepMerges({}, inheritedP, finalPropsP) :
+            finalPropsP || inheritedP
+        }
+    }
+    // remove developer_flag in non 'development' ENV
+    if (!DEV_MODE && finalProps.developer_flag) delete finalProps.developer_flag
+    // process $web and $native props part
+    const { $web, $native } = finalProps
+    if ($web || $native) {
+      delete finalProps.$web; delete finalProps.$native
+      if (window.isWeb && $web) finalProps = deepMerges({}, finalProps, $web)
+      else if (!window.isWeb && $native) finalProps = deepMerges({}, finalProps, $native)
     }
     // separate addIns props
     const addInProps: any = {}
     for (const p in finalProps) {
-      if (p.startsWith('$') || p === TAddIn.addInProps.CONSTANT || p === TAddIn.addInProps.ignore) {
+      if (p.startsWith('$') || p === TAddIn.addInProps.CONSTANT || p === TAddIn.addInProps.ignore || p === TAddIn.addInProps.developer_flag) {
         addInProps[p] = finalProps[p]; delete finalProps[p] // move props from finalProps to $props
       }
     }

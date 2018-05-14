@@ -20,7 +20,7 @@ const anyView = (isAnim: boolean) => (props => {
 
 const anyText = (isAnim: boolean) => (props => {
   const ActText = isAnim ? Animated.Text : TextRN
-  const { system: { style, classes }, onPress, url, ...rest } = props
+  const { system: { style, classes, developer_RenderCounter }, onPress, url, ...rest } = props
   const rootStyle = mergeRulesets<'Text'>(classes.root, props.numberOfLines === 1 && classes.singleLineStyle, style)
   //Link to URL
   const doPress = !url ? onPress : () => Linking.canOpenURL(url).then(supported => {
@@ -28,7 +28,11 @@ const anyText = (isAnim: boolean) => (props => {
     return Linking.openURL(url);
   }).catch(err => warning(false, `An error occurred: ${err}, ${url}`))
 
-  return <ActText style={rootStyle} {...rest} onPress={onPress} />
+  if (developer_RenderCounter) {
+    const txt = '[' + developer_RenderCounter + '] '
+    return React.Children.count(props.children) == 0 ? txt : [txt, ...React.Children.toArray(props.children)]
+  } else
+    return <ActText style={rootStyle} {...rest} onPress={onPress} />
 }) as Types.CodeSFCNative<TComps.TextShape>
 
 

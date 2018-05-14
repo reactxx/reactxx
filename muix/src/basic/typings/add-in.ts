@@ -20,15 +20,17 @@ export namespace TAddIn {
 
   export interface ShapeDefault { }
 
-/******************************************
-    COMPONENT PROPS
-  *******************************************/
+  /******************************************
+      COMPONENT PROPS
+    *******************************************/
 
   //******************** Cross platform 
-  export enum addInProps { ignore = 'ignore', CONSTANT = 'CONSTANT'}
+  export enum addInProps { ignore = 'ignore', CONSTANT = 'CONSTANT', developer_flag ='developer_flag'}
   export interface PropsX<R extends Types.Shape = Types.Shape> {
     [addInProps.ignore]?: boolean
-    [addInProps.CONSTANT]?: boolean,
+    [addInProps.CONSTANT]?: boolean
+    [addInProps.developer_flag]?: boolean
+    developer_RenderCounter: number
   }
 
   //******************** Platform specific

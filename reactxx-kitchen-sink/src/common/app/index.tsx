@@ -3,6 +3,7 @@ import React from 'react'
 import NavigApp from './navigation'
 import { primitives } from '../primitives/index'
 import { component } from '../component/index'
+import { mediaqs } from '../mediaq/index'
 import * as comps from '../components/index'
 import { AppContainer } from 'reactxx'
 
@@ -36,7 +37,8 @@ export const examples: KSink.Example[] = [
   navigationExample,
   ...components,
   ...primitives,
-  ...component
+  ...component,
+  ...mediaqs,
 ]
 
 export const nameToExample = (name: string) => examples.find(e => e.name===name) || navigationExample

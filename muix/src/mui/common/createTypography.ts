@@ -1,7 +1,7 @@
 ﻿import muiCreateTypography from 'material-ui/styles/createTypography'
 
-import { deepMerge, TCommon } from 'reactxx-basic'
-import { Types, toPlatformSheet } from 'reactxx'
+import { deepMerge, TCommon, toPlatformSheet_all as toPlatformSheet } from 'reactxx-basic'
+import { Types } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
 
 import * as Mui from '../typings/mui'

@@ -85,7 +85,6 @@ export namespace Types {
       $native?: Partial<TCommon.getPropsNative<R>> //native specific style
       classes?: PartialSheetCreatorX<R> // cross platform sheet
       className?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<TCommon.getStyle<R>, R>>
-      developer_flag?: boolean
     } & TAddIn.PropsX<R>
     >
 
@@ -96,8 +95,7 @@ export namespace Types {
 
   export type omitPropNames = 'system' | 'style' | 'classes' | 'className' | keyof TAddIn.CodeProps
 
-  export interface CodeSystem<R extends Shape = Shape> {
-    developer_flag: boolean
+  export interface CodeSystem<R extends Shape = Shape> extends TAddIn.PropsX {
     theme: TCommon.getTheme<R>
     variant: TCommon.getVariant<R>
   }

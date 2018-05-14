@@ -9,6 +9,7 @@ import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
 import { FinalizeProps } from './finalize-props'
+import { renderCounter } from './develop'
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
@@ -93,11 +94,11 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
       return this.renderer()
     }
 
-    renderCodeComponent = () => {
-      const { codeClassesPatch, codeProps, codeClasses, codeSystemProps } = this.state
+    renderComponentCode = () => {
+      const { codeClassesPatch, codeProps, codeClasses, codeSystemProps, addInProps } = this.state
 
-      if (DEV_MODE && codeSystemProps.developer_flag) {
-        const { themeContext, finalProps, propsPatch } = this.state
+      if (addInProps.developer_flag) {
+        const { themeContext, finalProps, propsPatch, addInProps, addInClasses } = this.state
         console.log(
           `### withStyles RENDER CODE for ${name}`,
           '\nprops: ', this.props,
@@ -108,16 +109,20 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
           '\ncodeSystemProps: ', codeSystemProps,
           '\ncodeClasses: ', codeClasses,
           '\ncodeClassesPatch: ', codeClassesPatch,
+          '\naddInProps: ', addInProps,
+          '\naddInClasses: ', addInClasses,
         )
       }
 
       // apply patches
-      let classes = codeClasses as Types.Sheet<R>
-      if (codeClassesPatch.length > 0) classes = deepMerges({}, codeClasses, ...codeClassesPatch)
-      else if (codeClasses.__isCached) classes = { ...codeClasses } as Types.Sheet<R>
+      let classes = codeClasses as Types.Sheet<R> & { __isCached?: boolean }
+      if (codeClassesPatch.length > 0) {
+        classes = deepMerges({}, codeClasses, ...codeClassesPatch)
+        delete classes.__isCached
+      }
 
       // call component code
-      return <CodeComponent {...codeProps as Types.CodeProps<R>} system={{ ...codeSystemProps, classes }}/>
+      return <CodeComponent {...codeProps as Types.CodeProps<R>} system={{ ...codeSystemProps, ...this.state.addInProps, classes }} />
     }
 
     renderer =
@@ -130,7 +135,9 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
           renderAddIn.addInHOCsX(this.state,
             toPlatform(this.state,
               renderAddIn.addInHOCs(this.state,
-                this.renderCodeComponent
+                renderCounter(() => ({ developer_flag: this.state.addInProps.developer_flag }), count => { this.state.addInProps.developer_RenderCounter = count },
+                  this.renderComponentCode
+                )
               )
             )
           )
@@ -163,16 +170,15 @@ export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()
 
 const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderState) => {
 
-  const { propsPatch, finalProps } = renderState
-  const { classes, className, style, onPress, onLongPress, onPressIn, onPressOut, $web, $native, developer_flag, CONSTANT, ...rest } = finalProps as Types.PropsX & TCommonStyles.OnPressAllX
+  const { propsPatch, finalProps, addInProps } = renderState
+  const { classes, className, style, onPress, onLongPress, onPressIn, onPressOut, $web, $native, ...rest } = finalProps as Types.PropsX & TCommonStyles.OnPressAllX
   const { theme, $cache } = renderState.themeContext
 
   //** STATIC SHEET
-  let staticSheet: Types.Sheet
+  let staticSheet: Types.Sheet & { __isCached?: boolean }
   let getStaticSheet: () => Types.Sheet
   let variantCacheId
   let variant = null
-  let isCached = false
   if (typeof createSheetX !== 'function') {
     variantCacheId = '#static#'
     getStaticSheet = () => renderAddIn.toPlatformSheet(createSheetX)
@@ -194,18 +200,24 @@ const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, opti
   }
 
   if (!staticSheet) {
-    isCached = true
     let compCache = $cache[name]
     if (!compCache) $cache[name] = compCache = {}
     staticSheet = compCache[variantCacheId]
-    if (!staticSheet) compCache[variantCacheId] = staticSheet = getStaticSheet();
+    if (!staticSheet) {
+      compCache[variantCacheId] = staticSheet = getStaticSheet();
+      staticSheet.__isCached = true
+    }
   }
 
   //** MERGE staticSheet with classes and className
   const root = className && { root: renderAddIn.toPlatformRuleSet(callCreator(theme, variant, className)) }
-  renderState.codeClasses = classes || root ? deepModify(staticSheet, renderAddIn.toPlatformSheet(callCreator(theme, variant, classes)), root) : staticSheet
+  if (classes || root) {
+    renderState.codeClasses = deepModify(staticSheet, renderAddIn.toPlatformSheet(callCreator(theme, variant, classes)), root)
+    delete renderState.codeClasses.__isCached
+  } else
+    renderState.codeClasses = staticSheet
 
-  if (DEV_MODE && finalProps.developer_flag) {
+  if (addInProps.developer_flag) {
     console.log(
       `### withStyles PREPARE SHEET for ${name}`,
       '\nstaticSheet: ', staticSheet,
@@ -219,15 +231,17 @@ const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, opti
   renderState.addInClasses = {} as any
   for (const p in renderState.codeClasses) {
     if (p.startsWith('$')) {
-      // cannot modify __isCached codeClasses => make shallow copy
-      if (finalCodeClasses === renderState.codeClasses && isCached) finalCodeClasses = { ...renderState.codeClasses } 
+      if (finalCodeClasses.__isCached) { // cannot modify __isCached codeClasses => make shallow copy
+        finalCodeClasses = { ...renderState.codeClasses }
+        delete finalCodeClasses.__isCached
+      }
       renderState.addInClasses[p] = finalCodeClasses[p]
       delete finalCodeClasses[p] // modify finalCodeClasses
       continue
     }
   }
   renderState.codeClasses = finalCodeClasses
-  
+
 
   renderState.codeProps = rest as Types.CodeProps
 
@@ -238,7 +252,6 @@ const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, opti
     classes: null,
     style: renderAddIn.toPlatformRuleSet(callCreator(theme, variant, style)),
     variant,
-    developer_flag,
   } as Types.CodeSystemProps
 
   toPlatformEvents($web, $native as TCommonStyles.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, renderState.codeProps)

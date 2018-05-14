@@ -134,7 +134,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\animation\common\animation.tsx_" />
     <TypeScriptCompile Include="src\activable\common\activable.tsx" />
     <TypeScriptCompile Include="src\activable\native\index.ts" />
     <TypeScriptCompile Include="src\activable\web\index.ts" />
@@ -156,13 +155,16 @@
     <TypeScriptCompile Include="src\ks\common\animation\add-in.ts" />
     <TypeScriptCompile Include="src\ks\common\animation\types.ts" />
     <TypeScriptCompile Include="src\ks\common\mediaq\add-in.ts" />
+    <TypeScriptCompile Include="src\ks\common\mediaq\index.tsx" />
+    <TypeScriptCompile Include="src\ks\common\mediaq\me1.tsx" />
+    <TypeScriptCompile Include="src\basic\common\to-platform-all.ts" />
     <TypeScriptCompile Include="src\ks\common\mediaq\types.ts" />
+    <TypeScriptCompile Include="src\ks\common\mediaq\withStyles.tsx" />
     <TypeScriptCompile Include="src\ks\react-16.3.ts" />
     <TypeScriptCompile Include="src\fela\index.ts" />
     <TypeScriptCompile Include="src\doc\home.tsx" />
     <TypeScriptCompile Include="src\ks\common\app\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\app\navigation.tsx" />
-    <None Include="src\ks\common\components\responsible-drawer\responsible-drawer.tsx_" />
     <TypeScriptCompile Include="src\ks\common\components\typo.tsx" />
     <TypeScriptCompile Include="src\ks\common\components\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\components\responsible-drawer\responsible-drawer.tsx" />
@@ -197,7 +199,6 @@
     <TypeScriptCompile Include="src\primitives\web\comps.tsx" />
     <TypeScriptCompile Include="src\primitives\web\index.ts" />
     <TypeScriptCompile Include="src\basic\common\theme.tsx" />
-    <TypeScriptCompile Include="src\reactxx\common\to-platform.ts" />
     <TypeScriptCompile Include="src\reactxx\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\reactxx\native\comps.tsx" />
     <TypeScriptCompile Include="src\reactxx\typings\add-in.ts" />

@@ -9,6 +9,7 @@ import { H1, H2, H3, H4, H5, U, I, B, A, Blocquote, P } from '../components/typo
 import { examples, nameToExample, exampleToElement, components, navigationExample, KSink } from './index'
 import { primitives } from '../primitives/index'
 import { component } from '../component/index'
+import { mediaqs } from '../mediaq/index'
 import { ResponsibleDrawer } from '../components/responsible-drawer/responsible-drawer'
 
 export type GotoExample = (example: KSink.Example) => void
@@ -24,7 +25,7 @@ const webSandboxUrl: GetExampleUrl = (ex) => {
   return `${sandBoxUrl}module=%2Fsrc%2Fcommon%2F${name}.tsx&initialpath=${name}`
 }
 
-const debugPath = 'component/ce1' 
+const debugPath = 'mediaq/me1' 
 
 class App extends React.Component<{}, KSink.Example> {
 
@@ -60,6 +61,7 @@ const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ chil
     {DrawerGroup('Primitives', primitives, gotoExample, actName)}
     {DrawerGroup('Component', component, gotoExample, actName)}
     {DrawerGroup('Components', components, gotoExample, actName)}
+    {DrawerGroup('Media Queries', mediaqs, gotoExample, actName)}
   </ScrollView>
 </View>
 

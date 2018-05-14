@@ -1,15 +1,11 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { toPlatformSheet_all as toPlatformSheet, toPlatformRuleSet_all as toPlatformRuleSet, TCommon, ThemeProvider, theme, renderAddIn, withStyles, TRenderState as TRenderStateBasic } from 'reactxx-basic'
-import { animations, TAnimation } from 'reactxx-animation'
+import { TCommon, ThemeProvider, theme, renderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformSheet_all as toPlatformSheet, toPlatformRuleSet_all as toPlatformRuleSet } from 'reactxx-basic'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet } from 'reactxx-mediaq'
-import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
 
-import { Types } from '../typings/types'
-import { TAddIn } from '../typings/add-in'
-
-const DEV_MODE = process.env.NODE_ENV === 'development'
+import { Types } from './types'
+import { TAddIn } from './add-in'
 
 /************************
 * TRenderState
@@ -27,7 +23,7 @@ export interface TRenderState extends TRenderStateBasic {
 renderAddIn.toPlatformSheet = toPlatformSheet
 renderAddIn.toPlatformRuleSet = toPlatformRuleSet
 
-// before converting props and sheet to platform dependent form
+// used before converting props and sheet to platform dependent form
 renderAddIn.addInHOCsX = (state: TRenderState, next) =>
   mediaQFlags( // media flags, e.g. {mobile:false, tablet:true, desktop:false }
     () => ({ $mediaq: state.addInProps.$mediaq, theme: state.themeContext.theme }),
@@ -36,14 +32,10 @@ renderAddIn.addInHOCsX = (state: TRenderState, next) =>
 
 // after converting props and sheet to platform dependent form
 renderAddIn.addInHOCs = (state: TRenderState, next) =>
-  mediaQSheet( // actualize mediaq part of ruleset
+  mediaQSheet( // actualize mediaq part of the ruleset
     () => state.codeClasses as TMediaQ.MediaQSheet,
     mediaSheetPatch => mediaSheetPatch && state.codeClassesPatch.push(mediaSheetPatch as Types.Sheet),
-    animations( // process animation $animations part of sheet
-      () => state.addInClasses.$animations,
-      animations => state.codeSystemProps.animations = animations,
-      next
-    )
+    next
   )
 
 /************************
