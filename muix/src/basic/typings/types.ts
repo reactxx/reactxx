@@ -163,10 +163,12 @@ export namespace Types {
     className?: Types.RulesetX<TCommon.getStyle<R>>
   }>
 
+  export type TDefaultProps<R extends Types.Shape =  Types.Shape> = PropsXOverwrite<R> | ((theme: TCommon.getTheme<R>) => PropsXOverwrite<R>)
+
   export interface WithStyleOptions_ComponentX<R extends Types.Shape =  Types.Shape> extends TCommon.WithStyleOptions {
     getVariant?: (props: Types.PropsX<R> & TAddIn.GetVariant<R>, theme?: TCommon.getTheme<R>) => TCommon.getVariant<R>
     variantToString?: (variant: TCommon.getVariant<R>) => string
-    defaultProps?: PropsXOverwrite<R>
+    defaultProps?: TDefaultProps<R>
   }
 
 }

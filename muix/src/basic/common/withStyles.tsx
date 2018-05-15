@@ -59,6 +59,9 @@ export const withStylesCreator = <R extends Types.Shape, TStatic extends {} = {}
 
 const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCommon.getNameType<R>, sheetCreator: Types.SheetCreatorX<R>, _options?: Types.WithStyleOptions_ComponentX<R>, overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => (CodeComponent: Types.CodeComponentType<R>) => {
 
+  warning(!uniqueNameCheck[name], `*** withStylesCreator: Component with name=${name} already exist`)
+  uniqueNameCheck[name] = true
+
   type TPropsX = Types.PropsX<R>
 
   //*** OPTIONS
@@ -126,12 +129,12 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
     }
 
     renderer =
-      finalizeProps(
-        () => this.props,
-        ({ finalProps, addInProps }) => { this.state.finalProps = finalProps; this.state.addInProps = addInProps },
-        theme(
-          () => ({ withTheme: options.withTheme }),
-          themeContext => this.state.themeContext = themeContext,
+      theme(
+        () => ({ withTheme: options.withTheme }),
+        themeContext => this.state.themeContext = themeContext,
+        finalizeProps(
+          () => ({ props: this.props, theme: this.state.themeContext.theme }),
+          ({ finalProps, addInProps }) => { this.state.finalProps = finalProps; this.state.addInProps = addInProps },
           renderAddIn.addInHOCsX(this.state,
             toPlatform(this.state,
               renderAddIn.addInHOCs(this.state,
@@ -168,6 +171,8 @@ export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()
 * PRIVATE
 *************************/
 
+const uniqueNameCheck: { [name: string]: boolean } = {}
+
 const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderState) => {
 
   const { propsPatch, finalProps, addInProps } = renderState
@@ -184,8 +189,8 @@ const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, opti
     getStaticSheet = () => renderAddIn.toPlatformSheet(createSheetX)
   } else {
     if (options && options.getVariant) {
-      const propsWithMediaQ = propsPatch.length > 0 ? Object.assign({}, finalProps, ...propsPatch) : finalProps
-      variant = options.getVariant(propsWithMediaQ, theme)
+      const propsWithPatch = propsPatch.length > 0 ? Object.assign({}, finalProps, ...propsPatch) : finalProps
+      variant = options.getVariant(propsWithPatch, theme)
       variantCacheId = options.variantToString && options.variantToString(variant)
       if (variantCacheId) {
         getStaticSheet = () => renderAddIn.toPlatformSheet(callCreator(theme, variant, createSheetX))

@@ -129,6 +129,8 @@ export const refresh = () => {
   appContainer.setState({})
 }
 
+export const breaksToString = (start: number, end: number) => `${start ? start : ''}-${end ? end : ''}`
+
 
 /************************
 * PRIVATE

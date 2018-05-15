@@ -8,7 +8,7 @@ import { TAddIn } from '../typings/add-in';
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
-export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCascading?: boolean; defaultProps?: Types.PropsXOverwrite }) => {
+export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCascading?: boolean; defaultProps?: Types.TDefaultProps }) => {
 
   const { Provider: CascadingProvider, Consumer: CascadingConsumer } = options.withCascading ? React.createContext<TPropsX>(null) : { Provider: null, Consumer: null } as React.Context<TPropsX>
 
@@ -31,6 +31,7 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
     // merge properties
     let finalProps = { ...props } as Types.PropsX
     if (defaultProps || cascadingProps) {
+      if (typeof defaultProps === 'function') defaultProps = defaultProps(null)
       const inherited = defaultProps && cascadingProps ? deepMerges({}, defaultProps, cascadingProps) : defaultProps || cascadingProps
       if (inherited)
         for (const p in inherited) {
@@ -59,16 +60,18 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
     return { finalProps: finalProps as TPropsX, addInProps: addInProps as TAddIn.PropsX }
   }
 
-  const finalizeProps = (input: () => Types.PropsX, output: (par: { finalProps: Types.PropsX, addInProps: TAddIn.PropsX }) => void, next: () => React.ReactNode) => {
-    let props: Types.PropsX
+  const finalizeProps = (input: () => { props: Types.PropsX, theme }, output: (par: { finalProps: Types.PropsX, addInProps: TAddIn.PropsX }) => void, next: () => React.ReactNode) => {
+    let props: Types.PropsX, defaultProps: Types.PropsX
     const render = (inheritedProps: Types.PropsX) => {
-      output(finalize(options.defaultProps, inheritedProps, props))
+      output(finalize(defaultProps, inheritedProps, props))
       return next()
     }
     const res = () => {
-      props = input()
+      const inp = input()
+      props = inp.props
+      defaultProps = typeof options.defaultProps === 'function' ? options.defaultProps(inp.theme) : options.defaultProps
       if (options.withCascading) return <CascadingConsumer>{render}</CascadingConsumer>
-      output(finalize(options.defaultProps, null, props))
+      output(finalize(defaultProps, null, props))
       return next()
     }
     return res

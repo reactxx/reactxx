@@ -46,13 +46,10 @@ export namespace TAddIn {
     mediaqFlags?: TMediaQ.MediaFlags<getMediaQ<R>>
   }
 
-  export interface CodePropsWeb<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> {
-  }
+  export interface CodePropsWeb<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> { }
 
-  export interface CodePropsNative<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> {
-  }
+  export interface CodePropsNative<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> { }
 
-  export interface CodeProps<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> {
-  }
+  export interface CodeProps<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> { }
 
 }

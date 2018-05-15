@@ -5,7 +5,12 @@ import { TCommon } from '../typings/common'
 
 const globalThemeContext: TCommon.ThemeContext = { theme: null, $cache: {} }
 const themeContext = React.createContext<TCommon.ThemeContext>(null)
-export const namedThemes: { [themeName: string]: TCommon.ThemeBase } = {}
+const namedThemes: { [themeName: string]: TCommon.ThemeBase } = {}
+
+export const registerTheme = <T extends {} = never>(name: string, theme: T) => {
+  warning(!namedThemes[name], `Theme ${name} already registered`)
+  namedThemes[name] = theme
+}
 
 export const theme = (input: () => { withTheme: boolean }, output: (outputPar: TCommon.ThemeContext) => void, next: () => React.ReactNode) => {
   const render = (renderPar: TCommon.ThemeContext) => {
