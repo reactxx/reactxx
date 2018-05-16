@@ -4,13 +4,14 @@ import ReactN from 'react-native'
 import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
 
-export const toPlatformEvents = ($web: TCommonStyles.OnPressAllWeb, $native: TCommonStyles.OnPressAllNative, propsX: TCommonStyles.OnPressAllX, cp: TCommonStyles.OnPressAllNative | TCommonStyles.OnPressAllWeb, setActive?: (active: boolean) => void) => {
+export const toPlatformEvents = ($web: Types.OnPressAllWeb, $native: Types.OnPressAllNative, propsX: Types.OnPressAllX, cp: Types.OnPressAllNative | Types.OnPressAllWeb, cpx: Types.OnPressAllX) => {
   const { onPress, onLongPress, onPressIn, onPressOut } = propsX
-  if (isType<TCommonStyles.OnPressAllWeb>(cp)) {
+  cpx.onPress = onPress; cpx.onLongPress = onLongPress; cpx.onPressIn = onPressIn; cpx.onPressOut = onPressOut;
+  if (isType<Types.OnPressAllWeb>(cp)) {
     const cl = $web && $web.onClick || onPress; if (cl) cp.onClick = cl
     const cl2 = $web && $web.onMouseDown || onPressIn; if (cl2) cp.onMouseDown = cl2
     const cl3 = $web && $web.onMouseUp || onPressOut; if (cl3) cp.onMouseUp = cl3
-  } else if (isType<TCommonStyles.OnPressAllNative>(cp)) {
+  } else if (isType<Types.OnPressAllNative>(cp)) {
     const cl = $native && $native.onPress || onPress; if (cl) cp.onPress = cl
     const cl1 = $native && $native.onLongPress || onLongPress; if (cl1) cp.onLongPress = cl1
     const cl2 = $native && $native.onPressIn || onPressIn; if (cl2) cp.onPressIn = cl2

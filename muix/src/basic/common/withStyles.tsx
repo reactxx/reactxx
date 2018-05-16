@@ -29,6 +29,8 @@ export interface TRenderState {
   codeProps?: Types.CodeProps // platform dependent props
   codeSystemProps?: Types.CodeSystemProps // props, processed by code
   codeClasses?: Types.Sheet // platform dependent classes
+
+  finalCodeProps?: Types.CodeProps
 }
 
 /************************
@@ -38,16 +40,16 @@ export interface TRenderState {
 export interface RenderAddIn {
   toPlatformSheet: (sheet: Types.SheetX | Types.PartialSheetX) => Types.Sheet
   toPlatformRuleSet: (style: Types.RulesetX) => TCommonStyles.Ruleset
-  addInHOCsX: (state: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
-  addInHOCs: (state: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
+  beforeToPlatform: (state: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
+  afterToPlatform: (state: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
 }
 
-// addIn configuration instance
+// addIn configuration
 export const renderAddIn: RenderAddIn = {
   toPlatformSheet,
   toPlatformRuleSet,
-  addInHOCsX: (state, next) => next,
-  addInHOCs: (state, next) => next
+  beforeToPlatform: (state, next) => next,
+  afterToPlatform: (state, next) => next
 }
 
 /************************
@@ -84,7 +86,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
   //****************************
   // Styled COMPONENT
   //****************************
-  class Styled extends React.Component<Types.PropsX> {
+  class Styled extends React.Component<Types.PropsX, TRenderState> {
 
     state: TRenderState = {
       propsPatch: [],
@@ -124,8 +126,13 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
         delete classes.__isCached
       }
 
+      this.state.finalCodeProps = {
+        ...codeProps,
+        system: { ...codeSystemProps, ...this.state.addInProps, classes }
+      }
+
       // call component code
-      return <CodeComponent {...codeProps as Types.CodeProps<R>} system={{ ...codeSystemProps, ...this.state.addInProps, classes }} />
+      return <CodeComponent {...this.state.finalCodeProps as Types.CodeProps<R>} />
     }
 
     renderer =
@@ -133,11 +140,11 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
         () => ({ withTheme: options.withTheme }),
         themeContext => this.state.themeContext = themeContext,
         finalizeProps(
-          () => ({ props: this.props, theme: this.state.themeContext.theme }),
+          () => ({ props: this.props, theme: this.state.themeContext.theme, eventCurrent: this.state }),
           ({ finalProps, addInProps }) => { this.state.finalProps = finalProps; this.state.addInProps = addInProps },
-          renderAddIn.addInHOCsX(this.state,
+          renderAddIn.beforeToPlatform(this.state,
             toPlatform(this.state,
-              renderAddIn.addInHOCs(this.state,
+              renderAddIn.afterToPlatform(this.state,
                 renderCounter(() => ({ developer_flag: this.state.addInProps.developer_flag }), count => { this.state.addInProps.developer_RenderCounter = count },
                   this.renderComponentCode
                 )
@@ -176,7 +183,7 @@ const uniqueNameCheck: { [name: string]: boolean } = {}
 const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderState) => {
 
   const { propsPatch, finalProps, addInProps } = renderState
-  const { classes, className, style, onPress, onLongPress, onPressIn, onPressOut, $web, $native, ...rest } = finalProps as Types.PropsX & TCommonStyles.OnPressAllX
+  const { classes, className, style, onPress, onLongPress, onPressIn, onPressOut, $web, $native, ...rest } = finalProps as Types.PropsX & Types.OnPressAllX
   const { theme, $cache } = renderState.themeContext
 
   //** STATIC SHEET
@@ -259,7 +266,7 @@ const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, opti
     variant,
   } as Types.CodeSystemProps
 
-  toPlatformEvents($web, $native as TCommonStyles.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, renderState.codeProps)
+  toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, renderState.codeProps, renderState.codeSystemProps)
 }
 const callCreator = <T extends {}>(theme: TCommon.ThemeBase, variant, creator: T | ((theme: TCommon.ThemeBase, variant) => T)) => typeof creator === 'function' ? creator(theme, variant) : creator
 

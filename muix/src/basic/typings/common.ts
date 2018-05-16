@@ -7,6 +7,14 @@ import { TCommonStyles } from 'reactxx-basic'
 export namespace TCommon {
 
   //******************** Shape
+  //export const enum TEvents { onPress = 'onPress', onLongPress = 'onLongPress', onPressIn = 'onPressIn', onPressOut = 'onPressOut' }
+  export type TEventOnPress = 'onPress'
+  export type TEvents = 'onPress' | 'onLongPress' | 'onPressIn' | 'onPressOut'
+
+  export type TEventsX = 'onPress' | 'onLongPress'
+  export type TEventsAll = TEvents
+
+
   export interface Shape {
     //**** sheet constrains
     common?: Record<string, TCommonStyles.RulesetNativeIds> // rulesets (and their native type), which are used in both web and native component code. Rules and its valid values must be compatible with native.
@@ -15,6 +23,7 @@ export namespace TCommon {
     //******************** native style constrain
     style?: TCommonStyles.RulesetNativeIds // for native: export type of component style property (for web, style has always React.CSSProperties type)
     //**** component property constrains
+    events?: TEvents | null
     props?: {} //common (web and native) props
     propsNative?: {} //native only props 
     propsWeb?: React.HTMLAttributes<Element>//web only props
@@ -35,6 +44,7 @@ export namespace TCommon {
   export type getNameType<R extends Shape> = R['nameType']
   export type getVariant<R extends Shape = Shape> = R['variant']
   export type getTheme<R extends Shape = Shape> = R['theme']
+  export type getEvents<R extends Shape = Shape> = R['events']
 
   export type ShapeTexts<P extends string> = { [p in P]: 'Text' }
   export type ShapeViews<P extends string> = { [p in P]: 'View' }

@@ -68,7 +68,6 @@ const label: Types.CodeSFC<Shape> = ({ system: { classes, style }, children}) =>
 
 export const LabelCreator = withStylesCreator<Shape>(Consts.Label, labelSheet, label)
 export const Label = LabelCreator()
-export const LabelC = LabelCreator({ withCascading: true })
 
 /************************
 * BADGE
@@ -102,7 +101,6 @@ const badge: Types.CodeSFC<Shape> = ({ system: { classes, style }, children }) =
 
 export const BadgeCreator = withStylesCreator<Shape>(Consts.Badge, badgeSheet, badge)
 export const Badge = BadgeCreator()
-export const BadgeC = LabelCreator({ withCascading: true })
 
 /************************
 * THEMES

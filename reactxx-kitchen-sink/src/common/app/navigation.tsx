@@ -10,6 +10,7 @@ import { examples, nameToExample, exampleToElement, components, navigationExampl
 import { primitives } from '../primitives/index'
 import { component } from '../component/index'
 import { mediaqs } from '../mediaq/index'
+import { animations } from '../animation/index'
 import { ResponsibleDrawer } from '../components/responsible-drawer/responsible-drawer'
 
 export type GotoExample = (example: KSink.Example) => void
@@ -60,8 +61,9 @@ const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ chil
     <DrawerItem key={navigationExample.name} example={navigationExample} gotoExample={gotoExample} actName={actName} />
     {DrawerGroup('Primitives', primitives, gotoExample, actName)}
     {DrawerGroup('Component', component, gotoExample, actName)}
-    {DrawerGroup('Components', components, gotoExample, actName)}
     {DrawerGroup('Media Queries', mediaqs, gotoExample, actName)}
+    {DrawerGroup('Animation', animations, gotoExample, actName)}
+    {DrawerGroup('Components', components, gotoExample, actName)}
   </ScrollView>
 </View>
 

@@ -24,14 +24,14 @@ renderAddIn.toPlatformSheet = toPlatformSheet
 renderAddIn.toPlatformRuleSet = toPlatformRuleSet
 
 // used before converting props and sheet to platform dependent form
-renderAddIn.addInHOCsX = (state: TRenderState, next) =>
+renderAddIn.beforeToPlatform = (state: TRenderState, next) =>
   mediaQFlags( // media flags, e.g. {mobile:false, tablet:true, desktop:false }
     () => ({ $mediaq: state.addInProps.$mediaq, theme: state.themeContext.theme }),
     mediaqFlags => mediaqFlags && state.propsPatch.push({ mediaqFlags }),
     next)
 
 // after converting props and sheet to platform dependent form
-renderAddIn.addInHOCs = (state: TRenderState, next) =>
+renderAddIn.afterToPlatform = (state: TRenderState, next) =>
   mediaQSheet( // actualize mediaq part of the ruleset
     () => state.codeClasses as TMediaQ.MediaQSheet,
     mediaSheetPatch => mediaSheetPatch && state.codeClassesPatch.push(mediaSheetPatch as Types.Sheet),

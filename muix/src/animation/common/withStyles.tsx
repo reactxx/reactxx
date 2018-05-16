@@ -24,17 +24,13 @@ renderAddIn.toPlatformSheet = toPlatformSheet
 renderAddIn.toPlatformRuleSet = toPlatformRuleSet
 
 // used before converting props and sheet to platform dependent form
-renderAddIn.addInHOCsX = (state: TRenderState, next) =>
-  mediaQFlags( // media flags, e.g. {mobile:false, tablet:true, desktop:false }
-    () => ({ $mediaq: state.addInProps.$mediaq, theme: state.themeContext.theme }),
-    mediaqFlags => mediaqFlags && state.propsPatch.push({ mediaqFlags }),
-    next)
+renderAddIn.beforeToPlatform = (state: TRenderState, next) => next
 
 // after converting props and sheet to platform dependent form
-renderAddIn.addInHOCs = (state: TRenderState, next) =>
-  mediaQSheet( // actualize mediaq part of the ruleset
-    () => state.codeClasses as TMediaQ.MediaQSheet,
-    mediaSheetPatch => mediaSheetPatch && state.codeClassesPatch.push(mediaSheetPatch as Types.Sheet),
+renderAddIn.afterToPlatform = (state: TRenderState, next) =>
+  animations( // process animation $animations part of sheet
+    () => state.addInClasses.$animations,
+    animations => state.codeSystemProps.animations = animations,
     next
   )
 
@@ -49,7 +45,3 @@ export const withStylesCreator =
 
 export interface TProvider<R extends Types.Shape> { Provider: React.ComponentClass<Types.PropsX<R>> }
 
-export const AppContainer: React.SFC<Partial<TCommon.ThemeProviderProps>> = props => {
-  const theme = <ThemeProvider theme={props}>{props.children}</ThemeProvider>
-  return mediaQProviderExists() ? theme : <MediaQ_AppContainer>{theme}</MediaQ_AppContainer>
-}

@@ -19,7 +19,8 @@ export namespace MuiButtonT {
     common: TCommon.ShapeViews<'root' | 'disabled' | 'flatPrimary' | 'flatSecondary' | 'raised' | 'raisedPrimary' | 'raisedSecondary' | 'fab' | 'mini'> & TCommon.ShapeTexts<'label'>
     native: TCommon.ShapeViews<'raisedDisable' | 'ripple' | 'flat' | 'active'> & TCommon.ShapeTexts<'labelIcon'>
     web: 'colorInherit' | 'keyboardFocused'
-    props: ButtonProps & TCommonStyles.OnPressAllX
+    events: TCommon.TEvents,
+    props: ButtonProps
     propsNative: ReactN.TouchableOpacityProperties
     nameType: CompNames.Button | CompNames.ButtonIconLeft | CompNames.ButtonIconRight
     variant: string

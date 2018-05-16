@@ -10,7 +10,7 @@ const AppNative: React.SFC = props => <View style={{ marginTop: 20, backgroundCo
   <Text style={{ color: 'yellow', fontSize: 24 }} onPress={() => alert('hallo native world')}>HALLO NATIVE WORLD</Text>
 </View>
 
-const AppX: React.SFC = props => <ViewX style={{ marginTop: 20, backgroundColor: 'red', $web: { overflow: 'scroll' }, $native: { overflow: 'visible'} }}>
+const AppX: React.SFC = props => <ViewX>
   <TextX style={{ color: 'yellow', fontSize: 24 }} onPress={ev => alert('hallo xplatform world')}>HALLO XPLATFORM WORLD</TextX>
 </ViewX>
 

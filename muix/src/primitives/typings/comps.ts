@@ -23,40 +23,45 @@ export namespace TComps {
     PRIMITIVE'S SHAPES
   *******************************************/
 
-  export interface TextShape {
+  export type TextShape = Types.OverwriteShape<{
     common: TCommon.ShapeTexts<'root' | 'singleLineStyle'>
     web: 'pressable'
     native: null
     style: 'Text'
-    props: { numberOfLines?: number; url?: string } & TCommonStyles.OnPressX
+    events: TCommon.TEventsX
+    props: { numberOfLines?: number; url?: string }
     propsWeb: React.HTMLAttributes<HTMLSpanElement>
     propsNative: ReactN.TextProperties
-  }
+    nameType: CompNames.Text | CompNames.AnimatedText | string
+  }>
 
-  export interface ViewShape {
+  export type ViewShape = Types.OverwriteShape<{
     common: TCommon.ShapeViews<'root'>
     web: null
     native: null
     style: 'View'
-    props: TCommonStyles.OnPressAllX
+    events: TCommon.TEventsAll
     propsWeb: React.HTMLAttributes<HTMLDivElement>
     propsNative: ReactN.ViewProperties
-  }
+    nameType: CompNames.View | CompNames.AnimatedView | string
+  }>
 
-  export interface IconShape {
+  export type IconShape = Types.OverwriteShape<{
     common: TCommon.ShapeViews<'root'>
     web: 'pressable'
     native: null
     style: 'Text'
-    props: { data: string } & TCommonStyles.OnPressX
+    events: TCommon.TEventsX
+    props: { data: string }
     propsWeb: React.SVGAttributes<SVGElement> & { url?: string }
     propsNative: {
       size?: number
       color?: string
     }
-  }
+    nameType: CompNames.Icon | CompNames.AnimatedIcon | string
+  }>
 
-  export interface ScrollViewShape {
+  export type ScrollViewShape = Types.OverwriteShape<{
     common: TCommon.ShapeScrollViews<'root'> & TCommon.ShapeViews<'container'>
     web: 'rootHorizontal' | 'containerHorizontal'
     native: null
@@ -66,5 +71,6 @@ export namespace TComps {
     }
     propsWeb: React.HTMLAttributes<HTMLDivElement>
     propsNative: ReactN.ScrollViewProperties
-  }
+    nameType: CompNames.ScrollView | CompNames.AnimatedScrollView | string
+  }>
 }

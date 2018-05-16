@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { mergeRulesets, TCommon, variantToString } from 'reactxx-basic'
+import { LoremIpsum, TCommonStyles, mergeRulesets, TCommon, variantToString } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
 import { TAddIn, Types, TProvider, withStylesCreator, View, Text, Icon, AnimatedView, ScrollView, AppContainer } from 'reactxx'
-import { LoremIpsum, TCommonStyles } from 'reactxx-basic'
 import { TComps } from 'reactxx-primitives'
 
 
@@ -31,7 +30,7 @@ export namespace TResponsibleDrawer {
   export interface IconRenderProps {
     style: Types.RulesetX
     iconData: string,
-    onPress: TCommonStyles.MouseEvent
+    onPress: Types.MouseEventEx
   }
 
   export interface Variant extends TMediaQ.CodeProps<TAddIn.getMediaQ<Shape>> {
@@ -57,6 +56,7 @@ export namespace TResponsibleDrawer {
     nameType: Consts.Drawer
   }>
 }
+
 
 //************************************************************************************************************
 // ResponsibleDrawer component

@@ -16,7 +16,7 @@ export const enum Consts {
   Label = 'ks$ce1$label1' //unique component name
 }
 
-// 
+
 type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeViews<'root'> & TCommon.ShapeTexts<'label' | 'icon' | 'iconGap'>,
   props: {

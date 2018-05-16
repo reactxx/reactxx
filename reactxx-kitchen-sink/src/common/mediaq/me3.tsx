@@ -16,7 +16,7 @@ export interface Theme extends TCommon.ThemeBase {
 }
 
 export const enum Consts {
-  Label1 = 'ks$me3$label1', //unique component name
+  Label = 'ks$me3$label', //unique component name
   Theme1 = 'ks$me3$theme1',
   Theme2 = 'ks$me3$theme2',
 }
@@ -24,7 +24,7 @@ export const enum Consts {
 type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<'root'>,
   mediaq: 'isMobile' | 'isTablet' | 'isDesktop'
-  nameType: Consts.Label1
+  nameType: Consts.Label
   theme: Theme
 }>
 
@@ -36,8 +36,8 @@ const sheet: Types.SheetCreatorX<Shape> = ({ breakpoints: { mobileEnd, tabletEnd
   root: {
     margin: 10,
     $mediaq: {
-      [breaksToString(null, mobileEnd)]: { color: 'red', fontSize: 14 },
-      [breaksToString(mobileEnd, tabletEnd)]: { color: 'green', fontStyle: 'italic' },
+      [breaksToString(null, mobileEnd)]: { color: 'red', fontSize: 14 }, // e.g. '-480': { color: 'red', fontSize: 14 }
+      [breaksToString(mobileEnd, tabletEnd)]: { color: 'green', fontStyle: 'italic' }, // e.g. '480-1024': { color: 'green', fontStyle: 'italic' }
       [breaksToString(tabletEnd, null)]: { color: 'blue' },
     }
   },
@@ -48,8 +48,9 @@ const sheet: Types.SheetCreatorX<Shape> = ({ breakpoints: { mobileEnd, tabletEnd
 *************************/
 const ThemeProvider = ThemeProviderUntyped as TCommon.ThemeProviderTyped<Theme>
 
+// use static theme definition (with 'registerTheme') when possible
 registerTheme<Theme>(Consts.Theme1, { breakpoints: { mobileEnd: 480, tabletEnd: 1024 } })
-registerTheme<Theme>(Consts.Theme2, { breakpoints: { mobileEnd: 1024, tabletEnd: 1280 } })
+registerTheme<Theme>(Consts.Theme2, { breakpoints: { mobileEnd: 640, tabletEnd: 1280 } })
 
 /************************
 * CODE
@@ -58,11 +59,11 @@ registerTheme<Theme>(Consts.Theme2, { breakpoints: { mobileEnd: 1024, tabletEnd:
 const label: Types.CodeSFC<Shape> = ({ system: { classes, mediaqFlags }, children }) => {
   const root = mergeRulesets<Types.ViewRulesetX>(classes.root)
   const info = mediaqFlags.isMobile ? 'MOBILE' : mediaqFlags.isTablet ? 'TABLET' : 'DESKTOP'
-  return <Text className={root} developer_flag>[{info}] {children}</Text>
+  return <Text className={root}>[{info}] {children}</Text>
 }
 
-const Label: Types.ComponentTypeX<Shape> = withStylesCreator(Consts.Label1, sheet, label)({
-  defaultProps: ({ breakpoints: { mobileEnd, tabletEnd } }) => ({
+const Label: Types.ComponentTypeX<Shape> = withStylesCreator(Consts.Label, sheet, label)({
+  defaultProps: ({ breakpoints: { mobileEnd, tabletEnd } }) => ({ // use values from theme
     $mediaq: {
       isMobile: [null, mobileEnd],
       isTablet: [mobileEnd, tabletEnd],
@@ -77,6 +78,8 @@ const App: React.SFC = props => {
       <Label>{LoremIpsum(40)}</Label>
       <ThemeProvider theme={Consts.Theme2}>
         <Label>{LoremIpsum(40)}</Label>
+        {/*WRONG: sheet.root.$mediaq value is parametrized by THEME (not by PROPS). Changing props impacts mediaqFlags only (used in label.info variable)*/}
+        <Label $mediaq={{ isMobile: [null, 1024], isTablet: [1024, 1280], isDesktop: [1280, null] }}>WRONG: {LoremIpsum(40)}</Label>
       </ThemeProvider>
     </ThemeProvider>
   </MediaQ_AppContainer>

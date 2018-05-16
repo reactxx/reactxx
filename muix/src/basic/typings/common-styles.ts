@@ -153,13 +153,13 @@ export namespace TCommonStyles {
     EVENTS
   *******************************************/
 
-  export type MouseEvent = (event?: React.MouseEvent<Element>) => void
+  //export type MouseEvent = (event?: React.MouseEvent<Element>) => void
 
-  export interface OnPressX { onPress?: MouseEvent; onLongPress: () => void }
-  export interface OnPressAllX extends OnPressX { onPressIn?: MouseEvent; onPressOut?: MouseEvent }
+  //export interface OnPressX { onPress?: MouseEvent; onLongPress: () => MouseEvent }
+  //export interface OnPressAllX extends OnPressX { onPressIn?: MouseEvent; onPressOut?: MouseEvent }
 
-  export interface OnPressAllWeb { onClick?: React.MouseEventHandler<Element>; onMouseDown?: React.MouseEventHandler<Element>; onMouseUp?: React.MouseEventHandler<Element> }
-  export interface OnPressAllNative { onPress: () => void; onPressIn: () => void; onPressOut: () => void; onLongPress: () => void }
+  //export interface OnPressAllWeb { onClick?: React.MouseEventHandler<Element>; onMouseDown?: React.MouseEventHandler<Element>; onMouseUp?: React.MouseEventHandler<Element> }
+  //export interface OnPressAllNative { onPress: () => void; onPressIn: () => void; onPressOut: () => void; onLongPress: () => void }
 
 
 }

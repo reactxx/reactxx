@@ -5,6 +5,7 @@ import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
 import { deepMerges, deepMerge, isObjectLiteral } from './to-platform'
 import { TAddIn } from '../typings/add-in';
+import { TCommonStyles } from 'reactxx-basic';
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
@@ -27,7 +28,26 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
 
   }
 
-  const finalize = (defaultProps, cascadingProps, props) => {
+  const finalizeEvent = (props: Types.OnPressAllX, propName: TCommon.TEvents, eventCurrent) => {
+    if (!props[propName]) return
+    const oldProc: any = props[propName]
+    if (oldProc['$wrapped']) return
+    const newProc = (ev: any) => {
+      ev = ev ? { ...ev } : {}
+      ev.current = eventCurrent.finalCodeProps
+      oldProc(ev)
+    }
+    newProc['$wrapped'] = true
+    props[propName] = newProc
+  }
+  const finalizeEvents = (props: Types.OnPressAllX, eventCurrent) => {
+    finalizeEvent(props, 'onPress', eventCurrent)
+    finalizeEvent(props, 'onLongPress', eventCurrent)
+    finalizeEvent(props, 'onPressIn', eventCurrent)
+    finalizeEvent(props, 'onPressOut', eventCurrent)
+  }
+
+  const finalize = (defaultProps, cascadingProps, props, eventCurrent) => {
     // merge properties
     let finalProps = { ...props } as Types.PropsX
     if (defaultProps || cascadingProps) {
@@ -41,7 +61,7 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
             finalPropsP || inheritedP
         }
     }
-    // remove developer_flag in non 'development' ENV
+    // remove developer_flag for non 'development' ENV
     if (!DEV_MODE && finalProps.developer_flag) delete finalProps.developer_flag
     // process $web and $native props part
     const { $web, $native } = finalProps
@@ -50,6 +70,8 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
       if (window.isWeb && $web) finalProps = deepMerges({}, finalProps, $web)
       else if (!window.isWeb && $native) finalProps = deepMerges({}, finalProps, $native)
     }
+    // events
+    finalizeEvents(finalProps as Types.OnPressAllX, eventCurrent)
     // separate addIns props
     const addInProps: any = {}
     for (const p in finalProps) {
@@ -60,18 +82,18 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
     return { finalProps: finalProps as TPropsX, addInProps: addInProps as TAddIn.PropsX }
   }
 
-  const finalizeProps = (input: () => { props: Types.PropsX, theme }, output: (par: { finalProps: Types.PropsX, addInProps: TAddIn.PropsX }) => void, next: () => React.ReactNode) => {
-    let props: Types.PropsX, defaultProps: Types.PropsX
+  const finalizeProps = (input: () => { props: Types.PropsX, theme, eventCurrent }, output: (par: { finalProps: Types.PropsX, addInProps: TAddIn.PropsX }) => void, next: () => React.ReactNode) => {
+    let props: Types.PropsX, defaultProps: Types.PropsX, eventCurrent
     const render = (inheritedProps: Types.PropsX) => {
-      output(finalize(defaultProps, inheritedProps, props))
+      output(finalize(defaultProps, inheritedProps, props, eventCurrent))
       return next()
     }
     const res = () => {
       const inp = input()
-      props = inp.props
+      props = inp.props; eventCurrent = inp.eventCurrent
       defaultProps = typeof options.defaultProps === 'function' ? options.defaultProps(inp.theme) : options.defaultProps
       if (options.withCascading) return <CascadingConsumer>{render}</CascadingConsumer>
-      output(finalize(defaultProps, null, props))
+      output(finalize(defaultProps, null, props, eventCurrent))
       return next()
     }
     return res
