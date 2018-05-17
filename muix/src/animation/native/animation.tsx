@@ -77,7 +77,7 @@ export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements 
     this.opened = toOpened
     Animated.timing(value, { ...animConfig, toValue: toOpened ? 1 : 0 }).start(({ finished }) => {
       if (!finished) return
-      this.animations.statefullComponent.forceUpdate()
+      this.animations.statefullComponent.setState({})
     })
     
   }

@@ -2,20 +2,20 @@ import React from 'react'
 import warning from 'warning'
 
 import { rulesetsToClassNames } from 'reactxx-fela'
-import { Types, mergeRulesets, withStylesCreator } from 'reactxx-basic'
+import { Types, mergeRulesets, withStylesCreator, hasPlatformEvents } from 'reactxx-basic'
 
 import { TComps, CompNames } from '../typings/comps'
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comps-sheets'
 
 export const view: Types.CodeSFCWeb<TComps.ViewShape> = props => {
   const { system: { style, classes }, ...rest } = props
-  const rootStyle = mergeRulesets<'Web'>(classes.root)
+  const rootStyle = mergeRulesets<'Web'>(classes.root, hasPlatformEvents(props) && classes.pressable)
   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest} />
 }
 
 export const icon: Types.CodeSFCWeb<TComps.IconShape> = props => {
   const { system: { style, classes }, children, data, viewBox, url, onClick, ...rest } = props
-  const rootStyle = mergeRulesets<'Web'>(classes.root, onClick && classes.pressable)
+  const rootStyle = mergeRulesets<'Web'>(classes.root, hasPlatformEvents(props) && classes.pressable)
   //replace fontSize with width x height
   if (rootStyle.fontSize) { rootStyle.height = rootStyle.width = rootStyle.fontSize; delete rootStyle.fontSize }
   if (style && style.fontSize) { style.height = style.width = style.fontSize; delete style.fontSize }
@@ -28,7 +28,7 @@ export const icon: Types.CodeSFCWeb<TComps.IconShape> = props => {
 
 export const text: Types.CodeSFCWeb<TComps.TextShape> = props => {
   const { system: { style, classes, developer_RenderCounter }, numberOfLines, url, onClick, ...rest } = props
-  const rootStyle = mergeRulesets<'Web'>(classes.root, onClick && classes.pressable, numberOfLines === 1 && classes.singleLineStyle)
+  const rootStyle = mergeRulesets<'Web'>(classes.root, hasPlatformEvents(props) && classes.pressable, numberOfLines === 1 && classes.singleLineStyle)
   const tagProps = { className: TComps.Consts.textClassName + ' ' + rulesetsToClassNames(rootStyle), style, ...rest, onClick: url ? undefined : onClick } //, ...rootStyle.$props }
 
   if (developer_RenderCounter) {

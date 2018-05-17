@@ -31,13 +31,16 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
   const finalizeEvent = (props: Types.OnPressAllX, propName: TCommon.TEvents, eventCurrent) => {
     if (!props[propName]) return
     const oldProc: any = props[propName]
-    if (oldProc['$wrapped']) return
-    const newProc = (ev: any) => {
-      ev = ev ? { ...ev } : {}
-      ev.current = eventCurrent.finalCodeProps
-      oldProc(ev)
-    }
-    newProc['$wrapped'] = true
+    let newProc
+    if (!oldProc['$wrapped']) {
+      newProc = (ev: any) => {
+        ev = ev ? { ...ev } : {}
+        ev.current = eventCurrent.finalCodeProps
+        oldProc(ev)
+      }
+      newProc['$wrapped'] = true
+    } else
+      newProc = oldProc
     props[propName] = newProc
   }
   const finalizeEvents = (props: Types.OnPressAllX, eventCurrent) => {

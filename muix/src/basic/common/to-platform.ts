@@ -19,6 +19,8 @@ export const toPlatformEvents = ($web: Types.OnPressAllWeb, $native: Types.OnPre
   }
 }
 
+export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseUp : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
+
 export const toPlatformSheet = (sheet: Types.SheetX | Types.PartialSheetX) => {
   if (typeof sheet !== 'object') return sheet
   const res = {}

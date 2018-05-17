@@ -70,7 +70,7 @@ export const muiCompatible = <R extends Types.Shape>(Component: muiComponentType
       classes: classes
     }
 
-    toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps as any)
+    toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, codeProps as any, {})
 
     return <Component {...codeProps as any} />
   }

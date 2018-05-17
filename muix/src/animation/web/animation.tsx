@@ -87,7 +87,7 @@ export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements 
     this.runningTimer = window.setTimeout(() => {
       delete this.runningTimer
     }, $delay + $duration)
-    this.animations.statefullComponent.forceUpdate()
+    this.animations.statefullComponent.setState({})
   }
 }
 

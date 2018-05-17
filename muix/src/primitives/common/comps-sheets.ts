@@ -43,6 +43,11 @@ const webViewRuleset = {
 export const viewSheet: Types.SheetX<TComps.ViewShape> = {
   root: {
     $web: webViewRuleset
+  },
+  pressable: {
+    $web: {
+      cursor: 'pointer'
+    }
   }
 }
 

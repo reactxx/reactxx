@@ -37,7 +37,7 @@ export namespace TComps {
 
   export type ViewShape = Types.OverwriteShape<{
     common: TCommon.ShapeViews<'root'>
-    web: null
+    web: 'pressable'
     native: null
     style: 'View'
     events: TCommon.TEventsAll
