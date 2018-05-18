@@ -16,7 +16,7 @@ export const toPlatformRuleSet_all = (style: Types.RulesetX & { $mediaq? }) => {
     const { $native: $propsNative, $web: $propsWeb, ...restProps } = $propsX
     $props = { ...restProps, ...(isNative ? $propsNative : $propsWeb) }
   }
-  const res: any = { ...rest, ...(isNative ? $native : $web), /*$overrides: toPlatformSheet($overrides),*/ $mediaq: toPlatformSheet_all($mediaq as any), $props }
+  const res: any = { ...rest, ...(isNative ? $native : $web), $mediaq: toPlatformSheet_all($mediaq as any), $props }
   //if (!res.$overrides) delete res.$overrides;  //remove NULL or UNDEFINED
   if (!res.$props) delete res.$props //remove NULL or UNDEFINED
   return res as TCommonStyles.Ruleset

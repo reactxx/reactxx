@@ -16,6 +16,7 @@
           "reactxx-basic": "reactxx-basic/es/index",
           "reactxx-activable": "reactxx-activable/es/native/index",
           "reactxx-animation": "reactxx-animation/es/native/index",
+          "reactxx-primitives": "reactxx-primitives/es/native/index",
           "reactxx-mediaq": "reactxx-mediaq/es/native/index",
           "reactxx": "reactxx/es/native/index",
           "reactxx-mui": "reactxx-mui/es/native"

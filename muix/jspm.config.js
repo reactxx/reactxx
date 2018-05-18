@@ -115,7 +115,8 @@ SystemJS.config({
         "normalize-scroll-left": "npm:normalize-scroll-left@0.1.2",
         "react-transition-group": "npm:react-transition-group@2.2.1",
         "react-event-listener": "npm:react-event-listener@0.5.3",
-        "@types/react-transition-group": "npm:@types/react-transition-group@2.0.7"
+        "@types/react-transition-group": "npm:@types/react-transition-group@2.0.7",
+        "@babel/runtime": "npm:@babel/runtime@7.0.0-beta.47"
       }
     },
     "npm:fela-dom@7.0.5": {
@@ -696,6 +697,12 @@ SystemJS.config({
         "object-assign": "npm:object-assign@4.1.1",
         "loose-envify": "npm:loose-envify@1.3.1",
         "prop-types": "npm:prop-types@15.6.1"
+      }
+    },
+    "npm:@babel/runtime@7.0.0-beta.47": {
+      "map": {
+        "core-js": "npm:core-js@2.5.3",
+        "regenerator-runtime": "npm:regenerator-runtime@0.11.1"
       }
     }
   }

@@ -85,6 +85,7 @@
     <None Include="packages.config" />
     <Content Include="public\favicon.ico" />
     <Content Include="public\index.html" />
+    <Content Include="src\common\component\text.txt" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />
     <Content Include="README.md" />
@@ -108,20 +109,31 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\common\animation\ae1.tsx" />
+    <TypeScriptCompile Include="src\common\animation\index.tsx" />
     <TypeScriptCompile Include="src\common\app\index.tsx" />
     <TypeScriptCompile Include="src\common\app\navigation.tsx" />
+    <TypeScriptCompile Include="src\common\basic\index.tsx" />
+    <TypeScriptCompile Include="src\common\basic\pe1.tsx" />
+    <TypeScriptCompile Include="src\common\basic\pe2.tsx" />
+    <TypeScriptCompile Include="src\common\basic\pe3.tsx" />
+    <TypeScriptCompile Include="src\common\basic\pe4.tsx" />
+    <TypeScriptCompile Include="src\common\basic\pe5.tsx" />
+    <TypeScriptCompile Include="src\common\basic\pe6.tsx" />
+    <TypeScriptCompile Include="src\common\basic\pe7.tsx" />
+    <TypeScriptCompile Include="src\common\basic\pe8.tsx" />
+    <TypeScriptCompile Include="src\common\basic\pe9.tsx" />
     <TypeScriptCompile Include="src\common\components\index.tsx" />
     <TypeScriptCompile Include="src\common\components\typo.tsx" />
+    <TypeScriptCompile Include="src\common\component\ce1.tsx" />
+    <TypeScriptCompile Include="src\common\component\ce2.tsx" />
+    <TypeScriptCompile Include="src\common\component\index.tsx" />
     <TypeScriptCompile Include="src\common\hallo-world.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\index.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\e1.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\e2.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\e3.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\e4.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\e5.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\e6.tsx" />
-    <TypeScriptCompile Include="src\common\primitives\e7.tsx" />
     <TypeScriptCompile Include="src\common\components\responsible-drawer\responsible-drawer.tsx" />
+    <TypeScriptCompile Include="src\common\mediaq\index.tsx" />
+    <TypeScriptCompile Include="src\common\mediaq\me1.tsx" />
+    <TypeScriptCompile Include="src\common\mediaq\me2.tsx" />
+    <TypeScriptCompile Include="src\common\mediaq\me3.tsx" />
     <TypeScriptCompile Include="src\common\typings.d.ts" />
     <TypeScriptCompile Include="src\native\index.tsx" />
     <TypeScriptCompile Include="src\react-16.3.ts" />

@@ -16,6 +16,7 @@
           "reactxx-activable": "./deploy/es/activable/native",
           "reactxx-mediaq": "./deploy/es/mediaq/native",
           "reactxx-animation": "./deploy/es/animation/native",
+          "reactxx-primitives": "./deploy/es/primitives/native",
           "reactxx": "./deploy/es/reactxx/native",
           "reactxx-basic": "./deploy/es/basic",
           "reactxx-mui": "./deploy/es/mui/native"

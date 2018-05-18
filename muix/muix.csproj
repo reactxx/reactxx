@@ -77,8 +77,6 @@
     <Content Include="deploy\reactxx\README.md" />
     <Content Include="deploy\mui\package.json" />
     <Content Include="deploy\mui\README.md" />
-    <Content Include="deploy\stateman\package.json" />
-    <Content Include="deploy\stateman\README.md" />
     <Content Include="deploy\basic\package.json" />
     <Content Include="deploy\basic\README.md" />
     <Content Include="deploy\fela\package.json" />
@@ -98,6 +96,8 @@
     <Content Include="%24start.cmd" />
     <Content Include="deploy\activable\package.json" />
     <Content Include="deploy\activable\README.md" />
+    <Content Include="deploy\primitives\package.json" />
+    <Content Include="deploy\primitives\README.md" />
     <None Include="packages.config" />
     <Content Include="README.md" />
     <Content Include="StyleSheet1.css" />
@@ -116,7 +116,6 @@
     <Content Include="src\mui\native\fonts\Roboto-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="src\stateman\README.md" />
     <Content Include="src\reactxx\README.md" />
     <Content Include="src\mui\README.md" />
     <None Include="Web.Debug.config">
@@ -223,7 +222,6 @@
     <TypeScriptCompile Include="src\mui\typings\button-base.ts" />
     <TypeScriptCompile Include="src\mui\ButtonBase\ButtonBase.tsx" />
     <TypeScriptCompile Include="src\mui\Button\Button.tsx" />
-    <TypeScriptCompile Include="src\stateman\index.ts" />
     <TypeScriptCompile Include="src\reactxx\native\index.ts" />
     <TypeScriptCompile Include="src\reactxx\web\comps.tsx" />
     <TypeScriptCompile Include="src\reactxx\web\index.ts" />

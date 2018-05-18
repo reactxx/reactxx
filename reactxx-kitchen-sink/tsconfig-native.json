@@ -6,12 +6,6 @@
     "rootDir": "src",
     "outDir": "deploy/es",
 
-    "baseUrl": ".",
-    "paths": {
-      "reactxx-mdi": [ "node_modules/reactxx-mdi/es/index" ]
-      //"typescript-config": [ "node_modules/reactxx/es/typings/typescript-config" ]
-    },
-
     "importHelpers": true,
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
