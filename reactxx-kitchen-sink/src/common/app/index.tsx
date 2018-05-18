@@ -1,7 +1,7 @@
 import React from 'react'
 
 import NavigApp from './navigation'
-import { primitives } from '../primitives/index'
+import { primitives } from '../basic/index'
 import { component } from '../component/index'
 import { mediaqs } from '../mediaq/index'
 import { animations } from '../animation/index'

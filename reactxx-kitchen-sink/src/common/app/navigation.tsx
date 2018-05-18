@@ -7,7 +7,7 @@ import { Types, View, Text, ScrollView, Icon } from 'reactxx'
 
 import { H1, H2, H3, H4, H5, U, I, B, A, Blocquote, P } from '../components/typo'
 import { examples, nameToExample, exampleToElement, components, navigationExample, KSink } from './index'
-import { primitives } from '../primitives/index'
+import { primitives } from '../basic/index'
 import { component } from '../component/index'
 import { mediaqs } from '../mediaq/index'
 import { animations } from '../animation/index'
@@ -26,7 +26,7 @@ const webSandboxUrl: GetExampleUrl = (ex) => {
   return `${sandBoxUrl}module=%2Fsrc%2Fcommon%2F${name}.tsx&initialpath=${name}`
 }
 
-const debugPath = 'mediaq/me2' 
+const debugPath = 'mediaq/me2'
 
 class App extends React.Component<{}, KSink.Example> {
 
@@ -47,7 +47,7 @@ class App extends React.Component<{}, KSink.Example> {
 
 const drawerButton = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as Types.RulesetX
 const toolbar = { flexDirection: 'row', alignItems: 'center', height: 48, padding: 15 } as Types.ViewRulesetX
-const codeIcons = { color: 'white', marginLeft: 15, $web: { ':hover': { transform: 'scale(1.2)' } } } as Types.RulesetX
+const codeIcons = { color: 'white', marginLeft: 15, $web: { ':hover': { transform: 'scale(1.2)' } } } as Types.TextRulesetX
 var logo = { flexGrow: 0, marginLeft: 5, color: 'lightblue', paddingRight: 10, marginRight: 10, borderRightColor: 'lightblue', borderRightWidth: 1, $web: { borderRightStyle: 'solid' } } as Types.RulesetX
 
 const Drawer: React.SFC<{ gotoExample: GotoExample; actName: string }> = ({ children, gotoExample, actName }) => <View className={{ flex: 1 }}>
@@ -74,8 +74,8 @@ const Content: React.SFC<{ actExample: KSink.Example }> = ({ children, actExampl
     </ResponsibleDrawer.LayoutChanged>
     <Text className={logo}>ReactXX KitchenSink</Text>
     <Text numberOfLines={1} className={{ flexGrow: 1, flexShrink: 1, color: 'white', }}>{actExample.title}</Text>
-    {window.isWeb && actExample.name != 'xapp/navigation' && <Icon className={{ ...codeIcons, fontSize: 32 }} $web={{ viewBox: '0 0 1024 1024', url: webSandboxUrl(actExample) }} >{codeSandboxSVG}</Icon>}
-    {window.isWeb && <Icon data={GithubCircle} className={codeIcons} $web={{ url: webGithubUrl(actExample) }} />}
+    {window.isWeb && actExample.name != 'xapp/navigation' && <Icon className={{ ...codeIcons, fontSize: 32 }} $web={{ viewBox: '0 0 1024 1024' }} url={webSandboxUrl(actExample)} >{codeSandboxSVG}</Icon>}
+    {window.isWeb && <Icon data={GithubCircle} className={codeIcons} url={webGithubUrl(actExample)} />}
   </View>
   <View className={{ flexGrow: 1, backgroundColor: 'white', padding: 15 }}>
     {children}

@@ -47,17 +47,14 @@ export namespace TComps {
   }>
 
   export type IconShape = Types.OverwriteShape<{
-    common: TCommon.ShapeViews<'root'>
+    common: TCommon.ShapeTexts<'root'>
     web: 'pressable'
     native: null
     style: 'Text'
     events: TCommon.TEventsX
-    props: { data: string }
-    propsWeb: React.SVGAttributes<SVGElement> & { url?: string }
-    propsNative: {
-      size?: number
-      color?: string
-    }
+    props: { data: string; url?: string }
+    propsWeb: React.SVGAttributes<SVGElement>
+    propsNative: ReactN.TextProperties
     nameType: CompNames.Icon | CompNames.AnimatedIcon | string
   }>
 

@@ -13,7 +13,7 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
 
   const { Provider: CascadingProvider, Consumer: CascadingConsumer } = options.withCascading ? React.createContext<TPropsX>(null) : { Provider: null, Consumer: null } as React.Context<TPropsX>
 
-  class cascadingProvider extends React.Component<TPropsX> {
+  class CascadingProviderComponent extends React.Component<TPropsX> {
 
     render() {
       if (options.withCascading) return <CascadingConsumer>{this.CASCADING}</CascadingConsumer>
@@ -102,6 +102,6 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
     return res
   }
 
-  return { finalizeProps, cascadingProvider }
+  return { finalizeProps, cascadingProvider: CascadingProviderComponent as React.ComponentClass<TPropsX>}
 
 }

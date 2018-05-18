@@ -78,8 +78,10 @@ const App: React.SFC = props => {
       <Label>{LoremIpsum(40)}</Label>
       <ThemeProvider theme={Consts.Theme2}>
         <Label>{LoremIpsum(40)}</Label>
-        {/*WRONG: sheet.root.$mediaq value is parametrized by THEME (not by PROPS). Changing props impacts mediaqFlags only (used in label.info variable)*/}
+        {/*
+        WRONG: sheet.root.$mediaq value is parametrized by THEME (not by PROPS). Changing props impacts mediaqFlags only (used in label.info variable)
         <Label $mediaq={{ isMobile: [null, 1024], isTablet: [1024, 1280], isDesktop: [1280, null] }}>WRONG: {LoremIpsum(40)}</Label>
+        */}
       </ThemeProvider>
     </ThemeProvider>
   </MediaQ_AppContainer>

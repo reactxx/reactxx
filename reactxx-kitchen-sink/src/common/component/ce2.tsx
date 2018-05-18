@@ -1,10 +1,8 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { deepMerge, mergeRulesets, TCommon, ThemeProviderUntyped } from 'reactxx-basic'
-import { Types, withStylesCreator } from 'reactxx'
+import { Types, withStylesCreator, deepMerge, mergeRulesets, TCommon, ThemeProviderUntyped, TAddIn, TProvider } from 'reactxx-basic'
 import { TComps, Text, View, ScrollView, Icon,  } from 'reactxx-primitives'
-
 
 import { H2, A, P } from '../components/typo'
 
@@ -22,7 +20,7 @@ export interface Theme extends TCommon.ThemeBase {
 }
 
 export const enum Consts {
-  Label = 'ks$ce3$label',
+  Label = 'ks$ce2$label',
   Badge = 'ks$ce3$badge',
 }
 
@@ -171,7 +169,7 @@ class Example2 extends React.Component<{}, { toggle: boolean }> {
 
     return <ThemeProvider theme={actThemes[0]}>
       <P>
-        <A onPress={this.doToggle}>TOGGLE THEME</A>
+        <A onPress={this.doToggle}>CLICK HERE TO TOGGLE THEME</A>
       </P>
       <Section>
         <Label>Label 1</Label>

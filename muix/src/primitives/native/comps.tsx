@@ -20,7 +20,7 @@ const anyView = (isAnim: boolean) => (props => {
 
 const anyText = (isAnim: boolean) => (props => {
   const ActText = isAnim ? Animated.Text : TextRN
-  const { system: { style, classes, developer_RenderCounter }, onPress, url, ...rest } = props
+  const { system: { style, classes, developer_RenderCounter }, onPress, url, children, ...rest } = props
   const rootStyle = mergeRulesets<'Text'>(classes.root, props.numberOfLines === 1 && classes.singleLineStyle, style)
   //Link to URL
   const doPress = !url ? onPress : () => Linking.canOpenURL(url).then(supported => {
@@ -28,11 +28,12 @@ const anyText = (isAnim: boolean) => (props => {
     return Linking.openURL(url);
   }).catch(err => warning(false, `An error occurred: ${err}, ${url}`))
 
+  let child = children
   if (developer_RenderCounter) {
     const txt = '[' + developer_RenderCounter + '] '
-    return React.Children.count(props.children) == 0 ? txt : [txt, ...React.Children.toArray(props.children)]
-  } else
-    return <ActText style={rootStyle} {...rest} onPress={onPress} />
+    child = React.Children.count(children) == 0 ? txt : [txt, ...React.Children.toArray(children)]
+  } 
+  return <ActText style={rootStyle} {...rest} onPress={doPress}>{child}</ActText>
 }) as Types.CodeSFCNative<TComps.TextShape>
 
 
@@ -44,13 +45,19 @@ const anyScrollView = (isAnim: boolean) => (props => {
   return <ActScrollView style={rootStyle} contentContainerStyle={containerStyle} {...rest} />
 }) as Types.CodeSFCNative<TComps.ScrollViewShape>
 
-const AnimatedIconLow = Animated.createAnimatedComponent(MaterialCommunityIcons)
 const anyIcon = (isAnim: boolean) => (props => {
   const ActIcon = isAnim ? AnimatedIconLow : MaterialCommunityIcons
-  const { system: { style, classes }, data, children, ...rest } = props
+  const { system: { style, classes }, data, children, onPress, url, ...rest } = props
   const rootStyle = mergeRulesets<'Text'>(classes.root, style)
-  return <ActIcon name={(data || children as string) as MaterialCommunityIconsProps['name']} style={rootStyle} {...rest} />
+  //Link to URL
+  const doPress = !url ? onPress : () => Linking.canOpenURL(url).then(supported => {
+    warning(supported, `Can't handle url: ${url}`)
+    return Linking.openURL(url);
+  }).catch(err => warning(false, `An error occurred: ${err}, ${url}`))
+
+  return <ActIcon name={(data || children as string) as MaterialCommunityIconsProps['name']} style={rootStyle} {...rest} onPress={doPress}/>
 }) as Types.CodeSFCNative<TComps.IconShape>
+const AnimatedIconLow = Animated.createAnimatedComponent(MaterialCommunityIcons)
 
 export const view = anyView(false)
 export const animatedView = anyView(true)

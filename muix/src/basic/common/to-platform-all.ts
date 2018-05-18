@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommonStyles } from 'reactxx-basic'
-
+import { TCommonStyles } from '../typings/common-styles'
+import { TAddIn } from '../typings/add-in'
 import { Types } from '../typings/types'
 
 //create platform specific ruleset from cross platform one

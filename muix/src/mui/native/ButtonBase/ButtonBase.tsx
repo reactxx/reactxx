@@ -3,7 +3,7 @@ import ReactN, { View, TouchableWithoutFeedback, Animated, Easing, Platform, Lay
 import { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
 import { Properties } from 'csstype'
 
-import { TCommonStyles, mergeRulesets } from 'reactxx-basic'
+import { TCommonStyles, mergeRulesets, TCommon } from 'reactxx-basic'
 import { Types, TAddIn, TProvider, withStylesCreator } from 'reactxx'
 
 import { MuiButtonBaseT } from '../../typings/button-base'

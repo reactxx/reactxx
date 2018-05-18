@@ -9,7 +9,7 @@ export const toPlatformEvents = ($web: Types.OnPressAllWeb, $native: Types.OnPre
   cpx.onPress = onPress; cpx.onLongPress = onLongPress; cpx.onPressIn = onPressIn; cpx.onPressOut = onPressOut;
   if (isType<Types.OnPressAllWeb>(cp)) {
     const cl = $web && $web.onClick || onPress; if (cl) cp.onClick = cl
-    const cl2 = $web && $web.onMouseDown || onPressIn; if (cl2) cp.onMouseDown = cl2
+    const cl2 = $web && $web.onMouseDown || onPressIn; if (cl2) cp.onMouseDown = cl2 
     const cl3 = $web && $web.onMouseUp || onPressOut; if (cl3) cp.onMouseUp = cl3
   } else if (isType<Types.OnPressAllNative>(cp)) {
     const cl = $native && $native.onPress || onPress; if (cl) cp.onPress = cl
@@ -19,7 +19,7 @@ export const toPlatformEvents = ($web: Types.OnPressAllWeb, $native: Types.OnPre
   }
 }
 
-export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseUp : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
+export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseDown : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
 
 export const toPlatformSheet = (sheet: Types.SheetX | Types.PartialSheetX) => {
   if (typeof sheet !== 'object') return sheet
