@@ -21,20 +21,20 @@ export const toPlatformEvents = ($web: Types.OnPressAllWeb, $native: Types.OnPre
 
 export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseDown : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
 
-export const toPlatformSheet = (sheet: Types.SheetX | Types.PartialSheetX) => {
-  if (typeof sheet !== 'object') return sheet
-  const res = {}
-  for (const p in sheet) res[p] = toPlatformRuleSet(sheet[p])
-  return res as Types.Sheet
-}
+//export const toPlatformSheet = (sheet: Types.SheetX | Types.PartialSheetX) => {
+//  if (typeof sheet !== 'object') return sheet
+//  const res = {}
+//  for (const p in sheet) res[p] = toPlatformRuleSet(sheet[p])
+//  return res as Types.Sheet
+//}
 
-//create platform specific ruleset from cross platform one
-export const toPlatformRuleSet = (style: Types.RulesetX) => {
-  if (!style) return null
-  if (!style.$web && !style.$native) return style // optimalization: already platform specific
-  const { $web, $native, ...rest } = style
-  return { ...rest, ...(window.isWeb ? $web : $native) } as TCommonStyles.Ruleset
-}
+////create platform specific ruleset from cross platform one
+//export const toPlatformRuleSet = (style: Types.RulesetX) => {
+//  if (!style) return null
+//  if (!style.$web && !style.$native) return style // optimalization: already platform specific
+//  const { $web, $native, ...rest } = style
+//  return { ...rest, ...(window.isWeb ? $web : $native) } as TCommonStyles.Ruleset
+//}
 
 export const deepModify = (target, ...sources) => {
   if (!sources.find(s => !!s)) return target

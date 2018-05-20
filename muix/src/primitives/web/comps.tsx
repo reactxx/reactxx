@@ -30,7 +30,7 @@ export const icon: Types.CodeSFCWeb<TComps.IconShape> = props => {
 export const text: Types.CodeSFCWeb<TComps.TextShape> = props => {
   const { system: { style, classes, developer_RenderCounter }, numberOfLines, url, onClick, ...rest } = props
   const rootStyle = mergeRulesets<'Web'>(classes.root, hasPlatformEvents(props) && classes.pressable, numberOfLines === 1 && classes.singleLineStyle)
-  const tagProps = { className: TComps.Consts.textClassName + ' ' + rulesetsToClassNames(rootStyle), style, ...rest, onClick: url ? undefined : onClick } //, ...rootStyle.$props }
+  const tagProps = { className: TComps.Consts.textClassName + ' ' + rulesetsToClassNames(rootStyle), style, ...rest, onClick: url ? undefined : onClick } 
 
   if (developer_RenderCounter) {
     const txt = '[' + developer_RenderCounter + '] '

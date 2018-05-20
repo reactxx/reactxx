@@ -30,20 +30,13 @@
     "baseUrl": ".",
     "paths": {
 
-      //"typescript-config": [ "src/reactxx/web/index" ],
-
-      "platform-config": [ "src/reactxx/web/platform" ],
-
       "reactxx-fela": [ "src/fela/index" ],
-
       "reactxx-animation": [ "src/animation/web/index" ],
       "reactxx-primitives": [ "src/primitives/web/index" ],
       "reactxx-mediaq": [ "src/mediaq/web/index" ],
       "reactxx-basic": [ "src/basic/index" ],
       "reactxx-activable": [ "src/activable/web/index" ],
-
       "reactxx": [ "src/reactxx/web/index" ],
-
 
       "reactxx-mui/*": [ "src/mui/*" ]
     },

@@ -80,7 +80,8 @@ const sheet: Types.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =>
           transform: [
             { translateX: [-drawerWidths[0], 0] }
           ],
-        },backDrop: { //animation ruleset for backDrop element
+        },
+        backDrop: { //animation ruleset for backDrop element
           opacity: [0, 0.4], // change backDrop opacity
           transform: [ // appear backDrop during first 0.5% of whole animation time
             { translateX: [-5000, 0] },
@@ -142,7 +143,7 @@ const sheet: Types.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =>
 // responsibleDrawer stateless component. 
 const responsibleDrawer: Types.CodeSFC<TResponsibleDrawer.Shape> = props => {
 
-  const { system: { classes, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }}, drawer: drawerNode, children } = props
+  const { system: { classes, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } }, drawer: drawerNode, children } = props
 
   const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()

@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 import warning from 'warning'
 
 import { ThemeProvider, ThemeConsumer, theme } from './theme'
-import { toPlatformEvents, toPlatformSheet, toPlatformRuleSet, deepMerges, deepModify } from './to-platform'
+import { toPlatformEvents, deepMerges, deepModify } from './to-platform'
 import { TCommon } from '../typings/common'
 import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
@@ -38,16 +38,12 @@ export interface TRenderState {
 *************************/
 // addIn configuration type
 export interface RenderAddIn {
-  toPlatformSheet: (sheet: Types.SheetX | Types.PartialSheetX) => Types.Sheet
-  toPlatformRuleSet: (style: Types.RulesetX) => TCommonStyles.Ruleset
   beforeToPlatform: (state: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
   afterToPlatform: (state: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
 }
 
 // addIn configuration
 export const renderAddIn: RenderAddIn = {
-  toPlatformSheet,
-  toPlatformRuleSet,
   beforeToPlatform: (state, next) => next,
   afterToPlatform: (state, next) => next
 }
@@ -140,7 +136,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
         () => ({ withTheme: options.withTheme }),
         themeContext => this.state.themeContext = themeContext,
         finalizeProps(
-          () => ({ props: this.props, theme: this.state.themeContext.theme, eventCurrent: this.state }),
+          () => ({ props: this.props, theme: this.state.themeContext.theme, renderState: this.state }),
           ({ finalProps, addInProps }) => { this.state.finalProps = finalProps; this.state.addInProps = addInProps },
           renderAddIn.beforeToPlatform(this.state,
             toPlatform(this.state,
@@ -193,21 +189,21 @@ const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, opti
   let variant = null
   if (typeof createSheetX !== 'function') {
     variantCacheId = '#static#'
-    getStaticSheet = () => renderAddIn.toPlatformSheet(createSheetX)
+    getStaticSheet = () => toPlatformSheet(createSheetX)
   } else {
     if (options && options.getVariant) {
       const propsWithPatch = propsPatch.length > 0 ? Object.assign({}, finalProps, ...propsPatch) : finalProps
       variant = options.getVariant(propsWithPatch, theme)
       variantCacheId = options.variantToString && options.variantToString(variant)
       if (variantCacheId) {
-        getStaticSheet = () => renderAddIn.toPlatformSheet(callCreator(theme, variant, createSheetX))
+        getStaticSheet = () => toPlatformSheet(callCreator(theme, variant, createSheetX))
       } else {
         //getVariant!=null && variantToString==null => NO CACHING
-        staticSheet = renderAddIn.toPlatformSheet(callCreator(theme, variant, createSheetX))
+        staticSheet = toPlatformSheet(callCreator(theme, variant, createSheetX))
       }
     } else {
       variantCacheId = '#novariant#'
-      getStaticSheet = () => renderAddIn.toPlatformSheet(callCreator(theme, null, createSheetX))
+      getStaticSheet = () => toPlatformSheet(callCreator(theme, null, createSheetX))
     }
   }
 
@@ -222,9 +218,9 @@ const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, opti
   }
 
   //** MERGE staticSheet with classes and className
-  const root = className && { root: renderAddIn.toPlatformRuleSet(callCreator(theme, variant, className)) }
+  const root = className && { root: toPlatformRuleSet(callCreator(theme, variant, className)) }
   if (classes || root) {
-    renderState.codeClasses = deepModify(staticSheet, renderAddIn.toPlatformSheet(callCreator(theme, variant, classes)), root)
+    renderState.codeClasses = deepModify(staticSheet, toPlatformSheet(callCreator(theme, variant, classes)), root)
     delete renderState.codeClasses.__isCached
   } else
     renderState.codeClasses = staticSheet
@@ -262,7 +258,7 @@ const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, opti
   renderState.codeSystemProps = {
     ...systemFromPatch,
     classes: null,
-    style: renderAddIn.toPlatformRuleSet(callCreator(theme, variant, style)),
+    style: toPlatformRuleSet(callCreator(theme, variant, style)),
     variant,
   } as Types.CodeSystemProps
 
@@ -276,3 +272,32 @@ const fromOptions = (...bools: boolean[]) => {
   return res
 }
 
+export const toPlatformRuleSet = (style: Types.RulesetX & { $mediaq?}) => {
+  if (!style) return style
+  const isNative = !window.isWeb
+  if (!style.$mediaq && !style.$web && !style.$native /*&& !style.$props*/) return style
+  const { $web, $native, /*$overrides,*/ $mediaq, /*$props: $propsX,*/ ...rest } = style
+  //let $props: any = $propsX
+  //if ($propsX && ($propsX.$native && isNative || $propsX.$web && !isNative)) {
+  //  const { $native: $propsNative, $web: $propsWeb, ...restProps } = $propsX
+  //  $props = { ...restProps, ...(isNative ? $propsNative : $propsWeb) }
+  //}
+  const res: any = { ...rest, ...(isNative ? $native : $web), $mediaq: toPlatformSheet($mediaq as any)/*, $props*/ }
+  //if (!res.$overrides) delete res.$overrides;  //remove NULL or UNDEFINED
+  //if (!res.$props) delete res.$props //remove NULL or UNDEFINED
+  return res as TCommonStyles.Ruleset
+}
+
+//create platform specific sheet from cross platform one
+export const toPlatformSheet = (sheet: Types.PartialSheetX) => {
+  if (typeof sheet !== 'object') return sheet
+  const res = {}
+  for (const p in sheet) {
+    const sheet$p = sheet[p]
+    if (p === '$mediaq') { // media breakpoints
+      res[p] = sheet$p
+    } else // ruleset
+      res[p] = toPlatformRuleSet(sheet$p)
+  }
+  return res as Types.Sheet
+}

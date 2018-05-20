@@ -5,7 +5,7 @@ import jssShared, { create} from 'jss';
 import preset from 'jss-preset-default';
 import JssProvider from 'react-jss/lib/JssProvider'
 
-import { toPlatformEvents, toPlatformRuleSet_all as toPlatformRuleSet, toPlatformSheet_all as toPlatformSheet, TCommonStyles, TCommon, ThemeProvider } from 'reactxx-basic'
+import { toPlatformEvents, toPlatformRuleSet, toPlatformSheet, TCommonStyles, TCommon, ThemeProvider } from 'reactxx-basic'
 import { rulesetToClassNames } from 'reactxx-fela'
 import { TAddIn, Types} from 'reactxx'
 

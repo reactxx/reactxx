@@ -28,33 +28,28 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
 
   }
 
-  const finalizeEvent = (props: Types.OnPressAllX, propName: TCommon.TEvents, eventCurrent) => {
-    if (!props[propName]) return
-    const oldProc: any = props[propName]
-    let newProc
-    if (!oldProc['$wrapped']) {
-      newProc = (ev: any) => {
-        ev = ev ? { ...ev } : {}
-        ev.current = eventCurrent.finalCodeProps
-        oldProc(ev)
-      }
-      newProc['$wrapped'] = true
-    } else
-      newProc = oldProc
-    props[propName] = newProc
+  const finalizeEvent = (props: Types.OnPressAllX, propName: TCommon.TEvents, renderState) => {
+    const proc: any = props[propName]
+    if (!proc || proc['$wrapped']) return
+    const newProc = props[propName] = (ev: any) => {
+      ev = ev ? { ...ev } : {}
+      ev.current = renderState.finalCodeProps
+      proc(ev)
+    }
+    newProc['$wrapped'] = true
   }
-  const finalizeEvents = (props: Types.OnPressAllX, eventCurrent) => {
-    finalizeEvent(props, 'onPress', eventCurrent)
-    finalizeEvent(props, 'onLongPress', eventCurrent)
-    finalizeEvent(props, 'onPressIn', eventCurrent)
-    finalizeEvent(props, 'onPressOut', eventCurrent)
+  const finalizeEvents = (props: Types.OnPressAllX, renderState) => {
+    finalizeEvent(props, 'onPress', renderState)
+    finalizeEvent(props, 'onLongPress', renderState)
+    finalizeEvent(props, 'onPressIn', renderState)
+    finalizeEvent(props, 'onPressOut', renderState)
   }
 
-  const finalize = (defaultProps, cascadingProps, props, eventCurrent) => {
+  const finalize = (defaultProps, cascadingProps, props, renderState) => {
     // merge properties
     let finalProps = { ...props } as Types.PropsX
     if (defaultProps || cascadingProps) {
-      if (typeof defaultProps === 'function') defaultProps = defaultProps(null)
+      //if (typeof defaultProps === 'function') defaultProps = defaultProps(null)
       const inherited = defaultProps && cascadingProps ? deepMerges({}, defaultProps, cascadingProps) : defaultProps || cascadingProps
       if (inherited)
         for (const p in inherited) {
@@ -74,34 +69,34 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
       else if (!window.isWeb && $native) finalProps = deepMerges({}, finalProps, $native)
     }
     // events
-    finalizeEvents(finalProps as Types.OnPressAllX, eventCurrent)
+    finalizeEvents(finalProps as Types.OnPressAllX, renderState)
     // separate addIns props
     const addInProps: any = {}
     for (const p in finalProps) {
       if (p.startsWith('$') || p === TAddIn.addInProps.CONSTANT || p === TAddIn.addInProps.ignore || p === TAddIn.addInProps.developer_flag) {
-        addInProps[p] = finalProps[p]; delete finalProps[p] // move props from finalProps to $props
+        addInProps[p] = finalProps[p]; delete finalProps[p] // move props from finalProps to addInProps
       }
     }
     return { finalProps: finalProps as TPropsX, addInProps: addInProps as TAddIn.PropsX }
   }
 
-  const finalizeProps = (input: () => { props: Types.PropsX, theme, eventCurrent }, output: (par: { finalProps: Types.PropsX, addInProps: TAddIn.PropsX }) => void, next: () => React.ReactNode) => {
-    let props: Types.PropsX, defaultProps: Types.PropsX, eventCurrent
+  const finalizeProps = (input: () => { props: Types.PropsX, theme, renderState }, output: (par: { finalProps: Types.PropsX, addInProps: TAddIn.PropsX }) => void, next: () => React.ReactNode) => {
+    let props: Types.PropsX, defaultProps: Types.PropsX, renderState
     const render = (inheritedProps: Types.PropsX) => {
-      output(finalize(defaultProps, inheritedProps, props, eventCurrent))
+      output(finalize(defaultProps, inheritedProps, props, renderState))
       return next()
     }
     const res = () => {
       const inp = input()
-      props = inp.props; eventCurrent = inp.eventCurrent
+      props = inp.props; renderState = inp.renderState
       defaultProps = typeof options.defaultProps === 'function' ? options.defaultProps(inp.theme) : options.defaultProps
       if (options.withCascading) return <CascadingConsumer>{render}</CascadingConsumer>
-      output(finalize(defaultProps, null, props, eventCurrent))
+      output(finalize(defaultProps, null, props, renderState))
       return next()
     }
     return res
   }
 
-  return { finalizeProps, cascadingProvider: CascadingProviderComponent as React.ComponentClass<TPropsX>}
+  return { finalizeProps, cascadingProvider: CascadingProviderComponent as React.ComponentClass<TPropsX> }
 
 }

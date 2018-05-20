@@ -19,7 +19,7 @@ export namespace Types {
     {
       $native?: TCommonStyles.RulesetNative<T> // native specific rules
       $web?: TCommonStyles.RulesetWeb // web specific rules
-      $props?: PropsInRulesetX<R>
+      //$props?: PropsInRulesetX<R>
     } &
     TAddIn.RulesetAddInX<T, R>
 

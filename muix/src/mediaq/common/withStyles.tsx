@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, theme, renderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformSheet_all as toPlatformSheet, toPlatformRuleSet_all as toPlatformRuleSet } from 'reactxx-basic'
+import { TCommon, ThemeProvider, theme, renderAddIn, TRenderState as TRenderStateBasic, withStyles } from 'reactxx-basic'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet } from 'reactxx-mediaq'
 
 import { Types } from '../typings/types'
@@ -19,9 +19,6 @@ export interface TRenderState extends TRenderStateBasic {
 /************************
 * ADDINS
 *************************/
-
-renderAddIn.toPlatformSheet = toPlatformSheet
-renderAddIn.toPlatformRuleSet = toPlatformRuleSet
 
 // used before converting props and sheet to platform dependent form
 renderAddIn.beforeToPlatform = (state: TRenderState, next) =>

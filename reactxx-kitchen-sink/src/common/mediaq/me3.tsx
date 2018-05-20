@@ -58,8 +58,7 @@ registerTheme<Theme>(Consts.Theme2, { breakpoints: { mobileEnd: 640, tabletEnd: 
 
 const label: Types.CodeSFC<Shape> = ({ system: { classes, mediaqFlags }, children }) => {
   const root = mergeRulesets<Types.ViewRulesetX>(classes.root)
-  const info = mediaqFlags.isMobile ? 'MOBILE' : mediaqFlags.isTablet ? 'TABLET' : 'DESKTOP'
-  return <Text className={root}>[{info}] {children}</Text>
+  return <Text className={root}>{mediaqFlags.isMobile ? '[MOBILE]' : mediaqFlags.isTablet ? '[TABLET]' : '[DESKTOP]'} {children}</Text>
 }
 
 const Label: Types.ComponentTypeX<Shape> = withStylesCreator(Consts.Label, sheet, label)({
@@ -79,7 +78,7 @@ const App: React.SFC = props => {
       <ThemeProvider theme={Consts.Theme2}>
         <Label>{LoremIpsum(40)}</Label>
         {/*
-        WRONG: sheet.root.$mediaq value is parametrized by THEME (not by PROPS). Changing props impacts mediaqFlags only (used in label.info variable)
+        WRONG: sheet.root.$mediaq value is parametrized by THEME (not by PROPS). Changing props impacts mediaqFlags only
         <Label $mediaq={{ isMobile: [null, 1024], isTablet: [1024, 1280], isDesktop: [1280, null] }}>WRONG: {LoremIpsum(40)}</Label>
         */}
       </ThemeProvider>

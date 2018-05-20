@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { toPlatformSheet_all as toPlatformSheet, toPlatformRuleSet_all as toPlatformRuleSet, TCommon, ThemeProvider, theme, renderAddIn, withStyles, TRenderState as TRenderStateBasic } from 'reactxx-basic'
+import { TCommon, ThemeProvider, theme, renderAddIn, withStyles, TRenderState as TRenderStateBasic } from 'reactxx-basic'
 import { animations, TAnimation } from 'reactxx-animation'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet } from 'reactxx-mediaq'
 import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
@@ -23,9 +23,6 @@ export interface TRenderState extends TRenderStateBasic {
 /************************
 * ADDINS
 *************************/
-
-renderAddIn.toPlatformSheet = toPlatformSheet
-renderAddIn.toPlatformRuleSet = toPlatformRuleSet
 
 // before converting props and sheet to platform dependent form
 renderAddIn.beforeToPlatform = (state: TRenderState, next) =>
