@@ -26,7 +26,7 @@ export const enum Consts {
 
 type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeViews<'root'> & TCommon.ShapeTexts<'label'>,
-  nameType: Consts.Label | Consts.Badge,
+  //nameType: Consts.Label | Consts.Badge,
   theme: Theme,
 }>
 
@@ -66,6 +66,15 @@ const label: Types.CodeSFC<Shape> = ({ system: { classes, style }, children}) =>
 
 export const LabelCreator = withStylesCreator<Shape>(Consts.Label, labelSheet, label)
 export const Label = LabelCreator()
+
+// 
+export const LabelEx = LabelCreator({
+  sheet: (theme, variant) => {
+    const sheet = labelSheet(theme, variant)
+    return { ...sheet, label: { ...sheet.label, color: theme.color.dark } }
+  }
+})
+
 
 /************************
 * BADGE

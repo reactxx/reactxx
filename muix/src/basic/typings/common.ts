@@ -28,7 +28,7 @@ export namespace TCommon {
     propsNative?: {} //native only props 
     propsWeb?: React.HTMLAttributes<Element>//web only props
     //**** export type of component name
-    nameType?: string | null
+    //nameType?: string | null
     //**** component theme par
     variant?: {}
     //**** component theme par
@@ -41,7 +41,7 @@ export namespace TCommon {
   export type getProps<R extends Shape> = R['props']
   export type getPropsWeb<R extends Shape> = R['propsWeb']
   export type getPropsNative<R extends Shape> = R['propsNative']
-  export type getNameType<R extends Shape> = R['nameType']
+  //export type getNameType<R extends Shape> = R['nameType']
   export type getVariant<R extends Shape = Shape> = R['variant']
   export type getTheme<R extends Shape = Shape> = R['theme']
   export type getEvents<R extends Shape = Shape> = R['events']
@@ -69,6 +69,6 @@ export namespace TCommon {
   //export type ThemeProviderProp<T extends ThemeBase = ThemeBase> = string | T
   export type ThemeProviderProps<T extends ThemeBase = ThemeBase> = { theme: T | string | ((parentTheme: T) => T) }
   export type ThemeProviderTyped<T extends ThemeBase = ThemeBase> = React.ComponentClass<ThemeProviderProps<T>>
-  export interface ThemeContext { theme?: ThemeBase; $cache?: {} }
+  export interface ThemeContext { theme?: ThemeBase; $cache?: {}[] }
 
 }

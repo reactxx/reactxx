@@ -11,7 +11,7 @@ export interface CacheItem {
   addIns?
   isConstant?: boolean
 }
-export type Cache = { [name: string]: { [variantId: string]: CacheItem } }
+export type Cache = { [variantId: string]: CacheItem }[]
 
 export const platformSheetFromCache = (name: string, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, propsPatch: TAddIn.CodeProps[], finalProps: Types.PropsX, themeContext: TCommon.ThemeContext) => {
 

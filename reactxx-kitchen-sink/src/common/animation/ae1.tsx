@@ -17,7 +17,7 @@ export const enum Consts {
 
 type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeViews<'root'> & TCommon.ShapeTexts<'label'>
-  nameType: Consts.Label
+  //nameType: Consts.Label
   animation: { //animation sheets
     anim1: TCommon.ShapeViews<'rootAnim'> & TCommon.ShapeTexts<'labelAnim'>
     anim2: TCommon.ShapeViews<'rootAnim'> & TCommon.ShapeTexts<'labelAnim'>

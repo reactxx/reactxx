@@ -32,7 +32,7 @@ export namespace TComps {
     props: { numberOfLines?: number; url?: string }
     propsWeb: React.HTMLAttributes<HTMLSpanElement>
     propsNative: ReactN.TextProperties
-    nameType: CompNames.Text | CompNames.AnimatedText | string
+    //nameType: CompNames.Text | CompNames.AnimatedText | string
   }>
 
   export type ViewShape = Types.OverwriteShape<{
@@ -43,7 +43,7 @@ export namespace TComps {
     events: TCommon.TEventsAll
     propsWeb: React.HTMLAttributes<HTMLDivElement>
     propsNative: ReactN.ViewProperties
-    nameType: CompNames.View | CompNames.AnimatedView | string
+    //nameType: CompNames.View | CompNames.AnimatedView | string
   }>
 
   export type IconShape = Types.OverwriteShape<{
@@ -55,7 +55,7 @@ export namespace TComps {
     props: { data: string; url?: string }
     propsWeb: React.SVGAttributes<SVGElement>
     propsNative: ReactN.TextProperties
-    nameType: CompNames.Icon | CompNames.AnimatedIcon | string
+    //nameType: CompNames.Icon | CompNames.AnimatedIcon | string
   }>
 
   export type ScrollViewShape = Types.OverwriteShape<{
@@ -68,6 +68,6 @@ export namespace TComps {
     }
     propsWeb: React.HTMLAttributes<HTMLDivElement>
     propsNative: ReactN.ScrollViewProperties
-    nameType: CompNames.ScrollView | CompNames.AnimatedScrollView | string
+    //nameType: CompNames.ScrollView | CompNames.AnimatedScrollView | string
   }>
 }

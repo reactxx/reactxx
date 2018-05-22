@@ -15,7 +15,7 @@ export const enum Consts {
 type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<'root' | 'mobile' | 'tablet' | 'desktop'>,
   mediaq: 'isMobile' | 'isTablet' | 'isDesktop'
-  nameType: Consts.Label1
+  //nameType: Consts.Label1
 }>
 
 /************************

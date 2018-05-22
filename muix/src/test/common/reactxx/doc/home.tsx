@@ -19,7 +19,7 @@ export namespace DocHome {
       openClose: TCommon.ShapeViews<'content'> & TCommon.ShapeTexts<'icon'>
     }
     props: { title: React.ReactNode }
-    nameType: CompNames.ExpandPanel
+    //nameType: CompNames.ExpandPanel
   }>
 }
 

@@ -38,7 +38,7 @@ export namespace Types {
     props: {}; propsNative: ReactN.ViewProperties; propsWeb: React.HTMLAttributes<HTMLElement>
     variant: never,
     theme: TCommon.ThemeBase
-    nameType: null
+    //nameType: null
   }
 
   export type OverwriteShape<R extends Shape> = PartialOverwrite<ShapeDefault, R>
@@ -154,7 +154,7 @@ export namespace Types {
   /******************************************
       $props IN RULESETs
    *******************************************/
-  export type PropsInRulesetX<R extends Shape = Shape> = Partial<Overwrite<TCommon.getProps<R>, {
+  export type WithoutStylesPropsX<R extends Shape = Shape> = Partial<Overwrite<TCommon.getProps<R>, {
     $web?: Partial<TCommon.getPropsWeb<R>> //web specific style
     $native?: Partial<TCommon.getPropsNative<R>> //native specific style
     style?: never
@@ -166,18 +166,24 @@ export namespace Types {
   /******************************************
       THEME
    *******************************************/
-  export type PropsXOverwrite<R extends Types.Shape = Types.Shape> = PartialOverwrite<Types.PropsX<R>, {
-    style?: Types.RulesetX<TCommon.getStyle<R>>
-    classes?: Types.PartialSheetX<R>
-    className?: Types.RulesetX<TCommon.getStyle<R>>
+  //export type PropsXOverwrite<R extends Types.Shape = Types.Shape> = PartialOverwrite<Types.PropsX<R>, {
+  //  style?: Types.RulesetX<TCommon.getStyle<R>>
+  //  classes?: Types.PartialSheetX<R>
+  //  className?: Types.RulesetX<TCommon.getStyle<R>>
+  //}>
+  export type DefaultProps<R extends Types.Shape = Types.Shape> = PartialOverwrite<Types.PropsX<R>, {
+    classes?: never
+    style?: never
+    className?: never
   }>
 
-  export type TDefaultProps<R extends Types.Shape =  Types.Shape> = PropsXOverwrite<R> | ((theme: TCommon.getTheme<R>) => PropsXOverwrite<R>)
+  export type DefaultPropsCreator<R extends Types.Shape =  Types.Shape> = DefaultProps<R> | ((theme: TCommon.getTheme<R>) => DefaultProps<R>)
 
   export interface WithStyleOptions_ComponentX<R extends Types.Shape =  Types.Shape> extends TCommon.WithStyleOptions {
     getVariant?: (props: Types.PropsX<R> & TAddIn.GetVariant<R>, theme?: TCommon.getTheme<R>) => TCommon.getVariant<R>
     variantToString?: (variant: TCommon.getVariant<R>) => string
-    defaultProps?: TDefaultProps<R>
+    defaultProps?: DefaultPropsCreator<R>
+    sheet?: SheetCreatorX<R>
   }
 
   /******************************************

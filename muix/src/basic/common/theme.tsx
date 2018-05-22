@@ -3,7 +3,7 @@ import warning from 'warning'
 
 import { TCommon } from '../typings/common'
 
-const globalThemeContext: TCommon.ThemeContext = { theme: null, $cache: {} }
+const globalThemeContext: TCommon.ThemeContext = { theme: null, $cache: [] }
 const themeContext = React.createContext<TCommon.ThemeContext>(null)
 const namedThemes: { [themeName: string]: TCommon.ThemeBase } = {}
 
@@ -37,7 +37,7 @@ export class ThemeProvider extends React.Component<TCommon.ThemeProviderProps> {
     warning(actTheme, 'ThemeProvider: missing theme')
     //if (typeof theme === 'string') actTheme.themeName = theme
     if (!this.themeContext || actTheme !== this.themeContext.theme)
-      this.themeContext = { theme: actTheme, $cache: {} }
+      this.themeContext = { theme: actTheme, $cache: [] }
     return <themeContext.Provider value={this.themeContext}>{children}</themeContext.Provider>
   }
 

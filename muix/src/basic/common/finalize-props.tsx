@@ -9,7 +9,7 @@ import { TCommonStyles } from 'reactxx-basic';
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
-export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCascading?: boolean; defaultProps?: Types.TDefaultProps }) => {
+export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCascading?: boolean; defaultProps?: Types.DefaultPropsCreator }) => {
 
   const { Provider: CascadingProvider, Consumer: CascadingConsumer } = options.withCascading ? React.createContext<TPropsX>(null) : { Provider: null, Consumer: null } as React.Context<TPropsX>
 
@@ -49,7 +49,6 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
     // merge properties
     let finalProps = { ...props } as Types.PropsX
     if (defaultProps || cascadingProps) {
-      //if (typeof defaultProps === 'function') defaultProps = defaultProps(null)
       const inherited = defaultProps && cascadingProps ? deepMerges({}, defaultProps, cascadingProps) : defaultProps || cascadingProps
       if (inherited)
         for (const p in inherited) {
@@ -59,8 +58,10 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
             finalPropsP || inheritedP
         }
     }
+
     // remove developer_flag for non 'development' ENV
     if (!DEV_MODE && finalProps.developer_flag) delete finalProps.developer_flag
+
     // process $web and $native props part
     const { $web, $native } = finalProps
     if ($web || $native) {
@@ -68,8 +69,10 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
       if (window.isWeb && $web) finalProps = deepMerges({}, finalProps, $web)
       else if (!window.isWeb && $native) finalProps = deepMerges({}, finalProps, $native)
     }
+
     // events
     finalizeEvents(finalProps as Types.OnPressAllX, renderState)
+
     // separate addIns props
     const addInProps: any = {}
     for (const p in finalProps) {

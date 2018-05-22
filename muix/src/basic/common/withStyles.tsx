@@ -52,18 +52,18 @@ export const renderAddIn: RenderAddIn = {
 * WITH STYLES
 *************************/
 
-export const withStylesCreator = <R extends Types.Shape, TStatic extends {} = {}>(name: TCommon.getNameType<R>, sheetCreator: Types.SheetCreatorX<R>, codeComponent: Types.CodeComponentType<R>, options?: Types.WithStyleOptions_ComponentX<R>) =>
-  (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStylesLow<R, TStatic>(name, sheetCreator, options, overrideOptions)(codeComponent)
+export const withStylesCreator = <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, codeComponent: Types.CodeComponentType<R>) =>
+  (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStylesLow<R, TStatic>(displayName, sheetCreator, overrideOptions)(codeComponent)
 
-const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCommon.getNameType<R>, sheetCreator: Types.SheetCreatorX<R>, _options?: Types.WithStyleOptions_ComponentX<R>, overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => (CodeComponent: Types.CodeComponentType<R>) => {
-
-  warning(!uniqueNameCheck[name], `*** withStylesCreator: Component with name=${name} already exist`)
-  uniqueNameCheck[name] = true
+const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, options?: Types.WithStyleOptions_ComponentX<R>) => (CodeComponent: Types.CodeComponentType<R>) => {
 
   type TPropsX = Types.PropsX<R>
 
-  //*** OPTIONS
-  const options: Types.WithStyleOptions_ComponentX = _options && overrideOptions ? deepMerges({}, _options, overrideOptions) : (overrideOptions ? { ...overrideOptions } : (_options ? { ..._options } : {}))
+  const id = compCounter++
+  displayName = `${displayName} (${id})`
+
+  sheetCreator = options && options.sheet || sheetCreator
+
   options.withTheme = fromOptions(typeof sheetCreator === 'function', options ? options.withTheme : undefined)
 
   //**** PROPERTY CASCADING 
@@ -73,7 +73,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
   //**** TO PLATFORM
   const toPlatform = (state: TRenderState, next: () => React.ReactNode) => {
     const res = () => {
-      convertToPlatform(name, sheetCreator, options, state)
+      convertToPlatform(displayName, id, sheetCreator, options, state)
       return next()
     }
     return res
@@ -101,7 +101,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
       if (addInProps.developer_flag) {
         const { themeContext, finalProps, propsPatch, addInProps, addInClasses } = this.state
         console.log(
-          `### withStyles RENDER CODE for ${name}`,
+          `### withStyles RENDER CODE for ${displayName}`,
           '\nprops: ', this.props,
           '\nfinalProps: ', finalProps,
           '\ntheme: ', themeContext.theme,
@@ -155,7 +155,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
     }
 
     public static Provider = cascadingProvider
-    public static displayName = name
+    public static displayName = displayName
   }
 
   const styled: React.ComponentClass<Types.PropsX<R>> & TProvider<R> & TStatic = Styled as any
@@ -163,7 +163,9 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(name: TCo
 
 }
 
-export const withStyles: <R extends Types.Shape, TStatic extends {} = {}>(name: TCommon.getNameType<R>, sheetCreator: Types.SheetCreatorX<R>, options?, overrideOptions?) => (CodeComponent) => any = withStylesLow
+let compCounter = 0
+
+export const withStyles: <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, options?, overrideOptions?) => (CodeComponent) => any = withStylesLow
 
 
 export interface TProvider<R extends Types.Shape> { Provider: React.ComponentClass<Types.PropsX<R>> }
@@ -174,9 +176,9 @@ export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()
 * PRIVATE
 *************************/
 
-const uniqueNameCheck: { [name: string]: boolean } = {}
+//const uniqueNameCheck: { [name: string]: boolean } = {}
 
-const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderState) => {
+const convertToPlatform = (displayName: string, id:number, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderState) => {
 
   const { propsPatch, finalProps, addInProps } = renderState
   const { classes, className, style, onPress, onLongPress, onPressIn, onPressOut, $web, $native, ...rest } = finalProps as Types.PropsX & Types.OnPressAllX
@@ -208,8 +210,8 @@ const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, opti
   }
 
   if (!staticSheet) {
-    let compCache = $cache[name]
-    if (!compCache) $cache[name] = compCache = {}
+    let compCache = $cache[id]
+    if (!compCache) $cache[id] = compCache = {}
     staticSheet = compCache[variantCacheId]
     if (!staticSheet) {
       compCache[variantCacheId] = staticSheet = getStaticSheet();
@@ -227,7 +229,7 @@ const convertToPlatform = (name: string, createSheetX: Types.SheetCreatorX, opti
 
   if (addInProps.developer_flag) {
     console.log(
-      `### withStyles PREPARE SHEET for ${name}`,
+      `### withStyles PREPARE SHEET for ${displayName}`,
       '\nstaticSheet: ', staticSheet,
       '\nroot: ', root,
       '\nclasses: ', classes,

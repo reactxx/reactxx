@@ -18,7 +18,7 @@ export namespace MuiButtonBaseT {
     native: TCommon.ShapeViews<'ripple'>
     props: ButtonBaseProps //& ReactXX.OnPressAllWeb
     propsNative: ReactN.TouchableOpacityProperties
-    nameType: CompNames.ButtonBase
+    //nameType: CompNames.ButtonBase
     theme: TCommon.ThemeBase & Muix.Theme
   }>
 

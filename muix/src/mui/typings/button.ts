@@ -22,7 +22,7 @@ export namespace MuiButtonT {
     events: TCommon.TEvents,
     props: ButtonProps
     propsNative: ReactN.TouchableOpacityProperties
-    nameType: CompNames.Button | CompNames.ButtonIconLeft | CompNames.ButtonIconRight
+    //nameType: CompNames.Button | CompNames.ButtonIconLeft | CompNames.ButtonIconRight
     variant: string
     theme: TCommon.ThemeBase & Muix.Theme
   }>

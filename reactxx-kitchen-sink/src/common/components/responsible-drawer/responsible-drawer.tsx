@@ -53,7 +53,7 @@ export namespace TResponsibleDrawer {
       tablet: TCommon.ShapeViews<'drawer' | 'content'> // tablet animation sheet
     }
     variant: Variant
-    nameType: Consts.Drawer
+    //nameType: Consts.Drawer
   }>
 }
 

@@ -146,6 +146,7 @@
     <TypeScriptCompile Include="src\animation\web\index.ts" />
     <TypeScriptCompile Include="src\basic\common\develop.tsx" />
     <TypeScriptCompile Include="src\basic\common\finalize-props.tsx" />
+    <TypeScriptCompile Include="src\basic\common\invariant.tsx" />
     <TypeScriptCompile Include="src\basic\common\to-platform.ts" />
     <TypeScriptCompile Include="src\basic\common\sheet-cache.tsx" />
     <TypeScriptCompile Include="src\basic\common\withStyles.tsx" />
