@@ -1,1 +1,1 @@
-D:/reactxx/muix/src/basic/typings/types.ts
+c:/reactxx/muix/src/basic/typings/types.ts

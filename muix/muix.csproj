@@ -120,6 +120,7 @@
     </Content>
     <Content Include="src\reactxx\README.md" />
     <Content Include="trash\mui\README.md" />
+    <Content Include="src\basic\typings\mklink-c.cmd" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
