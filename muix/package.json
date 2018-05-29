@@ -2,7 +2,7 @@
   "name": "reactxx-all",
   "version": "0.1.0",
   "dependencies": {
-    "react": "16.4.0",
+    "react": "^16.3.2",
     "@material-ui/core": "1.1.0",
     "reactxx-mdi": "^0.1.67",
     "tslib": "1.9.1",
@@ -23,6 +23,7 @@
     "name": "reactxx-all",
     "main": "reactxx-all.js",
     "dependencies": {
+      "react-dom": "npm:react-dom@^16.3.2",
       "classnames": "npm:classnames@^2.2.5",
       "fela-dom": "npm:fela-dom@^7.0.4",
       "fela-plugin-extend": "npm:fela-plugin-extend@^6.0.3",
