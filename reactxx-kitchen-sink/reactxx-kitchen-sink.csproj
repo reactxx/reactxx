@@ -136,7 +136,6 @@
     <TypeScriptCompile Include="src\common\mediaq\me3.tsx" />
     <TypeScriptCompile Include="src\common\typings.d.ts" />
     <TypeScriptCompile Include="src\native\index.tsx" />
-    <TypeScriptCompile Include="src\react-16.3.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\web\index.tsx" />
   </ItemGroup>
