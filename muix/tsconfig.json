@@ -55,6 +55,7 @@
     "node_modules/reactxx-mdi/typings.ts"
   ],
   "exclude": [
-    "src/ks/typings.d.ts"
+    "src/ks/typings.d.ts",
+    "trash/**/*"
   ]
 }

@@ -109,17 +109,7 @@
     <Content Include="%24refresh-all.cmd" />
     <Content Include="src\doc\home.md" />
     <Content Include="src\doc\home - Copy.md" />
-    <Content Include="trash\mui\native\fonts\Roboto-Light.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="trash\mui\native\fonts\Roboto-Medium.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="trash\mui\native\fonts\Roboto-Regular.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="src\reactxx\README.md" />
-    <Content Include="trash\mui\README.md" />
     <Content Include="src\basic\typings\mklink-c.cmd" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -216,32 +206,17 @@
     <TypeScriptCompile Include="src\reactxx\typings\types.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\web\index.tsx" />
-    <TypeScriptCompile Include="trash\mui\common\createTypography.ts" />
-    <TypeScriptCompile Include="trash\mui\common\createMuiTheme.ts" />
-    <TypeScriptCompile Include="trash\mui\native\ButtonBase\ButtonBase.tsx" />
-    <TypeScriptCompile Include="trash\mui\native\Button\Button.tsx" />
-    <TypeScriptCompile Include="trash\mui\native\expoLoadFonts.ts" />
-    <TypeScriptCompile Include="trash\mui\native\index.tsx" />
-    <TypeScriptCompile Include="trash\mui\typings\button.ts" />
-    <TypeScriptCompile Include="trash\mui\typings\button-base.ts" />
-    <TypeScriptCompile Include="trash\mui\ButtonBase\ButtonBase.tsx" />
-    <TypeScriptCompile Include="trash\mui\Button\Button.tsx" />
     <TypeScriptCompile Include="src\reactxx\native\index.ts" />
     <TypeScriptCompile Include="src\reactxx\web\comps.tsx" />
     <TypeScriptCompile Include="src\reactxx\web\index.ts" />
-    <TypeScriptCompile Include="trash\mui-test\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\web\appstate\index.tsx" />
     <TypeScriptCompile Include="src\test\common\reactxx\doc\home.tsx" />
     <TypeScriptCompile Include="src\test\common\reactxx\index.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\index.tsx" />
-    <TypeScriptCompile Include="trash\mui-test\animation.tsx" />
     <TypeScriptCompile Include="src\test\native\App.tsx" />
     <TypeScriptCompile Include="src\test\common\root.tsx" />
     <TypeScriptCompile Include="src\test\web\index.tsx" />
-    <TypeScriptCompile Include="trash\mui\typings\muix.ts" />
-    <TypeScriptCompile Include="trash\mui\index.tsx" />
-    <TypeScriptCompile Include="trash\mui\typings\mui.ts" />
     <TypeScriptCompile Include="src\basic\index.ts" />
     <TypeScriptCompile Include="src\basic\typings\common-styles.ts" />
   </ItemGroup>
@@ -250,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\test\common\animation\" />
+    <Folder Include="trash\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
