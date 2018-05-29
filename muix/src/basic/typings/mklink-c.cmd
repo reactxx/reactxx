@@ -1,4 +1,4 @@
-set drive=d:
+set drive=c:
 
 del %drive%\reactxx\muix\src\reactxx\typings\types.ts /q
 del %drive%\reactxx\muix\src\mediaq\typings\types.ts  /q
