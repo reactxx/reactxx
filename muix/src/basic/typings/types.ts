@@ -28,7 +28,7 @@ export namespace Types {
   export interface ViewRulesetX<TAddIn extends {} = {}> extends RulesetX<'View'> { }
   export interface TextRulesetX<TAddIn extends {} = {}> extends RulesetX<'Text'> { }
   export interface ImageRulesetX<TAddIn extends {} = {}> extends RulesetX<'Image'> { }
-  export interface ScrollViewRulesetX<TAddIn extends {} = {}> extends RulesetX<'ScrollView'> { }
+  //export interface ScrollViewRulesetX<TAddIn extends {} = {}> extends RulesetX<'ScrollView'> { }
 
   //******************** Shape
   export interface Shape extends TCommon.Shape, TAddIn.Shape { }

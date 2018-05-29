@@ -130,20 +130,20 @@ export namespace TCommonStyles {
     COMMON RULESET
   *******************************************/
 
-  export type RulesetNativeIds = 'Text' | 'View' | 'Image' | 'ScrollView'
+  export type RulesetNativeIds = 'Text' | 'View' | 'Image' //| 'ScrollView'
 
   //******************** Native ruleset which are compatible with web
   export type RulesetCommon<T extends RulesetNativeIds> =
     T extends 'Text' ? TCommonStyles.TextStyle :
     T extends 'Image' ? TCommonStyles.ImageStyle :
-    T extends 'ScrollView' ? TCommonStyles.ScrollViewStyle :
+    //T extends 'ScrollView' ? TCommonStyles.ScrollViewStyle :
     TCommonStyles.ViewStyle
 
   //******************** Platform specific ruleset
   export type RulesetNative<T extends RulesetNativeIds = never> =
     T extends 'Text' ? ReactN.TextStyle :
     T extends 'Image' ? ReactN.ImageStyle :
-    T extends 'ScrollView' ? ReactN.ScrollViewStyle :
+    //T extends 'ScrollView' ? ReactN.ScrollViewStyle :
     ReactN.ViewStyle
 
   export type RulesetWeb = CSS.Properties & { [P in CSS.SimplePseudos]?: CSS.Properties }

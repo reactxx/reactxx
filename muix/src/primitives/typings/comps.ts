@@ -62,7 +62,7 @@ export namespace TComps {
     common: TCommon.ShapeScrollViews<'root'> & TCommon.ShapeViews<'container'>
     web: 'rootHorizontal' | 'containerHorizontal'
     native: null
-    style: 'ScrollView'
+    style: 'View'
     props: {
       horizontal?: boolean
     }

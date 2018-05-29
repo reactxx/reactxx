@@ -1248,8 +1248,8 @@ declare module 'expo' {
 
   interface LinearGradientProps extends ViewProperties {
     colors?: Array<string>
-    start?: [number, number]
-    end?: [number, number]
+    //start?: number //[number, number]
+    //end?: number //[number, number]
     locations?: Array<number>
   }
 
@@ -1665,7 +1665,7 @@ declare module 'expo' {
 
     interface SvgProps extends ViewProperties {
       height?: number | string
-      opacity?: number | string
+      //opacity?: number | string
       preserveAspectRatio?: string
       viewBox?: string
       width?: number | string

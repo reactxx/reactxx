@@ -1,6 +1,0 @@
-export { Palette } from 'material-ui/styles/createPalette'
-export { Style, Typography} from 'material-ui/styles/createTypography'
-export { Theme, ThemeOptions} from 'material-ui/styles/createMuiTheme'
-export { ButtonProps} from 'material-ui/Button/Button'
-export { ButtonBaseProps } from 'material-ui/ButtonBase/ButtonBase'
-export { StyledComponentProps } from 'material-ui/styles/withStyles'

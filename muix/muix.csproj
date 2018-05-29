@@ -99,6 +99,7 @@
     <Content Include="deploy\primitives\package.json" />
     <Content Include="deploy\primitives\README.md" />
     <Content Include="package-web.json" />
+    <Content Include="package-all.json" />
     <None Include="packages.config" />
     <Content Include="README.md" />
     <Content Include="StyleSheet1.css" />
@@ -108,17 +109,17 @@
     <Content Include="%24refresh-all.cmd" />
     <Content Include="src\doc\home.md" />
     <Content Include="src\doc\home - Copy.md" />
-    <Content Include="src\mui\native\fonts\Roboto-Light.ttf">
+    <Content Include="trash\mui\native\fonts\Roboto-Light.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="src\mui\native\fonts\Roboto-Medium.ttf">
+    <Content Include="trash\mui\native\fonts\Roboto-Medium.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="src\mui\native\fonts\Roboto-Regular.ttf">
+    <Content Include="trash\mui\native\fonts\Roboto-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="src\reactxx\README.md" />
-    <Content Include="src\mui\README.md" />
+    <Content Include="trash\mui\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -156,6 +157,7 @@
     <TypeScriptCompile Include="src\basic\typings\types.ts" />
     <TypeScriptCompile Include="src\basic\typings\typings.d.ts" />
     <TypeScriptCompile Include="src\animation\typings\add-in.ts" />
+    <TypeScriptCompile Include="src\expo.d.ts" />
     <TypeScriptCompile Include="src\ks\common\animation\ae1.tsx" />
     <TypeScriptCompile Include="src\ks\common\animation\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\basic\pe8.tsx" />
@@ -213,32 +215,32 @@
     <TypeScriptCompile Include="src\reactxx\typings\types.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />
     <TypeScriptCompile Include="src\ks\web\index.tsx" />
-    <TypeScriptCompile Include="src\mui\common\createTypography.ts" />
-    <TypeScriptCompile Include="src\mui\common\createMuiTheme.ts" />
-    <TypeScriptCompile Include="src\mui\native\ButtonBase\ButtonBase.tsx" />
-    <TypeScriptCompile Include="src\mui\native\Button\Button.tsx" />
-    <TypeScriptCompile Include="src\mui\native\expoLoadFonts.ts" />
-    <TypeScriptCompile Include="src\mui\native\index.tsx" />
-    <TypeScriptCompile Include="src\mui\typings\button.ts" />
-    <TypeScriptCompile Include="src\mui\typings\button-base.ts" />
-    <TypeScriptCompile Include="src\mui\ButtonBase\ButtonBase.tsx" />
-    <TypeScriptCompile Include="src\mui\Button\Button.tsx" />
+    <TypeScriptCompile Include="trash\mui\common\createTypography.ts" />
+    <TypeScriptCompile Include="trash\mui\common\createMuiTheme.ts" />
+    <TypeScriptCompile Include="trash\mui\native\ButtonBase\ButtonBase.tsx" />
+    <TypeScriptCompile Include="trash\mui\native\Button\Button.tsx" />
+    <TypeScriptCompile Include="trash\mui\native\expoLoadFonts.ts" />
+    <TypeScriptCompile Include="trash\mui\native\index.tsx" />
+    <TypeScriptCompile Include="trash\mui\typings\button.ts" />
+    <TypeScriptCompile Include="trash\mui\typings\button-base.ts" />
+    <TypeScriptCompile Include="trash\mui\ButtonBase\ButtonBase.tsx" />
+    <TypeScriptCompile Include="trash\mui\Button\Button.tsx" />
     <TypeScriptCompile Include="src\reactxx\native\index.ts" />
     <TypeScriptCompile Include="src\reactxx\web\comps.tsx" />
     <TypeScriptCompile Include="src\reactxx\web\index.ts" />
-    <TypeScriptCompile Include="src\test\common\mui\button-demo.tsx" />
+    <TypeScriptCompile Include="trash\mui-test\button-demo.tsx" />
     <TypeScriptCompile Include="src\test\web\appstate\index.tsx" />
     <TypeScriptCompile Include="src\test\common\reactxx\doc\home.tsx" />
     <TypeScriptCompile Include="src\test\common\reactxx\index.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />
     <TypeScriptCompile Include="src\test\common\shadows\index.tsx" />
-    <TypeScriptCompile Include="src\test\native\animation.tsx" />
+    <TypeScriptCompile Include="trash\mui-test\animation.tsx" />
     <TypeScriptCompile Include="src\test\native\App.tsx" />
     <TypeScriptCompile Include="src\test\common\root.tsx" />
     <TypeScriptCompile Include="src\test\web\index.tsx" />
-    <TypeScriptCompile Include="src\mui\typings\muix.ts" />
-    <TypeScriptCompile Include="src\mui\index.tsx" />
-    <TypeScriptCompile Include="src\mui\typings\mui.ts" />
+    <TypeScriptCompile Include="trash\mui\typings\muix.ts" />
+    <TypeScriptCompile Include="trash\mui\index.tsx" />
+    <TypeScriptCompile Include="trash\mui\typings\mui.ts" />
     <TypeScriptCompile Include="src\basic\index.ts" />
     <TypeScriptCompile Include="src\basic\typings\common-styles.ts" />
   </ItemGroup>

@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "dependencies": {
     "react": "16.3.1",
-    "material-ui": "^1.0.0-beta.38",
+    "@material-ui/core": "^1.0.0",
+    "@material-ui/core/button": "^1.0.0",
     "reactxx-mdi": "^0.1.67",
     "tslib": "^1.9.0",
     "warning": "^3.0.0"
@@ -34,7 +35,6 @@
       "jss-preset-default": "npm:jss-preset-default@^4.0.1",
       "prop-types": "npm:prop-types@^15.6.0",
       "react-jss": "npm:react-jss@^8.1.0",
-      "material-ui": "npm:material-ui@next",
       "core-js": "npm:core-js@^2.5.1",
       "deepmerge": "npm:deepmerge@^2.0.1",
       "reactxx-mdi": "npm:reactxx-mdi@^0.1.67",
