@@ -9,7 +9,7 @@ export namespace TAddIn {
   *******************************************/
 
   //******************** Cross platform
-  export interface RulesetAddInX<T extends TCommonStyles.RulesetNativeIds, R extends Types.Shape> { }
+  export interface RulesetAddInX<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Types.Shape = Types.Shape> { }
   export interface SheetX<R extends Types.Shape = Types.Shape> { }
 
 
@@ -25,12 +25,12 @@ export namespace TAddIn {
     *******************************************/
 
   //******************** Cross platform 
-  export enum addInProps { ignore = 'ignore', CONSTANT = 'CONSTANT', developer_flag ='developer_flag'}
+  //export enum addInProps { ignore = 'ignore', CONSTANT = 'CONSTANT', developer_flag ='developer_flag'}
   export interface PropsX<R extends Types.Shape = Types.Shape> {
-    [addInProps.ignore]?: boolean
-    [addInProps.CONSTANT]?: boolean
-    [addInProps.developer_flag]?: boolean
-    developer_RenderCounter: number
+    $ignore?: boolean
+    $constant?: boolean
+    $developer_flag?: boolean
+    $developer_RenderCounter: number
   }
 
   //******************** Platform specific

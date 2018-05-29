@@ -48,7 +48,7 @@ const label: Types.CodeSFC<Shape> = ({ system: { classes, mediaqFlags }, childre
     mediaqFlags.isDesktop && classes.desktop,
   )
   const info = mediaqFlags.isMobile ? 'MOBILE' : mediaqFlags.isTablet ? 'TABLET' : 'DESKTOP'
-  return <Text className={root} developer_flag>[{info}] {children}</Text>
+  return <Text className={root} $developer_flag>[{info}] {children}</Text>
 }
 
 const Label: Types.ComponentTypeX<Shape> = withStylesCreator(Consts.Label1, sheet, label)({

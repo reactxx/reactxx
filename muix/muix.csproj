@@ -98,6 +98,7 @@
     <Content Include="deploy\activable\README.md" />
     <Content Include="deploy\primitives\package.json" />
     <Content Include="deploy\primitives\README.md" />
+    <Content Include="package-web.json" />
     <None Include="packages.config" />
     <Content Include="README.md" />
     <Content Include="StyleSheet1.css" />

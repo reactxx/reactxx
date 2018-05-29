@@ -19,6 +19,8 @@ export namespace Types {
     {
       $native?: TCommonStyles.RulesetNative<T> // native specific rules
       $web?: TCommonStyles.RulesetWeb // web specific rules
+      $before?: RulesetX<T> 
+      $after?: RulesetX<T> 
       //$props?: PropsInRulesetX<R>
     } &
     TAddIn.RulesetAddInX<T, R>
@@ -78,12 +80,14 @@ export namespace Types {
   *******************************************/
 
   //******************** Cross platform component types
+  export type ThemedPropsX<R extends Shape = Shape> = (theme: TCommon.getTheme<R>) => PropsX<R>
 
   export type PropsX<R extends Shape = Shape> = PartialOverwrite<TCommon.getProps<R>,
     {
       style?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<TCommon.getStyle<R>, R>>
-      $web?: Partial<TCommon.getPropsWeb<R>> //web specific style
-      $native?: Partial<TCommon.getPropsNative<R>> //native specific style
+      $web?: Partial<TCommon.getPropsWeb<R>> //web specific props
+      $native?: Partial<TCommon.getPropsNative<R>> //native specific props
+      $themedProps?: ThemedPropsX<R>
       classes?: PartialSheetCreatorX<R> // cross platform sheet
       className?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<TCommon.getStyle<R>, R>>
     } &
@@ -171,18 +175,40 @@ export namespace Types {
   //  classes?: Types.PartialSheetX<R>
   //  className?: Types.RulesetX<TCommon.getStyle<R>>
   //}>
-  export type DefaultProps<R extends Types.Shape = Types.Shape> = PartialOverwrite<Types.PropsX<R>, {
-    classes?: never
-    style?: never
-    className?: never
-  }>
+  //export type NotStyledPropsX<R extends Types.Shape = Types.Shape> = PartialOverwrite<PropsX<R>, {
+  //  classes?: never
+  //  style?: never
+  //  className?: never
+  //}>
 
-  export type DefaultPropsCreator<R extends Types.Shape =  Types.Shape> = DefaultProps<R> | ((theme: TCommon.getTheme<R>) => DefaultProps<R>)
+  //export type CascadingProps<R extends Types.Shape = Types.Shape> = PartialOverwrite<PropsX<R>, {
+  //  $themed?: (theme: TCommon.getTheme<R>) => NotStyledPropsX<R>
+  //  style?: never
+  //  className?: never
+  //}>
+
+  //export type DefaultPropsCreator<R extends Types.Shape =  Types.Shape> = NotStyledPropsX<R> | ((theme: TCommon.getTheme<R>) => NotStyledPropsX<R>)
+
+  export interface CascadingProp {
+    classes?: Types.PartialSheetCreatorX
+    className?: Types.RootRulesetCreatorX
+    style?: Types.RootRulesetCreatorX
+    $themedProps?: Types.ThemedPropsX
+    rest?: Types.PropsX
+  }
+
+  export interface CascadingStyles {
+    classes: Types.PartialSheetCreatorX[]
+    className: Types.RootRulesetCreatorX[]
+    style: Types.RootRulesetCreatorX[]
+  }
+
 
   export interface WithStyleOptions_ComponentX<R extends Types.Shape =  Types.Shape> extends TCommon.WithStyleOptions {
     getVariant?: (props: Types.PropsX<R> & TAddIn.GetVariant<R>, theme?: TCommon.getTheme<R>) => TCommon.getVariant<R>
     variantToString?: (variant: TCommon.getVariant<R>) => string
-    defaultProps?: DefaultPropsCreator<R>
+    defaultProps?: Types.PropsX<R>
+    defaultPropsAsCascading?: CascadingProp
     sheet?: SheetCreatorX<R>
   }
 

@@ -99,7 +99,7 @@ const iconHeart = MDI.Heart
 
 const App_ = props => <>
   <LabelEx>Label 10</LabelEx>
-  <LabelEx iconData={MDI.Stop} classes={{ label: { color: 'white' } }} developer_flag>Label 11</LabelEx>
+  <LabelEx iconData={MDI.Stop} classes={{ label: { color: 'white' } }} $developer_flag>Label 11</LabelEx>
 </>
 
 const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>

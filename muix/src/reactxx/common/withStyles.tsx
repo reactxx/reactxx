@@ -16,8 +16,9 @@ const DEV_MODE = process.env.NODE_ENV === 'development'
 *************************/
 export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
-  addInClasses?: TAddIn.SheetX
+  //addInClasses?: TAddIn.SheetX
   codeSystemProps?: Types.CodeSystemProps
+  codeClasses?: Types.Sheet & TAddIn.SheetX
 }
 
 /************************
@@ -37,7 +38,7 @@ renderAddIn.afterToPlatform = (state: TRenderState, next) =>
     () => state.codeClasses as TMediaQ.MediaQSheet,
     mediaSheetPatch => mediaSheetPatch && state.codeClassesPatch.push(mediaSheetPatch as Types.Sheet),
     animations( // process animation $animations part of sheet
-      () => state.addInClasses.$animations,
+      () => state.codeClasses.$animations,
       animations => state.codeSystemProps.animations = animations,
       next
     )

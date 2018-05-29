@@ -12,7 +12,6 @@ import { TAddIn } from '../typings/add-in'
 *************************/
 export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
-  addInClasses?: TAddIn.SheetX
   codeSystemProps?: Types.CodeSystemProps
 }
 

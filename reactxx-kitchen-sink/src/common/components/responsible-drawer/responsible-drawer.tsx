@@ -230,7 +230,7 @@ const App: React.SFC = () => <AppContainer>
   </ResponsibleDrawer>
 </AppContainer>
 
-const Drawer: React.SFC = () => <ScrollView CONSTANT classes={{ container: { flex: 1, backgroundColor: 'lightgray' } }}>
+const Drawer: React.SFC = () => <ScrollView $constant classes={{ container: { flex: 1, backgroundColor: 'lightgray' } }}>
   <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, padding: 10, backgroundColor: 'gray', }}>
     <Text className={{ flexGrow: 1, color: 'white' }}>{LoremIpsum(2)}</Text>
     {/* re-render ResponsibleDrawer.LayoutChanged only when Provider notifies (hide x display it): */}
@@ -243,7 +243,7 @@ const Drawer: React.SFC = () => <ScrollView CONSTANT classes={{ container: { fle
 
 const drawer = <Drawer />
 
-const Content: React.SFC = () => <ScrollView CONSTANT classes={{ container: { flex: 1 } }}> {/* content */}
+const Content: React.SFC = () => <ScrollView $constant classes={{ container: { flex: 1 } }}> {/* content */}
   <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}>
     {/* re-render ResponsibleDrawer.LayoutChanged only when Provider notifies (hide x display it): */}
     <ResponsibleDrawer.LayoutChanged>

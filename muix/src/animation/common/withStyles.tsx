@@ -12,8 +12,8 @@ import { TAddIn } from '../typings/add-in'
 *************************/
 export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
-  addInClasses?: TAddIn.SheetX
   codeSystemProps?: Types.CodeSystemProps
+  codeClasses?: Types.Sheet & TAddIn.SheetX
 }
 
 /************************
@@ -26,7 +26,7 @@ renderAddIn.beforeToPlatform = (state: TRenderState, next) => next
 // after converting props and sheet to platform dependent form
 renderAddIn.afterToPlatform = (state: TRenderState, next) =>
   animations( // process animation $animations part of sheet
-    () => state.addInClasses.$animations,
+    () => state.codeClasses.$animations,
     animations => state.codeSystemProps.animations = animations,
     next
   )

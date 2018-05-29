@@ -20,7 +20,7 @@ const anyView = (isAnim: boolean) => (props => {
 
 const anyText = (isAnim: boolean) => (props => {
   const ActText = isAnim ? Animated.Text : TextRN
-  const { system: { style, classes, developer_RenderCounter }, onPress, url, children, ...rest } = props
+  const { system: { style, classes, $developer_RenderCounter }, onPress, url, children, ...rest } = props
   const rootStyle = mergeRulesets<'Text'>(classes.root, props.numberOfLines === 1 && classes.singleLineStyle, style)
   //Link to URL
   const doPress = !url ? onPress : () => Linking.canOpenURL(url).then(supported => {
@@ -29,8 +29,8 @@ const anyText = (isAnim: boolean) => (props => {
   }).catch(err => warning(false, `An error occurred: ${err}, ${url}`))
 
   let child = children
-  if (developer_RenderCounter) {
-    const txt = '[' + developer_RenderCounter + '] '
+  if ($developer_RenderCounter) {
+    const txt = '[' + $developer_RenderCounter + '] '
     child = React.Children.count(children) == 0 ? txt : [txt, ...React.Children.toArray(children)]
   } 
   return <ActText style={rootStyle} {...rest} onPress={doPress}>{child}</ActText>

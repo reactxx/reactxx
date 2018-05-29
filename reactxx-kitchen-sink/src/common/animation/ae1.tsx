@@ -94,7 +94,7 @@ const label: Types.CodeSFC<Shape> = props => {
   const root = mergeRulesets<Types.ViewRulesetX>(classes.root, isAnim1 && anim1.sheet.rootAnim, isAnim2 && anim2.sheet.rootAnim, isAnim3 && anim3.sheet.rootAnim)
   const label = mergeRulesets<Types.TextRulesetX>(classes.label, isAnim1 && anim1.sheet.labelAnim, isAnim2 && anim2.sheet.labelAnim, isAnim3 && anim3.sheet.labelAnim)
   return <View {...rest} className={root}>
-    <Text className={label} developer_flag>
+    <Text className={label} $developer_flag>
       {children}
     </Text>
   </View>

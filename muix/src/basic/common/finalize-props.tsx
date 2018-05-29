@@ -4,26 +4,43 @@ import warning from 'warning'
 import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
 import { deepMerges, deepMerge, isObjectLiteral } from './to-platform'
-import { TAddIn } from '../typings/add-in';
-import { TCommonStyles } from 'reactxx-basic';
+import { TAddIn } from '../typings/add-in'
+import { TCommonStyles } from 'reactxx-basic'
+import { theme } from './theme'
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
-export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCascading?: boolean; defaultProps?: Types.DefaultPropsCreator }) => {
+interface ProviderProps {
+  cascadingItems?: Types.CascadingProp[]
+}
 
-  const { Provider: CascadingProvider, Consumer: CascadingConsumer } = options.withCascading ? React.createContext<TPropsX>(null) : { Provider: null, Consumer: null } as React.Context<TPropsX>
+interface CascadingStyles extends Types.CascadingStyles {
+  props: (Types.ThemedPropsX | Types.PropsX)[]
+}
 
-  class CascadingProviderComponent extends React.Component<TPropsX> {
+
+export const getCascadingItem = (props: Types.PropsX) => {
+  const { classes, className, style, $themedProps, ...rest } = props
+  return { classes, className, style, $themedProps, rest: Object.keys(rest).length === 0 ? null : rest } as Types.CascadingProp
+}
+
+export const FinalizeProps = <R extends Types.Shape>(options?: Types.WithStyleOptions_ComponentX<R>) => {
+
+  const { Provider: CascadingProvider, Consumer: CascadingConsumer } = options.withCascading ? React.createContext<ProviderProps>(null) : { Provider: null, Consumer: null } as React.Context<ProviderProps>
+
+  class CascadingProviderComponent extends React.Component<Types.PropsX> {
 
     render() {
-      if (options.withCascading) return <CascadingConsumer>{this.CASCADING}</CascadingConsumer>
-      warning(DEV_MODE, `Component.Provider does not exist (component.name=${name}). Use 'C' variant of the component, e.g. <LabelC.Provider><LabelC>. 'C' variant of the component is created by e.g. 'LabelCreator = withStylesCreator<Shape>(Consts.Label, sheet, label); export const LabelC = LabelCreator({ withCascading: true})'`) //`
-      return null
+      if (!options.withCascading) {
+        warning(DEV_MODE, `Component.Provider does not exist (component.name=${name}). Use 'C' variant of the component, e.g. <LabelC.Provider><LabelC>. 'C' variant of the component is created by e.g. 'LabelCreator = withStylesCreator<Shape>(Consts.Label, sheet, label); export const LabelC = LabelCreator({ withCascading: true})'`) //`
+        return this.props.children
+      }
+      return <CascadingConsumer>{this.CASCADING}</CascadingConsumer>
     }
 
-    CASCADING = (parentsProps: TPropsX) => {
-      const { children, ...rest } = this.props as Types.PropsX & { children?: React.ReactNode }
-      return <CascadingProvider value={(parentsProps && rest ? deepMerges({}, parentsProps, rest) : rest) as TPropsX}>{children}</CascadingProvider>
+    CASCADING = (cascadingProps: ProviderProps) => {
+      const item = getCascadingItem(this.props)
+      return <CascadingProvider value={{ cascadingItems: cascadingProps ? [...cascadingProps.cascadingItems, item] : [item] }}>{this.props.children}</CascadingProvider >
     }
 
   }
@@ -45,61 +62,74 @@ export const FinalizeProps = <TPropsX extends Types.PropsX>(options: { withCasca
     finalizeEvent(props, 'onPressOut', renderState)
   }
 
-  const finalize = (defaultProps, cascadingProps, props, renderState) => {
-    // merge properties
-    let finalProps = { ...props } as Types.PropsX
-    if (defaultProps || cascadingProps) {
-      const inherited = defaultProps && cascadingProps ? deepMerges({}, defaultProps, cascadingProps) : defaultProps || cascadingProps
-      if (inherited)
-        for (const p in inherited) {
-          const finalPropsP = finalProps[p]; const inheritedP = inherited[p]
-          finalProps[p] = finalPropsP && isObjectLiteral(inheritedP) ?
-            deepMerges({}, inheritedP, finalPropsP) :
-            finalPropsP || inheritedP
-        }
-    }
+  const finalize = (theme, defaultProps: Types.CascadingProp, cascadingProps: ProviderProps, props: Types.PropsX, renderState) => {
+
+    const items = [defaultProps, ...(cascadingProps ? cascadingProps.cascadingItems : null), getCascadingItem(props)]
+
+    const cascadingStyles = items.reduce<CascadingStyles>((prev, curr) => {
+      if (!curr) return prev
+      if (curr.rest) prev.props.push(curr.rest)
+      if (curr.$themedProps) prev.props.push(curr.$themedProps(theme))
+      if (curr.className) prev.className.push(curr.className)
+      if (curr.classes) prev.classes.push(curr.classes)
+      if (curr.style) prev.style.push(curr.style)
+      return prev
+    }, { props: [], classes: [], className: [], style: [] })
+
+    const needsDeepMerge = cascadingStyles.props.length > 1
+
+    props = needsDeepMerge ? deepMerges({}, ...cascadingStyles.props) : { ...cascadingStyles.props[0] }
+    delete cascadingStyles.props
 
     // remove developer_flag for non 'development' ENV
-    if (!DEV_MODE && finalProps.developer_flag) delete finalProps.developer_flag
+    if (!DEV_MODE && props.$developer_flag) delete props.$developer_flag
 
     // process $web and $native props part
-    const { $web, $native } = finalProps
-    if ($web || $native) {
-      delete finalProps.$web; delete finalProps.$native
-      if (window.isWeb && $web) finalProps = deepMerges({}, finalProps, $web)
-      else if (!window.isWeb && $native) finalProps = deepMerges({}, finalProps, $native)
+    const { $web, $native } = props
+    if ($web) {
+      delete props.$web
+      if (window.isWeb) props = needsDeepMerge ? deepMerges(props, $web) : deepMerges({}, props, $web)
+    } else if ($native) {
+      delete props.$native
+      if (!window.isWeb) props = needsDeepMerge ? deepMerges(props, $native) : deepMerges({}, props, $native)
     }
 
     // events
-    finalizeEvents(finalProps as Types.OnPressAllX, renderState)
+    finalizeEvents(props as Types.OnPressAllX, renderState)
 
-    // separate addIns props
+    // separate addIns props (starting with $)
     const addInProps: any = {}
-    for (const p in finalProps) {
-      if (p.startsWith('$') || p === TAddIn.addInProps.CONSTANT || p === TAddIn.addInProps.ignore || p === TAddIn.addInProps.developer_flag) {
-        addInProps[p] = finalProps[p]; delete finalProps[p] // move props from finalProps to addInProps
+    for (const p in props) {
+      if (p.startsWith('$')) {
+        addInProps[p] = props[p]; delete props[p] // move props from finalProps to addInProps, e.g. $mediaq: {'-640': {}}
       }
     }
-    return { finalProps: finalProps as TPropsX, addInProps: addInProps as TAddIn.PropsX }
+
+    return { finalProps: props as Types.PropsX, addInProps, cascadingStyles }
   }
 
-  const finalizeProps = (input: () => { props: Types.PropsX, theme, renderState }, output: (par: { finalProps: Types.PropsX, addInProps: TAddIn.PropsX }) => void, next: () => React.ReactNode) => {
-    let props: Types.PropsX, defaultProps: Types.PropsX, renderState
-    const render = (inheritedProps: Types.PropsX) => {
-      output(finalize(defaultProps, inheritedProps, props, renderState))
+  interface FinalizePropsOutput {
+    finalProps: Types.PropsX
+    addInProps: TAddIn.PropsX
+    cascadingStyles: Types.CascadingStyles
+  }
+
+  const finalizeProps = (input: () => { props: Types.PropsX, theme, renderState }, output: (par: FinalizePropsOutput) => void, next: () => React.ReactNode) => {
+    let props: Types.PropsX, theme, renderState
+    const render = (cascadingProps: ProviderProps) => {
+      output(finalize(theme, options.defaultPropsAsCascading, cascadingProps, props, renderState))
       return next()
     }
     const res = () => {
       const inp = input()
-      props = inp.props; renderState = inp.renderState
-      defaultProps = typeof options.defaultProps === 'function' ? options.defaultProps(inp.theme) : options.defaultProps
+      props = inp.props; renderState = inp.renderState; theme = inp.theme
       if (options.withCascading) return <CascadingConsumer>{render}</CascadingConsumer>
-      output(finalize(defaultProps, null, props, renderState))
+      output(finalize(theme, options.defaultPropsAsCascading, null, props, renderState))
       return next()
     }
     return res
   }
 
-  return { finalizeProps, cascadingProvider: CascadingProviderComponent as React.ComponentClass<TPropsX> }
+  return { finalizeProps, cascadingProvider: CascadingProviderComponent as any as React.ComponentClass<Types.PropsX<R>> }
 
 }
