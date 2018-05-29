@@ -1,6 +1,7 @@
-set root=d:\reactxx\muix\
+set driver=d:
+set root=%driver%\reactxx\muix\
 
-d:
+%driver%
 
 cd %root%
 rmdir node_modules /s /q
