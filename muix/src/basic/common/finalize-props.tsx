@@ -10,23 +10,27 @@ import { theme } from './theme'
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
-interface ProviderProps {
-  cascadingItems?: Types.CascadingProp[]
-}
+type StyleFromPropsArray = Types.StyleFromProps[]
 
-interface CascadingStyles extends Types.CascadingStyles {
+interface AccumulatedStylesAndProps extends Types.AccumulatedStylesFromProps {
   props: (Types.ThemedPropsX | Types.PropsX)[]
 }
 
+export interface FinalizePropsOutput {
+  finalProps: Types.PropsX
+  addInProps: TAddIn.PropsX
+  accumulatedStylesFromProps: Types.AccumulatedStylesFromProps
+  eventsX: Types.OnPressAllX
+}
 
-export const getCascadingItem = (props: Types.PropsX) => {
+export const getStyleFromProps = (props: Types.PropsX) => {
   const { classes, className, style, $themedProps, ...rest } = props
-  return { classes, className, style, $themedProps, rest: Object.keys(rest).length === 0 ? null : rest } as Types.CascadingProp
+  return { classes, className, style, $themedProps, rest: Object.keys(rest).length === 0 ? null : rest } as Types.StyleFromProps
 }
 
 export const FinalizeProps = <R extends Types.Shape>(options?: Types.WithStyleOptions_ComponentX<R>) => {
 
-  const { Provider: CascadingProvider, Consumer: CascadingConsumer } = options.withCascading ? React.createContext<ProviderProps>(null) : { Provider: null, Consumer: null } as React.Context<ProviderProps>
+  const { Provider: CascadingProvider, Consumer: CascadingConsumer } = options.withCascading ? React.createContext<StyleFromPropsArray>(null) : { Provider: null, Consumer: null } as React.Context<StyleFromPropsArray>
 
   class CascadingProviderComponent extends React.Component<Types.PropsX> {
 
@@ -38,35 +42,38 @@ export const FinalizeProps = <R extends Types.Shape>(options?: Types.WithStyleOp
       return <CascadingConsumer>{this.CASCADING}</CascadingConsumer>
     }
 
-    CASCADING = (cascadingProps: ProviderProps) => {
-      const item = getCascadingItem(this.props)
-      return <CascadingProvider value={{ cascadingItems: cascadingProps ? [...cascadingProps.cascadingItems, item] : [item] }}>{this.props.children}</CascadingProvider >
+    CASCADING = (cascadingProps: StyleFromPropsArray) => {
+      const item = getStyleFromProps(this.props)
+      return <CascadingProvider value={cascadingProps ? [...cascadingProps, item] : [item]}>{this.props.children}</CascadingProvider >
     }
 
   }
 
-  const finalizeEvent = (props: Types.OnPressAllX, propName: TCommon.TEvents, renderState) => {
-    const proc: any = props[propName]
+  const finalizeEvent = (finalProps: Types.OnPressAllX, propName: TCommon.TEvents, eventsPlatform, platformName: string, eventsX: Types.OnPressAllX, renderState) => {
+    const proc: any = eventsPlatform && platformName[platformName] || finalProps[propName]
     if (!proc || proc['$wrapped']) return
-    const newProc = props[propName] = (ev: any) => {
+    delete proc[propName]; if (eventsPlatform) delete eventsPlatform[platformName]
+    const newProc = finalProps[platformName] = eventsX[propName] = (ev: any) => {
       ev = ev ? { ...ev } : {}
       ev.current = renderState.finalCodeProps
       proc(ev)
     }
     newProc['$wrapped'] = true
   }
-  const finalizeEvents = (props: Types.OnPressAllX, renderState) => {
-    finalizeEvent(props, 'onPress', renderState)
-    finalizeEvent(props, 'onLongPress', renderState)
-    finalizeEvent(props, 'onPressIn', renderState)
-    finalizeEvent(props, 'onPressOut', renderState)
+  const finalizeEvents = (finalProps: Types.PropsX & Types.OnPressAllX, eventsX: Types.OnPressAllX, renderState) => {
+    const eventsPlatform = window.isWeb ? finalProps.$web : finalProps.$native
+    finalizeEvent(finalProps, 'onPress', eventsPlatform, window.isWeb ? 'onClick' : 'onPress', eventsX, renderState)
+    finalizeEvent(finalProps, 'onPressIn', eventsPlatform, window.isWeb ? 'onMouseDown' : 'onPressIn', eventsX, renderState)
+    finalizeEvent(finalProps, 'onPressOut', eventsPlatform, window.isWeb ? 'onMouseUp' : 'onPressOut', eventsX, renderState)
+    finalizeEvent(finalProps, 'onLongPress', eventsPlatform, window.isWeb ? '?' : 'onLongPress', eventsX, renderState)
   }
 
-  const finalize = (theme, defaultProps: Types.CascadingProp, cascadingProps: ProviderProps, props: Types.PropsX, renderState) => {
+  const finalize = (theme, _defaultPropsAsStyleFromProps: Types.StyleFromProps, cascadingStyleFromPropsArray: StyleFromPropsArray, currentProps: Types.PropsX, renderState) => {
 
-    const items = [defaultProps, ...(cascadingProps ? cascadingProps.cascadingItems : null), getCascadingItem(props)]
+    const allStyleFromPropsArray: StyleFromPropsArray = [_defaultPropsAsStyleFromProps, ...cascadingStyleFromPropsArray || null, getStyleFromProps(currentProps)]
 
-    const cascadingStyles = items.reduce<CascadingStyles>((prev, curr) => {
+    // accumulate Types.StyleFromProps[] to Types.StylesFromProps
+    const accumulatedStylesAndProps = allStyleFromPropsArray.reduce<AccumulatedStylesAndProps>((prev, curr) => {
       if (!curr) return prev
       if (curr.rest) prev.props.push(curr.rest)
       if (curr.$themedProps) prev.props.push(curr.$themedProps(theme))
@@ -76,55 +83,47 @@ export const FinalizeProps = <R extends Types.Shape>(options?: Types.WithStyleOp
       return prev
     }, { props: [], classes: [], className: [], style: [] })
 
-    const needsDeepMerge = cascadingStyles.props.length > 1
+    const needsDeepMerge = accumulatedStylesAndProps.props.length > 1
 
-    props = needsDeepMerge ? deepMerges({}, ...cascadingStyles.props) : { ...cascadingStyles.props[0] }
-    delete cascadingStyles.props
+    // merge non-style props
+    let finalProps: Types.PropsX = needsDeepMerge ? deepMerges({}, ...accumulatedStylesAndProps.props) : { ...accumulatedStylesAndProps.props[0] }
+    delete accumulatedStylesAndProps.props
 
     // remove developer_flag for non 'development' ENV
-    if (!DEV_MODE && props.$developer_flag) delete props.$developer_flag
-
-    // process $web and $native props part
-    const { $web, $native } = props
-    if ($web) {
-      delete props.$web
-      if (window.isWeb) props = needsDeepMerge ? deepMerges(props, $web) : deepMerges({}, props, $web)
-    } else if ($native) {
-      delete props.$native
-      if (!window.isWeb) props = needsDeepMerge ? deepMerges(props, $native) : deepMerges({}, props, $native)
-    }
+    if (!DEV_MODE && finalProps.$developer_flag) delete finalProps.$developer_flag
 
     // events
-    finalizeEvents(props as Types.OnPressAllX, renderState)
+    const eventsX: Types.OnPressAllX = {}
+    finalizeEvents(finalProps, eventsX, renderState)
+
+    // process $web and $native props part
+    const { $web, $native } = finalProps
+    delete finalProps.$web; delete finalProps.$native
+    if ($web && window.isWeb) finalProps = needsDeepMerge ? deepMerges(finalProps, $web) : deepMerges({}, finalProps, $web)
+    if ($native && !window.isWeb) finalProps = needsDeepMerge ? deepMerges(finalProps, $native) : deepMerges({}, finalProps, $native)
 
     // separate addIns props (starting with $)
     const addInProps: any = {}
-    for (const p in props) {
+    for (const p in finalProps) {
       if (p.startsWith('$')) {
-        addInProps[p] = props[p]; delete props[p] // move props from finalProps to addInProps, e.g. $mediaq: {'-640': {}}
+        addInProps[p] = finalProps[p]; delete finalProps[p] // move props from finalProps to addInProps, e.g. for $mediaq: {'-640': {}}
       }
     }
 
-    return { finalProps: props as Types.PropsX, addInProps, cascadingStyles }
-  }
-
-  interface FinalizePropsOutput {
-    finalProps: Types.PropsX
-    addInProps: TAddIn.PropsX
-    cascadingStyles: Types.CascadingStyles
+    return { finalProps, addInProps, accumulatedStylesFromProps: accumulatedStylesAndProps, eventsX } as FinalizePropsOutput
   }
 
   const finalizeProps = (input: () => { props: Types.PropsX, theme, renderState }, output: (par: FinalizePropsOutput) => void, next: () => React.ReactNode) => {
     let props: Types.PropsX, theme, renderState
-    const render = (cascadingProps: ProviderProps) => {
-      output(finalize(theme, options.defaultPropsAsCascading, cascadingProps, props, renderState))
+    const render = (cascadingStyleFromPropsArray: StyleFromPropsArray) => {
+      output(finalize(theme, options._defaultPropsAsStyleFromProps, cascadingStyleFromPropsArray, props, renderState))
       return next()
     }
     const res = () => {
       const inp = input()
       props = inp.props; renderState = inp.renderState; theme = inp.theme
       if (options.withCascading) return <CascadingConsumer>{render}</CascadingConsumer>
-      output(finalize(theme, options.defaultPropsAsCascading, null, props, renderState))
+      output(finalize(theme, options._defaultPropsAsStyleFromProps, null, props, renderState))
       return next()
     }
     return res

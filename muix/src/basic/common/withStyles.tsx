@@ -3,12 +3,12 @@ import ReactN from 'react-native'
 import warning from 'warning'
 
 import { ThemeProvider, ThemeConsumer, theme } from './theme'
-import { toPlatformEvents, deepMerges, deepModify } from './to-platform'
+import { deepMerges, deepModify } from './to-platform'
 import { TCommon } from '../typings/common'
 import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
-import { FinalizeProps, getCascadingItem } from './finalize-props'
+import { FinalizeProps, getStyleFromProps } from './finalize-props'
 import { renderCounter } from './develop'
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
@@ -23,7 +23,7 @@ export interface TRenderState {
 
   // Step 2: merge props, separate addInProps and cascadingStyles. Sources are defaultProps, cascading result, actual props
   finalProps?: Types.PropsX
-  cascadingStyles?: Types.CascadingStyles
+  accumulatedStylesFromProps?: Types.AccumulatedStylesFromProps // 
   addInProps?: TAddIn.PropsX // separated props, which name starts with $, e.g. $mediaq, $developer_flag etc.
   codeProps?: Types.CodeProps // platform dependent events
   codeSystemProps?: Types.CodeSystemProps // platform independent events with codeSystemProps parametters
@@ -77,7 +77,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
 
   options.withTheme = typeof options.withTheme === 'boolean' ? options.withTheme : typeof sheetCreator === 'function'
 
-  if (options.defaultProps) options.defaultPropsAsCascading = getCascadingItem(options.defaultProps)
+  if (options.defaultProps) options._defaultPropsAsStyleFromProps = getStyleFromProps(options.defaultProps)
 
   //**** PROPERTY CASCADING 
 
@@ -150,7 +150,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
         themeContext => this.state.themeContext = themeContext,
         finalizeProps(
           () => ({ props: this.props, theme: this.state.themeContext.theme, renderState: this.state }),
-          ({ finalProps, addInProps, cascadingStyles }) => { this.state.finalProps = finalProps; this.state.addInProps = addInProps; this.state.cascadingStyles = cascadingStyles },
+          ({ finalProps, addInProps, accumulatedStylesFromProps }) => { this.state.finalProps = finalProps; this.state.addInProps = addInProps; this.state.accumulatedStylesFromProps = accumulatedStylesFromProps },
           renderAddIn.beforeToPlatform(this.state,
             toPlatform(this.state,
               renderAddIn.afterToPlatform(this.state,
@@ -193,14 +193,14 @@ export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()
 
 const convertToPlatform = (displayName: string, id:number, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderState) => {
 
-  const { propsPatch, finalProps, addInProps, cascadingStyles } = renderState
+  const { propsPatch, finalProps, addInProps, accumulatedStylesFromProps } = renderState
   const { theme, $cache } = renderState.themeContext
   const { onPress, onLongPress, onPressIn, onPressOut, ...rest } = finalProps as Types.PropsX & Types.OnPressAllX
   let variant = null
 
   // classes modifiers
-  const toMergeSheetsX = [...cascadingStyles.classes, ...cascadingStyles.className.map(className => ({ root: className })), ... (window.isWeb ? null : cascadingStyles.style.map(style => ({ root: style })))]
-  const toMergeStylesX = window.isWeb && cascadingStyles.style.length > 0 ? cascadingStyles.style : null
+  const toMergeSheetsX = [...accumulatedStylesFromProps.classes, ...accumulatedStylesFromProps.className.map(className => ({ root: className })), ... (window.isWeb ? null : accumulatedStylesFromProps.style.map(style => ({ root: style })))]
+  const toMergeStylesX = window.isWeb && accumulatedStylesFromProps.style.length > 0 ? accumulatedStylesFromProps.style : null
 
   let getSheetFromCache
   let toPlatformSheets

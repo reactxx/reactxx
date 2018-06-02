@@ -100,8 +100,8 @@
     <Content Include="deploy\primitives\README.md" />
     <Content Include="package-web.json" />
     <Content Include="package-all.json" />
-    <Content Include="mklink.cmd" />
-    <Content Include="mklink-c.cmd" />
+    <Content Include="%24mklink.cmd" />
+    <Content Include="%24mklink-c.cmd" />
     <None Include="packages.config" />
     <Content Include="README.md" />
     <Content Include="StyleSheet1.css" />

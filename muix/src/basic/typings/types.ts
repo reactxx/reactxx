@@ -19,8 +19,8 @@ export namespace Types {
     {
       $native?: TCommonStyles.RulesetNative<T> // native specific rules
       $web?: TCommonStyles.RulesetWeb // web specific rules
-      $before?: RulesetX<T> 
-      $after?: RulesetX<T> 
+      $before?: RulesetX<T>
+      $after?: RulesetX<T>
       //$props?: PropsInRulesetX<R>
     } &
     TAddIn.RulesetAddInX<T, R>
@@ -103,37 +103,44 @@ export namespace Types {
 
   export type omitPropNames = 'system' | 'style' | 'classes' | 'className' | keyof TAddIn.CodeProps
 
-  export type CodeSystem<R extends Shape = Shape> = {
-    theme: TCommon.getTheme<R>
-    variant: TCommon.getVariant<R>
-  } &
-    TEventsX<R> &
+  export type CodeSystem<R extends Shape = Shape> =
+    {
+      theme: TCommon.getTheme<R>
+      variant: TCommon.getVariant<R>
+    } &
+    TEventsX<R> & // events passed to cross platform component, used in custom component
     TAddIn.PropsX<R>
 
 
   // *** web
-  export type CodePropsWeb<R extends Shape = Shape, TCodePropsWebAddIn extends {} = {}> = Omit<TCommon.getProps<R> & TCommon.getPropsWeb<R>, omitPropNames> & Types.OnPressAllWeb & {
-    system:
+  export type CodePropsWeb<R extends Shape = Shape, TCodePropsWebAddIn extends {} = {}> =
+    Omit<TCommon.getProps<R> & TCommon.getPropsWeb<R>, omitPropNames> &
+    Types.OnPressAllWeb &
     {
-      style: TCommonStyles.RulesetWeb
-      classes: SheetWeb<R>
-    } &
-    CodeSystem<R> &
-    TAddIn.CodePropsWeb<R>
-  }
+      system:
+      {
+        style: TCommonStyles.RulesetWeb
+        classes: SheetWeb<R>
+      } &
+      CodeSystem<R> &
+      TAddIn.CodePropsWeb<R>
+    }
 
   export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
   // *** native
-  export type CodePropsNative<R extends Shape = Shape> = Omit<TCommon.getProps<R> & TCommon.getPropsNative<R>, omitPropNames> & Types.OnPressAllNative & {
-    system:
+  export type CodePropsNative<R extends Shape = Shape> =
+    Omit<TCommon.getProps<R> & TCommon.getPropsNative<R>, omitPropNames> &
+    Types.OnPressAllNative &
     {
-      style: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
-      classes: SheetNative<R>
-    } &
-    CodeSystem<R> &
-    TAddIn.CodePropsNative<R>
-  }
+      system:
+      {
+        style: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
+        classes: SheetNative<R>
+      } &
+      CodeSystem<R> &
+      TAddIn.CodePropsNative<R>
+    }
 
   export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
 
@@ -149,7 +156,10 @@ export namespace Types {
     Omit<TCommon.getProps<R> & (TCommon.getPropsNative<R> | TCommon.getPropsWeb<R>), omitPropNames> &
     Types.OnPressAllNative &
     Types.OnPressAllWeb &
-    { system: CodeSystemProps<R> }
+    {
+      children?: React.ReactNode
+      system: CodeSystemProps<R>
+    }
 
   export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
@@ -189,7 +199,7 @@ export namespace Types {
 
   //export type DefaultPropsCreator<R extends Types.Shape =  Types.Shape> = NotStyledPropsX<R> | ((theme: TCommon.getTheme<R>) => NotStyledPropsX<R>)
 
-  export interface CascadingProp {
+  export interface StyleFromProps {
     classes?: Types.PartialSheetCreatorX
     className?: Types.RootRulesetCreatorX
     style?: Types.RootRulesetCreatorX
@@ -197,7 +207,8 @@ export namespace Types {
     rest?: Types.PropsX
   }
 
-  export interface CascadingStyles {
+  // all classes's, className's and style's, accumulated from 
+  export interface AccumulatedStylesFromProps {
     classes: Types.PartialSheetCreatorX[]
     className: Types.RootRulesetCreatorX[]
     style: Types.RootRulesetCreatorX[]
@@ -208,7 +219,7 @@ export namespace Types {
     getVariant?: (props: Types.PropsX<R> & TAddIn.GetVariant<R>, theme?: TCommon.getTheme<R>) => TCommon.getVariant<R>
     variantToString?: (variant: TCommon.getVariant<R>) => string
     defaultProps?: Types.PropsX<R>
-    defaultPropsAsCascading?: CascadingProp
+    _defaultPropsAsStyleFromProps?: StyleFromProps // computed property, = getStyleFromProps(defaultProps)
     sheet?: SheetCreatorX<R>
   }
 
@@ -217,12 +228,15 @@ export namespace Types {
   *******************************************/
 
   export interface MouseEventPar<R extends Types.Shape = Types.Shape> extends React.MouseEvent<Element> { current?: CodeProps<R> }
-  export type MouseEventEx<R extends Types.Shape = Types.Shape> = (ev?: MouseEventPar<R>) => void
-  
+  export type MouseEventEx<R extends Types.Shape = Types.Shape> = React.EventHandler<MouseEventPar<R>>// (ev?: MouseEventPar<R>) => void
+
   export interface OnPressX<R extends Types.Shape = Types.Shape> { onPress?: MouseEventEx<R>; onLongPress?: MouseEventEx<R> }
   export interface OnPressAllX<R extends Types.Shape = Types.Shape> extends OnPressX<R> { onPressIn?: MouseEventEx<R>; onPressOut?: MouseEventEx<R> }
 
-  export interface OnPressAllWeb { onClick?: React.MouseEventHandler<Element>; onMouseDown?: React.MouseEventHandler<Element>; onMouseUp?: React.MouseEventHandler<Element> }
+  export interface OnPressAllWeb { onClick?: React.MouseEvent<Element>; onMouseDown?: React.MouseEvent<Element>; onMouseUp?: React.MouseEvent<Element> }
+
+  //export type NativeEvent<R extends Types.Shape = Types.Shape> = (par: NativeEventPar<R>) => void
+  export interface NativeEventPar<R extends Types.Shape = Types.Shape> extends ReactN.GestureResponderEvent { current?: CodeProps<R> }
   export interface OnPressAllNative { onPress?: () => void; onPressIn?: () => void; onPressOut?: () => void; onLongPress?: () => void }
 
 }

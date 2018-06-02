@@ -4,20 +4,20 @@ import ReactN from 'react-native'
 import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
 
-export const toPlatformEvents = ($web: Types.OnPressAllWeb, $native: Types.OnPressAllNative, propsX: Types.OnPressAllX, cp: Types.OnPressAllNative | Types.OnPressAllWeb, cpx: Types.OnPressAllX) => {
-  const { onPress, onLongPress, onPressIn, onPressOut } = propsX
-  cpx.onPress = onPress; cpx.onLongPress = onLongPress; cpx.onPressIn = onPressIn; cpx.onPressOut = onPressOut;
-  if (isType<Types.OnPressAllWeb>(cp)) {
-    const cl = $web && $web.onClick || onPress; if (cl) cp.onClick = cl
-    const cl2 = $web && $web.onMouseDown || onPressIn; if (cl2) cp.onMouseDown = cl2 
-    const cl3 = $web && $web.onMouseUp || onPressOut; if (cl3) cp.onMouseUp = cl3
-  } else if (isType<Types.OnPressAllNative>(cp)) {
-    const cl = $native && $native.onPress || onPress; if (cl) cp.onPress = cl
-    const cl1 = $native && $native.onLongPress || onLongPress; if (cl1) cp.onLongPress = cl1
-    const cl2 = $native && $native.onPressIn || onPressIn; if (cl2) cp.onPressIn = cl2
-    const cl3 = $native && $native.onPressOut || onPressOut; if (cl3) cp.onPressOut = cl3
-  }
-}
+//export const toPlatformEvents = ($web: Types.OnPressAllWeb, $native: Types.OnPressAllNative, propsX: Types.OnPressAllX, codeProps: Types.OnPressAllNative | Types.OnPressAllWeb, codeSystemProps: Types.OnPressAllX) => {
+//  const { onPress, onLongPress, onPressIn, onPressOut } = propsX
+//  codeSystemProps.onPress = onPress; codeSystemProps.onLongPress = onLongPress; codeSystemProps.onPressIn = onPressIn; codeSystemProps.onPressOut = onPressOut;
+//  if (isType<Types.OnPressAllWeb>(codeProps)) {
+//    const cl = $web && $web.onClick || onPress; if (cl) codeProps.onClick = cl
+//    const cl2 = $web && $web.onMouseDown || onPressIn; if (cl2) codeProps.onMouseDown = cl2 
+//    const cl3 = $web && $web.onMouseUp || onPressOut; if (cl3) codeProps.onMouseUp = cl3
+//  } else if (isType<Types.OnPressAllNative>(codeProps)) {
+//    const cl = $native && $native.onPress || onPress; if (cl) codeProps.onPress = cl
+//    const cl1 = $native && $native.onLongPress || onLongPress; if (cl1) codeProps.onLongPress = cl1
+//    const cl2 = $native && $native.onPressIn || onPressIn; if (cl2) codeProps.onPressIn = cl2
+//    const cl3 = $native && $native.onPressOut || onPressOut; if (cl3) codeProps.onPressOut = cl3
+//  }
+//}
 
 export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseDown : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
 

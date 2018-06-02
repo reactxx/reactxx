@@ -36,9 +36,7 @@
       "reactxx-mediaq": [ "src/mediaq/web/index" ],
       "reactxx-basic": [ "src/basic/index" ],
       "reactxx-activable": [ "src/activable/web/index" ],
-
       "reactxx": [ "src/reactxx/web/index" ],
-
 
       "reactxx-mui/*": [ "src/mui/*" ]
     },
@@ -55,7 +53,6 @@
     "node_modules/reactxx-mdi/typings.ts"
   ],
   "exclude": [
-    "src/ks/typings.d.ts",
-    "trash/**/*"
+    "src/ks/typings.d.ts"
   ]
 }
