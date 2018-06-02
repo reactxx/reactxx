@@ -17,7 +17,7 @@ interface AccumulatedStylesAndProps extends Types.AccumulatedStylesFromProps {
 }
 
 export interface FinalizePropsOutput {
-  finalProps: Types.PropsX
+  platformProps: Types.CodeProps
   addInProps: TAddIn.PropsX
   accumulatedStylesFromProps: Types.AccumulatedStylesFromProps
   eventsX: Types.OnPressAllX
@@ -86,31 +86,31 @@ export const FinalizeProps = <R extends Types.Shape>(options?: Types.WithStyleOp
     const needsDeepMerge = accumulatedStylesAndProps.props.length > 1
 
     // merge non-style props
-    let finalProps: Types.PropsX = needsDeepMerge ? deepMerges({}, ...accumulatedStylesAndProps.props) : { ...accumulatedStylesAndProps.props[0] }
+    let platformProps: Types.PropsX = needsDeepMerge ? deepMerges({}, ...accumulatedStylesAndProps.props) : { ...accumulatedStylesAndProps.props[0] }
     delete accumulatedStylesAndProps.props
 
     // remove developer_flag for non 'development' ENV
-    if (!DEV_MODE && finalProps.$developer_flag) delete finalProps.$developer_flag
+    if (!DEV_MODE && platformProps.$developer_flag) delete platformProps.$developer_flag
 
     // events
     const eventsX: Types.OnPressAllX = {}
-    finalizeEvents(finalProps, eventsX, renderState)
+    finalizeEvents(platformProps, eventsX, renderState)
 
     // process $web and $native props part
-    const { $web, $native } = finalProps
-    delete finalProps.$web; delete finalProps.$native
-    if ($web && window.isWeb) finalProps = needsDeepMerge ? deepMerges(finalProps, $web) : deepMerges({}, finalProps, $web)
-    if ($native && !window.isWeb) finalProps = needsDeepMerge ? deepMerges(finalProps, $native) : deepMerges({}, finalProps, $native)
+    const { $web, $native } = platformProps
+    delete platformProps.$web; delete platformProps.$native
+    if ($web && window.isWeb) platformProps = needsDeepMerge ? deepMerges(platformProps, $web) : deepMerges({}, platformProps, $web)
+    if ($native && !window.isWeb) platformProps = needsDeepMerge ? deepMerges(platformProps, $native) : deepMerges({}, platformProps, $native)
 
     // separate addIns props (starting with $)
     const addInProps: any = {}
-    for (const p in finalProps) {
+    for (const p in platformProps) {
       if (p.startsWith('$')) {
-        addInProps[p] = finalProps[p]; delete finalProps[p] // move props from finalProps to addInProps, e.g. for $mediaq: {'-640': {}}
+        addInProps[p] = platformProps[p]; delete platformProps[p] // move props from platformProps to addInProps, e.g. $developer_flag:true, $mediaq: {'-640': {}}
       }
     }
 
-    return { finalProps, addInProps, accumulatedStylesFromProps: accumulatedStylesAndProps, eventsX } as FinalizePropsOutput
+    return { platformProps: platformProps as Types.CodeProps, addInProps, accumulatedStylesFromProps: accumulatedStylesAndProps, eventsX } as FinalizePropsOutput
   }
 
   const finalizeProps = (input: () => { props: Types.PropsX, theme, renderState }, output: (par: FinalizePropsOutput) => void, next: () => React.ReactNode) => {

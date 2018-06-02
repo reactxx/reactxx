@@ -22,13 +22,13 @@ export interface TRenderState {
   themeContext?: TCommon.ThemeContext 
 
   // Step 2: merge props, separate addInProps and cascadingStyles. Sources are defaultProps, cascading result, actual props
-  finalProps?: Types.PropsX
+  platformProps?: Types.CodeProps
   accumulatedStylesFromProps?: Types.AccumulatedStylesFromProps // 
   addInProps?: TAddIn.PropsX // separated props, which name starts with $, e.g. $mediaq, $developer_flag etc.
-  codeProps?: Types.CodeProps // platform dependent events
+  //codeProps?: Types.CodeProps // platform dependent events
   codeSystemProps?: Types.CodeSystemProps // platform independent events with codeSystemProps parametters
 
-  // Step 3: call addIns - can change codeProps and codeSystemProps
+  // Step 3: call addIns - can change platformProps and codeSystemProps
   propsPatch?: TAddIn.CodeProps[] // props modified by addIns 
 
   // Step 4: 
@@ -39,7 +39,7 @@ export interface TRenderState {
 
   codeClasses?: Types.Sheet // platform dependent classes
 
-  finalCodeProps?: Types.CodeProps // final props, processed by component code
+  //finalCodeProps?: Types.CodeProps // final props, processed by component code
 }
 
 /************************
@@ -109,21 +109,21 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
     }
 
     renderComponentCode = () => {
-      const { codeClassesPatch, codeProps, codeClasses, codeSystemProps, addInProps } = this.state
+      const { platformProps, codeClassesPatch, codeClasses, codeSystemProps, addInProps } = this.state
 
       if (addInProps.$developer_flag) {
-        const { themeContext, finalProps, propsPatch/*, addInClasses*/ } = this.state
+        const { themeContext, propsPatch/*, addInClasses*/ } = this.state
         console.log(
           `### withStyles RENDER CODE for ${displayName}`,
           '\nprops: ', this.props,
-          '\nfinalProps: ', finalProps,
+          '\nplatformProps: ', platformProps,
+          '\naddInProps: ', addInProps,
           '\ntheme: ', themeContext.theme,
-          '\ncodeProps: ', codeProps,
+          //'\ncodeProps: ', codeProps,
           '\npropsPatch: ', propsPatch,
           '\ncodeSystemProps: ', codeSystemProps,
           '\ncodeClasses: ', codeClasses,
           '\ncodeClassesPatch: ', codeClassesPatch,
-          '\naddInProps: ', addInProps,
           //'\naddInClasses: ', addInClasses,
         )
       }
@@ -135,13 +135,13 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
         delete classes.$isCached
       }
 
-      this.state.finalCodeProps = {
-        ...codeProps,
+      const finalCodeProps = {
+        ...platformProps,
         system: { ...codeSystemProps, ...this.state.addInProps, classes }
       }
 
       // call component code
-      return <CodeComponent {...this.state.finalCodeProps as Types.CodeProps<R>} />
+      return <CodeComponent {...finalCodeProps as Types.CodeProps<R>} />
     }
 
     renderer =
@@ -150,7 +150,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
         themeContext => this.state.themeContext = themeContext,
         finalizeProps(
           () => ({ props: this.props, theme: this.state.themeContext.theme, renderState: this.state }),
-          ({ finalProps, addInProps, accumulatedStylesFromProps }) => { this.state.finalProps = finalProps; this.state.addInProps = addInProps; this.state.accumulatedStylesFromProps = accumulatedStylesFromProps },
+          ({ platformProps, addInProps, accumulatedStylesFromProps, eventsX }) => { this.state.platformProps = platformProps; this.state.addInProps = addInProps; this.state.accumulatedStylesFromProps = accumulatedStylesFromProps },
           renderAddIn.beforeToPlatform(this.state,
             toPlatform(this.state,
               renderAddIn.afterToPlatform(this.state,
@@ -193,9 +193,9 @@ export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()
 
 const convertToPlatform = (displayName: string, id:number, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderState) => {
 
-  const { propsPatch, finalProps, addInProps, accumulatedStylesFromProps } = renderState
+  const { propsPatch, platformProps, addInProps, accumulatedStylesFromProps } = renderState
   const { theme, $cache } = renderState.themeContext
-  const { onPress, onLongPress, onPressIn, onPressOut, ...rest } = finalProps as Types.PropsX & Types.OnPressAllX
+  //const { onPress, onLongPress, onPressIn, onPressOut, ...rest } = platformProps as Types.PropsX & Types.OnPressAllX
   let variant = null
 
   // classes modifiers
@@ -207,13 +207,21 @@ const convertToPlatform = (displayName: string, id:number, createSheetX: Types.S
   let toPlatformStyles
   const sheetFromCache = getSheetFromCache(toMergeSheetsX.length <= 0)
 
-  const classes = toPlatformSheets(theme, variant, sheetFromCache, toMergeSheetsX) // call creators (theme, variant), deepmerges toMergeSheetsX to sheetFromCache, process RulesetX.$web & $native & $before & $after
+  // call creators (theme, variant), deepmerges toMergeSheetsX to sheetFromCache, process RulesetX.$web & $native & $before & $after
+  const classes = toPlatformSheets(theme, variant, sheetFromCache, toMergeSheetsX) 
   renderState.addInClasses = classes.addInClasses //e.g {$animations:..., root: {$mediaq:...}}
   renderState.codeClasses = classes.codeClasses
 
   const style = toPlatformStyles(theme, variant, toMergeStylesX) // call creators (theme, variant), deepmerges toMergeStylesX to {}
 
-
+  //** RETURN platform dependent props for pure component code
+  const systemFromPatch = propsPatch.length > 0 ? Object.assign({}, ...propsPatch) : null
+  renderState.codeSystemProps = {
+    ...systemFromPatch,
+    classes: null,
+    style,
+    variant,
+  } as Types.CodeSystemProps
   //const sheet = toMerge.length <= 1 ? sheetFromCache.sheet : deepMerges(sheetFromCache.isConstant ? deepClone(sheetFromCache.sheet) : sheetFromCache.sheet, ...toMerge)
 
   //const { classes, className, style, onPress, onLongPress, onPressIn, onPressOut, $web, $native, ...rest } = finalProps as Types.PropsX & Types.OnPressAllX
@@ -241,7 +249,6 @@ const convertToPlatform = (displayName: string, id:number, createSheetX: Types.S
   //    getStaticSheet = () => toPlatformSheet(callCreator(theme, null, createSheetX))
   //  }
   //}
-
   //if (!staticSheet) {
   //  let compCache = $cache[id]
   //  if (!compCache) $cache[id] = compCache = {}
@@ -287,16 +294,9 @@ const convertToPlatform = (displayName: string, id:number, createSheetX: Types.S
   //renderState.codeClasses = finalCodeClasses
 
 
-  renderState.codeProps = rest as Types.CodeProps
+  //renderState.codeProps = rest as Types.CodeProps
 
-  //** RETURN platform dependent props for pure component code
-  const systemFromPatch = propsPatch.length > 0 ? Object.assign({}, ...propsPatch) : null
-  renderState.codeSystemProps = {
-    ...systemFromPatch,
-    classes: null,
-    style,
-    variant,
-  } as Types.CodeSystemProps
+ 
 
   //toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, renderState.codeProps, renderState.codeSystemProps)
 }

@@ -48,10 +48,10 @@ export const keyFrameToClassNames = (keyFrame: React.CSSProperties) => keyFrame 
 
 
 //Converts sheet to named atomic classes
-export const sheetToClassSheet = <TKey extends string>(sheet: Partial<Record<TKey, React.CSSProperties>>) => {
-  if (!sheet) return null
-  const res: Partial<Record<TKey, string>> = {}
-  for (const p in sheet) res[p] = rulesetToClassNames(sheet[p])
-  return res
-}
+//export const sheetToClassSheet = <TKey extends string>(sheet: Partial<Record<TKey, React.CSSProperties>>) => {
+//  if (!sheet) return null
+//  const res: Partial<Record<TKey, string>> = {}
+//  for (const p in sheet) res[p] = rulesetToClassNames(sheet[p])
+//  return res
+//}
 
