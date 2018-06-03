@@ -23,7 +23,7 @@ export interface TRenderState extends TRenderStateBasic {
 renderAddIn.beforeToPlatform = (state: TRenderState, next) =>
   mediaQFlags( // media flags, e.g. {mobile:false, tablet:true, desktop:false }
     () => ({ $mediaq: state.addInProps.$mediaq, theme: state.themeContext.theme }),
-    mediaqFlags => mediaqFlags && state.propsPatch.push({ mediaqFlags }),
+    mediaqFlags => mediaqFlags && (state.codeSystemPropsPatch['reactxx-mediaq'] = { mediaqFlags }),
     next)
 
 // after converting props and sheet to platform dependent form

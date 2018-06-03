@@ -112,19 +112,20 @@ interface StaticSheet extends SheetWithAddIns {
 }
 type Cache = { [variantId: string]: StaticSheet }[]
 
-const getStaticSheetFromCache = (id: number, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, propsPatch: TAddIn.CodeProps[], finalProps: Types.PropsX, themeContext: TCommon.ThemeContext) => {
+// call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
+export const getPlatformSheet = (id: number, createSheetX: Types.SheetCreatorX, themeContext: TCommon.ThemeContext, sheetXPatch, variant, variantCacheId) => {
+  return { codeClasses: null, addIns: null }
+}
+
+const getStaticSheetFromCache = (id: number, createSheetX: Types.SheetCreatorX, themeContext: TCommon.ThemeContext, sheetXPatch, variant, variantCacheId) => {
 
   const { $cache, theme } = themeContext
 
   if (typeof createSheetX !== 'function')
     return fromCache($cache, id, '#static#', () => toPlatformSheetInPlace(createSheetX))
 
-  if (!options || !options.getVariant)
+  if (!variant)
     return fromCache($cache, id, '#novariant#', () => toPlatformSheetInPlace(createSheetX(theme, null)))
-
-  const propsWithPatch = propsPatch.length > 0 ? Object.assign({}, finalProps, ...propsPatch) : finalProps
-  const variant = options.getVariant(propsWithPatch, theme)
-  const variantCacheId = options.variantToString && options.variantToString(variant)
 
   if (variantCacheId)
     return fromCache($cache, id, variantCacheId, () => toPlatformSheetInPlace(createSheetX(theme, variant)))
