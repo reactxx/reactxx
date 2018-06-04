@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactN from 'react-native'
+import warning from 'warning'
 
 import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
@@ -36,18 +37,65 @@ export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.on
 //  return { ...rest, ...(window.isWeb ? $web : $native) } as TCommonStyles.Ruleset
 //}
 
-export const deepModify = (target, ...sources) => {
-  if (!sources.find(s => !!s)) return target
-  target = { ...target }
-  const modifiers = deepMerges({}, ...sources)
-  for (const p in modifiers) {
-    const modifiersP = modifiers[p]; const targetP = target[p]
-    target[p] = targetP && isObjectLiteral(modifiersP) ? deepMerges({}, targetP, modifiersP) : modifiersP
+//export const deepModify = (target, ...sources) => {
+//  if (!sources.find(s => !!s)) return target
+//  target = { ...target }
+//  const modifiers = deepMerges({}, ...sources)
+//  for (const p in modifiers) {
+//    const modifiersP = modifiers[p]; const targetP = target[p]
+//    target[p] = targetP && isObjectLiteral(modifiersP) ? deepMerges({}, targetP, modifiersP) : modifiersP
+//  }
+//  return target
+//}
+
+export const immutableMerge = (target, ...sources) => {
+  // group sources properties by name
+  const values: { [propName: string]: {}[] | true } = {}
+  for (const p in target) if (!isObject(target[p])) values[p] = true 
+    
+  let hasObject = false
+  let res = target
+  sources.forEach(s => {
+    if (!s) return
+    if (res === target) res = { ...target }
+    for (const p in s) {
+      const val = s[p]
+      if (val === undefined) { delete res[p]; continue }
+      const isObj = isObject(val)
+      const value = values[p] || (values[p] = isObj ? [] : true)
+      warning((value === true) !== isObj, 'value.isObj === isObj')
+      if (isObj) {
+        (value as {}[]).push(val)
+        hasObject = true
+      } else
+        res[p] = val
+    }
+  })
+  if (!hasObject) return res
+
+  // apply object properties
+  for (const p in values) {
+    const val = values[p]
+    if (val===true) continue
+    const targetVal = res[p]
+    res[p] = !targetVal && val.length === 1 ? val[0] : immutableMerge(targetVal || {}, ...val)
   }
-  return target
+  return res
 }
 
 
+export const deepModifyTest = () => {
+  const a = 1, b = 2, c = 3, d = 4
+  let res = immutableMerge({}, {}, {})
+  res = immutableMerge({ a, b }, { a:11, c }, { b: 22 })
+  res = immutableMerge({ x: { a, b, z: { c } }, d },
+    { x: { a: 11, b: 22, c, z: { c: 33 } }, z: { c }, d: 44 },
+    { x: { b: 222, z: { c: 333 } }, y: { d }, d: 444 })
+  res = immutableMerge({ x: { a, b, z: { c } }, d },
+    { x: { a: undefined, c, z: undefined } },
+    { y: { b: 222 }, d: undefined })
+  debugger
+}
 
 export const deepMerges = (target, ...sources) => {
   sources.forEach(source => deepMerge(target, source))
@@ -59,13 +107,13 @@ export const deepMerge = (target, source) => {
   if (!source) return target
   if (isObject(target) && isObject(source))
     for (const key in source) {
-      //if (key==='$preserve') continue
-      //if (skipSystem && key[0] === '$' && key !== '$mediaq') continue //skip $override, $childOverride and $name props
-      if (isObjectLiteral(source[key])) {
-        if (!target[key]) target[key] = {}
-        deepMerge(target[key], source[key])
-      } else
-        target[key] = source[key]
+      const targetVal = target[key]; const sourceVal = source[key]
+      if (sourceVal === undefined) { delete target[key]; continue }
+      target[key] = isObjectLiteral(sourceVal) ? deepMerge(targetVal || {}, sourceVal) : sourceVal
+      //if (isObjectLiteral(source[key])) {
+      //  target[key] = deepMerge(target[key] || {}, source[key])
+      //} else
+      //  target[key] = source[key]
     }
   else {
     debugger

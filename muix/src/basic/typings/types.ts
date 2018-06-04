@@ -219,7 +219,8 @@ export namespace Types {
     getVariant?: (props: Types.PropsX<R> & TAddIn.GetVariant<R>, theme?: TCommon.getTheme<R>) => TCommon.getVariant<R>
     variantToString?: (variant: TCommon.getVariant<R>) => string
     defaultProps?: Types.PropsX<R>
-    _defaultPropsAsStyleFromProps?: StyleFromProps // computed property, = getStyleFromProps(defaultProps)
+    _defaultPropsAsStyleFromProps?: StyleFromProps // computed property, { $themedProps, rest } = getStyleFromProps(defaultProps)
+    _defaultClasses?: Types.PartialSheetCreatorX // computed property, { classes } = getStyleFromProps(defaultProps)
     sheet?: SheetCreatorX<R>
   }
 

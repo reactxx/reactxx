@@ -5,8 +5,9 @@ import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
 import { deepMerges, deepMerge, isObjectLiteral } from './to-platform'
 import { TAddIn } from '../typings/add-in'
-import { TCommonStyles } from 'reactxx-basic'
+import { TCommonStyles } from '../typings/common-styles'
 import { theme } from './theme'
+import { TRenderState } from './withStyles'
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
@@ -28,7 +29,7 @@ export const getStyleFromProps = (props: Types.PropsX) => {
   return { classes, className, style, $themedProps, rest: Object.keys(rest).length === 0 ? null : rest } as Types.StyleFromProps
 }
 
-export const FinalizeProps = <R extends Types.Shape>(options?: Types.WithStyleOptions_ComponentX<R>) => {
+export const FinalizeProps = <R extends Types.Shape>(options: Types.WithStyleOptions_ComponentX<R>) => {
 
   const { Provider: CascadingProvider, Consumer: CascadingConsumer } = options.withCascading ? React.createContext<StyleFromPropsArray>(null) : { Provider: null, Consumer: null } as React.Context<StyleFromPropsArray>
 
@@ -49,13 +50,13 @@ export const FinalizeProps = <R extends Types.Shape>(options?: Types.WithStyleOp
 
   }
 
-  const finalizeEvent = (finalProps: Types.OnPressAllX, propName: TCommon.TEvents, eventsPlatform, platformName: string, eventsX: Types.OnPressAllX, renderState) => {
+  const finalizeEvent = (finalProps: Types.OnPressAllX, propName: TCommon.TEvents, eventsPlatform, platformName: string, eventsX: Types.OnPressAllX, renderState: TRenderState) => {
     const proc: any = eventsPlatform && platformName[platformName] || finalProps[propName]
     if (!proc || proc['$wrapped']) return
     delete proc[propName]; if (eventsPlatform) delete eventsPlatform[platformName]
     const newProc = finalProps[platformName] = eventsX[propName] = (ev: any) => {
       ev = ev ? { ...ev } : {}
-      ev.current = renderState.finalCodeProps
+      ev.current = renderState.platformProps
       proc(ev)
     }
     newProc['$wrapped'] = true

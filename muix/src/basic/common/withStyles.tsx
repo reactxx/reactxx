@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 import warning from 'warning'
 
 import { ThemeProvider, ThemeConsumer, theme } from './theme'
-import { deepMerges, deepModify, deepMerge } from './to-platform'
+import { deepMerges, deepMerge, immutableMerge, deepModifyTest } from './to-platform'
 import { TCommon } from '../typings/common'
 import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
@@ -13,6 +13,8 @@ import { renderCounter } from './develop'
 import { getPlatformSheet } from './sheet-cache'
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
+
+deepModifyTest()
 
 /************************
 * TRenderState
@@ -78,7 +80,11 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
 
   options.withTheme = typeof options.withTheme === 'boolean' ? options.withTheme : typeof sheetCreator === 'function'
 
-  if (options.defaultProps) options._defaultPropsAsStyleFromProps = getStyleFromProps(options.defaultProps)
+  if (options.defaultProps) {
+    const { $themedProps, classes, rest } = getStyleFromProps(options.defaultProps)
+    options._defaultPropsAsStyleFromProps = { $themedProps, rest }
+    options._defaultClasses = classes
+  }
 
   //**** PROPERTY CASCADING 
 
@@ -221,12 +227,13 @@ const convertToPlatform = (displayName: string, id: number, createSheetX: Types.
 
   // **** sheet patch (for native: style included)
   const toMergeSheetCreators = [...accumulatedStylesFromProps.classes, ...accumulatedStylesFromProps.className.map(className => ({ root: className })), ... (window.isWeb ? null : accumulatedStylesFromProps.style.map(style => ({ root: style })))]
-  const toMergeSheetsX = toMergeSheetCreators.length === 0 ? null : toMergeSheetCreators.map(creator => expandCreator(creator))
-  const sheetXPatch = !toMergeSheetsX ? null : toMergeSheetsX.length === 1 ? toMergeSheetsX[0] : deepMerges({}, ...toMergeSheetsX)
+  const sheetXPatch: Types.PartialSheetX[] = toMergeSheetCreators.length === 0 ? null : toMergeSheetCreators.map(creator => expandCreator(creator))
+  const defaultClasses: Types.PartialSheetX = typeof options._defaultClasses === 'function' ? expandCreator(options._defaultClasses) : options._defaultClasses
+  //const sheetXPatch: Types.PartialSheetCreatorX[] = !toMergeSheetsX ? null : toMergeSheetsX.length === 1 ? toMergeSheetsX[0] : deepMerges({}, ...toMergeSheetsX)
 
   // **** apply sheet patch to sheet:
   // call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
-  const { codeClasses, addIns } = getPlatformSheet(id, createSheetX, renderState.themeContext, sheetXPatch, variant, variantCacheId)
+  const { codeClasses, addIns } = getPlatformSheet({ id, createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
   renderState.addInClasses = addIns //e.g {$animations:..., root: {$mediaq:...}}
   renderState.codeClasses = codeClasses
 }

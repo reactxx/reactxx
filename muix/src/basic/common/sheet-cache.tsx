@@ -6,6 +6,90 @@ import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
 import { TRenderState } from './withStyles'
+import { deepMerges, deepMerge, immutableMerge } from './to-platform'
+
+type Cache = { [variantId: string]: StaticSheet }[]
+
+interface StaticSheet {
+  codeClasses: Types.Sheet
+  addIns?
+  isConstant?: boolean
+}
+
+const enum GetPlatformSheetLowMode { patch, cache, noCache }
+
+interface GetPlatformSheetPar { id: number; createSheetX: Types.SheetCreatorX; themeContext: TCommon.ThemeContext; sheetXPatch: Types.PartialSheetX[]; defaultClasses?: Types.PartialSheetX ; variant; variantCacheId: string }
+
+// call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
+export const getPlatformSheet = (par: GetPlatformSheetPar) => {
+  const { sheetXPatch, defaultClasses, createSheetX} = par
+  const patches: Types.PartialSheetX[] = sheetXPatch && defaultClasses ? [defaultClasses, ...sheetXPatch] : sheetXPatch ? sheetXPatch : defaultClasses ? [defaultClasses] : null
+  return sheetXPatch ? getPlatformSheetLow({ ...par, sheetXPatch: patches }, GetPlatformSheetLowMode.patch) : getFromCache({ ...par, sheetXPatch: patches })
+}
+
+const getPlatformSheetLow = ({ id, createSheetX, themeContext, sheetXPatch, variant, variantCacheId }: GetPlatformSheetPar, mode: GetPlatformSheetLowMode) => {
+  const sheet = typeof createSheetX === 'function' ? createSheetX(themeContext.theme, variant) : createSheetX
+  const isPatchValue = mode === GetPlatformSheetLowMode.patch && typeof createSheetX !== 'function'
+  const merged = sheetXPatch ? (isPatchValue ? deepMerges({}, sheet, ...sheetXPatch) : deepMerges(sheet, ...sheetXPatch)) : sheet
+  const isConst = isPatchValue && !sheetXPatch
+  return { codeClasses: null, addIns: null } as StaticSheet
+}
+
+const getFromCache = (par: GetPlatformSheetPar) => {
+  const { id, createSheetX, variant, variantCacheId, themeContext: { $cache, theme } } = par
+  const cacheId = typeof createSheetX !== 'function' ? '#static#' : !variant ? '#novariant#' : variantCacheId ? variantCacheId : null
+  const res = cacheId ? fromCache($cache, id, cacheId, () => getPlatformSheetLow(par, GetPlatformSheetLowMode.cache)) : getPlatformSheetLow(par, GetPlatformSheetLowMode.noCache)
+  res.isConstant = !!cacheId
+  return res
+}
+
+const fromCache = ($cache: Cache, id: number, variantCacheId: string, getter: () => StaticSheet) => {
+  let compCache = $cache[id]
+  if (!compCache) $cache[id] = compCache = {}
+  return compCache[variantCacheId] || (compCache[variantCacheId] = getter())
+}
+
+const toPlatformRuleSetInPlace = (style: Types.RulesetX) => {
+  if (!isObject(style)) return { style, addIn: null }
+  let addIn, $web, $native
+  for (const p in style) {
+    if (p === '$web') $web = style[p]
+    else if (p === '$native') $native = style[p]
+    else if (p.charAt(0) === '$') { if (!addIn) addIn = {}; addIn[p] = style[p] }
+    else continue
+    delete style[p]
+  }
+  if ($web && window.isWeb) mergeRulesetInPlace(style, $web)
+  else if ($native && !window.isWeb) mergeRulesetInPlace(style, $native)
+  return { style, addIn }
+}
+
+//interface StaticSheet extends SheetWithAddIns {
+//  isConstant?: boolean
+//}
+
+const toPlatformSheetInPlace = (codeClasses: Types.PartialSheetX) => {
+  if (!isObject(codeClasses)) return { codeClasses } as StaticSheet
+  let addIns
+  for (const p in codeClasses) {
+    if (p.charAt(0) === '$') {
+      if (!addIns) addIns = {}
+      addIns[p] = codeClasses[p]
+      delete codeClasses[p]
+      continue
+    }
+    const ruleset = toPlatformRuleSetInPlace(codeClasses[p])
+    codeClasses[p] = ruleset.style as any
+    if (ruleset.addIn) {
+      if (!addIns) addIns = {}
+      addIns[p] = ruleset.addIn
+    }
+  }
+  return { codeClasses, addIns } as StaticSheet
+}
+
+const mergeRulesetInPlace = (target, source) => Object.assign(target, source)
+const isObject = item => item && typeof item === 'object'
 
 
 //const convertToPlatform = (displayName: string, id: number, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderState) => {
@@ -101,83 +185,39 @@ import { TRenderState } from './withStyles'
 
 //  toPlatformEvents($web, $native as Types.OnPressAllNative, { onPress, onLongPress, onPressIn, onPressOut }, renderState.codeProps, renderState.codeSystemProps)
 //}
-const callCreator = <T extends {}>(theme: TCommon.ThemeBase, variant, creator: T | ((theme: TCommon.ThemeBase, variant) => T)) => typeof creator === 'function' ? creator(theme, variant) : creator
+//const callCreator = <T extends {}>(theme: TCommon.ThemeBase, variant, creator: T | ((theme: TCommon.ThemeBase, variant) => T)) => typeof creator === 'function' ? creator(theme, variant) : creator
 
-interface SheetWithAddIns {
-  sheet: Types.Sheet
-  addIns?
-}
-interface StaticSheet extends SheetWithAddIns {
-  isConstant?: boolean
-}
-type Cache = { [variantId: string]: StaticSheet }[]
+//const callCreateSheet = ({ id, createSheetX, themeContext, sheetXPatch, defaultClasses, variant, variantCacheId }: GetPlatformSheetPar) => {
 
-// call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
-export const getPlatformSheet = (id: number, createSheetX: Types.SheetCreatorX, themeContext: TCommon.ThemeContext, sheetXPatch, variant, variantCacheId) => {
-  return { codeClasses: null, addIns: null }
-}
+//  const { $cache, theme } = themeContext
 
-const getStaticSheetFromCache = (id: number, createSheetX: Types.SheetCreatorX, themeContext: TCommon.ThemeContext, sheetXPatch, variant, variantCacheId) => {
+//  if (typeof createSheetX !== 'function')
+//    return sheetXPatch ? deepMerge({}, createSheetX) : createSheetX
 
-  const { $cache, theme } = themeContext
+//  if (!variant)
+//    return sheetXPatch ? createSheetX(theme, null) : fromCache($cache, id, '#novariant#', () => createSheetX(theme, null))
 
-  if (typeof createSheetX !== 'function')
-    return fromCache($cache, id, '#static#', () => toPlatformSheetInPlace(createSheetX))
+//  if (variantCacheId)
+//    return sheetXPatch ? createSheetX(theme, null) : fromCache($cache, id, variantCacheId, () => createSheetX(theme, variant))
 
-  if (!variant)
-    return fromCache($cache, id, '#novariant#', () => toPlatformSheetInPlace(createSheetX(theme, null)))
+//  return createSheetX(theme, variant) //getVariant!=null && variantToString==null => NO CACHING
 
-  if (variantCacheId)
-    return fromCache($cache, id, variantCacheId, () => toPlatformSheetInPlace(createSheetX(theme, variant)))
+//}
 
-  return toPlatformSheetInPlace(createSheetX(theme, variant)) //getVariant!=null && variantToString==null => NO CACHING
+//const callCreateSheet_ = (par: GetPlatformSheetPar) => {
 
-}
+//  const { id, createSheetX, variant, variantCacheId, themeContext: { $cache, theme } } = par
 
-const fromCache = ($cache: Cache, id: number, variantCacheId: string, getter: () => StaticSheet) => {
-  let compCache = $cache[id]
-  if (!compCache) $cache[id] = compCache = {}
-  let cacheItem = compCache[variantCacheId]
-  if (!cacheItem) {
-    compCache[variantCacheId] = cacheItem = getter();
-    cacheItem.isConstant = true
-  }
-  return cacheItem
-}
+//  if (typeof createSheetX !== 'function')
+//    return fromCache($cache, id, '#static#', () => getPlatformSheetLow(par))
 
-const toPlatformRuleSetInPlace = (style: Types.RulesetX) => {
-  if (!isObject(style)) return { style, addIn: null }
-  let addIn, $web, $native
-  for (const p in style) {
-    if (p === '$web') $web = style[p]
-    else if (p === '$native') $native = style[p]
-    else if (p.charAt(0) === '$') { if (!addIn) addIn = {}; addIn[p] = style[p] }
-    else continue
-    delete style[p]
-  }
-  if ($web && window.isWeb) mergeRulesetInPlace(style, $web)
-  else if ($native && !window.isWeb) mergeRulesetInPlace(style, $native)
-  return { style, addIn }
-}
+//  if (!variant)
+//    return fromCache($cache, id, '#novariant#', () => getPlatformSheetLow(par))
 
-const toPlatformSheetInPlace = (sheet: Types.PartialSheetX) => {
-  if (!isObject(sheet)) return { sheet } as StaticSheet
-  let addIns
-  for (const p in sheet) {
-    if (p.charAt(0) === '$') {
-      if (!addIns) addIns = {}
-      addIns[p] = sheet[p]
-      continue
-    }
-    const ruleset = toPlatformRuleSetInPlace(sheet[p])
-    sheet[p] = ruleset.style as any
-    if (ruleset.addIn) {
-      if (!addIns) addIns = {}
-      addIns[p] = ruleset.addIn
-    }
-  }
-  return { sheet, addIns } as StaticSheet
-}
+//  if (variantCacheId)
+//    return fromCache($cache, id, variantCacheId, () => getPlatformSheetLow(par))
 
-const mergeRulesetInPlace = (target, source) => Object.assign(target, source)
-const isObject = item => item && typeof item === 'object'
+//  return getPlatformSheetLow(par) //getVariant!=null && variantToString==null => NO CACHING
+
+//}
+
