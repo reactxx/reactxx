@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, theme, renderAddIn, TRenderState as TRenderStateBasic, withStyles } from 'reactxx-basic'
+import { TCommon, ThemeProvider, theme, renderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformSheetInPlace } from 'reactxx-basic'
 import { animations, TAnimation } from 'reactxx-animation'
 
 import { Types } from '../typings/types'
@@ -13,23 +13,38 @@ import { TAddIn } from '../typings/add-in'
 export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
   codeSystemProps?: Types.CodeSystemProps
-  codeClasses?: Types.Sheet & TAddIn.SheetX
+  addInClasses?: TAddIn.SheetX
 }
 
 /************************
 * ADDINS
 *************************/
 
-// used before converting props and sheet to platform dependent form
-renderAddIn.beforeToPlatform = (state: TRenderState, next) => next
-
-// after converting props and sheet to platform dependent form
-renderAddIn.afterToPlatform = (state: TRenderState, next) =>
+export const afterToPlatform = (state: TRenderState, next) =>
   animations( // process animation $animations part of sheet
-    () => state.codeClasses.$animations,
+    () => state.addInClasses.$animations,
     animations => state.codeSystemProps.animations = animations,
     next
   )
+
+// after converting props and sheet to platform dependent form
+renderAddIn.afterToPlatform = afterToPlatform
+
+export const toPlatformSheetHooks = (propName: string, value) => {
+    if (propName != '$animations') return {}
+    return {
+      done: true,
+      value: (val => {
+        const res = {}
+        for (const p in val) res[p] = toPlatformSheetInPlace(val)
+        return res
+      })()
+    }
+  }
+
+renderAddIn.toPlatformSheetHooks = [
+  toPlatformSheetHooks
+]
 
 /************************
 * WITH STYLES CREATOR

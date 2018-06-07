@@ -1,9 +1,9 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, theme, renderAddIn, withStyles, TRenderState as TRenderStateBasic } from 'reactxx-basic'
-import { animations, TAnimation } from 'reactxx-animation'
-import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet } from 'reactxx-mediaq'
+import { TCommon, ThemeProvider, theme, renderAddIn, withStyles, TRenderState as TRenderStateBasic, toPlatformSheetInPlace, toPlatformRuleSetInPlace } from 'reactxx-basic'
+import { animations, TAnimation, toPlatformSheetHooks as AnimationToPlatformSheetHooks, afterToPlatform as AnimationAfterToPlatform } from 'reactxx-animation'
+import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet, afterToPlatform as MediaQAfterToPlatform, beforeToPlatform as MediaQBeforeToPlatform, toPlatformRulesetHooks as MediaQToPlatformRulesetHooks } from 'reactxx-mediaq'
 import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
 
 import { Types } from '../typings/types'
@@ -16,9 +16,9 @@ const DEV_MODE = process.env.NODE_ENV === 'development'
 *************************/
 export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
-  //addInClasses?: TAddIn.SheetX
   codeSystemProps?: Types.CodeSystemProps
   codeClasses?: Types.Sheet & TAddIn.SheetX
+  addInClasses?: TAddIn.SheetX
 }
 
 /************************
@@ -26,23 +26,24 @@ export interface TRenderState extends TRenderStateBasic {
 *************************/
 
 // before converting props and sheet to platform dependent form
-renderAddIn.beforeToPlatform = (state: TRenderState, next) =>
-  mediaQFlags( // media flags, e.g. {mobile:false, tablet:true, desktop:false }
-    () => ({ $mediaq: state.addInProps.$mediaq, theme: state.themeContext.theme }),
-    mediaqFlags => mediaqFlags && (state.codeSystemPropsPatch['reactxx-mediaq'] = { mediaqFlags }),
-    next)
+renderAddIn.beforeToPlatform = MediaQBeforeToPlatform
 
 // after converting props and sheet to platform dependent form
-renderAddIn.afterToPlatform = (state: TRenderState, next) =>
-  mediaQSheet( // actualize mediaq part of ruleset
-    () => state.codeClasses as TMediaQ.MediaQSheet,
-    mediaSheetPatch => mediaSheetPatch && state.codeClassesPatch.push(mediaSheetPatch as Types.Sheet),
-    animations( // process animation $animations part of sheet
-      () => state.codeClasses.$animations,
-      animations => state.codeSystemProps.animations = animations,
-      next
-    )
-  )
+renderAddIn.afterToPlatform = (state: TRenderState, next) => MediaQAfterToPlatform(state, AnimationAfterToPlatform(state, next))
+//mediaQSheet( // actualize mediaq part of ruleset
+//  () => state.codeClasses as TMediaQ.MediaQSheet,
+//  mediaSheetPatch => mediaSheetPatch && state.codeClassesPatch.push(mediaSheetPatch as Types.Sheet),
+//  animations( // process animation $animations part of sheet
+//    () => state.codeClasses.$animations,
+//    animations => state.codeSystemProps.animations = animations,
+//    next
+//  )
+//)
+
+renderAddIn.toPlatformSheetHooks = [AnimationToPlatformSheetHooks]
+
+renderAddIn.toPlatformRulesetHooks = [MediaQToPlatformRulesetHooks]
+
 
 /************************
 * WITH STYLES CREATOR

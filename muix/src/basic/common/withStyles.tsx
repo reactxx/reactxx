@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 import warning from 'warning'
 
 import { ThemeProvider, ThemeConsumer, theme } from './theme'
-import { deepMerges, deepMerge, immutableMerge, deepModifyTest } from './to-platform'
+import { deepMerges, deepMerge, immutableMerge } from './to-platform'
 import { TCommon } from '../typings/common'
 import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
@@ -14,7 +14,7 @@ import { getPlatformSheet } from './sheet-cache'
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
-deepModifyTest()
+//deepModifyTest()
 
 /************************
 * TRenderState
@@ -52,6 +52,8 @@ export interface TRenderState {
 export interface RenderAddIn {
   beforeToPlatform: (state: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
   afterToPlatform: (state: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
+  toPlatformRulesetHooks?: ((propName: string, value) => { done?: boolean; value? })[]
+  toPlatformSheetHooks?: ((propName: string, value) => { done?: boolean; value? })[]
 }
 
 // empty addIn configuration

@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, theme, renderAddIn, TRenderState as TRenderStateBasic, withStyles } from 'reactxx-basic'
+import { TCommon, ThemeProvider, theme, renderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformRuleSetInPlace } from 'reactxx-basic'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet } from 'reactxx-mediaq'
 
 import { Types } from '../typings/types'
@@ -19,20 +19,38 @@ export interface TRenderState extends TRenderStateBasic {
 * ADDINS
 *************************/
 
-// used before converting props and sheet to platform dependent form
-renderAddIn.beforeToPlatform = (state: TRenderState, next) =>
+export const beforeToPlatform = (state: TRenderState, next) =>
   mediaQFlags( // media flags, e.g. {mobile:false, tablet:true, desktop:false }
     () => ({ $mediaq: state.addInProps.$mediaq, theme: state.themeContext.theme }),
     mediaqFlags => mediaqFlags && (state.codeSystemPropsPatch['reactxx-mediaq'] = { mediaqFlags }),
     next)
 
-// after converting props and sheet to platform dependent form
-renderAddIn.afterToPlatform = (state: TRenderState, next) =>
+export const afterToPlatform = (state: TRenderState, next) =>
   mediaQSheet( // actualize mediaq part of the ruleset
     () => state.codeClasses as TMediaQ.MediaQSheet,
     mediaSheetPatch => mediaSheetPatch && state.codeClassesPatch.push(mediaSheetPatch as Types.Sheet),
     next
   )
+
+export const toPlatformRulesetHooks = (propName: string, value) => {
+  if (propName != '$mediaq') return {}
+  return {
+    done: true,
+    value: (val => {
+      const res = {}
+      for (const p in val) res[p] = toPlatformRuleSetInPlace(val)
+      return res
+    })()
+  }
+}
+
+// used before converting props and sheet to platform dependent form
+renderAddIn.beforeToPlatform = beforeToPlatform
+
+// after converting props and sheet to platform dependent form
+renderAddIn.afterToPlatform = afterToPlatform
+
+renderAddIn.toPlatformRulesetHooks = [toPlatformRulesetHooks]
 
 /************************
 * WITH STYLES CREATOR
