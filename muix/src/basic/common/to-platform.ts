@@ -5,6 +5,7 @@ import warning from 'warning'
 import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
 import { renderAddIn } from './withStyles'
+import { TAddIn } from '../typings/add-in';
 
 export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseDown : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
 
@@ -103,28 +104,30 @@ export interface StaticSheet {
   isConstant?: boolean
 }
 
-export const toPlatformRuleSetInPlace = (style: Types.RulesetX) => {
+export const toPlatformRuleSetInPlace = (style: Types.RulesetX, ignoreAddIn?: boolean) => {
   if (!isObject(style)) return { style, addIn: null }
+  // $before, $after
   if (style.$before || style.$after) {
     const $before = style.$before; const $after = style.$after
     delete style.$before; delete style.$after
     style = $before ? deepMerges($before, style, $after) : deepMerge(style, $after)
   }
+  // $web, $native, $<addIn>
   let addIn, $web, $native
   for (const p in style) {
     switch (p) {
       case '$web': $web = style[p]; break
       case '$native': $native = style[p]; break
       default:
-        if (p.charAt(0) !== '$') continue
+        if (ignoreAddIn || p.charAt(0) !== '$') continue
         if (!addIn) addIn = {}
         const { toPlatformRulesetHooks } = renderAddIn
-        if (!toPlatformRulesetHooks) break
-        toPlatformRulesetHooks.find(hook => {
+        const done = toPlatformRulesetHooks && toPlatformRulesetHooks.find(hook => {
           const val = hook(p, style[p])
           if (val.done) addIn[p] = val.value
           return val.done
         })
+        warning(done, `Cannot find hook for ${p} addIn prop`)
     }
     delete style[p]
   }
@@ -133,28 +136,177 @@ export const toPlatformRuleSetInPlace = (style: Types.RulesetX) => {
   return { style, addIn }
 }
 
-export const toPlatformSheetInPlace = (codeClasses: Types.PartialSheetX) => {
-  if (!isObject(codeClasses)) return { codeClasses } as StaticSheet
-  let addIns
-  for (const p in codeClasses) {
-    if (p.charAt(0) === '$') {
-      if (!addIns) addIns = {}
-      const { toPlatformSheetHooks } = renderAddIn
-      if (!toPlatformSheetHooks) continue
-      toPlatformSheetHooks.find(hook => {
-        const val = hook(p, codeClasses[p])
-        if (val.done) addIns[p] = val.value
-        return val.done
-      })
-      delete codeClasses[p]
-      continue
-    }
-    const ruleset = toPlatformRuleSetInPlace(codeClasses[p])
-    codeClasses[p] = ruleset.style as any
-    if (ruleset.addIn) {
-      if (!addIns) addIns = {}
-      addIns[p] = ruleset.addIn
-    }
-  }
-  return { codeClasses, addIns } as StaticSheet
+//export const toPlatformSheetInPlace = (codeClasses: Types.PartialSheetX, ignoreAddIn?: boolean) => {
+//  if (!isObject(codeClasses)) return { codeClasses } as StaticSheet
+//  let addIns
+//  for (const p in codeClasses) {
+//    if (p.charAt(0) === '$') {
+//      if (ignoreAddIn) continue
+//      if (!addIns) addIns = {}
+//      const { toPlatformSheetHooks } = renderAddIn
+//      const done = toPlatformSheetHooks && toPlatformSheetHooks.find(hook => {
+//        const val = hook(p, codeClasses[p])
+//        if (val.done) addIns[p] = val.value
+//        return val.done
+//      })
+//      delete codeClasses[p]
+//      warning(done, `Cannot find hook for ${p} addIn prop`)
+//      continue
+//    }
+//    const ruleset = toPlatformRuleSetInPlace(codeClasses[p])
+//    codeClasses[p] = ruleset.style as any
+//    if (ruleset.addIn) {
+//      if (!addIns) addIns = {}
+//      addIns[p] = ruleset.addIn
+//    }
+//  }
+//  return { codeClasses, addIns } as StaticSheet
+//}
+
+export const toPlatformRulesets = (sources: Types.RulesetX[]) => {
+  if (!sources || sources.length == 0) return null
+  const rulesets = []
+  sources.forEach(source => pushRulesetParts(source, rulesets, () => ({})))
+  return mergeRulesetsParts(rulesets)
 }
+
+type TSheetAddIn = Array<{}>
+type TRulesetAddIn = { [name: string]: Array<{}> } // name is e.g. '$mediaq'
+type TAddIn = TSheetAddIn | TRulesetAddIn
+type TAddIns = { [name: string]: TAddIn} // name is e.g. '$animations' or 'root'
+
+export interface MergeSheetsResult {
+  sheet: Types.Sheet
+  addIns: TAddIns
+}
+
+export const mergeSheets = (cache: MergeSheetsResult /*platform format*/, sources: Types.PartialSheetX[] /*X format*/) => {
+  if (!sources || sources.length == 0) return cache
+  const toMergesParts: { [name: string]: Types.RulesetX[] } = {}
+  let mergeNeeded = false
+  let addIns: TAddIns = null
+  sources.forEach(src => {
+    for (const p in src) {
+
+      // initialize addIns item or for sheet or for ruleset
+      const createAddIn = <T extends TAddIn = TRulesetAddIn>(isSheet?: boolean) => {
+        if (!addIns) addIns = {}
+        const addIn = addIns[p]
+        if (addIn) return addIn as T
+        const cacheAddIn = cache && cache.addIns && cache.addIns[p]
+        if (!cacheAddIn || isSheet) return (addIns[p] = isSheet ? [...cacheAddIn] : {}) as T // no addIns initialization from cache or Sheet addIn
+        /* ruleset addIn => two level deep copy of cached addIn, e.g.:
+        const addIns = {
+          root: {
+            $media: [
+              { '0-480': { m: 1 }, '480-': { m: 2 } }
+            ]
+          }
+        }*/
+        const res = addIns[p] = { ...cacheAddIn } // first level: sheet's ruleset
+        for (const p in res) res[p] = [...res[p]] // second level: 
+        return res as T
+      }
+
+      // put sheet's system prop to addIns (e.g. $animations)
+      if (p.charAt(0) === '$') { createAddIn<TSheetAddIn>().push(src[p]); continue }
+
+      // linearize cross platform ruleset (and put ruleset's system prop to addIns, e.g. $mediaq)
+      mergeNeeded = true
+      const rulesets = toMergesParts[p] || (toMergesParts[p] = [])
+      pushRulesetParts(src[p], rulesets, createAddIn)
+    }
+  })
+
+  if (!mergeNeeded) return { sheet: cache.sheet, addIns } as MergeSheetsResult
+
+  const sheet: Types.Sheet = cache ? { ...cache.sheet } : {}
+  for (const p in toMergesParts) {
+    const targetp = sheet[p]; const toMergesp = toMergesParts[p]
+    const toMerge = targetp && toMergesp.length > 0 ? [targetp, ...toMergesp] : targetp ? [targetp] : toMergesp.length > 0 ? toMergesp : null
+    if (!toMerge) continue
+    sheet[p] = mergeRulesetsParts(toMerge)
+  }
+  return { sheet, addIns } as MergeSheetsResult
+}
+
+// shallow merge with removing system props (name starts with '$')
+const mergeRulesetsParts = (parts: Array<{}>) => {
+  if (parts.length === 0) return null
+  if (parts.length === 1) {
+    // optimalization for just single part
+    const p0 = parts[0]
+    const sysProps = Object.keys(p0).filter(p => p.charAt(0) === '$')
+    if (sysProps.length === 0) return p0 // no sys prop => return part
+    // remove sys props from part
+    const res = Object.assign(p0)
+    sysProps.forEach(p => delete res[p])
+    return res
+  }
+  const res = {}
+  parts.forEach(part => {
+    for (const p in part) {
+      if (p.charAt(0) === '$') continue
+      const partp = part[p], resp = res[p], isObjectPartp = isObject(partp), isObjectResp = isObject(resp)
+      res[p] = isObjectPartp ? mergeRulesetsParts(isObjectResp ? [resp, partp] : [partp]/* merge non-object with object:  */) : partp
+    }
+  })
+  return res
+}
+
+const partProps = { $before: true, $after: true, $native: true, $web: true }
+
+const pushRulesetPart = (ruleset, arr: Array<any>, createAddIn: () => { [name: string]: Array<{}> }) => {
+  if (!ruleset) return
+  arr.push(ruleset)
+  for (const p in ruleset) {
+    if (p.charAt(0) != '$' || partProps[p]) continue
+    // addIn prop in ruleset
+    const addIns = createAddIn()
+    const addIn = addIns[p] || (addIns[p] = [])
+    addIn.push(ruleset[p])
+  }
+}
+
+const pushRulesetParts = (ruleset: Types.RulesetX, arr: Array<any>, getAddIns: () => {}) => {
+  const { $before, $after, $native, $web } = ruleset
+  pushRulesetPart($before, arr, getAddIns)
+  pushRulesetPart($before && (window.isWeb ? $before.$web : $before.$native), arr, getAddIns)
+  pushRulesetPart(ruleset, arr, getAddIns)
+  pushRulesetPart(window.isWeb ? $web : $native, arr, getAddIns)
+  pushRulesetPart($after, arr, getAddIns)
+  pushRulesetPart($after && (window.isWeb ? $after.$web : $after.$native), arr, getAddIns)
+}
+
+//export const immutableToPlatformRuleSet = (style: Types.RulesetX, ignoreAddIn?: boolean) => {
+//  warning(isObject(style), 'isObject(style)')
+
+//  // $before, $after
+//  if (style.$before || style.$after) {
+//    const $before = style.$before; const $after = style.$after
+//    delete style.$before; delete style.$after
+//    style = $before ? deepMerges($before, style, $after) : deepMerge(style, $after)
+//  }
+//  // $web, $native, $<addIn>
+//  let addIn, $web, $native
+//  for (const p in style) {
+//    switch (p) {
+//      case '$web': $web = style[p]; break
+//      case '$native': $native = style[p]; break
+//      default:
+//        if (ignoreAddIn || p.charAt(0) !== '$') continue
+//        if (!addIn) addIn = {}
+//        const { toPlatformRulesetHooks } = renderAddIn
+//        const done = toPlatformRulesetHooks && toPlatformRulesetHooks.find(hook => {
+//          const val = hook(p, style[p])
+//          if (val.done) addIn[p] = val.value
+//          return val.done
+//        })
+//        warning(done, `Cannot find hook for ${p} addIn prop`)
+//    }
+//    delete style[p]
+//  }
+//  if ($web && window.isWeb) deepMerge(style, $web)
+//  else if ($native && !window.isWeb) deepMerge(style, $native)
+//  return { style, addIn }
+//}

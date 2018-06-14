@@ -27,7 +27,7 @@ export const beforeToPlatform = (state: TRenderState, next) =>
 
 export const afterToPlatform = (state: TRenderState, next) =>
   mediaQSheet( // actualize mediaq part of the ruleset
-    () => state.codeClasses as TMediaQ.MediaQSheet,
+    () => state.addInClasses as TMediaQ.MediaQSheet,
     mediaSheetPatch => mediaSheetPatch && state.codeClassesPatch.push(mediaSheetPatch as Types.Sheet),
     next
   )

@@ -71,7 +71,7 @@ export const FinalizeProps = <R extends Types.Shape>(options: Types.WithStyleOpt
 
   const finalize = (theme, _defaultPropsAsStyleFromProps: Types.StyleFromProps, cascadingStyleFromPropsArray: StyleFromPropsArray, currentProps: Types.PropsX, renderState) => {
 
-    const allStyleFromPropsArray: StyleFromPropsArray = [_defaultPropsAsStyleFromProps, ...cascadingStyleFromPropsArray || null, getStyleFromProps(currentProps)]
+    const allStyleFromPropsArray: StyleFromPropsArray = [_defaultPropsAsStyleFromProps || null, ...cascadingStyleFromPropsArray || [], getStyleFromProps(currentProps)]
 
     // accumulate Types.StyleFromProps[] to Types.StylesFromProps
     const accumulatedStylesAndProps = allStyleFromPropsArray.reduce<AccumulatedStylesAndProps>((prev, curr) => {

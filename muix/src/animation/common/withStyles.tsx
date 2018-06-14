@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, theme, renderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformSheetInPlace } from 'reactxx-basic'
+import { TCommon, ThemeProvider, theme, renderAddIn, TRenderState as TRenderStateBasic, withStyles, mergeSheets } from 'reactxx-basic'
 import { animations, TAnimation } from 'reactxx-animation'
 
 import { Types } from '../typings/types'
@@ -36,7 +36,7 @@ export const toPlatformSheetHooks = (propName: string, value) => {
       done: true,
       value: (val => {
         const res = {}
-        for (const p in val) res[p] = toPlatformSheetInPlace(val)
+        for (const p in val) res[p] = mergeSheets(null, val)
         return res
       })()
     }

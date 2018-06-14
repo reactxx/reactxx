@@ -168,36 +168,18 @@ export namespace Types {
   /******************************************
       $props IN RULESETs
    *******************************************/
-  export type WithoutStylesPropsX<R extends Shape = Shape> = Partial<Overwrite<TCommon.getProps<R>, {
-    $web?: Partial<TCommon.getPropsWeb<R>> //web specific style
-    $native?: Partial<TCommon.getPropsNative<R>> //native specific style
-    style?: never
-    classes?: never
-    className?: never
-  }>>
+  //export type WithoutStylesPropsX<R extends Shape = Shape> = Partial<Overwrite<TCommon.getProps<R>, {
+  //  $web?: Partial<TCommon.getPropsWeb<R>> //web specific style
+  //  $native?: Partial<TCommon.getPropsNative<R>> //native specific style
+  //  style?: never
+  //  classes?: never
+  //  className?: never
+  //}>>
 
 
   /******************************************
-      THEME
+      OPRIONS AND STYLES FROM PROPS
    *******************************************/
-  //export type PropsXOverwrite<R extends Types.Shape = Types.Shape> = PartialOverwrite<Types.PropsX<R>, {
-  //  style?: Types.RulesetX<TCommon.getStyle<R>>
-  //  classes?: Types.PartialSheetX<R>
-  //  className?: Types.RulesetX<TCommon.getStyle<R>>
-  //}>
-  //export type NotStyledPropsX<R extends Types.Shape = Types.Shape> = PartialOverwrite<PropsX<R>, {
-  //  classes?: never
-  //  style?: never
-  //  className?: never
-  //}>
-
-  //export type CascadingProps<R extends Types.Shape = Types.Shape> = PartialOverwrite<PropsX<R>, {
-  //  $themed?: (theme: TCommon.getTheme<R>) => NotStyledPropsX<R>
-  //  style?: never
-  //  className?: never
-  //}>
-
-  //export type DefaultPropsCreator<R extends Types.Shape =  Types.Shape> = NotStyledPropsX<R> | ((theme: TCommon.getTheme<R>) => NotStyledPropsX<R>)
 
   export interface StyleFromProps {
     classes?: Types.PartialSheetCreatorX

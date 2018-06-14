@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, theme, renderAddIn, withStyles, TRenderState as TRenderStateBasic, toPlatformSheetInPlace, toPlatformRuleSetInPlace } from 'reactxx-basic'
+import { TCommon, ThemeProvider, theme, renderAddIn, withStyles, TRenderState as TRenderStateBasic } from 'reactxx-basic'
 import { animations, TAnimation, toPlatformSheetHooks as AnimationToPlatformSheetHooks, afterToPlatform as AnimationAfterToPlatform } from 'reactxx-animation'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet, afterToPlatform as MediaQAfterToPlatform, beforeToPlatform as MediaQBeforeToPlatform, toPlatformRulesetHooks as MediaQToPlatformRulesetHooks } from 'reactxx-mediaq'
 import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
