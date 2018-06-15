@@ -10,8 +10,8 @@ import ReactDOM from 'react-dom'
 //import App from '../common/with-styles'
 //import App from '../common/components/responsible-drawer/responsible-drawer';
 //import App from '../common/mediaq/me3'
-//import App from '../common/animation/ae2'
-import App from '../common/basic/pe4'
+import App from '../common/animation/ae1'
+//import App from '../common/basic/pe4'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

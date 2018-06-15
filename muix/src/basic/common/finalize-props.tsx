@@ -53,10 +53,10 @@ export const FinalizeProps = <R extends Types.Shape>(options: Types.WithStyleOpt
   const finalizeEvent = (finalProps: Types.OnPressAllX, propName: TCommon.TEvents, eventsPlatform, platformName: string, eventsX: Types.OnPressAllX, renderState: TRenderState) => {
     const proc: any = eventsPlatform && platformName[platformName] || finalProps[propName]
     if (!proc || proc['$wrapped']) return
-    delete proc[propName]; if (eventsPlatform) delete eventsPlatform[platformName]
+    delete finalProps[propName]; if (eventsPlatform) delete eventsPlatform[platformName]
     const newProc = finalProps[platformName] = eventsX[propName] = (ev: any) => {
       ev = ev ? { ...ev } : {}
-      ev.current = renderState.platformProps
+      ev.current = renderState.finalCodeProps
       proc(ev)
     }
     newProc['$wrapped'] = true

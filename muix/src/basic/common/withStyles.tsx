@@ -42,7 +42,7 @@ export interface TRenderState {
 
   codeClasses?: Types.Sheet // platform dependent classes
 
-  //finalCodeProps?: Types.CodeProps // final props, processed by component code
+  finalCodeProps?: Types.CodeProps // final props, processed by component code
 }
 
 /************************
@@ -52,14 +52,16 @@ export interface TRenderState {
 export interface RenderAddIn {
   beforeToPlatform: (state: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
   afterToPlatform: (state: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
-  toPlatformRulesetHooks?: ((propName: string, value) => { done?: boolean; value?})[]
-  toPlatformSheetHooks?: ((propName: string, value) => { done?: boolean; value?})[]
+  finishAddIns: ((addIns: {}) => void)[]
+  //toPlatformRulesetHooks?: ((propName: string, value) => { done?: boolean; value?})[]
+  //toPlatformSheetHooks?: ((propName: string, value) => { done?: boolean; value?})[]
 }
 
 // empty addIn configuration
 export const renderAddIn: RenderAddIn = {
   beforeToPlatform: (state, next) => next,
-  afterToPlatform: (state, next) => next
+  afterToPlatform: (state, next) => next,
+  finishAddIns: []
 }
 
 /************************
@@ -144,13 +146,13 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
         delete classes.$isCached
       }
 
-      const finalCodeProps = {
+      this.state.finalCodeProps = {
         ...platformProps,
         system: { ...codeSystemProps, ...this.state.addInProps, classes }
       }
 
       // call component code
-      return <CodeComponent {...finalCodeProps as Types.CodeProps<R>} />
+      return <CodeComponent {...this.state.finalCodeProps as Types.CodeProps<R>} />
     }
 
     renderer =
@@ -238,22 +240,22 @@ const convertToPlatform = (displayName: string, id: number, createSheetX: Types.
   renderState.codeClasses = sheet
 }
 
-const toPlatformStyle = (style: Types.RulesetX, isConst: boolean) => {
-  if (!style) return style
+//const toPlatformStyle = (style: Types.RulesetX, isConst: boolean) => {
+//  if (!style) return style
 
-  const $web = style.$web; const $native = style.$native
+//  const $web = style.$web; const $native = style.$native
 
-  const process = data => isConst ? deepMerges({}, style, data) : deepMerge(style, data)
+//  const process = data => isConst ? deepMerges({}, style, data) : deepMerge(style, data)
 
-  let res = style
-  if ($web) {
-    if (!window.isWeb) delete style.$web
-    else { res = process($web); delete res.$web }
-  }
-  if ($native) {
-    if (window.isWeb) delete style.$native
-    else { res = process($native); delete res.$native }
-  }
-  return res
-}
+//  let res = style
+//  if ($web) {
+//    if (!window.isWeb) delete style.$web
+//    else { res = process($web); delete res.$web }
+//  }
+//  if ($native) {
+//    if (window.isWeb) delete style.$native
+//    else { res = process($native); delete res.$native }
+//  }
+//  return res
+//}
 

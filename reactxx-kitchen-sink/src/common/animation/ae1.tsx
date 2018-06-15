@@ -45,7 +45,7 @@ const sheet: Types.SheetX<Shape> = {
       labelAnim: {
         transform: [
           { translateX: [0, -180] }
-        ]
+        ],
       },
       $duration: 1000 // in msec
     },
@@ -64,7 +64,7 @@ const sheet: Types.SheetX<Shape> = {
     },
     anim3: {
       rootAnim: {
-        opacity: [1, 0.2] 
+        opacity: [1, 0.2, '20-'] // means 20%-100% of $duration
       },
       labelAnim: {
         transform: [

@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, theme, renderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformRuleSetInPlace } from 'reactxx-basic'
+import { TCommon, ThemeProvider, theme, renderAddIn, TRenderState as TRenderStateBasic, withStyles, mergeSheets } from 'reactxx-basic'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet } from 'reactxx-mediaq'
 
 import { Types } from '../typings/types'
@@ -32,17 +32,26 @@ export const afterToPlatform = (state: TRenderState, next) =>
     next
   )
 
-export const toPlatformRulesetHooks = (propName: string, value) => {
-  if (propName != '$mediaq') return {}
-  return {
-    done: true,
-    value: (val => {
-      const res = {}
-      for (const p in val) res[p] = toPlatformRuleSetInPlace(val)
-      return res
-    })()
+export const finishAddIns = (addIns: {}) => {
+  for (const p in addIns) {
+    const mediaq = addIns[p].mediaq
+    if (!mediaq) continue
+    addIns[p].mediaq = mergeSheets(null, addIns[p].mediaq)
   }
 }
+
+renderAddIn.finishAddIns.push(finishAddIns)
+//export const finishAddIns = (propName: string, value) => {
+//  if (propName != '$mediaq') return {}
+//  return {
+//    done: true,
+//    value: (val => {
+//      const res = {}
+//      for (const p in val) res[p] = toPlatformRuleSetInPlace(val)
+//      return res
+//    })()
+//  }
+//}
 
 // used before converting props and sheet to platform dependent form
 renderAddIn.beforeToPlatform = beforeToPlatform
@@ -50,7 +59,7 @@ renderAddIn.beforeToPlatform = beforeToPlatform
 // after converting props and sheet to platform dependent form
 renderAddIn.afterToPlatform = afterToPlatform
 
-renderAddIn.toPlatformRulesetHooks = [toPlatformRulesetHooks]
+//renderAddIn.toPlatformRulesetHooks = [finishAddIns]
 
 /************************
 * WITH STYLES CREATOR

@@ -6,7 +6,7 @@ import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
 import { TRenderState } from './withStyles'
-import { deepMerges, deepMerge, mergeSheets, StaticSheet, MergeSheetsResult } from './to-platform'
+import { deepMerges, deepMerge, mergeSheets, MergeSheetsResult } from './to-platform'
 
 //type Cache2 = { [variantId: string]: StaticSheet }[]
 type Cache = { [variantId: string]: MergeSheetsResult }[]

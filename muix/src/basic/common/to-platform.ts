@@ -98,43 +98,43 @@ export function mergeRulesets(...rulesets) {
   return res
 }
 
-export interface StaticSheet {
-  codeClasses: Types.Sheet
-  addIns?
-  isConstant?: boolean
-}
+//export interface StaticSheet {
+//  codeClasses: Types.Sheet
+//  addIns?
+//  isConstant?: boolean
+//}
 
-export const toPlatformRuleSetInPlace = (style: Types.RulesetX, ignoreAddIn?: boolean) => {
-  if (!isObject(style)) return { style, addIn: null }
-  // $before, $after
-  if (style.$before || style.$after) {
-    const $before = style.$before; const $after = style.$after
-    delete style.$before; delete style.$after
-    style = $before ? deepMerges($before, style, $after) : deepMerge(style, $after)
-  }
-  // $web, $native, $<addIn>
-  let addIn, $web, $native
-  for (const p in style) {
-    switch (p) {
-      case '$web': $web = style[p]; break
-      case '$native': $native = style[p]; break
-      default:
-        if (ignoreAddIn || p.charAt(0) !== '$') continue
-        if (!addIn) addIn = {}
-        const { toPlatformRulesetHooks } = renderAddIn
-        const done = toPlatformRulesetHooks && toPlatformRulesetHooks.find(hook => {
-          const val = hook(p, style[p])
-          if (val.done) addIn[p] = val.value
-          return val.done
-        })
-        warning(done, `Cannot find hook for ${p} addIn prop`)
-    }
-    delete style[p]
-  }
-  if ($web && window.isWeb) deepMerge(style, $web)
-  else if ($native && !window.isWeb) deepMerge(style, $native)
-  return { style, addIn }
-}
+//export const toPlatformRuleSetInPlace = (style: Types.RulesetX, ignoreAddIn?: boolean) => {
+//  if (!isObject(style)) return { style, addIn: null }
+//  // $before, $after
+//  if (style.$before || style.$after) {
+//    const $before = style.$before; const $after = style.$after
+//    delete style.$before; delete style.$after
+//    style = $before ? deepMerges($before, style, $after) : deepMerge(style, $after)
+//  }
+//  // $web, $native, $<addIn>
+//  let addIn, $web, $native
+//  for (const p in style) {
+//    switch (p) {
+//      case '$web': $web = style[p]; break
+//      case '$native': $native = style[p]; break
+//      default:
+//        if (ignoreAddIn || p.charAt(0) !== '$') continue
+//        if (!addIn) addIn = {}
+//        const { toPlatformRulesetHooks } = renderAddIn
+//        const done = toPlatformRulesetHooks && toPlatformRulesetHooks.find(hook => {
+//          const val = hook(p, style[p])
+//          if (val.done) addIn[p] = val.value
+//          return val.done
+//        })
+//        warning(done, `Cannot find hook for ${p} addIn prop`)
+//    }
+//    delete style[p]
+//  }
+//  if ($web && window.isWeb) deepMerge(style, $web)
+//  else if ($native && !window.isWeb) deepMerge(style, $native)
+//  return { style, addIn }
+//}
 
 //export const toPlatformSheetInPlace = (codeClasses: Types.PartialSheetX, ignoreAddIn?: boolean) => {
 //  if (!isObject(codeClasses)) return { codeClasses } as StaticSheet
@@ -180,7 +180,7 @@ export interface MergeSheetsResult {
   addIns: TAddIns
 }
 
-export const mergeSheets = (cache: MergeSheetsResult /*platform format*/, sources: Types.PartialSheetX[] /*X format*/) => {
+export const mergeSheets = (cache: MergeSheetsResult /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
   if (!sources || sources.length == 0) return cache
   const toMergesParts: { [name: string]: Types.RulesetX[] } = {}
   let mergeNeeded = false
@@ -193,9 +193,9 @@ export const mergeSheets = (cache: MergeSheetsResult /*platform format*/, source
         if (!addIns) addIns = {}
         const addIn = addIns[p]
         if (addIn) return addIn as T
-        const cacheAddIn = cache && cache.addIns && cache.addIns[p]
-        if (!cacheAddIn || isSheet) return (addIns[p] = isSheet ? [...cacheAddIn] : {}) as T // no addIns initialization from cache or Sheet addIn
-        /* ruleset addIn => two level deep copy of cached addIn, e.g.:
+        const cacheAddIn = cache && cache.addIns && cache.addIns[p] 
+        if (!cacheAddIn || isSheet) return (addIns[p] = isSheet ? (cacheAddIn ? [...cacheAddIn as TSheetAddIn] : []) : {}) as T // no addIns initialization from cache or Sheet addIn
+        /* ruleset addIn example:
         const addIns = {
           root: {
             $media: [
@@ -203,20 +203,24 @@ export const mergeSheets = (cache: MergeSheetsResult /*platform format*/, source
             ]
           }
         }*/
-        const res = addIns[p] = { ...cacheAddIn } // first level: sheet's ruleset
-        for (const p in res) res[p] = [...res[p]] // second level: 
+        // two level deep copy of cached addIns:
+        const res = addIns[p] = { ...cacheAddIn as TRulesetAddIn } // first level: sheet's ruleset, e.g. 'root':{}
+        for (const pp in res) res[pp] = [...res[pp]] // second level: array of ruleset prop, e.g. 'mediaq':[]
         return res as T
       }
 
-      // put sheet's system prop to addIns (e.g. $animations)
-      if (p.charAt(0) === '$') { createAddIn<TSheetAddIn>().push(src[p]); continue }
+      // put sheet's system prop to addIns (e.g. $animations or sheet.$mediaq)
+      if (p.charAt(0) === '$') { createAddIn<TSheetAddIn>(true).push(src[p]); continue }
 
-      // linearize cross platform ruleset (and put ruleset's system prop to addIns, e.g. $mediaq)
+      // linearize cross platform ruleset (and put ruleset's system prop to addIns, e.g. ruleset.$mediaq)
       mergeNeeded = true
       const rulesets = toMergesParts[p] || (toMergesParts[p] = [])
       pushRulesetParts(src[p], rulesets, createAddIn)
     }
   })
+
+  // convert addIns to platform format
+  if (addIns) renderAddIn.finishAddIns.forEach(finish => finish(addIns))
 
   if (!mergeNeeded) return { sheet: cache.sheet, addIns } as MergeSheetsResult
 
@@ -261,7 +265,7 @@ const pushRulesetPart = (ruleset, arr: Array<any>, createAddIn: () => { [name: s
   arr.push(ruleset)
   for (const p in ruleset) {
     if (p.charAt(0) != '$' || partProps[p]) continue
-    // addIn prop in ruleset
+    // addIn prop in ruleset, e.g. $mediaq
     const addIns = createAddIn()
     const addIn = addIns[p] || (addIns[p] = [])
     addIn.push(ruleset[p])
