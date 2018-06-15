@@ -33,6 +33,7 @@ renderAddIn.afterToPlatform = afterToPlatform
 export const finishAddIns = (addIns: any) => {
   const $anims: TAddIn.SheetX[] = addIns.$animations
   addIns.$animations = !$anims || $anims.length === 0 ? null : $anims.length === 1 ? $anims[0] : deepMerges({}, ...$anims)
+  console.log('addIns.$animations\n', addIns.$animations)
 }
 
 renderAddIn.finishAddIns.push(finishAddIns)
@@ -61,7 +62,7 @@ renderAddIn.finishAddIns.push(finishAddIns)
 export const withStylesCreator =
   <R extends Types.Shape, TStatic extends {} = {}>
     (displayName: string, sheetCreator: Types.SheetCreatorX<R>, component: Types.CodeComponentType<R>, options?: Types.WithStyleOptions_ComponentX<R>) =>
-    (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStyles<R, TStatic>(name, sheetCreator, options, overrideOptions)(component) as React.ComponentClass<Types.PropsX<R>> & TProvider<R> & TStatic
+    (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStyles<R, TStatic>(displayName, sheetCreator, options, overrideOptions)(component) as React.ComponentClass<Types.PropsX<R>> & TProvider<R> & TStatic
 
 export interface TProvider<R extends Types.Shape> { Provider: React.ComponentClass<Types.PropsX<R>> }
 

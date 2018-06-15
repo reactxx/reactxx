@@ -1,4 +1,4 @@
-set driver=c:
+set driver=d:
 set root=%driver%\reactxx\muix\
 
 %driver%

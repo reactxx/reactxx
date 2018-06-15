@@ -9,9 +9,6 @@
 
     "baseUrl": ".",
     "paths": {
-      "typescript-config": [ "src/reactxx/native/index" ],
-
-      "reactxx-fela": [ "src/fela/index" ],
 
       "reactxx-mdi": [ "node_modules/reactxx-mdi/es/index" ],
 
@@ -19,6 +16,7 @@
       "reactxx-primitives": [ "src/primitives/native/index" ],
       "reactxx-mediaq": [ "src/mediaq/native/index" ],
       "reactxx-basic": [ "src/basic/index" ],
+      "reactxx-fela": [ "src/fela/index" ],
       "reactxx-activable": [ "src/activable/web/index" ],
 
       "reactxx-mui/typings/*": [ "src/mui/typings/*" ],

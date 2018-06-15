@@ -194,8 +194,15 @@ export const mergeSheets = (cache: MergeSheetsResult /*platform format of sheet 
         const addIn = addIns[p]
         if (addIn) return addIn as T
         const cacheAddIn = cache && cache.addIns && cache.addIns[p] 
-        if (!cacheAddIn || isSheet) return (addIns[p] = isSheet ? (cacheAddIn ? [...cacheAddIn as TSheetAddIn] : []) : {}) as T // no addIns initialization from cache or Sheet addIn
-        /* ruleset addIn example:
+
+        // no cache:
+        if (!cacheAddIn) return (addIns[p] = isSheet ? [] : {}) as T
+
+        // sheet - init array from cache
+        if (isSheet) return (addIns[p] = [cacheAddIn]) as T 
+
+        // ruleset - two level deep copy of cached addIns:
+        /* example:
         const addIns = {
           root: {
             $media: [
@@ -203,7 +210,6 @@ export const mergeSheets = (cache: MergeSheetsResult /*platform format of sheet 
             ]
           }
         }*/
-        // two level deep copy of cached addIns:
         const res = addIns[p] = { ...cacheAddIn as TRulesetAddIn } // first level: sheet's ruleset, e.g. 'root':{}
         for (const pp in res) res[pp] = [...res[pp]] // second level: array of ruleset prop, e.g. 'mediaq':[]
         return res as T

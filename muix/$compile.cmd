@@ -1,5 +1,5 @@
 set root=d:\reactxx\muix\
-set tsc="c:\Program Files (x86)\Microsoft SDKs\TypeScript\2.8\tsc.exe"
+set tsc="c:\Program Files (x86)\Microsoft SDKs\TypeScript\2.9\tsc.exe"
 
 d:
 

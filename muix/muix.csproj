@@ -150,7 +150,7 @@
     <TypeScriptCompile Include="src\basic\typings\types.ts" />
     <TypeScriptCompile Include="src\basic\typings\typings.d.ts" />
     <TypeScriptCompile Include="src\animation\typings\add-in.ts" />
-    <TypeScriptCompile Include="src\expo.d.ts" />
+    <None Include="src\expo.d.ts_" />
     <TypeScriptCompile Include="src\ks\common\animation\ae1.tsx" />
     <TypeScriptCompile Include="src\ks\common\animation\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\basic\pe8.tsx" />

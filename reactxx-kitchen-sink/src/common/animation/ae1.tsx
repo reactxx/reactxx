@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { LoremIpsum, TCommon, TCommonStyles, mergeRulesets} from 'reactxx-basic'
-import { Text, View, ScrollView } from 'reactxx-primitives'
+import { LoremIpsum, TCommon, TCommonStyles, mergeRulesets } from 'reactxx-basic'
+import { AnimatedText, AnimatedView, View, ScrollView } from 'reactxx-primitives'
 import { Types, TAddIn, withStylesCreator, TProvider } from 'reactxx-animation'
 
 import { H2 } from '../components/typo'
@@ -51,13 +51,13 @@ const sheet: Types.SheetX<Shape> = {
     },
     anim2: {
       rootAnim: {
-        opacity: [1, 0.2, '-50'] // means 0%-50% of $duration
+        opacity: [0.2, 1, '-35'] // means 0%-35% of $duration
       },
       labelAnim: {
         transform: [
           { scale: [1, 0] },
-          { rotate: ['0', '180deg'] },
-          '50-' // means 50%-100% of $duration
+          { rotate: ['0deg', '180deg'] },
+          '35-' // means 35%-100% of $duration
         ],
       },
       $duration: 2000
@@ -93,11 +93,11 @@ const label: Types.CodeSFC<Shape> = props => {
   const { system: { classes, animations: { sheets: { anim1, anim2, anim3 } }, onPress, onPressIn, onPressOut }, isAnim1, isAnim2, isAnim3, children, ...rest } = props
   const root = mergeRulesets<Types.ViewRulesetX>(classes.root, isAnim1 && anim1.sheet.rootAnim, isAnim2 && anim2.sheet.rootAnim, isAnim3 && anim3.sheet.rootAnim)
   const label = mergeRulesets<Types.TextRulesetX>(classes.label, isAnim1 && anim1.sheet.labelAnim, isAnim2 && anim2.sheet.labelAnim, isAnim3 && anim3.sheet.labelAnim)
-  return <View {...rest} className={root}>
-    <Text className={label} $developer_flag>
+  return <AnimatedView {...rest} className={root}>
+    <AnimatedText className={label}>
       {children}
-    </Text>
-  </View>
+    </AnimatedText>
+  </AnimatedView>
 }
 
 export const Label = withStylesCreator<Shape>(Consts.Label, sheet, label)()
@@ -112,6 +112,8 @@ export const Label = withStylesCreator<Shape>(Consts.Label, sheet, label)()
 const Section: React.SFC = ({ children }) => <View className={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>{children}</View>
 
 const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
+  <Label isAnim1 classes={{ $animations: { anim1: { $duration: 1000 } } }} onPress={ev => ev.current.system.animations.sheets.anim1.toggle()} >TOOGGLE ANIM1</Label>
+  {/*
   <Section>
     <H2>SIMPLE (ANIM1)</H2>
     <Label isAnim1 onPress={ev => ev.current.system.animations.sheets.anim1.toggle()}>TOOGGLE ANIM1</Label>
@@ -132,6 +134,7 @@ const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
     <Label isAnim1 classes={{ $animations: { anim1: { $duration: 250 } } }} onPress={ev => ev.current.system.animations.sheets.anim1.toggle()}>TOOGGLE ANIM1</Label>
     <Label isAnim1 classes={{ $animations: { anim1: { $duration: 250 } } }} onPressIn={ev => ev.current.system.animations.sheets.anim1.open()} onPressOut={ev => ev.current.system.animations.sheets.anim1.close()}>OPEN x CLOSE</Label>
   </Section>
+  */}
 </ScrollView>
 
 export default App

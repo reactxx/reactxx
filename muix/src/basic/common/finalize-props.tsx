@@ -55,7 +55,7 @@ export const FinalizeProps = <R extends Types.Shape>(options: Types.WithStyleOpt
     if (!proc || proc['$wrapped']) return
     delete finalProps[propName]; if (eventsPlatform) delete eventsPlatform[platformName]
     const newProc = finalProps[platformName] = eventsX[propName] = (ev: any) => {
-      ev = ev ? { ...ev } : {}
+      ev = ev && !ev.constructor ? { ...ev } : {}
       ev.current = renderState.finalCodeProps
       proc(ev)
     }
