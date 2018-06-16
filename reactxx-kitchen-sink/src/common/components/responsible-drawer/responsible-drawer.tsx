@@ -225,7 +225,7 @@ const button = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as 
 
 //const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer/>}>
 const App: React.SFC = () => <AppContainer>
-  <ResponsibleDrawer drawer={drawer} $developer_flag>
+  <ResponsibleDrawer drawer={drawer} >
     <Content />
   </ResponsibleDrawer>
 </AppContainer>

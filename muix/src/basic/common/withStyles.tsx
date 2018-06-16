@@ -71,14 +71,14 @@ export const renderAddIn: RenderAddIn = {
 export const withStylesCreator = <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, codeComponent: Types.CodeComponentType<R>) =>
   (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStylesLow<R, TStatic>(displayName, sheetCreator, overrideOptions)(codeComponent)
 
-const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, options?: Types.WithStyleOptions_ComponentX<R>) => (CodeComponent: Types.CodeComponentType<R>) => {
+const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, options?: Types.WithStyleOptions_ComponentX<R>, overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => (CodeComponent: Types.CodeComponentType<R>) => {
 
   type TPropsX = Types.PropsX<R>
 
   const id = compCounter++
   displayName = `${displayName} (${id})`
 
-  if (!options) options = {}
+  options = options && overrideOptions ? deepMerges({}, options, overrideOptions) : options ? options : overrideOptions ? overrideOptions : {}
 
   sheetCreator = options.sheet || sheetCreator
 

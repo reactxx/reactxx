@@ -227,6 +227,7 @@ export const mergeSheets = (cache: MergeSheetsResult /*platform format of sheet 
 
   // convert addIns to platform format
   if (addIns) renderAddIn.finishAddIns.forEach(finish => finish(addIns))
+  else addIns = cache && cache.addIns
 
   if (!mergeNeeded) return { sheet: cache.sheet, addIns } as MergeSheetsResult
 

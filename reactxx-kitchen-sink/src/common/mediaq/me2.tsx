@@ -48,7 +48,7 @@ const label: Types.CodeSFC<Shape> = ({ system: { classes, mediaqFlags }, childre
     mediaqFlags.isDesktop && classes.desktop,
   )
   const info = mediaqFlags.isMobile ? 'MOBILE' : mediaqFlags.isTablet ? 'TABLET' : 'DESKTOP'
-  return <Text className={root} $developer_flag>[{info}] {children}</Text>
+  return <Text className={root}>[{info}] {children}</Text>
 }
 
 const Label: Types.ComponentTypeX<Shape> = withStylesCreator(Consts.Label1, sheet, label)({
@@ -63,7 +63,7 @@ const Label: Types.ComponentTypeX<Shape> = withStylesCreator(Consts.Label1, shee
 
 const App: React.SFC = props => {
   return <MediaQ_AppContainer>
-    <Label>{LoremIpsum(40)}</Label>
+    <Label $developer_flag>{LoremIpsum(40)}</Label>
     <Label $mediaq={{ isMobile: [null, 1024], isTablet: [1024, 1280], isDesktop: [1280, null] }}>{LoremIpsum(40)}</Label>
   </MediaQ_AppContainer>
 }
