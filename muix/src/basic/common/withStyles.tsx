@@ -35,7 +35,7 @@ export interface TRenderState {
 
   // Step 4: 
   // - 
-  codeSystemProps?: Types.CodeSystemProps // system props
+  //codeSystemProps?: Types.CodeSystemProps // system props
   addInClasses?: TAddIn.SheetX // separated addIn sheet
 
   codeClassesPatch?: Types.Sheet[] // classes modified by addIns 
@@ -120,7 +120,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
     }
 
     renderComponentCode = () => {
-      const { platformProps, codeClassesPatch, codeClasses, codeSystemProps, addInProps } = this.state
+      const { platformProps, codeClassesPatch, codeClasses, addInProps } = this.state
 
       if (addInProps.$developer_flag) {
         const { themeContext, codeSystemPropsPatch/*, addInClasses*/ } = this.state
@@ -132,7 +132,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
           '\ntheme: ', themeContext.theme,
           //'\ncodeProps: ', codeProps,
           '\npropsPatch: ', codeSystemPropsPatch,
-          '\ncodeSystemProps: ', codeSystemProps,
+          //'\ncodeSystemProps: ', codeSystemProps,
           '\ncodeClasses: ', codeClasses,
           '\ncodeClassesPatch: ', codeClassesPatch,
           //'\naddInClasses: ', addInClasses,
@@ -143,10 +143,13 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
       let classes = codeClasses
       if (codeClassesPatch.length > 0) classes = deepMerges({}, codeClasses, ...codeClassesPatch)
 
-      this.state.finalCodeProps = {
-        ...platformProps,
-        system: { ...codeSystemProps, ...this.state.addInProps, classes }
-      }
+      platformProps.system.classes = classes
+
+      this.state.finalCodeProps = platformProps
+
+      //this.state.finalCodeProps = {
+      //  ...platformProps, system: { ...platformProps.system, ...this.state.addInProps, classes }
+      //}
 
       // call component code
       return <CodeComponent {...this.state.finalCodeProps as Types.CodeProps<R>} />

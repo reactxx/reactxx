@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, themePipe, renderAddIn, TRenderState as TRenderStateBasic, withStyles, mergeSheets } from 'reactxx-basic'
+import { TCommon, ThemeProvider, themePipe, renderAddIn, TRenderState as TRenderStateBasic, withStyles, mergeSheets, deepMerges } from 'reactxx-basic'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet } from 'reactxx-mediaq'
 
 import { Types } from '../typings/types'
@@ -12,7 +12,8 @@ import { TAddIn } from '../typings/add-in'
 *************************/
 export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
-  codeSystemProps?: Types.CodeSystemProps
+  //codeSystemProps?: Types.CodeSystemProps
+  platformProps?: Types.CodeProps
 }
 
 /************************
@@ -34,9 +35,10 @@ export const afterToPlatform = (state: TRenderState, next) =>
 
 export const finishAddIns = (addIns: {}) => {
   for (const p in addIns) {
-    const mediaq = addIns[p].mediaq
-    if (!mediaq) continue
-    addIns[p].mediaq = mergeSheets(null, addIns[p].mediaq)
+    const addInsp = addIns[p]
+    const $mediaq: Array<{}> = addInsp && addInsp.$mediaq
+    if (!$mediaq) continue
+    addIns[p].$mediaq = $mediaq.length === 0 ? null : $mediaq.length === 1 ? $mediaq[0] : deepMerges({}, ...$mediaq)
   }
 }
 

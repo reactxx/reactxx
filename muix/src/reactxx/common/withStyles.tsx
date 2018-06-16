@@ -16,7 +16,8 @@ const DEV_MODE = process.env.NODE_ENV === 'development'
 *************************/
 export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
-  codeSystemProps?: Types.CodeSystemProps
+  platformProps?: Types.CodeProps
+  //codeSystemProps?: Types.CodeSystemProps
   codeClasses?: Types.Sheet & TAddIn.SheetX
   addInClasses?: TAddIn.SheetX
 }

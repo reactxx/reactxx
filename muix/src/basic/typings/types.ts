@@ -198,7 +198,8 @@ export namespace Types {
 
 
   export interface WithStyleOptions_ComponentX<R extends Types.Shape =  Types.Shape> extends TCommon.WithStyleOptions {
-    getVariant?: (props: Types.PropsX<R> & TAddIn.GetVariant<R>, theme?: TCommon.getTheme<R>) => TCommon.getVariant<R>
+    //getVariant?: (props: Types.PropsX<R> & TAddIn.GetVariant<R>, theme?: TCommon.getTheme<R>) => TCommon.getVariant<R>
+    getVariant?: (props: Types.CodeProps<R>, theme?: TCommon.getTheme<R>) => TCommon.getVariant<R>
     variantToString?: (variant: TCommon.getVariant<R>) => string
     defaultProps?: Types.PropsX<R>
     //_defaultPropsAsStyleFromProps?: StyleFromProps // computed property, { $themedProps, rest } = getStyleFromProps(defaultProps)

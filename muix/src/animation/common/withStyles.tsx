@@ -12,8 +12,9 @@ import { TAddIn } from '../typings/add-in'
 *************************/
 export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
-  codeSystemProps?: Types.CodeSystemProps
+  //codeSystemProps?: Types.CodeSystemProps
   addInClasses?: TAddIn.SheetX
+  platformProps?: Types.CodeProps
 }
 
 /************************
@@ -23,7 +24,7 @@ export interface TRenderState extends TRenderStateBasic {
 export const afterToPlatform = (state: TRenderState, next) =>
   animations( // process animation $animations part of sheet
     () => state.addInClasses && state.addInClasses.$animations,
-    animations => state.codeSystemProps.animations = animations,
+    animations => state.platformProps.system.animations = animations,
     next
   )
 

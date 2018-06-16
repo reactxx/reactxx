@@ -117,7 +117,7 @@ export const CreateToPlatformContext = <R extends Types.Shape>(id:number, displa
     const { theme, $cache } = renderState.themeContext
 
     // **** codeSystemProps
-    const codeSystemProps = renderState.codeSystemProps = {} as Types.CodeSystemProps
+    const codeSystemProps = renderState.platformProps.system = {} as Types.CodeSystemProps
     if (eventsX) Object.assign(codeSystemProps, eventsX)
     for (const p in codeSystemPropsPatch) Object.assign(codeSystemProps, codeSystemPropsPatch[p])
 
@@ -127,7 +127,7 @@ export const CreateToPlatformContext = <R extends Types.Shape>(id:number, displa
     const expandCreator = creator => typeof creator === 'function' ? creator(theme, variant) : creator
 
     if (options && options.getVariant) {
-      variant = options.getVariant(codeSystemProps, theme)
+      variant = options.getVariant(renderState.platformProps, theme)
       variantCacheId = options.variantToString ? options.variantToString(variant) : null
     }
     codeSystemProps.variant = variant
