@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, theme, renderAddIn, TRenderState as TRenderStateBasic, withStyles, mergeSheets } from 'reactxx-basic'
+import { TCommon, ThemeProvider, themePipe, renderAddIn, TRenderState as TRenderStateBasic, withStyles, mergeSheets } from 'reactxx-basic'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet } from 'reactxx-mediaq'
 
 import { Types } from '../typings/types'
@@ -54,10 +54,10 @@ renderAddIn.finishAddIns.push(finishAddIns)
 //}
 
 // used before converting props and sheet to platform dependent form
-renderAddIn.beforeToPlatform = beforeToPlatform
+renderAddIn.propsAddInPipeline = beforeToPlatform
 
 // after converting props and sheet to platform dependent form
-renderAddIn.afterToPlatform = afterToPlatform
+renderAddIn.styleAddInPipeline = afterToPlatform
 
 //renderAddIn.toPlatformRulesetHooks = [finishAddIns]
 

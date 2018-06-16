@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, theme, renderAddIn, withStyles, TRenderState as TRenderStateBasic } from 'reactxx-basic'
+import { TCommon, ThemeProvider, themePipe, renderAddIn, withStyles, TRenderState as TRenderStateBasic } from 'reactxx-basic'
 import { animations, TAnimation, finishAddIns as animationFinishAddIns, afterToPlatform as animationAfterToPlatform } from 'reactxx-animation'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet, afterToPlatform as mediaQAfterToPlatform, beforeToPlatform as mediaQBeforeToPlatform, finishAddIns as mediaFinishAddIns } from 'reactxx-mediaq'
 import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
@@ -26,10 +26,10 @@ export interface TRenderState extends TRenderStateBasic {
 *************************/
 
 // before converting props and sheet to platform dependent form
-renderAddIn.beforeToPlatform = mediaQBeforeToPlatform
+renderAddIn.propsAddInPipeline = mediaQBeforeToPlatform
 
 // after converting props and sheet to platform dependent form
-renderAddIn.afterToPlatform = (state: TRenderState, next) => mediaQAfterToPlatform(state, animationAfterToPlatform(state, next))
+renderAddIn.styleAddInPipeline = (state: TRenderState, next) => mediaQAfterToPlatform(state, animationAfterToPlatform(state, next))
 //mediaQSheet( // actualize mediaq part of ruleset
 //  () => state.codeClasses as TMediaQ.MediaQSheet,
 //  mediaSheetPatch => mediaSheetPatch && state.codeClassesPatch.push(mediaSheetPatch as Types.Sheet),

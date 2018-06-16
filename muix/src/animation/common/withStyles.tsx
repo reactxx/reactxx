@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, theme, renderAddIn, TRenderState as TRenderStateBasic, withStyles, mergeSheets, deepMerges } from 'reactxx-basic'
+import { TCommon, ThemeProvider, themePipe, renderAddIn, TRenderState as TRenderStateBasic, withStyles, mergeSheets, deepMerges } from 'reactxx-basic'
 import { animations, TAnimation } from 'reactxx-animation'
 
 import { Types } from '../typings/types'
@@ -28,7 +28,7 @@ export const afterToPlatform = (state: TRenderState, next) =>
   )
 
 // after converting props and sheet to platform dependent form
-renderAddIn.afterToPlatform = afterToPlatform
+renderAddIn.styleAddInPipeline = afterToPlatform
 
 export const finishAddIns = (addIns: any) => {
   const $anims: TAddIn.SheetX[] = addIns.$animations

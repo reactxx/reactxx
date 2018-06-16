@@ -24,7 +24,7 @@ export class RenderCounter extends React.Component<{ children: (count: number) =
   }
 }
 
-export const renderCounter = (input: () => { developer_flag: boolean }, output: (count: number) => void, next: () => React.ReactNode) => {
+export const renderCounterPipe = (input: () => { developer_flag: boolean }, output: (count: number) => void, next: () => React.ReactNode) => {
   const render = (count: number) => {
     output(count)
     return next()

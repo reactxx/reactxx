@@ -12,7 +12,7 @@ export const registerTheme = <T extends {} = never>(name: string, theme: T) => {
   namedThemes[name] = theme
 }
 
-export const theme = (input: () => { withTheme: boolean }, output: (outputPar: TCommon.ThemeContext) => void, next: () => React.ReactNode) => {
+export const themePipe = (input: () => { withTheme: boolean }, output: (outputPar: TCommon.ThemeContext) => void, next: () => React.ReactNode) => {
   const render = (renderPar: TCommon.ThemeContext) => {
     output(renderPar)
     return next()
@@ -28,7 +28,7 @@ export const theme = (input: () => { withTheme: boolean }, output: (outputPar: T
 export class ThemeProvider extends React.Component<TCommon.ThemeProviderProps> {
 
   render() {
-    return typeof theme === 'function' ? <themeContext.Consumer>{this.PROVIDER}</themeContext.Consumer> : this.PROVIDER(null)
+    return typeof themePipe === 'function' ? <themeContext.Consumer>{this.PROVIDER}</themeContext.Consumer> : this.PROVIDER(null)
   }
 
   PROVIDER = (parentContext: TCommon.ThemeContext) => {

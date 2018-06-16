@@ -3,19 +3,12 @@ import warning from 'warning'
 
 import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
-import { deepMerges, deepMerge, isObjectLiteral } from './to-platform'
+import { deepMerges, deepMerge, isObjectLiteral, toPlatformRulesets } from './to-platform'
 import { TAddIn } from '../typings/add-in'
 import { TCommonStyles } from '../typings/common-styles'
-import { theme } from './theme'
+import { themePipe } from './theme'
 import { TRenderState } from './withStyles'
-
-const DEV_MODE = process.env.NODE_ENV === 'development'
-
-type StyleFromPropsArray = Types.StyleFromProps[]
-
-interface AccumulatedStylesAndProps extends Types.AccumulatedStylesFromProps {
-  props: (Types.ThemedPropsX | Types.PropsX)[]
-}
+import { getPlatformSheet } from './sheet-cache'
 
 export interface FinalizePropsOutput {
   platformProps: Types.CodeProps
@@ -24,12 +17,16 @@ export interface FinalizePropsOutput {
   eventsX: Types.OnPressAllX
 }
 
-export const getStyleFromProps = (props: Types.PropsX) => {
-  const { classes, className, style, $themedProps, ...rest } = props
-  return { classes, className, style, $themedProps, rest: Object.keys(rest).length === 0 ? null : rest } as Types.StyleFromProps
-}
+export const CreateToPlatformContext = <R extends Types.Shape>(id:number, displayName: string, sheetCreator: Types.SheetCreatorX<R>, options: Types.WithStyleOptions_ComponentX<R>) => {
 
-export const CreateFinalizePropsContext = <R extends Types.Shape>(options: Types.WithStyleOptions_ComponentX<R>) => {
+  let styleFromDefaultProps: Types.StyleFromProps = null
+  let classesFromDefaultProps: Types.PartialSheetCreatorX = null
+
+  if (options.defaultProps) {
+    const { $themedProps, classes, rest } = getStyleFromProps(options.defaultProps)
+    styleFromDefaultProps = { $themedProps, rest }
+    classesFromDefaultProps = classes
+  }
 
   const { Provider: CascadingProvider, Consumer: CascadingConsumer } = options.withCascading ? React.createContext<StyleFromPropsArray>(null) : { Provider: null, Consumer: null } as React.Context<StyleFromPropsArray>
 
@@ -61,7 +58,7 @@ export const CreateFinalizePropsContext = <R extends Types.Shape>(options: Types
     }
     newProc['$wrapped'] = true
   }
-  const finalizeEvents = (finalProps: Types.PropsX & Types.OnPressAllX, eventsX: Types.OnPressAllX, renderState) => {
+  const finalizeEvents = (finalProps: Types.PropsX & Types.OnPressAllX, eventsX: Types.OnPressAllX, renderState: TRenderState) => {
     const eventsPlatform = window.isWeb ? finalProps.$web : finalProps.$native
     finalizeEvent(finalProps, 'onPress', eventsPlatform, window.isWeb ? 'onClick' : 'onPress', eventsX, renderState)
     finalizeEvent(finalProps, 'onPressIn', eventsPlatform, window.isWeb ? 'onMouseDown' : 'onPressIn', eventsX, renderState)
@@ -69,9 +66,9 @@ export const CreateFinalizePropsContext = <R extends Types.Shape>(options: Types
     finalizeEvent(finalProps, 'onLongPress', eventsPlatform, window.isWeb ? '?' : 'onLongPress', eventsX, renderState)
   }
 
-  const finalize = (theme, _defaultPropsAsStyleFromProps: Types.StyleFromProps, cascadingStyleFromPropsArray: StyleFromPropsArray, currentProps: Types.PropsX, renderState) => {
+  const toPlatformProps = (theme, cascadingStyleFromPropsArray: StyleFromPropsArray, currentProps: Types.PropsX, renderState: TRenderState) => {
 
-    const allStyleFromPropsArray: StyleFromPropsArray = [_defaultPropsAsStyleFromProps || null, ...cascadingStyleFromPropsArray || [], getStyleFromProps(currentProps)]
+    const allStyleFromPropsArray: StyleFromPropsArray = [styleFromDefaultProps || null, ...cascadingStyleFromPropsArray || [], getStyleFromProps(currentProps)]
 
     // accumulate Types.StyleFromProps[] to Types.StylesFromProps
     const accumulatedStylesAndProps = allStyleFromPropsArray.reduce<AccumulatedStylesAndProps>((prev, curr) => {
@@ -114,23 +111,87 @@ export const CreateFinalizePropsContext = <R extends Types.Shape>(options: Types
     return { platformProps: platformProps as Types.CodeProps, addInProps, accumulatedStylesFromProps: accumulatedStylesAndProps, eventsX } as FinalizePropsOutput
   }
 
-  const finalizeProps = (input: () => { props: Types.PropsX, theme, renderState }, output: (par: FinalizePropsOutput) => void, next: () => React.ReactNode) => {
-    let props: Types.PropsX, theme, renderState
+  const toPlatformStyle = (displayName: string, id: number, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderState) => {
+
+    const { eventsX, codeSystemPropsPatch, platformProps, addInProps, accumulatedStylesFromProps } = renderState
+    const { theme, $cache } = renderState.themeContext
+
+    // **** codeSystemProps
+    const codeSystemProps = renderState.codeSystemProps = {} as Types.CodeSystemProps
+    if (eventsX) Object.assign(codeSystemProps, eventsX)
+    for (const p in codeSystemPropsPatch) Object.assign(codeSystemProps, codeSystemPropsPatch[p])
+
+    // **** variant
+    let variant: {} = null
+    let variantCacheId: string = null
+    const expandCreator = creator => typeof creator === 'function' ? creator(theme, variant) : creator
+
+    if (options && options.getVariant) {
+      variant = options.getVariant(codeSystemProps, theme)
+      variantCacheId = options.variantToString ? options.variantToString(variant) : null
+    }
+    codeSystemProps.variant = variant
+
+    // **** style (for web only). For native: is included in sheetXPatch.root.
+    const toMergeStylesCreators = window.isWeb && accumulatedStylesFromProps.style.length > 0 ? accumulatedStylesFromProps.style : null
+    const toMergeStylesX: Types.RulesetX[] = !toMergeStylesCreators ? null : toMergeStylesCreators.map(creator => expandCreator(creator))
+
+    if (toMergeStylesX) codeSystemProps.style = toPlatformRulesets(toMergeStylesX)
+
+    // **** sheet patch (for native: style included)
+    const toMergeSheetCreators = [...accumulatedStylesFromProps.classes || null, ...accumulatedStylesFromProps.className.map(className => ({ root: className })), ... (window.isWeb ? [] : accumulatedStylesFromProps.style.map(style => ({ root: style })))]
+    const sheetXPatch: Types.PartialSheetX[] = toMergeSheetCreators.length === 0 ? null : toMergeSheetCreators.map(creator => expandCreator(creator))
+    const defaultClasses: Types.PartialSheetX = typeof classesFromDefaultProps === 'function' ? expandCreator(classesFromDefaultProps) : classesFromDefaultProps
+
+    // **** apply sheet patch to sheet:
+    // call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
+    const { sheet, addIns } = getPlatformSheet({ id, createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
+    renderState.addInClasses = addIns //e.g {$animations:..., root: {$mediaq:...}}
+    renderState.codeClasses = sheet
+  }
+
+  const propsPipe = (input: () => { props: Types.PropsX, theme, renderState: TRenderState }, output: (par: FinalizePropsOutput) => void, next: () => React.ReactNode) => {
+    let props: Types.PropsX, theme, renderState: TRenderState
     const render = (cascadingStyleFromPropsArray: StyleFromPropsArray) => {
-      output(finalize(theme, options._defaultPropsAsStyleFromProps, cascadingStyleFromPropsArray, props, renderState))
+      output(toPlatformProps(theme, cascadingStyleFromPropsArray, props, renderState))
       return next()
     }
     const res = () => {
       const inp = input()
       props = inp.props; renderState = inp.renderState; theme = inp.theme
       if (options.withCascading) return <CascadingConsumer>{render}</CascadingConsumer>
-      output(finalize(theme, options._defaultPropsAsStyleFromProps, null, props, renderState))
+      output(toPlatformProps(theme, null, props, renderState))
       return next()
     }
     return res
   }
 
-  return { finalizeProps, cascadingProvider: CascadingProviderComponent as any as React.ComponentClass<Types.PropsX<R>> }
+  const stylePipe = (state: TRenderState, next: () => React.ReactNode) => {
+    const res = () => {
+      toPlatformStyle(displayName, id, sheetCreator, options, state)
+      return next()
+    }
+    return res
+  }
 
+  return { propsPipe, stylePipe, cascadingProvider: CascadingProviderComponent as any as React.ComponentClass<Types.PropsX<R>> }
+
+}
+
+/************************
+* PRIVATE
+*************************/
+
+const getStyleFromProps = (props: Types.PropsX) => {
+  const { classes, className, style, $themedProps, ...rest } = props
+  return { classes, className, style, $themedProps, rest: Object.keys(rest).length === 0 ? null : rest } as Types.StyleFromProps
+}
+
+const DEV_MODE = process.env.NODE_ENV === 'development'
+
+type StyleFromPropsArray = Types.StyleFromProps[]
+
+interface AccumulatedStylesAndProps extends Types.AccumulatedStylesFromProps {
+  props: (Types.ThemedPropsX | Types.PropsX)[]
 }
 
