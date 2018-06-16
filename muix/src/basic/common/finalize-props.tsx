@@ -29,7 +29,7 @@ export const getStyleFromProps = (props: Types.PropsX) => {
   return { classes, className, style, $themedProps, rest: Object.keys(rest).length === 0 ? null : rest } as Types.StyleFromProps
 }
 
-export const FinalizeProps = <R extends Types.Shape>(options: Types.WithStyleOptions_ComponentX<R>) => {
+export const CreateFinalizePropsContext = <R extends Types.Shape>(options: Types.WithStyleOptions_ComponentX<R>) => {
 
   const { Provider: CascadingProvider, Consumer: CascadingConsumer } = options.withCascading ? React.createContext<StyleFromPropsArray>(null) : { Provider: null, Consumer: null } as React.Context<StyleFromPropsArray>
 
@@ -133,3 +133,4 @@ export const FinalizeProps = <R extends Types.Shape>(options: Types.WithStyleOpt
   return { finalizeProps, cascadingProvider: CascadingProviderComponent as any as React.ComponentClass<Types.PropsX<R>> }
 
 }
+

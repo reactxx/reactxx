@@ -114754,6 +114754,8 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
     var _native2 = _require(_dependencyMap[4], "../../../animation/native");
 
+    var _typo = _require(_dependencyMap[5], "../components/typo");
+
     function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
     function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
@@ -114831,7 +114833,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                 className: root,
                 __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 66
+                    lineNumber: 67
                 }
             }),
             _react2.default.createElement(
@@ -114840,7 +114842,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                     className: label,
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 67
+                        lineNumber: 68
                     }
                 },
                 children
@@ -114862,7 +114864,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                 },
                 __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 80
+                    lineNumber: 81
                 }
             },
             children
@@ -114878,35 +114880,228 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                 },
                 __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 81
+                    lineNumber: 82
                 }
             },
             _react2.default.createElement(
-                Label,
+                Section,
                 {
-                    isAnim1: true,
-                    classes: {
-                        $animations: {
-                            anim1: {
-                                $duration: 1000
-                            }
-                        }
-                    },
-                    onPress: function onPress(ev) {
-                        return ev.current.system.animations.sheets.anim1.toggle();
-                    },
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 82
+                        lineNumber: 83
                     }
                 },
-                "TOOGGLE ANIM1"
+                _react2.default.createElement(
+                    _typo.H2,
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 84
+                        }
+                    },
+                    "SIMPLE (ANIM1)"
+                ),
+                _react2.default.createElement(
+                    Label,
+                    {
+                        isAnim1: true,
+                        onPress: function onPress(ev) {
+                            return ev.current.system.animations.sheets.anim1.toggle();
+                        },
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 85
+                        }
+                    },
+                    "TOOGGLE ANIM1"
+                ),
+                _react2.default.createElement(
+                    Label,
+                    {
+                        isAnim1: true,
+                        onPressIn: function onPressIn(ev) {
+                            return ev.current.system.animations.sheets.anim1.open();
+                        },
+                        onPressOut: function onPressOut(ev) {
+                            return ev.current.system.animations.sheets.anim1.close();
+                        },
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 86
+                        }
+                    },
+                    "OPEN x CLOSE"
+                )
+            ),
+            _react2.default.createElement(
+                Section,
+                {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 88
+                    }
+                },
+                _react2.default.createElement(
+                    _typo.H2,
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 89
+                        }
+                    },
+                    "WITH DELAY (ANIM2)"
+                ),
+                _react2.default.createElement(
+                    Label,
+                    {
+                        isAnim2: true,
+                        onPress: function onPress(ev) {
+                            return ev.current.system.animations.sheets.anim2.toggle();
+                        },
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 90
+                        }
+                    },
+                    "TOOGGLE ANIM2"
+                ),
+                _react2.default.createElement(
+                    Label,
+                    {
+                        isAnim2: true,
+                        onPressIn: function onPressIn(ev) {
+                            return ev.current.system.animations.sheets.anim2.open();
+                        },
+                        onPressOut: function onPressOut(ev) {
+                            return ev.current.system.animations.sheets.anim2.close();
+                        },
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 91
+                        }
+                    },
+                    "OPEN x CLOSE"
+                )
+            ),
+            _react2.default.createElement(
+                Section,
+                {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 93
+                    }
+                },
+                _react2.default.createElement(
+                    _typo.H2,
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 94
+                        }
+                    },
+                    "WITH DELAY (ANIM3)"
+                ),
+                _react2.default.createElement(
+                    Label,
+                    {
+                        isAnim3: true,
+                        onPress: function onPress(ev) {
+                            return ev.current.system.animations.sheets.anim3.toggle();
+                        },
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 95
+                        }
+                    },
+                    "TOOGGLE ANIM3"
+                ),
+                _react2.default.createElement(
+                    Label,
+                    {
+                        isAnim3: true,
+                        onPressIn: function onPressIn(ev) {
+                            return ev.current.system.animations.sheets.anim3.open();
+                        },
+                        onPressOut: function onPressOut(ev) {
+                            return ev.current.system.animations.sheets.anim3.close();
+                        },
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 96
+                        }
+                    },
+                    "OPEN x CLOSE"
+                )
+            ),
+            _react2.default.createElement(
+                Section,
+                {
+                    __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 98
+                    }
+                },
+                _react2.default.createElement(
+                    _typo.H2,
+                    {
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 99
+                        }
+                    },
+                    "CHANGE DURATION (ANIM1)"
+                ),
+                _react2.default.createElement(
+                    Label,
+                    {
+                        isAnim1: true,
+                        classes: {
+                            $animations: {
+                                anim1: {
+                                    $duration: 250
+                                }
+                            }
+                        },
+                        onPress: function onPress(ev) {
+                            return ev.current.system.animations.sheets.anim1.toggle();
+                        },
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 100
+                        }
+                    },
+                    "TOOGGLE ANIM1"
+                ),
+                _react2.default.createElement(
+                    Label,
+                    {
+                        isAnim1: true,
+                        classes: {
+                            $animations: {
+                                anim1: {
+                                    $duration: 250
+                                }
+                            }
+                        },
+                        onPressIn: function onPressIn(ev) {
+                            return ev.current.system.animations.sheets.anim1.open();
+                        },
+                        onPressOut: function onPressOut(ev) {
+                            return ev.current.system.animations.sheets.anim1.close();
+                        },
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 101
+                        }
+                    },
+                    "OPEN x CLOSE"
+                )
             )
         );
     };
 
     exports.default = App;
-},797,[798,120,799,807,811],"deploy\\es\\ks\\common\\animation\\ae1.js");
+},797,[798,120,799,807,811,816],"deploy\\es\\ks\\common\\animation\\ae1.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
     var __extends;
 
@@ -115600,7 +115795,8 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                     var addIn = addIns[p];
                     if (addIn) return addIn;
                     var cacheAddIn = cache && cache.addIns && cache.addIns[p];
-                    if (!cacheAddIn || isSheet) return addIns[p] = isSheet ? cacheAddIn ? [cacheAddIn] : [] : {};
+                    if (!cacheAddIn) return addIns[p] = isSheet ? [] : {};
+                    if (isSheet) return addIns[p] = [cacheAddIn];
 
                     var res = addIns[p] = _extends({}, cacheAddIn);
 
@@ -117559,6 +117755,191 @@ __d(function (global, _require, module, exports, _dependencyMap) {
         };
     };
 },815,[799,811],"deploy\\es\\animation\\common\\withStyles.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    exports.A = exports.U = exports.I = exports.B = exports.Blocquote = exports.P = exports.H5 = exports.H4 = exports.H3 = exports.H2 = exports.H1 = undefined;
+
+    var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+    var _jsxFileName = "d:\\reactxx\\muix\\deploy\\es\\ks\\common\\components\\typo.js";
+
+    var _react = _require(_dependencyMap[0], "react");
+
+    var _react2 = _interopRequireDefault(_react);
+
+    var _native = _require(_dependencyMap[1], "../../../primitives/native");
+
+    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+    var typo = {
+        H1: {
+            fontSize: 32,
+            fontWeight: 'bold',
+            marginTop: 26,
+            marginBottom: 10
+        },
+        H2: {
+            fontSize: 26,
+            fontWeight: 'bold',
+            marginTop: 22,
+            marginBottom: 8
+        },
+        H3: {
+            fontSize: 22,
+            fontWeight: 'bold',
+            marginTop: 18,
+            marginBottom: 7
+        },
+        H4: {
+            fontSize: 18,
+            marginTop: 14,
+            marginBottom: 6
+        },
+        H5: {
+            fontSize: 14,
+            marginTop: 12,
+            marginBottom: 5
+        },
+        B: {
+            fontWeight: 'bold'
+        },
+        I: {
+            fontStyle: 'italic'
+        },
+        U: {
+            textDecorationLine: 'underline'
+        },
+        A: {
+            color: 'blue',
+            $web: {
+                ':hover': {
+                    textDecorationLine: 'underline'
+                }
+            }
+        },
+        P: {
+            marginTop: 6,
+            marginBottom: 4
+        },
+        Blocquote: {
+            marginLeft: 30,
+            marginTop: 4,
+            marginBottom: 4
+        }
+    };
+
+    var H1 = exports.H1 = function H1(props) {
+        return _react2.default.createElement(_native.Text, _extends({}, props, {
+            className: typo.H1,
+            __source: {
+                fileName: _jsxFileName,
+                lineNumber: 57
+            }
+        }));
+    };
+
+    var H2 = exports.H2 = function H2(props) {
+        return _react2.default.createElement(_native.Text, _extends({}, props, {
+            className: typo.H2,
+            __source: {
+                fileName: _jsxFileName,
+                lineNumber: 58
+            }
+        }));
+    };
+
+    var H3 = exports.H3 = function H3(props) {
+        return _react2.default.createElement(_native.Text, _extends({}, props, {
+            className: typo.H3,
+            __source: {
+                fileName: _jsxFileName,
+                lineNumber: 59
+            }
+        }));
+    };
+
+    var H4 = exports.H4 = function H4(props) {
+        return _react2.default.createElement(_native.Text, _extends({}, props, {
+            className: typo.H4,
+            __source: {
+                fileName: _jsxFileName,
+                lineNumber: 60
+            }
+        }));
+    };
+
+    var H5 = exports.H5 = function H5(props) {
+        return _react2.default.createElement(_native.Text, _extends({}, props, {
+            className: typo.H5,
+            __source: {
+                fileName: _jsxFileName,
+                lineNumber: 61
+            }
+        }));
+    };
+
+    var P = exports.P = function P(props) {
+        return _react2.default.createElement(_native.Text, _extends({}, props, {
+            className: typo.P,
+            __source: {
+                fileName: _jsxFileName,
+                lineNumber: 62
+            }
+        }));
+    };
+
+    var Blocquote = exports.Blocquote = function Blocquote(props) {
+        return _react2.default.createElement(_native.Text, _extends({}, props, {
+            className: typo.Blocquote,
+            __source: {
+                fileName: _jsxFileName,
+                lineNumber: 63
+            }
+        }));
+    };
+
+    var B = exports.B = function B(props) {
+        return _react2.default.createElement(_native.Text, _extends({}, props, {
+            className: typo.B,
+            __source: {
+                fileName: _jsxFileName,
+                lineNumber: 64
+            }
+        }));
+    };
+
+    var I = exports.I = function I(props) {
+        return _react2.default.createElement(_native.Text, _extends({}, props, {
+            className: typo.I,
+            __source: {
+                fileName: _jsxFileName,
+                lineNumber: 65
+            }
+        }));
+    };
+
+    var U = exports.U = function U(props) {
+        return _react2.default.createElement(_native.Text, _extends({}, props, {
+            className: typo.U,
+            __source: {
+                fileName: _jsxFileName,
+                lineNumber: 66
+            }
+        }));
+    };
+
+    var A = exports.A = function A(props) {
+        return _react2.default.createElement(_native.Text, _extends({}, props, {
+            className: typo.A,
+            __source: {
+                fileName: _jsxFileName,
+                lineNumber: 67
+            }
+        }));
+    };
+},816,[120,807],"deploy\\es\\ks\\common\\components\\typo.js");
 require(46);
 require(11);
 //# sourceMappingURL=index.map

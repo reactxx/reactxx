@@ -8,7 +8,7 @@ import { TCommon } from '../typings/common'
 import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
-import { FinalizeProps, getStyleFromProps } from './finalize-props'
+import { CreateFinalizePropsContext, getStyleFromProps } from './finalize-props'
 import { renderCounter } from './develop'
 import { getPlatformSheet } from './sheet-cache'
 
@@ -25,14 +25,13 @@ export interface TRenderState {
   themeContext?: TCommon.ThemeContext
 
   // Step 2: merge props, separate addInProps and cascadingStyles. Sources are defaultProps, cascading result, actual props
-  platformProps?: Types.CodeProps
+  platformProps?: Types.CodeProps // user defined component props PLUS platform props of root component
   accumulatedStylesFromProps?: Types.AccumulatedStylesFromProps // 
   addInProps?: TAddIn.PropsX // separated props, which name starts with $, e.g. $mediaq, $developer_flag etc.
-  //codeProps?: Types.CodeProps // platform dependent events
-  codeSystemProps?: Types.CodeSystemProps // platform independent events with codeSystemProps parametters
+  codeSystemProps?: Types.CodeSystemProps // system props
 
   // Step 3: call addIns - can change platformProps and codeSystemProps
-  codeSystemPropsPatch?: { [addInName: string]: TAddIn.CodeProps } // props modified by addIns 
+  codeSystemPropsPatch?: { [addInName: string]: TAddIn.CodeProps } // codeSystemProps, modified by addIns 
 
   // Step 4: 
   // - 
@@ -92,7 +91,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
 
   //**** PROPERTY CASCADING 
 
-  const { finalizeProps, cascadingProvider } = FinalizeProps<R>(options)
+  const { finalizeProps, cascadingProvider } = CreateFinalizePropsContext<R>(options)
 
   //**** TO PLATFORM
   const toPlatform = (state: TRenderState, next: () => React.ReactNode) => {

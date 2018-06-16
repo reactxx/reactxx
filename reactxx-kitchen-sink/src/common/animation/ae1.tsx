@@ -112,8 +112,6 @@ export const Label = withStylesCreator<Shape>(Consts.Label, sheet, label)()
 const Section: React.SFC = ({ children }) => <View className={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>{children}</View>
 
 const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
-  <Label isAnim1 classes={{ $animations: { anim1: { $duration: 1000 } } }} onPress={ev => ev.current.system.animations.sheets.anim1.toggle()} >TOOGGLE ANIM1</Label>
-  {/*
   <Section>
     <H2>SIMPLE (ANIM1)</H2>
     <Label isAnim1 onPress={ev => ev.current.system.animations.sheets.anim1.toggle()}>TOOGGLE ANIM1</Label>
@@ -134,7 +132,6 @@ const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
     <Label isAnim1 classes={{ $animations: { anim1: { $duration: 250 } } }} onPress={ev => ev.current.system.animations.sheets.anim1.toggle()}>TOOGGLE ANIM1</Label>
     <Label isAnim1 classes={{ $animations: { anim1: { $duration: 250 } } }} onPressIn={ev => ev.current.system.animations.sheets.anim1.open()} onPressOut={ev => ev.current.system.animations.sheets.anim1.close()}>OPEN x CLOSE</Label>
   </Section>
-  */}
 </ScrollView>
 
 export default App
