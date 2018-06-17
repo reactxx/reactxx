@@ -1,7 +1,7 @@
 import ReactN, { Animated } from 'react-native'
 
 import { DriverLow, getGaps } from '../common/animation'
-import { TAnimation } from '../typings/animation' 
+import { TAnimation } from '../typings/animation'
 
 export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements TAnimation.DriverNative<T>  {
 
@@ -9,6 +9,9 @@ export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements 
     super(sheet, animations)
     const { $delay, $duration, $easing, $opened } = this.$config
     this.value = new Animated.Value($opened ? 1 : 0)
+    this.value.addListener(ev => {
+      console.log(ev)
+    })
     const rulesets = this.sheet = {} as any
 
     let useNativeDriver = true
@@ -64,22 +67,29 @@ export class Driver<T extends TAnimation.Shape> extends DriverLow<T> implements 
     }
 
     this.animConfig = { delay: $delay, duration: $duration, toValue: null, useNativeDriver }
+
+    console.log('Driver.create: ', this.opened, $opened, useNativeDriver, rulesets)
+
   }
   value: ReactN.Animated.Value
   animConfig: Animated.TimingAnimationConfig
   sheet: TAnimation.SheetNative<T>
-  
-  protected bothClassName: {[P in keyof T]: T[P]}[]
-  reset() { this.value.stopAnimation(); this.value.setValue(this.opened ? 1 : 0) }
+
+  protected bothClassName: { [P in keyof T]: T[P] }[]
+  reset() {
+    console.log('Driver.reset: ', this.opened)
+    this.value.stopAnimation(); this.value.setValue(this.opened ? 1 : 0)
+  }
   doOpen(toOpened: boolean) {
     const { value, animConfig } = this
-    //console.log('useNativeDriver: ', animConfig.useNativeDriver)
     this.opened = toOpened
+    console.log('Driver.opened: ', this.opened, animConfig)
     Animated.timing(value, { ...animConfig, toValue: toOpened ? 1 : 0 }).start(({ finished }) => {
       if (!finished) return
+      console.log('Driver.finished: ', value)
       this.animations.statefullComponent.setState({})
     })
-    
+
   }
 }
 

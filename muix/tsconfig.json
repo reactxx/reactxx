@@ -1,46 +1,46 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "es5",
-    "module": "system",
-    "moduleResolution": "node",
-
-    //"declaration": true,
-
-    //"traceResolution": true,
-
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-
+    "target": "es2017",
     "rootDir": "src",
-    "outDir": "deploy/lib",
-    "jsx": "react",
+    "outDir": "deploy/es",
+
+    "declaration": true,
 
     "inlineSourceMap": true,
     "inlineSources": true,
-    "importHelpers": true,
-
-    "strictNullChecks": false,
-    "downlevelIteration": true,
-    "strict": true,
-    "strictFunctionTypes": false,
-    "noImplicitAny": false,
-    //"noUnusedLocals": true,
 
     "baseUrl": ".",
     "paths": {
 
-      "reactxx-fela": [ "src/fela/index" ],
-      "reactxx-animation": [ "src/animation/web/index" ],
-      "reactxx-primitives": [ "src/primitives/web/index" ],
-      "reactxx-mediaq": [ "src/mediaq/web/index" ],
-      "reactxx-basic": [ "src/basic/index" ],
-      "reactxx-activable": [ "src/activable/web/index" ],
-      "reactxx": [ "src/reactxx/web/index" ],
+      "reactxx-mdi": [ "node_modules/reactxx-mdi/es/index" ],
 
-      "reactxx-mui/*": [ "src/mui/*" ]
+      "reactxx-animation": [ "src/animation/native/index" ],
+      "reactxx-primitives": [ "src/primitives/native/index" ],
+      "reactxx-mediaq": [ "src/mediaq/native/index" ],
+      "reactxx-basic": [ "src/basic/index" ],
+      "reactxx-fela": [ "src/fela/index" ],
+      "reactxx-activable": [ "src/activable/web/index" ],
+
+      "reactxx-mui/typings/*": [ "src/mui/typings/*" ],
+
+      "reactxx": [ "src/reactxx/native/index" ],
+
+      "reactxx-mui/*": [ "src/mui/native/*" ]
     },
 
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": false,
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": false,
+
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "jsx": "react-native",
     "lib": [
       "dom",
       "es2015",
@@ -48,9 +48,7 @@
     ]
   },
   "include": [
-    //"src/**/*",
-    "src/**/*",
-    "node_modules/reactxx-mdi/typings.ts"
+    "src/**/*"
   ],
   "exclude": [
     "src/ks/typings.d.ts"

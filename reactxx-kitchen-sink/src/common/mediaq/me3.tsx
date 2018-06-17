@@ -62,13 +62,15 @@ const label: Types.CodeSFC<Shape> = ({ system: { classes, mediaqFlags }, childre
 }
 
 const Label: Types.ComponentTypeX<Shape> = withStylesCreator(Consts.Label, sheet, label)({
-  defaultProps: ({ breakpoints: { mobileEnd, tabletEnd } }) => ({ // use values from theme
-    $mediaq: {
-      isMobile: [null, mobileEnd],
-      isTablet: [mobileEnd, tabletEnd],
-      isDesktop: [tabletEnd, null],
-    }
-  })
+  defaultProps: {
+    $themedProps: ({ breakpoints: { mobileEnd, tabletEnd } }) => ({ // use values from theme
+      $mediaq: {
+        isMobile: [null, mobileEnd],
+        isTablet: [mobileEnd, tabletEnd],
+        isDesktop: [tabletEnd, null],
+      }
+    })
+  },
 })
 
 const App: React.SFC = props => {

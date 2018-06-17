@@ -75,7 +75,9 @@ export const mediaQFlags = <T extends string>(input: () => { $mediaq: TMediaQ.No
   let getNotifyBreakpointsResult: ReturnType<typeof getNotifyBreakpoints>
   const render = () => {
     const { notifyBreakpoints, observedBits: ob } = getNotifyBreakpointsResult
+    //console.log('mediaQFlags: ', ob, )
     const mediaqFlags = ob === 0 ? null : getMediaCode(notifyBreakpoints)
+    //console.log(mediaqFlags)
     output(mediaqFlags as TMediaQ.MediaFlags<T>)
     return next()
   }
@@ -111,12 +113,14 @@ export class MediaQ_AppContainer extends React.Component {
 
   constructor(props) {
     super(props)
-    warning(!appContainer, 'Only single mediaq.AppContainer component instance allowed')
-    appContainer = this
-    mediaQBreaks = []
+    //warning(!appContainer, 'Only single mediaq.AppContainer component instance allowed')
+    appContainer = appContainer || this
+    mediaQBreaks = mediaQBreaks || []
   }
   render() {
-    return <context.Provider value={mediaQBreaks.map(b => b.active)}>
+    //if (appContainer === this)
+    //  console.log('MediaQ_AppContainer.render: ', mediaQBreaks)
+    return appContainer !== this ? this.props.children : <context.Provider value={mediaQBreaks.map(b => b.active)}>
       {this.props.children}
     </context.Provider>
   }
@@ -208,6 +212,7 @@ const subscribe = (value: number, inRuleset: boolean) => {
   if (!b) {
     warning(mediaQBreaks.length <= 31, 'reactxx-mediaq: too many different breakpoints (max 32 allowed)')
     mediaQBreaks.push(b = { id: mediaQBreaks.length, value })
+    //console.log('subscribe: ', mediaQBreaks)
     byValue[value] = b
     onSubscribe(b, inRuleset)
   }

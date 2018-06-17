@@ -63,7 +63,7 @@ const Label: Types.ComponentTypeX<Shape> = withStylesCreator(Consts.Label1, shee
 
 const App: React.SFC = props => {
   return <MediaQ_AppContainer>
-    <Label $developer_flag>{LoremIpsum(40)}</Label>
+    <Label>{LoremIpsum(40)}</Label>
     <Label $mediaq={{ isMobile: [null, 1024], isTablet: [1024, 1280], isDesktop: [1280, null] }}>{LoremIpsum(40)}</Label>
   </MediaQ_AppContainer>
 }

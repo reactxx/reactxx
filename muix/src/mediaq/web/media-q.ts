@@ -3,8 +3,10 @@ import { TMediaQ, refresh } from '../common/media-q'
 export const onSubscribe = (b: TMediaQ.Breakpoint, inRuleset: boolean) => {
   const mediaQuery = window.matchMedia(`(min-width: ${b.value}px)`)
   b.active = mediaQuery.matches
+  //console.log('onSubscribe: ', b)
   const onChange = (q: MediaQueryList) => {
     b.active = q.matches
+    //console.log('onChange: ', b)
     if (!timer) timer = window.setTimeout(() => {
       timer = 0
       refresh()

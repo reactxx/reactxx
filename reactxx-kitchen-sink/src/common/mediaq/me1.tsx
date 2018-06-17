@@ -19,7 +19,7 @@ const App: React.SFC = props => {
     margin: 10,
   }
   return <MediaQ_AppContainer>
-    <Text className={changeColorRuleset} $developer_flag>{LoremIpsum(40)}</Text>
+    <Text className={changeColorRuleset}>{LoremIpsum(40)}</Text>
   </MediaQ_AppContainer>
 }
 

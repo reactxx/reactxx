@@ -34,7 +34,6 @@ renderAddIn.styleAddInPipeline = afterToPlatform
 export const finishAddIns = (addIns: any) => {
   const $anims: TAddIn.SheetX[] = addIns.$animations
   addIns.$animations = !$anims || $anims.length === 0 ? null : $anims.length === 1 ? $anims[0] : deepMerges({}, ...$anims)
-  console.log('addIns.$animations\n', addIns.$animations)
 }
 
 renderAddIn.finishAddIns.push(finishAddIns)

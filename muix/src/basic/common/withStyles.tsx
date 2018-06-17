@@ -84,24 +84,9 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
 
   options.withTheme = typeof options.withTheme === 'boolean' ? options.withTheme : typeof sheetCreator === 'function'
 
-  //if (options.defaultProps) {
-  //  const { $themedProps, classes, rest } = getStyleFromProps(options.defaultProps)
-  //  options._defaultPropsAsStyleFromProps = { $themedProps, rest }
-  //  options._defaultClasses = classes
-  //}
-
   //**** PROPERTY CASCADING 
 
   const { propsPipe, stylePipe, cascadingProvider } = CreateToPlatformContext<R>(id, displayName, sheetCreator, options)
-
-  //**** TO PLATFORM
-  //const toPlatform = (state: TRenderState, next: () => React.ReactNode) => {
-  //  const res = () => {
-  //    convertToPlatform(displayName, id, sheetCreator, options, state, _defaultClasses)
-  //    return next()
-  //  }
-  //  return res
-  //}
 
   //****************************
   // Styled COMPONENT
@@ -194,7 +179,6 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
 let compCounter = 0
 
 export const withStyles: <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, options?, overrideOptions?) => (CodeComponent) => any = withStylesLow
-
 
 export interface TProvider<R extends Types.Shape> { Provider: React.ComponentClass<Types.PropsX<R>> }
 

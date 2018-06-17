@@ -3,7 +3,9 @@ import { Dimensions } from 'react-native'
 import { deepMerge } from 'reactxx-basic'
 import { TMediaQ, refresh, mediaQBreaks } from '../common/media-q'
 
-export const onSubscribe = (b: TMediaQ.Breakpoint, inRuleset: boolean) => b.active = b.value >= Dimensions.get('window').width
+export const onSubscribe = (b: TMediaQ.Breakpoint, inRuleset: boolean) => {
+  b.active = (b.value <= Dimensions.get('window').width)
+}
 
 export const modifyRuleset = (ruleset: {}, items: TMediaQ.RulesetDecoded[]) => {
   if (!items) return ruleset
@@ -20,7 +22,7 @@ Dimensions.addEventListener('change', arg => {
   const width = Dimensions.get('window').width
   let doRefresh = false
   mediaQBreaks.forEach(b => {
-    const newActive = b.value >= width
+    const newActive = b.value <= width
     if (newActive === b.active) return
     doRefresh = true
     b.active = newActive

@@ -177,7 +177,7 @@ const responsibleDrawer: Types.CodeSFC<TResponsibleDrawer.Shape> = props => {
   )
 
   return <View className={root}>
-    <AnimatedView key={1} className={backDrop} onPress={closeDrawer} />
+    {isMobile && <AnimatedView key={1} className={backDrop} onPress={closeDrawer} />}
     <AnimatedView key={2} className={drawer}>
       {/* Provider notifies inner Consumer's (i.e. ResponsibleDrawer.LayoutChanged component's) that some of their props changed */}
       <Provider value={{ iconData: MDI.Close, onPress: closeDrawer, style: closeButton }}>
