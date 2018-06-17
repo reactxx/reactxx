@@ -2,18 +2,8 @@
 import ReactN from 'react-native'
 
 import { TCommon } from '../typings/common'
-import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
-import { TAddIn } from '../typings/add-in'
-import { TRenderState } from './withStyles'
-import { deepMerges, deepMerge, mergeSheets, MergeSheetsResult } from './to-platform'
-
-type Cache = { [variantId: string]: MergeSheetsResult }[]
-
-interface GetPlatformSheetPar {
-  id: number; createSheetX: Types.SheetCreatorX; themeContext: TCommon.ThemeContext; sheetXPatch: Types.PartialSheetX[];
-  defaultClasses?: Types.PartialSheetX; variant; variantCacheId: string;
-}
+import { toPlatformSheets, MergeSheetsResult } from './to-platform'
 
 export const getPlatformSheet = (par: GetPlatformSheetPar) => {
   const { id, createSheetX, defaultClasses, sheetXPatch, variant, variantCacheId, themeContext: { $cache } } = par
@@ -22,7 +12,7 @@ export const getPlatformSheet = (par: GetPlatformSheetPar) => {
     // from theme cache (use defaultClasses only)
     const cache = fromCache($cache, id, cacheId, () => toPlatform({ ...par, sheetXPatch: defaultClasses ? [defaultClasses] : null }))
     // 
-    return mergeSheets(cache, sheetXPatch)
+    return toPlatformSheets(cache, sheetXPatch)
   } else {
     const patch = sheetXPatch && defaultClasses ? [defaultClasses, ...sheetXPatch] : sheetXPatch ? sheetXPatch : defaultClasses ? [defaultClasses] : null
     return toPlatform({ ...par, sheetXPatch: patch })
@@ -37,9 +27,15 @@ const fromCache = ($cache: Cache, id: number, variantCacheId: string, getter: ()
 
 const toPlatform = ({ createSheetX, themeContext: { theme }, sheetXPatch, variant }: GetPlatformSheetPar) => {
   const sheet = typeof createSheetX === 'function' ? createSheetX(theme, variant) : createSheetX
-  return mergeSheets(null, [sheet, ...sheetXPatch || []])
+  return toPlatformSheets(null, [sheet, ...sheetXPatch || []])
 }
 
+type Cache = { [variantId: string]: MergeSheetsResult }[]
+
+interface GetPlatformSheetPar {
+  id: number; createSheetX: Types.SheetCreatorX; themeContext: TCommon.ThemeContext; sheetXPatch: Types.PartialSheetX[];
+  defaultClasses?: Types.PartialSheetX; variant; variantCacheId: string;
+}
 
 //let a, b, c, d
 

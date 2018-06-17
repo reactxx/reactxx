@@ -28,7 +28,6 @@ export namespace Types {
   export interface ViewRulesetX<TAddIn extends {} = {}> extends RulesetX<'View'> { }
   export interface TextRulesetX<TAddIn extends {} = {}> extends RulesetX<'Text'> { }
   export interface ImageRulesetX<TAddIn extends {} = {}> extends RulesetX<'Image'> { }
-  //export interface ScrollViewRulesetX<TAddIn extends {} = {}> extends RulesetX<'ScrollView'> { }
 
   //******************** Shape
   export interface Shape extends TCommon.Shape, TAddIn.Shape { }
@@ -198,13 +197,9 @@ export namespace Types {
 
 
   export interface WithStyleOptions_ComponentX<R extends Types.Shape =  Types.Shape> extends TCommon.WithStyleOptions {
-    //getVariant?: (props: Types.PropsX<R> & TAddIn.GetVariant<R>, theme?: TCommon.getTheme<R>) => TCommon.getVariant<R>
     getVariant?: (props: Types.CodeProps<R>, theme?: TCommon.getTheme<R>) => TCommon.getVariant<R>
     variantToString?: (variant: TCommon.getVariant<R>) => string
     defaultProps?: Types.PropsX<R>
-    //_defaultPropsAsStyleFromProps?: StyleFromProps // computed property, { $themedProps, rest } = getStyleFromProps(defaultProps)
-    //_defaultClasses?: Types.PartialSheetCreatorX // computed property, { classes } = getStyleFromProps(defaultProps)
-    sheet?: SheetCreatorX<R>
   }
 
   /******************************************

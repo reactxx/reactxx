@@ -3,7 +3,7 @@ import warning from 'warning'
 
 import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
-import { deepMerges, deepMerge, isObjectLiteral, toPlatformRulesets } from './to-platform'
+import { deepMerges, deepMerge, toPlatformRulesets } from './to-platform'
 import { TAddIn } from '../typings/add-in'
 import { TCommonStyles } from '../typings/common-styles'
 import { themePipe } from './theme'
@@ -13,14 +13,16 @@ import { getPlatformSheet } from './sheet-cache'
 export interface FinalizePropsOutput {
   platformProps: Types.CodeProps
   addInProps: TAddIn.PropsX
-  accumulatedStylesFromProps: Types.AccumulatedStylesFromProps
-  eventsX: Types.OnPressAllX
+  //accumulatedStylesFromProps: Types.AccumulatedStylesFromProps
+  //eventsX: Types.OnPressAllX
 }
 
 export const CreateToPlatformContext = <R extends Types.Shape>(id:number, displayName: string, sheetCreator: Types.SheetCreatorX<R>, options: Types.WithStyleOptions_ComponentX<R>) => {
 
   let styleFromDefaultProps: Types.StyleFromProps = null
   let classesFromDefaultProps: Types.PartialSheetCreatorX = null
+  const eventsX: Types.OnPressAllX = {}
+  let accumulatedStylesFromProps: AccumulatedStylesAndProps
 
   if (options.defaultProps) {
     const { $themedProps, classes, rest } = getStyleFromProps(options.defaultProps)
@@ -47,31 +49,33 @@ export const CreateToPlatformContext = <R extends Types.Shape>(id:number, displa
 
   }
 
-  const finalizeEvent = (finalProps: Types.OnPressAllX, propName: TCommon.TEvents, eventsPlatform, platformName: string, eventsX: Types.OnPressAllX, renderState: TRenderState) => {
+  const finalizeEvent = (finalProps: Types.OnPressAllX, propName: TCommon.TEvents, eventsPlatform, platformName: string, renderState: TRenderState) => {
     const proc: any = eventsPlatform && platformName[platformName] || finalProps[propName]
     if (!proc || proc['$wrapped']) return
     delete finalProps[propName]; if (eventsPlatform) delete eventsPlatform[platformName]
     const newProc = finalProps[platformName] = eventsX[propName] = (ev: any) => {
       ev = ev && !ev.constructor ? { ...ev } : {}
-      ev.current = renderState.finalCodeProps
+      ev.current = renderState.platformProps
       proc(ev)
     }
     newProc['$wrapped'] = true
   }
-  const finalizeEvents = (finalProps: Types.PropsX & Types.OnPressAllX, eventsX: Types.OnPressAllX, renderState: TRenderState) => {
+  const finalizeEvents = (finalProps: Types.PropsX & Types.OnPressAllX, renderState: TRenderState) => {
     const eventsPlatform = window.isWeb ? finalProps.$web : finalProps.$native
-    finalizeEvent(finalProps, 'onPress', eventsPlatform, window.isWeb ? 'onClick' : 'onPress', eventsX, renderState)
-    finalizeEvent(finalProps, 'onPressIn', eventsPlatform, window.isWeb ? 'onMouseDown' : 'onPressIn', eventsX, renderState)
-    finalizeEvent(finalProps, 'onPressOut', eventsPlatform, window.isWeb ? 'onMouseUp' : 'onPressOut', eventsX, renderState)
-    finalizeEvent(finalProps, 'onLongPress', eventsPlatform, window.isWeb ? '?' : 'onLongPress', eventsX, renderState)
+    finalizeEvent(finalProps, 'onPress', eventsPlatform, window.isWeb ? 'onClick' : 'onPress', renderState)
+    finalizeEvent(finalProps, 'onPressIn', eventsPlatform, window.isWeb ? 'onMouseDown' : 'onPressIn', renderState)
+    finalizeEvent(finalProps, 'onPressOut', eventsPlatform, window.isWeb ? 'onMouseUp' : 'onPressOut', renderState)
+    finalizeEvent(finalProps, 'onLongPress', eventsPlatform, window.isWeb ? '?' : 'onLongPress', renderState)
   }
 
-  const toPlatformProps = (theme, cascadingStyleFromPropsArray: StyleFromPropsArray, currentProps: Types.PropsX, renderState: TRenderState) => {
+  const toPlatformProps = (cascadingStyleFromPropsArray: StyleFromPropsArray, currentProps: Types.PropsX, renderState: TRenderState) => {
 
     const allStyleFromPropsArray: StyleFromPropsArray = [styleFromDefaultProps || null, ...cascadingStyleFromPropsArray || [], getStyleFromProps(currentProps)]
 
+    const theme = renderState.themeContext.theme
+
     // accumulate Types.StyleFromProps[] to Types.StylesFromProps
-    const accumulatedStylesFromProps = allStyleFromPropsArray.reduce<AccumulatedStylesAndProps>((prev, curr) => {
+    accumulatedStylesFromProps = allStyleFromPropsArray.reduce<AccumulatedStylesAndProps>((prev, curr) => {
       if (!curr) return prev
       if (curr.rest) prev.props.push(curr.rest)
       if (curr.$themedProps) prev.props.push(curr.$themedProps(theme))
@@ -91,8 +95,7 @@ export const CreateToPlatformContext = <R extends Types.Shape>(id:number, displa
     if (!DEV_MODE && platformProps.$developer_flag) delete platformProps.$developer_flag
 
     // events
-    const eventsX: Types.OnPressAllX = {}
-    finalizeEvents(platformProps, eventsX, renderState)
+    finalizeEvents(platformProps, renderState)
 
     // process $web and $native props part
     const { $web, $native } = platformProps
@@ -108,17 +111,17 @@ export const CreateToPlatformContext = <R extends Types.Shape>(id:number, displa
       }
     }
 
-    return { platformProps: platformProps as Types.CodeProps, addInProps, accumulatedStylesFromProps, eventsX } as FinalizePropsOutput
+    return { platformProps: platformProps as Types.CodeProps, addInProps } as FinalizePropsOutput
   }
 
   const toPlatformStyle = (displayName: string, id: number, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderState) => {
 
-    const { eventsX, , accumulatedStylesFromProps, codeSystemPropsPatch, finalCodeProps, addInProps } = renderState
+    const { codeSystemPropsPatch, platformProps, addInProps } = renderState
     const { theme, $cache } = renderState.themeContext
 
     // **** codeSystemProps
-    const codeSystemProps = renderState.finalCodeProps.system = {} as Types.CodeSystemProps
-    if (eventsX) Object.assign(codeSystemProps, eventsX)
+    const codeSystemProps = renderState.platformProps.system = { ...eventsX || null } as Types.CodeSystemProps
+    //if (eventsX) Object.assign(codeSystemProps, eventsX)
     for (const p in codeSystemPropsPatch) Object.assign(codeSystemProps, codeSystemPropsPatch[p])
 
     // **** variant
@@ -127,7 +130,7 @@ export const CreateToPlatformContext = <R extends Types.Shape>(id:number, displa
     const expandCreator = creator => typeof creator === 'function' ? creator(theme, variant) : creator
 
     if (options && options.getVariant) {
-      variant = options.getVariant(renderState.finalCodeProps, theme)
+      variant = options.getVariant(renderState.platformProps, theme)
       variantCacheId = options.variantToString ? options.variantToString(variant) : null
     }
     codeSystemProps.variant = variant
@@ -150,17 +153,17 @@ export const CreateToPlatformContext = <R extends Types.Shape>(id:number, displa
     renderState.codeClasses = sheet
   }
 
-  const propsPipe = (input: () => { props: Types.PropsX, theme, renderState: TRenderState }, output: (par: FinalizePropsOutput) => void, next: () => React.ReactNode) => {
-    let props: Types.PropsX, theme, renderState: TRenderState
+  const propsPipe = (input: () => { props: Types.PropsX, renderState: TRenderState }, output: (par: FinalizePropsOutput) => void, next: () => React.ReactNode) => {
+    let props: Types.PropsX, renderState: TRenderState
     const render = (cascadingStyleFromPropsArray: StyleFromPropsArray) => {
-      output(toPlatformProps(theme, cascadingStyleFromPropsArray, props, renderState))
+      output(toPlatformProps(cascadingStyleFromPropsArray, props, renderState))
       return next()
     }
     const res = () => {
       const inp = input()
-      props = inp.props; renderState = inp.renderState; theme = inp.theme
+      props = inp.props; renderState = inp.renderState 
       if (options.withCascading) return <CascadingConsumer>{render}</CascadingConsumer>
-      output(toPlatformProps(theme, null, props, renderState))
+      output(toPlatformProps(null, props, renderState))
       return next()
     }
     return res
@@ -174,7 +177,34 @@ export const CreateToPlatformContext = <R extends Types.Shape>(id:number, displa
     return res
   }
 
-  return { propsPipe, stylePipe, cascadingProvider: CascadingProviderComponent as any as React.ComponentClass<Types.PropsX<R>> }
+  const renderComponentPipe = (renderState: TRenderState, CodeComponent: Types.CodeComponentType) => () => {
+    const { platformProps, codeClassesPatch, codeClasses, addInProps } = renderState
+
+    if (addInProps.$developer_flag) {
+      const { themeContext, codeSystemPropsPatch } = renderState
+      console.log(
+        `### withStyles RENDER CODE for ${displayName}`,
+        '\nplatformProps: ', platformProps,
+        '\naddInProps: ', addInProps,
+        '\ntheme: ', themeContext.theme,
+        '\npropsPatch: ', codeSystemPropsPatch,
+        '\ncodeClasses: ', codeClasses,
+        '\ncodeClassesPatch: ', codeClassesPatch,
+      )
+    }
+
+    // apply patches
+    let classes = codeClasses
+    if (codeClassesPatch.length > 0) classes = deepMerges({}, codeClasses, ...codeClassesPatch)
+
+    platformProps.system.classes = classes
+
+    // call component code
+    return <CodeComponent {...renderState.platformProps as Types.CodeProps<R>} />
+  }
+
+
+  return { propsPipe, stylePipe, renderComponentPipe, cascadingProvider: CascadingProviderComponent as any as React.ComponentClass<Types.PropsX<R>> }
 
 }
 

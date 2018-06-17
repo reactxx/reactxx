@@ -69,9 +69,8 @@ export const Label = LabelCreator()
 
 // 
 export const LabelEx = LabelCreator({
-  sheet: (theme, variant) => {
-    const sheet = labelSheet(theme, variant)
-    return { ...sheet, label: { ...sheet.label, color: theme.color.dark } }
+  defaultProps: {
+    classes: theme => ({ label: { color: theme.color.dark }})
   }
 })
 

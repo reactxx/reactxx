@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, themePipe, renderAddIn, TRenderState as TRenderStateBasic, withStyles, mergeSheets, deepMerges } from 'reactxx-basic'
+import { TCommon, ThemeProvider, themePipe, renderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformSheets, deepMerges } from 'reactxx-basic'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQSheet } from 'reactxx-mediaq'
 
 import { Types } from '../typings/types'
@@ -13,7 +13,7 @@ import { TAddIn } from '../typings/add-in'
 export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
   //codeSystemProps?: Types.CodeSystemProps
-  finalCodeProps?: Types.CodeProps
+  platformProps?: Types.CodeProps
 }
 
 /************************
@@ -43,25 +43,12 @@ export const finishAddIns = (addIns: {}) => {
 }
 
 renderAddIn.finishAddIns.push(finishAddIns)
-//export const finishAddIns = (propName: string, value) => {
-//  if (propName != '$mediaq') return {}
-//  return {
-//    done: true,
-//    value: (val => {
-//      const res = {}
-//      for (const p in val) res[p] = toPlatformRuleSetInPlace(val)
-//      return res
-//    })()
-//  }
-//}
 
 // used before converting props and sheet to platform dependent form
 renderAddIn.propsAddInPipeline = beforeToPlatform
 
 // after converting props and sheet to platform dependent form
 renderAddIn.styleAddInPipeline = afterToPlatform
-
-//renderAddIn.toPlatformRulesetHooks = [finishAddIns]
 
 /************************
 * WITH STYLES CREATOR

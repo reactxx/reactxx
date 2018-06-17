@@ -9,14 +9,14 @@ import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
 
-const DEV_MODE = process.env.NODE_ENV === 'development'
+//const DEV_MODE = process.env.NODE_ENV === 'development'
 
 /************************
 * TRenderState
 *************************/
 export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
-  finalCodeProps?: Types.CodeProps
+  platformProps?: Types.CodeProps
   //codeSystemProps?: Types.CodeSystemProps
   codeClasses?: Types.Sheet & TAddIn.SheetX
   addInClasses?: TAddIn.SheetX
@@ -31,21 +31,8 @@ renderAddIn.propsAddInPipeline = mediaQBeforeToPlatform
 
 // after converting props and sheet to platform dependent form
 renderAddIn.styleAddInPipeline = (state: TRenderState, next) => mediaQAfterToPlatform(state, animationAfterToPlatform(state, next))
-//mediaQSheet( // actualize mediaq part of ruleset
-//  () => state.codeClasses as TMediaQ.MediaQSheet,
-//  mediaSheetPatch => mediaSheetPatch && state.codeClassesPatch.push(mediaSheetPatch as Types.Sheet),
-//  animations( // process animation $animations part of sheet
-//    () => state.codeClasses.$animations,
-//    animations => state.codeSystemProps.animations = animations,
-//    next
-//  )
-//)
 
 renderAddIn.finishAddIns.concat([animationFinishAddIns, mediaFinishAddIns])
-
-//renderAddIn.toPlatformSheetHooks = [animationFinishAddIns]
-
-//renderAddIn.toPlatformRulesetHooks = [MediaQToPlatformRulesetHooks]
 
 
 /************************

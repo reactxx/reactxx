@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, themePipe, renderAddIn, TRenderState as TRenderStateBasic, withStyles, mergeSheets, deepMerges } from 'reactxx-basic'
+import { TCommon, ThemeProvider, themePipe, renderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformSheets, deepMerges } from 'reactxx-basic'
 import { animations, TAnimation } from 'reactxx-animation'
 
 import { Types } from '../typings/types'
@@ -14,7 +14,7 @@ export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
   //codeSystemProps?: Types.CodeSystemProps
   addInClasses?: TAddIn.SheetX
-  finalCodeProps?: Types.CodeProps
+  platformProps?: Types.CodeProps
 }
 
 /************************
@@ -24,7 +24,7 @@ export interface TRenderState extends TRenderStateBasic {
 export const afterToPlatform = (state: TRenderState, next) =>
   animations( // process animation $animations part of sheet
     () => state.addInClasses && state.addInClasses.$animations,
-    animations => state.finalCodeProps.system.animations = animations,
+    animations => state.platformProps.system.animations = animations,
     next
   )
 
@@ -37,23 +37,6 @@ export const finishAddIns = (addIns: any) => {
 }
 
 renderAddIn.finishAddIns.push(finishAddIns)
-
-//export const finishAddIns = (propName: string, value: TAddIn.SheetX[]) => {
-//    if (propName != '$animations') return {}
-//    return {
-//      done: true,
-//      value: (val => {
-//        val.map(v => mergeSheets(null, v))
-//        const res = {}
-//        for (const p in val) res[p] = mergeSheets(null, val)
-//        return res
-//      })(value)
-//    }
-//  }
-
-//renderAddIn.toPlatformSheetHooks = [
-//  finishAddIns
-//]
 
 /************************
 * WITH STYLES CREATOR
