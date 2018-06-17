@@ -43,7 +43,7 @@ For "Text" element:
     title: 'Inner Text is inline element',
     descr: `
 `,
-    Component: props => <>
+    Component: props => <React.Fragment>
       <Text className={{ fontWeight: 'bold', fontSize: 32 }}> {/*BLOCK*/}
         HALLO WORLD!
       </Text>
@@ -54,7 +54,7 @@ For "Text" element:
         </Text>{' '}
         {LoremIpsum(10)}
       </Text>
-    </>
+    </React.Fragment>
   },
 
   $04: {
@@ -135,9 +135,9 @@ For "View" element:
           '1024-': { color: 'blue', },
         }
       }
-      return <>
+      return <React.Fragment>
         <Text classes={{ root: text }}>{LoremIpsum(40)}</Text>
-      </>
+      </React.Fragment>
     }
   },
 

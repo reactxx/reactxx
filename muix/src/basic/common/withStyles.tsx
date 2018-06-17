@@ -25,7 +25,7 @@ export interface TRenderState {
   themeContext?: TCommon.ThemeContext
 
   // Step 2: merge props, separate addInProps and cascadingStyles. Sources are defaultProps, cascading result, actual props
-  platformProps?: Types.CodeProps // component props PLUS $web or $native platform props PLUS platform events
+  finalCodeProps?: Types.CodeProps // component props PLUS $web or $native platform props PLUS platform events
   accumulatedStylesFromProps?: Types.AccumulatedStylesFromProps // 
   addInProps?: TAddIn.PropsX // separated props, which name starts with $, e.g. $mediaq, $developer_flag etc.
   eventsX?: Types.OnPressAllX
@@ -42,7 +42,7 @@ export interface TRenderState {
 
   codeClasses?: Types.Sheet // platform dependent classes
 
-  finalCodeProps?: Types.CodeProps // final props (processed by component code). Is passed to e.g. onPress's event.current
+  //finalCodeProps?: Types.CodeProps // final props (processed by component code). Is passed to e.g. onPress's event.current
 }
 
 /************************
@@ -105,14 +105,14 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
     }
 
     renderComponentCode = () => {
-      const { platformProps, codeClassesPatch, codeClasses, addInProps } = this.state
+      const { finalCodeProps, codeClassesPatch, codeClasses, addInProps } = this.state
 
       if (addInProps.$developer_flag) {
         const { themeContext, codeSystemPropsPatch/*, addInClasses*/ } = this.state
         console.log(
           `### withStyles RENDER CODE for ${displayName}`,
           '\nprops: ', this.props,
-          '\nplatformProps: ', platformProps,
+          '\nplatformProps: ', finalCodeProps,
           '\naddInProps: ', addInProps,
           '\ntheme: ', themeContext.theme,
           //'\ncodeProps: ', codeProps,
@@ -128,13 +128,9 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
       let classes = codeClasses
       if (codeClassesPatch.length > 0) classes = deepMerges({}, codeClasses, ...codeClassesPatch)
 
-      platformProps.system.classes = classes
+      finalCodeProps.system.classes = classes
 
-      this.state.finalCodeProps = platformProps
-
-      //this.state.finalCodeProps = {
-      //  ...platformProps, system: { ...platformProps.system, ...this.state.addInProps, classes }
-      //}
+      //this.state.finalCodeProps = finalCodeProps
 
       // call component code
       return <CodeComponent {...this.state.finalCodeProps as Types.CodeProps<R>} />
@@ -147,7 +143,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
         propsPipe(
           () => ({ props: this.props, theme: this.state.themeContext.theme, renderState: this.state }),
           ({ platformProps, addInProps, accumulatedStylesFromProps, eventsX }) => {
-            this.state.platformProps = platformProps; this.state.addInProps = addInProps; this.state.accumulatedStylesFromProps = accumulatedStylesFromProps; this.state.eventsX = eventsX
+            this.state.finalCodeProps = platformProps; this.state.addInProps = addInProps; this.state.accumulatedStylesFromProps = accumulatedStylesFromProps; this.state.eventsX = eventsX
           },
           renderAddIn.propsAddInPipeline(this.state,
             stylePipe(this.state,

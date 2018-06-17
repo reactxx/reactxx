@@ -71,7 +71,7 @@ export const CreateToPlatformContext = <R extends Types.Shape>(id:number, displa
     const allStyleFromPropsArray: StyleFromPropsArray = [styleFromDefaultProps || null, ...cascadingStyleFromPropsArray || [], getStyleFromProps(currentProps)]
 
     // accumulate Types.StyleFromProps[] to Types.StylesFromProps
-    const accumulatedStylesAndProps = allStyleFromPropsArray.reduce<AccumulatedStylesAndProps>((prev, curr) => {
+    const accumulatedStylesFromProps = allStyleFromPropsArray.reduce<AccumulatedStylesAndProps>((prev, curr) => {
       if (!curr) return prev
       if (curr.rest) prev.props.push(curr.rest)
       if (curr.$themedProps) prev.props.push(curr.$themedProps(theme))
@@ -81,11 +81,11 @@ export const CreateToPlatformContext = <R extends Types.Shape>(id:number, displa
       return prev
     }, { props: [], classes: [], className: [], style: [] })
 
-    const needsDeepMerge = accumulatedStylesAndProps.props.length > 1
+    const needsDeepMerge = accumulatedStylesFromProps.props.length > 1
 
     // merge non-style props
-    let platformProps: Types.PropsX = needsDeepMerge ? deepMerges({}, ...accumulatedStylesAndProps.props) : { ...accumulatedStylesAndProps.props[0] }
-    delete accumulatedStylesAndProps.props
+    let platformProps: Types.PropsX = needsDeepMerge ? deepMerges({}, ...accumulatedStylesFromProps.props) : { ...accumulatedStylesFromProps.props[0] }
+    delete accumulatedStylesFromProps.props
 
     // remove developer_flag for non 'development' ENV
     if (!DEV_MODE && platformProps.$developer_flag) delete platformProps.$developer_flag
@@ -108,16 +108,16 @@ export const CreateToPlatformContext = <R extends Types.Shape>(id:number, displa
       }
     }
 
-    return { platformProps: platformProps as Types.CodeProps, addInProps, accumulatedStylesFromProps: accumulatedStylesAndProps, eventsX } as FinalizePropsOutput
+    return { platformProps: platformProps as Types.CodeProps, addInProps, accumulatedStylesFromProps, eventsX } as FinalizePropsOutput
   }
 
   const toPlatformStyle = (displayName: string, id: number, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderState) => {
 
-    const { eventsX, codeSystemPropsPatch, platformProps, addInProps, accumulatedStylesFromProps } = renderState
+    const { eventsX, , accumulatedStylesFromProps, codeSystemPropsPatch, finalCodeProps, addInProps } = renderState
     const { theme, $cache } = renderState.themeContext
 
     // **** codeSystemProps
-    const codeSystemProps = renderState.platformProps.system = {} as Types.CodeSystemProps
+    const codeSystemProps = renderState.finalCodeProps.system = {} as Types.CodeSystemProps
     if (eventsX) Object.assign(codeSystemProps, eventsX)
     for (const p in codeSystemPropsPatch) Object.assign(codeSystemProps, codeSystemPropsPatch[p])
 
@@ -127,7 +127,7 @@ export const CreateToPlatformContext = <R extends Types.Shape>(id:number, displa
     const expandCreator = creator => typeof creator === 'function' ? creator(theme, variant) : creator
 
     if (options && options.getVariant) {
-      variant = options.getVariant(renderState.platformProps, theme)
+      variant = options.getVariant(renderState.finalCodeProps, theme)
       variantCacheId = options.variantToString ? options.variantToString(variant) : null
     }
     codeSystemProps.variant = variant

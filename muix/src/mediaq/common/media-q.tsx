@@ -71,7 +71,7 @@ export namespace TMediaQ {
 * EXPORTED
 *************************/
 
-export const mediaQFlags = <T extends string>(input: () => { $mediaq: TMediaQ.NotifyIntervalCreator<T>; theme? }, output: (outputPar: TMediaQ.MediaFlags<T>) => void, next: () => React.ReactNode) => {
+export const mediaQFlags = <T extends string>(input: () => { $mediaq: TMediaQ.NotifyIntervalCreator<T>; theme?}, output: (outputPar: TMediaQ.MediaFlags<T>) => void, next: () => React.ReactNode) => {
   let getNotifyBreakpointsResult: ReturnType<typeof getNotifyBreakpoints>
   const render = () => {
     const { notifyBreakpoints, observedBits: ob } = getNotifyBreakpointsResult
@@ -120,13 +120,9 @@ export class MediaQ_AppContainer extends React.Component {
   render() {
     //if (appContainer === this)
     //  console.log('MediaQ_AppContainer.render: ', mediaQBreaks)
-    return appContainer !== this ? this.props.children : <context.Provider value={mediaQBreaks.map(b => b.active)}>
-      {this.props.children}
-    </context.Provider>
+    return appContainer !== this ? <React.Fragment>{this.props.children}</React.Fragment> : <context.Provider value={mediaQBreaks.map(b => b.active)}>{this.props.children}</context.Provider>
   }
 }
-
-export const mediaQProviderExists = () => !!appContainer
 
 export const refresh = () => {
   checkAppContainer()
@@ -194,7 +190,7 @@ const getSheetBreakpoints = (sheet: TMediaQ.MediaQSheet) => {
 
 const getSheetPatch = (ignore: boolean, classesIn: TMediaQ.MediaQSheet, usedSheetBreakpoints: TMediaQ.MediaQRulesetDecoded[]) => {
   if (ignore || !usedSheetBreakpoints) return null
-  const classesOut: TMediaQ.MediaQSheet = { }
+  const classesOut: TMediaQ.MediaQSheet = {}
   usedSheetBreakpoints.forEach(used => {
     const ruleset = classesIn[used.rulesetName];
     warning(ruleset, `Missing ruleset ${used.rulesetName}`); //`

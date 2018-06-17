@@ -72,14 +72,20 @@ const label: Types.CodeSFC<Shape> = ({ system: { classes, style }, children, ico
 * EXPORTED COMPONENT
 *************************/
 export const LabelCreator = withStylesCreator<Shape>(Consts.Label, sheet, label)
+
+
 export const Label = LabelCreator()
 
 // allow property cascading
 export const LabelC = LabelCreator({ withCascading: true })
 
+// with default props
 export const LabelEx = LabelCreator({
-  defaultProps: { iconData: MDI.Play },
-  sheet: { ...sheet, label: { color: 'red' } } as Types.SheetX<Shape>
+  defaultProps: {
+    iconData: MDI.Play,
+    classes: { label: { color: 'red' } }
+  }
+  //sheet: { ...sheet, label: { color: 'red' } } as Types.SheetX<Shape>
 })
 
 //export const LabelEx2 = LabelCreator({

@@ -9,39 +9,39 @@ import { TAddIn } from '../typings/add-in';
 
 export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseDown : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
 
-export const immutableMerge = (target, ...sources) => {
-  // apply non object properties (objectProps[p]===false), accumulate object properties (objectProps[p]===[...])
-  const objectProps: { [propName: string]: Array<{}> | false } = {}
-  for (const p in target) if (!isObject(target[p])) objectProps[p] = false // for checking target x sources merge-ability
-  let hasObjectProp = false
-  let res = target
-  sources.forEach(s => {
-    if (!s) return
-    if (res === target) res = { ...target }
-    for (const p in s) {
-      const val = s[p]
-      if (val === undefined) { delete res[p]; continue }
-      const isObj = isObject(val)
-      const value = objectProps[p] || (objectProps[p] = isObj ? [] : false)
-      warning((value === false) !== isObj, 'value.isObj === isObj')
-      if (isObj) { // object prop, wait for merge
-        (value as Array<{}>).push(val)
-        hasObjectProp = true
-      } else
-        res[p] = val // non object prop, last win
-    }
-  })
-  if (!hasObjectProp) return res
+//export const immutableMerge = (target, ...sources) => {
+//  // apply non object properties (objectProps[p]===false), accumulate object properties (objectProps[p]===[...])
+//  const objectProps: { [propName: string]: Array<{}> | false } = {}
+//  for (const p in target) if (!isObject(target[p])) objectProps[p] = false // for checking target x sources merge-ability
+//  let hasObjectProp = false
+//  let res = target
+//  sources.forEach(s => {
+//    if (!s) return
+//    if (res === target) res = { ...target }
+//    for (const p in s) {
+//      const val = s[p]
+//      if (val === undefined) { delete res[p]; continue }
+//      const isObj = isObject(val)
+//      const value = objectProps[p] || (objectProps[p] = isObj ? [] : false)
+//      warning((value === false) !== isObj, 'value.isObj === isObj')
+//      if (isObj) { // object prop, wait for merge
+//        (value as Array<{}>).push(val)
+//        hasObjectProp = true
+//      } else
+//        res[p] = val // non object prop, last win
+//    }
+//  })
+//  if (!hasObjectProp) return res
 
-  // apply object properties
-  for (const p in objectProps) {
-    const objs = objectProps[p]
-    if (objs === false) continue
-    const targetVal = res[p]
-    res[p] = !targetVal && objs.length === 1 ? objs[0] : immutableMerge(targetVal || {}, ...objs)
-  }
-  return res
-}
+//  // apply object properties
+//  for (const p in objectProps) {
+//    const objs = objectProps[p]
+//    if (objs === false) continue
+//    const targetVal = res[p]
+//    res[p] = !targetVal && objs.length === 1 ? objs[0] : immutableMerge(targetVal || {}, ...objs)
+//  }
+//  return res
+//}
 
 
 //export const deepModifyTest = () => {

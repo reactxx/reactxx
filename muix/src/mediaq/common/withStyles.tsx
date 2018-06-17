@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 
 import { TCommon, ThemeProvider, themePipe, renderAddIn, TRenderState as TRenderStateBasic, withStyles, mergeSheets, deepMerges } from 'reactxx-basic'
-import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet } from 'reactxx-mediaq'
+import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQSheet } from 'reactxx-mediaq'
 
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
@@ -13,7 +13,7 @@ import { TAddIn } from '../typings/add-in'
 export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
   //codeSystemProps?: Types.CodeSystemProps
-  platformProps?: Types.CodeProps
+  finalCodeProps?: Types.CodeProps
 }
 
 /************************
@@ -74,7 +74,4 @@ export const withStylesCreator =
 
 export interface TProvider<R extends Types.Shape> { Provider: React.ComponentClass<Types.PropsX<R>> }
 
-export const AppContainer: React.SFC<Partial<TCommon.ThemeProviderProps>> = props => {
-  const theme = <ThemeProvider theme={props}>{props.children}</ThemeProvider>
-  return mediaQProviderExists() ? theme : <MediaQ_AppContainer>{theme}</MediaQ_AppContainer>
-}
+export const AppContainer: React.SFC<Partial<TCommon.ThemeProviderProps>> = props => <MediaQ_AppContainer><ThemeProvider theme={props}>{props.children}</ThemeProvider></MediaQ_AppContainer>

@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 
 import { TCommon, ThemeProvider, themePipe, renderAddIn, withStyles, TRenderState as TRenderStateBasic } from 'reactxx-basic'
 import { animations, TAnimation, finishAddIns as animationFinishAddIns, afterToPlatform as animationAfterToPlatform } from 'reactxx-animation'
-import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQProviderExists, mediaQSheet, afterToPlatform as mediaQAfterToPlatform, beforeToPlatform as mediaQBeforeToPlatform, finishAddIns as mediaFinishAddIns } from 'reactxx-mediaq'
+import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQSheet, afterToPlatform as mediaQAfterToPlatform, beforeToPlatform as mediaQBeforeToPlatform, finishAddIns as mediaFinishAddIns } from 'reactxx-mediaq'
 import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
 
 import { Types } from '../typings/types'
@@ -16,7 +16,7 @@ const DEV_MODE = process.env.NODE_ENV === 'development'
 *************************/
 export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
-  platformProps?: Types.CodeProps
+  finalCodeProps?: Types.CodeProps
   //codeSystemProps?: Types.CodeSystemProps
   codeClasses?: Types.Sheet & TAddIn.SheetX
   addInClasses?: TAddIn.SheetX
@@ -59,7 +59,4 @@ export const withStylesCreator =
 
 export interface TProvider<R extends Types.Shape> { Provider: React.ComponentClass<Types.PropsX<R>> }
 
-export const AppContainer: React.SFC<Partial<TCommon.ThemeProviderProps>> = props => {
-  const theme = <ThemeProvider theme={props}>{props.children}</ThemeProvider>
-  return mediaQProviderExists() ? theme : <MediaQ_AppContainer>{theme}</MediaQ_AppContainer>
-}
+export const AppContainer: React.SFC<Partial<TCommon.ThemeProviderProps>> = props => <MediaQ_AppContainer><ThemeProvider theme={props}>{props.children}</ThemeProvider></MediaQ_AppContainer>
