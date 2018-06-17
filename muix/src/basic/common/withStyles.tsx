@@ -7,7 +7,7 @@ import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
 
-import { CreateToPlatformContext } from './system-pipes'
+import { getSystemPipes } from './system-pipes'
 import { renderCounterPipe } from './develop'
 import { ThemeProvider, ThemeConsumer, themePipe } from './theme'
 import { deepMerges } from './to-platform'
@@ -29,22 +29,22 @@ export interface TRenderState {
   addInProps?: TAddIn.PropsX // separated props, which name starts with $, e.g. $mediaq, $developer_flag etc.
 
   // Step 3 - propsAddInPipeline: call addIns PROPS phase (addIn use addInProps and fills codeSystemPropsPatch)
-  codeSystemPropsPatch?: { [addInName: string]: TAddIn.CodeProps } // codeSystemProps, modified by addIns 
+  codePropsPatch?: { [addInName: string]: TAddIn.CodeProps } // codeProps, modified by addIns 
 
   // Step 4 - stylePipe:
-  // - apply codeSystemPropsPatch to platformProps.system
-  // - merge all styles to codeClasses
-  //codeSystemProps?: Types.CodeSystemProps // system props
+  // - finalProps = codeSystemPropsPatch to platformProps
+  // - merge all styles to codeClasses, separate addIns sheet and ruleset props to addInClasses
+  finalProps?: Types.CodeProps
   addInClasses?: TAddIn.SheetX // separated sheet and ruleset props, which name starts with $, e.g. $mediaq
   codeClasses?: Types.Sheet // platform dependent classes
 
   // Step 5 - styleAddInPipeline: call addIns STYLE phase (addIn use addInClasses and fills codeClassesPatch)
-  codeClassesPatch?: Types.Sheet[] // classes modified by addIns 
+  codeClassesPatch?: { [addInName: string]: Types.Sheet } // codeClasses modified by addIns 
 
   // Step 6 - renderCounterPipe: for development mode - render counter (fills addInProps.$developer_RenderCounter). It allows to display number of component render calls
 
   // Step 7 - renderComponentPipe: 
-  // - merges codeClassesPatch to codeClasses, save result to platformProps.system.classes
+  // - merges codeClassesPatch to codeClasses, save result to finalProps.system.classes
   // - render code component
 
 }
@@ -88,7 +88,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
 
   //**** PROPERTY CASCADING 
 
-  const { propsPipe, stylePipe, renderComponentPipe, cascadingProvider } = CreateToPlatformContext<R>(id, displayName, sheetCreator, options)
+  const { propsPipe, stylePipe, renderComponentPipe, cascadingProvider } = getSystemPipes<R>(id, displayName, sheetCreator, options)
 
   //****************************
   // Styled COMPONENT
@@ -96,8 +96,8 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
   class Styled extends React.Component<Types.PropsX, TRenderState> {
 
     state: TRenderState = {
-      codeSystemPropsPatch: {},
-      codeClassesPatch: [],
+      codePropsPatch: {},
+      codeClassesPatch: {},
     }
 
     render() {

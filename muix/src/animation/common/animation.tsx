@@ -11,7 +11,7 @@ import { TAnimation } from '../typings/animation'
 
 export const animations = (input: () => TAnimation.SheetsX, output: (outputPar: TAnimation.Drivers) => void, next: () => React.ReactNode) => {
   const render = (animations: TAnimation.Drivers) => {
-    console.log('animations.render')
+    //console.log('animations.render')
     output(animations)
     return next()
   }
@@ -80,10 +80,10 @@ interface AnimProps {
 
 class AnimationsComponent extends React.Component<AnimProps, AnimState> {
 
-  constructor (props) {
-    super(props)
-    console.log('AnimationsComponent.create')
-  }
+  //constructor (props) {
+  //  super(props)
+  //  console.log('AnimationsComponent.create')
+  //}
 
   state: AnimState = { self: this }
 
@@ -101,7 +101,7 @@ class AnimationsComponent extends React.Component<AnimProps, AnimState> {
   }
 
   render() {
-    console.log('AnimationsComponent.render')
+    //console.log('AnimationsComponent.render')
     return this.props.children({ statefullComponent: this, reset: this.reset, sheets: this.state.sheets })
   }
 

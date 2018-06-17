@@ -39,7 +39,6 @@ export namespace Types {
     props: {}; propsNative: ReactN.ViewProperties; propsWeb: React.HTMLAttributes<HTMLElement>
     variant: never,
     theme: TCommon.ThemeBase
-    //nameType: null
   }
 
   export type OverwriteShape<R extends Shape> = PartialOverwrite<ShapeDefault, R>
@@ -159,6 +158,9 @@ export namespace Types {
       children?: React.ReactNode
       system: CodeSystemProps<R>
     }
+
+  export type PartialCodeProps = Partial<CodeProps>
+
 
   export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
   export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>

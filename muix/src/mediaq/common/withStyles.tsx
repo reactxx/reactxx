@@ -13,7 +13,7 @@ import { TAddIn } from '../typings/add-in'
 export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
   //codeSystemProps?: Types.CodeSystemProps
-  platformProps?: Types.CodeProps
+  //platformProps?: Types.CodeProps
 }
 
 /************************
@@ -23,13 +23,13 @@ export interface TRenderState extends TRenderStateBasic {
 export const beforeToPlatform = (state: TRenderState, next) =>
   mediaQFlags( // media flags, e.g. {mobile:false, tablet:true, desktop:false }
     () => ({ $mediaq: state.addInProps.$mediaq, theme: state.themeContext.theme }),
-    mediaqFlags => mediaqFlags && (state.codeSystemPropsPatch['reactxx-mediaq'] = { mediaqFlags }),
+    mediaqFlags => mediaqFlags && (state.codePropsPatch['reactxx-mediaq'] = { system: { mediaqFlags } } as Types.CodeProps),
     next)
 
 export const afterToPlatform = (state: TRenderState, next) =>
   mediaQSheet( // actualize mediaq part of the ruleset
     () => state.addInClasses as TMediaQ.MediaQSheet,
-    mediaSheetPatch => mediaSheetPatch && state.codeClassesPatch.push(mediaSheetPatch as Types.Sheet),
+    mediaSheetPatch => mediaSheetPatch && (state.codeClassesPatch['reactxx-mediaq'] = mediaSheetPatch as Types.Sheet),
     next
   )
 

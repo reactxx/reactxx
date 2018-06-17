@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom'
 ////const res = [...new Set(['a', 'b', 'c', 'd', 'b', 'f'])]
 //debugger
 
+//import App from '../common/basic/pe3'
 import App from '../common/app/index'
 //import App from '../common/with-styles'
 //import App from '../common/components/responsible-drawer/responsible-drawer'
