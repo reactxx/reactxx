@@ -1,19 +1,15 @@
 {
   "name": "reactxx-all",
   "version": "0.1.0",
-  "main": "deploy/es/ks/native/index.js",
   "dependencies": {
-    "deepmerge": "^2.1.0",
-    "expo": "^27.0.0",
-    "react": "16.3.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
-    "material-ui": "^1.0.0-beta.38",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "reactxx-mdi": "^0.1.67",
-    "reactxx-shadows": "^0.1.18",
     "tslib": "^1.9.0",
     "warning": "^3.0.0"
   },
   "devDependencies": {
+    "@material-ui/core": "^1.2.1",
     "@types/expo": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/expo/types-expo-0.1.1.tgz",
     "@types/jss": "^9.3.2",
     "@types/prop-types": "^15.5.2",
@@ -21,13 +17,13 @@
     "@types/react-dom": "^16.0.5",
     "@types/react-native": "^0.52.18",
     "@types/warning": "^3.0.0",
-    "babel-plugin-module-resolver": "^3.0.0",
     "fela": "^6.1.3"
   },
   "jspm": {
     "name": "reactxx-all",
     "main": "reactxx-all.js",
     "dependencies": {
+      "react-dom": "npm:react-dom@^16.4.1",
       "classnames": "npm:classnames@^2.2.5",
       "fela-dom": "npm:fela-dom@^7.0.4",
       "fela-plugin-extend": "npm:fela-plugin-extend@^6.0.3",
@@ -40,7 +36,6 @@
       "jss-preset-default": "npm:jss-preset-default@^4.0.1",
       "prop-types": "npm:prop-types@^15.6.0",
       "react-jss": "npm:react-jss@^8.1.0",
-      "material-ui": "npm:material-ui@next",
       "core-js": "npm:core-js@^2.5.1",
       "deepmerge": "npm:deepmerge@^2.0.1",
       "reactxx-mdi": "npm:reactxx-mdi@^0.1.67",
@@ -64,8 +59,7 @@
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
-      "react": "npm:react@16.3.2",
-      "react-dom": "npm:react-dom@16.3.2",
+      "react": "npm:react",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
       "url": "npm:jspm-nodelibs-url@^0.2.0",
@@ -87,12 +81,6 @@
         "ignore": [
           "test.js"
         ]
-      },
-      "npm:lodash@4.17.5": {
-        "map": {
-          "buffer": "@empty",
-          "process": "@empty"
-        }
       },
       "npm:pbkdf2@3.0.14": {
         "main": "browser.js"

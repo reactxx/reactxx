@@ -2,14 +2,14 @@
   "name": "reactxx-all",
   "version": "0.1.0",
   "dependencies": {
-    "react": "16.3.1",
-    "@material-ui/core": "^1.0.0",
-    "@material-ui/core/button": "^1.0.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "reactxx-mdi": "^0.1.67",
     "tslib": "^1.9.0",
     "warning": "^3.0.0"
   },
   "devDependencies": {
+    "@material-ui/core": "^1.2.1",
     "@types/expo": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/expo/types-expo-0.1.1.tgz",
     "@types/jss": "^9.3.2",
     "@types/prop-types": "^15.5.2",
@@ -23,6 +23,7 @@
     "name": "reactxx-all",
     "main": "reactxx-all.js",
     "dependencies": {
+      "react-dom": "npm:react-dom@^16.4.1",
       "classnames": "npm:classnames@^2.2.5",
       "fela-dom": "npm:fela-dom@^7.0.4",
       "fela-plugin-extend": "npm:fela-plugin-extend@^6.0.3",
@@ -40,6 +41,61 @@
       "reactxx-mdi": "npm:reactxx-mdi@^0.1.67",
       "tslib": "npm:tslib@^1.9.0",
       "warning": "npm:warning@^3.0.0"
+    },
+    "devDependencies": {},
+    "peerDependencies": {
+      "assert": "npm:jspm-nodelibs-assert@^0.2.0",
+      "buffer": "npm:jspm-nodelibs-buffer@^0.2.0",
+      "child_process": "npm:jspm-nodelibs-child_process@^0.2.0",
+      "constants": "npm:jspm-nodelibs-constants@^0.2.0",
+      "crypto": "npm:jspm-nodelibs-crypto@^0.2.0",
+      "domain": "npm:jspm-nodelibs-domain@^0.2.0",
+      "events": "npm:jspm-nodelibs-events@^0.2.0",
+      "fela": "npm:fela@^6.0.0",
+      "fs": "npm:jspm-nodelibs-fs@^0.2.0",
+      "http": "npm:jspm-nodelibs-http@^0.2.0",
+      "https": "npm:jspm-nodelibs-https@^0.2.0",
+      "jss": "npm:jss@^9.7.0",
+      "os": "npm:jspm-nodelibs-os@^0.2.0",
+      "path": "npm:jspm-nodelibs-path@^0.2.0",
+      "process": "npm:jspm-nodelibs-process@^0.2.0",
+      "react": "npm:react",
+      "stream": "npm:jspm-nodelibs-stream@^0.2.0",
+      "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
+      "url": "npm:jspm-nodelibs-url@^0.2.0",
+      "util": "npm:jspm-nodelibs-util@^0.2.0",
+      "vm": "npm:jspm-nodelibs-vm@^0.2.0",
+      "zlib": "npm:jspm-nodelibs-zlib@^0.2.0"
+    },
+    "overrides": {
+      "npm:browserify-zlib@0.1.4": {
+        "dependencies": {
+          "readable-stream": "^2.0.2",
+          "pako": "~0.2.0"
+        },
+        "map": {
+          "_stream_transform": "readable-stream/transform"
+        }
+      },
+      "npm:inherits@2.0.3": {
+        "ignore": [
+          "test.js"
+        ]
+      },
+      "npm:pbkdf2@3.0.14": {
+        "main": "browser.js"
+      },
+      "npm:safe-buffer@5.1.1": {
+        "browser": "index.js"
+      },
+      "npm:tslib@1.9.0": {
+        "format": "cjs",
+        "meta": {
+          "tslib.js": {
+            "esModule": true
+          }
+        }
+      }
     }
   }
 }

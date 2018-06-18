@@ -7,6 +7,10 @@ declare module 'fela-plugin-rtl' {
   export default def
 }
 
+declare module 'fbemitter' {
+  export type EventSubscription = any
+}
+
 declare module 'jss-preset-default' {
   const def: any
   export default def
