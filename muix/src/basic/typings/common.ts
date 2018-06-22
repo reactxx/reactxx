@@ -3,6 +3,7 @@ import ReactN from 'react-native'
 import * as CSS from 'csstype'
 
 import { TCommonStyles } from 'reactxx-basic'
+import { TAddIn } from '../typings/add-in';
 
 export namespace TCommon {
 
@@ -70,5 +71,22 @@ export namespace TCommon {
   export type ThemeProviderProps<T extends ThemeBase = ThemeBase> = { theme: T | string | ((parentTheme: T) => T) }
   export type ThemeProviderTyped<T extends ThemeBase = ThemeBase> = React.ComponentClass<ThemeProviderProps<T>>
   export interface ThemeContext { theme?: ThemeBase; $cache?: {}[] }
+
+  //****************************
+  // PLATFORM SHEET
+  //****************************
+  export type RulesetFragmentsData = {}
+
+  export interface RulesetFragments {
+    __fragments: RulesetFragmentsData[]
+    name: string
+  }
+
+  export type SheetFragmentsData = { [rulesetName: string]: RulesetFragments }
+
+  export interface SheetFragments {
+    data?: SheetFragmentsData
+    addIns?: TAddIn.SheetX
+  }
 
 }

@@ -20,7 +20,7 @@ export const modifyRuleset = (ruleset: {}, items: TMediaQ.RulesetDecoded[]) => {
   if (!items) return ruleset
   //const res = {...ruleset}
   const res = {}
-  items.forEach(it => res[intervalToSelector(it.from.value, it.to.value)] = mergeRulesetsParts(it.ruleset.data))
+  items.forEach(it => res[intervalToSelector(it.from.value, it.to.value)] = mergeRulesetsParts(it.ruleset.__fragments))
   return res
 }
 

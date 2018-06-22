@@ -7,24 +7,12 @@ import { TCommon } from '../typings/common'
 import { Types } from '../typings/types'
 import { renderAddIn } from './withStyles'
 import { TAddIn } from '../typings/add-in';
+import { instanceOf } from 'prop-types';
 
 
 //****************************
 // PLATFORM SHEET
 //****************************
-export type Ruleset = {}
-
-export interface RulesetFragments {
-  data: Ruleset[]
-  name: string
-}
-
-export type SheetData = { [rulesetName: string]: RulesetFragments }
-
-export interface SheetFragments {
-  data?: SheetData
-  addIns?: TAddIns
-}
 
 export const getPlatformSheet = (par: GetPlatformSheetPar) => {
   const { id, createSheetX, defaultClasses, sheetXPatch, variant, variantCacheId, themeContext: { $cache } } = par
@@ -40,7 +28,26 @@ export const getPlatformSheet = (par: GetPlatformSheetPar) => {
   }
 }
 
-const fromCache = ($cache: Cache, id: number, variantCacheId: string, getter: () => SheetFragments) => {
+export const applySheetPatch = (codeClasses: TCommon.SheetFragmentsData, codeClassesPatch: { [addInName: string]: TCommon.SheetFragmentsData }) => {
+  const classesPatches = Object.keys(codeClassesPatch).map(p => codeClassesPatch[p])
+  if (classesPatches.length > 0) {
+    const clss: TCommon.SheetFragmentsData = {}
+    classesPatches.forEach(cls => {
+      for (const p in cls) {
+        const clsp = cls[p]
+        if (!clsp) continue
+        const clssRes = clss[p] || (clss[p] = { name: p, __fragments: [] })
+        Array.prototype.push.apply(clssRes.__fragments, clsp.__fragments)
+      }
+    })
+    const res: TCommon.SheetFragmentsData = { ...codeClasses } as any
+    for (const p in clss) res[p].__fragments = [...res[p].__fragments, ...clss[p].__fragments]
+    return res
+  } else
+    return codeClasses
+}
+
+const fromCache = ($cache: Cache, id: number, variantCacheId: string, getter: () => TCommon.SheetFragments) => {
   let compCache = $cache[id]
   if (!compCache) $cache[id] = compCache = {}
   return compCache[variantCacheId] || (compCache[variantCacheId] = mergeCacheParts(getter()))
@@ -51,7 +58,7 @@ const toPlatform = ({ createSheetX, themeContext: { theme }, sheetXPatch, varian
   return toPlatformSheets(null, [sheet, ...sheetXPatch || []])
 }
 
-type Cache = { [variantId: string]: SheetFragments }[]
+type Cache = { [variantId: string]: TCommon.SheetFragments }[]
 
 interface GetPlatformSheetPar {
   id: number; createSheetX: Types.SheetCreatorX; themeContext: TCommon.ThemeContext; sheetXPatch: Types.PartialSheetX[];
@@ -66,22 +73,8 @@ interface GetPlatformSheetPar {
 export function mergeRulesets<T extends TCommonStyles.RulesetNativeIds = 'View'>(...rulesets/*all used rulesets*/): TCommonStyles.RulesetNative<T>
 export function mergeRulesets<T extends 'Web'>(...rulesets): TCommonStyles.RulesetWeb
 export function mergeRulesets<T extends {}>(...rulesets): T
-export function mergeRulesets(...rulesets: ({ data?: {}[] })[]) {
+export function mergeRulesets(...rulesets) {
   return mergeRulesetsParts(rulesets)
-  //let count = 0
-  //let res
-  //rulesets.forEach(ruleset => {
-  //  if (!ruleset) return
-  //  if (Array.isArray(ruleset)) {
-  //  }
-  //  switch (count) {
-  //    case 0: res = ruleset; break
-  //    case 1: res = deepMerges({}, res, ruleset); break
-  //    default: deepMerges(res, ruleset); break
-  //  }
-  //  count++
-  //})
-  //return res
 }
 
 export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseDown : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
@@ -160,13 +153,13 @@ type TRulesetAddIn = { [name: string]: Array<{}> } // name is e.g. '$mediaq'
 type TAddIn = TSheetAddIn | TRulesetAddIn
 type TAddIns = { [name: string]: TAddIn } // name is e.g. '$animations' or 'root'
 
-export const toPlatformSheets = (cache: SheetFragments /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
+export const toPlatformSheets = (cache: TCommon.SheetFragments /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
   if (!sources || sources.length == 0) return cache
-  const sheetData: SheetFragments = {}
+  const sheetData: TCommon.SheetFragments = {}
   if (cache && cache.data) {
     sheetData.data = {}
     for (const p in cache.data)
-      sheetData.data[p] = { name: p, data: [...cache.data[p].data] }
+      sheetData.data[p] = { name: p, __fragments: [...cache.data[p].__fragments] }
   } 
   sources.forEach(src => {
     for (const p in src) {
@@ -206,9 +199,9 @@ export const toPlatformSheets = (cache: SheetFragments /*platform format of shee
 
       // linearize cross platform ruleset (and put ruleset's system prop to addIns, e.g. ruleset.$mediaq)
       if (!sheetData.data) sheetData.data = {}
-      const cachedRulesets = cache && cache.data && cache.data[p] && cache.data[p].data
-      const rulesets = sheetData.data[p] || (sheetData.data[p] = { name: p, data: cachedRulesets ? [...cachedRulesets] : [] })
-      pushRulesetParts(src[p], rulesets.data, createAddIn)
+      const cachedRulesets = cache && cache.data && cache.data[p] && cache.data[p].__fragments
+      const rulesets = sheetData.data[p] || (sheetData.data[p] = { name: p, __fragments: cachedRulesets ? [...cachedRulesets] : [] })
+      pushRulesetParts(src[p], rulesets.__fragments, createAddIn)
     }
   })
 
@@ -234,90 +227,29 @@ interface MergeSheetsResult_ {
   addIns: TAddIns
 }
 
-const toPlatformSheets_ = (cache: MergeSheetsResult_ /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
-  if (!sources || sources.length == 0) return cache
-  const toMergesParts: { [name: string]: Types.RulesetX[] } = {}
-  let mergeNeeded = false
-  let addIns: TAddIns = null
-  sources.forEach(src => {
-    for (const p in src) {
-
-      // initialize addIns item or for sheet or for ruleset
-      const createAddIn = <T extends TAddIn = TRulesetAddIn>(isSheet?: boolean) => {
-        if (!addIns) addIns = {}
-        const addIn = addIns[p]
-        if (addIn) return addIn as T
-        const cacheAddIn = cache && cache.addIns && cache.addIns[p]
-
-        // no cache:
-        if (!cacheAddIn) return (addIns[p] = isSheet ? [] : {}) as T
-
-        // sheet - init array from cache
-        if (isSheet) return (addIns[p] = [cacheAddIn]) as T
-
-        // ruleset - two level deep copy of cached addIns:
-        /* example:
-        const addIns = {
-          root: {
-            $media: [
-              { '0-480': { m: 1 }, '480-': { m: 2 } }
-            ]
-          }
-        }*/
-        const res = addIns[p] = { ...cacheAddIn as TRulesetAddIn } // first level: sheet's ruleset, e.g. 'root':{}
-        for (const pp in res) res[pp] = [...res[pp]] // second level: array of ruleset prop, e.g. 'mediaq':[]
-        return res as T
-      }
-
-      // put sheet's system prop to addIns (e.g. $animations or sheet.$mediaq)
-      if (p.charAt(0) === '$') { createAddIn<TSheetAddIn>(true).push(src[p]); continue }
-
-      // linearize cross platform ruleset (and put ruleset's system prop to addIns, e.g. ruleset.$mediaq)
-      mergeNeeded = true
-      const rulesets = toMergesParts[p] || (toMergesParts[p] = [])
-      pushRulesetParts(src[p], rulesets, createAddIn)
-    }
-  })
-
-  // convert addIns to platform format
-  if (addIns) renderAddIn.finishAddIns.forEach(finish => finish(addIns))
-  else addIns = cache && cache.addIns
-
-  if (!mergeNeeded) return { sheet: cache.sheet, addIns } as MergeSheetsResult_
-
-  const sheet: Types.Sheet = cache ? { ...cache.sheet } : {}
-  for (const p in toMergesParts) {
-    const targetp = sheet[p]; const toMergesp = toMergesParts[p]
-    const toMerge = targetp && toMergesp.length > 0 ? [targetp, ...toMergesp] : targetp ? [targetp] : toMergesp.length > 0 ? toMergesp : null
-    if (!toMerge) continue
-    sheet[p] = mergeRulesetsParts(toMerge as any)
-  }
-  return { sheet, addIns } as MergeSheetsResult_
-}
-
-export const mergeCacheParts = (cache: SheetFragments) => {
+export const mergeCacheParts = (cache: TCommon.SheetFragments) => {
   for (const p in cache.data) {
     const data = cache.data[p]
-    if (!data.data) continue
-    data.data = [mergeRulesetsParts(data.data)]
+    if (!data.__fragments) continue
+    data.__fragments = [mergeRulesetsParts(data.__fragments)]
   }
   return cache
 }
 
 // shallow merge with removing system props (name starts with '$')
-export const mergeRulesetsParts = (parts: (Ruleset | RulesetFragments)[]) => {
+export const mergeRulesetsParts = (parts: (TCommon.RulesetFragmentsData | TCommon.RulesetFragments)[]) => {
   if (!parts || parts.length === 0) return null
 
   // optimalization for just single part
   if (parts.length === 1) {
-    let parts0 = parts[0] as RulesetFragments
+    let parts0 = parts[0] as TCommon.RulesetFragments
     if (!parts0) return null
-    if (parts0.data) {
-      if (parts0.data.length === 1) { // single part is single item array
-        parts0 = parts0.data[0] as RulesetFragments
+    if (parts0.__fragments) {
+      if (parts0.__fragments.length === 1) { // single part is single item array
+        parts0 = parts0.__fragments[0] as TCommon.RulesetFragments
         if (!parts0) return null
       } else
-        return mergePartArray(parts0.data) // single part is array
+        return mergePartArray(parts0.__fragments) // single part is array
     }
     // just single part or single item array
     const sysProps = Object.keys(parts0).filter(p => p.charAt(0) === '$') //system prop names
@@ -331,10 +263,10 @@ export const mergeRulesetsParts = (parts: (Ruleset | RulesetFragments)[]) => {
   return mergePartArray(parts)
 }
 
-const mergePart = (part: { data?: {}[] }, res: {}) => {
+const mergePart = (part: TCommon.RulesetFragments | TCommon.RulesetFragmentsData, res: {}) => {
   if (!part) return
-  if (part.data) {
-    mergePartArray(part.data, res)
+  if ((part as TCommon.RulesetFragments).__fragments) {
+    mergePartArray((part as TCommon.RulesetFragments).__fragments, res)
     return
   }
   for (const p in part) {
@@ -344,7 +276,7 @@ const mergePart = (part: { data?: {}[] }, res: {}) => {
   }
 }
 
-const mergePartArray = (parts: {}[], res?: {}) => {
+const mergePartArray = (parts: TCommon.RulesetFragmentsData[], res?: {}) => {
   if (!res) res = {}
   parts.forEach(part => mergePart(part, res))
   return res

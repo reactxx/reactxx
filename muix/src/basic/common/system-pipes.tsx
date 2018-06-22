@@ -3,7 +3,7 @@ import warning from 'warning'
 
 import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
-import { SheetData, getPlatformSheet, deepMerges, immutableMerge, toPlatformRulesets } from './to-platform'
+import { getPlatformSheet, deepMerges, toPlatformRulesets, applySheetPatch, immutableMerge } from './to-platform'
 import { TAddIn } from '../typings/add-in'
 import { TCommonStyles } from '../typings/common-styles'
 import { themePipe } from './theme'
@@ -186,22 +186,22 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     }
 
     // apply patches
-    const classesPatches = Object.keys(codeClassesPatch).map(p => codeClassesPatch[p])
-    if (classesPatches.length > 0) {
-      const clss: SheetData = {}
-      classesPatches.forEach(cls => {
-        for (const p in cls) {
-          const clsp = cls[p]
-          if (!clsp) continue
-          const clssRes = clss[p] || (clss[p] = { name: p, data: [] })
-          Array.prototype.push.apply(clssRes.data, clsp.data)
-        }
-      })
-      const res: SheetData = { ...codeClasses }
-      for (const p in clss) res[p].data = [...res[p].data, ...clss[p].data]
-      finalProps.system.classes = res as any
-    } else
-      finalProps.system.classes = codeClasses as any
+    //const classesPatches = Object.keys(codeClassesPatch).map(p => codeClassesPatch[p])
+    //if (classesPatches.length > 0) {
+    //  const clss: TCommon.SheetFragmentsData = {}
+    //  classesPatches.forEach(cls => {
+    //    for (const p in cls) {
+    //      const clsp = cls[p]
+    //      if (!clsp) continue
+    //      const clssRes = clss[p] || (clss[p] = { name: p, __fragments: [] })
+    //      Array.prototype.push.apply(clssRes.__fragments, clsp.__fragments)
+    //    }
+    //  })
+    //  const res: TCommon.SheetFragmentsData = { ...codeClasses }
+    //  for (const p in clss) res[p].__fragments = [...res[p].__fragments, ...clss[p].__fragments]
+    //  finalProps.system.classes = res as any
+    //} else
+    finalProps.system.classes = applySheetPatch(codeClasses, codeClassesPatch) as any
 
     // call component code
     return <CodeComponent {...finalProps as Types.CodeProps<R>} />

@@ -1,7 +1,7 @@
 import React from 'react'
 import warning from 'warning'
 
-import { Types, TCommonStyles, RulesetFragments, SheetData } from 'reactxx-basic'
+import { Types, TCommonStyles, TCommon } from 'reactxx-basic'
 
 import { onSubscribe, modifyRuleset } from 'reactxx-mediaq' // import platform dependent code
 
@@ -26,7 +26,7 @@ export namespace TMediaQ {
   export type RulesetWithAddIn = TCommonStyles.Ruleset & MediaQRulesetPart
 
   export interface MediaQRulesetPart {
-    $mediaq?: { [query: string]: RulesetFragments } //TCommonStyles.Ruleset }
+    $mediaq?: { [query: string]: TCommon.RulesetFragments } //TCommonStyles.Ruleset }
   }
 
   //*** decoded MediaQSheet
@@ -38,7 +38,7 @@ export namespace TMediaQ {
   export interface RulesetDecoded {
     from: Breakpoint
     to: Breakpoint
-    ruleset: RulesetFragments
+    ruleset: TCommon.RulesetFragments
   }
 
   /************************
@@ -91,7 +91,7 @@ export const mediaQFlags = <T extends string>(input: () => { $mediaq: TMediaQ.No
   return res
 }
 
-export const mediaQSheet = <T extends string>(input: () => TMediaQ.MediaQSheet, output: (outputPar: SheetData) => void, next: () => React.ReactNode) => {
+export const mediaQSheet = <T extends string>(input: () => TMediaQ.MediaQSheet, output: (outputPar: TCommon.SheetFragmentsData) => void, next: () => React.ReactNode) => {
   let breaks: ReturnType<typeof getSheetBreakpoints>
   let codeSheet: TMediaQ.MediaQSheet
   const render = () => {
@@ -190,11 +190,11 @@ const getSheetBreakpoints = (sheet: TMediaQ.MediaQSheet) => {
 
 const getSheetPatch = (ignore: boolean, classesIn: TMediaQ.MediaQSheet, usedSheetBreakpoints: TMediaQ.MediaQRulesetDecoded[]) => {
   if (ignore || !usedSheetBreakpoints || usedSheetBreakpoints.length===0) return null
-  const codeClassesPatch: SheetData = { }
+  const codeClassesPatch: TCommon.SheetFragmentsData = { }
   usedSheetBreakpoints.forEach(used => {
     const ruleset = classesIn[used.rulesetName];
     warning(ruleset, `Missing ruleset ${used.rulesetName}`); //`
-    codeClassesPatch[used.rulesetName] = { name: used.rulesetName, data: [modifyRuleset(ruleset, used.items)] }
+    codeClassesPatch[used.rulesetName] = { name: used.rulesetName, __fragments: [modifyRuleset(ruleset, used.items)] }
   })
   return codeClassesPatch
 }
