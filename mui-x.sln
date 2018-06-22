@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "reactxx-kitchen-sink", "rea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "docs", "docs\docs.csproj", "{81F83C25-CD85-48C1-9E42-58D4A2695358}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mui", "mui\mui.csproj", "{63AAD97F-219B-4633-9700-95F1CB26B4B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{81F83C25-CD85-48C1-9E42-58D4A2695358}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81F83C25-CD85-48C1-9E42-58D4A2695358}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81F83C25-CD85-48C1-9E42-58D4A2695358}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63AAD97F-219B-4633-9700-95F1CB26B4B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63AAD97F-219B-4633-9700-95F1CB26B4B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63AAD97F-219B-4633-9700-95F1CB26B4B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63AAD97F-219B-4633-9700-95F1CB26B4B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

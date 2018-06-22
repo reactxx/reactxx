@@ -73,7 +73,7 @@ export const immutableMerge = (target, sources: {}[]) => {
         objProps.push(val)
       } else { // non object prop, last win
         delete objectProps[p]
-        res[p] = val 
+        res[p] = val
       }
     }
   })
@@ -110,6 +110,83 @@ export interface MergeSheetsResult {
   addIns: TAddIns
 }
 
+export type Ruleset = { }
+
+export interface RulesetData {
+  data: Ruleset[]
+  name: string
+  cache?: Ruleset
+}
+
+export interface SheetData {
+  data?: { [rulesetName: string]: RulesetData }
+  addIns?: TAddIns
+}
+
+export const toPlatformSheets2 = (cache: SheetData /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
+  if (!sources || sources.length == 0) return cache
+  const sheetData: SheetData = { }
+  sources.forEach(src => {
+    for (const p in src) {
+
+      // initialize addIns item or for sheet or for ruleset
+      const createAddIn = <T extends TAddIn = TRulesetAddIn>(isSheet?: boolean) => {
+        if (!sheetData.addIns) sheetData.addIns = {}
+        const addIn = sheetData.addIns[p]
+        if (addIn) return addIn as T
+
+        const cacheAddIn = cache && cache.addIns && cache.addIns[p]
+
+        // no cache:
+        if (!cacheAddIn) return (sheetData.addIns[p] = isSheet ? [] : {}) as T
+
+        //*** init adIns from cache:
+
+        // sheet - init array from cache
+        if (isSheet) return (sheetData.addIns[p] = [cacheAddIn]) as T
+
+        // ruleset - two level deep copy of cached addIns:
+        /* example:
+        const addIns = {
+          root: {
+            $media: [
+              { '0-480': { m: 1 }, '480-': { m: 2 } }
+            ]
+          }
+        }*/
+        const res = sheetData.addIns[p] = { ...cacheAddIn as TRulesetAddIn } // first level: sheet's ruleset, e.g. 'root':{}
+        for (const pp in res) res[pp] = [...res[pp]] // second level: array of ruleset prop, e.g. 'mediaq':[]
+        return res as T
+      }
+
+      // put sheet's system prop to addIns (e.g. $animations or sheet.$mediaq)
+      if (p.charAt(0) === '$') { createAddIn<TSheetAddIn>(true).push(src[p]); continue }
+
+      // linearize cross platform ruleset (and put ruleset's system prop to addIns, e.g. ruleset.$mediaq)
+      if (!sheetData.data) sheetData.data = {}
+      const rulesets = sheetData.data[p] || (sheetData.data[p] = { name: p, data: [], cache: cache && cache.data[p] && cache.data[p].cache })
+      pushRulesetParts(src[p], rulesets.data, createAddIn)
+    }
+  })
+
+  // convert addIns to platform format
+  if (sheetData.addIns) renderAddIn.finishAddIns.forEach(finish => finish(sheetData.addIns))
+  else sheetData.addIns = cache && cache.addIns
+
+  return sheetData
+
+  //const sheet: Types.Sheet = cache ? { ...cache.sheet } : {}
+  //for (const p in toMergesParts) {
+  //  const targetp = sheet[p]; const toMergesp = toMergesParts[p]
+  //  const toMerge = targetp && toMergesp.length > 0 ? [targetp, ...toMergesp] : targetp ? [targetp] : toMergesp.length > 0 ? toMergesp : null
+  //  if (!toMerge) continue
+  //  sheet[p] = mergeRulesetsParts(toMerge)
+  //}
+  //return { sheet, addIns } as MergeSheetsResult
+}
+
+
+
 export const toPlatformSheets = (cache: MergeSheetsResult /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
   if (!sources || sources.length == 0) return cache
   const toMergesParts: { [name: string]: Types.RulesetX[] } = {}
@@ -123,13 +200,13 @@ export const toPlatformSheets = (cache: MergeSheetsResult /*platform format of s
         if (!addIns) addIns = {}
         const addIn = addIns[p]
         if (addIn) return addIn as T
-        const cacheAddIn = cache && cache.addIns && cache.addIns[p] 
+        const cacheAddIn = cache && cache.addIns && cache.addIns[p]
 
         // no cache:
         if (!cacheAddIn) return (addIns[p] = isSheet ? [] : {}) as T
 
         // sheet - init array from cache
-        if (isSheet) return (addIns[p] = [cacheAddIn]) as T 
+        if (isSheet) return (addIns[p] = [cacheAddIn]) as T
 
         // ruleset - two level deep copy of cached addIns:
         /* example:

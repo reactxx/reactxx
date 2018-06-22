@@ -1,0 +1,18 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es5",
+    "module": "system",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "rootDir": "src",
+    "outDir": "deploy",
+    "disableSizeLimit": true,
+    "jsx": "react"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/material-ui/*.js"
+  ]
+}

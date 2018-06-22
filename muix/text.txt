@@ -1,22 +1,20 @@
-﻿reactxx-primitives
-
-https://medium.com/dailyjs/a-guide-to-building-a-react-component-for-npm-68f03b314753
+﻿https://medium.com/dailyjs/a-guide-to-building-a-react-component-for-npm-68f03b314753
 
 # TODO
-TextC etc.
 
-# withStyle
+- codeClasses is map of Ruleset array
+- merging to flat ruleset performs in mergeRulesets 
+- ruleset patches modifies codeClasses arrays
 
-# CHANGES NEW
+- $when
+root: {
+  $when: {
+    disabled: {
+    }
+  }
+}
 
-## Media state and Active to HOC withStyle component state
-
-# REMOVE OLD
-
-## NO $overrides, rename mergeRulesetWithOverrides
-
-
-
-
-
-
+if any $when exists => codeClasses is converted to { root: { $whenName:'root', value: {..ruleset} }} 
+mergeRulesets: 
+- has codeClasses as first argument
+- $whenName evidence, ev. uses codeClasses[$whenName]

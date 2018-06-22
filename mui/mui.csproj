@@ -1,7 +1,7 @@
-﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,12 +9,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7FBE4680-8F69-417A-9163-98D24A58B8EF}</ProjectGuid>
+    <ProjectGuid>{63AAD97F-219B-4633-9700-95F1CB26B4B8}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>muix</RootNamespace>
-    <AssemblyName>muix</AssemblyName>
+    <RootNamespace>mui</RootNamespace>
+    <AssemblyName>mui</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -25,7 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.9</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,8 +46,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
@@ -68,24 +68,21 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="%24blacklist.js" />
-    <Content Include=".babelrc" />
-    <Content Include="app.json" />
-    <Content Include="assets\icon.png" />
-    <Content Include="assets\splash.png" />
-    <Content Include="deploy\reactxx\package.json" />
-    <Content Include="deploy\reactxx\README.md" />
-    <Content Include="deploy\mui\package.json" />
-    <Content Include="deploy\mui\README.md" />
-    <Content Include="deploy\basic\package.json" />
-    <Content Include="deploy\basic\README.md" />
-    <Content Include="deploy\fela\package.json" />
-    <Content Include="deploy\fela\README.md" />
-    <Content Include="deploy\animation\package.json" />
-    <Content Include="deploy\animation\README.md" />
-    <Content Include="deploy\mediaq\package.json" />
-    <Content Include="deploy\mediaq\README.md" />
-    <Content Include="src\ks\common\component\text.txt" />
+    <Content Include="index.html" />
+    <None Include="flow.cmd" />
+    <Content Include="jspm.config.js" />
+    <Content Include="package.json" />
+    <None Include="packages.config" />
+    <TypeScriptCompile Include="src\app\index.tsx" />
+    <Content Include="tsconfig.json" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="src\material-ui\AppBar\AppBar.js" />
     <Content Include="src\material-ui\AppBar\index.js" />
     <Content Include="src\material-ui\Avatar\Avatar.js" />
@@ -201,6 +198,8 @@
     <Content Include="src\material-ui\IconButton\index.js" />
     <Content Include="src\material-ui\Icon\Icon.js" />
     <Content Include="src\material-ui\Icon\index.js" />
+    <TypeScriptCompile Include="src\app\typings.d.ts" />
+    <TypeScriptCompile Include="src\material-ui\index.ts" />
     <Content Include="src\material-ui\InputAdornment\index.js" />
     <Content Include="src\material-ui\InputAdornment\InputAdornment.js" />
     <Content Include="src\material-ui\InputLabel\index.js" />
@@ -307,8 +306,7 @@
     <Content Include="src\material-ui\styles\spacing.js" />
     <Content Include="src\material-ui\styles\themeListener.js" />
     <Content Include="src\material-ui\styles\transitions.js" />
-    <TypeScriptCompile Include="src\material-ui\styles\withStyles.ts" />
-    <Content Include="src\material-ui\styles\withStyles-old.js" />
+    <Content Include="src\material-ui\styles\withStyles.js" />
     <Content Include="src\material-ui\styles\withTheme.js" />
     <Content Include="src\material-ui\styles\zIndex.js" />
     <Content Include="src\material-ui\SvgIcon\index.js" />
@@ -343,6 +341,13 @@
     <Content Include="src\material-ui\Tabs\TabScrollButton.js" />
     <Content Include="src\material-ui\Tab\index.js" />
     <Content Include="src\material-ui\Tab\Tab.js" />
+    <Content Include="src\material-ui\test-utils\createMount.js" />
+    <Content Include="src\material-ui\test-utils\createRender.js" />
+    <Content Include="src\material-ui\test-utils\createShallow.js" />
+    <Content Include="src\material-ui\test-utils\getClasses.js" />
+    <Content Include="src\material-ui\test-utils\index.js" />
+    <Content Include="src\material-ui\test-utils\until.js" />
+    <Content Include="src\material-ui\test-utils\unwrap.js" />
     <Content Include="src\material-ui\TextField\index.js" />
     <Content Include="src\material-ui\TextField\TextField.js" />
     <Content Include="src\material-ui\Toolbar\index.js" />
@@ -364,149 +369,14 @@
     <Content Include="src\material-ui\withWidth\withWidth.js" />
     <Content Include="src\material-ui\Zoom\index.js" />
     <Content Include="src\material-ui\Zoom\Zoom.js" />
-    <Content Include="text.txt" />
-    <Content Include="index.html" />
-    <Content Include="package.json" />
-    <Content Include="%24publish.cmd" />
-    <Content Include="%24publish_.cmd" />
-    <Content Include="%24refresh-libs.cmd" />
-    <Content Include="%24compile.cmd" />
-    <Content Include="%24start.cmd" />
-    <Content Include="deploy\activable\package.json" />
-    <Content Include="deploy\activable\README.md" />
-    <Content Include="deploy\primitives\package.json" />
-    <Content Include="deploy\primitives\README.md" />
-    <Content Include="package-web.json" />
-    <Content Include="package-all.json" />
-    <Content Include="%24mklink.cmd" />
-    <Content Include="%24mklink-c.cmd" />
-    <None Include="packages.config" />
-    <Content Include="README.md" />
-    <Content Include="StyleSheet1.css" />
-    <Content Include="tsconfig-native.json" />
-    <Content Include="tsconfig-web.json" />
-    <Content Include="tsconfig.json" />
-    <Content Include="%24refresh-all.cmd" />
-    <Content Include="src\doc\home.md" />
-    <Content Include="src\doc\home - Copy.md" />
-    <Content Include="src\reactxx\README.md" />
-    <Content Include="src\basic\typings\mklink-c.cmd" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="jspm.config.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="src\activable\common\activable.tsx" />
-    <TypeScriptCompile Include="src\activable\native\index.ts" />
-    <TypeScriptCompile Include="src\activable\web\index.ts" />
-    <TypeScriptCompile Include="src\animation\common\animation.tsx" />
-    <TypeScriptCompile Include="src\animation\native\animation.tsx" />
-    <TypeScriptCompile Include="src\animation\native\index.ts" />
-    <TypeScriptCompile Include="src\animation\typings\animation.ts" />
-    <TypeScriptCompile Include="src\animation\typings\types.ts" />
-    <TypeScriptCompile Include="src\animation\typings\typings.d.ts" />
-    <TypeScriptCompile Include="src\animation\web\animation.tsx" />
-    <TypeScriptCompile Include="src\animation\web\index.ts" />
-    <TypeScriptCompile Include="src\basic\common\develop.tsx" />
-    <TypeScriptCompile Include="src\basic\common\system-pipes.tsx" />
-    <TypeScriptCompile Include="src\basic\common\to-platform.ts" />
-    <TypeScriptCompile Include="src\basic\common\sheet-cache.tsx" />
-    <TypeScriptCompile Include="src\basic\common\withStyles.tsx" />
-    <TypeScriptCompile Include="src\basic\typings\add-in.ts" />
-    <TypeScriptCompile Include="src\basic\typings\common.ts" />
-    <TypeScriptCompile Include="src\basic\typings\types.ts" />
-    <TypeScriptCompile Include="src\basic\typings\typings.d.ts" />
-    <TypeScriptCompile Include="src\animation\typings\add-in.ts" />
-    <None Include="src\expo.d.ts_" />
-    <TypeScriptCompile Include="src\ks\common\animation\ae1.tsx" />
-    <TypeScriptCompile Include="src\ks\common\animation\index.tsx" />
-    <TypeScriptCompile Include="src\ks\common\basic\pe8.tsx" />
-    <TypeScriptCompile Include="src\ks\common\mediaq\me3.tsx" />
-    <TypeScriptCompile Include="src\ks\common\basic\pe9.tsx" />
-    <TypeScriptCompile Include="src\material-ui\index.ts" />
-    <TypeScriptCompile Include="src\mediaq\common\withStyles.tsx" />
-    <TypeScriptCompile Include="src\mediaq\typings\add-in.ts" />
-    <TypeScriptCompile Include="src\ks\common\mediaq\index.tsx" />
-    <TypeScriptCompile Include="src\ks\common\mediaq\me2.tsx" />
-    <TypeScriptCompile Include="src\ks\common\mediaq\me1.tsx" />
-    <TypeScriptCompile Include="src\animation\common\withStyles.tsx" />
-    <TypeScriptCompile Include="src\fela\index.ts" />
-    <TypeScriptCompile Include="src\doc\home.tsx" />
-    <TypeScriptCompile Include="src\ks\common\app\index.tsx" />
-    <TypeScriptCompile Include="src\ks\common\app\navigation.tsx" />
-    <TypeScriptCompile Include="src\ks\common\components\typo.tsx" />
-    <TypeScriptCompile Include="src\ks\common\components\index.tsx" />
-    <TypeScriptCompile Include="src\ks\common\components\responsible-drawer\responsible-drawer.tsx" />
-    <TypeScriptCompile Include="src\ks\common\component\ce2.tsx" />
-    <TypeScriptCompile Include="src\ks\common\component\ce1.tsx" />
-    <TypeScriptCompile Include="src\ks\common\component\index.tsx" />
-    <TypeScriptCompile Include="src\ks\common\hallo-world.tsx" />
-    <TypeScriptCompile Include="src\ks\common\basic\pe1.tsx" />
-    <TypeScriptCompile Include="src\ks\common\basic\pe2.tsx" />
-    <TypeScriptCompile Include="src\ks\common\basic\pe3.tsx" />
-    <TypeScriptCompile Include="src\ks\common\basic\pe4.tsx" />
-    <TypeScriptCompile Include="src\ks\common\basic\pe5.tsx" />
-    <TypeScriptCompile Include="src\ks\common\basic\pe6.tsx" />
-    <TypeScriptCompile Include="src\ks\common\basic\pe7.tsx" />
-    <TypeScriptCompile Include="src\ks\common\basic\index.tsx" />
-    <TypeScriptCompile Include="src\ks\common\typings.d.ts" />
-    <TypeScriptCompile Include="src\ks\native\index.tsx" />
-    <TypeScriptCompile Include="src\ks\typings.d.ts" />
-    <TypeScriptCompile Include="src\mediaq\common\media-q.tsx" />
-    <TypeScriptCompile Include="src\mediaq\native\index.ts" />
-    <TypeScriptCompile Include="src\mediaq\native\media-q.ts" />
-    <TypeScriptCompile Include="src\mediaq\typings\types.ts" />
-    <TypeScriptCompile Include="src\mediaq\typings\typings.d.ts" />
-    <TypeScriptCompile Include="src\mediaq\web\index.ts" />
-    <TypeScriptCompile Include="src\mediaq\web\media-q.ts" />
-    <TypeScriptCompile Include="src\mui\web\classnames.ts" />
-    <TypeScriptCompile Include="src\mui\web\withStyles.tsx" />
-    <TypeScriptCompile Include="src\navigation\index.tsx" />
-    <TypeScriptCompile Include="src\primitives\common\comps-sheets.ts" />
-    <TypeScriptCompile Include="src\primitives\native\comps.tsx" />
-    <TypeScriptCompile Include="src\primitives\native\index.ts" />
-    <TypeScriptCompile Include="src\primitives\typings\comps.ts" />
-    <TypeScriptCompile Include="src\primitives\web\comps.tsx" />
-    <TypeScriptCompile Include="src\primitives\web\index.ts" />
-    <TypeScriptCompile Include="src\basic\common\theme.tsx" />
-    <TypeScriptCompile Include="src\reactxx\common\withStyles.tsx" />
-    <TypeScriptCompile Include="src\reactxx\native\comps.tsx" />
-    <TypeScriptCompile Include="src\reactxx\typings\add-in.ts" />
-    <None Include="src\basic\typings\mklink.cmd" />
-    <TypeScriptCompile Include="src\reactxx\typings\index.ts" />
-    <TypeScriptCompile Include="src\reactxx\typings\types.ts" />
-    <TypeScriptCompile Include="src\typings.d.ts" />
-    <TypeScriptCompile Include="src\ks\web\index.tsx" />
-    <TypeScriptCompile Include="src\reactxx\native\index.ts" />
-    <TypeScriptCompile Include="src\reactxx\web\comps.tsx" />
-    <TypeScriptCompile Include="src\reactxx\web\index.ts" />
-    <TypeScriptCompile Include="src\test\web\appstate\index.tsx" />
-    <TypeScriptCompile Include="src\test\common\reactxx\doc\home.tsx" />
-    <TypeScriptCompile Include="src\test\common\reactxx\index.tsx" />
-    <TypeScriptCompile Include="src\test\common\shadows\native.tsx" />
-    <TypeScriptCompile Include="src\test\common\shadows\index.tsx" />
-    <TypeScriptCompile Include="src\test\native\App.tsx" />
-    <TypeScriptCompile Include="src\test\common\root.tsx" />
-    <TypeScriptCompile Include="src\test\web\index.tsx" />
-    <TypeScriptCompile Include="src\basic\index.ts" />
-    <TypeScriptCompile Include="src\basic\typings\common-styles.ts" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\test\common\animation\" />
-    <Folder Include="trash\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -522,9 +392,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>53247</DevelopmentServerPort>
+          <DevelopmentServerPort>51104</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53248/</IISUrl>
+          <IISUrl>http://localhost:51104/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -538,13 +408,9 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
-  <PropertyGroup>
-    <PostBuildEvent>rem call "c:\Program Files (x86)\Microsoft SDKs\TypeScript\2.6\tsc.exe" --p d:\muix\muix\tsconfig-web.json
-rem call "c:\Program Files (x86)\Microsoft SDKs\TypeScript\2.6\tsc.exe" --p d:\muix\muix\tsconfig-native.json</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

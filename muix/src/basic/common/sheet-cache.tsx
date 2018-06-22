@@ -22,7 +22,12 @@ export const getPlatformSheet = (par: GetPlatformSheetPar) => {
 const fromCache = ($cache: Cache, id: number, variantCacheId: string, getter: () => MergeSheetsResult) => {
   let compCache = $cache[id]
   if (!compCache) $cache[id] = compCache = {}
-  return compCache[variantCacheId] || (compCache[variantCacheId] = getter())
+  let res = compCache[variantCacheId]
+  if (res) return res
+  res = getter()
+  //TODO: merge
+  compCache[variantCacheId] = res
+  return res
 }
 
 const toPlatform = ({ createSheetX, themeContext: { theme }, sheetXPatch, variant }: GetPlatformSheetPar) => {

@@ -5,6 +5,7 @@
     "module": "system",
     "moduleResolution": "node",
 
+    "allowJs": true,
     //"declaration": true,
 
     //"traceResolution": true,
@@ -38,7 +39,8 @@
       "reactxx-activable": [ "src/activable/web/index" ],
       "reactxx": [ "src/reactxx/web/index" ],
 
-      "reactxx-mui/*": [ "src/mui/*" ]
+      "reactxx-mui/*": [ "src/material-ui/*" ],
+      "classnames": [ "src/mui/web/classnames" ]
     },
 
     "lib": [
@@ -49,7 +51,9 @@
   },
   "include": [
     //"src/**/*",
-    "src/**/*",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/material-ui/*.js",
     "node_modules/reactxx-mdi/typings.ts"
   ],
   "exclude": [
