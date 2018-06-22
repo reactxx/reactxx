@@ -1,3 +1,4 @@
+import { mergeRulesetsParts } from 'reactxx-basic'
 import { TMediaQ, refresh } from '../common/media-q'
 
 export const onSubscribe = (b: TMediaQ.Breakpoint, inRuleset: boolean) => {
@@ -18,8 +19,8 @@ export const onSubscribe = (b: TMediaQ.Breakpoint, inRuleset: boolean) => {
 export const modifyRuleset = (ruleset: {}, items: TMediaQ.RulesetDecoded[]) => {
   if (!items) return ruleset
   //const res = {...ruleset}
-  const res = { $mediaq: undefined }
-  items.forEach(it => res[intervalToSelector(it.from.value, it.to.value)] = it.ruleset)
+  const res = {}
+  items.forEach(it => res[intervalToSelector(it.from.value, it.to.value)] = mergeRulesetsParts(it.ruleset.data))
   return res
 }
 

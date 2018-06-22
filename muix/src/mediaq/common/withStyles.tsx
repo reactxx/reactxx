@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, themePipe, renderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformSheets, deepMerges } from 'reactxx-basic'
+import { TCommon, ThemeProvider, themePipe, renderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformSheets, deepMerges, SheetFragments } from 'reactxx-basic'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQSheet } from 'reactxx-mediaq'
 
 import { Types } from '../typings/types'
@@ -29,7 +29,7 @@ export const beforeToPlatform = (state: TRenderState, next) =>
 export const afterToPlatform = (state: TRenderState, next) =>
   mediaQSheet( // actualize mediaq part of the ruleset
     () => state.addInClasses as TMediaQ.MediaQSheet,
-    mediaSheetPatch => mediaSheetPatch && (state.codeClassesPatch['reactxx-mediaq'] = mediaSheetPatch as Types.Sheet),
+    codeClassesPatch => codeClassesPatch && (state.codeClassesPatch['reactxx-mediaq'] = codeClassesPatch),
     next
   )
 
@@ -38,7 +38,7 @@ export const finishAddIns = (addIns: {}) => {
     const addInsp = addIns[p]
     const $mediaq: Array<{}> = addInsp && addInsp.$mediaq
     if (!$mediaq) continue
-    addIns[p].$mediaq = $mediaq.length === 0 ? null : $mediaq.length === 1 ? $mediaq[0] : deepMerges({}, ...$mediaq)
+    addIns[p].$mediaq = toPlatformSheets(null, $mediaq).data //.length === 0 ? null : $mediaq.length === 1 ? $mediaq[0] : deepMerges({}, ...$mediaq)
   }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import warning from 'warning'
 
-import { Types, TCommonStyles } from 'reactxx-basic'
+import { Types, TCommonStyles, RulesetFragments, SheetData } from 'reactxx-basic'
 
 import { onSubscribe, modifyRuleset } from 'reactxx-mediaq' // import platform dependent code
 
@@ -26,7 +26,7 @@ export namespace TMediaQ {
   export type RulesetWithAddIn = TCommonStyles.Ruleset & MediaQRulesetPart
 
   export interface MediaQRulesetPart {
-    $mediaq?: { [query: string]: TCommonStyles.Ruleset }
+    $mediaq?: { [query: string]: RulesetFragments } //TCommonStyles.Ruleset }
   }
 
   //*** decoded MediaQSheet
@@ -38,7 +38,7 @@ export namespace TMediaQ {
   export interface RulesetDecoded {
     from: Breakpoint
     to: Breakpoint
-    ruleset: TCommonStyles.Ruleset
+    ruleset: RulesetFragments
   }
 
   /************************
@@ -91,7 +91,7 @@ export const mediaQFlags = <T extends string>(input: () => { $mediaq: TMediaQ.No
   return res
 }
 
-export const mediaQSheet = <T extends string>(input: () => TMediaQ.MediaQSheet, output: (outputPar: TMediaQ.MediaQSheet) => void, next: () => React.ReactNode) => {
+export const mediaQSheet = <T extends string>(input: () => TMediaQ.MediaQSheet, output: (outputPar: SheetData) => void, next: () => React.ReactNode) => {
   let breaks: ReturnType<typeof getSheetBreakpoints>
   let codeSheet: TMediaQ.MediaQSheet
   const render = () => {
@@ -103,7 +103,7 @@ export const mediaQSheet = <T extends string>(input: () => TMediaQ.MediaQSheet, 
     codeSheet = input()
     breaks = getSheetBreakpoints(codeSheet)
     if (breaks.observedBits !== 0) return <MediaQConsumer unstable_observedBits={breaks.observedBits}>{render}</MediaQConsumer>
-    output(null)
+    output(window.isWeb && breaks.sheetBreakpoints && breaks.sheetBreakpoints.length > 0 && getSheetPatch(false, codeSheet, breaks.sheetBreakpoints))
     return next()
   }
   return res
@@ -174,7 +174,7 @@ const getSheetBreakpoints = (sheet: TMediaQ.MediaQSheet) => {
       const interval = pm.split('-').map((i, idx) => {
         if (!i) return idx == 0 ? BMin : BMax
         const breakpoint = subscribe(parseInt(i), true)
-        observedBits |= 1 << breakpoint.id
+        if (breakpoint.id >= 0) observedBits |= 1 << breakpoint.id
         return breakpoint
       })
       const rsCodeItem: TMediaQ.RulesetDecoded = {
@@ -185,18 +185,18 @@ const getSheetBreakpoints = (sheet: TMediaQ.MediaQSheet) => {
       rsCode.items.push(rsCodeItem)
     }
   }
-  return { sheetBreakpoints: observedBits === 0 ? null : res, observedBits: observedBits }
+  return { sheetBreakpoints: res, observedBits: observedBits }
 }
 
 const getSheetPatch = (ignore: boolean, classesIn: TMediaQ.MediaQSheet, usedSheetBreakpoints: TMediaQ.MediaQRulesetDecoded[]) => {
-  if (ignore || !usedSheetBreakpoints) return null
-  const classesOut: TMediaQ.MediaQSheet = {}
+  if (ignore || !usedSheetBreakpoints || usedSheetBreakpoints.length===0) return null
+  const codeClassesPatch: SheetData = { }
   usedSheetBreakpoints.forEach(used => {
     const ruleset = classesIn[used.rulesetName];
     warning(ruleset, `Missing ruleset ${used.rulesetName}`); //`
-    classesOut[used.rulesetName] = modifyRuleset(ruleset, used.items)
+    codeClassesPatch[used.rulesetName] = { name: used.rulesetName, data: [modifyRuleset(ruleset, used.items)] }
   })
-  return classesOut
+  return codeClassesPatch
 }
 
 const checkAppContainer = () => warning(mediaQBreaks, 'reactxx-mediaq: missing MediaQ_AppContainer component in your application root')

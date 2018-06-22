@@ -18,7 +18,7 @@ export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
   platformProps?: Types.CodeProps
   //codeSystemProps?: Types.CodeSystemProps
-  codeClasses?: Types.Sheet & TAddIn.SheetX
+  //codeClasses?: Types.Sheet & TAddIn.SheetX
   addInClasses?: TAddIn.SheetX
 }
 

@@ -3,19 +3,18 @@ import warning from 'warning'
 
 import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
-import { deepMerges, immutableMerge, toPlatformRulesets } from './to-platform'
+import { SheetData, getPlatformSheet, deepMerges, immutableMerge, toPlatformRulesets } from './to-platform'
 import { TAddIn } from '../typings/add-in'
 import { TCommonStyles } from '../typings/common-styles'
 import { themePipe } from './theme'
 import { TRenderState } from './withStyles'
-import { getPlatformSheet } from './sheet-cache'
 
 export interface FinalizePropsOutput {
   platformProps: Types.CodeProps
   addInProps: TAddIn.PropsX
 }
 
-export const getSystemPipes = <R extends Types.Shape>(id:number, displayName: string, sheetCreator: Types.SheetCreatorX<R>, options: Types.WithStyleOptions_ComponentX<R>) => {
+export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: string, sheetCreator: Types.SheetCreatorX<R>, options: Types.WithStyleOptions_ComponentX<R>) => {
 
   const defaultPropsStyles: Types.StyleFromProps = options.defaultProps && getStyleFromProps(options.defaultProps)
 
@@ -59,7 +58,9 @@ export const getSystemPipes = <R extends Types.Shape>(id:number, displayName: st
 
   const toPlatformProps = (cascadingStyleFromPropsArray: StyleFromPropsArray, currentProps: Types.PropsX, renderState: TRenderStateEx) => {
 
-    const allStyleFromPropsArray: StyleFromPropsArray = [defaultPropsStyles || null, ...cascadingStyleFromPropsArray || [], getStyleFromProps(currentProps)]
+    const _defaultPropsStyles = defaultPropsStyles ? { ...defaultPropsStyles, classes: null } : null
+
+    const allStyleFromPropsArray: StyleFromPropsArray = [_defaultPropsStyles, ...cascadingStyleFromPropsArray || [], getStyleFromProps(currentProps)]
 
     const theme = renderState.themeContext.theme
 
@@ -139,9 +140,9 @@ export const getSystemPipes = <R extends Types.Shape>(id:number, displayName: st
 
     // **** apply sheet patch to sheet:
     // call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
-    const { sheet, addIns } = getPlatformSheet({ id, createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
-    renderState.addInClasses = addIns //e.g {$animations:..., root: {$mediaq:...}}
-    renderState.codeClasses = sheet
+    const { data: codeClasses, addIns: addInClasses } = getPlatformSheet({ id, createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
+    renderState.addInClasses = addInClasses //e.g {$animations:..., root: {$mediaq:...}}
+    renderState.codeClasses = codeClasses
   }
 
   const propsPipe = (input: () => { props: Types.PropsX, renderState: TRenderStateEx }, output: (par: FinalizePropsOutput) => void, next: () => React.ReactNode) => {
@@ -152,7 +153,7 @@ export const getSystemPipes = <R extends Types.Shape>(id:number, displayName: st
     }
     const res = () => {
       const inp = input()
-      props = inp.props; renderState = inp.renderState 
+      props = inp.props; renderState = inp.renderState
       if (options.withCascading) return <CascadingConsumer>{render}</CascadingConsumer>
       output(toPlatformProps(null, props, renderState))
       return next()
@@ -186,7 +187,21 @@ export const getSystemPipes = <R extends Types.Shape>(id:number, displayName: st
 
     // apply patches
     const classesPatches = Object.keys(codeClassesPatch).map(p => codeClassesPatch[p])
-    finalProps.system.classes = classesPatches.length === 0 ? codeClasses : immutableMerge(codeClasses, classesPatches)
+    if (classesPatches.length > 0) {
+      const clss: SheetData = {}
+      classesPatches.forEach(cls => {
+        for (const p in cls) {
+          const clsp = cls[p]
+          if (!clsp) continue
+          const clssRes = clss[p] || (clss[p] = { name: p, data: [] })
+          Array.prototype.push.apply(clssRes.data, clsp.data)
+        }
+      })
+      const res: SheetData = { ...codeClasses }
+      for (const p in clss) res[p].data = [...res[p].data, ...clss[p].data]
+      finalProps.system.classes = res as any
+    } else
+      finalProps.system.classes = codeClasses as any
 
     // call component code
     return <CodeComponent {...finalProps as Types.CodeProps<R>} />

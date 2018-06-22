@@ -3,9 +3,60 @@ import ReactN from 'react-native'
 import warning from 'warning'
 
 import { TCommonStyles } from '../typings/common-styles'
+import { TCommon } from '../typings/common'
 import { Types } from '../typings/types'
 import { renderAddIn } from './withStyles'
 import { TAddIn } from '../typings/add-in';
+
+
+//****************************
+// PLATFORM SHEET
+//****************************
+export type Ruleset = {}
+
+export interface RulesetFragments {
+  data: Ruleset[]
+  name: string
+}
+
+export type SheetData = { [rulesetName: string]: RulesetFragments }
+export interface SheetFragments {
+  data?: SheetData
+  addIns?: TAddIns
+}
+
+export const getPlatformSheet = (par: GetPlatformSheetPar) => {
+  const { id, createSheetX, defaultClasses, sheetXPatch, variant, variantCacheId, themeContext: { $cache } } = par
+  const cacheId = typeof createSheetX !== 'function' ? '#static#' : !variant ? '#novariant#' : variantCacheId ? variantCacheId : null
+  if (cacheId) {
+    // from theme cache (use defaultClasses only)
+    const cache = fromCache($cache, id, cacheId, () => toPlatform({ ...par, sheetXPatch: defaultClasses ? [defaultClasses] : null }))
+    //const cache = fromCache($cache, id, cacheId, () => toPlatform({ ...par }))
+    return toPlatformSheets(cache, sheetXPatch)
+  } else {
+    const patch = sheetXPatch && defaultClasses ? [defaultClasses, ...sheetXPatch] : sheetXPatch ? sheetXPatch : defaultClasses ? [defaultClasses] : null
+    return toPlatform({ ...par, sheetXPatch: patch })
+  }
+}
+
+const fromCache = ($cache: Cache, id: number, variantCacheId: string, getter: () => SheetFragments) => {
+  let compCache = $cache[id]
+  if (!compCache) $cache[id] = compCache = {}
+  return compCache[variantCacheId] || (compCache[variantCacheId] = mergeCacheParts(getter()))
+}
+
+const toPlatform = ({ createSheetX, themeContext: { theme }, sheetXPatch, variant }: GetPlatformSheetPar) => {
+  const sheet = typeof createSheetX === 'function' ? createSheetX(theme, variant) : createSheetX
+  return toPlatformSheets(null, [sheet, ...sheetXPatch || []])
+}
+
+type Cache = { [variantId: string]: SheetFragments }[]
+
+interface GetPlatformSheetPar {
+  id: number; createSheetX: Types.SheetCreatorX; themeContext: TCommon.ThemeContext; sheetXPatch: Types.PartialSheetX[];
+  defaultClasses?: Types.PartialSheetX; variant; variantCacheId: string;
+}
+
 
 //****************************
 // UTILS
@@ -14,19 +65,22 @@ import { TAddIn } from '../typings/add-in';
 export function mergeRulesets<T extends TCommonStyles.RulesetNativeIds = 'View'>(...rulesets/*all used rulesets*/): TCommonStyles.RulesetNative<T>
 export function mergeRulesets<T extends 'Web'>(...rulesets): TCommonStyles.RulesetWeb
 export function mergeRulesets<T extends {}>(...rulesets): T
-export function mergeRulesets(...rulesets) {
-  let count = 0
-  let res
-  rulesets.forEach(ruleset => {
-    if (!ruleset) return
-    switch (count) {
-      case 0: res = ruleset; break
-      case 1: res = deepMerges({}, res, ruleset); break
-      default: deepMerges(res, ruleset); break
-    }
-    count++
-  })
-  return res
+export function mergeRulesets(...rulesets: ({ data?: {}[] })[]) {
+  return mergeRulesetsParts(rulesets)
+  //let count = 0
+  //let res
+  //rulesets.forEach(ruleset => {
+  //  if (!ruleset) return
+  //  if (Array.isArray(ruleset)) {
+  //  }
+  //  switch (count) {
+  //    case 0: res = ruleset; break
+  //    case 1: res = deepMerges({}, res, ruleset); break
+  //    default: deepMerges(res, ruleset); break
+  //  }
+  //  count++
+  //})
+  //return res
 }
 
 export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseDown : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
@@ -105,27 +159,14 @@ type TRulesetAddIn = { [name: string]: Array<{}> } // name is e.g. '$mediaq'
 type TAddIn = TSheetAddIn | TRulesetAddIn
 type TAddIns = { [name: string]: TAddIn } // name is e.g. '$animations' or 'root'
 
-export interface MergeSheetsResult {
-  sheet: Types.Sheet
-  addIns: TAddIns
-}
-
-export type Ruleset = { }
-
-export interface RulesetData {
-  data: Ruleset[]
-  name: string
-  cache?: Ruleset
-}
-
-export interface SheetData {
-  data?: { [rulesetName: string]: RulesetData }
-  addIns?: TAddIns
-}
-
-export const toPlatformSheets2 = (cache: SheetData /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
+export const toPlatformSheets = (cache: SheetFragments /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
   if (!sources || sources.length == 0) return cache
-  const sheetData: SheetData = { }
+  const sheetData: SheetFragments = {}
+  if (cache && cache.data) {
+    sheetData.data = {}
+    for (const p in cache.data)
+      sheetData.data[p] = { name: p, data: [...cache.data[p].data] }
+  } 
   sources.forEach(src => {
     for (const p in src) {
 
@@ -164,7 +205,8 @@ export const toPlatformSheets2 = (cache: SheetData /*platform format of sheet an
 
       // linearize cross platform ruleset (and put ruleset's system prop to addIns, e.g. ruleset.$mediaq)
       if (!sheetData.data) sheetData.data = {}
-      const rulesets = sheetData.data[p] || (sheetData.data[p] = { name: p, data: [], cache: cache && cache.data[p] && cache.data[p].cache })
+      const cachedRulesets = cache && cache.data && cache.data[p] && cache.data[p].data
+      const rulesets = sheetData.data[p] || (sheetData.data[p] = { name: p, data: cachedRulesets ? [...cachedRulesets] : [] })
       pushRulesetParts(src[p], rulesets.data, createAddIn)
     }
   })
@@ -186,8 +228,12 @@ export const toPlatformSheets2 = (cache: SheetData /*platform format of sheet an
 }
 
 
+interface MergeSheetsResult_ {
+  sheet: Types.Sheet
+  addIns: TAddIns
+}
 
-export const toPlatformSheets = (cache: MergeSheetsResult /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
+const toPlatformSheets_ = (cache: MergeSheetsResult_ /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
   if (!sources || sources.length == 0) return cache
   const toMergesParts: { [name: string]: Types.RulesetX[] } = {}
   let mergeNeeded = false
@@ -236,41 +282,72 @@ export const toPlatformSheets = (cache: MergeSheetsResult /*platform format of s
   if (addIns) renderAddIn.finishAddIns.forEach(finish => finish(addIns))
   else addIns = cache && cache.addIns
 
-  if (!mergeNeeded) return { sheet: cache.sheet, addIns } as MergeSheetsResult
+  if (!mergeNeeded) return { sheet: cache.sheet, addIns } as MergeSheetsResult_
 
   const sheet: Types.Sheet = cache ? { ...cache.sheet } : {}
   for (const p in toMergesParts) {
     const targetp = sheet[p]; const toMergesp = toMergesParts[p]
     const toMerge = targetp && toMergesp.length > 0 ? [targetp, ...toMergesp] : targetp ? [targetp] : toMergesp.length > 0 ? toMergesp : null
     if (!toMerge) continue
-    sheet[p] = mergeRulesetsParts(toMerge)
+    sheet[p] = mergeRulesetsParts(toMerge as any)
   }
-  return { sheet, addIns } as MergeSheetsResult
+  return { sheet, addIns } as MergeSheetsResult_
+}
+
+export const mergeCacheParts = (cache: SheetFragments) => {
+  for (const p in cache.data) {
+    const data = cache.data[p]
+    data.data = [mergeRulesetsParts(data.data)]
+  }
+  return cache
 }
 
 // shallow merge with removing system props (name starts with '$')
-const mergeRulesetsParts = (parts: Array<{}>) => {
-  if (parts.length === 0) return null
+export const mergeRulesetsParts = (parts: Array<{ data?: {}[] }>) => {
+  if (!parts || parts.length === 0) return null
+
+  // optimalization for just single part
   if (parts.length === 1) {
-    // optimalization for just single part
-    const p0 = parts[0]
-    const sysProps = Object.keys(p0).filter(p => p.charAt(0) === '$')
-    if (sysProps.length === 0) return p0 // no sys prop => return part
+    let parts0 = parts[0]
+    if (!parts0) return null
+    if (parts0.data) {
+      if (parts0.data.length === 1) { // single part is single item array
+        parts0 = parts0.data[0]
+        if (!parts0) return null
+      } else
+        return mergePartArray(parts0.data) // single part is array
+    }
+    // just single part or single item array
+    const sysProps = Object.keys(parts0).filter(p => p.charAt(0) === '$') //system prop names
+    if (sysProps.length === 0) return parts0 // no sys prop => return part
     // remove sys props from part
-    const res = Object.assign(p0)
+    const res = Object.assign(parts0)
     sysProps.forEach(p => delete res[p])
     return res
   }
-  const res = {}
-  parts.forEach(part => {
-    for (const p in part) {
-      if (p.charAt(0) === '$') continue
-      const partp = part[p], resp = res[p], isObjectPartp = isObject(partp), isObjectResp = isObject(resp)
-      res[p] = isObjectPartp ? mergeRulesetsParts(isObjectResp ? [resp, partp] : [partp]/* merge non-object with object:  */) : partp
-    }
-  })
+
+  return mergePartArray(parts)
+}
+
+const mergePart = (part: { data?: {}[] }, res: {}) => {
+  if (!part) return
+  if (part.data) {
+    mergePartArray(part.data, res)
+    return
+  }
+  for (const p in part) {
+    if (p.charAt(0) === '$') continue
+    const partp = part[p], resp = res[p], isObjectPartp = isObject(partp), isObjectResp = isObject(resp)
+    res[p] = isObjectPartp ? mergeRulesetsParts(isObjectResp ? [resp, partp] : [partp]/* merge non-object with object:  */) : partp
+  }
+}
+
+const mergePartArray = (parts: {}[], res?: {}) => {
+  if (!res) res = {}
+  parts.forEach(part => mergePart(part, res))
   return res
 }
+
 
 const partProps = { $before: true, $after: true, $native: true, $web: true }
 

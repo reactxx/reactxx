@@ -103,10 +103,7 @@ export const LabelEx = LabelCreator({
 const Section: React.SFC = ({ children }) => <View className={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>{children}</View>
 const iconHeart = MDI.Heart
 
-const App_ = props => <React.Fragment>
-  <LabelEx>Label 10</LabelEx>
-  <LabelEx iconData={MDI.Stop} classes={{ label: { color: 'white' } }}>Label 11</LabelEx>
-</React.Fragment>
+const App_ = props => <LabelEx>Label 10</LabelEx>
 
 const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
   <H2>Default</H2>

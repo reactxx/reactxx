@@ -420,7 +420,7 @@
     <TypeScriptCompile Include="src\basic\common\develop.tsx" />
     <TypeScriptCompile Include="src\basic\common\system-pipes.tsx" />
     <TypeScriptCompile Include="src\basic\common\to-platform.ts" />
-    <TypeScriptCompile Include="src\basic\common\sheet-cache.tsx" />
+    <None Include="src\basic\common\sheet-cache.tsx_" />
     <TypeScriptCompile Include="src\basic\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\basic\typings\add-in.ts" />
     <TypeScriptCompile Include="src\basic\typings\common.ts" />

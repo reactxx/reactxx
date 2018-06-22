@@ -12,7 +12,7 @@ const App: React.SFC = props => {
   const changeColorRuleset: Types.TextRulesetX = {
     $mediaq: {
       '-480': { color: 'red', fontSize: 14 },
-      '480-1024': { color: 'green', fontStyle: 'italic' },
+      '480-1024': { color: 'green', fontStyle: 'italic', $web: { ':hover': { color: 'lightgreen' } } },
       '1024-': { color: 'blue', },
     },
     fontSize: 20,

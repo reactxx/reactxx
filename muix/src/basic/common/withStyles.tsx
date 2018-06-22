@@ -10,7 +10,7 @@ import { TAddIn } from '../typings/add-in'
 import { getSystemPipes } from './system-pipes'
 import { renderCounterPipe } from './develop'
 import { ThemeProvider, ThemeConsumer, themePipe } from './theme'
-import { deepMerges } from './to-platform'
+import { deepMerges, SheetData } from './to-platform'
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
@@ -36,10 +36,10 @@ export interface TRenderState {
   // - merge all styles to codeClasses, separate addIns sheet and ruleset props to addInClasses
   finalProps?: Types.CodeProps
   addInClasses?: TAddIn.SheetX // separated sheet and ruleset props, which name starts with $, e.g. $mediaq
-  codeClasses?: Types.Sheet // platform dependent classes
+  codeClasses?: SheetData // platform dependent classes
 
   // Step 5 - styleAddInPipeline: call addIns STYLE phase (addIn use addInClasses and fills codeClassesPatch)
-  codeClassesPatch?: { [addInName: string]: Types.Sheet } // codeClasses modified by addIns 
+  codeClassesPatch?: { [addInName: string]: SheetData } // codeClasses modified by addIns 
 
   // Step 6 - renderCounterPipe: for development mode - render counter (fills addInProps.$developer_RenderCounter). It allows to display number of component render calls
 

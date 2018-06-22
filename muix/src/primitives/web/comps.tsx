@@ -21,8 +21,7 @@ export const icon: Types.CodeSFCWeb<TComps.IconShape> = props => {
   if (rootStyle.fontSize) { rootStyle.height = rootStyle.width = rootStyle.fontSize; delete rootStyle.fontSize }
   if (style && style.fontSize) { style.height = style.width = style.fontSize; delete style.fontSize }
   const svg = <svg className={rulesetsToClassNames(rootStyle)} style={style} focusable='false' viewBox={viewBox || '0 0 24 24'} onClick={url ? undefined : onClick} {...rest}>
-    {data && <path d={data} />}
-    {!data && children}
+    {data ? <path d={data} /> : children}
   </svg>
   return url ? <a href={url}>{svg}</a> : svg
 }
