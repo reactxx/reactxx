@@ -23,7 +23,6 @@
     "name": "reactxx-all",
     "main": "reactxx-all.js",
     "dependencies": {
-      "react-dom": "npm:react-dom@^16.4.1",
       "fela-dom": "npm:fela-dom@^7.0.4",
       "fela-plugin-extend": "npm:fela-plugin-extend@^6.0.3",
       "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@^5.0.16",
@@ -40,7 +39,6 @@
       "reactxx-mdi": "npm:reactxx-mdi@^0.1.67",
       "tslib": "npm:tslib@^1.9.0",
       "warning": "npm:warning@^3.0.0",
-
       "brcast": "npm:brcast@^3.0.1",
       "csstype": "npm:csstype@^2.5.2",
       "debounce": "npm:debounce@^1.1.0",
@@ -76,12 +74,8 @@
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
-<<<<<<< HEAD
-      "react": "npm:react@^16.4.1",
+      "react": "npm:react@^16.0.0",
       "react-dom": "npm:react-dom@^16.4.1",
-=======
-      "react": "npm:react",
->>>>>>> 1a048709432b9e46749148c379877784ae666912
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
       "url": "npm:jspm-nodelibs-url@^0.2.0",
@@ -104,17 +98,7 @@
           "test.js"
         ]
       },
-<<<<<<< HEAD
-      "npm:lodash@4.17.5": {
-        "map": {
-          "buffer": "@empty",
-          "process": "@empty"
-        }
-      },
       "npm:pbkdf2@3.0.16": {
-=======
-      "npm:pbkdf2@3.0.14": {
->>>>>>> 1a048709432b9e46749148c379877784ae666912
         "main": "browser.js"
       },
       "npm:safe-buffer@5.1.2": {
@@ -131,3 +115,4 @@
     }
   }
 }
+

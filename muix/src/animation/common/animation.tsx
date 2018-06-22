@@ -89,6 +89,7 @@ class AnimationsComponent extends React.Component<AnimProps, AnimState> {
 
   static getDerivedStateFromProps(nextProps: AnimProps, prevState: AnimState): Partial<AnimState> {
     if (!nextProps.$initAnimations) return { sheets: null }
+    if (prevState.sheets && prevState.self.props.$initAnimations === nextProps.$initAnimations) return { sheets: prevState.sheets }
     const $anim = nextProps.$initAnimations
     const sheets:{ [name: string]: TAnimation.Driver } = {}
     const self = prevState.self

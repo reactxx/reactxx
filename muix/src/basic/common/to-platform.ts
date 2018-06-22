@@ -20,6 +20,7 @@ export interface RulesetFragments {
 }
 
 export type SheetData = { [rulesetName: string]: RulesetFragments }
+
 export interface SheetFragments {
   data?: SheetData
   addIns?: TAddIns
@@ -297,22 +298,23 @@ const toPlatformSheets_ = (cache: MergeSheetsResult_ /*platform format of sheet 
 export const mergeCacheParts = (cache: SheetFragments) => {
   for (const p in cache.data) {
     const data = cache.data[p]
+    if (!data.data) continue
     data.data = [mergeRulesetsParts(data.data)]
   }
   return cache
 }
 
 // shallow merge with removing system props (name starts with '$')
-export const mergeRulesetsParts = (parts: Array<{ data?: {}[] }>) => {
+export const mergeRulesetsParts = (parts: (Ruleset | RulesetFragments)[]) => {
   if (!parts || parts.length === 0) return null
 
   // optimalization for just single part
   if (parts.length === 1) {
-    let parts0 = parts[0]
+    let parts0 = parts[0] as RulesetFragments
     if (!parts0) return null
     if (parts0.data) {
       if (parts0.data.length === 1) { // single part is single item array
-        parts0 = parts0.data[0]
+        parts0 = parts0.data[0] as RulesetFragments
         if (!parts0) return null
       } else
         return mergePartArray(parts0.data) // single part is array

@@ -8,47 +8,11 @@ SystemJS.config({
     "": {
       "defaultExtension": "js"
     },
-    "deploy/lib/material-ui/ButtonBase/": { "main": "index.js" },
-    "deploy/lib/material-ui/Button/": { "main": "index.js" },
-    "npm:react-popper@0.8.2": {
-      "map": {
-        "prop-types": "npm:prop-types@15.6.2",
-        "popper.js": "npm:popper.js@1.14.3"
-      }
+    "deploy/lib/material-ui/ButtonBase/": {
+      "main": "index.js"
     },
-    "npm:react-scrollbar-size@2.1.0": {
-      "map": {
-        "prop-types": "npm:prop-types@15.6.2",
-        "babel-runtime": "npm:babel-runtime@6.26.0",
-        "react-event-listener": "npm:react-event-listener@0.5.3",
-        "stifle": "npm:stifle@1.0.4"
-      }
-    },
-    "npm:recompose@0.26.0": {
-      "map": {
-        "fbjs": "npm:fbjs@0.8.17",
-        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.5.0",
-        "symbol-observable": "npm:symbol-observable@1.2.0",
-        "change-emitter": "npm:change-emitter@0.1.6"
-      }
-    },
-    "npm:react-event-listener@0.5.3": {
-      "map": {
-        "babel-runtime": "npm:babel-runtime@6.26.0",
-        "fbjs": "npm:fbjs@0.8.17",
-        "prop-types": "npm:prop-types@15.6.2",
-        "warning": "npm:warning@3.0.0"
-      }
-    },
-    "npm:@types/jss@9.5.0": {
-      "map": {
-        "csstype": "npm:csstype@1.8.2"
-      }
-    },
-    "npm:@types/react-transition-group@2.0.7": {
-      "map": {
-        "@types/react": "npm:@types/react@16.0.40"
-      }
+    "deploy/lib/material-ui/Button/": {
+      "main": "index.js"
     }
   },
   map: {
@@ -61,8 +25,7 @@ SystemJS.config({
     "reactxx-mui": "deploy/lib/material-ui",
     "reactxx-mui/Button": "deploy/lib/material-ui/Button/index",
     "reactxx-mui/ButtonBase": "deploy/lib/material-ui/ButtonBase/index",
-    "classnames": "deploy/lib/mui/web/classnames",
-    //"reactxx-mui/styles/withStyles": "deploy/lib/material-ui/styles/withStyles",
+    "classnames": "deploy/lib/mui/web/classnames"
   }
 });
 
@@ -90,7 +53,6 @@ SystemJS.config({
     "assert": "npm:jspm-nodelibs-assert@0.2.1",
     "buffer": "npm:jspm-nodelibs-buffer@0.2.3",
     "child_process": "npm:jspm-nodelibs-child_process@0.2.1",
-    //"classnames": "npm:classnames@2.2.5",
     "constants": "npm:jspm-nodelibs-constants@0.2.1",
     "core-js": "npm:core-js@2.5.3",
     "crypto": "npm:jspm-nodelibs-crypto@0.2.1",

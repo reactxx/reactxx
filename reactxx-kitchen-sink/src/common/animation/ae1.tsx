@@ -111,6 +111,8 @@ export const Label = withStylesCreator<Shape>(Consts.Label, sheet, label)()
 *************************************************/
 const Section: React.SFC = ({ children }) => <View className={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>{children}</View>
 
+const App_: React.SFC = props => <Label isAnim1 onPress={ev => ev.current.system.animations.sheets.anim1.toggle()}>TOOGGLE ANIM1</Label>
+
 const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
   <Section>
     <H2>SIMPLE (ANIM1)</H2>
