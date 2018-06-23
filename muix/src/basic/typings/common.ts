@@ -3,7 +3,6 @@ import ReactN from 'react-native'
 import * as CSS from 'csstype'
 
 import { TCommonStyles } from 'reactxx-basic'
-import { TAddIn } from '../typings/add-in';
 
 export namespace TCommon {
 
@@ -75,18 +74,25 @@ export namespace TCommon {
   //****************************
   // PLATFORM SHEET
   //****************************
-  export type RulesetFragmentsData = {}
+  export type RulesetFragmentsPart = {} | RulesetFragments
+  export type RulesetFragmentsParts = RulesetFragmentsPart[]
 
   export interface RulesetFragments {
-    __fragments: RulesetFragmentsData[]
+    __fragments: {}[]
     name: string
   }
 
   export type SheetFragmentsData = { [rulesetName: string]: RulesetFragments }
 
   export interface SheetFragments {
-    data?: SheetFragmentsData
-    addIns?: TAddIn.SheetX
+    __sheet?: SheetFragmentsData
+    addIns?: TAddIns
   }
+
+  export type TSheetAddIn = Array<{}>
+  export type TRulesetAddIn = { [name: string]: Array<{}> } // name is e.g. '$mediaq'
+  export type TAddIn = TSheetAddIn | TRulesetAddIn
+  export type TAddIns = { [name: string]: TAddIn } // name is e.g. '$animations' or 'root'
+
 
 }

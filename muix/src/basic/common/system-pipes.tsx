@@ -140,7 +140,7 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
 
     // **** apply sheet patch to sheet:
     // call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
-    const { data: codeClasses, addIns: addInClasses } = getPlatformSheet({ id, createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
+    const { __sheet: codeClasses, addIns: addInClasses } = getPlatformSheet({ id, createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
     renderState.addInClasses = addInClasses //e.g {$animations:..., root: {$mediaq:...}}
     renderState.codeClasses = codeClasses
   }

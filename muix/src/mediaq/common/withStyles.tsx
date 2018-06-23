@@ -38,7 +38,7 @@ export const finishAddIns = (addIns: {}) => {
     const addInsp = addIns[p]
     const $mediaq: Array<{}> = addInsp && addInsp.$mediaq
     if (!$mediaq) continue
-    addIns[p].$mediaq = toPlatformSheets(null, $mediaq).data //.length === 0 ? null : $mediaq.length === 1 ? $mediaq[0] : deepMerges({}, ...$mediaq)
+    addIns[p].$mediaq = toPlatformSheets(null, $mediaq).__sheet //.length === 0 ? null : $mediaq.length === 1 ? $mediaq[0] : deepMerges({}, ...$mediaq)
   }
 }
 
