@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { LoremIpsum, TCommonStyles, mergeRulesets, TCommon, variantToString } from 'reactxx-basic'
+import { LoremIpsum, TCommonStyles, TCommon, variantToString } from 'reactxx-basic'
 import { TMediaQ } from 'reactxx-mediaq'
 import { TAddIn, Types, TProvider, withStylesCreator, View, Text, Icon, AnimatedView, ScrollView, AppContainer } from 'reactxx'
 import { TComps } from 'reactxx-primitives'
@@ -143,7 +143,7 @@ const sheet: Types.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =>
 // responsibleDrawer stateless component. 
 const responsibleDrawer: Types.CodeSFC<TResponsibleDrawer.Shape> = props => {
 
-  const { system: { classes, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } }, drawer: drawerNode, children } = props
+  const { system: { mergeRulesets, classes, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } }, drawer: drawerNode, children } = props
 
   const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()

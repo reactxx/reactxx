@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Text } from 'reactxx-primitives'
-import { mergeRulesets, TCommon, LoremIpsum, ThemeProviderUntyped, registerTheme } from 'reactxx-basic'
+import { TCommon, LoremIpsum, ThemeProviderUntyped, registerTheme } from 'reactxx-basic'
 import { MediaQ_AppContainer, Types, withStylesCreator, breaksToString } from 'reactxx-mediaq'
 
 /************************
@@ -56,7 +56,7 @@ registerTheme<Theme>(Consts.Theme2, { breakpoints: { mobileEnd: 640, tabletEnd: 
 * CODE
 *************************/
 
-const label: Types.CodeSFC<Shape> = ({ system: { classes, mediaqFlags }, children }) => {
+const label: Types.CodeSFC<Shape> = ({ system: { mergeRulesets, classes, mediaqFlags }, children }) => {
   const root = mergeRulesets<Types.ViewRulesetX>(classes.root)
   return <Text className={root}>{mediaqFlags.isMobile ? '[MOBILE]' : mediaqFlags.isTablet ? '[TABLET]' : '[DESKTOP]'} {children}</Text>
 }

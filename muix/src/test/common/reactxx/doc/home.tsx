@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN, { Animated } from 'react-native'
 
-import { mergeRulesets, TCommon } from 'reactxx-basic'
+import { TCommon } from 'reactxx-basic'
 import { TComps } from 'reactxx-primitives'
 import { Types, withStylesCreator, Text, View, AnimatedView, AnimatedIcon, ScrollView } from 'reactxx'
 import MDI from 'reactxx-mdi'
@@ -79,7 +79,7 @@ const expandedPanelSheet: Types.SheetCreatorX<DocHome.ExpandedPanelShape> = {
 //modifyThemeStates(state, null, theme => [modifyThemeState<ReactXX.TextShape>(state, theme, ReactXX.CompNames.Text, (theme, par) => ({ root: headerLabelStyle }))])}
 
 const expandedPanel: Types.CodeSFC<DocHome.ExpandedPanelShape> = props => {
-  const { system: { style, classes, theme, animations: { sheets: { openClose } } }, title, children, ...rest } = props
+  const { system: { mergeRulesets, style, classes, theme, animations: { sheets: { openClose } } }, title, children, ...rest } = props
   const rootStyle = mergeRulesets<Types.ViewRulesetX>(classes.root)
   const headerStyle = mergeRulesets<Types.ViewRulesetX>(classes.header)
   const contentStyle = mergeRulesets<Types.ViewRulesetX>(classes.content, openClose.sheet.content)

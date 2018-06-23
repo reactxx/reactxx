@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { LoremIpsum, TCommon, TCommonStyles, mergeRulesets } from 'reactxx-basic'
+import { LoremIpsum, TCommon, TCommonStyles } from 'reactxx-basic'
 import { AnimatedText, AnimatedView, View, ScrollView } from 'reactxx-primitives'
 import { Types, TAddIn, withStylesCreator, TProvider } from 'reactxx-animation'
 

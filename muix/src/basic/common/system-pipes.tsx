@@ -3,7 +3,7 @@ import warning from 'warning'
 
 import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
-import { getPlatformSheet, deepMerges, toPlatformRulesets, applySheetPatch, immutableMerge } from './to-platform'
+import { getPlatformSheet, deepMerges, toPlatformRulesets, applySheetPatch, immutableMerge, mergeRulesets } from './to-platform'
 import { TAddIn } from '../typings/add-in'
 import { TCommonStyles } from '../typings/common-styles'
 import { themePipe } from './theme'
@@ -202,6 +202,7 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     //  finalProps.system.classes = res as any
     //} else
     finalProps.system.classes = applySheetPatch(codeClasses, codeClassesPatch) as any
+    finalProps.system.mergeRulesets = mergeRulesets
 
     // call component code
     return <CodeComponent {...finalProps as Types.CodeProps<R>} />

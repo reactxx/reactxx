@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { Types, withStylesCreator, deepMerge, mergeRulesets, TCommon, ThemeProviderUntyped, TAddIn, TProvider } from 'reactxx-basic'
+import { Types, withStylesCreator, deepMerge, TCommon, ThemeProviderUntyped, TAddIn, TProvider } from 'reactxx-basic'
 import { TComps, Text, View, ScrollView, Icon,  } from 'reactxx-primitives'
 
 import { H2, A, P } from '../components/typo'
@@ -56,7 +56,7 @@ const labelSheet: Types.SheetCreatorX<Shape> = ({ color: { main, dark, constrast
   },
 })
 
-const label: Types.CodeSFC<Shape> = ({ system: { classes, style }, children}) => {
+const label: Types.CodeSFC<Shape> = ({ system: { mergeRulesets, classes, style }, children}) => {
   const root = mergeRulesets<Types.ViewRulesetX>(classes.root)
   const label = mergeRulesets<Types.TextRulesetX>(classes.label)
   return <View className={root} style={style as Types.ViewRulesetX}>
@@ -97,7 +97,7 @@ const badgeSheet: Types.SheetCreatorX<Shape> = ({ color: { dark, constrastText }
   },
 })
 
-const badge: Types.CodeSFC<Shape> = ({ system: { classes, style }, children }) => {
+const badge: Types.CodeSFC<Shape> = ({ system: { mergeRulesets, classes, style }, children }) => {
   const root = mergeRulesets<Types.ViewRulesetX>(classes.root)
   const label = mergeRulesets<Types.TextRulesetX>(classes.label) 
   return <View className={root} style={style as Types.ViewRulesetX}>

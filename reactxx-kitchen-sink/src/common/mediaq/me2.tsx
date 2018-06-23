@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Text } from 'reactxx-primitives'
-import { mergeRulesets, TCommon, LoremIpsum } from 'reactxx-basic'
+import { TCommon, LoremIpsum } from 'reactxx-basic'
 import { MediaQ_AppContainer, Types, withStylesCreator } from 'reactxx-mediaq'
 
 /************************
@@ -40,7 +40,7 @@ const sheet: Types.SheetX<Shape> = {
 /************************
 * CODE
 *************************/
-const label: Types.CodeSFC<Shape> = ({ system: { classes, mediaqFlags }, children }) => {
+const label: Types.CodeSFC<Shape> = ({ system: { mergeRulesets, classes, mediaqFlags }, children }) => {
   const root = mergeRulesets<Types.ViewRulesetX>(
     classes.root,
     mediaqFlags.isMobile && classes.mobile,
