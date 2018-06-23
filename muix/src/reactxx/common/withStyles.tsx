@@ -32,7 +32,7 @@ renderAddIn.propsAddInPipeline = mediaQBeforeToPlatform
 // after converting props and sheet to platform dependent form
 renderAddIn.styleAddInPipeline = (state: TRenderState, next) => mediaQAfterToPlatform(state, animationAfterToPlatform(state, next))
 
-renderAddIn.finishAddIns.concat([animationFinishAddIns, mediaFinishAddIns])
+renderAddIn.finishAddIns = [animationFinishAddIns, mediaFinishAddIns]
 
 
 /************************

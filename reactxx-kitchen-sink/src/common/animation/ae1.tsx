@@ -90,7 +90,7 @@ const sheet: Types.SheetX<Shape> = {
 * CODE
 *************************/
 const label: Types.CodeSFC<Shape> = props => {
-  const { system: { classes, animations: { sheets: { anim1, anim2, anim3 } }, onPress, onPressIn, onPressOut }, isAnim1, isAnim2, isAnim3, children, ...rest } = props
+  const { system: { mergeRulesets, classes, animations: { sheets: { anim1, anim2, anim3 } }, onPress, onPressIn, onPressOut }, isAnim1, isAnim2, isAnim3, children, ...rest } = props
   const root = mergeRulesets<Types.ViewRulesetX>(classes.root, isAnim1 && anim1.sheet.rootAnim, isAnim2 && anim2.sheet.rootAnim, isAnim3 && anim3.sheet.rootAnim)
   const label = mergeRulesets<Types.TextRulesetX>(classes.label, isAnim1 && anim1.sheet.labelAnim, isAnim2 && anim2.sheet.labelAnim, isAnim3 && anim3.sheet.labelAnim)
   return <AnimatedView {...rest} className={root}>

@@ -62,10 +62,9 @@ type DeepPartial<T> = {
   ? Array<DeepPartial<U>>
   : T[P] extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : DeepPartial<T[P]>
 }
-type PartialRecord<K extends string, T> = {
-  [P in K]?: T;
-};
-
+type PartialRecord<K extends keyof any, T> = {
+  [P in K]?: T
+}
 
 
 type XX = Diff<'a' | 'b', 'b' | 'd'>

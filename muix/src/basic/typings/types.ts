@@ -25,9 +25,9 @@ export namespace Types {
     } &
     TAddIn.RulesetAddInX<T, R>
 
-  export interface ViewRulesetX<TAddIn extends {} = {}> extends RulesetX<'View'> { }
-  export interface TextRulesetX<TAddIn extends {} = {}> extends RulesetX<'Text'> { }
-  export interface ImageRulesetX<TAddIn extends {} = {}> extends RulesetX<'Image'> { }
+  export interface ViewRulesetX extends RulesetX<'View'> { }
+  export interface TextRulesetX extends RulesetX<'Text'> { }
+  export interface ImageRulesetX extends RulesetX<'Image'> { }
 
   //******************** Shape
   export interface Shape extends TCommon.Shape, TAddIn.Shape { }
@@ -58,13 +58,18 @@ export namespace Types {
   export type SheetCreatorX<R extends Shape = Shape> = themeCreator<R, SheetX<R>>
 
   //******************** Platform specific sheet
-  export type SheetWeb<R extends Shape = Shape> = Record<(keyof TCommon.getCommon<R>) | TCommon.getWeb<R>, TCommonStyles.RulesetWeb>
-  export type SheetNative<R extends Shape = Shape> =
-    { [P in keyof TCommon.getCommon<R>]: TCommonStyles.RulesetNative<TCommon.getCommon<R>[P]> } &
-    { [P in keyof TCommon.getNative<R>]: TCommonStyles.RulesetNative<TCommon.getNative<R>[P]> }
+  //export type SheetWeb<R extends Shape = Shape> = Record<(keyof TCommon.getCommon<R>) | TCommon.getWeb<R>, TCommonStyles.RulesetWeb>
+  //export type SheetNative<R extends Shape = Shape> =
+  //  { [P in keyof TCommon.getCommon<R>]: TCommonStyles.RulesetNative<TCommon.getCommon<R>[P]> } &
+  //  { [P in keyof TCommon.getNative<R>]: TCommonStyles.RulesetNative<TCommon.getNative<R>[P]> }
+  export type RulesetNamesWeb<R extends Shape = Shape> = keyof TCommon.getCommon<R> | TCommon.getWeb<R>
+  export type RulesetNamesNative<R extends Shape = Shape> = keyof TCommon.getCommon<R> | keyof TCommon.getNative<R>
+  export type RulesetNames<R extends Shape = Shape> = keyof TCommon.getCommon<R> | TCommon.getWeb<R> | keyof TCommon.getNative<R>
 
-  export type Sheet<R extends Shape = Shape> = SheetWeb<R> | SheetNative<R>
-  export type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
+  export type SheetWeb<R extends Shape = Shape> = PartialRecord<RulesetNamesWeb<R>, TCommon.RulesetFragments>
+  export type SheetNative<R extends Shape = Shape> = PartialRecord<RulesetNamesNative<R>,TCommon.RulesetFragments>
+  export type Sheet<R extends Shape = Shape> = PartialRecord<RulesetNames<R>, TCommon.RulesetFragments>
+  //export type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
 
   /******************************************
       CREATORS
@@ -101,10 +106,19 @@ export namespace Types {
 
   export type omitPropNames = 'system' | 'style' | 'classes' | 'className' | keyof TAddIn.CodeProps
 
+  //type TMergeRulesetsNative<T extends TCommonStyles.RulesetNativeIds = 'View'> = (...rulesets/*all used rulesets*/) => TCommonStyles.RulesetNative<T>
+  //type TMergeRulesetsWeb<T extends 'Web'> = (...rulesets) => TCommonStyles.RulesetWeb
+  //type TMergeRulesets<T extends {}> = (...rulesets) => T
+
+  type TMergeRulesetsResult<T extends TCommonStyles.RulesetNativeIds | 'Web' | {}> =
+    T extends TCommonStyles.RulesetNativeIds ? TCommonStyles.RulesetNative<T> :
+    T extends 'Web' ? TCommonStyles.RulesetWeb : T
+
   export type CodeSystem<R extends Shape = Shape> =
     {
       theme: TCommon.getTheme<R>
       variant: TCommon.getVariant<R>
+      mergeRulesets: <T extends TCommonStyles.RulesetNativeIds | 'Web' | {}>(...rulesets) => TMergeRulesetsResult<T>
     } &
     TEventsX<R> & // events passed to cross platform component, used in custom component
     TAddIn.PropsX<R>

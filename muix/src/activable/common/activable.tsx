@@ -51,7 +51,7 @@ export const activeSheet = (input: () => { sheet: TActivable.SheetWithAddIn, act
   const res = () => {
     const { sheet, activeFlag, activable } = input()
     if (activable === true) {
-      const patch: Types.Sheet = {}
+      const patch = {}
       for (const p in sheet) {
         const rs = sheet[p]
         if (!rs || !rs.$active) continue
