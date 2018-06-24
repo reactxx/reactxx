@@ -192,7 +192,6 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     return <CodeComponent {...finalProps as Types.CodeProps<R>} />
   }
 
-
   return { propsPipe, stylePipe, renderComponentPipe, cascadingProvider: CascadingProviderComponent as any as React.ComponentClass<Types.PropsX<R>> }
 
 }

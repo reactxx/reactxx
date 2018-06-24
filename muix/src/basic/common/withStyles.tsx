@@ -36,7 +36,7 @@ export interface TRenderState {
   // - merge all styles to codeClasses, separate addIns sheet and ruleset props to addInClasses
   finalProps?: Types.CodeProps
   addInClasses?: TCommon.TAddIns // separated sheet and ruleset props, which name starts with $, e.g. <sheet>.$animations, <ruleset>.$mediaq etc.
-  codeClasses?: TCommon.SheetFragmentsData // platform dependent classes
+  //codeClasses?: TCommon.SheetFragmentsData // platform dependent classes
 
   // Step 5 - styleAddInPipeline: call addIns STYLE phase (addIn es addInClasses and fills codeClassesPatch)
   codeClassesPatch?: TCommon.SheetPatch // codeClasses modified by addIns 
