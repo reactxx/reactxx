@@ -142,7 +142,7 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     // call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
     const { codeClasses, addInClasses } = getPlatformSheet({ id, createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
     renderState.addInClasses = addInClasses //e.g {$animations:..., root: {$mediaq:...}}
-    renderState.codeClasses = codeClasses
+    renderState.finalProps.system.classes = codeClasses
   }
 
   const propsPipe = (input: () => { props: Types.PropsX, renderState: TRenderStateEx }, output: (par: FinalizePropsOutput) => void, next: () => React.ReactNode) => {
@@ -170,7 +170,8 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
   }
 
   const renderComponentPipe = (renderState: TRenderState, CodeComponent: Types.CodeComponentType) => () => {
-    const { finalProps, codeClassesPatch, codeClasses, addInProps, addInClasses } = renderState
+
+    const { finalProps, codeClassesPatch, addInProps, addInClasses } = renderState
 
     if (addInProps.$developer_flag) {
       const { themeContext, codePropsPatch } = renderState
@@ -180,35 +181,12 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
         '\naddInProps: ', addInProps,
         '\ntheme: ', themeContext.theme,
         '\npropsPatch: ', codePropsPatch,
-        '\ncodeClasses: ', codeClasses,
         '\ncodeClassesPatch: ', codeClassesPatch,
       )
     }
 
-    finalProps.system.classes = codeClasses //applySheetPatch(codeClasses, codeClassesPatch) as any
-
-    // convert TCommon.SheetPatch to TCommon.SheetPatchFinal ( => remove AddIn's name hiearchy) 
-    let codeClassesPatchFinal: TCommon.SheetPatchFinal = null
-    if (codeClassesPatch) {
-      const arrayCanModify: { [rulesetName: string]: boolean } = {}
-      codeClassesPatchFinal = {}
-      for (const addInName in codeClassesPatch) {
-        const addIn = codeClassesPatch[addInName]
-        for (const rulesetName in addIn) {
-          let final = codeClassesPatchFinal[rulesetName], addInp = addIn[rulesetName]
-          // optimize merging ruleset fragments arrays
-          if (!final) codeClassesPatchFinal[rulesetName] = addInp //first addIn[rulesetName], use it
-          else if (arrayCanModify[rulesetName]) Array.prototype.push.apply(final, addInp) // thirdth and more addIn[rulesetName], modify 'final'
-          else { // second addIn[rulesetName]
-            codeClassesPatchFinal[rulesetName] = [...final, ...addInp] // second => concat first and second
-            arrayCanModify[rulesetName] = true
-          }
-        }
-      }
-    }
-
     // method, called in component code: ruleset merging
-    finalProps.system.mergeRulesets = (...rulesets: TCommon.RulesetFragmentsParts) => mergeRulesets(codeClassesPatchFinal, addInClasses['$whenUsed'] as any, rulesets)
+    finalProps.system.mergeRulesets = (...rulesets: TCommon.RulesetFragmentsParts) => mergeRulesets(consolidePatches(codeClassesPatch), addInClasses['$whenUsed'] as any, rulesets)
 
     // call component code
     return <CodeComponent {...finalProps as Types.CodeProps<R>} />
@@ -222,6 +200,27 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
 /************************
 * PRIVATE
 *************************/
+
+// convert TCommon.SheetPatch to TCommon.SheetPatchFinal ( => remove AddIn's name hiearchy) 
+const consolidePatches = (codeClassesPatch: TCommon.SheetPatch) => {
+  if (!codeClassesPatch) return null
+  const arrayCanModify: { [rulesetName: string]: boolean } = {}
+  const codeClassesPatchFinal: TCommon.SheetPatchFinal = {}
+  for (const addInName in codeClassesPatch) {
+    const addIn = codeClassesPatch[addInName]
+    for (const rulesetName in addIn) {
+      let final = codeClassesPatchFinal[rulesetName], addInp = addIn[rulesetName]
+      // optimize merging ruleset's fragments
+      if (!final) codeClassesPatchFinal[rulesetName] = addInp //first addIn[rulesetName] => use it
+      else if (arrayCanModify[rulesetName]) Array.prototype.push.apply(final, addInp) // thirdth and more addIn[rulesetName] => modify 'final'
+      else { // second addIn[rulesetName]
+        codeClassesPatchFinal[rulesetName] = [...final, ...addInp] // second => concat first and second
+        arrayCanModify[rulesetName] = true
+      }
+    }
+  }
+  return codeClassesPatchFinal
+}
 
 const mergeRulesets = (codeClassesPatch: TCommon.SheetPatchFinal, whenUsed /*$whenUsed = addInClasses['$whenUsed']*/: TCommon.SheetFragmentsData, rulesets: TCommon.RulesetFragmentsParts) => {
 
