@@ -28,24 +28,24 @@ export const getPlatformSheet = (par: GetPlatformSheetPar) => {
   }
 }
 
-export const applySheetPatch = (codeClasses: TCommon.SheetFragmentsData, codeClassesPatch: { [addInName: string]: TCommon.SheetFragmentsData }) => {
-  const classesPatches = Object.keys(codeClassesPatch).map(p => codeClassesPatch[p])
-  if (classesPatches.length > 0) {
-    const clss: TCommon.SheetFragmentsData = {}
-    classesPatches.forEach(cls => {
-      for (const p in cls) {
-        const clsp = cls[p]
-        if (!clsp) continue
-        const clssRes = clss[p] || (clss[p] = { name: null, __fragments: [] })
-        Array.prototype.push.apply(clssRes.__fragments, clsp.__fragments)
-      }
-    })
-    const res: TCommon.SheetFragmentsData = { ...codeClasses } as any
-    for (const p in clss) res[p].__fragments = [...res[p].__fragments, ...clss[p].__fragments]
-    return res
-  } else
-    return codeClasses
-}
+//export const applySheetPatch = (codeClasses: TCommon.SheetFragmentsData, codeClassesPatch: { [addInName: string]: TCommon.SheetFragmentsData }) => {
+//  const classesPatches = Object.keys(codeClassesPatch).map(p => codeClassesPatch[p])
+//  if (classesPatches.length > 0) {
+//    const clss: TCommon.SheetFragmentsData = {}
+//    classesPatches.forEach(cls => {
+//      for (const p in cls) {
+//        const clsp = cls[p]
+//        if (!clsp) continue
+//        const clssRes = clss[p] || (clss[p] = { name: null, __fragments: [] })
+//        Array.prototype.push.apply(clssRes.__fragments, clsp.__fragments)
+//      }
+//    })
+//    const res: TCommon.SheetFragmentsData = { ...codeClasses } as any
+//    for (const p in clss) res[p].__fragments = [...res[p].__fragments, ...clss[p].__fragments]
+//    return res
+//  } else
+//    return codeClasses
+//}
 
 const fromCache = ($cache: Cache, id: number, variantCacheId: string, getter: () => TCommon.SheetFragments) => {
   let compCache = $cache[id]

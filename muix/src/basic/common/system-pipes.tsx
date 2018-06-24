@@ -3,7 +3,7 @@ import warning from 'warning'
 
 import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
-import { getPlatformSheet, deepMerges, toPlatformRulesets, applySheetPatch, immutableMerge, mergeRulesetsParts } from './to-platform'
+import { getPlatformSheet, deepMerges, toPlatformRulesets, immutableMerge, mergeRulesetsParts } from './to-platform'
 import { TAddIn } from '../typings/add-in'
 import { TCommonStyles } from '../typings/common-styles'
 import { themePipe } from './theme'
@@ -195,17 +195,19 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
       for (const addInName in codeClassesPatch) {
         const addIn = codeClassesPatch[addInName]
         for (const rulesetName in addIn) {
-          const final = codeClassesPatchFinal[rulesetName], addInp = addIn[rulesetName]
-          if (!final) codeClassesPatchFinal[rulesetName] = addInp //first addIn[rulesetName]
-          else if (arrayCanModify[rulesetName]) Array.prototype.push.apply(final, addInp) // thirdth and more addIn[rulesetName]
+          let final = codeClassesPatchFinal[rulesetName], addInp = addIn[rulesetName]
+          // optimize merging ruleset fragments arrays
+          if (!final) codeClassesPatchFinal[rulesetName] = addInp //first addIn[rulesetName], use it
+          else if (arrayCanModify[rulesetName]) Array.prototype.push.apply(final, addInp) // thirdth and more addIn[rulesetName], modify 'final'
           else { // second addIn[rulesetName]
-            codeClassesPatchFinal[rulesetName] = [...final, ...addInp]
+            codeClassesPatchFinal[rulesetName] = [...final, ...addInp] // second => concat first and second
             arrayCanModify[rulesetName] = true
           }
         }
       }
     }
 
+    // method, called in component code: ruleset merging
     finalProps.system.mergeRulesets = (...rulesets: TCommon.RulesetFragmentsParts) => mergeRulesets(codeClassesPatchFinal, addInClasses['$whenUsed'] as any, rulesets)
 
     // call component code
@@ -221,24 +223,22 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
 * PRIVATE
 *************************/
 
-const mergeRulesets = (codeClassesPatch: TCommon.SheetPatchFinal, whenUsed: TCommon.SheetFragmentsData, rulesets: TCommon.RulesetFragmentsParts) => {
+const mergeRulesets = (codeClassesPatch: TCommon.SheetPatchFinal, whenUsed /*$whenUsed = addInClasses['$whenUsed']*/: TCommon.SheetFragmentsData, rulesets: TCommon.RulesetFragmentsParts) => {
 
   if (!rulesets || rulesets.length === 0) return null
 
-  //const $whenUsed = state.addInClasses['$whenUsed']
   let usedRulesetNames: {} = null
   if (whenUsed)
     rulesets.forEach((r: TCommon.RulesetFragments) => r.__fragments && r.name && (usedRulesetNames || (usedRulesetNames = {})) && (usedRulesetNames[r.name] = true))
 
-  //const codeClassesPatch = state.codeClassesPatch
-
   if (!usedRulesetNames && !codeClassesPatch) return mergeRulesetsParts(rulesets)
 
+  // for every ruleset: apply patches and resolve "$whenUsed" addIn
   const finalRulesets = rulesets.map((r: TCommon.RulesetFragments) => {
     const name = r && r.__fragments && r.name
     if (!name) return r
     const patch = codeClassesPatch && codeClassesPatch[name]
-    const used = usedRulesetNames && usedRulesetNames[name] && whenUsed && whenUsed[name]
+    const used = usedRulesetNames && usedRulesetNames[name] && whenUsed[name]
     if (!patch && !used) return r
     return {
       __fragments: [
