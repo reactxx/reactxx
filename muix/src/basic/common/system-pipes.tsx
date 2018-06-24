@@ -3,7 +3,7 @@ import warning from 'warning'
 
 import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
-import { getPlatformSheet, deepMerges, toPlatformRulesets, applySheetPatch, immutableMerge, mergeRulesets } from './to-platform'
+import { getPlatformSheet, deepMerges, toPlatformRulesets, applySheetPatch, immutableMerge, mergeRulesetsParts } from './to-platform'
 import { TAddIn } from '../typings/add-in'
 import { TCommonStyles } from '../typings/common-styles'
 import { themePipe } from './theme'
@@ -140,7 +140,7 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
 
     // **** apply sheet patch to sheet:
     // call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
-    const { __sheet: codeClasses, addIns: addInClasses } = getPlatformSheet({ id, createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
+    const { codeClasses, addInClasses } = getPlatformSheet({ id, createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
     renderState.addInClasses = addInClasses //e.g {$animations:..., root: {$mediaq:...}}
     renderState.codeClasses = codeClasses
   }
@@ -169,8 +169,8 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     return res
   }
 
-  const renderComponentPipe = (renderState: TRenderStateEx, CodeComponent: Types.CodeComponentType) => () => {
-    const { finalProps, codeClassesPatch, codeClasses, addInProps } = renderState
+  const renderComponentPipe = (renderState: TRenderState, CodeComponent: Types.CodeComponentType) => () => {
+    const { finalProps, codeClassesPatch, codeClasses, addInProps, addInClasses } = renderState
 
     if (addInProps.$developer_flag) {
       const { themeContext, codePropsPatch } = renderState
@@ -185,24 +185,28 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
       )
     }
 
-    // apply patches
-    //const classesPatches = Object.keys(codeClassesPatch).map(p => codeClassesPatch[p])
-    //if (classesPatches.length > 0) {
-    //  const clss: TCommon.SheetFragmentsData = {}
-    //  classesPatches.forEach(cls => {
-    //    for (const p in cls) {
-    //      const clsp = cls[p]
-    //      if (!clsp) continue
-    //      const clssRes = clss[p] || (clss[p] = { name: p, __fragments: [] })
-    //      Array.prototype.push.apply(clssRes.__fragments, clsp.__fragments)
-    //    }
-    //  })
-    //  const res: TCommon.SheetFragmentsData = { ...codeClasses }
-    //  for (const p in clss) res[p].__fragments = [...res[p].__fragments, ...clss[p].__fragments]
-    //  finalProps.system.classes = res as any
-    //} else
-    finalProps.system.classes = applySheetPatch(codeClasses, codeClassesPatch) as any
-    finalProps.system.mergeRulesets = mergeRulesets
+    finalProps.system.classes = codeClasses //applySheetPatch(codeClasses, codeClassesPatch) as any
+
+    // convert TCommon.SheetPatch to TCommon.SheetPatchFinal ( => remove AddIn's name hiearchy) 
+    let codeClassesPatchFinal: TCommon.SheetPatchFinal = null
+    if (codeClassesPatch) {
+      const arrayCanModify: { [rulesetName: string]: boolean } = {}
+      codeClassesPatchFinal = {}
+      for (const addInName in codeClassesPatch) {
+        const addIn = codeClassesPatch[addInName]
+        for (const rulesetName in addIn) {
+          const final = codeClassesPatchFinal[rulesetName], addInp = addIn[rulesetName]
+          if (!final) codeClassesPatchFinal[rulesetName] = addInp //first addIn[rulesetName]
+          else if (arrayCanModify[rulesetName]) Array.prototype.push.apply(final, addInp) // thirdth and more addIn[rulesetName]
+          else { // second addIn[rulesetName]
+            codeClassesPatchFinal[rulesetName] = [...final, ...addInp]
+            arrayCanModify[rulesetName] = true
+          }
+        }
+      }
+    }
+
+    finalProps.system.mergeRulesets = (...rulesets: TCommon.RulesetFragmentsParts) => mergeRulesets(codeClassesPatchFinal, addInClasses['$whenUsed'] as any, rulesets)
 
     // call component code
     return <CodeComponent {...finalProps as Types.CodeProps<R>} />
@@ -216,6 +220,37 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
 /************************
 * PRIVATE
 *************************/
+
+const mergeRulesets = (codeClassesPatch: TCommon.SheetPatchFinal, whenUsed: TCommon.SheetFragmentsData, rulesets: TCommon.RulesetFragmentsParts) => {
+
+  if (!rulesets || rulesets.length === 0) return null
+
+  //const $whenUsed = state.addInClasses['$whenUsed']
+  let usedRulesetNames: {} = null
+  if (whenUsed)
+    rulesets.forEach((r: TCommon.RulesetFragments) => r.__fragments && r.name && (usedRulesetNames || (usedRulesetNames = {})) && (usedRulesetNames[r.name] = true))
+
+  //const codeClassesPatch = state.codeClassesPatch
+
+  if (!usedRulesetNames && !codeClassesPatch) return mergeRulesetsParts(rulesets)
+
+  const finalRulesets = rulesets.map((r: TCommon.RulesetFragments) => {
+    const name = r && r.__fragments && r.name
+    if (!name) return r
+    const patch = codeClassesPatch && codeClassesPatch[name]
+    const used = usedRulesetNames && usedRulesetNames[name] && whenUsed && whenUsed[name]
+    if (!patch && !used) return r
+    return {
+      __fragments: [
+        ...r.__fragments,
+        ...(used && used.__fragments) || [],
+        ...patch || [],
+      ]
+    }
+  })
+
+  return mergeRulesetsParts(finalRulesets)
+}
 
 interface TRenderStateEx extends TRenderState {
   eventsX?: Types.OnPressAllX

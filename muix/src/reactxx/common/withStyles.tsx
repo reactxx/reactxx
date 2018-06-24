@@ -19,7 +19,7 @@ export interface TRenderState extends TRenderStateBasic {
   platformProps?: Types.CodeProps
   //codeSystemProps?: Types.CodeSystemProps
   //codeClasses?: Types.Sheet & TAddIn.SheetX
-  addInClasses?: TAddIn.SheetX
+  //addInClasses?: TAddIn.SheetX
 }
 
 /************************
@@ -32,7 +32,7 @@ renderAddIn.propsAddInPipeline = mediaQBeforeToPlatform
 // after converting props and sheet to platform dependent form
 renderAddIn.styleAddInPipeline = (state: TRenderState, next) => mediaQAfterToPlatform(state, animationAfterToPlatform(state, next))
 
-renderAddIn.finishAddIns = [animationFinishAddIns, mediaFinishAddIns]
+renderAddIn.finishAddInClasses = [animationFinishAddIns, mediaFinishAddIns]
 
 
 /************************

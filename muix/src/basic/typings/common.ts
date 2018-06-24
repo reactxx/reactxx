@@ -74,25 +74,37 @@ export namespace TCommon {
   //****************************
   // PLATFORM SHEET
   //****************************
+  export type Fragments = {}[]
   export type RulesetFragmentsPart = {} | RulesetFragments
   export type RulesetFragmentsParts = RulesetFragmentsPart[]
 
   export interface RulesetFragments {
-    __fragments: {}[]
+    __fragments: Fragments
     name: string
   }
 
   export type SheetFragmentsData = { [rulesetName: string]: RulesetFragments }
 
   export interface SheetFragments {
-    __sheet?: SheetFragmentsData
-    addIns?: TAddIns
+    codeClasses?: SheetFragmentsData
+    addInClasses?: TAddIns
   }
 
-  export type TSheetAddIn = Array<{}>
+  export type SheetPatch = {
+    [addInName: string]: {
+      [rulesetName: string]: Fragments
+    }
+  }
+
+  export type SheetPatchFinal = {
+    [rulesetName: string]: Fragments
+  }
+
+  export type TSheetAddIn = {}
   export type TRulesetAddIn = { [name: string]: Array<{}> } // name is e.g. '$mediaq'
   export type TAddIn = TSheetAddIn | TRulesetAddIn
   export type TAddIns = { [name: string]: TAddIn } // name is e.g. '$animations' or 'root'
 
 
-}
+
+} 

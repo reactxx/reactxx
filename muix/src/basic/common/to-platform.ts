@@ -36,7 +36,7 @@ export const applySheetPatch = (codeClasses: TCommon.SheetFragmentsData, codeCla
       for (const p in cls) {
         const clsp = cls[p]
         if (!clsp) continue
-        const clssRes = clss[p] || (clss[p] = { name: p, __fragments: [] })
+        const clssRes = clss[p] || (clss[p] = { name: null, __fragments: [] })
         Array.prototype.push.apply(clssRes.__fragments, clsp.__fragments)
       }
     })
@@ -65,17 +65,6 @@ interface GetPlatformSheetPar {
   defaultClasses?: Types.PartialSheetX; variant; variantCacheId: string;
 }
 
-
-//****************************
-// UTILS
-//****************************
-
-export function mergeRulesets<T extends TCommonStyles.RulesetNativeIds = 'View'>(...rulesets/*all used rulesets*/): TCommonStyles.RulesetNative<T>
-export function mergeRulesets<T extends 'Web'>(...rulesets): TCommonStyles.RulesetWeb
-export function mergeRulesets<T extends {}>(...rulesets): T
-export function mergeRulesets(...rulesets) {
-  return mergeRulesetsParts(rulesets)
-}
 
 export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseDown : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
 
@@ -156,29 +145,29 @@ export const toPlatformRulesets = (sources: Types.RulesetX[]) => {
 export const toPlatformSheets = (cache: TCommon.SheetFragments /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
   if (!sources || sources.length == 0) return cache
   const sheetData: TCommon.SheetFragments = {}
-  if (cache && cache.__sheet) {
-    sheetData.__sheet = {}
-    for (const p in cache.__sheet)
-      sheetData.__sheet[p] = { name: p, __fragments: [...cache.__sheet[p].__fragments] }
+  if (cache && cache.codeClasses) {
+    sheetData.codeClasses = {}
+    for (const p in cache.codeClasses)
+      sheetData.codeClasses[p] = { name: p, __fragments: [...cache.codeClasses[p].__fragments] }
   } 
   sources.forEach(src => {
     for (const p in src) {
 
       // initialize addIns item or for sheet or for ruleset
-      const createAddIn = <T extends TCommon.TAddIn = TCommon.TRulesetAddIn>(isSheet?: boolean) => {
-        if (!sheetData.addIns) sheetData.addIns = {}
-        const addIn = sheetData.addIns[p]
+      const createAddIn = <T extends {}[] | {}>(isSheet?: boolean) => {
+        if (!sheetData.addInClasses) sheetData.addInClasses = {}
+        const addIn = sheetData.addInClasses[p]
         if (addIn) return addIn as T
 
-        const cacheAddIn = cache && cache.addIns && cache.addIns[p]
+        const cacheAddIn = cache && cache.addInClasses && cache.addInClasses[p]
 
         // no cache:
-        if (!cacheAddIn) return (sheetData.addIns[p] = isSheet ? [] : {}) as T
+        if (!cacheAddIn) return (sheetData.addInClasses[p] = isSheet ? [] : {}) as T
 
         //*** init adIns from cache:
 
         // sheet - init array from cache
-        if (isSheet) return (sheetData.addIns[p] = [cacheAddIn]) as T
+        if (isSheet) return (sheetData.addInClasses[p] = [cacheAddIn]) as T
 
         // ruleset - two level deep copy of cached addIns:
         /* example:
@@ -189,25 +178,25 @@ export const toPlatformSheets = (cache: TCommon.SheetFragments /*platform format
             ]
           }
         }*/
-        const res = sheetData.addIns[p] = { ...cacheAddIn as TCommon.TRulesetAddIn } // first level: sheet's ruleset, e.g. 'root':{}
+        const res = sheetData.addInClasses[p] = { ...cacheAddIn } // first level: sheet's ruleset, e.g. 'root':{}
         for (const pp in res) res[pp] = [...res[pp]] // second level: array of ruleset prop, e.g. 'mediaq':[]
         return res as T
       }
 
-      // put sheet's system prop to addIns (e.g. $animations or sheet.$mediaq)
-      if (p.charAt(0) === '$') { createAddIn<TCommon.TSheetAddIn>(true).push(src[p]); continue }
+      // put sheet's addIns-prop to addIns (e.g. <sheet>.$animations)
+      if (p.charAt(0) === '$') { createAddIn<{}[]>(true).push(src[p]); continue }
 
-      // linearize cross platform ruleset (and put ruleset's system prop to addIns, e.g. ruleset.$mediaq)
-      if (!sheetData.__sheet) sheetData.__sheet = {}
-      const cachedRulesets = cache && cache.__sheet && cache.__sheet[p] && cache.__sheet[p].__fragments
-      const rulesets = sheetData.__sheet[p] || (sheetData.__sheet[p] = { name: p, __fragments: cachedRulesets ? [...cachedRulesets] : [] })
+      // convert cross platform ruleset to RulesetFragments and put ruleset's system prop to addIns (e.g. ruleset.$mediaq)
+      if (!sheetData.codeClasses) sheetData.codeClasses = {}
+      const cachedRulesets = cache && cache.codeClasses && cache.codeClasses[p] && cache.codeClasses[p].__fragments
+      const rulesets = sheetData.codeClasses[p] || (sheetData.codeClasses[p] = { name: p, __fragments: cachedRulesets ? [...cachedRulesets] : [] })
       pushRulesetParts(src[p], rulesets.__fragments, createAddIn)
     }
   })
 
   // convert addIns to platform format
-  if (sheetData.addIns) renderAddIn.finishAddIns.forEach(finish => finish(sheetData.addIns))
-  else sheetData.addIns = cache && cache.addIns
+  if (sheetData.addInClasses) renderAddIn.finishAddInClasses.forEach(finish => finish(sheetData.addInClasses))
+  else sheetData.addInClasses = cache && cache.addInClasses
 
   return sheetData
 
@@ -222,8 +211,8 @@ export const toPlatformSheets = (cache: TCommon.SheetFragments /*platform format
 }
 
 export const mergeCacheParts = (cache: TCommon.SheetFragments) => {
-  for (const p in cache.__sheet) {
-    const data = cache.__sheet[p]
+  for (const p in cache.codeClasses) {
+    const data = cache.codeClasses[p]
     if (!data.__fragments) continue
     data.__fragments = [mergeRulesetsParts(data.__fragments)]
   }

@@ -27,22 +27,23 @@ export const beforeToPlatform = (state: TRenderState, next) =>
     next)
 
 export const afterToPlatform = (state: TRenderState, next) =>
-  mediaQSheet( // actualize mediaq part of the ruleset
-    () => state.addInClasses as TMediaQ.MediaQSheet,
-    codeClassesPatch => codeClassesPatch && (state.codeClassesPatch['reactxx-mediaq'] = codeClassesPatch),
+  mediaQSheet( // actualize $mediaq part of the ruleset
+    () => ({ addInClasses: state.addInClasses as TMediaQ.MediaQSheet, codeClassesPatch: state.codeClassesPatch }),
     next
   )
 
-export const finishAddIns = (addIns: {}) => {
-  for (const p in addIns) {
-    const addInsp = addIns[p]
+export const finishAddIns = (addInClasses: {}) => {
+  // addIns = e.g. { root: { $mediaq: [ { '480-1024': Types.RulesetX } ] } }
+  for (const p in addInClasses) {
+    const addInsp = addInClasses[p]
     const $mediaq: Array<{}> = addInsp && addInsp.$mediaq
     if (!$mediaq) continue
-    addIns[p].$mediaq = toPlatformSheets(null, $mediaq).__sheet //.length === 0 ? null : $mediaq.length === 1 ? $mediaq[0] : deepMerges({}, ...$mediaq)
+    // output: addIns.root.$mediaq = e.g. { name: '480-1024', __fragments: [ {color: 'red', $web: {...}}, {':hover: {}'} ] }
+    addInClasses[p].$mediaq = toPlatformSheets(null, $mediaq).codeClasses
   }
 }
 
-renderAddIn.finishAddIns.push(finishAddIns)
+renderAddIn.finishAddInClasses.push(finishAddIns)
 
 // used before converting props and sheet to platform dependent form
 renderAddIn.propsAddInPipeline = beforeToPlatform

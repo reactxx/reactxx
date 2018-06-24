@@ -7,14 +7,15 @@ export const onSubscribe = (b: TMediaQ.Breakpoint, inRuleset: boolean) => {
   b.active = (b.value <= Dimensions.get('window').width)
 }
 
-export const modifyRuleset = (ruleset: {}, items: TMediaQ.RulesetDecoded[]) => {
-  if (!items) return ruleset
+export const modifyRuleset = (items: TMediaQ.RulesetDecoded[]) => {
+  if (!items) return null
   //const res = { ...ruleset }
   //const res = { $mediaq: undefined }
-  const res = { }
+  const res = []
   items.forEach(it => {
     if (!it.from.active || it.to.active) return
-    deepMerge(res, it.ruleset)
+    Array.prototype.push.apply(res, it.ruleset)
+    //deepMerge(res, it.ruleset)
   })
   return res
 }

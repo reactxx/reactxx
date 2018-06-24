@@ -91,19 +91,19 @@ export const mediaQFlags = <T extends string>(input: () => { $mediaq: TMediaQ.No
   return res
 }
 
-export const mediaQSheet = <T extends string>(input: () => TMediaQ.MediaQSheet, output: (outputPar: TCommon.SheetFragmentsData) => void, next: () => React.ReactNode) => {
+export const mediaQSheet = <T extends string>(input: () => { addInClasses: TMediaQ.MediaQSheet, codeClassesPatch: TCommon.SheetPatch }, next: () => React.ReactNode) => {
   let breaks: ReturnType<typeof getSheetBreakpoints>
-  let codeSheet: TMediaQ.MediaQSheet
+  let addInClasses: TMediaQ.MediaQSheet
+  let codeClassesPatch: TCommon.SheetPatch
   const render = () => {
-    const sheetPatch = getSheetPatch(breaks.observedBits === 0, codeSheet, breaks.sheetBreakpoints)
-    output(sheetPatch)
+    const sheetPatch = modifySheetPatch(codeClassesPatch, breaks.observedBits === 0, addInClasses, breaks.sheetBreakpoints)
     return next()
   }
   const res = () => {
-    codeSheet = input()
-    breaks = getSheetBreakpoints(codeSheet)
-    if (breaks.observedBits !== 0) return <MediaQConsumer unstable_observedBits={breaks.observedBits}>{render}</MediaQConsumer>
-    output(window.isWeb && breaks.sheetBreakpoints && breaks.sheetBreakpoints.length > 0 && getSheetPatch(false, codeSheet, breaks.sheetBreakpoints))
+    const inp = input(); addInClasses = inp.addInClasses; codeClassesPatch = inp.codeClassesPatch
+    breaks = getSheetBreakpoints(addInClasses)
+    if (!window.isWeb && breaks.observedBits !== 0) return <MediaQConsumer unstable_observedBits={breaks.observedBits}>{render}</MediaQConsumer>
+    if (window.isWeb && breaks.sheetBreakpoints && breaks.sheetBreakpoints.length > 0) modifySheetPatch(codeClassesPatch, false, addInClasses, breaks.sheetBreakpoints)
     return next()
   }
   return res
@@ -188,15 +188,22 @@ const getSheetBreakpoints = (sheet: TMediaQ.MediaQSheet) => {
   return { sheetBreakpoints: res, observedBits: observedBits }
 }
 
-const getSheetPatch = (ignore: boolean, classesIn: TMediaQ.MediaQSheet, usedSheetBreakpoints: TMediaQ.MediaQRulesetDecoded[]) => {
-  if (ignore || !usedSheetBreakpoints || usedSheetBreakpoints.length===0) return null
-  const codeClassesPatch: TCommon.SheetFragmentsData = { }
+const patchName = 'reactxx-mediaq'
+
+const modifySheetPatch = (codeClassesPatch: TCommon.SheetPatch, ignore: boolean, addInClasses: TMediaQ.MediaQSheet, usedSheetBreakpoints: TMediaQ.MediaQRulesetDecoded[]) => {
+  // clear mediaq patches
+  delete codeClassesPatch[patchName]
+  // add new patches
+  if (ignore || !usedSheetBreakpoints || usedSheetBreakpoints.length===0) return 
+  //const codeClassesPatch: TCommon.SheetFragmentsData = { }
   usedSheetBreakpoints.forEach(used => {
-    const ruleset = classesIn[used.rulesetName];
-    warning(ruleset, `Missing ruleset ${used.rulesetName}`); //`
-    codeClassesPatch[used.rulesetName] = { name: used.rulesetName, __fragments: [modifyRuleset(ruleset, used.items)] }
+    const patch = codeClassesPatch[patchName] || (codeClassesPatch[patchName] = {})
+    //warning(ruleset, `Missing ruleset ${used.rulesetName}`); //`
+    //const rulesetPatch = sheet[used.rulesetName] || (codeClassesPatch[used.rulesetName] = {})
+    patch[used.rulesetName] = [modifyRuleset(used.items)]
+    //const 
+    //codeClassesPatch[used.rulesetName] = { name: used.rulesetName, __fragments: [modifyRuleset(ruleset, used.items)] }
   })
-  return codeClassesPatch
 }
 
 const checkAppContainer = () => warning(mediaQBreaks, 'reactxx-mediaq: missing MediaQ_AppContainer component in your application root')

@@ -16,8 +16,8 @@ export const onSubscribe = (b: TMediaQ.Breakpoint, inRuleset: boolean) => {
   mediaQuery.addListener(onChange)
 }
 
-export const modifyRuleset = (ruleset: {}, items: TMediaQ.RulesetDecoded[]) => {
-  if (!items) return ruleset
+export const modifyRuleset = (items: TMediaQ.RulesetDecoded[]) => {
+  if (!items) return null
   //const res = {...ruleset}
   const res = {}
   items.forEach(it => res[intervalToSelector(it.from.value, it.to.value)] = mergeRulesetsParts(it.ruleset.__fragments))
