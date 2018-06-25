@@ -14,7 +14,7 @@ export const registerTheme = <T extends {} = never>(name: string, theme: T) => {
 
 export const themePipe = (input: () => { withTheme: boolean }, output: (outputPar: TCommon.ThemeContext) => void, next: () => React.ReactNode) => {
   const render = (renderPar: TCommon.ThemeContext) => {
-    output(renderPar)
+    output(renderPar || globalThemeContext)
     return next()
   }
   const res = () => {

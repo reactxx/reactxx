@@ -28,25 +28,6 @@ export const getPlatformSheet = (par: GetPlatformSheetPar) => {
   }
 }
 
-//export const applySheetPatch = (codeClasses: TCommon.SheetFragmentsData, codeClassesPatch: { [addInName: string]: TCommon.SheetFragmentsData }) => {
-//  const classesPatches = Object.keys(codeClassesPatch).map(p => codeClassesPatch[p])
-//  if (classesPatches.length > 0) {
-//    const clss: TCommon.SheetFragmentsData = {}
-//    classesPatches.forEach(cls => {
-//      for (const p in cls) {
-//        const clsp = cls[p]
-//        if (!clsp) continue
-//        const clssRes = clss[p] || (clss[p] = { name: null, __fragments: [] })
-//        Array.prototype.push.apply(clssRes.__fragments, clsp.__fragments)
-//      }
-//    })
-//    const res: TCommon.SheetFragmentsData = { ...codeClasses } as any
-//    for (const p in clss) res[p].__fragments = [...res[p].__fragments, ...clss[p].__fragments]
-//    return res
-//  } else
-//    return codeClasses
-//}
-
 const fromCache = ($cache: Cache, id: number, variantCacheId: string, getter: () => TCommon.SheetFragments) => {
   let compCache = $cache[id]
   if (!compCache) $cache[id] = compCache = {}
@@ -54,7 +35,16 @@ const fromCache = ($cache: Cache, id: number, variantCacheId: string, getter: ()
 }
 
 const toPlatform = ({ createSheetX, themeContext: { theme }, sheetXPatch, variant }: GetPlatformSheetPar) => {
-  const sheet = typeof createSheetX === 'function' ? createSheetX(theme, variant) : createSheetX
+  let sheet: Types.PartialSheetX
+  if (typeof createSheetX === 'function') {
+    try { sheet = createSheetX(theme, variant) }
+    catch {
+      debugger
+      warning(theme, 'Missing <ThemeProvider theme={}>')
+      return null
+    }
+  } else
+    sheet = createSheetX
   return toPlatformSheets(null, [sheet, ...sheetXPatch || []])
 }
 
@@ -64,7 +54,6 @@ interface GetPlatformSheetPar {
   id: number; createSheetX: Types.SheetCreatorX; themeContext: TCommon.ThemeContext; sheetXPatch: Types.PartialSheetX[];
   defaultClasses?: Types.PartialSheetX; variant; variantCacheId: string;
 }
-
 
 export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseDown : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
 
@@ -137,10 +126,6 @@ export const toPlatformRulesets = (sources: Types.RulesetX[]) => {
 //****************************
 // TO PLATFORM SHEETS
 //****************************
-//type TSheetAddIn = Array<{}>
-//type TRulesetAddIn = { [name: string]: Array<{}> } // name is e.g. '$mediaq'
-//type TAddIn = TSheetAddIn | TRulesetAddIn
-//type TAddIns = { [name: string]: TAddIn } // name is e.g. '$animations' or 'root'
 
 export const toPlatformSheets = (cache: TCommon.SheetFragments /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
   if (!sources || sources.length == 0) return cache
@@ -200,14 +185,6 @@ export const toPlatformSheets = (cache: TCommon.SheetFragments /*platform format
 
   return sheetData
 
-  //const sheet: Types.Sheet = cache ? { ...cache.sheet } : {}
-  //for (const p in toMergesParts) {
-  //  const targetp = sheet[p]; const toMergesp = toMergesParts[p]
-  //  const toMerge = targetp && toMergesp.length > 0 ? [targetp, ...toMergesp] : targetp ? [targetp] : toMergesp.length > 0 ? toMergesp : null
-  //  if (!toMerge) continue
-  //  sheet[p] = mergeRulesetsParts(toMerge)
-  //}
-  //return { sheet, addIns } as MergeSheetsResult
 }
 
 export const mergeCacheParts = (cache: TCommon.SheetFragments) => {
@@ -289,115 +266,3 @@ const pushRulesetParts = (ruleset: Types.RulesetX, arr: Array<any>, getAddIns: (
   pushRulesetPart($after, arr, getAddIns)
   pushRulesetPart($after && (window.isWeb ? $after.$web : $after.$native), arr, getAddIns)
 }
-
-//export const immutableToPlatformRuleSet = (style: Types.RulesetX, ignoreAddIn?: boolean) => {
-//  warning(isObject(style), 'isObject(style)')
-
-//  // $before, $after
-//  if (style.$before || style.$after) {
-//    const $before = style.$before; const $after = style.$after
-//    delete style.$before; delete style.$after
-//    style = $before ? deepMerges($before, style, $after) : deepMerge(style, $after)
-//  }
-//  // $web, $native, $<addIn>
-//  let addIn, $web, $native
-//  for (const p in style) {
-//    switch (p) {
-//      case '$web': $web = style[p]; break
-//      case '$native': $native = style[p]; break
-//      default:
-//        if (ignoreAddIn || p.charAt(0) !== '$') continue
-//        if (!addIn) addIn = {}
-//        const { toPlatformRulesetHooks } = renderAddIn
-//        const done = toPlatformRulesetHooks && toPlatformRulesetHooks.find(hook => {
-//          const val = hook(p, style[p])
-//          if (val.done) addIn[p] = val.value
-//          return val.done
-//        })
-//        warning(done, `Cannot find hook for ${p} addIn prop`)
-//    }
-//    delete style[p]
-//  }
-//  if ($web && window.isWeb) deepMerge(style, $web)
-//  else if ($native && !window.isWeb) deepMerge(style, $native)
-//  return { style, addIn }
-//}
-
-//export const deepModifyTest = () => {
-//  const a = 1, b = 2, c = 3, d = 4
-//  let res = immutableMerge({}, {}, {})
-//  res = immutableMerge({ a, b }, { a: 11, c }, { b: 22 })
-//  res = immutableMerge({ x: { a, b, z: { c } }, d },
-//    { x: { a: 11, b: 22, c, z: { c: 33 } }, z: { c }, d: 44 },
-//    { x: { b: 222, z: { c: 333 } }, y: { d }, d: 444 })
-//  res = immutableMerge({ x: { a, b, z: { c } }, d },
-//    { x: { a: undefined, c, z: undefined } },
-//    { y: { b: 222 }, d: undefined })
-//  debugger
-//}
-
-//export interface StaticSheet {
-//  codeClasses: Types.Sheet
-//  addIns?
-//  isConstant?: boolean
-//}
-
-//export const toPlatformRuleSetInPlace = (style: Types.RulesetX, ignoreAddIn?: boolean) => {
-//  if (!isObject(style)) return { style, addIn: null }
-//  // $before, $after
-//  if (style.$before || style.$after) {
-//    const $before = style.$before; const $after = style.$after
-//    delete style.$before; delete style.$after
-//    style = $before ? deepMerges($before, style, $after) : deepMerge(style, $after)
-//  }
-//  // $web, $native, $<addIn>
-//  let addIn, $web, $native
-//  for (const p in style) {
-//    switch (p) {
-//      case '$web': $web = style[p]; break
-//      case '$native': $native = style[p]; break
-//      default:
-//        if (ignoreAddIn || p.charAt(0) !== '$') continue
-//        if (!addIn) addIn = {}
-//        const { toPlatformRulesetHooks } = renderAddIn
-//        const done = toPlatformRulesetHooks && toPlatformRulesetHooks.find(hook => {
-//          const val = hook(p, style[p])
-//          if (val.done) addIn[p] = val.value
-//          return val.done
-//        })
-//        warning(done, `Cannot find hook for ${p} addIn prop`)
-//    }
-//    delete style[p]
-//  }
-//  if ($web && window.isWeb) deepMerge(style, $web)
-//  else if ($native && !window.isWeb) deepMerge(style, $native)
-//  return { style, addIn }
-//}
-
-//export const toPlatformSheetInPlace = (codeClasses: Types.PartialSheetX, ignoreAddIn?: boolean) => {
-//  if (!isObject(codeClasses)) return { codeClasses } as StaticSheet
-//  let addIns
-//  for (const p in codeClasses) {
-//    if (p.charAt(0) === '$') {
-//      if (ignoreAddIn) continue
-//      if (!addIns) addIns = {}
-//      const { toPlatformSheetHooks } = renderAddIn
-//      const done = toPlatformSheetHooks && toPlatformSheetHooks.find(hook => {
-//        const val = hook(p, codeClasses[p])
-//        if (val.done) addIns[p] = val.value
-//        return val.done
-//      })
-//      delete codeClasses[p]
-//      warning(done, `Cannot find hook for ${p} addIn prop`)
-//      continue
-//    }
-//    const ruleset = toPlatformRuleSetInPlace(codeClasses[p])
-//    codeClasses[p] = ruleset.style as any
-//    if (ruleset.addIn) {
-//      if (!addIns) addIns = {}
-//      addIns[p] = ruleset.addIn
-//    }
-//  }
-//  return { codeClasses, addIns } as StaticSheet
-//}
-

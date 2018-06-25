@@ -12,11 +12,10 @@ export namespace TAddIn {
   *******************************************/
 
   //******************** Cross platform
-  export interface RulesetAddInX<T extends TCommonStyles.RulesetNativeIds, R extends Types.Shape> extends TMediaQ.MediaQRulesetPartX<T> { }
+  export interface RulesetAddInX<T extends TCommonStyles.RulesetNativeIds, R extends Types.Shape> extends TMediaQ.MediaQRulesetPartX<T>, TAddInBasic.RulesetAddInX<T, R> { }
   export interface SheetX<R extends Types.Shape = Types.Shape> { $animations?: TAnimation.SheetsX<getAnimation<R>> }
 
-
-  /******************************************
+    /******************************************
     SHAPE
   *******************************************/
   export interface Shape {

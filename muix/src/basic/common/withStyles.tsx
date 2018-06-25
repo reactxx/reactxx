@@ -7,7 +7,7 @@ import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
 
-import { getSystemPipes } from './system-pipes'
+import { getSystemPipes, whenUsed_FinishAddIns } from './system-pipes'
 import { renderCounterPipe } from './develop'
 import { ThemeProvider, ThemeConsumer, themePipe } from './theme'
 import { deepMerges } from './to-platform'
@@ -63,7 +63,7 @@ export interface RenderAddIn {
 export const renderAddIn: RenderAddIn = {
   propsAddInPipeline: (state, next) => next,
   styleAddInPipeline: (state, next) => next,
-  finishAddInClasses: []
+  finishAddInClasses: [whenUsed_FinishAddIns]
 }
 
 /************************
@@ -97,7 +97,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
 
     state: TRenderState = {
       codePropsPatch: {},
-      codeClassesPatch: {},
+      //codeClassesPatch: {},
     }
 
     render() {

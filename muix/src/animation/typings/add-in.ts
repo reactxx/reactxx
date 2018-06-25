@@ -10,7 +10,7 @@ export namespace TAddIn {
   *******************************************/
 
   //******************** Cross platform
-  export interface RulesetAddInX<T extends TCommonStyles.RulesetNativeIds, R extends Types.Shape>  { }
+  export interface RulesetAddInX<T extends TCommonStyles.RulesetNativeIds, R extends Types.Shape> extends TAddInBasic.RulesetAddInX<T, R> { }
   export interface SheetX<R extends Types.Shape = Types.Shape> { $animations?: TAnimation.SheetsX<getAnimation<R>> }
 
 
@@ -39,7 +39,7 @@ export namespace TAddIn {
   export interface GetVariant<R extends Types.Shape = Types.Shape> {
   }
 
-  export interface CodePropsWeb<R extends Types.Shape = Types.Shape>  {
+  export interface CodePropsWeb<R extends Types.Shape = Types.Shape> {
     animations?: TAnimation.DriversWeb<getAnimation<R>>
   }
 

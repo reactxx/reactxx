@@ -153,6 +153,7 @@
     <TypeScriptCompile Include="src\ks\common\animation\ae1.tsx" />
     <TypeScriptCompile Include="src\ks\common\animation\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\basic\pe8.tsx" />
+    <TypeScriptCompile Include="src\ks\common\component\ce3.tsx" />
     <TypeScriptCompile Include="src\ks\common\mediaq\me3.tsx" />
     <TypeScriptCompile Include="src\ks\common\basic\pe9.tsx" />
     <TypeScriptCompile Include="src\mediaq\common\withStyles.tsx" />

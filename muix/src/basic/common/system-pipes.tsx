@@ -3,7 +3,7 @@ import warning from 'warning'
 
 import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
-import { getPlatformSheet, deepMerges, toPlatformRulesets, immutableMerge, mergeRulesetsParts } from './to-platform'
+import { getPlatformSheet, deepMerges, toPlatformRulesets, immutableMerge, mergeRulesetsParts, toPlatformSheets } from './to-platform'
 import { TAddIn } from '../typings/add-in'
 import { TCommonStyles } from '../typings/common-styles'
 import { themePipe } from './theme'
@@ -186,7 +186,11 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     }
 
     // method, called in component code: ruleset merging
-    finalProps.system.mergeRulesets = (...rulesets: TCommon.RulesetFragmentsParts) => mergeRulesets(consolidePatches(codeClassesPatch), addInClasses['$whenUsed'] as any, rulesets)
+    finalProps.system.mergeRulesets = (...rulesets: TCommon.RulesetFragmentsParts) =>
+      mergeRulesets(
+        consolidePatches(codeClassesPatch),
+        addInClasses,
+        rulesets)
 
     // call component code
     return <CodeComponent {...finalProps as Types.CodeProps<R>} />
@@ -195,6 +199,20 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
   return { propsPipe, stylePipe, renderComponentPipe, cascadingProvider: CascadingProviderComponent as any as React.ComponentClass<Types.PropsX<R>> }
 
 }
+
+export const whenUsed_FinishAddIns = (addInClasses: {}) => {
+  // addIns = e.g. { root: { $whenUsed: [ { disabled: Types.RulesetX } ] } }
+  for (const p in addInClasses) {
+    const addInsp = addInClasses[p]
+    const $whenUsed: Array<{}> = addInsp && addInsp[$whenUsedPropName]
+    if (!$whenUsed) continue
+    // output: addIns.root.$whenUsed = e.g. { name: 'disabled', __fragments: [ {...} ] }
+    addInClasses[p][$whenUsedPropName] = toPlatformSheets(null, $whenUsed).codeClasses
+  }
+}
+
+
+const $whenUsedPropName = '$whenUsed'
 
 /************************
 * PRIVATE
@@ -221,27 +239,39 @@ const consolidePatches = (codeClassesPatch: TCommon.SheetPatch) => {
   return codeClassesPatchFinal
 }
 
-const mergeRulesets = (codeClassesPatch: TCommon.SheetPatchFinal, whenUsed /*$whenUsed = addInClasses['$whenUsed']*/: TCommon.SheetFragmentsData, rulesets: TCommon.RulesetFragmentsParts) => {
+const mergeRulesets = (codeClassesPatch: TCommon.SheetPatchFinal, addInClasses: TCommon.TAddIns, rulesets: TCommon.RulesetFragmentsParts) => {
 
   if (!rulesets || rulesets.length === 0) return null
 
+  // get used ruleset names (some of them could be name in addInClasses $whenUsed)
   let usedRulesetNames: {} = null
-  if (whenUsed)
-    rulesets.forEach((r: TCommon.RulesetFragments) => r.__fragments && r.name && (usedRulesetNames || (usedRulesetNames = {})) && (usedRulesetNames[r.name] = true))
+  if (addInClasses) rulesets.forEach((r: TCommon.RulesetFragments) => {
+    if (!r.__fragments || !r.name) return
+    (usedRulesetNames || (usedRulesetNames = {}))[r.name] = true
+})
 
-  if (!usedRulesetNames && !codeClassesPatch) return mergeRulesetsParts(rulesets)
+  if (!addInClasses && !codeClassesPatch) return mergeRulesetsParts(rulesets)
 
   // for every ruleset: apply patches and resolve "$whenUsed" addIn
   const finalRulesets = rulesets.map((r: TCommon.RulesetFragments) => {
     const name = r && r.__fragments && r.name
-    if (!name) return r
+    if (!name) return r 
+    // get patch
     const patch = codeClassesPatch && codeClassesPatch[name]
-    const used = usedRulesetNames && usedRulesetNames[name] && whenUsed[name]
+    // gen whenUses
+    const allWhenUses: TCommon.SheetFragmentsData = usedRulesetNames && addInClasses[name] && addInClasses[name][$whenUsedPropName]
+    let used = null // array of used whenUses
+    if (allWhenUses) for (const p in allWhenUses) {
+      if (!usedRulesetNames[p]) return // not used
+      if (!used) used = [...allWhenUses[p].__fragments] // first used
+      else Array.prototype.push(used, allWhenUses[p].__fragments) // second and more used
+    }
     if (!patch && !used) return r
+    // concat patch and whenUses
     return {
       __fragments: [
         ...r.__fragments,
-        ...(used && used.__fragments) || [],
+        ...used || [],
         ...patch || [],
       ]
     }
