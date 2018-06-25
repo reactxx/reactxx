@@ -110,7 +110,7 @@ export namespace Types {
   //type TMergeRulesetsWeb<T extends 'Web'> = (...rulesets) => TCommonStyles.RulesetWeb
   //type TMergeRulesets<T extends {}> = (...rulesets) => T
 
-  type TMergeRulesetsResult<T extends TCommonStyles.RulesetNativeIds | 'Web' | {}> =
+  export type TMergeRulesetsResult<T extends TCommonStyles.RulesetNativeIds | 'Web' | {}> =
     T extends TCommonStyles.RulesetNativeIds ? TCommonStyles.RulesetNative<T> :
     T extends 'Web' ? TCommonStyles.RulesetWeb : T
 

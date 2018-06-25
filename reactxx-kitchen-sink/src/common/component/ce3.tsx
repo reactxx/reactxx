@@ -120,7 +120,7 @@ const Section: React.SFC = ({ children }) => <View className={{ flexDirection: '
 *************************************************/
 
 const App: React.SFC = props => <ThemeProvider theme={theme}>
-  <Label $developer_flag>Label 1</Label>
+  <Label>Label 1</Label>
 </ThemeProvider>
 
 const App_: React.SFC = props => <ThemeProvider theme={theme}>

@@ -10,20 +10,22 @@ import { instanceOf } from 'prop-types';
 
 
 //****************************
-// PLATFORM SHEET
+// GET PLATFORM SHEET
 //****************************
 
 export const getPlatformSheet = (par: GetPlatformSheetPar) => {
   const { id, createSheetX, defaultClasses, sheetXPatch, variant, variantCacheId, themeContext: { $cache } } = par
+  // final sheet is from sheet, defaultClasses, cascading and style props (classes, className and style (for native only))
+  // sheet and defaultClasses could be cached
   const cacheId = typeof createSheetX !== 'function' ? '#static#' : !variant ? '#novariant#' : variantCacheId ? variantCacheId : null
   if (cacheId) {
-    // from theme cache (use defaultClasses only)
-    const cache = fromCache($cache, id, cacheId, () => toPlatform({ ...par, sheetXPatch: defaultClasses ? [defaultClasses] : null }))
-    //const cache = fromCache($cache, id, cacheId, () => toPlatform({ ...par }))
-    return toPlatformSheets(par.finishAddInClasses, cache, sheetXPatch)
+    // from theme cache (sheet and defaultClasses included in cache)
+    const cache = fromCache($cache, id, cacheId, () => create_toPlatform_sheet({ ...par, sheetXPatch: defaultClasses ? [defaultClasses] : null }))
+    return toPlatformSheets(cache, sheetXPatch, par.finishAddInClasses)
   } else {
+    // without cache ( including sheet and defaultClasses)
     const patch = sheetXPatch && defaultClasses ? [defaultClasses, ...sheetXPatch] : sheetXPatch ? sheetXPatch : defaultClasses ? [defaultClasses] : null
-    return toPlatform({ ...par, sheetXPatch: patch })
+    return create_toPlatform_sheet({ ...par, sheetXPatch: patch })
   }
 }
 
@@ -33,7 +35,16 @@ const fromCache = ($cache: Cache, id: number, variantCacheId: string, getter: ()
   return compCache[variantCacheId] || (compCache[variantCacheId] = mergeCacheParts(getter()))
 }
 
-const toPlatform = ({ finishAddInClasses, createSheetX, themeContext: { theme }, sheetXPatch, variant }: GetPlatformSheetPar) => {
+const mergeCacheParts = (cache: TCommon.SheetFragments) => {
+  for (const p in cache.codeClasses) {
+    const data = cache.codeClasses[p]
+    if (!data.__fragments) continue
+    data.__fragments = [mergeRulesetsParts(data.__fragments)]
+  }
+  return cache
+}
+
+const create_toPlatform_sheet = ({ finishAddInClasses, createSheetX, themeContext: { theme }, sheetXPatch, variant }: GetPlatformSheetPar) => {
   let sheet: Types.PartialSheetX
   if (typeof createSheetX === 'function') {
     try { sheet = createSheetX(theme, variant) }
@@ -44,7 +55,7 @@ const toPlatform = ({ finishAddInClasses, createSheetX, themeContext: { theme },
     }
   } else
     sheet = createSheetX
-  return toPlatformSheets(finishAddInClasses, null, [sheet, ...sheetXPatch || []])
+  return toPlatformSheets(null, [sheet, ...sheetXPatch || []], finishAddInClasses)
 }
 
 type Cache = { [variantId: string]: TCommon.SheetFragments }[]
@@ -56,62 +67,6 @@ interface GetPlatformSheetPar {
 }
 
 export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseDown : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
-
-//****************************
-// DEEP MERGE
-//****************************
-
-export const deepMerges = (target, ...sources) => {
-  sources.forEach(source => deepMerge(target, source))
-  return target
-}
-
-//simple deep merge
-export const deepMerge = (target, source) => {
-  if (!source) return target
-  if (isObject(target) && isObject(source))
-    for (const key in source) {
-      const sourceVal = source[key]
-      if (sourceVal === undefined) { delete target[key]; continue }
-      target[key] = isObjectLiteral(sourceVal) ? deepMerge(target[key] || {}, sourceVal) : sourceVal
-    }
-  else {
-    debugger
-    throw 'deepMerge: cannot merge object and non object'
-  }
-  return target
-}
-const isObject = item => item && typeof item === 'object' && !Array.isArray(item) && !item.$$typeof /*React component prop*/ && item.constructor !== item && typeof item['_interpolation'] != 'function' //HACK: typeof item['_interpolation'] != 'function' prevent to merge ReactNative's Animated.Value.interpolate prop
-const isObjectLiteral = item => isObject(item) && item.constructor !== item
-
-export const immutableMerge = (target, sources: {}[]) => {
-  // apply non object properties (objectProps[p]===false), accumulate object properties (objectProps[p]===[...])
-  const objectProps: { [propName: string]: Array<{}> } = {}
-  let res = target
-  sources.forEach(s => {
-    if (!s) return
-    if (res === target) res = { ...target }
-    for (const p in s) {
-      const val = s[p]
-      const isObj = isObject(val)
-      if (isObj) { // object prop, wait for merge
-        const objProps = objectProps[p] || (objectProps[p] = [])
-        objProps.push(val)
-      } else { // non object prop, last win
-        delete objectProps[p]
-        res[p] = val
-      }
-    }
-  })
-
-  // apply object properties
-  for (const p in objectProps) {
-    const objs = objectProps[p]
-    const targetVal = res[p]
-    res[p] = !targetVal && objs.length === 1 ? objs[0] : immutableMerge(targetVal || {}, objs)
-  }
-  return res
-}
 
 //****************************
 // TO PLATFORM RULESETS
@@ -127,7 +82,7 @@ export const toPlatformRulesets = (sources: Types.RulesetX[]) => {
 // TO PLATFORM SHEETS
 //****************************
 
-export const toPlatformSheets = (finishAddInClasses: ((addInClasses: {}) => void)[], cache: TCommon.SheetFragments /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
+export const toPlatformSheets = (cache: TCommon.SheetFragments /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/, finishAddInClasses?: ((addInClasses: {}) => void)[]) => {
   if (!sources || sources.length == 0) return cache
   const sheetData: TCommon.SheetFragments = {}
   if (cache && cache.codeClasses) {
@@ -187,61 +142,59 @@ export const toPlatformSheets = (finishAddInClasses: ((addInClasses: {}) => void
 
 }
 
-export const mergeCacheParts = (cache: TCommon.SheetFragments) => {
-  for (const p in cache.codeClasses) {
-    const data = cache.codeClasses[p]
-    if (!data.__fragments) continue
-    data.__fragments = [mergeRulesetsParts(data.__fragments)]
-  }
-  return cache
-}
-
+//****************************
+// MERGE RULESET PARTS
+//****************************
 // shallow merge with removing system props (name starts with '$')
 export const mergeRulesetsParts = (parts: TCommon.RulesetFragmentsParts) => {
   if (!parts || parts.length === 0) return null
 
-  // optimalization for just single part
-  if (parts.length === 1) {
-    let parts0 = parts[0] as TCommon.RulesetFragments
-    if (!parts0) return null
-    if (parts0.__fragments) {
-      if (parts0.__fragments.length === 1) { // single part is single item array
-        parts0 = parts0.__fragments[0] as TCommon.RulesetFragments
-        if (!parts0) return null
-      } else
-        return mergePartArray(parts0.__fragments) // single part is array
-    }
-    // just single part or single item array
-    const sysProps = Object.keys(parts0).filter(p => p.charAt(0) === '$') //system prop names
-    if (sysProps.length === 0) return parts0 // no sys prop => return part
-    // remove sys props from part
-    const res = Object.assign(parts0)
-    sysProps.forEach(p => delete res[p])
-    return res
-  }
+  const simple = parts.length === 1 && mergeSimple(parts[0] as TCommon.RulesetFragments)
+  if (simple) return simple.value as TCommonStyles.Ruleset
 
-  return mergePartArray(parts)
+  const res: TCommonStyles.Ruleset = {}
+  mergePartArray(parts, res)
+  return res
+}
+
+const mergePartArray = (parts: TCommon.RulesetFragmentsParts, res: {}) => {
+  if (!parts) return
+  parts.forEach(part => mergePart(part, res))
 }
 
 const mergePart = (part: TCommon.RulesetFragmentsPart, res: {}) => {
   if (!part) return
-  if ((part as TCommon.RulesetFragments).__fragments) {
-    mergePartArray((part as TCommon.RulesetFragments).__fragments, res)
+  // Array
+  const arr: {}[] = (part as TCommon.RulesetFragments).__fragments || (Array.isArray(part) && part)
+  if (arr) {
+    mergePartArray(arr, res)
     return
   }
+  // Ruleset as object
   for (const p in part) {
-    if (p.charAt(0) === '$') continue
+    if (p.charAt(0) === '$') continue // ignore system props
     const partp = part[p], resp = res[p], isObjectPartp = isObject(partp), isObjectResp = isObject(resp)
-    res[p] = isObjectPartp ? mergeRulesetsParts(isObjectResp ? [resp, partp] : [partp]/* merge non-object with object:  */) : partp
+    if (isObjectPartp && isObjectResp) res[p] = deepMerges({}, resp, partp)
+    else res[p] = partp
   }
 }
 
-const mergePartArray = (parts: TCommon.RulesetFragmentsParts, res?: {}) => {
-  if (!res) res = {}
-  parts.forEach(part => mergePart(part, res))
-  return res
+const mergeSimple = (part: TCommon.RulesetFragments) => {
+  const fragments = part && part.__fragments
+  if (!fragments || fragments.length > 1) return null
+  if (fragments.length === 0) return { value: null }
+  const part0 = fragments[0]
+  const sysProps = Object.keys(part0).filter(p => p.charAt(0) === '$') //system prop names
+  if (sysProps.length === 0) return { value: part0 } // no sys prop => return part
+  const res = Object.assign(part0)
+  sysProps.forEach(p => delete res[p])
+  return { value: res }
 }
 
+
+//****************************
+// PUSH RULESET PARTS
+//****************************
 
 const partProps = { $before: true, $after: true, $native: true, $web: true }
 
@@ -266,3 +219,60 @@ const pushRulesetParts = (ruleset: Types.RulesetX, arr: Array<any>, getAddIns: (
   pushRulesetPart($after, arr, getAddIns)
   pushRulesetPart($after && (window.isWeb ? $after.$web : $after.$native), arr, getAddIns)
 }
+
+//****************************
+// DEEP MERGE
+//****************************
+
+export const deepMerges = (target, ...sources) => {
+  sources.forEach(source => deepMerge(target, source))
+  return target
+}
+
+//simple deep merge
+export const deepMerge = (target, source) => {
+  if (!source) return target
+  if (isObject(target) && isObject(source))
+    for (const key in source) {
+      const sourceVal = source[key]
+      if (sourceVal === undefined) { delete target[key]; continue }
+      target[key] = isObjectLiteral(sourceVal) ? deepMerge(target[key] || {}, sourceVal) : sourceVal
+    }
+  else {
+    debugger
+    throw 'deepMerge: cannot merge object and non object'
+  }
+  return target
+}
+const isObject = item => item && typeof item === 'object' && !Array.isArray(item) && !item.$$typeof /*React component prop*/ && item.constructor !== item && typeof item['_interpolation'] != 'function' //HACK: typeof item['_interpolation'] != 'function' prevent to merge ReactNative's Animated.Value.interpolate prop
+const isObjectLiteral = item => isObject(item) && item.constructor !== item
+
+export const immutableMerge = (target, sources: {}[]) => {
+  // apply non object properties (objectProps[p]===false), accumulate object properties (objectProps[p]===[...])
+  const objectProps: { [propName: string]: Array<{}> } = {}
+  let res = target
+  sources.forEach(s => {
+    if (!s) return
+    if (res === target) res = { ...target }
+    for (const p in s) {
+      const val = s[p]
+      const isObj = isObject(val)
+      if (isObj) { // object prop, wait for merge
+        const objProps = objectProps[p] || (objectProps[p] = [])
+        objProps.push(val)
+      } else { // non object prop, last win
+        delete objectProps[p]
+        res[p] = val
+      }
+    }
+  })
+
+  // apply object properties
+  for (const p in objectProps) {
+    const objs = objectProps[p]
+    const targetVal = res[p]
+    res[p] = !targetVal && objs.length === 1 ? objs[0] : immutableMerge(targetVal || {}, objs)
+  }
+  return res
+}
+

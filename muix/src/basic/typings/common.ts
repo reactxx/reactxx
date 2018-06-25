@@ -74,8 +74,9 @@ export namespace TCommon {
   //****************************
   // PLATFORM SHEET
   //****************************
-  export type Fragments = {}[]
-  export type RulesetFragmentsPart = {} | RulesetFragments
+  export type Fragment = {}
+  export type Fragments = Fragment[]
+  export type RulesetFragmentsPart = Fragment | RulesetFragments | Fragments
   export type RulesetFragmentsParts = RulesetFragmentsPart[]
 
   export interface RulesetFragments {

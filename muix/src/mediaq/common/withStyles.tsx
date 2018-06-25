@@ -39,7 +39,7 @@ export const finishAddIns = (addInClasses: { [rulesetName: string]: { $mediaq?: 
     const $mediaq = addInsp && addInsp.$mediaq as {}[] // input type
     if (!$mediaq) continue
     // output: addIns.root.$mediaq = e.g. { name: '480-1024', __fragments: [ {color: 'red', $web: {...}}, {':hover: {}'} ] }
-    addInClasses[p].$mediaq = toPlatformSheets(null, null, $mediaq).codeClasses // convert to output type
+    addInClasses[p].$mediaq = toPlatformSheets(null, $mediaq).codeClasses // convert to output type
   }
 }
 

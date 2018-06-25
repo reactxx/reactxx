@@ -189,11 +189,19 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     }
 
     // method, called in component code: ruleset merging
-    finalProps.system.mergeRulesets = (...rulesets: TCommon.RulesetFragmentsParts) =>
-      mergeRulesets(
+    finalProps.system.mergeRulesets = (...rulesets: TCommon.RulesetFragmentsParts) => {
+      const res = mergeRulesets(
         consolidePatches(codeClassesPatch),
         addInClasses,
-        rulesets)
+        rulesets) as Types.TMergeRulesetsResult<any>
+      if (addInProps.$developer_flag) {
+        console.log(
+          `### mergeRulesets for ${displayName}`,
+          res
+        )
+      }
+      return res
+    }
 
     //console.log('*** render code: ', renderState.$developer_id)
 
@@ -212,7 +220,7 @@ export const whenUsedFinishAddIns = (addInClasses: {}) => {
     const $whenUsed: Array<{}> = addInsp && addInsp[$whenUsedPropName]
     if (!$whenUsed) continue
     // output: addIns.root.$whenUsed = e.g. { name: 'disabled', __fragments: [ {...} ] }
-    addInClasses[p][$whenUsedPropName] = toPlatformSheets(null, null, $whenUsed).codeClasses
+    addInClasses[p][$whenUsedPropName] = toPlatformSheets(null, $whenUsed).codeClasses
   }
 }
 
@@ -236,7 +244,7 @@ const consolidePatches = (codeClassesPatch: TCommon.SheetPatch) => {
       if (!final) codeClassesPatchFinal[rulesetName] = addInp //first addIn[rulesetName] => use it
       else if (arrayCanModify[rulesetName]) Array.prototype.push.apply(final, addInp) // > second => modify result
       else { // second => concat first and second to new array
-        codeClassesPatchFinal[rulesetName] = final.concat(addInp) 
+        codeClassesPatchFinal[rulesetName] = final.concat(addInp)
         arrayCanModify[rulesetName] = true
       }
     }
@@ -245,7 +253,7 @@ const consolidePatches = (codeClassesPatch: TCommon.SheetPatch) => {
 }
 
 const mergeRulesets = (codeClassesPatch: TCommon.SheetPatchFinal, addInClasses: TCommon.TAddIns, rulesets: TCommon.RulesetFragmentsParts) => {
-  
+
   if (!rulesets || rulesets.length === 0) return null
 
   // get used ruleset names (some of them could apear in addInClasses $whenUsed)
@@ -253,14 +261,14 @@ const mergeRulesets = (codeClassesPatch: TCommon.SheetPatchFinal, addInClasses: 
   if (addInClasses) rulesets.forEach((r: TCommon.RulesetFragments) => {
     if (!r || !r.__fragments || !r.name) return
     (usedRulesetNames || (usedRulesetNames = {}))[r.name] = true
-})
+  })
 
   if (!usedRulesetNames && !codeClassesPatch) return mergeRulesetsParts(rulesets)
 
   // for every ruleset: apply patches and resolve "$whenUsed" addIn
   const finalRulesets = rulesets.map((r: TCommon.RulesetFragments) => {
     const name = r && r.__fragments && r.name
-    if (!name) return r 
+    if (!name) return r
     // get patch
     const patch = codeClassesPatch && codeClassesPatch[name]
     // gen whenUses
