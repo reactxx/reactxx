@@ -15,7 +15,6 @@ export const modifyRuleset = (items: TMediaQ.RulesetDecoded[]) => {
   items.forEach(it => {
     if (!it.from.active || it.to.active) return
     Array.prototype.push.apply(res, it.ruleset)
-    //deepMerge(res, it.ruleset)
   })
   return res
 }

@@ -134,7 +134,10 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     if (toMergeStylesX) system.style = toPlatformRulesets(toMergeStylesX)
 
     // **** sheet patch (for native: style included)
-    const toMergeSheetCreators = [...accumulatedStylesFromProps.classes || null, ...accumulatedStylesFromProps.className.map(className => ({ root: className })), ... (window.isWeb ? [] : accumulatedStylesFromProps.style.map(style => ({ root: style })))]
+    const toMergeSheetCreators = [
+      ...accumulatedStylesFromProps.classes || null,
+      ...accumulatedStylesFromProps.className.map(className => ({ root: className })),
+      ... (window.isWeb ? [] : accumulatedStylesFromProps.style.map(style => ({ root: style })))]
     const sheetXPatch: Types.PartialSheetX[] = toMergeSheetCreators.length === 0 ? null : toMergeSheetCreators.map(creator => expandCreator(creator))
     const defaultClasses: Types.PartialSheetX = !defaultPropsStyles ? null : typeof defaultPropsStyles.classes === 'function' ? expandCreator(defaultPropsStyles.classes) : defaultPropsStyles.classes
 
@@ -229,9 +232,9 @@ const consolidePatches = (codeClassesPatch: TCommon.SheetPatch) => {
       let final = codeClassesPatchFinal[rulesetName], addInp = addIn[rulesetName]
       // optimize merging ruleset's fragments
       if (!final) codeClassesPatchFinal[rulesetName] = addInp //first addIn[rulesetName] => use it
-      else if (arrayCanModify[rulesetName]) Array.prototype.push.apply(final, addInp) // thirdth and more addIn[rulesetName] => modify 'final'
-      else { // second addIn[rulesetName]
-        codeClassesPatchFinal[rulesetName] = [...final, ...addInp] // second => concat first and second
+      else if (arrayCanModify[rulesetName]) Array.prototype.push.apply(final, addInp) // > second => modify result
+      else { // second => concat first and second to new array
+        codeClassesPatchFinal[rulesetName] = final.concat(addInp) 
         arrayCanModify[rulesetName] = true
       }
     }
@@ -240,17 +243,17 @@ const consolidePatches = (codeClassesPatch: TCommon.SheetPatch) => {
 }
 
 const mergeRulesets = (codeClassesPatch: TCommon.SheetPatchFinal, addInClasses: TCommon.TAddIns, rulesets: TCommon.RulesetFragmentsParts) => {
-
+  
   if (!rulesets || rulesets.length === 0) return null
 
-  // get used ruleset names (some of them could be name in addInClasses $whenUsed)
+  // get used ruleset names (some of them could apear in addInClasses $whenUsed)
   let usedRulesetNames: {} = null
   if (addInClasses) rulesets.forEach((r: TCommon.RulesetFragments) => {
-    if (!r.__fragments || !r.name) return
+    if (!r || !r.__fragments || !r.name) return
     (usedRulesetNames || (usedRulesetNames = {}))[r.name] = true
 })
 
-  if (!addInClasses && !codeClassesPatch) return mergeRulesetsParts(rulesets)
+  if (!usedRulesetNames && !codeClassesPatch) return mergeRulesetsParts(rulesets)
 
   // for every ruleset: apply patches and resolve "$whenUsed" addIn
   const finalRulesets = rulesets.map((r: TCommon.RulesetFragments) => {
@@ -259,19 +262,21 @@ const mergeRulesets = (codeClassesPatch: TCommon.SheetPatchFinal, addInClasses: 
     // get patch
     const patch = codeClassesPatch && codeClassesPatch[name]
     // gen whenUses
-    const allWhenUses: TCommon.SheetFragmentsData = usedRulesetNames && addInClasses[name] && addInClasses[name][$whenUsedPropName]
-    let used = null // array of used whenUses
-    if (allWhenUses) for (const p in allWhenUses) {
+    const $whenUses: TCommon.SheetFragmentsData = usedRulesetNames && addInClasses[name] && addInClasses[name][$whenUsedPropName]
+    let $whenUsedPatch: {}[] = null // fragments of used $whenUses
+    if ($whenUses) for (const p in $whenUses) {
       if (!usedRulesetNames[p]) return // not used
-      if (!used) used = [...allWhenUses[p].__fragments] // first used
-      else Array.prototype.push(used, allWhenUses[p].__fragments) // second and more used
+      let isSecond = true
+      if (!$whenUsedPatch) $whenUsedPatch = $whenUses[p].__fragments // first
+      else if (isSecond) { $whenUsedPatch = $whenUsedPatch.concat($whenUses[p].__fragments); isSecond = false } // second
+      else Array.prototype.push($whenUsedPatch, $whenUses[p].__fragments) // > second
     }
-    if (!patch && !used) return r
+    if (!patch && !$whenUsedPatch) return r
     // concat patch and whenUses
     return {
       __fragments: [
         ...r.__fragments,
-        ...used || [],
+        ...$whenUsedPatch || [],
         ...patch || [],
       ]
     }
