@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, themePipe, renderAddIn, TRenderState as TRenderStateBasic, withStyles, deepMerges } from 'reactxx-basic'
+import { TCommon, ThemeProvider, themePipe, RenderAddIn, TRenderState as TRenderStateBasic, withStyles, deepMerges, whenUsedFinishAddIns } from 'reactxx-basic'
 import { animations, TAnimation } from 'reactxx-animation'
 
 import { Types } from '../typings/types'
@@ -21,15 +21,12 @@ export interface TRenderState extends TRenderStateBasic {
 * ADDINS
 *************************/
 
-export const afterToPlatform = (state: TRenderState, next) =>
+export const stylePipe = (state: TRenderState, next) =>
   animations( // process animation $animations part of sheet
     () => state.addInClasses && state.addInClasses.$animations as TAnimation.SheetsX,
     animations => state.finalProps.system.animations = animations,
     next
   )
-
-// after converting props and sheet to platform dependent form
-renderAddIn.styleAddInPipeline = afterToPlatform
 
 export const finishAddIns = (addInClasses) => {
   const $anims: TAddIn.SheetX[] = addInClasses.$animations
@@ -37,7 +34,11 @@ export const finishAddIns = (addInClasses) => {
   addInClasses.$animations = $anims.length === 1 ? $anims[0] : deepMerges({}, ...$anims)
 }
 
-renderAddIn.finishAddInClasses.push(finishAddIns)
+const renderAddIn: RenderAddIn = {
+  propsAddInPipeline: (renderState, next) => next,
+  styleAddInPipeline: stylePipe,
+  finishAddInClasses: [whenUsedFinishAddIns, finishAddIns],
+}
 
 /************************
 * WITH STYLES CREATOR
@@ -46,7 +47,7 @@ renderAddIn.finishAddInClasses.push(finishAddIns)
 export const withStylesCreator =
   <R extends Types.Shape, TStatic extends {} = {}>
     (displayName: string, sheetCreator: Types.SheetCreatorX<R>, component: Types.CodeComponentType<R>, options?: Types.WithStyleOptions_ComponentX<R>) =>
-    (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStyles<R, TStatic>(displayName, sheetCreator, options, overrideOptions)(component) as React.ComponentClass<Types.PropsX<R>> & TProvider<R> & TStatic
+    (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStyles<R, TStatic>(displayName, sheetCreator, renderAddIn, options, overrideOptions)(component) as React.ComponentClass<Types.PropsX<R>> & TProvider<R> & TStatic
 
 export interface TProvider<R extends Types.Shape> { Provider: React.ComponentClass<Types.PropsX<R>> }
 

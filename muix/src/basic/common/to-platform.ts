@@ -5,7 +5,6 @@ import warning from 'warning'
 import { TCommonStyles } from '../typings/common-styles'
 import { TCommon } from '../typings/common'
 import { Types } from '../typings/types'
-import { renderAddIn } from './withStyles'
 import { TAddIn } from '../typings/add-in';
 import { instanceOf } from 'prop-types';
 
@@ -21,7 +20,7 @@ export const getPlatformSheet = (par: GetPlatformSheetPar) => {
     // from theme cache (use defaultClasses only)
     const cache = fromCache($cache, id, cacheId, () => toPlatform({ ...par, sheetXPatch: defaultClasses ? [defaultClasses] : null }))
     //const cache = fromCache($cache, id, cacheId, () => toPlatform({ ...par }))
-    return toPlatformSheets(cache, sheetXPatch)
+    return toPlatformSheets(par.finishAddInClasses, cache, sheetXPatch)
   } else {
     const patch = sheetXPatch && defaultClasses ? [defaultClasses, ...sheetXPatch] : sheetXPatch ? sheetXPatch : defaultClasses ? [defaultClasses] : null
     return toPlatform({ ...par, sheetXPatch: patch })
@@ -34,7 +33,7 @@ const fromCache = ($cache: Cache, id: number, variantCacheId: string, getter: ()
   return compCache[variantCacheId] || (compCache[variantCacheId] = mergeCacheParts(getter()))
 }
 
-const toPlatform = ({ createSheetX, themeContext: { theme }, sheetXPatch, variant }: GetPlatformSheetPar) => {
+const toPlatform = ({ finishAddInClasses, createSheetX, themeContext: { theme }, sheetXPatch, variant }: GetPlatformSheetPar) => {
   let sheet: Types.PartialSheetX
   if (typeof createSheetX === 'function') {
     try { sheet = createSheetX(theme, variant) }
@@ -45,7 +44,7 @@ const toPlatform = ({ createSheetX, themeContext: { theme }, sheetXPatch, varian
     }
   } else
     sheet = createSheetX
-  return toPlatformSheets(null, [sheet, ...sheetXPatch || []])
+  return toPlatformSheets(finishAddInClasses, null, [sheet, ...sheetXPatch || []])
 }
 
 type Cache = { [variantId: string]: TCommon.SheetFragments }[]
@@ -53,6 +52,7 @@ type Cache = { [variantId: string]: TCommon.SheetFragments }[]
 interface GetPlatformSheetPar {
   id: number; createSheetX: Types.SheetCreatorX; themeContext: TCommon.ThemeContext; sheetXPatch: Types.PartialSheetX[];
   defaultClasses?: Types.PartialSheetX; variant; variantCacheId: string;
+  finishAddInClasses: ((addInClasses: {}) => void)[];
 }
 
 export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseDown : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
@@ -127,14 +127,14 @@ export const toPlatformRulesets = (sources: Types.RulesetX[]) => {
 // TO PLATFORM SHEETS
 //****************************
 
-export const toPlatformSheets = (cache: TCommon.SheetFragments /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
+export const toPlatformSheets = (finishAddInClasses: ((addInClasses: {}) => void)[], cache: TCommon.SheetFragments /*platform format of sheet and addIns*/, sources: Types.PartialSheetX[] /*X format*/) => {
   if (!sources || sources.length == 0) return cache
   const sheetData: TCommon.SheetFragments = {}
   if (cache && cache.codeClasses) {
     sheetData.codeClasses = {}
     for (const p in cache.codeClasses)
       sheetData.codeClasses[p] = { name: p, __fragments: [...cache.codeClasses[p].__fragments] }
-  } 
+  }
   sources.forEach(src => {
     for (const p in src) {
 
@@ -180,7 +180,7 @@ export const toPlatformSheets = (cache: TCommon.SheetFragments /*platform format
   })
 
   // convert addIns to platform format
-  if (sheetData.addInClasses) renderAddIn.finishAddInClasses.forEach(finish => finish(sheetData.addInClasses))
+  if (sheetData.addInClasses && finishAddInClasses) finishAddInClasses.forEach(finish => finish(sheetData.addInClasses))
   else sheetData.addInClasses = cache && cache.addInClasses
 
   return sheetData

@@ -7,7 +7,7 @@ import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
 
-import { getSystemPipes, whenUsed_FinishAddIns } from './system-pipes'
+import { getSystemPipes, whenUsedFinishAddIns } from './system-pipes'
 import { renderCounterPipe } from './develop'
 import { ThemeProvider, ThemeConsumer, themePipe } from './theme'
 import { deepMerges } from './to-platform'
@@ -47,6 +47,8 @@ export interface TRenderState {
   // - merges codeClassesPatch to codeClasses, save result to finalProps.system.classes
   // - render code component
 
+  $developer_id?: string  
+
 }
 
 /************************
@@ -54,16 +56,16 @@ export interface TRenderState {
 *************************/
 // addIn configuration type
 export interface RenderAddIn {
-  propsAddInPipeline: (state: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
-  styleAddInPipeline: (state: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
+  propsAddInPipeline: (renderState: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
+  styleAddInPipeline: (renderState: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
   finishAddInClasses: ((addInClasses: {}) => void)[]
 }
 
 // empty addIn configuration
-export const renderAddIn: RenderAddIn = {
-  propsAddInPipeline: (state, next) => next,
-  styleAddInPipeline: (state, next) => next,
-  finishAddInClasses: [whenUsed_FinishAddIns]
+const renderAddIn: RenderAddIn = {
+  propsAddInPipeline: (renderState, next) => next,
+  styleAddInPipeline: (renderState, next) => next,
+  finishAddInClasses: [whenUsedFinishAddIns]
 }
 
 /************************
@@ -71,9 +73,9 @@ export const renderAddIn: RenderAddIn = {
 *************************/
 
 export const withStylesCreator = <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, codeComponent: Types.CodeComponentType<R>) =>
-  (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStylesLow<R, TStatic>(displayName, sheetCreator, overrideOptions)(codeComponent)
+  (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStylesLow<R, TStatic>(displayName, sheetCreator, renderAddIn, overrideOptions)(codeComponent)
 
-const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, options?: Types.WithStyleOptions_ComponentX<R>, overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => (CodeComponent: Types.CodeComponentType<R>) => {
+const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, addIns: RenderAddIn, options?: Types.WithStyleOptions_ComponentX<R>, overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => (CodeComponent: Types.CodeComponentType<R>) => {
 
   type TPropsX = Types.PropsX<R>
 
@@ -88,19 +90,20 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
 
   //**** PROPERTY CASCADING 
 
-  const { propsPipe, stylePipe, renderComponentPipe, cascadingProvider } = getSystemPipes<R>(id, displayName, sheetCreator, options)
+  const { propsPipe, stylePipe, renderComponentPipe, cascadingProvider } = getSystemPipes<R>(id, displayName, sheetCreator, addIns.finishAddInClasses, options)
 
   //****************************
   // Styled COMPONENT
   //****************************
-  class Styled extends React.Component<Types.PropsX, TRenderState> {
+  class Styled extends React.Component<Types.PropsX> {
 
-    state: TRenderState = {
+    renderState: TRenderState = {
       codePropsPatch: {},
-      //codeClassesPatch: {},
+      $developer_id: displayName + ' *' + compIdCounter++
     }
 
     render() {
+      //console.log('*** render: ', this.renderState.$developer_id)
       if (DEV_MODE && this.props.$developer_flag)
         debugger
       return this.renderPipeline()
@@ -109,17 +112,17 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
     renderPipeline =
       themePipe(
         () => ({ withTheme: options.withTheme }),
-        themeContext => this.state.themeContext = themeContext,
+        themeContext => this.renderState.themeContext = themeContext,
         propsPipe(
-          () => ({ props: this.props, renderState: this.state }),
-          ({ platformProps, addInProps }) => { this.state.platformProps = platformProps; this.state.addInProps = addInProps },
-          renderAddIn.propsAddInPipeline(this.state,
-            stylePipe(this.state,
-              renderAddIn.styleAddInPipeline(this.state,
+          () => ({ props: this.props, renderState: this.renderState }),
+          ({ platformProps, addInProps }) => { this.renderState.platformProps = platformProps; this.renderState.addInProps = addInProps },
+          addIns.propsAddInPipeline(this.renderState,
+            stylePipe(this.renderState,
+              addIns.styleAddInPipeline(this.renderState,
                 renderCounterPipe(
-                  () => ({ developer_flag: this.state.addInProps.$developer_flag }),
-                  count => { this.state.addInProps.$developer_RenderCounter = count },
-                  renderComponentPipe(this.state, CodeComponent)
+                  () => ({ developer_flag: this.renderState.addInProps.$developer_flag }),
+                  count => { this.renderState.addInProps.$developer_RenderCounter = count },
+                  renderComponentPipe(this.renderState, CodeComponent)
                 )
               )
             )
@@ -131,6 +134,32 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
       return !nextProps.$constant
     }
 
+    //// *** tracing for developer
+    //componentDidCatch(error, info) {
+    //  // Display fallback UI
+    //  //this.setState({ hasError: true });
+    //  // You can also log the error to an error reporting service
+    //  console.error('**** ERROR: ', this.renderState.$developer_id, error, info)
+    //}
+
+    //constructor(props) {
+    //  super(props)
+    //  //if (props.$developer_flag) debugger
+    //}
+
+    //static getDerivedStateFromProps(nextProps, prevState): any {
+    //  //if (nextProps.$developer_flag) debugger
+    //  return null
+    //}
+
+    //componentWillUnmount() {
+    //  //if (DEV_MODE && this.props.$developer_flag) debugger
+    //}
+
+    //developer_trace(msg: string) {
+
+    //}
+
     public static Provider = cascadingProvider
     public static displayName = displayName
   }
@@ -140,10 +169,11 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
 
 }
 
-export const withStyles: <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, options?, overrideOptions?) => (CodeComponent) => any = withStylesLow
+export const withStyles: <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, addIns: RenderAddIn, options?, overrideOptions?) => (CodeComponent) => any = withStylesLow
 
 export interface TProvider<R extends Types.Shape> { Provider: React.ComponentClass<Types.PropsX<R>> }
 
 export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()).join('$')
 
 let compCounter = 0
+let compIdCounter = 0

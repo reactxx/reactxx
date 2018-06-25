@@ -225,7 +225,7 @@ const button = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as 
 
 //const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer/>}>
 const App: React.SFC = () => <AppContainer>
-  <ResponsibleDrawer drawer={drawer} >
+  <ResponsibleDrawer drawer={drawer} $developer_flag>
     <Content />
   </ResponsibleDrawer>
 </AppContainer>
@@ -243,20 +243,22 @@ const Drawer: React.SFC = () => <ScrollView $constant classes={{ container: { fl
 
 const drawer = <Drawer />
 
-const Content: React.SFC = () => <ScrollView $constant classes={{ container: { flex: 1 } }}> {/* content */}
-  <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}>
-    {/* re-render ResponsibleDrawer.LayoutChanged only when Provider notifies (hide x display it): */}
-    <ResponsibleDrawer.LayoutChanged>
-      {({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />}
-    </ResponsibleDrawer.LayoutChanged>
-    <Text numberOfLines={1} className={{ flexGrow: 1, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(10)}</Text>
-    <Text className={{ flexShrink: 0, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(2)}</Text>
-  </View>
-  <Text className={{ fontSize: 18, margin: 40, color: 'red' }}>
-    {window.isWeb ? 'Change browser window width' : 'Rotate your device'} to see different Drawer's behavior for MOBILE, TABLET and DESKTOP
+const Content: React.SFC = () => {
+  return <ScrollView $constant classes={{ container: { flex: 1 } }}> {/* content */}
+    <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}>
+      {/* re-render ResponsibleDrawer.LayoutChanged only when Provider notifies (hide x display it): */}
+      <ResponsibleDrawer.LayoutChanged>
+        {({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />}
+      </ResponsibleDrawer.LayoutChanged>
+      <Text numberOfLines={1} className={{ flexGrow: 1, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(10)}</Text>
+      <Text className={{ flexShrink: 0, color: 'white', fontWeight: 'bold', marginLeft: 10, }}>{LoremIpsum(2)}</Text>
+    </View>
+    <Text className={{ fontSize: 18, margin: 40, color: 'red' }}>
+      {window.isWeb ? 'Change browser window width' : 'Rotate your device'} to see different Drawer's behavior for MOBILE, TABLET and DESKTOP
     </Text>
-  {/* just for fun: change to lightgray color for 800px-1248px media width */}
-  <Text $developer_flag className={{ padding: 10, $mediaq: { '800-1248': { color: 'lightgray', $web: { ':hover': { color: 'gray'}} } } }} >{LoremIpsum(80)}</Text>
-</ScrollView>
+    {/* just for fun: change to lightgray color for 800px-1248px media width */}
+    <Text className={{ padding: 10, $mediaq: { '800-1248': { color: 'lightgray', $web: { ':hover': { color: 'gray' } } } } }} >{LoremIpsum(80)}</Text>
+  </ScrollView>
+}
 
 export default App

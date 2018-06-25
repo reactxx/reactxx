@@ -17,7 +17,7 @@ export const LoremIpsum = (words: 2 | 5 | 10 | 20 | 40 | 80 | 160) => {
 
 //Helper components, counts number of its render() method calls
 export class RenderCounter extends React.Component<{ children: (count: number) => React.ReactNode}> {
-  counter = 0
+  counter = 1
   render() {
     this.counter++
     return this.props.children(this.counter)

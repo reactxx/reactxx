@@ -1,9 +1,9 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, themePipe, renderAddIn, withStyles, TRenderState as TRenderStateBasic } from 'reactxx-basic'
-import { animations, TAnimation, finishAddIns as animationFinishAddIns, afterToPlatform as animationAfterToPlatform } from 'reactxx-animation'
-import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQSheet, afterToPlatform as mediaQAfterToPlatform, beforeToPlatform as mediaQBeforeToPlatform, finishAddIns as mediaFinishAddIns } from 'reactxx-mediaq'
+import { TCommon, ThemeProvider, themePipe, RenderAddIn, withStyles, TRenderState as TRenderStateBasic, whenUsedFinishAddIns } from 'reactxx-basic'
+import { animations, TAnimation, finishAddIns as animationFinishAddIns, stylePipe as animationStylePipe } from 'reactxx-animation'
+import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQSheet, stylePipe as mediaQStylePipe, propsPipe as mediaQPropsPipe, finishAddIns as mediaFinishAddIns } from 'reactxx-mediaq'
 import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
 
 import { Types } from '../typings/types'
@@ -26,14 +26,12 @@ export interface TRenderState extends TRenderStateBasic {
 * ADDINS
 *************************/
 
-// before converting props and sheet to platform dependent form
-renderAddIn.propsAddInPipeline = mediaQBeforeToPlatform
+const renderAddIn: RenderAddIn = {
+  propsAddInPipeline: mediaQPropsPipe,
+  styleAddInPipeline: (state: TRenderState, next) => mediaQStylePipe(state, animationStylePipe(state, next)),
+  finishAddInClasses: [whenUsedFinishAddIns, animationFinishAddIns, mediaFinishAddIns],
+}
 
-// after converting props and sheet to platform dependent form
-renderAddIn.styleAddInPipeline = (state: TRenderState, next) => mediaQAfterToPlatform(state, animationAfterToPlatform(state, next))
-
-renderAddIn.finishAddInClasses.push(animationFinishAddIns)
-renderAddIn.finishAddInClasses.push(mediaFinishAddIns)
 
 
 /************************
@@ -43,7 +41,7 @@ renderAddIn.finishAddInClasses.push(mediaFinishAddIns)
 export const withStylesCreator =
   <R extends Types.Shape, TStatic extends {} = {}>
     (displayName: string, sheetCreator: Types.SheetCreatorX<R>, component: Types.CodeComponentType<R>, options?: Types.WithStyleOptions_ComponentX<R>) =>
-    (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStyles<R, TStatic>(displayName, sheetCreator, options, overrideOptions)(component) as React.ComponentClass<Types.PropsX<R>> & TProvider<R> & TStatic
+    (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStyles<R, TStatic>(displayName, sheetCreator, renderAddIn, options, overrideOptions)(component) as React.ComponentClass<Types.PropsX<R>> & TProvider<R> & TStatic
 
 export interface TProvider<R extends Types.Shape> { Provider: React.ComponentClass<Types.PropsX<R>> }
 

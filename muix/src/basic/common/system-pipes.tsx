@@ -14,7 +14,7 @@ export interface FinalizePropsOutput {
   addInProps: TAddIn.PropsX
 }
 
-export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: string, sheetCreator: Types.SheetCreatorX<R>, options: Types.WithStyleOptions_ComponentX<R>) => {
+export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: string, sheetCreator: Types.SheetCreatorX<R>, finishAddInClasses: ((addInClasses: {}) => void)[], options: Types.WithStyleOptions_ComponentX<R>) => {
 
   const defaultPropsStyles: Types.StyleFromProps = options.defaultProps && getStyleFromProps(options.defaultProps)
 
@@ -143,7 +143,7 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
 
     // **** apply sheet patch to sheet:
     // call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
-    const { codeClasses, addInClasses } = getPlatformSheet({ id, createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
+    const { codeClasses, addInClasses } = getPlatformSheet({ id, finishAddInClasses, createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
     renderState.addInClasses = addInClasses //e.g {$animations:..., root: {$mediaq:...}}
     renderState.finalProps.system.classes = codeClasses
   }
@@ -195,6 +195,8 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
         addInClasses,
         rulesets)
 
+    //console.log('*** render code: ', renderState.$developer_id)
+
     // call component code
     return <CodeComponent {...finalProps as Types.CodeProps<R>} />
   }
@@ -203,14 +205,14 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
 
 }
 
-export const whenUsed_FinishAddIns = (addInClasses: {}) => {
+export const whenUsedFinishAddIns = (addInClasses: {}) => {
   // addIns = e.g. { root: { $whenUsed: [ { disabled: Types.RulesetX } ] } }
   for (const p in addInClasses) {
     const addInsp = addInClasses[p]
     const $whenUsed: Array<{}> = addInsp && addInsp[$whenUsedPropName]
     if (!$whenUsed) continue
     // output: addIns.root.$whenUsed = e.g. { name: 'disabled', __fragments: [ {...} ] }
-    addInClasses[p][$whenUsedPropName] = toPlatformSheets(null, $whenUsed).codeClasses
+    addInClasses[p][$whenUsedPropName] = toPlatformSheets(null, null, $whenUsed).codeClasses
   }
 }
 
