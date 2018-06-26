@@ -156,6 +156,8 @@
     <TypeScriptCompile Include="src\ks\common\component\ce3.tsx" />
     <TypeScriptCompile Include="src\ks\common\mediaq\me3.tsx" />
     <TypeScriptCompile Include="src\ks\common\basic\pe9.tsx" />
+    <TypeScriptCompile Include="src\material-ui\index.ts" />
+    <TypeScriptCompile Include="src\material-ui\styles\withStyles.ts" />
     <TypeScriptCompile Include="src\mediaq\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\mediaq\typings\add-in.ts" />
     <TypeScriptCompile Include="src\ks\common\mediaq\index.tsx" />
@@ -191,6 +193,8 @@
     <TypeScriptCompile Include="src\mediaq\typings\typings.d.ts" />
     <TypeScriptCompile Include="src\mediaq\web\index.ts" />
     <TypeScriptCompile Include="src\mediaq\web\media-q.ts" />
+    <TypeScriptCompile Include="src\mui\web\classnames.ts" />
+    <TypeScriptCompile Include="src\mui\web\withStyles.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
     <TypeScriptCompile Include="src\primitives\common\comps-sheets.ts" />
     <TypeScriptCompile Include="src\primitives\native\comps.tsx" />
