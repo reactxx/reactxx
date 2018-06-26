@@ -72,17 +72,18 @@ const renderAddIn: RenderAddIn = {
 * WITH STYLES
 *************************/
 
-export const withStylesCreator = <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, codeComponent: Types.CodeComponentType<R>) =>
-  (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStylesLow<R, TStatic>(displayName, sheetCreator, renderAddIn, overrideOptions)(codeComponent)
+export const withStylesCreator = <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, codeComponent: Types.CodeComponentType<R>, options?: Types.WithStyleOptions_ComponentX<R>) =>
+  (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStylesLow<R, TStatic>(sheetCreator, renderAddIn, { ...options || null, name: displayName }, overrideOptions)(codeComponent)
 
-const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, addIns: RenderAddIn, options?: Types.WithStyleOptions_ComponentX<R>, overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => (CodeComponent: Types.CodeComponentType<R>) => {
+const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCreator: Types.SheetCreatorX<R>, addIns: RenderAddIn, options?: Types.WithStyleOptions_ComponentX<R>, overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => (CodeComponent: Types.CodeComponentType<R>) => {
 
   type TPropsX = Types.PropsX<R>
 
   const id = compCounter++
-  displayName = `${displayName} (${id})`
 
   options = options && overrideOptions ? deepMerges({}, options, overrideOptions) : options ? options : overrideOptions ? overrideOptions : {}
+
+  const displayName = `${options.name} (${id})`
 
   //sheetCreator = options.sheet || sheetCreator
 
@@ -169,7 +170,10 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(displayNa
 
 }
 
-export const withStyles: <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, addIns: RenderAddIn, options?, overrideOptions?) => (CodeComponent) => any = withStylesLow
+export const withStyles:
+  <R extends Types.Shape, TStatic extends {} = {}>
+  (sheetCreator: Types.SheetCreatorX<R>, addIns: RenderAddIn, options?: TCommon.WithStyleOptions, overrideOptions?: TCommon.WithStyleOptions)
+    => (CodeComponent) => any = withStylesLow
 
 export interface TProvider<R extends Types.Shape> { Provider: React.ComponentClass<Types.PropsX<R>> }
 

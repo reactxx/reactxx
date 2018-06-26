@@ -40,6 +40,7 @@
       "reactxx": [ "src/reactxx/web/index" ],
 
       "reactxx-mui/*": [ "src/material-ui/*" ],
+      "reactxx-muix/*": [ "src/mui/*" ],
       "classnames": [ "src/mui/web/classnames" ]
     },
 

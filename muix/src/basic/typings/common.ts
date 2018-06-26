@@ -61,9 +61,15 @@ export namespace TCommon {
   }
 
   export interface WithStyleOptions {
+    name?: string
     withTheme?: boolean
     withCascading?: boolean
     withActive?: boolean
+
+    getVariant?
+    variantToString?
+    defaultProps?
+
   }
 
   //export type ThemeProviderProp<T extends ThemeBase = ThemeBase> = string | T

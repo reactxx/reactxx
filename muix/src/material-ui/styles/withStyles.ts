@@ -1,3 +1,3 @@
-import withStyles from '../../mui/web/withStyles'
+import withStyles from 'reactxx-muix/web/styles/withStyles'
 
 export default withStyles
