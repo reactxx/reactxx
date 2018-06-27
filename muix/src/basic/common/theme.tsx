@@ -3,7 +3,7 @@ import warning from 'warning'
 
 import { TCommon } from '../typings/common'
 
-const globalThemeContext: TCommon.ThemeContext = { theme: null, $cache: [] }
+let globalThemeContext: TCommon.ThemeContext // = { theme: null, $cache: [] }
 const themeContext = React.createContext<TCommon.ThemeContext>(null)
 const namedThemes: { [themeName: string]: TCommon.ThemeBase } = {}
 
@@ -12,14 +12,15 @@ export const registerTheme = <T extends {} = never>(name: string, theme: T) => {
   namedThemes[name] = theme
 }
 
-export const themePipe = (input: () => { withTheme: boolean }, output: (outputPar: TCommon.ThemeContext) => void, next: () => React.ReactNode) => {
+export const themePipe = (getDefaultTheme: () => TCommon.ThemeBase, input: () => { withTheme: boolean }, output: (outputPar: TCommon.ThemeContext) => void, next: () => React.ReactNode) => {
+  const getThemeContext = () => globalThemeContext || (globalThemeContext = { theme: getDefaultTheme ? getDefaultTheme() : null, $cache: [] })
   const render = (renderPar: TCommon.ThemeContext) => {
-    output(renderPar || globalThemeContext)
+    output(renderPar || getThemeContext())
     return next()
   }
   const res = () => {
     if (input().withTheme) return <ThemeConsumer>{render}</ThemeConsumer>
-    output(globalThemeContext)
+    output(getThemeContext())
     return next()
   }
   return res

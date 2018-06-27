@@ -23,9 +23,19 @@ SystemJS.config({
     "reactxx-mediaq": "deploy/lib/mediaq/web/index",
     "reactxx": "deploy/lib/reactxx/web/index",
     "reactxx-mui": "deploy/lib/material-ui",
-    "reactxx-mui/Button": "deploy/lib/material-ui/Button/index",
-    "reactxx-mui/ButtonBase": "deploy/lib/material-ui/ButtonBase/index",
-    "classnames": "deploy/lib/mui/web/classnames"
+
+    "material-ui/Button/Button": "deploy/lib/material-ui/Button/Button",
+    "material-ui/ButtonBase/ButtonBase": "deploy/lib/material-ui/ButtonBase/ButtonBase",
+    "material-ui/styles/createGenerateClassName": "deploy/lib/material-ui/styles/createGenerateClassName",
+    "material-ui/styles/MuiThemeProvider": "deploy/lib/material-ui/styles/MuiThemeProvider",
+    "material-ui/styles/withStyles": "deploy/lib/material-ui/styles/withStyles",
+    "material-ui/styles/createMuiTheme": "deploy/lib/material-ui/styles/createMuiTheme",
+
+    "reactxx-muix/web/styles/withStyles": "deploy/lib/muix/web/styles/withStyles",
+    "reactxx-muix/web/Button/Button": "deploy/lib/muix/web/Button/Button",
+    "reactxx-muix/web/ButtonBase/ButtonBase": "deploy/lib/muix/web/ButtonBase/ButtonBase",
+
+    "classnames": "deploy/lib/muix/web/styles/classnames"
   }
 });
 

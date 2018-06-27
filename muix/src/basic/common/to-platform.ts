@@ -50,7 +50,7 @@ const create_toPlatform_sheet = ({ finishAddInClasses, createSheetX, themeContex
     try { sheet = createSheetX(theme, variant) }
     catch {
       debugger
-      warning(theme, 'Missing <ThemeProvider theme={}>')
+      warning(theme, 'Create sheet error (maybe missing <ThemeProvider theme={}>)')
       return null
     }
   } else

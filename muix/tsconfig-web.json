@@ -38,7 +38,9 @@
       "reactxx-activable": [ "src/activable/web/index" ],
       "reactxx": [ "src/reactxx/web/index" ],
 
-      "reactxx-mui/*": [ "src/mui/*" ]
+      "reactxx-mui/*": [ "src/material-ui/*" ],
+      "reactxx-muix/*": [ "src/mui/*" ],
+      "classnames": [ "src/mui/web/classnames" ]
     },
 
     "lib": [

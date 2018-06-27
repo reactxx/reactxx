@@ -59,6 +59,8 @@ export interface RenderAddIn {
   propsAddInPipeline: (renderState: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
   styleAddInPipeline: (renderState: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
   finishAddInClasses: ((addInClasses: {}) => void)[]
+  getDefaultTheme?: () => TCommon.ThemeBase
+  createSheetHook?: (sheetCreator: Types.SheetCreatorX) => Types.SheetCreatorX
 }
 
 // empty addIn configuration
@@ -89,8 +91,8 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCrea
 
   options.withTheme = typeof options.withTheme === 'boolean' ? options.withTheme : typeof sheetCreator === 'function'
 
-  //**** PROPERTY CASCADING 
-
+  //**** build in pipes
+  sheetCreator = addIns.createSheetHook ? addIns.createSheetHook(sheetCreator) as Types.SheetCreatorX<R> : sheetCreator
   const { propsPipe, stylePipe, renderComponentPipe, cascadingProvider } = getSystemPipes<R>(id, displayName, sheetCreator, addIns.finishAddInClasses, options)
 
   //****************************
@@ -112,6 +114,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCrea
 
     renderPipeline =
       themePipe(
+        addIns.getDefaultTheme,
         () => ({ withTheme: options.withTheme }),
         themeContext => this.renderState.themeContext = themeContext,
         propsPipe(
