@@ -280,9 +280,7 @@ export const immutableMerge = (target, sources: {}[]) => {
 
 export const immutableMerge2 = (sources: {}[], isSheet?: boolean) => {
   if (!sources) return sources
-  let count = 0
-  let isToMerge = false
-  let dest = null
+  let count = 0, isToMerge = false, dest = null
   const objectsToMerge: { [propName: string]: Array<{}> } = {}
   sources.forEach(src => {
     if (!src) return

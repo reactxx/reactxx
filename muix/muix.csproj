@@ -114,6 +114,10 @@
     <Content Include="src\doc\home - Copy.md" />
     <Content Include="src\reactxx\README.md" />
     <Content Include="src\basic\typings\mklink-c.cmd" />
+    <TypeScriptCompile Include="src\basic\common\to-platform2.ts" />
+    <TypeScriptCompile Include="src\test\sheet-frag\src-2.ts" />
+    <TypeScriptCompile Include="src\test\sheet-frag\src-3.ts" />
+    <TypeScriptCompile Include="src\test\sheet-frag\src-1.ts" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
