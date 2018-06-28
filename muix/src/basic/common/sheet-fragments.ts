@@ -44,6 +44,9 @@ const sheetsToFragments = (sheets: Sheet[], named?: boolean) => {
   if (sheets.length === 1) {
     const rulesets = {}
     for (const p in rulesets) {
+      if (p.charAt(0) === '$') {
+        continue
+      }
       const fragments = rulesetToFragments(sheets[0][p])
       rulesets[p] = named ? { rulesetName: p, fragments } as RulesetFragments : fragments
     }

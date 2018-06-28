@@ -244,6 +244,8 @@ export const deepMerge = (target, source) => {
   }
   return target
 }
+
+// Object.getPrototypeOf(obj) === Object.prototype,/ https://stackoverflow.com/questions/1173549/how-to-determine-if-an-object-is-an-object-literal-in-javascript
 const isObject = item => item && typeof item === 'object' && !Array.isArray(item) && !item.$$typeof /*React component prop*/ && item.constructor !== item && typeof item['_interpolation'] != 'function' //HACK: typeof item['_interpolation'] != 'function' prevent to merge ReactNative's Animated.Value.interpolate prop
 const isObjectLiteral = item => isObject(item) && item.constructor !== item
 
@@ -274,5 +276,37 @@ export const immutableMerge = (target, sources: {}[]) => {
     res[p] = !targetVal && objs.length === 1 ? objs[0] : immutableMerge(targetVal || {}, objs)
   }
   return res
+}
+
+export const immutableMerge2 = (sources: {}[], isSheet?: boolean) => {
+  if (!sources) return sources
+  let count = 0
+  let isToMerge = false
+  let dest = null
+  const objectsToMerge: { [propName: string]: Array<{}> } = {}
+  sources.forEach(src => {
+    if (!src) return
+    count++
+    switch (count) {
+      case 1: dest = src; break // first
+      case 2: dest = { ...dest } // !!! does not break, continue with merge
+      default: // merge dest with src
+        for (const p in src) {
+          const destp = dest[p], srcp = src[p], isSrcpObj = isObject(srcp)
+          if (!destp) { dest[p] = srcp; continue } // set first scalar or object
+          const isDestpObj = isObject(destp)
+          warning(isSrcpObj === isDestpObj, 'Cannot merge object with non-object')
+          if (!isSrcpObj) { dest[p] = srcp; continue } // override scalar
+          // src is second or more object
+          isToMerge = true
+          let canModifyp = objectsToMerge[p]
+          if (!canModifyp) canModifyp = objectsToMerge[p] = [dest[p]] // second => put first 
+          canModifyp.push(srcp) // push second or more
+        }
+    }
+  })
+  if (isToMerge)
+    for (const p in objectsToMerge) dest[p] = immutableMerge2(objectsToMerge[p])
+  return dest
 }
 
