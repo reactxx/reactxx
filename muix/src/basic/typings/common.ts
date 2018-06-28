@@ -112,6 +112,4 @@ export namespace TCommon {
   export type TAddIn = TSheetAddIn | TRulesetAddIn
   export type TAddIns = { [name: string]: TAddIn } // name is e.g. '$animations' or 'root'
 
-
-
 } 

@@ -102,6 +102,7 @@
     <Content Include="package-all.json" />
     <Content Include="%24mklink.cmd" />
     <Content Include="%24mklink-c.cmd" />
+    <Content Include="json.json" />
     <None Include="packages.config" />
     <Content Include="README.md" />
     <Content Include="StyleSheet1.css" />
@@ -141,6 +142,7 @@
     <TypeScriptCompile Include="src\animation\web\index.ts" />
     <TypeScriptCompile Include="src\basic\common\develop.tsx" />
     <TypeScriptCompile Include="src\basic\common\system-pipes.tsx" />
+    <TypeScriptCompile Include="src\basic\common\sheet-fragments.ts" />
     <TypeScriptCompile Include="src\basic\common\to-platform.ts" />
     <None Include="src\basic\common\sheet-cache.tsx_" />
     <TypeScriptCompile Include="src\basic\common\withStyles.tsx" />
