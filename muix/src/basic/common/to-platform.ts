@@ -290,9 +290,9 @@ export const immutableMerge2 = (sources: {}[], isSheet?: boolean) => {
       case 2: dest = { ...dest } // !!! does not break, continue with merge
       default: // merge dest with src
         for (const p in src) {
-          const destp = dest[p], srcp = src[p], isSrcpObj = isObject(srcp)
+          const destp = dest[p], srcp = src[p]
           if (!destp) { dest[p] = srcp; continue } // set first scalar or object
-          const isDestpObj = isObject(destp)
+          const isDestpObj = isObject(destp), isSrcpObj = isObject(srcp)
           warning(isSrcpObj === isDestpObj, 'Cannot merge object with non-object')
           if (!isSrcpObj) { dest[p] = srcp; continue } // override scalar
           // src is second or more object
