@@ -22,5 +22,6 @@ test()
 //const App: React.SFC = () => <Button>Hallo world</Button>
 import App from '../common/muix/m1'
 
+
 ReactDOM.render(<App />, document.getElementById('root'))
 

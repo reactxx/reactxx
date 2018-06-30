@@ -1,39 +1,44 @@
-﻿const final = {
-  addIns: {
-    $mediaq: {
-      root: {
-        '480-640': {
-        },
-        '640-1024': {
-          ':hover': {
-          },
-        },
-      },
-      'addIns/$whenUsed/root/a': {
-        '320-640': {
-          color: 'green',
-        },
-      }
-    },
-    $whenUsed: {
-      root: {
-        a: {
-        }
-      },
-      'addIns/$mediaq/root/480-640': {
-        b: {
-          ":hover": {
-            color: 'yellow'
-          },
-        },
-      },
-      'addIns/$mediaq/root/640-1024/:hover': {
-        color: 'red'
-      }
-    },
+﻿const x = {
+  "root": {
+    ":active": {},
+    "backgroundColor": "blue"
   },
-  root: {
-    backgroundColor: 'blue',
-    color: 'red',
+  "add-ins": {
+    "$mediaq": {
+      "add-ins/$whenUsed/add-ins/$mediaq/root/:active/480-640/b/:hover": {
+        "480-600": {
+          "color": "brown"
+        },
+        "path": [
+          "add-ins",
+          "$whenUsed",
+          "add-ins/$mediaq/root/:active/480-640",
+          "b",
+          ":hover"
+        ]
+      },
+      "root/:active": {
+        "480-640": {},
+        "path": [
+          "root",
+          ":active"
+        ]
+      }
+    },
+    "$whenUsed": {
+      "add-ins/$mediaq/root/:active/480-640": {
+        "b": {
+          ":hover": {
+            "color": "yellow"
+          }
+        },
+        "path": [
+          "add-ins",
+          "$mediaq",
+          "root/:active",
+          "480-640"
+        ]
+      }
+    }
   }
 }
