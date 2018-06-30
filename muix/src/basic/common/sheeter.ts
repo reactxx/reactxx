@@ -47,17 +47,17 @@ export enum Consts {
 //****************************
 
 // transform sheet to mergable and patchable form. !!! root is mutated !!!
-export const toPatchableAndMergeable = (root: TSheet, options?: { processAddIn?: TProcessAddIn; isComponentSheet?: boolean }) => {
+export const toPatchableAndMergeable = (root: TSheet, isComponentSheet?: boolean, _processAddIn?: TProcessAddIn) => {
   root = linearize(root) // in-place processing of $before, $web, $native and $after ruleset props
-  const res = extractPatches(root, root as TSheetWithAddIns, [], options && options.processAddIn || processAddIn) // extract addIn props of ruleset (starting with $, e.g. $whenUsed, $mediaq) etc.
-  if (options && options.isComponentSheet) nameRulesets(res)
+  const res = extractPatches(root, root as TSheetWithAddIns, [], _processAddIn || processAddIn) // extract addIn props of ruleset (starting with $, e.g. $whenUsed, $mediaq) etc.
+  if (isComponentSheet) nameRulesets(res)
   return res
 }
 
 // merge rulesets in component code and apply addIn patches
-export const mergeRulesets = (sheet: TSheetWithAddIns, filters: SheetItemFilters, ...rulesets: TRuleset[]) => {
+export const mergeRulesets = (sheet: TSheetWithAddIns, filters: SheetItemFilters, rulesets: TRuleset[]) => {
   if (!rulesets || rulesets.length === 0) return null
-  // get used ruleset's (for whenUses processing)
+  // get used ruleset's (for $whenUses processing)
   const addIns = sheet.$addIns
   const whenUsed = addIns && addIns.$whenUsed
   let usedRulesets: UsedRulesetNames = null
@@ -66,23 +66,24 @@ export const mergeRulesets = (sheet: TSheetWithAddIns, filters: SheetItemFilters
     if (ruleset.$rulesetName) (usedRulesets || (usedRulesets = {}))[ruleset.$rulesetName as string] = true
   })
 
+  // patch rulesets
   let firstIsReadOnly = true
   let patchedRulesets: TRuleset[]
-  if (!addIns)
+  if (!addIns) // no patch
     patchedRulesets = rulesets
-  else {
+  else { // with patch 
     patchedRulesets = []
     const patches = getPatches(addIns, filters, usedRulesets) // compute actual patches (based on addIn filters and usedRulesets)
     rulesets.forEach((ruleset, idx) => {
       if (!ruleset) return
       if (!ruleset.$rulesetName) { patchedRulesets.push(ruleset); return } // not named ruleset
-      const myPatches = patches.filter(p => p.path[0] === ruleset.$rulesetName) // patches for this named ruleset
+      const myPatches = patches.filter(p => p.path[0] === ruleset.$rulesetName) // filter patches for this ruleset
       if (myPatches.length === 0) { patchedRulesets.push(ruleset); return } // no patches
       ruleset = deepMerge({}, ruleset) // deep clone
       if (idx === 0) firstIsReadOnly = false // first ruleset is not readonly (=> can delete $rulesetName prop)
       myPatches.forEach(patch => {
-        const patchPlace = findPath(ruleset, patch.path, 1)
-        deepMerges(patchPlace, patch.items)
+        const patchPlace = findPath(ruleset, patch.path, 1) // find sub-object of ruleset
+        deepMerges(patchPlace, patch.items) // path it
       })
       patchedRulesets.push(ruleset)
     })
@@ -90,7 +91,7 @@ export const mergeRulesets = (sheet: TSheetWithAddIns, filters: SheetItemFilters
 
   if (patchedRulesets.length === 0) return null
 
-  // merging
+  // merging of used rulesets
   let res: TRuleset = patchedRulesets.length === 1 ? patchedRulesets[0] : (firstIsReadOnly ? immutableMerge(patchedRulesets) : deepMerges(patchedRulesets[0], patchedRulesets.slice(1)))
 
   // remove $rulesetName from result
@@ -135,7 +136,8 @@ const whenUsedAddInFilter: SheetItemFilter = ({ rulesetName, usedRulesetNames })
 
 type Patch = { path: string[], items: TNode[] }
 
-// compute actual patches (based on addIn filters and usedRulesets). addInsRoot cannot be mutated
+// For mergeRulesets: compute actual patches (based on addIn filters and usedRulesets)
+// addInsRoot is not mutated
 const getPatches = (addInsRoot: TAddIns, filters: SheetItemFilters, usedRulesets: UsedRulesetNames) => {
   let res: Patch[]
   try {
@@ -147,7 +149,7 @@ const getPatches = (addInsRoot: TAddIns, filters: SheetItemFilters, usedRulesets
   return res
 }
 
-const getPatchLow = (addInsRoot: TAddIns, filters: SheetItemFilters, usedRulesets: UsedRulesetNames, canModify: boolean) => {
+const getPatchLow = (addInsRoot: TAddIns /*addInsRoot is not mutated*/, filters: SheetItemFilters, usedRulesets: UsedRulesetNames, canModify: boolean) => {
   if (!addInsRoot || !filters) return null
   let rootPatches: Patch[] = [] // patches of top level sheet rulesets
   let addInPatches: Patch[] = [] // pathes for inner addIns rulesets
@@ -183,6 +185,11 @@ const getPatchLow = (addInsRoot: TAddIns, filters: SheetItemFilters, usedRuleset
     const patchPlace = findPath(addInsRoot, p.path, 1)
     deepMerges(patchPlace, p.items)
   })
+  // for DUMP
+  //const develop = {
+  //  rootPatches,
+  //  addInPatches
+  //}
   // return root patches
   return rootPatches
 }
@@ -313,189 +320,251 @@ const immutableMerge = (sources: TNode[]) => {
 //****************************
 // CODE
 
-export const test = () => {
-  const res = toPatchableAndMergeable(root, { isComponentSheet: true })
-  debugger
-  const merged = mergeRulesets(res, {
-    '$mediaq': ({ rulesetName, usedRulesetNames }) => {
-      return true
-    }
-  }, res.root, false as any, res.b, null as any)
-  //const patches = getPatches(res.$addIns, { '$mediaq': path => true, '$whenUsed': path => true })
-  return res
-}
+//export const test = () => {
+//  const res = toPatchableAndMergeable(root, true)
+//  debugger
+//  const merged = mergeRulesets(
+//    res,
+//    {
+//      '$mediaq': ({ rulesetName, usedRulesetNames }) => {
+//        return true
+//      }
+//    },
+//    [res.root, false as any, res.b, null as any])
+//  return res
+//}
 
-//****************************
-// INPUT DATA
+////****************************
+//// INPUT DATA
 
-const root: TSheet = {
-  root: {
-    a0: 1,
-    $web: {
-      a1: 1,
-      ":active": {
-        a2: 1,
-        $before: {
-          $mediaq: {
-            //a3: 1, => error
-            '100-200': {
-              a3: 1,
-              $whenUsed: {
-                b: {
-                  a4: 1,
-                  $after: {
-                    $web: {
-                      a5: 1,
-                      ":hover": {
-                        a6: 1,
-                        $mediaq: {
-                          '200-300': {
-                            a7: 1,
-                          }
-                        } as TSheet
-                      },
-                    },
-                    ":hover": {
-                      $mediaq: {
-                        '300-400': {
-                          a8: 1,
-                        }
-                      } as TSheet
-                    }
-                  },
-                },
-              } as TSheet,
-            },
-          } as TSheet,
-        },
-      },
-    },
-  },
-  b: {}
-}
+//const root: TSheet = {
+//  root: {
+//    a0: 1,
+//    $web: {
+//      a1: 1,
+//      ":active": {
+//        a2: 1,
+//        $before: {
+//          $mediaq: {
+//            //a3: 1, => error
+//            '100-200': {
+//              a3: 1,
+//              $whenUsed: {
+//                b: {
+//                  a4: 1,
+//                  $after: {
+//                    $web: {
+//                      a5: 1,
+//                      ":hover": {
+//                        a6: 1,
+//                        $mediaq: {
+//                          '200-300': {
+//                            a7: 1,
+//                          }
+//                        } as TSheet
+//                      },
+//                    },
+//                    ":hover": {
+//                      $mediaq: {
+//                        '300-400': {
+//                          a8: 1,
+//                        }
+//                      } as TSheet
+//                    }
+//                  },
+//                },
+//              } as TSheet,
+//            },
+//          } as TSheet,
+//        },
+//      },
+//    },
+//  },
+//  b: {}
+//}
 
-//window['isWeb'] = true
+////window['isWeb'] = true
 
-//****************************
-// 
+////****************************
+//// 
 
-const _toPatchableAndMergeable = {
-  "root": {
-    "a0": 1,
-    "a1": 1,
-    ":active": {
-      "a2": 1
-    }
-  },
-  "b": {},
-  "$addIns": {
-    "$mediaq": {
-      "$addIns/$whenUsed/$addIns/$mediaq/root/:active/100-200/b/:hover": {
-        "300-400": {
-          "a8": 1
-        },
-        "200-300": {
-          "a7": 1
-        },
-        "#path": [
-          "$addIns",
-          "$whenUsed",
-          "$addIns/$mediaq/root/:active/100-200",
-          "b",
-          ":hover"
-        ]
-      },
-      "root/:active": {
-        "100-200": {
-          "a3": 1
-        },
-        "#path": [
-          "root",
-          ":active"
-        ]
-      }
-    },
-    "$whenUsed": {
-      "$addIns/$mediaq/root/:active/100-200": {
-        "b": {
-          "a4": 1,
-          ":hover": {
-            "a6": 1
-          },
-          "a5": 1
-        },
-        "#path": [
-          "$addIns",
-          "$mediaq",
-          "root/:active",
-          "100-200"
-        ]
-      }
-    }
-  }
-}
+//const _toPatchableAndMergeable = {
+//  "root": {
+//    "a0": 1,
+//    "a1": 1,
+//    ":active": {
+//      "a2": 1
+//    }
+//  },
+//  "b": {},
+//  "$addIns": {
+//    "$mediaq": {
+//      "$addIns/$whenUsed/$addIns/$mediaq/root/:active/100-200/b/:hover": {
+//        "300-400": {
+//          "a8": 1
+//        },
+//        "200-300": {
+//          "a7": 1
+//        },
+//        "#path": [
+//          "$addIns",
+//          "$whenUsed",
+//          "$addIns/$mediaq/root/:active/100-200",
+//          "b",
+//          ":hover"
+//        ]
+//      },
+//      "root/:active": {
+//        "100-200": {
+//          "a3": 1
+//        },
+//        "#path": [
+//          "root",
+//          ":active"
+//        ]
+//      }
+//    },
+//    "$whenUsed": {
+//      "$addIns/$mediaq/root/:active/100-200": {
+//        "b": {
+//          "a4": 1,
+//          ":hover": {
+//            "a6": 1
+//          },
+//          "a5": 1
+//        },
+//        "#path": [
+//          "$addIns",
+//          "$mediaq",
+//          "root/:active",
+//          "100-200"
+//        ]
+//      }
+//    }
+//  }
+//}
 
+//const inGetPatchLow = {
+//  "rootPatches": [
+//    {
+//      "path": [
+//        "root",
+//        ":active"
+//      ],
+//      "items": [
+//        {
+//          "a3": 1,
+//          "a4": 1,
+//          ":hover": {
+//            "a6": 1,
+//            "a8": 1,
+//            "a7": 1
+//          },
+//          "a5": 1
+//        }
+//      ]
+//    }
+//  ],
+//  "addInPatches": [
+//    {
+//      "path": [
+//        "$addIns",
+//        "$whenUsed",
+//        "$addIns/$mediaq/root/:active/100-200",
+//        "b",
+//        ":hover"
+//      ],
+//      "items": [
+//        {
+//          "a8": 1
+//        },
+//        {
+//          "a7": 1
+//        }
+//      ]
+//    },
+//    {
+//      "path": [
+//        "$addIns",
+//        "$mediaq",
+//        "root/:active",
+//        "100-200"
+//      ],
+//      "items": [
+//        {
+//          "a4": 1,
+//          ":hover": {
+//            "a6": 1,
+//            "a8": 1,
+//            "a7": 1
+//          },
+//          "a5": 1
+//        }
+//      ]
+//    }
+//  ]
+//}
 
-const patches = [
-  {
-    "path": [
-      "$addIns",
-      "$whenUsed",
-      "$addIns/$mediaq/root/:active/100-200",
-      "b",
-      ":hover"
-    ],
-    "items": [
-      {
-        "a8": 1
-      },
-      {
-        "a7": 1
-      }
-    ]
-  },
-  {
-    "path": [
-      "root",
-      ":active"
-    ],
-    "items": [
-      {
-        "a3": 1
-      }
-    ]
-  },
-  {
-    "path": [
-      "$addIns",
-      "$mediaq",
-      "root/:active",
-      "100-200"
-    ],
-    "items": [
-      {
-        "a4": 1,
-        ":hover": {
-          "a6": 1
-        },
-        "a5": 1
-      }
-    ]
-  }
-]
+//const patches = [
+//  {
+//    "path": [
+//      "$addIns",
+//      "$whenUsed",
+//      "$addIns/$mediaq/root/:active/100-200",
+//      "b",
+//      ":hover"
+//    ],
+//    "items": [
+//      {
+//        "a8": 1
+//      },
+//      {
+//        "a7": 1
+//      }
+//    ]
+//  },
+//  {
+//    "path": [
+//      "root",
+//      ":active"
+//    ],
+//    "items": [
+//      {
+//        "a3": 1
+//      }
+//    ]
+//  },
+//  {
+//    "path": [
+//      "$addIns",
+//      "$mediaq",
+//      "root/:active",
+//      "100-200"
+//    ],
+//    "items": [
+//      {
+//        "a4": 1,
+//        ":hover": {
+//          "a6": 1
+//        },
+//        "a5": 1
+//      }
+//    ]
+//  }
+//]
 
-const result = {
-  "a0": 1,
-  "a1": 1,
-  ":active": {
-    "a2": 1,
-    "a3": 1,
-    "a4": 1,
-    ":hover": {
-      "a6": 1,
-      "a8": 1,
-      "a7": 1
-    },
-    "a5": 1
-  }
-}
+//const result = {
+//  "a0": 1,
+//  "a1": 1,
+//  ":active": {
+//    "a2": 1,
+//    "a3": 1,
+//    "a4": 1,
+//    ":hover": {
+//      "a6": 1,
+//      "a8": 1,
+//      "a7": 1
+//    },
+//    "a5": 1
+//  }
+//}
