@@ -61,8 +61,13 @@ const create_toPlatform_sheet = ({ finishAddInClasses, createSheetX, themeContex
 type Cache = { [variantId: string]: TCommon.SheetFragments }[]
 
 interface GetPlatformSheetPar {
-  id: number; createSheetX: Types.SheetCreatorX; themeContext: TCommon.ThemeContext; sheetXPatch: Types.PartialSheetX[];
-  defaultClasses?: Types.PartialSheetX; variant; variantCacheId: string;
+  id: number
+  createSheetX: Types.SheetCreatorX
+  themeContext: TCommon.ThemeContext
+  sheetXPatch: Types.PartialSheetX[];
+  defaultClasses?: Types.PartialSheetX
+  variant
+  variantCacheId: string;
   finishAddInClasses: ((addInClasses: {}) => void)[];
 }
 
