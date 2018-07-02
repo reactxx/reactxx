@@ -1,4 +1,4 @@
-import { TFinishAddIns, TSheet, AddInRulesetFilters, mergeSheets, toPatchableAndMergeable, mergeRulesetsForCode, nameRulesets } from './sheeter'
+import { TFinishAddIns, TSheet, AddInRulesetFilters, mergeSheets, toPatchableAndMergeable, mergeRulesetsForCode } from './sheeter'
 import { finishAddInCreator, rulesetFilterCreator } from './sheeter-mediaq'
 import { rulesetFilter } from './sheeter-when-used'
 
@@ -6,8 +6,6 @@ import { rulesetFilter } from './sheeter-when-used'
 // CODE
 
 export const test = () => {
-
-  debugger
 
   const finishAddIns: TFinishAddIns = {
     $mediaq: finishAddInCreator()
@@ -18,15 +16,15 @@ export const test = () => {
   }
   const patchable = toPatchableAndMergeable(root)
 
-  nameRulesets(patchable)
-
   window.isWeb = true
-  const mergedWeb = mergeSheets(patchable, [], finishAddIns, false)
+  const mergedWeb = mergeSheets(patchable, [], finishAddIns)
   const codeRootWeb = mergeRulesetsForCode(mergedWeb, addInRulesetFilters, [mergedWeb.root])
 
   window.isWeb = false
-  const mergedNative = mergeSheets(patchable, [], finishAddIns, false)
+  const mergedNative = mergeSheets(patchable, [], finishAddIns)
   const codeRootNative = mergeRulesetsForCode(mergedNative, addInRulesetFilters, [mergedNative.root])
+
+  debugger
 }
 
 const root: TSheet = {

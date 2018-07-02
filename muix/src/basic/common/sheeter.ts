@@ -10,17 +10,28 @@ const DEV_MODE = process.env.NODE_ENV === 'development'
 // TYPINGS
 //****************************
 
+// consts
+export const enum Consts {
+  $addIns = '$addIns',
+  $whenUsed = '$whenUsed',
+  path = '#path',
+  rulesetName = '#rulesetName',
+  canModify = '#canModify',
+  data = '#data',
+}
+
 //****************************
 // SHEET HIEARCHY
 
 export interface TSheetWithAddIns extends TSheet {
+  [Consts.canModify]?
   $addIns: TAddIns
 }
 export type TAddIns = { [addInsName: string]: TSheets }
 export type TSheets = { [rulesetName: string]: TSheet }
 export type TSheet = { [rulesetName: string]: TRuleset }
 export interface TRuleset extends TNode {
-  $rulesetName?: string
+  [Consts.rulesetName]?: string
 }
 export type TNode = { [ruleName: string]: TNode | string | string[] | number | TSheets }
 
@@ -42,16 +53,11 @@ export type AddInRulesetFilters = { [addInName: string]: AddInRulesetFilter }
 export type TFinishAddIn = (addIns: TAddIns, addInName: string) => void
 export type TFinishAddIns = { [addInName: string]: TFinishAddIn }
 
-// consts
-export enum Consts {
-  $addIns = '$addIns',
-  $whenUsed = '$whenUsed',
-  path = '#path',
-}
-
 //****************************
 // MAIN EXPORTS
 //****************************
+
+export const setCanModify = (root: TSheetWithAddIns) => root[Consts.canModify] = true
 
 // transform sheet to mergable and patchable form. !!! root is mutated !!!
 export const toPatchableAndMergeable = (root: TSheet) => {
@@ -61,24 +67,26 @@ export const toPatchableAndMergeable = (root: TSheet) => {
 }
 
 // merging patchable and mergeable sheets
-export const mergeSheets = (sheet: TSheetWithAddIns, modifiers: TSheetWithAddIns[], finishProcs: TFinishAddIns, canModifySheet?: boolean) => {
-  if (modifiers && modifiers.length > 1) sheet = canModifySheet ? deepMerges(sheet, modifiers) : immutableMerge([sheet, ...modifiers])
-  else if (!canModifySheet) sheet = deepMerges({}, [sheet])
-  if (finishProcs) finishMergedSheetAddIns(sheet.$addIns, finishProcs)
-  return sheet
-}
-
-// for component sheet only: assign name to rulesets. Used only for root component sheet (and not for other data with sheet format, e.g. for ruleset.$mediaq or ruleset.$whenUsed)
-export const nameRulesets = (root: TSheetWithAddIns) => {
-  const addIns = root.$addIns; if (!addIns) return
-  for (const p in root) if (p.charAt(0) != '$') root[p].$rulesetName = p
-}
-
-export const finishMergedSheetAddIns = (addIns: TAddIns, finishProcs: TFinishAddIns) => {
-  for (const addInName in addIns) {
-    const proc = finishProcs[addInName]
-    if (proc) proc(addIns, addInName)
+export const mergeSheets = (sheet: TSheetWithAddIns, modifiers: TSheetWithAddIns[], finishProcs: TFinishAddIns) => {
+  const canModify = sheet[Consts.canModify]
+  if (modifiers && modifiers.length > 1) sheet = canModify ? deepMerges(sheet, modifiers) : immutableMerge([sheet, ...modifiers])
+  // finish addIns
+  if (sheet.$addIns && finishProcs) {
+    if (!canModify) { // clone
+      sheet = { ...sheet, $addIns: { ...sheet.$addIns } }
+      for (const p in sheet.$addIns) sheet.$addIns[p] = { ...sheet.$addIns[p] }
+    }
+    for (const addInName in sheet.$addIns) {
+      const proc = finishProcs[addInName]
+      if (proc) proc(sheet.$addIns, addInName)
+    }
   }
+  // name rulesets
+  const ignore = { '$': true, '#': true }
+  if (sheet.$addIns) {
+    for (const p in sheet) if (!ignore[p.charAt(0)]) sheet[p][Consts.rulesetName] = p
+  }
+  return sheet
 }
 
 // merge rulesets in component code (apply addIn patches)
@@ -90,31 +98,28 @@ export const mergeRulesetsForCode = (sheet: TSheetWithAddIns, addInRulesetFilter
   let usedRulesets: UsedRulesetNames = null
   if (whenUsed) rulesets.forEach(ruleset => {
     if (!ruleset) return
-    if (ruleset.$rulesetName) (usedRulesets || (usedRulesets = {}))[ruleset.$rulesetName as string] = true
+    if (ruleset[Consts.rulesetName]) (usedRulesets || (usedRulesets = {}))[ruleset[Consts.rulesetName]] = true
   })
 
   // patch rulesets
   let firstIsReadOnly = true
-  let patchedRulesets: TRuleset[]
-  if (!addIns) // no patch
-    patchedRulesets = rulesets
-  else { // with patch 
+  let patchedRulesets = rulesets
+  const patches = addIns && getPatches(addIns, addInRulesetFilters, usedRulesets) // compute actual patches (based on addIn filters and usedRulesets)
+  if (patches) {
     patchedRulesets = []
-    const patches = getPatches(addIns, addInRulesetFilters, usedRulesets) // compute actual patches (based on addIn filters and usedRulesets)
-    if (patches)
-      rulesets.forEach((ruleset, idx) => {
-        if (!ruleset) return
-        if (!ruleset.$rulesetName) { patchedRulesets.push(ruleset); return } // not named ruleset
-        const myPatches = patches.filter(p => p.patchPath[0] === ruleset.$rulesetName) // filter patches for this ruleset
-        if (myPatches.length === 0) { patchedRulesets.push(ruleset); return } // no patches
-        ruleset = deepMerge({}, ruleset) // deep clone
-        if (idx === 0) firstIsReadOnly = false // first ruleset is not readonly (=> can delete $rulesetName prop)
-        myPatches.forEach(patch => {
-          const patchPlace = findPath(ruleset, patch.patchPath, 1) // find sub-object of ruleset
-          deepMerges(patchPlace, patch.rulesets) // path it
-        })
-        patchedRulesets.push(ruleset)
+    rulesets.forEach((ruleset, idx) => {
+      if (!ruleset) return
+      if (!ruleset[Consts.rulesetName]) { patchedRulesets.push(ruleset); return } // not named ruleset
+      const myPatches = patches.filter(p => p.patchPath[0] === ruleset[Consts.rulesetName]) // filter patches for this ruleset
+      if (myPatches.length === 0) { patchedRulesets.push(ruleset); return } // no patches
+      ruleset = deepMerge({}, ruleset) // deep clone
+      if (idx === 0) firstIsReadOnly = false // first ruleset is not readonly (=> can delete $rulesetName prop)
+      myPatches.forEach(patch => {
+        const patchPlace = findPath(ruleset, patch.patchPath, 1) // find sub-object of ruleset
+        deepMerges(patchPlace, patch.rulesets) // path it
       })
+      patchedRulesets.push(ruleset)
+    })
   }
 
   if (patchedRulesets.length === 0) return null
@@ -123,9 +128,9 @@ export const mergeRulesetsForCode = (sheet: TSheetWithAddIns, addInRulesetFilter
   let res: TRuleset = patchedRulesets.length === 1 ? patchedRulesets[0] : (firstIsReadOnly ? immutableMerge(patchedRulesets) : deepMerges(patchedRulesets[0], patchedRulesets.slice(1)))
 
   // remove $rulesetName from result
-  if (res.$rulesetName) {
+  if (res[Consts.rulesetName]) {
     if (res === patchedRulesets[0] && firstIsReadOnly) res = { ...res }
-    delete res.$rulesetName
+    delete res[Consts.rulesetName]
   }
 
   return res
@@ -173,12 +178,12 @@ const getPatchLow = (addInsRoot: TAddIns /*addInsRoot is not mutated*/, addInRul
   for (const addInName in addInsRoot) {
     const addInSheets = addInsRoot[addInName] // addInKey is e.g $whenUsed, $mediaq...
     // get addIn ruleset filter
-    const filter = addInName === Consts.$whenUsed ? whenUsedAddInFilter : addInRulesetFilters[addInName]
+    const filter = addInRulesetFilters[addInName]
     warning(filter, `Missing filter for ${addInName} addIn`)
     for (const sheetName in addInSheets) {
       // prepare patch for single patch, patchKey = e.g. "root/:active", "add-ins/$whenUsed/add-ins/$mediaq/root/:active/480-640/b/:hover", atc
       const addInSheet = addInSheets[sheetName]
-      const patchPath = addInSheet[Consts.path] as any as string[]
+      const patchPath = addInSheet[Consts.data].path as any as string[]
       const isAddIn = patchPath[0] === Consts.$addIns // path starts with addIns/...
       if (!canModify && isAddIn) throw getPatchLowWithDeepClone // cannot modify and patch of addIn occurred => try again with canModify=true (I think that aAddIn recursion will be rare)
 
@@ -197,7 +202,7 @@ const getPatchLow = (addInsRoot: TAddIns /*addInsRoot is not mutated*/, addInRul
   addInPatches.sort((p1, p2) => p2.patchPath.length - p1.patchPath.length)
   addInPatches.forEach(p => {
     const patchPlace = findPath(addInsRoot, p.patchPath, 1)
-    deepMerges(patchPlace, p.rulesets)
+    if (patchPlace) deepMerges(patchPlace, p.rulesets)
   })
   // for DUMP
   if (DEV_MODE) {
@@ -278,7 +283,7 @@ const processAddIn = (addInNode, addInName, parentNode, root, addInNodePath) => 
   const newValue = extractPatches(addInNode, root, path)
   const newNode = addIn[actPathStr] = oldValue ? deepMerge(oldValue, newValue) : newValue
   // extends with path
-  newNode[Consts.path] = addInNodePath
+  newNode[Consts.data] = { path: addInNodePath }
 }
 
 //****************************
