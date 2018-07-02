@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom'
 
 import Button from 'material-ui/Button'
 
-//import { test } from '../../basic/common/to-platform2'
-//test()
+import { test } from '../../basic/common/sheeter-mediaq-test'
+test()
 
 //debugger
 //const res = Array.from(new Set(['a', 'b', 'c'].concat(['d', 'b', 'f'])))

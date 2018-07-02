@@ -392,6 +392,10 @@
     <Content Include="src\doc\home - Copy.md" />
     <Content Include="src\reactxx\README.md" />
     <Content Include="src\basic\typings\mklink-c.cmd" />
+    <TypeScriptCompile Include="src\basic\common\sheeter-test.ts" />
+    <TypeScriptCompile Include="src\basic\common\sheeter-mediaq-test.ts" />
+    <TypeScriptCompile Include="src\basic\common\sheeter-when-used.ts" />
+    <TypeScriptCompile Include="src\basic\common\sheeter-mediaq.ts" />
     <TypeScriptCompile Include="src\basic\common\sheeter.ts" />
     <TypeScriptCompile Include="src\material-ui\styles\withStyles.ts" />
     <TypeScriptCompile Include="src\test\sheet-frag\src-2.ts" />
