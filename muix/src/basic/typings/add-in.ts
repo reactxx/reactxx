@@ -46,7 +46,7 @@ export namespace TAddIn {
     $ignore?: boolean
     $constant?: boolean
     $developer_flag?: boolean
-    $developer_RenderCounter: number
+    $developer_RenderCounter?: number
   }
 
   //******************** Platform specific

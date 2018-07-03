@@ -17,7 +17,7 @@ const DEV_MODE = process.env.NODE_ENV === 'development'
 export namespace TSheeter {
   // consts
   export const enum Consts {
-    $addIns = '$addIns',
+    $system = '$system',
     $whenUsed = '$whenUsed',
     path = '#path',
     rulesetName = '#rulesetName',
@@ -30,7 +30,7 @@ export namespace TSheeter {
 
   export interface SheetWithAddIns extends Sheet {
     [Consts.canModify]?
-    $addIns: AddIns
+    $system: AddIns
   }
   export type AddIns = { [addInsName: string]: Sheets }
   export type Sheets = { [rulesetName: string]: Sheet }
@@ -93,7 +93,7 @@ export const finishProps = (props: TSheeter.Sheet, finishProcs: TSheeter.FinishA
 export const mergeRulesetsForCode = (sheet: TSheeter.SheetWithAddIns, addInRulesetFilters: TSheeter.AddInRulesetFilters, rulesets: TSheeter.Ruleset[]) => {
   if (!rulesets || rulesets.length === 0) return null
   // get used ruleset's (for $whenUses processing)
-  const addIns = sheet.$addIns
+  const addIns = sheet.$system
   const whenUsed = addIns && addIns.$whenUsed
   let usedRulesets: TSheeter.UsedRulesetNames = null
   if (whenUsed) rulesets.forEach(ruleset => {
@@ -154,22 +154,22 @@ export const isObject = obj => typeof obj === 'object' && Object.getPrototypeOf(
 const whenUsedAddInFilter: TSheeter.AddInRulesetFilter = ({ addInSheet, usedRulesetNames }) => filterRulesetNames(addInSheet).filter(key => usedRulesetNames[key]).map(key => addInSheet[key])
 
 const nameRulesets = (sheet: TSheeter.SheetWithAddIns) => {
-  if (!sheet.$addIns) return
+  if (!sheet.$system) return
   const ignore = { '$': true, '#': true }
-  if (sheet.$addIns)
+  if (sheet.$system)
     for (const p in sheet) if (!ignore[p.charAt(0)]) sheet[p][TSheeter.Consts.rulesetName] = p
 }
 
 const finishAddIns = (sheet: TSheeter.SheetWithAddIns, finishProcs: TSheeter.FinishAddIns) => {
-  if (!sheet.$addIns || !finishProcs) return sheet
+  if (!sheet.$system || !finishProcs) return sheet
   const canModify = sheet[TSheeter.Consts.canModify]
   // clone when needed
-  if (!canModify) sheet = { ...sheet, $addIns: { ...sheet.$addIns } }
-  for (const addInName in sheet.$addIns) {
+  if (!canModify) sheet = { ...sheet, $system: { ...sheet.$system } }
+  for (const addInName in sheet.$system) {
     const proc = finishProcs[addInName]
     if (proc) {
-      let addInItem = sheet.$addIns[addInName]
-      if (!canModify) addInItem = sheet.$addIns[addInName] = { ...addInItem } // clone
+      let addInItem = sheet.$system[addInName]
+      if (!canModify) addInItem = sheet.$system[addInName] = { ...addInItem } // clone
       proc(addInItem)
     }
   }
@@ -207,7 +207,7 @@ const getPatchLow = (addInsRoot: TSheeter.AddIns /*addInsRoot is not mutated*/, 
       // prepare patch for single patch, patchKey = e.g. "root/:active", "add-ins/$whenUsed/add-ins/$mediaq/root/:active/480-640/b/:hover", atc
       const addInSheet = addInSheets[sheetName]
       const patchPath = addInSheet[TSheeter.Consts.data].path as any as string[]
-      const isAddIn = patchPath[0] === TSheeter.Consts.$addIns // path starts with addIns/...
+      const isAddIn = patchPath[0] === TSheeter.Consts.$system // path starts with addIns/...
       if (!canModify && isAddIn) throw getPatchLowWithDeepClone // cannot modify and patch of addIn occurred => try again with canModify=true (I think that aAddIn recursion will be rare)
 
       const rulesets = filter({ addInSheet, usedRulesetNames })
@@ -300,7 +300,7 @@ const processAddIn = (addInNode, addInName, parentNode, root, addInNodePath) => 
   const addIn = addIns[addInName] || (addIns[addInName] = {})
   // path
   const actPathStr = addInNodePath.join('/')
-  const path = [TSheeter.Consts.$addIns, addInName, actPathStr]
+  const path = [TSheeter.Consts.$system, addInName, actPathStr]
   // create addIn value
   const oldValue = addIn[actPathStr]
   const newValue = extractPatches(addInNode, root, path)

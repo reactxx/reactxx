@@ -116,9 +116,9 @@ export namespace Types {
 
   export type CodeSystem<R extends Shape = Shape> =
     {
-      theme: TCommon.getTheme<R>
-      variant: TCommon.getVariant<R>
-      mergeRulesets: <T extends TCommonStyles.RulesetNativeIds | 'Web' | {}>(...rulesets) => TMergeRulesetsResult<T>
+      theme?: TCommon.getTheme<R>
+      variant?: TCommon.getVariant<R>
+      mergeRulesets?: <T extends TCommonStyles.RulesetNativeIds | 'Web' | {}>(...rulesets) => TMergeRulesetsResult<T>
     } &
     TEventsX<R> & // events passed to cross platform component, used in custom component
     TAddIn.PropsX<R>
@@ -158,8 +158,8 @@ export namespace Types {
 
   // *** web or native
   export type CodeSystemProps<R extends Shape = Shape> = {
-    style: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<TCommon.getStyle<R>>
-    classes: Sheet<R>
+    style?: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<TCommon.getStyle<R>>
+    classes?: Sheet<R>
   } &
     CodeSystem<R> &
     TAddIn.CodeProps<R>
