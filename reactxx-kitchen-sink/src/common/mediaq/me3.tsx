@@ -56,7 +56,7 @@ registerTheme<Theme>(Consts.Theme2, { breakpoints: { mobileEnd: 640, tabletEnd: 
 * CODE
 *************************/
 
-const label: Types.CodeSFC<Shape> = ({ system: { mergeRulesets, classes, mediaqFlags }, children }) => {
+const label: Types.CodeSFC<Shape> = ({ $system: { mergeRulesets, classes, mediaqFlags }, children }) => {
   const root = mergeRulesets<Types.ViewRulesetX>(classes.root)
   return <Text className={root}>{mediaqFlags.isMobile ? '[MOBILE]' : mediaqFlags.isTablet ? '[TABLET]' : '[DESKTOP]'} {children}</Text>
 }

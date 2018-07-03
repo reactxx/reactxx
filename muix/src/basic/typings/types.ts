@@ -129,7 +129,7 @@ export namespace Types {
     Omit<TCommon.getProps<R> & TCommon.getPropsWeb<R>, omitPropNames> &
     Types.OnPressAllWeb &
     {
-      system:
+      $system:
       {
         style: TCommonStyles.RulesetWeb
         classes: SheetWeb<R>
@@ -145,7 +145,7 @@ export namespace Types {
     Omit<TCommon.getProps<R> & TCommon.getPropsNative<R>, omitPropNames> &
     Types.OnPressAllNative &
     {
-      system:
+      $system:
       {
         style: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
         classes: SheetNative<R>
@@ -170,7 +170,7 @@ export namespace Types {
     Types.OnPressAllWeb &
     {
       children?: React.ReactNode
-      system?: CodeSystemProps<R>
+      $system?: CodeSystemProps<R>
     }
 
   export type PartialCodeProps = Partial<CodeProps>

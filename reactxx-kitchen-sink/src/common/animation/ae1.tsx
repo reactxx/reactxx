@@ -90,7 +90,7 @@ const sheet: Types.SheetX<Shape> = {
 * CODE
 *************************/
 const label: Types.CodeSFC<Shape> = props => {
-  const { system: { mergeRulesets, classes, animations: { sheets: { anim1, anim2, anim3 } }, onPress, onPressIn, onPressOut }, isAnim1, isAnim2, isAnim3, children, ...rest } = props
+  const { $system: { mergeRulesets, classes, animations: { sheets: { anim1, anim2, anim3 } }, onPress, onPressIn, onPressOut }, isAnim1, isAnim2, isAnim3, children, ...rest } = props
   const root = mergeRulesets<Types.ViewRulesetX>(classes.root, isAnim1 && anim1.sheet.rootAnim, isAnim2 && anim2.sheet.rootAnim, isAnim3 && anim3.sheet.rootAnim)
   const label = mergeRulesets<Types.TextRulesetX>(classes.label, isAnim1 && anim1.sheet.labelAnim, isAnim2 && anim2.sheet.labelAnim, isAnim3 && anim3.sheet.labelAnim)
   return <AnimatedView {...rest} className={root}>
@@ -111,28 +111,28 @@ export const Label = withStylesCreator<Shape>(Consts.Label, sheet, label)()
 *************************************************/
 const Section: React.SFC = ({ children }) => <View className={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>{children}</View>
 
-const App_: React.SFC = props => <Label isAnim1 onPress={ev => ev.current.system.animations.sheets.anim1.toggle()}>TOOGGLE ANIM1</Label>
+const App_: React.SFC = props => <Label isAnim1 onPress={ev => ev.current.$system.animations.sheets.anim1.toggle()}>TOOGGLE ANIM1</Label>
 
 const App: React.SFC = props => <ScrollView className={{ flex: 1 }}>
   <Section>
     <H2>SIMPLE (ANIM1)</H2>
-    <Label isAnim1 onPress={ev => ev.current.system.animations.sheets.anim1.toggle()}>TOOGGLE ANIM1</Label>
-    <Label isAnim1 onPressIn={ev => ev.current.system.animations.sheets.anim1.open()} onPressOut={ev => ev.current.system.animations.sheets.anim1.close()}>OPEN x CLOSE</Label>
+    <Label isAnim1 onPress={ev => ev.current.$system.animations.sheets.anim1.toggle()}>TOOGGLE ANIM1</Label>
+    <Label isAnim1 onPressIn={ev => ev.current.$system.animations.sheets.anim1.open()} onPressOut={ev => ev.current.$system.animations.sheets.anim1.close()}>OPEN x CLOSE</Label>
   </Section>
   <Section>
     <H2>WITH DELAY (ANIM2)</H2>
-    <Label isAnim2 onPress={ev => ev.current.system.animations.sheets.anim2.toggle()}>TOOGGLE ANIM2</Label>
-    <Label isAnim2 onPressIn={ev => ev.current.system.animations.sheets.anim2.open()} onPressOut={ev => ev.current.system.animations.sheets.anim2.close()}>OPEN x CLOSE</Label>
+    <Label isAnim2 onPress={ev => ev.current.$system.animations.sheets.anim2.toggle()}>TOOGGLE ANIM2</Label>
+    <Label isAnim2 onPressIn={ev => ev.current.$system.animations.sheets.anim2.open()} onPressOut={ev => ev.current.$system.animations.sheets.anim2.close()}>OPEN x CLOSE</Label>
   </Section>
   <Section>
     <H2>WITH DELAY (ANIM3)</H2>
-    <Label isAnim3 onPress={ev => ev.current.system.animations.sheets.anim3.toggle()}>TOOGGLE ANIM3</Label>
-    <Label isAnim3 onPressIn={ev => ev.current.system.animations.sheets.anim3.open()} onPressOut={ev => ev.current.system.animations.sheets.anim3.close()}>OPEN x CLOSE</Label>
+    <Label isAnim3 onPress={ev => ev.current.$system.animations.sheets.anim3.toggle()}>TOOGGLE ANIM3</Label>
+    <Label isAnim3 onPressIn={ev => ev.current.$system.animations.sheets.anim3.open()} onPressOut={ev => ev.current.$system.animations.sheets.anim3.close()}>OPEN x CLOSE</Label>
   </Section>
   <Section>
     <H2>CHANGE DURATION (ANIM1)</H2>
-    <Label isAnim1 classes={{ $animations: { anim1: { $duration: 250 } } }} onPress={ev => ev.current.system.animations.sheets.anim1.toggle()}>TOOGGLE ANIM1</Label>
-    <Label isAnim1 classes={{ $animations: { anim1: { $duration: 250 } } }} onPressIn={ev => ev.current.system.animations.sheets.anim1.open()} onPressOut={ev => ev.current.system.animations.sheets.anim1.close()}>OPEN x CLOSE</Label>
+    <Label isAnim1 classes={{ $animations: { anim1: { $duration: 250 } } }} onPress={ev => ev.current.$system.animations.sheets.anim1.toggle()}>TOOGGLE ANIM1</Label>
+    <Label isAnim1 classes={{ $animations: { anim1: { $duration: 250 } } }} onPressIn={ev => ev.current.$system.animations.sheets.anim1.open()} onPressOut={ev => ev.current.$system.animations.sheets.anim1.close()}>OPEN x CLOSE</Label>
   </Section>
 </ScrollView>
 

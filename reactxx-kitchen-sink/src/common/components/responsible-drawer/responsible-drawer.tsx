@@ -143,7 +143,7 @@ const sheet: Types.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =>
 // responsibleDrawer stateless component. 
 const responsibleDrawer: Types.CodeSFC<TResponsibleDrawer.Shape> = props => {
 
-  const { system: { mergeRulesets, classes, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } }, drawer: drawerNode, children } = props
+  const { $system: { mergeRulesets, classes, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } }, drawer: drawerNode, children } = props
 
   const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()
@@ -197,7 +197,7 @@ const responsibleDrawer: Types.CodeSFC<TResponsibleDrawer.Shape> = props => {
 
 // return HOC ResponsibleDrawer component and its creator
 export const ResponsibleDrawerCreator = withStylesCreator<TResponsibleDrawer.Shape, { LayoutChanged: typeof Consumer }>(TResponsibleDrawer.Consts.Drawer, sheet, responsibleDrawer, {
-  getVariant: ({ animationDuration, system: { mediaqFlags }, drawerWidths }) => ({ animationDuration, mediaqFlags, drawerWidths }),
+  getVariant: ({ animationDuration, $system: { mediaqFlags }, drawerWidths }) => ({ animationDuration, mediaqFlags, drawerWidths }),
   variantToString: ({ animationDuration, mediaqFlags, drawerWidths }) => variantToString(animationDuration, mediaqFlags.mobile, mediaqFlags.tablet, mediaqFlags.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
   defaultProps: {
     animationDuration: 300,

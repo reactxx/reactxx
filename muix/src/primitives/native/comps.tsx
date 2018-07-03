@@ -10,7 +10,7 @@ import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comp
 
 const anyView = (isAnim: boolean) => (props => {
   const ActView = isAnim ? Animated.View : ViewRN
-  const { system: { mergeRulesets, style, classes }, onPress, onLongPress, onPressIn, onPressOut, ...rest } = props
+  const { $system: { mergeRulesets, style, classes }, onPress, onLongPress, onPressIn, onPressOut, ...rest } = props
   const rootStyle = mergeRulesets<'View'>(classes.root, style)
   const presses = onPress || onLongPress || onPressIn || onPressOut ? { onPress, onLongPress, onPressIn, onPressOut } : null
   const res = <ActView style={rootStyle} {...rest} />
@@ -20,7 +20,7 @@ const anyView = (isAnim: boolean) => (props => {
 
 const anyText = (isAnim: boolean) => (props => {
   const ActText = isAnim ? Animated.Text : TextRN
-  const { system: { mergeRulesets, style, classes, $developer_RenderCounter }, onPress, url, children, ...rest } = props
+  const { $system: { mergeRulesets, style, classes, $developer_RenderCounter }, onPress, url, children, ...rest } = props
   const rootStyle = mergeRulesets<'Text'>(classes.root, props.numberOfLines === 1 && classes.singleLineStyle, style)
   //Link to URL
   const doPress = !url ? onPress : () => Linking.canOpenURL(url).then(supported => {
@@ -39,7 +39,7 @@ const anyText = (isAnim: boolean) => (props => {
 
 const anyScrollView = (isAnim: boolean) => (props => {
   const ActScrollView = isAnim ? Animated.ScrollView : ScrollViewRN
-  const { system: { mergeRulesets, style, classes }, ...rest } = props
+  const { $system: { mergeRulesets, style, classes }, ...rest } = props
   const rootStyle = mergeRulesets<'ScrollView'>(classes.root, style)
   const containerStyle = mergeRulesets<'View'>(classes.container)
   return <ActScrollView style={rootStyle} contentContainerStyle={containerStyle} {...rest} />
@@ -47,7 +47,7 @@ const anyScrollView = (isAnim: boolean) => (props => {
 
 const anyIcon = (isAnim: boolean) => (props => {
   const ActIcon = isAnim ? AnimatedIconLow : MaterialCommunityIcons
-  const { system: { mergeRulesets, style, classes }, data, children, onPress, url, ...rest } = props
+  const { $system: { mergeRulesets, style, classes }, data, children, onPress, url, ...rest } = props
   const rootStyle = mergeRulesets<'Text'>(classes.root, style)
   //Link to URL
   const doPress = !url ? onPress : () => Linking.canOpenURL(url).then(supported => {

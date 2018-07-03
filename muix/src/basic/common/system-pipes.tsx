@@ -117,10 +117,10 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
 
     // **** merge patches and eventsX to finalProps
     const propPatches: Types.PartialCodeProps[] = Object.keys(codePropsPatch).map(p => codePropsPatch[p])
-    if (eventsX) propPatches.push({ system: { ...eventsX } } as Types.PartialCodeProps)
+    if (eventsX) propPatches.push({ $system: { ...eventsX } } as Types.PartialCodeProps)
     const finalProps: Types.CodeProps = renderState.finalProps = immutableMerge(renderState.platformProps, propPatches)
-    if (!finalProps.system) finalProps.system = {} as any
-    const system = finalProps.system
+    if (!finalProps.$system) finalProps.$system = {} as any
+    const system = finalProps.$system
 
     // **** variant
     let variant: {} = null
@@ -150,7 +150,7 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     // call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
     const { codeClasses, addInClasses } = getPlatformSheet({ id, finishAddInClasses,  createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
     renderState.addInClasses = addInClasses //e.g {$animations:..., root: {$mediaq:...}}
-    renderState.finalProps.system.classes = codeClasses
+    renderState.finalProps.$system.classes = codeClasses
   }
 
   const propsPipe = (input: () => { props: Types.PropsX, renderState: TRenderStateEx }, output: (par: FinalizePropsOutput) => void, next: () => React.ReactNode) => {
@@ -194,7 +194,7 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     }
 
     // method, called in component code: ruleset merging
-    finalProps.system.mergeRulesets = (...rulesets: TCommon.RulesetFragmentsParts) => {
+    finalProps.$system.mergeRulesets = (...rulesets: TCommon.RulesetFragmentsParts) => {
       const res = mergeRulesets(
         consolidePatches(codeClassesPatch),
         addInClasses,

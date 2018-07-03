@@ -23,7 +23,7 @@ export interface TRenderState extends TRenderStateBasic {
 export const propsPipe = (state: TRenderState, next) =>
   mediaQFlags( // media flags, e.g. {mobile:false, tablet:true, desktop:false }
     () => ({ $mediaq: state.addInProps.$mediaq, theme: state.themeContext.theme }),
-    mediaqFlags => mediaqFlags && (state.codePropsPatch['reactxx-mediaq'] = { system: { mediaqFlags } } as Types.CodeProps),
+    mediaqFlags => mediaqFlags && (state.codePropsPatch['reactxx-mediaq'] = { $system: { mediaqFlags } } as Types.CodeProps),
     next)
 
 export const stylePipe = (state: TRenderState, next) =>

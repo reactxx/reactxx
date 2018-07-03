@@ -24,7 +24,7 @@ export interface TRenderState extends TRenderStateBasic {
 export const stylePipe = (state: TRenderState, next) =>
   animations( // process animation $animations part of sheet
     () => state.addInClasses && state.addInClasses.$animations as TAnimation.SheetsX,
-    animations => state.finalProps.system.animations = animations,
+    animations => state.finalProps.$system.animations = animations,
     next
   )
 
