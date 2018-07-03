@@ -1,18 +1,16 @@
-import { TFinishAddIns, TSheet, AddInRulesetFilters, mergeSheets, toPatchableAndMergeable, mergeRulesetsForCode } from './sheeter'
-import { finishAddInCreator, rulesetFilterCreator } from './sheeter-mediaq'
-import { rulesetFilter } from './sheeter-when-used'
+import { TSheeter, mergeSheets, toPatchableAndMergeable, mergeRulesetsForCode, mediaqFinishAddInCreator, mediaqRulesetFilterCreator, whenUsedRulesetFilter } from 'reactxx-sheeter'
 
 export const test = () => {
 
-  const finishAddIns: TFinishAddIns = {
-    $mediaq: finishAddInCreator()
-  }
-  const addInRulesetFilters: AddInRulesetFilters = {
-    $mediaq: rulesetFilterCreator(200), // screen width = 200px
-    $whenUsed: rulesetFilter
-  }
   const patchable = toPatchableAndMergeable(root)
 
+  const finishAddIns: TSheeter.FinishAddIns = {
+    $mediaq: mediaqFinishAddInCreator()
+  }
+  const addInRulesetFilters: TSheeter.AddInRulesetFilters = {
+    $mediaq: mediaqRulesetFilterCreator(200), // screen width = 200px
+    $whenUsed: whenUsedRulesetFilter
+  }
   window.isWeb = true
   const mergedWeb = mergeSheets(patchable, [], finishAddIns)
   const codeRootWeb = mergeRulesetsForCode(mergedWeb, addInRulesetFilters, [mergedWeb.root, false as any, mergedWeb.b, null as any])
@@ -27,7 +25,7 @@ export const test = () => {
 //****************************
 // INPUT DATA
 
-const root: TSheet = {
+const root: TSheeter.Sheet = {
   root: {
     a0: 1,
     $web: {
@@ -50,7 +48,7 @@ const root: TSheet = {
                           '200-300': {
                             a7: 1,
                           }
-                        } as TSheet
+                        } as TSheeter.Sheet
                       },
                     },
                     ":hover": {
@@ -58,13 +56,13 @@ const root: TSheet = {
                         '300-400': {
                           a8: 1,
                         }
-                      } as TSheet
+                      } as TSheeter.Sheet
                     }
                   },
                 },
-              } as TSheet,
+              } as TSheeter.Sheet,
             },
-          } as TSheet,
+          } as TSheeter.Sheet,
         },
       },
     },

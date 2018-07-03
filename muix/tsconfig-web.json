@@ -5,6 +5,7 @@
     "module": "system",
     "moduleResolution": "node",
 
+    "allowJs": true,
     //"declaration": true,
 
     //"traceResolution": true,
@@ -30,6 +31,7 @@
     "baseUrl": ".",
     "paths": {
 
+      "reactxx-sheeter": [ "src/sheeter/index" ],
       "reactxx-fela": [ "src/fela/index" ],
       "reactxx-animation": [ "src/animation/web/index" ],
       "reactxx-primitives": [ "src/primitives/web/index" ],
@@ -38,9 +40,9 @@
       "reactxx-activable": [ "src/activable/web/index" ],
       "reactxx": [ "src/reactxx/web/index" ],
 
-      "reactxx-mui/*": [ "src/material-ui/*" ],
-      "reactxx-muix/*": [ "src/mui/*" ],
-      "classnames": [ "src/mui/web/classnames" ]
+      "material-ui/*": [ "src/material-ui/*" ],
+      "reactxx-muix/*": [ "src/muix/*" ],
+      "classnames": [ "src/muix/web/classnames" ]
     },
 
     "lib": [
@@ -51,7 +53,9 @@
   },
   "include": [
     //"src/**/*",
-    "src/**/*",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/material-ui/*.js",
     "node_modules/reactxx-mdi/typings.ts"
   ],
   "exclude": [

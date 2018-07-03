@@ -15,6 +15,7 @@
 
       "reactxx-mdi": [ "node_modules/reactxx-mdi/es/index" ],
 
+      "reactxx-sheeter": [ "src/sheeter/index" ],
       "reactxx-animation": [ "src/animation/native/index" ],
       "reactxx-primitives": [ "src/primitives/native/index" ],
       "reactxx-mediaq": [ "src/mediaq/native/index" ],

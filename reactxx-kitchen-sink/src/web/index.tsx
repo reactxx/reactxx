@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom'
 
 import Button from 'material-ui/Button'
 
-//import { test } from '../../basic/common/sheeter-mediaq-test'
-import { test } from '../../basic/common/sheeter-test'
+//import { test } from '../common/sheeter/mediaq-test'
+import { test } from '../common/sheeter/test'
 test()
 
 //debugger

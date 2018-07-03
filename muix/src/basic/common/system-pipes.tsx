@@ -1,9 +1,11 @@
 ﻿import React from 'react'
 import warning from 'warning'
 
+import { deepMerges, toPatchableAndMergeable, setCanModify, TSheeter, finishProps } from 'reactxx-sheeter'
+
 import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
-import { getPlatformSheet, deepMerges, toPlatformRulesets, immutableMerge, mergeRulesetsParts, toPlatformSheets } from './to-platform'
+import { getPlatformSheet, toPlatformRulesets, immutableMerge, mergeRulesetsParts, toPlatformSheets } from './to-platform'
 import { TAddIn } from '../typings/add-in'
 import { TCommonStyles } from '../typings/common-styles'
 import { themePipe } from './theme'
@@ -16,9 +18,9 @@ export interface FinalizePropsOutput {
 
 export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: string, sheetCreator: Types.SheetCreatorX<R>, finishAddInClasses: ((addInClasses: {}) => void)[], options: Types.WithStyleOptions_ComponentX<R>) => {
 
-  const defaultPropsStyles: Types.StyleFromProps = options.defaultProps && getStyleFromProps(options.defaultProps)
+  const defaultPropsSeparated: Types.SeparatedProps = options.defaultProps && separateProps(options.defaultProps)
 
-  const { Provider: CascadingProvider, Consumer: CascadingConsumer } = options.withCascading ? React.createContext<StyleFromPropsArray>(null) : { Provider: null, Consumer: null } as React.Context<StyleFromPropsArray>
+  const { Provider: CascadingProvider, Consumer: CascadingConsumer } = options.withCascading ? React.createContext<SeparatedPropsArray>(null) : { Provider: null, Consumer: null } as React.Context<SeparatedPropsArray>
 
   class CascadingProviderComponent extends React.Component<Types.PropsX> {
 
@@ -30,8 +32,8 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
       return <CascadingConsumer>{this.CASCADING}</CascadingConsumer>
     }
 
-    CASCADING = (cascadingProps: StyleFromPropsArray) => {
-      const item = getStyleFromProps(this.props)
+    CASCADING = (cascadingProps: SeparatedPropsArray) => {
+      const item = separateProps(this.props)
       return <CascadingProvider value={cascadingProps ? [...cascadingProps, item] : [item]}>{this.props.children}</CascadingProvider >
     }
 
@@ -56,16 +58,16 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     finalizeEvent(finalProps, 'onLongPress', eventsPlatform, window.isWeb ? '?' : 'onLongPress', renderState)
   }
 
-  const toPlatformProps = (cascadingStyleFromPropsArray: StyleFromPropsArray, currentProps: Types.PropsX, renderState: TRenderStateEx) => {
+  const toPlatformProps = (cascadingSeparatedPropsArray: SeparatedPropsArray, currentProps: Types.PropsX, renderState: TRenderStateEx) => {
 
-    const _defaultPropsStyles = defaultPropsStyles ? { ...defaultPropsStyles, classes: null } : null
+    const _defaultPropsNoClasses = defaultPropsSeparated ? { ...defaultPropsSeparated, classes: null } : null
 
-    const allStyleFromPropsArray: StyleFromPropsArray = [_defaultPropsStyles, ...cascadingStyleFromPropsArray || [], getStyleFromProps(currentProps)]
+    const allSeparatedPropsArray: SeparatedPropsArray = [_defaultPropsNoClasses, ...cascadingSeparatedPropsArray || [], separateProps(currentProps)]
 
     const theme = renderState.themeContext.theme
 
     // accumulate Types.StyleFromProps[] to Types.StylesFromProps
-    const accumulatedStylesFromProps = renderState.accumulatedStylesFromProps = allStyleFromPropsArray.reduce<AccumulatedStylesAndProps>((prev, curr) => {
+    const accumulatedSeparatedProps = renderState.separatedStyles = allSeparatedPropsArray.reduce<AccumulatedStylesAndProps>((prev, curr) => {
       if (!curr) return prev
       if (curr.rest) prev.props.push(curr.rest)
       if (curr.$themedProps) prev.props.push(curr.$themedProps(theme))
@@ -75,11 +77,14 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
       return prev
     }, { props: [], classes: [], className: [], style: [] })
 
-    const needsDeepMerge = accumulatedStylesFromProps.props.length > 1
+    const needsDeepMerge = accumulatedSeparatedProps.props.length > 1
 
     // merge non-style props
-    let platformProps: Types.PropsX = needsDeepMerge ? deepMerges({}, ...accumulatedStylesFromProps.props) : { ...accumulatedStylesFromProps.props[0] }
-    delete accumulatedStylesFromProps.props
+    const mergedProps: Types.PropsX = needsDeepMerge ? deepMerges({}, accumulatedSeparatedProps.props) : { ...accumulatedSeparatedProps.props[0] }
+    delete accumulatedSeparatedProps.props
+
+    // use sheeter utils for prop finishing (linearize $web and $native props, extract and finish addIns (e.g. $mediaq))
+    const platformProps = finishProps(mergedProps as TSheeter.Sheet, null)
 
     // remove developer_flag for non 'development' ENV
     if (!DEV_MODE && platformProps.$developer_flag) delete platformProps.$developer_flag
@@ -89,10 +94,10 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     finalizeEvents(platformProps, renderState)
 
     // process $web and $native props part
-    const { $web, $native } = platformProps
-    delete platformProps.$web; delete platformProps.$native
-    if ($web && window.isWeb) platformProps = needsDeepMerge ? deepMerges(platformProps, $web) : deepMerges({}, platformProps, $web)
-    if ($native && !window.isWeb) platformProps = needsDeepMerge ? deepMerges(platformProps, $native) : deepMerges({}, platformProps, $native)
+    //const { $web, $native } = platformProps
+    //delete platformProps.$web; delete platformProps.$native
+    //if ($web && window.isWeb) platformProps = needsDeepMerge ? deepMerges(platformProps, [$web]) : deepMerges({}, platformProps, $web)
+    //if ($native && !window.isWeb) platformProps = needsDeepMerge ? deepMerges(platformProps, $native) : deepMerges({}, platformProps, $native)
 
     // separate addIns props (starting with $)
     const addInProps: any = {}
@@ -107,7 +112,7 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
 
   const toPlatformStyle = (displayName: string, id: number, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderStateEx) => {
 
-    const { codePropsPatch, platformProps, addInProps, eventsX, accumulatedStylesFromProps } = renderState
+    const { codePropsPatch, platformProps, addInProps, eventsX, separatedStyles } = renderState
     const { theme, $cache } = renderState.themeContext
 
     // **** merge patches and eventsX to finalProps
@@ -128,18 +133,18 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     }
 
     // **** style (for web only). For native: is included in sheetXPatch.root.
-    const toMergeStylesCreators = window.isWeb && accumulatedStylesFromProps.style.length > 0 ? accumulatedStylesFromProps.style : null
+    const toMergeStylesCreators = window.isWeb && separatedStyles.style.length > 0 ? separatedStyles.style : null
     const toMergeStylesX: Types.RulesetX[] = !toMergeStylesCreators ? null : toMergeStylesCreators.map(creator => expandCreator(creator))
 
     if (toMergeStylesX) system.style = toPlatformRulesets(toMergeStylesX)
 
     // **** sheet patch (for native: style included)
     const toMergeSheetCreators = [
-      ...accumulatedStylesFromProps.classes || null,
-      ...accumulatedStylesFromProps.className.map(className => ({ root: className })),
-      ... (window.isWeb ? [] : accumulatedStylesFromProps.style.map(style => ({ root: style })))]
+      ...separatedStyles.classes || null,
+      ...separatedStyles.className.map(className => ({ root: className })),
+      ... (window.isWeb ? [] : separatedStyles.style.map(style => ({ root: style })))]
     const sheetXPatch: Types.PartialSheetX[] = toMergeSheetCreators.length === 0 ? null : toMergeSheetCreators.map(creator => expandCreator(creator))
-    const defaultClasses: Types.PartialSheetX = !defaultPropsStyles ? null : typeof defaultPropsStyles.classes === 'function' ? expandCreator(defaultPropsStyles.classes) : defaultPropsStyles.classes
+    const defaultClasses: Types.PartialSheetX = !defaultPropsSeparated ? null : typeof defaultPropsSeparated.classes === 'function' ? expandCreator(defaultPropsSeparated.classes) : defaultPropsSeparated.classes
 
     // **** apply sheet patch to sheet:
     // call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
@@ -150,7 +155,7 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
 
   const propsPipe = (input: () => { props: Types.PropsX, renderState: TRenderStateEx }, output: (par: FinalizePropsOutput) => void, next: () => React.ReactNode) => {
     let props: Types.PropsX, renderState: TRenderState
-    const render = (cascadingStyleFromPropsArray: StyleFromPropsArray) => {
+    const render = (cascadingStyleFromPropsArray: SeparatedPropsArray) => {
       output(toPlatformProps(cascadingStyleFromPropsArray, props, renderState))
       return next()
     }
@@ -297,17 +302,17 @@ const mergeRulesets = (codeClassesPatch: TCommon.SheetPatchFinal, addInClasses: 
 
 interface TRenderStateEx extends TRenderState {
   eventsX?: Types.OnPressAllX
-  accumulatedStylesFromProps?: AccumulatedStylesAndProps
+  separatedStyles?: AccumulatedStylesAndProps
 }
 
-const getStyleFromProps = (props: Types.PropsX) => {
+const separateProps = (props: Types.PropsX) => {
   const { classes, className, style, $themedProps, ...rest } = props
-  return { classes, className, style, $themedProps, rest: Object.keys(rest).length === 0 ? null : rest } as Types.StyleFromProps
+  return { classes, className, style, $themedProps, rest: Object.keys(rest).length === 0 ? null : rest } as Types.SeparatedProps
 }
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
-type StyleFromPropsArray = Types.StyleFromProps[]
+type SeparatedPropsArray = Types.SeparatedProps[]
 
 interface AccumulatedStylesAndProps extends Types.AccumulatedStylesFromProps {
   props: (Types.ThemedPropsX | Types.PropsX)[]

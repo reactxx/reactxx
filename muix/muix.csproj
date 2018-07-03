@@ -392,11 +392,13 @@
     <Content Include="src\doc\home - Copy.md" />
     <Content Include="src\reactxx\README.md" />
     <Content Include="src\basic\typings\mklink-c.cmd" />
-    <TypeScriptCompile Include="src\basic\common\sheeter-test.ts" />
-    <TypeScriptCompile Include="src\basic\common\sheeter-mediaq-test.ts" />
-    <TypeScriptCompile Include="src\basic\common\sheeter-when-used.ts" />
-    <TypeScriptCompile Include="src\basic\common\sheeter-mediaq.ts" />
-    <TypeScriptCompile Include="src\basic\common\sheeter.ts" />
+    <TypeScriptCompile Include="src\ks\common\sheeter\animations-test.ts" />
+    <TypeScriptCompile Include="src\ks\common\sheeter\test.ts" />
+    <TypeScriptCompile Include="src\ks\common\sheeter\mediaq-test.ts" />
+    <TypeScriptCompile Include="src\sheeter\animations.ts" />
+    <TypeScriptCompile Include="src\sheeter\when-used.ts" />
+    <TypeScriptCompile Include="src\sheeter\mediaq.ts" />
+    <TypeScriptCompile Include="src\sheeter\index.ts" />
     <TypeScriptCompile Include="src\material-ui\styles\withStyles.ts" />
     <TypeScriptCompile Include="src\test\sheet-frag\src-2.ts" />
     <TypeScriptCompile Include="src\test\sheet-frag\src-3.ts" />
@@ -431,7 +433,6 @@
     <TypeScriptCompile Include="src\basic\common\system-pipes.tsx" />
     <TypeScriptCompile Include="src\basic\common\sheet-fragments.ts" />
     <TypeScriptCompile Include="src\basic\common\to-platform.ts" />
-    <None Include="src\basic\common\sheet-cache.tsx_" />
     <TypeScriptCompile Include="src\basic\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\basic\typings\add-in.ts" />
     <TypeScriptCompile Include="src\basic\typings\common.ts" />

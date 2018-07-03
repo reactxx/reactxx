@@ -196,7 +196,7 @@ export namespace Types {
       OPRIONS AND STYLES FROM PROPS
    *******************************************/
 
-  export interface StyleFromProps {
+  export interface SeparatedProps {
     classes?: Types.PartialSheetCreatorX
     className?: Types.RootRulesetCreatorX
     style?: Types.RootRulesetCreatorX
