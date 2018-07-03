@@ -170,7 +170,7 @@ export namespace Types {
     Types.OnPressAllWeb &
     {
       children?: React.ReactNode
-      system: CodeSystemProps<R>
+      system?: CodeSystemProps<R>
     }
 
   export type PartialCodeProps = Partial<CodeProps>

@@ -57,7 +57,7 @@ export namespace TMediaQ {
   }
 
   //***  MediaQ Notify properties
-  export type NotifyIntervalCreator<TState extends string = string> = NotifyIntervalX<TState> | ((theme) => NotifyIntervalX<TState>)
+  export type NotifyIntervalCreator<TState extends string = string> = NotifyIntervalX<TState> //| ((theme) => NotifyIntervalX<TState>)
   export type NotifyIntervalX<TState extends string> = { [P in TState]: [number | null, number | null] }
 
   export type NotifyIntervalDecoded<TState extends string = string> = { [P in TState]: [Breakpoint, Breakpoint] }
@@ -83,7 +83,7 @@ export const mediaQFlags = <T extends string>(input: () => { $mediaq: TMediaQ.No
   }
   const res = () => {
     const { $mediaq, theme } = input()
-    getNotifyBreakpointsResult = getNotifyBreakpoints($mediaq, theme)
+    getNotifyBreakpointsResult = getNotifyBreakpoints($mediaq)
     if (getNotifyBreakpointsResult.observedBits !== 0) return <MediaQConsumer unstable_observedBits={getNotifyBreakpointsResult.observedBits}>{render}</MediaQConsumer>
     output(null)
     return next()
@@ -136,13 +136,13 @@ export const breaksToString = (start: number, end: number) => `${start ? start :
 * PRIVATE
 *************************/
 
-const getNotifyBreakpoints = <T extends string>($mediaq: TMediaQ.NotifyIntervalCreator, theme) => {
+const getNotifyBreakpoints = <T extends string>($mediaq: TMediaQ.NotifyIntervalCreator) => {
   if (!$mediaq) return { usedNotifyBreakpoints: null as TMediaQ.NotifyIntervalDecoded<T>, observedBits: 0 }
-  const mediaq = typeof $mediaq === 'function' ? $mediaq(theme) : $mediaq
+  //const mediaq = typeof $mediaq === 'function' ? $mediaq(theme) : $mediaq
   const newMedia = {} as TMediaQ.NotifyIntervalDecoded<T>
   let observedBits = 0
-  for (const p in mediaq)
-    newMedia[p] = mediaq[p].map((i, idx) => {
+  for (const p in $mediaq)
+    newMedia[p] = $mediaq[p].map((i, idx) => {
       if (!i) return idx == 0 ? BMin : BMax
       const breakpoint = subscribe(i, false)
       observedBits |= 1 << breakpoint.id

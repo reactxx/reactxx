@@ -83,7 +83,7 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     const mergedProps: Types.PropsX = needsDeepMerge ? deepMerges({}, accumulatedSeparatedProps.props) : { ...accumulatedSeparatedProps.props[0] }
     delete accumulatedSeparatedProps.props
 
-    // use sheeter utils for prop finishing (linearize $web and $native props, extract and finish addIns (e.g. $mediaq))
+    // use sheeter utils for props finishing (linearize $web and $native props, extract and finish addIns (e.g. $mediaq))
     const platformProps = finishProps(mergedProps as TSheeter.Sheet, null)
 
     // remove developer_flag for non 'development' ENV
