@@ -34,7 +34,7 @@ export namespace TAddIn {
 
   //******************** Cross platform 
   export interface PropsX<R extends Types.Shape = Types.Shape> extends TAddInBasic.PropsX<R> {
-    $mediaq?: TMediaQ.NotifyIntervalCreator<getMediaQ<R>>
+    $mediaq?: TMediaQ.NotifyIntervalX<getMediaQ<R>>
   }
 
   //******************** Platform specific

@@ -13,7 +13,7 @@ import { TRenderState } from './withStyles'
 
 export interface FinalizePropsOutput {
   platformProps: Types.CodeProps
-  addInProps: TAddIn.PropsX
+  //addInProps: TAddIn.PropsX
 }
 
 export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: string, sheetCreator: Types.SheetCreatorX<R>, finishAddInClasses: ((addInClasses: {}) => void)[], options: Types.WithStyleOptions_ComponentX<R>) => {
@@ -83,8 +83,8 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     const mergedProps: Types.PropsX = needsDeepMerge ? deepMerges({}, accumulatedSeparatedProps.props) : { ...accumulatedSeparatedProps.props[0] }
     delete accumulatedSeparatedProps.props
 
-    // use sheeter utils for props finishing (linearize $web and $native props, extract and finish addIns (e.g. $mediaq))
-    const platformProps = finishProps(mergedProps as TSheeter.Sheet, null)
+    // use sheeter utils for props finishing (linearize $web and $native props, extract addIns (e.g. $mediaq))
+    const platformProps = finishProps(mergedProps as TSheeter.Sheet)
 
     // remove developer_flag for non 'development' ENV
     if (!DEV_MODE && platformProps.$developer_flag) delete platformProps.$developer_flag
@@ -100,14 +100,14 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     //if ($native && !window.isWeb) platformProps = needsDeepMerge ? deepMerges(platformProps, $native) : deepMerges({}, platformProps, $native)
 
     // separate addIns props (starting with $)
-    const addInProps: any = {}
-    for (const p in platformProps) {
-      if (p.startsWith('$')) {
-        addInProps[p] = platformProps[p]; delete platformProps[p] // move props from platformProps to addInProps, e.g. $developer_flag:true, $mediaq: {'-640': {}}
-      }
-    }
+    //const addInProps: any = {}
+    //for (const p in platformProps) {
+    //  if (p.startsWith('$')) {
+    //    addInProps[p] = platformProps[p]; delete platformProps[p] // move props from platformProps to addInProps, e.g. $developer_flag:true, $mediaq: {'-640': {}}
+    //  }
+    //}
 
-    return { platformProps: platformProps as Types.CodeProps, addInProps } as FinalizePropsOutput
+    return { platformProps: platformProps as Types.CodeProps } as FinalizePropsOutput
   }
 
   const toPlatformStyle = (displayName: string, id: number, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderStateEx) => {

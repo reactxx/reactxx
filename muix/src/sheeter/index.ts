@@ -23,6 +23,7 @@ export namespace TSheeter {
     rulesetName = '#rulesetName',
     canModify = '#canModify',
     data = '#data',
+    dataObservedBits = 'observedBits',
   }
 
   //****************************
@@ -48,9 +49,11 @@ export namespace TSheeter {
     usedRulesetNames?: UsedRulesetNames
     addInSheet: Sheet
   }
-  export type AddInRulesetFilter = (par: AddInRulesetPar) => Ruleset[]
-  export type AddInRulesetFilters = { [addInName: string]: AddInRulesetFilter }
+  export type RulesetPatchGetter = (par: AddInRulesetPar) => Ruleset[]
+  export type RulesetPatchGetters = { [addInName: string]: RulesetPatchGetter }
 
+  export type PropsPatchGetter = (par: {}, patches: Array<{}>) => void
+  export type PropsPatchGetters = { [addInName: string]: PropsPatchGetter }
   //****************************
   // OTHER
 
@@ -60,7 +63,27 @@ export namespace TSheeter {
 }
 
 //****************************
-// MAIN EXPORTS
+// EXPORTS FOR PROPS
+//****************************
+
+export const finishProps = (root: TSheeter.Sheet) => {
+  root = linearize(root) // in-place processing of $before, $web, $native and $after ruleset props
+  return extractPropsPatches(root) as TSheeter.SheetWithAddIns // extract addIn props of ruleset (starting with $, e.g. $mediaq) etc.
+}
+
+const getPropsPatch = (addInsRoot: TSheeter.AddIns /*addInsRoot is not mutated*/, addInPropsFilters: TSheeter.PropsPatchGetters) => {
+  if (!addInPropsFilters) return null
+  const res = []
+  for (const p in addInsRoot) {
+    const addIn = addInsRoot[p], proc = addInPropsFilters[p]
+    if (!addIn || !proc) continue
+    proc(addIn, res)
+  }
+  return res.length === 0 ? null : res
+}
+
+//****************************
+// EXPORTS FOR SHEET
 //****************************
 
 export const setCanModify = (root: TSheeter.SheetWithAddIns) => root[TSheeter.Consts.canModify] = true
@@ -69,6 +92,7 @@ export const setCanModify = (root: TSheeter.SheetWithAddIns) => root[TSheeter.Co
 export const toPatchableAndMergeable = (root: TSheeter.Sheet) => {
   root = linearize(root) // in-place processing of $before, $web, $native and $after ruleset props
   return extractPatches(root, root as TSheeter.SheetWithAddIns, []) as TSheeter.SheetWithAddIns // extract addIn props of ruleset (starting with $, e.g. $mediaq) etc.
+  //return (isProp ? extractPropsPatches(root) : extractPatches(root, root as TSheeter.SheetWithAddIns, [])) as TSheeter.SheetWithAddIns // extract addIn props of ruleset (starting with $, e.g. $mediaq) etc.
   //return res
 }
 
@@ -82,29 +106,23 @@ export const mergeSheets = (sheet: TSheeter.SheetWithAddIns, modifiers: TSheeter
   return sheet
 }
 
-export const finishProps = (props: TSheeter.Sheet, finishProcs: TSheeter.FinishAddIns) => {
-  const platformProps = toPatchableAndMergeable(props)
-  setCanModify(platformProps)
-  return finishAddIns(platformProps, null)
-}
-
-
 // merge rulesets in component code (apply addIn patches)
-export const mergeRulesetsForCode = (sheet: TSheeter.SheetWithAddIns, addInRulesetFilters: TSheeter.AddInRulesetFilters, rulesets: TSheeter.Ruleset[]) => {
+export const mergeRulesetsForCode = (sheet: TSheeter.SheetWithAddIns, rulesetPatchGetters: TSheeter.RulesetPatchGetters, rulesets: TSheeter.Ruleset[]) => {
   if (!rulesets || rulesets.length === 0) return null
-  // get used ruleset's (for $whenUses processing)
   const addIns = sheet.$system
-  const whenUsed = addIns && addIns.$whenUsed
+
+  // get used ruleset's (for $whenUses processing)
+  const $whenUsed = addIns && addIns.$whenUsed
   let usedRulesets: TSheeter.UsedRulesetNames = null
-  if (whenUsed) rulesets.forEach(ruleset => {
+  if ($whenUsed) rulesets.forEach(ruleset => {
     if (!ruleset || !ruleset[TSheeter.Consts.rulesetName]) return
     (usedRulesets || (usedRulesets = {}))[ruleset[TSheeter.Consts.rulesetName]] = true
   })
 
-  // patch rulesets
+  // apply patch to rulesets
   let firstIsReadOnly = true
   let patchedRulesets = rulesets
-  const patches = addIns && getPatches(addIns, addInRulesetFilters, usedRulesets) // compute actual patches (based on addIn filters and usedRulesets)
+  const patches = addIns && getPatches(addIns, rulesetPatchGetters, usedRulesets) // compute actual patches (based on addIn filters and usedRulesets)
   if (patches) {
     patchedRulesets = []
     rulesets.forEach((ruleset, idx) => {
@@ -151,7 +169,7 @@ export const isObject = obj => typeof obj === 'object' && Object.getPrototypeOf(
 // PRIVATE
 //****************************
 
-const whenUsedAddInFilter: TSheeter.AddInRulesetFilter = ({ addInSheet, usedRulesetNames }) => filterRulesetNames(addInSheet).filter(key => usedRulesetNames[key]).map(key => addInSheet[key])
+const whenUsedAddInFilter: TSheeter.RulesetPatchGetter = ({ addInSheet, usedRulesetNames }) => filterRulesetNames(addInSheet).filter(key => usedRulesetNames[key]).map(key => addInSheet[key])
 
 const nameRulesets = (sheet: TSheeter.SheetWithAddIns) => {
   if (!sheet.$system) return
@@ -183,7 +201,7 @@ type Patch = { patchPath: string[], rulesets: TSheeter.Node[] }
 
 // For mergeRulesets: compute actual patches (based on addIn filters and usedRulesets)
 // addInsRoot is not mutated
-const getPatches = (addInsRoot: TSheeter.AddIns, addInRulesetFilters: TSheeter.AddInRulesetFilters, usedRulesets: TSheeter.UsedRulesetNames) => {
+const getPatches = (addInsRoot: TSheeter.AddIns, addInRulesetFilters: TSheeter.RulesetPatchGetters, usedRulesets: TSheeter.UsedRulesetNames) => {
   let res: Patch[]
   try {
     res = getPatchLow(addInsRoot, addInRulesetFilters, usedRulesets, false) // optimistic: addIns are not recured => addInsRoot is not mutated
@@ -194,14 +212,14 @@ const getPatches = (addInsRoot: TSheeter.AddIns, addInRulesetFilters: TSheeter.A
   return res
 }
 
-const getPatchLow = (addInsRoot: TSheeter.AddIns /*addInsRoot is not mutated*/, addInRulesetFilters: TSheeter.AddInRulesetFilters, usedRulesetNames: TSheeter.UsedRulesetNames, canModify: boolean) => {
-  if (!addInsRoot || !addInRulesetFilters) return null
+const getPatchLow = (addInsRoot: TSheeter.AddIns /*addInsRoot is not mutated*/, rulesetPatchGetters: TSheeter.RulesetPatchGetters, usedRulesetNames: TSheeter.UsedRulesetNames, canModify: boolean) => {
+  if (!addInsRoot || !rulesetPatchGetters) return null
   let rootPatches: Patch[] = [] // patches of top level sheet rulesets
   let addInPatches: Patch[] = [] // pathes for inner addIns rulesets
   for (const addInName in addInsRoot) {
     const addInSheets = addInsRoot[addInName] // addInKey is e.g $whenUsed, $mediaq...
     // get addIn ruleset filter
-    const filter = addInRulesetFilters[addInName]
+    const filter = rulesetPatchGetters[addInName]
     warning(filter, `Missing filter for ${addInName} addIn`)
     for (const sheetName in addInSheets) {
       // prepare patch for single patch, patchKey = e.g. "root/:active", "add-ins/$whenUsed/add-ins/$mediaq/root/:active/480-640/b/:hover", atc
@@ -280,9 +298,20 @@ export const linearize = (root: TSheeter.Node) => {
 //****************************
 // EXTRACT PATCHES FROM SHEET TO ADD INS
 
+const extractPropsPatches = (node: TSheeter.Node) => {
+  const addIns = node.$system || (node.$system = {})
+  for (const nodePropName in node) {
+    if (nodePropName.charAt(0) !== '$' || nodePropName === '$system') continue
+    addIns[nodePropName] = node[nodePropName]
+    delete node[nodePropName]
+  }
+  return node
+}
+
 // extrach $??? addIn parts of ruleset and put them to root.addIns
 const extractPatches = (node: TSheeter.Node, root: TSheeter.SheetWithAddIns, nodePath: string[]) => {
   for (const nodePropName in node) {
+    if (nodePropName === '$system') continue
     const subNode = node[nodePropName]
     if (!isObject(subNode)) continue
     if (nodePropName.charAt(0) === '$') {
@@ -296,7 +325,7 @@ const extractPatches = (node: TSheeter.Node, root: TSheeter.SheetWithAddIns, nod
 
 const processAddIn = (addInNode, addInName, parentNode, root, addInNodePath) => {
   // adjust addIn, e.g. root.addIns.$whenUsed
-  const addIns = root.$addIns || (root.$addIns = {})
+  const addIns = root.$system || (root.$system = {})
   const addIn = addIns[addInName] || (addIns[addInName] = {})
   // path
   const actPathStr = addInNodePath.join('/')

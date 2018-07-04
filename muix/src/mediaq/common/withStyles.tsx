@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 
 import { TCommon, ThemeProvider, themePipe, RenderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformSheets, deepMerges, whenUsedFinishAddIns } from 'reactxx-basic'
-import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQSheet } from 'reactxx-mediaq'
+import { mediaQFlags, mediaQSheet, MediaQ_AppContainer } from 'reactxx-mediaq'
 
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
@@ -12,8 +12,6 @@ import { TAddIn } from '../typings/add-in'
 *************************/
 export interface TRenderState extends TRenderStateBasic {
   addInProps?: TAddIn.PropsX
-  //codeSystemProps?: Types.CodeSystemProps
-  //platformProps?: Types.CodeProps
 }
 
 /************************
@@ -22,13 +20,12 @@ export interface TRenderState extends TRenderStateBasic {
 
 export const propsPipe = (state: TRenderState, next) =>
   mediaQFlags( // media flags, e.g. {mobile:false, tablet:true, desktop:false }
-    () => ({ $mediaq: state.addInProps.$mediaq, theme: state.themeContext.theme }),
-    mediaqFlags => mediaqFlags && (state.codePropsPatch['reactxx-mediaq'] = { $system: { mediaqFlags } } as Types.CodeProps),
+    () => ({ $mediaq: state.platformProps.$system['$mediaq'], getPropsPatches: state.getPropsPatches }),
     next)
 
 export const stylePipe = (state: TRenderState, next) =>
   mediaQSheet( // actualize $mediaq part of the ruleset
-    () => ({ addInClasses: state.addInClasses as TMediaQ.MediaQSheet, codeClassesPatch: state.codeClassesPatch || (state.codeClassesPatch = {}) }),
+    () => state.getClassesPatches,
     next
   )
 
@@ -46,16 +43,9 @@ export const finishAddIns = (addInClasses: { [rulesetName: string]: { $mediaq?: 
 const renderAddIn: RenderAddIn = {
   propsAddInPipeline: propsPipe,
   styleAddInPipeline: stylePipe,
-  finishAddInClasses: [whenUsedFinishAddIns, finishAddIns],
 }
 
-//renderAddIn.finishAddInClasses.push(finishAddIns)
-
-//// used before converting props and sheet to platform dependent form
-//renderAddIn.propsAddInPipeline = beforeToPlatform
-
-//// after converting props and sheet to platform dependent form
-//renderAddIn.styleAddInPipeline = afterToPlatform
+export const breaksToString = (start: number, end: number) => `${start ? start : ''}-${end ? end : ''}` //`
 
 /************************
 * WITH STYLES CREATOR

@@ -1,6 +1,6 @@
 window.isWeb = true
-export * from './media-q'
-export * from '../common/media-q'
+export * from './web'
 export * from '../common/withStyles'
 export * from '../typings/types'
+export * from '../typings/mediaq'
 export * from '../typings/add-in'

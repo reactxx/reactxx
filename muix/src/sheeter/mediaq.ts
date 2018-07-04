@@ -7,14 +7,15 @@ export interface RulesetDecoded {
   to: number
 }
 
-export const mediaqFinishAddInCreator: (onFinished?: (breakpoints: number[]) => void) => TSheeter.FinishAddIn = onFinished => addInItem => {
-  const breakpoints = []
-  const addBreakpoint = br => { const i = parseInt(br); breakpoints.push(i); return i }
+export const mediaqFinishAddInCreator: (onFinished?: (data, breakpoints: number[]) => void) => TSheeter.FinishAddIn = onFinished => addInItem => {
   for (const sheetName in addInItem) {
+    const breakpoints = []
+    const addBreakpoint = br => { const i = parseInt(br); breakpoints.push(i); return i }
     const sheet = addInItem[sheetName]
     let map: {}
+    let data
     const finished = {
-      [TSheeter.Consts.data]: {
+      [TSheeter.Consts.data]: data = {
         path: sheet[TSheeter.Consts.data].path,
         map: map = {}
       }
@@ -30,11 +31,11 @@ export const mediaqFinishAddInCreator: (onFinished?: (breakpoints: number[]) => 
         map[rulesetName] = { from: interval[0], to: interval[1] }
     }
     addInItem[sheetName] = finished as any
+    if (onFinished) onFinished(data, breakpoints) // for native: register all media breakpoints
   }
-  if (onFinished) onFinished(breakpoints) // for native: register all media breakpoints
 }
 
-export const mediaqRulesetFilterCreator: (windowWidth?: number) => TSheeter.AddInRulesetFilter = (windowWidth: number) => ({ addInSheet }) => {
+export const mediaqRulesetPatchGetterCreator: (windowWidth?: number) => TSheeter.RulesetPatchGetter = (windowWidth: number) => ({ addInSheet }) => {
   const maps = addInSheet[TSheeter.Consts.data].map
   const res: any = window.isWeb ? {} : []
   if (!windowWidth) windowWidth = 0
