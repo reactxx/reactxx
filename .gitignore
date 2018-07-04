@@ -318,3 +318,5 @@ muix/src/ks
 !docs/reactxx/jspm_packages/
 !docs/bundle/
 !docs/bundle/index.js
+
+!muix/src/material-ui/**/*.js
