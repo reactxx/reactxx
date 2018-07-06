@@ -1,9 +1,9 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, themePipe, RenderAddIn, withStyles, TRenderState as TRenderStateBasic, whenUsedFinishAddIns } from 'reactxx-basic'
-import { animations, TAnimation, finishAddIns as animationFinishAddIns, stylePipe as animationStylePipe } from 'reactxx-animation'
-import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQSheet, stylePipe as mediaQStylePipe, propsPipe as mediaQPropsPipe, finishAddIns as mediaFinishAddIns } from 'reactxx-mediaq'
+import { TCommon, ThemeProvider, themePipe, RenderAddIn, withStyles, TRenderState as TRenderStateBasic } from 'reactxx-basic'
+import { animations, TAnimation, stylePipe as animationStylePipe } from 'reactxx-animation'
+import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQSheet, stylePipe as mediaQStylePipe, propsPipe as mediaQPropsPipe } from 'reactxx-mediaq'
 import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
 
 import { Types } from '../typings/types'
@@ -29,7 +29,7 @@ export interface TRenderState extends TRenderStateBasic {
 const renderAddIn: RenderAddIn = {
   propsAddInPipeline: mediaQPropsPipe,
   styleAddInPipeline: (state: TRenderState, next) => mediaQStylePipe(state, animationStylePipe(state, next)),
-  finishAddInClasses: [whenUsedFinishAddIns, animationFinishAddIns, mediaFinishAddIns],
+  //finishAddInClasses: [whenUsedFinishAddIns, animationFinishAddIns, mediaFinishAddIns],
 }
 
 

@@ -4,9 +4,11 @@ import { Types, TCommonStyles, TCommon } from 'reactxx-basic'
 export namespace TMediaQ {
 
   export interface MediaQFlags {
-    $mediaq: TMediaQ.NotifyIntervalX
+    addIns: TSheeter.AddIns // TMediaQ.NotifyIntervalX
     getPropsPatches: TSheeter.PropsPatchGetters
   }
+
+  //export type MediaQFlags = TSheeter.PropsPatchGetters
 
   /************************
   * RULESET TYPINGS

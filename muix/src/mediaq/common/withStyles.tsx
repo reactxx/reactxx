@@ -1,11 +1,13 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, themePipe, RenderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformSheets, deepMerges, whenUsedFinishAddIns } from 'reactxx-basic'
-import { mediaQFlags, mediaQSheet, MediaQ_AppContainer } from 'reactxx-mediaq'
+import { TSheeter } from 'reactxx-sheeter'
+import { TCommon, ThemeProvider, themePipe, RenderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformSheets, deepMerges } from 'reactxx-basic'
+import { mediaQFlags, mediaQSheet, MediaQ_AppContainer, mediaqFinishAddInClasses, mediaqFinishAddInProps } from 'reactxx-mediaq'
 
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
+import { TMediaQ } from '../typings/mediaq'
 
 /************************
 * TRenderState
@@ -20,7 +22,7 @@ export interface TRenderState extends TRenderStateBasic {
 
 export const propsPipe = (state: TRenderState, next) =>
   mediaQFlags( // media flags, e.g. {mobile:false, tablet:true, desktop:false }
-    () => ({ $mediaq: state.platformProps.$system['$mediaq'], getPropsPatches: state.getPropsPatches }),
+    () => ({ addIns: state.platformProps.$system as TSheeter.AddIns, getPropsPatches: state.getPropsPatches }),
     next)
 
 export const stylePipe = (state: TRenderState, next) =>
@@ -29,20 +31,22 @@ export const stylePipe = (state: TRenderState, next) =>
     next
   )
 
-export const finishAddIns = (addInClasses: { [rulesetName: string]: { $mediaq?: {}[] /*input type*/ | TCommon.SheetFragmentsData /*output type*/ } }) => {
-  // addIns = e.g. { root: { $mediaq: { '480-1024': Types.RulesetX } } }
-  for (const p in addInClasses) {
-    const addInsp = addInClasses[p]
-    const $mediaq = addInsp && addInsp.$mediaq as {}[] // input type
-    if (!$mediaq) continue
-    // output: addIns.root.$mediaq = e.g. { name: '480-1024', __fragments: [ {color: 'red', $web: {...}}, {':hover: {}'} ] }
-    addInClasses[p].$mediaq = toPlatformSheets(null, $mediaq).codeClasses // convert to output type
-  }
-}
+//export const finishAddIns = (addInClasses: { [rulesetName: string]: { $mediaq?: {}[] /*input type*/ | TCommon.SheetFragmentsData /*output type*/ } }) => {
+//  // addIns = e.g. { root: { $mediaq: { '480-1024': Types.RulesetX } } }
+//  for (const p in addInClasses) {
+//    const addInsp = addInClasses[p]
+//    const $mediaq = addInsp && addInsp.$mediaq as {}[] // input type
+//    if (!$mediaq) continue
+//    // output: addIns.root.$mediaq = e.g. { name: '480-1024', __fragments: [ {color: 'red', $web: {...}}, {':hover: {}'} ] }
+//    addInClasses[p].$mediaq = toPlatformSheets(null, $mediaq).codeClasses // convert to output type
+//  }
+//}
 
 const renderAddIn: RenderAddIn = {
   propsAddInPipeline: propsPipe,
   styleAddInPipeline: stylePipe,
+  finishAddInProps: { '$mediaq': mediaqFinishAddInProps },
+  finishAddInClasses: { '$mediaq': mediaqFinishAddInClasses },
 }
 
 export const breaksToString = (start: number, end: number) => `${start ? start : ''}-${end ? end : ''}` //`

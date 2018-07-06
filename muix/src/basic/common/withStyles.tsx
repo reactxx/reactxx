@@ -9,7 +9,7 @@ import { TCommonStyles } from '../typings/common-styles'
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
 
-import { getSystemPipes, whenUsedFinishAddIns } from './system-pipes'
+import { getSystemPipes } from './system-pipes'
 import { renderCounterPipe } from './develop'
 import { ThemeProvider, ThemeConsumer, themePipe } from './theme'
 import { deepMerges } from './to-platform'
@@ -62,16 +62,19 @@ export interface TRenderState {
 export interface RenderAddIn {
   propsAddInPipeline: (renderState: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
   styleAddInPipeline: (renderState: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
-  finishAddInClasses?: ((addInClasses: {}) => void)[]
+  //finishAddInClasses?: ((addInClasses: {}) => void)[]
   getDefaultTheme?: () => TCommon.ThemeBase
   createSheetHook?: (sheetCreator: Types.SheetCreatorX) => Types.SheetCreatorX
+
+  finishAddInProps?: TSheeter.FinishAddIns
+  finishAddInClasses?: TSheeter.FinishAddIns
 }
 
 // empty addIn configuration
 const renderAddIn: RenderAddIn = {
   propsAddInPipeline: (renderState, next) => next,
   styleAddInPipeline: (renderState, next) => next,
-  finishAddInClasses: [whenUsedFinishAddIns]
+  //finishAddInClasses: [whenUsedFinishAddIns]
 }
 
 /************************
@@ -97,7 +100,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCrea
 
   //**** build in pipes
   sheetCreator = addIns.createSheetHook ? addIns.createSheetHook(sheetCreator) as Types.SheetCreatorX<R> : sheetCreator
-  const { propsPipe, stylePipe, renderComponentPipe, cascadingProvider } = getSystemPipes<R>(id, displayName, sheetCreator, addIns.finishAddInClasses, options)
+  const { propsPipe, stylePipe, renderComponentPipe, cascadingProvider } = getSystemPipes<R>(id, displayName, sheetCreator, addIns, options)
 
   //****************************
   // Styled COMPONENT
@@ -123,7 +126,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCrea
         themeContext => this.renderState.themeContext = themeContext,
         propsPipe(
           () => ({ props: this.props, renderState: this.renderState }),
-          ({ platformProps }) => { this.renderState.platformProps = platformProps },
+          platformProps => this.renderState.platformProps = platformProps,
           addIns.propsAddInPipeline(this.renderState,
             stylePipe(this.renderState,
               addIns.styleAddInPipeline(this.renderState,

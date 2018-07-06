@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, themePipe, RenderAddIn, TRenderState as TRenderStateBasic, withStyles, deepMerges, whenUsedFinishAddIns } from 'reactxx-basic'
+import { TCommon, ThemeProvider, themePipe, RenderAddIn, TRenderState as TRenderStateBasic, withStyles, deepMerges } from 'reactxx-basic'
 import { animations, TAnimation } from 'reactxx-animation'
 
 import { Types } from '../typings/types'
@@ -28,16 +28,16 @@ export const stylePipe = (state: TRenderState, next) =>
     next
   )
 
-export const finishAddIns = (addInClasses) => {
-  const $anims: TAddIn.SheetX[] = addInClasses.$animations
-  if (!$anims || $anims.length === 0) return
-  addInClasses.$animations = $anims.length === 1 ? $anims[0] : deepMerges({}, ...$anims)
-}
+//export const finishAddIns = (addInClasses) => {
+//  const $anims: TAddIn.SheetX[] = addInClasses.$animations
+//  if (!$anims || $anims.length === 0) return
+//  addInClasses.$animations = $anims.length === 1 ? $anims[0] : deepMerges({}, ...$anims)
+//}
 
 const renderAddIn: RenderAddIn = {
   propsAddInPipeline: (renderState, next) => next,
   styleAddInPipeline: stylePipe,
-  finishAddInClasses: [whenUsedFinishAddIns, finishAddIns],
+  //finishAddInClasses: [whenUsedFinishAddIns, finishAddIns],
 }
 
 /************************

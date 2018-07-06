@@ -38,6 +38,9 @@ export const mediaQFlags = (input: () => TMediaQ.MediaQFlags, next: () => React.
   return res
 }
 
+export const mediaqFinishAddInProps: TSheeter.FinishAddIn = null
+export const mediaqFinishAddInClasses: TSheeter.FinishAddIn = null
+
 export const mediaQSheet = (input: () => TSheeter.RulesetPatchGetters, next: () => React.ReactNode) => {
   let filters: TSheeter.RulesetPatchGetters
   const render = (width: number) => {

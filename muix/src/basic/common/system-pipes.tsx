@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import warning from 'warning'
 
-import { deepMerges, toPatchableAndMergeable, setCanModify, TSheeter, finishProps } from 'reactxx-sheeter'
+import { deepMerges, toPatchableAndMergeable, setCanModify, TSheeter, finishProps, getPropsPatch } from 'reactxx-sheeter'
 
 import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
@@ -9,14 +9,19 @@ import { getPlatformSheet, toPlatformRulesets, immutableMerge, mergeRulesetsPart
 import { TAddIn } from '../typings/add-in'
 import { TCommonStyles } from '../typings/common-styles'
 import { themePipe } from './theme'
-import { TRenderState } from './withStyles'
+import { RenderAddIn, TRenderState } from './withStyles'
 
 export interface FinalizePropsOutput {
   platformProps: Types.CodeProps
   //addInProps: TAddIn.PropsX
 }
 
-export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: string, sheetCreator: Types.SheetCreatorX<R>, finishAddInClasses: ((addInClasses: {}) => void)[], options: Types.WithStyleOptions_ComponentX<R>) => {
+export const getSystemPipes = <R extends Types.Shape>(
+  id: number,
+  displayName: string,
+  sheetCreator: Types.SheetCreatorX<R>,
+  addIns: RenderAddIn,
+  options: Types.WithStyleOptions_ComponentX<R>) => {
 
   const defaultPropsSeparated: Types.SeparatedProps = options.defaultProps && separateProps(options.defaultProps)
 
@@ -43,7 +48,7 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     const proc: any = eventsPlatform && platformName[platformName] || finalProps[propName]
     delete finalProps[propName]; if (eventsPlatform) delete eventsPlatform[platformName]
     if (!proc || proc['$wrapped']) return
-    const newProc = finalProps[platformName] = renderState.eventsX[propName] = (ev: any) => {
+    const newProc = finalProps[platformName] = renderState.platformProps.$system[propName] = (ev: any) => {
       ev = ev && !ev.constructor ? { ...ev } : {}
       ev.current = renderState.finalProps
       proc(ev)
@@ -83,14 +88,15 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     const mergedProps: Types.PropsX = needsDeepMerge ? deepMerges({}, accumulatedSeparatedProps.props) : { ...accumulatedSeparatedProps.props[0] }
     delete accumulatedSeparatedProps.props
 
+    debugger
     // use sheeter utils for props finishing (linearize $web and $native props, extract addIns (e.g. $mediaq))
-    const platformProps = finishProps(mergedProps as TSheeter.Sheet)
+    const platformProps = finishProps(mergedProps as TSheeter.Sheet, addIns.finishAddInProps)
 
     // remove developer_flag for non 'development' ENV
     if (!DEV_MODE && platformProps.$developer_flag) delete platformProps.$developer_flag
 
     // events
-    renderState.eventsX = {}
+    if (!platformProps.$system) platformProps.$system = {}
     finalizeEvents(platformProps, renderState)
 
     // process $web and $native props part
@@ -107,19 +113,19 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
     //  }
     //}
 
-    return { platformProps: platformProps as Types.CodeProps } as FinalizePropsOutput
+    return platformProps as Types.CodeProps //{ platformProps: platformProps as Types.CodeProps } as FinalizePropsOutput
   }
 
   const toPlatformStyle = (displayName: string, id: number, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderStateEx) => {
 
-    const { codePropsPatch, platformProps, addInProps, eventsX, separatedStyles } = renderState
+    const { codePropsPatch, platformProps, addInProps, separatedStyles, getPropsPatches } = renderState
     const { theme, $cache } = renderState.themeContext
 
     // **** merge patches and eventsX to finalProps
-    const propPatches: Types.PartialCodeProps[] = Object.keys(codePropsPatch).map(p => codePropsPatch[p])
-    if (eventsX) propPatches.push({ $system: { ...eventsX } } as Types.PartialCodeProps)
-    const finalProps: Types.CodeProps = renderState.finalProps = immutableMerge(renderState.platformProps, propPatches)
-    if (!finalProps.$system) finalProps.$system = {} as any
+    const propPatches = getPropsPatch(platformProps.$system as TSheeter.AddIns, getPropsPatches)//: Types.PartialCodeProps[] = Object.keys(codePropsPatch).map(p => codePropsPatch[p])
+    //if (eventsX) propPatches.push({ $system: { ...eventsX } } as Types.PartialCodeProps)
+    const finalProps: Types.CodeProps = renderState.finalProps = immutableMerge(platformProps, propPatches)
+    //if (!finalProps.$system) finalProps.$system = {} as any
     const system = finalProps.$system
 
     // **** variant
@@ -148,12 +154,12 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
 
     // **** apply sheet patch to sheet:
     // call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
-    const { codeClasses, addInClasses } = getPlatformSheet({ id, finishAddInClasses,  createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
+    const { codeClasses, addInClasses } = getPlatformSheet({ id, finishAddInClasses: addIns.finishAddInClasses as any, createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
     renderState.addInClasses = addInClasses //e.g {$animations:..., root: {$mediaq:...}}
     renderState.finalProps.$system.classes = codeClasses
   }
 
-  const propsPipe = (input: () => { props: Types.PropsX, renderState: TRenderStateEx }, output: (par: FinalizePropsOutput) => void, next: () => React.ReactNode) => {
+  const propsPipe = (input: () => { props: Types.PropsX, renderState: TRenderStateEx }, output: (par: Types.CodeProps) => void, next: () => React.ReactNode) => {
     let props: Types.PropsX, renderState: TRenderState
     const render = (cascadingStyleFromPropsArray: SeparatedPropsArray) => {
       output(toPlatformProps(cascadingStyleFromPropsArray, props, renderState))
@@ -218,16 +224,16 @@ export const getSystemPipes = <R extends Types.Shape>(id: number, displayName: s
 
 }
 
-export const whenUsedFinishAddIns = (addInClasses: {}) => {
-  // addIns = e.g. { root: { $whenUsed: [ { disabled: Types.RulesetX } ] } }
-  for (const p in addInClasses) {
-    const addInsp = addInClasses[p]
-    const $whenUsed: Array<{}> = addInsp && addInsp[$whenUsedPropName]
-    if (!$whenUsed) continue
-    // output: addIns.root.$whenUsed = e.g. { name: 'disabled', __fragments: [ {...} ] }
-    addInClasses[p][$whenUsedPropName] = toPlatformSheets(null, $whenUsed).codeClasses
-  }
-}
+//export const whenUsedFinishAddIns = (addInClasses: {}) => {
+//  // addIns = e.g. { root: { $whenUsed: [ { disabled: Types.RulesetX } ] } }
+//  for (const p in addInClasses) {
+//    const addInsp = addInClasses[p]
+//    const $whenUsed: Array<{}> = addInsp && addInsp[$whenUsedPropName]
+//    if (!$whenUsed) continue
+//    // output: addIns.root.$whenUsed = e.g. { name: 'disabled', __fragments: [ {...} ] }
+//    addInClasses[p][$whenUsedPropName] = toPlatformSheets(null, $whenUsed).codeClasses
+//  }
+//}
 
 
 const $whenUsedPropName = '$whenUsed'
@@ -301,7 +307,7 @@ const mergeRulesets = (codeClassesPatch: TCommon.SheetPatchFinal, addInClasses: 
 }
 
 interface TRenderStateEx extends TRenderState {
-  eventsX?: Types.OnPressAllX
+  //eventsX?: Types.OnPressAllX
   separatedStyles?: AccumulatedStylesAndProps
 }
 

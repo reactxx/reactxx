@@ -1,4 +1,4 @@
-﻿import { TProvider, Types, withStyles, RenderAddIn, whenUsedFinishAddIns, TCommon, ThemeProviderUntyped } from 'reactxx-basic'
+﻿import { TProvider, Types, withStyles, RenderAddIn, TCommon, ThemeProviderUntyped } from 'reactxx-basic'
 
 import { default as createMuiTheme } from 'material-ui/styles/createMuiTheme'
 
@@ -14,7 +14,6 @@ export const ThemeProvider = ThemeProviderUntyped as TCommon.ThemeProviderTyped<
 const renderAddIn: RenderAddIn = {
   propsAddInPipeline: (renderState, next) => next,
   styleAddInPipeline: (renderState, next) => next,
-  finishAddInClasses: [whenUsedFinishAddIns],
   getDefaultTheme: () => createMuiTheme() as Theme,
   createSheetHook: createSheetHook,
 }

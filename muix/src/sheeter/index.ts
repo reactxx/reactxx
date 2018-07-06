@@ -66,12 +66,17 @@ export namespace TSheeter {
 // EXPORTS FOR PROPS
 //****************************
 
-export const finishProps = (root: TSheeter.Sheet) => {
+export const finishProps = (root: TSheeter.Sheet, onFinishAddInProps: TSheeter.FinishAddIns) => {
   root = linearize(root) // in-place processing of $before, $web, $native and $after ruleset props
-  return extractPropsPatches(root) as TSheeter.SheetWithAddIns // extract addIn props of ruleset (starting with $, e.g. $mediaq) etc.
+  const res = extractPropsPatches(root) as TSheeter.SheetWithAddIns // extract addIn props of ruleset (starting with $, e.g. $mediaq) etc.
+  if (res.$system && onFinishAddInProps) for (const p in res.$system) {
+    const finish = onFinishAddInProps[p]
+    if (finish) finish(res.$system[p])
+  }
+  return res
 }
 
-const getPropsPatch = (addInsRoot: TSheeter.AddIns /*addInsRoot is not mutated*/, addInPropsFilters: TSheeter.PropsPatchGetters) => {
+export const getPropsPatch = (addInsRoot: TSheeter.AddIns /*addInsRoot is not mutated*/, addInPropsFilters: TSheeter.PropsPatchGetters) => {
   if (!addInPropsFilters) return null
   const res = []
   for (const p in addInsRoot) {
@@ -97,11 +102,11 @@ export const toPatchableAndMergeable = (root: TSheeter.Sheet) => {
 }
 
 // merging patchable and mergeable sheets
-export const mergeSheets = (sheet: TSheeter.SheetWithAddIns, modifiers: TSheeter.SheetWithAddIns[], finishProcs: TSheeter.FinishAddIns) => {
+export const mergeSheets = (sheet: TSheeter.SheetWithAddIns, modifiers: TSheeter.SheetWithAddIns[], onFinishAddInClasses: TSheeter.FinishAddIns) => {
   const canModify = sheet[TSheeter.Consts.canModify]
   // deep merge
   if (modifiers && modifiers.length > 1) sheet = canModify ? deepMerges(sheet, modifiers) : immutableMerge([sheet, ...modifiers])
-  sheet = finishAddIns(sheet, finishProcs)
+  sheet = finishAddInsClasses(sheet, onFinishAddInClasses)
   nameRulesets (sheet)
   return sheet
 }
@@ -178,13 +183,13 @@ const nameRulesets = (sheet: TSheeter.SheetWithAddIns) => {
     for (const p in sheet) if (!ignore[p.charAt(0)]) sheet[p][TSheeter.Consts.rulesetName] = p
 }
 
-const finishAddIns = (sheet: TSheeter.SheetWithAddIns, finishProcs: TSheeter.FinishAddIns) => {
-  if (!sheet.$system || !finishProcs) return sheet
+const finishAddInsClasses = (sheet: TSheeter.SheetWithAddIns, onFinishAddInClasses: TSheeter.FinishAddIns) => {
+  if (!sheet.$system || !onFinishAddInClasses) return sheet
   const canModify = sheet[TSheeter.Consts.canModify]
   // clone when needed
   if (!canModify) sheet = { ...sheet, $system: { ...sheet.$system } }
   for (const addInName in sheet.$system) {
-    const proc = finishProcs[addInName]
+    const proc = onFinishAddInClasses[addInName]
     if (proc) {
       let addInItem = sheet.$system[addInName]
       if (!canModify) addInItem = sheet.$system[addInName] = { ...addInItem } // clone

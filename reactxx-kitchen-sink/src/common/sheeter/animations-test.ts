@@ -1,4 +1,4 @@
-import { TSheeter, mergeSheets, toPatchableAndMergeable, mergeRulesetsForCode, mediaqFinishAddInCreator, mediaqRulesetPatchGetterCreator, whenUsedRulesetFilter } from 'reactxx-sheeter'
+import { TSheeter, mergeSheets, toPatchableAndMergeable, mergeRulesetsForCode, whenUsedRulesetFilter } from 'reactxx-sheeter'
 
 //****************************
 // CODE
@@ -6,10 +6,8 @@ import { TSheeter, mergeSheets, toPatchableAndMergeable, mergeRulesetsForCode, m
 export const test = () => {
 
   const finishAddIns: TSheeter.FinishAddIns = {
-    $mediaq: mediaqFinishAddInCreator()
   }
   const addInRulesetFilters: TSheeter.RulesetPatchGetters = {
-    $mediaq: mediaqRulesetPatchGetterCreator(400),
     $whenUsed: whenUsedRulesetFilter
   }
   const patchable = toPatchableAndMergeable(root)
