@@ -1,7 +1,8 @@
 import React from 'react'
 import warning from 'warning'
 
-import { TSheeter, mediaqRulesetPatchGetterCreator, mediaqFinishAddInCreator } from 'reactxx-sheeter'
+import { TSheeter } from 'reactxx-sheeter'
+import * as Sheeter from 'reactxx-sheeter'
 import { TMediaQ } from '../typings/mediaq'
 
 export class MediaQ_AppContainer extends React.Component {
@@ -53,7 +54,7 @@ const subscribe = (data, breaks: number[]) => {
   data[TSheeter.Consts.dataObservedBits] = observedBits
 }
 
-export const mediaqFinishAddInClasses = mediaqFinishAddInCreator(subscribe)
+export const mediaqFinishAddInClasses = Sheeter.mediaqFinishAddInCreator(subscribe)
 
 export const mediaqFinishAddInProps: TSheeter.FinishAddIn = (addInItem: TMediaQ.NotifyIntervalX) => {
   const breaks: number[] = []

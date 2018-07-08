@@ -1,7 +1,8 @@
 ﻿import React from 'react'
 import warning from 'warning'
 
-import { deepMerges, toPatchableAndMergeable, setCanModify, TSheeter, finishProps, getPropsPatch } from 'reactxx-sheeter'
+import { TSheeter } from 'reactxx-sheeter'
+import * as Sheeter from 'reactxx-sheeter'
 
 import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
@@ -85,12 +86,12 @@ export const getSystemPipes = <R extends Types.Shape>(
     const needsDeepMerge = accumulatedSeparatedProps.props.length > 1
 
     // merge non-style props
-    const mergedProps: Types.PropsX = needsDeepMerge ? deepMerges({}, accumulatedSeparatedProps.props) : { ...accumulatedSeparatedProps.props[0] }
+    const mergedProps: Types.PropsX = needsDeepMerge ? Sheeter.deepMerges({}, accumulatedSeparatedProps.props) : { ...accumulatedSeparatedProps.props[0] }
     delete accumulatedSeparatedProps.props
 
     debugger
     // use sheeter utils for props finishing (linearize $web and $native props, extract addIns (e.g. $mediaq))
-    const platformProps = finishProps(mergedProps as TSheeter.Sheet, addIns.finishAddInProps)
+    const platformProps = Sheeter.finishProps(mergedProps as TSheeter.Sheet, addIns.finishAddInProps)
 
     // remove developer_flag for non 'development' ENV
     if (!DEV_MODE && platformProps.$developer_flag) delete platformProps.$developer_flag
@@ -122,7 +123,7 @@ export const getSystemPipes = <R extends Types.Shape>(
     const { theme, $cache } = renderState.themeContext
 
     // **** merge patches and eventsX to finalProps
-    const propPatches = getPropsPatch(platformProps.$system as TSheeter.AddIns, getPropsPatches)//: Types.PartialCodeProps[] = Object.keys(codePropsPatch).map(p => codePropsPatch[p])
+    const propPatches = Sheeter.getPropsPatch(platformProps.$system as TSheeter.AddIns, getPropsPatches)//: Types.PartialCodeProps[] = Object.keys(codePropsPatch).map(p => codePropsPatch[p])
     //if (eventsX) propPatches.push({ $system: { ...eventsX } } as Types.PartialCodeProps)
     const finalProps: Types.CodeProps = renderState.finalProps = immutableMerge(platformProps, propPatches)
     //if (!finalProps.$system) finalProps.$system = {} as any

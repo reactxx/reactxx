@@ -1,4 +1,5 @@
-import { TSheeter, mergeSheets, toPatchableAndMergeable, mergeRulesetsForCode, mediaqFinishAddInCreator, mediaqRulesetPatchGetterCreator, whenUsedRulesetFilter } from 'reactxx-sheeter'
+import { TSheeter } from 'reactxx-sheeter'
+import * as Sheeter from 'reactxx-sheeter'
 
 //****************************
 // CODE
@@ -6,21 +7,21 @@ import { TSheeter, mergeSheets, toPatchableAndMergeable, mergeRulesetsForCode, m
 export const test = () => {
 
   const finishAddIns: TSheeter.FinishAddIns = {
-    $mediaq: mediaqFinishAddInCreator()
+    $mediaq: Sheeter.mediaqFinishAddInCreator()
   }
   const addInRulesetFilters: TSheeter.RulesetPatchGetters = {
-    $mediaq: mediaqRulesetPatchGetterCreator(400),
-    $whenUsed: whenUsedRulesetFilter
+    $mediaq: Sheeter.mediaqRulesetPatchGetterCreator(400),
+    $whenUsed: Sheeter.whenUsedRulesetFilter
   }
-  const patchable = toPatchableAndMergeable(root)
+  const patchable = Sheeter.toPatchableAndMergeable(root)
 
   window.isWeb = true
-  const mergedWeb = mergeSheets(patchable, [], finishAddIns)
-  const codeRootWeb = mergeRulesetsForCode(mergedWeb, addInRulesetFilters, [mergedWeb.root])
+  const mergedWeb = Sheeter.mergeSheets(patchable, [], finishAddIns)
+  const codeRootWeb = Sheeter.mergeRulesetsForCode(mergedWeb, addInRulesetFilters, [mergedWeb.root])
 
   window.isWeb = false
-  const mergedNative = mergeSheets(patchable, [], finishAddIns)
-  const codeRootNative = mergeRulesetsForCode(mergedNative, addInRulesetFilters, [mergedNative.root])
+  const mergedNative = Sheeter.mergeSheets(patchable, [], finishAddIns)
+  const codeRootNative = Sheeter.mergeRulesetsForCode(mergedNative, addInRulesetFilters, [mergedNative.root])
 
   debugger
 }

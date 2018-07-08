@@ -1,7 +1,8 @@
 import React from 'react'
 import { Dimensions } from 'react-native'
 
-import { TSheeter, mediaqRulesetPatchGetterCreator } from 'reactxx-sheeter'
+import { TSheeter } from 'reactxx-sheeter'
+import * as Sheeter  from 'reactxx-sheeter'
 import { TMediaQ } from '../typings/mediaq'
 
 export class MediaQ_AppContainer extends React.Component<{}, { width: number }> {
@@ -44,7 +45,7 @@ export const mediaqFinishAddInClasses: TSheeter.FinishAddIn = null
 export const mediaQSheet = (input: () => TSheeter.RulesetPatchGetters, next: () => React.ReactNode) => {
   let filters: TSheeter.RulesetPatchGetters
   const render = (width: number) => {
-    filters.$mediaq = mediaqRulesetPatchGetterCreator(width)
+    filters.$mediaq = Sheeter.mediaqRulesetPatchGetterCreator(width)
     return next()
   }
   const res = () => {
