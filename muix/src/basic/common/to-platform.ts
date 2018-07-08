@@ -2,6 +2,9 @@ import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
 
+import { TSheeter } from 'reactxx-sheeter'
+import * as Sheeter from 'reactxx-sheeter'
+
 import { TCommonStyles } from '../typings/common-styles'
 import { TCommon } from '../typings/common'
 import { Types } from '../typings/types'
@@ -14,61 +17,37 @@ import { instanceOf } from 'prop-types';
 //****************************
 
 export const getPlatformSheet = (par: GetPlatformSheetPar) => {
-  const { id, createSheetX, defaultClasses, sheetXPatch, variant, variantCacheId, themeContext: { $cache } } = par
-  // final sheet is from sheet, defaultClasses, cascading and style props (classes, className and style (for native only))
+  const { componentId, expandCreator, createSheetX, defaultClasses, sheetXPatch, cacheId, $cache } = par
+  // final sheet is merged from sheet, defaultClasses, component.provider cascading props and component props (classes, className and (for native only) style)
   // sheet and defaultClasses could be cached
-  const cacheId = typeof createSheetX !== 'function' ? '#static#' : !variant ? '#novariant#' : variantCacheId ? variantCacheId : null
   if (cacheId) {
     // from theme cache (sheet and defaultClasses included in cache)
-    const cache = fromCache($cache, id, cacheId, () => create_toPlatform_sheet({ ...par, sheetXPatch: defaultClasses ? [defaultClasses] : null }))
-    return toPlatformSheets(cache, sheetXPatch, par.finishAddInClasses)
+    const cache = fromCache($cache, componentId, cacheId, () => Sheeter.mergeSheets(expandCreator(createSheetX), defaultClasses ? [defaultClasses] : null, true))
+    return Sheeter.mergeSheetsAndFinish(cache, sheetXPatch, par.finishAddInClasses, false)
   } else {
     // without cache ( including sheet and defaultClasses)
     const patch = sheetXPatch && defaultClasses ? [defaultClasses, ...sheetXPatch] : sheetXPatch ? sheetXPatch : defaultClasses ? [defaultClasses] : null
-    return create_toPlatform_sheet({ ...par, sheetXPatch: patch })
+    return Sheeter.mergeSheetsAndFinish(expandCreator(createSheetX), patch, par.finishAddInClasses, true)
   }
 }
 
-const fromCache = ($cache: Cache, id: number, variantCacheId: string, getter: () => TCommon.SheetFragments) => {
-  let compCache = $cache[id]
-  if (!compCache) $cache[id] = compCache = {}
-  return compCache[variantCacheId] || (compCache[variantCacheId] = mergeCacheParts(getter()))
+const fromCache = ($cache: Cache, componentId: number, cacheId: string, getter: () => TSheeter.SheetWithAddIns) => {
+  let compCache = $cache[componentId]
+  if (!compCache) $cache[componentId] = compCache = {}
+  return compCache[cacheId] || (compCache[cacheId] = getter())
 }
 
-const mergeCacheParts = (cache: TCommon.SheetFragments) => {
-  for (const p in cache.codeClasses) {
-    const data = cache.codeClasses[p]
-    if (!data.__fragments) continue
-    data.__fragments = [mergeRulesetsParts(data.__fragments)]
-  }
-  return cache
-}
-
-const create_toPlatform_sheet = ({ finishAddInClasses, createSheetX, themeContext: { theme }, sheetXPatch, variant }: GetPlatformSheetPar) => {
-  let sheet: Types.PartialSheetX
-  if (typeof createSheetX === 'function') {
-    try { sheet = createSheetX(theme, variant) }
-    catch {
-      debugger
-      warning(theme, 'Create sheet error (maybe missing <ThemeProvider theme={}>)')
-      return null
-    }
-  } else
-    sheet = createSheetX
-  return toPlatformSheets(null, [sheet, ...sheetXPatch || []], finishAddInClasses)
-}
-
-type Cache = { [variantId: string]: TCommon.SheetFragments }[]
+type Cache = { [variantId: string]: TSheeter.SheetWithAddIns }[]
 
 interface GetPlatformSheetPar {
-  id: number
+  componentId: number
   createSheetX: Types.SheetCreatorX
-  themeContext: TCommon.ThemeContext
-  sheetXPatch: Types.PartialSheetX[];
-  defaultClasses?: Types.PartialSheetX
-  variant
-  variantCacheId: string;
-  finishAddInClasses: ((addInClasses: {}) => void)[];
+  expandCreator: (creator: Types.SheetCreatorX) => TSheeter.SheetWithAddIns
+  $cache: Cache
+  sheetXPatch: TSheeter.SheetWithAddIns[]
+  defaultClasses?: TSheeter.SheetWithAddIns
+  cacheId: string
+  finishAddInClasses: TSheeter.FinishAddIns
 }
 
 export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseDown : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress

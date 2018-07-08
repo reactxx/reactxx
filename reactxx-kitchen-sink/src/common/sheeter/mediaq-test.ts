@@ -16,11 +16,11 @@ export const test = () => {
   const patchable = Sheeter.toPatchableAndMergeable(root)
 
   window.isWeb = true
-  const mergedWeb = Sheeter.mergeSheets(patchable, [], finishAddIns)
+  const mergedWeb = Sheeter.mergeSheetsAndFinish(patchable, [], finishAddIns)
   const codeRootWeb = Sheeter.mergeRulesetsForCode(mergedWeb, addInRulesetFilters, [mergedWeb.root])
 
   window.isWeb = false
-  const mergedNative = Sheeter.mergeSheets(patchable, [], finishAddIns)
+  const mergedNative = Sheeter.mergeSheetsAndFinish(patchable, [], finishAddIns)
   const codeRootNative = Sheeter.mergeRulesetsForCode(mergedNative, addInRulesetFilters, [mergedNative.root])
 
   debugger

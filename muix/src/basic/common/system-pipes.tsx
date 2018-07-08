@@ -73,7 +73,7 @@ export const getSystemPipes = <R extends Types.Shape>(
     const theme = renderState.themeContext.theme
 
     // accumulate Types.StyleFromProps[] to Types.StylesFromProps
-    const accumulatedSeparatedProps = renderState.separatedStyles = allSeparatedPropsArray.reduce<AccumulatedStylesAndProps>((prev, curr) => {
+    const separatedStylesAndProps = renderState.separatedStyles = allSeparatedPropsArray.reduce<AccumulatedStylesAndProps>((prev, curr) => {
       if (!curr) return prev
       if (curr.rest) prev.props.push(curr.rest)
       if (curr.$themedProps) prev.props.push(curr.$themedProps(theme))
@@ -83,13 +83,12 @@ export const getSystemPipes = <R extends Types.Shape>(
       return prev
     }, { props: [], classes: [], className: [], style: [] })
 
-    const needsDeepMerge = accumulatedSeparatedProps.props.length > 1
+    const needsDeepMerge = separatedStylesAndProps.props.length > 1
 
     // merge non-style props
-    const mergedProps: Types.PropsX = needsDeepMerge ? Sheeter.deepMerges({}, accumulatedSeparatedProps.props) : { ...accumulatedSeparatedProps.props[0] }
-    delete accumulatedSeparatedProps.props
+    const mergedProps: Types.PropsX = needsDeepMerge ? Sheeter.deepMerges({}, separatedStylesAndProps.props) : { ...separatedStylesAndProps.props[0] }
+    delete separatedStylesAndProps.props
 
-    debugger
     // use sheeter utils for props finishing (linearize $web and $native props, extract addIns (e.g. $mediaq))
     const platformProps = Sheeter.finishProps(mergedProps as TSheeter.Sheet, addIns.finishAddInProps)
 
@@ -100,63 +99,59 @@ export const getSystemPipes = <R extends Types.Shape>(
     if (!platformProps.$system) platformProps.$system = {}
     finalizeEvents(platformProps, renderState)
 
-    // process $web and $native props part
-    //const { $web, $native } = platformProps
-    //delete platformProps.$web; delete platformProps.$native
-    //if ($web && window.isWeb) platformProps = needsDeepMerge ? deepMerges(platformProps, [$web]) : deepMerges({}, platformProps, $web)
-    //if ($native && !window.isWeb) platformProps = needsDeepMerge ? deepMerges(platformProps, $native) : deepMerges({}, platformProps, $native)
-
-    // separate addIns props (starting with $)
-    //const addInProps: any = {}
-    //for (const p in platformProps) {
-    //  if (p.startsWith('$')) {
-    //    addInProps[p] = platformProps[p]; delete platformProps[p] // move props from platformProps to addInProps, e.g. $developer_flag:true, $mediaq: {'-640': {}}
-    //  }
-    //}
-
     return platformProps as Types.CodeProps //{ platformProps: platformProps as Types.CodeProps } as FinalizePropsOutput
   }
 
-  const toPlatformStyle = (displayName: string, id: number, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderStateEx) => {
+  const toPlatformStyle = (displayName: string, componentId: number, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderStateEx) => {
 
     const { codePropsPatch, platformProps, addInProps, separatedStyles, getPropsPatches } = renderState
     const { theme, $cache } = renderState.themeContext
 
     // **** merge patches and eventsX to finalProps
     const propPatches = Sheeter.getPropsPatch(platformProps.$system as TSheeter.AddIns, getPropsPatches)//: Types.PartialCodeProps[] = Object.keys(codePropsPatch).map(p => codePropsPatch[p])
-    //if (eventsX) propPatches.push({ $system: { ...eventsX } } as Types.PartialCodeProps)
     const finalProps: Types.CodeProps = renderState.finalProps = immutableMerge(platformProps, propPatches)
-    //if (!finalProps.$system) finalProps.$system = {} as any
     const system = finalProps.$system
 
     // **** variant
     let variant: {} = null
     let variantCacheId: string = null
-    const expandCreator = creator => typeof creator === 'function' ? creator(theme, variant) : creator
+    const expandCreator = creator => {
+      let sheet: Types.SheetX
+      if (typeof createSheetX === 'function') {
+        try { sheet = createSheetX(theme, variant) }
+        catch {
+          warning(theme, 'Create sheet error (maybe missing <ThemeProvider theme={}>)')
+          return null
+        }
+      } else
+        sheet = createSheetX
+      return Sheeter.toPatchableAndMergeable(sheet)
+    }
 
     if (options && options.getVariant) {
       variant = system.variant = options.getVariant(finalProps, theme)
       variantCacheId = options.variantToString ? options.variantToString(variant) : null
     }
+    const cacheId = typeof createSheetX !== 'function' ? '#static#' : !variant ? '#novariant#' : variantCacheId ? variantCacheId : null
 
-    // **** style (for web only). For native: is included in sheetXPatch.root.
+    // **** style (for web only, for native is included in root).
     const toMergeStylesCreators = window.isWeb && separatedStyles.style.length > 0 ? separatedStyles.style : null
-    const toMergeStylesX: Types.RulesetX[] = !toMergeStylesCreators ? null : toMergeStylesCreators.map(creator => expandCreator(creator))
+    const toMergeStylesX: TSheeter.SheetWithAddIns[] = !toMergeStylesCreators ? null : toMergeStylesCreators.map(creator => expandCreator(creator))
 
-    if (toMergeStylesX) system.style = toPlatformRulesets(toMergeStylesX)
+    if (toMergeStylesX) system.style = toMergeStylesX.length === 1 ? toMergeStylesX[0] : Sheeter.deepMerges({}, toMergeStylesX)
 
     // **** sheet patch (for native: style included)
     const toMergeSheetCreators = [
       ...separatedStyles.classes || null,
       ...separatedStyles.className.map(className => ({ root: className })),
-      ... (window.isWeb ? [] : separatedStyles.style.map(style => ({ root: style })))]
-    const sheetXPatch: Types.PartialSheetX[] = toMergeSheetCreators.length === 0 ? null : toMergeSheetCreators.map(creator => expandCreator(creator))
-    const defaultClasses: Types.PartialSheetX = !defaultPropsSeparated ? null : typeof defaultPropsSeparated.classes === 'function' ? expandCreator(defaultPropsSeparated.classes) : defaultPropsSeparated.classes
+      ...(window.isWeb ? [] : separatedStyles.style.map(style => ({ root: style })))]
+    const sheetXPatch: TSheeter.SheetWithAddIns[] = toMergeSheetCreators.length === 0 ? null : toMergeSheetCreators.map(creator => expandCreator(creator))
+    const defaultClasses: TSheeter.SheetWithAddIns = !defaultPropsSeparated ? null : expandCreator(defaultPropsSeparated.classes)
 
     // **** apply sheet patch to sheet:
     // call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
-    const { codeClasses, addInClasses } = getPlatformSheet({ id, finishAddInClasses: addIns.finishAddInClasses as any, createSheetX, themeContext: renderState.themeContext, sheetXPatch, defaultClasses, variant, variantCacheId })
-    renderState.addInClasses = addInClasses //e.g {$animations:..., root: {$mediaq:...}}
+    const codeClasses = getPlatformSheet({ expandCreator, componentId, finishAddInClasses: addIns.finishAddInClasses, createSheetX, $cache: renderState.themeContext.$cache, sheetXPatch, defaultClasses, cacheId })
+    //renderState.addInClasses = addInClasses //e.g {$animations:..., root: {$mediaq:...}}
     renderState.finalProps.$system.classes = codeClasses
   }
 

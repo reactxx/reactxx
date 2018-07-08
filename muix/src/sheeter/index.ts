@@ -34,7 +34,7 @@ export namespace TSheeter {
     $system: AddIns
   }
   export type AddIns = { [addInsName: string]: Sheets }
-  export type Sheets = { [rulesetName: string]: Sheet }
+  export type Sheets = { [sheetName: string]: Sheet }
   export type Sheet = { [rulesetName: string]: Ruleset }
   export interface Ruleset extends Node {
     [Consts.rulesetName]?: string
@@ -69,6 +69,7 @@ export namespace TSheeter {
 export const finishProps = (root: TSheeter.Sheet, onFinishAddInProps: TSheeter.FinishAddIns) => {
   root = linearize(root) // in-place processing of $before, $web, $native and $after ruleset props
   const res = extractPropsPatches(root) as TSheeter.SheetWithAddIns // extract addIn props of ruleset (starting with $, e.g. $mediaq) etc.
+  // call addIn specific finishing
   if (res.$system && onFinishAddInProps) for (const p in res.$system) {
     const finish = onFinishAddInProps[p]
     if (finish) finish(res.$system[p])
@@ -76,11 +77,11 @@ export const finishProps = (root: TSheeter.Sheet, onFinishAddInProps: TSheeter.F
   return res
 }
 
-export const getPropsPatch = (addInsRoot: TSheeter.AddIns /*addInsRoot is not mutated*/, addInPropsFilters: TSheeter.PropsPatchGetters) => {
-  if (!addInPropsFilters) return null
+export const getPropsPatch = (addInsRoot: TSheeter.AddIns /*addInsRoot is not mutated*/, propsPatchGetters: TSheeter.PropsPatchGetters) => {
+  if (!propsPatchGetters) return null
   const res = []
   for (const p in addInsRoot) {
-    const addIn = addInsRoot[p], proc = addInPropsFilters[p]
+    const addIn = addInsRoot[p], proc = propsPatchGetters[p]
     if (!addIn || !proc) continue
     proc(addIn, res)
   }
@@ -97,21 +98,23 @@ export const setCanModify = (root: TSheeter.SheetWithAddIns) => root[TSheeter.Co
 export const toPatchableAndMergeable = (root: TSheeter.Sheet) => {
   root = linearize(root) // in-place processing of $before, $web, $native and $after ruleset props
   return extractPatches(root, root as TSheeter.SheetWithAddIns, []) as TSheeter.SheetWithAddIns // extract addIn props of ruleset (starting with $, e.g. $mediaq) etc.
-  //return (isProp ? extractPropsPatches(root) : extractPatches(root, root as TSheeter.SheetWithAddIns, [])) as TSheeter.SheetWithAddIns // extract addIn props of ruleset (starting with $, e.g. $mediaq) etc.
-  //return res
 }
 
 // merging patchable and mergeable sheets
-export const mergeSheets = (sheet: TSheeter.SheetWithAddIns, modifiers: TSheeter.SheetWithAddIns[], onFinishAddInClasses: TSheeter.FinishAddIns) => {
-  const canModify = sheet[TSheeter.Consts.canModify]
+export const mergeSheets = (sheet: TSheeter.SheetWithAddIns, modifiers: TSheeter.SheetWithAddIns[], canModify: boolean) => {
   // deep merge
-  if (modifiers && modifiers.length > 1) sheet = canModify ? deepMerges(sheet, modifiers) : immutableMerge([sheet, ...modifiers])
+  if (modifiers && modifiers.length >= 1) sheet = canModify ? deepMerges(sheet, modifiers) : immutableMerge([sheet, ...modifiers])
+  return sheet
+}
+export const mergeSheetsAndFinish = (sheet: TSheeter.SheetWithAddIns, modifiers: TSheeter.SheetWithAddIns[], onFinishAddInClasses: TSheeter.FinishAddIns, canModify?: boolean) => {
+  // deep merge
+  sheet = mergeSheets(sheet, modifiers, canModify)
   sheet = finishAddInsClasses(sheet, onFinishAddInClasses)
   nameRulesets (sheet)
   return sheet
 }
 
-// merge rulesets in component code (apply addIn patches)
+// merge rulesets in component code (and apply addIn patches)
 export const mergeRulesetsForCode = (sheet: TSheeter.SheetWithAddIns, rulesetPatchGetters: TSheeter.RulesetPatchGetters, rulesets: TSheeter.Ruleset[]) => {
   if (!rulesets || rulesets.length === 0) return null
   const addIns = sheet.$system

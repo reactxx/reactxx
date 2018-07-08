@@ -13,11 +13,11 @@ export const test = () => {
     $whenUsed: Sheeter.whenUsedRulesetFilter
   }
   window.isWeb = true
-  const mergedWeb = Sheeter.mergeSheets(patchable, [], finishAddIns)
+  const mergedWeb = Sheeter.mergeSheetsAndFinish(patchable, [], finishAddIns)
   const codeRootWeb = Sheeter.mergeRulesetsForCode(mergedWeb, addInRulesetFilters, [mergedWeb.root, false as any, mergedWeb.b, null as any])
 
   window.isWeb = false
-  const mergedNative = Sheeter.mergeSheets(patchable, [], finishAddIns)
+  const mergedNative = Sheeter.mergeSheetsAndFinish(patchable, [], finishAddIns)
   const codeRootNative = Sheeter.mergeRulesetsForCode(mergedNative, addInRulesetFilters, [mergedNative.root, false as any, mergedNative.b, null as any])
 
   debugger
