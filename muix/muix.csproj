@@ -440,8 +440,6 @@
     <TypeScriptCompile Include="src\animation\web\index.ts" />
     <TypeScriptCompile Include="src\basic\common\develop.tsx" />
     <TypeScriptCompile Include="src\basic\common\system-pipes.tsx" />
-    <TypeScriptCompile Include="src\basic\common\sheet-fragments.ts" />
-    <None Include="src\basic\common\to-platform.ts_" />
     <TypeScriptCompile Include="src\basic\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\basic\typings\add-in.ts" />
     <TypeScriptCompile Include="src\basic\typings\common.ts" />

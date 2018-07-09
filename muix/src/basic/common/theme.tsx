@@ -1,7 +1,6 @@
-﻿import React from 'react'
-import warning from 'warning'
-
-import { TCommon } from '../typings/common'
+﻿import React from 'react';
+import warning from 'warning';
+import { TCommon } from '../typings/common';
 
 let globalThemeContext: TCommon.ThemeContext // = { theme: null, $cache: [] }
 const themeContext = React.createContext<TCommon.ThemeContext>(null)

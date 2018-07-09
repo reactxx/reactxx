@@ -1,9 +1,10 @@
-﻿import { TProvider, Types, withStyles, RenderAddIn, TCommon, ThemeProviderUntyped } from 'reactxx-basic'
+﻿import { default as createMuiTheme } from 'material-ui/styles/createMuiTheme';
+import React from 'react';
+import { RenderAddIn, TCommon, ThemeProviderUntyped, TProvider, Types, withStyles } from 'reactxx-basic';
+import { Theme as MuiTheme } from '../../typings/styles/createMuiTheme';
+import createSheetHook from './create-sheet-hook';
 
-import { default as createMuiTheme } from 'material-ui/styles/createMuiTheme'
 
-import { Theme as MuiTheme } from '../../typings/styles/createMuiTheme'
-import createSheetHook from './create-sheet-hook'
 
 
 export type Theme = MuiTheme & TCommon.ThemeBase

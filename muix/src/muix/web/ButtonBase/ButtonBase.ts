@@ -1,4 +1,5 @@
-﻿import { styles, default as ButtonBase } from 'material-ui/ButtonBase/ButtonBase'
+﻿import React from 'react'
+import { styles, default as ButtonBase } from 'material-ui/ButtonBase/ButtonBase'
 
 import { TProvider, TCommon, Types, ThemeProviderUntyped } from 'reactxx-basic'
 

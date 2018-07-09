@@ -1,6 +1,6 @@
-﻿import { TCommonStyles, TCommon, TAddIn as TAddInBasic } from 'reactxx-basic'
-import { TMediaQ } from 'reactxx-mediaq'
-import { Types } from './types'
+﻿import { TAddIn as TAddInBasic, TCommonStyles } from 'reactxx-basic';
+import { TMediaQ } from 'reactxx-mediaq';
+import { Types } from './types';
 
 
 export namespace TAddIn {

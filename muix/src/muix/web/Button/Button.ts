@@ -1,9 +1,10 @@
-﻿import { styles, default as Button } from 'material-ui/Button/Button'
+﻿import { default as Button, styles } from 'material-ui/Button/Button';
+import React from 'react';
+import { TCommon, TProvider, Types } from 'reactxx-basic';
+import { ButtonClassKey, ButtonProps } from '../../typings/Button/Button';
+import { Theme } from '../styles/withStyles';
 
-import { TProvider, TCommon, Types, ThemeProviderUntyped } from 'reactxx-basic'
 
-import { ButtonProps, ButtonClassKey } from '../../typings/Button/Button'
-import { Theme } from '../styles/withStyles'
 
 type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<ButtonClassKey>,

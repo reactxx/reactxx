@@ -1,6 +1,5 @@
-﻿import React from 'react'
-import ReactN from 'react-native'
-import * as CSS from 'csstype'
+﻿import * as CSS from 'csstype';
+import ReactN from 'react-native';
 
 export namespace TCommonStyles {
 

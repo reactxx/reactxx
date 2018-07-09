@@ -1,9 +1,9 @@
-import React from 'react'
-import warning from 'warning'
+import React from 'react';
+import * as Sheeter from 'reactxx-sheeter';
+import warning from 'warning';
+import { TMediaQ } from '../typings/mediaq';
 
 
-import * as Sheeter from 'reactxx-sheeter'
-import { TMediaQ } from '../typings/mediaq'
 
 export class MediaQ_AppContainer extends React.Component {
 

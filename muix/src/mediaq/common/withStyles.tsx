@@ -1,13 +1,10 @@
-﻿import React from 'react'
-import ReactN from 'react-native'
+﻿import React from 'react';
+import { RenderAddIn, TCommon, ThemeProvider, TRenderState, withStyles } from 'reactxx-basic';
+import { mediaqFinishAddInClasses, mediaqFinishAddInProps, mediaQFlags, mediaQSheet, MediaQ_AppContainer } from 'reactxx-mediaq';
+import { AddIns as SheeterAddIns } from 'reactxx-sheeter';
+import { Types } from '../typings/types';
 
-import { AddIns as SheeterAddIns } from 'reactxx-sheeter'
-import { TCommon, ThemeProvider, themePipe, RenderAddIn, TRenderState, withStyles } from 'reactxx-basic'
-import { mediaQFlags, mediaQSheet, MediaQ_AppContainer, mediaqFinishAddInClasses, mediaqFinishAddInProps } from 'reactxx-mediaq'
 
-import { Types } from '../typings/types'
-import { TAddIn } from '../typings/add-in'
-import { TMediaQ } from '../typings/mediaq'
 
 /************************
 * ADDINS

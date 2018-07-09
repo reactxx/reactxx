@@ -1,17 +1,10 @@
-﻿import React from 'react'
-import ReactN from 'react-native'
-import warning from 'warning'
-
-import * as Sheeter from 'reactxx-sheeter'
-
-import { TCommon } from '../typings/common'
-import { TCommonStyles } from '../typings/common-styles'
-import { Types } from '../typings/types'
-import { TAddIn } from '../typings/add-in'
-
-import { getSystemPipes } from './system-pipes'
-import { renderCounterPipe } from './develop'
-import { ThemeProvider, ThemeConsumer, themePipe } from './theme'
+﻿import React from 'react';
+import * as Sheeter from 'reactxx-sheeter';
+import { TCommon } from '../typings/common';
+import { Types } from '../typings/types';
+import { renderCounterPipe } from './develop';
+import { getSystemPipes } from './system-pipes';
+import { themePipe } from './theme';
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
@@ -87,11 +80,11 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCrea
 
   type TPropsX = Types.PropsX<R>
 
-  const id = compCounter++
+  const componentId = compCounter++
 
   options = options && overrideOptions ? Sheeter.deepMerges({}, [options, overrideOptions]) : options ? options : overrideOptions ? overrideOptions : {}
 
-  const displayName = `${options.name} (${id})`
+  const displayName = `${options.name} (${componentId})`
 
   //sheetCreator = options.sheet || sheetCreator
 
@@ -99,7 +92,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCrea
 
   //**** build in pipes
   sheetCreator = addIns.createSheetHook ? addIns.createSheetHook(sheetCreator) as Types.SheetCreatorX<R> : sheetCreator
-  const { propsPipe, stylePipe, renderComponentPipe, cascadingProvider } = getSystemPipes<R>(id, displayName, sheetCreator, addIns, options)
+  const { propsPipe, stylePipe, renderComponentPipe, cascadingProvider } = getSystemPipes<R>(componentId, displayName, sheetCreator, addIns, options)
 
   //****************************
   // Styled COMPONENT

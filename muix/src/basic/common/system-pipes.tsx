@@ -1,15 +1,9 @@
-﻿import React from 'react'
-import warning from 'warning'
-
-
-import * as Sheeter from 'reactxx-sheeter'
-
-import { Types } from '../typings/types'
-import { TCommon } from '../typings/common'
-import { TAddIn } from '../typings/add-in'
-import { TCommonStyles } from '../typings/common-styles'
-import { themePipe } from './theme'
-import { RenderAddIn, TRenderState } from './withStyles'
+﻿import React from 'react';
+import * as Sheeter from 'reactxx-sheeter';
+import warning from 'warning';
+import { TCommon } from '../typings/common';
+import { Types } from '../typings/types';
+import { RenderAddIn, TRenderState } from './withStyles';
 
 export const getSystemPipes = <R extends Types.Shape>(
   id: number,

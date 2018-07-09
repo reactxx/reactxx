@@ -1,11 +1,10 @@
-﻿import React from 'react'
-import ReactN from 'react-native'
-import * as CSS from 'csstype'
+﻿import React from 'react';
+import ReactN from 'react-native';
+import { TCommon, TCommonStyles } from 'reactxx-basic';
+import { Ruleset as SheeterRuleset } from 'reactxx-sheeter';
+import { TAddIn } from './add-in';
 
-import { Ruleset as SheeterRuleset } from 'reactxx-sheeter'
-import { TCommonStyles, TCommon } from 'reactxx-basic'
 
-import { TAddIn } from './add-in'
 
 export namespace Types {
 

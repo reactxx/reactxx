@@ -1,5 +1,5 @@
-﻿import { AddIns as SheeterAddIns, PropsPatchGetters as SheeterPropsPatchGetters } from 'reactxx-sheeter'
-import { Types, TCommonStyles, TCommon } from 'reactxx-basic'
+﻿import { TCommonStyles, Types } from 'reactxx-basic';
+import { AddIns as SheeterAddIns, PropsPatchGetters as SheeterPropsPatchGetters, Ruleset as SheeterRuleset } from 'reactxx-sheeter';
 
 export namespace TMediaQ {
 
@@ -29,29 +29,29 @@ export namespace TMediaQ {
   export type RulesetWithAddIn = TCommonStyles.Ruleset & MediaQRulesetPart
 
   export interface MediaQRulesetPart {
-    $mediaq?: { [query: string]: TCommon.RulesetFragments } //TCommonStyles.Ruleset }
+    $mediaq?: { [query: string]: SheeterRuleset } //TCommonStyles.Ruleset }
   }
 
   //*** decoded MediaQSheet
-  export interface MediaQRulesetDecoded {
-    rulesetName: string // ruleset name in sheet
-    items: RulesetDecoded[] // decoded MediaQRulesetPartX
-  }
+  //export interface MediaQRulesetDecoded {
+  //  rulesetName: string // ruleset name in sheet
+  //  items: RulesetDecoded[] // decoded MediaQRulesetPartX
+  //}
 
-  export interface RulesetDecoded {
-    from: Breakpoint
-    to: Breakpoint
-    ruleset: TCommon.RulesetFragments
-  }
+  //export interface RulesetDecoded {
+  //  from: Breakpoint
+  //  to: Breakpoint
+  //  ruleset: SheeterRuleset
+  //}
 
   /************************
   * NOTIFY TYPINGS
   *************************/
 
-  //*** breakpoint
-  export const enum Consts {
-    maxBreakpoint = 10000000
-  }
+  ////*** breakpoint
+  //export const enum Consts {
+  //  maxBreakpoint = 10000000
+  //}
 
   export interface Breakpoint {
     id: number // 0..31, index to breakpoints array

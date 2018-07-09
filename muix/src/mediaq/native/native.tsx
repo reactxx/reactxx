@@ -1,8 +1,8 @@
-import React from 'react'
-import { Dimensions } from 'react-native'
+import React from 'react';
+import { Dimensions } from 'react-native';
+import * as Sheeter from 'reactxx-sheeter';
+import { TMediaQ } from '../typings/mediaq';
 
-import * as Sheeter  from 'reactxx-sheeter'
-import { TMediaQ } from '../typings/mediaq'
 
 export class MediaQ_AppContainer extends React.Component<{}, { width: number }> {
 

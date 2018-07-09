@@ -80,36 +80,36 @@ export namespace TCommon {
   //****************************
   // PLATFORM SHEET
   //****************************
-  export type Fragment = {}
-  export type Fragments = Fragment[]
-  export type RulesetFragmentsPart = Fragment | RulesetFragments | Fragments
-  export type RulesetFragmentsParts = RulesetFragmentsPart[]
+//  export type Fragment = {}
+//  export type Fragments = Fragment[]
+//  export type RulesetFragmentsPart = Fragment | RulesetFragments | Fragments
+//  export type RulesetFragmentsParts = RulesetFragmentsPart[]
 
-  export interface RulesetFragments {
-    __fragments: Fragments
-    name: string
-  }
+//  export interface RulesetFragments {
+//    __fragments: Fragments
+//    name: string
+//  }
 
-  export type SheetFragmentsData = { [rulesetName: string]: RulesetFragments }
+//  export type SheetFragmentsData = { [rulesetName: string]: RulesetFragments }
 
-  export interface SheetFragments {
-    codeClasses?: SheetFragmentsData
-    addInClasses?: TAddIns
-  }
+//  export interface SheetFragments {
+//    codeClasses?: SheetFragmentsData
+//    addInClasses?: TAddIns
+//  }
 
-  export type SheetPatch = {
-    [addInName: string]: {
-      [rulesetName: string]: Fragments
-    }
-  }
+//  export type SheetPatch = {
+//    [addInName: string]: {
+//      [rulesetName: string]: Fragments
+//    }
+//  }
 
-  export type SheetPatchFinal = {
-    [rulesetName: string]: Fragments
-  }
+//  export type SheetPatchFinal = {
+//    [rulesetName: string]: Fragments
+//  }
 
-  export type TSheetAddIn = {}
-  export type TRulesetAddIn = { [name: string]: Array<{}> } // name is e.g. '$mediaq'
-  export type TAddIn = TSheetAddIn | TRulesetAddIn
-  export type TAddIns = { [name: string]: TAddIn } // name is e.g. '$animations' or 'root'
+//  export type TSheetAddIn = {}
+//  export type TRulesetAddIn = { [name: string]: Array<{}> } // name is e.g. '$mediaq'
+//  export type TAddIn = TSheetAddIn | TRulesetAddIn
+//  export type TAddIns = { [name: string]: TAddIn } // name is e.g. '$animations' or 'root'
 
 } 

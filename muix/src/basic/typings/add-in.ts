@@ -1,6 +1,6 @@
-﻿import { Types } from './types'
-import { TCommonStyles } from './common-styles'
-import { TCommon } from './common'
+﻿import { TCommon } from './common';
+import { TCommonStyles } from './common-styles';
+import { Types } from './types';
 
 
 export namespace TAddIn {
