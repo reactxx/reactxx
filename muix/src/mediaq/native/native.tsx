@@ -1,7 +1,6 @@
 import React from 'react'
 import { Dimensions } from 'react-native'
 
-import { TSheeter } from 'reactxx-sheeter'
 import * as Sheeter  from 'reactxx-sheeter'
 import { TMediaQ } from '../typings/mediaq'
 
@@ -39,11 +38,11 @@ export const mediaQFlags = (input: () => TMediaQ.MediaQFlags, next: () => React.
   return res
 }
 
-export const mediaqFinishAddInProps: TSheeter.FinishAddIn = null
-export const mediaqFinishAddInClasses: TSheeter.FinishAddIn = null
+export const mediaqFinishAddInProps: Sheeter.FinishAddIn = null
+export const mediaqFinishAddInClasses: Sheeter.FinishAddIn = null
 
-export const mediaQSheet = (input: () => TSheeter.RulesetPatchGetters, next: () => React.ReactNode) => {
-  let filters: TSheeter.RulesetPatchGetters
+export const mediaQSheet = (input: () => Sheeter.RulesetPatchGetters, next: () => React.ReactNode) => {
+  let filters: Sheeter.RulesetPatchGetters
   const render = (width: number) => {
     filters.$mediaq = Sheeter.mediaqRulesetPatchGetterCreator(width)
     return next()
@@ -63,7 +62,7 @@ const context = React.createContext<number>(0)
 
 let appContainer: MediaQ_AppContainer
 
-const propsPatchGetterCreator: (width: number) => TSheeter.PropsPatchGetter = width => (intervals: TMediaQ.NotifyIntervalX, map) => {
+const propsPatchGetterCreator: (width: number) => Sheeter.PropsPatchGetter = width => (intervals: TMediaQ.NotifyIntervalX, map) => {
   const $mediaq: TMediaQ.MediaFlags = {}
   for (const p in intervals) {
     const [beg, end] = intervals[p]

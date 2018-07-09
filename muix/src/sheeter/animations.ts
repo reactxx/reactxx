@@ -1,2 +1,2 @@
-import { filterRulesetNames, TSheeter } from './index'
+import { filterRulesetNames } from './index'
 

@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 import * as CSS from 'csstype'
 
-import { TSheeter } from 'reactxx-sheeter'
+import { Ruleset as SheeterRuleset } from 'reactxx-sheeter'
 import { TCommonStyles, TCommon } from 'reactxx-basic'
 
 import { TAddIn } from './add-in'
@@ -67,9 +67,9 @@ export namespace Types {
   export type RulesetNamesNative<R extends Shape = Shape> = keyof TCommon.getCommon<R> | keyof TCommon.getNative<R>
   export type RulesetNames<R extends Shape = Shape> = keyof TCommon.getCommon<R> | TCommon.getWeb<R> | keyof TCommon.getNative<R>
 
-  export type SheetWeb<R extends Shape = Shape> = PartialRecord<RulesetNamesWeb<R>, TSheeter.Ruleset>
-  export type SheetNative<R extends Shape = Shape> = PartialRecord<RulesetNamesNative<R>, TSheeter.Ruleset>
-  export type Sheet<R extends Shape = Shape> = PartialRecord<RulesetNames<R>, TSheeter.Ruleset>
+  export type SheetWeb<R extends Shape = Shape> = PartialRecord<RulesetNamesWeb<R>, SheeterRuleset>
+  export type SheetNative<R extends Shape = Shape> = PartialRecord<RulesetNamesNative<R>, SheeterRuleset>
+  export type Sheet<R extends Shape = Shape> = PartialRecord<RulesetNames<R>, SheeterRuleset>
   //export type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
 
   /******************************************

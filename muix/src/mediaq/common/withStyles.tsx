@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TSheeter } from 'reactxx-sheeter'
+import { AddIns as SheeterAddIns } from 'reactxx-sheeter'
 import { TCommon, ThemeProvider, themePipe, RenderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformSheets, deepMerges } from 'reactxx-basic'
 import { mediaQFlags, mediaQSheet, MediaQ_AppContainer, mediaqFinishAddInClasses, mediaqFinishAddInProps } from 'reactxx-mediaq'
 
@@ -22,7 +22,7 @@ export interface TRenderState extends TRenderStateBasic {
 
 export const propsPipe = (state: TRenderState, next) =>
   mediaQFlags( // media flags, e.g. {mobile:false, tablet:true, desktop:false }
-    () => ({ addIns: state.platformProps.$system as TSheeter.AddIns, getPropsPatches: state.getPropsPatches }),
+    () => ({ addIns: state.platformProps.$system as SheeterAddIns, getPropsPatches: state.getPropsPatches }),
     next)
 
 export const stylePipe = (state: TRenderState, next) =>

@@ -1,5 +1,5 @@
-import { filterRulesetNames, TSheeter } from './index'
+import { filterRulesetNames, RulesetPatchGetter } from './index'
 
-export const whenUsedRulesetFilter: TSheeter.RulesetPatchGetter = ({ addInSheet, usedRulesetNames }) => filterRulesetNames(addInSheet).filter(key => usedRulesetNames[key]).map(key => addInSheet[key])
+export const whenUsedRulesetFilter: RulesetPatchGetter = ({ addInSheet, usedRulesetNames }) => filterRulesetNames(addInSheet).filter(key => usedRulesetNames[key]).map(key => addInSheet[key])
 
 

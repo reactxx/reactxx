@@ -1,7 +1,7 @@
 import React from 'react'
 import warning from 'warning'
 
-import { TSheeter } from 'reactxx-sheeter'
+
 import * as Sheeter from 'reactxx-sheeter'
 import { TMediaQ } from '../typings/mediaq'
 
@@ -51,19 +51,19 @@ const subscribe = (data, breaks: number[]) => {
   const breakPoints = breaks.map(br => appContainer.subscribe(br))
   let observedBits = 0
   breakPoints.forEach(breakPoint => observedBits |= 1 << breakPoint.id)
-  data[TSheeter.Consts.dataObservedBits] = observedBits
+  data[Sheeter.Consts.dataObservedBits] = observedBits
 }
 
 export const mediaqFinishAddInClasses = Sheeter.mediaqFinishAddInCreator(subscribe)
 
-export const mediaqFinishAddInProps: TSheeter.FinishAddIn = (addInItem: TMediaQ.NotifyIntervalX) => {
+export const mediaqFinishAddInProps: Sheeter.FinishAddIn = (addInItem: TMediaQ.NotifyIntervalX) => {
   const breaks: number[] = []
   for (const p in addInItem) {
     const prop = addInItem[p]
     if (prop[0]) breaks.push(prop[0])
     if (prop[1]) breaks.push(prop[1])
   }
-  subscribe(addInItem[TSheeter.Consts.data] = {} as any, breaks)
+  subscribe(addInItem[Sheeter.Consts.data] = {} as any, breaks)
 }
 
 
@@ -84,7 +84,7 @@ export const mediaQFlags = (input: () => TMediaQ.MediaQFlags, next: () => React.
 }
 
 // CSS media query are used for web, no pipe is required
-export const mediaQSheet = (input: () => TSheeter.RulesetPatchGetters, next: () => React.ReactNode) => next 
+export const mediaQSheet = (input: () => Sheeter.RulesetPatchGetters, next: () => React.ReactNode) => next 
 
 /************************
 * PRIVATE
@@ -104,11 +104,11 @@ let appContainer: MediaQ_AppContainer
 
 const getObservedBits = ($mediaq: TMediaQ.NotifyIntervalX) => {
   if (!$mediaq) return 0
-  const data = $mediaq[TSheeter.Consts.data]; if (!data) return 0
-  return data[TSheeter.Consts.dataObservedBits] || 0
+  const data = $mediaq[Sheeter.Consts.data]; if (!data) return 0
+  return data[Sheeter.Consts.dataObservedBits] || 0
 }
 
-const propsPatchGetterCreator: (width: number) => TSheeter.PropsPatchGetter = width => (intervals: TMediaQ.NotifyIntervalX, map) => {
+const propsPatchGetterCreator: (width: number) => Sheeter.PropsPatchGetter = width => (intervals: TMediaQ.NotifyIntervalX, map) => {
   const $mediaq: TMediaQ.MediaFlags = {}
   for (const p in intervals) {
     if (p.charAt(0) === '#') continue

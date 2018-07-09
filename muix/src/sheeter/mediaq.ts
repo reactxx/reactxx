@@ -1,4 +1,4 @@
-import { TSheeter } from './index'
+import { FinishAddIn, Consts, RulesetPatchGetter} from './index'
 
 const maxBreakpoint = 10000000
 
@@ -7,7 +7,7 @@ export interface RulesetDecoded {
   to: number
 }
 
-export const mediaqFinishAddInCreator: (onFinished?: (data, breakpoints: number[]) => void) => TSheeter.FinishAddIn = onFinished => addInItem => {
+export const mediaqFinishAddInCreator: (onFinished?: (data, breakpoints: number[]) => void) => FinishAddIn = onFinished => addInItem => {
   for (const sheetName in addInItem) {
     const breakpoints = []
     const addBreakpoint = br => { const i = parseInt(br); breakpoints.push(i); return i }
@@ -15,8 +15,8 @@ export const mediaqFinishAddInCreator: (onFinished?: (data, breakpoints: number[
     let map: {}
     let data
     const finished = {
-      [TSheeter.Consts.data]: data = {
-        path: sheet[TSheeter.Consts.data].path,
+      [Consts.data]: data = {
+        path: sheet[Consts.data].path,
         map: map = {}
       }
     }
@@ -35,8 +35,8 @@ export const mediaqFinishAddInCreator: (onFinished?: (data, breakpoints: number[
   }
 }
 
-export const mediaqRulesetPatchGetterCreator: (windowWidth?: number) => TSheeter.RulesetPatchGetter = (windowWidth: number) => ({ addInSheet }) => {
-  const maps = addInSheet[TSheeter.Consts.data].map
+export const mediaqRulesetPatchGetterCreator: (windowWidth?: number) => RulesetPatchGetter = (windowWidth: number) => ({ addInSheet }) => {
+  const maps = addInSheet[Consts.data].map
   const res: any = window.isWeb ? {} : []
   if (!windowWidth) windowWidth = 0
   for (const p in addInSheet) {

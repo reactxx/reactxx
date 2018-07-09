@@ -1,14 +1,14 @@
-import { TSheeter } from 'reactxx-sheeter'
+
 import * as Sheeter from 'reactxx-sheeter'
 
 export const test = () => {
 
   const patchable = Sheeter.toPatchableAndMergeable(root)
 
-  const finishAddIns: TSheeter.FinishAddIns = {
+  const finishAddIns: Sheeter.FinishAddIns = {
     $mediaq: Sheeter.mediaqFinishAddInCreator()
   }
-  const addInRulesetFilters: TSheeter.RulesetPatchGetters = {
+  const addInRulesetFilters: Sheeter.RulesetPatchGetters = {
     $mediaq: Sheeter.mediaqRulesetPatchGetterCreator(200), // screen width = 200px
     $whenUsed: Sheeter.whenUsedRulesetFilter
   }
@@ -26,7 +26,7 @@ export const test = () => {
 //****************************
 // INPUT DATA
 
-const root: TSheeter.Sheet = {
+const root: Sheeter.Sheet = {
   root: {
     a0: 1,
     $web: {
@@ -49,7 +49,7 @@ const root: TSheeter.Sheet = {
                           '200-300': {
                             a7: 1,
                           }
-                        } as TSheeter.Sheet
+                        } as Sheeter.Sheet
                       },
                     },
                     ":hover": {
@@ -57,13 +57,13 @@ const root: TSheeter.Sheet = {
                         '300-400': {
                           a8: 1,
                         }
-                      } as TSheeter.Sheet
+                      } as Sheeter.Sheet
                     }
                   },
                 },
-              } as TSheeter.Sheet,
+              } as Sheeter.Sheet,
             },
-          } as TSheeter.Sheet,
+          } as Sheeter.Sheet,
         },
       },
     },

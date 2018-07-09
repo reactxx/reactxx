@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 import warning from 'warning'
 
-import { TSheeter } from 'reactxx-sheeter'
+
 import * as Sheeter from 'reactxx-sheeter'
 
 import { TCommonStyles } from '../typings/common-styles'
@@ -31,23 +31,23 @@ export const getPlatformSheet = (par: GetPlatformSheetPar) => {
   }
 }
 
-const fromCache = ($cache: Cache, componentId: number, cacheId: string, getter: () => TSheeter.SheetWithAddIns) => {
+const fromCache = ($cache: Cache, componentId: number, cacheId: string, getter: () => Sheeter.SheetWithAddIns) => {
   let compCache = $cache[componentId]
   if (!compCache) $cache[componentId] = compCache = {}
   return compCache[cacheId] || (compCache[cacheId] = getter())
 }
 
-type Cache = { [variantId: string]: TSheeter.SheetWithAddIns }[]
+type Cache = { [variantId: string]: Sheeter.SheetWithAddIns }[]
 
 interface GetPlatformSheetPar {
   componentId: number
   createSheetX: Types.SheetCreatorX
-  expandCreator: (creator: Types.SheetCreatorX) => TSheeter.SheetWithAddIns
+  expandCreator: (creator: Types.SheetCreatorX) => Sheeter.SheetWithAddIns
   $cache: Cache
-  sheetXPatch: TSheeter.SheetWithAddIns[]
-  defaultClasses?: TSheeter.SheetWithAddIns
+  sheetXPatch: Sheeter.SheetWithAddIns[]
+  defaultClasses?: Sheeter.SheetWithAddIns
   cacheId: string
-  finishAddInClasses: TSheeter.FinishAddIns
+  finishAddInClasses: Sheeter.FinishAddIns
 }
 
 export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseDown : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress

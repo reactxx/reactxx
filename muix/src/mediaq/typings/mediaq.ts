@@ -1,11 +1,11 @@
-﻿import { TSheeter } from 'reactxx-sheeter'
+﻿import { AddIns as SheeterAddIns, PropsPatchGetters as SheeterPropsPatchGetters } from 'reactxx-sheeter'
 import { Types, TCommonStyles, TCommon } from 'reactxx-basic'
 
 export namespace TMediaQ {
 
   export interface MediaQFlags {
-    addIns: TSheeter.AddIns // TMediaQ.NotifyIntervalX
-    getPropsPatches: TSheeter.PropsPatchGetters
+    addIns: SheeterAddIns // TMediaQ.NotifyIntervalX
+    getPropsPatches: SheeterPropsPatchGetters
   }
 
   //export type MediaQFlags = TSheeter.PropsPatchGetters

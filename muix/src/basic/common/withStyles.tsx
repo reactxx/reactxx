@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 import warning from 'warning'
 
-import { TSheeter } from 'reactxx-sheeter'
+import * as Sheeter from 'reactxx-sheeter'
 
 import { TCommon } from '../typings/common'
 import { TCommonStyles } from '../typings/common-styles'
@@ -31,7 +31,7 @@ export interface TRenderState {
   addInProps?: TAddIn.PropsX // separated props, which name starts with $, e.g. $mediaq, $developer_flag etc.
 
   // Step 3 - propsAddInPipeline: call addIns PROPS phase (addIn use addInProps and fills codeSystemPropsPatch)
-  getPropsPatches?: TSheeter.PropsPatchGetters
+  getPropsPatches?: Sheeter.PropsPatchGetters
   codePropsPatch?: { [addInName: string]: TAddIn.CodeProps } // codeProps, modified by addIns 
 
   // Step 4 - stylePipe:
@@ -42,7 +42,7 @@ export interface TRenderState {
   //codeClasses?: TCommon.SheetFragmentsData // platform dependent classes
 
   // Step 5 - styleAddInPipeline: call addIns STYLE phase (addIn es addInClasses and fills codeClassesPatch)
-  getClassesPatches?: TSheeter.RulesetPatchGetters
+  getClassesPatches?: Sheeter.RulesetPatchGetters
   codeClassesPatch?: TCommon.SheetPatch // codeClasses modified by addIns 
 
   // Step 6 - renderCounterPipe: for development mode - render counter (fills addInProps.$developer_RenderCounter). It allows to display number of component render calls
@@ -66,8 +66,8 @@ export interface RenderAddIn {
   getDefaultTheme?: () => TCommon.ThemeBase
   createSheetHook?: (sheetCreator: Types.SheetCreatorX) => Types.SheetCreatorX
 
-  finishAddInProps?: TSheeter.FinishAddIns
-  finishAddInClasses?: TSheeter.FinishAddIns
+  finishAddInProps?: Sheeter.FinishAddIns
+  finishAddInClasses?: Sheeter.FinishAddIns
 }
 
 // empty addIn configuration

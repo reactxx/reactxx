@@ -1,4 +1,4 @@
-import { TSheeter } from 'reactxx-sheeter'
+
 import * as Sheeter from 'reactxx-sheeter'
 
 //****************************
@@ -6,10 +6,10 @@ import * as Sheeter from 'reactxx-sheeter'
 
 export const test = () => {
 
-  const finishAddIns: TSheeter.FinishAddIns = {
+  const finishAddIns: Sheeter.FinishAddIns = {
     $mediaq: Sheeter.mediaqFinishAddInCreator()
   }
-  const addInRulesetFilters: TSheeter.RulesetPatchGetters = {
+  const addInRulesetFilters: Sheeter.RulesetPatchGetters = {
     $mediaq: Sheeter.mediaqRulesetPatchGetterCreator(400),
     $whenUsed: Sheeter.whenUsedRulesetFilter
   }
@@ -26,7 +26,7 @@ export const test = () => {
   debugger
 }
 
-const root: TSheeter.Sheet = {
+const root: Sheeter.Sheet = {
   root: {
     a1:1,
     $mediaq: {

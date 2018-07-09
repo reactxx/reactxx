@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import warning from 'warning'
 
-import { TSheeter } from 'reactxx-sheeter'
+
 import * as Sheeter from 'reactxx-sheeter'
 
 import { Types } from '../typings/types'
@@ -90,7 +90,7 @@ export const getSystemPipes = <R extends Types.Shape>(
     delete separatedStylesAndProps.props
 
     // use sheeter utils for props finishing (linearize $web and $native props, extract addIns (e.g. $mediaq))
-    const platformProps = Sheeter.finishProps(mergedProps as TSheeter.Sheet, addIns.finishAddInProps)
+    const platformProps = Sheeter.finishProps(mergedProps as Sheeter.Sheet, addIns.finishAddInProps)
 
     // remove developer_flag for non 'development' ENV
     if (!DEV_MODE && platformProps.$developer_flag) delete platformProps.$developer_flag
@@ -108,7 +108,7 @@ export const getSystemPipes = <R extends Types.Shape>(
     const { theme, $cache } = renderState.themeContext
 
     // **** merge patches and eventsX to finalProps
-    const propPatches = Sheeter.getPropsPatch(platformProps.$system as TSheeter.AddIns, getPropsPatches)//: Types.PartialCodeProps[] = Object.keys(codePropsPatch).map(p => codePropsPatch[p])
+    const propPatches = Sheeter.getPropsPatch(platformProps.$system as Sheeter.AddIns, getPropsPatches)//: Types.PartialCodeProps[] = Object.keys(codePropsPatch).map(p => codePropsPatch[p])
     const finalProps: Types.CodeProps = renderState.finalProps = immutableMerge(platformProps, propPatches)
     const system = finalProps.$system
 
@@ -137,7 +137,7 @@ export const getSystemPipes = <R extends Types.Shape>(
 
     // **** style (for web only, for native is included in root).
     const toMergeStylesCreators = window.isWeb && separatedStyles.style.length > 0 ? separatedStyles.style : null
-    const toMergeStylesX: TSheeter.SheetWithAddIns[] = !toMergeStylesCreators ? null : toMergeStylesCreators.map(creator => expandCreator(creator))
+    const toMergeStylesX: Sheeter.SheetWithAddIns[] = !toMergeStylesCreators ? null : toMergeStylesCreators.map(creator => expandCreator(creator))
 
     if (toMergeStylesX) system.style = toMergeStylesX.length === 1 ? toMergeStylesX[0] : Sheeter.deepMerges({}, toMergeStylesX)
 
@@ -146,8 +146,8 @@ export const getSystemPipes = <R extends Types.Shape>(
       ...separatedStyles.classes || null,
       ...separatedStyles.className.map(className => ({ root: className })),
       ...(window.isWeb ? [] : separatedStyles.style.map(style => ({ root: style })))]
-    const sheetXPatch: TSheeter.SheetWithAddIns[] = toMergeSheetCreators.length === 0 ? null : toMergeSheetCreators.map(creator => expandCreator(creator))
-    const defaultClasses: TSheeter.SheetWithAddIns = !defaultPropsSeparated ? null : expandCreator(defaultPropsSeparated.classes)
+    const sheetXPatch: Sheeter.SheetWithAddIns[] = toMergeSheetCreators.length === 0 ? null : toMergeSheetCreators.map(creator => expandCreator(creator))
+    const defaultClasses: Sheeter.SheetWithAddIns = !defaultPropsSeparated ? null : expandCreator(defaultPropsSeparated.classes)
 
     // **** apply sheet patch to sheet:
     // call sheet creator, merges it with sheet patch
@@ -197,9 +197,9 @@ export const getSystemPipes = <R extends Types.Shape>(
     }
 
     // method, called in component code: ruleset merging
-    finalProps.$system.mergeRulesets = (...rulesets: TSheeter.Ruleset[]) => {
+    finalProps.$system.mergeRulesets = (...rulesets: Sheeter.Ruleset[]) => {
       const res = Sheeter.mergeRulesetsForCode(
-        finalProps.$system.classes as TSheeter.SheetWithAddIns,
+        finalProps.$system.classes as Sheeter.SheetWithAddIns,
         getClassesPatches,
         rulesets
       ) as Types.TMergeRulesetsResult<any>

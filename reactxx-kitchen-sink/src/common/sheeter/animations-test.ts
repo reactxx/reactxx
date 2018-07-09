@@ -1,4 +1,4 @@
-import { TSheeter } from 'reactxx-sheeter'
+
 import * as Sheeter from 'reactxx-sheeter'
 
 //****************************
@@ -6,9 +6,9 @@ import * as Sheeter from 'reactxx-sheeter'
 
 export const test = () => {
 
-  const finishAddIns: TSheeter.FinishAddIns = {
+  const finishAddIns: Sheeter.FinishAddIns = {
   }
-  const addInRulesetFilters: TSheeter.RulesetPatchGetters = {
+  const addInRulesetFilters: Sheeter.RulesetPatchGetters = {
     $whenUsed: Sheeter.whenUsedRulesetFilter
   }
   const patchable = Sheeter.toPatchableAndMergeable(root)
@@ -24,7 +24,7 @@ export const test = () => {
   debugger
 }
 
-const root: TSheeter.Sheet = {
+const root: Sheeter.Sheet = {
   root: {
     $animation: {
       rootAnim: {
