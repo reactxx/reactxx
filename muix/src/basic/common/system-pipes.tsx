@@ -6,16 +6,10 @@ import * as Sheeter from 'reactxx-sheeter'
 
 import { Types } from '../typings/types'
 import { TCommon } from '../typings/common'
-import { getPlatformSheet, toPlatformRulesets, immutableMerge, mergeRulesetsParts, toPlatformSheets } from './to-platform'
 import { TAddIn } from '../typings/add-in'
 import { TCommonStyles } from '../typings/common-styles'
 import { themePipe } from './theme'
 import { RenderAddIn, TRenderState } from './withStyles'
-
-export interface FinalizePropsOutput {
-  platformProps: Types.CodeProps
-  //addInProps: TAddIn.PropsX
-}
 
 export const getSystemPipes = <R extends Types.Shape>(
   id: number,
@@ -66,9 +60,9 @@ export const getSystemPipes = <R extends Types.Shape>(
 
   const toPlatformProps = (cascadingSeparatedPropsArray: SeparatedPropsArray, currentProps: Types.PropsX, renderState: TRenderStateEx) => {
 
-    const _defaultPropsNoClasses = defaultPropsSeparated ? { ...defaultPropsSeparated, classes: null } : null
+    const defaultPropsNoClasses = defaultPropsSeparated ? { ...defaultPropsSeparated, classes: null } : null
 
-    const allSeparatedPropsArray: SeparatedPropsArray = [_defaultPropsNoClasses, ...cascadingSeparatedPropsArray || [], separateProps(currentProps)]
+    const allSeparatedPropsArray: SeparatedPropsArray = [defaultPropsNoClasses, ...cascadingSeparatedPropsArray || [], separateProps(currentProps)]
 
     const theme = renderState.themeContext.theme
 
@@ -104,12 +98,12 @@ export const getSystemPipes = <R extends Types.Shape>(
 
   const toPlatformStyle = (displayName: string, componentId: number, createSheetX: Types.SheetCreatorX, options: Types.WithStyleOptions_ComponentX, renderState: TRenderStateEx) => {
 
-    const { codePropsPatch, platformProps, addInProps, separatedStyles, getPropsPatches } = renderState
+    const { platformProps, separatedStyles, getPropsPatches } = renderState
     const { theme, $cache } = renderState.themeContext
 
     // **** merge patches and eventsX to finalProps
-    const propPatches = Sheeter.getPropsPatch(platformProps.$system as Sheeter.AddIns, getPropsPatches)//: Types.PartialCodeProps[] = Object.keys(codePropsPatch).map(p => codePropsPatch[p])
-    const finalProps: Types.CodeProps = renderState.finalProps = immutableMerge(platformProps, propPatches)
+    const propPatches = Sheeter.getPropsPatch(platformProps.$system as Sheeter.AddIns, getPropsPatches)
+    const finalProps: Types.CodeProps = renderState.finalProps = propPatches && propPatches.length > 0 ? Sheeter.immutableMerge([platformProps, ...propPatches]) : platformProps
     const system = finalProps.$system
 
     // **** variant
@@ -182,28 +176,25 @@ export const getSystemPipes = <R extends Types.Shape>(
 
   const renderComponentPipe = (renderState: TRenderState, CodeComponent: Types.CodeComponentType) => () => {
 
-    const { finalProps, codeClassesPatch, addInProps, addInClasses, getClassesPatches } = renderState
+    const { finalProps, finalProps: { $system }, getClassesPatches } = renderState
 
-    if (addInProps.$developer_flag) {
-      const { themeContext, codePropsPatch } = renderState
+    if ($system.$developer_flag) {
+      const { themeContext } = renderState
       console.log(
         `### withStyles RENDER CODE for ${displayName}`,
         '\nfinalProps: ', finalProps,
-        '\naddInProps: ', addInProps,
         '\ntheme: ', themeContext.theme,
-        '\npropsPatch: ', codePropsPatch,
-        '\ncodeClassesPatch: ', codeClassesPatch,
       )
     }
 
     // method, called in component code: ruleset merging
-    finalProps.$system.mergeRulesets = (...rulesets: Sheeter.Ruleset[]) => {
+    $system.mergeRulesets = (...rulesets: Sheeter.Ruleset[]) => {
       const res = Sheeter.mergeRulesetsForCode(
-        finalProps.$system.classes as Sheeter.SheetWithAddIns,
+        $system.classes as Sheeter.SheetWithAddIns,
         getClassesPatches,
         rulesets
       ) as Types.TMergeRulesetsResult<any>
-      if (addInProps.$developer_flag) {
+      if ($system.$developer_flag) {
         console.log(
           `### mergeRulesets for ${displayName}`,
           res
@@ -222,90 +213,51 @@ export const getSystemPipes = <R extends Types.Shape>(
 
 }
 
-//export const whenUsedFinishAddIns = (addInClasses: {}) => {
-//  // addIns = e.g. { root: { $whenUsed: [ { disabled: Types.RulesetX } ] } }
-//  for (const p in addInClasses) {
-//    const addInsp = addInClasses[p]
-//    const $whenUsed: Array<{}> = addInsp && addInsp[$whenUsedPropName]
-//    if (!$whenUsed) continue
-//    // output: addIns.root.$whenUsed = e.g. { name: 'disabled', __fragments: [ {...} ] }
-//    addInClasses[p][$whenUsedPropName] = toPlatformSheets(null, $whenUsed).codeClasses
-//  }
-//}
+//****************************
+// GET PLATFORM SHEET
+//****************************
 
+const getPlatformSheet = (par: GetPlatformSheetPar) => {
+  const { componentId, expandCreator, createSheetX, defaultClasses, sheetXPatch, cacheId, $cache } = par
+  // final sheet is merged from sheet, defaultClasses, component.provider cascading props and component props (classes, className and (for native only) style)
+  // sheet and defaultClasses could be cached
+  if (cacheId) {
+    // from theme cache (sheet and defaultClasses included in cache)
+    const cache = fromCache($cache, componentId, cacheId, () => Sheeter.mergeSheets(expandCreator(createSheetX), defaultClasses ? [defaultClasses] : null, true))
+    return Sheeter.mergeSheetsAndFinish(cache, sheetXPatch, par.finishAddInClasses, false)
+  } else {
+    // without cache ( including sheet and defaultClasses)
+    const patch = sheetXPatch && defaultClasses ? [defaultClasses, ...sheetXPatch] : sheetXPatch ? sheetXPatch : defaultClasses ? [defaultClasses] : null
+    return Sheeter.mergeSheetsAndFinish(expandCreator(createSheetX), patch, par.finishAddInClasses, true)
+  }
+}
 
-const $whenUsedPropName = '$whenUsed'
+const fromCache = ($cache: Cache, componentId: number, cacheId: string, getter: () => Sheeter.SheetWithAddIns) => {
+  let compCache = $cache[componentId]
+  if (!compCache) $cache[componentId] = compCache = {}
+  return compCache[cacheId] || (compCache[cacheId] = getter())
+}
+
+type Cache = { [variantId: string]: Sheeter.SheetWithAddIns }[]
+
+interface GetPlatformSheetPar {
+  componentId: number
+  createSheetX: Types.SheetCreatorX
+  expandCreator: (creator: Types.SheetCreatorX) => Sheeter.SheetWithAddIns
+  $cache: Cache
+  sheetXPatch: Sheeter.SheetWithAddIns[]
+  defaultClasses?: Sheeter.SheetWithAddIns
+  cacheId: string
+  finishAddInClasses: Sheeter.FinishAddIns
+}
+
+export const hasPlatformEvents = (cpx: Types.CodeProps) => window.isWeb ? cpx.onClick || cpx.onMouseUp || cpx.onMouseDown : cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
 
 /************************
 * PRIVATE
 *************************/
 
-// convert TCommon.SheetPatch to TCommon.SheetPatchFinal ( => remove AddIn's name hiearchy) 
-const consolidePatches = (codeClassesPatch: TCommon.SheetPatch) => {
-  if (!codeClassesPatch) return null
-  const arrayCanModify: { [rulesetName: string]: boolean } = {}
-  const codeClassesPatchFinal: TCommon.SheetPatchFinal = {}
-  for (const addInName in codeClassesPatch) {
-    const addIn = codeClassesPatch[addInName]
-    for (const rulesetName in addIn) {
-      let final = codeClassesPatchFinal[rulesetName], addInp = addIn[rulesetName]
-      // optimize merging ruleset's fragments
-      if (!final) codeClassesPatchFinal[rulesetName] = addInp //first addIn[rulesetName] => use it
-      else if (arrayCanModify[rulesetName]) Array.prototype.push.apply(final, addInp) // > second => modify result
-      else { // second => concat first and second to new array
-        codeClassesPatchFinal[rulesetName] = final.concat(addInp)
-        arrayCanModify[rulesetName] = true
-      }
-    }
-  }
-  return codeClassesPatchFinal
-}
-
-const mergeRulesets = (codeClassesPatch: TCommon.SheetPatchFinal, addInClasses: TCommon.TAddIns, rulesets: TCommon.RulesetFragmentsParts) => {
-
-  if (!rulesets || rulesets.length === 0) return null
-
-  // get used ruleset names (some of them could apear in addInClasses $whenUsed)
-  let usedRulesetNames: {} = null
-  if (addInClasses) rulesets.forEach((r: TCommon.RulesetFragments) => {
-    if (!r || !r.__fragments || !r.name) return
-    (usedRulesetNames || (usedRulesetNames = {}))[r.name] = true
-  })
-
-  if (!usedRulesetNames && !codeClassesPatch) return mergeRulesetsParts(rulesets)
-
-  // for every ruleset: apply patches and resolve "$whenUsed" addIn
-  const finalRulesets = rulesets.map((r: TCommon.RulesetFragments) => {
-    const name = r && r.__fragments && r.name
-    if (!name) return r
-    // get patch
-    const patch = codeClassesPatch && codeClassesPatch[name]
-    // gen whenUses
-    const $whenUses: TCommon.SheetFragmentsData = usedRulesetNames && addInClasses[name] && addInClasses[name][$whenUsedPropName]
-    let $whenUsedPatch: {}[] = null // fragments of used $whenUses
-    if ($whenUses) for (const p in $whenUses) {
-      if (!usedRulesetNames[p]) return // not used
-      let isSecond = true
-      if (!$whenUsedPatch) $whenUsedPatch = $whenUses[p].__fragments // first
-      else if (isSecond) { $whenUsedPatch = $whenUsedPatch.concat($whenUses[p].__fragments); isSecond = false } // second
-      else Array.prototype.push($whenUsedPatch, $whenUses[p].__fragments) // > second
-    }
-    if (!patch && !$whenUsedPatch) return r
-    // concat patch and whenUses
-    return {
-      __fragments: [
-        ...r.__fragments,
-        ...$whenUsedPatch || [],
-        ...patch || [],
-      ]
-    }
-  })
-
-  return mergeRulesetsParts(finalRulesets)
-}
-
 interface TRenderStateEx extends TRenderState {
-  //eventsX?: Types.OnPressAllX
   separatedStyles?: AccumulatedStylesAndProps
 }
 

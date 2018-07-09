@@ -1,21 +1,11 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, themePipe, RenderAddIn, TRenderState as TRenderStateBasic, withStyles, deepMerges } from 'reactxx-basic'
+import { TCommon, ThemeProvider, themePipe, RenderAddIn, TRenderState, withStyles } from 'reactxx-basic'
 import { animations, TAnimation } from 'reactxx-animation'
 
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
-
-/************************
-* TRenderState
-*************************/
-export interface TRenderState extends TRenderStateBasic {
-  addInProps?: TAddIn.PropsX
-  //codeSystemProps?: Types.CodeSystemProps
-  //addInClasses?: TAddIn.SheetX
-  finalProps?: Types.CodeProps
-}
 
 /************************
 * ADDINS
@@ -23,8 +13,8 @@ export interface TRenderState extends TRenderStateBasic {
 
 export const stylePipe = (state: TRenderState, next) =>
   animations( // process animation $animations part of sheet
-    () => state.addInClasses && state.addInClasses.$animations as TAnimation.SheetsX,
-    animations => state.finalProps.$system.animations = animations,
+    () => null, //state.addInClasses && state.addInClasses.$animations as TAnimation.SheetsX,
+    animations => { }, //state.finalProps.$system.animations = animations,
     next
   )
 

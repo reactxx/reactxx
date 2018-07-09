@@ -366,7 +366,7 @@ export const deepMerge = (target, source) => {
 }
 
 // deep merge for case when first source (sources[0]) is large object (e.g. component sheet) and other sources are small patches of sources[0]
-const immutableMerge = (sources: Node[]) => {
+export const immutableMerge = (sources: Node[]) => {
   if (!sources) return null
   if (sources.length === 1) return sources[0]
   let count = 0

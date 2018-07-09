@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommon, ThemeProvider, themePipe, RenderAddIn, withStyles, TRenderState as TRenderStateBasic } from 'reactxx-basic'
+import { TCommon, ThemeProvider, themePipe, RenderAddIn, withStyles, TRenderState } from 'reactxx-basic'
 import { animations, TAnimation, stylePipe as animationStylePipe } from 'reactxx-animation'
 import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQSheet, stylePipe as mediaQStylePipe, propsPipe as mediaQPropsPipe } from 'reactxx-mediaq'
 import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
@@ -10,17 +10,6 @@ import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
 
 //const DEV_MODE = process.env.NODE_ENV === 'development'
-
-/************************
-* TRenderState
-*************************/
-export interface TRenderState extends TRenderStateBasic {
-  addInProps?: TAddIn.PropsX
-  platformProps?: Types.CodeProps
-  //codeSystemProps?: Types.CodeSystemProps
-  //codeClasses?: Types.Sheet & TAddIn.SheetX
-  //addInClasses?: TAddIn.SheetX
-}
 
 /************************
 * ADDINS

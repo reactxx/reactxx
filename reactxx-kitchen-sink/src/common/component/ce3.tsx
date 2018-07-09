@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { Types, withStylesCreator, deepMerge, TCommon, ThemeProviderUntyped, TAddIn, TProvider } from 'reactxx-basic'
+import { Types, withStylesCreator, TCommon, ThemeProviderUntyped, TAddIn, TProvider } from 'reactxx-basic'
 import { TComps, Text, View, ScrollView, Icon, } from 'reactxx-primitives'
 
 import { H2, A, P } from '../components/typo'

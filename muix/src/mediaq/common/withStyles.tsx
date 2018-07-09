@@ -2,19 +2,12 @@
 import ReactN from 'react-native'
 
 import { AddIns as SheeterAddIns } from 'reactxx-sheeter'
-import { TCommon, ThemeProvider, themePipe, RenderAddIn, TRenderState as TRenderStateBasic, withStyles, toPlatformSheets, deepMerges } from 'reactxx-basic'
+import { TCommon, ThemeProvider, themePipe, RenderAddIn, TRenderState, withStyles } from 'reactxx-basic'
 import { mediaQFlags, mediaQSheet, MediaQ_AppContainer, mediaqFinishAddInClasses, mediaqFinishAddInProps } from 'reactxx-mediaq'
 
 import { Types } from '../typings/types'
 import { TAddIn } from '../typings/add-in'
 import { TMediaQ } from '../typings/mediaq'
-
-/************************
-* TRenderState
-*************************/
-export interface TRenderState extends TRenderStateBasic {
-  addInProps?: TAddIn.PropsX
-}
 
 /************************
 * ADDINS

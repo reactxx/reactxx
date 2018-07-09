@@ -12,7 +12,6 @@ import { TAddIn } from '../typings/add-in'
 import { getSystemPipes } from './system-pipes'
 import { renderCounterPipe } from './develop'
 import { ThemeProvider, ThemeConsumer, themePipe } from './theme'
-import { deepMerges } from './to-platform'
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
@@ -28,22 +27,22 @@ export interface TRenderState {
   // - merge props, separate addInProps and cascadingStyles.
   // - Sources are defaultProps, props from cascading, actual props
   platformProps?: Types.CodeProps // component props PLUS $web or $native platform props PLUS platform events
-  addInProps?: TAddIn.PropsX // separated props, which name starts with $, e.g. $mediaq, $developer_flag etc.
+  //addInProps?: TAddIn.PropsX // separated props, which name starts with $, e.g. $mediaq, $developer_flag etc.
 
   // Step 3 - propsAddInPipeline: call addIns PROPS phase (addIn use addInProps and fills codeSystemPropsPatch)
   getPropsPatches?: Sheeter.PropsPatchGetters
-  codePropsPatch?: { [addInName: string]: TAddIn.CodeProps } // codeProps, modified by addIns 
+  //codePropsPatch?: { [addInName: string]: TAddIn.CodeProps } // codeProps, modified by addIns 
 
   // Step 4 - stylePipe:
   // - finalProps = codeSystemPropsPatch to platformProps
   // - merge all styles to codeClasses, separate addIns sheet and ruleset props to addInClasses
   finalProps?: Types.CodeProps
-  addInClasses?: TCommon.TAddIns // separated sheet and ruleset props, which name starts with $, e.g. <sheet>.$animations, <ruleset>.$mediaq etc.
+  //addInClasses?: TCommon.TAddIns // separated sheet and ruleset props, which name starts with $, e.g. <sheet>.$animations, <ruleset>.$mediaq etc.
   //codeClasses?: TCommon.SheetFragmentsData // platform dependent classes
 
   // Step 5 - styleAddInPipeline: call addIns STYLE phase (addIn es addInClasses and fills codeClassesPatch)
   getClassesPatches?: Sheeter.RulesetPatchGetters
-  codeClassesPatch?: TCommon.SheetPatch // codeClasses modified by addIns 
+  //codeClassesPatch?: TCommon.SheetPatch // codeClasses modified by addIns 
 
   // Step 6 - renderCounterPipe: for development mode - render counter (fills addInProps.$developer_RenderCounter). It allows to display number of component render calls
 
@@ -90,7 +89,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCrea
 
   const id = compCounter++
 
-  options = options && overrideOptions ? deepMerges({}, options, overrideOptions) : options ? options : overrideOptions ? overrideOptions : {}
+  options = options && overrideOptions ? Sheeter.deepMerges({}, [options, overrideOptions]) : options ? options : overrideOptions ? overrideOptions : {}
 
   const displayName = `${options.name} (${id})`
 
@@ -108,7 +107,6 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCrea
   class Styled extends React.Component<Types.PropsX> {
 
     renderState: TRenderState = {
-      codePropsPatch: {},
       $developer_id: displayName + ' *' + compIdCounter++
     }
 
@@ -131,8 +129,8 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCrea
             stylePipe(this.renderState,
               addIns.styleAddInPipeline(this.renderState,
                 renderCounterPipe(
-                  () => ({ developer_flag: this.renderState.addInProps.$developer_flag }),
-                  count => { this.renderState.addInProps.$developer_RenderCounter = count },
+                  () => ({ developer_flag: this.renderState.finalProps.$system.$developer_flag }),
+                  count => { this.renderState.finalProps.$system.$developer_RenderCounter = count },
                   renderComponentPipe(this.renderState, CodeComponent)
                 )
               )
@@ -188,6 +186,7 @@ export const withStyles:
 export interface TProvider<R extends Types.Shape> { Provider: React.ComponentClass<Types.PropsX<R>> }
 
 export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()).join('$')
+
 
 let compCounter = 0
 let compIdCounter = 0
