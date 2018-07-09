@@ -24,18 +24,14 @@ export interface TRenderState {
 
   // Step 3 - propsAddInPipeline: call addIns PROPS phase (addIn use addInProps and fills codeSystemPropsPatch)
   getPropsPatches?: Sheeter.PropsPatchGetters
-  //codePropsPatch?: { [addInName: string]: TAddIn.CodeProps } // codeProps, modified by addIns 
 
   // Step 4 - stylePipe:
   // - finalProps = codeSystemPropsPatch to platformProps
   // - merge all styles to codeClasses, separate addIns sheet and ruleset props to addInClasses
   finalProps?: Types.CodeProps
-  //addInClasses?: TCommon.TAddIns // separated sheet and ruleset props, which name starts with $, e.g. <sheet>.$animations, <ruleset>.$mediaq etc.
-  //codeClasses?: TCommon.SheetFragmentsData // platform dependent classes
 
   // Step 5 - styleAddInPipeline: call addIns STYLE phase (addIn es addInClasses and fills codeClassesPatch)
   getClassesPatches?: Sheeter.RulesetPatchGetters
-  //codeClassesPatch?: TCommon.SheetPatch // codeClasses modified by addIns 
 
   // Step 6 - renderCounterPipe: for development mode - render counter (fills addInProps.$developer_RenderCounter). It allows to display number of component render calls
 

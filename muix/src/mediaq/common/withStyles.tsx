@@ -12,25 +12,14 @@ import { Types } from '../typings/types';
 
 export const propsPipe = (state: TRenderState, next) =>
   mediaQFlags( // media flags, e.g. {mobile:false, tablet:true, desktop:false }
-    () => ({ addIns: state.platformProps.$system as SheeterAddIns, getPropsPatches: state.getPropsPatches }),
+    () => ({ $system: state.platformProps.$system as SheeterAddIns, getPropsPatches: state.getPropsPatches || (state.getPropsPatches = {}) }),
     next)
 
 export const stylePipe = (state: TRenderState, next) =>
   mediaQSheet( // actualize $mediaq part of the ruleset
-    () => state.getClassesPatches,
+    () => state.getClassesPatches || (state.getClassesPatches = {}),
     next
   )
-
-//export const finishAddIns = (addInClasses: { [rulesetName: string]: { $mediaq?: {}[] /*input type*/ | TCommon.SheetFragmentsData /*output type*/ } }) => {
-//  // addIns = e.g. { root: { $mediaq: { '480-1024': Types.RulesetX } } }
-//  for (const p in addInClasses) {
-//    const addInsp = addInClasses[p]
-//    const $mediaq = addInsp && addInsp.$mediaq as {}[] // input type
-//    if (!$mediaq) continue
-//    // output: addIns.root.$mediaq = e.g. { name: '480-1024', __fragments: [ {color: 'red', $web: {...}}, {':hover: {}'} ] }
-//    addInClasses[p].$mediaq = toPlatformSheets(null, $mediaq).codeClasses // convert to output type
-//  }
-//}
 
 const renderAddIn: RenderAddIn = {
   propsAddInPipeline: propsPipe,

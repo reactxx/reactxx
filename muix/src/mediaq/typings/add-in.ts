@@ -39,11 +39,11 @@ export namespace TAddIn {
 
   //******************** Platform specific
   export interface GetVariant<R extends Types.Shape = Types.Shape> {
-    mediaqFlags?: TMediaQ.MediaFlags<TAddIn.getMediaQ<R>>
+    $mediaq?: TMediaQ.MediaFlags<TAddIn.getMediaQ<R>>
   }
 
   export interface CodePropsLow<R extends Types.Shape = Types.Shape> {
-    mediaqFlags?: TMediaQ.MediaFlags<getMediaQ<R>>
+    $mediaq?: TMediaQ.MediaFlags<getMediaQ<R>>
   }
 
   export interface CodePropsWeb<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> { }

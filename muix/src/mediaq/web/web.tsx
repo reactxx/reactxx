@@ -22,7 +22,7 @@ export class MediaQ_AppContainer extends React.Component {
     mediaQBreaks = null
   }
 
-  subscribe (value: number) {
+  subscribe(value: number) {
     checkAppContainer()
     let b = byValue[value]
     if (!b) {
@@ -40,6 +40,7 @@ export class MediaQ_AppContainer extends React.Component {
           this.setState({})
         }, 1)
       }
+      mediaQuery.addListener(onChange)
     }
     return b
   }
@@ -47,23 +48,23 @@ export class MediaQ_AppContainer extends React.Component {
 
 }
 
-const subscribe = (data, breaks: number[]) => {
-  const breakPoints = breaks.map(br => appContainer.subscribe(br))
-  let observedBits = 0
-  breakPoints.forEach(breakPoint => observedBits |= 1 << breakPoint.id)
-  data[Sheeter.Consts.dataObservedBits] = observedBits
-}
-
-export const mediaqFinishAddInClasses = Sheeter.mediaqFinishAddInCreator(subscribe)
+export const mediaqFinishAddInClasses = Sheeter.mediaqFinishAddInCreator()
 
 export const mediaqFinishAddInProps: Sheeter.FinishAddIn = (addInItem: TMediaQ.NotifyIntervalX) => {
-  const breaks: number[] = []
+  const breaks: { [value: number]: boolean } = {}
+  let observedBits = 0
+  const processBreak = (value: number) => {
+    if (!value || breaks[value]) return
+    breaks[value] = true
+    const breakPoint = appContainer.subscribe(value)
+    observedBits |= 1 << breakPoint.id
+  }
   for (const p in addInItem) {
     const prop = addInItem[p]
-    if (prop[0]) breaks.push(prop[0])
-    if (prop[1]) breaks.push(prop[1])
+    processBreak(prop[0])
+    processBreak(prop[1])
   }
-  subscribe(addInItem[Sheeter.Consts.data] = {} as any, breaks)
+  (addInItem[Sheeter.Consts.data] = {} as any)[Sheeter.Consts.dataObservedBits] = observedBits
 }
 
 
@@ -77,14 +78,17 @@ export const mediaQFlags = (input: () => TMediaQ.MediaQFlags, next: () => React.
   }
   const res = () => {
     pars = input()
-    debugger
-    return <context.Consumer unstable_observedBits={getObservedBits(pars.addIns['$mediaq'] as any as TMediaQ.NotifyIntervalX)}>{render}</context.Consumer>
+    return <context.Consumer unstable_observedBits={getObservedBits(pars.$system['$mediaq'] as any as TMediaQ.NotifyIntervalX)}>{render}</context.Consumer>
   }
   return res
 }
 
-// CSS media query are used for web, no pipe is required
-export const mediaQSheet = (input: () => Sheeter.RulesetPatchGetters, next: () => React.ReactNode) => next 
+// CSS media query are used for web, no consumer is required, just register getPropsPatches
+export const mediaQSheet = (input: () => Sheeter.RulesetPatchGetters, next: () => React.ReactNode) => {
+  const getPropsPatches = input()
+  getPropsPatches.$mediaq = Sheeter.mediaqRulesetPatchGetterCreator()
+  return next
+}
 
 /************************
 * PRIVATE
@@ -115,5 +119,5 @@ const propsPatchGetterCreator: (width: number) => Sheeter.PropsPatchGetter = wid
     const [beg, end] = intervals[p]
     $mediaq[p] = (!beg || beg <= width) && (!end || end > width)
   }
-  map.push({ $mediaq })
+  map.push({ $system: { $mediaq } })
 }

@@ -1,4 +1,4 @@
-import { FinishAddIn, Consts, RulesetPatchGetter} from './index'
+import { Consts, FinishAddIn, RulesetPatchGetter } from './index';
 
 const maxBreakpoint = 10000000
 

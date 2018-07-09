@@ -4,7 +4,7 @@ import { AddIns as SheeterAddIns, PropsPatchGetters as SheeterPropsPatchGetters,
 export namespace TMediaQ {
 
   export interface MediaQFlags {
-    addIns: SheeterAddIns // TMediaQ.NotifyIntervalX
+    $system: SheeterAddIns // TMediaQ.NotifyIntervalX
     getPropsPatches: SheeterPropsPatchGetters
   }
 

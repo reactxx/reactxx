@@ -2,11 +2,11 @@
 // sheet processing magic
 //****************************
 
-import warning from 'warning'
+import warning from 'warning';
 
-export * from './animations'
-export * from './mediaq'
-export * from './when-used'
+export * from './animations';
+export * from './mediaq';
+export * from './when-used';
 
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
@@ -114,7 +114,7 @@ export const mergeSheetsAndFinish = (sheet: SheetWithAddIns, modifiers: SheetWit
 
 // merge rulesets in component code (and apply addIn patches)
 export const mergeRulesetsForCode = (sheet: SheetWithAddIns, rulesetPatchGetters: RulesetPatchGetters, rulesets: Ruleset[]) => {
-  if (!rulesets || rulesets.length === 0) return null
+  if (!rulesets || (rulesets = rulesets.filter(r => !!r)).length === 0) return null
   const addIns = sheet.$system
 
   // get used ruleset's (for $whenUses processing)
@@ -178,10 +178,10 @@ export const isObject = obj => typeof obj === 'object' && Object.getPrototypeOf(
 const whenUsedAddInFilter: RulesetPatchGetter = ({ addInSheet, usedRulesetNames }) => filterRulesetNames(addInSheet).filter(key => usedRulesetNames[key]).map(key => addInSheet[key])
 
 const nameRulesets = (sheet: SheetWithAddIns) => {
-  if (!sheet.$system) return
+  //if (!sheet.$system) return
   const ignore = { '$': true, '#': true }
-  if (sheet.$system)
-    for (const p in sheet) if (!ignore[p.charAt(0)]) sheet[p][Consts.rulesetName] = p
+  //if (sheet.$system)
+  for (const p in sheet) if (!ignore[p.charAt(0)]) sheet[p][Consts.rulesetName] = p
 }
 
 const finishAddInsClasses = (sheet: SheetWithAddIns, onFinishAddInClasses: FinishAddIns) => {

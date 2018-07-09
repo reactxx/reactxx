@@ -40,15 +40,15 @@ const sheet: Types.SheetX<Shape> = {
 /************************
 * CODE
 *************************/
-const label: Types.CodeSFC<Shape> = ({ $system: { mergeRulesets, classes, mediaqFlags }, children }) => {
-  const root = mergeRulesets<Types.ViewRulesetX>(
+const label: Types.CodeSFC<Shape> = ({ $system: { mergeRulesets, classes, $mediaq }, children }) => {
+  const root = mergeRulesets<Types.TextRulesetX>(
     classes.root,
-    mediaqFlags.isMobile && classes.mobile,
-    mediaqFlags.isTablet && classes.tablet,
-    mediaqFlags.isDesktop && classes.desktop,
+    $mediaq.isMobile && classes.mobile,
+    $mediaq.isTablet && classes.tablet,
+    $mediaq.isDesktop && classes.desktop,
   )
-  const info = mediaqFlags.isMobile ? 'MOBILE' : mediaqFlags.isTablet ? 'TABLET' : 'DESKTOP'
-  return <Text className={root}>[{info}] {children}</Text>
+  const info = $mediaq.isMobile ? 'MOBILE' : $mediaq.isTablet ? 'TABLET' : 'DESKTOP'
+  return <Text className={root} $developer_flag>[{info}] {children}</Text>
 }
 
 const Label: Types.ComponentTypeX<Shape> = withStylesCreator(Consts.Label1, sheet, label)({

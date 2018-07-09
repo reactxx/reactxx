@@ -5,10 +5,8 @@
     "module": "system",
     "moduleResolution": "node",
 
-    //"allowJs": true,
-    "declaration": true,
-
-    //"traceResolution": true,
+    "allowJs": true,
+    //"declaration": true,
 
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

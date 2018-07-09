@@ -9,7 +9,7 @@ export const test = () => {
   const finishAddIns: Sheeter.FinishAddIns = {
     $mediaq: Sheeter.mediaqFinishAddInCreator()
   }
-  const addInRulesetFilters: Sheeter.RulesetPatchGetters = {
+  const rulesetPatchGetters: Sheeter.RulesetPatchGetters = {
     $mediaq: Sheeter.mediaqRulesetPatchGetterCreator(400),
     $whenUsed: Sheeter.whenUsedRulesetFilter
   }
@@ -17,11 +17,11 @@ export const test = () => {
 
   window.isWeb = true
   const mergedWeb = Sheeter.mergeSheetsAndFinish(patchable, [], finishAddIns)
-  const codeRootWeb = Sheeter.mergeRulesetsForCode(mergedWeb, addInRulesetFilters, [mergedWeb.root])
+  const codeRootWeb = Sheeter.mergeRulesetsForCode(mergedWeb, rulesetPatchGetters, [mergedWeb.root])
 
   window.isWeb = false
   const mergedNative = Sheeter.mergeSheetsAndFinish(patchable, [], finishAddIns)
-  const codeRootNative = Sheeter.mergeRulesetsForCode(mergedNative, addInRulesetFilters, [mergedNative.root])
+  const codeRootNative = Sheeter.mergeRulesetsForCode(mergedNative, rulesetPatchGetters, [mergedNative.root])
 
   debugger
 }

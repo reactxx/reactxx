@@ -28,7 +28,7 @@ export class MediaQ_AppContainer extends React.Component<{}, { width: number }> 
 export const mediaQFlags = (input: () => TMediaQ.MediaQFlags, next: () => React.ReactNode) => {
   let pars: TMediaQ.MediaQFlags
   const render = (width: number) => {
-    pars.getPropsPatches.$mediaq = propsPatchGetterCreator(width)
+    (pars.getPropsPatches || (pars.getPropsPatches = {})).$mediaq = propsPatchGetterCreator(width)
     return next()
   }
   const res = () => {
@@ -68,6 +68,6 @@ const propsPatchGetterCreator: (width: number) => Sheeter.PropsPatchGetter = wid
     const [beg, end] = intervals[p]
     $mediaq[p] = (!beg || beg <= width) && (!end || end > width)
   }
-  map.push({ $mediaq })
+  map.push({ $system: { $mediaq } })
 }
 

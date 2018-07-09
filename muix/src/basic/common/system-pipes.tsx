@@ -105,15 +105,16 @@ export const getSystemPipes = <R extends Types.Shape>(
     let variantCacheId: string = null
 
     const expandCreator = creator => {
+      if (!creator) return null
       let sheet: Types.SheetX
-      if (typeof createSheetX === 'function') {
-        try { sheet = createSheetX(theme, variant) }
+      if (typeof creator === 'function') {
+        try { sheet = creator(theme, variant) }
         catch {
           warning(theme, 'Create sheet error (maybe missing <ThemeProvider theme={}>)')
           return null
         }
       } else
-        sheet = createSheetX
+        sheet = creator
       return Sheeter.toPatchableAndMergeable(sheet)
     }
 
