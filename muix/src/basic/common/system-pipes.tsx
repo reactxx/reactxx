@@ -170,7 +170,7 @@ export const getSystemPipes = <R extends Types.Shape>(
       return next()
     }
     return res
-  }]
+  }
 
   const stylePipe = (state: TRenderState, next: () => React.ReactNode) => {
     const res = () => {
@@ -198,10 +198,10 @@ export const getSystemPipes = <R extends Types.Shape>(
 
     // method, called in component code: ruleset merging
     finalProps.$system.mergeRulesets = (...rulesets: TSheeter.Ruleset[]) => {
-      const res = Sheeter.mergeSheetsAndFinish(
-        finalProps.$system.classes as any, //******** TODO
-        getClassesPatches as any, //******** TODO
-        rulesets as any//******** TODO
+      const res = Sheeter.mergeRulesetsForCode(
+        finalProps.$system.classes as TSheeter.SheetWithAddIns,
+        getClassesPatches,
+        rulesets
       ) as Types.TMergeRulesetsResult<any>
       if (addInProps.$developer_flag) {
         console.log(
