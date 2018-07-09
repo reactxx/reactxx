@@ -115,6 +115,7 @@ export const getSystemPipes = <R extends Types.Shape>(
     // **** variant
     let variant: {} = null
     let variantCacheId: string = null
+
     const expandCreator = creator => {
       let sheet: Types.SheetX
       if (typeof createSheetX === 'function') {
@@ -149,7 +150,7 @@ export const getSystemPipes = <R extends Types.Shape>(
     const defaultClasses: TSheeter.SheetWithAddIns = !defaultPropsSeparated ? null : expandCreator(defaultPropsSeparated.classes)
 
     // **** apply sheet patch to sheet:
-    // call sheet creator, merges it with sheet patch, process RulesetX.$web & $native & $before & $after, extract addIns
+    // call sheet creator, merges it with sheet patch
     const codeClasses = getPlatformSheet({ expandCreator, componentId, finishAddInClasses: addIns.finishAddInClasses, createSheetX, $cache: renderState.themeContext.$cache, sheetXPatch, defaultClasses, cacheId })
     //renderState.addInClasses = addInClasses //e.g {$animations:..., root: {$mediaq:...}}
     renderState.finalProps.$system.classes = codeClasses
@@ -169,7 +170,7 @@ export const getSystemPipes = <R extends Types.Shape>(
       return next()
     }
     return res
-  }
+  }]
 
   const stylePipe = (state: TRenderState, next: () => React.ReactNode) => {
     const res = () => {
@@ -181,7 +182,7 @@ export const getSystemPipes = <R extends Types.Shape>(
 
   const renderComponentPipe = (renderState: TRenderState, CodeComponent: Types.CodeComponentType) => () => {
 
-    const { finalProps, codeClassesPatch, addInProps, addInClasses } = renderState
+    const { finalProps, codeClassesPatch, addInProps, addInClasses, getClassesPatches } = renderState
 
     if (addInProps.$developer_flag) {
       const { themeContext, codePropsPatch } = renderState
@@ -196,11 +197,12 @@ export const getSystemPipes = <R extends Types.Shape>(
     }
 
     // method, called in component code: ruleset merging
-    finalProps.$system.mergeRulesets = (...rulesets: TCommon.RulesetFragmentsParts) => {
-      const res = mergeRulesets(
-        consolidePatches(codeClassesPatch),
-        addInClasses,
-        rulesets) as Types.TMergeRulesetsResult<any>
+    finalProps.$system.mergeRulesets = (...rulesets: TSheeter.Ruleset[]) => {
+      const res = Sheeter.mergeSheetsAndFinish(
+        finalProps.$system.classes as any, //******** TODO
+        getClassesPatches as any, //******** TODO
+        rulesets as any//******** TODO
+      ) as Types.TMergeRulesetsResult<any>
       if (addInProps.$developer_flag) {
         console.log(
           `### mergeRulesets for ${displayName}`,
