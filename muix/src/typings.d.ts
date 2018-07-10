@@ -67,7 +67,7 @@ type PartialRecord<K extends keyof any, T> = {
 }
 
 
-type XX = Diff<'a' | 'b', 'b' | 'd'>
+//type XX = Diff<'a' | 'b', 'b' | 'd'>
 
 //https://schneidenbach.gitbooks.io/typescript-cookbook/get-the-return-type-of-a-function.html
 //nameOf, return type of function, 

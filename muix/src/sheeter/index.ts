@@ -4,7 +4,7 @@
 
 import warning from 'warning';
 
-export * from './animations';
+export * from './animations/index';
 export * from './mediaq';
 export * from './when-used';
 
@@ -20,7 +20,7 @@ export const enum Consts {
   $whenUsed = '$whenUsed',
   path = '#path',
   rulesetName = '#rulesetName',
-  canModify = '#canModify',
+  //canModify = '#canModify',
   data = '#data',
   dataObservedBits = 'observedBits',
 }
@@ -29,10 +29,11 @@ export const enum Consts {
 // SHEET HIEARCHY
 
 export interface SheetWithAddIns extends Sheet {
-  [Consts.canModify]?
+  //[Consts.canModify]?
   $system: AddIns
 }
-export type AddIns = { [addInsName: string]: Sheets }
+export type AddIns = { [addInsName: string]: Sheets | Sheetss}
+export type Sheetss = { [sheetsName: string]: Sheets }
 export type Sheets = { [sheetName: string]: Sheet }
 export type Sheet = { [rulesetName: string]: Ruleset }
 export interface Ruleset extends Node {
@@ -90,7 +91,7 @@ export const getPropsPatch = (addInsRoot: AddIns /*addInsRoot is not mutated*/, 
 // EXPORTS FOR SHEET
 //****************************
 
-export const setCanModify = (root: SheetWithAddIns) => root[Consts.canModify] = true
+//export const setCanModify = (root: SheetWithAddIns) => root[Consts.canModify] = true
 
 // transform sheet to mergable and patchable form. !!! root is mutated !!!
 export const toPatchableAndMergeable = (root: Sheet) => {
@@ -107,7 +108,7 @@ export const mergeSheets = (sheet: SheetWithAddIns, modifiers: SheetWithAddIns[]
 export const mergeSheetsAndFinish = (sheet: SheetWithAddIns, modifiers: SheetWithAddIns[], onFinishAddInClasses: FinishAddIns, canModify?: boolean) => {
   // deep merge
   sheet = mergeSheets(sheet, modifiers, canModify)
-  sheet = finishAddInsClasses(sheet, onFinishAddInClasses)
+  sheet = finishAddInsClasses(sheet, onFinishAddInClasses, canModify)
   nameRulesets(sheet)
   return sheet
 }
@@ -184,9 +185,9 @@ const nameRulesets = (sheet: SheetWithAddIns) => {
   for (const p in sheet) if (!ignore[p.charAt(0)]) sheet[p][Consts.rulesetName] = p
 }
 
-const finishAddInsClasses = (sheet: SheetWithAddIns, onFinishAddInClasses: FinishAddIns) => {
+const finishAddInsClasses = (sheet: SheetWithAddIns, onFinishAddInClasses: FinishAddIns, canModify: boolean) => {
   if (!sheet.$system || !onFinishAddInClasses) return sheet
-  const canModify = sheet[Consts.canModify]
+  //const canModify = sheet[Consts.canModify]
   // clone when needed
   if (!canModify) sheet = { ...sheet, $system: { ...sheet.$system } }
   for (const addInName in sheet.$system) {
@@ -322,7 +323,11 @@ const extractPatches = (node: Node, root: SheetWithAddIns, nodePath: string[]) =
     if (!isObject(subNode)) continue
     if (nodePropName.charAt(0) === '$') {
       delete node[nodePropName]
-      processAddIn(subNode as Node, nodePropName, node, root, nodePath)
+      if (nodePath.length === 0) {
+        const addIns = root.$system || (root.$system = {})
+        addIns[nodePropName] = subNode
+      } else
+        processAddIn(subNode as Node, nodePropName, node, root, nodePath)
     } else
       node[nodePropName] = extractPatches(subNode as Node, root, [...nodePath, nodePropName])
   }

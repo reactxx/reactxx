@@ -2,11 +2,6 @@ import { Consts, FinishAddIn, RulesetPatchGetter } from './index';
 
 const maxBreakpoint = 10000000
 
-export interface RulesetDecoded {
-  from: number
-  to: number
-}
-
 export const mediaqFinishAddInCreator: (onFinished?: (data, breakpoints: number[]) => void) => FinishAddIn = onFinished => addInItem => {
   for (const sheetName in addInItem) {
     const breakpoints = []

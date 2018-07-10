@@ -1,2 +1,0 @@
-import { filterRulesetNames } from './index'
-
