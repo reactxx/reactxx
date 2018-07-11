@@ -50,9 +50,9 @@ export interface TRenderState {
 export interface RenderAddIn {
   propsAddInPipeline: (renderState: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
   styleAddInPipeline: (renderState: TRenderState, next: () => React.ReactNode) => () => React.ReactNode
-  //finishAddInClasses?: ((addInClasses: {}) => void)[]
+
   getDefaultTheme?: () => TCommon.ThemeBase
-  createSheetHook?: (sheetCreator: Types.SheetCreatorX) => Types.SheetCreatorX
+  createSheetHook?: (sheetCreator: Types.SheetCreatorX) => Types.SheetCreatorX  // allow modify sheet, e.g. from material-ui format
 
   finishAddInProps?: Sheeter.FinishAddIns
   finishAddInClasses?: Sheeter.FinishAddIns
@@ -62,7 +62,6 @@ export interface RenderAddIn {
 const renderAddIn: RenderAddIn = {
   propsAddInPipeline: (renderState, next) => next,
   styleAddInPipeline: (renderState, next) => next,
-  //finishAddInClasses: [whenUsedFinishAddIns]
 }
 
 /************************
