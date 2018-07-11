@@ -1,15 +1,14 @@
-import warning from 'warning'
 import { Sheets, Sheet, getGaps } from '../index'
 
 export const $animationsToCSS = ($animations: Sheets) => {
   for (const sheetName in $animations) {
     const sheet = $animations[sheetName]
-    const { $delay = 0, $duration = 0, $easing = 'ease-in', $opened } = sheet
+    const { $delay = 0, $duration = 0, $easing = 'ease-in' } = sheet
     $animations[sheetName] = sheetToCSS(sheet, $duration as number, $delay as number, $easing as string)
   }
 }
 
-const sheetToCSS = (inputSheet: Sheet, $duration: number, $delay: number, $easing:string) => {
+const sheetToCSS = (inputSheet: Sheet, $duration: number, $delay: number, $easing:string) => { 
   const outputSheet: Sheet = {}
   for (const rulesetName in inputSheet) {
     if (rulesetName.startsWith('$')) continue
@@ -68,3 +67,4 @@ const sheetToCSS = (inputSheet: Sheet, $duration: number, $delay: number, $easin
 }
 
 const pixTransforms = { translateX: true, translateY: true }
+

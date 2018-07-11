@@ -89,7 +89,7 @@ class AnimationsComponent extends React.Component<AnimProps, AnimState> {
 
   static getDerivedStateFromProps(nextProps: AnimProps, prevState: AnimState): Partial<AnimState> {
     if (!nextProps.$initAnimations) return { sheets: null }
-    if (prevState.sheets && prevState.self.props.$initAnimations === nextProps.$initAnimations) return { sheets: prevState.sheets }
+    if (prevState.sheets && prevState.self.props.$initAnimations === nextProps.$initAnimations) return null
     const $anim = nextProps.$initAnimations
     const sheets:{ [name: string]: TAnimation.Driver } = {}
     const self = prevState.self
@@ -99,6 +99,10 @@ class AnimationsComponent extends React.Component<AnimProps, AnimState> {
       sheets[p] = new AnimationDriver($anim[p], parent)
     }
     return { sheets }
+  }
+
+  shouldComponentUpdate(nextProps: AnimProps) {
+    return this.props.$initAnimations !== nextProps.$initAnimations
   }
 
   render() {

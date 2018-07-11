@@ -50,7 +50,9 @@ const sheetToInterpolate = (inputSheet: Sheet, $duration: number, $delay: number
       }
     }
   }
-  outputSheet[Consts.data] = { $duration, $delay, $easing, useNativeDriver}
+  outputSheet[Consts.data] = {
+    TimingAnimationConfig: { duration: $duration, delay: $delay, $easing, useNativeDriver }
+  }
   return outputSheet
 }
 
