@@ -132,7 +132,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCrea
       return !nextProps.$constant
     }
 
-    //// TESTx
+    //// TEST
     //// *** tracing for developer
     //componentDidCatch(error, info) {
     //  // Display fallback UI
