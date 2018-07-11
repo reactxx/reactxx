@@ -1,5 +1,5 @@
-import { Breakpoint } from '../styles/createBreakpoints';
-import { WithWidthProps } from '../withWidth';
+import { Breakpoint } from 'reactxx-muix/typings/styles/createBreakpoints';
+import { WithWidthProps } from 'reactxx-muix/typings/withWidth';
 
 export interface WithMobileDialogOptions {
   breakpoint: Breakpoint;

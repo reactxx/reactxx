@@ -1,2 +1,2 @@
-export { default } from './SvgIcon';
-export * from './SvgIcon';
+export { default } from 'reactxx-muix/typings/SvgIcon/SvgIcon';
+export * from 'reactxx-muix/typings/SvgIcon/SvgIcon';

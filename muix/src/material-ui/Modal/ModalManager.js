@@ -1,8 +1,8 @@
 import css from 'dom-helpers/style';
 import ownerDocument from 'dom-helpers/ownerDocument';
 import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
-import isOverflowing from './isOverflowing';
-import { ariaHidden, hideSiblings, showSiblings } from './manageAriaHidden';
+import isOverflowing from 'material-ui/Modal/isOverflowing';
+import { ariaHidden, hideSiblings, showSiblings } from 'material-ui/Modal/manageAriaHidden';
 
 function findIndexOf(data, callback) {
   let idx = -1;

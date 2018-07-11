@@ -8,11 +8,11 @@ import contains from 'dom-helpers/query/contains';
 import ownerDocument from 'dom-helpers/ownerDocument';
 import debounce from 'debounce';
 import EventListener from 'react-event-listener';
-import ownerWindow from '../utils/ownerWindow';
-import withStyles from '../styles/withStyles';
-import Modal from '../Modal';
-import Grow from '../Grow';
-import Paper from '../Paper';
+import ownerWindow from 'material-ui/utils/ownerWindow';
+import withStyles from 'material-ui/styles/withStyles';
+import Modal from 'material-ui/Modal';
+import Grow from 'material-ui/Grow';
+import Paper from 'material-ui/Paper';
 
 function getOffsetTop(rect, vertical) {
   let offset = 0;

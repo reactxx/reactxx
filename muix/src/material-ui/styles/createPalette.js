@@ -1,11 +1,11 @@
 import warning from 'warning';
 import deepmerge from 'deepmerge'; // < 1kb payload overhead when lodash/merge is > 3kb.
-import indigo from '../colors/indigo';
-import pink from '../colors/pink';
-import grey from '../colors/grey';
-import red from '../colors/red';
-import common from '../colors/common';
-import { getContrastRatio, darken, lighten } from './colorManipulator';
+import indigo from 'material-ui/colors/indigo';
+import pink from 'material-ui/colors/pink';
+import grey from 'material-ui/colors/grey';
+import red from 'material-ui/colors/red';
+import common from 'material-ui/colors/common';
+import { getContrastRatio, darken, lighten } from 'material-ui/styles/colorManipulator';
 
 export const light = {
   // The colors used to style the text.

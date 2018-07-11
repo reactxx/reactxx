@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import KeyboardArrowLeft from '../internal/svg-icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '../internal/svg-icons/KeyboardArrowRight';
-import withTheme from '../styles/withTheme';
-import IconButton from '../IconButton';
+import KeyboardArrowLeft from 'material-ui/internal/svg-icons/KeyboardArrowLeft';
+import KeyboardArrowRight from 'material-ui/internal/svg-icons/KeyboardArrowRight';
+import withTheme from 'material-ui/styles/withTheme';
+import IconButton from 'material-ui/IconButton';
 
 /**
  * @ignore - internal component.

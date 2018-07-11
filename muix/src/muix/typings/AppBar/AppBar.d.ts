@@ -1,5 +1,5 @@
-import { PropTypes, StandardProps } from '..';
-import { PaperProps } from '../Paper';
+import { PropTypes, StandardProps } from 'reactxx-muix/typings';
+import { PaperProps } from 'reactxx-muix/typings/Paper';
 
 export interface AppBarProps extends StandardProps<PaperProps, AppBarClassKey> {
   color?: PropTypes.Color;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
-import { StandardProps } from '..';
+import { StandardProps } from 'reactxx-muix/typings';
 
 export interface TouchRippleProps
   extends StandardProps<TransitionGroup.TransitionGroupProps, TouchRippleClassKey> {

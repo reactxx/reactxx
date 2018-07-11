@@ -8,10 +8,10 @@ import EventListener from 'react-event-listener';
 import debounce from 'debounce';
 import { getNormalizedScrollLeft, detectScrollType } from 'normalize-scroll-left';
 import scroll from 'scroll';
-import ScrollbarSize from './ScrollbarSize';
-import withStyles from '../styles/withStyles';
-import TabIndicator from './TabIndicator';
-import TabScrollButton from './TabScrollButton';
+import ScrollbarSize from 'material-ui/Tabs/ScrollbarSize';
+import withStyles from 'material-ui/styles/withStyles';
+import TabIndicator from 'material-ui/Tabs/TabIndicator';
+import TabScrollButton from 'material-ui/Tabs/TabScrollButton';
 
 export const styles = theme => ({
   root: {

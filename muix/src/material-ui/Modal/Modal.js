@@ -10,12 +10,12 @@ import activeElement from 'dom-helpers/activeElement';
 import contains from 'dom-helpers/query/contains';
 import inDOM from 'dom-helpers/util/inDOM';
 import ownerDocument from 'dom-helpers/ownerDocument';
-import RootRef from '../RootRef';
-import Portal from '../Portal';
-import { createChainedFunction } from '../utils/helpers';
-import withStyles from '../styles/withStyles';
-import ModalManager from './ModalManager';
-import Backdrop from '../Backdrop';
+import RootRef from 'material-ui/RootRef';
+import Portal from 'material-ui/Portal';
+import { createChainedFunction } from 'material-ui/utils/helpers';
+import withStyles from 'material-ui/styles/withStyles';
+import ModalManager from 'material-ui/Modal/ModalManager';
+import Backdrop from 'material-ui/Backdrop';
 
 function getContainer(container, defaultContainer) {
   container = typeof container === 'function' ? container() : container;

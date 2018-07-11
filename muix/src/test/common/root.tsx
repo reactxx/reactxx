@@ -9,7 +9,7 @@ import React from 'react'
 //import Shadows from './shadows/index'
 //import ComponentX from './styles/component-x'
 //import Animation from './reactxx/responsible-drawer/responsible-drawer'
-import ReactXX from './reactxx/index'
+import ReactXX from './reactxx'
 //import ButtonDemo, { overridesNew } from './components/button-demo'
 
 //import { ScrollView, View, Text, Typography } from 'muix-primitives'

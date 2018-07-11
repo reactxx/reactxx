@@ -3,10 +3,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import Paper from '../Paper';
-import Typography from '../Typography';
-import { emphasize } from '../styles/colorManipulator';
+import withStyles from 'material-ui/styles/withStyles';
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
+import { emphasize } from 'material-ui/styles/colorManipulator';
 
 export const styles = theme => {
   const emphasis = theme.palette.type === 'light' ? 0.8 : 0.98;

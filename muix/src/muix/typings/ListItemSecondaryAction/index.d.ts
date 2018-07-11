@@ -1,2 +1,2 @@
-export { default } from './ListItemSecondaryAction';
-export * from './ListItemSecondaryAction';
+export { default } from 'reactxx-muix/typings/ListItemSecondaryAction/ListItemSecondaryAction';
+export * from 'reactxx-muix/typings/ListItemSecondaryAction/ListItemSecondaryAction';

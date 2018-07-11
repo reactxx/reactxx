@@ -6,10 +6,10 @@ import ReactDOM from 'react-dom';
 import EventListener from 'react-event-listener';
 import debounce from 'debounce';
 import Transition from 'react-transition-group/Transition';
-import ownerWindow from '../utils/ownerWindow';
-import withTheme from '../styles/withTheme';
-import { duration } from '../styles/transitions';
-import { reflow, getTransitionProps } from '../transitions/utils';
+import ownerWindow from 'material-ui/utils/ownerWindow';
+import withTheme from 'material-ui/styles/withTheme';
+import { duration } from 'material-ui/styles/transitions';
+import { reflow, getTransitionProps } from 'material-ui/transitions/utils';
 
 const GUTTER = 24;
 

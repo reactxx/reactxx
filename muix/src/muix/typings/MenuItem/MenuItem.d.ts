@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { ListItemProps } from '../ListItem';
+import { StandardProps } from 'reactxx-muix/typings';
+import { ListItemProps } from 'reactxx-muix/typings/ListItem';
 
 export interface MenuItemProps extends StandardProps<ListItemProps, MenuItemClassKey> {
   component?: React.ReactType<MenuItemProps>;

@@ -1,2 +1,2 @@
-export { default } from './MobileStepper';
-export * from './MobileStepper';
+export { default } from 'reactxx-muix/typings/MobileStepper/MobileStepper';
+export * from 'reactxx-muix/typings/MobileStepper/MobileStepper';

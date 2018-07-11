@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Breakpoint } from '../styles/createBreakpoints';
+import { Breakpoint } from 'reactxx-muix/typings/styles/createBreakpoints';
 
 export interface HiddenJsProps {
   initialWidth?: Breakpoint;

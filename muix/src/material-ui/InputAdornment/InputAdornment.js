@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Typography from '../Typography';
-import withStyles from '../styles/withStyles';
+import Typography from 'material-ui/Typography';
+import withStyles from 'material-ui/styles/withStyles';
 
 export const styles = theme => ({
   root: {

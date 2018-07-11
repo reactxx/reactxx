@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IPopperProps } from 'react-popper';
-import { StandardProps } from '..';
+import { StandardProps } from 'reactxx-muix/typings';
 
 export interface TooltipProps
   extends StandardProps<React.HTMLAttributes<HTMLDivElement>, TooltipClassKey, 'title'> {

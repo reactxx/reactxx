@@ -3,8 +3,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import ListItem from '../ListItem';
+import withStyles from 'material-ui/styles/withStyles';
+import ListItem from 'material-ui/ListItem';
 
 export const styles = theme => ({
   root: {

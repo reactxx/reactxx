@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import Ripple from './Ripple';
+import withStyles from 'material-ui/styles/withStyles';
+import Ripple from 'material-ui/ButtonBase/Ripple';
 
 const DURATION = 550;
 export const DELAY_RIPPLE = 80;

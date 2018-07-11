@@ -1,2 +1,2 @@
-export { default } from './InputAdornment';
-export * from './InputAdornment';
+export { default } from 'reactxx-muix/typings/InputAdornment/InputAdornment';
+export * from 'reactxx-muix/typings/InputAdornment/InputAdornment';

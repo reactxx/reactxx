@@ -1,2 +1,2 @@
-export { default } from './Icon';
-export * from './Icon';
+export { default } from 'reactxx-muix/typings/Icon/Icon';
+export * from 'reactxx-muix/typings/Icon/Icon';

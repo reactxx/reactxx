@@ -1,2 +1,2 @@
-export { default } from './Slide';
-export * from './Slide';
+export { default } from 'reactxx-muix/typings/Slide/Slide';
+export * from 'reactxx-muix/typings/Slide/Slide';

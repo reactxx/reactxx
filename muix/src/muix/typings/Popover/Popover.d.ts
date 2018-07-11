@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { PaperProps } from '../Paper';
-import { ModalProps, ModalClassKey } from '../Modal';
-import { TransitionHandlerProps, TransitionProps } from '../transitions/transition';
+import { StandardProps } from 'reactxx-muix/typings';
+import { PaperProps } from 'reactxx-muix/typings/Paper';
+import { ModalProps, ModalClassKey } from 'reactxx-muix/typings/Modal';
+import { TransitionHandlerProps, TransitionProps } from 'reactxx-muix/typings/transitions/transition';
 
 export interface PopoverOrigin {
   horizontal: 'left' | 'center' | 'right' | number;

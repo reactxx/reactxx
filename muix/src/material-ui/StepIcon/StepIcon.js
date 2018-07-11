@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import CheckCircle from '../internal/svg-icons/CheckCircle';
-import Warning from '../internal/svg-icons/Warning';
-import withStyles from '../styles/withStyles';
-import StepPositionIcon from './StepPositionIcon';
+import CheckCircle from 'material-ui/internal/svg-icons/CheckCircle';
+import Warning from 'material-ui/internal/svg-icons/Warning';
+import withStyles from 'material-ui/styles/withStyles';
+import StepPositionIcon from 'material-ui/StepIcon/StepPositionIcon';
 
 export const styles = theme => ({
   root: {

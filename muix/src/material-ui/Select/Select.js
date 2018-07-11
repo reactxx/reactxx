@@ -2,12 +2,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import SelectInput from './SelectInput';
-import withStyles from '../styles/withStyles';
-import ArrowDropDownIcon from '../internal/svg-icons/ArrowDropDown';
-import Input from '../Input';
-import { styles as nativeSelectStyles } from '../NativeSelect/NativeSelect';
-import NativeSelectInput from '../NativeSelect/NativeSelectInput';
+import SelectInput from 'material-ui/Select/SelectInput';
+import withStyles from 'material-ui/styles/withStyles';
+import ArrowDropDownIcon from 'material-ui/internal/svg-icons/ArrowDropDown';
+import Input from 'material-ui/Input';
+import { styles as nativeSelectStyles } from 'material-ui/NativeSelect/NativeSelect';
+import NativeSelectInput from 'material-ui/NativeSelect/NativeSelectInput';
 
 export const styles = nativeSelectStyles;
 

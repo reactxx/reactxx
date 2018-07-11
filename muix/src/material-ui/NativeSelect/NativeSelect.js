@@ -2,10 +2,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import NativeSelectInput from './NativeSelectInput';
-import withStyles from '../styles/withStyles';
-import ArrowDropDownIcon from '../internal/svg-icons/ArrowDropDown';
-import Input from '../Input';
+import NativeSelectInput from 'material-ui/NativeSelect/NativeSelectInput';
+import withStyles from 'material-ui/styles/withStyles';
+import ArrowDropDownIcon from 'material-ui/internal/svg-icons/ArrowDropDown';
+import Input from 'material-ui/Input';
 
 export const styles = theme => ({
   root: {

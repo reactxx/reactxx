@@ -1,5 +1,5 @@
-import { Theme } from './createMuiTheme';
-import { ConsistentWith } from '..';
+import { Theme } from 'reactxx-muix/typings/styles/createMuiTheme';
+import { ConsistentWith } from 'reactxx-muix/typings';
 
 export interface WithTheme {
   theme: Theme;

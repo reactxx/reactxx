@@ -1,12 +1,16 @@
-import warning from 'warning'
+import warning from 'warning';
+import { Consts, FinishAddIn, Sheets } from 'reactxx-sheeter';
+import { $animationsToInterpolate, NativeAnimationAddIn } from './native';
+import { $animationsToCSS, WebAnimationAddIn } from './web';
 
-import { FinishAddIn } from '../index'
-import { $animationsToCSS } from './web'
-import { $animationsToInterpolate } from './native'
-
-export const animationFinishAddInClasses: FinishAddIn = addInItem => {
+export {NativeAnimationAddIn, NativeAnimationRuleset, InterpolationConfigTypes } from './native';
+export {WebAnimationAddIn, WebAnimationRuleset } from './web';
+export const animationFinishAddInClasses: FinishAddIn = (addInItem: Sheets) => {
   return window.isWeb ? $animationsToCSS(addInItem) : $animationsToInterpolate(addInItem)
 }
+
+export type AnimationAddIn = WebAnimationAddIn | NativeAnimationAddIn
+export type AnimationAddIns = { [animName: string]: AnimationAddIn }
 
 export type AnimToPairs<T> = [T, T]
 
@@ -31,15 +35,19 @@ export interface AnimationConfig {
   $duration?: number
   $delay?: number
   $opened?: boolean
+  useNativeDriver?:boolean
 }
 
-interface AnimRuleSet {
-  transform?: AnimTransform
-  [fieldName: string]: [number, number] | [number, number, string] | [string, string] | [string, string, string] | AnimTransform
+export interface SheetExtension extends AnimationConfig {
+  [Consts.data]: AnimationConfig & { useNativeDriver?: boolean }
 }
 
-export type AnimSheet = { [rulesetName: string]: AnimRuleSet | number | string | boolean } & AnimationConfig
-export type AnimSheets = { [sheetName: string]: AnimSheet }
+ type AnimRuleseLow = { [fieldName: string]: [number, number] | [number, number, string] | [string, string] | [string, string, string] }
+
+export type AnimRuleset = AnimRuleseLow & { transform?: AnimTransform }
+
+export type AnimSheet = { [rulesetName: string]: AnimRuleset } & AnimationConfig
+//export type AnimSheets = { [sheetName: string]: AnimSheet }
 
 export const getGaps = (interval: string, $duration: number) => {
   let leftGap = 0, rightGap = 0
@@ -56,25 +64,3 @@ export const getGaps = (interval: string, $duration: number) => {
   const duration = $duration - rightGap - leftGap
   return { leftGap, rightGap, duration }
 }
-
-
-
-const $animations: AnimSheets = {
-  anim: {
-    rootAnim: {
-      opacity: [0.2, 1, '-35'] // means 0%-35% of $duration
-    },
-    labelAnim: {
-      transform: {
-        scale: [1, 0],
-        rotate: ['0deg', '180deg'],
-        time: '35-' // means 35%-100% of $duration
-      },
-    },
-    $duration: 2000,
-    $easing: '',
-    $delay: 500,
-    $opened: true,
-  },
-}
-

@@ -1,2 +1,2 @@
-export { default } from './SwipeableDrawer';
-export * from './SwipeableDrawer';
+export { default } from 'reactxx-muix/typings/SwipeableDrawer/SwipeableDrawer';
+export * from 'reactxx-muix/typings/SwipeableDrawer/SwipeableDrawer';

@@ -1,1 +1,1 @@
-export { default } from './ListSubheader';
+export { default } from 'material-ui/ListSubheader/ListSubheader';

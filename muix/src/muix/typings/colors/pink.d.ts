@@ -1,4 +1,4 @@
-import { Color } from '..';
+import { Color } from 'reactxx-muix/typings';
 
 declare const color: Color;
 

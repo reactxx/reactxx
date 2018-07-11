@@ -4,11 +4,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import Drawer, { getAnchor, isHorizontal } from '../Drawer/Drawer';
-import { duration } from '../styles/transitions';
-import withTheme from '../styles/withTheme';
-import { getTransitionProps } from '../transitions/utils';
-import SwipeArea from './SwipeArea';
+import Drawer, { getAnchor, isHorizontal } from 'material-ui/Drawer/Drawer';
+import { duration } from 'material-ui/styles/transitions';
+import withTheme from 'material-ui/styles/withTheme';
+import { getTransitionProps } from 'material-ui/transitions/utils';
+import SwipeArea from 'material-ui/SwipeableDrawer/SwipeArea';
 
 // This value is closed to what browsers are using internally to
 // trigger a native scroll.

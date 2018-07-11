@@ -2,14 +2,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '../styles/withStyles';
-import Input from '../Input';
-import MenuItem from '../MenuItem';
-import Select from '../Select';
-import TableCell from '../TableCell';
-import Toolbar from '../Toolbar';
-import Typography from '../Typography';
-import TablePaginationActions from '../TablePaginationActions';
+import withStyles from 'material-ui/styles/withStyles';
+import Input from 'material-ui/Input';
+import MenuItem from 'material-ui/MenuItem';
+import Select from 'material-ui/Select';
+import TableCell from 'material-ui/TableCell';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import TablePaginationActions from 'material-ui/TablePaginationActions';
 
 export const styles = theme => ({
   root: {

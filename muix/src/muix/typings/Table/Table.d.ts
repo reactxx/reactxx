@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StandardProps } from '..';
+import { StandardProps } from 'reactxx-muix/typings';
 
 export interface TableProps extends StandardProps<TableBaseProps, TableClassKey> {
   component?: React.ReactType<TableBaseProps>;

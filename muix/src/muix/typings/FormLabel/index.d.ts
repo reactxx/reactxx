@@ -1,2 +1,2 @@
-export { default } from './FormLabel';
-export * from './FormLabel';
+export { default } from 'reactxx-muix/typings/FormLabel/FormLabel';
+export * from 'reactxx-muix/typings/FormLabel/FormLabel';

@@ -3,10 +3,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import Paper from '../Paper';
-import { capitalize } from '../utils/helpers';
-import LinearProgress from '../LinearProgress';
+import withStyles from 'material-ui/styles/withStyles';
+import Paper from 'material-ui/Paper';
+import { capitalize } from 'material-ui/utils/helpers';
+import LinearProgress from 'material-ui/LinearProgress';
 
 export const styles = theme => ({
   root: {

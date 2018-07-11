@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { FadeProps } from '../Fade';
-import { TransitionProps } from '../transitions/transition';
+import { StandardProps } from 'reactxx-muix/typings';
+import { FadeProps } from 'reactxx-muix/typings/Fade';
+import { TransitionProps } from 'reactxx-muix/typings/transitions/transition';
 
 export interface BackdropProps
   extends StandardProps<

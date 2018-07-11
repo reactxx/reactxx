@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { TableCellProps } from '../TableCell';
-import { IconButtonProps } from '../IconButton';
-import { SelectProps } from '../Select';
+import { StandardProps } from 'reactxx-muix/typings';
+import { TableCellProps } from 'reactxx-muix/typings/TableCell';
+import { IconButtonProps } from 'reactxx-muix/typings/IconButton';
+import { SelectProps } from 'reactxx-muix/typings/Select';
 
 export interface LabelDisplayedRowsArgs {
   from: number;

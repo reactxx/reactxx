@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { Orientation } from '../Stepper';
-import { TransitionProps } from '../transitions/transition';
+import { StandardProps } from 'reactxx-muix/typings';
+import { Orientation } from 'reactxx-muix/typings/Stepper';
+import { TransitionProps } from 'reactxx-muix/typings/transitions/transition';
 
 export interface StepContentProps
   extends StandardProps<React.HTMLAttributes<HTMLDivElement>, StepContentClasskey> {

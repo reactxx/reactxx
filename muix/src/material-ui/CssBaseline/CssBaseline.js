@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '../styles';
-import exactProp from '../utils/exactProp';
+import { withStyles } from 'material-ui/styles';
+import exactProp from 'material-ui/utils/exactProp';
 
 const styles = theme => ({
   '@global': {

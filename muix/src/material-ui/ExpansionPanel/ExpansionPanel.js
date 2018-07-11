@@ -3,10 +3,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Collapse from '../Collapse';
-import Paper from '../Paper';
-import withStyles from '../styles/withStyles';
-import { isMuiElement } from '../utils/reactHelpers';
+import Collapse from 'material-ui/Collapse';
+import Paper from 'material-ui/Paper';
+import withStyles from 'material-ui/styles/withStyles';
+import { isMuiElement } from 'material-ui/utils/reactHelpers';
 
 // Workaround https://github.com/jsdom/jsdom/issues/2026
 const edgeFix =

@@ -3,9 +3,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import Paper from '../Paper';
-import StepConnector from '../StepConnector';
+import withStyles from 'material-ui/styles/withStyles';
+import Paper from 'material-ui/Paper';
+import StepConnector from 'material-ui/StepConnector';
 
 export const styles = theme => ({
   root: {

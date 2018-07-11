@@ -1,8 +1,8 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import wrapDisplayName from 'recompose/wrapDisplayName';
-import createMuiTheme from './createMuiTheme';
-import themeListener from './themeListener';
+import createMuiTheme from 'material-ui/styles/createMuiTheme';
+import themeListener from 'material-ui/styles/themeListener';
 
 let defaultTheme;
 

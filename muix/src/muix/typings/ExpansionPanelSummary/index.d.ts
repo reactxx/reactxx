@@ -1,2 +1,2 @@
-export { default } from './ExpansionPanelSummary';
-export * from './ExpansionPanelSummary';
+export { default } from 'reactxx-muix/typings/ExpansionPanelSummary/ExpansionPanelSummary';
+export * from 'reactxx-muix/typings/ExpansionPanelSummary/ExpansionPanelSummary';

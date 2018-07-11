@@ -7,11 +7,11 @@ import debounce from 'debounce';
 import warning from 'warning';
 import classNames from 'classnames';
 import { Manager, Popper, Reference } from 'react-popper';
-import { capitalize } from '../utils/helpers';
-import RootRef from '../RootRef';
-import Portal from '../Portal';
-import common from '../colors/common';
-import withStyles from '../styles/withStyles';
+import { capitalize } from 'material-ui/utils/helpers';
+import RootRef from 'material-ui/RootRef';
+import Portal from 'material-ui/Portal';
+import common from 'material-ui/colors/common';
+import withStyles from 'material-ui/styles/withStyles';
 
 export const styles = theme => ({
   popper: {

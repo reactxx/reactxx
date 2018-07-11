@@ -1,18 +1,22 @@
-import { Sheets, Sheet, getGaps } from '../index'
+import React from 'react'
+import { Consts, getGaps, Sheets } from 'reactxx-sheeter';
+import { AnimSheet, AnimationConfig } from '.';
 
 export const $animationsToCSS = ($animations: Sheets) => {
-  for (const sheetName in $animations) {
-    const sheet = $animations[sheetName]
-    const { $delay = 0, $duration = 0, $easing = 'ease-in' } = sheet
-    $animations[sheetName] = sheetToCSS(sheet, $duration as number, $delay as number, $easing as string)
-  }
+  for (const sheetName in $animations) $animations[sheetName] = sheetToCSS($animations[sheetName])
 }
 
-const sheetToCSS = (inputSheet: Sheet, $duration: number, $delay: number, $easing:string) => { 
-  const outputSheet: Sheet = {}
-  for (const rulesetName in inputSheet) {
-    if (rulesetName.startsWith('$')) continue
-    const ruleset = inputSheet[rulesetName]
+export type WebAnimationAddIn = { [rulesetName: string]: WebAnimationRuleset } & { [Consts.data]?: AnimationConfig }
+export type WebAnimationRuleset = React.CSSProperties
+
+const sheetToCSS = (sheet: AnimSheet) => { 
+
+  const { $duration = 0, $delay = 0, $easing, $opened, ...rulesets } = sheet
+
+  const outputSheet:WebAnimationAddIn = {}
+
+  for (const rulesetName in rulesets) {
+    const ruleset = sheet[rulesetName]
     const transformRule = ruleset.transform
 
     const rulesets: [{}, {}] = [{}, {}]
@@ -56,14 +60,18 @@ const sheetToCSS = (inputSheet: Sheet, $duration: number, $delay: number, $easin
           addTransformString(transforms, modifier)
         }
       } else //e.g. opacity: [0,1]
-        addRule(rule, ruleName, rule[2])
+        addRule(rule, ruleName, rule[2] as string)
     }
     outputSheet[`${rulesetName}/opened`] = { ...rulesets[0], transitionTimingFunction: $easing, transition: transitions0.join(', ') }
     outputSheet[`${rulesetName}/closed`] = { ...rulesets[1], transitionTimingFunction: $easing, transition: transitions1.join(', ') }
   }
-  //const x = JSON.stringify(outputSheet, null, 2)
-  //debugger
-  return outputSheet as Sheet
+  outputSheet[Consts.data] = {
+    $opened,
+    $easing,
+    $delay,
+    $duration,
+  }
+  return outputSheet
 }
 
 const pixTransforms = { translateX: true, translateY: true }

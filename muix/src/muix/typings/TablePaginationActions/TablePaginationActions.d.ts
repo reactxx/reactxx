@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { IconButtonProps } from '../IconButton/IconButton';
+import { StandardProps } from 'reactxx-muix/typings';
+import { IconButtonProps } from 'reactxx-muix/typings/IconButton/IconButton';
 
 export interface TablePaginationActionsProps extends React.HTMLAttributes<HTMLDivElement> {
   backIconButtonProps?: Partial<IconButtonProps>;

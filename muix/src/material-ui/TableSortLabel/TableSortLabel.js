@@ -3,10 +3,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import ArrowDownwardIcon from '../internal/svg-icons/ArrowDownward';
-import withStyles from '../styles/withStyles';
-import ButtonBase from '../ButtonBase';
-import { capitalize } from '../utils/helpers';
+import ArrowDownwardIcon from 'material-ui/internal/svg-icons/ArrowDownward';
+import withStyles from 'material-ui/styles/withStyles';
+import ButtonBase from 'material-ui/ButtonBase';
+import { capitalize } from 'material-ui/utils/helpers';
 
 export const styles = theme => ({
   root: {

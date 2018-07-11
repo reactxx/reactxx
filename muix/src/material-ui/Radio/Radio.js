@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import SwitchBase from '../internal/SwitchBase';
-import RadioButtonUncheckedIcon from '../internal/svg-icons/RadioButtonUnchecked';
-import RadioButtonCheckedIcon from '../internal/svg-icons/RadioButtonChecked';
-import { capitalize } from '../utils/helpers';
-import withStyles from '../styles/withStyles';
+import SwitchBase from 'material-ui/internal/SwitchBase';
+import RadioButtonUncheckedIcon from 'material-ui/internal/svg-icons/RadioButtonUnchecked';
+import RadioButtonCheckedIcon from 'material-ui/internal/svg-icons/RadioButtonChecked';
+import { capitalize } from 'material-ui/utils/helpers';
+import withStyles from 'material-ui/styles/withStyles';
 
 export const styles = theme => ({
   root: {

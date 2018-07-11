@@ -1,4 +1,4 @@
-import { CSSProperties, StyleRules } from './withStyles';
+import { CSSProperties, StyleRules } from 'reactxx-muix/typings/styles/withStyles';
 
 /**
  * This function doesn't really "do anything" at runtime, it's just the identity

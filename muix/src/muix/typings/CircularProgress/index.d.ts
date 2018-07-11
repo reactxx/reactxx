@@ -1,2 +1,2 @@
-export { default } from './CircularProgress';
-export * from './CircularProgress';
+export { default } from 'reactxx-muix/typings/CircularProgress/CircularProgress';
+export * from 'reactxx-muix/typings/CircularProgress/CircularProgress';

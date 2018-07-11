@@ -3,9 +3,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import ButtonBase from '../ButtonBase';
-import IconButton from '../IconButton';
-import withStyles from '../styles/withStyles';
+import ButtonBase from 'material-ui/ButtonBase';
+import IconButton from 'material-ui/IconButton';
+import withStyles from 'material-ui/styles/withStyles';
 
 export const styles = theme => {
   const transition = {

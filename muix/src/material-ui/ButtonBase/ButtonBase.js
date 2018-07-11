@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import keycode from 'keycode';
-import ownerWindow from '../utils/ownerWindow';
-import withStyles from '../styles/withStyles';
-import { listenForFocusKeys, detectFocusVisible } from './focusVisible';
-import TouchRipple from './TouchRipple';
-import createRippleHandler from './createRippleHandler';
+import ownerWindow from 'material-ui/utils/ownerWindow';
+import withStyles from 'material-ui/styles/withStyles';
+import { listenForFocusKeys, detectFocusVisible } from 'material-ui/ButtonBase/focusVisible';
+import TouchRipple from 'material-ui/ButtonBase/TouchRipple';
+import createRippleHandler from 'material-ui/ButtonBase/createRippleHandler';
 
 export const styles = {
   root: {

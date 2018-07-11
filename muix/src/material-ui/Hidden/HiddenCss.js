@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
-import { keys as breakpointKeys } from '../styles/createBreakpoints';
-import { capitalize } from '../utils/helpers';
-import withStyles from '../styles/withStyles';
+import { keys as breakpointKeys } from 'material-ui/styles/createBreakpoints';
+import { capitalize } from 'material-ui/utils/helpers';
+import withStyles from 'material-ui/styles/withStyles';
 
 const styles = theme => {
   const hidden = {

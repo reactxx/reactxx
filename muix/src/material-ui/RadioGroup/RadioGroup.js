@@ -2,8 +2,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import FormGroup from '../FormGroup';
-import { createChainedFunction, find } from '../utils/helpers';
+import FormGroup from 'material-ui/FormGroup';
+import { createChainedFunction, find } from 'material-ui/utils/helpers';
 
 class RadioGroup extends React.Component {
   radios = [];

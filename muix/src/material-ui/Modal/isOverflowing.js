@@ -1,6 +1,6 @@
 import isWindow from 'dom-helpers/query/isWindow';
 import ownerDocument from 'dom-helpers/ownerDocument';
-import ownerWindow from '../utils/ownerWindow';
+import ownerWindow from 'material-ui/utils/ownerWindow';
 
 export function isBody(node) {
   return node && node.tagName.toLowerCase() === 'body';

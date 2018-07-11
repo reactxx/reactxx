@@ -14,11 +14,12 @@ export const test = () => {
 
   window.isWeb = true
   const mergedWeb = Sheeter.mergeSheetsAndFinish(patchable, [], finishAddIns)
+  console.log(JSON.stringify(mergedWeb, null, 2))
   //const codeRootWeb = Sheeter.mergeRulesetsForCode(mergedWeb, rulesetPatchGetters, [mergedWeb.root])
 
   window.isWeb = false
   const mergedNative = Sheeter.mergeSheetsAndFinish(patchable, [], finishAddIns)
-
+  console.log(JSON.stringify(mergedNative, null, 2))
   //const codeRootNative = Sheeter.mergeRulesetsForCode(mergedNative, rulesetPatchGetters, [mergedNative.root])
 
   debugger

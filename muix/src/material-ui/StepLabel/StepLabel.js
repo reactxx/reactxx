@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import Typography from '../Typography';
-import StepIcon from '../StepIcon';
+import withStyles from 'material-ui/styles/withStyles';
+import Typography from 'material-ui/Typography';
+import StepIcon from 'material-ui/StepIcon';
 
 export const styles = theme => ({
   root: {

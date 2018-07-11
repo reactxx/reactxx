@@ -1,5 +1,5 @@
-import { Color, PaletteType } from '..';
-import { CommonColors } from '../colors/common';
+import { Color, PaletteType } from 'reactxx-muix/typings';
+import { CommonColors } from 'reactxx-muix/typings/colors/common';
 
 interface TypeText {
   primary: string;

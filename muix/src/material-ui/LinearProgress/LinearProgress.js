@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import warning from 'warning';
-import withStyles from '../styles/withStyles';
-import { lighten } from '../styles/colorManipulator';
+import withStyles from 'material-ui/styles/withStyles';
+import { lighten } from 'material-ui/styles/colorManipulator';
 
 const TRANSITION_DURATION = 4; // seconds
 

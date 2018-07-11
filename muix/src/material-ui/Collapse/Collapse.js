@@ -4,9 +4,9 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
-import withStyles from '../styles/withStyles';
-import { duration } from '../styles/transitions';
-import { getTransitionProps } from '../transitions/utils';
+import withStyles from 'material-ui/styles/withStyles';
+import { duration } from 'material-ui/styles/transitions';
+import { getTransitionProps } from 'material-ui/transitions/utils';
 
 export const styles = theme => ({
   container: {

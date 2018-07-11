@@ -1,2 +1,2 @@
-export { default } from './Stepper';
-export * from './Stepper';
+export { default } from 'reactxx-muix/typings/Stepper/Stepper';
+export * from 'reactxx-muix/typings/Stepper/Stepper';

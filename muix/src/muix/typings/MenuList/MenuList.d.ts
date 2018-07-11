@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { ListProps, ListClassKey } from '../List';
+import { StandardProps } from 'reactxx-muix/typings';
+import { ListProps, ListClassKey } from 'reactxx-muix/typings/List';
 
 export interface MenuListProps extends StandardProps<ListProps, MenuListClassKey, 'onKeyDown'> {
   onKeyDown?: React.ReactEventHandler<React.KeyboardEvent<any>>;

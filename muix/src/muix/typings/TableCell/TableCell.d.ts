@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StandardProps } from '..';
+import { StandardProps } from 'reactxx-muix/typings';
 
 /**
  * `<TableCell>` will be rendered as an `<th>`or `<td>` depending

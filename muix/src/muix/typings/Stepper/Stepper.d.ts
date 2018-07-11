@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { PaperProps } from '../Paper';
+import { StandardProps } from 'reactxx-muix/typings';
+import { PaperProps } from 'reactxx-muix/typings/Paper';
 
 export type Orientation = 'horizontal' | 'vertical';
 

@@ -1,2 +1,2 @@
-export { default } from './TextField';
-export * from './TextField';
+export { default } from 'reactxx-muix/typings/TextField/TextField';
+export * from 'reactxx-muix/typings/TextField/TextField';

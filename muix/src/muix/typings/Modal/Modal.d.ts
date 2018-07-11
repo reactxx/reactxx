@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StandardProps, ModalManager } from '..';
-import { BackdropProps } from '../Backdrop';
-import { PortalProps } from '../Portal';
+import { StandardProps, ModalManager } from 'reactxx-muix/typings';
+import { BackdropProps } from 'reactxx-muix/typings/Backdrop';
+import { PortalProps } from 'reactxx-muix/typings/Portal';
 
 export interface ModalProps
   extends StandardProps<

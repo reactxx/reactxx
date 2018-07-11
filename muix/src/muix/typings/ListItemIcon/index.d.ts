@@ -1,2 +1,2 @@
-export { default } from './ListItemIcon';
-export * from './ListItemIcon';
+export { default } from 'reactxx-muix/typings/ListItemIcon/ListItemIcon';
+export * from 'reactxx-muix/typings/ListItemIcon/ListItemIcon';

@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import keycode from 'keycode';
-import CancelIcon from '../internal/svg-icons/Cancel';
-import withStyles from '../styles/withStyles';
-import { emphasize, fade } from '../styles/colorManipulator';
-import unsupportedProp from '../utils/unsupportedProp';
-import '../Avatar/Avatar'; // So we don't have any override priority issue.
+import CancelIcon from 'material-ui/internal/svg-icons/Cancel';
+import withStyles from 'material-ui/styles/withStyles';
+import { emphasize, fade } from 'material-ui/styles/colorManipulator';
+import unsupportedProp from 'material-ui/utils/unsupportedProp';
+import 'material-ui/Avatar/Avatar'; // So we don't have any override priority issue.
 
 export const styles = theme => {
   const height = 32;

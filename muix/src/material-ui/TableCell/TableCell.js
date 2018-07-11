@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import { capitalize } from '../utils/helpers';
-import { darken, fade, lighten } from '../styles/colorManipulator';
+import withStyles from 'material-ui/styles/withStyles';
+import { capitalize } from 'material-ui/utils/helpers';
+import { darken, fade, lighten } from 'material-ui/styles/colorManipulator';
 
 export const styles = theme => ({
   root: {

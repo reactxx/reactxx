@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import { capitalize } from '../utils/helpers';
-import { isHorizontal } from '../Drawer/Drawer';
+import withStyles from 'material-ui/styles/withStyles';
+import { capitalize } from 'material-ui/utils/helpers';
+import { isHorizontal } from 'material-ui/Drawer/Drawer';
 
 export const styles = theme => ({
   root: {

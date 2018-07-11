@@ -3,8 +3,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Paper from '../Paper';
-import withStyles from '../styles/withStyles';
+import Paper from 'material-ui/Paper';
+import withStyles from 'material-ui/styles/withStyles';
 
 export const styles = {
   root: {

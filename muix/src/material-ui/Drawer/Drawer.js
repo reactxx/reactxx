@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Modal from '../Modal';
-import withStyles from '../styles/withStyles';
-import Slide from '../Slide';
-import Paper from '../Paper';
-import { capitalize } from '../utils/helpers';
-import { duration } from '../styles/transitions';
+import Modal from 'material-ui/Modal';
+import withStyles from 'material-ui/styles/withStyles';
+import Slide from 'material-ui/Slide';
+import Paper from 'material-ui/Paper';
+import { capitalize } from 'material-ui/utils/helpers';
+import { duration } from 'material-ui/styles/transitions';
 
 const oppositeDirection = {
   left: 'right',

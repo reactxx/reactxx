@@ -1,2 +1,2 @@
-export { default } from './AppBar';
-export * from './AppBar';
+export { default } from 'reactxx-muix/typings/AppBar/AppBar';
+export * from 'reactxx-muix/typings/AppBar/AppBar';

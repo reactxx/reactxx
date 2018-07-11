@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { ModalProps } from '../Modal';
-import { SlideProps } from '../Slide';
-import { PaperProps } from '../Paper';
-import { Theme } from '../styles/createMuiTheme';
-import { TransitionHandlerProps, TransitionProps } from '../transitions/transition';
+import { StandardProps } from 'reactxx-muix/typings';
+import { ModalProps } from 'reactxx-muix/typings/Modal';
+import { SlideProps } from 'reactxx-muix/typings/Slide';
+import { PaperProps } from 'reactxx-muix/typings/Paper';
+import { Theme } from 'reactxx-muix/typings/styles/createMuiTheme';
+import { TransitionHandlerProps, TransitionProps } from 'reactxx-muix/typings/transitions/transition';
 
 export interface DrawerProps
   extends StandardProps<

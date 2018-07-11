@@ -3,12 +3,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import { capitalize } from '../utils/helpers';
-import Modal from '../Modal';
-import Fade from '../Fade';
-import { duration } from '../styles/transitions';
-import Paper from '../Paper';
+import withStyles from 'material-ui/styles/withStyles';
+import { capitalize } from 'material-ui/utils/helpers';
+import Modal from 'material-ui/Modal';
+import Fade from 'material-ui/Fade';
+import { duration } from 'material-ui/styles/transitions';
+import Paper from 'material-ui/Paper';
 
 export const styles = theme => ({
   root: {

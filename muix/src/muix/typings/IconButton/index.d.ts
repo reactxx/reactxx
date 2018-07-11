@@ -1,2 +1,2 @@
-export { default } from './IconButton';
-export * from './IconButton';
+export { default } from 'reactxx-muix/typings/IconButton/IconButton';
+export * from 'reactxx-muix/typings/IconButton/IconButton';

@@ -1,2 +1,2 @@
-export { default } from './CardMedia';
-export * from './CardMedia';
+export { default } from 'reactxx-muix/typings/CardMedia/CardMedia';
+export * from 'reactxx-muix/typings/CardMedia/CardMedia';

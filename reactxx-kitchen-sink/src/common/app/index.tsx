@@ -1,12 +1,12 @@
 import React from 'react'
 
 import NavigApp from './navigation'
-import { primitives } from '../basic/index'
-import { component } from '../component/index'
-import { mediaqs } from '../mediaq/index'
-import { animations } from '../animation/index'
+import { primitives } from '../basic'
+import { component } from '../component'
+import { mediaqs } from '../mediaq'
+import { animations } from '../animation'
 
-import * as comps from '../components/index'
+import * as comps from '../components'
 import { AppContainer } from 'reactxx'
 
 export namespace KSink {

@@ -6,9 +6,9 @@ import EventListener from 'react-event-listener';
 import debounce from 'debounce';
 import wrapDisplayName from 'recompose/wrapDisplayName';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import withTheme from '../styles/withTheme';
-import { keys as breakpointKeys } from '../styles/createBreakpoints';
-import getThemeProps from '../styles/getThemeProps';
+import withTheme from 'material-ui/styles/withTheme';
+import { keys as breakpointKeys } from 'material-ui/styles/createBreakpoints';
+import getThemeProps from 'material-ui/styles/getThemeProps';
 
 // By default, returns true if screen width is the same or greater than the given breakpoint.
 export const isWidthUp = (breakpoint, width, inclusive = true) => {

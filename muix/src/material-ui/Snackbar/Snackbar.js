@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import EventListener from 'react-event-listener';
-import withStyles from '../styles/withStyles';
-import { duration } from '../styles/transitions';
-import ClickAwayListener from '../ClickAwayListener';
-import { capitalize, createChainedFunction } from '../utils/helpers';
-import Slide from '../Slide';
-import SnackbarContent from '../SnackbarContent';
+import withStyles from 'material-ui/styles/withStyles';
+import { duration } from 'material-ui/styles/transitions';
+import ClickAwayListener from 'material-ui/ClickAwayListener';
+import { capitalize, createChainedFunction } from 'material-ui/utils/helpers';
+import Slide from 'material-ui/Slide';
+import SnackbarContent from 'material-ui/SnackbarContent';
 
 export const styles = theme => {
   const gutter = theme.spacing.unit * 3;

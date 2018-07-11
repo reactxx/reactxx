@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import ButtonBase from '../ButtonBase';
-import { isMuiElement } from '../utils/reactHelpers';
+import withStyles from 'material-ui/styles/withStyles';
+import ButtonBase from 'material-ui/ButtonBase';
+import { isMuiElement } from 'material-ui/utils/reactHelpers';
 
 export const styles = theme => ({
   root: {

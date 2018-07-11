@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { TypographyProps } from '../Typography';
+import { StandardProps } from 'reactxx-muix/typings';
+import { TypographyProps } from 'reactxx-muix/typings/Typography';
 
 export interface ListItemTextProps
   extends StandardProps<React.HTMLAttributes<HTMLDivElement>, ListItemTextClassKey> {

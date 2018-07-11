@@ -1,23 +1,26 @@
 import warning from 'warning'
-import { Consts, Sheets, Sheet, getGaps } from '../index'
+import { Consts, Sheets, getGaps } from 'reactxx-sheeter'
+import { AnimSheet, AnimationConfig } from '.'
 
 export const $animationsToInterpolate = ($animations: Sheets) => {
-  for (const sheetName in $animations) {
-    const sheet = $animations[sheetName]
-    const { $delay = 0, $duration = 0, $easing = 'ease-in', $opened } = sheet
-    $animations[sheetName] = sheetToInterpolate(sheet, $duration as number, $delay as number, $easing as string)
-  }
+  for (const sheetName in $animations) $animations[sheetName] = sheetToInterpolate($animations[sheetName])
 }
 
-const sheetToInterpolate = (inputSheet: Sheet, $duration: number, $delay: number, $easing: string) => {
-  const outputSheet = { } as any
+export type NativeAnimationAddIn = { [rulesetName: string]: NativeAnimationRuleset } & { [Consts.data]?: AnimationConfig }
 
-  let useNativeDriver = true
+export type NativeAnimationRuleset = InterpolationConfigTypes & { transform?: InterpolationConfigTypes }
+type InterpolationConfigType = import('react-native').Animated.InterpolationConfigType
+export type InterpolationConfigTypes = { [ruleName: string]: InterpolationConfigType }
 
-  const addProp = (pair, modifier: string) => {
+const sheetToInterpolate = (inputSheet: AnimSheet) => {
+
+  const { $duration = 0, $delay = 0, $easing, $opened, ...rulesets } = inputSheet
+
+  const addProp = (pair, modifier: string | never) => {
     let { leftGap, rightGap } = getGaps(modifier, $duration)
     //console.log(pair, modifier, leftGap, rightGap, $duration)
-    if (!leftGap && !rightGap) return { inputRange: [0, 1], outputRange: pair }
+    if (!leftGap && !rightGap)
+      return { inputRange: [0, 1], outputRange: pair }
     else {
       leftGap = leftGap / $duration; rightGap = rightGap / $duration
       if (leftGap && rightGap) return { inputRange: [0, leftGap, 1 - rightGap, 1], outputRange: [pair[0], pair[0], pair[1], pair[1]] }
@@ -26,32 +29,36 @@ const sheetToInterpolate = (inputSheet: Sheet, $duration: number, $delay: number
     }
   }
 
-  for (const rulesetName in inputSheet) {
-    if (rulesetName.startsWith('$')) continue
-    const ruleset = inputSheet[rulesetName]
+  let useNativeDriver = true
+  const outputSheet: NativeAnimationAddIn = {}
+  for (const rulesetName in rulesets) {
+    const ruleset = rulesets[rulesetName]
+    const output: NativeAnimationRuleset = outputSheet[rulesetName] = {}
     const transformRule = ruleset.transform
-    const outputRuleset = outputSheet[rulesetName] = {}
     for (const ruleName in ruleset) {
       if (ruleName.startsWith('$')) continue
       const rule = ruleset[ruleName]
       if (rule === transformRule) {
         const modifier = transformRule.time
-        const outputTransform = outputRuleset['transform'] = []
+        const outputTransform: InterpolationConfigTypes = output.transform = {}
         for (const transformName in transformRule) {
+          if (transformName === 'time') continue
           const transform = transformRule[transformName]
-          if (typeof transform === 'string') continue
-          const item = {}; outputTransform.push(item)
           useNativeDriver = useNativeDriver && allowedTransforms[transformName]
-          item[transformName] = addProp(transform, modifier)
+          outputTransform[transformName] = addProp(transform, modifier)
         }
       } else {
         useNativeDriver = useNativeDriver && allowedStyles[ruleName]
-        outputRuleset[ruleName] = addProp(rule, rule[2])
+        output[ruleName] = addProp(rule, rule[2] as string)
       }
     }
   }
   outputSheet[Consts.data] = {
-    TimingAnimationConfig: { duration: $duration, delay: $delay, $easing, useNativeDriver }
+    $opened,
+    $easing,
+    $delay,
+    $duration,
+    useNativeDriver,
   }
   return outputSheet
 }

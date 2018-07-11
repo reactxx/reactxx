@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { ButtonBaseProps } from '../ButtonBase';
+import { StandardProps } from 'reactxx-muix/typings';
+import { ButtonBaseProps } from 'reactxx-muix/typings/ButtonBase';
 
 export interface BottomNavigationActionProps
   extends StandardProps<ButtonBaseProps, BottomNavigationActionClassKey, 'onChange'> {

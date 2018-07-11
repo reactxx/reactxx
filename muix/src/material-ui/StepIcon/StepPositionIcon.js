@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import SvgIcon from '../SvgIcon';
+import withStyles from 'material-ui/styles/withStyles';
+import SvgIcon from 'material-ui/SvgIcon';
 
 export const styles = theme => ({
   root: {

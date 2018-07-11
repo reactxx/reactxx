@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import { keys as breakpointKeys } from '../styles/createBreakpoints';
-import withWidth, { isWidthDown, isWidthUp } from '../withWidth';
-import exactProp from '../utils/exactProp';
+import { keys as breakpointKeys } from 'material-ui/styles/createBreakpoints';
+import withWidth, { isWidthDown, isWidthUp } from 'material-ui/withWidth';
+import exactProp from 'material-ui/utils/exactProp';
 
 /**
  * @ignore - internal component.

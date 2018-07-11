@@ -7,7 +7,7 @@ import keycode from 'keycode';
 import contains from 'dom-helpers/query/contains';
 import activeElement from 'dom-helpers/activeElement';
 import ownerDocument from 'dom-helpers/ownerDocument';
-import List from '../List';
+import List from 'material-ui/List';
 
 class MenuList extends React.Component {
   state = {

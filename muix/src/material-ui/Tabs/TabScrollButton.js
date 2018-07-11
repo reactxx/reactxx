@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import KeyboardArrowLeft from '../internal/svg-icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '../internal/svg-icons/KeyboardArrowRight';
-import withStyles from '../styles/withStyles';
-import ButtonBase from '../ButtonBase';
+import KeyboardArrowLeft from 'material-ui/internal/svg-icons/KeyboardArrowLeft';
+import KeyboardArrowRight from 'material-ui/internal/svg-icons/KeyboardArrowRight';
+import withStyles from 'material-ui/styles/withStyles';
+import ButtonBase from 'material-ui/ButtonBase';
 
 export const styles = theme => ({
   root: {

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Theme } from '../styles/createMuiTheme';
-import { TransitionProps } from '../transitions/transition';
+import { Theme } from 'reactxx-muix/typings/styles/createMuiTheme';
+import { TransitionProps } from 'reactxx-muix/typings/transitions/transition';
 
 export interface SlideProps extends TransitionProps {
   direction: 'left' | 'right' | 'up' | 'down';

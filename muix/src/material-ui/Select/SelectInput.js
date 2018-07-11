@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import keycode from 'keycode';
-import Menu from '../Menu/Menu';
-import { isFilled } from '../Input/Input';
+import Menu from 'material-ui/Menu/Menu';
+import { isFilled } from 'material-ui/Input/Input';
 
 /**
  * @ignore - internal component.

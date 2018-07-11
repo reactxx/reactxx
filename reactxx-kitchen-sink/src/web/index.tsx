@@ -6,7 +6,7 @@ import Button from 'material-ui/Button'
 //import { test } from '../common/sheeter/mediaq-test'
 //import { test } from '../common/sheeter/test'
 import { test } from '../common/sheeter/animations-test'
-//test()
+test()
 
 //debugger
 //const res = Array.from(new Set(['a', 'b', 'c'].concat(['d', 'b', 'f'])))

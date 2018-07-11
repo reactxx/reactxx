@@ -2,14 +2,14 @@
 
 import deepmerge from 'deepmerge'; // < 1kb payload overhead when lodash/merge is > 3kb.
 import warning from 'warning';
-import createTypography from './createTypography';
-import createBreakpoints from './createBreakpoints';
-import createPalette from './createPalette';
-import createMixins from './createMixins';
-import shadows from './shadows';
-import transitions from './transitions';
-import zIndex from './zIndex';
-import spacing from './spacing';
+import createTypography from 'material-ui/styles/createTypography';
+import createBreakpoints from 'material-ui/styles/createBreakpoints';
+import createPalette from 'material-ui/styles/createPalette';
+import createMixins from 'material-ui/styles/createMixins';
+import shadows from 'material-ui/styles/shadows';
+import transitions from 'material-ui/styles/transitions';
+import zIndex from 'material-ui/styles/zIndex';
+import spacing from 'material-ui/styles/spacing';
 
 function createMuiTheme(options         = {}) {
   const {

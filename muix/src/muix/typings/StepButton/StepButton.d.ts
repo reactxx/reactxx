@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { Orientation } from '../Stepper';
-import { ButtonBaseProps } from '../ButtonBase';
+import { StandardProps } from 'reactxx-muix/typings';
+import { Orientation } from 'reactxx-muix/typings/Stepper';
+import { ButtonBaseProps } from 'reactxx-muix/typings/ButtonBase';
 
 export type StepButtonIcon = React.ReactElement<any> | string | number | null;
 

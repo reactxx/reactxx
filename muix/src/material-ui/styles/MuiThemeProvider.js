@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
 import createBroadcast from 'brcast';
-import themeListener, { CHANNEL } from './themeListener';
-import exactProp from '../utils/exactProp';
+import themeListener, { CHANNEL } from 'material-ui/styles/themeListener';
+import exactProp from 'material-ui/utils/exactProp';
 
 /**
  * This component takes a `theme` property.

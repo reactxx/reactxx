@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import { isFilled, isAdornedStart } from '../Input/Input';
-import { capitalize } from '../utils/helpers';
-import { isMuiElement } from '../utils/reactHelpers';
+import withStyles from 'material-ui/styles/withStyles';
+import { isFilled, isAdornedStart } from 'material-ui/Input/Input';
+import { capitalize } from 'material-ui/utils/helpers';
+import { isMuiElement } from 'material-ui/utils/reactHelpers';
 
 export const styles = theme => ({
   root: {

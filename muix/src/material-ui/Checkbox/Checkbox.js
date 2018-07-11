@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import SwitchBase from '../internal/SwitchBase';
-import CheckBoxOutlineBlankIcon from '../internal/svg-icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '../internal/svg-icons/CheckBox';
-import IndeterminateCheckBoxIcon from '../internal/svg-icons/IndeterminateCheckBox';
-import { capitalize } from '../utils/helpers';
-import withStyles from '../styles/withStyles';
+import SwitchBase from 'material-ui/internal/SwitchBase';
+import CheckBoxOutlineBlankIcon from 'material-ui/internal/svg-icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from 'material-ui/internal/svg-icons/CheckBox';
+import IndeterminateCheckBoxIcon from 'material-ui/internal/svg-icons/IndeterminateCheckBox';
+import { capitalize } from 'material-ui/utils/helpers';
+import withStyles from 'material-ui/styles/withStyles';
 
 export const styles = theme => ({
   root: {

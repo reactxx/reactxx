@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { SnackbarContentProps } from '../SnackbarContent';
-import { TransitionHandlerProps, TransitionProps } from '../transitions/transition';
+import { StandardProps } from 'reactxx-muix/typings';
+import { SnackbarContentProps } from 'reactxx-muix/typings/SnackbarContent';
+import { TransitionHandlerProps, TransitionProps } from 'reactxx-muix/typings/transitions/transition';
 
 export type SnackBarOrigin = {
   horizontal?: 'left' | 'center' | 'right' | number;

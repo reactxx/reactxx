@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
 import classNames from 'classnames';
-import Collapse from '../Collapse';
-import withStyles from '../styles/withStyles';
+import Collapse from 'material-ui/Collapse';
+import withStyles from 'material-ui/styles/withStyles';
 
 export const styles = theme => ({
   root: {

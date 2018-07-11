@@ -4,9 +4,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
-import withStyles from '../styles/withStyles';
-import Popover from '../Popover';
-import MenuList from '../MenuList';
+import withStyles from 'material-ui/styles/withStyles';
+import Popover from 'material-ui/Popover';
+import MenuList from 'material-ui/MenuList';
 
 const RTL_ORIGIN = {
   vertical: 'top',

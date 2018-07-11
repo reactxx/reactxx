@@ -1,4 +1,4 @@
-import { StandardProps } from '..';
+import { StandardProps } from 'reactxx-muix/typings';
 
 export interface ListItemAvatarProps extends StandardProps<{}, ListItemAvatarClassKey> {}
 

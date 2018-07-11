@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StandardProps } from '../';
+import { StandardProps } from 'reactxx-muix/typings';
 
 export function cloneChildrenWithClassName<T>(children: React.ReactNode, className: string): T[];
 

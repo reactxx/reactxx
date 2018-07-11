@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import debounce from 'debounce';
 import EventListener from 'react-event-listener';
-import withStyles from '../styles/withStyles';
+import withStyles from 'material-ui/styles/withStyles';
 
 const ROWS_HEIGHT = 19;
 

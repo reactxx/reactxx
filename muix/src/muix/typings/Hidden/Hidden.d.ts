@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { Breakpoint } from '../styles/createBreakpoints';
+import { StandardProps } from 'reactxx-muix/typings';
+import { Breakpoint } from 'reactxx-muix/typings/styles/createBreakpoints';
 
 export interface HiddenProps extends StandardProps<{}, never> {
   implementation?: 'js' | 'css';

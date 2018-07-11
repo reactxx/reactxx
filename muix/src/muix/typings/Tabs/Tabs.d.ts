@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StandardProps } from '..';
-import { ButtonBaseProps } from '../ButtonBase/ButtonBase';
-import { TabIndicatorProps } from './TabIndicator';
+import { StandardProps } from 'reactxx-muix/typings';
+import { ButtonBaseProps } from 'reactxx-muix/typings/ButtonBase/ButtonBase';
+import { TabIndicatorProps } from 'reactxx-muix/typings/Tabs/TabIndicator';
 
 export interface TabsProps
   extends StandardProps<ButtonBaseProps, TabsClassKey, 'onChange' | 'action' | 'component'> {

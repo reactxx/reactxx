@@ -4,7 +4,7 @@
 
 import warning from 'warning';
 
-export * from './animations/index';
+export * from './animations';
 export * from './mediaq';
 export * from './when-used';
 
@@ -32,8 +32,7 @@ export interface SheetWithAddIns extends Sheet {
   //[Consts.canModify]?
   $system: AddIns
 }
-export type AddIns = { [addInsName: string]: Sheets | Sheetss}
-export type Sheetss = { [sheetsName: string]: Sheets }
+export type AddIns = { [addInsName: string]: Sheets }
 export type Sheets = { [sheetName: string]: Sheet }
 export type Sheet = { [rulesetName: string]: Ruleset }
 export interface Ruleset extends Node {

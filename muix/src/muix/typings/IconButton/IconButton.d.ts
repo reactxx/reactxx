@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps, PropTypes } from '..';
-import { ButtonBaseProps } from '../ButtonBase';
+import { StandardProps, PropTypes } from 'reactxx-muix/typings';
+import { ButtonBaseProps } from 'reactxx-muix/typings/ButtonBase';
 
 export interface IconButtonProps extends StandardProps<ButtonBaseProps, IconButtonClassKey> {
   color?: PropTypes.Color;

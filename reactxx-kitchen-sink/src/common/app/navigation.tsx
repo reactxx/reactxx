@@ -6,11 +6,11 @@ import { GithubCircle } from 'reactxx-mdi/GithubCircle'
 import { Types, View, Text, ScrollView, Icon } from 'reactxx'
 
 import { H1, H2, H3, H4, H5, U, I, B, A, Blocquote, P } from '../components/typo'
-import { examples, nameToExample, exampleToElement, components, navigationExample, KSink } from './index'
-import { primitives } from '../basic/index'
-import { component } from '../component/index'
-import { mediaqs } from '../mediaq/index'
-import { animations } from '../animation/index'
+import { examples, nameToExample, exampleToElement, components, navigationExample, KSink } from '.'
+import { primitives } from '../basic'
+import { component } from '../component'
+import { mediaqs } from '../mediaq'
+import { animations } from '../animation'
 import { ResponsibleDrawer } from '../components/responsible-drawer/responsible-drawer'
 
 export type GotoExample = (example: KSink.Example) => void

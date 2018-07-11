@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps, PropTypes } from '..';
-import { Style, TextStyle } from '../styles/createTypography';
+import { StandardProps, PropTypes } from 'reactxx-muix/typings';
+import { Style, TextStyle } from 'reactxx-muix/typings/styles/createTypography';
 
 export interface TypographyProps
   extends StandardProps<React.HTMLAttributes<HTMLElement>, TypographyClassKey> {
