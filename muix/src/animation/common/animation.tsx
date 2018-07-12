@@ -1,4 +1,5 @@
 import React from 'react';
+import warning from 'warning';
 import * as Sheeter from 'reactxx-sheeter';
 import { AnimationDriver } from 'reactxx-animation';
 
@@ -25,20 +26,29 @@ export const animations = (input: () => Sheeter.AnimationAddIns, output: (output
 *************************/
 
 export abstract class DriverLow {
-  constructor(public sheet: Sheeter.AnimationAddIn, public name: string, public component: AnimationsComponent) {
+  constructor(sheet: Sheeter.AnimationAddIn, name: string, component: AnimationsComponent) {
     //this.$config = sheet[Sheeter.Consts.data]
     //this.opened = !!this.$config.$opened
+    this.$config = sheet[Sheeter.Consts.data]
+    this.$pars = {
+      component, name, sheet, opened: !!this.$config.$opened, rulesetNames: this.$config.rulesetNames
+    }
   }
 
-  $config = this.sheet[Sheeter.Consts.data]
-  opened= !!this.$config.$opened
-  rulesetNames = this.$config.rulesetNames
+  $config: Sheeter.AnimationConfig
+  $pars: {
+    opened: boolean,
+    rulesetNames: string[],
+    sheet: Sheeter.AnimationAddIn,
+    name: string,
+    component: AnimationsComponent
+  }
 
   set(isOpen: boolean) {
-    this.component.reset(this)
+    this.$pars.component.reset(this)
     this.doOpen(isOpen)
   }
-  toggle() { this.set(!this.opened) }
+  toggle() { this.set(!this.$pars.opened) }
   open() { this.set(true) }
   close() { this.set(false) }
   reset() { }
@@ -58,6 +68,17 @@ interface AnimProps {
   children: (animations: AnimationsComponent) => React.ReactNode
 }
 
+const wrongAnimNames = {
+  context: true,
+  isMounted: true,
+  props: true,
+  refs: true,
+  replaceState: true,
+  reset: true,
+  state: true,
+  $pars: true,
+}
+
 class AnimationsComponent extends React.Component<AnimProps> {
 
   constructor(props: AnimProps) {
@@ -65,16 +86,19 @@ class AnimationsComponent extends React.Component<AnimProps> {
     this.adjustDrivers()
   }
 
-  private animNames = Object.keys(this.props.addIns).filter(p => p.charAt(0) != '#')
-  private lastAddIns: Sheeter.AnimationAddIns
+  private $pars = {
+    animNames: Object.keys(this.props.addIns).filter(p => p.charAt(0) != '#'),
+    lastAddIns: null as Sheeter.AnimationAddIns
+  }
 
   private adjustDrivers() {
-    const { animNames, lastAddIns, props: { addIns } } = this
+    const { $pars: { animNames, lastAddIns }, props: { addIns } } = this
     if (addIns === lastAddIns) return
-    this.lastAddIns = addIns
-    this.animNames.forEach(animName => {
+    this.$pars.lastAddIns = addIns
+    this.$pars.animNames.forEach(animName => {
       const sheet = addIns[animName]
-      this[animName] = new AnimationDriver(sheet as any, animName, this)
+      warning (!wrongAnimNames[animName], 'Wrong animation name: ${animName}')
+      this[animName] = new AnimationDriver(sheet, animName, this)
     })
   }
 
@@ -84,7 +108,7 @@ class AnimationsComponent extends React.Component<AnimProps> {
   }
 
   reset = (justRunning?: DriverLow) => {
-    this.animNames.forEach(animName => {
+    this.$pars.animNames.forEach(animName => {
       const driver = this[animName] as DriverLow
       if (driver !== justRunning) driver.reset()
     })

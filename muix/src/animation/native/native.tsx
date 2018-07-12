@@ -5,9 +5,9 @@ import * as Sheeter from 'reactxx-sheeter';
 
 export class Driver extends DriverLow {
 
-  constructor(sheet: Sheeter.NativeAnimationAddIn, public name: string, component) {
+  constructor(sheet: Sheeter.NativeAnimationAddIn, name: string, component) {
     super(sheet, name, component)
-    this.rulesetNames.forEach(rulesetName => {
+    this.$pars.rulesetNames.forEach(rulesetName => {
       const ruleset =sheet[rulesetName] 
       const res = this[rulesetName] = {}
       for (const ruleName in ruleset) {
@@ -25,14 +25,14 @@ export class Driver extends DriverLow {
   value = new Animated.Value(this.$config.$opened ? 1 : 0)
 
   reset() {
-    this.value.stopAnimation(); this.value.setValue(this.opened ? 1 : 0)
+    this.value.stopAnimation(); this.value.setValue(this.$pars.opened ? 1 : 0)
   }
   doOpen(toOpened: boolean) {
     const { value, $config } = this
-    this.opened = toOpened
+    this.$pars.opened = toOpened
     Animated.timing(value, { duration: $config.$duration, delay: $config.$delay, toValue: toOpened ? 1 : 0, useNativeDriver: $config.useNativeDriver }).start(({ finished }) => {
       if (!finished) return
-      this.component.setState({})
+      this.$pars.component.setState({})
     })
 
   }

@@ -42,9 +42,9 @@ const sheet: Types.SheetX<Shape> = {
         opacity: [1, 0.2]
       },
       labelAnim: {
-        transform: [
-          { translateX: [0, -180] }
-        ],
+         transform: {
+           translateX: [0, -180]
+         },
       },
       $duration: 1000 // in msec
     },
@@ -53,11 +53,11 @@ const sheet: Types.SheetX<Shape> = {
         opacity: [0.2, 1, '-35'] // means 0%-35% of $duration
       },
       labelAnim: {
-        transform: [
-          { scale: [1, 0] },
-          { rotate: ['0deg', '180deg'] },
-          '35-' // means 35%-100% of $duration
-        ],
+        transform: {
+          scale: [1, 0] ,
+          rotate: ['0deg', '180deg'],
+          time: '35-' // means 35%-100% of $duration
+        },
       },
       $duration: 2000
     },
@@ -66,10 +66,10 @@ const sheet: Types.SheetX<Shape> = {
         opacity: [1, 0.2, '20-'] // means 20%-100% of $duration
       },
       labelAnim: {
-        transform: [
-          { translateX: [0, -180] },
-          '10-20' // means 10%-20% of $duration
-        ],
+        transform: {
+          translateX: [0, -180],
+          time: '10-20' // means 10%-20% of $duration
+        },
       },
       $duration: 1000
     },

@@ -5,8 +5,9 @@ import { DriverLow } from '../common/animation';
 
 export class Driver extends DriverLow {
 
-  constructor(sheet: Sheeter.NativeAnimationAddIn, public name: string, component) {
+  constructor(sheet: Sheeter.WebAnimationAddIn, name: string, component) {
     super(sheet, name, component)
+    // console.log(JSON.stringify(sheet, null, 2))
     this.refreshRulesets()
   }
 
@@ -19,17 +20,17 @@ export class Driver extends DriverLow {
   doOpen(opened: boolean) {
     const { $delay, $duration } = this.$config
     if (this.runningTimer) clearTimeout(this.runningTimer)
-    this.opened = opened
+    this.$pars.opened = opened
     this.refreshRulesets()
     this.runningTimer = window.setTimeout(() => {
       delete this.runningTimer
     }, $delay + $duration)
-    this.component.setState({})
+    this.$pars.component.setState({})
   }
 
   refreshRulesets() {
-    const openFlag = this.opened ? '/opened' : '/closed' 
-    this.rulesetNames.forEach(rulesetName => this[rulesetName] = this.sheet[rulesetName + openFlag])
+    const openFlag = this.$pars.opened ? '/opened' : '/closed' 
+    this.$pars.rulesetNames.forEach(rulesetName => this[rulesetName] = this.$pars.sheet[rulesetName + openFlag])
   }
 }
 
