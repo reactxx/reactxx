@@ -59,6 +59,7 @@ const sheetToInterpolate = (inputSheet: AnimSheet) => {
     $delay,
     $duration,
     useNativeDriver,
+    rulesetNames: Object.keys(rulesets)
   }
   return outputSheet
 }

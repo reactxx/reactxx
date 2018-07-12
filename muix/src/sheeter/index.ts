@@ -4,7 +4,7 @@
 
 import warning from 'warning';
 
-export * from './animations';
+export * from './animations/index';
 export * from './mediaq';
 export * from './when-used';
 
@@ -169,7 +169,7 @@ export const filterRulesetNames = (sheet: Sheet) => Object.keys(sheet).filter(k 
 //see processAddIn
 
 //https://stackoverflow.com/questions/1173549/how-to-determine-if-an-object-is-an-object-literal-in-javascript
-export const isObject = obj => typeof obj === 'object' && Object.getPrototypeOf(obj) === Object.prototype
+export const isObject = obj => obj && typeof obj === 'object' && !obj.$$typeof// (Object.getPrototypeOf(obj) === Object.prototype)
 
 //****************************
 // PRIVATE

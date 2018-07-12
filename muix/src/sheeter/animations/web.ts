@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { AnimationConfig, AnimSheet } from './index';
 import { Consts, getGaps, Sheets } from 'reactxx-sheeter';
-import { AnimSheet, AnimationConfig } from '.';
 
 export const $animationsToCSS = ($animations: Sheets) => {
   for (const sheetName in $animations) $animations[sheetName] = sheetToCSS($animations[sheetName])
@@ -70,6 +70,7 @@ const sheetToCSS = (sheet: AnimSheet) => {
     $easing,
     $delay,
     $duration,
+    rulesetNames: Object.keys(rulesets)
   }
   return outputSheet
 }

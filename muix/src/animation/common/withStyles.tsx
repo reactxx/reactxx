@@ -1,33 +1,28 @@
-﻿import React from 'react'
-import ReactN from 'react-native'
+﻿import React from 'react';
+import { RenderAddIn, TRenderState, withStyles } from 'reactxx-basic';
+import { animationFinishAddInClasses } from 'reactxx-sheeter';
+import { Types } from '../typings/types';
+import { animations } from './animation';
 
-import { TCommon, ThemeProvider, themePipe, RenderAddIn, TRenderState, withStyles } from 'reactxx-basic'
-import { animations, TAnimation } from 'reactxx-animation'
 
-import { Types } from '../typings/types'
-import { TAddIn } from '../typings/add-in'
 
 /************************
 * ADDINS
 *************************/
 
 export const stylePipe = (state: TRenderState, next) =>
-  animations( // process animation $animations part of sheet
-    () => null, //state.addInClasses && state.addInClasses.$animations as TAnimation.SheetsX,
-    animations => { }, //state.finalProps.$system.animations = animations,
+  animations( // process animation $animations addin of sheet
+    () => state.finalProps.$system.classes.$system['$animations'],
+    animations => animations && (state.finalProps.$system['animations'] = animations),
     next
   )
-
-//export const finishAddIns = (addInClasses) => {
-//  const $anims: TAddIn.SheetX[] = addInClasses.$animations
-//  if (!$anims || $anims.length === 0) return
-//  addInClasses.$animations = $anims.length === 1 ? $anims[0] : deepMerges({}, ...$anims)
-//}
 
 const renderAddIn: RenderAddIn = {
   propsAddInPipeline: (renderState, next) => next,
   styleAddInPipeline: stylePipe,
-  //finishAddInClasses: [whenUsedFinishAddIns, finishAddIns],
+  finishAddInClasses: {
+    $animations: animationFinishAddInClasses
+  }
 }
 
 /************************

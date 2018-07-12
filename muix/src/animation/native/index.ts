@@ -1,5 +1,5 @@
 window.isWeb = false
-export { Driver as AnimationDriver } from './animation'
+export { Driver as AnimationDriver } from './native'
 export * from '../typings/animation'
 export * from '../typings/types'
 export * from '../typings/add-in'

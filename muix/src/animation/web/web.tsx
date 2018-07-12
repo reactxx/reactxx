@@ -28,7 +28,7 @@ export class Driver extends DriverLow {
   }
 
   refreshRulesets() {
-    const openFlag = this.open ? '/opened' : '/closed' 
+    const openFlag = this.opened ? '/opened' : '/closed' 
     this.rulesetNames.forEach(rulesetName => this[rulesetName] = this.sheet[rulesetName + openFlag])
   }
 }

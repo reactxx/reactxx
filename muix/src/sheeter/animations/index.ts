@@ -36,6 +36,7 @@ export interface AnimationConfig {
   $delay?: number
   $opened?: boolean
   useNativeDriver?:boolean
+  rulesetNames?:string[]
 }
 
 export interface SheetExtension extends AnimationConfig {

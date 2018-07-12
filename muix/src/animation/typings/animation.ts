@@ -27,29 +27,29 @@ export namespace TAnimation {
     $web?: ToPairs<TCommonStyles.RulesetWeb> //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
   }
 
-  export interface Drivers<T extends Shapes = Shapes> extends AnimationsEx { sheets: { [P in keyof T]: Driver<T[P]> } }
-  export interface DriversWeb<T extends Shapes> extends AnimationsEx { sheets: { [P in keyof T]: DriverWeb<T[P]> } }
-  export interface DriversNative<T extends Shapes> extends AnimationsEx { sheets: { [P in keyof T]: DriverNative<T[P]> } }
+  //export interface Drivers<T extends Shapes = Shapes> extends AnimationsEx { sheets: { [P in keyof T]: Driver<T[P]> } }
+  export type Drivers<T extends Shapes = Shapes> = AnimationsEx & { [P in keyof T]: Driver<T[P]> }
+  export interface DriversWeb<T extends Shapes> extends AnimationsEx { sheets: { [P in keyof T]: Driver<T[P]> } }
+  export interface DriversNative<T extends Shapes> extends AnimationsEx { sheets: { [P in keyof T]: Driver<T[P]> } }
 
-  export interface AnimationsEx { reset: (exceptOf?: Driver<{}>) => void; statefullComponent: React.Component }
+  export interface AnimationsEx { reset: (exceptOf?: Driver<{}>) => void }
 
-  export interface Driver<T extends Shape = Shape> {
+  export type Driver<T extends Shape = Shape> = {
     opened: boolean
     open()
     close()
     set(isOpen: boolean)
     toggle()
     reset()
-    sheet: Sheet<T>
-  }
+  } & Sheet<T>
 
-  export interface DriverWeb<T extends Shape> extends Driver<T> {
-    sheet: SheetWeb<T>
-  }
-  export interface DriverNative<T extends Shape> extends Driver<T> {
-    value: ReactN.Animated.Value
-    sheet: SheetNative<T>
-  }
+  // export interface DriverWeb<T extends Shape> extends Driver<T> {
+  //   sheet: SheetWeb<T>
+  // }
+  // export interface DriverNative<T extends Shape> extends Driver<T> {
+  //   value: ReactN.Animated.Value
+  //   sheet: SheetNative<T>
+  // }
 
   export type SheetWeb<T extends Shape> = { [P in keyof T]: TCommonStyles.RulesetWeb } & AnimationConfig
   export type SheetNative<T extends Shape> = { [P in keyof T]: TCommonStyles.RulesetNative<T[P]> } & AnimationConfig

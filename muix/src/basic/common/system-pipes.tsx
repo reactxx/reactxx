@@ -33,23 +33,23 @@ export const getSystemPipes = <R extends Types.Shape>(
 
   }
 
-  const finalizeEvent = (finalProps: Types.OnPressAllX, propName: TCommon.TEvents, eventsPlatform, platformName: string, renderState: TRenderStateEx) => {
-    const proc: any = eventsPlatform && platformName[platformName] || finalProps[propName]
-    delete finalProps[propName]; if (eventsPlatform) delete eventsPlatform[platformName]
+  const finalizeEvent = (platformProps: Types.CodeProps & Types.OnPressAllX, propName: TCommon.TEvents, eventsPlatform, platformName: string, renderState: TRenderStateEx) => {
+    const proc: any = eventsPlatform && platformName[platformName] || platformProps[propName]
+    delete platformProps[propName]; if (eventsPlatform) delete eventsPlatform[platformName]
     if (!proc || proc['$wrapped']) return
-    const newProc = finalProps[platformName] = renderState.platformProps.$system[propName] = (ev: any) => {
+    const newProc = platformProps[platformName] = platformProps.$system[propName] = (ev: any) => {
       ev = ev && !ev.constructor ? { ...ev } : {}
       ev.current = renderState.finalProps
       proc(ev)
     }
     newProc['$wrapped'] = true
   }
-  const finalizeEvents = (finalProps: Types.PropsX & Types.OnPressAllX, renderState: TRenderStateEx) => {
-    const eventsPlatform = window.isWeb ? finalProps.$web : finalProps.$native
-    finalizeEvent(finalProps, 'onPress', eventsPlatform, window.isWeb ? 'onClick' : 'onPress', renderState)
-    finalizeEvent(finalProps, 'onPressIn', eventsPlatform, window.isWeb ? 'onMouseDown' : 'onPressIn', renderState)
-    finalizeEvent(finalProps, 'onPressOut', eventsPlatform, window.isWeb ? 'onMouseUp' : 'onPressOut', renderState)
-    finalizeEvent(finalProps, 'onLongPress', eventsPlatform, window.isWeb ? '?' : 'onLongPress', renderState)
+  const finalizeEvents = (platformProps: Types.PropsX & Types.OnPressAllX, renderState: TRenderStateEx) => {
+    const eventsPlatform = window.isWeb ? platformProps.$web : platformProps.$native
+    finalizeEvent(platformProps, 'onPress', eventsPlatform, window.isWeb ? 'onClick' : 'onPress', renderState)
+    finalizeEvent(platformProps, 'onPressIn', eventsPlatform, window.isWeb ? 'onMouseDown' : 'onPressIn', renderState)
+    finalizeEvent(platformProps, 'onPressOut', eventsPlatform, window.isWeb ? 'onMouseUp' : 'onPressOut', renderState)
+    finalizeEvent(platformProps, 'onLongPress', eventsPlatform, window.isWeb ? '?' : 'onLongPress', renderState)
   }
 
   const toPlatformProps = (cascadingSeparatedPropsArray: SeparatedPropsArray, currentProps: Types.PropsX, renderState: TRenderStateEx) => {
@@ -155,7 +155,7 @@ export const getSystemPipes = <R extends Types.Shape>(
       const inp = input()
       props = inp.props; renderState = inp.renderState
       if (options.withCascading) return <CascadingConsumer>{render}</CascadingConsumer>
-      output(toPlatformProps(null, props, renderState))
+      output(toPlatformProps(null, {...props}, renderState))
       return next()
     }
     return res
