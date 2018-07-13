@@ -18,8 +18,8 @@ export namespace TAnimation {
 
   //export interface Drivers<T extends Shapes = Shapes> extends AnimationsEx { sheets: { [P in keyof T]: Driver<T[P]> } }
   export type Drivers<T extends Shapes = Shapes> = AnimationsEx & { [P in keyof T]: Driver<T[P]> }
-  export interface DriversWeb<T extends Shapes> extends AnimationsEx { sheets: { [P in keyof T]: Driver<T[P]> } }
-  export interface DriversNative<T extends Shapes> extends AnimationsEx { sheets: { [P in keyof T]: Driver<T[P]> } }
+  //export interface DriversWeb<T extends Shapes> extends AnimationsEx { sheets: { [P in keyof T]: Driver<T[P]> } }
+  //export interface DriversNative<T extends Shapes> extends AnimationsEx { sheets: { [P in keyof T]: Driver<T[P]> } }
 
   export interface AnimationsEx { reset: (exceptOf?: Driver<{}>) => void }
 

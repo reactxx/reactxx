@@ -3,8 +3,8 @@ import { AddIns as SheeterAddIns, PropsPatchGetters as SheeterPropsPatchGetters,
 
 export namespace TMediaQ {
 
-  export interface MediaQFlags {
-    $system: SheeterAddIns // TMediaQ.NotifyIntervalX
+  export interface MediaQFlagsInputPar {
+    addIns: SheeterAddIns // TMediaQ.NotifyIntervalX
     getPropsPatches: SheeterPropsPatchGetters
   }
 
@@ -64,7 +64,7 @@ export namespace TMediaQ {
 
   export type NotifyIntervalDecoded<TState extends string = string> = { [P in TState]: [Breakpoint, Breakpoint] }
 
-  export interface CodeProps<TState extends string = string> { mediaqFlags?: MediaFlags<TState> }
+  export interface CodeProps<TState extends string = string> { $mediaq?: MediaFlags<TState> }
   export type MediaFlags<TState extends string = string> = { [P in TState]: boolean }
 
 }

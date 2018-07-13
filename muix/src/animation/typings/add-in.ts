@@ -32,23 +32,21 @@ export namespace TAddIn {
   *******************************************/
 
   //******************** Cross platform 
-  export interface PropsX<R extends Types.Shape = Types.Shape> extends TAddInBasic.PropsX<R> {
-  }
+  export interface PropsX<R extends Types.Shape = Types.Shape> extends TAddInBasic.PropsX<R> { }
 
   //******************** Platform specific
-  export interface GetVariant<R extends Types.Shape = Types.Shape> {
-  }
+  export interface GetVariant<R extends Types.Shape = Types.Shape> { }
 
-  export interface CodePropsWeb<R extends Types.Shape = Types.Shape> {
-    animations?: TAnimation.DriversWeb<getAnimation<R>>
-  }
+  //export interface CodePropsWeb<R extends Types.Shape = Types.Shape> {
+  //  animations?: TAnimation.DriversWeb<getAnimation<R>>
+  //}
 
-  export interface CodePropsNative<R extends Types.Shape = Types.Shape> {
-    animations?: TAnimation.DriversNative<getAnimation<R>>
-  }
+  //export interface CodePropsNative<R extends Types.Shape = Types.Shape> {
+  //  animations?: TAnimation.DriversNative<getAnimation<R>>
+  //}
 
   export interface CodeProps<R extends Types.Shape = Types.Shape> {
-    animations?: TAnimation.Drivers<getAnimation<R>>
+    $animations?: TAnimation.Drivers<getAnimation<R>>
   }
 
 }

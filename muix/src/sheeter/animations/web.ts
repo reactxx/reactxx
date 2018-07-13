@@ -62,8 +62,8 @@ const sheetToCSS = (sheet: AnimSheet) => {
       } else //e.g. opacity: [0,1]
         addRule(rule, ruleName, rule[2] as string)
     }
-    outputSheet[`${rulesetName}/opened`] = { ...rulesets[0], transitionTimingFunction: $easing, transition: transitions0.join(', ') }
-    outputSheet[`${rulesetName}/closed`] = { ...rulesets[1], transitionTimingFunction: $easing, transition: transitions1.join(', ') }
+    outputSheet[`${rulesetName}/closed`] = { ...rulesets[0], transitionTimingFunction: $easing, transition: transitions0.join(', ') }
+    outputSheet[`${rulesetName}/opened`] = { ...rulesets[1], transitionTimingFunction: $easing, transition: transitions1.join(', ') }
   }
   outputSheet[Consts.data] = {
     $opened,

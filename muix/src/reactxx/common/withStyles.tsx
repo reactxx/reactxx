@@ -1,13 +1,11 @@
-﻿import React from 'react'
-import ReactN from 'react-native'
+﻿import React from 'react';
+import { stylePipe as animationStylePipe } from 'reactxx-animation';
+import { RenderAddIn, TCommon, ThemeProvider, TRenderState, withStyles } from 'reactxx-basic';
+import { mediaqFinishAddInClasses, mediaqFinishAddInProps, MediaQ_AppContainer, propsPipe as mediaQPropsPipe, stylePipe as mediaQStylePipe } from 'reactxx-mediaq';
+import { animationFinishAddInClasses } from 'reactxx-sheeter';
+import { Types } from '../typings/types';
 
-import { TCommon, ThemeProvider, themePipe, RenderAddIn, withStyles, TRenderState } from 'reactxx-basic'
-import { animations, TAnimation, stylePipe as animationStylePipe } from 'reactxx-animation'
-import { mediaQFlags, TMediaQ, MediaQ_AppContainer, mediaQSheet, stylePipe as mediaQStylePipe, propsPipe as mediaQPropsPipe } from 'reactxx-mediaq'
-import { activeFlag, activeSheet, TActivable } from 'reactxx-activable'
 
-import { Types } from '../typings/types'
-import { TAddIn } from '../typings/add-in'
 
 //const DEV_MODE = process.env.NODE_ENV === 'development'
 
@@ -18,7 +16,13 @@ import { TAddIn } from '../typings/add-in'
 const renderAddIn: RenderAddIn = {
   propsAddInPipeline: mediaQPropsPipe,
   styleAddInPipeline: (state: TRenderState, next) => mediaQStylePipe(state, animationStylePipe(state, next)),
-  //finishAddInClasses: [whenUsedFinishAddIns, animationFinishAddIns, mediaFinishAddIns],
+  finishAddInProps: { 
+    '$mediaq': mediaqFinishAddInProps 
+  },
+  finishAddInClasses: {
+    $animations: animationFinishAddInClasses,
+    '$mediaq': mediaqFinishAddInClasses
+  }
 }
 
 

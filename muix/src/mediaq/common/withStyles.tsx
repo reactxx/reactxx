@@ -12,7 +12,7 @@ import { Types } from '../typings/types';
 
 export const propsPipe = (state: TRenderState, next) =>
   mediaQFlags( // media flags, e.g. {mobile:false, tablet:true, desktop:false }
-    () => ({ $system: state.platformProps.$system as SheeterAddIns, getPropsPatches: state.getPropsPatches || (state.getPropsPatches = {}) }),
+    () => ({ addIns: state.platformProps.$system as SheeterAddIns, getPropsPatches: state.getPropsPatches || (state.getPropsPatches = {}) }),
     next)
 
 export const stylePipe = (state: TRenderState, next) =>

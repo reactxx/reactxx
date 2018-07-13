@@ -42,14 +42,16 @@ export namespace TAddIn {
     $mediaq?: TMediaQ.MediaFlags<TAddIn.getMediaQ<R>>
   }
 
-  export interface CodePropsLow<R extends Types.Shape = Types.Shape> {
+  //export interface CodePropsLow<R extends Types.Shape = Types.Shape> {
+  //  $mediaq?: TMediaQ.MediaFlags<getMediaQ<R>>
+  //}
+
+  //export interface CodePropsWeb<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> { }
+
+  //export interface CodePropsNative<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> { }
+
+  export interface CodeProps<R extends Types.Shape = Types.Shape> {
     $mediaq?: TMediaQ.MediaFlags<getMediaQ<R>>
   }
-
-  export interface CodePropsWeb<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> { }
-
-  export interface CodePropsNative<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> { }
-
-  export interface CodeProps<R extends Types.Shape = Types.Shape> extends CodePropsLow<R> { }
 
 }

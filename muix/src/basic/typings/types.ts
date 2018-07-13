@@ -3,8 +3,7 @@ import ReactN from 'react-native';
 import { TCommon, TCommonStyles } from 'reactxx-basic';
 import { Ruleset as SheeterRuleset } from 'reactxx-sheeter';
 import { TAddIn } from './add-in';
-
-
+import * as Sheeter from 'reactxx-sheeter';
 
 export namespace Types {
 
@@ -120,57 +119,93 @@ export namespace Types {
       variant?: TCommon.getVariant<R>
       mergeRulesets?: <T extends TCommonStyles.RulesetNativeIds | 'Web' | {}>(...rulesets) => TMergeRulesetsResult<T>
     } &
-    TEventsX<R> & // events passed to cross platform component, used in custom component
-    TAddIn.PropsX<R>
+    TEventsX<R>  // events passed to cross platform component, used in custom component
+  //& TAddIn.PropsX<R>
 
 
   // *** web
-  export type CodePropsWeb<R extends Shape = Shape, TCodePropsWebAddIn extends {} = {}> =
+  //export type CodePropsWeb<R extends Shape = Shape, TCodePropsWebAddIn extends {} = {}> =
+  //  Omit<TCommon.getProps<R> & TCommon.getPropsWeb<R>, omitPropNames> &
+  //  Types.OnPressAllWeb &
+  //  TAddIn.CodePropsWeb<R> &
+  //  {
+  //    $system:
+  //    {
+  //      style: TCommonStyles.RulesetWeb
+  //      classes: SheetWeb<R>
+  //    } &
+  //    CodeSystem<R>
+  //  }
+
+  type $SystemWeb<R extends Shape = Shape> = {
+    style: TCommonStyles.RulesetWeb
+    classes: SheetWeb<R>
+  }
+  export type CodePropsWeb<R extends Shape = Shape> =
     Omit<TCommon.getProps<R> & TCommon.getPropsWeb<R>, omitPropNames> &
     Types.OnPressAllWeb &
+    TAddIn.CodeProps<R> &
     {
-      $system:
-      {
-        style: TCommonStyles.RulesetWeb
-        classes: SheetWeb<R>
-      } &
-      CodeSystem<R> &
-      TAddIn.CodePropsWeb<R>
+      children?: React.ReactNode
+      $system?: $SystemLow<R> & $SystemWeb<R>
     }
-
   export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
-  // *** native
+  //// *** native
+  //export type CodePropsNative<R extends Shape = Shape> =
+  //  Omit<TCommon.getProps<R> & TCommon.getPropsNative<R>, omitPropNames> &
+  //  Types.OnPressAllNative &
+  //  TAddIn.CodePropsNative<R> &
+  //  {
+  //    $system:
+  //    {
+  //      style: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
+  //      classes: SheetNative<R>
+  //    } &
+  //    CodeSystem<R>
+  //  }
+  type $SystemNative<R extends Shape = Shape> = {
+    style: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
+    classes: SheetNative<R>
+  }
   export type CodePropsNative<R extends Shape = Shape> =
     Omit<TCommon.getProps<R> & TCommon.getPropsNative<R>, omitPropNames> &
     Types.OnPressAllNative &
+    TAddIn.CodeProps<R> &
     {
-      $system:
-      {
-        style: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
-        classes: SheetNative<R>
-      } &
-      CodeSystem<R> &
-      TAddIn.CodePropsNative<R>
+      children?: React.ReactNode
+      $system?: $SystemLow<R> & $SystemNative<R>
     }
-
   export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
 
   // *** web or native
-  export type CodeSystemProps<R extends Shape = Shape> = {
+  type $SystemLow<R extends Shape = Shape> =
+    TEventsX<R> &
+    {
+      theme?: TCommon.getTheme<R>
+      variant?: TCommon.getVariant<R>
+      mergeRulesets?: <T extends TCommonStyles.RulesetNativeIds | 'Web' | {}>(...rulesets) => TMergeRulesetsResult<T>
+      addIns?: Sheeter.AddIns,
+      $ignore?: boolean
+      $constant?: boolean
+      $developer_flag?: boolean
+      $developer_RenderCounter?: number,
+    }
+
+
+  type $System<R extends Shape = Shape> = {
     style?: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<TCommon.getStyle<R>>
     classes?: Sheet<R>
-  } &
-    CodeSystem<R> &
-    TAddIn.CodeProps<R>
+  }
 
   export type CodeProps<R extends Shape = Shape> =
     Omit<TCommon.getProps<R> & (TCommon.getPropsNative<R> | TCommon.getPropsWeb<R>), omitPropNames> &
     Types.OnPressAllNative &
     Types.OnPressAllWeb &
+    TAddIn.CodeProps<R> &
     {
+      $system?: $SystemLow<R> & $System<R>
       children?: React.ReactNode
-      $system?: CodeSystemProps<R>
     }
 
   export type PartialCodeProps = Partial<CodeProps>

@@ -1,21 +1,14 @@
-import React from 'react'
-import ReactN from 'react-native'
-
-import { LoremIpsum, TCommonStyles, TCommon, variantToString } from 'reactxx-basic'
-import { TMediaQ } from 'reactxx-mediaq'
-import { TAddIn, Types, TProvider, withStylesCreator, View, Text, Icon, AnimatedView, ScrollView, AppContainer } from 'reactxx'
-import { TComps } from 'reactxx-primitives'
-
-
+import React from 'react';
+import { AnimatedView, AppContainer, Icon, ScrollView, TAddIn, Text, Types, View, withStylesCreator } from 'reactxx';
+import { LoremIpsum, TCommon, variantToString } from 'reactxx-basic';
 //******* Two possibilities how to use get icon data:
-
 // for Typescript only. Typescript replaces e.g. MDI.Close by its value on EVERY MDI.Close's occurence.
 // for Native: MDI.Close = 'close'
 // for SVG Web: MDI.Close = 'M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z'
-import MDI from 'reactxx-mdi'
-
+import MDI from 'reactxx-mdi';
 // 'Menu' variable contains correct platform specific value 
-import { Menu } from 'reactxx-mdi/Menu'
+import { Menu } from 'reactxx-mdi/Menu';
+import { TMediaQ } from 'reactxx-mediaq';
 
 
 //************************************************************************************************************
@@ -69,7 +62,7 @@ const { Provider, Consumer } = React.createContext<TResponsibleDrawer.IconRender
 // It is parametrized by theme (not used here) and compThemePar. Default value of compThemePar is defined in withStyles HOC bellow
 const sheet: Types.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) => {
 
-  const { animationDuration, drawerWidths, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } } = variant
+  const { animationDuration, drawerWidths, $mediaq: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } } = variant
 
   return {
 
@@ -77,16 +70,14 @@ const sheet: Types.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =>
 
       mobile: { // single animation (= single Animated.Value for NATIVE), for mobile
         drawer: { // animation ruleset for specific drawer element
-          transform: [
-            { translateX: [-drawerWidths[0], 0] }
-          ],
+          transform: { translateX: [-drawerWidths[0], 0] },
         },
         backDrop: { //animation ruleset for backDrop element
           opacity: [0, 0.4], // change backDrop opacity
-          transform: [ // appear backDrop during first 0.5% of whole animation time
-            { translateX: [-5000, 0] },
-            '-0.5' // means 0%-0.5% of $duration
-          ],
+          transform: { // appear backDrop during first 0.5% of whole animation time
+            translateX: [-5000, 0],
+            time: '-0.5' // means 0%-0.5% of $duration
+          },
         },
         $duration: animationDuration,
         $opened: false, //drawer is closed by default for mobile
@@ -94,9 +85,7 @@ const sheet: Types.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =>
 
       tablet: { // tablet animation
         drawer: { // for drawer element
-          transform: [
-            { translateX: [-drawerWidths[1], 0] }
-          ],
+          transform: { translateX: [-drawerWidths[1], 0] }
         },
         content: { // for content element - change left
           left: [0, drawerWidths[1]]
@@ -143,7 +132,7 @@ const sheet: Types.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =>
 // responsibleDrawer stateless component. 
 const responsibleDrawer: Types.CodeSFC<TResponsibleDrawer.Shape> = props => {
 
-  const { $system: { mergeRulesets, classes, animations: { sheets: { tablet: animTablet, mobile: animMobile } }, mediaqFlags: { mobile: isMobile, tablet: isTablet, desktop: isDesktop } }, drawer: drawerNode, children } = props
+  const { $animations: { tablet: animTablet, mobile: animMobile }, $mediaq: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, $system: { mergeRulesets, classes }, drawer: drawerNode, children } = props
 
   const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()
@@ -155,18 +144,18 @@ const responsibleDrawer: Types.CodeSFC<TResponsibleDrawer.Shape> = props => {
 
   const backDrop = mergeRulesets<Types.ViewRulesetX>(
     classes.backDrop,
-    isMobile && animMobile.sheet.backDrop, // backDrop animation for mobile
+    isMobile && animMobile.backDrop, // backDrop animation for mobile
   )
 
   const drawer = mergeRulesets<Types.ViewRulesetX>(
     classes.drawer,
-    isMobile && animMobile.sheet.drawer, // drawer animation for mobile
-    isTablet && animTablet.sheet.drawer, // drawer animation for tablet
+    isMobile && animMobile.drawer, // drawer animation for mobile
+    isTablet && animTablet.drawer, // drawer animation for tablet
   )
 
   const content = mergeRulesets<Types.ViewRulesetX>(
     classes.content,
-    isTablet && animTablet.sheet.content, // content animation for tablet
+    isTablet && animTablet.content, // content animation for tablet
   )
 
   const closeButton = mergeRulesets<Types.TextRulesetX>(classes.closeButton)
@@ -197,8 +186,8 @@ const responsibleDrawer: Types.CodeSFC<TResponsibleDrawer.Shape> = props => {
 
 // return HOC ResponsibleDrawer component and its creator
 export const ResponsibleDrawerCreator = withStylesCreator<TResponsibleDrawer.Shape, { LayoutChanged: typeof Consumer }>(TResponsibleDrawer.Consts.Drawer, sheet, responsibleDrawer, {
-  getVariant: ({ animationDuration, $system: { mediaqFlags }, drawerWidths }) => ({ animationDuration, mediaqFlags, drawerWidths }),
-  variantToString: ({ animationDuration, mediaqFlags, drawerWidths }) => variantToString(animationDuration, mediaqFlags.mobile, mediaqFlags.tablet, mediaqFlags.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
+  getVariant: ({ animationDuration, $mediaq, drawerWidths }) => ({ animationDuration, $mediaq, drawerWidths }),
+  variantToString: ({ animationDuration, $mediaq, drawerWidths }) => variantToString(animationDuration, $mediaq.mobile, $mediaq.tablet, $mediaq.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
   defaultProps: {
     animationDuration: 300,
     drawerWidths: [250, 250, 300],
@@ -225,7 +214,7 @@ const button = { color: 'white', fontSize: 28, $web: { cursor: 'pointer' } } as 
 
 //const App: React.SFC = () => <ResponsibleDrawer className={{ $native: { marginTop: 24 } }} drawer={<Drawer/>}>
 const App: React.SFC = () => <AppContainer>
-  <ResponsibleDrawer drawer={drawer}>
+  <ResponsibleDrawer drawer={drawer} $developer_flag>
     <Content />
   </ResponsibleDrawer>
 </AppContainer>

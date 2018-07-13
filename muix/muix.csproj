@@ -391,16 +391,6 @@
     <Content Include="src\doc\home.md" />
     <Content Include="src\doc\home - Copy.md" />
     <Content Include="src\reactxx\README.md" />
-    <TypeScriptCompile Include="src\animation2\common\animation.tsx" />
-    <TypeScriptCompile Include="src\animation2\common\withStyles.tsx" />
-    <TypeScriptCompile Include="src\animation2\native\animation.tsx" />
-    <TypeScriptCompile Include="src\animation2\native\index.ts" />
-    <TypeScriptCompile Include="src\animation2\typings\add-in.ts" />
-    <TypeScriptCompile Include="src\animation2\typings\animation.ts" />
-    <TypeScriptCompile Include="src\animation2\typings\types.ts" />
-    <TypeScriptCompile Include="src\animation2\typings\typings.d.ts" />
-    <TypeScriptCompile Include="src\animation2\web\animation.tsx" />
-    <TypeScriptCompile Include="src\animation2\web\index.ts" />
     <TypeScriptCompile Include="src\ks\common\sheeter\animations-test.ts" />
     <TypeScriptCompile Include="src\ks\common\sheeter\test.ts" />
     <TypeScriptCompile Include="src\ks\common\sheeter\mediaq-test.ts" />

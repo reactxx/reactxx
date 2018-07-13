@@ -66,13 +66,18 @@ export type FinishAddIns = { [addInName: string]: FinishAddIn }
 
 export const finishProps = (root: Sheet, onFinishAddInProps: FinishAddIns) => {
   root = linearize(root) // in-place processing of $before, $web, $native and $after ruleset props
-  const res = extractPropsPatches(root) as SheetWithAddIns // extract addIn props of ruleset (starting with $, e.g. $mediaq) etc.
-  // call addIn specific finishing
-  if (res.$system && onFinishAddInProps) for (const p in res.$system) {
+  extractPropsPatches(root) as SheetWithAddIns // move props (starting with $, e.g. $mediaq) to root.$system
+  // move $ props (for which onFinishAddInProps exists) to root.$system.addIns
+  if (root.$system && onFinishAddInProps) for (const p in root.$system) {
     const finish = onFinishAddInProps[p]
-    if (finish) finish(res.$system[p])
+    if (finish) {
+      finish(root.$system[p])
+      //const addIns = root.$system.addIns || (root.$system.addIns = {})
+      //addIns[p] = finish(root.$system[p])
+      //delete root.$system[p]
+    }
   }
-  return res
+  return root
 }
 
 export const getPropsPatch = (addInsRoot: AddIns /*addInsRoot is not mutated*/, propsPatchGetters: PropsPatchGetters) => {
@@ -169,13 +174,11 @@ export const filterRulesetNames = (sheet: Sheet) => Object.keys(sheet).filter(k 
 //see processAddIn
 
 //https://stackoverflow.com/questions/1173549/how-to-determine-if-an-object-is-an-object-literal-in-javascript
-export const isObject = obj => obj && typeof obj === 'object' && !obj.$$typeof// (Object.getPrototypeOf(obj) === Object.prototype)
+export const isObject = obj => obj && typeof obj === 'object' && !obj.$$typeof && Object.getPrototypeOf(obj) === Object.prototype
 
 //****************************
 // PRIVATE
 //****************************
-
-const whenUsedAddInFilter: RulesetPatchGetter = ({ addInSheet, usedRulesetNames }) => filterRulesetNames(addInSheet).filter(key => usedRulesetNames[key]).map(key => addInSheet[key])
 
 const nameRulesets = (sheet: SheetWithAddIns) => {
   //if (!sheet.$system) return
@@ -226,7 +229,8 @@ const getPatchLow = (addInsRoot: AddIns /*addInsRoot is not mutated*/, rulesetPa
     const addInSheets = addInsRoot[addInName] // addInKey is e.g $whenUsed, $mediaq...
     // get addIn ruleset filter
     const filter = rulesetPatchGetters[addInName]
-    warning(filter, `Missing filter for ${addInName} addIn`)
+    if (!filter) continue
+    //warning(filter, `Missing filter for ${addInName} addIn`)
     for (const sheetName in addInSheets) {
       // prepare patch for single patch, patchKey = e.g. "root/:active", "add-ins/$whenUsed/add-ins/$mediaq/root/:active/480-640/b/:hover", atc
       const addInSheet = addInSheets[sheetName]

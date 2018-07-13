@@ -128,55 +128,52 @@ export namespace Types {
   export type CodePropsWeb<R extends Shape = Shape, TCodePropsWebAddIn extends {} = {}> =
     Omit<TCommon.getProps<R> & TCommon.getPropsWeb<R>, omitPropNames> &
     Types.OnPressAllWeb &
+    TAddIn.CodeProps<R> &
     {
       $system:
       {
         style: TCommonStyles.RulesetWeb
         classes: SheetWeb<R>
+        children?: React.ReactNode
       } &
-      CodeSystem<R> &
-      TAddIn.CodePropsWeb<R>
+      CodeSystem<R>
     }
-
-  export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
   // *** native
   export type CodePropsNative<R extends Shape = Shape> =
     Omit<TCommon.getProps<R> & TCommon.getPropsNative<R>, omitPropNames> &
     Types.OnPressAllNative &
+    TAddIn.CodeProps<R> &
     {
       $system:
       {
         style: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
         classes: SheetNative<R>
+        children?: React.ReactNode
       } &
-      CodeSystem<R> &
-      TAddIn.CodePropsNative<R>
+      CodeSystem<R>
     }
 
-  export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
-
   // *** web or native
-  export type CodeSystemProps<R extends Shape = Shape> = {
-    style?: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<TCommon.getStyle<R>>
-    classes?: Sheet<R>
-  } &
-    CodeSystem<R> &
-    TAddIn.CodeProps<R>
-
   export type CodeProps<R extends Shape = Shape> =
     Omit<TCommon.getProps<R> & (TCommon.getPropsNative<R> | TCommon.getPropsWeb<R>), omitPropNames> &
     Types.OnPressAllNative &
     Types.OnPressAllWeb &
+    TAddIn.CodeProps<R> &
     {
-      children?: React.ReactNode
-      $system?: CodeSystemProps<R>
+      $system?: {
+        style?: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<TCommon.getStyle<R>>
+        classes?: Sheet<R>
+        children?: React.ReactNode
+      } &
+      CodeSystem<R>
     }
 
-  export type PartialCodeProps = Partial<CodeProps>
-
-
+  export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
+  export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
   export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
+
+  export type PartialCodeProps = Partial<CodeProps>
   export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
   export type CodeComponentType<R extends Shape = Shape> = React.ComponentType<CodeProps<R>>
 

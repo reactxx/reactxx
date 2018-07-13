@@ -69,8 +69,8 @@ export const mediaqFinishAddInProps: Sheeter.FinishAddIn = (addInItem: TMediaQ.N
 
 
 // 
-export const mediaQFlags = (input: () => TMediaQ.MediaQFlags, next: () => React.ReactNode) => {
-  let pars: TMediaQ.MediaQFlags
+export const mediaQFlags = (input: () => TMediaQ.MediaQFlagsInputPar, next: () => React.ReactNode) => {
+  let pars: TMediaQ.MediaQFlagsInputPar
   const render = (activeBreakpoints: boolean[]) => {
     // https://stackoverflow.com/questions/3437786/get-the-size-of-the-screen-current-web-page-and-browser-window
     pars.getPropsPatches.$mediaq = propsPatchGetterCreator(window.innerWidth)
@@ -78,7 +78,7 @@ export const mediaQFlags = (input: () => TMediaQ.MediaQFlags, next: () => React.
   }
   const res = () => {
     pars = input()
-    return <context.Consumer unstable_observedBits={getObservedBits(pars.$system['$mediaq'] as any as TMediaQ.NotifyIntervalX)}>{render}</context.Consumer>
+    return <context.Consumer unstable_observedBits={getObservedBits(pars.addIns['$mediaq'] as any as TMediaQ.NotifyIntervalX)}>{render}</context.Consumer>
   }
   return res
 }
@@ -119,5 +119,5 @@ const propsPatchGetterCreator: (width: number) => Sheeter.PropsPatchGetter = wid
     const [beg, end] = intervals[p]
     $mediaq[p] = (!beg || beg <= width) && (!end || end > width)
   }
-  map.push({ $system: { $mediaq } })
+  map.push({ $mediaq })
 }

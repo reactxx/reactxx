@@ -30,9 +30,7 @@ const expandedPanelSheet: Types.SheetCreatorX<DocHome.ExpandedPanelShape> = {
         height: [0, 50],
       },
       icon: {
-        transform: [
-          { rotate: ['0deg', '180deg'] }
-        ]
+        transform: { rotate: ['0deg', '180deg'] }
       },
       $duration: 400,
       $opened: false,
@@ -79,11 +77,11 @@ const expandedPanelSheet: Types.SheetCreatorX<DocHome.ExpandedPanelShape> = {
 //modifyThemeStates(state, null, theme => [modifyThemeState<ReactXX.TextShape>(state, theme, ReactXX.CompNames.Text, (theme, par) => ({ root: headerLabelStyle }))])}
 
 const expandedPanel: Types.CodeSFC<DocHome.ExpandedPanelShape> = props => {
-  const { $system: { mergeRulesets, style, classes, theme, animations: { sheets: { openClose } } }, title, children, ...rest } = props
+  const { $system: { mergeRulesets, style, classes, theme }, $animations: { openClose }, title, children, ...rest } = props
   const rootStyle = mergeRulesets<Types.ViewRulesetX>(classes.root)
   const headerStyle = mergeRulesets<Types.ViewRulesetX>(classes.header)
-  const contentStyle = mergeRulesets<Types.ViewRulesetX>(classes.content, openClose.sheet.content)
-  const iconStyle = mergeRulesets<Types.TextRulesetX>(classes.icon, openClose.sheet.icon)
+  const contentStyle = mergeRulesets<Types.ViewRulesetX>(classes.content, openClose.content)
+  const iconStyle = mergeRulesets<Types.TextRulesetX>(classes.icon, openClose.icon)
   const headerLabelStyle = mergeRulesets<Types.TextRulesetX>(classes.headerLabel)
 
   return <View className={rootStyle} style={style as Types.ViewRulesetX}>
