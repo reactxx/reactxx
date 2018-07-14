@@ -162,7 +162,7 @@ const responsibleDrawer: Types.CodeSFC<TResponsibleDrawer.Shape> = props => {
 
   const openButton = mergeRulesets<Types.TextRulesetX>(
     classes.openButton,
-    { display: (isTablet && animTablet.opened) || isDesktop ? 'none' : 'flex' }
+    { display: (isTablet && animTablet.$pars.opened) || isDesktop ? 'none' : 'flex' }
   )
 
   return <View className={root}>
@@ -234,7 +234,7 @@ const drawer = <Drawer />
 
 const Content: React.SFC = () => {
   return <ScrollView $constant classes={{ container: { flex: 1 } }}> {/* content */}
-    <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}>
+    <View className={{ flexDirection: 'row', alignItems: 'center', height: 48, backgroundColor: 'blue', padding: 10 }}> 
       {/* re-render ResponsibleDrawer.LayoutChanged only when Provider notifies (hide x display it): */}
       <ResponsibleDrawer.LayoutChanged>
         {({ style, onPress, iconData }) => <Icon className={{ ...button, ...style }} onPress={onPress} data={iconData} />}

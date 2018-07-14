@@ -24,7 +24,7 @@ export namespace TAnimation {
   export interface AnimationsEx { reset: (exceptOf?: Driver<{}>) => void }
 
   export type Driver<T extends Shape = Shape> = {
-    opened: boolean
+    $pars: { opened:boolean }
     open()
     close()
     set(isOpen: boolean)

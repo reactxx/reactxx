@@ -141,6 +141,8 @@ export const getSystemPipes = <R extends Types.Shape>(
     // **** apply sheet patch to sheet:
     // call sheet creator, merges it with sheet patch
     const codeClasses = getPlatformSheet({ expandCreator, componentId, finishAddInClasses: addIns.finishAddInClasses, createSheetX, $cache: renderState.themeContext.$cache, sheetXPatch, defaultClasses, cacheId })
+    if (codeClasses.$system && codeClasses.$system['$whenUsed'])
+      (renderState.getClassesPatches || (renderState.getClassesPatches = {}))['$whenUsed'] = Sheeter.whenUsedRulesetFilter
     //renderState.addInClasses = addInClasses //e.g {$animations:..., root: {$mediaq:...}}
     renderState.finalProps.$system.classes = codeClasses
   }

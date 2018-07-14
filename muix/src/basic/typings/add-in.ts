@@ -3,28 +3,28 @@ import { TCommonStyles } from './common-styles';
 import { Types } from './types';
 
 
-export namespace TAddIn {
+export namespace TAddIn { 
 
   /******************************************
     RULESETX & SHEETX
   *******************************************/
 
   //******************** Cross platform
-  export namespace TWhenUsed {
-    export type PartialSheetX<R extends Types.Shape = Types.Shape, T extends TCommonStyles.RulesetNativeIds = 'Text'> =
-      SheetXCommon<R, T> & SheetXNative<R, T> & SheetXWeb<R, T>
+  //export namespace TWhenUsed {
+  //  export type PartialSheetX<R extends Types.Shape = Types.Shape, T extends TCommonStyles.RulesetNativeIds = 'Text'> =
+  //    SheetXCommon<R, T> & SheetXNative<R, T> & SheetXWeb<R, T>
 
-    export type SheetXCommon<R extends Types.Shape = Types.Shape, T extends TCommonStyles.RulesetNativeIds = 'Text'> =
-      { [P in keyof TCommon.getCommon<R>]?: Partial<Types.RulesetXPure<T>> }
-    export type SheetXNative<R extends Types.Shape = Types.Shape, T extends TCommonStyles.RulesetNativeIds = 'Text'> =
-      { [P in keyof TCommon.getNative<R>]?: { $native?: TCommonStyles.RulesetNative<TCommon.getNative<R>[P]> } }
-    export type SheetXWeb<R extends Types.Shape = Types.Shape, T extends TCommonStyles.RulesetNativeIds = 'Text'> =
-      { [P in TCommon.getWeb<R>]?: { $web?: TCommonStyles.RulesetWeb } }
-  }
+  //  export type SheetXCommon<R extends Types.Shape = Types.Shape, T extends TCommonStyles.RulesetNativeIds = 'Text'> =
+  //    { [P in keyof TCommon.getCommon<R>]?: Partial<Types.RulesetXPure<T>> }
+  //  export type SheetXNative<R extends Types.Shape = Types.Shape, T extends TCommonStyles.RulesetNativeIds = 'Text'> =
+  //    { [P in keyof TCommon.getNative<R>]?: { $native?: TCommonStyles.RulesetNative<TCommon.getNative<R>[P]> } }
+  //  export type SheetXWeb<R extends Types.Shape = Types.Shape, T extends TCommonStyles.RulesetNativeIds = 'Text'> =
+  //    { [P in TCommon.getWeb<R>]?: { $web?: TCommonStyles.RulesetWeb } }
+  //}
 
 
   export interface RulesetAddInX<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Types.Shape = Types.Shape> {
-    $whenUsed?: TWhenUsed.PartialSheetX<R, T>
+    $whenUsed?: Types.PartialSheetX<R>
   }
   export interface SheetX<R extends Types.Shape = Types.Shape> { }
 

@@ -100,7 +100,8 @@ export const getPropsPatch = (addInsRoot: AddIns /*addInsRoot is not mutated*/, 
 // transform sheet to mergable and patchable form. !!! root is mutated !!!
 export const toPatchableAndMergeable = (root: Sheet) => {
   root = linearize(root) // in-place processing of $before, $web, $native and $after ruleset props
-  return extractPatches(root, root as SheetWithAddIns, []) as SheetWithAddIns // extract addIn props of ruleset (starting with $, e.g. $mediaq) etc.
+  const res = extractPatches(root, root as SheetWithAddIns, []) as SheetWithAddIns // extract addIn props of ruleset (starting with $, e.g. $mediaq) etc.
+  return res
 }
 
 // merging patchable and mergeable sheets
@@ -238,6 +239,7 @@ const getPatchLow = (addInsRoot: AddIns /*addInsRoot is not mutated*/, rulesetPa
       const isAddIn = patchPath[0] === Consts.$system // path starts with addIns/...
       if (!canModify && isAddIn) throw getPatchLowWithDeepClone // cannot modify and patch of addIn occurred => try again with canModify=true (I think that aAddIn recursion will be rare)
 
+      //const rulesets = filter({ addInSheet: addInSheets as any, usedRulesetNames })
       const rulesets = filter({ addInSheet, usedRulesetNames })
       if (!rulesets || rulesets.length === 0) continue
 
