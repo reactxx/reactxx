@@ -133,18 +133,13 @@ const remove = (root, path: string) => {
         const isDelete = idx === parts.length - 1
         if (part.charAt(0) === '#') {
             const actIdx = parseInt(part.substr(1))
-            if (isDelete) (root as Array<any>).splice(actIdx, 1)
+            if (isDelete) (root as Array<any>).splice(actIdx, 1);
             else root = root[actIdx]
         } else {
             if (isDelete) delete root[part]
             else root = root[part]
         }
     })
-}
-
-const replaceCommentValue = (ast, path:string, value: string) => {
-    const root = navigate(ast, path)
-    root.value = value
 }
 
 const ast = parse(code, { sourceType: 'module', plugins: ['jsx', 'objectRestSpread'] });
@@ -160,10 +155,6 @@ const parent = (qpath: string, level: number = 1) => {
     return level === 0 ? qpath : qpath.split('/').slice(0, -level).join('/')
 }
 
-replaceCommentValue(ast, subNodes[0].$path, 'XXX')
-replaceCommentValue(ast, subNodes[1].$path, 'YYY')
-replaceCommentValue(ast, subNodes[2].$path, 'ZZZ')
-
 const subNodesJSON = JSON.stringify(subNodes, null, 2)
 const x = navigateAll(ast, subNodes[1].$path)
 
@@ -173,7 +164,7 @@ const dump = JSON.stringify(toRemove, null, 2)
 
 
 const importClassNames = astq.query(ast, '// ImportDeclaration [ /ImportDefaultSpecifier/Identifier [@name == "classNames"] ]')
-remove(ast, importClassNames[0].$path)
+remove(ast, importClassNames[0].$path) //, '*** REACTXX PATCH: remove classNames import')
 
 const buttonFunction = astq.query(ast, '// Program/FunctionDeclaration [ /Identifier [@name == "Button"] ]')
 const selectProps = astq.query(buttonFunction[0], '/BlockStatement/VariableDeclaration/VariableDeclarator [ /Identifier [@name == "props"] ]')
@@ -194,11 +185,11 @@ const place = selectProps[0].id.properties;
       "name": "classNames"
     },
     "trailingComments": [
-        {
-          "type": "CommentBlock",
-          "value": "REACTXX: select classNames from props"
-        }
-      ]    
+      {
+        "type": "CommentBlock",
+        "value": "*** REACTXX PATCH: select classNames from props"
+      }
+    ]  
   }
 `))
 
@@ -225,7 +216,13 @@ className[0].value = JSON.parse(`{
           },
           "computed": false
         }
-      ]
+      ],
+      "trailingComments": [
+        {
+          "type": "CommentBlock",
+          "value": "*** REACTXX PATCH: wrap class with classNames"
+        }
+      ]  
     }
   }`)
 
