@@ -12,7 +12,7 @@ import { animations } from './animation';
 
 export const stylePipe = (state: TRenderState, next) =>
   animations( // process animation $animations addin of sheet
-    () => state.finalProps.$system.classes.$system && state.finalProps.$system.classes.$system['$animations'],
+    () => state.finalProps.classes.$system && state.finalProps.classes.$system['$animations'],
     animations => animations && (state.finalProps['$animations'] = animations),
     next
   )

@@ -391,6 +391,7 @@ export const immutableMerge = (sources: Node[]) => {
       case 2: dest = { ...dest } // !!! does not break thi case, continue with merging on flat clone
       default: // merge flat cloned dest with src
         for (const propName in src) {
+          if (propName.charAt(0)==='#') continue
           const destp = dest[propName], srcp = src[propName] as Node
           if (!destp) { dest[propName] = srcp; continue } // set first scalar or object
           const isDestpObj = isObject(destp), isSrcpObj = isObject(srcp)

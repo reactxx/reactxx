@@ -124,57 +124,28 @@ export namespace Types {
 
 
   // *** web
-  //export type CodePropsWeb<R extends Shape = Shape, TCodePropsWebAddIn extends {} = {}> =
-  //  Omit<TCommon.getProps<R> & TCommon.getPropsWeb<R>, omitPropNames> &
-  //  Types.OnPressAllWeb &
-  //  TAddIn.CodePropsWeb<R> &
-  //  {
-  //    $system:
-  //    {
-  //      style: TCommonStyles.RulesetWeb
-  //      classes: SheetWeb<R>
-  //    } &
-  //    CodeSystem<R>
-  //  }
-
-  type $SystemWeb<R extends Shape = Shape> = {
-    style: TCommonStyles.RulesetWeb
-    classes: SheetWeb<R>
-  }
   export type CodePropsWeb<R extends Shape = Shape> =
     Omit<TCommon.getProps<R> & TCommon.getPropsWeb<R>, omitPropNames> &
     Types.OnPressAllWeb &
     TAddIn.CodeProps<R> &
     {
+      style: TCommonStyles.RulesetWeb
+      classes: SheetWeb<R>
       children?: React.ReactNode
-      $system?: $SystemLow<R> & $SystemWeb<R>
+      $system?: $SystemLow<R>
     }
   export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
   //// *** native
-  //export type CodePropsNative<R extends Shape = Shape> =
-  //  Omit<TCommon.getProps<R> & TCommon.getPropsNative<R>, omitPropNames> &
-  //  Types.OnPressAllNative &
-  //  TAddIn.CodePropsNative<R> &
-  //  {
-  //    $system:
-  //    {
-  //      style: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
-  //      classes: SheetNative<R>
-  //    } &
-  //    CodeSystem<R>
-  //  }
-  type $SystemNative<R extends Shape = Shape> = {
-    style: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
-    classes: SheetNative<R>
-  }
   export type CodePropsNative<R extends Shape = Shape> =
     Omit<TCommon.getProps<R> & TCommon.getPropsNative<R>, omitPropNames> &
     Types.OnPressAllNative &
     TAddIn.CodeProps<R> &
     {
+      style: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
+      classes: SheetNative<R>
       children?: React.ReactNode
-      $system?: $SystemLow<R> & $SystemNative<R>
+      $system?: $SystemLow<R> 
     }
   export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
 
@@ -193,19 +164,16 @@ export namespace Types {
     }
 
 
-  type $System<R extends Shape = Shape> = {
-    style?: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<TCommon.getStyle<R>>
-    classes?: Sheet<R>
-  }
-
   export type CodeProps<R extends Shape = Shape> =
     Omit<TCommon.getProps<R> & (TCommon.getPropsNative<R> | TCommon.getPropsWeb<R>), omitPropNames> &
     Types.OnPressAllNative &
     Types.OnPressAllWeb &
     TAddIn.CodeProps<R> &
     {
-      $system?: $SystemLow<R> & $System<R>
+      $system?: $SystemLow<R>
       children?: React.ReactNode
+      style?: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<TCommon.getStyle<R>>
+      classes?: Sheet<R>
     }
 
   export type PartialCodeProps = Partial<CodeProps>

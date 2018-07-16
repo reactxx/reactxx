@@ -56,7 +56,7 @@ const labelSheet: Types.SheetCreatorX<Shape> = ({ color: { main, dark, constrast
   },
 })
 
-const label: Types.CodeSFC<Shape> = ({ $system: { mergeRulesets, classes, style }, children}) => {
+const label: Types.CodeSFC<Shape> = ({ $system: { mergeRulesets }, classes, style, children}) => {
   const root = mergeRulesets<Types.ViewRulesetX>(classes.root)
   const label = mergeRulesets<Types.TextRulesetX>(classes.label)
   return <View className={root} style={style as Types.ViewRulesetX}>
@@ -97,7 +97,7 @@ const badgeSheet: Types.SheetCreatorX<Shape> = ({ color: { dark, constrastText }
   },
 })
 
-const badge: Types.CodeSFC<Shape> = ({ $system: { mergeRulesets, classes, style }, children }) => {
+const badge: Types.CodeSFC<Shape> = ({ $system: { mergeRulesets }, classes, style, children }) => {
   const root = mergeRulesets<Types.ViewRulesetX>(classes.root)
   const label = mergeRulesets<Types.TextRulesetX>(classes.label) 
   return <View className={root} style={style as Types.ViewRulesetX}>

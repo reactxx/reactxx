@@ -43,7 +43,7 @@ export interface SheetExtension extends AnimationConfig {
   [Consts.data]: AnimationConfig & { useNativeDriver?: boolean }
 }
 
- type AnimRuleseLow = { [fieldName: string]: [number, number] | [number, number, string] | [string, string] | [string, string, string] }
+type AnimRuleseLow = { [fieldName: string]: [number, number] | [number, number, string] | [string, string] | [string, string, string] }
 
 export type AnimRuleset = AnimRuleseLow & { transform?: AnimTransform }
 

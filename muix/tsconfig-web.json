@@ -1,14 +1,13 @@
 ﻿{
   "compileOnSave": true,
   "compilerOptions": {
+    "watch": true,
     "target": "es5",
     "module": "system",
     "moduleResolution": "node",
 
     "allowJs": true,
     //"declaration": true,
-
-    //"traceResolution": true,
 
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

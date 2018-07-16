@@ -132,7 +132,7 @@ const sheet: Types.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =>
 // responsibleDrawer stateless component. 
 const responsibleDrawer: Types.CodeSFC<TResponsibleDrawer.Shape> = props => {
 
-  const { $animations: { tablet: animTablet, mobile: animMobile }, $mediaq: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, $system: { mergeRulesets, classes }, drawer: drawerNode, children } = props
+  const { $animations: { tablet: animTablet, mobile: animMobile }, $mediaq: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, $system: { mergeRulesets }, classes, drawer: drawerNode, children } = props
 
   const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()

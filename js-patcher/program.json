@@ -1,0 +1,495 @@
+{
+    "type": "File",
+    "program": {
+      "type": "Program",
+      "body": [
+        {
+          "type": "ImportDeclaration",
+          "specifiers": [
+            {
+              "type": "ImportSpecifier",
+              "imported": {
+                "type": "Identifier",
+                "name": "parse"
+              },
+              "local": {
+                "type": "Identifier",
+                "name": "parse"
+              }
+            }
+          ],
+          "source": {
+            "type": "StringLiteral",
+            "extra": {
+              "rawValue": "@babel/parser",
+              "raw": "'@babel/parser'"
+            },
+            "value": "@babel/parser"
+          }
+        },
+        {
+          "type": "ImportDeclaration",
+          "specifiers": [
+            {
+              "type": "ImportDefaultSpecifier",
+              "local": {
+                "type": "Identifier",
+                "name": "generate"
+              }
+            }
+          ],
+          "source": {
+            "type": "StringLiteral",
+            "extra": {
+              "rawValue": "@babel/generator",
+              "raw": "'@babel/generator'"
+            },
+            "value": "@babel/generator"
+          }
+        },
+        {
+          "type": "VariableDeclaration",
+          "declarations": [
+            {
+              "type": "VariableDeclarator",
+              "id": {
+                "type": "Identifier",
+                "name": "code"
+              },
+              "init": {
+                "type": "StringLiteral",
+                "extra": {
+                  "rawValue": "",
+                  "raw": "''"
+                },
+                "value": ""
+              }
+            }
+          ],
+          "kind": "const"
+        },
+        {
+          "type": "VariableDeclaration",
+          "declarations": [
+            {
+              "type": "VariableDeclarator",
+              "id": {
+                "type": "Identifier",
+                "name": "ast"
+              },
+              "init": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "Identifier",
+                  "name": "parse"
+                },
+                "arguments": [
+                  {
+                    "type": "Identifier",
+                    "name": "code"
+                  }
+                ]
+              }
+            }
+          ],
+          "kind": "const"
+        },
+        {
+          "type": "VariableDeclaration",
+          "declarations": [
+            {
+              "type": "VariableDeclarator",
+              "id": {
+                "type": "Identifier",
+                "name": "ignores"
+              },
+              "init": {
+                "type": "ObjectExpression",
+                "properties": [
+                  {
+                    "type": "ObjectProperty",
+                    "method": false,
+                    "key": {
+                      "type": "Identifier",
+                      "name": "start"
+                    },
+                    "computed": false,
+                    "shorthand": false,
+                    "value": {
+                      "type": "BooleanLiteral",
+                      "value": true
+                    }
+                  },
+                  {
+                    "type": "ObjectProperty",
+                    "method": false,
+                    "key": {
+                      "type": "Identifier",
+                      "name": "end"
+                    },
+                    "computed": false,
+                    "shorthand": false,
+                    "value": {
+                      "type": "BooleanLiteral",
+                      "value": true
+                    }
+                  },
+                  {
+                    "type": "ObjectProperty",
+                    "method": false,
+                    "key": {
+                      "type": "Identifier",
+                      "name": "loc"
+                    },
+                    "computed": false,
+                    "shorthand": false,
+                    "value": {
+                      "type": "BooleanLiteral",
+                      "value": true
+                    }
+                  },
+                  {
+                    "type": "ObjectProperty",
+                    "method": false,
+                    "key": {
+                      "type": "Identifier",
+                      "name": "sourceType"
+                    },
+                    "computed": false,
+                    "shorthand": false,
+                    "value": {
+                      "type": "BooleanLiteral",
+                      "value": true
+                    }
+                  },
+                  {
+                    "type": "ObjectProperty",
+                    "method": false,
+                    "key": {
+                      "type": "Identifier",
+                      "name": "interpreter"
+                    },
+                    "computed": false,
+                    "shorthand": false,
+                    "value": {
+                      "type": "BooleanLiteral",
+                      "value": true
+                    }
+                  },
+                  {
+                    "type": "ObjectProperty",
+                    "method": false,
+                    "key": {
+                      "type": "Identifier",
+                      "name": "directives"
+                    },
+                    "computed": false,
+                    "shorthand": false,
+                    "value": {
+                      "type": "BooleanLiteral",
+                      "value": true
+                    }
+                  },
+                  {
+                    "type": "ObjectProperty",
+                    "method": false,
+                    "key": {
+                      "type": "Identifier",
+                      "name": "comments"
+                    },
+                    "computed": false,
+                    "shorthand": false,
+                    "value": {
+                      "type": "BooleanLiteral",
+                      "value": true
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "kind": "const"
+        },
+        {
+          "type": "FunctionDeclaration",
+          "id": {
+            "type": "Identifier",
+            "name": "removeIgnored"
+          },
+          "generator": false,
+          "async": false,
+          "params": [
+            {
+              "type": "Identifier",
+              "name": "root"
+            }
+          ],
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ForInStatement",
+                "left": {
+                  "type": "VariableDeclaration",
+                  "declarations": [
+                    {
+                      "type": "VariableDeclarator",
+                      "id": {
+                        "type": "Identifier",
+                        "name": "p"
+                      },
+                      "init": null
+                    }
+                  ],
+                  "kind": "const"
+                },
+                "right": {
+                  "type": "Identifier",
+                  "name": "root"
+                },
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "VariableDeclaration",
+                      "declarations": [
+                        {
+                          "type": "VariableDeclarator",
+                          "id": {
+                            "type": "Identifier",
+                            "name": "value"
+                          },
+                          "init": {
+                            "type": "MemberExpression",
+                            "object": {
+                              "type": "Identifier",
+                              "name": "root"
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "p"
+                            },
+                            "computed": true
+                          }
+                        }
+                      ],
+                      "kind": "const"
+                    },
+                    {
+                      "type": "IfStatement",
+                      "test": {
+                        "type": "UnaryExpression",
+                        "operator": "!",
+                        "prefix": true,
+                        "argument": {
+                          "type": "MemberExpression",
+                          "object": {
+                            "type": "Identifier",
+                            "name": "ignores"
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "p"
+                          },
+                          "computed": true
+                        }
+                      },
+                      "consequent": {
+                        "type": "BlockStatement",
+                        "body": [
+                          {
+                            "type": "IfStatement",
+                            "test": {
+                              "type": "LogicalExpression",
+                              "left": {
+                                "type": "Identifier",
+                                "name": "value"
+                              },
+                              "operator": "&&",
+                              "right": {
+                                "type": "BinaryExpression",
+                                "left": {
+                                  "type": "UnaryExpression",
+                                  "operator": "typeof",
+                                  "prefix": true,
+                                  "argument": {
+                                    "type": "Identifier",
+                                    "name": "value"
+                                  }
+                                },
+                                "operator": "===",
+                                "right": {
+                                  "type": "StringLiteral",
+                                  "extra": {
+                                    "rawValue": "object",
+                                    "raw": "'object'"
+                                  },
+                                  "value": "object"
+                                }
+                              }
+                            },
+                            "consequent": {
+                              "type": "ExpressionStatement",
+                              "expression": {
+                                "type": "CallExpression",
+                                "callee": {
+                                  "type": "Identifier",
+                                  "name": "removeIgnored"
+                                },
+                                "arguments": [
+                                  {
+                                    "type": "Identifier",
+                                    "name": "value"
+                                  }
+                                ]
+                              }
+                            },
+                            "alternate": null
+                          }
+                        ]
+                      },
+                      "alternate": {
+                        "type": "ExpressionStatement",
+                        "expression": {
+                          "type": "UnaryExpression",
+                          "operator": "delete",
+                          "prefix": true,
+                          "argument": {
+                            "type": "MemberExpression",
+                            "object": {
+                              "type": "Identifier",
+                              "name": "root"
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "p"
+                            },
+                            "computed": true
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "ExpressionStatement",
+          "expression": {
+            "type": "CallExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "removeIgnored"
+            },
+            "arguments": [
+              {
+                "type": "Identifier",
+                "name": "ast"
+              }
+            ]
+          }
+        },
+        {
+          "type": "VariableDeclaration",
+          "declarations": [
+            {
+              "type": "VariableDeclarator",
+              "id": {
+                "type": "Identifier",
+                "name": "json"
+              },
+              "init": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "MemberExpression",
+                  "object": {
+                    "type": "Identifier",
+                    "name": "JSON"
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "stringify"
+                  },
+                  "computed": false
+                },
+                "arguments": [
+                  {
+                    "type": "Identifier",
+                    "name": "ast"
+                  },
+                  {
+                    "type": "NullLiteral"
+                  },
+                  {
+                    "type": "NumericLiteral",
+                    "extra": {
+                      "rawValue": 2,
+                      "raw": "2"
+                    },
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ],
+          "kind": "const"
+        },
+        {
+          "type": "VariableDeclaration",
+          "declarations": [
+            {
+              "type": "VariableDeclarator",
+              "id": {
+                "type": "Identifier",
+                "name": "output"
+              },
+              "init": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "Identifier",
+                  "name": "generate"
+                },
+                "arguments": [
+                  {
+                    "type": "Identifier",
+                    "name": "ast"
+                  },
+                  {
+                    "type": "ObjectExpression",
+                    "properties": [],
+                    "innerComments": [
+                      {
+                        "type": "CommentBlock",
+                        "value": " options "
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Identifier",
+                    "name": "code"
+                  }
+                ]
+              }
+            }
+          ],
+          "kind": "let"
+        },
+        {
+          "type": "ExpressionStatement",
+          "expression": {
+            "type": "AssignmentExpression",
+            "operator": "=",
+            "left": {
+              "type": "Identifier",
+              "name": "output"
+            },
+            "right": {
+              "type": "NullLiteral"
+            }
+          }
+        }
+      ]
+    }
+  }

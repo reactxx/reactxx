@@ -60,7 +60,7 @@ const sheet: Types.SheetX<Shape> = {
 class label extends React.Component<Types.CodeProps<Shape>, { disabled: boolean }> {
   state = { disabled: this.props.disabled }
   render() {
-    const { state: { disabled }, props: { children, $system: { mergeRulesets, classes } } } = this
+    const { state: { disabled }, props: { children, $system: { mergeRulesets }, classes } } = this
     const root = mergeRulesets<Types.ViewRulesetX>(classes.root)
     const header = mergeRulesets<Types.TextRulesetX>(classes.header, disabled && classes.disabled)
     const label = mergeRulesets<Types.TextRulesetX>(classes.label, disabled && classes.disabled)

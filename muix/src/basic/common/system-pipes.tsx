@@ -128,7 +128,7 @@ export const getSystemPipes = <R extends Types.Shape>(
     const toMergeStylesCreators = window.isWeb && separatedStyles.style.length > 0 ? separatedStyles.style : null
     const toMergeStylesX: Sheeter.SheetWithAddIns[] = !toMergeStylesCreators ? null : toMergeStylesCreators.map(creator => expandCreator(creator))
 
-    if (toMergeStylesX) system.style = toMergeStylesX.length === 1 ? toMergeStylesX[0] : Sheeter.deepMerges({}, toMergeStylesX)
+    if (toMergeStylesX) finalProps.style = toMergeStylesX.length === 1 ? toMergeStylesX[0] : Sheeter.deepMerges({}, toMergeStylesX)
 
     // **** sheet patch (for native: style included)
     const toMergeSheetCreators = [
@@ -144,7 +144,7 @@ export const getSystemPipes = <R extends Types.Shape>(
     if (codeClasses.$system && codeClasses.$system['$whenUsed'])
       (renderState.getClassesPatches || (renderState.getClassesPatches = {}))['$whenUsed'] = Sheeter.whenUsedRulesetFilter
     //renderState.addInClasses = addInClasses //e.g {$animations:..., root: {$mediaq:...}}
-    renderState.finalProps.$system.classes = codeClasses
+    renderState.finalProps.classes = codeClasses
   }
 
   const propsPipe = (input: () => { props: Types.PropsX, renderState: TRenderStateEx }, output: (par: Types.CodeProps) => void, next: () => React.ReactNode) => {
@@ -157,7 +157,7 @@ export const getSystemPipes = <R extends Types.Shape>(
       const inp = input()
       props = inp.props; renderState = inp.renderState
       if (options.withCascading) return <CascadingConsumer>{render}</CascadingConsumer>
-      output(toPlatformProps(null, {...props}, renderState))
+      output(toPlatformProps(null, { ...props }, renderState))
       return next()
     }
     return res
@@ -173,7 +173,7 @@ export const getSystemPipes = <R extends Types.Shape>(
 
   const renderComponentPipe = (renderState: TRenderState, CodeComponent: Types.CodeComponentType) => () => {
 
-    const { finalProps, finalProps: { $system }, getClassesPatches } = renderState
+    const { finalProps, finalProps: { classes, $system }, getClassesPatches } = renderState
 
     if ($system.$developer_flag) {
       const { themeContext } = renderState
@@ -187,7 +187,7 @@ export const getSystemPipes = <R extends Types.Shape>(
     // method, called in component code: ruleset merging
     $system.mergeRulesets = (...rulesets: Sheeter.Ruleset[]) => {
       const res = Sheeter.mergeRulesetsForCode(
-        $system.classes as Sheeter.SheetWithAddIns,
+        classes as Sheeter.SheetWithAddIns,
         getClassesPatches,
         rulesets
       ) as Types.TMergeRulesetsResult<any>
@@ -198,6 +198,17 @@ export const getSystemPipes = <R extends Types.Shape>(
         )
       }
       return res
+    }
+
+    if (options.isMui) {
+      for (const p in finalProps.classes) {
+        finalProps.classes[p] = {
+          ...finalProps.classes[p],
+          toString: () => p,
+          '#classes': classes,
+          '#getClassesPatches': getClassesPatches,
+        }
+      }
     }
 
     //console.log('*** render code: ', renderState.$developer_id)

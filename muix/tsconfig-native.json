@@ -1,6 +1,7 @@
 ﻿{
   "compileOnSave": true,
   "compilerOptions": {
+    "moduleResolution": "node",
     "target": "es2017",
     "rootDir": "src",
     "outDir": "deploy/es",
@@ -34,7 +35,6 @@
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
     "downlevelIteration": true,
-    "moduleResolution": "node",
     "strict": true,
     "noImplicitReturns": true,
     "strictFunctionTypes": false,

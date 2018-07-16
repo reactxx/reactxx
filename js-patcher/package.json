@@ -1,0 +1,33 @@
+{
+  "name": "js-patcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/generator": "^7.0.0-beta.53",
+    "@babel/parser": "^7.0.0-beta.53",
+    "@types/glob": "^5.0.35",
+    "@types/js-beautify": "0.0.31",
+    "@types/node": "^10.5.2",
+    "@types/prettier": "^1.13.1",
+    "astq": "^2.3.4",
+    "glob": "^7.1.2",
+    "js-beautify": "^1.7.5",
+    "prettier": "^1.13.7"
+  },
+  "dependencies": {
+    "@types/escodegen": "0.0.6",
+    "@types/esprima": "^4.0.2",
+    "acorn-jsx": "^4.1.1",
+    "escodegen": "^1.11.0",
+    "escodegen.jsx": "^0.1.0",
+    "esprima": "^4.0.1",
+    "jsx-transpiler": "^0.1.4",
+    "prettydiff": "^99.0.1"
+  }
+}

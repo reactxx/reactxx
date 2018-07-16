@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "watch": true,
+    "target": "es2017",
+    "moduleResolution": "node",
+    "module": "commonjs",
+
+    "inlineSourceMap": true,
+    //"inlineSources": true,
+    "importHelpers": true,
+
+    "strictNullChecks": false,
+    "downlevelIteration": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "noImplicitAny": false,
+
+    "outDir": "deploy",
+
+    "lib": [
+      "dom",
+      "es2015",
+      "esnext.asynciterable"
+    ]
+  }
+}
