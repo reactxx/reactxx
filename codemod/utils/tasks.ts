@@ -11,15 +11,17 @@ Ast.astq.func("isHTMLTag", (adapter, node, par) => {
     return first === first.toLowerCase()
 })
 
-export const getNode_importPackage = (ast: Ast.Ast, name: string) => Ast.astq.query(ast, `// ImportDeclaration [ /ImportDefaultSpecifier/Identifier [@name == "${name}"] ]`)
+export const getNode_importPackage = (ast: Ast.Ast, name: string) => Ast.astq.query(ast, 
+    `// ImportDeclaration [ /ImportDefaultSpecifier/Identifier [@name == "${name}"] ]`)
 
-export const getNode_functionGlobal = (ast: Ast.Ast, name: string) => Ast.astq.query(ast, `// Program/FunctionDeclaration [ /Identifier [@name == "${name}"] ]`)
+export const getNode_functionGlobal = (ast: Ast.Ast, name: string) => Ast.astq.query(ast, 
+    `// Program/FunctionDeclaration [ /Identifier [@name == "${name}"] ]`)
 
-export const getNode_class = (ast: Ast.Ast, name: string) => Ast.astq.query(ast, `// Program/ClassDeclaration [ /Identifier [@name == "${name}"] ]`)
+export const getNode_class = (ast: Ast.Ast, name: string) => Ast.astq.query(ast, 
+    `// Program/ClassDeclaration [ /Identifier [@name == "${name}"] ]`)
 
-export const getNode_classMethod = (ast: Ast.Ast, className: string, methodName) => { 
-    return Ast.astq.query(checkSingleResult(getNode_class (ast,className)), `// ClassMethod/Identifier [ @name == "${methodName}"]`)
-}
+export const getNode_classMethod = (ast: Ast.Ast, className: string, methodName) => Ast.astq.query(ast, 
+    `// Program/ClassDeclaration [ /Identifier [@name == "${className}"] ] // ClassMethod [ /Identifier [ @name == "${methodName}"] ]`)
 
 export const checkSingleResult = (res: Ast.Ast[]) => {
     warning(res && res.length === 1, 'checkSingle: single result expected')
@@ -44,9 +46,9 @@ export const adjustHtmlClassName = (root: Ast.Ast, functionName: string) => {
 
 export const selectClassNamesFromProps = (root: Ast.Ast, functionName: string) => {
     let func = getNode_functionGlobal(root, functionName)
-    if (!func || func.length!=1) func = checkSingleResult(getNode_classMethod(root, functionName, 'render'))
-    const selectProps = Ast.astq.query(func, '/BlockStatement/VariableDeclaration/VariableDeclarator [ /Identifier [@name == "props"] ]')
-    const place = selectProps[0].id.properties;
+    func = func && func.length==1 ? func[0] : checkSingleResult (getNode_classMethod(root, functionName, 'render'))
+    const selectProps = checkSingleResult(Ast.astq.query(func.body, '/VariableDeclaration/VariableDeclarator [ /Identifier [@name == "props"] ]'))
+    const place = selectProps.id.properties;
     (place as Array<any>).splice(0, 0, JSON.parse(`
     {
         "type": "ObjectProperty",
@@ -71,7 +73,9 @@ export const selectClassNamesFromProps = (root: Ast.Ast, functionName: string) =
     `))
 }
 
-let res = getNode_classMethod(Parser.parseCode('class Test { render() { const {classNames} = props } }'), 'Test', 'render')
+// let res
+// res = selectClassNamesFromProps(Parser.parseCode('function Test () { const {classNames} = props }'), 'Test')
+// res = selectClassNamesFromProps(Parser.parseCode('class Test { render() { const {classNames} = props } }'), 'Test')
 
-res = null
+// res = null
 

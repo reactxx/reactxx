@@ -1,203 +1,91 @@
 {
-  "type": "File",
-  "program": {
-    "type": "Program",
+  "type": "FunctionDeclaration",
+  "id": {
+    "type": "Identifier",
+    "name": "Test",
+    "$path": "program/body/#0/id",
+    "$qpath": "File/Program/FunctionDeclaration/Identifier",
+    "$parentPath": "program/body/#0",
+    "$deep": 3
+  },
+  "generator": false,
+  "async": false,
+  "params": [],
+  "body": {
+    "type": "BlockStatement",
     "body": [
       {
-        "type": "FunctionDeclaration",
-        "id": {
-          "type": "Identifier",
-          "name": "Button"
-        },
-        "generator": false,
-        "async": false,
-        "params": [
+        "type": "VariableDeclaration",
+        "declarations": [
           {
-            "type": "Identifier",
-            "name": "props"
+            "type": "VariableDeclarator",
+            "id": {
+              "type": "ObjectPattern",
+              "properties": [
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "classNames",
+                    "$path": "program/body/#0/body/body/#0/declarations/#0/id/properties/#0/key",
+                    "$qpath": "File/Program/FunctionDeclaration/BlockStatement/VariableDeclaration/VariableDeclarator/ObjectPattern/ObjectProperty/Identifier",
+                    "$parentPath": "program/body/#0/body/body/#0/declarations/#0/id/properties/#0",
+                    "$deep": 8
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "classNames",
+                    "$path": "program/body/#0/body/body/#0/declarations/#0/id/properties/#0/value",
+                    "$qpath": "File/Program/FunctionDeclaration/BlockStatement/VariableDeclaration/VariableDeclarator/ObjectPattern/ObjectProperty/Identifier",
+                    "$parentPath": "program/body/#0/body/body/#0/declarations/#0/id/properties/#0",
+                    "$deep": 8
+                  },
+                  "extra": {
+                    "shorthand": true,
+                    "$path": "program/body/#0/body/body/#0/declarations/#0/id/properties/#0/extra"
+                  },
+                  "$path": "program/body/#0/body/body/#0/declarations/#0/id/properties/#0",
+                  "$qpath": "File/Program/FunctionDeclaration/BlockStatement/VariableDeclaration/VariableDeclarator/ObjectPattern/ObjectProperty",
+                  "$parentPath": "program/body/#0/body/body/#0/declarations/#0/id",
+                  "$deep": 7
+                }
+              ],
+              "$path": "program/body/#0/body/body/#0/declarations/#0/id",
+              "$qpath": "File/Program/FunctionDeclaration/BlockStatement/VariableDeclaration/VariableDeclarator/ObjectPattern",
+              "$parentPath": "program/body/#0/body/body/#0/declarations/#0",
+              "$deep": 6
+            },
+            "init": {
+              "type": "Identifier",
+              "name": "props",
+              "$path": "program/body/#0/body/body/#0/declarations/#0/init",
+              "$qpath": "File/Program/FunctionDeclaration/BlockStatement/VariableDeclaration/VariableDeclarator/Identifier",
+              "$parentPath": "program/body/#0/body/body/#0/declarations/#0",
+              "$deep": 6
+            },
+            "$path": "program/body/#0/body/body/#0/declarations/#0",
+            "$qpath": "File/Program/FunctionDeclaration/BlockStatement/VariableDeclaration/VariableDeclarator",
+            "$parentPath": "program/body/#0/body/body/#0",
+            "$deep": 5
           }
         ],
-        "body": {
-          "type": "BlockStatement",
-          "body": [
-            {
-              "type": "ReturnStatement",
-              "argument": {
-                "type": "JSXElement",
-                "openingElement": {
-                  "type": "JSXOpeningElement",
-                  "name": {
-                    "type": "JSXIdentifier",
-                    "name": "ButtonBase"
-                  },
-                  "attributes": [
-                    {
-                      "type": "JSXAttribute",
-                      "name": {
-                        "type": "JSXIdentifier",
-                        "name": "className"
-                      },
-                      "value": {
-                        "type": "JSXExpressionContainer",
-                        "expression": {
-                          "type": "Identifier",
-                          "name": "className"
-                        }
-                      }
-                    },
-                    {
-                      "type": "JSXAttribute",
-                      "name": {
-                        "type": "JSXIdentifier",
-                        "name": "disabled"
-                      },
-                      "value": {
-                        "type": "JSXExpressionContainer",
-                        "expression": {
-                          "type": "Identifier",
-                          "name": "disabled"
-                        }
-                      }
-                    },
-                    {
-                      "type": "JSXAttribute",
-                      "name": {
-                        "type": "JSXIdentifier",
-                        "name": "focusRipple"
-                      },
-                      "value": {
-                        "type": "JSXExpressionContainer",
-                        "expression": {
-                          "type": "UnaryExpression",
-                          "operator": "!",
-                          "prefix": true,
-                          "argument": {
-                            "type": "Identifier",
-                            "name": "disableFocusRipple"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "JSXAttribute",
-                      "name": {
-                        "type": "JSXIdentifier",
-                        "name": "focusVisibleClassName"
-                      },
-                      "value": {
-                        "type": "JSXExpressionContainer",
-                        "expression": {
-                          "type": "CallExpression",
-                          "callee": {
-                            "type": "Identifier",
-                            "name": "classNames"
-                          },
-                          "arguments": [
-                            {
-                              "type": "MemberExpression",
-                              "object": {
-                                "type": "Identifier",
-                                "name": "classes"
-                              },
-                              "property": {
-                                "type": "Identifier",
-                                "name": "focusVisible"
-                              },
-                              "computed": false
-                            },
-                            {
-                              "type": "Identifier",
-                              "name": "focusVisibleClassName"
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    {
-                      "type": "JSXSpreadAttribute",
-                      "argument": {
-                        "type": "Identifier",
-                        "name": "other"
-                      }
-                    }
-                  ],
-                  "selfClosing": false
-                },
-                "closingElement": {
-                  "type": "JSXClosingElement",
-                  "name": {
-                    "type": "JSXIdentifier",
-                    "name": "ButtonBase"
-                  }
-                },
-                "children": [
-                  {
-                    "type": "JSXElement",
-                    "openingElement": {
-                      "type": "JSXOpeningElement",
-                      "name": {
-                        "type": "JSXIdentifier",
-                        "name": "span"
-                      },
-                      "attributes": [
-                        {
-                          "type": "JSXAttribute",
-                          "name": {
-                            "type": "JSXIdentifier",
-                            "name": "className"
-                          },
-                          "value": {
-                            "type": "JSXExpressionContainer",
-                            "expression": {
-                              "type": "MemberExpression",
-                              "object": {
-                                "type": "Identifier",
-                                "name": "classes"
-                              },
-                              "property": {
-                                "type": "Identifier",
-                                "name": "label"
-                              },
-                              "computed": false,
-                              "trailingComments": [
-                                {
-                                  "type": "CommentBlock",
-                                  "value": "#####3"
-                                }
-                              ]
-                            }
-                          }
-                        }
-                      ],
-                      "selfClosing": false
-                    },
-                    "closingElement": {
-                      "type": "JSXClosingElement",
-                      "name": {
-                        "type": "JSXIdentifier",
-                        "name": "span"
-                      }
-                    },
-                    "children": [
-                      {
-                        "type": "JSXExpressionContainer",
-                        "expression": {
-                          "type": "Identifier",
-                          "name": "children"
-                        }
-                      }
-                    ]
-                  }
-                ],
-                "extra": {
-                  "parenthesized": true,
-                  "parenStart": 6254
-                }
-              }
-            }
-          ]
-        }
+        "kind": "const",
+        "$path": "program/body/#0/body/body/#0",
+        "$qpath": "File/Program/FunctionDeclaration/BlockStatement/VariableDeclaration",
+        "$parentPath": "program/body/#0/body",
+        "$deep": 4
       }
-    ]
-  }
+    ],
+    "$path": "program/body/#0/body",
+    "$qpath": "File/Program/FunctionDeclaration/BlockStatement",
+    "$parentPath": "program/body/#0",
+    "$deep": 3
+  },
+  "$path": "program/body/#0",
+  "$qpath": "File/Program/FunctionDeclaration",
+  "$parentPath": "program",
+  "$deep": 2
 }
