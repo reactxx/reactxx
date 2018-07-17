@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
-import { CardContentProps } from 'reactxx-muix/typings/CardContent';
+import { StandardProps } from '..';
+import { CardContentProps } from '../CardContent';
 
 export interface CardHeaderProps
   extends StandardProps<React.HTMLAttributes<HTMLDivElement>, CardHeaderClassKey, 'title'> {

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
+import withStyles from '../styles/withStyles';
 
-const styles = {
+export const styles = {
   root: {
     display: 'table-row-group',
   },

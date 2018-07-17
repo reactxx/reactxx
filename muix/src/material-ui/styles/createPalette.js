@@ -1,11 +1,11 @@
 import warning from 'warning';
 import deepmerge from 'deepmerge'; // < 1kb payload overhead when lodash/merge is > 3kb.
-import indigo from 'material-ui/colors/indigo';
-import pink from 'material-ui/colors/pink';
-import grey from 'material-ui/colors/grey';
-import red from 'material-ui/colors/red';
-import common from 'material-ui/colors/common';
-import { getContrastRatio, darken, lighten } from 'material-ui/styles/colorManipulator';
+import indigo from '../colors/indigo';
+import pink from '../colors/pink';
+import grey from '../colors/grey';
+import red from '../colors/red';
+import common from '../colors/common';
+import { getContrastRatio, darken, lighten } from './colorManipulator';
 
 export const light = {
   // The colors used to style the text.
@@ -125,7 +125,7 @@ export default function createPalette(palette) {
     return contrastText;
   }
 
-  function augmentColor(color, mainShade, lightShade, darkShade) {
+  function augmentColor(color, mainShade = 500, lightShade = 300, darkShade = 700) {
     if (!color.main && color[mainShade]) {
       color.main = color[mainShade];
     }
@@ -136,9 +136,9 @@ export default function createPalette(palette) {
     }
   }
 
-  augmentColor(primary, 500, 300, 700);
+  augmentColor(primary);
   augmentColor(secondary, 'A400', 'A200', 'A700');
-  augmentColor(error, 500, 300, 700);
+  augmentColor(error);
 
   const types = { dark, light };
 

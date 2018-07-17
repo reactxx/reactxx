@@ -1,1 +1,1 @@
-export { default } from 'material-ui/Paper/Paper';
+export { default } from './Paper';

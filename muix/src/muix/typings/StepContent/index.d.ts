@@ -1,2 +1,2 @@
-export { default } from 'reactxx-muix/typings/StepContent/StepContent';
-export * from 'reactxx-muix/typings/StepContent/StepContent';
+export { default } from './StepContent';
+export * from './StepContent';

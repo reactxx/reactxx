@@ -1,1 +1,1 @@
-export { default } from 'material-ui/GridListTile/GridListTile';
+export { default } from './GridListTile';

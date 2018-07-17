@@ -1,1 +1,1 @@
-export { default } from 'material-ui/Switch/Switch';
+export { default } from './Switch';

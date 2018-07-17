@@ -20,11 +20,7 @@ const patches = [
 const srcPath = ''
 const destPath = ''
 
-const run = () => {
-    patches.forEach(patch => {
-        patch.transform('')
-    })
-}
+
 
 //const res = fs.readFileSync(`d:/reactxx/muix/trash/mui/index.tsx`, {encoding:'utf-8'});
 

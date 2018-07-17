@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Modal from 'material-ui/Modal';
-import withStyles from 'material-ui/styles/withStyles';
-import Slide from 'material-ui/Slide';
-import Paper from 'material-ui/Paper';
-import { capitalize } from 'material-ui/utils/helpers';
-import { duration } from 'material-ui/styles/transitions';
+import Modal from '../Modal';
+import withStyles from '../styles/withStyles';
+import Slide from '../Slide';
+import Paper from '../Paper';
+import { capitalize } from '../utils/helpers';
+import { duration } from '../styles/transitions';
 
 const oppositeDirection = {
   left: 'right',
@@ -89,14 +89,14 @@ export const styles = theme => ({
  * when `variant="temporary"` is set.
  */
 class Drawer extends React.Component {
+  // Let's assume that the Drawer will always be rendered on user space.
+  // We use this state is order to skip the appear transition during the
+  // initial mount of the component.
+  mounted = false;
+
   componentDidMount() {
     this.mounted = true;
   }
-
-  // Let's assume that the Drawer will always be rendered on user space.
-  // We use that state is order to skip the appear transition during the
-  // initial mount of the component.
-  mounted = false;
 
   render() {
     const {
@@ -200,7 +200,7 @@ Drawer.propTypes = {
    */
   elevation: PropTypes.number,
   /**
-   * Properties applied to the `Modal` element.
+   * Properties applied to the [`Modal`](/api/modal) element.
    */
   ModalProps: PropTypes.object,
   /**
@@ -214,11 +214,11 @@ Drawer.propTypes = {
    */
   open: PropTypes.bool,
   /**
-   * Properties applied to the `Paper` element.
+   * Properties applied to the [`Paper`](/api/paper) element.
    */
   PaperProps: PropTypes.object,
   /**
-   * Properties applied to the `Slide` element.
+   * Properties applied to the [`Slide`](/api/slide) element.
    */
   SlideProps: PropTypes.object,
   /**
@@ -234,7 +234,7 @@ Drawer.propTypes = {
     PropTypes.shape({ enter: PropTypes.number, exit: PropTypes.number }),
   ]),
   /**
-   * The variant of drawer.
+   * The variant to use.
    */
   variant: PropTypes.oneOf(['permanent', 'persistent', 'temporary']),
 };

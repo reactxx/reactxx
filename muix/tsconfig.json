@@ -2,8 +2,8 @@
   "compileOnSave": true,
   "compilerOptions": {
     //"watch": true,
-    "target": "es2017",
-    //"module": "system",
+    "target": "es5",
+    "module": "system",
     "moduleResolution": "node",
 
     "allowJs": true,
@@ -17,7 +17,7 @@
     "jsx": "react",
 
     "inlineSourceMap": true,
-    //"inlineSources": true,
+    "inlineSources": true,
     "importHelpers": true,
 
     "strictNullChecks": false,

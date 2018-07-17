@@ -1,22 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Typography from 'material-ui/Typography';
-import withStyles from 'material-ui/styles/withStyles';
+import Typography from '../Typography';
+import withStyles from '../styles/withStyles';
 
-export const styles = theme => ({
+export const styles = {
   root: {
     display: 'flex',
     maxHeight: '2em',
     alignItems: 'center',
   },
   positionStart: {
-    marginRight: theme.spacing.unit,
+    marginRight: 8,
   },
   positionEnd: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: 8,
   },
-});
+};
 
 function InputAdornment(props) {
   const {

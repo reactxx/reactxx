@@ -1,1 +1,1 @@
-export { default } from 'material-ui/Drawer/Drawer';
+export { default } from './Drawer';

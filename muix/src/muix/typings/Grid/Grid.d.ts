@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps, Omit } from 'reactxx-muix/typings';
-import { Breakpoint } from 'reactxx-muix/typings/styles/createBreakpoints';
+import { StandardProps, Omit } from '..';
+import { Breakpoint } from '../styles/createBreakpoints';
 
 export type GridItemsAlignment = 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
 

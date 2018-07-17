@@ -1,4 +1,4 @@
-import { StandardProps } from 'reactxx-muix/typings';
+import { StandardProps } from '..';
 
 export interface ListItemIconProps extends StandardProps<{}, ListItemIconClassKey> {
   children: React.ReactElement<any>;

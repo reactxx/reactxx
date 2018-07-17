@@ -1,1 +1,1 @@
-export { default } from 'material-ui/TableFooter/TableFooter';
+export { default } from './TableFooter';

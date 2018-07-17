@@ -14,5 +14,5 @@ type Shape = Types.OverwriteShape<{
 
 const sheet: Types.SheetCreatorX<Shape> = theme => styles as any as Types.SheetX<Shape>
 
-export default ButtonBase as React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>
+export default ButtonBase as any as React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>
 

@@ -1,2 +1,2 @@
-export { default } from 'reactxx-muix/typings/CardActions/CardActions';
-export * from 'reactxx-muix/typings/CardActions/CardActions';
+export { default } from './CardActions';
+export * from './CardActions';

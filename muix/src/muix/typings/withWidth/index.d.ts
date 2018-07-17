@@ -1,2 +1,2 @@
-export { default } from 'reactxx-muix/typings/withWidth/withWidth';
-export * from 'reactxx-muix/typings/withWidth/withWidth';
+export { default } from './withWidth';
+export * from './withWidth';

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
 import createBroadcast from 'brcast';
-import themeListener, { CHANNEL } from 'material-ui/styles/themeListener';
-import exactProp from 'material-ui/utils/exactProp';
+import themeListener, { CHANNEL } from './themeListener';
+import exactProp from '../utils/exactProp';
 
 /**
  * This component takes a `theme` property.
@@ -11,6 +11,13 @@ import exactProp from 'material-ui/utils/exactProp';
  * This component should preferably be used at **the root of your component tree**.
  */
 class MuiThemeProvider extends React.Component {
+  broadcast = createBroadcast();
+
+  unsubscribeId = null;
+
+  // We are not using the React state in order to avoid unnecessary rerender.
+  outerTheme = null;
+
   constructor(props, context) {
     super(props, context);
 
@@ -60,11 +67,6 @@ class MuiThemeProvider extends React.Component {
     }
   }
 
-  broadcast = createBroadcast();
-  unsubscribeId = null;
-  // We are not using the React state in order to avoid unnecessary rerender.
-  outerTheme = null;
-
   // Simple merge between the outer theme and the local theme
   mergeOuterLocalTheme(localTheme) {
     // To support composition of theme.
@@ -75,7 +77,6 @@ class MuiThemeProvider extends React.Component {
           'Material-UI: you are providing a theme function property ' +
             'to the MuiThemeProvider component:',
           '<MuiThemeProvider theme={outerTheme => outerTheme} />',
-          '',
           'However, no outer theme is present.',
           'Make sure a theme is already injected higher in the React tree ' +
             'or provide a theme object.',

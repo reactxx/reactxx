@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import { capitalize } from 'material-ui/utils/helpers';
+import withStyles from '../styles/withStyles';
+import { capitalize } from '../utils/helpers';
 
 export const styles = theme => ({
   root: theme.mixins.gutters({
@@ -21,7 +21,7 @@ export const styles = theme => ({
     color: 'inherit',
   },
   inset: {
-    paddingLeft: theme.spacing.unit * 9,
+    paddingLeft: 72,
   },
   sticky: {
     position: 'sticky',

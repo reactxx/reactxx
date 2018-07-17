@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StandardProps, PropTypes } from 'reactxx-muix/typings';
+import { StandardProps, PropTypes } from '..';
 
 export interface FormControlProps
   extends StandardProps<React.HtmlHTMLAttributes<HTMLDivElement>, FormControlClassKey> {

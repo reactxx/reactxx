@@ -23,11 +23,18 @@
   "dependencies": {
     "@types/escodegen": "0.0.6",
     "@types/esprima": "^4.0.2",
+    "@types/fs-extra": "^5.0.4",
+    "@types/typescript": "^2.0.0",
+    "@types/warning": "^3.0.0",
     "acorn-jsx": "^4.1.1",
     "escodegen": "^1.11.0",
     "escodegen.jsx": "^0.1.0",
     "esprima": "^4.0.1",
+    "flow-remove-types": "^1.2.3",
+    "fs-extra": "^7.0.0",
     "jsx-transpiler": "^0.1.4",
-    "prettydiff": "^99.0.1"
+    "prettydiff": "^99.0.1",
+    "typescript": "^2.9.2",
+    "warning": "^4.0.1"
   }
 }

@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import EventListener from 'react-event-listener';
-import withStyles from 'material-ui/styles/withStyles';
-import { duration } from 'material-ui/styles/transitions';
-import ClickAwayListener from 'material-ui/ClickAwayListener';
-import { capitalize, createChainedFunction } from 'material-ui/utils/helpers';
-import Slide from 'material-ui/Slide';
-import SnackbarContent from 'material-ui/SnackbarContent';
+import withStyles from '../styles/withStyles';
+import { duration } from '../styles/transitions';
+import ClickAwayListener from '../ClickAwayListener';
+import { capitalize, createChainedFunction } from '../utils/helpers';
+import Slide from '../Slide';
+import SnackbarContent from '../SnackbarContent';
 
 export const styles = theme => {
-  const gutter = theme.spacing.unit * 3;
+  const gutter = 24;
   const top = { top: 0 };
   const bottom = { bottom: 0 };
   const right = { justifyContent: 'flex-end' };
@@ -92,23 +92,9 @@ if (process.env.NODE_ENV !== 'production' && !React.createContext) {
 }
 
 class Snackbar extends React.Component {
+  timerAutoHide = null;
+
   state = {};
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (typeof prevState.exited === 'undefined') {
-      return {
-        exited: !nextProps.open,
-      };
-    }
-
-    if (nextProps.open) {
-      return {
-        exited: false,
-      };
-    }
-
-    return null;
-  }
 
   componentDidMount() {
     if (this.props.open) {
@@ -130,23 +116,42 @@ class Snackbar extends React.Component {
     clearTimeout(this.timerAutoHide);
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (typeof prevState.exited === 'undefined') {
+      return {
+        exited: !nextProps.open,
+      };
+    }
+
+    if (nextProps.open) {
+      return {
+        exited: false,
+      };
+    }
+
+    return null;
+  }
+
   // Timer that controls delay before snackbar auto hides
-  setAutoHideTimer(autoHideDuration = null) {
-    if (!this.props.onClose || this.props.autoHideDuration == null) {
+  setAutoHideTimer(autoHideDuration) {
+    const autoHideDurationBefore =
+      autoHideDuration != null ? autoHideDuration : this.props.autoHideDuration;
+
+    if (!this.props.onClose || autoHideDurationBefore == null) {
       return;
     }
 
     clearTimeout(this.timerAutoHide);
     this.timerAutoHide = setTimeout(() => {
-      if (!this.props.onClose || this.props.autoHideDuration == null) {
+      const autoHideDurationAfter =
+        autoHideDuration != null ? autoHideDuration : this.props.autoHideDuration;
+      if (!this.props.onClose || autoHideDurationAfter == null) {
         return;
       }
 
       this.props.onClose(null, 'timeout');
-    }, autoHideDuration || this.props.autoHideDuration || 0);
+    }, autoHideDurationBefore);
   }
-
-  timerAutoHide = null;
 
   handleMouseEnter = event => {
     if (this.props.onMouseEnter) {
@@ -178,11 +183,11 @@ class Snackbar extends React.Component {
   // or when the window is shown back.
   handleResume = () => {
     if (this.props.autoHideDuration != null) {
-      if (this.props.resumeHideDuration !== undefined) {
+      if (this.props.resumeHideDuration != null) {
         this.setAutoHideTimer(this.props.resumeHideDuration);
         return;
       }
-      this.setAutoHideTimer((this.props.autoHideDuration || 0) * 0.5);
+      this.setAutoHideTimer(this.props.autoHideDuration * 0.5);
     }
   };
 
@@ -273,8 +278,9 @@ Snackbar.propTypes = {
     horizontal: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.oneOf(['left', 'center', 'right']),
-    ]),
-    vertical: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf(['top', 'center', 'bottom'])]),
+    ]).isRequired,
+    vertical: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf(['top', 'center', 'bottom'])])
+      .isRequired,
   }),
   /**
    * The number of milliseconds to wait before automatically calling the
@@ -298,7 +304,7 @@ Snackbar.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Properties applied to the `SnackbarContent` element.
+   * Properties applied to the [`SnackbarContent`](/api/snackbar-content) element.
    */
   ContentProps: PropTypes.object,
   /**

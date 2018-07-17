@@ -2,12 +2,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import SelectInput from 'material-ui/Select/SelectInput';
-import withStyles from 'material-ui/styles/withStyles';
-import ArrowDropDownIcon from 'material-ui/internal/svg-icons/ArrowDropDown';
-import Input from 'material-ui/Input';
-import { styles as nativeSelectStyles } from 'material-ui/NativeSelect/NativeSelect';
-import NativeSelectInput from 'material-ui/NativeSelect/NativeSelectInput';
+import SelectInput from './SelectInput';
+import withStyles from '../styles/withStyles';
+import mergeClasses from '../styles/mergeClasses';
+import ArrowDropDownIcon from '../internal/svg-icons/ArrowDropDown';
+import Input from '../Input';
+import { styles as nativeSelectStyles } from '../NativeSelect/NativeSelect';
+import NativeSelectInput from '../NativeSelect/NativeSelectInput';
 
 export const styles = nativeSelectStyles;
 
@@ -32,19 +33,15 @@ function Select(props) {
   } = props;
 
   const inputComponent = native ? NativeSelectInput : SelectInput;
-  const inputNativeProps = {
-    children,
-    classes,
-    IconComponent,
-    type: undefined, // We render a select. We can ignore the type provided by the `Input`.
-  };
 
   return React.cloneElement(input, {
     // Most of the logic is implemented in `SelectInput`.
     // The `Select` component is a simple API wrapper to expose something better to play with.
     inputComponent,
     inputProps: {
-      ...inputNativeProps,
+      children,
+      IconComponent,
+      type: undefined, // We render a select. We can ignore the type provided by the `Input`.
       ...(native
         ? {}
         : {
@@ -59,6 +56,13 @@ function Select(props) {
             SelectDisplayProps,
           }),
       ...inputProps,
+      classes: inputProps
+        ? mergeClasses({
+            baseClasses: classes,
+            newClasses: inputProps.classes,
+            Component: Select,
+          })
+        : classes,
       ...(input ? input.props.inputProps : {}),
     },
     ...other,
@@ -100,7 +104,7 @@ Select.propTypes = {
    */
   inputProps: PropTypes.object,
   /**
-   * Properties applied to the `Menu` element.
+   * Properties applied to the [`Menu`](/api/menu) element.
    */
   MenuProps: PropTypes.object,
   /**

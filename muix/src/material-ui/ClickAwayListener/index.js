@@ -1,1 +1,1 @@
-export { default } from 'material-ui/ClickAwayListener/ClickAwayListener';
+export { default } from './ClickAwayListener';

@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { PopoverProps, PopoverClassKey } from 'reactxx-muix/typings/Popover';
-import { MenuListProps } from 'reactxx-muix/typings/MenuList';
-import { PaperProps } from 'reactxx-muix/typings/Paper';
-import { StandardProps } from 'reactxx-muix/typings';
-import { TransitionHandlerProps, TransitionProps } from 'reactxx-muix/typings/transitions/transition';
-import { ClassNameMap } from 'reactxx-muix/typings/styles/withStyles';
+import { PopoverProps, PopoverClassKey } from '../Popover';
+import { MenuListProps } from '../MenuList';
+import { PaperProps } from '../Paper';
+import { StandardProps } from '..';
+import { TransitionHandlerProps, TransitionProps } from '../transitions/transition';
+import { ClassNameMap } from '../styles/withStyles';
 
 export interface MenuProps
   extends StandardProps<PopoverProps & Partial<TransitionHandlerProps>, MenuClassKey> {
-  anchorEl?: HTMLElement;
+  anchorEl?: HTMLElement | ((element: HTMLElement) => HTMLElement);
+  disableAutoFocusItem?: boolean;
   MenuListProps?: Partial<MenuListProps>;
   PaperProps?: Partial<PaperProps>;
   PopoverClasses?: Partial<ClassNameMap<PopoverClassKey>>;

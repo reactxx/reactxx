@@ -1,1 +1,1 @@
-export { default } from 'material-ui/StepIcon/StepIcon';
+export { default } from './StepIcon';

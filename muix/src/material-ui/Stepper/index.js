@@ -1,1 +1,1 @@
-export { default } from 'material-ui/Stepper/Stepper';
+export { default } from './Stepper';

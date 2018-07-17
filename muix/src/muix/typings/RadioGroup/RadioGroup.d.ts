@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
-import { FormGroupProps, FormGroupClassKey } from 'reactxx-muix/typings/FormGroup';
+import { StandardProps } from '..';
+import { FormGroupProps, FormGroupClassKey } from '../FormGroup';
 
 export interface RadioGroupProps
   extends StandardProps<FormGroupProps, RadioGroupClassKey, 'onChange'> {

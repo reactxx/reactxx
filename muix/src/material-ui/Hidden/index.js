@@ -1,1 +1,1 @@
-export { default } from 'material-ui/Hidden/Hidden';
+export { default } from './Hidden';

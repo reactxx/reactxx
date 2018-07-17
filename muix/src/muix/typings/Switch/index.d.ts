@@ -1,2 +1,2 @@
-export { default } from 'reactxx-muix/typings/Switch/Switch';
-export * from 'reactxx-muix/typings/Switch/Switch';
+export { default } from './Switch';
+export * from './Switch';

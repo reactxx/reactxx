@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Omit } from 'reactxx-muix/typings';
-import { DrawerProps } from 'reactxx-muix/typings/Drawer';
+import { Omit } from '..';
+import { DrawerProps } from '../Drawer';
 
 export interface SwipeableDrawerProps extends Omit<DrawerProps, 'onClose' | 'open'> {
   disableBackdropTransition?: boolean;

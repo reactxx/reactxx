@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import { isFilled, isAdornedStart } from 'material-ui/Input/Input';
-import { capitalize } from 'material-ui/utils/helpers';
-import { isMuiElement } from 'material-ui/utils/reactHelpers';
+import withStyles from '../styles/withStyles';
+import { isFilled, isAdornedStart } from '../Input/Input';
+import { capitalize } from '../utils/helpers';
+import { isMuiElement } from '../utils/reactHelpers';
 
-export const styles = theme => ({
+export const styles = {
   root: {
     display: 'inline-flex',
     flexDirection: 'column',
@@ -18,22 +18,22 @@ export const styles = theme => ({
     border: 0,
   },
   marginNormal: {
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit,
+    marginTop: 16,
+    marginBottom: 8,
   },
   marginDense: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit / 2,
+    marginTop: 8,
+    marginBottom: 4,
   },
   fullWidth: {
     width: '100%',
   },
-});
+};
 
 /**
  * Provides context such as filled/focused/error/required for form inputs.
  * Relying on the context provides high flexibilty and ensures that the state always stays
- * consitent across the children of the `FormControl`.
+ * consistent across the children of the `FormControl`.
  * This context is used by the following components:
  *  - FormLabel
  *  - FormHelperText

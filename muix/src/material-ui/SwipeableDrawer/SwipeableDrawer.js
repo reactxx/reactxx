@@ -4,11 +4,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import Drawer, { getAnchor, isHorizontal } from 'material-ui/Drawer/Drawer';
-import { duration } from 'material-ui/styles/transitions';
-import withTheme from 'material-ui/styles/withTheme';
-import { getTransitionProps } from 'material-ui/transitions/utils';
-import SwipeArea from 'material-ui/SwipeableDrawer/SwipeArea';
+import Drawer, { getAnchor, isHorizontal } from '../Drawer/Drawer';
+import { duration } from '../styles/transitions';
+import withTheme from '../styles/withTheme';
+import { getTransitionProps } from '../transitions/utils';
+import SwipeArea from './SwipeArea';
 
 // This value is closed to what browsers are using internally to
 // trigger a native scroll.
@@ -30,27 +30,17 @@ if (process.env.NODE_ENV !== 'production' && !React.createContext) {
 }
 
 class SwipeableDrawer extends React.Component {
+  backdrop = null;
+
+  paper = null;
+
+  isSwiping = null;
+
+  startX = null;
+
+  startY = null;
+
   state = {};
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (typeof prevState.maybeSwiping === 'undefined') {
-      return {
-        maybeSwiping: false,
-        open: nextProps.open,
-      };
-    }
-
-    if (!nextProps.open && prevState.open) {
-      return {
-        maybeSwiping: false,
-        open: nextProps.open,
-      };
-    }
-
-    return {
-      open: nextProps.open,
-    };
-  }
 
   componentDidMount() {
     if (this.props.variant === 'temporary') {
@@ -79,6 +69,26 @@ class SwipeableDrawer extends React.Component {
     if (nodeThatClaimedTheSwipe === this) {
       nodeThatClaimedTheSwipe = null;
     }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (typeof prevState.maybeSwiping === 'undefined') {
+      return {
+        maybeSwiping: false,
+        open: nextProps.open,
+      };
+    }
+
+    if (!nextProps.open && prevState.open) {
+      return {
+        maybeSwiping: false,
+        open: nextProps.open,
+      };
+    }
+
+    return {
+      open: nextProps.open,
+    };
   }
 
   getMaxTranslate() {
@@ -298,11 +308,13 @@ class SwipeableDrawer extends React.Component {
     this.isSwiping = null;
   };
 
-  backdrop = null;
-  paper = null;
-  isSwiping = null;
-  startX = null;
-  startY = null;
+  handleBackdropRef = node => {
+    this.backdrop = node ? ReactDOM.findDOMNode(node) : null;
+  };
+
+  handlePaperRef = node => {
+    this.paper = node ? ReactDOM.findDOMNode(node) : null;
+  };
 
   listenTouchStart() {
     document.body.addEventListener('touchstart', this.handleBodyTouchStart);
@@ -317,14 +329,6 @@ class SwipeableDrawer extends React.Component {
     document.body.removeEventListener('touchend', this.handleBodyTouchEnd);
     document.body.removeEventListener('touchcancel', this.handleBodyTouchEnd);
   }
-
-  handleBackdropRef = node => {
-    this.backdrop = node ? ReactDOM.findDOMNode(node) : null;
-  };
-
-  handlePaperRef = node => {
-    this.paper = node ? ReactDOM.findDOMNode(node) : null;
-  };
 
   render() {
     const {

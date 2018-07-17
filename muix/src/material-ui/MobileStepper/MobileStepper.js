@@ -3,10 +3,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import { capitalize } from 'material-ui/utils/helpers';
-import LinearProgress from 'material-ui/LinearProgress';
+import withStyles from '../styles/withStyles';
+import Paper from '../Paper';
+import { capitalize } from '../utils/helpers';
+import LinearProgress from '../LinearProgress';
 
 export const styles = theme => ({
   root: {
@@ -15,7 +15,7 @@ export const styles = theme => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     background: theme.palette.background.default,
-    padding: theme.spacing.unit,
+    padding: 8,
   },
   positionBottom: {
     position: 'fixed',
@@ -39,8 +39,8 @@ export const styles = theme => ({
   dot: {
     backgroundColor: theme.palette.action.disabled,
     borderRadius: '50%',
-    width: theme.spacing.unit,
-    height: theme.spacing.unit,
+    width: 8,
+    height: 8,
     margin: '0 2px',
   },
   dotActive: {
@@ -128,7 +128,7 @@ MobileStepper.propTypes = {
    */
   steps: PropTypes.number.isRequired,
   /**
-   * The type of mobile stepper to use.
+   * The variant to use.
    */
   variant: PropTypes.oneOf(['text', 'dots', 'progress']),
 };

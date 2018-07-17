@@ -1,2 +1,2 @@
-export { default } from 'reactxx-muix/typings/MenuItem/MenuItem';
-export * from 'reactxx-muix/typings/MenuItem/MenuItem';
+export { default } from './MenuItem';
+export * from './MenuItem';

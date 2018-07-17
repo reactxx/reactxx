@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
-import { TouchRippleProps } from 'reactxx-muix/typings/ButtonBase/TouchRipple';
+import { StandardProps } from '..';
+import { TouchRippleProps } from './TouchRipple';
 
 export interface ButtonBaseProps
   extends StandardProps<

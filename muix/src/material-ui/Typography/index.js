@@ -1,1 +1,1 @@
-export { default } from 'material-ui/Typography/Typography';
+export { default } from './Typography';

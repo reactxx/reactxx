@@ -8,6 +8,7 @@ import contextTypes from 'react-jss/lib/contextTypes';
 import { create } from 'jss';
 import * as ns from 'react-jss/lib/ns';
 import jssPreset from './jssPreset';
+import mergeClasses from './mergeClasses';
 import createMuiTheme from './createMuiTheme';
 import themeListener from './themeListener';
 import createGenerateClassName from './createGenerateClassName';
@@ -68,6 +69,20 @@ const withStyles = (stylesOrCreator, options = {}) => Component => {
   );
 
   class WithStyles extends React.Component {
+    disableStylesGeneration = false;
+
+    jss = null;
+
+    sheetOptions = null;
+
+    sheetsManager = sheetsManager;
+
+    stylesCreatorSaved = null;
+
+    theme = null;
+
+    unsubscribeId = null;
+
     constructor(props, context) {
       super(props, context);
 
@@ -165,44 +180,12 @@ const withStyles = (stylesOrCreator, options = {}) => Component => {
       }
 
       if (generate) {
-        if (this.props.classes) {
-          this.cacheClasses.value = {
-            ...this.cacheClasses.lastJSS,
-            ...Object.keys(this.props.classes).reduce((accumulator, key) => {
-              warning(
-                this.cacheClasses.lastJSS[key] || this.disableStylesGeneration,
-                [
-                  `Material-UI: the key \`${key}\` ` +
-                    `provided to the classes property is not implemented in ${getDisplayName(
-                      Component,
-                    )}.`,
-                  `You can only override one of the following: ${Object.keys(
-                    this.cacheClasses.lastJSS,
-                  ).join(',')}`,
-                ].join('\n'),
-              );
-
-              warning(
-                !this.props.classes[key] || typeof this.props.classes[key] === 'string',
-                [
-                  `Material-UI: the key \`${key}\` ` +
-                    `provided to the classes property is not valid for ${getDisplayName(
-                      Component,
-                    )}.`,
-                  `You need to provide a non empty string instead of: ${this.props.classes[key]}.`,
-                ].join('\n'),
-              );
-
-              if (this.props.classes[key]) {
-                accumulator[key] = `${this.cacheClasses.lastJSS[key]} ${this.props.classes[key]}`;
-              }
-
-              return accumulator;
-            }, {}),
-          };
-        } else {
-          this.cacheClasses.value = this.cacheClasses.lastJSS;
-        }
+        this.cacheClasses.value = mergeClasses({
+          baseClasses: this.cacheClasses.lastJSS,
+          newClasses: this.props.classes,
+          Component,
+          noBase: this.disableStylesGeneration,
+        });
       }
 
       return this.cacheClasses.value;
@@ -237,6 +220,13 @@ const withStyles = (stylesOrCreator, options = {}) => Component => {
 
         if (process.env.NODE_ENV !== 'production' && !meta) {
           meta = getDisplayName(Component);
+          warning(
+            typeof meta === 'string',
+            [
+              'Material-UI: the component displayName is invalid. It needs to be a string.',
+              `Please fix the following component: ${Component}.`,
+            ].join('\n'),
+          );
         }
 
         const sheet = this.jss.createStyleSheet(styles, {
@@ -282,14 +272,6 @@ const withStyles = (stylesOrCreator, options = {}) => Component => {
         }
       }
     }
-
-    disableStylesGeneration = false;
-    jss = null;
-    sheetOptions = null;
-    sheetsManager = sheetsManager;
-    stylesCreatorSaved = null;
-    theme = null;
-    unsubscribeId = null;
 
     render() {
       const { classes, innerRef, ...other } = this.props;

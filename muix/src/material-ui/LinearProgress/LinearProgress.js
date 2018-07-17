@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import warning from 'warning';
-import withStyles from 'material-ui/styles/withStyles';
-import { lighten } from 'material-ui/styles/colorManipulator';
+import withStyles from '../styles/withStyles';
+import { lighten } from '../styles/colorManipulator';
 
 const TRANSITION_DURATION = 4; // seconds
 
@@ -239,8 +239,8 @@ LinearProgress.propTypes = {
    */
   valueBuffer: PropTypes.number,
   /**
-   * The variant of progress indicator. Use indeterminate or query
-   * when there is no progress value.
+   * The variant to use.
+   * Use indeterminate or query when there is no progress value.
    */
   variant: PropTypes.oneOf(['determinate', 'indeterminate', 'buffer', 'query']),
 };

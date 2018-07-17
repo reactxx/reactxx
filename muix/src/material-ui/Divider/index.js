@@ -1,1 +1,1 @@
-export { default } from 'material-ui/Divider/Divider';
+export { default } from './Divider';

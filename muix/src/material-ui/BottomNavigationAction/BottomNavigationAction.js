@@ -3,16 +3,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import ButtonBase from 'material-ui/ButtonBase';
-import unsupportedProp from 'material-ui/utils/unsupportedProp';
+import withStyles from '../styles/withStyles';
+import ButtonBase from '../ButtonBase';
+import unsupportedProp from '../utils/unsupportedProp';
 
 export const styles = theme => ({
   root: {
     transition: theme.transitions.create(['color', 'padding-top'], {
       duration: theme.transitions.duration.short,
     }),
-    paddingTop: theme.spacing.unit,
+    paddingTop: 8,
     paddingBottom: 10,
     paddingLeft: 12,
     paddingRight: 12,
@@ -21,7 +21,7 @@ export const styles = theme => ({
     color: theme.palette.text.secondary,
     flex: '1',
     '&$iconOnly': {
-      paddingTop: theme.spacing.unit * 2,
+      paddingTop: 16,
     },
     '&$selected': {
       paddingTop: 6,

@@ -3,10 +3,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import ButtonBase from 'material-ui/ButtonBase';
-import { capitalize } from 'material-ui/utils/helpers';
-import unsupportedProp from 'material-ui/utils/unsupportedProp';
+import withStyles from '../styles/withStyles';
+import ButtonBase from '../ButtonBase';
+import { capitalize } from '../utils/helpers';
+import unsupportedProp from '../utils/unsupportedProp';
 
 export const styles = theme => ({
   root: {
@@ -72,8 +72,8 @@ export const styles = theme => ({
     paddingLeft: 12,
     paddingRight: 12,
     [theme.breakpoints.up('md')]: {
-      paddingLeft: theme.spacing.unit * 3,
-      paddingRight: theme.spacing.unit * 3,
+      paddingLeft: 24,
+      paddingRight: 24,
     },
   },
   label: {
@@ -91,6 +91,8 @@ export const styles = theme => ({
 });
 
 class Tab extends React.Component {
+  label = null;
+
   state = {
     labelWrapped: false,
   };
@@ -121,8 +123,6 @@ class Tab extends React.Component {
       onClick(event);
     }
   };
-
-  label = undefined;
 
   checkTextWrap = () => {
     if (this.label) {

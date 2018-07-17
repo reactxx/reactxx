@@ -1,25 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import Typography from 'material-ui/Typography';
+import withStyles from '../styles/withStyles';
+import Typography from '../Typography';
 
 export const styles = theme => ({
   root: theme.mixins.gutters({
     display: 'flex',
     alignItems: 'center',
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: 16,
+    paddingBottom: 16,
   }),
   avatar: {
     flex: '0 0 auto',
-    marginRight: theme.spacing.unit * 2,
+    marginRight: 16,
   },
   action: {
     flex: '0 0 auto',
     alignSelf: 'flex-start',
-    marginTop: theme.spacing.unit * -1,
-    marginRight: theme.spacing.unit * -2,
+    marginTop: -8,
+    marginRight: -16,
   },
   content: {
     flex: '1 1 auto',

@@ -1,1 +1,1 @@
-export { default } from 'material-ui/FormControl/FormControl';
+export { default } from './FormControl';

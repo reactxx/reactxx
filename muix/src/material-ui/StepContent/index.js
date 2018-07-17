@@ -1,1 +1,1 @@
-export { default } from 'material-ui/StepContent/StepContent';
+export { default } from './StepContent';

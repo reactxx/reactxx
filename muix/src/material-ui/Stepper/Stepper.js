@@ -3,14 +3,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import StepConnector from 'material-ui/StepConnector';
+import withStyles from '../styles/withStyles';
+import Paper from '../Paper';
+import StepConnector from '../StepConnector';
 
-export const styles = theme => ({
+export const styles = {
   root: {
     display: 'flex',
-    padding: theme.spacing.unit * 3,
+    padding: 24,
   },
   horizontal: {
     flexDirection: 'row',
@@ -22,7 +22,7 @@ export const styles = theme => ({
   alternativeLabel: {
     alignItems: 'flex-start',
   },
-});
+};
 
 function Stepper(props) {
   const {

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
-import { Orientation } from 'reactxx-muix/typings/Stepper';
-import { StepButtonIcon } from 'reactxx-muix/typings/StepButton';
-import { StepIconProps } from 'reactxx-muix/typings/StepIcon';
+import { StandardProps } from '..';
+import { Orientation } from '../Stepper';
+import { StepButtonIcon } from '../StepButton';
+import { StepIconProps } from '../StepIcon';
 
 export interface StepLabelProps
   extends StandardProps<React.HTMLAttributes<HTMLDivElement>, StepLabelClasskey> {

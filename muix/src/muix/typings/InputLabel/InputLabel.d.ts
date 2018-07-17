@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
-import { FormLabelProps, FormLabelClassKey } from 'reactxx-muix/typings/FormLabel';
-import { ClassNameMap } from 'reactxx-muix/typings/styles/withStyles';
+import { StandardProps } from '..';
+import { FormLabelProps, FormLabelClassKey } from '../FormLabel';
+import { ClassNameMap } from '../styles/withStyles';
 
 export interface InputLabelProps extends StandardProps<FormLabelProps, InputLabelClassKey> {
   disableAnimation?: boolean;

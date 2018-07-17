@@ -3,10 +3,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
-import { emphasize } from 'material-ui/styles/colorManipulator';
+import withStyles from '../styles/withStyles';
+import Paper from '../Paper';
+import Typography from '../Typography';
+import { emphasize } from '../styles/colorManipulator';
 
 export const styles = theme => {
   const emphasis = theme.palette.type === 'light' ? 0.8 : 0.98;
@@ -14,31 +14,30 @@ export const styles = theme => {
 
   return {
     root: {
-      pointerEvents: 'initial',
       color: theme.palette.getContrastText(backgroundColor),
       backgroundColor,
       display: 'flex',
       alignItems: 'center',
       flexWrap: 'wrap',
-      padding: `6px ${theme.spacing.unit * 3}px`,
+      padding: '6px 24px',
       [theme.breakpoints.up('md')]: {
         minWidth: 288,
         maxWidth: 568,
-        borderRadius: 2,
+        borderRadius: theme.shape.borderRadius,
       },
       [theme.breakpoints.down('sm')]: {
         flexGrow: 1,
       },
     },
     message: {
-      padding: `${theme.spacing.unit}px 0`,
+      padding: '8px 0',
     },
     action: {
       display: 'flex',
       alignItems: 'center',
       marginLeft: 'auto',
-      paddingLeft: theme.spacing.unit * 3,
-      marginRight: -theme.spacing.unit,
+      paddingLeft: 24,
+      marginRight: -8,
     },
   };
 };

@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import { cloneChildrenWithClassName } from 'material-ui/utils/reactHelpers';
-import 'material-ui/Button'; // So we don't have any override priority issue.
+import withStyles from '../styles/withStyles';
+import { cloneChildrenWithClassName } from '../utils/reactHelpers';
+import '../Button'; // So we don't have any override priority issue.
 
-export const styles = theme => ({
+export const styles = {
   root: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit}px`,
+    padding: '16px 8px',
   },
   action: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: 8,
   },
-});
+};
 
 function ExpansionPanelActions(props) {
   const { children, classes, className, ...other } = props;

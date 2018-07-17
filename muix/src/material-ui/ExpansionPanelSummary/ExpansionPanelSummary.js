@@ -3,9 +3,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import ButtonBase from 'material-ui/ButtonBase';
-import IconButton from 'material-ui/IconButton';
-import withStyles from 'material-ui/styles/withStyles';
+import ButtonBase from '../ButtonBase';
+import IconButton from '../IconButton';
+import withStyles from '../styles/withStyles';
 
 export const styles = theme => {
   const transition = {
@@ -14,9 +14,9 @@ export const styles = theme => {
   return {
     root: {
       display: 'flex',
-      minHeight: theme.spacing.unit * 6,
+      minHeight: 8 * 6,
       transition: theme.transitions.create(['min-height', 'background-color'], transition),
-      padding: `0 ${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 3}px`,
+      padding: '0 24px 0 24px',
       '&:hover:not($disabled)': {
         cursor: 'pointer',
       },
@@ -39,7 +39,7 @@ export const styles = theme => {
       transition: theme.transitions.create(['margin'], transition),
       margin: '12px 0',
       '& > :last-child': {
-        paddingRight: theme.spacing.unit * 4,
+        paddingRight: 32,
       },
       '&$expanded': {
         margin: '20px 0',
@@ -48,7 +48,7 @@ export const styles = theme => {
     expandIcon: {
       position: 'absolute',
       top: '50%',
-      right: theme.spacing.unit,
+      right: 8,
       transform: 'translateY(-50%) rotate(0deg)',
       transition: theme.transitions.create('transform', transition),
       '&:hover': {
@@ -99,6 +99,7 @@ class ExpansionPanelSummary extends React.Component {
       disabled,
       expanded,
       expandIcon,
+      IconButtonProps,
       onChange,
       ...other
     } = this.props;
@@ -137,6 +138,7 @@ class ExpansionPanelSummary extends React.Component {
             component="div"
             tabIndex={-1}
             aria-hidden="true"
+            {...IconButtonProps}
           >
             {expandIcon}
           </IconButton>
@@ -174,6 +176,10 @@ ExpansionPanelSummary.propTypes = {
    * The icon to display as the expand indicator.
    */
   expandIcon: PropTypes.node,
+  /**
+   * Properties applied to the `TouchRipple` element wrapping the expand icon.
+   */
+  IconButtonProps: PropTypes.object,
   /**
    * @ignore
    */

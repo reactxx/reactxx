@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import { fade } from 'material-ui/styles/colorManipulator';
+import withStyles from '../styles/withStyles';
+import { fade } from '../styles/colorManipulator';
 
 export const styles = theme => ({
   root: {
@@ -19,7 +19,7 @@ export const styles = theme => ({
     width: '100%',
   },
   inset: {
-    marginLeft: theme.spacing.unit * 9,
+    marginLeft: 72,
   },
   light: {
     backgroundColor: fade(theme.palette.divider, 0.08),

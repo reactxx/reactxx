@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import { capitalize } from 'material-ui/utils/helpers';
-import { darken, fade, lighten } from 'material-ui/styles/colorManipulator';
+import withStyles from '../styles/withStyles';
+import { capitalize } from '../utils/helpers';
+import { darken, fade, lighten } from '../styles/colorManipulator';
 
 export const styles = theme => ({
   root: {
@@ -18,10 +18,9 @@ export const styles = theme => ({
         : darken(fade(theme.palette.divider, 1), 0.8)
     }`,
     textAlign: 'left',
-    padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 7}px ${theme.spacing.unit /
-      2}px ${theme.spacing.unit * 3}px`,
+    padding: '4px 56px 4px 24px',
     '&:last-child': {
-      paddingRight: theme.spacing.unit * 3,
+      paddingRight: 24,
     },
   },
   head: {
@@ -44,7 +43,7 @@ export const styles = theme => ({
     flexDirection: 'row-reverse', // can be dynamically inherited at runtime by contents
   },
   paddingDense: {
-    paddingRight: theme.spacing.unit * 3,
+    paddingRight: 24,
   },
   paddingCheckbox: {
     padding: '0 12px',

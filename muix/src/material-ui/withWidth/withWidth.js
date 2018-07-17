@@ -3,12 +3,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import EventListener from 'react-event-listener';
-import debounce from 'debounce';
+import debounce from 'debounce'; // < 1kb payload overhead when lodash/debounce is > 3kb.
 import wrapDisplayName from 'recompose/wrapDisplayName';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import withTheme from 'material-ui/styles/withTheme';
-import { keys as breakpointKeys } from 'material-ui/styles/createBreakpoints';
-import getThemeProps from 'material-ui/styles/getThemeProps';
+import withTheme from '../styles/withTheme';
+import { keys as breakpointKeys } from '../styles/createBreakpoints';
+import getThemeProps from '../styles/getThemeProps';
 
 // By default, returns true if screen width is the same or greater than the given breakpoint.
 export const isWidthUp = (breakpoint, width, inclusive = true) => {
@@ -35,6 +35,15 @@ const withWidth = (options = {}) => Component => {
   } = options;
 
   class WithWidth extends React.Component {
+    handleResize = debounce(() => {
+      const width = this.getWidth();
+      if (width !== this.state.width) {
+        this.setState({
+          width,
+        });
+      }
+    }, resizeInterval);
+
     constructor(props) {
       super(props);
 
@@ -87,15 +96,6 @@ const withWidth = (options = {}) => Component => {
       width = width || 'xl';
       return width;
     }
-
-    handleResize = debounce(() => {
-      const width = this.getWidth();
-      if (width !== this.state.width) {
-        this.setState({
-          width,
-        });
-      }
-    }, resizeInterval);
 
     render() {
       const { initialWidth, theme, width, ...other } = this.props;

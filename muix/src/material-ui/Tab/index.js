@@ -1,1 +1,1 @@
-export { default } from 'material-ui/Tab/Tab';
+export { default } from './Tab';

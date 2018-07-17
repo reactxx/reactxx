@@ -1,22 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import { cloneChildrenWithClassName } from 'material-ui/utils/reactHelpers';
-import 'material-ui/Button'; // So we don't have any override priority issue.
+import withStyles from '../styles/withStyles';
+import { cloneChildrenWithClassName } from '../utils/reactHelpers';
+import '../Button'; // So we don't have any override priority issue.
 
 export const styles = theme => ({
   root: {
     display: 'flex',
     alignItems: 'center',
     boxSizing: 'border-box',
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit / 2}px`,
+    padding: '8px 4px',
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing.unit}px ${theme.spacing.unit * 1.5}px`,
+      padding: '8px 12px',
     },
   },
   action: {
-    margin: `0 ${theme.spacing.unit / 2}px`,
+    margin: '0 4px',
   },
 });
 

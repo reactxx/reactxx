@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Omit } from 'reactxx-muix/typings';
-import { Theme } from 'reactxx-muix/typings/styles/createMuiTheme';
-import { TransitionProps } from 'reactxx-muix/typings/transitions/transition';
+import { Omit } from '..';
+import { Theme } from '../styles/createMuiTheme';
+import { TransitionProps } from '../transitions/transition';
 
 export interface GrowProps extends Omit<TransitionProps, 'timeout'> {
   theme?: Theme;

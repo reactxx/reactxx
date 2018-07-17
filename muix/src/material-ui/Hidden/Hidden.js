@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HiddenJs from 'material-ui/Hidden/HiddenJs';
-import HiddenCss from 'material-ui/Hidden/HiddenCss';
+import HiddenJs from './HiddenJs';
+import HiddenCss from './HiddenCss';
 
 /**
  * Responsively hides children based on the selected implementation.

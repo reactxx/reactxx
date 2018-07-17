@@ -12,9 +12,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import { keys as breakpointKeys } from 'material-ui/styles/createBreakpoints';
-import requirePropFactory from 'material-ui/utils/requirePropFactory';
+import withStyles from '../styles/withStyles';
+import { keys as breakpointKeys } from '../styles/createBreakpoints';
+import requirePropFactory from '../utils/requirePropFactory';
 
 const GUTTERS = [0, 8, 16, 24, 32, 40];
 const GRID_SIZES = ['auto', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];

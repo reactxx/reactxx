@@ -3,8 +3,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Paper from 'material-ui/Paper';
-import withStyles from 'material-ui/styles/withStyles';
+import Paper from '../Paper';
+import withStyles from '../styles/withStyles';
 
 export const styles = {
   root: {
@@ -16,7 +16,7 @@ function Card(props) {
   const { classes, className, raised, ...other } = props;
 
   return (
-    <Paper className={classNames(classes.root, className)} elevation={raised ? 8 : 2} {...other} />
+    <Paper className={classNames(classes.root, className)} elevation={raised ? 8 : 1} {...other} />
   );
 }
 

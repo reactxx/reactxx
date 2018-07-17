@@ -3,8 +3,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import IconButton from 'material-ui/IconButton';
+import withStyles from '../styles/withStyles';
+import IconButton from '../IconButton';
 
 export const styles = {
   root: {
@@ -32,6 +32,10 @@ export const styles = {
 };
 
 class SwitchBase extends React.Component {
+  input = null;
+
+  isControlled = null;
+
   constructor(props) {
     super(props);
 
@@ -43,9 +47,6 @@ class SwitchBase extends React.Component {
   }
 
   state = {};
-
-  input = null;
-  isControlled = null;
 
   handleFocus = event => {
     if (this.props.onFocus) {

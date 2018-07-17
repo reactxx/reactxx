@@ -1,5 +1,5 @@
-import { Breakpoint } from 'reactxx-muix/typings/styles/createBreakpoints';
-import { ConsistentWith, Overwrite } from 'reactxx-muix/typings';
+import { Breakpoint } from '../styles/createBreakpoints';
+import { ConsistentWith, Overwrite } from '..';
 
 export interface WithWidthOptions {
   resizeInterval: number;

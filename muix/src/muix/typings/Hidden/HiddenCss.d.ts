@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Breakpoint } from 'reactxx-muix/typings/styles/createBreakpoints';
+import { Breakpoint } from '../styles/createBreakpoints';
 
 export interface HiddenCssProps {
   lgDown?: boolean;

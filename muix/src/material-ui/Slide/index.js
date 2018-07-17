@@ -1,1 +1,1 @@
-export { default } from 'material-ui/Slide/Slide';
+export { default } from './Slide';

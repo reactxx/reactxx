@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
-import { Orientation } from 'reactxx-muix/typings/Stepper';
+import { StandardProps } from '..';
+import { Orientation } from '../Stepper';
 
 export type StepConnectorIcon = React.ReactElement<any> | string | number;
 

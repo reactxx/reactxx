@@ -1,1 +1,1 @@
-export { default } from 'material-ui/FormLabel/FormLabel';
+export { default } from './FormLabel';

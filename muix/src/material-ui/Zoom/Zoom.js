@@ -3,9 +3,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
-import { duration } from 'material-ui/styles/transitions';
-import withTheme from 'material-ui/styles/withTheme';
-import { reflow, getTransitionProps } from 'material-ui/transitions/utils';
+import { duration } from '../styles/transitions';
+import withTheme from '../styles/withTheme';
+import { reflow, getTransitionProps } from '../transitions/utils';
 
 const styles = {
   entering: {

@@ -4,9 +4,9 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
-import withStyles from 'material-ui/styles/withStyles';
-import { duration } from 'material-ui/styles/transitions';
-import { getTransitionProps } from 'material-ui/transitions/utils';
+import withStyles from '../styles/withStyles';
+import { duration } from '../styles/transitions';
+import { getTransitionProps } from '../transitions/utils';
 
 export const styles = theme => ({
   container: {
@@ -32,13 +32,15 @@ export const styles = theme => ({
  * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
  */
 class Collapse extends React.Component {
+  wrapper = null;
+
+  autoTransitionDuration = null;
+
+  timer = null;
+
   componentWillUnmount() {
     clearTimeout(this.timer);
   }
-
-  wrapper = null;
-  autoTransitionDuration = undefined;
-  timer = null;
 
   handleEnter = node => {
     node.style.height = this.props.collapsedHeight;

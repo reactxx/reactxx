@@ -3,11 +3,11 @@
 import React from 'react';
 import warning from 'warning';
 import PropTypes from 'prop-types';
-import Input from 'material-ui/Input';
-import InputLabel from 'material-ui/InputLabel';
-import FormControl from 'material-ui/FormControl';
-import FormHelperText from 'material-ui/FormHelperText';
-import Select from 'material-ui/Select';
+import Input from '../Input';
+import InputLabel from '../InputLabel';
+import FormControl from '../FormControl';
+import FormHelperText from '../FormHelperText';
+import Select from '../Select';
 
 /**
  * The `TextField` is a convenience wrapper for the most common cases (80%).
@@ -164,7 +164,7 @@ TextField.propTypes = {
    */
   error: PropTypes.bool,
   /**
-   * Properties applied to the `FormHelperText` element.
+   * Properties applied to the [`FormHelperText`](/api/form-helper-text) element.
    */
   FormHelperTextProps: PropTypes.object,
   /**
@@ -181,7 +181,7 @@ TextField.propTypes = {
    */
   id: PropTypes.string,
   /**
-   * Properties applied to the `InputLabel` element.
+   * Properties applied to the [`InputLabel`](/api/input-label) element.
    */
   InputLabelProps: PropTypes.object,
   /**
@@ -249,7 +249,7 @@ TextField.propTypes = {
    */
   select: PropTypes.bool,
   /**
-   * Properties applied to the `Select` element.
+   * Properties applied to the [`Select`](/api/select) element.
    */
   SelectProps: PropTypes.object,
   /**

@@ -1,1 +1,1 @@
-export { default } from 'material-ui/Checkbox/Checkbox';
+export { default } from './Checkbox';

@@ -1,2 +1,2 @@
-export { default } from 'reactxx-muix/typings/LinearProgress/LinearProgress';
-export * from 'reactxx-muix/typings/LinearProgress/LinearProgress';
+export { default } from './LinearProgress';
+export * from './LinearProgress';

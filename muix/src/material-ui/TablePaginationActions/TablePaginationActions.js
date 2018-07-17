@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import KeyboardArrowLeft from 'material-ui/internal/svg-icons/KeyboardArrowLeft';
-import KeyboardArrowRight from 'material-ui/internal/svg-icons/KeyboardArrowRight';
-import withTheme from 'material-ui/styles/withTheme';
-import IconButton from 'material-ui/IconButton';
+import KeyboardArrowLeft from '../internal/svg-icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '../internal/svg-icons/KeyboardArrowRight';
+import withTheme from '../styles/withTheme';
+import IconButton from '../IconButton';
 
 /**
  * @ignore - internal component.
@@ -52,7 +52,7 @@ class TablePaginationActions extends React.Component {
 
 TablePaginationActions.propTypes = {
   /**
-   * Properties applied to the back arrow `IconButton` element.
+   * Properties applied to the back arrow [`IconButton`](/api/icon-button) element.
    */
   backIconButtonProps: PropTypes.object,
   /**
@@ -60,7 +60,7 @@ TablePaginationActions.propTypes = {
    */
   count: PropTypes.number.isRequired,
   /**
-   * Properties applied to the next arrow `IconButton` element.
+   * Properties applied to the next arrow [`IconButton`](/api/icon-button) element.
    */
   nextIconButtonProps: PropTypes.object,
   /**

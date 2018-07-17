@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import EventListener from 'react-event-listener';
-import debounce from 'debounce';
-import withStyles from 'material-ui/styles/withStyles';
+import debounce from 'debounce'; // < 1kb payload overhead when lodash/debounce is > 3kb.
+import withStyles from '../styles/withStyles';
 
 export const styles = {
   root: {
@@ -31,6 +31,12 @@ export const styles = {
 };
 
 class GridListTile extends React.Component {
+  imgElement = null;
+
+  handleResize = debounce(() => {
+    this.fit();
+  }, 166); // Corresponds to 10 frames at 60 Hz.
+
   componentDidMount() {
     this.ensureImageCover();
   }
@@ -43,20 +49,10 @@ class GridListTile extends React.Component {
     this.handleResize.clear();
   }
 
-  imgElement = null;
-
-  handleResize = debounce(() => {
-    this.fit();
-  }, 166); // Corresponds to 10 frames at 60 Hz.
-
   fit = () => {
     const imgElement = this.imgElement;
 
-    if (!imgElement) {
-      return;
-    }
-
-    if (!imgElement.complete) {
+    if (!imgElement || !imgElement.complete) {
       return;
     }
 
@@ -94,7 +90,11 @@ class GridListTile extends React.Component {
         <EventListener target="window" onResize={this.handleResize} />
         <div className={classes.tile}>
           {React.Children.map(children, child => {
-            if (child && child.type === 'img') {
+            if (!React.isValidElement(child)) {
+              return null;
+            }
+
+            if (child.type === 'img') {
               return React.cloneElement(child, {
                 ref: node => {
                   this.imgElement = node;

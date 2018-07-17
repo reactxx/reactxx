@@ -3,8 +3,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import FormLabel from 'material-ui/FormLabel';
+import withStyles from '../styles/withStyles';
+import FormLabel from '../FormLabel';
 
 export const styles = theme => ({
   root: {
@@ -15,11 +15,11 @@ export const styles = theme => ({
     left: 0,
     top: 0,
     // slight alteration to spec spacing to match visual spec result
-    transform: `translate(0, ${theme.spacing.unit * 3}px) scale(1)`,
+    transform: 'translate(0, 24px) scale(1)',
   },
   marginDense: {
     // Compensation for the `Input.inputDense` style.
-    transform: `translate(0, ${theme.spacing.unit * 2.5 + 1}px) scale(1)`,
+    transform: 'translate(0, 21px) scale(1)',
   },
   shrink: {
     transform: 'translate(0, 1.5px) scale(0.75)',

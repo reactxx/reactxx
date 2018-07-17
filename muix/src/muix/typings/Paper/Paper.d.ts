@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
+import { StandardProps } from '..';
 
 export interface PaperProps
   extends StandardProps<React.HTMLAttributes<HTMLDivElement>, PaperClassKey> {

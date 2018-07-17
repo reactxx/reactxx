@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withWidth, { isWidthDown } from 'material-ui/withWidth';
+import withWidth, { isWidthDown } from '../withWidth';
 
 /**
  * Dialog will responsively be full screen *at or below* the given breakpoint

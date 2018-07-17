@@ -1,2 +1,2 @@
-export { default } from 'reactxx-muix/typings/Fade/Fade';
-export * from 'reactxx-muix/typings/Fade/Fade';
+export { default } from './Fade';
+export * from './Fade';

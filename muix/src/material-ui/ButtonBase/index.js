@@ -1,1 +1,1 @@
-export { default } from 'material-ui/ButtonBase/ButtonBase';
+export { default } from './ButtonBase';

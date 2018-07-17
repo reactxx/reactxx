@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
-import { CollapseProps } from 'reactxx-muix/typings/Collapse';
-import { PaperProps } from 'reactxx-muix/typings/Paper';
+import { StandardProps } from '..';
+import { CollapseProps } from '../Collapse';
+import { PaperProps } from '../Paper';
 
 export interface ExpansionPanelProps
   extends StandardProps<PaperProps, ExpansionPanelClassKey, 'onChange'> {

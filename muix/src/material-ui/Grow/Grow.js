@@ -3,11 +3,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
-import withTheme from 'material-ui/styles/withTheme';
-import { reflow, getTransitionProps } from 'material-ui/transitions/utils';
+import withTheme from '../styles/withTheme';
+import { reflow, getTransitionProps } from '../transitions/utils';
 
 function getScale(value) {
-  return `scale(${value}, ${Math.pow(value, 2)})`;
+  return `scale(${value}, ${value ** 2})`;
 }
 
 const styles = {
@@ -22,16 +22,18 @@ const styles = {
 };
 
 /**
- * The Grow transition is used by the [Popover](/utils/popovers) component.
+ * The Grow transition is used by the [Tooltip](/demos/tooltips) and
+ * [Popover](/utils/popover) components.
  * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
  */
 class Grow extends React.Component {
+  autoTimeout = null;
+
+  timer = null;
+
   componentWillUnmount() {
     clearTimeout(this.timer);
   }
-
-  autoTimeout = undefined;
-  timer = null;
 
   handleEnter = node => {
     const { theme, timeout } = this.props;

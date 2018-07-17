@@ -1,1 +1,1 @@
-export { default } from 'material-ui/TablePaginationActions/TablePaginationActions';
+export { default } from './TablePaginationActions';

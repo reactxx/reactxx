@@ -2,10 +2,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import NativeSelectInput from 'material-ui/NativeSelect/NativeSelectInput';
-import withStyles from 'material-ui/styles/withStyles';
-import ArrowDropDownIcon from 'material-ui/internal/svg-icons/ArrowDropDown';
-import Input from 'material-ui/Input';
+import NativeSelectInput from './NativeSelectInput';
+import withStyles from '../styles/withStyles';
+import ArrowDropDownIcon from '../internal/svg-icons/ArrowDropDown';
+import Input from '../Input';
 
 export const styles = theme => ({
   root: {
@@ -18,9 +18,9 @@ export const styles = theme => ({
     // When interacting quickly, the text can end up selected.
     // Native select can't be selected either.
     userSelect: 'none',
-    paddingRight: theme.spacing.unit * 4,
-    width: `calc(100% - ${theme.spacing.unit * 4}px)`,
-    minWidth: theme.spacing.unit * 2, // So it doesn't collapse.
+    paddingRight: 32,
+    width: 'calc(100% - 32px)',
+    minWidth: 16, // So it doesn't collapse.
     cursor: 'pointer',
     '&:focus': {
       // Show that it's not an text input

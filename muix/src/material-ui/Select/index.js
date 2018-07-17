@@ -1,1 +1,1 @@
-export { default } from 'material-ui/Select/Select';
+export { default } from './Select';

@@ -1,1 +1,1 @@
-export { default } from 'material-ui/CardHeader/CardHeader';
+export { default } from './CardHeader';

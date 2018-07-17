@@ -1,1 +1,1 @@
-export { default } from 'material-ui/NativeSelect/NativeSelect';
+export { default } from './NativeSelect';

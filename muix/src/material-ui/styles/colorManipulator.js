@@ -46,6 +46,28 @@ export function convertHexToRGB(color        ) {
 }
 
 /**
+ * Converts a color from CSS rgb format to CSS hex format.
+ *
+ * @param {string} color - RGB color, i.e. rgb(n, n, n)
+ * @returns {string} A CSS rgb color string, i.e. #nnnnnn
+ */
+export function rgbToHex(color) {
+  // Pass hex straight through
+  if (color.indexOf('#') === 0) {
+    return color;
+  }
+  function intToHex(c) {
+    const hex = c.toString(16);
+    return hex.length === 1 ? `0${hex}` : hex;
+  }
+
+  let { values } = decomposeColor(color);
+  values = values.map(n => intToHex(n));
+
+  return `#${values.join('')}`;
+}
+
+/**
  * Returns an object with the type and values of a color.
  *
  * Note: Does not support rgb % values.
@@ -132,7 +154,7 @@ export function getLuminance(color        ) {
   if (decomposedColor.type.indexOf('rgb') !== -1) {
     const rgb = decomposedColor.values.map(val => {
       val /= 255; // normalized
-      return val <= 0.03928 ? val / 12.92 : Math.pow((val + 0.055) / 1.055, 2.4);
+      return val <= 0.03928 ? val / 12.92 : ((val + 0.055) / 1.055) ** 2.4;
     });
     // Truncate at 3 digits
     return Number((0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]).toFixed(3));

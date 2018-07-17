@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import Typography from 'material-ui/Typography';
-import StepIcon from 'material-ui/StepIcon';
+import withStyles from '../styles/withStyles';
+import Typography from '../Typography';
+import StepIcon from '../StepIcon';
 
 export const styles = theme => ({
   root: {
@@ -35,14 +35,14 @@ export const styles = theme => ({
     },
     '&$alternativeLabel': {
       textAlign: 'center',
-      marginTop: theme.spacing.unit * 2,
+      marginTop: 16,
     },
     '&$error': {
       color: theme.palette.error.main,
     },
   },
   iconContainer: {
-    paddingRight: theme.spacing.unit,
+    paddingRight: 8,
     '&$alternativeLabel': {
       paddingRight: 0,
     },
@@ -173,7 +173,7 @@ StepLabel.propTypes = {
    */
   orientation: PropTypes.oneOf(['horizontal', 'vertical']),
   /**
-   * Properties applied to the `StepIcon` element.
+   * Properties applied to the [`StepIcon`](/api/step-icon) element.
    */
   StepIconProps: PropTypes.object,
 };

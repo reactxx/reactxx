@@ -1,23 +1,25 @@
 //      
 
 import deepmerge from 'deepmerge'; // < 1kb payload overhead when lodash/merge is > 3kb.
+import isPlainObject from 'is-plain-object';
 import warning from 'warning';
-import createTypography from 'material-ui/styles/createTypography';
-import createBreakpoints from 'material-ui/styles/createBreakpoints';
-import createPalette from 'material-ui/styles/createPalette';
-import createMixins from 'material-ui/styles/createMixins';
-import shadows from 'material-ui/styles/shadows';
-import transitions from 'material-ui/styles/transitions';
-import zIndex from 'material-ui/styles/zIndex';
-import spacing from 'material-ui/styles/spacing';
+import createBreakpoints from './createBreakpoints';
+import createMixins from './createMixins';
+import createPalette from './createPalette';
+import createTypography from './createTypography';
+import shadows from './shadows';
+import shape from './shape';
+import spacing from './spacing';
+import transitions from './transitions';
+import zIndex from './zIndex';
 
 function createMuiTheme(options         = {}) {
   const {
-    palette: paletteInput = {},
     breakpoints: breakpointsInput = {},
     mixins: mixinsInput = {},
-    typography: typographyInput = {},
+    palette: paletteInput = {},
     shadows: shadowsInput,
+    typography: typographyInput = {},
     ...other
   } = options;
 
@@ -35,11 +37,15 @@ function createMuiTheme(options         = {}) {
     typography: createTypography(palette, typographyInput),
     ...deepmerge(
       {
-        transitions,
+        shape,
         spacing,
+        transitions,
         zIndex,
       },
       other,
+      {
+        isMergeableObject: isPlainObject,
+      },
     ),
   };
 

@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import KeyboardArrowLeft from 'material-ui/internal/svg-icons/KeyboardArrowLeft';
-import KeyboardArrowRight from 'material-ui/internal/svg-icons/KeyboardArrowRight';
-import withStyles from 'material-ui/styles/withStyles';
-import ButtonBase from 'material-ui/ButtonBase';
+import KeyboardArrowLeft from '../internal/svg-icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '../internal/svg-icons/KeyboardArrowRight';
+import withStyles from '../styles/withStyles';
+import ButtonBase from '../ButtonBase';
 
-export const styles = theme => ({
+export const styles = {
   root: {
     color: 'inherit',
-    flex: `0 0 ${theme.spacing.unit * 7}px`,
+    flex: '0 0 56px',
   },
-});
+};
 
 /**
  * @ignore - internal component.

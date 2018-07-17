@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import { capitalize } from 'material-ui/utils/helpers';
+import withStyles from '../styles/withStyles';
+import { capitalize } from '../utils/helpers';
 
 export const styles = theme => ({
   root: {
@@ -41,7 +41,7 @@ export const styles = theme => ({
     marginBottom: '0.35em',
   },
   paragraph: {
-    marginBottom: theme.spacing.unit * 2,
+    marginBottom: 16,
   },
   colorInherit: {
     color: 'inherit',

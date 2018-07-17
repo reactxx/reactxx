@@ -1,1 +1,1 @@
-export { default } from 'material-ui/withMobileDialog/withMobileDialog';
+export { default } from './withMobileDialog';

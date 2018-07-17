@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
-import { PaperProps } from 'reactxx-muix/typings/Paper';
+import { StandardProps } from '..';
+import { PaperProps } from '../Paper';
 
 export interface SnackbarContentProps extends StandardProps<PaperProps, SnackbarContentClassKey> {
   action?: React.ReactElement<any>;

@@ -1,1 +1,1 @@
-export { default } from 'material-ui/ListItemAvatar/ListItemAvatar';
+export { default } from './ListItemAvatar';

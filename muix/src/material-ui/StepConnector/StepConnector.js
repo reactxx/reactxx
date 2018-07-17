@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
+import withStyles from '../styles/withStyles';
 
 export const styles = theme => ({
   root: {
@@ -10,11 +10,11 @@ export const styles = theme => ({
   horizontal: {},
   vertical: {
     marginLeft: 12, // half icon
-    padding: `0 0 ${theme.spacing.unit}px`,
+    padding: '0 0 8px',
   },
   alternativeLabel: {
     position: 'absolute',
-    top: theme.spacing.unit + 4,
+    top: 8 + 4,
     left: 'calc(50% + 20px)',
     right: 'calc(-50% + 20px)',
   },
@@ -29,7 +29,7 @@ export const styles = theme => ({
   lineVertical: {
     borderLeftStyle: 'solid',
     borderLeftWidth: 1,
-    minHeight: theme.spacing.unit * 3,
+    minHeight: 24,
   },
 });
 

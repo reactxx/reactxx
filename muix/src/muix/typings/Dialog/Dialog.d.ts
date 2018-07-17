@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
-import { PaperProps } from 'reactxx-muix/typings/Paper';
-import { ModalProps } from 'reactxx-muix/typings/Modal';
-import { TransitionHandlerProps, TransitionProps } from 'reactxx-muix/typings/transitions/transition';
+import { StandardProps } from '..';
+import { PaperProps } from '../Paper';
+import { ModalProps } from '../Modal';
+import { TransitionHandlerProps, TransitionProps } from '../transitions/transition';
 
 export interface DialogProps
   extends StandardProps<ModalProps & Partial<TransitionHandlerProps>, DialogClassKey, 'children'> {

@@ -1,0 +1,9 @@
+- Download last version a unzip material-ui-1.4.0\packages\material-ui\src\ to d:\reactxx\codemod\git\
+- delete test-utils
+- select *.test.js and delete
+- select *.spec.* and delete
+- select *.d.ts, ZIP and delete
+- unpack ZIP to d:\reactxx\muix\src\muix\typings\
+
+- run (form TERMINAL in VSCODE): flow-remove-types --out-dir flow/ git/
+

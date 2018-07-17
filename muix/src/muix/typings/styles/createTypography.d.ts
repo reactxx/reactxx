@@ -1,6 +1,6 @@
-import { Palette } from 'reactxx-muix/typings/styles/createPalette';
-import { Overwrite, Omit } from 'reactxx-muix/typings';
-import { CSSProperties } from 'reactxx-muix/typings/styles/withStyles';
+import { Palette } from './createPalette';
+import { Overwrite, Omit } from '..';
+import { CSSProperties } from './withStyles';
 
 export type TextStyle =
   | 'display1'

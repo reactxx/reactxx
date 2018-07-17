@@ -3,36 +3,63 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import { capitalize } from 'material-ui/utils/helpers';
-import Modal from 'material-ui/Modal';
-import Fade from 'material-ui/Fade';
-import { duration } from 'material-ui/styles/transitions';
-import Paper from 'material-ui/Paper';
+import withStyles from '../styles/withStyles';
+import { capitalize } from '../utils/helpers';
+import Modal from '../Modal';
+import Fade from '../Fade';
+import { duration } from '../styles/transitions';
+import Paper from '../Paper';
 
 export const styles = theme => ({
-  root: {
+  root: {},
+  scrollPaper: {
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
+  scrollBody: {
+    overflowY: 'auto',
+    overflowX: 'hidden',
+  },
   paper: {
     display: 'flex',
-    margin: theme.spacing.unit * 4,
     flexDirection: 'column',
-    flex: '0 1 auto',
+    margin: 48,
     position: 'relative',
     overflowY: 'auto', // Fix IE11 issue, to remove at some point.
     // We disable the focus ring for mouse, touch and keyboard users.
     outline: 'none',
   },
+  paperScrollPaper: {
+    flex: '0 1 auto',
+    maxHeight: 'calc(100% - 96px)',
+  },
+  paperScrollBody: {
+    margin: '48px auto',
+  },
   paperWidthXs: {
     maxWidth: Math.max(theme.breakpoints.values.xs, 360),
+    '&$paperScrollBody': {
+      [theme.breakpoints.down(Math.max(theme.breakpoints.values.xs, 360) + 48 * 2)]: {
+        margin: 48,
+      },
+    },
   },
   paperWidthSm: {
     maxWidth: theme.breakpoints.values.sm,
+    '&$paperScrollBody': {
+      [theme.breakpoints.down(theme.breakpoints.values.sm + 48 * 2)]: {
+        margin: 48,
+      },
+    },
   },
   paperWidthMd: {
     maxWidth: theme.breakpoints.values.md,
+    '&$paperScrollBody': {
+      [theme.breakpoints.down(theme.breakpoints.values.md + 48 * 2)]: {
+        margin: 48,
+      },
+    },
   },
   paperFullWidth: {
     width: '100%',
@@ -42,7 +69,7 @@ export const styles = theme => ({
     width: '100%',
     maxWidth: '100%',
     height: '100%',
-    maxHeight: '100%',
+    maxHeight: 'none',
     borderRadius: 0,
   },
 });
@@ -72,6 +99,7 @@ function Dialog(props) {
     onExiting,
     open,
     PaperProps,
+    scroll,
     TransitionComponent,
     transitionDuration,
     TransitionProps,
@@ -80,7 +108,7 @@ function Dialog(props) {
 
   return (
     <Modal
-      className={classNames(classes.root, className)}
+      className={classNames(classes.root, classes[`scroll${capitalize(scroll)}`], className)}
       BackdropProps={{
         transitionDuration,
         ...BackdropProps,
@@ -108,7 +136,7 @@ function Dialog(props) {
       >
         <Paper
           elevation={24}
-          className={classNames(classes.paper, {
+          className={classNames(classes.paper, classes[`paperScroll${capitalize(scroll)}`], {
             [classes[`paperWidth${maxWidth ? capitalize(maxWidth) : ''}`]]: maxWidth,
             [classes.paperFullScreen]: fullScreen,
             [classes.paperFullWidth]: fullWidth,
@@ -207,9 +235,13 @@ Dialog.propTypes = {
    */
   open: PropTypes.bool.isRequired,
   /**
-   * Properties applied to the `Paper` element.
+   * Properties applied to the [`Paper`](/api/paper) element.
    */
   PaperProps: PropTypes.object,
+  /**
+   * Determine the container for scrolling the dialog.
+   */
+  scroll: PropTypes.oneOf(['body', 'paper']),
   /**
    * Transition component.
    */
@@ -234,6 +266,7 @@ Dialog.defaultProps = {
   fullScreen: false,
   fullWidth: false,
   maxWidth: 'sm',
+  scroll: 'paper',
   TransitionComponent: Fade,
   transitionDuration: { enter: duration.enteringScreen, exit: duration.leavingScreen },
 };

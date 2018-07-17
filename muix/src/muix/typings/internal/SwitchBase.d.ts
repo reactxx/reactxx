@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
-import { IconButtonProps } from 'reactxx-muix/typings/IconButton';
+import { StandardProps } from '..';
+import { IconButtonProps } from '../IconButton';
 
 export interface SwitchBaseProps
   extends StandardProps<IconButtonProps, SwitchBaseClassKey, 'onChange'> {

@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { StandardProps, PropTypes } from 'reactxx-muix/typings';
+import { StandardProps, PropTypes } from '..';
 
 export interface IconProps
   extends StandardProps<React.HTMLAttributes<HTMLSpanElement>, IconClassKey> {
   color?: PropTypes.Color | 'action' | 'disabled' | 'error';
+  fontSize?: 'inherit' | 'default';
 }
 
 export type IconClassKey =
@@ -12,7 +13,8 @@ export type IconClassKey =
   | 'colorAction'
   | 'colorDisabled'
   | 'colorError'
-  | 'colorPrimary';
+  | 'colorPrimary'
+  | 'fontSizeInherit';
 
 declare const Icon: React.ComponentType<IconProps>;
 

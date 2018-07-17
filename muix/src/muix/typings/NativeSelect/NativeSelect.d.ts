@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
-import { InputProps } from 'reactxx-muix/typings/Input';
-import { MenuProps } from 'reactxx-muix/typings/Menu';
-import { NativeSelectInputProps } from 'reactxx-muix/typings/NativeSelect/NativeSelectInput';
+import { StandardProps } from '..';
+import { InputProps } from '../Input';
+import { MenuProps } from '../Menu';
+import { NativeSelectInputProps } from './NativeSelectInput';
 
 export interface NativeSelectProps
   extends StandardProps<InputProps, NativeSelectClassKey, 'value' | 'onChange'>,

@@ -1,2 +1,2 @@
-export { default } from 'reactxx-muix/typings/Grid/Grid';
-export * from 'reactxx-muix/typings/Grid/Grid';
+export { default } from './Grid';
+export * from './Grid';

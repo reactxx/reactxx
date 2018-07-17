@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
-import { SwitchBaseProps, SwitchBaseClassKey } from 'reactxx-muix/typings/internal/SwitchBase';
+import { StandardProps } from '..';
+import { SwitchBaseProps, SwitchBaseClassKey } from '../internal/SwitchBase';
 
 export interface CheckboxProps
   extends StandardProps<SwitchBaseProps, CheckboxClassKey, 'checkedIcon' | 'color' | 'icon'> {

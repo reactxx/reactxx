@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { Breakpoints } from 'reactxx-muix/typings/styles/createBreakpoints';
-import { Spacing } from 'reactxx-muix/typings/styles/spacing';
-import { StyleRules } from 'reactxx-muix/typings/styles';
-import { CSSProperties } from 'reactxx-muix/typings/styles/withStyles';
+import { Breakpoints } from './createBreakpoints';
+import { Spacing } from './spacing';
+import { StyleRules } from '../styles';
+import { CSSProperties } from './withStyles';
 
 export interface Mixins {
   gutters: (styles?: CSSProperties) => CSSProperties;

@@ -1,1 +1,1 @@
-export { default } from 'material-ui/TableCell/TableCell';
+export { default } from './TableCell';

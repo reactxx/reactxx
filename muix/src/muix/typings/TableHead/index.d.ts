@@ -1,2 +1,2 @@
-export { default } from 'reactxx-muix/typings/TableHead/TableHead';
-export * from 'reactxx-muix/typings/TableHead/TableHead';
+export { default } from './TableHead';
+export * from './TableHead';

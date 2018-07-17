@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MenuProps } from 'reactxx-muix/typings/Menu';
+import { MenuProps } from '../Menu';
 
 export interface SelectInputProps {
   autoFocus?: boolean;

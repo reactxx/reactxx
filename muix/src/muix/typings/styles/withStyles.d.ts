@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { WithTheme } from 'reactxx-muix/typings/styles/withTheme';
-import { ConsistentWith, Overwrite } from 'reactxx-muix/typings';
-import { Theme } from 'reactxx-muix/typings/styles/createMuiTheme';
+import { WithTheme } from '../styles/withTheme';
+import { ConsistentWith, Overwrite } from '..';
+import { Theme } from './createMuiTheme';
 import * as CSS from 'csstype';
 import * as JSS from 'jss';
 

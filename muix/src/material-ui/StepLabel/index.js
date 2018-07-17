@@ -1,1 +1,1 @@
-export { default } from 'material-ui/StepLabel/StepLabel';
+export { default } from './StepLabel';

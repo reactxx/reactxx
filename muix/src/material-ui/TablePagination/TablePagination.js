@@ -2,14 +2,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStyles from 'material-ui/styles/withStyles';
-import Input from 'material-ui/Input';
-import MenuItem from 'material-ui/MenuItem';
-import Select from 'material-ui/Select';
-import TableCell from 'material-ui/TableCell';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import TablePaginationActions from 'material-ui/TablePaginationActions';
+import withStyles from '../styles/withStyles';
+import Input from '../Input';
+import MenuItem from '../MenuItem';
+import Select from '../Select';
+import TableCell from '../TableCell';
+import Toolbar from '../Toolbar';
+import Typography from '../Typography';
+import TablePaginationActions from '../TablePaginationActions';
 
 export const styles = theme => ({
   root: {
@@ -36,13 +36,13 @@ export const styles = theme => ({
     flexShrink: 0,
   },
   selectRoot: {
-    marginRight: theme.spacing.unit * 4,
-    marginLeft: theme.spacing.unit,
+    marginRight: 32,
+    marginLeft: 8,
     color: theme.palette.text.secondary,
   },
   select: {
-    paddingLeft: theme.spacing.unit,
-    paddingRight: theme.spacing.unit * 2,
+    paddingLeft: 8,
+    paddingRight: 16,
   },
   selectIcon: {
     top: 1,
@@ -50,7 +50,7 @@ export const styles = theme => ({
   actions: {
     flexShrink: 0,
     color: theme.palette.text.secondary,
-    marginLeft: theme.spacing.unit * 2.5,
+    marginLeft: 20,
   },
 });
 
@@ -156,7 +156,7 @@ TablePagination.propTypes = {
    */
   ActionsComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
   /**
-   * Properties applied to the back arrow `IconButton` component.
+   * Properties applied to the back arrow [`IconButton`](/api/icon-button) component.
    */
   backIconButtonProps: PropTypes.object,
   /**
@@ -187,7 +187,7 @@ TablePagination.propTypes = {
    */
   labelRowsPerPage: PropTypes.node,
   /**
-   * Properties applied to the next arrow `IconButton` element.
+   * Properties applied to the next arrow [`IconButton`](/api/icon-button) element.
    */
   nextIconButtonProps: PropTypes.object,
   /**
@@ -217,7 +217,7 @@ TablePagination.propTypes = {
    */
   rowsPerPageOptions: PropTypes.array,
   /**
-   * Properties applied to the rows per page `Select` element.
+   * Properties applied to the rows per page [`Select`](/api/select) element.
    */
   SelectProps: PropTypes.object,
 };

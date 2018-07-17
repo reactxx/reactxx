@@ -1,1 +1,1 @@
-export { default } from 'material-ui/Tooltip/Tooltip';
+export { default } from './Tooltip';

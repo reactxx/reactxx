@@ -1,2 +1,2 @@
-export { default } from 'reactxx-muix/typings/Tab/Tab';
-export * from 'reactxx-muix/typings/Tab/Tab';
+export { default } from './Tab';
+export * from './Tab';

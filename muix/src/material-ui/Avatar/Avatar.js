@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
+import withStyles from '../styles/withStyles';
 
 export const styles = theme => ({
   root: {
@@ -10,8 +10,8 @@ export const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0,
-    width: theme.spacing.unit * 5,
-    height: theme.spacing.unit * 5,
+    width: 40,
+    height: 40,
     fontFamily: theme.typography.fontFamily,
     fontSize: theme.typography.pxToRem(20),
     borderRadius: '50%',

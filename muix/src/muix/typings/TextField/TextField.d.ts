@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { StandardProps, PropTypes } from 'reactxx-muix/typings';
-import { FormControlProps } from 'reactxx-muix/typings/FormControl';
-import { FormHelperTextProps } from 'reactxx-muix/typings/FormHelperText';
-import { InputProps } from 'reactxx-muix/typings/Input';
-import { InputLabelProps } from 'reactxx-muix/typings/InputLabel';
-import { FormControlClassKey } from 'reactxx-muix/typings/FormControl';
-import { SelectProps } from 'reactxx-muix/typings/Select';
+import { StandardProps, PropTypes } from '..';
+import { FormControlProps } from '../FormControl';
+import { FormHelperTextProps } from '../FormHelperText';
+import { InputProps } from '../Input';
+import { InputLabelProps } from '../InputLabel';
+import { FormControlClassKey } from '../FormControl';
+import { SelectProps } from '../Select';
 
 export interface TextFieldProps
   extends StandardProps<FormControlProps, TextFieldClassKey, 'onChange' | 'defaultValue'> {

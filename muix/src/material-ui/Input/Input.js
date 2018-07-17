@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import Textarea from 'material-ui/Input/Textarea';
+import withStyles from '../styles/withStyles';
+import Textarea from './Textarea';
 
 // Supports determination of isControlled().
 // Controlled input accepts its current value as a prop.
@@ -71,7 +71,7 @@ export const styles = theme => {
     },
     formControl: {
       'label + &': {
-        marginTop: theme.spacing.unit * 2,
+        marginTop: 16,
       },
     },
     focused: {},
@@ -121,7 +121,7 @@ export const styles = theme => {
     },
     error: {},
     multiline: {
-      padding: `${theme.spacing.unit - 2}px 0 ${theme.spacing.unit - 1}px`,
+      padding: `${8 - 2}px 0 ${8 - 1}px`,
     },
     fullWidth: {
       width: '100%',
@@ -129,7 +129,7 @@ export const styles = theme => {
     input: {
       font: 'inherit',
       color: 'currentColor',
-      padding: `${theme.spacing.unit - 2}px 0 ${theme.spacing.unit - 1}px`,
+      padding: `${8 - 2}px 0 ${8 - 1}px`,
       border: 0,
       boxSizing: 'content-box',
       verticalAlign: 'middle',
@@ -172,7 +172,7 @@ export const styles = theme => {
       },
     },
     inputMarginDense: {
-      paddingTop: theme.spacing.unit / 2 - 1,
+      paddingTop: 4 - 1,
     },
     inputMultiline: {
       resize: 'none',
@@ -217,6 +217,10 @@ function formControlState(props, context) {
 }
 
 class Input extends React.Component {
+  isControlled = this.props.value != null;
+
+  input = null; // Holds the input reference
+
   constructor(props, context) {
     super(props, context);
 
@@ -284,9 +288,6 @@ class Input extends React.Component {
       this.checkDirty(this.props);
     } // else performed in the onChange
   }
-
-  isControlled = this.props.value != null;
-  input = null; // Holds the input reference
 
   handleFocus = event => {
     // Fix a bug with IE11 where the focus/blur events are triggered
@@ -472,7 +473,6 @@ class Input extends React.Component {
         {startAdornment}
         <InputComponent
           aria-invalid={error}
-          aria-required={required}
           autoComplete={autoComplete}
           autoFocus={autoFocus}
           className={inputClassName}

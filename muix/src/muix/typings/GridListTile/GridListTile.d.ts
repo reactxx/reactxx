@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
+import { StandardProps } from '..';
 
 export interface GridListTileProps
   extends StandardProps<React.HTMLAttributes<HTMLLIElement>, GridListTileClassKey> {

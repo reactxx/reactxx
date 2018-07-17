@@ -1,2 +1,2 @@
-export { default } from 'reactxx-muix/typings/Avatar/Avatar';
-export * from 'reactxx-muix/typings/Avatar/Avatar';
+export { default } from './Avatar';
+export * from './Avatar';

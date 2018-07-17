@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from 'material-ui/styles/withStyles';
-import Fade from 'material-ui/Fade';
+import withStyles from '../styles/withStyles';
+import Fade from '../Fade';
 
 export const styles = {
   root: {

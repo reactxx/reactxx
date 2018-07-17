@@ -1,19 +1,18 @@
 import * as React from 'react';
-import { StandardProps, ModalManager } from 'reactxx-muix/typings';
-import { BackdropProps } from 'reactxx-muix/typings/Backdrop';
-import { PortalProps } from 'reactxx-muix/typings/Portal';
+import { StandardProps, ModalManager } from '..';
+import { BackdropProps } from '../Backdrop';
+import { PortalProps } from '../Portal';
 
 export interface ModalProps
-  extends StandardProps<
-      React.HtmlHTMLAttributes<HTMLDivElement> & Partial<PortalProps>,
-      ModalClassKey
-    > {
+  extends StandardProps<React.HtmlHTMLAttributes<HTMLDivElement>, ModalClassKey> {
   BackdropComponent?: React.ReactType<BackdropProps>;
   BackdropProps?: Partial<BackdropProps>;
+  container?: PortalProps['container'];
   disableAutoFocus?: boolean;
   disableBackdropClick?: boolean;
   disableEnforceFocus?: boolean;
   disableEscapeKeyDown?: boolean;
+  disablePortal?: PortalProps['disablePortal'];
   disableRestoreFocus?: boolean;
   hideBackdrop?: boolean;
   keepMounted?: boolean;

@@ -1,5 +1,5 @@
-import { StandardProps } from 'reactxx-muix/typings';
-import { ButtonBaseProps } from 'reactxx-muix/typings/ButtonBase/ButtonBase';
+import { StandardProps } from '..';
+import { ButtonBaseProps } from '../ButtonBase/ButtonBase';
 
 export interface TabScrollButtonProps
   extends StandardProps<ButtonBaseProps, TabScrollButtonClassKey> {

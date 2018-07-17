@@ -4,9 +4,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
-import withStyles from 'material-ui/styles/withStyles';
-import Popover from 'material-ui/Popover';
-import MenuList from 'material-ui/MenuList';
+import withStyles from '../styles/withStyles';
+import Popover from '../Popover';
+import MenuList from '../MenuList';
 
 const RTL_ORIGIN = {
   vertical: 'top',
@@ -26,12 +26,16 @@ export const styles = {
     maxHeight: 'calc(100% - 96px)',
     // Add iOS momentum scrolling.
     WebkitOverflowScrolling: 'touch',
+    // Fix a scrolling issue on Chrome.
+    transform: 'translateZ(0)',
   },
 };
 
 class Menu extends React.Component {
+  menuList = null;
+
   componentDidMount() {
-    if (this.props.open) {
+    if (this.props.open && this.props.disableAutoFocusItem !== true) {
       this.focus();
     }
   }
@@ -43,8 +47,6 @@ class Menu extends React.Component {
 
     return ReactDOM.findDOMNode(this.menuList.selectedItem);
   };
-
-  menuList = undefined;
 
   focus = () => {
     if (this.menuList && this.menuList.selectedItem) {
@@ -59,11 +61,13 @@ class Menu extends React.Component {
   };
 
   handleEnter = element => {
-    const { theme } = this.props;
+    const { disableAutoFocusItem, theme } = this.props;
     const menuList = ReactDOM.findDOMNode(this.menuList);
 
     // Focus so the scroll computation of the Popover works as expected.
-    this.focus();
+    if (disableAutoFocusItem !== true) {
+      this.focus();
+    }
 
     // Let's ignore that piece of logic if users are already overriding the width
     // of the menu.
@@ -92,6 +96,7 @@ class Menu extends React.Component {
     const {
       children,
       classes,
+      disableAutoFocusItem,
       MenuListProps,
       onEnter,
       PaperProps = {},
@@ -118,7 +123,6 @@ class Menu extends React.Component {
       >
         <MenuList
           data-mui-test="Menu"
-          role="menu"
           onKeyDown={this.handleListKeyDown}
           {...MenuListProps}
           ref={node => {
@@ -136,7 +140,7 @@ Menu.propTypes = {
   /**
    * The DOM element used to set the position of the menu.
    */
-  anchorEl: PropTypes.object,
+  anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   /**
    * Menu contents, normally `MenuItem`s.
    */
@@ -147,7 +151,11 @@ Menu.propTypes = {
    */
   classes: PropTypes.object.isRequired,
   /**
-   * Properties applied to the `MenuList` element.
+   * If `true`, the selected / first menu item will not be auto focused.
+   */
+  disableAutoFocusItem: PropTypes.bool,
+  /**
+   * Properties applied to the [`MenuList`](/api/menu-list) element.
    */
   MenuListProps: PropTypes.object,
   /**
@@ -207,6 +215,7 @@ Menu.propTypes = {
 };
 
 Menu.defaultProps = {
+  disableAutoFocusItem: false,
   transitionDuration: 'auto',
 };
 

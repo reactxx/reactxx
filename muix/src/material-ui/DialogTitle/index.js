@@ -1,1 +1,1 @@
-export { default } from 'material-ui/DialogTitle/DialogTitle';
+export { default } from './DialogTitle';

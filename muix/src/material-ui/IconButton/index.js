@@ -1,1 +1,1 @@
-export { default } from 'material-ui/IconButton/IconButton';
+export { default } from './IconButton';

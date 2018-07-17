@@ -1,1 +1,1 @@
-export { default } from 'material-ui/ListItem/ListItem';
+export { default } from './ListItem';

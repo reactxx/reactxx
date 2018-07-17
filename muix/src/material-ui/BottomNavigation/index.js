@@ -1,1 +1,1 @@
-export { default } from 'material-ui/BottomNavigation/BottomNavigation';
+export { default } from './BottomNavigation';

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StandardProps } from 'reactxx-muix/typings';
-import { PaperProps } from 'reactxx-muix/typings/Paper';
-import { ButtonProps } from 'reactxx-muix/typings/Button';
+import { StandardProps } from '..';
+import { PaperProps } from '../Paper';
+import { ButtonProps } from '../Button';
 
 export interface MobileStepperProps extends StandardProps<PaperProps, MobileStepperClassKey> {
   activeStep?: number;
