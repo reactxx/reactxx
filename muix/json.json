@@ -1,13 +1,13 @@
 {
-  "type": "FunctionDeclaration",
-  "id": {
+  "type": "ClassMethod",
+  "static": false,
+  "key": {
     "type": "Identifier",
-    "name": "Test",
-    "$path": "program/body/#0/id",
-    "$qpath": "File/Program/FunctionDeclaration/Identifier",
-    "$parentPath": "program/body/#0",
-    "$deep": 3
+    "name": "render"
   },
+  "computed": false,
+  "kind": "method",
+  "id": null,
   "generator": false,
   "async": false,
   "params": [],
@@ -20,72 +20,71 @@
           {
             "type": "VariableDeclarator",
             "id": {
-              "type": "ObjectPattern",
-              "properties": [
-                {
-                  "type": "ObjectProperty",
-                  "method": false,
-                  "key": {
-                    "type": "Identifier",
-                    "name": "classNames",
-                    "$path": "program/body/#0/body/body/#0/declarations/#0/id/properties/#0/key",
-                    "$qpath": "File/Program/FunctionDeclaration/BlockStatement/VariableDeclaration/VariableDeclarator/ObjectPattern/ObjectProperty/Identifier",
-                    "$parentPath": "program/body/#0/body/body/#0/declarations/#0/id/properties/#0",
-                    "$deep": 8
-                  },
-                  "computed": false,
-                  "shorthand": true,
-                  "value": {
-                    "type": "Identifier",
-                    "name": "classNames",
-                    "$path": "program/body/#0/body/body/#0/declarations/#0/id/properties/#0/value",
-                    "$qpath": "File/Program/FunctionDeclaration/BlockStatement/VariableDeclaration/VariableDeclarator/ObjectPattern/ObjectProperty/Identifier",
-                    "$parentPath": "program/body/#0/body/body/#0/declarations/#0/id/properties/#0",
-                    "$deep": 8
-                  },
-                  "extra": {
-                    "shorthand": true,
-                    "$path": "program/body/#0/body/body/#0/declarations/#0/id/properties/#0/extra"
-                  },
-                  "$path": "program/body/#0/body/body/#0/declarations/#0/id/properties/#0",
-                  "$qpath": "File/Program/FunctionDeclaration/BlockStatement/VariableDeclaration/VariableDeclarator/ObjectPattern/ObjectProperty",
-                  "$parentPath": "program/body/#0/body/body/#0/declarations/#0/id",
-                  "$deep": 7
-                }
-              ],
-              "$path": "program/body/#0/body/body/#0/declarations/#0/id",
-              "$qpath": "File/Program/FunctionDeclaration/BlockStatement/VariableDeclaration/VariableDeclarator/ObjectPattern",
-              "$parentPath": "program/body/#0/body/body/#0/declarations/#0",
-              "$deep": 6
+              "type": "Identifier",
+              "name": "x"
             },
             "init": {
-              "type": "Identifier",
-              "name": "props",
-              "$path": "program/body/#0/body/body/#0/declarations/#0/init",
-              "$qpath": "File/Program/FunctionDeclaration/BlockStatement/VariableDeclaration/VariableDeclarator/Identifier",
-              "$parentPath": "program/body/#0/body/body/#0/declarations/#0",
-              "$deep": 6
-            },
-            "$path": "program/body/#0/body/body/#0/declarations/#0",
-            "$qpath": "File/Program/FunctionDeclaration/BlockStatement/VariableDeclaration/VariableDeclarator",
-            "$parentPath": "program/body/#0/body/body/#0",
-            "$deep": 5
+              "type": "JSXElement",
+              "openingElement": {
+                "type": "JSXOpeningElement",
+                "name": {
+                  "type": "JSXIdentifier",
+                  "name": "span"
+                },
+                "attributes": [
+                  {
+                    "type": "JSXAttribute",
+                    "name": {
+                      "type": "JSXIdentifier",
+                      "name": "className"
+                    },
+                    "value": {
+                      "type": "JSXExpressionContainer",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "Identifier",
+                          "name": "classNames"
+                        },
+                        "arguments": [
+                          {
+                            "type": "MemberExpression",
+                            "object": {
+                              "type": "Identifier",
+                              "name": "classes"
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "label"
+                            },
+                            "computed": false
+                          },
+                          {
+                            "type": "MemberExpression",
+                            "object": {
+                              "type": "Identifier",
+                              "name": "classes"
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "root"
+                            },
+                            "computed": false
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "selfClosing": true
+              },
+              "closingElement": null,
+              "children": []
+            }
           }
         ],
-        "kind": "const",
-        "$path": "program/body/#0/body/body/#0",
-        "$qpath": "File/Program/FunctionDeclaration/BlockStatement/VariableDeclaration",
-        "$parentPath": "program/body/#0/body",
-        "$deep": 4
+        "kind": "const"
       }
-    ],
-    "$path": "program/body/#0/body",
-    "$qpath": "File/Program/FunctionDeclaration/BlockStatement",
-    "$parentPath": "program/body/#0",
-    "$deep": 3
-  },
-  "$path": "program/body/#0",
-  "$qpath": "File/Program/FunctionDeclaration",
-  "$parentPath": "program",
-  "$deep": 2
+    ]
+  }
 }

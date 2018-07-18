@@ -16,7 +16,7 @@ export const parseCode = (code: string) => {
 
 export const parseFile = (fileName: string) => parseCode(fs.readFileSync(fileName, { encoding: 'utf-8' }))
 
-export const generateCode = (ast:Ast.Ast) => generate(ast, { /* options */ })
+export const generateCode = (ast:Ast.Ast) => generate(ast, { /* options */ }).code as string
 
 export const generateFile = (ast:Ast.Ast, fileName:string) => fsExtra.outputFileSync (fileName, generateCode(ast))
 

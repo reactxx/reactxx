@@ -3,11 +3,11 @@ import * as ASTQ from 'astq'
 export const astq = new ASTQ();
 
 export type Ast = {
-    $path:string
-    $qpath:string,
-    $parentPath:string
-    $deep:number
-} & {[prop:string]: any}
+    $path: string
+    $qpath: string,
+    $parentPath: string
+    $deep: number
+} & { [prop: string]: any }
 
 const ignores = {
     start: true,
@@ -17,6 +17,12 @@ const ignores = {
     interpreter: true,
     directives: true,
     comments: true,
+}
+
+export function removeUnused(root: Ast) {
+    removeIgnored(root)
+    removeTemporaryFields(root)
+    return root
 }
 
 export function removeIgnored(root: Ast) {
@@ -66,7 +72,7 @@ export const removeTemporaryFields = (root: Ast) => {
 
 export const removeNode = (_root: Ast | any, path: string) => {
     if (!path) return null
-    let root:any = _root
+    let root: any = _root
     const parts = path.split('/')
     parts.forEach((part, idx) => {
         const isDelete = idx === parts.length - 1

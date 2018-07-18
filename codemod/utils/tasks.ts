@@ -11,71 +11,75 @@ Ast.astq.func("isHTMLTag", (adapter, node, par) => {
     return first === first.toLowerCase()
 })
 
-export const getNode_importPackage = (ast: Ast.Ast, name: string) => Ast.astq.query(ast, 
-    `// ImportDeclaration [ /ImportDefaultSpecifier/Identifier [@name == "${name}"] ]`)
+export const getNode_importPackage = (ast: Ast.Ast, name: string, allowEmpty: boolean | null = false) => checkSingleResult (Ast.astq.query(ast, 
+    `// ImportDeclaration [ /ImportDefaultSpecifier/Identifier [@name == "${name}"] ]`), allowEmpty)
 
-export const getNode_functionGlobal = (ast: Ast.Ast, name: string) => Ast.astq.query(ast, 
-    `// Program/FunctionDeclaration [ /Identifier [@name == "${name}"] ]`)
+export const getNode_functionGlobal = (ast: Ast.Ast, name: string, allowEmpty: boolean | null = false) => checkSingleResult (Ast.astq.query(ast, 
+    `// Program/FunctionDeclaration [ /Identifier [@name == "${name}"] ]`), allowEmpty)
 
-export const getNode_class = (ast: Ast.Ast, name: string) => Ast.astq.query(ast, 
-    `// Program/ClassDeclaration [ /Identifier [@name == "${name}"] ]`)
+export const getNode_class = (ast: Ast.Ast, name: string, allowEmpty: boolean | null = false) => checkSingleResult (Ast.astq.query(ast, 
+    `// Program/ClassDeclaration [ /Identifier [@name == "${name}"] ]`), allowEmpty)
 
-export const getNode_classMethod = (ast: Ast.Ast, className: string, methodName) => Ast.astq.query(ast, 
-    `// Program/ClassDeclaration [ /Identifier [@name == "${className}"] ] // ClassMethod [ /Identifier [ @name == "${methodName}"] ]`)
+export const getNode_classMethod = (ast: Ast.Ast, className: string, methodName, mode: boolean | null = false) => checkSingleResult (Ast.astq.query(ast, 
+    `// Program/ClassDeclaration [ /Identifier [@name == "${className}"] ] // ClassMethod [ /Identifier [ @name == "${methodName}"] ]`), mode)
 
-export const checkSingleResult = (res: Ast.Ast[]) => {
-    warning(res && res.length === 1, 'checkSingle: single result expected')
+export const checkSingleResult = (res: Ast.Ast[], allowEmpty: boolean | null = false) => {
+    if (allowEmpty===null) return res as any as Ast.Ast
+    warning(allowEmpty===true || res.length === 1, 'checkSingle: single result expected')
     return res[0]
 }
 
 export const removeClassNamesImport = (root: Ast.Ast) => {
-    Ast.removeNode(root, checkSingleResult(getNode_importPackage(root, 'classNames')).$path)
+    Ast.removeNode(root, getNode_importPackage(root, 'classNames').$path)
 }
 
 export const adjustHtmlClassName = (root: Ast.Ast, functionName: string) => {
-    const func = checkSingleResult(getNode_functionGlobal(root, functionName))
-    const htmls = Ast.astq.query(func, '/BlockStatement // JSXElement [ /JSXOpeningElement/JSXIdentifier [ isHTMLTag(@name) ] && // JSXAttribute/JSXIdentifier [ @name=="className" ] ]') as Ast.Ast[]
+    const func = getNode_functionGlobal(root, functionName, false) || getNode_classMethod(root, functionName, 'render')
+    const htmls = Ast.astq.query(func.body, '// JSXElement [ /JSXOpeningElement/JSXIdentifier [ isHTMLTag(@name) ] && // JSXAttribute/JSXIdentifier [ @name=="className" ] ]') as Ast.Ast[]
+    const classNames = 'classNames('
     htmls.forEach(html => {
-        const clasName = checkSingleResult(Ast.astq.query(html, '// JSXAttribute [ /JSXIdentifier [ @name=="className" ] ]'))
+        const clasName = checkSingleResult(Ast.astq.query(html, '/JSXOpeningElement/JSXAttribute [ /JSXIdentifier [ @name=="className" ] ]'))
         const oldCode = Parser.generateCode(clasName.value.expression)
-        clasName.value.expression = Ast.removeIgnored (Parser.parseExpressionLow(`classNamesStr(${oldCode.code})`))
+        const newCode = oldCode.startsWith(classNames) ? 'classNamesStr(' + oldCode.substr(classNames.length) : `classNamesStr(${oldCode})`
+        clasName.value.expression = Parser.parseExpressionLow(newCode)
     })
-    const res = Parser.generateCode (root)
-    return null
+    return root
 }
 
 export const selectClassNamesFromProps = (root: Ast.Ast, functionName: string) => {
-    let func = getNode_functionGlobal(root, functionName)
-    func = func && func.length==1 ? func[0] : checkSingleResult (getNode_classMethod(root, functionName, 'render'))
+    const func = getNode_functionGlobal(root, functionName, false) || getNode_classMethod(root, functionName, 'render')
     const selectProps = checkSingleResult(Ast.astq.query(func.body, '/VariableDeclaration/VariableDeclarator [ /Identifier [@name == "props"] ]'))
     const place = selectProps.id.properties;
-    (place as Array<any>).splice(0, 0, JSON.parse(`
-    {
-        "type": "ObjectProperty",
-        "method": false,
-        "key": {
-          "type": "Identifier",
-          "name": "classNames"
-        },
-        "computed": false,
-        "shorthand": true,
-        "value": {
-          "type": "Identifier",
-          "name": "classNames"
-        },
-        "trailingComments": [
-          {
-            "type": "CommentBlock",
-            "value": "*** REACTXX PATCH: selectClassNamesFromProps"
-          }
-        ]  
-      }
-    `))
+    (place as Array<any>).splice(0, 0, selectFromObject('className'), selectFromObject('classNameStr'))
+    Ast.removeIgnored(root)
+    Ast.removeTemporaryFields(root)
+    return root
 }
 
-// let res
-// res = selectClassNamesFromProps(Parser.parseCode('function Test () { const {classNames} = props }'), 'Test')
-// res = selectClassNamesFromProps(Parser.parseCode('class Test { render() { const {classNames} = props } }'), 'Test')
+const selectFromObject = (name:string) =>({
+    "type": "ObjectProperty",
+    "method": false,
+    "key": {
+      "type": "Identifier",
+      "name": name
+    },
+    "computed": false,
+    "shorthand": true,
+    "value": {
+      "type": "Identifier",
+      "name": name
+    },
+    "extra": {
+      "shorthand": true
+    }
+  })
 
-// res = null
+  let res
+  //res = Parser.generateCode(selectClassNamesFromProps(Parser.parseCode('function Test () { const {xxx} = props }'), 'Test'))
+  //res = Parser.generateCode(selectClassNamesFromProps(Parser.parseCode('class Test { render() { const {xxx} = props } }'), 'Test'))
 
+  //res = Parser.generateCode(adjustHtmlClassName(Parser.parseCode('function Test () { const x = <span className={classes.label}><span className={classes.label}/></span> }'), 'Test'))
+  //res = Parser.generateCode(adjustHtmlClassName(Parser.parseCode('class Test { render () { const x = <span className={classes.label}><span className={classes.label}/></span> } }'), 'Test'))
+  res = Parser.generateCode(adjustHtmlClassName(Parser.parseCode('class Test { render () { const x = <span className={classNames(classes.label, classes.root)}><span className={classes.label}/></span> } }'), 'Test'))
+
+  res = null
