@@ -4,8 +4,8 @@ import generate from '@babel/generator';
 import * as fs from 'fs';
 import * as fsExtra from 'fs-extra';
 
-export const parseCodeLow = (code: string) => parse(code, { sourceType: 'module', plugins: ['jsx', 'objectRestSpread'] });
-export const parseExpressionLow = (code: string) => parseExpression(code, { plugins: ['jsx', 'objectRestSpread'] });
+export const parseCodeLow = (code: string) => parse(code, { sourceType: 'module', plugins: ['jsx', 'objectRestSpread', 'classProperties'] });
+export const parseExpressionLow = (code: string) => parseExpression(code, { plugins: ['jsx', 'objectRestSpread', 'classProperties'] });
 
 export const parseCode = (code: string) => {
     const ast = parseCodeLow(code)

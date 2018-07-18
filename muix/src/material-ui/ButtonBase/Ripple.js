@@ -1,31 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Transition from 'react-transition-group/Transition';
-
 /**
  * @ignore - internal component.
  */
+
 class Ripple extends React.Component {
   state = {
     visible: false,
-    leaving: false,
+    leaving: false
   };
-
   handleEnter = () => {
     this.setState({
-      visible: true,
+      visible: true
     });
   };
-
   handleExit = () => {
     this.setState({
-      leaving: true,
+      leaving: true
     });
   };
 
   render() {
     const {
+      classNames,
+      classNamesStr,
       classes,
       className: classNameProp,
       pulsate,
@@ -34,69 +33,66 @@ class Ripple extends React.Component {
       rippleSize,
       ...other
     } = this.props;
-    const { visible, leaving } = this.state;
-
-    const rippleClassName = classNames(
-      classes.ripple,
-      {
-        [classes.rippleVisible]: visible,
-        [classes.ripplePulsate]: pulsate,
-      },
-      classNameProp,
-    );
-
+    const {
+      visible,
+      leaving
+    } = this.state;
+    const rippleClassName = classNames(classes.ripple, {
+      [classes.rippleVisible]: visible,
+      [classes.ripplePulsate]: pulsate
+    }, classNameProp);
     const rippleStyles = {
       width: rippleSize,
       height: rippleSize,
       top: -(rippleSize / 2) + rippleY,
-      left: -(rippleSize / 2) + rippleX,
+      left: -(rippleSize / 2) + rippleX
     };
-
     const childClassName = classNames(classes.child, {
       [classes.childLeaving]: leaving,
-      [classes.childPulsate]: pulsate,
+      [classes.childPulsate]: pulsate
     });
-
-    return (
-      <Transition onEnter={this.handleEnter} onExit={this.handleExit} {...other}>
-        <span className={rippleClassName} style={rippleStyles}>
-          <span className={childClassName} />
+    return <Transition onEnter={this.handleEnter} onExit={this.handleExit} {...other}>
+        <span className={classNamesStr(rippleClassName)} style={rippleStyles}>
+          <span className={classNamesStr(childClassName)} />
         </span>
-      </Transition>
-    );
+      </Transition>;
   }
+
 }
 
 Ripple.propTypes = {
   /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css-api) below for more details.
-   */
+     * Override or extend the styles applied to the component.
+     * See [CSS API](#css-api) below for more details.
+     */
   classes: PropTypes.object.isRequired,
+
   /**
-   * @ignore
-   */
+     * @ignore
+     */
   className: PropTypes.string,
+
   /**
-   * If `true`, the ripple pulsates, typically indicating the keyboard focus state of an element.
-   */
+     * If `true`, the ripple pulsates, typically indicating the keyboard focus state of an element.
+     */
   pulsate: PropTypes.bool,
+
   /**
-   * Diameter of the ripple.
-   */
+     * Diameter of the ripple.
+     */
   rippleSize: PropTypes.number,
+
   /**
-   * Horizontal position of the ripple center.
-   */
+     * Horizontal position of the ripple center.
+     */
   rippleX: PropTypes.number,
+
   /**
-   * Vertical position of the ripple center.
-   */
-  rippleY: PropTypes.number,
+     * Vertical position of the ripple center.
+     */
+  rippleY: PropTypes.number
 };
-
 Ripple.defaultProps = {
-  pulsate: false,
+  pulsate: false
 };
-
 export default Ripple;

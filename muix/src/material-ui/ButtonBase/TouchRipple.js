@@ -2,13 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
-import classNames from 'classnames';
 import withStyles from '../styles/withStyles';
 import Ripple from './Ripple';
-
 const DURATION = 550;
 export const DELAY_RIPPLE = 80;
-
 export const styles = theme => ({
   root: {
     display: 'block',
@@ -20,7 +17,7 @@ export const styles = theme => ({
     left: 0,
     top: 0,
     pointerEvents: 'none',
-    zIndex: 0,
+    zIndex: 0
   },
   ripple: {
     width: 50,
@@ -28,15 +25,15 @@ export const styles = theme => ({
     left: 0,
     top: 0,
     opacity: 0,
-    position: 'absolute',
+    position: 'absolute'
   },
   rippleVisible: {
     opacity: 0.3,
     transform: 'scale(1)',
-    animation: `mui-ripple-enter ${DURATION}ms ${theme.transitions.easing.easeInOut}`,
+    animation: `mui-ripple-enter ${DURATION}ms ${theme.transitions.easing.easeInOut}`
   },
   ripplePulsate: {
-    animationDuration: `${theme.transitions.duration.shorter}ms`,
+    animationDuration: `${theme.transitions.duration.shorter}ms`
   },
   child: {
     opacity: 1,
@@ -44,64 +41,61 @@ export const styles = theme => ({
     width: '100%',
     height: '100%',
     borderRadius: '50%',
-    backgroundColor: 'currentColor',
+    backgroundColor: 'currentColor'
   },
   childLeaving: {
     opacity: 0,
-    animation: `mui-ripple-exit ${DURATION}ms ${theme.transitions.easing.easeInOut}`,
+    animation: `mui-ripple-exit ${DURATION}ms ${theme.transitions.easing.easeInOut}`
   },
   childPulsate: {
     position: 'absolute',
     left: 0,
     top: 0,
-    animation: `mui-ripple-pulsate 2500ms ${theme.transitions.easing.easeInOut} 200ms infinite`,
+    animation: `mui-ripple-pulsate 2500ms ${theme.transitions.easing.easeInOut} 200ms infinite`
   },
   '@keyframes mui-ripple-enter': {
     '0%': {
       transform: 'scale(0)',
-      opacity: 0.1,
+      opacity: 0.1
     },
     '100%': {
       transform: 'scale(1)',
-      opacity: 0.3,
-    },
+      opacity: 0.3
+    }
   },
   '@keyframes mui-ripple-exit': {
     '0%': {
-      opacity: 1,
+      opacity: 1
     },
     '100%': {
-      opacity: 0,
-    },
+      opacity: 0
+    }
   },
   '@keyframes mui-ripple-pulsate': {
     '0%': {
-      transform: 'scale(1)',
+      transform: 'scale(1)'
     },
     '50%': {
-      transform: 'scale(0.92)',
+      transform: 'scale(0.92)'
     },
     '100%': {
-      transform: 'scale(1)',
-    },
-  },
+      transform: 'scale(1)'
+    }
+  }
 });
 
 class TouchRipple extends React.PureComponent {
   // Used to filter out mouse emulated events on mobile.
-  ignoringMouseDown = false;
-
-  // We use a timer in order to only show the ripples for touch "click" like events.
+  ignoringMouseDown = false; // We use a timer in order to only show the ripples for touch "click" like events.
   // We don't want to display the ripple for touch scroll events.
-  startTimer = null;
 
-  // This is the hook called once the previous timeout is ready.
+  startTimer = null; // This is the hook called once the previous timeout is ready.
+
   startTimerCommit = null;
-
   state = {
     // eslint-disable-next-line react/no-unused-state
     nextKey: 0,
-    ripples: [],
+    ripples: []
   };
 
   componentWillUnmount() {
@@ -109,14 +103,16 @@ class TouchRipple extends React.PureComponent {
   }
 
   pulsate = () => {
-    this.start({}, { pulsate: true });
+    this.start({}, {
+      pulsate: true
+    });
   };
-
   start = (event = {}, options = {}, cb) => {
     const {
       pulsate = false,
       center = this.props.center || options.pulsate,
-      fakeElement = false, // For test purposes
+      fakeElement = false // For test purposes
+
     } = options;
 
     if (event.type === 'mousedown' && this.ignoringMouseDown) {
@@ -129,25 +125,18 @@ class TouchRipple extends React.PureComponent {
     }
 
     const element = fakeElement ? null : ReactDOM.findDOMNode(this);
-    const rect = element
-      ? element.getBoundingClientRect()
-      : {
-          width: 0,
-          height: 0,
-          left: 0,
-          top: 0,
-        };
+    const rect = element ? element.getBoundingClientRect() : {
+      width: 0,
+      height: 0,
+      left: 0,
+      top: 0
+    }; // Get the size of the ripple
 
-    // Get the size of the ripple
     let rippleX;
     let rippleY;
     let rippleSize;
 
-    if (
-      center ||
-      (event.clientX === 0 && event.clientY === 0) ||
-      (!event.clientX && !event.touches)
-    ) {
+    if (center || event.clientX === 0 && event.clientY === 0 || !event.clientX && !event.touches) {
       rippleX = Math.round(rect.width / 2);
       rippleY = Math.round(rect.height / 2);
     } else {
@@ -158,27 +147,31 @@ class TouchRipple extends React.PureComponent {
     }
 
     if (center) {
-      rippleSize = Math.sqrt((2 * rect.width ** 2 + rect.height ** 2) / 3);
+      rippleSize = Math.sqrt((2 * rect.width ** 2 + rect.height ** 2) / 3); // For some reason the animation is broken on Mobile Chrome if the size if even.
 
-      // For some reason the animation is broken on Mobile Chrome if the size if even.
       if (rippleSize % 2 === 0) {
         rippleSize += 1;
       }
     } else {
-      const sizeX =
-        Math.max(Math.abs((element ? element.clientWidth : 0) - rippleX), rippleX) * 2 + 2;
-      const sizeY =
-        Math.max(Math.abs((element ? element.clientHeight : 0) - rippleY), rippleY) * 2 + 2;
+      const sizeX = Math.max(Math.abs((element ? element.clientWidth : 0) - rippleX), rippleX) * 2 + 2;
+      const sizeY = Math.max(Math.abs((element ? element.clientHeight : 0) - rippleY), rippleY) * 2 + 2;
       rippleSize = Math.sqrt(sizeX ** 2 + sizeY ** 2);
-    }
+    } // Touche devices
 
-    // Touche devices
+
     if (event.touches) {
       // Prepare the ripple effect.
       this.startTimerCommit = () => {
-        this.startCommit({ pulsate, rippleX, rippleY, rippleSize, cb });
-      };
-      // Deplay the execution of the ripple effect.
+        this.startCommit({
+          pulsate,
+          rippleX,
+          rippleY,
+          rippleSize,
+          cb
+        });
+      }; // Deplay the execution of the ripple effect.
+
+
       this.startTimer = setTimeout(() => {
         if (this.startTimerCommit) {
           this.startTimerCommit();
@@ -186,41 +179,40 @@ class TouchRipple extends React.PureComponent {
         }
       }, DELAY_RIPPLE); // We have to make a tradeoff with this value.
     } else {
-      this.startCommit({ pulsate, rippleX, rippleY, rippleSize, cb });
+      this.startCommit({
+        pulsate,
+        rippleX,
+        rippleY,
+        rippleSize,
+        cb
+      });
     }
   };
-
   startCommit = params => {
-    const { pulsate, rippleX, rippleY, rippleSize, cb } = params;
-
+    const {
+      pulsate,
+      rippleX,
+      rippleY,
+      rippleSize,
+      cb
+    } = params;
     this.setState(state => {
       return {
         nextKey: state.nextKey + 1,
-        ripples: [
-          ...state.ripples,
-          <Ripple
-            key={state.nextKey}
-            classes={this.props.classes}
-            timeout={{
-              exit: DURATION,
-              enter: DURATION,
-            }}
-            pulsate={pulsate}
-            rippleX={rippleX}
-            rippleY={rippleY}
-            rippleSize={rippleSize}
-          />,
-        ],
+        ripples: [...state.ripples, <Ripple key={state.nextKey} classes={this.props.classes} timeout={{
+          exit: DURATION,
+          enter: DURATION
+        }} pulsate={pulsate} rippleX={rippleX} rippleY={rippleY} rippleSize={rippleSize} />]
       };
     }, cb);
   };
-
   stop = (event, cb) => {
     clearTimeout(this.startTimer);
-    const { ripples } = this.state;
-
-    // The touch interaction occures to quickly.
+    const {
+      ripples
+    } = this.state; // The touch interaction occures to quickly.
     // We still want to show ripple effect.
+
     if (event.type === 'touchend' && this.startTimerCommit) {
       event.persist();
       this.startTimerCommit();
@@ -234,51 +226,50 @@ class TouchRipple extends React.PureComponent {
     this.startTimerCommit = null;
 
     if (ripples && ripples.length) {
-      this.setState(
-        {
-          ripples: ripples.slice(1),
-        },
-        cb,
-      );
+      this.setState({
+        ripples: ripples.slice(1)
+      }, cb);
     }
   };
 
   render() {
-    const { center, classes, className, ...other } = this.props;
-
-    return (
-      <TransitionGroup
-        component="span"
-        enter
-        exit
-        className={classNames(classes.root, className)}
-        {...other}
-      >
+    const {
+      classNames,
+      classNamesStr,
+      center,
+      classes,
+      className,
+      ...other
+    } = this.props;
+    return <TransitionGroup component="span" enter exit className={classNames(classes.root, className)} {...other}>
         {this.state.ripples}
-      </TransitionGroup>
-    );
+      </TransitionGroup>;
   }
+
 }
 
 TouchRipple.propTypes = {
   /**
-   * If `true`, the ripple starts at the center of the component
-   * rather than at the point of interaction.
-   */
+     * If `true`, the ripple starts at the center of the component
+     * rather than at the point of interaction.
+     */
   center: PropTypes.bool,
+
   /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css-api) below for more details.
-   */
+     * Override or extend the styles applied to the component.
+     * See [CSS API](#css-api) below for more details.
+     */
   classes: PropTypes.object.isRequired,
+
   /**
-   * @ignore
-   */
-  className: PropTypes.string,
+     * @ignore
+     */
+  className: PropTypes.string
 };
-
 TouchRipple.defaultProps = {
-  center: false,
+  center: false
 };
-
-export default withStyles(styles, { flip: false, name: 'MuiTouchRipple' })(TouchRipple);
+export default withStyles(styles, {
+  flip: false,
+  name: 'MuiTouchRipple'
+})(TouchRipple);

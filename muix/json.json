@@ -20,70 +20,1242 @@
           {
             "type": "VariableDeclarator",
             "id": {
-              "type": "Identifier",
-              "name": "x"
+              "type": "ObjectPattern",
+              "properties": [
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "action"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "action"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "buttonRef"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "buttonRef"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "centerRipple"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "centerRipple"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "children"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "children"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "classes"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "classes"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "className"
+                  },
+                  "computed": false,
+                  "shorthand": false,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "classNameProp"
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "component"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "component"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "disabled"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "disabled"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "disableRipple"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "disableRipple"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "disableTouchRipple"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "disableTouchRipple"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "focusRipple"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "focusRipple"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "focusVisibleClassName"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "focusVisibleClassName"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "onBlur"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "onBlur"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "onFocus"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "onFocus"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "onFocusVisible"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "onFocusVisible"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "onKeyDown"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "onKeyDown"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "onKeyUp"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "onKeyUp"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "onMouseDown"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "onMouseDown"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "onMouseLeave"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "onMouseLeave"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "onMouseUp"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "onMouseUp"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "onTouchEnd"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "onTouchEnd"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "onTouchMove"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "onTouchMove"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "onTouchStart"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "onTouchStart"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "tabIndex"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "tabIndex"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "TouchRippleProps"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "TouchRippleProps"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "type"
+                  },
+                  "computed": false,
+                  "shorthand": true,
+                  "value": {
+                    "type": "Identifier",
+                    "name": "type"
+                  },
+                  "extra": {
+                    "shorthand": true
+                  }
+                },
+                {
+                  "type": "RestElement",
+                  "argument": {
+                    "type": "Identifier",
+                    "name": "other"
+                  }
+                }
+              ]
             },
             "init": {
-              "type": "JSXElement",
-              "openingElement": {
-                "type": "JSXOpeningElement",
-                "name": {
-                  "type": "JSXIdentifier",
-                  "name": "span"
-                },
-                "attributes": [
-                  {
-                    "type": "JSXAttribute",
-                    "name": {
-                      "type": "JSXIdentifier",
-                      "name": "className"
-                    },
-                    "value": {
-                      "type": "JSXExpressionContainer",
-                      "expression": {
-                        "type": "CallExpression",
-                        "callee": {
-                          "type": "Identifier",
-                          "name": "classNames"
-                        },
-                        "arguments": [
-                          {
-                            "type": "MemberExpression",
-                            "object": {
-                              "type": "Identifier",
-                              "name": "classes"
-                            },
-                            "property": {
-                              "type": "Identifier",
-                              "name": "label"
-                            },
-                            "computed": false
-                          },
-                          {
-                            "type": "MemberExpression",
-                            "object": {
-                              "type": "Identifier",
-                              "name": "classes"
-                            },
-                            "property": {
-                              "type": "Identifier",
-                              "name": "root"
-                            },
-                            "computed": false
-                          }
-                        ]
-                      }
-                    }
-                  }
-                ],
-                "selfClosing": true
+              "type": "MemberExpression",
+              "object": {
+                "type": "ThisExpression"
               },
-              "closingElement": null,
-              "children": []
+              "property": {
+                "type": "Identifier",
+                "name": "props"
+              },
+              "computed": false
             }
           }
         ],
         "kind": "const"
+      },
+      {
+        "type": "VariableDeclaration",
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "id": {
+              "type": "Identifier",
+              "name": "className"
+            },
+            "init": {
+              "type": "CallExpression",
+              "callee": {
+                "type": "Identifier",
+                "name": "classNames"
+              },
+              "arguments": [
+                {
+                  "type": "MemberExpression",
+                  "object": {
+                    "type": "Identifier",
+                    "name": "classes"
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "root"
+                  },
+                  "computed": false
+                },
+                {
+                  "type": "ObjectExpression",
+                  "properties": [
+                    {
+                      "type": "ObjectProperty",
+                      "method": false,
+                      "computed": true,
+                      "key": {
+                        "type": "MemberExpression",
+                        "object": {
+                          "type": "Identifier",
+                          "name": "classes"
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "disabled"
+                        },
+                        "computed": false
+                      },
+                      "shorthand": false,
+                      "value": {
+                        "type": "Identifier",
+                        "name": "disabled"
+                      }
+                    },
+                    {
+                      "type": "ObjectProperty",
+                      "method": false,
+                      "computed": true,
+                      "key": {
+                        "type": "MemberExpression",
+                        "object": {
+                          "type": "Identifier",
+                          "name": "classes"
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "focusVisible"
+                        },
+                        "computed": false
+                      },
+                      "shorthand": false,
+                      "value": {
+                        "type": "MemberExpression",
+                        "object": {
+                          "type": "MemberExpression",
+                          "object": {
+                            "type": "ThisExpression"
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "state"
+                          },
+                          "computed": false
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "focusVisible"
+                        },
+                        "computed": false
+                      }
+                    },
+                    {
+                      "type": "ObjectProperty",
+                      "method": false,
+                      "computed": true,
+                      "key": {
+                        "type": "Identifier",
+                        "name": "focusVisibleClassName"
+                      },
+                      "shorthand": false,
+                      "value": {
+                        "type": "MemberExpression",
+                        "object": {
+                          "type": "MemberExpression",
+                          "object": {
+                            "type": "ThisExpression"
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "state"
+                          },
+                          "computed": false
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "focusVisible"
+                        },
+                        "computed": false
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "Identifier",
+                  "name": "classNameProp"
+                }
+              ]
+            }
+          }
+        ],
+        "kind": "const"
+      },
+      {
+        "type": "VariableDeclaration",
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "id": {
+              "type": "Identifier",
+              "name": "buttonProps"
+            },
+            "init": {
+              "type": "ObjectExpression",
+              "properties": []
+            }
+          }
+        ],
+        "kind": "const"
+      },
+      {
+        "type": "VariableDeclaration",
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "id": {
+              "type": "Identifier",
+              "name": "ComponentProp"
+            },
+            "init": {
+              "type": "Identifier",
+              "name": "component"
+            }
+          }
+        ],
+        "kind": "let"
+      },
+      {
+        "type": "IfStatement",
+        "test": {
+          "type": "LogicalExpression",
+          "left": {
+            "type": "BinaryExpression",
+            "left": {
+              "type": "Identifier",
+              "name": "ComponentProp"
+            },
+            "operator": "===",
+            "right": {
+              "type": "StringLiteral",
+              "extra": {
+                "rawValue": "button",
+                "raw": "'button'"
+              },
+              "value": "button"
+            }
+          },
+          "operator": "&&",
+          "right": {
+            "type": "MemberExpression",
+            "object": {
+              "type": "Identifier",
+              "name": "other"
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "href"
+            },
+            "computed": false
+          }
+        },
+        "consequent": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ExpressionStatement",
+              "expression": {
+                "type": "AssignmentExpression",
+                "operator": "=",
+                "left": {
+                  "type": "Identifier",
+                  "name": "ComponentProp"
+                },
+                "right": {
+                  "type": "StringLiteral",
+                  "extra": {
+                    "rawValue": "a",
+                    "raw": "'a'"
+                  },
+                  "value": "a"
+                }
+              }
+            }
+          ]
+        },
+        "alternate": null
+      },
+      {
+        "type": "IfStatement",
+        "test": {
+          "type": "BinaryExpression",
+          "left": {
+            "type": "Identifier",
+            "name": "ComponentProp"
+          },
+          "operator": "===",
+          "right": {
+            "type": "StringLiteral",
+            "extra": {
+              "rawValue": "button",
+              "raw": "'button'"
+            },
+            "value": "button"
+          }
+        },
+        "consequent": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ExpressionStatement",
+              "expression": {
+                "type": "AssignmentExpression",
+                "operator": "=",
+                "left": {
+                  "type": "MemberExpression",
+                  "object": {
+                    "type": "Identifier",
+                    "name": "buttonProps"
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "type"
+                  },
+                  "computed": false
+                },
+                "right": {
+                  "type": "LogicalExpression",
+                  "left": {
+                    "type": "Identifier",
+                    "name": "type"
+                  },
+                  "operator": "||",
+                  "right": {
+                    "type": "StringLiteral",
+                    "extra": {
+                      "rawValue": "button",
+                      "raw": "'button'"
+                    },
+                    "value": "button"
+                  }
+                }
+              }
+            },
+            {
+              "type": "ExpressionStatement",
+              "expression": {
+                "type": "AssignmentExpression",
+                "operator": "=",
+                "left": {
+                  "type": "MemberExpression",
+                  "object": {
+                    "type": "Identifier",
+                    "name": "buttonProps"
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "disabled"
+                  },
+                  "computed": false
+                },
+                "right": {
+                  "type": "Identifier",
+                  "name": "disabled"
+                }
+              }
+            }
+          ]
+        },
+        "alternate": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ExpressionStatement",
+              "expression": {
+                "type": "AssignmentExpression",
+                "operator": "=",
+                "left": {
+                  "type": "MemberExpression",
+                  "object": {
+                    "type": "Identifier",
+                    "name": "buttonProps"
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "role"
+                  },
+                  "computed": false
+                },
+                "right": {
+                  "type": "StringLiteral",
+                  "extra": {
+                    "rawValue": "button",
+                    "raw": "'button'"
+                  },
+                  "value": "button"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "ReturnStatement",
+        "argument": {
+          "type": "JSXElement",
+          "openingElement": {
+            "type": "JSXOpeningElement",
+            "name": {
+              "type": "JSXIdentifier",
+              "name": "ComponentProp"
+            },
+            "attributes": [
+              {
+                "type": "JSXAttribute",
+                "name": {
+                  "type": "JSXIdentifier",
+                  "name": "onBlur"
+                },
+                "value": {
+                  "type": "JSXExpressionContainer",
+                  "expression": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "ThisExpression"
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "handleBlur"
+                    },
+                    "computed": false
+                  }
+                }
+              },
+              {
+                "type": "JSXAttribute",
+                "name": {
+                  "type": "JSXIdentifier",
+                  "name": "onFocus"
+                },
+                "value": {
+                  "type": "JSXExpressionContainer",
+                  "expression": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "ThisExpression"
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "handleFocus"
+                    },
+                    "computed": false
+                  }
+                }
+              },
+              {
+                "type": "JSXAttribute",
+                "name": {
+                  "type": "JSXIdentifier",
+                  "name": "onKeyDown"
+                },
+                "value": {
+                  "type": "JSXExpressionContainer",
+                  "expression": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "ThisExpression"
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "handleKeyDown"
+                    },
+                    "computed": false
+                  }
+                }
+              },
+              {
+                "type": "JSXAttribute",
+                "name": {
+                  "type": "JSXIdentifier",
+                  "name": "onKeyUp"
+                },
+                "value": {
+                  "type": "JSXExpressionContainer",
+                  "expression": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "ThisExpression"
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "handleKeyUp"
+                    },
+                    "computed": false
+                  }
+                }
+              },
+              {
+                "type": "JSXAttribute",
+                "name": {
+                  "type": "JSXIdentifier",
+                  "name": "onMouseDown"
+                },
+                "value": {
+                  "type": "JSXExpressionContainer",
+                  "expression": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "ThisExpression"
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "handleMouseDown"
+                    },
+                    "computed": false
+                  }
+                }
+              },
+              {
+                "type": "JSXAttribute",
+                "name": {
+                  "type": "JSXIdentifier",
+                  "name": "onMouseLeave"
+                },
+                "value": {
+                  "type": "JSXExpressionContainer",
+                  "expression": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "ThisExpression"
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "handleMouseLeave"
+                    },
+                    "computed": false
+                  }
+                }
+              },
+              {
+                "type": "JSXAttribute",
+                "name": {
+                  "type": "JSXIdentifier",
+                  "name": "onMouseUp"
+                },
+                "value": {
+                  "type": "JSXExpressionContainer",
+                  "expression": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "ThisExpression"
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "handleMouseUp"
+                    },
+                    "computed": false
+                  }
+                }
+              },
+              {
+                "type": "JSXAttribute",
+                "name": {
+                  "type": "JSXIdentifier",
+                  "name": "onTouchEnd"
+                },
+                "value": {
+                  "type": "JSXExpressionContainer",
+                  "expression": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "ThisExpression"
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "handleTouchEnd"
+                    },
+                    "computed": false
+                  }
+                }
+              },
+              {
+                "type": "JSXAttribute",
+                "name": {
+                  "type": "JSXIdentifier",
+                  "name": "onTouchMove"
+                },
+                "value": {
+                  "type": "JSXExpressionContainer",
+                  "expression": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "ThisExpression"
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "handleTouchMove"
+                    },
+                    "computed": false
+                  }
+                }
+              },
+              {
+                "type": "JSXAttribute",
+                "name": {
+                  "type": "JSXIdentifier",
+                  "name": "onTouchStart"
+                },
+                "value": {
+                  "type": "JSXExpressionContainer",
+                  "expression": {
+                    "type": "MemberExpression",
+                    "object": {
+                      "type": "ThisExpression"
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "handleTouchStart"
+                    },
+                    "computed": false
+                  }
+                }
+              },
+              {
+                "type": "JSXAttribute",
+                "name": {
+                  "type": "JSXIdentifier",
+                  "name": "tabIndex"
+                },
+                "value": {
+                  "type": "JSXExpressionContainer",
+                  "expression": {
+                    "type": "ConditionalExpression",
+                    "test": {
+                      "type": "Identifier",
+                      "name": "disabled"
+                    },
+                    "consequent": {
+                      "type": "StringLiteral",
+                      "extra": {
+                        "rawValue": "-1",
+                        "raw": "'-1'"
+                      },
+                      "value": "-1"
+                    },
+                    "alternate": {
+                      "type": "Identifier",
+                      "name": "tabIndex"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "JSXAttribute",
+                "name": {
+                  "type": "JSXIdentifier",
+                  "name": "className"
+                },
+                "value": {
+                  "type": "JSXExpressionContainer",
+                  "expression": {
+                    "type": "Identifier",
+                    "name": "className"
+                  }
+                }
+              },
+              {
+                "type": "JSXAttribute",
+                "name": {
+                  "type": "JSXIdentifier",
+                  "name": "ref"
+                },
+                "value": {
+                  "type": "JSXExpressionContainer",
+                  "expression": {
+                    "type": "Identifier",
+                    "name": "buttonRef"
+                  }
+                }
+              },
+              {
+                "type": "JSXSpreadAttribute",
+                "argument": {
+                  "type": "Identifier",
+                  "name": "buttonProps"
+                }
+              },
+              {
+                "type": "JSXSpreadAttribute",
+                "argument": {
+                  "type": "Identifier",
+                  "name": "other"
+                }
+              }
+            ],
+            "selfClosing": false
+          },
+          "closingElement": {
+            "type": "JSXClosingElement",
+            "name": {
+              "type": "JSXIdentifier",
+              "name": "ComponentProp"
+            }
+          },
+          "children": [
+            {
+              "type": "JSXText",
+              "extra": {
+                "rawValue": "\n        ",
+                "raw": "\n        "
+              },
+              "value": "\n        "
+            },
+            {
+              "type": "JSXExpressionContainer",
+              "expression": {
+                "type": "Identifier",
+                "name": "children"
+              }
+            },
+            {
+              "type": "JSXText",
+              "extra": {
+                "rawValue": "\n        ",
+                "raw": "\n        "
+              },
+              "value": "\n        "
+            },
+            {
+              "type": "JSXExpressionContainer",
+              "expression": {
+                "type": "ConditionalExpression",
+                "test": {
+                  "type": "LogicalExpression",
+                  "left": {
+                    "type": "UnaryExpression",
+                    "operator": "!",
+                    "prefix": true,
+                    "argument": {
+                      "type": "Identifier",
+                      "name": "disableRipple"
+                    }
+                  },
+                  "operator": "&&",
+                  "right": {
+                    "type": "UnaryExpression",
+                    "operator": "!",
+                    "prefix": true,
+                    "argument": {
+                      "type": "Identifier",
+                      "name": "disabled"
+                    }
+                  }
+                },
+                "consequent": {
+                  "type": "JSXElement",
+                  "openingElement": {
+                    "type": "JSXOpeningElement",
+                    "name": {
+                      "type": "JSXIdentifier",
+                      "name": "TouchRipple"
+                    },
+                    "attributes": [
+                      {
+                        "type": "JSXAttribute",
+                        "name": {
+                          "type": "JSXIdentifier",
+                          "name": "innerRef"
+                        },
+                        "value": {
+                          "type": "JSXExpressionContainer",
+                          "expression": {
+                            "type": "MemberExpression",
+                            "object": {
+                              "type": "ThisExpression"
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "onRippleRef"
+                            },
+                            "computed": false
+                          }
+                        }
+                      },
+                      {
+                        "type": "JSXAttribute",
+                        "name": {
+                          "type": "JSXIdentifier",
+                          "name": "center"
+                        },
+                        "value": {
+                          "type": "JSXExpressionContainer",
+                          "expression": {
+                            "type": "Identifier",
+                            "name": "centerRipple"
+                          }
+                        }
+                      },
+                      {
+                        "type": "JSXSpreadAttribute",
+                        "argument": {
+                          "type": "Identifier",
+                          "name": "TouchRippleProps"
+                        }
+                      }
+                    ],
+                    "selfClosing": true
+                  },
+                  "closingElement": null,
+                  "children": [],
+                  "extra": {
+                    "parenthesized": true,
+                    "parenStart": 7874
+                  }
+                },
+                "alternate": {
+                  "type": "NullLiteral"
+                }
+              }
+            },
+            {
+              "type": "JSXText",
+              "extra": {
+                "rawValue": "\n      ",
+                "raw": "\n      "
+              },
+              "value": "\n      "
+            }
+          ],
+          "extra": {
+            "parenthesized": true,
+            "parenStart": 7243
+          }
+        }
       }
     ]
   }

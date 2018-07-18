@@ -1,8 +1,6 @@
-import * as warning from 'warning'
 import * as Ast from './ast'
 import * as Parser from './parser'
 import * as Config from './config'
-import * as fs from 'fs';
 import * as fsExtra from 'fs-extra';
 
 export const commentStart = '*** REACTXX PATCH: '
@@ -28,7 +26,7 @@ const prepareAstDumpLow = (_root: Ast.Ast, path: string) => {
     })
 }
 
-export const prepareAstDump = (name: string, srcPath: string = Config.patchSource, destPath: string = Config.tempDump) => {
+export const prepareAstDump = (name: string, srcPath: string = Config.patchPrepare, destPath: string = Config.tempDump) => {
     const root = Parser.parseFile(srcPath + name + '.js')
     const comments = getNode_comments(root)
     if (!comments || comments.length===0) return

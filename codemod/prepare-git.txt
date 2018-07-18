@@ -1,9 +1,12 @@
-- Download last version a unzip material-ui-1.4.0\packages\material-ui\src\ to d:\reactxx\codemod\git\
+- Download last version a unzip material-ui-1.4.0\packages\material-ui\src\ to d:\reactxx\muix\src\material-ui-temp\
 - delete test-utils
 - select *.test.js and delete
 - select *.spec.* and delete
 - select *.d.ts, ZIP and delete
+- remove ": Object" from "export default function createPalette(palette: Object) {" ( in  D:\reactxx\muix\src\material-ui\styles\createPalette.js)
 - unpack ZIP to d:\reactxx\muix\src\muix\typings\
 
-- run (form TERMINAL in VSCODE): flow-remove-types --out-dir flow/ git/
+- run (form TERMINAL in VSCODE): 
+  D:\reactxx\codemod>flow-remove-types --out-dir d:/reactxx/muix/src/material-ui d:/reactxx/muix/src/material-ui-temp/
+- delete d:/reactxx/muix/src/material-ui-temp/
 

@@ -201,6 +201,7 @@
     <Content Include="src\material-ui\IconButton\index.js" />
     <Content Include="src\material-ui\Icon\Icon.js" />
     <Content Include="src\material-ui\Icon\index.js" />
+    <TypeScriptCompile Include="src\material-ui\index.ts" />
     <Content Include="src\material-ui\index.js" />
     <Content Include="src\material-ui\InputAdornment\index.js" />
     <Content Include="src\material-ui\InputAdornment\InputAdornment.js" />
@@ -301,6 +302,7 @@
     <Content Include="src\material-ui\styles\createTypography.js" />
     <Content Include="src\material-ui\styles\getStylesCreator.js" />
     <Content Include="src\material-ui\styles\getThemeProps.js" />
+    <Content Include="src\material-ui\styles\withStyles-old.js" />
     <Content Include="src\material-ui\styles\index.js" />
     <Content Include="src\material-ui\styles\jssPreset.js" />
     <Content Include="src\material-ui\styles\MuiThemeProvider.js" />
@@ -308,7 +310,6 @@
     <Content Include="src\material-ui\styles\spacing.js" />
     <Content Include="src\material-ui\styles\themeListener.js" />
     <Content Include="src\material-ui\styles\transitions.js" />
-    <Content Include="src\material-ui\styles\withStyles-old.js" />
     <Content Include="src\material-ui\styles\withTheme.js" />
     <Content Include="src\material-ui\styles\zIndex.js" />
     <Content Include="src\material-ui\SvgIcon\index.js" />
@@ -395,6 +396,7 @@
     <TypeScriptCompile Include="src\ks\common\sheeter\animations-test.ts" />
     <TypeScriptCompile Include="src\ks\common\sheeter\test.ts" />
     <TypeScriptCompile Include="src\ks\common\sheeter\mediaq-test.ts" />
+    <TypeScriptCompile Include="src\material-ui\styles\withStyles.ts" />
     <TypeScriptCompile Include="src\mediaq\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\mediaq\native\index.ts" />
     <TypeScriptCompile Include="src\mediaq\native\native.tsx" />
@@ -410,7 +412,6 @@
     <TypeScriptCompile Include="src\sheeter\when-used.ts" />
     <TypeScriptCompile Include="src\sheeter\mediaq.ts" />
     <TypeScriptCompile Include="src\sheeter\index.ts" />
-    <TypeScriptCompile Include="src\material-ui\styles\withStyles.ts" />
     <TypeScriptCompile Include="src\test\sheet-frag\src-2.ts" />
     <TypeScriptCompile Include="src\test\sheet-frag\src-3.ts" />
     <TypeScriptCompile Include="src\test\sheet-frag\src-1.ts" />
@@ -448,7 +449,6 @@
     <TypeScriptCompile Include="src\basic\typings\types.ts" />
     <TypeScriptCompile Include="src\basic\typings\typings.d.ts" />
     <TypeScriptCompile Include="src\animation\typings\add-in.ts" />
-    <None Include="src\expo.d.ts_" />
     <TypeScriptCompile Include="src\ks\common\animation\ae1.tsx" />
     <TypeScriptCompile Include="src\ks\common\animation\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\basic\pe8.tsx" />
@@ -456,7 +456,6 @@
     <TypeScriptCompile Include="src\ks\common\mediaq\me3.tsx" />
     <TypeScriptCompile Include="src\ks\common\basic\pe9.tsx" />
     <TypeScriptCompile Include="src\ks\common\muix\m1.tsx" />
-    <TypeScriptCompile Include="src\material-ui\index.ts" />
     <TypeScriptCompile Include="src\ks\common\mediaq\index.tsx" />
     <TypeScriptCompile Include="src\ks\common\mediaq\me2.tsx" />
     <TypeScriptCompile Include="src\ks\common\mediaq\me1.tsx" />

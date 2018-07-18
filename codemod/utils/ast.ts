@@ -2,6 +2,11 @@ import * as ASTQ from 'astq'
 
 export const astq = new ASTQ();
 
+export interface FileDescr {
+    path: string
+    transform: (root:Ast) => Ast
+}
+
 export type Ast = {
     $path: string
     $qpath: string,
