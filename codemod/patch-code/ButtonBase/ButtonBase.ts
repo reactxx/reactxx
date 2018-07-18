@@ -4,7 +4,7 @@ import * as Tasks from '../../utils/tasks/default'
 export default [
     {
         path: 'ButtonBase/ButtonBase',
-        transform: Tasks.taskDefaultCreator('ButtonBase')
+        transform: Tasks.taskDefaultCreator('ButtonBase', ['ComponentProp'])
     },
     {
         path: 'ButtonBase/Ripple',
@@ -12,6 +12,6 @@ export default [
     },
     {
         path: 'ButtonBase/TouchRipple',
-        transform: Tasks.taskDefaultCreator('TouchRipple')
+        transform: Tasks.taskDefaultCreator('TouchRipple', ['TransitionGroup'])
     },
 ] as Ast.FileDescr[]

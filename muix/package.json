@@ -37,6 +37,7 @@
       "fela-plugin-rtl": "npm:fela-plugin-rtl@^1.0.6",
       "fela-plugin-unit": "npm:fela-plugin-unit@^5.0.15",
       "hoist-non-react-statics": "npm:hoist-non-react-statics@^2.3.1",
+      "is-plain-object": "npm:is-plain-object@^2.0.4",
       "jss-preset-default": "npm:jss-preset-default@^4.0.1",
       "prop-types": "npm:prop-types@^15.6.0",
       "react-jss": "npm:react-jss@^8.1.0",
@@ -120,4 +121,4 @@
       }
     }
   }
-}
+}

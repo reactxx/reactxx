@@ -1,12 +1,6 @@
 import * as warning from 'warning'
 import * as Ast from './ast'
 
-Ast.astq.func("isHTMLTag", (adapter, node, par) => {
-    if (typeof par !== 'string') return
-    const first = par.charAt(0)
-    return first === first.toLowerCase()
-})
-
 export const getNode_importPackage = (ast: Ast.Ast, name: string, allowEmpty: boolean | null = false) => checkSingleResult (Ast.astq.query(ast, 
     `// ImportDeclaration [ /ImportDefaultSpecifier/Identifier [@name == "${name}"] ]`), allowEmpty)
 

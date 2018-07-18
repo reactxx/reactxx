@@ -65,7 +65,7 @@ export namespace TCommon {
     withTheme?: boolean
     withCascading?: boolean
     withActive?: boolean
-    isMui?:boolean,
+    isMui?:boolean
 
     getVariant?
     variantToString?

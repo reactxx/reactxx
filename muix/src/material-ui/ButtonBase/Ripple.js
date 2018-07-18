@@ -23,8 +23,10 @@ class Ripple extends React.Component {
 
   render() {
     const {
-      classNames,
-      classNamesStr,
+      $system: {
+        classNames,
+        classNamesStr
+      },
       classes,
       className: classNameProp,
       pulsate,

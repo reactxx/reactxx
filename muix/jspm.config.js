@@ -24,19 +24,10 @@ SystemJS.config({
     "reactxx-mediaq": "deploy/lib/mediaq/web/index",
     "reactxx": "deploy/lib/reactxx/web/index",
     "material-ui": "deploy/lib/material-ui",
-
-    // "material-ui/Button/Button": "deploy/lib/material-ui/Button/Button",
-    // "material-ui/ButtonBase/ButtonBase": "deploy/lib/material-ui/ButtonBase/ButtonBase",
-    // "material-ui/styles/createGenerateClassName": "deploy/lib/material-ui/styles/createGenerateClassName",
-    // "material-ui/styles/MuiThemeProvider": "deploy/lib/material-ui/styles/MuiThemeProvider",
-    // "material-ui/styles/withStyles": "deploy/lib/material-ui/styles/withStyles",
-    // "material-ui/styles/createMuiTheme": "deploy/lib/material-ui/styles/createMuiTheme",
-
     "reactxx-muix/web/styles/withStyles": "deploy/lib/muix/web/styles/withStyles",
     "reactxx-muix/web/styles/create-sheet-hook": "deploy/lib/muix/web/styles/create-sheet-hook",
     "reactxx-muix/web/Button/Button": "deploy/lib/muix/web/Button/Button",
     "reactxx-muix/web/ButtonBase/ButtonBase": "deploy/lib/muix/web/ButtonBase/ButtonBase",
-
     "classnames": "deploy/lib/muix/web/styles/classnames"
   }
 });
@@ -47,6 +38,7 @@ SystemJS.config({
     "npm:*.json"
   ],
   map: {
+    "is-plain-object": "npm:is-plain-object@2.0.4",
     "brcast": "npm:brcast@3.0.1",
     "csstype": "npm:csstype@2.5.5",
     "debounce": "npm:debounce@1.1.0",

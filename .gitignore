@@ -320,4 +320,6 @@ muix/src/ks
 !docs/bundle/index.js
 
 !muix/src/material-ui/**/*.js
+!codemod/patch-original/**/*.js
+
 muix/tsconfig.json

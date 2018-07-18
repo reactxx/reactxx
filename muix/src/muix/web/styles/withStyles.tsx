@@ -3,6 +3,7 @@ import React from 'react';
 import { RenderAddIn, TCommon, ThemeProviderUntyped, TProvider, Types, withStyles } from 'reactxx-basic';
 import { Theme as MuiTheme } from 'reactxx-muix/typings/styles/createMuiTheme';
 import createSheetHook from 'reactxx-muix/web/styles/create-sheet-hook';
+import { rulesetsToClassNames } from 'reactxx-fela'
 
 
 
@@ -17,6 +18,7 @@ const renderAddIn: RenderAddIn = {
   styleAddInPipeline: (renderState, next) => next,
   getDefaultTheme: () => createMuiTheme() as Theme,
   createSheetHook: createSheetHook,
+  rulesetsToClassNames: rulesetsToClassNames,
 }
 
 const withStylesMui = <R extends Types.Shape>

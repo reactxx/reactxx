@@ -56,6 +56,8 @@ export interface RenderAddIn {
 
   finishAddInProps?: Sheeter.FinishAddIns
   finishAddInClasses?: Sheeter.FinishAddIns
+
+  rulesetsToClassNames?: (...rulesets: React.CSSProperties[]) => string
 }
 
 // empty addIn configuration
@@ -100,7 +102,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCrea
 
     render() {
       //console.log('*** render: ', this.renderState.$developer_id)
-      if (DEV_MODE && this.props.$developer_flag) {
+      if (DEV_MODE && options && this.props.$developer_flag) {
         //debugger
       }
       return this.renderPipeline()

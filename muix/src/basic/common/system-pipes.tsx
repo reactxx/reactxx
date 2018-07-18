@@ -4,6 +4,7 @@ import warning from 'warning';
 import { TCommon } from '../typings/common';
 import { Types } from '../typings/types';
 import { RenderAddIn, TRenderState } from './withStyles';
+import { mergeRulesetsCreator, setClassNamesCreators } from './merge-rulesets';
 
 export const getSystemPipes = <R extends Types.Shape>(
   id: number,
@@ -185,31 +186,19 @@ export const getSystemPipes = <R extends Types.Shape>(
     }
 
     // method, called in component code: ruleset merging
-    $system.mergeRulesets = (...rulesets: Sheeter.Ruleset[]) => {
-      const res = Sheeter.mergeRulesetsForCode(
-        classes as Sheeter.SheetWithAddIns,
-        getClassesPatches,
-        rulesets
-      ) as Types.TMergeRulesetsResult<any>
-      if ($system.$developer_flag) {
-        console.log(
-          `### mergeRulesets for ${displayName}`,
-          res
-        )
-      }
-      return res
-    }
+    if (!options.isMui)
+      $system.mergeRulesets = mergeRulesetsCreator(classes as Sheeter.SheetWithAddIns, getClassesPatches)
+    else
+      setClassNamesCreators(finalProps, getClassesPatches, addIns);
 
-    if (options.isMui) {
-      for (const p in finalProps.classes) {
-        finalProps.classes[p] = {
-          ...finalProps.classes[p],
-          toString: () => p,
-          '#classes': classes,
-          '#getClassesPatches': getClassesPatches,
-        }
-      }
-    }
+    // for (const p in finalProps.classes) {
+    //   finalProps.classes[p] = {
+    //     ...finalProps.classes[p],
+    //     toString: () => p,
+    //     '#classes': classes,
+    //     '#getClassesPatches': getClassesPatches,
+    //   }
+    // }
 
     //console.log('*** render code: ', renderState.$developer_id)
 
