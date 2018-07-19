@@ -19,3 +19,5 @@ export const checkSingleResult = (res: Ast.Ast[], allowEmpty: boolean | null = f
     return res[0]
 }
 
+export const getNode_callExpression = (ast: Ast.Ast, name: string, allowEmpty: boolean | null = false) => checkSingleResult (Ast.astq.query(ast, 
+    `// CallExpression [ /Identifier [@name == "${name}"] ]`), allowEmpty)

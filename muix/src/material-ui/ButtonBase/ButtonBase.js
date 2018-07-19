@@ -257,11 +257,7 @@ class ButtonBase extends React.Component {
       type,
       ...other
     } = this.props;
-    const className = classNames(classes.root, {
-      [classes.disabled]: disabled,
-      [classes.focusVisible]: this.state.focusVisible,
-      [focusVisibleClassName]: this.state.focusVisible
-    }, classNameProp);
+    const className = classNames(classes.root, disabled && classes.disabled, this.state.focusVisible && classes.focusVisible, this.state.focusVisible && focusVisibleClassName, classNameProp);
     const buttonProps = {};
     let ComponentProp = component;
 

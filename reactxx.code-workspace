@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "muix"
+		}
+	],
+	"settings": {
+		"typescript.tsdk": "./node_modules/typescript/lib"
+	}
+}

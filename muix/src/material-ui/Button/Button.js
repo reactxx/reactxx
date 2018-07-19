@@ -188,28 +188,7 @@ function Button(props) {
   const fab = variant === 'fab' || variant === 'extendedFab';
   const contained = variant === 'contained' || variant === 'raised';
   const text = variant === 'text' || variant === 'flat' || variant === 'outlined';
-  const className = classNames(classes.root, {
-    [classes.fab]: fab,
-    [classes.mini]: fab && mini,
-    [classes.extendedFab]: variant === 'extendedFab',
-    [classes.text]: text,
-    [classes.textPrimary]: text && color === 'primary',
-    [classes.textSecondary]: text && color === 'secondary',
-    [classes.flat]: variant === 'text' || variant === 'flat',
-    [classes.flatPrimary]: (variant === 'text' || variant === 'flat') && color === 'primary',
-    [classes.flatSecondary]: (variant === 'text' || variant === 'flat') && color === 'secondary',
-    [classes.contained]: contained || fab,
-    [classes.containedPrimary]: (contained || fab) && color === 'primary',
-    [classes.containedSecondary]: (contained || fab) && color === 'secondary',
-    [classes.raised]: contained || fab,
-    [classes.raisedPrimary]: (contained || fab) && color === 'primary',
-    [classes.raisedSecondary]: (contained || fab) && color === 'secondary',
-    [classes.outlined]: variant === 'outlined',
-    [classes[`size${capitalize(size)}`]]: size !== 'medium',
-    [classes.disabled]: disabled,
-    [classes.fullWidth]: fullWidth,
-    [classes.colorInherit]: color === 'inherit'
-  }, classNameProp);
+  const className = classNames(classes.root, fab && classes.fab, fab && mini && classes.mini, variant === 'extendedFab' && classes.extendedFab, text && classes.text, text && color === 'primary' && classes.textPrimary, text && color === 'secondary' && classes.textSecondary, (variant === 'text' || variant === 'flat') && classes.flat, (variant === 'text' || variant === 'flat') && color === 'primary' && classes.flatPrimary, (variant === 'text' || variant === 'flat') && color === 'secondary' && classes.flatSecondary, (contained || fab) && classes.contained, (contained || fab) && color === 'primary' && classes.containedPrimary, (contained || fab) && color === 'secondary' && classes.containedSecondary, (contained || fab) && classes.raised, (contained || fab) && color === 'primary' && classes.raisedPrimary, (contained || fab) && color === 'secondary' && classes.raisedSecondary, variant === 'outlined' && classes.outlined, size !== 'medium' && classes[`size${capitalize(size)}`], disabled && classes.disabled, fullWidth && classes.fullWidth, color === 'inherit' && classes.colorInherit, classNameProp);
   return <ButtonBase className={className} disabled={disabled} focusRipple={!disableFocusRipple} focusVisibleClassName={classNames(classes.focusVisible, focusVisibleClassName)} {...other}>
       <span className={classNamesStr(classes.label)}>{children}</span>
     </ButtonBase>;
