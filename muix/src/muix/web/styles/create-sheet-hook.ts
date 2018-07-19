@@ -14,8 +14,12 @@ const modifySheet = sheet => {
   return sheet
 }
 
-const modifyRuleset = (sheet: {}, rulesetName: string) => {
-  const ruleset = sheet[rulesetName]
+function modifyRuleset(sheet: {}, rulesetName: string) {
+  if (rulesetName.startsWith('@keyframes')) {
+    delete sheet[rulesetName]
+    return
+  }
+const ruleset = sheet[rulesetName]
   let $whenUsed = null
   Object.keys(ruleset).forEach(ruleName => {
     const rule = ruleset[ruleName]
@@ -28,6 +32,8 @@ const modifyRuleset = (sheet: {}, rulesetName: string) => {
       if (whenUsed) {
         ($whenUsed || ($whenUsed = {}))[whenUsed[1]] = rule
         delete ruleset[ruleName]
+      } else if (rule && typeof rule === 'object') {
+        modifyRuleset(ruleset, ruleName)
       }
     }
   })
@@ -36,7 +42,7 @@ const modifyRuleset = (sheet: {}, rulesetName: string) => {
 }
 
 const rx$pseudoClasses = /&(:(:)?((\w|-)+))$/
-const rx$whenUsed = /&\$(\w+)$/ 
+const rx$whenUsed = /&\$(\w+)$/
 
 //&::-moz-focus-inner
 
