@@ -19,7 +19,7 @@ const plugins = {
   ]
 }
 
-const renderer = createRenderer(plugins)
+export const renderer = createRenderer(plugins)
 
 renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html
   height: '100%',

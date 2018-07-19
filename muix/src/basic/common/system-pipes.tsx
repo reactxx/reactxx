@@ -4,7 +4,7 @@ import warning from 'warning';
 import { TCommon } from '../typings/common';
 import { Types } from '../typings/types';
 import { RenderAddIn, TRenderState } from './withStyles';
-import { mergeRulesetsCreator, setClassNamesCreators } from './merge-rulesets';
+import { mergeRulesetsCreator, classNamesCreator } from './merge-rulesets';
 
 export const getSystemPipes = <R extends Types.Shape>(
   id: number,
@@ -87,6 +87,11 @@ export const getSystemPipes = <R extends Types.Shape>(
     // events
     if (!platformProps.$system) platformProps.$system = {}
     finalizeEvents(platformProps, renderState)
+
+    if (options.isMui && platformProps.innerRef) { // hack for materia-ui
+      platformProps.ref = platformProps.innerRef
+      delete platformProps.innerRef
+    }
 
     return platformProps as Types.CodeProps //{ platformProps: platformProps as Types.CodeProps } as FinalizePropsOutput
   }
@@ -188,8 +193,11 @@ export const getSystemPipes = <R extends Types.Shape>(
     // method, called in component code: ruleset merging
     if (!options.isMui)
       $system.mergeRulesets = mergeRulesetsCreator(classes as Sheeter.SheetWithAddIns, getClassesPatches)
-    else
-      setClassNamesCreators(finalProps, getClassesPatches, addIns);
+    else {
+      $system['classNames'] = classNamesCreator(false, classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns);
+      $system['classNamesStr'] = classNamesCreator(true, classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns);
+    }
+      
 
     // for (const p in finalProps.classes) {
     //   finalProps.classes[p] = {

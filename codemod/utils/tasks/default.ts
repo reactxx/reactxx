@@ -15,6 +15,7 @@ export const taskDefaultCreator = (functionName: string, forceHTMLTags?: string[
   selectClassNamesFromProps(root, functionName)
   refactorClassNames(root)
   adjustHtmlClassName(root, functionName, forceHTMLTags)
+  return root
 }
 
 const removeClassNamesImport = (root: Ast.Ast) => {

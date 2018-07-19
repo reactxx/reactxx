@@ -21,7 +21,7 @@ const modifyRuleset = (sheet: {}, rulesetName: string) => {
     const rule = ruleset[ruleName]
     const pseudoClasses = rx$pseudoClasses.exec(ruleName)
     if (pseudoClasses) {
-      ruleset[':' + pseudoClasses[1]] = rule
+      ruleset[pseudoClasses[1]] = rule
       delete ruleset[ruleName]
     } else {
       const whenUsed = rx$whenUsed.exec(ruleName)
@@ -35,8 +35,8 @@ const modifyRuleset = (sheet: {}, rulesetName: string) => {
     ruleset['$whenUsed'] = $whenUsed
 }
 
-const rx$pseudoClasses = /&:(\w+)$/
-const rx$whenUsed = /&\$(\w+)$/
+const rx$pseudoClasses = /&(:(:)?((\w|-)+))$/
+const rx$whenUsed = /&\$(\w+)$/ 
 
 //&::-moz-focus-inner
 

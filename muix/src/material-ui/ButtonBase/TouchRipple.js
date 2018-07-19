@@ -202,7 +202,7 @@ class TouchRipple extends React.PureComponent {
         ripples: [...state.ripples, <Ripple key={state.nextKey} classes={this.props.classes} timeout={{
           exit: DURATION,
           enter: DURATION
-        }} pulsate={pulsate} rippleX={rippleX} rippleY={rippleY} rippleSize={rippleSize} />]
+        }} pulsate={pulsate} rippleX={rippleX} rippleY={rippleY} rippleSize={rippleSize} $system={this.props.$system} />]
       };
     }, cb);
   };
