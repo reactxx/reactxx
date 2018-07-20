@@ -7,8 +7,7 @@ import * as Parser from '../utils/parser'
 import * as fsExtra from 'fs-extra';
 import * as Tasks from './default-modifier'
 
-import { registerTouchRipple } from '../patch-code/ButtonBase/TouchRipple'
-import { registerRipple } from '../patch-code/ButtonBase/Ripple'
+import { registerButtonBase } from '../patch-code/ButtonBase/ButtonBase'
 import { registerWithStyles } from '../patch-code/styles/withStyles'
 
 export interface MUISourceInfo {
@@ -25,8 +24,7 @@ export type Specials = { [path: string]: Ast.FileDescr }
 
 export const specials: Specials = {}
 
-registerTouchRipple(specials)
-registerRipple(specials)
+registerButtonBase(specials)
 registerWithStyles(specials)
 
 export const codeMod = () => {

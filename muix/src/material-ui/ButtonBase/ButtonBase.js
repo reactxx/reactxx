@@ -272,7 +272,7 @@ class ButtonBase extends React.Component {
       buttonProps.role = 'button';
     }
 
-    return <ComponentProp onBlur={this.handleBlur} onFocus={this.handleFocus} onKeyDown={this.handleKeyDown} onKeyUp={this.handleKeyUp} onMouseDown={this.handleMouseDown} onMouseLeave={this.handleMouseLeave} onMouseUp={this.handleMouseUp} onTouchEnd={this.handleTouchEnd} onTouchMove={this.handleTouchMove} onTouchStart={this.handleTouchStart} tabIndex={disabled ? '-1' : tabIndex} className={className} ref={buttonRef} {...buttonProps} {...other}>
+    return <ComponentProp onBlur={this.handleBlur} onFocus={this.handleFocus} onKeyDown={this.handleKeyDown} onKeyUp={this.handleKeyUp} onMouseDown={this.handleMouseDown} onMouseLeave={this.handleMouseLeave} onMouseUp={this.handleMouseUp} onTouchEnd={this.handleTouchEnd} onTouchMove={this.handleTouchMove} onTouchStart={this.handleTouchStart} tabIndex={disabled ? '-1' : tabIndex} className={classNamesStr(className)} ref={buttonRef} {...buttonProps} {...other}>
         {children}
         {!disableRipple && !disabled ? <TouchRipple innerRef={this.onRippleRef} center={centerRipple} {...TouchRippleProps} /> : null}
       </ComponentProp>;
