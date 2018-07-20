@@ -5,7 +5,7 @@ import * as fsExtra from 'fs-extra';
 
 export const commentStart = '*** REACTXX PATCH: '
 
-const getNode_comments = (root: Ast.Ast) => Ast.astq.query(root,
+const getNode_comments = (root: Ast.Ast) => Ast.astq().query(root,
     `// CommentBlock [ substr(@value,0,${commentStart.length})=='${commentStart}' ]`
 ) as Ast.Ast[]
 

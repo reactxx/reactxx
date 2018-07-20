@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import withStyles from '../styles/withStyles';
-
 export const styles = theme => ({
   root: {
     color: theme.palette.text.secondary,
@@ -14,21 +12,25 @@ export const styles = theme => ({
     minHeight: '1em',
     margin: 0,
     '&$error': {
-      color: theme.palette.error.main,
+      color: theme.palette.error.main
     },
     '&$disabled': {
-      color: theme.palette.text.disabled,
-    },
+      color: theme.palette.text.disabled
+    }
   },
   error: {},
   disabled: {},
   marginDense: {
-    marginTop: 4,
-  },
+    marginTop: 4
+  }
 });
 
 function FormHelperText(props, context) {
   const {
+    $system: {
+      classNames,
+      classNamesStr
+    },
     classes,
     className: classNameProp,
     disabled: disabledProp,
@@ -37,8 +39,9 @@ function FormHelperText(props, context) {
     component: Component,
     ...other
   } = props;
-  const { muiFormControl } = context;
-
+  const {
+    muiFormControl
+  } = context;
   let disabled = disabledProp;
   let error = errorProp;
   let margin = marginProp;
@@ -57,59 +60,16 @@ function FormHelperText(props, context) {
     }
   }
 
-  const className = classNames(
-    classes.root,
-    {
-      [classes.disabled]: disabled,
-      [classes.error]: error,
-      [classes.marginDense]: margin === 'dense',
-    },
-    classNameProp,
-  );
-
+  const className = classNames(classes.root, disabled && classes.disabled, error && classes.error, margin === 'dense' && classes.marginDense, classNameProp);
   return <Component className={className} {...other} />;
 }
 
-FormHelperText.propTypes = {
-  /**
-   * The content of the component.
-   */
-  children: PropTypes.node,
-  /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css-api) below for more details.
-   */
-  classes: PropTypes.object.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * The component used for the root node.
-   * Either a string to use a DOM element or a component.
-   */
-  component: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
-  /**
-   * If `true`, the helper text should be displayed in a disabled state.
-   */
-  disabled: PropTypes.bool,
-  /**
-   * If `true`, helper text should be displayed in an error state.
-   */
-  error: PropTypes.bool,
-  /**
-   * If `dense`, will adjust vertical spacing. This is normally obtained via context from
-   * FormControl.
-   */
-  margin: PropTypes.oneOf(['dense']),
-};
-
-FormHelperText.defaultProps = {
-  component: 'p',
-};
-
 FormHelperText.contextTypes = {
-  muiFormControl: PropTypes.object,
+  muiFormControl: PropTypes.object
 };
-
-export default withStyles(styles, { name: 'MuiFormHelperText' })(FormHelperText);
+export default withStyles(styles, {
+  name: 'MuiFormHelperText',
+  defaultProps: {
+    component: 'p'
+  }
+})(FormHelperText);

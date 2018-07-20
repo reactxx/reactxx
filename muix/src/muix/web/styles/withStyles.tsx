@@ -23,7 +23,7 @@ const renderAddIn: RenderAddIn = {
 
 
 const withStylesMui = <R extends Types.Shape>
-  (sheetCreator: Types.SheetCreatorX<R>, options?: { name: string }) => (component) => 
+  (sheetCreator: Types.SheetCreatorX<R>, options?: { name: string, defaultProps: Types.PropsX<R>}) => (component) => 
     withStyles<R, {}>(sheetCreator, renderAddIn, options, {isMui:true})(component) as React.ComponentClass<Types.PropsX<R>> & TProvider<R>
 
 export default withStylesMui

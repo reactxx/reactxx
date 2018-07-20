@@ -1,11 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-for */
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import withStyles from '../styles/withStyles';
 import Typography from '../Typography';
-
 export const styles = theme => ({
   root: {
     display: 'inline-flex',
@@ -16,25 +13,30 @@ export const styles = theme => ({
     // Remove grey highlight
     WebkitTapHighlightColor: 'transparent',
     marginLeft: -14,
-    marginRight: 16, // used for row presentation of radio/checkbox
+    marginRight: 16,
+    // used for row presentation of radio/checkbox
     '&$disabled': {
-      cursor: 'default',
-    },
+      cursor: 'default'
+    }
   },
   disabled: {},
   label: {
     '&$disabled': {
-      color: theme.palette.text.disabled,
-    },
-  },
+      color: theme.palette.text.disabled
+    }
+  }
 });
-
 /**
  * Drop in replacement of the `Radio`, `Switch` and `Checkbox` component.
  * Use this component if you want to display an extra label.
  */
+
 function FormControlLabel(props, context) {
   const {
+    $system: {
+      classNames,
+      classNamesStr
+    },
     checked,
     classes,
     className: classNameProp,
@@ -47,97 +49,38 @@ function FormControlLabel(props, context) {
     value,
     ...other
   } = props;
-  const { muiFormControl } = context;
-
+  const {
+    muiFormControl
+  } = context;
   let disabled = disabledProp;
+
   if (typeof disabled === 'undefined' && typeof control.props.disabled !== 'undefined') {
     disabled = control.props.disabled;
   }
+
   if (typeof disabled === 'undefined' && muiFormControl) {
     disabled = muiFormControl.disabled;
   }
 
   const controlProps = {
-    disabled,
+    disabled
   };
   ['checked', 'name', 'onChange', 'value', 'inputRef'].forEach(key => {
     if (typeof control.props[key] === 'undefined' && typeof props[key] !== 'undefined') {
       controlProps[key] = props[key];
     }
   });
-
-  return (
-    <label
-      className={classNames(
-        classes.root,
-        {
-          [classes.disabled]: disabled,
-        },
-        classNameProp,
-      )}
-      {...other}
-    >
+  return <label className={classNamesStr(classes.root, disabled && classes.disabled, classNameProp)} {...other}>
       {React.cloneElement(control, controlProps)}
-      <Typography
-        component="span"
-        className={classNames(classes.label, { [classes.disabled]: disabled })}
-      >
+      <Typography component="span" className={classNames(classes.label, disabled && classes.disabled)}>
         {label}
       </Typography>
-    </label>
-  );
+    </label>;
 }
 
-FormControlLabel.propTypes = {
-  /**
-   * If `true`, the component appears selected.
-   */
-  checked: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css-api) below for more details.
-   */
-  classes: PropTypes.object.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * A control element. For instance, it can be be a `Radio`, a `Switch` or a `Checkbox`.
-   */
-  control: PropTypes.element,
-  /**
-   * If `true`, the control will be disabled.
-   */
-  disabled: PropTypes.bool,
-  /**
-   * Use that property to pass a ref callback to the native input component.
-   */
-  inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  /**
-   * The text to be used in an enclosing label element.
-   */
-  label: PropTypes.node,
-  /*
-   * @ignore
-   */
-  name: PropTypes.string,
-  /**
-   * Callback fired when the state is changed.
-   *
-   * @param {object} event The event source of the callback.
-   * You can pull out the new value by accessing `event.target.checked`.
-   * @param {boolean} checked The `checked` value of the switch
-   */
-  onChange: PropTypes.func,
-  /**
-   * The value of the component.
-   */
-  value: PropTypes.string,
-};
-
 FormControlLabel.contextTypes = {
-  muiFormControl: PropTypes.object,
+  muiFormControl: PropTypes.object
 };
-
-export default withStyles(styles, { name: 'MuiFormControlLabel' })(FormControlLabel);
+export default withStyles(styles, {
+  name: 'MuiFormControlLabel'
+})(FormControlLabel);

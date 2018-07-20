@@ -1,10 +1,21 @@
 import * as ASTQ from 'astq'
 
-export const astq = new ASTQ();
+export const astq = () => {
+    const res = new ASTQ()
+    res.func("isHTMLTag", (adapter, node, tagName, tagNames) => {
+        if (typeof tagName !== 'string') return false
+        const first = tagName[0].charAt(0)
+        if (first === first.toLowerCase()) return true
+        if (!Array.isArray(tagNames)) return false
+        return !!tagNames.find(name => name === tagName)
+    })
+    return res
+}
 
 export interface FileDescr {
-    path: string
-    transform: (root:Ast) => Ast
+    path?: string
+    transform?: (root: Ast) => Ast
+    transformStr?: (code: string) => string
 }
 
 export type Ast = {

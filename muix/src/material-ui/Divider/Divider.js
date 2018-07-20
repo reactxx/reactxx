@@ -1,33 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import withStyles from '../styles/withStyles';
 import { fade } from '../styles/colorManipulator';
-
 export const styles = theme => ({
   root: {
     height: 1,
-    margin: 0, // Reset browser default style.
+    margin: 0,
+    // Reset browser default style.
     border: 'none',
     flexShrink: 0,
-    backgroundColor: theme.palette.divider,
+    backgroundColor: theme.palette.divider
   },
   absolute: {
     position: 'absolute',
     bottom: 0,
     left: 0,
-    width: '100%',
+    width: '100%'
   },
   inset: {
-    marginLeft: 72,
+    marginLeft: 72
   },
   light: {
-    backgroundColor: fade(theme.palette.divider, 0.08),
-  },
+    backgroundColor: fade(theme.palette.divider, 0.08)
+  }
 });
 
 function Divider(props) {
   const {
+    $system: {
+      classNames,
+      classNamesStr
+    },
     absolute,
     classes,
     className: classNameProp,
@@ -36,51 +39,16 @@ function Divider(props) {
     light,
     ...other
   } = props;
-
-  const className = classNames(
-    classes.root,
-    {
-      [classes.absolute]: absolute,
-      [classes.inset]: inset,
-      [classes.light]: light,
-    },
-    classNameProp,
-  );
-
+  const className = classNames(classes.root, absolute && classes.absolute, inset && classes.inset, light && classes.light, classNameProp);
   return <Component className={className} {...other} />;
 }
 
-Divider.propTypes = {
-  absolute: PropTypes.bool,
-  /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css-api) below for more details.
-   */
-  classes: PropTypes.object.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * The component used for the root node.
-   * Either a string to use a DOM element or a component.
-   */
-  component: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
-  /**
-   * If `true`, the divider will be indented.
-   */
-  inset: PropTypes.bool,
-  /**
-   * If `true`, the divider will have a lighter color.
-   */
-  light: PropTypes.bool,
-};
-
-Divider.defaultProps = {
-  absolute: false,
-  component: 'hr',
-  inset: false,
-  light: false,
-};
-
-export default withStyles(styles, { name: 'MuiDivider' })(Divider);
+export default withStyles(styles, {
+  name: 'MuiDivider',
+  defaultProps: {
+    absolute: false,
+    component: 'hr',
+    inset: false,
+    light: false
+  }
+})(Divider);

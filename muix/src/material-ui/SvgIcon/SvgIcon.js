@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import withStyles from '../styles/withStyles';
 import { capitalize } from '../utils/helpers';
-
 export const styles = theme => ({
   root: {
     userSelect: 'none',
@@ -14,31 +12,35 @@ export const styles = theme => ({
     flexShrink: 0,
     fontSize: 24,
     transition: theme.transitions.create('fill', {
-      duration: theme.transitions.duration.shorter,
-    }),
+      duration: theme.transitions.duration.shorter
+    })
   },
   colorPrimary: {
-    color: theme.palette.primary.main,
+    color: theme.palette.primary.main
   },
   colorSecondary: {
-    color: theme.palette.secondary.main,
+    color: theme.palette.secondary.main
   },
   colorAction: {
-    color: theme.palette.action.active,
+    color: theme.palette.action.active
   },
   colorError: {
-    color: theme.palette.error.main,
+    color: theme.palette.error.main
   },
   colorDisabled: {
-    color: theme.palette.action.disabled,
+    color: theme.palette.action.disabled
   },
   fontSizeInherit: {
-    fontSize: 'inherit',
-  },
+    fontSize: 'inherit'
+  }
 });
 
 function SvgIcon(props) {
   const {
+    $system: {
+      classNames,
+      classNamesStr
+    },
     children,
     classes,
     className: classNameProp,
@@ -50,85 +52,20 @@ function SvgIcon(props) {
     viewBox,
     ...other
   } = props;
-
-  const className = classNames(
-    classes.root,
-    {
-      [classes[`fontSize${capitalize(fontSize)}`]]: fontSize !== 'default',
-      [classes[`color${capitalize(color)}`]]: color !== 'inherit',
-    },
-    classNameProp,
-  );
-
-  return (
-    <Component
-      className={className}
-      focusable="false"
-      viewBox={viewBox}
-      color={nativeColor}
-      aria-hidden={titleAccess ? 'false' : 'true'}
-      {...other}
-    >
+  const className = classNames(classes.root, fontSize !== 'default' && classes[`fontSize${capitalize(fontSize)}`], color !== 'inherit' && classes[`color${capitalize(color)}`], classNameProp);
+  return <Component className={className} focusable="false" viewBox={viewBox} color={nativeColor} aria-hidden={titleAccess ? 'false' : 'true'} {...other}>
       {children}
       {titleAccess ? <title>{titleAccess}</title> : null}
-    </Component>
-  );
+    </Component>;
 }
 
-SvgIcon.propTypes = {
-  /**
-   * Node passed into the SVG element.
-   */
-  children: PropTypes.node.isRequired,
-  /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css-api) below for more details.
-   */
-  classes: PropTypes.object.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * The color of the component. It supports those theme colors that make sense for this component.
-   * You can use the `nativeColor` property to apply a color attribute to the SVG element.
-   */
-  color: PropTypes.oneOf(['inherit', 'primary', 'secondary', 'action', 'error', 'disabled']),
-  /**
-   * The component used for the root node.
-   * Either a string to use a DOM element or a component.
-   */
-  component: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
-  /**
-   * The fontSize applied to the icon. Defaults to 24px, but can be configure to inherit font size.
-   */
-  fontSize: PropTypes.oneOf(['inherit', 'default']),
-  /**
-   * Applies a color attribute to the SVG element.
-   */
-  nativeColor: PropTypes.string,
-  /**
-   * Provides a human-readable title for the element that contains it.
-   * https://www.w3.org/TR/SVG-access/#Equivalent
-   */
-  titleAccess: PropTypes.string,
-  /**
-   * Allows you to redefine what the coordinates without units mean inside an SVG element.
-   * For example, if the SVG element is 500 (width) by 200 (height),
-   * and you pass viewBox="0 0 50 20",
-   * this means that the coordinates inside the SVG will go from the top left corner (0,0)
-   * to bottom right (50,20) and each unit will be worth 10px.
-   */
-  viewBox: PropTypes.string,
-};
-
-SvgIcon.defaultProps = {
-  color: 'inherit',
-  component: 'svg',
-  fontSize: 'default',
-  viewBox: '0 0 24 24',
-};
-
 SvgIcon.muiName = 'SvgIcon';
-
-export default withStyles(styles, { name: 'MuiSvgIcon' })(SvgIcon);
+export default withStyles(styles, {
+  name: 'MuiSvgIcon',
+  defaultProps: {
+    color: 'inherit',
+    component: 'svg',
+    fontSize: 'default',
+    viewBox: '0 0 24 24'
+  }
+})(SvgIcon);

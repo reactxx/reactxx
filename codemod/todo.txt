@@ -1,0 +1,2 @@
+- generate wishStyles.js
+- media queries

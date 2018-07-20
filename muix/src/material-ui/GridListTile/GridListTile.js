@@ -1,38 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import EventListener from 'react-event-listener';
 import debounce from 'debounce'; // < 1kb payload overhead when lodash/debounce is > 3kb.
-import withStyles from '../styles/withStyles';
 
+import withStyles from '../styles/withStyles';
 export const styles = {
   root: {
     boxSizing: 'border-box',
-    flexShrink: 0,
+    flexShrink: 0
   },
   tile: {
     position: 'relative',
-    display: 'block', // In case it's not renderd with a div.
+    display: 'block',
+    // In case it's not renderd with a div.
     height: '100%',
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   imgFullHeight: {
     height: '100%',
     transform: 'translateX(-50%)',
     position: 'relative',
-    left: '50%',
+    left: '50%'
   },
   imgFullWidth: {
     width: '100%',
     position: 'relative',
     transform: 'translateY(-50%)',
-    top: '50%',
-  },
+    top: '50%'
+  }
 };
 
 class GridListTile extends React.Component {
   imgElement = null;
-
   handleResize = debounce(() => {
     this.fit();
   }, 166); // Corresponds to 10 frames at 60 Hz.
@@ -56,10 +55,7 @@ class GridListTile extends React.Component {
       return;
     }
 
-    if (
-      imgElement.width / imgElement.height >
-      imgElement.parentNode.offsetWidth / imgElement.parentNode.offsetHeight
-    ) {
+    if (imgElement.width / imgElement.height > imgElement.parentNode.offsetWidth / imgElement.parentNode.offsetHeight) {
       imgElement.classList.remove(...this.props.classes.imgFullWidth.split(' '));
       imgElement.classList.add(...this.props.classes.imgFullHeight.split(' '));
     } else {
@@ -83,68 +79,48 @@ class GridListTile extends React.Component {
   }
 
   render() {
-    const { children, classes, className, cols, component: Component, rows, ...other } = this.props;
-
-    return (
-      <Component className={classNames(classes.root, className)} {...other}>
+    const {
+      $system: {
+        classNames,
+        classNamesStr
+      },
+      children,
+      classes,
+      className,
+      cols,
+      component: Component,
+      rows,
+      ...other
+    } = this.props;
+    return <Component className={classNames(classes.root, className)} {...other}>
         <EventListener target="window" onResize={this.handleResize} />
-        <div className={classes.tile}>
+        <div className={classNamesStr(classes.tile)}>
           {React.Children.map(children, child => {
-            if (!React.isValidElement(child)) {
-              return null;
-            }
+          if (!React.isValidElement(child)) {
+            return null;
+          }
 
-            if (child.type === 'img') {
-              return React.cloneElement(child, {
-                ref: node => {
-                  this.imgElement = node;
-                },
-              });
-            }
+          if (child.type === 'img') {
+            return React.cloneElement(child, {
+              ref: node => {
+                this.imgElement = node;
+              }
+            });
+          }
 
-            return child;
-          })}
+          return child;
+        })}
         </div>
-      </Component>
-    );
+      </Component>;
   }
+
 }
 
-GridListTile.propTypes = {
-  /**
-   * Theoretically you can pass any node as children, but the main use case is to pass an img,
-   * in which case GridListTile takes care of making the image "cover" available space
-   * (similar to `background-size: cover` or to `object-fit: cover`).
-   */
-  children: PropTypes.node,
-  /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css-api) below for more details.
-   */
-  classes: PropTypes.object.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * Width of the tile in number of grid cells.
-   */
-  cols: PropTypes.number,
-  /**
-   * The component used for the root node.
-   * Either a string to use a DOM element or a component.
-   */
-  component: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
-  /**
-   * Height of the tile in number of grid cells.
-   */
-  rows: PropTypes.number,
-};
-
-GridListTile.defaultProps = {
-  cols: 1,
-  component: 'li',
-  rows: 1,
-};
-
-export default withStyles(styles, { name: 'MuiGridListTile' })(GridListTile);
+export default withStyles(styles, {
+  name: 'MuiGridListTile',
+  defaultProps: {
+    cols: 1,
+    component: 'li',
+    rows: 1
+  }
+})(GridListTile);

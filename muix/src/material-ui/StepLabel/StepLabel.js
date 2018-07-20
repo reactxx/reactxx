@@ -1,20 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import withStyles from '../styles/withStyles';
 import Typography from '../Typography';
 import StepIcon from '../StepIcon';
-
 export const styles = theme => ({
   root: {
     display: 'flex',
     alignItems: 'center',
     '&$alternativeLabel': {
-      flexDirection: 'column',
+      flexDirection: 'column'
     },
     '&$disabled': {
-      cursor: 'default',
-    },
+      cursor: 'default'
+    }
   },
   horizontal: {},
   vertical: {},
@@ -27,33 +25,37 @@ export const styles = theme => ({
     color: theme.palette.text.secondary,
     '&$active': {
       color: theme.palette.text.primary,
-      fontWeight: 500,
+      fontWeight: 500
     },
     '&$completed': {
       color: theme.palette.text.primary,
-      fontWeight: 500,
+      fontWeight: 500
     },
     '&$alternativeLabel': {
       textAlign: 'center',
-      marginTop: 16,
+      marginTop: 16
     },
     '&$error': {
-      color: theme.palette.error.main,
-    },
+      color: theme.palette.error.main
+    }
   },
   iconContainer: {
     paddingRight: 8,
     '&$alternativeLabel': {
-      paddingRight: 0,
-    },
+      paddingRight: 0
+    }
   },
   labelContainer: {
-    width: '100%',
-  },
+    width: '100%'
+  }
 });
 
 function StepLabel(props) {
   const {
+    $system: {
+      classNames,
+      classNamesStr
+    },
     active,
     alternativeLabel,
     children,
@@ -69,125 +71,29 @@ function StepLabel(props) {
     StepIconProps,
     ...other
   } = props;
-
-  return (
-    <span
-      className={classNames(
-        classes.root,
-        classes[orientation],
-        {
-          [classes.disabled]: disabled,
-          [classes.alternativeLabel]: alternativeLabel,
-          [classes.error]: error,
-        },
-        classNameProp,
-      )}
-      {...other}
-    >
-      {icon && (
-        <span
-          className={classNames(classes.iconContainer, {
-            [classes.alternativeLabel]: alternativeLabel,
-          })}
-        >
-          <StepIcon
-            completed={completed}
-            active={active}
-            error={error}
-            icon={icon}
-            {...StepIconProps}
-          />
-        </span>
-      )}
-      <span className={classes.labelContainer}>
-        <Typography
-          variant="body1"
-          component="span"
-          className={classNames(classes.label, {
-            [classes.alternativeLabel]: alternativeLabel,
-            [classes.completed]: completed,
-            [classes.active]: active,
-            [classes.error]: error,
-          })}
-        >
+  return <span className={classNamesStr(classes.root, classes[orientation], disabled && classes.disabled, alternativeLabel && classes.alternativeLabel, error && classes.error, classNameProp)} {...other}>
+      {icon && <span className={classNamesStr(classes.iconContainer, alternativeLabel && classes.alternativeLabel)}>
+          <StepIcon completed={completed} active={active} error={error} icon={icon} {...StepIconProps} />
+        </span>}
+      <span className={classNamesStr(classes.labelContainer)}>
+        <Typography variant="body1" component="span" className={classNames(classes.label, alternativeLabel && classes.alternativeLabel, completed && classes.completed, active && classes.active, error && classes.error)}>
           {children}
         </Typography>
         {optional}
       </span>
-    </span>
-  );
+    </span>;
 }
 
-StepLabel.propTypes = {
-  /**
-   * @ignore
-   * Sets the step as active. Is passed to child components.
-   */
-  active: PropTypes.bool,
-  /**
-   * @ignore
-   * Set internally by Stepper when it's supplied with the alternativeLabel property.
-   */
-  alternativeLabel: PropTypes.bool,
-  /**
-   * In most cases will simply be a string containing a title for the label.
-   */
-  children: PropTypes.node,
-  /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css-api) below for more details.
-   */
-  classes: PropTypes.object.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * @ignore
-   * Mark the step as completed. Is passed to child components.
-   */
-  completed: PropTypes.bool,
-  /**
-   * Mark the step as disabled, will also disable the button if
-   * `StepLabelButton` is a child of `StepLabel`. Is passed to child components.
-   */
-  disabled: PropTypes.bool,
-  /**
-   * Mark the step as failed.
-   */
-  error: PropTypes.bool,
-  /**
-   * Override the default icon.
-   */
-  icon: PropTypes.node,
-  /**
-   * @ignore
-   */
-  last: PropTypes.bool,
-  /**
-   * The optional node to display.
-   */
-  optional: PropTypes.node,
-  /**
-   * @ignore
-   */
-  orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-  /**
-   * Properties applied to the [`StepIcon`](/api/step-icon) element.
-   */
-  StepIconProps: PropTypes.object,
-};
-
-StepLabel.defaultProps = {
-  active: false,
-  alternativeLabel: false,
-  completed: false,
-  disabled: false,
-  error: false,
-  last: false,
-  orientation: 'horizontal',
-};
-
 StepLabel.muiName = 'StepLabel';
-
-export default withStyles(styles, { name: 'MuiStepLabel' })(StepLabel);
+export default withStyles(styles, {
+  name: 'MuiStepLabel',
+  defaultProps: {
+    active: false,
+    alternativeLabel: false,
+    completed: false,
+    disabled: false,
+    error: false,
+    last: false,
+    orientation: 'horizontal'
+  }
+})(StepLabel);

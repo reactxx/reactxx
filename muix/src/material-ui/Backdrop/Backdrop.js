@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import withStyles from '../styles/withStyles';
 import Fade from '../Fade';
-
 export const styles = {
   root: {
     zIndex: -1,
@@ -14,64 +12,34 @@ export const styles = {
     left: 0,
     // Remove grey highlight
     WebkitTapHighlightColor: 'transparent',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
   invisible: {
-    backgroundColor: 'transparent',
-  },
+    backgroundColor: 'transparent'
+  }
 };
 
 function Backdrop(props) {
-  const { classes, className, invisible, open, transitionDuration, ...other } = props;
-
-  return (
-    <Fade appear in={open} timeout={transitionDuration} {...other}>
-      <div
-        data-mui-test="Backdrop"
-        className={classNames(
-          classes.root,
-          {
-            [classes.invisible]: invisible,
-          },
-          className,
-        )}
-        aria-hidden="true"
-      />
-    </Fade>
-  );
+  const {
+    $system: {
+      classNames,
+      classNamesStr
+    },
+    classes,
+    className,
+    invisible,
+    open,
+    transitionDuration,
+    ...other
+  } = props;
+  return <Fade appear in={open} timeout={transitionDuration} {...other}>
+      <div data-mui-test="Backdrop" className={classNamesStr(classes.root, invisible && classes.invisible, className)} aria-hidden="true" />
+    </Fade>;
 }
 
-Backdrop.propTypes = {
-  /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css-api) below for more details.
-   */
-  classes: PropTypes.object.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * If `true`, the backdrop is invisible.
-   * It can be used when rendering a popover or a custom select component.
-   */
-  invisible: PropTypes.bool,
-  /**
-   * If `true`, the backdrop is open.
-   */
-  open: PropTypes.bool.isRequired,
-  /**
-   * The duration for the transition, in milliseconds.
-   * You may specify a single timeout for all transitions, or individually with an object.
-   */
-  transitionDuration: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.shape({ enter: PropTypes.number, exit: PropTypes.number }),
-  ]),
-};
-
-Backdrop.defaultProps = {
-  invisible: false,
-};
-
-export default withStyles(styles, { name: 'MuiBackdrop' })(Backdrop);
+export default withStyles(styles, {
+  name: 'MuiBackdrop',
+  defaultProps: {
+    invisible: false
+  }
+})(Backdrop);

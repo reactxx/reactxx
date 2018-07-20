@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import withStyles from '../styles/withStyles';
 import { capitalize } from '../utils/helpers';
-
 const RADIUS = 12;
-
 export const styles = theme => ({
   root: {
     position: 'relative',
     display: 'inline-flex',
     // For correct alignment with the text.
-    verticalAlign: 'middle',
+    verticalAlign: 'middle'
   },
   badge: {
     display: 'flex',
@@ -31,24 +28,29 @@ export const styles = theme => ({
     borderRadius: '50%',
     backgroundColor: theme.palette.color,
     color: theme.palette.textColor,
-    zIndex: 1, // Render the badge on top of potential ripples.
+    zIndex: 1 // Render the badge on top of potential ripples.
+
   },
   colorPrimary: {
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
+    color: theme.palette.primary.contrastText
   },
   colorSecondary: {
     backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.contrastText,
+    color: theme.palette.secondary.contrastText
   },
   colorError: {
     backgroundColor: theme.palette.error.main,
-    color: theme.palette.error.contrastText,
-  },
+    color: theme.palette.error.contrastText
+  }
 });
 
 function Badge(props) {
   const {
+    $system: {
+      classNames,
+      classNamesStr
+    },
     badgeContent,
     children,
     classes,
@@ -57,51 +59,17 @@ function Badge(props) {
     component: ComponentProp,
     ...other
   } = props;
-
-  const badgeClassName = classNames(classes.badge, {
-    [classes[`color${capitalize(color)}`]]: color !== 'default',
-  });
-
-  return (
-    <ComponentProp className={classNames(classes.root, classNameProp)} {...other}>
+  const badgeClassName = classNames(classes.badge, color !== 'default' && classes[`color${capitalize(color)}`]);
+  return <ComponentProp className={classNames(classes.root, classNameProp)} {...other}>
       {children}
-      <span className={badgeClassName}>{badgeContent}</span>
-    </ComponentProp>
-  );
+      <span className={classNamesStr(badgeClassName)}>{badgeContent}</span>
+    </ComponentProp>;
 }
 
-Badge.propTypes = {
-  /**
-   * The content rendered within the badge.
-   */
-  badgeContent: PropTypes.node.isRequired,
-  /**
-   * The badge will be added relative to this node.
-   */
-  children: PropTypes.node.isRequired,
-  /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css-api) below for more details.
-   */
-  classes: PropTypes.object.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * The color of the component. It supports those theme colors that make sense for this component.
-   */
-  color: PropTypes.oneOf(['default', 'primary', 'secondary', 'error']),
-  /**
-   * The component used for the root node.
-   * Either a string to use a DOM element or a component.
-   */
-  component: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
-};
-
-Badge.defaultProps = {
-  color: 'default',
-  component: 'span',
-};
-
-export default withStyles(styles, { name: 'MuiBadge' })(Badge);
+export default withStyles(styles, {
+  name: 'MuiBadge',
+  defaultProps: {
+    color: 'default',
+    component: 'span'
+  }
+})(Badge);

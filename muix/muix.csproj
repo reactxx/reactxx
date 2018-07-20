@@ -302,7 +302,6 @@
     <Content Include="src\material-ui\styles\createTypography.js" />
     <Content Include="src\material-ui\styles\getStylesCreator.js" />
     <Content Include="src\material-ui\styles\getThemeProps.js" />
-    <Content Include="src\material-ui\styles\withStyles-old.js" />
     <Content Include="src\material-ui\styles\index.js" />
     <Content Include="src\material-ui\styles\jssPreset.js" />
     <Content Include="src\material-ui\styles\MuiThemeProvider.js" />
@@ -396,7 +395,7 @@
     <TypeScriptCompile Include="src\ks\common\sheeter\animations-test.ts" />
     <TypeScriptCompile Include="src\ks\common\sheeter\test.ts" />
     <TypeScriptCompile Include="src\ks\common\sheeter\mediaq-test.ts" />
-    <TypeScriptCompile Include="src\material-ui\styles\withStyles.ts" />
+    <Content Include="src\material-ui\styles\withStyles.js" />
     <TypeScriptCompile Include="src\mediaq\common\withStyles.tsx" />
     <TypeScriptCompile Include="src\mediaq\native\index.ts" />
     <TypeScriptCompile Include="src\mediaq\native\native.tsx" />
@@ -406,6 +405,8 @@
     <TypeScriptCompile Include="src\mediaq\typings\typings.d.ts" />
     <TypeScriptCompile Include="src\mediaq\web\index.ts" />
     <TypeScriptCompile Include="src\mediaq\web\web.tsx" />
+    <TypeScriptCompile Include="src\muix\common\ButtonBase\ButtonBase.ts" />
+    <TypeScriptCompile Include="src\muix\common\Button\Button.ts" />
     <TypeScriptCompile Include="src\sheeter\animations\native.ts" />
     <TypeScriptCompile Include="src\sheeter\animations\web.ts" />
     <TypeScriptCompile Include="src\sheeter\animations\index.ts" />
@@ -743,8 +744,6 @@
     <TypeScriptCompile Include="src\muix\web\Button\Button.ts" />
     <TypeScriptCompile Include="src\muix\web\ButtonBase\ButtonBase.ts" />
     <TypeScriptCompile Include="src\muix\web\styles\create-sheet-hook.ts" />
-    <TypeScriptCompile Include="src\muix\web\styles\classnames.ts" />
-    <TypeScriptCompile Include="src\muix\web\styles\withStyles-old.tsx" />
     <TypeScriptCompile Include="src\muix\web\styles\withStyles.tsx" />
     <TypeScriptCompile Include="src\navigation\index.tsx" />
     <TypeScriptCompile Include="src\primitives\common\comps-sheets.ts" />
