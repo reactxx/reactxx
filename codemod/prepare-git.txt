@@ -6,7 +6,12 @@
 - remove ": Object" from "export default function createPalette(palette: Object) {" ( in  D:\reactxx\muix\src\material-ui\styles\createPalette.js)
 - unpack ZIP to d:\reactxx\muix\src\muix\typings\
 
+
+- delete d:\reactxx\muix\src\material-ui\
 - run (form TERMINAL in VSCODE): 
   D:\reactxx\codemod>flow-remove-types --out-dir d:/reactxx/muix/src/material-ui d:/reactxx/muix/src/material-ui-temp/
 - delete d:/reactxx/muix/src/material-ui-temp/
 
+- delete d:\reactxx\codemod\patch-original\
+- modify d:\reactxx\muix\src\material-ui\Input\Textarea.js ({} as options to withStyles)
+- run index.ts from CodeMod project

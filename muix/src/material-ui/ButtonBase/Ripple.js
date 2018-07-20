@@ -56,39 +56,4 @@ class Ripple extends React.Component {
 
 }
 
-Ripple.propTypes = {
-  /**
-     * Override or extend the styles applied to the component.
-     * See [CSS API](#css-api) below for more details.
-     */
-  classes: PropTypes.object.isRequired,
-
-  /**
-     * @ignore
-     */
-  className: PropTypes.string,
-
-  /**
-     * If `true`, the ripple pulsates, typically indicating the keyboard focus state of an element.
-     */
-  pulsate: PropTypes.bool,
-
-  /**
-     * Diameter of the ripple.
-     */
-  rippleSize: PropTypes.number,
-
-  /**
-     * Horizontal position of the ripple center.
-     */
-  rippleX: PropTypes.number,
-
-  /**
-     * Vertical position of the ripple center.
-     */
-  rippleY: PropTypes.number
-};
-Ripple.defaultProps = {
-  pulsate: false
-};
 export default Ripple;

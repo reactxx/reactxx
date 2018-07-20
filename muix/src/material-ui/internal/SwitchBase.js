@@ -1,11 +1,8 @@
 // @inheritedComponent IconButton
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import withStyles from '../styles/withStyles';
 import IconButton from '../IconButton';
-
 export const styles = {
   root: {
     display: 'inline-flex',
@@ -13,8 +10,8 @@ export const styles = {
     transition: 'none',
     '&:hover': {
       // Disable the hover effect for the IconButton.
-      backgroundColor: 'transparent',
-    },
+      backgroundColor: 'transparent'
+    }
   },
   checked: {},
   disabled: {},
@@ -27,19 +24,18 @@ export const styles = {
     top: 0,
     left: 0,
     margin: 0,
-    padding: 0,
-  },
+    padding: 0
+  }
 };
 
 class SwitchBase extends React.Component {
   input = null;
-
   isControlled = null;
 
   constructor(props) {
     super(props);
-
     this.isControlled = props.checked != null;
+
     if (!this.isControlled) {
       // not controlled, use internal state
       this.state.checked = props.defaultChecked !== undefined ? props.defaultChecked : false;
@@ -47,34 +43,39 @@ class SwitchBase extends React.Component {
   }
 
   state = {};
-
   handleFocus = event => {
     if (this.props.onFocus) {
       this.props.onFocus(event);
     }
 
-    const { muiFormControl } = this.context;
+    const {
+      muiFormControl
+    } = this.context;
+
     if (muiFormControl && muiFormControl.onFocus) {
       muiFormControl.onFocus(event);
     }
   };
-
   handleBlur = event => {
     if (this.props.onBlur) {
       this.props.onBlur(event);
     }
 
-    const { muiFormControl } = this.context;
+    const {
+      muiFormControl
+    } = this.context;
+
     if (muiFormControl && muiFormControl.onBlur) {
       muiFormControl.onBlur(event);
     }
   };
-
   handleInputChange = event => {
     const checked = event.target.checked;
 
     if (!this.isControlled) {
-      this.setState({ checked });
+      this.setState({
+        checked
+      });
     }
 
     if (this.props.onChange) {
@@ -84,6 +85,10 @@ class SwitchBase extends React.Component {
 
   render() {
     const {
+      $system: {
+        classNames,
+        classNamesStr
+      },
       checked: checkedProp,
       checkedIcon,
       classes,
@@ -102,8 +107,9 @@ class SwitchBase extends React.Component {
       value,
       ...other
     } = this.props;
-
-    const { muiFormControl } = this.context;
+    const {
+      muiFormControl
+    } = this.context;
     let disabled = disabledProp;
 
     if (muiFormControl) {
@@ -114,140 +120,22 @@ class SwitchBase extends React.Component {
 
     const checked = this.isControlled ? checkedProp : this.state.checked;
     const hasLabelFor = type === 'checkbox' || type === 'radio';
-
-    return (
-      <IconButton
-        component="span"
-        className={classNames(
-          classes.root,
-          {
-            [classes.checked]: checked,
-            [classes.disabled]: disabled,
-          },
-          classNameProp,
-        )}
-        disabled={disabled}
-        tabIndex={null}
-        role={undefined}
-        onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
-        {...other}
-      >
+    return <IconButton component="span" className={classNames(classes.root, checked && classes.checked, disabled && classes.disabled, classNameProp)} disabled={disabled} tabIndex={null} role={undefined} onFocus={this.handleFocus} onBlur={this.handleBlur} {...other}>
         {checked ? checkedIcon : icon}
-        <input
-          id={hasLabelFor && id}
-          type={type}
-          name={name}
-          checked={checked}
-          onChange={this.handleInputChange}
-          className={classes.input}
-          disabled={disabled}
-          tabIndex={tabIndex}
-          value={value}
-          ref={inputRef}
-          {...inputProps}
-        />
-      </IconButton>
-    );
+        <input id={hasLabelFor && id} type={type} name={name} checked={checked} onChange={this.handleInputChange} className={classNamesStr(classes.input)} disabled={disabled} tabIndex={tabIndex} value={value} ref={inputRef} {...inputProps} />
+      </IconButton>;
   }
-}
 
-// NB: If changed, please update Checkbox, Switch and Radio
+} // NB: If changed, please update Checkbox, Switch and Radio
 // so that the API documentation is updated.
-SwitchBase.propTypes = {
-  /**
-   * If `true`, the component is checked.
-   */
-  checked: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  /**
-   * The icon to display when the component is checked.
-   */
-  checkedIcon: PropTypes.node.isRequired,
-  /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css-api) below for more details.
-   */
-  classes: PropTypes.object.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * @ignore
-   */
-  defaultChecked: PropTypes.bool,
-  /**
-   * If `true`, the switch will be disabled.
-   */
-  disabled: PropTypes.bool,
-  /**
-   * If `true`, the ripple effect will be disabled.
-   */
-  disableRipple: PropTypes.bool,
-  /**
-   * The icon to display when the component is unchecked.
-   */
-  icon: PropTypes.node.isRequired,
-  /**
-   * The id of the `input` element.
-   */
-  id: PropTypes.string,
-  /**
-   * If `true`, the component appears indeterminate.
-   */
-  indeterminate: PropTypes.bool,
-  /**
-   * The icon to display when the component is indeterminate.
-   */
-  indeterminateIcon: PropTypes.node,
-  /**
-   * Attributes applied to the `input` element.
-   */
-  inputProps: PropTypes.object,
-  /**
-   * Use that property to pass a ref callback to the native input component.
-   */
-  inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  /*
-   * @ignore
-   */
-  name: PropTypes.string,
-  /**
-   * @ignore
-   */
-  onBlur: PropTypes.func,
-  /**
-   * Callback fired when the state is changed.
-   *
-   * @param {object} event The event source of the callback.
-   * You can pull out the new value by accessing `event.target.checked`.
-   * @param {boolean} checked The `checked` value of the switch
-   */
-  onChange: PropTypes.func,
-  /**
-   * @ignore
-   */
-  onFocus: PropTypes.func,
-  /**
-   * @ignore
-   */
-  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  /**
-   * The input component property `type`.
-   */
-  type: PropTypes.string,
-  /**
-   * The value of the component.
-   */
-  value: PropTypes.string,
-};
 
-SwitchBase.defaultProps = {
-  type: 'checkbox',
-};
 
 SwitchBase.contextTypes = {
-  muiFormControl: PropTypes.object,
+  muiFormControl: PropTypes.object
 };
-
-export default withStyles(styles, { name: 'MuiSwitchBase' })(SwitchBase);
+export default withStyles(styles, {
+  name: 'MuiSwitchBase',
+  defaultProps: {
+    type: 'checkbox'
+  }
+})(SwitchBase);

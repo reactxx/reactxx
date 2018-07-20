@@ -2,7 +2,7 @@ import * as Ast from '../../utils/ast'
 import * as Tasks from '../../tasks/default-modifier'
 import * as Queries from '../../utils/queries'
 
-import { Specials } from '../../tasks/index'
+import { Specials } from '../../tasks'
 
 export const registerTouchRipple = (specials: Specials) => specials['ButtonBase/TouchRipple'] = ({
     transform: ast => {

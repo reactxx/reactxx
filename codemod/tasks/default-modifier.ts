@@ -55,7 +55,10 @@ const refactorClassNames = (root: Ast.Ast) => {
 const selectClassNamesFromProps = (root: Ast.Ast, functionName: string) => {
   const func = getRenderFunc(root, functionName)
   const all = Ast.astq().query(func.body, '/VariableDeclaration/VariableDeclarator [ // Identifier [@name == "props"] ]')
+  // all.length===0: CSSBaseLine
+  // all.length>1: BottomNavigation
   const selectProps = all && all.length > 0 ? all[0] : null
+  if (!selectProps) return root
   const place = selectProps.id.properties;
   (place as Array<any>).splice(0, 0, selectFromObject)
   Ast.removeIgnored(root)
@@ -78,7 +81,8 @@ const propTypesAndDefaultProps = (root: Ast.Ast, name: string) => {
     const defaultPropsIdx = program.body.indexOf(defaultProps);
     (program.body as any[]).splice(defaultPropsIdx, 1)
     // put defaultProps to withStyles
-    const withStyles = Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExportDefaultDeclaration/CallExpression/CallExpression [ /Identifier [ @name=="withStyles" ] ] /ObjectExpression`))
+    const withStyles = Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExportDefaultDeclaration/CallExpression/CallExpression [ /Identifier [ @name=="withStyles" ] ] /ObjectExpression`), true)
+    if (!withStyles) return root // e.g. for Ripple
     withStyles.properties.push({
       "type": "ObjectProperty",
       "method": false,

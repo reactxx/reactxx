@@ -1,5 +1,5 @@
 
-            import withStyles from 'reactxx-muix/web/styles/withStyles'
+    import withStyles from 'reactxx-muix/web/styles/withStyles'
 
-            export default withStyles
-            
+    export default withStyles
+    

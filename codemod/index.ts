@@ -1,4 +1,4 @@
-import {codeMod} from './tasks/index'
-import {readAllCodes} from './tasks/index'
+import {codeMod} from './tasks'
+import {readAllCodes} from './tasks'
 
 codeMod()
