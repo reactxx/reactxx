@@ -51,7 +51,7 @@ const label: Types.CodeSFC<Shape> = ({ $system: { mergeRulesets }, classes, $med
   return <Text className={root}>[{info}] {children}</Text>
 }
 
-const Label: Types.ComponentTypeX<Shape> = withStylesCreator(Consts.Label1, sheet, label)({
+const Label: Types.ComponentTypeX<Shape> = withStylesCreator(sheet, label, {name:Consts.Label1})({
   defaultProps: {
     $mediaq: {
       isMobile: [null, 480],

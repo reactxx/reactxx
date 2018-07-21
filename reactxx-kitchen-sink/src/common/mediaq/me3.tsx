@@ -61,7 +61,7 @@ const label: Types.CodeSFC<Shape> = ({ $system: { mergeRulesets }, classes, $med
   return <Text className={root}>{$mediaq.isMobile ? '[MOBILE]' : $mediaq.isTablet ? '[TABLET]' : '[DESKTOP]'} {children}</Text>
 }
 
-const Label: Types.ComponentTypeX<Shape> = withStylesCreator(Consts.Label, sheet, label)({
+const Label: Types.ComponentTypeX<Shape> = withStylesCreator(sheet, label, {name:Consts.Label})({
   defaultProps: {
     $themedProps: ({ breakpoints: { mobileEnd, tabletEnd } }) => ({ // use values from theme
       $mediaq: {

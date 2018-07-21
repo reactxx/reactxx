@@ -26,4 +26,4 @@ const App: React.SFC = props => {
 export default App
 
 //Create Define Text component with MediaQ support
-const Text: Types.ComponentTypeX<TComps.TextShape> = withStylesCreator(Consts.Text, textSheet, text as Types.CodeComponentType<TComps.TextShape>)()
+const Text: Types.ComponentTypeX<TComps.TextShape> = withStylesCreator(textSheet, text as Types.CodeComponentType<TComps.TextShape>, {name:Consts.Text})()

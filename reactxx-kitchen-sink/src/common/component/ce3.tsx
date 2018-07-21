@@ -71,7 +71,7 @@ class label extends React.Component<Types.CodeProps<Shape>, { disabled: boolean 
   }
 }
 
-export const Label = withStylesCreator<Shape>('panel', sheet, label)()
+export const Label = withStylesCreator<Shape>(sheet, label, {name:'panel'})()
 
 /************************************************
 *************************************************

@@ -185,7 +185,8 @@ const responsibleDrawer: Types.CodeSFC<TResponsibleDrawer.Shape> = props => {
 //let count = 0
 
 // return HOC ResponsibleDrawer component and its creator
-export const ResponsibleDrawerCreator = withStylesCreator<TResponsibleDrawer.Shape, { LayoutChanged: typeof Consumer }>(TResponsibleDrawer.Consts.Drawer, sheet, responsibleDrawer, {
+export const ResponsibleDrawerCreator = withStylesCreator<TResponsibleDrawer.Shape, { LayoutChanged: typeof Consumer }>(sheet, responsibleDrawer, {
+  name:TResponsibleDrawer.Consts.Drawer,
   getVariant: ({ animationDuration, $mediaq, drawerWidths }) => ({ animationDuration, $mediaq, drawerWidths }),
   variantToString: ({ animationDuration, $mediaq, drawerWidths }) => variantToString(animationDuration, $mediaq.mobile, $mediaq.tablet, $mediaq.desktop, drawerWidths[0], drawerWidths[1], drawerWidths[2]),
   defaultProps: {

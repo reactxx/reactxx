@@ -1,4 +1,4 @@
-﻿import meta from 'material-ui/ButtonBase/ButtonBase'
+﻿import meta from 'reactxx-mui-web/ButtonBase/ButtonBase'
 import { Types } from 'reactxx-basic'
 
 import { Shape } from '../../common/ButtonBase/ButtonBase'

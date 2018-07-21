@@ -64,7 +64,7 @@ const label: Types.CodeSFC<Shape> = ({ $system: { mergeRulesets }, classes, styl
   </View>
 }
 
-export const LabelCreator = withStylesCreator<Shape>(Consts.Label, labelSheet, label)
+export const LabelCreator = withStylesCreator<Shape>(labelSheet, label, {name: Consts.Label})
 export const Label = LabelCreator()
 
 // 
@@ -105,7 +105,7 @@ const badge: Types.CodeSFC<Shape> = ({ $system: { mergeRulesets }, classes, styl
   </View>
 }
 
-export const BadgeCreator = withStylesCreator<Shape>(Consts.Badge, badgeSheet, badge)
+export const BadgeCreator = withStylesCreator<Shape>(badgeSheet, badge, {name:Consts.Badge})
 export const Badge = BadgeCreator()
 
 /************************

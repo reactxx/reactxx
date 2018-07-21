@@ -1,4 +1,4 @@
-﻿import { default as createMuiTheme } from 'material-ui/styles/createMuiTheme';
+﻿import { default as createMuiTheme } from 'reactxx-mui-web/styles/createMuiTheme';
 import React from 'react';
 import { RenderAddIn, TCommon, ThemeProviderUntyped, TProvider, Types, withStyles } from 'reactxx-basic';
 import { Theme as MuiTheme } from 'reactxx-muix/typings/styles/createMuiTheme';
@@ -18,6 +18,7 @@ const renderAddIn: RenderAddIn = {
   rulesetsToClassNames: rulesetsToClassNames,
 }
 
+//const withStylesCreatorMui = <R extends Types.Shape>()
 
 const withStylesMui = <R extends Types.Shape>
   (sheetCreator: Types.SheetCreatorX<R>, options?: { defaultProps: Types.PropsX<R>}) => (component) => 

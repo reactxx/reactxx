@@ -99,7 +99,7 @@ const label: Types.CodeSFC<Shape> = props => {
   </AnimatedView>
 }
 
-export const Label = withStylesCreator<Shape>(Consts.Label, sheet, label)()
+export const Label = withStylesCreator<Shape>(sheet, label, {name:Consts.Label})()
 
 /************************************************
 *************************************************

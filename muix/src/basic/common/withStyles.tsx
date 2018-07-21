@@ -70,8 +70,8 @@ const renderAddIn: RenderAddIn = {
 * WITH STYLES
 *************************/
 
-export const withStylesCreator = <R extends Types.Shape, TStatic extends {} = {}>(displayName: string, sheetCreator: Types.SheetCreatorX<R>, codeComponent: Types.CodeComponentType<R>, options?: Types.WithStyleOptions_ComponentX<R>) =>
-  (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStylesLow<R, TStatic>(sheetCreator, renderAddIn, { ...options || null, name: displayName }, overrideOptions)(codeComponent)
+export const withStylesCreator = <R extends Types.Shape, TStatic extends {} = {}>(sheetCreator: Types.SheetCreatorX<R>, codeComponent: Types.CodeComponentType<R>, options?: Types.WithStyleOptions_ComponentX<R>) =>
+  (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStylesLow<R, TStatic>(sheetCreator, renderAddIn, { ...options || null }, overrideOptions)(codeComponent)
 
 const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCreator: Types.SheetCreatorX<R>, addIns: RenderAddIn, options?: Types.WithStyleOptions_ComponentX<R>, overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => (CodeComponent: Types.CodeComponentType<R>) => {
 

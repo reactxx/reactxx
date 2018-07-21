@@ -71,7 +71,7 @@ const label: Types.CodeSFC<Shape> = ({ $system: { mergeRulesets }, classes, styl
 /************************
 * EXPORTED COMPONENT
 *************************/
-export const LabelCreator = withStylesCreator<Shape>(Consts.Label, sheet, label)
+export const LabelCreator = withStylesCreator<Shape>(sheet, label, {name:Consts.Label})
 
 
 export const Label = LabelCreator()

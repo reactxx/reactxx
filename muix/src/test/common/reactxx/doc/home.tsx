@@ -99,7 +99,7 @@ const expandedPanel: Types.CodeSFC<DocHome.ExpandedPanelShape> = props => {
       <AnimatedIconLow name={MDI.ArrowExpandDown} style={iconStyle} onPress={() => openClose.toggle()} />
 */
 
-const ExpandedPanel = withStylesCreator<DocHome.ExpandedPanelShape>(DocHome.CompNames.ExpandPanel, expandedPanelSheet, expandedPanel)()
+const ExpandedPanel = withStylesCreator<DocHome.ExpandedPanelShape>(expandedPanelSheet, expandedPanel, {name:DocHome.CompNames.ExpandPanel})()
 
 const App: React.SFC = () => <ScrollView classes={{ container: { padding: 10 } }}>
   <Text>Text before, text before, text before, text before, text before, text before, text before, text before, text before, text before, text before</Text>
