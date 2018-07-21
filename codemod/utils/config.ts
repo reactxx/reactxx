@@ -7,10 +7,15 @@
 
 //https://github.com/rse/astq
 
-const basicCodemod = 'd:/reactxx/codemod/'
 const basicReactXX = 'd:/reactxx/muix/'
 export const src = basicReactXX + 'src/mui-web/'
+export const reactxxMuiWeb = basicReactXX + 'src/muix/reactxx-mui-web/'
+export const reactxxMuiWebShapesDest = reactxxMuiWeb + 'typings/shapes/'
+export const reactxxMuiWebShapes = reactxxMuiWeb + 'typings/shapes/'
+
+const basicCodemod = 'd:/reactxx/codemod/'
 export const patchPrepare = basicCodemod + 'patch-prepare/'
 export const patchOriginal = basicCodemod + 'patch-original/'
+
 export const tempDump = 'd:/temp/dump/'
 

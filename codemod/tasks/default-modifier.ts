@@ -2,16 +2,18 @@ import * as Queries from '../utils/queries'
 import * as Ast from '../utils/ast'
 import * as Parser from '../utils/parser'
 
-export const taskDefaultCreator = (functionName: string, forceHTMLTags?: string[]) => (root: Ast.Ast) => {
-  removeClassNamesImport(root)
-  selectClassNamesFromProps(root, functionName)
+export const taskDefaultCreator = (forceHTMLTags?: string[]) => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
+  adjustImports(root)
+  selectClassNamesFromProps(root, info.name)
   refactorClassNames(root)
-  adjustHtmlClassName(root, functionName, forceHTMLTags)
-  defaultExport(root, functionName)
+  adjustHtmlClassName(root, info.name, forceHTMLTags)
+  defaultExport(root, info)
   return root
 }
 
-const removeClassNamesImport = (root: Ast.Ast) => {
+const adjustImports = (root: Ast.Ast) => {
+  // replace wrong inports
+  // remove classNames import
   const classNames = Queries.getNode_importPackage(root, 'classNames', true)
   if (!classNames) return
   Ast.removeNode(root, classNames.$path)
@@ -66,9 +68,9 @@ const selectClassNamesFromProps = (root: Ast.Ast, functionName: string) => {
   return root
 }
 
-const defaultExport = (root: Ast.Ast, name: string) => {
+const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   const body: any[] = Queries.checkSingleResult(Ast.astq().query(root, `/Program`)).body
-  const getStaticProp = (propName: string) => Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExpressionStatement [/AssignmentExpression/MemberExpression [ /Identifier [ @name=="${name}"] && /Identifier [ @name=="${propName}"] ] ]`), true)
+  const getStaticProp = (propName: string) => Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExpressionStatement [/AssignmentExpression/MemberExpression [ /Identifier [ @name=="${info.name}"] && /Identifier [ @name=="${propName}"] ] ]`), true)
   // remove propTypes
   const propTypes = getStaticProp('propTypes');
   if (propTypes) {
@@ -76,69 +78,59 @@ const defaultExport = (root: Ast.Ast, name: string) => {
     body.splice(propTypesIdx, 1)
   }
   // remove withStyles
-  const withStyles = Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExportDefaultDeclaration`))
-  if (withStyles) {
-    const withStylesIdx = body.indexOf(withStyles);
-    body.splice(withStylesIdx, 1)
+  if (info.withStyles) {
+    const defaultExport = Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExportDefaultDeclaration`))
+    const defaultExportIdx = body.indexOf(defaultExport);
+    body.splice(defaultExportIdx, 1)
   }
-  // remove defaultProps
-  const defaultProps = getStaticProp('defaultProps')
-  if (defaultProps) {
-    const defaultPropsIdx = body.indexOf(defaultProps);
-    body.splice(defaultPropsIdx, 1)
-    body.push({
-      "type": "VariableDeclaration",
-      "declarations": [
-        {
-          "type": "VariableDeclarator",
-          "id": {
-            "type": "Identifier",
-            "name": "defaultProps"
-          },
-          "init": defaultProps.expression.right
-        }
-      ],
-      "kind": "const"
-    })
+  // defaultProps to const
+  if (info.withStyles) {
+    const defaultProps = getStaticProp('defaultProps')
+    if (defaultProps) {
+      const defaultPropsIdx = body.indexOf(defaultProps);
+      body.splice(defaultPropsIdx, 1)
+      // defaultProps.expression.right.properties.push({
+      //   "type": "ObjectProperty",
+      //   "method": false,
+      //   "key": {
+      //     "type": "Identifier",
+      //     "name": "isMui"
+      //   },
+      //   "computed": false,
+      //   "shorthand": false,
+      //   "value": {
+      //     "type": "BooleanLiteral",
+      //     "value": true
+      //   }
+      // })
+      body.push({
+        "type": "VariableDeclaration",
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "id": {
+              "type": "Identifier",
+              "name": "defaultProps"
+            },
+            "init": defaultProps.expression.right
+          }
+        ],
+        "kind": "const"
+      })
+    }
   }
 
-  const defaultExport = Parser.parseCode(`
-  const meta = {component: ${name} || null, defaultProps: defaultProps || null, styles: styles || null }
-  export default meta
-  `)
-  body.push(defaultExport.program.body[0])
-  body.push(defaultExport.program.body[1])
-  return root
-}
-
-const defaultExport2 = (root: Ast.Ast, name: string) => {
-  const program = Queries.checkSingleResult(Ast.astq().query(root, `/Program`))
-  const getStaticProp = (propName: string) => Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExpressionStatement [/AssignmentExpression/MemberExpression [ /Identifier [ @name=="${name}"] && /Identifier [ @name=="${propName}"] ] ]`), true)
-  // remove propTypes
-  const propTypes = getStaticProp('propTypes');
-  if (propTypes) {
-    const propTypesIdx = program.body.indexOf(propTypes);
-    (program.body as any[]).splice(propTypesIdx, 1)
-  }
-  // remove defaultProps
-  const defaultProps = getStaticProp('defaultProps')
-  if (defaultProps) {
-    const defaultPropsIdx = program.body.indexOf(defaultProps);
-    (program.body as any[]).splice(defaultPropsIdx, 1)
-    // put defaultProps to withStyles
-    const withStyles = Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExportDefaultDeclaration/CallExpression/CallExpression [ /Identifier [ @name=="withStyles" ] ] /ObjectExpression`), true)
-    if (!withStyles) return root // e.g. for Ripple
-    withStyles.properties.push({
-      "type": "ObjectProperty",
-      "method": false,
-      "key": {
-        "type": "Identifier",
-        "name": "defaultProps"
-      },
-      "computed": false,
-      "shorthand": false,
-      "value": defaultProps.expression.right
-    })
+  // replace withStyles
+  if (info.withStyles) {
+    const defaultExport = Parser.parseCode(`
+/**
+* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/${info.dir}/${info.name}').Shape>}
+*/
+export const ${info.name}Creator = withStyles(styles, ${info.name}, {isMui:true, defaultProps})
+const ${info.name}Component  = ${info.name}Creator()
+export default ${info.name}Component
+    `)
+    Array.prototype.push.call(body, ...defaultExport.program.body)
   }
   return root
 }

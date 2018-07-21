@@ -59,5 +59,6 @@
   ],
   "exclude": [
     "src/ks/typings.d.ts"
+    //"src/muix/reactxx-mui-web/**/*"
   ]
 }

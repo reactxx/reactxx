@@ -176,6 +176,9 @@ export const withStyles:
 
 export interface TProvider<R extends Types.Shape> { Provider: React.ComponentClass<Types.PropsX<R>> }
 
+export type WithStyle<R extends Types.Shape> = React.ComponentClass<Types.PropsX<R>> & TProvider<R>
+export type WithStyleCreator<R extends Types.Shape> = (options?:Types.WithStyleOptions_ComponentX<R>) => WithStyle<R>
+
 export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()).join('$')
 
 

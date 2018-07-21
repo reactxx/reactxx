@@ -1,97 +1,42 @@
 {
-  "type": "File",
-  "program": {
-    "type": "Program",
-    "body": [
-      {
-        "type": "VariableDeclaration",
-        "declarations": [
-          {
-            "type": "VariableDeclarator",
-            "id": {
-              "type": "Identifier",
-              "name": "meta"
-            },
-            "init": {
-              "type": "ObjectExpression",
-              "properties": [
-                {
-                  "type": "ObjectProperty",
-                  "method": false,
-                  "key": {
-                    "type": "Identifier",
-                    "name": "component"
-                  },
-                  "computed": false,
-                  "shorthand": false,
-                  "value": {
-                    "type": "LogicalExpression",
-                    "left": {
-                      "type": "Identifier",
-                      "name": "AppBar"
-                    },
-                    "operator": "||",
-                    "right": {
-                      "type": "NullLiteral"
-                    }
-                  }
-                },
-                {
-                  "type": "ObjectProperty",
-                  "method": false,
-                  "key": {
-                    "type": "Identifier",
-                    "name": "defaultProps"
-                  },
-                  "computed": false,
-                  "shorthand": false,
-                  "value": {
-                    "type": "LogicalExpression",
-                    "left": {
-                      "type": "Identifier",
-                      "name": "defaultProps"
-                    },
-                    "operator": "||",
-                    "right": {
-                      "type": "NullLiteral"
-                    }
-                  }
-                },
-                {
-                  "type": "ObjectProperty",
-                  "method": false,
-                  "key": {
-                    "type": "Identifier",
-                    "name": "style"
-                  },
-                  "computed": false,
-                  "shorthand": false,
-                  "value": {
-                    "type": "LogicalExpression",
-                    "left": {
-                      "type": "Identifier",
-                      "name": "style"
-                    },
-                    "operator": "||",
-                    "right": {
-                      "type": "NullLiteral"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        ],
-        "kind": "const"
+  "type": "ObjectExpression",
+  "properties": [
+    {
+      "type": "ObjectProperty",
+      "method": false,
+      "key": {
+        "type": "Identifier",
+        "name": "color"
       },
-      {
-        "type": "ExportDefaultDeclaration",
-        "declaration": {
-          "type": "Identifier",
-          "name": "meta"
-        }
+      "computed": false,
+      "shorthand": false,
+      "value": {
+        "type": "StringLiteral",
+        "extra": {
+          "rawValue": "primary",
+          "raw": "'primary'"
+        },
+        "value": "primary"
       }
-    ]
-  }
+    },
+    {
+      "type": "ObjectProperty",
+      "method": false,
+      "key": {
+        "type": "Identifier",
+        "name": "position"
+      },
+      "computed": false,
+      "shorthand": false,
+      "value": {
+        "type": "StringLiteral",
+        "extra": {
+          "rawValue": "fixed",
+          "raw": "'fixed'"
+        },
+        "value": "fixed"
+      }
+    }
+  ]
 
 }

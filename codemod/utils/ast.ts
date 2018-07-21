@@ -12,9 +12,18 @@ export const astq = () => {
     return res
 }
 
+export interface MUISourceInfo {
+    dir: string
+    name: string
+    withStyles?: string
+    withTheme?: string
+    srcPath?: string
+    origPath?: string
+    origExists?: boolean
+}
 export interface FileDescr {
     path?: string
-    transform?: (root: Ast) => Ast
+    transform?: (root: Ast, info:MUISourceInfo) => Ast
     transformStr?: (code: string) => string
 }
 

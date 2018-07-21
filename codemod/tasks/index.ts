@@ -8,27 +8,19 @@ import * as fsExtra from 'fs-extra';
 import * as Tasks from './default-modifier'
 
 import { registerButtonBase } from '../patch-code/ButtonBase/ButtonBase'
-import { registerWithStyles } from '../patch-code/styles/withStyles'
-
-export interface MUISourceInfo {
-    dir: string
-    name: string
-    withStyles?: string
-    withTheme?: string
-    srcPath?: string
-    origPath?: string
-    origExists?: boolean
-}
 
 export type Specials = { [path: string]: Ast.FileDescr }
 
 export const specials: Specials = {}
 
 registerButtonBase(specials)
-registerWithStyles(specials)
 
 export const codeMod = () => {
+
     const { log, code } = readAllCodes()
+
+    try {fsExtra.rmdirSync(Config.reactxxMuiWebShapes)} catch {}
+    try {fsExtra.rmdirSync(Config.reactxxMuiWebShapesDest)} catch {}
 
     for (const path in log) {
         const logp = log[path]
@@ -40,25 +32,65 @@ export const codeMod = () => {
             const code = fs.readFileSync(logp.origPath, { encoding: 'utf-8' })
             fsExtra.outputFileSync(logp.srcPath, transformStr(code))
         } else {
-            transform = transform || logp.withStyles && ((specItem && specItem.transform) || Tasks.taskDefaultCreator(logp.withStyles))
+            transform = transform || logp.withStyles && ((specItem && specItem.transform) || Tasks.taskDefaultCreator())
             if (!transform) continue
             if (!logp.origExists) fsExtra.moveSync(logp.srcPath, logp.origPath)
             const ast = code[path]
-            transform(ast)
+            transform(ast, logp)
             Parser.generateFile(ast, logp.srcPath)
         }
+        // TS shape
+        if (logp.withStyles && logp.name!=='SwipeArea') {
+            fsExtra.outputFileSync(Config.reactxxMuiWebShapes + path + '.ts', noKey[logp.name] ? tsShapeNoKey(logp.dir, logp.name) : tsShape(logp.dir, logp.name), {flag:'w'})
+        }
     }
+
+    fsExtra.copySync(Config.reactxxMuiWeb, Config.src, {overwrite:true})
+
+}
+
+const tsShape = (dir:string, name:string) => `
+import { TCommon, Types } from 'reactxx-basic';
+import { Theme } from '../../../styles/withStyles';
+import { ${name}ClassKey, ${name}Props } from '../../mui/${dir}/${name}';
+ 
+export type Shape = Types.OverwriteShape<{
+  common: TCommon.ShapeTexts<${name}ClassKey>,
+  props: ${name}Props,
+  theme: Theme
+}>
+`
+const tsShapeNoKey = (dir:string, name:string) => `
+import { TCommon, Types } from 'reactxx-basic';
+import { Theme } from '../../../styles/withStyles';
+import { ${name}Props } from '../../mui/${dir}/${name}';
+
+export type Shape = Types.OverwriteShape<{
+  props: ${name}Props,
+  theme: Theme
+}>
+`
+
+const noKey = {
+    'Stepper':true,
+    'StepLabel':true,
+    'Step':true,
+    'StepIcon':true,
+    'StepContent':true,
+    'StepConnector':true,
+    'StepButton':true,
+    'HiddenCss':true,
 }
 
 
 export const readAllCodes = () => {
-    const log: { [path: string]: MUISourceInfo } = {}
+    const log: { [path: string]: Ast.MUISourceInfo } = {}
     const code: { [path: string]: Ast.Ast } = {}
     const compileErrors = []
     getAllComponents().forEach(comp => {
         const path = `${comp[0]}/${comp[1]}`
         // collect LOG info
-        const logItem: MUISourceInfo = {
+        const logItem: Ast.MUISourceInfo = {
             dir: comp[0],
             name: comp[1],
             srcPath: Config.src + path + '.js',
