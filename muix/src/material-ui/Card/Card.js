@@ -23,9 +23,12 @@ function Card(props) {
   return <Paper className={classNames(classes.root, className)} elevation={raised ? 8 : 1} {...other} />;
 }
 
-export default withStyles(styles, {
-  name: 'MuiCard',
-  defaultProps: {
-    raised: false
-  }
-})(Card);
+const defaultProps = {
+  raised: false
+};
+const meta = {
+  component: Card || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

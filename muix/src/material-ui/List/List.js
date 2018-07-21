@@ -55,11 +55,14 @@ class List extends React.Component {
 List.childContextTypes = {
   dense: PropTypes.bool
 };
-export default withStyles(styles, {
-  name: 'MuiList',
-  defaultProps: {
-    component: 'ul',
-    dense: false,
-    disablePadding: false
-  }
-})(List);
+const defaultProps = {
+  component: 'ul',
+  dense: false,
+  disablePadding: false
+};
+const meta = {
+  component: List || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

@@ -280,15 +280,18 @@ class ButtonBase extends React.Component {
 
 }
 
-export default withStyles(styles, {
-  name: 'MuiButtonBase',
-  defaultProps: {
-    centerRipple: false,
-    component: 'button',
-    disableRipple: false,
-    disableTouchRipple: false,
-    focusRipple: false,
-    tabIndex: '0',
-    type: 'button'
-  }
-})(ButtonBase);
+const defaultProps = {
+  centerRipple: false,
+  component: 'button',
+  disableRipple: false,
+  disableTouchRipple: false,
+  focusRipple: false,
+  tabIndex: '0',
+  type: 'button'
+};
+const meta = {
+  component: ButtonBase || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

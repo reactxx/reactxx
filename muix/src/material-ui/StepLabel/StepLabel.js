@@ -85,15 +85,18 @@ function StepLabel(props) {
 }
 
 StepLabel.muiName = 'StepLabel';
-export default withStyles(styles, {
-  name: 'MuiStepLabel',
-  defaultProps: {
-    active: false,
-    alternativeLabel: false,
-    completed: false,
-    disabled: false,
-    error: false,
-    last: false,
-    orientation: 'horizontal'
-  }
-})(StepLabel);
+const defaultProps = {
+  active: false,
+  alternativeLabel: false,
+  completed: false,
+  disabled: false,
+  error: false,
+  last: false,
+  orientation: 'horizontal'
+};
+const meta = {
+  component: StepLabel || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

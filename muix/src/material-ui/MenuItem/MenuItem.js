@@ -36,11 +36,14 @@ function MenuItem(props) {
   return <ListItem button role={role} tabIndex={-1} className={classNames(classes.root, selected && classes.selected, className)} component={component} {...other} />;
 }
 
-export default withStyles(styles, {
-  name: 'MuiMenuItem',
-  defaultProps: {
-    component: 'li',
-    role: 'menuitem',
-    selected: false
-  }
-})(MenuItem);
+const defaultProps = {
+  component: 'li',
+  role: 'menuitem',
+  selected: false
+};
+const meta = {
+  component: MenuItem || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

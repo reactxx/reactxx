@@ -56,6 +56,9 @@ function StepButton(props) {
     </ButtonBase>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiStepButton'
-})(StepButton);
+const meta = {
+  component: StepButton || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

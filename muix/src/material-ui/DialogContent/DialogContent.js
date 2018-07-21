@@ -30,6 +30,9 @@ function DialogContent(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiDialogContent'
-})(DialogContent);
+const meta = {
+  component: DialogContent || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

@@ -147,10 +147,13 @@ class ExpansionPanel extends React.Component {
 
 }
 
-export default withStyles(styles, {
-  name: 'MuiExpansionPanel',
-  defaultProps: {
-    defaultExpanded: false,
-    disabled: false
-  }
-})(ExpansionPanel);
+const defaultProps = {
+  defaultExpanded: false,
+  disabled: false
+};
+const meta = {
+  component: ExpansionPanel || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

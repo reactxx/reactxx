@@ -38,9 +38,12 @@ function CardMedia(props) {
   return <Component className={classNames(classes.root, isMediaComponent && classes.media, className)} style={composedStyle} src={isMediaComponent ? image || src : undefined} {...other} />;
 }
 
-export default withStyles(styles, {
-  name: 'MuiCardMedia',
-  defaultProps: {
-    component: 'div'
-  }
-})(CardMedia);
+const defaultProps = {
+  component: 'div'
+};
+const meta = {
+  component: CardMedia || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

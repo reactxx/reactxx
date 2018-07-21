@@ -194,17 +194,20 @@ function Button(props) {
     </ButtonBase>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiButton',
-  defaultProps: {
-    color: 'default',
-    component: 'button',
-    disabled: false,
-    disableFocusRipple: false,
-    fullWidth: false,
-    mini: false,
-    size: 'medium',
-    type: 'button',
-    variant: 'text'
-  }
-})(Button);
+const defaultProps = {
+  color: 'default',
+  component: 'button',
+  disabled: false,
+  disableFocusRipple: false,
+  fullWidth: false,
+  mini: false,
+  size: 'medium',
+  type: 'button',
+  variant: 'text'
+};
+const meta = {
+  component: Button || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

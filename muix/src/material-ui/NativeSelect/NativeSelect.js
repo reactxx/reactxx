@@ -99,10 +99,13 @@ function NativeSelect(props) {
 }
 
 NativeSelect.muiName = 'NativeSelect';
-export default withStyles(styles, {
-  name: 'MuiNativeSelect',
-  defaultProps: {
-    IconComponent: ArrowDropDownIcon,
-    input: <Input />
-  }
-})(NativeSelect);
+const defaultProps = {
+  IconComponent: ArrowDropDownIcon,
+  input: <Input />
+};
+const meta = {
+  component: NativeSelect || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

@@ -47,12 +47,15 @@ function ListSubheader(props) {
 }
 
 ListSubheader.muiName = 'ListSubheader';
-export default withStyles(styles, {
-  name: 'MuiListSubheader',
-  defaultProps: {
-    color: 'default',
-    component: 'li',
-    disableSticky: false,
-    inset: false
-  }
-})(ListSubheader);
+const defaultProps = {
+  color: 'default',
+  component: 'li',
+  disableSticky: false,
+  inset: false
+};
+const meta = {
+  component: ListSubheader || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

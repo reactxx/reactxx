@@ -36,9 +36,12 @@ class TableFooter extends React.Component {
 TableFooter.childContextTypes = {
   table: PropTypes.object
 };
-export default withStyles(styles, {
-  name: 'MuiTableFooter',
-  defaultProps: {
-    component: 'tfoot'
-  }
-})(TableFooter);
+const defaultProps = {
+  component: 'tfoot'
+};
+const meta = {
+  component: TableFooter || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

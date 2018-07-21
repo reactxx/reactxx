@@ -80,4 +80,9 @@ function HiddenCss(props) {
   return <div className={classNamesStr(classNames.join(' '))}>{children}</div>;
 }
 
-export default withStyles(styles)(HiddenCss);
+const meta = {
+  component: HiddenCss || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

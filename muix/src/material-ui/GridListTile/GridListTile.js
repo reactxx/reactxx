@@ -116,11 +116,14 @@ class GridListTile extends React.Component {
 
 }
 
-export default withStyles(styles, {
-  name: 'MuiGridListTile',
-  defaultProps: {
-    cols: 1,
-    component: 'li',
-    rows: 1
-  }
-})(GridListTile);
+const defaultProps = {
+  cols: 1,
+  component: 'li',
+  rows: 1
+};
+const meta = {
+  component: GridListTile || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

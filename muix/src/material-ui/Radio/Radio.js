@@ -46,9 +46,12 @@ function Radio(props) {
   }} {...other} />;
 }
 
-export default withStyles(styles, {
-  name: 'MuiRadio',
-  defaultProps: {
-    color: 'secondary'
-  }
-})(Radio);
+const defaultProps = {
+  color: 'secondary'
+};
+const meta = {
+  component: Radio || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

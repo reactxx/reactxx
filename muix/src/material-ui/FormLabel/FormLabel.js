@@ -82,9 +82,12 @@ function FormLabel(props, context) {
 FormLabel.contextTypes = {
   muiFormControl: PropTypes.object
 };
-export default withStyles(styles, {
-  name: 'MuiFormLabel',
-  defaultProps: {
-    component: 'label'
-  }
-})(FormLabel);
+const defaultProps = {
+  component: 'label'
+};
+const meta = {
+  component: FormLabel || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

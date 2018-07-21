@@ -55,11 +55,14 @@ function TableRow(props, context) {
 TableRow.contextTypes = {
   table: PropTypes.object
 };
-export default withStyles(styles, {
-  name: 'MuiTableRow',
-  defaultProps: {
-    component: 'tr',
-    hover: false,
-    selected: false
-  }
-})(TableRow);
+const defaultProps = {
+  component: 'tr',
+  hover: false,
+  selected: false
+};
+const meta = {
+  component: TableRow || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

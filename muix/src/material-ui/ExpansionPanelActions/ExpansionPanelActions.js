@@ -32,6 +32,9 @@ function ExpansionPanelActions(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiExpansionPanelActions'
-})(ExpansionPanelActions);
+const meta = {
+  component: ExpansionPanelActions || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

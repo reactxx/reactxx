@@ -27,9 +27,12 @@ function DialogTitle(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiDialogTitle',
-  defaultProps: {
-    disableTypography: false
-  }
-})(DialogTitle);
+const defaultProps = {
+  disableTypography: false
+};
+const meta = {
+  component: DialogTitle || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

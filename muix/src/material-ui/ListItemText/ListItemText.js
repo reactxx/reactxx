@@ -77,10 +77,13 @@ function ListItemText(props, context) {
 ListItemText.contextTypes = {
   dense: PropTypes.bool
 };
-export default withStyles(styles, {
-  name: 'MuiListItemText',
-  defaultProps: {
-    disableTypography: false,
-    inset: false
-  }
-})(ListItemText);
+const defaultProps = {
+  disableTypography: false,
+  inset: false
+};
+const meta = {
+  component: ListItemText || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

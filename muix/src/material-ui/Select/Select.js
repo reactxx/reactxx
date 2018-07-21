@@ -67,14 +67,17 @@ function Select(props) {
 }
 
 Select.muiName = 'Select';
-export default withStyles(nativeSelectStyles, {
-  name: 'MuiSelect',
-  defaultProps: {
-    autoWidth: false,
-    displayEmpty: false,
-    IconComponent: ArrowDropDownIcon,
-    input: <Input />,
-    multiple: false,
-    native: false
-  }
-})(Select);
+const defaultProps = {
+  autoWidth: false,
+  displayEmpty: false,
+  IconComponent: ArrowDropDownIcon,
+  input: <Input />,
+  multiple: false,
+  native: false
+};
+const meta = {
+  component: Select || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

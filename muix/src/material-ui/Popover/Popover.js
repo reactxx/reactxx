@@ -305,21 +305,24 @@ class Popover extends React.Component {
 
 }
 
-export default withStyles(styles, {
-  name: 'MuiPopover',
-  defaultProps: {
-    anchorReference: 'anchorEl',
-    anchorOrigin: {
-      vertical: 'top',
-      horizontal: 'left'
-    },
-    elevation: 8,
-    marginThreshold: 16,
-    transformOrigin: {
-      vertical: 'top',
-      horizontal: 'left'
-    },
-    TransitionComponent: Grow,
-    transitionDuration: 'auto'
-  }
-})(Popover);
+const defaultProps = {
+  anchorReference: 'anchorEl',
+  anchorOrigin: {
+    vertical: 'top',
+    horizontal: 'left'
+  },
+  elevation: 8,
+  marginThreshold: 16,
+  transformOrigin: {
+    vertical: 'top',
+    horizontal: 'left'
+  },
+  TransitionComponent: Grow,
+  transitionDuration: 'auto'
+};
+const meta = {
+  component: Popover || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

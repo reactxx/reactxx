@@ -34,9 +34,12 @@ function DialogActions(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiDialogActions',
-  defaultProps: {
-    disableActionSpacing: false
-  }
-})(DialogActions);
+const defaultProps = {
+  disableActionSpacing: false
+};
+const meta = {
+  component: DialogActions || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

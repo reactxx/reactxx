@@ -128,14 +128,16 @@ function CircularProgress(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiCircularProgress',
-  flip: false,
-  defaultProps: {
-    color: 'primary',
-    size: 40,
-    thickness: 3.6,
-    value: 0,
-    variant: 'indeterminate'
-  }
-})(CircularProgress);
+const defaultProps = {
+  color: 'primary',
+  size: 40,
+  thickness: 3.6,
+  value: 0,
+  variant: 'indeterminate'
+};
+const meta = {
+  component: CircularProgress || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

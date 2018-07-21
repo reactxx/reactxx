@@ -53,10 +53,13 @@ function StepContent(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiStepContent',
-  defaultProps: {
-    TransitionComponent: Collapse,
-    transitionDuration: 'auto'
-  }
-})(StepContent);
+const defaultProps = {
+  TransitionComponent: Collapse,
+  transitionDuration: 'auto'
+};
+const meta = {
+  component: StepContent || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

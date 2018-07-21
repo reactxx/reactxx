@@ -250,10 +250,12 @@ class TouchRipple extends React.PureComponent {
 
 }
 
-export default withStyles(styles, {
-  flip: false,
-  name: 'MuiTouchRipple',
-  defaultProps: {
-    center: false
-  }
-})(TouchRipple);
+const defaultProps = {
+  center: false
+};
+const meta = {
+  component: TouchRipple || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

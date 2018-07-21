@@ -36,9 +36,12 @@ class TableBody extends React.Component {
 TableBody.childContextTypes = {
   table: PropTypes.object
 };
-export default withStyles(styles, {
-  name: 'MuiTableBody',
-  defaultProps: {
-    component: 'tbody'
-  }
-})(TableBody);
+const defaultProps = {
+  component: 'tbody'
+};
+const meta = {
+  component: TableBody || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

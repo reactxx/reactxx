@@ -150,14 +150,17 @@ class FormControl extends React.Component {
 FormControl.childContextTypes = {
   muiFormControl: PropTypes.object
 };
-export default withStyles(styles, {
-  name: 'MuiFormControl',
-  defaultProps: {
-    component: 'div',
-    disabled: false,
-    error: false,
-    fullWidth: false,
-    margin: 'none',
-    required: false
-  }
-})(FormControl);
+const defaultProps = {
+  component: 'div',
+  disabled: false,
+  error: false,
+  fullWidth: false,
+  margin: 'none',
+  required: false
+};
+const meta = {
+  component: FormControl || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

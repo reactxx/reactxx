@@ -48,6 +48,9 @@ ListItemAvatar.contextTypes = {
   dense: PropTypes.bool
 };
 ListItemAvatar.muiName = 'ListItemAvatar';
-export default withStyles(styles, {
-  name: 'MuiListItemAvatar'
-})(ListItemAvatar);
+const meta = {
+  component: ListItemAvatar || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

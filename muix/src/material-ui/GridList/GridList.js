@@ -53,12 +53,15 @@ function GridList(props) {
     </Component>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiGridList',
-  defaultProps: {
-    cellHeight: 180,
-    cols: 2,
-    component: 'ul',
-    spacing: 4
-  }
-})(GridList);
+const defaultProps = {
+  cellHeight: 180,
+  cols: 2,
+  component: 'ul',
+  spacing: 4
+};
+const meta = {
+  component: GridList || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

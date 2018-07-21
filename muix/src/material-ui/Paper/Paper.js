@@ -38,11 +38,14 @@ function Paper(props) {
   return <Component className={className} {...other} />;
 }
 
-export default withStyles(styles, {
-  name: 'MuiPaper',
-  defaultProps: {
-    component: 'div',
-    elevation: 2,
-    square: false
-  }
-})(Paper);
+const defaultProps = {
+  component: 'div',
+  elevation: 2,
+  square: false
+};
+const meta = {
+  component: Paper || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

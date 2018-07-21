@@ -38,9 +38,12 @@ function TabScrollButton(props) {
     </ButtonBase>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiTabScrollButton',
-  defaultProps: {
-    visible: true
-  }
-})(TabScrollButton);
+const defaultProps = {
+  visible: true
+};
+const meta = {
+  component: TabScrollButton || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

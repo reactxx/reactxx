@@ -1,639 +1,97 @@
 {
-  "type": "BlockStatement",
-  "body": [
-    {
-      "type": "VariableDeclaration",
-      "declarations": [
-        {
-          "type": "VariableDeclarator",
-          "id": {
-            "type": "ObjectPattern",
-            "properties": [
-              {
-                "type": "ObjectProperty",
-                "method": false,
-                "key": {
-                  "type": "Identifier",
-                  "name": "children"
-                },
-                "computed": false,
-                "shorthand": false,
-                "value": {
-                  "type": "Identifier",
-                  "name": "childrenProp"
-                }
-              },
-              {
-                "type": "ObjectProperty",
-                "method": false,
-                "key": {
-                  "type": "Identifier",
-                  "name": "classes"
-                },
-                "computed": false,
-                "shorthand": true,
-                "value": {
-                  "type": "Identifier",
-                  "name": "classes"
-                },
-                "extra": {
-                  "shorthand": true
-                }
-              },
-              {
-                "type": "ObjectProperty",
-                "method": false,
-                "key": {
-                  "type": "Identifier",
-                  "name": "className"
-                },
-                "computed": false,
-                "shorthand": false,
-                "value": {
-                  "type": "Identifier",
-                  "name": "classNameProp"
-                }
-              },
-              {
-                "type": "ObjectProperty",
-                "method": false,
-                "key": {
-                  "type": "Identifier",
-                  "name": "onChange"
-                },
-                "computed": false,
-                "shorthand": true,
-                "value": {
-                  "type": "Identifier",
-                  "name": "onChange"
-                },
-                "extra": {
-                  "shorthand": true
-                }
-              },
-              {
-                "type": "ObjectProperty",
-                "method": false,
-                "key": {
-                  "type": "Identifier",
-                  "name": "showLabels"
-                },
-                "computed": false,
-                "shorthand": true,
-                "value": {
-                  "type": "Identifier",
-                  "name": "showLabels"
-                },
-                "extra": {
-                  "shorthand": true
-                }
-              },
-              {
-                "type": "ObjectProperty",
-                "method": false,
-                "key": {
-                  "type": "Identifier",
-                  "name": "value"
-                },
-                "computed": false,
-                "shorthand": true,
-                "value": {
-                  "type": "Identifier",
-                  "name": "value"
-                },
-                "extra": {
-                  "shorthand": true
-                }
-              },
-              {
-                "type": "RestElement",
-                "argument": {
-                  "type": "Identifier",
-                  "name": "other"
-                }
-              }
-            ]
-          },
-          "init": {
-            "type": "Identifier",
-            "name": "props"
-          }
-        }
-      ],
-      "kind": "const"
-    },
-    {
-      "type": "VariableDeclaration",
-      "declarations": [
-        {
-          "type": "VariableDeclarator",
-          "id": {
-            "type": "Identifier",
-            "name": "className"
-          },
-          "init": {
-            "type": "CallExpression",
-            "callee": {
+  "type": "File",
+  "program": {
+    "type": "Program",
+    "body": [
+      {
+        "type": "VariableDeclaration",
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "id": {
               "type": "Identifier",
-              "name": "classNames"
+              "name": "meta"
             },
-            "arguments": [
-              {
-                "type": "MemberExpression",
-                "object": {
-                  "type": "Identifier",
-                  "name": "classes"
-                },
-                "property": {
-                  "type": "Identifier",
-                  "name": "root"
-                },
-                "computed": false
-              },
-              {
-                "type": "Identifier",
-                "name": "classNameProp"
-              }
-            ]
-          }
-        }
-      ],
-      "kind": "const"
-    },
-    {
-      "type": "VariableDeclaration",
-      "declarations": [
-        {
-          "type": "VariableDeclarator",
-          "id": {
-            "type": "Identifier",
-            "name": "children"
-          },
-          "init": {
-            "type": "CallExpression",
-            "callee": {
-              "type": "MemberExpression",
-              "object": {
-                "type": "MemberExpression",
-                "object": {
-                  "type": "Identifier",
-                  "name": "React"
-                },
-                "property": {
-                  "type": "Identifier",
-                  "name": "Children"
-                },
-                "computed": false
-              },
-              "property": {
-                "type": "Identifier",
-                "name": "map"
-              },
-              "computed": false
-            },
-            "arguments": [
-              {
-                "type": "Identifier",
-                "name": "childrenProp"
-              },
-              {
-                "type": "ArrowFunctionExpression",
-                "id": null,
-                "generator": false,
-                "async": false,
-                "params": [
-                  {
+            "init": {
+              "type": "ObjectExpression",
+              "properties": [
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
                     "type": "Identifier",
-                    "name": "child"
+                    "name": "component"
                   },
-                  {
-                    "type": "Identifier",
-                    "name": "childIndex"
-                  }
-                ],
-                "body": {
-                  "type": "BlockStatement",
-                  "body": [
-                    {
-                      "type": "IfStatement",
-                      "test": {
-                        "type": "UnaryExpression",
-                        "operator": "!",
-                        "prefix": true,
-                        "argument": {
-                          "type": "CallExpression",
-                          "callee": {
-                            "type": "MemberExpression",
-                            "object": {
-                              "type": "Identifier",
-                              "name": "React"
-                            },
-                            "property": {
-                              "type": "Identifier",
-                              "name": "isValidElement"
-                            },
-                            "computed": false
-                          },
-                          "arguments": [
-                            {
-                              "type": "Identifier",
-                              "name": "child"
-                            }
-                          ]
-                        }
-                      },
-                      "consequent": {
-                        "type": "BlockStatement",
-                        "body": [
-                          {
-                            "type": "ReturnStatement",
-                            "argument": {
-                              "type": "NullLiteral"
-                            }
-                          }
-                        ]
-                      },
-                      "alternate": null
+                  "computed": false,
+                  "shorthand": false,
+                  "value": {
+                    "type": "LogicalExpression",
+                    "left": {
+                      "type": "Identifier",
+                      "name": "AppBar"
                     },
-                    {
-                      "type": "ExpressionStatement",
-                      "expression": {
-                        "type": "CallExpression",
-                        "callee": {
-                          "type": "Identifier",
-                          "name": "warning"
-                        },
-                        "arguments": [
-                          {
-                            "type": "BinaryExpression",
-                            "left": {
-                              "type": "MemberExpression",
-                              "object": {
-                                "type": "Identifier",
-                                "name": "child"
-                              },
-                              "property": {
-                                "type": "Identifier",
-                                "name": "type"
-                              },
-                              "computed": false
-                            },
-                            "operator": "!==",
-                            "right": {
-                              "type": "MemberExpression",
-                              "object": {
-                                "type": "Identifier",
-                                "name": "React"
-                              },
-                              "property": {
-                                "type": "Identifier",
-                                "name": "Fragment"
-                              },
-                              "computed": false
-                            }
-                          },
-                          {
-                            "type": "CallExpression",
-                            "callee": {
-                              "type": "MemberExpression",
-                              "object": {
-                                "type": "ArrayExpression",
-                                "elements": [
-                                  {
-                                    "type": "StringLiteral",
-                                    "extra": {
-                                      "rawValue": "Material-UI: the BottomNavigation component doesn't accept a Fragment as a child.",
-                                      "raw": "\"Material-UI: the BottomNavigation component doesn't accept a Fragment as a child.\""
-                                    },
-                                    "value": "Material-UI: the BottomNavigation component doesn't accept a Fragment as a child."
-                                  },
-                                  {
-                                    "type": "StringLiteral",
-                                    "extra": {
-                                      "rawValue": "Consider providing an array instead.",
-                                      "raw": "'Consider providing an array instead.'"
-                                    },
-                                    "value": "Consider providing an array instead."
-                                  }
-                                ]
-                              },
-                              "property": {
-                                "type": "Identifier",
-                                "name": "join"
-                              },
-                              "computed": false
-                            },
-                            "arguments": [
-                              {
-                                "type": "StringLiteral",
-                                "extra": {
-                                  "rawValue": "\n",
-                                  "raw": "'\\n'"
-                                },
-                                "value": "\n"
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "type": "VariableDeclaration",
-                      "declarations": [
-                        {
-                          "type": "VariableDeclarator",
-                          "id": {
-                            "type": "Identifier",
-                            "name": "childValue"
-                          },
-                          "init": {
-                            "type": "ConditionalExpression",
-                            "test": {
-                              "type": "BinaryExpression",
-                              "left": {
-                                "type": "MemberExpression",
-                                "object": {
-                                  "type": "MemberExpression",
-                                  "object": {
-                                    "type": "Identifier",
-                                    "name": "child"
-                                  },
-                                  "property": {
-                                    "type": "Identifier",
-                                    "name": "props"
-                                  },
-                                  "computed": false
-                                },
-                                "property": {
-                                  "type": "Identifier",
-                                  "name": "value"
-                                },
-                                "computed": false
-                              },
-                              "operator": "===",
-                              "right": {
-                                "type": "Identifier",
-                                "name": "undefined"
-                              }
-                            },
-                            "consequent": {
-                              "type": "Identifier",
-                              "name": "childIndex"
-                            },
-                            "alternate": {
-                              "type": "MemberExpression",
-                              "object": {
-                                "type": "MemberExpression",
-                                "object": {
-                                  "type": "Identifier",
-                                  "name": "child"
-                                },
-                                "property": {
-                                  "type": "Identifier",
-                                  "name": "props"
-                                },
-                                "computed": false
-                              },
-                              "property": {
-                                "type": "Identifier",
-                                "name": "value"
-                              },
-                              "computed": false
-                            }
-                          }
-                        }
-                      ],
-                      "kind": "const"
-                    },
-                    {
-                      "type": "ReturnStatement",
-                      "argument": {
-                        "type": "CallExpression",
-                        "callee": {
-                          "type": "MemberExpression",
-                          "object": {
-                            "type": "Identifier",
-                            "name": "React"
-                          },
-                          "property": {
-                            "type": "Identifier",
-                            "name": "cloneElement"
-                          },
-                          "computed": false
-                        },
-                        "arguments": [
-                          {
-                            "type": "Identifier",
-                            "name": "child"
-                          },
-                          {
-                            "type": "ObjectExpression",
-                            "properties": [
-                              {
-                                "type": "ObjectProperty",
-                                "method": false,
-                                "key": {
-                                  "type": "Identifier",
-                                  "name": "selected"
-                                },
-                                "computed": false,
-                                "shorthand": false,
-                                "value": {
-                                  "type": "BinaryExpression",
-                                  "left": {
-                                    "type": "Identifier",
-                                    "name": "childValue"
-                                  },
-                                  "operator": "===",
-                                  "right": {
-                                    "type": "Identifier",
-                                    "name": "value"
-                                  }
-                                }
-                              },
-                              {
-                                "type": "ObjectProperty",
-                                "method": false,
-                                "key": {
-                                  "type": "Identifier",
-                                  "name": "showLabel"
-                                },
-                                "computed": false,
-                                "shorthand": false,
-                                "value": {
-                                  "type": "ConditionalExpression",
-                                  "test": {
-                                    "type": "BinaryExpression",
-                                    "left": {
-                                      "type": "MemberExpression",
-                                      "object": {
-                                        "type": "MemberExpression",
-                                        "object": {
-                                          "type": "Identifier",
-                                          "name": "child"
-                                        },
-                                        "property": {
-                                          "type": "Identifier",
-                                          "name": "props"
-                                        },
-                                        "computed": false
-                                      },
-                                      "property": {
-                                        "type": "Identifier",
-                                        "name": "showLabel"
-                                      },
-                                      "computed": false
-                                    },
-                                    "operator": "!==",
-                                    "right": {
-                                      "type": "Identifier",
-                                      "name": "undefined"
-                                    }
-                                  },
-                                  "consequent": {
-                                    "type": "MemberExpression",
-                                    "object": {
-                                      "type": "MemberExpression",
-                                      "object": {
-                                        "type": "Identifier",
-                                        "name": "child"
-                                      },
-                                      "property": {
-                                        "type": "Identifier",
-                                        "name": "props"
-                                      },
-                                      "computed": false
-                                    },
-                                    "property": {
-                                      "type": "Identifier",
-                                      "name": "showLabel"
-                                    },
-                                    "computed": false
-                                  },
-                                  "alternate": {
-                                    "type": "Identifier",
-                                    "name": "showLabels"
-                                  }
-                                }
-                              },
-                              {
-                                "type": "ObjectProperty",
-                                "method": false,
-                                "key": {
-                                  "type": "Identifier",
-                                  "name": "value"
-                                },
-                                "computed": false,
-                                "shorthand": false,
-                                "value": {
-                                  "type": "Identifier",
-                                  "name": "childValue"
-                                }
-                              },
-                              {
-                                "type": "ObjectProperty",
-                                "method": false,
-                                "key": {
-                                  "type": "Identifier",
-                                  "name": "onChange"
-                                },
-                                "computed": false,
-                                "shorthand": true,
-                                "value": {
-                                  "type": "Identifier",
-                                  "name": "onChange"
-                                },
-                                "extra": {
-                                  "shorthand": true
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      }
+                    "operator": "||",
+                    "right": {
+                      "type": "NullLiteral"
                     }
-                  ]
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "defaultProps"
+                  },
+                  "computed": false,
+                  "shorthand": false,
+                  "value": {
+                    "type": "LogicalExpression",
+                    "left": {
+                      "type": "Identifier",
+                      "name": "defaultProps"
+                    },
+                    "operator": "||",
+                    "right": {
+                      "type": "NullLiteral"
+                    }
+                  }
+                },
+                {
+                  "type": "ObjectProperty",
+                  "method": false,
+                  "key": {
+                    "type": "Identifier",
+                    "name": "style"
+                  },
+                  "computed": false,
+                  "shorthand": false,
+                  "value": {
+                    "type": "LogicalExpression",
+                    "left": {
+                      "type": "Identifier",
+                      "name": "style"
+                    },
+                    "operator": "||",
+                    "right": {
+                      "type": "NullLiteral"
+                    }
+                  }
                 }
-              }
-            ]
-          }
-        }
-      ],
-      "kind": "const"
-    },
-    {
-      "type": "ReturnStatement",
-      "argument": {
-        "type": "JSXElement",
-        "openingElement": {
-          "type": "JSXOpeningElement",
-          "name": {
-            "type": "JSXIdentifier",
-            "name": "div"
-          },
-          "attributes": [
-            {
-              "type": "JSXAttribute",
-              "name": {
-                "type": "JSXIdentifier",
-                "name": "className"
-              },
-              "value": {
-                "type": "JSXExpressionContainer",
-                "expression": {
-                  "type": "Identifier",
-                  "name": "className"
-                }
-              }
-            },
-            {
-              "type": "JSXSpreadAttribute",
-              "argument": {
-                "type": "Identifier",
-                "name": "other"
-              }
+              ]
             }
-          ],
-          "selfClosing": false
-        },
-        "closingElement": {
-          "type": "JSXClosingElement",
-          "name": {
-            "type": "JSXIdentifier",
-            "name": "div"
-          }
-        },
-        "children": [
-          {
-            "type": "JSXText",
-            "extra": {
-              "rawValue": "\n      ",
-              "raw": "\n      "
-            },
-            "value": "\n      "
-          },
-          {
-            "type": "JSXExpressionContainer",
-            "expression": {
-              "type": "Identifier",
-              "name": "children"
-            }
-          },
-          {
-            "type": "JSXText",
-            "extra": {
-              "rawValue": "\n    ",
-              "raw": "\n    "
-            },
-            "value": "\n    "
           }
         ],
-        "extra": {
-          "parenthesized": true,
-          "parenStart": 1291
+        "kind": "const"
+      },
+      {
+        "type": "ExportDefaultDeclaration",
+        "declaration": {
+          "type": "Identifier",
+          "name": "meta"
         }
       }
-    }
-  ]
+    ]
+  }
 
 }

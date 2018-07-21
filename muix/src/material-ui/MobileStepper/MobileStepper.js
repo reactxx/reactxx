@@ -79,11 +79,14 @@ function MobileStepper(props) {
     </Paper>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiMobileStepper',
-  defaultProps: {
-    activeStep: 0,
-    position: 'bottom',
-    variant: 'dots'
-  }
-})(MobileStepper);
+const defaultProps = {
+  activeStep: 0,
+  position: 'bottom',
+  variant: 'dots'
+};
+const meta = {
+  component: MobileStepper || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

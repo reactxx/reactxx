@@ -33,10 +33,13 @@ function Toolbar(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiToolbar',
-  defaultProps: {
-    disableGutters: false,
-    variant: 'regular'
-  }
-})(Toolbar);
+const defaultProps = {
+  disableGutters: false,
+  variant: 'regular'
+};
+const meta = {
+  component: Toolbar || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

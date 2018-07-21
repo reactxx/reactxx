@@ -34,9 +34,12 @@ function FormGroup(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiFormGroup',
-  defaultProps: {
-    row: false
-  }
-})(FormGroup);
+const defaultProps = {
+  row: false
+};
+const meta = {
+  component: FormGroup || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

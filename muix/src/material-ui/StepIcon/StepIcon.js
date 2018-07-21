@@ -61,11 +61,14 @@ function StepIcon(props) {
   return icon;
 }
 
-export default withStyles(styles, {
-  name: 'MuiStepIcon',
-  defaultProps: {
-    active: false,
-    completed: false,
-    error: false
-  }
-})(StepIcon);
+const defaultProps = {
+  active: false,
+  completed: false,
+  error: false
+};
+const meta = {
+  component: StepIcon || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

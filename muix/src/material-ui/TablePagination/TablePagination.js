@@ -131,17 +131,20 @@ class TablePagination extends React.Component {
 
 }
 
-export default withStyles(styles, {
-  name: 'MuiTablePagination',
-  defaultProps: {
-    ActionsComponent: TablePaginationActions,
-    component: TableCell,
-    labelDisplayedRows: ({
-      from,
-      to,
-      count
-    }) => `${from}-${to} of ${count}`,
-    labelRowsPerPage: 'Rows per page:',
-    rowsPerPageOptions: [5, 10, 25]
-  }
-})(TablePagination);
+const defaultProps = {
+  ActionsComponent: TablePaginationActions,
+  component: TableCell,
+  labelDisplayedRows: ({
+    from,
+    to,
+    count
+  }) => `${from}-${to} of ${count}`,
+  labelRowsPerPage: 'Rows per page:',
+  rowsPerPageOptions: [5, 10, 25]
+};
+const meta = {
+  component: TablePagination || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

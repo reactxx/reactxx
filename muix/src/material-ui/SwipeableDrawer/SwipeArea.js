@@ -48,4 +48,9 @@ function SwipeArea(props) {
   }} {...other} />;
 }
 
-export default withStyles(styles)(SwipeArea);
+const meta = {
+  component: SwipeArea || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

@@ -66,10 +66,13 @@ function Badge(props) {
     </ComponentProp>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiBadge',
-  defaultProps: {
-    color: 'default',
-    component: 'span'
-  }
-})(Badge);
+const defaultProps = {
+  color: 'default',
+  component: 'span'
+};
+const meta = {
+  component: Badge || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

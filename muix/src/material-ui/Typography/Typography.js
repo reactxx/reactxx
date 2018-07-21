@@ -81,25 +81,28 @@ function Typography(props) {
   return <Component className={className} {...other} />;
 }
 
-export default withStyles(styles, {
-  name: 'MuiTypography',
-  defaultProps: {
-    align: 'inherit',
-    color: 'default',
-    gutterBottom: false,
-    headlineMapping: {
-      display4: 'h1',
-      display3: 'h1',
-      display2: 'h1',
-      display1: 'h1',
-      headline: 'h1',
-      title: 'h2',
-      subheading: 'h3',
-      body2: 'aside',
-      body1: 'p'
-    },
-    noWrap: false,
-    paragraph: false,
-    variant: 'body1'
-  }
-})(Typography);
+const defaultProps = {
+  align: 'inherit',
+  color: 'default',
+  gutterBottom: false,
+  headlineMapping: {
+    display4: 'h1',
+    display3: 'h1',
+    display2: 'h1',
+    display1: 'h1',
+    headline: 'h1',
+    title: 'h2',
+    subheading: 'h3',
+    body2: 'aside',
+    body1: 'p'
+  },
+  noWrap: false,
+  paragraph: false,
+  variant: 'body1'
+};
+const meta = {
+  component: Typography || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

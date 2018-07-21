@@ -96,6 +96,9 @@ class BottomNavigationAction extends React.Component {
 
 }
 
-export default withStyles(styles, {
-  name: 'MuiBottomNavigationAction'
-})(BottomNavigationAction);
+const meta = {
+  component: BottomNavigationAction || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

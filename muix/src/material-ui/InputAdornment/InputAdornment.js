@@ -35,10 +35,13 @@ function InputAdornment(props) {
     </Component>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiInputAdornment',
-  defaultProps: {
-    component: 'div',
-    disableTypography: false
-  }
-})(InputAdornment);
+const defaultProps = {
+  component: 'div',
+  disableTypography: false
+};
+const meta = {
+  component: InputAdornment || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

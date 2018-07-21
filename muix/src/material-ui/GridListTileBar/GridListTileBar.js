@@ -84,10 +84,13 @@ function GridListTileBar(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiGridListTileBar',
-  defaultProps: {
-    actionPosition: 'right',
-    titlePosition: 'bottom'
-  }
-})(GridListTileBar);
+const defaultProps = {
+  actionPosition: 'right',
+  titlePosition: 'bottom'
+};
+const meta = {
+  component: GridListTileBar || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

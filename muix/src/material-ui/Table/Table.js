@@ -38,9 +38,12 @@ class Table extends React.Component {
 Table.childContextTypes = {
   table: PropTypes.object
 };
-export default withStyles(styles, {
-  name: 'MuiTable',
-  defaultProps: {
-    component: 'table'
-  }
-})(Table);
+const defaultProps = {
+  component: 'table'
+};
+const meta = {
+  component: Table || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

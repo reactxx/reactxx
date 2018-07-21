@@ -56,4 +56,12 @@ class Ripple extends React.Component {
 
 }
 
-export default Ripple;
+const defaultProps = {
+  pulsate: false
+};
+const meta = {
+  component: Ripple || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

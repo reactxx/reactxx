@@ -260,6 +260,8 @@
     <Content Include="src\material-ui\Paper\Paper.js" />
     <Content Include="src\material-ui\Popover\index.js" />
     <Content Include="src\material-ui\Popover\Popover.js" />
+    <Content Include="src\material-ui\Popper\index.js" />
+    <Content Include="src\material-ui\Popper\Popper.js" />
     <Content Include="src\material-ui\Portal\index.js" />
     <Content Include="src\material-ui\Portal\Portal.js" />
     <Content Include="src\material-ui\RadioGroup\index.js" />
@@ -304,8 +306,10 @@
     <Content Include="src\material-ui\styles\getThemeProps.js" />
     <Content Include="src\material-ui\styles\index.js" />
     <Content Include="src\material-ui\styles\jssPreset.js" />
+    <Content Include="src\material-ui\styles\mergeClasses.js" />
     <Content Include="src\material-ui\styles\MuiThemeProvider.js" />
     <Content Include="src\material-ui\styles\shadows.js" />
+    <Content Include="src\material-ui\styles\shape.js" />
     <Content Include="src\material-ui\styles\spacing.js" />
     <Content Include="src\material-ui\styles\themeListener.js" />
     <Content Include="src\material-ui\styles\transitions.js" />

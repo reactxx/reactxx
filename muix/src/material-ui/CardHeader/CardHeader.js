@@ -55,9 +55,12 @@ function CardHeader(props) {
     </Component>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiCardHeader',
-  defaultProps: {
-    component: 'div'
-  }
-})(CardHeader);
+const defaultProps = {
+  component: 'div'
+};
+const meta = {
+  component: CardHeader || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

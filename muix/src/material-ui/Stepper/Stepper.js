@@ -75,13 +75,16 @@ function Stepper(props) {
 }
 
 Stepper.muiName = 'Stepper';
-export default withStyles(styles, {
-  name: 'MuiStepper',
-  defaultProps: {
-    activeStep: 0,
-    alternativeLabel: false,
-    connector: <StepConnector />,
-    nonLinear: false,
-    orientation: 'horizontal'
-  }
-})(Stepper);
+const defaultProps = {
+  activeStep: 0,
+  alternativeLabel: false,
+  connector: <StepConnector />,
+  nonLinear: false,
+  orientation: 'horizontal'
+};
+const meta = {
+  component: Stepper || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

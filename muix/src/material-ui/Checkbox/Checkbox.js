@@ -51,13 +51,16 @@ function Checkbox(props) {
   }} icon={indeterminate ? indeterminateIcon : icon} {...other} />;
 }
 
-export default withStyles(styles, {
-  name: 'MuiCheckbox',
-  defaultProps: {
-    checkedIcon: <CheckBoxIcon />,
-    color: 'secondary',
-    icon: <CheckBoxOutlineBlankIcon />,
-    indeterminate: false,
-    indeterminateIcon: <IndeterminateCheckBoxIcon />
-  }
-})(Checkbox);
+const defaultProps = {
+  checkedIcon: <CheckBoxIcon />,
+  color: 'secondary',
+  icon: <CheckBoxOutlineBlankIcon />,
+  indeterminate: false,
+  indeterminateIcon: <IndeterminateCheckBoxIcon />
+};
+const meta = {
+  component: Checkbox || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

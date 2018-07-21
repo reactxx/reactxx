@@ -119,19 +119,22 @@ function Dialog(props) {
     </Modal>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiDialog',
-  defaultProps: {
-    disableBackdropClick: false,
-    disableEscapeKeyDown: false,
-    fullScreen: false,
-    fullWidth: false,
-    maxWidth: 'sm',
-    scroll: 'paper',
-    TransitionComponent: Fade,
-    transitionDuration: {
-      enter: duration.enteringScreen,
-      exit: duration.leavingScreen
-    }
+const defaultProps = {
+  disableBackdropClick: false,
+  disableEscapeKeyDown: false,
+  fullScreen: false,
+  fullWidth: false,
+  maxWidth: 'sm',
+  scroll: 'paper',
+  TransitionComponent: Fade,
+  transitionDuration: {
+    enter: duration.enteringScreen,
+    exit: duration.leavingScreen
   }
-})(Dialog);
+};
+const meta = {
+  component: Dialog || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

@@ -249,19 +249,21 @@ class Snackbar extends React.Component {
 
 }
 
-export default withStyles(styles, {
-  flip: false,
-  name: 'MuiSnackbar',
-  defaultProps: {
-    anchorOrigin: {
-      vertical: 'bottom',
-      horizontal: 'center'
-    },
-    disableWindowBlurListener: false,
-    TransitionComponent: Slide,
-    transitionDuration: {
-      enter: duration.enteringScreen,
-      exit: duration.leavingScreen
-    }
+const defaultProps = {
+  anchorOrigin: {
+    vertical: 'bottom',
+    horizontal: 'center'
+  },
+  disableWindowBlurListener: false,
+  TransitionComponent: Slide,
+  transitionDuration: {
+    enter: duration.enteringScreen,
+    exit: duration.leavingScreen
   }
-})(Snackbar);
+};
+const meta = {
+  component: Snackbar || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

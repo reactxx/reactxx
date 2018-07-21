@@ -68,9 +68,12 @@ function Avatar(props) {
     </Component>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiAvatar',
-  defaultProps: {
-    component: 'div'
-  }
-})(Avatar);
+const defaultProps = {
+  component: 'div'
+};
+const meta = {
+  component: Avatar || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

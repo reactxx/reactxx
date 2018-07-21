@@ -177,10 +177,13 @@ class Tab extends React.Component {
 
 }
 
-export default withStyles(styles, {
-  name: 'MuiTab',
-  defaultProps: {
-    disabled: false,
-    textColor: 'inherit'
-  }
-})(Tab);
+const defaultProps = {
+  disabled: false,
+  textColor: 'inherit'
+};
+const meta = {
+  component: Tab || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

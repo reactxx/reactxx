@@ -36,4 +36,9 @@ function TabIndicator(props) {
   return <span className={classNamesStr(classes.root, classes[`color${capitalize(color)}`], className)} {...other} />;
 }
 
-export default withStyles(styles)(TabIndicator);
+const meta = {
+  component: TabIndicator || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

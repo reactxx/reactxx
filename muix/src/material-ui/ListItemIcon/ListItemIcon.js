@@ -29,6 +29,9 @@ function ListItemIcon(props) {
   });
 }
 
-export default withStyles(styles, {
-  name: 'MuiListItemIcon'
-})(ListItemIcon);
+const meta = {
+  component: ListItemIcon || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

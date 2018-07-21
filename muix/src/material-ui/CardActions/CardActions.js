@@ -36,9 +36,12 @@ function CardActions(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiCardActions',
-  defaultProps: {
-    disableActionSpacing: false
-  }
-})(CardActions);
+const defaultProps = {
+  disableActionSpacing: false
+};
+const meta = {
+  component: CardActions || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

@@ -37,9 +37,12 @@ function Backdrop(props) {
     </Fade>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiBackdrop',
-  defaultProps: {
-    invisible: false
-  }
-})(Backdrop);
+const defaultProps = {
+  invisible: false
+};
+const meta = {
+  component: Backdrop || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

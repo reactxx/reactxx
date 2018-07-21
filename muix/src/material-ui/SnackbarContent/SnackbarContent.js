@@ -58,6 +58,9 @@ function SnackbarContent(props) {
     </Paper>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiSnackbarContent'
-})(SnackbarContent);
+const meta = {
+  component: SnackbarContent || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

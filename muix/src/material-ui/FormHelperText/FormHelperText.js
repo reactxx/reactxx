@@ -67,9 +67,12 @@ function FormHelperText(props, context) {
 FormHelperText.contextTypes = {
   muiFormControl: PropTypes.object
 };
-export default withStyles(styles, {
-  name: 'MuiFormHelperText',
-  defaultProps: {
-    component: 'p'
-  }
-})(FormHelperText);
+const defaultProps = {
+  component: 'p'
+};
+const meta = {
+  component: FormHelperText || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

@@ -86,10 +86,13 @@ function IconButton(props) {
     </ButtonBase>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiIconButton',
-  defaultProps: {
-    color: 'default',
-    disabled: false
-  }
-})(IconButton);
+const defaultProps = {
+  color: 'default',
+  disabled: false
+};
+const meta = {
+  component: IconButton || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

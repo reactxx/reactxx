@@ -133,14 +133,17 @@ ListItem.contextTypes = {
 ListItem.childContextTypes = {
   dense: PropTypes.bool
 };
-export default withStyles(styles, {
-  name: 'MuiListItem',
-  defaultProps: {
-    button: false,
-    ContainerComponent: 'li',
-    dense: false,
-    disabled: false,
-    disableGutters: false,
-    divider: false
-  }
-})(ListItem);
+const defaultProps = {
+  button: false,
+  ContainerComponent: 'li',
+  dense: false,
+  disabled: false,
+  disableGutters: false,
+  divider: false
+};
+const meta = {
+  component: ListItem || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

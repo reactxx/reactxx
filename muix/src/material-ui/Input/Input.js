@@ -486,12 +486,15 @@ Input.contextTypes = {
 Input.childContextTypes = {
   muiFormControl: PropTypes.object
 };
-export default withStyles(styles, {
-  name: 'MuiInput',
-  defaultProps: {
-    disableUnderline: false,
-    fullWidth: false,
-    multiline: false,
-    type: 'text'
-  }
-})(Input);
+const defaultProps = {
+  disableUnderline: false,
+  fullWidth: false,
+  multiline: false,
+  type: 'text'
+};
+const meta = {
+  component: Input || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

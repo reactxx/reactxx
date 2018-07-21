@@ -104,9 +104,12 @@ function Switch(props) {
     </span>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiSwitch',
-  defaultProps: {
-    color: 'secondary'
-  }
-})(Switch);
+const defaultProps = {
+  color: 'secondary'
+};
+const meta = {
+  component: Switch || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

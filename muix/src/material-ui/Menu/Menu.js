@@ -119,11 +119,13 @@ class Menu extends React.Component {
 
 }
 
-export default withStyles(styles, {
-  name: 'MuiMenu',
-  withTheme: true,
-  defaultProps: {
-    disableAutoFocusItem: false,
-    transitionDuration: 'auto'
-  }
-})(Menu);
+const defaultProps = {
+  disableAutoFocusItem: false,
+  transitionDuration: 'auto'
+};
+const meta = {
+  component: Menu || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

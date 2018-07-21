@@ -42,9 +42,12 @@ class CssBaseline extends React.Component {
 }
 
 CssBaseline.propTypes = exactProp(CssBaseline.propTypes);
-export default withStyles(styles, {
-  name: 'MuiCssBaseline',
-  defaultProps: {
-    children: null
-  }
-})(CssBaseline);
+const defaultProps = {
+  children: null
+};
+const meta = {
+  component: CssBaseline || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

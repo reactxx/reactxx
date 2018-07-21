@@ -51,10 +51,13 @@ function StepConnector(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiStepConnector',
-  defaultProps: {
-    alternativeLabel: false,
-    orientation: 'horizontal'
-  }
-})(StepConnector);
+const defaultProps = {
+  alternativeLabel: false,
+  orientation: 'horizontal'
+};
+const meta = {
+  component: StepConnector || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

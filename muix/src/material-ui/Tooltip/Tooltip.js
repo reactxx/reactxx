@@ -289,18 +289,20 @@ class Tooltip extends React.Component {
 }
 
 Tooltip.propTypes = exactProp(Tooltip.propTypes);
-export default withStyles(styles, {
-  name: 'MuiTooltip',
-  withTheme: true,
-  defaultProps: {
-    disableFocusListener: false,
-    disableHoverListener: false,
-    disableTouchListener: false,
-    enterDelay: 0,
-    enterTouchDelay: 1000,
-    leaveDelay: 0,
-    leaveTouchDelay: 1500,
-    placement: 'bottom',
-    TransitionComponent: Grow
-  }
-})(Tooltip);
+const defaultProps = {
+  disableFocusListener: false,
+  disableHoverListener: false,
+  disableTouchListener: false,
+  enterDelay: 0,
+  enterTouchDelay: 1000,
+  leaveDelay: 0,
+  leaveTouchDelay: 1500,
+  placement: 'bottom',
+  TransitionComponent: Grow
+};
+const meta = {
+  component: Tooltip || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

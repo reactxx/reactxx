@@ -66,10 +66,13 @@ function TableSortLabel(props) {
     </ButtonBase>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiTableSortLabel',
-  defaultProps: {
-    active: false,
-    direction: 'desc'
-  }
-})(TableSortLabel);
+const defaultProps = {
+  active: false,
+  direction: 'desc'
+};
+const meta = {
+  component: TableSortLabel || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

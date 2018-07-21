@@ -66,11 +66,14 @@ function Step(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiStep',
-  defaultProps: {
-    active: false,
-    completed: false,
-    disabled: false
-  }
-})(Step);
+const defaultProps = {
+  active: false,
+  completed: false,
+  disabled: false
+};
+const meta = {
+  component: Step || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

@@ -52,10 +52,13 @@ function Icon(props) {
 }
 
 Icon.muiName = 'Icon';
-export default withStyles(styles, {
-  name: 'MuiIcon',
-  defaultProps: {
-    color: 'inherit',
-    fontSize: 'default'
-  }
-})(Icon);
+const defaultProps = {
+  color: 'inherit',
+  fontSize: 'default'
+};
+const meta = {
+  component: Icon || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

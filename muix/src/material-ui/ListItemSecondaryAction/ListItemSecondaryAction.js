@@ -27,6 +27,9 @@ function ListItemSecondaryAction(props) {
 }
 
 ListItemSecondaryAction.muiName = 'ListItemSecondaryAction';
-export default withStyles(styles, {
-  name: 'MuiListItemSecondaryAction'
-})(ListItemSecondaryAction);
+const meta = {
+  component: ListItemSecondaryAction || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

@@ -148,19 +148,20 @@ class Drawer extends React.Component {
 
 }
 
-export default withStyles(styles, {
-  name: 'MuiDrawer',
-  flip: false,
-  withTheme: true,
-  defaultProps: {
-    anchor: 'left',
-    elevation: 16,
-    open: false,
-    transitionDuration: {
-      enter: duration.enteringScreen,
-      exit: duration.leavingScreen
-    },
-    variant: 'temporary' // Mobile first.
+const defaultProps = {
+  anchor: 'left',
+  elevation: 16,
+  open: false,
+  transitionDuration: {
+    enter: duration.enteringScreen,
+    exit: duration.leavingScreen
+  },
+  variant: 'temporary' // Mobile first.
 
-  }
-})(Drawer);
+};
+const meta = {
+  component: Drawer || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

@@ -133,9 +133,12 @@ class SwitchBase extends React.Component {
 SwitchBase.contextTypes = {
   muiFormControl: PropTypes.object
 };
-export default withStyles(styles, {
-  name: 'MuiSwitchBase',
-  defaultProps: {
-    type: 'checkbox'
-  }
-})(SwitchBase);
+const defaultProps = {
+  type: 'checkbox'
+};
+const meta = {
+  component: SwitchBase || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

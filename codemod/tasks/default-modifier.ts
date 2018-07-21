@@ -7,7 +7,7 @@ export const taskDefaultCreator = (functionName: string, forceHTMLTags?: string[
   selectClassNamesFromProps(root, functionName)
   refactorClassNames(root)
   adjustHtmlClassName(root, functionName, forceHTMLTags)
-  propTypesAndDefaultProps(root, functionName)
+  defaultExport(root, functionName)
   return root
 }
 
@@ -66,7 +66,52 @@ const selectClassNamesFromProps = (root: Ast.Ast, functionName: string) => {
   return root
 }
 
-const propTypesAndDefaultProps = (root: Ast.Ast, name: string) => {
+const defaultExport = (root: Ast.Ast, name: string) => {
+  const body: any[] = Queries.checkSingleResult(Ast.astq().query(root, `/Program`)).body
+  const getStaticProp = (propName: string) => Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExpressionStatement [/AssignmentExpression/MemberExpression [ /Identifier [ @name=="${name}"] && /Identifier [ @name=="${propName}"] ] ]`), true)
+  // remove propTypes
+  const propTypes = getStaticProp('propTypes');
+  if (propTypes) {
+    const propTypesIdx = body.indexOf(propTypes);
+    body.splice(propTypesIdx, 1)
+  }
+  // remove withStyles
+  const withStyles = Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExportDefaultDeclaration`))
+  if (withStyles) {
+    const withStylesIdx = body.indexOf(withStyles);
+    body.splice(withStylesIdx, 1)
+  }
+  // remove defaultProps
+  const defaultProps = getStaticProp('defaultProps')
+  if (defaultProps) {
+    const defaultPropsIdx = body.indexOf(defaultProps);
+    body.splice(defaultPropsIdx, 1)
+    body.push({
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "defaultProps"
+          },
+          "init": defaultProps.expression.right
+        }
+      ],
+      "kind": "const"
+    })
+  }
+
+  const defaultExport = Parser.parseCode(`
+  const meta = {component: ${name} || null, defaultProps: defaultProps || null, styles: styles || null }
+  export default meta
+  `)
+  body.push(defaultExport.program.body[0])
+  body.push(defaultExport.program.body[1])
+  return root
+}
+
+const defaultExport2 = (root: Ast.Ast, name: string) => {
   const program = Queries.checkSingleResult(Ast.astq().query(root, `/Program`))
   const getStaticProp = (propName: string) => Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExpressionStatement [/AssignmentExpression/MemberExpression [ /Identifier [ @name=="${name}"] && /Identifier [ @name=="${propName}"] ] ]`), true)
   // remove propTypes

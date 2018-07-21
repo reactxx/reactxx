@@ -36,9 +36,12 @@ class TableHead extends React.Component {
 TableHead.childContextTypes = {
   table: PropTypes.object
 };
-export default withStyles(styles, {
-  name: 'MuiTableHead',
-  defaultProps: {
-    component: 'thead'
-  }
-})(TableHead);
+const defaultProps = {
+  component: 'thead'
+};
+const meta = {
+  component: TableHead || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

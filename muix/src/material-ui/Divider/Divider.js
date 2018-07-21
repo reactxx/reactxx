@@ -43,12 +43,15 @@ function Divider(props) {
   return <Component className={className} {...other} />;
 }
 
-export default withStyles(styles, {
-  name: 'MuiDivider',
-  defaultProps: {
-    absolute: false,
-    component: 'hr',
-    inset: false,
-    light: false
-  }
-})(Divider);
+const defaultProps = {
+  absolute: false,
+  component: 'hr',
+  inset: false,
+  light: false
+};
+const meta = {
+  component: Divider || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

@@ -156,12 +156,14 @@ class Collapse extends React.Component {
 }
 
 Collapse.muiSupportAuto = true;
-export default withStyles(styles, {
-  withTheme: true,
-  name: 'MuiCollapse',
-  defaultProps: {
-    collapsedHeight: '0px',
-    component: 'div',
-    timeout: duration.standard
-  }
-})(Collapse);
+const defaultProps = {
+  collapsedHeight: '0px',
+  component: 'div',
+  timeout: duration.standard
+};
+const meta = {
+  component: Collapse || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

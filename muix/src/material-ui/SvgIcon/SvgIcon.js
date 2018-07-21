@@ -60,12 +60,15 @@ function SvgIcon(props) {
 }
 
 SvgIcon.muiName = 'SvgIcon';
-export default withStyles(styles, {
-  name: 'MuiSvgIcon',
-  defaultProps: {
-    color: 'inherit',
-    component: 'svg',
-    fontSize: 'default',
-    viewBox: '0 0 24 24'
-  }
-})(SvgIcon);
+const defaultProps = {
+  color: 'inherit',
+  component: 'svg',
+  fontSize: 'default',
+  viewBox: '0 0 24 24'
+};
+const meta = {
+  component: SvgIcon || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

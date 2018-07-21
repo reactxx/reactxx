@@ -103,10 +103,13 @@ function TableCell(props, context) {
 TableCell.contextTypes = {
   table: PropTypes.object.isRequired
 };
-export default withStyles(styles, {
-  name: 'MuiTableCell',
-  defaultProps: {
-    numeric: false,
-    padding: 'default'
-  }
-})(TableCell);
+const defaultProps = {
+  numeric: false,
+  padding: 'default'
+};
+const meta = {
+  component: TableCell || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

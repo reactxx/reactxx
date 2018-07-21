@@ -85,7 +85,7 @@ export const readAllCodes = () => {
         else if (withStyles)
             logItem.withStyles = withStyles.name
     })
-    const dump = JSON.stringify(log, null, 2)
+    //const dump = JSON.stringify(log, null, 2)
     return { log, code, compileErrors }
 }
 

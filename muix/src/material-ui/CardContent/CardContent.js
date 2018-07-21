@@ -25,9 +25,12 @@ function CardContent(props) {
   return <Component className={classNames(classes.root, className)} {...other} />;
 }
 
-export default withStyles(styles, {
-  name: 'MuiCardContent',
-  defaultProps: {
-    component: 'div'
-  }
-})(CardContent);
+const defaultProps = {
+  component: 'div'
+};
+const meta = {
+  component: CardContent || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

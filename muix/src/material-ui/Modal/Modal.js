@@ -281,20 +281,22 @@ class Modal extends React.Component {
 
 }
 
-export default withStyles(styles, {
-  flip: false,
-  name: 'MuiModal',
-  defaultProps: {
-    disableAutoFocus: false,
-    disableBackdropClick: false,
-    disableEnforceFocus: false,
-    disableEscapeKeyDown: false,
-    disablePortal: false,
-    disableRestoreFocus: false,
-    hideBackdrop: false,
-    keepMounted: false,
-    // Modals don't open on the server so this won't conflict with concurrent requests.
-    manager: new ModalManager(),
-    BackdropComponent: Backdrop
-  }
-})(Modal);
+const defaultProps = {
+  disableAutoFocus: false,
+  disableBackdropClick: false,
+  disableEnforceFocus: false,
+  disableEscapeKeyDown: false,
+  disablePortal: false,
+  disableRestoreFocus: false,
+  hideBackdrop: false,
+  keepMounted: false,
+  // Modals don't open on the server so this won't conflict with concurrent requests.
+  manager: new ModalManager(),
+  BackdropComponent: Backdrop
+};
+const meta = {
+  component: Modal || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

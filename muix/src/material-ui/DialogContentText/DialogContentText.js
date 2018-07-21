@@ -25,6 +25,9 @@ function DialogContentText(props) {
     </Typography>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiDialogContentText'
-})(DialogContentText);
+const meta = {
+  component: DialogContentText || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

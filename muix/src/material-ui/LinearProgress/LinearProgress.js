@@ -184,10 +184,13 @@ function LinearProgress(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiLinearProgress',
-  defaultProps: {
-    color: 'primary',
-    variant: 'indeterminate'
-  }
-})(LinearProgress);
+const defaultProps = {
+  color: 'primary',
+  variant: 'indeterminate'
+};
+const meta = {
+  component: LinearProgress || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

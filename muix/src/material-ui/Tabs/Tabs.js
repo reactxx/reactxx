@@ -328,17 +328,19 @@ class Tabs extends React.Component {
 
 }
 
-export default withStyles(styles, {
-  name: 'MuiTabs',
-  withTheme: true,
-  defaultProps: {
-    centered: false,
-    component: 'div',
-    fullWidth: false,
-    indicatorColor: 'secondary',
-    scrollable: false,
-    ScrollButtonComponent: TabScrollButton,
-    scrollButtons: 'auto',
-    textColor: 'inherit'
-  }
-})(Tabs);
+const defaultProps = {
+  centered: false,
+  component: 'div',
+  fullWidth: false,
+  indicatorColor: 'secondary',
+  scrollable: false,
+  ScrollButtonComponent: TabScrollButton,
+  scrollButtons: 'auto',
+  textColor: 'inherit'
+};
+const meta = {
+  component: Tabs || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

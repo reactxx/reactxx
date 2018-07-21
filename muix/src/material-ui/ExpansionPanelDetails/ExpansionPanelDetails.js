@@ -24,6 +24,9 @@ function ExpansionPanelDetails(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiExpansionPanelDetails'
-})(ExpansionPanelDetails);
+const meta = {
+  component: ExpansionPanelDetails || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

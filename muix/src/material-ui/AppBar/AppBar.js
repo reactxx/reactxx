@@ -71,10 +71,13 @@ function AppBar(props) {
     </Paper>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiAppBar',
-  defaultProps: {
-    color: 'primary',
-    position: 'fixed'
-  }
-})(AppBar);
+const defaultProps = {
+  color: 'primary',
+  position: 'fixed'
+};
+const meta = {
+  component: AppBar || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

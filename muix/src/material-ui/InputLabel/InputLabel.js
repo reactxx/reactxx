@@ -69,9 +69,12 @@ function InputLabel(props, context) {
 InputLabel.contextTypes = {
   muiFormControl: PropTypes.object
 };
-export default withStyles(styles, {
-  name: 'MuiInputLabel',
-  defaultProps: {
-    disableAnimation: false
-  }
-})(InputLabel);
+const defaultProps = {
+  disableAnimation: false
+};
+const meta = {
+  component: InputLabel || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

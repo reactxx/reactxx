@@ -45,9 +45,12 @@ function BottomNavigation(props) {
     </div>;
 }
 
-export default withStyles(styles, {
-  name: 'MuiBottomNavigation',
-  defaultProps: {
-    showLabels: false
-  }
-})(BottomNavigation);
+const defaultProps = {
+  showLabels: false
+};
+const meta = {
+  component: BottomNavigation || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

@@ -5,9 +5,6 @@ import { Theme as MuiTheme } from 'reactxx-muix/typings/styles/createMuiTheme';
 import createSheetHook from 'reactxx-muix/web/styles/create-sheet-hook';
 import { rulesetsToClassNames, renderer } from 'reactxx-fela'
 
-
-
-
 export type Theme = MuiTheme & TCommon.ThemeBase
 
 export const ThemeProvider = ThemeProviderUntyped as TCommon.ThemeProviderTyped<Theme>
@@ -23,7 +20,7 @@ const renderAddIn: RenderAddIn = {
 
 
 const withStylesMui = <R extends Types.Shape>
-  (sheetCreator: Types.SheetCreatorX<R>, options?: { name: string, defaultProps: Types.PropsX<R>}) => (component) => 
+  (sheetCreator: Types.SheetCreatorX<R>, options?: { defaultProps: Types.PropsX<R>}) => (component) => 
     withStyles<R, {}>(sheetCreator, renderAddIn, options, {isMui:true})(component) as React.ComponentClass<Types.PropsX<R>> & TProvider<R>
 
 export default withStylesMui

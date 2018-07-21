@@ -188,10 +188,13 @@ class Chip extends React.Component {
 
 }
 
-export default withStyles(styles, {
-  name: 'MuiChip',
-  defaultProps: {
-    clickable: false,
-    component: 'div'
-  }
-})(Chip);
+const defaultProps = {
+  clickable: false,
+  component: 'div'
+};
+const meta = {
+  component: Chip || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;

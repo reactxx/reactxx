@@ -172,8 +172,12 @@ class Textarea extends React.Component {
 
 }
 
-export default withStyles(styles, {
-  defaultProps: {
-    rows: 1
-  }
-})(Textarea);
+const defaultProps = {
+  rows: 1
+};
+const meta = {
+  component: Textarea || null,
+  defaultProps: defaultProps || null,
+  styles: styles || null
+};
+export default meta;
