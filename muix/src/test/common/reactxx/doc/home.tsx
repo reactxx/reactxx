@@ -77,12 +77,12 @@ const expandedPanelSheet: Types.SheetCreatorX<DocHome.ExpandedPanelShape> = {
 //modifyThemeStates(state, null, theme => [modifyThemeState<ReactXX.TextShape>(state, theme, ReactXX.CompNames.Text, (theme, par) => ({ root: headerLabelStyle }))])}
 
 const expandedPanel: Types.CodeSFC<DocHome.ExpandedPanelShape> = props => {
-  const { $system: { mergeRulesets, theme }, style, classes, $animations: { openClose }, title, children, ...rest } = props
-  const rootStyle = mergeRulesets<Types.ViewRulesetX>(classes.root)
-  const headerStyle = mergeRulesets<Types.ViewRulesetX>(classes.header)
-  const contentStyle = mergeRulesets<Types.ViewRulesetX>(classes.content, openClose.content)
-  const iconStyle = mergeRulesets<Types.TextRulesetX>(classes.icon, openClose.icon)
-  const headerLabelStyle = mergeRulesets<Types.TextRulesetX>(classes.headerLabel)
+  const { $system: { classNames, theme }, style, classes, $animations: { openClose }, title, children, ...rest } = props
+  const rootStyle = classNames<Types.ViewRulesetX>(classes.root)
+  const headerStyle = classNames<Types.ViewRulesetX>(classes.header)
+  const contentStyle = classNames<Types.ViewRulesetX>(classes.content, openClose.content)
+  const iconStyle = classNames<Types.TextRulesetX>(classes.icon, openClose.icon)
+  const headerLabelStyle = classNames<Types.TextRulesetX>(classes.headerLabel)
 
   return <View className={rootStyle} style={style as Types.ViewRulesetX}>
     <View className={headerStyle} /*modifyThemeState={theme => ({ ...theme, overridesNew: { ...theme.overridesNew, [ReactXX.CompNames.Text]: { root: headerLabelStyle}}})}*/>

@@ -60,10 +60,10 @@ const sheet: Types.SheetX<Shape> = {
 class label extends React.Component<Types.CodeProps<Shape>, { disabled: boolean }> {
   state = { disabled: this.props.disabled }
   render() {
-    const { state: { disabled }, props: { children, $system: { mergeRulesets }, classes } } = this
-    const root = mergeRulesets<Types.ViewRulesetX>(classes.root)
-    const header = mergeRulesets<Types.TextRulesetX>(classes.header, disabled && classes.disabled)
-    const label = mergeRulesets<Types.TextRulesetX>(classes.label, disabled && classes.disabled)
+    const { state: { disabled }, props: { children, $system: { classNames }, classes } } = this
+    const root = classNames<Types.ViewRulesetX>(classes.root)
+    const header = classNames<Types.TextRulesetX>(classes.header, disabled && classes.disabled)
+    const label = classNames<Types.TextRulesetX>(classes.label, disabled && classes.disabled)
     return <View className={root}>
       <Text className={header} onPress={() => this.setState(({ disabled }) => ({ disabled: !disabled }))}>Click here to disable x enable</Text>
       <Text className={label}>{children}</Text>

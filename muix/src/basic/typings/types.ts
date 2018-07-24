@@ -151,17 +151,19 @@ export namespace Types {
 
   // *** web or native
   type $SystemLow<R extends Shape = Shape> =
-    TEventsX<R> &
-    {
+    TEventsX<R> 
+    & {
       theme?: TCommon.getTheme<R>
       variant?: TCommon.getVariant<R>
-      mergeRulesets?: <T extends TCommonStyles.RulesetNativeIds | 'Web' | {}>(...rulesets) => TMergeRulesetsResult<T>
-      addIns?: Sheeter.AddIns,
+      classNames?: <T extends TCommonStyles.RulesetNativeIds | 'Web' | {}> (...rulesets) => TMergeRulesetsResult<T>
+      classNamesStr?: (...rulesets) => string
+      //addIns?: Sheeter.AddIns,
       $ignore?: boolean
       $constant?: boolean
       $developer_flag?: boolean
       $developer_RenderCounter?: number,
     }
+    & Sheeter.AddIns
 
 
   export type CodeProps<R extends Shape = Shape> =

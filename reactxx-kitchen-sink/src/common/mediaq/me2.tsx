@@ -40,8 +40,8 @@ const sheet: Types.SheetX<Shape> = {
 /************************
 * CODE
 *************************/
-const label: Types.CodeSFC<Shape> = ({ $system: { mergeRulesets }, classes, $mediaq, children }) => {
-  const root = mergeRulesets<Types.TextRulesetX>(
+const label: Types.CodeSFC<Shape> = ({ $system: { classNames }, classes, $mediaq, children }) => {
+  const root = classNames<Types.TextRulesetX>(
     classes.root,
     $mediaq.isMobile && classes.mobile,
     $mediaq.isTablet && classes.tablet,

@@ -132,35 +132,35 @@ const sheet: Types.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =>
 // responsibleDrawer stateless component. 
 const responsibleDrawer: Types.CodeSFC<TResponsibleDrawer.Shape> = props => {
 
-  const { $animations: { tablet: animTablet, mobile: animMobile }, $mediaq: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, $system: { mergeRulesets }, classes, drawer: drawerNode, children } = props
+  const { $animations: { tablet: animTablet, mobile: animMobile }, $mediaq: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, $system: { classNames }, classes, drawer: drawerNode, children } = props
 
   const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()
 
   // calling mergeRulesetWithOverrides signals which rulesets are used. So it can use their $overrides to modify other sheet's rulesets
-  const root = mergeRulesets<Types.ViewRulesetX>(
+  const root = classNames<Types.ViewRulesetX>(
     classes.root,
   )
 
-  const backDrop = mergeRulesets<Types.ViewRulesetX>(
+  const backDrop = classNames<Types.ViewRulesetX>(
     classes.backDrop,
     isMobile && animMobile.backDrop, // backDrop animation for mobile
   )
 
-  const drawer = mergeRulesets<Types.ViewRulesetX>(
+  const drawer = classNames<Types.ViewRulesetX>(
     classes.drawer,
     isMobile && animMobile.drawer, // drawer animation for mobile
     isTablet && animTablet.drawer, // drawer animation for tablet
   )
 
-  const content = mergeRulesets<Types.ViewRulesetX>(
+  const content = classNames<Types.ViewRulesetX>(
     classes.content,
     isTablet && animTablet.content, // content animation for tablet
   )
 
-  const closeButton = mergeRulesets<Types.TextRulesetX>(classes.closeButton)
+  const closeButton = classNames<Types.TextRulesetX>(classes.closeButton)
 
-  const openButton = mergeRulesets<Types.TextRulesetX>(
+  const openButton = classNames<Types.TextRulesetX>(
     classes.openButton,
     { display: (isTablet && animTablet.$pars.opened) || isDesktop ? 'none' : 'flex' }
   )

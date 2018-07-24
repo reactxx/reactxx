@@ -57,11 +57,11 @@ const sheet: Types.SheetX<Shape> = {
 /************************
 * CODE
 *************************/
-const label: Types.CodeSFC<Shape> = ({ $system: { mergeRulesets }, classes, style, children, iconData }) => {
-  const root = mergeRulesets<Types.ViewRulesetX>(classes.root)
+const label: Types.CodeSFC<Shape> = ({ $system: { classNames }, classes, style, children, iconData }) => {
+  const root = classNames<Types.ViewRulesetX>(classes.root)
   const hasChildren = React.Children.count(children) > 0
-  const icon = iconData && mergeRulesets<Types.TextRulesetX>(classes.label, classes.icon, hasChildren && classes.iconGap)
-  const label = mergeRulesets<Types.TextRulesetX>(classes.label)
+  const icon = iconData && classNames<Types.TextRulesetX>(classes.label, classes.icon, hasChildren && classes.iconGap)
+  const label = classNames<Types.TextRulesetX>(classes.label)
   return <View className={root} style={style as Types.ViewRulesetX}>
     {iconData && <Icon data={iconData} className={icon} />}
     <Text className={label}>{children}</Text>

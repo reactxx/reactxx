@@ -4,7 +4,7 @@ import warning from 'warning';
 import { TCommon } from '../typings/common';
 import { Types } from '../typings/types';
 import { RenderAddIn, TRenderState } from './withStyles';
-import { mergeRulesetsCreator, classNamesCreator } from './merge-rulesets';
+import { mergeRulesetsCreator, mergeRulesetsCreatorStr } from './merge-rulesets';
 
 export const getSystemPipes = <R extends Types.Shape>(
   id: number,
@@ -191,12 +191,14 @@ export const getSystemPipes = <R extends Types.Shape>(
     }
 
     // method, called in component code: ruleset merging
-    if (!options.isMui)
-      $system.mergeRulesets = mergeRulesetsCreator(classes as Sheeter.SheetWithAddIns, getClassesPatches)
-    else {
-      $system['classNames'] = classNamesCreator(false, classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns);
-      $system['classNamesStr'] = classNamesCreator(true, classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns);
-    }
+    $system.classNames = mergeRulesetsCreator(classes as Sheeter.SheetWithAddIns, getClassesPatches)
+    $system['classNamesStr'] = mergeRulesetsCreatorStr(classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns.rulesetsToClassNames);
+    // if (!options.isMui)
+    //   $system.classNames = mergeRulesetsCreator(classes as Sheeter.SheetWithAddIns, getClassesPatches)
+    // else {
+    //   $system['classNames'] = classNamesCreator(false, classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns);
+    //   $system['classNamesStr'] = classNamesCreator(true, classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns);
+    // }
       
 
     // for (const p in finalProps.classes) {
