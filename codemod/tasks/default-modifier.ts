@@ -2,7 +2,7 @@ import * as Queries from '../utils/queries'
 import * as Ast from '../utils/ast'
 import * as Parser from '../utils/parser'
 
-export const taskDefaultCreator = (forceHTMLTags?: string[]) => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
+export const taskDefaultCreator = (forceHTMLTags: string[] = ['Component']) => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   adjustImports(root)
   selectClassNamesFromProps(root, info.name)
   refactorClassNames(root)
@@ -11,12 +11,25 @@ export const taskDefaultCreator = (forceHTMLTags?: string[]) => (root: Ast.Ast, 
   return root
 }
 
+const importRepairs = {
+  '../ButtonBase':'../ButtonBase/ButtonBase',
+  '../Paper':'../Paper/Paper',
+}
+
 const adjustImports = (root: Ast.Ast) => {
-  // replace wrong inports
-  // remove classNames import
-  const classNames = Queries.getNode_importPackage(root, 'classNames', true)
-  if (!classNames) return
-  Ast.removeNode(root, classNames.$path)
+  const imports = Ast.astq().query(root, `// ImportDeclaration`)
+  imports.forEach(imp => {
+    const id = Queries.checkSingleResult(Ast.astq().query(imp, '/ImportDefaultSpecifier/Identifier' || '/ImportSpecifier/Identifier'), true)
+    if (id && id.name==='classNames') { 
+      Ast.removeNode(root, imp.$path)
+      return 
+    } else {
+      const newValue = importRepairs[imp.source.value]
+      if (newValue) 
+        imp.source.value = newValue
+      return
+    }
+  })
 }
 
 const getRenderFunc = (root: Ast.Ast, functionName: string) => {

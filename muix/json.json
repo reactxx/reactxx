@@ -1,42 +1,54 @@
-{
-  "type": "ObjectExpression",
-  "properties": [
-    {
-      "type": "ObjectProperty",
-      "method": false,
-      "key": {
-        "type": "Identifier",
-        "name": "color"
-      },
-      "computed": false,
-      "shorthand": false,
-      "value": {
-        "type": "StringLiteral",
-        "extra": {
-          "rawValue": "primary",
-          "raw": "'primary'"
-        },
-        "value": "primary"
+[
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "React"
+        }
       }
+    ],
+    "source": {
+      "type": "StringLiteral",
+      "extra": {
+        "rawValue": "react",
+        "raw": "'react'"
+      },
+      "value": "react"
     },
-    {
-      "type": "ObjectProperty",
-      "method": false,
-      "key": {
-        "type": "Identifier",
-        "name": "position"
-      },
-      "computed": false,
-      "shorthand": false,
-      "value": {
-        "type": "StringLiteral",
-        "extra": {
-          "rawValue": "fixed",
-          "raw": "'fixed'"
-        },
-        "value": "fixed"
+    "leadingComments": [
+      {
+        "type": "CommentLine",
+        "value": " @inheritedComponent Paper"
       }
+    ]
+  },
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportSpecifier",
+        "imported": {
+          "type": "Identifier",
+          "name": "capitalize"
+        },
+        "local": {
+          "type": "Identifier",
+          "name": "capitalize"
+        }
+      }
+    ],
+    "source": {
+      "type": "StringLiteral",
+      "extra": {
+        "rawValue": "../utils/helpers",
+        "raw": "'../utils/helpers'"
+      },
+      "value": "../utils/helpers"
     }
-  ]
+  }
+]
 
-}
+

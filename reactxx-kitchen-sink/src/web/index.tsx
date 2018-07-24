@@ -22,7 +22,10 @@ import Button from 'reactxx-mui-web/Button'
 //import App from '../common/component/ce3'
 //import App from '../common/mediaq/me1'
 //const App: React.SFC = () => <Button>Hallo world</Button>
-import App from '../common/muix/m1'
+
+import App from '../common/muix/buttons'
+//import App from '../common/muix/paper'
+//import App from '../common/muix/appbar'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 
