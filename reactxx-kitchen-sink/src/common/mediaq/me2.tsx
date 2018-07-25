@@ -40,12 +40,13 @@ const sheet: Types.SheetX<Shape> = {
 /************************
 * CODE
 *************************/
-const label: Types.CodeSFC<Shape> = ({ $system: { classNames }, classes, $mediaq, children }) => {
+const label: Types.CodeSFC<Shape> = ({ $system: { classNames }, classes, className, $mediaq, children }) => {
   const root = classNames<Types.TextRulesetX>(
     classes.root,
     $mediaq.isMobile && classes.mobile,
     $mediaq.isTablet && classes.tablet,
-    $mediaq.isDesktop && classes.desktop,
+    $mediaq.isDesktop && classes.desktop, 
+    className,
   )
   const info = $mediaq.isMobile ? 'MOBILE' : $mediaq.isTablet ? 'TABLET' : 'DESKTOP'
   return <Text className={root}>[{info}] {children}</Text>

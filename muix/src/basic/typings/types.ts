@@ -130,6 +130,7 @@ export namespace Types {
     TAddIn.CodeProps<R> &
     {
       style: TCommonStyles.RulesetWeb
+      className: TCommonStyles.RulesetWeb
       classes: SheetWeb<R>
       children?: React.ReactNode
       $system?: $SystemLow<R>
@@ -142,7 +143,8 @@ export namespace Types {
     Types.OnPressAllNative &
     TAddIn.CodeProps<R> &
     {
-      style: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
+      //style: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
+      className: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
       classes: SheetNative<R>
       children?: React.ReactNode
       $system?: $SystemLow<R> 
@@ -175,6 +177,7 @@ export namespace Types {
       $system?: $SystemLow<R>
       children?: React.ReactNode
       style?: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<TCommon.getStyle<R>>
+      className?: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<TCommon.getStyle<R>>
       classes?: Sheet<R>
     }
 

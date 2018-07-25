@@ -132,14 +132,14 @@ const sheet: Types.SheetCreatorX<TResponsibleDrawer.Shape> = (theme, variant) =>
 // responsibleDrawer stateless component. 
 const responsibleDrawer: Types.CodeSFC<TResponsibleDrawer.Shape> = props => {
 
-  const { $animations: { tablet: animTablet, mobile: animMobile }, $mediaq: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, $system: { classNames }, classes, drawer: drawerNode, children } = props
+  const { $animations: { tablet: animTablet, mobile: animMobile }, $mediaq: { mobile: isMobile, tablet: isTablet, desktop: isDesktop }, $system: { classNames }, classes, className, drawer: drawerNode, children } = props
 
   const openDrawer = () => isTablet ? animTablet.open() : animMobile.open()
   const closeDrawer = () => isTablet ? animTablet.close() : animMobile.close()
 
   // calling mergeRulesetWithOverrides signals which rulesets are used. So it can use their $overrides to modify other sheet's rulesets
   const root = classNames<Types.ViewRulesetX>(
-    classes.root,
+    classes.root, className,
   )
 
   const backDrop = classNames<Types.ViewRulesetX>(

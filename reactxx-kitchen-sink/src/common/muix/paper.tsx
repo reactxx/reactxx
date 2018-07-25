@@ -12,11 +12,11 @@ const styles = theme => ({
 });
 
 function PaperSheet(props) {
-  const { classes } = props;
+  const { classes, className, $system: {classNames} } = props;
 
   return (
     <div style={{padding:10}}>
-      <Paper className={classes.root} elevation={1}>
+      <Paper className={classNames(classes.root, className)} elevation={1}>
         <Typography variant="headline" component="h3">
           This is a sheet of paper.
         </Typography>

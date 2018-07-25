@@ -130,18 +130,21 @@ export const getSystemPipes = <R extends Types.Shape>(
     }
     const cacheId = typeof createSheetX !== 'function' ? '#static#' : !variant ? '#novariant#' : variantCacheId ? variantCacheId : null
 
-    // **** style (for web only, for native is included in root).
-    const toMergeStylesCreators = window.isWeb && separatedStyles.style.length > 0 ? separatedStyles.style : null
-    const toMergeStylesX: Sheeter.SheetWithAddIns[] = !toMergeStylesCreators ? null : toMergeStylesCreators.map(creator => expandCreator(creator))
+    // **** className (and style for native).
+    const toMergeClassName = [
+      ...separatedStyles.className.map(creator => expandCreator(creator)),
+      ...(window.isWeb ? [] : separatedStyles.style.map(creator => expandCreator(creator)))]
+    if (toMergeClassName.length>0) finalProps.className = toMergeClassName.length === 1 ? toMergeClassName[0] : Sheeter.deepMerges({}, toMergeClassName)
 
-    if (toMergeStylesX) finalProps.style = toMergeStylesX.length === 1 ? toMergeStylesX[0] : Sheeter.deepMerges({}, toMergeStylesX)
+    // **** style (for web).
+    if (window.isWeb) {
+      const toMergeStylesCreators = separatedStyles.style.length > 0 ? separatedStyles.style : null
+      const toMergeStylesX: Sheeter.SheetWithAddIns[] = toMergeStylesCreators ? toMergeStylesCreators.map(creator => expandCreator(creator)) : null
+      if (toMergeStylesX) finalProps.style = toMergeStylesX.length === 1 ? toMergeStylesX[0] : Sheeter.deepMerges({}, toMergeStylesX)
+    }
 
-    // **** sheet patch (for native: style included)
-    const toMergeSheetCreators = [
-      ...separatedStyles.classes || null,
-      ...separatedStyles.className.map(className => ({ root: className })),
-      ...(window.isWeb ? [] : separatedStyles.style.map(style => ({ root: style })))]
-    const sheetXPatch: Sheeter.SheetWithAddIns[] = toMergeSheetCreators.length === 0 ? null : toMergeSheetCreators.map(creator => expandCreator(creator))
+    // **** sheet (classes)
+    const sheetXPatch: Sheeter.SheetWithAddIns[] = separatedStyles.classes && separatedStyles.classes.length > 0 ? separatedStyles.classes.map(creator => expandCreator(creator)) : null
     const defaultClasses: Sheeter.SheetWithAddIns = !defaultPropsSeparated ? null : expandCreator(defaultPropsSeparated.classes)
 
     // **** apply sheet patch to sheet:
@@ -149,7 +152,6 @@ export const getSystemPipes = <R extends Types.Shape>(
     const codeClasses = getPlatformSheet({ expandCreator, componentId, finishAddInClasses: addIns.finishAddInClasses, createSheetX, $cache: renderState.themeContext.$cache, sheetXPatch, defaultClasses, cacheId })
     if (codeClasses.$system && codeClasses.$system['$whenUsed'])
       (renderState.getClassesPatches || (renderState.getClassesPatches = {}))['$whenUsed'] = Sheeter.whenUsedRulesetFilter
-    //renderState.addInClasses = addInClasses //e.g {$animations:..., root: {$mediaq:...}}
     renderState.finalProps.classes = codeClasses
   }
 

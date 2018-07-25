@@ -9,14 +9,14 @@ import { TComps, CompNames } from '../typings/comps'
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comps-sheets'
 
 export const view: Types.CodeSFCWeb<TComps.ViewShape> = props => {
-  const { $system: { classNames }, style, classes, ...rest } = props
-  const rootStyle = classNames<'Web'>(classes.root, hasPlatformEvents(props) && classes.pressable)
+  const { $system: { classNames }, style, classes, className, ...rest } = props
+  const rootStyle = classNames<'Web'>(classes.root, hasPlatformEvents(props) && classes.pressable, className)
   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest} />
 }
 
 export const icon: Types.CodeSFCWeb<TComps.IconShape> = props => {
-  const { $system: { classNames }, style, classes, children, data, viewBox, url, onClick, ...rest } = props
-  const rootStyle = classNames<'Web'>(classes.root, hasPlatformEvents(props) && classes.pressable)
+  const { $system: { classNames }, style, classes, className, children, data, viewBox, url, onClick, ...rest } = props
+  const rootStyle = classNames<'Web'>(classes.root, hasPlatformEvents(props) && classes.pressable, className)
   //replace fontSize with width x height
   if (rootStyle.fontSize) { rootStyle.height = rootStyle.width = rootStyle.fontSize; delete rootStyle.fontSize }
   if (style && style.fontSize) { style.height = style.width = style.fontSize; delete style.fontSize }
@@ -27,8 +27,8 @@ export const icon: Types.CodeSFCWeb<TComps.IconShape> = props => {
 }
 
 export const text: Types.CodeSFCWeb<TComps.TextShape> = props => {
-  const { $system: { classNames, $developer_RenderCounter }, style, classes, numberOfLines, url, onClick, ...rest } = props
-  const rootStyle = classNames<'Web'>(classes.root, hasPlatformEvents(props) && classes.pressable, numberOfLines === 1 && classes.singleLineStyle)
+  const { $system: { classNames, $developer_RenderCounter }, style, classes, className, numberOfLines, url, onClick, ...rest } = props
+  const rootStyle = classNames<'Web'>(classes.root, hasPlatformEvents(props) && classes.pressable, numberOfLines === 1 && classes.singleLineStyle, className)
   const tagProps = { className: TComps.Consts.textClassName + ' ' + rulesetsToClassNames(rootStyle), style, ...rest, onClick: url ? undefined : onClick } 
 
   if ($developer_RenderCounter) {
@@ -40,8 +40,8 @@ export const text: Types.CodeSFCWeb<TComps.TextShape> = props => {
 }
 
 export const scrollView: Types.CodeSFCWeb<TComps.ScrollViewShape> = props => {
-  const { $system: { classNames }, style, classes, children, horizontal, ...rest } = props
-  const rootStyle = classNames<'Web'>(classes.root, horizontal && classes.rootHorizontal)
+  const { $system: { classNames }, style, classes, className, children, horizontal, ...rest } = props
+  const rootStyle = classNames<'Web'>(classes.root, horizontal && classes.rootHorizontal, className)
   const containerStyle = classNames<'Web'>(classes.container, horizontal && classes.containerHorizontal)
   //checkChildLayoutProps(style); checkChildLayoutProps(className)
   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest}>

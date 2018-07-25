@@ -92,8 +92,8 @@ const sheet: Types.SheetCreatorX<Shape> = ({ typo }) => ({
 class label extends React.Component<Types.CodeProps<Shape>, { disabled: boolean }> {
   state = { disabled: false }
   render() {
-    const { state: { disabled }, props: { children, $system: { classNames }, classes } } = this
-    const root = classNames<Types.ViewRulesetX>(classes.root)
+    const { state: { disabled }, props: { children, $system: { classNames }, classes, className } } = this
+    const root = classNames<Types.ViewRulesetX>(classes.root, className)
     const header = classNames<Types.TextRulesetX>(classes.label, disabled && classes.disabled)
     const label = classNames<Types.TextRulesetX>(classes.label, disabled && classes.disabled)
     return <View className={root}>

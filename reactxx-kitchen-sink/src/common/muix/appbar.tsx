@@ -3,6 +3,9 @@ import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
 import AppBar from 'reactxx-mui-web/AppBar/AppBar';
 import Toolbar from 'reactxx-mui-web/Toolbar/Toolbar';
 import Button from 'reactxx-mui-web/Button/Button';
+import IconButton from 'reactxx-mui-web/IconButton/IconButton';
+import { Icon } from 'reactxx-primitives'
+import { Navigation } from 'reactxx-mdi/Navigation'
 import Typography from 'reactxx-mui-web/Typography/Typography';
 
 const styles = {
@@ -19,19 +22,16 @@ const styles = {
 };
 
 function ButtonAppBar(props) {
-  const { classes } = props;
+  const { classes, className, $system: { classNamesStr, classNames } } = props;
   return (
-    <div className={classes.root}>
+    <div className={classNamesStr(classes.root, className)}>
       <AppBar position="static">
         <Toolbar>
-          {/*<IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-  </IconButton>*/}
-          <Typography variant="title" color="inherit" className={classes.flex}>
+          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+            <Icon data={Navigation}/>
+          </IconButton>
+          <Typography variant="title" color="inherit" className={classNames(classes.flex)}>
             INFO
-          </Typography>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            News
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>

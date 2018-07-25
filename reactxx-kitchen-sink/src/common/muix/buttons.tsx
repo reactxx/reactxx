@@ -323,5 +323,5 @@ function TextButtons2(props) {
   </Button>
 }
 
-export default withStylesCreator(styles as any, TextButtons2)()
+export default withStylesCreator(styles as any, TextButtons)()
 

@@ -89,8 +89,8 @@ const sheet: Types.SheetX<Shape> = {
 * CODE
 *************************/
 const label: Types.CodeSFC<Shape> = props => {
-  const { $system: { classNames, onPress, onPressIn, onPressOut }, $animations: { anim1, anim2, anim3 }, classes, style, isAnim1, isAnim2, isAnim3, children, ...rest } = props
-  const root = classNames<Types.ViewRulesetX>(classes.root, isAnim1 && anim1.rootAnim, isAnim2 && anim2.rootAnim, isAnim3 && anim3.rootAnim)
+  const { $system: { classNames, onPress, onPressIn, onPressOut }, $animations: { anim1, anim2, anim3 }, classes, className, style, isAnim1, isAnim2, isAnim3, children, ...rest } = props
+  const root = classNames<Types.ViewRulesetX>(classes.root, className, isAnim1 && anim1.rootAnim, isAnim2 && anim2.rootAnim, isAnim3 && anim3.rootAnim)
   const label = classNames<Types.TextRulesetX>(classes.label, isAnim1 && anim1.labelAnim, isAnim2 && anim2.labelAnim, isAnim3 && anim3.labelAnim)
   return <AnimatedView {...rest} className={root}>
     <AnimatedText className={label}>

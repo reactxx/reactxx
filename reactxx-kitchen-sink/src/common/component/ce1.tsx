@@ -57,8 +57,8 @@ const sheet: Types.SheetX<Shape> = {
 /************************
 * CODE
 *************************/
-const label: Types.CodeSFC<Shape> = ({ $system: { classNames }, classes, style, children, iconData }) => {
-  const root = classNames<Types.ViewRulesetX>(classes.root)
+const label: Types.CodeSFC<Shape> = ({ $system: { classNames }, classes, className, style, children, iconData }) => {
+  const root = classNames<Types.ViewRulesetX>(classes.root, className)
   const hasChildren = React.Children.count(children) > 0
   const icon = iconData && classNames<Types.TextRulesetX>(classes.label, classes.icon, hasChildren && classes.iconGap)
   const label = classNames<Types.TextRulesetX>(classes.label)

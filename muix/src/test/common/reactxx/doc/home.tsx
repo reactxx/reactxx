@@ -77,8 +77,8 @@ const expandedPanelSheet: Types.SheetCreatorX<DocHome.ExpandedPanelShape> = {
 //modifyThemeStates(state, null, theme => [modifyThemeState<ReactXX.TextShape>(state, theme, ReactXX.CompNames.Text, (theme, par) => ({ root: headerLabelStyle }))])}
 
 const expandedPanel: Types.CodeSFC<DocHome.ExpandedPanelShape> = props => {
-  const { $system: { classNames, theme }, style, classes, $animations: { openClose }, title, children, ...rest } = props
-  const rootStyle = classNames<Types.ViewRulesetX>(classes.root)
+  const { $system: { classNames, theme }, style, classes, className, $animations: { openClose }, title, children, ...rest } = props
+  const rootStyle = classNames<Types.ViewRulesetX>(classes.root, className)
   const headerStyle = classNames<Types.ViewRulesetX>(classes.header)
   const contentStyle = classNames<Types.ViewRulesetX>(classes.content, openClose.content)
   const iconStyle = classNames<Types.TextRulesetX>(classes.icon, openClose.icon)
