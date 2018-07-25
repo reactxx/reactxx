@@ -186,31 +186,12 @@ export const getSystemPipes = <R extends Types.Shape>(
       console.log(
         `### withStyles RENDER CODE for ${displayName}`,
         '\nfinalProps: ', finalProps,
-        '\ntheme: ', themeContext.theme,
       )
     }
 
     // method, called in component code: ruleset merging
     $system.classNames = mergeRulesetsCreator(classes as Sheeter.SheetWithAddIns, getClassesPatches)
-    $system['classNamesStr'] = mergeRulesetsCreatorStr(classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns.rulesetsToClassNames);
-    // if (!options.isMui)
-    //   $system.classNames = mergeRulesetsCreator(classes as Sheeter.SheetWithAddIns, getClassesPatches)
-    // else {
-    //   $system['classNames'] = classNamesCreator(false, classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns);
-    //   $system['classNamesStr'] = classNamesCreator(true, classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns);
-    // }
-      
-
-    // for (const p in finalProps.classes) {
-    //   finalProps.classes[p] = {
-    //     ...finalProps.classes[p],
-    //     toString: () => p,
-    //     '#classes': classes,
-    //     '#getClassesPatches': getClassesPatches,
-    //   }
-    // }
-
-    //console.log('*** render code: ', renderState.$developer_id)
+    $system.classNamesStr = mergeRulesetsCreatorStr(classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns.rulesetsToClassNames);
 
     // call component code
     return <CodeComponent {...finalProps as Types.CodeProps<R>} />

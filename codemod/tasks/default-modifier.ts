@@ -5,38 +5,40 @@ import * as Parser from '../utils/parser'
 export const taskDefaultCreator = (forceHTMLTags: string[] = ['Component']) => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   adjustImports(root)
   selectClassNamesFromProps(root, info.name)
-  refactorClassNames(root)
-  adjustHtmlClassName(root, info.name, forceHTMLTags)
+  refactorClassNamesObjectExpressionAttribute(root)
+  adjustHtmlClassNameAttribute(root, info.name, forceHTMLTags)
   defaultExport(root, info)
   return root
-}
-
-const importRepairs = {
-  '../ButtonBase':'../ButtonBase/ButtonBase',
-  '../Paper':'../Paper/Paper',
 }
 
 const adjustImports = (root: Ast.Ast) => {
   const imports = Ast.astq().query(root, `// ImportDeclaration`)
   imports.forEach(imp => {
     const id = Queries.checkSingleResult(Ast.astq().query(imp, '/ImportDefaultSpecifier/Identifier' || '/ImportSpecifier/Identifier'), true)
-    if (id && id.name==='classNames') { 
+    if (id && id.name === 'classNames') {
       Ast.removeNode(root, imp.$path)
-      return 
+      return
     } else {
       const newValue = importRepairs[imp.source.value]
-      if (newValue) 
+      if (newValue)
         imp.source.value = newValue
       return
     }
   })
+}
+const importRepairs = {
+  '../ButtonBase': '../ButtonBase/ButtonBase',
+  '../Paper': '../Paper/Paper',
 }
 
 const getRenderFunc = (root: Ast.Ast, functionName: string) => {
   return Queries.getNode_functionGlobal(root, functionName, true) || Queries.getNode_classMethod(root, functionName, 'render')
 }
 
-const adjustHtmlClassName = (root: Ast.Ast, functionName: string, forceHTMLTags: string[]) => {
+// for 'className' attribute HTML tags (e.g. 'span' etc. - not components as 'Button'): expand ruleset to className list (by means of classNamesStr function)
+// - 'className={classNames(x)}' by 'className={classNamesStr(x)}'
+// - 'className={x}' by 'className={classNamesStr(x)}'
+const adjustHtmlClassNameAttribute = (root: Ast.Ast, functionName: string, forceHTMLTags: string[]) => {
   const func = getRenderFunc(root, functionName)
   const htmls = Ast.astq().query(func.body, '// JSXElement [ /JSXOpeningElement/JSXIdentifier [ isHTMLTag(@name, {forceHTMLTags}) ] && // JSXAttribute/JSXIdentifier [ @name=="className" ] ]', { forceHTMLTags: forceHTMLTags || null }) as Ast.Ast[]
   const classNames = 'classNames('
@@ -49,9 +51,20 @@ const adjustHtmlClassName = (root: Ast.Ast, functionName: string, forceHTMLTags:
   return root
 }
 
-const refactorClassNames = (root: Ast.Ast) => {
+// refactor all calls of 'classNames' in render function: its ObjectExpression attribute, e.g. 'classNames(...,{x:y},...)' replace by 'classNames(...,(y) && (x),...)'
+const refactorClassNamesObjectExpressionAttribute = (root: Ast.Ast) => {
   const calls = Ast.astq().query(root, `// CallExpression [ /Identifier [@name == "classNames"] && /ObjectExpression ]`)
   calls.forEach(call => {
+    // check, if every 'classNames(classes.root ??? ' ends with ' ???, classNameProp)'
+    if (call.arguments.length>=2) {
+      const first = Parser.generateCode(call.arguments[0])
+      const last = Parser.generateCode(call.arguments[call.arguments.length-1])
+      if (first==='classes.root' && (last!='classNameProp' && last!='className')) {
+        // for Modal.js and StepIcon.js
+        const x = 0
+      }
+    }
+    // refactor
     const newArguments = []
     call.arguments.forEach(arg => {
       if (arg.type != 'ObjectExpression') { newArguments.push(arg); return }
@@ -66,7 +79,7 @@ const refactorClassNames = (root: Ast.Ast) => {
   return root
 }
 
-
+// in render: 'const {???} = props' transform to 'const {$system: {classNames, classNamesStr}, ???} = props'
 const selectClassNamesFromProps = (root: Ast.Ast, functionName: string) => {
   const func = getRenderFunc(root, functionName)
   const all = Ast.astq().query(func.body, '/VariableDeclaration/VariableDeclarator [ // Identifier [@name == "props"] ]')
@@ -84,38 +97,24 @@ const selectClassNamesFromProps = (root: Ast.Ast, functionName: string) => {
 const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   const body: any[] = Queries.checkSingleResult(Ast.astq().query(root, `/Program`)).body
   const getStaticProp = (propName: string) => Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExpressionStatement [/AssignmentExpression/MemberExpression [ /Identifier [ @name=="${info.name}"] && /Identifier [ @name=="${propName}"] ] ]`), true)
-  // remove propTypes
+  // remove e.g. Button.propTypes
   const propTypes = getStaticProp('propTypes');
   if (propTypes) {
     const propTypesIdx = body.indexOf(propTypes);
     body.splice(propTypesIdx, 1)
   }
-  // remove withStyles
+  // remove withStyles call
   if (info.withStyles) {
     const defaultExport = Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExportDefaultDeclaration`))
     const defaultExportIdx = body.indexOf(defaultExport);
     body.splice(defaultExportIdx, 1)
   }
-  // defaultProps to const
+  // refactor e.g. 'Button.defaultProps = ...' to 'const defaultProps = ...'
   if (info.withStyles) {
     const defaultProps = getStaticProp('defaultProps')
     if (defaultProps) {
       const defaultPropsIdx = body.indexOf(defaultProps);
       body.splice(defaultPropsIdx, 1)
-      // defaultProps.expression.right.properties.push({
-      //   "type": "ObjectProperty",
-      //   "method": false,
-      //   "key": {
-      //     "type": "Identifier",
-      //     "name": "isMui"
-      //   },
-      //   "computed": false,
-      //   "shorthand": false,
-      //   "value": {
-      //     "type": "BooleanLiteral",
-      //     "value": true
-      //   }
-      // })
       body.push({
         "type": "VariableDeclaration",
         "declarations": [
@@ -133,7 +132,10 @@ const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
     }
   }
 
-  // replace withStyles
+  // e.g.
+  // 'export const ButtonCreator...'
+  // 'const ButtonComponent = ButtonCreator()'
+  // 'export default ButtonComponent'
   if (info.withStyles) {
     const defaultExport = Parser.parseCode(`
 /**

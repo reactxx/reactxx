@@ -295,7 +295,7 @@ function TextButtons(props) {
         </Button>
         <ThemeProvider theme={theme}>
           <Button variant="contained" color="primary" className={classes.button}>
-            MuiThemeProvider
+            ThemeProvider
           </Button>
         </ThemeProvider>
         <Button
@@ -312,5 +312,16 @@ function TextButtons(props) {
   );
 }
 
-export default withStylesCreator(styles as any, TextButtons)()
+function TextButtons2(props) {
+  const { classes, $system: { classNamesStr, classNames } } = props;
+  return <Button
+    variant="contained"
+    color="primary"
+    className={classNames(classes.button, classes.cssRoot)}
+  >
+    Custom CSS
+  </Button>
+}
+
+export default withStylesCreator(styles as any, TextButtons2)()
 
