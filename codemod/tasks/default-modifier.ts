@@ -1,8 +1,10 @@
 import * as Queries from '../utils/queries'
 import * as Ast from '../utils/ast'
 import * as Parser from '../utils/parser'
+import {cssjsToFela} from './cssjs-to-fela'
 
 export const withStylesTaskDefaultCreator = (forceHTMLTags: string[] = ['Component']) => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
+  cssjsToFela(root, info)
   adjustImports(root)
   selectClassNamesFromProps(root, info.name)
   refactorClassNamesObjectExpressionAttribute(root)

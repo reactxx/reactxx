@@ -6,16 +6,16 @@
 //https://github.com/isaacs/node-glob
 
 //https://github.com/rse/astq
-
-const basicReactXX = 'd:/reactxx/muix/'
+const driver = 'c:/'
+const basicReactXX = driver + 'reactxx/muix/'
 export const src = basicReactXX + 'src/mui-web/'
 export const reactxxMuiWeb = basicReactXX + 'src/muix/reactxx-mui-web/'
 export const reactxxMuiWebShapesDest = reactxxMuiWeb + 'typings/shapes/'
 export const reactxxMuiWebShapes = reactxxMuiWeb + 'typings/shapes/'
 
-const basicCodemod = 'd:/reactxx/codemod/'
+const basicCodemod = driver + 'reactxx/codemod/'
 export const patchPrepare = basicCodemod + 'patch-prepare/'
 export const patchOriginal = basicCodemod + 'patch-original/'
 
-export const tempDump = 'd:/temp/dump/'
+export const tempDump = driver + 'temp/dump/'
 
