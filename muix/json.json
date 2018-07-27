@@ -1,54 +1,18 @@
-[
-  {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "React"
-        }
-      }
-    ],
-    "source": {
-      "type": "StringLiteral",
-      "extra": {
-        "rawValue": "react",
-        "raw": "'react'"
-      },
-      "value": "react"
-    },
-    "leadingComments": [
-      {
-        "type": "CommentLine",
-        "value": " @inheritedComponent Paper"
-      }
-    ]
+{
+  "type": "ObjectProperty",
+  "method": false,
+  "key": {
+    "type": "Identifier",
+    "name": "GENERATE"
   },
-  {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportSpecifier",
-        "imported": {
-          "type": "Identifier",
-          "name": "capitalize"
-        },
-        "local": {
-          "type": "Identifier",
-          "name": "capitalize"
-        }
-      }
-    ],
-    "source": {
-      "type": "StringLiteral",
-      "extra": {
-        "rawValue": "../utils/helpers",
-        "raw": "'../utils/helpers'"
-      },
-      "value": "../utils/helpers"
-    }
+  "computed": false,
+  "shorthand": false,
+  "value": {
+    "type": "StringLiteral",
+    "extra": {
+      "rawValue": "xxx",
+      "raw": "'xxx'"
+    },
+    "value": "xxx"
   }
-]
-
-
+}

@@ -138,7 +138,7 @@ class DownshiftMultiple extends React.Component<any, any> {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, $system:{classNamesStr} } = this.props;
     const { inputValue, selectedItem } = this.state;
 
     return (
@@ -151,7 +151,7 @@ class DownshiftMultiple extends React.Component<any, any> {
           selectedItem: selectedItem2,
           highlightedIndex,
         }) => (
-          <div className={classes.container}>
+          <div className={classNamesStr(classes.container)}>
             {renderInput({
               fullWidth: true,
               classes,
@@ -218,13 +218,13 @@ const styles = theme => ({
 let popperNode;
 
 function IntegrationDownshift(props) {
-  const { classes } = props;
+  const { classes, $system, $system: {classNamesStr} } = props;
 
   return (
-    <div className={classes.root}>
+    <div className={classNamesStr(classes.root)}>
       <Downshift>
         {({ getInputProps, getItemProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
-          <div className={classes.container}>
+          <div className={classNamesStr(classes.container)}>
             {renderInput({
               fullWidth: true,
               classes,
@@ -249,10 +249,10 @@ function IntegrationDownshift(props) {
           </div>
         )}
       </Downshift>
-      <DownshiftMultiple classes={classes} />
+      <DownshiftMultiple classes={classes} $system={$system} />
       <Downshift>
         {({ getInputProps, getItemProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
-          <div className={classes.container}>
+          <div className={classNamesStr(classes.container)}>
             {renderInput({
               fullWidth: true,
               classes,

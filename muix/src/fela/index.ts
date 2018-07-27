@@ -1,12 +1,11 @@
-import React from 'react'
-import { createRenderer, combineRules } from 'fela'
-import { render } from 'fela-dom'
-import pluginExtend from 'fela-plugin-extend'
-import pluginPrefixer from 'fela-plugin-prefixer'
-import pluginFallbackValue from 'fela-plugin-fallback-value'
-import pluginLvha from 'fela-plugin-lvha'
-import pluginUnit from 'fela-plugin-unit'
-import pluginRtl from 'fela-plugin-rtl'
+import { createRenderer } from 'fela';
+import { render } from 'fela-dom';
+import pluginExtend from 'fela-plugin-extend';
+import pluginFallbackValue from 'fela-plugin-fallback-value';
+import pluginLvha from 'fela-plugin-lvha';
+import pluginPrefixer from 'fela-plugin-prefixer';
+import pluginUnit from 'fela-plugin-unit';
+import React from 'react';
 
 const plugins = {
   plugins: [
@@ -55,32 +54,29 @@ export const keyFrameToClassNames = (keyFrame: React.CSSProperties) => keyFrame 
 //  return res
 //}
 
-export const getClassSelectors = (names:string[]) => {
-  const res: Record<string,string> = {}
-  names.forEach(name => {
-    let id = namesCount[name]
-    if (!id) id = namesCount[name] = 1
-    else id = namesCount[name] = id++
-    res[name] = `.${name}-${id}`
-  })
-  return res
-}
-const namesCount: Record<string, number> = {}
+// export const getClassSelectors = (names:string[]) => {
+//   const res: Record<string,string> = {}
+//   names.forEach(name => {
+//     let id = namesCount[name]
+//     if (!id) id = namesCount[name] = 1
+//     else id = namesCount[name] = id++
+//     res[name] = `.${name}-${id}`
+//   })
+//   return res
+// }
+// const namesCount: Record<string, number> = {}
 
-export const rulesetToClassNames2 = (ruleset: React.CSSProperties) => {
+export const rulesetToClassNamesMUI = (ruleset: React.CSSProperties) => {
   if (!ruleset) return ''
-  let fixed:string[] = null
+
+  const generate = ruleset['GENERATE']
   let rs = ruleset
-  for (const p in rs) {
-    if (p.substr(0, 3) === 'id.') {
-      if (!fixed) {
-        rs = { ...ruleset }
-        fixed = []
-      }
-      delete rs[p]
-      fixed.push(p.substr(3))
-    }
+  if (generate) {
+    rs = {...ruleset}
+    delete rs['GENERATE']
   }
-  const res = renderer.renderRule(() => rs, {}) + (fixed ? ' ' + fixed.join(' ') : '')
+
+  const res = renderer.renderRule(() => rs, {}) + (generate ? ' ' + generate : '')
+
   return res
 }
