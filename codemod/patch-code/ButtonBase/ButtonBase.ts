@@ -5,11 +5,11 @@ import * as Queries from '../../utils/queries'
 import { Specials } from '../../tasks'
 
 export const registerButtonBase = (specials: Specials) => {
-    specials['ButtonBase/Ripple'] = { transform: Tasks.taskDefaultCreator() }
-    specials['ButtonBase/ButtonBase'] = { transform: Tasks.taskDefaultCreator(['ComponentProp']) }
+    specials['ButtonBase/Ripple'] = { transform: Tasks.withStylesTaskDefaultCreator() }
+    specials['ButtonBase/ButtonBase'] = { transform: Tasks.withStylesTaskDefaultCreator(['ComponentProp']) }
     specials['ButtonBase/TouchRipple'] = {
         transform: (ast, info) => {
-            const res = Tasks.taskDefaultCreator(['TransitionGroup'])(ast, info)
+            const res = Tasks.withStylesTaskDefaultCreator(['TransitionGroup'])(ast, info)
             const rippleAttrs = Queries.checkSingleResult(Ast.astq().query(res, `// JSXOpeningElement [ /JSXIdentifier [@name == "Ripple"] ]`))
             rippleAttrs.attributes.push({
                 "type": "JSXAttribute",

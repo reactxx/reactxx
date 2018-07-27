@@ -23,9 +23,11 @@ import Button from 'reactxx-mui-web/Button'
 //import App from '../common/mediaq/me1'
 //const App: React.SFC = () => <Button>Hallo world</Button>
 
-import App from '../common/muix/buttons'
+//import App from '../common/muix/buttons'
 //import App from '../common/muix/paper'
 //import App from '../common/muix/appbar'
+//import App from '../common/muix/autocomplete'
+import App from './fela'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

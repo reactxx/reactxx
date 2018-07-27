@@ -28,7 +28,7 @@ renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html
   padding: 0,
   overflow: 'hidden',
 }, 'html, body, #root')
-renderer.renderStatic({fontFamily: 'Roboto'}, 'body')
+renderer.renderStatic({ fontFamily: 'Roboto' }, 'body')
 renderer.renderStatic({ boxSizing: 'border-box' }, '*')
 renderer.renderStatic({ display: 'flex', flexDirection: 'column', alignItems: 'stretch' }, '#root')
 
@@ -55,3 +55,32 @@ export const keyFrameToClassNames = (keyFrame: React.CSSProperties) => keyFrame 
 //  return res
 //}
 
+export const getClassSelectors = (names:string[]) => {
+  const res: Record<string,string> = {}
+  names.forEach(name => {
+    let id = namesCount[name]
+    if (!id) id = namesCount[name] = 1
+    else id = namesCount[name] = id++
+    res[name] = `.${name}-${id}`
+  })
+  return res
+}
+const namesCount: Record<string, number> = {}
+
+export const rulesetToClassNames2 = (ruleset: React.CSSProperties) => {
+  if (!ruleset) return ''
+  let fixed:string[] = null
+  let rs = ruleset
+  for (const p in rs) {
+    if (p.substr(0, 3) === 'id.') {
+      if (!fixed) {
+        rs = { ...ruleset }
+        fixed = []
+      }
+      delete rs[p]
+      fixed.push(p.substr(3))
+    }
+  }
+  const res = renderer.renderRule(() => rs, {}) + (fixed ? ' ' + fixed.join(' ') : '')
+  return res
+}

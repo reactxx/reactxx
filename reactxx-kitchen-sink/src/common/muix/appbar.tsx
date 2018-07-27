@@ -5,7 +5,7 @@ import Toolbar from 'reactxx-mui-web/Toolbar/Toolbar';
 import Button from 'reactxx-mui-web/Button/Button';
 import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import { Icon } from 'reactxx-primitives'
-import { Navigation } from 'reactxx-mdi/Navigation'
+import { Menu } from 'reactxx-mdi/Menu'
 import Typography from 'reactxx-mui-web/Typography/Typography';
 
 const styles = {
@@ -21,25 +21,52 @@ const styles = {
   },
 };
 
-function ButtonAppBar(props) {
-  const { classes, className, $system: { classNamesStr, classNames } } = props;
+function SimpleAppBar(props) {
+  const { classes } = props;
   return (
-    <div className={classNamesStr(classes.root, className)}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <Icon data={Navigation}/>
-          </IconButton>
-          <Typography variant="title" color="inherit" className={classNames(classes.flex)}>
-            INFO
+    <div style={{ margin: 20 }}>
+      <h2>Simple App Bar</h2>
+      <div className={classes.root}>
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <Typography variant="title" color="inherit">
+              Photos
           </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
+          </Toolbar>
+        </AppBar>
+      </div>
+      <h2>App Bar with buttons</h2>
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+              <Icon data={Menu} />
+            </IconButton>
+            <Typography variant="title" color="inherit" className={classes.flex}>
+              News
+          </Typography>
+            <Button color="inherit">Login</Button>
+          </Toolbar>
+        </AppBar>
+      </div>
+      <h2>Dense (desktop only)</h2>
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar variant="dense">
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+              <Icon data={Menu} />
+            </IconButton>
+            <Typography variant="title" color="inherit">
+              Photos
+          </Typography>
+          </Toolbar>
+        </AppBar>
+      </div>
     </div>
   );
 }
+
 //const App: React.SFC = props => <Button variant='raised' disabled size='large' color='secondary' >CLICK ME</Button>
-export default withStylesCreator(styles as any, ButtonAppBar)()
+export default withStylesCreator(styles as any, SimpleAppBar)()
 //export default App
 

@@ -19,8 +19,8 @@ export const codeMod = () => {
 
     const { log, code } = readAllCodes()
 
-    try {fsExtra.rmdirSync(Config.reactxxMuiWebShapes)} catch {}
-    try {fsExtra.rmdirSync(Config.reactxxMuiWebShapesDest)} catch {}
+    try { fsExtra.rmdirSync(Config.reactxxMuiWebShapes) } catch { }
+    try { fsExtra.rmdirSync(Config.reactxxMuiWebShapesDest) } catch { }
 
     for (const path in log) {
         const logp = log[path]
@@ -32,7 +32,14 @@ export const codeMod = () => {
             const code = fs.readFileSync(logp.origPath, { encoding: 'utf-8' })
             fsExtra.outputFileSync(logp.srcPath, transformStr(code))
         } else {
-            transform = transform || logp.withStyles && ((specItem && specItem.transform) || Tasks.taskDefaultCreator())
+            if (!transform) {
+                transform = specItem && specItem.transform
+                if (!transform) {
+                    if (logp.withStyles) transform = Tasks.withStylesTaskDefaultCreator()
+                    else if (logp.withTheme) transform = Tasks.withThemeTaskDefaultCreator()
+                    else transform = Tasks.otherTaskDefaultCreator()
+                }
+            }
             if (!transform) continue
             if (!logp.origExists) fsExtra.moveSync(logp.srcPath, logp.origPath)
             const ast = code[path]
@@ -40,16 +47,16 @@ export const codeMod = () => {
             Parser.generateFile(ast, logp.srcPath)
         }
         // TS shape
-        if (logp.withStyles && logp.name!=='SwipeArea') {
-            fsExtra.outputFileSync(Config.reactxxMuiWebShapes + path + '.ts', noKey[logp.name] ? tsShapeNoKey(logp.dir, logp.name) : tsShape(logp.dir, logp.name), {flag:'w'})
+        if (logp.withStyles && logp.name !== 'SwipeArea') {
+            fsExtra.outputFileSync(Config.reactxxMuiWebShapes + path + '.ts', noKey[logp.name] ? tsShapeNoKey(logp.dir, logp.name) : tsShape(logp.dir, logp.name), { flag: 'w' })
         }
     }
 
-    fsExtra.copySync(Config.reactxxMuiWeb, Config.src, {overwrite:true})
+    fsExtra.copySync(Config.reactxxMuiWeb, Config.src, { overwrite: true })
 
 }
 
-const tsShape = (dir:string, name:string) => `
+const tsShape = (dir: string, name: string) => `
 import { TCommon, Types } from 'reactxx-basic';
 import { Theme } from '../../../styles/withStyles';
 import { ${name}ClassKey, ${name}Props } from '../../mui/${dir}/${name}';
@@ -60,7 +67,7 @@ export type Shape = Types.OverwriteShape<{
   theme: Theme
 }>
 `
-const tsShapeNoKey = (dir:string, name:string) => `
+const tsShapeNoKey = (dir: string, name: string) => `
 import { TCommon, Types } from 'reactxx-basic';
 import { Theme } from '../../../styles/withStyles';
 import { ${name}Props } from '../../mui/${dir}/${name}';
@@ -72,14 +79,14 @@ export type Shape = Types.OverwriteShape<{
 `
 
 const noKey = {
-    'Stepper':true,
-    'StepLabel':true,
-    'Step':true,
-    'StepIcon':true,
-    'StepContent':true,
-    'StepConnector':true,
-    'StepButton':true,
-    'HiddenCss':true,
+    'Stepper': true,
+    'StepLabel': true,
+    'Step': true,
+    'StepIcon': true,
+    'StepContent': true,
+    'StepConnector': true,
+    'StepButton': true,
+    'HiddenCss': true,
 }
 
 

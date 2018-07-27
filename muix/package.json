@@ -6,6 +6,8 @@
     "start": "npm run lite"
   },
   "dependencies": {
+    "downshift": "^2.0.19",
+    "keycode": "^2.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "reactxx-mdi": "^0.1.67",
@@ -29,6 +31,8 @@
     "name": "reactxx-all",
     "main": "reactxx-all.js",
     "dependencies": {
+      "classnames": "npm:classnames@^2.2.6",
+      "downshift": "npm:downshift@^2.0.19",
       "fela-dom": "npm:fela-dom@^7.0.4",
       "fela-plugin-extend": "npm:fela-plugin-extend@^6.0.3",
       "fela-plugin-fallback-value": "npm:fela-plugin-fallback-value@^5.0.16",
@@ -39,6 +43,7 @@
       "hoist-non-react-statics": "npm:hoist-non-react-statics@^2.3.1",
       "is-plain-object": "npm:is-plain-object@^2.0.4",
       "jss-preset-default": "npm:jss-preset-default@^4.0.1",
+      "popper.js": "npm:popper.js@^1.14.3",
       "prop-types": "npm:prop-types@^15.6.0",
       "react-jss": "npm:react-jss@^8.1.0",
       "core-js": "npm:core-js@^2.5.1",
@@ -56,7 +61,7 @@
       "jss-nested": "npm:jss-nested@^6.0.1",
       "jss-props-sort": "npm:jss-props-sort@^6.0.0",
       "jss-vendor-prefixer": "npm:jss-vendor-prefixer@^7.0.0",
-      "keycode": "npm:keycode@^2.1.9",
+      "keycode": "npm:keycode@^2.2.0",
       "normalize-scroll-left": "npm:normalize-scroll-left@^0.1.2",
       "react-event-listener": "npm:react-event-listener@^0.6.0",
       "react-popper": "npm:react-popper@^0.10.0",
@@ -111,7 +116,7 @@
       "npm:safe-buffer@5.1.2": {
         "browser": "index.js"
       },
-      "npm:tslib@1.9.0": {
+      "npm:tslib@1.9.3": {
         "format": "cjs",
         "meta": {
           "tslib.js": {
