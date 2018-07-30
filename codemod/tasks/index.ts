@@ -8,12 +8,14 @@ import * as fsExtra from 'fs-extra';
 import * as Tasks from './default-modifier'
 
 import { registerButtonBase } from '../patch-code/ButtonBase/ButtonBase'
+import { registerInput } from '../patch-code/Input/Input'
 
 export type Specials = { [path: string]: Ast.FileDescr }
 
 export const specials: Specials = {}
 
 registerButtonBase(specials)
+registerInput(specials)
 
 export const codeMod = () => {
 

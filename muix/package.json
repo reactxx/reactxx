@@ -82,7 +82,7 @@
       "fs": "npm:jspm-nodelibs-fs@^0.2.0",
       "http": "npm:jspm-nodelibs-http@^0.2.0",
       "https": "npm:jspm-nodelibs-https@^0.2.0",
-      "jss": "npm:jss@^9.7.0",
+      "jss": "npm:jss@^9.4.0",
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",

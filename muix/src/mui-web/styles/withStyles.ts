@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { RenderAddIn, TCommon, ThemeProviderUntyped, TProvider, Types, withStyles } from 'reactxx-basic';
-import { renderer, rulesetsToClassNames } from 'reactxx-fela';
+import { renderer, rulesetToClassNamesMUI } from 'reactxx-fela';
 import { Theme as MuiTheme } from '../typings/mui/styles/createMuiTheme'
 import { default as createMuiTheme } from 'reactxx-mui-web/styles/createMuiTheme';
 
@@ -161,5 +161,5 @@ const renderAddIn: RenderAddIn = {
   styleAddInPipeline: (renderState, next) => next,
   getDefaultTheme: () => createMuiTheme() as Theme,
   createSheetHook: createSheetHook,
-  rulesetsToClassNames: rulesetsToClassNames,
+  rulesetsToClassNames: rulesetToClassNamesMUI,
 }
