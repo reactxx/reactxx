@@ -34,6 +34,9 @@ renderer.renderStatic({ display: 'flex', flexDirection: 'column', alignItems: 's
 
 render(renderer)
 
+var replAmpersand = /&/g.compile
+
+
 //Converts ruleset to blank delimited atomic classes
 export const rulesetToClassNames = (ruleset: React.CSSProperties) => ruleset ? renderer.renderRule(() => ruleset, {}) : ''
 export const rulesetsToClassNames = (...rulesets: React.CSSProperties[]) => {
