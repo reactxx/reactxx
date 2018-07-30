@@ -207,14 +207,6 @@ SystemJS.config({
         "css-in-js-utils": "npm:css-in-js-utils@2.0.1"
       }
     },
-    "npm:fela@6.1.9": {
-      "map": {
-        "isobject": "npm:isobject@3.0.1",
-        "css-in-js-utils": "npm:css-in-js-utils@2.0.1",
-        "fast-loops": "npm:fast-loops@1.0.1",
-        "fela-utils": "npm:fela-utils@8.0.8"
-      }
-    },
     "npm:is-plain-object@2.0.4": {
       "map": {
         "isobject": "npm:isobject@3.0.1"
@@ -700,6 +692,14 @@ SystemJS.config({
     "npm:iconv-lite@0.4.23": {
       "map": {
         "safer-buffer": "npm:safer-buffer@2.1.2"
+      }
+    },
+    "npm:fela@6.1.9": {
+      "map": {
+        "fast-loops": "npm:fast-loops@1.0.1",
+        "fela-utils": "npm:fela-utils@8.0.8",
+        "css-in-js-utils": "npm:css-in-js-utils@2.0.1",
+        "isobject": "npm:isobject@3.0.1"
       }
     }
   }

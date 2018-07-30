@@ -8,7 +8,7 @@ import Popper from 'reactxx-mui-web/Popper/Popper';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import TextField from 'reactxx-mui-web/TextField/TextField';
 
-const suggestions = [
+const suggestions = [ 
   { label: 'Afghanistan' },
   { label: 'Aland Islands' },
   { label: 'Albania' },

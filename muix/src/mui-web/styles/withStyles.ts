@@ -16,7 +16,7 @@ const withStylesCreator =
 export default withStylesCreator
 
 // for MUI RIPPLE
-renderer.renderStatic( ['keyframes', '-webkit-keyframes'].map(keyframes => `
+renderer.renderStatic(['keyframes', '-webkit-keyframes'].map(keyframes => `
 @${keyframes} mui-ripple-enter {
   0% {
     opacity: 0.1;
@@ -129,29 +129,29 @@ function modifyRuleset(sheet: {}, rulesetName: string) {
     delete sheet[rulesetName]
     return
   }
-const ruleset = sheet[rulesetName]
+  const ruleset = sheet[rulesetName]
   let $whenUsed = null
   Object.keys(ruleset).forEach(ruleName => {
     const rule = ruleset[ruleName]
-    const pseudoClasses = rx$pseudoClasses.exec(ruleName) 
-    if (pseudoClasses) {
-      ruleset[pseudoClasses[1]] = rule
+    // const pseudoClasses = rx$pseudoClasses.exec(ruleName) 
+    // if (false && pseudoClasses) {
+    //   ruleset[pseudoClasses[1]] = rule
+    //   delete ruleset[ruleName]
+    // } else {
+    const whenUsed = rx$whenUsed.exec(ruleName)
+    if (whenUsed) {
+      ($whenUsed || ($whenUsed = {}))[whenUsed[1]] = rule
       delete ruleset[ruleName]
-    } else {
-      const whenUsed = rx$whenUsed.exec(ruleName)
-      if (whenUsed) {
-        ($whenUsed || ($whenUsed = {}))[whenUsed[1]] = rule
-        delete ruleset[ruleName]
-      } else if (rule && typeof rule === 'object') {
-        modifyRuleset(ruleset, ruleName)
-      }
+    } else if (rule && typeof rule === 'object') {
+      modifyRuleset(ruleset, ruleName)
     }
+    //}
   })
   if ($whenUsed)
     ruleset['$whenUsed'] = $whenUsed
 }
 
-const rx$pseudoClasses = /&(:(:)?((\w|-)+))$/
+//const rx$pseudoClasses = /&(:(:)?((\w|-)+))$/
 const rx$whenUsed = /&\$(\w+)$/
 
 

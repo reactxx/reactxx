@@ -319,7 +319,7 @@ muix/src/ks
 !docs/bundle/
 !docs/bundle/index.js
 
-!muix/src/material-ui/**/*.js
+!muix/src/mui-web/**/*.js
 !codemod/patch-original/**/*.js
 
 muix/tsconfig.json

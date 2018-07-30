@@ -6,7 +6,7 @@
 //https://github.com/isaacs/node-glob
 
 //https://github.com/rse/astq
-const driver = 'c:/'
+const driver = 'd:/'
 const basicReactXX = driver + 'reactxx/muix/'
 export const src = basicReactXX + 'src/mui-web/'
 export const reactxxMuiWeb = basicReactXX + 'src/muix/reactxx-mui-web/'

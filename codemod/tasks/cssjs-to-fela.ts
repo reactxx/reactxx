@@ -60,24 +60,20 @@ export const cssjsToFela = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
     if (!key || !value) 
       return
     if (!usedRulesetNames[key.name]) return
-    const className = `${key.name}-${counter}`
+    const className = `${key.name}${counter}`
     value.properties.push(
       {
         "type": "ObjectProperty",
         "method": false,
         "key": {
           "type": "Identifier",
-          "name": "GENERATE"
+          "name": `NAME$${className}`
         },
         "computed": false,
         "shorthand": false,
         "value": {
-          "type": "StringLiteral",
-          "extra": {
-            "rawValue": className,
-            "raw": `'${className}'`
-          },
-          "value": className
+          "type": "BooleanLiteral",
+          "value": true
         }
       }
     )
@@ -98,7 +94,7 @@ const patchCode = (codeStr: string, counter: number, usedRulesetNames: Record<st
     lastIndex = match.index + match.text.length + 1
     if (match.text != '') {
       usedRulesetNames[match.text] = true
-      parts.push(`.${match.text}-${counter}`)
+      parts.push(`.${match.text}${counter}`)
     }
   })
   return parts.join('')

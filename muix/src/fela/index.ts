@@ -72,14 +72,25 @@ export const keyFrameToClassNames = (keyFrame: React.CSSProperties) => keyFrame 
 export const rulesetToClassNamesMUI = (ruleset: React.CSSProperties) => {
   if (!ruleset) return ''
 
-  const generate = ruleset['GENERATE']
   let rs = ruleset
-  if (generate) {
-    rs = {...ruleset}
-    delete rs['GENERATE']
+  let empty = true
+  let forceRuleNames: string[] = null
+  for (const p in ruleset) {
+    if (!p.startsWith(forceRuleName)) {
+      empty = false
+      continue
+    }
+    if (rs===ruleset) {
+      rs = {...ruleset}
+      forceRuleNames = []
+    }
+    forceRuleNames.push(p.substr(forceRuleName.length))
+    delete rs[p]
   }
 
-  const res = renderer.renderRule(() => rs, {}) + (generate ? ' ' + generate : '')
+  const res = (empty ? '' : renderer.renderRule(() => rs, {})) + (forceRuleNames ? ' ' + forceRuleNames.join(' ') : '')
 
   return res
 }
+
+const forceRuleName = 'NAME$'

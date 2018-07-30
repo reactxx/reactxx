@@ -134,7 +134,7 @@ const ruleset = sheet[rulesetName]
   Object.keys(ruleset).forEach(ruleName => {
     const rule = ruleset[ruleName]
     const pseudoClasses = rx$pseudoClasses.exec(ruleName) 
-    if (pseudoClasses) {
+    if (false && pseudoClasses) {
       ruleset[pseudoClasses[1]] = rule
       delete ruleset[ruleName]
     } else {
