@@ -10,7 +10,7 @@ import { isFilled } from '../Input/Input';
 
 class SelectInput extends React.Component {
   ignoreNextBlur = false;
-  displayNode = null;
+  displayRef = null;
   isOpenControlled = this.props.open !== undefined;
   state = {
     menuMinWidth: null,
@@ -21,13 +21,13 @@ class SelectInput extends React.Component {
     if (this.isOpenControlled && this.props.open) {
       // Focus the display node so the focus is restored on this element once
       // the menu is closed.
-      this.displayNode.focus(); // Rerender with the resolve `displayNode` reference.
+      this.displayRef.focus(); // Rerender with the resolve `displayRef` reference.
 
       this.forceUpdate();
     }
 
     if (this.props.autoFocus) {
-      this.displayNode.focus();
+      this.displayRef.focus();
     }
   }
 
@@ -47,7 +47,7 @@ class SelectInput extends React.Component {
 
     this.setState({
       // Perfom the layout computation outside of the render method.
-      menuMinWidth: this.props.autoWidth ? null : this.displayNode.clientWidth,
+      menuMinWidth: this.props.autoWidth ? null : this.displayRef.clientWidth,
       open
     });
   };
@@ -80,11 +80,6 @@ class SelectInput extends React.Component {
 
     if (onChange) {
       let value;
-      let target;
-
-      if (event.target) {
-        target = event.target;
-      }
 
       if (this.props.multiple) {
         value = Array.isArray(this.props.value) ? [...this.props.value] : [];
@@ -100,7 +95,7 @@ class SelectInput extends React.Component {
       }
 
       event.persist();
-      event.target = { ...target,
+      event.target = {
         value,
         name
       };
@@ -134,10 +129,10 @@ class SelectInput extends React.Component {
       });
     }
   };
-  handleDisplayRef = node => {
-    this.displayNode = node;
+  handleDisplayRef = ref => {
+    this.displayRef = ref;
   };
-  handleInputRef = node => {
+  handleInputRef = ref => {
     const {
       inputRef
     } = this.props;
@@ -147,7 +142,7 @@ class SelectInput extends React.Component {
     }
 
     const nodeProxy = {
-      node,
+      node: ref,
       // By pass the native input as we expose a rich object (array).
       value: this.props.value
     };
@@ -161,6 +156,11 @@ class SelectInput extends React.Component {
 
   render() {
     const {
+      $system: {
+        classNames,
+        classNamesStr,
+        theme
+      },
       autoWidth,
       children,
       classes,
@@ -187,7 +187,7 @@ class SelectInput extends React.Component {
       value,
       ...other
     } = this.props;
-    const open = this.isOpenControlled && this.displayNode ? openProp : this.state.open;
+    const open = this.isOpenControlled && this.displayRef ? openProp : this.state.open;
     delete other['aria-invalid'];
     let display;
     let displaySingle = '';
@@ -246,8 +246,8 @@ class SelectInput extends React.Component {
 
     let menuMinWidth = this.state.menuMinWidth;
 
-    if (!autoWidth && this.isOpenControlled && this.displayNode) {
-      menuMinWidth = this.displayNode.clientWidth;
+    if (!autoWidth && this.isOpenControlled && this.displayRef) {
+      menuMinWidth = this.displayRef.clientWidth;
     }
 
     let tabIndex;
@@ -258,10 +258,8 @@ class SelectInput extends React.Component {
       tabIndex = disabled ? null : 0;
     }
 
-    return <div className={classes.root}>
-        <div className={classNames(classes.select, classes.selectMenu, {
-        [classes.disabled]: disabled
-      }, className)} ref={this.handleDisplayRef} data-mui-test="SelectDisplay" aria-pressed={open ? 'true' : 'false'} tabIndex={tabIndex} role="button" aria-owns={open ? `menu-${name || ''}` : null} aria-haspopup="true" onKeyDown={this.handleKeyDown} onBlur={this.handleBlur} onClick={disabled || readOnly ? null : this.handleClick} onFocus={onFocus} {...SelectDisplayProps}>
+    return <div className={classNamesStr(classes.root)}>
+        <div className={classNamesStr(classes.select, classes.selectMenu, disabled && classes.disabled, className)} ref={this.handleDisplayRef} data-mui-test="SelectDisplay" aria-pressed={open ? 'true' : 'false'} tabIndex={tabIndex} role="button" aria-owns={open ? `menu-${name || ''}` : null} aria-haspopup="true" onKeyDown={this.handleKeyDown} onBlur={this.handleBlur} onClick={disabled || readOnly ? null : this.handleClick} onFocus={onFocus} {...SelectDisplayProps}>
           {
           /* So the vertical align positioning algorithm quicks in. */
         }
@@ -274,7 +272,7 @@ class SelectInput extends React.Component {
         </div>
         <input value={Array.isArray(value) ? value.join(',') : value} name={name} ref={this.handleInputRef} type={type} {...other} />
         <IconComponent className={classes.icon} />
-        <Menu id={`menu-${name || ''}`} anchorEl={this.displayNode} open={open} onClose={this.handleClose} {...MenuProps} MenuListProps={{
+        <Menu id={`menu-${name || ''}`} anchorEl={this.displayRef} open={open} onClose={this.handleClose} {...MenuProps} MenuListProps={{
         role: 'listbox',
         ...MenuProps.MenuListProps
       }} PaperProps={{ ...MenuProps.PaperProps,

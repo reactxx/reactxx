@@ -2,13 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     position: 'relative',
     display: 'flex',
     alignItems: 'center'
   },
+
+  /* Styles applied to the root element if `disableGutters={false}`. */
   gutters: theme.mixins.gutters(),
+
+  /* Styles applied to the root element if `variant="regular"`. */
   regular: theme.mixins.toolbar,
+
+  /* Styles applied to the root element if `variant="dense"`. */
   dense: {
     minHeight: 48
   }
@@ -18,7 +25,8 @@ function Toolbar(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     children,
     classes,
@@ -33,7 +41,7 @@ function Toolbar(props) {
     </div>;
 }
 
-const defaultProps = {
+const defaultProps = Toolbar.defaultProps = {
   disableGutters: false,
   variant: 'regular'
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = {
+  /* Styles applied to the root element. */
   root: {
     display: 'table-row-group'
   }
@@ -21,7 +22,8 @@ class TableBody extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       classes,
       className,
@@ -36,7 +38,7 @@ class TableBody extends React.Component {
 TableBody.childContextTypes = {
   table: PropTypes.object
 };
-const defaultProps = {
+const defaultProps = TableBody.defaultProps = {
   component: 'tbody'
 };
 

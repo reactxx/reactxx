@@ -5,6 +5,7 @@ import KeyboardArrowRight from '../internal/svg-icons/KeyboardArrowRight';
 import withStyles from '../styles/withStyles';
 import ButtonBase from "../ButtonBase/ButtonBase";
 export const styles = {
+  /* Styles applied to the root element. */
   root: {
     color: 'inherit',
     flex: '0 0 56px'
@@ -18,7 +19,8 @@ function TabScrollButton(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     classes,
     className: classNameProp,
@@ -38,7 +40,7 @@ function TabScrollButton(props) {
     </ButtonBase>;
 }
 
-const defaultProps = {
+const defaultProps = TabScrollButton.defaultProps = {
   visible: true
 };
 

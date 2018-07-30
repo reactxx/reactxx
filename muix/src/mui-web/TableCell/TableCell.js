@@ -4,6 +4,7 @@ import withStyles from '../styles/withStyles';
 import { capitalize } from '../utils/helpers';
 import { darken, fade, lighten } from '../styles/colorManipulator';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     display: 'table-cell',
     verticalAlign: 'inherit',
@@ -17,35 +18,49 @@ export const styles = theme => ({
       paddingRight: 24
     }
   },
+
+  /* Styles applied to the root element if `variant="head"` or `context.table.head`. */
   head: {
     color: theme.palette.text.secondary,
     fontSize: theme.typography.pxToRem(12),
     fontWeight: theme.typography.fontWeightMedium
   },
+
+  /* Styles applied to the root element if `variant="body"` or `context.table.body`. */
   body: {
     color: theme.palette.text.primary,
     fontSize: theme.typography.pxToRem(13),
     fontWeight: theme.typography.fontWeightRegular
   },
+
+  /* Styles applied to the root element if `variant="footer"` or `context.table.footer`. */
   footer: {
     borderBottom: 0,
     color: theme.palette.text.secondary,
     fontSize: theme.typography.pxToRem(12)
   },
+
+  /* Styles applied to the root element if `numeric={true}`. */
   numeric: {
     textAlign: 'right',
     flexDirection: 'row-reverse' // can be dynamically inherited at runtime by contents
 
   },
+
+  /* Styles applied to the root element if `padding="dense"`. */
   paddingDense: {
     paddingRight: 24
   },
+
+  /* Styles applied to the root element if `padding="checkbox"`. */
   paddingCheckbox: {
     padding: '0 12px',
     '&:last-child': {
       paddingRight: 12
     }
   },
+
+  /* Styles applied to the root element if `padding="none"`. */
   paddingNone: {
     padding: 0,
     '&:last-child': {
@@ -58,7 +73,8 @@ function TableCell(props, context) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     children,
     classes,
@@ -103,7 +119,7 @@ function TableCell(props, context) {
 TableCell.contextTypes = {
   table: PropTypes.object.isRequired
 };
-const defaultProps = {
+const defaultProps = TableCell.defaultProps = {
   numeric: false,
   padding: 'default'
 };

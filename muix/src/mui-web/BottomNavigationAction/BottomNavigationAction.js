@@ -5,6 +5,7 @@ import withStyles from '../styles/withStyles';
 import ButtonBase from "../ButtonBase/ButtonBase";
 import unsupportedProp from '../utils/unsupportedProp';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     transition: theme.transitions.create(['color', 'padding-top'], {
       duration: theme.transitions.duration.short
@@ -25,12 +26,18 @@ export const styles = theme => ({
       color: theme.palette.primary.main
     }
   },
+
+  /* Styles applied to the root element if selected. */
   selected: {
     NAME$selected6: true
   },
+
+  /* Styles applied to the root element if `showLabel={false}` and not selected. */
   iconOnly: {
     NAME$iconOnly6: true
   },
+
+  /* Styles applied to the span element that wraps the icon and label. */
   wrapper: {
     display: 'inline-flex',
     alignItems: 'center',
@@ -38,6 +45,8 @@ export const styles = theme => ({
     width: '100%',
     flexDirection: 'column'
   },
+
+  /* Styles applied to the label's span element. */
   label: {
     fontFamily: theme.typography.fontFamily,
     fontSize: theme.typography.pxToRem(12),
@@ -75,7 +84,8 @@ class BottomNavigationAction extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       classes,
       className: classNameProp,

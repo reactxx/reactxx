@@ -6,23 +6,34 @@ import { lighten } from '../styles/colorManipulator';
 const TRANSITION_DURATION = 4; // seconds
 
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     position: 'relative',
     overflow: 'hidden',
     height: 5
   },
+
+  /* Styles applied to the root & bar2 element if `color="primary"`; bar2 if `variant-"buffer"`. */
   colorPrimary: {
     backgroundColor: lighten(theme.palette.primary.light, 0.6)
   },
+
+  /* Styles applied to the root & bar2 elements if `color="secondary"`; bar2 if variant="buffer". */
   colorSecondary: {
     backgroundColor: lighten(theme.palette.secondary.light, 0.4)
   },
+
+  /* Styles applied to the root element if `variant="buffer"`. */
   buffer: {
     backgroundColor: 'transparent'
   },
+
+  /* Styles applied to the root element if `variant="query"`. */
   query: {
     transform: 'rotate(180deg)'
   },
+
+  /* Styles applied to the additional bar element if `variant="buffer"`. */
   dashed: {
     position: 'absolute',
     marginTop: 0,
@@ -30,16 +41,22 @@ export const styles = theme => ({
     width: '100%',
     animation: 'buffer 3s infinite linear'
   },
+
+  /* Styles applied to the additional bar element if `variant="buffer"` & `color="primary"`. */
   dashedColorPrimary: {
     backgroundImage: `radial-gradient(${lighten(theme.palette.primary.light, 0.6)} 0%, ${lighten(theme.palette.primary.light, 0.6)} 16%, transparent 42%)`,
     backgroundSize: '10px 10px',
     backgroundPosition: '0px -23px'
   },
+
+  /* Styles applied to the additional bar element if `variant="buffer"` & `color="secondary"`. */
   dashedColorSecondary: {
     backgroundImage: `radial-gradient(${lighten(theme.palette.secondary.light, 0.4)} 0%, ${lighten(theme.palette.secondary.light, 0.6)} 16%, transparent 42%)`,
     backgroundSize: '10px 10px',
     backgroundPosition: '0px -23px'
   },
+
+  /* Styles applied to the layered bar1 & bar2 elements. */
   bar: {
     width: '100%',
     position: 'absolute',
@@ -49,31 +66,48 @@ export const styles = theme => ({
     transition: 'transform 0.2s linear',
     transformOrigin: 'left'
   },
+
+  /* Styles applied to the bar elements if `color="primary"`; bar2 if `variant` not "buffer". */
   barColorPrimary: {
     backgroundColor: theme.palette.primary.main
   },
+
+  /* Styles applied to the bar elements if `color="secondary"`; bar2 if `variant` not "buffer". */
   barColorSecondary: {
     backgroundColor: theme.palette.secondary.main
   },
+
+  /* Styles applied to the bar1 element if `variant="indeterminate or query"`. */
   bar1Indeterminate: {
     width: 'auto',
     willChange: 'left, right',
     animation: 'mui-indeterminate1 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite'
   },
+
+  /* Styles applied to the bar1 element if `variant="determinate"`. */
+  bar1Determinate: {
+    willChange: 'transform',
+    transition: `transform .${TRANSITION_DURATION}s linear`
+  },
+
+  /* Styles applied to the bar1 element if `variant="buffer"`. */
+  bar1Buffer: {
+    zIndex: 1,
+    transition: `transform .${TRANSITION_DURATION}s linear`
+  },
+
+  /* Styles applied to the bar2 element if `variant="indeterminate or query"`. */
   bar2Indeterminate: {
     width: 'auto',
     willChange: 'left, right',
     animation: 'mui-indeterminate2 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite',
     animationDelay: '1.15s'
   },
-  bar1Determinate: {
-    willChange: 'transform',
-    transition: `transform .${TRANSITION_DURATION}s linear`
-  },
-  bar1Buffer: {
-    zIndex: 1,
-    transition: `transform .${TRANSITION_DURATION}s linear`
-  },
+
+  /* Styles applied to the bar2 element if `variant="determinate"`. */
+  bar2Determinate: {},
+
+  /* Styles applied to the bar2 element if `variant="buffer"`. */
   bar2Buffer: {
     transition: `transform .${TRANSITION_DURATION}s linear`
   },
@@ -140,7 +174,8 @@ function LinearProgress(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     classes,
     className: classNameProp,
@@ -153,7 +188,7 @@ function LinearProgress(props) {
   const className = classNames(classes.root, color === 'primary' && classes.colorPrimary, color === 'secondary' && classes.colorSecondary, variant === 'buffer' && classes.buffer, variant === 'query' && classes.query, classNameProp);
   const dashedClass = classNames(classes.dashed, color === 'primary' && classes.dashedColorPrimary, color === 'secondary' && classes.dashedColorSecondary);
   const bar1ClassName = classNames(classes.bar, color === 'primary' && classes.barColorPrimary, color === 'secondary' && classes.barColorSecondary, (variant === 'indeterminate' || variant === 'query') && classes.bar1Indeterminate, variant === 'determinate' && classes.bar1Determinate, variant === 'buffer' && classes.bar1Buffer);
-  const bar2ClassName = classNames(classes.bar, color === 'primary' && variant !== 'buffer' && classes.barColorPrimary, color === 'primary' && variant === 'buffer' && classes.colorPrimary, color === 'secondary' && variant !== 'buffer' && classes.barColorSecondary, color === 'secondary' && variant === 'buffer' && classes.colorSecondary, (variant === 'indeterminate' || variant === 'query') && classes.bar2Indeterminate, variant === 'buffer' && classes.bar2Buffer);
+  const bar2ClassName = classNames(classes.bar, color === 'primary' && variant !== 'buffer' && classes.barColorPrimary, color === 'primary' && variant === 'buffer' && classes.colorPrimary, color === 'secondary' && variant !== 'buffer' && classes.barColorSecondary, color === 'secondary' && variant === 'buffer' && classes.colorSecondary, (variant === 'indeterminate' || variant === 'query') && classes.bar2Indeterminate, variant === 'determinate' && classes.bar2Determinate, variant === 'buffer' && classes.bar2Buffer);
   const rootProps = {};
   const inlineStyles = {
     bar1: {},
@@ -184,7 +219,7 @@ function LinearProgress(props) {
     </div>;
 }
 
-const defaultProps = {
+const defaultProps = LinearProgress.defaultProps = {
   color: 'primary',
   variant: 'indeterminate'
 };

@@ -25,7 +25,8 @@ class Ripple extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       classes,
       className: classNameProp,

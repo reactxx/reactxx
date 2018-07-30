@@ -67,16 +67,17 @@ export type FinishAddIns = { [addInName: string]: FinishAddIn }
 export const finishProps = (root: Sheet, onFinishAddInProps: FinishAddIns) => {
   root = linearize(root) // in-place processing of $before, $web, $native and $after ruleset props
   extractPropsPatches(root) as SheetWithAddIns // move props (starting with $, e.g. $mediaq) to root.$system
-  // move $ props (for which onFinishAddInProps exists) to root.$system.addIns
-  if (root.$system && onFinishAddInProps) for (const p in root.$system) {
-    const finish = onFinishAddInProps[p]
-    if (finish) {
-      finish(root.$system[p])
-      //const addIns = root.$system.addIns || (root.$system.addIns = {})
-      //addIns[p] = finish(root.$system[p])
-      //delete root.$system[p]
+  // move $-props (for which onFinishAddInProps exists) to root.$system.addIns
+  if (root.$system && onFinishAddInProps)
+    for (const p in root.$system) {
+      const finish = onFinishAddInProps[p]
+      if (finish) {
+        finish(root.$system[p])
+        //const addIns = root.$system.addIns || (root.$system.addIns = {})
+        //addIns[p] = finish(root.$system[p])
+        //delete root.$system[p]
+      }
     }
-  }
   return root
 }
 
@@ -391,7 +392,7 @@ export const immutableMerge = (sources: Node[]) => {
       case 2: dest = { ...dest } // !!! does not break thi case, continue with merging on flat clone
       default: // merge flat cloned dest with src
         for (const propName in src) {
-          if (propName.charAt(0)==='#') continue
+          if (propName.charAt(0) === '#') continue
           const destp = dest[propName], srcp = src[propName] as Node
           if (!destp) { dest[propName] = srcp; continue } // set first scalar or object
           const isDestpObj = isObject(destp), isSrcpObj = isObject(srcp)

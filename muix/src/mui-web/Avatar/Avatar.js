@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     position: 'relative',
     display: 'flex',
@@ -16,10 +17,16 @@ export const styles = theme => ({
     overflow: 'hidden',
     userSelect: 'none'
   },
+
+  /* Styles applied to the root element if there are children and not `src` or `srcSet` */
+
+  /* Styles applied to the root element if `color="default"`. */
   colorDefault: {
     color: theme.palette.background.default,
     backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[400] : theme.palette.grey[600]
   },
+
+  /* Styles applied to the img element if either `src` or `srcSet` is defined. */
   img: {
     width: '100%',
     height: '100%',
@@ -33,7 +40,8 @@ function Avatar(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     alt,
     children: childrenProp,
@@ -68,7 +76,7 @@ function Avatar(props) {
     </Component>;
 }
 
-const defaultProps = {
+const defaultProps = Avatar.defaultProps = {
   component: 'div'
 };
 

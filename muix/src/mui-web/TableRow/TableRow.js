@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     color: 'inherit',
     display: 'table-row',
@@ -18,15 +19,23 @@ export const styles = theme => ({
       : 'rgba(255, 255, 255, 0.14)'
     }
   },
+
+  /* Styles applied to the root element if `context.table` & `selected={true}`. */
   selected: {
     NAME$selected84: true
   },
+
+  /* Styles applied to the root element if `context.table` & `hover={true}`. */
   hover: {
     NAME$hover84: true
   },
+
+  /* Styles applied to the root element if `context.table.head`. */
   head: {
     height: 56
   },
+
+  /* Styles applied to the root element if `context.table.footer`. */
   footer: {
     height: 56
   }
@@ -40,7 +49,8 @@ function TableRow(props, context) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     classes,
     className: classNameProp,
@@ -59,7 +69,7 @@ function TableRow(props, context) {
 TableRow.contextTypes = {
   table: PropTypes.object
 };
-const defaultProps = {
+const defaultProps = TableRow.defaultProps = {
   component: 'tr',
   hover: false,
   selected: false

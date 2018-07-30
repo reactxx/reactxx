@@ -57,6 +57,7 @@ export const styles = theme => {
   const bottomLineColor = light ? 'rgba(0, 0, 0, 0.42)' : 'rgba(255, 255, 255, 0.7)';
 
   return {
+    /* Styles applied to the root element. */
     root: {
       // Mimics the default input display property used by browsers for an input.
       display: 'inline-flex',
@@ -69,13 +70,17 @@ export const styles = theme => {
         color: theme.palette.text.disabled,
       },
     },
+    /* Styles applied to the root element if the component is a descendant of `FormControl`. */
     formControl: {
       'label + &': {
         marginTop: 16,
       },
     },
+    /* Styles applied to the root element if the component is focused. */
     focused: {},
+    /* Styles applied to the root element if `disabled={true}`. */
     disabled: {},
+    /* Styles applied to the root element if `disabledUnderline={false}`. */
     underline: {
       '&:after': {
         borderBottom: `2px solid ${theme.palette.primary[light ? 'dark' : 'light']}`,
@@ -119,13 +124,17 @@ export const styles = theme => {
         borderBottom: `1px dotted ${bottomLineColor}`,
       },
     },
+    /* Styles applied to the root element if `error={true}`. */
     error: {},
+    /* Styles applied to the root element if `multiline={true}`. */
     multiline: {
       padding: `${8 - 2}px 0 ${8 - 1}px`,
     },
+    /* Styles applied to the root element if `fullWidth={true}`. */
     fullWidth: {
       width: '100%',
     },
+    /* Styles applied to the `input` element. */
     input: {
       font: 'inherit',
       color: 'currentColor',
@@ -171,17 +180,21 @@ export const styles = theme => {
         opacity: 1, // Reset iOS opacity
       },
     },
+    /* Styles applied to the `input` element if `margin="dense"`. */
     inputMarginDense: {
       paddingTop: 4 - 1,
     },
+    /* Styles applied to the `input` element if `multiline={true}`. */
     inputMultiline: {
       resize: 'none',
       padding: 0,
     },
+    /* Styles applied to the `input` element if `type` is not "text"`. */
     inputType: {
       // type="date" or type="time", etc. have specific styles we need to reset.
       height: '1.1875em', // Reset (19px), match the native input line-height
     },
+    /* Styles applied to the `input` element if `type="search"`. */
     inputTypeSearch: {
       // Improve type search style.
       '-moz-appearance': 'textfield',
@@ -194,18 +207,20 @@ function formControlState(props, context) {
   let disabled = props.disabled;
   let error = props.error;
   let margin = props.margin;
+  let required = props.required;
 
   if (context && context.muiFormControl) {
     if (typeof disabled === 'undefined') {
       disabled = context.muiFormControl.disabled;
     }
-
     if (typeof error === 'undefined') {
       error = context.muiFormControl.error;
     }
-
     if (typeof margin === 'undefined') {
       margin = context.muiFormControl.margin;
+    }
+    if (typeof required === 'undefined') {
+      required = context.muiFormControl.required;
     }
   }
 
@@ -213,6 +228,7 @@ function formControlState(props, context) {
     disabled,
     error,
     margin,
+    required,
   };
 }
 
@@ -279,7 +295,7 @@ class Input extends React.Component {
 
   componentDidMount() {
     if (!this.isControlled) {
-      this.checkDirty(this.input);
+      this.checkDirty(this.inputRef);
     }
   }
 
@@ -322,7 +338,7 @@ class Input extends React.Component {
 
   handleChange = event => {
     if (!this.isControlled) {
-      this.checkDirty(this.input);
+      this.checkDirty(this.inputRef);
     }
 
     // Perform in the willUpdate
@@ -331,22 +347,22 @@ class Input extends React.Component {
     }
   };
 
-  handleRefInput = node => {
-    this.input = node;
+  handleRefInput = ref => {
+    this.inputRef = ref;
 
-    let ref;
+    let refProp;
 
     if (this.props.inputRef) {
-      ref = this.props.inputRef;
+      refProp = this.props.inputRef;
     } else if (this.props.inputProps && this.props.inputProps.ref) {
-      ref = this.props.inputProps.ref;
+      refProp = this.props.inputProps.ref;
     }
 
-    if (ref) {
-      if (typeof ref === 'function') {
-        ref(node);
+    if (refProp) {
+      if (typeof refProp === 'function') {
+        refProp(ref);
       } else {
-        ref.current = node;
+        refProp.current = ref;
       }
     }
   };
@@ -409,7 +425,7 @@ class Input extends React.Component {
     } = this.props;
 
     const { muiFormControl } = this.context;
-    const { disabled, error, margin } = formControlState(this.props, this.context);
+    const { disabled, error, margin, required } = formControlState(this.props, this.context);
 
     const className = classNames(
       classes.root,
@@ -436,8 +452,6 @@ class Input extends React.Component {
       },
       inputPropsClassName,
     );
-
-    const required = muiFormControl && muiFormControl.required === true;
 
     let InputComponent = 'input';
     let inputProps = {
@@ -487,7 +501,7 @@ class Input extends React.Component {
           onKeyUp={onKeyUp}
           placeholder={placeholder}
           readOnly={readOnly}
-          required={required ? true : undefined}
+          required={required}
           rows={rows}
           type={type}
           value={value}
@@ -611,9 +625,14 @@ Input.propTypes = {
    */
   placeholder: PropTypes.string,
   /**
-   * @ignore
+   * It prevents the user from changing the value of the field
+   * (not from interacting with the field).
    */
   readOnly: PropTypes.bool,
+  /**
+   * If `true`, the input will be required.
+   */
+  required: PropTypes.bool,
   /**
    * Number of rows to display when multiline option is set to true.
    */

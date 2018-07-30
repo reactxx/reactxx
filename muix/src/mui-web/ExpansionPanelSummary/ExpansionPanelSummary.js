@@ -9,6 +9,7 @@ export const styles = theme => {
     duration: theme.transitions.duration.shortest
   };
   return {
+    /* Styles applied to the root element. */
     root: {
       display: 'flex',
       minHeight: 8 * 6,
@@ -27,15 +28,23 @@ export const styles = theme => {
         opacity: 0.38
       }
     },
+
+    /* Styles applied to the root element if `expanded={true}`. */
     expanded: {
       NAME$expanded31: true
     },
+
+    /* Styles applied to the root and children wrapper elements when focused. */
     focused: {
       NAME$focused31: true
     },
+
+    /* Styles applied to the root element if `disabled={true}`. */
     disabled: {
       NAME$disabled31: true
     },
+
+    /* Styles applied to the children wrapper element. */
     content: {
       display: 'flex',
       flexGrow: 1,
@@ -48,6 +57,8 @@ export const styles = theme => {
         margin: '20px 0'
       }
     },
+
+    /* Styles applied to the `IconButton` component when `expandIcon` is supplied. */
     expandIcon: {
       position: 'absolute',
       top: '50%',
@@ -100,7 +111,8 @@ class ExpansionPanelSummary extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       children,
       classes,
@@ -128,7 +140,7 @@ class ExpansionPanelSummary extends React.Component {
 }
 
 ExpansionPanelSummary.muiName = 'ExpansionPanelSummary';
-const defaultProps = {
+const defaultProps = ExpansionPanelSummary.defaultProps = {
   disabled: false
 };
 

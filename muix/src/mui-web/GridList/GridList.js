@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import warning from 'warning';
 import withStyles from '../styles/withStyles';
 export const styles = {
+  /* Styles applied to the root element. */
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -18,7 +19,8 @@ function GridList(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     cellHeight,
     children,
@@ -53,7 +55,7 @@ function GridList(props) {
     </Component>;
 }
 
-const defaultProps = {
+const defaultProps = GridList.defaultProps = {
   cellHeight: 180,
   cols: 2,
   component: 'ul',

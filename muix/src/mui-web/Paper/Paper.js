@@ -10,9 +10,12 @@ export const styles = theme => {
     };
   });
   return {
+    /* Styles applied to the root element. */
     root: {
       backgroundColor: theme.palette.background.paper
     },
+
+    /* Styles applied to the root element if `square={false}`. */
     rounded: {
       borderRadius: theme.shape.borderRadius
     },
@@ -24,7 +27,8 @@ function Paper(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     classes,
     className: classNameProp,
@@ -38,7 +42,7 @@ function Paper(props) {
   return <Component className={classNamesStr(className)} {...other} />;
 }
 
-const defaultProps = {
+const defaultProps = Paper.defaultProps = {
   component: 'div',
   elevation: 2,
   square: false

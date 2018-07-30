@@ -5,23 +5,30 @@ import debounce from 'debounce'; // < 1kb payload overhead when lodash/debounce 
 
 import withStyles from '../styles/withStyles';
 export const styles = {
+  /* Styles applied to the root element. */
   root: {
     boxSizing: 'border-box',
     flexShrink: 0
   },
+
+  /* Styles applied to the `div` element that wraps the children. */
   tile: {
     position: 'relative',
     display: 'block',
-    // In case it's not renderd with a div.
+    // In case it's not rendered with a div.
     height: '100%',
     overflow: 'hidden'
   },
+
+  /* Styles applied to an `ing` element child, if if needed to ensure it covers the tile. */
   imgFullHeight: {
     height: '100%',
     transform: 'translateX(-50%)',
     position: 'relative',
     left: '50%'
   },
+
+  /* Styles applied to an `ing` element child, if if needed to ensure it covers the tile. */
   imgFullWidth: {
     width: '100%',
     position: 'relative',
@@ -82,7 +89,8 @@ class GridListTile extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       children,
       classes,
@@ -116,7 +124,7 @@ class GridListTile extends React.Component {
 
 }
 
-const defaultProps = {
+const defaultProps = GridListTile.defaultProps = {
   cols: 1,
   component: 'li',
   rows: 1

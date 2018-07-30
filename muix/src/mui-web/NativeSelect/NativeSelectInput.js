@@ -6,6 +6,11 @@ import PropTypes from 'prop-types';
  */
 function NativeSelectInput(props) {
   const {
+    $system: {
+      classNames,
+      classNamesStr,
+      theme
+    },
     children,
     classes,
     className,
@@ -17,10 +22,8 @@ function NativeSelectInput(props) {
     value,
     ...other
   } = props;
-  return <div className={classes.root}>
-      <select className={classNames(classes.select, {
-      [classes.disabled]: disabled
-    }, className)} name={name} disabled={disabled} onChange={onChange} value={value} ref={inputRef} {...other}>
+  return <div className={classNamesStr(classes.root)}>
+      <select className={classNamesStr(classes.select, disabled && classes.disabled, className)} name={name} disabled={disabled} onChange={onChange} value={value} ref={inputRef} {...other}>
         {children}
       </select>
       <IconComponent className={classes.icon} />

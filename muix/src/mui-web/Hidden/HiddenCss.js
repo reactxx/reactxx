@@ -31,7 +31,8 @@ function HiddenCss(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     children,
     classes,

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import Typography from '../Typography';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     display: 'inline-flex',
     alignItems: 'center',
@@ -19,9 +20,18 @@ export const styles = theme => ({
       cursor: 'default'
     }
   },
+
+  /* Styles applied to the root element if `labelPlacement="start"`. */
+  labelPlacementStart: {
+    flexDirection: 'row-reverse'
+  },
+
+  /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
     NAME$disabled33: true
   },
+
+  /* Styles applied to the label's Typography component. */
   label: {
     '&.disabled33': {
       color: theme.palette.text.disabled
@@ -37,7 +47,8 @@ function FormControlLabel(props, context) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     checked,
     classes,
@@ -46,6 +57,7 @@ function FormControlLabel(props, context) {
     disabled: disabledProp,
     inputRef,
     label,
+    labelPlacement,
     name,
     onChange,
     value,
@@ -72,7 +84,7 @@ function FormControlLabel(props, context) {
       controlProps[key] = props[key];
     }
   });
-  return <label className={classNamesStr(classes.root, disabled && classes.disabled, classNameProp)} {...other}>
+  return <label className={classNamesStr(classes.root, labelPlacement === 'start' && classes.labelPlacementStart, disabled && classes.disabled, classNameProp)} {...other}>
       {React.cloneElement(control, controlProps)}
       <Typography component="span" className={classNames(classes.label, disabled && classes.disabled)}>
         {label}
@@ -82,6 +94,9 @@ function FormControlLabel(props, context) {
 
 FormControlLabel.contextTypes = {
   muiFormControl: PropTypes.object
+};
+const defaultProps = FormControlLabel.defaultProps = {
+  labelPlacement: 'end'
 };
 
 /**

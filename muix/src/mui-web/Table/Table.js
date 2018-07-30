@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     display: 'table',
     fontFamily: theme.typography.fontFamily,
@@ -23,7 +24,8 @@ class Table extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       classes,
       className,
@@ -38,7 +40,7 @@ class Table extends React.Component {
 Table.childContextTypes = {
   table: PropTypes.object
 };
-const defaultProps = {
+const defaultProps = Table.defaultProps = {
   component: 'table'
 };
 

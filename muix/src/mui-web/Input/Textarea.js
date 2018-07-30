@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import debounce from 'debounce'; // < 1kb payload overhead when lodash/debounce is > 3kb.
 
 import EventListener from 'react-event-listener';
 import withStyles from '../styles/withStyles';
 const ROWS_HEIGHT = 19;
 export const styles = {
+  /* Styles applied to the root element. */
   root: {
     position: 'relative',
     // because the shadow has position: 'absolute',
@@ -26,7 +26,6 @@ export const styles = {
     background: 'transparent'
   },
   shadow: {
-    resize: 'none',
     // Overflow also needed to here to remove the extra row
     // added to textareas in Firefox.
     overflow: 'hidden',
@@ -42,9 +41,10 @@ export const styles = {
  */
 
 class Textarea extends React.Component {
-  shadow = null;
-  singlelineShadow = null;
-  input = null;
+  isControlled = this.props.value != null;
+  shadowRef = null;
+  singlelineShadowRef = null;
+  inputRef = null;
   value = null;
   handleResize = debounce(() => {
     this.syncHeightWithShadow();
@@ -76,32 +76,32 @@ class Textarea extends React.Component {
     this.handleResize.clear();
   }
 
-  handleRefInput = node => {
-    this.input = node;
+  handleRefInput = ref => {
+    this.inputRef = ref;
     const {
       textareaRef
     } = this.props;
 
     if (textareaRef) {
       if (typeof textareaRef === 'function') {
-        textareaRef(node);
+        textareaRef(ref);
       } else {
-        textareaRef.current = node;
+        textareaRef.current = ref;
       }
     }
   };
-  handleRefSinglelineShadow = node => {
-    this.singlelineShadow = node;
+  handleRefSinglelineShadow = ref => {
+    this.singlelineShadowRef = ref;
   };
-  handleRefShadow = node => {
-    this.shadow = node;
+  handleRefShadow = ref => {
+    this.shadowRef = ref;
   };
   handleChange = event => {
     this.value = event.target.value;
 
-    if (typeof this.props.value === 'undefined' && this.shadow) {
+    if (!this.isControlled) {
       // The component is not controlled, we need to update the shallow value.
-      this.shadow.value = this.value;
+      this.shadowRef.value = this.value;
       this.syncHeightWithShadow();
     }
 
@@ -113,17 +113,13 @@ class Textarea extends React.Component {
   syncHeightWithShadow() {
     const props = this.props;
 
-    if (!this.shadow || !this.singlelineShadow) {
-      return;
-    } // The component is controlled, we need to update the shallow value.
-
-
-    if (typeof props.value !== 'undefined') {
-      this.shadow.value = props.value == null ? '' : String(props.value);
+    if (this.isControlled) {
+      // The component is controlled, we need to update the shallow value.
+      this.shadowRef.value = props.value == null ? '' : String(props.value);
     }
 
-    const lineHeight = this.singlelineShadow.scrollHeight;
-    let newHeight = this.shadow.scrollHeight; // Guarding for jsdom, where scrollHeight isn't present.
+    const lineHeight = this.singlelineShadowRef.scrollHeight;
+    let newHeight = this.shadowRef.scrollHeight; // Guarding for jsdom, where scrollHeight isn't present.
     // See https://github.com/tmpvar/jsdom/issues/1013
 
     if (newHeight === undefined) {
@@ -148,7 +144,8 @@ class Textarea extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       classes,
       className,
@@ -164,19 +161,17 @@ class Textarea extends React.Component {
       height: this.state.height
     }}>
         <EventListener target="window" onResize={this.handleResize} />
-        <textarea ref={this.handleRefSinglelineShadow} className={classNamesStr(classes.textarea, classes.shadow)} tabIndex={-1} rows="1" readOnly aria-hidden="true" value="" />
-        <textarea ref={this.handleRefShadow} className={classNamesStr(classes.textarea, classes.shadow)} tabIndex={-1} rows={rows} aria-hidden="true" readOnly defaultValue={defaultValue} value={value} />
+        <textarea aria-hidden="true" className={classNamesStr(classes.textarea, classes.shadow)} readOnly ref={this.handleRefSinglelineShadow} rows="1" tabIndex={-1} value="" />
+        <textarea aria-hidden="true" className={classNamesStr(classes.textarea, classes.shadow)} defaultValue={defaultValue} readOnly ref={this.handleRefShadow} rows={rows} tabIndex={-1} value={value} />
         <textarea rows={rows} className={classNamesStr(classes.textarea, className)} defaultValue={defaultValue} value={value} onChange={this.handleChange} ref={this.handleRefInput} {...other} />
       </div>;
   }
 
 }
 
-const defaultProps = {
+const defaultProps = Textarea.defaultProps = {
   rows: 1
 };
-
-Textarea.defaultProps = defaultProps
 
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Input/Textarea').Shape>}

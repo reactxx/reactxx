@@ -19,9 +19,12 @@ export function getAnchor(props) {
   return props.theme.direction === 'rtl' && isHorizontal(props) ? oppositeDirection[props.anchor] : props.anchor;
 }
 export const styles = theme => ({
+  /* Styles applied to the root element if `variant="permanent or persistent"`. */
   docked: {
     flex: '0 0 auto'
   },
+
+  /* Styles applied to the `Paper` component. */
   paper: {
     overflowY: 'auto',
     display: 'flex',
@@ -39,14 +42,20 @@ export const styles = theme => ({
     // :focus-ring CSS pseudo-class will help.
     outline: 'none'
   },
+
+  /* Styles applied to the `Paper` component if `anchor="left"`. */
   paperAnchorLeft: {
     left: 0,
     right: 'auto'
   },
+
+  /* Styles applied to the `Paper` component if `anchor="right"`. */
   paperAnchorRight: {
     left: 'auto',
     right: 0
   },
+
+  /* Styles applied to the `Paper` component if `anchor="top"`. */
   paperAnchorTop: {
     top: 0,
     left: 0,
@@ -55,6 +64,8 @@ export const styles = theme => ({
     height: 'auto',
     maxHeight: '100vh'
   },
+
+  /* Styles applied to the `Paper` component if `anchor="bottom"`. */
   paperAnchorBottom: {
     top: 'auto',
     left: 0,
@@ -63,20 +74,29 @@ export const styles = theme => ({
     height: 'auto',
     maxHeight: '100vh'
   },
+
+  /* Styles applied to the `Paper` component if `anchor="left"` & `variant` is not "temporary". */
   paperAnchorDockedLeft: {
     borderRight: `1px solid ${theme.palette.divider}`
   },
+
+  /* Styles applied to the `Paper` component if `anchor="top"` & `variant` is not "temporary". */
   paperAnchorDockedTop: {
     borderBottom: `1px solid ${theme.palette.divider}`
   },
+
+  /* Styles applied to the `Paper` component if `anchor="right"` & `variant` is not "temporary". */
   paperAnchorDockedRight: {
     borderLeft: `1px solid ${theme.palette.divider}`
   },
+
+  /* Styles applied to the `Paper` component if `anchor="bottom"` & `variant` is not "temporary". */
   paperAnchorDockedBottom: {
     borderTop: `1px solid ${theme.palette.divider}`
   },
-  modal: {} // Just here so people can override the style.
 
+  /* Styles applied to the `Modal` component. */
+  modal: {}
 });
 /**
  * The properties of the [Modal](/api/modal) component are available
@@ -97,7 +117,8 @@ class Drawer extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       anchor: anchorProp,
       children,
@@ -112,7 +133,6 @@ class Drawer extends React.Component {
       open,
       PaperProps,
       SlideProps,
-      theme,
       transitionDuration,
       variant,
       ...other
@@ -148,7 +168,7 @@ class Drawer extends React.Component {
 
 }
 
-const defaultProps = {
+const defaultProps = Drawer.defaultProps = {
   anchor: 'left',
   elevation: 16,
   open: false,

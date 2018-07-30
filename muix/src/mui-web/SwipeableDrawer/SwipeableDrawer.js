@@ -7,6 +7,7 @@ import Drawer, { getAnchor, isHorizontal } from '../Drawer/Drawer';
 import { duration } from '../styles/transitions';
 import withTheme from '../styles/withTheme';
 import { getTransitionProps } from '../transitions/utils';
+import NoSsr from '../NoSsr';
 import SwipeArea from './SwipeArea'; // This value is closed to what browsers are using internally to
 // trigger a native scroll.
 
@@ -296,6 +297,7 @@ class SwipeableDrawer extends React.Component {
 
   render() {
     const {
+      anchor,
       disableBackdropTransition,
       disableDiscovery,
       disableSwipeToOpen,
@@ -325,8 +327,10 @@ class SwipeableDrawer extends React.Component {
           ...PaperProps.style
         },
         ref: this.handlePaperRef
-      }} {...other} />
-        {!disableDiscovery && !disableSwipeToOpen && variant === 'temporary' && <SwipeArea anchor={other.anchor} swipeAreaWidth={swipeAreaWidth} />}
+      }} anchor={anchor} {...other} />
+        {!disableDiscovery && !disableSwipeToOpen && variant === 'temporary' && <NoSsr>
+              <SwipeArea anchor={anchor} width={swipeAreaWidth} />
+            </NoSsr>}
       </React.Fragment>;
   }
 

@@ -6,6 +6,7 @@ import ButtonBase from "../ButtonBase/ButtonBase";
 import { capitalize } from '../utils/helpers';
 import unsupportedProp from '../utils/unsupportedProp';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: { ...theme.typography.button,
     maxWidth: 264,
     position: 'relative',
@@ -18,9 +19,13 @@ export const styles = theme => ({
       minWidth: 160
     }
   },
+
+  /* Styles applied to the root element if both `icon` and `label` are provided. */
   labelIcon: {
     minHeight: 72
   },
+
+  /* Styles applied to the root element if `textColor="inherit"`. */
   textColorInherit: {
     color: 'inherit',
     opacity: 0.7,
@@ -31,6 +36,8 @@ export const styles = theme => ({
       opacity: 0.4
     }
   },
+
+  /* Styles applied to the root element if `textColor="primary"`. */
   textColorPrimary: {
     color: theme.palette.text.secondary,
     '&.selected77': {
@@ -40,6 +47,8 @@ export const styles = theme => ({
       color: theme.palette.text.disabled
     }
   },
+
+  /* Styles applied to the root element if `textColor="secondary"`. */
   textColorSecondary: {
     color: theme.palette.text.secondary,
     '&.selected77': {
@@ -49,16 +58,25 @@ export const styles = theme => ({
       color: theme.palette.text.disabled
     }
   },
+
+  /* Styles applied to the root element if `selected={true}` (controlled by the Tabs component). */
   selected: {
     NAME$selected77: true
   },
+
+  /* Styles applied to the root element if `disabled={true}` (controlled by the Tabs component). */
   disabled: {
     NAME$disabled77: true
   },
+
+  /* Styles applied to the root element if `fullWidth={true}` (controlled by the Tabs component). */
   fullWidth: {
     flexShrink: 1,
-    flexGrow: 1
+    flexGrow: 1,
+    maxWidth: 'auto'
   },
+
+  /* Styles applied to the `icon` and `label`'s wrapper element. */
   wrapper: {
     display: 'inline-flex',
     alignItems: 'center',
@@ -66,6 +84,8 @@ export const styles = theme => ({
     width: '100%',
     flexDirection: 'column'
   },
+
+  /* Styles applied to the label container element if `label` is provided. */
   labelContainer: {
     paddingTop: 6,
     paddingBottom: 6,
@@ -76,6 +96,8 @@ export const styles = theme => ({
       paddingRight: 24
     }
   },
+
+  /* Styles applied to the label wrapper element if `label` is provided. */
   label: {
     fontSize: theme.typography.pxToRem(14),
     whiteSpace: 'normal',
@@ -83,6 +105,8 @@ export const styles = theme => ({
       fontSize: theme.typography.pxToRem(13)
     }
   },
+
+  /* Styles applied to the label wrapper element if `label` is provided and the text is wrapped. */
   labelWrapped: {
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(12)
@@ -127,8 +151,8 @@ class Tab extends React.Component {
     }
   };
   checkTextWrap = () => {
-    if (this.label) {
-      const labelWrapped = this.label.getClientRects().length > 1;
+    if (this.labelRef) {
+      const labelWrapped = this.labelRef.getClientRects().length > 1;
 
       if (this.state.labelWrapped !== labelWrapped) {
         this.setState({
@@ -142,7 +166,8 @@ class Tab extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       classes,
       className: classNameProp,
@@ -161,8 +186,8 @@ class Tab extends React.Component {
 
     if (labelProp !== undefined) {
       label = <span className={classNamesStr(classes.labelContainer)}>
-          <span className={classNamesStr(classes.label, this.state.labelWrapped && classes.labelWrapped)} ref={node => {
-          this.label = node;
+          <span className={classNamesStr(classes.label, this.state.labelWrapped && classes.labelWrapped)} ref={ref => {
+          this.labelRef = ref;
         }}>
             {labelProp}
           </span>
@@ -181,7 +206,7 @@ class Tab extends React.Component {
 
 }
 
-const defaultProps = {
+const defaultProps = Tab.defaultProps = {
   disabled: false,
   textColor: 'inherit'
 };

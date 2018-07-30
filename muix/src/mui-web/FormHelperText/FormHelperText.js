@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     color: theme.palette.text.secondary,
     fontFamily: theme.typography.fontFamily,
@@ -18,12 +19,18 @@ export const styles = theme => ({
       color: theme.palette.text.disabled
     }
   },
+
+  /* Styles applied to the root element if `error={true}`. */
   error: {
     NAME$error35: true
   },
+
+  /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
     NAME$disabled35: true
   },
+
+  /* Styles applied to the root element if `margin="dense"`. */
   marginDense: {
     marginTop: 4
   }
@@ -33,7 +40,8 @@ function FormHelperText(props, context) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     classes,
     className: classNameProp,
@@ -71,7 +79,7 @@ function FormHelperText(props, context) {
 FormHelperText.contextTypes = {
   muiFormControl: PropTypes.object
 };
-const defaultProps = {
+const defaultProps = FormHelperText.defaultProps = {
   component: 'p'
 };
 

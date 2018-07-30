@@ -4,6 +4,7 @@ import warning from 'warning';
 import Collapse from '../Collapse';
 import withStyles from '../styles/withStyles';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     marginTop: 8,
     marginLeft: 12,
@@ -13,9 +14,13 @@ export const styles = theme => ({
     paddingRight: 8,
     borderLeft: `1px solid ${theme.palette.type === 'light' ? theme.palette.grey[400] : theme.palette.grey[600]}`
   },
+
+  /* Styles applied to the root element if `last={true}` (controlled by `Step`). */
   last: {
     borderLeft: 'none'
   },
+
+  /* Styles applied to the Transition component. */
   transition: {}
 });
 
@@ -23,7 +28,8 @@ function StepContent(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     active,
     alternativeLabel,
@@ -53,7 +59,7 @@ function StepContent(props) {
     </div>;
 }
 
-const defaultProps = {
+const defaultProps = StepContent.defaultProps = {
   TransitionComponent: Collapse,
   transitionDuration: 'auto'
 };

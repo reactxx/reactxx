@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     fontFamily: theme.typography.fontFamily,
     color: theme.palette.text.secondary,
@@ -18,12 +19,18 @@ export const styles = theme => ({
       color: theme.palette.error.main
     }
   },
+
+  /* Styles applied to the root element if `focused={true}`. */
   focused: {
     NAME$focused36: true
   },
+
+  /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
     NAME$disabled36: true
   },
+
+  /* Styles applied to the root element if `error={true}`. */
   error: {
     NAME$error36: true
   },
@@ -38,7 +45,8 @@ function FormLabel(props, context) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     children,
     classes,
@@ -88,7 +96,7 @@ function FormLabel(props, context) {
 FormLabel.contextTypes = {
   muiFormControl: PropTypes.object
 };
-const defaultProps = {
+const defaultProps = FormLabel.defaultProps = {
   component: 'label'
 };
 

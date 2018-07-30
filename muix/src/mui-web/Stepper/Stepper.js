@@ -5,17 +5,24 @@ import withStyles from '../styles/withStyles';
 import Paper from "../Paper/Paper";
 import StepConnector from '../StepConnector';
 export const styles = {
+  /* Styles applied to the root element. */
   root: {
     display: 'flex',
     padding: 24
   },
+
+  /* Styles applied to the root element if `orientation="horizontal"`. */
   horizontal: {
     flexDirection: 'row',
     alignItems: 'center'
   },
+
+  /* Styles applied to the root element if `orientation="vertical"`. */
   vertical: {
     flexDirection: 'column'
   },
+
+  /* Styles applied to the root element if `alternativeLabel={true}`. */
   alternativeLabel: {
     alignItems: 'flex-start'
   }
@@ -25,7 +32,8 @@ function Stepper(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     activeStep,
     alternativeLabel,
@@ -75,7 +83,7 @@ function Stepper(props) {
 }
 
 Stepper.muiName = 'Stepper';
-const defaultProps = {
+const defaultProps = Stepper.defaultProps = {
   activeStep: 0,
   alternativeLabel: false,
   connector: <StepConnector />,

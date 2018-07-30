@@ -6,6 +6,7 @@ import Paper from "../Paper/Paper";
 import { capitalize } from '../utils/helpers';
 import LinearProgress from '../LinearProgress';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     display: 'flex',
     flexDirection: 'row',
@@ -14,6 +15,8 @@ export const styles = theme => ({
     background: theme.palette.background.default,
     padding: 8
   },
+
+  /* Styles applied to the root element if `position="bottom"`. */
   positionBottom: {
     position: 'fixed',
     bottom: 0,
@@ -21,6 +24,8 @@ export const styles = theme => ({
     right: 0,
     zIndex: theme.zIndex.mobileStepper
   },
+
+  /* Styles applied to the root element if `position="top"`. */
   positionTop: {
     position: 'fixed',
     top: 0,
@@ -28,11 +33,17 @@ export const styles = theme => ({
     right: 0,
     zIndex: theme.zIndex.mobileStepper
   },
+
+  /* Styles applied to the root element if `position="static"`. */
   positionStatic: {},
+
+  /* Styles applied to the dots container if `variant="dots"`. */
   dots: {
     display: 'flex',
     flexDirection: 'row'
   },
+
+  /* Styles applied to each dot if `variant="dots"`. */
   dot: {
     backgroundColor: theme.palette.action.disabled,
     borderRadius: '50%',
@@ -40,9 +51,13 @@ export const styles = theme => ({
     height: 8,
     margin: '0 2px'
   },
+
+  /* Styles applied to a dot if `variant="dots"` and this is the active step. */
   dotActive: {
     backgroundColor: theme.palette.primary.main
   },
+
+  /* Styles applied to the Linear Progress component if `variant="progress"`. */
   progress: {
     width: '50%'
   }
@@ -52,7 +67,8 @@ function MobileStepper(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     activeStep,
     backButton,
@@ -79,7 +95,7 @@ function MobileStepper(props) {
     </Paper>;
 }
 
-const defaultProps = {
+const defaultProps = MobileStepper.defaultProps = {
   activeStep: 0,
   position: 'bottom',
   variant: 'dots'

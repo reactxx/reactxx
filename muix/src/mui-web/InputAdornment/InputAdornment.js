@@ -3,14 +3,19 @@ import PropTypes from 'prop-types';
 import Typography from '../Typography';
 import withStyles from '../styles/withStyles';
 export const styles = {
+  /* Styles applied to the root element. */
   root: {
     display: 'flex',
     maxHeight: '2em',
     alignItems: 'center'
   },
+
+  /* Styles applied to the root element if `position="start"`. */
   positionStart: {
     marginRight: 8
   },
+
+  /* Styles applied to the root element if `position="end"`. */
   positionEnd: {
     marginLeft: 8
   }
@@ -20,7 +25,8 @@ function InputAdornment(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     children,
     component: Component,
@@ -35,7 +41,7 @@ function InputAdornment(props) {
     </Component>;
 }
 
-const defaultProps = {
+const defaultProps = InputAdornment.defaultProps = {
   component: 'div',
   disableTypography: false
 };

@@ -2,11 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = {
+  /* Styles applied to the root element. */
   root: {
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'wrap'
   },
+
+  /* Styles applied to the root element if `row={true}`. */
   row: {
     flexDirection: 'row'
   }
@@ -21,7 +24,8 @@ function FormGroup(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     classes,
     className,
@@ -34,7 +38,7 @@ function FormGroup(props) {
     </div>;
 }
 
-const defaultProps = {
+const defaultProps = FormGroup.defaultProps = {
   row: false
 };
 

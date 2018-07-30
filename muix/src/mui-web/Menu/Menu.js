@@ -15,20 +15,19 @@ const LTR_ORIGIN = {
   horizontal: 'left'
 };
 export const styles = {
+  /* Styles applied to the `Paper` component. */
   paper: {
     // specZ: The maximum height of a simple menu should be one or more rows less than the view
-    // height. This ensures a tappable area outside of the simple menu with which to dismiss
+    // height. This ensures a tapable area outside of the simple menu with which to dismiss
     // the menu.
     maxHeight: 'calc(100% - 96px)',
     // Add iOS momentum scrolling.
-    WebkitOverflowScrolling: 'touch',
-    // Fix a scrolling issue on Chrome.
-    transform: 'translateZ(0)'
+    WebkitOverflowScrolling: 'touch'
   }
 };
 
 class Menu extends React.Component {
-  menuList = null;
+  menuListRef = null;
 
   componentDidMount() {
     if (this.props.open && this.props.disableAutoFocusItem !== true) {
@@ -37,19 +36,19 @@ class Menu extends React.Component {
   }
 
   getContentAnchorEl = () => {
-    if (!this.menuList || !this.menuList.selectedItem) {
-      return ReactDOM.findDOMNode(this.menuList).firstChild;
+    if (!this.menuListRef || !this.menuListRef.selectedItemRef) {
+      return ReactDOM.findDOMNode(this.menuListRef).firstChild;
     }
 
-    return ReactDOM.findDOMNode(this.menuList.selectedItem);
+    return ReactDOM.findDOMNode(this.menuListRef.selectedItemRef);
   };
   focus = () => {
-    if (this.menuList && this.menuList.selectedItem) {
-      ReactDOM.findDOMNode(this.menuList.selectedItem).focus();
+    if (this.menuListRef && this.menuListRef.selectedItemRef) {
+      ReactDOM.findDOMNode(this.menuListRef.selectedItemRef).focus();
       return;
     }
 
-    const menuList = ReactDOM.findDOMNode(this.menuList);
+    const menuList = ReactDOM.findDOMNode(this.menuListRef);
 
     if (menuList && menuList.firstChild) {
       menuList.firstChild.focus();
@@ -60,7 +59,7 @@ class Menu extends React.Component {
       disableAutoFocusItem,
       theme
     } = this.props;
-    const menuList = ReactDOM.findDOMNode(this.menuList); // Focus so the scroll computation of the Popover works as expected.
+    const menuList = ReactDOM.findDOMNode(this.menuListRef); // Focus so the scroll computation of the Popover works as expected.
 
     if (disableAutoFocusItem !== true) {
       this.focus();
@@ -92,7 +91,8 @@ class Menu extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       children,
       classes,
@@ -101,7 +101,6 @@ class Menu extends React.Component {
       onEnter,
       PaperProps = {},
       PopoverClasses,
-      theme,
       ...other
     } = this.props;
     return <Popover getContentAnchorEl={this.getContentAnchorEl} classes={PopoverClasses} onEnter={this.handleEnter} anchorOrigin={theme.direction === 'rtl' ? RTL_ORIGIN : LTR_ORIGIN} transformOrigin={theme.direction === 'rtl' ? RTL_ORIGIN : LTR_ORIGIN} PaperProps={{ ...PaperProps,
@@ -109,8 +108,8 @@ class Menu extends React.Component {
         root: classes.paper
       }
     }} {...other}>
-        <MenuList data-mui-test="Menu" onKeyDown={this.handleListKeyDown} {...MenuListProps} ref={node => {
-        this.menuList = node;
+        <MenuList data-mui-test="Menu" onKeyDown={this.handleListKeyDown} {...MenuListProps} ref={ref => {
+        this.menuListRef = ref;
       }}>
           {children}
         </MenuList>
@@ -119,7 +118,7 @@ class Menu extends React.Component {
 
 }
 
-const defaultProps = {
+const defaultProps = Menu.defaultProps = {
   disableAutoFocusItem: false,
   transitionDuration: 'auto'
 };

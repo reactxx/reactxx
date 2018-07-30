@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import warning from 'warning';
 import withStyles from '../styles/withStyles';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     display: 'flex',
     justifyContent: 'center',
@@ -15,7 +16,8 @@ function BottomNavigation(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     children: childrenProp,
     classes,
@@ -45,7 +47,7 @@ function BottomNavigation(props) {
     </div>;
 }
 
-const defaultProps = {
+const defaultProps = BottomNavigation.defaultProps = {
   showLabels: false
 };
 

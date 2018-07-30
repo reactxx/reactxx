@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import Typography from '../Typography';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     color: theme.palette.text.secondary
   }
@@ -13,7 +14,8 @@ function DialogContentText(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     children,
     classes,

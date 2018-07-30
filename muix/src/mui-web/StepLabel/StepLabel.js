@@ -4,6 +4,7 @@ import withStyles from '../styles/withStyles';
 import Typography from '../Typography';
 import StepIcon from '../StepIcon';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     display: 'flex',
     alignItems: 'center',
@@ -14,23 +15,14 @@ export const styles = theme => ({
       cursor: 'default'
     }
   },
+
+  /* Styles applied to the root element if `orientation="horiizontal". */
   horizontal: {},
+
+  /* Styles applied to the root element if `orientation="vertical". */
   vertical: {},
-  active: {
-    NAME$active72: true
-  },
-  completed: {
-    NAME$completed72: true
-  },
-  alternativeLabel: {
-    NAME$alternativeLabel72: true
-  },
-  error: {
-    NAME$error72: true
-  },
-  disabled: {
-    NAME$disabled72: true
-  },
+
+  /* Styles applied to the `Typography` component which wraps `children`. */
   label: {
     color: theme.palette.text.secondary,
     '&.active72': {
@@ -49,12 +41,41 @@ export const styles = theme => ({
       color: theme.palette.error.main
     }
   },
+
+  /* Styles applied to the `Typography` component if `active={true}`. */
+  active: {
+    NAME$active72: true
+  },
+
+  /* Styles applied to the `Typography` component if `completed={true}`. */
+  completed: {
+    NAME$completed72: true
+  },
+
+  /* Styles applied to the root element and `Typography` component if `error={true}`. */
+  error: {
+    NAME$error72: true
+  },
+
+  /* Styles applied to the root element and `Typography` component if `disabled={true}`. */
+  disabled: {
+    NAME$disabled72: true
+  },
+
+  /* Styles applied to the `icon` container element. */
   iconContainer: {
     paddingRight: 8,
     '&.alternativeLabel72': {
       paddingRight: 0
     }
   },
+
+  /* Styles applied to the root & icon container and `Typography` if `alternativeLabel={true}`. */
+  alternativeLabel: {
+    NAME$alternativeLabel72: true
+  },
+
+  /* Styles applied to the container element which wraps `Typography` and `optional`. */
   labelContainer: {
     width: '100%'
   }
@@ -64,7 +85,8 @@ function StepLabel(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     active,
     alternativeLabel,
@@ -95,7 +117,7 @@ function StepLabel(props) {
 }
 
 StepLabel.muiName = 'StepLabel';
-const defaultProps = {
+const defaultProps = StepLabel.defaultProps = {
   active: false,
   alternativeLabel: false,
   completed: false,

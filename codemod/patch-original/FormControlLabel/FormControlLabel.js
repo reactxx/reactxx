@@ -7,6 +7,7 @@ import withStyles from '../styles/withStyles';
 import Typography from '../Typography';
 
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     display: 'inline-flex',
     alignItems: 'center',
@@ -21,7 +22,13 @@ export const styles = theme => ({
       cursor: 'default',
     },
   },
+  /* Styles applied to the root element if `labelPlacement="start"`. */
+  labelPlacementStart: {
+    flexDirection: 'row-reverse',
+  },
+  /* Styles applied to the root element if `disabled={true}`. */
   disabled: {},
+  /* Styles applied to the label's Typography component. */
   label: {
     '&$disabled': {
       color: theme.palette.text.disabled,
@@ -42,6 +49,7 @@ function FormControlLabel(props, context) {
     disabled: disabledProp,
     inputRef,
     label,
+    labelPlacement,
     name,
     onChange,
     value,
@@ -71,6 +79,7 @@ function FormControlLabel(props, context) {
       className={classNames(
         classes.root,
         {
+          [classes.labelPlacementStart]: labelPlacement === 'start',
           [classes.disabled]: disabled,
         },
         classNameProp,
@@ -118,6 +127,10 @@ FormControlLabel.propTypes = {
    * The text to be used in an enclosing label element.
    */
   label: PropTypes.node,
+  /**
+   * The position of the label.
+   */
+  labelPlacement: PropTypes.oneOf(['end', 'start']),
   /*
    * @ignore
    */
@@ -134,6 +147,10 @@ FormControlLabel.propTypes = {
    * The value of the component.
    */
   value: PropTypes.string,
+};
+
+FormControlLabel.defaultProps = {
+  labelPlacement: 'end',
 };
 
 FormControlLabel.contextTypes = {

@@ -8,6 +8,7 @@ import { listenForFocusKeys, detectFocusVisible } from './focusVisible';
 import TouchRipple from './TouchRipple';
 import createRippleHandler from './createRippleHandler';
 export const styles = {
+  /* Styles applied to the root element. */
   root: {
     display: 'inline-flex',
     alignItems: 'center',
@@ -45,9 +46,13 @@ export const styles = {
       cursor: 'default'
     }
   },
+
+  /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
     NAME$disabled8: true
   },
+
+  /* Styles applied to the root element if keyboard focused. */
   focusVisible: {}
 };
 /* istanbul ignore if */
@@ -229,7 +234,8 @@ class ButtonBase extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       action,
       buttonRef,
@@ -282,7 +288,7 @@ class ButtonBase extends React.Component {
 
 }
 
-const defaultProps = {
+const defaultProps = ButtonBase.defaultProps = {
   centerRipple: false,
   component: 'button',
   disableRipple: false,

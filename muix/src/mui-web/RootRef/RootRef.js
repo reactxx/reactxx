@@ -2,6 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import exactProp from '../utils/exactProp';
+
+function setRef(ref, value) {
+  if (typeof ref === 'function') {
+    ref(value);
+  } else if (ref) {
+    ref.current = value;
+  }
+}
 /**
  * Helper component to allow attaching a ref to a
  * wrapped element to access the underlying DOM element.
@@ -33,26 +41,21 @@ import exactProp from '../utils/exactProp';
  * ```
  */
 
+
 class RootRef extends React.Component {
   componentDidMount() {
-    const rootRef = this.props.rootRef;
-    const node = ReactDOM.findDOMNode(this);
+    setRef(this.props.rootRef, ReactDOM.findDOMNode(this));
+  }
 
-    if (typeof rootRef === 'function') {
-      rootRef(node);
-    } else if (rootRef) {
-      rootRef.current = node;
+  componentDidUpdate(prevProps) {
+    if (prevProps.rootRef !== this.props.rootRef) {
+      setRef(prevProps.rootRef, null);
+      setRef(this.props.rootRef, ReactDOM.findDOMNode(this));
     }
   }
 
   componentWillUnmount() {
-    const rootRef = this.props.rootRef;
-
-    if (typeof rootRef === 'function') {
-      rootRef(null);
-    } else if (rootRef) {
-      rootRef.current = null;
-    }
+    setRef(this.props.rootRef, null);
   }
 
   render() {

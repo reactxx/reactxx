@@ -21,6 +21,7 @@ function getHasTransition(props) {
 }
 
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     position: 'fixed',
     zIndex: theme.zIndex.modal,
@@ -29,6 +30,8 @@ export const styles = theme => ({
     top: 0,
     left: 0
   },
+
+  /* Styles applied to the root element if the `Modal` has exited. */
   hidden: {
     visibility: 'hidden'
   }
@@ -147,6 +150,11 @@ class Modal extends React.Component {
   handleDocumentKeyDown = event => {
     if (!this.isTopModal() || keycode(event) !== 'esc') {
       return;
+    } // Ignore events that have been `event.preventDefault()` marked.
+
+
+    if (event.defaultPrevented) {
+      return;
     }
 
     if (this.props.onEscapeKeyDown) {
@@ -216,7 +224,8 @@ class Modal extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       BackdropComponent,
       BackdropProps,
@@ -263,15 +272,15 @@ class Modal extends React.Component {
       childProps.tabIndex = children.props.tabIndex || '-1';
     }
 
-    return <Portal ref={node => {
-      this.mountNode = node ? node.getMountNode() : node;
+    return <Portal ref={ref => {
+      this.mountNode = ref ? ref.getMountNode() : ref;
     }} container={container} disablePortal={disablePortal} onRendered={this.handleRendered}>
-        <div data-mui-test="Modal" ref={node => {
-        this.modalRef = node;
+        <div data-mui-test="Modal" ref={ref => {
+        this.modalRef = ref;
       }} className={classNamesStr(classes.root, className, exited && classes.hidden)} {...other}>
           {hideBackdrop ? null : <BackdropComponent open={open} onClick={this.handleBackdropClick} {...BackdropProps} />}
-          <RootRef rootRef={node => {
-          this.dialogRef = node;
+          <RootRef rootRef={ref => {
+          this.dialogRef = ref;
         }}>
             {React.cloneElement(children, childProps)}
           </RootRef>
@@ -281,7 +290,7 @@ class Modal extends React.Component {
 
 }
 
-const defaultProps = {
+const defaultProps = Modal.defaultProps = {
   disableAutoFocus: false,
   disableBackdropClick: false,
   disableEnforceFocus: false,

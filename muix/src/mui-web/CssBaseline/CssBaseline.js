@@ -42,7 +42,7 @@ class CssBaseline extends React.Component {
 }
 
 CssBaseline.propTypes = exactProp(CssBaseline.propTypes);
-const defaultProps = {
+const defaultProps = CssBaseline.defaultProps = {
   children: null
 };
 

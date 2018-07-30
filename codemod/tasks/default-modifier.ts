@@ -1,14 +1,26 @@
+// viz D:\reactxx\codemod\patch-code\Input\Input.ts
+
 import * as Queries from '../utils/queries'
 import * as Ast from '../utils/ast'
 import * as Parser from '../utils/parser'
-import {cssjsToFela} from './cssjs-to-fela'
+import { cssjsToFela } from './cssjs-to-fela'
 
-export const withStylesTaskDefaultCreator = (forceHTMLTags: string[] = ['Component']) => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
-  cssjsToFela(root, info)
+export const classNamesFix = (forceHTMLTags: string[] = ['Component']) => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   adjustImports(root)
   selectClassNamesFromProps(root, info.name)
   refactorClassNamesObjectExpressionAttribute(root)
   adjustHtmlClassNameAttribute(root, info.name, forceHTMLTags)
+  return root
+}
+
+
+export const withStylesTaskDefaultCreator = (forceHTMLTags: string[] = ['Component']) => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
+  cssjsToFela(root, info)
+  classNamesFix(forceHTMLTags)(root, info)
+  // adjustImports(root)
+  // selectClassNamesFromProps(root, info.name)
+  // refactorClassNamesObjectExpressionAttribute(root)
+  // adjustHtmlClassNameAttribute(root, info.name, forceHTMLTags)
   defaultExport(root, info)
   return root
 }
@@ -41,26 +53,26 @@ const adjustImports = (root: Ast.Ast) => {
 const importRepairs = {
   '../ButtonBase': '../ButtonBase/ButtonBase',
   '../Paper': '../Paper/Paper',
-  '../ListItem':'../ListItem/ListItem',
-  '../Portal':'../Portal/Portal',
-  '../Input':'../Input/Input',
-  '../InputLabel':'../InputLabel/InputLabel',
-  '../FormLabel':'../FormLabel/FormLabel',
-  '../FormControl':'../FormControl/FormControl',
-  '../FormHelperText':'../FormHelperText/FormHelperText',
-  '../Select':'../Select/Select',
-  '../../SvgIcon':'../../SvgIcon/SvgIcon',
-  '../Popover':'../Popover/Popover',
-  '../MenuList':'../MenuList/MenuList',
-  '../Modal':'../Modal/Modal',
-  '../Grow':'../Grow/Grow',
-  '../List':'../List/List',
-  '../RootRef':'../RootRef/RootRef',
-  '../Backdrop':'../Backdrop/Backdrop',
-  '../Fade':'../Fade/Fade',
+  '../ListItem': '../ListItem/ListItem',
+  '../Portal': '../Portal/Portal',
+  '../Input': '../Input/Input',
+  '../InputLabel': '../InputLabel/InputLabel',
+  '../FormLabel': '../FormLabel/FormLabel',
+  '../FormControl': '../FormControl/FormControl',
+  '../FormHelperText': '../FormHelperText/FormHelperText',
+  '../Select': '../Select/Select',
+  '../../SvgIcon': '../../SvgIcon/SvgIcon',
+  '../Popover': '../Popover/Popover',
+  '../MenuList': '../MenuList/MenuList',
+  '../Modal': '../Modal/Modal',
+  '../Grow': '../Grow/Grow',
+  '../List': '../List/List',
+  '../RootRef': '../RootRef/RootRef',
+  '../Backdrop': '../Backdrop/Backdrop',
+  '../Fade': '../Fade/Fade',
 }
 
-const getRenderFunc = (root: Ast.Ast, functionName: string) => {
+export const getRenderFunc = (root: Ast.Ast, functionName: string) => {
   return Queries.getNode_functionGlobal(root, functionName, true) || Queries.getNode_classMethod(root, functionName, 'render')
 }
 
@@ -85,10 +97,10 @@ const refactorClassNamesObjectExpressionAttribute = (root: Ast.Ast) => {
   const calls = Ast.astq().query(root, `// CallExpression [ /Identifier [@name == "classNames"] && /ObjectExpression ]`)
   calls.forEach(call => {
     // check, if every 'classNames(classes.root ??? ' ends with ' ???, classNameProp)'
-    if (call.arguments.length>=2) {
+    if (call.arguments.length >= 2) {
       const first = Parser.generateCode(call.arguments[0])
-      const last = Parser.generateCode(call.arguments[call.arguments.length-1])
-      if (first==='classes.root' && (last!='classNameProp' && last!='className')) {
+      const last = Parser.generateCode(call.arguments[call.arguments.length - 1])
+      if (first === 'classes.root' && (last != 'classNameProp' && last != 'className')) {
         // for Modal.js and StepIcon.js
         const x = 0
       }
@@ -108,7 +120,8 @@ const refactorClassNamesObjectExpressionAttribute = (root: Ast.Ast) => {
   return root
 }
 
-// in render: 'const {???} = props' transform to 'const {$system: {classNames, classNamesStr}, ???} = props'
+// in render: 'const {???} = props' transform to 'const {$system: {classNames, classNamesStr, theme}, ???} = props'
+// vyhodit 'theme' z props, 
 const selectClassNamesFromProps = (root: Ast.Ast, functionName: string) => {
   const func = getRenderFunc(root, functionName)
   const all = Ast.astq().query(func.body, '/VariableDeclaration/VariableDeclarator [ // Identifier [@name == "props"] ]')
@@ -116,8 +129,11 @@ const selectClassNamesFromProps = (root: Ast.Ast, functionName: string) => {
   // all.length>1: BottomNavigation
   const selectProps = all && all.length > 0 ? all[0] : null
   if (!selectProps) return root
-  const place = selectProps.id.properties;
-  (place as Array<any>).splice(0, 0, selectFromObject)
+  const place: any[] = selectProps.id.properties;
+  const themeIdx = place.findIndex(pl => pl.key && pl.key.name==='theme');
+  if (themeIdx>=0) 
+    place.splice(themeIdx,1);
+  (place as Array<any>).splice(0, 0, constSelectFromObjectAST)
   Ast.removeIgnored(root)
   Ast.removeTemporaryFields(root)
   return root
@@ -142,22 +158,26 @@ const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   if (info.withStyles) {
     const defaultProps = getStaticProp('defaultProps')
     if (defaultProps) {
+      // default props to string
+      const defaultPropsStr = Parser.generateCode(defaultProps.expression.right)
+      // remove Button.defaultProps
       const defaultPropsIdx = body.indexOf(defaultProps);
       body.splice(defaultPropsIdx, 1)
-      body.push({
-        "type": "VariableDeclaration",
-        "declarations": [
-          {
-            "type": "VariableDeclarator",
-            "id": {
-              "type": "Identifier",
-              "name": "defaultProps"
-            },
-            "init": defaultProps.expression.right
-          }
-        ],
-        "kind": "const"
-      })
+      body.push(Parser.parseCode(`const defaultProps = ${info.name}.defaultProps = ${defaultPropsStr};`))
+      // body.push({
+      //   "type": "VariableDeclaration",
+      //   "declarations": [
+      //     {
+      //       "type": "VariableDeclarator",
+      //       "id": {
+      //         "type": "Identifier",
+      //         "name": "defaultProps"
+      //       },
+      //       "init": defaultProps.expression.right
+      //     }
+      //   ],
+      //   "kind": "const"
+      // })
     }
   }
 
@@ -185,7 +205,7 @@ $system: {
     classNamesStr
 }
 */
-const selectFromObject = {
+const constSelectFromObjectAST = {
   "type": "ObjectProperty",
   "method": false,
   "key": {
@@ -231,7 +251,25 @@ const selectFromObject = {
         "extra": {
           "shorthand": true
         }
+      },
+      {
+        "type": "ObjectProperty",
+        "method": false,
+        "key": {
+          "type": "Identifier",
+          "name": "theme"
+        },
+        "computed": false,
+        "shorthand": true,
+        "value": {
+          "type": "Identifier",
+          "name": "theme"
+        },
+        "extra": {
+          "shorthand": true
+        }
       }
+
     ]
   }
 }

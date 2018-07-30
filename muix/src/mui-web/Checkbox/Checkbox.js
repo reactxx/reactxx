@@ -7,15 +7,22 @@ import IndeterminateCheckBoxIcon from '../internal/svg-icons/IndeterminateCheckB
 import { capitalize } from '../utils/helpers';
 import withStyles from '../styles/withStyles';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     color: theme.palette.text.secondary
   },
+
+  /* Styles applied to the root element if `checked={true}`. */
   checked: {
     NAME$checked16: true
   },
+
+  /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
     NAME$disabled16: true
   },
+
+  /* Styles applied to the root element if `color="primary"`. */
   colorPrimary: {
     '&.checked16': {
       color: theme.palette.primary.main
@@ -24,6 +31,8 @@ export const styles = theme => ({
       color: theme.palette.action.disabled
     }
   },
+
+  /* Styles applied to the root element if `color="secondary"`. */
   colorSecondary: {
     '&.checked16': {
       color: theme.palette.secondary.main
@@ -38,7 +47,8 @@ function Checkbox(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     checkedIcon,
     classes,
@@ -55,7 +65,7 @@ function Checkbox(props) {
   }} icon={indeterminate ? indeterminateIcon : icon} {...other} />;
 }
 
-const defaultProps = {
+const defaultProps = Checkbox.defaultProps = {
   checkedIcon: <CheckBoxIcon />,
   color: 'secondary',
   icon: <CheckBoxOutlineBlankIcon />,

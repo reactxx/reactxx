@@ -10,6 +10,7 @@ import Toolbar from '../Toolbar';
 import Typography from '../Typography';
 import TablePaginationActions from '../TablePaginationActions';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     fontSize: theme.typography.pxToRem(12),
     // Increase the specificity to override TableCell.
@@ -17,34 +18,52 @@ export const styles = theme => ({
       padding: 0
     }
   },
+
+  /* Styles applied to the Toolbar component. */
   toolbar: {
     height: 56,
     minHeight: 56,
     paddingRight: 2
   },
+
+  /* Styles applied to the spacer element. */
   spacer: {
     flex: '1 1 100%'
   },
-  menuItem: {},
+
+  /* Styles applied to the caption Typography components if `variant="caption"`. */
   caption: {
     flexShrink: 0
   },
-  input: {
-    fontSize: 'inherit',
-    flexShrink: 0
-  },
+
+  /* Styles applied to the Select component `root` class. */
   selectRoot: {
     marginRight: 32,
     marginLeft: 8,
     color: theme.palette.text.secondary
   },
+
+  /* Styles applied to the Select component `select` class. */
   select: {
     paddingLeft: 8,
     paddingRight: 16
   },
+
+  /* Styles applied to the Select component `icon` class. */
   selectIcon: {
     top: 1
   },
+
+  /* Styles applied to the Input component. */
+  input: {
+    fontSize: 'inherit',
+    flexShrink: 0
+  },
+
+  /* Styles applied to the MenuItem component. */
+  menuItem: {},
+
+  /* Styles applied to the internal `TablePaginationActions` component. */
   actions: {
     flexShrink: 0,
     color: theme.palette.text.secondary,
@@ -76,7 +95,8 @@ class TablePagination extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       ActionsComponent,
       backIconButtonProps,
@@ -131,7 +151,7 @@ class TablePagination extends React.Component {
 
 }
 
-const defaultProps = {
+const defaultProps = TablePagination.defaultProps = {
   ActionsComponent: TablePaginationActions,
   component: TableCell,
   labelDisplayedRows: ({

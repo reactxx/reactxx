@@ -27,6 +27,9 @@ export const styles = {
     padding: 0
   }
 };
+/**
+ * @ignore - internal component.
+ */
 
 class SwitchBase extends React.Component {
   input = null;
@@ -87,8 +90,10 @@ class SwitchBase extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
+      autoFocus,
       checked: checkedProp,
       checkedIcon,
       classes,
@@ -102,6 +107,8 @@ class SwitchBase extends React.Component {
       onBlur,
       onChange,
       onFocus,
+      readOnly,
+      required,
       tabIndex,
       type,
       value,
@@ -122,7 +129,7 @@ class SwitchBase extends React.Component {
     const hasLabelFor = type === 'checkbox' || type === 'radio';
     return <IconButton component="span" className={classNames(classes.root, checked && classes.checked, disabled && classes.disabled, classNameProp)} disabled={disabled} tabIndex={null} role={undefined} onFocus={this.handleFocus} onBlur={this.handleBlur} {...other}>
         {checked ? checkedIcon : icon}
-        <input id={hasLabelFor && id} type={type} name={name} checked={checked} onChange={this.handleInputChange} className={classNamesStr(classes.input)} disabled={disabled} tabIndex={tabIndex} value={value} ref={inputRef} {...inputProps} />
+        <input autoFocus={autoFocus} checked={checked} className={classNamesStr(classes.input)} disabled={disabled} id={hasLabelFor && id} name={name} onChange={this.handleInputChange} readOnly={readOnly} ref={inputRef} required={required} tabIndex={tabIndex} type={type} value={value} {...inputProps} />
       </IconButton>;
   }
 
@@ -133,7 +140,7 @@ class SwitchBase extends React.Component {
 SwitchBase.contextTypes = {
   muiFormControl: PropTypes.object
 };
-const defaultProps = {
+const defaultProps = SwitchBase.defaultProps = {
   type: 'checkbox'
 };
 

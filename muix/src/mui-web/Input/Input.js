@@ -47,6 +47,7 @@ export const styles = theme => {
   };
   const bottomLineColor = light ? 'rgba(0, 0, 0, 0.42)' : 'rgba(255, 255, 255, 0.7)';
   return {
+    /* Styles applied to the root element. */
     root: {
       // Mimics the default input display property used by browsers for an input.
       display: 'inline-flex',
@@ -60,18 +61,26 @@ export const styles = theme => {
         color: theme.palette.text.disabled
       }
     },
+
+    /* Styles applied to the root element if the component is a descendant of `FormControl`. */
     formControl: {
       'label + &': {
         marginTop: 16
       },
       NAME$formControl43: true
     },
+
+    /* Styles applied to the root element if the component is focused. */
     focused: {
       NAME$focused43: true
     },
+
+    /* Styles applied to the root element if `disabled={true}`. */
     disabled: {
       NAME$disabled43: true
     },
+
+    /* Styles applied to the root element if `disabledUnderline={false}`. */
     underline: {
       '&:after': {
         borderBottom: `2px solid ${theme.palette.primary[light ? 'dark' : 'light']}`,
@@ -118,15 +127,23 @@ export const styles = theme => {
         borderBottom: `1px dotted ${bottomLineColor}`
       }
     },
+
+    /* Styles applied to the root element if `error={true}`. */
     error: {
       NAME$error43: true
     },
+
+    /* Styles applied to the root element if `multiline={true}`. */
     multiline: {
       padding: `${8 - 2}px 0 ${8 - 1}px`
     },
+
+    /* Styles applied to the root element if `fullWidth={true}`. */
     fullWidth: {
       width: '100%'
     },
+
+    /* Styles applied to the `input` element. */
     input: {
       font: 'inherit',
       color: 'currentColor',
@@ -183,18 +200,26 @@ export const styles = theme => {
 
       }
     },
+
+    /* Styles applied to the `input` element if `margin="dense"`. */
     inputMarginDense: {
       paddingTop: 4 - 1
     },
+
+    /* Styles applied to the `input` element if `multiline={true}`. */
     inputMultiline: {
       resize: 'none',
       padding: 0
     },
+
+    /* Styles applied to the `input` element if `type` is not "text"`. */
     inputType: {
       // type="date" or type="time", etc. have specific styles we need to reset.
       height: '1.1875em' // Reset (19px), match the native input line-height
 
     },
+
+    /* Styles applied to the `input` element if `type="search"`. */
     inputTypeSearch: {
       // Improve type search style.
       '-moz-appearance': 'textfield',
@@ -207,6 +232,7 @@ function formControlState(props, context) {
   let disabled = props.disabled;
   let error = props.error;
   let margin = props.margin;
+  let required = props.required;
 
   if (context && context.muiFormControl) {
     if (typeof disabled === 'undefined') {
@@ -220,12 +246,17 @@ function formControlState(props, context) {
     if (typeof margin === 'undefined') {
       margin = context.muiFormControl.margin;
     }
+
+    if (typeof required === 'undefined') {
+      required = context.muiFormControl.required;
+    }
   }
 
   return {
     disabled,
     error,
-    margin
+    margin,
+    required
   };
 }
 
@@ -289,7 +320,7 @@ class Input extends React.Component {
 
   componentDidMount() {
     if (!this.isControlled) {
-      this.checkDirty(this.input);
+      this.checkDirty(this.inputRef);
     }
   }
 
@@ -343,7 +374,7 @@ class Input extends React.Component {
   };
   handleChange = event => {
     if (!this.isControlled) {
-      this.checkDirty(this.input);
+      this.checkDirty(this.inputRef);
     } // Perform in the willUpdate
 
 
@@ -351,21 +382,21 @@ class Input extends React.Component {
       this.props.onChange(event);
     }
   };
-  handleRefInput = node => {
-    this.input = node;
-    let ref;
+  handleRefInput = ref => {
+    this.inputRef = ref;
+    let refProp;
 
     if (this.props.inputRef) {
-      ref = this.props.inputRef;
+      refProp = this.props.inputRef;
     } else if (this.props.inputProps && this.props.inputProps.ref) {
-      ref = this.props.inputProps.ref;
+      refProp = this.props.inputProps.ref;
     }
 
-    if (ref) {
-      if (typeof ref === 'function') {
-        ref(node);
+    if (refProp) {
+      if (typeof refProp === 'function') {
+        refProp(ref);
       } else {
-        ref.current = node;
+        refProp.current = ref;
       }
     }
   };
@@ -400,7 +431,8 @@ class Input extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       autoComplete,
       autoFocus,
@@ -444,11 +476,11 @@ class Input extends React.Component {
     const {
       disabled,
       error,
-      margin
+      margin,
+      required
     } = formControlState(this.props, this.context);
     const className = classNames(classes.root, disabled && classes.disabled, error && classes.error, fullWidth && classes.fullWidth, this.state.focused && classes.focused, muiFormControl && classes.formControl, multiline && classes.multiline, !disableUnderline && classes.underline, classNameProp);
     const inputClassName = classNames(classes.input, disabled && classes.disabled, type !== 'text' && classes.inputType, type === 'search' && classes.inputTypeSearch, multiline && classes.inputMultiline, margin === 'dense' && classes.inputMarginDense, inputPropsClassName);
-    const required = muiFormControl && muiFormControl.required === true;
     let InputComponent = 'input';
     let inputProps = { ...inputPropsProp,
       ref: this.handleRefInput
@@ -476,10 +508,12 @@ class Input extends React.Component {
         InputComponent = Textarea;
       }
     }
-    if (typeof InputComponent === 'string') inputClassName = classNamesStr(inputClassName)
+
+    if (typeof InputComponent === 'string') inputClassName = classNamesStr(inputClassName);else inputProps.$system = this.props.$system;
+
     return <div className={classNamesStr(className)} {...other}>
         {startAdornment}
-        <InputComponent aria-invalid={error} autoComplete={autoComplete} autoFocus={autoFocus} className={inputClassName} defaultValue={defaultValue} disabled={disabled} id={id} name={name} onBlur={this.handleBlur} onChange={this.handleChange} onFocus={this.handleFocus} onKeyDown={onKeyDown} onKeyUp={onKeyUp} placeholder={placeholder} readOnly={readOnly} required={required ? true : undefined} rows={rows} type={type} value={value} {...inputProps} />
+        <InputComponent aria-invalid={error} autoComplete={autoComplete} autoFocus={autoFocus} className={inputClassName} defaultValue={defaultValue} disabled={disabled} id={id} name={name} onBlur={this.handleBlur} onChange={this.handleChange} onFocus={this.handleFocus} onKeyDown={onKeyDown} onKeyUp={onKeyUp} placeholder={placeholder} readOnly={readOnly} required={required} rows={rows} type={type} value={value} {...inputProps} />
         {endAdornment}
       </div>;
   }

@@ -4,6 +4,7 @@ import withStyles from '../styles/withStyles';
 import ButtonBase from "../ButtonBase/ButtonBase";
 import { isMuiElement } from '../utils/reactHelpers';
 export const styles = theme => ({
+  /* Styles applied to the (normally root) `component` element. May be wrapped by a `container`. */
   root: {
     display: 'flex',
     justifyContent: 'flex-start',
@@ -12,30 +13,46 @@ export const styles = theme => ({
     textDecoration: 'none',
     width: '100%',
     boxSizing: 'border-box',
-    textAlign: 'left'
-  },
-  container: {
-    position: 'relative'
-  },
-  focusVisible: {
-    backgroundColor: theme.palette.action.hover
-  },
-  default: {
+    textAlign: 'left',
     paddingTop: 12,
     paddingBottom: 12
   },
+
+  /* Styles applied to the `container` element if `children` includes `ListItemSecondaryAction`. */
+  container: {
+    position: 'relative'
+  },
+  // TODO: Sanity check this - why is focusVisibleClassName prop apparently applied to a div?
+
+  /* Styles applied to the `component`'s `focusVisibleClassName` property if `button={true}`. */
+  focusVisible: {
+    backgroundColor: theme.palette.action.hover
+  },
+
+  /* Legacy styles applied to the root element. Use `root` instead. */
+  default: {},
+
+  /* Styles applied to the `component` element if `dense={true}` or `children` includes `Avatar`. */
   dense: {
     paddingTop: 8,
     paddingBottom: 8
   },
+
+  /* Styles applied to the inner `component` element if `disabled={true}`. */
   disabled: {
     opacity: 0.5
   },
+
+  /* Styles applied to the inner `component` element if `divider={true}`. */
   divider: {
     borderBottom: `1px solid ${theme.palette.divider}`,
     backgroundClip: 'padding-box'
   },
+
+  /* Styles applied to the inner `component` element if `disableGutters={false}`. */
   gutters: theme.mixins.gutters(),
+
+  /* Styles applied to the inner `component` element if `button={true}`. */
   button: {
     transition: theme.transitions.create('background-color', {
       duration: theme.transitions.duration.shortest
@@ -49,6 +66,8 @@ export const styles = theme => ({
       }
     }
   },
+
+  /* Styles applied to the `component` element if `children` includes `ListItemSecondaryAction`. */
   secondaryAction: {
     // Add some space to avoid collision as `ListItemSecondaryAction`
     // is absolutely positionned.
@@ -67,7 +86,8 @@ class ListItem extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       button,
       children: childrenProp,
@@ -90,7 +110,7 @@ class ListItem extends React.Component {
     const children = React.Children.toArray(childrenProp);
     const hasAvatar = children.some(value => isMuiElement(value, ['ListItemAvatar']));
     const hasSecondaryAction = children.length && isMuiElement(children[children.length - 1], ['ListItemSecondaryAction']);
-    const className = classNames(classes.root, isDense || hasAvatar ? classes.dense : classes.default, !disableGutters && classes.gutters, divider && classes.divider, disabled && classes.disabled, button && classes.button, hasSecondaryAction && classes.secondaryAction, classNameProp);
+    const className = classNames(classes.root, classes.default, (isDense || hasAvatar) && classes.dense, !disableGutters && classes.gutters, divider && classes.divider, disabled && classes.disabled, button && classes.button, hasSecondaryAction && classes.secondaryAction, classNameProp);
     const componentProps = {
       className,
       disabled,
@@ -133,7 +153,7 @@ ListItem.contextTypes = {
 ListItem.childContextTypes = {
   dense: PropTypes.bool
 };
-const defaultProps = {
+const defaultProps = ListItem.defaultProps = {
   button: false,
   ContainerComponent: 'li',
   dense: false,

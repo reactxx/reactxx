@@ -14,7 +14,8 @@ function Select(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     autoWidth,
     children,
@@ -67,7 +68,7 @@ function Select(props) {
 }
 
 Select.muiName = 'Select';
-const defaultProps = {
+const defaultProps = Select.defaultProps = {
   autoWidth: false,
   displayEmpty: false,
   IconComponent: ArrowDropDownIcon,

@@ -6,18 +6,25 @@ import withStyles from '../styles/withStyles';
 import { duration } from '../styles/transitions';
 import { getTransitionProps } from '../transitions/utils';
 export const styles = theme => ({
+  /* Styles applied to the container element. */
   container: {
     height: 0,
     overflow: 'hidden',
     transition: theme.transitions.create('height')
   },
+
+  /* Styles applied to the container element when the transition has entered. */
   entered: {
     height: 'auto'
   },
+
+  /* Styles applied to the outer wrapper element. */
   wrapper: {
     // Hack to get children with a negative margin to not falsify the height computation.
     display: 'flex'
   },
+
+  /* Styles applied to the outer wrapper element. */
   wrapperInner: {
     width: '100%'
   }
@@ -49,7 +56,7 @@ class Collapse extends React.Component {
       timeout,
       theme
     } = this.props;
-    const wrapperHeight = this.wrapper ? this.wrapper.clientHeight : 0;
+    const wrapperHeight = this.wrapperRef ? this.wrapperRef.clientHeight : 0;
     const {
       duration: transitionDuration
     } = getTransitionProps(this.props, {
@@ -78,7 +85,7 @@ class Collapse extends React.Component {
     }
   };
   handleExit = node => {
-    const wrapperHeight = this.wrapper ? this.wrapper.clientHeight : 0;
+    const wrapperHeight = this.wrapperRef ? this.wrapperRef.clientHeight : 0;
     node.style.height = `${wrapperHeight}px`;
 
     if (this.props.onExit) {
@@ -90,7 +97,7 @@ class Collapse extends React.Component {
       timeout,
       theme
     } = this.props;
-    const wrapperHeight = this.wrapper ? this.wrapper.clientHeight : 0;
+    const wrapperHeight = this.wrapperRef ? this.wrapperRef.clientHeight : 0;
     const {
       duration: transitionDuration
     } = getTransitionProps(this.props, {
@@ -121,7 +128,8 @@ class Collapse extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       children,
       classes,
@@ -134,7 +142,6 @@ class Collapse extends React.Component {
       onExit,
       onExiting,
       style,
-      theme,
       timeout,
       ...other
     } = this.props;
@@ -143,8 +150,8 @@ class Collapse extends React.Component {
         return <Component className={classNamesStr(classes.container, state === 'entered' && classes.entered, className)} style={{ ...style,
           minHeight: collapsedHeight
         }} {...childProps}>
-              <div className={classNamesStr(classes.wrapper)} ref={node => {
-            this.wrapper = node;
+              <div className={classNamesStr(classes.wrapper)} ref={ref => {
+            this.wrapperRef = ref;
           }}>
                 <div className={classNamesStr(classes.wrapperInner)}>{children}</div>
               </div>
@@ -156,7 +163,7 @@ class Collapse extends React.Component {
 }
 
 Collapse.muiSupportAuto = true;
-const defaultProps = {
+const defaultProps = Collapse.defaultProps = {
   collapsedHeight: '0px',
   component: 'div',
   timeout: duration.standard

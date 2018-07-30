@@ -6,15 +6,22 @@ import RadioButtonCheckedIcon from '../internal/svg-icons/RadioButtonChecked';
 import { capitalize } from '../utils/helpers';
 import withStyles from '../styles/withStyles';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     color: theme.palette.text.secondary
   },
+
+  /* Styles applied to the root element if `checked={true}`. */
   checked: {
     NAME$checked63: true
   },
+
+  /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
     NAME$disabled63: true
   },
+
+  /* Styles applied to the root element if `color="primary"`. */
   colorPrimary: {
     '&.checked63': {
       color: theme.palette.primary.main
@@ -23,6 +30,8 @@ export const styles = theme => ({
       color: theme.palette.action.disabled
     }
   },
+
+  /* Styles applied to the root element if `color="secondary"`. */
   colorSecondary: {
     '&.checked63': {
       color: theme.palette.secondary.main
@@ -37,7 +46,8 @@ function Radio(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     classes,
     color,
@@ -50,7 +60,7 @@ function Radio(props) {
   }} {...other} />;
 }
 
-const defaultProps = {
+const defaultProps = Radio.defaultProps = {
   color: 'secondary'
 };
 

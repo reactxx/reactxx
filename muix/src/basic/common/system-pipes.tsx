@@ -75,7 +75,8 @@ export const getSystemPipes = <R extends Types.Shape>(
     const needsDeepMerge = separatedStylesAndProps.props.length > 1
 
     // merge non-style props
-    const mergedProps: Types.PropsX = needsDeepMerge ? Sheeter.deepMerges({}, separatedStylesAndProps.props) : { ...separatedStylesAndProps.props[0] }
+    const mergedProps: Types.PropsX & {$system} = needsDeepMerge ? Sheeter.deepMerges({}, separatedStylesAndProps.props) : { ...separatedStylesAndProps.props[0] }
+    mergedProps.$system = {theme}
     delete separatedStylesAndProps.props
 
     // use sheeter utils for props finishing (linearize $web and $native props, extract addIns (e.g. $mediaq))
@@ -85,7 +86,7 @@ export const getSystemPipes = <R extends Types.Shape>(
     if (!DEV_MODE && platformProps.$developer_flag) delete platformProps.$developer_flag
 
     // events
-    if (!platformProps.$system) platformProps.$system = {}
+    //if (!platformProps.$system) platformProps.$system = {}
     finalizeEvents(platformProps, renderState)
 
     if (options.isMui && platformProps.innerRef) { // hack for materia-ui

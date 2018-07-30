@@ -65,6 +65,7 @@ function getAnchorEl(anchorEl) {
 }
 
 export const styles = {
+  /* Styles applied to the `Paper` component. */
   paper: {
     position: 'absolute',
     overflowY: 'auto',
@@ -85,8 +86,7 @@ class Popover extends React.Component {
   handleGetOffsetTop = getOffsetTop;
   handleGetOffsetLeft = getOffsetLeft;
   handleResize = debounce(() => {
-    const element = ReactDOM.findDOMNode(this.paperRef);
-    this.setPositioningStyles(element);
+    this.setPositioningStyles(this.paperRef);
   }, 166); // Corresponds to 10 frames at 60 Hz.
 
   componentDidMount() {
@@ -195,7 +195,7 @@ class Popover extends React.Component {
     } // If an anchor element wasn't provided, just use the parent body element of this Popover
 
 
-    const anchorElement = getAnchorEl(anchorEl) || ownerDocument(ReactDOM.findDOMNode(this.paperRef)).body;
+    const anchorElement = getAnchorEl(anchorEl) || ownerDocument(this.paperRef).body;
     const anchorRect = anchorElement.getBoundingClientRect();
     const anchorVertical = contentAnchorOffset === 0 ? anchorOrigin.vertical : 'center';
     return {
@@ -251,7 +251,8 @@ class Popover extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       action,
       anchorEl,
@@ -293,8 +294,8 @@ class Popover extends React.Component {
       invisible: true
     }} {...other}>
         <TransitionComponent appear in={open} onEnter={this.handleEnter} onEntered={onEntered} onEntering={onEntering} onExit={onExit} onExited={onExited} onExiting={onExiting} role={role} timeout={transitionDuration} {...TransitionProps}>
-          <Paper className={classes.paper} data-mui-test="Popover" elevation={elevation} ref={node => {
-          this.paperRef = node;
+          <Paper className={classes.paper} data-mui-test="Popover" elevation={elevation} ref={ref => {
+          this.paperRef = ReactDOM.findDOMNode(ref);
         }} {...PaperProps}>
             <EventListener target="window" onResize={this.handleResize} />
             {children}
@@ -305,7 +306,7 @@ class Popover extends React.Component {
 
 }
 
-const defaultProps = {
+const defaultProps = Popover.defaultProps = {
   anchorReference: 'anchorEl',
   anchorOrigin: {
     vertical: 'top',

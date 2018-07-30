@@ -31,6 +31,9 @@ export const styles = {
   },
 };
 
+/**
+ * @ignore - internal component.
+ */
 class SwitchBase extends React.Component {
   input = null;
 
@@ -84,6 +87,7 @@ class SwitchBase extends React.Component {
 
   render() {
     const {
+      autoFocus,
       checked: checkedProp,
       checkedIcon,
       classes,
@@ -97,6 +101,8 @@ class SwitchBase extends React.Component {
       onBlur,
       onChange,
       onFocus,
+      readOnly,
+      required,
       tabIndex,
       type,
       value,
@@ -135,16 +141,19 @@ class SwitchBase extends React.Component {
       >
         {checked ? checkedIcon : icon}
         <input
-          id={hasLabelFor && id}
-          type={type}
-          name={name}
+          autoFocus={autoFocus}
           checked={checked}
-          onChange={this.handleInputChange}
           className={classes.input}
           disabled={disabled}
-          tabIndex={tabIndex}
-          value={value}
+          id={hasLabelFor && id}
+          name={name}
+          onChange={this.handleInputChange}
+          readOnly={readOnly}
           ref={inputRef}
+          required={required}
+          tabIndex={tabIndex}
+          type={type}
+          value={value}
           {...inputProps}
         />
       </IconButton>
@@ -155,6 +164,10 @@ class SwitchBase extends React.Component {
 // NB: If changed, please update Checkbox, Switch and Radio
 // so that the API documentation is updated.
 SwitchBase.propTypes = {
+  /**
+   * If `true`, the input will be focused during the first mount.
+   */
+  autoFocus: PropTypes.bool,
   /**
    * If `true`, the component is checked.
    */
@@ -228,6 +241,15 @@ SwitchBase.propTypes = {
    * @ignore
    */
   onFocus: PropTypes.func,
+  /**
+   * It prevents the user from changing the value of the field
+   * (not from interacting with the field).
+   */
+  readOnly: PropTypes.bool,
+  /**
+   * If `true`, the input will be required.
+   */
+  required: PropTypes.bool,
   /**
    * @ignore
    */

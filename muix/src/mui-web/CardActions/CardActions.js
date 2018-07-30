@@ -5,6 +5,7 @@ import { cloneChildrenWithClassName } from '../utils/reactHelpers';
 import '../Button'; // So we don't have any override priority issue.
 
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     display: 'flex',
     alignItems: 'center',
@@ -14,6 +15,8 @@ export const styles = theme => ({
       padding: '8px 12px'
     }
   },
+
+  /* Styles applied to the children. */
   action: {
     margin: '0 4px'
   }
@@ -23,7 +26,8 @@ function CardActions(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     disableActionSpacing,
     children,
@@ -36,7 +40,7 @@ function CardActions(props) {
     </div>;
 }
 
-const defaultProps = {
+const defaultProps = CardActions.defaultProps = {
   disableActionSpacing: false
 };
 

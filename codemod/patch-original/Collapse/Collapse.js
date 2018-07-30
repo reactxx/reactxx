@@ -9,18 +9,22 @@ import { duration } from '../styles/transitions';
 import { getTransitionProps } from '../transitions/utils';
 
 export const styles = theme => ({
+  /* Styles applied to the container element. */
   container: {
     height: 0,
     overflow: 'hidden',
     transition: theme.transitions.create('height'),
   },
+  /* Styles applied to the container element when the transition has entered. */
   entered: {
     height: 'auto',
   },
+  /* Styles applied to the outer wrapper element. */
   wrapper: {
     // Hack to get children with a negative margin to not falsify the height computation.
     display: 'flex',
   },
+  /* Styles applied to the outer wrapper element. */
   wrapperInner: {
     width: '100%',
   },
@@ -52,7 +56,7 @@ class Collapse extends React.Component {
 
   handleEntering = node => {
     const { timeout, theme } = this.props;
-    const wrapperHeight = this.wrapper ? this.wrapper.clientHeight : 0;
+    const wrapperHeight = this.wrapperRef ? this.wrapperRef.clientHeight : 0;
 
     const { duration: transitionDuration } = getTransitionProps(this.props, {
       mode: 'enter',
@@ -83,7 +87,7 @@ class Collapse extends React.Component {
   };
 
   handleExit = node => {
-    const wrapperHeight = this.wrapper ? this.wrapper.clientHeight : 0;
+    const wrapperHeight = this.wrapperRef ? this.wrapperRef.clientHeight : 0;
     node.style.height = `${wrapperHeight}px`;
 
     if (this.props.onExit) {
@@ -93,7 +97,7 @@ class Collapse extends React.Component {
 
   handleExiting = node => {
     const { timeout, theme } = this.props;
-    const wrapperHeight = this.wrapper ? this.wrapper.clientHeight : 0;
+    const wrapperHeight = this.wrapperRef ? this.wrapperRef.clientHeight : 0;
 
     const { duration: transitionDuration } = getTransitionProps(this.props, {
       mode: 'exit',
@@ -168,8 +172,8 @@ class Collapse extends React.Component {
             >
               <div
                 className={classes.wrapper}
-                ref={node => {
-                  this.wrapper = node;
+                ref={ref => {
+                  this.wrapperRef = ref;
                 }}
               >
                 <div className={classes.wrapperInner}>{children}</div>

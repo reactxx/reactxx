@@ -6,6 +6,7 @@ import withStyles from '../styles/withStyles';
 import ButtonBase from "../ButtonBase/ButtonBase";
 import { capitalize } from '../utils/helpers';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     cursor: 'pointer',
     display: 'inline-flex',
@@ -19,12 +20,16 @@ export const styles = theme => ({
       color: theme.palette.text.primary
     }
   },
+
+  /* Styles applied to the root element if `active={true}`. */
   active: {
     color: theme.palette.text.primary,
     '& .icon85': {
       opacity: 1
     }
   },
+
+  /* Styles applied to the icon component. */
   icon: {
     height: 16,
     marginRight: 4,
@@ -37,9 +42,13 @@ export const styles = theme => ({
     width: 16,
     NAME$icon85: true
   },
+
+  /* Styles applied to the icon component if `direction="desc"`. */
   iconDirectionDesc: {
     transform: 'rotate(0deg)'
   },
+
+  /* Styles applied to the icon component if `direction="asc"`. */
   iconDirectionAsc: {
     transform: 'rotate(180deg)'
   }
@@ -52,7 +61,8 @@ function TableSortLabel(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     active,
     classes,
@@ -67,7 +77,7 @@ function TableSortLabel(props) {
     </ButtonBase>;
 }
 
-const defaultProps = {
+const defaultProps = TableSortLabel.defaultProps = {
   active: false,
   direction: 'desc'
 };

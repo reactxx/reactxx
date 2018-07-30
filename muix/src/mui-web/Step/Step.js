@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import warning from 'warning';
 import withStyles from '../styles/withStyles';
 export const styles = {
+  /* Styles applied to the root element. */
   root: {},
+
+  /* Styles applied to the root element if `orientation="horizontal"`. */
   horizontal: {
     paddingLeft: 8,
     paddingRight: 8,
@@ -14,7 +17,11 @@ export const styles = {
       paddingRight: 0
     }
   },
+
+  /* Styles applied to the root element if `orientation="vertical"`. */
   vertical: {},
+
+  /* Styles applied to the root element if `alternativeLabel={true}`. */
   alternativeLabel: {
     flex: 1,
     position: 'relative'
@@ -25,7 +32,8 @@ function Step(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     active,
     alternativeLabel,
@@ -66,7 +74,7 @@ function Step(props) {
     </div>;
 }
 
-const defaultProps = {
+const defaultProps = Step.defaultProps = {
   active: false,
   completed: false,
   disabled: false

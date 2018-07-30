@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: theme.mixins.gutters({
     paddingTop: 16,
     paddingBottom: 16,
@@ -15,7 +16,8 @@ function CardContent(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     classes,
     className,
@@ -25,7 +27,7 @@ function CardContent(props) {
   return <Component className={classNamesStr(classes.root, className)} {...other} />;
 }
 
-const defaultProps = {
+const defaultProps = CardContent.defaultProps = {
   component: 'div'
 };
 

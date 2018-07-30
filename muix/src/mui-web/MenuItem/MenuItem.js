@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import ListItem from "../ListItem/ListItem";
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: { ...theme.typography.subheading,
     height: 24,
     boxSizing: 'content-box',
@@ -17,6 +18,8 @@ export const styles = theme => ({
       backgroundColor: theme.palette.action.selected
     }
   },
+
+  /* Styles applied to the root element if `selected={true}`. */
   selected: {
     NAME$selected57: true
   }
@@ -26,7 +29,8 @@ function MenuItem(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     classes,
     className,
@@ -38,7 +42,7 @@ function MenuItem(props) {
   return <ListItem button role={role} tabIndex={-1} className={classNames(classes.root, selected && classes.selected, className)} component={component} {...other} />;
 }
 
-const defaultProps = {
+const defaultProps = MenuItem.defaultProps = {
   component: 'li',
   role: 'menuitem',
   selected: false

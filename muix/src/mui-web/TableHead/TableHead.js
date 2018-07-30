@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = {
+  /* Styles applied to the root element. */
   root: {
     display: 'table-header-group'
   }
@@ -21,7 +22,8 @@ class TableHead extends React.Component {
     const {
       $system: {
         classNames,
-        classNamesStr
+        classNamesStr,
+        theme
       },
       classes,
       className,
@@ -36,7 +38,7 @@ class TableHead extends React.Component {
 TableHead.childContextTypes = {
   table: PropTypes.object
 };
-const defaultProps = {
+const defaultProps = TableHead.defaultProps = {
   component: 'thead'
 };
 

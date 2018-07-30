@@ -4,6 +4,7 @@ import withStyles from '../styles/withStyles';
 import { capitalize } from '../utils/helpers';
 import SwitchBase from '../internal/SwitchBase';
 export const styles = theme => ({
+  /* Styles applied to the root element. */
   root: {
     display: 'inline-flex',
     width: 62,
@@ -12,6 +13,8 @@ export const styles = theme => ({
     // For correct alignment with the text.
     verticalAlign: 'middle'
   },
+
+  /* Styles used to create the `icon` passed to the internal `SwitchBase` component `icon` prop. */
   icon: {
     boxShadow: theme.shadows[1],
     backgroundColor: 'currentColor',
@@ -20,9 +23,13 @@ export const styles = theme => ({
     borderRadius: '50%',
     NAME$icon76: true
   },
+
+  /* Styles applied the icon element component if `checked={true}`. */
   iconChecked: {
     boxShadow: theme.shadows[2]
   },
+
+  /* Styles applied to the internal `SwitchBase` component's `root` class. */
   switchBase: {
     zIndex: 1,
     color: theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[400],
@@ -31,6 +38,8 @@ export const styles = theme => ({
     }),
     NAME$switchBase76: true
   },
+
+  /* Styles applied to the internal `SwitchBase` component's `checked` class. */
   checked: {
     transform: 'translateX(14px)',
     '& + .bar76': {
@@ -38,6 +47,8 @@ export const styles = theme => ({
     },
     NAME$checked76: true
   },
+
+  /* Styles applied to the internal SwitchBase component's root element if `color="primary"`. */
   colorPrimary: {
     '&.checked76': {
       color: theme.palette.primary.main,
@@ -46,6 +57,8 @@ export const styles = theme => ({
       }
     }
   },
+
+  /* Styles applied to the internal SwitchBase component's root element if `color="secondary"`. */
   colorSecondary: {
     '&.checked76': {
       color: theme.palette.secondary.main,
@@ -54,6 +67,8 @@ export const styles = theme => ({
       }
     }
   },
+
+  /* Styles applied to the internal SwitchBase component's disabled class. */
   disabled: {
     '& + .bar76': {
       opacity: theme.palette.type === 'light' ? 0.12 : 0.1
@@ -68,6 +83,8 @@ export const styles = theme => ({
       }
     }
   },
+
+  /* Styles applied to the bar element. */
   bar: {
     borderRadius: 14 / 2,
     display: 'block',
@@ -91,7 +108,8 @@ function Switch(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     classes,
     className,
@@ -108,7 +126,7 @@ function Switch(props) {
     </span>;
 }
 
-const defaultProps = {
+const defaultProps = Switch.defaultProps = {
   color: 'secondary'
 };
 

@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import warning from 'warning';
 import withStyles from '../styles/withStyles';
 export const styles = {
+  /* Styles applied to the root element. */
   root: {
     display: 'block',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center'
   },
+
+  /* Styles applied to the root element if `component="video, audio, picture, iframe, or img"`. */
   media: {
     width: '100%'
   }
@@ -19,7 +22,8 @@ function CardMedia(props) {
   const {
     $system: {
       classNames,
-      classNamesStr
+      classNamesStr,
+      theme
     },
     classes,
     className,
@@ -38,7 +42,7 @@ function CardMedia(props) {
   return <Component className={classNamesStr(classes.root, isMediaComponent && classes.media, className)} style={composedStyle} src={isMediaComponent ? image || src : undefined} {...other} />;
 }
 
-const defaultProps = {
+const defaultProps = CardMedia.defaultProps = {
   component: 'div'
 };
 

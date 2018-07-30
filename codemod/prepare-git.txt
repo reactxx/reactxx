@@ -1,17 +1,17 @@
-- Download last version a unzip material-ui-1.4.0\packages\material-ui\src\ to d:\reactxx\muix\src\material-ui-temp\
+- Download last version a unzip material-ui-1.4.0\packages\material-ui\src\ to d:\reactxx\muix\src\mui-web-temp\
 - delete test-utils
 - select *.test.js and delete
 - select *.spec.* and delete
 - select *.d.ts, ZIP and delete
-- remove ": Object" from "export default function createPalette(palette: Object) {" ( in  D:\reactxx\muix\src\material-ui\styles\createPalette.js)
-- unpack ZIP to d:\reactxx\muix\src\muix\typings\
+- remove ": Object" from "export default function createPalette(palette: Object) {" ( in  D:\reactxx\muix\src\mui-web-temp\styles\createPalette.js)
+- unpack ZIP to d:\reactxx\muix\src\muix\reactxx-mui-web\typings\mui\
 
 
-- delete d:\reactxx\muix\src\material-ui\
+- delete d:\reactxx\muix\src\mui-web\
 - run (form TERMINAL in VSCODE): 
-  D:\reactxx\codemod>flow-remove-types --out-dir d:/reactxx/muix/src/material-ui d:/reactxx/muix/src/material-ui-temp/
-- delete d:/reactxx/muix/src/material-ui-temp/
+  D:\reactxx\codemod>flow-remove-types --out-dir d:/reactxx/muix/src/mui-web d:/reactxx/muix/src/mui-web-temp/
+- delete d:/reactxx/muix/src/mui-web-temp/
 
 - delete d:\reactxx\codemod\patch-original\
-- modify d:\reactxx\muix\src\material-ui\Input\Textarea.js ({} as options to withStyles)
+- modify d:\reactxx\muix\src\mui-web\Input\Textarea.js ({} as options to withStyles), classNames misto classnames
 - run index.ts from CodeMod project
