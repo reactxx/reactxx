@@ -542,4 +542,5 @@ export const InputCreator = withStyles(styles, Input, {
   defaultProps
 });
 const InputComponent = InputCreator();
+InputComponent.muiName = Input.muiName;
 export default InputComponent;

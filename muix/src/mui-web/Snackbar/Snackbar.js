@@ -284,4 +284,5 @@ export const SnackbarCreator = withStyles(styles, Snackbar, {
   defaultProps
 });
 const SnackbarComponent = SnackbarCreator();
+SnackbarComponent.muiName = Snackbar.muiName;
 export default SnackbarComponent;

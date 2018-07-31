@@ -38,4 +38,5 @@ export const ListItemSecondaryActionCreator = withStyles(styles, ListItemSeconda
   defaultProps
 });
 const ListItemSecondaryActionComponent = ListItemSecondaryActionCreator();
+ListItemSecondaryActionComponent.muiName = ListItemSecondaryAction.muiName;
 export default ListItemSecondaryActionComponent;

@@ -152,4 +152,5 @@ export const SwitchBaseCreator = withStyles(styles, SwitchBase, {
   defaultProps
 });
 const SwitchBaseComponent = SwitchBaseCreator();
+SwitchBaseComponent.muiName = SwitchBase.muiName;
 export default SwitchBaseComponent;

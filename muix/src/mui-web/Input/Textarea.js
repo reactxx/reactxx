@@ -181,4 +181,5 @@ export const TextareaCreator = withStyles(styles, Textarea, {
   defaultProps
 });
 const TextareaComponent = TextareaCreator();
+TextareaComponent.muiName = Textarea.muiName;
 export default TextareaComponent;

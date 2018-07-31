@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
-import Typography from '../Typography';
+import Typography from "../Typography/Typography";
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
@@ -107,4 +107,5 @@ export const FormControlLabelCreator = withStyles(styles, FormControlLabel, {
   defaultProps
 });
 const FormControlLabelComponent = FormControlLabelCreator();
+FormControlLabelComponent.muiName = FormControlLabel.muiName;
 export default FormControlLabelComponent;

@@ -91,4 +91,5 @@ export const InputLabelCreator = withStyles(styles, InputLabel, {
   defaultProps
 });
 const InputLabelComponent = InputLabelCreator();
+InputLabelComponent.muiName = InputLabel.muiName;
 export default InputLabelComponent;

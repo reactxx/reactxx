@@ -78,4 +78,5 @@ export const StepConnectorCreator = withStyles(styles, StepConnector, {
   defaultProps
 });
 const StepConnectorComponent = StepConnectorCreator();
+StepConnectorComponent.muiName = StepConnector.muiName;
 export default StepConnectorComponent;

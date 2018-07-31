@@ -61,4 +61,5 @@ export const ListItemAvatarCreator = withStyles(styles, ListItemAvatar, {
   defaultProps
 });
 const ListItemAvatarComponent = ListItemAvatarCreator();
+ListItemAvatarComponent.muiName = ListItemAvatar.muiName;
 export default ListItemAvatarComponent;

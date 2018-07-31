@@ -77,4 +77,5 @@ export const IconCreator = withStyles(styles, Icon, {
   defaultProps
 });
 const IconComponent = IconCreator();
+IconComponent.muiName = Icon.muiName;
 export default IconComponent;

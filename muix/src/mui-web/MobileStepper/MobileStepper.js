@@ -109,4 +109,5 @@ export const MobileStepperCreator = withStyles(styles, MobileStepper, {
   defaultProps
 });
 const MobileStepperComponent = MobileStepperCreator();
+MobileStepperComponent.muiName = MobileStepper.muiName;
 export default MobileStepperComponent;

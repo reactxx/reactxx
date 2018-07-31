@@ -330,4 +330,5 @@ export const PopoverCreator = withStyles(styles, Popover, {
   defaultProps
 });
 const PopoverComponent = PopoverCreator();
+PopoverComponent.muiName = Popover.muiName;
 export default PopoverComponent;

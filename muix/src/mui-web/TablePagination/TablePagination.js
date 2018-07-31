@@ -7,7 +7,7 @@ import MenuItem from '../MenuItem';
 import Select from "../Select/Select";
 import TableCell from '../TableCell';
 import Toolbar from '../Toolbar';
-import Typography from '../Typography';
+import Typography from "../Typography/Typography";
 import TablePaginationActions from '../TablePaginationActions';
 export const styles = theme => ({
   /* Styles applied to the root element. */
@@ -171,4 +171,5 @@ export const TablePaginationCreator = withStyles(styles, TablePagination, {
   defaultProps
 });
 const TablePaginationComponent = TablePaginationCreator();
+TablePaginationComponent.muiName = TablePagination.muiName;
 export default TablePaginationComponent;

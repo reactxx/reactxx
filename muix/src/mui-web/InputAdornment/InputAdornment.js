@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Typography from '../Typography';
+import Typography from "../Typography/Typography";
 import withStyles from '../styles/withStyles';
 export const styles = {
   /* Styles applied to the root element. */
@@ -54,4 +54,5 @@ export const InputAdornmentCreator = withStyles(styles, InputAdornment, {
   defaultProps
 });
 const InputAdornmentComponent = InputAdornmentCreator();
+InputAdornmentComponent.muiName = InputAdornment.muiName;
 export default InputAdornmentComponent;

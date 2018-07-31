@@ -50,4 +50,5 @@ export const DialogActionsCreator = withStyles(styles, DialogActions, {
   defaultProps
 });
 const DialogActionsComponent = DialogActionsCreator();
+DialogActionsComponent.muiName = DialogActions.muiName;
 export default DialogActionsComponent;

@@ -39,4 +39,5 @@ export const CardContentCreator = withStyles(styles, CardContent, {
   defaultProps
 });
 const CardContentComponent = CardContentCreator();
+CardContentComponent.muiName = CardContent.muiName;
 export default CardContentComponent;

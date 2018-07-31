@@ -70,6 +70,7 @@ const importRepairs = {
   '../RootRef': '../RootRef/RootRef',
   '../Backdrop': '../Backdrop/Backdrop',
   '../Fade': '../Fade/Fade',
+  '../Typography': '../Typography/Typography',
 }
 
 export const getRenderFunc = (root: Ast.Ast, functionName: string) => {
@@ -148,8 +149,11 @@ const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
     const propTypesIdx = body.indexOf(propTypes);
     body.splice(propTypesIdx, 1)
   }
-  // remove withStyles call
+  // remove withStyles call (ans save mui name)
+  //let muiName:string 
   if (info.withStyles) {
+    // const muiNameItem = Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExportDefaultDeclaration//ObjectExpression/ObjectProperty [ /Identifier [@name=="name"] ] /StringLiteral`), true)
+    // muiName = muiNameItem && muiNameItem.value
     const defaultExport = Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExportDefaultDeclaration`))
     const defaultExportIdx = body.indexOf(defaultExport);
     body.splice(defaultExportIdx, 1)
@@ -190,9 +194,10 @@ const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/${info.dir}/${info.name}').Shape>}
 */
-export const ${info.name}Creator = withStyles(styles, ${info.name}, {isMui:true, defaultProps})
-const ${info.name}Component  = ${info.name}Creator()
-export default ${info.name}Component
+export const ${info.name}Creator = withStyles(styles, ${info.name}, {isMui:true, defaultProps});
+const ${info.name}Component  = ${info.name}Creator();
+if (${info.name}.muiName) ${info.name}Component.muiName = ${info.name}.muiName;
+export default ${info.name}Component;
     `)
     Array.prototype.push.call(body, ...defaultExport.program.body)
   }

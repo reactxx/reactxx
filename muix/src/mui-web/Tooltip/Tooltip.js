@@ -349,4 +349,5 @@ export const TooltipCreator = withStyles(styles, Tooltip, {
   defaultProps
 });
 const TooltipComponent = TooltipCreator();
+TooltipComponent.muiName = Tooltip.muiName;
 export default TooltipComponent;

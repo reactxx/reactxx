@@ -34,4 +34,5 @@ export const ExpansionPanelDetailsCreator = withStyles(styles, ExpansionPanelDet
   defaultProps
 });
 const ExpansionPanelDetailsComponent = ExpansionPanelDetailsCreator();
+ExpansionPanelDetailsComponent.muiName = ExpansionPanelDetails.muiName;
 export default ExpansionPanelDetailsComponent;

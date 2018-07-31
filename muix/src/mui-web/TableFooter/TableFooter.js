@@ -50,4 +50,5 @@ export const TableFooterCreator = withStyles(styles, TableFooter, {
   defaultProps
 });
 const TableFooterComponent = TableFooterCreator();
+TableFooterComponent.muiName = TableFooter.muiName;
 export default TableFooterComponent;

@@ -73,4 +73,5 @@ export const StepButtonCreator = withStyles(styles, StepButton, {
   defaultProps
 });
 const StepButtonComponent = StepButtonCreator();
+StepButtonComponent.muiName = StepButton.muiName;
 export default StepButtonComponent;

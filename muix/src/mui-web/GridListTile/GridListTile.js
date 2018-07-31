@@ -138,4 +138,5 @@ export const GridListTileCreator = withStyles(styles, GridListTile, {
   defaultProps
 });
 const GridListTileComponent = GridListTileCreator();
+GridListTileComponent.muiName = GridListTile.muiName;
 export default GridListTileComponent;

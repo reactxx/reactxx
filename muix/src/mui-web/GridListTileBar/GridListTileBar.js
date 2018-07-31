@@ -119,4 +119,5 @@ export const GridListTileBarCreator = withStyles(styles, GridListTileBar, {
   defaultProps
 });
 const GridListTileBarComponent = GridListTileBarCreator();
+GridListTileBarComponent.muiName = GridListTileBar.muiName;
 export default GridListTileBarComponent;

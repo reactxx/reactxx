@@ -66,4 +66,5 @@ export const DividerCreator = withStyles(styles, Divider, {
   defaultProps
 });
 const DividerComponent = DividerCreator();
+DividerComponent.muiName = Divider.muiName;
 export default DividerComponent;

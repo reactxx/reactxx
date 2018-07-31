@@ -50,4 +50,5 @@ export const FormGroupCreator = withStyles(styles, FormGroup, {
   defaultProps
 });
 const FormGroupComponent = FormGroupCreator();
+FormGroupComponent.muiName = FormGroup.muiName;
 export default FormGroupComponent;

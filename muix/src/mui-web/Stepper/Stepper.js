@@ -99,4 +99,5 @@ export const StepperCreator = withStyles(styles, Stepper, {
   defaultProps
 });
 const StepperComponent = StepperCreator();
+StepperComponent.muiName = Stepper.muiName;
 export default StepperComponent;

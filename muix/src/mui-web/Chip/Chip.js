@@ -215,4 +215,5 @@ export const ChipCreator = withStyles(styles, Chip, {
   defaultProps
 });
 const ChipComponent = ChipCreator();
+ChipComponent.muiName = Chip.muiName;
 export default ChipComponent;

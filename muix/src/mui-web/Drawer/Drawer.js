@@ -188,4 +188,5 @@ export const DrawerCreator = withStyles(styles, Drawer, {
   defaultProps
 });
 const DrawerComponent = DrawerCreator();
+DrawerComponent.muiName = Drawer.muiName;
 export default DrawerComponent;

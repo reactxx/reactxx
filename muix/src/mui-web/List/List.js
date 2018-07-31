@@ -77,4 +77,5 @@ export const ListCreator = withStyles(styles, List, {
   defaultProps
 });
 const ListComponent = ListCreator();
+ListComponent.muiName = List.muiName;
 export default ListComponent;

@@ -50,4 +50,5 @@ export const TableHeadCreator = withStyles(styles, TableHead, {
   defaultProps
 });
 const TableHeadComponent = TableHeadCreator();
+TableHeadComponent.muiName = TableHead.muiName;
 export default TableHeadComponent;

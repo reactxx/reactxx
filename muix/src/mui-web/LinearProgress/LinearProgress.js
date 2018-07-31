@@ -232,4 +232,5 @@ export const LinearProgressCreator = withStyles(styles, LinearProgress, {
   defaultProps
 });
 const LinearProgressComponent = LinearProgressCreator();
+LinearProgressComponent.muiName = LinearProgress.muiName;
 export default LinearProgressComponent;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
-import Typography from '../Typography';
+import Typography from "../Typography/Typography";
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: theme.mixins.gutters({
@@ -98,4 +98,5 @@ export const CardHeaderCreator = withStyles(styles, CardHeader, {
   defaultProps
 });
 const CardHeaderComponent = CardHeaderCreator();
+CardHeaderComponent.muiName = CardHeader.muiName;
 export default CardHeaderComponent;

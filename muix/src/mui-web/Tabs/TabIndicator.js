@@ -50,4 +50,5 @@ export const TabIndicatorCreator = withStyles(styles, TabIndicator, {
   defaultProps
 });
 const TabIndicatorComponent = TabIndicatorCreator();
+TabIndicatorComponent.muiName = TabIndicator.muiName;
 export default TabIndicatorComponent;

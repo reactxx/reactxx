@@ -88,4 +88,5 @@ export const StepCreator = withStyles(styles, Step, {
   defaultProps
 });
 const StepComponent = StepCreator();
+StepComponent.muiName = Step.muiName;
 export default StepComponent;

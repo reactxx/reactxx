@@ -72,4 +72,5 @@ export const StepContentCreator = withStyles(styles, StepContent, {
   defaultProps
 });
 const StepContentComponent = StepContentCreator();
+StepContentComponent.muiName = StepContent.muiName;
 export default StepContentComponent;

@@ -10,6 +10,8 @@
     "keycode": "^2.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-number-format": "^3.5.0",
+    "react-text-mask": "^5.4.3",
     "reactxx-mdi": "^0.1.67",
     "tslib": "^1.9.0",
     "warning": "^3.0.0"
@@ -48,6 +50,8 @@
       "react-jss": "npm:react-jss@^8.1.0",
       "core-js": "npm:core-js@^2.5.1",
       "deepmerge": "npm:deepmerge@^2.0.1",
+      "react-number-format": "npm:react-number-format@^3.5.0",
+      "react-text-mask": "npm:react-text-mask@^5.4.3",
       "reactxx-mdi": "npm:reactxx-mdi@^0.1.67",
       "tslib": "npm:tslib@^1.9.0",
       "warning": "npm:warning@^3.0.0",
@@ -71,6 +75,7 @@
     },
     "devDependencies": {},
     "peerDependencies": {
+      "@types/react": "npm:@types/react@^16.0.0",
       "assert": "npm:jspm-nodelibs-assert@^0.2.0",
       "buffer": "npm:jspm-nodelibs-buffer@^0.2.0",
       "child_process": "npm:jspm-nodelibs-child_process@^0.2.0",

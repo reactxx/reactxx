@@ -265,4 +265,5 @@ export const ButtonCreator = withStyles(styles, Button, {
   defaultProps
 });
 const ButtonComponent = ButtonCreator();
+ButtonComponent.muiName = Button.muiName;
 export default ButtonComponent;

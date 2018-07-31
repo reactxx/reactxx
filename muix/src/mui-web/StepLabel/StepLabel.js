@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
-import Typography from '../Typography';
+import Typography from "../Typography/Typography";
 import StepIcon from '../StepIcon';
 export const styles = theme => ({
   /* Styles applied to the root element. */
@@ -135,4 +135,5 @@ export const StepLabelCreator = withStyles(styles, StepLabel, {
   defaultProps
 });
 const StepLabelComponent = StepLabelCreator();
+StepLabelComponent.muiName = StepLabel.muiName;
 export default StepLabelComponent;

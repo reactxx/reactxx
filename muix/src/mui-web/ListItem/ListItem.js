@@ -170,4 +170,5 @@ export const ListItemCreator = withStyles(styles, ListItem, {
   defaultProps
 });
 const ListItemComponent = ListItemCreator();
+ListItemComponent.muiName = ListItem.muiName;
 export default ListItemComponent;

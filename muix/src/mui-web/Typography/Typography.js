@@ -162,4 +162,5 @@ export const TypographyCreator = withStyles(styles, Typography, {
   defaultProps
 });
 const TypographyComponent = TypographyCreator();
+TypographyComponent.muiName = Typography.muiName;
 export default TypographyComponent;

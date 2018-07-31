@@ -113,4 +113,5 @@ export const IconButtonCreator = withStyles(styles, IconButton, {
   defaultProps
 });
 const IconButtonComponent = IconButtonCreator();
+IconButtonComponent.muiName = IconButton.muiName;
 export default IconButtonComponent;

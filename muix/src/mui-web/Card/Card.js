@@ -37,4 +37,5 @@ export const CardCreator = withStyles(styles, Card, {
   defaultProps
 });
 const CardComponent = CardCreator();
+CardComponent.muiName = Card.muiName;
 export default CardComponent;

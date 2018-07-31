@@ -152,4 +152,5 @@ export const ExpansionPanelSummaryCreator = withStyles(styles, ExpansionPanelSum
   defaultProps
 });
 const ExpansionPanelSummaryComponent = ExpansionPanelSummaryCreator();
+ExpansionPanelSummaryComponent.muiName = ExpansionPanelSummary.muiName;
 export default ExpansionPanelSummaryComponent;

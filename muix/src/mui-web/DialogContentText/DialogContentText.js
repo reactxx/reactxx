@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
-import Typography from '../Typography';
+import Typography from "../Typography/Typography";
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
@@ -35,4 +35,5 @@ export const DialogContentTextCreator = withStyles(styles, DialogContentText, {
   defaultProps
 });
 const DialogContentTextComponent = DialogContentTextCreator();
+DialogContentTextComponent.muiName = DialogContentText.muiName;
 export default DialogContentTextComponent;

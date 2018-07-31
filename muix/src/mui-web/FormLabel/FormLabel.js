@@ -108,4 +108,5 @@ export const FormLabelCreator = withStyles(styles, FormLabel, {
   defaultProps
 });
 const FormLabelComponent = FormLabelCreator();
+FormLabelComponent.muiName = FormLabel.muiName;
 export default FormLabelComponent;

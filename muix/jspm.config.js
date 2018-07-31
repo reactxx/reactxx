@@ -37,6 +37,9 @@ SystemJS.config({
     "npm:*.json"
   ],
   map: {
+    "@types/react": "npm:@types/react@16.4.7",
+    "react-number-format": "npm:react-number-format@3.5.0",
+    "react-text-mask": "npm:react-text-mask@5.4.3",
     "classnames": "npm:classnames@2.2.6",
     "assert": "npm:jspm-nodelibs-assert@0.2.1",
     "brcast": "npm:brcast@3.0.1",
@@ -244,7 +247,7 @@ SystemJS.config({
     },
     "npm:jspm-nodelibs-buffer@0.2.3": {
       "map": {
-        "buffer": "npm:buffer@5.1.0"
+        "buffer": "npm:buffer@5.2.0"
       }
     },
     "npm:jspm-nodelibs-crypto@0.2.1": {
@@ -390,12 +393,6 @@ SystemJS.config({
       "map": {
         "punycode": "npm:punycode@1.3.2",
         "querystring": "npm:querystring@0.2.0"
-      }
-    },
-    "npm:buffer@5.1.0": {
-      "map": {
-        "base64-js": "npm:base64-js@1.3.0",
-        "ieee754": "npm:ieee754@1.1.12"
       }
     },
     "npm:fela-plugin-extend@6.0.7": {
@@ -700,6 +697,28 @@ SystemJS.config({
         "fela-utils": "npm:fela-utils@8.0.8",
         "css-in-js-utils": "npm:css-in-js-utils@2.0.1",
         "isobject": "npm:isobject@3.0.1"
+      }
+    },
+    "npm:react-number-format@3.5.0": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.26.0",
+        "prop-types": "npm:prop-types@15.6.2"
+      }
+    },
+    "npm:react-text-mask@5.4.3": {
+      "map": {
+        "prop-types": "npm:prop-types@15.6.2"
+      }
+    },
+    "npm:@types/react@16.4.7": {
+      "map": {
+        "csstype": "npm:csstype@2.5.6"
+      }
+    },
+    "npm:buffer@5.2.0": {
+      "map": {
+        "base64-js": "npm:base64-js@1.3.0",
+        "ieee754": "npm:ieee754@1.1.12"
       }
     }
   }

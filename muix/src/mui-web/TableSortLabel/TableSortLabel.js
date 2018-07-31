@@ -90,4 +90,5 @@ export const TableSortLabelCreator = withStyles(styles, TableSortLabel, {
   defaultProps
 });
 const TableSortLabelComponent = TableSortLabelCreator();
+TableSortLabelComponent.muiName = TableSortLabel.muiName;
 export default TableSortLabelComponent;

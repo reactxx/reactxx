@@ -54,4 +54,5 @@ export const CssBaselineCreator = withStyles(styles, CssBaseline, {
   defaultProps
 });
 const CssBaselineComponent = CssBaselineCreator();
+CssBaselineComponent.muiName = CssBaseline.muiName;
 export default CssBaselineComponent;

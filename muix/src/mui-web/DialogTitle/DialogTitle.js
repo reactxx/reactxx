@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
-import Typography from '../Typography';
+import Typography from "../Typography/Typography";
 export const styles = {
   /* Styles applied to the root element. */
   root: {
@@ -41,4 +41,5 @@ export const DialogTitleCreator = withStyles(styles, DialogTitle, {
   defaultProps
 });
 const DialogTitleComponent = DialogTitleCreator();
+DialogTitleComponent.muiName = DialogTitle.muiName;
 export default DialogTitleComponent;

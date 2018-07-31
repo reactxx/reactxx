@@ -83,4 +83,5 @@ export const TableRowCreator = withStyles(styles, TableRow, {
   defaultProps
 });
 const TableRowComponent = TableRowCreator();
+TableRowComponent.muiName = TableRow.muiName;
 export default TableRowComponent;

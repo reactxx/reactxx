@@ -175,4 +175,5 @@ export const FormControlCreator = withStyles(styles, FormControl, {
   defaultProps
 });
 const FormControlComponent = FormControlCreator();
+FormControlComponent.muiName = FormControl.muiName;
 export default FormControlComponent;

@@ -40,4 +40,5 @@ export const DialogContentCreator = withStyles(styles, DialogContent, {
   defaultProps
 });
 const DialogContentComponent = DialogContentCreator();
+DialogContentComponent.muiName = DialogContent.muiName;
 export default DialogContentComponent;

@@ -59,4 +59,5 @@ export const BottomNavigationCreator = withStyles(styles, BottomNavigation, {
   defaultProps
 });
 const BottomNavigationComponent = BottomNavigationCreator();
+BottomNavigationComponent.muiName = BottomNavigation.muiName;
 export default BottomNavigationComponent;

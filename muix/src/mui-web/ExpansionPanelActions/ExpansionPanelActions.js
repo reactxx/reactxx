@@ -44,4 +44,5 @@ export const ExpansionPanelActionsCreator = withStyles(styles, ExpansionPanelAct
   defaultProps
 });
 const ExpansionPanelActionsComponent = ExpansionPanelActionsCreator();
+ExpansionPanelActionsComponent.muiName = ExpansionPanelActions.muiName;
 export default ExpansionPanelActionsComponent;

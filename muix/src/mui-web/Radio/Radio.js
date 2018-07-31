@@ -72,4 +72,5 @@ export const RadioCreator = withStyles(styles, Radio, {
   defaultProps
 });
 const RadioComponent = RadioCreator();
+RadioComponent.muiName = Radio.muiName;
 export default RadioComponent;

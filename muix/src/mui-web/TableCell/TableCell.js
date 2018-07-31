@@ -132,4 +132,5 @@ export const TableCellCreator = withStyles(styles, TableCell, {
   defaultProps
 });
 const TableCellComponent = TableCellCreator();
+TableCellComponent.muiName = TableCell.muiName;
 export default TableCellComponent;

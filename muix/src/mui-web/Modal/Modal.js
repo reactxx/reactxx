@@ -312,4 +312,5 @@ export const ModalCreator = withStyles(styles, Modal, {
   defaultProps
 });
 const ModalComponent = ModalCreator();
+ModalComponent.muiName = Modal.muiName;
 export default ModalComponent;

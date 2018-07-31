@@ -52,4 +52,5 @@ export const CardActionsCreator = withStyles(styles, CardActions, {
   defaultProps
 });
 const CardActionsComponent = CardActionsCreator();
+CardActionsComponent.muiName = CardActions.muiName;
 export default CardActionsComponent;

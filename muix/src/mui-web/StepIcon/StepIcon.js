@@ -91,4 +91,5 @@ export const StepIconCreator = withStyles(styles, StepIcon, {
   defaultProps
 });
 const StepIconComponent = StepIconCreator();
+StepIconComponent.muiName = StepIcon.muiName;
 export default StepIconComponent;

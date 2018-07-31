@@ -177,4 +177,5 @@ export const CollapseCreator = withStyles(styles, Collapse, {
   defaultProps
 });
 const CollapseComponent = CollapseCreator();
+CollapseComponent.muiName = Collapse.muiName;
 export default CollapseComponent;

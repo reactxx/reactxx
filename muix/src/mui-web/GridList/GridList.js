@@ -70,4 +70,5 @@ export const GridListCreator = withStyles(styles, GridList, {
   defaultProps
 });
 const GridListComponent = GridListCreator();
+GridListComponent.muiName = GridList.muiName;
 export default GridListComponent;

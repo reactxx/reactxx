@@ -72,4 +72,5 @@ export const ListSubheaderCreator = withStyles(styles, ListSubheader, {
   defaultProps
 });
 const ListSubheaderComponent = ListSubheaderCreator();
+ListSubheaderComponent.muiName = ListSubheader.muiName;
 export default ListSubheaderComponent;

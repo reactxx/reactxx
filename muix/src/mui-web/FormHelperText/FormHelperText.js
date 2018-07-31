@@ -91,4 +91,5 @@ export const FormHelperTextCreator = withStyles(styles, FormHelperText, {
   defaultProps
 });
 const FormHelperTextComponent = FormHelperTextCreator();
+FormHelperTextComponent.muiName = FormHelperText.muiName;
 export default FormHelperTextComponent;

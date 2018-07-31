@@ -56,4 +56,5 @@ export const MenuItemCreator = withStyles(styles, MenuItem, {
   defaultProps
 });
 const MenuItemComponent = MenuItemCreator();
+MenuItemComponent.muiName = MenuItem.muiName;
 export default MenuItemComponent;

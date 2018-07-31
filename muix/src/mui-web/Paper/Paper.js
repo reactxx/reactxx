@@ -56,4 +56,5 @@ export const PaperCreator = withStyles(styles, Paper, {
   defaultProps
 });
 const PaperComponent = PaperCreator();
+PaperComponent.muiName = Paper.muiName;
 export default PaperComponent;

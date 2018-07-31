@@ -219,4 +219,5 @@ export const TabCreator = withStyles(styles, Tab, {
   defaultProps
 });
 const TabComponent = TabCreator();
+TabComponent.muiName = Tab.muiName;
 export default TabComponent;

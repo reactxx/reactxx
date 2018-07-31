@@ -1,18 +1,48 @@
 {
-  "type": "ObjectProperty",
-  "method": false,
-  "key": {
-    "type": "Identifier",
-    "name": "GENERATE"
-  },
-  "computed": false,
-  "shorthand": false,
-  "value": {
-    "type": "StringLiteral",
-    "extra": {
-      "rawValue": "xxx",
-      "raw": "'xxx'"
+  "type": "ExportDefaultDeclaration",
+  "declaration": {
+    "type": "CallExpression",
+    "callee": {
+      "type": "CallExpression",
+      "callee": {
+        "type": "Identifier",
+        "name": "withStyles"
+      },
+      "arguments": [
+        {
+          "type": "Identifier",
+          "name": "styles"
+        },
+        {
+          "type": "ObjectExpression",
+          "properties": [
+            {
+              "type": "ObjectProperty",
+              "method": false,
+              "key": {
+                "type": "Identifier",
+                "name": "name"
+              },
+              "computed": false,
+              "shorthand": false,
+              "value": {
+                "type": "StringLiteral",
+                "extra": {
+                  "rawValue": "MuiAppBar",
+                  "raw": "'MuiAppBar'"
+                },
+                "value": "MuiAppBar"
+              }
+            }
+          ]
+        }
+      ]
     },
-    "value": "xxx"
+    "arguments": [
+      {
+        "type": "Identifier",
+        "name": "AppBar"
+      }
+    ]
   }
 }

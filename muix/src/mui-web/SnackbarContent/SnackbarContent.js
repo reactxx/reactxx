@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import Paper from "../Paper/Paper";
-import Typography from '../Typography';
+import Typography from "../Typography/Typography";
 import { emphasize } from '../styles/colorManipulator';
 export const styles = theme => {
   const emphasis = theme.palette.type === 'light' ? 0.8 : 0.98;
@@ -72,4 +72,5 @@ export const SnackbarContentCreator = withStyles(styles, SnackbarContent, {
   defaultProps
 });
 const SnackbarContentComponent = SnackbarContentCreator();
+SnackbarContentComponent.muiName = SnackbarContent.muiName;
 export default SnackbarContentComponent;
