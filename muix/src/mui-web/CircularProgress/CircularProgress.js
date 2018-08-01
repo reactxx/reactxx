@@ -162,5 +162,5 @@ export const CircularProgressCreator = withStyles(styles, CircularProgress, {
   defaultProps
 });
 const CircularProgressComponent = CircularProgressCreator();
-CircularProgressComponent.muiName = CircularProgress.muiName;
+if (CircularProgress.muiName) CircularProgressComponent.muiName = CircularProgress.muiName;
 export default CircularProgressComponent;

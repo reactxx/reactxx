@@ -1,12 +1,13 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import { fade } from '../styles/colorManipulator';
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('margin', 0),
     height: 1,
-    margin: 0,
     // Reset browser default style.
     border: 'none',
     flexShrink: 0,
@@ -66,5 +67,5 @@ export const DividerCreator = withStyles(styles, Divider, {
   defaultProps
 });
 const DividerComponent = DividerCreator();
-DividerComponent.muiName = Divider.muiName;
+if (Divider.muiName) DividerComponent.muiName = Divider.muiName;
 export default DividerComponent;

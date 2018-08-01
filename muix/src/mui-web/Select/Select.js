@@ -85,5 +85,5 @@ export const SelectCreator = withStyles(styles, Select, {
   defaultProps
 });
 const SelectComponent = SelectCreator();
-SelectComponent.muiName = Select.muiName;
+if (Select.muiName) SelectComponent.muiName = Select.muiName;
 export default SelectComponent;

@@ -1,9 +1,11 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('margin', 0),
     color: theme.palette.text.secondary,
     fontFamily: theme.typography.fontFamily,
     fontSize: theme.typography.pxToRem(12),
@@ -11,7 +13,6 @@ export const styles = theme => ({
     marginTop: 8,
     lineHeight: '1em',
     minHeight: '1em',
-    margin: 0,
     '&.error35': {
       color: theme.palette.error.main
     },
@@ -91,5 +92,5 @@ export const FormHelperTextCreator = withStyles(styles, FormHelperText, {
   defaultProps
 });
 const FormHelperTextComponent = FormHelperTextCreator();
-FormHelperTextComponent.muiName = FormHelperText.muiName;
+if (FormHelperText.muiName) FormHelperTextComponent.muiName = FormHelperText.muiName;
 export default FormHelperTextComponent;

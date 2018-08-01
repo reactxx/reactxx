@@ -10,6 +10,7 @@ export const classNamesFix = (forceHTMLTags: string[] = ['Component']) => (root:
   selectClassNamesFromProps(root, info.name)
   refactorClassNamesObjectExpressionAttribute(root)
   adjustHtmlClassNameAttribute(root, info.name, forceHTMLTags)
+  adjustPaddingMargins(root)
   return root
 }
 
@@ -33,6 +34,63 @@ export const withThemeTaskDefaultCreator = (forceHTMLTags: string[] = ['Componen
 export const otherTaskDefaultCreator = (forceHTMLTags: string[] = ['Component']) => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   adjustImports(root)
   return root
+}
+
+const adjustPaddingMargins = (root: Ast.Ast) => {
+  const margin = adjustPaddingMarginsLow(root, 'margin')  
+  const padding = adjustPaddingMarginsLow(root, 'padding')
+  if (margin || padding) 
+    addToAtomicImport(root)
+}
+// replace single margin's and padding's with toAtomic() spread
+const adjustPaddingMarginsLow = (root: Ast.Ast, marginPadding: 'padding' | 'margin') => {
+  let modified = false
+  const styles = Queries.checkSingleResult(Ast.astq().query(root, '/Program/ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /Identifier [@name=="styles"] ] //ObjectExpression '), true)
+  if (!styles) return
+  const rulesets: any[] = Ast.astq().query(styles, `// ObjectExpression [ /ObjectProperty [ /Identifier [ @name=="${marginPadding}" ] ] ]`)
+  if (rulesets.length === 0) return
+  rulesets.forEach(({ properties }) => {
+    const parsed: any[] = properties.map(obj => parseValue(marginPadding, obj.key && obj.key.name === marginPadding && obj.value))
+    // process in reverse order
+    parsed.reverse().forEach((newValue, idx) => {
+      if (!newValue) return
+      modified = true
+      // replace single margin with spread operator
+      properties.splice(parsed.length - idx - 1, 1)
+      properties.splice(0, 0, newValue)
+    })
+  })
+  const dev = Parser.generateCode(styles)
+  return modified
+}
+const addToAtomicImport = (root: Ast.Ast) => {
+  const body = Queries.checkSingleResult(Ast.astq().query(root, `// Program`)).body as any[];
+  const idx = body.findIndex(imp => imp.type === 'ImportDeclaration')
+  body.splice(idx + 1, 0, Parser.parseCode(`import { toAtomic } from '../styles/withStyles';`))
+}
+const parseValue = (prefix: string, value) => {
+  if (!value) return null
+  return {
+    "type": "SpreadElement",
+    "argument": {
+      "type": "CallExpression",
+      "callee": {
+        "type": "Identifier",
+        "name": "toAtomic"
+      },
+      "arguments": [
+        {
+          "type": "StringLiteral",
+          "extra": {
+            "rawValue": prefix,
+            "raw": `'${prefix}'`
+          },
+          "value": prefix
+        },
+        value
+      ]
+    }
+  }
 }
 
 const adjustImports = (root: Ast.Ast) => {
@@ -131,9 +189,9 @@ const selectClassNamesFromProps = (root: Ast.Ast, functionName: string) => {
   const selectProps = all && all.length > 0 ? all[0] : null
   if (!selectProps) return root
   const place: any[] = selectProps.id.properties;
-  const themeIdx = place.findIndex(pl => pl.key && pl.key.name==='theme');
-  if (themeIdx>=0) 
-    place.splice(themeIdx,1);
+  const themeIdx = place.findIndex(pl => pl.key && pl.key.name === 'theme');
+  if (themeIdx >= 0)
+    place.splice(themeIdx, 1);
   (place as Array<any>).splice(0, 0, constSelectFromObjectAST)
   Ast.removeIgnored(root)
   Ast.removeTemporaryFields(root)

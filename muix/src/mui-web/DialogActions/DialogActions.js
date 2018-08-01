@@ -1,4 +1,6 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import { cloneChildrenWithClassName } from '../utils/reactHelpers';
@@ -6,17 +8,15 @@ import '../Button'; // So we don't have any override priority issue.
 
 export const styles = {
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('margin', '8px 4px'),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    flex: '0 0 auto',
-    margin: '8px 4px'
+    flex: '0 0 auto'
   },
 
   /* Styles applied to the children. */
-  action: {
-    margin: '0 4px'
+  action: { ...toAtomic('margin', '0 4px')
   }
 };
 
@@ -50,5 +50,5 @@ export const DialogActionsCreator = withStyles(styles, DialogActions, {
   defaultProps
 });
 const DialogActionsComponent = DialogActionsCreator();
-DialogActionsComponent.muiName = DialogActions.muiName;
+if (DialogActions.muiName) DialogActionsComponent.muiName = DialogActions.muiName;
 export default DialogActionsComponent;

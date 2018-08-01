@@ -1,5 +1,7 @@
 // @inheritedComponent ButtonBase
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import { fade } from '../styles/colorManipulator';
@@ -7,13 +9,12 @@ import ButtonBase from "../ButtonBase/ButtonBase";
 import { capitalize } from '../utils/helpers';
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('padding', 0),
     textAlign: 'center',
     flex: '0 0 auto',
     fontSize: theme.typography.pxToRem(24),
     width: 48,
     height: 48,
-    padding: 0,
     borderRadius: '50%',
     color: theme.palette.action.active,
     transition: theme.transitions.create('background-color', {
@@ -113,5 +114,5 @@ export const IconButtonCreator = withStyles(styles, IconButton, {
   defaultProps
 });
 const IconButtonComponent = IconButtonCreator();
-IconButtonComponent.muiName = IconButton.muiName;
+if (IconButton.muiName) IconButtonComponent.muiName = IconButton.muiName;
 export default IconButtonComponent;

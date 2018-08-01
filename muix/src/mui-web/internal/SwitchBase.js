@@ -1,5 +1,7 @@
 // @inheritedComponent IconButton
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import IconButton from '../IconButton';
@@ -15,16 +17,15 @@ export const styles = {
   },
   checked: {},
   disabled: {},
-  input: {
+  input: { ...toAtomic('padding', 0),
+    ...toAtomic('margin', 0),
     cursor: 'inherit',
     position: 'absolute',
     opacity: 0,
     width: '100%',
     height: '100%',
     top: 0,
-    left: 0,
-    margin: 0,
-    padding: 0
+    left: 0
   }
 };
 /**
@@ -152,5 +153,5 @@ export const SwitchBaseCreator = withStyles(styles, SwitchBase, {
   defaultProps
 });
 const SwitchBaseComponent = SwitchBaseCreator();
-SwitchBaseComponent.muiName = SwitchBase.muiName;
+if (SwitchBase.muiName) SwitchBaseComponent.muiName = SwitchBase.muiName;
 export default SwitchBaseComponent;

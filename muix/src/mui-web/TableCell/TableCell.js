@@ -1,11 +1,13 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import { capitalize } from '../utils/helpers';
 import { darken, fade, lighten } from '../styles/colorManipulator';
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('padding', '4px 56px 4px 24px'),
     display: 'table-cell',
     verticalAlign: 'inherit',
     // Workaround for a rendering bug with spanned columns in Chrome 62.0.
@@ -13,7 +15,6 @@ export const styles = theme => ({
     borderBottom: `1px solid
     ${theme.palette.type === 'light' ? lighten(fade(theme.palette.divider, 1), 0.88) : darken(fade(theme.palette.divider, 1), 0.8)}`,
     textAlign: 'left',
-    padding: '4px 56px 4px 24px',
     '&:last-child': {
       paddingRight: 24
     }
@@ -53,18 +54,15 @@ export const styles = theme => ({
   },
 
   /* Styles applied to the root element if `padding="checkbox"`. */
-  paddingCheckbox: {
-    padding: '0 12px',
+  paddingCheckbox: { ...toAtomic('padding', '0 12px'),
     '&:last-child': {
       paddingRight: 12
     }
   },
 
   /* Styles applied to the root element if `padding="none"`. */
-  paddingNone: {
-    padding: 0,
-    '&:last-child': {
-      padding: 0
+  paddingNone: { ...toAtomic('padding', 0),
+    '&:last-child': { ...toAtomic('padding', 0)
     }
   }
 });
@@ -132,5 +130,5 @@ export const TableCellCreator = withStyles(styles, TableCell, {
   defaultProps
 });
 const TableCellComponent = TableCellCreator();
-TableCellComponent.muiName = TableCell.muiName;
+if (TableCell.muiName) TableCellComponent.muiName = TableCell.muiName;
 export default TableCellComponent;

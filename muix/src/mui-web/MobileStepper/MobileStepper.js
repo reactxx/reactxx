@@ -1,5 +1,7 @@
 // @inheritedComponent Paper
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import Paper from "../Paper/Paper";
@@ -7,13 +9,12 @@ import { capitalize } from '../utils/helpers';
 import LinearProgress from '../LinearProgress';
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('padding', 8),
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    background: theme.palette.background.default,
-    padding: 8
+    background: theme.palette.background.default
   },
 
   /* Styles applied to the root element if `position="bottom"`. */
@@ -44,12 +45,11 @@ export const styles = theme => ({
   },
 
   /* Styles applied to each dot if `variant="dots"`. */
-  dot: {
+  dot: { ...toAtomic('margin', '0 2px'),
     backgroundColor: theme.palette.action.disabled,
     borderRadius: '50%',
     width: 8,
-    height: 8,
-    margin: '0 2px'
+    height: 8
   },
 
   /* Styles applied to a dot if `variant="dots"` and this is the active step. */
@@ -109,5 +109,5 @@ export const MobileStepperCreator = withStyles(styles, MobileStepper, {
   defaultProps
 });
 const MobileStepperComponent = MobileStepperCreator();
-MobileStepperComponent.muiName = MobileStepper.muiName;
+if (MobileStepper.muiName) MobileStepperComponent.muiName = MobileStepper.muiName;
 export default MobileStepperComponent;

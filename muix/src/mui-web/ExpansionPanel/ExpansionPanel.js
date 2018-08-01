@@ -167,5 +167,5 @@ export const ExpansionPanelCreator = withStyles(styles, ExpansionPanel, {
   defaultProps
 });
 const ExpansionPanelComponent = ExpansionPanelCreator();
-ExpansionPanelComponent.muiName = ExpansionPanel.muiName;
+if (ExpansionPanel.muiName) ExpansionPanelComponent.muiName = ExpansionPanel.muiName;
 export default ExpansionPanelComponent;

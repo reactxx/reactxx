@@ -54,5 +54,5 @@ export const ToolbarCreator = withStyles(styles, Toolbar, {
   defaultProps
 });
 const ToolbarComponent = ToolbarCreator();
-ToolbarComponent.muiName = Toolbar.muiName;
+if (Toolbar.muiName) ToolbarComponent.muiName = Toolbar.muiName;
 export default ToolbarComponent;

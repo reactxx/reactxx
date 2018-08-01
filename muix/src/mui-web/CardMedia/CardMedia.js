@@ -54,5 +54,5 @@ export const CardMediaCreator = withStyles(styles, CardMedia, {
   defaultProps
 });
 const CardMediaComponent = CardMediaCreator();
-CardMediaComponent.muiName = CardMedia.muiName;
+if (CardMedia.muiName) CardMediaComponent.muiName = CardMedia.muiName;
 export default CardMediaComponent;

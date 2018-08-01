@@ -1,5 +1,7 @@
 // @inheritedComponent ButtonBase
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import { fade } from '../styles/colorManipulator';
@@ -7,13 +9,13 @@ import ButtonBase from "../ButtonBase/ButtonBase";
 import { capitalize } from '../utils/helpers';
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: { ...theme.typography.button,
+  root: { ...toAtomic('padding', '8px 16px'),
+    ...theme.typography.button,
     lineHeight: '1.4em',
     // Improve readability for multiline button.
     boxSizing: 'border-box',
     minWidth: 64,
     minHeight: 36,
-    padding: '8px 16px',
     borderRadius: theme.shape.borderRadius,
     color: theme.palette.text.primary,
     transition: theme.transitions.create(['background-color', 'box-shadow'], {
@@ -152,9 +154,8 @@ export const styles = theme => ({
   // legacy
 
   /* Styles applied to the root element if `variant="[fab | extendedFab]"`. */
-  fab: {
+  fab: { ...toAtomic('padding', 0),
     borderRadius: '50%',
-    padding: 0,
     minWidth: 0,
     width: 56,
     height: 56,
@@ -165,9 +166,8 @@ export const styles = theme => ({
   },
 
   /* Styles applied to the root element if `variant="extendedFab"`. */
-  extendedFab: {
+  extendedFab: { ...toAtomic('padding', '0 16px'),
     borderRadius: 48 / 2,
-    padding: '0 16px',
     width: 'auto',
     minWidth: 48,
     height: 48
@@ -195,16 +195,14 @@ export const styles = theme => ({
   },
 
   /* Styles applied to the root element if `size="small"`. */
-  sizeSmall: {
-    padding: '7px 8px',
+  sizeSmall: { ...toAtomic('padding', '7px 8px'),
     minWidth: 64,
     minHeight: 32,
     fontSize: theme.typography.pxToRem(13)
   },
 
   /* Styles applied to the root element if `size="large"`. */
-  sizeLarge: {
-    padding: '8px 24px',
+  sizeLarge: { ...toAtomic('padding', '8px 24px'),
     minWidth: 112,
     minHeight: 40,
     fontSize: theme.typography.pxToRem(15)
@@ -265,5 +263,5 @@ export const ButtonCreator = withStyles(styles, Button, {
   defaultProps
 });
 const ButtonComponent = ButtonCreator();
-ButtonComponent.muiName = Button.muiName;
+if (Button.muiName) ButtonComponent.muiName = Button.muiName;
 export default ButtonComponent;

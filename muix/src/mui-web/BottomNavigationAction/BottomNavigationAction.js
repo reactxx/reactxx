@@ -118,5 +118,5 @@ export const BottomNavigationActionCreator = withStyles(styles, BottomNavigation
   defaultProps
 });
 const BottomNavigationActionComponent = BottomNavigationActionCreator();
-BottomNavigationActionComponent.muiName = BottomNavigationAction.muiName;
+if (BottomNavigationAction.muiName) BottomNavigationActionComponent.muiName = BottomNavigationAction.muiName;
 export default BottomNavigationActionComponent;

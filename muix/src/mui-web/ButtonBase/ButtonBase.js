@@ -1,4 +1,6 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import keycode from 'keycode';
@@ -9,7 +11,8 @@ import TouchRipple from './TouchRipple';
 import createRippleHandler from './createRippleHandler';
 export const styles = {
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('padding', 0),
+    ...toAtomic('margin', 0),
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -21,10 +24,8 @@ export const styles = {
     // We disable the focus ring for mouse, touch and keyboard users.
     outline: 'none',
     border: 0,
-    margin: 0,
     // Remove the margin in Safari
     borderRadius: 0,
-    padding: 0,
     // Remove the padding in Firefox
     cursor: 'pointer',
     userSelect: 'none',
@@ -306,5 +307,5 @@ export const ButtonBaseCreator = withStyles(styles, ButtonBase, {
   defaultProps
 });
 const ButtonBaseComponent = ButtonBaseCreator();
-ButtonBaseComponent.muiName = ButtonBase.muiName;
+if (ButtonBase.muiName) ButtonBaseComponent.muiName = ButtonBase.muiName;
 export default ButtonBaseComponent;

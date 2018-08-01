@@ -98,5 +98,5 @@ export const CardHeaderCreator = withStyles(styles, CardHeader, {
   defaultProps
 });
 const CardHeaderComponent = CardHeaderCreator();
-CardHeaderComponent.muiName = CardHeader.muiName;
+if (CardHeader.muiName) CardHeaderComponent.muiName = CardHeader.muiName;
 export default CardHeaderComponent;

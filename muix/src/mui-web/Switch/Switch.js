@@ -138,5 +138,5 @@ export const SwitchCreator = withStyles(styles, Switch, {
   defaultProps
 });
 const SwitchComponent = SwitchCreator();
-SwitchComponent.muiName = Switch.muiName;
+if (Switch.muiName) SwitchComponent.muiName = Switch.muiName;
 export default SwitchComponent;

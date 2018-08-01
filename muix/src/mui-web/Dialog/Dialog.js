@@ -1,5 +1,7 @@
 // @inheritedComponent Modal
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import { capitalize } from '../utils/helpers';
@@ -25,10 +27,9 @@ export const styles = theme => ({
   },
 
   /* Styles applied to the `Paper` component. */
-  paper: {
+  paper: { ...toAtomic('margin', 48),
     display: 'flex',
     flexDirection: 'column',
-    margin: 48,
     position: 'relative',
     overflowY: 'auto',
     // Fix IE11 issue, to remove at some point.
@@ -43,8 +44,7 @@ export const styles = theme => ({
   },
 
   /* Styles applied to the `Paper` component if `scroll="body"`. */
-  paperScrollBody: {
-    margin: '48px auto',
+  paperScrollBody: { ...toAtomic('margin', '48px auto'),
     NAME$paperScrollBody21: true
   },
 
@@ -52,8 +52,7 @@ export const styles = theme => ({
   paperWidthXs: {
     maxWidth: Math.max(theme.breakpoints.values.xs, 360),
     '&.paperScrollBody21': {
-      [theme.breakpoints.down(Math.max(theme.breakpoints.values.xs, 360) + 48 * 2)]: {
-        margin: 48
+      [theme.breakpoints.down(Math.max(theme.breakpoints.values.xs, 360) + 48 * 2)]: { ...toAtomic('margin', 48)
       }
     }
   },
@@ -62,8 +61,7 @@ export const styles = theme => ({
   paperWidthSm: {
     maxWidth: theme.breakpoints.values.sm,
     '&.paperScrollBody21': {
-      [theme.breakpoints.down(theme.breakpoints.values.sm + 48 * 2)]: {
-        margin: 48
+      [theme.breakpoints.down(theme.breakpoints.values.sm + 48 * 2)]: { ...toAtomic('margin', 48)
       }
     }
   },
@@ -72,8 +70,7 @@ export const styles = theme => ({
   paperWidthMd: {
     maxWidth: theme.breakpoints.values.md,
     '&.paperScrollBody21': {
-      [theme.breakpoints.down(theme.breakpoints.values.md + 48 * 2)]: {
-        margin: 48
+      [theme.breakpoints.down(theme.breakpoints.values.md + 48 * 2)]: { ...toAtomic('margin', 48)
       }
     }
   },
@@ -84,8 +81,7 @@ export const styles = theme => ({
   },
 
   /* Styles applied to the `Paper` component if `fullScreen={true}`. */
-  paperFullScreen: {
-    margin: 0,
+  paperFullScreen: { ...toAtomic('margin', 0),
     width: '100%',
     maxWidth: '100%',
     height: '100%',
@@ -164,5 +160,5 @@ export const DialogCreator = withStyles(styles, Dialog, {
   defaultProps
 });
 const DialogComponent = DialogCreator();
-DialogComponent.muiName = Dialog.muiName;
+if (Dialog.muiName) DialogComponent.muiName = Dialog.muiName;
 export default DialogComponent;

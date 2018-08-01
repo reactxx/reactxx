@@ -1,14 +1,15 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('padding', 0),
     fontFamily: theme.typography.fontFamily,
     color: theme.palette.text.secondary,
     fontSize: theme.typography.pxToRem(16),
     lineHeight: 1,
-    padding: 0,
     '&.focused36': {
       color: theme.palette.primary[theme.palette.type === 'light' ? 'dark' : 'light']
     },
@@ -108,5 +109,5 @@ export const FormLabelCreator = withStyles(styles, FormLabel, {
   defaultProps
 });
 const FormLabelComponent = FormLabelCreator();
-FormLabelComponent.muiName = FormLabel.muiName;
+if (FormLabel.muiName) FormLabelComponent.muiName = FormLabel.muiName;
 export default FormLabelComponent;

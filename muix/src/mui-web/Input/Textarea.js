@@ -1,4 +1,6 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import debounce from 'debounce'; // < 1kb payload overhead when lodash/debounce is > 3kb.
 
@@ -12,12 +14,11 @@ export const styles = {
     // because the shadow has position: 'absolute',
     width: '100%'
   },
-  textarea: {
+  textarea: { ...toAtomic('padding', 0),
     width: '100%',
     height: '100%',
     resize: 'none',
     font: 'inherit',
-    padding: 0,
     cursor: 'inherit',
     boxSizing: 'border-box',
     lineHeight: 'inherit',
@@ -181,5 +182,5 @@ export const TextareaCreator = withStyles(styles, Textarea, {
   defaultProps
 });
 const TextareaComponent = TextareaCreator();
-TextareaComponent.muiName = Textarea.muiName;
+if (Textarea.muiName) TextareaComponent.muiName = Textarea.muiName;
 export default TextareaComponent;

@@ -100,5 +100,5 @@ export const AppBarCreator = withStyles(styles, AppBar, {
   defaultProps
 });
 const AppBarComponent = AppBarCreator();
-AppBarComponent.muiName = AppBar.muiName;
+if (AppBar.muiName) AppBarComponent.muiName = AppBar.muiName;
 export default AppBarComponent;

@@ -276,5 +276,5 @@ export const TouchRippleCreator = withStyles(styles, TouchRipple, {
   defaultProps
 });
 const TouchRippleComponent = TouchRippleCreator();
-TouchRippleComponent.muiName = TouchRipple.muiName;
+if (TouchRipple.muiName) TouchRippleComponent.muiName = TouchRipple.muiName;
 export default TouchRippleComponent;

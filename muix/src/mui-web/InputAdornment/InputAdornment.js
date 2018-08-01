@@ -54,5 +54,5 @@ export const InputAdornmentCreator = withStyles(styles, InputAdornment, {
   defaultProps
 });
 const InputAdornmentComponent = InputAdornmentCreator();
-InputAdornmentComponent.muiName = InputAdornment.muiName;
+if (InputAdornment.muiName) InputAdornmentComponent.muiName = InputAdornment.muiName;
 export default InputAdornmentComponent;

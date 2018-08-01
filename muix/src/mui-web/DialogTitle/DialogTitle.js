@@ -1,12 +1,13 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import Typography from "../Typography/Typography";
 export const styles = {
   /* Styles applied to the root element. */
-  root: {
-    margin: 0,
-    padding: '24px 24px 20px',
+  root: { ...toAtomic('padding', '24px 24px 20px'),
+    ...toAtomic('margin', 0),
     flex: '0 0 auto'
   }
 };
@@ -41,5 +42,5 @@ export const DialogTitleCreator = withStyles(styles, DialogTitle, {
   defaultProps
 });
 const DialogTitleComponent = DialogTitleCreator();
-DialogTitleComponent.muiName = DialogTitle.muiName;
+if (DialogTitle.muiName) DialogTitleComponent.muiName = DialogTitle.muiName;
 export default DialogTitleComponent;

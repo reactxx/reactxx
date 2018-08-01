@@ -1,5 +1,7 @@
 // @inheritedComponent ButtonBase
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import ButtonBase from "../ButtonBase/ButtonBase";
@@ -7,10 +9,9 @@ import StepLabel from '../StepLabel';
 import { isMuiElement } from '../utils/reactHelpers';
 export const styles = {
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('padding', '24px 16px'),
+    ...toAtomic('margin', '-24px -16px'),
     width: '100%',
-    padding: '24px 16px',
-    margin: '-24px -16px',
     boxSizing: 'content-box'
   },
 
@@ -73,5 +74,5 @@ export const StepButtonCreator = withStyles(styles, StepButton, {
   defaultProps
 });
 const StepButtonComponent = StepButtonCreator();
-StepButtonComponent.muiName = StepButton.muiName;
+if (StepButton.muiName) StepButtonComponent.muiName = StepButton.muiName;
 export default StepButtonComponent;

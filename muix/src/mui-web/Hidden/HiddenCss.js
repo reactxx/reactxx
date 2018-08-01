@@ -89,5 +89,5 @@ export const HiddenCssCreator = withStyles(styles, HiddenCss, {
   defaultProps
 });
 const HiddenCssComponent = HiddenCssCreator();
-HiddenCssComponent.muiName = HiddenCss.muiName;
+if (HiddenCss.muiName) HiddenCssComponent.muiName = HiddenCss.muiName;
 export default HiddenCssComponent;

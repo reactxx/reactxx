@@ -53,5 +53,5 @@ export const BackdropCreator = withStyles(styles, Backdrop, {
   defaultProps
 });
 const BackdropComponent = BackdropCreator();
-BackdropComponent.muiName = Backdrop.muiName;
+if (Backdrop.muiName) BackdropComponent.muiName = Backdrop.muiName;
 export default BackdropComponent;

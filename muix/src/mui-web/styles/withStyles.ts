@@ -15,8 +15,31 @@ const withStylesCreator =
 
 export default withStylesCreator
 
-// for MUI RIPPLE
-renderer.renderStatic( ['keyframes', '-webkit-keyframes'].map(keyframes => `
+export const toAtomic = (prefix: 'margin' | 'padding', value: number | string) => {
+  let vals: (string | number)[] //top, bottom, left, right
+  if (typeof value === 'number')
+    vals = [value, value, value, value]
+  else if (typeof value === 'string') {
+    const parts = value.split(' ')
+    switch (parts.length) {
+      case 1: vals = [value, value, value, value]; break
+      case 2: vals = [parts[0], parts[0], parts[1], parts[1]]; break
+      case 3: vals = [parts[0], parts[2], parts[1], parts[1]]; break
+      case 4: vals = parts; break
+      default: throw 'Wrong value: ' + value
+    }
+  } else
+    throw 'Wrong value: ' + value
+  return {
+    [`${prefix}Top`]: vals[0],
+    [`${prefix}Bottom`]: vals[1],
+    [`${prefix}Left`]: vals[2],
+    [`${prefix}Right`]: vals[3],
+  }
+}
+
+// for MUI RIPPLE etc
+renderer.renderStatic(['keyframes', '-webkit-keyframes'].map(keyframes => `
 @${keyframes} mui-ripple-enter {
   0% {
     opacity: 0.1;
@@ -129,11 +152,12 @@ function modifyRuleset(sheet: {}, rulesetName: string) {
     delete sheet[rulesetName]
     return
   }
-const ruleset = sheet[rulesetName]
+  return
+  const ruleset = sheet[rulesetName]
   let $whenUsed = null
   Object.keys(ruleset).forEach(ruleName => {
     const rule = ruleset[ruleName]
-    const pseudoClasses = rx$pseudoClasses.exec(ruleName) 
+    const pseudoClasses = rx$pseudoClasses.exec(ruleName)
     if (false && pseudoClasses) {
       ruleset[pseudoClasses[1]] = rule
       delete ruleset[ruleName]

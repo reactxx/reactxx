@@ -1,12 +1,13 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import { capitalize } from '../utils/helpers';
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: {
-    display: 'block',
-    margin: 0
+  root: { ...toAtomic('margin', 0),
+    display: 'block'
   },
 
   /* Styles applied to the root element if `variant="display4"`. */
@@ -162,5 +163,5 @@ export const TypographyCreator = withStyles(styles, Typography, {
   defaultProps
 });
 const TypographyComponent = TypographyCreator();
-TypographyComponent.muiName = Typography.muiName;
+if (Typography.muiName) TypographyComponent.muiName = Typography.muiName;
 export default TypographyComponent;

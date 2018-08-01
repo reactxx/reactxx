@@ -1,4 +1,6 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import { isFilled, isAdornedStart } from '../Input/Input';
@@ -6,14 +8,13 @@ import { capitalize } from '../utils/helpers';
 import { isMuiElement } from '../utils/reactHelpers';
 export const styles = {
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('padding', 0),
+    ...toAtomic('margin', 0),
     display: 'inline-flex',
     flexDirection: 'column',
     position: 'relative',
     // Reset fieldset default style
     minWidth: 0,
-    padding: 0,
-    margin: 0,
     border: 0
   },
 
@@ -175,5 +176,5 @@ export const FormControlCreator = withStyles(styles, FormControl, {
   defaultProps
 });
 const FormControlComponent = FormControlCreator();
-FormControlComponent.muiName = FormControl.muiName;
+if (FormControl.muiName) FormControlComponent.muiName = FormControl.muiName;
 export default FormControlComponent;

@@ -35,5 +35,5 @@ export const DialogContentTextCreator = withStyles(styles, DialogContentText, {
   defaultProps
 });
 const DialogContentTextComponent = DialogContentTextCreator();
-DialogContentTextComponent.muiName = DialogContentText.muiName;
+if (DialogContentText.muiName) DialogContentTextComponent.muiName = DialogContentText.muiName;
 export default DialogContentTextComponent;

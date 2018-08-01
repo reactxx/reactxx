@@ -52,5 +52,5 @@ export const TableCreator = withStyles(styles, Table, {
   defaultProps
 });
 const TableComponent = TableCreator();
-TableComponent.muiName = Table.muiName;
+if (Table.muiName) TableComponent.muiName = Table.muiName;
 export default TableComponent;

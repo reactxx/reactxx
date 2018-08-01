@@ -107,5 +107,5 @@ export const FormControlLabelCreator = withStyles(styles, FormControlLabel, {
   defaultProps
 });
 const FormControlLabelComponent = FormControlLabelCreator();
-FormControlLabelComponent.muiName = FormControlLabel.muiName;
+if (FormControlLabel.muiName) FormControlLabelComponent.muiName = FormControlLabel.muiName;
 export default FormControlLabelComponent;

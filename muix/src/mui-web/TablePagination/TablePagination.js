@@ -1,5 +1,7 @@
 // @inheritedComponent TableCell
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import Input from "../Input/Input";
@@ -14,8 +16,7 @@ export const styles = theme => ({
   root: {
     fontSize: theme.typography.pxToRem(12),
     // Increase the specificity to override TableCell.
-    '&:last-child': {
-      padding: 0
+    '&:last-child': { ...toAtomic('padding', 0)
     }
   },
 
@@ -171,5 +172,5 @@ export const TablePaginationCreator = withStyles(styles, TablePagination, {
   defaultProps
 });
 const TablePaginationComponent = TablePaginationCreator();
-TablePaginationComponent.muiName = TablePagination.muiName;
+if (TablePagination.muiName) TablePaginationComponent.muiName = TablePagination.muiName;
 export default TablePaginationComponent;

@@ -1,4 +1,6 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 import CancelIcon from '../internal/svg-icons/Cancel';
@@ -13,7 +15,7 @@ export const styles = theme => {
   const deleteIconColor = fade(theme.palette.text.primary, 0.26);
   return {
     /* Styles applied to the root element. */
-    root: {
+    root: { ...toAtomic('padding', 0),
       fontFamily: theme.typography.fontFamily,
       fontSize: theme.typography.pxToRem(13),
       display: 'inline-flex',
@@ -30,10 +32,7 @@ export const styles = theme => {
       // We disable the focus ring for mouse, touch and keyboard users.
       outline: 'none',
       textDecoration: 'none',
-      border: 'none',
-      // Remove `button` border
-      padding: 0 // Remove `button` padding
-
+      border: 'none'
     },
 
     /* Styles applied to the root element if `onClick` is defined or `clickable={true}`. */
@@ -84,13 +83,12 @@ export const styles = theme => {
     },
 
     /* Styles applied to the `deleteIcon` element. */
-    deleteIcon: {
+    deleteIcon: { ...toAtomic('margin', '0 4px 0 -8px'),
       // Remove grey highlight
       WebkitTapHighlightColor: 'transparent',
       color: deleteIconColor,
       cursor: 'pointer',
       height: 'auto',
-      margin: '0 4px 0 -8px',
       '&:hover': {
         color: fade(deleteIconColor, 0.4)
       }
@@ -215,5 +213,5 @@ export const ChipCreator = withStyles(styles, Chip, {
   defaultProps
 });
 const ChipComponent = ChipCreator();
-ChipComponent.muiName = Chip.muiName;
+if (Chip.muiName) ChipComponent.muiName = Chip.muiName;
 export default ChipComponent;

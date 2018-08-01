@@ -58,5 +58,5 @@ export const SwipeAreaCreator = withStyles(styles, SwipeArea, {
   defaultProps
 });
 const SwipeAreaComponent = SwipeAreaCreator();
-SwipeAreaComponent.muiName = SwipeArea.muiName;
+if (SwipeArea.muiName) SwipeAreaComponent.muiName = SwipeArea.muiName;
 export default SwipeAreaComponent;

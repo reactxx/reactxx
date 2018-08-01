@@ -131,5 +131,5 @@ export const MenuCreator = withStyles(styles, Menu, {
   defaultProps
 });
 const MenuComponent = MenuCreator();
-MenuComponent.muiName = Menu.muiName;
+if (Menu.muiName) MenuComponent.muiName = Menu.muiName;
 export default MenuComponent;

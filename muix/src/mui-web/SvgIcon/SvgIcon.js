@@ -89,5 +89,5 @@ export const SvgIconCreator = withStyles(styles, SvgIcon, {
   defaultProps
 });
 const SvgIconComponent = SvgIconCreator();
-SvgIconComponent.muiName = SvgIcon.muiName;
+if (SvgIcon.muiName) SvgIconComponent.muiName = SvgIcon.muiName;
 export default SvgIconComponent;

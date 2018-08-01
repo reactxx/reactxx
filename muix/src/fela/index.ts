@@ -73,6 +73,41 @@ export const rulesetToClassNamesMUI = (ruleset: React.CSSProperties) => {
   if (!ruleset) return ''
 
   let rs = ruleset
+  // const idxToName = ['Left', 'Right', 'Top', 'Bottom']
+
+  // if (rs.margin) {
+  //   const margin = rs.margin
+  //   if (typeof margin === 'string') {
+
+  //   }
+  //   const { marginLeft, marginRight, marginTop, marginBottom } = rs
+  //   const setAsMargin = [];
+  //   [marginLeft, marginRight, marginTop, marginBottom].forEach((m, idx) => {
+  //     if (m === undefined)
+  //       setAsMargin.push(idxToName[idx])
+  //   })
+  //   if (setAsMargin.length > 0 && setAsMargin.length < 4) {
+  //     if (rs === ruleset) rs = { ...ruleset }
+  //     setAsMargin.forEach(s => rs['margin' + s] = rs.margin)
+  //     delete rs.margin
+  //   }
+  // }
+
+  // if (rs.padding) {
+  //   const { paddingLeft, paddingRight, paddingTop, paddingBottom } = rs
+  //   const setAsMargin = [];
+  //   [paddingLeft, paddingRight, paddingTop, paddingBottom].forEach((m, idx) => {
+  //     if (m === undefined)
+  //       setAsMargin.push(idxToName[idx])
+  //   })
+  //   if (setAsMargin.length > 0 && setAsMargin.length < 4) {
+  //     if (rs === ruleset) rs = { ...ruleset }
+  //     setAsMargin.forEach(s => rs['padding' + s] = rs.padding)
+  //     delete rs.padding
+  //   }
+  // }
+
+
   let empty = true
   let forceRuleNames: string[] = null
   for (const p in ruleset) {
@@ -80,8 +115,8 @@ export const rulesetToClassNamesMUI = (ruleset: React.CSSProperties) => {
       empty = false
       continue
     }
-    if (rs===ruleset) {
-      rs = {...ruleset}
+    if (rs === ruleset) {
+      rs = { ...ruleset }
       forceRuleNames = []
     }
     forceRuleNames.push(p.substr(forceRuleName.length))

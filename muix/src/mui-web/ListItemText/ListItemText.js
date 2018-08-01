@@ -1,13 +1,14 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import Typography from "../Typography/Typography";
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('padding', '0 16px'),
     flex: '1 1 auto',
     minWidth: 0,
-    padding: '0 16px',
     '&:first-child': {
       paddingLeft: 0
     }
@@ -104,5 +105,5 @@ export const ListItemTextCreator = withStyles(styles, ListItemText, {
   defaultProps
 });
 const ListItemTextComponent = ListItemTextCreator();
-ListItemTextComponent.muiName = ListItemText.muiName;
+if (ListItemText.muiName) ListItemTextComponent.muiName = ListItemText.muiName;
 export default ListItemTextComponent;

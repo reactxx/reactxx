@@ -81,5 +81,5 @@ export const CheckboxCreator = withStyles(styles, Checkbox, {
   defaultProps
 });
 const CheckboxComponent = CheckboxCreator();
-CheckboxComponent.muiName = Checkbox.muiName;
+if (Checkbox.muiName) CheckboxComponent.muiName = Checkbox.muiName;
 export default CheckboxComponent;

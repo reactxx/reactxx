@@ -1,11 +1,12 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = {
   /* Styles applied to the root element. */
-  root: {
-    display: 'flex',
-    padding: '8px 24px 24px'
+  root: { ...toAtomic('padding', '8px 24px 24px'),
+    display: 'flex'
   }
 };
 
@@ -34,5 +35,5 @@ export const ExpansionPanelDetailsCreator = withStyles(styles, ExpansionPanelDet
   defaultProps
 });
 const ExpansionPanelDetailsComponent = ExpansionPanelDetailsCreator();
-ExpansionPanelDetailsComponent.muiName = ExpansionPanelDetails.muiName;
+if (ExpansionPanelDetails.muiName) ExpansionPanelDetailsComponent.muiName = ExpansionPanelDetails.muiName;
 export default ExpansionPanelDetailsComponent;

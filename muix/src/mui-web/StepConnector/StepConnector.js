@@ -1,4 +1,6 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = theme => ({
@@ -11,10 +13,8 @@ export const styles = theme => ({
   horizontal: {},
 
   /* Styles applied to the root element if `orientation="vertical"`. */
-  vertical: {
-    marginLeft: 12,
-    // half icon
-    padding: '0 0 8px'
+  vertical: { ...toAtomic('padding', '0 0 8px'),
+    marginLeft: 12
   },
 
   /* Styles applied to the root element if `alternativeLabel={true}`. */
@@ -78,5 +78,5 @@ export const StepConnectorCreator = withStyles(styles, StepConnector, {
   defaultProps
 });
 const StepConnectorComponent = StepConnectorCreator();
-StepConnectorComponent.muiName = StepConnector.muiName;
+if (StepConnector.muiName) StepConnectorComponent.muiName = StepConnector.muiName;
 export default StepConnectorComponent;

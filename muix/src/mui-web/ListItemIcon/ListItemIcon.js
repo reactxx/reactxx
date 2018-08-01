@@ -39,5 +39,5 @@ export const ListItemIconCreator = withStyles(styles, ListItemIcon, {
   defaultProps
 });
 const ListItemIconComponent = ListItemIconCreator();
-ListItemIconComponent.muiName = ListItemIcon.muiName;
+if (ListItemIcon.muiName) ListItemIconComponent.muiName = ListItemIcon.muiName;
 export default ListItemIconComponent;

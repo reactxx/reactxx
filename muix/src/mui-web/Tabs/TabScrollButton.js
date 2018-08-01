@@ -52,5 +52,5 @@ export const TabScrollButtonCreator = withStyles(styles, TabScrollButton, {
   defaultProps
 });
 const TabScrollButtonComponent = TabScrollButtonCreator();
-TabScrollButtonComponent.muiName = TabScrollButton.muiName;
+if (TabScrollButton.muiName) TabScrollButtonComponent.muiName = TabScrollButton.muiName;
 export default TabScrollButtonComponent;

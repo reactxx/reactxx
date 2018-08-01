@@ -89,5 +89,5 @@ export const BadgeCreator = withStyles(styles, Badge, {
   defaultProps
 });
 const BadgeComponent = BadgeCreator();
-BadgeComponent.muiName = Badge.muiName;
+if (Badge.muiName) BadgeComponent.muiName = Badge.muiName;
 export default BadgeComponent;

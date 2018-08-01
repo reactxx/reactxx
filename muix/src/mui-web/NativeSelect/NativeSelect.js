@@ -124,5 +124,5 @@ export const NativeSelectCreator = withStyles(styles, NativeSelect, {
   defaultProps
 });
 const NativeSelectComponent = NativeSelectCreator();
-NativeSelectComponent.muiName = NativeSelect.muiName;
+if (NativeSelect.muiName) NativeSelectComponent.muiName = NativeSelect.muiName;
 export default NativeSelectComponent;

@@ -1,5 +1,7 @@
 // @inheritedComponent Paper
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import Paper from "../Paper/Paper";
@@ -10,13 +12,12 @@ export const styles = theme => {
   const backgroundColor = emphasize(theme.palette.background.default, emphasis);
   return {
     /* Styles applied to the root element. */
-    root: {
+    root: { ...toAtomic('padding', '6px 24px'),
       color: theme.palette.getContrastText(backgroundColor),
       backgroundColor,
       display: 'flex',
       alignItems: 'center',
       flexWrap: 'wrap',
-      padding: '6px 24px',
       [theme.breakpoints.up('md')]: {
         minWidth: 288,
         maxWidth: 568,
@@ -28,8 +29,7 @@ export const styles = theme => {
     },
 
     /* Styles applied to the message wrapper element. */
-    message: {
-      padding: '8px 0'
+    message: { ...toAtomic('padding', '8px 0')
     },
 
     /* Styles applied to the action wrapper element if `action` is provided. */
@@ -72,5 +72,5 @@ export const SnackbarContentCreator = withStyles(styles, SnackbarContent, {
   defaultProps
 });
 const SnackbarContentComponent = SnackbarContentCreator();
-SnackbarContentComponent.muiName = SnackbarContent.muiName;
+if (SnackbarContent.muiName) SnackbarContentComponent.muiName = SnackbarContent.muiName;
 export default SnackbarContentComponent;

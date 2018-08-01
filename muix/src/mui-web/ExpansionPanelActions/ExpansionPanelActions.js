@@ -1,4 +1,6 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import { cloneChildrenWithClassName } from '../utils/reactHelpers';
@@ -6,11 +8,10 @@ import '../Button'; // So we don't have any override priority issue.
 
 export const styles = {
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('padding', '16px 8px'),
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '16px 8px'
+    justifyContent: 'flex-end'
   },
 
   /* Styles applied to the children. */
@@ -44,5 +45,5 @@ export const ExpansionPanelActionsCreator = withStyles(styles, ExpansionPanelAct
   defaultProps
 });
 const ExpansionPanelActionsComponent = ExpansionPanelActionsCreator();
-ExpansionPanelActionsComponent.muiName = ExpansionPanelActions.muiName;
+if (ExpansionPanelActions.muiName) ExpansionPanelActionsComponent.muiName = ExpansionPanelActions.muiName;
 export default ExpansionPanelActionsComponent;

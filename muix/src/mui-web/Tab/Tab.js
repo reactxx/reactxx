@@ -1,5 +1,7 @@
 // @inheritedComponent ButtonBase
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import ButtonBase from "../ButtonBase/ButtonBase";
@@ -7,11 +9,11 @@ import { capitalize } from '../utils/helpers';
 import unsupportedProp from '../utils/unsupportedProp';
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: { ...theme.typography.button,
+  root: { ...toAtomic('padding', 0),
+    ...theme.typography.button,
     maxWidth: 264,
     position: 'relative',
     minWidth: 72,
-    padding: 0,
     minHeight: 48,
     flexShrink: 0,
     overflow: 'hidden',
@@ -219,5 +221,5 @@ export const TabCreator = withStyles(styles, Tab, {
   defaultProps
 });
 const TabComponent = TabCreator();
-TabComponent.muiName = Tab.muiName;
+if (Tab.muiName) TabComponent.muiName = Tab.muiName;
 export default TabComponent;

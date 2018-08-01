@@ -135,5 +135,5 @@ export const StepLabelCreator = withStyles(styles, StepLabel, {
   defaultProps
 });
 const StepLabelComponent = StepLabelCreator();
-StepLabelComponent.muiName = StepLabel.muiName;
+if (StepLabel.muiName) StepLabelComponent.muiName = StepLabel.muiName;
 export default StepLabelComponent;

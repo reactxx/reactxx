@@ -1,12 +1,13 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = {
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('padding', 0),
+    ...toAtomic('margin', 0),
     listStyle: 'none',
-    margin: 0,
-    padding: 0,
     position: 'relative'
   },
 
@@ -77,5 +78,5 @@ export const ListCreator = withStyles(styles, List, {
   defaultProps
 });
 const ListComponent = ListCreator();
-ListComponent.muiName = List.muiName;
+if (List.muiName) ListComponent.muiName = List.muiName;
 export default ListComponent;

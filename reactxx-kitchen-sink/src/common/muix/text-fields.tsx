@@ -5,7 +5,7 @@
 // replace margin and padding by marginTop..., paddingTop...
 // custom input not in example
 import React from 'react'
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator, { toAtomic } from 'reactxx-mui-web/styles/withStyles'
 
 import TextField from 'reactxx-mui-web/TextField/TextField';
 import FormControl from 'reactxx-mui-web/FormControl/FormControl';
@@ -29,7 +29,7 @@ const styles = theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    padding: '30px',
+    ...toAtomic('padding', '30px'),
     overflow: 'auto'
   } as React.CSSProperties,
   container: {
@@ -46,10 +46,7 @@ const styles = theme => ({
     width: 200,
   },
   formControl: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
-    marginTop: theme.spacing.unit,
+    ...toAtomic('margin', theme.spacing.unit),
   },
   withoutLabel: {
     marginTop: theme.spacing.unit * 3,
@@ -58,10 +55,10 @@ const styles = theme => ({
     flexBasis: 200,
   },
   margin: {
-    margin: theme.spacing.unit,
+    ...toAtomic('margin', theme.spacing.unit),
   },
   input: {
-    margin: theme.spacing.unit,
+    ...toAtomic('margin', theme.spacing.unit),
   },
 });
 
@@ -157,11 +154,11 @@ class formattedInputs extends React.Component<any> {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, $system: { classNamesStr } } = this.props;
     const { textmask, numberformat } = this.state;
 
     return (
-      <div className={classes.container}>
+      <div className={classNamesStr(classes.container)}>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="formatted-text-mask-input">react-text-mask</InputLabel>
           <Input
@@ -188,9 +185,9 @@ class formattedInputs extends React.Component<any> {
 const FormattedInputs = withStylesCreator(styles as any, formattedInputs)()
 
 function inputs(props) {
-  const { classes } = props;
+  const { classes, $system: { classNamesStr } } = props;
   return (
-    <div className={classes.container}>
+    <div className={classNamesStr(classes.container)}>
       <Input
         defaultValue="Hello world"
         className={classes.input}
@@ -266,7 +263,7 @@ class inputAdornments extends React.Component<any, any> {
     const { classes, $system: { classNamesStr, classNames } } = this.props;
 
     return (
-      <div className={classes.container}>
+      <div className={classNamesStr(classes.container)}>
         <TextField
           label="With normal TextField"
           id="simple-start-adornment"
@@ -447,7 +444,7 @@ class textFields extends React.Component<any> {
 
     return (
       <div className={classNamesStr(classes.container)}>
-        <form className={classNamesStr(classes.container)} noValidate autoComplete="off">
+        <form noValidate autoComplete="off">
           <TextField
             id="select-currency"
             select

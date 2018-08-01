@@ -1,14 +1,14 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 export const styles = {
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('padding', '0 24px 24px'),
     flex: '1 1 auto',
     overflowY: 'auto',
     WebkitOverflowScrolling: 'touch',
-    // Add iOS momentum scrolling.
-    padding: '0 24px 24px',
     '&:first-child': {
       paddingTop: 24
     }
@@ -40,5 +40,5 @@ export const DialogContentCreator = withStyles(styles, DialogContent, {
   defaultProps
 });
 const DialogContentComponent = DialogContentCreator();
-DialogContentComponent.muiName = DialogContent.muiName;
+if (DialogContent.muiName) DialogContentComponent.muiName = DialogContent.muiName;
 export default DialogContentComponent;

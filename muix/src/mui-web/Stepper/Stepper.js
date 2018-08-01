@@ -1,14 +1,15 @@
 // @inheritedComponent Paper
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import Paper from "../Paper/Paper";
 import StepConnector from '../StepConnector';
 export const styles = {
   /* Styles applied to the root element. */
-  root: {
-    display: 'flex',
-    padding: 24
+  root: { ...toAtomic('padding', 24),
+    display: 'flex'
   },
 
   /* Styles applied to the root element if `orientation="horizontal"`. */
@@ -99,5 +100,5 @@ export const StepperCreator = withStyles(styles, Stepper, {
   defaultProps
 });
 const StepperComponent = StepperCreator();
-StepperComponent.muiName = Stepper.muiName;
+if (Stepper.muiName) StepperComponent.muiName = Stepper.muiName;
 export default StepperComponent;

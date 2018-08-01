@@ -1,4 +1,6 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import warning from 'warning';
 import RootRef from "../RootRef/RootRef";
@@ -15,56 +17,46 @@ export const styles = theme => ({
   },
 
   /* Styles applied to the tooltip (label wrapper) element. */
-  tooltip: {
+  tooltip: { ...toAtomic('padding', '4px 8px'),
     backgroundColor: theme.palette.grey[700],
     borderRadius: theme.shape.borderRadius,
     color: theme.palette.common.white,
     fontFamily: theme.typography.fontFamily,
-    padding: '4px 8px',
     fontSize: theme.typography.pxToRem(10),
     lineHeight: `${theme.typography.round(14 / 10)}em`
   },
 
   /* Styles applied to the tooltip (label wrapper) element if the tooltip is opened by touch. */
-  touch: {
-    padding: '8px 16px',
+  touch: { ...toAtomic('padding', '8px 16px'),
     fontSize: theme.typography.pxToRem(14),
     lineHeight: `${theme.typography.round(16 / 14)}em`
   },
 
   /* Styles applied to the tooltip (label wrapper) element if `placement` contains "left". */
-  tooltipPlacementLeft: {
+  tooltipPlacementLeft: { ...toAtomic('margin', '0 24px '),
     transformOrigin: 'right center',
-    margin: '0 24px ',
-    [theme.breakpoints.up('sm')]: {
-      margin: '0 14px'
+    [theme.breakpoints.up('sm')]: { ...toAtomic('margin', '0 14px')
     }
   },
 
   /* Styles applied to the tooltip (label wrapper) element if `placement` contains "right". */
-  tooltipPlacementRight: {
+  tooltipPlacementRight: { ...toAtomic('margin', '0 24px'),
     transformOrigin: 'left center',
-    margin: '0 24px',
-    [theme.breakpoints.up('sm')]: {
-      margin: '0 14px'
+    [theme.breakpoints.up('sm')]: { ...toAtomic('margin', '0 14px')
     }
   },
 
   /* Styles applied to the tooltip (label wrapper) element if `placement` contains "top". */
-  tooltipPlacementTop: {
+  tooltipPlacementTop: { ...toAtomic('margin', '24px 0'),
     transformOrigin: 'center bottom',
-    margin: '24px 0',
-    [theme.breakpoints.up('sm')]: {
-      margin: '14px 0'
+    [theme.breakpoints.up('sm')]: { ...toAtomic('margin', '14px 0')
     }
   },
 
   /* Styles applied to the tooltip (label wrapper) element if `placement` contains "bottom". */
-  tooltipPlacementBottom: {
+  tooltipPlacementBottom: { ...toAtomic('margin', '24px 0'),
     transformOrigin: 'center top',
-    margin: '24px 0',
-    [theme.breakpoints.up('sm')]: {
-      margin: '14px 0'
+    [theme.breakpoints.up('sm')]: { ...toAtomic('margin', '14px 0')
     }
   }
 });
@@ -349,5 +341,5 @@ export const TooltipCreator = withStyles(styles, Tooltip, {
   defaultProps
 });
 const TooltipComponent = TooltipCreator();
-TooltipComponent.muiName = Tooltip.muiName;
+if (Tooltip.muiName) TooltipComponent.muiName = Tooltip.muiName;
 export default TooltipComponent;

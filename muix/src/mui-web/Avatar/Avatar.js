@@ -88,5 +88,5 @@ export const AvatarCreator = withStyles(styles, Avatar, {
   defaultProps
 });
 const AvatarComponent = AvatarCreator();
-AvatarComponent.muiName = Avatar.muiName;
+if (Avatar.muiName) AvatarComponent.muiName = Avatar.muiName;
 export default AvatarComponent;

@@ -360,5 +360,5 @@ export const TabsCreator = withStyles(styles, Tabs, {
   defaultProps
 });
 const TabsComponent = TabsCreator();
-TabsComponent.muiName = Tabs.muiName;
+if (Tabs.muiName) TabsComponent.muiName = Tabs.muiName;
 export default TabsComponent;

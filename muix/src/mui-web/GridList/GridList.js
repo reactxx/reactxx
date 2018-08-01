@@ -1,15 +1,16 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import warning from 'warning';
 import withStyles from '../styles/withStyles';
 export const styles = {
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('padding', 0),
     display: 'flex',
     flexWrap: 'wrap',
     overflowY: 'auto',
     listStyle: 'none',
-    padding: 0,
     WebkitOverflowScrolling: 'touch' // Add iOS momentum scrolling.
 
   }
@@ -70,5 +71,5 @@ export const GridListCreator = withStyles(styles, GridList, {
   defaultProps
 });
 const GridListComponent = GridListCreator();
-GridListComponent.muiName = GridList.muiName;
+if (GridList.muiName) GridListComponent.muiName = GridList.muiName;
 export default GridListComponent;

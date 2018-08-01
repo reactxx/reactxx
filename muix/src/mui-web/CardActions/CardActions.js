@@ -1,4 +1,6 @@
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import { cloneChildrenWithClassName } from '../utils/reactHelpers';
@@ -6,19 +8,16 @@ import '../Button'; // So we don't have any override priority issue.
 
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: {
+  root: { ...toAtomic('padding', '8px 4px'),
     display: 'flex',
     alignItems: 'center',
     boxSizing: 'border-box',
-    padding: '8px 4px',
-    [theme.breakpoints.up('sm')]: {
-      padding: '8px 12px'
+    [theme.breakpoints.up('sm')]: { ...toAtomic('padding', '8px 12px')
     }
   },
 
   /* Styles applied to the children. */
-  action: {
-    margin: '0 4px'
+  action: { ...toAtomic('margin', '0 4px')
   }
 });
 
@@ -52,5 +51,5 @@ export const CardActionsCreator = withStyles(styles, CardActions, {
   defaultProps
 });
 const CardActionsComponent = CardActionsCreator();
-CardActionsComponent.muiName = CardActions.muiName;
+if (CardActions.muiName) CardActionsComponent.muiName = CardActions.muiName;
 export default CardActionsComponent;
