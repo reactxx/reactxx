@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ButtonBase from "../ButtonBase/ButtonBase";
-import IconButton from '../IconButton';
+import IconButton from "../IconButton/IconButton";
 import withStyles from '../styles/withStyles';
 export const styles = theme => {
   const transition = {

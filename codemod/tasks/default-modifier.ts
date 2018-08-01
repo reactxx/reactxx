@@ -129,6 +129,8 @@ const importRepairs = {
   '../Backdrop': '../Backdrop/Backdrop',
   '../Fade': '../Fade/Fade',
   '../Typography': '../Typography/Typography',
+  '../FormGroup': '../FormGroup/FormGroup',
+  '../IconButton': '../IconButton/IconButton',
 }
 
 export const getRenderFunc = (root: Ast.Ast, functionName: string) => {
@@ -226,20 +228,6 @@ const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
       const defaultPropsIdx = body.indexOf(defaultProps);
       body.splice(defaultPropsIdx, 1)
       body.push(Parser.parseCode(`const defaultProps = ${info.name}.defaultProps = ${defaultPropsStr};`))
-      // body.push({
-      //   "type": "VariableDeclaration",
-      //   "declarations": [
-      //     {
-      //       "type": "VariableDeclarator",
-      //       "id": {
-      //         "type": "Identifier",
-      //         "name": "defaultProps"
-      //       },
-      //       "init": defaultProps.expression.right
-      //     }
-      //   ],
-      //   "kind": "const"
-      // })
     }
   }
 

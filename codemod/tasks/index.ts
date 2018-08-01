@@ -119,16 +119,16 @@ export const readAllCodes = () => {
         log[path] = logItem
 
         // get withStyles or withTheme component name ...
-        const withStylesOrWithTheme = (isWithStyle: boolean) => Queries.checkSingleResult(Ast.astq().query(root,
-            `/Program/ExportDefaultDeclaration/CallExpression [ /CallExpression/Identifier [ @name=="${isWithStyle ? 'withStyles' : 'withTheme'}" ] ] /Identifier`), true)
-        const withStyles = withStylesOrWithTheme(true)
-        const withTheme = withStylesOrWithTheme(false)
+        const withStylesOrWithTheme = (name:string) => Queries.checkSingleResult(Ast.astq().query(root,
+            `/Program/* [ //CallExpression/CallExpression/Identifier [ @name=="${name}" ] ]`), true)
+        const withStyles = withStylesOrWithTheme('withStyles')
+        const withTheme = withStylesOrWithTheme('withTheme')
 
         // ... and put it to log
         if (withTheme)
-            logItem.withTheme = withTheme.name
+            logItem.withTheme = true
         else if (withStyles)
-            logItem.withStyles = withStyles.name
+            logItem.withStyles = true
     })
     //const dump = JSON.stringify(log, null, 2)
     return { log, code, compileErrors }

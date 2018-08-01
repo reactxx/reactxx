@@ -27,8 +27,8 @@ import Button from 'reactxx-mui-web/Button'
 //import App from '../common/muix/paper'
 //import App from '../common/muix/appbar'
 //import App from '../common/muix/autocomplete'
-import App from '../common/muix/text-fields'
-//import App from './fela'
+//import App from '../common/muix/text-fields'
+import App from '../common/muix/grid'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

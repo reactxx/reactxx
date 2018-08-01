@@ -9,6 +9,8 @@
 // Follow this flexbox Guide to better understand the underlying model:
 // - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 import React from 'react';
+import { toAtomic } from '../styles/withStyles';
+
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
 import { keys as breakpointKeys } from '../styles/createBreakpoints';
@@ -67,10 +69,17 @@ function generateGutter(theme, breakpoint) {
     }
 
     styles[`spacing-${breakpoint}-${spacing}`] = {
-      margin: -spacing / 2,
+      marginLeft: -spacing / 2,
+      marginRight: -spacing / 2,
+      marginTop: -spacing / 2,
+      marginBottom: -spacing / 2,
       width: `calc(100% + ${spacing}px)`,
-      '& > $item': {
-        padding: spacing / 2
+      //'& > $item': {
+      '& > .grid_item': {
+        paddingLeft: spacing / 2,
+        paddingRight: spacing / 2,
+        paddingTop: spacing / 2,
+        paddingBottom: spacing / 2,
       }
     };
   });
@@ -94,9 +103,9 @@ export const styles = theme => ({
 
   /* Styles applied to the root element if `item={true}`. */
   item: {
-    boxSizing: 'border-box',
-    margin: '0' // For instance, it's useful when used with a `figure` element.
-
+    ...toAtomic('margin', '0'),
+    "NAME$grid_item": true,
+    boxSizing: 'border-box'
   },
 
   /* Styles applied to the root element if `zeroMinWidth={true}`. */
@@ -208,6 +217,11 @@ export const styles = theme => ({
 
 function Grid(props) {
   const {
+    $system: {
+      classNames,
+      classNamesStr,
+      theme
+    },
     alignContent,
     alignItems,
     classes,
@@ -227,133 +241,37 @@ function Grid(props) {
     zeroMinWidth,
     ...other
   } = props;
-  const className = classNames({
-    [classes.container]: container,
-    [classes.item]: item,
-    [classes.zeroMinWidth]: zeroMinWidth,
-    [classes[`spacing-xs-${String(spacing)}`]]: container && spacing !== 0,
-    [classes[`direction-xs-${String(direction)}`]]: direction !== Grid.defaultProps.direction,
-    [classes[`wrap-xs-${String(wrap)}`]]: wrap !== Grid.defaultProps.wrap,
-    [classes[`align-items-xs-${String(alignItems)}`]]: alignItems !== Grid.defaultProps.alignItems,
-    [classes[`align-content-xs-${String(alignContent)}`]]: alignContent !== Grid.defaultProps.alignContent,
-    [classes[`justify-xs-${String(justify)}`]]: justify !== Grid.defaultProps.justify,
-    [classes[`grid-xs-${String(xs)}`]]: xs !== false,
-    [classes[`grid-sm-${String(sm)}`]]: sm !== false,
-    [classes[`grid-md-${String(md)}`]]: md !== false,
-    [classes[`grid-lg-${String(lg)}`]]: lg !== false,
-    [classes[`grid-xl-${String(xl)}`]]: xl !== false
-  }, classNameProp);
-  return <Component className={className} {...other} />;
+  const className = classNames(container && classes.container, item && classes.item, zeroMinWidth && classes.zeroMinWidth, container && spacing !== 0 && classes[`spacing-xs-${String(spacing)}`], direction !== Grid.defaultProps.direction &&
+    classes[`direction-xs-${String(direction)}`], wrap !== Grid.defaultProps.wrap && classes[`wrap-xs-${String(wrap)}`], alignItems !== Grid.defaultProps.alignItems && classes[`align-items-xs-${String(alignItems)}`],
+    alignContent !== Grid.defaultProps.alignContent && classes[`align-content-xs-${String(alignContent)}`], justify !== Grid.defaultProps.justify && classes[`justify-xs-${String(justify)}`], xs !== false &&
+    classes[`grid-xs-${String(xs)}`], sm !== false && classes[`grid-sm-${String(sm)}`], md !== false && classes[`grid-md-${String(md)}`], lg !== false && classes[`grid-lg-${String(lg)}`],
+    xl !== false && classes[`grid-xl-${String(xl)}`], classNameProp);
+  return <Component className={classNamesStr(className)} {...other} />;
 }
 
-Grid.propTypes = {
-  /**
-     * Defines the `align-content` style property.
-     * It's applied for all screen sizes.
-     */
-  alignContent: PropTypes.oneOf(['stretch', 'center', 'flex-start', 'flex-end', 'space-between', 'space-around']),
+const StyledGrid = withStyles(styles, {
+  name: 'MuiGrid'
+})(Grid);
 
-  /**
-     * Defines the `align-items` style property.
-     * It's applied for all screen sizes.
-     */
-  alignItems: PropTypes.oneOf(['flex-start', 'center', 'flex-end', 'stretch', 'baseline']),
+if (process.env.NODE_ENV !== 'production') {
+  const requireProp = requirePropFactory('Grid');
+  StyledGrid.propTypes = {
+    ...StyledGrid.propTypes,
+    alignContent: requireProp('container'),
+    alignItems: requireProp('container'),
+    direction: requireProp('container'),
+    justify: requireProp('container'),
+    lg: requireProp('item'),
+    md: requireProp('item'),
+    sm: requireProp('item'),
+    spacing: requireProp('container'),
+    wrap: requireProp('container'),
+    xs: requireProp('item'),
+    zeroMinWidth: requireProp('zeroMinWidth')
+  };
+}
 
-  /**
-     * The content of the component.
-     */
-  children: PropTypes.node,
-
-  /**
-     * Override or extend the styles applied to the component.
-     * See [CSS API](#css-api) below for more details.
-     */
-  classes: PropTypes.object.isRequired,
-
-  /**
-     * @ignore
-     */
-  className: PropTypes.string,
-
-  /**
-     * The component used for the root node.
-     * Either a string to use a DOM element or a component.
-     */
-  component: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
-
-  /**
-     * If `true`, the component will have the flex *container* behavior.
-     * You should be wrapping *items* with a *container*.
-     */
-  container: PropTypes.bool,
-
-  /**
-     * Defines the `flex-direction` style property.
-     * It is applied for all screen sizes.
-     */
-  direction: PropTypes.oneOf(['row', 'row-reverse', 'column', 'column-reverse']),
-
-  /**
-     * If `true`, the component will have the flex *item* behavior.
-     * You should be wrapping *items* with a *container*.
-     */
-  item: PropTypes.bool,
-
-  /**
-     * Defines the `justify-content` style property.
-     * It is applied for all screen sizes.
-     */
-  justify: PropTypes.oneOf(['flex-start', 'center', 'flex-end', 'space-between', 'space-around', 'space-evenly']),
-
-  /**
-     * Defines the number of grids the component is going to use.
-     * It's applied for the `lg` breakpoint and wider screens if not overridden.
-     */
-  lg: PropTypes.oneOf([false, 'auto', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-
-  /**
-     * Defines the number of grids the component is going to use.
-     * It's applied for the `md` breakpoint and wider screens if not overridden.
-     */
-  md: PropTypes.oneOf([false, 'auto', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-
-  /**
-     * Defines the number of grids the component is going to use.
-     * It's applied for the `sm` breakpoint and wider screens if not overridden.
-     */
-  sm: PropTypes.oneOf([false, 'auto', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-
-  /**
-     * Defines the space between the type `item` component.
-     * It can only be used on a type `container` component.
-     */
-  spacing: PropTypes.oneOf(GUTTERS),
-
-  /**
-     * Defines the `flex-wrap` style property.
-     * It's applied for all screen sizes.
-     */
-  wrap: PropTypes.oneOf(['nowrap', 'wrap', 'wrap-reverse']),
-
-  /**
-     * Defines the number of grids the component is going to use.
-     * It's applied for the `xl` breakpoint and wider screens.
-     */
-  xl: PropTypes.oneOf([false, 'auto', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-
-  /**
-     * Defines the number of grids the component is going to use.
-     * It's applied for all the screen sizes with the lowest priority.
-     */
-  xs: PropTypes.oneOf([false, 'auto', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-
-  /**
-     * If `true`, it sets `min-width: 0` on the item.
-     * Refer to the limitations section of the documentation to better understand the use case.
-     */
-  zeroMinWidth: PropTypes.bool
-};
-Grid.defaultProps = {
+const defaultProps = Grid.defaultProps = {
   alignContent: 'stretch',
   alignItems: 'stretch',
   component: 'div',
@@ -370,25 +288,14 @@ Grid.defaultProps = {
   xs: false,
   zeroMinWidth: false
 };
-const StyledGrid = withStyles(styles, {
-  name: 'MuiGrid'
-})(Grid);
 
-if (process.env.NODE_ENV !== 'production') {
-  const requireProp = requirePropFactory('Grid');
-  StyledGrid.propTypes = { ...StyledGrid.propTypes,
-    alignContent: requireProp('container'),
-    alignItems: requireProp('container'),
-    direction: requireProp('container'),
-    justify: requireProp('container'),
-    lg: requireProp('item'),
-    md: requireProp('item'),
-    sm: requireProp('item'),
-    spacing: requireProp('container'),
-    wrap: requireProp('container'),
-    xs: requireProp('item'),
-    zeroMinWidth: requireProp('zeroMinWidth')
-  };
-}
-
-export default StyledGrid;
+/**
+* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Grid/Grid').Shape>}
+*/
+export const GridCreator = withStyles(styles, Grid, {
+  isMui: true,
+  defaultProps
+});
+const GridComponent = GridCreator();
+if (Grid.muiName) GridComponent.muiName = Grid.muiName;
+export default GridComponent;

@@ -4,7 +4,7 @@ import { toAtomic } from '../styles/withStyles';
 
 import PropTypes from 'prop-types';
 import withStyles from '../styles/withStyles';
-import IconButton from '../IconButton';
+import IconButton from "../IconButton/IconButton";
 export const styles = {
   root: {
     display: 'inline-flex',

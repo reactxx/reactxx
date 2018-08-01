@@ -15,8 +15,8 @@ export const astq = () => {
 export interface MUISourceInfo {
     dir: string
     name: string
-    withStyles?: string
-    withTheme?: string
+    withStyles?: boolean
+    withTheme?: boolean
     srcPath?: string
     origPath?: string
     origExists?: boolean

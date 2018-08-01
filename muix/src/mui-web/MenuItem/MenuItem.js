@@ -14,14 +14,14 @@ export const styles = theme => ({
     whiteSpace: 'nowrap',
     paddingLeft: 16,
     paddingRight: 16,
-    '&.selected57': {
+    '&.selected58': {
       backgroundColor: theme.palette.action.selected
     }
   },
 
   /* Styles applied to the root element if `selected={true}`. */
   selected: {
-    NAME$selected57: true
+    NAME$selected58: true
   }
 });
 

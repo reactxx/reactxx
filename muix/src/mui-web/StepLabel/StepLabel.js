@@ -8,10 +8,10 @@ export const styles = theme => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-    '&.alternativeLabel72': {
+    '&.alternativeLabel73': {
       flexDirection: 'column'
     },
-    '&.disabled72': {
+    '&.disabled73': {
       cursor: 'default'
     }
   },
@@ -25,54 +25,54 @@ export const styles = theme => ({
   /* Styles applied to the `Typography` component which wraps `children`. */
   label: {
     color: theme.palette.text.secondary,
-    '&.active72': {
+    '&.active73': {
       color: theme.palette.text.primary,
       fontWeight: 500
     },
-    '&.completed72': {
+    '&.completed73': {
       color: theme.palette.text.primary,
       fontWeight: 500
     },
-    '&.alternativeLabel72': {
+    '&.alternativeLabel73': {
       textAlign: 'center',
       marginTop: 16
     },
-    '&.error72': {
+    '&.error73': {
       color: theme.palette.error.main
     }
   },
 
   /* Styles applied to the `Typography` component if `active={true}`. */
   active: {
-    NAME$active72: true
+    NAME$active73: true
   },
 
   /* Styles applied to the `Typography` component if `completed={true}`. */
   completed: {
-    NAME$completed72: true
+    NAME$completed73: true
   },
 
   /* Styles applied to the root element and `Typography` component if `error={true}`. */
   error: {
-    NAME$error72: true
+    NAME$error73: true
   },
 
   /* Styles applied to the root element and `Typography` component if `disabled={true}`. */
   disabled: {
-    NAME$disabled72: true
+    NAME$disabled73: true
   },
 
   /* Styles applied to the `icon` container element. */
   iconContainer: {
     paddingRight: 8,
-    '&.alternativeLabel72': {
+    '&.alternativeLabel73': {
       paddingRight: 0
     }
   },
 
   /* Styles applied to the root & icon container and `Typography` if `alternativeLabel={true}`. */
   alternativeLabel: {
-    NAME$alternativeLabel72: true
+    NAME$alternativeLabel73: true
   },
 
   /* Styles applied to the container element which wraps `Typography` and `optional`. */

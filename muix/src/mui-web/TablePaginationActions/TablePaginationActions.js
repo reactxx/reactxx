@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import KeyboardArrowLeft from '../internal/svg-icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '../internal/svg-icons/KeyboardArrowRight';
 import withTheme from '../styles/withTheme';
-import IconButton from '../IconButton';
+import IconButton from "../IconButton/IconButton";
 /**
  * @ignore - internal component.
  */

@@ -24,7 +24,7 @@ export const styles = theme => ({
   /* Styles applied to the root element if `active={true}`. */
   active: {
     color: theme.palette.text.primary,
-    '& .icon85': {
+    '& .icon86': {
       opacity: 1
     }
   },
@@ -40,7 +40,7 @@ export const styles = theme => ({
     }),
     userSelect: 'none',
     width: 16,
-    NAME$icon85: true
+    NAME$icon86: true
   },
 
   /* Styles applied to the icon component if `direction="desc"`. */

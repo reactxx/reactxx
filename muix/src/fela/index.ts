@@ -33,8 +33,6 @@ renderer.renderStatic({ display: 'flex', flexDirection: 'column', alignItems: 's
 
 render(renderer)
 
-var replAmpersand = /&/g.compile
-
 
 //Converts ruleset to blank delimited atomic classes
 export const rulesetToClassNames = (ruleset: React.CSSProperties) => ruleset ? renderer.renderRule(() => ruleset, {}) : ''
@@ -44,70 +42,14 @@ export const rulesetsToClassNames = (...rulesets: React.CSSProperties[]) => {
   let res: string
   if (rulesets.length == 1) res = rulesetToClassNames(rulesets[0])
   else res = rulesetToClassNames(Object.assign({}, ...rulesets))
-  return res //rulesetToClassNames(Object.assign({}, ...rulesets))
+  return res 
 }
 export const keyFrameToClassNames = (keyFrame: React.CSSProperties) => keyFrame ? renderer.renderKeyframe(() => keyFrame, {}) : ''
-
-
-//Converts sheet to named atomic classes
-//export const sheetToClassSheet = <TKey extends string>(sheet: Partial<Record<TKey, React.CSSProperties>>) => {
-//  if (!sheet) return null
-//  const res: Partial<Record<TKey, string>> = {}
-//  for (const p in sheet) res[p] = rulesetToClassNames(sheet[p])
-//  return res
-//}
-
-// export const getClassSelectors = (names:string[]) => {
-//   const res: Record<string,string> = {}
-//   names.forEach(name => {
-//     let id = namesCount[name]
-//     if (!id) id = namesCount[name] = 1
-//     else id = namesCount[name] = id++
-//     res[name] = `.${name}-${id}`
-//   })
-//   return res
-// }
-// const namesCount: Record<string, number> = {}
 
 export const rulesetToClassNamesMUI = (ruleset: React.CSSProperties) => {
   if (!ruleset) return ''
 
   let rs = ruleset
-  // const idxToName = ['Left', 'Right', 'Top', 'Bottom']
-
-  // if (rs.margin) {
-  //   const margin = rs.margin
-  //   if (typeof margin === 'string') {
-
-  //   }
-  //   const { marginLeft, marginRight, marginTop, marginBottom } = rs
-  //   const setAsMargin = [];
-  //   [marginLeft, marginRight, marginTop, marginBottom].forEach((m, idx) => {
-  //     if (m === undefined)
-  //       setAsMargin.push(idxToName[idx])
-  //   })
-  //   if (setAsMargin.length > 0 && setAsMargin.length < 4) {
-  //     if (rs === ruleset) rs = { ...ruleset }
-  //     setAsMargin.forEach(s => rs['margin' + s] = rs.margin)
-  //     delete rs.margin
-  //   }
-  // }
-
-  // if (rs.padding) {
-  //   const { paddingLeft, paddingRight, paddingTop, paddingBottom } = rs
-  //   const setAsMargin = [];
-  //   [paddingLeft, paddingRight, paddingTop, paddingBottom].forEach((m, idx) => {
-  //     if (m === undefined)
-  //       setAsMargin.push(idxToName[idx])
-  //   })
-  //   if (setAsMargin.length > 0 && setAsMargin.length < 4) {
-  //     if (rs === ruleset) rs = { ...ruleset }
-  //     setAsMargin.forEach(s => rs['padding' + s] = rs.padding)
-  //     delete rs.padding
-  //   }
-  // }
-
-
   let empty = true
   let forceRuleNames: string[] = null
   for (const p in ruleset) {
