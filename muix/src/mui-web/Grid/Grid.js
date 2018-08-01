@@ -68,30 +68,22 @@ function generateGutter(theme, breakpoint) {
       return;
     }
 
-    styles[`spacing-${breakpoint}-${spacing}`] = {
-      marginLeft: -spacing / 2,
-      marginRight: -spacing / 2,
-      marginTop: -spacing / 2,
-      marginBottom: -spacing / 2,
+    styles[`spacing-${breakpoint}-${spacing}`] = { ...toAtomic('margin', -spacing / 2),
       width: `calc(100% + ${spacing}px)`,
       //'& > $item': {
-      '& > .grid_item': {
-        paddingLeft: spacing / 2,
-        paddingRight: spacing / 2,
-        paddingTop: spacing / 2,
-        paddingBottom: spacing / 2,
+      '& > .grid_item': { ...toAtomic('padding', spacing / 2)
       }
     };
   });
   return styles;
-} // Default CSS values
+}
+
+// Default CSS values
 // flex: '0 1 auto',
 // flexDirection: 'row',
 // alignItems: 'flex-start',
 // flexWrap: 'nowrap',
 // justifyContent: 'flex-start',
-
-
 export const styles = theme => ({
   /* Styles applied to the root element if `container={true}`. */
   container: {
@@ -102,10 +94,9 @@ export const styles = theme => ({
   },
 
   /* Styles applied to the root element if `item={true}`. */
-  item: {
-    ...toAtomic('margin', '0'),
-    "NAME$grid_item": true,
-    boxSizing: 'border-box'
+  item: { ...toAtomic('margin', '0'),
+    boxSizing: 'border-box',
+    "NAME$grid_item": true
   },
 
   /* Styles applied to the root element if `zeroMinWidth={true}`. */
@@ -241,11 +232,7 @@ function Grid(props) {
     zeroMinWidth,
     ...other
   } = props;
-  const className = classNames(container && classes.container, item && classes.item, zeroMinWidth && classes.zeroMinWidth, container && spacing !== 0 && classes[`spacing-xs-${String(spacing)}`], direction !== Grid.defaultProps.direction &&
-    classes[`direction-xs-${String(direction)}`], wrap !== Grid.defaultProps.wrap && classes[`wrap-xs-${String(wrap)}`], alignItems !== Grid.defaultProps.alignItems && classes[`align-items-xs-${String(alignItems)}`],
-    alignContent !== Grid.defaultProps.alignContent && classes[`align-content-xs-${String(alignContent)}`], justify !== Grid.defaultProps.justify && classes[`justify-xs-${String(justify)}`], xs !== false &&
-    classes[`grid-xs-${String(xs)}`], sm !== false && classes[`grid-sm-${String(sm)}`], md !== false && classes[`grid-md-${String(md)}`], lg !== false && classes[`grid-lg-${String(lg)}`],
-    xl !== false && classes[`grid-xl-${String(xl)}`], classNameProp);
+  const className = classNames(container && classes.container, item && classes.item, zeroMinWidth && classes.zeroMinWidth, container && spacing !== 0 && classes[`spacing-xs-${String(spacing)}`], direction !== Grid.defaultProps.direction && classes[`direction-xs-${String(direction)}`], wrap !== Grid.defaultProps.wrap && classes[`wrap-xs-${String(wrap)}`], alignItems !== Grid.defaultProps.alignItems && classes[`align-items-xs-${String(alignItems)}`], alignContent !== Grid.defaultProps.alignContent && classes[`align-content-xs-${String(alignContent)}`], justify !== Grid.defaultProps.justify && classes[`justify-xs-${String(justify)}`], xs !== false && classes[`grid-xs-${String(xs)}`], sm !== false && classes[`grid-sm-${String(sm)}`], md !== false && classes[`grid-md-${String(md)}`], lg !== false && classes[`grid-lg-${String(lg)}`], xl !== false && classes[`grid-xl-${String(xl)}`], classNameProp);
   return <Component className={classNamesStr(className)} {...other} />;
 }
 
@@ -255,8 +242,7 @@ const StyledGrid = withStyles(styles, {
 
 if (process.env.NODE_ENV !== 'production') {
   const requireProp = requirePropFactory('Grid');
-  StyledGrid.propTypes = {
-    ...StyledGrid.propTypes,
+  StyledGrid.propTypes = { ...StyledGrid.propTypes,
     alignContent: requireProp('container'),
     alignItems: requireProp('container'),
     direction: requireProp('container'),

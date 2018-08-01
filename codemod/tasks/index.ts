@@ -11,6 +11,7 @@ import { registerButtonBase } from '../patch-code/ButtonBase/ButtonBase'
 import { registerInput } from '../patch-code/Input/Input'
 import { registerNativeSelectInput } from '../patch-code/NativeSelect/NativeSelectInput'
 import { registerSelectInput } from '../patch-code/Select/SelectInput'
+import { registerGrid } from '../patch-code/Grid/Grid'
 
 export type Specials = { [path: string]: Ast.FileDescr }
 
@@ -20,6 +21,7 @@ registerButtonBase(specials)
 registerInput(specials)
 registerNativeSelectInput(specials)
 registerSelectInput(specials)
+registerGrid(specials)
 
 export const codeMod = () => {
 

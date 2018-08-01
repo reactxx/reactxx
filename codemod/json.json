@@ -1,36 +1,18 @@
 {
-  "type": "SpreadElement",
-  "argument": {
-    "type": "CallExpression",
-    "callee": {
-      "type": "Identifier",
-      "name": "toAtomic"
+  "type": "ObjectProperty",
+  "method": false,
+  "key": {
+    "type": "StringLiteral",
+    "extra": {
+      "rawValue": "NAME$grid_item",
+      "raw": "\"NAME$grid_item\""
     },
-    "arguments": [
-      {
-        "type": "StringLiteral",
-        "extra": {
-          "rawValue": "margin",
-          "raw": "'margin'"
-        },
-        "value": "margin"
-      },
-      {
-        "type": "BinaryExpression",
-        "left": {
-          "type": "Identifier",
-          "name": "a"
-        },
-        "operator": "/",
-        "right": {
-          "type": "NumericLiteral",
-          "extra": {
-            "rawValue": 2,
-            "raw": "2"
-          },
-          "value": 2
-        }
-      }
-    ]
+    "value": "NAME$grid_item"
+  },
+  "computed": false,
+  "shorthand": false,
+  "value": {
+    "type": "BooleanLiteral",
+    "value": true
   }
 }
