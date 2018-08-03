@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import classNames from 'classnames';
 /**
  * @ignore - internal component.
  */
+
 function NativeSelectInput(props) {
   const {
     $system: {

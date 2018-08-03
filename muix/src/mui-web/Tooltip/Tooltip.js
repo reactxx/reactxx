@@ -3,6 +3,7 @@ import { toAtomic } from '../styles/withStyles';
 
 import PropTypes from 'prop-types';
 import warning from 'warning';
+import classNames from 'classnames';
 import RootRef from "../RootRef/RootRef";
 import withStyles from '../styles/withStyles';
 import { capitalize } from '../utils/helpers';

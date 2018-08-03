@@ -2,9 +2,10 @@ import React from 'react';
 import { toAtomic } from '../styles/withStyles';
 
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import withStyles from '../styles/withStyles';
 import { cloneChildrenWithClassName } from '../utils/reactHelpers';
-import '../Button'; // So we don't have any override priority issue.
+import "../Button/Button"; // So we don't have any override priority issue.
 
 export const styles = theme => ({
   /* Styles applied to the root element. */

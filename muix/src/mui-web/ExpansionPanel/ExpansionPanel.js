@@ -1,6 +1,7 @@
 // @inheritedComponent Paper
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import warning from 'warning';
 import Collapse from '../Collapse';
 import Paper from "../Paper/Paper";

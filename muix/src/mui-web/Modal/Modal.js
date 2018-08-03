@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import warning from 'warning';
 import keycode from 'keycode';
 import ownerDocument from '../utils/ownerDocument';

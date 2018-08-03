@@ -11,6 +11,7 @@ export const classNamesFix = () => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   refactorClassNamesObjectExpressionAttribute(root)
   adjustHtmlClassNameAttribute(root, info.name)
   adjustPaddingMargins(root)
+  adjustTheme(root, info)
   return root
 }
 
@@ -30,6 +31,56 @@ export const withThemeTaskDefaultCreator = () => (root: Ast.Ast, info: Ast.MUISo
 export const otherTaskDefaultCreator = () => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   adjustImports(root)
   return root
+}
+
+const adjustTheme = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
+  if (!info.adjustThemeMethods && !info.adjustThemeProperties) return
+  const toAdjust = info.adjustThemeMethods && info.adjustThemeProperties ? [...info.adjustThemeMethods, ...info.adjustThemeProperties] : (info.adjustThemeMethods ? info.adjustThemeMethods : info.adjustThemeProperties)
+  toAdjust.forEach(methodName => {
+    const method = Queries.checkSingleResult(
+      info.adjustThemeMethods && info.adjustThemeMethods.indexOf(methodName) >= 0
+        ? Ast.astq().query(root, `// Program/ClassDeclaration [ /Identifier [@name == "${info.name}"] ] // ClassMethod [ /Identifier [ @name == "${methodName}"] ]`)
+        : Ast.astq().query(root, `// Program/ClassDeclaration [ /Identifier [@name == "${info.name}"] ] // ClassProperty [ /Identifier [ @name == "${methodName}"] ] / ArrowFunctionExpression`))
+    const selectProps = Queries.checkSingleResult(Ast.astq().query(method.body, '/VariableDeclaration/VariableDeclarator [ // Identifier [@name == "props"] ]'))
+    const place: any[] = selectProps.id.properties;
+    const themeIdx = place.findIndex(pl => pl.key && pl.key.name === 'theme');
+    if (themeIdx >= 0)
+      place.splice(themeIdx, 1);
+    (place as Array<any>).splice(0, 0, constSelectTheme)
+  })
+}
+const constSelectTheme = {
+  "type": "ObjectProperty",
+  "method": false,
+  "key": {
+    "type": "Identifier",
+    "name": "$system"
+  },
+  "computed": false,
+  "shorthand": false,
+  "value": {
+    "type": "ObjectPattern",
+    "properties": [
+      {
+        "type": "ObjectProperty",
+        "method": false,
+        "key": {
+          "type": "Identifier",
+          "name": "theme"
+        },
+        "computed": false,
+        "shorthand": true,
+        "value": {
+          "type": "Identifier",
+          "name": "theme"
+        },
+        "extra": {
+          "shorthand": true
+        }
+      }
+
+    ]
+  }
 }
 
 const adjustPaddingMargins = (root: Ast.Ast) => {
@@ -92,16 +143,25 @@ const parseValue = (prefix: string, value) => {
 const adjustImports = (root: Ast.Ast) => {
   const imports = Ast.astq().query(root, `// ImportDeclaration`)
   imports.forEach(imp => {
-    const id = Queries.checkSingleResult(Ast.astq().query(imp, '/ImportDefaultSpecifier/Identifier' || '/ImportSpecifier/Identifier'), true)
-    if (id && id.name === 'classNames') {
+    if (imp.source.type != 'StringLiteral') return
+    if (imp.source.value === 'classNames') {
       Ast.removeNode(root, imp.$path)
       return
-    } else {
-      const newValue = importRepairs[imp.source.value]
-      if (newValue)
-        imp.source.value = newValue
-      return
     }
+    const newValue = importRepairs[imp.source.value]
+    if (newValue)
+      imp.source.value = newValue
+    return
+    // const id = Queries.checkSingleResult(Ast.astq().query(imp, '/ImportDefaultSpecifier/Identifier' || '/ImportSpecifier/Identifier'), true)
+    //   if (id && id.name === 'classNames') {
+    //     Ast.removeNode(root, imp.$path)
+    //     return
+    //   } else {
+    //     const newValue = importRepairs[imp.source.value]
+    //     if (newValue)
+    //       imp.source.value = newValue
+    //     return
+    //   }
   })
 }
 const importRepairs = {
@@ -127,6 +187,7 @@ const importRepairs = {
   '../Typography': '../Typography/Typography',
   '../FormGroup': '../FormGroup/FormGroup',
   '../IconButton': '../IconButton/IconButton',
+  '../Button': '../Button/Button',
 }
 const unknownComponents = [
   'ComponentProp',
@@ -146,8 +207,8 @@ const adjustHtmlClassNameAttribute = (root: Ast.Ast, functionName: string) => {
   const htmls = Ast.astq().query(func.body, '// JSXElement [ /JSXOpeningElement/JSXIdentifier [ isHTMLTag(@name, {forceHTMLTags}) ] && // JSXAttribute/JSXIdentifier [ @name=="className" ] ]', { forceHTMLTags: unknownComponents || null }) as Ast.Ast[]
   const classNames = 'classNames('
   htmls.forEach(html => {
-    const compName:string = html.openingElement.name.name
-    const classNameProc = compName==='TransitionGroup' || compName.charAt(0).toLowerCase() === compName.charAt(0) ? 'classNamesStr(' : `classNamesAny(${compName},`
+    const compName: string = html.openingElement.name.name
+    const classNameProc = compName === 'TransitionGroup' || compName.charAt(0).toLowerCase() === compName.charAt(0) ? 'classNamesStr(' : `classNamesAny(${compName},`
     const clasName = Queries.checkSingleResult(Ast.astq().query(html, '/JSXOpeningElement/JSXAttribute [ /JSXIdentifier [ @name=="className" ] ]'))
     const oldCode = Parser.generateCode(clasName.value.expression)
     const newCode = oldCode.startsWith(classNames) ? classNameProc + oldCode.substr(classNames.length) : `${classNameProc}${oldCode})`

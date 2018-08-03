@@ -1,6 +1,7 @@
 // @inheritedComponent Paper
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import Paper from "../Paper/Paper";
 import withStyles from '../styles/withStyles';
 export const styles = {

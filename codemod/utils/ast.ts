@@ -20,10 +20,12 @@ export interface MUISourceInfo {
     srcPath?: string
     origPath?: string
     origExists?: boolean
+    adjustThemeProperties?: string[]
+    adjustThemeMethods?: string[]
 }
 export interface FileDescr {
     path?: string
-    transform?: (root: Ast, info:MUISourceInfo) => Ast
+    transform?: (root: Ast, info: MUISourceInfo) => Ast
     transformStr?: (code: string) => string
 }
 

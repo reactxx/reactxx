@@ -4,12 +4,11 @@ import * as Queries from '../../utils/queries'
 
 import { Specials } from '../../tasks'
 
-export const registerTabs = (specials: Specials) => {
-    specials['Tabs/Tabs'] = {
+export const registerCollapse = (specials: Specials) => {
+    specials['Collapse/Collapse'] = {
         transform: (ast, info) => {
             const res = Tasks.withStylesTaskDefaultCreator()(ast, Object.assign({}, info, {
-                adjustThemeProperties: ['moveTabsScroll', 'scrollSelectedIntoView', 'getConditionalElements', 'updateScrollButtonState'],
-                adjustThemeMethods: ['updateIndicatorState']
+                adjustThemeProperties: ['handleEntering', 'handleExiting'],
             }));
             // ['moveTabsScroll', 'scrollSelectedIntoView', 'getConditionalElements', 'updateScrollButtonState', 'updateIndicatorState'].forEach(methodName => {
             //     const method = Queries.checkSingleResult(

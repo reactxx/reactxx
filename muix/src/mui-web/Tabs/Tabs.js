@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
+import classNames from 'classnames';
 import EventListener from 'react-event-listener';
 import debounce from 'debounce'; // < 1kb payload overhead when lodash/debounce is > 3kb.
 

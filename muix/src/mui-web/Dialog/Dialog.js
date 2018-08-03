@@ -3,6 +3,7 @@ import React from 'react';
 import { toAtomic } from '../styles/withStyles';
 
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import withStyles from '../styles/withStyles';
 import { capitalize } from '../utils/helpers';
 import Modal from "../Modal/Modal";

@@ -2,6 +2,7 @@ import React from 'react';
 import { toAtomic } from '../styles/withStyles';
 
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import keycode from 'keycode';
 import CancelIcon from '../internal/svg-icons/Cancel';
 import withStyles from '../styles/withStyles';

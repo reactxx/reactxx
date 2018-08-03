@@ -2,6 +2,7 @@ import React from 'react';
 import { toAtomic } from '../styles/withStyles';
 
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import withStyles from '../styles/withStyles';
 import { isFilled, isAdornedStart } from '../Input/Input';
 import { capitalize } from '../utils/helpers';

@@ -13,6 +13,7 @@ import { registerNativeSelectInput } from '../patch-code/NativeSelect/NativeSele
 import { registerSelectInput } from '../patch-code/Select/SelectInput'
 import { registerGrid } from '../patch-code/Grid/Grid'
 import { registerTabs } from '../patch-code/Tabs/Tabs'
+import { registerCollapse } from '../patch-code/Collapse/Collapse'
 
 export type Specials = { [path: string]: Ast.FileDescr }
 
@@ -24,6 +25,7 @@ registerNativeSelectInput(specials)
 registerSelectInput(specials)
 registerGrid(specials)
 registerTabs(specials)
+registerCollapse(specials)
 
 export const codeMod = () => {
 

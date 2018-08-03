@@ -2,6 +2,7 @@ import React from 'react';
 import { toAtomic } from '../styles/withStyles';
 
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import debounce from 'debounce'; // < 1kb payload overhead when lodash/debounce is > 3kb.
 
 import EventListener from 'react-event-listener';

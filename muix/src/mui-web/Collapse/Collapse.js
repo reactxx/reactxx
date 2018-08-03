@@ -1,5 +1,6 @@
 // @inheritedComponent Transition
 import React from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
 import withStyles from '../styles/withStyles';
@@ -53,8 +54,10 @@ class Collapse extends React.Component {
   };
   handleEntering = node => {
     const {
-      timeout,
-      theme
+      $system: {
+        theme
+      },
+      timeout
     } = this.props;
     const wrapperHeight = this.wrapperRef ? this.wrapperRef.clientHeight : 0;
     const {
@@ -94,8 +97,10 @@ class Collapse extends React.Component {
   };
   handleExiting = node => {
     const {
-      timeout,
-      theme
+      $system: {
+        theme
+      },
+      timeout
     } = this.props;
     const wrapperHeight = this.wrapperRef ? this.wrapperRef.clientHeight : 0;
     const {
