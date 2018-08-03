@@ -29,6 +29,7 @@ function StepContent(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     active,

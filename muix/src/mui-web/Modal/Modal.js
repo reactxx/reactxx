@@ -225,6 +225,7 @@ class Modal extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       BackdropComponent,

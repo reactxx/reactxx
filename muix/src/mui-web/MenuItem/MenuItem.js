@@ -14,14 +14,14 @@ export const styles = theme => ({
     whiteSpace: 'nowrap',
     paddingLeft: 16,
     paddingRight: 16,
-    '&.selected58': {
+    '&.selected57': {
       backgroundColor: theme.palette.action.selected
     }
   },
 
   /* Styles applied to the root element if `selected={true}`. */
   selected: {
-    NAME$selected58: true
+    NAME$selected57: true
   }
 });
 
@@ -30,6 +30,7 @@ function MenuItem(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,

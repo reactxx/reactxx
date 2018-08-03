@@ -92,6 +92,7 @@ class Menu extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       children,

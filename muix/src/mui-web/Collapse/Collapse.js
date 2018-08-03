@@ -129,6 +129,7 @@ class Collapse extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       children,
@@ -147,7 +148,7 @@ class Collapse extends React.Component {
     } = this.props;
     return <Transition onEnter={this.handleEnter} onEntered={this.handleEntered} onEntering={this.handleEntering} onExit={this.handleExit} onExiting={this.handleExiting} addEndListener={this.addEndListener} timeout={timeout === 'auto' ? null : timeout} {...other}>
         {(state, childProps) => {
-        return <Component className={classNamesStr(classes.container, state === 'entered' && classes.entered, className)} style={{ ...style,
+        return <Component className={classNamesAny(Component, classes.container, state === 'entered' && classes.entered, className)} style={{ ...style,
           minHeight: collapsedHeight
         }} {...childProps}>
               <div className={classNamesStr(classes.wrapper)} ref={ref => {

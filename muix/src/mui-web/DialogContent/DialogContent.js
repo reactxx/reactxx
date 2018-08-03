@@ -20,6 +20,7 @@ function DialogContent(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,
@@ -31,6 +32,8 @@ function DialogContent(props) {
       {children}
     </div>;
 }
+
+const defaultProps = DialogContent.defaultProps = {};
 
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/DialogContent/DialogContent').Shape>}

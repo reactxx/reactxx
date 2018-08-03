@@ -10,33 +10,33 @@ export const styles = theme => ({
     color: theme.palette.text.secondary,
     fontSize: theme.typography.pxToRem(16),
     lineHeight: 1,
-    '&.focused36': {
+    '&.focused35': {
       color: theme.palette.primary[theme.palette.type === 'light' ? 'dark' : 'light']
     },
-    '&.disabled36': {
+    '&.disabled35': {
       color: theme.palette.text.disabled
     },
-    '&.error36': {
+    '&.error35': {
       color: theme.palette.error.main
     }
   },
 
   /* Styles applied to the root element if `focused={true}`. */
   focused: {
-    NAME$focused36: true
+    NAME$focused35: true
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
-    NAME$disabled36: true
+    NAME$disabled35: true
   },
 
   /* Styles applied to the root element if `error={true}`. */
   error: {
-    NAME$error36: true
+    NAME$error35: true
   },
   asterisk: {
-    '&.error36': {
+    '&.error35': {
       color: theme.palette.error.main
     }
   }
@@ -47,6 +47,7 @@ function FormLabel(props, context) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,
@@ -86,7 +87,7 @@ function FormLabel(props, context) {
   }
 
   const className = classNames(classes.root, focused && classes.focused, disabled && classes.disabled, error && classes.error, classNameProp);
-  return <Component className={classNamesStr(className)} {...other}>
+  return <Component className={classNamesAny(Component, className)} {...other}>
       {children}
       {required && <span className={classNamesStr(classes.asterisk, error && classes.error)} data-mui-test="FormLabelAsterisk">
           {'\u2009*'}

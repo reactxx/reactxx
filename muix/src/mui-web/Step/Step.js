@@ -33,6 +33,7 @@ function Step(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     active,

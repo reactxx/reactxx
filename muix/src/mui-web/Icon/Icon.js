@@ -49,6 +49,7 @@ function Icon(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,

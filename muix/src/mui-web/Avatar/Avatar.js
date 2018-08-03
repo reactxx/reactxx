@@ -41,6 +41,7 @@ function Avatar(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     alt,
@@ -71,7 +72,7 @@ function Avatar(props) {
     children = <img alt={alt} src={src} srcSet={srcSet} sizes={sizes} className={classNamesStr(classes.img)} {...imgProps} />;
   }
 
-  return <Component className={classNamesStr(className)} {...other}>
+  return <Component className={classNamesAny(Component, className)} {...other}>
       {children}
     </Component>;
 }

@@ -1,45 +1,41 @@
-// viz D:\reactxx\codemod\patch-code\Input\Input.ts
+// Tabs.js: scrollSelectedIntoView a updateIndicatorState: 'theme' nahradit '$system: {theme},'
 
 import * as Queries from '../utils/queries'
 import * as Ast from '../utils/ast'
 import * as Parser from '../utils/parser'
 import { cssjsToFela } from './cssjs-to-fela'
 
-export const classNamesFix = (forceHTMLTags: string[] = ['Component']) => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
+export const classNamesFix = () => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   adjustImports(root)
   selectClassNamesFromProps(root, info.name)
   refactorClassNamesObjectExpressionAttribute(root)
-  adjustHtmlClassNameAttribute(root, info.name, forceHTMLTags)
+  adjustHtmlClassNameAttribute(root, info.name)
   adjustPaddingMargins(root)
   return root
 }
 
 
-export const withStylesTaskDefaultCreator = (forceHTMLTags: string[] = ['Component']) => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
+export const withStylesTaskDefaultCreator = () => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   cssjsToFela(root, info)
-  classNamesFix(forceHTMLTags)(root, info)
-  // adjustImports(root)
-  // selectClassNamesFromProps(root, info.name)
-  // refactorClassNamesObjectExpressionAttribute(root)
-  // adjustHtmlClassNameAttribute(root, info.name, forceHTMLTags)
+  classNamesFix()(root, info)
   defaultExport(root, info)
   return root
 }
 
-export const withThemeTaskDefaultCreator = (forceHTMLTags: string[] = ['Component']) => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
+export const withThemeTaskDefaultCreator = () => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   adjustImports(root)
   return root
 }
 
-export const otherTaskDefaultCreator = (forceHTMLTags: string[] = ['Component']) => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
+export const otherTaskDefaultCreator = () => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   adjustImports(root)
   return root
 }
 
 const adjustPaddingMargins = (root: Ast.Ast) => {
-  const margin = adjustPaddingMarginsLow(root, 'margin')  
+  const margin = adjustPaddingMarginsLow(root, 'margin')
   const padding = adjustPaddingMarginsLow(root, 'padding')
-  if (margin || padding) 
+  if (margin || padding)
     addToAtomicImport(root)
 }
 // replace single margin's and padding's with toAtomic() spread
@@ -132,6 +128,11 @@ const importRepairs = {
   '../FormGroup': '../FormGroup/FormGroup',
   '../IconButton': '../IconButton/IconButton',
 }
+const unknownComponents = [
+  'ComponentProp',
+  'Component',
+  'TransitionGroup',
+]
 
 export const getRenderFunc = (root: Ast.Ast, functionName: string) => {
   return Queries.getNode_functionGlobal(root, functionName, true) || Queries.getNode_classMethod(root, functionName, 'render')
@@ -140,14 +141,16 @@ export const getRenderFunc = (root: Ast.Ast, functionName: string) => {
 // for 'className' attribute HTML tags (e.g. 'span' etc. - not components as 'Button'): expand ruleset to className list (by means of classNamesStr function)
 // - 'className={classNames(x)}' by 'className={classNamesStr(x)}'
 // - 'className={x}' by 'className={classNamesStr(x)}'
-const adjustHtmlClassNameAttribute = (root: Ast.Ast, functionName: string, forceHTMLTags: string[]) => {
+const adjustHtmlClassNameAttribute = (root: Ast.Ast, functionName: string) => {
   const func = getRenderFunc(root, functionName)
-  const htmls = Ast.astq().query(func.body, '// JSXElement [ /JSXOpeningElement/JSXIdentifier [ isHTMLTag(@name, {forceHTMLTags}) ] && // JSXAttribute/JSXIdentifier [ @name=="className" ] ]', { forceHTMLTags: forceHTMLTags || null }) as Ast.Ast[]
+  const htmls = Ast.astq().query(func.body, '// JSXElement [ /JSXOpeningElement/JSXIdentifier [ isHTMLTag(@name, {forceHTMLTags}) ] && // JSXAttribute/JSXIdentifier [ @name=="className" ] ]', { forceHTMLTags: unknownComponents || null }) as Ast.Ast[]
   const classNames = 'classNames('
   htmls.forEach(html => {
+    const compName:string = html.openingElement.name.name
+    const classNameProc = compName.charAt(0).toLowerCase() === compName.charAt(0) ? 'classNamesStr(' : `classNamesAny(${compName},`
     const clasName = Queries.checkSingleResult(Ast.astq().query(html, '/JSXOpeningElement/JSXAttribute [ /JSXIdentifier [ @name=="className" ] ]'))
     const oldCode = Parser.generateCode(clasName.value.expression)
-    const newCode = oldCode.startsWith(classNames) ? 'classNamesStr(' + oldCode.substr(classNames.length) : `classNamesStr(${oldCode})`
+    const newCode = oldCode.startsWith(classNames) ? classNameProc + oldCode.substr(classNames.length) : `${classNameProc}${oldCode})`
     clasName.value.expression = Parser.parseExpressionLow(newCode)
   })
   return root
@@ -221,14 +224,14 @@ const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   // refactor e.g. 'Button.defaultProps = ...' to 'const defaultProps = ...'
   if (info.withStyles) {
     const defaultProps = getStaticProp('defaultProps')
+    // default props to string
+    const defaultPropsStr = defaultProps ? Parser.generateCode(defaultProps.expression.right) : '{}'
+    // remove defaultProps
     if (defaultProps) {
-      // default props to string
-      const defaultPropsStr = Parser.generateCode(defaultProps.expression.right)
-      // remove Button.defaultProps
       const defaultPropsIdx = body.indexOf(defaultProps);
       body.splice(defaultPropsIdx, 1)
-      body.push(Parser.parseCode(`const defaultProps = ${info.name}.defaultProps = ${defaultPropsStr};`))
     }
+    body.push(Parser.parseCode(`const defaultProps = ${info.name}.defaultProps = ${defaultPropsStr};`))
   }
 
   // e.g.
@@ -253,7 +256,9 @@ export default ${info.name}Component;
 /* 
 $system: {
     classNames,
-    classNamesStr
+    classNamesStr,
+    classNamesAny,
+    theme
 }
 */
 const constSelectFromObjectAST = {
@@ -298,6 +303,23 @@ const constSelectFromObjectAST = {
         "value": {
           "type": "Identifier",
           "name": "classNamesStr"
+        },
+        "extra": {
+          "shorthand": true
+        }
+      },
+      {
+        "type": "ObjectProperty",
+        "method": false,
+        "key": {
+          "type": "Identifier",
+          "name": "classNamesAny"
+        },
+        "computed": false,
+        "shorthand": true,
+        "value": {
+          "type": "Identifier",
+          "name": "classNamesAny"
         },
         "extra": {
           "shorthand": true

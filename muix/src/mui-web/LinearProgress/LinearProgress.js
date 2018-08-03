@@ -175,6 +175,7 @@ function LinearProgress(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,

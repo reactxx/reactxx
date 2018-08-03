@@ -45,6 +45,7 @@ function CardHeader(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     action,
@@ -75,7 +76,7 @@ function CardHeader(props) {
       </Typography>;
   }
 
-  return <Component className={classNamesStr(classes.root, classNameProp)} {...other}>
+  return <Component className={classNamesAny(Component, classes.root, classNameProp)} {...other}>
       {avatar && <div className={classNamesStr(classes.avatar)}>{avatar}</div>}
       <div className={classNamesStr(classes.content)}>
         {title}

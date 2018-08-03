@@ -1,5 +1,5 @@
 import React from 'react'
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator, {toAtomic} from 'reactxx-mui-web/styles/withStyles'
 import Badge from 'reactxx-mui-web/Badge/Badge';
 import AppBar from 'reactxx-mui-web/AppBar/AppBar';
 import Tabs from 'reactxx-mui-web/Tabs/Tabs';
@@ -13,10 +13,10 @@ import { Email } from 'reactxx-mdi/Email'
 
 const styles = theme => ({
   margin: {
-    margin: theme.spacing.unit * 2,
+    ...toAtomic('margin', theme.spacing.unit * 2)
   },
   padding: {
-    padding: `0 ${theme.spacing.unit * 2}px`,
+    ...toAtomic('padding', `0 ${theme.spacing.unit * 2}px`),
   },
 });
 

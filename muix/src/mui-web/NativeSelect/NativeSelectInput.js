@@ -9,6 +9,7 @@ function NativeSelectInput(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,

@@ -25,6 +25,7 @@ function DialogActions(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     disableActionSpacing,

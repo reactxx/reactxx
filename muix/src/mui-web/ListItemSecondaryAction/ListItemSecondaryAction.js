@@ -16,6 +16,7 @@ function ListItemSecondaryAction(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,
@@ -29,6 +30,7 @@ function ListItemSecondaryAction(props) {
 }
 
 ListItemSecondaryAction.muiName = 'ListItemSecondaryAction';
+const defaultProps = ListItemSecondaryAction.defaultProps = {};
 
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListItemSecondaryAction/ListItemSecondaryAction').Shape>}

@@ -17,6 +17,7 @@ function CardContent(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,
@@ -24,7 +25,7 @@ function CardContent(props) {
     component: Component,
     ...other
   } = props;
-  return <Component className={classNamesStr(classes.root, className)} {...other} />;
+  return <Component className={classNamesAny(Component, classes.root, className)} {...other} />;
 }
 
 const defaultProps = CardContent.defaultProps = {

@@ -8,10 +8,10 @@ export const styles = theme => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-    '&.alternativeLabel73': {
+    '&.alternativeLabel72': {
       flexDirection: 'column'
     },
-    '&.disabled73': {
+    '&.disabled72': {
       cursor: 'default'
     }
   },
@@ -25,54 +25,54 @@ export const styles = theme => ({
   /* Styles applied to the `Typography` component which wraps `children`. */
   label: {
     color: theme.palette.text.secondary,
-    '&.active73': {
+    '&.active72': {
       color: theme.palette.text.primary,
       fontWeight: 500
     },
-    '&.completed73': {
+    '&.completed72': {
       color: theme.palette.text.primary,
       fontWeight: 500
     },
-    '&.alternativeLabel73': {
+    '&.alternativeLabel72': {
       textAlign: 'center',
       marginTop: 16
     },
-    '&.error73': {
+    '&.error72': {
       color: theme.palette.error.main
     }
   },
 
   /* Styles applied to the `Typography` component if `active={true}`. */
   active: {
-    NAME$active73: true
+    NAME$active72: true
   },
 
   /* Styles applied to the `Typography` component if `completed={true}`. */
   completed: {
-    NAME$completed73: true
+    NAME$completed72: true
   },
 
   /* Styles applied to the root element and `Typography` component if `error={true}`. */
   error: {
-    NAME$error73: true
+    NAME$error72: true
   },
 
   /* Styles applied to the root element and `Typography` component if `disabled={true}`. */
   disabled: {
-    NAME$disabled73: true
+    NAME$disabled72: true
   },
 
   /* Styles applied to the `icon` container element. */
   iconContainer: {
     paddingRight: 8,
-    '&.alternativeLabel73': {
+    '&.alternativeLabel72': {
       paddingRight: 0
     }
   },
 
   /* Styles applied to the root & icon container and `Typography` if `alternativeLabel={true}`. */
   alternativeLabel: {
-    NAME$alternativeLabel73: true
+    NAME$alternativeLabel72: true
   },
 
   /* Styles applied to the container element which wraps `Typography` and `optional`. */
@@ -86,6 +86,7 @@ function StepLabel(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     active,

@@ -15,6 +15,7 @@ function DialogContentText(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,
@@ -26,6 +27,8 @@ function DialogContentText(props) {
       {children}
     </Typography>;
 }
+
+const defaultProps = DialogContentText.defaultProps = {};
 
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/DialogContentText/DialogContentText').Shape>}

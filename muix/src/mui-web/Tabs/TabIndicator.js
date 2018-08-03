@@ -32,6 +32,7 @@ function TabIndicator(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,
@@ -41,6 +42,8 @@ function TabIndicator(props) {
   } = props;
   return <span className={classNamesStr(classes.root, classes[`color${capitalize(color)}`], className)} {...other} />;
 }
+
+const defaultProps = TabIndicator.defaultProps = {};
 
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Tabs/TabIndicator').Shape>}

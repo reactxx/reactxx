@@ -97,6 +97,7 @@ class TablePagination extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       ActionsComponent,
@@ -122,7 +123,7 @@ class TablePagination extends React.Component {
       colSpan = colSpanProp || 1000; // col-span over everything
     }
 
-    return <Component className={classNamesStr(classes.root)} colSpan={colSpan} {...other}>
+    return <Component className={classNamesAny(Component, classes.root)} colSpan={colSpan} {...other}>
         <Toolbar className={classes.toolbar}>
           <div className={classNamesStr(classes.spacer)} />
           {rowsPerPageOptions.length > 1 && <Typography variant="caption" className={classes.caption}>

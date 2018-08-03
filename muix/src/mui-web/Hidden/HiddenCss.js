@@ -32,6 +32,7 @@ function HiddenCss(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,
@@ -80,6 +81,8 @@ function HiddenCss(props) {
 
   return <div className={classNamesStr(classNames.join(' '))}>{children}</div>;
 }
+
+const defaultProps = HiddenCss.defaultProps = {};
 
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Hidden/HiddenCss').Shape>}

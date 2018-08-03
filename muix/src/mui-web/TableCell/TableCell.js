@@ -72,6 +72,7 @@ function TableCell(props, context) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,
@@ -109,7 +110,7 @@ function TableCell(props, context) {
     ariaSort = sortDirection === 'asc' ? 'ascending' : 'descending';
   }
 
-  return <Component className={classNamesStr(className)} aria-sort={ariaSort} scope={scope} {...other}>
+  return <Component className={classNamesAny(Component, className)} aria-sort={ariaSort} scope={scope} {...other}>
       {children}
     </Component>;
 }

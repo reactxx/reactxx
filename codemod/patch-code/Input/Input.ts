@@ -8,7 +8,7 @@ import { Specials } from '../../tasks'
 export const registerInput = (specials: Specials) => {
     specials['Input/Input'] = {
         transform: (ast, info) => {
-            const res = Tasks.withStylesTaskDefaultCreator(['TransitionGroup'])(ast, info)
+            const res = Tasks.withStylesTaskDefaultCreator()(ast, info)
             //před 'return' of RENDER funkce dat:
             //if (typeof InputComponent === 'string') inputClassName = classNamesStr(inputClassName); else inputProps.$system = this.props.$system;
             const func = Tasks.getRenderFunc(res, info.name)

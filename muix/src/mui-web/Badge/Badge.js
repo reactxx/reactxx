@@ -59,6 +59,7 @@ function Badge(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     badgeContent,
@@ -70,7 +71,7 @@ function Badge(props) {
     ...other
   } = props;
   const badgeClassName = classNames(classes.badge, color !== 'default' && classes[`color${capitalize(color)}`]);
-  return <ComponentProp className={classNames(classes.root, classNameProp)} {...other}>
+  return <ComponentProp className={classNamesAny(ComponentProp, classes.root, classNameProp)} {...other}>
       {children}
       <span className={classNamesStr(badgeClassName)}>{badgeContent}</span>
     </ComponentProp>;

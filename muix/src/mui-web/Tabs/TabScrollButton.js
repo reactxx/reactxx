@@ -20,6 +20,7 @@ function TabScrollButton(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,

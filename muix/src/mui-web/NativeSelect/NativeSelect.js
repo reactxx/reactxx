@@ -41,7 +41,7 @@ export const styles = theme => ({
     '&::-ms-expand': {
       display: 'none'
     },
-    '&.disabled61': {
+    '&.disabled60': {
       cursor: 'default'
     }
   },
@@ -59,7 +59,7 @@ export const styles = theme => ({
 
   /* Styles applied to the `Input` component `disabled` class. */
   disabled: {
-    NAME$disabled61: true
+    NAME$disabled60: true
   },
 
   /* Styles applied to the `Input` component `icon` class. */
@@ -84,6 +84,7 @@ function NativeSelect(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,

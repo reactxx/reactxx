@@ -18,6 +18,7 @@ function ListItemIcon(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,
@@ -30,6 +31,8 @@ function ListItemIcon(props) {
     ...other
   });
 }
+
+const defaultProps = ListItemIcon.defaultProps = {};
 
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListItemIcon/ListItemIcon').Shape>}

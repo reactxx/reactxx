@@ -53,6 +53,7 @@ function SvgIcon(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,
@@ -67,7 +68,7 @@ function SvgIcon(props) {
     ...other
   } = props;
   const className = classNames(classes.root, fontSize === 'inherit' && classes.fontSizeInherit, color !== 'inherit' && classes[`color${capitalize(color)}`], classNameProp);
-  return <Component className={classNamesStr(className)} focusable="false" viewBox={viewBox} color={nativeColor} aria-hidden={titleAccess ? 'false' : 'true'} {...other}>
+  return <Component className={classNamesAny(Component, className)} focusable="false" viewBox={viewBox} color={nativeColor} aria-hidden={titleAccess ? 'false' : 'true'} {...other}>
       {children}
       {titleAccess ? <title>{titleAccess}</title> : null}
     </Component>;

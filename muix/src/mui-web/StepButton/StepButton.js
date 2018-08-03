@@ -34,6 +34,7 @@ function StepButton(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     active,
@@ -65,6 +66,8 @@ function StepButton(props) {
       {child}
     </ButtonBase>;
 }
+
+const defaultProps = StepButton.defaultProps = {};
 
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/StepButton/StepButton').Shape>}

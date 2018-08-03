@@ -13,22 +13,22 @@ export const styles = theme => ({
     marginTop: 8,
     lineHeight: '1em',
     minHeight: '1em',
-    '&.error35': {
+    '&.error34': {
       color: theme.palette.error.main
     },
-    '&.disabled35': {
+    '&.disabled34': {
       color: theme.palette.text.disabled
     }
   },
 
   /* Styles applied to the root element if `error={true}`. */
   error: {
-    NAME$error35: true
+    NAME$error34: true
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
-    NAME$disabled35: true
+    NAME$disabled34: true
   },
 
   /* Styles applied to the root element if `margin="dense"`. */
@@ -42,6 +42,7 @@ function FormHelperText(props, context) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,
@@ -74,7 +75,7 @@ function FormHelperText(props, context) {
   }
 
   const className = classNames(classes.root, disabled && classes.disabled, error && classes.error, margin === 'dense' && classes.marginDense, classNameProp);
-  return <Component className={classNamesStr(className)} {...other} />;
+  return <Component className={classNamesAny(Component, className)} {...other} />;
 }
 
 FormHelperText.contextTypes = {

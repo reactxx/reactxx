@@ -26,6 +26,7 @@ function Toolbar(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,

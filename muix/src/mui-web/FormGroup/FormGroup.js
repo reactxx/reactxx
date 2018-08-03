@@ -25,6 +25,7 @@ function FormGroup(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,

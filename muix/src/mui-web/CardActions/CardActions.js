@@ -26,6 +26,7 @@ function CardActions(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     disableActionSpacing,

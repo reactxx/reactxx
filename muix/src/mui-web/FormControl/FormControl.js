@@ -139,6 +139,7 @@ class FormControl extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       classes,
@@ -151,7 +152,7 @@ class FormControl extends React.Component {
       required,
       ...other
     } = this.props;
-    return <Component className={classNamesStr(classes.root, margin !== 'none' && classes[`margin${capitalize(margin)}`], fullWidth && classes.fullWidth, className)} {...other} />;
+    return <Component className={classNamesAny(Component, classes.root, margin !== 'none' && classes[`margin${capitalize(margin)}`], fullWidth && classes.fullWidth, className)} {...other} />;
   }
 
 }

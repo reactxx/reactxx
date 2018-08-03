@@ -80,6 +80,7 @@ function GridListTileBar(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     actionIcon,

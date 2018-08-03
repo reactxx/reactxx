@@ -48,6 +48,7 @@ function SnackbarContent(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     action,
@@ -63,6 +64,8 @@ function SnackbarContent(props) {
       {action ? <div className={classNamesStr(classes.action)}>{action}</div> : null}
     </Paper>;
 }
+
+const defaultProps = SnackbarContent.defaultProps = {};
 
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/SnackbarContent/SnackbarContent').Shape>}

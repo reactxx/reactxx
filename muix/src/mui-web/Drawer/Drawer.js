@@ -118,6 +118,7 @@ class Drawer extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       anchor: anchorProp,

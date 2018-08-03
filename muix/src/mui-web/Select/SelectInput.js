@@ -159,6 +159,7 @@ class SelectInput extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       autoWidth,

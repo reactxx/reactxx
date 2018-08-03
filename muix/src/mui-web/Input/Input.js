@@ -57,7 +57,7 @@ export const styles = theme => {
       fontSize: theme.typography.pxToRem(16),
       lineHeight: '1.1875em',
       // Reset (19px), match the native input line-height
-      '&.disabled44': {
+      '&.disabled43': {
         color: theme.palette.text.disabled
       }
     },
@@ -67,17 +67,17 @@ export const styles = theme => {
       'label + &': {
         marginTop: 16
       },
-      NAME$formControl44: true
+      NAME$formControl43: true
     },
 
     /* Styles applied to the root element if the component is focused. */
     focused: {
-      NAME$focused44: true
+      NAME$focused43: true
     },
 
     /* Styles applied to the root element if `disabled={true}`. */
     disabled: {
-      NAME$disabled44: true
+      NAME$disabled43: true
     },
 
     /* Styles applied to the root element if `disabledUnderline={false}`. */
@@ -98,10 +98,10 @@ export const styles = theme => {
         pointerEvents: 'none' // Transparent to the hover style.
 
       },
-      '&.focused44:after': {
+      '&.focused43:after': {
         transform: 'scaleX(1)'
       },
-      '&.error44:after': {
+      '&.error43:after': {
         borderBottomColor: theme.palette.error.main,
         transform: 'scaleX(1)' // error is always underlined in red
 
@@ -120,17 +120,17 @@ export const styles = theme => {
         pointerEvents: 'none' // Transparent to the hover style.
 
       },
-      '&:hover:not(.disabled44):not(.focused44):not(.error44):before': {
+      '&:hover:not(.disabled43):not(.focused43):not(.error43):before': {
         borderBottom: `2px solid ${theme.palette.text.primary}`
       },
-      '&.disabled44:before': {
+      '&.disabled43:before': {
         borderBottom: `1px dotted ${bottomLineColor}`
       }
     },
 
     /* Styles applied to the root element if `error={true}`. */
     error: {
-      NAME$error44: true
+      NAME$error43: true
     },
 
     /* Styles applied to the root element if `multiline={true}`. */
@@ -179,7 +179,7 @@ export const styles = theme => {
         '-webkit-appearance': 'none'
       },
       // Show and hide the placeholder logic
-      'label[data-shrink=false] + .formControl44 &': {
+      'label[data-shrink=false] + .formControl43 &': {
         '&::-webkit-input-placeholder': placeholderHidden,
         '&::-moz-placeholder': placeholderHidden,
         // Firefox 19+
@@ -195,7 +195,7 @@ export const styles = theme => {
         '&:focus::-ms-input-placeholder': placeholderVisible // Edge
 
       },
-      '&.disabled44': {
+      '&.disabled43': {
         opacity: 1 // Reset iOS opacity
 
       }
@@ -432,6 +432,7 @@ class Input extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       autoComplete,

@@ -44,6 +44,7 @@ function InputLabel(props, context) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,

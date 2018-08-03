@@ -195,7 +195,8 @@ export const getSystemPipes = <R extends Types.Shape>(
     // method, called in component code: ruleset merging
     $system.classNames = mergeRulesetsCreator(classes as Sheeter.SheetWithAddIns, getClassesPatches)
     $system.classNamesStr = mergeRulesetsCreatorStr(classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns.rulesetsToClassNames);
-
+    $system.classNamesAny = (component, ...rulesets) => typeof component === 'string' ? $system.classNamesStr(...rulesets) : $system.classNames(...rulesets)
+    
     // call component code
     return <CodeComponent {...finalProps as Types.CodeProps<R>} />
   }

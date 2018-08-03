@@ -15,6 +15,7 @@ function ExpansionPanelDetails(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,
@@ -26,6 +27,8 @@ function ExpansionPanelDetails(props) {
       {children}
     </div>;
 }
+
+const defaultProps = ExpansionPanelDetails.defaultProps = {};
 
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ExpansionPanelDetails/ExpansionPanelDetails').Shape>}

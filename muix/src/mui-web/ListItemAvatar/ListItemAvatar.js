@@ -27,6 +27,7 @@ function ListItemAvatar(props, context) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,
@@ -52,6 +53,7 @@ ListItemAvatar.contextTypes = {
   dense: PropTypes.bool
 };
 ListItemAvatar.muiName = 'ListItemAvatar';
+const defaultProps = ListItemAvatar.defaultProps = {};
 
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListItemAvatar/ListItemAvatar').Shape>}

@@ -85,6 +85,7 @@ class BottomNavigationAction extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       classes,
@@ -109,6 +110,8 @@ class BottomNavigationAction extends React.Component {
   }
 
 }
+
+const defaultProps = BottomNavigationAction.defaultProps = {};
 
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/BottomNavigationAction/BottomNavigationAction').Shape>}

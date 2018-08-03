@@ -68,6 +68,7 @@ function MobileStepper(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     activeStep,

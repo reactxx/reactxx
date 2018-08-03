@@ -72,6 +72,7 @@ function AppBar(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,

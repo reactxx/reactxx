@@ -104,6 +104,7 @@ function CircularProgress(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,

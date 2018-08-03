@@ -146,6 +146,7 @@ class Textarea extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       classes,

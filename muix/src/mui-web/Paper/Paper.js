@@ -28,6 +28,7 @@ function Paper(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,
@@ -39,7 +40,7 @@ function Paper(props) {
   } = props;
   warning(elevation >= 0 && elevation < 25, `Material-UI: this elevation \`${elevation}\` is not implemented.`);
   const className = classNames(classes.root, classes[`elevation${elevation}`], !square && classes.rounded, classNameProp);
-  return <Component className={classNamesStr(className)} {...other} />;
+  return <Component className={classNamesAny(Component, className)} {...other} />;
 }
 
 const defaultProps = Paper.defaultProps = {

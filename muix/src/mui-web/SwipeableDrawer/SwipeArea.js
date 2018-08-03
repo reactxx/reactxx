@@ -38,6 +38,7 @@ function SwipeArea(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     anchor,
@@ -49,6 +50,8 @@ function SwipeArea(props) {
     [isHorizontal(props) ? 'width' : 'height']: width
   }} {...other} />;
 }
+
+const defaultProps = SwipeArea.defaultProps = {};
 
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/SwipeableDrawer/SwipeArea').Shape>}

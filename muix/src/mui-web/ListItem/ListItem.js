@@ -87,6 +87,7 @@ class ListItem extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       button,

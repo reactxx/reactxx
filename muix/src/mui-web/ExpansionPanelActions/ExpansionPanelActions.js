@@ -25,6 +25,7 @@ function ExpansionPanelActions(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,
@@ -36,6 +37,8 @@ function ExpansionPanelActions(props) {
       {cloneChildrenWithClassName(children, classes.action)}
     </div>;
 }
+
+const defaultProps = ExpansionPanelActions.defaultProps = {};
 
 /**
 * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ExpansionPanelActions/ExpansionPanelActions').Shape>}

@@ -43,6 +43,7 @@ function ListSubheader(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,
@@ -53,7 +54,7 @@ function ListSubheader(props) {
     inset,
     ...other
   } = props;
-  return <Component className={classNamesStr(classes.root, color !== 'default' && classes[`color${capitalize(color)}`], inset && classes.inset, !disableSticky && classes.sticky, className)} {...other} />;
+  return <Component className={classNamesAny(Component, classes.root, color !== 'default' && classes[`color${capitalize(color)}`], inset && classes.inset, !disableSticky && classes.sticky, className)} {...other} />;
 }
 
 ListSubheader.muiName = 'ListSubheader';

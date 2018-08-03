@@ -149,6 +149,7 @@ class Chip extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       avatar: avatarProp,
@@ -189,7 +190,7 @@ class Chip extends React.Component {
       tabIndex = onClick || onDelete || clickable ? 0 : -1;
     }
 
-    return <Component role="button" className={classNamesStr(className)} tabIndex={tabIndex} onClick={onClick} onKeyDown={this.handleKeyDown} ref={ref => {
+    return <Component role="button" className={classNamesAny(Component, className)} tabIndex={tabIndex} onClick={onClick} onKeyDown={this.handleKeyDown} ref={ref => {
       this.chipRef = ref;
     }} {...other}>
         {avatar}

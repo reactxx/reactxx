@@ -27,6 +27,7 @@ function Backdrop(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,

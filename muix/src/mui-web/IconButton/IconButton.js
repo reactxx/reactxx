@@ -26,11 +26,11 @@ export const styles = theme => ({
       '@media (hover: none)': {
         backgroundColor: 'transparent'
       },
-      '&.disabled43': {
+      '&.disabled42': {
         backgroundColor: 'transparent'
       }
     },
-    '&.disabled43': {
+    '&.disabled42': {
       color: theme.palette.action.disabled
     }
   },
@@ -66,7 +66,7 @@ export const styles = theme => ({
 
   /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
-    NAME$disabled43: true
+    NAME$disabled42: true
   },
 
   /* Styles applied to the children container element. */
@@ -87,6 +87,7 @@ function IconButton(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,

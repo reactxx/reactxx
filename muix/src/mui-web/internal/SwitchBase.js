@@ -92,6 +92,7 @@ class SwitchBase extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       autoFocus,

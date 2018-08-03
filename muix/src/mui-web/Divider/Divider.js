@@ -38,6 +38,7 @@ function Divider(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     absolute,
@@ -49,7 +50,7 @@ function Divider(props) {
     ...other
   } = props;
   const className = classNames(classes.root, absolute && classes.absolute, inset && classes.inset, light && classes.light, classNameProp);
-  return <Component className={classNamesStr(className)} {...other} />;
+  return <Component className={classNamesAny(Component, className)} {...other} />;
 }
 
 const defaultProps = Divider.defaultProps = {

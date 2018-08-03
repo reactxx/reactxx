@@ -17,6 +17,7 @@ function BottomNavigation(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children: childrenProp,

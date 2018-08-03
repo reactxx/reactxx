@@ -41,6 +41,7 @@ class List extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       children,
@@ -53,7 +54,7 @@ class List extends React.Component {
       ...other
     } = this.props;
     const className = classNames(classes.root, dense && !disablePadding && classes.dense, !disablePadding && classes.padding, subheader && classes.subheader, classNameProp);
-    return <Component className={classNamesStr(className)} {...other}>
+    return <Component className={classNamesAny(Component, className)} {...other}>
         {subheader}
         {children}
       </Component>;

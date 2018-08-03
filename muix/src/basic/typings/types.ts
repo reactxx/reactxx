@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { Component } from 'react';
 import ReactN from 'react-native';
 import { TCommon, TCommonStyles } from 'reactxx-basic';
 import { Ruleset as SheeterRuleset } from 'reactxx-sheeter';
@@ -159,6 +159,7 @@ export namespace Types {
       variant?: TCommon.getVariant<R>
       classNames?: <T extends TCommonStyles.RulesetNativeIds | 'Web' | {}> (...rulesets) => TMergeRulesetsResult<T>
       classNamesStr?: (...rulesets) => string
+      classNamesAny?: (Component, ...rulesets) => string | TMergeRulesetsResult<any>
       //addIns?: Sheeter.AddIns,
       $ignore?: boolean
       $constant?: boolean

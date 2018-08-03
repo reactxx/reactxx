@@ -211,6 +211,7 @@ function Grid(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     alignContent,
@@ -233,7 +234,7 @@ function Grid(props) {
     ...other
   } = props;
   const className = classNames(container && classes.container, item && classes.item, zeroMinWidth && classes.zeroMinWidth, container && spacing !== 0 && classes[`spacing-xs-${String(spacing)}`], direction !== Grid.defaultProps.direction && classes[`direction-xs-${String(direction)}`], wrap !== Grid.defaultProps.wrap && classes[`wrap-xs-${String(wrap)}`], alignItems !== Grid.defaultProps.alignItems && classes[`align-items-xs-${String(alignItems)}`], alignContent !== Grid.defaultProps.alignContent && classes[`align-content-xs-${String(alignContent)}`], justify !== Grid.defaultProps.justify && classes[`justify-xs-${String(justify)}`], xs !== false && classes[`grid-xs-${String(xs)}`], sm !== false && classes[`grid-sm-${String(sm)}`], md !== false && classes[`grid-md-${String(md)}`], lg !== false && classes[`grid-lg-${String(lg)}`], xl !== false && classes[`grid-xl-${String(xl)}`], classNameProp);
-  return <Component className={classNamesStr(className)} {...other} />;
+  return <Component className={classNamesAny(Component, className)} {...other} />;
 }
 
 const StyledGrid = withStyles(styles, {

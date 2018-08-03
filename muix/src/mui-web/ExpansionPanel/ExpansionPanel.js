@@ -46,7 +46,7 @@ export const styles = theme => {
         borderBottomRightRadius: 2,
         ...edgeFix
       },
-      '&.expanded28 + &': {
+      '&.expanded27 + &': {
         '&:before': {
           display: 'none'
         }
@@ -65,7 +65,7 @@ export const styles = theme => {
       '&:before': {
         opacity: 0
       },
-      NAME$expanded28: true
+      NAME$expanded27: true
     },
 
     /* Styles applied to the root element if `disabled={true}`. */
@@ -108,6 +108,7 @@ class ExpansionPanel extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       children: childrenProp,

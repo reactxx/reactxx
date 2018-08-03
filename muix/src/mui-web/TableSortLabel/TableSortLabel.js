@@ -24,7 +24,7 @@ export const styles = theme => ({
   /* Styles applied to the root element if `active={true}`. */
   active: {
     color: theme.palette.text.primary,
-    '& .icon86': {
+    '& .icon85': {
       opacity: 1
     }
   },
@@ -40,7 +40,7 @@ export const styles = theme => ({
     }),
     userSelect: 'none',
     width: 16,
-    NAME$icon86: true
+    NAME$icon85: true
   },
 
   /* Styles applied to the icon component if `direction="desc"`. */
@@ -62,6 +62,7 @@ function TableSortLabel(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     active,

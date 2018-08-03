@@ -21,6 +21,7 @@ function GridList(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     cellHeight,
@@ -33,7 +34,7 @@ function GridList(props) {
     style,
     ...other
   } = props;
-  return <Component className={classNamesStr(classes.root, classNameProp)} style={{
+  return <Component className={classNamesAny(Component, classes.root, classNameProp)} style={{
     margin: -spacing / 2,
     ...style
   }} {...other}>

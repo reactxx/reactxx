@@ -118,11 +118,13 @@ class Tabs extends React.Component {
 
   getConditionalElements = () => {
     const {
+      $system: {
+        theme
+      },
       classes,
       scrollable,
       ScrollButtonComponent,
-      scrollButtons,
-      theme
+      scrollButtons
     } = this.props;
     const conditionalElements = {};
     conditionalElements.scrollbarSizeListener = scrollable ? <ScrollbarSize onLoad={this.handleScrollbarSizeChange} onChange={this.handleScrollbarSizeChange} /> : null;
@@ -181,7 +183,9 @@ class Tabs extends React.Component {
   };
   moveTabsScroll = delta => {
     const {
-      theme
+      $system: {
+        theme
+      }
     } = this.props;
     const multiplier = theme.direction === 'rtl' ? -1 : 1;
     const nextScrollLeft = this.tabsRef.scrollLeft + delta * multiplier; // Fix for Edge
@@ -191,7 +195,9 @@ class Tabs extends React.Component {
   };
   scrollSelectedIntoView = () => {
     const {
-      theme,
+      $system: {
+        theme
+      },
       value
     } = this.props;
     const {
@@ -218,9 +224,11 @@ class Tabs extends React.Component {
   };
   updateScrollButtonState = () => {
     const {
+      $system: {
+        theme
+      },
       scrollable,
-      scrollButtons,
-      theme
+      scrollButtons
     } = this.props;
 
     if (scrollable && scrollButtons !== 'off') {
@@ -243,7 +251,9 @@ class Tabs extends React.Component {
 
   updateIndicatorState(props) {
     const {
-      theme,
+      $system: {
+        theme
+      },
       value
     } = props;
     const {
@@ -275,6 +285,7 @@ class Tabs extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       action,
@@ -323,7 +334,7 @@ class Tabs extends React.Component {
       });
     });
     const conditionalElements = this.getConditionalElements();
-    return <Component className={classNamesStr(className)} {...other}>
+    return <Component className={classNamesAny(Component, className)} {...other}>
         <EventListener target="window" onResize={this.handleResize} />
         {conditionalElements.scrollbarSizeListener}
         <div className={classNamesStr(classes.flexContainer)}>

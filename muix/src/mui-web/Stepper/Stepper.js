@@ -34,6 +34,7 @@ function Stepper(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     activeStep,

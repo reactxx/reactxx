@@ -23,6 +23,7 @@ function CardMedia(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,
@@ -39,7 +40,7 @@ function CardMedia(props) {
     backgroundImage: `url("${image}")`,
     ...style
   } : style;
-  return <Component className={classNamesStr(classes.root, isMediaComponent && classes.media, className)} style={composedStyle} src={isMediaComponent ? image || src : undefined} {...other} />;
+  return <Component className={classNamesAny(Component, classes.root, isMediaComponent && classes.media, className)} style={composedStyle} src={isMediaComponent ? image || src : undefined} {...other} />;
 }
 
 const defaultProps = CardMedia.defaultProps = {

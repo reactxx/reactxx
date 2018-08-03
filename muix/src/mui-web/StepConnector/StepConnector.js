@@ -50,6 +50,7 @@ function StepConnector(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     alternativeLabel,

@@ -10,11 +10,11 @@ export const styles = theme => ({
     verticalAlign: 'middle',
     // We disable the focus ring for mouse, touch and keyboard users.
     outline: 'none',
-    '&.selected85': {
+    '&.selected84': {
       backgroundColor: theme.palette.type === 'light' ? 'rgba(0, 0, 0, 0.04)' // grey[100]
       : 'rgba(255, 255, 255, 0.08)'
     },
-    '&.hover85:hover': {
+    '&.hover84:hover': {
       backgroundColor: theme.palette.type === 'light' ? 'rgba(0, 0, 0, 0.07)' // grey[200]
       : 'rgba(255, 255, 255, 0.14)'
     }
@@ -22,12 +22,12 @@ export const styles = theme => ({
 
   /* Styles applied to the root element if `context.table` & `selected={true}`. */
   selected: {
-    NAME$selected85: true
+    NAME$selected84: true
   },
 
   /* Styles applied to the root element if `context.table` & `hover={true}`. */
   hover: {
-    NAME$hover85: true
+    NAME$hover84: true
   },
 
   /* Styles applied to the root element if `context.table.head`. */
@@ -50,6 +50,7 @@ function TableRow(props, context) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     classes,
@@ -63,7 +64,7 @@ function TableRow(props, context) {
     table
   } = context;
   const className = classNames(classes.root, table && table.head && classes.head, table && table.footer && classes.footer, table && hover && classes.hover, table && selected && classes.selected, classNameProp);
-  return <Component className={classNamesStr(className)} {...other} />;
+  return <Component className={classNamesAny(Component, className)} {...other} />;
 }
 
 TableRow.contextTypes = {

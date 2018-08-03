@@ -15,6 +15,7 @@ function Select(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     autoWidth,

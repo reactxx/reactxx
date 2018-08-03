@@ -250,6 +250,7 @@ class TouchRipple extends React.PureComponent {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       center,
@@ -257,7 +258,7 @@ class TouchRipple extends React.PureComponent {
       className,
       ...other
     } = this.props;
-    return <TransitionGroup component="span" enter exit className={classNamesStr(classes.root, className)} {...other}>
+    return <TransitionGroup component="span" enter exit className={classNamesAny(TransitionGroup, classes.root, className)} {...other}>
         {this.state.ripples}
       </TransitionGroup>;
   }

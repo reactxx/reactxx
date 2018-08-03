@@ -116,6 +116,7 @@ function Typography(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     align,
@@ -132,7 +133,7 @@ function Typography(props) {
   } = props;
   const className = classNames(classes.root, classes[variant], color !== 'default' && classes[`color${capitalize(color)}`], noWrap && classes.noWrap, gutterBottom && classes.gutterBottom, paragraph && classes.paragraph, align !== 'inherit' && classes[`align${capitalize(align)}`], classNameProp);
   const Component = componentProp || (paragraph ? 'p' : headlineMapping[variant]) || 'span';
-  return <Component className={classNamesStr(className)} {...other} />;
+  return <Component className={classNamesAny(Component, className)} {...other} />;
 }
 
 const defaultProps = Typography.defaultProps = {

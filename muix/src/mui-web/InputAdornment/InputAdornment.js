@@ -26,6 +26,7 @@ function InputAdornment(props) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,
@@ -36,7 +37,7 @@ function InputAdornment(props) {
     position,
     ...other
   } = props;
-  return <Component className={classNamesStr(classes.root, position === 'start' && classes.positionStart, position === 'end' && classes.positionEnd, className)} {...other}>
+  return <Component className={classNamesAny(Component, classes.root, position === 'start' && classes.positionStart, position === 'end' && classes.positionEnd, className)} {...other}>
       {typeof children === 'string' && !disableTypography ? <Typography color="textSecondary">{children}</Typography> : children}
     </Component>;
 }

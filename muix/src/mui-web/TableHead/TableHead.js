@@ -23,6 +23,7 @@ class TableHead extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       classes,
@@ -30,7 +31,7 @@ class TableHead extends React.Component {
       component: Component,
       ...other
     } = this.props;
-    return <Component className={classNamesStr(classes.root, className)} {...other} />;
+    return <Component className={classNamesAny(Component, classes.root, className)} {...other} />;
   }
 
 }

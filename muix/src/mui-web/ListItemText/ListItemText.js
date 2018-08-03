@@ -28,21 +28,21 @@ export const styles = theme => ({
 
   /* Styles applied to the primary `Typography` component. */
   primary: {
-    '&.textDense55': {
+    '&.textDense54': {
       fontSize: 'inherit'
     }
   },
 
   /* Styles applied to the secondary `Typography` component. */
   secondary: {
-    '&.textDense55': {
+    '&.textDense54': {
       fontSize: 'inherit'
     }
   },
 
   /* Styles applied to the `Typography` components if `context.dense` is `true`. */
   textDense: {
-    NAME$textDense55: true
+    NAME$textDense54: true
   }
 });
 
@@ -51,6 +51,7 @@ function ListItemText(props, context) {
     $system: {
       classNames,
       classNamesStr,
+      classNamesAny,
       theme
     },
     children,

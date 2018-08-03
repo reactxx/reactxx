@@ -90,6 +90,7 @@ class GridListTile extends React.Component {
       $system: {
         classNames,
         classNamesStr,
+        classNamesAny,
         theme
       },
       children,
@@ -100,7 +101,7 @@ class GridListTile extends React.Component {
       rows,
       ...other
     } = this.props;
-    return <Component className={classNamesStr(classes.root, className)} {...other}>
+    return <Component className={classNamesAny(Component, classes.root, className)} {...other}>
         <EventListener target="window" onResize={this.handleResize} />
         <div className={classNamesStr(classes.tile)}>
           {React.Children.map(children, child => {
