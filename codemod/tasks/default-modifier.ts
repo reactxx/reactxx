@@ -147,7 +147,7 @@ const adjustHtmlClassNameAttribute = (root: Ast.Ast, functionName: string) => {
   const classNames = 'classNames('
   htmls.forEach(html => {
     const compName:string = html.openingElement.name.name
-    const classNameProc = compName.charAt(0).toLowerCase() === compName.charAt(0) ? 'classNamesStr(' : `classNamesAny(${compName},`
+    const classNameProc = compName==='TransitionGroup' || compName.charAt(0).toLowerCase() === compName.charAt(0) ? 'classNamesStr(' : `classNamesAny(${compName},`
     const clasName = Queries.checkSingleResult(Ast.astq().query(html, '/JSXOpeningElement/JSXAttribute [ /JSXIdentifier [ @name=="className" ] ]'))
     const oldCode = Parser.generateCode(clasName.value.expression)
     const newCode = oldCode.startsWith(classNames) ? classNameProc + oldCode.substr(classNames.length) : `${classNameProc}${oldCode})`

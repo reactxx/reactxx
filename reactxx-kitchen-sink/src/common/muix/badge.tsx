@@ -1,5 +1,5 @@
 import React from 'react'
-import withStylesCreator, {toAtomic} from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator, { toAtomic } from 'reactxx-mui-web/styles/withStyles'
 import Badge from 'reactxx-mui-web/Badge/Badge';
 import AppBar from 'reactxx-mui-web/AppBar/AppBar';
 import Tabs from 'reactxx-mui-web/Tabs/Tabs';
@@ -9,6 +9,7 @@ import Button from 'reactxx-mui-web/Button/Button';
 import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import { Icon } from 'reactxx-primitives'
 import { Email } from 'reactxx-mdi/Email'
+import { Cart } from 'reactxx-mdi/Cart'
 
 
 const styles = theme => ({
@@ -18,7 +19,28 @@ const styles = theme => ({
   padding: {
     ...toAtomic('padding', `0 ${theme.spacing.unit * 2}px`),
   },
+  badge: {
+    top: 1,
+    right: -15,
+    // The border color match the background color.
+    border: `2px solid ${
+      theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[900]
+      }`,
+  },
 });
+
+function customizedBadge(props) {
+  const { classes } = props;
+
+  return (
+    <IconButton aria-label="Cart">
+      <Badge badgeContent={4} color="primary" classes={{ badge: classes.badge }}>
+        <Icon data={Cart} />
+      </Badge>
+    </IconButton>
+  );
+}
+const CustomizedBadge = withStylesCreator(styles as any, customizedBadge)()
 
 function simpleBadge(props) {
   const { classes } = props;
@@ -65,9 +87,10 @@ class App extends React.Component<any> {
   render() {
     const { classes, $system: { classNamesStr } } = this.props;
     return <div className={classNamesStr(classes.root)}>
-      <h2>Simple Badges
-</h2>
+      <h2>Simple Badges</h2>
       <SimpleBadge />
+      <h2>Customized Badge</h2>
+      <CustomizedBadge />
     </div>
   }
 }

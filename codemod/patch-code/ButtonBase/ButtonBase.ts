@@ -5,7 +5,7 @@ import * as Queries from '../../utils/queries'
 import { Specials } from '../../tasks'
 
 export const registerButtonBase = (specials: Specials) => {
-    // specials['ButtonBase/Ripple'] = { transform: Tasks.withStylesTaskDefaultCreator() }
+    specials['ButtonBase/Ripple'] = { transform: Tasks.withStylesTaskDefaultCreator() }
     // specials['ButtonBase/ButtonBase'] = { transform: Tasks.withStylesTaskDefaultCreator() }
     specials['ButtonBase/TouchRipple'] = {
         transform: (ast, info) => {

@@ -23,6 +23,12 @@ class Ripple extends React.Component {
 
   render() {
     const {
+      $system: {
+        classNames,
+        classNamesStr,
+        classNamesAny,
+        theme
+      },
       classes,
       className: classNameProp,
       pulsate,
@@ -35,61 +41,23 @@ class Ripple extends React.Component {
       visible,
       leaving
     } = this.state;
-    const rippleClassName = classNames(classes.ripple, {
-      [classes.rippleVisible]: visible,
-      [classes.ripplePulsate]: pulsate
-    }, classNameProp);
+    const rippleClassName = classNames(classes.ripple, visible && classes.rippleVisible, pulsate && classes.ripplePulsate, classNameProp);
     const rippleStyles = {
       width: rippleSize,
       height: rippleSize,
       top: -(rippleSize / 2) + rippleY,
       left: -(rippleSize / 2) + rippleX
     };
-    const childClassName = classNames(classes.child, {
-      [classes.childLeaving]: leaving,
-      [classes.childPulsate]: pulsate
-    });
+    const childClassName = classNames(classes.child, leaving && classes.childLeaving, pulsate && classes.childPulsate);
     return <Transition onEnter={this.handleEnter} onExit={this.handleExit} {...other}>
-        <span className={rippleClassName} style={rippleStyles}>
-          <span className={childClassName} />
+        <span className={classNamesStr(rippleClassName)} style={rippleStyles}>
+          <span className={classNamesStr(childClassName)} />
         </span>
       </Transition>;
   }
 
 }
 
-Ripple.propTypes = {
-  /**
-     * Override or extend the styles applied to the component.
-     * See [CSS API](#css-api) below for more details.
-     */
-  classes: PropTypes.object.isRequired,
-
-  /**
-     * @ignore
-     */
-  className: PropTypes.string,
-
-  /**
-     * If `true`, the ripple pulsates, typically indicating the keyboard focus state of an element.
-     */
-  pulsate: PropTypes.bool,
-
-  /**
-     * Diameter of the ripple.
-     */
-  rippleSize: PropTypes.number,
-
-  /**
-     * Horizontal position of the ripple center.
-     */
-  rippleX: PropTypes.number,
-
-  /**
-     * Vertical position of the ripple center.
-     */
-  rippleY: PropTypes.number
-};
 Ripple.defaultProps = {
   pulsate: false
 };

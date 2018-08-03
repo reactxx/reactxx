@@ -9,13 +9,13 @@ export const styles = theme => ({
   root: {
     display: 'block',
     color: theme.palette.text.disabled,
-    '&.active71': {
+    '&.active72': {
       color: theme.palette.primary.main
     },
-    '&.completed71': {
+    '&.completed72': {
       color: theme.palette.primary.main
     },
-    '&.error71': {
+    '&.error72': {
       color: theme.palette.error.main
     }
   },
@@ -29,17 +29,17 @@ export const styles = theme => ({
 
   /* Styles applied to the root element if `active={true}`. */
   active: {
-    NAME$active71: true
+    NAME$active72: true
   },
 
   /* Styles applied to the root element if `completed={true}`. */
   completed: {
-    NAME$completed71: true
+    NAME$completed72: true
   },
 
   /* Styles applied to the root element if `error={true}`. */
   error: {
-    NAME$error71: true
+    NAME$error72: true
   }
 });
 

@@ -21,7 +21,7 @@ export const styles = theme => ({
     width: 20,
     height: 20,
     borderRadius: '50%',
-    NAME$icon76: true
+    NAME$icon77: true
   },
 
   /* Styles applied the icon element component if `checked={true}`. */
@@ -36,23 +36,23 @@ export const styles = theme => ({
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest
     }),
-    NAME$switchBase76: true
+    NAME$switchBase77: true
   },
 
   /* Styles applied to the internal `SwitchBase` component's `checked` class. */
   checked: {
     transform: 'translateX(14px)',
-    '& + .bar76': {
+    '& + .bar77': {
       opacity: 0.5
     },
-    NAME$checked76: true
+    NAME$checked77: true
   },
 
   /* Styles applied to the internal SwitchBase component's root element if `color="primary"`. */
   colorPrimary: {
-    '&.checked76': {
+    '&.checked77': {
       color: theme.palette.primary.main,
-      '& + .bar76': {
+      '& + .bar77': {
         backgroundColor: theme.palette.primary.main
       }
     }
@@ -60,9 +60,9 @@ export const styles = theme => ({
 
   /* Styles applied to the internal SwitchBase component's root element if `color="secondary"`. */
   colorSecondary: {
-    '&.checked76': {
+    '&.checked77': {
       color: theme.palette.secondary.main,
-      '& + .bar76': {
+      '& + .bar77': {
         backgroundColor: theme.palette.secondary.main
       }
     }
@@ -70,15 +70,15 @@ export const styles = theme => ({
 
   /* Styles applied to the internal SwitchBase component's disabled class. */
   disabled: {
-    '& + .bar76': {
+    '& + .bar77': {
       opacity: theme.palette.type === 'light' ? 0.12 : 0.1
     },
-    '& .icon76': {
+    '& .icon77': {
       boxShadow: theme.shadows[1]
     },
-    '&.switchBase76': {
+    '&.switchBase77': {
       color: theme.palette.type === 'light' ? theme.palette.grey[400] : theme.palette.grey[800],
-      '& + .bar76': {
+      '& + .bar77': {
         backgroundColor: theme.palette.type === 'light' ? theme.palette.common.black : theme.palette.common.white
       }
     }
@@ -100,7 +100,7 @@ export const styles = theme => ({
     }),
     backgroundColor: theme.palette.type === 'light' ? theme.palette.common.black : theme.palette.common.white,
     opacity: theme.palette.type === 'light' ? 0.38 : 0.3,
-    NAME$bar76: true
+    NAME$bar77: true
   }
 });
 

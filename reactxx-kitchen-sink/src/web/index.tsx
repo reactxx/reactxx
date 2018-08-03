@@ -30,7 +30,8 @@ import Button from 'reactxx-mui-web/Button'
 //import App from '../common/muix/text-fields'
 //import App from '../common/muix/grid'
 //import App from '../common/muix/avatar'
-import App from '../common/muix/badge'
+//import App from '../common/muix/badge'
+import App from '../common/muix/bottom-navigation'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

@@ -41,7 +41,7 @@ export const styles = theme => ({
     '&::-ms-expand': {
       display: 'none'
     },
-    '&.disabled60': {
+    '&.disabled61': {
       cursor: 'default'
     }
   },
@@ -59,7 +59,7 @@ export const styles = theme => ({
 
   /* Styles applied to the `Input` component `disabled` class. */
   disabled: {
-    NAME$disabled60: true
+    NAME$disabled61: true
   },
 
   /* Styles applied to the `Input` component `icon` class. */

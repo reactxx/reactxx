@@ -46,7 +46,7 @@ export const styles = theme => {
         borderBottomRightRadius: 2,
         ...edgeFix
       },
-      '&.expanded27 + &': {
+      '&.expanded28 + &': {
         '&:before': {
           display: 'none'
         }
@@ -65,7 +65,7 @@ export const styles = theme => {
       '&:before': {
         opacity: 0
       },
-      NAME$expanded27: true
+      NAME$expanded28: true
     },
 
     /* Styles applied to the root element if `disabled={true}`. */

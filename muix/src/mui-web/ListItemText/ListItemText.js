@@ -28,21 +28,21 @@ export const styles = theme => ({
 
   /* Styles applied to the primary `Typography` component. */
   primary: {
-    '&.textDense54': {
+    '&.textDense55': {
       fontSize: 'inherit'
     }
   },
 
   /* Styles applied to the secondary `Typography` component. */
   secondary: {
-    '&.textDense54': {
+    '&.textDense55': {
       fontSize: 'inherit'
     }
   },
 
   /* Styles applied to the `Typography` components if `context.dense` is `true`. */
   textDense: {
-    NAME$textDense54: true
+    NAME$textDense55: true
   }
 });
 
