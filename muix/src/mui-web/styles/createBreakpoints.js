@@ -1,6 +1,13 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 // Sorted ASC by size. That's important.
 // It can't be configured as it's used statically for propTypes.
-export const keys = ['xs', 'sm', 'md', 'lg', 'xl']; // Keep in mind that @media is inclusive by the CSS specification.
+export const keys = ["xs", "sm", "md", "lg", "xl"]; // Keep in mind that @media is inclusive by the CSS specification.
 
 export default function createBreakpoints(breakpoints) {
   const {
@@ -13,13 +20,13 @@ export default function createBreakpoints(breakpoints) {
       lg: 1280,
       xl: 1920
     },
-    unit = 'px',
+    unit = "px",
     step = 5,
     ...other
   } = breakpoints;
 
   function up(key) {
-    const value = typeof values[key] === 'number' ? values[key] : key;
+    const value = typeof values[key] === "number" ? values[key] : key;
     return `@media (min-width:${value}${unit})`;
   }
 
@@ -29,10 +36,11 @@ export default function createBreakpoints(breakpoints) {
 
     if (endIndex === keys.length) {
       // xl down applies to all sizes
-      return up('xs');
+      return up("xs");
     }
 
-    const value = typeof upperbound === 'number' && endIndex > 0 ? upperbound : key;
+    const value =
+      typeof upperbound === "number" && endIndex > 0 ? upperbound : key;
     return `@media (max-width:${value - step / 100}${unit})`;
   }
 
@@ -43,7 +51,10 @@ export default function createBreakpoints(breakpoints) {
       return up(start);
     }
 
-    return `@media (min-width:${values[start]}${unit}) and ` + `(max-width:${values[keys[endIndex]] - step / 100}${unit})`;
+    return (
+      `@media (min-width:${values[start]}${unit}) and ` +
+      `(max-width:${values[keys[endIndex]] - step / 100}${unit})`
+    );
   }
 
   function only(key) {

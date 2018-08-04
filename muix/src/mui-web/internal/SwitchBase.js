@@ -1,30 +1,38 @@
-// @inheritedComponent IconButton
-import React from 'react';
-import { toAtomic } from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
+// @inheritedComponent IconButton
+import React from "react";
+import { toAtomic } from "../styles/withStyles";
+
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
 import IconButton from "../IconButton/IconButton";
 export const styles = {
   root: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    transition: 'none',
-    '&:hover': {
+    display: "inline-flex",
+    alignItems: "center",
+    transition: "none",
+    "&:hover": {
       // Disable the hover effect for the IconButton.
-      backgroundColor: 'transparent'
+      backgroundColor: "transparent"
     }
   },
   checked: {},
   disabled: {},
-  input: { ...toAtomic('padding', 0),
-    ...toAtomic('margin', 0),
-    cursor: 'inherit',
-    position: 'absolute',
+  input: {
+    ...toAtomic("padding", 0),
+    ...toAtomic("margin", 0),
+    cursor: "inherit",
+    position: "absolute",
     opacity: 0,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     top: 0,
     left: 0
   }
@@ -43,7 +51,8 @@ class SwitchBase extends React.Component {
 
     if (!this.isControlled) {
       // not controlled, use internal state
-      this.state.checked = props.defaultChecked !== undefined ? props.defaultChecked : false;
+      this.state.checked =
+        props.defaultChecked !== undefined ? props.defaultChecked : false;
     }
   }
 
@@ -53,9 +62,7 @@ class SwitchBase extends React.Component {
       this.props.onFocus(event);
     }
 
-    const {
-      muiFormControl
-    } = this.context;
+    const { muiFormControl } = this.context;
 
     if (muiFormControl && muiFormControl.onFocus) {
       muiFormControl.onFocus(event);
@@ -66,9 +73,7 @@ class SwitchBase extends React.Component {
       this.props.onBlur(event);
     }
 
-    const {
-      muiFormControl
-    } = this.context;
+    const { muiFormControl } = this.context;
 
     if (muiFormControl && muiFormControl.onBlur) {
       muiFormControl.onBlur(event);
@@ -90,12 +95,7 @@ class SwitchBase extends React.Component {
 
   render() {
     const {
-      $system: {
-        classNames,
-        classNamesStr,
-        classNamesAny,
-        theme
-      },
+      $system: { classNames, classNamesStr, classNamesAny, theme },
       autoFocus,
       checked: checkedProp,
       checkedIcon,
@@ -117,39 +117,66 @@ class SwitchBase extends React.Component {
       value,
       ...other
     } = this.props;
-    const {
-      muiFormControl
-    } = this.context;
+    const { muiFormControl } = this.context;
     let disabled = disabledProp;
 
     if (muiFormControl) {
-      if (typeof disabled === 'undefined') {
+      if (typeof disabled === "undefined") {
         disabled = muiFormControl.disabled;
       }
     }
 
     const checked = this.isControlled ? checkedProp : this.state.checked;
-    const hasLabelFor = type === 'checkbox' || type === 'radio';
-    return <IconButton component="span" className={classNames(classes.root, checked && classes.checked, disabled && classes.disabled, classNameProp)} disabled={disabled} tabIndex={null} role={undefined} onFocus={this.handleFocus} onBlur={this.handleBlur} {...other}>
+    const hasLabelFor = type === "checkbox" || type === "radio";
+    return (
+      <IconButton
+        component="span"
+        className={classNames(
+          classes.root,
+          checked && classes.checked,
+          disabled && classes.disabled,
+          classNameProp
+        )}
+        disabled={disabled}
+        tabIndex={null}
+        role={undefined}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+        {...other}
+      >
         {checked ? checkedIcon : icon}
-        <input autoFocus={autoFocus} checked={checked} className={classNamesStr(classes.input)} disabled={disabled} id={hasLabelFor && id} name={name} onChange={this.handleInputChange} readOnly={readOnly} ref={inputRef} required={required} tabIndex={tabIndex} type={type} value={value} {...inputProps} />
-      </IconButton>;
+        <input
+          autoFocus={autoFocus}
+          checked={checked}
+          className={classNamesStr(classes.input)}
+          disabled={disabled}
+          id={hasLabelFor && id}
+          name={name}
+          onChange={this.handleInputChange}
+          readOnly={readOnly}
+          ref={inputRef}
+          required={required}
+          tabIndex={tabIndex}
+          type={type}
+          value={value}
+          {...inputProps}
+        />
+      </IconButton>
+    );
   }
-
 } // NB: If changed, please update Checkbox, Switch and Radio
 // so that the API documentation is updated.
-
 
 SwitchBase.contextTypes = {
   muiFormControl: PropTypes.object
 };
-const defaultProps = SwitchBase.defaultProps = {
-  type: 'checkbox'
-};
+const defaultProps = (SwitchBase.defaultProps = {
+  type: "checkbox"
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/internal/SwitchBase').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/internal/SwitchBase').Shape>}
+ */
 export const SwitchBaseCreator = withStyles(styles, SwitchBase, {
   isMui: true,
   defaultProps

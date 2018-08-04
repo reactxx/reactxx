@@ -1,10 +1,17 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 // @inheritedComponent List
-import React from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import keycode from 'keycode';
-import warning from 'warning';
-import ownerDocument from '../utils/ownerDocument';
+import React from "react";
+import PropTypes from "prop-types";
+import ReactDOM from "react-dom";
+import keycode from "keycode";
+import warning from "warning";
+import ownerDocument from "../utils/ownerDocument";
 import List from "../List/List";
 
 class MenuList extends React.Component {
@@ -50,19 +57,22 @@ class MenuList extends React.Component {
     const key = keycode(event);
     const currentFocus = ownerDocument(list).activeElement;
 
-    if ((key === 'up' || key === 'down') && (!currentFocus || currentFocus && !list.contains(currentFocus))) {
+    if (
+      (key === "up" || key === "down") &&
+      (!currentFocus || (currentFocus && !list.contains(currentFocus)))
+    ) {
       if (this.selectedItemRef) {
         this.selectedItemRef.focus();
       } else {
         list.firstChild.focus();
       }
-    } else if (key === 'down') {
+    } else if (key === "down") {
       event.preventDefault();
 
       if (currentFocus.nextElementSibling) {
         currentFocus.nextElementSibling.focus();
       }
-    } else if (key === 'up') {
+    } else if (key === "up") {
       event.preventDefault();
 
       if (currentFocus.previousElementSibling) {
@@ -88,9 +98,7 @@ class MenuList extends React.Component {
   };
 
   focus() {
-    const {
-      currentTabIndex
-    } = this.state;
+    const { currentTabIndex } = this.state;
     const list = this.listRef;
 
     if (!list || !list.children || !list.firstChild) {
@@ -127,54 +135,64 @@ class MenuList extends React.Component {
   }
 
   render() {
-    const {
-      children,
-      className,
-      onBlur,
-      onKeyDown,
-      ...other
-    } = this.props;
-    return <List role="menu" ref={ref => {
-      this.listRef = ReactDOM.findDOMNode(ref);
-    }} className={className} onKeyDown={this.handleKeyDown} onBlur={this.handleBlur} {...other}>
+    const { children, className, onBlur, onKeyDown, ...other } = this.props;
+    return (
+      <List
+        role="menu"
+        ref={ref => {
+          this.listRef = ReactDOM.findDOMNode(ref);
+        }}
+        className={className}
+        onKeyDown={this.handleKeyDown}
+        onBlur={this.handleBlur}
+        {...other}
+      >
         {React.Children.map(children, (child, index) => {
-        if (!React.isValidElement(child)) {
-          return null;
-        }
+          if (!React.isValidElement(child)) {
+            return null;
+          }
 
-        warning(child.type !== React.Fragment, ["Material-UI: the MenuList component doesn't accept a Fragment as a child.", 'Consider providing an array instead.'].join('\n'));
-        return React.cloneElement(child, {
-          tabIndex: index === this.state.currentTabIndex ? 0 : -1,
-          ref: child.props.selected ? ref => {
-            this.selectedItemRef = ReactDOM.findDOMNode(ref);
-          } : undefined,
-          onFocus: this.handleItemFocus
-        });
-      })}
-      </List>;
+          warning(
+            child.type !== React.Fragment,
+            [
+              "Material-UI: the MenuList component doesn't accept a Fragment as a child.",
+              "Consider providing an array instead."
+            ].join("\n")
+          );
+          return React.cloneElement(child, {
+            tabIndex: index === this.state.currentTabIndex ? 0 : -1,
+            ref: child.props.selected
+              ? ref => {
+                  this.selectedItemRef = ReactDOM.findDOMNode(ref);
+                }
+              : undefined,
+            onFocus: this.handleItemFocus
+          });
+        })}
+      </List>
+    );
   }
-
 }
 
 MenuList.propTypes = {
   /**
-     * MenuList contents, normally `MenuItem`s.
-     */
+   * MenuList contents, normally `MenuItem`s.
+   */
   children: PropTypes.node,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   className: PropTypes.string,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   onBlur: PropTypes.func,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   onKeyDown: PropTypes.func
 };
 export default MenuList;

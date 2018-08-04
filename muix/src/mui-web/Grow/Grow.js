@@ -1,9 +1,16 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 // @inheritedComponent Transition
-import React from 'react';
-import PropTypes from 'prop-types';
-import Transition from 'react-transition-group/Transition';
-import withTheme from '../styles/withTheme';
-import { reflow, getTransitionProps } from '../transitions/utils';
+import React from "react";
+import PropTypes from "prop-types";
+import Transition from "react-transition-group/Transition";
+import withTheme from "../styles/withTheme";
+import { reflow, getTransitionProps } from "../transitions/utils";
 
 function getScale(value) {
   return `scale(${value}, ${value ** 2})`;
@@ -35,67 +42,67 @@ class Grow extends React.Component {
   }
 
   handleEnter = node => {
-    const {
-      theme,
-      timeout
-    } = this.props;
+    const { theme, timeout } = this.props;
     reflow(node); // So the animation always start from the start.
 
-    const {
-      duration: transitionDuration,
-      delay
-    } = getTransitionProps(this.props, {
-      mode: 'enter'
-    });
+    const { duration: transitionDuration, delay } = getTransitionProps(
+      this.props,
+      {
+        mode: "enter"
+      }
+    );
     let duration = 0;
 
-    if (timeout === 'auto') {
+    if (timeout === "auto") {
       duration = theme.transitions.getAutoHeightDuration(node.clientHeight);
       this.autoTimeout = duration;
     } else {
       duration = transitionDuration;
     }
 
-    node.style.transition = [theme.transitions.create('opacity', {
-      duration,
-      delay
-    }), theme.transitions.create('transform', {
-      duration: duration * 0.666,
-      delay
-    })].join(',');
+    node.style.transition = [
+      theme.transitions.create("opacity", {
+        duration,
+        delay
+      }),
+      theme.transitions.create("transform", {
+        duration: duration * 0.666,
+        delay
+      })
+    ].join(",");
 
     if (this.props.onEnter) {
       this.props.onEnter(node);
     }
   };
   handleExit = node => {
-    const {
-      theme,
-      timeout
-    } = this.props;
+    const { theme, timeout } = this.props;
     let duration = 0;
-    const {
-      duration: transitionDuration,
-      delay
-    } = getTransitionProps(this.props, {
-      mode: 'exit'
-    });
+    const { duration: transitionDuration, delay } = getTransitionProps(
+      this.props,
+      {
+        mode: "exit"
+      }
+    );
 
-    if (timeout === 'auto') {
+    if (timeout === "auto") {
       duration = theme.transitions.getAutoHeightDuration(node.clientHeight);
       this.autoTimeout = duration;
     } else {
       duration = transitionDuration;
     }
 
-    node.style.transition = [theme.transitions.create('opacity', {
-      duration,
-      delay
-    }), theme.transitions.create('transform', {
-      duration: duration * 0.666,
-      delay: delay || duration * 0.333
-    })].join(',');
-    node.style.opacity = '0';
+    node.style.transition = [
+      theme.transitions.create("opacity", {
+        duration,
+        delay
+      }),
+      theme.transitions.create("transform", {
+        duration: duration * 0.666,
+        delay: delay || duration * 0.333
+      })
+    ].join(",");
+    node.style.opacity = "0";
     node.style.transform = getScale(0.75);
 
     if (this.props.onExit) {
@@ -103,7 +110,7 @@ class Grow extends React.Component {
     }
   };
   addEndListener = (_, next) => {
-    if (this.props.timeout === 'auto') {
+    if (this.props.timeout === "auto") {
       this.timer = setTimeout(next, this.autoTimeout || 0);
     }
   };
@@ -118,70 +125,83 @@ class Grow extends React.Component {
       timeout,
       ...other
     } = this.props;
-    const style = { ...styleProp,
+    const style = {
+      ...styleProp,
       ...(React.isValidElement(children) ? children.props.style : {})
     };
-    return <Transition appear onEnter={this.handleEnter} onExit={this.handleExit} addEndListener={this.addEndListener} timeout={timeout === 'auto' ? null : timeout} {...other}>
+    return (
+      <Transition
+        appear
+        onEnter={this.handleEnter}
+        onExit={this.handleExit}
+        addEndListener={this.addEndListener}
+        timeout={timeout === "auto" ? null : timeout}
+        {...other}
+      >
         {(state, childProps) => {
-        return React.cloneElement(children, {
-          style: {
-            opacity: 0,
-            transform: getScale(0.75),
-            ...styles[state],
-            ...style
-          },
-          ...childProps
-        });
-      }}
-      </Transition>;
+          return React.cloneElement(children, {
+            style: {
+              opacity: 0,
+              transform: getScale(0.75),
+              ...styles[state],
+              ...style
+            },
+            ...childProps
+          });
+        }}
+      </Transition>
+    );
   }
-
 }
 
 Grow.propTypes = {
   /**
-     * A single child content element.
-     */
+   * A single child content element.
+   */
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 
   /**
-     * If `true`, show the component; triggers the enter or exit animation.
-     */
+   * If `true`, show the component; triggers the enter or exit animation.
+   */
   in: PropTypes.bool,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   onEnter: PropTypes.func,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   onExit: PropTypes.func,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   style: PropTypes.object,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   theme: PropTypes.object.isRequired,
 
   /**
-     * The duration for the transition, in milliseconds.
-     * You may specify a single timeout for all transitions, or individually with an object.
-     *
-     * Set to 'auto' to automatically calculate transition time based on height.
-     */
-  timeout: PropTypes.oneOfType([PropTypes.number, PropTypes.shape({
-    enter: PropTypes.number,
-    exit: PropTypes.number
-  }), PropTypes.oneOf(['auto'])])
+   * The duration for the transition, in milliseconds.
+   * You may specify a single timeout for all transitions, or individually with an object.
+   *
+   * Set to 'auto' to automatically calculate transition time based on height.
+   */
+  timeout: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.shape({
+      enter: PropTypes.number,
+      exit: PropTypes.number
+    }),
+    PropTypes.oneOf(["auto"])
+  ])
 };
 Grow.defaultProps = {
-  timeout: 'auto'
+  timeout: "auto"
 };
 Grow.muiSupportAuto = true;
 export default withTheme()(Grow);

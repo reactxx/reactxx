@@ -1,60 +1,68 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 // @inheritedComponent Input
-import React from 'react';
-import PropTypes from 'prop-types';
-import NativeSelectInput from './NativeSelectInput';
-import withStyles from '../styles/withStyles';
-import ArrowDropDownIcon from '../internal/svg-icons/ArrowDropDown';
+import React from "react";
+import PropTypes from "prop-types";
+import NativeSelectInput from "./NativeSelectInput";
+import withStyles from "../styles/withStyles";
+import ArrowDropDownIcon from "../internal/svg-icons/ArrowDropDown";
 import Input from "../Input/Input";
 export const styles = theme => ({
   /* Styles applied to the `Input` component `root` class. */
   root: {
-    position: 'relative',
-    width: '100%'
+    position: "relative",
+    width: "100%"
   },
 
   /* Styles applied to the `Input` component `select` class. */
   select: {
-    '-moz-appearance': 'none',
+    "-moz-appearance": "none",
     // Reset
-    '-webkit-appearance': 'none',
+    "-webkit-appearance": "none",
     // Reset
     // When interacting quickly, the text can end up selected.
     // Native select can't be selected either.
-    userSelect: 'none',
+    userSelect: "none",
     paddingRight: 32,
-    width: 'calc(100% - 32px)',
+    width: "calc(100% - 32px)",
     minWidth: 16,
     // So it doesn't collapse.
-    cursor: 'pointer',
-    '&:focus': {
+    cursor: "pointer",
+    "&:focus": {
       // Show that it's not an text input
-      background: theme.palette.type === 'light' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.05)',
+      background:
+        theme.palette.type === "light"
+          ? "rgba(0, 0, 0, 0.05)"
+          : "rgba(255, 255, 255, 0.05)",
       borderRadius: 0 // Reset Chrome style
-
     },
     // Remove Firefox focus border
-    '&:-moz-focusring': {
-      color: 'transparent',
-      textShadow: '0 0 0 #000'
+    "&:-moz-focusring": {
+      color: "transparent",
+      textShadow: "0 0 0 #000"
     },
     // Remove IE11 arrow
-    '&::-ms-expand': {
-      display: 'none'
+    "&::-ms-expand": {
+      display: "none"
     },
-    '&.disabled61': {
-      cursor: 'default'
+    "&.disabled61": {
+      cursor: "default"
     }
   },
 
   /* Styles applied to the `Input` component `selectMenu` class. */
   selectMenu: {
-    width: 'auto',
+    width: "auto",
     // Fix Safari textOverflow
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    minHeight: '1.1875em' // Reset (19px), match the native input line-height
-
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    minHeight: "1.1875em" // Reset (19px), match the native input line-height
   },
 
   /* Styles applied to the `Input` component `disabled` class. */
@@ -66,13 +74,12 @@ export const styles = theme => ({
   icon: {
     // We use a position absolute over a flexbox in order to forward the pointer events
     // to the input.
-    position: 'absolute',
+    position: "absolute",
     right: 0,
-    top: 'calc(50% - 12px)',
+    top: "calc(50% - 12px)",
     // Center vertically
     color: theme.palette.action.active,
-    'pointer-events': 'none' // Don't block pointer events on the select under the icon.
-
+    "pointer-events": "none" // Don't block pointer events on the select under the icon.
   }
 });
 /**
@@ -81,12 +88,7 @@ export const styles = theme => ({
 
 function NativeSelect(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     children,
     classes,
     IconComponent,
@@ -111,15 +113,15 @@ function NativeSelect(props) {
   });
 }
 
-NativeSelect.muiName = 'NativeSelect';
-const defaultProps = NativeSelect.defaultProps = {
+NativeSelect.muiName = "NativeSelect";
+const defaultProps = (NativeSelect.defaultProps = {
   IconComponent: ArrowDropDownIcon,
   input: <Input />
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/NativeSelect/NativeSelect').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/NativeSelect/NativeSelect').Shape>}
+ */
 export const NativeSelectCreator = withStyles(styles, NativeSelect, {
   isMui: true,
   defaultProps

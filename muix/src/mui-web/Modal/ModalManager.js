@@ -1,8 +1,15 @@
-import css from 'dom-helpers/style';
-import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
-import ownerDocument from '../utils/ownerDocument';
-import isOverflowing from './isOverflowing';
-import { ariaHidden, hideSiblings, showSiblings } from './manageAriaHidden';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import css from "dom-helpers/style";
+import getScrollbarSize from "dom-helpers/util/scrollbarSize";
+import ownerDocument from "../utils/ownerDocument";
+import isOverflowing from "./isOverflowing";
+import { ariaHidden, hideSiblings, showSiblings } from "./manageAriaHidden";
 
 function findIndexOf(data, callback) {
   let idx = -1;
@@ -18,12 +25,12 @@ function findIndexOf(data, callback) {
 }
 
 function getPaddingRight(node) {
-  return parseInt(css(node, 'paddingRight') || 0, 10);
+  return parseInt(css(node, "paddingRight") || 0, 10);
 }
 
 function setContainerStyle(data, container) {
   const style = {
-    overflow: 'hidden'
+    overflow: "hidden"
   }; // We are only interested in the actual `style` here because we will override it.
 
   data.style = {
@@ -36,7 +43,7 @@ function setContainerStyle(data, container) {
 
     style.paddingRight = `${getPaddingRight(container) + scrollbarSize}px`; // .mui-fixed is a global helper.
 
-    const fixedNodes = ownerDocument(container).querySelectorAll('.mui-fixed');
+    const fixedNodes = ownerDocument(container).querySelectorAll(".mui-fixed");
 
     for (let i = 0; i < fixedNodes.length; i += 1) {
       const paddingRight = getPaddingRight(fixedNodes[i]);
@@ -54,7 +61,7 @@ function removeContainerStyle(data, container) {
   Object.keys(data.style).forEach(key => {
     container.style[key] = data.style[key];
   });
-  const fixedNodes = ownerDocument(container).querySelectorAll('.mui-fixed');
+  const fixedNodes = ownerDocument(container).querySelectorAll(".mui-fixed");
 
   for (let i = 0; i < fixedNodes.length; i += 1) {
     fixedNodes[i].style.paddingRight = `${data.prevPaddings[i]}px`;
@@ -68,13 +75,9 @@ function removeContainerStyle(data, container) {
  * Used by the Modal to ensure proper styling of containers.
  */
 
-
 class ModalManager {
   constructor(options = {}) {
-    const {
-      hideSiblingNodes = true,
-      handleContainerOverflow = true
-    } = options;
+    const { hideSiblingNodes = true, handleContainerOverflow = true } = options;
     this.hideSiblingNodes = hideSiblingNodes;
     this.handleContainerOverflow = handleContainerOverflow; // this.modals[modalIdx] = modal
 
@@ -130,7 +133,10 @@ class ModalManager {
       return modalIdx;
     }
 
-    const containerIdx = findIndexOf(this.data, item => item.modals.indexOf(modal) !== -1);
+    const containerIdx = findIndexOf(
+      this.data,
+      item => item.modals.indexOf(modal) !== -1
+    );
     const data = this.data[containerIdx];
     const container = this.containers[containerIdx];
     data.modals.splice(data.modals.indexOf(modal), 1);
@@ -156,9 +162,10 @@ class ModalManager {
   }
 
   isTopModal(modal) {
-    return !!this.modals.length && this.modals[this.modals.length - 1] === modal;
+    return (
+      !!this.modals.length && this.modals[this.modals.length - 1] === modal
+    );
   }
-
 }
 
 export default ModalManager;

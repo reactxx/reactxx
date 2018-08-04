@@ -1,18 +1,26 @@
-import React from 'react';
-import { toAtomic } from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import { cloneChildrenWithClassName } from '../utils/reactHelpers';
+import React from "react";
+import { toAtomic } from "../styles/withStyles";
+
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
+import { cloneChildrenWithClassName } from "../utils/reactHelpers";
 import "../Button/Button"; // So we don't have any override priority issue.
 
 export const styles = {
   /* Styles applied to the root element. */
-  root: { ...toAtomic('padding', '16px 8px'),
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end'
+  root: {
+    ...toAtomic("padding", "16px 8px"),
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end"
   },
 
   /* Styles applied to the children. */
@@ -23,31 +31,33 @@ export const styles = {
 
 function ExpansionPanelActions(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     children,
     classes,
     className,
     ...other
   } = props;
-  return <div className={classNamesStr(classes.root, className)} {...other}>
+  return (
+    <div className={classNamesStr(classes.root, className)} {...other}>
       {cloneChildrenWithClassName(children, classes.action)}
-    </div>;
+    </div>
+  );
 }
 
-const defaultProps = ExpansionPanelActions.defaultProps = {};
+const defaultProps = (ExpansionPanelActions.defaultProps = {});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ExpansionPanelActions/ExpansionPanelActions').Shape>}
-*/
-export const ExpansionPanelActionsCreator = withStyles(styles, ExpansionPanelActions, {
-  isMui: true,
-  defaultProps
-});
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ExpansionPanelActions/ExpansionPanelActions').Shape>}
+ */
+export const ExpansionPanelActionsCreator = withStyles(
+  styles,
+  ExpansionPanelActions,
+  {
+    isMui: true,
+    defaultProps
+  }
+);
 const ExpansionPanelActionsComponent = ExpansionPanelActionsCreator();
-if (ExpansionPanelActions.muiName) ExpansionPanelActionsComponent.muiName = ExpansionPanelActions.muiName;
+if (ExpansionPanelActions.muiName)
+  ExpansionPanelActionsComponent.muiName = ExpansionPanelActions.muiName;
 export default ExpansionPanelActionsComponent;

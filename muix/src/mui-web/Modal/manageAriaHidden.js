@@ -1,7 +1,16 @@
-const BLACKLIST = ['template', 'script', 'style'];
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+const BLACKLIST = ["template", "script", "style"];
 
 function isHidable(node) {
-  return node.nodeType === 1 && BLACKLIST.indexOf(node.tagName.toLowerCase()) === -1;
+  return (
+    node.nodeType === 1 && BLACKLIST.indexOf(node.tagName.toLowerCase()) === -1
+  );
 }
 
 function siblings(container, mount, callback) {
@@ -20,9 +29,9 @@ export function ariaHidden(show, node) {
   }
 
   if (show) {
-    node.setAttribute('aria-hidden', 'true');
+    node.setAttribute("aria-hidden", "true");
   } else {
-    node.removeAttribute('aria-hidden');
+    node.removeAttribute("aria-hidden");
   }
 }
 export function hideSiblings(container, mountNode) {

@@ -1,22 +1,30 @@
-// @inheritedComponent TableCell
-import React from 'react';
-import { toAtomic } from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-import PropTypes from 'prop-types';
-import withStyles from '../styles/withStyles';
+// @inheritedComponent TableCell
+import React from "react";
+import { toAtomic } from "../styles/withStyles";
+
+import PropTypes from "prop-types";
+import withStyles from "../styles/withStyles";
 import Input from "../Input/Input";
-import MenuItem from '../MenuItem';
+import MenuItem from "../MenuItem";
 import Select from "../Select/Select";
-import TableCell from '../TableCell';
-import Toolbar from '../Toolbar';
+import TableCell from "../TableCell";
+import Toolbar from "../Toolbar";
 import Typography from "../Typography/Typography";
-import TablePaginationActions from '../TablePaginationActions';
+import TablePaginationActions from "../TablePaginationActions";
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     fontSize: theme.typography.pxToRem(12),
     // Increase the specificity to override TableCell.
-    '&:last-child': { ...toAtomic('padding', 0)
+    "&:last-child": {
+      ...toAtomic("padding", 0)
     }
   },
 
@@ -29,7 +37,7 @@ export const styles = theme => ({
 
   /* Styles applied to the spacer element. */
   spacer: {
-    flex: '1 1 100%'
+    flex: "1 1 100%"
   },
 
   /* Styles applied to the caption Typography components if `variant="caption"`. */
@@ -57,7 +65,7 @@ export const styles = theme => ({
 
   /* Styles applied to the Input component. */
   input: {
-    fontSize: 'inherit',
+    fontSize: "inherit",
     flexShrink: 0
   },
 
@@ -79,12 +87,7 @@ class TablePagination extends React.Component {
   // This logic would be better handled on userside.
   // However, we have it just in case.
   componentDidUpdate() {
-    const {
-      count,
-      onChangePage,
-      page,
-      rowsPerPage
-    } = this.props;
+    const { count, onChangePage, page, rowsPerPage } = this.props;
     const newLastPage = Math.max(0, Math.ceil(count / rowsPerPage) - 1);
 
     if (page > newLastPage) {
@@ -94,12 +97,7 @@ class TablePagination extends React.Component {
 
   render() {
     const {
-      $system: {
-        classNames,
-        classNamesStr,
-        classNamesAny,
-        theme
-      },
+      $system: { classNames, classNamesStr, classNamesAny, theme },
       ActionsComponent,
       backIconButtonProps,
       classes,
@@ -119,59 +117,85 @@ class TablePagination extends React.Component {
     } = this.props;
     let colSpan;
 
-    if (Component === TableCell || Component === 'td') {
+    if (Component === TableCell || Component === "td") {
       colSpan = colSpanProp || 1000; // col-span over everything
     }
 
-    return <Component className={classNamesAny(Component, classes.root)} colSpan={colSpan} {...other}>
+    return (
+      <Component
+        className={classNamesAny(Component, classes.root)}
+        colSpan={colSpan}
+        {...other}
+      >
         <Toolbar className={classes.toolbar}>
           <div className={classNamesStr(classes.spacer)} />
-          {rowsPerPageOptions.length > 1 && <Typography variant="caption" className={classes.caption}>
+          {rowsPerPageOptions.length > 1 && (
+            <Typography variant="caption" className={classes.caption}>
               {labelRowsPerPage}
-            </Typography>}
-          {rowsPerPageOptions.length > 1 && <Select classes={{
-          root: classes.selectRoot,
-          select: classes.select,
-          icon: classes.selectIcon
-        }} input={<Input className={classes.input} disableUnderline />} value={rowsPerPage} onChange={onChangeRowsPerPage} {...SelectProps}>
-              {rowsPerPageOptions.map(rowsPerPageOption => <MenuItem className={classes.menuItem} key={rowsPerPageOption} value={rowsPerPageOption}>
+            </Typography>
+          )}
+          {rowsPerPageOptions.length > 1 && (
+            <Select
+              classes={{
+                root: classes.selectRoot,
+                select: classes.select,
+                icon: classes.selectIcon
+              }}
+              input={<Input className={classes.input} disableUnderline />}
+              value={rowsPerPage}
+              onChange={onChangeRowsPerPage}
+              {...SelectProps}
+            >
+              {rowsPerPageOptions.map(rowsPerPageOption => (
+                <MenuItem
+                  className={classes.menuItem}
+                  key={rowsPerPageOption}
+                  value={rowsPerPageOption}
+                >
                   {rowsPerPageOption}
-                </MenuItem>)}
-            </Select>}
+                </MenuItem>
+              ))}
+            </Select>
+          )}
           <Typography variant="caption" className={classes.caption}>
             {labelDisplayedRows({
-            from: count === 0 ? 0 : page * rowsPerPage + 1,
-            to: Math.min(count, (page + 1) * rowsPerPage),
-            count,
-            page
-          })}
+              from: count === 0 ? 0 : page * rowsPerPage + 1,
+              to: Math.min(count, (page + 1) * rowsPerPage),
+              count,
+              page
+            })}
           </Typography>
-          <ActionsComponent className={classes.actions} backIconButtonProps={backIconButtonProps} count={count} nextIconButtonProps={nextIconButtonProps} onChangePage={onChangePage} page={page} rowsPerPage={rowsPerPage} />
+          <ActionsComponent
+            className={classes.actions}
+            backIconButtonProps={backIconButtonProps}
+            count={count}
+            nextIconButtonProps={nextIconButtonProps}
+            onChangePage={onChangePage}
+            page={page}
+            rowsPerPage={rowsPerPage}
+          />
         </Toolbar>
-      </Component>;
+      </Component>
+    );
   }
-
 }
 
-const defaultProps = TablePagination.defaultProps = {
+const defaultProps = (TablePagination.defaultProps = {
   ActionsComponent: TablePaginationActions,
   component: TableCell,
-  labelDisplayedRows: ({
-    from,
-    to,
-    count
-  }) => `${from}-${to} of ${count}`,
-  labelRowsPerPage: 'Rows per page:',
+  labelDisplayedRows: ({ from, to, count }) => `${from}-${to} of ${count}`,
+  labelRowsPerPage: "Rows per page:",
   rowsPerPageOptions: [5, 10, 25]
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/TablePagination/TablePagination').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/TablePagination/TablePagination').Shape>}
+ */
 export const TablePaginationCreator = withStyles(styles, TablePagination, {
   isMui: true,
   defaultProps
 });
 const TablePaginationComponent = TablePaginationCreator();
-if (TablePagination.muiName) TablePaginationComponent.muiName = TablePagination.muiName;
+if (TablePagination.muiName)
+  TablePaginationComponent.muiName = TablePagination.muiName;
 export default TablePaginationComponent;

@@ -1,58 +1,67 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 import Modal from "../Modal/Modal";
-import withStyles from '../styles/withStyles';
-import Slide from '../Slide';
+import withStyles from "../styles/withStyles";
+import Slide from "../Slide";
 import Paper from "../Paper/Paper";
-import { capitalize } from '../utils/helpers';
-import { duration } from '../styles/transitions';
+import { capitalize } from "../utils/helpers";
+import { duration } from "../styles/transitions";
 const oppositeDirection = {
-  left: 'right',
-  right: 'left',
-  top: 'down',
-  bottom: 'up'
+  left: "right",
+  right: "left",
+  top: "down",
+  bottom: "up"
 };
 export function isHorizontal(props) {
-  return ['left', 'right'].indexOf(props.anchor) !== -1;
+  return ["left", "right"].indexOf(props.anchor) !== -1;
 }
 export function getAnchor(props) {
-  return props.theme.direction === 'rtl' && isHorizontal(props) ? oppositeDirection[props.anchor] : props.anchor;
+  return props.theme.direction === "rtl" && isHorizontal(props)
+    ? oppositeDirection[props.anchor]
+    : props.anchor;
 }
 export const styles = theme => ({
   /* Styles applied to the root element if `variant="permanent or persistent"`. */
   docked: {
-    flex: '0 0 auto'
+    flex: "0 0 auto"
   },
 
   /* Styles applied to the `Paper` component. */
   paper: {
-    overflowY: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100vh',
-    flex: '1 0 auto',
+    overflowY: "auto",
+    display: "flex",
+    flexDirection: "column",
+    height: "100vh",
+    flex: "1 0 auto",
     zIndex: theme.zIndex.drawer,
-    WebkitOverflowScrolling: 'touch',
+    WebkitOverflowScrolling: "touch",
     // Add iOS momentum scrolling.
     // temporary style
-    position: 'fixed',
+    position: "fixed",
     top: 0,
     // We disable the focus ring for mouse, touch and keyboard users.
     // At some point, it would be better to keep it for keyboard users.
     // :focus-ring CSS pseudo-class will help.
-    outline: 'none'
+    outline: "none"
   },
 
   /* Styles applied to the `Paper` component if `anchor="left"`. */
   paperAnchorLeft: {
     left: 0,
-    right: 'auto'
+    right: "auto"
   },
 
   /* Styles applied to the `Paper` component if `anchor="right"`. */
   paperAnchorRight: {
-    left: 'auto',
+    left: "auto",
     right: 0
   },
 
@@ -60,20 +69,20 @@ export const styles = theme => ({
   paperAnchorTop: {
     top: 0,
     left: 0,
-    bottom: 'auto',
+    bottom: "auto",
     right: 0,
-    height: 'auto',
-    maxHeight: '100vh'
+    height: "auto",
+    maxHeight: "100vh"
   },
 
   /* Styles applied to the `Paper` component if `anchor="bottom"`. */
   paperAnchorBottom: {
-    top: 'auto',
+    top: "auto",
     left: 0,
     bottom: 0,
     right: 0,
-    height: 'auto',
-    maxHeight: '100vh'
+    height: "auto",
+    maxHeight: "100vh"
   },
 
   /* Styles applied to the `Paper` component if `anchor="left"` & `variant` is not "temporary". */
@@ -116,21 +125,13 @@ class Drawer extends React.Component {
 
   render() {
     const {
-      $system: {
-        classNames,
-        classNamesStr,
-        classNamesAny,
-        theme
-      },
+      $system: { classNames, classNamesStr, classNamesAny, theme },
       anchor: anchorProp,
       children,
       classes,
       className,
       elevation,
-      ModalProps: {
-        BackdropProps: BackdropPropsProp,
-        ...ModalProps
-      } = {},
+      ModalProps: { BackdropProps: BackdropPropsProp, ...ModalProps } = {},
       onClose,
       open,
       PaperProps,
@@ -140,51 +141,82 @@ class Drawer extends React.Component {
       ...other
     } = this.props;
     const anchor = getAnchor(this.props);
-    const drawer = <Paper elevation={variant === 'temporary' ? elevation : 0} square className={classNames(classes.paper, classes[`paperAnchor${capitalize(anchor)}`], variant !== 'temporary' && classes[`paperAnchorDocked${capitalize(anchor)}`])} {...PaperProps}>
+    const drawer = (
+      <Paper
+        elevation={variant === "temporary" ? elevation : 0}
+        square
+        className={classNames(
+          classes.paper,
+          classes[`paperAnchor${capitalize(anchor)}`],
+          variant !== "temporary" &&
+            classes[`paperAnchorDocked${capitalize(anchor)}`]
+        )}
+        {...PaperProps}
+      >
         {children}
-      </Paper>;
+      </Paper>
+    );
 
-    if (variant === 'permanent') {
-      return <div className={classNamesStr(classes.docked, className)} {...other}>
+    if (variant === "permanent") {
+      return (
+        <div className={classNamesStr(classes.docked, className)} {...other}>
           {drawer}
-        </div>;
+        </div>
+      );
     }
 
-    const slidingDrawer = <Slide in={open} direction={oppositeDirection[anchor]} timeout={transitionDuration} appear={this.mounted} {...SlideProps}>
+    const slidingDrawer = (
+      <Slide
+        in={open}
+        direction={oppositeDirection[anchor]}
+        timeout={transitionDuration}
+        appear={this.mounted}
+        {...SlideProps}
+      >
         {drawer}
-      </Slide>;
+      </Slide>
+    );
 
-    if (variant === 'persistent') {
-      return <div className={classNamesStr(classes.docked, className)} {...other}>
+    if (variant === "persistent") {
+      return (
+        <div className={classNamesStr(classes.docked, className)} {...other}>
           {slidingDrawer}
-        </div>;
+        </div>
+      );
     } // variant === temporary
 
-
-    return <Modal BackdropProps={{ ...BackdropPropsProp,
-      transitionDuration
-    }} className={classNames(classes.modal, className)} open={open} onClose={onClose} {...other} {...ModalProps}>
+    return (
+      <Modal
+        BackdropProps={{
+          ...BackdropPropsProp,
+          transitionDuration
+        }}
+        className={classNames(classes.modal, className)}
+        open={open}
+        onClose={onClose}
+        {...other}
+        {...ModalProps}
+      >
         {slidingDrawer}
-      </Modal>;
+      </Modal>
+    );
   }
-
 }
 
-const defaultProps = Drawer.defaultProps = {
-  anchor: 'left',
+const defaultProps = (Drawer.defaultProps = {
+  anchor: "left",
   elevation: 16,
   open: false,
   transitionDuration: {
     enter: duration.enteringScreen,
     exit: duration.leavingScreen
   },
-  variant: 'temporary' // Mobile first.
-
-};
+  variant: "temporary" // Mobile first.
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Drawer/Drawer').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Drawer/Drawer').Shape>}
+ */
 export const DrawerCreator = withStyles(styles, Drawer, {
   isMui: true,
   defaultProps

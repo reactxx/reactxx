@@ -1,23 +1,30 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 // @inheritedComponent ButtonBase
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import ArrowDownwardIcon from '../internal/svg-icons/ArrowDownward';
-import withStyles from '../styles/withStyles';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import ArrowDownwardIcon from "../internal/svg-icons/ArrowDownward";
+import withStyles from "../styles/withStyles";
 import ButtonBase from "../ButtonBase/ButtonBase";
-import { capitalize } from '../utils/helpers';
+import { capitalize } from "../utils/helpers";
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    cursor: 'pointer',
-    display: 'inline-flex',
-    justifyContent: 'flex-start',
-    flexDirection: 'inherit',
-    alignItems: 'center',
-    '&:hover': {
+    cursor: "pointer",
+    display: "inline-flex",
+    justifyContent: "flex-start",
+    flexDirection: "inherit",
+    alignItems: "center",
+    "&:hover": {
       color: theme.palette.text.primary
     },
-    '&:focus': {
+    "&:focus": {
       color: theme.palette.text.primary
     }
   },
@@ -25,7 +32,7 @@ export const styles = theme => ({
   /* Styles applied to the root element if `active={true}`. */
   active: {
     color: theme.palette.text.primary,
-    '& .icon86': {
+    "& .icon86": {
       opacity: 1
     }
   },
@@ -36,22 +43,22 @@ export const styles = theme => ({
     marginRight: 4,
     marginLeft: 4,
     opacity: 0,
-    transition: theme.transitions.create(['opacity', 'transform'], {
+    transition: theme.transitions.create(["opacity", "transform"], {
       duration: theme.transitions.duration.shorter
     }),
-    userSelect: 'none',
+    userSelect: "none",
     width: 16,
     NAME$icon86: true
   },
 
   /* Styles applied to the icon component if `direction="desc"`. */
   iconDirectionDesc: {
-    transform: 'rotate(0deg)'
+    transform: "rotate(0deg)"
   },
 
   /* Styles applied to the icon component if `direction="asc"`. */
   iconDirectionAsc: {
-    transform: 'rotate(180deg)'
+    transform: "rotate(180deg)"
   }
 });
 /**
@@ -60,12 +67,7 @@ export const styles = theme => ({
 
 function TableSortLabel(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     active,
     classes,
     className,
@@ -73,24 +75,37 @@ function TableSortLabel(props) {
     direction,
     ...other
   } = props;
-  return <ButtonBase className={classNames(classes.root, active && classes.active, className)} component="span" disableRipple {...other}>
+  return (
+    <ButtonBase
+      className={classNames(classes.root, active && classes.active, className)}
+      component="span"
+      disableRipple
+      {...other}
+    >
       {children}
-      <ArrowDownwardIcon className={classNames(classes.icon, classes[`iconDirection${capitalize(direction)}`])} />
-    </ButtonBase>;
+      <ArrowDownwardIcon
+        className={classNames(
+          classes.icon,
+          classes[`iconDirection${capitalize(direction)}`]
+        )}
+      />
+    </ButtonBase>
+  );
 }
 
-const defaultProps = TableSortLabel.defaultProps = {
+const defaultProps = (TableSortLabel.defaultProps = {
   active: false,
-  direction: 'desc'
-};
+  direction: "desc"
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/TableSortLabel/TableSortLabel').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/TableSortLabel/TableSortLabel').Shape>}
+ */
 export const TableSortLabelCreator = withStyles(styles, TableSortLabel, {
   isMui: true,
   defaultProps
 });
 const TableSortLabelComponent = TableSortLabelCreator();
-if (TableSortLabel.muiName) TableSortLabelComponent.muiName = TableSortLabel.muiName;
+if (TableSortLabel.muiName)
+  TableSortLabelComponent.muiName = TableSortLabel.muiName;
 export default TableSortLabelComponent;

@@ -1,16 +1,23 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 // @inheritedComponent Transition
-import React from 'react';
-import PropTypes from 'prop-types';
-import Transition from 'react-transition-group/Transition';
-import { duration } from '../styles/transitions';
-import withTheme from '../styles/withTheme';
-import { reflow, getTransitionProps } from '../transitions/utils';
+import React from "react";
+import PropTypes from "prop-types";
+import Transition from "react-transition-group/Transition";
+import { duration } from "../styles/transitions";
+import withTheme from "../styles/withTheme";
+import { reflow, getTransitionProps } from "../transitions/utils";
 const styles = {
   entering: {
-    transform: 'scale(1)'
+    transform: "scale(1)"
   },
   entered: {
-    transform: 'scale(1)'
+    transform: "scale(1)"
   }
 };
 /**
@@ -21,30 +28,38 @@ const styles = {
 
 class Zoom extends React.Component {
   handleEnter = node => {
-    const {
-      theme
-    } = this.props;
+    const { theme } = this.props;
     reflow(node); // So the animation always start from the start.
 
     const transitionProps = getTransitionProps(this.props, {
-      mode: 'enter'
+      mode: "enter"
     });
-    node.style.webkitTransition = theme.transitions.create('transform', transitionProps);
-    node.style.transition = theme.transitions.create('transform', transitionProps);
+    node.style.webkitTransition = theme.transitions.create(
+      "transform",
+      transitionProps
+    );
+    node.style.transition = theme.transitions.create(
+      "transform",
+      transitionProps
+    );
 
     if (this.props.onEnter) {
       this.props.onEnter(node);
     }
   };
   handleExit = node => {
-    const {
-      theme
-    } = this.props;
+    const { theme } = this.props;
     const transitionProps = getTransitionProps(this.props, {
-      mode: 'exit'
+      mode: "exit"
     });
-    node.style.webkitTransition = theme.transitions.create('transform', transitionProps);
-    node.style.transition = theme.transitions.create('transform', transitionProps);
+    node.style.webkitTransition = theme.transitions.create(
+      "transform",
+      transitionProps
+    );
+    node.style.transition = theme.transitions.create(
+      "transform",
+      transitionProps
+    );
 
     if (this.props.onExit) {
       this.props.onExit(node);
@@ -60,65 +75,75 @@ class Zoom extends React.Component {
       theme,
       ...other
     } = this.props;
-    const style = { ...styleProp,
+    const style = {
+      ...styleProp,
       ...(React.isValidElement(children) ? children.props.style : {})
     };
-    return <Transition appear onEnter={this.handleEnter} onExit={this.handleExit} {...other}>
+    return (
+      <Transition
+        appear
+        onEnter={this.handleEnter}
+        onExit={this.handleExit}
+        {...other}
+      >
         {(state, childProps) => {
-        return React.cloneElement(children, {
-          style: {
-            transform: 'scale(0)',
-            willChange: 'transform',
-            ...styles[state],
-            ...style
-          },
-          ...childProps
-        });
-      }}
-      </Transition>;
+          return React.cloneElement(children, {
+            style: {
+              transform: "scale(0)",
+              willChange: "transform",
+              ...styles[state],
+              ...style
+            },
+            ...childProps
+          });
+        }}
+      </Transition>
+    );
   }
-
 }
 
 Zoom.propTypes = {
   /**
-     * A single child content element.
-     */
+   * A single child content element.
+   */
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 
   /**
-     * If `true`, the component will transition in.
-     */
+   * If `true`, the component will transition in.
+   */
   in: PropTypes.bool,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   onEnter: PropTypes.func,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   onExit: PropTypes.func,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   style: PropTypes.object,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   theme: PropTypes.object.isRequired,
 
   /**
-     * The duration for the transition, in milliseconds.
-     * You may specify a single timeout for all transitions, or individually with an object.
-     */
-  timeout: PropTypes.oneOfType([PropTypes.number, PropTypes.shape({
-    enter: PropTypes.number,
-    exit: PropTypes.number
-  })])
+   * The duration for the transition, in milliseconds.
+   * You may specify a single timeout for all transitions, or individually with an object.
+   */
+  timeout: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.shape({
+      enter: PropTypes.number,
+      exit: PropTypes.number
+    })
+  ])
 };
 Zoom.defaultProps = {
   timeout: {

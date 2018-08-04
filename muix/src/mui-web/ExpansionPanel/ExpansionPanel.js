@@ -1,20 +1,30 @@
-// @inheritedComponent Paper
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import warning from 'warning';
-import Collapse from '../Collapse';
-import Paper from "../Paper/Paper";
-import withStyles from '../styles/withStyles';
-import { isMuiElement } from '../utils/reactHelpers'; // Workaround https://github.com/jsdom/jsdom/issues/2026
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-const edgeFix = typeof window !== 'undefined' && /jsdom/.test(window.navigator.userAgent) ? {} : {
-  // Fix a rendering issue on Edge
-  '@supports (-ms-ime-align: auto)': {
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0
-  }
-};
+// @inheritedComponent Paper
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import warning from "warning";
+import Collapse from "../Collapse";
+import Paper from "../Paper/Paper";
+import withStyles from "../styles/withStyles";
+import { isMuiElement } from "../utils/reactHelpers"; // Workaround https://github.com/jsdom/jsdom/issues/2026
+
+const edgeFix =
+  typeof window !== "undefined" && /jsdom/.test(window.navigator.userAgent)
+    ? {}
+    : {
+        // Fix a rendering issue on Edge
+        "@supports (-ms-ime-align: auto)": {
+          borderBottomLeftRadius: 0,
+          borderBottomRightRadius: 0
+        }
+      };
 export const styles = theme => {
   const transition = {
     duration: theme.transitions.duration.shortest
@@ -22,10 +32,10 @@ export const styles = theme => {
   return {
     /* Styles applied to the root element. */
     root: {
-      position: 'relative',
-      transition: theme.transitions.create(['margin'], transition),
-      '&:before': {
-        position: 'absolute',
+      position: "relative",
+      transition: theme.transitions.create(["margin"], transition),
+      "&:before": {
+        position: "absolute",
         left: 0,
         top: -1,
         right: 0,
@@ -33,37 +43,40 @@ export const styles = theme => {
         content: '""',
         opacity: 1,
         backgroundColor: theme.palette.divider,
-        transition: theme.transitions.create(['opacity', 'background-color'], transition)
+        transition: theme.transitions.create(
+          ["opacity", "background-color"],
+          transition
+        )
       },
-      '&:first-child': {
+      "&:first-child": {
         borderTopLeftRadius: 2,
         borderTopRightRadius: 2,
-        '&:before': {
-          display: 'none'
+        "&:before": {
+          display: "none"
         }
       },
-      '&:last-child': {
+      "&:last-child": {
         borderBottomLeftRadius: 2,
         borderBottomRightRadius: 2,
         ...edgeFix
       },
-      '&.expanded28 + &': {
-        '&:before': {
-          display: 'none'
+      "&.expanded28 + &": {
+        "&:before": {
+          display: "none"
         }
       }
     },
 
     /* Styles applied to the root element if `expanded={true}`. */
     expanded: {
-      margin: '16px 0',
-      '&:first-child': {
+      margin: "16px 0",
+      "&:first-child": {
         marginTop: 0
       },
-      '&:last-child': {
+      "&:last-child": {
         marginBottom: 0
       },
-      '&:before': {
+      "&:before": {
         opacity: 0
       },
       NAME$expanded28: true
@@ -85,13 +98,16 @@ class ExpansionPanel extends React.Component {
 
     if (!this.isControlled) {
       // not controlled, use internal state
-      this.state.expanded = props.defaultExpanded !== undefined ? props.defaultExpanded : false;
+      this.state.expanded =
+        props.defaultExpanded !== undefined ? props.defaultExpanded : false;
     }
   }
 
   state = {};
   handleChange = event => {
-    const expanded = this.isControlled ? this.props.expanded : this.state.expanded;
+    const expanded = this.isControlled
+      ? this.props.expanded
+      : this.state.expanded;
 
     if (!this.isControlled) {
       this.setState({
@@ -106,12 +122,7 @@ class ExpansionPanel extends React.Component {
 
   render() {
     const {
-      $system: {
-        classNames,
-        classNamesStr,
-        classNamesAny,
-        theme
-      },
+      $system: { classNames, classNamesStr, classNamesAny, theme },
       children: childrenProp,
       classes,
       className: classNameProp,
@@ -123,16 +134,27 @@ class ExpansionPanel extends React.Component {
       ...other
     } = this.props;
     const expanded = this.isControlled ? expandedProp : this.state.expanded;
-    const className = classNames(classes.root, expanded && classes.expanded, disabled && classes.disabled, classNameProp);
+    const className = classNames(
+      classes.root,
+      expanded && classes.expanded,
+      disabled && classes.disabled,
+      classNameProp
+    );
     let summary = null;
     const children = React.Children.map(childrenProp, child => {
       if (!React.isValidElement(child)) {
         return null;
       }
 
-      warning(child.type !== React.Fragment, ["Material-UI: the ExpansionPanel component doesn't accept a Fragment as a child.", 'Consider providing an array instead.'].join('\n'));
+      warning(
+        child.type !== React.Fragment,
+        [
+          "Material-UI: the ExpansionPanel component doesn't accept a Fragment as a child.",
+          "Consider providing an array instead."
+        ].join("\n")
+      );
 
-      if (isMuiElement(child, ['ExpansionPanelSummary'])) {
+      if (isMuiElement(child, ["ExpansionPanelSummary"])) {
         summary = React.cloneElement(child, {
           disabled,
           expanded,
@@ -143,31 +165,40 @@ class ExpansionPanel extends React.Component {
 
       return child;
     });
-    const CollapseProps = !expanded ? {
-      'aria-hidden': 'true'
-    } : null;
-    return <Paper className={className} elevation={1} square {...other}>
+    const CollapseProps = !expanded
+      ? {
+          "aria-hidden": "true"
+        }
+      : null;
+    return (
+      <Paper className={className} elevation={1} square {...other}>
         {summary}
-        <Collapse in={expanded} timeout="auto" {...CollapseProps} {...CollapsePropsProp}>
+        <Collapse
+          in={expanded}
+          timeout="auto"
+          {...CollapseProps}
+          {...CollapsePropsProp}
+        >
           {children}
         </Collapse>
-      </Paper>;
+      </Paper>
+    );
   }
-
 }
 
-const defaultProps = ExpansionPanel.defaultProps = {
+const defaultProps = (ExpansionPanel.defaultProps = {
   defaultExpanded: false,
   disabled: false
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ExpansionPanel/ExpansionPanel').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ExpansionPanel/ExpansionPanel').Shape>}
+ */
 export const ExpansionPanelCreator = withStyles(styles, ExpansionPanel, {
   isMui: true,
   defaultProps
 });
 const ExpansionPanelComponent = ExpansionPanelCreator();
-if (ExpansionPanel.muiName) ExpansionPanelComponent.muiName = ExpansionPanel.muiName;
+if (ExpansionPanel.muiName)
+  ExpansionPanelComponent.muiName = ExpansionPanel.muiName;
 export default ExpansionPanelComponent;

@@ -1,10 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import exactProp from '../utils/exactProp';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
+import exactProp from "../utils/exactProp";
 
 function setRef(ref, value) {
-  if (typeof ref === 'function') {
+  if (typeof ref === "function") {
     ref(value);
   } else if (ref) {
     ref.current = value;
@@ -41,7 +48,6 @@ function setRef(ref, value) {
  * ```
  */
 
-
 class RootRef extends React.Component {
   componentDidMount() {
     setRef(this.props.rootRef, ReactDOM.findDOMNode(this));
@@ -61,19 +67,18 @@ class RootRef extends React.Component {
   render() {
     return this.props.children;
   }
-
 }
 
 RootRef.propTypes = {
   /**
-     * The wrapped element.
-     */
+   * The wrapped element.
+   */
   children: PropTypes.element.isRequired,
 
   /**
-     * Provide a way to access the DOM node of the wrapped element.
-     * You can provide a callback ref or a `React.createRef()` ref.
-     */
+   * Provide a way to access the DOM node of the wrapped element.
+   * You can provide a callback ref or a `React.createRef()` ref.
+   */
   rootRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired
 };
 RootRef.propTypes = exactProp(RootRef.propTypes);

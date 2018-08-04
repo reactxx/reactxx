@@ -1,3 +1,10 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 function easeInOutSin(time) {
   return (1 + Math.sin(Math.PI * time - Math.PI / 2)) / 2;
 }
@@ -6,7 +13,6 @@ function animate(prop, element, to, options = {}, cb = () => {}) {
   const {
     ease = easeInOutSin,
     duration = 300 // standard
-
   } = options;
   let start = null;
   const from = element[prop];
@@ -18,7 +24,7 @@ function animate(prop, element, to, options = {}, cb = () => {}) {
 
   const step = timestamp => {
     if (cancelled) {
-      cb(new Error('Animation cancelled'));
+      cb(new Error("Animation cancelled"));
       return;
     }
 
@@ -40,7 +46,7 @@ function animate(prop, element, to, options = {}, cb = () => {}) {
   };
 
   if (from === to) {
-    cb(new Error('Element already at target position'));
+    cb(new Error("Element already at target position"));
     return cancel;
   }
 

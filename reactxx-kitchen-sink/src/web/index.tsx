@@ -33,7 +33,8 @@ import Button from 'reactxx-mui-web/Button'
 //import App from '../common/muix/badge'
 //import App from '../common/muix/bottom-navigation'
 //import App from '../common/muix/cards'
-import App from '../common/muix/chips'
+//import App from '../common/muix/chips'
+import App from '../common/muix/dialogs'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

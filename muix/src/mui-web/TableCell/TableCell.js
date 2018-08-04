@@ -1,22 +1,34 @@
-import React from 'react';
-import { toAtomic } from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import { capitalize } from '../utils/helpers';
-import { darken, fade, lighten } from '../styles/colorManipulator';
+import React from "react";
+import { toAtomic } from "../styles/withStyles";
+
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
+import { capitalize } from "../utils/helpers";
+import { darken, fade, lighten } from "../styles/colorManipulator";
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: { ...toAtomic('padding', '4px 56px 4px 24px'),
-    display: 'table-cell',
-    verticalAlign: 'inherit',
+  root: {
+    ...toAtomic("padding", "4px 56px 4px 24px"),
+    display: "table-cell",
+    verticalAlign: "inherit",
     // Workaround for a rendering bug with spanned columns in Chrome 62.0.
     // Removes the alpha (sets it to 1), and lightens or darkens the theme color.
     borderBottom: `1px solid
-    ${theme.palette.type === 'light' ? lighten(fade(theme.palette.divider, 1), 0.88) : darken(fade(theme.palette.divider, 1), 0.8)}`,
-    textAlign: 'left',
-    '&:last-child': {
+    ${
+      theme.palette.type === "light"
+        ? lighten(fade(theme.palette.divider, 1), 0.88)
+        : darken(fade(theme.palette.divider, 1), 0.8)
+    }`,
+    textAlign: "left",
+    "&:last-child": {
       paddingRight: 24
     }
   },
@@ -44,9 +56,8 @@ export const styles = theme => ({
 
   /* Styles applied to the root element if `numeric={true}`. */
   numeric: {
-    textAlign: 'right',
-    flexDirection: 'row-reverse' // can be dynamically inherited at runtime by contents
-
+    textAlign: "right",
+    flexDirection: "row-reverse" // can be dynamically inherited at runtime by contents
   },
 
   /* Styles applied to the root element if `padding="dense"`. */
@@ -55,27 +66,25 @@ export const styles = theme => ({
   },
 
   /* Styles applied to the root element if `padding="checkbox"`. */
-  paddingCheckbox: { ...toAtomic('padding', '0 12px'),
-    '&:last-child': {
+  paddingCheckbox: {
+    ...toAtomic("padding", "0 12px"),
+    "&:last-child": {
       paddingRight: 12
     }
   },
 
   /* Styles applied to the root element if `padding="none"`. */
-  paddingNone: { ...toAtomic('padding', 0),
-    '&:last-child': { ...toAtomic('padding', 0)
+  paddingNone: {
+    ...toAtomic("padding", 0),
+    "&:last-child": {
+      ...toAtomic("padding", 0)
     }
   }
 });
 
 function TableCell(props, context) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     children,
     classes,
     className: classNameProp,
@@ -87,46 +96,59 @@ function TableCell(props, context) {
     variant,
     ...other
   } = props;
-  const {
-    table
-  } = context;
+  const { table } = context;
   let Component;
 
   if (component) {
     Component = component;
   } else {
-    Component = table && table.head ? 'th' : 'td';
+    Component = table && table.head ? "th" : "td";
   }
 
   let scope = scopeProp;
 
   if (!scope && table && table.head) {
-    scope = 'col';
+    scope = "col";
   }
 
-  const className = classNames(classes.root, (variant ? variant === 'head' : table && table.head) && classes.head, (variant ? variant === 'body' : table && table.body) && classes.body, (variant ? variant === 'footer' : table && table.footer) && classes.footer, numeric && classes.numeric, padding !== 'default' && classes[`padding${capitalize(padding)}`], classNameProp);
+  const className = classNames(
+    classes.root,
+    (variant ? variant === "head" : table && table.head) && classes.head,
+    (variant ? variant === "body" : table && table.body) && classes.body,
+    (variant ? variant === "footer" : table && table.footer) && classes.footer,
+    numeric && classes.numeric,
+    padding !== "default" && classes[`padding${capitalize(padding)}`],
+    classNameProp
+  );
   let ariaSort = null;
 
   if (sortDirection) {
-    ariaSort = sortDirection === 'asc' ? 'ascending' : 'descending';
+    ariaSort = sortDirection === "asc" ? "ascending" : "descending";
   }
 
-  return <Component className={classNamesAny(Component, className)} aria-sort={ariaSort} scope={scope} {...other}>
+  return (
+    <Component
+      className={classNamesAny(Component, className)}
+      aria-sort={ariaSort}
+      scope={scope}
+      {...other}
+    >
       {children}
-    </Component>;
+    </Component>
+  );
 }
 
 TableCell.contextTypes = {
   table: PropTypes.object.isRequired
 };
-const defaultProps = TableCell.defaultProps = {
+const defaultProps = (TableCell.defaultProps = {
   numeric: false,
-  padding: 'default'
-};
+  padding: "default"
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/TableCell/TableCell').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/TableCell/TableCell').Shape>}
+ */
 export const TableCellCreator = withStyles(styles, TableCell, {
   isMui: true,
   defaultProps

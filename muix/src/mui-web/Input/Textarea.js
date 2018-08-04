@@ -1,41 +1,49 @@
-import React from 'react';
-import { toAtomic } from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import debounce from 'debounce'; // < 1kb payload overhead when lodash/debounce is > 3kb.
+import React from "react";
+import { toAtomic } from "../styles/withStyles";
 
-import EventListener from 'react-event-listener';
-import withStyles from '../styles/withStyles';
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import debounce from "debounce"; // < 1kb payload overhead when lodash/debounce is > 3kb.
+
+import EventListener from "react-event-listener";
+import withStyles from "../styles/withStyles";
 const ROWS_HEIGHT = 19;
 export const styles = {
   /* Styles applied to the root element. */
   root: {
-    position: 'relative',
+    position: "relative",
     // because the shadow has position: 'absolute',
-    width: '100%'
+    width: "100%"
   },
-  textarea: { ...toAtomic('padding', 0),
-    width: '100%',
-    height: '100%',
-    resize: 'none',
-    font: 'inherit',
-    cursor: 'inherit',
-    boxSizing: 'border-box',
-    lineHeight: 'inherit',
-    border: 'none',
-    outline: 'none',
-    background: 'transparent'
+  textarea: {
+    ...toAtomic("padding", 0),
+    width: "100%",
+    height: "100%",
+    resize: "none",
+    font: "inherit",
+    cursor: "inherit",
+    boxSizing: "border-box",
+    lineHeight: "inherit",
+    border: "none",
+    outline: "none",
+    background: "transparent"
   },
   shadow: {
     // Overflow also needed to here to remove the extra row
     // added to textareas in Firefox.
-    overflow: 'hidden',
+    overflow: "hidden",
     // Visibility needed to hide the extra text area on ipads
-    visibility: 'hidden',
-    position: 'absolute',
-    height: 'auto',
-    whiteSpace: 'pre-wrap'
+    visibility: "hidden",
+    position: "absolute",
+    height: "auto",
+    whiteSpace: "pre-wrap"
   }
 };
 /**
@@ -56,7 +64,7 @@ class Textarea extends React.Component {
     super(props); // <Input> expects the components it renders to respond to 'value'
     // so that it can check whether they are filled.
 
-    this.value = props.value || props.defaultValue || '';
+    this.value = props.value || props.defaultValue || "";
     this.state = {
       height: Number(props.rows) * ROWS_HEIGHT
     };
@@ -80,12 +88,10 @@ class Textarea extends React.Component {
 
   handleRefInput = ref => {
     this.inputRef = ref;
-    const {
-      textareaRef
-    } = this.props;
+    const { textareaRef } = this.props;
 
     if (textareaRef) {
-      if (typeof textareaRef === 'function') {
+      if (typeof textareaRef === "function") {
         textareaRef(ref);
       } else {
         textareaRef.current = ref;
@@ -117,7 +123,7 @@ class Textarea extends React.Component {
 
     if (this.isControlled) {
       // The component is controlled, we need to update the shallow value.
-      this.shadowRef.value = props.value == null ? '' : String(props.value);
+      this.shadowRef.value = props.value == null ? "" : String(props.value);
     }
 
     const lineHeight = this.singlelineShadowRef.scrollHeight;
@@ -144,12 +150,7 @@ class Textarea extends React.Component {
 
   render() {
     const {
-      $system: {
-        classNames,
-        classNamesStr,
-        classNamesAny,
-        theme
-      },
+      $system: { classNames, classNamesStr, classNamesAny, theme },
       classes,
       className,
       defaultValue,
@@ -160,25 +161,54 @@ class Textarea extends React.Component {
       value,
       ...other
     } = this.props;
-    return <div className={classNamesStr(classes.root)} style={{
-      height: this.state.height
-    }}>
+    return (
+      <div
+        className={classNamesStr(classes.root)}
+        style={{
+          height: this.state.height
+        }}
+      >
         <EventListener target="window" onResize={this.handleResize} />
-        <textarea aria-hidden="true" className={classNamesStr(classes.textarea, classes.shadow)} readOnly ref={this.handleRefSinglelineShadow} rows="1" tabIndex={-1} value="" />
-        <textarea aria-hidden="true" className={classNamesStr(classes.textarea, classes.shadow)} defaultValue={defaultValue} readOnly ref={this.handleRefShadow} rows={rows} tabIndex={-1} value={value} />
-        <textarea rows={rows} className={classNamesStr(classes.textarea, className)} defaultValue={defaultValue} value={value} onChange={this.handleChange} ref={this.handleRefInput} {...other} />
-      </div>;
+        <textarea
+          aria-hidden="true"
+          className={classNamesStr(classes.textarea, classes.shadow)}
+          readOnly
+          ref={this.handleRefSinglelineShadow}
+          rows="1"
+          tabIndex={-1}
+          value=""
+        />
+        <textarea
+          aria-hidden="true"
+          className={classNamesStr(classes.textarea, classes.shadow)}
+          defaultValue={defaultValue}
+          readOnly
+          ref={this.handleRefShadow}
+          rows={rows}
+          tabIndex={-1}
+          value={value}
+        />
+        <textarea
+          rows={rows}
+          className={classNamesStr(classes.textarea, className)}
+          defaultValue={defaultValue}
+          value={value}
+          onChange={this.handleChange}
+          ref={this.handleRefInput}
+          {...other}
+        />
+      </div>
+    );
   }
-
 }
 
-const defaultProps = Textarea.defaultProps = {
+const defaultProps = (Textarea.defaultProps = {
   rows: 1
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Input/Textarea').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Input/Textarea').Shape>}
+ */
 export const TextareaCreator = withStyles(styles, Textarea, {
   isMui: true,
   defaultProps

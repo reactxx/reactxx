@@ -1,7 +1,14 @@
-//      
-import PropTypes from 'prop-types'; // Same value used by react-jss
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-export const CHANNEL = '__THEMING__';
+//
+import PropTypes from "prop-types"; // Same value used by react-jss
+
+export const CHANNEL = "__THEMING__";
 const themeListener = {
   contextTypes: {
     [CHANNEL]: PropTypes.object
@@ -26,6 +33,5 @@ const themeListener = {
       context[CHANNEL].unsubscribe(subscriptionId);
     }
   }
-
 };
 export default themeListener;

@@ -1,15 +1,31 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 //       weak
 function requirePropFactory(componentNameInError) {
   /* istanbul ignore if */
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === "production") {
     return () => null;
   }
 
-  const requireProp = requiredProp => (props, propName, componentName, location, propFullName) => {
+  const requireProp = requiredProp => (
+    props,
+    propName,
+    componentName,
+    location,
+    propFullName
+  ) => {
     const propFullNameSafe = propFullName || propName;
 
-    if (typeof props[propName] !== 'undefined' && !props[requiredProp]) {
-      return new Error(`The property \`${propFullNameSafe}\` of ` + `\`${componentNameInError}\` must be used on \`${requiredProp}\`.`);
+    if (typeof props[propName] !== "undefined" && !props[requiredProp]) {
+      return new Error(
+        `The property \`${propFullNameSafe}\` of ` +
+          `\`${componentNameInError}\` must be used on \`${requiredProp}\`.`
+      );
     }
 
     return null;

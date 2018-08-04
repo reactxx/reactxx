@@ -1,17 +1,24 @@
-//      
-import deepmerge from 'deepmerge'; // < 1kb payload overhead when lodash/merge is > 3kb.
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-import isPlainObject from 'is-plain-object';
-import warning from 'warning';
-import createBreakpoints from './createBreakpoints';
-import createMixins from './createMixins';
-import createPalette from './createPalette';
-import createTypography from './createTypography';
-import shadows from './shadows';
-import shape from './shape';
-import spacing from './spacing';
-import transitions from './transitions';
-import zIndex from './zIndex';
+//
+import deepmerge from "deepmerge"; // < 1kb payload overhead when lodash/merge is > 3kb.
+
+import isPlainObject from "is-plain-object";
+import warning from "warning";
+import createBreakpoints from "./createBreakpoints";
+import createMixins from "./createMixins";
+import createPalette from "./createPalette";
+import createTypography from "./createTypography";
+import shadows from "./shadows";
+import shape from "./shape";
+import spacing from "./spacing";
+import transitions from "./transitions";
+import zIndex from "./zIndex";
 
 function createMuiTheme(options = {}) {
   const {
@@ -26,7 +33,7 @@ function createMuiTheme(options = {}) {
   const breakpoints = createBreakpoints(breakpointsInput);
   const muiTheme = {
     breakpoints,
-    direction: 'ltr',
+    direction: "ltr",
     mixins: createMixins(breakpoints, spacing, mixinsInput),
     overrides: {},
     // Inject custom styles
@@ -35,16 +42,23 @@ function createMuiTheme(options = {}) {
     // Inject custom properties
     shadows: shadowsInput || shadows,
     typography: createTypography(palette, typographyInput),
-    ...deepmerge({
-      shape,
-      spacing,
-      transitions,
-      zIndex
-    }, other, {
-      isMergeableObject: isPlainObject
-    })
+    ...deepmerge(
+      {
+        shape,
+        spacing,
+        transitions,
+        zIndex
+      },
+      other,
+      {
+        isMergeableObject: isPlainObject
+      }
+    )
   };
-  warning(muiTheme.shadows.length === 25, 'Material-UI: the shadows array provided to createMuiTheme should support 25 elevations.');
+  warning(
+    muiTheme.shadows.length === 25,
+    "Material-UI: the shadows array provided to createMuiTheme should support 25 elevations."
+  );
   return muiTheme;
 }
 

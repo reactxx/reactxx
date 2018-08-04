@@ -6,6 +6,8 @@
 //https://github.com/isaacs/node-glob
 
 //https://github.com/rse/astq
+export const MUI_VERSION = 'v1.4.2'
+
 const driver = 'd:/'
 const basicReactXX = driver + 'reactxx/muix/'
 export const src = basicReactXX + 'src/mui-web/'

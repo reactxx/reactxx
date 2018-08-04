@@ -1,18 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import { capitalize } from '../utils/helpers';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
+import { capitalize } from "../utils/helpers";
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    userSelect: 'none',
+    userSelect: "none",
     fontSize: 24,
-    width: '1em',
-    height: '1em',
+    width: "1em",
+    height: "1em",
     // Chrome fix for https://bugs.chromium.org/p/chromium/issues/detail?id=820541
     // To remove at some point.
-    overflow: 'hidden',
+    overflow: "hidden",
     flexShrink: 0
   },
 
@@ -41,18 +48,13 @@ export const styles = theme => ({
     color: theme.palette.action.disabled
   },
   fontSizeInherit: {
-    fontSize: 'inherit'
+    fontSize: "inherit"
   }
 });
 
 function Icon(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     children,
     classes,
     className,
@@ -60,20 +62,32 @@ function Icon(props) {
     fontSize,
     ...other
   } = props;
-  return <span className={classNamesStr('material-icons', classes.root, color !== 'inherit' && classes[`color${capitalize(color)}`], fontSize !== 'default' && classes[`fontSize${capitalize(fontSize)}`], className)} aria-hidden="true" {...other}>
+  return (
+    <span
+      className={classNamesStr(
+        "material-icons",
+        classes.root,
+        color !== "inherit" && classes[`color${capitalize(color)}`],
+        fontSize !== "default" && classes[`fontSize${capitalize(fontSize)}`],
+        className
+      )}
+      aria-hidden="true"
+      {...other}
+    >
       {children}
-    </span>;
+    </span>
+  );
 }
 
-Icon.muiName = 'Icon';
-const defaultProps = Icon.defaultProps = {
-  color: 'inherit',
-  fontSize: 'default'
-};
+Icon.muiName = "Icon";
+const defaultProps = (Icon.defaultProps = {
+  color: "inherit",
+  fontSize: "default"
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Icon/Icon').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Icon/Icon').Shape>}
+ */
 export const IconCreator = withStyles(styles, Icon, {
   isMui: true,
   defaultProps

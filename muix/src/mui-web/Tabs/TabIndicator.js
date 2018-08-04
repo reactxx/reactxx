@@ -1,17 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import { capitalize } from '../utils/helpers';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
+import { capitalize } from "../utils/helpers";
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    position: 'absolute',
+    position: "absolute",
     height: 2,
     bottom: 0,
-    width: '100%',
+    width: "100%",
     transition: theme.transitions.create(),
-    willChange: 'left, width'
+    willChange: "left, width"
   },
 
   /* Styles applied to the root element if `color="primary"`. */
@@ -30,25 +37,29 @@ export const styles = theme => ({
 
 function TabIndicator(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     classes,
     className,
     color,
     ...other
   } = props;
-  return <span className={classNamesStr(classes.root, classes[`color${capitalize(color)}`], className)} {...other} />;
+  return (
+    <span
+      className={classNamesStr(
+        classes.root,
+        classes[`color${capitalize(color)}`],
+        className
+      )}
+      {...other}
+    />
+  );
 }
 
-const defaultProps = TabIndicator.defaultProps = {};
+const defaultProps = (TabIndicator.defaultProps = {});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Tabs/TabIndicator').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Tabs/TabIndicator').Shape>}
+ */
 export const TabIndicatorCreator = withStyles(styles, TabIndicator, {
   isMui: true,
   defaultProps

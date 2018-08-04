@@ -1,19 +1,27 @@
-import React from 'react';
-import { toAtomic } from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import { isFilled, isAdornedStart } from '../Input/Input';
-import { capitalize } from '../utils/helpers';
-import { isMuiElement } from '../utils/reactHelpers';
+import React from "react";
+import { toAtomic } from "../styles/withStyles";
+
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
+import { isFilled, isAdornedStart } from "../Input/Input";
+import { capitalize } from "../utils/helpers";
+import { isMuiElement } from "../utils/reactHelpers";
 export const styles = {
   /* Styles applied to the root element. */
-  root: { ...toAtomic('padding', 0),
-    ...toAtomic('margin', 0),
-    display: 'inline-flex',
-    flexDirection: 'column',
-    position: 'relative',
+  root: {
+    ...toAtomic("padding", 0),
+    ...toAtomic("margin", 0),
+    display: "inline-flex",
+    flexDirection: "column",
+    position: "relative",
     // Reset fieldset default style
     minWidth: 0,
     border: 0
@@ -33,7 +41,7 @@ export const styles = {
 
   /* Styles applied to the root element if `fullWidth={true}`. */
   fullWidth: {
-    width: '100%'
+    width: "100%"
   }
 };
 /**
@@ -52,13 +60,11 @@ class FormControl extends React.Component {
     super(props); // We need to iterate through the children and find the Input in order
     // to fully support server side rendering.
 
-    const {
-      children
-    } = this.props;
+    const { children } = this.props;
 
     if (children) {
       React.Children.forEach(children, child => {
-        if (!isMuiElement(child, ['Input', 'Select', 'NativeSelect'])) {
+        if (!isMuiElement(child, ["Input", "Select", "NativeSelect"])) {
           return;
         }
 
@@ -66,7 +72,9 @@ class FormControl extends React.Component {
           this.state.filled = true;
         }
 
-        const input = isMuiElement(child, ['Select', 'NativeSelect']) ? child.props.input : child;
+        const input = isMuiElement(child, ["Select", "NativeSelect"])
+          ? child.props.input
+          : child;
 
         if (input && isAdornedStart(input.props)) {
           this.state.adornedStart = true;
@@ -82,17 +90,8 @@ class FormControl extends React.Component {
   };
 
   getChildContext() {
-    const {
-      disabled,
-      error,
-      required,
-      margin
-    } = this.props;
-    const {
-      adornedStart,
-      filled,
-      focused
-    } = this.state;
+    const { disabled, error, required, margin } = this.props;
+    const { adornedStart, filled, focused } = this.state;
     return {
       muiFormControl: {
         adornedStart,
@@ -111,14 +110,24 @@ class FormControl extends React.Component {
   }
 
   handleFocus = () => {
-    this.setState(state => !state.focused ? {
-      focused: true
-    } : null);
+    this.setState(
+      state =>
+        !state.focused
+          ? {
+              focused: true
+            }
+          : null
+    );
   };
   handleBlur = () => {
-    this.setState(state => state.focused ? {
-      focused: false
-    } : null);
+    this.setState(
+      state =>
+        state.focused
+          ? {
+              focused: false
+            }
+          : null
+    );
   };
   handleDirty = () => {
     if (!this.state.filled) {
@@ -137,12 +146,7 @@ class FormControl extends React.Component {
 
   render() {
     const {
-      $system: {
-        classNames,
-        classNamesStr,
-        classNamesAny,
-        theme
-      },
+      $system: { classNames, classNamesStr, classNamesAny, theme },
       classes,
       className,
       component: Component,
@@ -153,26 +157,36 @@ class FormControl extends React.Component {
       required,
       ...other
     } = this.props;
-    return <Component className={classNamesAny(Component, classes.root, margin !== 'none' && classes[`margin${capitalize(margin)}`], fullWidth && classes.fullWidth, className)} {...other} />;
+    return (
+      <Component
+        className={classNamesAny(
+          Component,
+          classes.root,
+          margin !== "none" && classes[`margin${capitalize(margin)}`],
+          fullWidth && classes.fullWidth,
+          className
+        )}
+        {...other}
+      />
+    );
   }
-
 }
 
 FormControl.childContextTypes = {
   muiFormControl: PropTypes.object
 };
-const defaultProps = FormControl.defaultProps = {
-  component: 'div',
+const defaultProps = (FormControl.defaultProps = {
+  component: "div",
   disabled: false,
   error: false,
   fullWidth: false,
-  margin: 'none',
+  margin: "none",
   required: false
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/FormControl/FormControl').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/FormControl/FormControl').Shape>}
+ */
 export const FormControlCreator = withStyles(styles, FormControl, {
   isMui: true,
   defaultProps

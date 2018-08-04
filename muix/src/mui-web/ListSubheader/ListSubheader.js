@@ -1,14 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import { capitalize } from '../utils/helpers';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
+import { capitalize } from "../utils/helpers";
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: theme.mixins.gutters({
-    boxSizing: 'border-box',
-    lineHeight: '48px',
-    listStyle: 'none',
+    boxSizing: "border-box",
+    lineHeight: "48px",
+    listStyle: "none",
     color: theme.palette.text.secondary,
     fontFamily: theme.typography.fontFamily,
     fontWeight: theme.typography.fontWeightMedium,
@@ -22,7 +29,7 @@ export const styles = theme => ({
 
   /* Styles applied to the root element if `color="inherit"`. */
   colorInherit: {
-    color: 'inherit'
+    color: "inherit"
   },
 
   /* Styles applied to the root element if `inset={true}`. */
@@ -32,21 +39,16 @@ export const styles = theme => ({
 
   /* Styles applied to the root element if `disableSticky={false}`. */
   sticky: {
-    position: 'sticky',
+    position: "sticky",
     top: 0,
     zIndex: 1,
-    backgroundColor: 'inherit'
+    backgroundColor: "inherit"
   }
 });
 
 function ListSubheader(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     classes,
     className,
     color,
@@ -55,24 +57,37 @@ function ListSubheader(props) {
     inset,
     ...other
   } = props;
-  return <Component className={classNamesAny(Component, classes.root, color !== 'default' && classes[`color${capitalize(color)}`], inset && classes.inset, !disableSticky && classes.sticky, className)} {...other} />;
+  return (
+    <Component
+      className={classNamesAny(
+        Component,
+        classes.root,
+        color !== "default" && classes[`color${capitalize(color)}`],
+        inset && classes.inset,
+        !disableSticky && classes.sticky,
+        className
+      )}
+      {...other}
+    />
+  );
 }
 
-ListSubheader.muiName = 'ListSubheader';
-const defaultProps = ListSubheader.defaultProps = {
-  color: 'default',
-  component: 'li',
+ListSubheader.muiName = "ListSubheader";
+const defaultProps = (ListSubheader.defaultProps = {
+  color: "default",
+  component: "li",
   disableSticky: false,
   inset: false
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListSubheader/ListSubheader').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListSubheader/ListSubheader').Shape>}
+ */
 export const ListSubheaderCreator = withStyles(styles, ListSubheader, {
   isMui: true,
   defaultProps
 });
 const ListSubheaderComponent = ListSubheaderCreator();
-if (ListSubheader.muiName) ListSubheaderComponent.muiName = ListSubheader.muiName;
+if (ListSubheader.muiName)
+  ListSubheaderComponent.muiName = ListSubheader.muiName;
 export default ListSubheaderComponent;

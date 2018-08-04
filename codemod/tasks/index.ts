@@ -14,6 +14,7 @@ import { registerSelectInput } from '../patch-code/Select/SelectInput'
 import { registerGrid } from '../patch-code/Grid/Grid'
 import { registerTabs } from '../patch-code/Tabs/Tabs'
 import { registerCollapse } from '../patch-code/Collapse/Collapse'
+import { registerInputLabel } from '../patch-code/InputLabel/InputLabel'
 
 export type Specials = { [path: string]: Ast.FileDescr }
 
@@ -26,6 +27,7 @@ registerSelectInput(specials)
 registerGrid(specials)
 registerTabs(specials)
 registerCollapse(specials)
+registerInputLabel(specials)
 
 export const codeMod = () => {
 

@@ -1,14 +1,23 @@
-import React from 'react';
-import pure from 'recompose/pure';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import pure from "recompose/pure";
 import SvgIcon from "../../SvgIcon/SvgIcon";
 /**
  * @ignore - internal component.
  */
 
-let CheckBoxOutlineBlank = props => <SvgIcon {...props}>
+let CheckBoxOutlineBlank = props => (
+  <SvgIcon {...props}>
     <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
-  </SvgIcon>;
+  </SvgIcon>
+);
 
 CheckBoxOutlineBlank = pure(CheckBoxOutlineBlank);
-CheckBoxOutlineBlank.muiName = 'SvgIcon';
+CheckBoxOutlineBlank.muiName = "SvgIcon";
 export default CheckBoxOutlineBlank;

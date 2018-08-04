@@ -1,14 +1,21 @@
-/* eslint-disable react/no-did-mount-set-state */
-import React from 'react';
-import PropTypes from 'prop-types';
-import EventListener from 'react-event-listener';
-import debounce from 'debounce'; // < 1kb payload overhead when lodash/debounce is > 3kb.
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-import wrapDisplayName from 'recompose/wrapDisplayName';
-import hoistNonReactStatics from 'hoist-non-react-statics';
-import withTheme from '../styles/withTheme';
-import { keys as breakpointKeys } from '../styles/createBreakpoints';
-import getThemeProps from '../styles/getThemeProps'; // By default, returns true if screen width is the same or greater than the given breakpoint.
+/* eslint-disable react/no-did-mount-set-state */
+import React from "react";
+import PropTypes from "prop-types";
+import EventListener from "react-event-listener";
+import debounce from "debounce"; // < 1kb payload overhead when lodash/debounce is > 3kb.
+
+import wrapDisplayName from "recompose/wrapDisplayName";
+import hoistNonReactStatics from "hoist-non-react-statics";
+import withTheme from "../styles/withTheme";
+import { keys as breakpointKeys } from "../styles/createBreakpoints";
+import getThemeProps from "../styles/getThemeProps"; // By default, returns true if screen width is the same or greater than the given breakpoint.
 
 export const isWidthUp = (breakpoint, width, inclusive = true) => {
   if (inclusive) {
@@ -32,7 +39,6 @@ const withWidth = (options = {}) => Component => {
     noSSR = false,
     initialWidth: initialWidthOption,
     resizeInterval = 166 // Corresponds to 10 frames at 60 Hz.
-
   } = options;
 
   class WithWidth extends React.Component {
@@ -76,12 +82,12 @@ const withWidth = (options = {}) => Component => {
       const breakpoints = this.props.theme.breakpoints;
       let width = null;
       /**
-             * Start with the slowest value as low end devices often have a small screen.
-             *
-             * innerWidth |xs      sm      md      lg      xl
-             *            |-------|-------|-------|-------|------>
-             * width      |  xs   |  sm   |  md   |  lg   |  xl
-             */
+       * Start with the slowest value as low end devices often have a small screen.
+       *
+       * innerWidth |xs      sm      md      lg      xl
+       *            |-------|-------|-------|-------|------>
+       * width      |  xs   |  sm   |  md   |  lg   |  xl
+       */
 
       let index = 1;
 
@@ -96,23 +102,22 @@ const withWidth = (options = {}) => Component => {
         index += 1;
       }
 
-      width = width || 'xl';
+      width = width || "xl";
       return width;
     }
 
     render() {
-      const {
-        initialWidth,
-        theme,
-        width,
-        innerRef,
-        ...other
-      } = this.props;
+      const { initialWidth, theme, width, innerRef, ...other } = this.props;
       const props = {
-        width: width || this.state.width || initialWidth || initialWidthOption || getThemeProps({
-          theme,
-          name: 'MuiWithWidth'
-        }).initialWidth,
+        width:
+          width ||
+          this.state.width ||
+          initialWidth ||
+          initialWidthOption ||
+          getThemeProps({
+            theme,
+            name: "MuiWithWidth"
+          }).initialWidth,
         ...other
       };
       const more = {};
@@ -126,48 +131,48 @@ const withWidth = (options = {}) => Component => {
       //
       // An alternative is to use the `initialWidth` property.
 
-
       if (props.width === undefined) {
         return null;
       }
 
-      return <EventListener target="window" onResize={this.handleResize}>
+      return (
+        <EventListener target="window" onResize={this.handleResize}>
           <Component {...more} {...props} ref={innerRef} />
-        </EventListener>;
+        </EventListener>
+      );
     }
-
   }
 
   WithWidth.propTypes = {
     /**
-         * As `window.innerWidth` is unavailable on the server,
-         * we default to rendering an empty component during the first mount.
-         * In some situation, you might want to use an heuristic to approximate
-         * the screen width of the client browser screen width.
-         *
-         * For instance, you could be using the user-agent or the client-hints.
-         * http://caniuse.com/#search=client%20hint
-         */
-    initialWidth: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+     * As `window.innerWidth` is unavailable on the server,
+     * we default to rendering an empty component during the first mount.
+     * In some situation, you might want to use an heuristic to approximate
+     * the screen width of the client browser screen width.
+     *
+     * For instance, you could be using the user-agent or the client-hints.
+     * http://caniuse.com/#search=client%20hint
+     */
+    initialWidth: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
 
     /**
-         * Use that property to pass a ref callback to the decorated component.
-         */
+     * Use that property to pass a ref callback to the decorated component.
+     */
     innerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
     /**
-         * @ignore
-         */
+     * @ignore
+     */
     theme: PropTypes.object.isRequired,
 
     /**
-         * Bypass the width calculation logic.
-         */
-    width: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl'])
+     * Bypass the width calculation logic.
+     */
+    width: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"])
   };
 
-  if (process.env.NODE_ENV !== 'production') {
-    WithWidth.displayName = wrapDisplayName(Component, 'WithWidth');
+  if (process.env.NODE_ENV !== "production") {
+    WithWidth.displayName = wrapDisplayName(Component, "WithWidth");
   }
 
   hoistNonReactStatics(WithWidth, Component);

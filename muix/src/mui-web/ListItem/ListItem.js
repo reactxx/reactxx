@@ -1,27 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
 import ButtonBase from "../ButtonBase/ButtonBase";
-import { isMuiElement } from '../utils/reactHelpers';
+import { isMuiElement } from "../utils/reactHelpers";
 export const styles = theme => ({
   /* Styles applied to the (normally root) `component` element. May be wrapped by a `container`. */
   root: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    position: 'relative',
-    textDecoration: 'none',
-    width: '100%',
-    boxSizing: 'border-box',
-    textAlign: 'left',
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    position: "relative",
+    textDecoration: "none",
+    width: "100%",
+    boxSizing: "border-box",
+    textAlign: "left",
     paddingTop: 12,
     paddingBottom: 12
   },
 
   /* Styles applied to the `container` element if `children` includes `ListItemSecondaryAction`. */
   container: {
-    position: 'relative'
+    position: "relative"
   },
   // TODO: Sanity check this - why is focusVisibleClassName prop apparently applied to a div?
 
@@ -47,7 +54,7 @@ export const styles = theme => ({
   /* Styles applied to the inner `component` element if `divider={true}`. */
   divider: {
     borderBottom: `1px solid ${theme.palette.divider}`,
-    backgroundClip: 'padding-box'
+    backgroundClip: "padding-box"
   },
 
   /* Styles applied to the inner `component` element if `disableGutters={false}`. */
@@ -55,15 +62,15 @@ export const styles = theme => ({
 
   /* Styles applied to the inner `component` element if `button={true}`. */
   button: {
-    transition: theme.transitions.create('background-color', {
+    transition: theme.transitions.create("background-color", {
       duration: theme.transitions.duration.shortest
     }),
-    '&:hover': {
-      textDecoration: 'none',
+    "&:hover": {
+      textDecoration: "none",
       backgroundColor: theme.palette.action.hover,
       // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: 'transparent'
+      "@media (hover: none)": {
+        backgroundColor: "transparent"
       }
     }
   },
@@ -85,22 +92,14 @@ class ListItem extends React.Component {
 
   render() {
     const {
-      $system: {
-        classNames,
-        classNamesStr,
-        classNamesAny,
-        theme
-      },
+      $system: { classNames, classNamesStr, classNamesAny, theme },
       button,
       children: childrenProp,
       classes,
       className: classNameProp,
       component: componentProp,
       ContainerComponent,
-      ContainerProps: {
-        className: ContainerClassName,
-        ...ContainerProps
-      } = {},
+      ContainerProps: { className: ContainerClassName, ...ContainerProps } = {},
       dense,
       disabled,
       disableGutters,
@@ -110,43 +109,65 @@ class ListItem extends React.Component {
     } = this.props;
     const isDense = dense || this.context.dense || false;
     const children = React.Children.toArray(childrenProp);
-    const hasAvatar = children.some(value => isMuiElement(value, ['ListItemAvatar']));
-    const hasSecondaryAction = children.length && isMuiElement(children[children.length - 1], ['ListItemSecondaryAction']);
-    const className = classNames(classes.root, classes.default, (isDense || hasAvatar) && classes.dense, !disableGutters && classes.gutters, divider && classes.divider, disabled && classes.disabled, button && classes.button, hasSecondaryAction && classes.secondaryAction, classNameProp);
+    const hasAvatar = children.some(value =>
+      isMuiElement(value, ["ListItemAvatar"])
+    );
+    const hasSecondaryAction =
+      children.length &&
+      isMuiElement(children[children.length - 1], ["ListItemSecondaryAction"]);
+    const className = classNames(
+      classes.root,
+      classes.default,
+      (isDense || hasAvatar) && classes.dense,
+      !disableGutters && classes.gutters,
+      divider && classes.divider,
+      disabled && classes.disabled,
+      button && classes.button,
+      hasSecondaryAction && classes.secondaryAction,
+      classNameProp
+    );
     const componentProps = {
       className,
       disabled,
       ...other
     };
-    let Component = componentProp || 'li';
+    let Component = componentProp || "li";
 
     if (button) {
-      componentProps.component = componentProp || 'div';
-      componentProps.focusVisibleClassName = classNames(classes.focusVisible, focusVisibleClassName);
+      componentProps.component = componentProp || "div";
+      componentProps.focusVisibleClassName = classNames(
+        classes.focusVisible,
+        focusVisibleClassName
+      );
       Component = ButtonBase;
     }
 
     if (hasSecondaryAction) {
       // Use div by default.
-      Component = !componentProps.component && !componentProp ? 'div' : Component; // Avoid nesting of li > li.
+      Component =
+        !componentProps.component && !componentProp ? "div" : Component; // Avoid nesting of li > li.
 
-      if (ContainerComponent === 'li') {
-        if (Component === 'li') {
-          Component = 'div';
-        } else if (componentProps.component === 'li') {
-          componentProps.component = 'div';
+      if (ContainerComponent === "li") {
+        if (Component === "li") {
+          Component = "div";
+        } else if (componentProps.component === "li") {
+          componentProps.component = "div";
         }
       }
 
-      return <ContainerComponent className={classNames(classes.container, ContainerClassName)} {...ContainerProps}>
+      return (
+        <ContainerComponent
+          className={classNames(classes.container, ContainerClassName)}
+          {...ContainerProps}
+        >
           <Component {...componentProps}>{children}</Component>
           {children.pop()}
-        </ContainerComponent>;
+        </ContainerComponent>
+      );
     }
 
     return <Component {...componentProps}>{children}</Component>;
   }
-
 }
 
 ListItem.contextTypes = {
@@ -155,18 +176,18 @@ ListItem.contextTypes = {
 ListItem.childContextTypes = {
   dense: PropTypes.bool
 };
-const defaultProps = ListItem.defaultProps = {
+const defaultProps = (ListItem.defaultProps = {
   button: false,
-  ContainerComponent: 'li',
+  ContainerComponent: "li",
   dense: false,
   disabled: false,
   disableGutters: false,
   divider: false
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListItem/ListItem').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListItem/ListItem').Shape>}
+ */
 export const ListItemCreator = withStyles(styles, ListItem, {
   isMui: true,
   defaultProps

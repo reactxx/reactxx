@@ -1,12 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import SwitchBase from '../internal/SwitchBase';
-import CheckBoxOutlineBlankIcon from '../internal/svg-icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '../internal/svg-icons/CheckBox';
-import IndeterminateCheckBoxIcon from '../internal/svg-icons/IndeterminateCheckBox';
-import { capitalize } from '../utils/helpers';
-import withStyles from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import SwitchBase from "../internal/SwitchBase";
+import CheckBoxOutlineBlankIcon from "../internal/svg-icons/CheckBoxOutlineBlank";
+import CheckBoxIcon from "../internal/svg-icons/CheckBox";
+import IndeterminateCheckBoxIcon from "../internal/svg-icons/IndeterminateCheckBox";
+import { capitalize } from "../utils/helpers";
+import withStyles from "../styles/withStyles";
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
@@ -25,20 +32,20 @@ export const styles = theme => ({
 
   /* Styles applied to the root element if `color="primary"`. */
   colorPrimary: {
-    '&.checked16': {
+    "&.checked16": {
       color: theme.palette.primary.main
     },
-    '&.disabled16': {
+    "&.disabled16": {
       color: theme.palette.action.disabled
     }
   },
 
   /* Styles applied to the root element if `color="secondary"`. */
   colorSecondary: {
-    '&.checked16': {
+    "&.checked16": {
       color: theme.palette.secondary.main
     },
-    '&.disabled16': {
+    "&.disabled16": {
       color: theme.palette.action.disabled
     }
   }
@@ -46,12 +53,7 @@ export const styles = theme => ({
 
 function Checkbox(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     checkedIcon,
     classes,
     color,
@@ -60,24 +62,31 @@ function Checkbox(props) {
     indeterminateIcon,
     ...other
   } = props;
-  return <SwitchBase checkedIcon={indeterminate ? indeterminateIcon : checkedIcon} classes={{
-    root: classNames(classes.root, classes[`color${capitalize(color)}`]),
-    checked: classes.checked,
-    disabled: classes.disabled
-  }} icon={indeterminate ? indeterminateIcon : icon} {...other} />;
+  return (
+    <SwitchBase
+      checkedIcon={indeterminate ? indeterminateIcon : checkedIcon}
+      classes={{
+        root: classNames(classes.root, classes[`color${capitalize(color)}`]),
+        checked: classes.checked,
+        disabled: classes.disabled
+      }}
+      icon={indeterminate ? indeterminateIcon : icon}
+      {...other}
+    />
+  );
 }
 
-const defaultProps = Checkbox.defaultProps = {
+const defaultProps = (Checkbox.defaultProps = {
   checkedIcon: <CheckBoxIcon />,
-  color: 'secondary',
+  color: "secondary",
   icon: <CheckBoxOutlineBlankIcon />,
   indeterminate: false,
   indeterminateIcon: <IndeterminateCheckBoxIcon />
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Checkbox/Checkbox').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Checkbox/Checkbox').Shape>}
+ */
 export const CheckboxCreator = withStyles(styles, Checkbox, {
   isMui: true,
   defaultProps

@@ -1,32 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import warning from 'warning';
-import withStyles from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import warning from "warning";
+import withStyles from "../styles/withStyles";
 export const styles = {
   /* Styles applied to the root element. */
   root: {
-    display: 'block',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
+    display: "block",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center"
   },
 
   /* Styles applied to the root element if `component="video, audio, picture, iframe, or img"`. */
   media: {
-    width: '100%'
+    width: "100%"
   }
 };
-const MEDIA_COMPONENTS = ['video', 'audio', 'picture', 'iframe', 'img'];
+const MEDIA_COMPONENTS = ["video", "audio", "picture", "iframe", "img"];
 
 function CardMedia(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     classes,
     className,
     component: Component,
@@ -35,22 +37,40 @@ function CardMedia(props) {
     style,
     ...other
   } = props;
-  warning(Boolean(image || src), 'Material-UI: either `image` or `src` property must be specified.');
+  warning(
+    Boolean(image || src),
+    "Material-UI: either `image` or `src` property must be specified."
+  );
   const isMediaComponent = MEDIA_COMPONENTS.indexOf(Component) !== -1;
-  const composedStyle = !isMediaComponent && image ? {
-    backgroundImage: `url("${image}")`,
-    ...style
-  } : style;
-  return <Component className={classNamesAny(Component, classes.root, isMediaComponent && classes.media, className)} style={composedStyle} src={isMediaComponent ? image || src : undefined} {...other} />;
+  const composedStyle =
+    !isMediaComponent && image
+      ? {
+          backgroundImage: `url("${image}")`,
+          ...style
+        }
+      : style;
+  return (
+    <Component
+      className={classNamesAny(
+        Component,
+        classes.root,
+        isMediaComponent && classes.media,
+        className
+      )}
+      style={composedStyle}
+      src={isMediaComponent ? image || src : undefined}
+      {...other}
+    />
+  );
 }
 
-const defaultProps = CardMedia.defaultProps = {
-  component: 'div'
-};
+const defaultProps = (CardMedia.defaultProps = {
+  component: "div"
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/CardMedia/CardMedia').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/CardMedia/CardMedia').Shape>}
+ */
 export const CardMediaCreator = withStyles(styles, CardMedia, {
   isMui: true,
   defaultProps

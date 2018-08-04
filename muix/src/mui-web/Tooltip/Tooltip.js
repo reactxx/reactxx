@@ -1,15 +1,22 @@
-import React from 'react';
-import { toAtomic } from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-import PropTypes from 'prop-types';
-import warning from 'warning';
-import classNames from 'classnames';
+import React from "react";
+import { toAtomic } from "../styles/withStyles";
+
+import PropTypes from "prop-types";
+import warning from "warning";
+import classNames from "classnames";
 import RootRef from "../RootRef/RootRef";
-import withStyles from '../styles/withStyles';
-import { capitalize } from '../utils/helpers';
-import exactProp from '../utils/exactProp';
+import withStyles from "../styles/withStyles";
+import { capitalize } from "../utils/helpers";
+import exactProp from "../utils/exactProp";
 import Grow from "../Grow/Grow";
-import Popper from '../Popper';
+import Popper from "../Popper";
 export const styles = theme => ({
   /* Styles applied to the Popper component. */
   popper: {
@@ -18,7 +25,8 @@ export const styles = theme => ({
   },
 
   /* Styles applied to the tooltip (label wrapper) element. */
-  tooltip: { ...toAtomic('padding', '4px 8px'),
+  tooltip: {
+    ...toAtomic("padding", "4px 8px"),
     backgroundColor: theme.palette.grey[700],
     borderRadius: theme.shape.borderRadius,
     color: theme.palette.common.white,
@@ -28,36 +36,45 @@ export const styles = theme => ({
   },
 
   /* Styles applied to the tooltip (label wrapper) element if the tooltip is opened by touch. */
-  touch: { ...toAtomic('padding', '8px 16px'),
+  touch: {
+    ...toAtomic("padding", "8px 16px"),
     fontSize: theme.typography.pxToRem(14),
     lineHeight: `${theme.typography.round(16 / 14)}em`
   },
 
   /* Styles applied to the tooltip (label wrapper) element if `placement` contains "left". */
-  tooltipPlacementLeft: { ...toAtomic('margin', '0 24px '),
-    transformOrigin: 'right center',
-    [theme.breakpoints.up('sm')]: { ...toAtomic('margin', '0 14px')
+  tooltipPlacementLeft: {
+    ...toAtomic("margin", "0 24px "),
+    transformOrigin: "right center",
+    [theme.breakpoints.up("sm")]: {
+      ...toAtomic("margin", "0 14px")
     }
   },
 
   /* Styles applied to the tooltip (label wrapper) element if `placement` contains "right". */
-  tooltipPlacementRight: { ...toAtomic('margin', '0 24px'),
-    transformOrigin: 'left center',
-    [theme.breakpoints.up('sm')]: { ...toAtomic('margin', '0 14px')
+  tooltipPlacementRight: {
+    ...toAtomic("margin", "0 24px"),
+    transformOrigin: "left center",
+    [theme.breakpoints.up("sm")]: {
+      ...toAtomic("margin", "0 14px")
     }
   },
 
   /* Styles applied to the tooltip (label wrapper) element if `placement` contains "top". */
-  tooltipPlacementTop: { ...toAtomic('margin', '24px 0'),
-    transformOrigin: 'center bottom',
-    [theme.breakpoints.up('sm')]: { ...toAtomic('margin', '14px 0')
+  tooltipPlacementTop: {
+    ...toAtomic("margin", "24px 0"),
+    transformOrigin: "center bottom",
+    [theme.breakpoints.up("sm")]: {
+      ...toAtomic("margin", "14px 0")
     }
   },
 
   /* Styles applied to the tooltip (label wrapper) element if `placement` contains "bottom". */
-  tooltipPlacementBottom: { ...toAtomic('margin', '24px 0'),
-    transformOrigin: 'center top',
-    [theme.breakpoints.up('sm')]: { ...toAtomic('margin', '14px 0')
+  tooltipPlacementBottom: {
+    ...toAtomic("margin", "24px 0"),
+    transformOrigin: "center top",
+    [theme.breakpoints.up("sm")]: {
+      ...toAtomic("margin", "14px 0")
     }
   }
 });
@@ -90,7 +107,17 @@ class Tooltip extends React.Component {
   }
 
   componentDidMount() {
-    warning(!this.childrenRef.disabled || !this.childrenRef.tagName.toLowerCase() === 'button', ['Material-UI: you are providing a disabled `button` child to the Tooltip component.', 'A disabled element does not fire events.', "Tooltip needs to listen to the child element's events to display the title.", '', 'Place a `div` container on top of the element.'].join('\n')); // Fallback to this default id when possible.
+    warning(
+      !this.childrenRef.disabled ||
+        !this.childrenRef.tagName.toLowerCase() === "button",
+      [
+        "Material-UI: you are providing a disabled `button` child to the Tooltip component.",
+        "A disabled element does not fire events.",
+        "Tooltip needs to listen to the child element's events to display the title.",
+        "",
+        "Place a `div` container on top of the element."
+      ].join("\n")
+    ); // Fallback to this default id when possible.
     // Use the random value for client side rendering only.
     // We can't use it server side.
 
@@ -112,13 +139,10 @@ class Tooltip extends React.Component {
     this.childrenRef = ref;
   };
   handleEnter = event => {
-    const {
-      children,
-      enterDelay
-    } = this.props;
+    const { children, enterDelay } = this.props;
     const childrenProps = children.props;
 
-    if (event.type === 'focus') {
+    if (event.type === "focus") {
       this.internalState.focus = true;
 
       if (childrenProps.onFocus) {
@@ -126,7 +150,7 @@ class Tooltip extends React.Component {
       }
     }
 
-    if (event.type === 'mouseenter') {
+    if (event.type === "mouseenter") {
       this.internalState.hover = true;
 
       if (childrenProps.onMouseEnter) {
@@ -134,14 +158,13 @@ class Tooltip extends React.Component {
       }
     }
 
-    if (this.ignoreNonTouchEvents && event.type !== 'touchstart') {
+    if (this.ignoreNonTouchEvents && event.type !== "touchstart") {
       return;
     } // Remove the title ahead of time.
     // We don't want to wait for the next render commit.
     // We would risk displaying two tooltips at the same time (native + this one).
 
-
-    this.childrenRef.setAttribute('title', '');
+    this.childrenRef.setAttribute("title", "");
     clearTimeout(this.enterTimer);
     clearTimeout(this.leaveTimer);
 
@@ -166,13 +189,10 @@ class Tooltip extends React.Component {
     }
   };
   handleLeave = event => {
-    const {
-      children,
-      leaveDelay
-    } = this.props;
+    const { children, leaveDelay } = this.props;
     const childrenProps = children.props;
 
-    if (event.type === 'blur') {
+    if (event.type === "blur") {
       this.internalState.focus = false;
 
       if (childrenProps.onBlur) {
@@ -180,7 +200,7 @@ class Tooltip extends React.Component {
       }
     }
 
-    if (event.type === 'mouseleave') {
+    if (event.type === "mouseleave") {
       this.internalState.hover = false;
 
       if (childrenProps.onMouseLeave) {
@@ -222,10 +242,7 @@ class Tooltip extends React.Component {
   };
   handleTouchStart = event => {
     this.ignoreNonTouchEvents = true;
-    const {
-      children,
-      enterTouchDelay
-    } = this.props;
+    const { children, enterTouchDelay } = this.props;
 
     if (children.props.onTouchStart) {
       children.props.onTouchStart(event);
@@ -240,10 +257,7 @@ class Tooltip extends React.Component {
     }, enterTouchDelay);
   };
   handleTouchEnd = event => {
-    const {
-      children,
-      leaveTouchDelay
-    } = this.props;
+    const { children, leaveTouchDelay } = this.props;
 
     if (children.props.onTouchEnd) {
       children.props.onTouchEnd(event);
@@ -259,12 +273,7 @@ class Tooltip extends React.Component {
 
   render() {
     const {
-      $system: {
-        classNames,
-        classNamesStr,
-        classNamesAny,
-        theme
-      },
+      $system: { classNames, classNamesStr, classNamesAny, theme },
       children,
       classes,
       disableFocusListener,
@@ -280,13 +289,13 @@ class Tooltip extends React.Component {
     } = this.props;
     let open = this.isControlled ? openProp : this.state.open; // There is no point at displaying an empty tooltip.
 
-    if (title === '') {
+    if (title === "") {
       open = false;
     }
 
     const childrenProps = {
-      'aria-describedby': open ? id || this.defaultId : null,
-      title: !open && typeof title === 'string' ? title : null
+      "aria-describedby": open ? id || this.defaultId : null,
+      title: !open && typeof title === "string" ? title : null
     };
 
     if (!disableTouchListener) {
@@ -304,26 +313,61 @@ class Tooltip extends React.Component {
       childrenProps.onBlur = this.handleLeave;
     }
 
-    warning(!children.props.title, ['Material-UI: you have provided a `title` property to the child of <Tooltip />.', `Remove this title property \`${children.props.title}\` or the Tooltip component.`].join('\n'));
-    return <React.Fragment>
-        <RootRef rootRef={this.onRootRef}>{React.cloneElement(children, childrenProps)}</RootRef>
-        <Popper className={classes.popper} placement={placement} anchorEl={this.childrenRef} open={open} id={childrenProps['aria-describedby']} transition {...PopperProps}>
+    warning(
+      !children.props.title,
+      [
+        "Material-UI: you have provided a `title` property to the child of <Tooltip />.",
+        `Remove this title property \`${
+          children.props.title
+        }\` or the Tooltip component.`
+      ].join("\n")
+    );
+    return (
+      <React.Fragment>
+        <RootRef rootRef={this.onRootRef}>
+          {React.cloneElement(children, childrenProps)}
+        </RootRef>
+        <Popper
+          className={classes.popper}
+          placement={placement}
+          anchorEl={this.childrenRef}
+          open={open}
+          id={childrenProps["aria-describedby"]}
+          transition
+          {...PopperProps}
+        >
           {({
-          placement: placementInner,
-          TransitionProps: TransitionPropsInner
-        }) => <TransitionComponent timeout={theme.transitions.duration.shorter} {...TransitionPropsInner} {...TransitionProps}>
-              <div className={classNamesStr(classes.tooltip, this.ignoreNonTouchEvents && classes.touch, classes[`tooltipPlacement${capitalize(placementInner.split('-')[0])}`])}>
+            placement: placementInner,
+            TransitionProps: TransitionPropsInner
+          }) => (
+            <TransitionComponent
+              timeout={theme.transitions.duration.shorter}
+              {...TransitionPropsInner}
+              {...TransitionProps}
+            >
+              <div
+                className={classNamesStr(
+                  classes.tooltip,
+                  this.ignoreNonTouchEvents && classes.touch,
+                  classes[
+                    `tooltipPlacement${capitalize(
+                      placementInner.split("-")[0]
+                    )}`
+                  ]
+                )}
+              >
                 {title}
               </div>
-            </TransitionComponent>}
+            </TransitionComponent>
+          )}
         </Popper>
-      </React.Fragment>;
+      </React.Fragment>
+    );
   }
-
 }
 
 Tooltip.propTypes = exactProp(Tooltip.propTypes);
-const defaultProps = Tooltip.defaultProps = {
+const defaultProps = (Tooltip.defaultProps = {
   disableFocusListener: false,
   disableHoverListener: false,
   disableTouchListener: false,
@@ -331,13 +375,13 @@ const defaultProps = Tooltip.defaultProps = {
   enterTouchDelay: 1000,
   leaveDelay: 0,
   leaveTouchDelay: 1500,
-  placement: 'bottom',
+  placement: "bottom",
   TransitionComponent: Grow
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Tooltip/Tooltip').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Tooltip/Tooltip').Shape>}
+ */
 export const TooltipCreator = withStyles(styles, Tooltip, {
   isMui: true,
   defaultProps

@@ -1,28 +1,35 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 /* eslint-disable react/no-unused-prop-types */
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '../styles';
-import exactProp from '../utils/exactProp';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "../styles";
+import exactProp from "../utils/exactProp";
 
 const styles = theme => ({
-  '@global': {
+  "@global": {
     html: {
-      WebkitFontSmoothing: 'antialiased',
+      WebkitFontSmoothing: "antialiased",
       // Antialiasing.
-      MozOsxFontSmoothing: 'grayscale',
+      MozOsxFontSmoothing: "grayscale",
       // Antialiasing.
       // Change from `box-sizing: content-box` so that `width`
       // is not affected by `padding` or `border`.
-      boxSizing: 'border-box'
+      boxSizing: "border-box"
     },
-    '*, *::before, *::after': {
-      boxSizing: 'inherit'
+    "*, *::before, *::after": {
+      boxSizing: "inherit"
     },
     body: {
       margin: 0,
       // Remove the margin in all browsers.
       backgroundColor: theme.palette.background.default,
-      '@media print': {
+      "@media print": {
         // Save printer ink.
         backgroundColor: theme.palette.common.white
       }
@@ -33,22 +40,20 @@ const styles = theme => ({
  * Kickstart an elegant, consistent, and simple baseline to build upon.
  */
 
-
 class CssBaseline extends React.Component {
   render() {
     return this.props.children;
   }
-
 }
 
 CssBaseline.propTypes = exactProp(CssBaseline.propTypes);
-const defaultProps = CssBaseline.defaultProps = {
+const defaultProps = (CssBaseline.defaultProps = {
   children: null
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/CssBaseline/CssBaseline').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/CssBaseline/CssBaseline').Shape>}
+ */
 export const CssBaselineCreator = withStyles(styles, CssBaseline, {
   isMui: true,
   defaultProps

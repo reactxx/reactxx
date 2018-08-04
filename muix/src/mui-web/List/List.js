@@ -1,15 +1,23 @@
-import React from 'react';
-import { toAtomic } from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
+import React from "react";
+import { toAtomic } from "../styles/withStyles";
+
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
 export const styles = {
   /* Styles applied to the root element. */
-  root: { ...toAtomic('padding', 0),
-    ...toAtomic('margin', 0),
-    listStyle: 'none',
-    position: 'relative'
+  root: {
+    ...toAtomic("padding", 0),
+    ...toAtomic("margin", 0),
+    listStyle: "none",
+    position: "relative"
   },
 
   /* Styles applied to the root element if `disablePddding={false}`. */
@@ -39,12 +47,7 @@ class List extends React.Component {
 
   render() {
     const {
-      $system: {
-        classNames,
-        classNamesStr,
-        classNamesAny,
-        theme
-      },
+      $system: { classNames, classNamesStr, classNamesAny, theme },
       children,
       classes,
       className: classNameProp,
@@ -54,27 +57,34 @@ class List extends React.Component {
       subheader,
       ...other
     } = this.props;
-    const className = classNames(classes.root, dense && !disablePadding && classes.dense, !disablePadding && classes.padding, subheader && classes.subheader, classNameProp);
-    return <Component className={classNamesAny(Component, className)} {...other}>
+    const className = classNames(
+      classes.root,
+      dense && !disablePadding && classes.dense,
+      !disablePadding && classes.padding,
+      subheader && classes.subheader,
+      classNameProp
+    );
+    return (
+      <Component className={classNamesAny(Component, className)} {...other}>
         {subheader}
         {children}
-      </Component>;
+      </Component>
+    );
   }
-
 }
 
 List.childContextTypes = {
   dense: PropTypes.bool
 };
-const defaultProps = List.defaultProps = {
-  component: 'ul',
+const defaultProps = (List.defaultProps = {
+  component: "ul",
   dense: false,
   disablePadding: false
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/List/List').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/List/List').Shape>}
+ */
 export const ListCreator = withStyles(styles, List, {
   isMui: true,
   defaultProps

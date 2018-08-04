@@ -1,3 +1,10 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 function createRippleHandler(instance, eventName, action, cb) {
   return function handleEvent(event) {
     if (cb) {
@@ -10,7 +17,7 @@ function createRippleHandler(instance, eventName, action, cb) {
       ignore = true;
     }
 
-    if (instance.props.disableTouchRipple && eventName !== 'Blur') {
+    if (instance.props.disableTouchRipple && eventName !== "Blur") {
       ignore = true;
     }
 
@@ -18,7 +25,7 @@ function createRippleHandler(instance, eventName, action, cb) {
       instance.ripple[action](event);
     }
 
-    if (typeof instance.props[`on${eventName}`] === 'function') {
+    if (typeof instance.props[`on${eventName}`] === "function") {
       instance.props[`on${eventName}`](event);
     }
 

@@ -1,19 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
 import Typography from "../Typography/Typography";
-import StepIcon from '../StepIcon';
+import StepIcon from "../StepIcon";
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    display: 'flex',
-    alignItems: 'center',
-    '&.alternativeLabel73': {
-      flexDirection: 'column'
+    display: "flex",
+    alignItems: "center",
+    "&.alternativeLabel73": {
+      flexDirection: "column"
     },
-    '&.disabled73': {
-      cursor: 'default'
+    "&.disabled73": {
+      cursor: "default"
     }
   },
 
@@ -26,19 +33,19 @@ export const styles = theme => ({
   /* Styles applied to the `Typography` component which wraps `children`. */
   label: {
     color: theme.palette.text.secondary,
-    '&.active73': {
+    "&.active73": {
       color: theme.palette.text.primary,
       fontWeight: 500
     },
-    '&.completed73': {
+    "&.completed73": {
       color: theme.palette.text.primary,
       fontWeight: 500
     },
-    '&.alternativeLabel73': {
-      textAlign: 'center',
+    "&.alternativeLabel73": {
+      textAlign: "center",
       marginTop: 16
     },
-    '&.error73': {
+    "&.error73": {
       color: theme.palette.error.main
     }
   },
@@ -66,7 +73,7 @@ export const styles = theme => ({
   /* Styles applied to the `icon` container element. */
   iconContainer: {
     paddingRight: 8,
-    '&.alternativeLabel73': {
+    "&.alternativeLabel73": {
       paddingRight: 0
     }
   },
@@ -78,18 +85,13 @@ export const styles = theme => ({
 
   /* Styles applied to the container element which wraps `Typography` and `optional`. */
   labelContainer: {
-    width: '100%'
+    width: "100%"
   }
 });
 
 function StepLabel(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     active,
     alternativeLabel,
     children,
@@ -105,33 +107,68 @@ function StepLabel(props) {
     StepIconProps,
     ...other
   } = props;
-  return <span className={classNamesStr(classes.root, classes[orientation], disabled && classes.disabled, alternativeLabel && classes.alternativeLabel, error && classes.error, classNameProp)} {...other}>
-      {icon && <span className={classNamesStr(classes.iconContainer, alternativeLabel && classes.alternativeLabel)}>
-          <StepIcon completed={completed} active={active} error={error} icon={icon} {...StepIconProps} />
-        </span>}
+  return (
+    <span
+      className={classNamesStr(
+        classes.root,
+        classes[orientation],
+        disabled && classes.disabled,
+        alternativeLabel && classes.alternativeLabel,
+        error && classes.error,
+        classNameProp
+      )}
+      {...other}
+    >
+      {icon && (
+        <span
+          className={classNamesStr(
+            classes.iconContainer,
+            alternativeLabel && classes.alternativeLabel
+          )}
+        >
+          <StepIcon
+            completed={completed}
+            active={active}
+            error={error}
+            icon={icon}
+            {...StepIconProps}
+          />
+        </span>
+      )}
       <span className={classNamesStr(classes.labelContainer)}>
-        <Typography variant="body1" component="span" className={classNames(classes.label, alternativeLabel && classes.alternativeLabel, completed && classes.completed, active && classes.active, error && classes.error)}>
+        <Typography
+          variant="body1"
+          component="span"
+          className={classNames(
+            classes.label,
+            alternativeLabel && classes.alternativeLabel,
+            completed && classes.completed,
+            active && classes.active,
+            error && classes.error
+          )}
+        >
           {children}
         </Typography>
         {optional}
       </span>
-    </span>;
+    </span>
+  );
 }
 
-StepLabel.muiName = 'StepLabel';
-const defaultProps = StepLabel.defaultProps = {
+StepLabel.muiName = "StepLabel";
+const defaultProps = (StepLabel.defaultProps = {
   active: false,
   alternativeLabel: false,
   completed: false,
   disabled: false,
   error: false,
   last: false,
-  orientation: 'horizontal'
-};
+  orientation: "horizontal"
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/StepLabel/StepLabel').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/StepLabel/StepLabel').Shape>}
+ */
 export const StepLabelCreator = withStyles(styles, StepLabel, {
   isMui: true,
   defaultProps

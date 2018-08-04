@@ -1,7 +1,14 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 //       weak
 
 /* eslint-disable no-use-before-define */
-import warning from 'warning';
+import warning from "warning";
 /**
  * Returns a number whose value is limited to the given range.
  *
@@ -12,7 +19,10 @@ import warning from 'warning';
  */
 
 function clamp(value, min = 0, max = 1) {
-  warning(value >= min && value <= max, `Material-UI: the value provided ${value} is out of range [${min}, ${max}].`);
+  warning(
+    value >= min && value <= max,
+    `Material-UI: the value provided ${value} is out of range [${min}, ${max}].`
+  );
 
   if (value < min) {
     return min;
@@ -31,17 +41,16 @@ function clamp(value, min = 0, max = 1) {
  * @returns {string} A CSS rgb color string
  */
 
-
 export function convertHexToRGB(color) {
   color = color.substr(1);
-  const re = new RegExp(`.{1,${color.length / 3}}`, 'g');
+  const re = new RegExp(`.{1,${color.length / 3}}`, "g");
   let colors = color.match(re);
 
   if (colors && colors[0].length === 1) {
     colors = colors.map(n => n + n);
   }
 
-  return colors ? `rgb(${colors.map(n => parseInt(n, 16)).join(', ')})` : '';
+  return colors ? `rgb(${colors.map(n => parseInt(n, 16)).join(", ")})` : "";
 }
 /**
  * Converts a color from CSS rgb format to CSS hex format.
@@ -52,7 +61,7 @@ export function convertHexToRGB(color) {
 
 export function rgbToHex(color) {
   // Pass hex straight through
-  if (color.indexOf('#') === 0) {
+  if (color.indexOf("#") === 0) {
     return color;
   }
 
@@ -61,11 +70,9 @@ export function rgbToHex(color) {
     return hex.length === 1 ? `0${hex}` : hex;
   }
 
-  let {
-    values
-  } = decomposeColor(color);
+  let { values } = decomposeColor(color);
   values = values.map(n => intToHex(n));
-  return `#${values.join('')}`;
+  return `#${values.join("")}`;
 }
 /**
  * Returns an object with the type and values of a color.
@@ -77,18 +84,23 @@ export function rgbToHex(color) {
  */
 
 export function decomposeColor(color) {
-  if (color.charAt(0) === '#') {
+  if (color.charAt(0) === "#") {
     return decomposeColor(convertHexToRGB(color));
   }
 
-  const marker = color.indexOf('(');
+  const marker = color.indexOf("(");
   const type = color.substring(0, marker);
-  let values = color.substring(marker + 1, color.length - 1).split(',');
+  let values = color.substring(marker + 1, color.length - 1).split(",");
   values = values.map(value => parseFloat(value));
 
-  if (process.env.NODE_ENV !== 'production') {
-    if (['rgb', 'rgba', 'hsl', 'hsla'].indexOf(type) === -1) {
-      throw new Error([`Material-UI: unsupported \`${color}\` color.`, 'We support the following formats: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla().'].join('\n'));
+  if (process.env.NODE_ENV !== "production") {
+    if (["rgb", "rgba", "hsl", "hsla"].indexOf(type) === -1) {
+      throw new Error(
+        [
+          `Material-UI: unsupported \`${color}\` color.`,
+          "We support the following formats: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla()."
+        ].join("\n")
+      );
     }
   }
 
@@ -107,24 +119,20 @@ export function decomposeColor(color) {
  */
 
 export function recomposeColor(color) {
-  const {
-    type
-  } = color;
-  let {
-    values
-  } = color;
+  const { type } = color;
+  let { values } = color;
 
-  if (type.indexOf('rgb') !== -1) {
+  if (type.indexOf("rgb") !== -1) {
     // Only convert the first 3 values to int (i.e. not alpha)
-    values = values.map((n, i) => i < 3 ? parseInt(n, 10) : n);
+    values = values.map((n, i) => (i < 3 ? parseInt(n, 10) : n));
   }
 
-  if (type.indexOf('hsl') !== -1) {
+  if (type.indexOf("hsl") !== -1) {
     values[1] = `${values[1]}%`;
     values[2] = `${values[2]}%`;
   }
 
-  return `${color.type}(${values.join(', ')})`;
+  return `${color.type}(${values.join(", ")})`;
 }
 /**
  * Calculates the contrast ratio between two colors.
@@ -154,16 +162,17 @@ export function getContrastRatio(foreground, background) {
 export function getLuminance(color) {
   const decomposedColor = decomposeColor(color);
 
-  if (decomposedColor.type.indexOf('rgb') !== -1) {
+  if (decomposedColor.type.indexOf("rgb") !== -1) {
     const rgb = decomposedColor.values.map(val => {
       val /= 255; // normalized
 
       return val <= 0.03928 ? val / 12.92 : ((val + 0.055) / 1.055) ** 2.4;
     }); // Truncate at 3 digits
 
-    return Number((0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]).toFixed(3));
+    return Number(
+      (0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]).toFixed(3)
+    );
   } // else if (decomposedColor.type.indexOf('hsl') !== -1)
-
 
   return decomposedColor.values[2] / 100;
 }
@@ -177,7 +186,9 @@ export function getLuminance(color) {
  */
 
 export function emphasize(color, coefficient = 0.15) {
-  return getLuminance(color) > 0.5 ? darken(color, coefficient) : lighten(color, coefficient);
+  return getLuminance(color) > 0.5
+    ? darken(color, coefficient)
+    : lighten(color, coefficient);
 }
 /**
  * Set the absolute transparency of a color.
@@ -189,13 +200,16 @@ export function emphasize(color, coefficient = 0.15) {
  */
 
 export function fade(color, value) {
-  warning(color, `Material-UI: missing color argument in fade(${color}, ${value}).`);
+  warning(
+    color,
+    `Material-UI: missing color argument in fade(${color}, ${value}).`
+  );
   if (!color) return color;
   color = decomposeColor(color);
   value = clamp(value);
 
-  if (color.type === 'rgb' || color.type === 'hsl') {
-    color.type += 'a';
+  if (color.type === "rgb" || color.type === "hsl") {
+    color.type += "a";
   }
 
   color.values[3] = value;
@@ -210,14 +224,17 @@ export function fade(color, value) {
  */
 
 export function darken(color, coefficient) {
-  warning(color, `Material-UI: missing color argument in darken(${color}, ${coefficient}).`);
+  warning(
+    color,
+    `Material-UI: missing color argument in darken(${color}, ${coefficient}).`
+  );
   if (!color) return color;
   color = decomposeColor(color);
   coefficient = clamp(coefficient);
 
-  if (color.type.indexOf('hsl') !== -1) {
+  if (color.type.indexOf("hsl") !== -1) {
     color.values[2] *= 1 - coefficient;
-  } else if (color.type.indexOf('rgb') !== -1) {
+  } else if (color.type.indexOf("rgb") !== -1) {
     for (let i = 0; i < 3; i += 1) {
       color.values[i] *= 1 - coefficient;
     }
@@ -234,14 +251,17 @@ export function darken(color, coefficient) {
  */
 
 export function lighten(color, coefficient) {
-  warning(color, `Material-UI: missing color argument in lighten(${color}, ${coefficient}).`);
+  warning(
+    color,
+    `Material-UI: missing color argument in lighten(${color}, ${coefficient}).`
+  );
   if (!color) return color;
   color = decomposeColor(color);
   coefficient = clamp(coefficient);
 
-  if (color.type.indexOf('hsl') !== -1) {
+  if (color.type.indexOf("hsl") !== -1) {
     color.values[2] += (100 - color.values[2]) * coefficient;
-  } else if (color.type.indexOf('rgb') !== -1) {
+  } else if (color.type.indexOf("rgb") !== -1) {
     for (let i = 0; i < 3; i += 1) {
       color.values[i] += (255 - color.values[i]) * coefficient;
     }

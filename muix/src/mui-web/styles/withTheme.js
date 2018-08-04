@@ -1,9 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import hoistNonReactStatics from 'hoist-non-react-statics';
-import wrapDisplayName from 'recompose/wrapDisplayName';
-import createMuiTheme from './createMuiTheme';
-import themeListener from './themeListener';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import hoistNonReactStatics from "hoist-non-react-statics";
+import wrapDisplayName from "recompose/wrapDisplayName";
+import createMuiTheme from "./createMuiTheme";
+import themeListener from "./themeListener";
 let defaultTheme;
 
 function getDefaultTheme() {
@@ -14,7 +21,6 @@ function getDefaultTheme() {
   defaultTheme = createMuiTheme();
   return defaultTheme;
 } // Provide the theme object as a property to the input component.
-
 
 const withTheme = () => Component => {
   class WithTheme extends React.Component {
@@ -45,30 +51,26 @@ const withTheme = () => Component => {
     }
 
     render() {
-      const {
-        innerRef,
-        ...other
-      } = this.props;
+      const { innerRef, ...other } = this.props;
       return <Component theme={this.state.theme} ref={innerRef} {...other} />;
     }
-
   }
 
   WithTheme.propTypes = {
     /**
-         * Use that property to pass a ref callback to the decorated component.
-         */
+     * Use that property to pass a ref callback to the decorated component.
+     */
     innerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
   };
   WithTheme.contextTypes = themeListener.contextTypes;
 
-  if (process.env.NODE_ENV !== 'production') {
-    WithTheme.displayName = wrapDisplayName(Component, 'WithTheme');
+  if (process.env.NODE_ENV !== "production") {
+    WithTheme.displayName = wrapDisplayName(Component, "WithTheme");
   }
 
   hoistNonReactStatics(WithTheme, Component);
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== "production") {
     // Exposed for test purposes.
     WithTheme.Naked = Component;
   }

@@ -1,14 +1,22 @@
-import React from 'react';
-import { toAtomic } from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import { capitalize } from '../utils/helpers';
+import React from "react";
+import { toAtomic } from "../styles/withStyles";
+
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
+import { capitalize } from "../utils/helpers";
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: { ...toAtomic('margin', 0),
-    display: 'block'
+  root: {
+    ...toAtomic("margin", 0),
+    display: "block"
   },
 
   /* Styles applied to the root element if `variant="display4"`. */
@@ -46,34 +54,34 @@ export const styles = theme => ({
 
   /* Styles applied to the root element if `align="left"`. */
   alignLeft: {
-    textAlign: 'left'
+    textAlign: "left"
   },
 
   /* Styles applied to the root element if `align="center"`. */
   alignCenter: {
-    textAlign: 'center'
+    textAlign: "center"
   },
 
   /* Styles applied to the root element if `align="right"`. */
   alignRight: {
-    textAlign: 'right'
+    textAlign: "right"
   },
 
   /* Styles applied to the root element if `align="justify"`. */
   alignJustify: {
-    textAlign: 'justify'
+    textAlign: "justify"
   },
 
   /* Styles applied to the root element if `align="nowrap"`. */
   noWrap: {
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap'
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap"
   },
 
   /* Styles applied to the root element if `gutterBottom={true}`. */
   gutterBottom: {
-    marginBottom: '0.35em'
+    marginBottom: "0.35em"
   },
 
   /* Styles applied to the root element if `paragraph={true}`. */
@@ -83,7 +91,7 @@ export const styles = theme => ({
 
   /* Styles applied to the root element if `color="inherit"`. */
   colorInherit: {
-    color: 'inherit'
+    color: "inherit"
   },
 
   /* Styles applied to the root element if `color="primary"`. */
@@ -114,12 +122,7 @@ export const styles = theme => ({
 
 function Typography(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     align,
     classes,
     className: classNameProp,
@@ -132,34 +135,46 @@ function Typography(props) {
     variant,
     ...other
   } = props;
-  const className = classNames(classes.root, classes[variant], color !== 'default' && classes[`color${capitalize(color)}`], noWrap && classes.noWrap, gutterBottom && classes.gutterBottom, paragraph && classes.paragraph, align !== 'inherit' && classes[`align${capitalize(align)}`], classNameProp);
-  const Component = componentProp || (paragraph ? 'p' : headlineMapping[variant]) || 'span';
-  return <Component className={classNamesAny(Component, className)} {...other} />;
+  const className = classNames(
+    classes.root,
+    classes[variant],
+    color !== "default" && classes[`color${capitalize(color)}`],
+    noWrap && classes.noWrap,
+    gutterBottom && classes.gutterBottom,
+    paragraph && classes.paragraph,
+    align !== "inherit" && classes[`align${capitalize(align)}`],
+    classNameProp
+  );
+  const Component =
+    componentProp || (paragraph ? "p" : headlineMapping[variant]) || "span";
+  return (
+    <Component className={classNamesAny(Component, className)} {...other} />
+  );
 }
 
-const defaultProps = Typography.defaultProps = {
-  align: 'inherit',
-  color: 'default',
+const defaultProps = (Typography.defaultProps = {
+  align: "inherit",
+  color: "default",
   gutterBottom: false,
   headlineMapping: {
-    display4: 'h1',
-    display3: 'h1',
-    display2: 'h1',
-    display1: 'h1',
-    headline: 'h1',
-    title: 'h2',
-    subheading: 'h3',
-    body2: 'aside',
-    body1: 'p'
+    display4: "h1",
+    display3: "h1",
+    display2: "h1",
+    display1: "h1",
+    headline: "h1",
+    title: "h2",
+    subheading: "h3",
+    body2: "aside",
+    body1: "p"
   },
   noWrap: false,
   paragraph: false,
-  variant: 'body1'
-};
+  variant: "body1"
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Typography/Typography').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Typography/Typography').Shape>}
+ */
 export const TypographyCreator = withStyles(styles, Typography, {
   isMui: true,
   defaultProps

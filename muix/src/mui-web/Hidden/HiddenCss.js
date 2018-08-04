@@ -1,13 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import warning from 'warning';
-import { keys as breakpointKeys } from '../styles/createBreakpoints';
-import { capitalize } from '../utils/helpers';
-import withStyles from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import warning from "warning";
+import { keys as breakpointKeys } from "../styles/createBreakpoints";
+import { capitalize } from "../utils/helpers";
+import withStyles from "../styles/withStyles";
 
 const styles = theme => {
   const hidden = {
-    display: 'none'
+    display: "none"
   };
   return breakpointKeys.reduce((acc, key) => {
     acc[`only${capitalize(key)}`] = {
@@ -26,15 +33,9 @@ const styles = theme => {
  * @ignore - internal component.
  */
 
-
 function HiddenCss(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     children,
     classes,
     className,
@@ -51,7 +52,13 @@ function HiddenCss(props) {
     xsUp,
     ...other
   } = props;
-  warning(Object.keys(other).length === 0 || Object.keys(other).length === 1 && other.hasOwnProperty('ref'), `Material-UI: unsupported properties received ${Object.keys(other).join(', ')} by \`<Hidden />\`.`);
+  warning(
+    Object.keys(other).length === 0 ||
+      (Object.keys(other).length === 1 && other.hasOwnProperty("ref")),
+    `Material-UI: unsupported properties received ${Object.keys(other).join(
+      ", "
+    )} by \`<Hidden />\`.`
+  );
   const classNames = [];
 
   if (className) {
@@ -79,14 +86,14 @@ function HiddenCss(props) {
     });
   }
 
-  return <div className={classNamesStr(classNames.join(' '))}>{children}</div>;
+  return <div className={classNamesStr(classNames.join(" "))}>{children}</div>;
 }
 
-const defaultProps = HiddenCss.defaultProps = {};
+const defaultProps = (HiddenCss.defaultProps = {});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Hidden/HiddenCss').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Hidden/HiddenCss').Shape>}
+ */
 export const HiddenCssCreator = withStyles(styles, HiddenCss, {
   isMui: true,
   defaultProps

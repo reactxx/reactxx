@@ -1,18 +1,25 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 // @inheritedComponent Popover
-import React from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
-import withStyles from '../styles/withStyles';
+import React from "react";
+import PropTypes from "prop-types";
+import ReactDOM from "react-dom";
+import getScrollbarSize from "dom-helpers/util/scrollbarSize";
+import withStyles from "../styles/withStyles";
 import Popover from "../Popover/Popover";
 import MenuList from "../MenuList/MenuList";
 const RTL_ORIGIN = {
-  vertical: 'top',
-  horizontal: 'right'
+  vertical: "top",
+  horizontal: "right"
 };
 const LTR_ORIGIN = {
-  vertical: 'top',
-  horizontal: 'left'
+  vertical: "top",
+  horizontal: "left"
 };
 export const styles = {
   /* Styles applied to the `Paper` component. */
@@ -20,9 +27,9 @@ export const styles = {
     // specZ: The maximum height of a simple menu should be one or more rows less than the view
     // height. This ensures a tapable area outside of the simple menu with which to dismiss
     // the menu.
-    maxHeight: 'calc(100% - 96px)',
+    maxHeight: "calc(100% - 96px)",
     // Add iOS momentum scrolling.
-    WebkitOverflowScrolling: 'touch'
+    WebkitOverflowScrolling: "touch"
   }
 };
 
@@ -55,10 +62,7 @@ class Menu extends React.Component {
     }
   };
   handleEnter = element => {
-    const {
-      disableAutoFocusItem,
-      theme
-    } = this.props;
+    const { disableAutoFocusItem, theme } = this.props;
     const menuList = ReactDOM.findDOMNode(this.menuListRef); // Focus so the scroll computation of the Popover works as expected.
 
     if (disableAutoFocusItem !== true) {
@@ -66,10 +70,15 @@ class Menu extends React.Component {
     } // Let's ignore that piece of logic if users are already overriding the width
     // of the menu.
 
-
-    if (menuList && element.clientHeight < menuList.clientHeight && !menuList.style.width) {
+    if (
+      menuList &&
+      element.clientHeight < menuList.clientHeight &&
+      !menuList.style.width
+    ) {
       const size = `${getScrollbarSize()}px`;
-      menuList.style[theme.direction === 'rtl' ? 'paddingLeft' : 'paddingRight'] = size;
+      menuList.style[
+        theme.direction === "rtl" ? "paddingLeft" : "paddingRight"
+      ] = size;
       menuList.style.width = `calc(100% + ${size})`;
     }
 
@@ -78,7 +87,7 @@ class Menu extends React.Component {
     }
   };
   handleListKeyDown = (event, key) => {
-    if (key === 'tab') {
+    if (key === "tab") {
       event.preventDefault();
 
       if (this.props.onClose) {
@@ -89,12 +98,7 @@ class Menu extends React.Component {
 
   render() {
     const {
-      $system: {
-        classNames,
-        classNamesStr,
-        classNamesAny,
-        theme
-      },
+      $system: { classNames, classNamesStr, classNamesAny, theme },
       children,
       classes,
       disableAutoFocusItem,
@@ -104,29 +108,45 @@ class Menu extends React.Component {
       PopoverClasses,
       ...other
     } = this.props;
-    return <Popover getContentAnchorEl={this.getContentAnchorEl} classes={PopoverClasses} onEnter={this.handleEnter} anchorOrigin={theme.direction === 'rtl' ? RTL_ORIGIN : LTR_ORIGIN} transformOrigin={theme.direction === 'rtl' ? RTL_ORIGIN : LTR_ORIGIN} PaperProps={{ ...PaperProps,
-      classes: { ...PaperProps.classes,
-        root: classes.paper
-      }
-    }} {...other}>
-        <MenuList data-mui-test="Menu" onKeyDown={this.handleListKeyDown} {...MenuListProps} ref={ref => {
-        this.menuListRef = ref;
-      }}>
+    return (
+      <Popover
+        getContentAnchorEl={this.getContentAnchorEl}
+        classes={PopoverClasses}
+        onEnter={this.handleEnter}
+        anchorOrigin={theme.direction === "rtl" ? RTL_ORIGIN : LTR_ORIGIN}
+        transformOrigin={theme.direction === "rtl" ? RTL_ORIGIN : LTR_ORIGIN}
+        PaperProps={{
+          ...PaperProps,
+          classes: {
+            ...PaperProps.classes,
+            root: classes.paper
+          }
+        }}
+        {...other}
+      >
+        <MenuList
+          data-mui-test="Menu"
+          onKeyDown={this.handleListKeyDown}
+          {...MenuListProps}
+          ref={ref => {
+            this.menuListRef = ref;
+          }}
+        >
           {children}
         </MenuList>
-      </Popover>;
+      </Popover>
+    );
   }
-
 }
 
-const defaultProps = Menu.defaultProps = {
+const defaultProps = (Menu.defaultProps = {
   disableAutoFocusItem: false,
-  transitionDuration: 'auto'
-};
+  transitionDuration: "auto"
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Menu/Menu').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Menu/Menu').Shape>}
+ */
 export const MenuCreator = withStyles(styles, Menu, {
   isMui: true,
   defaultProps

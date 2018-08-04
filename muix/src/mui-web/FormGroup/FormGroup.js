@@ -1,18 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
 export const styles = {
   /* Styles applied to the root element. */
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexWrap: 'wrap'
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap"
   },
 
   /* Styles applied to the root element if `row={true}`. */
   row: {
-    flexDirection: 'row'
+    flexDirection: "row"
   }
 };
 /**
@@ -23,30 +30,30 @@ export const styles = {
 
 function FormGroup(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     classes,
     className,
     children,
     row,
     ...other
   } = props;
-  return <div className={classNamesStr(classes.root, row && classes.row, className)} {...other}>
+  return (
+    <div
+      className={classNamesStr(classes.root, row && classes.row, className)}
+      {...other}
+    >
       {children}
-    </div>;
+    </div>
+  );
 }
 
-const defaultProps = FormGroup.defaultProps = {
+const defaultProps = (FormGroup.defaultProps = {
   row: false
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/FormGroup/FormGroup').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/FormGroup/FormGroup').Shape>}
+ */
 export const FormGroupCreator = withStyles(styles, FormGroup, {
   isMui: true,
   defaultProps

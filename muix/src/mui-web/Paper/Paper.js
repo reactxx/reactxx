@@ -1,8 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import warning from 'warning';
-import withStyles from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import warning from "warning";
+import withStyles from "../styles/withStyles";
 export const styles = theme => {
   const elevations = {};
   theme.shadows.forEach((shadow, index) => {
@@ -26,12 +33,7 @@ export const styles = theme => {
 
 function Paper(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     classes,
     className: classNameProp,
     component: Component,
@@ -39,20 +41,30 @@ function Paper(props) {
     elevation,
     ...other
   } = props;
-  warning(elevation >= 0 && elevation < 25, `Material-UI: this elevation \`${elevation}\` is not implemented.`);
-  const className = classNames(classes.root, classes[`elevation${elevation}`], !square && classes.rounded, classNameProp);
-  return <Component className={classNamesAny(Component, className)} {...other} />;
+  warning(
+    elevation >= 0 && elevation < 25,
+    `Material-UI: this elevation \`${elevation}\` is not implemented.`
+  );
+  const className = classNames(
+    classes.root,
+    classes[`elevation${elevation}`],
+    !square && classes.rounded,
+    classNameProp
+  );
+  return (
+    <Component className={classNamesAny(Component, className)} {...other} />
+  );
 }
 
-const defaultProps = Paper.defaultProps = {
-  component: 'div',
+const defaultProps = (Paper.defaultProps = {
+  component: "div",
   elevation: 2,
   square: false
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Paper/Paper').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Paper/Paper').Shape>}
+ */
 export const PaperCreator = withStyles(styles, Paper, {
   isMui: true,
   defaultProps

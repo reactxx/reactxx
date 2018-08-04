@@ -1,8 +1,17 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 //       weak
-import warning from 'warning';
+import warning from "warning";
 export function capitalize(string) {
-  if (process.env.NODE_ENV !== 'production' && typeof string !== 'string') {
-    throw new Error('Material-UI: capitalize(string) expects a string argument.');
+  if (process.env.NODE_ENV !== "production" && typeof string !== "string") {
+    throw new Error(
+      "Material-UI: capitalize(string) expects a string argument."
+    );
   }
 
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -16,15 +25,15 @@ export function findIndex(arr, pred) {
   const predType = typeof pred;
 
   for (let i = 0; i < arr.length; i += 1) {
-    if (predType === 'function' && !!pred(arr[i], i, arr) === true) {
+    if (predType === "function" && !!pred(arr[i], i, arr) === true) {
       return i;
     }
 
-    if (predType === 'object' && contains(arr[i], pred)) {
+    if (predType === "object" && contains(arr[i], pred)) {
       return i;
     }
 
-    if (['string', 'number', 'boolean'].indexOf(predType) !== -1) {
+    if (["string", "number", "boolean"].indexOf(predType) !== -1) {
       return arr.indexOf(pred);
     }
   }
@@ -46,15 +55,21 @@ export function find(arr, pred) {
  */
 
 export function createChainedFunction(...funcs) {
-  return funcs.reduce((acc, func) => {
-    if (func == null) {
-      return acc;
-    }
+  return funcs.reduce(
+    (acc, func) => {
+      if (func == null) {
+        return acc;
+      }
 
-    warning(typeof func === 'function', 'Material-UI: invalid Argument Type, must only provide functions, undefined, or null.');
-    return function chainedFunction(...args) {
-      acc.apply(this, args);
-      func.apply(this, args);
-    };
-  }, () => {});
+      warning(
+        typeof func === "function",
+        "Material-UI: invalid Argument Type, must only provide functions, undefined, or null."
+      );
+      return function chainedFunction(...args) {
+        acc.apply(this, args);
+        func.apply(this, args);
+      };
+    },
+    () => {}
+  );
 }

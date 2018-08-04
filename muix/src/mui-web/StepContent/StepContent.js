@@ -1,9 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import warning from 'warning';
-import classNames from 'classnames';
-import Collapse from '../Collapse';
-import withStyles from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import warning from "warning";
+import classNames from "classnames";
+import Collapse from "../Collapse";
+import withStyles from "../styles/withStyles";
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
@@ -13,12 +20,16 @@ export const styles = theme => ({
     paddingLeft: 8 + 12,
     // margin + half icon
     paddingRight: 8,
-    borderLeft: `1px solid ${theme.palette.type === 'light' ? theme.palette.grey[400] : theme.palette.grey[600]}`
+    borderLeft: `1px solid ${
+      theme.palette.type === "light"
+        ? theme.palette.grey[400]
+        : theme.palette.grey[600]
+    }`
   },
 
   /* Styles applied to the root element if `last={true}` (controlled by `Step`). */
   last: {
-    borderLeft: 'none'
+    borderLeft: "none"
   },
 
   /* Styles applied to the Transition component. */
@@ -27,12 +38,7 @@ export const styles = theme => ({
 
 function StepContent(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     active,
     alternativeLabel,
     children,
@@ -47,28 +53,45 @@ function StepContent(props) {
     TransitionProps,
     ...other
   } = props;
-  warning(orientation === 'vertical', 'Material-UI: <StepContent /> is only designed for use with the vertical stepper.');
+  warning(
+    orientation === "vertical",
+    "Material-UI: <StepContent /> is only designed for use with the vertical stepper."
+  );
   let transitionDuration = transitionDurationProp;
 
-  if (transitionDurationProp === 'auto' && !TransitionComponent.muiSupportAuto) {
+  if (
+    transitionDurationProp === "auto" &&
+    !TransitionComponent.muiSupportAuto
+  ) {
     transitionDuration = undefined;
   }
 
-  return <div className={classNamesStr(classes.root, last && classes.last, className)} {...other}>
-      <TransitionComponent in={active} className={classes.transition} timeout={transitionDuration} unmountOnExit {...TransitionProps}>
+  return (
+    <div
+      className={classNamesStr(classes.root, last && classes.last, className)}
+      {...other}
+    >
+      <TransitionComponent
+        in={active}
+        className={classes.transition}
+        timeout={transitionDuration}
+        unmountOnExit
+        {...TransitionProps}
+      >
         {children}
       </TransitionComponent>
-    </div>;
+    </div>
+  );
 }
 
-const defaultProps = StepContent.defaultProps = {
+const defaultProps = (StepContent.defaultProps = {
   TransitionComponent: Collapse,
-  transitionDuration: 'auto'
-};
+  transitionDuration: "auto"
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/StepContent/StepContent').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/StepContent/StepContent').Shape>}
+ */
 export const StepContentCreator = withStyles(styles, StepContent, {
   isMui: true,
   defaultProps

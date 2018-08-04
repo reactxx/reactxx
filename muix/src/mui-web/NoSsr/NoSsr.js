@@ -1,6 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import exactProp from '../utils/exactProp';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import exactProp from "../utils/exactProp";
 
 const Fallback = () => null;
 /**
@@ -12,7 +19,6 @@ const Fallback = () => null;
  * - Reduce the rendering time on the server.
  * - Under too heavy server load, you can turn on service degradation.
  */
-
 
 class NoSsr extends React.Component {
   state = {
@@ -26,13 +32,9 @@ class NoSsr extends React.Component {
   }
 
   render() {
-    const {
-      children,
-      fallback
-    } = this.props;
+    const { children, fallback } = this.props;
     return this.state.mounted ? children : fallback;
   }
-
 }
 
 NoSsr.propTypes = {

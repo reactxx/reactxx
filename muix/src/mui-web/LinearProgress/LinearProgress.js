@@ -1,16 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import warning from 'warning';
-import withStyles from '../styles/withStyles';
-import { lighten } from '../styles/colorManipulator';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import warning from "warning";
+import withStyles from "../styles/withStyles";
+import { lighten } from "../styles/colorManipulator";
 const TRANSITION_DURATION = 4; // seconds
 
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    position: 'relative',
-    overflow: 'hidden',
+    position: "relative",
+    overflow: "hidden",
     height: 5
   },
 
@@ -26,46 +33,55 @@ export const styles = theme => ({
 
   /* Styles applied to the root element if `variant="buffer"`. */
   buffer: {
-    backgroundColor: 'transparent'
+    backgroundColor: "transparent"
   },
 
   /* Styles applied to the root element if `variant="query"`. */
   query: {
-    transform: 'rotate(180deg)'
+    transform: "rotate(180deg)"
   },
 
   /* Styles applied to the additional bar element if `variant="buffer"`. */
   dashed: {
-    position: 'absolute',
+    position: "absolute",
     marginTop: 0,
-    height: '100%',
-    width: '100%',
-    animation: 'buffer 3s infinite linear'
+    height: "100%",
+    width: "100%",
+    animation: "buffer 3s infinite linear"
   },
 
   /* Styles applied to the additional bar element if `variant="buffer"` & `color="primary"`. */
   dashedColorPrimary: {
-    backgroundImage: `radial-gradient(${lighten(theme.palette.primary.light, 0.6)} 0%, ${lighten(theme.palette.primary.light, 0.6)} 16%, transparent 42%)`,
-    backgroundSize: '10px 10px',
-    backgroundPosition: '0px -23px'
+    backgroundImage: `radial-gradient(${lighten(
+      theme.palette.primary.light,
+      0.6
+    )} 0%, ${lighten(theme.palette.primary.light, 0.6)} 16%, transparent 42%)`,
+    backgroundSize: "10px 10px",
+    backgroundPosition: "0px -23px"
   },
 
   /* Styles applied to the additional bar element if `variant="buffer"` & `color="secondary"`. */
   dashedColorSecondary: {
-    backgroundImage: `radial-gradient(${lighten(theme.palette.secondary.light, 0.4)} 0%, ${lighten(theme.palette.secondary.light, 0.6)} 16%, transparent 42%)`,
-    backgroundSize: '10px 10px',
-    backgroundPosition: '0px -23px'
+    backgroundImage: `radial-gradient(${lighten(
+      theme.palette.secondary.light,
+      0.4
+    )} 0%, ${lighten(
+      theme.palette.secondary.light,
+      0.6
+    )} 16%, transparent 42%)`,
+    backgroundSize: "10px 10px",
+    backgroundPosition: "0px -23px"
   },
 
   /* Styles applied to the layered bar1 & bar2 elements. */
   bar: {
-    width: '100%',
-    position: 'absolute',
+    width: "100%",
+    position: "absolute",
     left: 0,
     bottom: 0,
     top: 0,
-    transition: 'transform 0.2s linear',
-    transformOrigin: 'left'
+    transition: "transform 0.2s linear",
+    transformOrigin: "left"
   },
 
   /* Styles applied to the bar elements if `color="primary"`; bar2 if `variant` not "buffer". */
@@ -80,14 +96,15 @@ export const styles = theme => ({
 
   /* Styles applied to the bar1 element if `variant="indeterminate or query"`. */
   bar1Indeterminate: {
-    width: 'auto',
-    willChange: 'left, right',
-    animation: 'mui-indeterminate1 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite'
+    width: "auto",
+    willChange: "left, right",
+    animation:
+      "mui-indeterminate1 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite"
   },
 
   /* Styles applied to the bar1 element if `variant="determinate"`. */
   bar1Determinate: {
-    willChange: 'transform',
+    willChange: "transform",
     transition: `transform .${TRANSITION_DURATION}s linear`
   },
 
@@ -99,10 +116,11 @@ export const styles = theme => ({
 
   /* Styles applied to the bar2 element if `variant="indeterminate or query"`. */
   bar2Indeterminate: {
-    width: 'auto',
-    willChange: 'left, right',
-    animation: 'mui-indeterminate2 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite',
-    animationDelay: '1.15s'
+    width: "auto",
+    willChange: "left, right",
+    animation:
+      "mui-indeterminate2 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite",
+    animationDelay: "1.15s"
   },
 
   /* Styles applied to the bar2 element if `variant="determinate"`. */
@@ -116,50 +134,50 @@ export const styles = theme => ({
   // || represents the viewport
   // -  represents a light background
   // x  represents a dark background
-  '@keyframes mui-indeterminate1': {
+  "@keyframes mui-indeterminate1": {
     //  |-----|---x-||-----||-----|
-    '0%': {
-      left: '-35%',
-      right: '100%'
+    "0%": {
+      left: "-35%",
+      right: "100%"
     },
     //  |-----|-----||-----||xxxx-|
-    '60%': {
-      left: '100%',
-      right: '-90%'
+    "60%": {
+      left: "100%",
+      right: "-90%"
     },
-    '100%': {
-      left: '100%',
-      right: '-90%'
+    "100%": {
+      left: "100%",
+      right: "-90%"
     }
   },
-  '@keyframes mui-indeterminate2': {
+  "@keyframes mui-indeterminate2": {
     //  |xxxxx|xxxxx||-----||-----|
-    '0%': {
-      left: '-200%',
-      right: '100%'
+    "0%": {
+      left: "-200%",
+      right: "100%"
     },
     //  |-----|-----||-----||-x----|
-    '60%': {
-      left: '107%',
-      right: '-8%'
+    "60%": {
+      left: "107%",
+      right: "-8%"
     },
-    '100%': {
-      left: '107%',
-      right: '-8%'
+    "100%": {
+      left: "107%",
+      right: "-8%"
     }
   },
-  '@keyframes buffer': {
-    '0%': {
+  "@keyframes buffer": {
+    "0%": {
       opacity: 1,
-      backgroundPosition: '0px -23px'
+      backgroundPosition: "0px -23px"
     },
-    '50%': {
+    "50%": {
       opacity: 0,
-      backgroundPosition: '0px -23px'
+      backgroundPosition: "0px -23px"
     },
-    '100%': {
+    "100%": {
       opacity: 1,
-      backgroundPosition: '-200px -23px'
+      backgroundPosition: "-200px -23px"
     }
   }
 });
@@ -173,12 +191,7 @@ export const styles = theme => ({
 
 function LinearProgress(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     classes,
     className: classNameProp,
     color,
@@ -187,52 +200,104 @@ function LinearProgress(props) {
     variant,
     ...other
   } = props;
-  const className = classNames(classes.root, color === 'primary' && classes.colorPrimary, color === 'secondary' && classes.colorSecondary, variant === 'buffer' && classes.buffer, variant === 'query' && classes.query, classNameProp);
-  const dashedClass = classNames(classes.dashed, color === 'primary' && classes.dashedColorPrimary, color === 'secondary' && classes.dashedColorSecondary);
-  const bar1ClassName = classNames(classes.bar, color === 'primary' && classes.barColorPrimary, color === 'secondary' && classes.barColorSecondary, (variant === 'indeterminate' || variant === 'query') && classes.bar1Indeterminate, variant === 'determinate' && classes.bar1Determinate, variant === 'buffer' && classes.bar1Buffer);
-  const bar2ClassName = classNames(classes.bar, color === 'primary' && variant !== 'buffer' && classes.barColorPrimary, color === 'primary' && variant === 'buffer' && classes.colorPrimary, color === 'secondary' && variant !== 'buffer' && classes.barColorSecondary, color === 'secondary' && variant === 'buffer' && classes.colorSecondary, (variant === 'indeterminate' || variant === 'query') && classes.bar2Indeterminate, variant === 'determinate' && classes.bar2Determinate, variant === 'buffer' && classes.bar2Buffer);
+  const className = classNames(
+    classes.root,
+    color === "primary" && classes.colorPrimary,
+    color === "secondary" && classes.colorSecondary,
+    variant === "buffer" && classes.buffer,
+    variant === "query" && classes.query,
+    classNameProp
+  );
+  const dashedClass = classNames(
+    classes.dashed,
+    color === "primary" && classes.dashedColorPrimary,
+    color === "secondary" && classes.dashedColorSecondary
+  );
+  const bar1ClassName = classNames(
+    classes.bar,
+    color === "primary" && classes.barColorPrimary,
+    color === "secondary" && classes.barColorSecondary,
+    (variant === "indeterminate" || variant === "query") &&
+      classes.bar1Indeterminate,
+    variant === "determinate" && classes.bar1Determinate,
+    variant === "buffer" && classes.bar1Buffer
+  );
+  const bar2ClassName = classNames(
+    classes.bar,
+    color === "primary" && variant !== "buffer" && classes.barColorPrimary,
+    color === "primary" && variant === "buffer" && classes.colorPrimary,
+    color === "secondary" && variant !== "buffer" && classes.barColorSecondary,
+    color === "secondary" && variant === "buffer" && classes.colorSecondary,
+    (variant === "indeterminate" || variant === "query") &&
+      classes.bar2Indeterminate,
+    variant === "determinate" && classes.bar2Determinate,
+    variant === "buffer" && classes.bar2Buffer
+  );
   const rootProps = {};
   const inlineStyles = {
     bar1: {},
     bar2: {}
   };
 
-  if (variant === 'determinate' || variant === 'buffer') {
+  if (variant === "determinate" || variant === "buffer") {
     if (value !== undefined) {
-      rootProps['aria-valuenow'] = Math.round(value);
+      rootProps["aria-valuenow"] = Math.round(value);
       inlineStyles.bar1.transform = `scaleX(${value / 100})`;
     } else {
-      warning(false, 'Material-UI: you need to provide a value property ' + 'when using the determinate or buffer variant of LinearProgress .');
+      warning(
+        false,
+        "Material-UI: you need to provide a value property " +
+          "when using the determinate or buffer variant of LinearProgress ."
+      );
     }
   }
 
-  if (variant === 'buffer') {
+  if (variant === "buffer") {
     if (valueBuffer !== undefined) {
       inlineStyles.bar2.transform = `scaleX(${(valueBuffer || 0) / 100})`;
     } else {
-      warning(false, 'Material-UI: you need to provide a valueBuffer property ' + 'when using the buffer variant of LinearProgress.');
+      warning(
+        false,
+        "Material-UI: you need to provide a valueBuffer property " +
+          "when using the buffer variant of LinearProgress."
+      );
     }
   }
 
-  return <div className={classNamesStr(className)} role="progressbar" {...rootProps} {...other}>
-      {variant === 'buffer' ? <div className={classNamesStr(dashedClass)} /> : null}
+  return (
+    <div
+      className={classNamesStr(className)}
+      role="progressbar"
+      {...rootProps}
+      {...other}
+    >
+      {variant === "buffer" ? (
+        <div className={classNamesStr(dashedClass)} />
+      ) : null}
       <div className={classNamesStr(bar1ClassName)} style={inlineStyles.bar1} />
-      {variant === 'determinate' ? null : <div className={classNamesStr(bar2ClassName)} style={inlineStyles.bar2} />}
-    </div>;
+      {variant === "determinate" ? null : (
+        <div
+          className={classNamesStr(bar2ClassName)}
+          style={inlineStyles.bar2}
+        />
+      )}
+    </div>
+  );
 }
 
-const defaultProps = LinearProgress.defaultProps = {
-  color: 'primary',
-  variant: 'indeterminate'
-};
+const defaultProps = (LinearProgress.defaultProps = {
+  color: "primary",
+  variant: "indeterminate"
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/LinearProgress/LinearProgress').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/LinearProgress/LinearProgress').Shape>}
+ */
 export const LinearProgressCreator = withStyles(styles, LinearProgress, {
   isMui: true,
   defaultProps
 });
 const LinearProgressComponent = LinearProgressCreator();
-if (LinearProgress.muiName) LinearProgressComponent.muiName = LinearProgress.muiName;
+if (LinearProgress.muiName)
+  LinearProgressComponent.muiName = LinearProgress.muiName;
 export default LinearProgressComponent;

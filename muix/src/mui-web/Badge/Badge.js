@@ -1,27 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import { capitalize } from '../utils/helpers';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
+import { capitalize } from "../utils/helpers";
 const RADIUS = 11;
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    position: 'relative',
-    display: 'inline-flex',
+    position: "relative",
+    display: "inline-flex",
     // For correct alignment with the text.
-    verticalAlign: 'middle'
+    verticalAlign: "middle"
   },
 
   /* Styles applied to the badge `span` element. */
   badge: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    position: "absolute",
     top: -RADIUS,
     right: -RADIUS,
     fontFamily: theme.typography.fontFamily,
@@ -29,11 +36,10 @@ export const styles = theme => ({
     fontSize: theme.typography.pxToRem(12),
     width: RADIUS * 2,
     height: RADIUS * 2,
-    borderRadius: '50%',
+    borderRadius: "50%",
     backgroundColor: theme.palette.color,
     color: theme.palette.textColor,
     zIndex: 1 // Render the badge on top of potential ripples.
-
   },
 
   /* Styles applied to the root element if `color="primary"`. */
@@ -57,12 +63,7 @@ export const styles = theme => ({
 
 function Badge(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     badgeContent,
     children,
     classes,
@@ -71,21 +72,29 @@ function Badge(props) {
     component: ComponentProp,
     ...other
   } = props;
-  const badgeClassName = classNames(classes.badge, color !== 'default' && classes[`color${capitalize(color)}`]);
-  return <ComponentProp className={classNamesAny(ComponentProp, classes.root, classNameProp)} {...other}>
+  const badgeClassName = classNames(
+    classes.badge,
+    color !== "default" && classes[`color${capitalize(color)}`]
+  );
+  return (
+    <ComponentProp
+      className={classNamesAny(ComponentProp, classes.root, classNameProp)}
+      {...other}
+    >
       {children}
       <span className={classNamesStr(badgeClassName)}>{badgeContent}</span>
-    </ComponentProp>;
+    </ComponentProp>
+  );
 }
 
-const defaultProps = Badge.defaultProps = {
-  color: 'default',
-  component: 'span'
-};
+const defaultProps = (Badge.defaultProps = {
+  color: "default",
+  component: "span"
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Badge/Badge').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Badge/Badge').Shape>}
+ */
 export const BadgeCreator = withStyles(styles, Badge, {
   isMui: true,
   defaultProps

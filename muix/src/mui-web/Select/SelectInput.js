@@ -1,10 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import keycode from 'keycode';
-import warning from 'warning';
-import Menu from '../Menu/Menu';
-import { isFilled } from '../Input/Input';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import keycode from "keycode";
+import warning from "warning";
+import Menu from "../Menu/Menu";
+import { isFilled } from "../Input/Input";
 /**
  * @ignore - internal component.
  */
@@ -32,10 +39,7 @@ class SelectInput extends React.Component {
     }
   }
 
-  update = ({
-    event,
-    open
-  }) => {
+  update = ({ event, open }) => {
     if (this.isOpenControlled) {
       if (open) {
         this.props.onOpen(event);
@@ -74,10 +78,7 @@ class SelectInput extends React.Component {
       });
     }
 
-    const {
-      onChange,
-      name
-    } = this.props;
+    const { onChange, name } = this.props;
 
     if (onChange) {
       let value;
@@ -120,7 +121,7 @@ class SelectInput extends React.Component {
       return;
     }
 
-    if (['space', 'up', 'down'].indexOf(keycode(event)) !== -1) {
+    if (["space", "up", "down"].indexOf(keycode(event)) !== -1) {
       event.preventDefault(); // Opening the menu is going to blur the. It will be focused back when closed.
 
       this.ignoreNextBlur = true;
@@ -134,9 +135,7 @@ class SelectInput extends React.Component {
     this.displayRef = ref;
   };
   handleInputRef = ref => {
-    const {
-      inputRef
-    } = this.props;
+    const { inputRef } = this.props;
 
     if (!inputRef) {
       return;
@@ -148,7 +147,7 @@ class SelectInput extends React.Component {
       value: this.props.value
     };
 
-    if (typeof inputRef === 'function') {
+    if (typeof inputRef === "function") {
       inputRef(nodeProxy);
     } else {
       inputRef.current = nodeProxy;
@@ -157,12 +156,7 @@ class SelectInput extends React.Component {
 
   render() {
     const {
-      $system: {
-        classNames,
-        classNamesStr,
-        classNamesAny,
-        theme
-      },
+      $system: { classNames, classNamesStr, classNamesAny, theme },
       autoWidth,
       children,
       classes,
@@ -185,14 +179,15 @@ class SelectInput extends React.Component {
       required,
       SelectDisplayProps,
       tabIndex: tabIndexProp,
-      type = 'hidden',
+      type = "hidden",
       value,
       ...other
     } = this.props;
-    const open = this.isOpenControlled && this.displayRef ? openProp : this.state.open;
-    delete other['aria-invalid'];
+    const open =
+      this.isOpenControlled && this.displayRef ? openProp : this.state.open;
+    delete other["aria-invalid"];
     let display;
-    let displaySingle = '';
+    let displaySingle = "";
     const displayMultiple = [];
     let computeDisplay = false; // No need to display any value if the field is empty.
 
@@ -209,12 +204,21 @@ class SelectInput extends React.Component {
         return null;
       }
 
-      warning(child.type !== React.Fragment, ["Material-UI: the Select component doesn't accept a Fragment as a child.", 'Consider providing an array instead.'].join('\n'));
+      warning(
+        child.type !== React.Fragment,
+        [
+          "Material-UI: the Select component doesn't accept a Fragment as a child.",
+          "Consider providing an array instead."
+        ].join("\n")
+      );
       let selected;
 
       if (multiple) {
         if (!Array.isArray(value)) {
-          throw new Error('Material-UI: the `value` property must be an array ' + 'when using the `Select` component with `multiple`.');
+          throw new Error(
+            "Material-UI: the `value` property must be an array " +
+              "when using the `Select` component with `multiple`."
+          );
         }
 
         selected = value.indexOf(child.props.value) !== -1;
@@ -232,19 +236,17 @@ class SelectInput extends React.Component {
 
       return React.cloneElement(child, {
         onClick: this.handleItemClick(child),
-        role: 'option',
+        role: "option",
         selected,
         value: undefined,
         // The value is most likely not a valid HTML attribute.
-        'data-value': child.props.value // Instead, we provide it as a data attribute.
-
+        "data-value": child.props.value // Instead, we provide it as a data attribute.
       });
     });
 
     if (computeDisplay) {
-      display = multiple ? displayMultiple.join(', ') : displaySingle;
+      display = multiple ? displayMultiple.join(", ") : displaySingle;
     } // Avoid performing a layout computation in the render method.
-
 
     let menuMinWidth = this.state.menuMinWidth;
 
@@ -254,182 +256,227 @@ class SelectInput extends React.Component {
 
     let tabIndex;
 
-    if (typeof tabIndexProp !== 'undefined') {
+    if (typeof tabIndexProp !== "undefined") {
       tabIndex = tabIndexProp;
     } else {
       tabIndex = disabled ? null : 0;
     }
 
-    return <div className={classNamesStr(classes.root)}>
-        <div className={classNamesStr(classes.select, classes.selectMenu, disabled && classes.disabled, className)} ref={this.handleDisplayRef} data-mui-test="SelectDisplay" aria-pressed={open ? 'true' : 'false'} tabIndex={tabIndex} role="button" aria-owns={open ? `menu-${name || ''}` : null} aria-haspopup="true" onKeyDown={this.handleKeyDown} onBlur={this.handleBlur} onClick={disabled || readOnly ? null : this.handleClick} onFocus={onFocus} {...SelectDisplayProps}>
-          {
-          /* So the vertical align positioning algorithm quicks in. */
-        }
-          {
-          /* eslint-disable-next-line react/no-danger */
-        }
-          {display || <span dangerouslySetInnerHTML={{
-          __html: '&#8203;'
-        }} />}
+    return (
+      <div className={classNamesStr(classes.root)}>
+        <div
+          className={classNamesStr(
+            classes.select,
+            classes.selectMenu,
+            disabled && classes.disabled,
+            className
+          )}
+          ref={this.handleDisplayRef}
+          data-mui-test="SelectDisplay"
+          aria-pressed={open ? "true" : "false"}
+          tabIndex={tabIndex}
+          role="button"
+          aria-owns={open ? `menu-${name || ""}` : null}
+          aria-haspopup="true"
+          onKeyDown={this.handleKeyDown}
+          onBlur={this.handleBlur}
+          onClick={disabled || readOnly ? null : this.handleClick}
+          onFocus={onFocus}
+          {...SelectDisplayProps}
+        >
+          {/* So the vertical align positioning algorithm quicks in. */}
+          {/* eslint-disable-next-line react/no-danger */}
+          {display || (
+            <span
+              dangerouslySetInnerHTML={{
+                __html: "&#8203;"
+              }}
+            />
+          )}
         </div>
-        <input value={Array.isArray(value) ? value.join(',') : value} name={name} ref={this.handleInputRef} type={type} {...other} />
+        <input
+          value={Array.isArray(value) ? value.join(",") : value}
+          name={name}
+          ref={this.handleInputRef}
+          type={type}
+          {...other}
+        />
         <IconComponent className={classes.icon} />
-        <Menu id={`menu-${name || ''}`} anchorEl={this.displayRef} open={open} onClose={this.handleClose} {...MenuProps} MenuListProps={{
-        role: 'listbox',
-        ...MenuProps.MenuListProps
-      }} PaperProps={{ ...MenuProps.PaperProps,
-        style: {
-          minWidth: menuMinWidth,
-          ...(MenuProps.PaperProps != null ? MenuProps.PaperProps.style : null)
-        }
-      }}>
+        <Menu
+          id={`menu-${name || ""}`}
+          anchorEl={this.displayRef}
+          open={open}
+          onClose={this.handleClose}
+          {...MenuProps}
+          MenuListProps={{
+            role: "listbox",
+            ...MenuProps.MenuListProps
+          }}
+          PaperProps={{
+            ...MenuProps.PaperProps,
+            style: {
+              minWidth: menuMinWidth,
+              ...(MenuProps.PaperProps != null
+                ? MenuProps.PaperProps.style
+                : null)
+            }
+          }}
+        >
           {items}
         </Menu>
-      </div>;
+      </div>
+    );
   }
-
 }
 
 SelectInput.propTypes = {
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   autoFocus: PropTypes.bool,
 
   /**
-     * If true, the width of the popover will automatically be set according to the items inside the
-     * menu, otherwise it will be at least the width of the select input.
-     */
+   * If true, the width of the popover will automatically be set according to the items inside the
+   * menu, otherwise it will be at least the width of the select input.
+   */
   autoWidth: PropTypes.bool,
 
   /**
-     * The option elements to populate the select with.
-     * Can be some `<MenuItem>` elements.
-     */
+   * The option elements to populate the select with.
+   * Can be some `<MenuItem>` elements.
+   */
   children: PropTypes.node,
 
   /**
-     * Override or extend the styles applied to the component.
-     * See [CSS API](#css-api) below for more details.
-     */
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css-api) below for more details.
+   */
   classes: PropTypes.object.isRequired,
 
   /**
-     * The CSS class name of the select element.
-     */
+   * The CSS class name of the select element.
+   */
   className: PropTypes.string,
 
   /**
-     * If `true`, the select will be disabled.
-     */
+   * If `true`, the select will be disabled.
+   */
   disabled: PropTypes.bool,
 
   /**
-     * If `true`, the selected item is displayed even if its value is empty.
-     */
+   * If `true`, the selected item is displayed even if its value is empty.
+   */
   displayEmpty: PropTypes.bool,
 
   /**
-     * The icon that displays the arrow.
-     */
-  IconComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
+   * The icon that displays the arrow.
+   */
+  IconComponent: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+    PropTypes.object
+  ]),
 
   /**
-     * Use that property to pass a ref callback to the native select element.
-     */
+   * Use that property to pass a ref callback to the native select element.
+   */
   inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-     * Properties applied to the [`Menu`](/api/menu) element.
-     */
+   * Properties applied to the [`Menu`](/api/menu) element.
+   */
   MenuProps: PropTypes.object,
 
   /**
-     * If true, `value` must be an array and the menu will support multiple selections.
-     */
+   * If true, `value` must be an array and the menu will support multiple selections.
+   */
   multiple: PropTypes.bool,
 
   /**
-     * Name attribute of the `select` or hidden `input` element.
-     */
+   * Name attribute of the `select` or hidden `input` element.
+   */
   name: PropTypes.string,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   onBlur: PropTypes.func,
 
   /**
-     * Callback function fired when a menu item is selected.
-     *
-     * @param {object} event The event source of the callback.
-     * You can pull out the new value by accessing `event.target.value`.
-     * @param {object} [child] The react element that was selected.
-     */
+   * Callback function fired when a menu item is selected.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new value by accessing `event.target.value`.
+   * @param {object} [child] The react element that was selected.
+   */
   onChange: PropTypes.func,
 
   /**
-     * Callback fired when the component requests to be closed.
-     * Use in controlled mode (see open).
-     *
-     * @param {object} event The event source of the callback
-     */
+   * Callback fired when the component requests to be closed.
+   * Use in controlled mode (see open).
+   *
+   * @param {object} event The event source of the callback
+   */
   onClose: PropTypes.func,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   onFocus: PropTypes.func,
 
   /**
-     * Callback fired when the component requests to be opened.
-     * Use in controlled mode (see open).
-     *
-     * @param {object} event The event source of the callback
-     */
+   * Callback fired when the component requests to be opened.
+   * Use in controlled mode (see open).
+   *
+   * @param {object} event The event source of the callback
+   */
   onOpen: PropTypes.func,
 
   /**
-     * Control `select` open state.
-     */
+   * Control `select` open state.
+   */
   open: PropTypes.bool,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   readOnly: PropTypes.bool,
 
   /**
-     * Render the selected value.
-     *
-     * @param {*} value The `value` provided to the component.
-     * @returns {ReactElement}
-     */
+   * Render the selected value.
+   *
+   * @param {*} value The `value` provided to the component.
+   * @returns {ReactElement}
+   */
   renderValue: PropTypes.func,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   required: PropTypes.bool,
 
   /**
-     * Properties applied to the clickable div element.
-     */
+   * Properties applied to the clickable div element.
+   */
   SelectDisplayProps: PropTypes.object,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   type: PropTypes.string,
 
   /**
-     * The input value.
-     */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number]))]).isRequired
+   * The input value.
+   */
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number]))
+  ]).isRequired
 };
 export default SelectInput;

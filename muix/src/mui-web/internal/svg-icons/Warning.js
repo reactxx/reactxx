@@ -1,14 +1,23 @@
-import React from 'react';
-import pure from 'recompose/pure';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import pure from "recompose/pure";
 import SvgIcon from "../../SvgIcon/SvgIcon";
 /**
  * @ignore - internal component.
  */
 
-let Warning = props => <SvgIcon {...props}>
+let Warning = props => (
+  <SvgIcon {...props}>
     <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
-  </SvgIcon>;
+  </SvgIcon>
+);
 
 Warning = pure(Warning);
-Warning.muiName = 'SvgIcon';
+Warning.muiName = "SvgIcon";
 export default Warning;

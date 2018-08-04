@@ -1,6 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import withWidth, { isWidthDown } from '../withWidth';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import withWidth, { isWidthDown } from "../withWidth";
 /**
  * Dialog will responsively be full screen *at or below* the given breakpoint
  * (defaults to 'sm' for mobile devices).
@@ -8,16 +15,16 @@ import withWidth, { isWidthDown } from '../withWidth';
  */
 
 const withMobileDialog = (options = {}) => Component => {
-  const {
-    breakpoint = 'sm'
-  } = options;
+  const { breakpoint = "sm" } = options;
 
   function WithMobileDialog(props) {
-    return <Component fullScreen={isWidthDown(breakpoint, props.width)} {...props} />;
+    return (
+      <Component fullScreen={isWidthDown(breakpoint, props.width)} {...props} />
+    );
   }
 
   WithMobileDialog.propTypes = {
-    width: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']).isRequired
+    width: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]).isRequired
   };
   return withWidth()(WithMobileDialog);
 };

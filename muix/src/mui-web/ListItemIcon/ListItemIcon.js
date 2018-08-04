@@ -1,7 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
@@ -16,28 +23,27 @@ export const styles = theme => ({
 
 function ListItemIcon(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     children,
     classes,
     className: classNameProp,
     ...other
   } = props;
   return React.cloneElement(children, {
-    className: classNames(classes.root, classNameProp, children.props.className),
+    className: classNames(
+      classes.root,
+      classNameProp,
+      children.props.className
+    ),
     ...other
   });
 }
 
-const defaultProps = ListItemIcon.defaultProps = {};
+const defaultProps = (ListItemIcon.defaultProps = {});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListItemIcon/ListItemIcon').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListItemIcon/ListItemIcon').Shape>}
+ */
 export const ListItemIconCreator = withStyles(styles, ListItemIcon, {
   isMui: true,
   defaultProps

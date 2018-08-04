@@ -1,8 +1,15 @@
-import isWindow from 'dom-helpers/query/isWindow';
-import ownerDocument from '../utils/ownerDocument';
-import ownerWindow from '../utils/ownerWindow';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import isWindow from "dom-helpers/query/isWindow";
+import ownerDocument from "../utils/ownerDocument";
+import ownerWindow from "../utils/ownerWindow";
 export function isBody(node) {
-  return node && node.tagName.toLowerCase() === 'body';
+  return node && node.tagName.toLowerCase() === "body";
 } // Do we have a scroll bar?
 
 export default function isOverflowing(container) {
@@ -14,9 +21,8 @@ export default function isOverflowing(container) {
     return container.scrollHeight > container.clientHeight;
   } // Takes in account potential non zero margin on the body.
 
-
   const style = win.getComputedStyle(doc.body);
-  const marginLeft = parseInt(style.getPropertyValue('margin-left'), 10);
-  const marginRight = parseInt(style.getPropertyValue('margin-right'), 10);
+  const marginLeft = parseInt(style.getPropertyValue("margin-left"), 10);
+  const marginRight = parseInt(style.getPropertyValue("margin-right"), 10);
   return marginLeft + doc.body.clientWidth + marginRight < win.innerWidth;
 }

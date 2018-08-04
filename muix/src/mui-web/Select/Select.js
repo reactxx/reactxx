@@ -1,23 +1,25 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 // @inheritedComponent Input
-import React from 'react';
-import PropTypes from 'prop-types';
-import SelectInput from './SelectInput';
-import withStyles from '../styles/withStyles';
-import mergeClasses from '../styles/mergeClasses';
-import ArrowDropDownIcon from '../internal/svg-icons/ArrowDropDown';
+import React from "react";
+import PropTypes from "prop-types";
+import SelectInput from "./SelectInput";
+import withStyles from "../styles/withStyles";
+import mergeClasses from "../styles/mergeClasses";
+import ArrowDropDownIcon from "../internal/svg-icons/ArrowDropDown";
 import Input from "../Input/Input";
-import { styles as nativeSelectStyles } from '../NativeSelect/NativeSelect';
-import NativeSelectInput from '../NativeSelect/NativeSelectInput';
+import { styles as nativeSelectStyles } from "../NativeSelect/NativeSelect";
+import NativeSelectInput from "../NativeSelect/NativeSelectInput";
 export const styles = nativeSelectStyles;
 
 function Select(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     autoWidth,
     children,
     classes,
@@ -45,42 +47,46 @@ function Select(props) {
       IconComponent,
       type: undefined,
       // We render a select. We can ignore the type provided by the `Input`.
-      ...(native ? {} : {
-        autoWidth,
-        displayEmpty,
-        MenuProps,
-        multiple,
-        onClose,
-        onOpen,
-        open,
-        renderValue,
-        SelectDisplayProps
-      }),
+      ...(native
+        ? {}
+        : {
+            autoWidth,
+            displayEmpty,
+            MenuProps,
+            multiple,
+            onClose,
+            onOpen,
+            open,
+            renderValue,
+            SelectDisplayProps
+          }),
       ...inputProps,
-      classes: inputProps ? mergeClasses({
-        baseClasses: classes,
-        newClasses: inputProps.classes,
-        Component: Select
-      }) : classes,
+      classes: inputProps
+        ? mergeClasses({
+            baseClasses: classes,
+            newClasses: inputProps.classes,
+            Component: Select
+          })
+        : classes,
       ...(input ? input.props.inputProps : {})
     },
     ...other
   });
 }
 
-Select.muiName = 'Select';
-const defaultProps = Select.defaultProps = {
+Select.muiName = "Select";
+const defaultProps = (Select.defaultProps = {
   autoWidth: false,
   displayEmpty: false,
   IconComponent: ArrowDropDownIcon,
   input: <Input />,
   multiple: false,
   native: false
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Select/Select').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Select/Select').Shape>}
+ */
 export const SelectCreator = withStyles(styles, Select, {
   isMui: true,
   defaultProps

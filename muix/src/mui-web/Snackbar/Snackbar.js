@@ -1,13 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import EventListener from 'react-event-listener';
-import withStyles from '../styles/withStyles';
-import { duration } from '../styles/transitions';
-import ClickAwayListener from '../ClickAwayListener';
-import { capitalize, createChainedFunction } from '../utils/helpers';
-import Slide from '../Slide';
-import SnackbarContent from '../SnackbarContent';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import EventListener from "react-event-listener";
+import withStyles from "../styles/withStyles";
+import { duration } from "../styles/transitions";
+import ClickAwayListener from "../ClickAwayListener";
+import { capitalize, createChainedFunction } from "../utils/helpers";
+import Slide from "../Slide";
+import SnackbarContent from "../SnackbarContent";
 export const styles = theme => {
   const gutter = 24;
   const top = {
@@ -17,10 +24,10 @@ export const styles = theme => {
     bottom: 0
   };
   const right = {
-    justifyContent: 'flex-end'
+    justifyContent: "flex-end"
   };
   const left = {
-    justifyContent: 'flex-start'
+    justifyContent: "flex-start"
   };
   const topSpace = {
     top: gutter
@@ -35,69 +42,77 @@ export const styles = theme => {
     left: gutter
   };
   const center = {
-    left: '50%',
-    right: 'auto',
-    transform: 'translateX(-50%)'
+    left: "50%",
+    right: "auto",
+    transform: "translateX(-50%)"
   };
   return {
     /* Styles applied to the root element. */
     root: {
       zIndex: theme.zIndex.snackbar,
-      position: 'fixed',
-      display: 'flex',
+      position: "fixed",
+      display: "flex",
       left: 0,
       right: 0,
-      justifyContent: 'center',
-      alignItems: 'center'
+      justifyContent: "center",
+      alignItems: "center"
     },
 
     /* Styles applied to the root element if `anchorOrigin={{ 'top', 'center' }}`. */
-    anchorOriginTopCenter: { ...top,
-      [theme.breakpoints.up('md')]: { ...center
+    anchorOriginTopCenter: {
+      ...top,
+      [theme.breakpoints.up("md")]: {
+        ...center
       }
     },
 
     /* Styles applied to the root element if `anchorOrigin={{ 'bottom', 'center' }}`. */
-    anchorOriginBottomCenter: { ...bottom,
-      [theme.breakpoints.up('md')]: { ...center
+    anchorOriginBottomCenter: {
+      ...bottom,
+      [theme.breakpoints.up("md")]: {
+        ...center
       }
     },
 
     /* Styles applied to the root element if `anchorOrigin={{ 'top', 'right' }}`. */
-    anchorOriginTopRight: { ...top,
+    anchorOriginTopRight: {
+      ...top,
       ...right,
-      [theme.breakpoints.up('md')]: {
-        left: 'auto',
+      [theme.breakpoints.up("md")]: {
+        left: "auto",
         ...topSpace,
         ...rightSpace
       }
     },
 
     /* Styles applied to the root element if `anchorOrigin={{ 'bottom', 'right' }}`. */
-    anchorOriginBottomRight: { ...bottom,
+    anchorOriginBottomRight: {
+      ...bottom,
       ...right,
-      [theme.breakpoints.up('md')]: {
-        left: 'auto',
+      [theme.breakpoints.up("md")]: {
+        left: "auto",
         ...bottomSpace,
         ...rightSpace
       }
     },
 
     /* Styles applied to the root element if `anchorOrigin={{ 'top', 'left' }}`. */
-    anchorOriginTopLeft: { ...top,
+    anchorOriginTopLeft: {
+      ...top,
       ...left,
-      [theme.breakpoints.up('md')]: {
-        right: 'auto',
+      [theme.breakpoints.up("md")]: {
+        right: "auto",
         ...topSpace,
         ...leftSpace
       }
     },
 
     /* Styles applied to the root element if `anchorOrigin={{ 'bottom', 'left' }}`. */
-    anchorOriginBottomLeft: { ...bottom,
+    anchorOriginBottomLeft: {
+      ...bottom,
       ...left,
-      [theme.breakpoints.up('md')]: {
-        right: 'auto',
+      [theme.breakpoints.up("md")]: {
+        right: "auto",
         ...bottomSpace,
         ...leftSpace
       }
@@ -106,8 +121,8 @@ export const styles = theme => {
 };
 /* istanbul ignore if */
 
-if (process.env.NODE_ENV !== 'production' && !React.createContext) {
-  throw new Error('Material-UI: react@16.3.0 or greater is required.');
+if (process.env.NODE_ENV !== "production" && !React.createContext) {
+  throw new Error("Material-UI: react@16.3.0 or greater is required.");
 }
 
 class Snackbar extends React.Component {
@@ -135,7 +150,7 @@ class Snackbar extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (typeof prevState.exited === 'undefined') {
+    if (typeof prevState.exited === "undefined") {
       return {
         exited: !nextProps.open
       };
@@ -150,9 +165,9 @@ class Snackbar extends React.Component {
     return null;
   } // Timer that controls delay before snackbar auto hides
 
-
   setAutoHideTimer(autoHideDuration) {
-    const autoHideDurationBefore = autoHideDuration != null ? autoHideDuration : this.props.autoHideDuration;
+    const autoHideDurationBefore =
+      autoHideDuration != null ? autoHideDuration : this.props.autoHideDuration;
 
     if (!this.props.onClose || autoHideDurationBefore == null) {
       return;
@@ -160,13 +175,16 @@ class Snackbar extends React.Component {
 
     clearTimeout(this.timerAutoHide);
     this.timerAutoHide = setTimeout(() => {
-      const autoHideDurationAfter = autoHideDuration != null ? autoHideDuration : this.props.autoHideDuration;
+      const autoHideDurationAfter =
+        autoHideDuration != null
+          ? autoHideDuration
+          : this.props.autoHideDuration;
 
       if (!this.props.onClose || autoHideDurationAfter == null) {
         return;
       }
 
-      this.props.onClose(null, 'timeout');
+      this.props.onClose(null, "timeout");
     }, autoHideDurationBefore);
   }
 
@@ -186,7 +204,7 @@ class Snackbar extends React.Component {
   };
   handleClickAway = event => {
     if (this.props.onClose) {
-      this.props.onClose(event, 'clickaway');
+      this.props.onClose(event, "clickaway");
     }
   }; // Pause the timer when the user is interacting with the Snackbar
   // or when the user hide the window.
@@ -214,17 +232,9 @@ class Snackbar extends React.Component {
 
   render() {
     const {
-      $system: {
-        classNames,
-        classNamesStr,
-        classNamesAny,
-        theme
-      },
+      $system: { classNames, classNamesStr, classNamesAny, theme },
       action,
-      anchorOrigin: {
-        vertical,
-        horizontal
-      },
+      anchorOrigin: { vertical, horizontal },
       autoHideDuration,
       children,
       classes,
@@ -253,22 +263,56 @@ class Snackbar extends React.Component {
       return null;
     }
 
-    return <ClickAwayListener onClickAway={this.handleClickAway}>
-        <div className={classNamesStr(classes.root, classes[`anchorOrigin${capitalize(vertical)}${capitalize(horizontal)}`], className)} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} {...other}>
-          <EventListener target="window" onFocus={disableWindowBlurListener ? undefined : this.handleResume} onBlur={disableWindowBlurListener ? undefined : this.handlePause} />
-          <TransitionComponent appear in={open} onEnter={onEnter} onEntered={onEntered} onEntering={onEntering} onExit={onExit} onExited={createChainedFunction(this.handleExited, onExited)} onExiting={onExiting} timeout={transitionDuration} direction={vertical === 'top' ? 'down' : 'up'} {...TransitionProps}>
-            {children || <SnackbarContent message={message} action={action} {...ContentProps} />}
+    return (
+      <ClickAwayListener onClickAway={this.handleClickAway}>
+        <div
+          className={classNamesStr(
+            classes.root,
+            classes[
+              `anchorOrigin${capitalize(vertical)}${capitalize(horizontal)}`
+            ],
+            className
+          )}
+          onMouseEnter={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
+          {...other}
+        >
+          <EventListener
+            target="window"
+            onFocus={disableWindowBlurListener ? undefined : this.handleResume}
+            onBlur={disableWindowBlurListener ? undefined : this.handlePause}
+          />
+          <TransitionComponent
+            appear
+            in={open}
+            onEnter={onEnter}
+            onEntered={onEntered}
+            onEntering={onEntering}
+            onExit={onExit}
+            onExited={createChainedFunction(this.handleExited, onExited)}
+            onExiting={onExiting}
+            timeout={transitionDuration}
+            direction={vertical === "top" ? "down" : "up"}
+            {...TransitionProps}
+          >
+            {children || (
+              <SnackbarContent
+                message={message}
+                action={action}
+                {...ContentProps}
+              />
+            )}
           </TransitionComponent>
         </div>
-      </ClickAwayListener>;
+      </ClickAwayListener>
+    );
   }
-
 }
 
-const defaultProps = Snackbar.defaultProps = {
+const defaultProps = (Snackbar.defaultProps = {
   anchorOrigin: {
-    vertical: 'bottom',
-    horizontal: 'center'
+    vertical: "bottom",
+    horizontal: "center"
   },
   disableWindowBlurListener: false,
   TransitionComponent: Slide,
@@ -276,11 +320,11 @@ const defaultProps = Snackbar.defaultProps = {
     enter: duration.enteringScreen,
     exit: duration.leavingScreen
   }
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Snackbar/Snackbar').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Snackbar/Snackbar').Shape>}
+ */
 export const SnackbarCreator = withStyles(styles, Snackbar, {
   isMui: true,
   defaultProps

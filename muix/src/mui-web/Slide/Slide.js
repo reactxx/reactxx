@@ -1,23 +1,28 @@
-// @inheritedComponent Transition
-import React from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import EventListener from 'react-event-listener';
-import debounce from 'debounce'; // < 1kb payload overhead when lodash/debounce is > 3kb.
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-import Transition from 'react-transition-group/Transition';
-import ownerWindow from '../utils/ownerWindow';
-import withTheme from '../styles/withTheme';
-import { duration } from '../styles/transitions';
-import { reflow, getTransitionProps } from '../transitions/utils';
+// @inheritedComponent Transition
+import React from "react";
+import PropTypes from "prop-types";
+import ReactDOM from "react-dom";
+import EventListener from "react-event-listener";
+import debounce from "debounce"; // < 1kb payload overhead when lodash/debounce is > 3kb.
+
+import Transition from "react-transition-group/Transition";
+import ownerWindow from "../utils/ownerWindow";
+import withTheme from "../styles/withTheme";
+import { duration } from "../styles/transitions";
+import { reflow, getTransitionProps } from "../transitions/utils";
 const GUTTER = 24; // Translate the node so he can't be seen on the screen.
 // Later, we gonna translate back the node to his original location
 // with `translate3d(0, 0, 0)`.`
 
 function getTranslateValue(props, node) {
-  const {
-    direction
-  } = props;
+  const { direction } = props;
   const rect = node.getBoundingClientRect();
   let transform;
 
@@ -25,30 +30,34 @@ function getTranslateValue(props, node) {
     transform = node.fakeTransform;
   } else {
     const computedStyle = ownerWindow(node).getComputedStyle(node);
-    transform = computedStyle.getPropertyValue('-webkit-transform') || computedStyle.getPropertyValue('transform');
+    transform =
+      computedStyle.getPropertyValue("-webkit-transform") ||
+      computedStyle.getPropertyValue("transform");
   }
 
   let offsetX = 0;
   let offsetY = 0;
 
-  if (transform && transform !== 'none' && typeof transform === 'string') {
-    const transformValues = transform.split('(')[1].split(')')[0].split(',');
+  if (transform && transform !== "none" && typeof transform === "string") {
+    const transformValues = transform
+      .split("(")[1]
+      .split(")")[0]
+      .split(",");
     offsetX = parseInt(transformValues[4], 10);
     offsetY = parseInt(transformValues[5], 10);
   }
 
-  if (direction === 'left') {
+  if (direction === "left") {
     return `translateX(100vw) translateX(-${rect.left - offsetX}px)`;
   }
 
-  if (direction === 'right') {
+  if (direction === "right") {
     return `translateX(-${rect.left + rect.width + GUTTER - offsetX}px)`;
   }
 
-  if (direction === 'up') {
+  if (direction === "up") {
     return `translateY(100vh) translateY(-${rect.top - offsetY}px)`;
   } // direction === 'down'
-
 
   return `translateY(-${rect.top + rect.height + GUTTER - offsetY}px)`;
 }
@@ -71,7 +80,11 @@ class Slide extends React.Component {
   transition = null;
   handleResize = debounce(() => {
     // Skip configuration where the position is screen size invariant.
-    if (this.props.in || this.props.direction === 'down' || this.props.direction === 'right') {
+    if (
+      this.props.in ||
+      this.props.direction === "down" ||
+      this.props.direction === "right"
+    ) {
       return;
     }
 
@@ -113,36 +126,42 @@ class Slide extends React.Component {
     }
   };
   handleEntering = node => {
-    const {
-      theme
-    } = this.props;
+    const { theme } = this.props;
     const transitionProps = getTransitionProps(this.props, {
-      mode: 'enter'
+      mode: "enter"
     });
-    node.style.webkitTransition = theme.transitions.create('-webkit-transform', { ...transitionProps,
+    node.style.webkitTransition = theme.transitions.create(
+      "-webkit-transform",
+      {
+        ...transitionProps,
+        easing: theme.transitions.easing.easeOut
+      }
+    );
+    node.style.transition = theme.transitions.create("transform", {
+      ...transitionProps,
       easing: theme.transitions.easing.easeOut
     });
-    node.style.transition = theme.transitions.create('transform', { ...transitionProps,
-      easing: theme.transitions.easing.easeOut
-    });
-    node.style.webkitTransform = 'translate(0, 0)';
-    node.style.transform = 'translate(0, 0)';
+    node.style.webkitTransform = "translate(0, 0)";
+    node.style.transform = "translate(0, 0)";
 
     if (this.props.onEntering) {
       this.props.onEntering(node);
     }
   };
   handleExit = node => {
-    const {
-      theme
-    } = this.props;
+    const { theme } = this.props;
     const transitionProps = getTransitionProps(this.props, {
-      mode: 'exit'
+      mode: "exit"
     });
-    node.style.webkitTransition = theme.transitions.create('-webkit-transform', { ...transitionProps,
-      easing: theme.transitions.easing.sharp
-    });
-    node.style.transition = theme.transitions.create('transform', { ...transitionProps,
+    node.style.webkitTransition = theme.transitions.create(
+      "-webkit-transform",
+      {
+        ...transitionProps,
+        easing: theme.transitions.easing.sharp
+      }
+    );
+    node.style.transition = theme.transitions.create("transform", {
+      ...transitionProps,
       easing: theme.transitions.easing.sharp
     });
     setTranslateValue(this.props, node);
@@ -153,8 +172,8 @@ class Slide extends React.Component {
   };
   handleExited = node => {
     // No need for transitions when the component is hidden
-    node.style.webkitTransition = '';
-    node.style.transition = '';
+    node.style.webkitTransition = "";
+    node.style.transition = "";
 
     if (this.props.onExited) {
       this.props.onExited(node);
@@ -163,7 +182,7 @@ class Slide extends React.Component {
 
   updatePosition() {
     if (this.transitionRef) {
-      this.transitionRef.style.visibility = 'inherit';
+      this.transitionRef.style.visibility = "inherit";
       setTranslateValue(this.props, this.transitionRef);
     }
   }
@@ -184,81 +203,95 @@ class Slide extends React.Component {
     // We need to render it.
 
     if (!this.props.in && !this.mounted) {
-      style.visibility = 'hidden';
+      style.visibility = "hidden";
     }
 
-    style = { ...style,
+    style = {
+      ...style,
       ...styleProp,
       ...(React.isValidElement(children) ? children.props.style : {})
     };
-    return <EventListener target="window" onResize={this.handleResize}>
-        <Transition onEnter={this.handleEnter} onEntering={this.handleEntering} onExit={this.handleExit} onExited={this.handleExited} appear style={style} ref={ref => {
-        this.transitionRef = ReactDOM.findDOMNode(ref);
-      }} {...other}>
+    return (
+      <EventListener target="window" onResize={this.handleResize}>
+        <Transition
+          onEnter={this.handleEnter}
+          onEntering={this.handleEntering}
+          onExit={this.handleExit}
+          onExited={this.handleExited}
+          appear
+          style={style}
+          ref={ref => {
+            this.transitionRef = ReactDOM.findDOMNode(ref);
+          }}
+          {...other}
+        >
           {children}
         </Transition>
-      </EventListener>;
+      </EventListener>
+    );
   }
-
 }
 
 Slide.propTypes = {
   /**
-     * A single child content element.
-     */
+   * A single child content element.
+   */
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 
   /**
-     * Direction the child node will enter from.
-     */
-  direction: PropTypes.oneOf(['left', 'right', 'up', 'down']),
+   * Direction the child node will enter from.
+   */
+  direction: PropTypes.oneOf(["left", "right", "up", "down"]),
 
   /**
-     * If `true`, show the component; triggers the enter or exit animation.
-     */
+   * If `true`, show the component; triggers the enter or exit animation.
+   */
   in: PropTypes.bool,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   onEnter: PropTypes.func,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   onEntering: PropTypes.func,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   onExit: PropTypes.func,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   onExited: PropTypes.func,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   style: PropTypes.object,
 
   /**
-     * @ignore
-     */
+   * @ignore
+   */
   theme: PropTypes.object.isRequired,
 
   /**
-     * The duration for the transition, in milliseconds.
-     * You may specify a single timeout for all transitions, or individually with an object.
-     */
-  timeout: PropTypes.oneOfType([PropTypes.number, PropTypes.shape({
-    enter: PropTypes.number,
-    exit: PropTypes.number
-  })])
+   * The duration for the transition, in milliseconds.
+   * You may specify a single timeout for all transitions, or individually with an object.
+   */
+  timeout: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.shape({
+      enter: PropTypes.number,
+      exit: PropTypes.number
+    })
+  ])
 };
 Slide.defaultProps = {
-  direction: 'down',
+  direction: "down",
   timeout: {
     enter: duration.enteringScreen,
     exit: duration.leavingScreen

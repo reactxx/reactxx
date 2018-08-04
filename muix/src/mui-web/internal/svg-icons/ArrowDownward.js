@@ -1,14 +1,23 @@
-import React from 'react';
-import pure from 'recompose/pure';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import pure from "recompose/pure";
 import SvgIcon from "../../SvgIcon/SvgIcon";
 /**
  * @ignore - internal component.
  */
 
-let ArrowDownward = props => <SvgIcon {...props}>
+let ArrowDownward = props => (
+  <SvgIcon {...props}>
     <path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z" />
-  </SvgIcon>;
+  </SvgIcon>
+);
 
 ArrowDownward = pure(ArrowDownward);
-ArrowDownward.muiName = 'SvgIcon';
+ArrowDownward.muiName = "SvgIcon";
 export default ArrowDownward;

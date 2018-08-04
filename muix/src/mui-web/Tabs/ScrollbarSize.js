@@ -1,15 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import EventListener from 'react-event-listener';
-import debounce from 'debounce'; // < 1kb payload overhead when lodash/debounce is > 3kb.
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import EventListener from "react-event-listener";
+import debounce from "debounce"; // < 1kb payload overhead when lodash/debounce is > 3kb.
 
 const styles = {
   width: 100,
   height: 100,
-  position: 'absolute',
+  position: "absolute",
   top: -10000,
-  overflow: 'scroll',
-  msOverflowStyle: 'scrollbar'
+  overflow: "scroll",
+  msOverflowStyle: "scrollbar"
 };
 /**
  * @ignore - internal component.
@@ -19,14 +26,15 @@ const styles = {
 
 class ScrollbarSize extends React.Component {
   handleResize = debounce(() => {
-    const {
-      onChange
-    } = this.props;
+    const { onChange } = this.props;
     const prevHeight = this.scrollbarHeight;
     const prevWidth = this.scrollbarWidth;
     this.setMeasurements();
 
-    if (prevHeight !== this.scrollbarHeight || prevWidth !== this.scrollbarWidth) {
+    if (
+      prevHeight !== this.scrollbarHeight ||
+      prevWidth !== this.scrollbarWidth
+    ) {
       onChange({
         scrollbarHeight: this.scrollbarHeight,
         scrollbarWidth: this.scrollbarWidth
@@ -58,17 +66,21 @@ class ScrollbarSize extends React.Component {
   };
 
   render() {
-    const {
-      onChange
-    } = this.props;
-    return <div>
-        {onChange ? <EventListener target="window" onResize={this.handleResize} /> : null}
-        <div style={styles} ref={ref => {
-        this.nodeRef = ref;
-      }} />
-      </div>;
+    const { onChange } = this.props;
+    return (
+      <div>
+        {onChange ? (
+          <EventListener target="window" onResize={this.handleResize} />
+        ) : null}
+        <div
+          style={styles}
+          ref={ref => {
+            this.nodeRef = ref;
+          }}
+        />
+      </div>
+    );
   }
-
 }
 
 ScrollbarSize.propTypes = {

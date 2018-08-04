@@ -1,25 +1,50 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 //       weak
-import keycode from 'keycode';
-import warning from 'warning';
-import ownerDocument from '../utils/ownerDocument';
+import keycode from "keycode";
+import warning from "warning";
+import ownerDocument from "../utils/ownerDocument";
 const internal = {
   focusKeyPressed: false,
   keyUpEventTimeout: -1
 };
 export function detectFocusVisible(instance, element, callback, attempt = 1) {
-  warning(instance.focusVisibleCheckTime, 'Material-UI: missing instance.focusVisibleCheckTime.');
-  warning(instance.focusVisibleMaxCheckTimes, 'Material-UI: missing instance.focusVisibleMaxCheckTimes.');
+  warning(
+    instance.focusVisibleCheckTime,
+    "Material-UI: missing instance.focusVisibleCheckTime."
+  );
+  warning(
+    instance.focusVisibleMaxCheckTimes,
+    "Material-UI: missing instance.focusVisibleMaxCheckTimes."
+  );
   instance.focusVisibleTimeout = setTimeout(() => {
     const doc = ownerDocument(element);
 
-    if (internal.focusKeyPressed && (doc.activeElement === element || element.contains(doc.activeElement))) {
+    if (
+      internal.focusKeyPressed &&
+      (doc.activeElement === element || element.contains(doc.activeElement))
+    ) {
       callback();
     } else if (attempt < instance.focusVisibleMaxCheckTimes) {
       detectFocusVisible(instance, element, callback, attempt + 1);
     }
   }, instance.focusVisibleCheckTime);
 }
-const FOCUS_KEYS = ['tab', 'enter', 'space', 'esc', 'up', 'down', 'left', 'right'];
+const FOCUS_KEYS = [
+  "tab",
+  "enter",
+  "space",
+  "esc",
+  "up",
+  "down",
+  "left",
+  "right"
+];
 
 function isFocusKey(event) {
   return FOCUS_KEYS.indexOf(keycode(event)) > -1;
@@ -40,5 +65,5 @@ export function listenForFocusKeys(win) {
   // The event listener will only be added once per window.
   // Duplicate event listeners will be ignored by addEventListener.
   // Also, this logic is client side only, we don't need a teardown.
-  win.addEventListener('keyup', handleKeyUpEvent);
+  win.addEventListener("keyup", handleKeyUpEvent);
 }

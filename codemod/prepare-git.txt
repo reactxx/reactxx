@@ -1,4 +1,5 @@
 - Download last version a unzip material-ui-1.4.0\packages\material-ui\src\ to d:\reactxx\muix\src\mui-web-temp\
+- change version in D:\reactxx\codemod\utils\config.ts
 - delete test-utils
 - select *.test.js and delete
 - select *.spec.* and delete

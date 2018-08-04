@@ -1,8 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import warning from 'warning';
-import withStyles from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import warning from "warning";
+import withStyles from "../styles/withStyles";
 export const styles = {
   /* Styles applied to the root element. */
   root: {},
@@ -11,10 +18,10 @@ export const styles = {
   horizontal: {
     paddingLeft: 8,
     paddingRight: 8,
-    '&:first-child': {
+    "&:first-child": {
       paddingLeft: 0
     },
-    '&:last-child': {
+    "&:last-child": {
       paddingRight: 0
     }
   },
@@ -25,18 +32,13 @@ export const styles = {
   /* Styles applied to the root element if `alternativeLabel={true}`. */
   alternativeLabel: {
     flex: 1,
-    position: 'relative'
+    position: "relative"
   }
 };
 
 function Step(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     active,
     alternativeLabel,
     children,
@@ -50,41 +52,57 @@ function Step(props) {
     orientation,
     ...other
   } = props;
-  const className = classNames(classes.root, classes[orientation], alternativeLabel && classes.alternativeLabel, classNameProp);
-  return <div className={classNamesStr(className)} {...other}>
+  const className = classNames(
+    classes.root,
+    classes[orientation],
+    alternativeLabel && classes.alternativeLabel,
+    classNameProp
+  );
+  return (
+    <div className={classNamesStr(className)} {...other}>
       {React.Children.map(children, child => {
-      if (!React.isValidElement(child)) {
-        return null;
-      }
+        if (!React.isValidElement(child)) {
+          return null;
+        }
 
-      warning(child.type !== React.Fragment, ["Material-UI: the Step component doesn't accept a Fragment as a child.", 'Consider providing an array instead.'].join('\n'));
-      return React.cloneElement(child, {
-        active,
-        alternativeLabel,
-        completed,
-        disabled,
-        icon: index + 1,
-        last,
-        orientation,
-        ...child.props
-      });
-    })}
-      {connector && alternativeLabel && !last && React.cloneElement(connector, {
-      orientation,
-      alternativeLabel
-    })}
-    </div>;
+        warning(
+          child.type !== React.Fragment,
+          [
+            "Material-UI: the Step component doesn't accept a Fragment as a child.",
+            "Consider providing an array instead."
+          ].join("\n")
+        );
+        return React.cloneElement(child, {
+          active,
+          alternativeLabel,
+          completed,
+          disabled,
+          icon: index + 1,
+          last,
+          orientation,
+          ...child.props
+        });
+      })}
+      {connector &&
+        alternativeLabel &&
+        !last &&
+        React.cloneElement(connector, {
+          orientation,
+          alternativeLabel
+        })}
+    </div>
+  );
 }
 
-const defaultProps = Step.defaultProps = {
+const defaultProps = (Step.defaultProps = {
   active: false,
   completed: false,
   disabled: false
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Step/Step').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Step/Step').Shape>}
+ */
 export const StepCreator = withStyles(styles, Step, {
   isMui: true,
   defaultProps

@@ -1,24 +1,32 @@
-// @inheritedComponent ButtonBase
-import React from 'react';
-import { toAtomic } from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
+// @inheritedComponent ButtonBase
+import React from "react";
+import { toAtomic } from "../styles/withStyles";
+
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
 import ButtonBase from "../ButtonBase/ButtonBase";
-import { capitalize } from '../utils/helpers';
-import unsupportedProp from '../utils/unsupportedProp';
+import { capitalize } from "../utils/helpers";
+import unsupportedProp from "../utils/unsupportedProp";
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: { ...toAtomic('padding', 0),
+  root: {
+    ...toAtomic("padding", 0),
     ...theme.typography.button,
     maxWidth: 264,
-    position: 'relative',
+    position: "relative",
     minWidth: 72,
     minHeight: 48,
     flexShrink: 0,
-    overflow: 'hidden',
-    [theme.breakpoints.up('md')]: {
+    overflow: "hidden",
+    [theme.breakpoints.up("md")]: {
       minWidth: 160
     }
   },
@@ -30,12 +38,12 @@ export const styles = theme => ({
 
   /* Styles applied to the root element if `textColor="inherit"`. */
   textColorInherit: {
-    color: 'inherit',
+    color: "inherit",
     opacity: 0.7,
-    '&.selected78': {
+    "&.selected78": {
       opacity: 1
     },
-    '&.disabled78': {
+    "&.disabled78": {
       opacity: 0.4
     }
   },
@@ -43,10 +51,10 @@ export const styles = theme => ({
   /* Styles applied to the root element if `textColor="primary"`. */
   textColorPrimary: {
     color: theme.palette.text.secondary,
-    '&.selected78': {
+    "&.selected78": {
       color: theme.palette.primary.main
     },
-    '&.disabled78': {
+    "&.disabled78": {
       color: theme.palette.text.disabled
     }
   },
@@ -54,10 +62,10 @@ export const styles = theme => ({
   /* Styles applied to the root element if `textColor="secondary"`. */
   textColorSecondary: {
     color: theme.palette.text.secondary,
-    '&.selected78': {
+    "&.selected78": {
       color: theme.palette.secondary.main
     },
-    '&.disabled78': {
+    "&.disabled78": {
       color: theme.palette.text.disabled
     }
   },
@@ -76,16 +84,16 @@ export const styles = theme => ({
   fullWidth: {
     flexShrink: 1,
     flexGrow: 1,
-    maxWidth: 'auto'
+    maxWidth: "auto"
   },
 
   /* Styles applied to the `icon` and `label`'s wrapper element. */
   wrapper: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    flexDirection: 'column'
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    flexDirection: "column"
   },
 
   /* Styles applied to the label container element if `label` is provided. */
@@ -94,7 +102,7 @@ export const styles = theme => ({
     paddingBottom: 6,
     paddingLeft: 12,
     paddingRight: 12,
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up("md")]: {
       paddingLeft: 24,
       paddingRight: 24
     }
@@ -103,15 +111,15 @@ export const styles = theme => ({
   /* Styles applied to the label wrapper element if `label` is provided. */
   label: {
     fontSize: theme.typography.pxToRem(14),
-    whiteSpace: 'normal',
-    [theme.breakpoints.up('md')]: {
+    whiteSpace: "normal",
+    [theme.breakpoints.up("md")]: {
       fontSize: theme.typography.pxToRem(13)
     }
   },
 
   /* Styles applied to the label wrapper element if `label` is provided and the text is wrapped. */
   labelWrapped: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: theme.typography.pxToRem(12)
     }
   }
@@ -130,20 +138,16 @@ class Tab extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.labelWrapped === prevState.labelWrapped) {
       /**
-             * At certain text and tab lengths, a larger font size may wrap to two lines while the smaller
-             * font size still only requires one line.  This check will prevent an infinite render loop
-             * fron occurring in that scenario.
-             */
+       * At certain text and tab lengths, a larger font size may wrap to two lines while the smaller
+       * font size still only requires one line.  This check will prevent an infinite render loop
+       * fron occurring in that scenario.
+       */
       this.checkTextWrap();
     }
   }
 
   handleChange = event => {
-    const {
-      onChange,
-      value,
-      onClick
-    } = this.props;
+    const { onChange, value, onClick } = this.props;
 
     if (onChange) {
       onChange(event, value);
@@ -167,12 +171,7 @@ class Tab extends React.Component {
 
   render() {
     const {
-      $system: {
-        classNames,
-        classNamesStr,
-        classNamesAny,
-        theme
-      },
+      $system: { classNames, classNamesStr, classNamesAny, theme },
       classes,
       className: classNameProp,
       disabled,
@@ -189,35 +188,60 @@ class Tab extends React.Component {
     let label;
 
     if (labelProp !== undefined) {
-      label = <span className={classNamesStr(classes.labelContainer)}>
-          <span className={classNamesStr(classes.label, this.state.labelWrapped && classes.labelWrapped)} ref={ref => {
-          this.labelRef = ref;
-        }}>
+      label = (
+        <span className={classNamesStr(classes.labelContainer)}>
+          <span
+            className={classNamesStr(
+              classes.label,
+              this.state.labelWrapped && classes.labelWrapped
+            )}
+            ref={ref => {
+              this.labelRef = ref;
+            }}
+          >
             {labelProp}
           </span>
-        </span>;
+        </span>
+      );
     }
 
-    const className = classNames(classes.root, classes[`textColor${capitalize(textColor)}`], disabled && classes.disabled, selected && classes.selected, icon && label && classes.labelIcon, fullWidth && classes.fullWidth, classNameProp);
-    return <ButtonBase focusRipple className={className} role="tab" aria-selected={selected} disabled={disabled} {...other} onClick={this.handleChange}>
+    const className = classNames(
+      classes.root,
+      classes[`textColor${capitalize(textColor)}`],
+      disabled && classes.disabled,
+      selected && classes.selected,
+      icon && label && classes.labelIcon,
+      fullWidth && classes.fullWidth,
+      classNameProp
+    );
+    return (
+      <ButtonBase
+        focusRipple
+        className={className}
+        role="tab"
+        aria-selected={selected}
+        disabled={disabled}
+        {...other}
+        onClick={this.handleChange}
+      >
         <span className={classNamesStr(classes.wrapper)}>
           {icon}
           {label}
         </span>
         {indicator}
-      </ButtonBase>;
+      </ButtonBase>
+    );
   }
-
 }
 
-const defaultProps = Tab.defaultProps = {
+const defaultProps = (Tab.defaultProps = {
   disabled: false,
-  textColor: 'inherit'
-};
+  textColor: "inherit"
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Tab/Tab').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Tab/Tab').Shape>}
+ */
 export const TabCreator = withStyles(styles, Tab, {
   isMui: true,
   defaultProps

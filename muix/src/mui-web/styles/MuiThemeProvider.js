@@ -1,9 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import warning from 'warning';
-import createBroadcast from 'brcast';
-import themeListener, { CHANNEL } from './themeListener';
-import exactProp from '../utils/exactProp';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import warning from "warning";
+import createBroadcast from "brcast";
+import themeListener, { CHANNEL } from "./themeListener";
+import exactProp from "../utils/exactProp";
 /**
  * This component takes a `theme` property.
  * It makes the `theme` available down the React tree thanks to React context.
@@ -25,10 +32,7 @@ class MuiThemeProvider extends React.Component {
   }
 
   getChildContext() {
-    const {
-      sheetsManager,
-      disableStylesGeneration
-    } = this.props;
+    const { sheetsManager, disableStylesGeneration } = this.props;
     const muiThemeProviderOptions = this.context.muiThemeProviderOptions || {};
 
     if (sheetsManager !== undefined) {
@@ -67,11 +71,20 @@ class MuiThemeProvider extends React.Component {
     }
   } // Simple merge between the outer theme and the local theme
 
-
   mergeOuterLocalTheme(localTheme) {
     // To support composition of theme.
-    if (typeof localTheme === 'function') {
-      warning(this.outerTheme, ['Material-UI: you are providing a theme function property ' + 'to the MuiThemeProvider component:', '<MuiThemeProvider theme={outerTheme => outerTheme} />', 'However, no outer theme is present.', 'Make sure a theme is already injected higher in the React tree ' + 'or provide a theme object.'].join('\n'));
+    if (typeof localTheme === "function") {
+      warning(
+        this.outerTheme,
+        [
+          "Material-UI: you are providing a theme function property " +
+            "to the MuiThemeProvider component:",
+          "<MuiThemeProvider theme={outerTheme => outerTheme} />",
+          "However, no outer theme is present.",
+          "Make sure a theme is already injected higher in the React tree " +
+            "or provide a theme object."
+        ].join("\n")
+      );
       return localTheme(this.outerTheme);
     }
 
@@ -79,7 +92,8 @@ class MuiThemeProvider extends React.Component {
       return localTheme;
     }
 
-    return { ...this.outerTheme,
+    return {
+      ...this.outerTheme,
       ...localTheme
     };
   }
@@ -96,42 +110,43 @@ class MuiThemeProvider extends React.Component {
     // );
     return this.props.children;
   }
-
 }
 
 MuiThemeProvider.propTypes = {
   /**
-     * You can wrap a node.
-     */
+   * You can wrap a node.
+   */
   children: PropTypes.node.isRequired,
 
   /**
-     * You can disable the generation of the styles with this option.
-     * It can be useful when traversing the React tree outside of the HTML
-     * rendering step on the server.
-     * Let's say you are using react-apollo to extract all
-     * the queries made by the interface server side.
-     * You can significantly speed up the traversal with this property.
-     */
+   * You can disable the generation of the styles with this option.
+   * It can be useful when traversing the React tree outside of the HTML
+   * rendering step on the server.
+   * Let's say you are using react-apollo to extract all
+   * the queries made by the interface server side.
+   * You can significantly speed up the traversal with this property.
+   */
   disableStylesGeneration: PropTypes.bool,
 
   /**
-     * The sheetsManager is used to deduplicate style sheet injection in the page.
-     * It's deduplicating using the (theme, styles) couple.
-     * On the server, you should provide a new instance for each request.
-     */
+   * The sheetsManager is used to deduplicate style sheet injection in the page.
+   * It's deduplicating using the (theme, styles) couple.
+   * On the server, you should provide a new instance for each request.
+   */
   sheetsManager: PropTypes.object,
 
   /**
-     * A theme object.
-     */
+   * A theme object.
+   */
   theme: PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired
 };
 MuiThemeProvider.propTypes = exactProp(MuiThemeProvider.propTypes);
-MuiThemeProvider.childContextTypes = { ...themeListener.contextTypes,
+MuiThemeProvider.childContextTypes = {
+  ...themeListener.contextTypes,
   muiThemeProviderOptions: PropTypes.object
 };
-MuiThemeProvider.contextTypes = { ...themeListener.contextTypes,
+MuiThemeProvider.contextTypes = {
+  ...themeListener.contextTypes,
   muiThemeProviderOptions: PropTypes.object
 };
 export default MuiThemeProvider;

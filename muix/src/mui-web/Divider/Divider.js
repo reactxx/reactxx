@@ -1,26 +1,34 @@
-import React from 'react';
-import { toAtomic } from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
 
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import { fade } from '../styles/colorManipulator';
+import React from "react";
+import { toAtomic } from "../styles/withStyles";
+
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
+import { fade } from "../styles/colorManipulator";
 export const styles = theme => ({
   /* Styles applied to the root element. */
-  root: { ...toAtomic('margin', 0),
+  root: {
+    ...toAtomic("margin", 0),
     height: 1,
     // Reset browser default style.
-    border: 'none',
+    border: "none",
     flexShrink: 0,
     backgroundColor: theme.palette.divider
   },
 
   /* Styles applied to the root element if `absolute={true}`. */
   absolute: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     left: 0,
-    width: '100%'
+    width: "100%"
   },
 
   /* Styles applied to the root element if `inset={true}`. */
@@ -36,12 +44,7 @@ export const styles = theme => ({
 
 function Divider(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     absolute,
     classes,
     className: classNameProp,
@@ -50,20 +53,28 @@ function Divider(props) {
     light,
     ...other
   } = props;
-  const className = classNames(classes.root, absolute && classes.absolute, inset && classes.inset, light && classes.light, classNameProp);
-  return <Component className={classNamesAny(Component, className)} {...other} />;
+  const className = classNames(
+    classes.root,
+    absolute && classes.absolute,
+    inset && classes.inset,
+    light && classes.light,
+    classNameProp
+  );
+  return (
+    <Component className={classNamesAny(Component, className)} {...other} />
+  );
 }
 
-const defaultProps = Divider.defaultProps = {
+const defaultProps = (Divider.defaultProps = {
   absolute: false,
-  component: 'hr',
+  component: "hr",
   inset: false,
   light: false
-};
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Divider/Divider').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Divider/Divider').Shape>}
+ */
 export const DividerCreator = withStyles(styles, Divider, {
   isMui: true,
   defaultProps

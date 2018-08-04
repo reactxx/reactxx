@@ -1,8 +1,15 @@
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
 // @inheritedComponent Typography
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
 import Typography from "../Typography/Typography";
 export const styles = theme => ({
   /* Styles applied to the root element. */
@@ -13,31 +20,34 @@ export const styles = theme => ({
 
 function DialogContentText(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     children,
     classes,
     className,
     ...other
   } = props;
-  return <Typography component="p" variant="subheading" className={classNames(classes.root, className)} {...other}>
+  return (
+    <Typography
+      component="p"
+      variant="subheading"
+      className={classNames(classes.root, className)}
+      {...other}
+    >
       {children}
-    </Typography>;
+    </Typography>
+  );
 }
 
-const defaultProps = DialogContentText.defaultProps = {};
+const defaultProps = (DialogContentText.defaultProps = {});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/DialogContentText/DialogContentText').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/DialogContentText/DialogContentText').Shape>}
+ */
 export const DialogContentTextCreator = withStyles(styles, DialogContentText, {
   isMui: true,
   defaultProps
 });
 const DialogContentTextComponent = DialogContentTextCreator();
-if (DialogContentText.muiName) DialogContentTextComponent.muiName = DialogContentText.muiName;
+if (DialogContentText.muiName)
+  DialogContentTextComponent.muiName = DialogContentText.muiName;
 export default DialogContentTextComponent;

@@ -1,13 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import withStyles from "../styles/withStyles";
 export const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center'
+    position: "relative",
+    display: "flex",
+    alignItems: "center"
   },
 
   /* Styles applied to the root element if `disableGutters={false}`. */
@@ -24,12 +31,7 @@ export const styles = theme => ({
 
 function Toolbar(props) {
   const {
-    $system: {
-      classNames,
-      classNamesStr,
-      classNamesAny,
-      theme
-    },
+    $system: { classNames, classNamesStr, classNamesAny, theme },
     children,
     classes,
     className: classNameProp,
@@ -37,20 +39,27 @@ function Toolbar(props) {
     variant,
     ...other
   } = props;
-  const className = classNames(classes.root, classes[variant], !disableGutters && classes.gutters, classNameProp);
-  return <div className={classNamesStr(className)} {...other}>
+  const className = classNames(
+    classes.root,
+    classes[variant],
+    !disableGutters && classes.gutters,
+    classNameProp
+  );
+  return (
+    <div className={classNamesStr(className)} {...other}>
       {children}
-    </div>;
+    </div>
+  );
 }
 
-const defaultProps = Toolbar.defaultProps = {
+const defaultProps = (Toolbar.defaultProps = {
   disableGutters: false,
-  variant: 'regular'
-};
+  variant: "regular"
+});
 
 /**
-* @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Toolbar/Toolbar').Shape>}
-*/
+ * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Toolbar/Toolbar').Shape>}
+ */
 export const ToolbarCreator = withStyles(styles, Toolbar, {
   isMui: true,
   defaultProps

@@ -1,5 +1,3 @@
-// Tabs.js: scrollSelectedIntoView a updateIndicatorState: 'theme' nahradit '$system: {theme},'
-
 import * as Queries from '../utils/queries'
 import * as Ast from '../utils/ast'
 import * as Parser from '../utils/parser'

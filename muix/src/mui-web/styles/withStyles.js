@@ -1,19 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import warning from 'warning';
-import hoistNonReactStatics from 'hoist-non-react-statics';
-import getDisplayName from 'recompose/getDisplayName';
-import wrapDisplayName from 'recompose/wrapDisplayName';
-import contextTypes from 'react-jss/lib/contextTypes';
-import { create } from 'jss';
-import * as ns from 'react-jss/lib/ns';
-import jssPreset from './jssPreset';
-import mergeClasses from './mergeClasses';
-import createMuiTheme from './createMuiTheme';
-import themeListener from './themeListener';
-import createGenerateClassName from './createGenerateClassName';
-import getStylesCreator from './getStylesCreator';
-import getThemeProps from './getThemeProps'; // Default JSS instance.
+//----------------------------------------------------------------------------------
+//
+// This code was generated from material-ui v1.4.2 by reactxx-codemod tool
+// (https://github.com/reactxx/reactxx/tree/master/codemod)
+//
+//----------------------------------------------------------------------------------
+
+import React from "react";
+import PropTypes from "prop-types";
+import warning from "warning";
+import hoistNonReactStatics from "hoist-non-react-statics";
+import getDisplayName from "recompose/getDisplayName";
+import wrapDisplayName from "recompose/wrapDisplayName";
+import contextTypes from "react-jss/lib/contextTypes";
+import { create } from "jss";
+import * as ns from "react-jss/lib/ns";
+import jssPreset from "./jssPreset";
+import mergeClasses from "./mergeClasses";
+import createMuiTheme from "./createMuiTheme";
+import themeListener from "./themeListener";
+import createGenerateClassName from "./createGenerateClassName";
+import getStylesCreator from "./getStylesCreator";
+import getThemeProps from "./getThemeProps"; // Default JSS instance.
 
 const jss = create(jssPreset()); // Use a singleton or the provided one by the context.
 
@@ -45,7 +52,6 @@ function getDefaultTheme() {
 // It does not modify the component passed to it;
 // instead, it returns a new component, with a `classes` property.
 
-
 const withStyles = (stylesOrCreator, options = {}) => Component => {
   const {
     withTheme = false,
@@ -54,10 +60,17 @@ const withStyles = (stylesOrCreator, options = {}) => Component => {
     ...styleSheetOptions
   } = options;
   const stylesCreator = getStylesCreator(stylesOrCreator);
-  const listenToTheme = stylesCreator.themingEnabled || withTheme || typeof name === 'string';
+  const listenToTheme =
+    stylesCreator.themingEnabled || withTheme || typeof name === "string";
   indexCounter += 1;
   stylesCreator.options.index = indexCounter;
-  warning(indexCounter < 0, ['Material-UI: you might have a memory leak.', 'The indexCounter is not supposed to grow that much.'].join(' '));
+  warning(
+    indexCounter < 0,
+    [
+      "Material-UI: you might have a memory leak.",
+      "The indexCounter is not supposed to grow that much."
+    ].join(" ")
+  );
 
   class WithStyles extends React.Component {
     disableStylesGeneration = false;
@@ -71,20 +84,18 @@ const withStyles = (stylesOrCreator, options = {}) => Component => {
     constructor(props, context) {
       super(props, context);
       this.jss = this.context[ns.jss] || jss;
-      const {
-        muiThemeProviderOptions
-      } = this.context;
+      const { muiThemeProviderOptions } = this.context;
 
       if (muiThemeProviderOptions) {
         if (muiThemeProviderOptions.sheetsManager) {
           this.sheetsManager = muiThemeProviderOptions.sheetsManager;
         }
 
-        this.disableStylesGeneration = muiThemeProviderOptions.disableStylesGeneration;
+        this.disableStylesGeneration =
+          muiThemeProviderOptions.disableStylesGeneration;
       } // Attach the stylesCreator to the instance of the component as in the context
       // of react-hot-loader the hooks can be executed in a different closure context:
       // https://github.com/gaearon/react-hot-loader/blob/master/src/patch.dev.js#L107
-
 
       this.stylesCreatorSaved = stylesCreator;
       this.sheetOptions = {
@@ -92,7 +103,9 @@ const withStyles = (stylesOrCreator, options = {}) => Component => {
         ...this.context[ns.sheetOptions]
       }; // We use || as the function call is lazy evaluated.
 
-      this.theme = listenToTheme ? themeListener.initial(context) || getDefaultTheme() : noopTheme;
+      this.theme = listenToTheme
+        ? themeListener.initial(context) || getDefaultTheme()
+        : noopTheme;
       this.attach(this.theme);
       this.cacheClasses = {
         // Cache for the finalized classes value.
@@ -125,7 +138,10 @@ const withStyles = (stylesOrCreator, options = {}) => Component => {
 
     componentDidUpdate() {
       // react-hot-loader specific logic
-      if (this.stylesCreatorSaved === stylesCreator || process.env.NODE_ENV === 'production') {
+      if (
+        this.stylesCreatorSaved === stylesCreator ||
+        process.env.NODE_ENV === "production"
+      ) {
         return;
       }
 
@@ -202,15 +218,21 @@ const withStyles = (stylesOrCreator, options = {}) => Component => {
         const styles = stylesCreatorSaved.create(theme, name);
         let meta = name;
 
-        if (process.env.NODE_ENV !== 'production' && !meta) {
+        if (process.env.NODE_ENV !== "production" && !meta) {
           meta = getDisplayName(Component);
-          warning(typeof meta === 'string', ['Material-UI: the component displayName is invalid. It needs to be a string.', `Please fix the following component: ${Component}.`].join('\n'));
+          warning(
+            typeof meta === "string",
+            [
+              "Material-UI: the component displayName is invalid. It needs to be a string.",
+              `Please fix the following component: ${Component}.`
+            ].join("\n")
+          );
         }
 
         const sheet = this.jss.createStyleSheet(styles, {
           meta,
           classNamePrefix: meta,
-          flip: typeof flip === 'boolean' ? flip : theme.direction === 'rtl',
+          flip: typeof flip === "boolean" ? flip : theme.direction === "rtl",
           link: false,
           ...this.sheetOptions,
           ...stylesCreatorSaved.options,
@@ -251,11 +273,7 @@ const withStyles = (stylesOrCreator, options = {}) => Component => {
     }
 
     render() {
-      const {
-        classes,
-        innerRef,
-        ...other
-      } = this.props;
+      const { classes, innerRef, ...other } = this.props;
       const more = getThemeProps({
         theme: this.theme,
         name
@@ -266,20 +284,26 @@ const withStyles = (stylesOrCreator, options = {}) => Component => {
         more.theme = this.theme;
       }
 
-      return <Component {...more} classes={this.getClasses()} ref={innerRef} {...other} />;
+      return (
+        <Component
+          {...more}
+          classes={this.getClasses()}
+          ref={innerRef}
+          {...other}
+        />
+      );
     }
-
   }
 
   WithStyles.propTypes = {
     /**
-         * Override or extend the styles applied to the component.
-         */
+     * Override or extend the styles applied to the component.
+     */
     classes: PropTypes.object,
 
     /**
-         * Use that property to pass a ref callback to the decorated component.
-         */
+     * Use that property to pass a ref callback to the decorated component.
+     */
     innerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
   };
   WithStyles.contextTypes = {
@@ -288,13 +312,13 @@ const withStyles = (stylesOrCreator, options = {}) => Component => {
     ...(listenToTheme ? themeListener.contextTypes : {})
   };
 
-  if (process.env.NODE_ENV !== 'production') {
-    WithStyles.displayName = wrapDisplayName(Component, 'WithStyles');
+  if (process.env.NODE_ENV !== "production") {
+    WithStyles.displayName = wrapDisplayName(Component, "WithStyles");
   }
 
   hoistNonReactStatics(WithStyles, Component);
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== "production") {
     // Exposed for test purposes.
     WithStyles.Naked = Component;
     WithStyles.options = options;
