@@ -11,7 +11,8 @@ import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import { capitalize } from "../utils/helpers";
 const RADIUS = 11;
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     position: "relative",
@@ -92,13 +93,22 @@ const defaultProps = (Badge.defaultProps = {
   component: "span"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Badge/Badge').Shape>}
- */
-export const BadgeCreator = withStyles(styles, Badge, {
-  isMui: true,
-  defaultProps
-});
-const BadgeComponent = BadgeCreator();
-if (Badge.muiName) BadgeComponent.muiName = Badge.muiName;
-export default BadgeComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Badge/Badge').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Badge/Badge').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Badge/Badge').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const BadgeCode = Badge;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  BadgeCode as Badge,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

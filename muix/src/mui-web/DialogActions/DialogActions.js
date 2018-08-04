@@ -14,7 +14,7 @@ import withStyles from "../styles/withStyles";
 import { cloneChildrenWithClassName } from "../utils/reactHelpers";
 import "../Button/Button"; // So we don't have any override priority issue.
 
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("margin", "8px 4px"),
@@ -52,14 +52,22 @@ const defaultProps = (DialogActions.defaultProps = {
   disableActionSpacing: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/DialogActions/DialogActions').Shape>}
- */
-export const DialogActionsCreator = withStyles(styles, DialogActions, {
-  isMui: true,
-  defaultProps
-});
-const DialogActionsComponent = DialogActionsCreator();
-if (DialogActions.muiName)
-  DialogActionsComponent.muiName = DialogActions.muiName;
-export default DialogActionsComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/DialogActions/DialogActions').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/DialogActions/DialogActions').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/DialogActions/DialogActions').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const DialogActionsCode = DialogActions;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  DialogActionsCode as DialogActions,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

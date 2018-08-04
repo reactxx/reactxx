@@ -28,7 +28,7 @@ function easeIn(t) {
   return t * t;
 }
 
-export const styles = theme => ({
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     display: "inline-block",
@@ -96,6 +96,7 @@ export const styles = theme => ({
     }
   }
 });
+
 /**
  * ## ARIA
  *
@@ -103,7 +104,6 @@ export const styles = theme => ({
  * you should use `aria-describedby` to point to the progress bar, and set the `aria-busy`
  * attribute to `true` on that region until it has finished loading.
  */
-
 function CircularProgress(props) {
   const {
     $system: { classNames, classNamesStr, classNamesAny, theme },
@@ -191,14 +191,22 @@ const defaultProps = (CircularProgress.defaultProps = {
   variant: "indeterminate"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/CircularProgress/CircularProgress').Shape>}
- */
-export const CircularProgressCreator = withStyles(styles, CircularProgress, {
-  isMui: true,
-  defaultProps
-});
-const CircularProgressComponent = CircularProgressCreator();
-if (CircularProgress.muiName)
-  CircularProgressComponent.muiName = CircularProgress.muiName;
-export default CircularProgressComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/CircularProgress/CircularProgress').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/CircularProgress/CircularProgress').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/CircularProgress/CircularProgress').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const CircularProgressCode = CircularProgress;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  CircularProgressCode as CircularProgress,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

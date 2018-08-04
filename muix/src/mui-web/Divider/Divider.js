@@ -12,7 +12,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import { fade } from "../styles/colorManipulator";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("margin", 0),
@@ -72,13 +73,22 @@ const defaultProps = (Divider.defaultProps = {
   light: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Divider/Divider').Shape>}
- */
-export const DividerCreator = withStyles(styles, Divider, {
-  isMui: true,
-  defaultProps
-});
-const DividerComponent = DividerCreator();
-if (Divider.muiName) DividerComponent.muiName = Divider.muiName;
-export default DividerComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Divider/Divider').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Divider/Divider').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Divider/Divider').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const DividerCode = Divider;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  DividerCode as Divider,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

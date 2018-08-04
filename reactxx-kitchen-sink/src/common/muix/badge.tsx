@@ -5,7 +5,7 @@ import AppBar from 'reactxx-mui-web/AppBar/AppBar';
 import Tabs from 'reactxx-mui-web/Tabs/Tabs';
 import Tab from 'reactxx-mui-web/Tab/Tab';
 import Typography from 'reactxx-mui-web/Typography/Typography';
-import Button from 'reactxx-mui-web/Button/Button';
+import Button from 'reactxx-muix/web/Button/Button';
 import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import { Icon } from 'reactxx-primitives'
 import { Email } from 'reactxx-mdi/Email'

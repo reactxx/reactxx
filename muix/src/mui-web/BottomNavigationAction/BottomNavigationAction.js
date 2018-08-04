@@ -12,7 +12,8 @@ import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import unsupportedProp from "../utils/unsupportedProp";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     transition: theme.transitions.create(["color", "padding-top"], {
@@ -127,18 +128,22 @@ class BottomNavigationAction extends React.Component {
 
 const defaultProps = (BottomNavigationAction.defaultProps = {});
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/BottomNavigationAction/BottomNavigationAction').Shape>}
- */
-export const BottomNavigationActionCreator = withStyles(
-  styles,
-  BottomNavigationAction,
-  {
-    isMui: true,
-    defaultProps
-  }
-);
-const BottomNavigationActionComponent = BottomNavigationActionCreator();
-if (BottomNavigationAction.muiName)
-  BottomNavigationActionComponent.muiName = BottomNavigationAction.muiName;
-export default BottomNavigationActionComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/BottomNavigationAction/BottomNavigationAction').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/BottomNavigationAction/BottomNavigationAction').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/BottomNavigationAction/BottomNavigationAction').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const BottomNavigationActionCode = BottomNavigationAction;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  BottomNavigationActionCode as BottomNavigationAction,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

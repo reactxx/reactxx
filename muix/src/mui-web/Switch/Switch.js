@@ -11,7 +11,8 @@ import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import { capitalize } from "../utils/helpers";
 import SwitchBase from "../internal/SwitchBase";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     display: "inline-flex",
@@ -158,13 +159,22 @@ const defaultProps = (Switch.defaultProps = {
   color: "secondary"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Switch/Switch').Shape>}
- */
-export const SwitchCreator = withStyles(styles, Switch, {
-  isMui: true,
-  defaultProps
-});
-const SwitchComponent = SwitchCreator();
-if (Switch.muiName) SwitchComponent.muiName = Switch.muiName;
-export default SwitchComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Switch/Switch').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Switch/Switch').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Switch/Switch').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const SwitchCode = Switch;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  SwitchCode as Switch,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

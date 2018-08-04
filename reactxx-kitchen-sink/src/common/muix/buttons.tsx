@@ -1,7 +1,7 @@
 import React from 'react'
 import { ThemeProvider } from 'reactxx-basic'
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Button from 'reactxx-mui-web/Button/Button'
+import Button from 'reactxx-muix/web/Button/Button';
 import IconButton from 'reactxx-mui-web/IconButton/IconButton'
 import { Plus } from 'reactxx-mdi/Plus'
 import { Pencil } from 'reactxx-mdi/Pencil'

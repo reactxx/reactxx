@@ -1,18 +1,7 @@
 {
-  "type": "ObjectProperty",
-  "method": false,
-  "key": {
-    "type": "StringLiteral",
-    "extra": {
-      "rawValue": "NAME$grid_item",
-      "raw": "\"NAME$grid_item\""
-    },
-    "value": "NAME$grid_item"
-  },
-  "computed": false,
-  "shorthand": false,
-  "value": {
-    "type": "BooleanLiteral",
-    "value": true
-  }
+  "type": "ExportNamedDeclaration",
+  "specifiers": [],
+  "source": null,
+  "declaration": null,
+  "exportKind": "value"
 }

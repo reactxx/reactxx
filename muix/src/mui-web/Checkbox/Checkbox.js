@@ -14,7 +14,8 @@ import CheckBoxIcon from "../internal/svg-icons/CheckBox";
 import IndeterminateCheckBoxIcon from "../internal/svg-icons/IndeterminateCheckBox";
 import { capitalize } from "../utils/helpers";
 import withStyles from "../styles/withStyles";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     color: theme.palette.text.secondary
@@ -84,13 +85,22 @@ const defaultProps = (Checkbox.defaultProps = {
   indeterminateIcon: <IndeterminateCheckBoxIcon />
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Checkbox/Checkbox').Shape>}
- */
-export const CheckboxCreator = withStyles(styles, Checkbox, {
-  isMui: true,
-  defaultProps
-});
-const CheckboxComponent = CheckboxCreator();
-if (Checkbox.muiName) CheckboxComponent.muiName = Checkbox.muiName;
-export default CheckboxComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Checkbox/Checkbox').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Checkbox/Checkbox').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Checkbox/Checkbox').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const CheckboxCode = Checkbox;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  CheckboxCode as Checkbox,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

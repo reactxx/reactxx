@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import Typography from "../Typography/Typography";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", "24px 24px 20px"),
@@ -45,13 +45,22 @@ const defaultProps = (DialogTitle.defaultProps = {
   disableTypography: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/DialogTitle/DialogTitle').Shape>}
- */
-export const DialogTitleCreator = withStyles(styles, DialogTitle, {
-  isMui: true,
-  defaultProps
-});
-const DialogTitleComponent = DialogTitleCreator();
-if (DialogTitle.muiName) DialogTitleComponent.muiName = DialogTitle.muiName;
-export default DialogTitleComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/DialogTitle/DialogTitle').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/DialogTitle/DialogTitle').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/DialogTitle/DialogTitle').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const DialogTitleCode = DialogTitle;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  DialogTitleCode as DialogTitle,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

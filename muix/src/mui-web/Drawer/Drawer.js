@@ -28,7 +28,8 @@ export function getAnchor(props) {
     ? oppositeDirection[props.anchor]
     : props.anchor;
 }
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element if `variant="permanent or persistent"`. */
   docked: {
     flex: "0 0 auto"
@@ -108,11 +109,11 @@ export const styles = theme => ({
   /* Styles applied to the `Modal` component. */
   modal: {}
 });
+
 /**
  * The properties of the [Modal](/api/modal) component are available
  * when `variant="temporary"` is set.
  */
-
 class Drawer extends React.Component {
   // Let's assume that the Drawer will always be rendered on user space.
   // We use this state is order to skip the appear transition during the
@@ -214,13 +215,22 @@ const defaultProps = (Drawer.defaultProps = {
   variant: "temporary" // Mobile first.
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Drawer/Drawer').Shape>}
- */
-export const DrawerCreator = withStyles(styles, Drawer, {
-  isMui: true,
-  defaultProps
-});
-const DrawerComponent = DrawerCreator();
-if (Drawer.muiName) DrawerComponent.muiName = Drawer.muiName;
-export default DrawerComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Drawer/Drawer').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Drawer/Drawer').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Drawer/Drawer').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const DrawerCode = Drawer;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  DrawerCode as Drawer,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

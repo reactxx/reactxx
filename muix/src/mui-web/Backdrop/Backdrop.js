@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import Fade from "../Fade/Fade";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     zIndex: -1,
@@ -59,13 +59,22 @@ const defaultProps = (Backdrop.defaultProps = {
   invisible: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Backdrop/Backdrop').Shape>}
- */
-export const BackdropCreator = withStyles(styles, Backdrop, {
-  isMui: true,
-  defaultProps
-});
-const BackdropComponent = BackdropCreator();
-if (Backdrop.muiName) BackdropComponent.muiName = Backdrop.muiName;
-export default BackdropComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Backdrop/Backdrop').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Backdrop/Backdrop').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Backdrop/Backdrop').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const BackdropCode = Backdrop;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  BackdropCode as Backdrop,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

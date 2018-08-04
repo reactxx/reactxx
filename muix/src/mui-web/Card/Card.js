@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Paper from "../Paper/Paper";
 import withStyles from "../styles/withStyles";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     overflow: "hidden"
@@ -39,13 +39,22 @@ const defaultProps = (Card.defaultProps = {
   raised: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Card/Card').Shape>}
- */
-export const CardCreator = withStyles(styles, Card, {
-  isMui: true,
-  defaultProps
-});
-const CardComponent = CardCreator();
-if (Card.muiName) CardComponent.muiName = Card.muiName;
-export default CardComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Card/Card').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Card/Card').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Card/Card').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const CardCode = Card;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  CardCode as Card,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

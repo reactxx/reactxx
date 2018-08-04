@@ -10,7 +10,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import warning from "warning";
 import withStyles from "../styles/withStyles";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     display: "flex",
@@ -67,14 +68,22 @@ const defaultProps = (BottomNavigation.defaultProps = {
   showLabels: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/BottomNavigation/BottomNavigation').Shape>}
- */
-export const BottomNavigationCreator = withStyles(styles, BottomNavigation, {
-  isMui: true,
-  defaultProps
-});
-const BottomNavigationComponent = BottomNavigationCreator();
-if (BottomNavigation.muiName)
-  BottomNavigationComponent.muiName = BottomNavigation.muiName;
-export default BottomNavigationComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/BottomNavigation/BottomNavigation').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/BottomNavigation/BottomNavigation').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/BottomNavigation/BottomNavigation').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const BottomNavigationCode = BottomNavigation;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  BottomNavigationCode as BottomNavigation,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

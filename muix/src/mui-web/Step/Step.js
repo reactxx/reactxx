@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import warning from "warning";
 import withStyles from "../styles/withStyles";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {},
 
@@ -100,13 +100,22 @@ const defaultProps = (Step.defaultProps = {
   disabled: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Step/Step').Shape>}
- */
-export const StepCreator = withStyles(styles, Step, {
-  isMui: true,
-  defaultProps
-});
-const StepComponent = StepCreator();
-if (Step.muiName) StepComponent.muiName = Step.muiName;
-export default StepComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Step/Step').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Step/Step').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Step/Step').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const StepCode = Step;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  StepCode as Step,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

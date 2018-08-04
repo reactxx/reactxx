@@ -91,13 +91,22 @@ function HiddenCss(props) {
 
 const defaultProps = (HiddenCss.defaultProps = {});
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Hidden/HiddenCss').Shape>}
- */
-export const HiddenCssCreator = withStyles(styles, HiddenCss, {
-  isMui: true,
-  defaultProps
-});
-const HiddenCssComponent = HiddenCssCreator();
-if (HiddenCss.muiName) HiddenCssComponent.muiName = HiddenCss.muiName;
-export default HiddenCssComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/HiddenCss/HiddenCss').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/HiddenCss/HiddenCss').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/HiddenCss/HiddenCss').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const HiddenCssCode = HiddenCss;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  HiddenCssCode as HiddenCss,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

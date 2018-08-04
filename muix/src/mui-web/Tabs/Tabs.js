@@ -22,7 +22,8 @@ import ScrollbarSize from "./ScrollbarSize";
 import withStyles from "../styles/withStyles";
 import TabIndicator from "./TabIndicator";
 import TabScrollButton from "./TabScrollButton";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     overflow: "hidden",
@@ -430,13 +431,22 @@ const defaultProps = (Tabs.defaultProps = {
   textColor: "inherit"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Tabs/Tabs').Shape>}
- */
-export const TabsCreator = withStyles(styles, Tabs, {
-  isMui: true,
-  defaultProps
-});
-const TabsComponent = TabsCreator();
-if (Tabs.muiName) TabsComponent.muiName = Tabs.muiName;
-export default TabsComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Tabs/Tabs').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Tabs/Tabs').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Tabs/Tabs').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TabsCode = Tabs;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TabsCode as Tabs,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

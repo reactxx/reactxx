@@ -13,7 +13,7 @@ import withStyles from "../styles/withStyles";
 import { lighten } from "../styles/colorManipulator";
 const TRANSITION_DURATION = 4; // seconds
 
-export const styles = theme => ({
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     position: "relative",
@@ -181,6 +181,7 @@ export const styles = theme => ({
     }
   }
 });
+
 /**
  * ## ARIA
  *
@@ -188,7 +189,6 @@ export const styles = theme => ({
  * you should use `aria-describedby` to point to the progress bar, and set the `aria-busy`
  * attribute to `true` on that region until it has finished loading.
  */
-
 function LinearProgress(props) {
   const {
     $system: { classNames, classNamesStr, classNamesAny, theme },
@@ -290,14 +290,22 @@ const defaultProps = (LinearProgress.defaultProps = {
   variant: "indeterminate"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/LinearProgress/LinearProgress').Shape>}
- */
-export const LinearProgressCreator = withStyles(styles, LinearProgress, {
-  isMui: true,
-  defaultProps
-});
-const LinearProgressComponent = LinearProgressCreator();
-if (LinearProgress.muiName)
-  LinearProgressComponent.muiName = LinearProgress.muiName;
-export default LinearProgressComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/LinearProgress/LinearProgress').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/LinearProgress/LinearProgress').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/LinearProgress/LinearProgress').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const LinearProgressCode = LinearProgress;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  LinearProgressCode as LinearProgress,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

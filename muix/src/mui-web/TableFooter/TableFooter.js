@@ -9,7 +9,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     display: "table-footer-group"
@@ -50,13 +50,22 @@ const defaultProps = (TableFooter.defaultProps = {
   component: "tfoot"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/TableFooter/TableFooter').Shape>}
- */
-export const TableFooterCreator = withStyles(styles, TableFooter, {
-  isMui: true,
-  defaultProps
-});
-const TableFooterComponent = TableFooterCreator();
-if (TableFooter.muiName) TableFooterComponent.muiName = TableFooter.muiName;
-export default TableFooterComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/TableFooter/TableFooter').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/TableFooter/TableFooter').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/TableFooter/TableFooter').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TableFooterCode = TableFooter;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TableFooterCode as TableFooter,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

@@ -15,7 +15,8 @@ import withStyles from "../styles/withStyles";
 import Paper from "../Paper/Paper";
 import Typography from "../Typography/Typography";
 import { emphasize } from "../styles/colorManipulator";
-export const styles = theme => {
+
+const styles = theme => {
   const emphasis = theme.palette.type === "light" ? 0.8 : 0.98;
   const backgroundColor = emphasize(theme.palette.background.default, emphasis);
   return {
@@ -84,14 +85,22 @@ function SnackbarContent(props) {
 
 const defaultProps = (SnackbarContent.defaultProps = {});
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/SnackbarContent/SnackbarContent').Shape>}
- */
-export const SnackbarContentCreator = withStyles(styles, SnackbarContent, {
-  isMui: true,
-  defaultProps
-});
-const SnackbarContentComponent = SnackbarContentCreator();
-if (SnackbarContent.muiName)
-  SnackbarContentComponent.muiName = SnackbarContent.muiName;
-export default SnackbarContentComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/SnackbarContent/SnackbarContent').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/SnackbarContent/SnackbarContent').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/SnackbarContent/SnackbarContent').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const SnackbarContentCode = SnackbarContent;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  SnackbarContentCode as SnackbarContent,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

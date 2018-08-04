@@ -9,7 +9,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     display: "flex",
@@ -22,12 +22,12 @@ export const styles = {
     flexDirection: "row"
   }
 };
+
 /**
  * `FormGroup` wraps controls such as `Checkbox` and `Switch`.
  * It provides compact row layout.
  * For the `Radio`, you should be using the `RadioGroup` component instead of this one.
  */
-
 function FormGroup(props) {
   const {
     $system: { classNames, classNamesStr, classNamesAny, theme },
@@ -51,13 +51,22 @@ const defaultProps = (FormGroup.defaultProps = {
   row: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/FormGroup/FormGroup').Shape>}
- */
-export const FormGroupCreator = withStyles(styles, FormGroup, {
-  isMui: true,
-  defaultProps
-});
-const FormGroupComponent = FormGroupCreator();
-if (FormGroup.muiName) FormGroupComponent.muiName = FormGroup.muiName;
-export default FormGroupComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/FormGroup/FormGroup').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/FormGroup/FormGroup').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/FormGroup/FormGroup').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const FormGroupCode = FormGroup;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  FormGroupCode as FormGroup,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

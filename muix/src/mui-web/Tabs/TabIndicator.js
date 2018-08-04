@@ -10,7 +10,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import { capitalize } from "../utils/helpers";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     position: "absolute",
@@ -31,10 +32,10 @@ export const styles = theme => ({
     backgroundColor: theme.palette.secondary.main
   }
 });
+
 /**
  * @ignore - internal component.
  */
-
 function TabIndicator(props) {
   const {
     $system: { classNames, classNamesStr, classNamesAny, theme },
@@ -57,13 +58,22 @@ function TabIndicator(props) {
 
 const defaultProps = (TabIndicator.defaultProps = {});
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Tabs/TabIndicator').Shape>}
- */
-export const TabIndicatorCreator = withStyles(styles, TabIndicator, {
-  isMui: true,
-  defaultProps
-});
-const TabIndicatorComponent = TabIndicatorCreator();
-if (TabIndicator.muiName) TabIndicatorComponent.muiName = TabIndicator.muiName;
-export default TabIndicatorComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/TabIndicator/TabIndicator').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/TabIndicator/TabIndicator').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/TabIndicator/TabIndicator').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TabIndicatorCode = TabIndicator;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TabIndicatorCode as TabIndicator,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

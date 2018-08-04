@@ -51,13 +51,22 @@ const defaultProps = (CssBaseline.defaultProps = {
   children: null
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/CssBaseline/CssBaseline').Shape>}
- */
-export const CssBaselineCreator = withStyles(styles, CssBaseline, {
-  isMui: true,
-  defaultProps
-});
-const CssBaselineComponent = CssBaselineCreator();
-if (CssBaseline.muiName) CssBaselineComponent.muiName = CssBaseline.muiName;
-export default CssBaselineComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/CssBaseline/CssBaseline').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/CssBaseline/CssBaseline').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/CssBaseline/CssBaseline').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const CssBaselineCode = CssBaseline;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  CssBaselineCode as CssBaseline,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

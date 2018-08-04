@@ -15,7 +15,7 @@ import debounce from "debounce"; // < 1kb payload overhead when lodash/debounce 
 import EventListener from "react-event-listener";
 import withStyles from "../styles/withStyles";
 const ROWS_HEIGHT = 19;
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     position: "relative",
@@ -46,10 +46,10 @@ export const styles = {
     whiteSpace: "pre-wrap"
   }
 };
+
 /**
  * @ignore - internal component.
  */
-
 class Textarea extends React.Component {
   isControlled = this.props.value != null;
   shadowRef = null;
@@ -206,13 +206,22 @@ const defaultProps = (Textarea.defaultProps = {
   rows: 1
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Input/Textarea').Shape>}
- */
-export const TextareaCreator = withStyles(styles, Textarea, {
-  isMui: true,
-  defaultProps
-});
-const TextareaComponent = TextareaCreator();
-if (Textarea.muiName) TextareaComponent.muiName = Textarea.muiName;
-export default TextareaComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Textarea/Textarea').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Textarea/Textarea').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Textarea/Textarea').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TextareaCode = Textarea;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TextareaCode as Textarea,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

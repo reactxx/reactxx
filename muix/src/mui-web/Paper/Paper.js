@@ -10,7 +10,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import warning from "warning";
 import withStyles from "../styles/withStyles";
-export const styles = theme => {
+
+const styles = theme => {
   const elevations = {};
   theme.shadows.forEach((shadow, index) => {
     elevations[`elevation${index}`] = {
@@ -62,13 +63,22 @@ const defaultProps = (Paper.defaultProps = {
   square: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Paper/Paper').Shape>}
- */
-export const PaperCreator = withStyles(styles, Paper, {
-  isMui: true,
-  defaultProps
-});
-const PaperComponent = PaperCreator();
-if (Paper.muiName) PaperComponent.muiName = Paper.muiName;
-export default PaperComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Paper/Paper').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Paper/Paper').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Paper/Paper').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const PaperCode = Paper;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  PaperCode as Paper,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

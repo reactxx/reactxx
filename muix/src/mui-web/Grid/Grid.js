@@ -87,13 +87,7 @@ function generateGutter(theme, breakpoint) {
   return styles;
 }
 
-// Default CSS values
-// flex: '0 1 auto',
-// flexDirection: 'row',
-// alignItems: 'flex-start',
-// flexWrap: 'nowrap',
-// justifyContent: 'flex-start',
-export const styles = theme => ({
+const styles = theme => ({
   /* Styles applied to the root element if `container={true}`. */
   container: {
     boxSizing: "border-box",
@@ -304,13 +298,22 @@ const defaultProps = (Grid.defaultProps = {
   zeroMinWidth: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Grid/Grid').Shape>}
- */
-export const GridCreator = withStyles(styles, Grid, {
-  isMui: true,
-  defaultProps
-});
-const GridComponent = GridCreator();
-if (Grid.muiName) GridComponent.muiName = Grid.muiName;
-export default GridComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Grid/Grid').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Grid/Grid').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Grid/Grid').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const GridCode = Grid;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  GridCode as Grid,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

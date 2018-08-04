@@ -9,7 +9,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     position: "absolute",
@@ -136,14 +137,22 @@ const defaultProps = (GridListTileBar.defaultProps = {
   titlePosition: "bottom"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/GridListTileBar/GridListTileBar').Shape>}
- */
-export const GridListTileBarCreator = withStyles(styles, GridListTileBar, {
-  isMui: true,
-  defaultProps
-});
-const GridListTileBarComponent = GridListTileBarCreator();
-if (GridListTileBar.muiName)
-  GridListTileBarComponent.muiName = GridListTileBar.muiName;
-export default GridListTileBarComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/GridListTileBar/GridListTileBar').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/GridListTileBar/GridListTileBar').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/GridListTileBar/GridListTileBar').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const GridListTileBarCode = GridListTileBar;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  GridListTileBarCode as GridListTileBar,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

@@ -1,12 +1,12 @@
 import React from 'react'
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import AppBar from 'reactxx-mui-web/AppBar/AppBar';
-import Toolbar from 'reactxx-mui-web/Toolbar/Toolbar';
-import Button from 'reactxx-mui-web/Button/Button';
-import IconButton from 'reactxx-mui-web/IconButton/IconButton';
+import AppBar from 'reactxx-muix/web/AppBar/AppBar';
+import Toolbar from 'reactxx-muix/web/Toolbar/Toolbar';
+import Button from 'reactxx-muix/web/Button/Button';
+import IconButton from 'reactxx-muix/web/IconButton/IconButton';
 import { Icon } from 'reactxx-primitives'
 import { Menu } from 'reactxx-mdi/Menu'
-import Typography from 'reactxx-mui-web/Typography/Typography';
+import Typography from 'reactxx-muix/web/Typography/Typography';
 
 const styles = {
   root: {

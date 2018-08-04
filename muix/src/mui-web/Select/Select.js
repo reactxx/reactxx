@@ -15,7 +15,7 @@ import ArrowDropDownIcon from "../internal/svg-icons/ArrowDropDown";
 import Input from "../Input/Input";
 import { styles as nativeSelectStyles } from "../NativeSelect/NativeSelect";
 import NativeSelectInput from "../NativeSelect/NativeSelectInput";
-export const styles = nativeSelectStyles;
+const styles = nativeSelectStyles;
 
 function Select(props) {
   const {
@@ -84,13 +84,22 @@ const defaultProps = (Select.defaultProps = {
   native: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Select/Select').Shape>}
- */
-export const SelectCreator = withStyles(styles, Select, {
-  isMui: true,
-  defaultProps
-});
-const SelectComponent = SelectCreator();
-if (Select.muiName) SelectComponent.muiName = Select.muiName;
-export default SelectComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Select/Select').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Select/Select').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Select/Select').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const SelectCode = Select;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  SelectCode as Select,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

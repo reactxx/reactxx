@@ -11,7 +11,8 @@ import { toAtomic } from "../styles/withStyles";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     flex: "1 1 auto"
@@ -89,14 +90,22 @@ const defaultProps = (StepConnector.defaultProps = {
   orientation: "horizontal"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/StepConnector/StepConnector').Shape>}
- */
-export const StepConnectorCreator = withStyles(styles, StepConnector, {
-  isMui: true,
-  defaultProps
-});
-const StepConnectorComponent = StepConnectorCreator();
-if (StepConnector.muiName)
-  StepConnectorComponent.muiName = StepConnector.muiName;
-export default StepConnectorComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/StepConnector/StepConnector').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/StepConnector/StepConnector').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/StepConnector/StepConnector').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const StepConnectorCode = StepConnector;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  StepConnectorCode as StepConnector,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

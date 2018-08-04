@@ -11,7 +11,8 @@ import { toAtomic } from "../styles/withStyles";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("margin", 0),
@@ -95,14 +96,22 @@ const defaultProps = (FormHelperText.defaultProps = {
   component: "p"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/FormHelperText/FormHelperText').Shape>}
- */
-export const FormHelperTextCreator = withStyles(styles, FormHelperText, {
-  isMui: true,
-  defaultProps
-});
-const FormHelperTextComponent = FormHelperTextCreator();
-if (FormHelperText.muiName)
-  FormHelperTextComponent.muiName = FormHelperText.muiName;
-export default FormHelperTextComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/FormHelperText/FormHelperText').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/FormHelperText/FormHelperText').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/FormHelperText/FormHelperText').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const FormHelperTextCode = FormHelperText;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  FormHelperTextCode as FormHelperText,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

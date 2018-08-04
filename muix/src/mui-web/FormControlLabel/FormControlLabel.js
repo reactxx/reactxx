@@ -11,7 +11,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import Typography from "../Typography/Typography";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     display: "inline-flex",
@@ -46,11 +47,11 @@ export const styles = theme => ({
     }
   }
 });
+
 /**
  * Drop in replacement of the `Radio`, `Switch` and `Checkbox` component.
  * Use this component if you want to display an extra label.
  */
-
 function FormControlLabel(props, context) {
   const {
     $system: { classNames, classNamesStr, classNamesAny, theme },
@@ -120,14 +121,22 @@ const defaultProps = (FormControlLabel.defaultProps = {
   labelPlacement: "end"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/FormControlLabel/FormControlLabel').Shape>}
- */
-export const FormControlLabelCreator = withStyles(styles, FormControlLabel, {
-  isMui: true,
-  defaultProps
-});
-const FormControlLabelComponent = FormControlLabelCreator();
-if (FormControlLabel.muiName)
-  FormControlLabelComponent.muiName = FormControlLabel.muiName;
-export default FormControlLabelComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/FormControlLabel/FormControlLabel').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/FormControlLabel/FormControlLabel').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/FormControlLabel/FormControlLabel').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const FormControlLabelCode = FormControlLabel;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  FormControlLabelCode as FormControlLabel,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

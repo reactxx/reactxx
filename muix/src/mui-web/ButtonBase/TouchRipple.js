@@ -14,7 +14,8 @@ import withStyles from "../styles/withStyles";
 import Ripple from "./Ripple";
 const DURATION = 550;
 export const DELAY_RIPPLE = 80;
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     display: "block",
@@ -310,13 +311,22 @@ const defaultProps = (TouchRipple.defaultProps = {
   center: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ButtonBase/TouchRipple').Shape>}
- */
-export const TouchRippleCreator = withStyles(styles, TouchRipple, {
-  isMui: true,
-  defaultProps
-});
-const TouchRippleComponent = TouchRippleCreator();
-if (TouchRipple.muiName) TouchRippleComponent.muiName = TouchRipple.muiName;
-export default TouchRippleComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/TouchRipple/TouchRipple').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/TouchRipple/TouchRipple').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/TouchRipple/TouchRipple').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TouchRippleCode = TouchRipple;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TouchRippleCode as TouchRipple,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

@@ -42,7 +42,8 @@ export function isFilled(obj, SSR = false) {
 export function isAdornedStart(obj) {
   return obj.startAdornment;
 }
-export const styles = theme => {
+
+const styles = theme => {
   const light = theme.palette.type === "light";
   const placeholder = {
     color: "currentColor",
@@ -571,13 +572,22 @@ const defaultProps = (Input.defaultProps = {
   type: "text"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Input/Input').Shape>}
- */
-export const InputCreator = withStyles(styles, Input, {
-  isMui: true,
-  defaultProps
-});
-const InputComponent = InputCreator();
-if (Input.muiName) InputComponent.muiName = Input.muiName;
-export default InputComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Input/Input').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Input/Input').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Input/Input').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const InputCode = Input;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  InputCode as Input,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

@@ -15,7 +15,8 @@ import withStyles from "../styles/withStyles";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import { capitalize } from "../utils/helpers";
 import unsupportedProp from "../utils/unsupportedProp";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", 0),
@@ -239,13 +240,22 @@ const defaultProps = (Tab.defaultProps = {
   textColor: "inherit"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Tab/Tab').Shape>}
- */
-export const TabCreator = withStyles(styles, Tab, {
-  isMui: true,
-  defaultProps
-});
-const TabComponent = TabCreator();
-if (Tab.muiName) TabComponent.muiName = Tab.muiName;
-export default TabComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Tab/Tab').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Tab/Tab').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Tab/Tab').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TabCode = Tab;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TabCode as Tab,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

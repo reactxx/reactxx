@@ -9,7 +9,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     marginRight: 16,
@@ -17,10 +18,10 @@ export const styles = theme => ({
     flexShrink: 0
   }
 });
+
 /**
  * A simple wrapper to apply `List` styles to an `Icon` or `SvgIcon`.
  */
-
 function ListItemIcon(props) {
   const {
     $system: { classNames, classNamesStr, classNamesAny, theme },
@@ -41,13 +42,22 @@ function ListItemIcon(props) {
 
 const defaultProps = (ListItemIcon.defaultProps = {});
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListItemIcon/ListItemIcon').Shape>}
- */
-export const ListItemIconCreator = withStyles(styles, ListItemIcon, {
-  isMui: true,
-  defaultProps
-});
-const ListItemIconComponent = ListItemIconCreator();
-if (ListItemIcon.muiName) ListItemIconComponent.muiName = ListItemIcon.muiName;
-export default ListItemIconComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/ListItemIcon/ListItemIcon').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/ListItemIcon/ListItemIcon').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/ListItemIcon/ListItemIcon').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ListItemIconCode = ListItemIcon;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ListItemIconCode as ListItemIcon,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

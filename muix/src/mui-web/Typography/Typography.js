@@ -12,7 +12,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import { capitalize } from "../utils/helpers";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("margin", 0),
@@ -172,13 +173,22 @@ const defaultProps = (Typography.defaultProps = {
   variant: "body1"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Typography/Typography').Shape>}
- */
-export const TypographyCreator = withStyles(styles, Typography, {
-  isMui: true,
-  defaultProps
-});
-const TypographyComponent = TypographyCreator();
-if (Typography.muiName) TypographyComponent.muiName = Typography.muiName;
-export default TypographyComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Typography/Typography').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Typography/Typography').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Typography/Typography').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TypographyCode = Typography;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TypographyCode as Typography,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

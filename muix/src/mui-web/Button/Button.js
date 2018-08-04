@@ -15,7 +15,8 @@ import withStyles from "../styles/withStyles";
 import { fade } from "../styles/colorManipulator";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import { capitalize } from "../utils/helpers";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", "8px 16px"),
@@ -316,13 +317,22 @@ const defaultProps = (Button.defaultProps = {
   variant: "text"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Button/Button').Shape>}
- */
-export const ButtonCreator = withStyles(styles, Button, {
-  isMui: true,
-  defaultProps
-});
-const ButtonComponent = ButtonCreator();
-if (Button.muiName) ButtonComponent.muiName = Button.muiName;
-export default ButtonComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Button/Button').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Button/Button').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Button/Button').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ButtonCode = Button;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ButtonCode as Button,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

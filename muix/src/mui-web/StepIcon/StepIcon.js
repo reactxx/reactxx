@@ -12,7 +12,8 @@ import CheckCircle from "../internal/svg-icons/CheckCircle";
 import Warning from "../internal/svg-icons/Warning";
 import withStyles from "../styles/withStyles";
 import SvgIcon from "../SvgIcon";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     display: "block",
@@ -96,13 +97,22 @@ const defaultProps = (StepIcon.defaultProps = {
   error: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/StepIcon/StepIcon').Shape>}
- */
-export const StepIconCreator = withStyles(styles, StepIcon, {
-  isMui: true,
-  defaultProps
-});
-const StepIconComponent = StepIconCreator();
-if (StepIcon.muiName) StepIconComponent.muiName = StepIcon.muiName;
-export default StepIconComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/StepIcon/StepIcon').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/StepIcon/StepIcon').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/StepIcon/StepIcon').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const StepIconCode = StepIcon;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  StepIconCode as StepIcon,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

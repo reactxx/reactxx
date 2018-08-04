@@ -14,7 +14,7 @@ import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import Paper from "../Paper/Paper";
 import StepConnector from "../StepConnector";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", 24),
@@ -112,13 +112,22 @@ const defaultProps = (Stepper.defaultProps = {
   orientation: "horizontal"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Stepper/Stepper').Shape>}
- */
-export const StepperCreator = withStyles(styles, Stepper, {
-  isMui: true,
-  defaultProps
-});
-const StepperComponent = StepperCreator();
-if (Stepper.muiName) StepperComponent.muiName = Stepper.muiName;
-export default StepperComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Stepper/Stepper').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Stepper/Stepper').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Stepper/Stepper').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const StepperCode = Stepper;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  StepperCode as Stepper,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

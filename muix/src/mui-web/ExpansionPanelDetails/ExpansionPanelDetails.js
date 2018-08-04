@@ -11,7 +11,7 @@ import { toAtomic } from "../styles/withStyles";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", "8px 24px 24px"),
@@ -36,18 +36,22 @@ function ExpansionPanelDetails(props) {
 
 const defaultProps = (ExpansionPanelDetails.defaultProps = {});
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ExpansionPanelDetails/ExpansionPanelDetails').Shape>}
- */
-export const ExpansionPanelDetailsCreator = withStyles(
-  styles,
-  ExpansionPanelDetails,
-  {
-    isMui: true,
-    defaultProps
-  }
-);
-const ExpansionPanelDetailsComponent = ExpansionPanelDetailsCreator();
-if (ExpansionPanelDetails.muiName)
-  ExpansionPanelDetailsComponent.muiName = ExpansionPanelDetails.muiName;
-export default ExpansionPanelDetailsComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/ExpansionPanelDetails/ExpansionPanelDetails').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/ExpansionPanelDetails/ExpansionPanelDetails').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/ExpansionPanelDetails/ExpansionPanelDetails').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ExpansionPanelDetailsCode = ExpansionPanelDetails;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ExpansionPanelDetailsCode as ExpansionPanelDetails,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

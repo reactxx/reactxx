@@ -13,7 +13,8 @@ import Transition from "react-transition-group/Transition";
 import withStyles from "../styles/withStyles";
 import { duration } from "../styles/transitions";
 import { getTransitionProps } from "../transitions/utils";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the container element. */
   container: {
     height: 0,
@@ -37,12 +38,12 @@ export const styles = theme => ({
     width: "100%"
   }
 });
+
 /**
  * The Collapse transition is used by the
  * [Vertical Stepper](/demos/steppers#vertical-stepper) StepContent component.
  * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
  */
-
 class Collapse extends React.Component {
   wrapper = null;
   autoTransitionDuration = null;
@@ -202,13 +203,22 @@ const defaultProps = (Collapse.defaultProps = {
   timeout: duration.standard
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Collapse/Collapse').Shape>}
- */
-export const CollapseCreator = withStyles(styles, Collapse, {
-  isMui: true,
-  defaultProps
-});
-const CollapseComponent = CollapseCreator();
-if (Collapse.muiName) CollapseComponent.muiName = Collapse.muiName;
-export default CollapseComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Collapse/Collapse').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Collapse/Collapse').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Collapse/Collapse').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const CollapseCode = Collapse;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  CollapseCode as Collapse,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

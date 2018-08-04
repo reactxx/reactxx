@@ -9,7 +9,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     display: "table",
@@ -52,13 +53,22 @@ const defaultProps = (Table.defaultProps = {
   component: "table"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Table/Table').Shape>}
- */
-export const TableCreator = withStyles(styles, Table, {
-  isMui: true,
-  defaultProps
-});
-const TableComponent = TableCreator();
-if (Table.muiName) TableComponent.muiName = Table.muiName;
-export default TableComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Table/Table').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Table/Table').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Table/Table').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TableCode = Table;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TableCode as Table,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

@@ -1,7 +1,7 @@
 import React from 'react'
 import withStylesCreator, { toAtomic } from 'reactxx-mui-web/styles/withStyles'
 
-import Button from 'reactxx-mui-web/Button/Button';
+import Button from 'reactxx-muix/web/Button/Button';
 import Avatar from 'reactxx-mui-web/Avatar/Avatar';
 import List from 'reactxx-mui-web/List/List';
 import ListItem from 'reactxx-mui-web/ListItem/ListItem';

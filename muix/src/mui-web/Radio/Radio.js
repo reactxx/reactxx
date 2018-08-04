@@ -13,7 +13,8 @@ import RadioButtonUncheckedIcon from "../internal/svg-icons/RadioButtonUnchecked
 import RadioButtonCheckedIcon from "../internal/svg-icons/RadioButtonChecked";
 import { capitalize } from "../utils/helpers";
 import withStyles from "../styles/withStyles";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     color: theme.palette.text.secondary
@@ -76,13 +77,22 @@ const defaultProps = (Radio.defaultProps = {
   color: "secondary"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Radio/Radio').Shape>}
- */
-export const RadioCreator = withStyles(styles, Radio, {
-  isMui: true,
-  defaultProps
-});
-const RadioComponent = RadioCreator();
-if (Radio.muiName) RadioComponent.muiName = Radio.muiName;
-export default RadioComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Radio/Radio').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Radio/Radio').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Radio/Radio').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const RadioCode = Radio;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  RadioCode as Radio,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

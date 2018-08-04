@@ -14,7 +14,7 @@ import withStyles from "../styles/withStyles";
 import { cloneChildrenWithClassName } from "../utils/reactHelpers";
 import "../Button/Button"; // So we don't have any override priority issue.
 
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", "16px 8px"),
@@ -46,18 +46,22 @@ function ExpansionPanelActions(props) {
 
 const defaultProps = (ExpansionPanelActions.defaultProps = {});
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ExpansionPanelActions/ExpansionPanelActions').Shape>}
- */
-export const ExpansionPanelActionsCreator = withStyles(
-  styles,
-  ExpansionPanelActions,
-  {
-    isMui: true,
-    defaultProps
-  }
-);
-const ExpansionPanelActionsComponent = ExpansionPanelActionsCreator();
-if (ExpansionPanelActions.muiName)
-  ExpansionPanelActionsComponent.muiName = ExpansionPanelActions.muiName;
-export default ExpansionPanelActionsComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/ExpansionPanelActions/ExpansionPanelActions').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/ExpansionPanelActions/ExpansionPanelActions').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/ExpansionPanelActions/ExpansionPanelActions').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ExpansionPanelActionsCode = ExpansionPanelActions;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ExpansionPanelActionsCode as ExpansionPanelActions,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

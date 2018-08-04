@@ -11,7 +11,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import ListItem from "../ListItem/ListItem";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     ...theme.typography.subheading,
@@ -66,13 +67,22 @@ const defaultProps = (MenuItem.defaultProps = {
   selected: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/MenuItem/MenuItem').Shape>}
- */
-export const MenuItemCreator = withStyles(styles, MenuItem, {
-  isMui: true,
-  defaultProps
-});
-const MenuItemComponent = MenuItemCreator();
-if (MenuItem.muiName) MenuItemComponent.muiName = MenuItem.muiName;
-export default MenuItemComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/MenuItem/MenuItem').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/MenuItem/MenuItem').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/MenuItem/MenuItem').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const MenuItemCode = MenuItem;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  MenuItemCode as MenuItem,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

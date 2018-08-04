@@ -15,7 +15,7 @@ import withStyles from "../styles/withStyles";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import StepLabel from "../StepLabel";
 import { isMuiElement } from "../utils/reactHelpers";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", "24px 16px"),
@@ -84,13 +84,22 @@ function StepButton(props) {
 
 const defaultProps = (StepButton.defaultProps = {});
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/StepButton/StepButton').Shape>}
- */
-export const StepButtonCreator = withStyles(styles, StepButton, {
-  isMui: true,
-  defaultProps
-});
-const StepButtonComponent = StepButtonCreator();
-if (StepButton.muiName) StepButtonComponent.muiName = StepButton.muiName;
-export default StepButtonComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/StepButton/StepButton').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/StepButton/StepButton').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/StepButton/StepButton').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const StepButtonCode = StepButton;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  StepButtonCode as StepButton,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

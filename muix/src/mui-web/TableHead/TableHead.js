@@ -9,7 +9,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     display: "table-header-group"
@@ -50,13 +50,22 @@ const defaultProps = (TableHead.defaultProps = {
   component: "thead"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/TableHead/TableHead').Shape>}
- */
-export const TableHeadCreator = withStyles(styles, TableHead, {
-  isMui: true,
-  defaultProps
-});
-const TableHeadComponent = TableHeadCreator();
-if (TableHead.muiName) TableHeadComponent.muiName = TableHead.muiName;
-export default TableHeadComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/TableHead/TableHead').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/TableHead/TableHead').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/TableHead/TableHead').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TableHeadCode = TableHead;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TableHeadCode as TableHead,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

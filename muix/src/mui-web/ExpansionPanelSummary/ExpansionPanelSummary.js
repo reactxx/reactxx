@@ -12,7 +12,8 @@ import classNames from "classnames";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import IconButton from "../IconButton/IconButton";
 import withStyles from "../styles/withStyles";
-export const styles = theme => {
+
+const styles = theme => {
   const transition = {
     duration: theme.transitions.duration.shortest
   };
@@ -181,18 +182,22 @@ const defaultProps = (ExpansionPanelSummary.defaultProps = {
   disabled: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ExpansionPanelSummary/ExpansionPanelSummary').Shape>}
- */
-export const ExpansionPanelSummaryCreator = withStyles(
-  styles,
-  ExpansionPanelSummary,
-  {
-    isMui: true,
-    defaultProps
-  }
-);
-const ExpansionPanelSummaryComponent = ExpansionPanelSummaryCreator();
-if (ExpansionPanelSummary.muiName)
-  ExpansionPanelSummaryComponent.muiName = ExpansionPanelSummary.muiName;
-export default ExpansionPanelSummaryComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/ExpansionPanelSummary/ExpansionPanelSummary').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/ExpansionPanelSummary/ExpansionPanelSummary').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/ExpansionPanelSummary/ExpansionPanelSummary').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ExpansionPanelSummaryCode = ExpansionPanelSummary;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ExpansionPanelSummaryCode as ExpansionPanelSummary,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

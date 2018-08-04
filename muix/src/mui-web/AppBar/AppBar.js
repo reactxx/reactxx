@@ -12,7 +12,8 @@ import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import { capitalize } from "../utils/helpers";
 import Paper from "../Paper/Paper";
-export const styles = theme => {
+
+const styles = theme => {
   const backgroundColorDefault =
     theme.palette.type === "light"
       ? theme.palette.grey[100]
@@ -113,13 +114,22 @@ const defaultProps = (AppBar.defaultProps = {
   position: "fixed"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/AppBar/AppBar').Shape>}
- */
-export const AppBarCreator = withStyles(styles, AppBar, {
-  isMui: true,
-  defaultProps
-});
-const AppBarComponent = AppBarCreator();
-if (AppBar.muiName) AppBarComponent.muiName = AppBar.muiName;
-export default AppBarComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/AppBar/AppBar').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/AppBar/AppBar').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/AppBar/AppBar').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const AppBarCode = AppBar;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  AppBarCode as AppBar,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

@@ -23,7 +23,7 @@ import Button from 'reactxx-mui-web/Button'
 //import App from '../common/mediaq/me1'
 //const App: React.SFC = () => <Button>Hallo world</Button>
 
-//import App from '../common/muix/buttons'
+import App from '../common/muix/buttons'
 //import App from '../common/muix/paper'
 //import App from '../common/muix/appbar'
 //import App from '../common/muix/autocomplete'
@@ -34,7 +34,7 @@ import Button from 'reactxx-mui-web/Button'
 //import App from '../common/muix/bottom-navigation'
 //import App from '../common/muix/cards'
 //import App from '../common/muix/chips'
-import App from '../common/muix/dialogs'
+//import App from '../common/muix/dialogs'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

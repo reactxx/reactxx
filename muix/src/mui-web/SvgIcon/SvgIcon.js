@@ -10,7 +10,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import { capitalize } from "../utils/helpers";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     userSelect: "none",
@@ -99,13 +100,22 @@ const defaultProps = (SvgIcon.defaultProps = {
   viewBox: "0 0 24 24"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/SvgIcon/SvgIcon').Shape>}
- */
-export const SvgIconCreator = withStyles(styles, SvgIcon, {
-  isMui: true,
-  defaultProps
-});
-const SvgIconComponent = SvgIconCreator();
-if (SvgIcon.muiName) SvgIconComponent.muiName = SvgIcon.muiName;
-export default SvgIconComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/SvgIcon/SvgIcon').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/SvgIcon/SvgIcon').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/SvgIcon/SvgIcon').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const SvgIconCode = SvgIcon;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  SvgIconCode as SvgIcon,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

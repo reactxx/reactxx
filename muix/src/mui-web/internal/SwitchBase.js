@@ -13,7 +13,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import IconButton from "../IconButton/IconButton";
-export const styles = {
+const styles = {
   root: {
     display: "inline-flex",
     alignItems: "center",
@@ -37,10 +37,10 @@ export const styles = {
     left: 0
   }
 };
+
 /**
  * @ignore - internal component.
  */
-
 class SwitchBase extends React.Component {
   input = null;
   isControlled = null;
@@ -174,13 +174,22 @@ const defaultProps = (SwitchBase.defaultProps = {
   type: "checkbox"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/internal/SwitchBase').Shape>}
- */
-export const SwitchBaseCreator = withStyles(styles, SwitchBase, {
-  isMui: true,
-  defaultProps
-});
-const SwitchBaseComponent = SwitchBaseCreator();
-if (SwitchBase.muiName) SwitchBaseComponent.muiName = SwitchBase.muiName;
-export default SwitchBaseComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/SwitchBase/SwitchBase').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/SwitchBase/SwitchBase').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/SwitchBase/SwitchBase').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const SwitchBaseCode = SwitchBase;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  SwitchBaseCode as SwitchBase,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

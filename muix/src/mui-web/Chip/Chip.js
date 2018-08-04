@@ -17,7 +17,7 @@ import { emphasize, fade } from "../styles/colorManipulator";
 import unsupportedProp from "../utils/unsupportedProp";
 import "../Avatar/Avatar"; // So we don't have any override priority issue.
 
-export const styles = theme => {
+const styles = theme => {
   const height = 32;
   const backgroundColor =
     theme.palette.type === "light"
@@ -111,10 +111,10 @@ export const styles = theme => {
     }
   };
 };
+
 /**
  * Chips represent complex entities in small blocks, such as a contact.
  */
-
 class Chip extends React.Component {
   chipRef = null;
   handleDeleteIconClick = event => {
@@ -239,13 +239,22 @@ const defaultProps = (Chip.defaultProps = {
   component: "div"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Chip/Chip').Shape>}
- */
-export const ChipCreator = withStyles(styles, Chip, {
-  isMui: true,
-  defaultProps
-});
-const ChipComponent = ChipCreator();
-if (Chip.muiName) ChipComponent.muiName = Chip.muiName;
-export default ChipComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Chip/Chip').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Chip/Chip').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Chip/Chip').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ChipCode = Chip;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ChipCode as Chip,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

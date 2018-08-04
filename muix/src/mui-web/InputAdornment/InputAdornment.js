@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Typography from "../Typography/Typography";
 import withStyles from "../styles/withStyles";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     display: "flex",
@@ -65,14 +65,22 @@ const defaultProps = (InputAdornment.defaultProps = {
   disableTypography: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/InputAdornment/InputAdornment').Shape>}
- */
-export const InputAdornmentCreator = withStyles(styles, InputAdornment, {
-  isMui: true,
-  defaultProps
-});
-const InputAdornmentComponent = InputAdornmentCreator();
-if (InputAdornment.muiName)
-  InputAdornmentComponent.muiName = InputAdornment.muiName;
-export default InputAdornmentComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/InputAdornment/InputAdornment').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/InputAdornment/InputAdornment').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/InputAdornment/InputAdornment').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const InputAdornmentCode = InputAdornment;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  InputAdornmentCode as InputAdornment,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

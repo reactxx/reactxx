@@ -11,7 +11,8 @@ import warning from "warning";
 import classNames from "classnames";
 import Collapse from "../Collapse";
 import withStyles from "../styles/withStyles";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     marginTop: 8,
@@ -89,13 +90,22 @@ const defaultProps = (StepContent.defaultProps = {
   transitionDuration: "auto"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/StepContent/StepContent').Shape>}
- */
-export const StepContentCreator = withStyles(styles, StepContent, {
-  isMui: true,
-  defaultProps
-});
-const StepContentComponent = StepContentCreator();
-if (StepContent.muiName) StepContentComponent.muiName = StepContent.muiName;
-export default StepContentComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/StepContent/StepContent').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/StepContent/StepContent').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/StepContent/StepContent').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const StepContentCode = StepContent;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  StepContentCode as StepContent,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

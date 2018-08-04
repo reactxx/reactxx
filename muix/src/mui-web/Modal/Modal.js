@@ -28,7 +28,7 @@ function getHasTransition(props) {
   return props.children ? props.children.props.hasOwnProperty("in") : false;
 }
 
-export const styles = theme => ({
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     position: "fixed",
@@ -44,8 +44,8 @@ export const styles = theme => ({
     visibility: "hidden"
   }
 });
-/* istanbul ignore if */
 
+/* istanbul ignore if */
 if (process.env.NODE_ENV !== "production" && !React.createContext) {
   throw new Error("Material-UI: react@16.3.0 or greater is required.");
 }
@@ -339,13 +339,22 @@ const defaultProps = (Modal.defaultProps = {
   BackdropComponent: Backdrop
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Modal/Modal').Shape>}
- */
-export const ModalCreator = withStyles(styles, Modal, {
-  isMui: true,
-  defaultProps
-});
-const ModalComponent = ModalCreator();
-if (Modal.muiName) ModalComponent.muiName = Modal.muiName;
-export default ModalComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Modal/Modal').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Modal/Modal').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Modal/Modal').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ModalCode = Modal;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ModalCode as Modal,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

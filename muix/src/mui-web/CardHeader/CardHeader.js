@@ -10,7 +10,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import Typography from "../Typography/Typography";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: theme.mixins.gutters({
     display: "flex",
@@ -118,13 +119,22 @@ const defaultProps = (CardHeader.defaultProps = {
   disableTypography: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/CardHeader/CardHeader').Shape>}
- */
-export const CardHeaderCreator = withStyles(styles, CardHeader, {
-  isMui: true,
-  defaultProps
-});
-const CardHeaderComponent = CardHeaderCreator();
-if (CardHeader.muiName) CardHeaderComponent.muiName = CardHeader.muiName;
-export default CardHeaderComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/CardHeader/CardHeader').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/CardHeader/CardHeader').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/CardHeader/CardHeader').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const CardHeaderCode = CardHeader;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  CardHeaderCode as CardHeader,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

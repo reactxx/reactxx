@@ -10,7 +10,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import { capitalize } from "../utils/helpers";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: theme.mixins.gutters({
     boxSizing: "border-box",
@@ -80,14 +81,22 @@ const defaultProps = (ListSubheader.defaultProps = {
   inset: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListSubheader/ListSubheader').Shape>}
- */
-export const ListSubheaderCreator = withStyles(styles, ListSubheader, {
-  isMui: true,
-  defaultProps
-});
-const ListSubheaderComponent = ListSubheaderCreator();
-if (ListSubheader.muiName)
-  ListSubheaderComponent.muiName = ListSubheader.muiName;
-export default ListSubheaderComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/ListSubheader/ListSubheader').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/ListSubheader/ListSubheader').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/ListSubheader/ListSubheader').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ListSubheaderCode = ListSubheader;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ListSubheaderCode as ListSubheader,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

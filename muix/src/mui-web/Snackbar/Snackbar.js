@@ -15,7 +15,8 @@ import ClickAwayListener from "../ClickAwayListener";
 import { capitalize, createChainedFunction } from "../utils/helpers";
 import Slide from "../Slide";
 import SnackbarContent from "../SnackbarContent";
-export const styles = theme => {
+
+const styles = theme => {
   const gutter = 24;
   const top = {
     top: 0
@@ -119,8 +120,8 @@ export const styles = theme => {
     }
   };
 };
-/* istanbul ignore if */
 
+/* istanbul ignore if */
 if (process.env.NODE_ENV !== "production" && !React.createContext) {
   throw new Error("Material-UI: react@16.3.0 or greater is required.");
 }
@@ -322,13 +323,22 @@ const defaultProps = (Snackbar.defaultProps = {
   }
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Snackbar/Snackbar').Shape>}
- */
-export const SnackbarCreator = withStyles(styles, Snackbar, {
-  isMui: true,
-  defaultProps
-});
-const SnackbarComponent = SnackbarCreator();
-if (Snackbar.muiName) SnackbarComponent.muiName = Snackbar.muiName;
-export default SnackbarComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Snackbar/Snackbar').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Snackbar/Snackbar').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Snackbar/Snackbar').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const SnackbarCode = Snackbar;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  SnackbarCode as Snackbar,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

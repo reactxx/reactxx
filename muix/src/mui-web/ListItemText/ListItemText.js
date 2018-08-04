@@ -12,7 +12,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import Typography from "../Typography/Typography";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", "0 16px"),
@@ -128,13 +129,22 @@ const defaultProps = (ListItemText.defaultProps = {
   inset: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListItemText/ListItemText').Shape>}
- */
-export const ListItemTextCreator = withStyles(styles, ListItemText, {
-  isMui: true,
-  defaultProps
-});
-const ListItemTextComponent = ListItemTextCreator();
-if (ListItemText.muiName) ListItemTextComponent.muiName = ListItemText.muiName;
-export default ListItemTextComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/ListItemText/ListItemText').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/ListItemText/ListItemText').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/ListItemText/ListItemText').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ListItemTextCode = ListItemText;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ListItemTextCode as ListItemText,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

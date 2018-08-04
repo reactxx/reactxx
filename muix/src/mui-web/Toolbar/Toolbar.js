@@ -9,7 +9,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     position: "relative",
@@ -57,13 +58,22 @@ const defaultProps = (Toolbar.defaultProps = {
   variant: "regular"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Toolbar/Toolbar').Shape>}
- */
-export const ToolbarCreator = withStyles(styles, Toolbar, {
-  isMui: true,
-  defaultProps
-});
-const ToolbarComponent = ToolbarCreator();
-if (Toolbar.muiName) ToolbarComponent.muiName = Toolbar.muiName;
-export default ToolbarComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Toolbar/Toolbar').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Toolbar/Toolbar').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Toolbar/Toolbar').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ToolbarCode = Toolbar;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ToolbarCode as Toolbar,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

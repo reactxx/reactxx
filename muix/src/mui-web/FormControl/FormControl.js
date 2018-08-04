@@ -14,7 +14,7 @@ import withStyles from "../styles/withStyles";
 import { isFilled, isAdornedStart } from "../Input/Input";
 import { capitalize } from "../utils/helpers";
 import { isMuiElement } from "../utils/reactHelpers";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", 0),
@@ -44,6 +44,7 @@ export const styles = {
     width: "100%"
   }
 };
+
 /**
  * Provides context such as filled/focused/error/required for form inputs.
  * Relying on the context provides high flexibilty and ensures that the state always stays
@@ -54,7 +55,6 @@ export const styles = {
  *  - Input
  *  - InputLabel
  */
-
 class FormControl extends React.Component {
   constructor(props) {
     super(props); // We need to iterate through the children and find the Input in order
@@ -184,13 +184,22 @@ const defaultProps = (FormControl.defaultProps = {
   required: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/FormControl/FormControl').Shape>}
- */
-export const FormControlCreator = withStyles(styles, FormControl, {
-  isMui: true,
-  defaultProps
-});
-const FormControlComponent = FormControlCreator();
-if (FormControl.muiName) FormControlComponent.muiName = FormControl.muiName;
-export default FormControlComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/FormControl/FormControl').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/FormControl/FormControl').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/FormControl/FormControl').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const FormControlCode = FormControl;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  FormControlCode as FormControl,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

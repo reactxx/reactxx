@@ -25,7 +25,8 @@ const edgeFix =
           borderBottomRightRadius: 0
         }
       };
-export const styles = theme => {
+
+const styles = theme => {
   const transition = {
     duration: theme.transitions.duration.shortest
   };
@@ -191,14 +192,22 @@ const defaultProps = (ExpansionPanel.defaultProps = {
   disabled: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ExpansionPanel/ExpansionPanel').Shape>}
- */
-export const ExpansionPanelCreator = withStyles(styles, ExpansionPanel, {
-  isMui: true,
-  defaultProps
-});
-const ExpansionPanelComponent = ExpansionPanelCreator();
-if (ExpansionPanel.muiName)
-  ExpansionPanelComponent.muiName = ExpansionPanel.muiName;
-export default ExpansionPanelComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/ExpansionPanel/ExpansionPanel').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/ExpansionPanel/ExpansionPanel').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/ExpansionPanel/ExpansionPanel').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ExpansionPanelCode = ExpansionPanel;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ExpansionPanelCode as ExpansionPanel,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

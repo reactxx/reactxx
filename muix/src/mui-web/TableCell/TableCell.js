@@ -13,7 +13,8 @@ import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import { capitalize } from "../utils/helpers";
 import { darken, fade, lighten } from "../styles/colorManipulator";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", "4px 56px 4px 24px"),
@@ -146,13 +147,22 @@ const defaultProps = (TableCell.defaultProps = {
   padding: "default"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/TableCell/TableCell').Shape>}
- */
-export const TableCellCreator = withStyles(styles, TableCell, {
-  isMui: true,
-  defaultProps
-});
-const TableCellComponent = TableCellCreator();
-if (TableCell.muiName) TableCellComponent.muiName = TableCell.muiName;
-export default TableCellComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/TableCell/TableCell').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/TableCell/TableCell').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/TableCell/TableCell').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TableCellCode = TableCell;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TableCellCode as TableCell,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

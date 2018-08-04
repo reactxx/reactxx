@@ -21,7 +21,7 @@ const LTR_ORIGIN = {
   vertical: "top",
   horizontal: "left"
 };
-export const styles = {
+const styles = {
   /* Styles applied to the `Paper` component. */
   paper: {
     // specZ: The maximum height of a simple menu should be one or more rows less than the view
@@ -144,13 +144,22 @@ const defaultProps = (Menu.defaultProps = {
   transitionDuration: "auto"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Menu/Menu').Shape>}
- */
-export const MenuCreator = withStyles(styles, Menu, {
-  isMui: true,
-  defaultProps
-});
-const MenuComponent = MenuCreator();
-if (Menu.muiName) MenuComponent.muiName = Menu.muiName;
-export default MenuComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Menu/Menu').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Menu/Menu').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Menu/Menu').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const MenuCode = Menu;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  MenuCode as Menu,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

@@ -11,7 +11,7 @@ export const registerGrid = (specials: Specials) => {
             const res = Tasks.withStylesTaskDefaultCreator()(ast, info)
             // add 
             const itemStyle = Queries.checkSingleResult(Ast.astq().query(ast, 
-                '/Program/ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /Identifier [@name=="styles"] ] //ObjectExpression/ObjectProperty [ /Identifier [ @name == "item"] ] '))
+                '/Program/VariableDeclaration/VariableDeclarator [ /Identifier [@name=="styles"] ] //ObjectExpression/ObjectProperty [ /Identifier [ @name == "item"] ] '))
             itemStyle.value.properties.push({
                 "type": "ObjectProperty",
                 "method": false,

@@ -13,7 +13,8 @@ import ArrowDownwardIcon from "../internal/svg-icons/ArrowDownward";
 import withStyles from "../styles/withStyles";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import { capitalize } from "../utils/helpers";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     cursor: "pointer",
@@ -61,10 +62,10 @@ export const styles = theme => ({
     transform: "rotate(180deg)"
   }
 });
+
 /**
  * A button based label for placing inside `TableCell` for column sorting.
  */
-
 function TableSortLabel(props) {
   const {
     $system: { classNames, classNamesStr, classNamesAny, theme },
@@ -98,14 +99,22 @@ const defaultProps = (TableSortLabel.defaultProps = {
   direction: "desc"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/TableSortLabel/TableSortLabel').Shape>}
- */
-export const TableSortLabelCreator = withStyles(styles, TableSortLabel, {
-  isMui: true,
-  defaultProps
-});
-const TableSortLabelComponent = TableSortLabelCreator();
-if (TableSortLabel.muiName)
-  TableSortLabelComponent.muiName = TableSortLabel.muiName;
-export default TableSortLabelComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/TableSortLabel/TableSortLabel').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/TableSortLabel/TableSortLabel').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/TableSortLabel/TableSortLabel').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TableSortLabelCode = TableSortLabel;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TableSortLabelCode as TableSortLabel,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

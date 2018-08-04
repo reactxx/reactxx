@@ -17,7 +17,8 @@ import Modal from "../Modal/Modal";
 import Fade from "../Fade/Fade";
 import { duration } from "../styles/transitions";
 import Paper from "../Paper/Paper";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {},
 
@@ -105,10 +106,10 @@ export const styles = theme => ({
     borderRadius: 0
   }
 });
+
 /**
  * Dialogs are overlaid modal paper based components with a backdrop.
  */
-
 function Dialog(props) {
   const {
     $system: { classNames, classNamesStr, classNamesAny, theme },
@@ -203,13 +204,22 @@ const defaultProps = (Dialog.defaultProps = {
   }
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Dialog/Dialog').Shape>}
- */
-export const DialogCreator = withStyles(styles, Dialog, {
-  isMui: true,
-  defaultProps
-});
-const DialogComponent = DialogCreator();
-if (Dialog.muiName) DialogComponent.muiName = Dialog.muiName;
-export default DialogComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Dialog/Dialog').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Dialog/Dialog').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Dialog/Dialog').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const DialogCode = Dialog;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  DialogCode as Dialog,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

@@ -12,7 +12,7 @@ import EventListener from "react-event-listener";
 import debounce from "debounce"; // < 1kb payload overhead when lodash/debounce is > 3kb.
 
 import withStyles from "../styles/withStyles";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     boxSizing: "border-box",
@@ -145,13 +145,22 @@ const defaultProps = (GridListTile.defaultProps = {
   rows: 1
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/GridListTile/GridListTile').Shape>}
- */
-export const GridListTileCreator = withStyles(styles, GridListTile, {
-  isMui: true,
-  defaultProps
-});
-const GridListTileComponent = GridListTileCreator();
-if (GridListTile.muiName) GridListTileComponent.muiName = GridListTile.muiName;
-export default GridListTileComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/GridListTile/GridListTile').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/GridListTile/GridListTile').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/GridListTile/GridListTile').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const GridListTileCode = GridListTile;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  GridListTileCode as GridListTile,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

@@ -14,6 +14,7 @@ export const src = basicReactXX + 'src/mui-web/'
 export const reactxxMuiWeb = basicReactXX + 'src/muix/reactxx-mui-web/'
 export const reactxxMuiWebShapesDest = reactxxMuiWeb + 'typings/shapes/'
 export const reactxxMuiWebShapes = reactxxMuiWeb + 'typings/shapes/'
+export const reactxxMuiWebComps = basicReactXX + 'src/muix/web/'
 
 const basicCodemod = driver + 'reactxx/codemod/'
 export const patchPrepare = basicCodemod + 'patch-prepare/'

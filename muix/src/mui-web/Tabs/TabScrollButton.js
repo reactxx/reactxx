@@ -12,17 +12,17 @@ import KeyboardArrowLeft from "../internal/svg-icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "../internal/svg-icons/KeyboardArrowRight";
 import withStyles from "../styles/withStyles";
 import ButtonBase from "../ButtonBase/ButtonBase";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     color: "inherit",
     flex: "0 0 56px"
   }
 };
+
 /**
  * @ignore - internal component.
  */
-
 function TabScrollButton(props) {
   const {
     $system: { classNames, classNamesStr, classNamesAny, theme },
@@ -55,14 +55,22 @@ const defaultProps = (TabScrollButton.defaultProps = {
   visible: true
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Tabs/TabScrollButton').Shape>}
- */
-export const TabScrollButtonCreator = withStyles(styles, TabScrollButton, {
-  isMui: true,
-  defaultProps
-});
-const TabScrollButtonComponent = TabScrollButtonCreator();
-if (TabScrollButton.muiName)
-  TabScrollButtonComponent.muiName = TabScrollButton.muiName;
-export default TabScrollButtonComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/TabScrollButton/TabScrollButton').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/TabScrollButton/TabScrollButton').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/TabScrollButton/TabScrollButton').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TabScrollButtonCode = TabScrollButton;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TabScrollButtonCode as TabScrollButton,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

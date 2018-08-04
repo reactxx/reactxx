@@ -14,7 +14,7 @@ import withStyles from "../styles/withStyles";
 import { cloneChildrenWithClassName } from "../utils/reactHelpers";
 import "../Button/Button"; // So we don't have any override priority issue.
 
-export const styles = theme => ({
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", "8px 4px"),
@@ -54,13 +54,22 @@ const defaultProps = (CardActions.defaultProps = {
   disableActionSpacing: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/CardActions/CardActions').Shape>}
- */
-export const CardActionsCreator = withStyles(styles, CardActions, {
-  isMui: true,
-  defaultProps
-});
-const CardActionsComponent = CardActionsCreator();
-if (CardActions.muiName) CardActionsComponent.muiName = CardActions.muiName;
-export default CardActionsComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/CardActions/CardActions').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/CardActions/CardActions').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/CardActions/CardActions').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const CardActionsCode = CardActions;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  CardActionsCode as CardActions,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

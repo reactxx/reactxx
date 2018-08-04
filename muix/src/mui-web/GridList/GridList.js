@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import warning from "warning";
 import withStyles from "../styles/withStyles";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", 0),
@@ -85,13 +85,22 @@ const defaultProps = (GridList.defaultProps = {
   spacing: 4
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/GridList/GridList').Shape>}
- */
-export const GridListCreator = withStyles(styles, GridList, {
-  isMui: true,
-  defaultProps
-});
-const GridListComponent = GridListCreator();
-if (GridList.muiName) GridListComponent.muiName = GridList.muiName;
-export default GridListComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/GridList/GridList').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/GridList/GridList').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/GridList/GridList').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const GridListCode = GridList;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  GridListCode as GridList,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

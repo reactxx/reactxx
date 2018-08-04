@@ -15,7 +15,8 @@ import withStyles from "../styles/withStyles";
 import { fade } from "../styles/colorManipulator";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import { capitalize } from "../utils/helpers";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", 0),
@@ -95,11 +96,11 @@ export const styles = theme => ({
     justifyContent: "inherit"
   }
 });
+
 /**
  * Refer to the [Icons](/style/icons) section of the documentation
  * regarding the available icon options.
  */
-
 function IconButton(props) {
   const {
     $system: { classNames, classNamesStr, classNamesAny, theme },
@@ -133,13 +134,22 @@ const defaultProps = (IconButton.defaultProps = {
   disabled: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/IconButton/IconButton').Shape>}
- */
-export const IconButtonCreator = withStyles(styles, IconButton, {
-  isMui: true,
-  defaultProps
-});
-const IconButtonComponent = IconButtonCreator();
-if (IconButton.muiName) IconButtonComponent.muiName = IconButton.muiName;
-export default IconButtonComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/IconButton/IconButton').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/IconButton/IconButton').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/IconButton/IconButton').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const IconButtonCode = IconButton;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  IconButtonCode as IconButton,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

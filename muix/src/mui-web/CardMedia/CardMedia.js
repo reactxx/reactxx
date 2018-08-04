@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import warning from "warning";
 import withStyles from "../styles/withStyles";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     display: "block",
@@ -68,13 +68,22 @@ const defaultProps = (CardMedia.defaultProps = {
   component: "div"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/CardMedia/CardMedia').Shape>}
- */
-export const CardMediaCreator = withStyles(styles, CardMedia, {
-  isMui: true,
-  defaultProps
-});
-const CardMediaComponent = CardMediaCreator();
-if (CardMedia.muiName) CardMediaComponent.muiName = CardMedia.muiName;
-export default CardMediaComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/CardMedia/CardMedia').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/CardMedia/CardMedia').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/CardMedia/CardMedia').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const CardMediaCode = CardMedia;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  CardMediaCode as CardMedia,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

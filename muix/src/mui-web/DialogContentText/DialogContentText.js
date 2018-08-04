@@ -11,7 +11,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import Typography from "../Typography/Typography";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     color: theme.palette.text.secondary
@@ -40,14 +41,22 @@ function DialogContentText(props) {
 
 const defaultProps = (DialogContentText.defaultProps = {});
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/DialogContentText/DialogContentText').Shape>}
- */
-export const DialogContentTextCreator = withStyles(styles, DialogContentText, {
-  isMui: true,
-  defaultProps
-});
-const DialogContentTextComponent = DialogContentTextCreator();
-if (DialogContentText.muiName)
-  DialogContentTextComponent.muiName = DialogContentText.muiName;
-export default DialogContentTextComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/DialogContentText/DialogContentText').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/DialogContentText/DialogContentText').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/DialogContentText/DialogContentText').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const DialogContentTextCode = DialogContentText;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  DialogContentTextCode as DialogContentText,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

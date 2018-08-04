@@ -11,7 +11,8 @@ import { toAtomic } from "../styles/withStyles";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", 0),
@@ -118,13 +119,22 @@ const defaultProps = (FormLabel.defaultProps = {
   component: "label"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/FormLabel/FormLabel').Shape>}
- */
-export const FormLabelCreator = withStyles(styles, FormLabel, {
-  isMui: true,
-  defaultProps
-});
-const FormLabelComponent = FormLabelCreator();
-if (FormLabel.muiName) FormLabelComponent.muiName = FormLabel.muiName;
-export default FormLabelComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/FormLabel/FormLabel').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/FormLabel/FormLabel').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/FormLabel/FormLabel').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const FormLabelCode = FormLabel;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  FormLabelCode as FormLabel,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

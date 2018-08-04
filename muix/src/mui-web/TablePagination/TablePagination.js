@@ -18,7 +18,8 @@ import TableCell from "../TableCell";
 import Toolbar from "../Toolbar";
 import Typography from "../Typography/Typography";
 import TablePaginationActions from "../TablePaginationActions";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     fontSize: theme.typography.pxToRem(12),
@@ -79,10 +80,10 @@ export const styles = theme => ({
     marginLeft: 20
   }
 });
+
 /**
  * A `TableCell` based component for placing inside `TableFooter` for pagination.
  */
-
 class TablePagination extends React.Component {
   // This logic would be better handled on userside.
   // However, we have it just in case.
@@ -188,14 +189,22 @@ const defaultProps = (TablePagination.defaultProps = {
   rowsPerPageOptions: [5, 10, 25]
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/TablePagination/TablePagination').Shape>}
- */
-export const TablePaginationCreator = withStyles(styles, TablePagination, {
-  isMui: true,
-  defaultProps
-});
-const TablePaginationComponent = TablePaginationCreator();
-if (TablePagination.muiName)
-  TablePaginationComponent.muiName = TablePagination.muiName;
-export default TablePaginationComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/TablePagination/TablePagination').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/TablePagination/TablePagination').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/TablePagination/TablePagination').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TablePaginationCode = TablePagination;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TablePaginationCode as TablePagination,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

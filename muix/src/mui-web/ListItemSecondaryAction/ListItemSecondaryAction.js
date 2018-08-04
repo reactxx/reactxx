@@ -9,7 +9,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     position: "absolute",
@@ -37,18 +37,22 @@ function ListItemSecondaryAction(props) {
 ListItemSecondaryAction.muiName = "ListItemSecondaryAction";
 const defaultProps = (ListItemSecondaryAction.defaultProps = {});
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListItemSecondaryAction/ListItemSecondaryAction').Shape>}
- */
-export const ListItemSecondaryActionCreator = withStyles(
-  styles,
-  ListItemSecondaryAction,
-  {
-    isMui: true,
-    defaultProps
-  }
-);
-const ListItemSecondaryActionComponent = ListItemSecondaryActionCreator();
-if (ListItemSecondaryAction.muiName)
-  ListItemSecondaryActionComponent.muiName = ListItemSecondaryAction.muiName;
-export default ListItemSecondaryActionComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/ListItemSecondaryAction/ListItemSecondaryAction').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/ListItemSecondaryAction/ListItemSecondaryAction').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/ListItemSecondaryAction/ListItemSecondaryAction').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ListItemSecondaryActionCode = ListItemSecondaryAction;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ListItemSecondaryActionCode as ListItemSecondaryAction,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

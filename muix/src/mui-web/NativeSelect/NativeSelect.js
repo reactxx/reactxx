@@ -12,7 +12,8 @@ import NativeSelectInput from "./NativeSelectInput";
 import withStyles from "../styles/withStyles";
 import ArrowDropDownIcon from "../internal/svg-icons/ArrowDropDown";
 import Input from "../Input/Input";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the `Input` component `root` class. */
   root: {
     position: "relative",
@@ -82,10 +83,10 @@ export const styles = theme => ({
     "pointer-events": "none" // Don't block pointer events on the select under the icon.
   }
 });
+
 /**
  * An alternative to `<Select native />` with a much smaller dependency graph.
  */
-
 function NativeSelect(props) {
   const {
     $system: { classNames, classNamesStr, classNamesAny, theme },
@@ -119,13 +120,22 @@ const defaultProps = (NativeSelect.defaultProps = {
   input: <Input />
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/NativeSelect/NativeSelect').Shape>}
- */
-export const NativeSelectCreator = withStyles(styles, NativeSelect, {
-  isMui: true,
-  defaultProps
-});
-const NativeSelectComponent = NativeSelectCreator();
-if (NativeSelect.muiName) NativeSelectComponent.muiName = NativeSelect.muiName;
-export default NativeSelectComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/NativeSelect/NativeSelect').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/NativeSelect/NativeSelect').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/NativeSelect/NativeSelect').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const NativeSelectCode = NativeSelect;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  NativeSelectCode as NativeSelect,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

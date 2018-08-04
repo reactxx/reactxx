@@ -17,7 +17,8 @@ import { capitalize } from "../utils/helpers";
 import exactProp from "../utils/exactProp";
 import Grow from "../Grow/Grow";
 import Popper from "../Popper";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the Popper component. */
   popper: {
     zIndex: theme.zIndex.tooltip,
@@ -379,13 +380,22 @@ const defaultProps = (Tooltip.defaultProps = {
   TransitionComponent: Grow
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Tooltip/Tooltip').Shape>}
- */
-export const TooltipCreator = withStyles(styles, Tooltip, {
-  isMui: true,
-  defaultProps
-});
-const TooltipComponent = TooltipCreator();
-if (Tooltip.muiName) TooltipComponent.muiName = Tooltip.muiName;
-export default TooltipComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Tooltip/Tooltip').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Tooltip/Tooltip').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Tooltip/Tooltip').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TooltipCode = Tooltip;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TooltipCode as Tooltip,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

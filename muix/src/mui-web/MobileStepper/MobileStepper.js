@@ -15,7 +15,8 @@ import withStyles from "../styles/withStyles";
 import Paper from "../Paper/Paper";
 import { capitalize } from "../utils/helpers";
 import LinearProgress from "../LinearProgress";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", 8),
@@ -124,14 +125,22 @@ const defaultProps = (MobileStepper.defaultProps = {
   variant: "dots"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/MobileStepper/MobileStepper').Shape>}
- */
-export const MobileStepperCreator = withStyles(styles, MobileStepper, {
-  isMui: true,
-  defaultProps
-});
-const MobileStepperComponent = MobileStepperCreator();
-if (MobileStepper.muiName)
-  MobileStepperComponent.muiName = MobileStepper.muiName;
-export default MobileStepperComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/MobileStepper/MobileStepper').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/MobileStepper/MobileStepper').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/MobileStepper/MobileStepper').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const MobileStepperCode = MobileStepper;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  MobileStepperCode as MobileStepper,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

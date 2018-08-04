@@ -9,7 +9,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     position: "relative",
@@ -109,13 +110,22 @@ const defaultProps = (Avatar.defaultProps = {
   component: "div"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Avatar/Avatar').Shape>}
- */
-export const AvatarCreator = withStyles(styles, Avatar, {
-  isMui: true,
-  defaultProps
-});
-const AvatarComponent = AvatarCreator();
-if (Avatar.muiName) AvatarComponent.muiName = Avatar.muiName;
-export default AvatarComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Avatar/Avatar').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Avatar/Avatar').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Avatar/Avatar').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const AvatarCode = Avatar;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  AvatarCode as Avatar,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

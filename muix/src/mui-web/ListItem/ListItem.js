@@ -11,7 +11,8 @@ import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import { isMuiElement } from "../utils/reactHelpers";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the (normally root) `component` element. May be wrapped by a `container`. */
   root: {
     display: "flex",
@@ -185,13 +186,22 @@ const defaultProps = (ListItem.defaultProps = {
   divider: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListItem/ListItem').Shape>}
- */
-export const ListItemCreator = withStyles(styles, ListItem, {
-  isMui: true,
-  defaultProps
-});
-const ListItemComponent = ListItemCreator();
-if (ListItem.muiName) ListItemComponent.muiName = ListItem.muiName;
-export default ListItemComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/ListItem/ListItem').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/ListItem/ListItem').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/ListItem/ListItem').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ListItemCode = ListItem;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ListItemCode as ListItem,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

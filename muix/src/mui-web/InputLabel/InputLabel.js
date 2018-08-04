@@ -11,7 +11,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import FormLabel from "../FormLabel/FormLabel";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     transformOrigin: "top left"
@@ -102,13 +103,22 @@ const defaultProps = (InputLabel.defaultProps = {
   disableAnimation: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/InputLabel/InputLabel').Shape>}
- */
-export const InputLabelCreator = withStyles(styles, InputLabel, {
-  isMui: true,
-  defaultProps
-});
-const InputLabelComponent = InputLabelCreator();
-if (InputLabel.muiName) InputLabelComponent.muiName = InputLabel.muiName;
-export default InputLabelComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/InputLabel/InputLabel').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/InputLabel/InputLabel').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/InputLabel/InputLabel').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const InputLabelCode = InputLabel;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  InputLabelCode as InputLabel,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

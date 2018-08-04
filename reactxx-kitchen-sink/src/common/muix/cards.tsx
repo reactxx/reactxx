@@ -5,7 +5,7 @@ import Card from 'reactxx-mui-web/Card/Card';
 import CardActions from 'reactxx-mui-web/CardActions/CardActions';
 import CardContent from 'reactxx-mui-web/CardContent/CardContent';
 import CardHeader from 'reactxx-mui-web/CardHeader/CardHeader';
-import Button from 'reactxx-mui-web/Button/Button';
+import Button from 'reactxx-muix/web/Button/Button';
 import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import Typography from 'reactxx-mui-web/Typography/Typography';
 import CardMedia from 'reactxx-mui-web/CardMedia/CardMedia';

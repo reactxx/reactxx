@@ -10,7 +10,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import { capitalize } from "../utils/helpers";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     userSelect: "none",
@@ -85,13 +86,22 @@ const defaultProps = (Icon.defaultProps = {
   fontSize: "default"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Icon/Icon').Shape>}
- */
-export const IconCreator = withStyles(styles, Icon, {
-  isMui: true,
-  defaultProps
-});
-const IconComponent = IconCreator();
-if (Icon.muiName) IconComponent.muiName = Icon.muiName;
-export default IconComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Icon/Icon').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Icon/Icon').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Icon/Icon').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const IconCode = Icon;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  IconCode as Icon,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

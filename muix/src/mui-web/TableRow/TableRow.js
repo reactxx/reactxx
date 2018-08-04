@@ -9,7 +9,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     color: "inherit",
@@ -52,11 +53,11 @@ export const styles = theme => ({
     height: 56
   }
 });
+
 /**
  * Will automatically set dynamic row height
  * based on the material table element parent (head, body, etc).
  */
-
 function TableRow(props, context) {
   const {
     $system: { classNames, classNamesStr, classNamesAny, theme },
@@ -90,13 +91,22 @@ const defaultProps = (TableRow.defaultProps = {
   selected: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/TableRow/TableRow').Shape>}
- */
-export const TableRowCreator = withStyles(styles, TableRow, {
-  isMui: true,
-  defaultProps
-});
-const TableRowComponent = TableRowCreator();
-if (TableRow.muiName) TableRowComponent.muiName = TableRow.muiName;
-export default TableRowComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/TableRow/TableRow').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/TableRow/TableRow').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/TableRow/TableRow').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const TableRowCode = TableRow;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  TableRowCode as TableRow,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

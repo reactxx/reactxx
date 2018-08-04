@@ -10,7 +10,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import warning from "warning";
 import withStyles from "../styles/withStyles";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     width: 36,
@@ -26,10 +27,10 @@ export const styles = theme => ({
     fontSize: theme.typography.pxToRem(20)
   }
 });
+
 /**
  * This is a simple wrapper to apply the `dense` mode styles to `Avatar`.
  */
-
 function ListItemAvatar(props, context) {
   const {
     $system: { classNames, classNamesStr, classNamesAny, theme },
@@ -68,14 +69,22 @@ ListItemAvatar.contextTypes = {
 ListItemAvatar.muiName = "ListItemAvatar";
 const defaultProps = (ListItemAvatar.defaultProps = {});
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ListItemAvatar/ListItemAvatar').Shape>}
- */
-export const ListItemAvatarCreator = withStyles(styles, ListItemAvatar, {
-  isMui: true,
-  defaultProps
-});
-const ListItemAvatarComponent = ListItemAvatarCreator();
-if (ListItemAvatar.muiName)
-  ListItemAvatarComponent.muiName = ListItemAvatar.muiName;
-export default ListItemAvatarComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/ListItemAvatar/ListItemAvatar').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/ListItemAvatar/ListItemAvatar').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/ListItemAvatar/ListItemAvatar').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ListItemAvatarCode = ListItemAvatar;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ListItemAvatarCode as ListItemAvatar,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

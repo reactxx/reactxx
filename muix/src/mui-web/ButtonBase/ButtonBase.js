@@ -17,7 +17,7 @@ import withStyles from "../styles/withStyles";
 import { listenForFocusKeys, detectFocusVisible } from "./focusVisible";
 import TouchRipple from "./TouchRipple";
 import createRippleHandler from "./createRippleHandler";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", 0),
@@ -64,8 +64,8 @@ export const styles = {
   /* Styles applied to the root element if keyboard focused. */
   focusVisible: {}
 };
-/* istanbul ignore if */
 
+/* istanbul ignore if */
 if (process.env.NODE_ENV !== "production" && !React.createContext) {
   throw new Error("Material-UI: react@16.3.0 or greater is required.");
 }
@@ -345,13 +345,22 @@ const defaultProps = (ButtonBase.defaultProps = {
   type: "button"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/ButtonBase/ButtonBase').Shape>}
- */
-export const ButtonBaseCreator = withStyles(styles, ButtonBase, {
-  isMui: true,
-  defaultProps
-});
-const ButtonBaseComponent = ButtonBaseCreator();
-if (ButtonBase.muiName) ButtonBaseComponent.muiName = ButtonBase.muiName;
-export default ButtonBaseComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/ButtonBase/ButtonBase').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/ButtonBase/ButtonBase').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/ButtonBase/ButtonBase').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ButtonBaseCode = ButtonBase;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ButtonBaseCode as ButtonBase,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

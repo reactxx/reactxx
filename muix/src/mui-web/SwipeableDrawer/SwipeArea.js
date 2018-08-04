@@ -11,7 +11,8 @@ import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import { capitalize } from "../utils/helpers";
 import { isHorizontal } from "../Drawer/Drawer";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     position: "fixed",
@@ -37,10 +38,10 @@ export const styles = theme => ({
     right: 0
   }
 });
+
 /**
  * @ignore - internal component.
  */
-
 function SwipeArea(props) {
   const {
     $system: { classNames, classNamesStr, classNamesAny, theme },
@@ -65,13 +66,22 @@ function SwipeArea(props) {
 
 const defaultProps = (SwipeArea.defaultProps = {});
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/SwipeableDrawer/SwipeArea').Shape>}
- */
-export const SwipeAreaCreator = withStyles(styles, SwipeArea, {
-  isMui: true,
-  defaultProps
-});
-const SwipeAreaComponent = SwipeAreaCreator();
-if (SwipeArea.muiName) SwipeAreaComponent.muiName = SwipeArea.muiName;
-export default SwipeAreaComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/SwipeArea/SwipeArea').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/SwipeArea/SwipeArea').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/SwipeArea/SwipeArea').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const SwipeAreaCode = SwipeArea;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  SwipeAreaCode as SwipeArea,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

@@ -63,6 +63,21 @@ export const codeMod = () => {
         // TS shape
         if (logp.withStyles && logp.name !== 'SwipeArea') {
             fsExtra.outputFileSync(Config.reactxxMuiWebShapes + path + '.ts', noKey[logp.name] ? tsShapeNoKey(logp.dir, logp.name) : tsShape(logp.dir, logp.name), { flag: 'w' })
+            // export TS
+            fsExtra.outputFileSync(Config.reactxxMuiWebComps + path + '.ts', `
+import withStylesCreator from "reactxx-mui-web/styles/withStyles";
+import {Shape} from 'reactxx-mui-web/typings/shapes/${logp.name}/${logp.name}';
+import { styles, ${logp.name}, defaultProps } from 'reactxx-mui-web/${logp.name}/${logp.name}'
+            
+export const ${logp.name}Creator = withStylesCreator<Shape>(styles, ${logp.name}, {
+  isMui: true,
+  defaultProps
+});
+const ${logp.name}Component = ${logp.name}Creator();
+if (${logp.name}['muiName']) ${logp.name}Component['muiName'] = ${logp.name}['muiName']
+export default ${logp.name}Component;
+`, { flag: 'w' })
+
         }
     }
 

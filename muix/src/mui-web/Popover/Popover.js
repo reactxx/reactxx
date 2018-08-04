@@ -72,7 +72,7 @@ function getAnchorEl(anchorEl) {
   return typeof anchorEl === "function" ? anchorEl() : anchorEl;
 }
 
-export const styles = {
+const styles = {
   /* Styles applied to the `Paper` component. */
   paper: {
     position: "absolute",
@@ -372,13 +372,22 @@ const defaultProps = (Popover.defaultProps = {
   transitionDuration: "auto"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/Popover/Popover').Shape>}
- */
-export const PopoverCreator = withStyles(styles, Popover, {
-  isMui: true,
-  defaultProps
-});
-const PopoverComponent = PopoverCreator();
-if (Popover.muiName) PopoverComponent.muiName = Popover.muiName;
-export default PopoverComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/Popover/Popover').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/Popover/Popover').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/Popover/Popover').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const PopoverCode = Popover;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  PopoverCode as Popover,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

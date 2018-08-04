@@ -11,7 +11,7 @@ import { toAtomic } from "../styles/withStyles";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "../styles/withStyles";
-export const styles = {
+const styles = {
   /* Styles applied to the root element. */
   root: {
     ...toAtomic("padding", 0),
@@ -82,13 +82,22 @@ const defaultProps = (List.defaultProps = {
   disablePadding: false
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/List/List').Shape>}
- */
-export const ListCreator = withStyles(styles, List, {
-  isMui: true,
-  defaultProps
-});
-const ListComponent = ListCreator();
-if (List.muiName) ListComponent.muiName = List.muiName;
-export default ListComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/List/List').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/List/List').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/List/List').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const ListCode = List;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  ListCode as List,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};

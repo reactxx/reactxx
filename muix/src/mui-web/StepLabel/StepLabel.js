@@ -11,7 +11,8 @@ import classNames from "classnames";
 import withStyles from "../styles/withStyles";
 import Typography from "../Typography/Typography";
 import StepIcon from "../StepIcon";
-export const styles = theme => ({
+
+const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
     display: "flex",
@@ -166,13 +167,22 @@ const defaultProps = (StepLabel.defaultProps = {
   orientation: "horizontal"
 });
 
-/**
- * @type { import('reactxx-basic').WithStyleCreator<import('../typings/shapes/StepLabel/StepLabel').Shape>}
- */
-export const StepLabelCreator = withStyles(styles, StepLabel, {
-  isMui: true,
-  defaultProps
-});
-const StepLabelComponent = StepLabelCreator();
-if (StepLabel.muiName) StepLabelComponent.muiName = StepLabel.muiName;
-export default StepLabelComponent;
+/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/StepLabel/StepLabel').Shape> } TComponent */
+
+/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/StepLabel/StepLabel').Shape> } TStyles */
+
+/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/StepLabel/StepLabel').Shape> } TDefaultProps */
+
+/** @type { TComponent } */
+const StepLabelCode = StepLabel;
+/** @type { TStyles } */
+
+const stylesCode = styles;
+/** @type { TDefaultProps } */
+
+const defaultPropsCode = defaultProps;
+export {
+  StepLabelCode as StepLabel,
+  stylesCode as styles,
+  defaultPropsCode as defaultProps
+};
