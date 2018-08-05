@@ -272,13 +272,6 @@ const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
     body.splice(propTypesIdx, 1)
   }
   if (info.withStyles) {
-    // remove export styles
-    const exportNamedDeclaration = Queries.checkSingleResult(Ast.astq().query(root, '/Program/ExportNamedDeclaration [ /VariableDeclaration/VariableDeclarator/Identifier [@name=="styles"]]'), true)
-    if (exportNamedDeclaration) {
-      const exportNamedDeclarationIdx = body.indexOf(exportNamedDeclaration)
-      body.splice(exportNamedDeclarationIdx, 1, exportNamedDeclaration.declaration)
-    }
-
     // remove withStyles call
     const defaultExport = Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExportDefaultDeclaration`))
     const defaultExportIdx = body.indexOf(defaultExport);
@@ -293,7 +286,7 @@ const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
       const defaultPropsIdx = body.indexOf(defaultProps)
       body.splice(defaultPropsIdx, 1)
     }
-    body.push(Parser.parseCode(`const defaultProps = ${info.name}.defaultProps = ${defaultPropsStr};`))
+    body.push(Parser.parseCode(`export const defaultProps = ${info.name}.defaultProps = ${defaultPropsStr};`))
   }
 
   // e.g.
@@ -302,20 +295,16 @@ const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   // 'export default ButtonComponent'
   if (info.withStyles) {
     const defaultExport = Parser.parseCode(`
-/** @typedef { import('reactxx-basic').Types.CodeComponentType<import('../typings/shapes/${info.name}/${info.name}').Shape> } TComponent */
-/** @typedef { import('reactxx-basic').Types.SheetCreatorX<import('../typings/shapes/${info.name}/${info.name}').Shape> } TStyles */
-/** @typedef { import('reactxx-basic').Types.PropsX<import('../typings/shapes/${info.name}/${info.name}').Shape> } TDefaultProps */
+
+export const ${info.name}Code = ${info.name}
     
-/** @type { TComponent } */
-const ${info.name}Code = ${info.name}
-    
-/** @type { TStyles } */
-const stylesCode = styles
-    
-/** @type { TDefaultProps } */
-const defaultPropsCode = defaultProps
-    
-export {${info.name}Code as ${info.name}, stylesCode as styles, defaultPropsCode as defaultProps}
+export const ${info.name}Creator = withStyles(styles, ${info.name}, {isMui:true, defaultProps});
+
+export const ${info.name}Component = ${info.name}Creator();
+
+if (${info.name}.muiName) ${info.name}Component.muiName = ${info.name}.muiName;
+
+export default ${info.name}Component;
 `)
     Array.prototype.push.call(body, ...defaultExport.program.body)
   }
@@ -447,3 +436,25 @@ let res
 // `), 'Button'))
 
 res = null
+
+
+// /** @type { import('../typings/${info.dir}/${info.name}').CodeComponentType } */
+// const ${info.name}Code = ${info.name}
+    
+// /** @type { import('../typings/${info.dir}/${info.name}').SheetCreatorX } */
+// const stylesCode = styles
+    
+// /** @type { import('../typings/${info.dir}/${info.name}').PropsX } */
+// const defaultPropsCode = defaultProps
+    
+// /** @type { import('../typings/${info.dir}/${info.name}').WithStyleCreator } */
+// const ${info.name}Creator = withStyles(styles, ${info.name}, {isMui:true, defaultProps});
+
+// /** @type { import('../typings/${info.dir}/${info.name}').ComponentType } */
+// const ${info.name}Component = ${info.name}Creator();
+
+// if (${info.name}.muiName) ${info.name}Component.muiName = ${info.name}.muiName;
+
+// export {${info.name}Code as ${info.name}, stylesCode as styles, defaultPropsCode as defaultProps, ${info.name}Component, ${info.name}Creator}
+// export default ${info.name}Component;
+

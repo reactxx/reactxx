@@ -1,6 +1,6 @@
 import React from 'react'
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Avatar from 'reactxx-mui-web/Avatar/Avatar';
+import Avatar from 'reactxx-muix/current/Avatar/Avatar';
 import pink from 'reactxx-mui-web/colors/pink';
 import green from 'reactxx-mui-web/colors/green';
 import { Icon } from 'reactxx-primitives'

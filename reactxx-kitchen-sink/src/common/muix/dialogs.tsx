@@ -1,29 +1,29 @@
 import React from 'react'
 import withStylesCreator, { toAtomic } from 'reactxx-mui-web/styles/withStyles'
 
-import Button from 'reactxx-muix/web/Button/Button';
-import Avatar from 'reactxx-mui-web/Avatar/Avatar';
-import List from 'reactxx-mui-web/List/List';
-import ListItem from 'reactxx-mui-web/ListItem/ListItem';
-import ListItemAvatar from 'reactxx-mui-web/ListItemAvatar/ListItemAvatar';
-import ListItemText from 'reactxx-mui-web/ListItemText/ListItemText';
-import RadioGroup from 'reactxx-mui-web/RadioGroup/RadioGroup';
-import Radio from 'reactxx-mui-web/Radio/Radio';
-import FormControlLabel from 'reactxx-mui-web/FormControlLabel/FormControlLabel';
-import DialogTitle from 'reactxx-mui-web/DialogTitle/DialogTitle';
-import DialogActions from 'reactxx-mui-web/DialogActions/DialogActions';
-import DialogContent from 'reactxx-mui-web/DialogContent/DialogContent';
-import DialogContentText from 'reactxx-mui-web/DialogContentText/DialogContentText';
-import Dialog from 'reactxx-mui-web/Dialog/Dialog';
+import Button from 'reactxx-muix/current/Button/Button';
+import Avatar from 'reactxx-muix/current/Avatar/Avatar';
+import List from 'reactxx-muix/current/List/List';
+import ListItem from 'reactxx-muix/current/ListItem/ListItem';
+import ListItemAvatar from 'reactxx-muix/current/ListItemAvatar/ListItemAvatar';
+import ListItemText from 'reactxx-muix/current/ListItemText/ListItemText';
+import RadioGroup from 'reactxx-muix/current/RadioGroup/RadioGroup';
+import Radio from 'reactxx-muix/current/Radio/Radio';
+import FormControlLabel from 'reactxx-muix/current/FormControlLabel/FormControlLabel';
+import DialogTitle from 'reactxx-muix/current/DialogTitle/DialogTitle';
+import DialogActions from 'reactxx-muix/current/DialogActions/DialogActions';
+import DialogContent from 'reactxx-muix/current/DialogContent/DialogContent';
+import DialogContentText from 'reactxx-muix/current/DialogContentText/DialogContentText';
+import Dialog from 'reactxx-muix/current/Dialog/Dialog';
 
-import TextField from 'reactxx-mui-web/TextField/TextField';
+import TextField from 'reactxx-muix/current/TextField/TextField';
 
-import AppBar from 'reactxx-mui-web/AppBar/AppBar';
-import Toolbar from 'reactxx-mui-web/Toolbar/Toolbar';
-import Divider from 'reactxx-mui-web/Divider/Divider';
-import IconButton from 'reactxx-mui-web/IconButton/IconButton';
+import AppBar from 'reactxx-muix/current/AppBar/AppBar';
+import Toolbar from 'reactxx-muix/current/Toolbar/Toolbar';
+import Divider from 'reactxx-muix/current/Divider/Divider';
+import IconButton from 'reactxx-muix/current/IconButton/IconButton';
 
-import Typography from 'reactxx-mui-web/Typography/Typography';
+import Typography from 'reactxx-muix/current/Typography/Typography';
 import blue from 'reactxx-mui-web/colors/blue';
 import Slide from 'reactxx-mui-web/Slide/Slide';
 

@@ -1,12 +1,12 @@
 import React from 'react'
 import withStylesCreator, { toAtomic } from 'reactxx-mui-web/styles/withStyles'
-import Badge from 'reactxx-mui-web/Badge/Badge';
-import AppBar from 'reactxx-mui-web/AppBar/AppBar';
-import Tabs from 'reactxx-mui-web/Tabs/Tabs';
-import Tab from 'reactxx-mui-web/Tab/Tab';
-import Typography from 'reactxx-mui-web/Typography/Typography';
-import Button from 'reactxx-muix/web/Button/Button';
-import IconButton from 'reactxx-mui-web/IconButton/IconButton';
+import Badge from 'reactxx-muix/current/Badge/Badge';
+import AppBar from 'reactxx-muix/current/AppBar/AppBar';
+import Tabs from 'reactxx-muix/current/Tabs/Tabs';
+import Tab from 'reactxx-muix/current/Tab/Tab';
+import Typography from 'reactxx-muix/current/Typography/Typography';
+import Button from 'reactxx-muix/current/Button/Button';
+import IconButton from 'reactxx-muix/current/IconButton/IconButton';
 import { Icon } from 'reactxx-primitives'
 import { Email } from 'reactxx-mdi/Email'
 import { Cart } from 'reactxx-mdi/Cart'

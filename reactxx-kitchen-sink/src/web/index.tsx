@@ -1,8 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Button from 'reactxx-mui-web/Button'
-
 //import { test } from '../common/sheeter/mediaq-test'
 //import { test } from '../common/sheeter/test'
 //import { test } from '../common/sheeter/animations-test'
@@ -21,9 +19,9 @@ import Button from 'reactxx-mui-web/Button'
 //import App from '../common/basic/pe4'
 //import App from '../common/component/ce3'
 //import App from '../common/mediaq/me1'
-//const App: React.SFC = () => <Button>Hallo world</Button>
+const App: React.SFC = () => null
 
-import App from '../common/muix/buttons'
+//import App from '../common/muix/buttons'
 //import App from '../common/muix/paper'
 //import App from '../common/muix/appbar'
 //import App from '../common/muix/autocomplete'

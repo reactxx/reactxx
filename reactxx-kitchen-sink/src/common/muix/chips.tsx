@@ -1,8 +1,8 @@
 import React from 'react'
 import withStylesCreator, { toAtomic } from 'reactxx-mui-web/styles/withStyles'
-import Avatar from 'reactxx-mui-web/Avatar/Avatar';
-import Chip from 'reactxx-mui-web/Chip/Chip';
-import Paper from 'reactxx-mui-web/Paper/Paper';
+import Avatar from 'reactxx-muix/current/Avatar/Avatar';
+import Chip from 'reactxx-muix/current/Chip/Chip';
+import Paper from 'reactxx-muix/current/Paper/Paper';
 import { Icon } from 'reactxx-primitives'
 import { Face } from 'reactxx-mdi/Face'
 import { Check } from 'reactxx-mdi/Check'

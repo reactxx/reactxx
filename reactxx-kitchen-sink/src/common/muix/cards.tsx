@@ -1,16 +1,16 @@
 import React from 'react'
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
 
-import Card from 'reactxx-mui-web/Card/Card';
-import CardActions from 'reactxx-mui-web/CardActions/CardActions';
-import CardContent from 'reactxx-mui-web/CardContent/CardContent';
-import CardHeader from 'reactxx-mui-web/CardHeader/CardHeader';
-import Button from 'reactxx-muix/web/Button/Button';
-import IconButton from 'reactxx-mui-web/IconButton/IconButton';
-import Typography from 'reactxx-mui-web/Typography/Typography';
-import CardMedia from 'reactxx-mui-web/CardMedia/CardMedia';
-import Collapse from 'reactxx-mui-web/Collapse/Collapse';
-import Avatar from 'reactxx-mui-web/Avatar/Avatar';
+import Card from 'reactxx-muix/current/Card/Card';
+import CardActions from 'reactxx-muix/current/CardActions/CardActions';
+import CardContent from 'reactxx-muix/current/CardContent/CardContent';
+import CardHeader from 'reactxx-muix/current/CardHeader/CardHeader';
+import Button from 'reactxx-muix/current/Button/Button';
+import IconButton from 'reactxx-muix/current/IconButton/IconButton';
+import Typography from 'reactxx-muix/current/Typography/Typography';
+import CardMedia from 'reactxx-muix/current/CardMedia/CardMedia';
+import Collapse from 'reactxx-muix/current/Collapse/Collapse';
+import Avatar from 'reactxx-muix/current/Avatar/Avatar';
 
 import red from 'reactxx-mui-web/colors/red';
 

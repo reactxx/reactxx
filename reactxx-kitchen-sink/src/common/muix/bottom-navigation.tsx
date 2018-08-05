@@ -1,7 +1,7 @@
 import React from 'react'
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import BottomNavigation from 'reactxx-mui-web/BottomNavigation/BottomNavigation';
-import BottomNavigationAction from 'reactxx-mui-web/BottomNavigationAction/BottomNavigationAction';
+import BottomNavigation from 'reactxx-muix/current/BottomNavigation/BottomNavigation';
+import BottomNavigationAction from 'reactxx-muix/current/BottomNavigationAction/BottomNavigationAction';
 
 import { Icon } from 'reactxx-primitives'
 import { History } from 'reactxx-mdi/History'

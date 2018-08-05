@@ -1,13 +1,13 @@
 import React from 'react'
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
 
-import Grid from 'reactxx-mui-web/Grid/Grid';
-import FormLabel from 'reactxx-mui-web/FormLabel/FormLabel';
-import FormControlLabel from 'reactxx-mui-web/FormControlLabel/FormControlLabel';
-import RadioGroup from 'reactxx-mui-web/RadioGroup/RadioGroup';
-import Radio from 'reactxx-mui-web/Radio/Radio';
-import Paper from 'reactxx-mui-web/Paper/Paper';
-import Typography from 'reactxx-mui-web/Typography/Typography';
+import Grid from 'reactxx-muix/current/Grid/Grid';
+import FormLabel from 'reactxx-muix/current/FormLabel/FormLabel';
+import FormControlLabel from 'reactxx-muix/current/FormControlLabel/FormControlLabel';
+import RadioGroup from 'reactxx-muix/current/RadioGroup/RadioGroup';
+import Radio from 'reactxx-muix/current/Radio/Radio';
+import Paper from 'reactxx-muix/current/Paper/Paper';
+import Typography from 'reactxx-muix/current/Typography/Typography';
 
 const styles = theme => ({
   root: {

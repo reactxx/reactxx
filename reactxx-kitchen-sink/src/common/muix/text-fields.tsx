@@ -7,13 +7,13 @@
 import React from 'react'
 import withStylesCreator, { toAtomic } from 'reactxx-mui-web/styles/withStyles'
 
-import TextField from 'reactxx-mui-web/TextField/TextField';
-import FormControl from 'reactxx-mui-web/FormControl/FormControl';
-import Input from 'reactxx-mui-web/Input/Input';
-import InputLabel from 'reactxx-mui-web/InputLabel/InputLabel';
-import FormHelperText from 'reactxx-mui-web/FormHelperText/FormHelperText';
-import InputAdornment from 'reactxx-mui-web/InputAdornment/InputAdornment';
-import Grid from 'reactxx-mui-web/Grid/Grid';
+import TextField from 'reactxx-muix/current/TextField/TextField';
+import FormControl from 'reactxx-muix/current/FormControl/FormControl';
+import Input from 'reactxx-muix/current/Input/Input';
+import InputLabel from 'reactxx-muix/current/InputLabel/InputLabel';
+import FormHelperText from 'reactxx-muix/current/FormHelperText/FormHelperText';
+import InputAdornment from 'reactxx-muix/current/InputAdornment/InputAdornment';
+import Grid from 'reactxx-muix/current/Grid/Grid';
 
 import MaskedInput from 'react-text-mask';
 import NumberFormat from 'react-number-format';
@@ -23,7 +23,7 @@ import { Eye } from 'reactxx-mdi/Eye'
 import { EyeOff } from 'reactxx-mdi/EyeOff'
 import { AccountCircle } from 'reactxx-mdi/AccountCircle'
 
-import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
+import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';
 
 const styles = theme => ({
   root: {

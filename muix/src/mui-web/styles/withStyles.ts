@@ -1,12 +1,45 @@
 ﻿import React from 'react';
 import { RenderAddIn, TCommon, ThemeProviderUntyped, TProvider, Types, withStyles } from 'reactxx-basic';
 import { renderer, rulesetToClassNamesMUI } from 'reactxx-fela';
-import { Theme as MuiTheme } from '../typings/mui/styles/createMuiTheme'
+import { Theme as MuiTheme } from './createMuiTheme'
+import { WithTheme } from './withTheme'
 import { default as createMuiTheme } from 'reactxx-mui-web/styles/createMuiTheme';
 
 export type Theme = MuiTheme & TCommon.ThemeBase
 
 export const ThemeProvider = ThemeProviderUntyped as TCommon.ThemeProviderTyped<Theme>
+
+export type ClassNameMap<ClassKey extends string = string> = Record<ClassKey, string>;
+
+export type StyleRules<ClassKey extends string = string> = Record<ClassKey, CSSProperties>;
+
+export type StyleRulesCallback<ClassKey extends string = string> = (
+  theme: Theme,
+) => StyleRules<ClassKey>;
+
+export interface StylesCreator {
+  create(theme: Theme, name: string): StyleRules;
+  options: { index: number };
+  themingEnabled: boolean;
+}
+
+export type WithStyles<T extends string | StyleRules | StyleRulesCallback = string> = Partial<
+  WithTheme
+> & {
+  classes: ClassNameMap<
+    T extends string
+      ? T
+      : T extends StyleRulesCallback<infer K> ? K : T extends StyleRules<infer K> ? K : never
+  >;
+};
+
+export interface StyledComponentProps<ClassKey extends string = string> {
+  classes?: Partial<ClassNameMap<ClassKey>>;
+  innerRef?: React.Ref<any> | React.RefObject<any>;
+}
+
+
+export type CSSProperties = React.CSSProperties
 
 const withStylesCreator =
   <R extends Types.Shape>
