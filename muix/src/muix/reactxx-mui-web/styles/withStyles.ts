@@ -58,7 +58,7 @@ export const toAtomic = (prefix: 'margin' | 'padding', value: number | string) =
       case 1: vals = [value, value, value, value]; break
       case 2: vals = [parts[0], parts[0], parts[1], parts[1]]; break
       case 3: vals = [parts[0], parts[2], parts[1], parts[1]]; break
-      case 4: vals = parts; break
+      case 4: vals = [parts[0], parts[2], parts[3], parts[1]]; break // top | right | bottom | left
       default: throw 'Wrong value: ' + value
     }
   } else

@@ -19,7 +19,7 @@ import ReactDOM from 'react-dom'
 //import App from '../common/basic/pe4'
 //import App from '../common/component/ce3'
 //import App from '../common/mediaq/me1'
-const App: React.SFC = () => null
+//const App: React.SFC = () => null
 
 //import App from '../common/muix/buttons'
 //import App from '../common/muix/paper'
@@ -31,7 +31,7 @@ const App: React.SFC = () => null
 //import App from '../common/muix/badge'
 //import App from '../common/muix/bottom-navigation'
 //import App from '../common/muix/cards'
-//import App from '../common/muix/chips'
+import App from '../common/muix/chips'
 //import App from '../common/muix/dialogs'
 
 ReactDOM.render(<App />, document.getElementById('root'))

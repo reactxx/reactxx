@@ -24,10 +24,7 @@ SystemJS.config({
     "reactxx-mediaq": "deploy/lib/mediaq/web/index",
     "reactxx": "deploy/lib/reactxx/web/index",
     "reactxx-mui-web": "deploy/lib/mui-web",
-    "reactxx-muix/web/styles/withStyles": "deploy/lib/muix/web/styles/withStyles",
-    "reactxx-muix/web/styles/create-sheet-hook": "deploy/lib/muix/web/styles/create-sheet-hook",
-    "reactxx-muix/web/Button/Button": "deploy/lib/muix/web/Button/Button",
-    "reactxx-muix/web/ButtonBase/ButtonBase": "deploy/lib/muix/web/ButtonBase/ButtonBase"
+    "reactxx-muix": "deploy/lib/muix",
   }
 });
 
