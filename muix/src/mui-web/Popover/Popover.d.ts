@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const PopoverCode: CodeComponentType
 
-declare const Popover: React.Component<PropsX>
+declare const Popover: React.ComponentType<PropsX>
 export default Popover

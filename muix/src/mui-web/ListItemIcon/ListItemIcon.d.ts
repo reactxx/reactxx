@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const ListItemIconCode: CodeComponentType
 
-declare const ListItemIcon: React.Component<PropsX>
+declare const ListItemIcon: React.ComponentType<PropsX>
 export default ListItemIcon

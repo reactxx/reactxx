@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const MenuItemCode: CodeComponentType
 
-declare const MenuItem: React.Component<PropsX>
+declare const MenuItem: React.ComponentType<PropsX>
 export default MenuItem

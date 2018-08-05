@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const TooltipCode: CodeComponentType
 
-declare const Tooltip: React.Component<PropsX>
+declare const Tooltip: React.ComponentType<PropsX>
 export default Tooltip

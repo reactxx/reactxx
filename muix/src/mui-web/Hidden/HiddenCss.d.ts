@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const HiddenCssCode: CodeComponentType
 
-declare const HiddenCss: React.Component<PropsX>
+declare const HiddenCss: React.ComponentType<PropsX>
 export default HiddenCss

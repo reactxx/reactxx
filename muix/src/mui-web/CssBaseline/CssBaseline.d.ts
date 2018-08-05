@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const CssBaselineCode: CodeComponentType
 
-declare const CssBaseline: React.Component<PropsX>
+declare const CssBaseline: React.ComponentType<PropsX>
 export default CssBaseline

@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const FormGroupCode: CodeComponentType
 
-declare const FormGroup: React.Component<PropsX>
+declare const FormGroup: React.ComponentType<PropsX>
 export default FormGroup

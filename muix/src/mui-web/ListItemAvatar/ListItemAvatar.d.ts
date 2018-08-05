@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const ListItemAvatarCode: CodeComponentType
 
-declare const ListItemAvatar: React.Component<PropsX>
+declare const ListItemAvatar: React.ComponentType<PropsX>
 export default ListItemAvatar

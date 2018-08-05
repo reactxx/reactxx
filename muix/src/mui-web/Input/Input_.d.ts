@@ -7,6 +7,7 @@ export interface InputProps
       InputClassKey,
       'onChange' | 'onKeyUp' | 'onKeyDown' | 'defaultValue'
     > {
+  readOnly?:boolean,
   autoComplete?: string;
   autoFocus?: boolean;
   defaultValue?: string | number;

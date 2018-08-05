@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const DialogContentCode: CodeComponentType
 
-declare const DialogContent: React.Component<PropsX>
+declare const DialogContent: React.ComponentType<PropsX>
 export default DialogContent

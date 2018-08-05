@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const DrawerCode: CodeComponentType
 
-declare const Drawer: React.Component<PropsX>
+declare const Drawer: React.ComponentType<PropsX>
 export default Drawer

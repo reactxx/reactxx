@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const ToolbarCode: CodeComponentType
 
-declare const Toolbar: React.Component<PropsX>
+declare const Toolbar: React.ComponentType<PropsX>
 export default Toolbar

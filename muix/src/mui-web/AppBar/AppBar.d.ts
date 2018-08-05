@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const AppBarCode: CodeComponentType
 
-declare const AppBar: React.Component<PropsX>
+declare const AppBar: React.ComponentType<PropsX>
 export default AppBar

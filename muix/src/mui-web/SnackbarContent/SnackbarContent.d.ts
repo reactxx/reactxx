@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const SnackbarContentCode: CodeComponentType
 
-declare const SnackbarContent: React.Component<PropsX>
+declare const SnackbarContent: React.ComponentType<PropsX>
 export default SnackbarContent

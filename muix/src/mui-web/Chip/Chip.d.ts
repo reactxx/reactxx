@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const ChipCode: CodeComponentType
 
-declare const Chip: React.Component<PropsX>
+declare const Chip: React.ComponentType<PropsX>
 export default Chip

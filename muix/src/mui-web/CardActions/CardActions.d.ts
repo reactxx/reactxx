@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const CardActionsCode: CodeComponentType
 
-declare const CardActions: React.Component<PropsX>
+declare const CardActions: React.ComponentType<PropsX>
 export default CardActions

@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const BadgeCode: CodeComponentType
 
-declare const Badge: React.Component<PropsX>
+declare const Badge: React.ComponentType<PropsX>
 export default Badge

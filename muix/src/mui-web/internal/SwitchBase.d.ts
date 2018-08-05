@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const SwitchBaseCode: CodeComponentType
 
-declare const SwitchBase: React.Component<PropsX>
+declare const SwitchBase: React.ComponentType<PropsX>
 export default SwitchBase

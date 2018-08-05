@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const ButtonCode: CodeComponentType
 
-declare const Button: React.Component<PropsX>
+declare const Button: React.ComponentType<PropsX>
 export default Button

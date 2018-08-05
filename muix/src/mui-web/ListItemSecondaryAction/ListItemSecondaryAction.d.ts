@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const ListItemSecondaryActionCode: CodeComponentType
 
-declare const ListItemSecondaryAction: React.Component<PropsX>
+declare const ListItemSecondaryAction: React.ComponentType<PropsX>
 export default ListItemSecondaryAction

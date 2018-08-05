@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const StepperCode: CodeComponentType
 
-declare const Stepper: React.Component<PropsX>
+declare const Stepper: React.ComponentType<PropsX>
 export default Stepper

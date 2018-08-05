@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const ModalCode: CodeComponentType
 
-declare const Modal: React.Component<PropsX>
+declare const Modal: React.ComponentType<PropsX>
 export default Modal

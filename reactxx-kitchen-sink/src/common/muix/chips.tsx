@@ -8,6 +8,8 @@ import { Face } from 'reactxx-mdi/Face'
 import { Check } from 'reactxx-mdi/Check'
 import { Emoticon } from 'reactxx-mdi/Emoticon'
 
+const x = <Chip/>
+
 
 const styles = theme => ({
   container: {

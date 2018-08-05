@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const TablePaginationCode: CodeComponentType
 
-declare const TablePagination: React.Component<PropsX>
+declare const TablePagination: React.ComponentType<PropsX>
 export default TablePagination

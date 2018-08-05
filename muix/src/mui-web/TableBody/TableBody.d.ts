@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const TableBodyCode: CodeComponentType
 
-declare const TableBody: React.Component<PropsX>
+declare const TableBody: React.ComponentType<PropsX>
 export default TableBody

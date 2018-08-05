@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const TableSortLabelCode: CodeComponentType
 
-declare const TableSortLabel: React.Component<PropsX>
+declare const TableSortLabel: React.ComponentType<PropsX>
 export default TableSortLabel

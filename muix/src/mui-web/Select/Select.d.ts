@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const SelectCode: CodeComponentType
 
-declare const Select: React.Component<PropsX>
+declare const Select: React.ComponentType<PropsX>
 export default Select

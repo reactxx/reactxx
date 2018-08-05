@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const InputAdornmentCode: CodeComponentType
 
-declare const InputAdornment: React.Component<PropsX>
+declare const InputAdornment: React.ComponentType<PropsX>
 export default InputAdornment

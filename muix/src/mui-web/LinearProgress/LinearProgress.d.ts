@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const LinearProgressCode: CodeComponentType
 
-declare const LinearProgress: React.Component<PropsX>
+declare const LinearProgress: React.ComponentType<PropsX>
 export default LinearProgress

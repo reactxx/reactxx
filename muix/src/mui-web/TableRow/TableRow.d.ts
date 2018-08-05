@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const TableRowCode: CodeComponentType
 
-declare const TableRow: React.Component<PropsX>
+declare const TableRow: React.ComponentType<PropsX>
 export default TableRow

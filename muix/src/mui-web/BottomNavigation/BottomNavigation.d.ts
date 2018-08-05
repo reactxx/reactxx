@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const BottomNavigationCode: CodeComponentType
 
-declare const BottomNavigation: React.Component<PropsX>
+declare const BottomNavigation: React.ComponentType<PropsX>
 export default BottomNavigation

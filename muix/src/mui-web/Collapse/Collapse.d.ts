@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const CollapseCode: CodeComponentType
 
-declare const Collapse: React.Component<PropsX>
+declare const Collapse: React.ComponentType<PropsX>
 export default Collapse

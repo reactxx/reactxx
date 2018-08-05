@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const TypographyCode: CodeComponentType
 
-declare const Typography: React.Component<PropsX>
+declare const Typography: React.ComponentType<PropsX>
 export default Typography

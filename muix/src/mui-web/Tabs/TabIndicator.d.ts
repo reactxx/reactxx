@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const TabIndicatorCode: CodeComponentType
 
-declare const TabIndicator: React.Component<PropsX>
+declare const TabIndicator: React.ComponentType<PropsX>
 export default TabIndicator

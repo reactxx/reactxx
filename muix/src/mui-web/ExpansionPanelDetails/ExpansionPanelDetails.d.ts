@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const ExpansionPanelDetailsCode: CodeComponentType
 
-declare const ExpansionPanelDetails: React.Component<PropsX>
+declare const ExpansionPanelDetails: React.ComponentType<PropsX>
 export default ExpansionPanelDetails

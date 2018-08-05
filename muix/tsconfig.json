@@ -60,7 +60,7 @@
   "exclude": [
     "src/ks/typings.d.ts",
     "src/trash",
-    "src/ks/common/muix",
+    //"src/ks/common/muix",
     "src/muix/reactxx-mui-web"
     //"src/muix/reactxx-mui-web/**/*"
   ]

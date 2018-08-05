@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const SvgIconCode: CodeComponentType
 
-declare const SvgIcon: React.Component<PropsX>
+declare const SvgIcon: React.ComponentType<PropsX>
 export default SvgIcon

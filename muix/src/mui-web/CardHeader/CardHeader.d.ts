@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const CardHeaderCode: CodeComponentType
 
-declare const CardHeader: React.Component<PropsX>
+declare const CardHeader: React.ComponentType<PropsX>
 export default CardHeader

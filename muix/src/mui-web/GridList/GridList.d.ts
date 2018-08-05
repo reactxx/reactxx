@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const GridListCode: CodeComponentType
 
-declare const GridList: React.Component<PropsX>
+declare const GridList: React.ComponentType<PropsX>
 export default GridList

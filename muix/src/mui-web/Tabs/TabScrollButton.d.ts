@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const TabScrollButtonCode: CodeComponentType
 
-declare const TabScrollButton: React.Component<PropsX>
+declare const TabScrollButton: React.ComponentType<PropsX>
 export default TabScrollButton

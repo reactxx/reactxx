@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const StepIconCode: CodeComponentType
 
-declare const StepIcon: React.Component<PropsX>
+declare const StepIcon: React.ComponentType<PropsX>
 export default StepIcon

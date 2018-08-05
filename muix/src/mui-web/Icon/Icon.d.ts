@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const IconCode: CodeComponentType
 
-declare const Icon: React.Component<PropsX>
+declare const Icon: React.ComponentType<PropsX>
 export default Icon

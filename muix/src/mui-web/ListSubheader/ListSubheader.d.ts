@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const ListSubheaderCode: CodeComponentType
 
-declare const ListSubheader: React.Component<PropsX>
+declare const ListSubheader: React.ComponentType<PropsX>
 export default ListSubheader

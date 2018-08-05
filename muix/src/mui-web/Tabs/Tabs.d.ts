@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const TabsCode: CodeComponentType
 
-declare const Tabs: React.Component<PropsX>
+declare const Tabs: React.ComponentType<PropsX>
 export default Tabs

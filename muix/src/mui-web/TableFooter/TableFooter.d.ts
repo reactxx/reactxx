@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const TableFooterCode: CodeComponentType
 
-declare const TableFooter: React.Component<PropsX>
+declare const TableFooter: React.ComponentType<PropsX>
 export default TableFooter

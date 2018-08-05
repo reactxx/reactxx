@@ -86,7 +86,7 @@ const theme = createMuiTheme({
   palette: {
     primary: green,
   },
-})
+}) as any
 
 function TextButtons(props) {
   const { classes, $system: { classNamesStr, classNames } } = props;

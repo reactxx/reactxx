@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const GridCode: CodeComponentType
 
-declare const Grid: React.Component<PropsX>
+declare const Grid: React.ComponentType<PropsX>
 export default Grid

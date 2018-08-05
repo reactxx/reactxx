@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const BackdropCode: CodeComponentType
 
-declare const Backdrop: React.Component<PropsX>
+declare const Backdrop: React.ComponentType<PropsX>
 export default Backdrop

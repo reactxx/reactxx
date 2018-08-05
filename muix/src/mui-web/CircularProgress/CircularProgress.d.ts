@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const CircularProgressCode: CodeComponentType
 
-declare const CircularProgress: React.Component<PropsX>
+declare const CircularProgress: React.ComponentType<PropsX>
 export default CircularProgress

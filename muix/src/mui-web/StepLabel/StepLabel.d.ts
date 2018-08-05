@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const StepLabelCode: CodeComponentType
 
-declare const StepLabel: React.Component<PropsX>
+declare const StepLabel: React.ComponentType<PropsX>
 export default StepLabel

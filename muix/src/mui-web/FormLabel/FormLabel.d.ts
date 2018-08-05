@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const FormLabelCode: CodeComponentType
 
-declare const FormLabel: React.Component<PropsX>
+declare const FormLabel: React.ComponentType<PropsX>
 export default FormLabel

@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const TouchRippleCode: CodeComponentType
 
-declare const TouchRipple: React.Component<PropsX>
+declare const TouchRipple: React.ComponentType<PropsX>
 export default TouchRipple

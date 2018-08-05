@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const FormHelperTextCode: CodeComponentType
 
-declare const FormHelperText: React.Component<PropsX>
+declare const FormHelperText: React.ComponentType<PropsX>
 export default FormHelperText

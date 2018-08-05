@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const DividerCode: CodeComponentType
 
-declare const Divider: React.Component<PropsX>
+declare const Divider: React.ComponentType<PropsX>
 export default Divider

@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const CardMediaCode: CodeComponentType
 
-declare const CardMedia: React.Component<PropsX>
+declare const CardMedia: React.ComponentType<PropsX>
 export default CardMedia

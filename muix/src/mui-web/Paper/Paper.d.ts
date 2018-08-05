@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const PaperCode: CodeComponentType
 
-declare const Paper: React.Component<PropsX>
+declare const Paper: React.ComponentType<PropsX>
 export default Paper

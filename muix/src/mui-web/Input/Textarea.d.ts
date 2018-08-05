@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const TextareaCode: CodeComponentType
 
-declare const Textarea: React.Component<PropsX>
+declare const Textarea: React.ComponentType<PropsX>
 export default Textarea

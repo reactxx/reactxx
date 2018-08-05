@@ -1,13 +1,11 @@
 //https://codesandbox.io/s/1rw8v2o6yq
 
 //TODO: 
-// - D:\reactxx\muix\src\mui-web\InputLabel\InputLabel.js, remove transform: 'translate(0, 21px) scale(1)'
-// replace margin and padding by marginTop..., paddingTop...
 // custom input not in example
 import React from 'react'
 import withStylesCreator, { toAtomic } from 'reactxx-mui-web/styles/withStyles'
 
-import TextField from 'reactxx-muix/current/TextField/TextField';
+import TextField from 'reactxx-mui-web/TextField/TextField';
 import FormControl from 'reactxx-muix/current/FormControl/FormControl';
 import Input from 'reactxx-muix/current/Input/Input';
 import InputLabel from 'reactxx-muix/current/InputLabel/InputLabel';

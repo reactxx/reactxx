@@ -16,3 +16,24 @@
 - delete d:\reactxx\codemod\patch-original\
 - modify d:\reactxx\muix\src\mui-web\Input\Textarea.js ({} as options to withStyles), classNames misto classnames
 - run index.ts from CodeMod project
+
+********** mui TS ERRORS
+
+D:\reactxx\muix\src\ks\common\muix\autocomplete.tsx, D:\reactxx\muix\src\mui-web\Popper\Popper.d.ts
+
+children: React.ReactElement<any> | ((
+    props: {
+      placement: PopperPlacementType;
+      TransitionProps?: TransitionProps;
+    },
+  ) => React.ReactElement<any>);
+
+D:\reactxx\muix\src\ks\common\muix\dialogs.tsx, D:\reactxx\muix\src\mui-web\RadioGroup\RadioGroup.d.ts
+export interface RadioGroupProps
+  ...
+  ref?;
+}
+
+D:\reactxx\muix\src\ks\common\muix\text-fields.tsx, D:\reactxx\muix\src\mui-web\Input\Input_.d.ts
+export interface InputProps
+  readOnly?:boolean,

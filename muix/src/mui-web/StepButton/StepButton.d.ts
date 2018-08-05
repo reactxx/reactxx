@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const StepButtonCode: CodeComponentType
 
-declare const StepButton: React.Component<PropsX>
+declare const StepButton: React.ComponentType<PropsX>
 export default StepButton

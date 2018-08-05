@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const ListCode: CodeComponentType
 
-declare const List: React.Component<PropsX>
+declare const List: React.ComponentType<PropsX>
 export default List

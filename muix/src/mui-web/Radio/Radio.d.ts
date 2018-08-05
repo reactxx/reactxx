@@ -26,5 +26,5 @@ export declare const styles: SheetCreatorX
 export declare const defaultProps: PropsX
 export declare const RadioCode: CodeComponentType
 
-declare const Radio: React.Component<PropsX>
+declare const Radio: React.ComponentType<PropsX>
 export default Radio
