@@ -7,7 +7,6 @@ export interface InputProps
       InputClassKey,
       'onChange' | 'onKeyUp' | 'onKeyDown' | 'defaultValue'
     > {
-  readOnly?:boolean,
   autoComplete?: string;
   autoFocus?: boolean;
   defaultValue?: string | number;
@@ -24,6 +23,7 @@ export interface InputProps
   multiline?: boolean;
   name?: string;
   placeholder?: string;
+  readOnly?: boolean;
   required?: boolean;
   rows?: string | number;
   rowsMax?: string | number;

@@ -7,11 +7,10 @@ export interface RadioGroupProps
   name?: string;
   onChange?: (event: React.ChangeEvent<{}>, value: string) => void;
   value?: string;
-  ref?;
 }
 
 export type RadioGroupClassKey = FormGroupClassKey;
 
-declare const RadioGroup: React.ComponentType<RadioGroupProps>;
+declare const RadioGroup: React.ComponentClass<RadioGroupProps>;
 
 export default RadioGroup;

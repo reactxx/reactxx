@@ -4,11 +4,11 @@ import * as Parser from '../utils/parser'
 import { cssjsToFela } from './cssjs-to-fela'
 
 export const classNamesFix = () => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
-  adjustImports(root)
-  selectClassNamesFromProps(root, info.name)
-  refactorClassNamesObjectExpressionAttribute(root)
-  adjustHtmlClassNameAttribute(root, info.name)
-  adjustPaddingMargins(root)
+  adjustImports(root, info)
+  selectClassNamesFromProps(root, info)
+  refactorClassNamesObjectExpressionAttribute(root, info)
+  adjustHtmlClassNameAttribute(root, info)
+  adjustPaddingMargins(root, info)
   adjustTheme(root, info)
   return root
 }
@@ -22,12 +22,12 @@ export const withStylesTaskDefaultCreator = () => (root: Ast.Ast, info: Ast.MUIS
 }
 
 export const withThemeTaskDefaultCreator = () => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
-  adjustImports(root)
+  adjustImports(root, info)
   return root
 }
 
 export const otherTaskDefaultCreator = () => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
-  adjustImports(root)
+  adjustImports(root, info)
   return root
 }
 
@@ -81,7 +81,7 @@ const constSelectTheme = {
   }
 }
 
-const adjustPaddingMargins = (root: Ast.Ast) => {
+const adjustPaddingMargins = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   const margin = adjustPaddingMarginsLow(root, 'margin')
   const padding = adjustPaddingMarginsLow(root, 'padding')
   if (margin || padding)
@@ -138,7 +138,7 @@ const parseValue = (prefix: string, value) => {
   }
 }
 
-const adjustImports = (root: Ast.Ast) => {
+const adjustImports = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   const imports = Ast.astq().query(root, `// ImportDeclaration`)
   imports.forEach(imp => {
     if (imp.source.type != 'StringLiteral') return
@@ -193,16 +193,11 @@ const unknownComponents = [
   'TransitionGroup',
 ]
 
-export const getRenderFunc = (root: Ast.Ast, functionName: string) => {
-  return Queries.getNode_functionGlobal(root, functionName, true) || Queries.getNode_classMethod(root, functionName, 'render')
-}
-
 // for 'className' attribute HTML tags (e.g. 'span' etc. - not components as 'Button'): expand ruleset to className list (by means of classNamesStr function)
 // - 'className={classNames(x)}' by 'className={classNamesStr(x)}'
 // - 'className={x}' by 'className={classNamesStr(x)}'
-const adjustHtmlClassNameAttribute = (root: Ast.Ast, functionName: string) => {
-  const func = getRenderFunc(root, functionName)
-  const htmls = Ast.astq().query(func.body, '// JSXElement [ /JSXOpeningElement/JSXIdentifier [ isHTMLTag(@name, {forceHTMLTags}) ] && // JSXAttribute/JSXIdentifier [ @name=="className" ] ]', { forceHTMLTags: unknownComponents || null }) as Ast.Ast[]
+const adjustHtmlClassNameAttribute = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
+  const htmls = Ast.astq().query(info.renderFunc.body, '// JSXElement [ /JSXOpeningElement/JSXIdentifier [ isHTMLTag(@name, {forceHTMLTags}) ] && // JSXAttribute/JSXIdentifier [ @name=="className" ] ]', { forceHTMLTags: unknownComponents || null }) as Ast.Ast[]
   const classNames = 'classNames('
   htmls.forEach(html => {
     const compName: string = html.openingElement.name.name
@@ -216,7 +211,7 @@ const adjustHtmlClassNameAttribute = (root: Ast.Ast, functionName: string) => {
 }
 
 // refactor all calls of 'classNames' in render function: its ObjectExpression attribute, e.g. 'classNames(...,{x:y},...)' replace by 'classNames(...,(y) && (x),...)'
-const refactorClassNamesObjectExpressionAttribute = (root: Ast.Ast) => {
+const refactorClassNamesObjectExpressionAttribute = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   const calls = Ast.astq().query(root, `// CallExpression [ /Identifier [@name == "classNames"] && /ObjectExpression ]`)
   calls.forEach(call => {
     // check, if every 'classNames(classes.root ??? ' ends with ' ???, classNameProp)'
@@ -245,9 +240,8 @@ const refactorClassNamesObjectExpressionAttribute = (root: Ast.Ast) => {
 
 // in render: 'const {???} = props' transform to 'const {$system: {classNames, classNamesStr, theme}, ???} = props'
 // vyhodit 'theme' z props, 
-const selectClassNamesFromProps = (root: Ast.Ast, functionName: string) => {
-  const func = getRenderFunc(root, functionName)
-  const all = Ast.astq().query(func.body, '/VariableDeclaration/VariableDeclarator [ // Identifier [@name == "props"] ]')
+const selectClassNamesFromProps = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
+  const all = Ast.astq().query(info.renderFunc.body, '/VariableDeclaration/VariableDeclarator [ // Identifier [@name == "props"] ]')
   // all.length===0: CSSBaseLine
   // all.length>1: BottomNavigation
   const selectProps = all && all.length > 0 ? all[0] : null

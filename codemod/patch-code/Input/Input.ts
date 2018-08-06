@@ -8,7 +8,7 @@ import { Specials } from '../../tasks'
 export const registerInput = (specials: Specials) => {
     specials['Input/Input'] = {
         transform: (ast, info) => {
-            const func = Tasks.getRenderFunc(ast, info.name)
+            const func = info.renderFunc
             const body = func.body.body as any[];
             const returnIdx = body.findIndex(node => node.type === 'ReturnStatement')
             body.splice(returnIdx, 0, Parser.parseCode("if (typeof InputComponent === 'string') inputClassName = classNamesStr(inputClassName); else inputProps.$system = this.props.$system;"))

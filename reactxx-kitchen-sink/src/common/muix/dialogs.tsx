@@ -304,7 +304,7 @@ class ConfirmationDialogRaw extends React.Component<any, any> {
         <DialogContent>
           <RadioGroup
             ref={ref => {
-              this.radioGroupRef = ref;
+               this.radioGroupRef = ref;
             }}
             aria-label="Ringtone"
             name="ringtone"

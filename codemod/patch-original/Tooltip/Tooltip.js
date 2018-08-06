@@ -24,6 +24,7 @@ export const styles = theme => ({
     padding: '4px 8px',
     fontSize: theme.typography.pxToRem(10),
     lineHeight: `${theme.typography.round(14 / 10)}em`,
+    maxWidth: 300,
   },
   /* Styles applied to the tooltip (label wrapper) element if the tooltip is opened by touch. */
   touch: {
@@ -66,21 +67,23 @@ export const styles = theme => ({
 });
 
 class Tooltip extends React.Component {
+  childrenRef = null;
+
+  closeTimer = null;
+
+  defaultId = null;
+
   enterTimer = null;
+
+  focusTimer = null;
+
+  ignoreNonTouchEvents = false;
+
+  isControlled = null;
 
   leaveTimer = null;
 
   touchTimer = null;
-
-  closeTimer = null;
-
-  childrenRef = null;
-
-  isControlled = null;
-
-  ignoreNonTouchEvents = false;
-
-  defaultId = null;
 
   internalState = {
     hover: false,
@@ -125,14 +128,24 @@ class Tooltip extends React.Component {
   }
 
   componentWillUnmount() {
+    clearTimeout(this.closeTimer);
     clearTimeout(this.enterTimer);
+    clearTimeout(this.focusTimer);
     clearTimeout(this.leaveTimer);
     clearTimeout(this.touchTimer);
-    clearTimeout(this.closeTimer);
   }
 
   onRootRef = ref => {
     this.childrenRef = ref;
+  };
+
+  handleFocus = event => {
+    event.persist();
+    // The autoFocus of React might trigger the event before the componentDidMount.
+    // We need to account for this eventuality.
+    this.focusTimer = setTimeout(() => {
+      this.handleEnter(event);
+    });
   };
 
   handleEnter = event => {
@@ -147,11 +160,11 @@ class Tooltip extends React.Component {
       }
     }
 
-    if (event.type === 'mouseenter') {
+    if (event.type === 'mouseover') {
       this.internalState.hover = true;
 
-      if (childrenProps.onMouseEnter) {
-        childrenProps.onMouseEnter(event);
+      if (childrenProps.onMouseOver) {
+        childrenProps.onMouseOver(event);
       }
     }
 
@@ -177,7 +190,10 @@ class Tooltip extends React.Component {
   };
 
   handleOpen = event => {
-    if (!this.isControlled) {
+    // The mouseover event will trigger for every nested element in the tooltip.
+    // We can skip rerendering when the tooltip is already open.
+    // We are using the mouseover event instead of the mouseenter event to fix a hide/show issue.
+    if (!this.isControlled && !this.state.open) {
       this.setState({ open: true });
     }
 
@@ -304,12 +320,12 @@ class Tooltip extends React.Component {
     }
 
     if (!disableHoverListener) {
-      childrenProps.onMouseEnter = this.handleEnter;
+      childrenProps.onMouseOver = this.handleEnter;
       childrenProps.onMouseLeave = this.handleLeave;
     }
 
     if (!disableFocusListener) {
-      childrenProps.onFocus = this.handleEnter;
+      childrenProps.onFocus = this.handleFocus;
       childrenProps.onBlur = this.handleLeave;
     }
 

@@ -5,45 +5,56 @@
     "target": "es5",
     "module": "system",
     "moduleResolution": "node",
-
     "allowJs": true,
     //"declaration": true,
-
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-
     "rootDir": "src",
     "outDir": "deploy/lib",
     "jsx": "react",
-
     "inlineSourceMap": true,
     "inlineSources": true,
     "importHelpers": true,
-
     "strictNullChecks": false,
     "downlevelIteration": true,
     "strict": true,
     "strictFunctionTypes": false,
     "noImplicitAny": false,
+    "removeComments": true,
     //"noUnusedLocals": true,
-
     "baseUrl": ".",
     "paths": {
-
-      "reactxx-sheeter": [ "src/sheeter/index" ],
-      "reactxx-fela": [ "src/fela/index" ],
-      "reactxx-animation": [ "src/animation/web/index" ],
-      "reactxx-primitives": [ "src/primitives/web/index" ],
-      "reactxx-mediaq": [ "src/mediaq/web/index" ],
-      "reactxx-basic": [ "src/basic/index" ],
-      "reactxx-activable": [ "src/activable/web/index" ],
-      "reactxx": [ "src/reactxx/web/index" ],
-
-      "reactxx-mui-web/*": [ "src/mui-web/*" ],
-      "reactxx-muix/*": [ "src/muix/*" ],
-      "classnames": [ "src/muix/web/classnames" ]
+      "reactxx-sheeter": [
+        "src/sheeter/index"
+      ],
+      "reactxx-fela": [
+        "src/fela/index"
+      ],
+      "reactxx-animation": [
+        "src/animation/web/index"
+      ],
+      "reactxx-primitives": [
+        "src/primitives/web/index"
+      ],
+      "reactxx-mediaq": [
+        "src/mediaq/web/index"
+      ],
+      "reactxx-basic": [
+        "src/basic/index"
+      ],
+      "reactxx-activable": [
+        "src/activable/web/index"
+      ],
+      "reactxx": [
+        "src/reactxx/web/index"
+      ],
+      "reactxx-mui-web/*": [
+        "src/mui-web/*"
+      ],
+      "reactxx-muix/*": [
+        "src/muix/*"
+      ]
     },
-
     "lib": [
       "dom",
       "es2015",
@@ -54,10 +65,14 @@
     //"src/**/*",
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/material-ui/*.js",
+    "src/mui-web/**/*.js",
     "node_modules/reactxx-mdi/typings.ts"
   ],
   "exclude": [
-    "src/ks/typings.d.ts"
+    "src/ks/typings.d.ts",
+    "src/trash",
+    //"src/ks/common/muix",
+    "src/muix/reactxx-mui-web"
+    //"src/muix/reactxx-mui-web/**/*"
   ]
 }

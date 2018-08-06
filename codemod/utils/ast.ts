@@ -22,6 +22,9 @@ export interface MUISourceInfo {
     origExists?: boolean
     adjustThemeProperties?: string[]
     adjustThemeMethods?: string[]
+    renderFunc?: Ast
+    isClass?: boolean
+    nameIsUppercase?: boolean
 }
 export interface FileDescr {
     path?: string
