@@ -1,0 +1,7 @@
+import createSvgIcon from './lib/create-svg-icon'
+
+export default createSvgIcon(
+  'phone-bluetooth-speaker',
+  'PhoneBluetoothSpeaker',
+  false
+)

@@ -52,6 +52,8 @@
     "src/**/*"
   ],
   "exclude": [
-    "src/ks/typings.d.ts"
+    "src/ks/typings.d.ts",
+    "src/icons/lib",
+    "src/icons/*.tsx"
   ]
 }

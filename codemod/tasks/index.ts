@@ -34,7 +34,7 @@ export const codeMod = () => {
     const { log, code } = readAllCodes()
 
     //try { fsExtra.rmdirSync(Config.reactxxMuiWebShapes) } catch { }
-    try { fsExtra.rmdirSync(Config.muiWeb_Typings) } catch { }
+    //try { fsExtra.rmdirSync(Config.muiWeb_Typings) } catch { }
 
     for (const path in log) {
         const logp = log[path]
@@ -135,6 +135,7 @@ const noKey = {
 export const readAllCodes = () => {
     const log: { [path: string]: Ast.MUISourceInfo } = {}
     const code: { [path: string]: Ast.Ast } = {}
+    const codeStr: { [path: string]: string } = {}
     const compileErrors = []
     getAllComponents().forEach(comp => {
         const path = `${comp[0]}/${comp[1]}`
@@ -149,47 +150,56 @@ export const readAllCodes = () => {
         const actPath = logItem.origExists ? logItem.origPath : logItem.srcPath
 
         // parse JS file
-        let root
-        try { root = Parser.parseFile(actPath) } catch { compileErrors.push(actPath); return }
+        let root: Ast.Ast, rootStr: string
+        try {
+            rootStr = fs.readFileSync(actPath, { encoding: 'utf-8' })
+            root = Parser.parseCode(rootStr)
+        } catch { compileErrors.push(actPath); return }
         code[path] = root
+        codeStr[path] = rootStr
         log[path] = logItem
 
-        // get withStyles or withTheme component name ...
-        const withStylesOrWithTheme = (name: string) => Queries.checkSingleResult(Ast.astq().query(root,
-            `/Program/* [ //CallExpression/CallExpression/Identifier [ @name=="${name}" ] ]`), true)
-        const withStyles = withStylesOrWithTheme('withStyles')
-        const withTheme = withStylesOrWithTheme('withTheme')
+        if (!Config.isDoc) {
 
-        // ... and put it to log
-        if (withTheme)
-            logItem.withTheme = true
-        else if (withStyles)
-            logItem.withStyles = true
+            // get withStyles or withTheme component name ...
+            const withStylesOrWithTheme = (name: string) => Queries.checkSingleResult(Ast.astq().query(root,
+                `/Program/* [ //CallExpression/CallExpression/Identifier [ @name=="${name}" ] ]`), true)
+            const withStyles = withStylesOrWithTheme('withStyles')
+            const withTheme = withStylesOrWithTheme('withTheme')
 
-        // finish logItem
-        logItem.renderFunc = Queries.getNode_functionGlobal(root, logItem.name, true)
-        if (!logItem.renderFunc) {
-            logItem.renderFunc = Queries.getNode_classMethod(root, logItem.name, 'render')
-            if (logItem.renderFunc)
-                logItem.isClass = true
+            // ... and put it to log
+            if (withTheme)
+                logItem.withTheme = true
+            else if (withStyles)
+                logItem.withStyles = true
+
+            // finish logItem
+            logItem.renderFunc = Queries.getNode_functionGlobal(root, logItem.name, true)
+            if (!logItem.renderFunc) {
+                logItem.renderFunc = Queries.getNode_classMethod(root, logItem.name, 'render')
+                if (logItem.renderFunc)
+                    logItem.isClass = true
+            }
+            logItem.nameIsUppercase = logItem.name.charAt(0).toLowerCase() !== logItem.name.charAt(0)
         }
-        logItem.nameIsUppercase = logItem.name.charAt(0).toLowerCase() !== logItem.name.charAt(0)
 
     })
     //const dump = JSON.stringify(log, null, 2)
-    return { log, code, compileErrors }
+    return { log, code, codeStr, compileErrors }
 }
 
-const getAllComponents = () => Glob.sync('/**/!(index).js', { root: Config.muiWeb }).
-    map(f => f.substr(Config.muiWeb.length)).
-    //filter(f => f.charAt(0) === f.charAt(0).toUpperCase()).
-    map(f => {
-        let res: any[] = f.substr(0, f.length - 3).split('\\')
-        if (res.length > 2) {
-            const names = res.slice(1)
-            res = [res[0], names.join('/')]
-        }
-        return res as [string, string]
-    }
-    )
+const getAllComponents = () => {
+    const root = Config.isDoc ? Config.patchOriginal : Config.muiWeb
+    return Glob.sync('/**/!(index).js', { root: root }).
+        map(f => f.substr(root.length)).
+        //filter(f => f.charAt(0) === f.charAt(0).toUpperCase()).
+        map(f => {
+            let res: any[] = f.substr(0, f.length - 3).split('\\')
+            if (res.length > 2) {
+                const names = res.slice(1)
+                res = [res[0], names.join('/')]
+            }
+            return res as [string, string]
+        })
+}
 

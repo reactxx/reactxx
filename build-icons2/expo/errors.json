@@ -1,0 +1,96 @@
+{
+  "brightness-1": {
+    "id": "brightness-1",
+    "isMdi": false,
+    "fontId": 58278,
+    "svg": null
+  },
+  "bubble-chart": {
+    "id": "bubble-chart",
+    "isMdi": false,
+    "fontId": 59101,
+    "svg": null
+  },
+  "fiber-manual-record": {
+    "id": "fiber-manual-record",
+    "isMdi": false,
+    "fontId": 57441,
+    "svg": null
+  },
+  "fiber-smart-record": {
+    "id": "fiber-smart-record",
+    "isMdi": false,
+    "fontId": 57442,
+    "svg": null
+  },
+  "allo": {
+    "id": "allo",
+    "isMdi": true,
+    "svg": null
+  },
+  "amazon-clouddrive": {
+    "id": "amazon-clouddrive",
+    "isMdi": true,
+    "svg": null
+  },
+  "apple-mobileme": {
+    "id": "apple-mobileme",
+    "isMdi": true,
+    "svg": null
+  },
+  "disk": {
+    "id": "disk",
+    "isMdi": true,
+    "svg": null
+  },
+  "disk-alert": {
+    "id": "disk-alert",
+    "isMdi": true,
+    "svg": null
+  },
+  "hangouts": {
+    "id": "hangouts",
+    "isMdi": true,
+    "svg": null
+  },
+  "martini": {
+    "id": "martini",
+    "isMdi": true,
+    "svg": null
+  },
+  "nest-protect": {
+    "id": "nest-protect",
+    "isMdi": true,
+    "svg": null
+  },
+  "nest-thermostat": {
+    "id": "nest-thermostat",
+    "isMdi": true,
+    "svg": null
+  },
+  "roomba": {
+    "id": "roomba",
+    "isMdi": true,
+    "svg": null
+  },
+  "stackexchange": {
+    "id": "stackexchange",
+    "isMdi": true,
+    "svg": null
+  },
+  "visualstudio": {
+    "id": "visualstudio",
+    "isMdi": true,
+    "svg": null
+  },
+  "youtube-play": {
+    "id": "youtube-play",
+    "isMdi": true,
+    "svg": null
+  },
+  "blank": {
+    "id": "blank",
+    "isMdi": true,
+    "svg": null
+  }
+}

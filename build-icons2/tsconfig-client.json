@@ -1,0 +1,28 @@
+﻿{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "watch": true,
+    "target": "es5",
+    "module":"system",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "rootDir": "web",
+    "outDir": "deploy-web",
+    "jsx": "react",
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "importHelpers": true,
+    "strictNullChecks": false,
+    "downlevelIteration": true,
+    "strict": true,
+    "lib": [
+      "dom",
+      "es2015",
+      "esnext.asynciterable"
+    ]
+  },
+  "include": [
+    "web/**/*.*",
+  ]
+}

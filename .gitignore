@@ -323,3 +323,6 @@ muix/src/ks
 !codemod/patch-original/**/*.js
 
 muix/tsconfig.json
+
+build-icons2/material-design-icons-master
+build-icons2/MaterialDesign-SVG-master

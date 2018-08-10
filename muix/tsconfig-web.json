@@ -48,6 +48,9 @@
       "reactxx": [
         "src/reactxx/web/index"
       ],
+      "reactxx-icons/*": [
+        "src/icons/*"
+      ],
       "reactxx-mui-web/*": [
         "src/mui-web/*"
       ],
@@ -71,7 +74,8 @@
   "exclude": [
     "src/ks/typings.d.ts",
     "src/trash",
-    //"src/ks/common/muix",
+    "src/ks/common/muix-doc",
+    "src/icons/native",
     "src/muix/reactxx-mui-web"
     //"src/muix/reactxx-mui-web/**/*"
   ]

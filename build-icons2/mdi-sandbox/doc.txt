@@ -1,0 +1,5 @@
+- https://petershaggynoble.github.io/MDI-Sandbox/
+- capture key event
+- format JS source
+- break on icon.keywords.some
+- stringify(icons.list) to data.json
