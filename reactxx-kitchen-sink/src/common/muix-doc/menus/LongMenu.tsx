@@ -1,75 +1,48 @@
 import React from 'react';
-import IconButton from 'reactxx-muix/current/IconButton';
-import Menu from 'reactxx-muix/current/Menu';
-import MenuItem from 'reactxx-muix/current/MenuItem';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-
-const options = [
-  'None',
-  'Atria',
-  'Callisto',
-  'Dione',
-  'Ganymede',
-  'Hangouts Call',
-  'Luna',
-  'Oberon',
-  'Phobos',
-  'Pyxis',
-  'Sedna',
-  'Titania',
-  'Triton',
-  'Umbriel',
-];
-
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import IconButton from 'reactxx-muix/current/IconButton/IconButton';
+import Menu from 'reactxx-muix/current/Menu/Menu';
+import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';
+import MoreVertIcon from 'reactxx-icons/MoreVert';
+const options = ['None', 'Atria', 'Callisto', 'Dione', 'Ganymede', 'Hangouts Call', 'Luna', 'Oberon', 'Phobos', 'Pyxis', 'Sedna', 'Titania', 'Triton', 'Umbriel'];
 const ITEM_HEIGHT = 48;
 
-class LongMenu extends React.Component {
-  state = {
-    anchorEl: null,
+class LongMenu extends React.Component<any, any> {
+  state: any = {
+    anchorEl: null
   };
-
   handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
+    this.setState({
+      anchorEl: event.currentTarget
+    });
   };
-
   handleClose = () => {
-    this.setState({ anchorEl: null });
+    this.setState({
+      anchorEl: null
+    });
   };
 
   render() {
-    const { anchorEl } = this.state;
-
-    return (
-      <div>
-        <IconButton
-          aria-label="More"
-          aria-owns={anchorEl ? 'long-menu' : null}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
+    const {
+      anchorEl
+    } = this.state;
+    return <div>
+        <IconButton aria-label="More" aria-owns={anchorEl ? 'long-menu' : null} aria-haspopup="true" onClick={this.handleClick}>
           <MoreVertIcon />
         </IconButton>
-        <Menu
-          id="long-menu"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={this.handleClose}
-          PaperProps={{
-            style: {
-              maxHeight: ITEM_HEIGHT * 4.5,
-              width: 200,
-            },
-          }}
-        >
-          {options.map(option => (
-            <MenuItem key={option} selected={option === 'Pyxis'} onClick={this.handleClose}>
+        <Menu id="long-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose} PaperProps={{
+        style: {
+          maxHeight: ITEM_HEIGHT * 4.5,
+          width: 200
+        }
+      }}>
+          {options.map(option => <MenuItem key={option} selected={option === 'Pyxis'} onClick={this.handleClose}>
               {option}
-            </MenuItem>
-          ))}
+            </MenuItem>)}
         </Menu>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 export default LongMenu;

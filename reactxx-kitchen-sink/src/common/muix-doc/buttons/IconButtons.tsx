@@ -1,25 +1,27 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Icon from 'reactxx-muix/current/Icon';
-import IconButton from 'reactxx-muix/current/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import Icon from 'reactxx-muix/current/Icon/Icon';
+import IconButton from 'reactxx-muix/current/IconButton/IconButton';
+import DeleteIcon from 'reactxx-icons/Delete';
+import AddShoppingCartIcon from 'reactxx-icons/AddShoppingCart';
+import PhotoCamera from 'reactxx-icons/PhotoCamera';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   },
   input: {
-    display: 'none',
-  },
+    display: 'none'
+  }
 });
 
 function IconButtons(props) {
-  const { classes } = props;
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  return <div>
       <IconButton className={classes.button} aria-label="Delete">
         <DeleteIcon />
       </IconButton>
@@ -32,18 +34,16 @@ function IconButtons(props) {
       <IconButton color="primary" className={classes.button} aria-label="Add to shopping cart">
         <AddShoppingCartIcon />
       </IconButton>
-      <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+      <input accept="image/*" className={classNamesStr(classes.input)} id="icon-button-file" type="file" />
       <label htmlFor="icon-button-file">
         <IconButton color="primary" className={classes.button} component="span">
           <PhotoCamera />
         </IconButton>
       </label>
-    </div>
-  );
+    </div>;
 }
 
-IconButtons.propTypes = {
-  classes: PropTypes.object.isRequired,
+IconButtons['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(IconButtons);
+export default withStylesCreator((styles as any), IconButtons)();

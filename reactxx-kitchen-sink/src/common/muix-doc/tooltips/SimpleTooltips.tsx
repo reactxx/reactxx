@@ -1,27 +1,29 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import AddIcon from '@material-ui/icons/Add';
-import Button from 'reactxx-muix/current/Button';
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from 'reactxx-muix/current/IconButton';
-import Tooltip from 'reactxx-muix/current/Tooltip';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import AddIcon from 'reactxx-icons/Add';
+import Button from 'reactxx-muix/current/Button/Button';
+import DeleteIcon from 'reactxx-icons/Delete';
+import IconButton from 'reactxx-muix/current/IconButton/IconButton';
+import Tooltip from 'reactxx-muix/current/Tooltip/Tooltip';
 
 const styles = theme => ({
   fab: {
-    margin: theme.spacing.unit * 2,
+    margin: theme.spacing.unit * 2
   },
   absolute: {
     position: 'absolute',
     bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 3,
-  },
+    right: theme.spacing.unit * 3
+  }
 });
 
 function SimpleTooltips(props) {
-  const { classes } = props;
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  return <div>
       <Tooltip title="Delete">
         <IconButton aria-label="Delete">
           <DeleteIcon />
@@ -37,12 +39,10 @@ function SimpleTooltips(props) {
           <AddIcon />
         </Button>
       </Tooltip>
-    </div>
-  );
+    </div>;
 }
 
-SimpleTooltips.propTypes = {
-  classes: PropTypes.object.isRequired,
+SimpleTooltips['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(SimpleTooltips);
+export default withStylesCreator((styles as any), SimpleTooltips)();

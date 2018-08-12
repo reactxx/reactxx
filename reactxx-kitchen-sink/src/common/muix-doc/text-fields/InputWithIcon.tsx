@@ -1,49 +1,38 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Input from 'reactxx-muix/current/Input';
-import InputLabel from 'reactxx-muix/current/InputLabel';
-import InputAdornment from 'reactxx-muix/current/InputAdornment';
-import FormControl from 'reactxx-muix/current/FormControl';
-import TextField from 'reactxx-muix/current/TextField';
-import Grid from 'reactxx-muix/current/Grid';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import Input from 'reactxx-muix/current/Input/Input';
+import InputLabel from 'reactxx-muix/current/InputLabel/InputLabel';
+import InputAdornment from 'reactxx-muix/current/InputAdornment/InputAdornment';
+import FormControl from 'reactxx-muix/current/FormControl/FormControl';
+import TextField from 'reactxx-muix/current/TextField/TextField';
+import Grid from 'reactxx-muix/current/Grid/Grid';
+import AccountCircle from 'reactxx-icons/AccountCircle';
 
 const styles = theme => ({
   margin: {
-    margin: theme.spacing.unit,
-  },
+    margin: theme.spacing.unit
+  }
 });
 
 function InputWithIcon(props) {
-  const { classes } = props;
-
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  return <div>
       <FormControl className={classes.margin}>
         <InputLabel htmlFor="input-with-icon-adornment">With a start adornment</InputLabel>
-        <Input
-          id="input-with-icon-adornment"
-          startAdornment={
-            <InputAdornment position="start">
+        <Input id="input-with-icon-adornment" startAdornment={<InputAdornment position="start">
               <AccountCircle />
-            </InputAdornment>
-          }
-        />
+            </InputAdornment>} />
       </FormControl>
-      <TextField
-        className={classes.margin}
-        id="input-with-icon-textfield"
-        label="TextField"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
+      <TextField className={classes.margin} id="input-with-icon-textfield" label="TextField" InputProps={{
+      startAdornment: <InputAdornment position="start">
               <AccountCircle />
             </InputAdornment>
-          ),
-        }}
-      />
-      <div className={classes.margin}>
+    }} />
+      <div className={classNamesStr(classes.margin)}>
         <Grid container spacing={8} alignItems="flex-end">
           <Grid item>
             <AccountCircle />
@@ -53,12 +42,10 @@ function InputWithIcon(props) {
           </Grid>
         </Grid>
       </div>
-    </div>
-  );
+    </div>;
 }
 
-InputWithIcon.propTypes = {
-  classes: PropTypes.object.isRequired,
+InputWithIcon['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(InputWithIcon);
+export default withStylesCreator((styles as any), InputWithIcon)();

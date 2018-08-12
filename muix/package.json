@@ -6,6 +6,7 @@
     "start": "npm run lite"
   },
   "dependencies": {
+    "@types/react-swipeable-views": "^0.12.2",
     "downshift": "^2.0.19",
     "keycode": "^2.2.0",
     "react": "^16.4.1",
@@ -51,6 +52,7 @@
       "core-js": "npm:core-js@^2.5.1",
       "deepmerge": "npm:deepmerge@^2.0.1",
       "react-number-format": "npm:react-number-format@^3.5.0",
+      "react-swipeable-views": "npm:react-swipeable-views@^0.12.16",
       "react-text-mask": "npm:react-text-mask@^5.4.3",
       "reactxx-mdi": "npm:reactxx-mdi@^0.1.67",
       "tslib": "npm:tslib@^1.9.0",
@@ -91,7 +93,7 @@
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
-      "react": "npm:react@^16.0.0",
+      "react": "npm:react@^16.3.0",
       "react-dom": "npm:react-dom@^16.4.1",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
@@ -131,4 +133,4 @@
       }
     }
   }
-}
+}

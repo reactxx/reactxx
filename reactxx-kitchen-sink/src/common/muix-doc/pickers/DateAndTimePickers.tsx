@@ -1,41 +1,33 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import TextField from 'reactxx-muix/current/TextField';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import TextField from 'reactxx-muix/current/TextField/TextField';
 
 const styles = theme => ({
   container: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap'
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200,
-  },
+    width: 200
+  }
 });
 
 function DateAndTimePickers(props) {
-  const { classes } = props;
-
-  return (
-    <form className={classes.container} noValidate>
-      <TextField
-        id="datetime-local"
-        label="Next appointment"
-        type="datetime-local"
-        defaultValue="2017-05-24T10:30"
-        className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-    </form>
-  );
+  const {
+    classes
+  } = props;
+  return <form className={classNamesStr(classes.container)} noValidate>
+      <TextField id="datetime-local" label="Next appointment" type="datetime-local" defaultValue="2017-05-24T10:30" className={classes.textField} InputLabelProps={{
+      shrink: true
+    }} />
+    </form>;
 }
 
-DateAndTimePickers.propTypes = {
-  classes: PropTypes.object.isRequired,
+DateAndTimePickers['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(DateAndTimePickers);
+export default withStylesCreator((styles as any), DateAndTimePickers)();

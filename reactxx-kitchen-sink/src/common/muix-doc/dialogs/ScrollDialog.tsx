@@ -1,36 +1,34 @@
 import React from 'react';
-import Button from 'reactxx-muix/current/Button';
-import Dialog from 'reactxx-muix/current/Dialog';
-import DialogActions from 'reactxx-muix/current/DialogActions';
-import DialogContent from 'reactxx-muix/current/DialogContent';
-import DialogContentText from 'reactxx-muix/current/DialogContentText';
-import DialogTitle from 'reactxx-muix/current/DialogTitle';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import Button from 'reactxx-muix/current/Button/Button';
+import Dialog from 'reactxx-muix/current/Dialog/Dialog';
+import DialogActions from 'reactxx-muix/current/DialogActions/DialogActions';
+import DialogContent from 'reactxx-muix/current/DialogContent/DialogContent';
+import DialogContentText from 'reactxx-muix/current/DialogContentText/DialogContentText';
+import DialogTitle from 'reactxx-muix/current/DialogTitle/DialogTitle';
 
-class ScrollDialog extends React.Component {
-  state = {
+class ScrollDialog extends React.Component<any, any> {
+  state: any = {
     open: false,
-    scroll: 'paper',
+    scroll: 'paper'
   };
-
   handleClickOpen = scroll => () => {
-    this.setState({ open: true, scroll });
+    this.setState({
+      open: true,
+      scroll
+    });
   };
-
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false
+    });
   };
 
   render() {
-    return (
-      <div>
+    return <div>
         <Button onClick={this.handleClickOpen('paper')}>scroll=paper</Button>
         <Button onClick={this.handleClickOpen('body')}>scroll=body</Button>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          scroll={this.state.scroll}
-          aria-labelledby="scroll-dialog-title"
-        >
+        <Dialog open={this.state.open} onClose={this.handleClose} scroll={this.state.scroll} aria-labelledby="scroll-dialog-title">
           <DialogTitle id="scroll-dialog-title">Subscribe</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -81,9 +79,9 @@ class ScrollDialog extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 export default ScrollDialog;

@@ -1,27 +1,26 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import LinearProgress from 'reactxx-muix/current/LinearProgress';
-
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import LinearProgress from 'reactxx-muix/current/LinearProgress/LinearProgress';
 const styles = {
   root: {
-    flexGrow: 1,
-  },
+    flexGrow: 1
+  }
 };
 
 function LinearIndeterminate(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classNamesStr(classes.root)}>
       <LinearProgress />
       <br />
       <LinearProgress color="secondary" />
-    </div>
-  );
+    </div>;
 }
 
-LinearIndeterminate.propTypes = {
-  classes: PropTypes.object.isRequired,
+LinearIndeterminate['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(LinearIndeterminate);
+export default withStylesCreator((styles as any), LinearIndeterminate)();

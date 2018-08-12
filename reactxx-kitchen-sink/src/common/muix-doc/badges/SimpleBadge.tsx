@@ -1,28 +1,30 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Badge from 'reactxx-muix/current/Badge';
-import IconButton from 'reactxx-muix/current/IconButton';
-import MailIcon from '@material-ui/icons/Mail';
-import AppBar from 'reactxx-muix/current/AppBar';
-import Tabs from 'reactxx-muix/current/Tabs';
-import Tab from 'reactxx-muix/current/Tab';
-import Typography from 'reactxx-muix/current/Typography';
-import Button from 'reactxx-muix/current/Button';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import Badge from 'reactxx-muix/current/Badge/Badge';
+import IconButton from 'reactxx-muix/current/IconButton/IconButton';
+import MailIcon from 'reactxx-icons/Mail';
+import AppBar from 'reactxx-muix/current/AppBar/AppBar';
+import Tabs from 'reactxx-muix/current/Tabs/Tabs';
+import Tab from 'reactxx-muix/current/Tab/Tab';
+import Typography from 'reactxx-muix/current/Typography/Typography';
+import Button from 'reactxx-muix/current/Button/Button';
 
 const styles = theme => ({
   margin: {
-    margin: theme.spacing.unit * 2,
+    margin: theme.spacing.unit * 2
   },
   padding: {
-    padding: `0 ${theme.spacing.unit * 2}px`,
-  },
+    padding: `0 ${theme.spacing.unit * 2}px`
+  }
 });
 
 function SimpleBadge(props) {
-  const { classes } = props;
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  return <div>
       <div>
         <Badge className={classes.margin} badgeContent={4} color="primary">
           <MailIcon />
@@ -38,13 +40,9 @@ function SimpleBadge(props) {
       </div>
       <AppBar position="static" className={classes.margin}>
         <Tabs value={0}>
-          <Tab
-            label={
-              <Badge className={classes.padding} color="secondary" badgeContent={4}>
+          <Tab label={<Badge className={classes.padding} color="secondary" badgeContent={4}>
                 Item One
-              </Badge>
-            }
-          />
+              </Badge>} />
           <Tab label="Item Two" />
           <Tab label="Item Three" />
         </Tabs>
@@ -55,12 +53,10 @@ function SimpleBadge(props) {
       <Badge color="primary" badgeContent={4} className={classes.margin}>
         <Button variant="contained">Button</Button>
       </Badge>
-    </div>
-  );
+    </div>;
 }
 
-SimpleBadge.propTypes = {
-  classes: PropTypes.object.isRequired,
+SimpleBadge['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(SimpleBadge);
+export default withStylesCreator((styles as any), SimpleBadge)();

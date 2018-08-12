@@ -1,38 +1,36 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import Button from 'reactxx-muix/current/Button';
-import Dialog from 'reactxx-muix/current/Dialog';
-import DialogActions from 'reactxx-muix/current/DialogActions';
-import DialogContent from 'reactxx-muix/current/DialogContent';
-import DialogContentText from 'reactxx-muix/current/DialogContentText';
-import DialogTitle from 'reactxx-muix/current/DialogTitle';
-import withMobileDialog from 'reactxx-muix/current/withMobileDialog';
+import Button from 'reactxx-muix/current/Button/Button';
+import Dialog from 'reactxx-muix/current/Dialog/Dialog';
+import DialogActions from 'reactxx-muix/current/DialogActions/DialogActions';
+import DialogContent from 'reactxx-muix/current/DialogContent/DialogContent';
+import DialogContentText from 'reactxx-muix/current/DialogContentText/DialogContentText';
+import DialogTitle from 'reactxx-muix/current/DialogTitle/DialogTitle';
+import withMobileDialog from 'reactxx-mui-web/withMobileDialog';
 
-class ResponsiveDialog extends React.Component {
-  state = {
-    open: false,
+class ResponsiveDialog extends React.Component<any, any> {
+  state: any = {
+    open: false
   };
-
   handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({
+      open: true
+    });
   };
-
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false
+    });
   };
 
   render() {
-    const { fullScreen } = this.props;
-
-    return (
-      <div>
+    const {
+      fullScreen
+    } = this.props;
+    return <div>
         <Button onClick={this.handleClickOpen}>Open responsive dialog</Button>
-        <Dialog
-          fullScreen={fullScreen}
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="responsive-dialog-title"
-        >
+        <Dialog fullScreen={fullScreen} open={this.state.open} onClose={this.handleClose} aria-labelledby="responsive-dialog-title">
           <DialogTitle id="responsive-dialog-title">{"Use Google's location service?"}</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -49,13 +47,12 @@ class ResponsiveDialog extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
-    );
+      </div>;
   }
+
 }
 
-ResponsiveDialog.propTypes = {
-  fullScreen: PropTypes.bool.isRequired,
+ResponsiveDialog['propTypes'] = {
+  fullScreen: PropTypes.bool.isRequired
 };
-
 export default withMobileDialog()(ResponsiveDialog);

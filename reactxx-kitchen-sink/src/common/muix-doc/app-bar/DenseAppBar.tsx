@@ -1,26 +1,27 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import AppBar from 'reactxx-muix/current/AppBar';
-import Toolbar from 'reactxx-muix/current/Toolbar';
-import Typography from 'reactxx-muix/current/Typography';
-import IconButton from 'reactxx-muix/current/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import AppBar from 'reactxx-muix/current/AppBar/AppBar';
+import Toolbar from 'reactxx-muix/current/Toolbar/Toolbar';
+import Typography from 'reactxx-muix/current/Typography/Typography';
+import IconButton from 'reactxx-muix/current/IconButton/IconButton';
+import MenuIcon from 'reactxx-icons/Menu';
 const styles = {
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
     marginLeft: -18,
-    marginRight: 10,
-  },
+    marginRight: 10
+  }
 };
 
 function DenseAppBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classNamesStr(classes.root)}>
       <AppBar position="static">
         <Toolbar variant="dense">
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
@@ -31,12 +32,10 @@ function DenseAppBar(props) {
           </Typography>
         </Toolbar>
       </AppBar>
-    </div>
-  );
+    </div>;
 }
 
-DenseAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
+DenseAppBar['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(DenseAppBar);
+export default withStylesCreator((styles as any), DenseAppBar)();

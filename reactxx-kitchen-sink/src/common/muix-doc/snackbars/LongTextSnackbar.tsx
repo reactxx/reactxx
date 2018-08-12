@@ -1,53 +1,34 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import Button from 'reactxx-muix/current/Button';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import SnackbarContent from 'reactxx-muix/current/SnackbarContent';
-
-const action = (
-  <Button color="secondary" size="small">
+import Button from 'reactxx-muix/current/Button/Button';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import SnackbarContent from 'reactxx-muix/current/SnackbarContent/SnackbarContent';
+const action = <Button color="secondary" size="small">
     lorem ipsum dolorem
-  </Button>
-);
+  </Button>;
 
 const styles = theme => ({
   snackbar: {
-    margin: theme.spacing.unit,
-  },
+    margin: theme.spacing.unit
+  }
 });
 
 function LongTextSnackbar(props) {
-  const { classes } = props;
-
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  return <div>
       <SnackbarContent className={classes.snackbar} message="I love snacks." action={action} />
-      <SnackbarContent
-        className={classes.snackbar}
-        message={
-          'I love candy. I love cookies. I love cupcakes. \
-          I love cheesecake. I love chocolate.'
-        }
-      />
-      <SnackbarContent
-        className={classes.snackbar}
-        message="I love candy. I love cookies. I love cupcakes."
-        action={action}
-      />
-      <SnackbarContent
-        className={classes.snackbar}
-        message={
-          'I love candy. I love cookies. I love cupcakes. \
-          I love cheesecake. I love chocolate.'
-        }
-        action={action}
-      />
-    </div>
-  );
+      <SnackbarContent className={classes.snackbar} message={'I love candy. I love cookies. I love cupcakes. \
+          I love cheesecake. I love chocolate.'} />
+      <SnackbarContent className={classes.snackbar} message="I love candy. I love cookies. I love cupcakes." action={action} />
+      <SnackbarContent className={classes.snackbar} message={'I love candy. I love cookies. I love cupcakes. \
+          I love cheesecake. I love chocolate.'} action={action} />
+    </div>;
 }
 
-LongTextSnackbar.propTypes = {
-  classes: PropTypes.object.isRequired,
+LongTextSnackbar['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(LongTextSnackbar);
+export default withStylesCreator((styles as any), LongTextSnackbar)();

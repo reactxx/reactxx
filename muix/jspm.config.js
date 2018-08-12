@@ -24,7 +24,8 @@ SystemJS.config({
     "reactxx-mediaq": "deploy/lib/mediaq/web/index",
     "reactxx": "deploy/lib/reactxx/web/index",
     "reactxx-mui-web": "deploy/lib/mui-web",
-    "reactxx-muix": "deploy/lib/muix",
+    "reactxx-icons": "deploy/lib/icons",
+    "reactxx-muix": "deploy/lib/muix"
   }
 });
 
@@ -34,6 +35,7 @@ SystemJS.config({
     "npm:*.json"
   ],
   map: {
+    "react-swipeable-views": "npm:react-swipeable-views@0.12.16",
     "@types/react": "npm:@types/react@16.4.7",
     "react-number-format": "npm:react-number-format@3.5.0",
     "react-text-mask": "npm:react-text-mask@5.4.3",
@@ -81,7 +83,7 @@ SystemJS.config({
     "prop-types": "npm:prop-types@15.6.2",
     "react": "npm:react@16.4.1",
     "react-dom": "npm:react-dom@16.4.1",
-    "react-event-listener": "npm:react-event-listener@0.6.1",
+    "react-event-listener": "npm:react-event-listener@0.6.2",
     "react-jss": "npm:react-jss@8.6.1",
     "react-popper": "npm:react-popper@0.10.4",
     "react-transition-group": "npm:react-transition-group@2.4.0",
@@ -130,13 +132,6 @@ SystemJS.config({
         "css-in-js-utils": "npm:css-in-js-utils@2.0.1",
         "inline-style-prefixer": "npm:inline-style-prefixer@4.0.2",
         "fast-loops": "npm:fast-loops@1.0.1"
-      }
-    },
-    "npm:react-event-listener@0.6.1": {
-      "map": {
-        "warning": "npm:warning@4.0.1",
-        "prop-types": "npm:prop-types@15.6.2",
-        "@babel/runtime": "npm:@babel/runtime@7.0.0-beta.54"
       }
     },
     "npm:jss-nested@6.0.1": {
@@ -400,12 +395,6 @@ SystemJS.config({
         "fela-plugin-remove-undefined": "npm:fela-plugin-remove-undefined@5.0.21"
       }
     },
-    "npm:@babel/runtime@7.0.0-beta.54": {
-      "map": {
-        "core-js": "npm:core-js@2.5.7",
-        "regenerator-runtime": "npm:regenerator-runtime@0.12.0"
-      }
-    },
     "npm:fela-dom@7.0.9": {
       "map": {
         "css-in-js-utils": "npm:css-in-js-utils@2.0.1",
@@ -484,7 +473,7 @@ SystemJS.config({
         "create-hash": "npm:create-hash@1.2.0",
         "create-hmac": "npm:create-hmac@1.1.7",
         "inherits": "npm:inherits@2.0.3",
-        "elliptic": "npm:elliptic@6.4.0",
+        "elliptic": "npm:elliptic@6.4.1",
         "browserify-rsa": "npm:browserify-rsa@4.0.1",
         "parse-asn1": "npm:parse-asn1@5.1.1",
         "bn.js": "npm:bn.js@4.11.8"
@@ -533,7 +522,7 @@ SystemJS.config({
     },
     "npm:create-ecdh@4.0.3": {
       "map": {
-        "elliptic": "npm:elliptic@6.4.0",
+        "elliptic": "npm:elliptic@6.4.1",
         "bn.js": "npm:bn.js@4.11.8"
       }
     },
@@ -598,17 +587,6 @@ SystemJS.config({
       "map": {
         "inherits": "npm:inherits@2.0.3",
         "safe-buffer": "npm:safe-buffer@5.1.2"
-      }
-    },
-    "npm:elliptic@6.4.0": {
-      "map": {
-        "inherits": "npm:inherits@2.0.3",
-        "bn.js": "npm:bn.js@4.11.8",
-        "minimalistic-crypto-utils": "npm:minimalistic-crypto-utils@1.0.1",
-        "hash.js": "npm:hash.js@1.1.5",
-        "brorand": "npm:brorand@1.1.0",
-        "hmac-drbg": "npm:hmac-drbg@1.0.1",
-        "minimalistic-assert": "npm:minimalistic-assert@1.0.1"
       }
     },
     "npm:browserify-rsa@4.0.1": {
@@ -716,6 +694,56 @@ SystemJS.config({
       "map": {
         "base64-js": "npm:base64-js@1.3.0",
         "ieee754": "npm:ieee754@1.1.12"
+      }
+    },
+    "npm:react-swipeable-views@0.12.16": {
+      "map": {
+        "dom-helpers": "npm:dom-helpers@3.3.1",
+        "warning": "npm:warning@4.0.1",
+        "prop-types": "npm:prop-types@15.6.2",
+        "@babel/runtime": "npm:@babel/runtime@7.0.0-beta.42",
+        "react-swipeable-views-core": "npm:react-swipeable-views-core@0.12.16",
+        "react-swipeable-views-utils": "npm:react-swipeable-views-utils@0.12.16"
+      }
+    },
+    "npm:@babel/runtime@7.0.0-beta.42": {
+      "map": {
+        "regenerator-runtime": "npm:regenerator-runtime@0.11.1",
+        "core-js": "npm:core-js@2.5.7"
+      }
+    },
+    "npm:react-swipeable-views-core@0.12.16": {
+      "map": {
+        "@babel/runtime": "npm:@babel/runtime@7.0.0-beta.42",
+        "warning": "npm:warning@4.0.1"
+      }
+    },
+    "npm:react-swipeable-views-utils@0.12.16": {
+      "map": {
+        "@babel/runtime": "npm:@babel/runtime@7.0.0-beta.42",
+        "fbjs": "npm:fbjs@0.8.17",
+        "prop-types": "npm:prop-types@15.6.2",
+        "react-swipeable-views-core": "npm:react-swipeable-views-core@0.12.16",
+        "keycode": "npm:keycode@2.2.0",
+        "react-event-listener": "npm:react-event-listener@0.6.2"
+      }
+    },
+    "npm:react-event-listener@0.6.2": {
+      "map": {
+        "@babel/runtime": "npm:@babel/runtime@7.0.0-beta.42",
+        "prop-types": "npm:prop-types@15.6.2",
+        "warning": "npm:warning@4.0.1"
+      }
+    },
+    "npm:elliptic@6.4.1": {
+      "map": {
+        "bn.js": "npm:bn.js@4.11.8",
+        "inherits": "npm:inherits@2.0.3",
+        "brorand": "npm:brorand@1.1.0",
+        "hash.js": "npm:hash.js@1.1.5",
+        "hmac-drbg": "npm:hmac-drbg@1.0.1",
+        "minimalistic-crypto-utils": "npm:minimalistic-crypto-utils@1.0.1",
+        "minimalistic-assert": "npm:minimalistic-assert@1.0.1"
       }
     }
   }

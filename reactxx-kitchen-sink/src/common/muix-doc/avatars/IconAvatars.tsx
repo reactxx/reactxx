@@ -1,37 +1,38 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import pink from 'reactxx-muix/current/colors/pink';
-import green from 'reactxx-muix/current/colors/green';
-import Avatar from 'reactxx-muix/current/Avatar';
-import FolderIcon from '@material-ui/icons/Folder';
-import PageviewIcon from '@material-ui/icons/Pageview';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import pink from 'reactxx-mui-web/colors/pink';
+import green from 'reactxx-mui-web/colors/green';
+import Avatar from 'reactxx-muix/current/Avatar/Avatar';
+import FolderIcon from 'reactxx-icons/Folder';
+import PageviewIcon from 'reactxx-icons/Pageview';
+import AssignmentIcon from 'reactxx-icons/Assignment';
 const styles = {
   avatar: {
-    margin: 10,
+    margin: 10
   },
   pinkAvatar: {
     margin: 10,
     color: '#fff',
-    backgroundColor: pink[500],
+    backgroundColor: pink[500]
   },
   greenAvatar: {
     margin: 10,
     color: '#fff',
-    backgroundColor: green[500],
+    backgroundColor: green[500]
   },
   row: {
     display: 'flex',
-    justifyContent: 'center',
-  },
+    justifyContent: 'center'
+  }
 };
 
 function IconAvatars(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.row}>
+  const {
+    classes
+  } = props;
+  return <div className={classNamesStr(classes.row)}>
       <Avatar className={classes.avatar}>
         <FolderIcon />
       </Avatar>
@@ -41,12 +42,10 @@ function IconAvatars(props) {
       <Avatar className={classes.greenAvatar}>
         <AssignmentIcon />
       </Avatar>
-    </div>
-  );
+    </div>;
 }
 
-IconAvatars.propTypes = {
-  classes: PropTypes.object.isRequired,
+IconAvatars['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(IconAvatars);
+export default withStylesCreator((styles as any), IconAvatars)();

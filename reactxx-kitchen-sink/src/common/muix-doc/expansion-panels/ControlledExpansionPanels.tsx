@@ -1,44 +1,46 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import ExpansionPanel from 'reactxx-muix/current/ExpansionPanel';
-import ExpansionPanelDetails from 'reactxx-muix/current/ExpansionPanelDetails';
-import ExpansionPanelSummary from 'reactxx-muix/current/ExpansionPanelSummary';
-import Typography from 'reactxx-muix/current/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import ExpansionPanel from 'reactxx-muix/current/ExpansionPanel/ExpansionPanel';
+import ExpansionPanelDetails from 'reactxx-muix/current/ExpansionPanelDetails/ExpansionPanelDetails';
+import ExpansionPanelSummary from 'reactxx-muix/current/ExpansionPanelSummary/ExpansionPanelSummary';
+import Typography from 'reactxx-muix/current/Typography/Typography';
+import ExpandMoreIcon from 'reactxx-icons/ExpandMore';
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: '100%'
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
-    flexShrink: 0,
+    flexShrink: 0
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
-  },
+    color: theme.palette.text.secondary
+  }
 });
 
-class ControlledExpansionPanels extends React.Component {
-  state = {
-    expanded: null,
+class ControlledExpansionPanels extends React.Component<any, any> {
+  state: any = {
+    expanded: null
   };
-
   handleChange = panel => (event, expanded) => {
     this.setState({
-      expanded: expanded ? panel : false,
+      expanded: expanded ? panel : false
     });
   };
 
   render() {
-    const { classes } = this.props;
-    const { expanded } = this.state;
-
-    return (
-      <div className={classes.root}>
+    const {
+      classes
+    } = this.props;
+    const {
+      expanded
+    } = this.state;
+    return <div className={classNamesStr(classes.root)}>
         <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>General settings</Typography>
@@ -90,13 +92,12 @@ class ControlledExpansionPanels extends React.Component {
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
-      </div>
-    );
+      </div>;
   }
+
 }
 
-ControlledExpansionPanels.propTypes = {
-  classes: PropTypes.object.isRequired,
+ControlledExpansionPanels['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(ControlledExpansionPanels);
+export default withStylesCreator((styles as any), ControlledExpansionPanels)();

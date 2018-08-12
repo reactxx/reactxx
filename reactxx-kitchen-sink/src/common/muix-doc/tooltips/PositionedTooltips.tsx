@@ -1,20 +1,21 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Grid from 'reactxx-muix/current/Grid';
-import Button from 'reactxx-muix/current/Button';
-import Tooltip from 'reactxx-muix/current/Tooltip';
-
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import Grid from 'reactxx-muix/current/Grid/Grid';
+import Button from 'reactxx-muix/current/Button/Button';
+import Tooltip from 'reactxx-muix/current/Tooltip/Tooltip';
 const styles = {
   root: {
-    width: 500,
-  },
+    width: 500
+  }
 };
 
 function PositionedTooltips(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classNamesStr(classes.root)}>
       <Grid container justify="center">
         <Grid item>
           <Tooltip title="Add" placement="top-start">
@@ -73,12 +74,10 @@ function PositionedTooltips(props) {
           </Tooltip>
         </Grid>
       </Grid>
-    </div>
-  );
+    </div>;
 }
 
-PositionedTooltips.propTypes = {
-  classes: PropTypes.object.isRequired,
+PositionedTooltips['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(PositionedTooltips);
+export default withStylesCreator((styles as any), PositionedTooltips)();

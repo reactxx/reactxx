@@ -1,46 +1,47 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import ListSubheader from 'reactxx-muix/current/ListSubheader';
-import List from 'reactxx-muix/current/List';
-import ListItem from 'reactxx-muix/current/ListItem';
-import ListItemIcon from 'reactxx-muix/current/ListItemIcon';
-import ListItemText from 'reactxx-muix/current/ListItemText';
-import Collapse from 'reactxx-muix/current/Collapse';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import ListSubheader from 'reactxx-muix/current/ListSubheader/ListSubheader';
+import List from 'reactxx-muix/current/List/List';
+import ListItem from 'reactxx-muix/current/ListItem/ListItem';
+import ListItemIcon from 'reactxx-muix/current/ListItemIcon/ListItemIcon';
+import ListItemText from 'reactxx-muix/current/ListItemText/ListItemText';
+import Collapse from 'reactxx-muix/current/Collapse/Collapse';
+import InboxIcon from 'reactxx-icons/MoveToInbox';
+import DraftsIcon from 'reactxx-icons/Drafts';
+import SendIcon from 'reactxx-icons/Send';
+import ExpandLess from 'reactxx-icons/ExpandLess';
+import ExpandMore from 'reactxx-icons/ExpandMore';
+import StarBorder from 'reactxx-icons/StarBorder';
 
 const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   nested: {
-    paddingLeft: theme.spacing.unit * 4,
-  },
+    paddingLeft: theme.spacing.unit * 4
+  }
 });
 
-class NestedList extends React.Component {
-  state = { open: true };
-
+class NestedList extends React.Component<any, any> {
+  state: any = {
+    open: true
+  };
   handleClick = () => {
-    this.setState(state => ({ open: !state.open }));
+    this.setState(state => ({
+      open: !state.open
+    }));
   };
 
   render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
-        <List
-          component="nav"
-          subheader={<ListSubheader component="div">Nested List Items</ListSubheader>}
-        >
+    const {
+      classes
+    } = this.props;
+    return <div className={classNamesStr(classes.root)}>
+        <List component="nav" subheader={<ListSubheader component="div">Nested List Items</ListSubheader>}>
           <ListItem button>
             <ListItemIcon>
               <SendIcon />
@@ -71,13 +72,12 @@ class NestedList extends React.Component {
             </List>
           </Collapse>
         </List>
-      </div>
-    );
+      </div>;
   }
+
 }
 
-NestedList.propTypes = {
-  classes: PropTypes.object.isRequired,
+NestedList['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(NestedList);
+export default withStylesCreator((styles as any), NestedList)();

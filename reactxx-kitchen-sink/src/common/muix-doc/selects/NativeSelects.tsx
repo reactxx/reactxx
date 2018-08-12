@@ -1,53 +1,50 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Input from 'reactxx-muix/current/Input';
-import InputLabel from 'reactxx-muix/current/InputLabel';
-import FormHelperText from 'reactxx-muix/current/FormHelperText';
-import FormControl from 'reactxx-muix/current/FormControl';
-import Select from 'reactxx-muix/current/Select';
-import NativeSelect from 'reactxx-muix/current/NativeSelect';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import Input from 'reactxx-muix/current/Input/Input';
+import InputLabel from 'reactxx-muix/current/InputLabel/InputLabel';
+import FormHelperText from 'reactxx-muix/current/FormHelperText/FormHelperText';
+import FormControl from 'reactxx-muix/current/FormControl/FormControl';
+import Select from 'reactxx-muix/current/Select/Select';
+import NativeSelect from 'reactxx-muix/current/NativeSelect/NativeSelect';
 
 const styles = theme => ({
   root: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap'
   },
   formControl: {
     margin: theme.spacing.unit,
-    minWidth: 120,
+    minWidth: 120
   },
   selectEmpty: {
-    marginTop: theme.spacing.unit * 2,
-  },
+    marginTop: theme.spacing.unit * 2
+  }
 });
 
-class NativeSelects extends React.Component {
-  state = {
+class NativeSelects extends React.Component<any, any> {
+  state: any = {
     age: '',
-    name: 'hai',
+    name: 'hai'
   };
-
   handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
+    this.setState({
+      [name]: event.target.value
+    });
   };
 
   render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
+    const {
+      classes
+    } = this.props;
+    return <div className={classNamesStr(classes.root)}>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="age-native-simple">Age</InputLabel>
-          <Select
-            native
-            value={this.state.age}
-            onChange={this.handleChange('age')}
-            inputProps={{
-              name: 'age',
-              id: 'age-native-simple',
-            }}
-          >
+          <Select native value={this.state.age} onChange={this.handleChange('age')} inputProps={{
+          name: 'age',
+          id: 'age-native-simple'
+        }}>
             <option value="" />
             <option value={10}>Ten</option>
             <option value={20}>Twenty</option>
@@ -56,11 +53,7 @@ class NativeSelects extends React.Component {
         </FormControl>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="age-native-helper">Age</InputLabel>
-          <NativeSelect
-            value={this.state.age}
-            onChange={this.handleChange('age')}
-            input={<Input name="age" id="age-native-helper" />}
-          >
+          <NativeSelect value={this.state.age} onChange={this.handleChange('age')} input={<Input name="age" id="age-native-helper" />}>
             <option value="" />
             <option value={10}>Ten</option>
             <option value={20}>Twenty</option>
@@ -69,12 +62,7 @@ class NativeSelects extends React.Component {
           <FormHelperText>Some important helper text</FormHelperText>
         </FormControl>
         <FormControl className={classes.formControl}>
-          <NativeSelect
-            value={this.state.age}
-            onChange={this.handleChange('age')}
-            name="age"
-            className={classes.selectEmpty}
-          >
+          <NativeSelect value={this.state.age} onChange={this.handleChange('age')} name="age" className={classes.selectEmpty}>
             <option value="">None</option>
             <option value={10}>Ten</option>
             <option value={20}>Twenty</option>
@@ -86,11 +74,7 @@ class NativeSelects extends React.Component {
           <InputLabel shrink htmlFor="age-native-label-placeholder">
             Age
           </InputLabel>
-          <NativeSelect
-            value={this.state.age}
-            onChange={this.handleChange('age')}
-            input={<Input name="age" id="age-native-label-placeholder" />}
-          >
+          <NativeSelect value={this.state.age} onChange={this.handleChange('age')} input={<Input name="age" id="age-native-label-placeholder" />}>
             <option value="">None</option>
             <option value={10}>Ten</option>
             <option value={20}>Twenty</option>
@@ -100,11 +84,7 @@ class NativeSelects extends React.Component {
         </FormControl>
         <FormControl className={classes.formControl} disabled>
           <InputLabel htmlFor="name-native-disabled">Name</InputLabel>
-          <NativeSelect
-            value={this.state.name}
-            onChange={this.handleChange('name')}
-            input={<Input name="name" id="name-native-disabled" />}
-          >
+          <NativeSelect value={this.state.name} onChange={this.handleChange('name')} input={<Input name="name" id="name-native-disabled" />}>
             <option value="" />
             <optgroup label="Author">
               <option value="hai">Hai</option>
@@ -118,12 +98,7 @@ class NativeSelects extends React.Component {
         </FormControl>
         <FormControl className={classes.formControl} error>
           <InputLabel htmlFor="name-native-error">Name</InputLabel>
-          <NativeSelect
-            value={this.state.name}
-            onChange={this.handleChange('name')}
-            name="name"
-            input={<Input id="name-native-error" />}
-          >
+          <NativeSelect value={this.state.name} onChange={this.handleChange('name')} name="name" input={<Input id="name-native-error" />}>
             <option value="" />
             <optgroup label="Author">
               <option value="hai">Hai</option>
@@ -146,12 +121,7 @@ class NativeSelects extends React.Component {
           <FormHelperText>Uncontrolled</FormHelperText>
         </FormControl>
         <FormControl className={classes.formControl}>
-          <NativeSelect
-            className={classes.selectEmpty}
-            value={this.state.age}
-            name="age"
-            onChange={this.handleChange('age')}
-          >
+          <NativeSelect className={classes.selectEmpty} value={this.state.age} name="age" onChange={this.handleChange('age')}>
             <option value="" disabled>
               Placeholder
             </option>
@@ -163,15 +133,9 @@ class NativeSelects extends React.Component {
         </FormControl>
         <FormControl required className={classes.formControl}>
           <InputLabel htmlFor="age-native-required">Age</InputLabel>
-          <Select
-            native
-            value={this.state.age}
-            onChange={this.handleChange('age')}
-            name="age"
-            inputProps={{
-              id: 'age-native-required',
-            }}
-          >
+          <Select native value={this.state.age} onChange={this.handleChange('age')} name="age" inputProps={{
+          id: 'age-native-required'
+        }}>
             <option value="" />
             <option value={10}>Ten</option>
             <option value={20}>Twenty</option>
@@ -179,13 +143,12 @@ class NativeSelects extends React.Component {
           </Select>
           <FormHelperText>Required</FormHelperText>
         </FormControl>
-      </div>
-    );
+      </div>;
   }
+
 }
 
-NativeSelects.propTypes = {
-  classes: PropTypes.object.isRequired,
+NativeSelects['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(NativeSelects);
+export default withStylesCreator((styles as any), NativeSelects)();

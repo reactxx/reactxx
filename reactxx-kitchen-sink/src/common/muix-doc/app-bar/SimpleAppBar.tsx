@@ -1,20 +1,21 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import AppBar from 'reactxx-muix/current/AppBar';
-import Toolbar from 'reactxx-muix/current/Toolbar';
-import Typography from 'reactxx-muix/current/Typography';
-
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import AppBar from 'reactxx-muix/current/AppBar/AppBar';
+import Toolbar from 'reactxx-muix/current/Toolbar/Toolbar';
+import Typography from 'reactxx-muix/current/Typography/Typography';
 const styles = {
   root: {
-    flexGrow: 1,
-  },
+    flexGrow: 1
+  }
 };
 
 function SimpleAppBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classNamesStr(classes.root)}>
       <AppBar position="static" color="default">
         <Toolbar>
           <Typography variant="title" color="inherit">
@@ -22,12 +23,10 @@ function SimpleAppBar(props) {
           </Typography>
         </Toolbar>
       </AppBar>
-    </div>
-  );
+    </div>;
 }
 
-SimpleAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
+SimpleAppBar['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(SimpleAppBar);
+export default withStylesCreator((styles as any), SimpleAppBar)();

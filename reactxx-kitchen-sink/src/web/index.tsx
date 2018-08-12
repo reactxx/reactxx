@@ -31,8 +31,10 @@ import ReactDOM from 'react-dom'
 //import App from '../common/muix/badge'
 //import App from '../common/muix/bottom-navigation'
 //import App from '../common/muix/cards'
-import App from '../common/muix/chips'
+//import App from '../common/muix/chips'
 //import App from '../common/muix/dialogs'
+
+import App from '../common/muix-doc/app-bar/index'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

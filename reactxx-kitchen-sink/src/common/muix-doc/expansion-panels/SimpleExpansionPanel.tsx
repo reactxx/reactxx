@@ -1,26 +1,28 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import ExpansionPanel from 'reactxx-muix/current/ExpansionPanel';
-import ExpansionPanelSummary from 'reactxx-muix/current/ExpansionPanelSummary';
-import ExpansionPanelDetails from 'reactxx-muix/current/ExpansionPanelDetails';
-import Typography from 'reactxx-muix/current/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import ExpansionPanel from 'reactxx-muix/current/ExpansionPanel/ExpansionPanel';
+import ExpansionPanelSummary from 'reactxx-muix/current/ExpansionPanelSummary/ExpansionPanelSummary';
+import ExpansionPanelDetails from 'reactxx-muix/current/ExpansionPanelDetails/ExpansionPanelDetails';
+import Typography from 'reactxx-muix/current/Typography/Typography';
+import ExpandMoreIcon from 'reactxx-icons/ExpandMore';
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: '100%'
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
+    fontWeight: theme.typography.fontWeightRegular
+  }
 });
 
 function SimpleExpansionPanel(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classNamesStr(classes.root)}>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.heading}>Expansion Panel 1</Typography>
@@ -48,12 +50,10 @@ function SimpleExpansionPanel(props) {
           <Typography className={classes.heading}>Disabled Expansion Panel</Typography>
         </ExpansionPanelSummary>
       </ExpansionPanel>
-    </div>
-  );
+    </div>;
 }
 
-SimpleExpansionPanel.propTypes = {
-  classes: PropTypes.object.isRequired,
+SimpleExpansionPanel['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(SimpleExpansionPanel);
+export default withStylesCreator((styles as any), SimpleExpansionPanel)();

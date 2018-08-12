@@ -1,83 +1,75 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import classnames from 'classnames';
-import Card from 'reactxx-muix/current/Card';
-import CardHeader from 'reactxx-muix/current/CardHeader';
-import CardMedia from 'reactxx-muix/current/CardMedia';
-import CardContent from 'reactxx-muix/current/CardContent';
-import CardActions from 'reactxx-muix/current/CardActions';
-import Collapse from 'reactxx-muix/current/Collapse';
-import Avatar from 'reactxx-muix/current/Avatar';
-import IconButton from 'reactxx-muix/current/IconButton';
-import Typography from 'reactxx-muix/current/Typography';
-import red from 'reactxx-muix/current/colors/red';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Card from 'reactxx-muix/current/Card/Card';
+import CardHeader from 'reactxx-muix/current/CardHeader/CardHeader';
+import CardMedia from 'reactxx-muix/current/CardMedia/CardMedia';
+import CardContent from 'reactxx-muix/current/CardContent/CardContent';
+import CardActions from 'reactxx-muix/current/CardActions/CardActions';
+import Collapse from 'reactxx-muix/current/Collapse/Collapse';
+import Avatar from 'reactxx-muix/current/Avatar/Avatar';
+import IconButton from 'reactxx-muix/current/IconButton/IconButton';
+import Typography from 'reactxx-muix/current/Typography/Typography';
+import red from 'reactxx-mui-web/colors/red';
+import FavoriteIcon from 'reactxx-icons/Favorite';
+import ShareIcon from 'reactxx-icons/Share';
+import ExpandMoreIcon from 'reactxx-icons/ExpandMore';
+import MoreVertIcon from 'reactxx-icons/MoreVert';
 
 const styles = theme => ({
   card: {
-    maxWidth: 400,
+    maxWidth: 400
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '56.25%' // 16:9
+
   },
   actions: {
-    display: 'flex',
+    display: 'flex'
   },
   expand: {
     transform: 'rotate(0deg)',
     transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
+      duration: theme.transitions.duration.shortest
     }),
     marginLeft: 'auto',
     [theme.breakpoints.up('sm')]: {
-      marginRight: -8,
-    },
+      marginRight: -8
+    }
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: 'rotate(180deg)'
   },
   avatar: {
-    backgroundColor: red[500],
-  },
+    backgroundColor: red[500]
+  }
 });
 
-class RecipeReviewCard extends React.Component {
-  state = { expanded: false };
-
+class RecipeReviewCard extends React.Component<any, any> {
+  state: any = {
+    expanded: false
+  };
   handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
+    this.setState(state => ({
+      expanded: !state.expanded
+    }));
   };
 
   render() {
-    const { classes } = this.props;
-
-    return (
-      <div>
+    const {
+      classes
+    } = this.props;
+    return <div>
         <Card className={classes.card}>
-          <CardHeader
-            avatar={
-              <Avatar aria-label="Recipe" className={classes.avatar}>
+          <CardHeader avatar={<Avatar aria-label="Recipe" className={classes.avatar}>
                 R
-              </Avatar>
-            }
-            action={
-              <IconButton>
+              </Avatar>} action={<IconButton>
                 <MoreVertIcon />
-              </IconButton>
-            }
-            title="Shrimp and Chorizo Paella"
-            subheader="September 14, 2016"
-          />
-          <CardMedia
-            className={classes.media}
-            image="/static/images/cards/paella.jpg"
-            title="Contemplative Reptile"
-          />
+              </IconButton>} title="Shrimp and Chorizo Paella" subheader="September 14, 2016" />
+          <CardMedia className={classes.media} image="src/ks/common/muix/static/images/cards/paella.jpg" title="Contemplative Reptile" />
           <CardContent>
             <Typography component="p">
               This impressive paella is a perfect party dish and a fun meal to cook together with
@@ -91,14 +83,9 @@ class RecipeReviewCard extends React.Component {
             <IconButton aria-label="Share">
               <ShareIcon />
             </IconButton>
-            <IconButton
-              className={classnames(classes.expand, {
-                [classes.expandOpen]: this.state.expanded,
-              })}
-              onClick={this.handleExpandClick}
-              aria-expanded={this.state.expanded}
-              aria-label="Show more"
-            >
+            <IconButton className={classnames(classes.expand, {
+            [classes.expandOpen]: this.state.expanded
+          })} onClick={this.handleExpandClick} aria-expanded={this.state.expanded} aria-label="Show more">
               <ExpandMoreIcon />
             </IconButton>
           </CardActions>
@@ -132,13 +119,12 @@ class RecipeReviewCard extends React.Component {
             </CardContent>
           </Collapse>
         </Card>
-      </div>
-    );
+      </div>;
   }
+
 }
 
-RecipeReviewCard.propTypes = {
-  classes: PropTypes.object.isRequired,
+RecipeReviewCard['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(RecipeReviewCard);
+export default withStylesCreator((styles as any), RecipeReviewCard)();

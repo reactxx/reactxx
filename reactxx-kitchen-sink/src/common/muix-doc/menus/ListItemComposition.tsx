@@ -1,59 +1,64 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import MenuList from 'reactxx-muix/current/MenuList';
-import MenuItem from 'reactxx-muix/current/MenuItem';
-import Paper from 'reactxx-muix/current/Paper';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import ListItemIcon from 'reactxx-muix/current/ListItemIcon';
-import ListItemText from 'reactxx-muix/current/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
+import MenuList from 'reactxx-muix/current/MenuList/MenuList';
+import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';
+import Paper from 'reactxx-muix/current/Paper/Paper';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import ListItemIcon from 'reactxx-muix/current/ListItemIcon/ListItemIcon';
+import ListItemText from 'reactxx-muix/current/ListItemText/ListItemText';
+import InboxIcon from 'reactxx-icons/MoveToInbox';
+import DraftsIcon from 'reactxx-icons/Drafts';
+import SendIcon from 'reactxx-icons/Send';
 
 const styles = theme => ({
   menuItem: {
     '&:focus': {
       backgroundColor: theme.palette.primary.main,
       '& $primary, & $icon': {
-        color: theme.palette.common.white,
-      },
-    },
+        color: theme.palette.common.white
+      }
+    }
   },
   primary: {},
-  icon: {},
+  icon: {}
 });
 
 function ListItemComposition(props) {
-  const { classes } = props;
-
-  return (
-    <Paper>
+  const {
+    classes
+  } = props;
+  return <Paper>
       <MenuList>
         <MenuItem className={classes.menuItem}>
           <ListItemIcon className={classes.icon}>
             <SendIcon />
           </ListItemIcon>
-          <ListItemText classes={{ primary: classes.primary }} inset primary="Sent mail" />
+          <ListItemText classes={{
+          primary: classes.primary
+        }} inset primary="Sent mail" />
         </MenuItem>
         <MenuItem className={classes.menuItem}>
           <ListItemIcon className={classes.icon}>
             <DraftsIcon />
           </ListItemIcon>
-          <ListItemText classes={{ primary: classes.primary }} inset primary="Drafts" />
+          <ListItemText classes={{
+          primary: classes.primary
+        }} inset primary="Drafts" />
         </MenuItem>
         <MenuItem className={classes.menuItem}>
           <ListItemIcon className={classes.icon}>
             <InboxIcon />
           </ListItemIcon>
-          <ListItemText classes={{ primary: classes.primary }} inset primary="Inbox" />
+          <ListItemText classes={{
+          primary: classes.primary
+        }} inset primary="Inbox" />
         </MenuItem>
       </MenuList>
-    </Paper>
-  );
+    </Paper>;
 }
 
-ListItemComposition.propTypes = {
-  classes: PropTypes.object.isRequired,
+ListItemComposition['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(ListItemComposition);
+export default withStylesCreator((styles as any), ListItemComposition)();

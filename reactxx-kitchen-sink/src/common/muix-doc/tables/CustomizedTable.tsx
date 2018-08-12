@@ -1,58 +1,60 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Table from 'reactxx-muix/current/Table';
-import TableBody from 'reactxx-muix/current/TableBody';
-import TableCell from 'reactxx-muix/current/TableCell';
-import TableHead from 'reactxx-muix/current/TableHead';
-import TableRow from 'reactxx-muix/current/TableRow';
-import Paper from 'reactxx-muix/current/Paper';
-
-const CustomTableCell = withStyles(theme => ({
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import Table from 'reactxx-muix/current/Table/Table';
+import TableBody from 'reactxx-muix/current/TableBody/TableBody';
+import TableCell from 'reactxx-muix/current/TableCell/TableCell';
+import TableHead from 'reactxx-muix/current/TableHead/TableHead';
+import TableRow from 'reactxx-muix/current/TableRow/TableRow';
+import Paper from 'reactxx-muix/current/Paper/Paper';
+const CustomTableCell = (withStylesCreator(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    color: theme.palette.common.white
   },
   body: {
-    fontSize: 14,
-  },
-}))(TableCell);
+    fontSize: 14
+  }
+} as any), (TableCell as any))() as typeof TableCell);
 
 const styles = theme => ({
   root: {
     width: '100%',
     marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto',
+    overflowX: 'auto'
   },
   table: {
-    minWidth: 700,
+    minWidth: 700
   },
   row: {
     '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default,
-    },
-  },
+      backgroundColor: theme.palette.background.default
+    }
+  }
 });
 
 let id = 0;
+
 function createData(name, calories, fat, carbs, protein) {
   id += 1;
-  return { id, name, calories, fat, carbs, protein };
+  return {
+    id,
+    name,
+    calories,
+    fat,
+    carbs,
+    protein
+  };
 }
 
-const data = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+const data = [createData('Frozen yoghurt', 159, 6.0, 24, 4.0), createData('Ice cream sandwich', 237, 9.0, 37, 4.3), createData('Eclair', 262, 16.0, 24, 6.0), createData('Cupcake', 305, 3.7, 67, 4.3), createData('Gingerbread', 356, 16.0, 49, 3.9)];
 
 function CustomizedTable(props) {
-  const { classes } = props;
-
-  return (
-    <Paper className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
@@ -65,8 +67,7 @@ function CustomizedTable(props) {
         </TableHead>
         <TableBody>
           {data.map(n => {
-            return (
-              <TableRow className={classes.row} key={n.id}>
+          return <TableRow className={classes.row} key={n.id}>
                 <CustomTableCell component="th" scope="row">
                   {n.name}
                 </CustomTableCell>
@@ -74,17 +75,14 @@ function CustomizedTable(props) {
                 <CustomTableCell numeric>{n.fat}</CustomTableCell>
                 <CustomTableCell numeric>{n.carbs}</CustomTableCell>
                 <CustomTableCell numeric>{n.protein}</CustomTableCell>
-              </TableRow>
-            );
-          })}
+              </TableRow>;
+        })}
         </TableBody>
       </Table>
-    </Paper>
-  );
+    </Paper>;
 }
 
-CustomizedTable.propTypes = {
-  classes: PropTypes.object.isRequired,
+CustomizedTable['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(CustomizedTable);
+export default withStylesCreator((styles as any), CustomizedTable)();

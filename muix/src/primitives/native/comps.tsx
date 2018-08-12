@@ -8,6 +8,8 @@ import { Types, withStylesCreator } from 'reactxx-basic'
 import { TComps, CompNames } from '../typings/comps'
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comps-sheets'
 
+export const rulesetsToClassNames: any = null
+
 const anyView = (isAnim: boolean) => (props => {
   const ActView = isAnim ? Animated.View : ViewRN
   const { $system: { classNames }, classes, className, onPress, onLongPress, onPressIn, onPressOut, ...rest } = props

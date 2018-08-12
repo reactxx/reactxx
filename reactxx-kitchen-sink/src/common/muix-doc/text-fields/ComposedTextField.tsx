@@ -1,35 +1,37 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Input from 'reactxx-muix/current/Input';
-import InputLabel from 'reactxx-muix/current/InputLabel';
-import FormHelperText from 'reactxx-muix/current/FormHelperText';
-import FormControl from 'reactxx-muix/current/FormControl';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import Input from 'reactxx-muix/current/Input/Input';
+import InputLabel from 'reactxx-muix/current/InputLabel/InputLabel';
+import FormHelperText from 'reactxx-muix/current/FormHelperText/FormHelperText';
+import FormControl from 'reactxx-muix/current/FormControl/FormControl';
 
 const styles = theme => ({
   container: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap'
   },
   formControl: {
-    margin: theme.spacing.unit,
-  },
+    margin: theme.spacing.unit
+  }
 });
 
-class ComposedTextField extends React.Component {
-  state = {
-    name: 'Composed TextField',
+class ComposedTextField extends React.Component<any, any> {
+  state: any = {
+    name: 'Composed TextField'
   };
-
   handleChange = event => {
-    this.setState({ name: event.target.value });
+    this.setState({
+      name: event.target.value
+    });
   };
 
   render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.container}>
+    const {
+      classes
+    } = this.props;
+    return <div className={classNamesStr(classes.container)}>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="name-simple">Name</InputLabel>
           <Input id="name-simple" value={this.state.name} onChange={this.handleChange} />
@@ -49,13 +51,12 @@ class ComposedTextField extends React.Component {
           <Input id="name-error" value={this.state.name} onChange={this.handleChange} />
           <FormHelperText id="name-error-text">Error</FormHelperText>
         </FormControl>
-      </div>
-    );
+      </div>;
   }
+
 }
 
-ComposedTextField.propTypes = {
-  classes: PropTypes.object.isRequired,
+ComposedTextField['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(ComposedTextField);
+export default withStylesCreator((styles as any), ComposedTextField)();

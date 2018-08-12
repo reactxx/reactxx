@@ -1,15 +1,14 @@
 import React from 'react';
-import Button from 'reactxx-muix/current/Button';
-import Tooltip from 'reactxx-muix/current/Tooltip';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import Button from 'reactxx-muix/current/Button/Button';
+import Tooltip from 'reactxx-muix/current/Tooltip/Tooltip';
 
 function DisabledTooltips() {
-  return (
-    <Tooltip title="You don't have permission to do this">
+  return <Tooltip title="You don't have permission to do this">
       <span>
         <Button disabled>A Disabled Button</Button>
       </span>
-    </Tooltip>
-  );
+    </Tooltip>;
 }
 
 export default DisabledTooltips;

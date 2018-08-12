@@ -1,22 +1,22 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Paper from 'reactxx-muix/current/Paper';
-import Typography from 'reactxx-muix/current/Typography';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import Paper from 'reactxx-muix/current/Paper/Paper';
+import Typography from 'reactxx-muix/current/Typography/Typography';
 
 const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
+  root: { ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-  },
+    paddingBottom: theme.spacing.unit * 2
+  }
 });
 
 function PaperSheet(props) {
-  const { classes } = props;
-
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  return <div>
       <Paper className={classes.root} elevation={1}>
         <Typography variant="headline" component="h3">
           This is a sheet of paper.
@@ -25,12 +25,10 @@ function PaperSheet(props) {
           Paper can be used to build surface or other elements for your application.
         </Typography>
       </Paper>
-    </div>
-  );
+    </div>;
 }
 
-PaperSheet.propTypes = {
-  classes: PropTypes.object.isRequired,
+PaperSheet['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(PaperSheet);
+export default withStylesCreator((styles as any), PaperSheet)();

@@ -1,34 +1,35 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import CircularProgress from 'reactxx-muix/current/CircularProgress';
-import green from 'reactxx-muix/current/colors/green';
-import Button from 'reactxx-muix/current/Button';
-import CheckIcon from '@material-ui/icons/Check';
-import SaveIcon from '@material-ui/icons/Save';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import CircularProgress from 'reactxx-muix/current/CircularProgress/CircularProgress';
+import green from 'reactxx-mui-web/colors/green';
+import Button from 'reactxx-muix/current/Button/Button';
+import CheckIcon from 'reactxx-icons/Check';
+import SaveIcon from 'reactxx-icons/Save';
 
 const styles = theme => ({
   root: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   wrapper: {
     margin: theme.spacing.unit,
-    position: 'relative',
+    position: 'relative'
   },
   buttonSuccess: {
     backgroundColor: green[500],
     '&:hover': {
-      backgroundColor: green[700],
-    },
+      backgroundColor: green[700]
+    }
   },
   fabProgress: {
     color: green[500],
     position: 'absolute',
     top: -6,
     left: -6,
-    zIndex: 1,
+    zIndex: 1
   },
   buttonProgress: {
     color: green[500],
@@ -36,16 +37,15 @@ const styles = theme => ({
     top: '50%',
     left: '50%',
     marginTop: -12,
-    marginLeft: -12,
-  },
+    marginLeft: -12
+  }
 });
 
-class CircularIntegration extends React.Component {
+class CircularIntegration extends React.Component<any, any> {
   timer = null;
-
-  state = {
+  state: any = {
     loading: false,
-    success: false,
+    success: false
   };
 
   componentWillUnmount() {
@@ -54,62 +54,50 @@ class CircularIntegration extends React.Component {
 
   handleButtonClick = () => {
     if (!this.state.loading) {
-      this.setState(
-        {
-          success: false,
-          loading: true,
-        },
-        () => {
-          this.timer = setTimeout(() => {
-            this.setState({
-              loading: false,
-              success: true,
-            });
-          }, 2000);
-        },
-      );
+      this.setState({
+        success: false,
+        loading: true
+      }, () => {
+        this.timer = setTimeout(() => {
+          this.setState({
+            loading: false,
+            success: true
+          });
+        }, 2000);
+      });
     }
   };
 
   render() {
-    const { loading, success } = this.state;
-    const { classes } = this.props;
+    const {
+      loading,
+      success
+    } = this.state;
+    const {
+      classes
+    } = this.props;
     const buttonClassname = classNames({
-      [classes.buttonSuccess]: success,
+      [classes.buttonSuccess]: success
     });
-
-    return (
-      <div className={classes.root}>
-        <div className={classes.wrapper}>
-          <Button
-            variant="fab"
-            color="primary"
-            className={buttonClassname}
-            onClick={this.handleButtonClick}
-          >
+    return <div className={classNamesStr(classes.root)}>
+        <div className={classNamesStr(classes.wrapper)}>
+          <Button variant="fab" color="primary" className={buttonClassname} onClick={this.handleButtonClick}>
             {success ? <CheckIcon /> : <SaveIcon />}
           </Button>
           {loading && <CircularProgress size={68} className={classes.fabProgress} />}
         </div>
-        <div className={classes.wrapper}>
-          <Button
-            variant="contained"
-            color="primary"
-            className={buttonClassname}
-            disabled={loading}
-            onClick={this.handleButtonClick}
-          >
+        <div className={classNamesStr(classes.wrapper)}>
+          <Button variant="contained" color="primary" className={buttonClassname} disabled={loading} onClick={this.handleButtonClick}>
             Accept terms
           </Button>
           {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
         </div>
-      </div>
-    );
+      </div>;
   }
+
 }
 
-CircularIntegration.propTypes = {
-  classes: PropTypes.object.isRequired,
+CircularIntegration['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(CircularIntegration);
+export default withStylesCreator((styles as any), CircularIntegration)();

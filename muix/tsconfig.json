@@ -60,7 +60,7 @@
     },
     "lib": [
       "dom",
-      "es2015",
+      "es2017",
       "esnext.asynciterable"
     ]
   },
@@ -74,7 +74,7 @@
   "exclude": [
     "src/ks/typings.d.ts",
     "src/trash",
-    "src/ks/common/muix-doc",
+    //"src/ks/common/muix-doc",
     "src/icons/native",
     "src/muix/reactxx-mui-web"
     //"src/muix/reactxx-mui-web/**/*"

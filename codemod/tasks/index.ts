@@ -153,7 +153,7 @@ export const readAllCodes = () => {
         let root: Ast.Ast, rootStr: string
         try {
             rootStr = fs.readFileSync(actPath, { encoding: 'utf-8' })
-            root = Parser.parseCode(rootStr)
+            if (!Config.isDoc) root = Parser.parseCode(rootStr)
         } catch { compileErrors.push(actPath); return }
         code[path] = root
         codeStr[path] = rootStr

@@ -1,23 +1,24 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Stepper from 'reactxx-muix/current/Stepper';
-import Step from 'reactxx-muix/current/Step';
-import StepLabel from 'reactxx-muix/current/StepLabel';
-import Button from 'reactxx-muix/current/Button';
-import Typography from 'reactxx-muix/current/Typography';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import Stepper from 'reactxx-muix/current/Stepper/Stepper';
+import Step from 'reactxx-muix/current/Step/Step';
+import StepLabel from 'reactxx-muix/current/StepLabel/StepLabel';
+import Button from 'reactxx-muix/current/Button/Button';
+import Typography from 'reactxx-muix/current/Typography/Typography';
 
 const styles = theme => ({
   root: {
-    width: '90%',
+    width: '90%'
   },
   backButton: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing.unit
   },
   instructions: {
     marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
-  },
+    marginBottom: theme.spacing.unit
+  }
 });
 
 function getSteps() {
@@ -28,87 +29,82 @@ function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
       return 'Select campaign settings...';
+
     case 1:
       return 'What is an ad group anyways?';
+
     case 2:
       return 'This is the bit I really care about!';
+
     default:
       return 'Uknown stepIndex';
   }
 }
 
-class HorizontalLabelPositionBelowStepper extends React.Component {
-  state = {
-    activeStep: 0,
+class HorizontalLabelPositionBelowStepper extends React.Component<any, any> {
+  state: any = {
+    activeStep: 0
   };
-
   handleNext = () => {
-    const { activeStep } = this.state;
+    const {
+      activeStep
+    } = this.state;
     this.setState({
-      activeStep: activeStep + 1,
+      activeStep: activeStep + 1
     });
   };
-
   handleBack = () => {
-    const { activeStep } = this.state;
+    const {
+      activeStep
+    } = this.state;
     this.setState({
-      activeStep: activeStep - 1,
+      activeStep: activeStep - 1
     });
   };
-
   handleReset = () => {
     this.setState({
-      activeStep: 0,
+      activeStep: 0
     });
   };
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes
+    } = this.props;
     const steps = getSteps();
-    const { activeStep } = this.state;
-
-    return (
-      <div className={classes.root}>
+    const {
+      activeStep
+    } = this.state;
+    return <div className={classNamesStr(classes.root)}>
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map(label => {
-            return (
-              <Step key={label}>
+          return <Step key={label}>
                 <StepLabel>{label}</StepLabel>
-              </Step>
-            );
-          })}
+              </Step>;
+        })}
         </Stepper>
         <div>
-          {this.state.activeStep === steps.length ? (
-            <div>
+          {this.state.activeStep === steps.length ? <div>
               <Typography className={classes.instructions}>All steps completed</Typography>
               <Button onClick={this.handleReset}>Reset</Button>
-            </div>
-          ) : (
-            <div>
+            </div> : <div>
               <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
               <div>
-                <Button
-                  disabled={activeStep === 0}
-                  onClick={this.handleBack}
-                  className={classes.backButton}
-                >
+                <Button disabled={activeStep === 0} onClick={this.handleBack} className={classes.backButton}>
                   Back
                 </Button>
                 <Button variant="contained" color="primary" onClick={this.handleNext}>
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
-            </div>
-          )}
+            </div>}
         </div>
-      </div>
-    );
+      </div>;
   }
+
 }
 
-HorizontalLabelPositionBelowStepper.propTypes = {
-  classes: PropTypes.object,
+HorizontalLabelPositionBelowStepper['propTypes'] = {
+  classes: PropTypes.object
 };
-
-export default withStylesCreator(styles, {})(HorizontalLabelPositionBelowStepper);
+export default withStylesCreator((styles as any), HorizontalLabelPositionBelowStepper)();

@@ -1,19 +1,21 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Button from 'reactxx-muix/current/Button';
-import AddIcon from '@material-ui/icons/Add';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import Button from 'reactxx-muix/current/Button/Button';
+import AddIcon from 'reactxx-icons/Add';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
-  },
+    margin: theme.spacing.unit
+  }
 });
 
 function ButtonSizes(props) {
-  const { classes } = props;
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  return <div>
       <div>
         <Button size="small" className={classes.button}>
           Small
@@ -55,12 +57,10 @@ function ButtonSizes(props) {
           <AddIcon />
         </Button>
       </div>
-    </div>
-  );
+    </div>;
 }
 
-ButtonSizes.propTypes = {
-  classes: PropTypes.object.isRequired,
+ButtonSizes['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(ButtonSizes);
+export default withStylesCreator((styles as any), ButtonSizes)();

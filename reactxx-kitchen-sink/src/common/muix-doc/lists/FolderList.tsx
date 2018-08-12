@@ -1,26 +1,28 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import List from 'reactxx-muix/current/List';
-import ListItem from 'reactxx-muix/current/ListItem';
-import ListItemText from 'reactxx-muix/current/ListItemText';
-import Avatar from 'reactxx-muix/current/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
-import WorkIcon from '@material-ui/icons/Work';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import List from 'reactxx-muix/current/List/List';
+import ListItem from 'reactxx-muix/current/ListItem/ListItem';
+import ListItemText from 'reactxx-muix/current/ListItemText/ListItemText';
+import Avatar from 'reactxx-muix/current/Avatar/Avatar';
+import ImageIcon from 'reactxx-icons/Image';
+import WorkIcon from 'reactxx-icons/Work';
+import BeachAccessIcon from 'reactxx-icons/BeachAccess';
 
 const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
 function FolderList(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classNamesStr(classes.root)}>
       <List>
         <ListItem>
           <Avatar>
@@ -41,12 +43,10 @@ function FolderList(props) {
           <ListItemText primary="Vacation" secondary="July 20, 2014" />
         </ListItem>
       </List>
-    </div>
-  );
+    </div>;
 }
 
-FolderList.propTypes = {
-  classes: PropTypes.object.isRequired,
+FolderList['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(FolderList);
+export default withStylesCreator((styles as any), FolderList)();

@@ -8,6 +8,8 @@ import { Types, withStylesCreator, hasPlatformEvents } from 'reactxx-basic'
 import { TComps, CompNames } from '../typings/comps'
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comps-sheets'
 
+export { rulesetsToClassNames } from 'reactxx-fela'
+
 export const view: Types.CodeSFCWeb<TComps.ViewShape> = props => {
   const { $system: { classNames }, style, classes, className, ...rest } = props
   const rootStyle = classNames<'Web'>(classes.root, hasPlatformEvents(props) && classes.pressable, className)

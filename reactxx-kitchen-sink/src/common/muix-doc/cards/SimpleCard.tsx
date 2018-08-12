@@ -1,36 +1,36 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Card from 'reactxx-muix/current/Card';
-import CardActions from 'reactxx-muix/current/CardActions';
-import CardContent from 'reactxx-muix/current/CardContent';
-import Button from 'reactxx-muix/current/Button';
-import Typography from 'reactxx-muix/current/Typography';
-
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import Card from 'reactxx-muix/current/Card/Card';
+import CardActions from 'reactxx-muix/current/CardActions/CardActions';
+import CardContent from 'reactxx-muix/current/CardContent/CardContent';
+import Button from 'reactxx-muix/current/Button/Button';
+import Typography from 'reactxx-muix/current/Typography/Typography';
 const styles = {
   card: {
-    minWidth: 275,
+    minWidth: 275
   },
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
-    transform: 'scale(0.8)',
+    transform: 'scale(0.8)'
   },
   title: {
     marginBottom: 16,
-    fontSize: 14,
+    fontSize: 14
   },
   pos: {
-    marginBottom: 12,
-  },
+    marginBottom: 12
+  }
 };
 
 function SimpleCard(props) {
-  const { classes } = props;
-  const bull = <span className={classes.bullet}>•</span>;
-
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  const bull = <span className={classNamesStr(classes.bullet)}>•</span>;
+  return <div>
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.title} color="textSecondary">
@@ -56,12 +56,10 @@ function SimpleCard(props) {
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
-    </div>
-  );
+    </div>;
 }
 
-SimpleCard.propTypes = {
-  classes: PropTypes.object.isRequired,
+SimpleCard['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(SimpleCard);
+export default withStylesCreator((styles as any), SimpleCard)();

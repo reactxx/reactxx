@@ -1,19 +1,20 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Button from 'reactxx-muix/current/Button';
-import Tooltip from 'reactxx-muix/current/Tooltip';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import Button from 'reactxx-muix/current/Button/Button';
+import Tooltip from 'reactxx-muix/current/Tooltip/Tooltip';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   },
   customWidth: {
-    maxWidth: 500,
+    maxWidth: 500
   },
   noMaxWidth: {
-    maxWidth: 'none',
-  },
+    maxWidth: 'none'
+  }
 });
 
 const longText = `
@@ -22,24 +23,27 @@ Praesent non nunc mollis, fermentum neque at, semper arcu.
 Nullam eget est sed sem iaculis gravida eget vitae justo. 
 `;
 
-function VariableWidth({ classes }) {
-  return (
-    <div>
+function VariableWidth({
+  classes
+}) {
+  return <div>
       <Tooltip title={longText}>
         <Button className={classes.button}>Default Width [300px]</Button>
       </Tooltip>
-      <Tooltip title={longText} classes={{ tooltip: classes.customWidth }}>
+      <Tooltip title={longText} classes={{
+      tooltip: classes.customWidth
+    }}>
         <Button className={classes.button}>Custom Width [500px]</Button>
       </Tooltip>
-      <Tooltip title={longText} classes={{ tooltip: classes.noMaxWidth }}>
+      <Tooltip title={longText} classes={{
+      tooltip: classes.noMaxWidth
+    }}>
         <Button className={classes.button}>No wrapping</Button>
       </Tooltip>
-    </div>
-  );
+    </div>;
 }
 
-VariableWidth.propTypes = {
-  classes: PropTypes.object.isRequired,
+VariableWidth['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(VariableWidth);
+export default withStylesCreator((styles as any), VariableWidth)();

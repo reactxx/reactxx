@@ -1,24 +1,26 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import List from 'reactxx-muix/current/List';
-import ListItem from 'reactxx-muix/current/ListItem';
-import ListItemIcon from 'reactxx-muix/current/ListItemIcon';
-import ListItemText from 'reactxx-muix/current/ListItemText';
-import StarIcon from '@material-ui/icons/Star';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import List from 'reactxx-muix/current/List/List';
+import ListItem from 'reactxx-muix/current/ListItem/ListItem';
+import ListItemIcon from 'reactxx-muix/current/ListItemIcon/ListItemIcon';
+import ListItemText from 'reactxx-muix/current/ListItemText/ListItemText';
+import StarIcon from 'reactxx-icons/Star';
 
 const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
 function InsetList(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classNamesStr(classes.root)}>
       <List component="nav">
         <ListItem button>
           <ListItemIcon>
@@ -30,12 +32,10 @@ function InsetList(props) {
           <ListItemText inset primary="Eric Hoffman" />
         </ListItem>
       </List>
-    </div>
-  );
+    </div>;
 }
 
-InsetList.propTypes = {
-  classes: PropTypes.object.isRequired,
+InsetList['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(InsetList);
+export default withStylesCreator((styles as any), InsetList)();

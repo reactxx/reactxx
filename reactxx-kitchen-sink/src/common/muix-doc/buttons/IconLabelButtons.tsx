@@ -1,33 +1,35 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Button from 'reactxx-muix/current/Button';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import DeleteIcon from '@material-ui/icons/Delete';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import KeyboardVoiceICon from '@material-ui/icons/KeyboardVoice';
-import Icon from 'reactxx-muix/current/Icon';
-import SaveIcon from '@material-ui/icons/Save';
+import Button from 'reactxx-muix/current/Button/Button';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import DeleteIcon from 'reactxx-icons/Delete';
+import CloudUploadIcon from 'reactxx-icons/CloudUpload';
+import KeyboardVoiceICon from 'reactxx-icons/KeyboardVoice';
+import Icon from 'reactxx-muix/current/Icon/Icon';
+import SaveIcon from 'reactxx-icons/Save';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   },
   leftIcon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing.unit
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing.unit
   },
   iconSmall: {
-    fontSize: 20,
-  },
+    fontSize: 20
+  }
 });
 
 function IconLabelButtons(props) {
-  const { classes } = props;
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  return <div>
       <Button variant="contained" color="secondary" className={classes.button}>
         Delete
         <DeleteIcon className={classes.rightIcon} />
@@ -48,12 +50,10 @@ function IconLabelButtons(props) {
         <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
         Save
       </Button>
-    </div>
-  );
+    </div>;
 }
 
-IconLabelButtons.propTypes = {
-  classes: PropTypes.object.isRequired,
+IconLabelButtons['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(IconLabelButtons);
+export default withStylesCreator((styles as any), IconLabelButtons)();

@@ -1,31 +1,33 @@
 import React from 'react';
+import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import List from 'reactxx-muix/current/List';
-import ListItem from 'reactxx-muix/current/ListItem';
-import ListItemIcon from 'reactxx-muix/current/ListItemIcon';
-import ListItemSecondaryAction from 'reactxx-muix/current/ListItemSecondaryAction';
-import ListItemText from 'reactxx-muix/current/ListItemText';
-import ListSubheader from 'reactxx-muix/current/ListSubheader';
-import Switch from 'reactxx-muix/current/Switch';
-import WifiIcon from '@material-ui/icons/Wifi';
-import BluetoothIcon from '@material-ui/icons/Bluetooth';
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
+import List from 'reactxx-muix/current/List/List';
+import ListItem from 'reactxx-muix/current/ListItem/ListItem';
+import ListItemIcon from 'reactxx-muix/current/ListItemIcon/ListItemIcon';
+import ListItemSecondaryAction from 'reactxx-muix/current/ListItemSecondaryAction/ListItemSecondaryAction';
+import ListItemText from 'reactxx-muix/current/ListItemText/ListItemText';
+import ListSubheader from 'reactxx-muix/current/ListSubheader/ListSubheader';
+import Switch from 'reactxx-muix/current/Switch/Switch';
+import WifiIcon from 'reactxx-icons/Wifi';
+import BluetoothIcon from 'reactxx-icons/Bluetooth';
 
 const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
-class SwitchListSecondary extends React.Component {
-  state = {
-    checked: ['wifi'],
+class SwitchListSecondary extends React.Component<any, any> {
+  state: any = {
+    checked: ['wifi']
   };
-
   handleToggle = value => () => {
-    const { checked } = this.state;
+    const {
+      checked
+    } = this.state;
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -36,15 +38,15 @@ class SwitchListSecondary extends React.Component {
     }
 
     this.setState({
-      checked: newChecked,
+      checked: newChecked
     });
   };
 
   render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
+    const {
+      classes
+    } = this.props;
+    return <div className={classNamesStr(classes.root)}>
         <List subheader={<ListSubheader>Settings</ListSubheader>}>
           <ListItem>
             <ListItemIcon>
@@ -52,10 +54,7 @@ class SwitchListSecondary extends React.Component {
             </ListItemIcon>
             <ListItemText primary="Wi-Fi" />
             <ListItemSecondaryAction>
-              <Switch
-                onChange={this.handleToggle('wifi')}
-                checked={this.state.checked.indexOf('wifi') !== -1}
-              />
+              <Switch onChange={this.handleToggle('wifi')} checked={this.state.checked.indexOf('wifi') !== -1} />
             </ListItemSecondaryAction>
           </ListItem>
           <ListItem>
@@ -64,20 +63,16 @@ class SwitchListSecondary extends React.Component {
             </ListItemIcon>
             <ListItemText primary="Bluetooth" />
             <ListItemSecondaryAction>
-              <Switch
-                onChange={this.handleToggle('bluetooth')}
-                checked={this.state.checked.indexOf('bluetooth') !== -1}
-              />
+              <Switch onChange={this.handleToggle('bluetooth')} checked={this.state.checked.indexOf('bluetooth') !== -1} />
             </ListItemSecondaryAction>
           </ListItem>
         </List>
-      </div>
-    );
+      </div>;
   }
+
 }
 
-SwitchListSecondary.propTypes = {
-  classes: PropTypes.object.isRequired,
+SwitchListSecondary['propTypes'] = {
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles, {})(SwitchListSecondary);
+export default withStylesCreator((styles as any), SwitchListSecondary)();
