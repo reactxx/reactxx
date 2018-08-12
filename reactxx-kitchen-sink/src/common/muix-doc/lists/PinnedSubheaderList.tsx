@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import List from 'reactxx-muix/current/List/List';
@@ -29,7 +29,7 @@ function PinnedSubheaderList(props) {
   const {
     classes
   } = props;
-  return <List className={classes.root} subheader={<li />}>
+  return <List className={classNames(classes.root)} subheader={<li />}>
       {[0, 1, 2, 3, 4].map(sectionId => <li key={`section-${sectionId}`} className={classNamesStr(classes.listSection)}>
           <ul className={classNamesStr(classes.ul)}>
             <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>

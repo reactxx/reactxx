@@ -1,15 +1,11 @@
-import * as Glob from 'glob'
-import * as fs from 'fs'
-import * as Config from '../utils/config'
-import * as Queries from '../utils/queries'
-import * as Ast from '../utils/ast'
-import * as fsExtra from 'fs-extra';
-import * as Tasks from './default-modifier'
-import { readAllCodes } from '.'
-import { join } from 'path';
-import { match } from 'minimatch';
-import { parse, parseExpression } from '@babel/parser';
 import generate from '@babel/generator';
+import { parse, parseExpression } from '@babel/parser';
+import * as fsExtra from 'fs-extra';
+import { readAllCodes } from '.';
+import * as Ast from '../utils/ast';
+import * as Config from '../utils/config';
+import * as Queries from '../utils/queries';
+import { cssjsToFelaLow } from './cssjs-to-fela';
 
 export const codeModDoc = () => {
 
@@ -36,7 +32,7 @@ export const codeModDoc = () => {
 
         // code AST modification
         const ast = parseCodeLow(codeDest)
-        adjustHtmlClassNameAttribute(ast)
+        codeModAst(ast, path)
         code = generateCode(ast)
 
         // output code
@@ -48,11 +44,12 @@ export const codeModDoc = () => {
     }
 
     // generate index.ts files
+    const templateImports = []
     for (const p in exampleGroups) {
         const examples = exampleGroups[p]
         const imports = examples.map(e => `import ${e} from './${e}'`).join('\n')
-        const comps = examples.map(e => 
-`<h2>${e}</h2>
+        const comps = examples.map(e =>
+            `<h2>${e}</h2>
 <div style={{flexShrink: 0}}>
   <${e}/>
 </div>
@@ -70,7 +67,19 @@ const App: React.SFC = () => <div style={{padding: 30, overflow:'auto'}}>
 export default App
 `
         const fn = `${Config.muiWeb}${p}/index.tsx/`
+        templateImports.push(`import App from '../common/muix-doc/${p}/index'`)
         fsExtra.outputFileSync(fn, code)
+    }
+    const templateImport = templateImports.join('\n')
+}
+
+const codeModAst = (root: Ast.Ast, path: string) => {
+    adjustHtmlClassNameAttribute(root)
+    switch (path) {
+        case 'buttons/ButtonBases':
+            let sheet = Queries.checkSingleResult(Ast.astq().query(root, '// VariableDeclaration/VariableDeclarator [ /Identifier [@name == "styles"] ]'))
+            cssjsToFelaLow(sheet, { srcPath: path })
+            break
     }
 }
 
@@ -79,14 +88,14 @@ const parseCodeLow = (code: string) => parse(code, { sourceType: 'module', plugi
 const generateCode = (ast: Ast.Ast) => generate(ast, { /* options */ }).code as string
 
 const adjustHtmlClassNameAttribute = (root: Ast.Ast) => {
-    const htmls = Ast.astq().query(root, '// JSXElement [ /JSXOpeningElement/JSXIdentifier [ isHTMLTag(@name, {forceHTMLTags}) ] ]', { forceHTMLTags: null }) as Ast.Ast[]
+    const htmls = Ast.astq().query(root, '// JSXElement') as Ast.Ast[]
     const classNames = 'classNames('
     htmls.forEach(html => {
         const compName: string = html.openingElement.name.name
-        const classNameProc = compName === 'TransitionGroup' || compName.charAt(0).toLowerCase() === compName.charAt(0) ? 'classNamesStr(' : `classNamesAny(${compName},`
         const clasName = Queries.checkSingleResult(Ast.astq().query(html, '/JSXOpeningElement/JSXAttribute [ /JSXIdentifier [ @name=="className" ] ]'), true)
         if (!clasName) return
         const oldCode = generateCode(clasName.value.expression)
+        const classNameProc = compName.charAt(0).toLowerCase() === compName.charAt(0) ? 'classNamesStr(' : `classNames(`
         const newCode = oldCode.startsWith(classNames) ? classNameProc + oldCode.substr(classNames.length) : `${classNameProc}${oldCode})`
         clasName.value.expression = parseExpressionLow(newCode)
     })
@@ -143,6 +152,9 @@ import withStylesCreator from 'reactxx-mui-web/styles/withStyles'`)
             example = processMatchAll(/withStyles\(theme(\s|.)*?(}\)\)\(TableCell\);)/g, example, (match, res) => res.push(example.substr(match.index, match[0].length - endPart.length) + '} as any), TableCell as any)() as typeof TableCell;'))
             example = replaceAll(example, 'const CustomTableCell = withStyles(', 'const CustomTableCell = withStylesCreator(')
             break
+        case 'buttons/FloatingActionButtonZoom':
+            example = example.replace('const { classes, theme } = this.props;', 'const { classes, $system: {theme} } = this.props;')
+            break
     }
 
     example = importComponent(example)
@@ -155,7 +167,8 @@ import withStylesCreator from 'reactxx-mui-web/styles/withStyles'`)
     example = replaceAll(example, `extends React.Component {`, `extends React.Component<any,any> {`)
     example = replaceAll(example, `@material-ui/core/`, `reactxx-mui-web/`)
     example = replaceAll(example, `/static/images/`, `src/ks/common/muix/static/images/`)
-    example = example.replace(`\nimport`, `\nimport {mergeRulesets as classNamesStr} from 'reactxx-primitives';\nimport`)
+    example = example.replace(`\nimport`, `\nimport {mergeRulesetsStr as classNamesStr, mergeRulesets as classNames} from 'reactxx-primitives';\nimport`)
+    example = example.replace(`import classNames from 'classnames';\n`, ``)
 
     return example
 }
@@ -218,4 +231,3 @@ const ignores = {
     'snackbars/CustomizedSnackbars': true,
     'chips/ChipsPlayground': true,
 }
-

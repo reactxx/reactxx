@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Stepper from 'reactxx-muix/current/Stepper/Stepper';
@@ -85,12 +85,12 @@ class HorizontalLabelPositionBelowStepper extends React.Component<any, any> {
         </Stepper>
         <div>
           {this.state.activeStep === steps.length ? <div>
-              <Typography className={classes.instructions}>All steps completed</Typography>
+              <Typography className={classNames(classes.instructions)}>All steps completed</Typography>
               <Button onClick={this.handleReset}>Reset</Button>
             </div> : <div>
-              <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+              <Typography className={classNames(classes.instructions)}>{getStepContent(activeStep)}</Typography>
               <div>
-                <Button disabled={activeStep === 0} onClick={this.handleBack} className={classes.backButton}>
+                <Button disabled={activeStep === 0} onClick={this.handleBack} className={classNames(classes.backButton)}>
                   Back
                 </Button>
                 <Button variant="contained" color="primary" onClick={this.handleNext}>

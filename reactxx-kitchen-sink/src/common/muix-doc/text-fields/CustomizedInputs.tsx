@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'reactxx-basic';
 import createMuiTheme from 'reactxx-mui-web/styles/createMuiTheme';
@@ -66,7 +66,7 @@ function CustomizedInputs(props) {
     classes
   } = props;
   return <div className={classNamesStr(classes.container)}>
-      <FormControl className={classes.margin}>
+      <FormControl className={classNames(classes.margin)}>
         <InputLabel FormLabelClasses={{
         root: classes.cssLabel,
         focused: classes.cssFocused
@@ -78,7 +78,7 @@ function CustomizedInputs(props) {
       }} id="custom-css-input" />
       </FormControl>
       <ThemeProvider theme={(theme as any)}>
-        <TextField className={classes.margin} label="ThemeProvider" id="mui-theme-provider-input" />
+        <TextField className={classNames(classes.margin)} label="ThemeProvider" id="mui-theme-provider-input" />
       </ThemeProvider>
       <TextField defaultValue="react-bootstrap" label="Bootstrap" id="bootstrap-input" InputProps={{
       disableUnderline: true,

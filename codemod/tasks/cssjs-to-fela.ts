@@ -4,16 +4,19 @@ import * as warning from 'warning'
 import * as Parser from '../utils/parser'
 
 export const cssjsToFela = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
+  let sheet = Queries.checkSingleResult(Ast.astq().query(root, '/Program/ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /Identifier [@name == "styles"] ]'), true)
+  if (sheet) cssjsToFelaLow(sheet, info)
+  return root
+}
+export const cssjsToFelaLow = (sheet: Ast.Ast, info: Ast.MUISourceInfo) => {
   const counter = cssjsToFelaCallCounter++ // unique identification of changed JS file
   // get 'const styles = ...'
-  let sheet = Queries.checkSingleResult(Ast.astq().query(root, '/Program/ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /Identifier [@name == "styles"] ]'), true)
-  if (!sheet) return root
   sheet = sheet.init
   // ***** get object expression
   if (sheet.type !== 'ObjectExpression') { // not object expression ...
     if (sheet.type !== 'ArrowFunctionExpression') { // ... must be arrow expression (const styles = theme => ({}))
       warning(false, `sheet.type !== 'ArrowFunctionExpression' at ${info.srcPath}`) // e.g. select.js
-      return root
+      return
     }
     if (sheet.body && sheet.body.type === 'ObjectExpression') // const styles = theme => ({})
       sheet = sheet.body
@@ -31,22 +34,37 @@ export const cssjsToFela = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
       warning(false, `!rulesetName || !rulesetName.properties at ${info.srcPath}`)
       return
     }
+
+    // expand comma delimited rule names (e.g. )
+    const newProperties: any[] = [];
+    (rulesetName.properties as any[]).forEach(keyValue => {
+      if (!keyValue.key || keyValue.key.type != 'StringLiteral') {
+        newProperties.push(keyValue)
+        return
+      }
+      const parts: string[] = keyValue.key.value.split(',')
+      if (parts.length < 2) {
+        newProperties.push(keyValue)
+        return
+      }
+      //delete keyValue.key.extra
+      const copySrc = JSON.stringify(Ast.removeIgnored(keyValue), null, 2)
+      parts.forEach(part => {
+        const copy = JSON.parse(copySrc)
+        copy.key.value = part.trim()
+        newProperties.push(copy)
+      })
+    });
+    rulesetName.properties = newProperties;
+
+    // replace and register $... reference
     (rulesetName.properties as any[]).forEach(keyValue => { // all rules in ruleset
       if (!keyValue.key) return // e.g. spread element in button.js
       // *** modify KEY
-      switch (keyValue.key.type) {
-        case 'StringLiteral': // e.g. '&:hover': ???
-          const newKeyValue = patchCode(keyValue.key.value, counter, usedRulesetNames)
-          if (newKeyValue) {
-            keyValue.key.value = keyValue.key.extra.rawValue = newKeyValue
-            keyValue.key.extra.raw = `'${newKeyValue}'`
-          }
-          break
-        case 'Identifier': // e.g. color: ???
-          break
-        default:
-          //warning(false, `Wrong value type: ${keyValue.key.type} at ${info.srcPath}`)
-          break
+      if (keyValue.key.type === 'StringLiteral') {
+        const newKeyValue = patchCode(keyValue.key.value, counter, usedRulesetNames)
+        if (newKeyValue) keyValue.key.value = newKeyValue
+        delete keyValue.key.extra
       }
       // *** modify VALUE
       const valueCode = Parser.generateCode(keyValue.value)
@@ -55,9 +73,9 @@ export const cssjsToFela = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
         keyValue.value = Parser.parseExpressionLow(newValueCode)
     })
   });
-  // *** modify rulesets, used in $???
+  // *** modify rulesets, used in $...
   (sheet.properties as any[]).forEach(({ key, value }) => { // all rulesets in sheet
-    if (!key || !value) 
+    if (!key || !value)
       return
     if (!usedRulesetNames[key.name]) return
     const className = `${key.name}${counter}`
@@ -79,8 +97,7 @@ export const cssjsToFela = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
     )
     return
   })
-    
-  return root
+
 }
 let cssjsToFelaCallCounter = 1
 

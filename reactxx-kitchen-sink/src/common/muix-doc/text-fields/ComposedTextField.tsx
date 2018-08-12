@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Input from 'reactxx-muix/current/Input/Input';
@@ -32,21 +32,21 @@ class ComposedTextField extends React.Component<any, any> {
       classes
     } = this.props;
     return <div className={classNamesStr(classes.container)}>
-        <FormControl className={classes.formControl}>
+        <FormControl className={classNames(classes.formControl)}>
           <InputLabel htmlFor="name-simple">Name</InputLabel>
           <Input id="name-simple" value={this.state.name} onChange={this.handleChange} />
         </FormControl>
-        <FormControl className={classes.formControl} aria-describedby="name-helper-text">
+        <FormControl className={classNames(classes.formControl)} aria-describedby="name-helper-text">
           <InputLabel htmlFor="name-helper">Name</InputLabel>
           <Input id="name-helper" value={this.state.name} onChange={this.handleChange} />
           <FormHelperText id="name-helper-text">Some important helper text</FormHelperText>
         </FormControl>
-        <FormControl className={classes.formControl} disabled>
+        <FormControl className={classNames(classes.formControl)} disabled>
           <InputLabel htmlFor="name-disabled">Name</InputLabel>
           <Input id="name-disabled" value={this.state.name} onChange={this.handleChange} />
           <FormHelperText>Disabled</FormHelperText>
         </FormControl>
-        <FormControl className={classes.formControl} error aria-describedby="name-error-text">
+        <FormControl className={classNames(classes.formControl)} error aria-describedby="name-error-text">
           <InputLabel htmlFor="name-error">Name</InputLabel>
           <Input id="name-error" value={this.state.name} onChange={this.handleChange} />
           <FormHelperText id="name-error-text">Error</FormHelperText>

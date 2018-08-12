@@ -1,6 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
-import classNames from 'classnames';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Table from 'reactxx-muix/current/Table/Table';
@@ -261,10 +260,10 @@ class EnhancedTable extends React.Component<any, any> {
       page
     } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
-    return <Paper className={classes.root}>
+    return <Paper className={classNames(classes.root)}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <div className={classNamesStr(classes.tableWrapper)}>
-          <Table className={classes.table} aria-labelledby="tableTitle">
+          <Table className={classNames(classes.table)} aria-labelledby="tableTitle">
             <EnhancedTableHead numSelected={selected.length} order={order} orderBy={orderBy} onSelectAllClick={this.handleSelectAllClick} onRequestSort={this.handleRequestSort} rowCount={data.length} />
             <TableBody>
               {data.sort(getSorting(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {

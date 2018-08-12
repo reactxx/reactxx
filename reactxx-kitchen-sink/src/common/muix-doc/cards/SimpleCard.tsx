@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Card from 'reactxx-muix/current/Card/Card';
@@ -31,9 +31,9 @@ function SimpleCard(props) {
   } = props;
   const bull = <span className={classNamesStr(classes.bullet)}>•</span>;
   return <div>
-      <Card className={classes.card}>
+      <Card className={classNames(classes.card)}>
         <CardContent>
-          <Typography className={classes.title} color="textSecondary">
+          <Typography className={classNames(classes.title)} color="textSecondary">
             Word of the Day
           </Typography>
           <Typography variant="headline" component="h2">
@@ -43,7 +43,7 @@ function SimpleCard(props) {
             {bull}o{bull}
             lent
           </Typography>
-          <Typography className={classes.pos} color="textSecondary">
+          <Typography className={classNames(classes.pos)} color="textSecondary">
             adjective
           </Typography>
           <Typography component="p">

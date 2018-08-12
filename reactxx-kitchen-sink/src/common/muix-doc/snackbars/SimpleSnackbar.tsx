@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Button from 'reactxx-muix/current/Button/Button';
@@ -46,7 +46,7 @@ class SimpleSnackbar extends React.Component<any, any> {
         'aria-describedby': 'message-id'
       }} message={<span id="message-id">Note archived</span>} action={[<Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
               UNDO
-            </Button>, <IconButton key="close" aria-label="Close" color="inherit" className={classes.close} onClick={this.handleClose}>
+            </Button>, <IconButton key="close" aria-label="Close" color="inherit" className={classNames(classes.close)} onClick={this.handleClose}>
               <CloseIcon />
             </IconButton>]} />
       </div>;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import Fade from 'reactxx-muix/current/Fade/Fade';
 import Button from 'reactxx-muix/current/Button/Button';
@@ -73,7 +73,7 @@ class DelayingAppearance extends React.Component<any, any> {
             <CircularProgress />
           </Fade>
         </div>
-        <Button onClick={this.handleClickLoading} className={classes.button}>
+        <Button onClick={this.handleClickLoading} className={classNames(classes.button)}>
           {loading ? 'Stop loading' : 'Loading'}
         </Button>
         <div className={classNamesStr(classes.placeholder)}>
@@ -83,7 +83,7 @@ class DelayingAppearance extends React.Component<any, any> {
               <CircularProgress />
             </Fade>}
         </div>
-        <Button onClick={this.handleClickQuery} className={classes.button}>
+        <Button onClick={this.handleClickQuery} className={classNames(classes.button)}>
           {query !== 'idle' ? 'Reset' : 'Simulate a load'}
         </Button>
       </div>;

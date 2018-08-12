@@ -1,5 +1,5 @@
 // This file is shared across the demos.
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import React from 'react';
 import ListItem from 'reactxx-muix/current/ListItem/ListItem';
 import ListItemIcon from 'reactxx-muix/current/ListItemIcon/ListItemIcon';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import GridList from 'reactxx-muix/current/GridList/GridList';
@@ -47,7 +47,7 @@ function ImageGridList(props) {
     classes
   } = props;
   return <div className={classNamesStr(classes.root)}>
-      <GridList cellHeight={160} className={classes.gridList} cols={3}>
+      <GridList cellHeight={160} className={classNames(classes.gridList)} cols={3}>
         {tileData.map(tile => <GridListTile key={tile.img} cols={tile.cols || 1}>
             <img src={tile.img} alt={tile.title} />
           </GridListTile>)}

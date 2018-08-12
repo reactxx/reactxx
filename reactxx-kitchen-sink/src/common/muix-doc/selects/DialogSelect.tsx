@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import Button from 'reactxx-muix/current/Button/Button';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
@@ -55,7 +55,7 @@ class DialogSelect extends React.Component<any, any> {
           <DialogTitle>Fill the form</DialogTitle>
           <DialogContent>
             <form className={classNamesStr(classes.container)}>
-              <FormControl className={classes.formControl}>
+              <FormControl className={classNames(classes.formControl)}>
                 <InputLabel htmlFor="age-native-simple">Age</InputLabel>
                 <Select native value={this.state.age} onChange={this.handleChange('age')} input={<Input id="age-native-simple" />}>
                   <option value="" />
@@ -64,7 +64,7 @@ class DialogSelect extends React.Component<any, any> {
                   <option value={30}>Thirty</option>
                 </Select>
               </FormControl>
-              <FormControl className={classes.formControl}>
+              <FormControl className={classNames(classes.formControl)}>
                 <InputLabel htmlFor="age-simple">Age</InputLabel>
                 <Select value={this.state.age} onChange={this.handleChange('age')} input={<Input id="age-simple" />}>
                   <MenuItem value="">

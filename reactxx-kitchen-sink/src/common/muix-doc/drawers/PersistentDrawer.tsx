@@ -1,7 +1,6 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Drawer from 'reactxx-muix/current/Drawer/Drawer';
 import AppBar from 'reactxx-muix/current/AppBar/AppBar';

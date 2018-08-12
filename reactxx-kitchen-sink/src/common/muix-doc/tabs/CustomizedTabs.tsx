@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Tabs from 'reactxx-muix/current/Tabs/Tabs';
@@ -76,7 +76,7 @@ class CustomizedTabs extends React.Component<any, any> {
           selected: classes.tabSelected
         }} label="Tab 3" />
         </Tabs>
-        <Typography className={classes.typography}>Ant Design UI powered by Material-UI</Typography>
+        <Typography className={classNames(classes.typography)}>Ant Design UI powered by Material-UI</Typography>
       </div>;
   }
 

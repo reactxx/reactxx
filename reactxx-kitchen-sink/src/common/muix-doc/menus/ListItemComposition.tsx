@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import MenuList from 'reactxx-muix/current/MenuList/MenuList';
 import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';
@@ -30,24 +30,24 @@ function ListItemComposition(props) {
   } = props;
   return <Paper>
       <MenuList>
-        <MenuItem className={classes.menuItem}>
-          <ListItemIcon className={classes.icon}>
+        <MenuItem className={classNames(classes.menuItem)}>
+          <ListItemIcon className={classNames(classes.icon)}>
             <SendIcon />
           </ListItemIcon>
           <ListItemText classes={{
           primary: classes.primary
         }} inset primary="Sent mail" />
         </MenuItem>
-        <MenuItem className={classes.menuItem}>
-          <ListItemIcon className={classes.icon}>
+        <MenuItem className={classNames(classes.menuItem)}>
+          <ListItemIcon className={classNames(classes.icon)}>
             <DraftsIcon />
           </ListItemIcon>
           <ListItemText classes={{
           primary: classes.primary
         }} inset primary="Drafts" />
         </MenuItem>
-        <MenuItem className={classes.menuItem}>
-          <ListItemIcon className={classes.icon}>
+        <MenuItem className={classNames(classes.menuItem)}>
+          <ListItemIcon className={classNames(classes.icon)}>
             <InboxIcon />
           </ListItemIcon>
           <ListItemText classes={{

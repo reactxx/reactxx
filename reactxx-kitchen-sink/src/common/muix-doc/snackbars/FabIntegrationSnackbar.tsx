@@ -1,7 +1,6 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import AppBar from 'reactxx-muix/current/AppBar/AppBar';
 import Toolbar from 'reactxx-muix/current/Toolbar/Toolbar';
@@ -80,13 +79,13 @@ class FabIntegrationSnackbar extends React.Component<any, any> {
     } = this.state;
     const fabClassName = classNames(classes.fab, open ? classes.fabMoveUp : classes.fabMoveDown);
     return <div className={classNamesStr(classes.root)}>
-        <Button className={classes.button} onClick={this.handleClick}>
+        <Button className={classNames(classes.button)} onClick={this.handleClick}>
           Open snackbar
         </Button>
         <div className={classNamesStr(classes.appFrame)}>
           <AppBar position="static" color="primary">
             <Toolbar>
-              <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+              <IconButton className={classNames(classes.menuButton)} color="inherit" aria-label="Menu">
                 <MenuIcon />
               </IconButton>
               <Typography variant="title" color="inherit">
@@ -94,7 +93,7 @@ class FabIntegrationSnackbar extends React.Component<any, any> {
               </Typography>
             </Toolbar>
           </AppBar>
-          <Button variant="fab" color="secondary" className={fabClassName}>
+          <Button variant="fab" color="secondary" className={classNames(fabClassName)}>
             <AddIcon />
           </Button>
           <Snackbar open={open} autoHideDuration={4000} onClose={this.handleClose} ContentProps={{
@@ -102,7 +101,7 @@ class FabIntegrationSnackbar extends React.Component<any, any> {
           className: classes.snackbarContent
         }} message={<span id="snackbar-fab-message-id">Archived</span>} action={<Button color="inherit" size="small" onClick={this.handleClose}>
                 Undo
-              </Button>} className={classes.snackbar} />
+              </Button>} className={classNames(classes.snackbar)} />
         </div>
       </div>;
   }

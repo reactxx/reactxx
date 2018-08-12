@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import GridList from 'reactxx-muix/current/GridList/GridList';
@@ -55,12 +55,12 @@ function AdvancedGridList(props) {
     classes
   } = props;
   return <div className={classNamesStr(classes.root)}>
-      <GridList cellHeight={200} spacing={1} className={classes.gridList}>
+      <GridList cellHeight={200} spacing={1} className={classNames(classes.gridList)}>
         {tileData.map(tile => <GridListTile key={tile.img} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
             <img src={tile.img} alt={tile.title} />
-            <GridListTileBar title={tile.title} titlePosition="top" actionIcon={<IconButton className={classes.icon}>
+            <GridListTileBar title={tile.title} titlePosition="top" actionIcon={<IconButton className={classNames(classes.icon)}>
                   <StarBorderIcon />
-                </IconButton>} actionPosition="left" className={classes.titleBar} />
+                </IconButton>} actionPosition="left" className={classNames(classes.titleBar)} />
           </GridListTile>)}
       </GridList>
     </div>;

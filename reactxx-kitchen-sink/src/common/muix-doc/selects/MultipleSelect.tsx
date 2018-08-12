@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Input from 'reactxx-muix/current/Input/Input';
@@ -58,7 +58,7 @@ class MultipleSelect extends React.Component<any, any> {
       theme
     } = this.props;
     return <div className={classNamesStr(classes.root)}>
-        <FormControl className={classes.formControl}>
+        <FormControl className={classNames(classes.formControl)}>
           <InputLabel htmlFor="select-multiple">Name</InputLabel>
           <Select multiple value={this.state.name} onChange={this.handleChange} input={<Input id="select-multiple" />} MenuProps={MenuProps}>
             {names.map(name => <MenuItem key={name} value={name} style={({
@@ -68,7 +68,7 @@ class MultipleSelect extends React.Component<any, any> {
               </MenuItem>)}
           </Select>
         </FormControl>
-        <FormControl className={classes.formControl}>
+        <FormControl className={classNames(classes.formControl)}>
           <InputLabel htmlFor="select-multiple-checkbox">Tag</InputLabel>
           <Select multiple value={this.state.name} onChange={this.handleChange} input={<Input id="select-multiple-checkbox" />} renderValue={(selected: any) => selected.join(', ')} MenuProps={MenuProps}>
             {names.map(name => <MenuItem key={name} value={name}>
@@ -77,10 +77,10 @@ class MultipleSelect extends React.Component<any, any> {
               </MenuItem>)}
           </Select>
         </FormControl>
-        <FormControl className={classes.formControl}>
+        <FormControl className={classNames(classes.formControl)}>
           <InputLabel htmlFor="select-multiple-chip">Chip</InputLabel>
           <Select multiple value={this.state.name} onChange={this.handleChange} input={<Input id="select-multiple-chip" />} renderValue={(selected: any) => <div className={classNamesStr(classes.chips)}>
-                {selected.map(value => <Chip key={value} label={value} className={classes.chip} />)}
+                {selected.map(value => <Chip key={value} label={value} className={classNames(classes.chip)} />)}
               </div>} MenuProps={MenuProps}>
             {names.map(name => <MenuItem key={name} value={name} style={({
             fontWeight: this.state.name.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium

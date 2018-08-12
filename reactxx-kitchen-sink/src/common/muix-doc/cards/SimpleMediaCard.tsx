@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Card from 'reactxx-muix/current/Card/Card';
@@ -24,8 +24,8 @@ function SimpleMediaCard(props) {
     classes
   } = props;
   return <div>
-      <Card className={classes.card}>
-        <CardMedia className={classes.media} image="src/ks/common/muix/static/images/cards/contemplative-reptile.jpg" title="Contemplative Reptile" />
+      <Card className={classNames(classes.card)}>
+        <CardMedia className={classNames(classes.media)} image="src/ks/common/muix/static/images/cards/contemplative-reptile.jpg" title="Contemplative Reptile" />
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2">
             Lizard

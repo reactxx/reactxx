@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Button from 'reactxx-muix/current/Button/Button';
@@ -17,43 +17,43 @@ function ButtonSizes(props) {
   } = props;
   return <div>
       <div>
-        <Button size="small" className={classes.button}>
+        <Button size="small" className={classNames(classes.button)}>
           Small
         </Button>
-        <Button size="medium" className={classes.button}>
+        <Button size="medium" className={classNames(classes.button)}>
           Medium
         </Button>
-        <Button size="large" className={classes.button}>
+        <Button size="large" className={classNames(classes.button)}>
           Large
         </Button>
       </div>
       <div>
-        <Button variant="outlined" size="small" color="primary" className={classes.button}>
+        <Button variant="outlined" size="small" color="primary" className={classNames(classes.button)}>
           Small
         </Button>
-        <Button variant="outlined" size="medium" color="primary" className={classes.button}>
+        <Button variant="outlined" size="medium" color="primary" className={classNames(classes.button)}>
           Medium
         </Button>
-        <Button variant="outlined" size="large" color="primary" className={classes.button}>
+        <Button variant="outlined" size="large" color="primary" className={classNames(classes.button)}>
           Large
         </Button>
       </div>
       <div>
-        <Button variant="contained" size="small" color="primary" className={classes.button}>
+        <Button variant="contained" size="small" color="primary" className={classNames(classes.button)}>
           Small
         </Button>
-        <Button variant="contained" size="medium" color="primary" className={classes.button}>
+        <Button variant="contained" size="medium" color="primary" className={classNames(classes.button)}>
           Medium
         </Button>
-        <Button variant="contained" size="large" color="primary" className={classes.button}>
+        <Button variant="contained" size="large" color="primary" className={classNames(classes.button)}>
           Large
         </Button>
       </div>
       <div>
-        <Button variant="fab" mini color="secondary" aria-label="Add" className={classes.button}>
+        <Button variant="fab" mini color="secondary" aria-label="Add" className={classNames(classes.button)}>
           <AddIcon />
         </Button>
-        <Button variant="fab" color="secondary" aria-label="Add" className={classes.button}>
+        <Button variant="fab" color="secondary" aria-label="Add" className={classNames(classes.button)}>
           <AddIcon />
         </Button>
       </div>

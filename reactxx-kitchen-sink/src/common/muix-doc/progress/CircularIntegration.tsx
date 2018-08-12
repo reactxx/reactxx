@@ -1,7 +1,6 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import CircularProgress from 'reactxx-muix/current/CircularProgress/CircularProgress';
 import green from 'reactxx-mui-web/colors/green';
@@ -81,16 +80,16 @@ class CircularIntegration extends React.Component<any, any> {
     });
     return <div className={classNamesStr(classes.root)}>
         <div className={classNamesStr(classes.wrapper)}>
-          <Button variant="fab" color="primary" className={buttonClassname} onClick={this.handleButtonClick}>
+          <Button variant="fab" color="primary" className={classNames(buttonClassname)} onClick={this.handleButtonClick}>
             {success ? <CheckIcon /> : <SaveIcon />}
           </Button>
-          {loading && <CircularProgress size={68} className={classes.fabProgress} />}
+          {loading && <CircularProgress size={68} className={classNames(classes.fabProgress)} />}
         </div>
         <div className={classNamesStr(classes.wrapper)}>
-          <Button variant="contained" color="primary" className={buttonClassname} disabled={loading} onClick={this.handleButtonClick}>
+          <Button variant="contained" color="primary" className={classNames(buttonClassname)} disabled={loading} onClick={this.handleButtonClick}>
             Accept terms
           </Button>
-          {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+          {loading && <CircularProgress size={24} className={classNames(classes.buttonProgress)} />}
         </div>
       </div>;
   }

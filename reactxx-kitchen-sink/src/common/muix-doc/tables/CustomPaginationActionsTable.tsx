@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Table from 'reactxx-muix/current/Table/Table';
@@ -130,9 +130,9 @@ class CustomPaginationActionsTable extends React.Component<any, any> {
       page
     } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
-    return <Paper className={classes.root}>
+    return <Paper className={classNames(classes.root)}>
         <div className={classNamesStr(classes.tableWrapper)}>
-          <Table className={classes.table}>
+          <Table className={classNames(classes.table)}>
             <TableBody>
               {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
               return <TableRow key={n.id}>

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
@@ -44,7 +44,7 @@ class SimpleDialog extends React.Component<any, any> {
           <List>
             {emails.map(email => <ListItem button onClick={() => this.handleListItemClick(email)} key={email}>
                 <ListItemAvatar>
-                  <Avatar className={classes.avatar}>
+                  <Avatar className={classNames(classes.avatar)}>
                     <PersonIcon />
                   </Avatar>
                 </ListItemAvatar>

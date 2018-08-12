@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Button from 'reactxx-muix/current/Button/Button';
@@ -91,12 +91,12 @@ class CustomizedTooltips extends React.Component<any, any> {
     } = this.props;
     return <div>
         <Tooltip title="Add">
-          <Button className={classes.button}>Default</Button>
+          <Button className={classNames(classes.button)}>Default</Button>
         </Tooltip>
         <Tooltip title="Add" classes={{
         tooltip: classes.lightTooltip
       }}>
-          <Button className={classes.button}>Light</Button>
+          <Button className={classNames(classes.button)}>Light</Button>
         </Tooltip>
         <Tooltip title={<React.Fragment>
               Add
@@ -113,7 +113,7 @@ class CustomizedTooltips extends React.Component<any, any> {
           }
         }
       }}>
-          <Button className={classes.button}>Arrow</Button>
+          <Button className={classNames(classes.button)}>Arrow</Button>
         </Tooltip>
       </div>;
   }

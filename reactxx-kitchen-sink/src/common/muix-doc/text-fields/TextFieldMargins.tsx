@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import TextField from 'reactxx-muix/current/TextField/TextField';
@@ -21,9 +21,9 @@ const TextFieldMargins = props => {
     classes
   } = props;
   return <div className={classNamesStr(classes.container)}>
-      <TextField label="None" id="margin-none" defaultValue="Default Value" className={classes.textField} helperText="Some important text" />
-      <TextField label="Dense" id="margin-dense" defaultValue="Default Value" className={classes.textField} helperText="Some important text" margin="dense" />
-      <TextField label="Normal" id="margin-normal" defaultValue="Default Value" className={classes.textField} helperText="Some important text" margin="normal" />
+      <TextField label="None" id="margin-none" defaultValue="Default Value" className={classNames(classes.textField)} helperText="Some important text" />
+      <TextField label="Dense" id="margin-dense" defaultValue="Default Value" className={classNames(classes.textField)} helperText="Some important text" margin="dense" />
+      <TextField label="Normal" id="margin-normal" defaultValue="Default Value" className={classNames(classes.textField)} helperText="Some important text" margin="normal" />
     </div>;
 };
 

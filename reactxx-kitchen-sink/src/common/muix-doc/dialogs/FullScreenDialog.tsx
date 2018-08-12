@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Button from 'reactxx-muix/current/Button/Button';
@@ -49,12 +49,12 @@ class FullScreenDialog extends React.Component<any, any> {
     return <div>
         <Button onClick={this.handleClickOpen}>Open full-screen dialog</Button>
         <Dialog fullScreen open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
-          <AppBar className={classes.appBar}>
+          <AppBar className={classNames(classes.appBar)}>
             <Toolbar>
               <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
                 <CloseIcon />
               </IconButton>
-              <Typography variant="title" color="inherit" className={classes.flex}>
+              <Typography variant="title" color="inherit" className={classNames(classes.flex)}>
                 Sound
               </Typography>
               <Button color="inherit" onClick={this.handleClose}>

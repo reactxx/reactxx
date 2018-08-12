@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Input from 'reactxx-muix/current/Input/Input';
@@ -39,7 +39,7 @@ class SimpleSelect extends React.Component<any, any> {
       classes
     } = this.props;
     return <form className={classNamesStr(classes.root)} autoComplete="off">
-        <FormControl className={classes.formControl}>
+        <FormControl className={classNames(classes.formControl)}>
           <InputLabel htmlFor="age-simple">Age</InputLabel>
           <Select value={this.state.age} onChange={this.handleChange} inputProps={{
           name: 'age',
@@ -53,7 +53,7 @@ class SimpleSelect extends React.Component<any, any> {
             <MenuItem value={30}>Thirty</MenuItem>
           </Select>
         </FormControl>
-        <FormControl className={classes.formControl}>
+        <FormControl className={classNames(classes.formControl)}>
           <InputLabel htmlFor="age-helper">Age</InputLabel>
           <Select value={this.state.age} onChange={this.handleChange} input={<Input name="age" id="age-helper" />}>
             <MenuItem value="">
@@ -65,8 +65,8 @@ class SimpleSelect extends React.Component<any, any> {
           </Select>
           <FormHelperText>Some important helper text</FormHelperText>
         </FormControl>
-        <FormControl className={classes.formControl}>
-          <Select value={this.state.age} onChange={this.handleChange} displayEmpty name="age" className={classes.selectEmpty}>
+        <FormControl className={classNames(classes.formControl)}>
+          <Select value={this.state.age} onChange={this.handleChange} displayEmpty name="age" className={classNames(classes.selectEmpty)}>
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
@@ -76,11 +76,11 @@ class SimpleSelect extends React.Component<any, any> {
           </Select>
           <FormHelperText>Without label</FormHelperText>
         </FormControl>
-        <FormControl className={classes.formControl}>
+        <FormControl className={classNames(classes.formControl)}>
           <InputLabel shrink htmlFor="age-label-placeholder">
             Age
           </InputLabel>
-          <Select value={this.state.age} onChange={this.handleChange} input={<Input name="age" id="age-label-placeholder" />} displayEmpty name="age" className={classes.selectEmpty}>
+          <Select value={this.state.age} onChange={this.handleChange} input={<Input name="age" id="age-label-placeholder" />} displayEmpty name="age" className={classNames(classes.selectEmpty)}>
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
@@ -90,7 +90,7 @@ class SimpleSelect extends React.Component<any, any> {
           </Select>
           <FormHelperText>Label + placeholder</FormHelperText>
         </FormControl>
-        <FormControl className={classes.formControl} disabled>
+        <FormControl className={classNames(classes.formControl)} disabled>
           <InputLabel htmlFor="name-disabled">Name</InputLabel>
           <Select value={this.state.name} onChange={this.handleChange} input={<Input name="name" id="name-disabled" />}>
             <MenuItem value="">
@@ -102,7 +102,7 @@ class SimpleSelect extends React.Component<any, any> {
           </Select>
           <FormHelperText>Disabled</FormHelperText>
         </FormControl>
-        <FormControl className={classes.formControl} error>
+        <FormControl className={classNames(classes.formControl)} error>
           <InputLabel htmlFor="name-error">Name</InputLabel>
           <Select value={this.state.name} onChange={this.handleChange} name="name" renderValue={value => `⚠️  - ${value}`} input={<Input id="name-error" />}>
             <MenuItem value="">
@@ -114,7 +114,7 @@ class SimpleSelect extends React.Component<any, any> {
           </Select>
           <FormHelperText>Error</FormHelperText>
         </FormControl>
-        <FormControl className={classes.formControl}>
+        <FormControl className={classNames(classes.formControl)}>
           <InputLabel htmlFor="name-readonly">Name</InputLabel>
           <Select value={this.state.name} onChange={this.handleChange} input={<Input name="name" id="name-readonly" readOnly />}>
             <MenuItem value="">
@@ -126,7 +126,7 @@ class SimpleSelect extends React.Component<any, any> {
           </Select>
           <FormHelperText>Read only</FormHelperText>
         </FormControl>
-        <FormControl className={classes.formControl}>
+        <FormControl className={classNames(classes.formControl)}>
           <InputLabel htmlFor="age-auto-width">Age</InputLabel>
           <Select value={this.state.age} onChange={this.handleChange} input={<Input name="age" id="age-auto-width" />} autoWidth>
             <MenuItem value="">
@@ -138,8 +138,8 @@ class SimpleSelect extends React.Component<any, any> {
           </Select>
           <FormHelperText>Auto width</FormHelperText>
         </FormControl>
-        <FormControl className={classes.formControl}>
-          <Select value={this.state.age} onChange={this.handleChange} name="age" displayEmpty className={classes.selectEmpty}>
+        <FormControl className={classNames(classes.formControl)}>
+          <Select value={this.state.age} onChange={this.handleChange} name="age" displayEmpty className={classNames(classes.selectEmpty)}>
             <MenuItem value="" disabled>
               Placeholder
             </MenuItem>
@@ -149,11 +149,11 @@ class SimpleSelect extends React.Component<any, any> {
           </Select>
           <FormHelperText>Placeholder</FormHelperText>
         </FormControl>
-        <FormControl required className={classes.formControl}>
+        <FormControl required className={classNames(classes.formControl)}>
           <InputLabel htmlFor="age-required">Age</InputLabel>
           <Select value={this.state.age} onChange={this.handleChange} name="age" inputProps={{
           id: 'age-required'
-        }} className={classes.selectEmpty}>
+        }} className={classNames(classes.selectEmpty)}>
             <MenuItem value="">
               <em>None</em>
             </MenuItem>

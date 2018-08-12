@@ -6,26 +6,26 @@ import DenseAppBar from './DenseAppBar'
 import MenuAppBar from './MenuAppBar'
 import SimpleAppBar from './SimpleAppBar'
 
-const App: React.SFC = () => <div style={{ display:'flex', flexDirection:'column', flex:1, padding: 30, overflow: 'auto' }}>
+const App: React.SFC = () => <div style={{padding: 30, overflow:'auto'}}>
   <h2>ButtonAppBar</h2>
-  <div style={{ flexShrink: 0 }}>
-    <ButtonAppBar />
-  </div>
+<div style={{flexShrink: 0}}>
+  <ButtonAppBar/>
+</div>
 
-  <h2>DenseAppBar</h2>
-  <div style={{ flexShrink: 0 }}>
-    <DenseAppBar />
-  </div>
+<h2>DenseAppBar</h2>
+<div style={{flexShrink: 0}}>
+  <DenseAppBar/>
+</div>
 
-  <h2>MenuAppBar</h2>
-  <div style={{ flexShrink: 0 }}>
-    <MenuAppBar />
-  </div>
+<h2>MenuAppBar</h2>
+<div style={{flexShrink: 0}}>
+  <MenuAppBar/>
+</div>
 
-  <h2>SimpleAppBar</h2>
-  <div style={{ flexShrink: 0 }}>
-    <SimpleAppBar />
-  </div>
+<h2>SimpleAppBar</h2>
+<div style={{flexShrink: 0}}>
+  <SimpleAppBar/>
+</div>
 
 </div>
 

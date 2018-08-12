@@ -1,7 +1,6 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import SwipeableViews from 'react-swipeable-views';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import AppBar from 'reactxx-muix/current/AppBar/AppBar';
@@ -68,7 +67,9 @@ class FloatingActionButtonZoom extends React.Component<any, any> {
   render() {
     const {
       classes,
-      theme
+      $system: {
+        theme
+      }
     } = this.props;
     const transitionDuration = {
       enter: theme.transitions.duration.enteringScreen,
@@ -103,7 +104,7 @@ class FloatingActionButtonZoom extends React.Component<any, any> {
         {fabs.map((fab, index) => <Zoom key={fab.color} in={this.state.value === index} timeout={transitionDuration} style={{
         transitionDelay: `${this.state.value === index ? transitionDuration.exit : 0}ms`
       }} unmountOnExit>
-            <Button variant="fab" className={fab.className} color={fab.color}>
+            <Button variant="fab" className={classNames(fab.className)} color={fab.color}>
               {fab.icon}
             </Button>
           </Zoom>)}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Button from 'reactxx-muix/current/Button/Button';
@@ -18,22 +18,22 @@ function TextButtons(props) {
     classes
   } = props;
   return <div>
-      <Button className={classes.button}>Default</Button>
-      <Button color="primary" className={classes.button}>
+      <Button className={classNames(classes.button)}>Default</Button>
+      <Button color="primary" className={classNames(classes.button)}>
         Primary
       </Button>
-      <Button color="secondary" className={classes.button}>
+      <Button color="secondary" className={classNames(classes.button)}>
         Secondary
       </Button>
-      <Button disabled className={classes.button}>
+      <Button disabled className={classNames(classes.button)}>
         Disabled
       </Button>
-      <Button href="#text-buttons" className={classes.button}>
+      <Button href="#text-buttons" className={classNames(classes.button)}>
         Link
       </Button>
       <input accept="image/*" className={classNamesStr(classes.input)} id="flat-button-file" multiple type="file" />
       <label htmlFor="flat-button-file">
-        <Button component="span" className={classes.button}>
+        <Button component="span" className={classNames(classes.button)}>
           Upload
         </Button>
       </label>

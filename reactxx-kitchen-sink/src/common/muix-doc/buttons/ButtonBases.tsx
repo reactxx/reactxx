@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import ButtonBase from 'reactxx-muix/current/ButtonBase/ButtonBase';
@@ -20,20 +20,34 @@ const styles = theme => ({
       // Overrides inline-style
       height: 100
     },
-    '&:hover, &$focusVisible': {
+    "&:hover": {
       zIndex: 1,
-      '& $imageBackdrop': {
+      '& .imageBackdrop1': {
         opacity: 0.15
       },
-      '& $imageMarked': {
+      '& .imageMarked1': {
         opacity: 0
       },
-      '& $imageTitle': {
+      '& .imageTitle1': {
+        border: '4px solid currentColor'
+      }
+    },
+    "&.focusVisible1": {
+      zIndex: 1,
+      '& .imageBackdrop1': {
+        opacity: 0.15
+      },
+      '& .imageMarked1': {
+        opacity: 0
+      },
+      '& .imageTitle1': {
         border: '4px solid currentColor'
       }
     }
   },
-  focusVisible: {},
+  focusVisible: {
+    NAME$focusVisible1: true
+  },
   imageButton: {
     position: 'absolute',
     left: 0,
@@ -62,11 +76,13 @@ const styles = theme => ({
     bottom: 0,
     backgroundColor: theme.palette.common.black,
     opacity: 0.4,
-    transition: theme.transitions.create('opacity')
+    transition: theme.transitions.create('opacity'),
+    NAME$imageBackdrop1: true
   },
   imageTitle: {
     position: 'relative',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 4}px ${theme.spacing.unit + 6}px`
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 4}px ${theme.spacing.unit + 6}px`,
+    NAME$imageTitle1: true
   },
   imageMarked: {
     height: 3,
@@ -75,7 +91,8 @@ const styles = theme => ({
     position: 'absolute',
     bottom: -2,
     left: 'calc(50% - 9px)',
-    transition: theme.transitions.create('opacity')
+    transition: theme.transitions.create('opacity'),
+    NAME$imageMarked1: true
   }
 });
 
@@ -98,7 +115,7 @@ function ButtonBases(props) {
     classes
   } = props;
   return <div className={classNamesStr(classes.root)}>
-      {images.map(image => <ButtonBase focusRipple key={image.title} className={classes.image} focusVisibleClassName={classes.focusVisible} style={{
+      {images.map(image => <ButtonBase focusRipple key={image.title} className={classNames(classes.image)} focusVisibleClassName={classes.focusVisible} style={{
       width: image.width
     }}>
           <span className={classNamesStr(classes.imageSrc)} style={{
@@ -106,7 +123,7 @@ function ButtonBases(props) {
       }} />
           <span className={classNamesStr(classes.imageBackdrop)} />
           <span className={classNamesStr(classes.imageButton)}>
-            <Typography component="span" variant="subheading" color="inherit" className={classes.imageTitle}>
+            <Typography component="span" variant="subheading" color="inherit" className={classNames(classes.imageTitle)}>
               {image.title}
               <span className={classNamesStr(classes.imageMarked)} />
             </Typography>

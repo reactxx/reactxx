@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Drawer from 'reactxx-muix/current/Drawer/Drawer';
@@ -73,9 +73,9 @@ class ResponsiveDrawer extends React.Component<any, any> {
         <List>{otherMailFolderListItems}</List>
       </div>;
     return <div className={classNamesStr(classes.root)}>
-        <AppBar className={classes.appBar}>
+        <AppBar className={classNames(classes.appBar)}>
           <Toolbar>
-            <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerToggle} className={classes.navIconHide}>
+            <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerToggle} className={classNames(classes.navIconHide)}>
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>

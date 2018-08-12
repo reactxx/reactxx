@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import ExpansionPanel from 'reactxx-muix/current/ExpansionPanel/ExpansionPanel';
@@ -25,7 +25,7 @@ function SimpleExpansionPanel(props) {
   return <div className={classNamesStr(classes.root)}>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>Expansion Panel 1</Typography>
+          <Typography className={classNames(classes.heading)}>Expansion Panel 1</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
@@ -36,7 +36,7 @@ function SimpleExpansionPanel(props) {
       </ExpansionPanel>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>Expansion Panel 2</Typography>
+          <Typography className={classNames(classes.heading)}>Expansion Panel 2</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
@@ -47,7 +47,7 @@ function SimpleExpansionPanel(props) {
       </ExpansionPanel>
       <ExpansionPanel disabled>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>Disabled Expansion Panel</Typography>
+          <Typography className={classNames(classes.heading)}>Disabled Expansion Panel</Typography>
         </ExpansionPanelSummary>
       </ExpansionPanel>
     </div>;

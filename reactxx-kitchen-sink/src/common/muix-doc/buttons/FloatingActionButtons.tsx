@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Button from 'reactxx-muix/current/Button/Button';
@@ -22,17 +22,17 @@ function FloatingActionButtons(props) {
     classes
   } = props;
   return <div>
-      <Button variant="fab" color="primary" aria-label="Add" className={classes.button}>
+      <Button variant="fab" color="primary" aria-label="Add" className={classNames(classes.button)}>
         <AddIcon />
       </Button>
-      <Button variant="fab" color="secondary" aria-label="Edit" className={classes.button}>
+      <Button variant="fab" color="secondary" aria-label="Edit" className={classNames(classes.button)}>
         <Icon>edit_icon</Icon>
       </Button>
-      <Button variant="extendedFab" aria-label="Delete" className={classes.button}>
-        <NavigationIcon className={classes.extendedIcon} />
+      <Button variant="extendedFab" aria-label="Delete" className={classNames(classes.button)}>
+        <NavigationIcon className={classNames(classes.extendedIcon)} />
         Extended
       </Button>
-      <Button variant="fab" disabled aria-label="Delete" className={classes.button}>
+      <Button variant="fab" disabled aria-label="Delete" className={classNames(classes.button)}>
         <DeleteIcon />
       </Button>
     </div>;

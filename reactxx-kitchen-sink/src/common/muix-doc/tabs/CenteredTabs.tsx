@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Paper from 'reactxx-muix/current/Paper/Paper';
@@ -25,7 +25,7 @@ class CenteredTabs extends React.Component<any, any> {
     const {
       classes
     } = this.props;
-    return <Paper className={classes.root}>
+    return <Paper className={classNames(classes.root)}>
         <Tabs value={this.state.value} onChange={this.handleChange} indicatorColor="primary" textColor="primary" centered>
           <Tab label="Item One" />
           <Tab label="Item Two" />

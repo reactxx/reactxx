@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import CircularProgress from 'reactxx-muix/current/CircularProgress/CircularProgress';
@@ -38,12 +38,12 @@ class CircularStatic extends React.Component<any, any> {
       classes
     } = this.props;
     return <div>
-        <CircularProgress className={classes.progress} variant="static" value={5} />
-        <CircularProgress className={classes.progress} variant="static" value={25} />
-        <CircularProgress className={classes.progress} variant="static" value={50} />
-        <CircularProgress className={classes.progress} variant="static" value={75} />
-        <CircularProgress className={classes.progress} variant="static" value={100} />
-        <CircularProgress className={classes.progress} variant="static" value={this.state.completed} />
+        <CircularProgress className={classNames(classes.progress)} variant="static" value={5} />
+        <CircularProgress className={classNames(classes.progress)} variant="static" value={25} />
+        <CircularProgress className={classNames(classes.progress)} variant="static" value={50} />
+        <CircularProgress className={classNames(classes.progress)} variant="static" value={75} />
+        <CircularProgress className={classNames(classes.progress)} variant="static" value={100} />
+        <CircularProgress className={classNames(classes.progress)} variant="static" value={this.state.completed} />
       </div>;
   }
 

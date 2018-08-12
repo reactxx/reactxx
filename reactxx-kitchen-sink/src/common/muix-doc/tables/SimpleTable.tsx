@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Table from 'reactxx-muix/current/Table/Table';
@@ -40,8 +40,8 @@ function SimpleTable(props) {
   const {
     classes
   } = props;
-  return <Paper className={classes.root}>
-      <Table className={classes.table}>
+  return <Paper className={classNames(classes.root)}>
+      <Table className={classNames(classes.table)}>
         <TableHead>
           <TableRow>
             <TableCell>Dessert (100g serving)</TableCell>

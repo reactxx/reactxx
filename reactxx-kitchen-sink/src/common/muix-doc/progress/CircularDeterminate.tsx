@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import CircularProgress from 'reactxx-muix/current/CircularProgress/CircularProgress';
@@ -38,10 +38,10 @@ class CircularDeterminate extends React.Component<any, any> {
       classes
     } = this.props;
     return <div>
-        <CircularProgress className={classes.progress} variant="determinate" value={this.state.completed} />
-        <CircularProgress className={classes.progress} variant="determinate" size={50} value={this.state.completed} />
-        <CircularProgress className={classes.progress} color="secondary" variant="determinate" value={this.state.completed} />
-        <CircularProgress className={classes.progress} color="secondary" variant="determinate" size={50} value={this.state.completed} />
+        <CircularProgress className={classNames(classes.progress)} variant="determinate" value={this.state.completed} />
+        <CircularProgress className={classNames(classes.progress)} variant="determinate" size={50} value={this.state.completed} />
+        <CircularProgress className={classNames(classes.progress)} color="secondary" variant="determinate" value={this.state.completed} />
+        <CircularProgress className={classNames(classes.progress)} color="secondary" variant="determinate" size={50} value={this.state.completed} />
       </div>;
   }
 

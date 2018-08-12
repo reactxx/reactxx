@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import List from 'reactxx-muix/current/List/List';
@@ -62,7 +62,7 @@ class InteractiveList extends React.Component<any, any> {
         </FormGroup>
         <Grid container spacing={16}>
           <Grid item xs={12} md={6}>
-            <Typography variant="title" className={classes.title}>
+            <Typography variant="title" className={classNames(classes.title)}>
               Text only
             </Typography>
             <div className={classNamesStr(classes.demo)}>
@@ -74,7 +74,7 @@ class InteractiveList extends React.Component<any, any> {
             </div>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Typography variant="title" className={classes.title}>
+            <Typography variant="title" className={classNames(classes.title)}>
               Icon with text
             </Typography>
             <div className={classNamesStr(classes.demo)}>
@@ -91,7 +91,7 @@ class InteractiveList extends React.Component<any, any> {
         </Grid>
         <Grid container spacing={16}>
           <Grid item xs={12} md={6}>
-            <Typography variant="title" className={classes.title}>
+            <Typography variant="title" className={classNames(classes.title)}>
               Avatar with text
             </Typography>
             <div className={classNamesStr(classes.demo)}>
@@ -108,7 +108,7 @@ class InteractiveList extends React.Component<any, any> {
             </div>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Typography variant="title" className={classes.title}>
+            <Typography variant="title" className={classNames(classes.title)}>
               Avatar with text and icon
             </Typography>
             <div className={classNamesStr(classes.demo)}>

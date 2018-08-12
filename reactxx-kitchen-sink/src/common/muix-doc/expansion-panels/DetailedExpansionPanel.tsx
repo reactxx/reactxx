@@ -1,8 +1,7 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
-import classNames from 'classnames';
 import ExpansionPanel from 'reactxx-muix/current/ExpansionPanel/ExpansionPanel';
 import ExpansionPanelDetails from 'reactxx-muix/current/ExpansionPanelDetails/ExpansionPanelDetails';
 import ExpansionPanelSummary from 'reactxx-muix/current/ExpansionPanelSummary/ExpansionPanelSummary';
@@ -56,16 +55,16 @@ function DetailedExpansionPanel(props) {
       <ExpansionPanel defaultExpanded>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <div className={classNamesStr(classes.column)}>
-            <Typography className={classes.heading}>Location</Typography>
+            <Typography className={classNames(classes.heading)}>Location</Typography>
           </div>
           <div className={classNamesStr(classes.column)}>
-            <Typography className={classes.secondaryHeading}>Select trip destination</Typography>
+            <Typography className={classNames(classes.secondaryHeading)}>Select trip destination</Typography>
           </div>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.details}>
+        <ExpansionPanelDetails className={classNames(classes.details)}>
           <div className={classNamesStr(classes.column)} />
           <div className={classNamesStr(classes.column)}>
-            <Chip label="Barbados" className={classes.chip} onDelete={() => {}} />
+            <Chip label="Barbados" className={classNames(classes.chip)} onDelete={() => {}} />
           </div>
           <div className={classNamesStr(classes.column, classes.helper)}>
             <Typography variant="caption">

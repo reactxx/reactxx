@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import GridList from 'reactxx-muix/current/GridList/GridList';
@@ -50,7 +50,7 @@ function TitlebarGridList(props) {
     classes
   } = props;
   return <div className={classNamesStr(classes.root)}>
-      <GridList cellHeight={180} className={classes.gridList}>
+      <GridList cellHeight={180} className={classNames(classes.gridList)}>
         <GridListTile key="Subheader" cols={2} style={{
         height: 'auto'
       }}>
@@ -58,7 +58,7 @@ function TitlebarGridList(props) {
         </GridListTile>
         {tileData.map(tile => <GridListTile key={tile.img}>
             <img src={tile.img} alt={tile.title} />
-            <GridListTileBar title={tile.title} subtitle={<span>by: {tile.author}</span>} actionIcon={<IconButton className={classes.icon}>
+            <GridListTileBar title={tile.title} subtitle={<span>by: {tile.author}</span>} actionIcon={<IconButton className={classNames(classes.icon)}>
                   <InfoIcon />
                 </IconButton>} />
           </GridListTile>)}

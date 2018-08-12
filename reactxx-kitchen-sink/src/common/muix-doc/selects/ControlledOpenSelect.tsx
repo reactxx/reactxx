@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import InputLabel from 'reactxx-muix/current/InputLabel/InputLabel';
@@ -45,10 +45,10 @@ class ControlledOpenSelect extends React.Component<any, any> {
       classes
     } = this.props;
     return <form autoComplete="off">
-        <Button className={classes.button} onClick={this.handleOpen}>
+        <Button className={classNames(classes.button)} onClick={this.handleOpen}>
           Open the select
         </Button>
-        <FormControl className={classes.formControl}>
+        <FormControl className={classNames(classes.formControl)}>
           <InputLabel htmlFor="demo-controlled-open-select">Age</InputLabel>
           <Select open={this.state.open} onClose={this.handleClose} onOpen={this.handleOpen} value={this.state.age} onChange={this.handleChange} inputProps={{
           name: 'age',

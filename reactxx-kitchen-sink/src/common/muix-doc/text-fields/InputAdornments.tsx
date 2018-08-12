@@ -1,6 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
-import classNames from 'classnames';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import IconButton from 'reactxx-muix/current/IconButton/IconButton';
@@ -78,7 +77,7 @@ class InputAdornments extends React.Component<any, any> {
               {option.label}
             </MenuItem>)}
         </TextField>
-        <FormControl fullWidth className={classes.margin}>
+        <FormControl fullWidth className={classNames(classes.margin)}>
           <InputLabel htmlFor="adornment-amount">Amount</InputLabel>
           <Input id="adornment-amount" value={this.state.amount} onChange={this.handleChange('amount')} startAdornment={<InputAdornment position="start">$</InputAdornment>} />
         </FormControl>

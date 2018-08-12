@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Button from 'reactxx-muix/current/Button/Button';
@@ -28,17 +28,17 @@ function VariableWidth({
 }) {
   return <div>
       <Tooltip title={longText}>
-        <Button className={classes.button}>Default Width [300px]</Button>
+        <Button className={classNames(classes.button)}>Default Width [300px]</Button>
       </Tooltip>
       <Tooltip title={longText} classes={{
       tooltip: classes.customWidth
     }}>
-        <Button className={classes.button}>Custom Width [500px]</Button>
+        <Button className={classNames(classes.button)}>Custom Width [500px]</Button>
       </Tooltip>
       <Tooltip title={longText} classes={{
       tooltip: classes.noMaxWidth
     }}>
-        <Button className={classes.button}>No wrapping</Button>
+        <Button className={classNames(classes.button)}>No wrapping</Button>
       </Tooltip>
     </div>;
 }

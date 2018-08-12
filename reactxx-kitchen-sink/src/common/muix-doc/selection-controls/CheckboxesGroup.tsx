@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import FormLabel from 'reactxx-muix/current/FormLabel/FormLabel';
@@ -41,7 +41,7 @@ class CheckboxesGroup extends React.Component<any, any> {
     } = this.state;
     const error = Object.values(this.state).filter(v => v).length !== 2;
     return <div className={classNamesStr(classes.root)}>
-        <FormControl component="fieldset" className={classes.formControl}>
+        <FormControl component="fieldset" className={classNames(classes.formControl)}>
           <FormLabel component="legend">Assign responsibility</FormLabel>
           <FormGroup>
             <FormControlLabel control={<Checkbox checked={gilad} onChange={this.handleChange('gilad')} value="gilad" />} label="Gilad Gray" />
@@ -50,7 +50,7 @@ class CheckboxesGroup extends React.Component<any, any> {
           </FormGroup>
           <FormHelperText>Be careful</FormHelperText>
         </FormControl>
-        <FormControl required error={error} component="fieldset" className={classes.formControl}>
+        <FormControl required error={error} component="fieldset" className={classNames(classes.formControl)}>
           <FormLabel component="legend">Pick two</FormLabel>
           <FormGroup>
             <FormControlLabel control={<Checkbox checked={gilad} onChange={this.handleChange('gilad')} value="gilad" />} label="Gilad Gray" />

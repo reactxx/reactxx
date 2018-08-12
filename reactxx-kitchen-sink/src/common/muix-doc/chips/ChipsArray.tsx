@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Avatar from 'reactxx-muix/current/Avatar/Avatar';
@@ -59,17 +59,17 @@ class ChipsArray extends React.Component<any, any> {
     const {
       classes
     } = this.props;
-    return <Paper className={classes.root}>
+    return <Paper className={classNames(classes.root)}>
         {this.state.chipData.map(data => {
         let avatar = null;
 
         if (data.label === 'React') {
           avatar = <Avatar>
-                <TagFacesIcon className={classes.svgIcon} />
+                <TagFacesIcon className={classNames(classes.svgIcon)} />
               </Avatar>;
         }
 
-        return <Chip key={data.key} avatar={avatar} label={data.label} onDelete={this.handleDelete(data)} className={classes.chip} />;
+        return <Chip key={data.key} avatar={avatar} label={data.label} onDelete={this.handleDelete(data)} className={classNames(classes.chip)} />;
       })}
       </Paper>;
   }

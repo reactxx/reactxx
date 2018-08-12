@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Radio from 'reactxx-muix/current/Radio/Radio';
@@ -36,18 +36,18 @@ class RadioButtonsGroup extends React.Component<any, any> {
       classes
     } = this.props;
     return <div className={classNamesStr(classes.root)}>
-        <FormControl component="fieldset" className={classes.formControl}>
+        <FormControl component="fieldset" className={classNames(classes.formControl)}>
           <FormLabel component="legend">Gender</FormLabel>
-          <RadioGroup aria-label="Gender" name="gender1" className={classes.group} value={this.state.value} onChange={this.handleChange}>
+          <RadioGroup aria-label="Gender" name="gender1" className={classNames(classes.group)} value={this.state.value} onChange={this.handleChange}>
             <FormControlLabel value="female" control={<Radio />} label="Female" />
             <FormControlLabel value="male" control={<Radio />} label="Male" />
             <FormControlLabel value="other" control={<Radio />} label="Other" />
             <FormControlLabel value="disabled" disabled control={<Radio />} label="(Disabled option)" />
           </RadioGroup>
         </FormControl>
-        <FormControl component="fieldset" className={classes.formControl}>
+        <FormControl component="fieldset" className={classNames(classes.formControl)}>
           <FormLabel component="legend">Gender</FormLabel>
-          <RadioGroup aria-label="gender" name="gender2" className={classes.group} value={this.state.value} onChange={this.handleChange}>
+          <RadioGroup aria-label="gender" name="gender2" className={classNames(classes.group)} value={this.state.value} onChange={this.handleChange}>
             <FormControlLabel value="female" control={<Radio color="primary" />} label="Female" labelPlacement="start" />
             <FormControlLabel value="male" control={<Radio color="primary" />} label="Male" labelPlacement="start" />
             <FormControlLabel value="other" control={<Radio color="primary" />} label="Other" labelPlacement="start" />

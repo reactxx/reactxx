@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import ListSubheader from 'reactxx-muix/current/ListSubheader/ListSubheader';
@@ -63,7 +63,7 @@ class NestedList extends React.Component<any, any> {
           </ListItem>
           <Collapse in={this.state.open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItem button className={classes.nested}>
+              <ListItem button className={classNames(classes.nested)}>
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>

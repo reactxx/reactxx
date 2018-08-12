@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import Button from 'reactxx-muix/current/Button/Button';
 import ClickAwayListener from 'reactxx-muix/current/ClickAwayListener/ClickAwayListener';
@@ -47,7 +47,7 @@ class MenuListComposition extends React.Component<any, any> {
       open
     } = this.state;
     return <div className={classNamesStr(classes.root)}>
-        <Paper className={classes.paper}>
+        <Paper className={classNames(classes.paper)}>
           <MenuList>
             <MenuItem>Profile</MenuItem>
             <MenuItem>My account</MenuItem>

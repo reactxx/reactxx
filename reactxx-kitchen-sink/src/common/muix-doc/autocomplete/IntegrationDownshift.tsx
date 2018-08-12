@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 import Downshift from 'downshift';
@@ -201,13 +201,13 @@ class DownshiftMultiple extends React.Component<any, any> {
           fullWidth: true,
           classes,
           InputProps: getInputProps(({
-            startAdornment: selectedItem.map(item => <Chip key={item} tabIndex={-1} label={item} className={classes.chip} onDelete={this.handleDelete(item)} />),
+            startAdornment: selectedItem.map(item => <Chip key={item} tabIndex={-1} label={item} className={classNames(classes.chip)} onDelete={this.handleDelete(item)} />),
             onChange: this.handleInputChange,
             onKeyDown: this.handleKeyDown,
             placeholder: 'Select multiple countries'
           } as any))
         })}
-            {isOpen ? <Paper className={classes.paper} square>
+            {isOpen ? <Paper className={classNames(classes.paper)} square>
                 {getSuggestions(inputValue2).map((suggestion, index) => renderSuggestion({
             suggestion,
             index,
@@ -275,7 +275,7 @@ function IntegrationDownshift(props) {
             placeholder: 'Search a country (start with a)'
           })
         })}
-            {isOpen ? <Paper className={classes.paper} square>
+            {isOpen ? <Paper className={classNames(classes.paper)} square>
                 {getSuggestions(inputValue).map((suggestion, index) => renderSuggestion({
             suggestion,
             index,

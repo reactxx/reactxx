@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import FormGroup from 'reactxx-muix/current/FormGroup/FormGroup';
 import FormControlLabel from 'reactxx-muix/current/FormControlLabel/FormControlLabel';
 import Switch from 'reactxx-muix/current/Switch/Switch';

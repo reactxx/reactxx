@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Paper from 'reactxx-muix/current/Paper/Paper';
@@ -17,7 +17,7 @@ function PaperSheet(props) {
     classes
   } = props;
   return <div>
-      <Paper className={classes.root} elevation={1}>
+      <Paper className={classNames(classes.root)} elevation={1}>
         <Typography variant="headline" component="h3">
           This is a sheet of paper.
         </Typography>

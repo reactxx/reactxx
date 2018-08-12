@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Card from 'reactxx-muix/current/Card/Card';
@@ -44,9 +44,9 @@ function MediaControlCard(props) {
     theme
   } = props;
   return <div>
-      <Card className={classes.card}>
+      <Card className={classNames(classes.card)}>
         <div className={classNamesStr(classes.details)}>
-          <CardContent className={classes.content}>
+          <CardContent className={classNames(classes.content)}>
             <Typography variant="headline">Live From Space</Typography>
             <Typography variant="subheading" color="textSecondary">
               Mac Miller
@@ -57,14 +57,14 @@ function MediaControlCard(props) {
               {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
             </IconButton>
             <IconButton aria-label="Play/pause">
-              <PlayArrowIcon className={classes.playIcon} />
+              <PlayArrowIcon className={classNames(classes.playIcon)} />
             </IconButton>
             <IconButton aria-label="Next">
               {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
             </IconButton>
           </div>
         </div>
-        <CardMedia className={classes.cover} image="src/ks/common/muix/static/images/cards/live-from-space.jpg" title="Live from space album cover" />
+        <CardMedia className={classNames(classes.cover)} image="src/ks/common/muix/static/images/cards/live-from-space.jpg" title="Live from space album cover" />
       </Card>
     </div>;
 }

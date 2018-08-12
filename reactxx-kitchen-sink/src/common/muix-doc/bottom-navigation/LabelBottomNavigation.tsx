@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import BottomNavigation from 'reactxx-muix/current/BottomNavigation/BottomNavigation';
@@ -31,7 +31,7 @@ class LabelBottomNavigation extends React.Component<any, any> {
     const {
       value
     } = this.state;
-    return <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
+    return <BottomNavigation value={value} onChange={this.handleChange} className={classNames(classes.root)}>
         <BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} />
         <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
         <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon />} />

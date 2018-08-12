@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Stepper from 'reactxx-muix/current/Stepper/Stepper';
@@ -185,23 +185,23 @@ class HorizontalNonLinearAlternativeLabelStepper extends React.Component<any, an
         </Stepper>
         <div>
           {this.allStepsCompleted() ? <div>
-              <Typography className={classes.instructions}>
+              <Typography className={classNames(classes.instructions)}>
                 All steps completed - you&quot;re finished
               </Typography>
               <Button onClick={this.handleReset}>Reset</Button>
             </div> : <div>
-              <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+              <Typography className={classNames(classes.instructions)}>{getStepContent(activeStep)}</Typography>
               <div>
-                <Button disabled={activeStep === 0} onClick={this.handleBack} className={classes.button}>
+                <Button disabled={activeStep === 0} onClick={this.handleBack} className={classNames(classes.button)}>
                   Back
                 </Button>
-                <Button variant="contained" color="primary" onClick={this.handleNext} className={classes.button}>
+                <Button variant="contained" color="primary" onClick={this.handleNext} className={classNames(classes.button)}>
                   Next
                 </Button>
-                {this.isStepOptional(activeStep) && !this.state.completed.has(this.state.activeStep) && <Button variant="contained" color="primary" onClick={this.handleSkip} className={classes.button}>
+                {this.isStepOptional(activeStep) && !this.state.completed.has(this.state.activeStep) && <Button variant="contained" color="primary" onClick={this.handleSkip} className={classNames(classes.button)}>
                       Skip
                     </Button>}
-                {activeStep !== steps.length && (this.state.completed.has(this.state.activeStep) ? <Typography variant="caption" className={classes.completed}>
+                {activeStep !== steps.length && (this.state.completed.has(this.state.activeStep) ? <Typography variant="caption" className={classNames(classes.completed)}>
                       Step {activeStep + 1} already completed
                     </Typography> : <Button variant="contained" color="primary" onClick={this.handleComplete}>
                       {this.completedSteps() === this.totalSteps() - 1 ? 'Finish' : 'Complete Step'}

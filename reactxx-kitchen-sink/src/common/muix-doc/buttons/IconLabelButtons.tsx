@@ -1,7 +1,6 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Button from 'reactxx-muix/current/Button/Button';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import DeleteIcon from 'reactxx-icons/Delete';
@@ -30,23 +29,23 @@ function IconLabelButtons(props) {
     classes
   } = props;
   return <div>
-      <Button variant="contained" color="secondary" className={classes.button}>
+      <Button variant="contained" color="secondary" className={classNames(classes.button)}>
         Delete
-        <DeleteIcon className={classes.rightIcon} />
+        <DeleteIcon className={classNames(classes.rightIcon)} />
       </Button>
-      <Button variant="contained" color="primary" className={classes.button}>
+      <Button variant="contained" color="primary" className={classNames(classes.button)}>
         Send
-        <Icon className={classes.rightIcon}>send</Icon>
+        <Icon className={classNames(classes.rightIcon)}>send</Icon>
       </Button>
-      <Button variant="contained" color="default" className={classes.button}>
+      <Button variant="contained" color="default" className={classNames(classes.button)}>
         Upload
-        <CloudUploadIcon className={classes.rightIcon} />
+        <CloudUploadIcon className={classNames(classes.rightIcon)} />
       </Button>
-      <Button variant="contained" disabled color="secondary" className={classes.button}>
-        <KeyboardVoiceICon className={classes.leftIcon} />
+      <Button variant="contained" disabled color="secondary" className={classNames(classes.button)}>
+        <KeyboardVoiceICon className={classNames(classes.leftIcon)} />
         Talk
       </Button>
-      <Button variant="contained" size="small" className={classes.button}>
+      <Button variant="contained" size="small" className={classNames(classes.button)}>
         <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
         Save
       </Button>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import AddIcon from 'reactxx-icons/Add';
@@ -30,12 +30,12 @@ function SimpleTooltips(props) {
         </IconButton>
       </Tooltip>
       <Tooltip title="Add">
-        <Button variant="fab" color="primary" aria-label="Add" className={classes.fab}>
+        <Button variant="fab" color="primary" aria-label="Add" className={classNames(classes.fab)}>
           <AddIcon />
         </Button>
       </Tooltip>
       <Tooltip title="FAB 'position: absolute;'">
-        <Button variant="fab" color="secondary" className={classes.absolute}>
+        <Button variant="fab" color="secondary" className={classNames(classes.absolute)}>
           <AddIcon />
         </Button>
       </Tooltip>

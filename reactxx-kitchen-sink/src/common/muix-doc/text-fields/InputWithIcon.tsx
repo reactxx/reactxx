@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Input from 'reactxx-muix/current/Input/Input';
@@ -21,13 +21,13 @@ function InputWithIcon(props) {
     classes
   } = props;
   return <div>
-      <FormControl className={classes.margin}>
+      <FormControl className={classNames(classes.margin)}>
         <InputLabel htmlFor="input-with-icon-adornment">With a start adornment</InputLabel>
         <Input id="input-with-icon-adornment" startAdornment={<InputAdornment position="start">
               <AccountCircle />
             </InputAdornment>} />
       </FormControl>
-      <TextField className={classes.margin} id="input-with-icon-textfield" label="TextField" InputProps={{
+      <TextField className={classNames(classes.margin)} id="input-with-icon-textfield" label="TextField" InputProps={{
       startAdornment: <InputAdornment position="start">
               <AccountCircle />
             </InputAdornment>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Icon from 'reactxx-muix/current/Icon/Icon';
@@ -22,21 +22,21 @@ function IconButtons(props) {
     classes
   } = props;
   return <div>
-      <IconButton className={classes.button} aria-label="Delete">
+      <IconButton className={classNames(classes.button)} aria-label="Delete">
         <DeleteIcon />
       </IconButton>
-      <IconButton className={classes.button} aria-label="Delete" disabled color="primary">
+      <IconButton className={classNames(classes.button)} aria-label="Delete" disabled color="primary">
         <DeleteIcon />
       </IconButton>
-      <IconButton color="secondary" className={classes.button} aria-label="Add an alarm">
+      <IconButton color="secondary" className={classNames(classes.button)} aria-label="Add an alarm">
         <Icon>alarm</Icon>
       </IconButton>
-      <IconButton color="primary" className={classes.button} aria-label="Add to shopping cart">
+      <IconButton color="primary" className={classNames(classes.button)} aria-label="Add to shopping cart">
         <AddShoppingCartIcon />
       </IconButton>
       <input accept="image/*" className={classNamesStr(classes.input)} id="icon-button-file" type="file" />
       <label htmlFor="icon-button-file">
-        <IconButton color="primary" className={classes.button} component="span">
+        <IconButton color="primary" className={classNames(classes.button)} component="span">
           <PhotoCamera />
         </IconButton>
       </label>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import Button from 'reactxx-muix/current/Button/Button';
 import Menu from 'reactxx-muix/current/Menu/Menu';
 import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';

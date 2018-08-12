@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import IconButton from 'reactxx-muix/current/IconButton/IconButton';
 import Badge from 'reactxx-muix/current/Badge/Badge';

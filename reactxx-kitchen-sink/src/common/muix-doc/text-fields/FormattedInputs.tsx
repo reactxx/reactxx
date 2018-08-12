@@ -1,5 +1,5 @@
 /* eslint-disable react/prefer-stateless-function */
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import React from 'react';
 import MaskedInput from 'react-text-mask';
 import NumberFormat from 'react-number-format';
@@ -72,11 +72,11 @@ class FormattedInputs extends React.Component<any, any> {
       numberformat
     } = this.state;
     return <div className={classNamesStr(classes.container)}>
-        <FormControl className={classes.formControl}>
+        <FormControl className={classNames(classes.formControl)}>
           <InputLabel htmlFor="formatted-text-mask-input">react-text-mask</InputLabel>
           <Input value={textmask} onChange={this.handleChange('textmask')} id="formatted-text-mask-input" inputComponent={TextMaskCustom} />
         </FormControl>
-        <TextField className={classes.formControl} label="react-number-format" value={numberformat} onChange={this.handleChange('numberformat')} id="formatted-numberformat-input" InputProps={{
+        <TextField className={classNames(classes.formControl)} label="react-number-format" value={numberformat} onChange={this.handleChange('numberformat')} id="formatted-numberformat-input" InputProps={{
         inputComponent: NumberFormatCustom
       }} />
       </div>;

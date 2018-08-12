@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import MobileStepper from 'reactxx-muix/current/MobileStepper/MobileStepper';
@@ -71,11 +71,11 @@ class TextMobileStepper extends React.Component<any, any> {
     } = this.state;
     const maxSteps = tutorialSteps.length;
     return <div className={classNamesStr(classes.root)}>
-        <Paper square elevation={0} className={classes.header}>
+        <Paper square elevation={0} className={classNames(classes.header)}>
           <Typography>{tutorialSteps[activeStep].label}</Typography>
         </Paper>
         <img className={classNamesStr(classes.img)} src={tutorialSteps[activeStep].imgPath} alt={tutorialSteps[activeStep].label} />
-        <MobileStepper steps={maxSteps} position="static" activeStep={activeStep} className={classes.mobileStepper} nextButton={<Button size="small" onClick={this.handleNext} disabled={activeStep === maxSteps - 1}>
+        <MobileStepper steps={maxSteps} position="static" activeStep={activeStep} className={classNames(classes.mobileStepper)} nextButton={<Button size="small" onClick={this.handleNext} disabled={activeStep === maxSteps - 1}>
               Next
               {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
             </Button>} backButton={<Button size="small" onClick={this.handleBack} disabled={activeStep === 0}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import green from 'reactxx-mui-web/colors/green';
@@ -45,7 +45,7 @@ class RadioButtons extends React.Component<any, any> {
         checked: classes.checked
       }} />
         <Radio checked={this.state.selectedValue === 'd'} onChange={this.handleChange} value="d" color="default" name="radio-button-demo" aria-label="D" />
-        <Radio checked={this.state.selectedValue === 'e'} onChange={this.handleChange} value="e" color="default" name="radio-button-demo" aria-label="E" className={classes.size} icon={<RadioButtonUncheckedIcon className={classes.sizeIcon} />} checkedIcon={<RadioButtonCheckedIcon className={classes.sizeIcon} />} />
+        <Radio checked={this.state.selectedValue === 'e'} onChange={this.handleChange} value="e" color="default" name="radio-button-demo" aria-label="E" className={classNames(classes.size)} icon={<RadioButtonUncheckedIcon className={classNames(classes.sizeIcon)} />} checkedIcon={<RadioButtonCheckedIcon className={classNames(classes.sizeIcon)} />} />
       </div>;
   }
 

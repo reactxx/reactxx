@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import green from 'reactxx-mui-web/colors/green';
@@ -56,7 +56,7 @@ class CheckboxLabels extends React.Component<any, any> {
         checked: classes.checked
       }} />} label="Custom color" />
         <FormControlLabel control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} value="checkedH" />} label="Custom icon" />
-        <FormControlLabel control={<Checkbox className={classes.size} icon={<CheckBoxOutlineBlankIcon className={classes.sizeIcon} />} checkedIcon={<CheckBoxIcon className={classes.sizeIcon} />} value="checkedI" />} label="Custom size" />
+        <FormControlLabel control={<Checkbox className={classNames(classes.size)} icon={<CheckBoxOutlineBlankIcon className={classNames(classes.sizeIcon)} />} checkedIcon={<CheckBoxIcon className={classNames(classes.sizeIcon)} />} value="checkedI" />} label="Custom size" />
       </FormGroup>;
   }
 

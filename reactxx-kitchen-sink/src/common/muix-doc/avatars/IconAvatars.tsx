@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import pink from 'reactxx-mui-web/colors/pink';
@@ -33,13 +33,13 @@ function IconAvatars(props) {
     classes
   } = props;
   return <div className={classNamesStr(classes.row)}>
-      <Avatar className={classes.avatar}>
+      <Avatar className={classNames(classes.avatar)}>
         <FolderIcon />
       </Avatar>
-      <Avatar className={classes.pinkAvatar}>
+      <Avatar className={classNames(classes.pinkAvatar)}>
         <PageviewIcon />
       </Avatar>
-      <Avatar className={classes.greenAvatar}>
+      <Avatar className={classNames(classes.greenAvatar)}>
         <AssignmentIcon />
       </Avatar>
     </div>;

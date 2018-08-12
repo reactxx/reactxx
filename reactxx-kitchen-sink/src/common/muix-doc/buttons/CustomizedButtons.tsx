@@ -1,7 +1,6 @@
 import React from 'react';
-import { mergeRulesets as classNamesStr } from 'reactxx-primitives';
+import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { ThemeProvider } from 'reactxx-basic';
 import createMuiTheme from 'reactxx-mui-web/styles/createMuiTheme';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
@@ -63,7 +62,7 @@ function CustomizedInputs(props) {
         Custom CSS
       </Button>
       <ThemeProvider theme={(theme as any)}>
-        <Button variant="contained" color="primary" className={classes.margin}>
+        <Button variant="contained" color="primary" className={classNames(classes.margin)}>
           ThemeProvider
         </Button>
       </ThemeProvider>

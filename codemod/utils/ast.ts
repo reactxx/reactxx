@@ -13,8 +13,8 @@ export const astq = () => {
 }
 
 export interface MUISourceInfo {
-    dir: string
-    name: string
+    dir?: string
+    name?: string
     withStyles?: boolean
     withTheme?: boolean
     srcPath?: string
