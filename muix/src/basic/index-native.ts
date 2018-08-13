@@ -8,4 +8,5 @@ export * from './typings/common-styles';
 export * from './typings/types';
 
 export const rulesetsToClassNames: any = null
+export const rulesetToClassNamesMUI: any = null
 

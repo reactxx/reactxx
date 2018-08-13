@@ -4,6 +4,15 @@ import { renderer, rulesetToClassNamesMUI } from 'reactxx-fela';
 import { Theme as MuiTheme } from './createMuiTheme'
 import { WithTheme } from './withTheme'
 import { default as createMuiTheme } from 'reactxx-mui-web/styles/createMuiTheme';
+import {classNamesStr} from 'reactxx-basic';
+
+const old: any = React.createElement
+React.createElement = (tag, props, ...children) => {
+  if (!props || typeof tag !== 'string' || !props.className || typeof props.className === 'string') 
+    return old(tag, props, ...children)
+  props.className = classNamesStr(props.className)
+  return old(tag, props, ...children)
+}
 
 export type Theme = MuiTheme & TCommon.ThemeBase
 

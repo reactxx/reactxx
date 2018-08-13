@@ -42,18 +42,6 @@ class NestedList extends React.Component<any, any> {
     } = this.props;
     return <div className={classNamesStr(classes.root)}>
         <List component="nav" subheader={<ListSubheader component="div">Nested List Items</ListSubheader>}>
-          <ListItem button>
-            <ListItemIcon>
-              <SendIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Sent mail" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <DraftsIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Drafts" />
-          </ListItem>
           <ListItem button onClick={this.handleClick}>
             <ListItemIcon>
               <InboxIcon />

@@ -134,32 +134,6 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCrea
       return !nextProps.$constant
     }
 
-    //// *** tracing for developer
-    //componentDidCatch(error, info) {
-    //  // Display fallback UI
-    //  //this.setState({ hasError: true });
-    //  // You can also log the error to an error reporting service
-    //  console.error('**** ERROR: ', this.renderState.$developer_id, error, info)
-    //}
-
-    //constructor(props) {
-    //  super(props)
-    //  //if (props.$developer_flag) debugger
-    //}
-
-    //static getDerivedStateFromProps(nextProps, prevState): any {
-    //  //if (nextProps.$developer_flag) debugger
-    //  return null
-    //}
-
-    //componentWillUnmount() {
-    //  //if (DEV_MODE && this.props.$developer_flag) debugger
-    //}
-
-    //developer_trace(msg: string) {
-
-    //}
-
     public static Provider = cascadingProvider
     public static displayName = displayName
   }

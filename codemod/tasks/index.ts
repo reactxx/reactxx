@@ -43,7 +43,7 @@ export const codeMod = () => {
 
         switch (path) {
             case 'ListItem/ListItem':
-                _code = _code.replace('const className = classNames(', 'const className = classNamesAny(componentProp || "li",')
+                _code = _code.replace('return <Component {...componentProps}>{children}</Component>;', 'componentProps.className = classNamesAny(Component, componentProps.className)\nreturn <Component {...componentProps}>{children}</Component>;')
                 break
             case 'GridListTile/GridListTile':
                 _code = _code.replace(`\nimport`, `\nimport {fitPatch} from './GridListTilePatch';\nimport`)

@@ -75,8 +75,8 @@ export const getSystemPipes = <R extends Types.Shape>(
     const needsDeepMerge = separatedStylesAndProps.props.length > 1
 
     // merge non-style props
-    const mergedProps: Types.PropsX & {$system} = needsDeepMerge ? Sheeter.deepMerges({}, separatedStylesAndProps.props) : { ...separatedStylesAndProps.props[0] }
-    mergedProps.$system = {theme}
+    const mergedProps: Types.PropsX & { $system } = needsDeepMerge ? Sheeter.deepMerges({}, separatedStylesAndProps.props) : { ...separatedStylesAndProps.props[0] }
+    mergedProps.$system = { theme }
     delete separatedStylesAndProps.props
 
     // use sheeter utils for props finishing (linearize $web and $native props, extract addIns (e.g. $mediaq))
@@ -135,7 +135,7 @@ export const getSystemPipes = <R extends Types.Shape>(
     const toMergeClassName = [
       ...separatedStyles.className.map(creator => expandCreator(creator)),
       ...(window.isWeb ? [] : separatedStyles.style.map(creator => expandCreator(creator)))]
-    if (toMergeClassName.length>0) finalProps.className = toMergeClassName.length === 1 ? toMergeClassName[0] : Sheeter.deepMerges({}, toMergeClassName)
+    if (toMergeClassName.length > 0) finalProps.className = toMergeClassName.length === 1 ? toMergeClassName[0] : Sheeter.deepMerges({}, toMergeClassName)
 
     // **** style (for web).
     if (window.isWeb) {
@@ -194,11 +194,24 @@ export const getSystemPipes = <R extends Types.Shape>(
 
     // method, called in component code: ruleset merging
     $system.classNames = mergeRulesetsCreator(classes as Sheeter.SheetWithAddIns, getClassesPatches)
-    $system.classNamesStr = mergeRulesetsCreatorStr(classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns.rulesetsToClassNames);
-    $system.classNamesAny = (component, ...rulesets) => typeof component === 'string' ? $system.classNamesStr(...rulesets) : $system.classNames(...rulesets)
-    
+    // $system.classNamesStr = mergeRulesetsCreatorStr(classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns.rulesetsToClassNames);
+    // $system.classNamesAny = (component, ...rulesets) => typeof component === 'string' ? $system.classNamesStr(...rulesets) : $system.classNames(...rulesets)
+    $system.classNamesStr = mergeRulesetsCreator(classes as Sheeter.SheetWithAddIns, getClassesPatches)
+    $system.classNamesAny = (component, ...rulesets) => $system.classNames(...rulesets)
+
     // call component code
     return <CodeComponent {...finalProps as Types.CodeProps<R>} />
+    // const old: any = React.createElement
+    // try {
+    //   React.createElement = (type, props, children) => {
+    //     if (typeof type === 'string' && typeof props.className !=='string') {
+    //       props.className = ''
+    //     }
+    //     return old(type, props, children)
+    //   }
+    // } finally {
+    //   React.createElement = old
+    // }
   }
 
   return { propsPipe, stylePipe, renderComponentPipe, cascadingProvider: CascadingProviderComponent as any as React.ComponentClass<Types.PropsX<R>> }

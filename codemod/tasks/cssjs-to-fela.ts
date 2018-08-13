@@ -15,7 +15,7 @@ export const cssjsToFelaLow = (sheet: Ast.Ast, info: Ast.MUISourceInfo) => {
   // ***** get object expression
   if (sheet.type !== 'ObjectExpression') { // not object expression ...
     if (sheet.type !== 'ArrowFunctionExpression') { // ... must be arrow expression (const styles = theme => ({}))
-      warning(false, `sheet.type !== 'ArrowFunctionExpression' at ${info.srcPath}`) // e.g. select.js
+      //warning(false, `sheet.type !== 'ArrowFunctionExpression' at ${info.srcPath}`) // e.g. select.js
       return
     }
     if (sheet.body && sheet.body.type === 'ObjectExpression') // const styles = theme => ({})
@@ -31,7 +31,7 @@ export const cssjsToFelaLow = (sheet: Ast.Ast, info: Ast.MUISourceInfo) => {
 
   (sheet.properties as any[]).forEach(({ value: rulesetName }) => { // all rulesets in sheet
     if (!rulesetName || !rulesetName.properties) {
-      warning(false, `!rulesetName || !rulesetName.properties at ${info.srcPath}`)
+      //warning(false, `!rulesetName || !rulesetName.properties at ${info.srcPath}`)
       return
     }
 

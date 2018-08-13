@@ -1,7 +1,7 @@
 import { classNamesStr } from 'reactxx-basic'
 
-export const fitPatch = () => {
-  const imgElement = this.imgElement
+export const fitPatch = (self) => {
+  const imgElement = self.imgElement
 
   if (!imgElement || !imgElement.complete) return
 
@@ -10,16 +10,16 @@ export const fitPatch = () => {
     imgElement.parentNode.offsetWidth / imgElement.parentNode.offsetHeight
   ) {
     imgElement.classList.remove(
-      ...classNamesStr(this.props.classes.imgFullWidth).split(" ")
+      ...classNamesStr(self.props.classes.imgFullWidth).split(" ")
     );
-    imgElement.classList.add(...classNamesStr(this.props.classes.imgFullHeight).split(" "));
+    imgElement.classList.add(...classNamesStr(self.props.classes.imgFullHeight).split(" "));
   } else {
     imgElement.classList.remove(
-      ...classNamesStr(this.props.classes.imgFullHeight).split(" ")
+      ...classNamesStr(self.props.classes.imgFullHeight).split(" ")
     );
-    imgElement.classList.add(...classNamesStr(this.props.classes.imgFullWidth).split(" "));
+    imgElement.classList.add(...classNamesStr(self.props.classes.imgFullWidth).split(" "));
   }
 
-  imgElement.removeEventListener("load", this.fit);
+  imgElement.removeEventListener("load", self.fit);
 
 }

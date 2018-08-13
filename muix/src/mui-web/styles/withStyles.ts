@@ -4,6 +4,15 @@ import { renderer, rulesetToClassNamesMUI } from 'reactxx-fela';
 import { Theme as MuiTheme } from './createMuiTheme'
 import { WithTheme } from './withTheme'
 import { default as createMuiTheme } from 'reactxx-mui-web/styles/createMuiTheme';
+import { classNamesStrMUI } from 'reactxx-basic';
+
+const old: any = React.createElement
+React.createElement = (tag, props, ...children) => {
+  //console.log (tag.name)
+  if (props && (typeof tag === 'string' || tag.name === 'TransitionGroup') && props.className && typeof props.className !== 'string')
+    props.className = classNamesStrMUI(props.className)
+  return old(tag, props, ...children)
+}
 
 export type Theme = MuiTheme & TCommon.ThemeBase
 
@@ -15,7 +24,7 @@ export type StyleRules<ClassKey extends string = string> = Record<ClassKey, CSSP
 
 export type StyleRulesCallback<ClassKey extends string = string> = (
   theme: Theme,
-) => StyleRules<ClassKey>;
+) => StyleRules<ClassKey>; 
 
 export interface StylesCreator {
   create(theme: Theme, name: string): StyleRules;
@@ -25,11 +34,11 @@ export interface StylesCreator {
 
 export type WithStyles<T extends string | StyleRules | StyleRulesCallback = string> = Partial<
   WithTheme
-> & {
+  > & {
   classes: ClassNameMap<
-    T extends string
-      ? T
-      : T extends StyleRulesCallback<infer K> ? K : T extends StyleRules<infer K> ? K : never
+  T extends string
+  ? T
+  : T extends StyleRulesCallback<infer K> ? K : T extends StyleRules<infer K> ? K : never
   >;
 };
 

@@ -1,7 +1,7 @@
 ﻿import * as Sheeter from 'reactxx-sheeter';
 import { Types } from '../typings/types';
 // !!! platform dependent import
-import { rulesetsToClassNames } from 'reactxx-basic';
+import { rulesetsToClassNames, rulesetToClassNamesMUI } from 'reactxx-basic';
 
 export const mergeRulesetsCreator = (classes: Sheeter.SheetWithAddIns, getClassesPatches: Sheeter.RulesetPatchGetters) => (...rulesets: Sheeter.Ruleset[]) => {
   return Sheeter.mergeRulesetsForCode(
@@ -27,6 +27,11 @@ export const classNames = (...rulesets: React.CSSProperties[]) => {
 export const classNamesStr = (...rulesets: React.CSSProperties[]) => {
   const merged = classNames(...rulesets)
   return rulesetsToClassNames ? rulesetsToClassNames(merged) : merged
+}
+
+export const classNamesStrMUI = (...rulesets: React.CSSProperties[]) => {  
+  const merged = classNames(...rulesets)
+  return rulesetsToClassNames ? rulesetToClassNamesMUI(merged) : merged
 }
 
 

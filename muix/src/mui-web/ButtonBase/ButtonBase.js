@@ -6,21 +6,24 @@
 //----------------------------------------------------------------------------------
 
 import React from "react";
-import { toAtomic } from "../styles/withStyles";
+import { toAtomic } from "reactxx-mui-web/styles/withStyles";
 
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import classNames from "classnames";
 import keycode from "keycode";
-import ownerWindow from "../utils/ownerWindow";
-import withStyles from "../styles/withStyles";
-import { listenForFocusKeys, detectFocusVisible } from "./focusVisible";
-import TouchRipple from "./TouchRipple";
-import createRippleHandler from "./createRippleHandler";
+import ownerWindow from "reactxx-mui-web/utils/ownerWindow";
+import withStyles from "reactxx-mui-web/styles/withStyles";
+import { listenForFocusKeys, detectFocusVisible } from "reactxx-mui-web/ButtonBase/focusVisible";
+import TouchRipple from "reactxx-mui-web/ButtonBase/TouchRipple";
+import createRippleHandler from "reactxx-mui-web/ButtonBase/createRippleHandler";
+
+/* @jsx keycode */
+
 export const styles = {
   /* Styles applied to the root element. */
   root: {
-    ...toAtomic("padding", 0),
+    ...toAtomic("padding", 1),
     ...toAtomic("margin", 0),
     display: "inline-flex",
     alignItems: "center",
