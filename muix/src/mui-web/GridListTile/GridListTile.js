@@ -6,6 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import React from "react";
+import { fitPatch } from "./GridListTilePatch";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import EventListener from "react-event-listener";
@@ -63,7 +64,8 @@ class GridListTile extends React.Component {
     this.handleResize.clear();
   }
 
-  fit = () => {
+  fit = fitPatch.bind(this);
+  fit_ = () => {
     const imgElement = this.imgElement;
 
     if (!imgElement || !imgElement.complete) {

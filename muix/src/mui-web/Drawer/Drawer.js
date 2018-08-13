@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Modal from "../Modal/Modal";
 import withStyles from "../styles/withStyles";
-import Slide from "../Slide";
+import Slide from "../Slide/Slide";
 import Paper from "../Paper/Paper";
 import { capitalize } from "../utils/helpers";
 import { duration } from "../styles/transitions";

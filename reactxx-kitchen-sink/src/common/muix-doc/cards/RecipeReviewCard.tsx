@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
+import { classNamesStr, classNames } from 'reactxx-basic';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import classnames from 'classnames';

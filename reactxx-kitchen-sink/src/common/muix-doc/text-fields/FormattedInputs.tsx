@@ -1,5 +1,5 @@
 /* eslint-disable react/prefer-stateless-function */
-import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
+import { classNamesStr, classNames } from 'reactxx-basic';
 import React from 'react';
 import MaskedInput from 'react-text-mask';
 import NumberFormat from 'react-number-format';

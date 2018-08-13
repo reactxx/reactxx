@@ -115,15 +115,18 @@ class ListItem extends React.Component {
     const hasSecondaryAction =
       children.length &&
       isMuiElement(children[children.length - 1], ["ListItemSecondaryAction"]);
-    const className = classNames(
+    const className = classNamesAny(
+      componentProp || "li",
       classes.root,
       classes.default,
-      (isDense || hasAvatar) && classes.dense,
-      !disableGutters && classes.gutters,
-      divider && classes.divider,
-      disabled && classes.disabled,
-      button && classes.button,
-      hasSecondaryAction && classes.secondaryAction,
+      {
+        [classes.dense]: isDense || hasAvatar,
+        [classes.gutters]: !disableGutters,
+        [classes.divider]: divider,
+        [classes.disabled]: disabled,
+        [classes.button]: button,
+        [classes.secondaryAction]: hasSecondaryAction
+      },
       classNameProp
     );
     const componentProps = {
@@ -157,7 +160,11 @@ class ListItem extends React.Component {
 
       return (
         <ContainerComponent
-          className={classNames(classes.container, ContainerClassName)}
+          className={classNamesAny(
+            ContainerComponent,
+            classes.container,
+            ContainerClassName
+          )}
           {...ContainerProps}
         >
           <Component {...componentProps}>{children}</Component>

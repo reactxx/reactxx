@@ -22,22 +22,22 @@ export const styles = theme => ({
     marginTop: 8,
     lineHeight: "1em",
     minHeight: "1em",
-    "&.error35": {
+    "&.error33": {
       color: theme.palette.error.main
     },
-    "&.disabled35": {
+    "&.disabled33": {
       color: theme.palette.text.disabled
     }
   },
 
   /* Styles applied to the root element if `error={true}`. */
   error: {
-    NAME$error35: true
+    NAME$error33: true
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
-    NAME$disabled35: true
+    NAME$disabled33: true
   },
 
   /* Styles applied to the root element if `margin="dense"`. */

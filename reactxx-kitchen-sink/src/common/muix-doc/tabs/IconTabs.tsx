@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
+import { classNamesStr, classNames } from 'reactxx-basic';
 import Paper from 'reactxx-muix/current/Paper/Paper';
 import Tabs from 'reactxx-muix/current/Tabs/Tabs';
 import Tab from 'reactxx-muix/current/Tab/Tab';

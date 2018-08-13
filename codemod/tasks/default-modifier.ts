@@ -1,3 +1,7 @@
+// D:\reactxx\muix\src\mui-web\ListItem\ListItem.js:
+// const className = classNames( => const className = classNamesAny(componentProp || "li", 
+
+
 import * as Queries from '../utils/queries'
 import * as Ast from '../utils/ast'
 import * as Parser from '../utils/parser'
@@ -186,11 +190,13 @@ const importRepairs = {
   '../FormGroup': '../FormGroup/FormGroup',
   '../IconButton': '../IconButton/IconButton',
   '../Button': '../Button/Button',
+  '../Slide': '../Slide/Slide',
 }
 const unknownComponents = [
   'ComponentProp',
   'Component',
   'TransitionGroup',
+  'ContainerComponent',
 ]
 
 // for 'className' attribute HTML tags (e.g. 'span' etc. - not components as 'Button'): expand ruleset to className list (by means of classNamesStr function)

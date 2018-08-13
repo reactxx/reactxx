@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
+import { classNamesStr, classNames } from 'reactxx-basic';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
@@ -104,7 +104,7 @@ class FloatingActionButtonZoom extends React.Component<any, any> {
         {fabs.map((fab, index) => <Zoom key={fab.color} in={this.state.value === index} timeout={transitionDuration} style={{
         transitionDelay: `${this.state.value === index ? transitionDuration.exit : 0}ms`
       }} unmountOnExit>
-            <Button variant="fab" className={classNames(fab.className)} color={fab.color}>
+            <Button variant="fab" className={classNames(fab.className)} color={(fab.color as any)}>
               {fab.icon}
             </Button>
           </Zoom>)}

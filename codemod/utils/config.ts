@@ -6,7 +6,7 @@
 //https://github.com/isaacs/node-glob
 
 //https://github.com/rse/astq
-export const isDoc = true
+export const isDoc = false
 
 
 export const MUI_VERSION = 'v1.4.3'

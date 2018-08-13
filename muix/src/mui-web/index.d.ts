@@ -59,7 +59,7 @@ export type Overwrite<T, U> = (U extends ConsistentWith<U, T> ? T : Omit<T, keyo
 
 export namespace PropTypes {
   type Alignment = 'inherit' | 'left' | 'center' | 'right' | 'justify';
-  type Color = 'inherit' | 'primary' | 'secondary' | 'default' | string;
+  type Color = 'inherit' | 'primary' | 'secondary' | 'default';
   type Margin = 'none' | 'dense' | 'normal';
 }
 

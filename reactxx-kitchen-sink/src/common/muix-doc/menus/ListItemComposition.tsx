@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
+import { classNamesStr, classNames } from 'reactxx-basic';
 import PropTypes from 'prop-types';
 import MenuList from 'reactxx-muix/current/MenuList/MenuList';
 import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';

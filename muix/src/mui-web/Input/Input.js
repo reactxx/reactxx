@@ -71,7 +71,7 @@ export const styles = theme => {
       fontSize: theme.typography.pxToRem(16),
       lineHeight: "1.1875em",
       // Reset (19px), match the native input line-height
-      "&.disabled44": {
+      "&.disabled41": {
         color: theme.palette.text.disabled
       }
     },
@@ -81,17 +81,17 @@ export const styles = theme => {
       "label + &": {
         marginTop: 16
       },
-      NAME$formControl44: true
+      NAME$formControl41: true
     },
 
     /* Styles applied to the root element if the component is focused. */
     focused: {
-      NAME$focused44: true
+      NAME$focused41: true
     },
 
     /* Styles applied to the root element if `disabled={true}`. */
     disabled: {
-      NAME$disabled44: true
+      NAME$disabled41: true
     },
 
     /* Styles applied to the root element if `disabledUnderline={false}`. */
@@ -113,10 +113,10 @@ export const styles = theme => {
         }),
         pointerEvents: "none" // Transparent to the hover style.
       },
-      "&.focused44:after": {
+      "&.focused41:after": {
         transform: "scaleX(1)"
       },
-      "&.error44:after": {
+      "&.error41:after": {
         borderBottomColor: theme.palette.error.main,
         transform: "scaleX(1)" // error is always underlined in red
       },
@@ -133,17 +133,17 @@ export const styles = theme => {
         }),
         pointerEvents: "none" // Transparent to the hover style.
       },
-      "&:hover:not(.disabled44):not(.focused44):not(.error44):before": {
+      "&:hover:not(.disabled41):not(.focused41):not(.error41):before": {
         borderBottom: `2px solid ${theme.palette.text.primary}`
       },
-      "&.disabled44:before": {
+      "&.disabled41:before": {
         borderBottom: `1px dotted ${bottomLineColor}`
       }
     },
 
     /* Styles applied to the root element if `error={true}`. */
     error: {
-      NAME$error44: true
+      NAME$error41: true
     },
 
     /* Styles applied to the root element if `multiline={true}`. */
@@ -192,7 +192,7 @@ export const styles = theme => {
         "-webkit-appearance": "none"
       },
       // Show and hide the placeholder logic
-      "label[data-shrink=false] + .formControl44 &": {
+      "label[data-shrink=false] + .formControl41 &": {
         "&::-webkit-input-placeholder": placeholderHidden,
         "&::-moz-placeholder": placeholderHidden,
         // Firefox 19+
@@ -207,7 +207,7 @@ export const styles = theme => {
         // IE 11
         "&:focus::-ms-input-placeholder": placeholderVisible // Edge
       },
-      "&.disabled44": {
+      "&.disabled41": {
         opacity: 1 // Reset iOS opacity
       }
     },

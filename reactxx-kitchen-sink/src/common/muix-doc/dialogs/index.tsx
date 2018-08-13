@@ -6,7 +6,6 @@ import AlertDialogSlide from './AlertDialogSlide'
 import ConfirmationDialog from './ConfirmationDialog'
 import FormDialog from './FormDialog'
 import FullScreenDialog from './FullScreenDialog'
-import ResponsiveDialog from './ResponsiveDialog'
 import ScrollDialog from './ScrollDialog'
 import SimpleDialog from './SimpleDialog'
 
@@ -34,11 +33,6 @@ const App: React.SFC = () => <div style={{padding: 30, overflow:'auto'}}>
 <h2>FullScreenDialog</h2>
 <div style={{flexShrink: 0}}>
   <FullScreenDialog/>
-</div>
-
-<h2>ResponsiveDialog</h2>
-<div style={{flexShrink: 0}}>
-  <ResponsiveDialog/>
 </div>
 
 <h2>ScrollDialog</h2>

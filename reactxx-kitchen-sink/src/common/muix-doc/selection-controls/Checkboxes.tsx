@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
+import { classNamesStr, classNames } from 'reactxx-basic';
 import Checkbox from 'reactxx-muix/current/Checkbox/Checkbox';
 
 class Checkboxes extends React.Component<any, any> {

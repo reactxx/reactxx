@@ -29,7 +29,7 @@ export interface MUISourceInfo {
 export interface FileDescr {
     path?: string
     transform?: (root: Ast, info: MUISourceInfo) => Ast
-    transformStr?: (code: string) => string
+    //transformStr?: (code: string) => string
 }
 
 export type Ast = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
+import { classNamesStr, classNames } from 'reactxx-basic';
 import Switch from 'reactxx-muix/current/Switch/Switch';
 
 class Switches extends React.Component<any, any> {

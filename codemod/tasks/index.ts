@@ -31,7 +31,7 @@ registerInputLabel(specials)
 
 export const codeMod = () => {
 
-    const { log, code } = readAllCodes()
+    const { log, codeStr } = readAllCodes()
 
     //try { fsExtra.rmdirSync(Config.reactxxMuiWebShapes) } catch { }
     //try { fsExtra.rmdirSync(Config.muiWeb_Typings) } catch { }
@@ -39,27 +39,58 @@ export const codeMod = () => {
     for (const path in log) {
         const logp = log[path]
         const specItem = specials[path]
-        const transformStr = specItem && specItem.transformStr
-        let transform = specItem && specItem.transform
-        if (transformStr) {
-            if (!logp.origExists) fsExtra.moveSync(logp.srcPath, logp.origPath)
-            const code = fs.readFileSync(logp.origPath, { encoding: 'utf-8' })
-            fsExtra.outputFileSync(logp.srcPath, transformStr(code))
-        } else {
-            if (!transform) {
-                transform = specItem && specItem.transform
-                if (!transform) {
-                    if (logp.withStyles) transform = Tasks.withStylesTaskDefaultCreator()
-                    else if (logp.withTheme) transform = Tasks.withThemeTaskDefaultCreator()
-                    else transform = Tasks.otherTaskDefaultCreator()
-                }
-            }
-            if (!transform) continue
-            if (!logp.origExists) fsExtra.moveSync(logp.srcPath, logp.origPath)
-            const ast = code[path]
-            transform(ast, logp)
-            Parser.generateFile(ast, logp.srcPath)
+        let _code = codeStr[path]
+
+        switch (path) {
+            case 'ListItem/ListItem':
+                _code = _code.replace('const className = classNames(', 'const className = classNamesAny(componentProp || "li",')
+                break
+            case 'GridListTile/GridListTile':
+                _code = _code.replace(`\nimport`, `\nimport {fitPatch} from './GridListTilePatch';\nimport`)
+                _code = _code.replace(`fit = () => {`, `  fit = fitPatch.bind(this)\n  fit_ = () => {`)
+                break
         }
+        const ast = Parser.parseCode(_code)
+
+        // finish logItem
+        logp.renderFunc = Queries.getNode_functionGlobal(ast, logp.name, true)
+        if (!logp.renderFunc) {
+            logp.renderFunc = Queries.getNode_classMethod(ast, logp.name, 'render', true)
+            if (logp.renderFunc)
+            logp.isClass = true
+        }
+        const withStylesOrWithTheme = (name: string) => Queries.checkSingleResult(Ast.astq().query(ast,
+            `/Program/* [ //CallExpression/CallExpression/Identifier [ @name=="${name}" ] ]`), true)
+        const withStyles = withStylesOrWithTheme('withStyles')
+        const withTheme = withStylesOrWithTheme('withTheme')
+
+        // ... and put it to log
+        if (withTheme)
+          logp.withTheme = true
+        else if (withStyles)
+          logp.withStyles = true
+
+        //const transformStr = specItem && specItem.transformStr
+        let transform = specItem && specItem.transform
+        // if (transformStr) {
+        //     if (!logp.origExists) fsExtra.moveSync(logp.srcPath, logp.origPath)
+        //     const code = fs.readFileSync(logp.origPath, { encoding: 'utf-8' })
+        //     fsExtra.outputFileSync(logp.srcPath, transformStr(code))
+        // } else {
+        if (!transform) {
+            transform = specItem && specItem.transform
+            if (!transform) {
+                if (logp.withStyles) transform = Tasks.withStylesTaskDefaultCreator()
+                else if (logp.withTheme) transform = Tasks.withThemeTaskDefaultCreator()
+                else transform = Tasks.otherTaskDefaultCreator()
+            }
+        }
+        if (!transform) continue
+        if (!logp.origExists) fsExtra.moveSync(logp.srcPath, logp.origPath)
+        //const ast = code[path]
+        transform(ast, logp)
+        Parser.generateFile(ast, logp.srcPath)
+        //}
         // TS shape
         if (logp.withStyles && logp.name !== 'SwipeArea') {
             const ts = Config.muiWeb + path + '.d.ts'
@@ -134,7 +165,7 @@ const noKey = {
 
 export const readAllCodes = () => {
     const log: { [path: string]: Ast.MUISourceInfo } = {}
-    const code: { [path: string]: Ast.Ast } = {}
+    //const code: { [path: string]: Ast.Ast } = {}
     const codeStr: { [path: string]: string } = {}
     const compileErrors = []
     getAllComponents().forEach(comp => {
@@ -150,42 +181,20 @@ export const readAllCodes = () => {
         const actPath = logItem.origExists ? logItem.origPath : logItem.srcPath
 
         // parse JS file
-        let root: Ast.Ast, rootStr: string
+        let rootStr: string
         try {
             rootStr = fs.readFileSync(actPath, { encoding: 'utf-8' })
-            if (!Config.isDoc) root = Parser.parseCode(rootStr)
+            //if (!Config.isDoc) root = Parser.parseCode(rootStr)
         } catch { compileErrors.push(actPath); return }
-        code[path] = root
+        //code[path] = root
         codeStr[path] = rootStr
         log[path] = logItem
 
-        if (!Config.isDoc) {
-
-            // get withStyles or withTheme component name ...
-            const withStylesOrWithTheme = (name: string) => Queries.checkSingleResult(Ast.astq().query(root,
-                `/Program/* [ //CallExpression/CallExpression/Identifier [ @name=="${name}" ] ]`), true)
-            const withStyles = withStylesOrWithTheme('withStyles')
-            const withTheme = withStylesOrWithTheme('withTheme')
-
-            // ... and put it to log
-            if (withTheme)
-                logItem.withTheme = true
-            else if (withStyles)
-                logItem.withStyles = true
-
-            // finish logItem
-            logItem.renderFunc = Queries.getNode_functionGlobal(root, logItem.name, true)
-            if (!logItem.renderFunc) {
-                logItem.renderFunc = Queries.getNode_classMethod(root, logItem.name, 'render')
-                if (logItem.renderFunc)
-                    logItem.isClass = true
-            }
-            logItem.nameIsUppercase = logItem.name.charAt(0).toLowerCase() !== logItem.name.charAt(0)
-        }
-
+        logItem.nameIsUppercase = logItem.name.charAt(0).toLowerCase() !== logItem.name.charAt(0)
     })
     //const dump = JSON.stringify(log, null, 2)
-    return { log, code, codeStr, compileErrors }
+    //return { log, code, codeStr, compileErrors }
+    return { log, codeStr, compileErrors }
 }
 
 const getAllComponents = () => {

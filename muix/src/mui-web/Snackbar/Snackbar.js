@@ -13,7 +13,7 @@ import withStyles from "../styles/withStyles";
 import { duration } from "../styles/transitions";
 import ClickAwayListener from "../ClickAwayListener";
 import { capitalize, createChainedFunction } from "../utils/helpers";
-import Slide from "../Slide";
+import Slide from "../Slide/Slide";
 import SnackbarContent from "../SnackbarContent";
 export const styles = theme => {
   const gutter = 24;

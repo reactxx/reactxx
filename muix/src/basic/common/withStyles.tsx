@@ -103,7 +103,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCrea
     render() {
       //console.log('*** render: ', this.renderState.$developer_id)
       if (DEV_MODE && options && this.props.$developer_flag) {
-        //debugger
+        debugger
       }
       return this.renderPipeline()
     }

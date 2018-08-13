@@ -40,10 +40,10 @@ export const styles = theme => ({
   textColorInherit: {
     color: "inherit",
     opacity: 0.7,
-    "&.selected78": {
+    "&.selected75": {
       opacity: 1
     },
-    "&.disabled78": {
+    "&.disabled75": {
       opacity: 0.4
     }
   },
@@ -51,10 +51,10 @@ export const styles = theme => ({
   /* Styles applied to the root element if `textColor="primary"`. */
   textColorPrimary: {
     color: theme.palette.text.secondary,
-    "&.selected78": {
+    "&.selected75": {
       color: theme.palette.primary.main
     },
-    "&.disabled78": {
+    "&.disabled75": {
       color: theme.palette.text.disabled
     }
   },
@@ -62,22 +62,22 @@ export const styles = theme => ({
   /* Styles applied to the root element if `textColor="secondary"`. */
   textColorSecondary: {
     color: theme.palette.text.secondary,
-    "&.selected78": {
+    "&.selected75": {
       color: theme.palette.secondary.main
     },
-    "&.disabled78": {
+    "&.disabled75": {
       color: theme.palette.text.disabled
     }
   },
 
   /* Styles applied to the root element if `selected={true}` (controlled by the Tabs component). */
   selected: {
-    NAME$selected78: true
+    NAME$selected75: true
   },
 
   /* Styles applied to the root element if `disabled={true}` (controlled by the Tabs component). */
   disabled: {
-    NAME$disabled78: true
+    NAME$disabled75: true
   },
 
   /* Styles applied to the root element if `fullWidth={true}` (controlled by the Tabs component). */

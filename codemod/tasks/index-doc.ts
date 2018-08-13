@@ -1,3 +1,5 @@
+// D:\reactxx\muix\src\ks\common\muix-doc\grid-list\TitlebarGridList.tsx, wrong title
+
 import generate from '@babel/generator';
 import { parse, parseExpression } from '@babel/parser';
 import * as fsExtra from 'fs-extra';
@@ -9,7 +11,7 @@ import { cssjsToFelaLow } from './cssjs-to-fela';
 
 export const codeModDoc = () => {
 
-    const { log, codeStr, code } = readAllCodes()
+    const { log, codeStr } = readAllCodes()
 
     try { fsExtra.emptyDirSync(Config.muiWeb) } catch { }
 
@@ -154,6 +156,13 @@ import withStylesCreator from 'reactxx-mui-web/styles/withStyles'`)
             break
         case 'buttons/FloatingActionButtonZoom':
             example = example.replace('const { classes, theme } = this.props;', 'const { classes, $system: {theme} } = this.props;')
+            example = example.replace('color={fab.color}', 'color={fab.color as any}')
+            break
+        case 'cards/MediaControlCard':
+            example = example.replace('const { classes, theme } = props;', 'const { classes, $system: {theme} } = props;')
+            break
+        case '':
+            example = example.replace('', '')
             break
     }
 
@@ -167,7 +176,7 @@ import withStylesCreator from 'reactxx-mui-web/styles/withStyles'`)
     example = replaceAll(example, `extends React.Component {`, `extends React.Component<any,any> {`)
     example = replaceAll(example, `@material-ui/core/`, `reactxx-mui-web/`)
     example = replaceAll(example, `/static/images/`, `src/ks/common/muix/static/images/`)
-    example = example.replace(`\nimport`, `\nimport {mergeRulesetsStr as classNamesStr, mergeRulesets as classNames} from 'reactxx-primitives';\nimport`)
+    example = example.replace(`\nimport`, `\nimport {classNamesStr, classNames} from 'reactxx-basic';\nimport`)
     example = example.replace(`import classNames from 'classnames';\n`, ``)
 
     return example
@@ -230,4 +239,5 @@ const ignores = {
     'autocomplete/IntegrationReactSelect': true,
     'snackbars/CustomizedSnackbars': true,
     'chips/ChipsPlayground': true,
+    'dialogs/ResponsiveDialog':true,
 }

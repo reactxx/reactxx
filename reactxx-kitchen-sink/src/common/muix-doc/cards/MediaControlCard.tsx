@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeRulesetsStr as classNamesStr, mergeRulesets as classNames } from 'reactxx-primitives';
+import { classNamesStr, classNames } from 'reactxx-basic';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Card from 'reactxx-muix/current/Card/Card';
@@ -41,7 +41,9 @@ const styles = theme => ({
 function MediaControlCard(props) {
   const {
     classes,
-    theme
+    $system: {
+      theme
+    }
   } = props;
   return <div>
       <Card className={classNames(classes.card)}>

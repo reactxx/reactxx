@@ -39,14 +39,14 @@ import ReactDOM from 'react-dom'
 // import App from '../common/muix-doc/avatars/index'
 // import App from '../common/muix-doc/badges/index'
 // import App from '../common/muix-doc/bottom-navigation/index'
-import App from '../common/muix-doc/buttons/index'
+// import App from '../common/muix-doc/buttons/index'
 // import App from '../common/muix-doc/cards/index'
 // import App from '../common/muix-doc/chips/index'
 // import App from '../common/muix-doc/dialogs/index'
 // import App from '../common/muix-doc/dividers/index'
-// import App from '../common/muix-doc/drawers/index'
-// import App from '../common/muix-doc/expansion-panels/index'
-// import App from '../common/muix-doc/grid-list/index'
+// import App from '../common/muix-doc/drawers/index' TODO
+// import App from '../common/muix-doc/expansion-panels/index' TODO
+ import App from '../common/muix-doc/grid-list/index'
 // import App from '../common/muix-doc/lists/index'
 // import App from '../common/muix-doc/menus/index'
 // import App from '../common/muix-doc/paper/index'
@@ -61,7 +61,7 @@ import App from '../common/muix-doc/buttons/index'
 // import App from '../common/muix-doc/text-fields/index'
 // import App from '../common/muix-doc/tooltips/index'
 
-//import App from '../common/muix-doc/buttons/ButtonBases'
+//import App from '../common/muix-doc/cards/SimpleMediaCard'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

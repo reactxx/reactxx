@@ -21,30 +21,30 @@ export const styles = theme => ({
 
   /* Styles applied to the root element if `checked={true}`. */
   checked: {
-    NAME$checked64: true
+    NAME$checked61: true
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
-    NAME$disabled64: true
+    NAME$disabled61: true
   },
 
   /* Styles applied to the root element if `color="primary"`. */
   colorPrimary: {
-    "&.checked64": {
+    "&.checked61": {
       color: theme.palette.primary.main
     },
-    "&.disabled64": {
+    "&.disabled61": {
       color: theme.palette.action.disabled
     }
   },
 
   /* Styles applied to the root element if `color="secondary"`. */
   colorSecondary: {
-    "&.checked64": {
+    "&.checked61": {
       color: theme.palette.secondary.main
     },
-    "&.disabled64": {
+    "&.disabled61": {
       color: theme.palette.action.disabled
     }
   }
