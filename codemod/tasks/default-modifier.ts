@@ -154,16 +154,6 @@ const adjustImports = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
     if (newValue)
       imp.source.value = newValue
     return
-    // const id = Queries.checkSingleResult(Ast.astq().query(imp, '/ImportDefaultSpecifier/Identifier' || '/ImportSpecifier/Identifier'), true)
-    //   if (id && id.name === 'classNames') {
-    //     Ast.removeNode(root, imp.$path)
-    //     return
-    //   } else {
-    //     const newValue = importRepairs[imp.source.value]
-    //     if (newValue)
-    //       imp.source.value = newValue
-    //     return
-    //   }
   })
 }
 const importRepairs = {
@@ -203,16 +193,17 @@ const unknownComponents = [
 // - 'className={classNames(x)}' by 'className={classNamesStr(x)}'
 // - 'className={x}' by 'className={classNamesStr(x)}'
 const adjustHtmlClassNameAttribute = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
-  const htmls = Ast.astq().query(info.renderFunc.body, '// JSXElement [ /JSXOpeningElement/JSXIdentifier [ isHTMLTag(@name, {forceHTMLTags}) ] && // JSXAttribute/JSXIdentifier [ @name=="className" ] ]', { forceHTMLTags: unknownComponents || null }) as Ast.Ast[]
-  const classNames = 'classNames('
-  htmls.forEach(html => {
-    const compName: string = html.openingElement.name.name
-    const classNameProc = compName === 'TransitionGroup' || compName.charAt(0).toLowerCase() === compName.charAt(0) ? 'classNamesStr(' : `classNamesAny(${compName},`
-    const clasName = Queries.checkSingleResult(Ast.astq().query(html, '/JSXOpeningElement/JSXAttribute [ /JSXIdentifier [ @name=="className" ] ]'))
-    const oldCode = Parser.generateCode(clasName.value.expression)
-    const newCode = oldCode.startsWith(classNames) ? classNameProc + oldCode.substr(classNames.length) : `${classNameProc}${oldCode})`
-    clasName.value.expression = Parser.parseExpressionLow(newCode)
-  })
+  //************ CLASSNAMES
+  // const htmls = Ast.astq().query(info.renderFunc.body, '// JSXElement [ /JSXOpeningElement/JSXIdentifier [ isHTMLTag(@name, {forceHTMLTags}) ] && // JSXAttribute/JSXIdentifier [ @name=="className" ] ]', { forceHTMLTags: unknownComponents || null }) as Ast.Ast[]
+  // const classNames = 'classNames('
+  // htmls.forEach(html => {
+  //   const compName: string = html.openingElement.name.name
+  //   const classNameProc = compName === 'TransitionGroup' || compName.charAt(0).toLowerCase() === compName.charAt(0) ? 'classNamesStr(' : `classNamesAny(${compName},`
+  //   const clasName = Queries.checkSingleResult(Ast.astq().query(html, '/JSXOpeningElement/JSXAttribute [ /JSXIdentifier [ @name=="className" ] ]'))
+  //   const oldCode = Parser.generateCode(clasName.value.expression)
+  //   const newCode = oldCode.startsWith(classNames) ? classNameProc + oldCode.substr(classNames.length) : `${classNameProc}${oldCode})`
+  //   clasName.value.expression = Parser.parseExpressionLow(newCode)
+  // })
   return root
 }
 
@@ -340,58 +331,59 @@ const constSelectFromObjectAST = {
   "value": {
     "type": "ObjectPattern",
     "properties": [
-      {
-        "type": "ObjectProperty",
-        "method": false,
-        "key": {
-          "type": "Identifier",
-          "start": 39,
-          "name": "classNames"
-        },
-        "computed": false,
-        "shorthand": true,
-        "value": {
-          "type": "Identifier",
-          "name": "classNames"
-        },
-        "extra": {
-          "shorthand": true
-        }
-      },
-      {
-        "type": "ObjectProperty",
-        "method": false,
-        "key": {
-          "type": "Identifier",
-          "name": "classNamesStr"
-        },
-        "computed": false,
-        "shorthand": true,
-        "value": {
-          "type": "Identifier",
-          "name": "classNamesStr"
-        },
-        "extra": {
-          "shorthand": true
-        }
-      },
-      {
-        "type": "ObjectProperty",
-        "method": false,
-        "key": {
-          "type": "Identifier",
-          "name": "classNamesAny"
-        },
-        "computed": false,
-        "shorthand": true,
-        "value": {
-          "type": "Identifier",
-          "name": "classNamesAny"
-        },
-        "extra": {
-          "shorthand": true
-        }
-      },
+      //************ CLASSNAMES
+      // {
+      //   "type": "ObjectProperty",
+      //   "method": false,
+      //   "key": {
+      //     "type": "Identifier",
+      //     "start": 39,
+      //     "name": "classNames"
+      //   },
+      //   "computed": false,
+      //   "shorthand": true,
+      //   "value": {
+      //     "type": "Identifier",
+      //     "name": "classNames"
+      //   },
+      //   "extra": {
+      //     "shorthand": true
+      //   }
+      // },
+      // {
+      //   "type": "ObjectProperty",
+      //   "method": false,
+      //   "key": {
+      //     "type": "Identifier",
+      //     "name": "classNamesStr"
+      //   },
+      //   "computed": false,
+      //   "shorthand": true,
+      //   "value": {
+      //     "type": "Identifier",
+      //     "name": "classNamesStr"
+      //   },
+      //   "extra": {
+      //     "shorthand": true
+      //   }
+      // },
+      // {
+      //   "type": "ObjectProperty",
+      //   "method": false,
+      //   "key": {
+      //     "type": "Identifier",
+      //     "name": "classNamesAny"
+      //   },
+      //   "computed": false,
+      //   "shorthand": true,
+      //   "value": {
+      //     "type": "Identifier",
+      //     "name": "classNamesAny"
+      //   },
+      //   "extra": {
+      //     "shorthand": true
+      //   }
+      // },
       {
         "type": "ObjectProperty",
         "method": false,

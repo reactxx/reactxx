@@ -194,24 +194,13 @@ export const getSystemPipes = <R extends Types.Shape>(
 
     // method, called in component code: ruleset merging
     $system.classNames = mergeRulesetsCreator(classes as Sheeter.SheetWithAddIns, getClassesPatches)
-    // $system.classNamesStr = mergeRulesetsCreatorStr(classes as Sheeter.SheetWithAddIns, getClassesPatches, addIns.rulesetsToClassNames);
+    $system.classNamesStr = mergeRulesetsCreatorStr(classes as Sheeter.SheetWithAddIns, getClassesPatches) //, addIns.rulesetsToClassNames);
     // $system.classNamesAny = (component, ...rulesets) => typeof component === 'string' ? $system.classNamesStr(...rulesets) : $system.classNames(...rulesets)
-    $system.classNamesStr = mergeRulesetsCreator(classes as Sheeter.SheetWithAddIns, getClassesPatches)
-    $system.classNamesAny = (component, ...rulesets) => $system.classNames(...rulesets)
+    //$system.classNamesStr = mergeRulesetsCreator(classes as Sheeter.SheetWithAddIns, getClassesPatches)
+    //$system.classNamesAny = (component, ...rulesets) => $system.classNames(...rulesets)
 
     // call component code
     return <CodeComponent {...finalProps as Types.CodeProps<R>} />
-    // const old: any = React.createElement
-    // try {
-    //   React.createElement = (type, props, children) => {
-    //     if (typeof type === 'string' && typeof props.className !=='string') {
-    //       props.className = ''
-    //     }
-    //     return old(type, props, children)
-    //   }
-    // } finally {
-    //   React.createElement = old
-    // }
   }
 
   return { propsPipe, stylePipe, renderComponentPipe, cascadingProvider: CascadingProviderComponent as any as React.ComponentClass<Types.PropsX<R>> }

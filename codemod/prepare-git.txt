@@ -12,6 +12,9 @@
   D:\reactxx\codemod>flow-remove-types --out-dir d:/reactxx/muix/src/mui-web d:/reactxx/muix/src/mui-web-temp/
 - delete d:/reactxx/muix/src/mui-web-temp/
 
+- copy material-ui-1.5.0.zip\material-ui-1.5.0\docs\src\pages\demos\ to d:\reactxx\codemod\patch-doc-original\
+- del *.md
+
 - delete d:\reactxx\codemod\patch-original\
 - modify d:\reactxx\muix\src\mui-web\Input\Textarea.js ({} as options to withStyles), classNames misto classnames
 - run index.ts from CodeMod project

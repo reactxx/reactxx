@@ -6,16 +6,18 @@
 //https://github.com/isaacs/node-glob
 
 //https://github.com/rse/astq
-export const isDoc = false
-
-
-export const MUI_VERSION = 'v1.4.3'
-
 const driver = 'd:/'
-
 const reactxx = driver + 'reactxx/muix/'
+export const MUI_VERSION = 'v1.5.0'
 
-export const muiWeb = reactxx + (isDoc ? 'src/ks/common/muix-doc/' : 'src/mui-web/')
+export let isDoc = false
+export const setIsDoc = (_isDoc:boolean) => {
+    isDoc = _isDoc
+    muiWeb = reactxx + (isDoc ? 'src/ks/common/muix-doc/' : 'src/mui-web/')
+    patchOriginal = codemod + (isDoc ? 'patch-doc-original/' : 'patch-original/')
+}
+
+export let muiWeb = reactxx + (isDoc ? 'src/ks/common/muix-doc/' : 'src/mui-web/')
 //export const muiWeb_Typings = muiWeb + 'typings/'
 
 export const muix = reactxx + 'src/muix/'
@@ -25,7 +27,7 @@ export const muix_Web = muix + 'current/'
 
 const codemod = driver + 'reactxx/codemod/'
 //export const patchPrepare = codemod + 'patch-prepare/'
-export const patchOriginal = codemod + (isDoc ? 'patch-doc-original/' : 'patch-original/')
+export let patchOriginal = codemod + (isDoc ? 'patch-doc-original/' : 'patch-original/')
 
 //export const tempDump = driver + 'temp/dump/'
 

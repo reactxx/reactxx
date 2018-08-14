@@ -43,14 +43,18 @@ export const codeMod = () => {
 
         switch (path) {
             case 'ListItem/ListItem':
-                _code = _code.replace('return <Component {...componentProps}>{children}</Component>;', 'componentProps.className = classNamesAny(Component, componentProps.className)\nreturn <Component {...componentProps}>{children}</Component>;')
+                //************ CLASSNAMES
+                //_code = _code.replace('return <Component {...componentProps}>{children}</Component>;', 'componentProps.className = classNamesAny(Component, componentProps.className)\nreturn <Component {...componentProps}>{children}</Component>;')
                 break
             case 'GridListTile/GridListTile':
                 _code = _code.replace(`\nimport`, `\nimport {fitPatch} from './GridListTilePatch';\nimport`)
                 _code = _code.replace(`fit = () => {`, `  fit = fitPatch.bind(this)\n  fit_ = () => {`)
                 break
         }
+        //************ CLASSNAMES
+        _code = _code.replace(`import classNames from 'classnames';`, `import { classNames } from 'reactxx-basic';`)
         const ast = Parser.parseCode(_code)
+        
 
         // finish logItem
         logp.renderFunc = Queries.getNode_functionGlobal(ast, logp.name, true)

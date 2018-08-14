@@ -11,7 +11,6 @@ export interface ChipProps
   label?: React.ReactNode;
   onDelete?: React.EventHandler<any>;
   onKeyDown?: React.EventHandler<React.KeyboardEvent<any>>;
-  href?:string;
 }
 
 export type ChipClassKey =

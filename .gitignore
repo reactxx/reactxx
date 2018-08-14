@@ -321,6 +321,7 @@ muix/src/ks
 
 !muix/src/mui-web/**/*.js
 !codemod/patch-original/**/*.js
+!muix/src/fela/fela-utils
 
 muix/tsconfig.json
 

@@ -11,10 +11,10 @@ export const registerInput = (specials: Specials) => {
             const func = info.renderFunc
             const body = func.body.body as any[];
             const returnIdx = body.findIndex(node => node.type === 'ReturnStatement')
-            body.splice(returnIdx, 0, Parser.parseCode("if (typeof InputComponent === 'string') inputClassName = classNamesStr(inputClassName); else inputProps.$system = this.props.$system;"))
+            //************ CLASSNAMES
+            //body.splice(returnIdx, 0, Parser.parseCode("if (typeof InputComponent === 'string') inputClassName = classNamesStr(inputClassName); else inputProps.$system = this.props.$system;"))
+            body.splice(returnIdx, 0, Parser.parseCode("if (typeof InputComponent !== 'string') inputProps.$system = this.props.$system;"))
             const res = Tasks.withStylesTaskDefaultCreator()(ast, info)
-            //před 'return' of RENDER funkce dat:
-            //if (typeof InputComponent === 'string') inputClassName = classNamesStr(inputClassName); else inputProps.$system = this.props.$system;
             return res
         }
     }

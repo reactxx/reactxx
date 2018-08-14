@@ -2,6 +2,11 @@
   isWeb:boolean
 }
 
+declare module 'recompose/toRenderProps' {
+  const toRenderProps: any
+  export default toRenderProps
+}
+
 declare module 'fela-plugin-rtl' {
   const def
   export default def

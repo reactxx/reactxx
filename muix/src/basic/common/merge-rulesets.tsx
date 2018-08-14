@@ -10,7 +10,7 @@ export const mergeRulesetsCreator = (classes: Sheeter.SheetWithAddIns, getClasse
     rulesets
   ) as Types.TMergeRulesetsResult<any>
 }
-export const mergeRulesetsCreatorStr = (classes: Sheeter.SheetWithAddIns, getClassesPatches: Sheeter.RulesetPatchGetters, rulesetsToClassNames: (...rulesets: React.CSSProperties[]) => string) => (...rulesets: Sheeter.Ruleset[]) => {
+export const mergeRulesetsCreatorStr = (classes: Sheeter.SheetWithAddIns, getClassesPatches: Sheeter.RulesetPatchGetters) => (...rulesets: Sheeter.Ruleset[]) => {
   const res = Sheeter.mergeRulesetsForCode(
     classes as Sheeter.SheetWithAddIns,
     getClassesPatches,
