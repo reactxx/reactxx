@@ -68,7 +68,7 @@ export const transformStrCode = (code: string, info: Ast.MUISourceInfo, dts: str
         // let temp = Parser.parseCode(code)
         // code = code + '\n' + dtsCode + '\n'
         // temp = Parser.parseCode(code)
-        code = code + '\n' + Parser.generateCode(ast) + '\n'
+        //code = code + '\n' + Parser.generateCode(ast) + '\n'
 
     }
 
