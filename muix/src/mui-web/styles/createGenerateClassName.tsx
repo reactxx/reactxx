@@ -93,7 +93,3 @@ export default function createGenerateClassName(options: any = {}) {
     return `${rule.key}-${ruleCounter}`;
   };
 }
-interface GenerateClassNameOptions {
-  dangerouslyUseGlobalCSS?: boolean;
-  productionPrefix?: string;
-}

@@ -269,8 +269,3 @@ export function lighten(color, coefficient) {
 
   return recomposeColor(color);
 }
-export type ColorFormat = "rgb" | "rgba" | "hsl" | "hsla";
-export interface ColorObject {
-  type: ColorFormat;
-  values: [number, number, number] | [number, number, number, number];
-}

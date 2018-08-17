@@ -30,9 +30,3 @@ const withMobileDialog = (options: any = {}) => Component => {
 };
 
 export default withMobileDialog;
-export interface WithMobileDialogOptions {
-  breakpoint: Breakpoint;
-}
-export interface InjectedProps {
-  fullScreen?: boolean;
-}

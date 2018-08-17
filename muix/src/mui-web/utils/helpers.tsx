@@ -73,4 +73,3 @@ export function createChainedFunction(...funcs) {
     () => {}
   );
 }
-type ChainedFunction = ((...args: any[]) => void) | undefined | null;

@@ -9,7 +9,3 @@ const shape = {
   borderRadius: 4
 };
 export default shape;
-export interface Shape {
-  borderRadius: number;
-}
-export type ShapeOptions = Partial<Shape>;

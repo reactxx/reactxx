@@ -84,7 +84,3 @@ const withTheme = () => Component => {
 };
 
 export default withTheme;
-export interface WithTheme {
-  theme: Theme;
-  innerRef?: React.Ref<any> | React.RefObject<any>;
-}

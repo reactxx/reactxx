@@ -32,8 +32,3 @@ export default function createMixins(breakpoints, spacing, mixins) {
     ...mixins
   };
 }
-export interface Mixins {
-  gutters: (styles?: CSSProperties) => CSSProperties;
-  toolbar: CSSProperties; // ... use interface declaration merging to add custom mixins
-}
-export interface MixinsOptions extends Partial<Mixins> {}

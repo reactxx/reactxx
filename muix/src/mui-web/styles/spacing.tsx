@@ -11,7 +11,3 @@ const spacing = {
   unit: 8
 };
 export default spacing;
-export interface Spacing {
-  unit: number;
-}
-export type SpacingOptions = Partial<Spacing>;

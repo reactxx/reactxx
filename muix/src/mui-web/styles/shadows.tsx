@@ -45,30 +45,3 @@ const shadows = [
   createShadow(0, 11, 15, -7, 0, 24, 38, 3, 0, 9, 46, 8)
 ];
 export default shadows;
-export type Shadows = [
-  "none",
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
-];

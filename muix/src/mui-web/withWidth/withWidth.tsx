@@ -185,10 +185,3 @@ const withWidth = (options: any = {}) => Component => {
 };
 
 export default withWidth;
-export interface WithWidthOptions {
-  resizeInterval: number;
-}
-export interface WithWidthProps {
-  width: Breakpoint;
-  innerRef?: React.Ref<any> | React.RefObject<any>;
-}

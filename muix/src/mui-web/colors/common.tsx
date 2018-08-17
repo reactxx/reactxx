@@ -11,7 +11,3 @@ const common = {
   white: "#fff"
 };
 export default common;
-export interface CommonColors {
-  black: string;
-  white: string;
-}
