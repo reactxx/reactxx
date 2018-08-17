@@ -1,0 +1,12 @@
+﻿{ 
+  "extends": "../tsconfig-web.common.json",
+  "compilerOptions": {
+    "outDir": "../../deploy/lib/sheeter",
+    "baseUrl": ".",
+    "paths": {
+      "reactxx-sheeter": [
+        "../sheeter"
+      ],  
+    }
+  }
+}

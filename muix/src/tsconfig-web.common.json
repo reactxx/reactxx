@@ -1,0 +1,31 @@
+﻿{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "system",
+    "moduleResolution": "node",
+    //"allowJs": true,
+    "declaration": true,
+    "composite": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    //"rootDir": "src",
+    //"outDir": "deploy/lib",
+    "jsx": "react",
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "importHelpers": true,
+    "strictNullChecks": false,
+    "downlevelIteration": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    //"noUnusedLocals": true,
+
+    "lib": [
+      "dom",
+      "es2017",
+      "esnext.asynciterable"
+    ]
+  }
+}

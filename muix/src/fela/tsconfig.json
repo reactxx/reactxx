@@ -1,0 +1,7 @@
+﻿{ 
+  "extends": "../tsconfig-web.common.json",
+  "compilerOptions": {
+    "outDir": "../../deploy/lib/fela"
+    }
+  }
+}

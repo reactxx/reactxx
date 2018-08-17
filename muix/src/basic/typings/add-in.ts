@@ -1,5 +1,4 @@
-﻿import { TCommon } from './common';
-import { TCommonStyles } from './common-styles';
+﻿import { TCommonStyles } from './common-styles';
 import { Types } from './types';
 
 

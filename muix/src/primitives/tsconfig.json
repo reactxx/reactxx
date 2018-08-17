@@ -1,0 +1,23 @@
+﻿{ 
+  "extends": "../tsconfig-web.common.json",
+  "compilerOptions": {
+    "outDir": "../../deploy/lib/primitives",
+    "baseUrl": ".",
+    "paths": {
+      "reactxx-basic": [
+        "../basic"
+      ],
+      "reactxx-fela": [
+        "../fela"
+      ],
+      "reactxx-sheeter": [
+        "../sheeter"
+      ],
+    }
+  },
+  "references": [
+    {"path": "../basic"},
+    {"path": "../fela"},
+    {"path": "../sheeter"},
+  ]
+}

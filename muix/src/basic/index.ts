@@ -8,4 +8,4 @@ export * from './typings/common';
 export * from './typings/common-styles';
 export * from './typings/types';
 
-export { rulesetToClassNamesMUI, rulesetsToClassNames } from 'reactxx-fela'
+export { rulesetToClassNamesMUI, rulesetsToClassNames } from 'reactxx-fela' 

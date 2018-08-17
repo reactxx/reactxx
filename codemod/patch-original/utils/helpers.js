@@ -10,13 +10,13 @@ export function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export function contains(obj        , pred        ) {
+export function contains(obj, pred) {
   return Object.keys(pred).every(key => {
     return obj.hasOwnProperty(key) && obj[key] === pred[key];
   });
 }
 
-export function findIndex(arr            , pred     ) {
+export function findIndex(arr, pred) {
   const predType = typeof pred;
   for (let i = 0; i < arr.length; i += 1) {
     if (predType === 'function' && !!pred(arr[i], i, arr) === true) {
@@ -32,7 +32,7 @@ export function findIndex(arr            , pred     ) {
   return -1;
 }
 
-export function find(arr            , pred     ) {
+export function find(arr, pred) {
   const index = findIndex(arr, pred);
   return index > -1 ? arr[index] : undefined;
 }
@@ -46,7 +46,7 @@ export function find(arr            , pred     ) {
  * @param {function} functions to chain
  * @returns {function|null}
  */
-export function createChainedFunction(...funcs            ) {
+export function createChainedFunction(...funcs) {
   return funcs.reduce(
     (acc, func) => {
       if (func == null) {
@@ -63,6 +63,6 @@ export function createChainedFunction(...funcs            ) {
         func.apply(this, args);
       };
     },
-    () => {},
+    () => { },
   );
 }

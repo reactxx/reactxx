@@ -1,106 +1,70 @@
-import * as Glob from 'glob'
 import * as fs from 'fs'
 import * as Config from '../utils/config'
 import * as Queries from '../utils/queries'
 import * as Ast from '../utils/ast'
 import * as Parser from '../utils/parser'
 import * as fsExtra from 'fs-extra';
-import * as Tasks from './default-modifier'
+import { readAllCodes, scanDir } from '../utils/readAllCodes'
+import { transformAstCode } from './ast-comp'
+import { transformStrCode } from './str-comp'
 
-import { registerButtonBase } from '../patch-code/ButtonBase/ButtonBase'
-import { registerInput } from '../patch-code/Input/Input'
-import { registerNativeSelectInput } from '../patch-code/NativeSelect/NativeSelectInput'
-import { registerSelectInput } from '../patch-code/Select/SelectInput'
-import { registerGrid } from '../patch-code/Grid/Grid'
-import { registerTabs } from '../patch-code/Tabs/Tabs'
-import { registerCollapse } from '../patch-code/Collapse/Collapse'
-import { registerInputLabel } from '../patch-code/InputLabel/InputLabel'
-
-export type Specials = { [path: string]: Ast.FileDescr }
-
-export const specials: Specials = {}
-
-registerButtonBase(specials)
-registerInput(specials)
-registerNativeSelectInput(specials)
-registerSelectInput(specials)
-registerGrid(specials)
-registerTabs(specials)
-registerCollapse(specials)
-registerInputLabel(specials)
+export const typeDefs = () => {
+    scanDir(Config.patchOriginal, '/**/*.d.ts').forEach(src => {
+        if (!src.startsWith('utils')) return
+        const dest = src.replace('.d.ts', '.ts')
+        let code = fs.readFileSync(Config.patchOriginal + src, { encoding: 'utf-8' })
+        code = code.replace(/^declare .*$/gm, '')
+        code = code.replace(/^export default .*$/gm, '')
+        //fsExtra.outputFileSync(Config.muiWeb + dest, code, { flag: 'w' });
+    })
+}
 
 export const codeMod = () => {
 
-    const { log, codeStr } = readAllCodes()
+    try { fsExtra.emptyDirSync(Config.muiWeb) } catch { }
 
-    //try { fsExtra.rmdirSync(Config.reactxxMuiWebShapes) } catch { }
-    //try { fsExtra.rmdirSync(Config.muiWeb_Typings) } catch { }
+    fsExtra.copySync(Config.muix_WebSources, Config.muiWeb, { overwrite: true })
+    
+    //typeDefs()
+
+    const { log, codeStr } = readAllCodes()
 
     for (const path in log) {
         const logp = log[path]
-        const specItem = specials[path]
-        let _code = codeStr[path]
 
-        switch (path) {
-            case 'ListItem/ListItem':
-                //************ CLASSNAMES
-                //_code = _code.replace('return <Component {...componentProps}>{children}</Component>;', 'componentProps.className = classNamesAny(Component, componentProps.className)\nreturn <Component {...componentProps}>{children}</Component>;')
-                break
-            case 'GridListTile/GridListTile':
-                _code = _code.replace(`\nimport`, `\nimport {fitPatch} from './GridListTilePatch';\nimport`)
-                _code = _code.replace(`fit = () => {`, `  fit = fitPatch.bind(this)\n  fit_ = () => {`)
-                break
-        }
-        //************ CLASSNAMES
-        _code = _code.replace(`import classNames from 'classnames';`, `import { classNames } from 'reactxx-basic';`)
-        const ast = Parser.parseCode(_code)
-        
+        if (logp.nameIsUppercase || path==='styles/withStyles') continue
+
+        let code = codeStr[path]
+
+        logp.withTheme = code.indexOf('withTheme(') > 0
+        if (!logp.withTheme) logp.withStyles = code.indexOf('withStyles(styles') > 0
+
+        const dtsFn = Config.patchOriginal + path + '.d.ts'
+        const dts = fs.existsSync(dtsFn) ? fs.readFileSync(dtsFn, { encoding: 'utf-8' }) : null
+
+        code = transformStrCode(code, logp, dts, allAstTypes)
+
+        const ast = Parser.parseCode(code)
 
         // finish logItem
         logp.renderFunc = Queries.getNode_functionGlobal(ast, logp.name, true)
         if (!logp.renderFunc) {
             logp.renderFunc = Queries.getNode_classMethod(ast, logp.name, 'render', true)
             if (logp.renderFunc)
-            logp.isClass = true
+                logp.isClass = true
         }
-        const withStylesOrWithTheme = (name: string) => Queries.checkSingleResult(Ast.astq().query(ast,
-            `/Program/* [ //CallExpression/CallExpression/Identifier [ @name=="${name}" ] ]`), true)
-        const withStyles = withStylesOrWithTheme('withStyles')
-        const withTheme = withStylesOrWithTheme('withTheme')
 
-        // ... and put it to log
-        if (withTheme)
-          logp.withTheme = true
-        else if (withStyles)
-          logp.withStyles = true
 
-        //const transformStr = specItem && specItem.transformStr
-        let transform = specItem && specItem.transform
-        // if (transformStr) {
-        //     if (!logp.origExists) fsExtra.moveSync(logp.srcPath, logp.origPath)
-        //     const code = fs.readFileSync(logp.origPath, { encoding: 'utf-8' })
-        //     fsExtra.outputFileSync(logp.srcPath, transformStr(code))
-        // } else {
-        if (!transform) {
-            transform = specItem && specItem.transform
-            if (!transform) {
-                if (logp.withStyles) transform = Tasks.withStylesTaskDefaultCreator()
-                else if (logp.withTheme) transform = Tasks.withThemeTaskDefaultCreator()
-                else transform = Tasks.otherTaskDefaultCreator()
-            }
-        }
-        if (!transform) continue
-        if (!logp.origExists) fsExtra.moveSync(logp.srcPath, logp.origPath)
-        //const ast = code[path]
-        transform(ast, logp)
-        Parser.generateFile(ast, logp.srcPath)
-        //}
+        transformAstCode(ast, logp)
+
+        Parser.generateFile(ast, logp.destPath + '.tsx')
+
         // TS shape
         if (logp.withStyles && logp.name !== 'SwipeArea') {
+            console.log(path)
             const ts = Config.muiWeb + path + '.d.ts'
             const ts_ = ts.replace('.d.ts', '_.d.ts')
             if (!fs.existsSync(ts_))
-                //if (!Parser.canAutoGenerateFile(ts))
                 fsExtra.moveSync(ts, ts_)
             fsExtra.outputFileSync(ts, tsShape(logp, !noKey[logp.name]), { flag: 'w' })
             // export TS
@@ -167,52 +131,4 @@ const noKey = {
 }
 
 
-export const readAllCodes = () => {
-    const log: { [path: string]: Ast.MUISourceInfo } = {}
-    //const code: { [path: string]: Ast.Ast } = {}
-    const codeStr: { [path: string]: string } = {}
-    const compileErrors = []
-    getAllComponents().forEach(comp => {
-        const path = `${comp[0]}/${comp[1]}`
-        // collect LOG info
-        const logItem: Ast.MUISourceInfo = {
-            dir: comp[0],
-            name: comp[1],
-            srcPath: Config.muiWeb + path + '.js',
-            origPath: Config.patchOriginal + path + '.js',
-        }
-        logItem.origExists = fs.existsSync(logItem.origPath)
-        const actPath = logItem.origExists ? logItem.origPath : logItem.srcPath
-
-        // parse JS file
-        let rootStr: string
-        try {
-            rootStr = fs.readFileSync(actPath, { encoding: 'utf-8' })
-            //if (!Config.isDoc) root = Parser.parseCode(rootStr)
-        } catch { compileErrors.push(actPath); return }
-        //code[path] = root
-        codeStr[path] = rootStr
-        log[path] = logItem
-
-        logItem.nameIsUppercase = logItem.name.charAt(0).toLowerCase() !== logItem.name.charAt(0)
-    })
-    //const dump = JSON.stringify(log, null, 2)
-    //return { log, code, codeStr, compileErrors }
-    return { log, codeStr, compileErrors }
-}
-
-const getAllComponents = () => {
-    const root = Config.isDoc ? Config.patchOriginal : Config.muiWeb
-    return Glob.sync('/**/!(index).js', { root: root }).
-        map(f => f.substr(root.length)).
-        //filter(f => f.charAt(0) === f.charAt(0).toUpperCase()).
-        map(f => {
-            let res: any[] = f.substr(0, f.length - 3).split('\\')
-            if (res.length > 2) {
-                const names = res.slice(1)
-                res = [res[0], names.join('/')]
-            }
-            return res as [string, string]
-        })
-}
-
+const allAstTypes = {}

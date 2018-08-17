@@ -22,5 +22,9 @@
       "es2015",
       "esnext.asynciterable"
     ]
-  }
+  },
+  "exclude": [
+    "trash",
+    "patch-original"
+  ]
 }

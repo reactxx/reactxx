@@ -6,13 +6,29 @@
         {
             "type": "typescript",
             "tsconfig": "tsconfig.json",
+            "option": "watch",
             "problemMatcher": [
                 "$tsc"
+            ]
+        },
+        {
+            "label": "TypeScript compile",
+            "type": "shell",
+            "command": "tsc -b src/mui-web --verbose",
+            "problemMatcher": [
+                "$tsc-watch"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "type": "typescript",
+            "tsconfig": "src\\icons\\tsconfig.json",
+            "problemMatcher": [
+                "$tsc"
+            ]
         }
     ]
 }

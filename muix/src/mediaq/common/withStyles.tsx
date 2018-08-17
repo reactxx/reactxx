@@ -1,6 +1,6 @@
 ﻿import React from 'react';
-import { RenderAddIn, TCommon, ThemeProvider, TRenderState, withStyles } from 'reactxx-basic';
-import { mediaqFinishAddInClasses, mediaqFinishAddInProps, mediaQFlags, mediaQSheet, MediaQ_AppContainer } from 'reactxx-mediaq';
+import { RenderAddIn, TCommon, ThemeProvider, TRenderState, withStyles, TAddIn } from 'reactxx-basic';
+import { mediaqFinishAddInClasses, mediaqFinishAddInProps, mediaQFlags, mediaQSheet, MediaQ_AppContainer } from 'reactxx-mediaq'
 import { AddIns as SheeterAddIns } from 'reactxx-sheeter';
 import { Types } from '../typings/types';
 

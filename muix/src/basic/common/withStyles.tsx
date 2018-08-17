@@ -5,8 +5,12 @@ import { Types } from '../typings/types';
 import { renderCounterPipe } from './develop';
 import { getSystemPipes } from './system-pipes';
 import { themePipe } from './theme';
+import { TAddIn } from '../typings/add-in';
 
-const DEV_MODE = process.env.NODE_ENV === 'development'
+// DON'T REMOVE IT (project reference fails)
+type fake = TAddIn.CodeProps
+
+const DEV_MODE = process.env.NODE_ENV === 'development' 
 
 /************************
 * TRenderState

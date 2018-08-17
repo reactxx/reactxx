@@ -1,0 +1,25 @@
+﻿{ 
+  "extends": "../tsconfig-web.common.json",
+  "compilerOptions": {
+    "outDir": "../../deploy/lib/basic",
+    "baseUrl": ".",
+    "paths": {
+      "reactxx-basic": [
+        "../basic"
+      ],
+      "reactxx-sheeter": [
+        "../sheeter"
+      ],
+      "reactxx-fela": [
+        "../fela"
+      ],
+    }
+  },
+  "references": [
+    {"path": "../fela"},
+    {"path": "../sheeter"},
+  ],
+  "exclude": [
+    "index-native.ts"
+  ]
+}

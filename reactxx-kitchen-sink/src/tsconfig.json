@@ -1,0 +1,47 @@
+﻿{ 
+  "extends": "../tsconfig-web.common.json",
+  "compilerOptions": {
+    "outDir": "../../deploy/lib/basic",
+    "baseUrl": ".",
+    "paths": {
+      "reactxx-animation": [
+        "../animation"
+      ],
+      "reactxx-icons": [
+        "../icons"
+      ],
+      "reactxx-mediaq": [
+        "../mediaq"
+      ],
+      "reactxx-primitives": [
+        "../primitives"
+      ],
+      "reactxx-basic": [
+        "../basic"
+      ],
+      "reactxx-sheeter": [
+        "../sheeter"
+      ],
+      "reactxx-fela": [
+        "../fela"
+      ],
+      "reactxx-mui-web/*": [
+        "../mui-web/*"
+      ],
+    }
+  },
+  "references": [
+    {"path": "../fela"},
+    {"path": "../sheeter"},
+    {"path": "../animation"},
+    {"path": "../mediaq"},
+    {"path": "../primitives"},
+    {"path": "../basic"},
+    {"path": "../icons"},
+    {"path": "../mui-web"},
+  ],
+  "exclude": [
+    "common/muix",
+    "common/muix-doc",
+  ]
+}

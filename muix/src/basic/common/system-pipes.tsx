@@ -5,6 +5,12 @@ import { TCommon } from '../typings/common';
 import { Types } from '../typings/types';
 import { RenderAddIn, TRenderState } from './withStyles';
 import { mergeRulesetsCreator, mergeRulesetsCreatorStr } from './merge-rulesets';
+import { TCommonStyles } from '../typings/common-styles';
+import { TAddIn } from '../typings/add-in';
+
+// DON'T REMOVE IT (project reference fails)
+type fake = TAddIn.CodeProps
+type fake2 = TCommonStyles.FlexStyle
 
 export const getSystemPipes = <R extends Types.Shape>(
   id: number,

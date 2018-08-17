@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import ReactN from 'react-native';
-import { TCommon, TCommonStyles } from 'reactxx-basic';
+import { TCommonStyles } from 'reactxx-basic';
+import { TCommon } from 'reactxx-basic';
 import { Ruleset as SheeterRuleset } from 'reactxx-sheeter';
 import { TAddIn } from './add-in';
 import * as Sheeter from 'reactxx-sheeter';
@@ -244,3 +245,6 @@ export namespace Types {
   export interface OnPressAllNative { onPress?: () => void; onPressIn?: () => void; onPressOut?: () => void; onLongPress?: () => void }
 
 }
+
+
+export const fakeTypes = 0

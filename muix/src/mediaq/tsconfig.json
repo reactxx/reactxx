@@ -1,0 +1,29 @@
+﻿{ 
+  "extends": "../tsconfig-web.common.json",
+  "compilerOptions": {
+    "outDir": "../../deploy/lib/mediaq",
+    "baseUrl": ".",
+    "paths": {
+      "reactxx-mediaq": [
+        "../mediaq",
+      ],
+      "reactxx-basic": [
+        "../basic"
+      ],
+      "reactxx-fela": [
+        "../fela"
+      ],
+      "reactxx-sheeter": [
+        "../sheeter"
+      ],
+    }
+  },
+  "references": [
+    {"path": "../basic"},
+    {"path": "../fela"},
+    {"path": "../sheeter"},
+  ],
+  "exclude": [
+    "index-native.ts"
+  ]
+}

@@ -1,5 +1,5 @@
 ﻿import { TAddIn as TAddInBasic, TCommonStyles } from 'reactxx-basic';
-import { TMediaQ } from 'reactxx-mediaq';
+import { TMediaQ } from './mediaq';
 import { Types } from './types';
 
 

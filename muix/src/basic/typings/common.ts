@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 import * as CSS from 'csstype'
 
-import { TCommonStyles } from 'reactxx-basic'
+import { TCommonStyles } from './common-styles'
 
 export namespace TCommon {
 

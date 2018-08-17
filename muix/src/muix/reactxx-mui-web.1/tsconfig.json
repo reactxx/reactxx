@@ -1,0 +1,23 @@
+﻿{ 
+  "extends": "../tsconfig-web.common.json",
+  "compilerOptions": {
+    "outDir": "../../deploy/lib/mui-web",
+    "baseUrl": ".",
+    "paths": {
+      "reactxx-basic": [
+        "../basic"
+      ],
+      "reactxx-sheeter": [
+        "../sheeter"
+      ],
+      "reactxx-fela": [
+        "../fela"
+      ],
+    }
+  },
+  "references": [
+    {"path": "../fela"},
+    {"path": "../sheeter"},
+    {"path": "../basic"},
+  ]
+}

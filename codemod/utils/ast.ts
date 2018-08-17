@@ -15,11 +15,12 @@ export const astq = () => {
 export interface MUISourceInfo {
     dir?: string
     name?: string
+    path?: string
     withStyles?: boolean
     withTheme?: boolean
-    srcPath?: string
+    destPath?: string
     origPath?: string
-    origExists?: boolean
+    //origExists?: boolean
     adjustThemeProperties?: string[]
     adjustThemeMethods?: string[]
     renderFunc?: Ast

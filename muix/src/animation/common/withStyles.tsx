@@ -2,6 +2,7 @@
 import { RenderAddIn, TRenderState, withStyles } from 'reactxx-basic';
 import { animationFinishAddInClasses } from 'reactxx-sheeter';
 import { Types } from '../typings/types';
+import { TAddIn } from '../typings/add-in';
 import { animations } from './animation';
 
 

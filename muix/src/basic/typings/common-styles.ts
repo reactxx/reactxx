@@ -162,3 +162,5 @@ export namespace TCommonStyles {
 
 
 }
+
+export const fake = 0

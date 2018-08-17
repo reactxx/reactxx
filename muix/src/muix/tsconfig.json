@@ -1,0 +1,31 @@
+﻿{ 
+  "extends": "../tsconfig-web.common.json",
+  "compilerOptions": {
+    "outDir": "../../deploy/lib/muix",
+    "baseUrl": ".",
+    "paths": {
+      "reactxx-mui-web": [
+        "../mui-web"
+      ],
+      "reactxx-basic": [
+        "../basic"
+      ],
+      "reactxx-sheeter": [
+        "../sheeter"
+      ],
+      "reactxx-fela": [
+        "../fela"
+      ],
+      "reactxx-icons": [
+        "../icons"
+      ],
+    }
+  },
+  "references": [
+    {"path": "../fela"},
+    {"path": "../sheeter"},
+    {"path": "../icons"},
+    {"path": "../basic"},
+    {"path": "../mui-web"},
+  ]
+}

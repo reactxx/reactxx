@@ -34,9 +34,9 @@ export const duration = {
   leavingScreen: 195,
 };
 
-export const formatMs = (milliseconds        ) => `${Math.round(milliseconds)}ms`;
-export const isString = (value     ) => typeof value === 'string';
-export const isNumber = (value     ) => !isNaN(parseFloat(value));
+export const formatMs = (milliseconds) => `${Math.round(milliseconds)}ms`;
+export const isString = (value) => typeof value === 'string';
+export const isNumber = (value) => !isNaN(parseFloat(value));
 
 /**
  * @param {string|Array} props
@@ -50,13 +50,8 @@ export default {
   easing,
   duration,
   create(
-    props                         = ['all'],
-    options   
-                    
-                                 
-                      
-                              
-      = {},
+    props = ['all'],
+    options = {},
   ) {
     const {
       duration: durationOption = duration.standard,
@@ -87,12 +82,12 @@ export default {
       .map(
         animatedProp =>
           `${animatedProp} ${
-            typeof durationOption === 'string' ? durationOption : formatMs(durationOption)
+          typeof durationOption === 'string' ? durationOption : formatMs(durationOption)
           } ${easingOption} ${typeof delay === 'string' ? delay : formatMs(delay)}`,
-      )
+    )
       .join(',');
   },
-  getAutoHeightDuration(height         ) {
+  getAutoHeightDuration(height) {
     if (!height) {
       return 0;
     }
