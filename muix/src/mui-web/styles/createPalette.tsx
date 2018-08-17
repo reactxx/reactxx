@@ -111,10 +111,10 @@ export default function createPalette(palette) {
     // Use the same logic as
     // Bootstrap: https://github.com/twbs/bootstrap/blob/1d6e3710dd447de1a200f29e8fa521f8a0908f70/scss/_functions.scss#L59
     // and material-components-web https://github.com/material-components/material-components-web/blob/ac46b8863c4dab9fc22c4c662dc6bd1b65dd652f/packages/mdc-theme/_functions.scss#L54
-    const contrastText = getContrastRatio(background, dark.text.primary) >=
-      contrastThreshold
-      ? dark.text.primary
-      : light.text.primary;
+    const contrastText =
+      getContrastRatio(background, dark.text.primary) >= contrastThreshold
+        ? dark.text.primary
+        : light.text.primary;
 
     if (process.env.NODE_ENV !== "production") {
       const contrast = getContrastRatio(background, contrastText);

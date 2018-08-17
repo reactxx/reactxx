@@ -85,12 +85,13 @@ export default {
     return (Array.isArray(props) ? props : [props])
       .map(
         animatedProp =>
-          `${animatedProp} ${typeof durationOption === "string"
-            ? durationOption
-            : formatMs(durationOption)} ${easingOption} ${typeof delay ===
-            "string"
-            ? delay
-            : formatMs(delay)}`
+          `${animatedProp} ${
+            typeof durationOption === "string"
+              ? durationOption
+              : formatMs(durationOption)
+          } ${easingOption} ${
+            typeof delay === "string" ? delay : formatMs(delay)
+          }`
       )
       .join(",");
   },

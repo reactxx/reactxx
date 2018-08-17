@@ -27,11 +27,12 @@ export default function createTypography(palette, typography) {
     // Apply the CSS properties to all the variants.
     allVariants,
     ...other
-  } = typeof typography === "function" ? typography(palette) : typography;
+  } =
+    typeof typography === "function" ? typography(palette) : typography;
   const coef = fontSize / 14;
 
   function pxToRem(value) {
-    return `${value / htmlFontSize * coef}rem`;
+    return `${(value / htmlFontSize) * coef}rem`;
   }
 
   return deepmerge(

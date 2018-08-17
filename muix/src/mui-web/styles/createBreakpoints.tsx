@@ -39,9 +39,8 @@ export default function createBreakpoints(breakpoints) {
       return up("xs");
     }
 
-    const value = typeof upperbound === "number" && endIndex > 0
-      ? upperbound
-      : key;
+    const value =
+      typeof upperbound === "number" && endIndex > 0 ? upperbound : key;
     return `@media (max-width:${value - step / 100}${unit})`;
   }
 

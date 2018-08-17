@@ -63,8 +63,8 @@ const withTheme = () => Component => {
 
   WithTheme.propTypes = {
     /**
-         * Use that property to pass a ref callback to the decorated component.
-         */
+     * Use that property to pass a ref callback to the decorated component.
+     */
     innerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
   };
   WithTheme.contextTypes = themeListener.contextTypes;

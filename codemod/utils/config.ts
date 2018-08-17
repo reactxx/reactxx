@@ -6,7 +6,7 @@
 //https://github.com/isaacs/node-glob
 
 //https://github.com/rse/astq
-const driver = 'd:/'
+const driver = 'c:/'
 const reactxx = driver + 'reactxx/muix/'
 export const MUI_VERSION = 'v1.5.0'
 

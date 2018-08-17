@@ -87,12 +87,12 @@ const withWidth = (options: any = {}) => Component => {
       const breakpoints = this.props.theme.breakpoints;
       let width = null;
       /**
-             * Start with the slowest value as low end devices often have a small screen.
-             *
-             * innerWidth |xs      sm      md      lg      xl
-             *            |-------|-------|-------|-------|------>
-             * width      |  xs   |  sm   |  md   |  lg   |  xl
-             */
+       * Start with the slowest value as low end devices often have a small screen.
+       *
+       * innerWidth |xs      sm      md      lg      xl
+       *            |-------|-------|-------|-------|------>
+       * width      |  xs   |  sm   |  md   |  lg   |  xl
+       */
 
       let index = 1;
 
@@ -116,13 +116,13 @@ const withWidth = (options: any = {}) => Component => {
       const props = {
         width:
           width ||
-            this.state.width ||
-            initialWidth ||
-            initialWidthOption ||
-            getThemeProps({
-              theme,
-              name: "MuiWithWidth"
-            }).initialWidth,
+          this.state.width ||
+          initialWidth ||
+          initialWidthOption ||
+          getThemeProps({
+            theme,
+            name: "MuiWithWidth"
+          }).initialWidth,
         ...other
       };
       const more: any = {};
@@ -150,29 +150,29 @@ const withWidth = (options: any = {}) => Component => {
 
   WithWidth.propTypes = {
     /**
-         * As `window.innerWidth` is unavailable on the server,
-         * we default to rendering an empty component during the first mount.
-         * In some situation, you might want to use an heuristic to approximate
-         * the screen width of the client browser screen width.
-         *
-         * For instance, you could be using the user-agent or the client-hints.
-         * http://caniuse.com/#search=client%20hint
-         */
+     * As `window.innerWidth` is unavailable on the server,
+     * we default to rendering an empty component during the first mount.
+     * In some situation, you might want to use an heuristic to approximate
+     * the screen width of the client browser screen width.
+     *
+     * For instance, you could be using the user-agent or the client-hints.
+     * http://caniuse.com/#search=client%20hint
+     */
     initialWidth: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
 
     /**
-         * Use that property to pass a ref callback to the decorated component.
-         */
+     * Use that property to pass a ref callback to the decorated component.
+     */
     innerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
     /**
-         * @ignore
-         */
+     * @ignore
+     */
     theme: PropTypes.object.isRequired,
 
     /**
-         * Bypass the width calculation logic.
-         */
+     * Bypass the width calculation logic.
+     */
     width: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"])
   };
 
