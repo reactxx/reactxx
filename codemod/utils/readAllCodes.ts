@@ -24,6 +24,7 @@ export const readAllCodes = () => {
         try { codeStr[path] = fs.readFileSync(logItem.origPath, { encoding: 'utf-8' }) } catch { compileErrors.push(logItem.origPath); return }
 
         logItem.nameIsUppercase = logItem.name.startsWith('svg-icons') || logItem.name.charAt(0).toLowerCase() !== logItem.name.charAt(0)
+        logItem.dirIsUppercase = logItem.dir.charAt(0).toLowerCase() !== logItem.dir.charAt(0)
     })
     //const dump = JSON.stringify(log, null, 2)
     //return { log, code, codeStr, compileErrors }
@@ -33,7 +34,8 @@ export const readAllCodes = () => {
 export const scanDir = (dir:string, mask: string) => Glob.sync(mask, { root: dir }).map(f => f.substr(dir.length))
 
 const getAllJS = () => {
-    return scanDir(Config.patchOriginal, '/**/!(index).js').
+    //return scanDir(Config.patchOriginal, '/**/!(index).js').
+    return scanDir(Config.patchOriginal, '/*/*.js').
         map(f => {
             let res: any[] = f.substr(0, f.length - 3).split('\\')
             if (res.length > 2) {

@@ -24,7 +24,7 @@ export const codeMod = () => {
     try { fsExtra.emptyDirSync(Config.muiWeb) } catch { }
 
     fsExtra.copySync(Config.muix_WebSources, Config.muiWeb, { overwrite: true })
-    
+
     //typeDefs()
 
     const { log, codeStr } = readAllCodes()
@@ -32,7 +32,7 @@ export const codeMod = () => {
     for (const path in log) {
         const logp = log[path]
 
-        if (logp.nameIsUppercase || path==='styles/withStyles') continue
+        if (logp.nameIsUppercase || (logp.dirIsUppercase && logp.name === 'index')) continue
 
         let code = codeStr[path]
 

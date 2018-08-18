@@ -6,8 +6,6 @@ import * as Queries from '../../utils/queries'
 
 export const transformStrCode = (code: string, info: Ast.MUISourceInfo, dts: string, all) => {
 
-    //  if (info.path === 'styles/withStyles')
-    //      debugger
     switch (info.path) {
         case 'GridListTile/GridListTile':
             code = code.replace(`\nimport`, `\nimport {fitPatch} from './GridListTilePatch';\nimport`)
@@ -57,15 +55,23 @@ export const transformStrCode = (code: string, info: Ast.MUISourceInfo, dts: str
     code = code.replace(``, ``)
 
     if (dts) {
+        dts = dts.replace(/\ninterface /g, '\nexport interface ')
+        dts = dts.replace(/\ntype /g, '\nexport type ')
         const ast = Parser.parseCode(dts)
+        //if (info.path === 'styles/index') debugger
         ast.program.body = (ast.program.body as any[]).filter(node =>
-            !node.declare &&
-            node.type != 'ExportDefaultDeclaration' &&
-            node.type != 'ImportDeclaration' &&
-            (!node.declaration || node.declaration.type != 'TSDeclareFunction')
+            // !node.declare &&
+            node.type === 'ImportDeclaration' ||
+            // (node.type != 'ExportNamedDeclaration' || node.exportKind !='type') &&
+            (node.declaration && (
+                node.declaration.type === 'TSInterfaceDeclaration' ||
+                node.declaration.type === 'TSTypeAliasDeclaration'
+            ))
+
         )
         let dtsCode = Parser.generateCode(ast)
-        code = insertAfterImports(code, dtsCode)
+        if (dtsCode.length > 0)
+            code = insertAfterImports(code, dtsCode)
         // let temp = Parser.**parseCode(code)
         // code = code + '\n' + dtsCode + '\n'
         // temp = Parser.parseCode(code)
@@ -73,14 +79,19 @@ export const transformStrCode = (code: string, info: Ast.MUISourceInfo, dts: str
 
     }
 
+    switch (info.path) {
+        case 'styles/index':
+            code = code.replace(`export { default as MuiThemeProvider } from './MuiThemeProvider';`, ``)
+            code += `\nexport { StyledComponentProps, StyleRules } from "./withStyles";`
+            break
+    }
+
     return code
 }
 
 const insertAfterImports = (code: string, insert: string) => {
-    const x = code.split(insertAfterImportsRx)
-    const idx = code.search(insertAfterImportsRx)
-    const fake = code.substr(idx)
-    return code
+    const parts = code.split(/import .*\n/)
+    const importEndIdx = code.length - parts[parts.length - 1].length
+    return code.substr(0, importEndIdx) + insert + code.substr(importEndIdx)
 }
-//const insertAfterImportsRx = /^(.|\s)*import .*/m
-const insertAfterImportsRx = /^(.|\s)*import .*/m
+
