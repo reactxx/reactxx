@@ -5,4 +5,3 @@ import * as Config from './utils/config'
 //Config.setIsDoc(true); codeModDoc()
 
 Config.setIsDoc(false); codeMod()
-

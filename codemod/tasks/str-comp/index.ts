@@ -58,14 +58,15 @@ export const transformStrCode = (code: string, info: Ast.MUISourceInfo, dts: str
 
     if (dts) {
         const ast = Parser.parseCode(dts)
-        ast.program.body = (ast.program.body as any[]).filter(node => 
-            !node.declare && 
-            node.type != 'ExportDefaultDeclaration' && 
-            node.type != 'ImportDeclaration' && 
-            (!node.declaration || node.declaration.type!='TSDeclareFunction')
+        ast.program.body = (ast.program.body as any[]).filter(node =>
+            !node.declare &&
+            node.type != 'ExportDefaultDeclaration' &&
+            node.type != 'ImportDeclaration' &&
+            (!node.declaration || node.declaration.type != 'TSDeclareFunction')
         )
-        // let dtsCode = Parser.generateCode(ast)
-        // let temp = Parser.parseCode(code)
+        let dtsCode = Parser.generateCode(ast)
+        code = insertAfterImports(code, dtsCode)
+        // let temp = Parser.**parseCode(code)
         // code = code + '\n' + dtsCode + '\n'
         // temp = Parser.parseCode(code)
         //code = code + '\n' + Parser.generateCode(ast) + '\n'
@@ -75,3 +76,11 @@ export const transformStrCode = (code: string, info: Ast.MUISourceInfo, dts: str
     return code
 }
 
+const insertAfterImports = (code: string, insert: string) => {
+    const x = code.split(insertAfterImportsRx)
+    const idx = code.search(insertAfterImportsRx)
+    const fake = code.substr(idx)
+    return code
+}
+//const insertAfterImportsRx = /^(.|\s)*import .*/m
+const insertAfterImportsRx = /^(.|\s)*import .*/m
