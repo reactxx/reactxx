@@ -5,6 +5,15 @@
 //
 //----------------------------------------------------------------------------------
 
+import warning from "warning";
+import deepmerge from "deepmerge"; // < 1kb payload overhead when lodash/merge is > 3kb.
+
+import indigo from "../colors/indigo";
+import pink from "../colors/pink";
+import grey from "../colors/grey";
+import red from "../colors/red";
+import common from "../colors/common";
+import { getContrastRatio, darken, lighten } from "./colorManipulator";
 import { Color, PaletteType } from "..";
 import { CommonColors } from "../colors/common";
 export interface TypeText {
@@ -85,15 +94,6 @@ export interface PaletteOptions {
   background?: Partial<TypeBackground>;
   getContrastText?: (background: string) => string;
 }
-import warning from "warning";
-import deepmerge from "deepmerge"; // < 1kb payload overhead when lodash/merge is > 3kb.
-
-import indigo from "../colors/indigo";
-import pink from "../colors/pink";
-import grey from "../colors/grey";
-import red from "../colors/red";
-import common from "../colors/common";
-import { getContrastRatio, darken, lighten } from "./colorManipulator";
 export const light = {
   // The colors used to style the text.
   text: {

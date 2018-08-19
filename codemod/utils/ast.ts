@@ -27,6 +27,7 @@ export interface MUISourceInfo {
     isClass?: boolean
     nameIsUppercase?: boolean
     dirIsUppercase?: boolean
+    defaultPropsStr?: string
 }
 export interface FileDescr {
     path?: string

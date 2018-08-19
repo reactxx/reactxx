@@ -5,14 +5,13 @@
 //
 //----------------------------------------------------------------------------------
 
+/* eslint-disable no-underscore-dangle */
+import warning from "warning";
 import { GenerateClassName } from "jss";
 export interface GenerateClassNameOptions {
   dangerouslyUseGlobalCSS?: boolean;
   productionPrefix?: string;
-}
-/* eslint-disable no-underscore-dangle */
-
-import warning from "warning"; // People might bundle this classname generator twice.
+} // People might bundle this classname generator twice.
 // We need to use a global.
 
 global["__MUI_GENERATOR_COUNTER__"] = 0;

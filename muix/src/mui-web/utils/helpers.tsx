@@ -5,9 +5,9 @@
 //
 //----------------------------------------------------------------------------------
 
-export type ChainedFunction = ((...args: any[]) => void) | undefined | null; //       weak
-
+//       weak
 import warning from "warning";
+export type ChainedFunction = ((...args: any[]) => void) | undefined | null;
 export function capitalize(string) {
   if (process.env.NODE_ENV !== "production" && typeof string !== "string") {
     throw new Error(

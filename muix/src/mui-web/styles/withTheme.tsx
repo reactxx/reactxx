@@ -5,18 +5,18 @@
 //
 //----------------------------------------------------------------------------------
 
-import { Theme } from "./createMuiTheme";
-import { ConsistentWith } from "..";
-export interface WithTheme {
-  theme: Theme;
-  innerRef?: React.Ref<any> | React.RefObject<any>;
-}
 import React from "react";
 import PropTypes from "prop-types";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import wrapDisplayName from "recompose/wrapDisplayName";
 import createMuiTheme from "./createMuiTheme";
 import themeListener from "./themeListener";
+import { Theme } from "./createMuiTheme";
+import { ConsistentWith } from "..";
+export interface WithTheme {
+  theme: Theme;
+  innerRef?: React.Ref<any> | React.RefObject<any>;
+}
 let defaultTheme;
 
 function getDefaultTheme() {

@@ -5,6 +5,9 @@
 //
 //----------------------------------------------------------------------------------
 
+//
+import deepmerge from "deepmerge"; // < 1kb payload overhead when lodash/merge is > 3kb.
+
 import { Palette } from "./createPalette";
 import { Overwrite, Omit } from "..";
 import { CSSProperties } from "./withStyles";
@@ -47,9 +50,7 @@ export type Typography = Record<Style, TypographyStyle> &
   TypographyUtils;
 export type TypographyOptions = Partial<
   Record<Style, TypographyStyleOptions> & FontStyleOptions
->; //
-
-import deepmerge from "deepmerge"; // < 1kb payload overhead when lodash/merge is > 3kb.
+>;
 
 function round(value) {
   return Math.round(value * 1e5) / 1e5;

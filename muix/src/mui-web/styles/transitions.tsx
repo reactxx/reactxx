@@ -5,6 +5,12 @@
 //
 //----------------------------------------------------------------------------------
 
+//
+
+/* eslint-disable no-param-reassign */
+
+/* eslint-disable no-restricted-globals */
+import warning from "warning";
 export interface Easing {
   easeInOut: string;
   easeOut: string;
@@ -45,13 +51,8 @@ export interface TransitionsOptions {
     }>
   ) => string;
   getAutoHeightDuration?: (height: number) => number;
-} //export type TransitionsOptions = DeepPartial<Transitions>;//
-
-/* eslint-disable no-param-reassign */
-
-/* eslint-disable no-restricted-globals */
-
-import warning from "warning"; // Follow https://material.google.com/motion/duration-easing.html#duration-easing-natural-easing-curves
+} //export type TransitionsOptions = DeepPartial<Transitions>;
+// Follow https://material.google.com/motion/duration-easing.html#duration-easing-natural-easing-curves
 // to learn the context in which each easing should be used.
 
 export const easing = {

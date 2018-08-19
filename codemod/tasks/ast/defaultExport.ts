@@ -17,23 +17,22 @@ export const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
       const defaultExportIdx = body.indexOf(defaultExport);
       body.splice(defaultExportIdx, 1)
   
-      // refactor e.g. 'Button.defaultProps = ...' to 'const defaultProps = Button.defaultProps = ...'
+      // remove 'Button.defaultProps = ...', save defaults to info
       const defaultProps = getStaticProp('defaultProps')
       // default props to string
-      const defaultPropsStr = defaultProps ? Parser.generateCode(defaultProps.expression.right) : '{}'
+      info.defaultPropsStr = defaultProps ? Parser.generateCode(defaultProps.expression.right) : '{}'
       // remove defaultProps
       if (defaultProps) {
         const defaultPropsIdx = body.indexOf(defaultProps)
         body.splice(defaultPropsIdx, 1)
       }
-      body.push(Parser.parseCode(`export const defaultProps = ${info.name}.defaultProps = ${defaultPropsStr};`))
     }
   
     // e.g.
     // 'export const ButtonCreator...'
     // 'const ButtonComponent = ButtonCreator()'
     // 'export default ButtonComponent'
-    if (info.withStyles) {
+    if (false && info.withStyles) {
       const defaultExport = Parser.parseCode(`
   
   export const ${info.name}Code = ${info.name}
