@@ -16,7 +16,7 @@ export interface MUISourceInfo {
     dir?: string
     name?: string
     path?: string
-    withStyles?: boolean
+    withStylesOrTheme?: boolean
     withTheme?: boolean
     destPath?: string
     origPath?: string

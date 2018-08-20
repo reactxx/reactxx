@@ -56,8 +56,8 @@ export type ConsistentWith<T, U> = Pick<U, keyof T & keyof U>;
 export type Overwrite<T, U> = (U extends ConsistentWith<U, T> ? T : Omit<T, keyof U>) & U;
 
 export namespace PropTypes {
-  type Alignment = 'inherit' | 'left' | 'center' | 'right' | 'justify';
-  type Color = 'inherit' | 'primary' | 'secondary' | 'default';
-  type Margin = 'none' | 'dense' | 'normal';
+  export type Alignment = 'inherit' | 'left' | 'center' | 'right' | 'justify';
+  export type Color = 'inherit' | 'primary' | 'secondary' | 'default';
+  export type Margin = 'none' | 'dense' | 'normal';
 }
 

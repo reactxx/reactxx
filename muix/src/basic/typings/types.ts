@@ -183,7 +183,7 @@ export namespace Types {
       classes?: Sheet<R>
     }
 
-  export type PartialCodeProps = Partial<CodeProps>
+  export type PartialCodeProps<R extends Shape = Shape> = Partial<CodeProps<Shape>>
 
 
   export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>

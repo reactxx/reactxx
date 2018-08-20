@@ -4,10 +4,10 @@ export const adjustImports = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
     const imports = Ast.astq().query(root, `// ImportDeclaration`)
     imports.forEach(imp => {
       if (imp.source.type != 'StringLiteral') return
-      if (imp.source.value === 'classNames') {
-        Ast.removeNode(root, imp.$path)
-        return
-      }
+      // if (imp.source.value === 'classNames') {
+      //   Ast.removeNode(root, imp.$path)
+      //   return
+      // }
       const newValue = importRepairs[imp.source.value]
       if (newValue)
         imp.source.value = newValue
@@ -39,4 +39,5 @@ export const adjustImports = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
     '../IconButton': '../IconButton/IconButton',
     '../Button': '../Button/Button',
     '../Slide': '../Slide/Slide',
+    '../Popper': '../Popper/Popper',
   }

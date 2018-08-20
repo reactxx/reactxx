@@ -1,5 +1,5 @@
 import * as Ast from '../../utils/ast'
-import * as Tasks from '../default-modifier'
+import * as Tasks from '../ast/default-modifier'
 import * as Queries from '../../utils/queries'
 
 export const touchRippleAst = (ast: Ast.Ast, info: Ast.MUISourceInfo) => {

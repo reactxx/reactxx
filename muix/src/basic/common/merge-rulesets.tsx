@@ -19,7 +19,7 @@ export const mergeRulesetsCreatorStr = (classes: Sheeter.SheetWithAddIns, getCla
   return rulesetsToClassNames ? rulesetsToClassNames(res) : res
 }
 
-export const classNames = (...rulesets: React.CSSProperties[]) => {
+export const classNames = (...rulesets: (React.CSSProperties | {})[]) => {
   if (!rulesets || (rulesets = rulesets.filter(r => !!r)).length === 0) return null
   return rulesets.length === 1 ? rulesets[0] : Sheeter.deepMerges({}, rulesets)
 }

@@ -1,5 +1,5 @@
 import * as Ast from '../../utils/ast'
-import * as Tasks from '../default-modifier'
+import * as Tasks from '../ast/default-modifier'
 import * as Parser from '../../utils/parser'
 import * as Queries from '../../utils/queries'
 
@@ -7,7 +7,7 @@ export const gridAst = (ast: Ast.Ast, info: Ast.MUISourceInfo) => {
     const res = Tasks.withStylesTaskDefaultCreator()(ast, info)
     // add 
     const itemStyle = Queries.checkSingleResult(Ast.astq().query(ast,
-        '/Program/ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /Identifier [@name=="styles"] ] //ObjectExpression/ObjectProperty [ /Identifier [ @name == "item"] ] '))
+        '/Program/VariableDeclaration/VariableDeclarator [ /Identifier [@name=="styles"] ] //ObjectExpression/ObjectProperty [ /Identifier [ @name == "item"] ] '))
     itemStyle.value.properties.push({
         "type": "ObjectProperty",
         "method": false,

@@ -2,7 +2,7 @@ import { replaceAll } from '../utils/regexp'
 import * as Config from '../utils/config'
 
 import * as Ast from '../utils/ast'
-import * as Tasks from './default-modifier'
+import * as Tasks from './ast/default-modifier'
 import * as Parser from '../utils/parser'
 import * as Queries from '../utils/queries'
 import { gridAst } from './ast-comp/Grid'
@@ -18,6 +18,42 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
         case 'GridListTile/GridListTile':
             code = code.replace(`\nimport`, `\nimport {fitPatch} from './GridListTilePatch';\nimport`)
             code = code.replace(`fit = () => {`, `  fit = fitPatch.bind(this)\n  fit_ = () => {`)
+            break
+        case 'SwipeableDrawer/SwipeArea':
+            code += `\nexport interface SwipeAreaProps {}\n`
+            break
+        case '':
+            code = code.replace(``, ``)
+            break
+        case '':
+            code = code.replace(``, ``)
+            break
+        case '':
+            code = code.replace(``, ``)
+            break
+        case '':
+            code = code.replace(``, ``)
+            break
+        case '':
+            code = code.replace(``, ``)
+            break
+        case '':
+            code = code.replace(``, ``)
+            break
+        case 'Tooltip/Tooltip':
+            code = code.replace(`=== 'button'`, `=== 'button' as any`)
+            code = code.replace(`this.state.open = false`, `(this.state.open as any) = false`)
+            code = code.replace(`const childrenProps = {`, `const childrenProps: any = {`)
+            code = code.replace(`this.props.theme`, `this.props.$system.theme`)
+            code = code.replace(`className={classes.popper}`, `className={classes.popper as any}`)
+            code = code.replace(`rootRef={this.onRootRef}`, `{...{rootRef:this.onRootRef}}`)
+            break
+        case 'Zoom/Zoom':
+            code = code.replace(`children.props.style`, `(children.props as any).style`)
+            code = code.replace(`React.cloneElement(children`, `React.cloneElement(children as any`)
+            code = code.replace(`this.props.onEnter(node)`, `(this.props as any).onEnter(node)`)
+            // Error in C:\reactxx\codemod\patch-original\transitions\transition.d.ts
+            code = code.replace(`onExit={this.handleExit}`, `onExit={this.handleExit}\ntimeout = {null}`)
             break
         case 'withWidth/withWidth':
             code = code.replace(`const more = {};`, `const more: any = {};`)
@@ -46,16 +82,18 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
         case 'ButtonBase/focusVisible':
             code = code.replace(`const internal = {`, `const internal: any = {`)
             break
-        case '':
-            code = code.replace(``, ``)
-            break
     }
 
     code = code.replace(/options\s*=\s*{}/, `options: any = {}`)
     code = code.replace(`import classNames from 'classnames';`, `import { classNames } from 'reactxx-basic';`)
-    code = code.replace(`extends React.Component {`, `extends React.Component<any,any> {\n static propTypes\n  static displayName\n static contextTypes\n static Naked\n  static options`)
+    const compProps = info.withStylesOrTheme ? 'Partial<Types.CodeProps<Shape>>' : '{children, [p:string]: any}'
+    code = code.replace(`extends React.Component {`, `extends React.Component<${compProps},any> {\n static propTypes\n  static displayName\n static contextTypes\n static Naked\n  static options`)
     code = code.replace(`  state = {};`, `  state: any = {};`)
     code = code.replace(`super();`, `super(props);`)
+    code = code.replace(`import withTheme from '../styles/withTheme';`, ``)
+    code = code.replace(`import withStyles from '../styles/withStyles';`, ``)
+    code = code.replace(`export const styles =`, `const styles =`)
+    code = code.replace(`import PropTypes from 'prop-types';`, ``)
     code = code.replace(``, ``)
 
     //********** INCLUDE TYPESCRIPT DEFINITIONS
@@ -63,6 +101,7 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
         dts = dts.replace(/\ninterface /g, '\nexport interface ')
         dts = dts.replace(`import * as React from 'react';`, '')
         dts = dts.replace(/\ntype /g, '\nexport type ')
+        dts = dts.replace(`import { Theme } from '../styles/createMuiTheme';`, ``)
         const ast = Parser.parseCode(dts)
         //if (info.path === 'styles/index') debugger
         ast.program.body = (ast.program.body as any[]).filter(node =>
@@ -146,20 +185,26 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
                 adjustThemeMethods: ['updateIndicatorState']
             } as Ast.MUISourceInfo))
             break
+        case 'TextField/TextField':
+            Tasks.withStylesTaskDefaultCreator()(ast, Object.assign({}, info, {
+                adjustThemeProperties: ['moveTabsScroll', 'scrollSelectedIntoView', 'getConditionalElements', 'updateScrollButtonState'],
+                adjustThemeMethods: ['updateIndicatorState']
+            } as Ast.MUISourceInfo))
+            break
         default:
-            if (info.withStyles) Tasks.withStylesTaskDefaultCreator()(ast, info)
-            else if (info.withTheme) Tasks.withThemeTaskDefaultCreator()(ast, info)
+            if (info.withStylesOrTheme) Tasks.withStylesTaskDefaultCreator()(ast, info)
+            //else if (info.withTheme) Tasks.withThemeTaskDefaultCreator()(ast, info)
             else Tasks.otherTaskDefaultCreator()(ast, info)
             break
     }
-
-    //********** COMPONENTS: TYPED EXPORTS
     code = Parser.generateFileContent(ast)
 
-    if (info.withStyles && info.name !== 'SwipeArea') {
-        code = code.replace(`export const styles =`,`const styles =`)
+    //********** COMPONENTS: TYPED EXPORTS
+    if (info.withStylesOrTheme) {
         code = tsShape(info, true) + code + tsShape(info, false)
     }
+
+    code = Config.msgAutoGenerated + code
 
     return code
 }
@@ -173,10 +218,10 @@ const insertAfterImports = (code: string, insert: string) => {
 const tsShape = (info: Ast.MUISourceInfo, isStart: boolean) =>
     isStart ?
         `import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
-import { Theme } from '../styles/withStyles';
+import withStyles, { Theme } from '../styles/withStyles';
 ` : `
 export type Shape = Types.OverwriteShape<{
-  ${!noKey[info.name] ? `common: TCommon.ShapeTexts<${info.name}ClassKey>,` : ''}
+  ${!noKey[info.name] && !info.withTheme ? `common: TCommon.ShapeTexts<${info.name}ClassKey>,` : ''}
   props: ${info.name}Props,
   theme: Theme
 }>
@@ -186,10 +231,10 @@ export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-${info.defaultPropsStr  ? `export const defaultProps  = ${info.name}['defaultProps'] = ${info.defaultPropsStr} as PropsX;` : ''}
-export const ${info.name}Code: CodeComponentType = ${info.name}
+${info.defaultPropsStr ? `export const defaultProps  = ${info.name}['defaultProps'] = ${info.defaultPropsStr} as PropsX;` : ''}
+export const ${info.name}Code: CodeComponentType = ${info.name} as any
 export const ${info.name}Styles: SheetCreatorX = styles as any
-export const ${info.name}Creator: WithStyleCreator = withStyles<Shape>(${info.name}Styles, ${info.name}, {isMui:true, defaultProps});
+export const ${info.name}Creator: WithStyleCreator = withStyles<Shape>(${info.name}Styles, ${info.name}Code, {isMui:true, defaultProps});
 export const ${info.name}Component: React.${info.isClass ? 'ComponentClass' : 'ComponentType'}<PropsX> = ${info.name}Creator();
 if ((${info.name} as any).muiName) (${info.name}Component as any).muiName = (${info.name} as any).muiName;
 
@@ -197,6 +242,7 @@ if ((${info.name} as any).muiName) (${info.name}Component as any).muiName = (${i
 export default ${info.name}
 `
 const noKey = {
+    'SwipeArea': true,
     'Stepper': true,
     'StepLabel': true,
     'Step': true,

@@ -8,6 +8,7 @@
   "dependencies": {
     "@types/react-event-listener": "^0.4.7",
     "@types/react-swipeable-views": "^0.12.2",
+    "@types/react-transition-group": "^2.0.13",
     "@types/recompose": "^0.26.4",
     "downshift": "^2.0.19",
     "keycode": "^2.2.0",

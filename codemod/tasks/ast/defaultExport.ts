@@ -11,7 +11,7 @@ export const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
       const propTypesIdx = body.indexOf(propTypes)
       body.splice(propTypesIdx, 1)
     }
-    if (info.withStyles) {
+    if (info.withStylesOrTheme) {
       // remove withStyles call
       const defaultExport = Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExportDefaultDeclaration`))
       const defaultExportIdx = body.indexOf(defaultExport);
@@ -32,7 +32,7 @@ export const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
     // 'export const ButtonCreator...'
     // 'const ButtonComponent = ButtonCreator()'
     // 'export default ButtonComponent'
-    if (false && info.withStyles) {
+    if (false && info.withStylesOrTheme) {
       const defaultExport = Parser.parseCode(`
   
   export const ${info.name}Code = ${info.name}
