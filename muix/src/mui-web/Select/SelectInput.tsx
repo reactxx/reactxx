@@ -9,8 +9,8 @@ import React from "react";
 import { classNames } from "reactxx-basic";
 import keycode from "keycode";
 import warning from "warning";
-import Menu from "../Menu/Menu/Menu";
-import { isFilled } from "../Input/Input/Input";
+import Menu from "../Menu/Menu";
+import { isFilled } from "../Input/Input";
 import { MenuProps } from "../Menu/Menu";
 export interface SelectInputProps {
   autoFocus?: boolean;
@@ -56,16 +56,15 @@ export type CodeProps = SelectInputProps;
 
 class SelectInput extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
   ignoreNextBlur = false;
   displayRef = null;
   isOpenControlled = this.props.open !== undefined;
-  state = {
+  state: any = {
     menuMinWidth: null,
     open: false
   };
@@ -380,157 +379,4 @@ class SelectInput extends React.Component<CodeProps, any> {
   }
 }
 
-SelectInput.propTypes = {
-  /**
-   * @ignore
-   */
-  autoFocus: PropTypes.bool,
-
-  /**
-   * If true, the width of the popover will automatically be set according to the items inside the
-   * menu, otherwise it will be at least the width of the select input.
-   */
-  autoWidth: PropTypes.bool,
-
-  /**
-   * The option elements to populate the select with.
-   * Can be some `<MenuItem>` elements.
-   */
-  children: PropTypes.node,
-
-  /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css-api) below for more details.
-   */
-  classes: PropTypes.object.isRequired,
-
-  /**
-   * The CSS class name of the select element.
-   */
-  className: PropTypes.string,
-
-  /**
-   * If `true`, the select will be disabled.
-   */
-  disabled: PropTypes.bool,
-
-  /**
-   * If `true`, the selected item is displayed even if its value is empty.
-   */
-  displayEmpty: PropTypes.bool,
-
-  /**
-   * The icon that displays the arrow.
-   */
-  IconComponent: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func,
-    PropTypes.object
-  ]),
-
-  /**
-   * Use that property to pass a ref callback to the native select element.
-   */
-  inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-
-  /**
-   * Properties applied to the [`Menu`](/api/menu) element.
-   */
-  MenuProps: PropTypes.object,
-
-  /**
-   * If true, `value` must be an array and the menu will support multiple selections.
-   */
-  multiple: PropTypes.bool,
-
-  /**
-   * Name attribute of the `select` or hidden `input` element.
-   */
-  name: PropTypes.string,
-
-  /**
-   * @ignore
-   */
-  onBlur: PropTypes.func,
-
-  /**
-   * Callback function fired when a menu item is selected.
-   *
-   * @param {object} event The event source of the callback.
-   * You can pull out the new value by accessing `event.target.value`.
-   * @param {object} [child] The react element that was selected.
-   */
-  onChange: PropTypes.func,
-
-  /**
-   * Callback fired when the component requests to be closed.
-   * Use in controlled mode (see open).
-   *
-   * @param {object} event The event source of the callback
-   */
-  onClose: PropTypes.func,
-
-  /**
-   * @ignore
-   */
-  onFocus: PropTypes.func,
-
-  /**
-   * Callback fired when the component requests to be opened.
-   * Use in controlled mode (see open).
-   *
-   * @param {object} event The event source of the callback
-   */
-  onOpen: PropTypes.func,
-
-  /**
-   * Control `select` open state.
-   */
-  open: PropTypes.bool,
-
-  /**
-   * @ignore
-   */
-  readOnly: PropTypes.bool,
-
-  /**
-   * Render the selected value.
-   *
-   * @param {*} value The `value` provided to the component.
-   * @returns {ReactElement}
-   */
-  renderValue: PropTypes.func,
-
-  /**
-   * @ignore
-   */
-  required: PropTypes.bool,
-
-  /**
-   * Properties applied to the clickable div element.
-   */
-  SelectDisplayProps: PropTypes.object,
-
-  /**
-   * @ignore
-   */
-  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-
-  /**
-   * @ignore
-   */
-  type: PropTypes.string,
-
-  /**
-   * The input value.
-   */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.bool,
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
-    )
-  ]).isRequired
-};
 export default SelectInput;

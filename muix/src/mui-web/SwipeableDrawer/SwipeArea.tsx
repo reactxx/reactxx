@@ -10,7 +10,7 @@ import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
 import { classNames } from "reactxx-basic";
 import { capitalize } from "../utils/helpers";
-import { isHorizontal } from "../Drawer/Drawer/Drawer";
+import { isHorizontal } from "../Drawer/Drawer";
 
 const styles = theme => ({
   /* Styles applied to the root element. */

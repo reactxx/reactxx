@@ -23,7 +23,6 @@ export const withStylesTaskDefaultCreator = () => (root: Ast.Ast, info: Ast.MUIS
   cssjsToFela(root, info)
   classNamesFix()(root, info)
   defaultExport(root, info)
-  removePropTypes(root, info)
   return root
 }
 

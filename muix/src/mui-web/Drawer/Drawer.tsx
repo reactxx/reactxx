@@ -153,11 +153,10 @@ const styles = theme => ({
 
 class Drawer extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options; // Let's assume that the Drawer will always be rendered on user space.
   // We use this state is order to skip the appear transition during the
   // initial mount of the component.

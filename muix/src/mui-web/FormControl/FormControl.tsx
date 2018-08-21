@@ -9,7 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
 import { classNames } from "reactxx-basic";
-import { isFilled, isAdornedStart } from "../Input/Input/Input";
+import { isFilled, isAdornedStart } from "../Input/Input";
 import { capitalize } from "../utils/helpers";
 import { isMuiElement } from "../utils/reactHelpers";
 import { StandardProps, PropTypes } from "..";
@@ -75,11 +75,10 @@ const styles = {
 
 class FormControl extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
 
   constructor(props) {
@@ -109,7 +108,7 @@ class FormControl extends React.Component<CodeProps, any> {
     }
   }
 
-  state = {
+  state: any = {
     adornedStart: false,
     filled: false,
     focused: false

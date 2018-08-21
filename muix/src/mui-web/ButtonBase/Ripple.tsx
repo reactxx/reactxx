@@ -20,13 +20,12 @@ export type CodeProps = RippleProps;
 
 class Ripple extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
-  state = {
+  state: any = {
     visible: false,
     leaving: false
   };

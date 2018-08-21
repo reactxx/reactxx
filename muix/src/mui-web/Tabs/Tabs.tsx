@@ -23,7 +23,7 @@ import ScrollbarSize from "./ScrollbarSize";
 import TabIndicator from "./TabIndicator";
 import TabScrollButton from "./TabScrollButton";
 import { StandardProps } from "..";
-import { ButtonBaseProps } from "../ButtonBase/ButtonBase/ButtonBase";
+import { ButtonBaseProps } from "../ButtonBase/ButtonBase";
 import { TabIndicatorProps } from "./TabIndicator";
 export interface TabsProps
   extends StandardProps<
@@ -113,11 +113,11 @@ const styles = theme => ({
 
 class Tabs extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
+  tabsRef;
   static options;
   tabs = null;
   valueToIndex = new Map();
@@ -130,7 +130,7 @@ class Tabs extends React.Component<CodeProps, any> {
     this.updateScrollButtonState();
   }, 166); // Corresponds to 10 frames at 60 Hz.
 
-  state = {
+  state: any = {
     indicatorStyle: {},
     scrollerStyle: {
       marginBottom: 0
@@ -477,7 +477,7 @@ export type WithStyleCreator = TWithStyleCreator<Shape>
 
 export const TabsCode: CodeComponentType = Tabs as any
 export const TabsStyles: SheetCreatorX = styles as any
-export const TabsCreator: WithStyleCreator = withStyles<Shape>(TabsStyles, TabsCode, {isMui:true, defaultProps});
+export const TabsCreator: WithStyleCreator = withStyles<Shape>(TabsStyles, TabsCode, {isMui:true});
 export const TabsComponent: React.ComponentClass<PropsX> = TabsCreator();
 if ((Tabs as any).muiName) (TabsComponent as any).muiName = (Tabs as any).muiName;
 

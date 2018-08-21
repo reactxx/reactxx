@@ -28,6 +28,7 @@ export interface MUISourceInfo {
     nameIsUppercase?: boolean
     dirIsUppercase?: boolean
     defaultPropsStr?: string
+    componentFields?: string // public component static or not static fields
 }
 export interface FileDescr {
     path?: string

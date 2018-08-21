@@ -332,11 +332,10 @@ function formControlState(props, context) {
 
 class Input extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
   isControlled = null;
   input = null; // Holds the input reference
@@ -387,7 +386,7 @@ class Input extends React.Component<CodeProps, any> {
     }
   }
 
-  state = {
+  state: any = {
     focused: false
   };
 

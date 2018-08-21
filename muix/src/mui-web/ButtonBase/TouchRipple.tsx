@@ -137,7 +137,7 @@ class TouchRipple extends React.PureComponent {
   startTimer = null; // This is the hook called once the previous timeout is ready.
 
   startTimerCommit = null;
-  state = {
+  state: any = {
     // eslint-disable-next-line react/no-unused-state
     nextKey: 0,
     ripples: []

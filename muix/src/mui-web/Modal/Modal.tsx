@@ -82,11 +82,10 @@ if (process.env.NODE_ENV !== "production" && !React.createContext) {
 
 class Modal extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
   mountNode = null;
   modalRef = null;

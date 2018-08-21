@@ -10,7 +10,7 @@ import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
 import { classNames } from "reactxx-basic";
 import { cloneChildrenWithClassName } from "../utils/reactHelpers";
-import "../Button/Button"; // So we don't have any override priority issue.
+import "../Button"; // So we don't have any override priority issue.
 
 import { StandardProps } from "..";
 export interface ExpansionPanelActionsProps

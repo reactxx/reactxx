@@ -133,7 +133,7 @@ const TextField: Types.CodeSFCWeb<Shape> = props => {
     <Input
       autoComplete={autoComplete}
       autoFocus={autoFocus}
-      defaultValue={defaultValue}
+      defaultValue={defaultValue as any}
       disabled={disabled}
       fullWidth={fullWidth}
       multiline={multiline}
@@ -149,7 +149,7 @@ const TextField: Types.CodeSFCWeb<Shape> = props => {
       onFocus={onFocus}
       placeholder={placeholder}
       inputProps={inputProps}
-      {...InputProps}
+      {...InputProps as any}
     />
   );
   return (

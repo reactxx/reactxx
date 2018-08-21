@@ -129,11 +129,10 @@ const styles = theme => ({
 
 class TablePagination extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options; // This logic would be better handled on userside.
   // However, we have it just in case.
 

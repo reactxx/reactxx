@@ -13,7 +13,7 @@ import KeyboardArrowLeft from "../internal/svg-icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "../internal/svg-icons/KeyboardArrowRight";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import { StandardProps } from "..";
-import { ButtonBaseProps } from "../ButtonBase/ButtonBase/ButtonBase";
+import { ButtonBaseProps } from "../ButtonBase/ButtonBase";
 export interface TabScrollButtonProps
   extends StandardProps<ButtonBaseProps, TabScrollButtonClassKey> {
   direction?: "left" | "right";

@@ -61,11 +61,10 @@ const styles = theme => ({
 
 class Collapse extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
   wrapper = null;
   autoTransitionDuration = null;
@@ -232,7 +231,7 @@ export type WithStyleCreator = TWithStyleCreator<Shape>
 
 export const CollapseCode: CodeComponentType = Collapse as any
 export const CollapseStyles: SheetCreatorX = styles as any
-export const CollapseCreator: WithStyleCreator = withStyles<Shape>(CollapseStyles, CollapseCode, {isMui:true, defaultProps});
+export const CollapseCreator: WithStyleCreator = withStyles<Shape>(CollapseStyles, CollapseCode, {isMui:true});
 export const CollapseComponent: React.ComponentClass<PropsX> = CollapseCreator();
 if ((Collapse as any).muiName) (CollapseComponent as any).muiName = (Collapse as any).muiName;
 

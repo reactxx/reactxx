@@ -12,7 +12,7 @@ import KeyboardArrowLeft from "../internal/svg-icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "../internal/svg-icons/KeyboardArrowRight";
 import IconButton from "../IconButton/IconButton";
 import { StandardProps } from "..";
-import { IconButtonProps } from "../IconButton/IconButton/IconButton";
+import { IconButtonProps } from "../IconButton/IconButton";
 export interface TablePaginationActionsProps
   extends React.HTMLAttributes<HTMLDivElement> {
   backIconButtonProps?: Partial<IconButtonProps>;
@@ -31,11 +31,10 @@ export interface TablePaginationActionsProps
 
 class TablePaginationActions extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
   handleBackButtonClick = event => {
     this.props.onChangePage(event, this.props.page - 1);

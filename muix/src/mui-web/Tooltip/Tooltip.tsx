@@ -128,11 +128,10 @@ const styles = theme => ({
 
 class Tooltip extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
   childrenRef = null;
   closeTimer = null;
@@ -412,8 +411,6 @@ class Tooltip extends React.Component<CodeProps, any> {
     );
   }
 }
-
-Tooltip.propTypes = exactProp(Tooltip.propTypes);
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<TooltipClassKey>,

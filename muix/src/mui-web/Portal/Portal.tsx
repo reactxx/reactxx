@@ -38,11 +38,10 @@ export type CodeProps = PortalProps;
 
 class Portal extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
 
   componentDidMount() {
@@ -99,33 +98,7 @@ class Portal extends React.Component<CodeProps, any> {
   }
 }
 
-Portal.propTypes = {
-  /**
-   * The children to render into the `container`.
-   */
-  children: PropTypes.node.isRequired,
-
-  /**
-   * A node, component instance, or function that returns either.
-   * The `container` will have the portal children appended to it.
-   * By default, it uses the body of the top-level document object,
-   * so it's simply `document.body` most of the time.
-   */
-  container: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-
-  /**
-   * Disable the portal behavior.
-   * The children stay within it's parent DOM hierarchy.
-   */
-  disablePortal: PropTypes.bool,
-
-  /**
-   * Callback fired once the children has been mounted into the `container`.
-   */
-  onRendered: PropTypes.func
-};
 Portal.defaultProps = {
   disablePortal: false
 };
-Portal.propTypes = exactProp(Portal.propTypes);
 export default Portal;

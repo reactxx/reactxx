@@ -31,11 +31,10 @@ export type CodeProps = ScrollbarSizeProps;
 
 class ScrollbarSize extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
   handleResize = debounce(() => {
     const { onChange } = this.props;
@@ -95,8 +94,4 @@ class ScrollbarSize extends React.Component<CodeProps, any> {
   }
 }
 
-ScrollbarSize.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  onLoad: PropTypes.func.isRequired
-};
 export default ScrollbarSize;

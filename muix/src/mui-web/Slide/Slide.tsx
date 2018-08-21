@@ -82,11 +82,10 @@ export function setTranslateValue(props, node) {
 
 class Slide extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
   mounted = false;
   transition = null;

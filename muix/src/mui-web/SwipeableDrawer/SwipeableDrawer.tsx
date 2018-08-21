@@ -11,7 +11,7 @@ import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Drawer
 import React from "react";
 import ReactDOM from "react-dom";
-import Drawer, { getAnchor, isHorizontal } from "../Drawer/Drawer/Drawer";
+import Drawer, { getAnchor, isHorizontal } from "../Drawer/Drawer";
 import { duration } from "../styles/transitions";
 import { getTransitionProps } from "../transitions/utils";
 import NoSsr from "../NoSsr/NoSsr";
@@ -48,11 +48,10 @@ if (process.env.NODE_ENV !== "production" && !React.createContext) {
 
 class SwipeableDrawer extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
   backdrop = null;
   paper = null;

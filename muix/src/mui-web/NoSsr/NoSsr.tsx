@@ -29,13 +29,12 @@ export type CodeProps = NoSsrProps;
 
 class NoSsr extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
-  state = {
+  state: any = {
     mounted: false
   };
 
@@ -73,21 +72,6 @@ class NoSsr extends React.Component<CodeProps, any> {
   }
 }
 
-NoSsr.propTypes = {
-  children: PropTypes.node.isRequired,
-
-  /**
-   * If `true`, the component will not only prevent server side rendering.
-   * It will also defer the rendering of the children into a different screen frame.
-   */
-  defer: PropTypes.bool,
-
-  /**
-   * The fallback content to display.
-   */
-  fallback: PropTypes.node
-};
-NoSsr.propTypes = exactProp(NoSsr.propTypes);
 NoSsr.defaultProps = {
   defer: false,
   fallback: null

@@ -65,11 +65,10 @@ const styles = {
 
 class Textarea extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
   isControlled = null;
   shadowRef = null;
@@ -91,7 +90,7 @@ class Textarea extends React.Component<CodeProps, any> {
     };
   }
 
-  state = {
+  state: any = {
     height: null
   };
 

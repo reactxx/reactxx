@@ -2,8 +2,8 @@ import * as Ast from '../../utils/ast'
 import * as RegExp from '../../utils/regexp'
 
 export const adjustImports = (code: string) => {
-  return RegExp.processMatchAll(/from '\.\.\/([A-Z]\w+)/g, code, (match, res) => {
-    const imp = code.substr(match.index, match[0].length) + '/' + match[1]
+  return RegExp.processMatchAll(/from '\.\.\/([A-Z]\w+)'/g, code, (match, res) => {
+    const imp = code.substr(match.index, match[0].length - 1) + '/' + match[1] + `'`
     res.push(imp)
   })
 }

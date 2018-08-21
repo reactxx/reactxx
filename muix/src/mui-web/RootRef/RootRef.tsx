@@ -57,11 +57,10 @@ export type CodeProps = RootRefProps;
 
 class RootRef extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
 
   componentDidMount() {
@@ -84,17 +83,4 @@ class RootRef extends React.Component<CodeProps, any> {
   }
 }
 
-RootRef.propTypes = {
-  /**
-   * The wrapped element.
-   */
-  children: PropTypes.element.isRequired,
-
-  /**
-   * Provide a way to access the DOM node of the wrapped element.
-   * You can provide a callback ref or a `React.createRef()` ref.
-   */
-  rootRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired
-};
-RootRef.propTypes = exactProp(RootRef.propTypes);
 export default RootRef;

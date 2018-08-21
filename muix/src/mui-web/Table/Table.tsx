@@ -30,11 +30,10 @@ const styles = theme => ({
 
 class Table extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
 
   getChildContext() {

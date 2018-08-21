@@ -14,7 +14,7 @@ import CancelIcon from "../internal/svg-icons/Cancel";
 import { emphasize, fade, darken } from "../styles/colorManipulator";
 import unsupportedProp from "../utils/unsupportedProp";
 import { capitalize } from "../utils/helpers";
-import "../Avatar/Avatar/Avatar"; // So we don't have any override priority issue.
+import "../Avatar/Avatar"; // So we don't have any override priority issue.
 
 import { StandardProps, PropTypes } from "..";
 export interface ChipProps
@@ -226,11 +226,10 @@ const styles = theme => {
 
 class Chip extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
   chipRef = null;
   handleDeleteIconClick = event => {

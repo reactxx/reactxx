@@ -27,16 +27,15 @@ export type CodeProps = MenuListProps;
 
 class MenuList extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
   listRef = null;
   selectedItemRef = null;
   blurTimer = null;
-  state = {
+  state: any = {
     currentTabIndex: null
   };
 
@@ -192,25 +191,4 @@ class MenuList extends React.Component<CodeProps, any> {
   }
 }
 
-MenuList.propTypes = {
-  /**
-   * MenuList contents, normally `MenuItem`s.
-   */
-  children: PropTypes.node,
-
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-
-  /**
-   * @ignore
-   */
-  onBlur: PropTypes.func,
-
-  /**
-   * @ignore
-   */
-  onKeyDown: PropTypes.func
-};
 export default MenuList;

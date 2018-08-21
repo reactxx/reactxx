@@ -47,19 +47,16 @@ const styles = theme => ({
 
 class CssBaseline extends React.Component<CodeProps, any> {
   static defaultProps: CodeProps;
-  static propTypes;
+  static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
-  static Naked;
   static options;
 
   render() {
     return this.props.children;
   }
 }
-
-CssBaseline.propTypes = exactProp(CssBaseline.propTypes);
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<CssBaselineClassKey>,
