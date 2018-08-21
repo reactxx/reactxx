@@ -24,20 +24,14 @@ const styles = {
   }
 };
 
-function ExpansionPanelDetails(props) {
-  const {
-    $system: { theme },
-    classes,
-    children,
-    className,
-    ...other
-  } = props;
+const ExpansionPanelDetails: Types.CodeSFCWeb<Shape> = props => {
+  const { classes, children, className, ...other } = props;
   return (
     <div className={classNames(classes.root, className)} {...other}>
       {children}
     </div>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<ExpansionPanelDetailsClassKey>,
@@ -48,9 +42,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = ExpansionPanelDetails['defaultProps'] = {} as PropsX;
+export const defaultProps  = ExpansionPanelDetails.defaultProps = {} as CodeProps;
 export const ExpansionPanelDetailsCode: CodeComponentType = ExpansionPanelDetails as any
 export const ExpansionPanelDetailsStyles: SheetCreatorX = styles as any
 export const ExpansionPanelDetailsCreator: WithStyleCreator = withStyles<Shape>(ExpansionPanelDetailsStyles, ExpansionPanelDetailsCode, {isMui:true, defaultProps});

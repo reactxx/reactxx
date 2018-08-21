@@ -146,11 +146,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = FormHelperText['defaultProps'] = {
+export const defaultProps  = FormHelperText.defaultProps = {
   component: 'p'
-} as PropsX;
+} as CodeProps;
 export const FormHelperTextCode: CodeComponentType = FormHelperText as any
 export const FormHelperTextStyles: SheetCreatorX = styles as any
 export const FormHelperTextCreator: WithStyleCreator = withStyles<Shape>(FormHelperTextStyles, FormHelperTextCode, {isMui:true, defaultProps});

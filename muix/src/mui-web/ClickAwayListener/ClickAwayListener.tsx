@@ -21,16 +21,18 @@ export interface ClickAwayListenerProps {
  * For instance, if you need to hide a menu when people click anywhere else on your page.
  */
 
-class ClickAwayListener extends React.Component<
-  {
-    children;
-    [p: string]: any;
-  },
-  any
-> {
+interface ClickAwayListenerProps {
+  children?;
+  [p: string]: any;
+}
+export type CodeProps = ClickAwayListenerProps;
+
+class ClickAwayListener extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   node = null;

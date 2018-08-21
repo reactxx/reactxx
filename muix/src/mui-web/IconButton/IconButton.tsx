@@ -112,16 +112,8 @@ const styles = theme => ({
  * regarding the available icon options.
  */
 
-function IconButton(props) {
-  const {
-    $system: { theme },
-    children,
-    classes,
-    className,
-    color,
-    disabled,
-    ...other
-  } = props;
+const IconButton: Types.CodeSFCWeb<Shape> = props => {
+  const { children, classes, className, color, disabled, ...other } = props;
   return (
     <ButtonBase
       className={classNames(
@@ -138,7 +130,7 @@ function IconButton(props) {
       <span className={classes.label}>{children}</span>
     </ButtonBase>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<IconButtonClassKey>,
@@ -149,12 +141,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = IconButton['defaultProps'] = {
+export const defaultProps  = IconButton.defaultProps = {
   color: 'default',
   disabled: false
-} as PropsX;
+} as CodeProps;
 export const IconButtonCode: CodeComponentType = IconButton as any
 export const IconButtonStyles: SheetCreatorX = styles as any
 export const IconButtonCreator: WithStyleCreator = withStyles<Shape>(IconButtonStyles, IconButtonCode, {isMui:true, defaultProps});

@@ -11,7 +11,7 @@ import React from "react";
 import { classNames } from "reactxx-basic";
 import warning from "warning";
 import { StandardProps } from "..";
-import { Orientation } from "../Stepper";
+import { Orientation } from "../Stepper/Stepper";
 export interface StepProps
   extends StandardProps<React.HTMLAttributes<HTMLDivElement>, StepClasskey> {
   active?: boolean;
@@ -58,9 +58,8 @@ const styles = {
   completed: {}
 };
 
-function Step(props) {
+const Step: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     active,
     alternativeLabel,
     children,
@@ -115,7 +114,7 @@ function Step(props) {
         })}
     </div>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   
@@ -126,13 +125,14 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Step['defaultProps'] = {
+export const defaultProps  = Step.defaultProps = {
   active: false,
   completed: false,
   disabled: false
-} as PropsX;
+} as CodeProps;
 export const StepCode: CodeComponentType = Step as any
 export const StepStyles: SheetCreatorX = styles as any
 export const StepCreator: WithStyleCreator = withStyles<Shape>(StepStyles, StepCode, {isMui:true, defaultProps});

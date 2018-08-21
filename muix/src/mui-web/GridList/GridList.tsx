@@ -34,9 +34,8 @@ const styles = {
   }
 };
 
-function GridList(props) {
+const GridList: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     cellHeight,
     children,
     classes,
@@ -86,7 +85,7 @@ function GridList(props) {
       })}
     </Component>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<GridListClassKey>,
@@ -97,14 +96,15 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = GridList['defaultProps'] = {
+export const defaultProps  = GridList.defaultProps = {
   cellHeight: 180,
   cols: 2,
   component: 'ul',
   spacing: 4
-} as PropsX;
+} as CodeProps;
 export const GridListCode: CodeComponentType = GridList as any
 export const GridListStyles: SheetCreatorX = styles as any
 export const GridListCreator: WithStyleCreator = withStyles<Shape>(GridListStyles, GridListCode, {isMui:true, defaultProps});

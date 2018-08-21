@@ -40,9 +40,8 @@ const styles = theme => ({
   }
 });
 
-function CardActions(props) {
+const CardActions: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     disableActionSpacing,
     children,
     classes,
@@ -56,7 +55,7 @@ function CardActions(props) {
         : cloneChildrenWithClassName(children, classes.action)}
     </div>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<CardActionsClassKey>,
@@ -67,11 +66,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = CardActions['defaultProps'] = {
+export const defaultProps  = CardActions.defaultProps = {
   disableActionSpacing: false
-} as PropsX;
+} as CodeProps;
 export const CardActionsCode: CodeComponentType = CardActions as any
 export const CardActionsStyles: SheetCreatorX = styles as any
 export const CardActionsCreator: WithStyleCreator = withStyles<Shape>(CardActionsStyles, CardActionsCode, {isMui:true, defaultProps});

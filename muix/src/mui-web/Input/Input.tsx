@@ -330,10 +330,12 @@ function formControlState(props, context) {
   };
 }
 
-class Input extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class Input extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   isControlled = null;
@@ -639,14 +641,15 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Input['defaultProps'] = {
+export const defaultProps  = Input.defaultProps = {
   disableUnderline: false,
   fullWidth: false,
   multiline: false,
   type: 'text'
-} as PropsX;
+} as CodeProps;
 export const InputCode: CodeComponentType = Input as any
 export const InputStyles: SheetCreatorX = styles as any
 export const InputCreator: WithStyleCreator = withStyles<Shape>(InputStyles, InputCode, {isMui:true, defaultProps});

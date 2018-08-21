@@ -21,16 +21,18 @@ export interface NoSsrProps {
  * - Under too heavy server load, you can turn on service degradation.
  */
 
-class NoSsr extends React.Component<
-  {
-    children;
-    [p: string]: any;
-  },
-  any
-> {
+interface NoSsrProps {
+  children?;
+  [p: string]: any;
+}
+export type CodeProps = NoSsrProps;
+
+class NoSsr extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   state = {

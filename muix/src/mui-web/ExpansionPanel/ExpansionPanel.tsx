@@ -11,11 +11,11 @@ import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
 import { classNames } from "reactxx-basic";
 import warning from "warning";
-import Collapse from "../Collapse";
+import Collapse from "../Collapse/Collapse";
 import Paper from "../Paper/Paper";
 import { isMuiElement } from "../utils/reactHelpers";
 import { StandardProps } from "..";
-import { CollapseProps } from "../Collapse";
+import { CollapseProps } from "../Collapse/Collapse";
 import { PaperProps } from "../Paper/Paper";
 export interface ExpansionPanelProps
   extends StandardProps<PaperProps, ExpansionPanelClassKey, "onChange"> {
@@ -101,13 +101,12 @@ const styles = theme => {
   };
 };
 
-class ExpansionPanel extends React.Component<
-  Partial<Types.CodeProps<Shape>>,
-  any
-> {
+class ExpansionPanel extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   isControlled = null;
@@ -215,12 +214,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = ExpansionPanel['defaultProps'] = {
+export const defaultProps  = ExpansionPanel.defaultProps = {
   defaultExpanded: false,
   disabled: false
-} as PropsX;
+} as CodeProps;
 export const ExpansionPanelCode: CodeComponentType = ExpansionPanel as any
 export const ExpansionPanelStyles: SheetCreatorX = styles as any
 export const ExpansionPanelCreator: WithStyleCreator = withStyles<Shape>(ExpansionPanelStyles, ExpansionPanelCode, {isMui:true, defaultProps});

@@ -10,9 +10,9 @@ import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
 import warning from "warning";
 import { classNames } from "reactxx-basic";
-import Collapse from "../Collapse";
+import Collapse from "../Collapse/Collapse";
 import { StandardProps } from "..";
-import { Orientation } from "../Stepper";
+import { Orientation } from "../Stepper/Stepper";
 import { TransitionProps } from "../transitions/transition";
 export interface StepContentProps
   extends StandardProps<
@@ -57,9 +57,8 @@ const styles = theme => ({
   transition: {}
 });
 
-function StepContent(props) {
+const StepContent: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     active,
     alternativeLabel,
     children,
@@ -103,7 +102,7 @@ function StepContent(props) {
       </TransitionComponent>
     </div>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   
@@ -114,12 +113,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = StepContent['defaultProps'] = {
+export const defaultProps  = StepContent.defaultProps = {
   TransitionComponent: Collapse,
   transitionDuration: 'auto'
-} as PropsX;
+} as CodeProps;
 export const StepContentCode: CodeComponentType = StepContent as any
 export const StepContentStyles: SheetCreatorX = styles as any
 export const StepContentCreator: WithStyleCreator = withStyles<Shape>(StepContentStyles, StepContentCode, {isMui:true, defaultProps});

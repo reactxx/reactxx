@@ -94,10 +94,12 @@ if (process.env.NODE_ENV !== "production" && !React.createContext) {
  * It contains a load of style reset and some focus/ripple logic.
  */
 
-class ButtonBase extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class ButtonBase extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   ripple = null;
@@ -368,9 +370,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = ButtonBase['defaultProps'] = {
+export const defaultProps  = ButtonBase.defaultProps = {
   centerRipple: false,
   component: 'button',
   disableRipple: false,
@@ -378,7 +381,7 @@ export const defaultProps  = ButtonBase['defaultProps'] = {
   focusRipple: false,
   tabIndex: '0',
   type: 'button'
-} as PropsX;
+} as CodeProps;
 export const ButtonBaseCode: CodeComponentType = ButtonBase as any
 export const ButtonBaseStyles: SheetCreatorX = styles as any
 export const ButtonBaseCreator: WithStyleCreator = withStyles<Shape>(ButtonBaseStyles, ButtonBaseCode, {isMui:true, defaultProps});

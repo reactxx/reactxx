@@ -126,13 +126,13 @@ export namespace Types {
 
   // *** web
   export type CodePropsWeb<R extends Shape = Shape> =
-    Omit<TCommon.getProps<R> & TCommon.getPropsWeb<R>, omitPropNames> &
+    OmitPartial<TCommon.getProps<R> & TCommon.getPropsWeb<R>, omitPropNames> &
     Types.OnPressAllWeb &
     TAddIn.CodeProps<R> &
     {
-      style: TCommonStyles.RulesetWeb
-      className: TCommonStyles.RulesetWeb
-      classes: SheetWeb<R>
+      style?: TCommonStyles.RulesetWeb
+      className?: TCommonStyles.RulesetWeb
+      classes?: SheetWeb<R>
       children?: React.ReactNode
       $system?: $SystemLow<R>
     }
@@ -238,7 +238,7 @@ export namespace Types {
   export interface OnPressX<R extends Types.Shape = Types.Shape> { onPress?: MouseEventEx<R>; onLongPress?: MouseEventEx<R> }
   export interface OnPressAllX<R extends Types.Shape = Types.Shape> extends OnPressX<R> { onPressIn?: MouseEventEx<R>; onPressOut?: MouseEventEx<R> }
 
-  export interface OnPressAllWeb { onClick?: React.MouseEvent<Element>; onMouseDown?: React.MouseEvent<Element>; onMouseUp?: React.MouseEvent<Element> }
+  export interface OnPressAllWeb { onClick?: React.MouseEventHandler<Element>; onMouseDown?: React.MouseEventHandler<Element>; onMouseUp?: React.MouseEventHandler<Element> }
 
   //export type NativeEvent<R extends Types.Shape = Types.Shape> = (par: NativeEventPar<R>) => void
   export interface NativeEventPar<R extends Types.Shape = Types.Shape> extends ReactN.GestureResponderEvent { current?: CodeProps<R> }

@@ -11,13 +11,13 @@ import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Drawer
 import React from "react";
 import ReactDOM from "react-dom";
-import Drawer, { getAnchor, isHorizontal } from "../Drawer/Drawer";
+import Drawer, { getAnchor, isHorizontal } from "../Drawer/Drawer/Drawer";
 import { duration } from "../styles/transitions";
 import { getTransitionProps } from "../transitions/utils";
-import NoSsr from "../NoSsr";
+import NoSsr from "../NoSsr/NoSsr";
 import SwipeArea from "./SwipeArea";
 import { Omit } from "..";
-import { DrawerProps } from "../Drawer";
+import { DrawerProps } from "../Drawer/Drawer";
 export interface SwipeableDrawerProps
   extends Omit<DrawerProps, "onClose" | "open"> {
   disableBackdropTransition?: boolean;
@@ -46,13 +46,12 @@ if (process.env.NODE_ENV !== "production" && !React.createContext) {
   throw new Error("Material-UI: react@16.3.0 or greater is required.");
 }
 
-class SwipeableDrawer extends React.Component<
-  Partial<Types.CodeProps<Shape>>,
-  any
-> {
+class SwipeableDrawer extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   backdrop = null;
@@ -424,9 +423,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = SwipeableDrawer['defaultProps'] = {
+export const defaultProps  = SwipeableDrawer.defaultProps = {
   anchor: 'left',
   disableBackdropTransition: false,
   disableDiscovery: false,
@@ -438,7 +438,7 @@ export const defaultProps  = SwipeableDrawer['defaultProps'] = {
   },
   variant: 'temporary' // Mobile first.
 
-} as PropsX;
+} as CodeProps;
 export const SwipeableDrawerCode: CodeComponentType = SwipeableDrawer as any
 export const SwipeableDrawerStyles: SheetCreatorX = styles as any
 export const SwipeableDrawerCreator: WithStyleCreator = withStyles<Shape>(SwipeableDrawerStyles, SwipeableDrawerCode, {isMui:true, defaultProps});

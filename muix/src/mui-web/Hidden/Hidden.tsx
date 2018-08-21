@@ -6,6 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import React from "react";
+import { Types } from "reactxx-basic";
 import HiddenJs from "./HiddenJs";
 import HiddenCss from "./HiddenCss";
 import { StandardProps } from "..";
@@ -29,7 +30,11 @@ export interface HiddenProps extends StandardProps<{}, never> {
  * Responsively hides children based on the selected implementation.
  */
 
-function Hidden(props) {
+export type Shape = Types.OverwriteShape<{
+  props: HiddenProps;
+}>;
+
+const Hidden: Types.CodeSFCWeb<Shape> = props => {
   const { implementation, ...other } = props;
 
   if (implementation === "js") {
@@ -37,7 +42,7 @@ function Hidden(props) {
   }
 
   return <HiddenCss {...other} />;
-}
+};
 
 Hidden.propTypes = {
   /**

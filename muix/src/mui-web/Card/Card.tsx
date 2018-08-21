@@ -24,14 +24,8 @@ const styles = {
   }
 };
 
-function Card(props) {
-  const {
-    $system: { theme },
-    classes,
-    className,
-    raised,
-    ...other
-  } = props;
+const Card: Types.CodeSFCWeb<Shape> = props => {
+  const { classes, className, raised, ...other } = props;
   return (
     <Paper
       className={classNames(classes.root, className)}
@@ -39,7 +33,7 @@ function Card(props) {
       {...other}
     />
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<CardClassKey>,
@@ -50,11 +44,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Card['defaultProps'] = {
+export const defaultProps  = Card.defaultProps = {
   raised: false
-} as PropsX;
+} as CodeProps;
 export const CardCode: CodeComponentType = Card as any
 export const CardStyles: SheetCreatorX = styles as any
 export const CardCreator: WithStyleCreator = withStyles<Shape>(CardStyles, CardCode, {isMui:true, defaultProps});

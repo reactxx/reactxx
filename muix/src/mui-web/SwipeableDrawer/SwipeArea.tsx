@@ -10,7 +10,7 @@ import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
 import { classNames } from "reactxx-basic";
 import { capitalize } from "../utils/helpers";
-import { isHorizontal } from "../Drawer/Drawer";
+import { isHorizontal } from "../Drawer/Drawer/Drawer";
 
 const styles = theme => ({
   /* Styles applied to the root element. */
@@ -42,14 +42,8 @@ const styles = theme => ({
  * @ignore - internal component.
  */
 
-function SwipeArea(props) {
-  const {
-    $system: { theme },
-    anchor,
-    classes,
-    width,
-    ...other
-  } = props;
+const SwipeArea: Types.CodeSFCWeb<Shape> = props => {
+  const { anchor, classes, width, ...other } = props;
   return (
     <div
       className={classNames(
@@ -62,7 +56,7 @@ function SwipeArea(props) {
       {...other}
     />
   );
-}
+};
 
 export interface SwipeAreaProps {}
 
@@ -75,9 +69,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = SwipeArea['defaultProps'] = {} as PropsX;
+export const defaultProps  = SwipeArea.defaultProps = {} as CodeProps;
 export const SwipeAreaCode: CodeComponentType = SwipeArea as any
 export const SwipeAreaStyles: SheetCreatorX = styles as any
 export const SwipeAreaCreator: WithStyleCreator = withStyles<Shape>(SwipeAreaStyles, SwipeAreaCode, {isMui:true, defaultProps});

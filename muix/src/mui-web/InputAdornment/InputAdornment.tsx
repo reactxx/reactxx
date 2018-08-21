@@ -40,9 +40,8 @@ const styles = {
   }
 };
 
-function InputAdornment(props) {
+const InputAdornment: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     children,
     component: Component,
     classes,
@@ -68,7 +67,7 @@ function InputAdornment(props) {
       )}
     </Component>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<InputAdornmentClassKey>,
@@ -79,12 +78,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = InputAdornment['defaultProps'] = {
+export const defaultProps  = InputAdornment.defaultProps = {
   component: 'div',
   disableTypography: false
-} as PropsX;
+} as CodeProps;
 export const InputAdornmentCode: CodeComponentType = InputAdornment as any
 export const InputAdornmentStyles: SheetCreatorX = styles as any
 export const InputAdornmentCreator: WithStyleCreator = withStyles<Shape>(InputAdornmentStyles, InputAdornmentCode, {isMui:true, defaultProps});

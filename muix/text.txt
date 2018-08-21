@@ -1,314 +1,315 @@
-﻿"// @inheritedComponent ButtonBase
+﻿"// @inheritedComponent FormControl
 
-/**** REACTXX PATCH: imports*/
+import {Types} from 'reactxx-basic'
 import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import withStyles from '../styles/withStyles';
-import { fade } from '../styles/colorManipulator';
-import ButtonBase from '../ButtonBase';
-import { capitalize } from '../utils/helpers';
-export const styles = theme => ({
-  root: { ...theme.typography.button,
-    lineHeight: '1.4em',
-    // Improve readability for multiline button.
-    boxSizing: 'border-box',
-    minWidth: 64,
-    minHeight: 36,
-    padding: '8px 16px',
-    borderRadius: theme.shape.borderRadius,
-    color: theme.palette.text.primary,
-    transition: theme.transitions.create(['background-color', 'box-shadow'], {
-      duration: theme.transitions.duration.short
-    }),
-    '&:hover': {
-      textDecoration: 'none',
-      backgroundColor: fade(theme.palette.text.primary, theme.palette.action.hoverOpacity),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: 'transparent'
-      },
-      '&$disabled': {
-        backgroundColor: 'transparent'
-      }
-    },
-    '&$disabled': {
-      color: theme.palette.action.disabled
-    }
-  },
-  label: {
-    display: 'inherit',
-    alignItems: 'inherit',
-    justifyContent: 'inherit'
-  },
-  text: {},
-  textPrimary: {
-    color: theme.palette.primary.main,
-    '&:hover': {
-      backgroundColor: fade(theme.palette.primary.main, theme.palette.action.hoverOpacity),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: 'transparent'
-      }
-    }
-  },
-  textSecondary: {
-    color: theme.palette.secondary.main,
-    '&:hover': {
-      backgroundColor: fade(theme.palette.secondary.main, theme.palette.action.hoverOpacity),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: 'transparent'
-      }
-    }
-  },
-  flat: {},
-  // legacy
-  flatPrimary: {},
-  // legacy
-  flatSecondary: {},
-  // legacy
-  outlined: {
-    border: `1px solid ${theme.palette.type === 'light' ? 'rgba(0, 0, 0, 0.23)' : 'rgba(255, 255, 255, 0.23)'}`
-  },
-  contained: {
-    color: theme.palette.getContrastText(theme.palette.grey[300]),
-    backgroundColor: theme.palette.grey[300],
-    boxShadow: theme.shadows[2],
-    '&$focusVisible': {
-      boxShadow: theme.shadows[6]
-    },
-    '&:active': {
-      boxShadow: theme.shadows[8]
-    },
-    '&$disabled': {
-      color: theme.palette.action.disabled,
-      boxShadow: theme.shadows[0],
-      backgroundColor: theme.palette.action.disabledBackground
-    },
-    '&:hover': {
-      backgroundColor: theme.palette.grey.A100,
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: theme.palette.grey[300]
-      },
-      '&$disabled': {
-        backgroundColor: theme.palette.action.disabledBackground
-      }
-    }
-  },
-  containedPrimary: {
-    color: theme.palette.primary.contrastText,
-    backgroundColor: theme.palette.primary.main,
-    '&:hover': {
-      backgroundColor: theme.palette.primary.dark,
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: theme.palette.primary.main
-      }
-    }
-  },
-  containedSecondary: {
-    color: theme.palette.secondary.contrastText,
-    backgroundColor: theme.palette.secondary.main,
-    '&:hover': {
-      backgroundColor: theme.palette.secondary.dark,
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: theme.palette.secondary.main
-      }
-    }
-  },
-  raised: {},
-  // legacy
-  raisedPrimary: {},
-  // legacy
-  raisedSecondary: {},
-  // legacy
-  fab: {
-    borderRadius: '50%',
-    padding: 0,
-    minWidth: 0,
-    width: 56,
-    height: 56,
-    boxShadow: theme.shadows[6],
-    '&:active': {
-      boxShadow: theme.shadows[12]
-    }
-  },
-  extendedFab: {
-    borderRadius: 48 / 2,
-    padding: '0 16px',
-    width: 'auto',
-    minWidth: 48,
-    height: 48
-  },
-  focusVisible: {},
-  disabled: {},
-  colorInherit: {
-    color: 'inherit'
-  },
-  mini: {
-    width: 40,
-    height: 40
-  },
-  sizeSmall: {
-    padding: '7px 8px',
-    minWidth: 64,
-    minHeight: 32,
-    fontSize: theme.typography.pxToRem(13)
-  },
-  sizeLarge: {
-    padding: '8px 24px',
-    minWidth: 112,
-    minHeight: 40,
-    fontSize: theme.typography.pxToRem(15)
-  },
-  fullWidth: {
-    width: '100%'
-  }
-});
+import warning from 'warning';
 
-function Button(props) {
+import Input from '../Input';
+import InputLabel from '../InputLabel';
+import FormControl from '../FormControl';
+import FormHelperText from '../FormHelperText';
+import Select from '../Select';
+import { StandardProps, PropTypes } from '..';
+import { FormControlProps } from '../FormControl';
+import { FormHelperTextProps } from '../FormHelperText';
+import { InputProps } from '../Input';
+import { InputLabelProps } from '../InputLabel';
+import { FormControlClassKey } from '../FormControl';
+import { SelectProps } from '../Select';
+export interface TextFieldProps extends StandardProps<FormControlProps, TextFieldClassKey, 'onChange' | 'defaultValue'> {
+  autoComplete?: string;
+  autoFocus?: boolean;
+  children?: React.ReactNode;
+  defaultValue?: string | number;
+  disabled?: boolean;
+  error?: boolean;
+  FormHelperTextProps?: Partial<FormHelperTextProps>;
+  fullWidth?: boolean;
+  helperText?: React.ReactNode;
+  id?: string;
+  InputLabelProps?: Partial<InputLabelProps>;
+  InputProps?: Partial<InputProps>;
+  inputProps?: InputProps['inputProps'];
+  inputRef?: React.Ref<any> | React.RefObject<any>;
+  label?: React.ReactNode;
+  margin?: PropTypes.Margin;
+  multiline?: boolean;
+  name?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>;
+  placeholder?: string;
+  required?: boolean;
+  rows?: string | number;
+  rowsMax?: string | number;
+  select?: boolean;
+  SelectProps?: Partial<SelectProps>;
+  type?: string;
+  value?: Array<string | number> | string | number;
+}
+export type TextFieldClassKey = FormControlClassKey;
+
+/**
+ * The `TextField` is a convenience wrapper for the most common cases (80%).
+ * It cannot be all things to all people, otherwise the API would grow out of control.
+ *
+ * ## Advanced Configuration
+ *
+ * It's important to understand that the text field is a simple abstraction
+ * on top of the following components:
+ * - [FormControl](/api/form-control)
+ * - [InputLabel](/api/input-label)
+ * - [Input](/api/input)
+ * - [FormHelperText](/api/form-helper-text)
+ *
+ * If you wish to alter the properties applied to the native input, you can do so as follows:
+ *
+ * ```jsx
+ * const inputProps = {
+ *   step: 300,
+ * };
+ *
+ * return <TextField id="time" type="time" inputProps={inputProps} />;
+ * ```
+ *
+ * For advanced cases, please look at the source of TextField by clicking on the
+ * "Edit this page" button above. Consider either:
+ * - using the upper case props for passing values directly to the components
+ * - using the underlying components directly as shown in the demos
+ */
+export type Shape = Types.OverwriteShape<{props: RadioProps
+}>
+const TextField: Types.CodeSFC<Shape> = (props) => {
   const {
-    /**** REACTXX PATCH: selectClassNamesFromProps*/
+    autoComplete,
+    autoFocus,
     children,
-    classes,
-    className: classNameProp,
-    color,
+    className,
+    defaultValue,
     disabled,
-    disableFocusRipple,
+    error,
+    FormHelperTextProps,
     fullWidth,
-    focusVisibleClassName,
-    mini,
-    size,
-    variant,
+    helperText,
+    id,
+    InputLabelProps,
+    inputProps,
+    InputProps,
+    inputRef,
+    label,
+    multiline,
+    name,
+    onBlur,
+    onChange,
+    onFocus,
+    placeholder,
+    required,
+    rows,
+    rowsMax,
+    select,
+    SelectProps,
+    type,
+    value,
     ...other
   } = props;
-  const fab = variant === 'fab' || variant === 'extendedFab';
-  const contained = variant === 'contained' || variant === 'raised';
-  const text = variant === 'text' || variant === 'flat' || variant === 'outlined';
-  const className = classNames(classes.root, {
-    [classes.fab]: fab,
-    [classes.mini]: fab && mini,
-    [classes.extendedFab]: variant === 'extendedFab',
-    [classes.text]: text,
-    [classes.textPrimary]: text && color === 'primary',
-    [classes.textSecondary]: text && color === 'secondary',
-    [classes.flat]: variant === 'text' || variant === 'flat',
-    [classes.flatPrimary]: (variant === 'text' || variant === 'flat') && color === 'primary',
-    [classes.flatSecondary]: (variant === 'text' || variant === 'flat') && color === 'secondary',
-    [classes.contained]: contained || fab,
-    [classes.containedPrimary]: (contained || fab) && color === 'primary',
-    [classes.containedSecondary]: (contained || fab) && color === 'secondary',
-    [classes.raised]: contained || fab,
-    [classes.raisedPrimary]: (contained || fab) && color === 'primary',
-    [classes.raisedSecondary]: (contained || fab) && color === 'secondary',
-    [classes.outlined]: variant === 'outlined',
-    [classes[`size${capitalize(size)}`]]: size !== 'medium',
-    [classes.disabled]: disabled,
-    [classes.fullWidth]: fullWidth,
-    [classes.colorInherit]: color === 'inherit'
-  }, classNameProp);
-  return <ButtonBase className={className} disabled={disabled} focusRipple={!disableFocusRipple} focusVisibleClassName={classNames(classes.focusVisible, focusVisibleClassName)} {...other}>
-      <span
-    /**** REACTXX PATCH: span*/
-    className={classNamesStr(classes.label)}>{children}</span>
-    </ButtonBase>;
+
+  warning(
+    !select || Boolean(children),
+    'Material-UI: `children` must be passed when using the `TextField` component with `select`.',
+  );
+
+  const helperTextId = helperText && id ? `${id}-helper-text` : undefined;
+  const InputElement = (
+    <Input
+      autoComplete={autoComplete}
+      autoFocus={autoFocus}
+      defaultValue={defaultValue}
+      disabled={disabled}
+      fullWidth={fullWidth}
+      multiline={multiline}
+      name={name}
+      rows={rows}
+      rowsMax={rowsMax}
+      type={type}
+      value={value}
+      id={id}
+      inputRef={inputRef}
+      onBlur={onBlur}
+      onChange={onChange}
+      onFocus={onFocus}
+      placeholder={placeholder}
+      inputProps={inputProps}
+      {...InputProps}
+    />
+  );
+
+  return (
+    <FormControl
+      aria-describedby={helperTextId}
+      className={className}
+      error={error}
+      fullWidth={fullWidth}
+      required={required}
+      {...other}
+    >
+      {label && (
+        <InputLabel htmlFor={id} {...InputLabelProps}>
+          {label}
+        </InputLabel>
+      )}
+      {select ? (
+        <Select value={value} input={InputElement} {...SelectProps}>
+          {children}
+        </Select>
+      ) : (
+        InputElement
+      )}
+      {helperText && (
+        <FormHelperText id={helperTextId} {...FormHelperTextProps}>
+          {helperText}
+        </FormHelperText>
+      )}
+    </FormControl>
+  );
 }
 
-Button.propTypes = {
+TextField.propTypes = {
   /**
-     * The content of the button.
-     */
-  children: PropTypes.node.isRequired,
-
+   * This property helps users to fill forms faster, especially on mobile devices.
+   * The name can be confusing, as it's more like an autofill.
+   * You can learn more about it here:
+   * https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill
+   */
+  autoComplete: PropTypes.string,
   /**
-     * Override or extend the styles applied to the component.
-     * See [CSS API](#css-api) below for more details.
-     */
-  classes: PropTypes.object.isRequired,
-
+   * If `true`, the input will be focused during the first mount.
+   */
+  autoFocus: PropTypes.bool,
   /**
-     * @ignore
-     */
+   * @ignore
+   */
+  children: PropTypes.node,
+  /**
+   * @ignore
+   */
   className: PropTypes.string,
-
   /**
-     * The color of the component. It supports those theme colors that make sense for this component.
-     */
-  color: PropTypes.oneOf(['default', 'inherit', 'primary', 'secondary']),
-
+   * The default value of the `Input` element.
+   */
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /**
-     * The component used for the root node.
-     * Either a string to use a DOM element or a component.
-     */
-  component: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
-
-  /**
-     * If `true`, the button will be disabled.
-     */
+   * If `true`, the input will be disabled.
+   */
   disabled: PropTypes.bool,
-
   /**
-     * If `true`, the  keyboard focus ripple will be disabled.
-     * `disableRipple` must also be true.
-     */
-  disableFocusRipple: PropTypes.bool,
-
+   * If `true`, the label will be displayed in an error state.
+   */
+  error: PropTypes.bool,
   /**
-     * If `true`, the ripple effect will be disabled.
-     */
-  disableRipple: PropTypes.bool,
-
+   * Properties applied to the [`FormHelperText`](/api/form-helper-text) element.
+   */
+  FormHelperTextProps: PropTypes.object,
   /**
-     * @ignore
-     */
-  focusVisibleClassName: PropTypes.string,
-
-  /**
-     * If `true`, the button will take up the full width of its container.
-     */
+   * If `true`, the input will take up the full width of its container.
+   */
   fullWidth: PropTypes.bool,
-
   /**
-     * The URL to link to when the button is clicked.
-     * If defined, an `a` element will be used as the root node.
-     */
-  href: PropTypes.string,
-
+   * The helper text content.
+   */
+  helperText: PropTypes.node,
   /**
-     * If `true`, and `variant` is `'fab'`, will use mini floating action button styling.
-     */
-  mini: PropTypes.bool,
-
+   * The id of the `input` element.
+   * Use that property to make `label` and `helperText` accessible for screen readers.
+   */
+  id: PropTypes.string,
   /**
-     * The size of the button.
-     * `small` is equivalent to the dense button styling.
-     */
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-
+   * Properties applied to the [`InputLabel`](/api/input-label) element.
+   */
+  InputLabelProps: PropTypes.object,
   /**
-     * @ignore
-     */
+   * Properties applied to the `Input` element.
+   */
+  InputProps: PropTypes.object,
+  /**
+   * Attributes applied to the native `input` element.
+   */
+  inputProps: PropTypes.object,
+  /**
+   * Use that property to pass a ref callback to the native input component.
+   */
+  inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  /**
+   * The label content.
+   */
+  label: PropTypes.node,
+  /**
+   * If `dense` or `normal`, will adjust vertical spacing of this and contained components.
+   */
+  margin: PropTypes.oneOf(['none', 'dense', 'normal']),
+  /**
+   * If `true`, a textarea element will be rendered instead of an input.
+   */
+  multiline: PropTypes.bool,
+  /**
+   * Name attribute of the `input` element.
+   */
+  name: PropTypes.string,
+  /**
+   * @ignore
+   */
+  onBlur: PropTypes.func,
+  /**
+   * Callback fired when the value is changed.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new value by accessing `event.target.value`.
+   */
+  onChange: PropTypes.func,
+  /**
+   * @ignore
+   */
+  onFocus: PropTypes.func,
+  /**
+   * The short hint displayed in the input before the user enters a value.
+   */
+  placeholder: PropTypes.string,
+  /**
+   * If `true`, the label is displayed as required and the input will be required.
+   */
+  required: PropTypes.bool,
+  /**
+   * Number of rows to display when multiline option is set to true.
+   */
+  rows: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Maximum number of rows to display when multiline option is set to true.
+   */
+  rowsMax: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Render a `Select` element while passing the `Input` element to `Select` as `input` parameter.
+   * If this option is set you must pass the options of the select as children.
+   */
+  select: PropTypes.bool,
+  /**
+   * Properties applied to the [`Select`](/api/select) element.
+   */
+  SelectProps: PropTypes.object,
+  /**
+   * Type attribute of the `Input` element. It should be a valid HTML5 input type.
+   */
   type: PropTypes.string,
-
   /**
-     * The variant to use.
-     */
-  variant: PropTypes.oneOf(['text', 'flat', 'outlined', 'contained', 'raised', 'fab', 'extendedFab'])
+   * The value of the `Input` element, required for a controlled component.
+   */
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+  ]),
 };
-Button.defaultProps = {
-  color: 'default',
-  component: 'button',
-  disabled: false,
-  disableFocusRipple: false,
-  fullWidth: false,
-  mini: false,
-  size: 'medium',
-  type: 'button',
-  variant: 'text'
+
+TextField.defaultProps = {
+  required: false,
+  select: false,
 };
-export default withStyles(styles, {
-  name: 'MuiButton'
-})(Button);"
+
+export default TextField;
+"

@@ -143,11 +143,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = FormControlLabel['defaultProps'] = {
+export const defaultProps  = FormControlLabel.defaultProps = {
   labelPlacement: 'end'
-} as PropsX;
+} as CodeProps;
 export const FormControlLabelCode: CodeComponentType = FormControlLabel as any
 export const FormControlLabelStyles: SheetCreatorX = styles as any
 export const FormControlLabelCreator: WithStyleCreator = withStyles<Shape>(FormControlLabelStyles, FormControlLabelCode, {isMui:true, defaultProps});

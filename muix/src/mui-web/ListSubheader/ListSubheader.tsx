@@ -64,9 +64,8 @@ const styles = theme => ({
   }
 });
 
-function ListSubheader(props) {
+const ListSubheader: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     classes,
     className,
     color,
@@ -87,7 +86,7 @@ function ListSubheader(props) {
       {...other}
     />
   );
-}
+};
 
 ListSubheader.muiName = "ListSubheader";
 
@@ -100,14 +99,15 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = ListSubheader['defaultProps'] = {
+export const defaultProps  = ListSubheader.defaultProps = {
   color: 'default',
   component: 'li',
   disableSticky: false,
   inset: false
-} as PropsX;
+} as CodeProps;
 export const ListSubheaderCode: CodeComponentType = ListSubheader as any
 export const ListSubheaderStyles: SheetCreatorX = styles as any
 export const ListSubheaderCreator: WithStyleCreator = withStyles<Shape>(ListSubheaderStyles, ListSubheaderCode, {isMui:true, defaultProps});

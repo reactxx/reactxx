@@ -28,10 +28,12 @@ const styles = theme => ({
   }
 });
 
-class Table extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class Table extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
 
@@ -71,12 +73,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Table['defaultProps'] = {
+export const defaultProps  = Table.defaultProps = {
   component: 'table',
   padding: 'default'
-} as PropsX;
+} as CodeProps;
 export const TableCode: CodeComponentType = Table as any
 export const TableStyles: SheetCreatorX = styles as any
 export const TableCreator: WithStyleCreator = withStyles<Shape>(TableStyles, TableCode, {isMui:true, defaultProps});

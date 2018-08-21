@@ -94,9 +94,8 @@ const styles = theme => {
   };
 };
 
-function AppBar(props) {
+const AppBar: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     children,
     classes,
     className: classNameProp,
@@ -122,7 +121,7 @@ function AppBar(props) {
       {children}
     </Paper>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<AppBarClassKey>,
@@ -133,12 +132,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = AppBar['defaultProps'] = {
+export const defaultProps  = AppBar.defaultProps = {
   color: 'primary',
   position: 'fixed'
-} as PropsX;
+} as CodeProps;
 export const AppBarCode: CodeComponentType = AppBar as any
 export const AppBarStyles: SheetCreatorX = styles as any
 export const AppBarCreator: WithStyleCreator = withStyles<Shape>(AppBarStyles, AppBarCode, {isMui:true, defaultProps});

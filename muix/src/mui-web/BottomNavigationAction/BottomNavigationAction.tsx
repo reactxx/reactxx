@@ -90,13 +90,12 @@ const styles = theme => ({
   }
 });
 
-class BottomNavigationAction extends React.Component<
-  Partial<Types.CodeProps<Shape>>,
-  any
-> {
+class BottomNavigationAction extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   handleChange = event => {
@@ -161,9 +160,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = BottomNavigationAction['defaultProps'] = {} as PropsX;
+export const defaultProps  = BottomNavigationAction.defaultProps = {} as CodeProps;
 export const BottomNavigationActionCode: CodeComponentType = BottomNavigationAction as any
 export const BottomNavigationActionStyles: SheetCreatorX = styles as any
 export const BottomNavigationActionCreator: WithStyleCreator = withStyles<Shape>(BottomNavigationActionStyles, BottomNavigationActionCode, {isMui:true, defaultProps});

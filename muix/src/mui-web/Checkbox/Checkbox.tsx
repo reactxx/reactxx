@@ -64,9 +64,8 @@ const styles = theme => ({
   }
 });
 
-function Checkbox(props) {
+const Checkbox: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     checkedIcon,
     classes,
     color,
@@ -87,7 +86,7 @@ function Checkbox(props) {
       {...other}
     />
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<CheckboxClassKey>,
@@ -98,15 +97,16 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Checkbox['defaultProps'] = {
+export const defaultProps  = Checkbox.defaultProps = {
   checkedIcon: <CheckBoxIcon />,
   color: 'secondary',
   icon: <CheckBoxOutlineBlankIcon />,
   indeterminate: false,
   indeterminateIcon: <IndeterminateCheckBoxIcon />
-} as PropsX;
+} as CodeProps;
 export const CheckboxCode: CodeComponentType = Checkbox as any
 export const CheckboxStyles: SheetCreatorX = styles as any
 export const CheckboxCreator: WithStyleCreator = withStyles<Shape>(CheckboxStyles, CheckboxCode, {isMui:true, defaultProps});

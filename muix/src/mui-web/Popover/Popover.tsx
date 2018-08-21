@@ -133,10 +133,12 @@ const styles = {
   }
 };
 
-class Popover extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class Popover extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   paperRef = null;
@@ -416,9 +418,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Popover['defaultProps'] = {
+export const defaultProps  = Popover.defaultProps = {
   anchorReference: 'anchorEl',
   anchorOrigin: {
     vertical: 'top',
@@ -432,7 +435,7 @@ export const defaultProps  = Popover['defaultProps'] = {
   },
   TransitionComponent: Grow,
   transitionDuration: 'auto'
-} as PropsX;
+} as CodeProps;
 export const PopoverCode: CodeComponentType = Popover as any
 export const PopoverStyles: SheetCreatorX = styles as any
 export const PopoverCreator: WithStyleCreator = withStyles<Shape>(PopoverStyles, PopoverCode, {isMui:true, defaultProps});

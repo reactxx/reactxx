@@ -151,10 +151,12 @@ const styles = theme => ({
  * when `variant="temporary"` is set.
  */
 
-class Drawer extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class Drawer extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options; // Let's assume that the Drawer will always be rendered on user space.
   // We use this state is order to skip the appear transition during the
@@ -255,9 +257,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Drawer['defaultProps'] = {
+export const defaultProps  = Drawer.defaultProps = {
   anchor: 'left',
   elevation: 16,
   open: false,
@@ -267,7 +270,7 @@ export const defaultProps  = Drawer['defaultProps'] = {
   },
   variant: 'temporary' // Mobile first.
 
-} as PropsX;
+} as CodeProps;
 export const DrawerCode: CodeComponentType = Drawer as any
 export const DrawerStyles: SheetCreatorX = styles as any
 export const DrawerCreator: WithStyleCreator = withStyles<Shape>(DrawerStyles, DrawerCode, {isMui:true, defaultProps});

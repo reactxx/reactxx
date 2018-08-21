@@ -67,9 +67,8 @@ const styles = theme => {
   };
 };
 
-function Paper(props) {
+const Paper: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     classes,
     className: classNameProp,
     component: Component,
@@ -88,7 +87,7 @@ function Paper(props) {
     classNameProp
   );
   return <Component className={className} {...other} />;
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<PaperClassKey>,
@@ -99,13 +98,14 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Paper['defaultProps'] = {
+export const defaultProps  = Paper.defaultProps = {
   component: 'div',
   elevation: 2,
   square: false
-} as PropsX;
+} as CodeProps;
 export const PaperCode: CodeComponentType = Paper as any
 export const PaperStyles: SheetCreatorX = styles as any
 export const PaperCreator: WithStyleCreator = withStyles<Shape>(PaperStyles, PaperCode, {isMui:true, defaultProps});

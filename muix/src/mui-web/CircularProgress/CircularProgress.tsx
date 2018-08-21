@@ -124,9 +124,8 @@ const styles = theme => ({
  * attribute to `true` on that region until it has finished loading.
  */
 
-function CircularProgress(props) {
+const CircularProgress: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     classes,
     className,
     color,
@@ -201,7 +200,7 @@ function CircularProgress(props) {
       </svg>
     </div>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<CircularProgressClassKey>,
@@ -212,15 +211,16 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = CircularProgress['defaultProps'] = {
+export const defaultProps  = CircularProgress.defaultProps = {
   color: 'primary',
   size: 40,
   thickness: 3.6,
   value: 0,
   variant: 'indeterminate'
-} as PropsX;
+} as CodeProps;
 export const CircularProgressCode: CodeComponentType = CircularProgress as any
 export const CircularProgressStyles: SheetCreatorX = styles as any
 export const CircularProgressCreator: WithStyleCreator = withStyles<Shape>(CircularProgressStyles, CircularProgressCode, {isMui:true, defaultProps});

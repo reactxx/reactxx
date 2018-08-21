@@ -19,17 +19,18 @@ export interface MenuListProps
   onKeyDown?: React.ReactEventHandler<React.KeyboardEvent<any>>;
 }
 export type MenuListClassKey = ListClassKey;
+interface MenuListProps {
+  children?;
+  [p: string]: any;
+}
+export type CodeProps = MenuListProps;
 
-class MenuList extends React.Component<
-  {
-    children;
-    [p: string]: any;
-  },
-  any
-> {
+class MenuList extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   listRef = null;

@@ -75,9 +75,8 @@ const styles = theme => ({
   }
 });
 
-function Badge(props) {
+const Badge: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     badgeContent,
     children,
     classes,
@@ -99,7 +98,7 @@ function Badge(props) {
       <span className={badgeClassName}>{badgeContent}</span>
     </ComponentProp>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<BadgeClassKey>,
@@ -110,12 +109,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Badge['defaultProps'] = {
+export const defaultProps  = Badge.defaultProps = {
   color: 'default',
   component: 'span'
-} as PropsX;
+} as CodeProps;
 export const BadgeCode: CodeComponentType = Badge as any
 export const BadgeStyles: SheetCreatorX = styles as any
 export const BadgeCreator: WithStyleCreator = withStyles<Shape>(BadgeStyles, BadgeCode, {isMui:true, defaultProps});

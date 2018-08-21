@@ -28,18 +28,7 @@ function getDefaultTheme() {
 } // Provide the theme object as a property to the input component.
 
 const withTheme = () => Component => {
-  class WithTheme extends React.Component<
-    {
-      children;
-      [p: string]: any;
-    },
-    any
-  > {
-    static propTypes;
-    static displayName;
-    static contextTypes;
-    static Naked;
-    static options;
+  class WithTheme extends React.Component {
     unsubscribeId = null;
 
     constructor(props, context) {

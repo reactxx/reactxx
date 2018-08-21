@@ -3,13 +3,13 @@ import { cssjsToFela } from './cssjs-to-fela'
 
 import { extractThemeInClassMethod } from './extractThemeInClassMethod'
 import { adjustPaddingMargins } from './adjustPaddingMargins'
-import { adjustImports } from './adjustImports'
 import { refactorClassNamesConditions } from './refactorClassNamesConditions'
 import { extractThemeInRender } from './extractThemeInRender'
 import { defaultExport } from './defaultExport'
+import { removePropTypes } from './removePropTypes'
 
 export const classNamesFix = () => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
-  adjustImports(root, info)
+  //adjustImports(root, info)
   extractThemeInRender(root, info)
   refactorClassNamesConditions(root, info)
   //adjustHtmlClassNameAttribute(root, info)
@@ -23,6 +23,7 @@ export const withStylesTaskDefaultCreator = () => (root: Ast.Ast, info: Ast.MUIS
   cssjsToFela(root, info)
   classNamesFix()(root, info)
   defaultExport(root, info)
+  removePropTypes(root, info)
   return root
 }
 
@@ -31,10 +32,10 @@ export const withStylesTaskDefaultCreator = () => (root: Ast.Ast, info: Ast.MUIS
 //   return root
 // }
 
-export const otherTaskDefaultCreator = () => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
-  adjustImports(root, info)
-  return root
-}
+// export const otherTaskDefaultCreator = () => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
+//   adjustImports(root, info)
+//   return root
+// }
 
 
 

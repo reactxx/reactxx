@@ -333,11 +333,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = TouchRipple['defaultProps'] = {
+export const defaultProps  = TouchRipple.defaultProps = {
   center: false
-} as PropsX;
+} as CodeProps;
 export const TouchRippleCode: CodeComponentType = TouchRipple as any
 export const TouchRippleStyles: SheetCreatorX = styles as any
 export const TouchRippleCreator: WithStyleCreator = withStyles<Shape>(TouchRippleStyles, TouchRippleCode, {isMui:true, defaultProps});

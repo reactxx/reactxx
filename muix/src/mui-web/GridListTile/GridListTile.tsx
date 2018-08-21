@@ -61,13 +61,12 @@ const styles = {
   }
 };
 
-class GridListTile extends React.Component<
-  Partial<Types.CodeProps<Shape>>,
-  any
-> {
+class GridListTile extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   imgElement = null;
@@ -170,13 +169,14 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = GridListTile['defaultProps'] = {
+export const defaultProps  = GridListTile.defaultProps = {
   cols: 1,
   component: 'li',
   rows: 1
-} as PropsX;
+} as CodeProps;
 export const GridListTileCode: CodeComponentType = GridListTile as any
 export const GridListTileStyles: SheetCreatorX = styles as any
 export const GridListTileCreator: WithStyleCreator = withStyles<Shape>(GridListTileStyles, GridListTileCode, {isMui:true, defaultProps});

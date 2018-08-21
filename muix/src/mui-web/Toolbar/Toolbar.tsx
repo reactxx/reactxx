@@ -37,9 +37,8 @@ const styles = theme => ({
   }
 });
 
-function Toolbar(props) {
+const Toolbar: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     children,
     classes,
     className: classNameProp,
@@ -58,7 +57,7 @@ function Toolbar(props) {
       {children}
     </div>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<ToolbarClassKey>,
@@ -69,12 +68,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Toolbar['defaultProps'] = {
+export const defaultProps  = Toolbar.defaultProps = {
   disableGutters: false,
   variant: 'regular'
-} as PropsX;
+} as CodeProps;
 export const ToolbarCode: CodeComponentType = Toolbar as any
 export const ToolbarStyles: SheetCreatorX = styles as any
 export const ToolbarCreator: WithStyleCreator = withStyles<Shape>(ToolbarStyles, ToolbarCode, {isMui:true, defaultProps});

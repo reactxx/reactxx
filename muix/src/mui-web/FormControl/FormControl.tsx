@@ -9,7 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
 import { classNames } from "reactxx-basic";
-import { isFilled, isAdornedStart } from "../Input/Input";
+import { isFilled, isAdornedStart } from "../Input/Input/Input";
 import { capitalize } from "../utils/helpers";
 import { isMuiElement } from "../utils/reactHelpers";
 import { StandardProps, PropTypes } from "..";
@@ -73,13 +73,12 @@ const styles = {
  *  - InputLabel
  */
 
-class FormControl extends React.Component<
-  Partial<Types.CodeProps<Shape>>,
-  any
-> {
+class FormControl extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
 
@@ -211,16 +210,17 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = FormControl['defaultProps'] = {
+export const defaultProps  = FormControl.defaultProps = {
   component: 'div',
   disabled: false,
   error: false,
   fullWidth: false,
   margin: 'none',
   required: false
-} as PropsX;
+} as CodeProps;
 export const FormControlCode: CodeComponentType = FormControl as any
 export const FormControlStyles: SheetCreatorX = styles as any
 export const FormControlCreator: WithStyleCreator = withStyles<Shape>(FormControlStyles, FormControlCode, {isMui:true, defaultProps});

@@ -14,7 +14,7 @@ import CancelIcon from "../internal/svg-icons/Cancel";
 import { emphasize, fade, darken } from "../styles/colorManipulator";
 import unsupportedProp from "../utils/unsupportedProp";
 import { capitalize } from "../utils/helpers";
-import "../Avatar/Avatar"; // So we don't have any override priority issue.
+import "../Avatar/Avatar/Avatar"; // So we don't have any override priority issue.
 
 import { StandardProps, PropTypes } from "..";
 export interface ChipProps
@@ -224,10 +224,12 @@ const styles = theme => {
  * Chips represent complex entities in small blocks, such as a contact.
  */
 
-class Chip extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class Chip extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   chipRef = null;
@@ -375,13 +377,14 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Chip['defaultProps'] = {
+export const defaultProps  = Chip.defaultProps = {
   clickable: false,
   component: 'div',
   color: 'default'
-} as PropsX;
+} as CodeProps;
 export const ChipCode: CodeComponentType = Chip as any
 export const ChipStyles: SheetCreatorX = styles as any
 export const ChipCreator: WithStyleCreator = withStyles<Shape>(ChipStyles, ChipCode, {isMui:true, defaultProps});

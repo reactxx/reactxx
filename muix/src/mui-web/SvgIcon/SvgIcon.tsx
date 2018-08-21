@@ -75,9 +75,8 @@ const styles = theme => ({
   }
 });
 
-function SvgIcon(props) {
+const SvgIcon: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     children,
     classes,
     className: classNameProp,
@@ -108,7 +107,7 @@ function SvgIcon(props) {
       {titleAccess ? <title>{titleAccess}</title> : null}
     </Component>
   );
-}
+};
 
 SvgIcon.muiName = "SvgIcon";
 
@@ -121,14 +120,15 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = SvgIcon['defaultProps'] = {
+export const defaultProps  = SvgIcon.defaultProps = {
   color: 'inherit',
   component: 'svg',
   fontSize: 'default',
   viewBox: '0 0 24 24'
-} as PropsX;
+} as CodeProps;
 export const SvgIconCode: CodeComponentType = SvgIcon as any
 export const SvgIconStyles: SheetCreatorX = styles as any
 export const SvgIconCreator: WithStyleCreator = withStyles<Shape>(SvgIconStyles, SvgIconCode, {isMui:true, defaultProps});

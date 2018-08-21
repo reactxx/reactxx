@@ -21,3 +21,5 @@ export const checkSingleResult = (res: Ast.Ast[], allowEmpty: boolean | null = f
 
 export const getNode_callExpression = (ast: Ast.Ast, name: string, allowEmpty: boolean | null = false) => checkSingleResult(Ast.astq().query(ast,
     `// CallExpression [ /Identifier [@name == "${name}"] ]`), allowEmpty)
+
+export const getStaticProp = (root: Ast.Ast, className: string, propName: string) => checkSingleResult(Ast.astq().query(root, `/Program/ExpressionStatement [/AssignmentExpression/MemberExpression [ /Identifier [ @name=="${className}"] && /Identifier [ @name=="${propName}"] ] ]`), true)

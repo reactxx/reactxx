@@ -80,10 +80,12 @@ if (process.env.NODE_ENV !== "production" && !React.createContext) {
  * This component shares many concepts with [react-overlays](https://react-bootstrap.github.io/react-overlays/#modals).
  */
 
-class Modal extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class Modal extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   mountNode = null;
@@ -366,9 +368,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Modal['defaultProps'] = {
+export const defaultProps  = Modal.defaultProps = {
   disableAutoFocus: false,
   disableBackdropClick: false,
   disableEnforceFocus: false,
@@ -380,7 +383,7 @@ export const defaultProps  = Modal['defaultProps'] = {
   // Modals don't open on the server so this won't conflict with concurrent requests.
   manager: new ModalManager(),
   BackdropComponent: Backdrop
-} as PropsX;
+} as CodeProps;
 export const ModalCode: CodeComponentType = Modal as any
 export const ModalStyles: SheetCreatorX = styles as any
 export const ModalCreator: WithStyleCreator = withStyles<Shape>(ModalStyles, ModalCode, {isMui:true, defaultProps});

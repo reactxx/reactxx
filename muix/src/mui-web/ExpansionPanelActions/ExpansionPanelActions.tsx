@@ -34,20 +34,14 @@ const styles = {
   }
 };
 
-function ExpansionPanelActions(props) {
-  const {
-    $system: { theme },
-    children,
-    classes,
-    className,
-    ...other
-  } = props;
+const ExpansionPanelActions: Types.CodeSFCWeb<Shape> = props => {
+  const { children, classes, className, ...other } = props;
   return (
     <div className={classNames(classes.root, className)} {...other}>
       {cloneChildrenWithClassName(children, classes.action)}
     </div>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<ExpansionPanelActionsClassKey>,
@@ -58,9 +52,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = ExpansionPanelActions['defaultProps'] = {} as PropsX;
+export const defaultProps  = ExpansionPanelActions.defaultProps = {} as CodeProps;
 export const ExpansionPanelActionsCode: CodeComponentType = ExpansionPanelActions as any
 export const ExpansionPanelActionsStyles: SheetCreatorX = styles as any
 export const ExpansionPanelActionsCreator: WithStyleCreator = withStyles<Shape>(ExpansionPanelActionsStyles, ExpansionPanelActionsCode, {isMui:true, defaultProps});

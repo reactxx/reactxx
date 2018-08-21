@@ -23,20 +23,14 @@ const styles = {
   }
 };
 
-function ListItemSecondaryAction(props) {
-  const {
-    $system: { theme },
-    children,
-    classes,
-    className,
-    ...other
-  } = props;
+const ListItemSecondaryAction: Types.CodeSFCWeb<Shape> = props => {
+  const { children, classes, className, ...other } = props;
   return (
     <div className={classNames(classes.root, className)} {...other}>
       {children}
     </div>
   );
-}
+};
 
 ListItemSecondaryAction.muiName = "ListItemSecondaryAction";
 
@@ -49,9 +43,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = ListItemSecondaryAction['defaultProps'] = {} as PropsX;
+export const defaultProps  = ListItemSecondaryAction.defaultProps = {} as CodeProps;
 export const ListItemSecondaryActionCode: CodeComponentType = ListItemSecondaryAction as any
 export const ListItemSecondaryActionStyles: SheetCreatorX = styles as any
 export const ListItemSecondaryActionCreator: WithStyleCreator = withStyles<Shape>(ListItemSecondaryActionStyles, ListItemSecondaryActionCode, {isMui:true, defaultProps});

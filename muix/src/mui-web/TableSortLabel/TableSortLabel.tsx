@@ -78,16 +78,8 @@ const styles = theme => ({
  * A button based label for placing inside `TableCell` for column sorting.
  */
 
-function TableSortLabel(props) {
-  const {
-    $system: { theme },
-    active,
-    classes,
-    className,
-    children,
-    direction,
-    ...other
-  } = props;
+const TableSortLabel: Types.CodeSFCWeb<Shape> = props => {
+  const { active, classes, className, children, direction, ...other } = props;
   return (
     <ButtonBase
       className={classNames(classes.root, active && classes.active, className)}
@@ -104,7 +96,7 @@ function TableSortLabel(props) {
       />
     </ButtonBase>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<TableSortLabelClassKey>,
@@ -115,12 +107,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = TableSortLabel['defaultProps'] = {
+export const defaultProps  = TableSortLabel.defaultProps = {
   active: false,
   direction: 'desc'
-} as PropsX;
+} as CodeProps;
 export const TableSortLabelCode: CodeComponentType = TableSortLabel as any
 export const TableSortLabelStyles: SheetCreatorX = styles as any
 export const TableSortLabelCreator: WithStyleCreator = withStyles<Shape>(TableSortLabelStyles, TableSortLabelCode, {isMui:true, defaultProps});

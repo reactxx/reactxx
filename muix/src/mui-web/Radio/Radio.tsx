@@ -63,13 +63,8 @@ const styles = theme => ({
   }
 });
 
-function Radio(props) {
-  const {
-    $system: { theme },
-    classes,
-    color,
-    ...other
-  } = props;
+const Radio: Types.CodeSFCWeb<Shape> = props => {
+  const { classes, color, ...other } = props;
   return (
     <SwitchBase
       type="radio"
@@ -83,7 +78,7 @@ function Radio(props) {
       {...other}
     />
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<RadioClassKey>,
@@ -94,11 +89,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Radio['defaultProps'] = {
+export const defaultProps  = Radio.defaultProps = {
   color: 'secondary'
-} as PropsX;
+} as CodeProps;
 export const RadioCode: CodeComponentType = Radio as any
 export const RadioStyles: SheetCreatorX = styles as any
 export const RadioCreator: WithStyleCreator = withStyles<Shape>(RadioStyles, RadioCode, {isMui:true, defaultProps});

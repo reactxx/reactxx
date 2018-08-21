@@ -23,7 +23,7 @@ import ScrollbarSize from "./ScrollbarSize";
 import TabIndicator from "./TabIndicator";
 import TabScrollButton from "./TabScrollButton";
 import { StandardProps } from "..";
-import { ButtonBaseProps } from "../ButtonBase/ButtonBase";
+import { ButtonBaseProps } from "../ButtonBase/ButtonBase/ButtonBase";
 import { TabIndicatorProps } from "./TabIndicator";
 export interface TabsProps
   extends StandardProps<
@@ -111,10 +111,12 @@ const styles = theme => ({
   indicator: {}
 });
 
-class Tabs extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class Tabs extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   tabs = null;
@@ -177,7 +179,7 @@ class Tabs extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
       ScrollButtonComponent,
       scrollButtons
     } = this.props;
-    const conditionalElements = {};
+    const conditionalElements: any = {};
     conditionalElements.scrollbarSizeListener = scrollable ? (
       <ScrollbarSize
         onLoad={this.handleScrollbarSizeChange}
@@ -469,6 +471,7 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
 

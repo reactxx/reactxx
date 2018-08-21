@@ -303,9 +303,8 @@ const styles = theme => ({
   }
 });
 
-function Button(props) {
+const Button: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     children,
     classes,
     className: classNameProp,
@@ -369,7 +368,7 @@ function Button(props) {
       <span className={classes.label}>{children}</span>
     </ButtonBase>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<ButtonClassKey>,
@@ -380,9 +379,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Button['defaultProps'] = {
+export const defaultProps  = Button.defaultProps = {
   color: 'default',
   component: 'button',
   disabled: false,
@@ -392,7 +392,7 @@ export const defaultProps  = Button['defaultProps'] = {
   size: 'medium',
   type: 'button',
   variant: 'text'
-} as PropsX;
+} as CodeProps;
 export const ButtonCode: CodeComponentType = Button as any
 export const ButtonStyles: SheetCreatorX = styles as any
 export const ButtonCreator: WithStyleCreator = withStyles<Shape>(ButtonStyles, ButtonCode, {isMui:true, defaultProps});

@@ -42,16 +42,8 @@ const styles = theme => ({
   selected: {}
 });
 
-function MenuItem(props) {
-  const {
-    $system: { theme },
-    classes,
-    className,
-    component,
-    selected,
-    role,
-    ...other
-  } = props;
+const MenuItem: Types.CodeSFCWeb<Shape> = props => {
+  const { classes, className, component, selected, role, ...other } = props;
   return (
     <ListItem
       button
@@ -66,7 +58,7 @@ function MenuItem(props) {
       {...other}
     />
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<MenuItemClassKey>,
@@ -77,13 +69,14 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = MenuItem['defaultProps'] = {
+export const defaultProps  = MenuItem.defaultProps = {
   component: 'li',
   role: 'menuitem',
   selected: false
-} as PropsX;
+} as CodeProps;
 export const MenuItemCode: CodeComponentType = MenuItem as any
 export const MenuItemStyles: SheetCreatorX = styles as any
 export const MenuItemCreator: WithStyleCreator = withStyles<Shape>(MenuItemStyles, MenuItemCode, {isMui:true, defaultProps});

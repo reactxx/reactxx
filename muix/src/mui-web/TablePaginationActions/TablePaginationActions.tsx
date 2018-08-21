@@ -12,7 +12,7 @@ import KeyboardArrowLeft from "../internal/svg-icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "../internal/svg-icons/KeyboardArrowRight";
 import IconButton from "../IconButton/IconButton";
 import { StandardProps } from "..";
-import { IconButtonProps } from "../IconButton/IconButton";
+import { IconButtonProps } from "../IconButton/IconButton/IconButton";
 export interface TablePaginationActionsProps
   extends React.HTMLAttributes<HTMLDivElement> {
   backIconButtonProps?: Partial<IconButtonProps>;
@@ -29,13 +29,12 @@ export interface TablePaginationActionsProps
  * @ignore - internal component.
  */
 
-class TablePaginationActions extends React.Component<
-  Partial<Types.CodeProps<Shape>>,
-  any
-> {
+class TablePaginationActions extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   handleBackButtonClick = event => {
@@ -94,9 +93,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = TablePaginationActions['defaultProps'] = {} as PropsX;
+export const defaultProps  = TablePaginationActions.defaultProps = {} as CodeProps;
 export const TablePaginationActionsCode: CodeComponentType = TablePaginationActions as any
 export const TablePaginationActionsStyles: SheetCreatorX = styles as any
 export const TablePaginationActionsCreator: WithStyleCreator = withStyles<Shape>(TablePaginationActionsStyles, TablePaginationActionsCode, {isMui:true, defaultProps});

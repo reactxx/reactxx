@@ -126,10 +126,12 @@ const styles = theme => ({
   }
 });
 
-class Tooltip extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class Tooltip extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   childrenRef = null;
@@ -422,9 +424,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Tooltip['defaultProps'] = {
+export const defaultProps  = Tooltip.defaultProps = {
   disableFocusListener: false,
   disableHoverListener: false,
   disableTouchListener: false,
@@ -434,7 +437,7 @@ export const defaultProps  = Tooltip['defaultProps'] = {
   leaveTouchDelay: 1500,
   placement: 'bottom',
   TransitionComponent: Grow
-} as PropsX;
+} as CodeProps;
 export const TooltipCode: CodeComponentType = Tooltip as any
 export const TooltipStyles: SheetCreatorX = styles as any
 export const TooltipCreator: WithStyleCreator = withStyles<Shape>(TooltipStyles, TooltipCode, {isMui:true, defaultProps});

@@ -45,13 +45,12 @@ const styles = theme => ({
  * Kickstart an elegant, consistent, and simple baseline to build upon.
  */
 
-class CssBaseline extends React.Component<
-  Partial<Types.CodeProps<Shape>>,
-  any
-> {
+class CssBaseline extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
 
@@ -71,11 +70,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = CssBaseline['defaultProps'] = {
+export const defaultProps  = CssBaseline.defaultProps = {
   children: null
-} as PropsX;
+} as CodeProps;
 export const CssBaselineCode: CodeComponentType = CssBaseline as any
 export const CssBaselineStyles: SheetCreatorX = styles as any
 export const CssBaselineCreator: WithStyleCreator = withStyles<Shape>(CssBaselineStyles, CssBaselineCode, {isMui:true, defaultProps});

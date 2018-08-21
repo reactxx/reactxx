@@ -37,9 +37,8 @@ const styles = {
   }
 };
 
-function DialogActions(props) {
+const DialogActions: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     disableActionSpacing,
     children,
     classes,
@@ -53,7 +52,7 @@ function DialogActions(props) {
         : cloneChildrenWithClassName(children, classes.action)}
     </div>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<DialogActionsClassKey>,
@@ -64,11 +63,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = DialogActions['defaultProps'] = {
+export const defaultProps  = DialogActions.defaultProps = {
   disableActionSpacing: false
-} as PropsX;
+} as CodeProps;
 export const DialogActionsCode: CodeComponentType = DialogActions as any
 export const DialogActionsStyles: SheetCreatorX = styles as any
 export const DialogActionsCreator: WithStyleCreator = withStyles<Shape>(DialogActionsStyles, DialogActionsCode, {isMui:true, defaultProps});

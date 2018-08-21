@@ -81,10 +81,12 @@ function getAnchorEl(anchorEl) {
  * Poppers rely on the 3rd party library [Popper.js](https://github.com/FezVrasta/popper.js) for positioning.
  */
 
-class Popper extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class Popper extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   popper = null;
@@ -265,13 +267,14 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Popper['defaultProps'] = {
+export const defaultProps  = Popper.defaultProps = {
   disablePortal: false,
   placement: 'bottom',
   transition: false
-} as PropsX;
+} as CodeProps;
 export const PopperCode: CodeComponentType = Popper as any
 export const PopperStyles: SheetCreatorX = styles as any
 export const PopperCreator: WithStyleCreator = withStyles<Shape>(PopperStyles, PopperCode, {isMui:true, defaultProps});

@@ -71,10 +71,12 @@ const styles = {
  * @ignore - internal component.
  */
 
-class SwitchBase extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class SwitchBase extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   input = null;
@@ -215,11 +217,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = SwitchBase['defaultProps'] = {
+export const defaultProps  = SwitchBase.defaultProps = {
   type: 'checkbox'
-} as PropsX;
+} as CodeProps;
 export const SwitchBaseCode: CodeComponentType = SwitchBase as any
 export const SwitchBaseStyles: SheetCreatorX = styles as any
 export const SwitchBaseCreator: WithStyleCreator = withStyles<Shape>(SwitchBaseStyles, SwitchBaseCode, {isMui:true, defaultProps});

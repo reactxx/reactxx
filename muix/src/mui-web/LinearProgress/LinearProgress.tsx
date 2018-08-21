@@ -217,9 +217,8 @@ const styles = theme => ({
  * attribute to `true` on that region until it has finished loading.
  */
 
-function LinearProgress(props) {
+const LinearProgress: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     classes,
     className: classNameProp,
     color,
@@ -301,7 +300,7 @@ function LinearProgress(props) {
       )}
     </div>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<LinearProgressClassKey>,
@@ -312,12 +311,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = LinearProgress['defaultProps'] = {
+export const defaultProps  = LinearProgress.defaultProps = {
   color: 'primary',
   variant: 'indeterminate'
-} as PropsX;
+} as CodeProps;
 export const LinearProgressCode: CodeComponentType = LinearProgress as any
 export const LinearProgressStyles: SheetCreatorX = styles as any
 export const LinearProgressCreator: WithStyleCreator = withStyles<Shape>(LinearProgressStyles, LinearProgressCode, {isMui:true, defaultProps});

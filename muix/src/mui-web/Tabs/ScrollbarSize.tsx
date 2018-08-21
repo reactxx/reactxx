@@ -23,16 +23,18 @@ const styles = {
  * It has been moved into the core in order to minimize the bundle size.
  */
 
-class ScrollbarSize extends React.Component<
-  {
-    children;
-    [p: string]: any;
-  },
-  any
-> {
+interface ScrollbarSizeProps {
+  children?;
+  [p: string]: any;
+}
+export type CodeProps = ScrollbarSizeProps;
+
+class ScrollbarSize extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   handleResize = debounce(() => {

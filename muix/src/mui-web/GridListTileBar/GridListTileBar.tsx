@@ -104,9 +104,8 @@ const styles = theme => ({
   }
 });
 
-function GridListTileBar(props) {
+const GridListTileBar: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     actionIcon,
     actionPosition,
     classes,
@@ -148,7 +147,7 @@ function GridListTileBar(props) {
       ) : null}
     </div>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<GridListTileBarClassKey>,
@@ -159,12 +158,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = GridListTileBar['defaultProps'] = {
+export const defaultProps  = GridListTileBar.defaultProps = {
   actionPosition: 'right',
   titlePosition: 'bottom'
-} as PropsX;
+} as CodeProps;
 export const GridListTileBarCode: CodeComponentType = GridListTileBar as any
 export const GridListTileBarStyles: SheetCreatorX = styles as any
 export const GridListTileBarCreator: WithStyleCreator = withStyles<Shape>(GridListTileBarStyles, GridListTileBarCode, {isMui:true, defaultProps});

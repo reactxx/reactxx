@@ -60,9 +60,8 @@ const styles = theme => ({
   }
 });
 
-function Avatar(props) {
+const Avatar: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     alt,
     children: childrenProp,
     childrenClassName: childrenClassNameProp,
@@ -116,7 +115,7 @@ function Avatar(props) {
       {children}
     </Component>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<AvatarClassKey>,
@@ -127,11 +126,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Avatar['defaultProps'] = {
+export const defaultProps  = Avatar.defaultProps = {
   component: 'div'
-} as PropsX;
+} as CodeProps;
 export const AvatarCode: CodeComponentType = Avatar as any
 export const AvatarStyles: SheetCreatorX = styles as any
 export const AvatarCreator: WithStyleCreator = withStyles<Shape>(AvatarStyles, AvatarCode, {isMui:true, defaultProps});

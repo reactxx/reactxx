@@ -102,13 +102,12 @@ const styles = theme => {
   };
 };
 
-class ExpansionPanelSummary extends React.Component<
-  Partial<Types.CodeProps<Shape>>,
-  any
-> {
+class ExpansionPanelSummary extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   state = {
@@ -205,11 +204,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = ExpansionPanelSummary['defaultProps'] = {
+export const defaultProps  = ExpansionPanelSummary.defaultProps = {
   disabled: false
-} as PropsX;
+} as CodeProps;
 export const ExpansionPanelSummaryCode: CodeComponentType = ExpansionPanelSummary as any
 export const ExpansionPanelSummaryStyles: SheetCreatorX = styles as any
 export const ExpansionPanelSummaryCreator: WithStyleCreator = withStyles<Shape>(ExpansionPanelSummaryStyles, ExpansionPanelSummaryCode, {isMui:true, defaultProps});

@@ -13,7 +13,7 @@ import KeyboardArrowLeft from "../internal/svg-icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "../internal/svg-icons/KeyboardArrowRight";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import { StandardProps } from "..";
-import { ButtonBaseProps } from "../ButtonBase/ButtonBase";
+import { ButtonBaseProps } from "../ButtonBase/ButtonBase/ButtonBase";
 export interface TabScrollButtonProps
   extends StandardProps<ButtonBaseProps, TabScrollButtonClassKey> {
   direction?: "left" | "right";
@@ -31,9 +31,8 @@ const styles = {
  * @ignore - internal component.
  */
 
-function TabScrollButton(props) {
+const TabScrollButton: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     classes,
     className: classNameProp,
     direction,
@@ -57,7 +56,7 @@ function TabScrollButton(props) {
       {direction === "left" ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
     </ButtonBase>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<TabScrollButtonClassKey>,
@@ -68,11 +67,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = TabScrollButton['defaultProps'] = {
+export const defaultProps  = TabScrollButton.defaultProps = {
   visible: true
-} as PropsX;
+} as CodeProps;
 export const TabScrollButtonCode: CodeComponentType = TabScrollButton as any
 export const TabScrollButtonStyles: SheetCreatorX = styles as any
 export const TabScrollButtonCreator: WithStyleCreator = withStyles<Shape>(TabScrollButtonStyles, TabScrollButtonCode, {isMui:true, defaultProps});

@@ -14,7 +14,7 @@ import ArrowDropDownIcon from "../internal/svg-icons/ArrowDropDown";
 import Input from "../Input/Input";
 import { StandardProps } from "..";
 import { InputProps } from "../Input/Input";
-import { MenuProps } from "../Menu";
+import { MenuProps } from "../Menu/Menu";
 import { NativeSelectInputProps } from "./NativeSelectInput";
 export interface NativeSelectProps
   extends StandardProps<InputProps, NativeSelectClassKey, "value" | "onChange">,
@@ -102,9 +102,8 @@ const styles = theme => ({
  * An alternative to `<Select native />` with a much smaller dependency graph.
  */
 
-function NativeSelect(props) {
+const NativeSelect: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     children,
     classes,
     IconComponent,
@@ -127,7 +126,7 @@ function NativeSelect(props) {
     },
     ...other
   });
-}
+};
 
 NativeSelect.muiName = "NativeSelect";
 
@@ -140,12 +139,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = NativeSelect['defaultProps'] = {
+export const defaultProps  = NativeSelect.defaultProps = {
   IconComponent: ArrowDropDownIcon,
   input: <Input />
-} as PropsX;
+} as CodeProps;
 export const NativeSelectCode: CodeComponentType = NativeSelect as any
 export const NativeSelectStyles: SheetCreatorX = styles as any
 export const NativeSelectCreator: WithStyleCreator = withStyles<Shape>(NativeSelectStyles, NativeSelectCode, {isMui:true, defaultProps});

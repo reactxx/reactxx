@@ -25,13 +25,12 @@ const styles = {
   }
 };
 
-class TableFooter extends React.Component<
-  Partial<Types.CodeProps<Shape>>,
-  any
-> {
+class TableFooter extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
 
@@ -71,11 +70,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = TableFooter['defaultProps'] = {
+export const defaultProps  = TableFooter.defaultProps = {
   component: 'tfoot'
-} as PropsX;
+} as CodeProps;
 export const TableFooterCode: CodeComponentType = TableFooter as any
 export const TableFooterStyles: SheetCreatorX = styles as any
 export const TableFooterCreator: WithStyleCreator = withStyles<Shape>(TableFooterStyles, TableFooterCode, {isMui:true, defaultProps});

@@ -28,14 +28,8 @@ const styles = theme => ({
  * A simple wrapper to apply `List` styles to an `Icon` or `SvgIcon`.
  */
 
-function ListItemIcon(props) {
-  const {
-    $system: { theme },
-    children,
-    classes,
-    className: classNameProp,
-    ...other
-  } = props;
+const ListItemIcon: Types.CodeSFCWeb<Shape> = props => {
+  const { children, classes, className: classNameProp, ...other } = props;
   return React.cloneElement(children, {
     className: classNames(
       classes.root,
@@ -44,7 +38,7 @@ function ListItemIcon(props) {
     ),
     ...other
   });
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<ListItemIconClassKey>,
@@ -55,9 +49,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = ListItemIcon['defaultProps'] = {} as PropsX;
+export const defaultProps  = ListItemIcon.defaultProps = {} as CodeProps;
 export const ListItemIconCode: CodeComponentType = ListItemIcon as any
 export const ListItemIconStyles: SheetCreatorX = styles as any
 export const ListItemIconCreator: WithStyleCreator = withStyles<Shape>(ListItemIconStyles, ListItemIconCode, {isMui:true, defaultProps});

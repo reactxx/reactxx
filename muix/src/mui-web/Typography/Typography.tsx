@@ -155,9 +155,8 @@ const styles = theme => ({
   }
 });
 
-function Typography(props) {
+const Typography: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     align,
     classes,
     className: classNameProp,
@@ -183,7 +182,7 @@ function Typography(props) {
   const Component =
     componentProp || (paragraph ? "p" : headlineMapping[variant]) || "span";
   return <Component className={className} {...other} />;
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<TypographyClassKey>,
@@ -194,9 +193,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Typography['defaultProps'] = {
+export const defaultProps  = Typography.defaultProps = {
   align: 'inherit',
   color: 'default',
   gutterBottom: false,
@@ -214,7 +214,7 @@ export const defaultProps  = Typography['defaultProps'] = {
   noWrap: false,
   paragraph: false,
   variant: 'body1'
-} as PropsX;
+} as CodeProps;
 export const TypographyCode: CodeComponentType = Typography as any
 export const TypographyStyles: SheetCreatorX = styles as any
 export const TypographyCreator: WithStyleCreator = withStyles<Shape>(TypographyStyles, TypographyCode, {isMui:true, defaultProps});

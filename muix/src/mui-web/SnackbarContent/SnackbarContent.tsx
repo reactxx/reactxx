@@ -60,15 +60,8 @@ const styles = theme => {
   };
 };
 
-function SnackbarContent(props) {
-  const {
-    $system: { theme },
-    action,
-    classes,
-    className,
-    message,
-    ...other
-  } = props;
+const SnackbarContent: Types.CodeSFCWeb<Shape> = props => {
+  const { action, classes, className, message, ...other } = props;
   return (
     <Paper
       component={Typography}
@@ -85,7 +78,7 @@ function SnackbarContent(props) {
       {action ? <div className={classes.action}>{action}</div> : null}
     </Paper>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<SnackbarContentClassKey>,
@@ -96,9 +89,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = SnackbarContent['defaultProps'] = {} as PropsX;
+export const defaultProps  = SnackbarContent.defaultProps = {} as CodeProps;
 export const SnackbarContentCode: CodeComponentType = SnackbarContent as any
 export const SnackbarContentStyles: SheetCreatorX = styles as any
 export const SnackbarContentCreator: WithStyleCreator = withStyles<Shape>(SnackbarContentStyles, SnackbarContentCode, {isMui:true, defaultProps});

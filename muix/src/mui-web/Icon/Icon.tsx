@@ -67,16 +67,8 @@ const styles = theme => ({
   }
 });
 
-function Icon(props) {
-  const {
-    $system: { theme },
-    children,
-    classes,
-    className,
-    color,
-    fontSize,
-    ...other
-  } = props;
+const Icon: Types.CodeSFCWeb<Shape> = props => {
+  const { children, classes, className, color, fontSize, ...other } = props;
   return (
     <span
       className={classNames(
@@ -92,7 +84,7 @@ function Icon(props) {
       {children}
     </span>
   );
-}
+};
 
 Icon.muiName = "Icon";
 
@@ -105,12 +97,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Icon['defaultProps'] = {
+export const defaultProps  = Icon.defaultProps = {
   color: 'inherit',
   fontSize: 'default'
-} as PropsX;
+} as CodeProps;
 export const IconCode: CodeComponentType = Icon as any
 export const IconStyles: SheetCreatorX = styles as any
 export const IconCreator: WithStyleCreator = withStyles<Shape>(IconStyles, IconCode, {isMui:true, defaultProps});

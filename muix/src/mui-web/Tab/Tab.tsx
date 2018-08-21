@@ -153,10 +153,12 @@ const styles = theme => ({
   }
 });
 
-class Tab extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class Tab extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   label = null;
@@ -276,12 +278,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Tab['defaultProps'] = {
+export const defaultProps  = Tab.defaultProps = {
   disabled: false,
   textColor: 'inherit'
-} as PropsX;
+} as CodeProps;
 export const TabCode: CodeComponentType = Tab as any
 export const TabStyles: SheetCreatorX = styles as any
 export const TabCreator: WithStyleCreator = withStyles<Shape>(TabStyles, TabCode, {isMui:true, defaultProps});

@@ -46,9 +46,8 @@ const styles = {
   }
 };
 
-function Backdrop(props) {
+const Backdrop: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     classes,
     className,
     invisible,
@@ -69,7 +68,7 @@ function Backdrop(props) {
       />
     </Fade>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<BackdropClassKey>,
@@ -80,11 +79,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Backdrop['defaultProps'] = {
+export const defaultProps  = Backdrop.defaultProps = {
   invisible: false
-} as PropsX;
+} as CodeProps;
 export const BackdropCode: CodeComponentType = Backdrop as any
 export const BackdropStyles: SheetCreatorX = styles as any
 export const BackdropCreator: WithStyleCreator = withStyles<Shape>(BackdropStyles, BackdropCode, {isMui:true, defaultProps});

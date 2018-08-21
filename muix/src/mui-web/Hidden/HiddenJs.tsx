@@ -27,7 +27,7 @@ export interface HiddenJsProps {
  * @ignore - internal component.
  */
 
-function HiddenJs(props) {
+const HiddenJs: Types.CodeSFCWeb<Shape> = props => {
   const { children, only, width } = props;
   let visible = true; // `only` check is faster to get out sooner if used.
 
@@ -68,7 +68,7 @@ function HiddenJs(props) {
   }
 
   return children;
-}
+};
 
 HiddenJs.propTypes = {
   /**

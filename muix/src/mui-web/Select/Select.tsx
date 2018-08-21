@@ -11,11 +11,11 @@ import SelectInput from "./SelectInput";
 import mergeClasses from "../styles/mergeClasses";
 import ArrowDropDownIcon from "../internal/svg-icons/ArrowDropDown";
 import Input from "../Input/Input";
-import { styles as nativeSelectStyles } from "../NativeSelect/NativeSelect";
-import NativeSelectInput from "../NativeSelect/NativeSelectInput";
+import { styles as nativeSelectStyles } from "../NativeSelect/NativeSelect/NativeSelect";
+import NativeSelectInput from "../NativeSelect/NativeSelect/NativeSelectInput";
 import { StandardProps } from "..";
 import { InputProps } from "../Input/Input";
-import { MenuProps } from "../Menu";
+import { MenuProps } from "../Menu/Menu";
 import { SelectInputProps } from "./SelectInput";
 export interface SelectProps
   extends StandardProps<InputProps, SelectClassKey, "value" | "onChange">,
@@ -42,7 +42,7 @@ export type SelectClassKey =
   | "icon";
 const styles = nativeSelectStyles;
 
-function Select(props) {
+const Select: Types.CodeSFCWeb<Shape> = props => {
   const {
     autoWidth,
     children,
@@ -96,7 +96,7 @@ function Select(props) {
     },
     ...other
   });
-}
+};
 
 Select.propTypes = {
   /**

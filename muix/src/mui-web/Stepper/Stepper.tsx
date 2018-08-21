@@ -11,7 +11,7 @@ import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
 import { classNames } from "reactxx-basic";
 import Paper from "../Paper/Paper";
-import StepConnector from "../StepConnector";
+import StepConnector from "../StepConnector/StepConnector";
 import { StandardProps } from "..";
 import { PaperProps } from "../Paper/Paper";
 export type Orientation = "horizontal" | "vertical";
@@ -53,9 +53,8 @@ const styles = {
   }
 };
 
-function Stepper(props) {
+const Stepper: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     activeStep,
     alternativeLabel,
     children,
@@ -116,7 +115,7 @@ function Stepper(props) {
       {steps}
     </Paper>
   );
-}
+};
 
 Stepper.muiName = "Stepper";
 
@@ -129,15 +128,16 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Stepper['defaultProps'] = {
+export const defaultProps  = Stepper.defaultProps = {
   activeStep: 0,
   alternativeLabel: false,
   connector: <StepConnector />,
   nonLinear: false,
   orientation: 'horizontal'
-} as PropsX;
+} as CodeProps;
 export const StepperCode: CodeComponentType = Stepper as any
 export const StepperStyles: SheetCreatorX = styles as any
 export const StepperCreator: WithStyleCreator = withStyles<Shape>(StepperStyles, StepperCode, {isMui:true, defaultProps});

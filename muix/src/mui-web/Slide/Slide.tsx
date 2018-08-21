@@ -80,10 +80,12 @@ export function setTranslateValue(props, node) {
  * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
  */
 
-class Slide extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class Slide extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   mounted = false;
@@ -251,15 +253,16 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Slide['defaultProps'] = {
+export const defaultProps  = Slide.defaultProps = {
   direction: 'down',
   timeout: {
     enter: duration.enteringScreen,
     exit: duration.leavingScreen
   }
-} as PropsX;
+} as CodeProps;
 export const SlideCode: CodeComponentType = Slide as any
 export const SlideStyles: SheetCreatorX = styles as any
 export const SlideCreator: WithStyleCreator = withStyles<Shape>(SlideStyles, SlideCode, {isMui:true, defaultProps});

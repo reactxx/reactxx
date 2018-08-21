@@ -10,7 +10,7 @@ import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
 import { classNames } from "reactxx-basic";
 import { StandardProps } from "..";
-import { Orientation } from "../Stepper";
+import { Orientation } from "../Stepper/Stepper";
 export type StepConnectorIcon = React.ReactElement<any> | string | number;
 export interface StepConnectorProps
   extends StandardProps<
@@ -76,9 +76,8 @@ const styles = theme => ({
   }
 });
 
-function StepConnector(props) {
+const StepConnector: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     alternativeLabel,
     className: classNameProp,
     classes,
@@ -101,7 +100,7 @@ function StepConnector(props) {
       <span className={lineClassName} />
     </div>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   
@@ -112,12 +111,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = StepConnector['defaultProps'] = {
+export const defaultProps  = StepConnector.defaultProps = {
   alternativeLabel: false,
   orientation: 'horizontal'
-} as PropsX;
+} as CodeProps;
 export const StepConnectorCode: CodeComponentType = StepConnector as any
 export const StepConnectorStyles: SheetCreatorX = styles as any
 export const StepConnectorCreator: WithStyleCreator = withStyles<Shape>(StepConnectorStyles, StepConnectorCode, {isMui:true, defaultProps});

@@ -50,9 +50,8 @@ const styles = theme => ({
   }
 });
 
-function Divider(props) {
+const Divider: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     absolute,
     classes,
     className: classNameProp,
@@ -69,7 +68,7 @@ function Divider(props) {
     classNameProp
   );
   return <Component className={className} {...other} />;
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<DividerClassKey>,
@@ -80,14 +79,15 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Divider['defaultProps'] = {
+export const defaultProps  = Divider.defaultProps = {
   absolute: false,
   component: 'hr',
   inset: false,
   light: false
-} as PropsX;
+} as CodeProps;
 export const DividerCode: CodeComponentType = Divider as any
 export const DividerStyles: SheetCreatorX = styles as any
 export const DividerCreator: WithStyleCreator = withStyles<Shape>(DividerStyles, DividerCode, {isMui:true, defaultProps});

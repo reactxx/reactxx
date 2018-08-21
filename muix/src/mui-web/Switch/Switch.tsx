@@ -141,14 +141,8 @@ const styles = theme => ({
   }
 });
 
-function Switch(props) {
-  const {
-    $system: { theme },
-    classes,
-    className,
-    color,
-    ...other
-  } = props;
+const Switch: Types.CodeSFCWeb<Shape> = props => {
+  const { classes, className, color, ...other } = props;
   return (
     <span className={classNames(classes.root, className)}>
       <SwitchBase
@@ -169,7 +163,7 @@ function Switch(props) {
       <span className={classes.bar} />
     </span>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<SwitchClassKey>,
@@ -180,11 +174,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Switch['defaultProps'] = {
+export const defaultProps  = Switch.defaultProps = {
   color: 'secondary'
-} as PropsX;
+} as CodeProps;
 export const SwitchCode: CodeComponentType = Switch as any
 export const SwitchStyles: SheetCreatorX = styles as any
 export const SwitchCreator: WithStyleCreator = withStyles<Shape>(SwitchStyles, SwitchCode, {isMui:true, defaultProps});

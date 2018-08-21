@@ -28,15 +28,8 @@ const styles = {
   }
 };
 
-function DialogTitle(props) {
-  const {
-    $system: { theme },
-    children,
-    classes,
-    className,
-    disableTypography,
-    ...other
-  } = props;
+const DialogTitle: Types.CodeSFCWeb<Shape> = props => {
+  const { children, classes, className, disableTypography, ...other } = props;
   return (
     <div className={classNames(classes.root, className)} {...other}>
       {disableTypography ? (
@@ -46,7 +39,7 @@ function DialogTitle(props) {
       )}
     </div>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<DialogTitleClassKey>,
@@ -57,11 +50,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = DialogTitle['defaultProps'] = {
+export const defaultProps  = DialogTitle.defaultProps = {
   disableTypography: false
-} as PropsX;
+} as CodeProps;
 export const DialogTitleCode: CodeComponentType = DialogTitle as any
 export const DialogTitleStyles: SheetCreatorX = styles as any
 export const DialogTitleCreator: WithStyleCreator = withStyles<Shape>(DialogTitleStyles, DialogTitleCode, {isMui:true, defaultProps});

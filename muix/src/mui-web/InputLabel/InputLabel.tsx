@@ -128,11 +128,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = InputLabel['defaultProps'] = {
+export const defaultProps  = InputLabel.defaultProps = {
   disableAnimation: false
-} as PropsX;
+} as CodeProps;
 export const InputLabelCode: CodeComponentType = InputLabel as any
 export const InputLabelStyles: SheetCreatorX = styles as any
 export const InputLabelCreator: WithStyleCreator = withStyles<Shape>(InputLabelStyles, InputLabelCode, {isMui:true, defaultProps});

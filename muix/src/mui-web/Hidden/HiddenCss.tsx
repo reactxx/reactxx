@@ -47,9 +47,8 @@ const styles = theme => {
  * @ignore - internal component.
  */
 
-function HiddenCss(props) {
+const HiddenCss: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     children,
     classes,
     className,
@@ -101,7 +100,7 @@ function HiddenCss(props) {
   }
 
   return <div className={classNames.join(" ")}>{children}</div>;
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   
@@ -112,9 +111,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = HiddenCss['defaultProps'] = {} as PropsX;
+export const defaultProps  = HiddenCss.defaultProps = {} as CodeProps;
 export const HiddenCssCode: CodeComponentType = HiddenCss as any
 export const HiddenCssStyles: SheetCreatorX = styles as any
 export const HiddenCssCreator: WithStyleCreator = withStyles<Shape>(HiddenCssStyles, HiddenCssCode, {isMui:true, defaultProps});

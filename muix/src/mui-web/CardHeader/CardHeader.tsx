@@ -73,9 +73,8 @@ const styles = theme => ({
   subheader: {}
 });
 
-function CardHeader(props) {
+const CardHeader: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     action,
     avatar,
     classes,
@@ -133,7 +132,7 @@ function CardHeader(props) {
       {action && <div className={classes.action}>{action}</div>}
     </Component>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<CardHeaderClassKey>,
@@ -144,12 +143,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = CardHeader['defaultProps'] = {
+export const defaultProps  = CardHeader.defaultProps = {
   component: 'div',
   disableTypography: false
-} as PropsX;
+} as CodeProps;
 export const CardHeaderCode: CodeComponentType = CardHeader as any
 export const CardHeaderStyles: SheetCreatorX = styles as any
 export const CardHeaderCreator: WithStyleCreator = withStyles<Shape>(CardHeaderStyles, CardHeaderCode, {isMui:true, defaultProps});

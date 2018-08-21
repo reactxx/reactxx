@@ -142,9 +142,8 @@ const styles = theme => ({
  * Dialogs are overlaid modal paper based components with a backdrop.
  */
 
-function Dialog(props) {
+const Dialog: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     BackdropProps,
     children,
     classes,
@@ -220,7 +219,7 @@ function Dialog(props) {
       </TransitionComponent>
     </Modal>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<DialogClassKey>,
@@ -231,9 +230,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Dialog['defaultProps'] = {
+export const defaultProps  = Dialog.defaultProps = {
   disableBackdropClick: false,
   disableEscapeKeyDown: false,
   fullScreen: false,
@@ -245,7 +245,7 @@ export const defaultProps  = Dialog['defaultProps'] = {
     enter: duration.enteringScreen,
     exit: duration.leavingScreen
   }
-} as PropsX;
+} as CodeProps;
 export const DialogCode: CodeComponentType = Dialog as any
 export const DialogStyles: SheetCreatorX = styles as any
 export const DialogCreator: WithStyleCreator = withStyles<Shape>(DialogStyles, DialogCode, {isMui:true, defaultProps});

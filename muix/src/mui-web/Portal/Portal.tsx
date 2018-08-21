@@ -30,16 +30,18 @@ function getOwnerDocument(element) {
  * that exists outside the DOM hierarchy of the parent component.
  */
 
-class Portal extends React.Component<
-  {
-    children;
-    [p: string]: any;
-  },
-  any
-> {
+interface PortalProps {
+  children?;
+  [p: string]: any;
+}
+export type CodeProps = PortalProps;
+
+class Portal extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
 

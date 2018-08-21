@@ -24,14 +24,8 @@ const styles = theme => ({
   }
 });
 
-function DialogContentText(props) {
-  const {
-    $system: { theme },
-    children,
-    classes,
-    className,
-    ...other
-  } = props;
+const DialogContentText: Types.CodeSFCWeb<Shape> = props => {
+  const { children, classes, className, ...other } = props;
   return (
     <Typography
       component="p"
@@ -42,7 +36,7 @@ function DialogContentText(props) {
       {children}
     </Typography>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<DialogContentTextClassKey>,
@@ -53,9 +47,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = DialogContentText['defaultProps'] = {} as PropsX;
+export const defaultProps  = DialogContentText.defaultProps = {} as CodeProps;
 export const DialogContentTextCode: CodeComponentType = DialogContentText as any
 export const DialogContentTextStyles: SheetCreatorX = styles as any
 export const DialogContentTextCreator: WithStyleCreator = withStyles<Shape>(DialogContentTextStyles, DialogContentTextCode, {isMui:true, defaultProps});

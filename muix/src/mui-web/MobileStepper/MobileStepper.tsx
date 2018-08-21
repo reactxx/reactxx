@@ -12,11 +12,11 @@ import React from "react";
 import { classNames } from "reactxx-basic";
 import Paper from "../Paper/Paper";
 import { capitalize } from "../utils/helpers";
-import LinearProgress from "../LinearProgress";
+import LinearProgress from "../LinearProgress/LinearProgress";
 import { StandardProps } from "..";
 import { PaperProps } from "../Paper/Paper";
 import { ButtonProps } from "../Button/Button";
-import { LinearProgressProps } from "../LinearProgress";
+import { LinearProgressProps } from "../LinearProgress/LinearProgress";
 export interface MobileStepperProps
   extends StandardProps<PaperProps, MobileStepperClassKey> {
   activeStep?: number;
@@ -95,9 +95,8 @@ const styles = theme => ({
   }
 });
 
-function MobileStepper(props) {
+const MobileStepper: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     activeStep,
     backButton,
     classes,
@@ -140,7 +139,7 @@ function MobileStepper(props) {
       {nextButton}
     </Paper>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<MobileStepperClassKey>,
@@ -151,13 +150,14 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = MobileStepper['defaultProps'] = {
+export const defaultProps  = MobileStepper.defaultProps = {
   activeStep: 0,
   position: 'bottom',
   variant: 'dots'
-} as PropsX;
+} as CodeProps;
 export const MobileStepperCode: CodeComponentType = MobileStepper as any
 export const MobileStepperStyles: SheetCreatorX = styles as any
 export const MobileStepperCreator: WithStyleCreator = withStyles<Shape>(MobileStepperStyles, MobileStepperCode, {isMui:true, defaultProps});

@@ -49,14 +49,8 @@ const styles = theme => ({
  * @ignore - internal component.
  */
 
-function TabIndicator(props) {
-  const {
-    $system: { theme },
-    classes,
-    className,
-    color,
-    ...other
-  } = props;
+const TabIndicator: Types.CodeSFCWeb<Shape> = props => {
+  const { classes, className, color, ...other } = props;
   return (
     <span
       className={classNames(
@@ -67,7 +61,7 @@ function TabIndicator(props) {
       {...other}
     />
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<TabIndicatorClassKey>,
@@ -78,9 +72,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = TabIndicator['defaultProps'] = {} as PropsX;
+export const defaultProps  = TabIndicator.defaultProps = {} as CodeProps;
 export const TabIndicatorCode: CodeComponentType = TabIndicator as any
 export const TabIndicatorStyles: SheetCreatorX = styles as any
 export const TabIndicatorCreator: WithStyleCreator = withStyles<Shape>(TabIndicatorStyles, TabIndicatorCode, {isMui:true, defaultProps});

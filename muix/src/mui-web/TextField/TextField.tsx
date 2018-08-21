@@ -6,6 +6,7 @@
 //----------------------------------------------------------------------------------
 
 // @inheritedComponent FormControl
+import { Types } from "reactxx-basic";
 import React from "react";
 import warning from "warning";
 import Input from "../Input/Input";
@@ -86,7 +87,11 @@ export type TextFieldClassKey = FormControlClassKey;
  * - using the underlying components directly as shown in the demos
  */
 
-function TextField(props) {
+export type Shape = Types.OverwriteShape<{
+  props: TextFieldProps;
+}>;
+
+const TextField: Types.CodeSFCWeb<Shape> = props => {
   const {
     autoComplete,
     autoFocus,
@@ -175,7 +180,7 @@ function TextField(props) {
       )}
     </FormControl>
   );
-}
+};
 
 TextField.defaultProps = {
   required: false,

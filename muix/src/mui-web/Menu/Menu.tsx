@@ -54,10 +54,12 @@ const styles = {
   }
 };
 
-class Menu extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class Menu extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   menuListRef = null;
@@ -174,12 +176,13 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Menu['defaultProps'] = {
+export const defaultProps  = Menu.defaultProps = {
   disableAutoFocusItem: false,
   transitionDuration: 'auto'
-} as PropsX;
+} as CodeProps;
 export const MenuCode: CodeComponentType = Menu as any
 export const MenuStyles: SheetCreatorX = styles as any
 export const MenuCreator: WithStyleCreator = withStyles<Shape>(MenuStyles, MenuCode, {isMui:true, defaultProps});

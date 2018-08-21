@@ -37,15 +37,8 @@ const styles = {
  * For the `Radio`, you should be using the `RadioGroup` component instead of this one.
  */
 
-function FormGroup(props) {
-  const {
-    $system: { theme },
-    classes,
-    className,
-    children,
-    row,
-    ...other
-  } = props;
+const FormGroup: Types.CodeSFCWeb<Shape> = props => {
+  const { classes, className, children, row, ...other } = props;
   return (
     <div
       className={classNames(classes.root, row && classes.row, className)}
@@ -54,7 +47,7 @@ function FormGroup(props) {
       {children}
     </div>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<FormGroupClassKey>,
@@ -65,11 +58,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = FormGroup['defaultProps'] = {
+export const defaultProps  = FormGroup.defaultProps = {
   row: false
-} as PropsX;
+} as CodeProps;
 export const FormGroupCode: CodeComponentType = FormGroup as any
 export const FormGroupStyles: SheetCreatorX = styles as any
 export const FormGroupCreator: WithStyleCreator = withStyles<Shape>(FormGroupStyles, FormGroupCode, {isMui:true, defaultProps});

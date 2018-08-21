@@ -10,14 +10,14 @@ import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent TableCell
 import React from "react";
 import Input from "../Input/Input";
-import MenuItem from "../MenuItem";
+import MenuItem from "../MenuItem/MenuItem";
 import Select from "../Select/Select";
-import TableCell from "../TableCell";
-import Toolbar from "../Toolbar";
+import TableCell from "../TableCell/TableCell";
+import Toolbar from "../Toolbar/Toolbar";
 import Typography from "../Typography/Typography";
-import TablePaginationActions from "../TablePaginationActions";
+import TablePaginationActions from "../TablePaginationActions/TablePaginationActions";
 import { StandardProps } from "..";
-import { TableCellProps } from "../TableCell";
+import { TableCellProps } from "../TableCell/TableCell";
 import { IconButtonProps } from "../IconButton/IconButton";
 import { SelectProps } from "../Select/Select";
 export interface LabelDisplayedRowsArgs {
@@ -127,13 +127,12 @@ const styles = theme => ({
  * A `TableCell` based component for placing inside `TableFooter` for pagination.
  */
 
-class TablePagination extends React.Component<
-  Partial<Types.CodeProps<Shape>>,
-  any
-> {
+class TablePagination extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options; // This logic would be better handled on userside.
   // However, we have it just in case.
@@ -237,9 +236,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = TablePagination['defaultProps'] = {
+export const defaultProps  = TablePagination.defaultProps = {
   ActionsComponent: TablePaginationActions,
   component: TableCell,
   labelDisplayedRows: ({
@@ -249,7 +249,7 @@ export const defaultProps  = TablePagination['defaultProps'] = {
   }) => `${from}-${to} of ${count}`,
   labelRowsPerPage: 'Rows per page:',
   rowsPerPageOptions: [5, 10, 25]
-} as PropsX;
+} as CodeProps;
 export const TablePaginationCode: CodeComponentType = TablePagination as any
 export const TablePaginationStyles: SheetCreatorX = styles as any
 export const TablePaginationCreator: WithStyleCreator = withStyles<Shape>(TablePaginationStyles, TablePaginationCode, {isMui:true, defaultProps});

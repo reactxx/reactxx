@@ -10,11 +10,11 @@ import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
 import { classNames } from "reactxx-basic";
 import Typography from "../Typography/Typography";
-import StepIcon from "../StepIcon";
+import StepIcon from "../StepIcon/StepIcon";
 import { StandardProps } from "..";
-import { Orientation } from "../Stepper";
-import { StepButtonIcon } from "../StepButton";
-import { StepIconProps } from "../StepIcon";
+import { Orientation } from "../Stepper/Stepper";
+import { StepButtonIcon } from "../StepButton/StepButton";
+import { StepIconProps } from "../StepIcon/StepIcon";
 export interface StepLabelProps
   extends StandardProps<
       React.HTMLAttributes<HTMLDivElement>,
@@ -113,9 +113,8 @@ const styles = theme => ({
   }
 });
 
-function StepLabel(props) {
+const StepLabel: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     active,
     alternativeLabel,
     children,
@@ -177,7 +176,7 @@ function StepLabel(props) {
       </span>
     </span>
   );
-}
+};
 
 StepLabel.muiName = "StepLabel";
 
@@ -190,9 +189,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = StepLabel['defaultProps'] = {
+export const defaultProps  = StepLabel.defaultProps = {
   active: false,
   alternativeLabel: false,
   completed: false,
@@ -200,7 +200,7 @@ export const defaultProps  = StepLabel['defaultProps'] = {
   error: false,
   last: false,
   orientation: 'horizontal'
-} as PropsX;
+} as CodeProps;
 export const StepLabelCode: CodeComponentType = StepLabel as any
 export const StepLabelStyles: SheetCreatorX = styles as any
 export const StepLabelCreator: WithStyleCreator = withStyles<Shape>(StepLabelStyles, StepLabelCode, {isMui:true, defaultProps});

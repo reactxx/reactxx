@@ -113,10 +113,12 @@ const styles = theme => ({
   }
 });
 
-class ListItem extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class ListItem extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
 
@@ -222,16 +224,17 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = ListItem['defaultProps'] = {
+export const defaultProps  = ListItem.defaultProps = {
   button: false,
   ContainerComponent: 'li',
   dense: false,
   disabled: false,
   disableGutters: false,
   divider: false
-} as PropsX;
+} as CodeProps;
 export const ListItemCode: CodeComponentType = ListItem as any
 export const ListItemStyles: SheetCreatorX = styles as any
 export const ListItemCreator: WithStyleCreator = withStyles<Shape>(ListItemStyles, ListItemCode, {isMui:true, defaultProps});

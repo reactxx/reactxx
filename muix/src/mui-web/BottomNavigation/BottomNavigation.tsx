@@ -34,9 +34,8 @@ const styles = theme => ({
   }
 });
 
-function BottomNavigation(props) {
+const BottomNavigation: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     children: childrenProp,
     classes,
     className: classNameProp,
@@ -75,7 +74,7 @@ function BottomNavigation(props) {
       {children}
     </div>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<BottomNavigationClassKey>,
@@ -86,11 +85,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = BottomNavigation['defaultProps'] = {
+export const defaultProps  = BottomNavigation.defaultProps = {
   showLabels: false
-} as PropsX;
+} as CodeProps;
 export const BottomNavigationCode: CodeComponentType = BottomNavigation as any
 export const BottomNavigationStyles: SheetCreatorX = styles as any
 export const BottomNavigationCreator: WithStyleCreator = withStyles<Shape>(BottomNavigationStyles, BottomNavigationCode, {isMui:true, defaultProps});

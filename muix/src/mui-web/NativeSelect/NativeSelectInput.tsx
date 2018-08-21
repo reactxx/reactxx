@@ -6,6 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import React from "react";
+import { Types } from "reactxx-basic";
 import { classNames } from "reactxx-basic";
 export interface NativeSelectInputProps {
   disabled?: boolean;
@@ -29,9 +30,12 @@ export interface NativeSelectInputProps {
  * @ignore - internal component.
  */
 
-function NativeSelectInput(props) {
+export type Shape = Types.OverwriteShape<{
+  props: NativeSelectInputProps;
+}>;
+
+const NativeSelectInput: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     children,
     classes,
     className,
@@ -63,7 +67,7 @@ function NativeSelectInput(props) {
       <IconComponent className={classes.icon} />
     </div>
   );
-}
+};
 
 NativeSelectInput.propTypes = {
   /**

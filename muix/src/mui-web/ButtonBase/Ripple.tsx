@@ -12,16 +12,18 @@ import Transition from "react-transition-group/Transition";
  * @ignore - internal component.
  */
 
-class Ripple extends React.Component<
-  {
-    children;
-    [p: string]: any;
-  },
-  any
-> {
+interface RippleProps {
+  children?;
+  [p: string]: any;
+}
+export type CodeProps = RippleProps;
+
+class Ripple extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   state = {

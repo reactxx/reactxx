@@ -39,10 +39,12 @@ const styles = {
  * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
  */
 
-class Grow extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class Grow extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   autoTimeout = null;
@@ -176,11 +178,12 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Grow['defaultProps'] = {
+export const defaultProps  = Grow.defaultProps = {
   timeout: 'auto'
-} as PropsX;
+} as CodeProps;
 export const GrowCode: CodeComponentType = Grow as any
 export const GrowStyles: SheetCreatorX = styles as any
 export const GrowCreator: WithStyleCreator = withStyles<Shape>(GrowStyles, GrowCode, {isMui:true, defaultProps});

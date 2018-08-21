@@ -11,10 +11,10 @@ import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
 import { classNames } from "reactxx-basic";
 import ButtonBase from "../ButtonBase/ButtonBase";
-import StepLabel from "../StepLabel";
+import StepLabel from "../StepLabel/StepLabel";
 import { isMuiElement } from "../utils/reactHelpers";
 import { StandardProps } from "..";
-import { Orientation } from "../Stepper";
+import { Orientation } from "../Stepper/Stepper";
 import { ButtonBaseProps } from "../ButtonBase/ButtonBase";
 export type StepButtonIcon = React.ReactElement<any> | string | number | null;
 export interface StepButtonProps
@@ -52,9 +52,8 @@ const styles = {
   }
 };
 
-function StepButton(props) {
+const StepButton: Types.CodeSFCWeb<Shape> = props => {
   const {
-    $system: { theme },
     active,
     alternativeLabel,
     children,
@@ -94,7 +93,7 @@ function StepButton(props) {
       {child}
     </ButtonBase>
   );
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   
@@ -105,9 +104,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = StepButton['defaultProps'] = {} as PropsX;
+export const defaultProps  = StepButton.defaultProps = {} as CodeProps;
 export const StepButtonCode: CodeComponentType = StepButton as any
 export const StepButtonStyles: SheetCreatorX = styles as any
 export const StepButtonCreator: WithStyleCreator = withStyles<Shape>(StepButtonStyles, StepButtonCode, {isMui:true, defaultProps});

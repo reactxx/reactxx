@@ -9,9 +9,9 @@ import React from "react";
 import { classNames } from "reactxx-basic";
 import keycode from "keycode";
 import warning from "warning";
-import Menu from "../Menu/Menu";
-import { isFilled } from "../Input/Input";
-import { MenuProps } from "../Menu";
+import Menu from "../Menu/Menu/Menu";
+import { isFilled } from "../Input/Input/Input";
+import { MenuProps } from "../Menu/Menu";
 export interface SelectInputProps {
   autoFocus?: boolean;
   autoWidth: boolean;
@@ -48,16 +48,18 @@ export interface SelectInputProps {
  * @ignore - internal component.
  */
 
-class SelectInput extends React.Component<
-  {
-    children;
-    [p: string]: any;
-  },
-  any
-> {
+interface SelectInputProps {
+  children?;
+  [p: string]: any;
+}
+export type CodeProps = SelectInputProps;
+
+class SelectInput extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   ignoreNextBlur = false;

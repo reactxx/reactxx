@@ -28,12 +28,7 @@ function setRef(ref, value) {
   rootRef?: ((instance: T | null) => void) | React.RefObject<T>;
 }
  *
- * class MyComponent extends React.Component<{children, [p:string]: any},any> {
- static propTypes
-  static displayName
- static contextTypes
- static Naked
-  static options
+ * class MyComponent extends React.Component {
  *   constructor() {
  *     super(props);
  *     this.domRef = React.createRef();
@@ -54,7 +49,21 @@ function setRef(ref, value) {
  * ```
  */
 
-class RootRef extends React.Component {
+interface RootRefProps {
+  children?;
+  [p: string]: any;
+}
+export type CodeProps = RootRefProps;
+
+class RootRef extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
+  static propTypes;
+  static displayName;
+  static contextTypes;
+  static childContextTypes;
+  static Naked;
+  static options;
+
   componentDidMount() {
     setRef(this.props.rootRef, ReactDOM.findDOMNode(this));
   }

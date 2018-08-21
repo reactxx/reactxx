@@ -45,10 +45,12 @@ const styles = {
   }
 };
 
-class List extends React.Component<Partial<Types.CodeProps<Shape>>, any> {
+class List extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
 
@@ -99,13 +101,14 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = List['defaultProps'] = {
+export const defaultProps  = List.defaultProps = {
   component: 'ul',
   dense: false,
   disablePadding: false
-} as PropsX;
+} as CodeProps;
 export const ListCode: CodeComponentType = List as any
 export const ListStyles: SheetCreatorX = styles as any
 export const ListCreator: WithStyleCreator = withStyles<Shape>(ListStyles, ListCode, {isMui:true, defaultProps});

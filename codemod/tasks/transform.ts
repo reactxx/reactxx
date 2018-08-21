@@ -8,6 +8,8 @@ import * as Queries from '../utils/queries'
 import { gridAst } from './ast-comp/Grid'
 import { touchRippleAst } from './ast-comp/TouchRipple'
 
+import { removePropTypes } from './ast/removePropTypes'
+import { adjustImports } from './code/adjustImports'
 
 export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) => {
 
@@ -39,6 +41,8 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
             break
         case '':
             code = code.replace(``, ``)
+            break
+        case 'TextField/TextField':
             break
         case 'Tooltip/Tooltip':
             code = code.replace(`=== 'button'`, `=== 'button' as any`)
@@ -84,10 +88,28 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
             break
     }
 
+    if (sfcWithProp[info.name]) {
+        code = code.replace(`\nimport`, `import {Types} from 'reactxx-basic'\nimport`)
+        code = code.replace(`\nfunction ${info.name}`,
+            `\nexport type Shape = Types.OverwriteShape<{\n  props: ${info.name}Props\n}>;\nfunction ${info.name}`)
+    }
+    if (componentNoProp[info.name]) {
+        code = code.replace(`\nclass ${info.name}`,
+            `\ninterface ${info.name}Props { children?; [p:string]: any }\nexport type CodeProps = ${info.name}Props\nclass ${info.name}`)
+    }
+
     code = code.replace(/options\s*=\s*{}/, `options: any = {}`)
     code = code.replace(`import classNames from 'classnames';`, `import { classNames } from 'reactxx-basic';`)
-    const compProps = info.withStylesOrTheme ? 'Partial<Types.CodeProps<Shape>>' : '{children, [p:string]: any}'
-    code = code.replace(`extends React.Component {`, `extends React.Component<${compProps},any> {\n static propTypes\n  static displayName\n static contextTypes\n static Naked\n  static options`)
+    code = code.replace(`class ${info.name} extends React.Component {`,
+        `class ${info.name} extends React.Component<CodeProps,any> {
+  static defaultProps: CodeProps
+  static propTypes
+  static displayName
+  static contextTypes
+  static childContextTypes
+  static Naked
+  static options`)
+    code = code.replace(`\nfunction ${info.name}(props) {`, `const ${info.name}: Types.CodeSFCWeb<Shape> = (props) => {`)
     code = code.replace(`  state = {};`, `  state: any = {};`)
     code = code.replace(`super();`, `super(props);`)
     code = code.replace(`import withTheme from '../styles/withTheme';`, ``)
@@ -119,6 +141,8 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
     }
 
     //********** AFTER INSERTING TS DEFS
+    code = adjustImports(code)
+
     switch (info.path) {
         case 'styles/index':
             code = code.replace(`export { default as MuiThemeProvider } from './MuiThemeProvider';`, ``)
@@ -186,15 +210,12 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
             } as Ast.MUISourceInfo))
             break
         case 'TextField/TextField':
-            Tasks.withStylesTaskDefaultCreator()(ast, Object.assign({}, info, {
-                adjustThemeProperties: ['moveTabsScroll', 'scrollSelectedIntoView', 'getConditionalElements', 'updateScrollButtonState'],
-                adjustThemeMethods: ['updateIndicatorState']
-            } as Ast.MUISourceInfo))
+            removePropTypes(ast, info)
             break
         default:
             if (info.withStylesOrTheme) Tasks.withStylesTaskDefaultCreator()(ast, info)
             //else if (info.withTheme) Tasks.withThemeTaskDefaultCreator()(ast, info)
-            else Tasks.otherTaskDefaultCreator()(ast, info)
+            //else Tasks.otherTaskDefaultCreator()(ast, info)
             break
     }
     code = Parser.generateFileContent(ast)
@@ -229,9 +250,10 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-${info.defaultPropsStr ? `export const defaultProps  = ${info.name}['defaultProps'] = ${info.defaultPropsStr} as PropsX;` : ''}
+${info.defaultPropsStr ? `export const defaultProps  = ${info.name}.defaultProps = ${info.defaultPropsStr} as CodeProps;` : ''}
 export const ${info.name}Code: CodeComponentType = ${info.name} as any
 export const ${info.name}Styles: SheetCreatorX = styles as any
 export const ${info.name}Creator: WithStyleCreator = withStyles<Shape>(${info.name}Styles, ${info.name}Code, {isMui:true, defaultProps});
@@ -253,3 +275,20 @@ const noKey = {
     'HiddenCss': true,
 }
 
+const sfcWithProp = {
+    'Hidden': true,
+    'TextField': true,
+    'NativeSelectInput': true,
+}
+
+const componentNoProp = {
+    'ScrollbarSize': true,
+    'SelectInput': true,
+    'RadioGroup': true,
+    'NoSsr': true,
+    'MenuList': true,
+    'Portal': true,
+    'RootRef': true,
+    'ClickAwayListener': true,
+    'Ripple': true,
+}

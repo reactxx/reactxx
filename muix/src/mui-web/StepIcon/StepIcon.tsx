@@ -11,7 +11,7 @@ import React from "react";
 import { classNames } from "reactxx-basic";
 import CheckCircle from "../internal/svg-icons/CheckCircle";
 import Warning from "../internal/svg-icons/Warning";
-import SvgIcon from "../SvgIcon";
+import SvgIcon from "../SvgIcon/SvgIcon";
 import { StandardProps } from "..";
 export interface StepIconProps
   extends StandardProps<
@@ -63,15 +63,8 @@ const styles = theme => ({
   error: {}
 });
 
-function StepIcon(props) {
-  const {
-    $system: { theme },
-    completed,
-    icon,
-    active,
-    error,
-    classes
-  } = props;
+const StepIcon: Types.CodeSFCWeb<Shape> = props => {
+  const { completed, icon, active, error, classes } = props;
 
   if (typeof icon === "number" || typeof icon === "string") {
     if (error) {
@@ -95,7 +88,7 @@ function StepIcon(props) {
   }
 
   return icon;
-}
+};
 
 export type Shape = Types.OverwriteShape<{
   
@@ -106,13 +99,14 @@ export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvide
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
 export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = StepIcon['defaultProps'] = {
+export const defaultProps  = StepIcon.defaultProps = {
   active: false,
   completed: false,
   error: false
-} as PropsX;
+} as CodeProps;
 export const StepIconCode: CodeComponentType = StepIcon as any
 export const StepIconStyles: SheetCreatorX = styles as any
 export const StepIconCreator: WithStyleCreator = withStyles<Shape>(StepIconStyles, StepIconCode, {isMui:true, defaultProps});

@@ -19,17 +19,18 @@ export interface RadioGroupProps
   value?: string;
 }
 export type RadioGroupClassKey = FormGroupClassKey;
+interface RadioGroupProps {
+  children?;
+  [p: string]: any;
+}
+export type CodeProps = RadioGroupProps;
 
-class RadioGroup extends React.Component<
-  {
-    children;
-    [p: string]: any;
-  },
-  any
-> {
+class RadioGroup extends React.Component<CodeProps, any> {
+  static defaultProps: CodeProps;
   static propTypes;
   static displayName;
   static contextTypes;
+  static childContextTypes;
   static Naked;
   static options;
   radios = [];
