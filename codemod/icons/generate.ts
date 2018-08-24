@@ -2,6 +2,7 @@ import * as map from './map.json'
 import * as Case from 'change-case'
 import * as Config from '../utils/config'
 import * as fsExtra from 'fs-extra'
+import * as tsconfig from './icons-project-tsconfig.json'
 
 export const generate = () => {
     fsExtra.emptyDirSync(Config.icons)
@@ -18,6 +19,8 @@ export const generate = () => {
     }
     const metaCode = 'export const meta = ' + JSON.stringify(map, null, 2)
     fsExtra.outputFileSync(Config.icons + 'meta.ts', metaCode, { encoding: 'utf8' })
+    fsExtra.outputFileSync(Config.icons + 'tsconfig.json', JSON.stringify(tsconfig, null, 2), { encoding: 'utf8' })
+
     //FSExtra.outputFileSync(Config.icons + 'native/meta.ts', metaCode, { encoding: 'utf8' })
     for (const p in internals) {
         const dest = Config.muix_WebSources + 'internal/svg-icons/' + p + '.tsx'
