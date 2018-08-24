@@ -160,6 +160,7 @@ class Tab extends React.Component<CodeProps, any> {
   static displayName;
   static contextTypes;
   static childContextTypes;
+  labelRef;
   static options;
   label = null;
   state: any = {
@@ -271,7 +272,7 @@ class Tab extends React.Component<CodeProps, any> {
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<TabClassKey>,
-  props: TabProps,
+  props: TabProps & { indicator?; },
   theme: Theme
 }>
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

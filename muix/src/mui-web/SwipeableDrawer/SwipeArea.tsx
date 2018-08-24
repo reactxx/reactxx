@@ -59,7 +59,10 @@ const SwipeArea: Types.CodeSFCWeb<Shape> = props => {
   );
 };
 
-export interface SwipeAreaProps {}
+export interface SwipeAreaProps {
+  anchor?;
+  width?;
+}
 
 export type Shape = Types.OverwriteShape<{
   

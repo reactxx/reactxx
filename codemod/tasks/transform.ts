@@ -1,4 +1,3 @@
-import { replaceAll } from '../utils/regexp'
 import * as Config from '../utils/config'
 
 import * as Ast from '../utils/ast'
@@ -11,88 +10,92 @@ import { touchRippleAst } from './ast-comp/TouchRipple'
 import { removePropTypes } from './ast/removePropTypes'
 import { adjustImports } from './code/adjustImports'
 
+import {processScript} from './transform-script'
+
 export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) => {
 
     console.log(info.path)
 
-    //********** SPECIAL STRING REPLACE
-    {
-        switch (info.path) {
-            case 'GridListTile/GridListTile':
-                code = code.replace(`\nimport`, `\nimport {fitPatch} from './GridListTilePatch';\nimport`)
-                code = code.replace(`fit = () => {`, `  fit = fitPatch.bind(this)\n  fit_ = () => {`)
-                break
-            case 'SwipeableDrawer/SwipeArea':
-                code += `\nexport interface SwipeAreaProps {}\n`
-                break
-            case '':
-                code = code.replace(``, ``)
-                break
-            case '':
-                code = code.replace(``, ``)
-                break
-            case '':
-                code = code.replace(``, ``)
-                break
-            case '':
-                code = code.replace(``, ``)
-                break
-            case 'Tabs/ScrollbarSize':
-                code = code.replace(``, ``)
-                info.componentFields = '  scrollbarWidth\n  scrollbarHeight\n  nodeRef'
-                break
-            case 'Tabs/Tabs':
-                code = code.replace(`const conditionalElements = {};`, `const conditionalElements: any = {};`)
-                info.componentFields = '  tabsRef'
-                info.overrideReactIsValidElement = true
-                break
-            case 'TextField/TextField':
-                code = code.replace(`defaultValue={defaultValue}`, `defaultValue={defaultValue as any}`)
-                break
-            case 'Tooltip/Tooltip':
-                code = code.replace(`=== 'button'`, `=== 'button' as any`)
-                code = code.replace(`this.state.open = false`, `(this.state.open as any) = false`)
-                code = code.replace(`const childrenProps = {`, `const childrenProps: any = {`)
-                code = code.replace(`this.props.theme`, `this.props.$system.theme`)
-                code = code.replace(`className={classes.popper}`, `className={classes.popper as any}`)
-                code = code.replace(`rootRef={this.onRootRef}`, `{...{rootRef:this.onRootRef}}`)
-                break
-            case 'Zoom/Zoom':
-                code = code.replace(`children.props.style`, `(children.props as any).style`)
-                code = code.replace(`React.cloneElement(children`, `React.cloneElement(children as any`)
-                code = code.replace(`this.props.onEnter(node)`, `(this.props as any).onEnter(node)`)
-                // Error in C:\reactxx\codemod\patch-original\transitions\transition.d.ts
-                code = code.replace(`onExit={this.handleExit}`, `onExit={this.handleExit}\ntimeout = {null}`)
-                break
-            case 'withWidth/withWidth':
-                code = code.replace(`const more = {};`, `const more: any = {};`)
-                break
-            case 'styles/withTheme':
-                code = code.replace(`return WithTheme;`, `return WithTheme as React.ComponentClass<any>;`)
-                break
-            case 'styles/withStyles':
-                code = code.replace(`return WithStyles;`, `return WithStyles as React.ComponentClass<any>;`)
-                code = code.replace(`extends React.Component {`, `extends React.Component {\n cacheClasses`)
-                code = code.replace(`const stylesCreator = getStylesCreator`, `const stylesCreator: any = getStylesCreator`)
-                break
-            case 'withMobileDialog/withMobileDialog':
-                //code = code.replace(`WithMobileDialog.propTypes = {`, `(WithMobileDialog as any).propTypes = {`)
-                code = code.replace(`from '../withWidth';`, `from '../withWidth/withWidth';`)
-                break
-            case 'styles/createPalette':
-                code = code.replace(`mainShade = 500`, `mainShade: any = 500`).replace(`lightShade = 300`, `lightShade: any = 300`).replace(`darkShade = 700`, `darkShade: any = 700`)
-                break
-            case 'styles/createGenerateClassName':
-                code = replaceAll(code, `global.__MUI_GENERATOR_COUNTER__`, `global['__MUI_GENERATOR_COUNTER__']`)
-                break
-            case 'internal/animate':
-                code = code.replace(`cb = ()`, `cb: any = ()`)
-                break
-            case 'ButtonBase/focusVisible':
-                code = code.replace(`const internal = {`, `const internal: any = {`)
-                break
-        }
-    }
+    code = processScript (info, code)
+
+    // //********** SPECIAL STRING REPLACE
+    // {
+    //     switch (info.path) {
+    //         case 'GridListTile/GridListTile':
+    //             code = code.replace(`\nimport`, `\nimport {fitPatch} from './GridListTilePatch';\nimport`)
+    //             code = code.replace(`fit = () => {`, `  fit = fitPatch.bind(this)\n  fit_ = () => {`)
+    //             break
+    //         case '':
+    //             code = code.replace(``, ``)
+    //             break
+    //         case 'SwipeableDrawer/SwipeableDrawer':
+    //             break
+    //         case 'SwipeableDrawer/SwipeArea':
+    //             code += `\nexport interface SwipeAreaProps { anchor?; width? }\n`
+    //             break
+    //         case 'Tab/Tab':
+    //             info.componentFields = '  labelRef'
+    //             info.addToProps = 'indicator?;'
+    //             break
+    //         case 'Table/Table':
+    //             info.addToProps = 'padding?;'
+    //             break
+    //         case 'Tabs/ScrollbarSize':
+    //             code = code.replace(``, ``)
+    //             info.componentFields = '  scrollbarWidth\n  scrollbarHeight\n  nodeRef'
+    //             break
+    //         case 'Tabs/Tabs':
+    //             code = code.replace(`const conditionalElements = {};`, `const conditionalElements: any = {};`)
+    //             info.componentFields = '  tabsRef'
+    //             info.overrideReactIsValidElement = true
+    //             break
+    //         case 'TextField/TextField':
+    //             code = code.replace(`defaultValue={defaultValue}`, `defaultValue={defaultValue as any}`)
+    //             break
+    //         case 'Tooltip/Tooltip':
+    //             code = code.replace(`=== 'button'`, `=== 'button' as any`)
+    //             code = code.replace(`this.state.open = false`, `(this.state.open as any) = false`)
+    //             code = code.replace(`const childrenProps = {`, `const childrenProps: any = {`)
+    //             code = code.replace(`this.props.theme`, `this.props.$system.theme`)
+    //             code = code.replace(`className={classes.popper}`, `className={classes.popper as any}`)
+    //             code = code.replace(`rootRef={this.onRootRef}`, `{...{rootRef:this.onRootRef}}`)
+    //             break
+    //         case 'Zoom/Zoom':
+    //             code = code.replace(`children.props.style`, `(children.props as any).style`)
+    //             code = code.replace(`React.cloneElement(children`, `React.cloneElement(children as any`)
+    //             code = code.replace(`this.props.onEnter(node)`, `(this.props as any).onEnter(node)`)
+    //             // Error in C:\reactxx\codemod\patch-original\transitions\transition.d.ts
+    //             code = code.replace(`onExit={this.handleExit}`, `onExit={this.handleExit}\ntimeout = {null}`)
+    //             break
+    //         case 'withWidth/withWidth':
+    //             code = code.replace(`const more = {};`, `const more: any = {};`)
+    //             break
+    //         case 'styles/withTheme':
+    //             code = code.replace(`return WithTheme;`, `return WithTheme as React.ComponentClass<any>;`)
+    //             break
+    //         case 'styles/withStyles':
+    //             code = code.replace(`return WithStyles;`, `return WithStyles as React.ComponentClass<any>;`)
+    //             code = code.replace(`extends React.Component {`, `extends React.Component {\n cacheClasses`)
+    //             code = code.replace(`const stylesCreator = getStylesCreator`, `const stylesCreator: any = getStylesCreator`)
+    //             break
+    //         case 'withMobileDialog/withMobileDialog':
+    //             //code = code.replace(`WithMobileDialog.propTypes = {`, `(WithMobileDialog as any).propTypes = {`)
+    //             code = code.replace(`from '../withWidth';`, `from '../withWidth/withWidth';`)
+    //             break
+    //         case 'styles/createPalette':
+    //             code = code.replace(`mainShade = 500`, `mainShade: any = 500`).replace(`lightShade = 300`, `lightShade: any = 300`).replace(`darkShade = 700`, `darkShade: any = 700`)
+    //             break
+    //         case 'styles/createGenerateClassName':
+    //             code = replaceAll(code, `global.__MUI_GENERATOR_COUNTER__`, `global['__MUI_GENERATOR_COUNTER__']`)
+    //             break
+    //         case 'internal/animate':
+    //             code = code.replace(`cb = ()`, `cb: any = ()`)
+    //             break
+    //         case 'ButtonBase/focusVisible':
+    //             code = code.replace(`const internal = {`, `const internal: any = {`)
+    //             break
+    //     }
+    // }
 
     //********** COMMON  STRING REPLACE
     {
@@ -129,8 +132,8 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
         code = code.replace(`import withTheme from '../styles/withTheme';`, ``)
         code = code.replace(`import withStyles from '../styles/withStyles';`, ``)
         code = code.replace(`export const styles =`, `const styles =`)
-        if (info.withStylesOrTheme && code.indexOf(`const styles =`) < 0) 
-          code += '\nconst styles = {}\n'
+        if (info.withStylesOrTheme && code.indexOf(`const styles =`) < 0)
+            code += '\nconst styles = {}\n'
 
         code = code.replace(``, ``)
     }
@@ -264,7 +267,7 @@ import withStyles, { Theme } from '../styles/withStyles';
 ` : `
 export type Shape = Types.OverwriteShape<{
   ${!noKey[info.name] && !info.withTheme ? `common: TCommon.ShapeTexts<${info.name}ClassKey>,` : ''}
-  props: ${info.name}Props,
+  props: ${info.name}Props${info.addToProps ? ` & { ${info.addToProps} }` : ''},
   theme: Theme
 }>
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

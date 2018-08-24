@@ -69,7 +69,7 @@ Table.childContextTypes = {
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<TableClassKey>,
-  props: TableProps,
+  props: TableProps & { padding?; },
   theme: Theme
 }>
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

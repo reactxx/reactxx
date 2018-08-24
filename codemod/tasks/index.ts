@@ -13,6 +13,10 @@ export const codeMod = () => {
 
     const { log, codeStr } = readAllCodes()
 
+    // const script = {}
+    // for (const path in log) script[path] = { replace: { '': '' }, replaceAll: { '': '' }, componentFields: '', addToProps: '' }
+    // let scriptStr = JSON.stringify(script, null, 2)
+
     for (const path in log) {
 
         if (ignores[path]) continue
