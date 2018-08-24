@@ -370,7 +370,7 @@ class SwipeableDrawer extends React.Component<CodeProps, any> {
       disableBackdropTransition,
       disableDiscovery,
       disableSwipeToOpen,
-      ModalProps: { BackdropProps, ...ModalPropsProp } = {},
+      ModalProps: { BackdropProps, ...ModalPropsProp } = {} as any,
       onOpen,
       open,
       PaperProps = {},
@@ -418,7 +418,7 @@ const styles = {};
 
 export type Shape = Types.OverwriteShape<{
   
-  props: SwipeableDrawerProps,
+  props: SwipeableDrawerProps & {ModalProps?},
   theme: Theme
 }>
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

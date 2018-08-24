@@ -27,7 +27,7 @@ interface Script {
     addToProps?: string
     addToCode?: string
     overrideReactIsValidElement?: boolean
-    ignore?:boolean
+    ignore?: boolean
 }
 
 const scripts: Record<string, Script> = {
@@ -1238,13 +1238,12 @@ const scripts: Record<string, Script> = {
     },
     "SwipeableDrawer/SwipeableDrawer": {
         replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
+            '...ModalPropsProp } = {}': '...ModalPropsProp } = {} as anys',
+            'this.props.onClose()': 'this.props.onClose(null)',
+            'this.props.onOpen()':'this.props.onOpen(null)'
         },
         componentFields: "",
-        addToProps: ""
+        addToProps: "ModalProps?"
     },
     "SwipeableDrawer/SwipeArea": {
         addToCode: `\nexport interface SwipeAreaProps { anchor?; width? }\n`
@@ -1275,6 +1274,9 @@ const scripts: Record<string, Script> = {
     "TableSortLabel/TableSortLabel": {
     },
     "Tabs/ScrollbarSize": {
+        replace: {
+            'style={styles}': 'style={styles as any}'
+        },
         componentFields: '  scrollbarWidth\n  scrollbarHeight\n  nodeRef',
     },
     "Tabs/TabIndicator": {
