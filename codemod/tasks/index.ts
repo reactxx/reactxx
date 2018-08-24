@@ -35,6 +35,8 @@ export const codeMod = () => {
         if (!info.withStylesOrTheme) info.withStylesOrTheme = code.indexOf('withStyles(styles') > 0
 
         code = transform(code, info, dts)
+        
+        if (!code) continue
 
         fsExtra.outputFileSync(info.destPath + '.tsx', code)
     }

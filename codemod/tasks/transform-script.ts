@@ -4,6 +4,7 @@ import { replaceAll } from '../utils/regexp'
 export const processScript = (info: Ast.MUISourceInfo, code: string) => {
     const script = scripts[info.path]
     if (!script) return code
+    if (script.ignore) return null
     if (script.addToCode) code += script.addToCode
     if (script.replace) Object.keys(script.replace).forEach(p => {
         if (!p || p === '') return
@@ -26,20 +27,11 @@ interface Script {
     addToProps?: string
     addToCode?: string
     overrideReactIsValidElement?: boolean
+    ignore?:boolean
 }
 
 const scripts: Record<string, Script> = {
     "AppBar/AppBar": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "AppBar/index": {
         replace: {
             "": ""
         },
@@ -59,27 +51,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "Avatar/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "Backdrop/Backdrop": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Backdrop/index": {
         replace: {
             "": ""
         },
@@ -99,27 +71,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "Badge/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "BottomNavigation/BottomNavigation": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "BottomNavigation/index": {
         replace: {
             "": ""
         },
@@ -139,27 +91,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "BottomNavigationAction/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "Button/Button": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Button/index": {
         replace: {
             "": ""
         },
@@ -199,16 +131,6 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "ButtonBase/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "ButtonBase/Ripple": {
         replace: {
             "": ""
@@ -239,27 +161,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "Card/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "CardActions/CardActions": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "CardActions/index": {
         replace: {
             "": ""
         },
@@ -279,27 +181,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "CardContent/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "CardHeader/CardHeader": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "CardHeader/index": {
         replace: {
             "": ""
         },
@@ -319,27 +201,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "CardMedia/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "Checkbox/Checkbox": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Checkbox/index": {
         replace: {
             "": ""
         },
@@ -359,27 +221,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "Chip/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "CircularProgress/CircularProgress": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "CircularProgress/index": {
         replace: {
             "": ""
         },
@@ -399,27 +241,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "ClickAwayListener/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "Collapse/Collapse": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Collapse/index": {
         replace: {
             "": ""
         },
@@ -520,16 +342,6 @@ const scripts: Record<string, Script> = {
         addToProps: ""
     },
     "colors/grey": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "colors/index": {
         replace: {
             "": ""
         },
@@ -649,27 +461,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "CssBaseline/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "Dialog/Dialog": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Dialog/index": {
         replace: {
             "": ""
         },
@@ -689,27 +481,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "DialogActions/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "DialogContent/DialogContent": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "DialogContent/index": {
         replace: {
             "": ""
         },
@@ -729,27 +501,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "DialogContentText/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "DialogTitle/DialogTitle": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "DialogTitle/index": {
         replace: {
             "": ""
         },
@@ -769,27 +521,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "Divider/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "Drawer/Drawer": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Drawer/index": {
         replace: {
             "": ""
         },
@@ -809,27 +541,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "ExpansionPanel/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "ExpansionPanelActions/ExpansionPanelActions": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "ExpansionPanelActions/index": {
         replace: {
             "": ""
         },
@@ -849,27 +561,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "ExpansionPanelDetails/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "ExpansionPanelSummary/ExpansionPanelSummary": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "ExpansionPanelSummary/index": {
         replace: {
             "": ""
         },
@@ -889,27 +581,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "Fade/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "FormControl/FormControl": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "FormControl/index": {
         replace: {
             "": ""
         },
@@ -929,27 +601,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "FormControlLabel/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "FormGroup/FormGroup": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "FormGroup/index": {
         replace: {
             "": ""
         },
@@ -969,27 +621,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "FormHelperText/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "FormLabel/FormLabel": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "FormLabel/index": {
         replace: {
             "": ""
         },
@@ -1009,27 +641,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "Grid/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "GridList/GridList": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "GridList/index": {
         replace: {
             "": ""
         },
@@ -1060,27 +672,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "GridListTileBar/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "Grow/Grow": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Grow/index": {
         replace: {
             "": ""
         },
@@ -1120,16 +712,6 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "Hidden/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "Icon/Icon": {
         replace: {
             "": ""
@@ -1140,37 +722,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "Icon/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "IconButton/IconButton": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "IconButton/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Input/index": {
         replace: {
             "": ""
         },
@@ -1200,27 +752,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "InputAdornment/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "InputAdornment/InputAdornment": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "InputLabel/index": {
         replace: {
             "": ""
         },
@@ -1260,27 +792,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "LinearProgress/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "LinearProgress/LinearProgress": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "List/index": {
         replace: {
             "": ""
         },
@@ -1300,27 +812,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "ListItem/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "ListItem/ListItem": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "ListItemAvatar/index": {
         replace: {
             "": ""
         },
@@ -1340,27 +832,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "ListItemIcon/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "ListItemIcon/ListItemIcon": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "ListItemSecondaryAction/index": {
         replace: {
             "": ""
         },
@@ -1380,27 +852,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "ListItemText/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "ListItemText/ListItemText": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "ListSubheader/index": {
         replace: {
             "": ""
         },
@@ -1420,27 +872,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "Menu/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "Menu/Menu": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "MenuItem/index": {
         replace: {
             "": ""
         },
@@ -1460,16 +892,6 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "MenuList/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "MenuList/MenuList": {
         replace: {
             "": ""
@@ -1480,27 +902,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "MobileStepper/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "MobileStepper/MobileStepper": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Modal/index": {
         replace: {
             "": ""
         },
@@ -1550,16 +952,6 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "NativeSelect/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "NativeSelect/NativeSelect": {
         replace: {
             "": ""
@@ -1580,27 +972,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "NoSsr/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "NoSsr/NoSsr": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Paper/index": {
         replace: {
             "": ""
         },
@@ -1620,27 +992,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "Popover/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "Popover/Popover": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Popper/index": {
         replace: {
             "": ""
         },
@@ -1660,27 +1012,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "Portal/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "Portal/Portal": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Radio/index": {
         replace: {
             "": ""
         },
@@ -1700,16 +1032,6 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "RadioGroup/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "RadioGroup/RadioGroup": {
         replace: {
             "": ""
@@ -1720,27 +1042,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "RootRef/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "RootRef/RootRef": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Select/index": {
         replace: {
             "": ""
         },
@@ -1770,27 +1072,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "Slide/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "Slide/Slide": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Snackbar/index": {
         replace: {
             "": ""
         },
@@ -1810,27 +1092,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "SnackbarContent/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "SnackbarContent/SnackbarContent": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Step/index": {
         replace: {
             "": ""
         },
@@ -1850,27 +1112,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "StepButton/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "StepButton/StepButton": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "StepConnector/index": {
         replace: {
             "": ""
         },
@@ -1890,27 +1132,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "StepContent/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "StepContent/StepContent": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "StepIcon/index": {
         replace: {
             "": ""
         },
@@ -1930,27 +1152,7 @@ const scripts: Record<string, Script> = {
         componentFields: "",
         addToProps: ""
     },
-    "StepLabel/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
     "StepLabel/StepLabel": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "Stepper/index": {
         replace: {
             "": ""
         },
@@ -1971,24 +1173,8 @@ const scripts: Record<string, Script> = {
         addToProps: ""
     },
     "styles/colorManipulator": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "styles/createBreakpoints": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "styles/createGenerateClassName": {
         replaceAll: {
@@ -1996,24 +1182,8 @@ const scripts: Record<string, Script> = {
         },
     },
     "styles/createMixins": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "styles/createMuiTheme": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "styles/createPalette": {
         replace: {
@@ -2021,203 +1191,50 @@ const scripts: Record<string, Script> = {
             'lightShade = 300': `lightShade: any = 300`,
             'darkShade = 700': `darkShade: any = 700`
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "styles/createStyles": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        ignore: true
     },
     "styles/createTypography": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "styles/getStylesCreator": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        ignore: true
     },
     "styles/getThemeProps": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "styles/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "styles/jssPreset": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        ignore: true
     },
     "styles/mergeClasses": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "styles/MuiThemeProvider": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        ignore: true
     },
     "styles/shadows": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "styles/shape": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "styles/spacing": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "styles/themeListener": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        ignore: true
     },
     "styles/transitions": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "styles/withStyles": {
+        ignore: true,
         replace: {
             'return WithStyles;': `return WithStyles as React.ComponentClass<any>;`,
             'extends React.Component {': `extends React.Component {\n cacheClasses`,
             'const stylesCreator = getStylesCreator': `const stylesCreator: any = getStylesCreator`,
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "styles/withTheme": {
         replace: {
             'return WithTheme;': 'return WithTheme as React.ComponentClass<any>;'
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "styles/zIndex": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "SvgIcon/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "SvgIcon/SvgIcon": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
-    },
-    "SwipeableDrawer/index": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "SwipeableDrawer/SwipeableDrawer": {
         replace: {
