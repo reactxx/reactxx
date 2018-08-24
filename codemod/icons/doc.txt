@@ -1,0 +1,17 @@
+download a inzip master 
+- https://github.com/google/material-design-icons
+- https://github.com/Templarian/MaterialDesign-SVG
+to reactxx\codemod\icons
+
+download 
+- https://github.com/expo/vector-icons/blob/master/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json
+- https://github.com/expo/vector-icons/blob/master/vendor/react-native-vector-icons/glyphmaps/MaterialIcons.json
+to reactxx\codemod\icons
+
+remove unused MI files in \reactxx\codemod\icons\material-design-icons-master\
+- search 24px SVG icons:
+  Search for: _24px\.svg$
+  RegEx: check
+  Plugin, Search in Plugin check
+  Plugin path !contains \design\
+- ZIP, delete d:\reactxx\build-icons2\material-design-icons-master\ and unzip

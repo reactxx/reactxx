@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent FormLabel
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import FormLabel from "../FormLabel/FormLabel";
 import { StandardProps } from "..";
@@ -67,9 +68,8 @@ const styles = theme => ({
   }
 });
 
-function InputLabel(props, context) {
+const InputLabel: Types.CodeSFCWeb<Shape> = (props, context) => {
   const {
-    $system: { theme },
     children,
     classes,
     className: classNameProp,
@@ -108,12 +108,12 @@ function InputLabel(props, context) {
       data-shrink={shrink}
       className={className}
       classes={FormLabelClasses}
-      {...other}
+      {...other as any}
     >
       {children}
     </FormLabel>
   );
-}
+};
 
 InputLabel.contextTypes = {
   muiFormControl: PropTypes.object

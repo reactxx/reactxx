@@ -26,7 +26,9 @@
     "@types/fs-extra": "^5.0.4",
     "@types/typescript": "^2.0.0",
     "@types/warning": "^3.0.0",
+    "@types/xml2js": "^0.4.3",
     "acorn-jsx": "^4.1.1",
+    "change-case": "^3.0.2",
     "escodegen": "^1.11.0",
     "escodegen.jsx": "^0.1.0",
     "esprima": "^4.0.1",
@@ -36,6 +38,7 @@
     "prettydiff": "^99.0.1",
     "tslib": "^1.9.3",
     "typescript": "^2.9.2",
-    "warning": "^4.0.1"
+    "warning": "^4.0.1",
+    "xml2js": "^0.4.19"
   }
 }

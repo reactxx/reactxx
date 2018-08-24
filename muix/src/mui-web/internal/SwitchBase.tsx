@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent IconButton
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import IconButton from "../IconButton/IconButton";
 import { StandardProps } from "..";
@@ -178,7 +179,7 @@ class SwitchBase extends React.Component<CodeProps, any> {
         role={undefined}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
-        {...other}
+        {...other as any}
       >
         {checked ? checkedIcon : icon}
         <input
@@ -195,7 +196,7 @@ class SwitchBase extends React.Component<CodeProps, any> {
           tabIndex={tabIndex}
           type={type}
           value={value}
-          {...inputProps}
+          {...inputProps as any}
         />
       </IconButton>
     );

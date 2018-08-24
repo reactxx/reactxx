@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { StandardProps } from "..";
 export interface TableProps
@@ -54,7 +55,10 @@ class Table extends React.Component<CodeProps, any> {
       ...other
     } = this.props;
     return (
-      <Component className={classNames(classes.root, className)} {...other} />
+      <Component
+        className={classNames(classes.root, className)}
+        {...other as any}
+      />
     );
   }
 }

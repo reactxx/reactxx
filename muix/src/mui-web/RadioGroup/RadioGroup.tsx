@@ -7,6 +7,7 @@
 
 // @inheritedComponent FormGroup
 import React from "react";
+import PropTypes from "prop-types";
 import warning from "warning";
 import FormGroup from "../FormGroup/FormGroup";
 import { createChainedFunction, find } from "../utils/helpers";
@@ -63,8 +64,8 @@ class RadioGroup extends React.Component<CodeProps, any> {
     const { children, name, value, onChange, ...other } = this.props;
     this.radios = [];
     return (
-      <FormGroup role="radiogroup" {...other}>
-        {React.Children.map(children, child => {
+      <FormGroup role="radiogroup" {...other as any}>
+        {React.Children.map(children, (child: React.ReactElement<any>) => {
           if (!React.isValidElement(child)) {
             return null;
           }

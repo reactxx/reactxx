@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent ButtonBase
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import ArrowDownwardIcon from "../internal/svg-icons/ArrowDownward";
 import ButtonBase from "../ButtonBase/ButtonBase";
@@ -85,7 +86,7 @@ const TableSortLabel: Types.CodeSFCWeb<Shape> = props => {
       className={classNames(classes.root, active && classes.active, className)}
       component="span"
       disableRipple
-      {...other}
+      {...other as any}
     >
       {children}
       <ArrowDownwardIcon

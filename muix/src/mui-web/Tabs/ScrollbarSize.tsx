@@ -6,6 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import React from "react";
+import PropTypes from "prop-types";
 import EventListener from "react-event-listener";
 import debounce from "debounce"; // < 1kb payload overhead when lodash/debounce is > 3kb.
 
@@ -35,6 +36,9 @@ class ScrollbarSize extends React.Component<CodeProps, any> {
   static displayName;
   static contextTypes;
   static childContextTypes;
+  scrollbarWidth;
+  scrollbarHeight;
+  nodeRef;
   static options;
   handleResize = debounce(() => {
     const { onChange } = this.props;

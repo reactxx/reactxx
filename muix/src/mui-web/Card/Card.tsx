@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Paper
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import Paper from "../Paper/Paper";
 import { StandardProps } from "..";
@@ -30,7 +31,7 @@ const Card: Types.CodeSFCWeb<Shape> = props => {
     <Paper
       className={classNames(classes.root, className)}
       elevation={raised ? 8 : 1}
-      {...other}
+      {...other as any}
     />
   );
 };

@@ -8,12 +8,13 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { capitalize } from "../utils/helpers";
-import { StandardProps, PropTypes } from "..";
+import { StandardProps, PropTypes as muiPropTypes } from "..";
 export interface SvgIconProps
   extends StandardProps<React.SVGProps<SVGSVGElement>, SvgIconClassKey> {
-  color?: PropTypes.Color | "action" | "disabled" | "error";
+  color?: muiPropTypes.Color | "action" | "disabled" | "error";
   component?: React.ReactType<SvgIconProps>;
   fontSize?: "inherit" | "default";
   nativeColor?: string;
@@ -101,7 +102,7 @@ const SvgIcon: Types.CodeSFCWeb<Shape> = props => {
       viewBox={viewBox}
       color={nativeColor}
       aria-hidden={titleAccess ? "false" : "true"}
-      {...other}
+      {...other as any}
     >
       {children}
       {titleAccess ? <title>{titleAccess}</title> : null}

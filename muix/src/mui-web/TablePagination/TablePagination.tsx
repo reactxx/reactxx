@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent TableCell
 import React from "react";
+import PropTypes from "prop-types";
 import Input from "../Input/Input";
 import MenuItem from "../MenuItem/MenuItem";
 import Select from "../Select/Select";
@@ -172,7 +173,7 @@ class TablePagination extends React.Component<CodeProps, any> {
     }
 
     return (
-      <Component className={classes.root} colSpan={colSpan} {...other}>
+      <Component className={classes.root} colSpan={colSpan} {...other as any}>
         <Toolbar className={classes.toolbar}>
           <div className={classes.spacer} />
           {rowsPerPageOptions.length > 1 && (
@@ -190,7 +191,7 @@ class TablePagination extends React.Component<CodeProps, any> {
               input={<Input className={classes.input} disableUnderline />}
               value={rowsPerPage}
               onChange={onChangeRowsPerPage}
-              {...SelectProps}
+              {...SelectProps as any}
             >
               {rowsPerPageOptions.map(rowsPerPageOption => (
                 <MenuItem

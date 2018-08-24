@@ -7,6 +7,7 @@
 
 // @inheritedComponent List
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import keycode from "keycode";
 import warning from "warning";
@@ -162,7 +163,7 @@ class MenuList extends React.Component<CodeProps, any> {
         className={className}
         onKeyDown={this.handleKeyDown}
         onBlur={this.handleBlur}
-        {...other}
+        {...other as any}
       >
         {React.Children.map(children, (child, index) => {
           if (!React.isValidElement(child)) {

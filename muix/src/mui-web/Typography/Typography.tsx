@@ -8,14 +8,15 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { capitalize } from "../utils/helpers";
-import { StandardProps, PropTypes } from "..";
+import { StandardProps, PropTypes as muiPropTypes } from "..";
 import { Style, TextStyle } from "../styles/createTypography";
 export interface TypographyProps
   extends StandardProps<React.HTMLAttributes<HTMLElement>, TypographyClassKey> {
-  align?: PropTypes.Alignment;
-  color?: PropTypes.Color | "textPrimary" | "textSecondary" | "error";
+  align?: muiPropTypes.Alignment;
+  color?: muiPropTypes.Color | "textPrimary" | "textSecondary" | "error";
   component?: React.ReactType<TypographyProps>;
   gutterBottom?: boolean;
   headlineMapping?: { [type in TextStyle]: string };
@@ -181,7 +182,7 @@ const Typography: Types.CodeSFCWeb<Shape> = props => {
   );
   const Component =
     componentProp || (paragraph ? "p" : headlineMapping[variant]) || "span";
-  return <Component className={className} {...other} />;
+  return <Component className={className} {...other as any} />;
 };
 
 export type Shape = Types.OverwriteShape<{

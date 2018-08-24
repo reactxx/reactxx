@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { capitalize } from "../utils/helpers";
 import SwitchBase from "../internal/SwitchBase";
@@ -158,7 +159,7 @@ const Switch: Types.CodeSFCWeb<Shape> = props => {
         checkedIcon={
           <span className={classNames(classes.icon, classes.iconChecked)} />
         }
-        {...other}
+        {...other as any}
       />
       <span className={classes.bar} />
     </span>

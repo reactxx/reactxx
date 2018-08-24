@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import Textarea from "./Textarea";
 import { StandardProps } from "..";
@@ -593,7 +594,7 @@ class Input extends React.Component<CodeProps, any> {
       inputProps.$system = this.props.$system;
 
     return (
-      <div className={className} {...other}>
+      <div className={className} {...other as any}>
         {startAdornment}
         <InputComponent
           aria-invalid={error}
@@ -615,7 +616,7 @@ class Input extends React.Component<CodeProps, any> {
           rows={rows}
           type={type}
           value={value}
-          {...inputProps}
+          {...inputProps as any}
         />
         {endAdornment}
       </div>

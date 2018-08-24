@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import Typography from "../Typography/Typography";
 import { StandardProps } from "..";
@@ -58,7 +59,7 @@ const InputAdornment: Types.CodeSFCWeb<Shape> = props => {
         position === "end" && classes.positionEnd,
         className
       )}
-      {...other}
+      {...other as any}
     >
       {typeof children === "string" && !disableTypography ? (
         <Typography color="textSecondary">{children}</Typography>

@@ -9,12 +9,13 @@
 import { Types } from "reactxx-basic";
 import React from "react";
 import warning from "warning";
+import PropTypes from "prop-types";
 import Input from "../Input/Input";
 import InputLabel from "../InputLabel/InputLabel";
 import FormControl from "../FormControl/FormControl";
 import FormHelperText from "../FormHelperText/FormHelperText";
 import Select from "../Select/Select";
-import { StandardProps, PropTypes } from "..";
+import { StandardProps, PropTypes as muiPropTypes } from "..";
 import { FormControlProps } from "../FormControl/FormControl";
 import { FormHelperTextProps } from "../FormHelperText/FormHelperText";
 import { InputProps } from "../Input/Input";
@@ -42,7 +43,7 @@ export interface TextFieldProps
   inputProps?: InputProps["inputProps"];
   inputRef?: React.Ref<any> | React.RefObject<any>;
   label?: React.ReactNode;
-  margin?: PropTypes.Margin;
+  margin?: muiPropTypes.Margin;
   multiline?: boolean;
   name?: string;
   onChange?: React.ChangeEventHandler<
@@ -159,22 +160,22 @@ const TextField: Types.CodeSFCWeb<Shape> = props => {
       error={error}
       fullWidth={fullWidth}
       required={required}
-      {...other}
+      {...other as any}
     >
       {label && (
-        <InputLabel htmlFor={id} {...InputLabelProps}>
+        <InputLabel htmlFor={id} {...InputLabelProps as any}>
           {label}
         </InputLabel>
       )}
       {select ? (
-        <Select value={value} input={InputElement} {...SelectProps}>
+        <Select value={value} input={InputElement} {...SelectProps as any}>
           {children}
         </Select>
       ) : (
         InputElement
       )}
       {helperText && (
-        <FormHelperText id={helperTextId} {...FormHelperTextProps}>
+        <FormHelperText id={helperTextId} {...FormHelperTextProps as any}>
           {helperText}
         </FormHelperText>
       )}

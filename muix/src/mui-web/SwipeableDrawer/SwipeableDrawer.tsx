@@ -10,6 +10,7 @@ import withStyles, { Theme } from '../styles/withStyles';
 /* eslint-disable consistent-this */
 // @inheritedComponent Drawer
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import Drawer, { getAnchor, isHorizontal } from "../Drawer/Drawer";
 import { duration } from "../styles/transitions";
@@ -399,7 +400,7 @@ class SwipeableDrawer extends React.Component<CodeProps, any> {
             ref: this.handlePaperRef
           }}
           anchor={anchor}
-          {...other}
+          {...other as any}
         />
         {!disableDiscovery &&
           !disableSwipeToOpen &&
@@ -412,6 +413,8 @@ class SwipeableDrawer extends React.Component<CodeProps, any> {
     );
   }
 }
+
+const styles = {};
 
 export type Shape = Types.OverwriteShape<{
   

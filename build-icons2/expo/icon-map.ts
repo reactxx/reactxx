@@ -31,7 +31,7 @@ export const getIconMap = () => {
 const getMiSVG = () => {
     const paths: Record<string, string> = {}
     const errors: string[] = []
-    Glob.sync('/**/*.*', { root: Config.mi }).forEach(f => {
+    Glob.sync('/**/*.*', { root: Config.iconMi }).forEach(f => {
         const parts = f.split('\\')
         const fn = parts[parts.length - 1]
         const id = fn.substring(beg.length, fn.length - end.length).replace(/_/g, '-')
@@ -46,7 +46,7 @@ const beg = 'ic_'
 const end = '_24px.svg'
 
 const getMdiSvg = (id: string) => {
-    const f = Config.mdi + id + '.svg'
+    const f = Config.iconMdi + id + '.svg'
     let res: string = null
     try {
         const xml = FSExtra.readFileSync(f, { encoding: 'utf8' })

@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import warning from "warning";
 import { lighten } from "../styles/colorManipulator";
@@ -292,7 +293,12 @@ const LinearProgress: Types.CodeSFCWeb<Shape> = props => {
   }
 
   return (
-    <div className={className} role="progressbar" {...rootProps} {...other}>
+    <div
+      className={className}
+      role="progressbar"
+      {...rootProps as any}
+      {...other as any}
+    >
       {variant === "buffer" ? <div className={dashedClass} /> : null}
       <div className={bar1ClassName} style={inlineStyles.bar1} />
       {variant === "determinate" ? null : (

@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Input
 import React from "react";
+import PropTypes from "prop-types";
 import NativeSelectInput from "./NativeSelectInput";
 import ArrowDropDownIcon from "../internal/svg-icons/ArrowDropDown";
 import Input from "../Input/Input";

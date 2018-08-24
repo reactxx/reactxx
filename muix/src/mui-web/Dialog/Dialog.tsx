@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Modal
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { capitalize } from "../utils/helpers";
 import Modal from "../Modal/Modal";
@@ -188,7 +189,7 @@ const Dialog: Types.CodeSFCWeb<Shape> = props => {
       onClose={onClose}
       open={open}
       role="dialog"
-      {...other}
+      {...other as any}
     >
       <TransitionComponent
         appear
@@ -200,7 +201,7 @@ const Dialog: Types.CodeSFCWeb<Shape> = props => {
         onExit={onExit}
         onExiting={onExiting}
         onExited={onExited}
-        {...TransitionProps}
+        {...TransitionProps as any}
       >
         <Paper
           elevation={24}
@@ -212,7 +213,7 @@ const Dialog: Types.CodeSFCWeb<Shape> = props => {
             fullScreen && classes.paperFullScreen,
             fullWidth && classes.paperFullWidth
           )}
-          {...PaperProps}
+          {...PaperProps as any}
         >
           {children}
         </Paper>

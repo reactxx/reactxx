@@ -5,7 +5,9 @@
 // 
 //----------------------------------------------------------------------------------
 
-// This is using the API from https://github.com/vesparny/brcast
+//
+import PropTypes from "prop-types"; // This is using the API from https://github.com/vesparny/brcast
+
 export interface Broadcast<S> {
   setState(state: S): void;
   getState(): S;
@@ -22,8 +24,7 @@ export interface ThemeListener<S = {}> {
     callback: (state: S) => void
   ): number | null;
   unsubscribe(context: MuiContext<S>, subscriptionId: number): void;
-} //
-// Same value used by react-jss
+} // Same value used by react-jss
 
 export const CHANNEL = "__THEMING__";
 const themeListener = {

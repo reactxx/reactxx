@@ -8,11 +8,12 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { isFilled, isAdornedStart } from "../Input/Input";
 import { capitalize } from "../utils/helpers";
 import { isMuiElement } from "../utils/reactHelpers";
-import { StandardProps, PropTypes } from "..";
+import { StandardProps, PropTypes as muiPropTypes } from "..";
 export interface FormControlProps
   extends StandardProps<
       React.HtmlHTMLAttributes<HTMLDivElement>,
@@ -22,7 +23,7 @@ export interface FormControlProps
   disabled?: boolean;
   error?: boolean;
   fullWidth?: boolean;
-  margin?: PropTypes.Margin;
+  margin?: muiPropTypes.Margin;
   onBlur?: React.EventHandler<any>;
   onFocus?: React.EventHandler<any>;
   required?: boolean;
@@ -88,7 +89,7 @@ class FormControl extends React.Component<CodeProps, any> {
     const { children } = props;
 
     if (children) {
-      React.Children.forEach(children, child => {
+      React.Children.forEach(children, (child: React.ReactElement<any>) => {
         if (!isMuiElement(child, ["Input", "Select", "NativeSelect"])) {
           return;
         }
@@ -190,7 +191,7 @@ class FormControl extends React.Component<CodeProps, any> {
           fullWidth && classes.fullWidth,
           className
         )}
-        {...other}
+        {...other as any}
       />
     );
   }

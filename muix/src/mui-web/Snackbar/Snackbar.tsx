@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import EventListener from "react-event-listener";
 import { duration } from "../styles/transitions";
@@ -320,7 +321,7 @@ class Snackbar extends React.Component<CodeProps, any> {
           )}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
-          {...other}
+          {...other as any}
         >
           <EventListener
             target="window"
@@ -338,13 +339,13 @@ class Snackbar extends React.Component<CodeProps, any> {
             onExiting={onExiting}
             timeout={transitionDuration}
             direction={vertical === "top" ? "down" : "up"}
-            {...TransitionProps}
+            {...TransitionProps as any}
           >
             {children || (
               <SnackbarContent
                 message={message}
                 action={action}
-                {...ContentProps}
+                {...ContentProps as any}
               />
             )}
           </TransitionComponent>

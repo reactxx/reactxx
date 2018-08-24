@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Transition
 import React from "react";
+import PropTypes from "prop-types";
 import Transition from "react-transition-group/Transition";
 import { duration } from "../styles/transitions";
 import { reflow, getTransitionProps } from "../transitions/utils";
@@ -93,7 +94,7 @@ class Fade extends React.Component<CodeProps, any> {
         appear
         onEnter={this.handleEnter}
         onExit={this.handleExit}
-        {...other}
+        {...other as any}
       >
         {(state, childProps) => {
           return React.cloneElement(children, {

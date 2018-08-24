@@ -6,6 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import React from "react";
+import PropTypes from "prop-types";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import wrapDisplayName from "recompose/wrapDisplayName";
 import createMuiTheme from "./createMuiTheme";
@@ -57,7 +58,9 @@ const withTheme = () => Component => {
 
     render() {
       const { innerRef, ...other } = this.props;
-      return <Component theme={this.state.theme} ref={innerRef} {...other} />;
+      return (
+        <Component theme={this.state.theme} ref={innerRef} {...other as any} />
+      );
     }
   }
 

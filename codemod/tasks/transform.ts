@@ -37,19 +37,17 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
             case '':
                 code = code.replace(``, ``)
                 break
-            case '':
+            case 'Tabs/ScrollbarSize':
                 code = code.replace(``, ``)
+                info.componentFields = '  scrollbarWidth\n  scrollbarHeight\n  nodeRef'
                 break
             case 'Tabs/Tabs':
                 code = code.replace(`const conditionalElements = {};`, `const conditionalElements: any = {};`)
-                code = code.replace(``, ``)
-                code = code.replace(``, ``)
-                code = code.replace(``, ``)
-                info.componentFields = 'tabsRef'
+                info.componentFields = '  tabsRef'
+                info.overrideReactIsValidElement = true
                 break
             case 'TextField/TextField':
                 code = code.replace(`defaultValue={defaultValue}`, `defaultValue={defaultValue as any}`)
-                code = code.replace(`{...InputProps}`, `{...InputProps as any}`)
                 break
             case 'Tooltip/Tooltip':
                 code = code.replace(`=== 'button'`, `=== 'button' as any`)
@@ -78,7 +76,7 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
                 code = code.replace(`const stylesCreator = getStylesCreator`, `const stylesCreator: any = getStylesCreator`)
                 break
             case 'withMobileDialog/withMobileDialog':
-                code = code.replace(`WithMobileDialog.propTypes = {`, `(WithMobileDialog as any).propTypes = {`)
+                //code = code.replace(`WithMobileDialog.propTypes = {`, `(WithMobileDialog as any).propTypes = {`)
                 code = code.replace(`from '../withWidth';`, `from '../withWidth/withWidth';`)
                 break
             case 'styles/createPalette':
@@ -107,8 +105,13 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
             code = code.replace(`\nclass ${info.name}`,
                 `\ninterface ${info.name}Props { children?; [p:string]: any }\nexport type CodeProps = ${info.name}Props\nclass ${info.name}`)
         }
+        if (info.overrideReactIsValidElement) {
+            code = code.replace(`React.isValidElement`, `(React as any).isValidElement`)
+        }
 
+        code = code.replace(/\{\.\.\.(\w+)\}/g, `{...$1 as any}`) // {...props} => {...props as any}
         code = code.replace(/options\s*=\s*{}/, `options: any = {}`)
+        code = code.replace(`, child => {`, `, (child: React.ReactElement<any>) => {`)
         code = code.replace(`import classNames from 'classnames';`, `import { classNames } from 'reactxx-basic';`)
         code = code.replace(`class ${info.name} extends React.Component {`,
             `class ${info.name} extends React.Component<CodeProps,any> {
@@ -120,17 +123,24 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
   ${info.componentFields ? info.componentFields : ''}
   static options`)
         code = code.replace(`\nfunction ${info.name}(props) {`, `const ${info.name}: Types.CodeSFCWeb<Shape> = (props) => {`)
+        code = code.replace(`\nfunction ${info.name}(props, context) {`, `const ${info.name}: Types.CodeSFCWeb<Shape> = (props, context) => {`)
         code = code.replace(`  state = {`, `  state: any = {`)
         code = code.replace(`super();`, `super(props);`)
         code = code.replace(`import withTheme from '../styles/withTheme';`, ``)
         code = code.replace(`import withStyles from '../styles/withStyles';`, ``)
         code = code.replace(`export const styles =`, `const styles =`)
-        code = code.replace(`import PropTypes from 'prop-types';`, ``)
+        if (info.withStylesOrTheme && code.indexOf(`const styles =`) < 0) 
+          code += '\nconst styles = {}\n'
+
         code = code.replace(``, ``)
     }
 
     //********** INCLUDE TYPESCRIPT DEFINITIONS
     if (dts) {
+        // solves mui index.ts PropTypes collision with import PropTypes from 'prop-types
+        dts = dts.replace(/PropTypes, StandardProps|StandardProps, PropTypes/, 'StandardProps, PropTypes as muiPropTypes')
+        dts = dts.replace(/PropTypes\./g, 'muiPropTypes.')
+
         dts = dts.replace(/\ninterface /g, '\nexport interface ')
         dts = dts.replace(`import * as React from 'react';`, '')
         dts = dts.replace(/\ntype /g, '\nexport type ')

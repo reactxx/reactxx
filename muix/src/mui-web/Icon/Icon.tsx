@@ -8,12 +8,13 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { capitalize } from "../utils/helpers";
-import { StandardProps, PropTypes } from "..";
+import { StandardProps, PropTypes as muiPropTypes } from "..";
 export interface IconProps
   extends StandardProps<React.HTMLAttributes<HTMLSpanElement>, IconClassKey> {
-  color?: PropTypes.Color | "action" | "disabled" | "error";
+  color?: muiPropTypes.Color | "action" | "disabled" | "error";
   fontSize?: "inherit" | "default";
 }
 export type IconClassKey =
@@ -79,7 +80,7 @@ const Icon: Types.CodeSFCWeb<Shape> = props => {
         className
       )}
       aria-hidden="true"
-      {...other}
+      {...other as any}
     >
       {children}
     </span>

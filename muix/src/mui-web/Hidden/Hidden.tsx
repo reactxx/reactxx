@@ -7,6 +7,7 @@
 
 import React from "react";
 import { Types } from "reactxx-basic";
+import PropTypes from "prop-types";
 import HiddenJs from "./HiddenJs";
 import HiddenCss from "./HiddenCss";
 import { StandardProps } from "..";
@@ -38,10 +39,10 @@ const Hidden: Types.CodeSFCWeb<Shape> = props => {
   const { implementation, ...other } = props;
 
   if (implementation === "js") {
-    return <HiddenJs {...other} />;
+    return <HiddenJs {...other as any} />;
   }
 
-  return <HiddenCss {...other} />;
+  return <HiddenCss {...other as any} />;
 };
 
 Hidden.defaultProps = {

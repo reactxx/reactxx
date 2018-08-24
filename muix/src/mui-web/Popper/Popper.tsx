@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 import PopperJS from "popper.js";
 import Portal from "../Portal/Portal";
 import { ReferenceObject } from "popper.js";
@@ -248,7 +249,7 @@ class Popper extends React.Component<CodeProps, any> {
             // Prevents scroll issue, waiting for Popper.js to add this style once initiated.
             position: "absolute"
           }}
-          {...other}
+          {...other as any}
         >
           {typeof children === "function" ? children(childProps) : children}
         </div>
@@ -256,6 +257,8 @@ class Popper extends React.Component<CodeProps, any> {
     );
   }
 }
+
+const styles = {};
 
 export type Shape = Types.OverwriteShape<{
   

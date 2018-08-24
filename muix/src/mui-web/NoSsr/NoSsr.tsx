@@ -6,6 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import React from "react";
+import PropTypes from "prop-types";
 import exactProp from "../utils/exactProp";
 export interface NoSsrProps {
   children: React.ReactNode;

@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import SwitchBase from "../internal/SwitchBase";
 import CheckBoxOutlineBlankIcon from "../internal/svg-icons/CheckBoxOutlineBlank";
@@ -83,7 +84,7 @@ const Checkbox: Types.CodeSFCWeb<Shape> = props => {
         disabled: classes.disabled
       }}
       icon={indeterminate ? indeterminateIcon : icon}
-      {...other}
+      {...other as any}
     />
   );
 };

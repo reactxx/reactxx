@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import TransitionGroup from "react-transition-group/TransitionGroup";
 import { classNames } from "reactxx-basic";
@@ -316,7 +317,7 @@ class TouchRipple extends React.PureComponent {
         enter
         exit
         className={classNames(classes.root, className)}
-        {...other}
+        {...other as any}
       >
         {this.state.ripples}
       </TransitionGroup>

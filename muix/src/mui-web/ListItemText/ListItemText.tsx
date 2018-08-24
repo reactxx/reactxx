@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import Typography from "../Typography/Typography";
 import { StandardProps } from "..";
@@ -73,9 +74,8 @@ const styles = theme => ({
   textDense: {}
 });
 
-function ListItemText(props, context) {
+const ListItemText: Types.CodeSFCWeb<Shape> = (props, context) => {
   const {
-    $system: { theme },
     children,
     classes,
     className: classNameProp,
@@ -96,7 +96,7 @@ function ListItemText(props, context) {
         variant="subheading"
         className={classNames(classes.primary, dense && classes.textDense)}
         component="span"
-        {...primaryTypographyProps}
+        {...primaryTypographyProps as any}
       >
         {primary}
       </Typography>
@@ -115,7 +115,7 @@ function ListItemText(props, context) {
         variant="body1"
         className={classNames(classes.secondary, dense && classes.textDense)}
         color="textSecondary"
-        {...secondaryTypographyProps}
+        {...secondaryTypographyProps as any}
       >
         {secondary}
       </Typography>
@@ -130,13 +130,13 @@ function ListItemText(props, context) {
         inset && classes.inset,
         classNameProp
       )}
-      {...other}
+      {...other as any}
     >
       {primary}
       {secondary}
     </div>
   );
-}
+};
 
 ListItemText.contextTypes = {
   dense: PropTypes.bool

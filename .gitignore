@@ -328,3 +328,8 @@ muix/tsconfig.json
 
 build-icons2/material-design-icons-master
 build-icons2/MaterialDesign-SVG-master
+
+codemod/icons/material-design-icons-master.zip
+codemod/icons/MaterialDesign-SVG-master.zip
+codemod/icons/material-design-icons-master
+codemod/icons/MaterialDesign-SVG-master

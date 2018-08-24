@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent ListItem
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import ListItem from "../ListItem/ListItem";
 import { StandardProps } from "..";
@@ -55,7 +56,7 @@ const MenuItem: Types.CodeSFCWeb<Shape> = props => {
         className
       )}
       component={component}
-      {...other}
+      {...other as any}
     />
   );
 };

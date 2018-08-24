@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import warning from "warning";
 import keycode from "keycode";
@@ -336,13 +337,13 @@ class Modal extends React.Component<CodeProps, any> {
             className,
             exited && classes.hidden
           )}
-          {...other}
+          {...other as any}
         >
           {hideBackdrop ? null : (
             <BackdropComponent
               open={open}
               onClick={this.handleBackdropClick}
-              {...BackdropProps}
+              {...BackdropProps as any}
             />
           )}
           <RootRef

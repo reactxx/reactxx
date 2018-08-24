@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent ButtonBase
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import { capitalize } from "../utils/helpers";
@@ -255,7 +256,7 @@ class Tab extends React.Component<CodeProps, any> {
         role="tab"
         aria-selected={selected}
         disabled={disabled}
-        {...other}
+        {...other as any}
         onClick={this.handleChange}
       >
         <span className={classes.wrapper}>

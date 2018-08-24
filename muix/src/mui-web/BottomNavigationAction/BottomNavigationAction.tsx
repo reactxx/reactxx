@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent ButtonBase
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import unsupportedProp from "../utils/unsupportedProp";
@@ -139,7 +140,7 @@ class BottomNavigationAction extends React.Component<CodeProps, any> {
         className={className}
         focusRipple
         onClick={this.handleChange}
-        {...other}
+        {...other as any}
       >
         <span className={classes.wrapper}>
           {icon}

@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Typography
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import Typography from "../Typography/Typography";
 import { StandardProps } from "..";
@@ -31,7 +32,7 @@ const DialogContentText: Types.CodeSFCWeb<Shape> = props => {
       component="p"
       variant="subheading"
       className={classNames(classes.root, className)}
-      {...other}
+      {...other as any}
     >
       {children}
     </Typography>

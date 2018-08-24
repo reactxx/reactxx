@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import { isMuiElement } from "../utils/reactHelpers";
@@ -195,15 +196,15 @@ class ListItem extends React.Component<CodeProps, any> {
       return (
         <ContainerComponent
           className={classNames(classes.container, ContainerClassName)}
-          {...ContainerProps}
+          {...ContainerProps as any}
         >
-          <Component {...componentProps}>{children}</Component>
+          <Component {...componentProps as any}>{children}</Component>
           {children.pop()}
         </ContainerComponent>
       );
     }
 
-    return <Component {...componentProps}>{children}</Component>;
+    return <Component {...componentProps as any}>{children}</Component>;
   }
 }
 

@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Modal
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import warning from "warning";
 import debounce from "debounce"; // < 1kb payload overhead when lodash/debounce is > 3kb.
@@ -375,7 +376,7 @@ class Popover extends React.Component<CodeProps, any> {
         BackdropProps={{
           invisible: true
         }}
-        {...other}
+        {...other as any}
       >
         <TransitionComponent
           appear
@@ -388,7 +389,7 @@ class Popover extends React.Component<CodeProps, any> {
           onExiting={onExiting}
           role={role}
           timeout={transitionDuration}
-          {...TransitionProps}
+          {...TransitionProps as any}
         >
           <Paper
             className={classes.paper}
@@ -397,7 +398,7 @@ class Popover extends React.Component<CodeProps, any> {
             ref={ref => {
               this.paperRef = ReactDOM.findDOMNode(ref);
             }}
-            {...PaperProps}
+            {...PaperProps as any}
           >
             <EventListener target="window" onResize={this.handleResize} />
             {children}

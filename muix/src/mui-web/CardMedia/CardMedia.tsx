@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import warning from "warning";
 import { StandardProps } from "..";
@@ -68,7 +69,7 @@ const CardMedia: Types.CodeSFCWeb<Shape> = props => {
       )}
       style={composedStyle}
       src={isMediaComponent ? image || src : undefined}
-      {...other}
+      {...other as any}
     />
   );
 };

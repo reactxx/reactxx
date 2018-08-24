@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { capitalize } from "../utils/helpers";
 import { darken, fade, lighten } from "../styles/colorManipulator";
@@ -114,9 +115,8 @@ const styles = theme => ({
   }
 });
 
-function TableCell(props, context) {
+const TableCell: Types.CodeSFCWeb<Shape> = (props, context) => {
   const {
-    $system: { theme },
     children,
     classes,
     className: classNameProp,
@@ -171,12 +171,12 @@ function TableCell(props, context) {
       className={className}
       aria-sort={ariaSort}
       scope={scope}
-      {...other}
+      {...other as any}
     >
       {children}
     </Component>
   );
-}
+};
 
 TableCell.contextTypes = {
   table: PropTypes.object,

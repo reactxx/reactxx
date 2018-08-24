@@ -9,15 +9,16 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent ButtonBase
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { fade } from "../styles/colorManipulator";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import { capitalize } from "../utils/helpers";
-import { StandardProps, PropTypes } from "..";
+import { StandardProps, PropTypes as muiPropTypes } from "..";
 import { ButtonBaseProps } from "../ButtonBase/ButtonBase";
 export interface IconButtonProps
   extends StandardProps<ButtonBaseProps, IconButtonClassKey> {
-  color?: PropTypes.Color;
+  color?: muiPropTypes.Color;
   disabled?: boolean;
   disableRipple?: boolean;
 }
@@ -125,7 +126,7 @@ const IconButton: Types.CodeSFCWeb<Shape> = props => {
       centerRipple
       focusRipple
       disabled={disabled}
-      {...other}
+      {...other as any}
     >
       <span className={classes.label}>{children}</span>
     </ButtonBase>

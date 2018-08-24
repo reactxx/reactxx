@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent ButtonBase
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import ButtonBase from "../ButtonBase/ButtonBase";
 import StepLabel from "../StepLabel/StepLabel";
@@ -79,7 +80,7 @@ const StepButton: Types.CodeSFCWeb<Shape> = props => {
   const child = isMuiElement(children, ["StepLabel"]) ? (
     React.cloneElement(children, childProps)
   ) : (
-    <StepLabel {...childProps}>{children}</StepLabel>
+    <StepLabel {...childProps as any}>{children}</StepLabel>
   );
   return (
     <ButtonBase
@@ -88,7 +89,7 @@ const StepButton: Types.CodeSFCWeb<Shape> = props => {
         className: classes.touchRipple
       }}
       className={classNames(classes.root, classes[orientation], classNameProp)}
-      {...other}
+      {...other as any}
     >
       {child}
     </ButtonBase>

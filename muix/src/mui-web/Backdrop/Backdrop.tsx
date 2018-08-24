@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import Fade from "../Fade/Fade";
 import { StandardProps } from "..";
@@ -56,7 +57,7 @@ const Backdrop: Types.CodeSFCWeb<Shape> = props => {
     ...other
   } = props;
   return (
-    <Fade appear in={open} timeout={transitionDuration} {...other}>
+    <Fade appear in={open} timeout={transitionDuration} {...other as any}>
       <div
         data-mui-test="Backdrop"
         className={classNames(

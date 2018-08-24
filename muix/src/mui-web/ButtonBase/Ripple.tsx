@@ -6,6 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import Transition from "react-transition-group/Transition";
 /**
@@ -73,7 +74,7 @@ class Ripple extends React.Component<CodeProps, any> {
       <Transition
         onEnter={this.handleEnter}
         onExit={this.handleExit}
-        {...other}
+        {...other as any}
       >
         <span className={rippleClassName} style={rippleStyles}>
           <span className={childClassName} />

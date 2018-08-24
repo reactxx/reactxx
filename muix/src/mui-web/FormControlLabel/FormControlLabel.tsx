@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 /* eslint-disable jsx-a11y/label-has-for */
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import Typography from "../Typography/Typography";
 import { StandardProps } from "..";
@@ -68,9 +69,8 @@ const styles = theme => ({
  * Use this component if you want to display an extra label.
  */
 
-function FormControlLabel(props, context) {
+const FormControlLabel: Types.CodeSFCWeb<Shape> = (props, context) => {
   const {
-    $system: { theme },
     checked,
     classes,
     className: classNameProp,
@@ -117,7 +117,7 @@ function FormControlLabel(props, context) {
         disabled && classes.disabled,
         classNameProp
       )}
-      {...other}
+      {...other as any}
     >
       {React.cloneElement(control, controlProps)}
       <Typography
@@ -128,7 +128,7 @@ function FormControlLabel(props, context) {
       </Typography>
     </label>
   );
-}
+};
 
 FormControlLabel.contextTypes = {
   muiFormControl: PropTypes.object

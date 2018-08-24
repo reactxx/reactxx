@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 /* eslint-disable no-restricted-globals */
 import React from "react";
+import PropTypes from "prop-types";
 import warning from "warning";
 import { classNames } from "reactxx-basic";
 import EventListener from "react-event-listener";
@@ -401,7 +402,7 @@ class Tabs extends React.Component<CodeProps, any> {
       <TabIndicator
         className={classes.indicator}
         color={indicatorColor}
-        {...TabIndicatorProps}
+        {...TabIndicatorProps as any}
         style={{
           ...this.state.indicatorStyle,
           ...TabIndicatorProps.style
@@ -410,35 +411,38 @@ class Tabs extends React.Component<CodeProps, any> {
     );
     this.valueToIndex = new Map();
     let childIndex = 0;
-    const children = React.Children.map(childrenProp, child => {
-      if (!React.isValidElement(child)) {
-        return null;
-      }
+    const children = React.Children.map(
+      childrenProp,
+      (child: React.ReactElement<any>) => {
+        if (!(React as any).isValidElement(child)) {
+          return null;
+        }
 
-      warning(
-        child.type !== React.Fragment,
-        [
-          "Material-UI: the Tabs component doesn't accept a Fragment as a child.",
-          "Consider providing an array instead."
-        ].join("\n")
-      );
-      const childValue =
-        child.props.value === undefined ? childIndex : child.props.value;
-      this.valueToIndex.set(childValue, childIndex);
-      const selected = childValue === value;
-      childIndex += 1;
-      return React.cloneElement(child, {
-        fullWidth,
-        indicator: selected && !this.state.mounted && indicator,
-        selected,
-        onChange,
-        textColor,
-        value: childValue
-      });
-    });
+        warning(
+          child.type !== React.Fragment,
+          [
+            "Material-UI: the Tabs component doesn't accept a Fragment as a child.",
+            "Consider providing an array instead."
+          ].join("\n")
+        );
+        const childValue =
+          child.props.value === undefined ? childIndex : child.props.value;
+        this.valueToIndex.set(childValue, childIndex);
+        const selected = childValue === value;
+        childIndex += 1;
+        return React.cloneElement(child, {
+          fullWidth,
+          indicator: selected && !this.state.mounted && indicator,
+          selected,
+          onChange,
+          textColor,
+          value: childValue
+        });
+      }
+    );
     const conditionalElements = this.getConditionalElements();
     return (
-      <Component className={className} {...other}>
+      <Component className={className} {...other as any}>
         <EventListener target="window" onResize={this.handleResize} />
         {conditionalElements.scrollbarSizeListener}
         <div className={classes.flexContainer}>

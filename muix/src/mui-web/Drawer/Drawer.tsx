@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import Modal from "../Modal/Modal";
 import Slide from "../Slide/Slide";
@@ -195,7 +196,7 @@ class Drawer extends React.Component<CodeProps, any> {
           variant !== "temporary" &&
             classes[`paperAnchorDocked${capitalize(anchor)}`]
         )}
-        {...PaperProps}
+        {...PaperProps as any}
       >
         {children}
       </Paper>
@@ -203,7 +204,10 @@ class Drawer extends React.Component<CodeProps, any> {
 
     if (variant === "permanent") {
       return (
-        <div className={classNames(classes.docked, className)} {...other}>
+        <div
+          className={classNames(classes.docked, className)}
+          {...other as any}
+        >
           {drawer}
         </div>
       );
@@ -215,7 +219,7 @@ class Drawer extends React.Component<CodeProps, any> {
         direction={oppositeDirection[anchor]}
         timeout={transitionDuration}
         appear={this.mounted}
-        {...SlideProps}
+        {...SlideProps as any}
       >
         {drawer}
       </Slide>
@@ -223,7 +227,10 @@ class Drawer extends React.Component<CodeProps, any> {
 
     if (variant === "persistent") {
       return (
-        <div className={classNames(classes.docked, className)} {...other}>
+        <div
+          className={classNames(classes.docked, className)}
+          {...other as any}
+        >
           {slidingDrawer}
         </div>
       );
@@ -238,8 +245,8 @@ class Drawer extends React.Component<CodeProps, any> {
         className={classNames(classes.modal, className)}
         open={open}
         onClose={onClose}
-        {...other}
-        {...ModalProps}
+        {...other as any}
+        {...ModalProps as any}
       >
         {slidingDrawer}
       </Modal>

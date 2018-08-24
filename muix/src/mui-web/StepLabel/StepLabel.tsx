@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import Typography from "../Typography/Typography";
 import StepIcon from "../StepIcon/StepIcon";
@@ -140,7 +141,7 @@ const StepLabel: Types.CodeSFCWeb<Shape> = props => {
         error && classes.error,
         classNameProp
       )}
-      {...other}
+      {...other as any}
     >
       {icon && (
         <span
@@ -154,7 +155,7 @@ const StepLabel: Types.CodeSFCWeb<Shape> = props => {
             active={active}
             error={error}
             icon={icon}
-            {...StepIconProps}
+            {...StepIconProps as any}
           />
         </span>
       )}

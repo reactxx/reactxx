@@ -7,6 +7,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 import exactProp from "../utils/exactProp";
 
 function setRef(ref, value) {

@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import { classNames } from "reactxx-basic";
 import keycode from "keycode";
@@ -344,15 +345,15 @@ class ButtonBase extends React.Component<CodeProps, any> {
         tabIndex={disabled ? "-1" : tabIndex}
         className={className}
         ref={buttonRef}
-        {...buttonProps}
-        {...other}
+        {...buttonProps as any}
+        {...other as any}
       >
         {children}
         {!disableRipple && !disabled ? (
           <TouchRipple
             innerRef={this.onRippleRef}
             center={centerRipple}
-            {...TouchRippleProps}
+            {...TouchRippleProps as any}
           />
         ) : null}
       </ComponentProp>

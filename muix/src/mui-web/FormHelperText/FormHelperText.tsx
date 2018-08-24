@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { StandardProps } from "..";
 export interface FormHelperTextProps
@@ -72,9 +73,8 @@ const styles = theme => ({
   required: {}
 });
 
-function FormHelperText(props, context) {
+const FormHelperText: Types.CodeSFCWeb<Shape> = (props, context) => {
   const {
-    $system: { theme },
     classes,
     className: classNameProp,
     component: Component,
@@ -130,8 +130,8 @@ function FormHelperText(props, context) {
     required && classes.required,
     classNameProp
   );
-  return <Component className={className} {...other} />;
-}
+  return <Component className={className} {...other as any} />;
+};
 
 FormHelperText.contextTypes = {
   muiFormControl: PropTypes.object

@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Transition
 import React from "react";
+import PropTypes from "prop-types";
 import Transition from "react-transition-group/Transition";
 import { reflow, getTransitionProps } from "../transitions/utils";
 import { Omit } from "..";
@@ -148,7 +149,7 @@ class Grow extends React.Component<CodeProps, any> {
         onExit={this.handleExit}
         addEndListener={this.addEndListener}
         timeout={timeout === "auto" ? null : timeout}
-        {...other}
+        {...other as any}
       >
         {(state, childProps) => {
           return React.cloneElement(children, {

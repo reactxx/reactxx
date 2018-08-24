@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import warning from "warning";
 import { StandardProps } from "..";
@@ -35,14 +36,8 @@ const styles = theme => ({
  * This is a simple wrapper to apply the `dense` mode styles to `Avatar`.
  */
 
-function ListItemAvatar(props, context) {
-  const {
-    $system: { theme },
-    children,
-    classes,
-    className: classNameProp,
-    ...other
-  } = props;
+const ListItemAvatar: Types.CodeSFCWeb<Shape> = (props, context) => {
+  const { children, classes, className: classNameProp, ...other } = props;
 
   if (context.dense === undefined) {
     warning(
@@ -65,7 +60,7 @@ function ListItemAvatar(props, context) {
     ),
     ...other
   });
-}
+};
 
 ListItemAvatar.contextTypes = {
   dense: PropTypes.bool

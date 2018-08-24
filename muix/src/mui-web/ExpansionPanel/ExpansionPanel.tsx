@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Paper
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import warning from "warning";
 import Collapse from "../Collapse/Collapse";
@@ -159,43 +160,46 @@ class ExpansionPanel extends React.Component<CodeProps, any> {
       classNameProp
     );
     let summary = null;
-    const children = React.Children.map(childrenProp, child => {
-      if (!React.isValidElement(child)) {
-        return null;
+    const children = React.Children.map(
+      childrenProp,
+      (child: React.ReactElement<any>) => {
+        if (!React.isValidElement(child)) {
+          return null;
+        }
+
+        warning(
+          child.type !== React.Fragment,
+          [
+            "Material-UI: the ExpansionPanel component doesn't accept a Fragment as a child.",
+            "Consider providing an array instead."
+          ].join("\n")
+        );
+
+        if (isMuiElement(child, ["ExpansionPanelSummary"])) {
+          summary = React.cloneElement(child, {
+            disabled,
+            expanded,
+            onChange: this.handleChange
+          });
+          return null;
+        }
+
+        return child;
       }
-
-      warning(
-        child.type !== React.Fragment,
-        [
-          "Material-UI: the ExpansionPanel component doesn't accept a Fragment as a child.",
-          "Consider providing an array instead."
-        ].join("\n")
-      );
-
-      if (isMuiElement(child, ["ExpansionPanelSummary"])) {
-        summary = React.cloneElement(child, {
-          disabled,
-          expanded,
-          onChange: this.handleChange
-        });
-        return null;
-      }
-
-      return child;
-    });
+    );
     const CollapseProps = !expanded
       ? {
           "aria-hidden": "true"
         }
       : null;
     return (
-      <Paper className={className} elevation={1} square {...other}>
+      <Paper className={className} elevation={1} square {...other as any}>
         {summary}
         <Collapse
           in={expanded}
           timeout="auto"
-          {...CollapseProps}
-          {...CollapsePropsProp}
+          {...CollapseProps as any}
+          {...CollapsePropsProp as any}
         >
           {children}
         </Collapse>

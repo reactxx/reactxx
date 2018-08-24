@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import debounce from "debounce"; // < 1kb payload overhead when lodash/debounce is > 3kb.
 
@@ -221,7 +222,7 @@ class Textarea extends React.Component<CodeProps, any> {
           value={value}
           onChange={this.handleChange}
           ref={this.handleRefInput}
-          {...other}
+          {...other as any}
         />
       </div>
     );

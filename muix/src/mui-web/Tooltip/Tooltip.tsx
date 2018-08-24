@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import warning from "warning";
 import { classNames } from "reactxx-basic";
 import RootRef from "../RootRef/RootRef";
@@ -380,7 +381,7 @@ class Tooltip extends React.Component<CodeProps, any> {
           open={open}
           id={childrenProps["aria-describedby"]}
           transition
-          {...PopperProps}
+          {...PopperProps as any}
         >
           {({
             placement: placementInner,
@@ -388,8 +389,8 @@ class Tooltip extends React.Component<CodeProps, any> {
           }) => (
             <TransitionComponent
               timeout={theme.transitions.duration.shorter}
-              {...TransitionPropsInner}
-              {...TransitionProps}
+              {...TransitionPropsInner as any}
+              {...TransitionProps as any}
             >
               <div
                 className={classNames(

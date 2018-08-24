@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import Typography from "../Typography/Typography";
 import { StandardProps } from "..";
@@ -31,7 +32,7 @@ const styles = {
 const DialogTitle: Types.CodeSFCWeb<Shape> = props => {
   const { children, classes, className, disableTypography, ...other } = props;
   return (
-    <div className={classNames(classes.root, className)} {...other}>
+    <div className={classNames(classes.root, className)} {...other as any}>
       {disableTypography ? (
         children
       ) : (

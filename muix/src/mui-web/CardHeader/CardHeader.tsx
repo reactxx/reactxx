@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import Typography from "../Typography/Typography";
 import { StandardProps } from "..";
@@ -95,7 +96,7 @@ const CardHeader: Types.CodeSFCWeb<Shape> = props => {
         variant={avatar ? "body2" : "headline"}
         className={classes.title}
         component="span"
-        {...titleTypographyProps}
+        {...titleTypographyProps as any}
       >
         {title}
       </Typography>
@@ -115,7 +116,7 @@ const CardHeader: Types.CodeSFCWeb<Shape> = props => {
         className={classes.subheader}
         color="textSecondary"
         component="span"
-        {...subheaderTypographyProps}
+        {...subheaderTypographyProps as any}
       >
         {subheader}
       </Typography>
@@ -123,7 +124,10 @@ const CardHeader: Types.CodeSFCWeb<Shape> = props => {
   }
 
   return (
-    <Component className={classNames(classes.root, classNameProp)} {...other}>
+    <Component
+      className={classNames(classes.root, classNameProp)}
+      {...other as any}
+    >
       {avatar && <div className={classes.avatar}>{avatar}</div>}
       <div className={classes.content}>
         {title}

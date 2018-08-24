@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { StandardProps } from "..";
 export interface GridListTileBarProps
@@ -130,7 +131,7 @@ const GridListTileBar: Types.CodeSFCWeb<Shape> = props => {
     actionPos === "right" && classes.titleWrapActionPosRight
   );
   return (
-    <div className={className} {...other}>
+    <div className={className} {...other as any}>
       <div className={titleWrapClassName}>
         <div className={classes.title}>{title}</div>
         {subtitle ? <div className={classes.subtitle}>{subtitle}</div> : null}

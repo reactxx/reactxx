@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { capitalize } from "../utils/helpers";
 import { StandardProps } from "..";
@@ -177,8 +178,8 @@ const CircularProgress: Types.CodeSFCWeb<Shape> = props => {
         ...style
       }}
       role="progressbar"
-      {...rootProps}
-      {...other}
+      {...rootProps as any}
+      {...other as any}
     >
       <svg
         className={classes.svg}

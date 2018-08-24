@@ -7,6 +7,7 @@
 
 // @inheritedComponent Input
 import React from "react";
+import PropTypes from "prop-types";
 import SelectInput from "./SelectInput";
 import mergeClasses from "../styles/mergeClasses";
 import ArrowDropDownIcon from "../internal/svg-icons/ArrowDropDown";

@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
 import { fitPatch } from "./GridListTilePatch";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import EventListener from "react-event-listener";
 import debounce from "debounce"; // < 1kb payload overhead when lodash/debounce is > 3kb.
@@ -135,10 +136,13 @@ class GridListTile extends React.Component<CodeProps, any> {
       ...other
     } = this.props;
     return (
-      <Component className={classNames(classes.root, className)} {...other}>
+      <Component
+        className={classNames(classes.root, className)}
+        {...other as any}
+      >
         <EventListener target="window" onResize={this.handleResize} />
         <div className={classes.tile}>
-          {React.Children.map(children, child => {
+          {React.Children.map(children, (child: React.ReactElement<any>) => {
             if (!React.isValidElement(child)) {
               return null;
             }

@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import KeyboardArrowLeft from "../internal/svg-icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "../internal/svg-icons/KeyboardArrowRight";
@@ -51,7 +52,7 @@ const TabScrollButton: Types.CodeSFCWeb<Shape> = props => {
       className={className}
       onClick={onClick}
       tabIndex={-1}
-      {...other}
+      {...other as any}
     >
       {direction === "left" ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
     </ButtonBase>

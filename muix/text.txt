@@ -1,315 +1,849 @@
-﻿"// @inheritedComponent FormControl
+﻿pe' does not exist on type '{}'.
 
-import {Types} from 'reactxx-basic'
-import React from 'react';
-import warning from 'warning';
+93   if (primary != null && primary.type !== Typography && !disableTypography) {
+                                    ~~~~
 
-import Input from '../Input';
-import InputLabel from '../InputLabel';
-import FormControl from '../FormControl';
-import FormHelperText from '../FormHelperText';
-import Select from '../Select';
-import { StandardProps, PropTypes } from '..';
-import { FormControlProps } from '../FormControl';
-import { FormHelperTextProps } from '../FormHelperText';
-import { InputProps } from '../Input';
-import { InputLabelProps } from '../InputLabel';
-import { FormControlClassKey } from '../FormControl';
-import { SelectProps } from '../Select';
-export interface TextFieldProps extends StandardProps<FormControlProps, TextFieldClassKey, 'onChange' | 'defaultValue'> {
-  autoComplete?: string;
-  autoFocus?: boolean;
-  children?: React.ReactNode;
-  defaultValue?: string | number;
-  disabled?: boolean;
-  error?: boolean;
-  FormHelperTextProps?: Partial<FormHelperTextProps>;
-  fullWidth?: boolean;
-  helperText?: React.ReactNode;
-  id?: string;
-  InputLabelProps?: Partial<InputLabelProps>;
-  InputProps?: Partial<InputProps>;
-  inputProps?: InputProps['inputProps'];
-  inputRef?: React.Ref<any> | React.RefObject<any>;
-  label?: React.ReactNode;
-  margin?: PropTypes.Margin;
-  multiline?: boolean;
-  name?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>;
-  placeholder?: string;
-  required?: boolean;
-  rows?: string | number;
-  rowsMax?: string | number;
-  select?: boolean;
-  SelectProps?: Partial<SelectProps>;
-  type?: string;
-  value?: Array<string | number> | string | number;
-}
-export type TextFieldClassKey = FormControlClassKey;
+src/mui-web/ListItemText/ListItemText.tsx:110:15 - error TS2339: Property 'type' does not exist on type 'ReactNode'.
+  Property 'type' does not exist on type 'string'.
 
-/**
- * The `TextField` is a convenience wrapper for the most common cases (80%).
- * It cannot be all things to all people, otherwise the API would grow out of control.
- *
- * ## Advanced Configuration
- *
- * It's important to understand that the text field is a simple abstraction
- * on top of the following components:
- * - [FormControl](/api/form-control)
- * - [InputLabel](/api/input-label)
- * - [Input](/api/input)
- * - [FormHelperText](/api/form-helper-text)
- *
- * If you wish to alter the properties applied to the native input, you can do so as follows:
- *
- * ```jsx
- * const inputProps = {
- *   step: 300,
- * };
- *
- * return <TextField id="time" type="time" inputProps={inputProps} />;
- * ```
- *
- * For advanced cases, please look at the source of TextField by clicking on the
- * "Edit this page" button above. Consider either:
- * - using the upper case props for passing values directly to the components
- * - using the underlying components directly as shown in the demos
- */
-export type Shape = Types.OverwriteShape<{props: RadioProps
-}>
-const TextField: Types.CodeSFC<Shape> = (props) => {
-  const {
-    autoComplete,
-    autoFocus,
-    children,
-    className,
-    defaultValue,
-    disabled,
-    error,
-    FormHelperTextProps,
-    fullWidth,
-    helperText,
-    id,
-    InputLabelProps,
-    inputProps,
-    InputProps,
-    inputRef,
-    label,
-    multiline,
-    name,
-    onBlur,
-    onChange,
-    onFocus,
-    placeholder,
-    required,
-    rows,
-    rowsMax,
-    select,
-    SelectProps,
-    type,
-    value,
-    ...other
-  } = props;
+110     secondary.type !== Typography &&
+                  ~~~~
 
-  warning(
-    !select || Boolean(children),
-    'Material-UI: `children` must be passed when using the `TextField` component with `select`.',
-  );
+src/mui-web/ListSubheader/ListSubheader.tsx:92:15 - error TS2339: Property 'muiName' does not exist on type 'StatelessComponent<CodePropsWeb<PartialOverwrite<ShapeDefault, { common: ShapeTexts<ListSubheaderClassKey>; props: ListSubheaderProps; theme: Theme; }>>>'.
 
-  const helperTextId = helperText && id ? `${id}-helper-text` : undefined;
-  const InputElement = (
-    <Input
-      autoComplete={autoComplete}
-      autoFocus={autoFocus}
-      defaultValue={defaultValue}
-      disabled={disabled}
-      fullWidth={fullWidth}
-      multiline={multiline}
-      name={name}
-      rows={rows}
-      rowsMax={rowsMax}
-      type={type}
-      value={value}
-      id={id}
-      inputRef={inputRef}
-      onBlur={onBlur}
-      onChange={onChange}
-      onFocus={onFocus}
-      placeholder={placeholder}
-      inputProps={inputProps}
-      {...InputProps}
-    />
-  );
+92 ListSubheader.muiName = "ListSubheader";
+                 ~~~~~~~
 
-  return (
-    <FormControl
-      aria-describedby={helperTextId}
-      className={className}
-      error={error}
-      fullWidth={fullWidth}
-      required={required}
-      {...other}
-    >
-      {label && (
-        <InputLabel htmlFor={id} {...InputLabelProps}>
-          {label}
-        </InputLabel>
-      )}
-      {select ? (
-        <Select value={value} input={InputElement} {...SelectProps}>
-          {children}
-        </Select>
-      ) : (
-        InputElement
-      )}
-      {helperText && (
-        <FormHelperText id={helperTextId} {...FormHelperTextProps}>
-          {helperText}
-        </FormHelperText>
-      )}
-    </FormControl>
-  );
-}
+src/mui-web/Menu/Menu.tsx:82:62 - error TS2339: Property 'focus' does not exist on type 'Element | Text'.
+  Property 'focus' does not exist on type 'Element'.
 
-TextField.propTypes = {
-  /**
-   * This property helps users to fill forms faster, especially on mobile devices.
-   * The name can be confusing, as it's more like an autofill.
-   * You can learn more about it here:
-   * https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill
-   */
-  autoComplete: PropTypes.string,
-  /**
-   * If `true`, the input will be focused during the first mount.
-   */
-  autoFocus: PropTypes.bool,
-  /**
-   * @ignore
-   */
-  children: PropTypes.node,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * The default value of the `Input` element.
-   */
-  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * If `true`, the input will be disabled.
-   */
-  disabled: PropTypes.bool,
-  /**
-   * If `true`, the label will be displayed in an error state.
-   */
-  error: PropTypes.bool,
-  /**
-   * Properties applied to the [`FormHelperText`](/api/form-helper-text) element.
-   */
-  FormHelperTextProps: PropTypes.object,
-  /**
-   * If `true`, the input will take up the full width of its container.
-   */
-  fullWidth: PropTypes.bool,
-  /**
-   * The helper text content.
-   */
-  helperText: PropTypes.node,
-  /**
-   * The id of the `input` element.
-   * Use that property to make `label` and `helperText` accessible for screen readers.
-   */
-  id: PropTypes.string,
-  /**
-   * Properties applied to the [`InputLabel`](/api/input-label) element.
-   */
-  InputLabelProps: PropTypes.object,
-  /**
-   * Properties applied to the `Input` element.
-   */
-  InputProps: PropTypes.object,
-  /**
-   * Attributes applied to the native `input` element.
-   */
-  inputProps: PropTypes.object,
-  /**
-   * Use that property to pass a ref callback to the native input component.
-   */
-  inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  /**
-   * The label content.
-   */
-  label: PropTypes.node,
-  /**
-   * If `dense` or `normal`, will adjust vertical spacing of this and contained components.
-   */
-  margin: PropTypes.oneOf(['none', 'dense', 'normal']),
-  /**
-   * If `true`, a textarea element will be rendered instead of an input.
-   */
-  multiline: PropTypes.bool,
-  /**
-   * Name attribute of the `input` element.
-   */
-  name: PropTypes.string,
-  /**
-   * @ignore
-   */
-  onBlur: PropTypes.func,
-  /**
-   * Callback fired when the value is changed.
-   *
-   * @param {object} event The event source of the callback.
-   * You can pull out the new value by accessing `event.target.value`.
-   */
-  onChange: PropTypes.func,
-  /**
-   * @ignore
-   */
-  onFocus: PropTypes.func,
-  /**
-   * The short hint displayed in the input before the user enters a value.
-   */
-  placeholder: PropTypes.string,
-  /**
-   * If `true`, the label is displayed as required and the input will be required.
-   */
-  required: PropTypes.bool,
-  /**
-   * Number of rows to display when multiline option is set to true.
-   */
-  rows: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * Maximum number of rows to display when multiline option is set to true.
-   */
-  rowsMax: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * Render a `Select` element while passing the `Input` element to `Select` as `input` parameter.
-   * If this option is set you must pass the options of the select as children.
-   */
-  select: PropTypes.bool,
-  /**
-   * Properties applied to the [`Select`](/api/select) element.
-   */
-  SelectProps: PropTypes.object,
-  /**
-   * Type attribute of the `Input` element. It should be a valid HTML5 input type.
-   */
-  type: PropTypes.string,
-  /**
-   * The value of the `Input` element, required for a controlled component.
-   */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
-  ]),
-};
+82       ReactDOM.findDOMNode(this.menuListRef.selectedItemRef).focus();
+                                                                ~~~~~
 
-TextField.defaultProps = {
-  required: false,
-  select: false,
-};
+src/mui-web/Menu/Menu.tsx:89:27 - error TS2339: Property 'focus' does not exist on type 'Node'.
 
-export default TextField;
-"
+89       menuList.firstChild.focus();
+                             ~~~~~
+
+src/mui-web/Menu/Menu.tsx:93:35 - error TS2459: Type 'Readonly<{ children?:
+ReactNode; }> & Readonly<CodePropsWeb<PartialOverwrite<ShapeDefault, { common: ShapeTexts<"paper">; props: MenuProps; theme: Theme; }>>>' has no property 'theme' and no string index signature.
+
+93     const { disableAutoFocusItem, theme } = this.props;
+                                     ~~~~~
+
+src/mui-web/Menu/Menu.tsx:103:39 - error TS2339: Property 'clientHeight' does not exist on type 'Element | Text'.
+  Property 'clientHeight' does not exist on type 'Text'.
+
+103       element.clientHeight < menuList.clientHeight &&
+                                          ~~~~~~~~~~~~
+
+src/mui-web/Menu/Menu.tsx:104:17 - error TS2339: Property 'style' does not exist on type 'Element | Text'.
+  Property 'style' does not exist on type 'Element'.
+
+104       !menuList.style.width
+                    ~~~~~
+
+src/mui-web/Menu/Menu.tsx:107:16 - error TS2339: Property 'style' does not exist on type 'Element | Text'.
+  Property 'style' does not exist on type 'Element'.
+
+107       menuList.style[
+                   ~~~~~
+
+src/mui-web/Menu/Menu.tsx:110:16 - error TS2339: Property 'style' does not exist on type 'Element | Text'.
+  Property 'style' does not exist on type 'Element'.
+
+110       menuList.style.width = `calc(100% + ${size})`;
+                   ~~~~~
+
+src/mui-web/Menu/Menu.tsx:114:7 - error TS2554: Expected 2 arguments, but got 1.
+
+114       this.props.onEnter(element);
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/MenuList/MenuList.tsx:18:18 - error TS2395: Individual declarations in merged declaration 'MenuListProps' must be all exported or all local.
+18 export interface MenuListProps
+                    ~~~~~~~~~~~~~
+
+src/mui-web/MenuList/MenuList.tsx:23:11 - error TS2395: Individual declarations in merged declaration 'MenuListProps' must be all exported or all local.
+23 interface MenuListProps {
+             ~~~~~~~~~~~~~
+
+src/mui-web/MenuList/MenuList.tsx:181:13 - error TS2345: Argument of type '{ tabIndex: number; ref: (ref: any) => void; onFocus: (event: any) => void; }' is not assignable to parameter of type 'Partial<{}> & Attributes'.
+  Object literal may only specify known properties, and 'tabIndex' does not
+exist in type 'Partial<{}> & Attributes'.
+
+181             tabIndex: index === this.state.currentTabIndex ? 0 : -1,
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/MenuList/MenuList.tsx:182:30 - error TS2339: Property 'selected' does not exist on type '{}'.
+
+182             ref: child.props.selected
+                                 ~~~~~~~~
+
+src/mui-web/Modal/Modal.tsx:20:8 - error TS2300: Duplicate identifier 'ModalManager'.
+
+20 import ModalManager from "./ModalManager";
+          ~~~~~~~~~~~~
+
+src/mui-web/Modal/Modal.tsx:22:25 - error TS2300: Duplicate identifier 'ModalManager'.
+
+22 import { StandardProps, ModalManager } from "..";
+                           ~~~~~~~~~~~~
+
+src/mui-web/Modal/Modal.tsx:22:25 - error TS2305: Module '"C:/reactxx/muix/src/mui-web/index"' has no exported member 'ModalManager'.
+
+22 import { StandardProps, ModalManager } from "..";
+                           ~~~~~~~~~~~~
+
+src/mui-web/Modal/Modal.tsx:191:7 - error TS2554: Expected 1 arguments, but
+got 2.
+
+191       this.props.onClose(event, "backdropClick");
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Modal/Modal.tsx:208:7 - error TS2554: Expected 1 arguments, but
+got 2.
+
+208       this.props.onClose(event, "escapeKeyDown");
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Modal/Modal.tsx:212:10 - error TS2339: Property 'lastFocus' does not exist on type 'Modal'.
+
+212     this.lastFocus = ownerDocument(this.mountNode).activeElement;
+             ~~~~~~~~~
+
+src/mui-web/Modal/Modal.tsx:234:12 - error TS2339: Property 'lastFocus' does not exist on type 'Modal'.
+
+234       this.lastFocus = currentActiveElement;
+               ~~~~~~~~~
+
+src/mui-web/Modal/Modal.tsx:257:14 - error TS2339: Property 'lastFocus' does not exist on type 'Modal'.
+
+257     if (this.lastFocus) {
+                 ~~~~~~~~~
+
+src/mui-web/Modal/Modal.tsx:261:16 - error TS2339: Property 'lastFocus' does not exist on type 'Modal'.
+
+261       if (this.lastFocus.focus) {
+                   ~~~~~~~~~
+
+src/mui-web/Modal/Modal.tsx:262:14 - error TS2339: Property 'lastFocus' does not exist on type 'Modal'.
+
+262         this.lastFocus.focus();
+                 ~~~~~~~~~
+
+src/mui-web/Modal/Modal.tsx:265:12 - error TS2339: Property 'lastFocus' does not exist on type 'Modal'.
+
+265       this.lastFocus = null;
+               ~~~~~~~~~
+
+src/mui-web/Modal/Modal.tsx:307:18 - error TS2339: Property 'onExited' does
+not exist on type '{}'.
+
+307       childProps.onExited = createChainedFunction(
+                     ~~~~~~~~
+
+src/mui-web/Modal/Modal.tsx:309:18 - error TS2339: Property 'props' does not exist on type 'ReactNode'.
+  Property 'props' does not exist on type 'string'.
+
+309         children.props.onExited
+                     ~~~~~
+
+src/mui-web/Modal/Modal.tsx:313:18 - error TS2339: Property 'props' does not exist on type 'ReactNode'.
+  Property 'props' does not exist on type 'string'.
+
+313     if (children.props.role === undefined) {
+                     ~~~~~
+
+src/mui-web/Modal/Modal.tsx:314:18 - error TS2339: Property 'role' does not
+exist on type '{}'.
+
+314       childProps.role = children.props.role || "document";
+                     ~~~~
+
+src/mui-web/Modal/Modal.tsx:314:34 - error TS2339: Property 'props' does not exist on type 'ReactNode'.
+  Property 'props' does not exist on type 'string'.
+
+314       childProps.role = children.props.role || "document";
+                                     ~~~~~
+
+src/mui-web/Modal/Modal.tsx:317:18 - error TS2339: Property 'props' does not exist on type 'ReactNode'.
+  Property 'props' does not exist on type 'string'.
+
+317     if (children.props.tabIndex === undefined) {
+                     ~~~~~
+
+src/mui-web/Modal/Modal.tsx:318:18 - error TS2339: Property 'tabIndex' does
+not exist on type '{}'.
+
+318       childProps.tabIndex = children.props.tabIndex || "-1";
+                     ~~~~~~~~
+
+src/mui-web/Modal/Modal.tsx:318:38 - error TS2339: Property 'props' does not exist on type 'ReactNode'.
+  Property 'props' does not exist on type 'string'.
+
+318       childProps.tabIndex = children.props.tabIndex || "-1";
+                                         ~~~~~
+
+src/mui-web/Modal/Modal.tsx:354:33 - error TS2345: Argument of type 'ReactNode' is not assignable to parameter of type 'ReactElement<any>'.
+  Type 'string' is not assignable to type 'ReactElement<any>'.
+
+354             {React.cloneElement(children, childProps)}
+                                    ~~~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:44:11 - error TS2339: Property 'paddingRight' does not exist on type '{ overflow: string; }'.
+
+44     style.paddingRight = `${getPaddingRight(container) + scrollbarSize}px`; // .mui-fixed is a global helper.
+             ~~~~~~~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:81:10 - error TS2339: Property 'hideSiblingNodes' does not exist on type 'ModalManager'.
+
+81     this.hideSiblingNodes = hideSiblingNodes;
+            ~~~~~~~~~~~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:82:10 - error TS2339: Property 'handleContainerOverflow' does not exist on type 'ModalManager'.
+
+82     this.handleContainerOverflow = handleContainerOverflow; // this.modals[modalIdx] = modal
+            ~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:84:10 - error TS2339: Property 'modals' does not exist on type 'ModalManager'.
+
+84     this.modals = []; // this.containers[containerIdx] = container
+            ~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:86:10 - error TS2339: Property 'containers' does not exist on type 'ModalManager'.
+
+86     this.containers = []; // this.data[containerIdx] = {
+            ~~~~~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:90:10 - error TS2339: Property 'data' does not exist on type 'ModalManager'.
+
+90     this.data = [];
+            ~~~~
+
+src/mui-web/Modal/ModalManager.tsx:94:25 - error TS2339: Property 'modals' does not exist on type 'ModalManager'.
+
+94     let modalIdx = this.modals.indexOf(modal);
+                           ~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:100:21 - error TS2339: Property 'modals'
+does not exist on type 'ModalManager'.
+
+100     modalIdx = this.modals.length;
+                        ~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:101:10 - error TS2339: Property 'modals'
+does not exist on type 'ModalManager'.
+
+101     this.modals.push(modal);
+             ~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:103:14 - error TS2339: Property 'hideSiblingNodes' does not exist on type 'ModalManager'.
+
+103     if (this.hideSiblingNodes) {
+                 ~~~~~~~~~~~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:107:31 - error TS2339: Property 'containers' does not exist on type 'ModalManager'.
+
+107     const containerIdx = this.containers.indexOf(container);
+                                  ~~~~~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:110:12 - error TS2339: Property 'data' does not exist on type 'ModalManager'.
+
+110       this.data[containerIdx].modals.push(modal);
+               ~~~~
+
+src/mui-web/Modal/ModalManager.tsx:120:14 - error TS2339: Property 'handleContainerOverflow' does not exist on type 'ModalManager'.
+
+120     if (this.handleContainerOverflow) {
+                 ~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:124:10 - error TS2339: Property 'containers' does not exist on type 'ModalManager'.
+
+124     this.containers.push(container);
+             ~~~~~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:125:10 - error TS2339: Property 'data' does not exist on type 'ModalManager'.
+
+125     this.data.push(data);
+             ~~~~
+
+src/mui-web/Modal/ModalManager.tsx:130:27 - error TS2339: Property 'modals'
+does not exist on type 'ModalManager'.
+
+130     const modalIdx = this.modals.indexOf(modal);
+                              ~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:137:12 - error TS2339: Property 'data' does not exist on type 'ModalManager'.
+
+137       this.data,
+               ~~~~
+
+src/mui-web/Modal/ModalManager.tsx:140:23 - error TS2339: Property 'data' does not exist on type 'ModalManager'.
+
+140     const data = this.data[containerIdx];
+                          ~~~~
+
+src/mui-web/Modal/ModalManager.tsx:141:28 - error TS2339: Property 'containers' does not exist on type 'ModalManager'.
+
+141     const container = this.containers[containerIdx];
+                               ~~~~~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:143:10 - error TS2339: Property 'modals'
+does not exist on type 'ModalManager'.
+
+143     this.modals.splice(modalIdx, 1); // If that was the last modal in a
+container, clean up the container.
+             ~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:146:16 - error TS2339: Property 'handleContainerOverflow' does not exist on type 'ModalManager'.
+
+146       if (this.handleContainerOverflow) {
+                   ~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:150:16 - error TS2339: Property 'hideSiblingNodes' does not exist on type 'ModalManager'.
+
+150       if (this.hideSiblingNodes) {
+                   ~~~~~~~~~~~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:154:12 - error TS2339: Property 'containers' does not exist on type 'ModalManager'.
+
+154       this.containers.splice(containerIdx, 1);
+               ~~~~~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:155:12 - error TS2339: Property 'data' does not exist on type 'ModalManager'.
+
+155       this.data.splice(containerIdx, 1);
+               ~~~~
+
+src/mui-web/Modal/ModalManager.tsx:156:21 - error TS2339: Property 'hideSiblingNodes' does not exist on type 'ModalManager'.
+
+156     } else if (this.hideSiblingNodes) {
+                        ~~~~~~~~~~~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:166:14 - error TS2339: Property 'modals'
+does not exist on type 'ModalManager'.
+
+166       !!this.modals.length && this.modals[this.modals.length - 1] === modal
+                 ~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:166:36 - error TS2339: Property 'modals'
+does not exist on type 'ModalManager'.
+
+166       !!this.modals.length && this.modals[this.modals.length - 1] === modal
+                                       ~~~~~~
+
+src/mui-web/Modal/ModalManager.tsx:166:48 - error TS2339: Property 'modals'
+does not exist on type 'ModalManager'.
+
+166       !!this.modals.length && this.modals[this.modals.length - 1] === modal
+                                                   ~~~~~~
+
+src/mui-web/NativeSelect/NativeSelect.tsx:14:31 - error TS2307: Cannot find
+module '../internal/svg-icons/ArrowDropDown'.
+
+14 import ArrowDropDownIcon from "../internal/svg-icons/ArrowDropDown";
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/NativeSelect/NativeSelect.tsx:115:29 - error TS2345: Argument of type 'ReactNode' is not assignable to parameter of type 'ReactElement<any>'.
+  Type 'string' is not assignable to type 'ReactElement<any>'.
+
+115   return React.cloneElement(input, {
+                                ~~~~~
+
+src/mui-web/NativeSelect/NativeSelect.tsx:126:25 - error TS2339: Property 'props' does not exist on type 'string | number | true | {} | ReactElement<any> | ReactNodeArray | ReactPortal'.
+  Property 'props' does not exist on type 'string'.
+
+126       ...(input ? input.props.inputProps : {})
+                            ~~~~~
+
+src/mui-web/NativeSelect/NativeSelect.tsx:132:14 - error TS2339: Property 'muiName' does not exist on type 'StatelessComponent<CodePropsWeb<PartialOverwrite<ShapeDefault, { common: ShapeTexts<NativeSelectClassKey>; props: NativeSelectProps; theme: Theme; }>>>'.
+
+132 NativeSelect.muiName = "NativeSelect";
+                 ~~~~~~~
+
+src/mui-web/NoSsr/NoSsr.tsx:11:18 - error TS2395: Individual declarations in merged declaration 'NoSsrProps' must be all exported or all local.
+
+11 export interface NoSsrProps {
+                    ~~~~~~~~~~
+
+src/mui-web/NoSsr/NoSsr.tsx:25:11 - error TS2395: Individual declarations in merged declaration 'NoSsrProps' must be all exported or all local.
+
+25 interface NoSsrProps {
+             ~~~~~~~~~~
+
+src/mui-web/NoSsr/NoSsr.tsx:43:10 - error TS2339: Property 'mounted' does not exist on type 'NoSsr'.
+
+43     this.mounted = true;
+            ~~~~~~~
+
+src/mui-web/NoSsr/NoSsr.tsx:52:20 - error TS2339: Property 'mounted' does not exist on type 'NoSsr'.
+
+52           if (this.mounted) {
+                      ~~~~~~~
+
+src/mui-web/NoSsr/NoSsr.tsx:67:10 - error TS2339: Property 'mounted' does not exist on type 'NoSsr'.
+
+67     this.mounted = false;
+            ~~~~~~~
+
+src/mui-web/Popover/Popover.tsx:321:7 - error TS2554: Expected 2 arguments,
+but got 1.
+
+321       this.props.onEnter(element);
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Popover/Popover.tsx:361:28 - error TS2339: Property 'muiSupportAuto' does not exist on type 'ReactType<any>'.
+  Property 'muiSupportAuto' does not exist on type 'string'.
+
+361       !TransitionComponent.muiSupportAuto
+                               ~~~~~~~~~~~~~~
+
+src/mui-web/Popper/Popper.tsx:151:7 - error TS2459: Type 'Readonly<{ children?: ReactNode; }> & Readonly<CodePropsWeb<PartialOverwrite<ShapeDefault, { props: PopperProps; theme: Theme; }>>>' has no property 'theme' and no string index signature.
+
+151       theme,
+          ~~~~~
+
+src/mui-web/Popper/Popper.tsx:165:55 - error TS2345: Argument of type 'Element | Text' is not assignable to parameter of type 'Element'.
+  Type 'Text' is not assignable to type 'Element'.
+    Property 'attributes' is missing in type 'Text'.
+
+165     this.popper = new PopperJS(getAnchorEl(anchorEl), popperNode, {
+                                                          ~~~~~~~~~~
+
+src/mui-web/Popper/Popper.tsx:178:26 - error TS2339: Property 'modifiers' does not exist on type 'Object'.
+
+178         ...popperOptions.modifiers
+                             ~~~~~~~~~
+
+src/mui-web/Popper/Popper.tsx:234:18 - error TS2339: Property 'TransitionProps' does not exist on type '{ placement: any; }'.
+
+234       childProps.TransitionProps = {
+                     ~~~~~~~~~~~~~~~
+
+src/mui-web/Portal/Portal.tsx:13:10 - error TS2440: Import declaration conflicts with local declaration of 'PortalProps'.
+
+13 import { PortalProps } from "../Portal/Portal";
+            ~~~~~~~~~~~
+
+src/mui-web/Portal/Portal.tsx:14:18 - error TS2395: Individual declarations
+in merged declaration 'PortalProps' must be all exported or all local.
+
+14 export interface PortalProps {
+                    ~~~~~~~~~~~
+
+src/mui-web/Portal/Portal.tsx:34:11 - error TS2395: Individual declarations
+in merged declaration 'PortalProps' must be all exported or all local.
+
+34 interface PortalProps {
+             ~~~~~~~~~~~
+
+src/mui-web/Portal/Portal.tsx:70:10 - error TS2339: Property 'mountNode' does not exist on type 'Portal'.
+
+70     this.mountNode = null;
+            ~~~~~~~~~
+
+src/mui-web/Portal/Portal.tsx:75:12 - error TS2339: Property 'mountNode' does not exist on type 'Portal'.
+
+75       this.mountNode = ReactDOM.findDOMNode(this).parentElement;
+              ~~~~~~~~~
+
+src/mui-web/Portal/Portal.tsx:79:10 - error TS2339: Property 'mountNode' does not exist on type 'Portal'.
+
+79     this.mountNode = getContainer(container, getOwnerDocument(this).body);
+            ~~~~~~~~~
+
+src/mui-web/Portal/Portal.tsx:86:17 - error TS2339: Property 'mountNode' does not exist on type 'Portal'.
+
+86     return this.mountNode;
+                   ~~~~~~~~~
+
+src/mui-web/Portal/Portal.tsx:96:17 - error TS2339: Property 'mountNode' does not exist on type 'Portal'.
+
+96     return this.mountNode
+                   ~~~~~~~~~
+
+src/mui-web/Portal/Portal.tsx:97:46 - error TS2339: Property 'mountNode' does not exist on type 'Portal'.
+
+97       ? ReactDOM.createPortal(children, this.mountNode)
+                                                ~~~~~~~~~
+
+src/mui-web/Radio/Radio.tsx:14:38 - error TS2307: Cannot find module '../internal/svg-icons/RadioButtonUnchecked'.
+
+14 import RadioButtonUncheckedIcon from "../internal/svg-icons/RadioButtonUnchecked";
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Radio/Radio.tsx:15:36 - error TS2307: Cannot find module '../internal/svg-icons/RadioButtonChecked'.
+
+15 import RadioButtonCheckedIcon from "../internal/svg-icons/RadioButtonChecked";
+                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/RadioGroup/RadioGroup.tsx:16:18 - error TS2395: Individual declarations in merged declaration 'RadioGroupProps' must be all exported or all
+local.
+
+16 export interface RadioGroupProps
+                    ~~~~~~~~~~~~~~~
+
+src/mui-web/RadioGroup/RadioGroup.tsx:23:11 - error TS2395: Individual declarations in merged declaration 'RadioGroupProps' must be all exported or all
+local.
+
+23 interface RadioGroupProps {
+             ~~~~~~~~~~~~~~~
+
+src/mui-web/RadioGroup/RadioGroup.tsx:81:13 - error TS2345: Argument of type '{ name: any; inputRef: (node: any) => void; checked: boolean; onChange: any; }' is not assignable to parameter of type 'Partial<{}> & Attributes'.
+  Object literal may only specify known properties, and 'name' does not exist in type 'Partial<{}> & Attributes'.
+
+81             name,
+               ~~~~
+
+src/mui-web/RadioGroup/RadioGroup.tsx:87:44 - error TS2339: Property 'value' does not exist on type '{}'.
+
+87             checked: value === child.props.value,
+                                              ~~~~~
+
+src/mui-web/RadioGroup/RadioGroup.tsx:89:27 - error TS2339: Property 'onChange' does not exist on type '{}'.
+
+89               child.props.onChange,
+                             ~~~~~~~~
+
+src/mui-web/Select/Select.tsx:13:31 - error TS2307: Cannot find module '../internal/svg-icons/ArrowDropDown'.
+
+13 import ArrowDropDownIcon from "../internal/svg-icons/ArrowDropDown";
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Select/Select.tsx:15:10 - error TS2305: Module '"C:/reactxx/muix/src/mui-web/NativeSelect/NativeSelect"' has no exported member 'styles'.
+
+15 import { styles as nativeSelectStyles } from "../NativeSelect/NativeSelect";
+            ~~~~~~
+
+src/mui-web/Select/Select.tsx:46:15 - error TS2503: Cannot find namespace 'Types'.
+
+46 const Select: Types.CodeSFCWeb<Shape> = props => {
+                 ~~~~~
+
+src/mui-web/Select/Select.tsx:46:32 - error TS2304: Cannot find name 'Shape'.
+
+46 const Select: Types.CodeSFCWeb<Shape> = props => {
+                                  ~~~~~
+
+src/mui-web/Select/Select.tsx:111:16 - error TS2304: Cannot find name 'withStyles'.
+
+111 export default withStyles(nativeSelectStyles, {
+                   ~~~~~~~~~~
+
+src/mui-web/Select/SelectInput.tsx:16:18 - error TS2395: Individual declarations in merged declaration 'SelectInputProps' must be all exported or all local.
+
+16 export interface SelectInputProps {
+                    ~~~~~~~~~~~~~~~~
+
+src/mui-web/Select/SelectInput.tsx:52:11 - error TS2395: Individual declarations in merged declaration 'SelectInputProps' must be all exported or all local.
+
+52 interface SelectInputProps {
+             ~~~~~~~~~~~~~~~~
+
+src/mui-web/Select/SelectInput.tsx:239:12 - error TS2542: Index signature in type '{ readonly [x: string]: any; }' only permits reading.
+
+239     delete other["aria-invalid"];
+               ~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Select/SelectInput.tsx:277:48 - error TS2339: Property 'value' does not exist on type '{}'.
+
+277           selected = value.indexOf(child.props.value) !== -1;
+                                                   ~~~~~
+
+src/mui-web/Select/SelectInput.tsx:280:46 - error TS2339: Property 'children' does not exist on type '{}'.
+
+280             displayMultiple.push(child.props.children);
+                                                 ~~~~~~~~
+
+src/mui-web/Select/SelectInput.tsx:283:44 - error TS2339: Property 'value' does not exist on type '{}'.
+
+283           selected = value === child.props.value;
+                                               ~~~~~
+
+src/mui-web/Select/SelectInput.tsx:286:41 - error TS2339: Property 'children' does not exist on type '{}'.
+
+286             displaySingle = child.props.children;
+                                            ~~~~~~~~
+
+src/mui-web/Select/SelectInput.tsx:291:11 - error TS2345: Argument of type '{ onClick: (event: any) => void; role: string; selected: any; value: undefined; "data-value": any; }' is not assignable to parameter of type 'Partial<{}> & Attributes'.
+  Object literal may only specify known properties, and 'onClick' does not exist in type 'Partial<{}> & Attributes'.
+
+291           onClick: this.handleItemClick(child),
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Select/SelectInput.tsx:296:37 - error TS2339: Property 'value' does not exist on type '{}'.
+
+296           "data-value": child.props.value // Instead, we provide it as a data attribute.
+                                        ~~~~~
+
+src/mui-web/Slide/Slide.tsx:103:14 - error TS2339: Property 'transitionRef'
+does not exist on type 'Slide'.
+
+103     if (this.transitionRef) {
+                 ~~~~~~~~~~~~~
+
+src/mui-web/Slide/Slide.tsx:104:42 - error TS2339: Property 'transitionRef'
+does not exist on type 'Slide'.
+
+104       setTranslateValue(this.props, this.transitionRef);
+                                             ~~~~~~~~~~~~~
+
+src/mui-web/Slide/Slide.tsx:137:7 - error TS2554: Expected 2 arguments, but
+got 1.
+
+137       this.props.onEnter(node);
+          ~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Slide/Slide.tsx:160:7 - error TS2554: Expected 2 arguments, but
+got 1.
+
+160       this.props.onEntering(node);
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Slide/Slide.tsx:196:14 - error TS2339: Property 'transitionRef'
+does not exist on type 'Slide'.
+
+196     if (this.transitionRef) {
+                 ~~~~~~~~~~~~~
+
+src/mui-web/Slide/Slide.tsx:197:12 - error TS2339: Property 'transitionRef'
+does not exist on type 'Slide'.
+
+197       this.transitionRef.style.visibility = "inherit";
+               ~~~~~~~~~~~~~
+
+src/mui-web/Slide/Slide.tsx:198:42 - error TS2339: Property 'transitionRef'
+does not exist on type 'Slide'.
+
+198       setTranslateValue(this.props, this.transitionRef);
+                                             ~~~~~~~~~~~~~
+
+src/mui-web/Slide/Slide.tsx:218:13 - error TS2339: Property 'visibility' does not exist on type '{}'.
+
+218       style.visibility = "hidden";
+                ~~~~~~~~~~
+
+src/mui-web/Slide/Slide.tsx:224:59 - error TS2339: Property 'style' does not exist on type '{}'.
+
+224       ...(React.isValidElement(children) ? children.props.style : {})
+                                                              ~~~~~
+
+src/mui-web/Slide/Slide.tsx:236:18 - error TS2339: Property 'transitionRef'
+does not exist on type 'Slide'.
+
+236             this.transitionRef = ReactDOM.findDOMNode(ref);
+                     ~~~~~~~~~~~~~
+
+src/mui-web/Snackbar/Snackbar.tsx:180:7 - error TS2554: Expected 1 arguments, but got 0.
+
+180       this.setAutoHideTimer();
+          ~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Snackbar/Snackbar.tsx:187:9 - error TS2554: Expected 1 arguments, but got 0.
+
+187         this.setAutoHideTimer();
+            ~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Step/Step.tsx:99:11 - error TS2345: Argument of type '{ active:
+boolean; alternativeLabel: boolean; completed: boolean; disabled: boolean; icon: number; last: boolean; orientation: "horizontal" | "vertical"; }' is not assignable to parameter of type 'Partial<{}> & Attributes'.
+  Object literal may only specify known properties, and 'active' does not exist in type 'Partial<{}> & Attributes'.
+
+99           active,
+             ~~~~~~
+
+src/mui-web/StepButton/StepButton.tsx:81:24 - error TS2345: Argument of type 'ReactNode' is not assignable to parameter of type 'ReactElement<any>'.
+  Type 'string' is not assignable to type 'ReactElement<any>'.
+
+81     React.cloneElement(children, childProps)
+                          ~~~~~~~~
+
+src/mui-web/StepContent/StepContent.tsx:85:26 - error TS2339: Property 'muiSupportAuto' does not exist on type 'ComponentType<TransitionProps>'.
+  Property 'muiSupportAuto' does not exist on type 'ComponentClass<TransitionProps>'.
+
+85     !TransitionComponent.muiSupportAuto
+                            ~~~~~~~~~~~~~~
+
+src/mui-web/StepIcon/StepIcon.tsx:13:25 - error TS2307: Cannot find module '../internal/svg-icons/CheckCircle'.
+
+13 import CheckCircle from "../internal/svg-icons/CheckCircle";
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/StepIcon/StepIcon.tsx:14:21 - error TS2307: Cannot find module '../internal/svg-icons/Warning'.
+
+14 import Warning from "../internal/svg-icons/Warning";
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/StepIcon/StepIcon.tsx:67:7 - error TS2322: Type '(props: OmitPartial<StepIconProps & HTMLAttributes<HTMLElement>, omitPropNames> & OnPressAllWeb & CodeProps<PartialOverwrite<ShapeDefault, { props: StepIconProps; theme: Theme; }>> & { ...; } & { ...; }) => {}' is not assignable to type 'StatelessComponent<CodePropsWeb<PartialOverwrite<ShapeDefault, { props: StepIconProps; theme: Theme; }>>>'.
+  Type '{}' is not assignable to type 'ReactElement<any>'.
+    Property 'type' is missing in type '{}'.
+
+67 const StepIcon: Types.CodeSFCWeb<Shape> = props => {
+         ~~~~~~~~
+
+src/mui-web/StepLabel/StepLabel.tsx:182:11 - error TS2339: Property 'muiName' does not exist on type 'StatelessComponent<CodePropsWeb<PartialOverwrite<ShapeDefault, { props: StepLabelProps; theme: Theme; }>>>'.
+
+182 StepLabel.muiName = "StepLabel";
+              ~~~~~~~
+
+src/mui-web/Stepper/Stepper.tsx:77:9 - error TS2345: Argument of type '{ orientation: "horizontal" | "vertical"; }' is not assignable to parameter of type 'Partial<{}> & Attributes'.
+  Object literal may only specify known properties, and 'orientation' does not exist in type 'Partial<{}> & Attributes'.
+
+77         orientation
+           ~~~~~~~~~~~
+
+src/mui-web/Stepper/Stepper.tsx:108:26 - error TS2345: Argument of type 'ReactChild' is not assignable to parameter of type 'ReactElement<any>'.
+  Type 'string' is not assignable to type 'ReactElement<any>'.
+
+108       React.cloneElement(step, {
+                             ~~~~
+
+src/mui-web/Stepper/Stepper.tsx:110:17 - error TS2339: Property 'props' does not exist on type 'ReactChild'.
+  Property 'props' does not exist on type 'string'.
+
+110         ...step.props
+                    ~~~~~
+
+src/mui-web/Stepper/Stepper.tsx:121:9 - error TS2339: Property 'muiName' does not exist on type 'StatelessComponent<CodePropsWeb<PartialOverwrite<ShapeDefault, { props: StepperProps; theme: Theme; }>>>'.
+
+121 Stepper.muiName = "Stepper";
+            ~~~~~~~
+
+src/mui-web/styles/index.tsx:10:38 - error TS2307: Cannot find module './jssPreset'.
+
+10 export { default as jssPreset } from "./jssPreset";
+                                        ~~~~~~~~~~~~~
+
+src/mui-web/styles/withTheme.tsx:60:15 - error TS2459: Type 'Readonly<{ children?: ReactNode; }> & Readonly<{}>' has no property 'innerRef' and no string index signature.
+
+60       const { innerRef, ...other } = this.props;
+                 ~~~~~~~~
+
+src/mui-web/styles/withTheme.tsx:67:13 - error TS2339: Property 'propTypes'
+does not exist on type 'typeof WithTheme'.
+
+67   WithTheme.propTypes = {
+               ~~~~~~~~~
+
+src/mui-web/styles/withTheme.tsx:73:13 - error TS2339: Property 'contextTypes' does not exist on type 'typeof WithTheme'.
+
+73   WithTheme.contextTypes = themeListener.contextTypes;
+               ~~~~~~~~~~~~
+
+src/mui-web/styles/withTheme.tsx:76:15 - error TS2339: Property 'displayName' does not exist on type 'typeof WithTheme'.
+
+76     WithTheme.displayName = wrapDisplayName(Component, "WithTheme");
+                 ~~~~~~~~~~~
+
+src/mui-web/styles/withTheme.tsx:83:15 - error TS2339: Property 'Naked' does not exist on type 'typeof WithTheme'.
+
+83     WithTheme.Naked = Component;
+                 ~~~~~
+
+src/mui-web/SvgIcon/SvgIcon.tsx:113:9 - error TS2339: Property 'muiName' does not exist on type 'StatelessComponent<CodePropsWeb<PartialOverwrite<ShapeDefault, { common: ShapeTexts<IconClassKey>; props: SvgIconProps; theme: Theme; }>>>'.
+
+113 SvgIcon.muiName = "SvgIcon";
+            ~~~~~~~
+
+src/mui-web/SwipeableDrawer/SwipeableDrawer.tsx:330:9 - error TS2554: Expected 1 arguments, but got 0.
+
+330         this.props.onClose();
+            ~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/SwipeableDrawer/SwipeableDrawer.tsx:333:7 - error TS2554: Expected 1 arguments, but got 0.
+
+333       this.props.onOpen();
+          ~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/SwipeableDrawer/SwipeableDrawer.tsx:360:7 - error TS2345: Argument of type '{ passive: boolean; }' is not assignable to parameter of type 'boolean | EventListenerOptions'.
+  Object literal may only specify known properties, and 'passive' does not exist in type 'boolean | EventListenerOptions'.
+
+360       passive: false
+          ~~~~~~~~~~~~~~
+
+src/mui-web/SwipeableDrawer/SwipeableDrawer.tsx:373:21 - error TS2525: Initializer provides no value for this binding element and the binding element has no default value.
+
+373       ModalProps: { BackdropProps, ...ModalPropsProp } = {},
+                        ~~~~~~~~~~~~~
+
+src/mui-web/SwipeableDrawer/SwipeableDrawer.tsx:409:26 - error TS2339: Property 'anchor' does not exist on type 'IntrinsicAttributes & OmitPartial<SwipeAreaProps & HTMLAttributes<HTMLElement>, omitPropNames> & OnPressAllWeb & CodeProps<PartialOverwrite<ShapeDefault, { props: SwipeAreaProps; theme: Theme; }>> & { ...; } & { ...; }'.
+
+409               <SwipeArea anchor={anchor} width={swipeAreaWidth} />
+                             ~~~~~~~~~~~~~~~
+
+src/mui-web/SwipeableDrawer/SwipeArea.tsx:47:11 - error TS2459: Type 'OmitPartial<SwipeAreaProps & HTMLAttributes<HTMLElement>, omitPropNames> & OnPressAllWeb & CodeProps<PartialOverwrite<ShapeDefault, { props: SwipeAreaProps; theme: Theme; }>> & { ...; } & { ...; }' has no property 'anchor' and no string index signature.
+
+47   const { anchor, classes, width, ...other } = props;
+             ~~~~~~
+
+src/mui-web/SwipeableDrawer/SwipeArea.tsx:47:28 - error TS2459: Type 'OmitPartial<SwipeAreaProps & HTMLAttributes<HTMLElement>, omitPropNames> & OnPressAllWeb & CodeProps<PartialOverwrite<ShapeDefault, { props: SwipeAreaProps; theme: Theme; }>> & { ...; } & { ...; }' has no property 'width' and no string index signature.
+
+47   const { anchor, classes, width, ...other } = props;
+                              ~~~~~
+
+src/mui-web/Tab/Tab.tsx:196:14 - error TS2339: Property 'labelRef' does not
+exist on type 'Tab'.
+
+196     if (this.labelRef) {
+                 ~~~~~~~~
+
+src/mui-web/Tab/Tab.tsx:197:33 - error TS2339: Property 'labelRef' does not
+exist on type 'Tab'.
+
+197       const labelWrapped = this.labelRef.getClientRects().length > 1;
+                                    ~~~~~~~~
+
+src/mui-web/Tab/Tab.tsx:215:7 - error TS2459: Type 'Readonly<{ children?: ReactNode; }> & Readonly<CodePropsWeb<PartialOverwrite<ShapeDefault, { common: ShapeTexts<TabClassKey>; props: TabProps; theme: Theme; }>>>' has no property 'indicator' and no string index signature.
+
+215       indicator,
+          ~~~~~~~~~
+
+src/mui-web/Tab/Tab.tsx:234:20 - error TS2339: Property 'labelRef' does not
+exist on type 'Tab'.
+
+234               this.labelRef = ref;
+                       ~~~~~~~~
+
+src/mui-web/Table/Table.tsx:44:29 - error TS2339: Property 'padding' does not exist on type 'Readonly<{ children?: ReactNode; }> & Readonly<CodePropsWeb<PartialOverwrite<ShapeDefault, { common: ShapeTexts<"root">; props: TableProps; theme: Theme; }>>>'.
+
+44         padding: this.props.padding
+                               ~~~~~~~
+
+src/mui-web/TablePaginationActions/TablePaginationActions.tsx:12:31 - error
+TS2307: Cannot find module '../internal/svg-icons/KeyboardArrowLeft'.
+
+12 import KeyboardArrowLeft from "../internal/svg-icons/KeyboardArrowLeft";
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/TablePaginationActions/TablePaginationActions.tsx:13:32 - error
+TS2307: Cannot find module '../internal/svg-icons/KeyboardArrowRight'.
+
+13 import KeyboardArrowRight from "../internal/svg-icons/KeyboardArrowRight";
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/mui-web/TableSortLabel/TableSortLabel.tsx:14:31 - error TS2307: Cannot find module '../internal/svg-icons/ArrowDownward'.
+
+14 import ArrowDownwardIcon from "../internal/svg-icons/ArrowDownward";
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Tabs/ScrollbarSize.tsx:91:11 - error TS2322: Type '{ width: number; height: number; position: string; top: number; overflow: string; msOverflowStyle: string; }' is not assignable to type 'CSSProperties'.
+  Types of property 'position' are incompatible.
+    Type 'string' is not assignable to type 'PositionProperty'.
+
+91           style={styles}
+             ~~~~~
+
+  node_modules/@types/react/index.d.ts:953:9
+    953         style?: CSSProperties;
+                ~~~~~
+    The expected type comes from property 'style' which is declared here on
+type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'
+
+src/mui-web/Tabs/TabScrollButton.tsx:13:31 - error TS2307: Cannot find module '../internal/svg-icons/KeyboardArrowLeft'.
+
+13 import KeyboardArrowLeft from "../internal/svg-icons/KeyboardArrowLeft";
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/mui-web/Tabs/TabScrollButton.tsx:14:32 - error TS2307: Cannot find module '../internal/svg-icons/KeyboardArrowRight'.
+
+14 import KeyboardArrowRight from "../internal/svg-icons/KeyboardArrowRight";
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

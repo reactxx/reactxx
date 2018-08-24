@@ -7,6 +7,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 import ownerDocument from "../utils/ownerDocument";
 import exactProp from "../utils/exactProp";
 import { PortalProps } from "../Portal/Portal";

@@ -1,4 +1,4 @@
-import createSvgIcon from './lib/create-svg-icon'
+import createSvgIcon from 'reactxx-mui-web/internal/svg-icons/create-svg-icon'
 
 export default createSvgIcon(
   'M10 18h5V5h-5v13zm-6 0h5V5H4v13zM16 5v13h5V5h-5z',

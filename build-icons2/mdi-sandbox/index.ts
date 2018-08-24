@@ -4,7 +4,7 @@ import * as mdiSandbox from './data.json'
 import * as FSExtra from 'fs-extra'
 
 const getMiToMdi = () => {
-    const allMi: string[] = Glob.sync('/**/*.*', { root: Config.mi }).map(f => f.split('\\')).map(parts => parts[parts.length - 1]).map(fn => fn.substring(beg.length, fn.length - end.length).replace(/_/g, '-'))
+    const allMi: string[] = Glob.sync('/**/*.*', { root: Config.iconMi }).map(f => f.split('\\')).map(parts => parts[parts.length - 1]).map(fn => fn.substring(beg.length, fn.length - end.length).replace(/_/g, '-'))
 
     //*********
     const miToMdi: { [id: string]: string[] } = {}

@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Transition
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import EventListener from "react-event-listener";
 import debounce from "debounce"; // < 1kb payload overhead when lodash/debounce is > 3kb.
@@ -234,7 +235,7 @@ class Slide extends React.Component<CodeProps, any> {
           ref={ref => {
             this.transitionRef = ReactDOM.findDOMNode(ref);
           }}
-          {...other}
+          {...other as any}
         >
           {children}
         </Transition>
@@ -242,6 +243,8 @@ class Slide extends React.Component<CodeProps, any> {
     );
   }
 }
+
+const styles = {};
 
 export type Shape = Types.OverwriteShape<{
   

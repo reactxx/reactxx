@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { StandardProps } from "..";
 export interface FormGroupProps
@@ -42,7 +43,7 @@ const FormGroup: Types.CodeSFCWeb<Shape> = props => {
   return (
     <div
       className={classNames(classes.root, row && classes.row, className)}
-      {...other}
+      {...other as any}
     >
       {children}
     </div>

@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import keycode from "keycode";
 import CancelIcon from "../internal/svg-icons/Cancel";
@@ -16,10 +17,10 @@ import unsupportedProp from "../utils/unsupportedProp";
 import { capitalize } from "../utils/helpers";
 import "../Avatar/Avatar"; // So we don't have any override priority issue.
 
-import { StandardProps, PropTypes } from "..";
+import { StandardProps, PropTypes as muiPropTypes } from "..";
 export interface ChipProps
   extends StandardProps<React.HTMLAttributes<HTMLDivElement>, ChipClassKey> {
-  color?: PropTypes.Color;
+  color?: muiPropTypes.Color;
   avatar?: React.ReactElement<any>;
   clickable?: boolean;
   component?: React.ReactType<ChipProps>;
@@ -357,7 +358,7 @@ class Chip extends React.Component<CodeProps, any> {
         ref={ref => {
           this.chipRef = ref;
         }}
-        {...other}
+        {...other as any}
       >
         {avatar}
         <span className={classes.label}>{label}</span>

@@ -8,14 +8,15 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { capitalize } from "../utils/helpers";
-import { StandardProps, PropTypes } from "..";
+import { StandardProps, PropTypes as muiPropTypes } from "..";
 export interface BadgeProps
   extends StandardProps<React.HTMLAttributes<HTMLDivElement>, BadgeClassKey> {
   badgeContent: React.ReactNode;
   children: React.ReactNode;
-  color?: PropTypes.Color | "error";
+  color?: muiPropTypes.Color | "error";
   component?: React.ReactType<BadgeProps>;
 }
 export type BadgeClassKey =
@@ -92,7 +93,7 @@ const Badge: Types.CodeSFCWeb<Shape> = props => {
   return (
     <ComponentProp
       className={classNames(classes.root, classNameProp)}
-      {...other}
+      {...other as any}
     >
       {children}
       <span className={badgeClassName}>{badgeContent}</span>

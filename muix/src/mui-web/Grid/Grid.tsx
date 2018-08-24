@@ -18,6 +18,7 @@ import withStyles, { Theme } from '../styles/withStyles';
 // Follow this flexbox Guide to better understand the underlying model:
 // - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { keys as breakpointKeys } from "../styles/createBreakpoints";
 import requirePropFactory from "../utils/requirePropFactory";
@@ -370,7 +371,7 @@ const Grid: Types.CodeSFCWeb<Shape> = props => {
     xl !== false && classes[`grid-xl-${String(xl)}`],
     classNameProp
   );
-  return <Component className={className} {...other} />;
+  return <Component className={className} {...other as any} />;
 };
 
 const StyledGrid = withStyles(styles, {

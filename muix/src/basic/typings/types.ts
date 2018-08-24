@@ -130,9 +130,12 @@ export namespace Types {
     Types.OnPressAllWeb &
     TAddIn.CodeProps<R> &
     {
-      style?: TCommonStyles.RulesetWeb
-      className?: TCommonStyles.RulesetWeb
-      classes?: SheetWeb<R>
+      // style?: TCommonStyles.RulesetWeb
+      // className?: TCommonStyles.RulesetWeb
+      // classes?: SheetWeb<R>
+      style?: { [rule: string]: any }
+      className?: { [rule: string]: any } | string
+      classes?: { [ruleset: string]: any }
       children?: React.ReactNode
       $system?: $SystemLow<R>
     }
@@ -148,13 +151,13 @@ export namespace Types {
       className: TCommonStyles.RulesetNative<TCommon.getStyle<R>>
       classes: SheetNative<R>
       children?: React.ReactNode
-      $system?: $SystemLow<R> 
+      $system?: $SystemLow<R>
     }
   export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
 
   // *** web or native
   type $SystemLow<R extends Shape = Shape> =
-    TEventsX<R> 
+    TEventsX<R>
     & {
       theme?: TCommon.getTheme<R>
       variant?: TCommon.getVariant<R>

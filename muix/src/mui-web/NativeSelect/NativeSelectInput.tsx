@@ -7,6 +7,7 @@
 
 import React from "react";
 import { Types } from "reactxx-basic";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 export interface NativeSelectInputProps {
   disabled?: boolean;
@@ -60,7 +61,7 @@ const NativeSelectInput: Types.CodeSFCWeb<Shape> = props => {
         onChange={onChange}
         value={value}
         ref={inputRef}
-        {...other}
+        {...other as any}
       >
         {children}
       </select>

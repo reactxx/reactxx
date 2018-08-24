@@ -9,13 +9,14 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Paper
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { capitalize } from "../utils/helpers";
 import Paper from "../Paper/Paper";
-import { PropTypes, StandardProps } from "..";
+import { StandardProps, PropTypes as muiPropTypes } from "..";
 import { PaperProps } from "../Paper/Paper";
 export interface AppBarProps extends StandardProps<PaperProps, AppBarClassKey> {
-  color?: PropTypes.Color;
+  color?: muiPropTypes.Color;
   position?: "fixed" | "absolute" | "sticky" | "static";
 }
 export type AppBarClassKey =
@@ -116,7 +117,7 @@ const AppBar: Types.CodeSFCWeb<Shape> = props => {
       component="header"
       elevation={4}
       className={className}
-      {...other}
+      {...other as any}
     >
       {children}
     </Paper>

@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { StandardProps } from "..";
 export interface TableRowProps
@@ -68,9 +69,8 @@ const styles = theme => ({
  * based on the material table element parent (head, body, etc).
  */
 
-function TableRow(props, context) {
+const TableRow: Types.CodeSFCWeb<Shape> = (props, context) => {
   const {
-    $system: { theme },
     classes,
     className: classNameProp,
     component: Component,
@@ -87,8 +87,8 @@ function TableRow(props, context) {
     selected && classes.selected,
     classNameProp
   );
-  return <Component className={className} {...other} />;
-}
+  return <Component className={className} {...other as any} />;
+};
 
 TableRow.contextTypes = {
   tablelvl2: PropTypes.object

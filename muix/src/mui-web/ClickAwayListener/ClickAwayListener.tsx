@@ -8,6 +8,7 @@
 // @inheritedComponent EventListener
 import React from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 import EventListener from "react-event-listener";
 import ownerDocument from "../utils/ownerDocument";
 export interface ClickAwayListenerProps {
@@ -92,7 +93,11 @@ class ClickAwayListener extends React.Component<CodeProps, any> {
     }
 
     return (
-      <EventListener target="document" {...listenerProps} {...other}>
+      <EventListener
+        target="document"
+        {...listenerProps as any}
+        {...other as any}
+      >
         {children}
       </EventListener>
     );

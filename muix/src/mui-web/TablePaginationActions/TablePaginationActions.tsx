@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import KeyboardArrowLeft from "../internal/svg-icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "../internal/svg-icons/KeyboardArrowRight";
 import IconButton from "../IconButton/IconButton";
@@ -55,11 +56,11 @@ class TablePaginationActions extends React.Component<CodeProps, any> {
       ...other
     } = this.props;
     return (
-      <div {...other}>
+      <div {...other as any}>
         <IconButton
           onClick={this.handleBackButtonClick}
           disabled={page === 0}
-          {...backIconButtonProps}
+          {...backIconButtonProps as any}
         >
           {theme.direction === "rtl" ? (
             <KeyboardArrowRight />
@@ -70,7 +71,7 @@ class TablePaginationActions extends React.Component<CodeProps, any> {
         <IconButton
           onClick={this.handleNextButtonClick}
           disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-          {...nextIconButtonProps}
+          {...nextIconButtonProps as any}
         >
           {theme.direction === "rtl" ? (
             <KeyboardArrowLeft />
@@ -82,6 +83,8 @@ class TablePaginationActions extends React.Component<CodeProps, any> {
     );
   }
 }
+
+const styles = {};
 
 export type Shape = Types.OverwriteShape<{
   

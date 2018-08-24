@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Popover
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import getScrollbarSize from "dom-helpers/util/scrollbarSize";
 import Popover from "../Popover/Popover";
@@ -149,12 +150,12 @@ class Menu extends React.Component<CodeProps, any> {
             root: classes.paper
           }
         }}
-        {...other}
+        {...other as any}
       >
         <MenuList
           data-mui-test="Menu"
           onKeyDown={this.handleListKeyDown}
-          {...MenuListProps}
+          {...MenuListProps as any}
           ref={ref => {
             this.menuListRef = ref;
           }}

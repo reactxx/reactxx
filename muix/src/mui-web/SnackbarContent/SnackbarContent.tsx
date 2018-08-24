@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Paper
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import Paper from "../Paper/Paper";
 import Typography from "../Typography/Typography";
@@ -72,7 +73,7 @@ const SnackbarContent: Types.CodeSFCWeb<Shape> = props => {
       square
       elevation={6}
       className={classNames(classes.root, className)}
-      {...other}
+      {...other as any}
     >
       <div className={classes.message}>{message}</div>
       {action ? <div className={classes.action}>{action}</div> : null}

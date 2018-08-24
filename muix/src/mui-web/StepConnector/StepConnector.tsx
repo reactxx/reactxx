@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { StandardProps } from "..";
 import { Orientation } from "../Stepper/Stepper";
@@ -96,7 +97,7 @@ const StepConnector: Types.CodeSFCWeb<Shape> = props => {
     orientation === "vertical" && classes.lineVertical
   );
   return (
-    <div className={className} {...other}>
+    <div className={className} {...other as any}>
       <span className={lineClassName} />
     </div>
   );

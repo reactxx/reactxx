@@ -6,6 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import keycode from "keycode";
 import warning from "warning";
@@ -249,50 +250,53 @@ class SelectInput extends React.Component<CodeProps, any> {
       }
     }
 
-    const items = React.Children.map(children, child => {
-      if (!React.isValidElement(child)) {
-        return null;
+    const items = React.Children.map(
+      children,
+      (child: React.ReactElement<any>) => {
+        if (!React.isValidElement(child)) {
+          return null;
+        }
+
+        warning(
+          child.type !== React.Fragment,
+          [
+            "Material-UI: the Select component doesn't accept a Fragment as a child.",
+            "Consider providing an array instead."
+          ].join("\n")
+        );
+        let selected;
+
+        if (multiple) {
+          if (!Array.isArray(value)) {
+            throw new Error(
+              "Material-UI: the `value` property must be an array " +
+                "when using the `Select` component with `multiple`."
+            );
+          }
+
+          selected = value.indexOf(child.props.value) !== -1;
+
+          if (selected && computeDisplay) {
+            displayMultiple.push(child.props.children);
+          }
+        } else {
+          selected = value === child.props.value;
+
+          if (selected && computeDisplay) {
+            displaySingle = child.props.children;
+          }
+        }
+
+        return React.cloneElement(child, {
+          onClick: this.handleItemClick(child),
+          role: "option",
+          selected,
+          value: undefined,
+          // The value is most likely not a valid HTML attribute.
+          "data-value": child.props.value // Instead, we provide it as a data attribute.
+        });
       }
-
-      warning(
-        child.type !== React.Fragment,
-        [
-          "Material-UI: the Select component doesn't accept a Fragment as a child.",
-          "Consider providing an array instead."
-        ].join("\n")
-      );
-      let selected;
-
-      if (multiple) {
-        if (!Array.isArray(value)) {
-          throw new Error(
-            "Material-UI: the `value` property must be an array " +
-              "when using the `Select` component with `multiple`."
-          );
-        }
-
-        selected = value.indexOf(child.props.value) !== -1;
-
-        if (selected && computeDisplay) {
-          displayMultiple.push(child.props.children);
-        }
-      } else {
-        selected = value === child.props.value;
-
-        if (selected && computeDisplay) {
-          displaySingle = child.props.children;
-        }
-      }
-
-      return React.cloneElement(child, {
-        onClick: this.handleItemClick(child),
-        role: "option",
-        selected,
-        value: undefined,
-        // The value is most likely not a valid HTML attribute.
-        "data-value": child.props.value // Instead, we provide it as a data attribute.
-      });
-    });
+    );
 
     if (computeDisplay) {
       display = multiple ? displayMultiple.join(", ") : displaySingle;
@@ -332,7 +336,7 @@ class SelectInput extends React.Component<CodeProps, any> {
           onBlur={this.handleBlur}
           onClick={disabled || readOnly ? null : this.handleClick}
           onFocus={onFocus}
-          {...SelectDisplayProps}
+          {...SelectDisplayProps as any}
         >
           {/* So the vertical align positioning algorithm quicks in. */}
           {/* eslint-disable-next-line react/no-danger */}
@@ -349,7 +353,7 @@ class SelectInput extends React.Component<CodeProps, any> {
           name={name}
           ref={this.handleInputRef}
           type={type}
-          {...other}
+          {...other as any}
         />
         <IconComponent className={classes.icon} />
         <Menu
@@ -357,7 +361,7 @@ class SelectInput extends React.Component<CodeProps, any> {
           anchorEl={this.displayRef}
           open={open}
           onClose={this.handleClose}
-          {...MenuProps}
+          {...MenuProps as any}
           MenuListProps={{
             role: "listbox",
             ...MenuProps.MenuListProps

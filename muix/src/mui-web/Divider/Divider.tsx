@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { fade } from "../styles/colorManipulator";
 import { StandardProps } from "..";
@@ -67,7 +68,7 @@ const Divider: Types.CodeSFCWeb<Shape> = props => {
     light && classes.light,
     classNameProp
   );
-  return <Component className={className} {...other} />;
+  return <Component className={className} {...other as any} />;
 };
 
 export type Shape = Types.OverwriteShape<{

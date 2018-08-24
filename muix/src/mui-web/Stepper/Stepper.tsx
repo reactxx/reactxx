@@ -9,6 +9,7 @@ import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from
 import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Paper
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import Paper from "../Paper/Paper";
 import StepConnector from "../StepConnector/StepConnector";
@@ -111,7 +112,7 @@ const Stepper: Types.CodeSFCWeb<Shape> = props => {
     ];
   });
   return (
-    <Paper square elevation={0} className={className} {...other}>
+    <Paper square elevation={0} className={className} {...other as any}>
       {steps}
     </Paper>
   );

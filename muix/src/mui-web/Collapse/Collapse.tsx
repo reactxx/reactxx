@@ -10,6 +10,7 @@ import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Transition
 import React from "react";
 import { classNames } from "reactxx-basic";
+import PropTypes from "prop-types";
 import Transition from "react-transition-group/Transition";
 import { duration } from "../styles/transitions";
 import { getTransitionProps } from "../transitions/utils";
@@ -182,7 +183,7 @@ class Collapse extends React.Component<CodeProps, any> {
         onExiting={this.handleExiting}
         addEndListener={this.addEndListener}
         timeout={timeout === "auto" ? null : timeout}
-        {...other}
+        {...other as any}
       >
         {(state, childProps) => {
           return (
@@ -196,7 +197,7 @@ class Collapse extends React.Component<CodeProps, any> {
                 ...style,
                 minHeight: collapsedHeight
               }}
-              {...childProps}
+              {...childProps as any}
             >
               <div
                 className={classes.wrapper}

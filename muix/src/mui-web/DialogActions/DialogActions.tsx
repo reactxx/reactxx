@@ -8,6 +8,7 @@
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme } from '../styles/withStyles';
 import React from "react";
+import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { cloneChildrenWithClassName } from "../utils/reactHelpers";
 import "../Button"; // So we don't have any override priority issue.
@@ -46,7 +47,7 @@ const DialogActions: Types.CodeSFCWeb<Shape> = props => {
     ...other
   } = props;
   return (
-    <div className={classNames(classes.root, className)} {...other}>
+    <div className={classNames(classes.root, className)} {...other as any}>
       {disableActionSpacing
         ? children
         : cloneChildrenWithClassName(children, classes.action)}
