@@ -8,6 +8,7 @@ export const generate = () => {
     fsExtra.emptyDirSync(Config.icons)
     const internals = {}
     for (const p in map) {
+        if (p==='react') continue
         const icon = map[p]
         const name = Case.pascalCase(icon.id)
         const fn = Config.icons + name + '.tsx'
