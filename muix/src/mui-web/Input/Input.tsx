@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
-import withStyles, { Theme } from '../styles/withStyles';
+import withStyles, { Theme, toAtomic } from '../styles/withStyles';
 import React from "react";
 import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
@@ -337,6 +337,7 @@ class Input extends React.Component<CodeProps, any> {
   static displayName;
   static contextTypes;
   static childContextTypes;
+  inputRef;
   static options;
   isControlled = null;
   input = null; // Holds the input reference
@@ -515,7 +516,10 @@ class Input extends React.Component<CodeProps, any> {
       fullWidth,
       id,
       inputComponent,
-      inputProps: { className: inputPropsClassName, ...inputPropsProp } = {},
+      inputProps: {
+        className: inputPropsClassName,
+        ...inputPropsProp
+      } = {} as any,
       inputRef,
       margin: marginProp,
       multiline,
@@ -561,8 +565,8 @@ class Input extends React.Component<CodeProps, any> {
       margin === "dense" && classes.inputMarginDense,
       inputPropsClassName
     );
-    let InputComponent = "input";
-    let inputProps = {
+    let InputComponent: any = "input";
+    let inputProps: any = {
       ...inputPropsProp,
       ref: this.handleRefInput
     };
@@ -634,7 +638,7 @@ Input.childContextTypes = {
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<InputClassKey>,
-  props: InputProps,
+  props: InputProps & {   onFilled?; onEmpty? },
   theme: Theme
 }>
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

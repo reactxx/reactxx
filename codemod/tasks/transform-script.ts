@@ -150,10 +150,9 @@ export const scripts: Record<string, Script> = {
     },
     "Grid/Grid": {
         replace: {
-            "": ""
+            "(size / 12)": "((size as number) / 12)"
         },
-        addFields: "",
-        addProps: ""
+        transform: code => code.split('const StyledGrid = withStyles')[0]
     },
     "GridList/GridList": {
         flags: Flags.isValidElementOverride
@@ -176,16 +175,16 @@ export const scripts: Record<string, Script> = {
         addFields: '  static muiSupportAuto'
     },
     "Hidden/Hidden": {
-        replace: {
-            "": ""
-        },
         addFields: "  inputRef",
-        addProps: "",
-
     },
     "Hidden/HiddenCss": {
     },
     "Hidden/HiddenJs": {
+        replace: {
+            "return children": "return children as any",
+            "from '../withWidth';":"from '../withWidth/withWidth';",
+        },
+        addProps: "width?",
     },
     "Icon/Icon": {
     },
@@ -193,10 +192,12 @@ export const scripts: Record<string, Script> = {
     },
     "Input/Input": {
         replace: {
-            "": ""
+            "...inputPropsProp } = {}": "...inputPropsProp } = {} as any",
+            "let InputComponent =":"let InputComponent: any =",
+            "let inputProps = {":"let inputProps: any = {",
         },
-        addFields: "",
-        addProps: ""
+        addFields: "  inputRef",
+        addProps: "  onFilled?; onEmpty?"
     },
     "Input/Textarea": {
         replace: {

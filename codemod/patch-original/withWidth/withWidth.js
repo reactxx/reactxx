@@ -146,7 +146,7 @@ const withWidth = (options = {}) => Component => {
     initialWidth: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
     /**
      * Use that property to pass a ref callback to the decorated component.
-     */
+*/
     innerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     /**
      * @ignore

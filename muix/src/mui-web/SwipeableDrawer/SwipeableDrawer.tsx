@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
-import withStyles, { Theme } from '../styles/withStyles';
+import withStyles, { Theme, toAtomic } from '../styles/withStyles';
 /* eslint-disable consistent-this */
 // @inheritedComponent Drawer
 import React from "react";

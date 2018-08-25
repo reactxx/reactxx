@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
-import withStyles, { Theme } from '../styles/withStyles';
+import withStyles, { Theme, toAtomic } from '../styles/withStyles';
 import React from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
@@ -303,7 +303,13 @@ class TouchRipple extends React.PureComponent<CodeProps, any> {
   };
 
   render() {
-    const { center, classes, className, ...other } = this.props;
+    const {
+      $system: { theme },
+      center,
+      classes,
+      className,
+      ...other
+    } = this.props;
     return (
       <TransitionGroup
         component="span"
@@ -318,14 +324,6 @@ class TouchRipple extends React.PureComponent<CodeProps, any> {
   }
 }
 
-TouchRipple.defaultProps = {
-  center: false
-};
-export default withStyles(styles, {
-  flip: false,
-  name: "MuiTouchRipple"
-})(TouchRipple);
-
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<TouchRippleClassKey>,
   props: TouchRippleProps,
@@ -338,10 +336,12 @@ export type PropsX = Types.PropsX<Shape>
 export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-
+export const defaultProps  = TouchRipple.defaultProps = {
+  center: false
+} as CodeProps;
 export const TouchRippleCode: CodeComponentType = TouchRipple as any
 export const TouchRippleStyles: SheetCreatorX = styles as any
-export const TouchRippleCreator: WithStyleCreator = withStyles<Shape>(TouchRippleStyles, TouchRippleCode, {isMui:true});
+export const TouchRippleCreator: WithStyleCreator = withStyles<Shape>(TouchRippleStyles, TouchRippleCode, {isMui:true, defaultProps});
 export const TouchRippleComponent: React.ComponentClass<PropsX> = TouchRippleCreator();
 if ((TouchRipple as any).muiName) (TouchRippleComponent as any).muiName = (TouchRipple as any).muiName;
 

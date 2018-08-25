@@ -5,7 +5,7 @@ import * as Tasks from './ast/default-modifier'
 import * as Parser from '../utils/parser'
 import * as Queries from '../utils/queries'
 import { gridAst } from './ast-comp/Grid'
-import { touchRippleAst } from './ast-comp/TouchRipple'
+//import { touchRippleAst } from './ast-comp/TouchRipple'
 
 import { removePropTypes } from './ast/removePropTypes'
 import { adjustImports } from './code/adjustImports'
@@ -37,13 +37,17 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
         dts = dts.replace(`children: React.ReactNode`, `children?: React.ReactNode`)
 
         switch (info.path) {
-            case 'Modal/Modal': dts = dts.replace("import { StandardProps, ModalManager", "import { StandardProps")
+            case 'Modal/Modal':
+                dts = dts.replace("import { StandardProps, ModalManager", "import { StandardProps")
                 break
             case 'ButtonBase/TouchRipple':
                 dts = dts.replace("import { TransitionGroup } from 'react-transition-group';", "")
                 break
             case 'ClickAwayListener/ClickAwayListener':
                 dts = dts.replace("onClickAway:", "onClickAway?:")
+                break
+            case 'internal/SwitchBase':
+                dts = dts.replace("export type SwitchBase = React.Component<SwitchBaseProps>;", "")
                 break
         }
 
@@ -90,9 +94,9 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
             case 'ButtonBase/Ripple':
                 Tasks.withStylesTaskDefaultCreator()(ast, info)
                 break
-            case 'ButtonBase/TouchRipple':
+            //case 'ButtonBase/TouchRipple':
                 //touchRippleAst(ast, info)
-                break
+                //break
             // case 'Collapse/Collapse':
             //     Tasks.withStylesTaskDefaultCreator()(ast, Object.assign({}, info, {
             //         adjustThemeProperties: ['handleEntering', 'handleExiting'],
@@ -165,7 +169,7 @@ const insertAfterImports = (code: string, insert: string) => {
 const tsShape = (info: Ast.MUISourceInfo, isStart: boolean) =>
     isStart ?
         `import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
-import withStyles, { Theme } from '../styles/withStyles';
+import withStyles, { Theme, toAtomic } from '../styles/withStyles';
 ` : `
 export type Shape = Types.OverwriteShape<{
   ${!noKey[info.name] && !info.withTheme ? `common: TCommon.ShapeTexts<${info.name}ClassKey>,` : ''}

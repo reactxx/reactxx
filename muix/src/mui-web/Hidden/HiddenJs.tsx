@@ -7,10 +7,11 @@
 
 import PropTypes from "prop-types";
 import { keys as breakpointKeys } from "../styles/createBreakpoints";
-import withWidth, { isWidthDown, isWidthUp } from "../withWidth";
+import withWidth, { isWidthDown, isWidthUp } from "../withWidth/withWidth";
 import exactProp from "../utils/exactProp";
 import { Breakpoint } from "../styles/createBreakpoints";
 export interface HiddenJsProps {
+  width?;
   initialWidth?: Breakpoint;
   lgDown?: boolean;
   lgUp?: boolean;
@@ -70,7 +71,7 @@ const HiddenJs: React.SFC<HiddenJsProps> & {
     return null;
   }
 
-  return children;
+  return children as any;
 };
 
 export default withWidth()(HiddenJs);

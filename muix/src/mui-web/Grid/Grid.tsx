@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
-import withStyles, { Theme } from '../styles/withStyles';
+import withStyles, { Theme, toAtomic } from '../styles/withStyles';
 // A grid component using the following libs as inspiration.
 //
 // For the implementation:
@@ -163,7 +163,7 @@ function generateGrid(globalStyles, theme, breakpoint) {
       return;
     } // Only keep 6 significant numbers.
 
-    const width = `${Math.round((size / 12) * 10e6) / 10e4}%`; // Close to the bootstrap implementation:
+    const width = `${Math.round(((size as number) / 12) * 10e6) / 10e4}%`; // Close to the bootstrap implementation:
     // https://github.com/twbs/bootstrap/blob/8fccaa2439e97ec72a4b7dc42ccc1f649790adb0/scss/mixins/_grid.scss#L41
 
     styles[key] = {
@@ -376,28 +376,6 @@ const Grid: Types.CodeSFCWeb<Shape> & {
   return <Component className={className} {...other as any} />;
 };
 
-const StyledGrid = withStyles(styles, {
-  name: "MuiGrid"
-})(Grid);
-
-if (process.env.NODE_ENV !== "production") {
-  const requireProp = requirePropFactory("Grid");
-  StyledGrid.propTypes = {
-    ...StyledGrid.propTypes,
-    alignContent: requireProp("container"),
-    alignItems: requireProp("container"),
-    direction: requireProp("container"),
-    justify: requireProp("container"),
-    lg: requireProp("item"),
-    md: requireProp("item"),
-    sm: requireProp("item"),
-    spacing: requireProp("container"),
-    wrap: requireProp("container"),
-    xs: requireProp("item"),
-    zeroMinWidth: requireProp("zeroMinWidth")
-  };
-}
-
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<GridClassKey>,
   props: GridProps,
@@ -410,23 +388,7 @@ export type PropsX = Types.PropsX<Shape>
 export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Grid.defaultProps = {
-  alignContent: 'stretch',
-  alignItems: 'stretch',
-  component: 'div',
-  container: false,
-  direction: 'row',
-  item: false,
-  justify: 'flex-start',
-  lg: false,
-  md: false,
-  sm: false,
-  spacing: 0,
-  wrap: 'wrap',
-  xl: false,
-  xs: false,
-  zeroMinWidth: false
-} as CodeProps;
+export const defaultProps  = Grid.defaultProps = {} as CodeProps;
 export const GridCode: CodeComponentType = Grid as any
 export const GridStyles: SheetCreatorX = styles as any
 export const GridCreator: WithStyleCreator = withStyles<Shape>(GridStyles, GridCode, {isMui:true, defaultProps});

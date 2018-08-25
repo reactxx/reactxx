@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
-import withStyles, { Theme } from '../styles/withStyles';
+import withStyles, { Theme, toAtomic } from '../styles/withStyles';
 /* eslint-disable no-restricted-globals */
 import React from "react";
 import PropTypes from "prop-types";
