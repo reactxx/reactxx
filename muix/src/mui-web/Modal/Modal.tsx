@@ -19,7 +19,7 @@ import Portal from "../Portal/Portal";
 import { createChainedFunction } from "../utils/helpers";
 import ModalManager from "./ModalManager";
 import Backdrop from "../Backdrop/Backdrop";
-import { StandardProps, ModalManager } from "..";
+import { StandardProps } from "..";
 import { BackdropProps } from "../Backdrop/Backdrop";
 import { PortalProps } from "../Portal/Portal";
 export interface ModalProps
@@ -53,7 +53,9 @@ function getContainer(container, defaultContainer) {
 }
 
 function getHasTransition(props) {
-  return props.children ? props.children.props.hasOwnProperty("in") : false;
+  return props.children
+    ? (props.children as any).props.hasOwnProperty("in")
+    : false;
 }
 
 const styles = theme => ({
@@ -87,6 +89,7 @@ class Modal extends React.Component<CodeProps, any> {
   static displayName;
   static contextTypes;
   static childContextTypes;
+  lastFocus;
   static options;
   mountNode = null;
   modalRef = null;
@@ -187,8 +190,8 @@ class Modal extends React.Component<CodeProps, any> {
       this.props.onBackdropClick(event);
     }
 
-    if (!this.props.disableBackdropClick && this.props.onClose) {
-      this.props.onClose(event, "backdropClick");
+    if (!this.props.disableBackdropClick && (this.props.onClose as any)) {
+      (this.props.onClose as any)(event, "backdropClick");
     }
   };
   handleDocumentKeyDown = event => {
@@ -204,8 +207,8 @@ class Modal extends React.Component<CodeProps, any> {
       this.props.onEscapeKeyDown(event);
     }
 
-    if (!this.props.disableEscapeKeyDown && this.props.onClose) {
-      this.props.onClose(event, "escapeKeyDown");
+    if (!this.props.disableEscapeKeyDown && (this.props.onClose as any)) {
+      (this.props.onClose as any)(event, "escapeKeyDown");
     }
   };
   checkForFocus = () => {
@@ -297,7 +300,7 @@ class Modal extends React.Component<CodeProps, any> {
     } = this.props;
     const { exited } = this.state;
     const hasTransition = getHasTransition(this.props);
-    const childProps = {};
+    const childProps: any = {};
 
     if (!keepMounted && !open && (!hasTransition || exited)) {
       return null;
@@ -306,16 +309,16 @@ class Modal extends React.Component<CodeProps, any> {
     if (hasTransition) {
       childProps.onExited = createChainedFunction(
         this.handleExited,
-        children.props.onExited
+        (children as any).props.onExited
       );
     }
 
-    if (children.props.role === undefined) {
-      childProps.role = children.props.role || "document";
+    if ((children as any).props.role === undefined) {
+      childProps.role = (children as any).props.role || "document";
     }
 
-    if (children.props.tabIndex === undefined) {
-      childProps.tabIndex = children.props.tabIndex || "-1";
+    if ((children as any).props.tabIndex === undefined) {
+      childProps.tabIndex = (children as any).props.tabIndex || "-1";
     }
 
     return (
@@ -351,7 +354,7 @@ class Modal extends React.Component<CodeProps, any> {
               this.dialogRef = ref;
             }}
           >
-            {React.cloneElement(children, childProps)}
+            {React.cloneElement(children as any, childProps)}
           </RootRef>
         </div>
       </Portal>

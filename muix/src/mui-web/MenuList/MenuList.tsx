@@ -20,10 +20,6 @@ export interface MenuListProps
   onKeyDown?: React.ReactEventHandler<React.KeyboardEvent<any>>;
 }
 export type MenuListClassKey = ListClassKey;
-interface MenuListProps {
-  children?;
-  [p: string]: any;
-}
 
 class MenuList extends React.Component<MenuListProps, any> {
   static defaultProps: MenuListProps;
@@ -98,7 +94,7 @@ class MenuList extends React.Component<MenuListProps, any> {
     }
 
     if (this.props.onKeyDown) {
-      this.props.onKeyDown(event, key);
+      (this.props as any).onKeyDown(event, key);
     }
   };
   handleItemFocus = event => {
@@ -164,8 +160,8 @@ class MenuList extends React.Component<MenuListProps, any> {
         onBlur={this.handleBlur}
         {...other as any}
       >
-        {React.Children.map(children, (child, index) => {
-          if (!React.isValidElement(child)) {
+        {React.Children.map(children, (child: any, index) => {
+          if (!(React as any).isValidElement(child)) {
             return null;
           }
 

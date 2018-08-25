@@ -29,7 +29,7 @@ function getPaddingRight(node) {
 }
 
 function setContainerStyle(data, container) {
-  const style = {
+  const style: any = {
     overflow: "hidden"
   }; // We are only interested in the actual `style` here because we will override it.
 
@@ -76,6 +76,12 @@ function removeContainerStyle(data, container) {
  */
 
 class ModalManager {
+  hideSiblingNodes;
+  containers;
+  data;
+  modals;
+  handleContainerOverflow;
+
   constructor(options: any = {}) {
     const { hideSiblingNodes = true, handleContainerOverflow = true } = options;
     this.hideSiblingNodes = hideSiblingNodes;

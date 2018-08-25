@@ -36,6 +36,11 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
         dts = dts.replace(`children: React.ReactElement<any>`, `children?: React.ReactElement<any>`)
         dts = dts.replace(`children: React.ReactNode`, `children?: React.ReactNode`)
 
+        switch (info.path) {
+            case 'Modal/Modal': dts = dts.replace("import { StandardProps, ModalManager", "import { StandardProps")
+                break
+        }
+
         const ast = Parser.parseCode(dts)
         //if (info.path === 'styles/index') debugger
         ast.program.body = (ast.program.body as any[]).filter(node =>

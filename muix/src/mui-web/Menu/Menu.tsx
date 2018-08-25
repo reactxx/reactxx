@@ -79,19 +79,22 @@ class Menu extends React.Component<CodeProps, any> {
   };
   focus = () => {
     if (this.menuListRef && this.menuListRef.selectedItemRef) {
-      ReactDOM.findDOMNode(this.menuListRef.selectedItemRef).focus();
+      (ReactDOM.findDOMNode(this.menuListRef.selectedItemRef) as any).focus();
       return;
     }
 
-    const menuList = ReactDOM.findDOMNode(this.menuListRef);
+    const menuList: any = ReactDOM.findDOMNode(this.menuListRef);
 
     if (menuList && menuList.firstChild) {
       menuList.firstChild.focus();
     }
   };
   handleEnter = element => {
-    const { disableAutoFocusItem, theme } = this.props;
-    const menuList = ReactDOM.findDOMNode(this.menuListRef); // Focus so the scroll computation of the Popover works as expected.
+    const {
+      $system: { theme },
+      disableAutoFocusItem
+    } = this.props;
+    const menuList: any = ReactDOM.findDOMNode(this.menuListRef); // Focus so the scroll computation of the Popover works as expected.
 
     if (disableAutoFocusItem !== true) {
       this.focus();
@@ -111,7 +114,7 @@ class Menu extends React.Component<CodeProps, any> {
     }
 
     if (this.props.onEnter) {
-      this.props.onEnter(element);
+      this.props.onEnter(element, false);
     }
   };
   handleListKeyDown = (event, key) => {

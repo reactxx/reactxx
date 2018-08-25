@@ -569,97 +569,68 @@ export const scripts: Record<string, Script> = {
         addProps: ""
     },
     "ListItemIcon/ListItemIcon": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "ListItemSecondaryAction/ListItemSecondaryAction": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "ListItemText/ListItemText": {
         replace: {
-            "": ""
+            "let secondary = secondaryProp": "let secondary:any = secondaryProp",
+            "primary.type !== Typography":"(primary as any).type !== Typography"
         },
-        addFields: "",
-        addProps: ""
     },
     "ListSubheader/ListSubheader": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Menu/Menu": {
         replace: {
-            "": ""
+            "const menuList = ReactDOM.findDOMNode": "const menuList: any = ReactDOM.findDOMNode",
+            "ReactDOM.findDOMNode(this.menuListRef.selectedItemRef).focus()":"(ReactDOM.findDOMNode(this.menuListRef.selectedItemRef) as any).focus()",
+            "this.props.onEnter(element)":"this.props.onEnter(element, false)",
+            "this.props.onKeyDown":"(this.props.onKeyDown as any)"
         },
-        addFields: "",
-        addProps: ""
+        transform: code => replaceAll(code, "const menuList = ReactDOM.findDOMNode", "const menuList: any = ReactDOM.findDOMNode"),
+        adjustThemeProperties: ['handleEnter']
     },
     "MenuItem/MenuItem": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "MenuList/MenuList": {
         replace: {
-            "": ""
+            "React.Children.map(children, (child": "React.Children.map(children, (child: any",
+            "this.props.onKeyDown(event":"(this.props as any).onKeyDown(event"
         },
-        flags: Flags.addEmptyPropsDef,
-        addFields: "",
-        addProps: ""
+        flags: Flags.isValidElementOverride,
     },
     "MobileStepper/MobileStepper": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Modal/isOverflowing": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Modal/manageAriaHidden": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Modal/Modal": {
         replace: {
-            "": ""
+            "import { StandardProps, ModalManager": "import { StandardProps",
+            "React.cloneElement(children":"React.cloneElement(children as any",
+            "const childProps = {}":"const childProps: any = {}",
+            
         },
-        addFields: "",
-        addProps: ""
+        transform: code => {
+            code = replaceAll(code, 'props.children.props.', '(props.children as any).props.')
+            code = replaceAll(code, 'children.props.', '(children as any).props.')
+            code = replaceAll(code, "this.props.onClose", "(this.props.onClose as any)")
+            return code
+        },
+        addFields: '  lastFocus'
     },
     "Modal/ModalManager": {
         replace: {
-            "": ""
+            "class ModalManager {": "class ModalManager {\n  hideSiblingNodes\n  containers\n  data\n  modals\n handleContainerOverflow",
+            "const style = {":"const style: any = {"
         },
-        addFields: "",
-        addProps: ""
     },
     "NativeSelect/NativeSelect": {
         replace: {
             "React.cloneElement(input": "React.cloneElement(input as any",
             "...(input ? input.props.inputProps": "...(input ? (input as any).props.inputProps"
         },
-        addFields: "",
-        addProps: ""
     },
     "NativeSelect/NativeSelectInput": {
         replace: {
