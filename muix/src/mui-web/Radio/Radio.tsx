@@ -64,7 +64,9 @@ const styles = theme => ({
   }
 });
 
-const Radio: Types.CodeSFCWeb<Shape> = props => {
+const Radio: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { classes, color, ...other } = props;
   return (
     <SwitchBase

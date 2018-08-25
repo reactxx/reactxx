@@ -1,1185 +1,776 @@
-import * as Ast from '../utils/ast'
+import { Flags, Script } from './transform-code'
+
 import { replaceAll } from '../utils/regexp'
 
-export const processScript = (info: Ast.MUISourceInfo, code: string) => {
-    const script = scripts[info.path]
-    if (!script) return code
-    if (script.ignore) return null
-    if (script.addToCode) code += script.addToCode
-    if (script.replace) Object.keys(script.replace).forEach(p => {
-        if (!p || p === '') return
-        code = code.replace(p, script.replace[p])
-    })
-    if (script.replaceAll) Object.keys(script.replaceAll).forEach(p => {
-        if (!p || p === '') return
-        code = replaceAll(code, p, script.replaceAll[p])
-    })
-    info.addToProps = script.addToProps
-    info.componentFields = script.componentFields
-    info.overrideReactIsValidElement = script.overrideReactIsValidElement
-    return code
-}
-
-interface Script {
-    replace?: Record<string, string>
-    replaceAll?: Record<string, string>
-    componentFields?: string
-    addToProps?: string
-    addToCode?: string
-    overrideReactIsValidElement?: boolean
-    ignore?: boolean
-}
-
-const scripts: Record<string, Script> = {
+export const scripts: Record<string, Script> = {
     "AppBar/AppBar": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Avatar/Avatar": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Backdrop/Backdrop": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Badge/Badge": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "BottomNavigation/BottomNavigation": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "BottomNavigationAction/BottomNavigationAction": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Button/Button": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ButtonBase/ButtonBase": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ButtonBase/createRippleHandler": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ButtonBase/focusVisible": {
         replace: {
             'const internal = {': 'const internal: any = {'
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ButtonBase/Ripple": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        flags: Flags.addEmptyPropsDef,
+        addFields: "",
+        addProps: ""
     },
     "ButtonBase/TouchRipple": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Card/Card": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "CardActions/CardActions": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "CardContent/CardContent": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "CardHeader/CardHeader": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "CardMedia/CardMedia": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Checkbox/Checkbox": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Chip/Chip": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "CircularProgress/CircularProgress": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ClickAwayListener/ClickAwayListener": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        flags: Flags.addEmptyPropsDef,
+        addFields: "",
+        addProps: ""
     },
     "Collapse/Collapse": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        adjustThemeProperties: ['handleEntering', 'handleExiting'],
+        addProps: ""
     },
     "colors/amber": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/blue": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/blueGrey": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/brown": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/common": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/cyan": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/deepOrange": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/deepPurple": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/green": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/grey": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/indigo": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/lightBlue": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/lightGreen": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/lime": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/orange": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/pink": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/purple": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/red": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/teal": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "colors/yellow": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "CssBaseline/CssBaseline": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Dialog/Dialog": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "DialogActions/DialogActions": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "DialogContent/DialogContent": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "DialogContentText/DialogContentText": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "DialogTitle/DialogTitle": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Divider/Divider": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Drawer/Drawer": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ExpansionPanel/ExpansionPanel": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ExpansionPanelActions/ExpansionPanelActions": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ExpansionPanelDetails/ExpansionPanelDetails": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ExpansionPanelSummary/ExpansionPanelSummary": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Fade/Fade": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "FormControl/FormControl": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "FormControlLabel/FormControlLabel": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "FormGroup/FormGroup": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "FormHelperText/FormHelperText": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "FormLabel/FormLabel": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Grid/Grid": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "GridList/GridList": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "GridListTile/GridListTile": {
         replace: {
             "\nimport": `\nimport {fitPatch} from './GridListTilePatch';\nimport`,
             "fit = () => {": `  fit = fitPatch.bind(this)\n  fit_ = () => {`,
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "GridListTileBar/GridListTileBar": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Grow/Grow": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Hidden/Hidden": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: "",
+
     },
     "Hidden/HiddenCss": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Hidden/HiddenJs": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Icon/Icon": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "IconButton/IconButton": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Input/Input": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Input/Textarea": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "InputAdornment/InputAdornment": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "InputLabel/InputLabel": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "internal/animate": {
         replace: {
             'cb = ()': `cb: any = ()`
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "internal/SwitchBase": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "LinearProgress/LinearProgress": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "List/List": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ListItem/ListItem": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ListItemAvatar/ListItemAvatar": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ListItemIcon/ListItemIcon": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ListItemSecondaryAction/ListItemSecondaryAction": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ListItemText/ListItemText": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "ListSubheader/ListSubheader": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Menu/Menu": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "MenuItem/MenuItem": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "MenuList/MenuList": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        flags: Flags.addEmptyPropsDef,
+        addFields: "",
+        addProps: ""
     },
     "MobileStepper/MobileStepper": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Modal/isOverflowing": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Modal/manageAriaHidden": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Modal/Modal": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "Modal/ModalManager": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "NativeSelect/NativeSelect": {
         replace: {
-            "": ""
+            "React.cloneElement(input": "React.cloneElement(input as any",
+            "...(input ? input.props.inputProps": "...(input ? (input as any).props.inputProps"
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: ""
     },
     "NativeSelect/NativeSelectInput": {
         replace: {
             "": ""
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "",
+        addProps: "classes?; className?;",
+
     },
     "NoSsr/NoSsr": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "  mounted",
+        addProps: "defer?"
     },
     "Paper/Paper": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "Popover/Popover": {
         replace: {
-            "": ""
+            "!TransitionComponent.muiSupportAuto": "!(TransitionComponent as any).muiSupportAuto",
+            "this.props.onEnter(element)":"this.props.onEnter(element, false)"
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "Popper/Popper": {
         replace: {
-            "": ""
+            "const childProps = {": "const childProps: any = {",
+            "const popperNode = ReactDOM.findDOMNode": "const popperNode: any = ReactDOM.findDOMNode",
+            "popperOptions = {}":"popperOptions = {} as any"
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        adjustThemeProperties: ['handleOpen'],
     },
     "Portal/Portal": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: " mountNode\n",
     },
     "Radio/Radio": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "RadioGroup/RadioGroup": {
         replace: {
-            "": ""
+            //"React.cloneElement(child": "React.cloneElement(child as any    "
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        flags: Flags.isValidElementOverride,
+        addProps: "onChange?"
     },
     "RootRef/RootRef": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        flags: Flags.addEmptyPropsDef,
     },
     "Select/Select": {
         replace: {
-            "": ""
+            "input.props.inputProps": "(input as any).props.inputProps",
+            "React.cloneElement(input": "React.cloneElement(input as any",
+            "import { styles as nativeSelectStyles }": "import { NativeSelectStyles as nativeSelectStyles }"
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "Select/SelectInput": {
         replace: {
-            "": ""
+            "delete other[": "delete (other as any)[",
+            "inputRef.current = nodeProxy": "(inputRef as any).current = nodeProxy"
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addProps: "classes?; className?; displayEmpty?; required?; type?;",
+        flags: Flags.isValidElementOverride,
     },
     "Slide/Slide": {
         replace: {
-            "": ""
+            "children.props.style": "(children as any).props.style",
+            "let style = {}": "let style: any = {}",
+            "this.props.onEnter(node)": "this.props.onEnter(node, false)",
+            "this.props.onEntering(node)": "this.props.onEntering(node, false)"
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
+        addFields: "  transitionRef",
     },
     "Snackbar/Snackbar": {
         replace: {
-            "": ""
+            "setAutoHideTimer(autoHideDuration)": "setAutoHideTimer(autoHideDuration?)"
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "SnackbarContent/SnackbarContent": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "Step/Step": {
         replace: {
-            "": ""
+            "React.cloneElement(child": "React.cloneElement(child as any"
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "StepButton/StepButton": {
         replace: {
-            "": ""
+            "React.cloneElement(children": "React.cloneElement(children as any"
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "StepConnector/StepConnector": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "StepContent/StepContent": {
         replace: {
-            "": ""
+            "!TransitionComponent.muiSupportAuto": "!(TransitionComponent as any).muiSupportAuto"
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "StepIcon/StepIcon": {
         replace: {
-            "": ""
+            "return icon": "return icon as any"
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "StepLabel/StepLabel": {
-        replace: {
-            "": ""
-        },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "Stepper/Stepper": {
         replace: {
-            "": ""
+            "childrenArray.map((step": "childrenArray.map((step: any",
+            "React.cloneElement(connectorProp": "React.cloneElement(connectorProp as any"
         },
-        replaceAll: {
-            "": ""
-        },
-        componentFields: "",
-        addToProps: ""
     },
     "styles/colorManipulator": {
     },
     "styles/createBreakpoints": {
     },
     "styles/createGenerateClassName": {
-        replaceAll: {
-            'global.__MUI_GENERATOR_COUNTER__': `global['__MUI_GENERATOR_COUNTER__']`
-        },
+        transform: code => replaceAll(code, 'global.__MUI_GENERATOR_COUNTER__', `global['__MUI_GENERATOR_COUNTER__']`)
     },
     "styles/createMixins": {
     },
@@ -1193,22 +784,22 @@ const scripts: Record<string, Script> = {
         },
     },
     "styles/createStyles": {
-        ignore: true
+        flags: Flags.ignore
     },
     "styles/createTypography": {
     },
     "styles/getStylesCreator": {
-        ignore: true
+        flags: Flags.ignore
     },
     "styles/getThemeProps": {
     },
     "styles/jssPreset": {
-        ignore: true
+        flags: Flags.ignore
     },
     "styles/mergeClasses": {
     },
     "styles/MuiThemeProvider": {
-        ignore: true
+        flags: Flags.ignore
     },
     "styles/shadows": {
     },
@@ -1217,12 +808,12 @@ const scripts: Record<string, Script> = {
     "styles/spacing": {
     },
     "styles/themeListener": {
-        ignore: true
+        flags: Flags.ignore
     },
     "styles/transitions": {
     },
     "styles/withStyles": {
-        ignore: true,
+        flags: Flags.ignore,
         replace: {
             'return WithStyles;': `return WithStyles as React.ComponentClass<any>;`,
             'extends React.Component {': `extends React.Component {\n cacheClasses`,
@@ -1230,32 +821,37 @@ const scripts: Record<string, Script> = {
         },
     },
     "styles/withTheme": {
+        flags: Flags.ignore,
         replace: {
             'return WithTheme;': 'return WithTheme as React.ComponentClass<any>;'
         },
+        addProps: '  static Naked\n  static displayName\n  static contextTypes\n  static propTypes'
+    },
+    "styles/index": {
+        flags: Flags.ignore,
     },
     "SvgIcon/SvgIcon": {
     },
     "SwipeableDrawer/SwipeableDrawer": {
         replace: {
-            '...ModalPropsProp } = {}': '...ModalPropsProp } = {} as anys',
+            '...ModalPropsProp } = {}': '...ModalPropsProp } = {} as any',
             'this.props.onClose()': 'this.props.onClose(null)',
-            'this.props.onOpen()':'this.props.onOpen(null)'
+            'this.props.onOpen()': 'this.props.onOpen(null)',
+            "removeEventListener('touchmove', this.handleBodyTouchMove, { passive: false }": `removeEventListener('touchmove', this.handleBodyTouchMove`
         },
-        componentFields: "",
-        addToProps: "ModalProps?"
+        addProps: "ModalProps?",
     },
     "SwipeableDrawer/SwipeArea": {
-        addToCode: `\nexport interface SwipeAreaProps { anchor?; width? }\n`
+        transform: code => code += `\nexport interface SwipeAreaProps { anchor?; width? }\n`
     },
     "Switch/Switch": {
     },
     "Tab/Tab": {
-        componentFields: '  labelRef',
-        addToProps: 'indicator?;'
+        addFields: '  labelRef',
+        addProps: 'indicator?;'
     },
     "Table/Table": {
-        addToProps: 'padding?;'
+        addProps: 'padding?;'
     },
     "TableBody/TableBody": {
     },
@@ -1277,7 +873,8 @@ const scripts: Record<string, Script> = {
         replace: {
             'style={styles}': 'style={styles as any}'
         },
-        componentFields: '  scrollbarWidth\n  scrollbarHeight\n  nodeRef',
+        addFields: '  scrollbarWidth\n  scrollbarHeight\n  nodeRef',
+        flags: Flags.addEmptyPropsDef,
     },
     "Tabs/TabIndicator": {
     },
@@ -1285,8 +882,10 @@ const scripts: Record<string, Script> = {
         replace: {
             'const conditionalElements = {};': `const conditionalElements: any = {};`
         },
-        componentFields: "  tabsRef",
-        overrideReactIsValidElement: true
+        addFields: "  tabsRef",
+        flags: Flags.isValidElementOverride,
+        adjustThemeProperties: ['moveTabsScroll', 'scrollSelectedIntoView', 'getConditionalElements', 'updateScrollButtonState'],
+        adjustThemeMethods: ['updateIndicatorState']
     },
     "Tabs/TabScrollButton": {
     },
@@ -1294,6 +893,7 @@ const scripts: Record<string, Script> = {
         replace: {
             'defaultValue={defaultValue}': `defaultValue={defaultValue as any}`,
         },
+
     },
     "Toolbar/Toolbar": {
     },

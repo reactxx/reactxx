@@ -23,7 +23,7 @@ export interface StepLabelProps
     > {
   active?: boolean;
   alternativeLabel?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   completed?: boolean;
   disabled?: boolean;
   error?: boolean;
@@ -114,7 +114,9 @@ const styles = theme => ({
   }
 });
 
-const StepLabel: Types.CodeSFCWeb<Shape> = props => {
+const StepLabel: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     active,
     alternativeLabel,

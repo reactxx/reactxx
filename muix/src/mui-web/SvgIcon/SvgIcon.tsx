@@ -76,7 +76,9 @@ const styles = theme => ({
   }
 });
 
-const SvgIcon: Types.CodeSFCWeb<Shape> = props => {
+const SvgIcon: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     children,
     classes,

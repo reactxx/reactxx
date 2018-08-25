@@ -28,9 +28,8 @@ export interface MUISourceInfo {
     nameIsUppercase?: boolean
     dirIsUppercase?: boolean
     defaultPropsStr?: string
-    componentFields?: string // public component static or not static fields
-    overrideReactIsValidElement?: boolean // `React.isValidElement` => (React as any).isValidElement`
-    addToProps?: string
+    addFields?: string // public component static or not static fields
+    addProps?: string
 }
 export interface FileDescr {
     path?: string

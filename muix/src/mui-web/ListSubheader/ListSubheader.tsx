@@ -65,7 +65,9 @@ const styles = theme => ({
   }
 });
 
-const ListSubheader: Types.CodeSFCWeb<Shape> = props => {
+const ListSubheader: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     classes,
     className,

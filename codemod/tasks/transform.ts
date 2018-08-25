@@ -10,55 +10,14 @@ import { touchRippleAst } from './ast-comp/TouchRipple'
 import { removePropTypes } from './ast/removePropTypes'
 import { adjustImports } from './code/adjustImports'
 
-import {processScript} from './transform-script'
+import { processScript } from './transform-code'
 
 export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) => {
 
     console.log(info.path)
 
-    code = processScript (info, code)
+    code = processScript(info, code)
     if (!code) return null
-
-    //********** COMMON  STRING REPLACE
-    {
-        if (sfcWithProp[info.name]) {
-            code = code.replace(`\nimport`, `import {Types} from 'reactxx-basic'\nimport`)
-            code = code.replace(`\nfunction ${info.name}`,
-                `\nexport type Shape = Types.OverwriteShape<{\n  props: ${info.name}Props\n}>;\nfunction ${info.name}`)
-        }
-        if (componentNoProp[info.name]) {
-            code = code.replace(`\nclass ${info.name}`,
-                `\ninterface ${info.name}Props { children?; [p:string]: any }\nexport type CodeProps = ${info.name}Props\nclass ${info.name}`)
-        }
-        if (info.overrideReactIsValidElement) {
-            code = code.replace(`React.isValidElement`, `(React as any).isValidElement`)
-        }
-
-        code = code.replace(/\{\.\.\.(\w+)\}/g, `{...$1 as any}`) // {...props} => {...props as any}
-        code = code.replace(/options\s*=\s*{}/, `options: any = {}`)
-        code = code.replace(`, child => {`, `, (child: React.ReactElement<any>) => {`)
-        code = code.replace(`import classNames from 'classnames';`, `import { classNames } from 'reactxx-basic';`)
-        code = code.replace(`class ${info.name} extends React.Component {`,
-            `class ${info.name} extends React.Component<CodeProps,any> {
-  static defaultProps: CodeProps
-  static muiName
-  static displayName
-  static contextTypes
-  static childContextTypes
-  ${info.componentFields ? info.componentFields : ''}
-  static options`)
-        code = code.replace(`\nfunction ${info.name}(props) {`, `const ${info.name}: Types.CodeSFCWeb<Shape> = (props) => {`)
-        code = code.replace(`\nfunction ${info.name}(props, context) {`, `const ${info.name}: Types.CodeSFCWeb<Shape> = (props, context) => {`)
-        code = code.replace(`  state = {`, `  state: any = {`)
-        code = code.replace(`super();`, `super(props);`)
-        code = code.replace(`import withTheme from '../styles/withTheme';`, ``)
-        code = code.replace(`import withStyles from '../styles/withStyles';`, ``)
-        code = code.replace(`export const styles =`, `const styles =`)
-        if (info.withStylesOrTheme && code.indexOf(`const styles =`) < 0)
-            code += '\nconst styles = {}\n'
-
-        code = code.replace(``, ``)
-    }
 
     //********** INCLUDE TYPESCRIPT DEFINITIONS
     if (dts) {
@@ -70,6 +29,13 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
         dts = dts.replace(`import * as React from 'react';`, '')
         dts = dts.replace(/\ntype /g, '\nexport type ')
         dts = dts.replace(`import { Theme } from '../styles/createMuiTheme';`, ``)
+
+        if (info.addProps && !info.withStylesOrTheme)
+            dts = dts.replace(`export interface ${info.name}Props {`, `export interface ${info.name}Props {\n  ${info.addProps}`)
+
+        dts = dts.replace(`children: React.ReactElement<any>`, `children?: React.ReactElement<any>`)
+        dts = dts.replace(`children: React.ReactNode`, `children?: React.ReactNode`)
+
         const ast = Parser.parseCode(dts)
         //if (info.path === 'styles/index') debugger
         ast.program.body = (ast.program.body as any[]).filter(node =>
@@ -113,11 +79,11 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
             case 'ButtonBase/TouchRipple':
                 touchRippleAst(ast, info)
                 break
-            case 'Collapse/Collapse':
-                Tasks.withStylesTaskDefaultCreator()(ast, Object.assign({}, info, {
-                    adjustThemeProperties: ['handleEntering', 'handleExiting'],
-                } as Ast.MUISourceInfo));
-                break
+            // case 'Collapse/Collapse':
+            //     Tasks.withStylesTaskDefaultCreator()(ast, Object.assign({}, info, {
+            //         adjustThemeProperties: ['handleEntering', 'handleExiting'],
+            //     } as Ast.MUISourceInfo));
+            //     break
             case 'Grid/Grid':
                 gridAst(ast, info)
                 break
@@ -144,18 +110,18 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
                 callExpression.arguments[shrinkIdx] = margin
                 callExpression.arguments[marginIdx] = shrink
                 break
-            case 'NativeSelect/NativeSelectInput':
-                Tasks.classNamesFix()(ast, info)
-                break
-            case 'Select/SelectInput':
-                Tasks.classNamesFix()(ast, info)
-                break
-            case 'Tabs/Tabs':
-                Tasks.withStylesTaskDefaultCreator()(ast, Object.assign({}, info, {
-                    adjustThemeProperties: ['moveTabsScroll', 'scrollSelectedIntoView', 'getConditionalElements', 'updateScrollButtonState'],
-                    adjustThemeMethods: ['updateIndicatorState']
-                } as Ast.MUISourceInfo))
-                break
+            // case 'NativeSelect/NativeSelectInput':
+            //     Tasks.classNamesFix()(ast, info)
+            //     break
+            // case 'Select/SelectInput':
+            //     Tasks.classNamesFix()(ast, info)
+            //     break
+            // case 'Tabs/Tabs':
+            //     Tasks.withStylesTaskDefaultCreator()(ast, Object.assign({}, info, {
+            //         adjustThemeProperties: ['moveTabsScroll', 'scrollSelectedIntoView', 'getConditionalElements', 'updateScrollButtonState'],
+            //         adjustThemeMethods: ['updateIndicatorState']
+            //     } as Ast.MUISourceInfo))
+            //     break
             default:
                 if (info.withStylesOrTheme) Tasks.withStylesTaskDefaultCreator()(ast, info)
                 //else if (info.withTheme) Tasks.withThemeTaskDefaultCreator()(ast, info)
@@ -189,7 +155,7 @@ import withStyles, { Theme } from '../styles/withStyles';
 ` : `
 export type Shape = Types.OverwriteShape<{
   ${!noKey[info.name] && !info.withTheme ? `common: TCommon.ShapeTexts<${info.name}ClassKey>,` : ''}
-  props: ${info.name}Props${info.addToProps ? ` & { ${info.addToProps} }` : ''},
+  props: ${info.name}Props${info.addProps ? ` & { ${info.addProps} }` : ''},
   theme: Theme
 }>
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>
@@ -221,20 +187,14 @@ const noKey = {
     'HiddenCss': true,
 }
 
-const sfcWithProp = {
-    'Hidden': true,
-    'TextField': true,
-    'NativeSelectInput': true,
-}
-
-const componentNoProp = {
-    'ScrollbarSize': true,
-    'SelectInput': true,
-    'RadioGroup': true,
-    'NoSsr': true,
-    'MenuList': true,
-    'Portal': true,
-    'RootRef': true,
-    'ClickAwayListener': true,
-    'Ripple': true,
-}
+// const componentNoProp = {
+//     'ScrollbarSize': true,
+//     'SelectInput': true,
+//     'RadioGroup': true,
+//     'NoSsr': true,
+//     'MenuList': true,
+//     'Portal': true,
+//     'RootRef': true,
+//     'ClickAwayListener': true,
+//     'Ripple': true,
+// }

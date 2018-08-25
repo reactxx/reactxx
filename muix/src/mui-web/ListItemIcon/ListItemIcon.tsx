@@ -13,7 +13,7 @@ import { classNames } from "reactxx-basic";
 import { StandardProps } from "..";
 export interface ListItemIconProps
   extends StandardProps<{}, ListItemIconClassKey> {
-  children: React.ReactElement<any>;
+  children?: React.ReactElement<any>;
 }
 export type ListItemIconClassKey = "root";
 
@@ -29,7 +29,9 @@ const styles = theme => ({
  * A simple wrapper to apply `List` styles to an `Icon` or `SvgIcon`.
  */
 
-const ListItemIcon: Types.CodeSFCWeb<Shape> = props => {
+const ListItemIcon: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { children, classes, className: classNameProp, ...other } = props;
   return React.cloneElement(children, {
     className: classNames(

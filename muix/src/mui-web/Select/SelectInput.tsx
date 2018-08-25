@@ -14,6 +14,11 @@ import Menu from "../Menu/Menu";
 import { isFilled } from "../Input/Input";
 import { MenuProps } from "../Menu/Menu";
 export interface SelectInputProps {
+  classes?;
+  className?;
+  displayEmpty?;
+  required?;
+  type?;
   autoFocus?: boolean;
   autoWidth: boolean;
   disabled?: boolean;
@@ -49,14 +54,8 @@ export interface SelectInputProps {
  * @ignore - internal component.
  */
 
-interface SelectInputProps {
-  children?;
-  [p: string]: any;
-}
-export type CodeProps = SelectInputProps;
-
-class SelectInput extends React.Component<CodeProps, any> {
-  static defaultProps: CodeProps;
+class SelectInput extends React.Component<SelectInputProps, any> {
+  static defaultProps: SelectInputProps;
   static muiName;
   static displayName;
   static contextTypes;
@@ -201,13 +200,12 @@ class SelectInput extends React.Component<CodeProps, any> {
     if (typeof inputRef === "function") {
       inputRef(nodeProxy);
     } else {
-      inputRef.current = nodeProxy;
+      (inputRef as any).current = nodeProxy;
     }
   };
 
   render() {
     const {
-      $system: { theme },
       autoWidth,
       children,
       classes,
@@ -236,7 +234,7 @@ class SelectInput extends React.Component<CodeProps, any> {
     } = this.props;
     const open =
       this.isOpenControlled && this.displayRef ? openProp : this.state.open;
-    delete other["aria-invalid"];
+    delete (other as any)["aria-invalid"];
     let display;
     let displaySingle = "";
     const displayMultiple = [];
@@ -253,7 +251,7 @@ class SelectInput extends React.Component<CodeProps, any> {
     const items = React.Children.map(
       children,
       (child: React.ReactElement<any>) => {
-        if (!React.isValidElement(child)) {
+        if (!(React as any).isValidElement(child)) {
           return null;
         }
 
@@ -322,7 +320,9 @@ class SelectInput extends React.Component<CodeProps, any> {
           className={classNames(
             classes.select,
             classes.selectMenu,
-            disabled && classes.disabled,
+            {
+              [classes.disabled]: disabled
+            },
             className
           )}
           ref={this.handleDisplayRef}

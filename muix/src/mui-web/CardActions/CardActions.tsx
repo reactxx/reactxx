@@ -41,7 +41,9 @@ const styles = theme => ({
   }
 });
 
-const CardActions: Types.CodeSFCWeb<Shape> = props => {
+const CardActions: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     disableActionSpacing,
     children,

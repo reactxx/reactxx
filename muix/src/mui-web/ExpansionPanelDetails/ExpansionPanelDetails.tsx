@@ -25,7 +25,9 @@ const styles = {
   }
 };
 
-const ExpansionPanelDetails: Types.CodeSFCWeb<Shape> = props => {
+const ExpansionPanelDetails: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { classes, children, className, ...other } = props;
   return (
     <div className={classNames(classes.root, className)} {...other as any}>

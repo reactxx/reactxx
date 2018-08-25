@@ -95,7 +95,9 @@ const styles = theme => {
   };
 };
 
-const AppBar: Types.CodeSFCWeb<Shape> = props => {
+const AppBar: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     children,
     classes,

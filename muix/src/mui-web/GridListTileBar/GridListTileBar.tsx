@@ -105,7 +105,9 @@ const styles = theme => ({
   }
 });
 
-const GridListTileBar: Types.CodeSFCWeb<Shape> = props => {
+const GridListTileBar: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     actionIcon,
     actionPosition,

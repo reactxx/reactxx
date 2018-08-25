@@ -143,15 +143,15 @@ class Popper extends React.Component<CodeProps, any> {
 
   handleOpen = () => {
     const {
+      $system: { theme },
       anchorEl,
       modifiers,
       open,
       placement,
-      popperOptions = {},
-      theme,
+      popperOptions = {} as any,
       disablePortal
     } = this.props;
-    const popperNode = ReactDOM.findDOMNode(this);
+    const popperNode: any = ReactDOM.findDOMNode(this);
 
     if (!popperNode || !anchorEl || !open) {
       return;
@@ -226,7 +226,7 @@ class Popper extends React.Component<CodeProps, any> {
       return null;
     }
 
-    const childProps = {
+    const childProps: any = {
       placement: placement || flipPlacement(theme, placementProps)
     };
 

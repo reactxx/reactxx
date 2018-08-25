@@ -17,10 +17,9 @@ interface RippleProps {
   children?;
   [p: string]: any;
 }
-export type CodeProps = RippleProps;
 
-class Ripple extends React.Component<CodeProps, any> {
-  static defaultProps: CodeProps;
+class Ripple extends React.Component<RippleProps, any> {
+  static defaultProps: RippleProps;
   static muiName;
   static displayName;
   static contextTypes;

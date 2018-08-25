@@ -48,7 +48,9 @@ const styles = theme => {
  * @ignore - internal component.
  */
 
-const HiddenCss: Types.CodeSFCWeb<Shape> = props => {
+const HiddenCss: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     children,
     classes,

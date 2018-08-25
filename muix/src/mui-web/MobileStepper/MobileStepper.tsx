@@ -96,7 +96,9 @@ const styles = theme => ({
   }
 });
 
-const MobileStepper: Types.CodeSFCWeb<Shape> = props => {
+const MobileStepper: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     activeStep,
     backButton,

@@ -6,10 +6,11 @@
 //----------------------------------------------------------------------------------
 
 import React from "react";
-import { Types } from "reactxx-basic";
 import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 export interface NativeSelectInputProps {
+  classes?;
+  className?;
   disabled?: boolean;
   IconComponent?: React.ReactType;
   inputRef?: (
@@ -31,11 +32,9 @@ export interface NativeSelectInputProps {
  * @ignore - internal component.
  */
 
-export type Shape = Types.OverwriteShape<{
-  props: NativeSelectInputProps;
-}>;
-
-const NativeSelectInput: Types.CodeSFCWeb<Shape> = props => {
+const NativeSelectInput: React.SFC<NativeSelectInputProps> & {
+  muiName?: string;
+} = props => {
   const {
     children,
     classes,
@@ -53,7 +52,9 @@ const NativeSelectInput: Types.CodeSFCWeb<Shape> = props => {
       <select
         className={classNames(
           classes.select,
-          disabled && classes.disabled,
+          {
+            [classes.disabled]: disabled
+          },
           className
         )}
         name={name}

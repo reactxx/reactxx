@@ -15,7 +15,7 @@ import { StandardProps, PropTypes as muiPropTypes } from "..";
 export interface BadgeProps
   extends StandardProps<React.HTMLAttributes<HTMLDivElement>, BadgeClassKey> {
   badgeContent: React.ReactNode;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   color?: muiPropTypes.Color | "error";
   component?: React.ReactType<BadgeProps>;
 }
@@ -76,7 +76,9 @@ const styles = theme => ({
   }
 });
 
-const Badge: Types.CodeSFCWeb<Shape> = props => {
+const Badge: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     badgeContent,
     children,

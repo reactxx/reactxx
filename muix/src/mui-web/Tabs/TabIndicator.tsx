@@ -50,7 +50,9 @@ const styles = theme => ({
  * @ignore - internal component.
  */
 
-const TabIndicator: Types.CodeSFCWeb<Shape> = props => {
+const TabIndicator: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { classes, className, color, ...other } = props;
   return (
     <span

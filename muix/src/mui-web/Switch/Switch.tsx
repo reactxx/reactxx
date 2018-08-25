@@ -142,7 +142,9 @@ const styles = theme => ({
   }
 });
 
-const Switch: Types.CodeSFCWeb<Shape> = props => {
+const Switch: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { classes, className, color, ...other } = props;
   return (
     <span className={classNames(classes.root, className)}>

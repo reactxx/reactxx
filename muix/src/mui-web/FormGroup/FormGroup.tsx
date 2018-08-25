@@ -38,7 +38,9 @@ const styles = {
  * For the `Radio`, you should be using the `RadioGroup` component instead of this one.
  */
 
-const FormGroup: Types.CodeSFCWeb<Shape> = props => {
+const FormGroup: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { classes, className, children, row, ...other } = props;
   return (
     <div

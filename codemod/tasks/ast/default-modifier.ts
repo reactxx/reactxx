@@ -9,10 +9,8 @@ import { defaultExport } from './defaultExport'
 import { removePropTypes } from './removePropTypes'
 
 export const classNamesFix = () => (root: Ast.Ast, info: Ast.MUISourceInfo) => {
-  //adjustImports(root, info)
   extractThemeInRender(root, info)
   refactorClassNamesConditions(root, info)
-  //adjustHtmlClassNameAttribute(root, info)
   adjustPaddingMargins(root, info)
   extractThemeInClassMethod(root, info)
   return root

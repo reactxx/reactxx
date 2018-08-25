@@ -25,7 +25,7 @@ export interface TooltipProps
       TooltipClassKey,
       "title"
     > {
-  children: React.ReactElement<any>;
+  children?: React.ReactElement<any>;
   disableFocusListener?: boolean;
   disableHoverListener?: boolean;
   disableTouchListener?: boolean;

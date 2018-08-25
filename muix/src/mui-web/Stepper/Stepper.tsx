@@ -20,7 +20,7 @@ export interface StepperProps
   extends StandardProps<PaperProps, StepperClasskey> {
   activeStep?: number;
   alternativeLabel?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   connector?: React.ReactElement<any> | React.ReactNode;
   nonLinear?: boolean;
   orientation?: Orientation;
@@ -54,7 +54,9 @@ const styles = {
   }
 };
 
-const Stepper: Types.CodeSFCWeb<Shape> = props => {
+const Stepper: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     activeStep,
     alternativeLabel,
@@ -73,12 +75,12 @@ const Stepper: Types.CodeSFCWeb<Shape> = props => {
     classNameProp
   );
   const connector = React.isValidElement(connectorProp)
-    ? React.cloneElement(connectorProp, {
+    ? React.cloneElement(connectorProp as any, {
         orientation
       })
     : null;
   const childrenArray = React.Children.toArray(children);
-  const steps = childrenArray.map((step, index) => {
+  const steps = childrenArray.map((step: any, index) => {
     const controlProps = {
       index,
       orientation,

@@ -32,7 +32,7 @@ export const codeMod = () => {
         const dts = fs.existsSync(dtsFn) ? fs.readFileSync(dtsFn, { encoding: 'utf-8' }) : null
 
         info.withStylesOrTheme = info.withTheme = path != 'withWidth/withWidth' && code.indexOf('withTheme(') > 0
-        if (!info.withStylesOrTheme) info.withStylesOrTheme = code.indexOf('withStyles(styles') > 0
+        if (!info.withStylesOrTheme) info.withStylesOrTheme = code.indexOf('withStyles(styles') > 0 || code.indexOf('withStyles(nativeSelectStyles') > 0
 
         code = transform(code, info, dts)
         

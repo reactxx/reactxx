@@ -125,7 +125,9 @@ const styles = theme => ({
  * attribute to `true` on that region until it has finished loading.
  */
 
-const CircularProgress: Types.CodeSFCWeb<Shape> = props => {
+const CircularProgress: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     classes,
     className,

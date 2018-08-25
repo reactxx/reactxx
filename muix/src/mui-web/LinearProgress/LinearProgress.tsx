@@ -218,7 +218,9 @@ const styles = theme => ({
  * attribute to `true` on that region until it has finished loading.
  */
 
-const LinearProgress: Types.CodeSFCWeb<Shape> = props => {
+const LinearProgress: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     classes,
     className: classNameProp,

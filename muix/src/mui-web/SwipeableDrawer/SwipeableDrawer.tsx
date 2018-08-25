@@ -327,10 +327,10 @@ class SwipeableDrawer extends React.Component<CodeProps, any> {
           mode: "enter"
         });
       } else {
-        this.props.onClose();
+        this.props.onClose(null);
       }
     } else if (this.isSwiping && !this.props.open) {
-      this.props.onOpen();
+      this.props.onOpen(null);
     } else {
       // Reset the position, the swipe was aborted.
       this.setPosition(0, {
@@ -356,9 +356,7 @@ class SwipeableDrawer extends React.Component<CodeProps, any> {
   }
 
   removeBodyTouchListeners() {
-    document.body.removeEventListener("touchmove", this.handleBodyTouchMove, {
-      passive: false
-    });
+    document.body.removeEventListener("touchmove", this.handleBodyTouchMove);
     document.body.removeEventListener("touchend", this.handleBodyTouchEnd);
     document.body.removeEventListener("touchcancel", this.handleBodyTouchEnd);
   }
@@ -418,7 +416,7 @@ const styles = {};
 
 export type Shape = Types.OverwriteShape<{
   
-  props: SwipeableDrawerProps & {ModalProps?},
+  props: SwipeableDrawerProps & { ModalProps? },
   theme: Theme
 }>
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

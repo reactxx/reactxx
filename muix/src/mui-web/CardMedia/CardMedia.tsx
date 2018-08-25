@@ -38,7 +38,9 @@ const styles = {
 };
 const MEDIA_COMPONENTS = ["video", "audio", "picture", "iframe", "img"];
 
-const CardMedia: Types.CodeSFCWeb<Shape> = props => {
+const CardMedia: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     classes,
     className,

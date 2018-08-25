@@ -68,7 +68,9 @@ const styles = theme => {
   };
 };
 
-const Paper: Types.CodeSFCWeb<Shape> = props => {
+const Paper: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     classes,
     className: classNameProp,

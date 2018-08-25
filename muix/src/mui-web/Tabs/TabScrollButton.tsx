@@ -32,7 +32,9 @@ const styles = {
  * @ignore - internal component.
  */
 
-const TabScrollButton: Types.CodeSFCWeb<Shape> = props => {
+const TabScrollButton: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     classes,
     className: classNameProp,

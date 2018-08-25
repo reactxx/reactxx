@@ -28,10 +28,9 @@ interface ScrollbarSizeProps {
   children?;
   [p: string]: any;
 }
-export type CodeProps = ScrollbarSizeProps;
 
-class ScrollbarSize extends React.Component<CodeProps, any> {
-  static defaultProps: CodeProps;
+class ScrollbarSize extends React.Component<ScrollbarSizeProps, any> {
+  static defaultProps: ScrollbarSizeProps;
   static muiName;
   static displayName;
   static contextTypes;
@@ -88,7 +87,7 @@ class ScrollbarSize extends React.Component<CodeProps, any> {
           <EventListener target="window" onResize={this.handleResize} />
         ) : null}
         <div
-          style={styles}
+          style={styles as any}
           ref={ref => {
             this.nodeRef = ref;
           }}

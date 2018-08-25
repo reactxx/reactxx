@@ -51,7 +51,9 @@ const styles = theme => ({
   }
 });
 
-const Divider: Types.CodeSFCWeb<Shape> = props => {
+const Divider: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     absolute,
     classes,

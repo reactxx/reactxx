@@ -6,7 +6,6 @@
 //----------------------------------------------------------------------------------
 
 // @inheritedComponent FormControl
-import { Types } from "reactxx-basic";
 import React from "react";
 import warning from "warning";
 import PropTypes from "prop-types";
@@ -88,11 +87,9 @@ export type TextFieldClassKey = FormControlClassKey;
  * - using the underlying components directly as shown in the demos
  */
 
-export type Shape = Types.OverwriteShape<{
-  props: TextFieldProps;
-}>;
-
-const TextField: Types.CodeSFCWeb<Shape> = props => {
+const TextField: React.SFC<TextFieldProps> & {
+  muiName?: string;
+} = props => {
   const {
     autoComplete,
     autoFocus,

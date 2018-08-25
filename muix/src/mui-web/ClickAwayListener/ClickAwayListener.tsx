@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 import EventListener from "react-event-listener";
 import ownerDocument from "../utils/ownerDocument";
 export interface ClickAwayListenerProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   mouseEvent?: "onClick" | "onMouseDown" | "onMouseUp" | false;
   onClickAway: (event: React.ChangeEvent<{}>) => void;
   touchEvent?: "onTouchStart" | "onTouchEnd" | false;
@@ -26,10 +26,9 @@ interface ClickAwayListenerProps {
   children?;
   [p: string]: any;
 }
-export type CodeProps = ClickAwayListenerProps;
 
-class ClickAwayListener extends React.Component<CodeProps, any> {
-  static defaultProps: CodeProps;
+class ClickAwayListener extends React.Component<ClickAwayListenerProps, any> {
+  static defaultProps: ClickAwayListenerProps;
   static muiName;
   static displayName;
   static contextTypes;

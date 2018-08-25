@@ -77,7 +77,9 @@ const styles = theme => ({
   }
 });
 
-const StepConnector: Types.CodeSFCWeb<Shape> = props => {
+const StepConnector: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     alternativeLabel,
     className: classNameProp,

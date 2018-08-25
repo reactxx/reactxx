@@ -18,7 +18,7 @@ export interface BottomNavigationProps
       BottomNavigationClassKey,
       "onChange"
     > {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   onChange?: (event: React.ChangeEvent<{}>, value: any) => void;
   showLabels?: boolean;
   value?: any;
@@ -35,7 +35,9 @@ const styles = theme => ({
   }
 });
 
-const BottomNavigation: Types.CodeSFCWeb<Shape> = props => {
+const BottomNavigation: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     children: childrenProp,
     classes,

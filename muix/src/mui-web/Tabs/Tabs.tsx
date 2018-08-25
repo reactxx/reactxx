@@ -478,10 +478,19 @@ export type PropsX = Types.PropsX<Shape>
 export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-
+export const defaultProps  = Tabs.defaultProps = {
+  centered: false,
+  component: 'div',
+  fullWidth: false,
+  indicatorColor: 'secondary',
+  scrollable: false,
+  ScrollButtonComponent: TabScrollButton,
+  scrollButtons: 'auto',
+  textColor: 'inherit'
+} as CodeProps;
 export const TabsCode: CodeComponentType = Tabs as any
 export const TabsStyles: SheetCreatorX = styles as any
-export const TabsCreator: WithStyleCreator = withStyles<Shape>(TabsStyles, TabsCode, {isMui:true});
+export const TabsCreator: WithStyleCreator = withStyles<Shape>(TabsStyles, TabsCode, {isMui:true, defaultProps});
 export const TabsComponent: React.ComponentClass<PropsX> = TabsCreator();
 if ((Tabs as any).muiName) (TabsComponent as any).muiName = (Tabs as any).muiName;
 

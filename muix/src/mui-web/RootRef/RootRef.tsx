@@ -54,10 +54,9 @@ interface RootRefProps {
   children?;
   [p: string]: any;
 }
-export type CodeProps = RootRefProps;
 
-class RootRef extends React.Component<CodeProps, any> {
-  static defaultProps: CodeProps;
+class RootRef extends React.Component<RootRefProps, any> {
+  static defaultProps: RootRefProps;
   static muiName;
   static displayName;
   static contextTypes;

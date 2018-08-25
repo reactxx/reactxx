@@ -43,7 +43,9 @@ const styles = theme => ({
  * @ignore - internal component.
  */
 
-const SwipeArea: Types.CodeSFCWeb<Shape> = props => {
+const SwipeArea: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { anchor, classes, width, ...other } = props;
   return (
     <div

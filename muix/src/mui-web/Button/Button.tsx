@@ -304,7 +304,9 @@ const styles = theme => ({
   }
 });
 
-const Button: Types.CodeSFCWeb<Shape> = props => {
+const Button: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     children,
     classes,

@@ -31,7 +31,9 @@ const styles = {
   }
 };
 
-const DialogContent: Types.CodeSFCWeb<Shape> = props => {
+const DialogContent: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { classes, children, className, ...other } = props;
   return (
     <div className={classNames(classes.root, className)} {...other as any}>

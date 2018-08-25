@@ -31,7 +31,9 @@ const styles = theme => ({
   })
 });
 
-const CardContent: Types.CodeSFCWeb<Shape> = props => {
+const CardContent: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { classes, className, component: Component, ...other } = props;
   return (
     <Component

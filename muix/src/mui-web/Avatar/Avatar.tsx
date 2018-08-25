@@ -61,7 +61,9 @@ const styles = theme => ({
   }
 });
 
-const Avatar: Types.CodeSFCWeb<Shape> = props => {
+const Avatar: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     alt,
     children: childrenProp,

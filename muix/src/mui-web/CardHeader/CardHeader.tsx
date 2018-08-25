@@ -74,7 +74,9 @@ const styles = theme => ({
   subheader: {}
 });
 
-const CardHeader: Types.CodeSFCWeb<Shape> = props => {
+const CardHeader: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     action,
     avatar,

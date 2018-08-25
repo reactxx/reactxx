@@ -329,7 +329,9 @@ const styles = theme => ({
   }, {})
 });
 
-const Grid: Types.CodeSFCWeb<Shape> = props => {
+const Grid: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     alignContent,
     alignItems,

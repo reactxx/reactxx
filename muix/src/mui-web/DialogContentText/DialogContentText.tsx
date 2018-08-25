@@ -25,7 +25,9 @@ const styles = theme => ({
   }
 });
 
-const DialogContentText: Types.CodeSFCWeb<Shape> = props => {
+const DialogContentText: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { children, classes, className, ...other } = props;
   return (
     <Typography

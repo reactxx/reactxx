@@ -229,10 +229,14 @@ export type PropsX = Types.PropsX<Shape>
 export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-
+export const defaultProps  = Collapse.defaultProps = {
+  collapsedHeight: '0px',
+  component: 'div',
+  timeout: duration.standard
+} as CodeProps;
 export const CollapseCode: CodeComponentType = Collapse as any
 export const CollapseStyles: SheetCreatorX = styles as any
-export const CollapseCreator: WithStyleCreator = withStyles<Shape>(CollapseStyles, CollapseCode, {isMui:true});
+export const CollapseCreator: WithStyleCreator = withStyles<Shape>(CollapseStyles, CollapseCode, {isMui:true, defaultProps});
 export const CollapseComponent: React.ComponentClass<PropsX> = CollapseCreator();
 if ((Collapse as any).muiName) (CollapseComponent as any).muiName = (Collapse as any).muiName;
 

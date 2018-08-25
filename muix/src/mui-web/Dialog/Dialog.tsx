@@ -143,7 +143,9 @@ const styles = theme => ({
  * Dialogs are overlaid modal paper based components with a backdrop.
  */
 
-const Dialog: Types.CodeSFCWeb<Shape> = props => {
+const Dialog: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     BackdropProps,
     children,

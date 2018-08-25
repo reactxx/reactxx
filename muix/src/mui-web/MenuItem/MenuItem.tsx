@@ -43,7 +43,9 @@ const styles = theme => ({
   selected: {}
 });
 
-const MenuItem: Types.CodeSFCWeb<Shape> = props => {
+const MenuItem: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { classes, className, component, selected, role, ...other } = props;
   return (
     <ListItem

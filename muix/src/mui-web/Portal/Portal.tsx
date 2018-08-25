@@ -12,7 +12,7 @@ import ownerDocument from "../utils/ownerDocument";
 import exactProp from "../utils/exactProp";
 import { PortalProps } from "../Portal/Portal";
 export interface PortalProps {
-  children: React.ReactElement<any>;
+  children?: React.ReactElement<any>;
   container?: React.ReactInstance | (() => React.ReactInstance);
   disablePortal?: boolean;
   onRendered?: () => void;
@@ -31,18 +31,13 @@ function getOwnerDocument(element) {
  * that exists outside the DOM hierarchy of the parent component.
  */
 
-interface PortalProps {
-  children?;
-  [p: string]: any;
-}
-export type CodeProps = PortalProps;
-
-class Portal extends React.Component<CodeProps, any> {
-  static defaultProps: CodeProps;
+class Portal extends React.Component<PortalProps, any> {
+  static defaultProps: PortalProps;
   static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
+  mountNode;
   static options;
 
   componentDidMount() {

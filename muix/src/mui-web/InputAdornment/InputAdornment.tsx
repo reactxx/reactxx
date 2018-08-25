@@ -41,7 +41,9 @@ const styles = {
   }
 };
 
-const InputAdornment: Types.CodeSFCWeb<Shape> = props => {
+const InputAdornment: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     children,
     component: Component,

@@ -103,7 +103,9 @@ const styles = theme => ({
  * An alternative to `<Select native />` with a much smaller dependency graph.
  */
 
-const NativeSelect: Types.CodeSFCWeb<Shape> = props => {
+const NativeSelect: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     children,
     classes,
@@ -112,7 +114,7 @@ const NativeSelect: Types.CodeSFCWeb<Shape> = props => {
     inputProps,
     ...other
   } = props;
-  return React.cloneElement(input, {
+  return React.cloneElement(input as any, {
     // Most of the logic is implemented in `NativeSelectInput`.
     // The `Select` component is a simple API wrapper to expose something better to play with.
     inputComponent: NativeSelectInput,
@@ -123,7 +125,7 @@ const NativeSelect: Types.CodeSFCWeb<Shape> = props => {
       type: undefined,
       // We render a select. We can ignore the type provided by the `Input`.
       ...inputProps,
-      ...(input ? input.props.inputProps : {})
+      ...(input ? (input as any).props.inputProps : {})
     },
     ...other
   });

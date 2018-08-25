@@ -9,7 +9,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import exactProp from "../utils/exactProp";
 export interface NoSsrProps {
-  children: React.ReactNode;
+  defer?;
+  children?: React.ReactNode;
   fallback?: React.ReactNode;
 }
 /**
@@ -22,18 +23,13 @@ export interface NoSsrProps {
  * - Under too heavy server load, you can turn on service degradation.
  */
 
-interface NoSsrProps {
-  children?;
-  [p: string]: any;
-}
-export type CodeProps = NoSsrProps;
-
-class NoSsr extends React.Component<CodeProps, any> {
-  static defaultProps: CodeProps;
+class NoSsr extends React.Component<NoSsrProps, any> {
+  static defaultProps: NoSsrProps;
   static muiName;
   static displayName;
   static contextTypes;
   static childContextTypes;
+  mounted;
   static options;
   state: any = {
     mounted: false

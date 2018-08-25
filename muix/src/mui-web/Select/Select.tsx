@@ -5,6 +5,8 @@
 // 
 //----------------------------------------------------------------------------------
 
+import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
+import withStyles, { Theme } from '../styles/withStyles';
 // @inheritedComponent Input
 import React from "react";
 import PropTypes from "prop-types";
@@ -12,7 +14,7 @@ import SelectInput from "./SelectInput";
 import mergeClasses from "../styles/mergeClasses";
 import ArrowDropDownIcon from "../internal/svg-icons/ArrowDropDown";
 import Input from "../Input/Input";
-import { styles as nativeSelectStyles } from "../NativeSelect/NativeSelect";
+import { NativeSelectStyles as nativeSelectStyles } from "../NativeSelect/NativeSelect";
 import NativeSelectInput from "../NativeSelect/NativeSelectInput";
 import { StandardProps } from "..";
 import { InputProps } from "../Input/Input";
@@ -43,7 +45,9 @@ export type SelectClassKey =
   | "icon";
 const styles = nativeSelectStyles;
 
-const Select: Types.CodeSFCWeb<Shape> = props => {
+const Select: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     autoWidth,
     children,
@@ -63,7 +67,7 @@ const Select: Types.CodeSFCWeb<Shape> = props => {
     ...other
   } = props;
   const inputComponent = native ? NativeSelectInput : SelectInput;
-  return React.cloneElement(input, {
+  return React.cloneElement(input as any, {
     // Most of the logic is implemented in `SelectInput`.
     // The `Select` component is a simple API wrapper to expose something better to play with.
     inputComponent,
@@ -93,21 +97,39 @@ const Select: Types.CodeSFCWeb<Shape> = props => {
             Component: Select
           })
         : classes,
-      ...(input ? input.props.inputProps : {})
+      ...(input ? (input as any).props.inputProps : {})
     },
     ...other
   });
 };
 
-Select.defaultProps = {
+Select.muiName = "Select";
+
+export type Shape = Types.OverwriteShape<{
+  common: TCommon.ShapeTexts<SelectClassKey>,
+  props: SelectProps,
+  theme: Theme
+}>
+export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>
+export type CodeComponentType = Types.CodeComponentType<Shape>
+export type SheetCreatorX = Types.SheetCreatorX<Shape>
+export type PropsX = Types.PropsX<Shape>
+export type CodeProps = Types.CodePropsWeb<Shape>
+export type WithStyleCreator = TWithStyleCreator<Shape>
+
+export const defaultProps  = Select.defaultProps = {
   autoWidth: false,
   displayEmpty: false,
   IconComponent: ArrowDropDownIcon,
   input: <Input />,
   multiple: false,
   native: false
-};
-Select.muiName = "Select";
-export default withStyles(nativeSelectStyles, {
-  name: "MuiSelect"
-})(Select);
+} as CodeProps;
+export const SelectCode: CodeComponentType = Select as any
+export const SelectStyles: SheetCreatorX = styles as any
+export const SelectCreator: WithStyleCreator = withStyles<Shape>(SelectStyles, SelectCode, {isMui:true, defaultProps});
+export const SelectComponent: React.ComponentType<PropsX> = SelectCreator();
+if ((Select as any).muiName) (SelectComponent as any).muiName = (Select as any).muiName;
+
+
+export default Select

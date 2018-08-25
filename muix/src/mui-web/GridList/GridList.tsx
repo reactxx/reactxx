@@ -35,7 +35,9 @@ const styles = {
   }
 };
 
-const GridList: Types.CodeSFCWeb<Shape> = props => {
+const GridList: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     cellHeight,
     children,

@@ -211,7 +211,7 @@ class Snackbar extends React.Component<CodeProps, any> {
     return null;
   } // Timer that controls delay before snackbar auto hides
 
-  setAutoHideTimer(autoHideDuration) {
+  setAutoHideTimer(autoHideDuration?) {
     const autoHideDurationBefore =
       autoHideDuration != null ? autoHideDuration : this.props.autoHideDuration;
 

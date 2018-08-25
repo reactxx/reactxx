@@ -22,7 +22,7 @@ export interface StepContentProps
     > {
   active?: boolean;
   alternativeLabel?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   completed?: boolean;
   last?: boolean;
   optional?: boolean;
@@ -58,7 +58,9 @@ const styles = theme => ({
   transition: {}
 });
 
-const StepContent: Types.CodeSFCWeb<Shape> = props => {
+const StepContent: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     active,
     alternativeLabel,
@@ -82,7 +84,7 @@ const StepContent: Types.CodeSFCWeb<Shape> = props => {
 
   if (
     transitionDurationProp === "auto" &&
-    !TransitionComponent.muiSupportAuto
+    !(TransitionComponent as any).muiSupportAuto
   ) {
     transitionDuration = undefined;
   }

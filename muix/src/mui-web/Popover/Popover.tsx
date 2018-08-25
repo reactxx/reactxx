@@ -318,7 +318,7 @@ class Popover extends React.Component<CodeProps, any> {
 
   handleEnter = element => {
     if (this.props.onEnter) {
-      this.props.onEnter(element);
+      this.props.onEnter(element, false);
     }
 
     this.setPositioningStyles(element);
@@ -358,7 +358,7 @@ class Popover extends React.Component<CodeProps, any> {
 
     if (
       transitionDurationProp === "auto" &&
-      !TransitionComponent.muiSupportAuto
+      !(TransitionComponent as any).muiSupportAuto
     ) {
       transitionDuration = undefined;
     } // If the container prop is provided, use that

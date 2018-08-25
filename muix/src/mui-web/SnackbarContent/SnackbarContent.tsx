@@ -61,7 +61,9 @@ const styles = theme => {
   };
 };
 
-const SnackbarContent: Types.CodeSFCWeb<Shape> = props => {
+const SnackbarContent: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { action, classes, className, message, ...other } = props;
   return (
     <Paper

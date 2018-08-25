@@ -47,7 +47,9 @@ const styles = {
   }
 };
 
-const Backdrop: Types.CodeSFCWeb<Shape> = props => {
+const Backdrop: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     classes,
     className,

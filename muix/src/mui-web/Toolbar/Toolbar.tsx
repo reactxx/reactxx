@@ -38,7 +38,9 @@ const styles = theme => ({
   }
 });
 
-const Toolbar: Types.CodeSFCWeb<Shape> = props => {
+const Toolbar: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     children,
     classes,

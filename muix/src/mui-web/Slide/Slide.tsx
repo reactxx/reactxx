@@ -87,6 +87,7 @@ class Slide extends React.Component<CodeProps, any> {
   static displayName;
   static contextTypes;
   static childContextTypes;
+  transitionRef;
   static options;
   mounted = false;
   transition = null;
@@ -134,7 +135,7 @@ class Slide extends React.Component<CodeProps, any> {
     reflow(node);
 
     if (this.props.onEnter) {
-      this.props.onEnter(node);
+      this.props.onEnter(node, false);
     }
   };
   handleEntering = node => {
@@ -157,7 +158,7 @@ class Slide extends React.Component<CodeProps, any> {
     node.style.transform = "translate(0, 0)";
 
     if (this.props.onEntering) {
-      this.props.onEntering(node);
+      this.props.onEntering(node, false);
     }
   };
   handleExit = node => {
@@ -210,7 +211,7 @@ class Slide extends React.Component<CodeProps, any> {
       style: styleProp,
       ...other
     } = this.props;
-    let style = {}; // We use this state to handle the server-side rendering.
+    let style: any = {}; // We use this state to handle the server-side rendering.
     // We don't know the width of the children ahead of time.
     // We need to render it.
 
@@ -221,7 +222,7 @@ class Slide extends React.Component<CodeProps, any> {
     style = {
       ...style,
       ...styleProp,
-      ...(React.isValidElement(children) ? children.props.style : {})
+      ...(React.isValidElement(children) ? (children as any).props.style : {})
     };
     return (
       <EventListener target="window" onResize={this.handleResize}>

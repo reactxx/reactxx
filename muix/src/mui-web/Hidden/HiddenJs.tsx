@@ -28,7 +28,9 @@ export interface HiddenJsProps {
  * @ignore - internal component.
  */
 
-const HiddenJs: Types.CodeSFCWeb<Shape> = props => {
+const HiddenJs: React.SFC<HiddenJsProps> & {
+  muiName?: string;
+} = props => {
   const { children, only, width } = props;
   let visible = true; // `only` check is faster to get out sooner if used.
 

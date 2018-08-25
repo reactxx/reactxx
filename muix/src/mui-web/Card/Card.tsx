@@ -25,7 +25,9 @@ const styles = {
   }
 };
 
-const Card: Types.CodeSFCWeb<Shape> = props => {
+const Card: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { classes, className, raised, ...other } = props;
   return (
     <Paper

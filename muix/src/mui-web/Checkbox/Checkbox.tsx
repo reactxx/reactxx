@@ -65,7 +65,9 @@ const styles = theme => ({
   }
 });
 
-const Checkbox: Types.CodeSFCWeb<Shape> = props => {
+const Checkbox: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     checkedIcon,
     classes,

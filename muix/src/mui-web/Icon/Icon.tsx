@@ -68,7 +68,9 @@ const styles = theme => ({
   }
 });
 
-const Icon: Types.CodeSFCWeb<Shape> = props => {
+const Icon: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { children, classes, className, color, fontSize, ...other } = props;
   return (
     <span

@@ -113,7 +113,9 @@ const styles = theme => ({
  * regarding the available icon options.
  */
 
-const IconButton: Types.CodeSFCWeb<Shape> = props => {
+const IconButton: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { children, classes, className, color, disabled, ...other } = props;
   return (
     <ButtonBase

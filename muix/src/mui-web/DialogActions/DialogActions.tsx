@@ -38,7 +38,9 @@ const styles = {
   }
 };
 
-const DialogActions: Types.CodeSFCWeb<Shape> = props => {
+const DialogActions: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     disableActionSpacing,
     children,

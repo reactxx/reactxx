@@ -20,14 +20,9 @@ export interface RadioGroupProps
   value?: string;
 }
 export type RadioGroupClassKey = FormGroupClassKey;
-interface RadioGroupProps {
-  children?;
-  [p: string]: any;
-}
-export type CodeProps = RadioGroupProps;
 
-class RadioGroup extends React.Component<CodeProps, any> {
-  static defaultProps: CodeProps;
+class RadioGroup extends React.Component<RadioGroupProps, any> {
+  static defaultProps: RadioGroupProps;
   static muiName;
   static displayName;
   static contextTypes;
@@ -66,7 +61,7 @@ class RadioGroup extends React.Component<CodeProps, any> {
     return (
       <FormGroup role="radiogroup" {...other as any}>
         {React.Children.map(children, (child: React.ReactElement<any>) => {
-          if (!React.isValidElement(child)) {
+          if (!(React as any).isValidElement(child)) {
             return null;
           }
 

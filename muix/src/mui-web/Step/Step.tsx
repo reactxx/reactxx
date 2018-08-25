@@ -59,7 +59,9 @@ const styles = {
   completed: {}
 };
 
-const Step: Types.CodeSFCWeb<Shape> = props => {
+const Step: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     active,
     alternativeLabel,
@@ -95,7 +97,7 @@ const Step: Types.CodeSFCWeb<Shape> = props => {
             "Consider providing an array instead."
           ].join("\n")
         );
-        return React.cloneElement(child, {
+        return React.cloneElement(child as any, {
           active,
           alternativeLabel,
           completed,

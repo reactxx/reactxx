@@ -156,7 +156,9 @@ const styles = theme => ({
   }
 });
 
-const Typography: Types.CodeSFCWeb<Shape> = props => {
+const Typography: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     align,
     classes,

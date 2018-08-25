@@ -64,7 +64,9 @@ const styles = theme => ({
   error: {}
 });
 
-const StepIcon: Types.CodeSFCWeb<Shape> = props => {
+const StepIcon: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { completed, icon, active, error, classes } = props;
 
   if (typeof icon === "number" || typeof icon === "string") {
@@ -88,7 +90,7 @@ const StepIcon: Types.CodeSFCWeb<Shape> = props => {
     );
   }
 
-  return icon;
+  return icon as any;
 };
 
 export type Shape = Types.OverwriteShape<{

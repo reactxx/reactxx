@@ -26,20 +26,21 @@ export const defaultExport = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
   // 'export const ButtonCreator...'
   // 'const ButtonComponent = ButtonCreator()'
   // 'export default ButtonComponent'
-  if (false && info.withStylesOrTheme) {
-    const defaultExport = Parser.parseCode(`
-  
-  export const ${info.name}Code = ${info.name}
-      
-  export const ${info.name}Creator = withStyles(styles, ${info.name}, {isMui:true, defaultProps});
-  
-  export const ${info.name}Component = ${info.name}Creator();
-  
-  if (${info.name}.muiName) ${info.name}Component.muiName = ${info.name}.muiName;
-  
-  export default ${info.name}Component;
-  `)
-    Array.prototype.push.call(body, ...defaultExport.program.body)
-  }
-  return root
+  //   if (false && info.withStylesOrTheme) {
+  //     const defaultExport = Parser.parseCode(`
+
+  //   export const ${info.name}Code = ${info.name}
+
+  //   export const ${info.name}Creator = withStyles(styles, ${info.name}, {isMui:true, defaultProps});
+
+  //   export const ${info.name}Component = ${info.name}Creator();
+
+  //   if (${info.name}.muiName) ${info.name}Component.muiName = ${info.name}.muiName;
+
+  //   export default ${info.name}Component;
+  //   `)
+  //     Array.prototype.push.call(body, ...defaultExport.program.body)
+  //   }
+  //   return root
+  // }
 }

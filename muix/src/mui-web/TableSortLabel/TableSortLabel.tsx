@@ -79,7 +79,9 @@ const styles = theme => ({
  * A button based label for placing inside `TableCell` for column sorting.
  */
 
-const TableSortLabel: Types.CodeSFCWeb<Shape> = props => {
+const TableSortLabel: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const { active, classes, className, children, direction, ...other } = props;
   return (
     <ButtonBase

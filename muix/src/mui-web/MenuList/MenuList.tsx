@@ -24,10 +24,9 @@ interface MenuListProps {
   children?;
   [p: string]: any;
 }
-export type CodeProps = MenuListProps;
 
-class MenuList extends React.Component<CodeProps, any> {
-  static defaultProps: CodeProps;
+class MenuList extends React.Component<MenuListProps, any> {
+  static defaultProps: MenuListProps;
   static muiName;
   static displayName;
   static contextTypes;

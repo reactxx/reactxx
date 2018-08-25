@@ -53,7 +53,9 @@ const styles = {
   }
 };
 
-const StepButton: Types.CodeSFCWeb<Shape> = props => {
+const StepButton: Types.CodeSFCWeb<Shape> & {
+  muiName?: string;
+} = props => {
   const {
     active,
     alternativeLabel,
@@ -78,7 +80,7 @@ const StepButton: Types.CodeSFCWeb<Shape> = props => {
     orientation
   };
   const child = isMuiElement(children, ["StepLabel"]) ? (
-    React.cloneElement(children, childProps)
+    React.cloneElement(children as any, childProps)
   ) : (
     <StepLabel {...childProps as any}>{children}</StepLabel>
   );
