@@ -4,427 +4,149 @@ import { replaceAll } from '../utils/regexp'
 
 export const scripts: Record<string, Script> = {
     "AppBar/AppBar": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Avatar/Avatar": {
         replace: {
-            "": ""
+            "childrenProp.props.className": "(childrenProp.props as any).className",
+            "React.cloneElement(childrenProp": "React.cloneElement(childrenProp as any"
         },
-        addFields: "",
-        addProps: ""
     },
     "Backdrop/Backdrop": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Badge/Badge": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "BottomNavigation/BottomNavigation": {
         replace: {
-            "": ""
+            "React.Children.map(childrenProp, (child": "React.Children.map(childrenProp, (child: any"
         },
-        addFields: "",
-        addProps: ""
+        flags: Flags.isValidElementOverride
     },
     "BottomNavigationAction/BottomNavigationAction": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Button/Button": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "ButtonBase/ButtonBase": {
         replace: {
-            "": ""
+            "const buttonProps = {}": "const buttonProps: any = {}"
         },
-        addFields: "",
-        addProps: ""
     },
     "ButtonBase/createRippleHandler": {
         replace: {
-            "": ""
+            "function createRippleHandler(instance, eventName, action, cb) {": "function createRippleHandler(instance, eventName, action, cb?) {"
         },
-        addFields: "",
-        addProps: ""
     },
     "ButtonBase/focusVisible": {
         replace: {
             'const internal = {': 'const internal: any = {'
         },
-        addFields: "",
-        addProps: ""
     },
     "ButtonBase/Ripple": {
-        replace: {
-            "": ""
-        },
         flags: Flags.addEmptyPropsDef,
-        addFields: "",
-        addProps: ""
     },
     "ButtonBase/TouchRipple": {
         replace: {
-            "": ""
+            "start = (event = {}, options = {}, cb) => {": "start = (event: any = {}, options: any = {}, cb?) => {",
+            "const element = fakeElement": "const element: any = fakeElement",
+            "class TouchRipple extends React.PureComponent {": "class TouchRipple extends React.PureComponent<CodeProps,any> {\n  static defaultProps: CodeProps",
+            "<Ripple\n": "<Ripple\n {...{$system: (this.props as any).$system}}",
         },
         addFields: "",
-        addProps: ""
     },
     "Card/Card": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "CardActions/CardActions": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "CardContent/CardContent": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "CardHeader/CardHeader": {
         replace: {
-            "": ""
+            "let title = titleProp": "let title: any = titleProp",
+            "let subheader = subheaderProp": "let subheader: any = subheaderProp"
         },
-        addFields: "",
-        addProps: ""
     },
     "CardMedia/CardMedia": {
         replace: {
-            "": ""
+            "MEDIA_COMPONENTS.indexOf(Component)": "MEDIA_COMPONENTS.indexOf(Component as any)"
         },
-        addFields: "",
-        addProps: ""
     },
     "Checkbox/Checkbox": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Chip/Chip": {
         replace: {
-            "": ""
+            "React.cloneElement(deleteIconProp, {": "React.cloneElement(deleteIconProp as any, {",
+            "deleteIconProp.props.className": "(deleteIconProp.props as any).className",
+            "React.cloneElement(avatarProp": "React.cloneElement(avatarProp as any",
         },
-        addFields: "",
-        addProps: ""
+        transform: code => replaceAll(code, "avatarProp.props", "(avatarProp.props as any)"),
     },
     "CircularProgress/CircularProgress": {
         replace: {
-            "": ""
+            "const circleStyle = {}": "const circleStyle: any = {}",
+            "const rootStyle = {}":"const rootStyle: any = {}",
+            "const rootProps = {}":"const rootProps: any = {}",
+            "":"",
         },
-        addFields: "",
-        addProps: ""
     },
     "ClickAwayListener/ClickAwayListener": {
-        replace: {
-            "": ""
-        },
-        flags: Flags.addEmptyPropsDef,
-        addFields: "",
-        addProps: ""
     },
     "Collapse/Collapse": {
         replace: {
-            "": ""
+            "this.props.onEntering(node)": "this.props.onEntering(node, false)",
+            "this.props.onEntered(node)":"this.props.onEntered(node, false)",
+            "this.props.onEnter(node)":"this.props.onEnter(node, false)",
         },
-        addFields: "",
+        addFields: "  wrapperRef\n  static muiSupportAuto",
         adjustThemeProperties: ['handleEntering', 'handleExiting'],
-        addProps: ""
-    },
-    "colors/amber": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/blue": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/blueGrey": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/brown": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/common": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/cyan": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/deepOrange": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/deepPurple": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/green": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/grey": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/indigo": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/lightBlue": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/lightGreen": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/lime": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/orange": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/pink": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/purple": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/red": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/teal": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
-    },
-    "colors/yellow": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "CssBaseline/CssBaseline": {
         replace: {
-            "": ""
+            "import { withStyles } from '../styles'": "",
         },
-        addFields: "",
-        addProps: ""
     },
     "Dialog/Dialog": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "DialogActions/DialogActions": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "DialogContent/DialogContent": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "DialogContentText/DialogContentText": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "DialogTitle/DialogTitle": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Divider/Divider": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Drawer/Drawer": {
         replace: {
-            "": ""
+            "...ModalProps } = {}": "...ModalProps } = {} as any"
         },
-        addFields: "",
-        addProps: ""
     },
     "ExpansionPanel/ExpansionPanel": {
         replace: {
-            "": ""
+            "React.cloneElement(child": "React.cloneElement(child as any"
         },
-        addFields: "",
-        addProps: ""
     },
     "ExpansionPanelActions/ExpansionPanelActions": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "ExpansionPanelDetails/ExpansionPanelDetails": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "ExpansionPanelSummary/ExpansionPanelSummary": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Fade/Fade": {
         replace: {
-            "": ""
+            "this.props.onEnter(node)": "this.props.onEnter(node, false)",
+            "children.props.style":"(children as any).props.style",
+            "React.cloneElement(children":"React.cloneElement(children as any"
         },
-        addFields: "",
-        addProps: ""
     },
     "FormControl/FormControl": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "FormControlLabel/FormControlLabel": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "FormGroup/FormGroup": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "FormHelperText/FormHelperText": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "FormLabel/FormLabel": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Grid/Grid": {
         replace: {
@@ -434,69 +156,40 @@ export const scripts: Record<string, Script> = {
         addProps: ""
     },
     "GridList/GridList": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
+        flags: Flags.isValidElementOverride
     },
     "GridListTile/GridListTile": {
         replace: {
             "\nimport": `\nimport {fitPatch} from './GridListTilePatch';\nimport`,
             "fit = () => {": `  fit = fitPatch.bind(this)\n  fit_ = () => {`,
+            "React.cloneElement(child":"React.cloneElement(child as any",
         },
-        addFields: "",
-        addProps: ""
     },
     "GridListTileBar/GridListTileBar": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Grow/Grow": {
         replace: {
-            "": ""
+            "this.props.onEnter(node)": "this.props.onEnter(node, false)",
+            "children.props.style":"(children.props as any).style",
+            "React.cloneElement(children":"React.cloneElement(children as any",
         },
-        addFields: "",
-        addProps: ""
+        addFields: '  static muiSupportAuto'
     },
     "Hidden/Hidden": {
         replace: {
             "": ""
         },
-        addFields: "",
+        addFields: "  inputRef",
         addProps: "",
 
     },
     "Hidden/HiddenCss": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Hidden/HiddenJs": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Icon/Icon": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "IconButton/IconButton": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "Input/Input": {
         replace: {
@@ -507,31 +200,20 @@ export const scripts: Record<string, Script> = {
     },
     "Input/Textarea": {
         replace: {
-            "": ""
+            "textareaRef.current = ref": "(textareaRef as any).current = ref",
+            'rows="1"':"rows={1}",
+            "rows={rows}":"rows={rows as any}"
         },
-        addFields: "",
-        addProps: ""
     },
     "InputAdornment/InputAdornment": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "InputLabel/InputLabel": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
+        addProps: "margin"
     },
     "internal/animate": {
         replace: {
-            'cb = ()': `cb: any = ()`
+            "function animate(prop, element, to, options = {}, cb = () => {}) {": "function animate(prop, element, to, options: any = {}, cb: any = () => {}) {"
         },
-        addFields: "",
-        addProps: ""
     },
     "internal/SwitchBase": {
         replace: {
@@ -542,31 +224,24 @@ export const scripts: Record<string, Script> = {
     },
     "LinearProgress/LinearProgress": {
         replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
+            "const inlineStyles = {":"const inlineStyles: any = {"
+        }
     },
     "List/List": {
-        replace: {
-            "": ""
-        },
-        addFields: "",
-        addProps: ""
     },
     "ListItem/ListItem": {
         replace: {
-            "": ""
+            "...ContainerProps } = {}": "...ContainerProps } = {} as any",
+            "const componentProps = {":"const componentProps: any = {",
         },
-        addFields: "",
-        addProps: ""
     },
     "ListItemAvatar/ListItemAvatar": {
         replace: {
-            "": ""
+            "React.cloneElement(children": "React.cloneElement(children as any",
+            "return props.children":"return props.children as any",
+            "ListItemAvatar.muiName = 'ListItemAvatar'":"ListItemAvatar['muiName'] = 'ListItemAvatar'"
         },
-        addFields: "",
-        addProps: ""
+        transform: code => replaceAll(code,"children.props.","(children as any).props.")
     },
     "ListItemIcon/ListItemIcon": {
     },
@@ -575,7 +250,7 @@ export const scripts: Record<string, Script> = {
     "ListItemText/ListItemText": {
         replace: {
             "let secondary = secondaryProp": "let secondary:any = secondaryProp",
-            "primary.type !== Typography":"(primary as any).type !== Typography"
+            "primary.type !== Typography": "(primary as any).type !== Typography"
         },
     },
     "ListSubheader/ListSubheader": {
@@ -583,9 +258,9 @@ export const scripts: Record<string, Script> = {
     "Menu/Menu": {
         replace: {
             "const menuList = ReactDOM.findDOMNode": "const menuList: any = ReactDOM.findDOMNode",
-            "ReactDOM.findDOMNode(this.menuListRef.selectedItemRef).focus()":"(ReactDOM.findDOMNode(this.menuListRef.selectedItemRef) as any).focus()",
-            "this.props.onEnter(element)":"this.props.onEnter(element, false)",
-            "this.props.onKeyDown":"(this.props.onKeyDown as any)"
+            "ReactDOM.findDOMNode(this.menuListRef.selectedItemRef).focus()": "(ReactDOM.findDOMNode(this.menuListRef.selectedItemRef) as any).focus()",
+            "this.props.onEnter(element)": "this.props.onEnter(element, false)",
+            "this.props.onKeyDown": "(this.props.onKeyDown as any)"
         },
         transform: code => replaceAll(code, "const menuList = ReactDOM.findDOMNode", "const menuList: any = ReactDOM.findDOMNode"),
         adjustThemeProperties: ['handleEnter']
@@ -595,7 +270,7 @@ export const scripts: Record<string, Script> = {
     "MenuList/MenuList": {
         replace: {
             "React.Children.map(children, (child": "React.Children.map(children, (child: any",
-            "this.props.onKeyDown(event":"(this.props as any).onKeyDown(event"
+            "this.props.onKeyDown(event": "(this.props as any).onKeyDown(event"
         },
         flags: Flags.isValidElementOverride,
     },
@@ -608,9 +283,9 @@ export const scripts: Record<string, Script> = {
     "Modal/Modal": {
         replace: {
             "import { StandardProps, ModalManager": "import { StandardProps",
-            "React.cloneElement(children":"React.cloneElement(children as any",
-            "const childProps = {}":"const childProps: any = {}",
-            
+            "React.cloneElement(children": "React.cloneElement(children as any",
+            "const childProps = {}": "const childProps: any = {}",
+
         },
         transform: code => {
             code = replaceAll(code, 'props.children.props.', '(props.children as any).props.')
@@ -623,7 +298,7 @@ export const scripts: Record<string, Script> = {
     "Modal/ModalManager": {
         replace: {
             "class ModalManager {": "class ModalManager {\n  hideSiblingNodes\n  containers\n  data\n  modals\n handleContainerOverflow",
-            "const style = {":"const style: any = {"
+            "const style = {": "const style: any = {"
         },
     },
     "NativeSelect/NativeSelect": {
@@ -649,14 +324,14 @@ export const scripts: Record<string, Script> = {
     "Popover/Popover": {
         replace: {
             "!TransitionComponent.muiSupportAuto": "!(TransitionComponent as any).muiSupportAuto",
-            "this.props.onEnter(element)":"this.props.onEnter(element, false)"
+            "this.props.onEnter(element)": "this.props.onEnter(element, false)"
         },
     },
     "Popper/Popper": {
         replace: {
             "const childProps = {": "const childProps: any = {",
             "const popperNode = ReactDOM.findDOMNode": "const popperNode: any = ReactDOM.findDOMNode",
-            "popperOptions = {}":"popperOptions = {} as any"
+            "popperOptions = {}": "popperOptions = {} as any"
         },
         adjustThemeProperties: ['handleOpen'],
     },

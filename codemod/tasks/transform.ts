@@ -39,6 +39,12 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
         switch (info.path) {
             case 'Modal/Modal': dts = dts.replace("import { StandardProps, ModalManager", "import { StandardProps")
                 break
+            case 'ButtonBase/TouchRipple':
+                dts = dts.replace("import { TransitionGroup } from 'react-transition-group';", "")
+                break
+            case 'ClickAwayListener/ClickAwayListener':
+                dts = dts.replace("onClickAway:", "onClickAway?:")
+                break
         }
 
         const ast = Parser.parseCode(dts)
@@ -65,6 +71,9 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
             code = code.replace(`export { default as MuiThemeProvider } from './MuiThemeProvider';`, ``)
             code += `\nexport { StyledComponentProps, StyleRules } from "./withStyles";`
             break
+        case 'ButtonBase/ButtonBase':
+            code = code.replace("tabIndex: '0',", "tabIndex: 0,")
+            break
     }
 
     //**********AST MODIFICATION
@@ -82,7 +91,7 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
                 Tasks.withStylesTaskDefaultCreator()(ast, info)
                 break
             case 'ButtonBase/TouchRipple':
-                touchRippleAst(ast, info)
+                //touchRippleAst(ast, info)
                 break
             // case 'Collapse/Collapse':
             //     Tasks.withStylesTaskDefaultCreator()(ast, Object.assign({}, info, {

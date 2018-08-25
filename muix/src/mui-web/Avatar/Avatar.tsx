@@ -92,9 +92,9 @@ const Avatar: Types.CodeSFCWeb<Shape> & {
     ) {
       const childrenClassName = classNames(
         childrenClassNameProp,
-        childrenProp.props.className
+        (childrenProp.props as any).className
       );
-      children = React.cloneElement(childrenProp, {
+      children = React.cloneElement(childrenProp as any, {
         className: childrenClassName
       });
     } else {

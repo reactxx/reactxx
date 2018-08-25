@@ -5,7 +5,7 @@
 // 
 //----------------------------------------------------------------------------------
 
-function createRippleHandler(instance, eventName, action, cb) {
+function createRippleHandler(instance, eventName, action, cb?) {
   return function handleEvent(event) {
     if (cb) {
       cb.call(instance, event);

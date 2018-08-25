@@ -13,7 +13,6 @@ import ReactDOM from "react-dom";
 import TransitionGroup from "react-transition-group/TransitionGroup";
 import { classNames } from "reactxx-basic";
 import Ripple from "./Ripple";
-import { TransitionGroup } from "react-transition-group";
 import { StandardProps } from "..";
 export interface TouchRippleProps
   extends StandardProps<
@@ -130,8 +129,9 @@ const styles = theme => ({
   }
 });
 
-class TouchRipple extends React.PureComponent {
-  // Used to filter out mouse emulated events on mobile.
+class TouchRipple extends React.PureComponent<CodeProps, any> {
+  static defaultProps: CodeProps; // Used to filter out mouse emulated events on mobile.
+
   ignoringMouseDown = false; // We use a timer in order to only show the ripples for touch "click" like events.
   // We don't want to display the ripple for touch scroll events.
 
@@ -156,7 +156,7 @@ class TouchRipple extends React.PureComponent {
       }
     );
   };
-  start = (event = {}, options: any = {}, cb) => {
+  start = (event: any = {}, options: any = {}, cb?) => {
     const {
       pulsate = false,
       center = this.props.center || options.pulsate,
@@ -172,7 +172,7 @@ class TouchRipple extends React.PureComponent {
       this.ignoringMouseDown = true;
     }
 
-    const element = fakeElement ? null : ReactDOM.findDOMNode(this);
+    const element: any = fakeElement ? null : ReactDOM.findDOMNode(this);
     const rect = element
       ? element.getBoundingClientRect()
       : {
@@ -270,7 +270,6 @@ class TouchRipple extends React.PureComponent {
             rippleX={rippleX}
             rippleY={rippleY}
             rippleSize={rippleSize}
-            $system={this.props.$system}
           />
         ]
       };
@@ -304,13 +303,7 @@ class TouchRipple extends React.PureComponent {
   };
 
   render() {
-    const {
-      $system: { theme },
-      center,
-      classes,
-      className,
-      ...other
-    } = this.props;
+    const { center, classes, className, ...other } = this.props;
     return (
       <TransitionGroup
         component="span"
@@ -325,6 +318,14 @@ class TouchRipple extends React.PureComponent {
   }
 }
 
+TouchRipple.defaultProps = {
+  center: false
+};
+export default withStyles(styles, {
+  flip: false,
+  name: "MuiTouchRipple"
+})(TouchRipple);
+
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<TouchRippleClassKey>,
   props: TouchRippleProps,
@@ -337,12 +338,10 @@ export type PropsX = Types.PropsX<Shape>
 export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = TouchRipple.defaultProps = {
-  center: false
-} as CodeProps;
+
 export const TouchRippleCode: CodeComponentType = TouchRipple as any
 export const TouchRippleStyles: SheetCreatorX = styles as any
-export const TouchRippleCreator: WithStyleCreator = withStyles<Shape>(TouchRippleStyles, TouchRippleCode, {isMui:true, defaultProps});
+export const TouchRippleCreator: WithStyleCreator = withStyles<Shape>(TouchRippleStyles, TouchRippleCode, {isMui:true});
 export const TouchRippleComponent: React.ComponentClass<PropsX> = TouchRippleCreator();
 if ((TouchRipple as any).muiName) (TouchRippleComponent as any).muiName = (TouchRipple as any).muiName;
 

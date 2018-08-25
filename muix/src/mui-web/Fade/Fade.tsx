@@ -54,7 +54,7 @@ class Fade extends React.Component<CodeProps, any> {
     );
 
     if (this.props.onEnter) {
-      this.props.onEnter(node);
+      this.props.onEnter(node, false);
     }
   };
   handleExit = node => {
@@ -87,7 +87,7 @@ class Fade extends React.Component<CodeProps, any> {
     } = this.props;
     const style = {
       ...styleProp,
-      ...(React.isValidElement(children) ? children.props.style : {})
+      ...(React.isValidElement(children) ? (children as any).props.style : {})
     };
     return (
       <Transition
@@ -97,7 +97,7 @@ class Fade extends React.Component<CodeProps, any> {
         {...other as any}
       >
         {(state, childProps) => {
-          return React.cloneElement(children, {
+          return React.cloneElement(children as any, {
             style: {
               opacity: 0,
               willChange: "opacity",

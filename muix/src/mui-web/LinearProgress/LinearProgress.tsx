@@ -264,7 +264,7 @@ const LinearProgress: Types.CodeSFCWeb<Shape> & {
     variant === "buffer" && classes.bar2Buffer
   );
   const rootProps = {};
-  const inlineStyles = {
+  const inlineStyles: any = {
     bar1: {},
     bar2: {}
   };

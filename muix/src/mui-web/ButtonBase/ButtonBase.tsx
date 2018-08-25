@@ -316,7 +316,7 @@ class ButtonBase extends React.Component<CodeProps, any> {
       this.state.focusVisible && focusVisibleClassName,
       classNameProp
     );
-    const buttonProps = {};
+    const buttonProps: any = {};
     let ComponentProp = component;
 
     if (ComponentProp === "button" && other.href) {
@@ -379,7 +379,7 @@ export const defaultProps  = ButtonBase.defaultProps = {
   disableRipple: false,
   disableTouchRipple: false,
   focusRipple: false,
-  tabIndex: '0',
+  tabIndex: 0,
   type: 'button'
 } as CodeProps;
 export const ButtonBaseCode: CodeComponentType = ButtonBase as any

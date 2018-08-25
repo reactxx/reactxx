@@ -148,7 +148,7 @@ class GridListTile extends React.Component<CodeProps, any> {
             }
 
             if (child.type === "img") {
-              return React.cloneElement(child, {
+              return React.cloneElement(child as any, {
                 ref: node => {
                   this.imgElement = node;
                 }

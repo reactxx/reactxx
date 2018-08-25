@@ -176,7 +176,10 @@ class Drawer extends React.Component<CodeProps, any> {
       classes,
       className,
       elevation,
-      ModalProps: { BackdropProps: BackdropPropsProp, ...ModalProps } = {},
+      ModalProps: {
+        BackdropProps: BackdropPropsProp,
+        ...ModalProps
+      } = {} as any,
       onClose,
       open,
       PaperProps,

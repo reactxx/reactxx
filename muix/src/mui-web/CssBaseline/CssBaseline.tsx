@@ -10,7 +10,6 @@ import withStyles, { Theme } from '../styles/withStyles';
 /* eslint-disable react/no-unused-prop-types */
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "../styles";
 import exactProp from "../utils/exactProp";
 export interface CssBaselineProps {
   children?: React.ReactElement<any>;

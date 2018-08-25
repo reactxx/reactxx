@@ -54,7 +54,7 @@ const CardMedia: Types.CodeSFCWeb<Shape> & {
     Boolean(image || src),
     "Material-UI: either `image` or `src` property must be specified."
   );
-  const isMediaComponent = MEDIA_COMPONENTS.indexOf(Component) !== -1;
+  const isMediaComponent = MEDIA_COMPONENTS.indexOf(Component as any) !== -1;
   const composedStyle =
     !isMediaComponent && image
       ? {

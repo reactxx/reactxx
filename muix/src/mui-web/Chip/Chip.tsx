@@ -305,9 +305,9 @@ class Chip extends React.Component<CodeProps, any> {
     if (onDelete) {
       deleteIcon =
         deleteIconProp && React.isValidElement(deleteIconProp) ? (
-          React.cloneElement(deleteIconProp, {
+          React.cloneElement(deleteIconProp as any, {
             className: classNames(
-              deleteIconProp.props.className,
+              (deleteIconProp.props as any).className,
               classes.deleteIcon,
               color !== "default" &&
                 classes[`deleteIconColor${capitalize(color)}`]
@@ -329,15 +329,15 @@ class Chip extends React.Component<CodeProps, any> {
     let avatar = null;
 
     if (avatarProp && React.isValidElement(avatarProp)) {
-      avatar = React.cloneElement(avatarProp, {
+      avatar = React.cloneElement(avatarProp as any, {
         className: classNames(
           classes.avatar,
-          avatarProp.props.className,
+          (avatarProp.props as any).className,
           color !== "default" && classes[`avatarColor${capitalize(color)}`]
         ),
         childrenClassName: classNames(
           classes.avatarChildren,
-          avatarProp.props.childrenClassName
+          (avatarProp.props as any).childrenClassName
         )
       });
     }

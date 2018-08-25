@@ -176,7 +176,7 @@ class ExpansionPanel extends React.Component<CodeProps, any> {
         );
 
         if (isMuiElement(child, ["ExpansionPanelSummary"])) {
-          summary = React.cloneElement(child, {
+          summary = React.cloneElement(child as any, {
             disabled,
             expanded,
             onChange: this.handleChange

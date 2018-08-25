@@ -121,7 +121,7 @@ InputLabel.contextTypes = {
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<InputLabelClassKey>,
-  props: InputLabelProps,
+  props: InputLabelProps & { margin },
   theme: Theme
 }>
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

@@ -66,6 +66,8 @@ class Collapse extends React.Component<CodeProps, any> {
   static displayName;
   static contextTypes;
   static childContextTypes;
+  wrapperRef;
+  static muiSupportAuto;
   static options;
   wrapper = null;
   autoTransitionDuration = null;
@@ -79,7 +81,7 @@ class Collapse extends React.Component<CodeProps, any> {
     node.style.height = this.props.collapsedHeight;
 
     if (this.props.onEnter) {
-      this.props.onEnter(node);
+      this.props.onEnter(node, false);
     }
   };
   handleEntering = node => {
@@ -106,14 +108,14 @@ class Collapse extends React.Component<CodeProps, any> {
     node.style.height = `${wrapperHeight}px`;
 
     if (this.props.onEntering) {
-      this.props.onEntering(node);
+      this.props.onEntering(node, false);
     }
   };
   handleEntered = node => {
     node.style.height = "auto";
 
     if (this.props.onEntered) {
-      this.props.onEntered(node);
+      this.props.onEntered(node, false);
     }
   };
   handleExit = node => {

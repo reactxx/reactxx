@@ -59,7 +59,7 @@ export const processScript = (info: Ast.MUISourceInfo, code: string) => {
   ${info.addFields ? info.addFields : ''}
   static options`)
     code = code.replace(`\nfunction ${info.name}(props) {`,
-        `const ${info.name}: ${info.withStylesOrTheme ? 'Types.CodeSFCWeb<Shape>' : `React.SFC<${compPropsName}>`}  & {muiName?: string} = (props) => {`)
+        `const ${info.name}: ${info.withStylesOrTheme ? 'Types.CodeSFCWeb<Shape>' : `React.SFC<${compPropsName}>`} & {muiName?: string} = (props) => {`)
     code = code.replace(`\nfunction ${info.name}(props, context) {`,
         `const ${info.name}: ${info.withStylesOrTheme ? 'Types.CodeSFCWeb<Shape>' : `React.SFC<${compPropsName}>`} = (props, context) => {`)
     code = code.replace(`  state = {`, `  state: any = {`)

@@ -46,6 +46,7 @@ class Grow extends React.Component<CodeProps, any> {
   static displayName;
   static contextTypes;
   static childContextTypes;
+  static muiSupportAuto;
   static options;
   autoTimeout = null;
   timer = null;
@@ -85,7 +86,7 @@ class Grow extends React.Component<CodeProps, any> {
     ].join(",");
 
     if (this.props.onEnter) {
-      this.props.onEnter(node);
+      this.props.onEnter(node, false);
     }
   };
   handleExit = node => {
@@ -140,7 +141,7 @@ class Grow extends React.Component<CodeProps, any> {
     } = this.props;
     const style = {
       ...styleProp,
-      ...(React.isValidElement(children) ? children.props.style : {})
+      ...(React.isValidElement(children) ? (children.props as any).style : {})
     };
     return (
       <Transition
@@ -152,7 +153,7 @@ class Grow extends React.Component<CodeProps, any> {
         {...other as any}
       >
         {(state, childProps) => {
-          return React.cloneElement(children, {
+          return React.cloneElement(children as any, {
             style: {
               opacity: 0,
               transform: getScale(0.75),

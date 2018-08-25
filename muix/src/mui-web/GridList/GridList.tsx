@@ -59,7 +59,7 @@ const GridList: Types.CodeSFCWeb<Shape> & {
       {...other as any}
     >
       {React.Children.map(children, (child: React.ReactElement<any>) => {
-        if (!React.isValidElement(child)) {
+        if (!(React as any).isValidElement(child)) {
           return null;
         }
 

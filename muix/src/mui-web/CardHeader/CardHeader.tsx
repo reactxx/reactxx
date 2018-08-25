@@ -90,7 +90,7 @@ const CardHeader: Types.CodeSFCWeb<Shape> & {
     titleTypographyProps,
     ...other
   } = props;
-  let title = titleProp;
+  let title: any = titleProp;
 
   if (title != null && title.type !== Typography && !disableTypography) {
     title = (
@@ -105,7 +105,7 @@ const CardHeader: Types.CodeSFCWeb<Shape> & {
     );
   }
 
-  let subheader = subheaderProp;
+  let subheader: any = subheaderProp;
 
   if (
     subheader != null &&

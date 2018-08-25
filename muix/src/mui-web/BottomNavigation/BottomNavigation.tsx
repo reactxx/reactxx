@@ -48,30 +48,33 @@ const BottomNavigation: Types.CodeSFCWeb<Shape> & {
     ...other
   } = props;
   const className = classNames(classes.root, classNameProp);
-  const children = React.Children.map(childrenProp, (child, childIndex) => {
-    if (!React.isValidElement(child)) {
-      return null;
-    }
+  const children = React.Children.map(
+    childrenProp,
+    (child: any, childIndex) => {
+      if (!(React as any).isValidElement(child)) {
+        return null;
+      }
 
-    warning(
-      child.type !== React.Fragment,
-      [
-        "Material-UI: the BottomNavigation component doesn't accept a Fragment as a child.",
-        "Consider providing an array instead."
-      ].join("\n")
-    );
-    const childValue =
-      child.props.value === undefined ? childIndex : child.props.value;
-    return React.cloneElement(child, {
-      selected: childValue === value,
-      showLabel:
-        child.props.showLabel !== undefined
-          ? child.props.showLabel
-          : showLabels,
-      value: childValue,
-      onChange
-    });
-  });
+      warning(
+        child.type !== React.Fragment,
+        [
+          "Material-UI: the BottomNavigation component doesn't accept a Fragment as a child.",
+          "Consider providing an array instead."
+        ].join("\n")
+      );
+      const childValue =
+        child.props.value === undefined ? childIndex : child.props.value;
+      return React.cloneElement(child, {
+        selected: childValue === value,
+        showLabel:
+          child.props.showLabel !== undefined
+            ? child.props.showLabel
+            : showLabels,
+        value: childValue,
+        onChange
+      });
+    }
+  );
   return (
     <div className={className} {...other as any}>
       {children}

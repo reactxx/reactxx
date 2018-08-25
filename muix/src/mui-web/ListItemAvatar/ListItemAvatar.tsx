@@ -45,18 +45,18 @@ const ListItemAvatar: Types.CodeSFCWeb<Shape> = (props, context) => {
       `Material-UI: <ListItemAvatar> is a simple wrapper to apply the dense styles
       to <Avatar>. You do not need it unless you are controlling the <List> dense property.`
     );
-    return props.children;
+    return props.children as any;
   }
 
-  return React.cloneElement(children, {
+  return React.cloneElement(children as any, {
     className: classNames(
       context.dense && classes.root,
       classNameProp,
-      children.props.className
+      (children as any).props.className
     ),
     childrenClassName: classNames(
       context.dense && classes.icon,
-      children.props.childrenClassName
+      (children as any).props.childrenClassName
     ),
     ...other
   });
@@ -65,7 +65,7 @@ const ListItemAvatar: Types.CodeSFCWeb<Shape> = (props, context) => {
 ListItemAvatar.contextTypes = {
   dense: PropTypes.bool
 };
-ListItemAvatar.muiName = "ListItemAvatar";
+ListItemAvatar["muiName"] = "ListItemAvatar";
 
 export type Shape = Types.OverwriteShape<{
   common: TCommon.ShapeTexts<ListItemAvatarClassKey>,

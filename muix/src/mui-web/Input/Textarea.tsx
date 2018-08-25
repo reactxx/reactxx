@@ -115,7 +115,7 @@ class Textarea extends React.Component<CodeProps, any> {
       if (typeof textareaRef === "function") {
         textareaRef(ref);
       } else {
-        textareaRef.current = ref;
+        (textareaRef as any).current = ref;
       }
     }
   };
@@ -201,7 +201,7 @@ class Textarea extends React.Component<CodeProps, any> {
           className={classNames(classes.textarea, classes.shadow)}
           readOnly
           ref={this.handleRefSinglelineShadow}
-          rows="1"
+          rows={1}
           tabIndex={-1}
           value=""
         />
@@ -211,7 +211,7 @@ class Textarea extends React.Component<CodeProps, any> {
           defaultValue={defaultValue}
           readOnly
           ref={this.handleRefShadow}
-          rows={rows}
+          rows={rows as any}
           tabIndex={-1}
           value={value}
         />

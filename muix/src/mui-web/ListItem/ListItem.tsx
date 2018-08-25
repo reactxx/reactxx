@@ -137,7 +137,10 @@ class ListItem extends React.Component<CodeProps, any> {
       className: classNameProp,
       component: componentProp,
       ContainerComponent,
-      ContainerProps: { className: ContainerClassName, ...ContainerProps } = {},
+      ContainerProps: {
+        className: ContainerClassName,
+        ...ContainerProps
+      } = {} as any,
       dense,
       disabled,
       disableGutters,
@@ -164,7 +167,7 @@ class ListItem extends React.Component<CodeProps, any> {
       hasSecondaryAction && classes.secondaryAction,
       classNameProp
     );
-    const componentProps = {
+    const componentProps: any = {
       className,
       disabled,
       ...other

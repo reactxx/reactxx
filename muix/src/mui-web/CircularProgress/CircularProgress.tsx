@@ -139,9 +139,9 @@ const CircularProgress: Types.CodeSFCWeb<Shape> & {
     variant,
     ...other
   } = props;
-  const circleStyle = {};
-  const rootStyle = {};
-  const rootProps = {};
+  const circleStyle: any = {};
+  const rootStyle: any = {};
+  const rootProps: any = {};
 
   if (variant === "determinate" || variant === "static") {
     const circumference = 2 * Math.PI * ((SIZE - thickness) / 2);
