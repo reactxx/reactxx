@@ -1,5 +1,6 @@
 import React from 'react';
-import SvgIcon, { PropsX, SvgIconClassKey, SvgIconProps } from '../../SvgIcon/SvgIcon';
+import ReactN from 'react-native';
+import SvgIcon, { PropsX, SvgIconClassKey, SvgIconProps, Shape } from '../../SvgIcon/SvgIcon';
 import { Theme } from '../../styles/withStyles';
 import { Types, TCommon, TAddIn, TCommonStyles } from 'reactxx-basic'
 

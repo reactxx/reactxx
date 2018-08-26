@@ -2,7 +2,6 @@
   "extends": "../tsconfig-web.common.json",
   "compilerOptions": {
     "outDir": "../../deploy/lib/mui-web",
-    "rootDir": "./",
     "strict": false,
     "baseUrl": ".",
     "paths": {

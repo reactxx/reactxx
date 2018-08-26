@@ -1,5 +1,5 @@
 ﻿{ 
-  "extends": "../tsconfig-web.common",
+  "extends": "../tsconfig-web.common.json",
   "compilerOptions": {
     "outDir": "../../deploy/lib/mui-web",
     "strict": false,

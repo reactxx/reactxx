@@ -148,11 +148,11 @@ const tsShape = (info: Ast.MUISourceInfo, isStart: boolean) =>
         `import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme, toAtomic } from '../styles/withStyles';
 ` : `
-export type Shape = Types.OverwriteShape<{
+export interface Shape extends Types.ShapeDefault {
   ${!noKey[info.name] && !info.withTheme ? `common: TCommon.ShapeTexts<${info.name}ClassKey>,` : ''}
   props: ${info.name}Props${info.addProps ? ` & { ${info.addProps} }` : ''},
   theme: Theme
-}>
+}
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>

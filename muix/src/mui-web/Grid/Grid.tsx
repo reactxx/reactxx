@@ -376,11 +376,11 @@ const Grid: Types.CodeSFCWeb<Shape> & {
   return <Component className={className} {...other as any} />;
 };
 
-export type Shape = Types.OverwriteShape<{
+export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<GridClassKey>,
   props: GridProps,
   theme: Theme
-}>
+}
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>

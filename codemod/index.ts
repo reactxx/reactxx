@@ -6,4 +6,7 @@ if (false) codeModDoc()
 
 if (false) codeMod(false)
 
-if (true) iconsRun()
+if (true) {
+    iconsRun()
+    codeMod(false)
+}

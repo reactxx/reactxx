@@ -101,11 +101,11 @@ const TableSortLabel: Types.CodeSFCWeb<Shape> & {
   );
 };
 
-export type Shape = Types.OverwriteShape<{
+export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<TableSortLabelClassKey>,
   props: TableSortLabelProps,
   theme: Theme
-}>
+}
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>

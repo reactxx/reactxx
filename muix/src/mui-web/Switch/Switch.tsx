@@ -168,11 +168,11 @@ const Switch: Types.CodeSFCWeb<Shape> & {
   );
 };
 
-export type Shape = Types.OverwriteShape<{
+export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<SwitchClassKey>,
   props: SwitchProps,
   theme: Theme
-}>
+}
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>

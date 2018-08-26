@@ -86,11 +86,11 @@ class TablePaginationActions extends React.Component<CodeProps, any> {
 
 const styles = {};
 
-export type Shape = Types.OverwriteShape<{
+export interface Shape extends Types.ShapeDefault {
   
   props: TablePaginationActionsProps,
   theme: Theme
-}>
+}
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>

@@ -91,11 +91,11 @@ const Icon: Types.CodeSFCWeb<Shape> & {
 
 Icon.muiName = "Icon";
 
-export type Shape = Types.OverwriteShape<{
+export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<IconClassKey>,
   props: IconProps,
   theme: Theme
-}>
+}
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>

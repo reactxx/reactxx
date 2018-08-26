@@ -5,7 +5,7 @@
 // 
 //----------------------------------------------------------------------------------
 
-import { TCommon, TCommonStyles, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
+import { TCommon, Types, TProvider, WithStyleCreator as TWithStyleCreator } from 'reactxx-basic';
 import withStyles, { Theme, toAtomic } from '../styles/withStyles';
 import React from "react";
 import PropTypes from "prop-types";
@@ -114,35 +114,11 @@ const SvgIcon: Types.CodeSFCWeb<Shape> & {
 
 SvgIcon.muiName = "SvgIcon";
 
-export interface TCommonRulesets extends TCommon.EmptySheet {
-  root: "Text" 
-  colorPrimary: "Text";
-  colorSecondary: "Text";
-  colorAction: "Text";
-  colorDisabled: "Text";
-  colorError: "Text";
-  fontSizeInherit: "Text";
-}
-
 export interface Shape extends Types.ShapeDefault {
-  // common: {
-  //   root: "Text" 
-  //   colorPrimary: "Text";
-  //   colorSecondary: "Text";
-  //   colorAction: "Text";
-  //   colorDisabled: "Text";
-  //   colorError: "Text";
-  //   fontSizeInherit: "Text";
-  // }
-  common: {[p in SvgIconClassKey]: 'Text'}
-  props: SvgIconProps
+  common: TCommon.ShapeTexts<SvgIconClassKey>,
+  props: SvgIconProps,
   theme: Theme
 }
-
-// Types.OverwriteShape<{
-//   common:TCommon.ShapeTexts<SvgIconClassKey>,
-// }>
-
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>
 export type CodeComponentType = Types.CodeComponentType<Shape>
 export type SheetCreatorX = Types.SheetCreatorX<Shape>
@@ -150,7 +126,7 @@ export type PropsX = Types.PropsX<Shape>
 export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps = SvgIcon.defaultProps = {
+export const defaultProps  = SvgIcon.defaultProps = {
   color: 'inherit',
   component: 'svg',
   fontSize: 'default',
@@ -158,7 +134,7 @@ export const defaultProps = SvgIcon.defaultProps = {
 } as CodeProps;
 export const SvgIconCode: CodeComponentType = SvgIcon as any
 export const SvgIconStyles: SheetCreatorX = styles as any
-export const SvgIconCreator: WithStyleCreator = withStyles<Shape>(SvgIconStyles, SvgIconCode, { isMui: true, defaultProps });
+export const SvgIconCreator: WithStyleCreator = withStyles<Shape>(SvgIconStyles, SvgIconCode, {isMui:true, defaultProps});
 export const SvgIconComponent: React.ComponentType<PropsX> = SvgIconCreator();
 if ((SvgIcon as any).muiName) (SvgIconComponent as any).muiName = (SvgIcon as any).muiName;
 
