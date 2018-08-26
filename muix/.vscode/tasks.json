@@ -7,16 +7,16 @@
             "type": "typescript",
             "tsconfig": "tsconfig.json",
             "option": "watch",
-            "problemMatcher": [
+            "problemMatcher": [ 
                 "$tsc"
             ]
         },
         {
             "label": "TypeScript compile",
             "type": "shell",
-            "command": "tsc -b src/icons --verbose",
+            "command": "tsc -b src/muix --verbose ",
             "problemMatcher": [
-                "$tsc-watch"
+                "$tsc"
             ],
             "group": {
                 "kind": "build",

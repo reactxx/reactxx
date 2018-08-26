@@ -126,4 +126,4 @@ export const BadgeComponent: React.ComponentType<PropsX> = BadgeCreator();
 if ((Badge as any).muiName) (BadgeComponent as any).muiName = (Badge as any).muiName;
 
 
-export default Badge
+export default BadgeComponent

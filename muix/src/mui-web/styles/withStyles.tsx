@@ -1,7 +1,8 @@
 ﻿import React from 'react';
 import { RenderAddIn, TCommon, ThemeProviderUntyped, TProvider, Types, withStyles, TAddIn } from 'reactxx-basic';
 import { renderer, rulesetToClassNamesMUI } from 'reactxx-fela';
-import { Theme as MuiTheme } from './createMuiTheme'
+import { Theme } from './createMuiTheme'
+export { Theme } from './createMuiTheme'
 import { default as createMuiTheme } from './createMuiTheme';
 import {classNamesStrMUI} from 'reactxx-basic';
 
@@ -13,7 +14,7 @@ React.createElement = (tag, props, ...children) => {
   return old(tag, props, ...children)
 }
 
-export type Theme = MuiTheme & TCommon.ThemeBase
+//export type Theme = MuiTheme //& TCommon.ThemeBase
 
 export const ThemeProvider = ThemeProviderUntyped as TCommon.ThemeProviderTyped<Theme>
 

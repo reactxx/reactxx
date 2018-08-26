@@ -168,4 +168,4 @@ export const MobileStepperComponent: React.ComponentType<PropsX> = MobileStepper
 if ((MobileStepper as any).muiName) (MobileStepperComponent as any).muiName = (MobileStepper as any).muiName;
 
 
-export default MobileStepper
+export default MobileStepperComponent

@@ -446,4 +446,4 @@ export const SwipeableDrawerComponent: React.ComponentClass<PropsX> = SwipeableD
 if ((SwipeableDrawer as any).muiName) (SwipeableDrawerComponent as any).muiName = (SwipeableDrawer as any).muiName;
 
 
-export default SwipeableDrawer
+export default SwipeableDrawerComponent

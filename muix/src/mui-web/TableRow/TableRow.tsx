@@ -118,4 +118,4 @@ export const TableRowComponent: React.ComponentType<PropsX> = TableRowCreator();
 if ((TableRow as any).muiName) (TableRowComponent as any).muiName = (TableRow as any).muiName;
 
 
-export default TableRow
+export default TableRowComponent

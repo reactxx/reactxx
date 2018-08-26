@@ -137,4 +137,4 @@ export const FadeComponent: React.ComponentClass<PropsX> = FadeCreator();
 if ((Fade as any).muiName) (FadeComponent as any).muiName = (Fade as any).muiName;
 
 
-export default Fade
+export default FadeComponent

@@ -1,0 +1,38 @@
+export const tsconfig = {
+    "extends": "../tsconfig-web.common.json",
+    "compilerOptions": {
+      "outDir": "../../deploy/lib/icons",
+      "baseUrl": ".",
+      "paths": {
+        "reactxx-basic": [
+          "../basic"
+        ],
+        "reactxx-fela": [
+          "../fela"
+        ],
+        "reactxx-sheeter": [
+          "../sheeter"
+        ],
+        "reactxx-mui-web/*": [
+          "../mui-web/*"
+        ]
+      }
+    },
+    "references": [
+      {
+        "path": "../fela"
+      },
+      {
+        "path": "../sheeter"
+      },
+      {
+        "path": "../basic"
+      },
+      {
+        "path": "../mui-web"
+      }
+    ],
+    "exclude": [
+      "native"
+    ]
+  }

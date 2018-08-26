@@ -346,4 +346,4 @@ export const TouchRippleComponent: React.ComponentClass<PropsX> = TouchRippleCre
 if ((TouchRipple as any).muiName) (TouchRippleComponent as any).muiName = (TouchRipple as any).muiName;
 
 
-export default TouchRipple
+export default TouchRippleComponent

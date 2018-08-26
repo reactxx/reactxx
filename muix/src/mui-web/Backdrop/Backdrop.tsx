@@ -95,4 +95,4 @@ export const BackdropComponent: React.ComponentType<PropsX> = BackdropCreator();
 if ((Backdrop as any).muiName) (BackdropComponent as any).muiName = (Backdrop as any).muiName;
 
 
-export default Backdrop
+export default BackdropComponent

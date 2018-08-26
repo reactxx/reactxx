@@ -1,9 +1,9 @@
 ﻿{ 
-  "extends": "../tsconfig-web.common.json",
+  "extends": "../tsconfig-web.common",
   "compilerOptions": {
     "outDir": "../../deploy/lib/mui-web",
-    "baseUrl": ".",
     "strict": false,
+    "baseUrl": ".",
     "paths": {
       "reactxx-basic": [
         "../basic"

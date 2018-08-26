@@ -392,4 +392,4 @@ export const ChipComponent: React.ComponentClass<PropsX> = ChipCreator();
 if ((Chip as any).muiName) (ChipComponent as any).muiName = (Chip as any).muiName;
 
 
-export default Chip
+export default ChipComponent

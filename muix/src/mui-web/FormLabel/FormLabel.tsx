@@ -163,4 +163,4 @@ export const FormLabelComponent: React.ComponentType<PropsX> = FormLabelCreator(
 if ((FormLabel as any).muiName) (FormLabelComponent as any).muiName = (FormLabel as any).muiName;
 
 
-export default FormLabel
+export default FormLabelComponent

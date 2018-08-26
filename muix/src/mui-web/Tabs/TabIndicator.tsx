@@ -86,4 +86,4 @@ export const TabIndicatorComponent: React.ComponentType<PropsX> = TabIndicatorCr
 if ((TabIndicator as any).muiName) (TabIndicatorComponent as any).muiName = (TabIndicator as any).muiName;
 
 
-export default TabIndicator
+export default TabIndicatorComponent

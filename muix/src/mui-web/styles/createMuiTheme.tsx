@@ -28,17 +28,13 @@ import { Shape, ShapeOptions } from "./shape";
 import { Spacing, SpacingOptions } from "./spacing";
 import { Transitions, TransitionsOptions } from "./transitions";
 import { ZIndex, ZIndexOptions } from "./zIndex";
-import { Overrides } from "./overrides";
-import { ComponentsProps } from "./props";
 export type Direction = "ltr" | "rtl";
 export interface ThemeOptions {
   shape?: ShapeOptions;
   breakpoints?: BreakpointsOptions;
   direction?: Direction;
   mixins?: MixinsOptions;
-  overrides?: Overrides;
   palette?: PaletteOptions;
-  props?: ComponentsProps;
   shadows?: Shadows;
   spacing?: SpacingOptions;
   transitions?: TransitionsOptions;
@@ -50,9 +46,7 @@ export interface Theme {
   breakpoints: Breakpoints;
   direction: Direction;
   mixins: Mixins;
-  overrides?: Overrides;
   palette: Palette;
-  props?: ComponentsProps;
   shadows: Shadows;
   spacing: Spacing;
   transitions: Transitions;

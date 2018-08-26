@@ -7,7 +7,7 @@ import { TComps } from '../typings/comps'
 export const textSheet: Types.SheetX<TComps.TextShape> = {
   root: {
     $web: {
-      whiteSpace: 'pre-wrap',
+      whiteSpace: 'pre-wrap', 
       wordWrap: 'break-word',
       [`& .${TComps.Consts.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. Consts.textClassName is className for Text component div.
         display: 'inline',

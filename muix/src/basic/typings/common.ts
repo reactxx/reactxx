@@ -13,13 +13,14 @@ export namespace TCommon {
 
   export type TEventsX = 'onPress' | 'onLongPress'
   export type TEventsAll = TEvents
-
-
+  export interface EmptySheet { 
+    //[idx:string]: TCommonStyles.RulesetNativeIds
+  }
   export interface Shape {
     //**** sheet constrains
-    common?: Record<string, TCommonStyles.RulesetNativeIds> // rulesets (and their native type), which are used in both web and native component code. Rules and its valid values must be compatible with native.
-    native?: Record<string, TCommonStyles.RulesetNativeIds> // ruleset types, which are used only in native code
-    web?: string | null // ruleset names, which are used only in web code (its export type is always React.CSSProperties)
+    common?: EmptySheet // rulesets (and their native type), which are used in both web and native component code. Rules and its valid values must be compatible with native.
+    native?: EmptySheet // ruleset types, which are used only in native code
+    web?: string // ruleset names, which are used only in web code (its export type is always React.CSSProperties)
     //******************** native style constrain
     style?: TCommonStyles.RulesetNativeIds // for native: export type of component style property (for web, style has always React.CSSProperties type)
     //**** component property constrains
@@ -56,7 +57,7 @@ export namespace TCommon {
   *******************************************/
 
   export interface ThemeBase {
-    type?: 'ThemeX'
+    //type?: 'ThemeX'
     //themeName?:string
   }
 
@@ -65,7 +66,7 @@ export namespace TCommon {
     withTheme?: boolean
     withCascading?: boolean
     withActive?: boolean
-    isMui?:boolean
+    isMui?: boolean
 
     getVariant?
     variantToString?
@@ -81,36 +82,36 @@ export namespace TCommon {
   //****************************
   // PLATFORM SHEET
   //****************************
-//  export type Fragment = {}
-//  export type Fragments = Fragment[]
-//  export type RulesetFragmentsPart = Fragment | RulesetFragments | Fragments
-//  export type RulesetFragmentsParts = RulesetFragmentsPart[]
+  //  export type Fragment = {}
+  //  export type Fragments = Fragment[]
+  //  export type RulesetFragmentsPart = Fragment | RulesetFragments | Fragments
+  //  export type RulesetFragmentsParts = RulesetFragmentsPart[]
 
-//  export interface RulesetFragments {
-//    __fragments: Fragments
-//    name: string
-//  }
+  //  export interface RulesetFragments {
+  //    __fragments: Fragments
+  //    name: string
+  //  }
 
-//  export type SheetFragmentsData = { [rulesetName: string]: RulesetFragments }
+  //  export type SheetFragmentsData = { [rulesetName: string]: RulesetFragments }
 
-//  export interface SheetFragments {
-//    codeClasses?: SheetFragmentsData
-//    addInClasses?: TAddIns
-//  }
+  //  export interface SheetFragments {
+  //    codeClasses?: SheetFragmentsData
+  //    addInClasses?: TAddIns
+  //  }
 
-//  export type SheetPatch = {
-//    [addInName: string]: {
-//      [rulesetName: string]: Fragments
-//    }
-//  }
+  //  export type SheetPatch = {
+  //    [addInName: string]: {
+  //      [rulesetName: string]: Fragments
+  //    }
+  //  }
 
-//  export type SheetPatchFinal = {
-//    [rulesetName: string]: Fragments
-//  }
+  //  export type SheetPatchFinal = {
+  //    [rulesetName: string]: Fragments
+  //  }
 
-//  export type TSheetAddIn = {}
-//  export type TRulesetAddIn = { [name: string]: Array<{}> } // name is e.g. '$mediaq'
-//  export type TAddIn = TSheetAddIn | TRulesetAddIn
-//  export type TAddIns = { [name: string]: TAddIn } // name is e.g. '$animations' or 'root'
+  //  export type TSheetAddIn = {}
+  //  export type TRulesetAddIn = { [name: string]: Array<{}> } // name is e.g. '$mediaq'
+  //  export type TAddIn = TSheetAddIn | TRulesetAddIn
+  //  export type TAddIns = { [name: string]: TAddIn } // name is e.g. '$animations' or 'root'
 
 } 

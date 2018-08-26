@@ -116,4 +116,4 @@ export const PaperComponent: React.ComponentType<PropsX> = PaperCreator();
 if ((Paper as any).muiName) (PaperComponent as any).muiName = (Paper as any).muiName;
 
 
-export default Paper
+export default PaperComponent

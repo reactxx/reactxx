@@ -118,4 +118,4 @@ export const ListSubheaderComponent: React.ComponentType<PropsX> = ListSubheader
 if ((ListSubheader as any).muiName) (ListSubheaderComponent as any).muiName = (ListSubheader as any).muiName;
 
 
-export default ListSubheader
+export default ListSubheaderComponent

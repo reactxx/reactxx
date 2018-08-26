@@ -141,4 +141,4 @@ export const InputLabelComponent: React.ComponentType<PropsX> = InputLabelCreato
 if ((InputLabel as any).muiName) (InputLabelComponent as any).muiName = (InputLabel as any).muiName;
 
 
-export default InputLabel
+export default InputLabelComponent

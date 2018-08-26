@@ -80,4 +80,4 @@ export const CssBaselineComponent: React.ComponentClass<PropsX> = CssBaselineCre
 if ((CssBaseline as any).muiName) (CssBaselineComponent as any).muiName = (CssBaseline as any).muiName;
 
 
-export default CssBaseline
+export default CssBaselineComponent

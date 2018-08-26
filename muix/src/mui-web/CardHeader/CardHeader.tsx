@@ -163,4 +163,4 @@ export const CardHeaderComponent: React.ComponentType<PropsX> = CardHeaderCreato
 if ((CardHeader as any).muiName) (CardHeaderComponent as any).muiName = (CardHeader as any).muiName;
 
 
-export default CardHeader
+export default CardHeaderComponent

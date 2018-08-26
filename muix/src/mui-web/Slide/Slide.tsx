@@ -273,4 +273,4 @@ export const SlideComponent: React.ComponentClass<PropsX> = SlideCreator();
 if ((Slide as any).muiName) (SlideComponent as any).muiName = (Slide as any).muiName;
 
 
-export default Slide
+export default SlideComponent

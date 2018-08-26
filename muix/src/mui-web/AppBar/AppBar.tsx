@@ -149,4 +149,4 @@ export const AppBarComponent: React.ComponentType<PropsX> = AppBarCreator();
 if ((AppBar as any).muiName) (AppBarComponent as any).muiName = (AppBar as any).muiName;
 
 
-export default AppBar
+export default AppBarComponent

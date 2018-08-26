@@ -7,9 +7,11 @@ import * as fsExtra from 'fs-extra';
 import { readAllCodes, scanDir } from '../utils/readAllCodes'
 import { transform } from './transform'
 
-export const codeMod = () => {
+export const codeMod = (toMuixCurrent = false) => {
 
-    try { fsExtra.emptyDirSync(Config.muiWeb) } catch { }
+    Config.setIsDoc(false)
+
+    try { fsExtra.emptyDirSync(toMuixCurrent ? Config.muix_Web : Config.muiWeb) } catch { }
 
     const { log, codeStr } = readAllCodes()
 
@@ -28,24 +30,32 @@ export const codeMod = () => {
 
         let code = codeStr[path]
 
-        const dtsFn = Config.patchOriginal + path + '.d.ts'
-        const dts = fs.existsSync(dtsFn) ? fs.readFileSync(dtsFn, { encoding: 'utf-8' }) : null
-
         info.withStylesOrTheme = info.withTheme = path != 'withWidth/withWidth' && code.indexOf('withTheme(') > 0
         if (!info.withStylesOrTheme) info.withStylesOrTheme = code.indexOf('withStyles(styles') > 0 || code.indexOf('withStyles(nativeSelectStyles') > 0
 
-        code = transform(code, info, dts)
-        
-        if (!code) continue
+        if (toMuixCurrent) {
+            if (!info.withStylesOrTheme || info.withTheme) continue
+            fsExtra.outputFileSync(Config.muix_Web + info.path + '.ts', '')
+        } else {
+            const dtsFn = Config.patchOriginal + path + '.d.ts'
+            const dts = fs.existsSync(dtsFn) ? fs.readFileSync(dtsFn, { encoding: 'utf-8' }) : null
+            code = transform(code, info, dts)
+            if (!code) continue
+            fsExtra.outputFileSync(info.destPath + '.tsx', code)
+        }
 
-        fsExtra.outputFileSync(info.destPath + '.tsx', code)
     }
-    fsExtra.copySync(Config.patchOriginal + 'transitions/transition.d.ts', Config.muiWeb + 'transitions/transition.ts')
-    fsExtra.copySync(Config.muix_WebSources, Config.muiWeb, { overwrite: true })
+    if (!toMuixCurrent) {
+        fsExtra.copySync(Config.patchOriginal + 'transitions/transition.d.ts', Config.muiWeb + 'transitions/transition.ts')
+        fsExtra.copySync(Config.muix_WebSources, Config.muiWeb, { overwrite: true })
+        fsExtra.copySync(Config.reactxx + 'src/typings.d.ts', Config.muiWeb + 'typings.d.ts', { overwrite: true })
+    }
 }
 
 const ignores = {
     'styles/withStyles': true,
+    'styles/index': true,
+    'utils/reactHelpers': true,
     'withWidth/withWidth': true,
     'withWidth/index': true,
     'withMobileDialog/withMobileDialog': true,
@@ -54,3 +64,5 @@ const ignores = {
     'styles/jssPreset': true,
     'styles/getStylesCreator': true,
 }
+
+const muixCurrent = (path: string) => {}

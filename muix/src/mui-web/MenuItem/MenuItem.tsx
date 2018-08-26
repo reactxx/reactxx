@@ -87,4 +87,4 @@ export const MenuItemComponent: React.ComponentType<PropsX> = MenuItemCreator();
 if ((MenuItem as any).muiName) (MenuItemComponent as any).muiName = (MenuItem as any).muiName;
 
 
-export default MenuItem
+export default MenuItemComponent

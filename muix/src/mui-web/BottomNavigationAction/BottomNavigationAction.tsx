@@ -171,4 +171,4 @@ export const BottomNavigationActionComponent: React.ComponentClass<PropsX> = Bot
 if ((BottomNavigationAction as any).muiName) (BottomNavigationActionComponent as any).muiName = (BottomNavigationAction as any).muiName;
 
 
-export default BottomNavigationAction
+export default BottomNavigationActionComponent

@@ -190,4 +190,4 @@ export const SwitchComponent: React.ComponentType<PropsX> = SwitchCreator();
 if ((Switch as any).muiName) (SwitchComponent as any).muiName = (Switch as any).muiName;
 
 
-export default Switch
+export default SwitchComponent

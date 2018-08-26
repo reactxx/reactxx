@@ -251,4 +251,4 @@ export const TextareaComponent: React.ComponentClass<PropsX> = TextareaCreator()
 if ((Textarea as any).muiName) (TextareaComponent as any).muiName = (Textarea as any).muiName;
 
 
-export default Textarea
+export default TextareaComponent

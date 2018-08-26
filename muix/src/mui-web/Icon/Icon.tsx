@@ -114,4 +114,4 @@ export const IconComponent: React.ComponentType<PropsX> = IconCreator();
 if ((Icon as any).muiName) (IconComponent as any).muiName = (Icon as any).muiName;
 
 
-export default Icon
+export default IconComponent

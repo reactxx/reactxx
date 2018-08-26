@@ -187,4 +187,4 @@ export const GridListTileComponent: React.ComponentClass<PropsX> = GridListTileC
 if ((GridListTile as any).muiName) (GridListTileComponent as any).muiName = (GridListTile as any).muiName;
 
 
-export default GridListTile
+export default GridListTileComponent

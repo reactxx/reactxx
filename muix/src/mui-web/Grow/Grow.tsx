@@ -192,4 +192,4 @@ export const GrowComponent: React.ComponentClass<PropsX> = GrowCreator();
 if ((Grow as any).muiName) (GrowComponent as any).muiName = (Grow as any).muiName;
 
 
-export default Grow
+export default GrowComponent

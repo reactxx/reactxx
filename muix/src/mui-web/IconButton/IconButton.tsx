@@ -158,4 +158,4 @@ export const IconButtonComponent: React.ComponentType<PropsX> = IconButtonCreato
 if ((IconButton as any).muiName) (IconButtonComponent as any).muiName = (IconButton as any).muiName;
 
 
-export default IconButton
+export default IconButtonComponent

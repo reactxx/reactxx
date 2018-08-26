@@ -228,4 +228,4 @@ export const FormControlComponent: React.ComponentClass<PropsX> = FormControlCre
 if ((FormControl as any).muiName) (FormControlComponent as any).muiName = (FormControl as any).muiName;
 
 
-export default FormControl
+export default FormControlComponent

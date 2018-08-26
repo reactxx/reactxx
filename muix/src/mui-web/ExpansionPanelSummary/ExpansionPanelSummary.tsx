@@ -217,4 +217,4 @@ export const ExpansionPanelSummaryComponent: React.ComponentClass<PropsX> = Expa
 if ((ExpansionPanelSummary as any).muiName) (ExpansionPanelSummaryComponent as any).muiName = (ExpansionPanelSummary as any).muiName;
 
 
-export default ExpansionPanelSummary
+export default ExpansionPanelSummaryComponent

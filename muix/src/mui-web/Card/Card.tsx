@@ -60,4 +60,4 @@ export const CardComponent: React.ComponentType<PropsX> = CardCreator();
 if ((Card as any).muiName) (CardComponent as any).muiName = (Card as any).muiName;
 
 
-export default Card
+export default CardComponent

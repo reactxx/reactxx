@@ -1,24 +1,23 @@
-﻿{
-  "extends": "../tsconfig-web.common.json",
+{
+  "extends": "../tsconfig-web.common",
   "compilerOptions": {
     "outDir": "../../deploy/lib/icons",
+    "strict": false,
     "baseUrl": ".",
-    "declaration": true,
-    "composite": true,
     "paths": {
-      "reactxx-basic": [
-        "../basic"
-      ],
       "reactxx-fela": [
         "../fela"
       ],
       "reactxx-sheeter": [
         "../sheeter"
       ],
+      "reactxx-basic": [
+        "../basic"
+      ],
       "reactxx-mui-web/*": [
         "../mui-web/*"
       ],
-    },
+    }
   },
   "references": [
     {
@@ -32,7 +31,7 @@
     },
     {
       "path": "../mui-web"
-    },
+    }
   ],
   "exclude": [
     "native"

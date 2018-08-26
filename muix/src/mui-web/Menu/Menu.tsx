@@ -193,4 +193,4 @@ export const MenuComponent: React.ComponentClass<PropsX> = MenuCreator();
 if ((Menu as any).muiName) (MenuComponent as any).muiName = (Menu as any).muiName;
 
 
-export default Menu
+export default MenuComponent

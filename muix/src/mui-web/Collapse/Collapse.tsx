@@ -243,4 +243,4 @@ export const CollapseComponent: React.ComponentClass<PropsX> = CollapseCreator()
 if ((Collapse as any).muiName) (CollapseComponent as any).muiName = (Collapse as any).muiName;
 
 
-export default Collapse
+export default CollapseComponent

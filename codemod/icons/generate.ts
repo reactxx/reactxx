@@ -2,13 +2,13 @@ import * as map from './map.json'
 import * as Case from 'change-case'
 import * as Config from '../utils/config'
 import * as fsExtra from 'fs-extra'
-import * as tsconfig from './icons-project-tsconfig.json'
+import { tsconfig } from './icons-project-tsconfig'
 
 export const generate = () => {
     fsExtra.emptyDirSync(Config.icons)
     const internals = {}
     for (const p in map) {
-        if (p==='react') continue
+        if (p === 'react') continue
         const icon = map[p]
         const name = Case.pascalCase(icon.id)
         const fn = Config.icons + name + '.tsx'
@@ -21,6 +21,8 @@ export const generate = () => {
     const metaCode = 'export const meta = ' + JSON.stringify(map, null, 2)
     fsExtra.outputFileSync(Config.icons + 'meta.ts', metaCode, { encoding: 'utf8' })
     fsExtra.outputFileSync(Config.icons + 'tsconfig.json', JSON.stringify(tsconfig, null, 2), { encoding: 'utf8' })
+    fsExtra.copySync(Config.reactxx + 'src/typings.d.ts', Config.icons + 'typings.d.ts', { overwrite: true })
+
 
     //FSExtra.outputFileSync(Config.icons + 'native/meta.ts', metaCode, { encoding: 'utf8' })
     for (const p in internals) {
@@ -31,7 +33,13 @@ export const generate = () => {
 
 const template = (data: string, name: string, isMdi: boolean, isMuiInternal: boolean) =>
     `import createSvgIcon from '${isMuiInternal ? '.' : 'reactxx-mui-web/internal/svg-icons'}/create-svg-icon'
+import React from 'react'
+import { SvgIconProps, Shape } from 'reactxx-mui-web/SvgIcon/SvgIcon'
+import { SvgIconClassKey } from 'reactxx-mui-web/SvgIcon/SvgIcon'
+import { Theme } from 'reactxx-mui-web/styles/createMuiTheme';
 
+import { Types, TCommon, TAddIn, TCommonStyles } from 'reactxx-basic'; 
+    
 export default createSvgIcon(
   '${data}',
   '${name}',

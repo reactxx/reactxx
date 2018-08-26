@@ -1,16 +1,17 @@
 import React from 'react';
-import SvgIcon from '../../SvgIcon/SvgIcon';
+import SvgIcon, { PropsX, SvgIconClassKey, SvgIconProps, Shape } from '../../SvgIcon/SvgIcon';
+import { Theme } from '../../styles/createMuiTheme';
+import { Types, TCommon, TAddIn, TCommonStyles } from 'reactxx-basic'  
 
-const createSvgIcon = (data: string, displayName: string, isMdi:boolean) => {
-    const Icon: React.SFC = props => <SvgIcon {...props} >
+const createSvgIcon = (data: string, displayName: string, isMdi: boolean) => {
+    const Icon: React.SFC<PropsX> = props => <SvgIcon {...props}>
         <path d={data} />
     </SvgIcon >
 
-    const res: any = Icon
-    res.displayName = displayName;
-    res.muiName = 'SvgIcon';
+    (Icon as any).displayName = displayName;
+    (Icon as any).muiName = 'SvgIcon';
 
-    return res;
+    return Icon;
 }
 
 export default createSvgIcon;

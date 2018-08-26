@@ -33,7 +33,7 @@ export namespace Types {
   export interface Shape extends TCommon.Shape, TAddIn.Shape { }
 
   export interface ShapeDefault extends TAddIn.ShapeDefault {
-    common: {}; native: {}; web: null
+    common: TCommon.EmptySheet; native: TCommon.EmptySheet; web: null
     style: 'View'
     events: null
     props: {}; propsNative: ReactN.ViewProperties; propsWeb: React.HTMLAttributes<HTMLElement>
@@ -52,8 +52,9 @@ export namespace Types {
   export type PartialSheetX<R extends Shape = Shape> = Partial<SheetXCommon<R> & SheetXNative<R> & SheetXWeb<R>> & DeepPartial<TAddIn.SheetX<R>>
 
   export type SheetXCommon<R extends Shape> = { [P in keyof TCommon.getCommon<R>]: Partial<RulesetX<TCommon.getCommon<R>[P], R>> }
-  export type SheetXNative<R extends Shape> = { [P in keyof TCommon.getNative<R>]: { $native?: TCommonStyles.RulesetNative<TCommon.getNative<R>[P]> } & TAddIn.RulesetAddInX<TCommon.getNative<R>[P], R> }
-  export type SheetXWeb<R extends Shape> = { [P in TCommon.getWeb<R>]: { $web?: TCommonStyles.RulesetWeb } & TAddIn.RulesetAddInX<TCommon.getNative<R>[P], R> }
+  export type SheetXNative<R extends Shape> = { [P in keyof TCommon.getNative<R>]: { $native?: TCommonStyles.RulesetNative<TCommon.getNative<R>[P]> }
+    & TAddIn.RulesetAddInX<TCommon.getNative<R>[P], R> }
+  export type SheetXWeb<R extends Shape> = { [P in TCommon.getWeb<R>]: { $web?: TCommonStyles.RulesetWeb } & TAddIn.RulesetAddInX<'Text', R> }
 
   export type SheetCreatorX<R extends Shape = Shape> = themeCreator<R, SheetX<R>>
 
@@ -111,7 +112,7 @@ export namespace Types {
   //type TMergeRulesets<T extends {}> = (...rulesets) => T
 
   export type TMergeRulesetsResult<T extends TCommonStyles.RulesetNativeIds | 'Web' | {}> =
-    T extends TCommonStyles.RulesetNativeIds ? TCommonStyles.RulesetNative<T> :
+    T extends TCommonStyles.RulesetNativeIdsLow ? TCommonStyles.RulesetNative<T> :
     T extends 'Web' ? TCommonStyles.RulesetWeb : T
 
   export type CodeSystem<R extends Shape = Shape> =
@@ -250,4 +251,4 @@ export namespace Types {
 }
 
 
-export const fakeTypes = 0
+//export const fakeTypes = 0

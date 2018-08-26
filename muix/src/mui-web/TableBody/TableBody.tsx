@@ -84,4 +84,4 @@ export const TableBodyComponent: React.ComponentClass<PropsX> = TableBodyCreator
 if ((TableBody as any).muiName) (TableBodyComponent as any).muiName = (TableBody as any).muiName;
 
 
-export default TableBody
+export default TableBodyComponent

@@ -95,4 +95,4 @@ export const InputAdornmentComponent: React.ComponentType<PropsX> = InputAdornme
 if ((InputAdornment as any).muiName) (InputAdornmentComponent as any).muiName = (InputAdornment as any).muiName;
 
 
-export default InputAdornment
+export default InputAdornmentComponent

@@ -231,4 +231,4 @@ export const CircularProgressComponent: React.ComponentType<PropsX> = CircularPr
 if ((CircularProgress as any).muiName) (CircularProgressComponent as any).muiName = (CircularProgress as any).muiName;
 
 
-export default CircularProgress
+export default CircularProgressComponent

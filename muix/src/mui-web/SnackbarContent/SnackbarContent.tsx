@@ -103,4 +103,4 @@ export const SnackbarContentComponent: React.ComponentType<PropsX> = SnackbarCon
 if ((SnackbarContent as any).muiName) (SnackbarContentComponent as any).muiName = (SnackbarContent as any).muiName;
 
 
-export default SnackbarContent
+export default SnackbarContentComponent

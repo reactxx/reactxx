@@ -96,7 +96,9 @@ TablePaginationActions['propTypes'] = {
   theme: PropTypes.object.isRequired,
 };
 
-const TablePaginationActionsWrapped = withStylesCreator(actionsStyles as any, TablePaginationActions, { withTheme: true })();
+const TablePaginationActionsWrapped = withStyles(actionsStyles, { withTheme: true })(
+  TablePaginationActions,
+);
 
 let counter = 0;
 function createData(name, calories, fat) {

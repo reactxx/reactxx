@@ -661,4 +661,4 @@ export const InputComponent: React.ComponentClass<PropsX> = InputCreator();
 if ((Input as any).muiName) (InputComponent as any).muiName = (Input as any).muiName;
 
 
-export default Input
+export default InputComponent

@@ -148,4 +148,4 @@ export const StepperComponent: React.ComponentType<PropsX> = StepperCreator();
 if ((Stepper as any).muiName) (StepperComponent as any).muiName = (Stepper as any).muiName;
 
 
-export default Stepper
+export default StepperComponent

@@ -104,4 +104,4 @@ export const BottomNavigationComponent: React.ComponentType<PropsX> = BottomNavi
 if ((BottomNavigation as any).muiName) (BottomNavigationComponent as any).muiName = (BottomNavigation as any).muiName;
 
 
-export default BottomNavigation
+export default BottomNavigationComponent

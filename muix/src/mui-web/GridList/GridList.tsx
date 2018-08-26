@@ -115,4 +115,4 @@ export const GridListComponent: React.ComponentType<PropsX> = GridListCreator();
 if ((GridList as any).muiName) (GridListComponent as any).muiName = (GridList as any).muiName;
 
 
-export default GridList
+export default GridListComponent

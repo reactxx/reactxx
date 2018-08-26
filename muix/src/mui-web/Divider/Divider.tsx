@@ -98,4 +98,4 @@ export const DividerComponent: React.ComponentType<PropsX> = DividerCreator();
 if ((Divider as any).muiName) (DividerComponent as any).muiName = (Divider as any).muiName;
 
 
-export default Divider
+export default DividerComponent

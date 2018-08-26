@@ -139,4 +139,4 @@ export const ZoomComponent: React.ComponentClass<PropsX> = ZoomCreator();
 if ((Zoom as any).muiName) (ZoomComponent as any).muiName = (Zoom as any).muiName;
 
 
-export default Zoom
+export default ZoomComponent

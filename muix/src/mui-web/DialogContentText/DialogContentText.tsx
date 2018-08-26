@@ -61,4 +61,4 @@ export const DialogContentTextComponent: React.ComponentType<PropsX> = DialogCon
 if ((DialogContentText as any).muiName) (DialogContentTextComponent as any).muiName = (DialogContentText as any).muiName;
 
 
-export default DialogContentText
+export default DialogContentTextComponent

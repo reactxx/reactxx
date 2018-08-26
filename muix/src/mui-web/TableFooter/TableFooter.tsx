@@ -86,4 +86,4 @@ export const TableFooterComponent: React.ComponentClass<PropsX> = TableFooterCre
 if ((TableFooter as any).muiName) (TableFooterComponent as any).muiName = (TableFooter as any).muiName;
 
 
-export default TableFooter
+export default TableFooterComponent

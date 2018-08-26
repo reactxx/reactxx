@@ -125,4 +125,4 @@ export const HiddenCssComponent: React.ComponentType<PropsX> = HiddenCssCreator(
 if ((HiddenCss as any).muiName) (HiddenCssComponent as any).muiName = (HiddenCss as any).muiName;
 
 
-export default HiddenCss
+export default HiddenCssComponent

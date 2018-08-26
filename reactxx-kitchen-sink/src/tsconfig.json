@@ -28,6 +28,9 @@
       "reactxx-mui-web/*": [
         "../mui-web/*"
       ],
+      "reactxx-muix/*": [
+        "../muix/*"
+      ],
     }
   },
   "references": [
@@ -39,9 +42,10 @@
     {"path": "../basic"},
     {"path": "../icons"},
     {"path": "../mui-web"},
+    {"path": "../muix"},
   ],
-  "exclude": [
-    "common/muix",
+  "include": [
+    //"common/muix",
     "common/muix-doc",
   ]
 }

@@ -443,4 +443,4 @@ export const TooltipComponent: React.ComponentClass<PropsX> = TooltipCreator();
 if ((Tooltip as any).muiName) (TooltipComponent as any).muiName = (Tooltip as any).muiName;
 
 
-export default Tooltip
+export default TooltipComponent

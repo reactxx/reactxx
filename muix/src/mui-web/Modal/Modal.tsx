@@ -394,4 +394,4 @@ export const ModalComponent: React.ComponentClass<PropsX> = ModalCreator();
 if ((Modal as any).muiName) (ModalComponent as any).muiName = (Modal as any).muiName;
 
 
-export default Modal
+export default ModalComponent

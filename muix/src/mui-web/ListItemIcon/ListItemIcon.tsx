@@ -63,4 +63,4 @@ export const ListItemIconComponent: React.ComponentType<PropsX> = ListItemIconCr
 if ((ListItemIcon as any).muiName) (ListItemIconComponent as any).muiName = (ListItemIcon as any).muiName;
 
 
-export default ListItemIcon
+export default ListItemIconComponent

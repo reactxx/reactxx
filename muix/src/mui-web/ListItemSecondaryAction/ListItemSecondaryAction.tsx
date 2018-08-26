@@ -57,4 +57,4 @@ export const ListItemSecondaryActionComponent: React.ComponentType<PropsX> = Lis
 if ((ListItemSecondaryAction as any).muiName) (ListItemSecondaryActionComponent as any).muiName = (ListItemSecondaryAction as any).muiName;
 
 
-export default ListItemSecondaryAction
+export default ListItemSecondaryActionComponent

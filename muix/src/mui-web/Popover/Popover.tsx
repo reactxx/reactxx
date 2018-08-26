@@ -443,4 +443,4 @@ export const PopoverComponent: React.ComponentClass<PropsX> = PopoverCreator();
 if ((Popover as any).muiName) (PopoverComponent as any).muiName = (Popover as any).muiName;
 
 
-export default Popover
+export default PopoverComponent

@@ -84,4 +84,4 @@ export const TableHeadComponent: React.ComponentClass<PropsX> = TableHeadCreator
 if ((TableHead as any).muiName) (TableHeadComponent as any).muiName = (TableHead as any).muiName;
 
 
-export default TableHead
+export default TableHeadComponent

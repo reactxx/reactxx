@@ -74,4 +74,4 @@ export const FormGroupComponent: React.ComponentType<PropsX> = FormGroupCreator(
 if ((FormGroup as any).muiName) (FormGroupComponent as any).muiName = (FormGroup as any).muiName;
 
 
-export default FormGroup
+export default FormGroupComponent

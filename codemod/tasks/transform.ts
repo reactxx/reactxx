@@ -1,11 +1,11 @@
 import * as Config from '../utils/config'
 
+import { replaceAll } from '../utils/regexp'
 import * as Ast from '../utils/ast'
 import * as Tasks from './ast/default-modifier'
 import * as Parser from '../utils/parser'
 import * as Queries from '../utils/queries'
 import { gridAst } from './ast-comp/Grid'
-//import { touchRippleAst } from './ast-comp/TouchRipple'
 
 import { removePropTypes } from './ast/removePropTypes'
 import { adjustImports } from './code/adjustImports'
@@ -48,6 +48,12 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
                 break
             case 'internal/SwitchBase':
                 dts = dts.replace("export type SwitchBase = React.Component<SwitchBaseProps>;", "")
+                break
+            case 'styles/createMuiTheme':
+                dts = dts.replace("import { Overrides } from './overrides';", "")
+                dts = dts.replace("import { ComponentsProps } from './props';", "")
+                dts = replaceAll(dts, "props?: ComponentsProps;", "")
+                dts = replaceAll(dts, "overrides?: Overrides;", "")
                 break
         }
 
@@ -94,14 +100,6 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
             case 'ButtonBase/Ripple':
                 Tasks.withStylesTaskDefaultCreator()(ast, info)
                 break
-            //case 'ButtonBase/TouchRipple':
-                //touchRippleAst(ast, info)
-                //break
-            // case 'Collapse/Collapse':
-            //     Tasks.withStylesTaskDefaultCreator()(ast, Object.assign({}, info, {
-            //         adjustThemeProperties: ['handleEntering', 'handleExiting'],
-            //     } as Ast.MUISourceInfo));
-            //     break
             case 'Grid/Grid':
                 gridAst(ast, info)
                 break
@@ -113,13 +111,6 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
                 break
             case 'InputLabel/InputLabel':
                 Tasks.withStylesTaskDefaultCreator()(ast, info)
-                // swap shrink and margin order in classNames call as follows:
-                // const className = classNames(
-                //     ...
-                //     margin === "dense" && classes.marginDense,
-                //     shrink && classes.shrink,
-                //     ...
-                //   );            
                 const callExpression = Queries.checkSingleResult(Ast.astq().query(ast, `// CallExpression [ /Identifier [@name == "classNames"] && // LogicalExpression/Identifier [ @name == "shrink"] ]`))
                 const shrink = Queries.checkSingleResult(Ast.astq().query(callExpression, `// LogicalExpression [ /Identifier [ @name == "shrink"] ]`))
                 const margin = Queries.checkSingleResult(Ast.astq().query(callExpression, `// LogicalExpression [/BinaryExpression/Identifier [ @name == "margin"] ]`))
@@ -128,22 +119,8 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
                 callExpression.arguments[shrinkIdx] = margin
                 callExpression.arguments[marginIdx] = shrink
                 break
-            // case 'NativeSelect/NativeSelectInput':
-            //     Tasks.classNamesFix()(ast, info)
-            //     break
-            // case 'Select/SelectInput':
-            //     Tasks.classNamesFix()(ast, info)
-            //     break
-            // case 'Tabs/Tabs':
-            //     Tasks.withStylesTaskDefaultCreator()(ast, Object.assign({}, info, {
-            //         adjustThemeProperties: ['moveTabsScroll', 'scrollSelectedIntoView', 'getConditionalElements', 'updateScrollButtonState'],
-            //         adjustThemeMethods: ['updateIndicatorState']
-            //     } as Ast.MUISourceInfo))
-            //     break
             default:
                 if (info.withStylesOrTheme) Tasks.withStylesTaskDefaultCreator()(ast, info)
-                //else if (info.withTheme) Tasks.withThemeTaskDefaultCreator()(ast, info)
-                //else Tasks.otherTaskDefaultCreator()(ast, info)
                 break
         }
     }
@@ -191,7 +168,7 @@ export const ${info.name}Component: React.${info.isClass ? 'ComponentClass' : 'C
 if ((${info.name} as any).muiName) (${info.name}Component as any).muiName = (${info.name} as any).muiName;
 
 
-export default ${info.name}
+export default ${info.name}Component
 `
 const noKey = {
     'SwipeArea': true,

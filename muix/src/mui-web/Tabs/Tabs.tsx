@@ -495,4 +495,4 @@ export const TabsComponent: React.ComponentClass<PropsX> = TabsCreator();
 if ((Tabs as any).muiName) (TabsComponent as any).muiName = (Tabs as any).muiName;
 
 
-export default Tabs
+export default TabsComponent

@@ -142,4 +142,4 @@ export const AvatarComponent: React.ComponentType<PropsX> = AvatarCreator();
 if ((Avatar as any).muiName) (AvatarComponent as any).muiName = (Avatar as any).muiName;
 
 
-export default Avatar
+export default AvatarComponent

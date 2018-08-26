@@ -86,4 +86,4 @@ export const SwipeAreaComponent: React.ComponentType<PropsX> = SwipeAreaCreator(
 if ((SwipeArea as any).muiName) (SwipeAreaComponent as any).muiName = (SwipeArea as any).muiName;
 
 
-export default SwipeArea
+export default SwipeAreaComponent

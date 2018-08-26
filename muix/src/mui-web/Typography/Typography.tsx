@@ -225,4 +225,4 @@ export const TypographyComponent: React.ComponentType<PropsX> = TypographyCreato
 if ((Typography as any).muiName) (TypographyComponent as any).muiName = (Typography as any).muiName;
 
 
-export default Typography
+export default TypographyComponent

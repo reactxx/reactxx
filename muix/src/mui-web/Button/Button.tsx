@@ -403,4 +403,4 @@ export const ButtonComponent: React.ComponentType<PropsX> = ButtonCreator();
 if ((Button as any).muiName) (ButtonComponent as any).muiName = (Button as any).muiName;
 
 
-export default Button
+export default ButtonComponent

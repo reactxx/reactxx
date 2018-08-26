@@ -105,4 +105,4 @@ export const RadioComponent: React.ComponentType<PropsX> = RadioCreator();
 if ((Radio as any).muiName) (RadioComponent as any).muiName = (Radio as any).muiName;
 
 
-export default Radio
+export default RadioComponent

@@ -229,4 +229,4 @@ export const SwitchBaseComponent: React.ComponentClass<PropsX> = SwitchBaseCreat
 if ((SwitchBase as any).muiName) (SwitchBaseComponent as any).muiName = (SwitchBase as any).muiName;
 
 
-export default SwitchBase
+export default SwitchBaseComponent

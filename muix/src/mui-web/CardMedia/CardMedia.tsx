@@ -98,4 +98,4 @@ export const CardMediaComponent: React.ComponentType<PropsX> = CardMediaCreator(
 if ((CardMedia as any).muiName) (CardMediaComponent as any).muiName = (CardMedia as any).muiName;
 
 
-export default CardMedia
+export default CardMediaComponent

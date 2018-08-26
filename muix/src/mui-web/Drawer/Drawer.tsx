@@ -287,4 +287,4 @@ export const DrawerComponent: React.ComponentClass<PropsX> = DrawerCreator();
 if ((Drawer as any).muiName) (DrawerComponent as any).muiName = (Drawer as any).muiName;
 
 
-export default Drawer
+export default DrawerComponent

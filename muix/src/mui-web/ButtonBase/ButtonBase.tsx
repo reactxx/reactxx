@@ -389,4 +389,4 @@ export const ButtonBaseComponent: React.ComponentClass<PropsX> = ButtonBaseCreat
 if ((ButtonBase as any).muiName) (ButtonBaseComponent as any).muiName = (ButtonBase as any).muiName;
 
 
-export default ButtonBase
+export default ButtonBaseComponent

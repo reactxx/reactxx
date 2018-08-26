@@ -56,4 +56,4 @@ export const ExpansionPanelDetailsComponent: React.ComponentType<PropsX> = Expan
 if ((ExpansionPanelDetails as any).muiName) (ExpansionPanelDetailsComponent as any).muiName = (ExpansionPanelDetails as any).muiName;
 
 
-export default ExpansionPanelDetails
+export default ExpansionPanelDetailsComponent

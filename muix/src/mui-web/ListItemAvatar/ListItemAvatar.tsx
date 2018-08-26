@@ -87,4 +87,4 @@ export const ListItemAvatarComponent: React.ComponentType<PropsX> = ListItemAvat
 if ((ListItemAvatar as any).muiName) (ListItemAvatarComponent as any).muiName = (ListItemAvatar as any).muiName;
 
 
-export default ListItemAvatar
+export default ListItemAvatarComponent

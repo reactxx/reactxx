@@ -211,4 +211,4 @@ export const StepLabelComponent: React.ComponentType<PropsX> = StepLabelCreator(
 if ((StepLabel as any).muiName) (StepLabelComponent as any).muiName = (StepLabel as any).muiName;
 
 
-export default StepLabel
+export default StepLabelComponent

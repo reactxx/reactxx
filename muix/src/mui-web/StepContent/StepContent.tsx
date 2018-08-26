@@ -130,4 +130,4 @@ export const StepContentComponent: React.ComponentType<PropsX> = StepContentCrea
 if ((StepContent as any).muiName) (StepContentComponent as any).muiName = (StepContent as any).muiName;
 
 
-export default StepContent
+export default StepContentComponent

@@ -118,4 +118,4 @@ export const StepButtonComponent: React.ComponentType<PropsX> = StepButtonCreato
 if ((StepButton as any).muiName) (StepButtonComponent as any).muiName = (StepButton as any).muiName;
 
 
-export default StepButton
+export default StepButtonComponent

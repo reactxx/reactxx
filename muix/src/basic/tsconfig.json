@@ -1,5 +1,5 @@
 ﻿{ 
-  "extends": "../tsconfig-web.common.json",
+  "extends": "../tsconfig-web.common",
   "compilerOptions": {
     "outDir": "../../deploy/lib/basic",
     "baseUrl": ".",

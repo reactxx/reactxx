@@ -90,4 +90,4 @@ export const TableComponent: React.ComponentClass<PropsX> = TableCreator();
 if ((Table as any).muiName) (TableComponent as any).muiName = (Table as any).muiName;
 
 
-export default Table
+export default TableComponent

@@ -85,4 +85,4 @@ export const ToolbarComponent: React.ComponentType<PropsX> = ToolbarCreator();
 if ((Toolbar as any).muiName) (ToolbarComponent as any).muiName = (Toolbar as any).muiName;
 
 
-export default Toolbar
+export default ToolbarComponent

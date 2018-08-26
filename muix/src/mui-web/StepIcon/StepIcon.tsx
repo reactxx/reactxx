@@ -117,4 +117,4 @@ export const StepIconComponent: React.ComponentType<PropsX> = StepIconCreator();
 if ((StepIcon as any).muiName) (StepIconComponent as any).muiName = (StepIcon as any).muiName;
 
 
-export default StepIcon
+export default StepIconComponent

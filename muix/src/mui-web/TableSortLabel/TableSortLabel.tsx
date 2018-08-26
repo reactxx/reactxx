@@ -124,4 +124,4 @@ export const TableSortLabelComponent: React.ComponentType<PropsX> = TableSortLab
 if ((TableSortLabel as any).muiName) (TableSortLabelComponent as any).muiName = (TableSortLabel as any).muiName;
 
 
-export default TableSortLabel
+export default TableSortLabelComponent

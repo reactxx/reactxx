@@ -245,4 +245,4 @@ export const ListItemComponent: React.ComponentClass<PropsX> = ListItemCreator()
 if ((ListItem as any).muiName) (ListItemComponent as any).muiName = (ListItem as any).muiName;
 
 
-export default ListItem
+export default ListItemComponent

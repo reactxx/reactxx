@@ -106,4 +106,4 @@ export const TablePaginationActionsComponent: React.ComponentClass<PropsX> = Tab
 if ((TablePaginationActions as any).muiName) (TablePaginationActionsComponent as any).muiName = (TablePaginationActions as any).muiName;
 
 
-export default TablePaginationActions
+export default TablePaginationActionsComponent

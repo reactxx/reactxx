@@ -83,4 +83,4 @@ export const TabScrollButtonComponent: React.ComponentType<PropsX> = TabScrollBu
 if ((TabScrollButton as any).muiName) (TabScrollButtonComponent as any).muiName = (TabScrollButton as any).muiName;
 
 
-export default TabScrollButton
+export default TabScrollButtonComponent

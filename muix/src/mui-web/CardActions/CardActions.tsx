@@ -82,4 +82,4 @@ export const CardActionsComponent: React.ComponentType<PropsX> = CardActionsCrea
 if ((CardActions as any).muiName) (CardActionsComponent as any).muiName = (CardActions as any).muiName;
 
 
-export default CardActions
+export default CardActionsComponent

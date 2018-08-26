@@ -175,4 +175,4 @@ export const GridListTileBarComponent: React.ComponentType<PropsX> = GridListTil
 if ((GridListTileBar as any).muiName) (GridListTileBarComponent as any).muiName = (GridListTileBar as any).muiName;
 
 
-export default GridListTileBar
+export default GridListTileBarComponent

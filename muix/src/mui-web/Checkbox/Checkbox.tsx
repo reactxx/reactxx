@@ -117,4 +117,4 @@ export const CheckboxComponent: React.ComponentType<PropsX> = CheckboxCreator();
 if ((Checkbox as any).muiName) (CheckboxComponent as any).muiName = (Checkbox as any).muiName;
 
 
-export default Checkbox
+export default CheckboxComponent

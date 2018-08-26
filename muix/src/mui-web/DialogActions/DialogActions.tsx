@@ -79,4 +79,4 @@ export const DialogActionsComponent: React.ComponentType<PropsX> = DialogActions
 if ((DialogActions as any).muiName) (DialogActionsComponent as any).muiName = (DialogActions as any).muiName;
 
 
-export default DialogActions
+export default DialogActionsComponent

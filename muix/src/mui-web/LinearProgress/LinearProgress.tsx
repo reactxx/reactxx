@@ -333,4 +333,4 @@ export const LinearProgressComponent: React.ComponentType<PropsX> = LinearProgre
 if ((LinearProgress as any).muiName) (LinearProgressComponent as any).muiName = (LinearProgress as any).muiName;
 
 
-export default LinearProgress
+export default LinearProgressComponent

@@ -1,11 +1,9 @@
 import { codeMod } from './tasks'
 import { codeModDoc } from './tasks/index-doc'
-import * as Config from './utils/config'
 import iconsRun from './icons/index'
 
-//Config.setIsDoc(true); codeModDoc()
+if (false) codeModDoc()
 
-Config.setIsDoc(false); codeMod()
+if (false) codeMod(false)
 
-//iconsRun()
-
+if (true) iconsRun()

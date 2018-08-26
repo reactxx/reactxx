@@ -143,4 +143,4 @@ export const StepComponent: React.ComponentType<PropsX> = StepCreator();
 if ((Step as any).muiName) (StepComponent as any).muiName = (Step as any).muiName;
 
 
-export default Step
+export default StepComponent

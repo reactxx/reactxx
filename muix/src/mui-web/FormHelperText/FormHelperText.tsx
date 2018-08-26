@@ -159,4 +159,4 @@ export const FormHelperTextComponent: React.ComponentType<PropsX> = FormHelperTe
 if ((FormHelperText as any).muiName) (FormHelperTextComponent as any).muiName = (FormHelperText as any).muiName;
 
 
-export default FormHelperText
+export default FormHelperTextComponent

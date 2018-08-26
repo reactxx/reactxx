@@ -132,4 +132,4 @@ export const SelectComponent: React.ComponentType<PropsX> = SelectCreator();
 if ((Select as any).muiName) (SelectComponent as any).muiName = (Select as any).muiName;
 
 
-export default Select
+export default SelectComponent

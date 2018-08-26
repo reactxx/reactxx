@@ -66,4 +66,4 @@ export const DialogTitleComponent: React.ComponentType<PropsX> = DialogTitleCrea
 if ((DialogTitle as any).muiName) (DialogTitleComponent as any).muiName = (DialogTitle as any).muiName;
 
 
-export default DialogTitle
+export default DialogTitleComponent

@@ -256,4 +256,4 @@ export const DialogComponent: React.ComponentType<PropsX> = DialogCreator();
 if ((Dialog as any).muiName) (DialogComponent as any).muiName = (Dialog as any).muiName;
 
 
-export default Dialog
+export default DialogComponent

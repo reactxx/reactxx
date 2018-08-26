@@ -257,4 +257,4 @@ export const TablePaginationComponent: React.ComponentClass<PropsX> = TablePagin
 if ((TablePagination as any).muiName) (TablePaginationComponent as any).muiName = (TablePagination as any).muiName;
 
 
-export default TablePagination
+export default TablePaginationComponent

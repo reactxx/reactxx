@@ -156,4 +156,4 @@ export const NativeSelectComponent: React.ComponentType<PropsX> = NativeSelectCr
 if ((NativeSelect as any).muiName) (NativeSelectComponent as any).muiName = (NativeSelect as any).muiName;
 
 
-export default NativeSelect
+export default NativeSelectComponent

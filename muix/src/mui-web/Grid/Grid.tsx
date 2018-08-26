@@ -396,4 +396,4 @@ export const GridComponent: React.ComponentType<PropsX> = GridCreator();
 if ((Grid as any).muiName) (GridComponent as any).muiName = (Grid as any).muiName;
 
 
-export default Grid
+export default GridComponent

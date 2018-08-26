@@ -284,4 +284,4 @@ export const PopperComponent: React.ComponentClass<PropsX> = PopperCreator();
 if ((Popper as any).muiName) (PopperComponent as any).muiName = (Popper as any).muiName;
 
 
-export default Popper
+export default PopperComponent

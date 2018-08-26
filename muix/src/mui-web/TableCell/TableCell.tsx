@@ -205,4 +205,4 @@ export const TableCellComponent: React.ComponentType<PropsX> = TableCellCreator(
 if ((TableCell as any).muiName) (TableCellComponent as any).muiName = (TableCell as any).muiName;
 
 
-export default TableCell
+export default TableCellComponent

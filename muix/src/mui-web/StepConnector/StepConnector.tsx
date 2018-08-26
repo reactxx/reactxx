@@ -128,4 +128,4 @@ export const StepConnectorComponent: React.ComponentType<PropsX> = StepConnector
 if ((StepConnector as any).muiName) (StepConnectorComponent as any).muiName = (StepConnector as any).muiName;
 
 
-export default StepConnector
+export default StepConnectorComponent

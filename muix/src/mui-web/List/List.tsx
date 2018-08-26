@@ -116,4 +116,4 @@ export const ListComponent: React.ComponentClass<PropsX> = ListCreator();
 if ((List as any).muiName) (ListComponent as any).muiName = (List as any).muiName;
 
 
-export default List
+export default ListComponent

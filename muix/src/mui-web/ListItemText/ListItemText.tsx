@@ -169,4 +169,4 @@ export const ListItemTextComponent: React.ComponentType<PropsX> = ListItemTextCr
 if ((ListItemText as any).muiName) (ListItemTextComponent as any).muiName = (ListItemText as any).muiName;
 
 
-export default ListItemText
+export default ListItemTextComponent

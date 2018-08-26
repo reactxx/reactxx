@@ -293,4 +293,4 @@ export const TabComponent: React.ComponentClass<PropsX> = TabCreator();
 if ((Tab as any).muiName) (TabComponent as any).muiName = (Tab as any).muiName;
 
 
-export default Tab
+export default TabComponent
