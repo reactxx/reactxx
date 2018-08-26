@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactN from 'react-native';
-import SvgIcon, { PropsX, SvgIconClassKey, SvgIconProps, Shape } from '../../SvgIcon/SvgIcon';
-import { Theme } from '../../styles/withStyles';
-import { Types, TCommon, TAddIn, TCommonStyles } from 'reactxx-basic'
+import SvgIcon, { PropsX, SvgIconProps, Shape } from '../../SvgIcon/SvgIcon';
+import { Types, TAddIn } from 'reactxx-basic'
 
 
 const createSvgIcon = (data: string, displayName: string, isMdi: boolean) => {

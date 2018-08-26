@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactN from 'react-native';
 import createSvgIcon from 'reactxx-mui-web/internal/svg-icons/create-svg-icon'
-import { SvgIconProps, Shape, SvgIconClassKey } from 'reactxx-mui-web/SvgIcon/SvgIcon'
-import { Theme } from 'reactxx-mui-web/styles/createMuiTheme'
+import { SvgIconProps, Shape } from 'reactxx-mui-web/SvgIcon/SvgIcon'
 
-import { Types, TCommon, TAddIn, TCommonStyles } from 'reactxx-basic'; 
+import { Types, TAddIn } from 'reactxx-basic'; 
     
 export default createSvgIcon(
   'M12,3V8.68L15,11.68V6H19V3H12M5.28,4.5L4,5.77L10.26,12.03C7.89,12.15 6,14.1 6,16.5C6,19 8,21 10.5,21C12.9,21 14.85,19.11 14.97,16.74L19.68,21.45L20.96,20.18L15,14.22L12,11.22L5.28,4.5Z',

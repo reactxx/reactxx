@@ -35,10 +35,9 @@ const template = (data: string, name: string, isMdi: boolean, isMuiInternal: boo
     `import React from 'react'
 import ReactN from 'react-native';
 import createSvgIcon from '${isMuiInternal ? '.' : 'reactxx-mui-web/internal/svg-icons'}/create-svg-icon'
-import { SvgIconProps, Shape, SvgIconClassKey } from '${isMuiInternal ? '../../SvgIcon/SvgIcon' : 'reactxx-mui-web/SvgIcon/SvgIcon'}'
-import { Theme } from '${isMuiInternal ? '../../styles/createMuiTheme' : 'reactxx-mui-web/styles/createMuiTheme'}'
+import { SvgIconProps, Shape } from '${isMuiInternal ? '../../SvgIcon/SvgIcon' : 'reactxx-mui-web/SvgIcon/SvgIcon'}'
 
-import { Types, TCommon, TAddIn, TCommonStyles } from 'reactxx-basic'; 
+import { Types, TAddIn } from 'reactxx-basic'; 
     
 export default createSvgIcon(
   '${data}',
