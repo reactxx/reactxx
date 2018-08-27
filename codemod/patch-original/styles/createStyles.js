@@ -1,5 +1,3 @@
-//      
-
-export default function createStyles(s        ) {
-  return s;
+export default function createStyles(styles) {
+  return styles;
 }

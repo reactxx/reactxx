@@ -8,6 +8,7 @@ import InsetList from './InsetList'
 import InteractiveList from './InteractiveList'
 import NestedList from './NestedList'
 import PinnedSubheaderList from './PinnedSubheaderList'
+import SelectedListItem from './SelectedListItem'
 import SimpleList from './SimpleList'
 import SwitchListSecondary from './SwitchListSecondary'
 
@@ -45,6 +46,11 @@ const App: React.SFC = () => <div style={{padding: 30, overflow:'auto'}}>
 <h2>PinnedSubheaderList</h2>
 <div style={{flexShrink: 0}}>
   <PinnedSubheaderList/>
+</div>
+
+<h2>SelectedListItem</h2>
+<div style={{flexShrink: 0}}>
+  <SelectedListItem/>
 </div>
 
 <h2>SimpleList</h2>

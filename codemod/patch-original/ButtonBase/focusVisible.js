@@ -1,5 +1,3 @@
-//       weak
-
 import keycode from 'keycode';
 import warning from 'warning';
 import ownerDocument from '../utils/ownerDocument';

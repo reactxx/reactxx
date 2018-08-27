@@ -1,6 +1,7 @@
 import { Flags, Script } from './transform-code'
 
 import { replaceAll } from '../utils/regexp'
+import { transform } from './transform';
 
 export const scripts: Record<string, Script> = {
     "AppBar/AppBar": {
@@ -55,6 +56,8 @@ export const scripts: Record<string, Script> = {
     "Card/Card": {
     },
     "CardActions/CardActions": {
+    },
+    "CardActionArea/CardActionArea": {
     },
     "CardContent/CardContent": {
     },
@@ -197,7 +200,8 @@ export const scripts: Record<string, Script> = {
             "let inputProps = {":"let inputProps: any = {",
         },
         addFields: "  inputRef",
-        addProps: "  onFilled?; onEmpty?"
+        addProps: "  onFilled?; onEmpty?",
+        transform: code => replaceAll(code, 'this.props.inputProps.ref', '(this.props.inputProps as any).ref')
     },
     "Input/Textarea": {
         replace: {
@@ -355,7 +359,8 @@ export const scripts: Record<string, Script> = {
         replace: {
             "input.props.inputProps": "(input as any).props.inputProps",
             "React.cloneElement(input": "React.cloneElement(input as any",
-            "import { styles as nativeSelectStyles }": "import { NativeSelectStyles as nativeSelectStyles }"
+            "import { styles as nativeSelectStyles }": "import { NativeSelectStyles as nativeSelectStyles }",
+            "newClasses: inputProps.classes":"newClasses: (inputProps as any).classes",
         },
     },
     "Select/SelectInput": {

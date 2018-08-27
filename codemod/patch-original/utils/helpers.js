@@ -1,5 +1,3 @@
-//       weak
-
 import warning from 'warning';
 
 export function capitalize(string) {
@@ -63,6 +61,6 @@ export function createChainedFunction(...funcs) {
         func.apply(this, args);
       };
     },
-    () => { },
+    () => {},
   );
 }

@@ -8,7 +8,7 @@
 //https://github.com/rse/astq
 export const drive = 'c:/'
 export const reactxx = drive + 'reactxx/muix/'
-export const MUI_VERSION = 'v1.5.0'
+export const MUI_VERSION = 'v3.0.0'
 
 export let isDoc = false
 export const setIsDoc = (_isDoc:boolean) => {

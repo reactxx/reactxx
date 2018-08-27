@@ -1,8 +1,6 @@
-//      
-
-export default function createMixins(breakpoints        , spacing        , mixins        ) {
+export default function createMixins(breakpoints, spacing, mixins) {
   return {
-    gutters: (styles         = {}) => {
+    gutters: (styles = {}) => {
       return {
         paddingLeft: spacing.unit * 2,
         paddingRight: spacing.unit * 2,

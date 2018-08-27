@@ -1,5 +1,3 @@
-//      
-
 import PropTypes from 'prop-types';
 
 // Same value used by react-jss
@@ -9,21 +7,21 @@ const themeListener = {
   contextTypes: {
     [CHANNEL]: PropTypes.object,
   },
-  initial: (context        ) => {
+  initial: context => {
     if (!context[CHANNEL]) {
       return null;
     }
 
     return context[CHANNEL].getState();
   },
-  subscribe: (context        , cb          ) => {
+  subscribe: (context, cb) => {
     if (!context[CHANNEL]) {
       return null;
     }
 
     return context[CHANNEL].subscribe(cb);
   },
-  unsubscribe(context        , subscriptionId        ) {
+  unsubscribe: (context, subscriptionId) => {
     if (context[CHANNEL]) {
       context[CHANNEL].unsubscribe(subscriptionId);
     }
