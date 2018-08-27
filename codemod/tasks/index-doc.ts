@@ -46,6 +46,10 @@ export const codeModDoc = () => {
             (exampleGroups[info.dir] || (exampleGroups[info.dir] = [])).push(info.name)
     }
 
+    // fsExtra.copySync(Config.muix_WebSources, Config.muiWeb, { overwrite: true })
+    // fsExtra.copySync(Config.reactxx + 'src/typings.d.ts', Config.muiWeb + 'typings.d.ts', { overwrite: true })
+
+
     // generate index.ts files
     const templateImports = []
     for (const p in exampleGroups) {

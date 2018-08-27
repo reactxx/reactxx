@@ -47,5 +47,6 @@
   "include": [
     //"common/muix",
     "common/muix-doc",
+    "typings.d.ts",
   ]
 }

@@ -59,7 +59,7 @@ export namespace TComps {
   }>
 
   export interface ScrollViewShape extends Types.ShapeDefault {
-    common: TCommon.ShapeScrollViews<'root'> & TCommon.ShapeViews<'container'>
+    common: TCommon.ShapeViews<'root'> & TCommon.ShapeViews<'container'>
     web: 'rootHorizontal' | 'containerHorizontal'
     native: null
     style: 'View'

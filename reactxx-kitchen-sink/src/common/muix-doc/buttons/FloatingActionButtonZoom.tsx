@@ -122,8 +122,8 @@ class FloatingActionButtonZoom extends React.Component<any,any> {
             in={this.state.value === index}
             timeout={transitionDuration}
             style={{
-              transitionDelay: `${this.state.value === index ? transitionDuration.exit : 0}ms`,
-            }}
+              $web: {transitionDelay: `${this.state.value === index ? transitionDuration.exit : 0}ms`,
+            }}}
             unmountOnExit
           >
             <Button variant="fab" className={fab.className} color={fab.color as any}>

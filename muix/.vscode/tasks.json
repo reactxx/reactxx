@@ -14,7 +14,7 @@
         {
             "label": "TypeScript compile",
             "type": "shell",
-            "command": "tsc -b src/primitives --verbose ",
+            "command": "tsc -b src/ks --verbose ",
             "problemMatcher": [
                 "$tsc"
             ],

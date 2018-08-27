@@ -52,6 +52,10 @@ set dest=%muix%sheeter\typings.d.ts
 del %dest% /q
 mklink %dest% %src%
 
+set dest=%drive%\reactxx\reactxx-kitchen-sink\src\typings.d.ts
+del %dest% /q
+mklink %dest% %src%
+
 rem --------------
 rmdir %drive%\reactxx\muix\src\ks 
 mklink %drive%\reactxx\muix\src\ks %drive%\reactxx\reactxx-kitchen-sink\src /d
