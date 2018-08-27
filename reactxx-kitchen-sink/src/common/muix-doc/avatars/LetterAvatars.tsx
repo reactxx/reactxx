@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Avatar from 'reactxx-muix/current/Avatar/Avatar';
+import Avatar from 'reactxx-mui-web/Avatar/Avatar';
 import deepOrange from 'reactxx-mui-web/colors/deepOrange';
 import deepPurple from 'reactxx-mui-web/colors/deepPurple';
 

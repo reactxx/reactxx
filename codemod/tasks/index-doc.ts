@@ -93,22 +93,6 @@ const parseExpressionLow = (code: string) => parseExpression(code, { plugins: ['
 const parseCodeLow = (code: string) => parse(code, { sourceType: 'module', plugins: ['jsx', 'objectRestSpread', 'classProperties', 'typescript'] });
 const generateCode = (ast: Ast.Ast) => generate(ast, { /* options */ }).code as string
 
-// const adjustHtmlClassNameAttribute = (root: Ast.Ast) => {
-//     const htmls = Ast.astq().query(root, '// JSXElement') as Ast.Ast[]
-//     const classNames = 'classNames('
-//     htmls.forEach(html => {
-//         const compName: string = html.openingElement.name.name
-//         const clasName = Queries.checkSingleResult(Ast.astq().query(html, '/JSXOpeningElement/JSXAttribute [ /JSXIdentifier [ @name=="className" ] ]'), true)
-//         if (!clasName) return
-//         const oldCode = generateCode(clasName.value.expression)
-//         const classNameProc = compName.charAt(0).toLowerCase() === compName.charAt(0) ? 'classNamesStr(' : `classNames(`
-//         const newCode = oldCode.startsWith(classNames) ? classNameProc + oldCode.substr(classNames.length) : `${classNameProc}${oldCode})`
-//         clasName.value.expression = parseExpressionLow(newCode)
-//     })
-//     return root
-// }
-
-
 const codeModFile = (code: string, path: string) => {
     switch (path) {
         case 'autocomplete/IntegrationDownshift':
@@ -195,7 +179,7 @@ import withStylesCreator from 'reactxx-mui-web/styles/withStyles'`)
 
 const importComponents = (example: string) => processMatchAll(importComponentRegExp, example, (match, res) => {
     let matchStr = example.substr(match.index, match[0].length - 2)
-    res.push(matchStr.replace('@material-ui/core/', 'reactxx-muix/current/'))
+    res.push(matchStr.replace('@material-ui/core/', 'reactxx-mui-web/'))
     res.push('/')
     res.push(match[1])
     res.push("';")

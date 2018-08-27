@@ -8,8 +8,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Paper from 'reactxx-muix/current/Paper/Paper';
-import Typography from 'reactxx-muix/current/Typography/Typography';
+import Paper from 'reactxx-mui-web/Paper/Paper';
+import Typography from 'reactxx-mui-web/Typography/Typography';
 
 const styles = theme => ({
   root: {

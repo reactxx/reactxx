@@ -8,10 +8,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import GridList from 'reactxx-muix/current/GridList/GridList';
-import GridListTile from 'reactxx-muix/current/GridListTile/GridListTile';
-import GridListTileBar from 'reactxx-muix/current/GridListTileBar/GridListTileBar';
-import IconButton from 'reactxx-muix/current/IconButton/IconButton';
+import GridList from 'reactxx-mui-web/GridList/GridList';
+import GridListTile from 'reactxx-mui-web/GridListTile/GridListTile';
+import GridListTileBar from 'reactxx-mui-web/GridListTileBar/GridListTileBar';
+import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import StarBorderIcon from 'reactxx-icons/StarBorder';
 import tileData from './tileData';
 

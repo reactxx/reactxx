@@ -6,10 +6,10 @@
 //----------------------------------------------------------------------------------
 
 import React from 'react';
-import Button from 'reactxx-muix/current/Button/Button';
-import Menu from 'reactxx-muix/current/Menu/Menu';
-import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';
-import Fade from 'reactxx-muix/current/Fade/Fade';
+import Button from 'reactxx-mui-web/Button/Button';
+import Menu from 'reactxx-mui-web/Menu/Menu';
+import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
+import Fade from 'reactxx-mui-web/Fade/Fade';
 
 class FadeMenu extends React.Component<any,any> {
   state: any = {

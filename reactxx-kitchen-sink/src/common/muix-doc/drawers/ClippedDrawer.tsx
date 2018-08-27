@@ -8,12 +8,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Drawer from 'reactxx-muix/current/Drawer/Drawer';
-import AppBar from 'reactxx-muix/current/AppBar/AppBar';
-import Toolbar from 'reactxx-muix/current/Toolbar/Toolbar';
-import List from 'reactxx-muix/current/List/List';
-import Typography from 'reactxx-muix/current/Typography/Typography';
-import Divider from 'reactxx-muix/current/Divider/Divider';
+import Drawer from 'reactxx-mui-web/Drawer/Drawer';
+import AppBar from 'reactxx-mui-web/AppBar/AppBar';
+import Toolbar from 'reactxx-mui-web/Toolbar/Toolbar';
+import List from 'reactxx-mui-web/List/List';
+import Typography from 'reactxx-mui-web/Typography/Typography';
+import Divider from 'reactxx-mui-web/Divider/Divider';
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 
 const drawerWidth = 240;

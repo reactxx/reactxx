@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 import keycode from 'keycode';
 import Downshift from 'downshift';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import TextField from 'reactxx-muix/current/TextField/TextField';
-import Popper from 'reactxx-muix/current/Popper/Popper';
-import Paper from 'reactxx-muix/current/Paper/Paper';
-import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';
-import Chip from 'reactxx-muix/current/Chip/Chip';
+import TextField from 'reactxx-mui-web/TextField/TextField';
+import Popper from 'reactxx-mui-web/Popper/Popper';
+import Paper from 'reactxx-mui-web/Paper/Paper';
+import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
+import Chip from 'reactxx-mui-web/Chip/Chip';
 
 const suggestions = [
   { label: 'Afghanistan' },

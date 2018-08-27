@@ -7,8 +7,8 @@
       "reactxx-animation": [
         "../animation"
       ],
-      "reactxx-icons": [
-        "../icons"
+      "reactxx-icons/*": [
+        "../icons/*"
       ],
       "reactxx-mediaq": [
         "../mediaq"

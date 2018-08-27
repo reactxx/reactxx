@@ -6,9 +6,9 @@
 //----------------------------------------------------------------------------------
 
 import React from 'react';
-import IconButton from 'reactxx-muix/current/IconButton/IconButton';
-import Menu from 'reactxx-muix/current/Menu/Menu';
-import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';
+import IconButton from 'reactxx-mui-web/IconButton/IconButton';
+import Menu from 'reactxx-mui-web/Menu/Menu';
+import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
 import MoreVertIcon from 'reactxx-icons/MoreVert';
 
 const options = [

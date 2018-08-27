@@ -6,9 +6,9 @@
 //----------------------------------------------------------------------------------
 
 import React from 'react';
-import Button from 'reactxx-muix/current/Button/Button';
-import Snackbar from 'reactxx-muix/current/Snackbar/Snackbar';
-import Slide from 'reactxx-muix/current/Slide/Slide';
+import Button from 'reactxx-mui-web/Button/Button';
+import Snackbar from 'reactxx-mui-web/Snackbar/Snackbar';
+import Slide from 'reactxx-mui-web/Slide/Slide';
 
 function TransitionLeft(props) {
   return <Slide {...props} direction="left" />;

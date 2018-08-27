@@ -6,13 +6,13 @@
 //----------------------------------------------------------------------------------
 
 import React from 'react';
-import Button from 'reactxx-muix/current/Button/Button';
-import Dialog from 'reactxx-muix/current/Dialog/Dialog';
-import DialogActions from 'reactxx-muix/current/DialogActions/DialogActions';
-import DialogContent from 'reactxx-muix/current/DialogContent/DialogContent';
-import DialogContentText from 'reactxx-muix/current/DialogContentText/DialogContentText';
-import DialogTitle from 'reactxx-muix/current/DialogTitle/DialogTitle';
-import Slide from 'reactxx-muix/current/Slide/Slide';
+import Button from 'reactxx-mui-web/Button/Button';
+import Dialog from 'reactxx-mui-web/Dialog/Dialog';
+import DialogActions from 'reactxx-mui-web/DialogActions/DialogActions';
+import DialogContent from 'reactxx-mui-web/DialogContent/DialogContent';
+import DialogContentText from 'reactxx-mui-web/DialogContentText/DialogContentText';
+import DialogTitle from 'reactxx-mui-web/DialogTitle/DialogTitle';
+import Slide from 'reactxx-mui-web/Slide/Slide';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;

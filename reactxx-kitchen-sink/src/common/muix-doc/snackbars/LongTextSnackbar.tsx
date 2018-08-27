@@ -7,9 +7,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'reactxx-muix/current/Button/Button';
+import Button from 'reactxx-mui-web/Button/Button';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import SnackbarContent from 'reactxx-muix/current/SnackbarContent/SnackbarContent';
+import SnackbarContent from 'reactxx-mui-web/SnackbarContent/SnackbarContent';
 
 const action = (
   <Button color="secondary" size="small">

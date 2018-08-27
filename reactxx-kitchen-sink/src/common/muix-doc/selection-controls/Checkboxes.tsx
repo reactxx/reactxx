@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import React from 'react';
-import Checkbox from 'reactxx-muix/current/Checkbox/Checkbox';
+import Checkbox from 'reactxx-mui-web/Checkbox/Checkbox';
 
 class Checkboxes extends React.Component<any,any> {
   state: any = {

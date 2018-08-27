@@ -8,10 +8,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Input from 'reactxx-muix/current/Input/Input';
-import InputLabel from 'reactxx-muix/current/InputLabel/InputLabel';
-import FormHelperText from 'reactxx-muix/current/FormHelperText/FormHelperText';
-import FormControl from 'reactxx-muix/current/FormControl/FormControl';
+import Input from 'reactxx-mui-web/Input/Input';
+import InputLabel from 'reactxx-mui-web/InputLabel/InputLabel';
+import FormHelperText from 'reactxx-mui-web/FormHelperText/FormHelperText';
+import FormControl from 'reactxx-mui-web/FormControl/FormControl';
 
 const styles = theme => ({
   container: {

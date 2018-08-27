@@ -8,12 +8,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from 'reactxx-basic';
-import Button from 'reactxx-muix/current/Button/Button';
+import Button from 'reactxx-mui-web/Button/Button';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
 import DeleteIcon from 'reactxx-icons/Delete';
 import CloudUploadIcon from 'reactxx-icons/CloudUpload';
 import KeyboardVoiceICon from 'reactxx-icons/KeyboardVoice';
-import Icon from 'reactxx-muix/current/Icon/Icon';
+import Icon from 'reactxx-mui-web/Icon/Icon';
 import SaveIcon from 'reactxx-icons/Save';
 
 const styles = theme => ({

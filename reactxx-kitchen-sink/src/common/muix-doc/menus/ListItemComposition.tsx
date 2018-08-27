@@ -7,12 +7,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import MenuList from 'reactxx-muix/current/MenuList/MenuList';
-import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';
-import Paper from 'reactxx-muix/current/Paper/Paper';
+import MenuList from 'reactxx-mui-web/MenuList/MenuList';
+import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
+import Paper from 'reactxx-mui-web/Paper/Paper';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import ListItemIcon from 'reactxx-muix/current/ListItemIcon/ListItemIcon';
-import ListItemText from 'reactxx-muix/current/ListItemText/ListItemText';
+import ListItemIcon from 'reactxx-mui-web/ListItemIcon/ListItemIcon';
+import ListItemText from 'reactxx-mui-web/ListItemText/ListItemText';
 import InboxIcon from 'reactxx-icons/MoveToInbox';
 import DraftsIcon from 'reactxx-icons/Drafts';
 import SendIcon from 'reactxx-icons/Send';

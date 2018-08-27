@@ -8,8 +8,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import GridList from 'reactxx-muix/current/GridList/GridList';
-import GridListTile from 'reactxx-muix/current/GridListTile/GridListTile';
+import GridList from 'reactxx-mui-web/GridList/GridList';
+import GridListTile from 'reactxx-mui-web/GridListTile/GridListTile';
 import tileData from './tileData';
 
 const styles = theme => ({

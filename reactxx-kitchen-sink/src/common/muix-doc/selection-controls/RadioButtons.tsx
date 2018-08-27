@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
 import green from 'reactxx-mui-web/colors/green';
-import Radio from 'reactxx-muix/current/Radio/Radio';
+import Radio from 'reactxx-mui-web/Radio/Radio';
 import RadioButtonUncheckedIcon from 'reactxx-icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from 'reactxx-icons/RadioButtonChecked';
 

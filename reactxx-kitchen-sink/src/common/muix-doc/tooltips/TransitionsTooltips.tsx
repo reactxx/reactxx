@@ -6,10 +6,10 @@
 //----------------------------------------------------------------------------------
 
 import React from 'react';
-import Button from 'reactxx-muix/current/Button/Button';
-import Tooltip from 'reactxx-muix/current/Tooltip/Tooltip';
-import Fade from 'reactxx-muix/current/Fade/Fade';
-import Zoom from 'reactxx-muix/current/Zoom/Zoom';
+import Button from 'reactxx-mui-web/Button/Button';
+import Tooltip from 'reactxx-mui-web/Tooltip/Tooltip';
+import Fade from 'reactxx-mui-web/Fade/Fade';
+import Zoom from 'reactxx-mui-web/Zoom/Zoom';
 
 function TransitionsTooltips() {
   return (

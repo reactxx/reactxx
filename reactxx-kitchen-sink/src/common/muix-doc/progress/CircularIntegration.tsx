@@ -9,9 +9,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from 'reactxx-basic';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import CircularProgress from 'reactxx-muix/current/CircularProgress/CircularProgress';
+import CircularProgress from 'reactxx-mui-web/CircularProgress/CircularProgress';
 import green from 'reactxx-mui-web/colors/green';
-import Button from 'reactxx-muix/current/Button/Button';
+import Button from 'reactxx-mui-web/Button/Button';
 import CheckIcon from 'reactxx-icons/Check';
 import SaveIcon from 'reactxx-icons/Save';
 

@@ -1,3 +1,4 @@
+import ReactN from 'react-native'
 import warning from 'warning'
 import { Consts, Sheets, getGaps } from 'reactxx-sheeter'
 import { AnimSheet, AnimationConfig } from '.'
@@ -9,7 +10,7 @@ export const $animationsToInterpolate = ($animations: Sheets) => {
 export type NativeAnimationAddIn = { [rulesetName: string]: NativeAnimationRuleset } & { [Consts.data]?: AnimationConfig }
 
 export type NativeAnimationRuleset = InterpolationConfigTypes & { transform?: InterpolationConfigTypes }
-type InterpolationConfigType = import('react-native').Animated.InterpolationConfigType
+type InterpolationConfigType = ReactN.Animated.InterpolationConfigType
 export type InterpolationConfigTypes = { [ruleName: string]: InterpolationConfigType }
 
 const sheetToInterpolate = (inputSheet: AnimSheet) => {

@@ -8,10 +8,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import List from 'reactxx-muix/current/List/List';
-import ListItem from 'reactxx-muix/current/ListItem/ListItem';
-import ListItemIcon from 'reactxx-muix/current/ListItemIcon/ListItemIcon';
-import ListItemText from 'reactxx-muix/current/ListItemText/ListItemText';
+import List from 'reactxx-mui-web/List/List';
+import ListItem from 'reactxx-mui-web/ListItem/ListItem';
+import ListItemIcon from 'reactxx-mui-web/ListItemIcon/ListItemIcon';
+import ListItemText from 'reactxx-mui-web/ListItemText/ListItemText';
 import StarIcon from 'reactxx-icons/Star';
 
 const styles = theme => ({

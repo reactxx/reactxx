@@ -7,11 +7,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Fade from 'reactxx-muix/current/Fade/Fade';
-import Button from 'reactxx-muix/current/Button/Button';
+import Fade from 'reactxx-mui-web/Fade/Fade';
+import Button from 'reactxx-mui-web/Button/Button';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import CircularProgress from 'reactxx-muix/current/CircularProgress/CircularProgress';
-import Typography from 'reactxx-muix/current/Typography/Typography';
+import CircularProgress from 'reactxx-mui-web/CircularProgress/CircularProgress';
+import Typography from 'reactxx-mui-web/Typography/Typography';
 
 const styles = theme => ({
   root: {

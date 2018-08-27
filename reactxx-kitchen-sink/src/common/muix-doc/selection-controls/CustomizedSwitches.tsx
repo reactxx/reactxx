@@ -9,9 +9,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
 import purple from 'reactxx-mui-web/colors/purple';
-import FormGroup from 'reactxx-muix/current/FormGroup/FormGroup';
-import FormControlLabel from 'reactxx-muix/current/FormControlLabel/FormControlLabel';
-import Switch from 'reactxx-muix/current/Switch/Switch';
+import FormGroup from 'reactxx-mui-web/FormGroup/FormGroup';
+import FormControlLabel from 'reactxx-mui-web/FormControlLabel/FormControlLabel';
+import Switch from 'reactxx-mui-web/Switch/Switch';
 
 const styles = theme => ({
   colorSwitchBase: {

@@ -8,9 +8,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Button from 'reactxx-muix/current/Button/Button';
+import Button from 'reactxx-mui-web/Button/Button';
 import AddIcon from 'reactxx-icons/Add';
-import Icon from 'reactxx-muix/current/Icon/Icon';
+import Icon from 'reactxx-mui-web/Icon/Icon';
 import DeleteIcon from 'reactxx-icons/Delete';
 import NavigationIcon from 'reactxx-icons/Navigation';
 

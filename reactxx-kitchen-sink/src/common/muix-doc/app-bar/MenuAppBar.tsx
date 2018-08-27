@@ -8,17 +8,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import AppBar from 'reactxx-muix/current/AppBar/AppBar';
-import Toolbar from 'reactxx-muix/current/Toolbar/Toolbar';
-import Typography from 'reactxx-muix/current/Typography/Typography';
-import IconButton from 'reactxx-muix/current/IconButton/IconButton';
+import AppBar from 'reactxx-mui-web/AppBar/AppBar';
+import Toolbar from 'reactxx-mui-web/Toolbar/Toolbar';
+import Typography from 'reactxx-mui-web/Typography/Typography';
+import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import MenuIcon from 'reactxx-icons/Menu';
 import AccountCircle from 'reactxx-icons/AccountCircle';
-import Switch from 'reactxx-muix/current/Switch/Switch';
-import FormControlLabel from 'reactxx-muix/current/FormControlLabel/FormControlLabel';
-import FormGroup from 'reactxx-muix/current/FormGroup/FormGroup';
-import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';
-import Menu from 'reactxx-muix/current/Menu/Menu';
+import Switch from 'reactxx-mui-web/Switch/Switch';
+import FormControlLabel from 'reactxx-mui-web/FormControlLabel/FormControlLabel';
+import FormGroup from 'reactxx-mui-web/FormGroup/FormGroup';
+import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
+import Menu from 'reactxx-mui-web/Menu/Menu';
 
 const styles = {
   root: {

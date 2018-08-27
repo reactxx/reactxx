@@ -8,12 +8,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Input from 'reactxx-muix/current/Input/Input';
-import InputLabel from 'reactxx-muix/current/InputLabel/InputLabel';
-import InputAdornment from 'reactxx-muix/current/InputAdornment/InputAdornment';
-import FormControl from 'reactxx-muix/current/FormControl/FormControl';
-import TextField from 'reactxx-muix/current/TextField/TextField';
-import Grid from 'reactxx-muix/current/Grid/Grid';
+import Input from 'reactxx-mui-web/Input/Input';
+import InputLabel from 'reactxx-mui-web/InputLabel/InputLabel';
+import InputAdornment from 'reactxx-mui-web/InputAdornment/InputAdornment';
+import FormControl from 'reactxx-mui-web/FormControl/FormControl';
+import TextField from 'reactxx-mui-web/TextField/TextField';
+import Grid from 'reactxx-mui-web/Grid/Grid';
 import AccountCircle from 'reactxx-icons/AccountCircle';
 
 const styles = theme => ({

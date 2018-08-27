@@ -6,8 +6,8 @@
 //----------------------------------------------------------------------------------
 
 import React from 'react';
-import Button from 'reactxx-muix/current/Button/Button';
-import Tooltip from 'reactxx-muix/current/Tooltip/Tooltip';
+import Button from 'reactxx-mui-web/Button/Button';
+import Tooltip from 'reactxx-mui-web/Tooltip/Tooltip';
 
 function DelayTooltips() {
   return (

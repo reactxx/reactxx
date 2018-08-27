@@ -8,11 +8,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import List from 'reactxx-muix/current/List/List';
-import ListItem from 'reactxx-muix/current/ListItem/ListItem';
-import ListItemText from 'reactxx-muix/current/ListItemText/ListItemText';
-import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';
-import Menu from 'reactxx-muix/current/Menu/Menu';
+import List from 'reactxx-mui-web/List/List';
+import ListItem from 'reactxx-mui-web/ListItem/ListItem';
+import ListItemText from 'reactxx-mui-web/ListItemText/ListItemText';
+import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
+import Menu from 'reactxx-mui-web/Menu/Menu';
 
 const styles = theme => ({
   root: {

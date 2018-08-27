@@ -8,9 +8,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Avatar from 'reactxx-muix/current/Avatar/Avatar';
-import Chip from 'reactxx-muix/current/Chip/Chip';
-import Paper from 'reactxx-muix/current/Paper/Paper';
+import Avatar from 'reactxx-mui-web/Avatar/Avatar';
+import Chip from 'reactxx-mui-web/Chip/Chip';
+import Paper from 'reactxx-mui-web/Paper/Paper';
 import TagFacesIcon from 'reactxx-icons/TagFaces';
 
 const styles = theme => ({

@@ -8,9 +8,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import AppBar from 'reactxx-muix/current/AppBar/AppBar';
-import Tabs from 'reactxx-muix/current/Tabs/Tabs';
-import Tab from 'reactxx-muix/current/Tab/Tab';
+import AppBar from 'reactxx-mui-web/AppBar/AppBar';
+import Tabs from 'reactxx-mui-web/Tabs/Tabs';
+import Tab from 'reactxx-mui-web/Tab/Tab';
 import PhoneIcon from 'reactxx-icons/Phone';
 import FavoriteIcon from 'reactxx-icons/Favorite';
 import PersonPinIcon from 'reactxx-icons/PersonPin';
@@ -18,7 +18,7 @@ import HelpIcon from 'reactxx-icons/Help';
 import ShoppingBasket from 'reactxx-icons/ShoppingBasket';
 import ThumbDown from 'reactxx-icons/ThumbDown';
 import ThumbUp from 'reactxx-icons/ThumbUp';
-import Typography from 'reactxx-muix/current/Typography/Typography';
+import Typography from 'reactxx-mui-web/Typography/Typography';
 
 function TabContainer(props) {
   return (

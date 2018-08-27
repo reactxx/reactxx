@@ -7,13 +7,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'reactxx-muix/current/Button/Button';
-import ClickAwayListener from 'reactxx-muix/current/ClickAwayListener/ClickAwayListener';
-import Grow from 'reactxx-muix/current/Grow/Grow';
-import Paper from 'reactxx-muix/current/Paper/Paper';
-import Popper from 'reactxx-muix/current/Popper/Popper';
-import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';
-import MenuList from 'reactxx-muix/current/MenuList/MenuList';
+import Button from 'reactxx-mui-web/Button/Button';
+import ClickAwayListener from 'reactxx-mui-web/ClickAwayListener/ClickAwayListener';
+import Grow from 'reactxx-mui-web/Grow/Grow';
+import Paper from 'reactxx-mui-web/Paper/Paper';
+import Popper from 'reactxx-mui-web/Popper/Popper';
+import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
+import MenuList from 'reactxx-mui-web/MenuList/MenuList';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
 
 const styles = theme => ({

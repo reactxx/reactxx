@@ -8,9 +8,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Button from 'reactxx-muix/current/Button/Button';
-import Snackbar from 'reactxx-muix/current/Snackbar/Snackbar';
-import IconButton from 'reactxx-muix/current/IconButton/IconButton';
+import Button from 'reactxx-mui-web/Button/Button';
+import Snackbar from 'reactxx-mui-web/Snackbar/Snackbar';
+import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import CloseIcon from 'reactxx-icons/Close';
 
 const styles = theme => ({

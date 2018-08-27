@@ -25,7 +25,7 @@ export namespace TCommon {
     style?: TCommonStyles.RulesetNativeIds // for native: export type of component style property (for web, style has always React.CSSProperties type)
     //**** component property constrains
     events?: TEvents | null
-    props?: {} //common (web and native) props
+    props?: TCommon.EmptySheet //common (web and native) props
     propsNative?: {} //native only props 
     propsWeb?: React.HTMLAttributes<Element>//web only props
     //**** export type of component name

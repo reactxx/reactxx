@@ -10,12 +10,12 @@ import PropTypes from 'prop-types';
 import { classNames } from 'reactxx-basic';
 import SwipeableViews from 'react-swipeable-views';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import AppBar from 'reactxx-muix/current/AppBar/AppBar';
-import Tabs from 'reactxx-muix/current/Tabs/Tabs';
-import Tab from 'reactxx-muix/current/Tab/Tab';
-import Typography from 'reactxx-muix/current/Typography/Typography';
-import Zoom from 'reactxx-muix/current/Zoom/Zoom';
-import Button from 'reactxx-muix/current/Button/Button';
+import AppBar from 'reactxx-mui-web/AppBar/AppBar';
+import Tabs from 'reactxx-mui-web/Tabs/Tabs';
+import Tab from 'reactxx-mui-web/Tab/Tab';
+import Typography from 'reactxx-mui-web/Typography/Typography';
+import Zoom from 'reactxx-mui-web/Zoom/Zoom';
+import Button from 'reactxx-mui-web/Button/Button';
 import AddIcon from 'reactxx-icons/Add';
 import EditIcon from 'reactxx-icons/Edit';
 import UpIcon from 'reactxx-icons/KeyboardArrowUp';

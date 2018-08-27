@@ -6,10 +6,10 @@
 //----------------------------------------------------------------------------------
 
 import React from 'react';
-import Grid from 'reactxx-muix/current/Grid/Grid';
-import Button from 'reactxx-muix/current/Button/Button';
-import Tooltip from 'reactxx-muix/current/Tooltip/Tooltip';
-import ClickAwayListener from 'reactxx-muix/current/ClickAwayListener/ClickAwayListener';
+import Grid from 'reactxx-mui-web/Grid/Grid';
+import Button from 'reactxx-mui-web/Button/Button';
+import Tooltip from 'reactxx-mui-web/Tooltip/Tooltip';
+import ClickAwayListener from 'reactxx-mui-web/ClickAwayListener/ClickAwayListener';
 
 class TriggersTooltips extends React.Component<any,any> {
   state: any = {

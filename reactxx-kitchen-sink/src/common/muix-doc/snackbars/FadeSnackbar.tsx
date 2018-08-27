@@ -6,9 +6,9 @@
 //----------------------------------------------------------------------------------
 
 import React from 'react';
-import Button from 'reactxx-muix/current/Button/Button';
-import Snackbar from 'reactxx-muix/current/Snackbar/Snackbar';
-import Fade from 'reactxx-muix/current/Fade/Fade';
+import Button from 'reactxx-mui-web/Button/Button';
+import Snackbar from 'reactxx-mui-web/Snackbar/Snackbar';
+import Fade from 'reactxx-mui-web/Fade/Fade';
 
 class FadeSnackbar extends React.Component<any,any> {
   state: any = {

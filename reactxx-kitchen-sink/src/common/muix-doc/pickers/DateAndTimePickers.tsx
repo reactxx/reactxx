@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import TextField from 'reactxx-muix/current/TextField/TextField';
+import TextField from 'reactxx-mui-web/TextField/TextField';
 
 const styles = theme => ({
   container: {

@@ -8,12 +8,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import List from 'reactxx-muix/current/List/List';
-import ListItem from 'reactxx-muix/current/ListItem/ListItem';
-import ListItemSecondaryAction from 'reactxx-muix/current/ListItemSecondaryAction/ListItemSecondaryAction';
-import ListItemText from 'reactxx-muix/current/ListItemText/ListItemText';
-import Checkbox from 'reactxx-muix/current/Checkbox/Checkbox';
-import IconButton from 'reactxx-muix/current/IconButton/IconButton';
+import List from 'reactxx-mui-web/List/List';
+import ListItem from 'reactxx-mui-web/ListItem/ListItem';
+import ListItemSecondaryAction from 'reactxx-mui-web/ListItemSecondaryAction/ListItemSecondaryAction';
+import ListItemText from 'reactxx-mui-web/ListItemText/ListItemText';
+import Checkbox from 'reactxx-mui-web/Checkbox/Checkbox';
+import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import CommentIcon from 'reactxx-icons/Comment';
 
 const styles = theme => ({

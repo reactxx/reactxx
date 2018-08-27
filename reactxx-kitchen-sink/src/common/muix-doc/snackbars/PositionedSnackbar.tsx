@@ -6,8 +6,8 @@
 //----------------------------------------------------------------------------------
 
 import React from 'react';
-import Button from 'reactxx-muix/current/Button/Button';
-import Snackbar from 'reactxx-muix/current/Snackbar/Snackbar';
+import Button from 'reactxx-mui-web/Button/Button';
+import Snackbar from 'reactxx-mui-web/Snackbar/Snackbar';
 
 class PositionedSnackbar extends React.Component<any,any> {
   state: any = {

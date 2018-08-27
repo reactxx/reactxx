@@ -11,7 +11,7 @@ import { classNames } from 'reactxx-basic';
 import { ThemeProvider } from 'reactxx-basic';
 import createMuiTheme from 'reactxx-mui-web/styles/createMuiTheme';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Button from 'reactxx-muix/current/Button/Button';
+import Button from 'reactxx-mui-web/Button/Button';
 import purple from 'reactxx-mui-web/colors/purple';
 import green from 'reactxx-mui-web/colors/green';
 

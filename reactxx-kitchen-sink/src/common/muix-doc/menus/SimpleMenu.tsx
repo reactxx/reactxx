@@ -6,9 +6,9 @@
 //----------------------------------------------------------------------------------
 
 import React from 'react';
-import Button from 'reactxx-muix/current/Button/Button';
-import Menu from 'reactxx-muix/current/Menu/Menu';
-import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';
+import Button from 'reactxx-mui-web/Button/Button';
+import Menu from 'reactxx-mui-web/Menu/Menu';
+import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
 
 class SimpleMenu extends React.Component<any,any> {
   state: any = {

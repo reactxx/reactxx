@@ -8,9 +8,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import AppBar from 'reactxx-muix/current/AppBar/AppBar';
-import Toolbar from 'reactxx-muix/current/Toolbar/Toolbar';
-import Typography from 'reactxx-muix/current/Typography/Typography';
+import AppBar from 'reactxx-mui-web/AppBar/AppBar';
+import Toolbar from 'reactxx-mui-web/Toolbar/Toolbar';
+import Typography from 'reactxx-mui-web/Typography/Typography';
 
 const styles = {
   root: {

@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from 'reactxx-basic';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Avatar from 'reactxx-muix/current/Avatar/Avatar';
+import Avatar from 'reactxx-mui-web/Avatar/Avatar';
 
 const styles = {
   row: {

@@ -2,11 +2,11 @@ import { codeMod } from './tasks'
 import { codeModDoc } from './tasks/index-doc'
 import iconsRun from './icons/index'
 
-if (false) codeModDoc()
+if (true) codeModDoc()
 
 if (false) codeMod(false)
 
-if (true) {
+if (false) {
     iconsRun()
     codeMod(false)
 }

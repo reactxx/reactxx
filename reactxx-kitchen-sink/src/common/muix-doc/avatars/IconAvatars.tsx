@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
 import pink from 'reactxx-mui-web/colors/pink';
 import green from 'reactxx-mui-web/colors/green';
-import Avatar from 'reactxx-muix/current/Avatar/Avatar';
+import Avatar from 'reactxx-mui-web/Avatar/Avatar';
 import FolderIcon from 'reactxx-icons/Folder';
 import PageviewIcon from 'reactxx-icons/Pageview';
 import AssignmentIcon from 'reactxx-icons/Assignment';

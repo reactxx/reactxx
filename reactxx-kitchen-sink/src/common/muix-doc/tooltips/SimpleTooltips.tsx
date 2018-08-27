@@ -9,10 +9,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
 import AddIcon from 'reactxx-icons/Add';
-import Button from 'reactxx-muix/current/Button/Button';
+import Button from 'reactxx-mui-web/Button/Button';
 import DeleteIcon from 'reactxx-icons/Delete';
-import IconButton from 'reactxx-muix/current/IconButton/IconButton';
-import Tooltip from 'reactxx-muix/current/Tooltip/Tooltip';
+import IconButton from 'reactxx-mui-web/IconButton/IconButton';
+import Tooltip from 'reactxx-mui-web/Tooltip/Tooltip';
 
 const styles = theme => ({
   fab: {

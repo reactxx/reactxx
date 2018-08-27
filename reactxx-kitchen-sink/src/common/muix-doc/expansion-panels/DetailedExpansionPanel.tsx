@@ -9,15 +9,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
 import { classNames } from 'reactxx-basic';
-import ExpansionPanel from 'reactxx-muix/current/ExpansionPanel/ExpansionPanel';
-import ExpansionPanelDetails from 'reactxx-muix/current/ExpansionPanelDetails/ExpansionPanelDetails';
-import ExpansionPanelSummary from 'reactxx-muix/current/ExpansionPanelSummary/ExpansionPanelSummary';
-import ExpansionPanelActions from 'reactxx-muix/current/ExpansionPanelActions/ExpansionPanelActions';
-import Typography from 'reactxx-muix/current/Typography/Typography';
+import ExpansionPanel from 'reactxx-mui-web/ExpansionPanel/ExpansionPanel';
+import ExpansionPanelDetails from 'reactxx-mui-web/ExpansionPanelDetails/ExpansionPanelDetails';
+import ExpansionPanelSummary from 'reactxx-mui-web/ExpansionPanelSummary/ExpansionPanelSummary';
+import ExpansionPanelActions from 'reactxx-mui-web/ExpansionPanelActions/ExpansionPanelActions';
+import Typography from 'reactxx-mui-web/Typography/Typography';
 import ExpandMoreIcon from 'reactxx-icons/ExpandMore';
-import Chip from 'reactxx-muix/current/Chip/Chip';
-import Button from 'reactxx-muix/current/Button/Button';
-import Divider from 'reactxx-muix/current/Divider/Divider';
+import Chip from 'reactxx-mui-web/Chip/Chip';
+import Button from 'reactxx-mui-web/Button/Button';
+import Divider from 'reactxx-mui-web/Divider/Divider';
 
 const styles = theme => ({
   root: {

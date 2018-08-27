@@ -6,9 +6,9 @@
 //----------------------------------------------------------------------------------
 
 import React from 'react';
-import FormGroup from 'reactxx-muix/current/FormGroup/FormGroup';
-import FormControlLabel from 'reactxx-muix/current/FormControlLabel/FormControlLabel';
-import Switch from 'reactxx-muix/current/Switch/Switch';
+import FormGroup from 'reactxx-mui-web/FormGroup/FormGroup';
+import FormControlLabel from 'reactxx-mui-web/FormControlLabel/FormControlLabel';
+import Switch from 'reactxx-mui-web/Switch/Switch';
 
 class SwitchLabels extends React.Component<any,any> {
   state: any = {

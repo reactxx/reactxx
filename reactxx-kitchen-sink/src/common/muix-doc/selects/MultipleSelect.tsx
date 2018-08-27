@@ -8,14 +8,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Input from 'reactxx-muix/current/Input/Input';
-import InputLabel from 'reactxx-muix/current/InputLabel/InputLabel';
-import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';
-import FormControl from 'reactxx-muix/current/FormControl/FormControl';
-import ListItemText from 'reactxx-muix/current/ListItemText/ListItemText';
-import Select from 'reactxx-muix/current/Select/Select';
-import Checkbox from 'reactxx-muix/current/Checkbox/Checkbox';
-import Chip from 'reactxx-muix/current/Chip/Chip';
+import Input from 'reactxx-mui-web/Input/Input';
+import InputLabel from 'reactxx-mui-web/InputLabel/InputLabel';
+import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
+import FormControl from 'reactxx-mui-web/FormControl/FormControl';
+import ListItemText from 'reactxx-mui-web/ListItemText/ListItemText';
+import Select from 'reactxx-mui-web/Select/Select';
+import Checkbox from 'reactxx-mui-web/Checkbox/Checkbox';
+import Chip from 'reactxx-mui-web/Chip/Chip';
 
 const styles = theme => ({
   root: {

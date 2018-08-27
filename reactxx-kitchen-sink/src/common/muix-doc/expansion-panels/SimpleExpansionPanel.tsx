@@ -8,10 +8,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import ExpansionPanel from 'reactxx-muix/current/ExpansionPanel/ExpansionPanel';
-import ExpansionPanelSummary from 'reactxx-muix/current/ExpansionPanelSummary/ExpansionPanelSummary';
-import ExpansionPanelDetails from 'reactxx-muix/current/ExpansionPanelDetails/ExpansionPanelDetails';
-import Typography from 'reactxx-muix/current/Typography/Typography';
+import ExpansionPanel from 'reactxx-mui-web/ExpansionPanel/ExpansionPanel';
+import ExpansionPanelSummary from 'reactxx-mui-web/ExpansionPanelSummary/ExpansionPanelSummary';
+import ExpansionPanelDetails from 'reactxx-mui-web/ExpansionPanelDetails/ExpansionPanelDetails';
+import Typography from 'reactxx-mui-web/Typography/Typography';
 import ExpandMoreIcon from 'reactxx-icons/ExpandMore';
 
 const styles = theme => ({

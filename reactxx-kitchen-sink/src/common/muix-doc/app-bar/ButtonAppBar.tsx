@@ -8,11 +8,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import AppBar from 'reactxx-muix/current/AppBar/AppBar';
-import Toolbar from 'reactxx-muix/current/Toolbar/Toolbar';
-import Typography from 'reactxx-muix/current/Typography/Typography';
-import Button from 'reactxx-muix/current/Button/Button';
-import IconButton from 'reactxx-muix/current/IconButton/IconButton';
+import AppBar from 'reactxx-mui-web/AppBar/AppBar';
+import Toolbar from 'reactxx-mui-web/Toolbar/Toolbar';
+import Typography from 'reactxx-mui-web/Typography/Typography';
+import Button from 'reactxx-mui-web/Button/Button';
+import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import MenuIcon from 'reactxx-icons/Menu';
 
 const styles = {

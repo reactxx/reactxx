@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import CircularProgress from 'reactxx-muix/current/CircularProgress/CircularProgress';
+import CircularProgress from 'reactxx-mui-web/CircularProgress/CircularProgress';
 
 const styles = theme => ({
   progress: {

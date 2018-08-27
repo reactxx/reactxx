@@ -7,17 +7,17 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'reactxx-muix/current/Button/Button';
+import Button from 'reactxx-mui-web/Button/Button';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Dialog from 'reactxx-muix/current/Dialog/Dialog';
-import DialogActions from 'reactxx-muix/current/DialogActions/DialogActions';
-import DialogContent from 'reactxx-muix/current/DialogContent/DialogContent';
-import DialogTitle from 'reactxx-muix/current/DialogTitle/DialogTitle';
-import InputLabel from 'reactxx-muix/current/InputLabel/InputLabel';
-import Input from 'reactxx-muix/current/Input/Input';
-import MenuItem from 'reactxx-muix/current/MenuItem/MenuItem';
-import FormControl from 'reactxx-muix/current/FormControl/FormControl';
-import Select from 'reactxx-muix/current/Select/Select';
+import Dialog from 'reactxx-mui-web/Dialog/Dialog';
+import DialogActions from 'reactxx-mui-web/DialogActions/DialogActions';
+import DialogContent from 'reactxx-mui-web/DialogContent/DialogContent';
+import DialogTitle from 'reactxx-mui-web/DialogTitle/DialogTitle';
+import InputLabel from 'reactxx-mui-web/InputLabel/InputLabel';
+import Input from 'reactxx-mui-web/Input/Input';
+import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
+import FormControl from 'reactxx-mui-web/FormControl/FormControl';
+import Select from 'reactxx-mui-web/Select/Select';
 
 const styles = theme => ({
   container: {

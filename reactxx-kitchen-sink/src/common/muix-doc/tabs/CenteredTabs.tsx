@@ -8,9 +8,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Paper from 'reactxx-muix/current/Paper/Paper';
-import Tabs from 'reactxx-muix/current/Tabs/Tabs';
-import Tab from 'reactxx-muix/current/Tab/Tab';
+import Paper from 'reactxx-mui-web/Paper/Paper';
+import Tabs from 'reactxx-mui-web/Tabs/Tabs';
+import Tab from 'reactxx-mui-web/Tab/Tab';
 
 const styles = {
   root: {

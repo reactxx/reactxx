@@ -8,12 +8,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Card from 'reactxx-muix/current/Card/Card';
-import CardActions from 'reactxx-muix/current/CardActions/CardActions';
-import CardContent from 'reactxx-muix/current/CardContent/CardContent';
-import CardMedia from 'reactxx-muix/current/CardMedia/CardMedia';
-import Button from 'reactxx-muix/current/Button/Button';
-import Typography from 'reactxx-muix/current/Typography/Typography';
+import Card from 'reactxx-mui-web/Card/Card';
+import CardActions from 'reactxx-mui-web/CardActions/CardActions';
+import CardContent from 'reactxx-mui-web/CardContent/CardContent';
+import CardMedia from 'reactxx-mui-web/CardMedia/CardMedia';
+import Button from 'reactxx-mui-web/Button/Button';
+import Typography from 'reactxx-mui-web/Typography/Typography';
 
 const styles = {
   card: {

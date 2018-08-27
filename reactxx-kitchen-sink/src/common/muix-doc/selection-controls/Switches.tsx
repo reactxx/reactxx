@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------------------
 
 import React from 'react';
-import Switch from 'reactxx-muix/current/Switch/Switch';
+import Switch from 'reactxx-mui-web/Switch/Switch';
 
 class Switches extends React.Component<any,any> {
   state: any = {

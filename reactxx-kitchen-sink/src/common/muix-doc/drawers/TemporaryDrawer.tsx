@@ -8,10 +8,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Drawer from 'reactxx-muix/current/Drawer/Drawer';
-import Button from 'reactxx-muix/current/Button/Button';
-import List from 'reactxx-muix/current/List/List';
-import Divider from 'reactxx-muix/current/Divider/Divider';
+import Drawer from 'reactxx-mui-web/Drawer/Drawer';
+import Button from 'reactxx-mui-web/Button/Button';
+import List from 'reactxx-mui-web/List/List';
+import Divider from 'reactxx-mui-web/Divider/Divider';
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 
 const styles = {

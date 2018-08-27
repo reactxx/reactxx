@@ -58,7 +58,7 @@ export namespace TComps {
     //nameType: CompNames.Icon | CompNames.AnimatedIcon | string
   }>
 
-  export type ScrollViewShape = Types.OverwriteShape<{
+  export interface ScrollViewShape extends Types.ShapeDefault {
     common: TCommon.ShapeScrollViews<'root'> & TCommon.ShapeViews<'container'>
     web: 'rootHorizontal' | 'containerHorizontal'
     native: null
@@ -69,5 +69,5 @@ export namespace TComps {
     propsWeb: React.HTMLAttributes<HTMLDivElement>
     propsNative: ReactN.ScrollViewProperties
     //nameType: CompNames.ScrollView | CompNames.AnimatedScrollView | string
-  }>
+  }
 }

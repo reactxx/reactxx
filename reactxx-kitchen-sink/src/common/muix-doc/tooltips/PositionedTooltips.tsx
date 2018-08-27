@@ -8,9 +8,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Grid from 'reactxx-muix/current/Grid/Grid';
-import Button from 'reactxx-muix/current/Button/Button';
-import Tooltip from 'reactxx-muix/current/Tooltip/Tooltip';
+import Grid from 'reactxx-mui-web/Grid/Grid';
+import Button from 'reactxx-mui-web/Button/Button';
+import Tooltip from 'reactxx-mui-web/Tooltip/Tooltip';
 
 const styles = {
   root: {

@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Input from 'reactxx-muix/current/Input/Input';
+import Input from 'reactxx-mui-web/Input/Input';
 
 const styles = theme => ({
   container: {

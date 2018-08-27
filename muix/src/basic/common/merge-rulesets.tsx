@@ -1,4 +1,5 @@
-﻿import * as Sheeter from 'reactxx-sheeter';
+﻿import React from 'react'
+import * as Sheeter from 'reactxx-sheeter';
 import { Types } from '../typings/types';
 // !!! platform dependent import
 import { rulesetsToClassNames, rulesetToClassNamesMUI } from 'reactxx-basic';

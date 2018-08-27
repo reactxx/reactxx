@@ -12,10 +12,10 @@ import MaskedInput from 'react-text-mask';
 import NumberFormat from 'react-number-format';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Input from 'reactxx-muix/current/Input/Input';
-import InputLabel from 'reactxx-muix/current/InputLabel/InputLabel';
-import TextField from 'reactxx-muix/current/TextField/TextField';
-import FormControl from 'reactxx-muix/current/FormControl/FormControl';
+import Input from 'reactxx-mui-web/Input/Input';
+import InputLabel from 'reactxx-mui-web/InputLabel/InputLabel';
+import TextField from 'reactxx-mui-web/TextField/TextField';
+import FormControl from 'reactxx-mui-web/FormControl/FormControl';
 
 const styles = theme => ({
   container: {

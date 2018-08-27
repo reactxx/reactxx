@@ -10,17 +10,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Button from 'reactxx-muix/current/Button/Button';
-import Avatar from 'reactxx-muix/current/Avatar/Avatar';
-import List from 'reactxx-muix/current/List/List';
-import ListItem from 'reactxx-muix/current/ListItem/ListItem';
-import ListItemAvatar from 'reactxx-muix/current/ListItemAvatar/ListItemAvatar';
-import ListItemText from 'reactxx-muix/current/ListItemText/ListItemText';
-import DialogTitle from 'reactxx-muix/current/DialogTitle/DialogTitle';
-import Dialog from 'reactxx-muix/current/Dialog/Dialog';
+import Button from 'reactxx-mui-web/Button/Button';
+import Avatar from 'reactxx-mui-web/Avatar/Avatar';
+import List from 'reactxx-mui-web/List/List';
+import ListItem from 'reactxx-mui-web/ListItem/ListItem';
+import ListItemAvatar from 'reactxx-mui-web/ListItemAvatar/ListItemAvatar';
+import ListItemText from 'reactxx-mui-web/ListItemText/ListItemText';
+import DialogTitle from 'reactxx-mui-web/DialogTitle/DialogTitle';
+import Dialog from 'reactxx-mui-web/Dialog/Dialog';
 import PersonIcon from 'reactxx-icons/Person';
 import AddIcon from 'reactxx-icons/Add';
-import Typography from 'reactxx-muix/current/Typography/Typography';
+import Typography from 'reactxx-mui-web/Typography/Typography';
 import blue from 'reactxx-mui-web/colors/blue';
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];

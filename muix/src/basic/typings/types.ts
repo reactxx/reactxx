@@ -33,7 +33,7 @@ export namespace Types {
   export interface Shape extends TCommon.Shape, TAddIn.Shape { }
 
   export interface ShapeDefault extends TAddIn.ShapeDefault {
-    common: TCommon.EmptySheet; native: TCommon.EmptySheet; web: null
+    common: TCommon.EmptySheet; native: TCommon.EmptySheet; web: string
     style: 'View'
     events: null
     props: {}; propsNative: ReactN.ViewProperties; propsWeb: React.HTMLAttributes<HTMLElement>
@@ -86,17 +86,17 @@ export namespace Types {
   //******************** Cross platform component types
   export type ThemedPropsX<R extends Shape = Shape> = (theme: TCommon.getTheme<R>) => PropsX<R>
 
-  export type PropsX<R extends Shape = Shape> = PartialOverwrite<TCommon.getProps<R>,
-    {
-      style?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<TCommon.getStyle<R>, R>>
-      $web?: Partial<TCommon.getPropsWeb<R>> //web specific props
-      $native?: Partial<TCommon.getPropsNative<R>> //native specific props
-      $themedProps?: ThemedPropsX<R>
-      classes?: PartialSheetCreatorX<R> // cross platform sheet
-      className?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<TCommon.getStyle<R>, R>>
-    } &
-    TEventsX<R> &
-    TAddIn.PropsX<R>
+  export interface PropsXEx<R extends Shape = Shape> {
+    style?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<TCommon.getStyle<R>, R>>
+    $web?: Partial<TCommon.getPropsWeb<R>> //web specific props
+    $native?: Partial<TCommon.getPropsNative<R>> //native specific props
+    $themedProps?: ThemedPropsX<R>
+    classes?: PartialSheetCreatorX<R> // cross platform sheet
+    className?: RootRulesetCreatorX<R, TAddIn.RulesetAddInX<TCommon.getStyle<R>, R>>
+  }
+  export type PropsX<R extends Shape = Shape> = PartialOverwrite<
+    TCommon.getProps<R>,
+    PropsXEx<R> & TEventsX<R> & TAddIn.PropsX<R>
     >
 
   export type TEventsX<R extends Shape = Shape> = PartialRecord<TCommon.getEvents<R>, MouseEventEx<R>>

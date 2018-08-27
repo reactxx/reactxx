@@ -8,11 +8,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Stepper from 'reactxx-muix/current/Stepper/Stepper';
-import Step from 'reactxx-muix/current/Step/Step';
-import StepLabel from 'reactxx-muix/current/StepLabel/StepLabel';
-import Button from 'reactxx-muix/current/Button/Button';
-import Typography from 'reactxx-muix/current/Typography/Typography';
+import Stepper from 'reactxx-mui-web/Stepper/Stepper';
+import Step from 'reactxx-mui-web/Step/Step';
+import StepLabel from 'reactxx-mui-web/StepLabel/StepLabel';
+import Button from 'reactxx-mui-web/Button/Button';
+import Typography from 'reactxx-mui-web/Typography/Typography';
 
 const styles = theme => ({
   root: {

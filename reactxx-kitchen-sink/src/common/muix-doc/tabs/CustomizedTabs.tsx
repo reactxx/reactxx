@@ -8,9 +8,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Tabs from 'reactxx-muix/current/Tabs/Tabs';
-import Tab from 'reactxx-muix/current/Tab/Tab';
-import Typography from 'reactxx-muix/current/Typography/Typography';
+import Tabs from 'reactxx-mui-web/Tabs/Tabs';
+import Tab from 'reactxx-mui-web/Tab/Tab';
+import Typography from 'reactxx-mui-web/Typography/Typography';
 
 const styles = theme => ({
   root: {

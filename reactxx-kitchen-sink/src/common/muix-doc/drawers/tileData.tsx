@@ -8,9 +8,9 @@
 // This file is shared across the demos.
 
 import React from 'react';
-import ListItem from 'reactxx-muix/current/ListItem/ListItem';
-import ListItemIcon from 'reactxx-muix/current/ListItemIcon/ListItemIcon';
-import ListItemText from 'reactxx-muix/current/ListItemText/ListItemText';
+import ListItem from 'reactxx-mui-web/ListItem/ListItem';
+import ListItemIcon from 'reactxx-mui-web/ListItemIcon/ListItemIcon';
+import ListItemText from 'reactxx-mui-web/ListItemText/ListItemText';
 import InboxIcon from 'reactxx-icons/MoveToInbox';
 import DraftsIcon from 'reactxx-icons/Drafts';
 import StarIcon from 'reactxx-icons/Star';

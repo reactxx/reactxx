@@ -6,12 +6,12 @@
 //----------------------------------------------------------------------------------
 
 import React from 'react';
-import FormLabel from 'reactxx-muix/current/FormLabel/FormLabel';
-import FormControl from 'reactxx-muix/current/FormControl/FormControl';
-import FormGroup from 'reactxx-muix/current/FormGroup/FormGroup';
-import FormControlLabel from 'reactxx-muix/current/FormControlLabel/FormControlLabel';
-import FormHelperText from 'reactxx-muix/current/FormHelperText/FormHelperText';
-import Switch from 'reactxx-muix/current/Switch/Switch';
+import FormLabel from 'reactxx-mui-web/FormLabel/FormLabel';
+import FormControl from 'reactxx-mui-web/FormControl/FormControl';
+import FormGroup from 'reactxx-mui-web/FormGroup/FormGroup';
+import FormControlLabel from 'reactxx-mui-web/FormControlLabel/FormControlLabel';
+import FormHelperText from 'reactxx-mui-web/FormHelperText/FormHelperText';
+import Switch from 'reactxx-mui-web/Switch/Switch';
 
 class SwitchesGroup extends React.Component<any,any> {
   state: any = {

@@ -9,9 +9,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
 import green from 'reactxx-mui-web/colors/green';
-import FormGroup from 'reactxx-muix/current/FormGroup/FormGroup';
-import FormControlLabel from 'reactxx-muix/current/FormControlLabel/FormControlLabel';
-import Checkbox from 'reactxx-muix/current/Checkbox/Checkbox';
+import FormGroup from 'reactxx-mui-web/FormGroup/FormGroup';
+import FormControlLabel from 'reactxx-mui-web/FormControlLabel/FormControlLabel';
+import Checkbox from 'reactxx-mui-web/Checkbox/Checkbox';
 import CheckBoxOutlineBlankIcon from 'reactxx-icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from 'reactxx-icons/CheckBox';
 import Favorite from 'reactxx-icons/Favorite';

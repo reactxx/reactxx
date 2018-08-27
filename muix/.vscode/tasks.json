@@ -14,7 +14,7 @@
         {
             "label": "TypeScript compile",
             "type": "shell",
-            "command": "tsc -b src/muix --verbose ",
+            "command": "tsc -b src/primitives --verbose ",
             "problemMatcher": [
                 "$tsc"
             ],

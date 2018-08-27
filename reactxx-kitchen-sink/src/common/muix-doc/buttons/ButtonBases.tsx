@@ -8,8 +8,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import ButtonBase from 'reactxx-muix/current/ButtonBase/ButtonBase';
-import Typography from 'reactxx-muix/current/Typography/Typography';
+import ButtonBase from 'reactxx-mui-web/ButtonBase/ButtonBase';
+import Typography from 'reactxx-mui-web/Typography/Typography';
 
 const styles = theme => ({
   root: {

@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import LinearProgress from 'reactxx-muix/current/LinearProgress/LinearProgress';
+import LinearProgress from 'reactxx-mui-web/LinearProgress/LinearProgress';
 
 const styles = {
   root: {

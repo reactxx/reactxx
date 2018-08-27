@@ -8,8 +8,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Avatar from 'reactxx-muix/current/Avatar/Avatar';
-import Chip from 'reactxx-muix/current/Chip/Chip';
+import Avatar from 'reactxx-mui-web/Avatar/Avatar';
+import Chip from 'reactxx-mui-web/Chip/Chip';
 import FaceIcon from 'reactxx-icons/Face';
 import DoneIcon from 'reactxx-icons/Done';
 

@@ -8,12 +8,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Table from 'reactxx-muix/current/Table/Table';
-import TableBody from 'reactxx-muix/current/TableBody/TableBody';
-import TableCell from 'reactxx-muix/current/TableCell/TableCell';
-import TableHead from 'reactxx-muix/current/TableHead/TableHead';
-import TableRow from 'reactxx-muix/current/TableRow/TableRow';
-import Paper from 'reactxx-muix/current/Paper/Paper';
+import Table from 'reactxx-mui-web/Table/Table';
+import TableBody from 'reactxx-mui-web/TableBody/TableBody';
+import TableCell from 'reactxx-mui-web/TableCell/TableCell';
+import TableHead from 'reactxx-mui-web/TableHead/TableHead';
+import TableRow from 'reactxx-mui-web/TableRow/TableRow';
+import Paper from 'reactxx-mui-web/Paper/Paper';
 
 const CustomTableCell = withStylesCreator(theme => ({
   head: {

@@ -10,10 +10,10 @@ import PropTypes from 'prop-types';
 import { ThemeProvider } from 'reactxx-basic';
 import createMuiTheme from 'reactxx-mui-web/styles/createMuiTheme';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Input from 'reactxx-muix/current/Input/Input';
-import InputLabel from 'reactxx-muix/current/InputLabel/InputLabel';
-import TextField from 'reactxx-muix/current/TextField/TextField';
-import FormControl from 'reactxx-muix/current/FormControl/FormControl';
+import Input from 'reactxx-mui-web/Input/Input';
+import InputLabel from 'reactxx-mui-web/InputLabel/InputLabel';
+import TextField from 'reactxx-mui-web/TextField/TextField';
+import FormControl from 'reactxx-mui-web/FormControl/FormControl';
 import purple from 'reactxx-mui-web/colors/purple';
 import green from 'reactxx-mui-web/colors/green';
 

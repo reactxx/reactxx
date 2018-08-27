@@ -8,12 +8,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
-import Radio from 'reactxx-muix/current/Radio/Radio';
-import RadioGroup from 'reactxx-muix/current/RadioGroup/RadioGroup';
-import FormHelperText from 'reactxx-muix/current/FormHelperText/FormHelperText';
-import FormControlLabel from 'reactxx-muix/current/FormControlLabel/FormControlLabel';
-import FormControl from 'reactxx-muix/current/FormControl/FormControl';
-import FormLabel from 'reactxx-muix/current/FormLabel/FormLabel';
+import Radio from 'reactxx-mui-web/Radio/Radio';
+import RadioGroup from 'reactxx-mui-web/RadioGroup/RadioGroup';
+import FormHelperText from 'reactxx-mui-web/FormHelperText/FormHelperText';
+import FormControlLabel from 'reactxx-mui-web/FormControlLabel/FormControlLabel';
+import FormControl from 'reactxx-mui-web/FormControl/FormControl';
+import FormLabel from 'reactxx-mui-web/FormLabel/FormLabel';
 
 const styles = theme => ({
   root: {

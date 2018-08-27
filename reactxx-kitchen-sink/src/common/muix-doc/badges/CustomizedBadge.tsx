@@ -7,8 +7,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import IconButton from 'reactxx-muix/current/IconButton/IconButton';
-import Badge from 'reactxx-muix/current/Badge/Badge';
+import IconButton from 'reactxx-mui-web/IconButton/IconButton';
+import Badge from 'reactxx-mui-web/Badge/Badge';
 import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
 import ShoppingCartIcon from 'reactxx-icons/ShoppingCart';
 
