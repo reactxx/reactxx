@@ -138,7 +138,7 @@ export namespace TCommonStyles {
     T extends 'Image' ? TCommonStyles.ImageStyle :
     T extends 'View' ? TCommonStyles.ViewStyle :
     //T extends 'ScrollView' ? TCommonStyles.ScrollViewStyle :
-    never
+    TCommonStyles.ViewStyle
 
   //******************** Platform specific ruleset
   export type RulesetNative<T extends RulesetNativeIds = unknown> =
@@ -146,7 +146,7 @@ export namespace TCommonStyles {
     T extends 'Image' ? ReactN.ImageStyle :
     T extends 'View' ? ReactN.ViewStyle :
     //T extends 'ScrollView' ? ReactN.ScrollViewStyle :
-    never
+    ReactN.ViewStyle
 
   export type RulesetWeb = CSS.Properties & { [P in CSS.SimplePseudos]?: CSS.Properties }
   export type Ruleset<T extends RulesetNativeIds = 'Text'> = RulesetWeb | RulesetNative<T>

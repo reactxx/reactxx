@@ -45,7 +45,8 @@ const ListItemIcon: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<ListItemIconClassKey>,
-  props: ListItemIconProps,
+  props: ListItemIconProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

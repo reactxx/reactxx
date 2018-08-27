@@ -116,7 +116,8 @@ SvgIcon.muiName = "SvgIcon";
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<SvgIconClassKey>,
-  props: SvgIconProps,
+  props: SvgIconProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

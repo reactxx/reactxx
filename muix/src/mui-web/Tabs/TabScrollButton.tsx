@@ -63,7 +63,8 @@ const TabScrollButton: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<TabScrollButtonClassKey>,
-  props: TabScrollButtonProps,
+  props: TabScrollButtonProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

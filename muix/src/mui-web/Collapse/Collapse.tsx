@@ -221,7 +221,8 @@ Collapse.muiSupportAuto = true;
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<CollapseClassKey>,
-  props: CollapseProps,
+  props: CollapseProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

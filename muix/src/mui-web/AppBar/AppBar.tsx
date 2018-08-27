@@ -128,7 +128,8 @@ const AppBar: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<AppBarClassKey>,
-  props: AppBarProps,
+  props: AppBarProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

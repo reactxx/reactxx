@@ -93,7 +93,8 @@ Icon.muiName = "Icon";
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<IconClassKey>,
-  props: IconProps,
+  props: IconProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

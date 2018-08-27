@@ -69,7 +69,8 @@ ListItemAvatar["muiName"] = "ListItemAvatar";
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<ListItemAvatarClassKey>,
-  props: ListItemAvatarProps,
+  props: ListItemAvatarProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

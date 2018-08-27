@@ -92,7 +92,8 @@ const GridList: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<GridListClassKey>,
-  props: GridListProps,
+  props: GridListProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

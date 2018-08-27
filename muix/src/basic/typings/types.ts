@@ -33,10 +33,14 @@ export namespace Types {
   export interface Shape extends TCommon.Shape, TAddIn.Shape { }
 
   export interface ShapeDefault extends TAddIn.ShapeDefault {
-    common: TCommon.EmptySheet; native: TCommon.EmptySheet; web: string
-    style: 'View'
+    common: TCommon.EmptySheet
+    native: TCommon.EmptySheet
+    web: string
+    style: string
     events: null
-    props: {}; propsNative: ReactN.ViewProperties; propsWeb: React.HTMLAttributes<HTMLElement>
+    props: {}
+    propsNative: ReactN.ViewProperties
+    propsWeb: React.HTMLAttributes<HTMLElement>
     variant: never,
     theme: TCommon.ThemeBase
   }

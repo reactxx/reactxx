@@ -203,7 +203,8 @@ FormControl.childContextTypes = {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<FormControlClassKey>,
-  props: FormControlProps,
+  props: FormControlProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

@@ -48,7 +48,8 @@ const ExpansionPanelActions: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<ExpansionPanelActionsClassKey>,
-  props: ExpansionPanelActionsProps,
+  props: ExpansionPanelActionsProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

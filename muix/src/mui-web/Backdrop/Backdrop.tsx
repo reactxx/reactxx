@@ -75,7 +75,8 @@ const Backdrop: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<BackdropClassKey>,
-  props: BackdropProps,
+  props: BackdropProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

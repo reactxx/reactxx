@@ -210,7 +210,8 @@ class ExpansionPanel extends React.Component<CodeProps, any> {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<ExpansionPanelClassKey>,
-  props: ExpansionPanelProps,
+  props: ExpansionPanelProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

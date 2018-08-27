@@ -113,7 +113,8 @@ const TableSortLabel: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<TableSortLabelClassKey>,
-  props: TableSortLabelProps,
+  props: TableSortLabelProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

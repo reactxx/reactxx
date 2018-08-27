@@ -84,7 +84,8 @@ const BottomNavigation: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<BottomNavigationClassKey>,
-  props: BottomNavigationProps,
+  props: BottomNavigationProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

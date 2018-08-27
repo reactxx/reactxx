@@ -136,7 +136,8 @@ FormControlLabel.contextTypes = {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<FormControlLabelClassKey>,
-  props: FormControlLabelProps,
+  props: FormControlLabelProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

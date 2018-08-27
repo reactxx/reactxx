@@ -64,7 +64,8 @@ TableBody.childContextTypes = {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<TableBodyClassKey>,
-  props: TableBodyProps,
+  props: TableBodyProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

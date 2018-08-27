@@ -328,7 +328,8 @@ class TouchRipple extends React.PureComponent<CodeProps, any> {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<TouchRippleClassKey>,
-  props: TouchRippleProps,
+  props: TouchRippleProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

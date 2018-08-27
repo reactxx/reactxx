@@ -74,9 +74,9 @@ class DelayingAppearance extends React.Component<any,any> {
         <div className={classes.placeholder}>
           <Fade
             in={loading}
-            style={{
+            style={{ $web:{
               transitionDelay: loading ? '800ms' : '0ms',
-            }}
+            }}}
             unmountOnExit
           >
             <CircularProgress />
@@ -91,9 +91,9 @@ class DelayingAppearance extends React.Component<any,any> {
           ) : (
             <Fade
               in={query === 'progress'}
-              style={{
+              style={{ $web:{
                 transitionDelay: query === 'progress' ? '800ms' : '0ms',
-              }}
+              }}}
               unmountOnExit
             >
               <CircularProgress />

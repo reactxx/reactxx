@@ -46,7 +46,8 @@ const DialogTitle: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<DialogTitleClassKey>,
-  props: DialogTitleProps,
+  props: DialogTitleProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

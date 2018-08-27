@@ -185,7 +185,8 @@ TableCell.contextTypes = {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<TableCellClassKey>,
-  props: TableCellProps,
+  props: TableCellProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

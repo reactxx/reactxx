@@ -357,7 +357,8 @@ class Snackbar extends React.Component<CodeProps, any> {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<SnackbarClassKey>,
-  props: SnackbarProps,
+  props: SnackbarProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

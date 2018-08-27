@@ -150,7 +150,8 @@ import withStyles, { Theme, toAtomic } from '../styles/withStyles';
 ` : `
 export interface Shape extends Types.ShapeDefault {
   ${!noKey[info.name] && !info.withTheme ? `common: TCommon.ShapeTexts<${info.name}ClassKey>,` : ''}
-  props: ${info.name}Props${info.addProps ? ` & { ${info.addProps} }` : ''},
+  props: ${info.name}Props${info.addProps ? ` & { ${info.addProps} }` : ''}
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

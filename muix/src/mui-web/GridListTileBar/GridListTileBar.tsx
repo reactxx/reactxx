@@ -154,7 +154,8 @@ const GridListTileBar: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<GridListTileBarClassKey>,
-  props: GridListTileBarProps,
+  props: GridListTileBarProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

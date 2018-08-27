@@ -88,7 +88,8 @@ const styles = {};
 
 export interface Shape extends Types.ShapeDefault {
   
-  props: TablePaginationActionsProps,
+  props: TablePaginationActionsProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

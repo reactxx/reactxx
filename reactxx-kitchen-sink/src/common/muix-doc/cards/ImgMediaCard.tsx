@@ -34,7 +34,7 @@ function ImgMediaCard(props) {
         <CardMedia
           component="img"
           className={classes.media}
-          height="140"
+          {...{height:140}}
           image="src/ks/common/muix/static/images/cards/contemplative-reptile.jpg"
           title="Contemplative Reptile"
         />

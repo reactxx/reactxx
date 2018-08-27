@@ -165,7 +165,8 @@ class GridListTile extends React.Component<CodeProps, any> {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<GridListTileClassKey>,
-  props: GridListTileProps,
+  props: GridListTileProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

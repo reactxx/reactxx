@@ -72,7 +72,7 @@ class MenuListComposition extends React.Component<any,any> {
               <Grow
                 {...TransitionProps}
                 {...{id:"menu-list-grow"}}
-                style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                style={{ $web:{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}}
               >
                 <Paper>
                   <ClickAwayListener onClickAway={this.handleClose}>

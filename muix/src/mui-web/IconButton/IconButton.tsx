@@ -137,7 +137,8 @@ const IconButton: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<IconButtonClassKey>,
-  props: IconButtonProps,
+  props: IconButtonProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

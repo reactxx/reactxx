@@ -114,6 +114,7 @@ import withStylesCreator from 'reactxx-mui-web/styles/withStyles'`)
         case 'menus/MenuListComposition':
             code = replaceAll(code, `  handleToggle = () => {`, `  anchorEl\n  handleToggle = () => {`)
             code = replaceAll(code, 'id="menu-list-grow"', '{...{id:"menu-list-grow"}}')
+            code = styleToWebStyle(code, 'transformOrigin')
             break
         case 'snackbars/ConsecutiveSnackbars':
         case 'snackbars/SimpleSnackbar':
@@ -136,7 +137,8 @@ import withStylesCreator from 'reactxx-mui-web/styles/withStyles'`)
             break
         case 'selects/MultipleSelect':
             code = replaceAll(code, 'renderValue={selected =>', 'renderValue={(selected: any) =>')
-            code = processMatchAll(/style={{(\s|.)*?(}})/g, code, (match, res) => res.push(code.substr(match.index, match[0].length - 3) + '} as any}'))
+            //code = styleToWebStyle(code, 'transitionDelay')
+            //code = processMatchAll(/style={{(\s|.)*?(}})/g, code, (match, res) => res.push(code.substr(match.index, match[0].length - 3) + '} as any}'))
             break
         case 'progress/CircularIndeterminate':
             code = replaceAll(code, '{ color: purple[500] }', '{ color: purple[500] } as any')
@@ -149,6 +151,7 @@ import withStylesCreator from 'reactxx-mui-web/styles/withStyles'`)
         case 'buttons/FloatingActionButtonZoom':
             code = code.replace('const { classes, theme } = this.props;', 'const { classes, $system: {theme} } = this.props;')
             code = code.replace('color={fab.color}', 'color={fab.color as any}')
+            code = styleToWebStyle(code, 'transitionDelay')
             break
         case 'cards/MediaControlCard':
             code = code.replace('const { classes, theme } = props;', 'const { classes, $system: {theme} } = props;')
@@ -159,8 +162,11 @@ import withStylesCreator from 'reactxx-mui-web/styles/withStyles'`)
         case 'dialogs/ConfirmationDialog':
             code = code.replace('super();', 'super(props);')
             break
-        case '':
-            code = code.replace('', '')
+        case 'progress/DelayingAppearance':
+            code = styleToWebStyle(code, 'transitionDelay')
+            break
+        case 'cards/ImgMediaCard':
+            code = code.replace('height="140"', '{...{height:140}}')
             break
     }
 
@@ -178,6 +184,15 @@ import withStylesCreator from 'reactxx-mui-web/styles/withStyles'`)
     code = code.replace(`import classNames from 'classnames';`, `import { classNames } from 'reactxx-basic';`)
 
     return code
+}
+
+const styleToWebStyle = (code: string, wrongPart: string) => {
+    return processMatchAll(/style={{((\s|.)*?)}}/g, code, (match, res) => {
+        if (match[1].indexOf(wrongPart) >= 0)
+            res.push(`style={{ $web:{${match[1]}}}}`)
+        else
+            res.push(match[0])
+    })
 }
 
 

@@ -172,7 +172,8 @@ Grow.muiSupportAuto = true;
 
 export interface Shape extends Types.ShapeDefault {
   
-  props: GrowProps,
+  props: GrowProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

@@ -79,7 +79,8 @@ const CardActionArea: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<CardActionAreaClassKey>,
-  props: CardActionAreaProps,
+  props: CardActionAreaProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

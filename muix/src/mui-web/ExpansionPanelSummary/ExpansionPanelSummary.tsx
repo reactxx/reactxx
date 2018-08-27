@@ -197,7 +197,8 @@ ExpansionPanelSummary.muiName = "ExpansionPanelSummary";
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<ExpansionPanelSummaryClassKey>,
-  props: ExpansionPanelSummaryProps,
+  props: ExpansionPanelSummaryProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

@@ -230,7 +230,8 @@ ListItem.childContextTypes = {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<ListItemClassKey>,
-  props: ListItemProps,
+  props: ListItemProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

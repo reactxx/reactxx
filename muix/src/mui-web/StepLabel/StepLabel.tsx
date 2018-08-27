@@ -185,7 +185,8 @@ StepLabel.muiName = "StepLabel";
 
 export interface Shape extends Types.ShapeDefault {
   
-  props: StepLabelProps,
+  props: StepLabelProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

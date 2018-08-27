@@ -94,7 +94,8 @@ const Checkbox: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<CheckboxClassKey>,
-  props: CheckboxProps,
+  props: CheckboxProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

@@ -85,7 +85,8 @@ const SnackbarContent: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<SnackbarContentClassKey>,
-  props: SnackbarContentProps,
+  props: SnackbarContentProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

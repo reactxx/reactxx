@@ -107,7 +107,8 @@ const HiddenCss: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   
-  props: HiddenCssProps,
+  props: HiddenCssProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

@@ -249,7 +249,8 @@ const styles = {};
 
 export interface Shape extends Types.ShapeDefault {
   
-  props: SlideProps,
+  props: SlideProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

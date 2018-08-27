@@ -142,7 +142,8 @@ const CardHeader: Types.CodeSFCWeb<Shape> & {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<CardHeaderClassKey>,
-  props: CardHeaderProps,
+  props: CardHeaderProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

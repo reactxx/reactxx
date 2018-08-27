@@ -39,7 +39,8 @@ ListItemSecondaryAction.muiName = "ListItemSecondaryAction";
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<ListItemSecondaryActionClassKey>,
-  props: ListItemSecondaryActionProps,
+  props: ListItemSecondaryActionProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

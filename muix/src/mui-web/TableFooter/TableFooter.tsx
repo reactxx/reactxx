@@ -66,7 +66,8 @@ TableFooter.childContextTypes = {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<TableFooterClassKey>,
-  props: TableFooterProps,
+  props: TableFooterProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

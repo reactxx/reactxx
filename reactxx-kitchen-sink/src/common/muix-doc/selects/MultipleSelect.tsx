@@ -92,7 +92,7 @@ class MultipleSelect extends React.Component<any,any> {
                     this.state.name.indexOf(name) === -1
                       ? theme.typography.fontWeightRegular
                       : theme.typography.fontWeightMedium,
-               } as any}
+                }}
               >
                 {name}
               </MenuItem>
@@ -142,7 +142,7 @@ class MultipleSelect extends React.Component<any,any> {
                     this.state.name.indexOf(name) === -1
                       ? theme.typography.fontWeightRegular
                       : theme.typography.fontWeightMedium,
-               } as any}
+                }}
               >
                 {name}
               </MenuItem>

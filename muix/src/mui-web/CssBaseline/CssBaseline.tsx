@@ -60,7 +60,8 @@ class CssBaseline extends React.Component<CodeProps, any> {
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<CssBaselineClassKey>,
-  props: CssBaselineProps,
+  props: CssBaselineProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

@@ -107,7 +107,8 @@ Select.muiName = "Select";
 
 export interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeTexts<SelectClassKey>,
-  props: SelectProps,
+  props: SelectProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>

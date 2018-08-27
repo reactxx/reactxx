@@ -124,7 +124,8 @@ Stepper.muiName = "Stepper";
 
 export interface Shape extends Types.ShapeDefault {
   
-  props: StepperProps,
+  props: StepperProps
+  style: 'Text'
   theme: Theme
 }
 export type ComponentType = React.ComponentClass<Types.PropsX<Shape>> & TProvider<Shape>
