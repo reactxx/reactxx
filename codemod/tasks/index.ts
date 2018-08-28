@@ -25,6 +25,8 @@ export const codeMod = (toMuixCurrent = false) => {
 
         const info = log[path]
 
+        //if (info.name!=='Zoom') continue
+
         //if (info.dir != 'Paper' && (info.nameIsUppercase || (info.dirIsUppercase && info.name === 'index'))) continue
         //if (info.dirIsUppercase && info.name === 'index') continue
 

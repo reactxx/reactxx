@@ -579,6 +579,7 @@ export const scripts: Record<string, Script> = {
             // Error in C:\reactxx\codemod\patch-original\transitions\transition.d.ts
             'onExit={this.handleExit}': `onExit={this.handleExit}\ntimeout = {null}`,
         },
+        adjustThemeProperties: ['handleEnter', 'handleExit'],
     },
 
 }

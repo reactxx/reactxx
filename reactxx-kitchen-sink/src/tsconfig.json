@@ -2,6 +2,7 @@
   "extends": "../tsconfig-web.common.json",
   "compilerOptions": {
     "outDir": "../../deploy/lib/ks",
+    //"watch": true,
     "baseUrl": ".",
     "paths": {
       "reactxx-animation": [

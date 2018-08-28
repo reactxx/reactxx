@@ -39,7 +39,9 @@ class Zoom extends React.Component<CodeProps, any> {
   static childContextTypes;
   static options;
   handleEnter = node => {
-    const { theme } = this.props;
+    const {
+      $system: { theme }
+    } = this.props;
     reflow(node); // So the animation always start from the start.
 
     const transitionProps = getTransitionProps(this.props, {
@@ -59,7 +61,9 @@ class Zoom extends React.Component<CodeProps, any> {
     }
   };
   handleExit = node => {
-    const { theme } = this.props;
+    const {
+      $system: { theme }
+    } = this.props;
     const transitionProps = getTransitionProps(this.props, {
       mode: "exit"
     });
