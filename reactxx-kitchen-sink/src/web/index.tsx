@@ -39,7 +39,7 @@ import ReactDOM from 'react-dom'
 // import App from '../common/muix-doc/avatars/index'
 // import App from '../common/muix-doc/badges/index'
  //import App from '../common/muix-doc/bottom-navigation/index'
- import App from '../common/muix-doc/buttons/index'
+// import App from '../common/muix-doc/buttons/index'
 // import App from '../common/muix-doc/cards/index'
 // import App from '../common/muix-doc/chips/index'
 // import App from '../common/muix-doc/dialogs/index'
@@ -62,5 +62,6 @@ import ReactDOM from 'react-dom'
 // import App from '../common/muix-doc/tooltips/index'
 
 //import App from '../common/muix-doc/cards/SimpleMediaCard'
+import App from '../common/remark/index'
 
 ReactDOM.render(<App />, document.getElementById('root')) 

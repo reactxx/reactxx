@@ -35,6 +35,9 @@ SystemJS.config({
     "npm:*.json"
   ],
   map: {
+    "dns": "npm:jspm-nodelibs-dns@0.2.1",
+    "hast-util-sanitize": "npm:hast-util-sanitize@1.2.0",
+    "net": "npm:jspm-nodelibs-net@0.2.1",
     "react-swipeable-views": "npm:react-swipeable-views@0.12.16",
     "@types/react": "npm:@types/react@16.4.7",
     "react-number-format": "npm:react-number-format@3.5.0",
@@ -90,6 +93,9 @@ SystemJS.config({
     "reactxx-mdi": "npm:reactxx-mdi@0.1.67",
     "downshift": "npm:downshift@2.0.19",
     "recompose": "npm:recompose@0.27.1",
+    "remark": "npm:remark@9.0.0",
+    "remark-generic-extensions": "npm:remark-generic-extensions@1.3.0",
+    "remark-react": "npm:remark-react@4.0.3",
     "scroll": "npm:scroll@2.0.3",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.2",
@@ -744,6 +750,224 @@ SystemJS.config({
         "hmac-drbg": "npm:hmac-drbg@1.0.1",
         "minimalistic-crypto-utils": "npm:minimalistic-crypto-utils@1.0.1",
         "minimalistic-assert": "npm:minimalistic-assert@1.0.1"
+      }
+    },
+    "npm:remark-generic-extensions@1.3.0": {
+      "map": {
+        "deepmerge": "npm:deepmerge@1.5.2",
+        "core-js": "npm:core-js@2.5.7",
+        "joi-browser": "npm:joi-browser@10.6.1",
+        "joi": "npm:joi@10.6.0",
+        "node-joi": "npm:joi@10.6.0"
+      }
+    },
+    "npm:remark-react@4.0.3": {
+      "map": {
+        "hast-util-sanitize": "npm:hast-util-sanitize@1.2.0",
+        "hast-to-hyperscript": "npm:hast-to-hyperscript@4.0.0",
+        "mdast-util-to-hast": "npm:mdast-util-to-hast@3.0.2",
+        "@mapbox/hast-util-table-cell-style": "npm:@mapbox/hast-util-table-cell-style@0.1.3"
+      }
+    },
+    "npm:remark@9.0.0": {
+      "map": {
+        "remark-parse": "npm:remark-parse@5.0.0",
+        "remark-stringify": "npm:remark-stringify@5.0.0",
+        "unified": "npm:unified@6.2.0"
+      }
+    },
+    "npm:hast-util-sanitize@1.2.0": {
+      "map": {
+        "xtend": "npm:xtend@4.0.1"
+      }
+    },
+    "npm:remark-parse@5.0.0": {
+      "map": {
+        "xtend": "npm:xtend@4.0.1",
+        "trim": "npm:trim@0.0.1",
+        "is-decimal": "npm:is-decimal@1.0.2",
+        "is-alphabetical": "npm:is-alphabetical@1.0.2",
+        "is-word-character": "npm:is-word-character@1.0.2",
+        "markdown-escapes": "npm:markdown-escapes@1.0.2",
+        "collapse-white-space": "npm:collapse-white-space@1.0.4",
+        "unherit": "npm:unherit@1.1.1",
+        "is-whitespace-character": "npm:is-whitespace-character@1.0.2",
+        "vfile-location": "npm:vfile-location@2.0.3",
+        "state-toggle": "npm:state-toggle@1.0.1",
+        "unist-util-remove-position": "npm:unist-util-remove-position@1.1.2",
+        "parse-entities": "npm:parse-entities@1.1.2",
+        "repeat-string": "npm:repeat-string@1.6.1",
+        "trim-trailing-lines": "npm:trim-trailing-lines@1.1.1"
+      }
+    },
+    "npm:remark-stringify@5.0.0": {
+      "map": {
+        "xtend": "npm:xtend@4.0.1",
+        "is-decimal": "npm:is-decimal@1.0.2",
+        "markdown-escapes": "npm:markdown-escapes@1.0.2",
+        "unherit": "npm:unherit@1.1.1",
+        "is-whitespace-character": "npm:is-whitespace-character@1.0.2",
+        "state-toggle": "npm:state-toggle@1.0.1",
+        "parse-entities": "npm:parse-entities@1.1.2",
+        "repeat-string": "npm:repeat-string@1.6.1",
+        "is-alphanumeric": "npm:is-alphanumeric@1.0.0",
+        "longest-streak": "npm:longest-streak@2.0.2",
+        "ccount": "npm:ccount@1.0.3",
+        "mdast-util-compact": "npm:mdast-util-compact@1.0.2",
+        "stringify-entities": "npm:stringify-entities@1.3.2",
+        "markdown-table": "npm:markdown-table@1.1.2"
+      }
+    },
+    "npm:mdast-util-to-hast@3.0.2": {
+      "map": {
+        "xtend": "npm:xtend@4.0.1",
+        "trim": "npm:trim@0.0.1",
+        "collapse-white-space": "npm:collapse-white-space@1.0.4",
+        "trim-lines": "npm:trim-lines@1.1.1",
+        "unist-util-position": "npm:unist-util-position@3.0.1",
+        "mdurl": "npm:mdurl@1.0.1",
+        "unist-util-generated": "npm:unist-util-generated@1.1.2",
+        "detab": "npm:detab@2.0.1",
+        "unist-builder": "npm:unist-builder@1.0.3",
+        "mdast-util-definitions": "npm:mdast-util-definitions@1.2.3",
+        "unist-util-visit": "npm:unist-util-visit@1.4.0"
+      }
+    },
+    "npm:hast-to-hyperscript@4.0.0": {
+      "map": {
+        "trim": "npm:trim@0.0.1",
+        "is-nan": "npm:is-nan@1.2.1",
+        "kebab-case": "npm:kebab-case@1.0.0",
+        "comma-separated-tokens": "npm:comma-separated-tokens@1.0.5",
+        "space-separated-tokens": "npm:space-separated-tokens@1.1.2",
+        "unist-util-is": "npm:unist-util-is@2.1.2",
+        "property-information": "npm:property-information@3.2.0"
+      }
+    },
+    "npm:unherit@1.1.1": {
+      "map": {
+        "xtend": "npm:xtend@4.0.1",
+        "inherits": "npm:inherits@2.0.3"
+      }
+    },
+    "npm:parse-entities@1.1.2": {
+      "map": {
+        "is-decimal": "npm:is-decimal@1.0.2",
+        "character-entities-legacy": "npm:character-entities-legacy@1.1.2",
+        "character-entities": "npm:character-entities@1.2.2",
+        "character-reference-invalid": "npm:character-reference-invalid@1.1.2",
+        "is-hexadecimal": "npm:is-hexadecimal@1.0.2",
+        "is-alphanumerical": "npm:is-alphanumerical@1.0.2"
+      }
+    },
+    "npm:unified@6.2.0": {
+      "map": {
+        "is-plain-obj": "npm:is-plain-obj@1.1.0",
+        "x-is-string": "npm:x-is-string@0.1.0",
+        "bail": "npm:bail@1.0.3",
+        "trough": "npm:trough@1.0.3",
+        "extend": "npm:extend@3.0.2",
+        "vfile": "npm:vfile@2.3.0"
+      }
+    },
+    "npm:unist-util-remove-position@1.1.2": {
+      "map": {
+        "unist-util-visit": "npm:unist-util-visit@1.4.0"
+      }
+    },
+    "npm:mdast-util-compact@1.0.2": {
+      "map": {
+        "unist-util-visit": "npm:unist-util-visit@1.4.0"
+      }
+    },
+    "npm:comma-separated-tokens@1.0.5": {
+      "map": {
+        "trim": "npm:trim@0.0.1"
+      }
+    },
+    "npm:detab@2.0.1": {
+      "map": {
+        "repeat-string": "npm:repeat-string@1.6.1"
+      }
+    },
+    "npm:space-separated-tokens@1.1.2": {
+      "map": {
+        "trim": "npm:trim@0.0.1"
+      }
+    },
+    "npm:mdast-util-definitions@1.2.3": {
+      "map": {
+        "unist-util-visit": "npm:unist-util-visit@1.4.0"
+      }
+    },
+    "npm:@mapbox/hast-util-table-cell-style@0.1.3": {
+      "map": {
+        "unist-util-visit": "npm:unist-util-visit@1.4.0"
+      }
+    },
+    "npm:stringify-entities@1.3.2": {
+      "map": {
+        "character-entities-legacy": "npm:character-entities-legacy@1.1.2",
+        "is-hexadecimal": "npm:is-hexadecimal@1.0.2",
+        "is-alphanumerical": "npm:is-alphanumerical@1.0.2",
+        "character-entities-html4": "npm:character-entities-html4@1.1.2"
+      }
+    },
+    "npm:unist-builder@1.0.3": {
+      "map": {
+        "object-assign": "npm:object-assign@4.1.1"
+      }
+    },
+    "npm:is-alphanumerical@1.0.2": {
+      "map": {
+        "is-alphabetical": "npm:is-alphabetical@1.0.2",
+        "is-decimal": "npm:is-decimal@1.0.2"
+      }
+    },
+    "npm:is-nan@1.2.1": {
+      "map": {
+        "define-properties": "npm:define-properties@1.1.3"
+      }
+    },
+    "npm:joi@10.6.0": {
+      "map": {
+        "items": "npm:items@2.1.1",
+        "topo": "npm:topo@2.0.2",
+        "isemail": "npm:isemail@2.2.1",
+        "hoek": "npm:hoek@4.2.1"
+      }
+    },
+    "npm:unist-util-visit@1.4.0": {
+      "map": {
+        "unist-util-visit-parents": "npm:unist-util-visit-parents@2.0.1"
+      }
+    },
+    "npm:vfile@2.3.0": {
+      "map": {
+        "replace-ext": "npm:replace-ext@1.0.0",
+        "unist-util-stringify-position": "npm:unist-util-stringify-position@1.1.2",
+        "is-buffer": "npm:is-buffer@1.1.6",
+        "vfile-message": "npm:vfile-message@1.0.1"
+      }
+    },
+    "npm:unist-util-visit-parents@2.0.1": {
+      "map": {
+        "unist-util-is": "npm:unist-util-is@2.1.2"
+      }
+    },
+    "npm:vfile-message@1.0.1": {
+      "map": {
+        "unist-util-stringify-position": "npm:unist-util-stringify-position@1.1.2"
+      }
+    },
+    "npm:topo@2.0.2": {
+      "map": {
+        "hoek": "npm:hoek@4.2.1"
+      }
+    },
+    "npm:define-properties@1.1.3": {
+      "map": {
+        "object-keys": "npm:object-keys@1.0.12"
       }
     }
   }
