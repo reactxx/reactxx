@@ -11,7 +11,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { classNames } from "reactxx-basic";
 import { cloneChildrenWithClassName } from "../utils/reactHelpers";
-import "../Button"; // So we don't have any override priority issue.
+import "../Button/Button"; // So we don't have any override priority issue.
 
 import { StandardProps } from "..";
 export interface DialogActionsProps

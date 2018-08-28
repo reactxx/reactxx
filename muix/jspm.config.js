@@ -35,6 +35,7 @@ SystemJS.config({
     "npm:*.json"
   ],
   map: {
+    "lodash": "npm:lodash@4.17.10",
     "dns": "npm:jspm-nodelibs-dns@0.2.1",
     "hast-util-sanitize": "npm:hast-util-sanitize@1.2.0",
     "net": "npm:jspm-nodelibs-net@0.2.1",
@@ -92,7 +93,7 @@ SystemJS.config({
     "react-transition-group": "npm:react-transition-group@2.4.0",
     "reactxx-mdi": "npm:reactxx-mdi@0.1.67",
     "downshift": "npm:downshift@2.0.19",
-    "recompose": "npm:recompose@0.27.1",
+    "recompose": "npm:recompose@0.29.0",
     "remark": "npm:remark@9.0.0",
     "remark-generic-extensions": "npm:remark-generic-extensions@1.3.0",
     "remark-react": "npm:remark-react@4.0.3",
@@ -171,16 +172,6 @@ SystemJS.config({
         "loose-envify": "npm:loose-envify@1.4.0",
         "fbjs": "npm:fbjs@0.8.17",
         "object-assign": "npm:object-assign@4.1.1"
-      }
-    },
-    "npm:recompose@0.27.1": {
-      "map": {
-        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.5.5",
-        "react-lifecycles-compat": "npm:react-lifecycles-compat@3.0.4",
-        "symbol-observable": "npm:symbol-observable@1.2.0",
-        "fbjs": "npm:fbjs@0.8.17",
-        "babel-runtime": "npm:babel-runtime@6.26.0",
-        "change-emitter": "npm:change-emitter@0.1.6"
       }
     },
     "npm:react-dom@16.4.1": {
@@ -664,12 +655,7 @@ SystemJS.config({
     },
     "npm:encoding@0.1.12": {
       "map": {
-        "iconv-lite": "npm:iconv-lite@0.4.23"
-      }
-    },
-    "npm:iconv-lite@0.4.23": {
-      "map": {
-        "safer-buffer": "npm:safer-buffer@2.1.2"
+        "iconv-lite": "npm:iconv-lite@0.4.24"
       }
     },
     "npm:fela@6.1.9": {
@@ -968,6 +954,26 @@ SystemJS.config({
     "npm:define-properties@1.1.3": {
       "map": {
         "object-keys": "npm:object-keys@1.0.12"
+      }
+    },
+    "npm:recompose@0.29.0": {
+      "map": {
+        "@babel/runtime": "npm:@babel/runtime@7.0.0",
+        "fbjs": "npm:fbjs@0.8.17",
+        "symbol-observable": "npm:symbol-observable@1.2.0",
+        "react-lifecycles-compat": "npm:react-lifecycles-compat@3.0.4",
+        "change-emitter": "npm:change-emitter@0.1.6",
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.5.5"
+      }
+    },
+    "npm:@babel/runtime@7.0.0": {
+      "map": {
+        "regenerator-runtime": "npm:regenerator-runtime@0.12.1"
+      }
+    },
+    "npm:iconv-lite@0.4.24": {
+      "map": {
+        "safer-buffer": "npm:safer-buffer@2.1.2"
       }
     }
   }

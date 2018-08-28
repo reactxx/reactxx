@@ -55,6 +55,7 @@
       "hoist-non-react-statics": "npm:hoist-non-react-statics@^2.3.1",
       "is-plain-object": "npm:is-plain-object@^2.0.4",
       "jss-preset-default": "npm:jss-preset-default@^4.0.1",
+      "lodash": "npm:lodash@^4.17.10",
       "popper.js": "npm:popper.js@^1.14.3",
       "prop-types": "npm:prop-types@^15.6.0",
       "react-jss": "npm:react-jss@^8.1.0",
@@ -84,7 +85,7 @@
       "react-event-listener": "npm:react-event-listener@^0.6.0",
       "react-popper": "npm:react-popper@^0.10.0",
       "react-transition-group": "npm:react-transition-group@^2.2.1",
-      "recompose": "npm:recompose@^0.27.0",
+      "recompose": "npm:recompose@0.29.0",
       "scroll": "npm:scroll@^2.0.3"
     },
     "devDependencies": {},
@@ -130,6 +131,12 @@
         "ignore": [
           "test.js"
         ]
+      },
+      "npm:lodash@4.17.10": {
+        "map": {
+          "buffer": "@empty",
+          "process": "@empty"
+        }
       },
       "npm:pbkdf2@3.0.16": {
         "main": "browser.js"

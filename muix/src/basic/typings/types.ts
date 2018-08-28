@@ -148,7 +148,7 @@ export namespace Types {
 
   //// *** native
   export type CodePropsNative<R extends Shape = Shape> =
-    Omit<TCommon.getProps<R> & TCommon.getPropsNative<R>, omitPropNames> &
+    OmitPartial<TCommon.getProps<R> & TCommon.getPropsNative<R>, omitPropNames> &
     Types.OnPressAllNative &
     TAddIn.CodeProps<R> &
     {
@@ -179,7 +179,7 @@ export namespace Types {
 
 
   export type CodeProps<R extends Shape = Shape> =
-    Omit<TCommon.getProps<R> & (TCommon.getPropsNative<R> | TCommon.getPropsWeb<R>), omitPropNames> &
+    OmitPartial<TCommon.getProps<R> & (TCommon.getPropsNative<R> | TCommon.getPropsWeb<R>), omitPropNames> &
     Types.OnPressAllNative &
     Types.OnPressAllWeb &
     TAddIn.CodeProps<R> &

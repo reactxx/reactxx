@@ -2,15 +2,16 @@ import * as Ast from '../../utils/ast'
 import * as RegExp from '../../utils/regexp'
 
 export const adjustImports = (code: string) => {
-  return RegExp.processMatchAll(/from '\.\.\/([A-Z]\w+)'/g, code, (match, res) => {
-    const imp = code.substr(match.index, match[0].length - 1) + '/' + match[1] + `'`
+  // " from '../Button'" nebo "import '../Button'" => '../Button/Button'
+  return RegExp.processMatchAll(/( from|import) '\.\.\/([A-Z]\w+)'/g, code, (match, res) => {
+    const imp = code.substr(match.index, match[0].length - 1) + '/' + match[2] + `'`
     res.push(imp)
   })
 }
 // export const adjustImports_ = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
 //   const imports = Ast.astq().query(root, `// ImportDeclaration`)
 //   imports.forEach(imp => {
-//     if (imp.source.type != 'StringLiteral') return
+//     if (imp.source.type != 'StringLiteral')) return
 //     // if (imp.source.value === 'classNames') {
 //     //   Ast.removeNode(root, imp.$path)
 //     //   return
