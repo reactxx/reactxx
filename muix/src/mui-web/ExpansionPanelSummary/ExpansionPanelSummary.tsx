@@ -46,28 +46,34 @@ const styles = theme => {
         transition
       ),
       padding: "0 24px 0 24px",
-      "&:hover:not($disabled)": {
+      "&:hover:not(.disabled31)": {
         cursor: "pointer"
       },
-      "&$expanded": {
+      "&.expanded31": {
         minHeight: 64
       },
-      "&$focused": {
+      "&.focused31": {
         backgroundColor: theme.palette.grey[300]
       },
-      "&$disabled": {
+      "&.disabled31": {
         opacity: 0.38
       }
     },
 
     /* Styles applied to the root element if `expanded={true}`. */
-    expanded: {},
+    expanded: {
+      NAME$expanded31: true
+    },
 
     /* Styles applied to the root and children wrapper elements when focused. */
-    focused: {},
+    focused: {
+      NAME$focused31: true
+    },
 
     /* Styles applied to the root element if `disabled={true}`. */
-    disabled: {},
+    disabled: {
+      NAME$disabled31: true
+    },
 
     /* Styles applied to the children wrapper element. */
     content: {
@@ -78,7 +84,7 @@ const styles = theme => {
       "& > :last-child": {
         paddingRight: 32
       },
-      "&$expanded": {
+      "&.expanded31": {
         margin: "20px 0"
       }
     },
@@ -96,7 +102,7 @@ const styles = theme => {
         // not only to the IconButton.
         backgroundColor: "transparent"
       },
-      "&$expanded": {
+      "&.expanded31": {
         transform: "translateY(-50%) rotate(180deg)"
       }
     }

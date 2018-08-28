@@ -1,7 +1,7 @@
 ﻿{ 
   "extends": "../tsconfig-web.common.json",
   "compilerOptions": {
-    "outDir": "../../deploy/lib/basic",
+    "outDir": "../../deploy/lib/ks",
     "baseUrl": ".",
     "paths": {
       "reactxx-animation": [
@@ -48,5 +48,6 @@
     //"common/muix",
     "common/muix-doc",
     "typings.d.ts",
+    "web",
   ]
 }

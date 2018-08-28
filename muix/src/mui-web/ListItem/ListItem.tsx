@@ -57,7 +57,7 @@ const styles = theme => ({
     textAlign: "left",
     paddingTop: 12,
     paddingBottom: 12,
-    "&$selected": {
+    "&.selected53": {
       backgroundColor: theme.palette.action.selected
     }
   },
@@ -119,7 +119,9 @@ const styles = theme => ({
   },
 
   /* Styles applied to the root element if `selected={true}`. */
-  selected: {}
+  selected: {
+    NAME$selected53: true
+  }
 });
 
 class ListItem extends React.Component<CodeProps, any> {

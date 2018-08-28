@@ -39,27 +39,31 @@ const styles = theme => ({
   },
 
   /* Styles applied to the root element if `checked={true}`. */
-  checked: {},
+  checked: {
+    NAME$checked16: true
+  },
 
   /* Styles applied to the root element if `disabled={true}`. */
-  disabled: {},
+  disabled: {
+    NAME$disabled16: true
+  },
 
   /* Styles applied to the root element if `color="primary"`. */
   colorPrimary: {
-    "&$checked": {
+    "&.checked16": {
       color: theme.palette.primary.main
     },
-    "&$disabled": {
+    "&.disabled16": {
       color: theme.palette.action.disabled
     }
   },
 
   /* Styles applied to the root element if `color="secondary"`. */
   colorSecondary: {
-    "&$checked": {
+    "&.checked16": {
       color: theme.palette.secondary.main
     },
-    "&$disabled": {
+    "&.disabled16": {
       color: theme.palette.action.disabled
     }
   }

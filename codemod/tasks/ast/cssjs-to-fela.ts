@@ -4,7 +4,7 @@ import * as warning from 'warning'
 import * as Parser from '../../utils/parser'
 
 export const cssjsToFela = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
-  let sheet = Queries.checkSingleResult(Ast.astq().query(root, '/Program/ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /Identifier [@name == "styles"] ]'), true)
+  let sheet = Queries.checkSingleResult(Ast.astq().query(root, '/Program/VariableDeclaration/VariableDeclarator [ /Identifier [@name == "styles"] ]'), true)
   if (sheet) cssjsToFelaLow(sheet, info)
   return root
 }
@@ -24,7 +24,8 @@ export const cssjsToFelaLow = (sheet: Ast.Ast, info: Ast.MUISourceInfo) => {
       sheet = Queries.checkSingleResult(Ast.astq().query(sheet, '// ReturnStatement')).argument // const styles = theme => { return {} }
     }
   }
-  warning(sheet.properties, `!sheet.properties at ${info.destPath}`)
+  if (!sheet.properties) return //e.g. HiddenCSS
+  //warning(sheet.properties, `!sheet.properties at ${info.destPath}`)
 
   // ***** modify $??? part in object expression KEY and VALUE's
   const usedRulesetNames: Record<string, boolean> = {};

@@ -89,13 +89,14 @@ const styles = theme => ({
 
   /* Styles applied to the `Paper` component if `scroll="body"`. */
   paperScrollBody: {
-    margin: "48px auto"
+    margin: "48px auto",
+    NAME$paperScrollBody21: true
   },
 
   /* Styles applied to the `Paper` component if `maxWidth="xs"`. */
   paperWidthXs: {
     maxWidth: Math.max(theme.breakpoints.values.xs, 360),
-    "&$paperScrollBody": {
+    "&.paperScrollBody21": {
       [theme.breakpoints.down(
         Math.max(theme.breakpoints.values.xs, 360) + 48 * 2
       )]: {
@@ -107,7 +108,7 @@ const styles = theme => ({
   /* Styles applied to the `Paper` component if `maxWidth="sm"`. */
   paperWidthSm: {
     maxWidth: theme.breakpoints.values.sm,
-    "&$paperScrollBody": {
+    "&.paperScrollBody21": {
       [theme.breakpoints.down(theme.breakpoints.values.sm + 48 * 2)]: {
         margin: 48
       }
@@ -117,7 +118,7 @@ const styles = theme => ({
   /* Styles applied to the `Paper` component if `maxWidth="md"`. */
   paperWidthMd: {
     maxWidth: theme.breakpoints.values.md,
-    "&$paperScrollBody": {
+    "&.paperScrollBody21": {
       [theme.breakpoints.down(theme.breakpoints.values.md + 48 * 2)]: {
         margin: 48
       }
@@ -127,7 +128,7 @@ const styles = theme => ({
   /* Styles applied to the `Paper` component if `maxWidth="lg"`. */
   paperWidthLg: {
     maxWidth: theme.breakpoints.values.lg,
-    "&$paperScrollBody": {
+    "&.paperScrollBody21": {
       [theme.breakpoints.down(theme.breakpoints.values.lg + 48 * 2)]: {
         margin: 48
       }

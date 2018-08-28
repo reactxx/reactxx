@@ -53,11 +53,11 @@ const styles = theme => ({
       "@media (hover: none)": {
         backgroundColor: "transparent"
       },
-      "&$disabled": {
+      "&.disabled45": {
         backgroundColor: "transparent"
       }
     },
-    "&$disabled": {
+    "&.disabled45": {
       color: theme.palette.action.disabled
     }
   },
@@ -98,7 +98,9 @@ const styles = theme => ({
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
-  disabled: {},
+  disabled: {
+    NAME$disabled45: true
+  },
 
   /* Styles applied to the children container element. */
   label: {

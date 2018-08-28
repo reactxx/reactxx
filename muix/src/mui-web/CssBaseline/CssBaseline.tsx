@@ -27,7 +27,13 @@ const styles = theme => ({
       // is not affected by `padding` or `border`.
       boxSizing: "border-box"
     },
-    "*, *::before, *::after": {
+    "*": {
+      boxSizing: "inherit"
+    },
+    "*::before": {
+      boxSizing: "inherit"
+    },
+    "*::after": {
       boxSizing: "inherit"
     },
     body: {

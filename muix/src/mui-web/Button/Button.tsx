@@ -92,11 +92,11 @@ const styles = theme => ({
       "@media (hover: none)": {
         backgroundColor: "transparent"
       },
-      "&$disabled": {
+      "&.disabled7": {
         backgroundColor: "transparent"
       }
     },
-    "&$disabled": {
+    "&.disabled7": {
       color: theme.palette.action.disabled
     }
   },
@@ -182,13 +182,13 @@ const styles = theme => ({
     color: theme.palette.getContrastText(theme.palette.grey[300]),
     backgroundColor: theme.palette.grey[300],
     boxShadow: theme.shadows[2],
-    "&$focusVisible": {
+    "&.focusVisible7": {
       boxShadow: theme.shadows[6]
     },
     "&:active": {
       boxShadow: theme.shadows[8]
     },
-    "&$disabled": {
+    "&.disabled7": {
       color: theme.palette.action.disabled,
       boxShadow: theme.shadows[0],
       backgroundColor: theme.palette.action.disabledBackground
@@ -199,7 +199,7 @@ const styles = theme => ({
       "@media (hover: none)": {
         backgroundColor: theme.palette.grey[300]
       },
-      "&$disabled": {
+      "&.disabled7": {
         backgroundColor: theme.palette.action.disabledBackground
       }
     }
@@ -266,10 +266,14 @@ const styles = theme => ({
   },
 
   /* Styles applied to the ButtonBase root element if the button is keyboard focused. */
-  focusVisible: {},
+  focusVisible: {
+    NAME$focusVisible7: true
+  },
 
   /* Styles applied to the root element if `disabled={true}`. */
-  disabled: {},
+  disabled: {
+    NAME$disabled7: true
+  },
 
   /* Styles applied to the root element if `color="inherit"`. */
   colorInherit: {

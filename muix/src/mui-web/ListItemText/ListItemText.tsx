@@ -58,20 +58,22 @@ const styles = theme => ({
 
   /* Styles applied to the primary `Typography` component. */
   primary: {
-    "&$textDense": {
+    "&.textDense57": {
       fontSize: "inherit"
     }
   },
 
   /* Styles applied to the secondary `Typography` component. */
   secondary: {
-    "&$textDense": {
+    "&.textDense57": {
       fontSize: "inherit"
     }
   },
 
   /* Styles applied to the `Typography` components if `context.dense` is `true`. */
-  textDense: {}
+  textDense: {
+    NAME$textDense57: true
+  }
 });
 
 const ListItemText: Types.CodeSFCWeb<Shape> = (props, context) => {

@@ -16,7 +16,7 @@
             "type": "shell",
             "command": "tsc -b src/ks --verbose ",
             "problemMatcher": [
-                "$tsc"
+                "$tsc-watch"
             ],
             "group": {
                 "kind": "build",

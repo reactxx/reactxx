@@ -71,7 +71,7 @@ const styles = {
     "&::-moz-focus-inner": {
       borderStyle: "none" // Remove Firefox dotted outline.
     },
-    "&$disabled": {
+    "&.disabled8": {
       pointerEvents: "none",
       // Disable link interactions
       cursor: "default"
@@ -79,7 +79,9 @@ const styles = {
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
-  disabled: {},
+  disabled: {
+    NAME$disabled8: true
+  },
 
   /* Styles applied to the root element if keyboard focused. */
   focusVisible: {}

@@ -95,7 +95,10 @@ const styles = theme => {
       WebkitTapHighlightColor: "transparent",
       // Remove grey highlight
       cursor: "pointer",
-      "&:hover, &:focus": {
+      "&:hover": {
+        backgroundColor: emphasize(backgroundColor, 0.08)
+      },
+      "&:focus": {
         backgroundColor: emphasize(backgroundColor, 0.08)
       },
       "&:active": {
@@ -109,7 +112,10 @@ const styles = theme => {
      * `onClick` and `color="primary"` is defined or `clickable={true}`.
      */
     clickableColorPrimary: {
-      "&:hover, &:focus": {
+      "&:hover": {
+        backgroundColor: emphasize(theme.palette.primary.main, 0.08)
+      },
+      "&:focus": {
         backgroundColor: emphasize(theme.palette.primary.main, 0.08)
       },
       "&:active": {
@@ -122,7 +128,10 @@ const styles = theme => {
      * `onClick` and `color="secondary"` is defined or `clickable={true}`.
      */
     clickableColorSecondary: {
-      "&:hover, &:focus": {
+      "&:hover": {
+        backgroundColor: emphasize(theme.palette.secondary.main, 0.08)
+      },
+      "&:focus": {
         backgroundColor: emphasize(theme.palette.secondary.main, 0.08)
       },
       "&:active": {
@@ -208,7 +217,10 @@ const styles = theme => {
     /* Styles applied to the deleteIcon element if `color="primary"`. */
     deleteIconColorPrimary: {
       color: fade(theme.palette.primary.contrastText, 0.65),
-      "&:hover, &:active": {
+      "&:hover": {
+        color: theme.palette.primary.contrastText
+      },
+      "&:active": {
         color: theme.palette.primary.contrastText
       }
     },
@@ -216,7 +228,10 @@ const styles = theme => {
     /* Styles applied to the deleteIcon element if `color="secondary"`. */
     deleteIconColorSecondary: {
       color: fade(theme.palette.primary.contrastText, 0.65),
-      "&:hover, &:active": {
+      "&:hover": {
+        color: theme.palette.primary.contrastText
+      },
+      "&:active": {
         color: theme.palette.primary.contrastText
       }
     }

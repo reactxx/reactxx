@@ -44,7 +44,7 @@ const styles = theme => ({
     marginLeft: -14,
     marginRight: 16,
     // used for row presentation of radio/checkbox
-    "&$disabled": {
+    "&.disabled34": {
       cursor: "default"
     }
   },
@@ -55,11 +55,13 @@ const styles = theme => ({
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
-  disabled: {},
+  disabled: {
+    NAME$disabled34: true
+  },
 
   /* Styles applied to the label's Typography component. */
   label: {
-    "&$disabled": {
+    "&.disabled34": {
       color: theme.palette.text.disabled
     }
   }

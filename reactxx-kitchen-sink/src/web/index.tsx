@@ -19,7 +19,7 @@ import ReactDOM from 'react-dom'
 //import App from '../common/basic/pe4'
 //import App from '../common/component/ce3'
 //import App from '../common/mediaq/me1'
-const App: React.SFC = () => null
+//const App: React.SFC = () => null
 
 //import App from '../common/muix/buttons'
 //import App from '../common/muix/paper'
@@ -34,11 +34,11 @@ const App: React.SFC = () => null
 //import App from '../common/muix/chips'
 //import App from '../common/muix/dialogs'
 
-// import App from '../common/muix-doc/app-bar/index'
+//import App from '../common/muix-doc/app-bar/index'
 // import App from '../common/muix-doc/autocomplete/index'
 // import App from '../common/muix-doc/avatars/index'
 // import App from '../common/muix-doc/badges/index'
-// import App from '../common/muix-doc/bottom-navigation/index'
+ import App from '../common/muix-doc/bottom-navigation/index'
  //import App from '../common/muix-doc/buttons/index'
 // import App from '../common/muix-doc/cards/index'
 // import App from '../common/muix-doc/chips/index'
@@ -63,5 +63,4 @@ const App: React.SFC = () => null
 
 //import App from '../common/muix-doc/cards/SimpleMediaCard'
 
-ReactDOM.render(<App />, document.getElementById('root'))
-
+ReactDOM.render(<App />, document.getElementById('root')) 

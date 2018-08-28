@@ -36,13 +36,13 @@ const styles = theme => ({
   root: {
     display: "block",
     color: theme.palette.text.disabled,
-    "&$active": {
+    "&.active76": {
       color: theme.palette.primary.main
     },
-    "&$completed": {
+    "&.completed76": {
       color: theme.palette.primary.main
     },
-    "&$error": {
+    "&.error76": {
       color: theme.palette.error.main
     }
   },
@@ -55,13 +55,19 @@ const styles = theme => ({
   },
 
   /* Styles applied to the root element if `active={true}`. */
-  active: {},
+  active: {
+    NAME$active76: true
+  },
 
   /* Styles applied to the root element if `completed={true}`. */
-  completed: {},
+  completed: {
+    NAME$completed76: true
+  },
 
   /* Styles applied to the root element if `error={true}`. */
-  error: {}
+  error: {
+    NAME$error76: true
+  }
 });
 
 const StepIcon: Types.CodeSFCWeb<Shape> & {

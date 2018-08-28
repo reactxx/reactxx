@@ -73,10 +73,10 @@ const styles = theme => ({
   textColorInherit: {
     color: "inherit",
     opacity: 0.7,
-    "&$selected": {
+    "&.selected83": {
       opacity: 1
     },
-    "&$disabled": {
+    "&.disabled83": {
       opacity: 0.4
     }
   },
@@ -84,10 +84,10 @@ const styles = theme => ({
   /* Styles applied to the root element if `textColor="primary"`. */
   textColorPrimary: {
     color: theme.palette.text.secondary,
-    "&$selected": {
+    "&.selected83": {
       color: theme.palette.primary.main
     },
-    "&$disabled": {
+    "&.disabled83": {
       color: theme.palette.text.disabled
     }
   },
@@ -95,19 +95,23 @@ const styles = theme => ({
   /* Styles applied to the root element if `textColor="secondary"`. */
   textColorSecondary: {
     color: theme.palette.text.secondary,
-    "&$selected": {
+    "&.selected83": {
       color: theme.palette.secondary.main
     },
-    "&$disabled": {
+    "&.disabled83": {
       color: theme.palette.text.disabled
     }
   },
 
   /* Styles applied to the root element if `selected={true}` (controlled by the Tabs component). */
-  selected: {},
+  selected: {
+    NAME$selected83: true
+  },
 
   /* Styles applied to the root element if `disabled={true}` (controlled by the Tabs component). */
-  disabled: {},
+  disabled: {
+    NAME$disabled83: true
+  },
 
   /* Styles applied to the root element if `fullWidth={true}` (controlled by the Tabs component). */
   fullWidth: {
