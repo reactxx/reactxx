@@ -25,17 +25,17 @@ const styles = theme => ({
   root: {
     display: "block",
     textAlign: "inherit",
-    "&:hover .focusHighlight11": {
+    "&:hover .focusHighlight12": {
       opacity: theme.palette.action.hoverOpacity
     },
-    "&.focusVisible11 .focusHighlight11": {
+    "&.focusVisible12 .focusHighlight12": {
       opacity: 0.12
     }
   },
 
   /* Styles applied to the ButtonBase root element if the action area is keyboard focused. */
   focusVisible: {
-    NAME$focusVisible11: true
+    NAME$focusVisible12: true
   },
 
   /* Styles applied to the overlay that covers the action area when it is keyboard focused. */
@@ -51,7 +51,7 @@ const styles = theme => ({
     transition: theme.transitions.create("opacity", {
       duration: theme.transitions.duration.short
     }),
-    NAME$focusHighlight11: true
+    NAME$focusHighlight12: true
   }
 });
 

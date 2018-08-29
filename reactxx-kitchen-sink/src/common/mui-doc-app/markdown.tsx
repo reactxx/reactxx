@@ -146,13 +146,11 @@ class ReactxxDocExample extends React.Component<{ path: string }> {
     }
 }
 
-
 interface Shape extends Types.ShapeDefault {
     web: 'root'
     props: { text?: string }
     theme: Theme
 }
-const MarkdownElementCreator = withStyles<Shape>(styles as Types.SheetCreatorX<Shape>, Markdown, { isMui: true });
-const MarkdownElementComponent = MarkdownElementCreator();
+const MarkdownElementComponent = withStyles<Shape>(styles as Types.SheetCreatorX<Shape>, Markdown, { isMui: true })()
 
 export default MarkdownElementComponent

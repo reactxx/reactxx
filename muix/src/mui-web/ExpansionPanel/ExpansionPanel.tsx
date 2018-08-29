@@ -74,7 +74,7 @@ const styles = theme => {
         borderBottomRightRadius: 2,
         ...edgeFix
       },
-      "&.expanded28 + &": {
+      "&.expanded29 + &": {
         "&:before": {
           display: "none"
         }
@@ -93,7 +93,7 @@ const styles = theme => {
       "&:before": {
         opacity: 0
       },
-      NAME$expanded28: true
+      NAME$expanded29: true
     },
 
     /* Styles applied to the root element if `disabled={true}`. */

@@ -1,11 +1,11 @@
 ﻿{
   "compileOnSave": true,
   "compilerOptions": {
-    "watch": true,
+    //"watch": true,
     "target": "es5",
     "module": "system",
     "moduleResolution": "node",
-    "allowJs": true,
+    "allowJs": false,
     //"declaration": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -17,7 +17,7 @@
     "importHelpers": true,
     "strictNullChecks": false,
     "downlevelIteration": true,
-    "strict": true,
+    "strict": false,
     "strictFunctionTypes": false,
     "noImplicitAny": false,
     "removeComments": true,
@@ -31,22 +31,16 @@
         "src/fela/index"
       ],
       "reactxx-animation": [
-        "src/animation/web/index"
+        "src/animation/index"
+      ],
+      "reactxx-basic": [
+        "src/basic/index"
       ],
       "reactxx-primitives": [
         "src/primitives/web/index"
       ],
       "reactxx-mediaq": [
-        "src/mediaq/web/index"
-      ],
-      "reactxx-basic": [
-        "src/basic/index"
-      ],
-      "reactxx-activable": [
-        "src/activable/web/index"
-      ],
-      "reactxx": [
-        "src/reactxx/web/index"
+        "src/mediaq/web/web"
       ],
       "reactxx-icons/*": [
         "src/icons/*"
@@ -60,23 +54,34 @@
     },
     "lib": [
       "dom",
-      "es2015",
+      "es2017",
       "esnext.asynciterable"
     ]
   },
   "include": [
     //"src/**/*",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/mui-web/**/*.js",
-    "node_modules/reactxx-mdi/typings.ts"
+    "src/sheeter/**/*",
+    "src/fela/**/*",
+    "src/basic/**/*",
+    "src/primitives/**/*",
+    "src/media/**/*",
+    "src/animation/**/*",
+    "src/mui-web/**/*",
+    "src/icons/**/*",
+    "src/muix/**/*",
+    "src/ks/common/muix-doc/**/*",
+    "src/ks/common/mui-doc-app/**/*",
+    "src/ks/web/**/*",
+    "src/typings.d.ts",
   ],
   "exclude": [
-    "src/ks/typings.d.ts",
+    "src/*/typings.d.ts",
     "src/trash",
-    "src/ks/common/muix-doc",
+    "src/ks/common/muix",
+    "src/ks/native",
     "src/icons/native",
+    "src/test",
+    //"src/muix/reactxx-mui-web"
     "src/muix/reactxx-mui-web"
-    //"src/muix/reactxx-mui-web/**/*"
   ]
 }

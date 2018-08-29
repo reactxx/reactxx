@@ -57,7 +57,7 @@ const styles = theme => ({
     textAlign: "left",
     paddingTop: 12,
     paddingBottom: 12,
-    "&.selected53": {
+    "&.selected54": {
       backgroundColor: theme.palette.action.selected
     }
   },
@@ -120,7 +120,7 @@ const styles = theme => ({
 
   /* Styles applied to the root element if `selected={true}`. */
   selected: {
-    NAME$selected53: true
+    NAME$selected54: true
   }
 });
 

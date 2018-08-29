@@ -50,10 +50,10 @@ const styles = theme => ({
     maxWidth: 168,
     color: theme.palette.text.secondary,
     flex: "1",
-    "&.iconOnly6": {
+    "&.iconOnly7": {
       paddingTop: 16
     },
-    "&.selected6": {
+    "&.selected7": {
       paddingTop: 6,
       color: theme.palette.primary.main
     }
@@ -61,12 +61,12 @@ const styles = theme => ({
 
   /* Styles applied to the root element if selected. */
   selected: {
-    NAME$selected6: true
+    NAME$selected7: true
   },
 
   /* Styles applied to the root element if `showLabel={false}` and not selected. */
   iconOnly: {
-    NAME$iconOnly6: true
+    NAME$iconOnly7: true
   },
 
   /* Styles applied to the span element that wraps the icon and label. */
@@ -85,11 +85,11 @@ const styles = theme => ({
     opacity: 1,
     transition: "font-size 0.2s, opacity 0.2s",
     transitionDelay: "0.1s",
-    "&.iconOnly6": {
+    "&.iconOnly7": {
       opacity: 0,
       transitionDelay: "0s"
     },
-    "&.selected6": {
+    "&.selected7": {
       fontSize: theme.typography.pxToRem(14)
     }
   }

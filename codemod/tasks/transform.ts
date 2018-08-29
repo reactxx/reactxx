@@ -49,6 +49,9 @@ export const transform = (code: string, info: Ast.MUISourceInfo, dts: string) =>
             case 'internal/SwitchBase':
                 dts = dts.replace("export type SwitchBase = React.Component<SwitchBaseProps>;", "")
                 break
+            case 'Hidden/Hidden':
+                dts = dts.replace("implementation?: 'js' | 'css';", "implementation?:string")
+                break
             case 'styles/createMuiTheme':
                 dts = dts.replace("import { Overrides } from './overrides';", "")
                 dts = dts.replace("import { ComponentsProps } from './props';", "")

@@ -51,10 +51,10 @@ const styles = theme => ({
   root: {
     display: "flex",
     alignItems: "center",
-    "&.alternativeLabel77": {
+    "&.alternativeLabel78": {
       flexDirection: "column"
     },
-    "&.disabled77": {
+    "&.disabled78": {
       cursor: "default"
     }
   },
@@ -68,54 +68,54 @@ const styles = theme => ({
   /* Styles applied to the `Typography` component which wraps `children`. */
   label: {
     color: theme.palette.text.secondary,
-    "&.active77": {
+    "&.active78": {
       color: theme.palette.text.primary,
       fontWeight: 500
     },
-    "&.completed77": {
+    "&.completed78": {
       color: theme.palette.text.primary,
       fontWeight: 500
     },
-    "&.alternativeLabel77": {
+    "&.alternativeLabel78": {
       textAlign: "center",
       marginTop: 16
     },
-    "&.error77": {
+    "&.error78": {
       color: theme.palette.error.main
     }
   },
 
   /* Styles applied to the `Typography` component if `active={true}`. */
   active: {
-    NAME$active77: true
+    NAME$active78: true
   },
 
   /* Styles applied to the `Typography` component if `completed={true}`. */
   completed: {
-    NAME$completed77: true
+    NAME$completed78: true
   },
 
   /* Styles applied to the root element and `Typography` component if `error={true}`. */
   error: {
-    NAME$error77: true
+    NAME$error78: true
   },
 
   /* Styles applied to the root element and `Typography` component if `disabled={true}`. */
   disabled: {
-    NAME$disabled77: true
+    NAME$disabled78: true
   },
 
   /* Styles applied to the `icon` container element. */
   iconContainer: {
     paddingRight: 8,
-    "&.alternativeLabel77": {
+    "&.alternativeLabel78": {
       paddingRight: 0
     }
   },
 
   /* Styles applied to the root & icon container and `Typography` if `alternativeLabel={true}`. */
   alternativeLabel: {
-    NAME$alternativeLabel77: true
+    NAME$alternativeLabel78: true
   },
 
   /* Styles applied to the container element which wraps `Typography` and `optional`. */

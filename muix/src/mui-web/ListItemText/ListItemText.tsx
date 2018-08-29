@@ -58,21 +58,21 @@ const styles = theme => ({
 
   /* Styles applied to the primary `Typography` component. */
   primary: {
-    "&.textDense57": {
+    "&.textDense58": {
       fontSize: "inherit"
     }
   },
 
   /* Styles applied to the secondary `Typography` component. */
   secondary: {
-    "&.textDense57": {
+    "&.textDense58": {
       fontSize: "inherit"
     }
   },
 
   /* Styles applied to the `Typography` components if `context.dense` is `true`. */
   textDense: {
-    NAME$textDense57: true
+    NAME$textDense58: true
   }
 });
 

@@ -44,22 +44,22 @@ const styles = theme => ({
     lineHeight: "1em",
     minHeight: "1em",
     margin: 0,
-    "&.error36": {
+    "&.error37": {
       color: theme.palette.error.main
     },
-    "&.disabled36": {
+    "&.disabled37": {
       color: theme.palette.text.disabled
     }
   },
 
   /* Styles applied to the root element if `error={true}`. */
   error: {
-    NAME$error36: true
+    NAME$error37: true
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
-    NAME$disabled36: true
+    NAME$disabled37: true
   },
 
   /* Styles applied to the root element if `margin="dense"`. */

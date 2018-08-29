@@ -34,13 +34,13 @@ const styles = theme => ({
     verticalAlign: "middle",
     // We disable the focus ring for mouse, touch and keyboard users.
     outline: "none",
-    "&.selected91": {
+    "&.selected92": {
       backgroundColor:
         theme.palette.type === "light"
           ? "rgba(0, 0, 0, 0.04)" // grey[100]
           : "rgba(255, 255, 255, 0.08)"
     },
-    "&.hover91:hover": {
+    "&.hover92:hover": {
       backgroundColor:
         theme.palette.type === "light"
           ? "rgba(0, 0, 0, 0.07)" // grey[200]
@@ -50,12 +50,12 @@ const styles = theme => ({
 
   /* Styles applied to the root element if `selected={true}`. */
   selected: {
-    NAME$selected91: true
+    NAME$selected92: true
   },
 
   /* Styles applied to the root element if `hover={true}`. */
   hover: {
-    NAME$hover91: true
+    NAME$hover92: true
   },
 
   /* Styles applied to the root element if table variant = 'head'. */

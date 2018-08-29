@@ -79,7 +79,7 @@ SimpleDialog['propTypes'] = {
   selectedValue: PropTypes.string,
 };
 
-const SimpleDialogWrapped = withStylesCreator(styles as any, SimpleDialog)();
+const SimpleDialogWrapped = withStylesCreator<any>(styles as any, SimpleDialog)();
 
 class SimpleDialogDemo extends React.Component<any,any> {
   state: any = {

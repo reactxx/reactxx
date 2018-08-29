@@ -36,13 +36,13 @@ const styles = theme => ({
   root: {
     display: "block",
     color: theme.palette.text.disabled,
-    "&.active76": {
+    "&.active77": {
       color: theme.palette.primary.main
     },
-    "&.completed76": {
+    "&.completed77": {
       color: theme.palette.primary.main
     },
-    "&.error76": {
+    "&.error77": {
       color: theme.palette.error.main
     }
   },
@@ -56,17 +56,17 @@ const styles = theme => ({
 
   /* Styles applied to the root element if `active={true}`. */
   active: {
-    NAME$active76: true
+    NAME$active77: true
   },
 
   /* Styles applied to the root element if `completed={true}`. */
   completed: {
-    NAME$completed76: true
+    NAME$completed77: true
   },
 
   /* Styles applied to the root element if `error={true}`. */
   error: {
-    NAME$error76: true
+    NAME$error77: true
   }
 });
 

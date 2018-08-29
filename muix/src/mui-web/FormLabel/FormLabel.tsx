@@ -38,31 +38,31 @@ const styles = theme => ({
     fontSize: theme.typography.pxToRem(16),
     lineHeight: 1,
     padding: 0,
-    "&.focused37": {
+    "&.focused38": {
       color:
         theme.palette.primary[theme.palette.type === "light" ? "dark" : "light"]
     },
-    "&.disabled37": {
+    "&.disabled38": {
       color: theme.palette.text.disabled
     },
-    "&.error37": {
+    "&.error38": {
       color: theme.palette.error.main
     }
   },
 
   /* Styles applied to the root element if `focused={true}`. */
   focused: {
-    NAME$focused37: true
+    NAME$focused38: true
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
-    NAME$disabled37: true
+    NAME$disabled38: true
   },
 
   /* Styles applied to the root element if `error={true}`. */
   error: {
-    NAME$error37: true
+    NAME$error38: true
   },
 
   /* Styles applied to the root element if `filled={true}`. */
@@ -71,7 +71,7 @@ const styles = theme => ({
   /* Styles applied to the root element if `required={true}`. */
   required: {},
   asterisk: {
-    "&.error37": {
+    "&.error38": {
       color: theme.palette.error.main
     }
   }

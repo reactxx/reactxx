@@ -12,7 +12,7 @@ import HiddenCss from "./HiddenCss";
 import { StandardProps } from "..";
 import { Breakpoint } from "../styles/createBreakpoints";
 export interface HiddenProps extends StandardProps<{}, never> {
-  implementation?: "js" | "css";
+  implementation?: string;
   initialWidth?: Breakpoint;
   lgDown?: boolean;
   lgUp?: boolean;

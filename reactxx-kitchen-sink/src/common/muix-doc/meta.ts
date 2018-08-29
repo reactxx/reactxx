@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------------------
 
 
- export interface SitemapNode { id: string; dir: string; title: string; examples: string[] }
+ export interface SitemapNode { id: string; dir: string; title: string; idx: number; examples: string[] }
 
 import app_bar from './app-bar/app-bar.md'
 import app_bar$ButtonAppBar from './app-bar/ButtonAppBar'
@@ -363,7 +363,8 @@ export const siteMap = [
       "DenseAppBar",
       "MenuAppBar",
       "SimpleAppBar"
-    ]
+    ],
+    "idx": 0
   },
   {
     "dir": "autocomplete",
@@ -371,7 +372,8 @@ export const siteMap = [
     "title": "Autocomplete",
     "examples": [
       "IntegrationDownshift"
-    ]
+    ],
+    "idx": 1
   },
   {
     "dir": "avatars",
@@ -381,7 +383,8 @@ export const siteMap = [
       "IconAvatars",
       "ImageAvatars",
       "LetterAvatars"
-    ]
+    ],
+    "idx": 2
   },
   {
     "dir": "badges",
@@ -390,7 +393,8 @@ export const siteMap = [
     "examples": [
       "CustomizedBadge",
       "SimpleBadge"
-    ]
+    ],
+    "idx": 3
   },
   {
     "dir": "bottom-navigation",
@@ -399,7 +403,8 @@ export const siteMap = [
     "examples": [
       "LabelBottomNavigation",
       "SimpleBottomNavigation"
-    ]
+    ],
+    "idx": 4
   },
   {
     "dir": "buttons",
@@ -416,7 +421,8 @@ export const siteMap = [
       "IconLabelButtons",
       "OutlinedButtons",
       "TextButtons"
-    ]
+    ],
+    "idx": 5
   },
   {
     "dir": "cards",
@@ -428,7 +434,8 @@ export const siteMap = [
       "MediaControlCard",
       "RecipeReviewCard",
       "SimpleCard"
-    ]
+    ],
+    "idx": 6
   },
   {
     "dir": "chips",
@@ -437,7 +444,8 @@ export const siteMap = [
     "examples": [
       "Chips",
       "ChipsArray"
-    ]
+    ],
+    "idx": 7
   },
   {
     "dir": "dialogs",
@@ -451,7 +459,8 @@ export const siteMap = [
       "FullScreenDialog",
       "ScrollDialog",
       "SimpleDialog"
-    ]
+    ],
+    "idx": 8
   },
   {
     "dir": "dividers",
@@ -460,7 +469,8 @@ export const siteMap = [
     "examples": [
       "InsetDividers",
       "ListDividers"
-    ]
+    ],
+    "idx": 9
   },
   {
     "dir": "drawers",
@@ -474,7 +484,8 @@ export const siteMap = [
       "ResponsiveDrawer",
       "SwipeableTemporaryDrawer",
       "TemporaryDrawer"
-    ]
+    ],
+    "idx": 10
   },
   {
     "dir": "expansion-panels",
@@ -484,7 +495,8 @@ export const siteMap = [
       "ControlledExpansionPanels",
       "DetailedExpansionPanel",
       "SimpleExpansionPanel"
-    ]
+    ],
+    "idx": 11
   },
   {
     "dir": "grid-list",
@@ -495,7 +507,8 @@ export const siteMap = [
       "ImageGridList",
       "SingleLineGridList",
       "TitlebarGridList"
-    ]
+    ],
+    "idx": 12
   },
   {
     "dir": "lists",
@@ -512,7 +525,8 @@ export const siteMap = [
       "SelectedListItem",
       "SimpleList",
       "SwitchListSecondary"
-    ]
+    ],
+    "idx": 13
   },
   {
     "dir": "menus",
@@ -526,7 +540,8 @@ export const siteMap = [
       "RenderPropsMenu",
       "SimpleListMenu",
       "SimpleMenu"
-    ]
+    ],
+    "idx": 14
   },
   {
     "dir": "paper",
@@ -534,7 +549,8 @@ export const siteMap = [
     "title": "Paper",
     "examples": [
       "PaperSheet"
-    ]
+    ],
+    "idx": 15
   },
   {
     "dir": "pickers",
@@ -544,7 +560,8 @@ export const siteMap = [
       "DateAndTimePickers",
       "DatePickers",
       "TimePickers"
-    ]
+    ],
+    "idx": 16
   },
   {
     "dir": "progress",
@@ -560,7 +577,8 @@ export const siteMap = [
       "LinearDeterminate",
       "LinearIndeterminate",
       "LinearQuery"
-    ]
+    ],
+    "idx": 17
   },
   {
     "dir": "selection-controls",
@@ -576,7 +594,8 @@ export const siteMap = [
       "Switches",
       "SwitchesGroup",
       "SwitchLabels"
-    ]
+    ],
+    "idx": 18
   },
   {
     "dir": "selects",
@@ -588,7 +607,8 @@ export const siteMap = [
       "MultipleSelect",
       "NativeSelects",
       "SimpleSelect"
-    ]
+    ],
+    "idx": 19
   },
   {
     "dir": "snackbars",
@@ -602,7 +622,8 @@ export const siteMap = [
       "LongTextSnackbar",
       "PositionedSnackbar",
       "SimpleSnackbar"
-    ]
+    ],
+    "idx": 20
   },
   {
     "dir": "steppers",
@@ -619,7 +640,8 @@ export const siteMap = [
       "SwipeableTextMobileStepper",
       "TextMobileStepper",
       "VerticalLinearStepper"
-    ]
+    ],
+    "idx": 21
   },
   {
     "dir": "tables",
@@ -630,7 +652,8 @@ export const siteMap = [
       "CustomPaginationActionsTable",
       "EnhancedTable",
       "SimpleTable"
-    ]
+    ],
+    "idx": 22
   },
   {
     "dir": "tabs",
@@ -648,7 +671,8 @@ export const siteMap = [
       "ScrollableTabsButtonPrevent",
       "SimpleTabs",
       "TabsWrappedLabel"
-    ]
+    ],
+    "idx": 23
   },
   {
     "dir": "text-fields",
@@ -663,7 +687,8 @@ export const siteMap = [
       "InputWithIcon",
       "TextFieldMargins",
       "TextFields"
-    ]
+    ],
+    "idx": 24
   },
   {
     "dir": "tooltips",
@@ -679,6 +704,7 @@ export const siteMap = [
       "TransitionsTooltips",
       "TriggersTooltips",
       "VariableWidth"
-    ]
+    ],
+    "idx": 25
   }
 ]

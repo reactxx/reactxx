@@ -106,7 +106,7 @@ const styles = theme => {
       fontSize: theme.typography.pxToRem(16),
       lineHeight: "1.1875em",
       // Reset (19px), match the native input line-height
-      "&.disabled46": {
+      "&.disabled47": {
         color: theme.palette.text.disabled
       }
     },
@@ -116,17 +116,17 @@ const styles = theme => {
       "label + &": {
         marginTop: 16
       },
-      NAME$formControl46: true
+      NAME$formControl47: true
     },
 
     /* Styles applied to the root element if the component is focused. */
     focused: {
-      NAME$focused46: true
+      NAME$focused47: true
     },
 
     /* Styles applied to the root element if `disabled={true}`. */
     disabled: {
-      NAME$disabled46: true
+      NAME$disabled47: true
     },
 
     /* Styles applied to the root element if `disableUnderline={false}`. */
@@ -148,10 +148,10 @@ const styles = theme => {
         }),
         pointerEvents: "none" // Transparent to the hover style.
       },
-      "&.focused46:after": {
+      "&.focused47:after": {
         transform: "scaleX(1)"
       },
-      "&.error46:after": {
+      "&.error47:after": {
         borderBottomColor: theme.palette.error.main,
         transform: "scaleX(1)" // error is always underlined in red
       },
@@ -168,17 +168,17 @@ const styles = theme => {
         }),
         pointerEvents: "none" // Transparent to the hover style.
       },
-      "&:hover:not(.disabled46):not(.focused46):not(.error46):before": {
+      "&:hover:not(.disabled47):not(.focused47):not(.error47):before": {
         borderBottom: `2px solid ${theme.palette.text.primary}`
       },
-      "&.disabled46:before": {
+      "&.disabled47:before": {
         borderBottom: `1px dotted ${bottomLineColor}`
       }
     },
 
     /* Styles applied to the root element if `error={true}`. */
     error: {
-      NAME$error46: true
+      NAME$error47: true
     },
 
     /* Styles applied to the root element if `multiline={true}`. */
@@ -227,7 +227,7 @@ const styles = theme => {
         "-webkit-appearance": "none"
       },
       // Show and hide the placeholder logic
-      "label[data-shrink=false] + .formControl46 &": {
+      "label[data-shrink=false] + .formControl47 &": {
         "&::-webkit-input-placeholder": placeholderHidden,
         "&::-moz-placeholder": placeholderHidden,
         // Firefox 19+
@@ -242,7 +242,7 @@ const styles = theme => {
         // IE 11
         "&:focus::-ms-input-placeholder": placeholderVisible // Edge
       },
-      "&.disabled46": {
+      "&.disabled47": {
         opacity: 1 // Reset iOS opacity
       }
     },

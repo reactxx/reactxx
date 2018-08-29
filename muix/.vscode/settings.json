@@ -1,4 +1,4 @@
 {
     "git.ignoreLimitWarning": true,
-    "typescript.autoClosingTags": true
+    "typescript.autoClosingTags": true,
 }

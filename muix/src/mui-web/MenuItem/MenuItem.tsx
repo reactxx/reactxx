@@ -33,12 +33,12 @@ const styles = theme => ({
     whiteSpace: "nowrap",
     paddingLeft: 16,
     paddingRight: 16,
-    "&.selected60": {}
+    "&.selected61": {}
   },
 
   /* Styles applied to the root element if `selected={true}`. */
   selected: {
-    NAME$selected60: true
+    NAME$selected61: true
   }
 });
 

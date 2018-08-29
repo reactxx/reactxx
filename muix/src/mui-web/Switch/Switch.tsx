@@ -51,7 +51,7 @@ const styles = theme => ({
     width: 20,
     height: 20,
     borderRadius: "50%",
-    NAME$icon82: true
+    NAME$icon83: true
   },
 
   /* Styles applied the icon element component if `checked={true}`. */
@@ -69,23 +69,23 @@ const styles = theme => ({
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
     }),
-    NAME$switchBase82: true
+    NAME$switchBase83: true
   },
 
   /* Styles applied to the internal `SwitchBase` component's `checked` class. */
   checked: {
     transform: "translateX(14px)",
-    "& + .bar82": {
+    "& + .bar83": {
       opacity: 0.5
     },
-    NAME$checked82: true
+    NAME$checked83: true
   },
 
   /* Styles applied to the internal SwitchBase component's root element if `color="primary"`. */
   colorPrimary: {
-    "&.checked82": {
+    "&.checked83": {
       color: theme.palette.primary.main,
-      "& + .bar82": {
+      "& + .bar83": {
         backgroundColor: theme.palette.primary.main
       }
     }
@@ -93,9 +93,9 @@ const styles = theme => ({
 
   /* Styles applied to the internal SwitchBase component's root element if `color="secondary"`. */
   colorSecondary: {
-    "&.checked82": {
+    "&.checked83": {
       color: theme.palette.secondary.main,
-      "& + .bar82": {
+      "& + .bar83": {
         backgroundColor: theme.palette.secondary.main
       }
     }
@@ -103,18 +103,18 @@ const styles = theme => ({
 
   /* Styles applied to the internal SwitchBase component's disabled class. */
   disabled: {
-    "& + .bar82": {
+    "& + .bar83": {
       opacity: theme.palette.type === "light" ? 0.12 : 0.1
     },
-    "& .icon82": {
+    "& .icon83": {
       boxShadow: theme.shadows[1]
     },
-    "&.switchBase82": {
+    "&.switchBase83": {
       color:
         theme.palette.type === "light"
           ? theme.palette.grey[400]
           : theme.palette.grey[800],
-      "& + .bar82": {
+      "& + .bar83": {
         backgroundColor:
           theme.palette.type === "light"
             ? theme.palette.common.black
@@ -142,7 +142,7 @@ const styles = theme => ({
         ? theme.palette.common.black
         : theme.palette.common.white,
     opacity: theme.palette.type === "light" ? 0.38 : 0.3,
-    NAME$bar82: true
+    NAME$bar83: true
   }
 });
 

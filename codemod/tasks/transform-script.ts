@@ -178,6 +178,9 @@ export const scripts: Record<string, Script> = {
         addFields: '  static muiSupportAuto'
     },
     "Hidden/Hidden": {
+        replace: {
+            "implementation?: 'js' | 'css';":"implementation?:string"
+        },
         addFields: "  inputRef",
     },
     "Hidden/HiddenCss": {

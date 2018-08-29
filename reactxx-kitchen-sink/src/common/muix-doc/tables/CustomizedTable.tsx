@@ -15,7 +15,7 @@ import TableHead from 'reactxx-mui-web/TableHead/TableHead';
 import TableRow from 'reactxx-mui-web/TableRow/TableRow';
 import Paper from 'reactxx-mui-web/Paper/Paper';
 
-const CustomTableCell = withStylesCreator(theme => ({
+const CustomTableCell = withStylesCreator((theme: any) => ({
   head: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
