@@ -9,6 +9,8 @@ import remarkReact from "remark-react"
 import deepmerge from "deepmerge"
 import { sanitizeGhSchema } from "./hast-util-sanitize"
 
+export const htmlTagClassName = 'rxx-markdown'
+
 export interface TagDefs {
     [propName: string]: TagDef<{}>
 }
@@ -54,7 +56,7 @@ export const markdownDefine = (tagDefs: TagDefs = {}) => {
         .use(remarkReact, {
             createElement: (name, props, children) => {
                 if (typeof name !== 'string' || props) return React.createElement(name, props, children)
-                return React.createElement(name, {className: 'rxx-markdown'}, children)
+                return React.createElement(name, {className: htmlTagClassName}, children)
             },
             sanitize: deepmerge(sanitizeGhSchema, { 
                 tagNames,

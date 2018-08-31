@@ -4,7 +4,7 @@ import withStyles, { Theme } from 'reactxx-mui-web/styles/withStyles';
 import { Types } from 'reactxx-basic';
 import ReactxxDocExample from './example'
 
-import {markdownDefine, MarkdownDefinition, markdownToReact, TagDef} from './markup'
+import { markdownDefine, MarkdownDefinition, TagDef, markdownToReact, htmlTagClassName } from './markup'
 
 const markdownDefinition = markdownDefine({
     ReactxxDocExample: {
@@ -15,7 +15,7 @@ const markdownDefinition = markdownDefine({
                 place: '::content::'
             }
         }
-    } as TagDef<{text: string}>
+    } as TagDef<{ text: string }>
 })
 
 interface Shape extends Types.ShapeDefault {
@@ -24,13 +24,13 @@ interface Shape extends Types.ShapeDefault {
     theme: Theme
 }
 
-const styles: Types.SheetCreatorX<Shape> = theme => ({
+const styles = theme => ({
     root: {
         $web: {
             fontFamily: theme.typography.fontFamily,
             PropertiesfontSize: 16,
             color: theme.palette.text.primary,
-            '& .rxx-markdown pre, & .rxx-markdown pre[class*="language-"]': {
+            [`& ${htmlTagClassName} pre, & ${htmlTagClassName} pre[class*="language-"]`]: {
                 margin: '24px 0',
                 padding: '12px 18px',
                 backgroundColor: theme.palette.background.paper,
@@ -38,7 +38,7 @@ const styles: Types.SheetCreatorX<Shape> = theme => ({
                 overflow: 'auto',
                 WebkitOverflowScrolling: 'touch', // iOS momentum scrolling.
             },
-            '& .rxx-markdown code': {
+            [`& ${htmlTagClassName} code`]: {
                 display: 'inline-block',
                 lineHeight: 1.6,
                 fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
@@ -47,40 +47,40 @@ const styles: Types.SheetCreatorX<Shape> = theme => ({
                 backgroundColor: theme.palette.background.paper,
                 fontSize: 14,
             },
-            '& .rxx-markdown p code, & .rxx-markdown ul code, & .rxx-markdown pre code': {
+            [`& ${htmlTagClassName} p code, & ${htmlTagClassName} ul code, & ${htmlTagClassName} pre code`]: {
                 fontSize: 14,
                 lineHeight: 1.6,
             },
-            '& .rxx-markdown h1': {
+            [`& ${htmlTagClassName} h1`]: {
                 ...theme.typography.display2,
                 color: theme.palette.text.secondary,
                 margin: '32px 0 16px',
             },
-            '& .rxx-markdown h2': {
+            [`& ${htmlTagClassName} h2`]: {
                 ...theme.typography.display1,
                 color: theme.palette.text.secondary,
                 margin: '32px 0 24px',
             },
-            '& .rxx-markdown h3': {
+            [`& ${htmlTagClassName} h3`]: {
                 ...theme.typography.headline,
                 color: theme.palette.text.secondary,
                 margin: '32px 0 24px',
             },
-            '& .rxx-markdown h4': {
+            [`& ${htmlTagClassName} h4`]: {
                 ...theme.typography.title,
                 color: theme.palette.text.secondary,
                 margin: '24px 0 16px',
             },
-            '& .rxx-markdown p, & .rxx-markdown ul, & .rxx-markdown ol': {
+            [`& ${htmlTagClassName} p, & ${htmlTagClassName} ul, & ${htmlTagClassName} ol`]: {
                 lineHeight: 1.6,
             },
-            '& .rxx-markdown h1 code, & .rxx-markdown h2 code, & .rxx-markdown h3 code, & .rxx-markdown h4 code': {
+            [`& ${htmlTagClassName} h1 code, & ${htmlTagClassName} h2 code, & ${htmlTagClassName} h3 code, & ${htmlTagClassName} h4 code`]: {
                 fontSize: 'inherit',
                 lineHeight: 'inherit',
                 // Remove scroll on small screens.
                 wordBreak: 'break-word',
             },
-            '& .rxx-markdown table': {
+            [`& ${htmlTagClassName} table`]: {
                 width: '100%',
                 display: 'block',
                 overflowX: 'auto',
@@ -89,57 +89,57 @@ const styles: Types.SheetCreatorX<Shape> = theme => ({
                 borderSpacing: 0,
                 overflow: 'hidden',
             },
-            '& .rxx-markdown thead': {
+            [`& ${htmlTagClassName} thead`]: {
                 fontSize: 14,
                 fontWeight: theme.typography.fontWeightMedium,
                 color: theme.palette.text.secondary,
             },
-            '& .rxx-markdown tbody': {
+            [`& ${htmlTagClassName} tbody`]: {
                 fontSize: 14,
                 lineHeight: 1.5,
                 color: theme.palette.text.primary,
             },
-            '& .rxx-markdown td': {
+            [`& ${htmlTagClassName} td`]: {
                 borderBottom: `1px solid ${theme.palette.divider}`,
                 padding: '8px 16px 8px 8px',
                 textAlign: 'left',
             },
-            '& .rxx-markdown td:last-child': {
+            [`& ${htmlTagClassName} td:last-child`]: {
                 paddingRight: 24,
             },
-            '& .rxx-markdown td compact': {
+            [`& ${htmlTagClassName} td compact`]: {
                 paddingRight: 24,
             },
-            '& .rxx-markdown td code': {
+            [`& ${htmlTagClassName} td code`]: {
                 fontSize: 13,
                 lineHeight: 1.6,
             },
-            '& .rxx-markdown th': {
+            [`& ${htmlTagClassName} th`]: {
                 whiteSpace: 'pre',
                 borderBottom: `1px solid ${theme.palette.divider}`,
                 fontWeight: theme.typography.fontWeightMedium,
                 padding: '0 16px 0 8px',
                 textAlign: 'left',
             },
-            '& .rxx-markdown th:last-child': {
+            [`& ${htmlTagClassName} th:last-child`]: {
                 paddingRight: 24,
             },
-            '& .rxx-markdown tr': {
+            [`& ${htmlTagClassName} tr`]: {
                 height: 48,
             },
-            '& .rxx-markdown thead tr': {
+            [`& ${htmlTagClassName} thead tr`]: {
                 height: 64,
             },
-            '& .rxx-markdown strong': {
+            [`& ${htmlTagClassName} strong`]: {
                 fontWeight: theme.typography.fontWeightMedium,
             },
-            '& .rxx-markdown blockquote': {
+            [`& ${htmlTagClassName} blockquote`]: {
                 borderLeft: `5px solid ${theme.palette.text.hint}`,
                 backgroundColor: theme.palette.background.paper,
                 padding: '4px 24px',
                 margin: '24px 0',
             },
-            '& .rxx-markdown a, & .rxx-markdown a code': {
+            [`& ${htmlTagClassName} a, & ${htmlTagClassName} a code`]: {
                 // Style taken from the Link component
                 color: theme.palette.secondary.main,
                 textDecoration: 'none',
@@ -147,7 +147,7 @@ const styles: Types.SheetCreatorX<Shape> = theme => ({
                     textDecoration: 'underline',
                 },
             },
-            '& .rxx-markdown img': {
+            [`& ${htmlTagClassName} img`]: {
                 maxWidth: '100%',
             },
         },
