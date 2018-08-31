@@ -10,7 +10,7 @@ const code = `
 
 # Click away listener
 
-<p class="description">Listen for click events that occur somewhere in the document, outside of the element itself.</p>
+### Listen for click events that occur somewhere in the document, outside of the element itself.
 
 ## Simple menu
 

@@ -10,7 +10,7 @@ const code = `
 
 # Bottom Navigation
 
-<p class="description">Bottom navigation bars allow movement between primary destinations in an app.</p>
+### Bottom navigation bars allow movement between primary destinations in an app.
 
 [Bottom navigation](https://material.io/design/components/bottom-navigation.html) bars display three to five destinations at the bottom of a screen. Each destination is represented by an icon and an optional text label. When a bottom navigation icon is tapped, the user is taken to the top-level navigation destination associated with that icon.
 

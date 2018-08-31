@@ -10,7 +10,7 @@ const code = `
 
 # Steppers
 
-<p class="description">Steppers convey progress through numbered steps.</p>
+### Steppers convey progress through numbered steps.
 
 [Steppers](https://material.io/archive/guidelines/components/steppers.html) display progress through a sequence of logical and numbered steps. They may also be used for navigation.
 Steppers may display a transient feedback message after a step is saved.

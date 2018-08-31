@@ -10,7 +10,7 @@ const code = `
 
 # Popover
 
-<p class="description">A Popover can be used to display some content on top of another.</p>
+### A Popover can be used to display some content on top of another.
 
 Things to know when using the \`Popover\` component:
 - The component is build on top of the [\`Modal\`](/utils/modal) component.

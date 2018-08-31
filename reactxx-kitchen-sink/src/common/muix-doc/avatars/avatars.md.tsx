@@ -10,7 +10,7 @@ const code = `
 
 # Avatars
 
-<p class="description">Avatars are found throughout material design with uses in everything from tables to dialog menus.</p>
+### Avatars are found throughout material design with uses in everything from tables to dialog menus.
 
 ## Image avatars
 

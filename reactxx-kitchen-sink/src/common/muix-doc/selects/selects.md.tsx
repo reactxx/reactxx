@@ -10,7 +10,7 @@ const code = `
 
 # Selects
 
-<p class="description">Select components are used for collecting user provided information from a list of options.</p>
+### Select components are used for collecting user provided information from a list of options.
 
 ## Simple Select
 

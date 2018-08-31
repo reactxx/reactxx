@@ -10,7 +10,7 @@ const code = `
 
 # Badge
 
-<p class="description">Badge generates a small badge to the top-right of its child(ren).</p>
+### Badge generates a small badge to the top-right of its child(ren).
 
 ## Simple Badges
 

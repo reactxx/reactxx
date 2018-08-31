@@ -10,7 +10,7 @@ const code = `
 
 # Hidden
 
-<p class="description">Quickly and responsively toggle the visibility value of components and more with our hidden utilities.</p>
+### Quickly and responsively toggle the visibility value of components and more with our hidden utilities.
 
 All elements are visible unless **they are explicitly hidden**.
 To ease integration with our [responsive breakpoints](/layout/basics),

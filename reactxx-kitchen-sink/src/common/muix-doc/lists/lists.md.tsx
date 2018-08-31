@@ -10,7 +10,7 @@ const code = `
 
 # Lists
 
-<p class="description">Lists are continuous, vertical indexes of text or images.</p>
+### Lists are continuous, vertical indexes of text or images.
 
 [Lists](https://material.io/design/components/lists.html) are a continuous group of text or images. They are composed of items containing primary and supplemental actions, which are represented by icons and text.
 

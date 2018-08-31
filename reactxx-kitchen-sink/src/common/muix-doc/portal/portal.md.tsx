@@ -10,7 +10,7 @@ const code = `
 
 # Portal
 
-<p class="description">The portal component renders its children into a new "subtree" outside of current component hierarchy.</p>
+### The portal component renders its children into a new "subtree" outside of current component hierarchy.
 
 The children of the portal component will be appended to the \`container\` specified.
 

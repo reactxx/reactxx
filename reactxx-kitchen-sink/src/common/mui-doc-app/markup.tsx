@@ -34,7 +34,7 @@ export const markdownDefine = (tagDefs: TagDefs = {}) => {
     // add name to objects
     const tagDefsEx = Object.keys(tagDefs).map(p => ({ ...tagDefs[p], name: p, props: Object.keys(tagDefs[p].props).map(pp => ({ ...tagDefs[p].props[pp], name: pp })) }))
     const elements = {}
-    const attributes = {'*': ['className']}
+    const attributes = { '*': ['className'] }
     const remarkReactComponents = {}
     tagDefsEx.forEach(tagDef => {
         const propsDefaultValues = {}
@@ -55,10 +55,11 @@ export const markdownDefine = (tagDefs: TagDefs = {}) => {
         .use(genericExtensions, { elements })
         .use(remarkReact, {
             createElement: (name, props, children) => {
-                if (typeof name !== 'string') return React.createElement(name, props, children)
-                return React.createElement(name, props ? {...props, className: htmlTagClassName} : {className: htmlTagClassName}, children)
+                if (typeof name !== 'string')
+                    return React.createElement(name, props, children) 
+                return React.createElement(name, { className: htmlTagClassName, ...(props || null) }, children)
             },
-            sanitize: deepmerge(sanitizeGhSchema, { 
+            sanitize: deepmerge(sanitizeGhSchema, {
                 tagNames,
                 attributes
             }),
@@ -66,7 +67,8 @@ export const markdownDefine = (tagDefs: TagDefs = {}) => {
         }) as MarkdownDefinition
 }
 
-export const markdownToReact = (markdown: string, markdownDefineResult: MarkdownDefinition) => markdownDefineResult.processSync(markdown, { commonmark: true }).contents
+export const markdownToReact = (markdown: string, markdownDefineResult: MarkdownDefinition) => 
+  markdownDefineResult.processSync(markdown, { commonmark: true }).contents
 
 const markdownToReact2 = (markdown: string, componentClass) => {
     return remark()

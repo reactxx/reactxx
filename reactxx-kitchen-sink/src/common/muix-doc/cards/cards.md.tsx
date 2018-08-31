@@ -10,7 +10,7 @@ const code = `
 
 # Cards
 
-<p class="description">Cards contain content and actions about a single subject.</p>
+### Cards contain content and actions about a single subject.
 
 [Cards](https://material.io/design/components/cards.html) are surfaces that display content and actions on a single topic.
 

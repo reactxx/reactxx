@@ -10,7 +10,7 @@ const code = `
 
 # Chips
 
-<p class="description">Chips are compact elements that represent an input, attribute, or action.</p>
+### Chips are compact elements that represent an input, attribute, or action.
 
 [Chips](https://material.io/design/components/chips.html) allow users to enter information, make selections, filter content, or trigger actions.
 

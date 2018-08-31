@@ -10,7 +10,7 @@ const code = `
 
 # Transitions
 
-<p class="description">Transition helps make a UI expressive and easy to use.</p>
+### Transition helps make a UI expressive and easy to use.
 
 Material-UI provides a number of transitions that can be used to introduce some basic
 [motion](https://material.io/design/motion/)

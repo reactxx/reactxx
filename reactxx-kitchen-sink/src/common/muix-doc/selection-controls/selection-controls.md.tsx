@@ -10,7 +10,7 @@ const code = `
 
 # Selection Controls
 
-<p class="description">Selection controls allow the user to select options.</p>
+### Selection controls allow the user to select options.
 
 [Selection controls](https://material.io/design/components/selection-controls.html) allow users to complete tasks that involve making choices such as selecting options, or switching settings on or off. Selection controls are found on screens that ask users to make decisions or declare preferences such as settings or dialogs.
 

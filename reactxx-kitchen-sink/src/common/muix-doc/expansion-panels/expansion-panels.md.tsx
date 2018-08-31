@@ -10,7 +10,7 @@ const code = `
 
 # Expansion Panel
 
-<p class="description">Expansion panels contain creation flows and allow lightweight editing of an element.</p>
+### Expansion panels contain creation flows and allow lightweight editing of an element.
 
 [An expansion panel](https://material.io/archive/guidelines/components/expansion-panels.html) is a lightweight container that may either stand alone or be connected to a larger surface, such as a card.
 

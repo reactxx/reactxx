@@ -10,7 +10,7 @@ const code = `
 
 # Dividers
 
-<p class="description">A divider is a thin line that groups content in lists and layouts.</p>
+### A divider is a thin line that groups content in lists and layouts.
 
 [Dividers](https://material.io/design/components/dividers.html) separate content into clear groups.
 

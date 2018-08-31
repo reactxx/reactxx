@@ -10,7 +10,7 @@ const code = `
 
 # Modal
 
-<p class="description">The modal component provides a solid foundation for creating dialogs, popovers, lightboxes, or whatever else.</p>
+### The modal component provides a solid foundation for creating dialogs, popovers, lightboxes, or whatever else.
 
 The component renders its \`children\` node in front of a backdrop component.
 
