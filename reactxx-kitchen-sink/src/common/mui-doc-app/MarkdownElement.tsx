@@ -11,7 +11,7 @@ const markdownDefinition = markdownDefine({
         component: ReactxxDocExample,
         props: {
             text: {
-                default: null,
+                //default: null,
                 place: '::content::'
             }
         }
@@ -24,13 +24,13 @@ interface Shape extends Types.ShapeDefault {
     theme: Theme
 }
 
-const styles = theme => ({
+const styles: Types.SheetCreatorX<Shape> = theme => ({
     root: {
         $web: {
             fontFamily: theme.typography.fontFamily,
             PropertiesfontSize: 16,
             color: theme.palette.text.primary,
-            [`& ${htmlTagClassName} pre, & ${htmlTagClassName} pre[class*="language-"]`]: {
+            [`& pre.${htmlTagClassName}, & pre[class*="language-"].${htmlTagClassName}`]: {
                 margin: '24px 0',
                 padding: '12px 18px',
                 backgroundColor: theme.palette.background.paper,
@@ -38,7 +38,7 @@ const styles = theme => ({
                 overflow: 'auto',
                 WebkitOverflowScrolling: 'touch', // iOS momentum scrolling.
             },
-            [`& ${htmlTagClassName} code`]: {
+            [`& code.${htmlTagClassName}`]: {
                 display: 'inline-block',
                 lineHeight: 1.6,
                 fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
@@ -47,40 +47,40 @@ const styles = theme => ({
                 backgroundColor: theme.palette.background.paper,
                 fontSize: 14,
             },
-            [`& ${htmlTagClassName} p code, & ${htmlTagClassName} ul code, & ${htmlTagClassName} pre code`]: {
+            [`& p code.${htmlTagClassName}, & ul code.${htmlTagClassName}, & pre code.${htmlTagClassName}`]: {
                 fontSize: 14,
                 lineHeight: 1.6,
             },
-            [`& ${htmlTagClassName} h1`]: {
+            [`& h1.${htmlTagClassName}`]: {
                 ...theme.typography.display2,
                 color: theme.palette.text.secondary,
                 margin: '32px 0 16px',
             },
-            [`& ${htmlTagClassName} h2`]: {
+            [`& h2.${htmlTagClassName}`]: {
                 ...theme.typography.display1,
                 color: theme.palette.text.secondary,
                 margin: '32px 0 24px',
             },
-            [`& ${htmlTagClassName} h3`]: {
+            [`& h3.${htmlTagClassName}`]: {
                 ...theme.typography.headline,
                 color: theme.palette.text.secondary,
                 margin: '32px 0 24px',
             },
-            [`& ${htmlTagClassName} h4`]: {
+            [`& h4.${htmlTagClassName}`]: {
                 ...theme.typography.title,
                 color: theme.palette.text.secondary,
                 margin: '24px 0 16px',
             },
-            [`& ${htmlTagClassName} p, & ${htmlTagClassName} ul, & ${htmlTagClassName} ol`]: {
+            [`& p.${htmlTagClassName}, & ul.${htmlTagClassName}, & ol.${htmlTagClassName}`]: {
                 lineHeight: 1.6,
             },
-            [`& ${htmlTagClassName} h1 code, & ${htmlTagClassName} h2 code, & ${htmlTagClassName} h3 code, & ${htmlTagClassName} h4 code`]: {
+            [`& h1 code.${htmlTagClassName}, & h2 code.${htmlTagClassName}, & h3 code.${htmlTagClassName}, & h4 code.${htmlTagClassName}`]: {
                 fontSize: 'inherit',
                 lineHeight: 'inherit',
                 // Remove scroll on small screens.
                 wordBreak: 'break-word',
             },
-            [`& ${htmlTagClassName} table`]: {
+            [`& table.${htmlTagClassName}`]: {
                 width: '100%',
                 display: 'block',
                 overflowX: 'auto',
@@ -89,57 +89,57 @@ const styles = theme => ({
                 borderSpacing: 0,
                 overflow: 'hidden',
             },
-            [`& ${htmlTagClassName} thead`]: {
+            [`& thead.${htmlTagClassName}`]: {
                 fontSize: 14,
                 fontWeight: theme.typography.fontWeightMedium,
                 color: theme.palette.text.secondary,
             },
-            [`& ${htmlTagClassName} tbody`]: {
+            [`& tbody.${htmlTagClassName}`]: {
                 fontSize: 14,
                 lineHeight: 1.5,
                 color: theme.palette.text.primary,
             },
-            [`& ${htmlTagClassName} td`]: {
+            [`& td.${htmlTagClassName}`]: {
                 borderBottom: `1px solid ${theme.palette.divider}`,
                 padding: '8px 16px 8px 8px',
                 textAlign: 'left',
             },
-            [`& ${htmlTagClassName} td:last-child`]: {
+            [`& td:last-child.${htmlTagClassName}`]: {
                 paddingRight: 24,
             },
-            [`& ${htmlTagClassName} td compact`]: {
+            [`& td compact.${htmlTagClassName}`]: {
                 paddingRight: 24,
             },
-            [`& ${htmlTagClassName} td code`]: {
+            [`& td code.${htmlTagClassName}`]: {
                 fontSize: 13,
                 lineHeight: 1.6,
             },
-            [`& ${htmlTagClassName} th`]: {
+            [`& th.${htmlTagClassName}`]: {
                 whiteSpace: 'pre',
                 borderBottom: `1px solid ${theme.palette.divider}`,
                 fontWeight: theme.typography.fontWeightMedium,
                 padding: '0 16px 0 8px',
                 textAlign: 'left',
             },
-            [`& ${htmlTagClassName} th:last-child`]: {
+            [`& th:last-child.${htmlTagClassName}`]: {
                 paddingRight: 24,
             },
-            [`& ${htmlTagClassName} tr`]: {
+            [`& tr.${htmlTagClassName}`]: {
                 height: 48,
             },
-            [`& ${htmlTagClassName} thead tr`]: {
+            [`& thead tr.${htmlTagClassName}`]: {
                 height: 64,
             },
-            [`& ${htmlTagClassName} strong`]: {
+            [`& strong.${htmlTagClassName}`]: {
                 fontWeight: theme.typography.fontWeightMedium,
             },
-            [`& ${htmlTagClassName} blockquote`]: {
+            [`& blockquote.${htmlTagClassName}`]: {
                 borderLeft: `5px solid ${theme.palette.text.hint}`,
                 backgroundColor: theme.palette.background.paper,
                 padding: '4px 24px',
                 margin: '24px 0',
             },
-            [`& ${htmlTagClassName} a, & ${htmlTagClassName} a code`]: {
+            [`& a.${htmlTagClassName}`]: {
                 // Style taken from the Link component
                 color: theme.palette.secondary.main,
                 textDecoration: 'none',
@@ -147,7 +147,15 @@ const styles = theme => ({
                     textDecoration: 'underline',
                 },
             },
-            [`& ${htmlTagClassName} img`]: {
+            [`& a code.${htmlTagClassName}`]: {
+                // Style taken from the Link component
+                color: theme.palette.secondary.main,
+                textDecoration: 'none',
+                '&:hover': {
+                    textDecoration: 'underline',
+                },
+            },
+            [`& img.${htmlTagClassName}`]: {
                 maxWidth: '100%',
             },
         },
@@ -161,6 +169,6 @@ const Markdown: Types.CodeSFCWeb<Shape> = props => {
     </div>
 }
 
-const MarkdownElementComponent = withStyles<Shape>(styles as Types.SheetCreatorX<Shape>, Markdown, { isMui: true })()
+const MarkdownElementComponent = withStyles<Shape>(styles, Markdown, { isMui: true })()
 
 export default MarkdownElementComponent
