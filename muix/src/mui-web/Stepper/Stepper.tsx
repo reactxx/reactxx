@@ -33,24 +33,32 @@ export type StepperClasskey =
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    display: "flex",
-    padding: 24
+    $web: {
+      display: "flex",
+      padding: 24
+    }
   },
 
   /* Styles applied to the root element if `orientation="horizontal"`. */
   horizontal: {
-    flexDirection: "row",
-    alignItems: "center"
+    $web: {
+      flexDirection: "row",
+      alignItems: "center"
+    }
   },
 
   /* Styles applied to the root element if `orientation="vertical"`. */
   vertical: {
-    flexDirection: "column"
+    $web: {
+      flexDirection: "column"
+    }
   },
 
   /* Styles applied to the root element if `alternativeLabel={true}`. */
   alternativeLabel: {
-    alignItems: "flex-start"
+    $web: {
+      alignItems: "flex-start"
+    }
   }
 };
 

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Card from 'reactxx-mui-web/Card/Card';
 import CardContent from 'reactxx-mui-web/CardContent/CardContent';
 import CardMedia from 'reactxx-mui-web/CardMedia/CardMedia';
@@ -19,36 +19,39 @@ import SkipNextIcon from 'reactxx-icons/SkipNext';
 
 const styles = theme => ({
   card: {
-    display: 'flex',
+    display: 'flex'
   },
   details: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   content: {
-    flex: '1 0 auto',
+    flex: '1 0 auto'
   },
   cover: {
     width: 151,
-    height: 151,
+    height: 151
   },
   controls: {
     display: 'flex',
     alignItems: 'center',
     paddingLeft: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit
   },
   playIcon: {
     height: 38,
-    width: 38,
-  },
+    width: 38
+  }
 });
 
 function MediaControlCard(props) {
-  const { classes, $system: {theme} } = props;
-
-  return (
-    <Card className={classes.card}>
+  const {
+    classes,
+    $system: {
+      theme
+    }
+  } = props;
+  return <Card className={classes.card}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography variant="headline">Live From Space</Typography>
@@ -68,18 +71,14 @@ function MediaControlCard(props) {
           </IconButton>
         </div>
       </div>
-      <CardMedia
-        className={classes.cover}
-        image="src/ks/common/muix/static/images/cards/live-from-space.jpg"
-        title="Live from space album cover"
-      />
-    </Card>
-  );
+      <CardMedia className={classes.cover} image="src/ks/common/muix/static/images/cards/live-from-space.jpg" title="Live from space album cover" />
+    </Card>;
 }
 
 MediaControlCard['propTypes'] = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, MediaControlCard, { withTheme: true })();
+export default withStylesCreator((styles as any), MediaControlCard, {
+  withTheme: true
+})();

@@ -13,43 +13,32 @@ import DialogActions from 'reactxx-mui-web/DialogActions/DialogActions';
 import DialogContent from 'reactxx-mui-web/DialogContent/DialogContent';
 import DialogContentText from 'reactxx-mui-web/DialogContentText/DialogContentText';
 import DialogTitle from 'reactxx-mui-web/DialogTitle/DialogTitle';
-
-export default class FormDialog extends React.Component<any,any> {
+export default class FormDialog extends React.Component<any, any> {
   state: any = {
-    open: false,
+    open: false
   };
-
   handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({
+      open: true
+    });
   };
-
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false
+    });
   };
 
   render() {
-    return (
-      <div>
+    return <div>
         <Button onClick={this.handleClickOpen}>Open form dialog</Button>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-        >
+        <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
           <DialogContent>
             <DialogContentText>
               To subscribe to this website, please enter your email address here. We will send
               updates occasionally.
             </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Email Address"
-              type="email"
-              fullWidth
-            />
+            <TextField autoFocus margin="dense" id="name" label="Email Address" type="email" fullWidth />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
@@ -60,7 +49,7 @@ export default class FormDialog extends React.Component<any,any> {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
-    );
+      </div>;
   }
+
 }

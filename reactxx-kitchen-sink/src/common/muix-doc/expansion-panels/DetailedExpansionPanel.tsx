@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import { classNames } from 'reactxx-basic';
 import ExpansionPanel from 'reactxx-mui-web/ExpansionPanel/ExpansionPanel';
 import ExpansionPanelDetails from 'reactxx-mui-web/ExpansionPanelDetails/ExpansionPanelDetails';
@@ -21,43 +21,44 @@ import Divider from 'reactxx-mui-web/Divider/Divider';
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: '100%'
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(15)
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary
   },
   icon: {
     verticalAlign: 'bottom',
     height: 20,
-    width: 20,
+    width: 20
   },
   details: {
-    alignItems: 'center',
+    alignItems: 'center'
   },
   column: {
-    flexBasis: '33.33%',
+    flexBasis: '33.33%'
   },
   helper: {
     borderLeft: `2px solid ${theme.palette.divider}`,
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
   },
   link: {
     color: theme.palette.primary.main,
     textDecoration: 'none',
     '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
+      textDecoration: 'underline'
+    }
+  }
 });
 
 function DetailedExpansionPanel(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classes.root}>
       <ExpansionPanel defaultExpanded>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <div className={classes.column}>
@@ -90,12 +91,10 @@ function DetailedExpansionPanel(props) {
           </Button>
         </ExpansionPanelActions>
       </ExpansionPanel>
-    </div>
-  );
+    </div>;
 }
 
 DetailedExpansionPanel['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, DetailedExpansionPanel)();
+export default withStylesCreator((styles as any), DetailedExpansionPanel)();

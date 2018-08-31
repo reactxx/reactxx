@@ -1,12 +1,13 @@
 import React from 'react'
 import { siteMap, pathToObjs, SitemapNode } from '../muix-doc/meta'
-import Markdown from './markdown'
+import Markdown from './MarkdownElement'
+import CssBaseline from 'reactxx-mui-web/CssBaseline/CssBaseline'
 
 abstract class NodeAble extends React.Component<{ node?: SitemapNode }, { node: SitemapNode }> {
   state = { node: siteMap[0] }
 }
 
-class LeftMenu extends NodeAble {
+class LeftMenu extends NodeAble { 
   render() {
     return null
   }
@@ -22,10 +23,10 @@ class Content extends  NodeAble {
 
 class App extends NodeAble {
   render() {
-    return <div>
+    return <React.Fragment>
       <LeftMenu node={this.state.node}/>
       <Content node={this.state.node}/>
-    </div>
+    </React.Fragment>
   }
 }
 

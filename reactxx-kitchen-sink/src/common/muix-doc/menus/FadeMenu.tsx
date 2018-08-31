@@ -11,46 +11,38 @@ import Menu from 'reactxx-mui-web/Menu/Menu';
 import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
 import Fade from 'reactxx-mui-web/Fade/Fade';
 
-class FadeMenu extends React.Component<any,any> {
+class FadeMenu extends React.Component<any, any> {
   state: any = {
-    anchorEl: null,
+    anchorEl: null
   };
-
   handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
+    this.setState({
+      anchorEl: event.currentTarget
+    });
   };
-
   handleClose = () => {
-    this.setState({ anchorEl: null });
+    this.setState({
+      anchorEl: null
+    });
   };
 
   render() {
-    const { anchorEl } = this.state;
+    const {
+      anchorEl
+    } = this.state;
     const open = Boolean(anchorEl);
-
-    return (
-      <div>
-        <Button
-          aria-owns={open ? 'fade-menu' : null}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
+    return <div>
+        <Button aria-owns={open ? 'fade-menu' : null} aria-haspopup="true" onClick={this.handleClick}>
           Open with fade transition
         </Button>
-        <Menu
-          id="fade-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={this.handleClose}
-          TransitionComponent={Fade}
-        >
+        <Menu id="fade-menu" anchorEl={anchorEl} open={open} onClose={this.handleClose} TransitionComponent={Fade}>
           <MenuItem onClick={this.handleClose}>Profile</MenuItem>
           <MenuItem onClick={this.handleClose}>My account</MenuItem>
           <MenuItem onClick={this.handleClose}>Logout</MenuItem>
         </Menu>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 export default FadeMenu;

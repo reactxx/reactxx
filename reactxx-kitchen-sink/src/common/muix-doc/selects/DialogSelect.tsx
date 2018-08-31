@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'reactxx-mui-web/Button/Button';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Dialog from 'reactxx-mui-web/Dialog/Dialog';
 import DialogActions from 'reactxx-mui-web/DialogActions/DialogActions';
 import DialogContent from 'reactxx-mui-web/DialogContent/DialogContent';
@@ -22,55 +22,48 @@ import Select from 'reactxx-mui-web/Select/Select';
 const styles = theme => ({
   container: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap'
   },
   formControl: {
     margin: theme.spacing.unit,
-    minWidth: 120,
-  },
+    minWidth: 120
+  }
 });
 
-class DialogSelect extends React.Component<any,any> {
+class DialogSelect extends React.Component<any, any> {
   state: any = {
     open: false,
-    age: '',
+    age: ''
   };
-
   handleChange = name => event => {
-    this.setState({ [name]: Number(event.target.value) });
+    this.setState({
+      [name]: Number(event.target.value)
+    });
   };
-
   handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({
+      open: true
+    });
   };
-
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false
+    });
   };
 
   render() {
-    const { classes } = this.props;
-
-    return (
-      <div>
+    const {
+      classes
+    } = this.props;
+    return <div>
         <Button onClick={this.handleClickOpen}>Open select dialog</Button>
-        <Dialog
-          disableBackdropClick
-          disableEscapeKeyDown
-          open={this.state.open}
-          onClose={this.handleClose}
-        >
+        <Dialog disableBackdropClick disableEscapeKeyDown open={this.state.open} onClose={this.handleClose}>
           <DialogTitle>Fill the form</DialogTitle>
           <DialogContent>
             <form className={classes.container}>
               <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="age-native-simple">Age</InputLabel>
-                <Select
-                  native
-                  value={this.state.age}
-                  onChange={this.handleChange('age')}
-                  input={<Input id="age-native-simple" />}
-                >
+                <Select native value={this.state.age} onChange={this.handleChange('age')} input={<Input id="age-native-simple" />}>
                   <option value="" />
                   <option value={10}>Ten</option>
                   <option value={20}>Twenty</option>
@@ -79,11 +72,7 @@ class DialogSelect extends React.Component<any,any> {
               </FormControl>
               <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="age-simple">Age</InputLabel>
-                <Select
-                  value={this.state.age}
-                  onChange={this.handleChange('age')}
-                  input={<Input id="age-simple" />}
-                >
+                <Select value={this.state.age} onChange={this.handleChange('age')} input={<Input id="age-simple" />}>
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
@@ -103,13 +92,12 @@ class DialogSelect extends React.Component<any,any> {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 DialogSelect['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, DialogSelect)();
+export default withStylesCreator((styles as any), DialogSelect)();

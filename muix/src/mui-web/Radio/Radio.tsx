@@ -34,36 +34,46 @@ export type RadioClassKey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    color: theme.palette.text.secondary
+    $web: {
+      color: theme.palette.text.secondary
+    }
   },
 
   /* Styles applied to the root element if `checked={true}`. */
   checked: {
-    NAME$checked68: true
+    $web: {
+      NAME$checked66: true
+    }
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
-    NAME$disabled68: true
+    $web: {
+      NAME$disabled66: true
+    }
   },
 
   /* Styles applied to the root element if `color="primary"`. */
   colorPrimary: {
-    "&.checked68": {
-      color: theme.palette.primary.main
-    },
-    "&.disabled68": {
-      color: theme.palette.action.disabled
+    $web: {
+      "&.checked66": {
+        color: theme.palette.primary.main
+      },
+      "&.disabled66": {
+        color: theme.palette.action.disabled
+      }
     }
   },
 
   /* Styles applied to the root element if `color="secondary"`. */
   colorSecondary: {
-    "&.checked68": {
-      color: theme.palette.secondary.main
-    },
-    "&.disabled68": {
-      color: theme.palette.action.disabled
+    $web: {
+      "&.checked66": {
+        color: theme.palette.secondary.main
+      },
+      "&.disabled66": {
+        color: theme.palette.action.disabled
+      }
     }
   }
 });

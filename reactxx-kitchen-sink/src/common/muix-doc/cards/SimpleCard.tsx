@@ -7,37 +7,36 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Card from 'reactxx-mui-web/Card/Card';
 import CardActions from 'reactxx-mui-web/CardActions/CardActions';
 import CardContent from 'reactxx-mui-web/CardContent/CardContent';
 import Button from 'reactxx-mui-web/Button/Button';
 import Typography from 'reactxx-mui-web/Typography/Typography';
-
 const styles = {
   card: {
-    minWidth: 275,
+    minWidth: 275
   },
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
-    transform: 'scale(0.8)',
+    transform: 'scale(0.8)'
   },
   title: {
     marginBottom: 16,
-    fontSize: 14,
+    fontSize: 14
   },
   pos: {
-    marginBottom: 12,
-  },
+    marginBottom: 12
+  }
 };
 
 function SimpleCard(props) {
-  const { classes } = props;
+  const {
+    classes
+  } = props;
   const bull = <span className={classes.bullet}>•</span>;
-
-  return (
-    <Card className={classes.card}>
+  return <Card className={classes.card}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary">
           Word of the Day
@@ -61,12 +60,10 @@ function SimpleCard(props) {
       <CardActions>
         <Button size="small">Learn More</Button>
       </CardActions>
-    </Card>
-  );
+    </Card>;
 }
 
 SimpleCard['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, SimpleCard)();
+export default withStylesCreator((styles as any), SimpleCard)();

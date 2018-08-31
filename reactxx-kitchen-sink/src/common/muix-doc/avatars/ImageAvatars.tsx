@@ -8,39 +8,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from 'reactxx-basic';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Avatar from 'reactxx-mui-web/Avatar/Avatar';
-
 const styles = {
   row: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   avatar: {
-    margin: 10,
+    margin: 10
   },
   bigAvatar: {
     width: 60,
-    height: 60,
-  },
+    height: 60
+  }
 };
 
 function ImageAvatars(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.row}>
+  const {
+    classes
+  } = props;
+  return <div className={classes.row}>
       <Avatar alt="Remy Sharp" src="src/ks/common/muix/static/images/remy.jpg" className={classes.avatar} />
-      <Avatar
-        alt="Adelle Charles"
-        src="src/ks/common/muix/static/images/uxceo-128.jpg"
-        className={classNames(classes.avatar, classes.bigAvatar)}
-      />
-    </div>
-  );
+      <Avatar alt="Adelle Charles" src="src/ks/common/muix/static/images/uxceo-128.jpg" className={classNames(classes.avatar, classes.bigAvatar)} />
+    </div>;
 }
 
 ImageAvatars['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, ImageAvatars)();
+export default withStylesCreator((styles as any), ImageAvatars)();

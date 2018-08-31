@@ -45,26 +45,34 @@ export interface CreateSwitchBaseOptions {
 }
 const styles = {
   root: {
-    display: "inline-flex",
-    alignItems: "center",
-    transition: "none",
-    "&:hover": {
-      // Disable the hover effect for the IconButton.
-      backgroundColor: "transparent"
+    $web: {
+      display: "inline-flex",
+      alignItems: "center",
+      transition: "none",
+      "&:hover": {
+        // Disable the hover effect for the IconButton.
+        backgroundColor: "transparent"
+      }
     }
   },
-  checked: {},
-  disabled: {},
+  checked: {
+    $web: {}
+  },
+  disabled: {
+    $web: {}
+  },
   input: {
-    cursor: "inherit",
-    position: "absolute",
-    opacity: 0,
-    width: "100%",
-    height: "100%",
-    top: 0,
-    left: 0,
-    margin: 0,
-    padding: 0
+    $web: {
+      cursor: "inherit",
+      position: "absolute",
+      opacity: 0,
+      width: "100%",
+      height: "100%",
+      top: 0,
+      left: 0,
+      margin: 0,
+      padding: 0
+    }
   }
 };
 /**

@@ -35,36 +35,46 @@ export type InputLabelClassKey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    transformOrigin: "top left"
+    $web: {
+      transformOrigin: "top left"
+    }
   },
 
   /* Styles applied to the root element if the component is a descendant of `FormControl`. */
   formControl: {
-    position: "absolute",
-    left: 0,
-    top: 0,
-    // slight alteration to spec spacing to match visual spec result
-    transform: "translate(0, 24px) scale(1)"
+    $web: {
+      position: "absolute",
+      left: 0,
+      top: 0,
+      // slight alteration to spec spacing to match visual spec result
+      transform: "translate(0, 24px) scale(1)"
+    }
   },
 
   /* Styles applied to the root element if `margin="dense"`. */
   marginDense: {
-    // Compensation for the `Input.inputDense` style.
-    transform: "translate(0, 21px) scale(1)"
+    $web: {
+      // Compensation for the `Input.inputDense` style.
+      transform: "translate(0, 21px) scale(1)"
+    }
   },
 
   /* Styles applied to the `input` element if `shrink={true}`. */
   shrink: {
-    transform: "translate(0, 1.5px) scale(0.75)",
-    transformOrigin: "top left"
+    $web: {
+      transform: "translate(0, 1.5px) scale(0.75)",
+      transformOrigin: "top left"
+    }
   },
 
   /* Styles applied to the `input` element if `disableAnimation={false}`. */
   animated: {
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shorter,
-      easing: theme.transitions.easing.easeOut
-    })
+    $web: {
+      transition: theme.transitions.create("transform", {
+        duration: theme.transitions.duration.shorter,
+        easing: theme.transitions.easing.easeOut
+      })
+    }
   }
 });
 

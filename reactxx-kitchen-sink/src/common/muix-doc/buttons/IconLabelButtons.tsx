@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from 'reactxx-basic';
 import Button from 'reactxx-mui-web/Button/Button';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import DeleteIcon from 'reactxx-icons/Delete';
 import CloudUploadIcon from 'reactxx-icons/CloudUpload';
 import KeyboardVoiceICon from 'reactxx-icons/KeyboardVoice';
@@ -18,23 +18,24 @@ import SaveIcon from 'reactxx-icons/Save';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   },
   leftIcon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing.unit
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing.unit
   },
   iconSmall: {
-    fontSize: 20,
-  },
+    fontSize: 20
+  }
 });
 
 function IconLabelButtons(props) {
-  const { classes } = props;
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  return <div>
       <Button variant="contained" color="secondary" className={classes.button}>
         Delete
         <DeleteIcon className={classes.rightIcon} />
@@ -55,12 +56,10 @@ function IconLabelButtons(props) {
         <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
         Save
       </Button>
-    </div>
-  );
+    </div>;
 }
 
 IconLabelButtons['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, IconLabelButtons)();
+export default withStylesCreator((styles as any), IconLabelButtons)();

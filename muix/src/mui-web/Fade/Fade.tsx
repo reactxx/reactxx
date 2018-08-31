@@ -19,10 +19,14 @@ export interface FadeProps extends TransitionProps {
 }
 const styles = {
   entering: {
-    opacity: 1
+    $web: {
+      opacity: 1
+    }
   },
   entered: {
-    opacity: 1
+    $web: {
+      opacity: 1
+    }
   }
 };
 /**

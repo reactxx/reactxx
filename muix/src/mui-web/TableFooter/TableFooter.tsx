@@ -22,7 +22,9 @@ export type TableFooterBaseProps = React.HTMLAttributes<
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    display: "table-footer-group"
+    $web: {
+      display: "table-footer-group"
+    }
   }
 };
 

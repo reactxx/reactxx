@@ -7,46 +7,49 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import AppBar from 'reactxx-mui-web/AppBar/AppBar';
 import Tabs from 'reactxx-mui-web/Tabs/Tabs';
 import Tab from 'reactxx-mui-web/Tab/Tab';
 import Typography from 'reactxx-mui-web/Typography/Typography';
 
 function TabContainer(props) {
-  return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+  return <Typography component="div" style={{
+    padding: 8 * 3
+  }}>
       {props.children}
-    </Typography>
-  );
+    </Typography>;
 }
 
 TabContainer['propTypes'] = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
-class SimpleTabs extends React.Component<any,any> {
+class SimpleTabs extends React.Component<any, any> {
   state: any = {
-    value: 0,
+    value: 0
   };
-
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.setState({
+      value
+    });
   };
 
   render() {
-    const { classes } = this.props;
-    const { value } = this.state;
-
-    return (
-      <div className={classes.root}>
+    const {
+      classes
+    } = this.props;
+    const {
+      value
+    } = this.state;
+    return <div className={classes.root}>
         <AppBar position="static">
           <Tabs value={value} onChange={this.handleChange}>
             <Tab label="Item One" />
@@ -57,13 +60,12 @@ class SimpleTabs extends React.Component<any,any> {
         {value === 0 && <TabContainer>Item One</TabContainer>}
         {value === 1 && <TabContainer>Item Two</TabContainer>}
         {value === 2 && <TabContainer>Item Three</TabContainer>}
-      </div>
-    );
+      </div>;
   }
+
 }
 
 SimpleTabs['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, SimpleTabs)();
+export default withStylesCreator((styles as any), SimpleTabs)();

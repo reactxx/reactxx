@@ -34,35 +34,43 @@ export type FormControlLabelClassKey = "root" | "start" | "disabled" | "label";
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    display: "inline-flex",
-    alignItems: "center",
-    cursor: "pointer",
-    // For correct alignment with the text.
-    verticalAlign: "middle",
-    // Remove grey highlight
-    WebkitTapHighlightColor: "transparent",
-    marginLeft: -14,
-    marginRight: 16,
-    // used for row presentation of radio/checkbox
-    "&.disabled35": {
-      cursor: "default"
+    $web: {
+      display: "inline-flex",
+      alignItems: "center",
+      cursor: "pointer",
+      // For correct alignment with the text.
+      verticalAlign: "middle",
+      // Remove grey highlight
+      WebkitTapHighlightColor: "transparent",
+      marginLeft: -14,
+      marginRight: 16,
+      // used for row presentation of radio/checkbox
+      "&.disabled34": {
+        cursor: "default"
+      }
     }
   },
 
   /* Styles applied to the root element if `labelPlacement="start"`. */
   labelPlacementStart: {
-    flexDirection: "row-reverse"
+    $web: {
+      flexDirection: "row-reverse"
+    }
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
-    NAME$disabled35: true
+    $web: {
+      NAME$disabled34: true
+    }
   },
 
   /* Styles applied to the label's Typography component. */
   label: {
-    "&.disabled35": {
-      color: theme.palette.text.disabled
+    $web: {
+      "&.disabled34": {
+        color: theme.palette.text.disabled
+      }
     }
   }
 });

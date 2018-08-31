@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Input from 'reactxx-mui-web/Input/Input';
 import InputLabel from 'reactxx-mui-web/InputLabel/InputLabel';
 import FormHelperText from 'reactxx-mui-web/FormHelperText/FormHelperText';
@@ -16,27 +16,28 @@ import FormControl from 'reactxx-mui-web/FormControl/FormControl';
 const styles = theme => ({
   container: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap'
   },
   formControl: {
-    margin: theme.spacing.unit,
-  },
+    margin: theme.spacing.unit
+  }
 });
 
-class ComposedTextField extends React.Component<any,any> {
+class ComposedTextField extends React.Component<any, any> {
   state: any = {
-    name: 'Composed TextField',
+    name: 'Composed TextField'
   };
-
   handleChange = event => {
-    this.setState({ name: event.target.value });
+    this.setState({
+      name: event.target.value
+    });
   };
 
   render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.container}>
+    const {
+      classes
+    } = this.props;
+    return <div className={classes.container}>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="name-simple">Name</InputLabel>
           <Input id="name-simple" value={this.state.name} onChange={this.handleChange} />
@@ -56,13 +57,12 @@ class ComposedTextField extends React.Component<any,any> {
           <Input id="name-error" value={this.state.name} onChange={this.handleChange} />
           <FormHelperText id="name-error-text">Error</FormHelperText>
         </FormControl>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 ComposedTextField['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, ComposedTextField)();
+export default withStylesCreator((styles as any), ComposedTextField)();

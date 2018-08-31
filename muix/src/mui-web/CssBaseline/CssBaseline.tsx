@@ -18,31 +18,33 @@ export type CssBaselineClassKey = "@global";
 
 const styles = theme => ({
   "@global": {
-    html: {
-      WebkitFontSmoothing: "antialiased",
-      // Antialiasing.
-      MozOsxFontSmoothing: "grayscale",
-      // Antialiasing.
-      // Change from `box-sizing: content-box` so that `width`
-      // is not affected by `padding` or `border`.
-      boxSizing: "border-box"
-    },
-    "*": {
-      boxSizing: "inherit"
-    },
-    "*::before": {
-      boxSizing: "inherit"
-    },
-    "*::after": {
-      boxSizing: "inherit"
-    },
-    body: {
-      margin: 0,
-      // Remove the margin in all browsers.
-      backgroundColor: theme.palette.background.default,
-      "@media print": {
-        // Save printer ink.
-        backgroundColor: theme.palette.common.white
+    $web: {
+      html: {
+        WebkitFontSmoothing: "antialiased",
+        // Antialiasing.
+        MozOsxFontSmoothing: "grayscale",
+        // Antialiasing.
+        // Change from `box-sizing: content-box` so that `width`
+        // is not affected by `padding` or `border`.
+        boxSizing: "border-box"
+      },
+      "*": {
+        boxSizing: "inherit"
+      },
+      "*::before": {
+        boxSizing: "inherit"
+      },
+      "*::after": {
+        boxSizing: "inherit"
+      },
+      body: {
+        margin: 0,
+        // Remove the margin in all browsers.
+        backgroundColor: theme.palette.background.default,
+        "@media print": {
+          // Save printer ink.
+          backgroundColor: theme.palette.common.white
+        }
       }
     }
   }

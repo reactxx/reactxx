@@ -25,13 +25,17 @@ function getScale(value) {
 
 const styles = {
   entering: {
-    opacity: 1,
-    transform: getScale(1)
+    $web: {
+      opacity: 1,
+      transform: getScale(1)
+    }
   },
   entered: {
-    opacity: 1,
-    // Use translateZ to scrolling issue on Chrome.
-    transform: `${getScale(1)} translateZ(0)`
+    $web: {
+      opacity: 1,
+      // Use translateZ to scrolling issue on Chrome.
+      transform: `${getScale(1)} translateZ(0)`
+    }
   }
 };
 /**

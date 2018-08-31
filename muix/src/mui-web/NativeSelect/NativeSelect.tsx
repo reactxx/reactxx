@@ -34,71 +34,81 @@ export type NativeSelectClassKey =
 const styles = theme => ({
   /* Styles applied to the `Input` component `root` class. */
   root: {
-    position: "relative",
-    width: "100%"
+    $web: {
+      position: "relative",
+      width: "100%"
+    }
   },
 
   /* Styles applied to the `Input` component `select` class. */
   select: {
-    "-moz-appearance": "none",
-    // Reset
-    "-webkit-appearance": "none",
-    // Reset
-    // When interacting quickly, the text can end up selected.
-    // Native select can't be selected either.
-    userSelect: "none",
-    paddingRight: 32,
-    width: "calc(100% - 32px)",
-    minWidth: 16,
-    // So it doesn't collapse.
-    cursor: "pointer",
-    "&:focus": {
-      // Show that it's not an text input
-      background:
-        theme.palette.type === "light"
-          ? "rgba(0, 0, 0, 0.05)"
-          : "rgba(255, 255, 255, 0.05)",
-      borderRadius: 0 // Reset Chrome style
-    },
-    // Remove Firefox focus border
-    "&:-moz-focusring": {
-      color: "transparent",
-      textShadow: "0 0 0 #000"
-    },
-    // Remove IE11 arrow
-    "&::-ms-expand": {
-      display: "none"
-    },
-    "&.disabled64": {
-      cursor: "default"
+    $web: {
+      "-moz-appearance": "none",
+      // Reset
+      "-webkit-appearance": "none",
+      // Reset
+      // When interacting quickly, the text can end up selected.
+      // Native select can't be selected either.
+      userSelect: "none",
+      paddingRight: 32,
+      width: "calc(100% - 32px)",
+      minWidth: 16,
+      // So it doesn't collapse.
+      cursor: "pointer",
+      "&:focus": {
+        // Show that it's not an text input
+        background:
+          theme.palette.type === "light"
+            ? "rgba(0, 0, 0, 0.05)"
+            : "rgba(255, 255, 255, 0.05)",
+        borderRadius: 0 // Reset Chrome style
+      },
+      // Remove Firefox focus border
+      "&:-moz-focusring": {
+        color: "transparent",
+        textShadow: "0 0 0 #000"
+      },
+      // Remove IE11 arrow
+      "&::-ms-expand": {
+        display: "none"
+      },
+      "&.disabled62": {
+        cursor: "default"
+      }
     }
   },
 
   /* Styles applied to the `Input` component `selectMenu` class. */
   selectMenu: {
-    width: "auto",
-    // Fix Safari textOverflow
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    minHeight: "1.1875em" // Reset (19px), match the native input line-height
+    $web: {
+      width: "auto",
+      // Fix Safari textOverflow
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      minHeight: "1.1875em" // Reset (19px), match the native input line-height
+    }
   },
 
   /* Styles applied to the `Input` component `disabled` class. */
   disabled: {
-    NAME$disabled64: true
+    $web: {
+      NAME$disabled62: true
+    }
   },
 
   /* Styles applied to the `Input` component `icon` class. */
   icon: {
-    // We use a position absolute over a flexbox in order to forward the pointer events
-    // to the input.
-    position: "absolute",
-    right: 0,
-    top: "calc(50% - 12px)",
-    // Center vertically
-    color: theme.palette.action.active,
-    "pointer-events": "none" // Don't block pointer events on the select under the icon.
+    $web: {
+      // We use a position absolute over a flexbox in order to forward the pointer events
+      // to the input.
+      position: "absolute",
+      right: 0,
+      top: "calc(50% - 12px)",
+      // Center vertically
+      color: theme.palette.action.active,
+      "pointer-events": "none" // Don't block pointer events on the select under the icon.
+    }
   }
 });
 /**

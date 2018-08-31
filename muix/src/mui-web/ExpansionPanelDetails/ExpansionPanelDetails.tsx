@@ -20,8 +20,10 @@ export type ExpansionPanelDetailsClassKey = "root";
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    display: "flex",
-    padding: "8px 24px 24px"
+    $web: {
+      display: "flex",
+      padding: "8px 24px 24px"
+    }
   }
 };
 

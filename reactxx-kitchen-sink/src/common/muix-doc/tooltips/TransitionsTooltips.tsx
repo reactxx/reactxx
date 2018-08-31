@@ -12,19 +12,19 @@ import Fade from 'reactxx-mui-web/Fade/Fade';
 import Zoom from 'reactxx-mui-web/Zoom/Zoom';
 
 function TransitionsTooltips() {
-  return (
-    <div>
+  return <div>
       <Tooltip title="Add">
         <Button>Grow</Button>
       </Tooltip>
-      <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="Add">
+      <Tooltip TransitionComponent={Fade} TransitionProps={{
+      timeout: 600
+    }} title="Add">
         <Button>Fade</Button>
       </Tooltip>
       <Tooltip TransitionComponent={Zoom} title="Add">
         <Button>Zoom</Button>
       </Tooltip>
-    </div>
-  );
+    </div>;
 }
 
 export default TransitionsTooltips;

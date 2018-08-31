@@ -24,30 +24,38 @@ export type DividerClassKey = "root" | "absolute" | "inset" | "light";
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    height: 1,
-    margin: 0,
-    // Reset browser default style.
-    border: "none",
-    flexShrink: 0,
-    backgroundColor: theme.palette.divider
+    $web: {
+      height: 1,
+      margin: 0,
+      // Reset browser default style.
+      border: "none",
+      flexShrink: 0,
+      backgroundColor: theme.palette.divider
+    }
   },
 
   /* Styles applied to the root element if `absolute={true}`. */
   absolute: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    width: "100%"
+    $web: {
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      width: "100%"
+    }
   },
 
   /* Styles applied to the root element if `inset={true}`. */
   inset: {
-    marginLeft: 72
+    $web: {
+      marginLeft: 72
+    }
   },
 
   /* Styles applied to the root element if `light={true}`. */
   light: {
-    backgroundColor: fade(theme.palette.divider, 0.08)
+    $web: {
+      backgroundColor: fade(theme.palette.divider, 0.08)
+    }
   }
 });
 

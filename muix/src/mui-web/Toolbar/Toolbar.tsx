@@ -21,20 +21,28 @@ export type ToolbarClassKey = "root" | "gutters" | "regular" | "dense";
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    position: "relative",
-    display: "flex",
-    alignItems: "center"
+    $web: {
+      position: "relative",
+      display: "flex",
+      alignItems: "center"
+    }
   },
 
   /* Styles applied to the root element if `disableGutters={false}`. */
-  gutters: theme.mixins.gutters(),
+  gutters: {
+    $web: theme.mixins.gutters()
+  },
 
   /* Styles applied to the root element if `variant="regular"`. */
-  regular: theme.mixins.toolbar,
+  regular: {
+    $web: theme.mixins.toolbar
+  },
 
   /* Styles applied to the root element if `variant="dense"`. */
   dense: {
-    minHeight: 48
+    $web: {
+      minHeight: 48
+    }
   }
 });
 

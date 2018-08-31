@@ -79,7 +79,7 @@ export namespace Types {
   /******************************************
       CREATORS
    *******************************************/
-  export type themeCreator<R extends Shape, T extends {}> = T | ((theme: TCommon.getTheme<R>, variant: TCommon.getVariant<R>) => T)
+  export type themeCreator<R extends Shape, T extends {}> = T | ((theme: TCommon.getTheme<R>, variant?: TCommon.getVariant<R>) => T)
   export type RootRulesetCreatorX<R extends Shape = Shape, TRulesetAddIn extends {} = {}> = themeCreator<R, RulesetX<TCommon.getStyle<R>, R>>
   export type PartialSheetCreatorX<R extends Shape = Shape> = themeCreator<R, PartialSheetX<R>>
 

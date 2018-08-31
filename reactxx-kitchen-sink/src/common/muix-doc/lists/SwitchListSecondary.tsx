@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import List from 'reactxx-mui-web/List/List';
 import ListItem from 'reactxx-mui-web/ListItem/ListItem';
 import ListItemIcon from 'reactxx-mui-web/ListItemIcon/ListItemIcon';
@@ -22,17 +22,18 @@ const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
-class SwitchListSecondary extends React.Component<any,any> {
+class SwitchListSecondary extends React.Component<any, any> {
   state: any = {
-    checked: ['wifi'],
+    checked: ['wifi']
   };
-
   handleToggle = value => () => {
-    const { checked } = this.state;
+    const {
+      checked
+    } = this.state;
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -43,15 +44,15 @@ class SwitchListSecondary extends React.Component<any,any> {
     }
 
     this.setState({
-      checked: newChecked,
+      checked: newChecked
     });
   };
 
   render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
+    const {
+      classes
+    } = this.props;
+    return <div className={classes.root}>
         <List subheader={<ListSubheader>Settings</ListSubheader>}>
           <ListItem>
             <ListItemIcon>
@@ -59,10 +60,7 @@ class SwitchListSecondary extends React.Component<any,any> {
             </ListItemIcon>
             <ListItemText primary="Wi-Fi" />
             <ListItemSecondaryAction>
-              <Switch
-                onChange={this.handleToggle('wifi')}
-                checked={this.state.checked.indexOf('wifi') !== -1}
-              />
+              <Switch onChange={this.handleToggle('wifi')} checked={this.state.checked.indexOf('wifi') !== -1} />
             </ListItemSecondaryAction>
           </ListItem>
           <ListItem>
@@ -71,20 +69,16 @@ class SwitchListSecondary extends React.Component<any,any> {
             </ListItemIcon>
             <ListItemText primary="Bluetooth" />
             <ListItemSecondaryAction>
-              <Switch
-                onChange={this.handleToggle('bluetooth')}
-                checked={this.state.checked.indexOf('bluetooth') !== -1}
-              />
+              <Switch onChange={this.handleToggle('bluetooth')} checked={this.state.checked.indexOf('bluetooth') !== -1} />
             </ListItemSecondaryAction>
           </ListItem>
         </List>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 SwitchListSecondary['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, SwitchListSecondary)();
+export default withStylesCreator((styles as any), SwitchListSecondary)();

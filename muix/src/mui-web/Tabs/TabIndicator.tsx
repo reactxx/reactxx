@@ -28,22 +28,28 @@ export type TabIndicatorClassKey = "root" | "colorSecondary" | "colorPrimary";
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    position: "absolute",
-    height: 2,
-    bottom: 0,
-    width: "100%",
-    transition: theme.transitions.create(),
-    willChange: "left, width"
+    $web: {
+      position: "absolute",
+      height: 2,
+      bottom: 0,
+      width: "100%",
+      transition: theme.transitions.create(),
+      willChange: "left, width"
+    }
   },
 
   /* Styles applied to the root element if `color="primary"`. */
   colorPrimary: {
-    backgroundColor: theme.palette.primary.main
+    $web: {
+      backgroundColor: theme.palette.primary.main
+    }
   },
 
   /* Styles applied to the root element if `color="secondary"`. */
   colorSecondary: {
-    backgroundColor: theme.palette.secondary.main
+    $web: {
+      backgroundColor: theme.palette.secondary.main
+    }
   }
 });
 /**

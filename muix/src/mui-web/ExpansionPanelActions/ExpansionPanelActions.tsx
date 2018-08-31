@@ -23,15 +23,19 @@ export type ExpansionPanelActionsClassKey = "root" | "action";
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: "16px 8px"
+    $web: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-end",
+      padding: "16px 8px"
+    }
   },
 
   /* Styles applied to the children. */
   action: {
-    marginLeft: 8
+    $web: {
+      marginLeft: 8
+    }
   }
 };
 

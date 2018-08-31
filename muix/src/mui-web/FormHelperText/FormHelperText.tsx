@@ -36,45 +36,59 @@ export type FormHelperTextClassKey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    color: theme.palette.text.secondary,
-    fontFamily: theme.typography.fontFamily,
-    fontSize: theme.typography.pxToRem(12),
-    textAlign: "left",
-    marginTop: 8,
-    lineHeight: "1em",
-    minHeight: "1em",
-    margin: 0,
-    "&.error37": {
-      color: theme.palette.error.main
-    },
-    "&.disabled37": {
-      color: theme.palette.text.disabled
+    $web: {
+      color: theme.palette.text.secondary,
+      fontFamily: theme.typography.fontFamily,
+      fontSize: theme.typography.pxToRem(12),
+      textAlign: "left",
+      marginTop: 8,
+      lineHeight: "1em",
+      minHeight: "1em",
+      margin: 0,
+      "&.error36": {
+        color: theme.palette.error.main
+      },
+      "&.disabled36": {
+        color: theme.palette.text.disabled
+      }
     }
   },
 
   /* Styles applied to the root element if `error={true}`. */
   error: {
-    NAME$error37: true
+    $web: {
+      NAME$error36: true
+    }
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
-    NAME$disabled37: true
+    $web: {
+      NAME$disabled36: true
+    }
   },
 
   /* Styles applied to the root element if `margin="dense"`. */
   marginDense: {
-    marginTop: 4
+    $web: {
+      marginTop: 4
+    }
   },
 
   /* Styles applied to the root element if `focused={true}`. */
-  focused: {},
+  focused: {
+    $web: {}
+  },
 
   /* Styles applied to the root element if `filled={true}`. */
-  filled: {},
+  filled: {
+    $web: {}
+  },
 
   /* Styles applied to the root element if `required={true}`. */
-  required: {}
+  required: {
+    $web: {}
+  }
 });
 
 const FormHelperText: Types.CodeSFCWeb<Shape> = (props, context) => {

@@ -36,43 +36,55 @@ export type ListItemTextClassKey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    flex: "1 1 auto",
-    minWidth: 0,
-    padding: "0 16px",
-    "&:first-child": {
-      paddingLeft: 0
+    $web: {
+      flex: "1 1 auto",
+      minWidth: 0,
+      padding: "0 16px",
+      "&:first-child": {
+        paddingLeft: 0
+      }
     }
   },
 
   /* Styles applied to the root element if `inset={true}`. */
   inset: {
-    "&:first-child": {
-      paddingLeft: 56
+    $web: {
+      "&:first-child": {
+        paddingLeft: 56
+      }
     }
   },
 
   /* Styles applied to the root element if `context.dense` is `true`. */
   dense: {
-    fontSize: theme.typography.pxToRem(13)
+    $web: {
+      fontSize: theme.typography.pxToRem(13)
+    }
   },
 
   /* Styles applied to the primary `Typography` component. */
   primary: {
-    "&.textDense58": {
-      fontSize: "inherit"
+    $web: {
+      "&.textDense56": {
+        fontSize: "inherit"
+      }
     }
   },
 
   /* Styles applied to the secondary `Typography` component. */
   secondary: {
-    "&.textDense58": {
-      fontSize: "inherit"
+    $web: {
+      "&.textDense56": {
+        fontSize: "inherit"
+      }
     }
   },
 
   /* Styles applied to the `Typography` components if `context.dense` is `true`. */
   textDense: {
-    NAME$textDense58: true
+    $web: {
+      NAME$textDense56: true
+    }
   }
 });
 

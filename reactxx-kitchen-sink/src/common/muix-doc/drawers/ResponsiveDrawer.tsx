@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Drawer from 'reactxx-mui-web/Drawer/Drawer';
 import AppBar from 'reactxx-mui-web/AppBar/AppBar';
 import Toolbar from 'reactxx-mui-web/Toolbar/Toolbar';
@@ -18,7 +18,6 @@ import Hidden from 'reactxx-mui-web/Hidden/Hidden';
 import Divider from 'reactxx-mui-web/Divider/Divider';
 import MenuIcon from 'reactxx-icons/Menu';
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
-
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -29,66 +28,60 @@ const styles = theme => ({
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
-    width: '100%',
+    width: '100%'
   },
   appBar: {
     position: 'absolute',
     marginLeft: drawerWidth,
     [theme.breakpoints.up('md')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-    },
+      width: `calc(100% - ${drawerWidth}px)`
+    }
   },
   navIconHide: {
     [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
+      display: 'none'
+    }
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
     [theme.breakpoints.up('md')]: {
-      position: 'relative',
-    },
+      position: 'relative'
+    }
   },
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
-  },
+    padding: theme.spacing.unit * 3
+  }
 });
 
-class ResponsiveDrawer extends React.Component<any,any> {
+class ResponsiveDrawer extends React.Component<any, any> {
   state: any = {
-    mobileOpen: false,
+    mobileOpen: false
   };
-
   handleDrawerToggle = () => {
-    this.setState(state => ({ mobileOpen: !state.mobileOpen }));
+    this.setState(state => ({
+      mobileOpen: !state.mobileOpen
+    }));
   };
 
   render() {
-    const { classes, theme } = this.props;
-
-    const drawer = (
-      <div>
+    const {
+      classes,
+      theme
+    } = this.props;
+    const drawer = <div>
         <div className={classes.toolbar} />
         <Divider />
         <List>{mailFolderListItems}</List>
         <Divider />
         <List>{otherMailFolderListItems}</List>
-      </div>
-    );
-
-    return (
-      <div className={classes.root}>
+      </div>;
+    return <div className={classes.root}>
         <AppBar className={classes.appBar}>
           <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerToggle}
-              className={classes.navIconHide}
-            >
+            <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerToggle} className={classes.navIconHide}>
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
@@ -97,29 +90,19 @@ class ResponsiveDrawer extends React.Component<any,any> {
           </Toolbar>
         </AppBar>
         <Hidden mdUp>
-          <Drawer
-            variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-            open={this.state.mobileOpen}
-            onClose={this.handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
+          <Drawer variant="temporary" anchor={theme.direction === 'rtl' ? 'right' : 'left'} open={this.state.mobileOpen} onClose={this.handleDrawerToggle} classes={{
+          paper: classes.drawerPaper
+        }} ModalProps={{
+          keepMounted: true // Better open performance on mobile.
+
+        }}>
             {drawer}
           </Drawer>
         </Hidden>
         <Hidden smDown implementation="css">
-          <Drawer
-            variant="permanent"
-            open
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-          >
+          <Drawer variant="permanent" open classes={{
+          paper: classes.drawerPaper
+        }}>
             {drawer}
           </Drawer>
         </Hidden>
@@ -127,14 +110,15 @@ class ResponsiveDrawer extends React.Component<any,any> {
           <div className={classes.toolbar} />
           <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
         </main>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 ResponsiveDrawer['propTypes'] = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, ResponsiveDrawer, { withTheme: true })();
+export default withStylesCreator((styles as any), ResponsiveDrawer, {
+  withTheme: true
+})();

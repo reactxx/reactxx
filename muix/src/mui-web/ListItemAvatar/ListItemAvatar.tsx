@@ -19,17 +19,21 @@ export type ListItemAvatarClassKey = "root" | "icon";
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    width: 36,
-    height: 36,
-    fontSize: theme.typography.pxToRem(18),
-    marginRight: 4
+    $web: {
+      width: 36,
+      height: 36,
+      fontSize: theme.typography.pxToRem(18),
+      marginRight: 4
+    }
   },
 
   /* Styles applied to the children – typically the `Avatar` component. */
   icon: {
-    width: 20,
-    height: 20,
-    fontSize: theme.typography.pxToRem(20)
+    $web: {
+      width: 20,
+      height: 20,
+      fontSize: theme.typography.pxToRem(20)
+    }
   }
 });
 /**

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import List from 'reactxx-mui-web/List/List';
 import ListItem from 'reactxx-mui-web/ListItem/ListItem';
 import ListItemIcon from 'reactxx-mui-web/ListItemIcon/ListItemIcon';
@@ -20,40 +20,33 @@ const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
-class SelectedListItem extends React.Component<any,any> {
+class SelectedListItem extends React.Component<any, any> {
   state: any = {
-    selectedIndex: 1,
+    selectedIndex: 1
   };
-
   handleListItemClick = (event, index) => {
-    this.setState({ selectedIndex: index });
+    this.setState({
+      selectedIndex: index
+    });
   };
 
   render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
+    const {
+      classes
+    } = this.props;
+    return <div className={classes.root}>
         <List component="nav">
-          <ListItem
-            button
-            selected={this.state.selectedIndex === 0}
-            onClick={event => this.handleListItemClick(event, 0)}
-          >
+          <ListItem button selected={this.state.selectedIndex === 0} onClick={event => this.handleListItemClick(event, 0)}>
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
             <ListItemText primary="Inbox" />
           </ListItem>
-          <ListItem
-            button
-            selected={this.state.selectedIndex === 1}
-            onClick={event => this.handleListItemClick(event, 1)}
-          >
+          <ListItem button selected={this.state.selectedIndex === 1} onClick={event => this.handleListItemClick(event, 1)}>
             <ListItemIcon>
               <DraftsIcon />
             </ListItemIcon>
@@ -62,28 +55,19 @@ class SelectedListItem extends React.Component<any,any> {
         </List>
         <Divider />
         <List component="nav">
-          <ListItem
-            button
-            selected={this.state.selectedIndex === 2}
-            onClick={event => this.handleListItemClick(event, 2)}
-          >
+          <ListItem button selected={this.state.selectedIndex === 2} onClick={event => this.handleListItemClick(event, 2)}>
             <ListItemText primary="Trash" />
           </ListItem>
-          <ListItem
-            button
-            selected={this.state.selectedIndex === 3}
-            onClick={event => this.handleListItemClick(event, 3)}
-          >
+          <ListItem button selected={this.state.selectedIndex === 3} onClick={event => this.handleListItemClick(event, 3)}>
             <ListItemText primary="Spam" />
           </ListItem>
         </List>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 SelectedListItem['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, SelectedListItem)();
+export default withStylesCreator((styles as any), SelectedListItem)();

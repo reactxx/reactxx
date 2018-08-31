@@ -36,31 +36,39 @@ export type FormControlClassKey =
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    display: "inline-flex",
-    flexDirection: "column",
-    position: "relative",
-    // Reset fieldset default style
-    minWidth: 0,
-    padding: 0,
-    margin: 0,
-    border: 0
+    $web: {
+      display: "inline-flex",
+      flexDirection: "column",
+      position: "relative",
+      // Reset fieldset default style
+      minWidth: 0,
+      padding: 0,
+      margin: 0,
+      border: 0
+    }
   },
 
   /* Styles applied to the root element if `margin="normal"`. */
   marginNormal: {
-    marginTop: 16,
-    marginBottom: 8
+    $web: {
+      marginTop: 16,
+      marginBottom: 8
+    }
   },
 
   /* Styles applied to the root element if `margin="dense"`. */
   marginDense: {
-    marginTop: 8,
-    marginBottom: 4
+    $web: {
+      marginTop: 8,
+      marginBottom: 4
+    }
   },
 
   /* Styles applied to the root element if `fullWidth={true}`. */
   fullWidth: {
-    width: "100%"
+    $web: {
+      width: "100%"
+    }
   }
 };
 /**

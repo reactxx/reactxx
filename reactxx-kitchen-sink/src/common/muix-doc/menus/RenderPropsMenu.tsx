@@ -11,27 +11,24 @@ import Menu from 'reactxx-mui-web/Menu/Menu';
 import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
 import toRenderProps from 'recompose/toRenderProps';
 import withState from 'recompose/withState';
-
 const WithState = toRenderProps(withState('anchorEl', 'updateAnchorEl', null));
 
 function RenderPropsMenu() {
-  return (
-    <WithState>
-      {({ anchorEl, updateAnchorEl }) => {
-        const open = Boolean(anchorEl);
-        const handleClose = () => {
-          updateAnchorEl(null);
-        };
+  return <WithState>
+      {({
+      anchorEl,
+      updateAnchorEl
+    }) => {
+      const open = Boolean(anchorEl);
 
-        return (
-          <React.Fragment>
-            <Button
-              aria-owns={open ? 'render-props-menu' : null}
-              aria-haspopup="true"
-              onClick={event => {
-                updateAnchorEl(event.currentTarget);
-              }}
-            >
+      const handleClose = () => {
+        updateAnchorEl(null);
+      };
+
+      return <React.Fragment>
+            <Button aria-owns={open ? 'render-props-menu' : null} aria-haspopup="true" onClick={event => {
+          updateAnchorEl(event.currentTarget);
+        }}>
               Open Menu
             </Button>
             <Menu id="render-props-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
@@ -39,11 +36,9 @@ function RenderPropsMenu() {
               <MenuItem onClick={handleClose}>My account</MenuItem>
               <MenuItem onClick={handleClose}>Logout</MenuItem>
             </Menu>
-          </React.Fragment>
-        );
-      }}
-    </WithState>
-  );
+          </React.Fragment>;
+    }}
+    </WithState>;
 }
 
 export default RenderPropsMenu;

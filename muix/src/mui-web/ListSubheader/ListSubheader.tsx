@@ -34,39 +34,51 @@ export type ListSubheaderClassKey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    boxSizing: "border-box",
-    lineHeight: "48px",
-    listStyle: "none",
-    color: theme.palette.text.secondary,
-    fontFamily: theme.typography.fontFamily,
-    fontWeight: theme.typography.fontWeightMedium,
-    fontSize: theme.typography.pxToRem(14)
+    $web: {
+      boxSizing: "border-box",
+      lineHeight: "48px",
+      listStyle: "none",
+      color: theme.palette.text.secondary,
+      fontFamily: theme.typography.fontFamily,
+      fontWeight: theme.typography.fontWeightMedium,
+      fontSize: theme.typography.pxToRem(14)
+    }
   },
 
   /* Styles applied to the root element if `color="primary"`. */
   colorPrimary: {
-    color: theme.palette.primary.main
+    $web: {
+      color: theme.palette.primary.main
+    }
   },
 
   /* Styles applied to the root element if `color="inherit"`. */
   colorInherit: {
-    color: "inherit"
+    $web: {
+      color: "inherit"
+    }
   },
 
   /* Styles applied to the inner `component` element if `disableGutters={false}`. */
-  gutters: theme.mixins.gutters(),
+  gutters: {
+    $web: theme.mixins.gutters()
+  },
 
   /* Styles applied to the root element if `inset={true}`. */
   inset: {
-    paddingLeft: 72
+    $web: {
+      paddingLeft: 72
+    }
   },
 
   /* Styles applied to the root element if `disableSticky={false}`. */
   sticky: {
-    position: "sticky",
-    top: 0,
-    zIndex: 1,
-    backgroundColor: "inherit"
+    $web: {
+      position: "sticky",
+      top: 0,
+      zIndex: 1,
+      backgroundColor: "inherit"
+    }
   }
 });
 

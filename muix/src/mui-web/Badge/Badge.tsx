@@ -29,50 +29,60 @@ const RADIUS = 11;
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    position: "relative",
-    display: "inline-flex",
-    // For correct alignment with the text.
-    verticalAlign: "middle"
+    $web: {
+      position: "relative",
+      display: "inline-flex",
+      // For correct alignment with the text.
+      verticalAlign: "middle"
+    }
   },
 
   /* Styles applied to the badge `span` element. */
   badge: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-    position: "absolute",
-    top: -RADIUS,
-    right: -RADIUS,
-    fontFamily: theme.typography.fontFamily,
-    fontWeight: theme.typography.fontWeight,
-    fontSize: theme.typography.pxToRem(12),
-    width: RADIUS * 2,
-    height: RADIUS * 2,
-    borderRadius: "50%",
-    backgroundColor: theme.palette.color,
-    color: theme.palette.textColor,
-    zIndex: 1 // Render the badge on top of potential ripples.
+    $web: {
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "center",
+      alignContent: "center",
+      alignItems: "center",
+      position: "absolute",
+      top: -RADIUS,
+      right: -RADIUS,
+      fontFamily: theme.typography.fontFamily,
+      fontWeight: theme.typography.fontWeight,
+      fontSize: theme.typography.pxToRem(12),
+      width: RADIUS * 2,
+      height: RADIUS * 2,
+      borderRadius: "50%",
+      backgroundColor: theme.palette.color,
+      color: theme.palette.textColor,
+      zIndex: 1 // Render the badge on top of potential ripples.
+    }
   },
 
   /* Styles applied to the root element if `color="primary"`. */
   colorPrimary: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText
+    $web: {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.primary.contrastText
+    }
   },
 
   /* Styles applied to the root element if `color="secondary"`. */
   colorSecondary: {
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.contrastText
+    $web: {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText
+    }
   },
 
   /* Styles applied to the root element if `color="error"`. */
   colorError: {
-    backgroundColor: theme.palette.error.main,
-    color: theme.palette.error.contrastText
+    $web: {
+      backgroundColor: theme.palette.error.main,
+      color: theme.palette.error.contrastText
+    }
   }
 });
 

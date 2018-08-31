@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import ListSubheader from 'reactxx-mui-web/ListSubheader/ListSubheader';
 import List from 'reactxx-mui-web/List/List';
 import ListItem from 'reactxx-mui-web/ListItem/ListItem';
@@ -25,31 +25,29 @@ const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   nested: {
-    paddingLeft: theme.spacing.unit * 4,
-  },
+    paddingLeft: theme.spacing.unit * 4
+  }
 });
 
-class NestedList extends React.Component<any,any> {
+class NestedList extends React.Component<any, any> {
   state: any = {
-    open: true,
+    open: true
   };
-
   handleClick = () => {
-    this.setState(state => ({ open: !state.open }));
+    this.setState(state => ({
+      open: !state.open
+    }));
   };
 
   render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
-        <List
-          component="nav"
-          subheader={<ListSubheader component="div">Nested List Items</ListSubheader>}
-        >
+    const {
+      classes
+    } = this.props;
+    return <div className={classes.root}>
+        <List component="nav" subheader={<ListSubheader component="div">Nested List Items</ListSubheader>}>
           <ListItem button>
             <ListItemIcon>
               <SendIcon />
@@ -80,13 +78,12 @@ class NestedList extends React.Component<any,any> {
             </List>
           </Collapse>
         </List>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 NestedList['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, NestedList)();
+export default withStylesCreator((styles as any), NestedList)();

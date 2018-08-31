@@ -22,13 +22,15 @@ export type CardContentClassKey = "root";
 
 const styles = theme => ({
   /* Styles applied to the root element. */
-  root: theme.mixins.gutters({
-    paddingTop: 16,
-    paddingBottom: 16,
-    "&:last-child": {
-      paddingBottom: 24
-    }
-  })
+  root: {
+    $web: theme.mixins.gutters({
+      paddingTop: 16,
+      paddingBottom: 16,
+      "&:last-child": {
+        paddingBottom: 24
+      }
+    })
+  }
 });
 
 const CardContent: Types.CodeSFCWeb<Shape> & {

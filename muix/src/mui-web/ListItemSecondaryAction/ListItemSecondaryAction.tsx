@@ -17,10 +17,12 @@ export type ListItemSecondaryActionClassKey = "root";
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    position: "absolute",
-    right: 4,
-    top: "50%",
-    transform: "translateY(-50%)"
+    $web: {
+      position: "absolute",
+      right: 4,
+      top: "50%",
+      transform: "translateY(-50%)"
+    }
   }
 };
 

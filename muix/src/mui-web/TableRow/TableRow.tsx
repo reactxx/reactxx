@@ -28,44 +28,54 @@ export type TableRowClassKey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    color: "inherit",
-    display: "table-row",
-    height: 48,
-    verticalAlign: "middle",
-    // We disable the focus ring for mouse, touch and keyboard users.
-    outline: "none",
-    "&.selected92": {
-      backgroundColor:
-        theme.palette.type === "light"
-          ? "rgba(0, 0, 0, 0.04)" // grey[100]
-          : "rgba(255, 255, 255, 0.08)"
-    },
-    "&.hover92:hover": {
-      backgroundColor:
-        theme.palette.type === "light"
-          ? "rgba(0, 0, 0, 0.07)" // grey[200]
-          : "rgba(255, 255, 255, 0.14)"
+    $web: {
+      color: "inherit",
+      display: "table-row",
+      height: 48,
+      verticalAlign: "middle",
+      // We disable the focus ring for mouse, touch and keyboard users.
+      outline: "none",
+      "&.selected89": {
+        backgroundColor:
+          theme.palette.type === "light"
+            ? "rgba(0, 0, 0, 0.04)" // grey[100]
+            : "rgba(255, 255, 255, 0.08)"
+      },
+      "&.hover89:hover": {
+        backgroundColor:
+          theme.palette.type === "light"
+            ? "rgba(0, 0, 0, 0.07)" // grey[200]
+            : "rgba(255, 255, 255, 0.14)"
+      }
     }
   },
 
   /* Styles applied to the root element if `selected={true}`. */
   selected: {
-    NAME$selected92: true
+    $web: {
+      NAME$selected89: true
+    }
   },
 
   /* Styles applied to the root element if `hover={true}`. */
   hover: {
-    NAME$hover92: true
+    $web: {
+      NAME$hover89: true
+    }
   },
 
   /* Styles applied to the root element if table variant = 'head'. */
   head: {
-    height: 56
+    $web: {
+      height: 56
+    }
   },
 
   /* Styles applied to the root element if table variant = 'footer'. */
   footer: {
-    height: 56
+    $web: {
+      height: 56
+    }
   }
 });
 /**

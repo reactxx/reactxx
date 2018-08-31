@@ -6,7 +6,6 @@
 //----------------------------------------------------------------------------------
 
 // This file is shared across the demos.
-
 import React from 'react';
 import ListItem from 'reactxx-mui-web/ListItem/ListItem';
 import ListItemIcon from 'reactxx-mui-web/ListItemIcon/ListItemIcon';
@@ -18,9 +17,7 @@ import SendIcon from 'reactxx-icons/Send';
 import MailIcon from 'reactxx-icons/Mail';
 import DeleteIcon from 'reactxx-icons/Delete';
 import ReportIcon from 'reactxx-icons/Report';
-
-export const mailFolderListItems = (
-  <div>
+export const mailFolderListItems = <div>
     <ListItem button>
       <ListItemIcon>
         <InboxIcon />
@@ -45,11 +42,8 @@ export const mailFolderListItems = (
       </ListItemIcon>
       <ListItemText primary="Drafts" />
     </ListItem>
-  </div>
-);
-
-export const otherMailFolderListItems = (
-  <div>
+  </div>;
+export const otherMailFolderListItems = <div>
     <ListItem button>
       <ListItemIcon>
         <MailIcon />
@@ -68,5 +62,4 @@ export const otherMailFolderListItems = (
       </ListItemIcon>
       <ListItemText primary="Spam" />
     </ListItem>
-  </div>
-);
+  </div>;

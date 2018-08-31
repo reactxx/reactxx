@@ -33,49 +33,59 @@ export type TableSortLabelClassKey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    cursor: "pointer",
-    display: "inline-flex",
-    justifyContent: "flex-start",
-    flexDirection: "inherit",
-    alignItems: "center",
-    "&:hover": {
-      color: theme.palette.text.primary
-    },
-    "&:focus": {
-      color: theme.palette.text.primary
+    $web: {
+      cursor: "pointer",
+      display: "inline-flex",
+      justifyContent: "flex-start",
+      flexDirection: "inherit",
+      alignItems: "center",
+      "&:hover": {
+        color: theme.palette.text.primary
+      },
+      "&:focus": {
+        color: theme.palette.text.primary
+      }
     }
   },
 
   /* Styles applied to the root element if `active={true}`. */
   active: {
-    color: theme.palette.text.primary,
-    "& .icon93": {
-      opacity: 1
+    $web: {
+      color: theme.palette.text.primary,
+      "& .icon90": {
+        opacity: 1
+      }
     }
   },
 
   /* Styles applied to the icon component. */
   icon: {
-    height: 16,
-    marginRight: 4,
-    marginLeft: 4,
-    opacity: 0,
-    transition: theme.transitions.create(["opacity", "transform"], {
-      duration: theme.transitions.duration.shorter
-    }),
-    userSelect: "none",
-    width: 16,
-    NAME$icon93: true
+    $web: {
+      height: 16,
+      marginRight: 4,
+      marginLeft: 4,
+      opacity: 0,
+      transition: theme.transitions.create(["opacity", "transform"], {
+        duration: theme.transitions.duration.shorter
+      }),
+      userSelect: "none",
+      width: 16,
+      NAME$icon90: true
+    }
   },
 
   /* Styles applied to the icon component if `direction="desc"`. */
   iconDirectionDesc: {
-    transform: "rotate(0deg)"
+    $web: {
+      transform: "rotate(0deg)"
+    }
   },
 
   /* Styles applied to the icon component if `direction="asc"`. */
   iconDirectionAsc: {
-    transform: "rotate(180deg)"
+    $web: {
+      transform: "rotate(180deg)"
+    }
   }
 });
 /**

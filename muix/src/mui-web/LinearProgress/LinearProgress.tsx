@@ -45,169 +45,212 @@ const TRANSITION_DURATION = 4; // seconds
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    position: "relative",
-    overflow: "hidden",
-    height: 5
+    $web: {
+      position: "relative",
+      overflow: "hidden",
+      height: 5
+    }
   },
 
   /* Styles applied to the root & bar2 element if `color="primary"`; bar2 if `variant-"buffer"`. */
   colorPrimary: {
-    backgroundColor: lighten(theme.palette.primary.light, 0.6)
+    $web: {
+      backgroundColor: lighten(theme.palette.primary.light, 0.6)
+    }
   },
   // eslint-disable-next-line max-len
 
   /* Styles applied to the root & bar2 elements if `color="secondary"`; bar2 if `variant="buffer"`. */
   colorSecondary: {
-    backgroundColor: lighten(theme.palette.secondary.light, 0.4)
+    $web: {
+      backgroundColor: lighten(theme.palette.secondary.light, 0.4)
+    }
   },
 
   /* Styles applied to the root element if `variant="buffer"`. */
   buffer: {
-    backgroundColor: "transparent"
+    $web: {
+      backgroundColor: "transparent"
+    }
   },
 
   /* Styles applied to the root element if `variant="query"`. */
   query: {
-    transform: "rotate(180deg)"
+    $web: {
+      transform: "rotate(180deg)"
+    }
   },
 
   /* Styles applied to the additional bar element if `variant="buffer"`. */
   dashed: {
-    position: "absolute",
-    marginTop: 0,
-    height: "100%",
-    width: "100%",
-    animation: "buffer 3s infinite linear"
+    $web: {
+      position: "absolute",
+      marginTop: 0,
+      height: "100%",
+      width: "100%",
+      animation: "buffer 3s infinite linear"
+    }
   },
 
   /* Styles applied to the additional bar element if `variant="buffer"` & `color="primary"`. */
   dashedColorPrimary: {
-    backgroundImage: `radial-gradient(${lighten(
-      theme.palette.primary.light,
-      0.6
-    )} 0%, ${lighten(theme.palette.primary.light, 0.6)} 16%, transparent 42%)`,
-    backgroundSize: "10px 10px",
-    backgroundPosition: "0px -23px"
+    $web: {
+      backgroundImage: `radial-gradient(${lighten(
+        theme.palette.primary.light,
+        0.6
+      )} 0%, ${lighten(
+        theme.palette.primary.light,
+        0.6
+      )} 16%, transparent 42%)`,
+      backgroundSize: "10px 10px",
+      backgroundPosition: "0px -23px"
+    }
   },
 
   /* Styles applied to the additional bar element if `variant="buffer"` & `color="secondary"`. */
   dashedColorSecondary: {
-    backgroundImage: `radial-gradient(${lighten(
-      theme.palette.secondary.light,
-      0.4
-    )} 0%, ${lighten(
-      theme.palette.secondary.light,
-      0.6
-    )} 16%, transparent 42%)`,
-    backgroundSize: "10px 10px",
-    backgroundPosition: "0px -23px"
+    $web: {
+      backgroundImage: `radial-gradient(${lighten(
+        theme.palette.secondary.light,
+        0.4
+      )} 0%, ${lighten(
+        theme.palette.secondary.light,
+        0.6
+      )} 16%, transparent 42%)`,
+      backgroundSize: "10px 10px",
+      backgroundPosition: "0px -23px"
+    }
   },
 
   /* Styles applied to the layered bar1 & bar2 elements. */
   bar: {
-    width: "100%",
-    position: "absolute",
-    left: 0,
-    bottom: 0,
-    top: 0,
-    transition: "transform 0.2s linear",
-    transformOrigin: "left"
+    $web: {
+      width: "100%",
+      position: "absolute",
+      left: 0,
+      bottom: 0,
+      top: 0,
+      transition: "transform 0.2s linear",
+      transformOrigin: "left"
+    }
   },
 
   /* Styles applied to the bar elements if `color="primary"`; bar2 if `variant` not "buffer". */
   barColorPrimary: {
-    backgroundColor: theme.palette.primary.main
+    $web: {
+      backgroundColor: theme.palette.primary.main
+    }
   },
 
   /* Styles applied to the bar elements if `color="secondary"`; bar2 if `variant` not "buffer". */
   barColorSecondary: {
-    backgroundColor: theme.palette.secondary.main
+    $web: {
+      backgroundColor: theme.palette.secondary.main
+    }
   },
 
   /* Styles applied to the bar1 element if `variant="indeterminate or query"`. */
   bar1Indeterminate: {
-    width: "auto",
-    willChange: "left, right",
-    animation:
-      "mui-indeterminate1 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite"
+    $web: {
+      width: "auto",
+      willChange: "left, right",
+      animation:
+        "mui-indeterminate1 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite"
+    }
   },
 
   /* Styles applied to the bar1 element if `variant="determinate"`. */
   bar1Determinate: {
-    willChange: "transform",
-    transition: `transform .${TRANSITION_DURATION}s linear`
+    $web: {
+      willChange: "transform",
+      transition: `transform .${TRANSITION_DURATION}s linear`
+    }
   },
 
   /* Styles applied to the bar1 element if `variant="buffer"`. */
   bar1Buffer: {
-    zIndex: 1,
-    transition: `transform .${TRANSITION_DURATION}s linear`
+    $web: {
+      zIndex: 1,
+      transition: `transform .${TRANSITION_DURATION}s linear`
+    }
   },
 
   /* Styles applied to the bar2 element if `variant="indeterminate or query"`. */
   bar2Indeterminate: {
-    width: "auto",
-    willChange: "left, right",
-    animation:
-      "mui-indeterminate2 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite",
-    animationDelay: "1.15s"
+    $web: {
+      width: "auto",
+      willChange: "left, right",
+      animation:
+        "mui-indeterminate2 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite",
+      animationDelay: "1.15s"
+    }
   },
 
   /* Styles applied to the bar2 element if `variant="determinate"`. */
-  bar2Determinate: {},
+  bar2Determinate: {
+    $web: {}
+  },
 
   /* Styles applied to the bar2 element if `variant="buffer"`. */
   bar2Buffer: {
-    transition: `transform .${TRANSITION_DURATION}s linear`
+    $web: {
+      transition: `transform .${TRANSITION_DURATION}s linear`
+    }
   },
   // Legends:
   // || represents the viewport
   // -  represents a light background
   // x  represents a dark background
   "@keyframes mui-indeterminate1": {
-    //  |-----|---x-||-----||-----|
-    "0%": {
-      left: "-35%",
-      right: "100%"
-    },
-    //  |-----|-----||-----||xxxx-|
-    "60%": {
-      left: "100%",
-      right: "-90%"
-    },
-    "100%": {
-      left: "100%",
-      right: "-90%"
+    $web: {
+      //  |-----|---x-||-----||-----|
+      "0%": {
+        left: "-35%",
+        right: "100%"
+      },
+      //  |-----|-----||-----||xxxx-|
+      "60%": {
+        left: "100%",
+        right: "-90%"
+      },
+      "100%": {
+        left: "100%",
+        right: "-90%"
+      }
     }
   },
   "@keyframes mui-indeterminate2": {
-    //  |xxxxx|xxxxx||-----||-----|
-    "0%": {
-      left: "-200%",
-      right: "100%"
-    },
-    //  |-----|-----||-----||-x----|
-    "60%": {
-      left: "107%",
-      right: "-8%"
-    },
-    "100%": {
-      left: "107%",
-      right: "-8%"
+    $web: {
+      //  |xxxxx|xxxxx||-----||-----|
+      "0%": {
+        left: "-200%",
+        right: "100%"
+      },
+      //  |-----|-----||-----||-x----|
+      "60%": {
+        left: "107%",
+        right: "-8%"
+      },
+      "100%": {
+        left: "107%",
+        right: "-8%"
+      }
     }
   },
   "@keyframes buffer": {
-    "0%": {
-      opacity: 1,
-      backgroundPosition: "0px -23px"
-    },
-    "50%": {
-      opacity: 0,
-      backgroundPosition: "0px -23px"
-    },
-    "100%": {
-      opacity: 1,
-      backgroundPosition: "-200px -23px"
+    $web: {
+      "0%": {
+        opacity: 1,
+        backgroundPosition: "0px -23px"
+      },
+      "50%": {
+        opacity: 0,
+        backgroundPosition: "0px -23px"
+      },
+      "100%": {
+        opacity: 1,
+        backgroundPosition: "-200px -23px"
+      }
     }
   }
 });

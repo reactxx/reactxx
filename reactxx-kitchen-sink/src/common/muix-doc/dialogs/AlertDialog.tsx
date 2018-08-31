@@ -13,29 +13,25 @@ import DialogContent from 'reactxx-mui-web/DialogContent/DialogContent';
 import DialogContentText from 'reactxx-mui-web/DialogContentText/DialogContentText';
 import DialogTitle from 'reactxx-mui-web/DialogTitle/DialogTitle';
 
-class AlertDialog extends React.Component<any,any> {
+class AlertDialog extends React.Component<any, any> {
   state: any = {
-    open: false,
+    open: false
   };
-
   handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({
+      open: true
+    });
   };
-
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false
+    });
   };
 
   render() {
-    return (
-      <div>
+    return <div>
         <Button onClick={this.handleClickOpen}>Open alert dialog</Button>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
+        <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
           <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
@@ -52,9 +48,9 @@ class AlertDialog extends React.Component<any,any> {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 export default AlertDialog;

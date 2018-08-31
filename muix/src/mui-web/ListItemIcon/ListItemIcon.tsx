@@ -20,9 +20,11 @@ export type ListItemIconClassKey = "root";
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    marginRight: 16,
-    color: theme.palette.action.active,
-    flexShrink: 0
+    $web: {
+      marginRight: 16,
+      color: theme.palette.action.active,
+      flexShrink: 0
+    }
   }
 });
 /**

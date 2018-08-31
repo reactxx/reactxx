@@ -66,9 +66,11 @@ export const processScript = (info: Ast.MUISourceInfo, code: string) => {
     code = code.replace(`super();`, `super(props);`)
     code = code.replace(`import withTheme from '../styles/withTheme';`, ``)
     code = code.replace(`import withStyles from '../styles/withStyles';`, ``)
-    code = code.replace(`export const styles =`, `const styles =`)
     if (info.withStylesOrTheme && code.indexOf(`const styles =`) < 0)
         code += '\nconst styles = {}\n'
+    else
+        //code = code.replace(`export const styles =`, `const styles${info.withStylesOrTheme && !info.withTheme ? ': Types.SheetCreatorX<Shape>' : ''} =`) //
+        code = code.replace(`export const styles =`, `const styles =`) //
 
     return code
 }

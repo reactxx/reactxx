@@ -61,7 +61,6 @@ export interface RenderAddIn {
   finishAddInProps?: Sheeter.FinishAddIns
   finishAddInClasses?: Sheeter.FinishAddIns
 
-  //rulesetsToClassNames?: (...rulesets: React.CSSProperties[]) => string
 }
 
 // empty addIn configuration

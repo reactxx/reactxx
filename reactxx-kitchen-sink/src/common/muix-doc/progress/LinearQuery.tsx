@@ -7,28 +7,26 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import LinearProgress from 'reactxx-mui-web/LinearProgress/LinearProgress';
-
 const styles = {
   root: {
-    flexGrow: 1,
-  },
+    flexGrow: 1
+  }
 };
 
 function LinearQuery(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classes.root}>
       <LinearProgress variant="query" />
       <br />
       <LinearProgress color="secondary" variant="query" />
-    </div>
-  );
+    </div>;
 }
 
 LinearQuery['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, LinearQuery)();
+export default withStylesCreator((styles as any), LinearQuery)();

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import GridList from 'reactxx-mui-web/GridList/GridList';
 import GridListTile from 'reactxx-mui-web/GridListTile/GridListTile';
 import GridListTileBar from 'reactxx-mui-web/GridListTileBar/GridListTileBar';
@@ -22,17 +22,16 @@ const styles = theme => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   gridList: {
     width: 500,
-    height: 450,
+    height: 450
   },
   icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
-  },
+    color: 'rgba(255, 255, 255, 0.54)'
+  }
 });
-
 /**
  * The example data is structured as follows:
  *
@@ -50,36 +49,30 @@ const styles = theme => ({
  *   },
  * ];
  */
-function TitlebarGridList(props) {
-  const { classes } = props;
 
-  return (
-    <div className={classes.root}>
+
+function TitlebarGridList(props) {
+  const {
+    classes
+  } = props;
+  return <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList}>
-        <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+        <GridListTile key="Subheader" cols={2} style={{
+        height: 'auto'
+      }}>
           <ListSubheader component="div">December</ListSubheader>
         </GridListTile>
-        {tileData.map(tile => (
-          <GridListTile key={tile.img}>
+        {tileData.map(tile => <GridListTile key={tile.img}>
             <img src={tile.img} alt={tile.title} />
-            <GridListTileBar
-              title={tile.title}
-              subtitle={<span>by: {tile.author}</span>}
-              actionIcon={
-                <IconButton className={classes.icon}>
+            <GridListTileBar title={tile.title} subtitle={<span>by: {tile.author}</span>} actionIcon={<IconButton className={classes.icon}>
                   <InfoIcon />
-                </IconButton>
-              }
-            />
-          </GridListTile>
-        ))}
+                </IconButton>} />
+          </GridListTile>)}
       </GridList>
-    </div>
-  );
+    </div>;
 }
 
 TitlebarGridList['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, TitlebarGridList)();
+export default withStylesCreator((styles as any), TitlebarGridList)();

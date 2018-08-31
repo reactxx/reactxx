@@ -24,21 +24,25 @@ export type MenuItemClassKey = "root" | "selected";
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    ...theme.typography.subheading,
-    height: 24,
-    boxSizing: "content-box",
-    width: "auto",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
-    paddingLeft: 16,
-    paddingRight: 16,
-    "&.selected61": {}
+    $web: {
+      ...theme.typography.subheading,
+      height: 24,
+      boxSizing: "content-box",
+      width: "auto",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+      paddingLeft: 16,
+      paddingRight: 16,
+      "&.selected59": {}
+    }
   },
 
   /* Styles applied to the root element if `selected={true}`. */
   selected: {
-    NAME$selected61: true
+    $web: {
+      NAME$selected59: true
+    }
   }
 });
 

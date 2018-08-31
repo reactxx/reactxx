@@ -14,41 +14,45 @@ import Paper from 'reactxx-mui-web/Paper/Paper';
 import Popper from 'reactxx-mui-web/Popper/Popper';
 import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
 import MenuList from 'reactxx-mui-web/MenuList/MenuList';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 
 const styles = theme => ({
   root: {
-    display: 'flex',
+    display: 'flex'
   },
   paper: {
-    marginRight: theme.spacing.unit * 2,
-  },
+    marginRight: theme.spacing.unit * 2
+  }
 });
 
-class MenuListComposition extends React.Component<any,any> {
+class MenuListComposition extends React.Component<any, any> {
   state: any = {
-    open: false,
+    open: false
   };
-
-  anchorEl
+  anchorEl;
   handleToggle = () => {
-    this.setState(state => ({ open: !state.open }));
+    this.setState(state => ({
+      open: !state.open
+    }));
   };
-
   handleClose = event => {
     if (this.anchorEl.contains(event.target)) {
       return;
     }
 
-    this.setState({ open: false });
+    this.setState({
+      open: false
+    });
   };
 
   render() {
-    const { classes } = this.props;
-    const { open } = this.state;
-
-    return (
-      <div className={classes.root}>
+    const {
+      classes
+    } = this.props;
+    const {
+      open
+    } = this.state;
+    return <div className={classes.root}>
         <Paper className={classes.paper}>
           <MenuList>
             <MenuItem>Profile</MenuItem>
@@ -57,23 +61,22 @@ class MenuListComposition extends React.Component<any,any> {
           </MenuList>
         </Paper>
         <div>
-          <Button
-            buttonRef={node => {
-              this.anchorEl = node;
-            }}
-            aria-owns={open ? 'menu-list-grow' : null}
-            aria-haspopup="true"
-            onClick={this.handleToggle}
-          >
+          <Button buttonRef={node => {
+          this.anchorEl = node;
+        }} aria-owns={open ? 'menu-list-grow' : null} aria-haspopup="true" onClick={this.handleToggle}>
             Toggle Menu Grow
           </Button>
           <Popper open={open} anchorEl={this.anchorEl} transition disablePortal>
-            {({ TransitionProps, placement }) => (
-              <Grow
-                {...TransitionProps}
-                {...{id:"menu-list-grow"}}
-                style={{ $web:{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}}
-              >
+            {({
+            TransitionProps,
+            placement
+          }) => <Grow {...TransitionProps} {...{
+            id: "menu-list-grow"
+          }} style={{
+            $web: {
+              transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom'
+            }
+          }}>
                 <Paper>
                   <ClickAwayListener onClickAway={this.handleClose}>
                     <MenuList>
@@ -83,17 +86,15 @@ class MenuListComposition extends React.Component<any,any> {
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>
-              </Grow>
-            )}
+              </Grow>}
           </Popper>
         </div>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 MenuListComposition['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, MenuListComposition)();
+export default withStylesCreator((styles as any), MenuListComposition)();

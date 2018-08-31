@@ -10,13 +10,11 @@ import Button from 'reactxx-mui-web/Button/Button';
 import Tooltip from 'reactxx-mui-web/Tooltip/Tooltip';
 
 function DisabledTooltips() {
-  return (
-    <Tooltip title="You don't have permission to do this">
+  return <Tooltip title="You don't have permission to do this">
       <span>
         <Button disabled>A Disabled Button</Button>
       </span>
-    </Tooltip>
-  );
+    </Tooltip>;
 }
 
 export default DisabledTooltips;

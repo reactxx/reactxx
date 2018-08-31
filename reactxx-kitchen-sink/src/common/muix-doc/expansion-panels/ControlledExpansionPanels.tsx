@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import ExpansionPanel from 'reactxx-mui-web/ExpansionPanel/ExpansionPanel';
 import ExpansionPanelDetails from 'reactxx-mui-web/ExpansionPanelDetails/ExpansionPanelDetails';
 import ExpansionPanelSummary from 'reactxx-mui-web/ExpansionPanelSummary/ExpansionPanelSummary';
@@ -16,36 +16,37 @@ import ExpandMoreIcon from 'reactxx-icons/ExpandMore';
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: '100%'
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
-    flexShrink: 0,
+    flexShrink: 0
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
-  },
+    color: theme.palette.text.secondary
+  }
 });
 
-class ControlledExpansionPanels extends React.Component<any,any> {
+class ControlledExpansionPanels extends React.Component<any, any> {
   state: any = {
-    expanded: null,
+    expanded: null
   };
-
   handleChange = panel => (event, expanded) => {
     this.setState({
-      expanded: expanded ? panel : false,
+      expanded: expanded ? panel : false
     });
   };
 
   render() {
-    const { classes } = this.props;
-    const { expanded } = this.state;
-
-    return (
-      <div className={classes.root}>
+    const {
+      classes
+    } = this.props;
+    const {
+      expanded
+    } = this.state;
+    return <div className={classes.root}>
         <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>General settings</Typography>
@@ -97,13 +98,12 @@ class ControlledExpansionPanels extends React.Component<any,any> {
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 ControlledExpansionPanels['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, ControlledExpansionPanels)();
+export default withStylesCreator((styles as any), ControlledExpansionPanels)();

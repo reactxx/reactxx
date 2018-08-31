@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import List from 'reactxx-mui-web/List/List';
 import ListItem from 'reactxx-mui-web/ListItem/ListItem';
 import ListItemIcon from 'reactxx-mui-web/ListItemIcon/ListItemIcon';
@@ -20,14 +20,15 @@ const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
 function SimpleList(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classes.root}>
       <List component="nav">
         <ListItem button>
           <ListItemIcon>
@@ -51,12 +52,10 @@ function SimpleList(props) {
           <ListItemText primary="Spam" />
         </ListItem>
       </List>
-    </div>
-  );
+    </div>;
 }
 
 SimpleList['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, SimpleList)();
+export default withStylesCreator((styles as any), SimpleList)();

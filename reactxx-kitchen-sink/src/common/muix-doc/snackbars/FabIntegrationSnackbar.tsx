@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from 'reactxx-basic';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import AppBar from 'reactxx-mui-web/AppBar/AppBar';
 import Toolbar from 'reactxx-mui-web/Toolbar/Toolbar';
 import IconButton from 'reactxx-mui-web/IconButton/IconButton';
@@ -21,67 +21,71 @@ import Snackbar from 'reactxx-mui-web/Snackbar/Snackbar';
 const styles = theme => ({
   root: {
     position: 'relative',
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   appFrame: {
     width: 360,
     height: 360,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20,
+    marginRight: 20
   },
   button: {
-    marginBottom: theme.spacing.unit,
+    marginBottom: theme.spacing.unit
   },
   fab: {
     position: 'absolute',
     bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 2
   },
   fabMoveUp: {
     transform: 'translate3d(0, -46px, 0)',
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.enteringScreen,
-      easing: theme.transitions.easing.easeOut,
-    }),
+      easing: theme.transitions.easing.easeOut
+    })
   },
   fabMoveDown: {
     transform: 'translate3d(0, 0, 0)',
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.leavingScreen,
-      easing: theme.transitions.easing.sharp,
-    }),
+      easing: theme.transitions.easing.sharp
+    })
   },
   snackbar: {
-    position: 'absolute',
+    position: 'absolute'
   },
   snackbarContent: {
-    width: 360,
-  },
+    width: 360
+  }
 });
 
-class FabIntegrationSnackbar extends React.Component<any,any> {
+class FabIntegrationSnackbar extends React.Component<any, any> {
   state: any = {
-    open: false,
+    open: false
   };
-
   handleClick = () => {
-    this.setState({ open: true });
+    this.setState({
+      open: true
+    });
   };
-
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false
+    });
   };
 
   render() {
-    const { classes } = this.props;
-    const { open } = this.state;
+    const {
+      classes
+    } = this.props;
+    const {
+      open
+    } = this.state;
     const fabClassName = classNames(classes.fab, open ? classes.fabMoveUp : classes.fabMoveDown);
-
-    return (
-      <div className={classes.root}>
+    return <div className={classes.root}>
         <Button className={classes.button} onClick={this.handleClick}>
           Open snackbar
         </Button>
@@ -99,30 +103,19 @@ class FabIntegrationSnackbar extends React.Component<any,any> {
           <Button variant="fab" color="secondary" className={fabClassName}>
             <AddIcon />
           </Button>
-          <Snackbar
-            open={open}
-            autoHideDuration={4000}
-            onClose={this.handleClose}
-            ContentProps={{
-              'aria-describedby': 'snackbar-fab-message-id',
-              className: classes.snackbarContent,
-            }}
-            message={<span id="snackbar-fab-message-id">Archived</span>}
-            action={
-              <Button color="inherit" size="small" onClick={this.handleClose}>
+          <Snackbar open={open} autoHideDuration={4000} onClose={this.handleClose} ContentProps={{
+          'aria-describedby': 'snackbar-fab-message-id',
+          className: classes.snackbarContent
+        }} message={<span id="snackbar-fab-message-id">Archived</span>} action={<Button color="inherit" size="small" onClick={this.handleClose}>
                 Undo
-              </Button>
-            }
-            className={classes.snackbar}
-          />
+              </Button>} className={classes.snackbar} />
         </div>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 FabIntegrationSnackbar['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, FabIntegrationSnackbar)();
+export default withStylesCreator((styles as any), FabIntegrationSnackbar)();

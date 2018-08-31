@@ -21,7 +21,9 @@ export type CardClassKey = "root";
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    overflow: "hidden"
+    $web: {
+      overflow: "hidden"
+    }
   }
 };
 

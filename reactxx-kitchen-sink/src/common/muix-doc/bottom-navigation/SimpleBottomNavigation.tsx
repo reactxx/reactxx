@@ -7,49 +7,45 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import BottomNavigation from 'reactxx-mui-web/BottomNavigation/BottomNavigation';
 import BottomNavigationAction from 'reactxx-mui-web/BottomNavigationAction/BottomNavigationAction';
 import RestoreIcon from 'reactxx-icons/Restore';
 import FavoriteIcon from 'reactxx-icons/Favorite';
 import LocationOnIcon from 'reactxx-icons/LocationOn';
-
 const styles = {
   root: {
-    width: 500,
-  },
+    width: 500
+  }
 };
 
-class SimpleBottomNavigation extends React.Component<any,any> {
+class SimpleBottomNavigation extends React.Component<any, any> {
   state: any = {
-    value: 0,
+    value: 0
   };
-
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.setState({
+      value
+    });
   };
 
   render() {
-    const { classes } = this.props;
-    const { value } = this.state;
-
-    return (
-      <BottomNavigation
-        value={value}
-        onChange={this.handleChange}
-        showLabels
-        className={classes.root}
-      >
+    const {
+      classes
+    } = this.props;
+    const {
+      value
+    } = this.state;
+    return <BottomNavigation value={value} onChange={this.handleChange} showLabels className={classes.root}>
         <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
         <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
         <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-      </BottomNavigation>
-    );
+      </BottomNavigation>;
   }
+
 }
 
 SimpleBottomNavigation['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, SimpleBottomNavigation)();
+export default withStylesCreator((styles as any), SimpleBottomNavigation)();

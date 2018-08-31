@@ -25,15 +25,19 @@ export type CardMediaClassKey = "root" | "media";
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    display: "block",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center"
+    $web: {
+      display: "block",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center"
+    }
   },
 
   /* Styles applied to the root element if `component="video, audio, picture, iframe, or img"`. */
   media: {
-    width: "100%"
+    $web: {
+      width: "100%"
+    }
   }
 };
 const MEDIA_COMPONENTS = ["video", "audio", "picture", "iframe", "img"];

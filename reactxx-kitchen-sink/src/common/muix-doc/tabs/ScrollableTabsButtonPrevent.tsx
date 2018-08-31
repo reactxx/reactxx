@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import AppBar from 'reactxx-mui-web/AppBar/AppBar';
 import Tabs from 'reactxx-mui-web/Tabs/Tabs';
 import Tab from 'reactxx-mui-web/Tab/Tab';
@@ -21,40 +21,43 @@ import ThumbUp from 'reactxx-icons/ThumbUp';
 import Typography from 'reactxx-mui-web/Typography/Typography';
 
 function TabContainer(props) {
-  return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+  return <Typography component="div" style={{
+    padding: 8 * 3
+  }}>
       {props.children}
-    </Typography>
-  );
+    </Typography>;
 }
 
 TabContainer['propTypes'] = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
-class ScrollableTabsButtonPrevent extends React.Component<any,any> {
+class ScrollableTabsButtonPrevent extends React.Component<any, any> {
   state: any = {
-    value: 0,
+    value: 0
   };
-
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.setState({
+      value
+    });
   };
 
   render() {
-    const { classes } = this.props;
-    const { value } = this.state;
-
-    return (
-      <div className={classes.root}>
+    const {
+      classes
+    } = this.props;
+    const {
+      value
+    } = this.state;
+    return <div className={classes.root}>
         <AppBar position="static">
           <Tabs value={value} onChange={this.handleChange} scrollable scrollButtons="off">
             <Tab icon={<PhoneIcon />} />
@@ -73,13 +76,12 @@ class ScrollableTabsButtonPrevent extends React.Component<any,any> {
         {value === 4 && <TabContainer>Item Five</TabContainer>}
         {value === 5 && <TabContainer>Item Six</TabContainer>}
         {value === 6 && <TabContainer>Item Seven</TabContainer>}
-      </div>
-    );
+      </div>;
   }
+
 }
 
 ScrollableTabsButtonPrevent['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, ScrollableTabsButtonPrevent)();
+export default withStylesCreator((styles as any), ScrollableTabsButtonPrevent)();

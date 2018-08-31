@@ -7,20 +7,18 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import LinearProgress from 'reactxx-mui-web/LinearProgress/LinearProgress';
-
 const styles = {
   root: {
-    flexGrow: 1,
-  },
+    flexGrow: 1
+  }
 };
 
-class LinearDeterminate extends React.Component<any,any> {
+class LinearDeterminate extends React.Component<any, any> {
   timer = null;
-
   state: any = {
-    completed: 0,
+    completed: 0
   };
 
   componentDidMount() {
@@ -32,29 +30,36 @@ class LinearDeterminate extends React.Component<any,any> {
   }
 
   progress = () => {
-    const { completed } = this.state;
+    const {
+      completed
+    } = this.state;
+
     if (completed === 100) {
-      this.setState({ completed: 0 });
+      this.setState({
+        completed: 0
+      });
     } else {
       const diff = Math.random() * 10;
-      this.setState({ completed: Math.min(completed + diff, 100) });
+      this.setState({
+        completed: Math.min(completed + diff, 100)
+      });
     }
   };
 
   render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.root}>
+    const {
+      classes
+    } = this.props;
+    return <div className={classes.root}>
         <LinearProgress variant="determinate" value={this.state.completed} />
         <br />
         <LinearProgress color="secondary" variant="determinate" value={this.state.completed} />
-      </div>
-    );
+      </div>;
   }
+
 }
 
 LinearDeterminate['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, LinearDeterminate)();
+export default withStylesCreator((styles as any), LinearDeterminate)();

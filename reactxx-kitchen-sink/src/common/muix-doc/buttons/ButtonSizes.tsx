@@ -7,20 +7,21 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Button from 'reactxx-mui-web/Button/Button';
 import AddIcon from 'reactxx-icons/Add';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
-  },
+    margin: theme.spacing.unit
+  }
 });
 
 function ButtonSizes(props) {
-  const { classes } = props;
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  return <div>
       <div>
         <Button size="small" className={classes.button}>
           Small
@@ -62,12 +63,10 @@ function ButtonSizes(props) {
           <AddIcon />
         </Button>
       </div>
-    </div>
-  );
+    </div>;
 }
 
 ButtonSizes['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, ButtonSizes)();
+export default withStylesCreator((styles as any), ButtonSizes)();

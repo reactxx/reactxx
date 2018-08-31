@@ -46,59 +46,65 @@ const styles = theme => {
   return {
     /* Styles applied to the root element. */
     root: {
-      position: "relative",
-      transition: theme.transitions.create(["margin"], transition),
-      "&:before": {
-        position: "absolute",
-        left: 0,
-        top: -1,
-        right: 0,
-        height: 1,
-        content: '""',
-        opacity: 1,
-        backgroundColor: theme.palette.divider,
-        transition: theme.transitions.create(
-          ["opacity", "background-color"],
-          transition
-        )
-      },
-      "&:first-child": {
-        borderTopLeftRadius: 2,
-        borderTopRightRadius: 2,
+      $web: {
+        position: "relative",
+        transition: theme.transitions.create(["margin"], transition),
         "&:before": {
-          display: "none"
-        }
-      },
-      "&:last-child": {
-        borderBottomLeftRadius: 2,
-        borderBottomRightRadius: 2,
-        ...edgeFix
-      },
-      "&.expanded29 + &": {
-        "&:before": {
-          display: "none"
+          position: "absolute",
+          left: 0,
+          top: -1,
+          right: 0,
+          height: 1,
+          content: '""',
+          opacity: 1,
+          backgroundColor: theme.palette.divider,
+          transition: theme.transitions.create(
+            ["opacity", "background-color"],
+            transition
+          )
+        },
+        "&:first-child": {
+          borderTopLeftRadius: 2,
+          borderTopRightRadius: 2,
+          "&:before": {
+            display: "none"
+          }
+        },
+        "&:last-child": {
+          borderBottomLeftRadius: 2,
+          borderBottomRightRadius: 2,
+          ...edgeFix
+        },
+        "&.expanded28 + &": {
+          "&:before": {
+            display: "none"
+          }
         }
       }
     },
 
     /* Styles applied to the root element if `expanded={true}`. */
     expanded: {
-      margin: "16px 0",
-      "&:first-child": {
-        marginTop: 0
-      },
-      "&:last-child": {
-        marginBottom: 0
-      },
-      "&:before": {
-        opacity: 0
-      },
-      NAME$expanded29: true
+      $web: {
+        margin: "16px 0",
+        "&:first-child": {
+          marginTop: 0
+        },
+        "&:last-child": {
+          marginBottom: 0
+        },
+        "&:before": {
+          opacity: 0
+        },
+        NAME$expanded28: true
+      }
     },
 
     /* Styles applied to the root element if `disabled={true}`. */
     disabled: {
-      backgroundColor: theme.palette.action.disabledBackground
+      $web: {
+        backgroundColor: theme.palette.action.disabledBackground
+      }
     }
   };
 };

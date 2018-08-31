@@ -26,12 +26,14 @@ export type GridListClassKey = "root";
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    overflowY: "auto",
-    listStyle: "none",
-    padding: 0,
-    WebkitOverflowScrolling: "touch" // Add iOS momentum scrolling.
+    $web: {
+      display: "flex",
+      flexWrap: "wrap",
+      overflowY: "auto",
+      listStyle: "none",
+      padding: 0,
+      WebkitOverflowScrolling: "touch" // Add iOS momentum scrolling.
+    }
   }
 };
 

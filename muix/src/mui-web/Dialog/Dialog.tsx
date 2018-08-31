@@ -54,100 +54,124 @@ export type DialogClassKey =
 
 const styles = theme => ({
   /* Styles applied to the root element. */
-  root: {},
+  root: {
+    $web: {}
+  },
 
   /* Styles applied to the root element if `scroll="paper"`. */
   scrollPaper: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
+    $web: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
+    }
   },
 
   /* Styles applied to the root element if `scroll="bodyr"`. */
   scrollBody: {
-    overflowY: "auto",
-    overflowX: "hidden"
+    $web: {
+      overflowY: "auto",
+      overflowX: "hidden"
+    }
   },
 
   /* Styles applied to the `Paper` component. */
   paper: {
-    display: "flex",
-    flexDirection: "column",
-    margin: 48,
-    position: "relative",
-    overflowY: "auto",
-    // Fix IE11 issue, to remove at some point.
-    // We disable the focus ring for mouse, touch and keyboard users.
-    outline: "none"
+    $web: {
+      display: "flex",
+      flexDirection: "column",
+      margin: 48,
+      position: "relative",
+      overflowY: "auto",
+      // Fix IE11 issue, to remove at some point.
+      // We disable the focus ring for mouse, touch and keyboard users.
+      outline: "none"
+    }
   },
 
   /* Styles applied to the `Paper` component if `scroll="paper"`. */
   paperScrollPaper: {
-    flex: "0 1 auto",
-    maxHeight: "calc(100% - 96px)"
+    $web: {
+      flex: "0 1 auto",
+      maxHeight: "calc(100% - 96px)"
+    }
   },
 
   /* Styles applied to the `Paper` component if `scroll="body"`. */
   paperScrollBody: {
-    margin: "48px auto",
-    NAME$paperScrollBody22: true
+    $web: {
+      margin: "48px auto",
+      NAME$paperScrollBody21: true
+    }
   },
 
   /* Styles applied to the `Paper` component if `maxWidth="xs"`. */
   paperWidthXs: {
-    maxWidth: Math.max(theme.breakpoints.values.xs, 360),
-    "&.paperScrollBody22": {
-      [theme.breakpoints.down(
-        Math.max(theme.breakpoints.values.xs, 360) + 48 * 2
-      )]: {
-        margin: 48
+    $web: {
+      maxWidth: Math.max(theme.breakpoints.values.xs, 360),
+      "&.paperScrollBody21": {
+        [theme.breakpoints.down(
+          Math.max(theme.breakpoints.values.xs, 360) + 48 * 2
+        )]: {
+          margin: 48
+        }
       }
     }
   },
 
   /* Styles applied to the `Paper` component if `maxWidth="sm"`. */
   paperWidthSm: {
-    maxWidth: theme.breakpoints.values.sm,
-    "&.paperScrollBody22": {
-      [theme.breakpoints.down(theme.breakpoints.values.sm + 48 * 2)]: {
-        margin: 48
+    $web: {
+      maxWidth: theme.breakpoints.values.sm,
+      "&.paperScrollBody21": {
+        [theme.breakpoints.down(theme.breakpoints.values.sm + 48 * 2)]: {
+          margin: 48
+        }
       }
     }
   },
 
   /* Styles applied to the `Paper` component if `maxWidth="md"`. */
   paperWidthMd: {
-    maxWidth: theme.breakpoints.values.md,
-    "&.paperScrollBody22": {
-      [theme.breakpoints.down(theme.breakpoints.values.md + 48 * 2)]: {
-        margin: 48
+    $web: {
+      maxWidth: theme.breakpoints.values.md,
+      "&.paperScrollBody21": {
+        [theme.breakpoints.down(theme.breakpoints.values.md + 48 * 2)]: {
+          margin: 48
+        }
       }
     }
   },
 
   /* Styles applied to the `Paper` component if `maxWidth="lg"`. */
   paperWidthLg: {
-    maxWidth: theme.breakpoints.values.lg,
-    "&.paperScrollBody22": {
-      [theme.breakpoints.down(theme.breakpoints.values.lg + 48 * 2)]: {
-        margin: 48
+    $web: {
+      maxWidth: theme.breakpoints.values.lg,
+      "&.paperScrollBody21": {
+        [theme.breakpoints.down(theme.breakpoints.values.lg + 48 * 2)]: {
+          margin: 48
+        }
       }
     }
   },
 
   /* Styles applied to the `Paper` component if `fullWidth={true}`. */
   paperFullWidth: {
-    width: "100%"
+    $web: {
+      width: "100%"
+    }
   },
 
   /* Styles applied to the `Paper` component if `fullScreen={true}`. */
   paperFullScreen: {
-    margin: 0,
-    width: "100%",
-    maxWidth: "100%",
-    height: "100%",
-    maxHeight: "none",
-    borderRadius: 0
+    $web: {
+      margin: 0,
+      width: "100%",
+      maxWidth: "100%",
+      height: "100%",
+      maxHeight: "none",
+      borderRadius: 0
+    }
   }
 });
 /**

@@ -7,44 +7,42 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Avatar from 'reactxx-mui-web/Avatar/Avatar';
 import deepOrange from 'reactxx-mui-web/colors/deepOrange';
 import deepPurple from 'reactxx-mui-web/colors/deepPurple';
-
 const styles = {
   avatar: {
-    margin: 10,
+    margin: 10
   },
   orangeAvatar: {
     margin: 10,
     color: '#fff',
-    backgroundColor: deepOrange[500],
+    backgroundColor: deepOrange[500]
   },
   purpleAvatar: {
     margin: 10,
     color: '#fff',
-    backgroundColor: deepPurple[500],
+    backgroundColor: deepPurple[500]
   },
   row: {
     display: 'flex',
-    justifyContent: 'center',
-  },
+    justifyContent: 'center'
+  }
 };
 
 function LetterAvatars(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.row}>
+  const {
+    classes
+  } = props;
+  return <div className={classes.row}>
       <Avatar className={classes.avatar}>H</Avatar>
       <Avatar className={classes.orangeAvatar}>N</Avatar>
       <Avatar className={classes.purpleAvatar}>OP</Avatar>
-    </div>
-  );
+    </div>;
 }
 
 LetterAvatars['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, LetterAvatars)();
+export default withStylesCreator((styles as any), LetterAvatars)();

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import AddIcon from 'reactxx-icons/Add';
 import Button from 'reactxx-mui-web/Button/Button';
 import DeleteIcon from 'reactxx-icons/Delete';
@@ -16,19 +16,20 @@ import Tooltip from 'reactxx-mui-web/Tooltip/Tooltip';
 
 const styles = theme => ({
   fab: {
-    margin: theme.spacing.unit * 2,
+    margin: theme.spacing.unit * 2
   },
   absolute: {
     position: 'absolute',
     bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 3,
-  },
+    right: theme.spacing.unit * 3
+  }
 });
 
 function SimpleTooltips(props) {
-  const { classes } = props;
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  return <div>
       <Tooltip title="Delete">
         <IconButton aria-label="Delete">
           <DeleteIcon />
@@ -44,12 +45,10 @@ function SimpleTooltips(props) {
           <AddIcon />
         </Button>
       </Tooltip>
-    </div>
-  );
+    </div>;
 }
 
 SimpleTooltips['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, SimpleTooltips)();
+export default withStylesCreator((styles as any), SimpleTooltips)();

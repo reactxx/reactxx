@@ -57,53 +57,64 @@ const styles = theme => {
   return {
     /* Styles applied to the root element. */
     root: {
-      fontFamily: theme.typography.fontFamily,
-      fontSize: theme.typography.pxToRem(13),
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      height,
-      color: theme.palette.getContrastText(backgroundColor),
-      backgroundColor,
-      borderRadius: height / 2,
-      whiteSpace: "nowrap",
-      transition: theme.transitions.create(["background-color", "box-shadow"]),
-      // label will inherit this from root, then `clickable` class overrides this for both
-      cursor: "default",
-      // We disable the focus ring for mouse, touch and keyboard users.
-      outline: "none",
-      textDecoration: "none",
-      border: "none",
-      // Remove `button` border
-      padding: 0 // Remove `button` padding
+      $web: {
+        fontFamily: theme.typography.fontFamily,
+        fontSize: theme.typography.pxToRem(13),
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height,
+        color: theme.palette.getContrastText(backgroundColor),
+        backgroundColor,
+        borderRadius: height / 2,
+        whiteSpace: "nowrap",
+        transition: theme.transitions.create([
+          "background-color",
+          "box-shadow"
+        ]),
+        // label will inherit this from root, then `clickable` class overrides this for both
+        cursor: "default",
+        // We disable the focus ring for mouse, touch and keyboard users.
+        outline: "none",
+        textDecoration: "none",
+        border: "none",
+        // Remove `button` border
+        padding: 0 // Remove `button` padding
+      }
     },
 
     /* Styles applied to the root element if `color="primary"`. */
     colorPrimary: {
-      backgroundColor: theme.palette.primary.main,
-      color: theme.palette.primary.contrastText
+      $web: {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.primary.contrastText
+      }
     },
 
     /* Styles applied to the root element if `color="secondary"`. */
     colorSecondary: {
-      backgroundColor: theme.palette.secondary.main,
-      color: theme.palette.secondary.contrastText
+      $web: {
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.secondary.contrastText
+      }
     },
 
     /* Styles applied to the root element if `onClick` is defined or `clickable={true}`. */
     clickable: {
-      WebkitTapHighlightColor: "transparent",
-      // Remove grey highlight
-      cursor: "pointer",
-      "&:hover": {
-        backgroundColor: emphasize(backgroundColor, 0.08)
-      },
-      "&:focus": {
-        backgroundColor: emphasize(backgroundColor, 0.08)
-      },
-      "&:active": {
-        boxShadow: theme.shadows[1],
-        backgroundColor: emphasize(backgroundColor, 0.12)
+      $web: {
+        WebkitTapHighlightColor: "transparent",
+        // Remove grey highlight
+        cursor: "pointer",
+        "&:hover": {
+          backgroundColor: emphasize(backgroundColor, 0.08)
+        },
+        "&:focus": {
+          backgroundColor: emphasize(backgroundColor, 0.08)
+        },
+        "&:active": {
+          boxShadow: theme.shadows[1],
+          backgroundColor: emphasize(backgroundColor, 0.12)
+        }
       }
     },
 
@@ -112,14 +123,16 @@ const styles = theme => {
      * `onClick` and `color="primary"` is defined or `clickable={true}`.
      */
     clickableColorPrimary: {
-      "&:hover": {
-        backgroundColor: emphasize(theme.palette.primary.main, 0.08)
-      },
-      "&:focus": {
-        backgroundColor: emphasize(theme.palette.primary.main, 0.08)
-      },
-      "&:active": {
-        backgroundColor: emphasize(theme.palette.primary.main, 0.12)
+      $web: {
+        "&:hover": {
+          backgroundColor: emphasize(theme.palette.primary.main, 0.08)
+        },
+        "&:focus": {
+          backgroundColor: emphasize(theme.palette.primary.main, 0.08)
+        },
+        "&:active": {
+          backgroundColor: emphasize(theme.palette.primary.main, 0.12)
+        }
       }
     },
 
@@ -128,111 +141,135 @@ const styles = theme => {
      * `onClick` and `color="secondary"` is defined or `clickable={true}`.
      */
     clickableColorSecondary: {
-      "&:hover": {
-        backgroundColor: emphasize(theme.palette.secondary.main, 0.08)
-      },
-      "&:focus": {
-        backgroundColor: emphasize(theme.palette.secondary.main, 0.08)
-      },
-      "&:active": {
-        backgroundColor: emphasize(theme.palette.secondary.main, 0.12)
+      $web: {
+        "&:hover": {
+          backgroundColor: emphasize(theme.palette.secondary.main, 0.08)
+        },
+        "&:focus": {
+          backgroundColor: emphasize(theme.palette.secondary.main, 0.08)
+        },
+        "&:active": {
+          backgroundColor: emphasize(theme.palette.secondary.main, 0.12)
+        }
       }
     },
 
     /* Styles applied to the root element if `onDelete` is defined. */
     deletable: {
-      "&:focus": {
-        backgroundColor: emphasize(backgroundColor, 0.08)
+      $web: {
+        "&:focus": {
+          backgroundColor: emphasize(backgroundColor, 0.08)
+        }
       }
     },
 
     /* Styles applied to the root element if `onDelete` and `color="primary"` is defined. */
     deletableColorPrimary: {
-      "&:focus": {
-        backgroundColor: emphasize(theme.palette.primary.main, 0.2)
+      $web: {
+        "&:focus": {
+          backgroundColor: emphasize(theme.palette.primary.main, 0.2)
+        }
       }
     },
 
     /* Styles applied to the root element if `onDelete` and `color="secondary"` is defined. */
     deletableColorSecondary: {
-      "&:focus": {
-        backgroundColor: emphasize(theme.palette.secondary.main, 0.2)
+      $web: {
+        "&:focus": {
+          backgroundColor: emphasize(theme.palette.secondary.main, 0.2)
+        }
       }
     },
 
     /* Styles applied to the `avatar` element. */
     avatar: {
-      marginRight: -4,
-      width: height,
-      height,
-      color:
-        theme.palette.type === "light"
-          ? theme.palette.grey[700]
-          : theme.palette.grey[300],
-      fontSize: theme.typography.pxToRem(16)
+      $web: {
+        marginRight: -4,
+        width: height,
+        height,
+        color:
+          theme.palette.type === "light"
+            ? theme.palette.grey[700]
+            : theme.palette.grey[300],
+        fontSize: theme.typography.pxToRem(16)
+      }
     },
 
     /* Styles applied to the `avatar` element if `checked={true}` and `color="primary"` */
     avatarColorPrimary: {
-      color: darken(theme.palette.primary.contrastText, 0.1),
-      backgroundColor: theme.palette.primary.dark
+      $web: {
+        color: darken(theme.palette.primary.contrastText, 0.1),
+        backgroundColor: theme.palette.primary.dark
+      }
     },
 
     /* Styles applied to the `avatar` element if `checked={true}` and `color="secondary"` */
     avatarColorSecondary: {
-      color: darken(theme.palette.secondary.contrastText, 0.1),
-      backgroundColor: theme.palette.secondary.dark
+      $web: {
+        color: darken(theme.palette.secondary.contrastText, 0.1),
+        backgroundColor: theme.palette.secondary.dark
+      }
     },
 
     /* Styles applied to the `avatar` elements children. */
     avatarChildren: {
-      width: 19,
-      height: 19
+      $web: {
+        width: 19,
+        height: 19
+      }
     },
 
     /* Styles applied to the label `span` element`. */
     label: {
-      display: "flex",
-      alignItems: "center",
-      paddingLeft: 12,
-      paddingRight: 12,
-      userSelect: "none",
-      whiteSpace: "nowrap",
-      cursor: "inherit"
+      $web: {
+        display: "flex",
+        alignItems: "center",
+        paddingLeft: 12,
+        paddingRight: 12,
+        userSelect: "none",
+        whiteSpace: "nowrap",
+        cursor: "inherit"
+      }
     },
 
     /* Styles applied to the `deleteIcon` element. */
     deleteIcon: {
-      // Remove grey highlight
-      WebkitTapHighlightColor: "transparent",
-      color: deleteIconColor,
-      cursor: "pointer",
-      height: "auto",
-      margin: "0 4px 0 -8px",
-      "&:hover": {
-        color: fade(deleteIconColor, 0.4)
+      $web: {
+        // Remove grey highlight
+        WebkitTapHighlightColor: "transparent",
+        color: deleteIconColor,
+        cursor: "pointer",
+        height: "auto",
+        margin: "0 4px 0 -8px",
+        "&:hover": {
+          color: fade(deleteIconColor, 0.4)
+        }
       }
     },
 
     /* Styles applied to the deleteIcon element if `color="primary"`. */
     deleteIconColorPrimary: {
-      color: fade(theme.palette.primary.contrastText, 0.65),
-      "&:hover": {
-        color: theme.palette.primary.contrastText
-      },
-      "&:active": {
-        color: theme.palette.primary.contrastText
+      $web: {
+        color: fade(theme.palette.primary.contrastText, 0.65),
+        "&:hover": {
+          color: theme.palette.primary.contrastText
+        },
+        "&:active": {
+          color: theme.palette.primary.contrastText
+        }
       }
     },
 
     /* Styles applied to the deleteIcon element if `color="secondary"`. */
     deleteIconColorSecondary: {
-      color: fade(theme.palette.primary.contrastText, 0.65),
-      "&:hover": {
-        color: theme.palette.primary.contrastText
-      },
-      "&:active": {
-        color: theme.palette.primary.contrastText
+      $web: {
+        color: fade(theme.palette.primary.contrastText, 0.65),
+        "&:hover": {
+          color: theme.palette.primary.contrastText
+        },
+        "&:active": {
+          color: theme.palette.primary.contrastText
+        }
       }
     }
   };

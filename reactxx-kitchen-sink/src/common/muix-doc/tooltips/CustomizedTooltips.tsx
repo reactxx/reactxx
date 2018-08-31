@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Button from 'reactxx-mui-web/Button/Button';
 import Tooltip from 'reactxx-mui-web/Tooltip/Tooltip';
 
@@ -16,7 +16,7 @@ const styles = theme => ({
     background: theme.palette.common.white,
     color: theme.palette.text.primary,
     boxShadow: theme.shadows[1],
-    fontSize: 11,
+    fontSize: 11
   },
   arrowPopper: {
     '&[x-placement*="bottom"] $arrowArrow': {
@@ -27,8 +27,8 @@ const styles = theme => ({
       height: '1em',
       '&::before': {
         borderWidth: '0 1em 1em 1em',
-        borderColor: `transparent transparent ${theme.palette.grey[700]} transparent`,
-      },
+        borderColor: `transparent transparent ${theme.palette.grey[700]} transparent`
+      }
     },
     '&[x-placement*="top"] $arrowArrow': {
       bottom: 0,
@@ -38,8 +38,8 @@ const styles = theme => ({
       height: '1em',
       '&::before': {
         borderWidth: '1em 1em 0 1em',
-        borderColor: `${theme.palette.grey[700]} transparent transparent transparent`,
-      },
+        borderColor: `${theme.palette.grey[700]} transparent transparent transparent`
+      }
     },
     '&[x-placement*="right"] $arrowArrow': {
       left: 0,
@@ -48,8 +48,8 @@ const styles = theme => ({
       width: '1em',
       '&::before': {
         borderWidth: '1em 1em 1em 0',
-        borderColor: `transparent ${theme.palette.grey[700]} transparent transparent`,
-      },
+        borderColor: `transparent ${theme.palette.grey[700]} transparent transparent`
+      }
     },
     '&[x-placement*="left"] $arrowArrow': {
       right: 0,
@@ -58,9 +58,9 @@ const styles = theme => ({
       width: '1em',
       '&::before': {
         borderWidth: '1em 0 1em 1em',
-        borderColor: `transparent transparent transparent ${theme.palette.grey[700]}`,
-      },
-    },
+        borderColor: `transparent transparent transparent ${theme.palette.grey[700]}`
+      }
+    }
   },
   arrowArrow: {
     position: 'absolute',
@@ -73,64 +73,60 @@ const styles = theme => ({
       display: 'block',
       width: 0,
       height: 0,
-      borderStyle: 'solid',
-    },
+      borderStyle: 'solid'
+    }
   },
   button: {
-    margin: theme.spacing.unit,
-  },
+    margin: theme.spacing.unit
+  }
 });
 
-class CustomizedTooltips extends React.Component<any,any> {
+class CustomizedTooltips extends React.Component<any, any> {
   state: any = {
-    arrowRef: null,
+    arrowRef: null
   };
-
   handleArrowRef = node => {
     this.setState({
-      arrowRef: node,
+      arrowRef: node
     });
   };
 
   render() {
-    const { classes } = this.props;
-
-    return (
-      <div>
+    const {
+      classes
+    } = this.props;
+    return <div>
         <Tooltip title="Add">
           <Button className={classes.button}>Default</Button>
         </Tooltip>
-        <Tooltip title="Add" classes={{ tooltip: classes.lightTooltip }}>
+        <Tooltip title="Add" classes={{
+        tooltip: classes.lightTooltip
+      }}>
           <Button className={classes.button}>Light</Button>
         </Tooltip>
-        <Tooltip
-          title={
-            <React.Fragment>
+        <Tooltip title={<React.Fragment>
               Add
               <span className={classes.arrowArrow} ref={this.handleArrowRef} />
-            </React.Fragment>
+            </React.Fragment>} classes={{
+        popper: classes.arrowPopper
+      }} PopperProps={{
+        popperOptions: {
+          modifiers: {
+            arrow: {
+              enabled: Boolean(this.state.arrowRef),
+              element: this.state.arrowRef
+            }
           }
-          classes={{ popper: classes.arrowPopper }}
-          PopperProps={{
-            popperOptions: {
-              modifiers: {
-                arrow: {
-                  enabled: Boolean(this.state.arrowRef),
-                  element: this.state.arrowRef,
-                },
-              },
-            },
-          }}
-        >
+        }
+      }}>
           <Button className={classes.button}>Arrow</Button>
         </Tooltip>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 CustomizedTooltips['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, CustomizedTooltips)();
+export default withStylesCreator((styles as any), CustomizedTooltips)();

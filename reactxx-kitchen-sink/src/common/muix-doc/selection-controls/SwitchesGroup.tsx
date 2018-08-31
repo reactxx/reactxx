@@ -13,57 +13,30 @@ import FormControlLabel from 'reactxx-mui-web/FormControlLabel/FormControlLabel'
 import FormHelperText from 'reactxx-mui-web/FormHelperText/FormHelperText';
 import Switch from 'reactxx-mui-web/Switch/Switch';
 
-class SwitchesGroup extends React.Component<any,any> {
+class SwitchesGroup extends React.Component<any, any> {
   state: any = {
     gilad: true,
     jason: false,
-    antoine: true,
+    antoine: true
   };
-
   handleChange = name => event => {
-    this.setState({ [name]: event.target.checked });
+    this.setState({
+      [name]: event.target.checked
+    });
   };
 
   render() {
-    return (
-      <FormControl component="fieldset">
+    return <FormControl component="fieldset">
         <FormLabel component="legend">Assign responsibility</FormLabel>
         <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={this.state.gilad}
-                onChange={this.handleChange('gilad')}
-                value="gilad"
-              />
-            }
-            label="Gilad Gray"
-          />
-          <FormControlLabel
-            control={
-              <Switch
-                checked={this.state.jason}
-                onChange={this.handleChange('jason')}
-                value="jason"
-              />
-            }
-            label="Jason Killian"
-          />
-          <FormControlLabel
-            control={
-              <Switch
-                checked={this.state.antoine}
-                onChange={this.handleChange('antoine')}
-                value="antoine"
-              />
-            }
-            label="Antoine Llorca"
-          />
+          <FormControlLabel control={<Switch checked={this.state.gilad} onChange={this.handleChange('gilad')} value="gilad" />} label="Gilad Gray" />
+          <FormControlLabel control={<Switch checked={this.state.jason} onChange={this.handleChange('jason')} value="jason" />} label="Jason Killian" />
+          <FormControlLabel control={<Switch checked={this.state.antoine} onChange={this.handleChange('antoine')} value="antoine" />} label="Antoine Llorca" />
         </FormGroup>
         <FormHelperText>Be careful</FormHelperText>
-      </FormControl>
-    );
+      </FormControl>;
   }
+
 }
 
 export default SwitchesGroup;

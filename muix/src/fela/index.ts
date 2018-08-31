@@ -21,19 +21,46 @@ const plugins = {
 
 export const renderer = createRenderer(plugins)
 
-renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html
+// renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html
+//   height: '100%',
+//   width: '100%',
+//   margin: 0,
+//   padding: 0,
+//   overflow: 'hidden',
+// }, 'html, body, #root')
+renderer.renderStatic({ 
+  fontFamily: 'Roboto' 
+}, 'body')
+//renderer.renderStatic({ boxSizing: 'border-box' }, '*')
+renderer.renderStatic({
+  display: 'flex', 
+  flexDirection: 'column', 
+  alignItems: 'stretch',
   height: '100%',
   width: '100%',
-  margin: 0,
-  padding: 0,
   overflow: 'hidden',
-}, 'html, body, #root')
-renderer.renderStatic({ fontFamily: 'Roboto' }, 'body')
-renderer.renderStatic({ boxSizing: 'border-box' }, '*')
-renderer.renderStatic({ display: 'flex', flexDirection: 'column', alignItems: 'stretch' }, '#root')
+}, '#root')
+
+// C:\reactxx\muix\src\mui-web\CssBaseline\CssBaseline.tsx
+renderer.renderStatic({
+  WebkitFontSmoothing: "antialiased",
+  MozOsxFontSmoothing: "grayscale",
+  boxSizing: "border-box"
+} as any, 'html')
+renderer.renderStatic({
+  boxSizing: "inherit"
+}, '*, *::before, *::after')
+renderer.renderStatic({
+  // Remove the margin in all browsers.
+  margin: 0,
+  // backgroundColor: theme.palette.background.default,
+  // "@media print": {
+  //   Save printer ink.
+  //   backgroundColor: theme.palette.common.white
+  // }
+}, 'body')
 
 render(renderer)
-
 
 //Converts ruleset to blank delimited atomic classes
 export const rulesetToClassNames = (ruleset: React.CSSProperties) => ruleset ? renderer.renderRule(() => ruleset, {}) : ''
@@ -43,7 +70,7 @@ export const rulesetsToClassNames = (...rulesets: React.CSSProperties[]) => {
   let res: string
   if (rulesets.length == 1) res = rulesetToClassNames(rulesets[0])
   else res = rulesetToClassNames(Object.assign({}, ...rulesets))
-  return res 
+  return res
 }
 export const keyFrameToClassNames = (keyFrame: React.CSSProperties) => keyFrame ? renderer.renderKeyframe(() => keyFrame, {}) : ''
 

@@ -7,7 +7,8 @@ import { readAllCodes } from '../utils/readAllCodes'
 import * as Ast from '../utils/ast';
 import * as Config from '../utils/config';
 import * as Queries from '../utils/queries';
-import { cssjsToFelaLow } from './ast/cssjs-to-fela';
+import { transformConstStyles } from './ast/transform-const-styles';
+import { removeDefaultExport } from './ast/remove-default-export'
 import { replaceAll, processMatchAll } from '../utils/regexp';
 
 export const codeModDoc = () => {
@@ -45,12 +46,12 @@ export const codeModDoc = () => {
 
         if (info.name.endsWith('.md')) {
             code = mdToTS(code)
-            const title = code.match(/^#\s*(.*)$/m)[1]
+            const title = code.match(/#\s*([a-zA-Z0-9 ]*)/m)[1]
             if (!title) throw ''
             groupAdd(info.dir, null, title)
         } else {
-            code = codeModAst(code, path)
-            code = codeModFile(code, path)
+            code = codeModFile(code, info)
+            code = codeModAst(code, info)
             switch (path) {
                 case 'dialogs/SimpleDialog':
                     code = code.replace("const SimpleDialogWrapped = withStylesCreator(", "const SimpleDialogWrapped = withStylesCreator<any>(")
@@ -93,25 +94,29 @@ export const codeModDoc = () => {
     fsExtra.outputFileSync(Config.muiWeb + 'meta.ts', meta.join(''));
 }
 
-const codeModAst = (code: string, path: string) => {
-    let root; const start = () => root = parseCodeLow(code); const end = () => generateCode(root)
-    switch (path) {
+const codeModAst = (code: string, info: Ast.MUISourceInfo) => {
+    const root = parseCodeLow(code)
+    switch (info.path) {
+        case 'hidden/BreakpointDown':
+        case 'hidden/BreakpointOnly':
+        case 'hidden/BreakpointUp':
+        case 'hidden/GridIntegration':
+            removeDefaultExport(root, info)
+            break
         case 'buttons/ButtonBases':
-            start()
-            let sheet = Queries.checkSingleResult(Ast.astq().query(root, '// VariableDeclaration/VariableDeclarator [ /Identifier [@name == "styles"] ]'))
-            cssjsToFelaLow(sheet, { destPath: path })
-            return end()
-        default:
-            return code
+            //let sheet = Queries.checkSingleResult(Ast.astq().query(root, '// VariableDeclaration/VariableDeclarator [ /Identifier [@name == "styles"] ]'))
+            transformConstStyles(root, info)
+            break
     }
+    return generateCode(root)
 }
 
 const parseExpressionLow = (code: string) => parseExpression(code, { plugins: ['jsx', 'objectRestSpread', 'classProperties', 'typescript'] });
 const parseCodeLow = (code: string) => parse(code, { sourceType: 'module', plugins: ['jsx', 'objectRestSpread', 'classProperties', 'typescript'] });
 const generateCode = (ast: Ast.Ast) => generate(ast, { /* options */ }).code as string
 
-const codeModFile = (code: string, path: string) => {
-    switch (path) {
+const codeModFile = (code: string, info: Ast.MUISourceInfo) => {
+    switch (info.path) {
         case 'autocomplete/IntegrationDownshift':
             code = processMatchAll(/startAdornment(\s|.)*?(}\),)/g, code, (match, res) => res.push(code.substr(match.index, match[0].length - 3) + '} as any),'))
             break
@@ -181,6 +186,33 @@ import withStylesCreator from 'reactxx-mui-web/styles/withStyles'`)
         case 'cards/ImgMediaCard':
             code = code.replace('height="140"', '{...{height:140}}')
             break
+        case 'transitions/SimpleZoom':
+            code = code.replace("transitionDelay: checked ? 500 : 0", "$web: {transitionDelay: checked ? '500' : '0'}")
+            break
+        case 'grid/ComplexGrid':
+            code = code.replace("style={{ cursor: 'pointer' }}", "style={{ $web: {cursor: 'pointer' }}}")
+            break
+        case 'grid/InteractiveGrid':
+            code = code.replace("", "")
+            break
+        case 'grid/SpacingGrid':
+            code = code.replace("Number(spacing)", "spacing")
+            break
+        case 'hidden/BreakpointDown':
+        case 'hidden/BreakpointOnly':
+        case 'hidden/BreakpointUp':
+        case 'hidden/GridIntegration':
+            code += `export default withStylesCreator(styles, withWidth(${info.name}))`
+            break
+        case 'popover/AnchorPlayground':
+            code = code.replace("", "")
+            break
+        case 'popper/ScrollPlayground':
+            code = code.replace("", "")
+            break
+        case 'transitions/SimpleGrow':
+            code = code.replace("style={{ transformOrigin: '0 0 0' }}", "style={{ $web: {transformOrigin: '0 0 0' }}}")
+            break
     }
 
     code = importComponents(code)
@@ -189,12 +221,14 @@ import withStylesCreator from 'reactxx-mui-web/styles/withStyles'`)
 
     code = replaceAll(code, '\n  state = {', '\n  state: any = {')
     code = replaceAll(code, `import { withStyles } from '@material-ui/core/styles';`, `import withStylesCreator from 'reactxx-mui-web/styles/withStyles'`)
+    code = replaceAll(code, `import withWidth from '@material-ui/core/withWidth';`, `import withWidth from 'reactxx-mui-web/withWidth/withWidth';`)
     code = replaceAll(code, `.propTypes = {`, `['propTypes'] = {`)
     code = replaceAll(code, `extends React.Component {`, `extends React.Component<any,any> {`)
     code = replaceAll(code, `@material-ui/core/`, `reactxx-mui-web/`)
     code = replaceAll(code, `/static/images/`, `src/ks/common/muix/static/images/`)
     //************ CLASSNAMES
     code = code.replace(`import classNames from 'classnames';`, `import { classNames } from 'reactxx-basic';`)
+    code = code.replace("import MarkdownElement from '@material-ui/docs/MarkdownElement'", "import MarkdownElement from '../../mui-doc-app/MarkdownElement'")
 
     return code
 }
@@ -208,25 +242,21 @@ const styleToWebStyle = (code: string, wrongPart: string) => {
     })
 }
 
-
-const importComponents = (example: string) => processMatchAll(importComponentRegExp, example, (match, res) => {
+const importComponents = (example: string) => processMatchAll(/^import ([A-Z]\w+).*@material-ui\/core\/\w+';/gm, example, (match, res) => {
     let matchStr = example.substr(match.index, match[0].length - 2)
     res.push(matchStr.replace('@material-ui/core/', 'reactxx-mui-web/'))
     res.push('/')
     res.push(match[1])
     res.push("';")
 })
-const importComponentRegExp = /^import ([A-Z]\w+).*@material-ui\/core\/\w+';/gm
 
-const importIcons = (example: string) => processMatchAll(importIconRegExp, example, (match, res) => {
+const importIcons = (example: string) => processMatchAll(/^import .*@material-ui\/icons\//gm, example, (match, res) => {
     res.push(example.substr(match.index, match[0].length).replace('@material-ui/icons/', 'reactxx-icons/'))
 })
-const importIconRegExp = /^import .*@material-ui\/icons\//gm
 
-const replaceWithStyles = (example: string) => processMatchAll(withStylesRegExp, example, (match, res) => {
+const replaceWithStyles = (example: string) => processMatchAll(/withStyles\((\w+)(.*?)\)\((\w+)\);$/gm, example, (match, res) => {
     res.push(`withStylesCreator(${match[1]} as any, ${match[3]}${match[2]})();`)
 })
-const withStylesRegExp = /withStyles\((\w+)(.*?)\)\((\w+)\);$/gm
 
 const ignores = {
     'autocomplete/IntegrationAutosuggest': true,

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import List from 'reactxx-mui-web/List/List';
 import ListItem from 'reactxx-mui-web/ListItem/ListItem';
 import ListItemAvatar from 'reactxx-mui-web/ListItemAvatar/ListItemAvatar';
@@ -27,57 +27,44 @@ import DeleteIcon from 'reactxx-icons/Delete';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    maxWidth: 752,
+    maxWidth: 752
   },
   demo: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   title: {
-    margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
-  },
+    margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`
+  }
 });
 
 function generate(element) {
-  return [0, 1, 2].map(value =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
+  return [0, 1, 2].map(value => React.cloneElement(element, {
+    key: value
+  }));
 }
 
-class InteractiveList extends React.Component<any,any> {
+class InteractiveList extends React.Component<any, any> {
   state: any = {
     dense: false,
-    secondary: false,
+    secondary: false
   };
 
   render() {
-    const { classes } = this.props;
-    const { dense, secondary } = this.state;
-
-    return (
-      <div className={classes.root}>
+    const {
+      classes
+    } = this.props;
+    const {
+      dense,
+      secondary
+    } = this.state;
+    return <div className={classes.root}>
         <FormGroup row>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={dense}
-                onChange={event => this.setState({ dense: event.target.checked })}
-                value="dense"
-              />
-            }
-            label="Enable dense"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={secondary}
-                onChange={event => this.setState({ secondary: event.target.checked })}
-                value="secondary"
-              />
-            }
-            label="Enable secondary text"
-          />
+          <FormControlLabel control={<Checkbox checked={dense} onChange={event => this.setState({
+          dense: event.target.checked
+        })} value="dense" />} label="Enable dense" />
+          <FormControlLabel control={<Checkbox checked={secondary} onChange={event => this.setState({
+          secondary: event.target.checked
+        })} value="secondary" />} label="Enable secondary text" />
         </FormGroup>
         <Grid container spacing={16}>
           <Grid item xs={12} md={6}>
@@ -86,14 +73,9 @@ class InteractiveList extends React.Component<any,any> {
             </Typography>
             <div className={classes.demo}>
               <List dense={dense}>
-                {generate(
-                  <ListItem>
-                    <ListItemText
-                      primary="Single-line item"
-                      secondary={secondary ? 'Secondary text' : null}
-                    />
-                  </ListItem>,
-                )}
+                {generate(<ListItem>
+                    <ListItemText primary="Single-line item" secondary={secondary ? 'Secondary text' : null} />
+                  </ListItem>)}
               </List>
             </div>
           </Grid>
@@ -103,17 +85,12 @@ class InteractiveList extends React.Component<any,any> {
             </Typography>
             <div className={classes.demo}>
               <List dense={dense}>
-                {generate(
-                  <ListItem>
+                {generate(<ListItem>
                     <ListItemIcon>
                       <FolderIcon />
                     </ListItemIcon>
-                    <ListItemText
-                      primary="Single-line item"
-                      secondary={secondary ? 'Secondary text' : null}
-                    />
-                  </ListItem>,
-                )}
+                    <ListItemText primary="Single-line item" secondary={secondary ? 'Secondary text' : null} />
+                  </ListItem>)}
               </List>
             </div>
           </Grid>
@@ -125,19 +102,14 @@ class InteractiveList extends React.Component<any,any> {
             </Typography>
             <div className={classes.demo}>
               <List dense={dense}>
-                {generate(
-                  <ListItem>
+                {generate(<ListItem>
                     <ListItemAvatar>
                       <Avatar>
                         <FolderIcon />
                       </Avatar>
                     </ListItemAvatar>
-                    <ListItemText
-                      primary="Single-line item"
-                      secondary={secondary ? 'Secondary text' : null}
-                    />
-                  </ListItem>,
-                )}
+                    <ListItemText primary="Single-line item" secondary={secondary ? 'Secondary text' : null} />
+                  </ListItem>)}
               </List>
             </div>
           </Grid>
@@ -147,35 +119,29 @@ class InteractiveList extends React.Component<any,any> {
             </Typography>
             <div className={classes.demo}>
               <List dense={dense}>
-                {generate(
-                  <ListItem>
+                {generate(<ListItem>
                     <ListItemAvatar>
                       <Avatar>
                         <FolderIcon />
                       </Avatar>
                     </ListItemAvatar>
-                    <ListItemText
-                      primary="Single-line item"
-                      secondary={secondary ? 'Secondary text' : null}
-                    />
+                    <ListItemText primary="Single-line item" secondary={secondary ? 'Secondary text' : null} />
                     <ListItemSecondaryAction>
                       <IconButton aria-label="Delete">
                         <DeleteIcon />
                       </IconButton>
                     </ListItemSecondaryAction>
-                  </ListItem>,
-                )}
+                  </ListItem>)}
               </List>
             </div>
           </Grid>
         </Grid>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 InteractiveList['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, InteractiveList)();
+export default withStylesCreator((styles as any), InteractiveList)();

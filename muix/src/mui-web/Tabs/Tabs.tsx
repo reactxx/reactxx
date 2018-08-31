@@ -64,52 +64,70 @@ export interface TabsActions {
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    overflow: "hidden",
-    minHeight: 48,
-    WebkitOverflowScrolling: "touch" // Add iOS momentum scrolling.
+    $web: {
+      overflow: "hidden",
+      minHeight: 48,
+      WebkitOverflowScrolling: "touch" // Add iOS momentum scrolling.
+    }
   },
 
   /* Styles applied to the flex container element. */
   flexContainer: {
-    display: "flex"
+    $web: {
+      display: "flex"
+    }
   },
 
   /* Styles applied to the flex container element if `centered={true}` & `scrollable={false}`. */
   centered: {
-    justifyContent: "center"
+    $web: {
+      justifyContent: "center"
+    }
   },
 
   /* Styles applied to the tablist element. */
   scroller: {
-    position: "relative",
-    display: "inline-block",
-    flex: "1 1 auto",
-    whiteSpace: "nowrap"
+    $web: {
+      position: "relative",
+      display: "inline-block",
+      flex: "1 1 auto",
+      whiteSpace: "nowrap"
+    }
   },
 
   /* Styles applied to the tablist element if `scrollable={false}`. */
   fixed: {
-    overflowX: "hidden",
-    width: "100%"
+    $web: {
+      overflowX: "hidden",
+      width: "100%"
+    }
   },
 
   /* Styles applied to the tablist element if `scrollable={true}`. */
   scrollable: {
-    overflowX: "scroll"
+    $web: {
+      overflowX: "scroll"
+    }
   },
 
   /* Styles applied to the `ScrollButtonComponent` component. */
-  scrollButtons: {},
+  scrollButtons: {
+    $web: {}
+  },
 
   /* Styles applied to the `ScrollButtonComponent` component if `sscrollButtons="auto"`. */
   scrollButtonsAuto: {
-    [theme.breakpoints.down("xs")]: {
-      display: "none"
+    $web: {
+      [theme.breakpoints.down("xs")]: {
+        display: "none"
+      }
     }
   },
 
   /* Styles applied to the `TabIndicator` component. */
-  indicator: {}
+  indicator: {
+    $web: {}
+  }
 });
 
 class Tabs extends React.Component<CodeProps, any> {

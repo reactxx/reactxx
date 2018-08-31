@@ -33,23 +33,31 @@ export type StepButtonClasskey = "root" | "vertical" | "touchRipple";
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    width: "100%",
-    padding: "24px 16px",
-    margin: "-24px -16px",
-    boxSizing: "content-box"
+    $web: {
+      width: "100%",
+      padding: "24px 16px",
+      margin: "-24px -16px",
+      boxSizing: "content-box"
+    }
   },
 
   /* Styles applied to the root element if `orientation="horizontal"`. */
-  horizontal: {},
+  horizontal: {
+    $web: {}
+  },
 
   /* Styles applied to the root element if `orientation="vertical"`. */
   vertical: {
-    justifyContent: "flex-start"
+    $web: {
+      justifyContent: "flex-start"
+    }
   },
 
   /* Styles applied to the `ButtonBase` touch-ripple. */
   touchRipple: {
-    color: "rgba(0, 0, 0, 0.3)"
+    $web: {
+      color: "rgba(0, 0, 0, 0.3)"
+    }
   }
 };
 

@@ -3,29 +3,29 @@ import * as Ast from '../../utils/ast'
 import * as warning from 'warning'
 import * as Parser from '../../utils/parser'
 
-export const cssjsToFela = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
-  let sheet = Queries.checkSingleResult(Ast.astq().query(root, '/Program/VariableDeclaration/VariableDeclarator [ /Identifier [@name == "styles"] ]'), true)
-  if (sheet) cssjsToFelaLow(sheet, info)
-  return root
-}
-export const cssjsToFelaLow = (sheet: Ast.Ast, info: Ast.MUISourceInfo) => {
+// export const cssjsToFela = (root: Ast.Ast, info: Ast.MUISourceInfo) => {
+//   let sheet = Queries.checkSingleResult(Ast.astq().query(root, '/Program/VariableDeclaration/VariableDeclarator [ /Identifier [@name == "styles"] ]'), true)
+//   if (sheet) cssjsToFelaLow(sheet, info)
+//   return root
+// }
+export const cssjsToFela = (sheet: Ast.Ast, info: Ast.MUISourceInfo) => {
   const counter = cssjsToFelaCallCounter++ // unique identification of changed JS file
-  // get 'const styles = ...'
-  sheet = sheet.init
-  // ***** get object expression
-  if (sheet.type !== 'ObjectExpression') { // not object expression ...
-    if (sheet.type !== 'ArrowFunctionExpression') { // ... must be arrow expression (const styles = theme => ({}))
-      //warning(false, `sheet.type !== 'ArrowFunctionExpression' at ${info.srcPath}`) // e.g. select.js
-      return
-    }
-    if (sheet.body && sheet.body.type === 'ObjectExpression') // const styles = theme => ({})
-      sheet = sheet.body
-    else {
-      sheet = Queries.checkSingleResult(Ast.astq().query(sheet, '// ReturnStatement')).argument // const styles = theme => { return {} }
-    }
-  }
-  if (!sheet.properties) return //e.g. HiddenCSS
-  //warning(sheet.properties, `!sheet.properties at ${info.destPath}`)
+  // // get 'const styles = ...'
+  // sheet = sheet.init
+  // // ***** get object expression
+  // if (sheet.type !== 'ObjectExpression') { // not object expression ...
+  //   if (sheet.type !== 'ArrowFunctionExpression') { // ... must be arrow expression (const styles = theme => ({}))
+  //     //warning(false, `sheet.type !== 'ArrowFunctionExpression' at ${info.srcPath}`) // e.g. select.js
+  //     return
+  //   }
+  //   if (sheet.body && sheet.body.type === 'ObjectExpression') // const styles = theme => ({})
+  //     sheet = sheet.body
+  //   else {
+  //     sheet = Queries.checkSingleResult(Ast.astq().query(sheet, '// ReturnStatement')).argument // const styles = theme => { return {} }
+  //   }
+  // }
+  // if (!sheet.properties) return //e.g. HiddenCSS
+  // //warning(sheet.properties, `!sheet.properties at ${info.destPath}`)
 
   // ***** modify $??? part in object expression KEY and VALUE's
   const usedRulesetNames: Record<string, boolean> = {};

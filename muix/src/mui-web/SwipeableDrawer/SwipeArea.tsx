@@ -16,27 +16,37 @@ import { isHorizontal } from "../Drawer/Drawer";
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    bottom: 0,
-    zIndex: theme.zIndex.drawer - 1
+    $web: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      zIndex: theme.zIndex.drawer - 1
+    }
   },
   anchorLeft: {
-    right: "auto"
+    $web: {
+      right: "auto"
+    }
   },
   anchorRight: {
-    left: "auto",
-    right: 0
+    $web: {
+      left: "auto",
+      right: 0
+    }
   },
   anchorTop: {
-    bottom: "auto",
-    right: 0
+    $web: {
+      bottom: "auto",
+      right: 0
+    }
   },
   anchorBottom: {
-    top: "auto",
-    bottom: 0,
-    right: 0
+    $web: {
+      top: "auto",
+      bottom: 0,
+      right: 0
+    }
   }
 });
 /**

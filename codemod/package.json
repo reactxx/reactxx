@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/generator": "^7.0.0-beta.53",
+    "@babel/generator": "^7.0.0",
     "@babel/parser": "^7.0.0-beta.53",
     "@types/glob": "^5.0.35",
     "@types/js-beautify": "0.0.31",

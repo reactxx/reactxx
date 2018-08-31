@@ -89,72 +89,86 @@ const styles = theme => {
   return {
     /* Styles applied to the root element. */
     root: {
-      zIndex: theme.zIndex.snackbar,
-      position: "fixed",
-      display: "flex",
-      left: 0,
-      right: 0,
-      justifyContent: "center",
-      alignItems: "center"
+      $web: {
+        zIndex: theme.zIndex.snackbar,
+        position: "fixed",
+        display: "flex",
+        left: 0,
+        right: 0,
+        justifyContent: "center",
+        alignItems: "center"
+      }
     },
 
     /* Styles applied to the root element if `anchorOrigin={{ 'top', 'center' }}`. */
     anchorOriginTopCenter: {
-      ...top,
-      [theme.breakpoints.up("md")]: {
-        ...center
+      $web: {
+        ...top,
+        [theme.breakpoints.up("md")]: {
+          ...center
+        }
       }
     },
 
     /* Styles applied to the root element if `anchorOrigin={{ 'bottom', 'center' }}`. */
     anchorOriginBottomCenter: {
-      ...bottom,
-      [theme.breakpoints.up("md")]: {
-        ...center
+      $web: {
+        ...bottom,
+        [theme.breakpoints.up("md")]: {
+          ...center
+        }
       }
     },
 
     /* Styles applied to the root element if `anchorOrigin={{ 'top', 'right' }}`. */
     anchorOriginTopRight: {
-      ...top,
-      ...right,
-      [theme.breakpoints.up("md")]: {
-        left: "auto",
-        ...topSpace,
-        ...rightSpace
+      $web: {
+        ...top,
+        ...right,
+        [theme.breakpoints.up("md")]: {
+          left: "auto",
+          ...topSpace,
+          ...rightSpace
+        }
       }
     },
 
     /* Styles applied to the root element if `anchorOrigin={{ 'bottom', 'right' }}`. */
     anchorOriginBottomRight: {
-      ...bottom,
-      ...right,
-      [theme.breakpoints.up("md")]: {
-        left: "auto",
-        ...bottomSpace,
-        ...rightSpace
+      $web: {
+        ...bottom,
+        ...right,
+        [theme.breakpoints.up("md")]: {
+          left: "auto",
+          ...bottomSpace,
+          ...rightSpace
+        }
       }
     },
 
     /* Styles applied to the root element if `anchorOrigin={{ 'top', 'left' }}`. */
     anchorOriginTopLeft: {
-      ...top,
-      ...left,
-      [theme.breakpoints.up("md")]: {
-        right: "auto",
-        ...topSpace,
-        ...leftSpace
+      $web: {
+        ...top,
+        ...left,
+        [theme.breakpoints.up("md")]: {
+          right: "auto",
+          ...topSpace,
+          ...leftSpace
+        }
       }
     },
 
     /* Styles applied to the root element if `anchorOrigin={{ 'bottom', 'left' }}`. */
     anchorOriginBottomLeft: {
-      ...bottom,
-      ...left,
-      [theme.breakpoints.up("md")]: {
-        right: "auto",
-        ...bottomSpace,
-        ...leftSpace
+      $web: {
+        ...bottom,
+        ...left,
+        [theme.breakpoints.up("md")]: {
+          right: "auto",
+          ...bottomSpace,
+          ...leftSpace
+        }
       }
     }
   };

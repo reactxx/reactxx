@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from 'reactxx-basic';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Drawer from 'reactxx-mui-web/Drawer/Drawer';
 import AppBar from 'reactxx-mui-web/AppBar/AppBar';
 import Toolbar from 'reactxx-mui-web/Toolbar/Toolbar';
@@ -18,12 +18,11 @@ import TextField from 'reactxx-mui-web/TextField/TextField';
 import Typography from 'reactxx-mui-web/Typography/Typography';
 import Divider from 'reactxx-mui-web/Divider/Divider';
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
-
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   appFrame: {
     height: 440,
@@ -31,60 +30,55 @@ const styles = theme => ({
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
-    width: '100%',
+    width: '100%'
   },
   appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
+    width: `calc(100% - ${drawerWidth}px)`
   },
   'appBar-left': {
-    marginLeft: drawerWidth,
+    marginLeft: drawerWidth
   },
   'appBar-right': {
-    marginRight: drawerWidth,
+    marginRight: drawerWidth
   },
   drawerPaper: {
     position: 'relative',
-    width: drawerWidth,
+    width: drawerWidth
   },
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
-  },
+    padding: theme.spacing.unit * 3
+  }
 });
 
-class PermanentDrawer extends React.Component<any,any> {
+class PermanentDrawer extends React.Component<any, any> {
   state: any = {
-    anchor: 'left',
+    anchor: 'left'
   };
-
   handleChange = event => {
     this.setState({
-      anchor: event.target.value,
+      anchor: event.target.value
     });
   };
 
   render() {
-    const { classes } = this.props;
-    const { anchor } = this.state;
-
-    const drawer = (
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor={anchor}
-      >
+    const {
+      classes
+    } = this.props;
+    const {
+      anchor
+    } = this.state;
+    const drawer = <Drawer variant="permanent" classes={{
+      paper: classes.drawerPaper
+    }} anchor={anchor}>
         <div className={classes.toolbar} />
         <Divider />
         <List>{mailFolderListItems}</List>
         <Divider />
         <List>{otherMailFolderListItems}</List>
-      </Drawer>
-    );
-
+      </Drawer>;
     let before = null;
     let after = null;
 
@@ -94,24 +88,13 @@ class PermanentDrawer extends React.Component<any,any> {
       after = drawer;
     }
 
-    return (
-      <div className={classes.root}>
-        <TextField
-          id="permanent-anchor"
-          select
-          label="Anchor"
-          value={anchor}
-          onChange={this.handleChange}
-          margin="normal"
-        >
+    return <div className={classes.root}>
+        <TextField id="permanent-anchor" select label="Anchor" value={anchor} onChange={this.handleChange} margin="normal">
           <MenuItem value="left">left</MenuItem>
           <MenuItem value="right">right</MenuItem>
         </TextField>
         <div className={classes.appFrame}>
-          <AppBar
-            position="absolute"
-            className={classNames(classes.appBar, classes[`appBar-${anchor}`])}
-          >
+          <AppBar position="absolute" className={classNames(classes.appBar, classes[`appBar-${anchor}`])}>
             <Toolbar>
               <Typography variant="title" color="inherit" noWrap>
                 Permanent drawer
@@ -125,13 +108,12 @@ class PermanentDrawer extends React.Component<any,any> {
           </main>
           {after}
         </div>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 PermanentDrawer['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, PermanentDrawer)();
+export default withStylesCreator((styles as any), PermanentDrawer)();

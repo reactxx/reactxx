@@ -57,12 +57,16 @@ const styles = theme => {
   return {
     /* Styles applied to the root element. */
     root: {
-      backgroundColor: theme.palette.background.paper
+      $web: {
+        backgroundColor: theme.palette.background.paper
+      }
     },
 
     /* Styles applied to the root element if `square={false}`. */
     rounded: {
-      borderRadius: theme.shape.borderRadius
+      $web: {
+        borderRadius: theme.shape.borderRadius
+      }
     },
     ...elevations
   };

@@ -38,40 +38,52 @@ export type CardHeaderClassKey =
 
 const styles = theme => ({
   /* Styles applied to the root element. */
-  root: theme.mixins.gutters({
-    display: "flex",
-    alignItems: "center",
-    paddingTop: 16,
-    paddingBottom: 16
-  }),
+  root: {
+    $web: theme.mixins.gutters({
+      display: "flex",
+      alignItems: "center",
+      paddingTop: 16,
+      paddingBottom: 16
+    })
+  },
 
   /* Styles applied to the avatar element. */
   avatar: {
-    flex: "0 0 auto",
-    marginRight: 16
+    $web: {
+      flex: "0 0 auto",
+      marginRight: 16
+    }
   },
 
   /* Styles applied to the action element. */
   action: {
-    flex: "0 0 auto",
-    alignSelf: "flex-start",
-    marginTop: -8,
-    marginRight: -12,
-    [theme.breakpoints.up("sm")]: {
-      marginRight: -20
+    $web: {
+      flex: "0 0 auto",
+      alignSelf: "flex-start",
+      marginTop: -8,
+      marginRight: -12,
+      [theme.breakpoints.up("sm")]: {
+        marginRight: -20
+      }
     }
   },
 
   /* Styles applied to the content wrapper element. */
   content: {
-    flex: "1 1 auto"
+    $web: {
+      flex: "1 1 auto"
+    }
   },
 
   /* Styles applied to the title Typography element. */
-  title: {},
+  title: {
+    $web: {}
+  },
 
   /* Styles applied to the subheader Typography element. */
-  subheader: {}
+  subheader: {
+    $web: {}
+  }
 });
 
 const CardHeader: Types.CodeSFCWeb<Shape> & {

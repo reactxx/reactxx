@@ -39,71 +39,83 @@ const styles = theme => {
   return {
     /* Styles applied to the root element. */
     root: {
-      display: "flex",
-      minHeight: 8 * 6,
-      transition: theme.transitions.create(
-        ["min-height", "background-color"],
-        transition
-      ),
-      padding: "0 24px 0 24px",
-      "&:hover:not(.disabled32)": {
-        cursor: "pointer"
-      },
-      "&.expanded32": {
-        minHeight: 64
-      },
-      "&.focused32": {
-        backgroundColor: theme.palette.grey[300]
-      },
-      "&.disabled32": {
-        opacity: 0.38
+      $web: {
+        display: "flex",
+        minHeight: 8 * 6,
+        transition: theme.transitions.create(
+          ["min-height", "background-color"],
+          transition
+        ),
+        padding: "0 24px 0 24px",
+        "&:hover:not(.disabled31)": {
+          cursor: "pointer"
+        },
+        "&.expanded31": {
+          minHeight: 64
+        },
+        "&.focused31": {
+          backgroundColor: theme.palette.grey[300]
+        },
+        "&.disabled31": {
+          opacity: 0.38
+        }
       }
     },
 
     /* Styles applied to the root element if `expanded={true}`. */
     expanded: {
-      NAME$expanded32: true
+      $web: {
+        NAME$expanded31: true
+      }
     },
 
     /* Styles applied to the root and children wrapper elements when focused. */
     focused: {
-      NAME$focused32: true
+      $web: {
+        NAME$focused31: true
+      }
     },
 
     /* Styles applied to the root element if `disabled={true}`. */
     disabled: {
-      NAME$disabled32: true
+      $web: {
+        NAME$disabled31: true
+      }
     },
 
     /* Styles applied to the children wrapper element. */
     content: {
-      display: "flex",
-      flexGrow: 1,
-      transition: theme.transitions.create(["margin"], transition),
-      margin: "12px 0",
-      "& > :last-child": {
-        paddingRight: 32
-      },
-      "&.expanded32": {
-        margin: "20px 0"
+      $web: {
+        display: "flex",
+        flexGrow: 1,
+        transition: theme.transitions.create(["margin"], transition),
+        margin: "12px 0",
+        "& > :last-child": {
+          paddingRight: 32
+        },
+        "&.expanded31": {
+          margin: "20px 0"
+        }
       }
     },
 
     /* Styles applied to the `IconButton` component when `expandIcon` is supplied. */
     expandIcon: {
-      position: "absolute",
-      top: "50%",
-      right: 8,
-      transform: "translateY(-50%) rotate(0deg)",
-      transition: theme.transitions.create("transform", transition),
-      "&:hover": {
-        // Disable the hover effect for the IconButton,
-        // because a hover effect should apply to the entire Expand button and
-        // not only to the IconButton.
-        backgroundColor: "transparent"
-      },
-      "&.expanded32": {
-        transform: "translateY(-50%) rotate(180deg)"
+      $web: {
+        position: "absolute",
+        top: "50%",
+        right: 8,
+        transform: "translateY(-50%) rotate(0deg)",
+        transition: theme.transitions.create("transform", transition),
+        "&:hover": {
+          // Disable the hover effect for the IconButton,
+          // because a hover effect should apply to the entire Expand button and
+          // not only to the IconButton.
+          backgroundColor: "transparent"
+        },
+        "&.expanded31": {
+          transform: "translateY(-50%) rotate(180deg)"
+        }
       }
     }
   };

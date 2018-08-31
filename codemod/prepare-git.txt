@@ -11,7 +11,7 @@
 - delete d:\reactxx\codemod\patch-original-temp
 
 - copy material-ui-1.5.0.zip\material-ui-1.5.0\docs\src\pages\demos\ to d:\reactxx\codemod\patch-doc-original\
-- del *.md
+- rename *.md to *.md.js
 
 - run index.ts from CodeMod project
 

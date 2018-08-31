@@ -10,31 +10,26 @@ import Paper from 'reactxx-mui-web/Paper/Paper';
 import Tabs from 'reactxx-mui-web/Tabs/Tabs';
 import Tab from 'reactxx-mui-web/Tab/Tab';
 
-class DisabledTabs extends React.Component<any,any> {
+class DisabledTabs extends React.Component<any, any> {
   state: any = {
-    value: 2,
+    value: 2
   };
-
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.setState({
+      value
+    });
   };
 
   render() {
-    return (
-      <Paper square>
-        <Tabs
-          value={this.state.value}
-          indicatorColor="primary"
-          textColor="primary"
-          onChange={this.handleChange}
-        >
+    return <Paper square>
+        <Tabs value={this.state.value} indicatorColor="primary" textColor="primary" onChange={this.handleChange}>
           <Tab label="Active" />
           <Tab label="Disabled" disabled />
           <Tab label="Active" />
         </Tabs>
-      </Paper>
-    );
+      </Paper>;
   }
+
 }
 
 export default DisabledTabs;

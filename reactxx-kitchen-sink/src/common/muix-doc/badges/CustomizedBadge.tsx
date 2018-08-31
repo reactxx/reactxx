@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import Badge from 'reactxx-mui-web/Badge/Badge';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import ShoppingCartIcon from 'reactxx-icons/ShoppingCart';
 
 const styles = theme => ({
@@ -17,26 +17,24 @@ const styles = theme => ({
     top: 1,
     right: -15,
     // The border color match the background color.
-    border: `2px solid ${
-      theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[900]
-    }`,
-  },
+    border: `2px solid ${theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[900]}`
+  }
 });
 
 function CustomizedBadge(props) {
-  const { classes } = props;
-
-  return (
-    <IconButton aria-label="Cart">
-      <Badge badgeContent={4} color="primary" classes={{ badge: classes.badge }}>
+  const {
+    classes
+  } = props;
+  return <IconButton aria-label="Cart">
+      <Badge badgeContent={4} color="primary" classes={{
+      badge: classes.badge
+    }}>
         <ShoppingCartIcon />
       </Badge>
-    </IconButton>
-  );
+    </IconButton>;
 }
 
 CustomizedBadge['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, CustomizedBadge)();
+export default withStylesCreator((styles as any), CustomizedBadge)();

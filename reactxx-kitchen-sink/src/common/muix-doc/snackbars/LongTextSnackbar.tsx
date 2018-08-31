@@ -8,53 +8,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'reactxx-mui-web/Button/Button';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import SnackbarContent from 'reactxx-mui-web/SnackbarContent/SnackbarContent';
-
-const action = (
-  <Button color="secondary" size="small">
+const action = <Button color="secondary" size="small">
     lorem ipsum dolorem
-  </Button>
-);
+  </Button>;
 
 const styles = theme => ({
   snackbar: {
-    margin: theme.spacing.unit,
-  },
+    margin: theme.spacing.unit
+  }
 });
 
 function LongTextSnackbar(props) {
-  const { classes } = props;
-
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  return <div>
       <SnackbarContent className={classes.snackbar} message="I love snacks." action={action} />
-      <SnackbarContent
-        className={classes.snackbar}
-        message={
-          'I love candy. I love cookies. I love cupcakes. \
-          I love cheesecake. I love chocolate.'
-        }
-      />
-      <SnackbarContent
-        className={classes.snackbar}
-        message="I love candy. I love cookies. I love cupcakes."
-        action={action}
-      />
-      <SnackbarContent
-        className={classes.snackbar}
-        message={
-          'I love candy. I love cookies. I love cupcakes. \
-          I love cheesecake. I love chocolate.'
-        }
-        action={action}
-      />
-    </div>
-  );
+      <SnackbarContent className={classes.snackbar} message={'I love candy. I love cookies. I love cupcakes. \
+          I love cheesecake. I love chocolate.'} />
+      <SnackbarContent className={classes.snackbar} message="I love candy. I love cookies. I love cupcakes." action={action} />
+      <SnackbarContent className={classes.snackbar} message={'I love candy. I love cookies. I love cupcakes. \
+          I love cheesecake. I love chocolate.'} action={action} />
+    </div>;
 }
 
 LongTextSnackbar['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, LongTextSnackbar)();
+export default withStylesCreator((styles as any), LongTextSnackbar)();

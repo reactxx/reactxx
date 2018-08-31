@@ -25,16 +25,20 @@ export type DialogActionsClassKey = "root" | "action";
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    flex: "0 0 auto",
-    margin: "8px 4px"
+    $web: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-end",
+      flex: "0 0 auto",
+      margin: "8px 4px"
+    }
   },
 
   /* Styles applied to the children. */
   action: {
-    margin: "0 4px"
+    $web: {
+      margin: "0 4px"
+    }
   }
 };
 

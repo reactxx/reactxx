@@ -32,31 +32,41 @@ export type StepClasskey =
   | "alternativeLabel";
 const styles = {
   /* Styles applied to the root element. */
-  root: {},
+  root: {
+    $web: {}
+  },
 
   /* Styles applied to the root element if `orientation="horizontal"`. */
   horizontal: {
-    paddingLeft: 8,
-    paddingRight: 8,
-    "&:first-child": {
-      paddingLeft: 0
-    },
-    "&:last-child": {
-      paddingRight: 0
+    $web: {
+      paddingLeft: 8,
+      paddingRight: 8,
+      "&:first-child": {
+        paddingLeft: 0
+      },
+      "&:last-child": {
+        paddingRight: 0
+      }
     }
   },
 
   /* Styles applied to the root element if `orientation="vertical"`. */
-  vertical: {},
+  vertical: {
+    $web: {}
+  },
 
   /* Styles applied to the root element if `alternativeLabel={true}`. */
   alternativeLabel: {
-    flex: 1,
-    position: "relative"
+    $web: {
+      flex: 1,
+      position: "relative"
+    }
   },
 
   /* Styles applied to the root element if `completed={true}`. */
-  completed: {}
+  completed: {
+    $web: {}
+  }
 };
 
 const Step: Types.CodeSFCWeb<Shape> & {

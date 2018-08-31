@@ -67,62 +67,76 @@ export type TooltipClassKey =
 const styles = theme => ({
   /* Styles applied to the Popper component. */
   popper: {
-    zIndex: theme.zIndex.tooltip,
-    opacity: 0.9
+    $web: {
+      zIndex: theme.zIndex.tooltip,
+      opacity: 0.9
+    }
   },
 
   /* Styles applied to the tooltip (label wrapper) element. */
   tooltip: {
-    backgroundColor: theme.palette.grey[700],
-    borderRadius: theme.shape.borderRadius,
-    color: theme.palette.common.white,
-    fontFamily: theme.typography.fontFamily,
-    padding: "4px 8px",
-    fontSize: theme.typography.pxToRem(10),
-    lineHeight: `${theme.typography.round(14 / 10)}em`,
-    maxWidth: 300
+    $web: {
+      backgroundColor: theme.palette.grey[700],
+      borderRadius: theme.shape.borderRadius,
+      color: theme.palette.common.white,
+      fontFamily: theme.typography.fontFamily,
+      padding: "4px 8px",
+      fontSize: theme.typography.pxToRem(10),
+      lineHeight: `${theme.typography.round(14 / 10)}em`,
+      maxWidth: 300
+    }
   },
 
   /* Styles applied to the tooltip (label wrapper) element if the tooltip is opened by touch. */
   touch: {
-    padding: "8px 16px",
-    fontSize: theme.typography.pxToRem(14),
-    lineHeight: `${theme.typography.round(16 / 14)}em`
+    $web: {
+      padding: "8px 16px",
+      fontSize: theme.typography.pxToRem(14),
+      lineHeight: `${theme.typography.round(16 / 14)}em`
+    }
   },
 
   /* Styles applied to the tooltip (label wrapper) element if `placement` contains "left". */
   tooltipPlacementLeft: {
-    transformOrigin: "right center",
-    margin: "0 24px ",
-    [theme.breakpoints.up("sm")]: {
-      margin: "0 14px"
+    $web: {
+      transformOrigin: "right center",
+      margin: "0 24px ",
+      [theme.breakpoints.up("sm")]: {
+        margin: "0 14px"
+      }
     }
   },
 
   /* Styles applied to the tooltip (label wrapper) element if `placement` contains "right". */
   tooltipPlacementRight: {
-    transformOrigin: "left center",
-    margin: "0 24px",
-    [theme.breakpoints.up("sm")]: {
-      margin: "0 14px"
+    $web: {
+      transformOrigin: "left center",
+      margin: "0 24px",
+      [theme.breakpoints.up("sm")]: {
+        margin: "0 14px"
+      }
     }
   },
 
   /* Styles applied to the tooltip (label wrapper) element if `placement` contains "top". */
   tooltipPlacementTop: {
-    transformOrigin: "center bottom",
-    margin: "24px 0",
-    [theme.breakpoints.up("sm")]: {
-      margin: "14px 0"
+    $web: {
+      transformOrigin: "center bottom",
+      margin: "24px 0",
+      [theme.breakpoints.up("sm")]: {
+        margin: "14px 0"
+      }
     }
   },
 
   /* Styles applied to the tooltip (label wrapper) element if `placement` contains "bottom". */
   tooltipPlacementBottom: {
-    transformOrigin: "center top",
-    margin: "24px 0",
-    [theme.breakpoints.up("sm")]: {
-      margin: "14px 0"
+    $web: {
+      transformOrigin: "center top",
+      margin: "24px 0",
+      [theme.breakpoints.up("sm")]: {
+        margin: "14px 0"
+      }
     }
   }
 });

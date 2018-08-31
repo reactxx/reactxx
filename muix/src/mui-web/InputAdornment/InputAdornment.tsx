@@ -25,19 +25,25 @@ export type InputAdornmentClassKey = "root" | "positionStart" | "positionEnd";
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    display: "flex",
-    maxHeight: "2em",
-    alignItems: "center"
+    $web: {
+      display: "flex",
+      maxHeight: "2em",
+      alignItems: "center"
+    }
   },
 
   /* Styles applied to the root element if `position="start"`. */
   positionStart: {
-    marginRight: 8
+    $web: {
+      marginRight: 8
+    }
   },
 
   /* Styles applied to the root element if `position="end"`. */
   positionEnd: {
-    marginLeft: 8
+    $web: {
+      marginLeft: 8
+    }
   }
 };
 

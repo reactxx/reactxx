@@ -3,6 +3,7 @@ import * as Sheeter from 'reactxx-sheeter';
 import { Types } from '../typings/types';
 // !!! platform dependent import
 import { rulesetsToClassNames, rulesetToClassNamesMUI } from 'reactxx-basic';
+import { TCommonStyles } from '../typings/common-styles';
 
 export const mergeRulesetsCreator = (classes: Sheeter.SheetWithAddIns, getClassesPatches: Sheeter.RulesetPatchGetters) => (...rulesets: Sheeter.Ruleset[]) => {
   return Sheeter.mergeRulesetsForCode(
@@ -20,17 +21,17 @@ export const mergeRulesetsCreatorStr = (classes: Sheeter.SheetWithAddIns, getCla
   return rulesetsToClassNames ? rulesetsToClassNames(res) : res
 }
 
-export const classNames = (...rulesets: (React.CSSProperties | {})[]) => {
+export const classNames = (...rulesets: (TCommonStyles.RulesetWeb | {})[]) => {
   if (!rulesets || (rulesets = rulesets.filter(r => !!r)).length === 0) return null
   return rulesets.length === 1 ? rulesets[0] : Sheeter.deepMerges({}, rulesets)
 }
 
-export const classNamesStr = (...rulesets: React.CSSProperties[]) => {
+export const classNamesStr = (...rulesets: TCommonStyles.RulesetWeb[]) => {
   const merged = classNames(...rulesets)
   return rulesetsToClassNames ? rulesetsToClassNames(merged) : merged
 }
 
-export const classNamesStrMUI = (...rulesets: React.CSSProperties[]) => {  
+export const classNamesStrMUI = (...rulesets: TCommonStyles.RulesetWeb[]) => {  
   const merged = classNames(...rulesets)
   return rulesetsToClassNames ? rulesetToClassNamesMUI(merged) : merged
 }

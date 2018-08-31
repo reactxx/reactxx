@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import List from 'reactxx-mui-web/List/List';
 import ListItem from 'reactxx-mui-web/ListItem/ListItem';
 import ListItemText from 'reactxx-mui-web/ListItemText/ListItemText';
@@ -20,40 +20,34 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     position: 'relative',
     overflow: 'auto',
-    maxHeight: 300,
+    maxHeight: 300
   },
   listSection: {
-    backgroundColor: 'inherit',
+    backgroundColor: 'inherit'
   },
   ul: {
     backgroundColor: 'inherit',
-    padding: 0,
-  },
+    padding: 0
+  }
 });
 
 function PinnedSubheaderList(props) {
-  const { classes } = props;
-
-  return (
-    <List className={classes.root} subheader={<li />}>
-      {[0, 1, 2, 3, 4].map(sectionId => (
-        <li key={`section-${sectionId}`} className={classes.listSection}>
+  const {
+    classes
+  } = props;
+  return <List className={classes.root} subheader={<li />}>
+      {[0, 1, 2, 3, 4].map(sectionId => <li key={`section-${sectionId}`} className={classes.listSection}>
           <ul className={classes.ul}>
             <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
-            {[0, 1, 2].map(item => (
-              <ListItem key={`item-${sectionId}-${item}`}>
+            {[0, 1, 2].map(item => <ListItem key={`item-${sectionId}-${item}`}>
                 <ListItemText primary={`Item ${item}`} />
-              </ListItem>
-            ))}
+              </ListItem>)}
           </ul>
-        </li>
-      ))}
-    </List>
-  );
+        </li>)}
+    </List>;
 }
 
 PinnedSubheaderList['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, PinnedSubheaderList)();
+export default withStylesCreator((styles as any), PinnedSubheaderList)();

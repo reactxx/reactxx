@@ -33,81 +33,93 @@ export type IconButtonClassKey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    textAlign: "center",
-    flex: "0 0 auto",
-    fontSize: theme.typography.pxToRem(24),
-    width: 48,
-    height: 48,
-    padding: 0,
-    borderRadius: "50%",
-    color: theme.palette.action.active,
-    transition: theme.transitions.create("background-color", {
-      duration: theme.transitions.duration.shortest
-    }),
-    "&:hover": {
-      backgroundColor: fade(
-        theme.palette.action.active,
-        theme.palette.action.hoverOpacity
-      ),
-      // Reset on touch devices, it doesn't add specificity
-      "@media (hover: none)": {
-        backgroundColor: "transparent"
+    $web: {
+      textAlign: "center",
+      flex: "0 0 auto",
+      fontSize: theme.typography.pxToRem(24),
+      width: 48,
+      height: 48,
+      padding: 0,
+      borderRadius: "50%",
+      color: theme.palette.action.active,
+      transition: theme.transitions.create("background-color", {
+        duration: theme.transitions.duration.shortest
+      }),
+      "&:hover": {
+        backgroundColor: fade(
+          theme.palette.action.active,
+          theme.palette.action.hoverOpacity
+        ),
+        // Reset on touch devices, it doesn't add specificity
+        "@media (hover: none)": {
+          backgroundColor: "transparent"
+        },
+        "&.disabled44": {
+          backgroundColor: "transparent"
+        }
       },
-      "&.disabled46": {
-        backgroundColor: "transparent"
+      "&.disabled44": {
+        color: theme.palette.action.disabled
       }
-    },
-    "&.disabled46": {
-      color: theme.palette.action.disabled
     }
   },
 
   /* Styles applied to the root element if `color="inherit"`. */
   colorInherit: {
-    color: "inherit"
+    $web: {
+      color: "inherit"
+    }
   },
 
   /* Styles applied to the root element if `color="primary"`. */
   colorPrimary: {
-    color: theme.palette.primary.main,
-    "&:hover": {
-      backgroundColor: fade(
-        theme.palette.primary.main,
-        theme.palette.action.hoverOpacity
-      ),
-      // Reset on touch devices, it doesn't add specificity
-      "@media (hover: none)": {
-        backgroundColor: "transparent"
+    $web: {
+      color: theme.palette.primary.main,
+      "&:hover": {
+        backgroundColor: fade(
+          theme.palette.primary.main,
+          theme.palette.action.hoverOpacity
+        ),
+        // Reset on touch devices, it doesn't add specificity
+        "@media (hover: none)": {
+          backgroundColor: "transparent"
+        }
       }
     }
   },
 
   /* Styles applied to the root element if `color="secondary"`. */
   colorSecondary: {
-    color: theme.palette.secondary.main,
-    "&:hover": {
-      backgroundColor: fade(
-        theme.palette.secondary.main,
-        theme.palette.action.hoverOpacity
-      ),
-      // Reset on touch devices, it doesn't add specificity
-      "@media (hover: none)": {
-        backgroundColor: "transparent"
+    $web: {
+      color: theme.palette.secondary.main,
+      "&:hover": {
+        backgroundColor: fade(
+          theme.palette.secondary.main,
+          theme.palette.action.hoverOpacity
+        ),
+        // Reset on touch devices, it doesn't add specificity
+        "@media (hover: none)": {
+          backgroundColor: "transparent"
+        }
       }
     }
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
-    NAME$disabled46: true
+    $web: {
+      NAME$disabled44: true
+    }
   },
 
   /* Styles applied to the children container element. */
   label: {
-    width: "100%",
-    display: "flex",
-    alignItems: "inherit",
-    justifyContent: "inherit"
+    $web: {
+      width: "100%",
+      display: "flex",
+      alignItems: "inherit",
+      justifyContent: "inherit"
+    }
   }
 });
 /**

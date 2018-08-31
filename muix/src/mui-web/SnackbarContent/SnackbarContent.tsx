@@ -29,34 +29,40 @@ const styles = theme => {
   return {
     /* Styles applied to the root element. */
     root: {
-      color: theme.palette.getContrastText(backgroundColor),
-      backgroundColor,
-      display: "flex",
-      alignItems: "center",
-      flexWrap: "wrap",
-      padding: "6px 24px",
-      [theme.breakpoints.up("md")]: {
-        minWidth: 288,
-        maxWidth: 568,
-        borderRadius: theme.shape.borderRadius
-      },
-      [theme.breakpoints.down("sm")]: {
-        flexGrow: 1
+      $web: {
+        color: theme.palette.getContrastText(backgroundColor),
+        backgroundColor,
+        display: "flex",
+        alignItems: "center",
+        flexWrap: "wrap",
+        padding: "6px 24px",
+        [theme.breakpoints.up("md")]: {
+          minWidth: 288,
+          maxWidth: 568,
+          borderRadius: theme.shape.borderRadius
+        },
+        [theme.breakpoints.down("sm")]: {
+          flexGrow: 1
+        }
       }
     },
 
     /* Styles applied to the message wrapper element. */
     message: {
-      padding: "8px 0"
+      $web: {
+        padding: "8px 0"
+      }
     },
 
     /* Styles applied to the action wrapper element if `action` is provided. */
     action: {
-      display: "flex",
-      alignItems: "center",
-      marginLeft: "auto",
-      paddingLeft: 24,
-      marginRight: -8
+      $web: {
+        display: "flex",
+        alignItems: "center",
+        marginLeft: "auto",
+        paddingLeft: 24,
+        marginRight: -8
+      }
     }
   };
 };

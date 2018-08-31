@@ -7,31 +7,31 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import AppBar from 'reactxx-mui-web/AppBar/AppBar';
 import Toolbar from 'reactxx-mui-web/Toolbar/Toolbar';
 import Typography from 'reactxx-mui-web/Typography/Typography';
 import Button from 'reactxx-mui-web/Button/Button';
 import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import MenuIcon from 'reactxx-icons/Menu';
-
 const styles = {
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   flex: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20,
-  },
+    marginRight: 20
+  }
 };
 
 function ButtonAppBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
@@ -43,12 +43,10 @@ function ButtonAppBar(props) {
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
-    </div>
-  );
+    </div>;
 }
 
 ButtonAppBar['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, ButtonAppBar)();
+export default withStylesCreator((styles as any), ButtonAppBar)();

@@ -67,244 +67,296 @@ export type ButtonClassKey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    ...theme.typography.button,
-    lineHeight: "1.4em",
-    // Improve readability for multiline button.
-    boxSizing: "border-box",
-    minWidth: 64,
-    minHeight: 36,
-    padding: "8px 16px",
-    borderRadius: theme.shape.borderRadius,
-    color: theme.palette.text.primary,
-    transition: theme.transitions.create(
-      ["background-color", "box-shadow", "border"],
-      {
-        duration: theme.transitions.duration.short
-      }
-    ),
-    "&:hover": {
-      textDecoration: "none",
-      backgroundColor: fade(
-        theme.palette.text.primary,
-        theme.palette.action.hoverOpacity
+    $web: {
+      ...theme.typography.button,
+      lineHeight: "1.4em",
+      // Improve readability for multiline button.
+      boxSizing: "border-box",
+      minWidth: 64,
+      minHeight: 36,
+      padding: "8px 16px",
+      borderRadius: theme.shape.borderRadius,
+      color: theme.palette.text.primary,
+      transition: theme.transitions.create(
+        ["background-color", "box-shadow", "border"],
+        {
+          duration: theme.transitions.duration.short
+        }
       ),
-      // Reset on touch devices, it doesn't add specificity
-      "@media (hover: none)": {
-        backgroundColor: "transparent"
+      "&:hover": {
+        textDecoration: "none",
+        backgroundColor: fade(
+          theme.palette.text.primary,
+          theme.palette.action.hoverOpacity
+        ),
+        // Reset on touch devices, it doesn't add specificity
+        "@media (hover: none)": {
+          backgroundColor: "transparent"
+        },
+        "&.disabled7": {
+          backgroundColor: "transparent"
+        }
       },
-      "&.disabled8": {
-        backgroundColor: "transparent"
+      "&.disabled7": {
+        color: theme.palette.action.disabled
       }
-    },
-    "&.disabled8": {
-      color: theme.palette.action.disabled
     }
   },
 
   /* Styles applied to the span element that wraps the children. */
   label: {
-    width: "100%",
-    // assure the correct width for iOS Safari
-    display: "inherit",
-    alignItems: "inherit",
-    justifyContent: "inherit"
+    $web: {
+      width: "100%",
+      // assure the correct width for iOS Safari
+      display: "inherit",
+      alignItems: "inherit",
+      justifyContent: "inherit"
+    }
   },
 
   /* Styles applied to the root element if `variant="text"`. */
-  text: {},
+  text: {
+    $web: {}
+  },
 
   /* Styles applied to the root element if `variant="text"` and `color="primary"`. */
   textPrimary: {
-    color: theme.palette.primary.main,
-    "&:hover": {
-      backgroundColor: fade(
-        theme.palette.primary.main,
-        theme.palette.action.hoverOpacity
-      ),
-      // Reset on touch devices, it doesn't add specificity
-      "@media (hover: none)": {
-        backgroundColor: "transparent"
+    $web: {
+      color: theme.palette.primary.main,
+      "&:hover": {
+        backgroundColor: fade(
+          theme.palette.primary.main,
+          theme.palette.action.hoverOpacity
+        ),
+        // Reset on touch devices, it doesn't add specificity
+        "@media (hover: none)": {
+          backgroundColor: "transparent"
+        }
       }
     }
   },
 
   /* Styles applied to the root element if `variant="text"` and `color="secondary"`. */
   textSecondary: {
-    color: theme.palette.secondary.main,
-    "&:hover": {
-      backgroundColor: fade(
-        theme.palette.secondary.main,
-        theme.palette.action.hoverOpacity
-      ),
-      // Reset on touch devices, it doesn't add specificity
-      "@media (hover: none)": {
-        backgroundColor: "transparent"
+    $web: {
+      color: theme.palette.secondary.main,
+      "&:hover": {
+        backgroundColor: fade(
+          theme.palette.secondary.main,
+          theme.palette.action.hoverOpacity
+        ),
+        // Reset on touch devices, it doesn't add specificity
+        "@media (hover: none)": {
+          backgroundColor: "transparent"
+        }
       }
     }
   },
 
   /* Styles applied to the root element for backwards compatibility with legacy variant naming. */
-  flat: {},
+  flat: {
+    $web: {}
+  },
 
   /* Styles applied to the root element for backwards compatibility with legacy variant naming. */
-  flatPrimary: {},
+  flatPrimary: {
+    $web: {}
+  },
 
   /* Styles applied to the root element for backwards compatibility with legacy variant naming. */
-  flatSecondary: {},
+  flatSecondary: {
+    $web: {}
+  },
 
   /* Styles applied to the root element if `variant="outlined"`. */
   outlined: {
-    border: `1px solid ${
-      theme.palette.type === "light"
-        ? "rgba(0, 0, 0, 0.23)"
-        : "rgba(255, 255, 255, 0.23)"
-    }`
+    $web: {
+      border: `1px solid ${
+        theme.palette.type === "light"
+          ? "rgba(0, 0, 0, 0.23)"
+          : "rgba(255, 255, 255, 0.23)"
+      }`
+    }
   },
 
   /* Styles applied to the root element if `variant="outlined"` and `color="primary"`. */
   outlinedPrimary: {
-    border: `1px solid ${fade(theme.palette.primary.main, 0.5)}`,
-    "&:hover": {
-      border: `1px solid ${theme.palette.primary.main}`
+    $web: {
+      border: `1px solid ${fade(theme.palette.primary.main, 0.5)}`,
+      "&:hover": {
+        border: `1px solid ${theme.palette.primary.main}`
+      }
     }
   },
 
   /* Styles applied to the root element if `variant="outlined"` and `color="secondary"`. */
   outlinedSecondary: {
-    border: `1px solid ${fade(theme.palette.secondary.main, 0.5)}`,
-    "&:hover": {
-      border: `1px solid ${theme.palette.secondary.main}`
+    $web: {
+      border: `1px solid ${fade(theme.palette.secondary.main, 0.5)}`,
+      "&:hover": {
+        border: `1px solid ${theme.palette.secondary.main}`
+      }
     }
   },
 
   /* Styles applied to the root element if `variant="[contained | fab]"`. */
   contained: {
-    color: theme.palette.getContrastText(theme.palette.grey[300]),
-    backgroundColor: theme.palette.grey[300],
-    boxShadow: theme.shadows[2],
-    "&.focusVisible8": {
-      boxShadow: theme.shadows[6]
-    },
-    "&:active": {
-      boxShadow: theme.shadows[8]
-    },
-    "&.disabled8": {
-      color: theme.palette.action.disabled,
-      boxShadow: theme.shadows[0],
-      backgroundColor: theme.palette.action.disabledBackground
-    },
-    "&:hover": {
-      backgroundColor: theme.palette.grey.A100,
-      // Reset on touch devices, it doesn't add specificity
-      "@media (hover: none)": {
-        backgroundColor: theme.palette.grey[300]
+    $web: {
+      color: theme.palette.getContrastText(theme.palette.grey[300]),
+      backgroundColor: theme.palette.grey[300],
+      boxShadow: theme.shadows[2],
+      "&.focusVisible7": {
+        boxShadow: theme.shadows[6]
       },
-      "&.disabled8": {
+      "&:active": {
+        boxShadow: theme.shadows[8]
+      },
+      "&.disabled7": {
+        color: theme.palette.action.disabled,
+        boxShadow: theme.shadows[0],
         backgroundColor: theme.palette.action.disabledBackground
+      },
+      "&:hover": {
+        backgroundColor: theme.palette.grey.A100,
+        // Reset on touch devices, it doesn't add specificity
+        "@media (hover: none)": {
+          backgroundColor: theme.palette.grey[300]
+        },
+        "&.disabled7": {
+          backgroundColor: theme.palette.action.disabledBackground
+        }
       }
     }
   },
 
   /* Styles applied to the root element if `variant="[contained | fab]"` and `color="primary"`. */
   containedPrimary: {
-    color: theme.palette.primary.contrastText,
-    backgroundColor: theme.palette.primary.main,
-    "&:hover": {
-      backgroundColor: theme.palette.primary.dark,
-      // Reset on touch devices, it doesn't add specificity
-      "@media (hover: none)": {
-        backgroundColor: theme.palette.primary.main
+    $web: {
+      color: theme.palette.primary.contrastText,
+      backgroundColor: theme.palette.primary.main,
+      "&:hover": {
+        backgroundColor: theme.palette.primary.dark,
+        // Reset on touch devices, it doesn't add specificity
+        "@media (hover: none)": {
+          backgroundColor: theme.palette.primary.main
+        }
       }
     }
   },
 
   /* Styles applied to the root element if `variant="[contained | fab]"` and `color="secondary"`. */
   containedSecondary: {
-    color: theme.palette.secondary.contrastText,
-    backgroundColor: theme.palette.secondary.main,
-    "&:hover": {
-      backgroundColor: theme.palette.secondary.dark,
-      // Reset on touch devices, it doesn't add specificity
-      "@media (hover: none)": {
-        backgroundColor: theme.palette.secondary.main
+    $web: {
+      color: theme.palette.secondary.contrastText,
+      backgroundColor: theme.palette.secondary.main,
+      "&:hover": {
+        backgroundColor: theme.palette.secondary.dark,
+        // Reset on touch devices, it doesn't add specificity
+        "@media (hover: none)": {
+          backgroundColor: theme.palette.secondary.main
+        }
       }
     }
   },
 
   /* Styles applied to the root element for backwards compatibility with legacy variant naming. */
-  raised: {},
+  raised: {
+    $web: {}
+  },
   // legacy
 
   /* Styles applied to the root element for backwards compatibility with legacy variant naming. */
-  raisedPrimary: {},
+  raisedPrimary: {
+    $web: {}
+  },
   // legacy
 
   /* Styles applied to the root element for backwards compatibility with legacy variant naming. */
-  raisedSecondary: {},
+  raisedSecondary: {
+    $web: {}
+  },
   // legacy
 
   /* Styles applied to the root element if `variant="[fab | extendedFab]"`. */
   fab: {
-    borderRadius: "50%",
-    padding: 0,
-    minWidth: 0,
-    width: 56,
-    height: 56,
-    boxShadow: theme.shadows[6],
-    "&:active": {
-      boxShadow: theme.shadows[12]
+    $web: {
+      borderRadius: "50%",
+      padding: 0,
+      minWidth: 0,
+      width: 56,
+      height: 56,
+      boxShadow: theme.shadows[6],
+      "&:active": {
+        boxShadow: theme.shadows[12]
+      }
     }
   },
 
   /* Styles applied to the root element if `variant="extendedFab"`. */
   extendedFab: {
-    borderRadius: 48 / 2,
-    padding: "0 16px",
-    width: "auto",
-    minWidth: 48,
-    height: 48
+    $web: {
+      borderRadius: 48 / 2,
+      padding: "0 16px",
+      width: "auto",
+      minWidth: 48,
+      height: 48
+    }
   },
 
   /* Styles applied to the ButtonBase root element if the button is keyboard focused. */
   focusVisible: {
-    NAME$focusVisible8: true
+    $web: {
+      NAME$focusVisible7: true
+    }
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
-    NAME$disabled8: true
+    $web: {
+      NAME$disabled7: true
+    }
   },
 
   /* Styles applied to the root element if `color="inherit"`. */
   colorInherit: {
-    color: "inherit"
+    $web: {
+      color: "inherit"
+    }
   },
 
   /* Styles applied to the root element if `size="mini"` & `variant="[fab | extendedFab]"`. */
   mini: {
-    width: 40,
-    height: 40
+    $web: {
+      width: 40,
+      height: 40
+    }
   },
 
   /* Styles applied to the root element if `size="small"`. */
   sizeSmall: {
-    padding: "7px 8px",
-    minWidth: 64,
-    minHeight: 32,
-    fontSize: theme.typography.pxToRem(13)
+    $web: {
+      padding: "7px 8px",
+      minWidth: 64,
+      minHeight: 32,
+      fontSize: theme.typography.pxToRem(13)
+    }
   },
 
   /* Styles applied to the root element if `size="large"`. */
   sizeLarge: {
-    padding: "8px 24px",
-    minWidth: 112,
-    minHeight: 40,
-    fontSize: theme.typography.pxToRem(15)
+    $web: {
+      padding: "8px 24px",
+      minWidth: 112,
+      minHeight: 40,
+      fontSize: theme.typography.pxToRem(15)
+    }
   },
 
   /* Styles applied to the root element if `fullWidth={true}`. */
   fullWidth: {
-    width: "100%"
+    $web: {
+      width: "100%"
+    }
   }
 });
 

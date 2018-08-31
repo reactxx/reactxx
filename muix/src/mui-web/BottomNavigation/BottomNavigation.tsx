@@ -28,10 +28,12 @@ export type BottomNavigationClassKey = "root";
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    display: "flex",
-    justifyContent: "center",
-    height: 56,
-    backgroundColor: theme.palette.background.paper
+    $web: {
+      display: "flex",
+      justifyContent: "center",
+      height: 56,
+      backgroundColor: theme.palette.background.paper
+    }
   }
 });
 

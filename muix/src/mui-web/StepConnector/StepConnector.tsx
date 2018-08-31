@@ -33,47 +33,61 @@ export type StepConnectorClasskey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    flex: "1 1 auto"
+    $web: {
+      flex: "1 1 auto"
+    }
   },
 
   /* Styles applied to the root element if `orientation="horizontal"`. */
-  horizontal: {},
+  horizontal: {
+    $web: {}
+  },
 
   /* Styles applied to the root element if `orientation="vertical"`. */
   vertical: {
-    marginLeft: 12,
-    // half icon
-    padding: "0 0 8px"
+    $web: {
+      marginLeft: 12,
+      // half icon
+      padding: "0 0 8px"
+    }
   },
 
   /* Styles applied to the root element if `alternativeLabel={true}`. */
   alternativeLabel: {
-    position: "absolute",
-    top: 8 + 4,
-    left: "calc(50% + 20px)",
-    right: "calc(-50% + 20px)"
+    $web: {
+      position: "absolute",
+      top: 8 + 4,
+      left: "calc(50% + 20px)",
+      right: "calc(-50% + 20px)"
+    }
   },
 
   /* Styles applied to the line element. */
   line: {
-    display: "block",
-    borderColor:
-      theme.palette.type === "light"
-        ? theme.palette.grey[400]
-        : theme.palette.grey[600]
+    $web: {
+      display: "block",
+      borderColor:
+        theme.palette.type === "light"
+          ? theme.palette.grey[400]
+          : theme.palette.grey[600]
+    }
   },
 
   /* Styles applied to the root element if `orientation="horizontal"`. */
   lineHorizontal: {
-    borderTopStyle: "solid",
-    borderTopWidth: 1
+    $web: {
+      borderTopStyle: "solid",
+      borderTopWidth: 1
+    }
   },
 
   /* Styles applied to the root element if `orientation="vertical"`. */
   lineVertical: {
-    borderLeftStyle: "solid",
-    borderLeftWidth: 1,
-    minHeight: 24
+    $web: {
+      borderLeftStyle: "solid",
+      borderLeftWidth: 1,
+      minHeight: 24
+    }
   }
 });
 

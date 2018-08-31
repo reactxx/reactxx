@@ -18,7 +18,9 @@ export interface DialogContentTextProps
 export type DialogContentTextClassKey = "root";
 const styles = {
   /* Styles applied to the root element. */
-  root: {}
+  root: {
+    $web: {}
+  }
 };
 
 const DialogContentText: Types.CodeSFCWeb<Shape> & {

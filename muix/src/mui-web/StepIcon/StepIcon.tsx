@@ -34,39 +34,49 @@ export type StepIconClasskey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    display: "block",
-    color: theme.palette.text.disabled,
-    "&.active77": {
-      color: theme.palette.primary.main
-    },
-    "&.completed77": {
-      color: theme.palette.primary.main
-    },
-    "&.error77": {
-      color: theme.palette.error.main
+    $web: {
+      display: "block",
+      color: theme.palette.text.disabled,
+      "&.active74": {
+        color: theme.palette.primary.main
+      },
+      "&.completed74": {
+        color: theme.palette.primary.main
+      },
+      "&.error74": {
+        color: theme.palette.error.main
+      }
     }
   },
 
   /* Styles applied to the SVG text element. */
   text: {
-    fill: theme.palette.primary.contrastText,
-    fontSize: theme.typography.caption.fontSize,
-    fontFamily: theme.typography.fontFamily
+    $web: {
+      fill: theme.palette.primary.contrastText,
+      fontSize: theme.typography.caption.fontSize,
+      fontFamily: theme.typography.fontFamily
+    }
   },
 
   /* Styles applied to the root element if `active={true}`. */
   active: {
-    NAME$active77: true
+    $web: {
+      NAME$active74: true
+    }
   },
 
   /* Styles applied to the root element if `completed={true}`. */
   completed: {
-    NAME$completed77: true
+    $web: {
+      NAME$completed74: true
+    }
   },
 
   /* Styles applied to the root element if `error={true}`. */
   error: {
-    NAME$error77: true
+    $web: {
+      NAME$error74: true
+    }
   }
 });
 

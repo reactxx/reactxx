@@ -19,10 +19,14 @@ export interface ZoomProps extends TransitionProps {
 }
 const styles = {
   entering: {
-    transform: "scale(1)"
+    $web: {
+      transform: "scale(1)"
+    }
   },
   entered: {
-    transform: "scale(1)"
+    $web: {
+      transform: "scale(1)"
+    }
   }
 };
 /**

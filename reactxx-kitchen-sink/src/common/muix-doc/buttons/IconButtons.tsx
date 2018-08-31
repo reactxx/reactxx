@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Icon from 'reactxx-mui-web/Icon/Icon';
 import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import DeleteIcon from 'reactxx-icons/Delete';
@@ -16,17 +16,18 @@ import PhotoCamera from 'reactxx-icons/PhotoCamera';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   },
   input: {
-    display: 'none',
-  },
+    display: 'none'
+  }
 });
 
 function IconButtons(props) {
-  const { classes } = props;
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  return <div>
       <IconButton className={classes.button} aria-label="Delete">
         <DeleteIcon />
       </IconButton>
@@ -45,12 +46,10 @@ function IconButtons(props) {
           <PhotoCamera />
         </IconButton>
       </label>
-    </div>
-  );
+    </div>;
 }
 
 IconButtons['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, IconButtons)();
+export default withStylesCreator((styles as any), IconButtons)();

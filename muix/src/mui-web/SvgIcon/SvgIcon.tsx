@@ -33,46 +33,60 @@ export type SvgIconClassKey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    userSelect: "none",
-    width: "1em",
-    height: "1em",
-    display: "inline-block",
-    fill: "currentColor",
-    flexShrink: 0,
-    fontSize: 24,
-    transition: theme.transitions.create("fill", {
-      duration: theme.transitions.duration.shorter
-    })
+    $web: {
+      userSelect: "none",
+      width: "1em",
+      height: "1em",
+      display: "inline-block",
+      fill: "currentColor",
+      flexShrink: 0,
+      fontSize: 24,
+      transition: theme.transitions.create("fill", {
+        duration: theme.transitions.duration.shorter
+      })
+    }
   },
 
   /* Styles applied to the root element if `color="primary"`. */
   colorPrimary: {
-    color: theme.palette.primary.main
+    $web: {
+      color: theme.palette.primary.main
+    }
   },
 
   /* Styles applied to the root element if `color="secondary"`. */
   colorSecondary: {
-    color: theme.palette.secondary.main
+    $web: {
+      color: theme.palette.secondary.main
+    }
   },
 
   /* Styles applied to the root element if `color="saction"`. */
   colorAction: {
-    color: theme.palette.action.active
+    $web: {
+      color: theme.palette.action.active
+    }
   },
 
   /* Styles applied to the root element if `color="error"`. */
   colorError: {
-    color: theme.palette.error.main
+    $web: {
+      color: theme.palette.error.main
+    }
   },
 
   /* Styles applied to the root element if `color="disabled"`. */
   colorDisabled: {
-    color: theme.palette.action.disabled
+    $web: {
+      color: theme.palette.action.disabled
+    }
   },
 
   /* Styles applied to the root element if `fontSize="inherit"`. */
   fontSizeInherit: {
-    fontSize: "inherit"
+    $web: {
+      fontSize: "inherit"
+    }
   }
 });
 

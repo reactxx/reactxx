@@ -7,27 +7,27 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import AppBar from 'reactxx-mui-web/AppBar/AppBar';
 import Toolbar from 'reactxx-mui-web/Toolbar/Toolbar';
 import Typography from 'reactxx-mui-web/Typography/Typography';
 import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import MenuIcon from 'reactxx-icons/Menu';
-
 const styles = {
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
     marginLeft: -18,
-    marginRight: 10,
-  },
+    marginRight: 10
+  }
 };
 
 function DenseAppBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classes.root}>
       <AppBar position="static">
         <Toolbar variant="dense">
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
@@ -38,12 +38,10 @@ function DenseAppBar(props) {
           </Typography>
         </Toolbar>
       </AppBar>
-    </div>
-  );
+    </div>;
 }
 
 DenseAppBar['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, DenseAppBar)();
+export default withStylesCreator((styles as any), DenseAppBar)();

@@ -11,22 +11,23 @@ import Button from 'reactxx-mui-web/Button/Button';
 import Tooltip from 'reactxx-mui-web/Tooltip/Tooltip';
 import ClickAwayListener from 'reactxx-mui-web/ClickAwayListener/ClickAwayListener';
 
-class TriggersTooltips extends React.Component<any,any> {
+class TriggersTooltips extends React.Component<any, any> {
   state: any = {
-    open: false,
+    open: false
   };
-
   handleTooltipClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false
+    });
   };
-
   handleTooltipOpen = () => {
-    this.setState({ open: true });
+    this.setState({
+      open: true
+    });
   };
 
   render() {
-    return (
-      <div>
+    return <div>
         <Grid container justify="center">
           <Grid item>
             <Tooltip disableFocusListener title="Add">
@@ -46,26 +47,18 @@ class TriggersTooltips extends React.Component<any,any> {
           <Grid item>
             <ClickAwayListener onClickAway={this.handleTooltipClose}>
               <div>
-                <Tooltip
-                  PopperProps={{
-                    disablePortal: true,
-                  }}
-                  onClose={this.handleTooltipClose}
-                  open={this.state.open}
-                  disableFocusListener
-                  disableHoverListener
-                  disableTouchListener
-                  title="Add"
-                >
+                <Tooltip PopperProps={{
+                disablePortal: true
+              }} onClose={this.handleTooltipClose} open={this.state.open} disableFocusListener disableHoverListener disableTouchListener title="Add">
                   <Button onClick={this.handleTooltipOpen}>Click</Button>
                 </Tooltip>
               </div>
             </ClickAwayListener>
           </Grid>
         </Grid>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 export default TriggersTooltips;

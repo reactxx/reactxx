@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import ExpansionPanel from 'reactxx-mui-web/ExpansionPanel/ExpansionPanel';
 import ExpansionPanelSummary from 'reactxx-mui-web/ExpansionPanelSummary/ExpansionPanelSummary';
 import ExpansionPanelDetails from 'reactxx-mui-web/ExpansionPanelDetails/ExpansionPanelDetails';
@@ -16,18 +16,19 @@ import ExpandMoreIcon from 'reactxx-icons/ExpandMore';
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: '100%'
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
+    fontWeight: theme.typography.fontWeightRegular
+  }
 });
 
 function SimpleExpansionPanel(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classes.root}>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.heading}>Expansion Panel 1</Typography>
@@ -55,12 +56,10 @@ function SimpleExpansionPanel(props) {
           <Typography className={classes.heading}>Disabled Expansion Panel</Typography>
         </ExpansionPanelSummary>
       </ExpansionPanel>
-    </div>
-  );
+    </div>;
 }
 
 SimpleExpansionPanel['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, SimpleExpansionPanel)();
+export default withStylesCreator((styles as any), SimpleExpansionPanel)();

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Badge from 'reactxx-mui-web/Badge/Badge';
 import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import MailIcon from 'reactxx-icons/Mail';
@@ -19,17 +19,18 @@ import Button from 'reactxx-mui-web/Button/Button';
 
 const styles = theme => ({
   margin: {
-    margin: theme.spacing.unit * 2,
+    margin: theme.spacing.unit * 2
   },
   padding: {
-    padding: `0 ${theme.spacing.unit * 2}px`,
-  },
+    padding: `0 ${theme.spacing.unit * 2}px`
+  }
 });
 
 function SimpleBadge(props) {
-  const { classes } = props;
-  return (
-    <div>
+  const {
+    classes
+  } = props;
+  return <div>
       <div>
         <Badge className={classes.margin} badgeContent={4} color="primary">
           <MailIcon />
@@ -45,13 +46,9 @@ function SimpleBadge(props) {
       </div>
       <AppBar position="static" className={classes.margin}>
         <Tabs value={0}>
-          <Tab
-            label={
-              <Badge className={classes.padding} color="secondary" badgeContent={4}>
+          <Tab label={<Badge className={classes.padding} color="secondary" badgeContent={4}>
                 Item One
-              </Badge>
-            }
-          />
+              </Badge>} />
           <Tab label="Item Two" />
           <Tab label="Item Three" />
         </Tabs>
@@ -62,12 +59,10 @@ function SimpleBadge(props) {
       <Badge color="primary" badgeContent={4} className={classes.margin}>
         <Button variant="contained">Button</Button>
       </Badge>
-    </div>
-  );
+    </div>;
 }
 
 SimpleBadge['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, SimpleBadge)();
+export default withStylesCreator((styles as any), SimpleBadge)();

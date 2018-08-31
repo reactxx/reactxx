@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import MenuList from 'reactxx-mui-web/MenuList/MenuList';
 import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
 import Paper from 'reactxx-mui-web/Paper/Paper';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import ListItemIcon from 'reactxx-mui-web/ListItemIcon/ListItemIcon';
 import ListItemText from 'reactxx-mui-web/ListItemText/ListItemText';
 import InboxIcon from 'reactxx-icons/MoveToInbox';
@@ -22,45 +22,49 @@ const styles = theme => ({
     '&:focus': {
       backgroundColor: theme.palette.primary.main,
       '& $primary, & $icon': {
-        color: theme.palette.common.white,
-      },
-    },
+        color: theme.palette.common.white
+      }
+    }
   },
   primary: {},
-  icon: {},
+  icon: {}
 });
 
 function ListItemComposition(props) {
-  const { classes } = props;
-
-  return (
-    <Paper>
+  const {
+    classes
+  } = props;
+  return <Paper>
       <MenuList>
         <MenuItem className={classes.menuItem}>
           <ListItemIcon className={classes.icon}>
             <SendIcon />
           </ListItemIcon>
-          <ListItemText classes={{ primary: classes.primary }} inset primary="Sent mail" />
+          <ListItemText classes={{
+          primary: classes.primary
+        }} inset primary="Sent mail" />
         </MenuItem>
         <MenuItem className={classes.menuItem}>
           <ListItemIcon className={classes.icon}>
             <DraftsIcon />
           </ListItemIcon>
-          <ListItemText classes={{ primary: classes.primary }} inset primary="Drafts" />
+          <ListItemText classes={{
+          primary: classes.primary
+        }} inset primary="Drafts" />
         </MenuItem>
         <MenuItem className={classes.menuItem}>
           <ListItemIcon className={classes.icon}>
             <InboxIcon />
           </ListItemIcon>
-          <ListItemText classes={{ primary: classes.primary }} inset primary="Inbox" />
+          <ListItemText classes={{
+          primary: classes.primary
+        }} inset primary="Inbox" />
         </MenuItem>
       </MenuList>
-    </Paper>
-  );
+    </Paper>;
 }
 
 ListItemComposition['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, ListItemComposition)();
+export default withStylesCreator((styles as any), ListItemComposition)();

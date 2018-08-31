@@ -24,8 +24,10 @@ export type TabScrollButtonClassKey = "root";
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    color: "inherit",
-    flex: "0 0 56px"
+    $web: {
+      color: "inherit",
+      flex: "0 0 56px"
+    }
   }
 };
 /**

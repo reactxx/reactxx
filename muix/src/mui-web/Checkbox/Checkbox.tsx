@@ -35,36 +35,46 @@ export type CheckboxClassKey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    color: theme.palette.text.secondary
+    $web: {
+      color: theme.palette.text.secondary
+    }
   },
 
   /* Styles applied to the root element if `checked={true}`. */
   checked: {
-    NAME$checked17: true
+    $web: {
+      NAME$checked16: true
+    }
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
-    NAME$disabled17: true
+    $web: {
+      NAME$disabled16: true
+    }
   },
 
   /* Styles applied to the root element if `color="primary"`. */
   colorPrimary: {
-    "&.checked17": {
-      color: theme.palette.primary.main
-    },
-    "&.disabled17": {
-      color: theme.palette.action.disabled
+    $web: {
+      "&.checked16": {
+        color: theme.palette.primary.main
+      },
+      "&.disabled16": {
+        color: theme.palette.action.disabled
+      }
     }
   },
 
   /* Styles applied to the root element if `color="secondary"`. */
   colorSecondary: {
-    "&.checked17": {
-      color: theme.palette.secondary.main
-    },
-    "&.disabled17": {
-      color: theme.palette.action.disabled
+    $web: {
+      "&.checked16": {
+        color: theme.palette.secondary.main
+      },
+      "&.disabled16": {
+        color: theme.palette.action.disabled
+      }
     }
   }
 });

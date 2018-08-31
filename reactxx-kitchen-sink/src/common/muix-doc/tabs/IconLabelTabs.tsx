@@ -12,31 +12,26 @@ import Tab from 'reactxx-mui-web/Tab/Tab';
 import PhoneIcon from 'reactxx-icons/Phone';
 import FavoriteIcon from 'reactxx-icons/Favorite';
 import PersonPinIcon from 'reactxx-icons/PersonPin';
-
-export default class IconLabelTabs extends React.Component<any,any> {
+export default class IconLabelTabs extends React.Component<any, any> {
   state: any = {
-    value: 0,
+    value: 0
   };
-
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.setState({
+      value
+    });
   };
 
   render() {
-    return (
-      <Paper square style={{ width: 500 }}>
-        <Tabs
-          value={this.state.value}
-          onChange={this.handleChange}
-          fullWidth
-          indicatorColor="secondary"
-          textColor="secondary"
-        >
+    return <Paper square style={{
+      width: 500
+    }}>
+        <Tabs value={this.state.value} onChange={this.handleChange} fullWidth indicatorColor="secondary" textColor="secondary">
           <Tab icon={<PhoneIcon />} label="RECENTS" />
           <Tab icon={<FavoriteIcon />} label="FAVORITES" />
           <Tab icon={<PersonPinIcon />} label="NEARBY" />
         </Tabs>
-      </Paper>
-    );
+      </Paper>;
   }
+
 }

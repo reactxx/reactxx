@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Button from 'reactxx-mui-web/Button/Button';
 import Dialog from 'reactxx-mui-web/Dialog/Dialog';
 import ListItemText from 'reactxx-mui-web/ListItemText/ListItemText';
@@ -20,44 +20,41 @@ import IconButton from 'reactxx-mui-web/IconButton/IconButton';
 import Typography from 'reactxx-mui-web/Typography/Typography';
 import CloseIcon from 'reactxx-icons/Close';
 import Slide from 'reactxx-mui-web/Slide/Slide';
-
 const styles = {
   appBar: {
-    position: 'relative',
+    position: 'relative'
   },
   flex: {
-    flex: 1,
-  },
+    flex: 1
+  }
 };
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-class FullScreenDialog extends React.Component<any,any> {
+class FullScreenDialog extends React.Component<any, any> {
   state: any = {
-    open: false,
+    open: false
   };
-
   handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({
+      open: true
+    });
   };
-
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false
+    });
   };
 
   render() {
-    const { classes } = this.props;
-    return (
-      <div>
+    const {
+      classes
+    } = this.props;
+    return <div>
         <Button onClick={this.handleClickOpen}>Open full-screen dialog</Button>
-        <Dialog
-          fullScreen
-          open={this.state.open}
-          onClose={this.handleClose}
-          TransitionComponent={Transition}
-        >
+        <Dialog fullScreen open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
           <AppBar className={classes.appBar}>
             <Toolbar>
               <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
@@ -81,13 +78,12 @@ class FullScreenDialog extends React.Component<any,any> {
             </ListItem>
           </List>
         </Dialog>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 FullScreenDialog['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, FullScreenDialog)();
+export default withStylesCreator((styles as any), FullScreenDialog)();

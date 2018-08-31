@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import List from 'reactxx-mui-web/List/List';
 import ListItem from 'reactxx-mui-web/ListItem/ListItem';
 import ListItemText from 'reactxx-mui-web/ListItemText/ListItemText';
@@ -20,14 +20,15 @@ const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
 function FolderList(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classes.root}>
       <List>
         <ListItem>
           <Avatar>
@@ -48,12 +49,10 @@ function FolderList(props) {
           <ListItemText primary="Vacation" secondary="July 20, 2014" />
         </ListItem>
       </List>
-    </div>
-  );
+    </div>;
 }
 
 FolderList['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, FolderList)();
+export default withStylesCreator((styles as any), FolderList)();

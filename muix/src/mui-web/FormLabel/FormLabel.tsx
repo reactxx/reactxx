@@ -33,46 +33,62 @@ export type FormLabelClassKey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    fontFamily: theme.typography.fontFamily,
-    color: theme.palette.text.secondary,
-    fontSize: theme.typography.pxToRem(16),
-    lineHeight: 1,
-    padding: 0,
-    "&.focused38": {
-      color:
-        theme.palette.primary[theme.palette.type === "light" ? "dark" : "light"]
-    },
-    "&.disabled38": {
-      color: theme.palette.text.disabled
-    },
-    "&.error38": {
-      color: theme.palette.error.main
+    $web: {
+      fontFamily: theme.typography.fontFamily,
+      color: theme.palette.text.secondary,
+      fontSize: theme.typography.pxToRem(16),
+      lineHeight: 1,
+      padding: 0,
+      "&.focused37": {
+        color:
+          theme.palette.primary[
+            theme.palette.type === "light" ? "dark" : "light"
+          ]
+      },
+      "&.disabled37": {
+        color: theme.palette.text.disabled
+      },
+      "&.error37": {
+        color: theme.palette.error.main
+      }
     }
   },
 
   /* Styles applied to the root element if `focused={true}`. */
   focused: {
-    NAME$focused38: true
+    $web: {
+      NAME$focused37: true
+    }
   },
 
   /* Styles applied to the root element if `disabled={true}`. */
   disabled: {
-    NAME$disabled38: true
+    $web: {
+      NAME$disabled37: true
+    }
   },
 
   /* Styles applied to the root element if `error={true}`. */
   error: {
-    NAME$error38: true
+    $web: {
+      NAME$error37: true
+    }
   },
 
   /* Styles applied to the root element if `filled={true}`. */
-  filled: {},
+  filled: {
+    $web: {}
+  },
 
   /* Styles applied to the root element if `required={true}`. */
-  required: {},
+  required: {
+    $web: {}
+  },
   asterisk: {
-    "&.error38": {
-      color: theme.palette.error.main
+    $web: {
+      "&.error37": {
+        color: theme.palette.error.main
+      }
     }
   }
 });

@@ -1,4 +1,5 @@
-﻿import * as CSS from 'csstype';
+﻿import React from 'React';
+import CSS from 'csstype';
 import ReactN from 'react-native';
 
 export namespace TCommonStyles {
@@ -148,21 +149,8 @@ export namespace TCommonStyles {
     //T extends 'ScrollView' ? ReactN.ScrollViewStyle :
     ReactN.ViewStyle
 
-  export type RulesetWeb = CSS.Properties & { [P in CSS.SimplePseudos]?: CSS.Properties }
+  export type RulesetWeb = React.CSSProperties & { [P in CSS.SimplePseudos]?: React.CSSProperties }
   export type Ruleset<T extends RulesetNativeIds = 'Text'> = RulesetWeb | RulesetNative<T>
-
-  /******************************************
-    EVENTS
-  *******************************************/
-
-  //export type MouseEvent = (event?: React.MouseEvent<Element>) => void
-
-  //export interface OnPressX { onPress?: MouseEvent; onLongPress: () => MouseEvent }
-  //export interface OnPressAllX extends OnPressX { onPressIn?: MouseEvent; onPressOut?: MouseEvent }
-
-  //export interface OnPressAllWeb { onClick?: React.MouseEventHandler<Element>; onMouseDown?: React.MouseEventHandler<Element>; onMouseUp?: React.MouseEventHandler<Element> }
-  //export interface OnPressAllNative { onPress: () => void; onPressIn: () => void; onPressOut: () => void; onLongPress: () => void }
-
 
 }
 

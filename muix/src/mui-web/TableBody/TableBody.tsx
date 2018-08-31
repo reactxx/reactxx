@@ -20,7 +20,9 @@ export type TableBodyBaseProps = React.HTMLAttributes<HTMLTableSectionElement>;
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    display: "table-row-group"
+    $web: {
+      display: "table-row-group"
+    }
   }
 };
 

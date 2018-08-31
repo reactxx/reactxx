@@ -18,31 +18,25 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-class AlertDialogSlide extends React.Component<any,any> {
+class AlertDialogSlide extends React.Component<any, any> {
   state: any = {
-    open: false,
+    open: false
   };
-
   handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({
+      open: true
+    });
   };
-
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false
+    });
   };
 
   render() {
-    return (
-      <div>
+    return <div>
         <Button onClick={this.handleClickOpen}>Slide in alert dialog</Button>
-        <Dialog
-          open={this.state.open}
-          TransitionComponent={Transition}
-          keepMounted
-          onClose={this.handleClose}
-          aria-labelledby="alert-dialog-slide-title"
-          aria-describedby="alert-dialog-slide-description"
-        >
+        <Dialog open={this.state.open} TransitionComponent={Transition} keepMounted onClose={this.handleClose} aria-labelledby="alert-dialog-slide-title" aria-describedby="alert-dialog-slide-description">
           <DialogTitle id="alert-dialog-slide-title">
             {"Use Google's location service?"}
           </DialogTitle>
@@ -61,9 +55,9 @@ class AlertDialogSlide extends React.Component<any,any> {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 export default AlertDialogSlide;

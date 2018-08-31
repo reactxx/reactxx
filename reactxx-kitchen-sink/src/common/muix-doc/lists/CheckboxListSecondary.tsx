@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import List from 'reactxx-mui-web/List/List';
 import ListItem from 'reactxx-mui-web/ListItem/ListItem';
 import ListItemSecondaryAction from 'reactxx-mui-web/ListItemSecondaryAction/ListItemSecondaryAction';
@@ -19,17 +19,18 @@ const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
-class CheckboxListSecondary extends React.Component<any,any> {
+class CheckboxListSecondary extends React.Component<any, any> {
   state: any = {
-    checked: [1],
+    checked: [1]
   };
-
   handleToggle = value => () => {
-    const { checked } = this.state;
+    const {
+      checked
+    } = this.state;
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -40,36 +41,30 @@ class CheckboxListSecondary extends React.Component<any,any> {
     }
 
     this.setState({
-      checked: newChecked,
+      checked: newChecked
     });
   };
 
   render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
+    const {
+      classes
+    } = this.props;
+    return <div className={classes.root}>
         <List>
-          {[0, 1, 2, 3].map(value => (
-            <ListItem key={value} dense button className={classes.listItem}>
+          {[0, 1, 2, 3].map(value => <ListItem key={value} dense button className={classes.listItem}>
               <Avatar alt="Remy Sharp" src="src/ks/common/muix/static/images/remy.jpg" />
               <ListItemText primary={`Line item ${value + 1}`} />
               <ListItemSecondaryAction>
-                <Checkbox
-                  onChange={this.handleToggle(value)}
-                  checked={this.state.checked.indexOf(value) !== -1}
-                />
+                <Checkbox onChange={this.handleToggle(value)} checked={this.state.checked.indexOf(value) !== -1} />
               </ListItemSecondaryAction>
-            </ListItem>
-          ))}
+            </ListItem>)}
         </List>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 CheckboxListSecondary['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, CheckboxListSecondary)();
+export default withStylesCreator((styles as any), CheckboxListSecondary)();

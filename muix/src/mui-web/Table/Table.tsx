@@ -23,11 +23,13 @@ export type TableClassKey = "root";
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    display: "table",
-    fontFamily: theme.typography.fontFamily,
-    width: "100%",
-    borderCollapse: "collapse",
-    borderSpacing: 0
+    $web: {
+      display: "table",
+      fontFamily: theme.typography.fontFamily,
+      width: "100%",
+      borderCollapse: "collapse",
+      borderSpacing: 0
+    }
   }
 });
 

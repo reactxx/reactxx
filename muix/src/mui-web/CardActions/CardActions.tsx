@@ -26,18 +26,22 @@ export type CardActionsClassKey = "root" | "action";
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    display: "flex",
-    alignItems: "center",
-    boxSizing: "border-box",
-    padding: "8px 4px",
-    [theme.breakpoints.up("sm")]: {
-      padding: "8px 12px"
+    $web: {
+      display: "flex",
+      alignItems: "center",
+      boxSizing: "border-box",
+      padding: "8px 4px",
+      [theme.breakpoints.up("sm")]: {
+        padding: "8px 12px"
+      }
     }
   },
 
   /* Styles applied to the children. */
   action: {
-    margin: "0 4px"
+    $web: {
+      margin: "0 4px"
+    }
   }
 });
 

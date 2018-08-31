@@ -10,35 +10,30 @@ import Button from 'reactxx-mui-web/Button/Button';
 import Snackbar from 'reactxx-mui-web/Snackbar/Snackbar';
 import Fade from 'reactxx-mui-web/Fade/Fade';
 
-class FadeSnackbar extends React.Component<any,any> {
+class FadeSnackbar extends React.Component<any, any> {
   state: any = {
-    open: false,
+    open: false
   };
-
   handleClick = () => {
-    this.setState({ open: true });
+    this.setState({
+      open: true
+    });
   };
-
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false
+    });
   };
 
   render() {
-    return (
-      <div>
+    return <div>
         <Button onClick={this.handleClick}>Open with Fade Transition</Button>
-        <Snackbar
-          open={this.state.open}
-          onClose={this.handleClose}
-          TransitionComponent={Fade}
-          ContentProps={{
-            'aria-describedby': 'message-id',
-          }}
-          message={<span id="message-id">I love snacks</span>}
-        />
-      </div>
-    );
+        <Snackbar open={this.state.open} onClose={this.handleClose} TransitionComponent={Fade} ContentProps={{
+        'aria-describedby': 'message-id'
+      }} message={<span id="message-id">I love snacks</span>} />
+      </div>;
   }
+
 }
 
 export default FadeSnackbar;

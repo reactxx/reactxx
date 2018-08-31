@@ -49,78 +49,100 @@ export type StepLabelClasskey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    display: "flex",
-    alignItems: "center",
-    "&.alternativeLabel78": {
-      flexDirection: "column"
-    },
-    "&.disabled78": {
-      cursor: "default"
+    $web: {
+      display: "flex",
+      alignItems: "center",
+      "&.alternativeLabel75": {
+        flexDirection: "column"
+      },
+      "&.disabled75": {
+        cursor: "default"
+      }
     }
   },
 
   /* Styles applied to the root element if `orientation="horiizontal". */
-  horizontal: {},
+  horizontal: {
+    $web: {}
+  },
 
   /* Styles applied to the root element if `orientation="vertical". */
-  vertical: {},
+  vertical: {
+    $web: {}
+  },
 
   /* Styles applied to the `Typography` component which wraps `children`. */
   label: {
-    color: theme.palette.text.secondary,
-    "&.active78": {
-      color: theme.palette.text.primary,
-      fontWeight: 500
-    },
-    "&.completed78": {
-      color: theme.palette.text.primary,
-      fontWeight: 500
-    },
-    "&.alternativeLabel78": {
-      textAlign: "center",
-      marginTop: 16
-    },
-    "&.error78": {
-      color: theme.palette.error.main
+    $web: {
+      color: theme.palette.text.secondary,
+      "&.active75": {
+        color: theme.palette.text.primary,
+        fontWeight: 500
+      },
+      "&.completed75": {
+        color: theme.palette.text.primary,
+        fontWeight: 500
+      },
+      "&.alternativeLabel75": {
+        textAlign: "center",
+        marginTop: 16
+      },
+      "&.error75": {
+        color: theme.palette.error.main
+      }
     }
   },
 
   /* Styles applied to the `Typography` component if `active={true}`. */
   active: {
-    NAME$active78: true
+    $web: {
+      NAME$active75: true
+    }
   },
 
   /* Styles applied to the `Typography` component if `completed={true}`. */
   completed: {
-    NAME$completed78: true
+    $web: {
+      NAME$completed75: true
+    }
   },
 
   /* Styles applied to the root element and `Typography` component if `error={true}`. */
   error: {
-    NAME$error78: true
+    $web: {
+      NAME$error75: true
+    }
   },
 
   /* Styles applied to the root element and `Typography` component if `disabled={true}`. */
   disabled: {
-    NAME$disabled78: true
+    $web: {
+      NAME$disabled75: true
+    }
   },
 
   /* Styles applied to the `icon` container element. */
   iconContainer: {
-    paddingRight: 8,
-    "&.alternativeLabel78": {
-      paddingRight: 0
+    $web: {
+      paddingRight: 8,
+      "&.alternativeLabel75": {
+        paddingRight: 0
+      }
     }
   },
 
   /* Styles applied to the root & icon container and `Typography` if `alternativeLabel={true}`. */
   alternativeLabel: {
-    NAME$alternativeLabel78: true
+    $web: {
+      NAME$alternativeLabel75: true
+    }
   },
 
   /* Styles applied to the container element which wraps `Typography` and `optional`. */
   labelContainer: {
-    width: "100%"
+    $web: {
+      width: "100%"
+    }
   }
 });
 

@@ -22,14 +22,18 @@ export type FormGroupClassKey = "root" | "row";
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    display: "flex",
-    flexDirection: "column",
-    flexWrap: "wrap"
+    $web: {
+      display: "flex",
+      flexDirection: "column",
+      flexWrap: "wrap"
+    }
   },
 
   /* Styles applied to the root element if `row={true}`. */
   row: {
-    flexDirection: "row"
+    $web: {
+      flexDirection: "row"
+    }
   }
 };
 /**

@@ -20,13 +20,15 @@ export type DialogContentClassKey = "root";
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    flex: "1 1 auto",
-    overflowY: "auto",
-    WebkitOverflowScrolling: "touch",
-    // Add iOS momentum scrolling.
-    padding: "0 24px 24px",
-    "&:first-child": {
-      paddingTop: 24
+    $web: {
+      flex: "1 1 auto",
+      overflowY: "auto",
+      WebkitOverflowScrolling: "touch",
+      // Add iOS momentum scrolling.
+      padding: "0 24px 24px",
+      "&:first-child": {
+        paddingTop: 24
+      }
     }
   }
 };

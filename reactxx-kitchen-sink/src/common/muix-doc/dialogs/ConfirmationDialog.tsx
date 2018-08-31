@@ -6,10 +6,9 @@
 //----------------------------------------------------------------------------------
 
 /* eslint-disable react/no-multi-comp */
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import Button from 'reactxx-mui-web/Button/Button';
 import List from 'reactxx-mui-web/List/List';
 import ListItem from 'reactxx-mui-web/ListItem/ListItem';
@@ -21,25 +20,9 @@ import Dialog from 'reactxx-mui-web/Dialog/Dialog';
 import RadioGroup from 'reactxx-mui-web/RadioGroup/RadioGroup';
 import Radio from 'reactxx-mui-web/Radio/Radio';
 import FormControlLabel from 'reactxx-mui-web/FormControlLabel/FormControlLabel';
+const options = ['None', 'Atria', 'Callisto', 'Dione', 'Ganymede', 'Hangouts Call', 'Luna', 'Oberon', 'Phobos', 'Pyxis', 'Sedna', 'Titania', 'Triton', 'Umbriel'];
 
-const options = [
-  'None',
-  'Atria',
-  'Callisto',
-  'Dione',
-  'Ganymede',
-  'Hangouts Call',
-  'Luna',
-  'Oberon',
-  'Phobos',
-  'Pyxis',
-  'Sedna',
-  'Titania',
-  'Triton',
-  'Umbriel',
-];
-
-class ConfirmationDialogRaw extends React.Component<any,any> {
+class ConfirmationDialogRaw extends React.Component<any, any> {
   radioGroupRef = null;
 
   constructor(props) {
@@ -47,57 +30,43 @@ class ConfirmationDialogRaw extends React.Component<any,any> {
     this.state.value = props.value;
   }
 
-  state: any = {};
+  state: any = {}; // TODO
 
-  // TODO
   componentWillReceiveProps(nextProps) {
     if (nextProps.value !== this.props.value) {
-      this.setState({ value: nextProps.value });
+      this.setState({
+        value: nextProps.value
+      });
     }
   }
 
   handleEntering = () => {
     this.radioGroupRef.focus();
   };
-
   handleCancel = () => {
     this.props.onClose(this.props.value);
   };
-
   handleOk = () => {
     this.props.onClose(this.state.value);
   };
-
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.setState({
+      value
+    });
   };
 
   render() {
-    const { value, ...other } = this.props;
-
-    return (
-      <Dialog
-        disableBackdropClick
-        disableEscapeKeyDown
-        maxWidth="xs"
-        onEntering={this.handleEntering}
-        aria-labelledby="confirmation-dialog-title"
-        {...other}
-      >
+    const {
+      value,
+      ...other
+    } = this.props;
+    return <Dialog disableBackdropClick disableEscapeKeyDown maxWidth="xs" onEntering={this.handleEntering} aria-labelledby="confirmation-dialog-title" {...other}>
         <DialogTitle id="confirmation-dialog-title">Phone Ringtone</DialogTitle>
         <DialogContent>
-          <RadioGroup
-            ref={ref => {
-              this.radioGroupRef = ref;
-            }}
-            aria-label="Ringtone"
-            name="ringtone"
-            value={this.state.value}
-            onChange={this.handleChange}
-          >
-            {options.map(option => (
-              <FormControlLabel value={option} key={option} control={<Radio />} label={option} />
-            ))}
+          <RadioGroup ref={ref => {
+          this.radioGroupRef = ref;
+        }} aria-label="Ringtone" name="ringtone" value={this.state.value} onChange={this.handleChange}>
+            {options.map(option => <FormControlLabel value={option} key={option} control={<Radio />} label={option} />)}
           </RadioGroup>
         </DialogContent>
         <DialogActions>
@@ -108,81 +77,71 @@ class ConfirmationDialogRaw extends React.Component<any,any> {
             Ok
           </Button>
         </DialogActions>
-      </Dialog>
-    );
+      </Dialog>;
   }
+
 }
 
 ConfirmationDialogRaw['propTypes'] = {
   onClose: PropTypes.func,
-  value: PropTypes.string,
+  value: PropTypes.string
 };
 
 const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   paper: {
     width: '80%',
-    maxHeight: 435,
-  },
+    maxHeight: 435
+  }
 });
 
-class ConfirmationDialog extends React.Component<any,any> {
+class ConfirmationDialog extends React.Component<any, any> {
   button = null;
-
   state: any = {
     open: false,
-    value: 'Dione',
+    value: 'Dione'
   };
-
   handleClickListItem = () => {
-    this.setState({ open: true });
+    this.setState({
+      open: true
+    });
   };
-
   handleClose = value => {
-    this.setState({ value, open: false });
+    this.setState({
+      value,
+      open: false
+    });
   };
 
   render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.root}>
+    const {
+      classes
+    } = this.props;
+    return <div className={classes.root}>
         <List>
           <ListItem button divider disabled>
             <ListItemText primary="Interruptions" />
           </ListItem>
-          <ListItem
-            button
-            divider
-            aria-haspopup="true"
-            aria-controls="ringtone-menu"
-            aria-label="Phone ringtone"
-            onClick={this.handleClickListItem}
-          >
+          <ListItem button divider aria-haspopup="true" aria-controls="ringtone-menu" aria-label="Phone ringtone" onClick={this.handleClickListItem}>
             <ListItemText primary="Phone ringtone" secondary={this.state.value} />
           </ListItem>
           <ListItem button divider disabled>
             <ListItemText primary="Default notification ringtone" secondary="Tethys" />
           </ListItem>
-          <ConfirmationDialogRaw
-            classes={{
-              paper: classes.paper,
-            }}
-            open={this.state.open}
-            onClose={this.handleClose}
-            value={this.state.value}
-          />
+          <ConfirmationDialogRaw classes={{
+          paper: classes.paper
+        }} open={this.state.open} onClose={this.handleClose} value={this.state.value} />
         </List>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 ConfirmationDialog['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, ConfirmationDialog)();
+export default withStylesCreator((styles as any), ConfirmationDialog)();

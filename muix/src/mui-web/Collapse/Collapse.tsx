@@ -33,25 +33,33 @@ export type CollapseClassKey =
 const styles = theme => ({
   /* Styles applied to the container element. */
   container: {
-    height: 0,
-    overflow: "hidden",
-    transition: theme.transitions.create("height")
+    $web: {
+      height: 0,
+      overflow: "hidden",
+      transition: theme.transitions.create("height")
+    }
   },
 
   /* Styles applied to the container element when the transition has entered. */
   entered: {
-    height: "auto"
+    $web: {
+      height: "auto"
+    }
   },
 
   /* Styles applied to the outer wrapper element. */
   wrapper: {
-    // Hack to get children with a negative margin to not falsify the height computation.
-    display: "flex"
+    $web: {
+      // Hack to get children with a negative margin to not falsify the height computation.
+      display: "flex"
+    }
   },
 
   /* Styles applied to the inner wrapper element. */
   wrapperInner: {
-    width: "100%"
+    $web: {
+      width: "100%"
+    }
   }
 });
 /**

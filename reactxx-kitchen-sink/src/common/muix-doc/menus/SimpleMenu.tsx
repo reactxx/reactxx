@@ -10,44 +10,37 @@ import Button from 'reactxx-mui-web/Button/Button';
 import Menu from 'reactxx-mui-web/Menu/Menu';
 import MenuItem from 'reactxx-mui-web/MenuItem/MenuItem';
 
-class SimpleMenu extends React.Component<any,any> {
+class SimpleMenu extends React.Component<any, any> {
   state: any = {
-    anchorEl: null,
+    anchorEl: null
   };
-
   handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
+    this.setState({
+      anchorEl: event.currentTarget
+    });
   };
-
   handleClose = () => {
-    this.setState({ anchorEl: null });
+    this.setState({
+      anchorEl: null
+    });
   };
 
   render() {
-    const { anchorEl } = this.state;
-
-    return (
-      <div>
-        <Button
-          aria-owns={anchorEl ? 'simple-menu' : null}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
+    const {
+      anchorEl
+    } = this.state;
+    return <div>
+        <Button aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup="true" onClick={this.handleClick}>
           Open Menu
         </Button>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={this.handleClose}
-        >
+        <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
           <MenuItem onClick={this.handleClose}>Profile</MenuItem>
           <MenuItem onClick={this.handleClose}>My account</MenuItem>
           <MenuItem onClick={this.handleClose}>Logout</MenuItem>
         </Menu>
-      </div>
-    );
+      </div>;
   }
+
 }
 
 export default SimpleMenu;

@@ -51,109 +51,133 @@ export type TabClassKey =
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    ...theme.typography.button,
-    maxWidth: 264,
-    position: "relative",
-    minWidth: 72,
-    padding: 0,
-    minHeight: 48,
-    flexShrink: 0,
-    overflow: "hidden",
-    [theme.breakpoints.up("md")]: {
-      minWidth: 160
+    $web: {
+      ...theme.typography.button,
+      maxWidth: 264,
+      position: "relative",
+      minWidth: 72,
+      padding: 0,
+      minHeight: 48,
+      flexShrink: 0,
+      overflow: "hidden",
+      [theme.breakpoints.up("md")]: {
+        minWidth: 160
+      }
     }
   },
 
   /* Styles applied to the root element if both `icon` and `label` are provided. */
   labelIcon: {
-    minHeight: 72
+    $web: {
+      minHeight: 72
+    }
   },
 
   /* Styles applied to the root element if `textColor="inherit"`. */
   textColorInherit: {
-    color: "inherit",
-    opacity: 0.7,
-    "&.selected84": {
-      opacity: 1
-    },
-    "&.disabled84": {
-      opacity: 0.4
+    $web: {
+      color: "inherit",
+      opacity: 0.7,
+      "&.selected81": {
+        opacity: 1
+      },
+      "&.disabled81": {
+        opacity: 0.4
+      }
     }
   },
 
   /* Styles applied to the root element if `textColor="primary"`. */
   textColorPrimary: {
-    color: theme.palette.text.secondary,
-    "&.selected84": {
-      color: theme.palette.primary.main
-    },
-    "&.disabled84": {
-      color: theme.palette.text.disabled
+    $web: {
+      color: theme.palette.text.secondary,
+      "&.selected81": {
+        color: theme.palette.primary.main
+      },
+      "&.disabled81": {
+        color: theme.palette.text.disabled
+      }
     }
   },
 
   /* Styles applied to the root element if `textColor="secondary"`. */
   textColorSecondary: {
-    color: theme.palette.text.secondary,
-    "&.selected84": {
-      color: theme.palette.secondary.main
-    },
-    "&.disabled84": {
-      color: theme.palette.text.disabled
+    $web: {
+      color: theme.palette.text.secondary,
+      "&.selected81": {
+        color: theme.palette.secondary.main
+      },
+      "&.disabled81": {
+        color: theme.palette.text.disabled
+      }
     }
   },
 
   /* Styles applied to the root element if `selected={true}` (controlled by the Tabs component). */
   selected: {
-    NAME$selected84: true
+    $web: {
+      NAME$selected81: true
+    }
   },
 
   /* Styles applied to the root element if `disabled={true}` (controlled by the Tabs component). */
   disabled: {
-    NAME$disabled84: true
+    $web: {
+      NAME$disabled81: true
+    }
   },
 
   /* Styles applied to the root element if `fullWidth={true}` (controlled by the Tabs component). */
   fullWidth: {
-    flexShrink: 1,
-    flexGrow: 1,
-    maxWidth: "none"
+    $web: {
+      flexShrink: 1,
+      flexGrow: 1,
+      maxWidth: "none"
+    }
   },
 
   /* Styles applied to the `icon` and `label`'s wrapper element. */
   wrapper: {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    flexDirection: "column"
+    $web: {
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      width: "100%",
+      flexDirection: "column"
+    }
   },
 
   /* Styles applied to the label container element if `label` is provided. */
   labelContainer: {
-    paddingTop: 6,
-    paddingBottom: 6,
-    paddingLeft: 12,
-    paddingRight: 12,
-    [theme.breakpoints.up("md")]: {
-      paddingLeft: 24,
-      paddingRight: 24
+    $web: {
+      paddingTop: 6,
+      paddingBottom: 6,
+      paddingLeft: 12,
+      paddingRight: 12,
+      [theme.breakpoints.up("md")]: {
+        paddingLeft: 24,
+        paddingRight: 24
+      }
     }
   },
 
   /* Styles applied to the label wrapper element if `label` is provided. */
   label: {
-    fontSize: theme.typography.pxToRem(14),
-    whiteSpace: "normal",
-    [theme.breakpoints.up("md")]: {
-      fontSize: theme.typography.pxToRem(13)
+    $web: {
+      fontSize: theme.typography.pxToRem(14),
+      whiteSpace: "normal",
+      [theme.breakpoints.up("md")]: {
+        fontSize: theme.typography.pxToRem(13)
+      }
     }
   },
 
   /* Styles applied to the label wrapper element if `label` is provided and the text is wrapped. */
   labelWrapped: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: theme.typography.pxToRem(12)
+    $web: {
+      [theme.breakpoints.down("sm")]: {
+        fontSize: theme.typography.pxToRem(12)
+      }
     }
   }
 });

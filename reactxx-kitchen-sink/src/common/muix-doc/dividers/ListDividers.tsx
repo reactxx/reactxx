@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStylesCreator from 'reactxx-mui-web/styles/withStyles'
+import withStylesCreator from 'reactxx-mui-web/styles/withStyles';
 import List from 'reactxx-mui-web/List/List';
 import ListItem from 'reactxx-mui-web/ListItem/ListItem';
 import ListItemText from 'reactxx-mui-web/ListItemText/ListItemText';
@@ -17,14 +17,15 @@ const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: '360px',
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
 function ListDividers(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
+  const {
+    classes
+  } = props;
+  return <div className={classes.root}>
       <List component="nav">
         <ListItem button>
           <ListItemText primary="Inbox" />
@@ -41,12 +42,10 @@ function ListDividers(props) {
           <ListItemText primary="Spam" />
         </ListItem>
       </List>
-    </div>
-  );
+    </div>;
 }
 
 ListDividers['propTypes'] = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
-export default withStylesCreator(styles as any, ListDividers)();
+export default withStylesCreator((styles as any), ListDividers)();

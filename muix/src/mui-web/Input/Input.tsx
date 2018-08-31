@@ -98,177 +98,203 @@ const styles = theme => {
   return {
     /* Styles applied to the root element. */
     root: {
-      // Mimics the default input display property used by browsers for an input.
-      display: "inline-flex",
-      position: "relative",
-      fontFamily: theme.typography.fontFamily,
-      color: theme.palette.text.primary,
-      fontSize: theme.typography.pxToRem(16),
-      lineHeight: "1.1875em",
-      // Reset (19px), match the native input line-height
-      "&.disabled47": {
-        color: theme.palette.text.disabled
+      $web: {
+        // Mimics the default input display property used by browsers for an input.
+        display: "inline-flex",
+        position: "relative",
+        fontFamily: theme.typography.fontFamily,
+        color: theme.palette.text.primary,
+        fontSize: theme.typography.pxToRem(16),
+        lineHeight: "1.1875em",
+        // Reset (19px), match the native input line-height
+        "&.disabled45": {
+          color: theme.palette.text.disabled
+        }
       }
     },
 
     /* Styles applied to the root element if the component is a descendant of `FormControl`. */
     formControl: {
-      "label + &": {
-        marginTop: 16
-      },
-      NAME$formControl47: true
+      $web: {
+        "label + &": {
+          marginTop: 16
+        },
+        NAME$formControl45: true
+      }
     },
 
     /* Styles applied to the root element if the component is focused. */
     focused: {
-      NAME$focused47: true
+      $web: {
+        NAME$focused45: true
+      }
     },
 
     /* Styles applied to the root element if `disabled={true}`. */
     disabled: {
-      NAME$disabled47: true
+      $web: {
+        NAME$disabled45: true
+      }
     },
 
     /* Styles applied to the root element if `disableUnderline={false}`. */
     underline: {
-      "&:after": {
-        borderBottom: `2px solid ${
-          theme.palette.primary[light ? "dark" : "light"]
-        }`,
-        left: 0,
-        bottom: 0,
-        // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
-        content: '""',
-        position: "absolute",
-        right: 0,
-        transform: "scaleX(0)",
-        transition: theme.transitions.create("transform", {
-          duration: theme.transitions.duration.shorter,
-          easing: theme.transitions.easing.easeOut
-        }),
-        pointerEvents: "none" // Transparent to the hover style.
-      },
-      "&.focused47:after": {
-        transform: "scaleX(1)"
-      },
-      "&.error47:after": {
-        borderBottomColor: theme.palette.error.main,
-        transform: "scaleX(1)" // error is always underlined in red
-      },
-      "&:before": {
-        borderBottom: `1px solid ${bottomLineColor}`,
-        left: 0,
-        bottom: 0,
-        // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
-        content: '"\\00a0"',
-        position: "absolute",
-        right: 0,
-        transition: theme.transitions.create("border-bottom-color", {
-          duration: theme.transitions.duration.shorter
-        }),
-        pointerEvents: "none" // Transparent to the hover style.
-      },
-      "&:hover:not(.disabled47):not(.focused47):not(.error47):before": {
-        borderBottom: `2px solid ${theme.palette.text.primary}`
-      },
-      "&.disabled47:before": {
-        borderBottom: `1px dotted ${bottomLineColor}`
+      $web: {
+        "&:after": {
+          borderBottom: `2px solid ${
+            theme.palette.primary[light ? "dark" : "light"]
+          }`,
+          left: 0,
+          bottom: 0,
+          // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
+          content: '""',
+          position: "absolute",
+          right: 0,
+          transform: "scaleX(0)",
+          transition: theme.transitions.create("transform", {
+            duration: theme.transitions.duration.shorter,
+            easing: theme.transitions.easing.easeOut
+          }),
+          pointerEvents: "none" // Transparent to the hover style.
+        },
+        "&.focused45:after": {
+          transform: "scaleX(1)"
+        },
+        "&.error45:after": {
+          borderBottomColor: theme.palette.error.main,
+          transform: "scaleX(1)" // error is always underlined in red
+        },
+        "&:before": {
+          borderBottom: `1px solid ${bottomLineColor}`,
+          left: 0,
+          bottom: 0,
+          // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
+          content: '"\\00a0"',
+          position: "absolute",
+          right: 0,
+          transition: theme.transitions.create("border-bottom-color", {
+            duration: theme.transitions.duration.shorter
+          }),
+          pointerEvents: "none" // Transparent to the hover style.
+        },
+        "&:hover:not(.disabled45):not(.focused45):not(.error45):before": {
+          borderBottom: `2px solid ${theme.palette.text.primary}`
+        },
+        "&.disabled45:before": {
+          borderBottom: `1px dotted ${bottomLineColor}`
+        }
       }
     },
 
     /* Styles applied to the root element if `error={true}`. */
     error: {
-      NAME$error47: true
+      $web: {
+        NAME$error45: true
+      }
     },
 
     /* Styles applied to the root element if `multiline={true}`. */
     multiline: {
-      padding: `${8 - 2}px 0 ${8 - 1}px`
+      $web: {
+        padding: `${8 - 2}px 0 ${8 - 1}px`
+      }
     },
 
     /* Styles applied to the root element if `fullWidth={true}`. */
     fullWidth: {
-      width: "100%"
+      $web: {
+        width: "100%"
+      }
     },
 
     /* Styles applied to the `input` element. */
     input: {
-      font: "inherit",
-      color: "currentColor",
-      padding: `${8 - 2}px 0 ${8 - 1}px`,
-      border: 0,
-      boxSizing: "content-box",
-      verticalAlign: "middle",
-      background: "none",
-      margin: 0,
-      // Reset for Safari
-      // Remove grey highlight
-      WebkitTapHighlightColor: "transparent",
-      display: "block",
-      // Make the flex item shrink with Firefox
-      minWidth: 0,
-      flexGrow: 1,
-      "&::-webkit-input-placeholder": placeholder,
-      "&::-moz-placeholder": placeholder,
-      // Firefox 19+
-      "&:-ms-input-placeholder": placeholder,
-      // IE 11
-      "&::-ms-input-placeholder": placeholder,
-      // Edge
-      "&:focus": {
-        outline: 0
-      },
-      // Reset Firefox invalid required input style
-      "&:invalid": {
-        boxShadow: "none"
-      },
-      "&::-webkit-search-decoration": {
-        // Remove the padding when type=search.
-        "-webkit-appearance": "none"
-      },
-      // Show and hide the placeholder logic
-      "label[data-shrink=false] + .formControl47 &": {
-        "&::-webkit-input-placeholder": placeholderHidden,
-        "&::-moz-placeholder": placeholderHidden,
+      $web: {
+        font: "inherit",
+        color: "currentColor",
+        padding: `${8 - 2}px 0 ${8 - 1}px`,
+        border: 0,
+        boxSizing: "content-box",
+        verticalAlign: "middle",
+        background: "none",
+        margin: 0,
+        // Reset for Safari
+        // Remove grey highlight
+        WebkitTapHighlightColor: "transparent",
+        display: "block",
+        // Make the flex item shrink with Firefox
+        minWidth: 0,
+        flexGrow: 1,
+        "&::-webkit-input-placeholder": placeholder,
+        "&::-moz-placeholder": placeholder,
         // Firefox 19+
-        "&:-ms-input-placeholder": placeholderHidden,
+        "&:-ms-input-placeholder": placeholder,
         // IE 11
-        "&::-ms-input-placeholder": placeholderHidden,
+        "&::-ms-input-placeholder": placeholder,
         // Edge
-        "&:focus::-webkit-input-placeholder": placeholderVisible,
-        "&:focus::-moz-placeholder": placeholderVisible,
-        // Firefox 19+
-        "&:focus:-ms-input-placeholder": placeholderVisible,
-        // IE 11
-        "&:focus::-ms-input-placeholder": placeholderVisible // Edge
-      },
-      "&.disabled47": {
-        opacity: 1 // Reset iOS opacity
+        "&:focus": {
+          outline: 0
+        },
+        // Reset Firefox invalid required input style
+        "&:invalid": {
+          boxShadow: "none"
+        },
+        "&::-webkit-search-decoration": {
+          // Remove the padding when type=search.
+          "-webkit-appearance": "none"
+        },
+        // Show and hide the placeholder logic
+        "label[data-shrink=false] + .formControl45 &": {
+          "&::-webkit-input-placeholder": placeholderHidden,
+          "&::-moz-placeholder": placeholderHidden,
+          // Firefox 19+
+          "&:-ms-input-placeholder": placeholderHidden,
+          // IE 11
+          "&::-ms-input-placeholder": placeholderHidden,
+          // Edge
+          "&:focus::-webkit-input-placeholder": placeholderVisible,
+          "&:focus::-moz-placeholder": placeholderVisible,
+          // Firefox 19+
+          "&:focus:-ms-input-placeholder": placeholderVisible,
+          // IE 11
+          "&:focus::-ms-input-placeholder": placeholderVisible // Edge
+        },
+        "&.disabled45": {
+          opacity: 1 // Reset iOS opacity
+        }
       }
     },
 
     /* Styles applied to the `input` element if `margin="dense"`. */
     inputMarginDense: {
-      paddingTop: 4 - 1
+      $web: {
+        paddingTop: 4 - 1
+      }
     },
 
     /* Styles applied to the `input` element if `multiline={true}`. */
     inputMultiline: {
-      resize: "none",
-      padding: 0
+      $web: {
+        resize: "none",
+        padding: 0
+      }
     },
 
     /* Styles applied to the `input` element if `type` is not "text"`. */
     inputType: {
-      // type="date" or type="time", etc. have specific styles we need to reset.
-      height: "1.1875em" // Reset (19px), match the native input line-height
+      $web: {
+        // type="date" or type="time", etc. have specific styles we need to reset.
+        height: "1.1875em" // Reset (19px), match the native input line-height
+      }
     },
 
     /* Styles applied to the `input` element if `type="search"`. */
     inputTypeSearch: {
-      // Improve type search style.
-      "-moz-appearance": "textfield",
-      "-webkit-appearance": "textfield"
+      $web: {
+        // Improve type search style.
+        "-moz-appearance": "textfield",
+        "-webkit-appearance": "textfield"
+      }
     }
   };
 };

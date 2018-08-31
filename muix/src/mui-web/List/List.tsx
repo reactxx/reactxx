@@ -22,27 +22,35 @@ export type ListClassKey = "root" | "padding" | "dense" | "subheader";
 const styles = {
   /* Styles applied to the root element. */
   root: {
-    listStyle: "none",
-    margin: 0,
-    padding: 0,
-    position: "relative"
+    $web: {
+      listStyle: "none",
+      margin: 0,
+      padding: 0,
+      position: "relative"
+    }
   },
 
   /* Styles applied to the root element if `disablePadding={false}`. */
   padding: {
-    paddingTop: 8,
-    paddingBottom: 8
+    $web: {
+      paddingTop: 8,
+      paddingBottom: 8
+    }
   },
 
   /* Styles applied to the root element if `dense={true}` & `disablePadding={false}`. */
   dense: {
-    paddingTop: 4,
-    paddingBottom: 4
+    $web: {
+      paddingTop: 4,
+      paddingBottom: 4
+    }
   },
 
   /* Styles applied to the root element if a `subheader` is provided. */
   subheader: {
-    paddingTop: 0
+    $web: {
+      paddingTop: 0
+    }
   }
 };
 

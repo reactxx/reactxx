@@ -61,17 +61,21 @@ function getHasTransition(props) {
 const styles = theme => ({
   /* Styles applied to the root element. */
   root: {
-    position: "fixed",
-    zIndex: theme.zIndex.modal,
-    right: 0,
-    bottom: 0,
-    top: 0,
-    left: 0
+    $web: {
+      position: "fixed",
+      zIndex: theme.zIndex.modal,
+      right: 0,
+      bottom: 0,
+      top: 0,
+      left: 0
+    }
   },
 
   /* Styles applied to the root element if the `Modal` has exited. */
   hidden: {
-    visibility: "hidden"
+    $web: {
+      visibility: "hidden"
+    }
   }
 });
 /* istanbul ignore if */
