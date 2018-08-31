@@ -30,7 +30,7 @@ The responsive grid focuses on consistent spacing widths, rather than column wid
 Material design margins and columns follow an **8dp** square baseline grid.
 Spacing can be 8, 16, 24, 32 or 40dp wide.
 
-{{"demo": "pages/layout/grid/SpacingGrid.js"}}
+!ReactxxDocExample[grid/SpacingGrid]
 
 ## Fluid grids
 
@@ -40,33 +40,33 @@ Fluid grids use columns that scale and resize content. A fluid grid’s layout c
 
 The column widths apply at all breakpoints (i.e. \`xs\` and up).
 
-{{"demo": "pages/layout/grid/CenteredGrid.js"}}
+!ReactxxDocExample[grid/CenteredGrid]
 
 ### Grid with breakpoints
 
 Some columns have multiple widths defined, causing the layout to change at the defined breakpoint.
 
-{{"demo": "pages/layout/grid/FullWidthGrid.js"}}
+!ReactxxDocExample[grid/FullWidthGrid]
 
 ## Interactive
 
 Below is an interactive demo that lets you explore the visual results of the different settings:
 
-{{"demo": "pages/layout/grid/InteractiveGrid.js"}}
+!ReactxxDocExample[grid/InteractiveGrid]
 
 ## Auto-layout
 
 The Auto-layout makes the *items* equitably share the available space.
 That also means you can set the width of one *item* and the others will automatically resize around it.
 
-{{"demo": "pages/layout/grid/AutoGrid.js"}}
+!ReactxxDocExample[grid/AutoGrid]
 
 ## CSS Grid Layout
 
 **CSS Grid Layout** excels at dividing a page into major regions, or defining the relationship in terms of size, position, and layer, between parts of a control built from HTML primitives.
 Unfortunately, CSS grid is only supported by the most recent browsers.
 
-{{"demo": "pages/layout/grid/CSSGrid.js"}}
+!ReactxxDocExample[grid/CSSGrid]
 
 ## Nested Grid
 
@@ -76,13 +76,13 @@ The \`container\` and \`item\` properties are two independent booleans. They can
 
 https://www.w3.org/TR/css-flexbox-1/#box-model
 
-{{"demo": "pages/layout/grid/NestedGrid.js"}}
+!ReactxxDocExample[grid/NestedGrid]
 
 ## Complex Grid
 
 The following demo doesn't follow the Material Design specification, but illustrates how the grid can be used to build complex layouts.
 
-{{"demo": "pages/layout/grid/ComplexGrid.js"}}
+!ReactxxDocExample[grid/ComplexGrid]
 
 ## Limitations
 
@@ -121,7 +121,7 @@ In practice, you can set the \`zeroMinWidth\` property:
   <Typography noWrap>
 \`\`\`
 
-{{"demo": "pages/layout/grid/AutoGridNoWrap.js"}}
+!ReactxxDocExample[grid/AutoGridNoWrap]
 `
 export default code
     

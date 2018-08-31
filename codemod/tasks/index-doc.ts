@@ -268,7 +268,7 @@ const ignores = {
 
 const mdToTS = (code: string) => {
     code = code.replace(/---(.|\s)*?---/gm, '')
-    code = processMatchAll(/{{"demo": "pages\/demos\/([a-z-A-Z]+)\/([a-z-A-Z]+)\.js"}}/gm, code, (match, res) => {
+    code = processMatchAll(/{{"demo": "pages\/\w+\/([a-z-A-Z]+)\/([a-z-A-Z]+)\.js"}}/gm, code, (match, res) => {
         res.push(`!ReactxxDocExample[${match[1]}/${match[2]}]`)
     })
     return `

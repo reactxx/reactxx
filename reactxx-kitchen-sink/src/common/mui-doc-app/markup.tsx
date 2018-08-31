@@ -52,6 +52,10 @@ export const markdownDefine = (tagDefs: TagDefs = {}) => {
     return remark()
         .use(genericExtensions, { elements })
         .use(remarkReact, {
+            createElement: (name, props, children) => {
+                if (typeof name !== 'string' || props) return React.createElement(name, props, children)
+                return React.createElement(name, {className: 'rxx-markdown'}, children)
+            },
             sanitize: deepmerge(sanitizeGhSchema, { 
                 tagNames,
                 attributes

@@ -27,15 +27,15 @@ The placement of the popper updates with the available area in the viewport.
 
 ## Scroll playground
 
-{{"demo": "pages/utils/popper/ScrollPlayground.js"}}
+!ReactxxDocExample[popper/ScrollPlayground]
 
 ## Positioned Popper
 
-{{"demo": "pages/utils/popper/PositionedPopper.js"}}
+!ReactxxDocExample[popper/PositionedPopper]
 
 ## Without transition Popper
 
-{{"demo": "pages/utils/popper/NoTransitionPopper.js"}}
+!ReactxxDocExample[popper/NoTransitionPopper]
 
 ## Faked reference object
 
@@ -44,14 +44,14 @@ You just need to create an object shaped like the [\`ReferenceObject\`](https://
 
 Highlight part of the text to see the popper:
 
-{{"demo": "pages/utils/popper/FakedReferencePopper.js"}}
+!ReactxxDocExample[popper/FakedReferencePopper]
 
 ## Render Props
 
 It is a [render props](https://reactjs.org/docs/render-props.html) demo that
 keeps track of the local state for a single popper.
 
-{{"demo": "pages/utils/popper/RenderPropsPopper.js"}}
+!ReactxxDocExample[popper/RenderPropsPopper]
 `
 export default code
     

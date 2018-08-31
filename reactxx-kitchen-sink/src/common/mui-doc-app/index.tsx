@@ -7,25 +7,27 @@ abstract class NodeAble extends React.Component<{ node?: SitemapNode }, { node: 
   state = { node: siteMap[0] }
 }
 
-class LeftMenu extends NodeAble { 
+class LeftMenu extends NodeAble {
   render() {
     return null
   }
 }
 
-class Content extends  NodeAble {
+class Content extends NodeAble {
   render() {
-    const {node} = this.props
+    const { node } = this.props
     const markup = pathToObjs[node.dir] as string
-    return <Markdown text={markup}/>
+    return <div style={{overflow: 'auto', padding: 20}}>
+      <Markdown text={markup} />
+    </div>
   }
 }
 
 class App extends NodeAble {
   render() {
     return <React.Fragment>
-      <LeftMenu node={this.state.node}/>
-      <Content node={this.state.node}/>
+      <LeftMenu node={this.state.node} />
+      <Content node={this.state.node} />
     </React.Fragment>
   }
 }

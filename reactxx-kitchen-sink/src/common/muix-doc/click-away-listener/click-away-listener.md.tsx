@@ -16,7 +16,7 @@ const code = `
 
 For instance, if you need to hide a menu when people click anywhere else on your page:
 
-{{"demo": "pages/utils/click-away-listener/ClickAway.js"}}
+!ReactxxDocExample[click-away-listener/ClickAway]
 
 You can find a more advanced demo on the [menu documentation section](/demos/menus#menulist-composition).
 `

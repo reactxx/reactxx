@@ -20,7 +20,7 @@ You have to wait for the client side reconciliation to see the children.
 
 ## Simple Portal
 
-{{"demo": "pages/utils/portal/SimplePortal.js"}}
+!ReactxxDocExample[portal/SimplePortal]
 `
 export default code
     

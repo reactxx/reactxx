@@ -27,7 +27,7 @@ This component shares many concepts with [react-overlays](https://react-bootstra
 
 ## Simple modal
 
-{{"demo": "pages/utils/modal/SimpleModal.js"}}
+!ReactxxDocExample[modal/SimpleModal]
 `
 export default code
     

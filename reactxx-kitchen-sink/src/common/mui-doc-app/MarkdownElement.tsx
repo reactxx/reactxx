@@ -30,7 +30,7 @@ const styles: Types.SheetCreatorX<Shape> = theme => ({
             fontFamily: theme.typography.fontFamily,
             PropertiesfontSize: 16,
             color: theme.palette.text.primary,
-            '& pre, & pre[class*="language-"]': {
+            '& .rxx-markdown pre, & .rxx-markdown pre[class*="language-"]': {
                 margin: '24px 0',
                 padding: '12px 18px',
                 backgroundColor: theme.palette.background.paper,
@@ -38,7 +38,7 @@ const styles: Types.SheetCreatorX<Shape> = theme => ({
                 overflow: 'auto',
                 WebkitOverflowScrolling: 'touch', // iOS momentum scrolling.
             },
-            '& code': {
+            '& .rxx-markdown code': {
                 display: 'inline-block',
                 lineHeight: 1.6,
                 fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
@@ -47,40 +47,40 @@ const styles: Types.SheetCreatorX<Shape> = theme => ({
                 backgroundColor: theme.palette.background.paper,
                 fontSize: 14,
             },
-            '& p code, & ul code, & pre code': {
+            '& .rxx-markdown p code, & .rxx-markdown ul code, & .rxx-markdown pre code': {
                 fontSize: 14,
                 lineHeight: 1.6,
             },
-            '& h1': {
+            '& .rxx-markdown h1': {
                 ...theme.typography.display2,
                 color: theme.palette.text.secondary,
                 margin: '32px 0 16px',
             },
-            '& h2': {
+            '& .rxx-markdown h2': {
                 ...theme.typography.display1,
                 color: theme.palette.text.secondary,
                 margin: '32px 0 24px',
             },
-            '& h3': {
+            '& .rxx-markdown h3': {
                 ...theme.typography.headline,
                 color: theme.palette.text.secondary,
                 margin: '32px 0 24px',
             },
-            '& h4': {
+            '& .rxx-markdown h4': {
                 ...theme.typography.title,
                 color: theme.palette.text.secondary,
                 margin: '24px 0 16px',
             },
-            '& p, & ul, & ol': {
+            '& .rxx-markdown p, & .rxx-markdown ul, & .rxx-markdown ol': {
                 lineHeight: 1.6,
             },
-            '& h1 code, & h2 code, & h3 code, & h4 code': {
+            '& .rxx-markdown h1 code, & .rxx-markdown h2 code, & .rxx-markdown h3 code, & .rxx-markdown h4 code': {
                 fontSize: 'inherit',
                 lineHeight: 'inherit',
                 // Remove scroll on small screens.
                 wordBreak: 'break-word',
             },
-            '& table': {
+            '& .rxx-markdown table': {
                 width: '100%',
                 display: 'block',
                 overflowX: 'auto',
@@ -89,57 +89,57 @@ const styles: Types.SheetCreatorX<Shape> = theme => ({
                 borderSpacing: 0,
                 overflow: 'hidden',
             },
-            '& thead': {
+            '& .rxx-markdown thead': {
                 fontSize: 14,
                 fontWeight: theme.typography.fontWeightMedium,
                 color: theme.palette.text.secondary,
             },
-            '& tbody': {
+            '& .rxx-markdown tbody': {
                 fontSize: 14,
                 lineHeight: 1.5,
                 color: theme.palette.text.primary,
             },
-            '& td': {
+            '& .rxx-markdown td': {
                 borderBottom: `1px solid ${theme.palette.divider}`,
                 padding: '8px 16px 8px 8px',
                 textAlign: 'left',
             },
-            '& td:last-child': {
+            '& .rxx-markdown td:last-child': {
                 paddingRight: 24,
             },
-            '& td compact': {
+            '& .rxx-markdown td compact': {
                 paddingRight: 24,
             },
-            '& td code': {
+            '& .rxx-markdown td code': {
                 fontSize: 13,
                 lineHeight: 1.6,
             },
-            '& th': {
+            '& .rxx-markdown th': {
                 whiteSpace: 'pre',
                 borderBottom: `1px solid ${theme.palette.divider}`,
                 fontWeight: theme.typography.fontWeightMedium,
                 padding: '0 16px 0 8px',
                 textAlign: 'left',
             },
-            '& th:last-child': {
+            '& .rxx-markdown th:last-child': {
                 paddingRight: 24,
             },
-            '& tr': {
+            '& .rxx-markdown tr': {
                 height: 48,
             },
-            '& thead tr': {
+            '& .rxx-markdown thead tr': {
                 height: 64,
             },
-            '& strong': {
+            '& .rxx-markdown strong': {
                 fontWeight: theme.typography.fontWeightMedium,
             },
-            '& blockquote': {
+            '& .rxx-markdown blockquote': {
                 borderLeft: `5px solid ${theme.palette.text.hint}`,
                 backgroundColor: theme.palette.background.paper,
                 padding: '4px 24px',
                 margin: '24px 0',
             },
-            '& a, & a code': {
+            '& .rxx-markdown a, & .rxx-markdown a code': {
                 // Style taken from the Link component
                 color: theme.palette.secondary.main,
                 textDecoration: 'none',
@@ -147,7 +147,7 @@ const styles: Types.SheetCreatorX<Shape> = theme => ({
                     textDecoration: 'underline',
                 },
             },
-            '& img': {
+            '& .rxx-markdown img': {
                 maxWidth: '100%',
             },
         },

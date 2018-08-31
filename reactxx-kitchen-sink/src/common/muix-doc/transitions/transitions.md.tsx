@@ -45,13 +45,13 @@ export default Main() {
 Expand vertically from the top of the child element.
 The \`collapsedHeight\` property can be used to set the minimum height when not expanded.
 
-{{"demo": "pages/utils/transitions/SimpleCollapse.js"}}
+!ReactxxDocExample[transitions/SimpleCollapse]
 
 ## Fade
 
 Fade in from transparent to opaque.
 
-{{"demo": "pages/utils/transitions/SimpleFade.js"}}
+!ReactxxDocExample[transitions/SimpleFade]
 
 ## Grow
 
@@ -61,7 +61,7 @@ from transparent to opaque.
 The second example demonstrates how to change the \`transform-origin\`, and conditionally applies
 the \`timeout\` property to change the entry speed.
 
-{{"demo": "pages/utils/transitions/SimpleGrow.js"}}
+!ReactxxDocExample[transitions/SimpleGrow]
 
 ## Slide
 
@@ -73,7 +73,7 @@ until \`in\` is \`true\`. This prevents the relatively positioned component from
 from it's off-screen position. Similarly the \`unmountOnExit\` property removes the component
 from the DOM after it has been transition off screen.
 
-{{"demo": "pages/utils/transitions/SimpleSlide.js"}}
+!ReactxxDocExample[transitions/SimpleSlide]
 
 ## Zoom
 
@@ -81,7 +81,7 @@ Expand outwards from the center of the child element.
 
 This example also demonstrates how to delay the enter transition.
 
-{{"demo": "pages/utils/transitions/SimpleZoom.js"}}
+!ReactxxDocExample[transitions/SimpleZoom]
 `
 export default code
     

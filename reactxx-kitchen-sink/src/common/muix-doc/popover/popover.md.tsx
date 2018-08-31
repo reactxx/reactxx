@@ -28,20 +28,20 @@ When it is \`anchorPosition\`, the component will, instead of \`anchorEl\`,
 refer to the \`anchorPosition\` prop which you can adjust to set
 the position of the popover.
 
-{{"demo": "pages/utils/popover/AnchorPlayground.js"}}
+!ReactxxDocExample[popover/AnchorPlayground]
 
 ## Mouse over interaction
 
 We demonstrate how to use the \`Popover\` component to implement a popover behavior based on the mouse over event.
 
-{{"demo": "pages/utils/popover/MouseOverPopover.js"}}
+!ReactxxDocExample[popover/MouseOverPopover]
 
 ## Render Props
 
 It is a [render props](https://reactjs.org/docs/render-props.html) demo that
 keeps track of the local state for a single popover.
 
-{{"demo": "pages/utils/popover/RenderPropsPopover.js"}}
+!ReactxxDocExample[popover/RenderPropsPopover]
 `
 export default code
     
