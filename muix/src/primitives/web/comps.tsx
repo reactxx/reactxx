@@ -3,7 +3,7 @@ import ReactN from 'react-native'
 import warning from 'warning'
 
 import { rulesetsToClassNames } from 'reactxx-fela'
-import { Types, withStylesCreator, hasPlatformEvents } from 'reactxx-basic'
+import { Reactxx, Types, withStylesCreator, hasPlatformEvents } from 'reactxx-basic'
 
 import { TComps, CompNames } from '../typings/comps'
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comps-sheets'
@@ -12,6 +12,7 @@ export const view: Types.CodeSFCWeb<TComps.ViewShape> = props => {
   const { $system: { classNames }, style, classes, className, ...rest } = props
   const rootStyle = classNames<'Web'>(classes.root, hasPlatformEvents(props) && classes.pressable, className)
   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest} />
+  //return <div className={[classes.root, hasPlatformEvents(props) && classes.pressable, className]} style={style} {...rest} />
 }
 
 export const icon: Types.CodeSFCWeb<TComps.IconShape> = props => {

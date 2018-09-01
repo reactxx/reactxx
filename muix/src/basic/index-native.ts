@@ -10,3 +10,7 @@ export * from './typings/types';
 export const rulesetsToClassNames: any = null
 export const rulesetToClassNamesMUI: any = null
 
+import createElementCreator from './common/create-element'
+
+export const Reactxx = createElementCreator(rulesetsToClassNames)
+

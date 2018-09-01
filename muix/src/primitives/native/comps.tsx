@@ -3,7 +3,7 @@ import ReactN, { View as ViewRN, Text as TextRN, ScrollView as ScrollViewRN, Ani
 import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
-import { Types, withStylesCreator } from 'reactxx-basic'
+import { Reactxx, Types, withStylesCreator } from 'reactxx-basic'
 
 import { TComps, CompNames } from '../typings/comps'
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from '../common/comps-sheets'

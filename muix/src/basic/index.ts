@@ -10,5 +10,13 @@ export { TCommonStyles } from './typings/common-styles';
 export { Types } from './typings/types';
 
 //export Types
+export { rulesetToClassNamesMUI, rulesetsToClassNames } from 'reactxx-fela'
 
-export { rulesetToClassNamesMUI, rulesetsToClassNames } from 'reactxx-fela' 
+import { rulesetsToClassNames } from 'reactxx-fela'
+
+import createElementCreator from './common/create-element'
+
+export const Reactxx = createElementCreator(rulesetsToClassNames)
+
+
+
