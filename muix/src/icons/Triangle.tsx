@@ -4,9 +4,10 @@ import createSvgIcon from 'reactxx-mui-web/internal/svg-icons/create-svg-icon'
 import { SvgIconProps, Shape } from 'reactxx-mui-web/SvgIcon/SvgIcon'
 
 import { Types, TAddIn } from 'reactxx-basic'; 
-    
+
+export const TriangleData = 'M1,21H23L12,2'
 export default createSvgIcon(
-  'M1,21H23L12,2',
+  TriangleData,
   'Triangle',
   true
 )

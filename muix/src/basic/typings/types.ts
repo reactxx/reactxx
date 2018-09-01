@@ -32,20 +32,20 @@ export namespace Types {
   //******************** Shape
   export interface Shape extends TCommon.Shape, TAddIn.Shape { }
 
-  export interface ShapeDefault extends TAddIn.ShapeDefault {
+  export interface ShapeDefault<TWeb extends string = null, TEvents extends string = null> extends TAddIn.ShapeDefault {
     common: TCommon.EmptySheet
     native: TCommon.EmptySheet
-    web: string
+    web: TWeb
     style: string
-    events: null
+    events: TEvents
     props: {}
     propsNative: ReactN.ViewProperties
-    propsWeb: React.HTMLAttributes<HTMLElement>
+    propsWeb: React.DOMAttributes<Element>
     variant: never,
     theme: TCommon.ThemeBase
   }
 
-  export type OverwriteShape<R extends Shape> = PartialOverwrite<ShapeDefault, R>
+  //export type OverwriteShape<R extends Shape> = PartialOverwrite<ShapeDefault, R>
 
   /******************************************
     COMPONENT SHEET

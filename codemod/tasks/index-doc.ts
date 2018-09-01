@@ -226,6 +226,7 @@ import withStylesCreator from 'reactxx-mui-web/styles/withStyles'`)
     code = replaceAll(code, `extends React.Component {`, `extends React.Component<any,any> {`)
     code = replaceAll(code, `@material-ui/core/`, `reactxx-mui-web/`)
     code = replaceAll(code, `/static/images/`, `src/ks/common/muix/static/images/`)
+    code = code.replace("<Fade {...TransitionProps}","<Fade {...TransitionProps as any}")
     //************ CLASSNAMES
     code = code.replace(`import classNames from 'classnames';`, `import { classNames } from 'reactxx-basic';`)
     code = code.replace("import MarkdownElement from '@material-ui/docs/MarkdownElement'", "import MarkdownElement from '../../mui-doc-app/MarkdownElement'")

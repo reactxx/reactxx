@@ -18,8 +18,8 @@ const markdownDefinition = markdownDefine({
     } as TagDef<{ text: string }>
 })
 
-interface Shape extends Types.ShapeDefault {
-    web: 'root'
+interface Shape extends Types.ShapeDefault<'root'> {
+    //web: 'root'
     props: { text?: string, markdownDefinition?: MarkdownDefinition }
     theme: Theme
 }

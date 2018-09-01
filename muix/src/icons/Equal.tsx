@@ -4,9 +4,10 @@ import createSvgIcon from 'reactxx-mui-web/internal/svg-icons/create-svg-icon'
 import { SvgIconProps, Shape } from 'reactxx-mui-web/SvgIcon/SvgIcon'
 
 import { Types, TAddIn } from 'reactxx-basic'; 
-    
+
+export const EqualData = 'M19,10H5V8H19V10M19,16H5V14H19V16Z'
 export default createSvgIcon(
-  'M19,10H5V8H19V10M19,16H5V14H19V16Z',
+  EqualData,
   'Equal',
   true
 )

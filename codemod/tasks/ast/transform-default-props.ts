@@ -7,9 +7,11 @@ export const transformDefaultProps = (root: Ast.Ast, info: Ast.MUISourceInfo) =>
   if (!info.withStylesOrTheme) return
   const body: any[] = Queries.checkSingleResult(Ast.astq().query(root, `/Program`)).body
   // remove withStyles call
-  const defaultExport = Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExportDefaultDeclaration`))
-  const defaultExportIdx = body.indexOf(defaultExport);
-  body.splice(defaultExportIdx, 1)
+  const defaultExport = Queries.checkSingleResult(Ast.astq().query(root, `/Program/ExportDefaultDeclaration`), true)
+  if (defaultExport) {
+    const defaultExportIdx = body.indexOf(defaultExport);
+    body.splice(defaultExportIdx, 1)
+  }
 
   // remove 'Button.defaultProps = ...', save defaults to info
   const defaultProps = Queries.getStaticProp(root, info.name, 'defaultProps')

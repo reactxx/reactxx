@@ -51,7 +51,7 @@ class SimplePopper extends React.Component<any, any> {
         <Popper id={id} open={open} anchorEl={anchorEl} transition>
           {({
           TransitionProps
-        }) => <Fade {...TransitionProps} timeout={350}>
+        }) => <Fade {...(TransitionProps as any)} timeout={350}>
               <Paper>
                 <Typography className={classes.typography}>The content of the Popper.</Typography>
               </Paper>

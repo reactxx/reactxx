@@ -4,8 +4,7 @@ import withStyles, { Theme } from 'reactxx-mui-web/styles/withStyles';
 import { Types, TCommonStyles } from 'reactxx-basic';
 import { siteMap, pathToObjs, SitemapNode } from '../muix-doc/meta'
 
-interface Shape extends Types.ShapeDefault {
-    web: 'root' | 'demo'
+interface Shape extends Types.ShapeDefault<'root' | 'demo'> {
     props: { text?: string }
     theme: Theme
 }

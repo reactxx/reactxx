@@ -8,11 +8,11 @@ export const transformConstStyles = (root: Ast.Ast, info: Ast.MUISourceInfo) => 
     if (!stylesDecl) return
     let objectExpr = Queries.checkSingleResult(Ast.astq().query(stylesDecl, '/ObjectExpression'), true)
     if (!objectExpr) {
-        const arrowFunc = Queries.checkSingleResult(Ast.astq().query(stylesDecl, '/ArrowFunctionExpression'))
+        const arrowFunc = Queries.checkSingleResult(Ast.astq().query(stylesDecl, '/ArrowFunctionExpression'), true)
         if (!arrowFunc) return // e.g. Select
         objectExpr = Queries.checkSingleResult(Ast.astq().query(arrowFunc, '/ObjectExpression'), true)
         if (!objectExpr)
-            objectExpr = Queries.checkSingleResult(Ast.astq().query(arrowFunc, '/BlockStatement/ReturnStatement/ObjectExpression'))
+            objectExpr = Queries.checkSingleResult(Ast.astq().query(arrowFunc, '/BlockStatement/ReturnStatement/ObjectExpression'), true)
     }
     if (!objectExpr) return 
     cssjsToFela(objectExpr, info)

@@ -389,7 +389,23 @@ export type PropsX = Types.PropsX<Shape>
 export type CodeProps = Types.CodePropsWeb<Shape>
 export type WithStyleCreator = TWithStyleCreator<Shape>
 
-export const defaultProps  = Grid.defaultProps = {} as CodeProps;
+export const defaultProps  = Grid.defaultProps = {
+  alignContent: 'stretch',
+  alignItems: 'stretch',
+  component: 'div',
+  container: false,
+  direction: 'row',
+  item: false,
+  justify: 'flex-start',
+  lg: false,
+  md: false,
+  sm: false,
+  spacing: 0,
+  wrap: 'wrap',
+  xl: false,
+  xs: false,
+  zeroMinWidth: false
+} as CodeProps;
 export const GridCode: CodeComponentType = Grid as any
 export const GridStyles: SheetCreatorX = styles as any
 export const GridCreator: WithStyleCreator = withStyles<Shape>(GridStyles, GridCode, {isMui:true, defaultProps});

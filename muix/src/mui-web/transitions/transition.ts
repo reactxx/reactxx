@@ -23,5 +23,5 @@ export type TransitionKeys =
 export interface TransitionProps
   extends TransitionActions,
     Partial<Pick<_TransitionProps, TransitionKeys>> {
-  style?: CSSProperties | any;
+  style?: CSSProperties;
 }

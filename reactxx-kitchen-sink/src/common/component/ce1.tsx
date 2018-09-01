@@ -2,7 +2,7 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { TCommon, Types, withStylesCreator, TAddIn, TProvider } from 'reactxx-basic';
-import MDI from 'reactxx-mdi'
+//import MDI from 'reactxx-mdi'
 import { TComps, Text, View, ScrollView, Icon } from 'reactxx-primitives'
 
 
@@ -17,13 +17,13 @@ export const enum Consts {
 }
 
 
-type Shape = Types.OverwriteShape<{
+interface Shape extends Types.DafaultShape {
   common: TCommon.ShapeViews<'root'> & TCommon.ShapeTexts<'label' | 'icon' | 'iconGap'>,
   props: {
     iconData: string,
   },
   //nameType: Consts.Label
-}>
+}
 
 /************************
 * SHEET
@@ -101,7 +101,7 @@ export const LabelEx = LabelCreator({
 *************************************************
 *************************************************/
 const Section: React.SFC = ({ children }) => <View className={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>{children}</View>
-const iconHeart = MDI.Heart
+const iconHeart = '' //MDI.Heart
 
 const App_ = props => <LabelEx>Label 10</LabelEx>
 

@@ -23,44 +23,34 @@ export namespace TComps {
     PRIMITIVE'S SHAPES
   *******************************************/
 
-  export type TextShape = Types.OverwriteShape<{
+ export interface ViewShape extends Types.ShapeDefault<'pressable', TCommon.TEventsAll> {
+  common: TCommon.ShapeViews<'root'>
+  native: null
+  style: 'View'
+  propsWeb: React.HTMLAttributes<HTMLDivElement>
+  propsNative: ReactN.ViewProperties
+}
+
+export interface TextShape extends Types.ShapeDefault<'pressable', TCommon.TEventsX> {
     common: TCommon.ShapeTexts<'root' | 'singleLineStyle'>
-    web: 'pressable'
     native: null
     style: 'Text'
-    events: TCommon.TEventsX
     props: { numberOfLines?: number; url?: string }
     propsWeb: React.HTMLAttributes<HTMLSpanElement>
     propsNative: ReactN.TextProperties
-    //nameType: CompNames.Text | CompNames.AnimatedText | string
-  }>
+  }
 
-  export type ViewShape = Types.OverwriteShape<{
-    common: TCommon.ShapeViews<'root'>
-    web: 'pressable'
-    native: null
-    style: 'View'
-    events: TCommon.TEventsAll
-    propsWeb: React.HTMLAttributes<HTMLDivElement>
-    propsNative: ReactN.ViewProperties
-    //nameType: CompNames.View | CompNames.AnimatedView | string
-  }>
-
-  export type IconShape = Types.OverwriteShape<{
+  export interface IconShape extends Types.ShapeDefault<'pressable', TCommon.TEventsX> {
     common: TCommon.ShapeTexts<'root'>
-    web: 'pressable'
     native: null
     style: 'Text'
-    events: TCommon.TEventsX
     props: { data: string; url?: string }
     propsWeb: React.SVGAttributes<SVGElement>
     propsNative: ReactN.TextProperties
-    //nameType: CompNames.Icon | CompNames.AnimatedIcon | string
-  }>
+  }
 
-  export interface ScrollViewShape extends Types.ShapeDefault {
+  export interface ScrollViewShape extends Types.ShapeDefault<'rootHorizontal' | 'containerHorizontal'> {
     common: TCommon.ShapeViews<'root'> & TCommon.ShapeViews<'container'>
-    web: 'rootHorizontal' | 'containerHorizontal'
     native: null
     style: 'View'
     props: {
@@ -68,6 +58,5 @@ export namespace TComps {
     }
     propsWeb: React.HTMLAttributes<HTMLDivElement>
     propsNative: ReactN.ScrollViewProperties
-    //nameType: CompNames.ScrollView | CompNames.AnimatedScrollView | string
   }
 }

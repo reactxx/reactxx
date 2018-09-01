@@ -10,7 +10,7 @@ export const generate = () => {
     for (const p in map) {
         if (p === 'react') continue
         const icon = map[p]
-        const name = Case.pascalCase(icon.id)
+        const name = icon.id==='3d-rotation' ? 'ThreeDRotation' : Case.pascalCase(icon.id)
         const fn = Config.icons + name + '.tsx'
         //const fnNative = Config.icons + 'native/' + name + '.tsx'
         fsExtra.outputFileSync(fn, template(icon.svg, name, icon.isMdi, false), { encoding: 'utf8' })
@@ -38,9 +38,10 @@ import createSvgIcon from '${isMuiInternal ? '.' : 'reactxx-mui-web/internal/svg
 import { SvgIconProps, Shape } from '${isMuiInternal ? '../../SvgIcon/SvgIcon' : 'reactxx-mui-web/SvgIcon/SvgIcon'}'
 
 import { Types, TAddIn } from 'reactxx-basic'; 
-    
+
+export const ${name}Data = '${data}'
 export default createSvgIcon(
-  '${data}',
+  ${name}Data,
   '${name}',
   ${isMdi ? 'true' : 'false'}
 )`
