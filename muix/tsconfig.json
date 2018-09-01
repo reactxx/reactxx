@@ -38,7 +38,7 @@
         "src/basic/index"
       ],
       "reactxx-primitives": [
-        "src/primitives/web/index"
+        "src/primitives/index"
       ],
       "reactxx-mediaq": [
         "src/mediaq/web/web"
@@ -66,14 +66,16 @@
     "src/fela/**/*",
     "src/basic/**/*",
     "src/primitives/**/*",
-    // "src/media/**/*",
-    // "src/animation/**/*",
-    // "src/mui-web/**/*",
-    // "src/icons/**/*",
-    // "src/muix/**/*",
-    // "src/ks/common/muix-doc/**/*",
-    // "src/ks/common/mui-doc-app/**/*",
-    // "src/ks/web/**/*",
+    "src/media/**/*",
+    "src/animation/**/*",
+    "src/mui-web/**/*",
+    "src/icons/**/*",
+    "src/muix/**/*",
+    "src/ks/common/muix-doc/**/*",
+    "src/ks/common/mui-doc-app/**/*",
+    "src/ks/web/**/*",
+    // "src/ks/common/component/ce1.tsx",
+    // "src/ks/common/components/typo.tsx",
   ],
   "exclude": [
     "src/*/typings.d.ts",

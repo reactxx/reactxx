@@ -50,7 +50,7 @@ const sheet: Types.SheetX<Shape> = {
     fontSize: 20,
   },
   iconGap: {
-    marginRight: 5,
+    marginRight: 5, 
   },
 }
 
