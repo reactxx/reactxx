@@ -13,16 +13,18 @@ export namespace Types {
   *******************************************/
 
   //*************** Cross platform ruleset for web and native
+  export interface RulesetXPureLow<T extends TCommonStyles.RulesetNativeIds = 'Text'> {
+    $native?: TCommonStyles.RulesetNative<T> // native specific rules
+    $web?: TCommonStyles.RulesetWeb // web specific rules
+    $before?: RulesetX<T>
+    $after?: RulesetX<T>
+    //$props?: PropsInRulesetX<R>
+  }
 
   export type RulesetXPure<T extends TCommonStyles.RulesetNativeIds = 'Text'> =
     TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
-    {
-      $native?: TCommonStyles.RulesetNative<T> // native specific rules
-      $web?: TCommonStyles.RulesetWeb // web specific rules
-      $before?: RulesetX<T>
-      $after?: RulesetX<T>
-      //$props?: PropsInRulesetX<R>
-    }
+    RulesetXPureLow<T>
+
   export type RulesetX<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> = RulesetXPure<T> & TAddIn.RulesetAddInX<T, R>
 
   export interface ViewRulesetX extends RulesetX<'View'> { }
@@ -32,7 +34,7 @@ export namespace Types {
   //******************** Shape
   export interface Shape extends TCommon.Shape, TAddIn.Shape { }
 
-  export interface ShapeDefault<TWeb extends string = null, TEvents extends string = null> extends TAddIn.ShapeDefault {
+  export interface ShapeDefault<TWeb extends string = null, TEvents extends string = null> {
     common: TCommon.EmptySheet
     native: TCommon.EmptySheet
     web: TWeb

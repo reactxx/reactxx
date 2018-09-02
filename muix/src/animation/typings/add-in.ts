@@ -1,4 +1,4 @@
-﻿import { TCommonStyles, TCommon, TAddIn as TAddInBasic } from 'reactxx-basic'
+﻿import { TCommonStyles, TCommon, TAddIn as TAddInBasic, Types as TypesBasic } from 'reactxx-basic'
 import { TAnimation } from 'reactxx-animation'
 import { Types } from './types'
 
@@ -21,7 +21,7 @@ export namespace TAddIn {
     animation?: TAnimation.Shapes
   }
 
-  export interface ShapeDefault {
+  export interface ShapeDefault<TWeb extends string = null, TEvents extends string = null> extends TypesBasic.ShapeDefault<TWeb, TEvents> {
     animation: {}
   }
 

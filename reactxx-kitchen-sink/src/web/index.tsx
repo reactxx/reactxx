@@ -62,6 +62,7 @@ import ReactDOM from 'react-dom'
 // import App from '../common/muix-doc/tooltips/index'
 
 //import App from '../common/muix-doc/cards/SimpleMediaCard'
-import App from '../common/mui-doc-app/index'
+//import App from '../common/mui-doc-app/index'
+import App from '../common/primitives/ce4'
 
 ReactDOM.render(<App />, document.getElementById('root')) 

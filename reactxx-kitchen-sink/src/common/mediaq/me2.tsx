@@ -2,21 +2,15 @@ import React from 'react'
 
 import { Text } from 'reactxx-primitives'
 import { TCommon, LoremIpsum } from 'reactxx-basic'
-import { MediaQ_AppContainer, Types, withStylesCreator } from 'reactxx-mediaq'
+import { MediaQ_AppContainer, Types, withStylesCreator, TAddIn } from 'reactxx-mediaq'
 
 /************************
 * TYPINGS
 *************************/
 
-export const enum Consts {
-  Label1 = 'ks$me2$label1' //unique component name
-}
-
-type Shape = Types.OverwriteShape<{
+interface Shape extends TAddIn.ShapeDefault<null, null, 'isMobile' | 'isTablet' | 'isDesktop'>{
   common: TCommon.ShapeTexts<'root' | 'mobile' | 'tablet' | 'desktop'>,
-  mediaq: 'isMobile' | 'isTablet' | 'isDesktop'
-  //nameType: Consts.Label1
-}>
+}
 
 /************************
 * SHEET
@@ -52,7 +46,7 @@ const label: Types.CodeSFC<Shape> = ({ $system: { classNames }, classes, classNa
   return <Text className={root}>[{info}] {children}</Text>
 }
 
-const Label: Types.ComponentTypeX<Shape> = withStylesCreator(sheet, label, {name:Consts.Label1})({
+const Label: Types.ComponentTypeX<Shape> = withStylesCreator(sheet, label, {})({
   defaultProps: {
     $mediaq: {
       isMobile: [null, 480],

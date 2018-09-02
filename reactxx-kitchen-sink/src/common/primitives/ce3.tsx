@@ -8,12 +8,12 @@ import { Text, View } from 'reactxx-primitives';
 * SHEET
 *************************/
 
-type Shape = Types.OverwriteShape<{
+interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeViews<'root'> & TCommon.ShapeTexts<'label' | 'header' | 'disabled'>,
   props: {
     disabled?: boolean
   }
-}>
+}
 
 const sheet: Types.SheetX<Shape> = {
   root: {

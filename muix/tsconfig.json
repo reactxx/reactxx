@@ -41,7 +41,7 @@
         "src/primitives/index"
       ],
       "reactxx-mediaq": [
-        "src/mediaq/web/web"
+        "src/mediaq/index"
       ],
       "reactxx-icons/*": [
         "src/icons/*"
@@ -62,20 +62,24 @@
   "include": [
     //"src/**/*",
     "src/typings.d.ts",
-    "src/sheeter/**/*",
-    "src/fela/**/*",
-    "src/basic/**/*",
-    "src/mui-web/**/*",
-    "src/primitives/**/*",
-    "src/media/**/*",
-    "src/animation/**/*",
-    "src/icons/**/*",
-    "src/muix/**/*",
-    "src/ks/common/muix-doc/**/*",
-    "src/ks/common/mui-doc-app/**/*",
-    //"src/ks/web/**/*",
-    //"src/ks/common/component/ce1.tsx",
-    //"src/ks/common/components/typo.tsx",
+    "src/ks/common/ks.d.ts",
+
+    "src/sheeter",
+    "src/fela",
+    "src/basic",
+    "src/mui-web",
+    "src/primitives",
+    "src/media",
+    "src/animation",
+    "src/icons",
+    "src/muix",
+    "src/ks/common/muix-doc",
+    "src/ks/common/mui-doc-app",
+    "src/ks/common/primitives", 
+    "src/ks/common/mediaq", 
+    "src/ks/common/animation", 
+    //"src/ks/common/components", 
+    "src/ks/web",
   ],
   "exclude": [
     "src/*/typings.d.ts",

@@ -2,7 +2,7 @@ import React from 'react';
 import { TAnimation, Types, withStylesCreator, TAddIn } from 'reactxx-animation';
 import { TCommon } from 'reactxx-basic';
 import { AnimatedText, AnimatedView, ScrollView, View } from 'reactxx-primitives';
-import { H2 } from '../components/typo';
+import { H2 } from '../primitives/typo';
 
 
 
@@ -14,7 +14,7 @@ export const enum Consts {
   Label = 'ks$ae2$label' //unique component name
 }
 
-type Shape = Types.OverwriteShape<{
+interface Shape extends Types.ShapeDefault<null, TCommon.TEvents> {
   common: TCommon.ShapeViews<'root'> & TCommon.ShapeTexts<'label'>
   //nameType: Consts.Label
   animation: { //animation sheets
@@ -27,8 +27,7 @@ type Shape = Types.OverwriteShape<{
     isAnim2: boolean
     isAnim3: boolean
   }
-  events: TCommon.TEvents
-}>
+}
 
 /************************
 * SHEET

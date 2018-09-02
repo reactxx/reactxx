@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { Types, withStylesCreator, TCommon, ThemeProviderUntyped, TAddIn, TProvider } from 'reactxx-basic'
 import { TComps, Text, View, ScrollView, Icon,  } from 'reactxx-primitives'
 
-import { H2, A, P } from '../components/typo'
+import { H2, A, P } from './typo'
 
 /************************
 * TYPINGS
@@ -24,11 +24,11 @@ export const enum Consts {
   Badge = 'ks$ce3$badge',
 }
 
-type Shape = Types.OverwriteShape<{
+interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeViews<'root'> & TCommon.ShapeTexts<'label'>,
   //nameType: Consts.Label | Consts.Badge,
   theme: Theme,
-}>
+}
 
 const ThemeProvider = ThemeProviderUntyped as TCommon.ThemeProviderTyped<Theme>
 

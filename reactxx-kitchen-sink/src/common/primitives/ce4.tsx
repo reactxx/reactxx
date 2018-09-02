@@ -4,7 +4,7 @@ import ReactN from 'react-native'
 import { Types, withStylesCreator, TCommon, ThemeProviderUntyped, TAddIn, TProvider } from 'reactxx-basic'
 import { TComps, Text, View, ScrollView, Icon, } from 'reactxx-primitives'
 
-import { H2, A, P } from '../components/typo'
+import { H2, A, P } from './typo'
 
 /************************
 * THEME
@@ -49,10 +49,10 @@ const ThemeProvider = ThemeProviderUntyped as TCommon.ThemeProviderTyped<Theme>
 * SHEET
 *************************/
 
-type Shape = Types.OverwriteShape<{
+interface Shape extends Types.ShapeDefault {
   common: TCommon.ShapeViews<'root'> & TCommon.ShapeTexts<'label' | 'header' | 'disabled'>,
   theme: Theme,
-}>
+}
 
 const sheet: Types.SheetCreatorX<Shape> = ({ typo }) => ({
   root: {

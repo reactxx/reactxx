@@ -33,7 +33,7 @@ export class MediaQ_AppContainer extends React.Component {
       const mediaQuery = window.matchMedia(`(min-width: ${b.value}px)`)
       b.active = mediaQuery.matches
       // on change media
-      const onChange = (q: MediaQueryList) => {
+      const onChange = (q) => {
         b.active = q.matches
         if (!this.timer) this.timer = window.setTimeout(() => {
           this.timer = 0

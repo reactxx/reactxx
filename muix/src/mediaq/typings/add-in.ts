@@ -1,4 +1,4 @@
-﻿import { TAddIn as TAddInBasic, TCommonStyles } from 'reactxx-basic';
+﻿import { TAddIn as TAddInBasic, Types as TypesBasic, TCommonStyles } from 'reactxx-basic';
 import { TMediaQ } from './mediaq';
 import { Types } from './types';
 
@@ -22,8 +22,8 @@ export namespace TAddIn {
     mediaq?: string | null
   }
 
-  export interface ShapeDefault {
-    mediaq: null
+  export interface ShapeDefault<TWeb extends string = null, TEvents extends string = null, TMediaq extends string = null> extends TypesBasic.ShapeDefault<TWeb, TEvents> {
+    mediaq: TMediaq
   }
 
   export type getMediaQ<R extends Shape = Shape> = R['mediaq']

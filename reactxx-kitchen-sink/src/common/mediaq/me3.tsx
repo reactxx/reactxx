@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Text } from 'reactxx-primitives'
 import { TCommon, LoremIpsum, ThemeProviderUntyped, registerTheme } from 'reactxx-basic'
-import { MediaQ_AppContainer, Types, withStylesCreator, breaksToString } from 'reactxx-mediaq'
+import { MediaQ_AppContainer, Types, withStylesCreator, breaksToString, TAddIn } from 'reactxx-mediaq'
 
 /************************
 * TYPINGS
@@ -21,12 +21,11 @@ export const enum Consts {
   Theme2 = 'ks$me3$theme2',
 }
 
-type Shape = Types.OverwriteShape<{
+interface Shape extends TAddIn.ShapeDefault<null, null, 'isMobile' | 'isTablet' | 'isDesktop'>{
   common: TCommon.ShapeTexts<'root'>,
-  mediaq: 'isMobile' | 'isTablet' | 'isDesktop'
   //nameType: Consts.Label
   theme: Theme
-}>
+}
 
 /************************
 * SHEET

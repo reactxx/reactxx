@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ScrollView } from 'reactxx-primitives'
 import { LoremIpsum } from 'reactxx-basic'
-import { H1, H2, H3, H4, H5, U, I, B, A, Blocquote, P } from '../components/typo'
+import { H1, H2, H3, H4, H5, U, I, B, A, Blocquote, P } from '../primitives/typo'
 
 const App: React.SFC = props => <ScrollView classes={{ container: { padding: 10 } }}>
   <H1>H1: {LoremIpsum(5)}</H1>
