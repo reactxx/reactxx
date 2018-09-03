@@ -38,9 +38,9 @@ export namespace TSheeterCompiled2 {
 
   export type Queue = QueueItem[]
   export interface QueueItem {
-    rules?: Values
+    rules: Values
     rulesTrace?: {}
-    path: string // <rulesetName>/before/:hover/whenUsed/<rulesetName>
+    path?: string // <rulesetName>/before/:hover/whenUsed/<rulesetName>
     conditions?: Conditions
   }
 

@@ -11,71 +11,78 @@ export const compile = (ruleset: TSheeterSource.RulesRoot<string>, rulesetName?:
     const { $before, $web, $native, $after } = ruleset
     const parts = [['/$before', $before], ['', ruleset], window.isWeb ? ['/$web', $web] : ['/$native', $native], ['/$after', $after]].filter(p => p[1])
     const queue: TSheeterCompiled2.Queue = []
-    parts.forEach((part: [string, Node]) => parsePseudo({
+    parts.forEach((part: [string, Node]) => parsePseudo(
         queue,
-        ruleset: part[1],
-        path: `${rulesetName || 'unknown'}${part[0]}`,
-        pseudoPrefixes: [],
-        conditions: []
-    }))
+        part[1],
+        `${rulesetName || 'unknown'}${part[0]}`,
+        [],
+        []
+    ))
     return queue
 }
 
 interface parseTreePar {
-    queue: TSheeterCompiled2.Queue,
-    ruleset: Node,
-    path: string,
-    pseudoPrefixes: string[],
-    conditions: TSheeterCompiled2.Conditions
+    queue: TSheeterCompiled2.Queue, ruleset: Node, path: string,
+    pseudoPrefixes: string[], conditions: TSheeterCompiled2.Conditions
 }
+// queue, ruleset, path, pseudoPrefixes, conditions
 
-const parsePseudo = (par: parseTreePar, rulesetToQueue?) => {
-    const { ruleset, path, pseudoPrefixes, queue, conditions } = par
-    const toQueue = typeof rulesetToQueue==='undefined' ? ruleset : rulesetToQueue
-    if (rulesetToQueue)
-        queue.push({ path, rules: null, rulesTrace: makeTrace(rulesetToQueue), conditions })
+const parsePseudo = (queue: TSheeterCompiled2.Queue, ruleset: Node, path: string,
+    pseudoPrefixes: string[], conditions: TSheeterCompiled2.Conditions, rulesetToQueue?) => {
+
+    // push to ruleset last wins queue
+    pushToQueue(queue, typeof rulesetToQueue === 'undefined' ? ruleset : rulesetToQueue, conditions, path)
+
+    // parse pseudo rules
     for (const p in ruleset) {
         const value = ruleset[p] as Node
         if (p.startsWith('$') || !isObject(value)) continue
-        parsePseudo({ ...par, ruleset: value, path: `${path}/${p}`, pseudoPrefixes: [...pseudoPrefixes, p] }, null)
+        parsePseudo(queue, value, `${path}/${p}`, [...pseudoPrefixes, p], conditions, null)
     }
+
+    // parse addIns
     const { $whenUsed, $mediaq, $animation } = ruleset
     const parts = [['$whenUsed', $whenUsed], ['$mediaq', $mediaq], ['$animation', $animation]].filter(p => p[1])
-    parts.forEach(part => {
-        const partPar = { ...par, ruleset: part[1] }
-        switch (part[0]) {
-            case '$whenUsed': parseWhenUsed(partPar); break;
-            case '$mediaq': parseMediaQ(partPar); break;
-            case '$animation': parseAnimation(partPar); break;
-        }
-    })
+    parts.forEach(part => parsers[part[0]](queue, part[1], path, pseudoPrefixes, conditions))
 }
 
-const parseWhenUsed = (par: parseTreePar) => {
-    const { queue, ruleset, path, conditions, pseudoPrefixes } = par
+const parseWhenUsed = (queue: TSheeterCompiled2.Queue, ruleset: Node, path: string, pseudoPrefixes: string[], conditions: TSheeterCompiled2.Conditions) => {
     for (const p in ruleset) {
         const rules = ruleset[p] as Node
-        parsePseudo({ 
-            ...par, 
-            ruleset: rules, 
-            path: `${path}/$whenUsed.${p}`, 
-            conditions: [...conditions, { type: 'whenUsed', rulesetName: p } as TSheeterCompiled2.WhenUsedCondition] 
-        }, wrapPseudoPrefixes(rules, pseudoPrefixes))
+        parsePseudo(
+            queue,
+            rules,
+            `${path}/$whenUsed.${p}`,
+            pseudoPrefixes,
+            [...conditions, { type: 'whenUsed', rulesetName: p } as TSheeterCompiled2.WhenUsedCondition],
+            wrapPseudoPrefixes(rules, pseudoPrefixes))
     }
 }
-const parseMediaQ = (par: parseTreePar) => {
+const parseMediaQ = (queue: TSheeterCompiled2.Queue, ruleset: Node, path: string, pseudoPrefixes: string[], conditions: TSheeterCompiled2.Conditions) => {
 }
-const parseAnimation = (par: parseTreePar) => {
+const parseAnimation = (queue: TSheeterCompiled2.Queue, ruleset: Node, path: string, pseudoPrefixes: string[], conditions: TSheeterCompiled2.Conditions) => {
 }
 
-const wrapPseudoPrefixes = (par: {}, pseudoPrefixes: string[]) => {
-    if (pseudoPrefixes.length === 0) return par
-    let res = par
+const parsers = {
+    '$whenUsed':parseMediaQ, 
+    '$mediaq':parseWhenUsed, 
+    '$animation':parseAnimation, 
+}
+
+const wrapPseudoPrefixes = (rules: {}, pseudoPrefixes: string[]) => {
+    if (pseudoPrefixes.length === 0) return rules
+    let res = rules
     for (let i = pseudoPrefixes.length - 1; i >= 0; i--)
         res = { [pseudoPrefixes[i]]: res }
     return res
 }
 
+const pushToQueue = (queue: TSheeterCompiled2.Queue, ruleset: TSheeterSource.RulesTree<string>, conditions: TSheeterCompiled2.Conditions, path: string) => {
+    if (DEV_MODE)
+        queue.push({ path, rules: rulesetCompiler(ruleset), rulesTrace: makeTrace(ruleset), conditions })
+    else
+        queue.push({ rules: rulesetCompiler(ruleset), conditions })
+}
 
 const makeTrace = (rules) => {
     const res = deepMerge({}, rules)
