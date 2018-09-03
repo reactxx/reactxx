@@ -7,6 +7,8 @@ import pluginLvha from 'fela-plugin-lvha';
 import pluginPrefixer from 'fela-plugin-prefixer';
 import pluginUnit from 'fela-plugin-unit';
 
+import patch from './patch';
+
 
 const plugins = {
   plugins: [
@@ -19,7 +21,9 @@ const plugins = {
   ]
 }
 
-export const renderer = createRenderer(plugins)
+export const renderer = patch(createRenderer(plugins))
+
+export const compileRuleset = (ruleset: Object) => renderer.renderRuleEx(ruleset)
 
 // renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html
 //   height: '100%',
@@ -28,13 +32,13 @@ export const renderer = createRenderer(plugins)
 //   padding: 0,
 //   overflow: 'hidden',
 // }, 'html, body, #root')
-renderer.renderStatic({ 
-  fontFamily: 'Roboto' 
+renderer.renderStatic({
+  fontFamily: 'Roboto'
 }, 'body')
 //renderer.renderStatic({ boxSizing: 'border-box' }, '*')
 renderer.renderStatic({
-  display: 'flex', 
-  flexDirection: 'column', 
+  display: 'flex',
+  flexDirection: 'column',
   alignItems: 'stretch',
   height: '100%',
   width: '100%',
@@ -63,7 +67,9 @@ renderer.renderStatic({
 render(renderer)
 
 //Converts ruleset to blank delimited atomic classes
-export const rulesetToClassNames = (ruleset: React.CSSProperties) => ruleset ? renderer.renderRule(() => ruleset, {}) : ''
+export const rulesetToClassNames = (ruleset: React.CSSProperties) => {
+  return ruleset ? renderer.renderRule(() => ruleset, {}) : ''
+}
 export const rulesetsToClassNames = (...rulesets: React.CSSProperties[]) => {
   if (!rulesets) return ''
   rulesets = rulesets.filter(r => !!r)
@@ -93,7 +99,16 @@ export const rulesetToClassNamesMUI = (ruleset: React.CSSProperties) => {
     delete rs[p]
   }
 
-  const res = (empty ? '' : renderer.renderRule(() => rs, {})) + (forceRuleNames ? ' ' + forceRuleNames.join(' ') : '')
+  let classNames = ''
+  if (!empty) {
+    const classNamesEx = compileRuleset(rs)
+    classNames = classNamesEx.join(' ')
+  }
+
+  const res = classNames + (forceRuleNames ? ' ' + forceRuleNames.join(' ') : '')
+  // const res1 = (empty ? '' : renderer.renderRule(() => rs, {})) + (forceRuleNames ? ' ' + forceRuleNames.join(' ') : '')
+  // if (res1 !== res)
+  //   debugger
 
   return res
 }

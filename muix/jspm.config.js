@@ -17,6 +17,7 @@ SystemJS.config({
   },
   map: {
     "reactxx-sheeter": "deploy/lib/sheeter/index",
+    "reactxx-sheeter2": "deploy/lib/sheeter2/index",
     "reactxx-fela": "deploy/lib/fela/index",
     "reactxx-basic": "deploy/lib/basic/index",
     "reactxx-animation": "deploy/lib/animation/index",
@@ -35,6 +36,9 @@ SystemJS.config({
     "npm:*.json"
   ],
   map: {
+    "css-in-js-utils": "npm:css-in-js-utils@2.0.1",
+    "isobject": "npm:isobject@3.0.1",
+    "fela-utils": "npm:fela-utils@8.1.0",
     "lodash": "npm:lodash@4.17.10",
     "dns": "npm:jspm-nodelibs-dns@0.2.1",
     "hast-util-sanitize": "npm:hast-util-sanitize@1.2.0",
@@ -974,6 +978,13 @@ SystemJS.config({
     "npm:iconv-lite@0.4.24": {
       "map": {
         "safer-buffer": "npm:safer-buffer@2.1.2"
+      }
+    },
+    "npm:fela-utils@8.1.0": {
+      "map": {
+        "css-in-js-utils": "npm:css-in-js-utils@2.0.1",
+        "string-hash": "npm:string-hash@1.1.3",
+        "fast-loops": "npm:fast-loops@1.0.1"
       }
     }
   }

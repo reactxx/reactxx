@@ -1,28 +1,96 @@
 [
   {
-    "display": "block",
-    "margin": 0,
-    "#rulesetName": "gutterBottom",
-    "fontSize": "7rem",
-    "fontWeight": 300,
-    "fontFamily": "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
-    "letterSpacing": "-.04em",
-    "lineHeight": "1.14286em",
-    "marginLeft": "-.04em",
-    "color": "rgba(0, 0, 0, 0.54)",
-    "marginBottom": "0.35em"
+    "path": "root/:hover/$whenUsed.root",
+    "rules": null,
+    "rulesTrace": {
+      ":hover": {
+        "hoverRoot": "hoverRoot",
+        ":active": {
+          "hoverRootActive": "hoverRootActive"
+        }
+      }
+    },
+    "conditions": [
+      {
+        "type": "whenUsed",
+        "rulesetName": "root"
+      }
+    ]
   },
   {
-    "display": "block",
-    "margin": 0,
-    "#rulesetName": "gutterBottom",
-    "fontSize": "3.5rem",
-    "fontWeight": 400,
-    "fontFamily": "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
-    "letterSpacing": "-.02em",
-    "lineHeight": "1.30357em",
-    "marginLeft": "-.02em",
-    "color": "rgba(0, 0, 0, 0.54)",
-    "marginBottom": "0.35em"
+    "path": "root/:hover/$whenUsed.root/:active/$whenUsed.disabled",
+    "rules": null,
+    "rulesTrace": {
+      ":hover": {
+        ":active": {
+          "hoverRootActiveInner": "hoverRootActiveInner"
+        }
+      }
+    },
+    "conditions": [
+      {
+        "type": "whenUsed",
+        "rulesetName": "root"
+      },
+      {
+        "type": "whenUsed",
+        "rulesetName": "disabled"
+      }
+    ]
+  },
+  {
+    "path": "root/:hover/$whenUsed.root/$whenUsed.disabled",
+    "rules": null,
+    "rulesTrace": {
+      ":hover": {
+        "hoverRootInner": "hoverRootInner"
+      }
+    },
+    "conditions": [
+      {
+        "type": "whenUsed",
+        "rulesetName": "root"
+      },
+      {
+        "type": "whenUsed",
+        "rulesetName": "disabled"
+      }
+    ]
+  },
+  {
+    "path": "root/$whenUsed.root",
+    "rules": null,
+    "rulesTrace": {
+      "plainRoot": "plainRoot"
+    },
+    "conditions": [
+      {
+        "type": "whenUsed",
+        "rulesetName": "root"
+      }
+    ]
+  },
+  {
+    "path": "root/$whenUsed.root/$whenUsed.disabled",
+    "rules": null,
+    "rulesTrace": {
+      "plainInner": "plainInner",
+      ":hover": {
+        "plainInnerHover": "plainInnerHover",
+        ":active": {
+          "plainInnerHoverActive": "plainInnerHoverActive"
+        }
+      }
+    },
+    "conditions": [
+      {
+        "type": "whenUsed",
+        "rulesetName": "root"
+      },
+      {
+        "type": "whenUsed",
+        "rulesetName": "disabled"
+      }
+    ]
   }
 ]
