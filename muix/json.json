@@ -1,9 +1,23 @@
 [
   {
-    "path": "root/:hover/$whenUsed.root",
+    "path": "root",
     "rules": [
       "a",
       "b"
+    ],
+    "rulesTrace": {
+      "rule": "rule",
+      ":hover": {
+        "hover": "hover"
+      }
+    },
+    "conditions": []
+  },
+  {
+    "path": "root/:hover/$whenUsed.root",
+    "rules": [
+      "c",
+      "d"
     ],
     "rulesTrace": {
       ":hover": {
@@ -23,7 +37,7 @@
   {
     "path": "root/:hover/$whenUsed.root/:active/$whenUsed.disabled",
     "rules": [
-      "c"
+      "e"
     ],
     "rulesTrace": {
       ":hover": {
@@ -46,7 +60,7 @@
   {
     "path": "root/:hover/$whenUsed.root/$whenUsed.disabled",
     "rules": [
-      "d"
+      "f"
     ],
     "rulesTrace": {
       ":hover": {
@@ -67,7 +81,7 @@
   {
     "path": "root/$whenUsed.root",
     "rules": [
-      "e"
+      "g"
     ],
     "rulesTrace": {
       "plainRoot": "plainRoot"
@@ -82,9 +96,9 @@
   {
     "path": "root/$whenUsed.root/$whenUsed.disabled",
     "rules": [
-      "f",
-      "g",
-      "h"
+      "h",
+      "i",
+      "j"
     ],
     "rulesTrace": {
       "plainInner": "plainInner",

@@ -80,8 +80,8 @@ const whenUsedRecursion: TSheeterSource.RulesTreeRoot<'root' | 'disabled'> = {
 
 export const run = () => {
     let res
-    //res = JSON.stringify(compile(merging, 'root'), null, 2)
-    //res = JSON.stringify(compile(whenUsed, 'root'), null, 2)
+    res = JSON.stringify(compile(merging, 'root'), null, 2)
+    res = JSON.stringify(compile(whenUsed, 'root'), null, 2)
     res = JSON.stringify(compile(whenUsedRecursion, 'root'), null, 2)
     debugger
 }

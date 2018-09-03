@@ -39,6 +39,9 @@ const renderStyleToClassNames = (renderer, { _className, ...style }: any, pseudo
     const value = style[property]
 
     if (isPlainObject(value)) {
+      // // reactxx HACK: ignore $... system property
+      if (property.charAt(0)==='$') 
+        continue
       if (isNestedSelector(property)) {
         classNames = concat(classNames, renderStyleToClassNames(
           renderer,
