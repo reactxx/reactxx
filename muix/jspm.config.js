@@ -17,7 +17,7 @@ SystemJS.config({
   },
   map: {
     "reactxx-sheeter": "deploy/lib/sheeter/index",
-    "reactxx-sheeter2": "deploy/lib/sheeter2/index",
+    "reactxx-core": "deploy/lib/core/index",
     "reactxx-fela": "deploy/lib/fela/index",
     "reactxx-basic": "deploy/lib/basic/index",
     "reactxx-animation": "deploy/lib/animation/index",

@@ -28,8 +28,8 @@
       "reactxx-sheeter": [
         "src/sheeter/index"
       ],
-      "reactxx-sheeter2": [
-        "src/sheeter2/index"
+      "reactxx-core": [
+        "src/core/index"
       ],
       "reactxx-fela": [
         "src/fela/index"
@@ -68,7 +68,7 @@
     "src/ks/common/ks.d.ts",
 
     "src/sheeter",
-    "src/sheeter2",
+    "src/core",
     "src/fela",
     "src/basic",
     "src/mui-web",

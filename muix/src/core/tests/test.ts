@@ -1,7 +1,7 @@
-import { compile } from './compiler2'
-import { TSheeterSource, TSheeterCompiled } from './types'
+import { compileRuleset } from '../compiler'
+import { TSheeterSource, TSheeterCompiled } from '../types'
 
-const merging: TSheeterSource.RulesTreeRoot<'root' | 'disabled'> = {
+const merging: TSheeterSource.Ruleset<'root' | 'disabled'> = {
     $before: {
         before: 'before',
         self: 'before',
@@ -20,7 +20,7 @@ const merging: TSheeterSource.RulesTreeRoot<'root' | 'disabled'> = {
     },
 }
 
-const whenUsed: TSheeterSource.RulesTreeRoot<'root' | 'disabled'> = {
+const whenUsed: TSheeterSource.Ruleset<'root' | 'disabled'> = {
     $whenUsed: {
         root: {
             plain: 'plain',
@@ -35,7 +35,7 @@ const whenUsed: TSheeterSource.RulesTreeRoot<'root' | 'disabled'> = {
     }
 }
 
-const whenUsedRecursion: TSheeterSource.RulesTreeRoot<'root' | 'disabled'> = {
+const whenUsedRecursion: TSheeterSource.Ruleset<'root' | 'disabled'> = {
     rule: 'rule',
     $whenUsed: {
         root: {
@@ -79,10 +79,21 @@ const whenUsedRecursion: TSheeterSource.RulesTreeRoot<'root' | 'disabled'> = {
 
 
 export const run = () => {
-    let res
-    res = JSON.stringify(compile(merging, 'root'), null, 2)
-    res = JSON.stringify(compile(whenUsed, 'root'), null, 2)
-    res = JSON.stringify(compile(whenUsedRecursion, 'root'), null, 2)
+    const res = {
+        MERGING: {
+            source: merging,
+            result: compileRuleset(merging, 'merging')
+        },
+        WHEN_USED: {
+            source: whenUsed,
+            result: compileRuleset(whenUsed, 'whenUsed')
+        },
+        WHEN_USED_RECURSION: {
+            source: whenUsedRecursion,
+            result: compileRuleset(whenUsedRecursion, 'whenUsedRecursion')
+        },
+    }
+    const json = JSON.stringify(res, null, 2)
     debugger
 }
 

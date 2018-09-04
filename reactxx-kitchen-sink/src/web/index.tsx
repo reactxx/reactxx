@@ -25,7 +25,7 @@ import ReactDOM from 'react-dom'
 //import App from '../common/mui-doc-app/index'
 //import App from '../common/primitives/ce1'
 
-import { run } from 'reactxx-sheeter2'
+import { run } from 'reactxx-core'
 run()
 
 
