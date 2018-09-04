@@ -1,21 +1,12 @@
-import { deepMerge, isObject } from './utils/deep-merge'
+import { deepMerge, isObject } from '../utils/deep-merge'
 import { TSheeterSource, TSheeterCompiled, Ruleset } from './types'
 
 // platform dependent import
 import { rulesetCompiler } from 'reactxx-core'
 
-const DEV_MODE = process.env.NODE_ENV === 'development'
-
-type Node = TSheeterSource.RulesTree<string>
-type CompileProc = (
-    list: TSheeterCompiled.RulesetList, ruleset: Node, path: string,
-    pseudoPrefixes: string[], conditions: TSheeterCompiled.Conditions,
-    rulesetToQueue?: Node
-) => void
-
 export const compileRuleset = (rs: Ruleset, rulesetName?: string) => {
     if (!rs) return null
-    if (rs.type === 'compiled') return rs as TSheeterCompiled.Ruleset
+    if (isCompiledRuleset(rs)) return rs
     const ruleset = rs as Node
     const { $before, $web, $native, $after } = ruleset
     const name = ruleset.name || rulesetName || 'unknown'
@@ -26,17 +17,41 @@ export const compileRuleset = (rs: Ruleset, rulesetName?: string) => {
         `${name}${part[0]}`,
         [], [], part[1]
     ))
-    return { name, list, type: 'compiled' } as TSheeterCompiled.Ruleset
+    return { name, list, [TSheeterCompiled.TypedInterfaceProp]: TSheeterCompiled.TypedInterfaceTypes.compiled } as TSheeterCompiled.Ruleset
 }
 
 export const compileClassName = (rs: Ruleset) => compileRuleset(rs, 'className')
 
-export const compileSheet = <Keys extends string = string>(sheet: TSheeterSource.Sheet<string>) => {
+export const compileSheet = <Keys extends string = string>(sheet: TSheeterSource.Sheet<Keys>) => {
     if (!sheet) return null
     const res: TSheeterCompiled.Sheet<Keys> = {} as any
     for (const p in sheet) res[p] = compileRuleset(sheet[p], p)
     return res
 }
+
+export function isCompiledRuleset(obj: Object): obj is TSheeterCompiled.Ruleset {
+    return obj[TSheeterCompiled.TypedInterfaceProp] === TSheeterCompiled.TypedInterfaceTypes.compiled
+}
+export function isValues(obj): obj is TSheeterCompiled.Values {
+    if (!Array.isArray(obj)) return false
+    if (obj.length===0) return true
+    return window.isWeb ? typeof obj[0] === 'string' : obj[0][TSheeterCompiled.TypedInterfaceProp] === TSheeterCompiled.TypedInterfaceTypes.nativeValue
+}
+
+
+//*********************************************************
+//  PRIVATE
+//*********************************************************
+const DEV_MODE = process.env.NODE_ENV === 'development'
+
+type Node = TSheeterSource.RulesTree<string>
+
+type CompileProc = (
+    list: TSheeterCompiled.RulesetList, ruleset: Node, path: string,
+    pseudoPrefixes: string[], conditions: TSheeterCompiled.Conditions,
+    rulesetToQueue?: Node
+) => void
+
 
 // linearize ruleset tree
 const compileTree: CompileProc = (list, ruleset, path, pseudoPrefixes, conditions, rulesetToQueue) => {

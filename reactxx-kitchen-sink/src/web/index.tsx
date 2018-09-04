@@ -25,8 +25,10 @@ import ReactDOM from 'react-dom'
 //import App from '../common/mui-doc-app/index'
 //import App from '../common/primitives/ce1'
 
-import { run } from 'reactxx-core'
-run()
+import { Test as App } from 'reactxx-core'
+
+// import { run } from 'reactxx-core'
+// run()
 
 
-//ReactDOM.render(<App />, document.getElementById('root')) 
+ReactDOM.render(<App />, document.getElementById('root')) 

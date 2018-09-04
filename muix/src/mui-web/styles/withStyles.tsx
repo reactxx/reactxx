@@ -6,11 +6,11 @@ import { default as createMuiTheme } from './createMuiTheme';
 import {classNamesStrMUI} from 'reactxx-basic';
 
 const old: any = React.createElement
-React.createElement = (tag, props, ...children) => {
-  if (!props || typeof tag !== 'string' || !props.className || typeof props.className === 'string') 
-    return old(tag, props, ...children)
+React.createElement = (type, props, ...children) => {
+  if (!props || typeof type !== 'string' || !props.className || typeof props.className === 'string') 
+    return old(type, props, ...children)
   props.className = classNamesStrMUI(props.className)
-  return old(tag, props, ...children)
+  return old(type, props, ...children)
 }
 
 export type Theme = MuiTheme & TCommon.ThemeBase

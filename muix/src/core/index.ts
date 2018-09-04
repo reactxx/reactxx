@@ -1,3 +1,8 @@
-export * from './web/compile'
+export * from './compiler/web'
+export * from './compiler/compiler'
+export * from './compiler/types'
+export * from './compiler/jsx'
 
-export { run } from './tests/test'
+//export { run as Test } from './tests/test'
+export { default as Test } from './tests/jsx'
+

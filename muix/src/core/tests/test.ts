@@ -1,5 +1,5 @@
-import { compileRuleset } from '../compiler'
-import { TSheeterSource, TSheeterCompiled } from '../types'
+import { compileRuleset } from '../compiler/compiler'
+import { TSheeterSource, TSheeterCompiled } from '../compiler/types'
 
 const merging: TSheeterSource.Ruleset<'root' | 'disabled'> = {
     $before: {
