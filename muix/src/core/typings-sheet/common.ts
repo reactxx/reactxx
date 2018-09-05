@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TCommonStyles } from './common-styles'
+import { TCommonStyles } from '../sheeter/common-styles'
 
 export namespace TCommon {
 

@@ -22,18 +22,18 @@ export const compileRuleset = (rs: Ruleset, rulesetName?: string) => {
 
 export const compileClassName = (rs: Ruleset) => compileRuleset(rs, 'className')
 
-export const compileSheet = <Keys extends string = string>(sheet: TSheeterSource.Sheet<Keys>) => {
+export const compileSheet = (sheet: TSheeterSource.Sheet) => {
     if (!sheet) return null
-    const res: TSheeterCompiled.Sheet<Keys> = {} as any
+    const res: TSheeterCompiled.Sheet = {} as any
     for (const p in sheet) res[p] = compileRuleset(sheet[p], p)
     return res
 }
 
 export function isCompiledRuleset(obj: Object): obj is TSheeterCompiled.Ruleset {
-    return obj[TSheeterCompiled.TypedInterfaceProp] === TSheeterCompiled.TypedInterfaceTypes.compiled
+    return obj && obj[TSheeterCompiled.TypedInterfaceProp] === TSheeterCompiled.TypedInterfaceTypes.compiled
 }
 export function isValues(obj): obj is TSheeterCompiled.Values {
-    if (!Array.isArray(obj)) return false
+    if (!obj || !Array.isArray(obj)) return false
     if (obj.length===0) return true
     return window.isWeb ? typeof obj[0] === 'string' : obj[0][TSheeterCompiled.TypedInterfaceProp] === TSheeterCompiled.TypedInterfaceTypes.nativeValue
 }
@@ -44,7 +44,7 @@ export function isValues(obj): obj is TSheeterCompiled.Values {
 //*********************************************************
 const DEV_MODE = process.env.NODE_ENV === 'development'
 
-type Node = TSheeterSource.RulesTree<string>
+type Node = TSheeterSource.RulesetInner
 
 type CompileProc = (
     list: TSheeterCompiled.RulesetList, ruleset: Node, path: string,
@@ -98,7 +98,7 @@ const wrapPseudoPrefixes = (rules: {}, pseudoPrefixes: string[]) => {
     return res
 }
 
-const pushToList = (list: TSheeterCompiled.RulesetList, ruleset: TSheeterSource.RulesTree<string>, conditions: TSheeterCompiled.Conditions, path: string) => {
+const pushToList = (list: TSheeterCompiled.RulesetList, ruleset: TSheeterSource.RulesetInner, conditions: TSheeterCompiled.Conditions, path: string) => {
     if (!ruleset) return
     if (DEV_MODE)
         list.push({ rules: rulesetCompiler(ruleset), conditions, path, rulesTrace: makeTrace(ruleset) })

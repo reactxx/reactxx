@@ -151,5 +151,3 @@ export namespace TCommonStyles {
   export type Ruleset<T extends RulesetNativeIds = 'Text'> = RulesetWeb | RulesetNative<T>
 
 }
-
-//export const fake = 0

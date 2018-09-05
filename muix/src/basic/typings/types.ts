@@ -13,19 +13,21 @@ export namespace Types {
   *******************************************/
 
   //*************** Cross platform ruleset for web and native
-  export interface RulesetXPureLow<T extends TCommonStyles.RulesetNativeIds = 'Text'> {
+  export interface RulesetXPureLow<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> {
     $native?: TCommonStyles.RulesetNative<T> // native specific rules
     $web?: TCommonStyles.RulesetWeb // web specific rules
-    $before?: RulesetX<T>
-    $after?: RulesetX<T>
-    //$props?: PropsInRulesetX<R>
+    $before?: RulesetX<T, R>
+    $after?: RulesetX<T, R>
+    //AddIns
+    $mediaq?: { [query: string]: RulesetX<T> }
+    $whenUsed?: Types.PartialSheetX<R>
   }
 
-  export type RulesetXPure<T extends TCommonStyles.RulesetNativeIds = 'Text'> =
+  export type RulesetXPure<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
-    RulesetXPureLow<T>
+    RulesetXPureLow<T, R>
 
-  export type RulesetX<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> = RulesetXPure<T> & TAddIn.RulesetAddInX<T, R>
+  export type RulesetX<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> = RulesetXPure<T, R> & TAddIn.RulesetAddInX<T, R>
 
   export interface ViewRulesetX extends RulesetX<'View'> { }
   export interface TextRulesetX extends RulesetX<'Text'> { }
@@ -47,8 +49,6 @@ export namespace Types {
     theme: TCommon.ThemeBase
   }
 
-  //export type OverwriteShape<R extends Shape> = PartialOverwrite<ShapeDefault, R>
-
   /******************************************
     COMPONENT SHEET
   *******************************************/
@@ -65,10 +65,6 @@ export namespace Types {
   export type SheetCreatorX<R extends Shape = Shape> = themeCreator<R, SheetX<R>>
 
   //******************** Platform specific sheet
-  //export type SheetWeb<R extends Shape = Shape> = Record<(keyof TCommon.getCommon<R>) | TCommon.getWeb<R>, TCommonStyles.RulesetWeb>
-  //export type SheetNative<R extends Shape = Shape> =
-  //  { [P in keyof TCommon.getCommon<R>]: TCommonStyles.RulesetNative<TCommon.getCommon<R>[P]> } &
-  //  { [P in keyof TCommon.getNative<R>]: TCommonStyles.RulesetNative<TCommon.getNative<R>[P]> }
   export type RulesetNamesWeb<R extends Shape = Shape> = keyof TCommon.getCommon<R> | TCommon.getWeb<R>
   export type RulesetNamesNative<R extends Shape = Shape> = keyof TCommon.getCommon<R> | keyof TCommon.getNative<R>
   export type RulesetNames<R extends Shape = Shape> = keyof TCommon.getCommon<R> | TCommon.getWeb<R> | keyof TCommon.getNative<R>
@@ -76,7 +72,6 @@ export namespace Types {
   export type SheetWeb<R extends Shape = Shape> = PartialRecord<RulesetNamesWeb<R>, SheeterRuleset>
   export type SheetNative<R extends Shape = Shape> = PartialRecord<RulesetNamesNative<R>, SheeterRuleset>
   export type Sheet<R extends Shape = Shape> = PartialRecord<RulesetNames<R>, SheeterRuleset>
-  //export type PartialSheet<R extends Shape> = Partial<SheetWeb<R>> | Partial<SheetNative<R>>
 
   /******************************************
       CREATORS
@@ -113,10 +108,6 @@ export namespace Types {
 
   export type omitPropNames = 'system' | 'style' | 'classes' | 'className' | keyof TAddIn.CodeProps
 
-  //type TMergeRulesetsNative<T extends TCommonStyles.RulesetNativeIds = 'View'> = (...rulesets/*all used rulesets*/) => TCommonStyles.RulesetNative<T>
-  //type TMergeRulesetsWeb<T extends 'Web'> = (...rulesets) => TCommonStyles.RulesetWeb
-  //type TMergeRulesets<T extends {}> = (...rulesets) => T
-
   export type TMergeRulesetsResult<T extends TCommonStyles.RulesetNativeIds | 'Web' | {}> =
     T extends TCommonStyles.RulesetNativeIdsLow ? TCommonStyles.RulesetNative<T> :
     T extends 'Web' ? TCommonStyles.RulesetWeb : T
@@ -128,7 +119,6 @@ export namespace Types {
       mergeRulesets?: <T extends TCommonStyles.RulesetNativeIds | 'Web' | {}>(...rulesets) => TMergeRulesetsResult<T>
     } &
     TEventsX<R>  // events passed to cross platform component, used in custom component
-  //& TAddIn.PropsX<R>
 
 
   // *** web
@@ -171,7 +161,6 @@ export namespace Types {
       classNames?: <T extends TCommonStyles.RulesetNativeIds | 'Web' | {}> (...rulesets) => TMergeRulesetsResult<T>
       classNamesStr?: (...rulesets) => string
       classNamesAny?: (Component, ...rulesets) => string | TMergeRulesetsResult<any>
-      //addIns?: Sheeter.AddIns,
       $ignore?: boolean
       $constant?: boolean
       $developer_flag?: boolean
@@ -201,19 +190,7 @@ export namespace Types {
   export type CodeComponentType<R extends Shape = Shape> = React.ComponentType<CodeProps<R>>
 
   /******************************************
-      $props IN RULESETs
-   *******************************************/
-  //export type WithoutStylesPropsX<R extends Shape = Shape> = Partial<Overwrite<TCommon.getProps<R>, {
-  //  $web?: Partial<TCommon.getPropsWeb<R>> //web specific style
-  //  $native?: Partial<TCommon.getPropsNative<R>> //native specific style
-  //  style?: never
-  //  classes?: never
-  //  className?: never
-  //}>>
-
-
-  /******************************************
-      OPRIONS AND STYLES FROM PROPS
+      OPTIONS AND STYLES FROM PROPS
    *******************************************/
 
   export interface SeparatedProps {
@@ -250,11 +227,7 @@ export namespace Types {
 
   export interface OnPressAllWeb { onClick?: React.MouseEventHandler<Element>; onMouseDown?: React.MouseEventHandler<Element>; onMouseUp?: React.MouseEventHandler<Element> }
 
-  //export type NativeEvent<R extends Types.Shape = Types.Shape> = (par: NativeEventPar<R>) => void
   export interface NativeEventPar<R extends Types.Shape = Types.Shape> extends ReactN.GestureResponderEvent { current?: CodeProps<R> }
   export interface OnPressAllNative { onPress?: () => void; onPressIn?: () => void; onPressOut?: () => void; onLongPress?: () => void }
 
 }
-
-
-//export const fakeTypes = 0

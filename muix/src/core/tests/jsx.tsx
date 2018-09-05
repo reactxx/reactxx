@@ -6,7 +6,7 @@ const style = compileClassName({
     color: 'red'
 })
 
-const sheet = compileSheet<'root' | 'disabled'>({
+const sheet = compileSheet({
     root: {
         color: 'gray'
     },
@@ -18,11 +18,11 @@ const sheet = compileSheet<'root' | 'disabled'>({
 const root = classNames(style, sheet.root, sheet.disabled, { fontWeight: 'bold' })
 
 const App: React.SFC = props => <div>
-    <h1 css={[sheet.root, style, sheet.disabled]}>HALLO</h1>
-    <h1 css={root}>HALLO</h1>
-    <h1 css={style}>HALLO</h1>
-    <h1 css={[style, { fontWeight: 'normal' }]}>HALLO</h1>
-    <h1 css={[root, { fontWeight: 'normal' }]}>HALLO</h1>
+    <h1 classNamex={[sheet.root, style, sheet.disabled]}>HALLO</h1>
+    <h1 classNamex={root}>HALLO</h1>
+    <h1 classNamex={style}>HALLO</h1>
+    <h1 classNamex={[style, { fontWeight: 'normal' }]}>HALLO</h1>
+    <h1 classNamex={[root, { fontWeight: 'normal' }]}>HALLO</h1>
     {/*
     */}
 </div>

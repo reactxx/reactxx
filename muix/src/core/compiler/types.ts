@@ -1,8 +1,38 @@
+// https://stackoverflow.com/questions/40093655/how-do-i-add-attributes-to-existing-html-elements-in-typescript-jsx
+// https://github.com/Microsoft/TypeScript/issues/10859
+declare module 'react' {
+  interface HTMLAttributes<T> {
+    //xclassName?: ClassName | ClassName[]
+    classNamex?: ClassName | ClassName[]
+    stylex?
+    onClickx?: never
+    onMouseDownx?: never
+    onMouseUpx?: never
+    
+    onClick?: never
+    onMouseDown?: never
+    onMouseUp?: never
+    //className?: never
+  }
+  interface SVGAttributes<T> {
+    classNamex?: ClassName | ClassName[]
+    stylex?
+    onClickx?: never
+    onMouseDownx?: never
+    onMouseUpx?: never
+
+    onClick?: never
+    onMouseDown?: never
+    onMouseUp?: never
+  }
+}
+
+
 //****************************
 // TYPINGS
 //****************************
 
-export type RulesetCompiler = (ruleset: TSheeterSource.Rules<string>) => TSheeterCompiled.Values
+export type RulesetCompiler = (ruleset: TSheeterSource.RulesetCommon) => TSheeterCompiled.Values
 export type NormalizeClassNames = (value: TSheeterCompiled.Values) => TSheeterCompiled.PlatformValues
 
 export interface Query { // 
@@ -19,40 +49,40 @@ export type AnimationQuery = 'opened' | 'closed'
 
 export type TValue = number | string
 
-export type Ruleset<Keys extends string = string> = TSheeterSource.Ruleset<Keys> | TSheeterCompiled.Ruleset
+export type Ruleset<Keys extends string = string> = TSheeterSource.Ruleset | TSheeterCompiled.Ruleset
 
 export type ClassName = TSheeterSource.Ruleset | TSheeterCompiled.Ruleset | TSheeterCompiled.Values
 
 
-  //********** SOURCE
+//********** SOURCE
 
-  export namespace TSheeterSource {
+export namespace TSheeterSource {
 
-    export type Sheet<Keys extends string> = Record<Keys, Ruleset<Keys>>
-    export type Ruleset<Keys extends string = string> = Rules<Keys> & RulesRoot<Keys>
+  export type Sheet = Record<string, Ruleset>
+  export type Ruleset<Keys extends string = string> = RulesetCommon & RulesetLow
 
-    export type PartialSheet<Keys extends string> = PartialRecord<Keys, RulesTree<Keys>>
+  export type PartialSheet = PartialRecord<string, RulesetInner>
 
-    export type RulesTree<Keys extends string> = Rules<Keys> & RulesAddIn<Keys>
+  export type RulesetInner = RulesetCommon & RulesetInnerLow
 
-    export interface Rules<Keys extends string> {
-      // e.g. "color: 'red'"  or "':hover': { color: 'blue' }" or "':hover': { $mediaq: { '-640': {color: green} } }"
-      [ruleName: string]: TValue | RulesTree<Keys>
-    }
-
-    export interface RulesRoot<Keys extends string> extends RulesAddIn<Keys> {
-      name?: string
-      $before?: RulesTree<Keys>
-      $web?: RulesTree<Keys>
-      $native?: RulesTree<Keys>
-      $after?: RulesTree<Keys>
-    }
-    export interface RulesAddIn<Keys extends string> {
-      $whenUsed?: PartialSheet<Keys>
-      $mediaq?: Record<string, RulesTree<Keys>> // record key has format eg. '-640' or '640-1024' or '1024-'
-      $animation?: any
-    }
+  export interface RulesetCommon {
+    // e.g. "color: 'red'"  or "':hover': { color: 'blue' }" or "':hover': { $mediaq: { '-640': {color: green} } }"
+    [ruleName: string]: TValue | RulesetInner
   }
+
+  export interface RulesetLow extends RulesetInnerLow {
+    name?: string
+    $before?: RulesetInner
+    $web?: RulesetInner
+    $native?: RulesetInner
+    $after?: RulesetInner
+  }
+  export interface RulesetInnerLow {
+    $whenUsed?: PartialSheet
+    $mediaq?: Record<string, RulesetInner> // record key has format eg. '-640' or '640-1024' or '1024-'
+    $animation?: any
+  }
+}
 
 export namespace TSheeterCompiled {
 

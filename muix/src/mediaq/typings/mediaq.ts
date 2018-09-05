@@ -20,7 +20,7 @@ export namespace TMediaQ {
 
   // $mediaq ruleset part. 'query' has '-640' or '640-1024' or '1024-' format
   export interface MediaQRulesetPartX<T extends TCommonStyles.RulesetNativeIds = 'Text'> {
-    $mediaq?: { [query: string]: Types.RulesetX<T> }
+    //$mediaq?: { [query: string]: Types.RulesetX<T> }
   }
 
   //*** Platform dependent
