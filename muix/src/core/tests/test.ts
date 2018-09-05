@@ -1,7 +1,7 @@
 import { compileRuleset } from '../compiler/compiler'
-import { TSheeterSource, TSheeterCompiled } from '../compiler/types'
+import { TSheeter } from '../typings/sheeter'
 
-const merging: TSheeterSource.Ruleset<'root' | 'disabled'> = {
+const merging: TSheeter.Ruleset<'root' | 'disabled'> = {
     $before: {
         before: 'before',
         self: 'before',
@@ -18,9 +18,9 @@ const merging: TSheeterSource.Ruleset<'root' | 'disabled'> = {
     $after: {
         after: 'after',
     },
-}
+} as any
 
-const whenUsed: TSheeterSource.Ruleset<'root' | 'disabled'> = {
+const whenUsed: TSheeter.Ruleset<'root' | 'disabled'> = {
     $whenUsed: {
         root: {
             plain: 'plain',
@@ -33,9 +33,9 @@ const whenUsed: TSheeterSource.Ruleset<'root' | 'disabled'> = {
             }
         },
     }
-}
+} as any
 
-const whenUsedRecursion: TSheeterSource.Ruleset<'root' | 'disabled'> = {
+const whenUsedRecursion: TSheeter.Ruleset<'root' | 'disabled'> = {
     rule: 'rule',
     $whenUsed: {
         root: {
@@ -74,7 +74,7 @@ const whenUsedRecursion: TSheeterSource.Ruleset<'root' | 'disabled'> = {
             }
         },
     }
-}
+} as any
 
 
 

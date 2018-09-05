@@ -1,5 +1,5 @@
 export * from './compiler/native'
 export * from './compiler/compiler'
 export * from './compiler/query'
-export * from './compiler/types'
+export * from './typings/compiled'
 export * from './compiler/jsx'

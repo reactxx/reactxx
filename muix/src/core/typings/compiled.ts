@@ -1,39 +1,11 @@
-// https://stackoverflow.com/questions/40093655/how-do-i-add-attributes-to-existing-html-elements-in-typescript-jsx
-// https://github.com/Microsoft/TypeScript/issues/10859
-declare module 'react' {
-  interface HTMLAttributes<T> {
-    //xclassName?: ClassName | ClassName[]
-    classNamex?: ClassName | ClassName[]
-    stylex?
-    onClickx?: never
-    onMouseDownx?: never
-    onMouseUpx?: never
-    
-    onClick?: never
-    onMouseDown?: never
-    onMouseUp?: never
-    //className?: never
-  }
-  interface SVGAttributes<T> {
-    classNamex?: ClassName | ClassName[]
-    stylex?
-    onClickx?: never
-    onMouseDownx?: never
-    onMouseUpx?: never
-
-    onClick?: never
-    onMouseDown?: never
-    onMouseUp?: never
-  }
-}
-
+import { TSheeter } from './sheeter'
 
 //****************************
 // TYPINGS
 //****************************
 
-export type RulesetCompiler = (ruleset: TSheeterSource.RulesetCommon) => TSheeterCompiled.Values
-export type NormalizeClassNames = (value: TSheeterCompiled.Values) => TSheeterCompiled.PlatformValues
+export type RulesetCompiler = (ruleset: TSheeter.RulesetInner) => TCompiler.Values
+export type NormalizeClassNames = (value: TCompiler.Values) => TCompiler.PlatformValues
 
 export interface Query { // 
   whenUsed?: WhenUsedQuery // map of used ruleset names
@@ -49,9 +21,9 @@ export type AnimationQuery = 'opened' | 'closed'
 
 export type TValue = number | string
 
-export type Ruleset<Keys extends string = string> = TSheeterSource.Ruleset | TSheeterCompiled.Ruleset
+// export type Ruleset<Keys extends string = string> = TSheeterSource.Ruleset | TCompiler.Ruleset
 
-export type ClassName = TSheeterSource.Ruleset | TSheeterCompiled.Ruleset | TSheeterCompiled.Values
+// export type ClassName = TSheeterSource.Ruleset | TCompiler.Ruleset | TCompiler.Values
 
 
 //********** SOURCE
@@ -84,7 +56,7 @@ export namespace TSheeterSource {
   }
 }
 
-export namespace TSheeterCompiled {
+export namespace TCompiler {
 
   export const TypedInterfaceProp = '``'
 

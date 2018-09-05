@@ -1,9 +1,10 @@
 import { renderer } from 'reactxx-fela'
-import { Query, Ruleset, RulesetCompiler, NormalizeClassNames, TSheeterCompiled } from './types'
+import { Query, RulesetCompiler, NormalizeClassNames, TCompiler } from '../typings/compiled'
 import {queryClassNames, classNames} from './query'
+import { TSheeter } from '../typings/sheeter'
 
-export type QueryClassNamesWeb = (query: Query, ...rulesets: Ruleset[]) => TSheeterCompiled.ValueWeb[]
-export type ClassNamesWeb = (...rulesets: Ruleset[]) => TSheeterCompiled.ValueWeb[]
+export type QueryClassNamesWeb = (query: Query, ...rulesets: TSheeter.Ruleset[]) => TCompiler.ValueWeb[]
+export type ClassNamesWeb = (...rulesets: TSheeter.Ruleset[]) => TCompiler.ValueWeb[]
 
 
 const _queryClassNames = queryClassNames as QueryClassNamesWeb
@@ -14,11 +15,11 @@ export {_queryClassNames as queryClassNames, _classNames as classNames}
 export const rulesetCompiler: RulesetCompiler = renderer.renderRuleEx
 
 // apply LAST WIN strategy for classnames
-export const normalizeClassNames: NormalizeClassNames = (values: TSheeterCompiled.Values) => {
-    const res: TSheeterCompiled.ValueWeb[] = []
+export const normalizeValues: NormalizeClassNames = (values: TCompiler.Values) => {
+    const res: TCompiler.ValueWeb[] = []
     const usedPropIds: { [propId: string]: boolean } = {}
     for (let k = values.length - 1; k >= 0; k--) {
-        const value = values[k] as TSheeterCompiled.ValueWeb
+        const value = values[k] as TCompiler.ValueWeb
         const propId = renderer.propIdCache[value]
         if (!propId) continue
         if (usedPropIds[propId]) continue

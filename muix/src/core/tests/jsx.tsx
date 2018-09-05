@@ -1,28 +1,61 @@
-/** @jsx ReactXX */
-import { ReactXX, classNames, queryClassNames, compileClassName, compileSheet } from 'reactxx-core'
+/** @jsx createElement */
+import { createElement, classNames, TSheeter, queryClassNames, compileRuleset, compileSheet } from 'reactxx-core'
+
+interface Shape extends TSheeter.ShapeAncestor<'webOnly'> {
+    common: TSheeter.ShapeTexts<'root'> & TSheeter.ShapeViews<'disabled'>
+    native: TSheeter.ShapeViews<'nativeOnly'>
+}
 
 // className?: className?: {} | string | ({} | string)[]
-const style = compileClassName({
+const style = compileRuleset({
     color: 'red'
 })
-
-const sheet = compileSheet({
+const sheetSrc: TSheeter.Sheet<Shape> = {
     root: {
         color: 'gray'
     },
-    disabled: { 
-        
-    }
-})
+    disabled: {
+        margin: 4,
+        $web: {
+            ':hover': {
+                $mediaq: {},
+                $whenUsed: {
+                    root: {},
+                }
+            },
 
-const root = classNames(style, sheet.root, sheet.disabled, { fontWeight: 'bold' })
+        }
+    },
+    webOnly: {
+        $web: {
+            ':hover': {
+                $mediaq: {},
+                $whenUsed: {
+                    root: {},
+                }
+            },
+
+        }
+    },
+    nativeOnly: {
+        $native: {
+
+        }
+    }
+}
+
+const sheet = compileSheet(sheetSrc as any)
+
+let fromRules, fromCompiled, r, c
+
+const root = classNames(style, sheet.root, sheet.disabled, r({ fontWeight: 'bold' }))
 
 const App: React.SFC = props => <div>
-    <h1 classNamex={[sheet.root, style, sheet.disabled]}>HALLO</h1>
-    <h1 classNamex={root}>HALLO</h1>
-    <h1 classNamex={style}>HALLO</h1>
-    <h1 classNamex={[style, { fontWeight: 'normal' }]}>HALLO</h1>
-    <h1 classNamex={[root, { fontWeight: 'normal' }]}>HALLO</h1>
+    <h1 classNameX={[sheet.root, style, sheet.disabled]}>HALLO</h1>
+    <h1 classNameX={root}>HALLO</h1>
+    <h1 classNameX={style}>HALLO</h1>
+    <h1 classNameX={[style, { fontWeight: 'normal' }]}>HALLO</h1>
+    <h1 classNameX={[root, { fontWeight: 'normal' }]}>HALLO</h1>
     {/*
     */}
 </div>

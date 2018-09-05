@@ -1,6 +1,6 @@
 ﻿import React from 'React';
-import CSS from 'csstype';
 import ReactN from 'react-native';
+import CSS from 'csstype';
 
 export namespace TCommonStyles {
 
@@ -135,19 +135,22 @@ export namespace TCommonStyles {
 
   //******************** Native ruleset which are compatible with web
   export type RulesetCommon<T extends RulesetNativeIds> =
-    T extends 'Text' ? TCommonStyles.TextStyle :
-    T extends 'Image' ? TCommonStyles.ImageStyle :
     T extends 'View' ? TCommonStyles.ViewStyle :
-    TCommonStyles.ViewStyle
+    T extends 'Image' ? TCommonStyles.ImageStyle :
+    TCommonStyles.TextStyle
 
   //******************** Platform specific ruleset
   export type RulesetNative<T extends RulesetNativeIds = unknown> =
-    T extends 'Text' ? ReactN.TextStyle :
-    T extends 'Image' ? ReactN.ImageStyle :
     T extends 'View' ? ReactN.ViewStyle :
-    ReactN.ViewStyle
+    T extends 'Image' ? ReactN.ImageStyle :
+    ReactN.TextStyle
 
-  export type RulesetWeb = React.CSSProperties & { [P in CSS.SimplePseudos]?: React.CSSProperties }
-  export type Ruleset<T extends RulesetNativeIds = 'Text'> = RulesetWeb | RulesetNative<T>
+  export type NativeProperties<T extends RulesetNativeIds = unknown> =
+    T extends 'View' ? ReactN.ViewProperties :
+    T extends 'Image' ? ReactN.ImageProperties :
+    ReactN.TextProperties
+
+  export type RulesetWeb = React.CSSProperties & { [P in CSS.Pseudos]?: React.CSSProperties }
+
 
 }
