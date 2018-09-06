@@ -1,10 +1,11 @@
+// platform dependent exports
 export * from './compiler/web'
-export * from './compiler/compiler'
-export * from './typings/compiled'
-export * from './compiler/jsx'
+export * from './extends/web'
 
-export * from './typings/sheeter'
-export * from './typings/common-styles'
+export * from './typings/index'
+
+export * from './compiler/ruleset'
+export * from './extends/class-names'
 
 //export { run as Test } from './tests/test'
 export { default as Test } from './tests/jsx'

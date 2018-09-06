@@ -1,6 +1,6 @@
-import { RulesetCompiler, NormalizeClassNames, TValue, TCompiler } from '../typings/compiled'
+import { TExtends, TCompiler, TValue } from '../typings/index'
 
-export const rulesetCompiler: RulesetCompiler = style => {
+export const rulesetCompiler: TExtends.RulesetCompiler = style => {
     if (!style) return []
     const res: TCompiler.Values = []
     for (const p in style) {
@@ -9,15 +9,3 @@ export const rulesetCompiler: RulesetCompiler = style => {
     }
     return res
 }
-
-// apply LAST WIN strategy for classnames
-export const normalizeValues: NormalizeClassNames = (values: TCompiler.Values) => {
-    const res: TCompiler.PlatformValuesNative = {}
-    for (let k = values.length - 1; k >= 0; k--) {
-        const value = values[k] as TCompiler.ValueNative
-        if (typeof res[value.propId] !== 'undefined') continue
-        res[value.propId] = value.value
-    }
-    return res
-}
-

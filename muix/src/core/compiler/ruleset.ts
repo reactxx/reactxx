@@ -1,15 +1,15 @@
 import { deepMerge, isObject } from '../utils/deep-merge'
-import { TCompiler, TSheeter, TCommonStyles } from '../typings/index'
+import { TCompiler, TSheeter, TCommonStyles, TExtends, TValue } from '../typings/index'
 
+import 'reactxx-fela'
 // platform dependent import
 import { rulesetCompiler } from 'reactxx-core'
 
 export const compileRuleset = <T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape>(
-    rs: TSheeter.Ruleset<T, R>,
+    ruleset: TSheeter.Ruleset<T, R>,
     rulesetName?: string
 ) => {
-    if (!rs) return null
-    const ruleset = rs
+    if (!ruleset) return null
     const { $before, $web, $native, $after } = ruleset
     const name = rulesetName || ruleset.name || 'unknown'
 
@@ -61,18 +61,27 @@ type CompileProc = (
 const compileTree: CompileProc = (list, ruleset, path, pseudoPrefixes, conditions, rulesetToQueue) => {
 
     // push to ruleset list
-    pushToList(list, rulesetToQueue, conditions, path)
+    if (rulesetToQueue) pushToList(list, rulesetToQueue, conditions, path)
 
-    // parse root addIns
-    const { $whenUsed, $mediaq, $animation } = ruleset
-    const parts = [[compileWhenUsed, $whenUsed], [compileMediaQ, $mediaq], [compileAnimation, $animation]].filter(p => p[1])
-    parts.forEach(part => part[0](list, part[1], path, pseudoPrefixes, conditions))
+    // compile root addIns
+    const { $whenUsed, $mediaq, $animation } = ruleset;
 
-    // parse addIns sub-rules
+    const addIns =
+        [[compileWhenUsed, $whenUsed],
+        [compileMediaQ, $mediaq],
+        [compileAnimation, $animation]]
+
+    addIns
+        .filter(p => p[1])
+        .forEach(part => part[0](
+            list, part[1], path, pseudoPrefixes, conditions)
+        )
+
+    // parse pseudo rules (:hover etc.)
     for (const p in ruleset) {
         const value = ruleset[p] as TSheeter.RulesetInner
         if (p.charAt(0) === '$' || !isObject(value)) continue
-        // null at the end => don't push to list, just parse addIns
+        // null at compileTree(...,null) => don't push to list, just parse addIns
         compileTree(list, value, `${path}/${p}`, [...pseudoPrefixes, p], conditions, null)
     }
 

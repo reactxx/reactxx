@@ -8,12 +8,6 @@ SystemJS.config({
     "": {
       "defaultExtension": "js"
     },
-    "deploy/lib/material-ui/ButtonBase/": {
-      "main": "index.js"
-    },
-    "deploy/lib/material-ui/Button/": {
-      "main": "index.js"
-    }
   },
   map: {
     "reactxx-sheeter": "deploy/lib/sheeter/index",

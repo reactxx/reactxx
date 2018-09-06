@@ -1,16 +1,17 @@
 /** @jsx createElement */
-import { createElement, classNames, TSheeter, queryClassNames, compileRuleset, compileSheet } from 'reactxx-core'
+import { createElement, classNames, TSheeter, compileRuleset, compileSheet } from 'reactxx-core'
 
-interface Shape extends TSheeter.ShapeAncestor<'webOnly'> {
+interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'> & TSheeter.ShapeViews<'disabled'>
     native: TSheeter.ShapeViews<'nativeOnly'>
+    web: TSheeter.ShapeWeb<'webOnly'>
 }
 
 // className?: className?: {} | string | ({} | string)[]
 const style = compileRuleset({
     color: 'red'
 })
-const sheetSrc: TSheeter.Sheet<Shape> = {
+const sheetSrc: TSheeter.Sheet<Shape> = { 
     root: {
         color: 'gray'
     },
@@ -20,7 +21,19 @@ const sheetSrc: TSheeter.Sheet<Shape> = {
             ':hover': {
                 $mediaq: {},
                 $whenUsed: {
-                    root: {},
+                    root: {
+                        $before: {},
+                        $web: {
+                            ':hover': {
+                                
+                            }
+                        },
+                        $native: {
+                            
+                        },
+                        
+
+                    },
                 }
             },
 
@@ -30,9 +43,7 @@ const sheetSrc: TSheeter.Sheet<Shape> = {
         $web: {
             ':hover': {
                 $mediaq: {},
-                $whenUsed: {
-                    root: {},
-                }
+                
             },
 
         }
@@ -41,14 +52,12 @@ const sheetSrc: TSheeter.Sheet<Shape> = {
         $native: {
 
         }
-    }
+    },
 }
 
-const sheet = compileSheet(sheetSrc as any)
+const sheet = compileSheet(sheetSrc)
 
-let fromRules, fromCompiled, r, c
-
-const root = classNames(style, sheet.root, sheet.disabled, r({ fontWeight: 'bold' }))
+const root = classNames(style, sheet.root, sheet.disabled, { fontWeight: 'bold' })
 
 const App: React.SFC = props => <div>
     <h1 classNameX={[sheet.root, style, sheet.disabled]}>HALLO</h1>

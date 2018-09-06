@@ -151,6 +151,6 @@ export namespace TCommonStyles {
     ReactN.TextProperties
 
   export type RulesetWeb = React.CSSProperties & { [P in CSS.Pseudos]?: React.CSSProperties }
-
+  export type Ruleset = RulesetWeb | RulesetNative
 
 }

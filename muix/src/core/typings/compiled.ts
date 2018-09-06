@@ -1,60 +1,4 @@
-import { TSheeter } from './sheeter'
-
-//****************************
-// TYPINGS
-//****************************
-
-export type RulesetCompiler = (ruleset: TSheeter.RulesetInner) => TCompiler.Values
-export type NormalizeClassNames = (value: TCompiler.Values) => TCompiler.PlatformValues
-
-export interface Query { // 
-  whenUsed?: WhenUsedQuery // map of used ruleset names
-  mediaq?: MediaQQuery // actual width
-  animation?: AnimationQuery // animation state: opened x closed
-}
-
-export type WhenUsedQuery = Record<string, boolean>
-
-export type MediaQQuery = number
-
-export type AnimationQuery = 'opened' | 'closed'
-
-export type TValue = number | string
-
-// export type Ruleset<Keys extends string = string> = TSheeterSource.Ruleset | TCompiler.Ruleset
-
-// export type ClassName = TSheeterSource.Ruleset | TCompiler.Ruleset | TCompiler.Values
-
-
-//********** SOURCE
-
-export namespace TSheeterSource {
-
-  export type Sheet = Record<string, Ruleset>
-  export type Ruleset<Keys extends string = string> = RulesetCommon & RulesetLow
-
-  export type PartialSheet = PartialRecord<string, RulesetInner>
-
-  export type RulesetInner = RulesetCommon & RulesetInnerLow
-
-  export interface RulesetCommon {
-    // e.g. "color: 'red'"  or "':hover': { color: 'blue' }" or "':hover': { $mediaq: { '-640': {color: green} } }"
-    [ruleName: string]: TValue | RulesetInner
-  }
-
-  export interface RulesetLow extends RulesetInnerLow {
-    name?: string
-    $before?: RulesetInner
-    $web?: RulesetInner
-    $native?: RulesetInner
-    $after?: RulesetInner
-  }
-  export interface RulesetInnerLow {
-    $whenUsed?: PartialSheet
-    $mediaq?: Record<string, RulesetInner> // record key has format eg. '-640' or '640-1024' or '1024-'
-    $animation?: any
-  }
-}
+import { TValue } from './index'
 
 export namespace TCompiler {
 
@@ -114,9 +58,9 @@ export namespace TCompiler {
     propId: string // property name
     value: TValue // propert value
   }
+  export type ValueNatives = ValueNative[]
 
   export type PlatformValues = PlatformValuesWeb | PlatformValuesNative
   export type PlatformValuesWeb = string
   export type PlatformValuesNative = Record<string, string | number>
 }
-

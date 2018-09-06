@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 import CSS from 'csstype';
 
-import { TCommonStyles } from './common-styles'
+import { TCommonStyles } from './index'
 
 export namespace TSheeter {
 
@@ -10,19 +10,20 @@ export namespace TSheeter {
     RULESET
   *******************************************/
 
-  export type RulesetWeb<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> = React.CSSProperties & { [P in CSS.Pseudos]?: RulesetInnerLow<T, R> }
+  export type RulesetWeb<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
+    React.CSSProperties & { [P in CSS.Pseudos]?: RulesetInnerLow<T, R> }
 
   //*************** Cross platform ruleset for web and native
   export type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
     RulesetLow<T, R>
 
-  export interface RulesetLow<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> extends RulesetInnerLow<T, R> {
+  export interface RulesetLow<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> extends
+    RulesetAddWebNative<T, R>,
+    RulesetInnerLow<T, R> {
     name?: string
-    $native?: TCommonStyles.RulesetNative<T> & RulesetInnerLow<T, R>// native specific rules
-    $web?: RulesetWeb<T, R> & RulesetInnerLow<T, R> // web specific rules
-    $before?: RulesetInner<T, R>
-    $after?: RulesetInner<T, R>
+    $before?: RulesetInner<T, R> & RulesetAddWebNative<T, R>
+    $after?: RulesetInner<T, R> & RulesetAddWebNative<T, R>
   }
 
   export type RulesetInner<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
@@ -30,29 +31,38 @@ export namespace TSheeter {
     RulesetInnerLow<T, R>
 
   export interface RulesetInnerLow<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> {
+    //$whenUsed?: PartialSheet<R>
     $whenUsed?: PartialSheet<R>
-    $mediaq?: Record<string, RulesetInner<T, R>> // record key has format eg. '-640' or '640-1024' or '1024-'
+    $mediaq?: Record<string, Ruleset<T, R>> // record key has format eg. '-640' or '640-1024' or '1024-'
     $animation?: any
   }
 
-  // export interface ViewRulesetX extends RulesetX<'View'> { }
-  // export interface TextRulesetX extends RulesetX<'Text'> { }
-  // export interface ImageRulesetX extends RulesetX<'Image'> { }
+  export interface RulesetAddWebNative<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> {
+    $native?: TCommonStyles.RulesetNative<T> & RulesetInnerLow<T, R>// native specific rules
+    $web?: RulesetWeb<T, R> & RulesetInnerLow<T, R> // web specific rules
+  }
+
 
   /******************************************
     STYLE
   *******************************************/
 
-  //*************** Cross platform ruleset for web and native
-  export interface StyleLow<T extends TCommonStyles.RulesetNativeIds = 'Text'> {
-    $native?: TCommonStyles.RulesetNative<T> // native specific rules
-    $web?: TCommonStyles.RulesetWeb // web specific rules
+  export type Style<T extends TCommonStyles.RulesetNativeIds = 'Text'> =
+    TCommonStyles.RulesetCommon<T> & StyleLow<T>
+
+  export interface StyleLow<T extends TCommonStyles.RulesetNativeIds = 'Text'> extends
+    StyleInnerLow<T> {
+    $before?: StyleInner<T>
+    $after?: StyleInner<T>
   }
 
-  export type Style<T extends TCommonStyles.RulesetNativeIds = 'Text'> =
-    TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
-    StyleLow<T>
+  export type StyleInner<T extends TCommonStyles.RulesetNativeIds = 'Text'> =
+    TCommonStyles.RulesetCommon<T> & StyleInnerLow<T>
 
+  export interface StyleInnerLow<T extends TCommonStyles.RulesetNativeIds = 'Text'> {
+    $native?: TCommonStyles.RulesetNative<T>
+    $web?: TCommonStyles.RulesetWeb
+  }
 
   /******************************************
       SHEET
@@ -60,10 +70,19 @@ export namespace TSheeter {
 
   export type Sheet<R extends Shape = Shape> = SheetCommon<R> & SheetNative<R> & SheetWeb<R>
   export type PartialSheet<R extends Shape = Shape> = Partial<SheetCommon<R> & SheetNative<R> & SheetWeb<R>>
+  //export type PartialSheet<R extends Shape = Shape> = SheetCommon<R> & SheetNative<R> & SheetWeb<R>
 
-  export type SheetCommon<R extends Shape> = { [P in keyof getCommon<R>]: Ruleset<getCommon<R>[P], R> }
-  export type SheetNative<R extends Shape> = { [P in keyof getNative<R>]: { $native?: TCommonStyles.RulesetNative<getNative<R>[P]> } }
-  export type SheetWeb<R extends Shape> = { [P in getWeb<R>]: { $web?: RulesetWeb<'Text', R> } }
+  export type SheetCommon<R extends Shape> = keyof getCommon<R> extends never ? {} :
+    { [P in keyof getCommon<R>]: Ruleset<getCommon<R>[P], R> }
+  export type SheetNative<R extends Shape> = keyof getNative<R> extends never ? {} :
+    { [P in keyof getNative<R>]: {
+      $native?: TCommonStyles.RulesetNative<getNative<R>[P]> & RulesetInnerLow<getNative<R>[P], R>
+    } }
+  export type SheetWeb<R extends Shape> = getWeb<R> extends never ? {} :
+    { [P in getWeb<R>]: {
+      $web?: RulesetWeb<'Text', R> & RulesetInnerLow<'Text', R>
+    } }
+
 
   /******************************************
     SHAPE
@@ -74,39 +93,40 @@ export namespace TSheeter {
     //**** sheet constrains
     common: EmptyInterface // rulesets (and their native type), which are used in both web and native component code. Rule are compatible with web and native.
     native: EmptyInterface // rulesets, which are used only in native code
-    web: string // ruleset names, which are used only in web code (its type is always React.CSSProperties)
+    web: EmptyInterface // ruleset names, which are used only in web code (its type is always React.CSSProperties)
     //******************** style constrain
     style: TCommonStyles.RulesetNativeIds // for web, style has always React.CSSProperties type
     //**** component property constrains
     props: EmptyInterface // common (web and native) props, excluding events
     propsNative: EmptyInterface // native only props 
     propsWeb: React.HTMLAttributes<Element>// web only props
-    events: TEventsAll | null // common events
+    events: EmptyInterface // common events
   }
 
   // ancestor for Shape inheritance
-  export interface ShapeAncestor<TWeb extends string = null, TEvents extends string = null> {
+  export interface ShapeAncestor {
     common: EmptyInterface
     native: EmptyInterface
-    web: TWeb
+    web: EmptyInterface
     style: unknown
-    events: TEvents
     props: EmptyInterface
     propsNative: ReactN.ViewProperties
     propsWeb: React.DOMAttributes<Element>
+    events: EmptyInterface //ShapeWeb<TEventsAll>
   }
 
   export type getCommon<R extends Shape> = R['common']
   export type getNative<R extends Shape> = R['native']
-  export type getWeb<R extends Shape> = R['web']
+  export type getWeb<R extends Shape> = keyof R['web']
   export type getStyle<R extends Shape> = R['style']
   export type getProps<R extends Shape> = R['props']
   export type getPropsWeb<R extends Shape> = R['propsWeb']
   export type getPropsNative<R extends Shape> = R['propsNative']
-  export type getEvents<R extends Shape = Shape> = R['events']
+  export type getEvents<R extends Shape = Shape> = keyof R['events']
 
   export type ShapeTexts<P extends string> = { [p in P]: 'Text' }
   export type ShapeViews<P extends string> = { [p in P]: 'View' }
+  export type ShapeWeb<P extends string> = { [p in P]: true }
   export type ShapeImages<P extends string> = { [p in P]: 'Image' }
 
   export interface EmptyInterface { }
@@ -119,11 +139,11 @@ export namespace TSheeter {
   //******************** Cross platform component types
 
   export interface PropsLow<R extends Shape = Shape> {
-    style?: Style<getStyle<R>>
+    styleX?: Style<getStyle<R>>
     $web?: Partial<getPropsWeb<R>> //web specific props
     $native?: Partial<getPropsNative<R>> //native specific props
     classes?: PartialSheet<R> // cross platform sheet
-    className?: RulesetInner<getStyle<R>, R>
+    classNameX?: RulesetInner<getStyle<R>, R>
   }
   export type Props<R extends Shape = Shape> =
     PartialOverwrite<getProps<R>, PropsLow<R> & TEventsX<R>>
@@ -144,9 +164,6 @@ export namespace TSheeter {
     OmitPartial<getProps<R> & getPropsWeb<R>, omitPropNames> &
     OnPressAllWeb &
     {
-      // style?: TCommonStyles.RulesetWeb
-      // className?: TCommonStyles.RulesetWeb
-      // classes?: SheetWeb<R>
       style?: { [rule: string]: any }
       className?: { [rule: string]: any } | string
       classes?: { [ruleset: string]: any }

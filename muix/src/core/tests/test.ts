@@ -1,4 +1,4 @@
-import { compileRuleset } from '../compiler/compiler'
+import { compileRuleset } from '../compiler/ruleset'
 import { TSheeter } from '../typings/sheeter'
 
 const merging: TSheeter.Ruleset<'root' | 'disabled'> = {
