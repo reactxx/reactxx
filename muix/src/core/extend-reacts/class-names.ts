@@ -2,7 +2,7 @@ import { TSheeter, TExtends, TCompiler } from '../typings'
 import { compileRuleset, isCompiledRuleset, isValues } from '../compiler/ruleset'
 
 // merge rulesets and apply query to ruleset's conditional parts ($whenUed, $mediaq etc.)
-export const classNamesWithQuery: TExtends.ClassNamesWithQueryProc = (query, ...rulesets) => {
+export const classNamesWithQuery = (query: TExtends.Query, ...rulesets: TExtends.ClassNameItem[]) => {
     if (!rulesets || rulesets.length===0) return [] as TCompiler.Values
     if (isValues(rulesets)) return rulesets
     // when used query par
@@ -27,7 +27,7 @@ export const classNamesWithQuery: TExtends.ClassNamesWithQueryProc = (query, ...
     return [].concat.apply([], values) as TCompiler.Values
 }
 
-export const classNames: TExtends.ClassNamesProc = (...rulesets) => classNamesWithQuery({}, ...rulesets)
+export const classNames = (...rulesets: TExtends.ClassNameItem[]) => classNamesWithQuery({}, ...rulesets)
 
 const testConditions = (conditions: TCompiler.Conditions, query: TExtends.Query) => {
     if (!conditions || conditions.length === 0) return true

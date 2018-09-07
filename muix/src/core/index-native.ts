@@ -1,8 +1,8 @@
 export * from './typings/index'
 
 export * from './compiler/ruleset'
-export * from './extends/class-names'
+export * from './extend-reacts/class-names'
 
 // platform dependent exports
 export * from './compiler/native'
-export * from './extends/native'
+export * from './extend-reacts/native'

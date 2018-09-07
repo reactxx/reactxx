@@ -1,4 +1,5 @@
 import { TValue } from './index'
+import { TSheeter } from './sheeter';
 
 export namespace TCompiler {
 
@@ -13,7 +14,7 @@ export namespace TCompiler {
     [TypedInterfaceProp]: TypedInterfaceTypes
   }
 
-  export type Sheet<Keys extends string = string> = Record<Keys, Ruleset>
+  export type Sheet<R extends TSheeter.Shape = TSheeter.Shape> = { [P in TSheeter.RulesetNamesAll<R>]: Ruleset }
 
   export interface Ruleset extends TypedInterface {
     [TypedInterfaceProp]: TypedInterfaceTypes.compiled

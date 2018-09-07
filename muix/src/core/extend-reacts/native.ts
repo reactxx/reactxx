@@ -1,5 +1,5 @@
 import React from 'react'
-import { TExtends, TCompiler } from '../typings/index'
+import { TExtends, TSheeter, TCompiler } from '../typings'
 /******************************************
   EXTEND REACT NATIVE
 *******************************************/
@@ -28,7 +28,7 @@ declare module 'react-native' {
 
   
   // apply LAST WIN strategy for native style
-export const normalizeValues: TExtends.NormalizeClassNames = (values: TCompiler.Values) => {
+export const normalizeValues = (values: TCompiler.Values) => {
   const res: TCompiler.PlatformValuesNative = {}
   for (let k = values.length - 1; k >= 0; k--) {
       const value = values[k] as TCompiler.ValueNative

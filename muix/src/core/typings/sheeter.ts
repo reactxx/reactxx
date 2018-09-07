@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 import CSS from 'csstype';
 
-import { TCommonStyles } from './index'
+import { TCommonStyles, TCompiler, TExtends } from './index'
 
 export namespace TSheeter {
 
@@ -11,7 +11,7 @@ export namespace TSheeter {
   *******************************************/
 
   export type RulesetWeb<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    React.CSSProperties & { [P in CSS.Pseudos]?: RulesetInnerLow<T, R> }
+    React.CSSProperties & { [P in CSS.Pseudos]?: React.CSSProperties & RulesetInnerLow<T, R> }
 
   //*************** Cross platform ruleset for web and native
   export type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
@@ -135,22 +135,45 @@ export namespace TSheeter {
   /******************************************
      COMPONENT TYPING
   *******************************************/
+  export type WithStyles<R extends Shape = Shape> = (sheet: SheetX<R>) => ComponentTypeX<R>
 
-  //******************** Cross platform component types
+  export type StyleX<R extends Shape = Shape> = Style<TSheeter.getStyle<R>>
+  export type StylesX<R extends Shape = Shape> = StyleX<R> | StyleX<R>[]
 
-  export interface PropsLow<R extends Shape = Shape> {
-    styleX?: Style<getStyle<R>>
+  export type ClassNameItem = TSheeter.Ruleset | TCompiler.Ruleset | TCompiler.Values
+  export type ClassName = ClassNameItem | ClassNameItem[]
+
+  export type SheetX<R extends Shape = Shape> = Sheet<R> | TCompiler.Sheet<R>
+  export type RulesetNamesAll<R extends Shape> = keyof getCommon<R> | keyof getNative<R> | getWeb<R>
+
+  //******************** Cross platform component props
+  export interface CommonProperties<R extends TSheeter.Shape = TSheeter.Shape> {
+    classNameX?: ClassName
+    styleX?: StylesX<R>
+  }
+
+  export interface CommonPropertiesCode<R extends TSheeter.Shape = TSheeter.Shape> {
+    classNameX?: ClassNameItem
+    styleX?: StyleX<R>
+  }
+
+  export interface PropsLow<R extends Shape> extends TExtends.CommonProperties {
     $web?: Partial<getPropsWeb<R>> //web specific props
     $native?: Partial<getPropsNative<R>> //native specific props
     classes?: PartialSheet<R> // cross platform sheet
-    classNameX?: RulesetInner<getStyle<R>, R>
   }
-  export type Props<R extends Shape = Shape> =
-    PartialOverwrite<getProps<R>, PropsLow<R> & TEventsX<R>>
+  export type Props<R extends Shape = Shape> = PartialOverwrite<getProps<R>,
+    CommonProperties<R> & PropsLow<R> & TEventsX<R>>
 
   export type TEventsX<R extends Shape = Shape> = PartialRecord<getEvents<R>, MouseEventEx<R>>
   export type ComponentTypeX<R extends Shape> = React.ComponentType<Props<R>>
   export type SFCX<R extends Shape = Shape> = React.SFC<Props<R>>
+
+  //******************** Cross platform component code props
+
+  export type PropsCode<R extends Shape = Shape> = PartialOverwrite<
+    getProps<R>, CommonPropertiesCode<R> & PropsLow<R> & TEventsX<R>>
+  export type SFCXCode<R extends Shape = Shape> = React.SFC<PropsCode<R>>
 
   //******************** Platform specific 
 

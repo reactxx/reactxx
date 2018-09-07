@@ -1,27 +1,39 @@
 import React from 'react'
 import { renderer } from 'reactxx-fela'
 
-import { TExtends, TCompiler } from '../typings/index'
+import { TExtends, TCompiler, TSheeter } from '../typings'
 import { classNames } from './class-names'
+import { styles } from './styles'
 /******************************************
   EXTEND REACT
 *******************************************/
 // https://stackoverflow.com/questions/40093655/how-do-i-add-attributes-to-existing-html-elements-in-typescript-jsx
 // https://github.com/Microsoft/TypeScript/issues/10859
 declare module 'react' {
-  interface HTMLAttributes<T> extends TExtends.CommonProperties {
+  interface HTMLAttributes<T> extends TSheeter.CommonProperties {
   }
-  interface SVGAttributes<T> extends TExtends.CommonProperties {
+  interface SVGAttributes<T> extends TSheeter.CommonProperties {
   }
 }
 
-export const createElement = (type, props: TExtends.CommonProperties, ...children) => {
+export const createElement = (type, props: TSheeter.CommonProperties & { className?, style? }, ...children) => {
   if (!props) return React.createElement(type, props, ...children)
-  const { classNameX, styleX } = props
+  const { classNameX, styleX } = props  
   if (classNameX) {
     const compiled = Array.isArray(classNameX) ? classNames(...classNameX as TExtends.ClassNameItem[]) : classNames(classNameX)
-    delete props.classNameX
-    props.className = normalizeValues(compiled)
+    if (isReactComponent(type)) {
+      delete props.classNameX
+      props.className = normalizeValues(compiled)
+    } else
+      props.classNameX = compiled
+  }
+  if (styleX) {
+    const compiled = Array.isArray(styleX) ? styles(...styleX) : styles(styleX)
+    if (isReactComponent(type)) {
+      delete props.styleX
+      props.style = compiled
+    } else
+      props.styleX = compiled
   }
   return React.createElement(type, props, ...children)
 }
@@ -41,3 +53,4 @@ const normalizeValues = (values: TCompiler.Values) => {
   return res.join(' ')
 }
 
+const isReactComponent = type => typeof type === 'string'

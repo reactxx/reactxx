@@ -1,12 +1,12 @@
 import warning from 'warning'
-import { TCommonStyles, TExtends } from '../typings'
+import { TCommonStyles, TSheeter } from '../typings'
 import { isObject } from '../utils/deep-merge'
 
-export const styles: TExtends.StyleProc = (...rulesets) => {
+export const styles = (...rulesets: TSheeter.StyleX[]) => {
   if (!rulesets) return undefined
   rulesets = rulesets.filter(r => r)
   if (rulesets.length === 1 && isSimple(rulesets[0])) return rulesets[0]
-  const res: TCommonStyles.Ruleset = {}
+  const res: TSheeter.StyleX = {}
   rulesets.forEach(r => deepMergeStyles(res, r))
   return res
 }

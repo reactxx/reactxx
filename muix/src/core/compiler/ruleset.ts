@@ -29,12 +29,26 @@ export const compileRuleset = <T extends TCommonStyles.RulesetNativeIds = 'Text'
     return { name, list, [TCompiler.TypedInterfaceProp]: TCompiler.TypedInterfaceTypes.compiled } as TCompiler.Ruleset
 }
 
+// in place sheet compilation
 export const compileSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.Sheet<R>) => {
     if (!sheet) return null
-    const res: TCompiler.Sheet = {} as any
-    for (const p in sheet) res[p] = compileRuleset(sheet[p], p)
-    return res
+    const res: TCompiler.Sheet<R> = {} as any
+    for (const p in sheet) sheet[p] = compileRuleset(sheet[p], p)
+    return sheet
 }
+
+export const adjustSheetCompiled = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetX<R>) => {
+    if (!sheet) return null
+    let sheetIsCompiled = false
+    for (const p in sheet) {
+        sheetIsCompiled = isCompiledRuleset(sheet[p])
+        break
+    }
+    // sheetIsCompiled and no classes => return sheet
+    if (!sheetIsCompiled) compileSheet(sheet)
+    return sheet as TCompiler.Sheet<R>
+}
+
 
 export function isCompiledRuleset(obj: Object): obj is TCompiler.Ruleset {
     return obj && obj[TCompiler.TypedInterfaceProp] === TCompiler.TypedInterfaceTypes.compiled
