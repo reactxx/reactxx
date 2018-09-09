@@ -2,70 +2,70 @@
 
 import React from 'react'
 import ReactN from 'react-native'
-import warning from 'warning'
 
 import { classNames } from '../extend-reacts/class-names'
-import { mergeSheets } from '../extend-reacts/merge-sheets'
+import { withStyles } from './with-styles'
+import { TPrimitives, TSheeter } from '../typings/index'
+import { textSheet, viewSheet, iconSheet, scrollViewSheet } from './sheets'
 
 // platform dependent import
 import { createElement } from 'reactxx-core'
 
-import { TPrimitives, TSheeter } from '../typings/index'
-import { textSheet, viewSheet, iconSheet, scrollViewSheet } from './sheets'
-
-export const view: TSheeter.WithStyles<TPrimitives.ViewShape> = sheet => (props: TSheeter.PropsCode<TPrimitives.ViewShape>) => {
+export const view: TSheeter.SFCCode<TPrimitives.ViewShape> = props => {
     const { styleX, classNameX, classes, ...rest } = props
-    const msheet = mergeSheets(sheet, classes)
-    const root = classNames(msheet.root, hasPlatformEvents(props) && msheet.pressable, classNameX)
-    return <div classNameX={root} styleX={styleX} {...rest}/>
+    const root = classNames(classes.root, hasPlatformEvents(props) && classes.pressable, classNameX)
+    return <div classNameX={root} styleX={styleX} {...rest} />
 }
-
-export const View = view(viewSheet)
 
 let hasPlatformEvents = props => false
 
-// export const icon: TSheeter.CodeSFCWeb<TPrimitives.IconShape> = props => {
-//   const { $system: { classNames }, style, classes, className, children, data, viewBox, url, onClick, ...rest } = props
-//   const rootStyle = classNames<'Web'>(classes.root, hasPlatformEvents(props) && classes.pressable, className)
-//   //replace fontSize with width x height
-//   if (rootStyle.fontSize) { rootStyle.height = rootStyle.width = rootStyle.fontSize; delete rootStyle.fontSize }
-//   if (style && style.fontSize) { style.height = style.width = style.fontSize; delete style.fontSize }
-//   const svg = <svg className={rulesetsToClassNames(rootStyle)} style={style} focusable='false' viewBox={viewBox || '0 0 24 24'} onClick={url ? undefined : onClick} {...rest}>
-//     {data ? <path d={data} /> : children}
-//   </svg>
-//   return url ? <a href={url}>{svg}</a> : svg
-// }
+export const icon: TSheeter.SFCCode<TPrimitives.IconShape> = props => {
+    const { styleX, classNameX, classes, children, data, $web: { viewBox }, url/*, onClick*/, ...rest } = props
+    const rootStyle = classNames(classes.root, hasPlatformEvents(props) && classes.pressable, classNameX)
+    const svg = <svg classNameX={rootStyle} styleX={styleX} onClick={url ? undefined : undefined /*onClick*/} {...rest}>
+        {data ? <path d={data} /> : children}
+    </svg>
+    return url ? <a href={url}>{svg}</a> : svg
+}
 
-// export const text: TSheeter.CodeSFCWeb<TPrimitives.TextShape> = props => {
-//   const { $system: { classNames, $developer_RenderCounter }, style, classes, className, numberOfLines, url, onClick, ...rest } = props
-//   const rootStyle = classNames<'Web'>(classes.root, hasPlatformEvents(props) && classes.pressable, numberOfLines === 1 && classes.singleLineStyle, className)
-//   const tagProps = { className: TPrimitives.Consts.textClassName + ' ' + rulesetsToClassNames(rootStyle), style, ...rest, onClick: url ? undefined : onClick } 
+export const scrollView: TSheeter.SFCCode<TPrimitives.ScrollViewShape> = props => {
+    const { styleX, classNameX, classes, children, horizontal, ...rest } = props
+    const rootStyle = classNames(classes.root, horizontal && classes.rootHorizontal, classNameX)
+    const containerStyle = classNames(classes.container, horizontal && classes.containerHorizontal)
+    return <div classNameX={rootStyle} style={styleX} {...rest}>
+        <div classNameX={containerStyle}>
+            {children}
+        </div>
+    </div>
+}
 
-//   if ($developer_RenderCounter) {
-//     const txt = '[' + $developer_RenderCounter + '] '
-//     tagProps.children = React.Children.count(props.children) == 0 ? txt : [txt, ...React.Children.toArray(props.children)]
-//   }
+export const text: TSheeter.SFCCode<TPrimitives.TextShape> = props => {
+    const { styleX, classNameX, classes, children, numberOfLines, url/*, onClick*/, ...rest } = props
+    const rootStyle = classNames(classes.root, hasPlatformEvents(props) && classes.pressable, classNameX)
+    const tagProps = { 
+        className: TPrimitives.Consts.textClassName, 
+        classNameX: rootStyle, 
+        styleX, 
+        ...rest, 
+        onClick: url ? undefined : undefined /*onClick*/ } 
+    return url ? <a href={url} {...tagProps} /> : <div {...tagProps} />
+}
 
-//   return url ? <a href={url} {...tagProps} /> : <div {...tagProps} />
-// }
+export const animatedView = view
+export const animatedIcon = icon
+export const animatedText = text
+export const animatedScrollView = scrollView
 
-// export const scrollView: TSheeter.CodeSFCWeb<TPrimitives.ScrollViewShape> = props => {
-//   const { $system: { classNames }, style, classes, className, children, horizontal, ...rest } = props
-//   const rootStyle = classNames<'Web'>(classes.root, horizontal && classes.rootHorizontal, className)
-//   const containerStyle = classNames<'Web'>(classes.container, horizontal && classes.containerHorizontal)
-//   //checkChildLayoutProps(style); checkChildLayoutProps(className)
-//   return <div className={rulesetsToClassNames(rootStyle)} style={style} {...rest}>
-//     <div className={rulesetsToClassNames(containerStyle)}>
-//       {children}
-//     </div>
-//   </div>
-// }
+export const View = withStyles<TPrimitives.ViewShape>(viewSheet, view)
+
+export const Icon = withStyles<TPrimitives.IconShape>(iconSheet, icon, {
+    $web: {
+        viewBox: '0 0 24 24',
+        focusable: 'false'
+    }
+})
 
 
-// export const animatedView = view
-// export const animatedIcon = icon
-// export const animatedText = text
-// export const animatedScrollView = scrollView
 
 // export const Text = (): Types.ComponentTypeX<TComps.TextShape> = withStylesCreator(textSheet, text as Types.CodeComponentType<TComps.TextShape>, {name:CompNames.Text})()
 // export const AnimatedText: Types.ComponentTypeX<TComps.TextShape> = withStylesCreator(textSheet, animatedText as Types.CodeComponentType<TComps.TextShape>, {name:CompNames.AnimatedText})()

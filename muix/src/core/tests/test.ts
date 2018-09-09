@@ -1,4 +1,4 @@
-import { compileRuleset } from '../compiler/ruleset'
+import { adjustRulesetCompiled } from '../compiler/ruleset'
 import { TSheeter } from '../typings/sheeter'
 
 const merging: TSheeter.Ruleset<'root' | 'disabled'> = {
@@ -82,15 +82,15 @@ export const run = () => {
     const res = {
         MERGING: {
             source: merging,
-            result: compileRuleset(merging, 'merging')
+            result: adjustRulesetCompiled(merging, 'merging')
         },
         WHEN_USED: {
             source: whenUsed,
-            result: compileRuleset(whenUsed, 'whenUsed')
+            result: adjustRulesetCompiled(whenUsed, 'whenUsed')
         },
         WHEN_USED_RECURSION: {
             source: whenUsedRecursion,
-            result: compileRuleset(whenUsedRecursion, 'whenUsedRecursion')
+            result: adjustRulesetCompiled(whenUsedRecursion, 'whenUsedRecursion')
         },
     }
     const json = JSON.stringify(res, null, 2)

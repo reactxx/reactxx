@@ -1,5 +1,4 @@
-import { TValue } from './index'
-import { TSheeter } from './sheeter';
+import { TValue,TSheeter, TRulesetConditions } from './index'
 
 export namespace TCompiler {
 
@@ -26,29 +25,8 @@ export namespace TCompiler {
     rules: Values // class names for web, propId-propValue for native
     rulesTrace?: {} // for DEV_MODE: ruleset source
     path?: string // for DEV_MODE: ruleset origin path
-    conditions?: Conditions // conditions (when is ruleset used)
+    conditions?: TRulesetConditions.Conditions // conditions (when is ruleset used)
   }
-
-  export type Conditions = ConditionAll[]
-  export type ConditionAll = WhenUsedCondition | MediaQCondition | AnimationCondition
-  export interface Condition {
-    type: ConditionTypes
-  }
-  export interface WhenUsedCondition extends Condition {
-    type: 'whenUsed'
-    rulesetName: string
-  }
-  export interface MediaQCondition extends Condition {
-    type: 'mediaq'
-    start: number | null
-    end: number | null
-  }
-  export interface AnimationCondition extends Condition {
-    type: 'animation'
-    opened: boolean
-  }
-
-  export type ConditionTypes = 'whenUsed' | 'mediaq' | 'animation'
 
   export type Values = Value[] // last value in array (with the same propId) wins!
 

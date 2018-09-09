@@ -13,12 +13,20 @@ const style1: TSheeter.Ruleset<'Text', Shape1> = {
 }
 
 
+const style12: TSheeter.Ruleset<'Text', Shape1> = {
+    $conditional: [
+        {
+            $condition: (props, theme, state) => false,
+            margin: 10
+        }
+    ],
+}
+
 interface Shape2 extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'> & TSheeter.ShapeViews<'disabled'>
     native: TSheeter.ShapeViews<'nativeOnly'>
     web: TSheeter.ShapeWeb<'webOnly'>
 }
-
 
 const style2: TSheeter.Ruleset<'Text', Shape2> = {
     $whenUsed: {
@@ -48,4 +56,5 @@ const sheet: TSheeter.Sheet<Shape2> = {
     root: {},
     disabled: {}
 }
+
 

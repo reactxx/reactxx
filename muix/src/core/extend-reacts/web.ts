@@ -21,19 +21,20 @@ export const createElement = (type, props: TSheeter.CommonProperties & { classNa
   const { classNameX, styleX } = props  
   if (classNameX) {
     const compiled = Array.isArray(classNameX) ? classNames(...classNameX as TExtends.ClassNameItem[]) : classNames(classNameX)
-    if (isReactComponent(type)) {
+    if (isReactBuildInComponent(type)) {
       delete props.classNameX
-      props.className = normalizeValues(compiled)
+      if (!props.className) props.className = normalizeValues(compiled)
+      else props.className += ' ' + normalizeValues(compiled)
     } else
       props.classNameX = compiled
   }
   if (styleX) {
-    const compiled = Array.isArray(styleX) ? styles(...styleX) : styles(styleX)
-    if (isReactComponent(type)) {
+    if (isReactBuildInComponent(type)) {
+      // we cannot recognize when styleX is compiled => styleX are compiled build-in component only
+      const compiled = Array.isArray(styleX) ? styles(...styleX) : styles(styleX)
       delete props.styleX
       props.style = compiled
-    } else
-      props.styleX = compiled
+    } 
   }
   return React.createElement(type, props, ...children)
 }
@@ -53,4 +54,4 @@ const normalizeValues = (values: TCompiler.Values) => {
   return res.join(' ')
 }
 
-const isReactComponent = type => typeof type === 'string'
+const isReactBuildInComponent = type => typeof type === 'string'

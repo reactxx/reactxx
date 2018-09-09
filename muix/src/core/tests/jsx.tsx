@@ -1,5 +1,5 @@
 /** @jsx createElement */
-import { createElement, classNames, TSheeter, compileRuleset, compileSheet } from 'reactxx-core'
+import { createElement, classNames, TSheeter, adjustRulesetCompiled } from 'reactxx-core'
 
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'> & TSheeter.ShapeViews<'disabled'>
@@ -8,10 +8,10 @@ interface Shape extends TSheeter.ShapeAncestor {
 }
 
 // className?: className?: {} | string | ({} | string)[]
-const style = compileRuleset({
+const style = adjustRulesetCompiled({
     color: 'red'
 })
-const sheetSrc: TSheeter.Sheet<Shape> = { 
+const sheet: TSheeter.Sheet<Shape> = { 
     root: {
         color: 'gray'
     },
@@ -54,8 +54,6 @@ const sheetSrc: TSheeter.Sheet<Shape> = {
         }
     },
 }
-
-const sheet = compileSheet(sheetSrc)
 
 const root = classNames(style, sheet.root, sheet.disabled, { fontWeight: 'bold' })
 

@@ -2,9 +2,8 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { TPrimitives, TSheeter  } from '../typings'
-import { compileSheet  } from '../compiler/ruleset'
 
-export const textSheet = compileSheet<TPrimitives.TextShape>({
+export const textSheet: TSheeter.Sheet<TPrimitives.TextShape> = ({
   root: {
     $web: {
       whiteSpace: 'pre-wrap', 
@@ -40,7 +39,7 @@ const webViewRuleset = {
   overflow: 'hidden',
 } as TSheeter.RulesetWeb
 
-export const viewSheet = compileSheet<TPrimitives.ViewShape>({
+export const viewSheet: TSheeter.Sheet<TPrimitives.ViewShape> = ({
   root: {
     $web: webViewRuleset
   },
@@ -51,12 +50,13 @@ export const viewSheet = compileSheet<TPrimitives.ViewShape>({
   }
 })
 
-export const iconSheet = compileSheet<TPrimitives.IconShape> ({
+export const iconSheet: TSheeter.Sheet<TPrimitives.IconShape> = ({
   root: {
     fontSize: 24,
     flexShrink: 0,
     $web: {
       fill: 'currentColor',
+      fontSize: 'inherited'
     }
   },
   pressable: { //web only ruleset
@@ -68,7 +68,7 @@ export const iconSheet = compileSheet<TPrimitives.IconShape> ({
 
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
-export const scrollViewSheet = compileSheet<TPrimitives.ScrollViewShape>({
+export const scrollViewSheet: TSheeter.Sheet<TPrimitives.ScrollViewShape> = ({
   root: {
     $web: {
       ...webViewRuleset,
