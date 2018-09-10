@@ -1,4 +1,4 @@
-import { TSheeter, TCompiler, TCommonStyles } from './index'
+import { TSheeter, TCompiler, TCommonStyles } from '../typings'
 
 export namespace TExtends {
 

@@ -1,40 +1,39 @@
-import { TSheeter, TCompiler, TCommonStyles } from '.'
+import { TSheeter, TCompiler, TCommonStyles } from '../typings'
 
 export namespace TRulesetConditions {
-
+ 
   export type CompileProc = (
     list: TCompiler.RulesetList,
-    ruleset: RulesetConditionPart | WhenUsedPart | MediaQPart | AnimationPart | ConditionalPart, 
+    ruleset: ConditionalPart | WhenUsedPart | MediaQPart | AnimationPart, 
     path: string,
     pseudoPrefixes: string[],
     conditions: Conditions,
-    rulesetToQueue?: RulesetConditionPart
+    rulesetToQueue?: ConditionalPart
   ) => void
 
   //*********************************************************
   //  RULESET EXTENSION
   //*********************************************************
 
-  export interface RulesetConditionPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> {
+  export interface ConditionalPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> {
     $whenUsed?: WhenUsedPart<R>
     $mediaq?: MediaQPart<T, R> // record key has format eg. '-640' or '640-1024' or '1024-'
-    $animation?: any
-    $conditional?: ConditionalPart
+    $animation?: AnimationPart
   }
 
-  export type WhenUsedPart<R extends TSheeter.Shape = TSheeter.Shape> = TSheeter.PartialSheet<R>
-  export type MediaQPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> = Record<string, TSheeter.Ruleset<T, R>>
-  export type AnimationPart = any
-  export type ConditionalPart = ConditionalPartRuleset[]
-  export type ConditionalProc = (props, theme, state) => boolean
-  export type ConditionalPartRuleset = TSheeter.Ruleset & {$condition: ConditionalProc}
+  export type WhenUsedPart<R extends TSheeter.Shape = TSheeter.Shape> = { [p in WhenUsedKeys<R>]?: TSheeter.Ruleset }
+  export type WhenUsedKeys<R extends TSheeter.Shape> = TSheeter.RulesetNamesAll<R> | TSheeter.getFlags<R>
 
+  export type MediaQPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> = Record<string, TSheeter.Ruleset<T, R>>
+
+  export type AnimationPart = any
+  
   //*********************************************************
   //  CONDITIONS
   //*********************************************************
 
   export type Conditions = ConditionAll[]
-  export type ConditionAll = WhenUsedCondition | MediaQCondition | AnimationCondition | ConditionalCondition
+  export type ConditionAll = WhenUsedCondition | MediaQCondition | AnimationCondition 
   export interface Condition {
     type: ConditionTypes
   }
@@ -51,10 +50,6 @@ export namespace TRulesetConditions {
     type: 'animation'
     opened: boolean
   }
-  export interface ConditionalCondition extends Condition {
-    type: 'conditional'
-    condition: ConditionalProc
-  }
 
   export type ConditionTypes = 'whenUsed' | 'mediaq' | 'animation' | 'conditional'
 
@@ -62,23 +57,17 @@ export namespace TRulesetConditions {
   //  QUERY
   //*********************************************************
 
-  export interface Query { // 
-    whenUsed?: WhenUsedQuery // map of used ruleset names
+  export interface Query<R extends TSheeter.Shape = TSheeter.Shape> { // 
+    whenUsed?: WhenUsedQuery<R> // map of used ruleset names
     mediaq?: MediaQQuery // actual width
     animation?: AnimationQuery // animation state: opened x closed
-    conditionalQuery?: ConditionalQuery
   }
 
-  export type WhenUsedQuery = Record<string, boolean>
+  export type WhenUsedQuery<R extends TSheeter.Shape = TSheeter.Shape> = Record<WhenUsedKeys<R>, boolean>
 
   export type MediaQQuery = number
 
   export type AnimationQuery = 'opened' | 'closed'
 
-  export type ConditionalQuery = {
-    props
-    theme
-    state
-  }
 
 }

@@ -1,13 +1,12 @@
-import { TCompiler, TSheeter, TRulesetConditions } from '../typings'
+import { TSheeter, TRulesetConditions } from '../typings'
 
 import { compileTree } from './ruleset'
 
-export const compileConditionals = (ruleset: TRulesetConditions.RulesetConditionPart) => {
+export const compileConditionals = (ruleset: TRulesetConditions.ConditionalPart) => {
     // compile root addIns
-    const { $whenUsed, $mediaq, $animation, $conditional } = ruleset;
+    const { $whenUsed, $mediaq, $animation } = ruleset;
 
     const addIns = [
-        { proc: compileConditional, part: $conditional },
         { proc: compileWhenUsed, part: $whenUsed },
         { proc: compileMediaQ, part: $mediaq },
         { proc: compileAnimation, part: $animation }
@@ -23,9 +22,6 @@ export const testConditions = (conditions: TRulesetConditions.Conditions, query:
             case 'whenUsed': return query.whenUsed && query.whenUsed[cond.rulesetName]
             case 'mediaq': return typeof query.mediaq === 'number' && cond.start <= query.mediaq && cond.end > query.mediaq
             case 'animation': return query.animation === (cond.opened ? 'opened' : 'closed')
-            case 'conditional':
-                const q = query.conditionalQuery
-                return cond.condition(q.props, q.theme, q.state)
         }
     })
     return !firstFalse
@@ -47,16 +43,6 @@ const compileWhenUsed: TRulesetConditions.CompileProc = (list, ruleset: TRuleset
             [...conditions, { type: 'whenUsed', rulesetName: p } as TRulesetConditions.WhenUsedCondition],
             wrapPseudoPrefixes(rules, pseudoPrefixes))
     }
-}
-const compileConditional: TRulesetConditions.CompileProc = (list, ruleset: TRulesetConditions.ConditionalPart, path, pseudoPrefixes, conditions) => {
-    ruleset.forEach((rules, idx) => {
-        compileTree(
-            list, rules,
-            `${path}/$conditional.${idx}`,
-            pseudoPrefixes,
-            [...conditions, { type: 'conditional', condition: rules.$condition } as TRulesetConditions.ConditionalCondition],
-            wrapPseudoPrefixes(rules, pseudoPrefixes))
-    })
 }
 
 const compileMediaQ: TRulesetConditions.CompileProc = (list, ruleset: TRulesetConditions.MediaQPart, path, pseudoPrefixes, conditions) => {

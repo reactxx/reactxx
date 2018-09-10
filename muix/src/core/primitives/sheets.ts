@@ -1,34 +1,44 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TPrimitives, TSheeter  } from '../typings'
+import { TPrimitives, TSheeter } from '../typings'
+
+//type t = TRulesetConditions.RulesetNamesAll<TPrimitives.TextShape>
 
 export const textSheet: TSheeter.Sheet<TPrimitives.TextShape> = ({
   root: {
     $web: {
-      whiteSpace: 'pre-wrap', 
+      whiteSpace: 'pre-wrap',
       wordWrap: 'break-word',
       [`& .${TPrimitives.Consts.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. Consts.textClassName is className for Text component div.
         display: 'inline',
       },
     },
-  },
-  singleLineStyle: {
-    flexShrink: 1,
-    $web: {
-      maxWidth: '100%',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap'
+    $whenUsed: {
+      pressable: {
+        $web: {
+          cursor: 'pointer'
+        },
+      },
+      singleLine: {
+        flexShrink: 1,
+        $web: {
+          maxWidth: '100%',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap'
+        },
+      },
     },
   },
-  pressable: { //web only ruleset
-    $web: {
-      cursor: 'pointer'
-    }
-  },
+  // pressable: { //web only ruleset
+  //   $web: {
+  //     cursor: 'pointer'
+  //   }
+  // },
 })
 
+// mimic React Native view behavior
 const webViewRuleset = {
   display: 'flex',
   flexDirection: 'column',
@@ -52,7 +62,7 @@ export const viewSheet: TSheeter.Sheet<TPrimitives.ViewShape> = ({
 
 export const iconSheet: TSheeter.Sheet<TPrimitives.IconShape> = ({
   root: {
-    fontSize: 24,
+    //fontSize: 24,
     flexShrink: 0,
     $web: {
       fill: 'currentColor',

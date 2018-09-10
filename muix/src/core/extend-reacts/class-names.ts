@@ -2,12 +2,28 @@ import { TSheeter, TExtends, TCompiler, TRulesetConditions } from '../typings'
 import { compileRuleset, isCompiledRuleset, isCompiledValues } from '../compiler/ruleset'
 import { testConditions } from '../compiler/ruleset-conditions'
 
+
+export const deleteUnusedProps = props => propsToDelete.forEach(p => delete props[p])
+
+export function classNamesForBind(...rulesets: TExtends.ClassNameItem[]) {
+    return classNamesWithQuery(this.$system.sheetQuery, ...rulesets)
+}
+
+export const classNames = (...rulesets: TExtends.ClassNameItem[]) => classNamesWithQuery({}, ...rulesets)
+
+/******************************************
+  PRIVATE
+*******************************************/
+
+const propsToDelete: TSheeter.CommonPropertiesCodeKeys[] = ['sheetQuery', 'classes', 'classNames']
+
 // merge rulesets and apply query to ruleset's conditional parts ($whenUed, $mediaq etc.)
-export const classNamesWithQuery = (query: TRulesetConditions.Query, ...rulesets: TExtends.ClassNameItem[]) => {
+const classNamesWithQuery = (query: TRulesetConditions.Query, ...rulesets: TExtends.ClassNameItem[]) => {
     if (!rulesets || rulesets.length === 0) return [] as TCompiler.Values
     if (isCompiledValues(rulesets)) return rulesets
     // when used query par
-    query.whenUsed = {}
+    if (!query) query = {}
+    if (!query.whenUsed) query.whenUsed = {}
     rulesets.forEach((r: TSheeter.Ruleset) => {
         if (!r || !r.name) return
         query.whenUsed[r.name] = true
@@ -31,5 +47,4 @@ export const classNamesWithQuery = (query: TRulesetConditions.Query, ...rulesets
     return [].concat.apply([], values) as TCompiler.Values
 }
 
-export const classNames = (...rulesets: TExtends.ClassNameItem[]) => classNamesWithQuery({}, ...rulesets)
 

@@ -1,8 +1,8 @@
 ﻿export * from './common-styles'
-export * from './compiled'
-export * from './extends'
+export * from '../compiler/compiled-d'
+export * from '../extend-reacts/extends-d'
 export * from './sheeter'
-export * from './primitives'
-export * from './ruleset-conditions'
+export * from '../primitives/primitives-d'
+export * from '../compiler/ruleset-conditions-d'
 
 export type TValue = number | string

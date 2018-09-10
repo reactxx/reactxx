@@ -20,7 +20,7 @@ export const compileRuleset = <T extends TCommonStyles.RulesetNativeIds = 'Text'
         ['', ruleset],
         window.isWeb ? ['/$web', $web] : ['/$native', $native],
         ['/$after', $after]
-    ].filter(p => !!p[1]) as [string, TRulesetConditions.RulesetConditionPart][]
+    ].filter(p => !!p[1]) as [string, TRulesetConditions.ConditionalPart][]
 
     const list: TCompiler.RulesetList = []
     parts.forEach(part => compileTree(

@@ -5,7 +5,7 @@ export const adjustSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TS
     // adjust sheet compiled (in place)
     adjustSheetCompiled(sheet)
     // no classes => return sheet
-    if (!classes) return sheet
+    if (!classes) return sheet as TCompiler.Sheet<R>
     // adjust classes compiled (in place)
     adjustSheetCompiled(classes)
     // merge sheet with classes

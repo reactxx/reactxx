@@ -1,17 +1,17 @@
 ﻿import ReactN from 'react-native'
 
-import { TSheeter, TCommonStyles } from './index'
+import { TSheeter } from '../typings'
 
-export const enum CompNames {
-  Text = 'ReactXX$Text',
-  View = 'ReactXX$View',
-  Icon = 'ReactXX$Icon',
-  ScrollView = 'ReactXX$ScrollView',
-  AnimatedView = 'ReactXX$AnimatedView',
-  AnimatedIcon = 'ReactXX$AnimatedIcon',
-  AnimatedText = 'ReactXX$AnimatedText',
-  AnimatedScrollView = 'ReactXX$AnimatedScrollView',
-}
+// export const enum CompNames {
+//   Text = 'ReactXX$Text',
+//   View = 'ReactXX$View',
+//   Icon = 'ReactXX$Icon',
+//   ScrollView = 'ReactXX$ScrollView',
+//   AnimatedView = 'ReactXX$AnimatedView',
+//   AnimatedIcon = 'ReactXX$AnimatedIcon',
+//   AnimatedText = 'ReactXX$AnimatedText',
+//   AnimatedScrollView = 'ReactXX$AnimatedScrollView',
+// }
 
 export namespace TPrimitives {
 
@@ -34,8 +34,9 @@ export namespace TPrimitives {
 }
 
 export interface TextShape extends TSheeter.ShapeAncestor {
-    common: TSheeter.ShapeTexts<'root' | 'singleLineStyle'>
-    web: TSheeter.ShapeWeb<'pressable'>
+    common: TSheeter.ShapeTexts<'root'>
+    //web: TSheeter.ShapeWeb<'pressable'>
+    sheetFlags: TSheeter.ShapeFlags<'pressable' | 'singleLine'>
     style: 'Text'
     props: { numberOfLines?: number; url?: string }
     propsWeb: React.HTMLAttributes<HTMLSpanElement>

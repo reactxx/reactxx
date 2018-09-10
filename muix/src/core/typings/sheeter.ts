@@ -11,7 +11,7 @@ export namespace TSheeter {
   *******************************************/
 
   export type RulesetWeb<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    React.CSSProperties & { [P in CSS.Pseudos]?: React.CSSProperties & TRulesetConditions.RulesetConditionPart<T, R> }
+    React.CSSProperties & { [P in CSS.Pseudos]?: React.CSSProperties & TRulesetConditions.ConditionalPart<T, R> }
 
   //*************** Cross platform ruleset for web and native
   export type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
@@ -19,22 +19,24 @@ export namespace TSheeter {
     RulesetLow<T, R>
 
   export interface RulesetLow<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> extends
-    RulesetAddWebNative<T, R>,
-    TRulesetConditions.RulesetConditionPart<T, R> {
+    $Web$Native<T, R>,
+    $Before$After<T, R>,
+    TRulesetConditions.ConditionalPart<T, R> {
     name?: string
-    $before?: RulesetInner<T, R> & RulesetAddWebNative<T, R>
-    $after?: RulesetInner<T, R> & RulesetAddWebNative<T, R>
   }
 
   export type RulesetInner<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
-    TRulesetConditions.RulesetConditionPart<T, R>
+    TRulesetConditions.ConditionalPart<T, R>
 
-  export interface RulesetAddWebNative<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> {
-    $native?: TCommonStyles.RulesetNative<T> & TRulesetConditions.RulesetConditionPart<T, R>// native specific rules
-    $web?: RulesetWeb<T, R> & TRulesetConditions.RulesetConditionPart<T, R> // web specific rules
+  export interface $Web$Native<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> {
+    $native?: TCommonStyles.RulesetNative<T> & TRulesetConditions.ConditionalPart<T, R>// native specific rules
+    $web?: RulesetWeb<T, R> & TRulesetConditions.ConditionalPart<T, R> // web specific rules
   }
-
+  export interface $Before$After<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> {
+    $before?: RulesetInner<T, R> & $Web$Native<T, R>
+    $after?: RulesetInner<T, R> & $Web$Native<T, R>
+  }
 
   /******************************************
     STYLE
@@ -69,11 +71,11 @@ export namespace TSheeter {
     { [P in keyof getCommon<R>]: Ruleset<getCommon<R>[P], R> }
   export type SheetNative<R extends Shape> = keyof getNative<R> extends never ? {} :
     { [P in keyof getNative<R>]: {
-      $native?: TCommonStyles.RulesetNative<getNative<R>[P]> & TRulesetConditions.RulesetConditionPart<getNative<R>[P], R>
+      $native?: TCommonStyles.RulesetNative<getNative<R>[P]> & TRulesetConditions.ConditionalPart<getNative<R>[P], R>
     } }
   export type SheetWeb<R extends Shape> = getWeb<R> extends never ? {} :
     { [P in getWeb<R>]: {
-      $web?: RulesetWeb<'Text', R> & TRulesetConditions.RulesetConditionPart<'Text', R>
+      $web?: RulesetWeb<'Text', R> & TRulesetConditions.ConditionalPart<'Text', R>
     } }
 
 
@@ -87,6 +89,7 @@ export namespace TSheeter {
     common: EmptyInterface // rulesets (and their native type), which are used in both web and native component code. Rule are compatible with web and native.
     native: EmptyInterface // rulesets, which are used only in native code
     web: EmptyInterface // ruleset names, which are used only in web code (its type is always React.CSSProperties)
+    sheetFlags: EmptyInterface
     //******************** style constrain
     style: TCommonStyles.RulesetNativeIds // for web, style has always React.CSSProperties type
     //**** component property constrains
@@ -101,6 +104,7 @@ export namespace TSheeter {
     common: EmptyInterface
     native: EmptyInterface
     web: EmptyInterface
+    sheetFlags: EmptyInterface
     style: unknown
     props: EmptyInterface
     propsNative: ReactN.ViewProperties
@@ -116,11 +120,16 @@ export namespace TSheeter {
   export type getPropsWeb<R extends Shape> = R['propsWeb']
   export type getPropsNative<R extends Shape> = R['propsNative']
   export type getEvents<R extends Shape = Shape> = keyof R['events']
+  export type getFlags<R extends Shape = Shape> = keyof R['sheetFlags']
+
+  export type RulesetNamesAll<R extends Shape> = keyof getCommon<R> | keyof getNative<R> | getWeb<R>
 
   export type ShapeTexts<P extends string> = { [p in P]: 'Text' }
   export type ShapeViews<P extends string> = { [p in P]: 'View' }
-  export type ShapeWeb<P extends string> = { [p in P]: true }
   export type ShapeImages<P extends string> = { [p in P]: 'Image' }
+
+  export type ShapeWeb<P extends string> = { [p in P]: true }
+  export type ShapeFlags<P extends string> = { [p in P]: true }
 
   export interface EmptyInterface { }
 
@@ -137,21 +146,20 @@ export namespace TSheeter {
   export type ClassName = ClassNameItem | ClassNameItem[]
 
   export type SheetX<R extends Shape = Shape> = Sheet<R> | TCompiler.Sheet<R>
-  export type RulesetNamesAll<R extends Shape> = keyof getCommon<R> | keyof getNative<R> | getWeb<R>
 
   //******************** Cross platform component props
   export interface CommonProperties<R extends TSheeter.Shape = TSheeter.Shape> {
     classNameX?: ClassName
     styleX?: StylesX<R>
+    classes?: PartialSheet<R> // cross platform sheet
   }
 
   export interface PropsLow<R extends Shape> extends TExtends.CommonProperties {
     $web?: Partial<getPropsWeb<R>> //web specific props
     $native?: Partial<getPropsNative<R>> //native specific props
-    classes?: PartialSheet<R> // cross platform sheet
   }
   export type Props<R extends Shape = Shape> = PartialOverwrite<getProps<R>,
-    CommonProperties<R> & PropsLow<R> & TEventsX<R>>
+    PropsLow<R> & CommonProperties<R> & TEventsX<R>>
 
   export type TEventsX<R extends Shape = Shape> = PartialRecord<getEvents<R>, MouseEventEx<R>>
   export type ComponentTypeX<R extends Shape> = React.ComponentType<Props<R>>
@@ -160,77 +168,81 @@ export namespace TSheeter {
   //******************** Cross platform component code props
 
   export type PropsCode<R extends Shape = Shape> = PartialOverwrite<
-    getProps<R>, CommonPropertiesCode<R> & PropsLow<R> & TEventsX<R>>
+    getProps<R>, PropsLow<R> & CommonPropertiesCode<R> & TEventsX<R>>
 
   export interface CommonPropertiesCode<R extends TSheeter.Shape = TSheeter.Shape> {
     classNameX?: ClassNameItem
     styleX?: StyleX<R>
     children?: React.ReactNode
-    classes?: PartialSheet<R> // cross platform sheet
+    sheetQuery?: TRulesetConditions.Query<R>;
+    classes?: TCompiler.Sheet<R> 
+    classNames?: (...rulesets: TExtends.ClassNameItem[]) => TCompiler.Values
   }
+
+  export type CommonPropertiesCodeKeys = keyof CommonPropertiesCode
 
   export type SFCCode<R extends Shape = Shape> = React.SFC<PropsCode<R>>
 
-  //******************** Platform specific 
+  // //******************** Platform specific 
 
-  export type omitPropNames = 'style' | 'classes' | 'className' | '$system'
+  // export type omitPropNames = 'style' | 'classes' | 'className' | '$system'
 
-  export type CodeSystem<R extends Shape = Shape> = TEventsX<R>
-
-
-  // *** web
-  export type CodePropsWeb<R extends Shape = Shape> =
-    OmitPartial<getProps<R> & getPropsWeb<R>, omitPropNames> &
-    OnPressAllWeb &
-    {
-      style?: { [rule: string]: any }
-      className?: { [rule: string]: any } | string
-      classes?: { [ruleset: string]: any }
-      children?: React.ReactNode
-      $system?: $SystemLow<R>
-    }
-  export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
-
-  //// *** native
-  export type CodePropsNative<R extends Shape = Shape> =
-    OmitPartial<getProps<R> & getPropsNative<R>, omitPropNames> &
-    OnPressAllNative &
-    {
-      //style: TCommonStyles.RulesetNative<getStyle<R>>
-      className: TCommonStyles.RulesetNative<getStyle<R>>
-      children?: React.ReactNode
-      $system?: $SystemLow<R>
-    }
-  export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
-
-  // *** web or native
-  type $SystemLow<R extends Shape = Shape> =
-    TEventsX<R>
-    & {
-      // $ignore?: boolean
-      // $constant?: boolean
-      $developer_flag?: boolean
-      $developer_RenderCounter?: number,
-    }
+  // export type CodeSystem<R extends Shape = Shape> = TEventsX<R>
 
 
-  export type CodeProps<R extends Shape = Shape> =
-    OmitPartial<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), omitPropNames> &
-    OnPressAllNative &
-    OnPressAllWeb &
-    {
-      $system?: $SystemLow<R>
-      children?: React.ReactNode
-      style?: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<getStyle<R>>
-      className?: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<getStyle<R>>
-    }
+  // // *** web
+  // export type CodePropsWeb<R extends Shape = Shape> =
+  //   OmitPartial<getProps<R> & getPropsWeb<R>, omitPropNames> &
+  //   OnPressAllWeb &
+  //   {
+  //     style?: { [rule: string]: any }
+  //     className?: { [rule: string]: any } | string
+  //     classes?: { [ruleset: string]: any }
+  //     children?: React.ReactNode
+  //     $system?: $SystemLow<R>
+  //   }
+  // export type CodeSFCWeb<R extends Shape> = React.SFC<CodePropsWeb<R>>
 
-  export type PartialCodeProps<R extends Shape = Shape> = Partial<CodeProps<Shape>>
+  // //// *** native
+  // export type CodePropsNative<R extends Shape = Shape> =
+  //   OmitPartial<getProps<R> & getPropsNative<R>, omitPropNames> &
+  //   OnPressAllNative &
+  //   {
+  //     //style: TCommonStyles.RulesetNative<getStyle<R>>
+  //     className: TCommonStyles.RulesetNative<getStyle<R>>
+  //     children?: React.ReactNode
+  //     $system?: $SystemLow<R>
+  //   }
+  // export type CodeSFCNative<R extends Shape> = React.SFC<CodePropsNative<R>>
+
+  // // *** web or native
+  // type $SystemLow<R extends Shape = Shape> =
+  //   TEventsX<R>
+  //   & {
+  //     // $ignore?: boolean
+  //     // $constant?: boolean
+  //     $developer_flag?: boolean
+  //     $developer_RenderCounter?: number,
+  //   }
 
 
-  export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
-  export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
-  export type CodeComponentType<R extends Shape = Shape> = React.ComponentType<CodeProps<R>>
+  // export type CodeProps<R extends Shape = Shape> =
+  //   OmitPartial<getProps<R> & (getPropsNative<R> | getPropsWeb<R>), omitPropNames> &
+  //   OnPressAllNative &
+  //   OnPressAllWeb &
+  //   {
+  //     $system?: $SystemLow<R>
+  //     children?: React.ReactNode
+  //     style?: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<getStyle<R>>
+  //     className?: TCommonStyles.RulesetWeb | TCommonStyles.RulesetNative<getStyle<R>>
+  //   }
+
+  // export type PartialCodeProps<R extends Shape = Shape> = Partial<CodeProps<Shape>>
+
+
+  // export type CodeSFC<R extends Shape> = React.SFC<CodeProps<R>>
+  // export type CodeComponent<R extends Shape> = React.Component<CodeProps<R>>
+  // export type CodeComponentType<R extends Shape = Shape> = React.ComponentType<CodeProps<R>>
 
   /******************************************
     EVENTS
@@ -240,7 +252,7 @@ export namespace TSheeter {
   export type TEventsXNames = 'onPress' | 'onLongPress'
   //export type TEvents = TEventsAll
 
-  export interface MouseEventPar<R extends Shape = Shape> extends React.MouseEvent<Element> { current?: CodeProps<R> }
+  export interface MouseEventPar<R extends Shape = Shape> extends React.MouseEvent<Element> { current?: PropsCode<R> }
   export type MouseEventEx<R extends Shape = Shape> = React.EventHandler<MouseEventPar<R>>// (ev?: MouseEventPar<R>) => void
 
   export interface OnPressX<R extends Shape = Shape> { onPress?: MouseEventEx<R>; onLongPress?: MouseEventEx<R> }
@@ -248,7 +260,7 @@ export namespace TSheeter {
 
   export interface OnPressAllWeb { onClick?: React.MouseEventHandler<Element>; onMouseDown?: React.MouseEventHandler<Element>; onMouseUp?: React.MouseEventHandler<Element> }
 
-  export interface NativeEventPar<R extends Shape = Shape> extends ReactN.GestureResponderEvent { current?: CodeProps<R> }
+  export interface NativeEventPar<R extends Shape = Shape> extends ReactN.GestureResponderEvent { current?: PropsCode<R> }
   export interface OnPressAllNative { onPress?: () => void; onPressIn?: () => void; onPressOut?: () => void; onLongPress?: () => void }
 
 } 

@@ -1,11 +1,15 @@
 /** @jsx createElement */
-import { createElement, classNames, TSheeter, adjustRulesetCompiled } from 'reactxx-core'
+import { createElement, classNames, TSheeter, TRulesetConditions, adjustRulesetCompiled } from 'reactxx-core'
 
 interface Shape extends TSheeter.ShapeAncestor {
-    common: TSheeter.ShapeTexts<'root'> & TSheeter.ShapeViews<'disabled'>
+    common: TSheeter.ShapeTexts<'root'> & TSheeter.ShapeViews<'label'>
     native: TSheeter.ShapeViews<'nativeOnly'>
     web: TSheeter.ShapeWeb<'webOnly'>
+    sheetFlags: TSheeter.ShapeFlags<'disabled' | 'active'>
 }
+
+type t = TRulesetConditions.WhenUsedKeys<Shape>
+type t2 = TSheeter.getFlags<Shape>
 
 // className?: className?: {} | string | ({} | string)[]
 const style = adjustRulesetCompiled({
@@ -13,10 +17,13 @@ const style = adjustRulesetCompiled({
 })
 const sheet: TSheeter.Sheet<Shape> = { 
     root: {
-        color: 'gray'
-    },
-    disabled: {
         margin: 4,
+        $whenUsed: {
+            disabled: {},
+        }
+    },
+    label: {
+        color: 'gray',
         $web: {
             ':hover': {
                 $mediaq: {},
@@ -55,10 +62,10 @@ const sheet: TSheeter.Sheet<Shape> = {
     },
 }
 
-const root = classNames(style, sheet.root, sheet.disabled, { fontWeight: 'bold' })
+const root = classNames(style, sheet.root, sheet.label, { fontWeight: 'bold' })
 
 const App: React.SFC = props => <div>
-    <h1 classNameX={[sheet.root, style, sheet.disabled]}>HALLO</h1>
+    <h1 classNameX={[sheet.root, style, sheet.label]}>HALLO</h1>
     <h1 classNameX={root}>HALLO</h1>
     <h1 classNameX={style}>HALLO</h1>
     <h1 classNameX={[style, { fontWeight: 'normal' }]}>HALLO</h1>
