@@ -1,5 +1,5 @@
 import React from 'react'
-import { TSheeter } from '../typings'
+import { TSheeter } from '../index-d'
 import { adjustSheet } from '../extend-reacts/adjust-sheet'
 import { classNamesForBind } from '../extend-reacts/class-names'
 

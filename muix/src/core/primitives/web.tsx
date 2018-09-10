@@ -4,7 +4,7 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { withStyles } from './with-styles'
-import { TPrimitives, TSheeter } from '../typings/index'
+import { TPrimitives, TSheeter } from '../index-d'
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from './sheets'
 
 // platform dependent import

@@ -1,5 +1,5 @@
-import { TSheeter, TCompiler } from '../typings'
-import { adjustSheetCompiled } from '../compiler/ruleset'
+import { TSheeter, TCompiler } from '../index-d'
+import { adjustSheetCompiled } from '../sheeter/ruleset'
 
 export const adjustSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetX<R>, classes: TSheeter.PartialSheet<R>) => {
     // adjust sheet compiled (in place)

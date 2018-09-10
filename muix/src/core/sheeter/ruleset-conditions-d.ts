@@ -1,4 +1,4 @@
-import { TSheeter, TCompiler, TCommonStyles } from '../typings'
+import { TSheeter, TCompiler, TCommonStyles } from '../index-d'
 
 export namespace TRulesetConditions {
  

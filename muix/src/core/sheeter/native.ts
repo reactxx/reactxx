@@ -1,4 +1,4 @@
-import { TExtends, TCompiler, TValue } from '../typings/index'
+import { TExtends, TCompiler, TValue } from '../index-d'
 
 export const rulesetCompiler: TExtends.RulesetCompiler = style => {
     if (!style) return []

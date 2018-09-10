@@ -1,11 +1,11 @@
 // platform dependent exports
-export * from './compiler/web'
+export * from './sheeter/web'
 export * from './extend-reacts/web'
 export * from './primitives/web'
 
-export * from './typings/index'
+export * from './index-d'
 
-export * from './compiler/ruleset'
+export * from './sheeter/ruleset'
 export * from './extend-reacts/class-names'
 
 //export { run as Test } from './tests/test'

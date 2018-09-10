@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TPrimitives, TSheeter } from '../typings'
+import { TPrimitives, TSheeter } from '../index-d'
 
 //type t = TRulesetConditions.RulesetNamesAll<TPrimitives.TextShape>
 

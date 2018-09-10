@@ -1,6 +1,6 @@
 ﻿import ReactN from 'react-native'
 
-import { TSheeter } from '../typings'
+import { TSheeter } from '../index-d'
 
 // export const enum CompNames {
 //   Text = 'ReactXX$Text',

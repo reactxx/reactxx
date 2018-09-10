@@ -1,5 +1,5 @@
 import React from 'react'
-import { TExtends, TSheeter, TCompiler } from '../typings'
+import { TExtends, TSheeter, TCompiler } from '../index-d'
 /******************************************
   EXTEND REACT NATIVE
 *******************************************/

@@ -1,4 +1,4 @@
-import { TSheeter, TCompiler, TCommonStyles } from '../typings'
+import { TSheeter, TCompiler, TCommonStyles } from '../index-d'
 
 export namespace TExtends {
 
@@ -14,27 +14,10 @@ export namespace TExtends {
   }
 
   export type Style<R extends TSheeter.Shape = TSheeter.Shape> = TSheeter.Style<TSheeter.getStyle<R>>
-  
+
   export type ClassNameItem = TSheeter.Ruleset | TCompiler.Ruleset | TCompiler.Values
   export type ClassName = ClassNameItem | ClassNameItem[]
 
   export type RulesetCompiler = (ruleset: TSheeter.RulesetInner) => TCompiler.Values
-
-  // export interface Query { // 
-  //   whenUsed?: WhenUsedQuery // map of used ruleset names
-  //   mediaq?: MediaQQuery // actual width
-  //   animation?: AnimationQuery // animation state: opened x closed
-  //   conditionalQuery?: ConditionalQuery
-  // }
-
-  // export type WhenUsedQuery = Record<string, boolean>
-
-  // export type MediaQQuery = number
-
-  // export type AnimationQuery = 'opened' | 'closed'
-
-  // export type ConditionalQuery = {
-
-  // }
 
 }

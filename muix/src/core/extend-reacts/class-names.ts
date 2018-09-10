@@ -1,6 +1,6 @@
-import { TSheeter, TExtends, TCompiler, TRulesetConditions } from '../typings'
-import { compileRuleset, isCompiledRuleset, isCompiledValues } from '../compiler/ruleset'
-import { testConditions } from '../compiler/ruleset-conditions'
+import { TSheeter, TExtends, TCompiler, TRulesetConditions } from '../index-d'
+import { compileRuleset, isCompiledRuleset, isCompiledValues } from '../sheeter/ruleset'
+import { testConditions } from '../sheeter/ruleset-conditions'
 
 
 export const deleteUnusedProps = props => propsToDelete.forEach(p => delete props[p])

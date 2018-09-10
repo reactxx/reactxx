@@ -1,5 +1,5 @@
 import { deepMerge, isObject } from '../utils/deep-merge'
-import { TCompiler, TSheeter, TCommonStyles, TRulesetConditions } from '../typings/index'
+import { TCompiler, TSheeter, TCommonStyles, TRulesetConditions } from '../index-d'
 import { compileConditionals } from './ruleset-conditions'
 
 import 'reactxx-fela'

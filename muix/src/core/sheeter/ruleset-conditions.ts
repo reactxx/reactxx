@@ -1,4 +1,4 @@
-import { TSheeter, TRulesetConditions } from '../typings'
+import { TSheeter, TRulesetConditions } from '../index-d'
 
 import { compileTree } from './ruleset'
 

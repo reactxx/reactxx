@@ -1,4 +1,4 @@
-import { TValue,TSheeter, TRulesetConditions } from '../typings'
+import { TValue,TSheeter, TRulesetConditions } from '../index-d'
 
 export namespace TCompiler {
 

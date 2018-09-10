@@ -1,7 +1,7 @@
 import React from 'react'
 import { renderer } from 'reactxx-fela'
 
-import { TExtends, TCompiler, TSheeter } from '../typings'
+import { TExtends, TCompiler, TSheeter } from '../index-d'
 import { classNames, deleteUnusedProps } from './class-names'
 import { styles } from './styles'
 /******************************************
