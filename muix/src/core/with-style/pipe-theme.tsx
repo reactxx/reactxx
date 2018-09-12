@@ -1,9 +1,7 @@
 import React from 'react';
 import warning from 'warning';
 import { TTheme, TWithStyles } from '../index-d';
-import { globalOptions, initGlobalOptions } from '../with-style/global-options'
-import { TSheeter } from '../sheeter/sheeter-d';
-import { TComponents } from '../sheeter/components-d';
+import { globalOptions, initGlobalOptions } from './global-options'
 
 export const initThemePipe = (options?: TWithStyles.GlobalOptions) => initGlobalOptions({
   getDefaultTheme: () => ({}),

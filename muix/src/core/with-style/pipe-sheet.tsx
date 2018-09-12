@@ -1,6 +1,6 @@
 import { TWithStyles } from '../index-d'
 import { adjustSheet } from '../extend-reacts/adjust-sheet'
-import { createWithTheme } from '../with-theme/theme-pipe'
+import { createWithTheme } from './pipe-theme'
 import { classNamesForBind } from '../extend-reacts/class-names'
 
 

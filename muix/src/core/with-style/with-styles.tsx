@@ -1,8 +1,8 @@
 import React from 'react'
 import { TSheeter, TComponents, TWithStyles } from '../index-d'
 import { globalOptions } from './global-options'
-import { sheetPipe } from './sheet-pipe'
-import { themePipe, initThemePipe } from '../with-theme/theme-pipe'
+import { sheetPipe } from './pipe-sheet'
+import { themePipe, initThemePipe } from './pipe-theme'
 import { deepMerges } from '../utils/deep-merge'
 
 export const initWithStyles = (options?: TWithStyles.GlobalOptions) => initThemePipe({
