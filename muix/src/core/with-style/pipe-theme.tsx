@@ -3,12 +3,12 @@ import warning from 'warning';
 import { TTheme, TWithStyles } from '../index-d';
 import { globalOptions, initGlobalOptions } from './global-options'
 
-export const initThemePipe = (options?: TWithStyles.GlobalOptions) => initGlobalOptions({
+export const initThemePipe = (options: TWithStyles.GlobalOptions = null) => initGlobalOptions({
   getDefaultTheme: () => ({}),
   namedThemes: {
     [defaultThemeName]: { $cache: {} }
   },
-  ...options || null
+  ...options
 })
 
 export const themePipe: TWithStyles.Pipe = (context, next) => {
@@ -41,43 +41,42 @@ export const adjustTheme = (theme?: TTheme.Theme) => {
     globalOptions.getDefaultTheme ? globalOptions.getDefaultTheme() : {}
 }
 
-export const createWithTheme = <T extends {}>(creator: T | ((theme: TTheme.Theme) => T), theme: TTheme.Theme, componentIdForSheet?: number) => {
-  if (typeof creator === 'function') {
+export const createWithTheme = <T extends {}>(
+  sheetOrCreator: T | ((theme: TTheme.Theme) => T),
+  theme: TTheme.Theme,
+  componentIdForSheet?: number
+) => {
+  if (typeof sheetOrCreator === 'function') {
     theme = adjustTheme(theme)
+    const isSheet = typeof componentIdForSheet === 'number'
     // already in cache:
-    if (componentIdForSheet) {
+    if (isSheet) {
       const value = theme.$cache && theme.$cache[componentIdForSheet]
       if (value) return { theme, value }
     }
-    const value = creator(adjustTheme(theme))
+    // call sheet creator with theme:
+    const value = sheetOrCreator(adjustTheme(theme))
     // put to cache:
-    if (typeof componentIdForSheet === 'number') {
+    if (isSheet) {
       if (!theme.$cache) theme.$cache = {}
       theme.$cache[componentIdForSheet] = value
     }
-    // return functional creator result
+    // return theme and sheet
     return { theme, value }
   } else
-    // return value creator result
-    return { theme, value: creator }
+    // return theme and sheet
+    return { theme, value: sheetOrCreator }
 }
 
 const reactContext = React.createContext<TTheme.Theme>(null)
 
-export class ThemeProvider<T extends TTheme.Theme = TTheme.Theme> extends React.Component<TTheme.ThemeProviderProps<T>> {
+export class ThemeProvider extends React.Component<TTheme.ThemeProviderProps> {
 
   render() {
     const { children, theme, registeredThemeName } = this.props
-    const actTheme =
-      registeredThemeName ? globalOptions.namedThemes[registeredThemeName] :
-        this.theme ? this.theme : (this.theme = theme)
+    const actTheme = registeredThemeName ? globalOptions.namedThemes[registeredThemeName] : theme
     warning(actTheme, 'ThemeProvider: missing theme')
     return actTheme ? <reactContext.Provider value={actTheme}>{children}</reactContext.Provider> : children
   }
 
-  theme: TTheme.Theme
 }
-
-export const ThemeProviderUntyped = ThemeProvider as React.ComponentClass<TTheme.ThemeProviderProps>
-
-//const t = <ThemeProviderUntyped>{theme => <div />}</ThemeProviderUntyped>

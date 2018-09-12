@@ -5,17 +5,37 @@ import { sheetPipe } from './pipe-sheet'
 import { themePipe, initThemePipe } from './pipe-theme'
 import { deepMerges } from '../utils/deep-merge'
 
-export const initWithStyles = (options?: TWithStyles.GlobalOptions) => initThemePipe({
+export const initWithStyles = (options: TWithStyles.GlobalOptions = null) => initThemePipe({
   createPipeline: context =>
     themePipe(context,
       sheetPipe(context,
-        lastPipe(context, null)
+        lastPipe(context,
+          null)
       )
     ),
-  ...options || null
+  ...options
 })
 
-const withStylesLow = <TStatic extends {} = {}>(
+export const lastPipe: TWithStyles.Pipe = (context, next) =>
+  () => <this.pipelineContex.CodeComponent {...context.codeProps} />
+
+export const withStylesCreator = <R extends TSheeter.Shape, TStatic extends {} = {}>(
+  sheetCreator: TSheeter.SheetOrCreator<R>,
+  codeComponent: TComponents.ComponentType<R>,
+  options?: TWithStyles.Options<R>
+) => (
+  overrideOptions?: TWithStyles.Options<R>
+) => withStylesLow(
+  sheetCreator, codeComponent, options, overrideOptions
+) as TComponents.ComponentClass<R> & TStatic & TProvider<R>
+
+export interface TProvider<R extends TSheeter.Shape> { Provider: React.ComponentClass<TComponents.Props<R>> }
+
+//*********************************************************
+//  PRIVATE
+//*********************************************************
+
+const withStylesLow = (
   sheetOrCreator: TSheeter.SheetOrCreator, CodeComponent: TComponents.ComponentType,
   options: TWithStyles.Options, overrideOptions: TWithStyles.Options
 ) => {
@@ -33,7 +53,7 @@ const withStylesLow = <TStatic extends {} = {}>(
   }
 
   class Styled extends React.Component<TComponents.Props> {
-    
+
     pipelineContex: TWithStyles.PipelineContext = {
       ...pipelineContextStatic,
       id: pipelineContextStatic.displayName + ' *' + compIdCounter++,
@@ -50,11 +70,9 @@ const withStylesLow = <TStatic extends {} = {}>(
     public static displayName = pipelineContextStatic.displayName
   }
 
+  const styled: TComponents.ComponentClass = Styled
+  return styled
 }
-
-export const lastPipe: TWithStyles.Pipe = (context, next) =>
-  () => <this.pipelineContex.CodeComponent {...context.codeProps} />
 
 let compCounter = 0
 let compIdCounter = 0
-

@@ -5,7 +5,7 @@ export namespace TTheme {
     $cache?: {[componentId: number]: TSheeter.Sheet}
   }
 
-  export interface ThemeProviderProps<T extends Theme = Theme> { 
+  export interface ThemeProviderProps<T extends {} = Theme> { 
     registeredThemeName?: string
     theme?: T
   }

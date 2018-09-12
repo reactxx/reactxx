@@ -51,6 +51,7 @@ export namespace TComponents {
 
   export type TEventsX<R extends Shape = Shape> = PartialRecord<TSheeter.getEvents<R>, MouseEventEx<R>>
   export type ComponentType<R extends Shape = Shape> = React.ComponentType<Props<R>>
+  export type ComponentClass<R extends Shape = Shape> = React.ComponentClass<Props<R>>
   export type SFC<R extends Shape = Shape> = React.SFC<Props<R>>
 
   //******************** Cross platform component code props
