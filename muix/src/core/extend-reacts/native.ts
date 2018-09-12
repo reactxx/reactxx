@@ -1,18 +1,18 @@
 import React from 'react'
-import { TExtends, TSheeter, TCompiler } from '../index-d'
+import { TComponents, TCompiler } from '../index-d'
 /******************************************
   EXTEND REACT NATIVE
 *******************************************/
 declare module 'react-native' {
-    interface ViewProperties extends TExtends.CommonProperties {
+    interface ViewProperties extends TComponents.CommonProperties {
     }
-    interface TextProperties extends TExtends.CommonProperties {
+    interface TextProperties extends TComponents.CommonProperties {
     }
-    interface ImageProperties extends TExtends.CommonProperties {
+    interface ImageProperties extends TComponents.CommonProperties {
     }
   }
 
-  export const createElement = (type, props: TExtends.CommonProperties, ...children) => {
+  export const createElement = (type, props: TComponents.CommonProperties, ...children) => {
     if (!props) return React.createElement(type, props, ...children)
     // const { classNameX, styleX } = props
     // if (classNameX) {

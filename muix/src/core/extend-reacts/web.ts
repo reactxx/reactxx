@@ -1,7 +1,7 @@
 import React from 'react'
 import { renderer } from 'reactxx-fela'
 
-import { TExtends, TCompiler, TSheeter } from '../index-d'
+import { TCompiler, TSheeter, TComponents } from '../index-d'
 import { classNames, deleteUnusedProps } from './class-names'
 import { styles } from './styles'
 /******************************************
@@ -10,19 +10,19 @@ import { styles } from './styles'
 // https://stackoverflow.com/questions/40093655/how-do-i-add-attributes-to-existing-html-elements-in-typescript-jsx
 // https://github.com/Microsoft/TypeScript/issues/10859
 declare module 'react' {
-  interface HTMLAttributes<T> extends TSheeter.CommonProperties {
+  interface HTMLAttributes<T> extends TComponents.CommonProperties {
   }
-  interface SVGAttributes<T> extends TSheeter.CommonProperties {
+  interface SVGAttributes<T> extends TComponents.CommonProperties {
   }
 }
 
-export const createElement = (type, props: TSheeter.CommonProperties & { className?, style? }, ...children) => {
+export const createElement = (type, props: TComponents.CommonProperties & { className?, style? }, ...children) => {
   if (!props) return React.createElement(type, props, ...children)
   const { classNameX, styleX } = props
   deleteUnusedProps(props)
   // classNameX are compiled as soon as possible
   if (classNameX) {
-    const compiled = Array.isArray(classNameX) ? classNames(...classNameX as TExtends.ClassNameItem[]) : classNames(classNameX)
+    const compiled = Array.isArray(classNameX) ? classNames(...classNameX as TSheeter.ClassNameItem[]) : classNames(classNameX)
     if (isReactBuildInComponent(type)) {
       delete props.classNameX
       if (!props.className) props.className = normalizeValues(compiled)

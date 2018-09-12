@@ -35,7 +35,7 @@ export const testConditions = (conditions: TRulesetConditions.Conditions, query:
 
 const compileWhenUsed: TRulesetConditions.CompileProc = (list, ruleset: TRulesetConditions.WhenUsedPart, path, pseudoPrefixes, conditions) => {
     for (const p in ruleset) {
-        const rules = ruleset[p] as TSheeter.RulesetInner
+        const rules = ruleset[p] as TSheeter.Ruleset
         compileTree(
             list, rules,
             `${path}/$whenUsed.${p}`,

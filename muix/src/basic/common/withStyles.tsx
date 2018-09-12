@@ -10,7 +10,7 @@ import { TAddIn } from '../typings/add-in';
 // DON'T REMOVE IT (project reference fails)
 type fake = TAddIn.CodeProps
 
-const DEV_MODE = process.env.NODE_ENV === 'development' 
+const DEV_MODE = process.env.NODE_ENV === 'development'
 
 /************************
 * TRenderState
@@ -43,7 +43,7 @@ export interface TRenderState {
   // - merges codeClassesPatch to codeClasses, save result to finalProps.system.classes
   // - render code component
 
-  $developer_id?: string  
+  $developer_id?: string
 
 }
 
@@ -73,8 +73,10 @@ const renderAddIn: RenderAddIn = {
 * WITH STYLES
 *************************/
 
-export const withStylesCreator = <R extends Types.Shape, TStatic extends {} = {}>(sheetCreator: Types.SheetCreatorX<R>, codeComponent: Types.CodeComponentType<R>, options?: Types.WithStyleOptions_ComponentX<R>) =>
-  (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => withStylesLow<R, TStatic>(sheetCreator, renderAddIn, { ...options || null }, overrideOptions)(codeComponent)
+export const withStylesCreator = <R extends Types.Shape, TStatic extends {} = {}>
+  (sheetCreator: Types.SheetCreatorX<R>, codeComponent: Types.CodeComponentType<R>, options?: Types.WithStyleOptions_ComponentX<R>) =>
+  (overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => 
+  withStylesLow<R, TStatic>(sheetCreator, renderAddIn, { ...options || null }, overrideOptions)(codeComponent)
 
 const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCreator: Types.SheetCreatorX<R>, addIns: RenderAddIn, options?: Types.WithStyleOptions_ComponentX<R>, overrideOptions?: Types.WithStyleOptions_ComponentX<R>) => (CodeComponent: Types.CodeComponentType<R>) => {
 
@@ -154,7 +156,7 @@ export const withStyles:
 export interface TProvider<R extends Types.Shape> { Provider: React.ComponentClass<Types.PropsX<R>> }
 
 export type WithStyle<R extends Types.Shape> = React.ComponentClass<Types.PropsX<R>> & TProvider<R>
-export type WithStyleCreator<R extends Types.Shape> = (options?:Types.WithStyleOptions_ComponentX<R>) => WithStyle<R>
+export type WithStyleCreator<R extends Types.Shape> = (options?: Types.WithStyleOptions_ComponentX<R>) => WithStyle<R>
 
 export const variantToString = (...pars: Object[]) => pars.map(p => p.toString()).join('$')
 

@@ -3,6 +3,7 @@ import { TSheeter } from 'reactxx-core'
 
 interface Shape1 extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
+    theme: { color: string }
 }
 const style1: TSheeter.Ruleset<'Text', Shape1> = {
     $whenUsed: {
@@ -11,6 +12,15 @@ const style1: TSheeter.Ruleset<'Text', Shape1> = {
         x:0,
     },
 }
+
+const sheet3: TSheeter.SheetCreator<Shape1> = ({color}) => ({ 
+    root: {
+        color
+    }
+})
+
+
+
 
 
 interface Shape2 extends TSheeter.ShapeAncestor {
@@ -47,5 +57,4 @@ const sheet: TSheeter.Sheet<Shape2> = {
     root: {},
     disabled: {}
 }
-
 

@@ -11,3 +11,7 @@ export * from './extend-reacts/class-names'
 //export { run as Test } from './tests/test'
 export { default as Test } from './tests/primitives'
 
+import {initWithStyles} from './with-style/with-styles'
+
+initWithStyles()
+

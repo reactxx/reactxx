@@ -47,11 +47,11 @@ const webViewRuleset = {
   flexShrink: 0,
   position: 'relative',
   overflow: 'hidden',
-} as TSheeter.RulesetWeb
+} as TSheeter.Ruleset
 
 export const viewSheet: TSheeter.Sheet<TPrimitives.ViewShape> = ({
   root: {
-    $web: webViewRuleset
+    $web: { $before: webViewRuleset }
   },
   pressable: {
     $web: {
@@ -81,7 +81,7 @@ export const iconSheet: TSheeter.Sheet<TPrimitives.IconShape> = ({
 export const scrollViewSheet: TSheeter.Sheet<TPrimitives.ScrollViewShape> = ({
   root: {
     $web: {
-      ...webViewRuleset,
+      $before: webViewRuleset,
       flexBasis: 0,
       flexGrow: 1,
       overflowX: 'hidden',
@@ -97,7 +97,7 @@ export const scrollViewSheet: TSheeter.Sheet<TPrimitives.ScrollViewShape> = ({
     }
   },
   container: {
-    $web: webViewRuleset,
+    $web: { $before: webViewRuleset },
   },
   rootHorizontal: {
     $web: {

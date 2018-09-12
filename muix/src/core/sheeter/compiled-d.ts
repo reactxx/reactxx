@@ -2,6 +2,8 @@ import { TValue,TSheeter, TRulesetConditions } from '../index-d'
 
 export namespace TCompiler {
 
+  export type RulesetCompiler = (ruleset: TSheeter.Ruleset) => Values
+
   export const TypedInterfaceProp = '``'
 
   export enum TypedInterfaceTypes {

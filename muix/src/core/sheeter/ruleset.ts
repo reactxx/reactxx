@@ -5,10 +5,10 @@ import { compileConditionals } from './ruleset-conditions'
 import 'reactxx-fela'
 
 // platform dependent import
-import {rulesetCompiler} from 'reactxx-core'
+import { rulesetCompiler } from 'reactxx-core'
 
 export const compileRuleset = <T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape>(
-    ruleset: TSheeter.Ruleset<T, R>,
+    ruleset: TSheeter.Ruleset<T, R> & { name?: string },
     rulesetName?: string
 ) => {
     if (!ruleset) return null
@@ -84,7 +84,7 @@ export const compileTree: TRulesetConditions.CompileProc = (list, ruleset, path,
 
     // parse pseudo rules (:hover etc.)
     for (const p in ruleset) {
-        const value = ruleset[p] as TSheeter.RulesetInner
+        const value = ruleset[p] as TSheeter.Ruleset
         if (p.charAt(0) === '$' || !isObject(value)) continue
         // null at compileTree(...,null) => don't push to list, just parse addIns
         compileTree(list, value, `${path}/${p}`, [...pseudoPrefixes, p], conditions, null)
@@ -100,7 +100,7 @@ const wrapPseudoPrefixes = (rules: {}, pseudoPrefixes: string[]) => {
     return res
 }
 
-const pushToList = (list: TCompiler.RulesetList, ruleset: TSheeter.RulesetInner, conditions: TRulesetConditions.Conditions, path: string) => {
+const pushToList = (list: TCompiler.RulesetList, ruleset: TSheeter.Ruleset, conditions: TRulesetConditions.Conditions, path: string) => {
     if (!ruleset) return
     if (DEV_MODE)
         list.push({ rules: rulesetCompiler(ruleset), conditions, path, rulesTrace: makeTrace(ruleset) })

@@ -1,6 +1,6 @@
 ﻿import ReactN from 'react-native'
 
-import { TSheeter } from '../index-d'
+import { TSheeter, TComponents } from '../index-d'
 
 // export const enum CompNames {
 //   Text = 'ReactXX$Text',
@@ -30,7 +30,7 @@ export namespace TPrimitives {
   style: 'View'
   propsWeb: React.HTMLAttributes<HTMLDivElement>
   propsNative: ReactN.ViewProperties
-  events: TSheeter.ShapeWeb<TSheeter.TEventsAll>
+  events: TSheeter.ShapeWeb<TComponents.TEventsAll>
 }
 
 export interface TextShape extends TSheeter.ShapeAncestor {
@@ -41,7 +41,7 @@ export interface TextShape extends TSheeter.ShapeAncestor {
     props: { numberOfLines?: number; url?: string }
     propsWeb: React.HTMLAttributes<HTMLSpanElement>
     propsNative: ReactN.TextProperties
-    events: TSheeter.ShapeWeb<TSheeter.TEventsXNames>
+    events: TSheeter.ShapeWeb<TComponents.TEventsXNames>
   }
 
   export interface IconShape extends TSheeter.ShapeAncestor {
@@ -51,7 +51,7 @@ export interface TextShape extends TSheeter.ShapeAncestor {
     props: { data: string; url?: string }
     propsWeb: React.SVGAttributes<SVGElement>
     propsNative: ReactN.TextProperties
-    events: TSheeter.ShapeWeb<TSheeter.TEventsXNames>
+    events: TSheeter.ShapeWeb<TComponents.TEventsXNames>
   }
 
   export interface ScrollViewShape extends TSheeter.ShapeAncestor {

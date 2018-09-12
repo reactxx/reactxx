@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-// import { Reactxx } from 'reactxx-basic'
 import warning from 'warning';
 import { TCommon } from '../typings/common';
 
@@ -36,7 +35,6 @@ export class ThemeProvider extends React.Component<TCommon.ThemeProviderProps> {
     const { children, theme } = this.props
     const actTheme = typeof theme === 'function' ? theme(parentContext && parentContext.theme) : (typeof theme === 'string' ? namedThemes[theme] : theme)
     warning(actTheme, 'ThemeProvider: missing theme')
-    //if (typeof theme === 'string') actTheme.themeName = theme
     if (!this.themeContext || actTheme !== this.themeContext.theme)
       this.themeContext = { theme: actTheme, $cache: [] }
     return <themeContext.Provider value={this.themeContext}>{children}</themeContext.Provider>

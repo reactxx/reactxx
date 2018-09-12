@@ -1,5 +1,5 @@
 import { renderer } from 'reactxx-fela'
-import { TExtends } from '../index-d'
+import { TCompiler } from '../index-d'
 
-export const rulesetCompiler: TExtends.RulesetCompiler = renderer.renderRuleEx
+export const rulesetCompiler: TCompiler.RulesetCompiler = renderer.renderRuleEx
 

@@ -1,6 +1,6 @@
-import { TExtends, TCompiler, TValue } from '../index-d'
+import { TCompiler, TValue } from '../index-d'
 
-export const rulesetCompiler: TExtends.RulesetCompiler = style => {
+export const rulesetCompiler: TCompiler.RulesetCompiler = style => {
     if (!style) return []
     const res: TCompiler.Values = []
     for (const p in style) {

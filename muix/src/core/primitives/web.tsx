@@ -3,22 +3,24 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { withStyles } from './with-styles'
-import { TPrimitives, TSheeter } from '../index-d'
+//import { withStyles } from '../with-style/with-styles'
+import { TPrimitives, TSheeter, TComponents } from '../index-d'
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from './sheets'
+
+const withStyles = <T extends any>(...args: any[]) => null as any
 
 // platform dependent import
 import { createElement } from 'reactxx-core'
 
-export const view: TSheeter.SFCCode<TPrimitives.ViewShape> = props => {
+export const view: TComponents.SFCCode<TPrimitives.ViewShape> = props => {
     const { styleX, classNameX, classNames, classes, ...rest } = props
-    const root = classNames(classes.root, hasPlatformEvents(props) && classes.pressable, classNameX)
+    const root = classNames(classes.root, hasPlatformEvents(props) && classes.pressable, classNameX) 
     return <div classNameX={root} styleX={styleX} {...rest} />
 }
 
 let hasPlatformEvents = props => false
 
-export const icon: TSheeter.SFCCode<TPrimitives.IconShape> = props => {
+export const icon: TComponents.SFCCode<TPrimitives.IconShape> = props => {
     const { styleX, classNameX, classes, classNames, children, data, url/*, onClick*/, ...rest } = props
     const rootStyle = classNames(classes.root, hasPlatformEvents(props) && classes.pressable, classNameX)
     const svg = <svg classNameX={rootStyle} styleX={styleX} onClick={url ? undefined : undefined /*onClick*/} {...rest}>
@@ -27,7 +29,7 @@ export const icon: TSheeter.SFCCode<TPrimitives.IconShape> = props => {
     return url ? <a href={url}>{svg}</a> : svg
 }
 
-export const scrollView: TSheeter.SFCCode<TPrimitives.ScrollViewShape> = props => {
+export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = props => {
     const { styleX, classNameX, classes, classNames, children, horizontal, ...rest } = props
     const rootStyle = classNames(classes.root, horizontal && classes.rootHorizontal, classNameX)
     const containerStyle = classNames(classes.container, horizontal && classes.containerHorizontal)
@@ -38,7 +40,7 @@ export const scrollView: TSheeter.SFCCode<TPrimitives.ScrollViewShape> = props =
     </div>
 }
 
-export const text: TSheeter.SFCCode<TPrimitives.TextShape> = props => {
+export const text: TComponents.SFCCode<TPrimitives.TextShape> = props => {
     const { classNameX, classes, classNames, numberOfLines, url/*, onClick*/, sheetQuery: { whenUsed }, ...rest } = props
     whenUsed.pressable = hasPlatformEvents(props)
     whenUsed.singleLine = numberOfLines === 1
@@ -59,9 +61,11 @@ export const animatedScrollView = scrollView
 export const View = withStyles<TPrimitives.ViewShape>(viewSheet, view)
 
 export const Icon = withStyles<TPrimitives.IconShape>(iconSheet, icon, {
-    $web: {
-        viewBox: '0 0 24 24',
-        focusable: 'false'
+    defaultProps: {
+        $web: {
+            viewBox: '0 0 24 24',
+            focusable: 'false'
+        }
     }
 })
 
