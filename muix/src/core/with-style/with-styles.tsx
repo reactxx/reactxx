@@ -1,23 +1,61 @@
 import React from 'react'
-import { TSheeter, TComponents, TWithStyles } from '../index-d'
+import { TSheeter, TComponents, TCompiler, TTheme, TRulesetConditions } from '../index-d'
 import { globalOptions } from './global-options'
-import { sheetPipe } from './pipe-sheet'
-import { themePipe, initThemePipe } from './pipe-theme'
+import { lastPipe } from './pipe-sheet'
+import { firstPipe, themePipeInit } from './pipe-theme'
 import { deepMerges } from '../utils/deep-merge'
 
-export const initWithStyles = (options: TWithStyles.GlobalOptions = null) => initThemePipe({
+export namespace TWithStyles {
+
+  export interface GlobalOptions {
+    getDefaultTheme?: TTheme.GetDefaultTheme
+    createPipeline?: PipeLine
+    namedThemes?: { [themeName: string]: TTheme.Theme }
+  }
+
+  export interface Options<R extends TSheeter.Shape = TSheeter.Shape> extends GlobalOptions {
+    name?: string,
+    defaultProps?: TComponents.Props<R>
+    withTheme?: boolean,
+  }
+
+  export interface PipelineContext extends Options<TSheeter.Shape> {
+    // static part
+    componentId?: number
+    displayName?: string
+    sheetOrCreator?: TSheeter.SheetOrCreator
+    CodeComponent?: TComponents.ComponentType,
+    // instance part
+    id?: string
+    props?: TComponents.Props
+    //codeProps?: TComponents.PropsCode
+    pipeData?: PipeData[]
+    sheet?: TCompiler.Sheet
+    sheetQuery?: TRulesetConditions.Query
+    theme?: TSheeter.getTheme
+  }
+
+  export interface PipeData {
+    codeProps?: TComponents.PropsCode
+
+    classNameX?: TSheeter.ClassName
+    styleX?: TSheeter.StylesX
+    classes?: TSheeter.PartialSheet // cross platform sheet
+  }
+
+  export type Pipe = (pipeId: number, context: TWithStyles.PipelineContext, next: () => React.ReactNode) => () => React.ReactNode
+  export type PipeLine = (context: TWithStyles.PipelineContext) => () => React.ReactNode
+
+}
+
+export const withStylesInit = (options: TWithStyles.GlobalOptions = null) => themePipeInit({
   createPipeline: context =>
-    themePipe(context,
-      sheetPipe(context,
-        lastPipe(context,
-          null)
-      )
+    firstPipe(0, context,
+      lastPipe(2, context,
+        null)
     ),
   ...options
 })
-
-export const lastPipe: TWithStyles.Pipe = (context, next) =>
-  () => <this.pipelineContex.CodeComponent {...context.codeProps} />
 
 export const withStylesCreator = <R extends TSheeter.Shape, TStatic extends {} = {}>(
   sheetCreator: TSheeter.SheetOrCreator<R>,
@@ -40,7 +78,7 @@ const withStylesLow = (
   options: TWithStyles.Options, overrideOptions: TWithStyles.Options
 ) => {
   options = options && overrideOptions ? deepMerges({}, [options, overrideOptions]) : options ? options : overrideOptions ? overrideOptions : {}
-  const componentId = compCounter++
+  const componentId = componentTypeCounter++
 
   const pipelineContextStatic: TWithStyles.PipelineContext = {
     ...globalOptions,
@@ -56,16 +94,15 @@ const withStylesLow = (
 
     pipelineContex: TWithStyles.PipelineContext = {
       ...pipelineContextStatic,
-      id: pipelineContextStatic.displayName + ' *' + compIdCounter++,
+      id: pipelineContextStatic.displayName + ' *' + componentInstaneCounter++,
       props: this.props,
-      codeProps: { ...this.props } as TComponents.PropsCode
     }
+
+    renderPipeline = options.createPipeline(this.pipelineContex)
 
     render() {
       return this.renderPipeline()
     }
-
-    renderPipeline = options.createPipeline(this.pipelineContex)
 
     public static displayName = pipelineContextStatic.displayName
   }
@@ -74,5 +111,5 @@ const withStylesLow = (
   return styled
 }
 
-let compCounter = 0
-let compIdCounter = 0
+let componentTypeCounter = 0 // counter of component types
+let componentInstaneCounter = 0 // counter of component instances

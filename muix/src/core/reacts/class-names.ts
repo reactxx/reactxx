@@ -23,8 +23,11 @@ const classNamesWithQuery = (query: TRulesetConditions.Query, theme, ...rulesets
     if (!rulesets || rulesets.length === 0) return [] as TCompiler.Values
     if (isCompiledValues(rulesets)) return rulesets
     // when used query par
-    if (!query) query = {}
-    if (!query.whenUsed) query.whenUsed = {}
+    if (query)
+      query = {...query, whenUsed: query.whenUsed ? {...query.whenUsed} : {}}
+    else 
+      query = {}
+
     rulesets.forEach((r: TSheeter.Ruleset & {name?:string}) => {
         if (!r || !r.name) return
         query.whenUsed[r.name] = true

@@ -1,11 +1,5 @@
-﻿
-grid/ComplexGrid
-grid/InteractiveGrid
-grid/SpacingGrid
-hidden/BreakpointDown
-hidden/BreakpointOnly
-hidden/BreakpointUp
-hidden/GridIntegration
-popover/AnchorPlayground
-popper/ScrollPlayground
-transitions/SimpleGrow
+﻿ruleset
+    name
+    value-list
+classNameX
+    ruleset, compileRuleset, values

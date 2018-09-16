@@ -27,7 +27,6 @@ export namespace TComponents {
     classNameX?: TSheeter.ClassNameOrCreator<R>
     styleX?: TSheeter.StylesXOrCreator<R>
     classes?: TSheeter.PartialSheetOrCreator<R> // cross platform sheet
-    theme?: TSheeter.getTheme<R>
   }
 
   /* cross platform styling attributes 
@@ -39,7 +38,7 @@ export namespace TComponents {
   export interface CommonProperties<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
     classNameX?: TSheeter.ClassName
     styleX?: TSheeter.StylesX<R>
-    classes?: TSheeter.PartialSheetOrCreator<R> // cross platform sheet
+    classes?: TSheeter.PartialSheet<R> // cross platform sheet
   }
 
   export interface PropsLow<R extends Shape> { //extends CommonPropertiesWithTheme<R> {
@@ -63,9 +62,10 @@ export namespace TComponents {
     classNameX?: TSheeter.ClassNameItem
     styleX?: TSheeter.StyleX<R>
     children?: React.ReactNode
-    sheetQuery?: TRulesetConditions.Query<R>;
+    sheetQuery?: TRulesetConditions.Query<R>
     classes?: TCompiler.Sheet<R>
     classNames?: (...rulesets: TSheeter.ClassNameItem[]) => TCompiler.Values
+    theme?: TSheeter.getTheme<R>
   }
 
   export type CommonPropertiesCodeKeys = keyof CommonPropertiesCode

@@ -1,21 +1,15 @@
-import { TWithStyles } from '../index-d'
-import { adjustSheet } from '../extend-reacts/adjust-sheet'
-import { createWithTheme } from './pipe-theme'
-import { classNamesForBind } from '../extend-reacts/class-names'
+import React from 'react';
+import { TWithStyles, TComponents } from '../index-d'
+import { adjustSheet } from '../reacts/adjust-sheet'
+import { classNamesForBind } from '../reacts/class-names'
 
 
-export const sheetPipe:TWithStyles.Pipe = (context, next) => {
-  const {props, codeProps, sheetOrCreator, theme } = context
-  const { value: sheet, theme: theme2 } = createWithTheme(sheetOrCreator, theme, context.componentId)
-  const { value: classes, theme: theme3 }= createWithTheme(props.classes, theme2)
-  const { value: classNameX, theme: theme4 }= createWithTheme(props.classNameX, theme3)
-  const { value: styleX, theme: theme5 }= createWithTheme(props.styleX, theme4)
-  //const { value: classes, theme: theme3 }= createWithTheme(props.classNameX, theme2)
-  context.theme = theme5
-  codeProps.classNameX = classNameX
-  codeProps.styleX = styleX
-  codeProps.classes = adjustSheet(sheet, classes)
-  codeProps.sheetQuery = { whenUsed: {} }
+export const lastPipe: TWithStyles.Pipe = (pipeId, context, next) => {
+  const { pipeData } = context
+  const codeProps: TComponents.PropsCode = {
+    sheetQuery: context.sheetQuery,
+    theme: context.theme,
+  }
   codeProps.classNames = classNamesForBind.bind(codeProps)
-  return next
+  return () => <context.CodeComponent {...codeProps} />
 }

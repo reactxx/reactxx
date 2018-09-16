@@ -37,9 +37,9 @@ export const adjustSheetCompiled = <R extends TSheeter.Shape = TSheeter.Shape>(s
     return compileSheet<R>(sheet)
 }
 
-export const adjustRulesetCompiled = (ruleset: TSheeter.Ruleset, rulesetName?: string) => {
+export const adjustRulesetCompiled = (ruleset: TSheeter.ClassName, rulesetName?: string) => {
     if (!ruleset) return null
-    return !isCompiledRuleset(ruleset) ? compileRuleset(ruleset, rulesetName) : ruleset
+    return !isCompiledRuleset(ruleset) ? compileRuleset(ruleset as TSheeter.Ruleset, rulesetName) : ruleset
 }
 
 export function isCompiledRuleset(obj: Object): obj is TCompiler.Ruleset {
@@ -51,12 +51,9 @@ export function isCompiledValues(obj): obj is TCompiler.Values {
     return window.isWeb ? typeof obj[0] === 'string' : obj[0][TCompiler.TypedInterfaceProp] === TCompiler.TypedInterfaceTypes.nativeValue
 }
 export function isCompiledSheet<R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetX): sheet is TCompiler.Sheet<R> {
-    let isCompiled = false
-    for (const p in sheet) {
-        isCompiled = isCompiledRuleset(sheet[p])
-        break
-    }
-    return isCompiled
+    for (const p in sheet)
+        return isCompiledRuleset(sheet[p])
+    return true
 }
 
 //*********************************************************
