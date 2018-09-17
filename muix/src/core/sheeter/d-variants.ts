@@ -1,21 +1,21 @@
-import { TSheeter, TCompiler, TCommonStyles } from '../index-d'
+import { TSheeter, TCompiler, TCommonStyles } from '../d-index'
 
-export namespace TRulesetConditions {
+export namespace TVariants {
  
-  export type CompileProc = (
-    list: TCompiler.RulesetList,
-    ruleset: ConditionalPart | WhenUsedPart | MediaQPart | AnimationPart, 
+  export type ToVariantProc = (
+    list: TCompiler.Variants,
+    ruleset: VariantPart | WhenUsedPart | MediaQPart | AnimationPart, 
     path: string,
     pseudoPrefixes: string[],
     conditions: Conditions,
-    rulesetToQueue?: ConditionalPart
+    rulesetToQueue?: VariantPart
   ) => void
 
   //*********************************************************
   //  RULESET EXTENSION
   //*********************************************************
 
-  export interface ConditionalPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> {
+  export interface VariantPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> {
     $whenUsed?: WhenUsedPart<R>
     $mediaq?: MediaQPart<T, R> // record key has format eg. '-640' or '640-1024' or '1024-'
     $animation?: AnimationPart

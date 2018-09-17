@@ -4,7 +4,7 @@ import React from 'react'
 import ReactN from 'react-native'
 
 //import { withStyles } from '../with-style/with-styles'
-import { TPrimitives, TSheeter, TComponents } from '../index-d'
+import { TPrimitives, TSheeter, TComponents } from '../d-index'
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from './sheets'
 
 const withStyles = <T extends any>(...args: any[]) => null as any

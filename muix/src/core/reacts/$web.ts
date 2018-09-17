@@ -1,7 +1,7 @@
 import React from 'react'
 import { renderer } from 'reactxx-fela'
 
-import { TCompiler, TSheeter, TComponents } from '../index-d'
+import { TCompiler, TSheeter, TComponents } from '../d-index'
 import { classNames, deleteUnusedProps } from './class-names'
 import { styles } from './styles'
 /******************************************
@@ -43,11 +43,11 @@ export const createElement = (type, props: TComponents.CommonProperties & { clas
 }
 
 // apply LAST WIN strategy for web className
-const normalizeValues = (values: TCompiler.Values) => {
-  const res: TCompiler.ValueWeb[] = []
+const normalizeValues = (values: TCompiler.AtomicClasses) => {
+  const res: TCompiler.AtomicWeb[] = []
   const usedPropIds: { [propId: string]: boolean } = {}
   for (let k = values.length - 1; k >= 0; k--) {
-    const value = values[k] as TCompiler.ValueWeb
+    const value = values[k] as TCompiler.AtomicWeb
     const propId = renderer.propIdCache[value]
     if (!propId) continue
     if (usedPropIds[propId]) continue

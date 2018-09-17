@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 import CSS from 'csstype';
 
-import { TCommonStyles, TCompiler, TRulesetConditions } from '../index-d'
+import { TCommonStyles, TCompiler, TVariants } from '../d-index'
 
 export namespace TSheeter {
 
@@ -16,28 +16,28 @@ export namespace TSheeter {
     Ruleset<T, R> | RulesetCreator<T, R>
 
   //*************** Cross platform ruleset for web and native
+  export type RulesetArray<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> = Ruleset<T,R>[] & {name?: string}
   export type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
-    RulesetLow<T, R>
+    RulesetLow<T, R> &
+    {name?: string}
+
+  export interface RulesetLow<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> extends
+    TVariants.VariantPart<T, R> {
+    $native?: RulesetNative<T, R> | RulesetNative<T, R>[]// native specific rules
+    $web?: RulesetWeb<T, R> | RulesetWeb<T, R>[]// web specific rules
+  }
 
   export type RulesetNative<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     TCommonStyles.RulesetNative<T> & // native rules which are compatible with web
-    RulesetLow<T, R>
+    TVariants.VariantPart<T, R>
 
   export type RulesetWeb<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     RulesetWebLow<T, R> & // native rules which are compatible with web
-    RulesetLow<T, R>
+    TVariants.VariantPart<T, R>
 
   export type RulesetWebLow<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    React.CSSProperties & { [P in CSS.Pseudos]?: React.CSSProperties & RulesetWeb<T, R> }
-
-  export interface RulesetLow<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> extends
-    TRulesetConditions.ConditionalPart<T, R> {
-    $native?: RulesetNative<T, R>// native specific rules
-    $web?: RulesetWeb<T, R> // web specific rules
-    $before?: Ruleset<T, R>
-    $after?: Ruleset<T, R>
-  }
+    React.CSSProperties & { [P in CSS.Pseudos]?: RulesetWeb<T, R> | RulesetWeb<T, R>[] }
 
   /******************************************
     STYLE
@@ -77,11 +77,11 @@ export namespace TSheeter {
     { [P in keyof getCommon<R>]: Ruleset<getCommon<R>[P], R> }
   export type SheetNative<R extends Shape> = keyof getNative<R> extends never ? {} :
     { [P in keyof getNative<R>]: {
-      $native?: TCommonStyles.RulesetNative<getNative<R>[P]> & TRulesetConditions.ConditionalPart<getNative<R>[P], R>
+      $native?: TCommonStyles.RulesetNative<getNative<R>[P]> & TVariants.VariantPart<getNative<R>[P], R>
     } }
   export type SheetWeb<R extends Shape> = getWeb<R> extends never ? {} :
     { [P in getWeb<R>]: {
-      $web?: RulesetWeb<'Text', R> & TRulesetConditions.ConditionalPart<'Text', R>
+      $web?: RulesetWeb<'Text', R> | RulesetWeb<'Text', R>[] //RulesetWeb<'Text', R> & TRulesetConditions.ConditionalPart<'Text', R>
     } }
 
 
@@ -146,10 +146,10 @@ export namespace TSheeter {
   export type StylesX<R extends Shape = Shape> = StyleX<R> | StyleX<R>[]
   export type StylesXOrCreator<R extends Shape = Shape> = StylesX<R> | ((theme: getTheme<R>) => StylesX<R>)
 
-  export type ClassNameItem = TSheeter.Ruleset | TSheeter.RulesetCreator | TCompiler.Ruleset | TCompiler.Values
+  export type ClassNameItem = TSheeter.Ruleset | TSheeter.RulesetCreator | TCompiler.NamedVariants | TCompiler.AtomicClasses
   export type ClassName = ClassNameItem | ClassNameItem[]
   export type ClassNameOrCreator<R extends Shape = Shape> = ClassName | ((theme: getTheme<R>) => ClassName)
-  
+
   export type SheetX<R extends Shape = Shape> = Sheet<R> | TCompiler.Sheet<R>
 
 

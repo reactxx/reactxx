@@ -1,5 +1,5 @@
 import React from 'react';
-import { TWithStyles, TComponents } from '../index-d'
+import { TWithStyles, TComponents } from '../d-index'
 import { adjustSheet } from '../reacts/adjust-sheet'
 import { classNamesForBind } from '../reacts/class-names'
 

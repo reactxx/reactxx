@@ -1,5 +1,5 @@
 import React from 'react'
-import { TSheeter, TComponents, TCompiler, TTheme, TRulesetConditions } from '../index-d'
+import { TSheeter, TComponents, TCompiler, TTheme, TVariants } from '../d-index'
 import { globalOptions } from './global-options'
 import { lastPipe } from './pipe-sheet'
 import { firstPipe, themePipeInit } from './pipe-theme'
@@ -31,7 +31,7 @@ export namespace TWithStyles {
     //codeProps?: TComponents.PropsCode
     pipeData?: PipeData[]
     sheet?: TCompiler.Sheet
-    sheetQuery?: TRulesetConditions.Query
+    sheetQuery?: TVariants.Query
     theme?: TSheeter.getTheme
   }
 

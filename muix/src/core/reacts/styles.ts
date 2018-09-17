@@ -1,5 +1,5 @@
 import warning from 'warning'
-import { TSheeter } from '../index-d'
+import { TSheeter } from '../d-index'
 import { isObject } from '../utils/deep-merge'
 
 export const styles = (...rulesets: TSheeter.StyleX[]) => {

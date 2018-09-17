@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TSheeter, TCompiler, TRulesetConditions } from '../index-d'
+import { TSheeter, TCompiler, TVariants } from '../d-index'
 
 export namespace TComponents {
 
@@ -62,9 +62,9 @@ export namespace TComponents {
     classNameX?: TSheeter.ClassNameItem
     styleX?: TSheeter.StyleX<R>
     children?: React.ReactNode
-    sheetQuery?: TRulesetConditions.Query<R>
+    sheetQuery?: TVariants.Query<R>
     classes?: TCompiler.Sheet<R>
-    classNames?: (...rulesets: TSheeter.ClassNameItem[]) => TCompiler.Values
+    classNames?: (...rulesets: TSheeter.ClassNameItem[]) => TCompiler.AtomicClasses
     theme?: TSheeter.getTheme<R>
   }
 

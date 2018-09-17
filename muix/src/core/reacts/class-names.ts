@@ -1,6 +1,6 @@
-import { TSheeter, TCompiler, TRulesetConditions, TComponents } from '../index-d'
-import { compileRuleset, isCompiledRuleset, isCompiledValues } from '../sheeter/ruleset'
-import { testConditions } from '../sheeter/ruleset-conditions'
+import { TSheeter, TCompiler, TVariants, TComponents } from '../d-index'
+import { toVariantClassList, isVariableList, isCompiledValues } from '../sheeter/linearize-compile'
+import { testConditions } from '../sheeter/variants'
 
 
 export const deleteUnusedProps = props => propsToDelete.forEach(p => delete props[p])
@@ -19,8 +19,8 @@ export const classNamesWithTheme = (theme, ...rulesets: TSheeter.ClassNameItem[]
 const propsToDelete: TComponents.CommonPropertiesCodeKeys[] = ['sheetQuery', 'classes', 'classNames']
 
 // merge rulesets and apply query to ruleset's conditional parts ($whenUed, $mediaq etc.)
-const classNamesWithQuery = (query: TRulesetConditions.Query, theme, ...rulesets: TSheeter.ClassNameItem[]) => {
-    if (!rulesets || rulesets.length === 0) return [] as TCompiler.Values
+const classNamesWithQuery = (query: TVariants.Query, theme, ...rulesets: TSheeter.ClassNameItem[]) => {
+    if (!rulesets || rulesets.length === 0) return [] as TCompiler.AtomicClasses
     if (isCompiledValues(rulesets)) return rulesets
     // when used query par
     if (query)
@@ -32,7 +32,7 @@ const classNamesWithQuery = (query: TRulesetConditions.Query, theme, ...rulesets
         if (!r || !r.name) return
         query.whenUsed[r.name] = true
     })
-    const values: TCompiler.Values[] = []
+    const values: TCompiler.AtomicClasses[] = []
     for (let i = 0; i < rulesets.length; i++) {
         const val = rulesets[i] as TSheeter.RulesetOrCreator
         if (!val) continue
@@ -40,15 +40,15 @@ const classNamesWithQuery = (query: TRulesetConditions.Query, theme, ...rulesets
             values.push(val)
             continue
         }
-        const rs = isCompiledRuleset(val) ? val : compileRuleset(typeof val === 'function' ? val(theme) : val) // adjust compiled
+        const rs = isVariableList(val) ? val : toVariantClassList(typeof val === 'function' ? val(theme) : val) // adjust compiled
         for (let j = 0; j < rs.list.length; j++) {
             const rsi = rs.list[j]
             if (!testConditions(rsi.conditions, query)) continue
-            values.push(rsi.rules)
+            values.push(rsi.atomicClasses)
         }
 
     }
-    return [].concat.apply([], values) as TCompiler.Values
+    return [].concat.apply([], values) as TCompiler.AtomicClasses
 }
 
 

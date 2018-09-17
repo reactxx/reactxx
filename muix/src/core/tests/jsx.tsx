@@ -1,5 +1,5 @@
 /** @jsx createElement */
-import { createElement, classNames, TSheeter, TRulesetConditions, adjustRulesetCompiled } from 'reactxx-core'
+import { createElement, classNames, TSheeter, TVariants, adjustRulesetCompiled } from 'reactxx-core'
 
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'> & TSheeter.ShapeViews<'label'>
@@ -8,14 +8,14 @@ interface Shape extends TSheeter.ShapeAncestor {
     sheetFlags: TSheeter.ShapeFlags<'disabled' | 'active'>
 }
 
-type t = TRulesetConditions.WhenUsedKeys<Shape>
+type t = TVariants.WhenUsedKeys<Shape>
 type t2 = TSheeter.getFlags<Shape>
 
 // className?: className?: {} | string | ({} | string)[]
 const style = adjustRulesetCompiled({
     color: 'red'
 })
-const sheet: TSheeter.Sheet<Shape> = { 
+const sheet: TSheeter.Sheet<Shape> = {
     root: {
         margin: 4,
         $whenUsed: {
@@ -29,16 +29,25 @@ const sheet: TSheeter.Sheet<Shape> = {
                 $mediaq: {},
                 $whenUsed: {
                     root: {
-                        $before: {},
-                        $web: {
-                            ':hover': {
-                                
+                        //$before: {},
+                        $web: [
+                            {
+                                ':hover': [
+                                    {
+                                        $whenUsed: {},
+                                        ':active': {},
+                                        cursor: 'pointer',
+                                    }
+                                ]
+                            },
+                            {
+                                margin: 10
                             }
-                        },
+                        ],
                         $native: {
-                            
+
                         },
-                        
+
 
                     },
                 }
@@ -50,7 +59,7 @@ const sheet: TSheeter.Sheet<Shape> = {
         $web: {
             ':hover': {
                 $mediaq: {},
-                
+
             },
 
         }

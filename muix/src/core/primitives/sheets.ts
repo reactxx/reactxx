@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TPrimitives, TSheeter } from '../index-d'
+import { TPrimitives, TSheeter } from '../d-index'
 
 //type t = TRulesetConditions.RulesetNamesAll<TPrimitives.TextShape>
 
@@ -47,11 +47,11 @@ const webViewRuleset = {
   flexShrink: 0,
   position: 'relative',
   overflow: 'hidden',
-} as TSheeter.Ruleset
+} as TSheeter.RulesetWeb
 
 export const viewSheet: TSheeter.Sheet<TPrimitives.ViewShape> = ({
   root: {
-    $web: { $before: webViewRuleset }
+    $web: webViewRuleset
   },
   pressable: {
     $web: {
@@ -80,24 +80,26 @@ export const iconSheet: TSheeter.Sheet<TPrimitives.IconShape> = ({
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
 export const scrollViewSheet: TSheeter.Sheet<TPrimitives.ScrollViewShape> = ({
   root: {
-    $web: {
-      $before: webViewRuleset,
-      flexBasis: 0,
-      flexGrow: 1,
-      overflowX: 'hidden',
-      overflowY: 'auto',
-      WebkitOverflowScrolling: 'touch',
-      // Enable hardware compositing in modern browsers.
-      // Creates a new layer with its own backing surface that can significantly
-      // improve scroll performance.
-      transform: 'translateZ(0)'
-    },
+    $web: [
+      webViewRuleset,
+      {
+        flexBasis: 0,
+        flexGrow: 1,
+        overflowX: 'hidden',
+        overflowY: 'auto',
+        WebkitOverflowScrolling: 'touch',
+        // Enable hardware compositing in modern browsers.
+        // Creates a new layer with its own backing surface that can significantly
+        // improve scroll performance.
+        transform: 'translateZ(0)'
+      }
+    ],
     $native: {
       flexBasis: 0,
     }
   },
   container: {
-    $web: { $before: webViewRuleset },
+    $web: webViewRuleset,
   },
   rootHorizontal: {
     $web: {

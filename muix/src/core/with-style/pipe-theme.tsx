@@ -1,8 +1,8 @@
 import React from 'react';
 import warning from 'warning';
-import { TComponents, TSheeter, TWithStyles } from '../index-d';
+import { TComponents, TSheeter, TWithStyles } from '../d-index';
 import { globalOptions, globalOptionsInit } from './global-options'
-import { adjustRulesetCompiled, adjustSheetCompiled } from '../sheeter/ruleset';
+import { adjustRulesetCompiled, adjustSheetCompiled } from '../sheeter/linearize-compile';
 
 export namespace TTheme {
   export interface Theme {

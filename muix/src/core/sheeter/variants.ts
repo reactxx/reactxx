@@ -1,21 +1,21 @@
-import { TSheeter, TRulesetConditions } from '../index-d'
+import { TSheeter, TVariants } from '../d-index'
 
-import { compileTree } from './ruleset'
+import { linearizeAndCompileRulesetInner } from './linearize-compile'
 
-export const compileConditionals = (ruleset: TRulesetConditions.ConditionalPart) => {
+export const toVariantPart = (ruleset: TVariants.VariantPart) => {
     // compile root addIns
     const { $whenUsed, $mediaq, $animation } = ruleset;
 
     const addIns = [
-        { proc: compileWhenUsed, part: $whenUsed },
-        { proc: compileMediaQ, part: $mediaq },
-        { proc: compileAnimation, part: $animation }
+        { proc: toWhenUsedVariant, part: $whenUsed },
+        { proc: toMediaQVariant, part: $mediaq },
+        { proc: toAnimationVariant, part: $animation }
     ]
 
     return addIns.filter(p => p.part)
 }
 
-export const testConditions = (conditions: TRulesetConditions.Conditions, query: TRulesetConditions.Query) => {
+export const testConditions = (conditions: TVariants.Conditions, query: TVariants.Query) => {
     if (!conditions || conditions.length === 0) return true
     const firstFalse = conditions.find(cond => {
         switch (cond.type) {
@@ -27,27 +27,25 @@ export const testConditions = (conditions: TRulesetConditions.Conditions, query:
     return !firstFalse
 }
 
-
-
 //*********************************************************
 //  PRIVATE
 //*********************************************************
 
-const compileWhenUsed: TRulesetConditions.CompileProc = (list, ruleset: TRulesetConditions.WhenUsedPart, path, pseudoPrefixes, conditions) => {
+const toWhenUsedVariant: TVariants.ToVariantProc = (list, ruleset: TVariants.WhenUsedPart, path, pseudoPrefixes, conditions) => {
     for (const p in ruleset) {
         const rules = ruleset[p] as TSheeter.Ruleset
-        compileTree(
+        linearizeAndCompileRulesetInner(
             list, rules,
             `${path}/$whenUsed.${p}`,
             pseudoPrefixes,
-            [...conditions, { type: 'whenUsed', rulesetName: p } as TRulesetConditions.WhenUsedCondition],
+            [...conditions, { type: 'whenUsed', rulesetName: p } as TVariants.WhenUsedCondition],
             wrapPseudoPrefixes(rules, pseudoPrefixes))
     }
 }
 
-const compileMediaQ: TRulesetConditions.CompileProc = (list, ruleset: TRulesetConditions.MediaQPart, path, pseudoPrefixes, conditions) => {
+const toMediaQVariant: TVariants.ToVariantProc = (list, ruleset: TVariants.MediaQPart, path, pseudoPrefixes, conditions) => {
 }
-const compileAnimation: TRulesetConditions.CompileProc = (list, ruleset: TRulesetConditions.AnimationPart, path, pseudoPrefixes, conditions) => {
+const toAnimationVariant: TVariants.ToVariantProc = (list, ruleset: TVariants.AnimationPart, path, pseudoPrefixes, conditions) => {
 }
 
 const wrapPseudoPrefixes = (rules: {}, pseudoPrefixes: string[]) => {
