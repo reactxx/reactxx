@@ -4,20 +4,32 @@ import generateClassName from 'fela/lib/generateClassName';
 import isPlainObject from 'isobject';
 import { IRenderer } from 'fela'
 
+namespace TCompiler {
+  export const TypedInterfaceProp = '``'
+  export enum TypedInterfaceTypes {
+    atomicArray = 'v' /*value array*/,
+  }
+
+}
+
 export interface IRendererEx extends IRenderer {
-  renderRuleEx(style: Object): string[]
+  renderRuleEx(style: Object, tracePath?: string): string[] & { [TCompiler.TypedInterfaceProp]: TCompiler.TypedInterfaceTypes.atomicArray }
   propIdCache: {}
+  trace: {}
 }
 
 const patch = (renderer: IRenderer) => {
   const rendererEx = renderer as IRendererEx
   rendererEx.renderRuleEx = renderRuleEx.bind(rendererEx)
   rendererEx.propIdCache = {}
+  rendererEx.trace = {}
   return rendererEx
 }
 export default patch
 
-function renderRuleEx(style: {}): string[] {
+const DEV_MODE = process.env.NODE_ENV === 'development'
+
+function renderRuleEx(style: {}, tracePath?: string): string[] {
   if (!style) return []
   const processedStyle = processStyleWithPlugins(
     this,
@@ -26,18 +38,19 @@ function renderRuleEx(style: {}): string[] {
     {}
   )
 
-  return renderStyleToClassNames(this, processedStyle)//.slice(1)
+  return renderStyleToClassNames(this, tracePath, processedStyle)//.slice(1)
 }
 
 const concat = <T = any>(arr1: Array<T>, arr2: Array<T>) => arr1.concat(arr2)
 
-const renderStyleToClassNames = (renderer, { _className, ...style }: any, pseudo: string = '', media: string = '', support: string = ''): string[] => {
+const renderStyleToClassNames = (renderer, tracePath: string, { _className, ...style }: any, pseudo: string = '', media: string = '', support: string = ''): string[] => {
   //let classNames = _className ? ` ${_className}` : ''
   let classNames: string[] = []
+  classNames[TCompiler.TypedInterfaceProp] = TCompiler.TypedInterfaceTypes.atomicArray
 
   for (const property in style) {
 
-    // // reactxx HACK: ignore $... system properties
+    // reactxx HACK: ignore $... system properties
     if (property.charAt(0) === '$')
       continue
 
@@ -48,7 +61,8 @@ const renderStyleToClassNames = (renderer, { _className, ...style }: any, pseudo
         classNames = concat(classNames, renderStyleToClassNames(
           renderer,
           value,
-          pseudo + normalizeNestedProperty(property),
+          // reactxx HACK
+          (pseudo ? pseudo + '/' : '') + normalizeNestedProperty(property),
           media,
           support
         ))
@@ -57,6 +71,7 @@ const renderStyleToClassNames = (renderer, { _className, ...style }: any, pseudo
           media,
           property.slice(6).trim()
         )
+        // reactxx HACK
         classNames = concat(classNames, renderStyleToClassNames(
           renderer,
           value,
@@ -105,6 +120,12 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
 
         // reactxx HACK: cache declarationReference without value
         renderer.propIdCache[className] = support + media + pseudo + property
+        if (DEV_MODE)
+          renderer.trace[className] = tracePath + '/' +
+            (support ? support + '/' : '') +
+            (media ? media + '/' : '') +
+            (pseudo ? pseudo + '/' : '') +
+            property + ': ' + value
 
         const declaration = cssifyDeclaration(property, value)
         const selector = generateCSSSelector(className, pseudo)

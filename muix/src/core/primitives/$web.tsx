@@ -41,9 +41,9 @@ export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = prop
 }
 
 export const text: TComponents.SFCCode<TPrimitives.TextShape> = props => {
-    const { classNameX, classes, classNames, numberOfLines, url/*, onClick*/, sheetQuery: { whenUsed }, ...rest } = props
-    whenUsed.pressable = hasPlatformEvents(props)
-    whenUsed.singleLine = numberOfLines === 1
+    const { classNameX, classes, classNames, numberOfLines, url/*, onClick*/, sheetQuery: { whenFlag }, ...rest } = props
+    whenFlag.pressable = hasPlatformEvents(props)
+    whenFlag.singleLine = numberOfLines === 1
     const tagProps = {
         className: TPrimitives.Consts.textClassName,
         classNameX: classNames(classes.root, classNameX),

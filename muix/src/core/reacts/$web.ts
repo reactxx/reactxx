@@ -43,7 +43,7 @@ export const createElement = (type, props: TComponents.CommonProperties & { clas
 }
 
 // apply LAST WIN strategy for web className
-const normalizeValues = (values: TCompiler.AtomicClasses) => {
+const normalizeValues = (values: TCompiler.AtomicArray) => {
   const res: TCompiler.AtomicWeb[] = []
   const usedPropIds: { [propId: string]: boolean } = {}
   for (let k = values.length - 1; k >= 0; k--) {

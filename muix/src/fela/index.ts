@@ -23,8 +23,6 @@ const plugins = {
 
 export const renderer = patch(createRenderer(plugins))
 
-export const compileRuleset = (ruleset: Object) => renderer.renderRuleEx(ruleset)
-
 // renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html
 //   height: '100%',
 //   width: '100%',
@@ -101,7 +99,7 @@ export const rulesetToClassNamesMUI = (ruleset: React.CSSProperties) => {
 
   let classNames = ''
   if (!empty) {
-    const classNamesEx = compileRuleset(rs)
+    const classNamesEx = renderer.renderRuleEx(rs)
     classNames = classNamesEx.join(' ')
   }
 

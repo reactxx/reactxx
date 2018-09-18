@@ -14,7 +14,7 @@ export const textSheet: TSheeter.Sheet<TPrimitives.TextShape> = ({
         display: 'inline',
       },
     },
-    $whenUsed: {
+    $whenFlag: {
       pressable: {
         $web: {
           cursor: 'pointer'

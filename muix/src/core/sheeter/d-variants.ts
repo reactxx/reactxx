@@ -4,7 +4,7 @@ export namespace TVariants {
  
   export type ToVariantProc = (
     list: TCompiler.Variants,
-    ruleset: VariantPart | WhenUsedPart | MediaQPart | AnimationPart, 
+    ruleset: VariantPart | WhenFlagPart | MediaQPart | AnimationPart, 
     path: string,
     pseudoPrefixes: string[],
     conditions: Conditions,
@@ -16,13 +16,13 @@ export namespace TVariants {
   //*********************************************************
 
   export interface VariantPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> {
-    $whenUsed?: WhenUsedPart<R>
+    $whenFlag?: WhenFlagPart<R>
     $mediaq?: MediaQPart<T, R> // record key has format eg. '-640' or '640-1024' or '1024-'
     $animation?: AnimationPart
   }
 
-  export type WhenUsedPart<R extends TSheeter.Shape = TSheeter.Shape> = { [p in WhenUsedKeys<R>]?: TSheeter.Ruleset }
-  export type WhenUsedKeys<R extends TSheeter.Shape> = TSheeter.RulesetNamesAll<R> | TSheeter.getFlags<R>
+  export type WhenFlagPart<R extends TSheeter.Shape = TSheeter.Shape> = { [p in WhenFlagKeys<R>]?: TSheeter.Ruleset }
+  export type WhenFlagKeys<R extends TSheeter.Shape> = TSheeter.RulesetNamesAll<R> | TSheeter.getFlags<R>
 
   export type MediaQPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> = Record<string, TSheeter.Ruleset<T, R>>
 
@@ -33,12 +33,12 @@ export namespace TVariants {
   //*********************************************************
 
   export type Conditions = ConditionAll[]
-  export type ConditionAll = WhenUsedCondition | MediaQCondition | AnimationCondition 
+  export type ConditionAll = WhenFlagCondition | MediaQCondition | AnimationCondition 
   export interface Condition {
     type: ConditionTypes
   }
-  export interface WhenUsedCondition extends Condition {
-    type: 'whenUsed'
+  export interface WhenFlagCondition extends Condition {
+    type: 'whenFlag'
     rulesetName: string
   }
   export interface MediaQCondition extends Condition {
@@ -51,19 +51,19 @@ export namespace TVariants {
     opened: boolean
   }
 
-  export type ConditionTypes = 'whenUsed' | 'mediaq' | 'animation' | 'conditional'
+  export type ConditionTypes = 'whenFlag' | 'mediaq' | 'animation' | 'conditional'
 
   //*********************************************************
   //  QUERY
   //*********************************************************
 
   export interface Query<R extends TSheeter.Shape = TSheeter.Shape> { // 
-    whenUsed?: WhenUsedQuery<R> // map of used ruleset names
+    whenFlag?: WhenFlagQuery<R> // map of used ruleset names
     mediaq?: MediaQQuery // actual width
     animation?: AnimationQuery // animation state: opened x closed
   }
 
-  export type WhenUsedQuery<R extends TSheeter.Shape = TSheeter.Shape> = Record<WhenUsedKeys<R>, boolean>
+  export type WhenFlagQuery<R extends TSheeter.Shape = TSheeter.Shape> = Record<WhenFlagKeys<R>, boolean>
 
   export type MediaQQuery = number
 

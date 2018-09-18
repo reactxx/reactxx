@@ -6,7 +6,7 @@ interface Shape1 extends TSheeter.ShapeAncestor {
     theme: { color: string }
 }
 const style1: TSheeter.Ruleset<'Text', Shape1> = {
-    $whenUsed: {
+    $whenFlag: {
         webOnly: {},
         root: {},
         x: 0,
@@ -34,15 +34,15 @@ const style2: TSheeter.Ruleset<'Text', Shape2>[] = [
         $web: {},
     },
     {
-        $whenUsed: {
+        $whenFlag: {
         },
         $native: {
-            $whenUsed: {
+            $whenFlag: {
                 webOnly: {
                     $web: {
                         $mediaq: {},
                     },
-                    $whenUsed: {},
+                    $whenFlag: {},
                     $mediaq: {},
                     $native: {
                         $mediaq: {},

@@ -1,5 +1,5 @@
 import { TSheeter, TCompiler } from '../d-index'
-import { adjustSheetCompiled } from '../sheeter/to-linear-atomized'
+import { adjustSheetCompiled } from '../sheeter/to-atomized'
 
 export const adjustSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetX<R>, classes: TSheeter.PartialSheet<R>) => {
     // adjust sheet compiled (in place)
@@ -11,7 +11,7 @@ export const adjustSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TS
     // merge sheet with classes
     let res = { ...sheet as TCompiler.Sheet } as TCompiler.Sheet<R>
     for (const p in classes) {
-        const rs = {...sheet[p]} as TCompiler.LinearAndAtomized
+        const rs = {...sheet[p]} as TCompiler.AtomizedRuleset
         rs.list = rs.list.concat(classes[p].list)
         res[p] = rs
     }

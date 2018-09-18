@@ -68,20 +68,20 @@ const sheet: Types.SheetCreatorX<Shape> = ({ typo }) => ({
   },
   header: {
     $before: typo.header,
-    $whenUsed: {
+    $whenFlag: {
       disabled: typo.headerDisabled,
     },
     backgroundColor: 'lightblue'
   },
   label: {
     $before: typo.normal,
-    $whenUsed: {
+    $whenFlag: {
       disabled: {
         $before: typo.disabled,
       }
     }
   },
-  // just flag: when used in 'mergeRuleset', header.$whenUsed.disabled or label.$whenUsed.disabled is used
+  // just flag: when used in 'mergeRuleset', header.$whenFlag.disabled or label.$whenFlag.disabled is used
   disabled: {},
 })
 

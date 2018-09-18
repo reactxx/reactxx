@@ -18,7 +18,7 @@ const comp2 = {
 
 const comp3 = {
   name: 'component/ce3',
-  title: 'WhenUsed',
+  title: 'WhenFlag',
   descr: '',
   Component: App3
 } as KSink.Example

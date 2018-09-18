@@ -28,7 +28,7 @@ declare module 'react-native' {
 
   
   // apply LAST WIN strategy for native style
-export const normalizeValues = (values: TCompiler.AtomicClasses) => {
+export const normalizeValues = (values: TCompiler.AtomicArray) => {
   const res: Record<string, string | number>/*TCompiler.PlatformValuesNative*/ = {}
   for (let k = values.length - 1; k >= 0; k--) {
       const value = values[k] as TCompiler.AtomicNative

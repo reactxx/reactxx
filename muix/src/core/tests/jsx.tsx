@@ -1,5 +1,5 @@
 /** @jsx createElement */
-import { createElement, classNames, TSheeter, TVariants, adjustRulesetCompiled } from 'reactxx-core'
+import { createElement, classNames, TSheeter, TVariants, adjustRulesetCompiled, traceAtomizedRuleset, toAtomizedSheet } from 'reactxx-core'
 
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'> & TSheeter.ShapeViews<'label'>
@@ -8,7 +8,7 @@ interface Shape extends TSheeter.ShapeAncestor {
     sheetFlags: TSheeter.ShapeFlags<'disabled' | 'active'>
 }
 
-type t = TVariants.WhenUsedKeys<Shape>
+type t = TVariants.WhenFlagKeys<Shape>
 type t2 = TSheeter.getFlags<Shape>
 
 // className?: className?: {} | string | ({} | string)[]
@@ -17,9 +17,12 @@ const style = adjustRulesetCompiled({
 })
 const sheet: TSheeter.Sheet<Shape> = {
     root: {
+        color: 'root',
         margin: 4,
-        $whenUsed: {
-            disabled: {},
+        $whenFlag: {
+            disabled: {
+                color: '$whenFlag|disabled',
+            },
         }
     },
     label: {
@@ -27,14 +30,14 @@ const sheet: TSheeter.Sheet<Shape> = {
         $web: {
             ':hover': {
                 $mediaq: {},
-                $whenUsed: {
+                $whenFlag: {
                     root: {
-                        //$before: {},
+                        color: 'label|$whenFlag|root',
                         $web: [
                             {
                                 ':hover': [
                                     {
-                                        $whenUsed: {},
+                                        $whenFlag: {},
                                         ':active': {},
                                         cursor: 'pointer',
                                     }
@@ -44,11 +47,6 @@ const sheet: TSheeter.Sheet<Shape> = {
                                 margin: 10
                             }
                         ],
-                        $native: {
-
-                        },
-
-
                     },
                 }
             },
@@ -56,20 +54,34 @@ const sheet: TSheeter.Sheet<Shape> = {
         }
     },
     webOnly: {
+        color: 'webOnly',
         $web: {
+            color: 'webOnly|$web',
             ':hover': {
-                $mediaq: {},
+                color: 'webOnly|$web|:hover',
+                $mediaq: {
+                    '640': {
+                        color: 'webOnly|$web|:hover|$mediaq|640'
+                    }
+                },
 
             },
 
         }
     },
     nativeOnly: {
+        color: 'nativeOnly',
         $native: {
 
         }
     },
 }
+
+
+const compSheet = toAtomizedSheet(sheet)
+
+let trace = traceAtomizedRuleset(compSheet.root)
+trace = traceAtomizedRuleset(compSheet.label)
 
 const root = classNames(style, sheet.root, sheet.label, { fontWeight: 'bold' })
 

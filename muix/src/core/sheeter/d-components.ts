@@ -64,7 +64,7 @@ export namespace TComponents {
     children?: React.ReactNode
     sheetQuery?: TVariants.Query<R>
     classes?: TCompiler.Sheet<R>
-    classNames?: (...rulesets: TSheeter.ClassNameItem[]) => TCompiler.AtomicClasses
+    classNames?: (...rulesets: TSheeter.ClassNameItem[]) => TCompiler.AtomicArray
     theme?: TSheeter.getTheme<R>
   }
 

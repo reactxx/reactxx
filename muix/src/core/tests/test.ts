@@ -1,4 +1,4 @@
-import { adjustRulesetCompiled } from '../sheeter/to-linear-atomized'
+import { adjustRulesetCompiled } from '../sheeter/to-atomized'
 import { TSheeter } from '../sheeter/d-sheeter'
 
 const merging: TSheeter.Ruleset<'root' | 'disabled'> = {
@@ -20,14 +20,14 @@ const merging: TSheeter.Ruleset<'root' | 'disabled'> = {
     },
 } as any
 
-const whenUsed: TSheeter.Ruleset<'root' | 'disabled'> = {
-    $whenUsed: {
+const whenFlag: TSheeter.Ruleset<'root' | 'disabled'> = {
+    $whenFlag: {
         root: {
             plain: 'plain',
         }
     },
     ':hover': {
-        $whenUsed: {
+        $whenFlag: {
             root: {
                 hover: 'hover',
             }
@@ -35,12 +35,12 @@ const whenUsed: TSheeter.Ruleset<'root' | 'disabled'> = {
     }
 } as any
 
-const whenUsedRecursion: TSheeter.Ruleset<'root' | 'disabled'> = {
+const whenFlagRecursion: TSheeter.Ruleset<'root' | 'disabled'> = {
     rule: 'rule',
-    $whenUsed: {
+    $whenFlag: {
         root: {
             plainRoot: 'plainRoot',
-            $whenUsed: {
+            $whenFlag: {
                 disabled: {
                     plainInner: 'plainInner',
                     ':hover': {
@@ -55,17 +55,17 @@ const whenUsedRecursion: TSheeter.Ruleset<'root' | 'disabled'> = {
     },
     ':hover': {
         hover: 'hover',
-        $whenUsed: {
+        $whenFlag: {
             root: {
                 hoverRoot: 'hoverRoot',
-                $whenUsed: {
+                $whenFlag: {
                     disabled: {
                         hoverRootInner: 'hoverRootInner',
                     }
                 },
                 ':active': {
                     hoverRootActive: 'hoverRootActive',
-                    $whenUsed: {
+                    $whenFlag: {
                         disabled: {
                             hoverRootActiveInner: 'hoverRootActiveInner',
                         }
@@ -85,12 +85,12 @@ export const run = () => {
             result: adjustRulesetCompiled(merging, 'merging')
         },
         WHEN_USED: {
-            source: whenUsed,
-            result: adjustRulesetCompiled(whenUsed, 'whenUsed')
+            source: whenFlag,
+            result: adjustRulesetCompiled(whenFlag, 'whenFlag')
         },
         WHEN_USED_RECURSION: {
-            source: whenUsedRecursion,
-            result: adjustRulesetCompiled(whenUsedRecursion, 'whenUsedRecursion')
+            source: whenFlagRecursion,
+            result: adjustRulesetCompiled(whenFlagRecursion, 'whenFlagRecursion')
         },
     }
     const json = JSON.stringify(res, null, 2)

@@ -9,7 +9,7 @@ export namespace TAddIn {
   *******************************************/
 
   export interface RulesetAddInX<T extends TCommonStyles.RulesetNativeIds = unknown, R extends Types.Shape = Types.Shape> {
-    $whenUsed?: Types.PartialSheetX<R>
+    $whenFlag?: Types.PartialSheetX<R>
   }
   export interface SheetX<R extends Types.Shape = Types.Shape> { }
 

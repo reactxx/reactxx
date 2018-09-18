@@ -20,7 +20,7 @@ export namespace Types {
     $after?: RulesetX<T, R>
     //AddIns
     $mediaq?: { [query: string]: RulesetX<T> }
-    $whenUsed?: Types.PartialSheetX<R>
+    $whenFlag?: Types.PartialSheetX<R>
   }
 
   export type RulesetXPure<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =

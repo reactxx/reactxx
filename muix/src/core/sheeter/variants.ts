@@ -1,13 +1,13 @@
 import { TSheeter, TVariants } from '../d-index'
 
-import { toLinearAndAtomizedInner } from './to-linear-atomized'
+import { toAtomizedRulesetInner } from './to-atomized'
 
-export const toVariantPart = (ruleset: TVariants.VariantPart) => {
+export const toVariantParts = (ruleset: TVariants.VariantPart) => {
     // compile root addIns
-    const { $whenUsed, $mediaq, $animation } = ruleset;
+    const { $whenFlag, $mediaq, $animation } = ruleset;
 
     const addIns = [
-        { proc: toWhenUsedVariant, part: $whenUsed },
+        { proc: toWhenFlagVariant, part: $whenFlag },
         { proc: toMediaQVariant, part: $mediaq },
         { proc: toAnimationVariant, part: $animation }
     ]
@@ -19,7 +19,7 @@ export const testConditions = (conditions: TVariants.Conditions, query: TVariant
     if (!conditions || conditions.length === 0) return true
     const firstFalse = conditions.find(cond => {
         switch (cond.type) {
-            case 'whenUsed': return query.whenUsed && query.whenUsed[cond.rulesetName]
+            case 'whenFlag': return query.whenFlag && query.whenFlag[cond.rulesetName]
             case 'mediaq': return typeof query.mediaq === 'number' && cond.start <= query.mediaq && cond.end > query.mediaq
             case 'animation': return query.animation === (cond.opened ? 'opened' : 'closed')
         }
@@ -31,14 +31,14 @@ export const testConditions = (conditions: TVariants.Conditions, query: TVariant
 //  PRIVATE
 //*********************************************************
 
-const toWhenUsedVariant: TVariants.ToVariantProc = (list, ruleset: TVariants.WhenUsedPart, path, pseudoPrefixes, conditions) => {
+const toWhenFlagVariant: TVariants.ToVariantProc = (list, ruleset: TVariants.WhenFlagPart, path, pseudoPrefixes, conditions) => {
     for (const p in ruleset) {
         const rules = ruleset[p] as TSheeter.Ruleset
-        toLinearAndAtomizedInner(
+        toAtomizedRulesetInner(
             list, rules,
-            `${path}/$whenUsed.${p}`,
+            `${path}/$whenFlag.${p}`,
             pseudoPrefixes,
-            [...conditions, { type: 'whenUsed', rulesetName: p } as TVariants.WhenUsedCondition],
+            [...conditions, { type: 'whenFlag', rulesetName: p } as TVariants.WhenFlagCondition],
             wrapPseudoPrefixes(rules, pseudoPrefixes))
     }
 }

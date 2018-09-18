@@ -1,5 +1,5 @@
 import { TSheeter, TCompiler, TVariants, TComponents } from '../d-index'
-import { toLinearAndAtomized, isVariableList, isCompiledValues } from '../sheeter/to-linear-atomized'
+import { toAtomizedRuleset, isAtomizedRuleset, isAtomicArray } from '../sheeter/to-atomized'
 import { testConditions } from '../sheeter/variants'
 
 
@@ -20,35 +20,37 @@ const propsToDelete: TComponents.CommonPropertiesCodeKeys[] = ['sheetQuery', 'cl
 
 // merge rulesets and apply query to ruleset's conditional parts ($whenUed, $mediaq etc.)
 const classNamesWithQuery = (query: TVariants.Query, theme, ...rulesets: TSheeter.ClassNameItem[]) => {
-    if (!rulesets || rulesets.length === 0) return [] as TCompiler.AtomicClasses
-    if (isCompiledValues(rulesets)) return rulesets
+    if (!rulesets || rulesets.length === 0) return [] as TCompiler.AtomicArray
+    if (isAtomicArray(rulesets)) return rulesets
     // when used query par
     if (query)
-      query = {...query, whenUsed: query.whenUsed ? {...query.whenUsed} : {}}
+      query = {...query, whenFlag: query.whenFlag ? {...query.whenFlag} : {}}
     else 
       query = {}
 
     rulesets.forEach((r: TSheeter.Ruleset & {name?:string}) => {
         if (!r || !r.name) return
-        query.whenUsed[r.name] = true
+        query.whenFlag[r.name] = true
     })
-    const values: TCompiler.AtomicClasses[] = []
+    const values: TCompiler.AtomicArray[] = []
     for (let i = 0; i < rulesets.length; i++) {
         const val = rulesets[i] as TSheeter.RulesetOrCreator
         if (!val) continue
-        if (isCompiledValues(val)) {
+        if (isAtomicArray(val)) {
             values.push(val)
             continue
         }
-        const rs = isVariableList(val) ? val : toLinearAndAtomized(typeof val === 'function' ? val(theme) : val) // adjust compiled
+        const rs = isAtomizedRuleset(val) ? val : toAtomizedRuleset(typeof val === 'function' ? val(theme) : val) // adjust compiled
         for (let j = 0; j < rs.list.length; j++) {
             const rsi = rs.list[j]
             if (!testConditions(rsi.conditions, query)) continue
-            values.push(rsi.atomicClasses)
+            values.push(rsi.atomicArray)
         }
 
     }
-    return [].concat.apply([], values) as TCompiler.AtomicClasses
+    const res = [].concat.apply([], values) as TCompiler.AtomicArray
+    res[TCompiler.TypedInterfaceProp] = TCompiler.TypedInterfaceTypes.atomicArray
+    return res
 }
 
 

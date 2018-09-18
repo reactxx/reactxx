@@ -2,7 +2,7 @@ import React from 'react';
 import warning from 'warning';
 import { TComponents, TSheeter, TWithStyles } from '../d-index';
 import { globalOptions, globalOptionsInit } from './global-options'
-import { adjustRulesetCompiled, adjustSheetCompiled } from '../sheeter/to-linear-atomized';
+import { adjustRulesetCompiled, adjustSheetCompiled } from '../sheeter/to-atomized';
 
 export namespace TTheme {
   export interface Theme {

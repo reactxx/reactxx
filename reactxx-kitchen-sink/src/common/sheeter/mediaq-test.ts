@@ -11,7 +11,7 @@ export const test = () => {
   }
   const rulesetPatchGetters: Sheeter.RulesetPatchGetters = {
     $mediaq: Sheeter.mediaqRulesetPatchGetterCreator(400),
-    $whenUsed: Sheeter.whenUsedRulesetFilter
+    $whenFlag: Sheeter.whenFlagRulesetFilter
   }
   const patchable = Sheeter.toPatchableAndMergeable(root)
 

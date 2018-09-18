@@ -146,7 +146,7 @@ export namespace TSheeter {
   export type StylesX<R extends Shape = Shape> = StyleX<R> | StyleX<R>[]
   export type StylesXOrCreator<R extends Shape = Shape> = StylesX<R> | ((theme: getTheme<R>) => StylesX<R>)
 
-  export type ClassNameItem = TSheeter.Ruleset | TSheeter.RulesetCreator | TCompiler.LinearAndAtomized | TCompiler.AtomicClasses
+  export type ClassNameItem = TSheeter.Ruleset | TSheeter.RulesetCreator | TCompiler.AtomizedRuleset | TCompiler.AtomicArray
   export type ClassName = ClassNameItem | ClassNameItem[]
   export type ClassNameOrCreator<R extends Shape = Shape> = ClassName | ((theme: getTheme<R>) => ClassName)
 
