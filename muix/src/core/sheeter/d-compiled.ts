@@ -15,9 +15,9 @@ export namespace TCompiler {
     [TypedInterfaceProp]: TypedInterfaceTypes
   }
 
-  export type Sheet<R extends TSheeter.Shape = TSheeter.Shape> = { [P in TSheeter.RulesetNamesAll<R>]: NamedVariants }
+  export type Sheet<R extends TSheeter.Shape = TSheeter.Shape> = { [P in TSheeter.RulesetNamesAll<R>]: LinearAndAtomized }
 
-  export interface NamedVariants extends TypedInterface {
+  export interface LinearAndAtomized extends TypedInterface {
     [TypedInterfaceProp]: TypedInterfaceTypes.compiled
     name: string
     list: Variants

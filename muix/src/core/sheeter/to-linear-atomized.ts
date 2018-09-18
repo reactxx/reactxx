@@ -7,7 +7,7 @@ import 'reactxx-fela'
 // platform dependent import
 import { toAtomicClasses } from 'reactxx-core'
 
-export const toVariantClassList = <T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape>(
+export const toLinearAndAtomized = <T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape>(
     ruleset: TSheeter.Ruleset<T, R> | TSheeter.RulesetArray<T, R>,
     rulesetName?: string
 ) => {
@@ -28,7 +28,7 @@ export const toVariantClassList = <T extends TCommonStyles.RulesetNativeIds = 'T
     else addParts(ruleset)
 
     const list: TCompiler.Variants = []
-    parts.forEach(part => linearizeAndCompileRulesetInner(
+    parts.forEach(part => toLinearAndAtomizedInner(
         list, part[1],
         `${name}${part[0]}`,
         [], [], part[1]
@@ -37,15 +37,16 @@ export const toVariantClassList = <T extends TCommonStyles.RulesetNativeIds = 'T
         name, 
         list, 
         [TCompiler.TypedInterfaceProp]: TCompiler.TypedInterfaceTypes.compiled 
-    } as TCompiler.NamedVariants
+    } as TCompiler.LinearAndAtomized
 }
 
 // linearize ruleset tree
-export const linearizeAndCompileRulesetInner: TVariants.ToVariantProc = (list, ruleset, path, pseudoPrefixes, conditions, rulesetToQueue) => {
+export const toLinearAndAtomizedInner: TVariants.ToVariantProc = (list, ruleset, path, pseudoPrefixes, conditions, rulesetToQueue) => {
 
     // push to ruleset list
     if (rulesetToQueue) pushToList(list, rulesetToQueue, conditions, path)
 
+    // process variant part of ruleset: $mediaq, $whenUsed, $animation etc.
     toVariantPart(ruleset).forEach(part => part.proc(
         list, part.part, path, pseudoPrefixes, conditions)
     )
@@ -55,7 +56,7 @@ export const linearizeAndCompileRulesetInner: TVariants.ToVariantProc = (list, r
         const value = ruleset[p] as TSheeter.Ruleset
         if (p.charAt(0) === '$' || !isObject(value)) continue
         // null at compileTree(...,null) => don't push to list, just parse addIns
-        linearizeAndCompileRulesetInner(list, value, `${path}/${p}`, [...pseudoPrefixes, p], conditions, null)
+        toLinearAndAtomizedInner(list, value, `${path}/${p}`, [...pseudoPrefixes, p], conditions, null)
     }
 
 }
@@ -68,10 +69,10 @@ export const adjustSheetCompiled = <R extends TSheeter.Shape = TSheeter.Shape>(s
 
 export const adjustRulesetCompiled = (ruleset: TSheeter.ClassName, rulesetName?: string) => {
     if (!ruleset) return null
-    return !isVariableList(ruleset) ? toVariantClassList(ruleset as TSheeter.Ruleset, rulesetName) : ruleset
+    return !isVariableList(ruleset) ? toLinearAndAtomized(ruleset as TSheeter.Ruleset, rulesetName) : ruleset
 }
 
-export function isVariableList(obj: Object): obj is TCompiler.NamedVariants {
+export function isVariableList(obj: Object): obj is TCompiler.LinearAndAtomized {
     return obj && obj[TCompiler.TypedInterfaceProp] === TCompiler.TypedInterfaceTypes.compiled
 }
 export function isCompiledValues(obj): obj is TCompiler.AtomicClasses {
@@ -94,7 +95,7 @@ const DEV_MODE = process.env.NODE_ENV === 'development'
 // in place sheet compilation
 const compileSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.Sheet<R>) => {
     if (!sheet) return null //as TCompiler.Sheet<R>
-    for (const p in sheet) sheet[p] = toVariantClassList(sheet[p], p)
+    for (const p in sheet) sheet[p] = toLinearAndAtomized(sheet[p], p)
     return sheet as any as TCompiler.Sheet<R>
 }
 

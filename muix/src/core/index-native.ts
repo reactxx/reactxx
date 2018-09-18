@@ -1,6 +1,6 @@
 export * from './d-index'
 
-export * from './sheeter/linearize-compile'
+export * from './sheeter/to-linear-atomized'
 export * from './reacts/class-names'
 
 // platform dependent exports

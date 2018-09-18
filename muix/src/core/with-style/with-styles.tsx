@@ -1,8 +1,8 @@
 import React from 'react'
 import { TSheeter, TComponents, TCompiler, TTheme, TVariants } from '../d-index'
 import { globalOptions } from './global-options'
-import { lastPipe } from './pipe-sheet'
-import { firstPipe, themePipeInit } from './pipe-theme'
+import { lastPipe } from './pipe-last'
+import { firstPipe, themePipeInit } from './pipe-first'
 import { deepMerges } from '../utils/deep-merge'
 
 export namespace TWithStyles {

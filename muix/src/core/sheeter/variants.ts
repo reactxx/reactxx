@@ -1,6 +1,6 @@
 import { TSheeter, TVariants } from '../d-index'
 
-import { linearizeAndCompileRulesetInner } from './linearize-compile'
+import { toLinearAndAtomizedInner } from './to-linear-atomized'
 
 export const toVariantPart = (ruleset: TVariants.VariantPart) => {
     // compile root addIns
@@ -34,7 +34,7 @@ export const testConditions = (conditions: TVariants.Conditions, query: TVariant
 const toWhenUsedVariant: TVariants.ToVariantProc = (list, ruleset: TVariants.WhenUsedPart, path, pseudoPrefixes, conditions) => {
     for (const p in ruleset) {
         const rules = ruleset[p] as TSheeter.Ruleset
-        linearizeAndCompileRulesetInner(
+        toLinearAndAtomizedInner(
             list, rules,
             `${path}/$whenUsed.${p}`,
             pseudoPrefixes,

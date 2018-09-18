@@ -1,4 +1,4 @@
-import { adjustRulesetCompiled } from '../sheeter/linearize-compile'
+import { adjustRulesetCompiled } from '../sheeter/to-linear-atomized'
 import { TSheeter } from '../sheeter/d-sheeter'
 
 const merging: TSheeter.Ruleset<'root' | 'disabled'> = {

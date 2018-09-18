@@ -1,5 +1,5 @@
 import { TSheeter, TCompiler, TVariants, TComponents } from '../d-index'
-import { toVariantClassList, isVariableList, isCompiledValues } from '../sheeter/linearize-compile'
+import { toLinearAndAtomized, isVariableList, isCompiledValues } from '../sheeter/to-linear-atomized'
 import { testConditions } from '../sheeter/variants'
 
 
@@ -40,7 +40,7 @@ const classNamesWithQuery = (query: TVariants.Query, theme, ...rulesets: TSheete
             values.push(val)
             continue
         }
-        const rs = isVariableList(val) ? val : toVariantClassList(typeof val === 'function' ? val(theme) : val) // adjust compiled
+        const rs = isVariableList(val) ? val : toLinearAndAtomized(typeof val === 'function' ? val(theme) : val) // adjust compiled
         for (let j = 0; j < rs.list.length; j++) {
             const rsi = rs.list[j]
             if (!testConditions(rsi.conditions, query)) continue
