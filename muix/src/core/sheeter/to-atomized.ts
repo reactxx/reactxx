@@ -1,3 +1,4 @@
+import warning from 'warning'
 import { isObject } from '../utils/deep-merge'
 import { TCompiler, TSheeter, TCommonStyles, TVariants } from '../d-index'
 import { toVariantParts } from './variants'
@@ -70,12 +71,7 @@ export const toAtomizedRulesetInner: TVariants.ToVariantProc = (list, ruleset, p
     for (const p in ruleset) {
         const value = ruleset[p] as TSheeter.Ruleset
         if (p.charAt(0) === '$') continue
-        if (Array.isArray(value)) {
-            value.forEach((r, idx) => {
-                toAtomizedRulesetInner(list, r, `${path}/${p}[${idx}]`, [...pseudoPrefixes, p], conditions, null)
-            })
-            continue
-        }
+        warning (!Array.isArray(value), 'Web pseudo properties cannot contain array')
         if (isObject(value))
             toAtomizedRulesetInner(list, value, `${path}/${p}`, [...pseudoPrefixes, p], conditions, null)
     }
