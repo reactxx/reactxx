@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 import CSS from 'csstype';
 
-import { TCommonStyles, TCompiler, TVariants } from '../d-index'
+import { TCommonStyles, TAtomize, TVariants } from '../d-index'
 
 export namespace TSheeter {
 
@@ -145,11 +145,11 @@ export namespace TSheeter {
   export type StylesX<R extends Shape = Shape> = StyleX<R> | StyleX<R>[]
   export type StylesXOrCreator<R extends Shape = Shape> = StylesX<R> | ((theme: getTheme<R>) => StylesX<R>)
 
-  export type ClassNameItem = TSheeter.Ruleset | TSheeter.RulesetCreator | TCompiler.AtomizedRuleset | TCompiler.AtomicArray
+  export type ClassNameItem = TSheeter.Ruleset | TSheeter.RulesetCreator | TAtomize.AtomizedRuleset | TAtomize.AtomicArray
   export type ClassName = ClassNameItem | ClassNameItem[]
   export type ClassNameOrCreator<R extends Shape = Shape> = ClassName | ((theme: getTheme<R>) => ClassName)
 
-  export type SheetX<R extends Shape = Shape> = Sheet<R> | TCompiler.Sheet<R>
+  export type SheetX<R extends Shape = Shape> = Sheet<R> | TAtomize.Sheet<R>
 
 
 } 

@@ -1,5 +1,5 @@
 ﻿export * from './sheeter/d-common-styles'
-export * from './sheeter/d-compiled'
+export * from 'reactxx-core/sheeter/d-atomize'
 export * from './sheeter/d-sheeter'
 export * from './sheeter/d-components'
 export * from './sheeter/d-variants'

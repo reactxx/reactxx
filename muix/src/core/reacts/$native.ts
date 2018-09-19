@@ -1,5 +1,5 @@
 import React from 'react'
-import { TComponents, TCompiler } from '../d-index'
+import { TComponents, TAtomize } from '../d-index'
 /******************************************
   EXTEND REACT NATIVE
 *******************************************/
@@ -28,10 +28,10 @@ declare module 'react-native' {
 
   
   // apply LAST WIN strategy for native style
-export const normalizeValues = (values: TCompiler.AtomicArray) => {
+export const normalizeValues = (values: TAtomize.AtomicArray) => {
   const res: Record<string, string | number>/*TCompiler.PlatformValuesNative*/ = {}
   for (let k = values.length - 1; k >= 0; k--) {
-      const value = values[k] as TCompiler.AtomicNative
+      const value = values[k] as TAtomize.AtomicNative
       if (typeof res[value.propId] !== 'undefined') continue
       res[value.propId] = value.value
   }

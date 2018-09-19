@@ -1,5 +1,5 @@
-import { TSheeter, TCompiler, TVariants, TComponents } from '../d-index'
-import { toAtomizedRuleset, isAtomizedRuleset, isAtomicArray } from '../sheeter/to-atomized'
+import { TSheeter, TAtomize, TVariants, TComponents } from '../d-index'
+import { atomizeRuleset, isAtomizedRuleset, isAtomicArray } from 'reactxx-core/sheeter/atomize'
 import { testConditions } from '../sheeter/variants'
 
 
@@ -20,7 +20,7 @@ const propsToDelete: TComponents.CommonPropertiesCodeKeys[] = ['sheetQuery', 'cl
 
 // merge rulesets and apply query to ruleset's conditional parts ($whenUed, $mediaq etc.)
 const classNamesWithQuery = (query: TVariants.Query, theme, ...rulesets: TSheeter.ClassNameItem[]) => {
-    if (!rulesets || rulesets.length === 0) return [] as TCompiler.AtomicArray
+    if (!rulesets || rulesets.length === 0) return [] as TAtomize.AtomicArray
     if (isAtomicArray(rulesets)) return rulesets
     // when used query par
     if (query)
@@ -32,7 +32,7 @@ const classNamesWithQuery = (query: TVariants.Query, theme, ...rulesets: TSheete
         if (!r || !r.name) return
         query.whenFlag[r.name] = true
     })
-    const values: TCompiler.AtomicArray[] = []
+    const values: TAtomize.AtomicArray[] = []
     for (let i = 0; i < rulesets.length; i++) {
         const val = rulesets[i] as TSheeter.RulesetOrCreator
         if (!val) continue
@@ -40,7 +40,7 @@ const classNamesWithQuery = (query: TVariants.Query, theme, ...rulesets: TSheete
             values.push(val)
             continue
         }
-        const rs = isAtomizedRuleset(val) ? val : toAtomizedRuleset(typeof val === 'function' ? val(theme) : val) // adjust compiled
+        const rs = isAtomizedRuleset(val) ? val : atomizeRuleset(typeof val === 'function' ? val(theme) : val) // adjust compiled
         for (let j = 0; j < rs.list.length; j++) {
             const rsi = rs.list[j]
             if (!testConditions(rsi.conditions, query)) continue
@@ -48,8 +48,8 @@ const classNamesWithQuery = (query: TVariants.Query, theme, ...rulesets: TSheete
         }
 
     }
-    const res = [].concat.apply([], values) as TCompiler.AtomicArray
-    res[TCompiler.TypedInterfaceProp] = TCompiler.TypedInterfaceTypes.atomicArray
+    const res = [].concat.apply([], values) as TAtomize.AtomicArray
+    res[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomicArray
     return res
 }
 

@@ -1,6 +1,6 @@
 import { TSheeter, TVariants } from '../d-index'
 
-import { toAtomizedRulesetInner } from './to-atomized'
+import { atomizeRulesetInner } from 'reactxx-core/sheeter/atomize'
 
 export const toVariantParts = (ruleset: TVariants.VariantPart) => {
     // compile root addIns
@@ -36,7 +36,7 @@ const toWhenFlagVariant: TVariants.ToVariantProc = (list, ruleset: TVariants.Whe
         const rules = ruleset[p] as TSheeter.Ruleset
         if (Array.isArray(rules))
             rules.forEach((r, idx) =>
-                toAtomizedRulesetInner(
+                atomizeRulesetInner(
                     list, r,
                     `${path}/$whenFlag.${p}[${idx}]`,
                     pseudoPrefixes,
@@ -44,7 +44,7 @@ const toWhenFlagVariant: TVariants.ToVariantProc = (list, ruleset: TVariants.Whe
                     wrapPseudoPrefixes(r, pseudoPrefixes))
             )
         else
-            toAtomizedRulesetInner(
+            atomizeRulesetInner(
                 list, rules,
                 `${path}/$whenFlag.${p}`,
                 pseudoPrefixes,

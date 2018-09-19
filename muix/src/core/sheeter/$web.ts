@@ -1,6 +1,6 @@
 import { renderer } from 'reactxx-fela'
-import { TCompiler } from '../d-index'
+import { TAtomize } from '../d-index'
 
-export const toAtomicClasses: TCompiler.ToAtomicClassesProc = renderer.renderRuleEx
+export const toAtomicArray: TAtomize.ToAtomicClassesProc = renderer.renderRuleEx
 
-export const getTracePath: TCompiler.TraceAtomicClassProc = (value: TCompiler.AtomicWeb) => renderer.trace[value]
+export const getTracePath: TAtomize.TraceAtomicClassProc = (value: TAtomize.AtomicWeb) => renderer.trace[value]

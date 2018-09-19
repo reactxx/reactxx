@@ -1,9 +1,9 @@
-import { TSheeter, TCompiler, TCommonStyles } from '../d-index'
+import { TSheeter, TAtomize, TCommonStyles } from '../d-index'
 
 export namespace TVariants {
  
   export type ToVariantProc = (
-    list: TCompiler.Variants,
+    list: TAtomize.Variants,
     ruleset: VariantPart | WhenFlagPart | MediaQPart | AnimationPart, 
     path: string,
     pseudoPrefixes: string[],

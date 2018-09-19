@@ -1,8 +1,8 @@
-import { TCompiler, TValue } from '../d-index'
+import { TAtomize, TValue } from '../d-index'
 
-export const toAtomicClasses: TCompiler.ToAtomicClassesProc = (style, tracePath) => {
-    const res: TCompiler.AtomicArray = [] as any
-    res[TCompiler.TypedInterfaceProp] = TCompiler.TypedInterfaceTypes.atomicArray
+export const toAtomicArray: TAtomize.ToAtomicClassesProc = (style, tracePath) => {
+    const res: TAtomize.AtomicArray = [] as any
+    res[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomicArray
     if (!style) return res
     for (const propId in style) {
         if (propId.charAt(0) === '$') continue
@@ -16,6 +16,6 @@ export const toAtomicClasses: TCompiler.ToAtomicClassesProc = (style, tracePath)
     return res
 }
 
-export const getTracePath: TCompiler.TraceAtomicClassProc = (value: TCompiler.AtomicNative) => value.tracePath + '/' + value.propId + ': ' + value.value
+export const getTracePath: TAtomize.TraceAtomicClassProc = (value: TAtomize.AtomicNative) => value.tracePath + '/' + value.propId + ': ' + value.value
 
 const DEV_MODE = process.env.NODE_ENV === 'development'

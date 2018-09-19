@@ -1,6 +1,6 @@
 export * from './d-index'
 
-export * from './sheeter/to-atomized'
+export * from 'reactxx-core/sheeter/atomize'
 export * from './reacts/class-names'
 
 // platform dependent exports

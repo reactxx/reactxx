@@ -1,12 +1,12 @@
 import warning from 'warning'
-import { isObject } from '../utils/deep-merge'
-import { TCompiler, TSheeter, TCommonStyles, TVariants } from '../d-index'
-import { toVariantParts } from './variants'
+import { isObject } from 'reactxx-core/utils/deep-merge'
+import { TAtomize, TSheeter, TCommonStyles, TVariants } from 'reactxx-core/d-index'
+import { toVariantParts } from 'reactxx-core/sheeter/variants'
 
 // platform dependent import
-import { toAtomicClasses, getTracePath } from 'reactxx-core'
+import { toAtomicArray, getTracePath } from 'reactxx-core'
 
-export const toAtomizedRuleset = <T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape>(
+export const atomizeRuleset = <T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape>(
     ruleset: TSheeter.Ruleset<T, R> | TSheeter.RulesetArray<T, R>,
     rulesetName?: string
 ) => {
@@ -31,8 +31,8 @@ export const toAtomizedRuleset = <T extends TCommonStyles.RulesetNativeIds = 'Te
     if (Array.isArray(ruleset)) ruleset.forEach((r, idx) => addParts(r, `[${idx}]`))
     else addParts(ruleset, '')
 
-    const list: TCompiler.Variants = []
-    parts.forEach(part => toAtomizedRulesetInner(
+    const list: TAtomize.Variants = []
+    parts.forEach(part => atomizeRulesetInner(
         list, part[1],
         `${name}${part[0]}`,
         [], [], part[1]
@@ -40,12 +40,12 @@ export const toAtomizedRuleset = <T extends TCommonStyles.RulesetNativeIds = 'Te
     return {
         name,
         list,
-        [TCompiler.TypedInterfaceProp]: TCompiler.TypedInterfaceTypes.atomizedRuleset
-    } as TCompiler.AtomizedRuleset
+        [TAtomize.TypedInterfaceProp]: TAtomize.TypedInterfaceTypes.atomizedRuleset
+    } as TAtomize.AtomizedRuleset
 }
 
-export const trace = (values: TCompiler.AtomicArray) => values.map(v => getTracePath(v)).join('\n')
-export const traceAtomizedRuleset = (rs: TCompiler.AtomizedRuleset) => {
+export const trace = (values: TAtomize.AtomicArray) => values.map(v => getTracePath(v)).join('\n')
+export const traceAtomizedRuleset = (rs: TAtomize.AtomizedRuleset) => {
     const res: string[] = [`******************** name: ${rs.name}`]
     rs.list.forEach(v => {
         if (v.atomicArray.length===0) return
@@ -57,7 +57,7 @@ export const traceAtomizedRuleset = (rs: TCompiler.AtomizedRuleset) => {
 }
 
 // linearize ruleset tree
-export const toAtomizedRulesetInner: TVariants.ToVariantProc = (list, ruleset, path, pseudoPrefixes, conditions, rulesetToQueue) => {
+export const atomizeRulesetInner: TVariants.ToVariantProc = (list, ruleset, path, pseudoPrefixes, conditions, rulesetToQueue) => {
 
     // push to ruleset list
     if (rulesetToQueue) pushToList(list, rulesetToQueue, conditions, path)
@@ -73,7 +73,7 @@ export const toAtomizedRulesetInner: TVariants.ToVariantProc = (list, ruleset, p
         if (p.charAt(0) === '$') continue
         warning (!Array.isArray(value), 'Web pseudo properties cannot contain array')
         if (isObject(value))
-            toAtomizedRulesetInner(list, value, `${path}/${p}`, [...pseudoPrefixes, p], conditions, null)
+            atomizeRulesetInner(list, value, `${path}/${p}`, [...pseudoPrefixes, p], conditions, null)
     }
 
 }
@@ -81,8 +81,8 @@ export const toAtomizedRulesetInner: TVariants.ToVariantProc = (list, ruleset, p
 // in place sheet compilation
 export const toAtomizedSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.Sheet<R>) => {
     if (!sheet) return null //as TCompiler.Sheet<R>
-    for (const p in sheet) sheet[p] = toAtomizedRuleset(sheet[p], p)
-    return sheet as any as TCompiler.Sheet<R>
+    for (const p in sheet) sheet[p] = atomizeRuleset(sheet[p], p)
+    return sheet as any as TAtomize.Sheet<R>
 }
 
 export const adjustSheetCompiled = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetX<R>) => {
@@ -93,23 +93,23 @@ export const adjustSheetCompiled = <R extends TSheeter.Shape = TSheeter.Shape>(s
 
 export const adjustRulesetCompiled = (ruleset: TSheeter.ClassName, rulesetName?: string) => {
     if (!ruleset) return null
-    return !isAtomizedRuleset(ruleset) ? toAtomizedRuleset(ruleset as TSheeter.Ruleset, rulesetName) : ruleset
+    return !isAtomizedRuleset(ruleset) ? atomizeRuleset(ruleset as TSheeter.Ruleset, rulesetName) : ruleset
 }
 
 export function isRuleset(obj: Object): obj is TSheeter.Ruleset {
-    return isObject(obj) && typeof obj[TCompiler.TypedInterfaceProp] === 'undefined'
+    return isObject(obj) && typeof obj[TAtomize.TypedInterfaceProp] === 'undefined'
 }
 
-export function isAtomizedRuleset(obj: Object): obj is TCompiler.AtomizedRuleset {
-    return obj && obj[TCompiler.TypedInterfaceProp] === TCompiler.TypedInterfaceTypes.atomizedRuleset
+export function isAtomizedRuleset(obj: Object): obj is TAtomize.AtomizedRuleset {
+    return obj && obj[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.atomizedRuleset
 }
-export function isAtomicArray(obj): obj is TCompiler.AtomicArray {
-    return obj && obj[TCompiler.TypedInterfaceProp] === TCompiler.TypedInterfaceTypes.atomicArray
+export function isAtomicArray(obj): obj is TAtomize.AtomicArray {
+    return obj && obj[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.atomicArray
     // if (!obj || !Array.isArray(obj)) return false
     // if (obj.length === 0) return true
     // return window.isWeb ? typeof obj[0] === 'string' : obj[0][TCompiler.TypedInterfaceProp] === TCompiler.TypedInterfaceTypes.nativeValue
 }
-export function isAtomizedSheet<R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetX): sheet is TCompiler.Sheet<R> {
+export function isAtomizedSheet<R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetX): sheet is TAtomize.Sheet<R> {
     for (const p in sheet)
         return isAtomizedRuleset(sheet[p])
     return true
@@ -129,12 +129,12 @@ const wrapPseudoPrefixes = (rules: {}, pseudoPrefixes: string[]) => {
     return res
 }
 
-const pushToList = (list: TCompiler.Variants, ruleset: TSheeter.Ruleset, conditions: TVariants.Conditions, path: string) => {
+const pushToList = (list: TAtomize.Variants, ruleset: TSheeter.Ruleset, conditions: TVariants.Conditions, path: string) => {
     if (!ruleset) return
     // if (DEV_MODE)
     //     list.push({ atomicArray: toAtomicClasses(ruleset, path), conditions, path, trace: makeTrace(ruleset) })
     // else
-    list.push({ atomicArray: toAtomicClasses(ruleset, path), conditions })
+    list.push({ atomicArray: toAtomicArray(ruleset, path), conditions })
 }
 
 // const makeTrace = (rules) => {

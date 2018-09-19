@@ -5,7 +5,7 @@ export * from './primitives/$web'
 
 export * from './d-index'
 
-export * from './sheeter/to-atomized'
+export * from './sheeter/atomize'
 export * from './reacts/class-names'
 
 //export { run as Test } from './tests/test'

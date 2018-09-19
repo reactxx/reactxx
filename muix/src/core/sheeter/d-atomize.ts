@@ -1,6 +1,6 @@
-import { TValue, TSheeter, TVariants } from '../d-index'
+import { TValue, TSheeter, TVariants } from 'reactxx-core/d-index'
 
-export namespace TCompiler {
+export namespace TAtomize {
 
   export type ToAtomicClassesProc = (ruleset: TSheeter.Ruleset, tracePath?: string) => AtomicArray
   export type TraceAtomicClassProc = (value: Atomic) => string
