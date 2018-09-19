@@ -37,7 +37,7 @@ export namespace TSheeter {
     TVariants.VariantPart<T, R>
 
   export type RulesetWebLow<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    React.CSSProperties & { [P in CSS.Pseudos]?: RulesetWeb<T, R> | RulesetWeb<T, R>[] }
+    React.CSSProperties & { [P in CSS.Pseudos]?: RulesetWeb<T, R> }
 
   /******************************************
     STYLE
@@ -67,17 +67,16 @@ export namespace TSheeter {
   export type Sheet<R extends Shape = Shape> = SheetCommon<R> & SheetNative<R> & SheetWeb<R>
   export type SheetCreator<R extends Shape = Shape> = (theme: getTheme<R>) => Sheet<R>
   export type SheetOrCreator<R extends Shape = Shape> = SheetCreator<R> | Sheet<R>
+
   export type PartialSheet<R extends Shape = Shape> = Partial<SheetCommon<R> & SheetNative<R> & SheetWeb<R>>
   export type PartialSheetCreator<R extends Shape = Shape> = (theme: getTheme<R>) => PartialSheet<R>
   export type PartialSheetOrCreator<R extends Shape = Shape> = PartialSheet<R> | PartialSheetCreator<R>
 
-  //export type PartialSheet<R extends Shape = Shape> = SheetCommon<R> & SheetNative<R> & SheetWeb<R>
-
   export type SheetCommon<R extends Shape> = keyof getCommon<R> extends never ? {} :
-    { [P in keyof getCommon<R>]: Ruleset<getCommon<R>[P], R> }
+    { [P in keyof getCommon<R>]: Ruleset<getCommon<R>[P], R> | Ruleset<getCommon<R>[P], R>[] }
   export type SheetNative<R extends Shape> = keyof getNative<R> extends never ? {} :
     { [P in keyof getNative<R>]: {
-      $native?: TCommonStyles.RulesetNative<getNative<R>[P]> & TVariants.VariantPart<getNative<R>[P], R>
+      $native?: TCommonStyles.RulesetNative<getNative<R>[P]> | TCommonStyles.RulesetNative<getNative<R>[P]>[]
     } }
   export type SheetWeb<R extends Shape> = getWeb<R> extends never ? {} :
     { [P in getWeb<R>]: {

@@ -19,13 +19,17 @@ import ReactDOM from 'react-dom'
 //import App from '../common/basic/pe4'
 //import App from '../common/component/ce3'
 //import App from '../common/mediaq/me1'
-//const App: React.SFC = () => null
+const App: React.SFC = () => null
 
 //import App from '../common/muix-doc/cards/SimpleMediaCard'
 //import App from '../common/mui-doc-app/index'
 //import App from '../common/primitives/ce1'
 
-import { Test as App } from 'reactxx-core'
+import {runTest} from 'reactxx-core/tests/jsx'
+
+//import { Test as App } from 'reactxx-core'
+
+runTest()
 
 // import { run } from 'reactxx-core'
 // run()

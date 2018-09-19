@@ -60,6 +60,7 @@ const renderStyleToClassNames = (renderer, tracePath: string, { _className, ...s
       if (isNestedSelector(property)) {
         classNames = concat(classNames, renderStyleToClassNames(
           renderer,
+          tracePath,
           value,
           // reactxx HACK
           (pseudo ? pseudo + '/' : '') + normalizeNestedProperty(property),
@@ -74,6 +75,7 @@ const renderStyleToClassNames = (renderer, tracePath: string, { _className, ...s
         // reactxx HACK
         classNames = concat(classNames, renderStyleToClassNames(
           renderer,
+          tracePath,
           value,
           pseudo,
           combinedMediaQuery,
@@ -86,6 +88,7 @@ const renderStyleToClassNames = (renderer, tracePath: string, { _className, ...s
         )
         classNames = concat(classNames, renderStyleToClassNames(
           renderer,
+          tracePath,
           value,
           pseudo,
           media,
@@ -121,11 +124,11 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
         // reactxx HACK: cache declarationReference without value
         renderer.propIdCache[className] = support + media + pseudo + property
         if (DEV_MODE)
-          renderer.trace[className] = tracePath + '/' +
+          renderer.trace[className] = tracePath + '|' +
             (support ? support + '/' : '') +
             (media ? media + '/' : '') +
             (pseudo ? pseudo + '/' : '') +
-            property + ': ' + value
+            property + '=' + value
 
         const declaration = cssifyDeclaration(property, value)
         const selector = generateCSSSelector(className, pseudo)

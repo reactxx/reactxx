@@ -8,16 +8,68 @@ interface Shape extends TSheeter.ShapeAncestor {
     sheetFlags: TSheeter.ShapeFlags<'disabled' | 'active'>
 }
 
-type t = TVariants.WhenFlagKeys<Shape>
-type t2 = TSheeter.getFlags<Shape>
+interface ShapeSimple extends TSheeter.ShapeAncestor {
+    common: TSheeter.ShapeTexts<'root'>
+    sheetFlags: TSheeter.ShapeFlags<'disabled'>
+}
 
-// className?: className?: {} | string | ({} | string)[]
-const style = adjustRulesetCompiled({
+const sheetSimple: TSheeter.Sheet<ShapeSimple> = {
+    root: [
+        {
+            $whenFlag: { disabled: { color: 'disabled1' } },
+            $web: [
+                {
+                    $whenFlag: { disabled: { color: 'disabled2' } },
+                    ':hover': {
+                        ':active': {
+                            $whenFlag: {
+                                disabled: [
+                                    { color: 'disabled3' },
+                                    { margin: 15 }
+                                ]
+                            },
+                            color: 'root',
+                        }
+                    },
+                    margin: 20,
+                },
+                {
+                    padding: 30
+                }
+            ],
+            // $native: [{
+            //     $whenFlag: { disabled: [
+            //         { color: 'disabled4' },
+            //         { margin: 15 }
+            //     ] },
+            //     color: 'root',
+            // }]
+        },
+        {
+            padding: 15
+        }
+
+    ]
+}
+
+export const runTest = () => {
+
+    const compSheet = toAtomizedSheet<ShapeSimple>(sheetSimple)
+
+    let trace = traceAtomizedRuleset(compSheet.root)
+    //trace = traceAtomizedRuleset(compSheet.label)
+}
+
+const style = {
     color: 'red'
-})
+}
 const sheet: TSheeter.Sheet<Shape> = {
     root: {
-        color: 'root',
+        $web: {
+            ':hover': {
+                color: 'root',
+            }
+        },
         margin: 4,
         $whenFlag: {
             disabled: {
@@ -26,8 +78,8 @@ const sheet: TSheeter.Sheet<Shape> = {
         }
     },
     label: {
-        color: 'gray',
         $web: {
+            color: 'gray',
             ':hover': {
                 $mediaq: {},
                 $whenFlag: {
@@ -35,13 +87,13 @@ const sheet: TSheeter.Sheet<Shape> = {
                         color: 'label|$whenFlag|root',
                         $web: [
                             {
-                                ':hover': [
-                                    {
-                                        $whenFlag: {},
-                                        ':active': {},
-                                        cursor: 'pointer',
-                                    }
-                                ]
+                                ':hover':
+                                {
+                                    $whenFlag: {},
+                                    ':active': {},
+                                    cursor: 'pointer',
+                                }
+
                             },
                             {
                                 margin: 10
@@ -54,7 +106,6 @@ const sheet: TSheeter.Sheet<Shape> = {
         }
     },
     webOnly: {
-        color: 'webOnly',
         $web: {
             color: 'webOnly|$web',
             ':hover': {
@@ -70,29 +121,22 @@ const sheet: TSheeter.Sheet<Shape> = {
         }
     },
     nativeOnly: {
-        color: 'nativeOnly',
         $native: {
-
+            margin: 20,
         }
     },
 }
 
+// const root = classNames(style, sheet.root, sheet.label, { fontWeight: 'bold' })
 
-const compSheet = toAtomizedSheet(sheet)
+// const App: React.SFC = props => <div>
+//     <h1 classNameX={[sheet.root, style, sheet.label]}>HALLO</h1>
+//     <h1 classNameX={root}>HALLO</h1>
+//     <h1 classNameX={style}>HALLO</h1>
+//     <h1 classNameX={[style, { fontWeight: 'normal' }]}>HALLO</h1>
+//     <h1 classNameX={[root, { fontWeight: 'normal' }]}>HALLO</h1>
+//     {/*
+//     */}
+// </div>
 
-let trace = traceAtomizedRuleset(compSheet.root)
-trace = traceAtomizedRuleset(compSheet.label)
-
-const root = classNames(style, sheet.root, sheet.label, { fontWeight: 'bold' })
-
-const App: React.SFC = props => <div>
-    <h1 classNameX={[sheet.root, style, sheet.label]}>HALLO</h1>
-    <h1 classNameX={root}>HALLO</h1>
-    <h1 classNameX={style}>HALLO</h1>
-    <h1 classNameX={[style, { fontWeight: 'normal' }]}>HALLO</h1>
-    <h1 classNameX={[root, { fontWeight: 'normal' }]}>HALLO</h1>
-    {/*
-    */}
-</div>
-
-export default App
+// export default App

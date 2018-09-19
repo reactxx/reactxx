@@ -14,16 +14,21 @@ export const toAtomizedRuleset = <T extends TCommonStyles.RulesetNativeIds = 'Te
     const name = rulesetName || ruleset.name || 'unknown'
     const parts: [string, TVariants.VariantPart][] = []
 
-    const addParts = (r: TSheeter.Ruleset) => {
+    const addParts = (r: TSheeter.Ruleset, idxPrefix: string) => {
         if (!r) return
-        parts.push(['', r])
+        parts.push([idxPrefix, r])
         const { $web, $native } = r
-        if (window.isWeb && $web) parts.push(['/$web', $web] as any)
-        else if (!window.isWeb && $native) parts.push(['/$native', $native] as any)
+        if (window.isWeb && $web) {
+            if (Array.isArray($web)) $web.forEach((r, idx) => parts.push([`${idxPrefix}/$web[${idx}]`, r] as any))
+            else parts.push([idxPrefix + '/$web', $web] as any)
+        } else if (!window.isWeb && $native) {
+            if (Array.isArray($native)) $native.forEach((r, idx) => parts.push([`${idxPrefix}/$native[${idx}]`, r] as any))
+            else parts.push([idxPrefix + '/$native', $native] as any)
+        }
     }
 
-    if (Array.isArray(ruleset)) ruleset.forEach(r => addParts(r))
-    else addParts(ruleset)
+    if (Array.isArray(ruleset)) ruleset.forEach((r, idx) => addParts(r, `[${idx}]`))
+    else addParts(ruleset, '')
 
     const list: TCompiler.Variants = []
     parts.forEach(part => toAtomizedRulesetInner(
@@ -42,8 +47,10 @@ export const trace = (values: TCompiler.AtomicArray) => values.map(v => getTrace
 export const traceAtomizedRuleset = (rs: TCompiler.AtomizedRuleset) => {
     const res: string[] = [`******************** name: ${rs.name}`]
     rs.list.forEach(v => {
-        res.push(`*** conditions: ${JSON.stringify(v.conditions, null, 2)}`)
-        v.atomicArray.forEach(v => res.push(getTracePath(v)))
+        if (v.atomicArray.length===0) return
+        res.push(`***`)
+        if (v.conditions && v.conditions.length > 0) res.push(`conditions: ${JSON.stringify(v.conditions)}`)
+        v.atomicArray.forEach(v => res.push(v + ' {' + getTracePath(v) + '}'))
     })
     return res.join('\n')
 }
@@ -62,10 +69,15 @@ export const toAtomizedRulesetInner: TVariants.ToVariantProc = (list, ruleset, p
     // parse pseudo rules (:hover etc.)
     for (const p in ruleset) {
         const value = ruleset[p] as TSheeter.Ruleset
-        if (p.charAt(0) === '$' || !isObject(value)) continue
-        // null at compileTree(...,null) => don't push to list, just parse addIns
-        //toAtomizedRulesetInner(list, value, `${path}/${p}`, [...pseudoPrefixes, p], conditions, null)
-        toAtomizedRulesetInner(list, value, `${path}`, [...pseudoPrefixes, p], conditions, null)
+        if (p.charAt(0) === '$') continue
+        if (Array.isArray(value)) {
+            value.forEach((r, idx) => {
+                toAtomizedRulesetInner(list, r, `${path}/${p}[${idx}]`, [...pseudoPrefixes, p], conditions, null)
+            })
+            continue
+        }
+        if (isObject(value))
+            toAtomizedRulesetInner(list, value, `${path}/${p}`, [...pseudoPrefixes, p], conditions, null)
     }
 
 }

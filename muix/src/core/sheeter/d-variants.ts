@@ -21,10 +21,11 @@ export namespace TVariants {
     $animation?: AnimationPart
   }
 
-  export type WhenFlagPart<R extends TSheeter.Shape = TSheeter.Shape> = { [p in WhenFlagKeys<R>]?: TSheeter.Ruleset }
+  export type WhenFlagPart<R extends TSheeter.Shape = TSheeter.Shape> = { [p in WhenFlagKeys<R>]?: TSheeter.Ruleset | TSheeter.Ruleset[] }
   export type WhenFlagKeys<R extends TSheeter.Shape> = TSheeter.RulesetNamesAll<R> | TSheeter.getFlags<R>
 
-  export type MediaQPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> = Record<string, TSheeter.Ruleset<T, R>>
+  export type MediaQPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> = 
+    Record<string, TSheeter.Ruleset<T, R> | TSheeter.Ruleset<T, R>[]>
 
   export type AnimationPart = any
   

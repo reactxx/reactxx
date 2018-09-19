@@ -11,6 +11,7 @@ SystemJS.config({
   },
   map: {
     "reactxx-sheeter": "deploy/lib/sheeter/index",
+    "reactxx-core/tests/jsx": "deploy/lib/core/tests/jsx",
     "reactxx-core": "deploy/lib/core/index",
     "reactxx-fela": "deploy/lib/fela/index",
     "reactxx-basic": "deploy/lib/basic/index",

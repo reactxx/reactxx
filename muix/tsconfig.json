@@ -29,8 +29,11 @@
       "reactxx-sheeter": [
         "src/sheeter/index"
       ],
+      "reactxx-core/*": [
+        "src/core/*"
+      ],
       "reactxx-core": [
-        "src/core/index"
+        "src/core"
       ],
       "reactxx-fela": [
         "src/fela/index"

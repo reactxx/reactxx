@@ -34,12 +34,22 @@ export const testConditions = (conditions: TVariants.Conditions, query: TVariant
 const toWhenFlagVariant: TVariants.ToVariantProc = (list, ruleset: TVariants.WhenFlagPart, path, pseudoPrefixes, conditions) => {
     for (const p in ruleset) {
         const rules = ruleset[p] as TSheeter.Ruleset
-        toAtomizedRulesetInner(
-            list, rules,
-            `${path}/$whenFlag.${p}`,
-            pseudoPrefixes,
-            [...conditions, { type: 'whenFlag', rulesetName: p } as TVariants.WhenFlagCondition],
-            wrapPseudoPrefixes(rules, pseudoPrefixes))
+        if (Array.isArray(rules))
+            rules.forEach((r, idx) =>
+                toAtomizedRulesetInner(
+                    list, r,
+                    `${path}/$whenFlag.${p}[${idx}]`,
+                    pseudoPrefixes,
+                    [...conditions, { type: 'whenFlag', rulesetName: p } as TVariants.WhenFlagCondition],
+                    wrapPseudoPrefixes(r, pseudoPrefixes))
+            )
+        else
+            toAtomizedRulesetInner(
+                list, rules,
+                `${path}/$whenFlag.${p}`,
+                pseudoPrefixes,
+                [...conditions, { type: 'whenFlag', rulesetName: p } as TVariants.WhenFlagCondition],
+                wrapPseudoPrefixes(rules, pseudoPrefixes))
     }
 }
 
