@@ -12,15 +12,7 @@ export namespace TComponents {
   *******************************************/
   export type WithStyles<R extends Shape = Shape> = (sheet: TSheeter.SheetX<R>, defaultProps?: Props<R>) => ComponentType<R>
 
-  // export type StyleX<R extends Shape = Shape> = TSheeter.Style<TSheeter.getStyle<R>>
-  // export type StylesX<R extends Shape = Shape> = StyleX<R> | StyleX<R>[]
-  export type StylesXCreator<R extends Shape = Shape> = (theme: TSheeter.getTheme<R>) => TSheeter.StylesX<R>
-
-  // export type ClassNameItem = TSheeter.Ruleset | TCompiler.Ruleset | TCompiler.Values
-  // export type ClassName = ClassNameItem | ClassNameItem[]
-  //export type ClassNameCreator<R extends Shape = Shape> = (theme: TSheeter.getTheme<R>) => TSheeter.ClassName
-
-  // export type SheetX<R extends Shape = Shape> = TSheeter.Sheet<R> | TCompiler.Sheet<R>
+  //export type StylesXCreator<R extends Shape = Shape> = (theme: TSheeter.getTheme<R>) => TSheeter.StylesX<R>
 
   //******************** Cross platform component props
   export interface CommonPropertiesWithTheme<R extends Shape = Shape> extends PropsLow<R> {

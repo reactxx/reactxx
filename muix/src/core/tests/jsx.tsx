@@ -1,5 +1,5 @@
 /** @jsx createElement */
-import { createElement, classNames, TSheeter, TVariants, adjustRulesetCompiled, traceAtomizedRuleset, toAtomizedSheet } from 'reactxx-core'
+import { createElement, classNames, TSheeter, TVariants, adjustRulesetCompiled, traceAtomizedRuleset, atomizeSheet } from 'reactxx-core'
 
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'> & TSheeter.ShapeViews<'label'>
@@ -7,6 +7,18 @@ interface Shape extends TSheeter.ShapeAncestor {
     web: TSheeter.ShapeWeb<'webOnly'>
     sheetFlags: TSheeter.ShapeFlags<'disabled' | 'active'>
 }
+
+interface ShapeSimple2 extends TSheeter.ShapeAncestor {
+    common: TSheeter.ShapeTexts<'root'>
+    sheetFlags: TSheeter.ShapeFlags<'disabled'>
+}
+
+const sheetSimple2: TSheeter.SheetCreator<ShapeSimple2> = theme => ({
+    root: [
+        { $whenFlag: {} },
+        { $web: [] }
+    ]
+})
 
 interface ShapeSimple extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
@@ -54,7 +66,7 @@ const sheetSimple: TSheeter.Sheet<ShapeSimple> = {
 
 export const runTest = () => {
 
-    const compSheet = toAtomizedSheet<ShapeSimple>(sheetSimple)
+    const compSheet = atomizeSheet<ShapeSimple>(sheetSimple)
 
     let trace = traceAtomizedRuleset(compSheet.root)
     //trace = traceAtomizedRuleset(compSheet.label)

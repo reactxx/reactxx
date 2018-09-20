@@ -1,70 +1,77 @@
 import React from 'react'
 import { TSheeter, TComponents, TAtomize, TTheme, TVariants } from '../d-index'
-import { globalOptions } from './global-options'
+import { globalOptions } from 'reactxx-core/with-style/global-state'
 import { lastPipe } from './pipe-last'
-import { firstPipe, themePipeInit } from './pipe-first'
+import { firstPipe, defaultThemeName } from './pipe-first'
 import { deepMerges } from '../utils/deep-merge'
 
 export namespace TWithStyles {
 
-  export interface GlobalOptions {
-    getDefaultTheme?: TTheme.GetDefaultTheme
-    createPipeline?: PipeLine
+  // application options
+  export interface GlobalState {
+    getDefaultTheme?: () => TTheme.Theme
+    createPipeline?: Pipeline
     namedThemes?: { [themeName: string]: TTheme.Theme }
   }
 
-  export interface Options<R extends TSheeter.Shape = TSheeter.Shape> extends GlobalOptions {
-    name?: string,
+  // component type options
+  export interface ComponentState<R extends TSheeter.Shape = TSheeter.Shape> extends GlobalState {
+    name?: string
     defaultProps?: TComponents.Props<R>
-    withTheme?: boolean,
-  }
-
-  export interface PipelineContext extends Options<TSheeter.Shape> {
-    // static part
+    withTheme?: boolean
+    sheetOrCreator?: TSheeter.SheetOrCreator
+    CodeComponent?: TComponents.ComponentType
+    // computed props
     componentId?: number
     displayName?: string
-    sheetOrCreator?: TSheeter.SheetOrCreator
-    CodeComponent?: TComponents.ComponentType,
-    // instance part
+  }
+
+  // component instance options
+  export interface InstanceState extends ComponentState<TSheeter.Shape> {
     id?: string
     props?: TComponents.Props
-    //codeProps?: TComponents.PropsCode
-    pipeData?: PipeData[]
+    pipeStates?: PipeState[]
     sheet?: TAtomize.Sheet
     sheetQuery?: TVariants.Query
     theme?: TSheeter.getTheme
   }
 
-  export interface PipeData {
+  export interface PipeState {
     codeProps?: TComponents.PropsCode
 
     classNameX?: TSheeter.ClassName
     styleX?: TSheeter.StylesX
-    classes?: TSheeter.PartialSheet // cross platform sheet
+    classes?: TSheeter.PartialSheet
   }
 
-  export type Pipe = (pipeId: number, context: TWithStyles.PipelineContext, next: () => React.ReactNode) => () => React.ReactNode
-  export type PipeLine = (context: TWithStyles.PipelineContext) => () => React.ReactNode
+  export type Pipe = (pipeId: number, instanceState: TWithStyles.InstanceState, next: ReactNodeCreator) => ReactNodeCreator
+  export type Pipeline = (instanceState: TWithStyles.InstanceState) => ReactNodeCreator
+  export type ReactNodeCreator = () => React.ReactNode
 
 }
 
-export const withStylesInit = (options: TWithStyles.GlobalOptions = null) => themePipeInit({
-  createPipeline: context =>
-    firstPipe(0, context,
-      lastPipe(2, context,
-        null)
-    ),
-  ...options
-})
+export const initGlobalState = (options: TWithStyles.GlobalState = null) => {
+  Object.assign(globalOptions, {
+    namedThemes: {},
+    createPipeline: context =>
+      firstPipe(0, context,
+        lastPipe(1, context,
+          null)
+      ),
+    ...options
+  })
+  if (globalOptions.getDefaultTheme)
+    globalOptions.namedThemes[defaultThemeName] = globalOptions.getDefaultTheme()
+}
 
 export const withStylesCreator = <R extends TSheeter.Shape, TStatic extends {} = {}>(
-  sheetCreator: TSheeter.SheetOrCreator<R>,
+  sheetOrCreator: TSheeter.SheetOrCreator<R>,
   codeComponent: TComponents.ComponentType<R>,
-  options?: TWithStyles.Options<R>
+  componentState?: TWithStyles.ComponentState<R>
 ) => (
-  overrideOptions?: TWithStyles.Options<R>
-) => withStylesLow(
-  sheetCreator, codeComponent, options, overrideOptions
+  overrideComponentState?: TWithStyles.ComponentState<R>
+) => withStyles(
+  finishComponentState(sheetOrCreator, codeComponent, componentState, overrideComponentState)
 ) as TComponents.ComponentClass<R> & TStatic & TProvider<R>
 
 export interface TProvider<R extends TSheeter.Shape> { Provider: React.ComponentClass<TComponents.Props<R>> }
@@ -73,42 +80,48 @@ export interface TProvider<R extends TSheeter.Shape> { Provider: React.Component
 //  PRIVATE
 //*********************************************************
 
-const withStylesLow = (
-  sheetOrCreator: TSheeter.SheetOrCreator, CodeComponent: TComponents.ComponentType,
-  options: TWithStyles.Options, overrideOptions: TWithStyles.Options
-) => {
-  options = options && overrideOptions ? deepMerges({}, [options, overrideOptions]) : options ? options : overrideOptions ? overrideOptions : {}
-  const componentId = componentTypeCounter++
-
-  const pipelineContextStatic: TWithStyles.PipelineContext = {
-    ...globalOptions,
-    ...options,
-    sheetOrCreator,
-    componentId,
-    CodeComponent,
-    withTheme: typeof options.withTheme === 'boolean' ? options.withTheme : typeof sheetOrCreator === 'function',
-    displayName: `${options.name || CodeComponent.displayName} (${componentId})`
-  }
+const withStyles = (componentState: TWithStyles.ComponentState) => {
 
   class Styled extends React.Component<TComponents.Props> {
 
-    pipelineContex: TWithStyles.PipelineContext = {
-      ...pipelineContextStatic,
-      id: pipelineContextStatic.displayName + ' *' + componentInstaneCounter++,
+    instanceState: TWithStyles.InstanceState = {
+      ...componentState,
+      id: componentState.displayName + ' *' + componentInstaneCounter++,
       props: this.props,
     }
 
-    renderPipeline = options.createPipeline(this.pipelineContex)
+    pipeline = componentState.createPipeline(this.instanceState)
 
     render() {
-      return this.renderPipeline()
+      return this.pipeline()
     }
 
-    public static displayName = pipelineContextStatic.displayName
+    public static displayName = componentState.displayName
   }
 
   const styled: TComponents.ComponentClass = Styled
   return styled
+}
+
+const finishComponentState = (
+  sheetOrCreator: TSheeter.SheetOrCreator, CodeComponent: TComponents.ComponentType,
+  componentState: TWithStyles.ComponentState, overrideComponentState: TWithStyles.ComponentState
+) => {
+  const mergedOptions = componentState && overrideComponentState ?
+    deepMerges({}, [componentState, overrideComponentState]) : componentState ?
+      componentState : overrideComponentState ?
+        overrideComponentState : {}
+  const componentId = componentTypeCounter++
+  const res: TWithStyles.ComponentState = {
+    ...globalOptions,
+    ...mergedOptions,
+    sheetOrCreator,
+    componentId,
+    CodeComponent,
+    withTheme: typeof mergedOptions.sheetOrCreator === 'function' ? true : mergedOptions.withTheme,
+    displayName: `${mergedOptions.name || mergedOptions.CodeComponent.displayName} (${componentId})`
+  }
+  return res
 }
 
 let componentTypeCounter = 0 // counter of component types

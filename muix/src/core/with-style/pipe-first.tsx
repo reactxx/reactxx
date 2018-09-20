@@ -1,8 +1,9 @@
 import React from 'react';
 import warning from 'warning';
-import { TComponents, TSheeter, TWithStyles } from '../d-index';
-import { globalOptions, globalOptionsInit } from './global-options'
-import { adjustRulesetCompiled, adjustSheetCompiled } from 'reactxx-core/sheeter/atomize';
+import { TAtomize, TComponents, TSheeter, TWithStyles } from '../d-index';
+import { globalOptions } from './global-state'
+import { adjustRulesetCompiled, adjustSheetCompiled } from '../sheeter/atomize';
+import { createWithTheme } from '../utils/createWithTheme';
 
 export namespace TTheme {
   export interface Theme {
@@ -14,80 +15,74 @@ export namespace TTheme {
     theme?: T
   }
 
-  export type GetDefaultTheme = () => Theme
 }
 
-export const themePipeInit = (options: TWithStyles.GlobalOptions = null) => {
-  globalOptionsInit({
-    namedThemes: {},
-    ...options
-  })
-  if (globalOptions.getDefaultTheme)
-    globalOptions.namedThemes[defaultThemeName] = globalOptions.getDefaultTheme()
-}
-
-export const firstPipe: TWithStyles.Pipe = (pipeId, context, next) => {
-  const render = (themePar: TTheme.Theme) => {
-    applyTheme(pipeId, themePar, context)
+export const firstPipe: TWithStyles.Pipe = (pipeId, state, next) => {
+  const render = (theme: TTheme.Theme) => {
+    applyTheme(pipeId, theme || globalOptions.namedThemes[defaultThemeName], state)
     return next()
   }
-  const res = () => {
+  return () => {
     // UNDO
-    delete context.sheet
+    delete state.sheet
     // init
-    context.sheetQuery = {}
-    context.pipeData = []
-    context.pipeData[pipeId] = { codeProps: { ...context.props } as TComponents.PropsCode }
-    // no theme
-    if (!context.withTheme) {
-      applyTheme(pipeId, null, context)
+    state.sheetQuery = {}
+    state.pipeStates = []
+    state.pipeStates[pipeId] = { codeProps: { ...state.props } as TComponents.PropsCode }
+    if (!state.withTheme) {
+      // no theme
+      applyTheme(pipeId, null, state)
       return next()
-    }
-    // theme => listen to theme change
-    return <reactContext.Consumer>{render}</reactContext.Consumer>
+    } else
+      // theme => listen to theme change
+      return <themeContext.Consumer>{render}</themeContext.Consumer>
   }
-  return res
 }
 
-const applyTheme = (pipeId: number, theme: TTheme.Theme, context: TWithStyles.PipelineContext) => {
-  context.theme = theme || globalOptions.namedThemes[defaultThemeName]
-  const { props: {classes, classNameX, styleX}, pipeData } = context
-  const data = pipeData[pipeId]
-  data.classes = adjustSheetCompiled(createWithTheme(classes, context.theme))
-  data.classNameX = adjustRulesetCompiled(createWithTheme(classNameX, context.theme))
-  data.styleX = createWithTheme(styleX, context.theme)
-  context.sheet = createSheetWithTheme(context.theme, context)
+const applyTheme = (pipeId: number, theme: TTheme.Theme, state: TWithStyles.InstanceState) => {
+  state.theme = theme
+  const { props: { classes, classNameX, styleX }, pipeStates } = state
+  const data = pipeStates[pipeId]
+  data.classes = adjustSheetCompiled(classes, theme)
+  data.classNameX = adjustRulesetCompiled(classNameX, theme)
+  data.styleX = createWithTheme(styleX, theme)
+  state.sheet = createSheetWithTheme(state)
 }
 
-const createSheetWithTheme = (theme: TTheme.Theme, context: TWithStyles.PipelineContext) => {
-  if (typeof context.sheetOrCreator === 'function') {
-    warning(theme, 'Theme expected (ThemeProvider or getDefaultTheme missing)')
-    let value = theme.$cache && theme.$cache[context.componentId]
-    if (value) return value
-    value = context.sheetOrCreator(theme)
-    if (!theme.$cache) theme.$cache = {}
-    theme.$cache[context.componentId] = value
-    return value
-  } else
-    return context.sheetOrCreator
+const mergeSheets = (sheet: TAtomize.Sheet, classes: TAtomize.Sheet, inPlace?: boolean) => {
+  if (!classes) return sheet
+  if (!inPlace) sheet = { ...sheet }
+  for (const p in classes) {
+    const c = classes[p], ca = Array.isArray(c), s = sheet[p], sa = Array.isArray(s)
+    warning(c && p, 'Something wrong here')
+    sheet[p] = !sa && !ca ? [s, c] : !sa ? [s, ...c] : !ca ? [...s, c] : [...s, ...c]
+  }
+}
+
+const createSheetWithTheme = (state: TWithStyles.InstanceState) => {
+  const { componentId, defaultProps, sheetOrCreator } = state
+  const theme = state.theme as TTheme.Theme
+
+  let value: TAtomize.Sheet = theme.$cache && theme.$cache[componentId]
+  if (value) return value
+
+  value = adjustSheetCompiled(sheetOrCreator, theme)
+  if (defaultProps && defaultProps.classes) {
+    const defaultClasses = adjustSheetCompiled(defaultProps.classes, theme)
+    mergeSheets(value, defaultClasses, true)
+  }
+
+  if (!theme.$cache) theme.$cache = {}
+  theme.$cache[componentId] = value
+
+  return value
+
 }
 
 
-const createWithTheme = <T extends {}>(valueOrCreator: T | ((theme: TTheme.Theme) => T), theme: TTheme.Theme) => {
-  if (typeof valueOrCreator === 'function') {
-    warning(theme, 'Theme expected (ThemeProvider or getDefaultTheme missing)')
-    // call creator with theme:
-    const value = valueOrCreator(theme)
-    // return value
-    return value
-  } else
-    // return value
-    return valueOrCreator
-}
+export const defaultThemeName = '*default-theme*'
 
-const defaultThemeName = '*default-theme*'
-
-const reactContext = React.createContext<TTheme.Theme>(null)
+const themeContext = React.createContext<TTheme.Theme>(null)
 
 export const registerTheme = (name: string, theme: TTheme.Theme) => {
   warning(!globalOptions.namedThemes[name], `Theme ${name} already registered`)
@@ -101,7 +96,7 @@ export class ThemeProvider extends React.Component<TTheme.ThemeProviderProps> {
     const { children, theme, registeredThemeName } = this.props
     const actTheme = registeredThemeName ? globalOptions.namedThemes[registeredThemeName] : theme
     warning(actTheme, 'ThemeProvider: missing theme')
-    return actTheme ? <reactContext.Provider value={actTheme}>{children}</reactContext.Provider> : children
+    return <themeContext.Provider value={actTheme}>{children}</themeContext.Provider>
   }
 
 }

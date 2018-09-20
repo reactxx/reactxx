@@ -2,6 +2,7 @@ import warning from 'warning'
 import { isObject } from 'reactxx-core/utils/deep-merge'
 import { TAtomize, TSheeter, TCommonStyles, TVariants } from 'reactxx-core/d-index'
 import { toVariantParts } from 'reactxx-core/sheeter/variants'
+import { createWithTheme } from '../utils/createWithTheme'
 
 // platform dependent import
 import { toAtomicArray, getTracePath } from 'reactxx-core'
@@ -79,21 +80,25 @@ export const atomizeRulesetInner: TVariants.ToVariantProc = (list, ruleset, path
 }
 
 // in place sheet compilation
-export const toAtomizedSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.Sheet<R>) => {
-    if (!sheet) return null //as TCompiler.Sheet<R>
+export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.Sheet<R>) => {
+    if (!sheet) return null 
     for (const p in sheet) sheet[p] = atomizeRuleset(sheet[p], p)
     return sheet as any as TAtomize.Sheet<R>
 }
 
-export const adjustSheetCompiled = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetX<R>) => {
-    if (!sheet) return null
-    if (isAtomizedSheet<R>(sheet)) return sheet
-    return toAtomizedSheet<R>(sheet)
+export const adjustSheetCompiled = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetOrCreator<R>, theme) => {
+    if (!sheet) return null 
+    const sh = createWithTheme(sheet, theme)
+    for (const p in sh) sh[p] = adjustRulesetCompiled(sh[p], theme, p)
+    return sh as any as TAtomize.Sheet<R>
 }
 
-export const adjustRulesetCompiled = (ruleset: TSheeter.ClassName, rulesetName?: string) => {
+export const adjustRulesetCompiled = (ruleset: TSheeter.ClassNameOrCreator, theme, rulesetName?: string) => {
     if (!ruleset) return null
-    return !isAtomizedRuleset(ruleset) ? atomizeRuleset(ruleset as TSheeter.Ruleset, rulesetName) : ruleset
+    const rs = createWithTheme(ruleset, theme)
+    if (isAtomizedRuleset(rs) || isAtomicArray(rs)) return rs
+    if (Array.isArray(rs)) return rs.map(r => adjustRulesetCompiled(r, theme))
+    return atomizeRuleset(rs as TSheeter.Ruleset, rulesetName)
 }
 
 export function isRuleset(obj: Object): obj is TSheeter.Ruleset {

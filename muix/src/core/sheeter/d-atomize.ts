@@ -32,6 +32,8 @@ export namespace TAtomize {
     conditions?: TVariants.Conditions // conditions (when is ruleset used)
   }
 
+  //export type 
+
   export type AtomicArray = Atomic[] & {[TypedInterfaceProp]: TypedInterfaceTypes.atomicArray} // last value in array (with the same propId) wins!
 
   export type Atomic = AtomicNative | AtomicWeb

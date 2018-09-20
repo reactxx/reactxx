@@ -11,7 +11,7 @@ export * from './reacts/class-names'
 //export { run as Test } from './tests/test'
 export { default as Test } from './tests/primitives'
 
-import {withStylesInit} from './with-style/with-styles'
+import {initGlobalState} from './with-style/with-styles'
 
-withStylesInit()
+initGlobalState()
 

@@ -7,7 +7,7 @@ import { TCommonStyles, TAtomize, TVariants } from '../d-index'
 export namespace TSheeter {
 
   /******************************************
-    RULESET
+    RULESET - Cross platform ruleset for web and native
   *******************************************/
 
   export type RulesetCreator<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
@@ -15,8 +15,8 @@ export namespace TSheeter {
   export type RulesetOrCreator<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     Ruleset<T, R> | RulesetCreator<T, R>
 
-  //*************** Cross platform ruleset for web and native
   export type RulesetArray<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> = Ruleset<T,R>[] & {name?: string}
+
   export type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
     RulesetLow<T, R> &
