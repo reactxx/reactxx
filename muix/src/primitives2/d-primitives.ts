@@ -1,6 +1,6 @@
 ﻿import ReactN from 'react-native'
 
-import { TSheeter, TComponents } from '../d-index'
+import { TSheeter, TComponents } from 'reactxx-core'
 
 // export const enum CompNames {
 //   Text = 'ReactXX$Text',
@@ -38,7 +38,7 @@ export interface TextShape extends TSheeter.ShapeAncestor {
     //web: TSheeter.ShapeWeb<'pressable'>
     sheetFlags: TSheeter.ShapeFlags<'pressable' | 'singleLine'>
     style: 'Text'
-    props: { numberOfLines?: number; url?: string }
+    props: { singleLine?: boolean; url?: string }
     propsWeb: React.HTMLAttributes<HTMLSpanElement>
     propsNative: ReactN.TextProperties
     events: TSheeter.ShapeWeb<TComponents.TEventsXNames>

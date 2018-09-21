@@ -3,14 +3,11 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-//import { withStyles } from '../with-style/with-styles'
-import { TPrimitives, TSheeter, TComponents } from '../d-index'
+import { createElement, TSheeter, TComponents } from 'reactxx-core'
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from './sheets'
+import { TPrimitives } from './d-index'
 
 const withStyles = <T extends any>(...args: any[]) => null as any
-
-// platform dependent import
-import { createElement } from 'reactxx-core'
 
 export const view: TComponents.SFCCode<TPrimitives.ViewShape> = props => {
     const { styleX, classNameX, classNames, classes, ...rest } = props
@@ -41,9 +38,9 @@ export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = prop
 }
 
 export const text: TComponents.SFCCode<TPrimitives.TextShape> = props => {
-    const { classNameX, classes, classNames, numberOfLines, url/*, onClick*/, sheetQuery: { whenFlag }, ...rest } = props
+    const { classNameX, classes, classNames, singleLine, url/*, onClick*/, sheetQuery: { whenFlag }, ...rest } = props
     whenFlag.pressable = hasPlatformEvents(props)
-    whenFlag.singleLine = numberOfLines === 1
+    whenFlag.singleLine = singleLine
     const tagProps = {
         className: TPrimitives.Consts.textClassName,
         classNameX: classNames(classes.root, classNameX),

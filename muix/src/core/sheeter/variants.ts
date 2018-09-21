@@ -1,6 +1,6 @@
 import { TSheeter, TVariants } from '../d-index'
 
-import { atomizeRulesetInner } from 'reactxx-core/sheeter/atomize'
+import { atomizeRulesetInner } from '../sheeter/atomize-low'
 
 export const toVariantParts = (ruleset: TVariants.VariantPart) => {
     // compile root addIns

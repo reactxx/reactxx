@@ -1,9 +1,8 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TPrimitives, TSheeter } from '../d-index'
-
-//type t = TRulesetConditions.RulesetNamesAll<TPrimitives.TextShape>
+import { TSheeter } from 'reactxx-core'
+import { TPrimitives } from './d-index'
 
 export const textSheet: TSheeter.Sheet<TPrimitives.TextShape> = ({
   root: {

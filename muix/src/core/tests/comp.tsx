@@ -1,7 +1,7 @@
 /** @jsx createElement */
 import {
     TComponents,
-    createElement, classNames, TSheeter, TVariants, adjustRulesetCompiled, traceAtomizedRuleset, atomizeSheet
+    createElement, TSheeter
 } from 'reactxx-core'
 
 interface Shape extends TSheeter.ShapeAncestor {

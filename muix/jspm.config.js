@@ -10,18 +10,22 @@ SystemJS.config({
     },
   },
   map: {
-    "reactxx-sheeter": "deploy/lib/sheeter/index",
-    "reactxx-core/tests/jsx": "deploy/lib/core/tests/jsx",
-    "reactxx-core": "deploy/lib/core/index",
     "reactxx-fela": "deploy/lib/fela/index",
-    "reactxx-basic": "deploy/lib/basic/index",
-    "reactxx-animation": "deploy/lib/animation/index",
-    "reactxx-primitives": "deploy/lib/primitives/index",
-    "reactxx-mediaq": "deploy/lib/mediaq/index",
-    "reactxx": "deploy/lib/reactxx/index",
-    "reactxx-mui-web": "deploy/lib/mui-web",
-    "reactxx-icons": "deploy/lib/icons",
-    "reactxx-muix": "deploy/lib/muix"
+
+    "reactxx-core/tests/index": "deploy/lib/core/tests/index",
+    "reactxx-core": "deploy/lib/core/index",
+
+    "reactxx-primitives": "deploy/lib/primitives2/index",
+    "reactxx-primitives/tests/index": "deploy/lib/primitives2/tests/index",
+
+    // "reactxx-sheeter": "deploy/lib/sheeter/index",
+    // "reactxx-basic": "deploy/lib/basic/index",
+    // "reactxx-animation": "deploy/lib/animation/index",
+    // "reactxx-mediaq": "deploy/lib/mediaq/index",
+    // "reactxx": "deploy/lib/reactxx/index",
+    // "reactxx-mui-web": "deploy/lib/mui-web",
+    // "reactxx-icons": "deploy/lib/icons",
+    // "reactxx-muix": "deploy/lib/muix"
   }
 });
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { TSheeter, TComponents, TAtomize, TTheme, TVariants } from '../d-index'
-import { globalOptions } from 'reactxx-core/with-style/global-state'
+import { globalOptions } from './global-state'
 import { lastPipe } from './pipe-last'
 import { firstPipe, defaultThemeName } from './pipe-first'
 import { deepMerges } from '../utils/deep-merge'
@@ -100,6 +100,7 @@ const withStyles = (componentState: TWithStyles.ComponentState) => {
   }
 
   const styled: TComponents.ComponentClass = Styled
+  styled[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.reactxxComponent
   return styled
 }
 

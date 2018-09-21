@@ -2,8 +2,8 @@ import React from 'react'
 import { renderer } from 'reactxx-fela'
 
 import { TAtomize, TSheeter, TComponents } from '../d-index'
-import { classNames, deleteUnusedProps } from './class-names'
-import { styles } from './styles'
+import { classNames, deleteUnusedProps } from '../sheeter/class-names'
+import { styles } from '../sheeter/styles'
 /******************************************
   EXTEND REACT
 *******************************************/
@@ -16,34 +16,35 @@ declare module 'react' {
   }
 }
 
-export const createElement = (type, props: TComponents.CommonProperties & { className?, style? }, ...children) => {
+export const createElement = (type, props: TComponents.CommonProperties & { className?, style?}, ...children) => {
   if (!props) return React.createElement(type, props, ...children)
   const { classNameX, styleX } = props
   deleteUnusedProps(props)
   // classNameX are compiled as soon as possible
   if (classNameX) {
     const compiled = Array.isArray(classNameX) ? classNames(...classNameX as TSheeter.ClassNameItem[]) : classNames(classNameX)
-    if (isReactBuildInComponent(type)) {
-      delete props.classNameX
-      if (!props.className) props.className = normalizeValues(compiled)
-      else props.className += ' ' + normalizeValues(compiled)
-    } else
+    if (isReactxxComponent(type))
       props.classNameX = compiled
+    else {
+      delete props.classNameX
+      if (!props.className) props.className = applyLastWinStrategy(compiled)
+      else props.className += ' ' + applyLastWinStrategy(compiled)
+    }
   }
   // styleX are compiled as late as possible
   if (styleX) {
-    if (isReactBuildInComponent(type)) {
+    if (!isReactxxComponent(type)) {
       // we cannot recognize when styleX is compiled => styleX are compiled in build-in component only
       const compiled = Array.isArray(styleX) ? styles(...styleX) : styles(styleX)
       delete props.styleX
       props.style = compiled
-    } 
+    }
   }
   return React.createElement(type, props, ...children)
 }
 
 // apply LAST WIN strategy for web className
-const normalizeValues = (values: TAtomize.AtomicArray) => {
+const applyLastWinStrategy = (values: TAtomize.AtomicArray) => {
   const res: TAtomize.AtomicWeb[] = []
   const usedPropIds: { [propId: string]: boolean } = {}
   for (let k = values.length - 1; k >= 0; k--) {
@@ -57,4 +58,4 @@ const normalizeValues = (values: TAtomize.AtomicArray) => {
   return res.join(' ')
 }
 
-const isReactBuildInComponent = type => typeof type === 'string'
+const isReactxxComponent = type => type[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.reactxxComponent

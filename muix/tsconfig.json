@@ -26,9 +26,6 @@
     //"noUnusedLocals": true,
     "baseUrl": ".",
     "paths": {
-      "reactxx-sheeter": [
-        "src/sheeter/index"
-      ],
       "reactxx-core/*": [
         "src/core/*"
       ],
@@ -38,27 +35,34 @@
       "reactxx-fela": [
         "src/fela/index"
       ],
-      "reactxx-animation": [
-        "src/animation/index"
-      ],
-      "reactxx-basic": [
-        "src/basic/index"
+      "reactxx-primitives/*": [
+        "src/primitives2/*"
       ],
       "reactxx-primitives": [
-        "src/primitives/index"
+        "src/primitives2/index"
       ],
-      "reactxx-mediaq": [
-        "src/mediaq/index"
-      ],
-      "reactxx-icons/*": [
-        "src/icons/*"
-      ],
-      "reactxx-mui-web/*": [
-        "src/mui-web/*"
-      ],
-      "reactxx-muix/*": [
-        "src/muix/*"
-      ]
+
+      // "reactxx-sheeter": [
+      //   "src/sheeter/index"
+      // ],
+      // "reactxx-animation": [
+      //   "src/animation/index"
+      // ],
+      // "reactxx-basic": [
+      //   "src/basic/index"
+      // ],
+      // "reactxx-mediaq": [
+      //   "src/mediaq/index"
+      // ],
+      // "reactxx-icons/*": [
+      //   "src/icons/*"
+      // ],
+      // "reactxx-mui-web/*": [
+      //   "src/mui-web/*"
+      // ],
+      // "reactxx-muix/*": [
+      //   "src/muix/*"
+      // ]
     },
     "lib": [
       "dom",
@@ -73,6 +77,9 @@
 
     "src/core",
     "src/fela",
+    "src/primitives2",
+    "src/ks/web",
+    
     // "src/sheeter",
     // "src/basic",
     // "src/mui-web",
@@ -86,7 +93,6 @@
     // "src/ks/common/primitives", 
     // "src/ks/common/mediaq", 
     // "src/ks/common/animation", 
-    "src/ks/web",
 
     //"src/ks/common/components", 
   ],

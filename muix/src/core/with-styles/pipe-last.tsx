@@ -1,7 +1,7 @@
 import React from 'react';
 import { TWithStyles, TComponents } from '../d-index'
 //import { adjustSheet } from '../reacts/adjust-sheet'
-import { classNamesForBind } from '../reacts/class-names'
+import { classNamesForBind } from '../sheeter/class-names'
 
 
 export const lastPipe: TWithStyles.Pipe = (pipeId, context, next) => {

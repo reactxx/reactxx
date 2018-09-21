@@ -25,11 +25,11 @@ const App: React.SFC = () => null
 //import App from '../common/mui-doc-app/index'
 //import App from '../common/primitives/ce1'
 
-import {runTest} from 'reactxx-core/tests/jsx'
+//import {runTest} from '../tests/jsx'
 
 //import { Test as App } from 'reactxx-core'
 
-runTest()
+//runTest()
 
 // import { run } from 'reactxx-core'
 // run()

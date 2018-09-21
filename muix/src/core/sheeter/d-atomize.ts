@@ -1,4 +1,4 @@
-import { TValue, TSheeter, TVariants } from 'reactxx-core/d-index'
+import { TValue, TSheeter, TVariants } from '../d-index'
 
 export namespace TAtomize {
 
@@ -11,6 +11,7 @@ export namespace TAtomize {
     atomizedRuleset = 'c'/*compiled ruleset*/,
     //nativeValue = 'n' /*Native value*/,
     atomicArray = 'v' /*value array*/,
+    reactxxComponent = 'x' 
   }
 
   export interface TypedInterface {

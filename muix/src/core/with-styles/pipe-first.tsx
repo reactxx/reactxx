@@ -2,8 +2,8 @@ import React from 'react';
 import warning from 'warning';
 import { TAtomize, TComponents, TSheeter, TWithStyles } from '../d-index';
 import { globalOptions } from './global-state'
-import { adjustRulesetCompiled, adjustSheetCompiled } from '../sheeter/atomize';
-import { createWithTheme } from '../utils/createWithTheme';
+import { atomizeRuleset, atomizeSheet } from '../sheeter/atomize';
+import { createWithTheme } from '../utils/create-with-theme';
 
 export namespace TTheme {
   export interface Theme {
@@ -43,8 +43,8 @@ const applyTheme = (pipeId: number, theme: TTheme.Theme, state: TWithStyles.Inst
   state.theme = theme
   const { props: { classes, classNameX, styleX }, pipeStates } = state
   const data = pipeStates[pipeId]
-  data.classes = adjustSheetCompiled(classes, theme)
-  data.classNameX = adjustRulesetCompiled(classNameX, theme)
+  data.classes = atomizeSheet(classes, theme)
+  data.classNameX = atomizeRuleset(classNameX, theme)
   data.styleX = createWithTheme(styleX, theme)
   state.sheet = createSheetWithTheme(state)
 }
@@ -66,9 +66,9 @@ const createSheetWithTheme = (state: TWithStyles.InstanceState) => {
   let value: TAtomize.Sheet = theme.$cache && theme.$cache[componentId]
   if (value) return value
 
-  value = adjustSheetCompiled(sheetOrCreator, theme)
+  value = atomizeSheet(sheetOrCreator, theme)
   if (defaultProps && defaultProps.classes) {
-    const defaultClasses = adjustSheetCompiled(defaultProps.classes, theme)
+    const defaultClasses = atomizeSheet(defaultProps.classes, theme)
     mergeSheets(value, defaultClasses, true)
   }
 
