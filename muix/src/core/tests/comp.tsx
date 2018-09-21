@@ -39,8 +39,8 @@ const sheet: TSheeter.Sheet<Shape> = {
 let Inner: React.ComponentType<TComponents.Props<Shape>>
 
 const App: TComponents.SFCCode<Shape> = props => {
-    const { classNameX, classes, styleX, theme, classNames } = props
-    const root = classNames(classes.root, { margin: 0 })
+    const { classNameX, classes, styleX, theme, mergeRulesets } = props
+    const root = mergeRulesets(classes.root, { margin: 0 })
     return <div>
         <Inner
             classes={{ root: classes.label }}

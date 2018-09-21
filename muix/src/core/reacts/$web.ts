@@ -2,7 +2,7 @@ import React from 'react'
 import { renderer } from 'reactxx-fela'
 
 import { TAtomize, TSheeter, TComponents } from '../d-index'
-import { classNames, deleteUnusedProps } from '../sheeter/class-names'
+import { mergeRulesets, deleteSystemProps } from 'reactxx-core/sheeter/merges'
 import { styles } from '../sheeter/styles'
 /******************************************
   EXTEND REACT
@@ -19,11 +19,11 @@ declare module 'react' {
 export const createElement = (type, props: TComponents.CommonProperties & { className?, style?}, ...children) => {
   if (!props) return React.createElement(type, props, ...children)
   const { classNameX, styleX } = props
-  deleteUnusedProps(props)
+  const isXXComponent = isReactxxComponent(type)
   // classNameX are compiled as soon as possible
   if (classNameX) {
-    const compiled = Array.isArray(classNameX) ? classNames(...classNameX as TSheeter.ClassNameItem[]) : classNames(classNameX)
-    if (isReactxxComponent(type))
+    const compiled = Array.isArray(classNameX) ? mergeRulesets(...classNameX as TSheeter.ClassNameItem[]) : mergeRulesets(classNameX)
+    if (isXXComponent)
       props.classNameX = compiled
     else {
       delete props.classNameX
@@ -33,13 +33,14 @@ export const createElement = (type, props: TComponents.CommonProperties & { clas
   }
   // styleX are compiled as late as possible
   if (styleX) {
-    if (!isReactxxComponent(type)) {
+    if (!isXXComponent) {
       // we cannot recognize when styleX is compiled => styleX are compiled in build-in component only
       const compiled = Array.isArray(styleX) ? styles(...styleX) : styles(styleX)
       delete props.styleX
       props.style = compiled
     }
   }
+  if (!isXXComponent) deleteSystemProps(props)
   return React.createElement(type, props, ...children)
 }
 

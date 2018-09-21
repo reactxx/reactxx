@@ -1,20 +1,21 @@
 import React from 'react';
 import { TWithStyles, TComponents } from '../d-index'
 //import { adjustSheet } from '../reacts/adjust-sheet'
-import { classNamesForBind } from '../sheeter/class-names'
+import { mergeRulesetsForBind } from 'reactxx-core/sheeter/merges'
 
 
-export const lastPipe: TWithStyles.Pipe = (pipeId, context, next) => {
+export const lastPipe: TWithStyles.Pipe = (state, next) => {
+  const pipeId = state.getPipeCounter()
   return () => {
-    const { pipeStates } = context
+    const { pipeStates } = state
     // UNDO
     delete pipeStates[pipeId]
     // prepare code component props
     const codeProps: TComponents.PropsCode = {
-      sheetQuery: context.sheetQuery,
-      theme: context.theme,
+      sheetQuery: state.sheetQuery,
+      theme: state.theme,
     }
-    codeProps.classNames = classNamesForBind.bind(codeProps)
-    return <context.CodeComponent {...codeProps} />
+    codeProps.mergeRulesets = mergeRulesetsForBind.bind(codeProps)
+    return <state.CodeComponent {...codeProps} />
   }
 }

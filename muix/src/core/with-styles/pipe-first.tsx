@@ -1,23 +1,10 @@
 import React from 'react';
-import warning from 'warning';
-import { TAtomize, TComponents, TSheeter, TWithStyles } from '../d-index';
+import { TTheme, TSheeter, TWithStyles } from '../d-index';
 import { globalOptions } from './global-state'
-import { atomizeRuleset, atomizeSheet } from '../sheeter/atomize';
-import { createWithTheme } from '../utils/create-with-theme';
+import {applyTheme, ThemeContextConsumer, defaultThemeName} from './themer'
 
-export namespace TTheme {
-  export interface Theme {
-    $cache?: { [componentId: number]: TSheeter.Sheet }
-  }
-
-  export interface ThemeProviderProps<T extends {} = Theme> {
-    registeredThemeName?: string
-    theme?: T
-  }
-
-}
-
-export const firstPipe: TWithStyles.Pipe = (pipeId, state, next) => {
+export const firstPipe: TWithStyles.Pipe = (state, next) => {
+  const pipeId = state.getPipeCounter()
   const render = (theme: TTheme.Theme) => {
     applyTheme(pipeId, theme || globalOptions.namedThemes[defaultThemeName], state)
     return next()
@@ -25,78 +12,13 @@ export const firstPipe: TWithStyles.Pipe = (pipeId, state, next) => {
   return () => {
     // UNDO
     delete state.sheet
-    // init
-    state.sheetQuery = {}
-    state.pipeStates = []
-    state.pipeStates[pipeId] = { codeProps: { ...state.props } as TComponents.PropsCode }
+    // apply theme
     if (!state.withTheme) {
       // no theme
       applyTheme(pipeId, null, state)
       return next()
     } else
       // theme => listen to theme change
-      return <themeContext.Consumer>{render}</themeContext.Consumer>
+      return <ThemeContextConsumer>{render}</ThemeContextConsumer>
   }
-}
-
-const applyTheme = (pipeId: number, theme: TTheme.Theme, state: TWithStyles.InstanceState) => {
-  state.theme = theme
-  const { props: { classes, classNameX, styleX }, pipeStates } = state
-  const data = pipeStates[pipeId]
-  data.classes = atomizeSheet(classes, theme)
-  data.classNameX = atomizeRuleset(classNameX, theme)
-  data.styleX = createWithTheme(styleX, theme)
-  state.sheet = createSheetWithTheme(state)
-}
-
-const mergeSheets = (sheet: TAtomize.Sheet, classes: TAtomize.Sheet, inPlace?: boolean) => {
-  if (!classes) return sheet
-  if (!inPlace) sheet = { ...sheet }
-  for (const p in classes) {
-    const c = classes[p], ca = Array.isArray(c), s = sheet[p], sa = Array.isArray(s)
-    warning(c && p, 'Something wrong here')
-    sheet[p] = !sa && !ca ? [s, c] : !sa ? [s, ...c] : !ca ? [...s, c] : [...s, ...c]
-  }
-}
-
-const createSheetWithTheme = (state: TWithStyles.InstanceState) => {
-  const { componentId, defaultProps, sheetOrCreator } = state
-  const theme = state.theme as TTheme.Theme
-
-  let value: TAtomize.Sheet = theme.$cache && theme.$cache[componentId]
-  if (value) return value
-
-  value = atomizeSheet(sheetOrCreator, theme)
-  if (defaultProps && defaultProps.classes) {
-    const defaultClasses = atomizeSheet(defaultProps.classes, theme)
-    mergeSheets(value, defaultClasses, true)
-  }
-
-  if (!theme.$cache) theme.$cache = {}
-  theme.$cache[componentId] = value
-
-  return value
-
-}
-
-
-export const defaultThemeName = '*default-theme*'
-
-const themeContext = React.createContext<TTheme.Theme>(null)
-
-export const registerTheme = (name: string, theme: TTheme.Theme) => {
-  warning(!globalOptions.namedThemes[name], `Theme ${name} already registered`)
-  if (!theme.$cache) theme.$cache = {}
-  globalOptions.namedThemes[name] = theme
-}
-
-export class ThemeProvider extends React.Component<TTheme.ThemeProviderProps> {
-
-  render() {
-    const { children, theme, registeredThemeName } = this.props
-    const actTheme = registeredThemeName ? globalOptions.namedThemes[registeredThemeName] : theme
-    warning(actTheme, 'ThemeProvider: missing theme')
-    return <themeContext.Provider value={actTheme}>{children}</themeContext.Provider>
-  }
-
 }

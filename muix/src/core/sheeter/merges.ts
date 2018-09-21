@@ -1,22 +1,33 @@
 import warning from 'warning'
-import { TSheeter, TAtomize, TVariants, TComponents } from '../d-index'
-import { atomizeRuleset, isAtomizedRuleset, isAtomicArray } from '../sheeter/atomize'
-import { testConditions } from '../sheeter/variants'
+import { TSheeter, TAtomize, TVariants, TComponents } from 'reactxx-core/d-index'
+import { atomizeRuleset, isAtomizedRuleset, isAtomicArray } from 'reactxx-core/sheeter/atomize'
+import { testConditions } from 'reactxx-core/sheeter/variants'
 
-export const deleteUnusedProps = props => propsToDelete.forEach(p => delete props[p])
+export const mergeSheets = (sheet: TAtomize.Sheet, classes: TAtomize.Sheet, inPlace?: boolean) => {
+    if (!classes) return sheet
+    if (!inPlace) sheet = { ...sheet }
+    for (const p in classes) {
+        const c = classes[p], ca = Array.isArray(c), s = sheet[p], sa = Array.isArray(s)
+        warning(c && p, 'Something wrong here')
+        sheet[p] = !sa && !ca ? [s, c] : !sa ? [s, ...c] : !ca ? [...s, c] : [...s, ...c]
+    }
+}
 
-export function classNamesForBind(...rulesets: TSheeter.ClassNameItem[]) {
+export function mergeRulesetsForBind(...rulesets: TSheeter.ClassNameItem[]) {
     return classNamesWithQuery(this.sheetQuery, this.theme, ...rulesets)
 }
 
-export const classNames = (...rulesets: TSheeter.ClassNameItem[]) => classNamesWithQuery({}, null, ...rulesets)
-export const classNamesWithTheme = (theme, ...rulesets: TSheeter.ClassNameItem[]) => classNamesWithQuery({}, theme, ...rulesets)
+export const mergeRulesets = (...rulesets: TSheeter.ClassNameItem[]) => classNamesWithQuery({}, null, ...rulesets)
+export const mergeRulesetsWithTheme = (theme, ...rulesets: TSheeter.ClassNameItem[]) => classNamesWithQuery({}, theme, ...rulesets)
+
+export const deleteSystemProps = props => propsToDelete.forEach(p => delete props[p])
+
 
 /******************************************
   PRIVATE
 *******************************************/
 
-const propsToDelete: TComponents.CommonPropertiesCodeKeys[] = ['sheetQuery', 'classes', 'classNames']
+const propsToDelete: TComponents.CommonPropertiesCodeKeys[] = ['sheetQuery', 'classes', 'mergeRulesets']
 
 const emptyAtomicArray = [] as TAtomize.AtomicArray
 emptyAtomicArray[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomicArray
@@ -30,10 +41,10 @@ const classNamesWithQuery = (query: TVariants.Query, theme, ...rulesets: TSheete
 
     // prepare whenFlag query par
     if (query)
-      query = {...query, whenFlag: query.whenFlag ? {...query.whenFlag} : {}}
-    else 
-      query = { whenFlag: {}}
-    rulesets.forEach((r: TSheeter.Ruleset & {name?:string}) => {
+        query = { ...query, whenFlag: query.whenFlag ? { ...query.whenFlag } : {} }
+    else
+        query = { whenFlag: {} }
+    rulesets.forEach((r: TSheeter.Ruleset & { name?: string }) => {
         if (!r || !r.name) return
         query.whenFlag[r.name] = true
     })

@@ -56,7 +56,7 @@ export namespace TComponents {
     children?: React.ReactNode
     sheetQuery?: TVariants.Query<R>
     classes?: TAtomize.Sheet<R>
-    classNames?: (...rulesets: TSheeter.ClassNameItem[]) => TAtomize.AtomicArray
+    mergeRulesets?: (...rulesets: TSheeter.ClassNameItem[]) => TAtomize.AtomicArray
     theme?: TSheeter.getTheme<R>
   }
 

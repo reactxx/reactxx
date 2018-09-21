@@ -10,16 +10,16 @@ import { TPrimitives } from './d-index'
 const withStyles = <T extends any>(...args: any[]) => null as any
 
 export const view: TComponents.SFCCode<TPrimitives.ViewShape> = props => {
-    const { styleX, classNameX, classNames, classes, ...rest } = props
-    const root = classNames(classes.root, hasPlatformEvents(props) && classes.pressable, classNameX) 
+    const { styleX, classNameX, mergeRulesets, classes, ...rest } = props
+    const root = mergeRulesets(classes.root, hasPlatformEvents(props) && classes.pressable, classNameX) 
     return <div classNameX={root} styleX={styleX} {...rest} />
 }
 
 let hasPlatformEvents = props => false
 
 export const icon: TComponents.SFCCode<TPrimitives.IconShape> = props => {
-    const { styleX, classNameX, classes, classNames, children, data, url/*, onClick*/, ...rest } = props
-    const rootStyle = classNames(classes.root, hasPlatformEvents(props) && classes.pressable, classNameX)
+    const { styleX, classNameX, classes, mergeRulesets, children, data, url/*, onClick*/, ...rest } = props
+    const rootStyle = mergeRulesets(classes.root, hasPlatformEvents(props) && classes.pressable, classNameX)
     const svg = <svg classNameX={rootStyle} styleX={styleX} onClick={url ? undefined : undefined /*onClick*/} {...rest}>
         {data ? <path d={data} /> : children}
     </svg>
@@ -27,9 +27,9 @@ export const icon: TComponents.SFCCode<TPrimitives.IconShape> = props => {
 }
 
 export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = props => {
-    const { styleX, classNameX, classes, classNames, children, horizontal, ...rest } = props
-    const rootStyle = classNames(classes.root, horizontal && classes.rootHorizontal, classNameX)
-    const containerStyle = classNames(classes.container, horizontal && classes.containerHorizontal)
+    const { styleX, classNameX, classes, mergeRulesets, children, horizontal, ...rest } = props
+    const rootStyle = mergeRulesets(classes.root, horizontal && classes.rootHorizontal, classNameX)
+    const containerStyle = mergeRulesets(classes.container, horizontal && classes.containerHorizontal)
     return <div classNameX={rootStyle} style={styleX} {...rest}>
         <div classNameX={containerStyle}>
             {children}
@@ -38,12 +38,12 @@ export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = prop
 }
 
 export const text: TComponents.SFCCode<TPrimitives.TextShape> = props => {
-    const { classNameX, classes, classNames, singleLine, url/*, onClick*/, sheetQuery: { whenFlag }, ...rest } = props
+    const { classNameX, classes, mergeRulesets, singleLine, url/*, onClick*/, sheetQuery: { whenFlag }, ...rest } = props
     whenFlag.pressable = hasPlatformEvents(props)
     whenFlag.singleLine = singleLine
     const tagProps = {
         className: TPrimitives.Consts.textClassName,
-        classNameX: classNames(classes.root, classNameX),
+        classNameX: mergeRulesets(classes.root, classNameX),
         ...rest,
         onClick: url ? undefined : undefined /*onClick*/
     }
