@@ -43,6 +43,6 @@ export namespace TAtomize {
 
 
   export type TRulesetItem = TAtomize.AtomizedRuleset | TAtomize.AtomicArray
-  export type TRuleset = TRulesetItem | TRulesetItem[]
+  export type Ruleset = TRulesetItem | TRulesetItem[]
 
 }

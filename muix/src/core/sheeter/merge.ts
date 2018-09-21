@@ -1,29 +1,28 @@
 import { TAtomize } from 'reactxx-core/d-index';
 import { isAtomicArray } from './atomize'
 
-// target is not modified
-export const mergeRuleset = (target: TAtomize.TRuleset, source: TAtomize.TRuleset) => {
+export const mergeRuleset = (target: TAtomize.Ruleset, source: TAtomize.Ruleset) => {
     if (!target) return source
     if (!source) return target
     const targeta = isArray(target), sourcea = isArray(source)
-    return (!targeta && !sourcea ? [target, source] : !targeta ? [target, ...source] : !sourcea ? [...target, source] : [...target, ...source]) as TAtomize.TRuleset
+    return (
+        !targeta && !sourcea ? [target, source] : !targeta ? [target, ...source] : !sourcea ? [...target, source] : [...target, ...source]
+    ) as TAtomize.Ruleset
 }
 
-export const mergeRulesets = (sources: TAtomize.TRuleset[]) => {
+export const mergeRulesets = (sources: TAtomize.Ruleset[]) => {
     if (!sources || sources.length === 0) return null
-    let res: TAtomize.TRuleset
+    let res: TAtomize.Ruleset = null
     let first = true
     sources.forEach(src => {
         if (!src) return
-        if (first) {
-            res = src; first = false
-        } else
-            res = mergeRuleset(res, src)
+        res = first ? src : mergeRuleset(res, src)
+        first = false
     })
     return res
 }
 
-// inPlace===true => target modified
+// inPlace===true => target is modified
 export const mergeSheet = (target: TAtomize.Sheet, source: TAtomize.Sheet, inPlace?: boolean) => {
     if (!source) return target
     if (!target) return source
@@ -33,17 +32,26 @@ export const mergeSheet = (target: TAtomize.Sheet, source: TAtomize.Sheet, inPla
     return target
 }
 
-// target is not modified
 export const mergeSheets = (target: TAtomize.Sheet, sources: TAtomize.Sheet[]) => {
     if (!sources || sources.length === 0) return target
-    let first = true
+    let inPlace = false
     let res = target
     sources.forEach(src => {
         if (!src) return
-        if (first) {
-            res = mergeSheet(res, src); first = false
-        } else
-            res = mergeSheet(res, src, true)
+        res = mergeSheet(res, src, inPlace)
+        inPlace = true
+    })
+    return res
+}
+
+export const mergeCodeProps = (sources: {}[]) => {
+    let res = null
+    if (!sources || sources.length === 0) return res
+    let first = true
+    sources.forEach(src => {
+        if (!src) return
+        res = first ? src : {...res, ...src}
+        first = false
     })
     return res
 }

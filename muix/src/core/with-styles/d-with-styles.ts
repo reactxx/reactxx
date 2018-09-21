@@ -36,7 +36,7 @@ export namespace TWithStyles {
   export interface PipeState {
     codeProps?: TComponents.PropsCode
 
-    classNameX?: TSheeter.ClassName
+    classNameX?: TAtomize.AtomizedRuleset
     styleX?: TSheeter.StylesX
     classes?: TSheeter.PartialSheet
   }

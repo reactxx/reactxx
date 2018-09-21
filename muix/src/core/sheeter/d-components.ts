@@ -51,7 +51,7 @@ export namespace TComponents {
     TSheeter.getProps<R>, CommonPropertiesCode<R> & TEventsX<R>>
 
   export interface CommonPropertiesCode<R extends TSheeter.Shape = TSheeter.Shape> {
-    classNameX?: TSheeter.ClassNameItem
+    classNameX?: TAtomize.Ruleset
     styleX?: TSheeter.StyleX<R>
     children?: React.ReactNode
     sheetQuery?: TVariants.Query<R>
