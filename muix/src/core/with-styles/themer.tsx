@@ -3,19 +3,21 @@ import warning from 'warning';
 import { TTheme, TAtomize, TSheeter, TWithStyles } from '../d-index';
 import { globalOptions } from './global-state'
 import { atomizeRuleset, atomizeSheet } from '../sheeter/atomize';
-import { mergeSheets } from '../sheeter/merges';
+import { mergeSheet } from 'reactxx-core/sheeter/merge';
 import { createWithTheme } from '../utils/create-with-theme';
 
 export const applyTheme = (pipeId: number, theme: TTheme.Theme, state: TWithStyles.InstanceState) => {
   warning(pipeId > 0, 'pipe-first.pipeId must be greater that zero')
 
+  const { props: { classes, classNameX, styleX, ...propsRest }, defaultProps } = state
+
+  state.pipeStates = []
   state.sheetQuery = {}
   state.theme = theme
-  state.pipeStates = []
-  const { props: { classes, classNameX, styleX, ...propsRest }, defaultProps } = state
 
   if (defaultProps) {
     const { classNameX: defaultClassNameX, styleX: defaultStyleX, ...defaultPropsRest } = defaultProps
+    // defaultProps.classes is merged with cached sheet in createSheetWithTheme
     state.pipeStates[0] = {
       codeProps: defaultPropsRest,
       classNameX: atomizeRuleset(defaultClassNameX, theme),
@@ -70,7 +72,7 @@ const createSheetWithTheme = (state: TWithStyles.InstanceState) => {
   value = atomizeSheet(sheetOrCreator, theme)
   if (defaultProps && defaultProps.classes) {
     const defaultClasses = atomizeSheet(defaultProps.classes, theme)
-    mergeSheets(value, defaultClasses, true)
+    mergeSheet(value, defaultClasses, true)
   }
 
   if (!theme.$cache) theme.$cache = {}

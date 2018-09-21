@@ -2,7 +2,7 @@ import React from 'react'
 import { renderer } from 'reactxx-fela'
 
 import { TAtomize, TSheeter, TComponents } from '../d-index'
-import { mergeRulesets, deleteSystemProps } from 'reactxx-core/sheeter/merges'
+import { toClassNames, deleteSystemProps } from '../sheeter/to-classnames'
 import { styles } from '../sheeter/styles'
 /******************************************
   EXTEND REACT
@@ -22,7 +22,7 @@ export const createElement = (type, props: TComponents.CommonProperties & { clas
   const isXXComponent = isReactxxComponent(type)
   // classNameX are compiled as soon as possible
   if (classNameX) {
-    const compiled = Array.isArray(classNameX) ? mergeRulesets(...classNameX as TSheeter.ClassNameItem[]) : mergeRulesets(classNameX)
+    const compiled = Array.isArray(classNameX) ? toClassNames(...classNameX as TSheeter.ClassNameItem[]) : toClassNames(classNameX)
     if (isXXComponent)
       props.classNameX = compiled
     else {

@@ -1,7 +1,6 @@
 import React from 'react';
 import { TWithStyles, TComponents } from '../d-index'
-//import { adjustSheet } from '../reacts/adjust-sheet'
-import { mergeRulesetsForBind } from 'reactxx-core/sheeter/merges'
+import { toClassNamesForBind } from 'reactxx-core/sheeter/to-classnames'
 
 
 export const lastPipe: TWithStyles.Pipe = (state, next) => {
@@ -15,7 +14,7 @@ export const lastPipe: TWithStyles.Pipe = (state, next) => {
       sheetQuery: state.sheetQuery,
       theme: state.theme,
     }
-    codeProps.mergeRulesets = mergeRulesetsForBind.bind(codeProps)
+    codeProps.toClassNames = toClassNamesForBind.bind(codeProps)
     return <state.CodeComponent {...codeProps} />
   }
 }
