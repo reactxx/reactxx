@@ -12,7 +12,7 @@ export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: T
     return sh as any as TAtomize.Sheet<R>
 }
 
-export const atomizeRuleset = (ruleset: TSheeter.RulesetOrCreator, theme, rulesetName?: string) => {
+export const atomizeRuleset = (ruleset: TSheeter.ClassNameOrCreator, theme, rulesetName?: string) => {
     if (!ruleset) return null
     const rs = createWithTheme(ruleset, theme)
     if (isAtomizedRuleset(rs) || isAtomicArray(rs)) return rs
@@ -26,7 +26,7 @@ export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme) => {
         if (isAtomizedStyleWeb(st)) return st
         return atomizeStyleWeb(st as TSheeter.StyleOrAtomizedWeb)
     } else
-        return atomizeRuleset(style as TSheeter.RulesetOrCreator, theme)
+        return atomizeRuleset(style as TSheeter.ClassNameOrCreator, theme)
 }
 
 // export function isRuleset(obj: Object): obj is TSheeter.Ruleset {
@@ -49,7 +49,7 @@ export function isAtomizedSheet<R extends TSheeter.Shape = TSheeter.Shape>(sheet
     return true
 }
 
-export function isRulesetWebArray(obj): obj is TSheeter.RulesetWeb[] {
-    return Array.isArray(obj) && !isAtomicArray(obj)
-}
+// export function isRulesetWebArray(obj): obj is TSheeter.RulesetWeb[] {
+//     return Array.isArray(obj) && !isAtomicArray(obj)
+// }
 

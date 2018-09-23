@@ -14,7 +14,6 @@ interface Shape extends TSheeter.ShapeAncestor {
     style: 'View'
 }
 
-
 const sheet: Shape['$SheetOrCreator'] = theme => {
     const res: Shape['$Sheet'] = {
         root: {
@@ -61,6 +60,14 @@ const App: TComponents.SFCCode<Shape> = props => {
     const root = toClassNames(classes.root, { margin: 0 })
     return <div>
         <Inner
+            styleX={theme => ([
+                {
+                    $web: {},
+                    $native: {},
+                    margin: 0,
+                },
+                styleX
+            ])}
             classes={theme => {
                 const res: typeof Inner['classes'] = {
                     root: [{ margin: 0, $web: [{ cursor: 'pointer' }], $native: [{ margin: 0 }] }],
@@ -69,7 +76,12 @@ const App: TComponents.SFCCode<Shape> = props => {
                 }
                 return res
             }}
-            classNameX={[{ margin: 0 }, classNameX, root]}
+            classNameX={theme => {
+                const res: typeof Inner['classNamex'] = [
+                    { margin: 0 }, classNameX, root
+                ]
+                return res
+            }}
         />
         <Inner
             classes={theme => ({ root: [classes.root, { margin: 0 }] })}

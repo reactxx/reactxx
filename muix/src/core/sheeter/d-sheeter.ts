@@ -25,7 +25,10 @@ export namespace TSheeter {
     Ruleset<T, R> | TAtomize.Ruleset
   export type RulesetOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     RulesetItem<T, R> | RulesetItem<T, R>[]
-  export type RulesetOrCreator<R extends Shape = Shape> = RulesetOrAtomized<R> | ((theme: getTheme<R>) => RulesetOrAtomized<R>)
+
+  export type ClassNameOrAtomized<R extends Shape = Shape> =
+    RulesetItem<getStyle<R>, R> | RulesetItem<getStyle<R>, R>[]
+  export type ClassNameOrCreator<R extends Shape = Shape> = ClassNameOrAtomized<R> | ((theme: getTheme<R>) => ClassNameOrAtomized<R>)
 
   export type RulesetNativeItem<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     RulesetNative<T, R> | TAtomize.Ruleset
@@ -61,12 +64,6 @@ export namespace TSheeter {
   export type StyleOrAtomized<R extends Shape = Shape> = StyleItem<R> | StyleItem<R>[]
 
   export type StyleOrAtomizedWeb = Style | (Style | TAtomize.StyleWeb)[]
-
-  //export type StyleWebItem = Style | TAtomize.StyleWeb
-  //export type StyleWeb = StyleWebItem | StyleWebItem[]
-  //export type StyleWebrCreator<R extends Shape = Shape> = StyleWeb | ((theme: getTheme<R>) => StyleWeb)
-  //export type StyleX = StyleWeb | RulesetOrAtomized
-  //export type StyleOrCreator<R extends Shape = Shape> = StyleX | ((theme: getTheme<R>) => StyleX)
 
   export interface StyleLow<R extends Shape = Shape> {
     $native?: TCommonStyles.RulesetNative<getStyle<R>>

@@ -16,7 +16,7 @@ export namespace TComponents {
 
   //******************** Cross platform component props
   export interface CommonProperties<R extends Shape = Shape> extends PropsLow<R> {
-    classNameX?: TSheeter.RulesetOrCreator<R>
+    classNameX?: TSheeter.ClassNameOrCreator<R>
     styleX?: TSheeter.StyleOrCreator<R>
     classes?: TSheeter.PartialSheetOrCreator<R> // cross platform sheet
   }
@@ -44,7 +44,7 @@ export namespace TComponents {
   export type ComponentType<R extends Shape = Shape> = React.ComponentType<Props<R>> & {
     // 
     classes: TSheeter.PartialSheet<R>
-    classNamex: TSheeter.RulesetOrAtomized<R>
+    classNamex: TSheeter.ClassNameOrAtomized<R>
   }
   export type ComponentClass<R extends Shape = Shape> = React.ComponentClass<Props<R>>
   export type SFC<R extends Shape = Shape> = React.SFC<Props<R>>

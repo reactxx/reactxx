@@ -35,7 +35,6 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 
   if (styleX) {
     if (!isXXComponent) {
-      // we cannot recognize when styleX is compiled => styleX are compiled in build-in component only
       props.style = mergeStyles<'web'>([atomizeStyle(styleX, null)])
     }
   }
