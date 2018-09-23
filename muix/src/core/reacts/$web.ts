@@ -3,26 +3,27 @@ import { renderer } from 'reactxx-fela'
 
 import { TAtomize, TSheeter, TComponents } from '../d-index'
 import { toClassNames, deleteSystemProps } from '../sheeter/to-classnames'
-import { styles } from '../sheeter/styles'
+import { mergeStyles } from '../sheeter/merge'
+import { atomizeStyle } from '../sheeter/atomize'
 /******************************************
   EXTEND REACT
 *******************************************/
 // https://stackoverflow.com/questions/40093655/how-do-i-add-attributes-to-existing-html-elements-in-typescript-jsx
 // https://github.com/Microsoft/TypeScript/issues/10859
 declare module 'react' {
-  interface HTMLAttributes<T> extends TComponents.CommonProperties {
+  interface HTMLAttributes<T> extends TComponents.ReactsCommonProperties {
   }
-  interface SVGAttributes<T> extends TComponents.CommonProperties {
+  interface SVGAttributes<T> extends TComponents.ReactsCommonProperties {
   }
 }
 
-export const createElement = (type, props: TComponents.CommonProperties & { className?, style?}, ...children) => {
+export const createElement = (type, props: TComponents.ReactsCommonProperties & { className?, style?}, ...children) => {
   if (!props) return React.createElement(type, props, ...children)
   const { classNameX, styleX } = props
-  const isXXComponent = isReactxxComponent(type)
-  // classNameX are compiled as soon as possible
+  const isXXComponent = isReactXXComponent(type)
+
   if (classNameX) {
-    const compiled = Array.isArray(classNameX) ? toClassNames(...classNameX as TSheeter.ClassNameItem[]) : toClassNames(classNameX)
+    const compiled = Array.isArray(classNameX) ? toClassNames(...classNameX as TSheeter.RulesetItem[]) : toClassNames(classNameX)
     if (isXXComponent)
       props.classNameX = compiled
     else {
@@ -31,13 +32,11 @@ export const createElement = (type, props: TComponents.CommonProperties & { clas
       else props.className += ' ' + applyLastWinStrategy(compiled)
     }
   }
-  // styleX are compiled as late as possible
+
   if (styleX) {
     if (!isXXComponent) {
       // we cannot recognize when styleX is compiled => styleX are compiled in build-in component only
-      const compiled = Array.isArray(styleX) ? styles(...styleX) : styles(styleX)
-      delete props.styleX
-      props.style = compiled
+      props.style = mergeStyles<'web'>([atomizeStyle(styleX, null)])
     }
   }
   if (!isXXComponent) deleteSystemProps(props)
@@ -59,4 +58,4 @@ const applyLastWinStrategy = (values: TAtomize.AtomicArray) => {
   return res.join(' ')
 }
 
-const isReactxxComponent = type => type[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.reactxxComponent
+const isReactXXComponent = type => type[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.reactxxComponent

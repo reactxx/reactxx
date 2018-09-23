@@ -17,7 +17,7 @@ export namespace TWithStyles {
     defaultProps?: TComponents.Props<R>
     withTheme?: boolean
     sheetOrCreator?: TSheeter.SheetOrCreator
-    CodeComponent?: TComponents.ComponentType
+    CodeComponent?: TComponents.ComponentTypeCode<R>
     // computed props
     componentId?: number
     displayName?: string
@@ -36,8 +36,8 @@ export namespace TWithStyles {
   export interface PipeState {
     codeProps?: TComponents.PropsCode
 
-    classNameX?: TAtomize.AtomizedRuleset
-    styleX?: TSheeter.StylesX
+    classNameX?: TAtomize.Ruleset
+    styleX?: TAtomize.Style
     classes?: TSheeter.PartialSheet
   }
 

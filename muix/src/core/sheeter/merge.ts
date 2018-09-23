@@ -1,10 +1,34 @@
 import { TAtomize } from 'reactxx-core/d-index';
 import { isAtomicArray } from './atomize'
 
+export const mergeStyles = <T extends 'web' | 'native'>(sources: TAtomize.Style[]) => {
+    let all: TAll<T>
+    if (window.isWeb) {
+        let res = undefined
+        let counter = 0;
+        (sources as TAtomize.StyleWeb[]).forEach(s => {
+            if (!s) return;
+            switch (counter) {
+                case 0: res = s; counter++; break
+                case 1: res = { ...res, ...s }; counter++; break
+                default: Object.assign(res, s)
+            }
+        })
+        delete res.$web
+        delete res.$native
+        delete res[TAtomize.TypedInterfaceProp]
+        all = res as TAll<T>
+    } else
+        all = mergeRulesets(sources as TAtomize.StyleNative[]) as TAll<T>
+
+    return all
+}
+type TAll<T extends 'web' | 'native'> = T extends 'web' ? React.CSSProperties : TAtomize.Ruleset
+
 export const mergeRuleset = (target: TAtomize.Ruleset, source: TAtomize.Ruleset) => {
     if (!target) return source
     if (!source) return target
-    const targeta = isArray(target), sourcea = isArray(source)
+    const targeta = isRulesetArray(target), sourcea = isRulesetArray(source)
     return (
         !targeta && !sourcea ? [target, source] : !targeta ? [target, ...source] : !sourcea ? [...target, source] : [...target, ...source]
     ) as TAtomize.Ruleset
@@ -50,10 +74,10 @@ export const mergeCodeProps = (sources: {}[]) => {
     let first = true
     sources.forEach(src => {
         if (!src) return
-        res = first ? src : {...res, ...src}
+        res = first ? src : { ...res, ...src }
         first = false
     })
     return res
 }
 
-const isArray = item => item && Array.isArray(item) && !isAtomicArray(item)
+const isRulesetArray = obj => Array.isArray(obj) && !isAtomicArray(obj)

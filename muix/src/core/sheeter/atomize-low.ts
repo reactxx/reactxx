@@ -2,41 +2,72 @@ import warning from 'warning'
 import { isObject } from '../utils/deep-merge'
 import { TAtomize, TSheeter, TCommonStyles, TVariants } from '../d-index'
 import { toVariantParts } from '../sheeter/variants'
+import { isAtomicArray, isAtomizedRuleset, isAtomizedStyleWeb } from './atomize'
 
 // platform dependent import
 import { toAtomicArray } from 'reactxx-core'
 
-export const atomizeRulesetLow = <T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape>(
-    ruleset: TSheeter.Ruleset<T, R> | TSheeter.RulesetArray<T, R>,
-    rulesetName?: string
-) => {
+
+export const atomizeStyleWeb = (st: TSheeter.StyleOrAtomizedWeb) => {
+
+    const res: TAtomize.StyleWeb = [] as any
+    res[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomizedStyleWeb
+
+    const addParts = (item: TAtomize.StyleWeb | TSheeter.Style) => {
+        if (isAtomizedStyleWeb(item))
+            item.forEach(it => res.push(it))
+        else {
+            res.push(item as React.CSSProperties)
+            if (item.$web) res.push(item.$web)
+        }
+    }
+    if (Array.isArray(st)) st.forEach(s => addParts(s))
+    else addParts(st)
+    return res
+}
+
+export const atomizeRulesetLow = (ruleset: TSheeter.RulesetOrAtomized /*| TSheeter.RulesetItem[]*/, rulesetName?: string) => {
     if (!ruleset) return null
 
-    const name = rulesetName || ruleset.name || 'unknown'
-    const parts: [string, TVariants.VariantPart][] = []
+    const name = rulesetName || ruleset['name'] || 'unknown'
+    const parts: [string, TSheeter.RulesetItem][] = []
 
-    const addParts = (r: TSheeter.Ruleset, idxPrefix: string) => {
+    const addParts = (r: TSheeter.RulesetItem, idxPrefix: string) => {
         if (!r) return
         parts.push([idxPrefix, r])
-        const { $web, $native } = r
+        const { $web, $native } = r as TSheeter.Ruleset
         if (window.isWeb && $web) {
-            if (Array.isArray($web)) $web.forEach((r, idx) => parts.push([`${idxPrefix}/$web[${idx}]`, r] as any))
-            else parts.push([idxPrefix + '/$web', $web] as any)
+            if (!isAtomicArray($web) && Array.isArray($web))
+                $web.forEach((r, idx) => parts.push([`${idxPrefix}/$web[${idx}]`, r] as any))
+            else
+                parts.push([idxPrefix + '/$web', $web] as any)
         } else if (!window.isWeb && $native) {
-            if (Array.isArray($native)) $native.forEach((r, idx) => parts.push([`${idxPrefix}/$native[${idx}]`, r] as any))
-            else parts.push([idxPrefix + '/$native', $native] as any)
+            if (!isAtomicArray($native) && Array.isArray($native))
+                $native.forEach((r, idx) => parts.push([`${idxPrefix}/$native[${idx}]`, r] as any))
+            else
+                parts.push([idxPrefix + '/$native', $native] as any)
         }
     }
 
-    if (Array.isArray(ruleset)) ruleset.forEach((r, idx) => addParts(r, `[${idx}]`))
-    else addParts(ruleset, '')
+    if (!isAtomicArray(ruleset) && Array.isArray(ruleset))
+        ruleset.forEach((r, idx) => addParts(r, `[${idx}]`))
+    else
+        addParts(ruleset, '')
 
     const list: TAtomize.Variants = []
-    parts.forEach(part => atomizeRulesetInner(
-        list, part[1],
-        `${name}${part[0]}`,
-        [], [], part[1]
-    ))
+    parts.forEach(part => {
+        const item = part[1]
+        if (isAtomicArray(item)) {
+            list.push({ atomicArray: item, conditions: [] })
+        } else if (isAtomizedRuleset(item)) {
+            item.list.forEach(l => list.push(l))
+        } else
+            atomizeRulesetInner(
+                list, item,
+                `${name}${part[0]}`,
+                [], [], item
+            )
+    })
     return {
         name,
         list,

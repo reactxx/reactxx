@@ -30,7 +30,7 @@ export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = prop
     const { styleX, classNameX, classes, toClassNames, children, horizontal, ...rest } = props
     const rootStyle = toClassNames(classes.root, horizontal && classes.rootHorizontal, classNameX)
     const containerStyle = toClassNames(classes.container, horizontal && classes.containerHorizontal)
-    return <div classNameX={rootStyle} style={styleX} {...rest}>
+    return <div classNameX={rootStyle} styleX={styleX} {...rest}>
         <div classNameX={containerStyle}>
             {children}
         </div>

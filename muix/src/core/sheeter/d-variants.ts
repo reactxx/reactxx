@@ -1,10 +1,10 @@
 import { TSheeter, TAtomize, TCommonStyles } from '../d-index'
 
 export namespace TVariants {
- 
+
   export type ToVariantProc = (
     list: TAtomize.Variants,
-    ruleset: VariantPart | WhenFlagPart | MediaQPart | AnimationPart, 
+    ruleset: VariantPart | WhenFlagPart | MediaQPart | AnimationPart,
     path: string,
     pseudoPrefixes: string[],
     conditions: Conditions,
@@ -16,25 +16,28 @@ export namespace TVariants {
   //*********************************************************
 
   export interface VariantPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> {
-    $whenFlag?: WhenFlagPart<R>
+    $whenFlag?: WhenFlagPart<T, R>
     $mediaq?: MediaQPart<T, R> // record key has format eg. '-640' or '640-1024' or '1024-'
     $animation?: AnimationPart
   }
 
-  export type WhenFlagPart<R extends TSheeter.Shape = TSheeter.Shape> = { [p in WhenFlagKeys<R>]?: TSheeter.Ruleset | TSheeter.Ruleset[] }
+  export type WhenFlagPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> = {
+    [P in WhenFlagKeys<R>]?: TSheeter.RulesetOrAtomized<T, R>
+  }
   export type WhenFlagKeys<R extends TSheeter.Shape> = TSheeter.RulesetNamesAll<R> | TSheeter.getFlags<R>
 
-  export type MediaQPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> = 
-    Record<string, TSheeter.Ruleset<T, R> | TSheeter.Ruleset<T, R>[]>
+  export type MediaQPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
+    Record<string, TSheeter.RulesetOrAtomized<T, R>>
 
   export type AnimationPart = any
-  
+
+
   //*********************************************************
   //  CONDITIONS
   //*********************************************************
 
   export type Conditions = ConditionAll[]
-  export type ConditionAll = WhenFlagCondition | MediaQCondition | AnimationCondition 
+  export type ConditionAll = WhenFlagCondition | MediaQCondition | AnimationCondition
   export interface Condition {
     type: ConditionTypes
   }

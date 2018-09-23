@@ -10,7 +10,8 @@ export namespace TAtomize {
   export enum TypedInterfaceTypes {
     atomizedRuleset = 'c'/*compiled ruleset*/,
     atomicArray = 'v' /*value array*/,
-    reactxxComponent = 'x'
+    reactxxComponent = 'x',
+    atomizedStyleWeb = 'w',
   }
 
   export interface TypedInterface {
@@ -42,7 +43,11 @@ export namespace TAtomize {
   export type AtomicNatives = AtomicNative[]
 
 
-  export type TRulesetItem = TAtomize.AtomizedRuleset | TAtomize.AtomicArray
-  export type Ruleset = TRulesetItem | TRulesetItem[]
+  //export type RulesetItem = TAtomize.AtomizedRuleset | TAtomize.AtomicArray
+  export type Ruleset = TAtomize.AtomizedRuleset | TAtomize.AtomicArray //RulesetItem | RulesetItem[]
+
+  export type Style = StyleNative | StyleWeb
+  export type StyleWeb = Array<React.CSSProperties> & {[TypedInterfaceProp]: TypedInterfaceTypes.atomizedStyleWeb}
+  export type StyleNative = Ruleset
 
 }

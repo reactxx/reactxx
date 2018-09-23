@@ -4,15 +4,15 @@ import { TComponents, TAtomize } from '../d-index'
   EXTEND REACT NATIVE
 *******************************************/
 declare module 'react-native' {
-    interface ViewProperties extends TComponents.CommonProperties {
+    interface ViewProperties extends TComponents.ReactsCommonProperties {
     }
-    interface TextProperties extends TComponents.CommonProperties {
+    interface TextProperties extends TComponents.ReactsCommonProperties {
     }
-    interface ImageProperties extends TComponents.CommonProperties {
+    interface ImageProperties extends TComponents.ReactsCommonProperties {
     }
   }
 
-  export const createElement = (type, props: TComponents.CommonProperties, ...children) => {
+  export const createElement = (type, props: TComponents.ReactsCommonProperties, ...children) => {
     if (!props) return React.createElement(type, props, ...children)
     // const { classNameX, styleX } = props
     // if (classNameX) {

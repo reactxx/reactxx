@@ -2,7 +2,7 @@ import React from 'react';
 import warning from 'warning';
 import { TTheme, TAtomize, TSheeter, TWithStyles } from '../d-index';
 import { globalOptions } from './global-state'
-import { atomizeRuleset, atomizeSheet } from '../sheeter/atomize';
+import { atomizeRuleset, atomizeSheet, atomizeStyle } from '../sheeter/atomize';
 import { mergeSheet } from 'reactxx-core/sheeter/merge';
 import { createWithTheme } from '../utils/create-with-theme';
 
@@ -21,7 +21,7 @@ export const applyTheme = (pipeId: number, theme: TTheme.Theme, state: TWithStyl
     state.pipeStates[0] = {
       codeProps: defaultPropsRest,
       classNameX: atomizeRuleset(defaultClassNameX, theme),
-      styleX: createWithTheme(defaultStyleX, theme),
+      styleX: atomizeStyle(defaultStyleX, theme),
     }
   }
 
@@ -29,10 +29,10 @@ export const applyTheme = (pipeId: number, theme: TTheme.Theme, state: TWithStyl
     codeProps: propsRest,
     classes: atomizeSheet(classes, theme),
     classNameX: atomizeRuleset(classNameX, theme),
-    styleX: createWithTheme(styleX, theme),
+    styleX: atomizeStyle(styleX, theme),
   }
 
-  state.sheet = createSheetWithTheme(state)
+  state.sheet = sheetFromThemeCache(state)
 }
 
 export const registerTheme = (name: string, theme: TTheme.Theme) => {
@@ -62,7 +62,7 @@ export const defaultThemeName = '*default-theme*'
 //  PRIVATE
 //*********************************************************
 
-const createSheetWithTheme = (state: TWithStyles.InstanceState) => {
+const sheetFromThemeCache = (state: TWithStyles.InstanceState) => {
   const { componentId, defaultProps, sheetOrCreator } = state
   const theme = state.theme as TTheme.Theme
 
