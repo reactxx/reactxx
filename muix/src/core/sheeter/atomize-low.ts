@@ -2,39 +2,41 @@ import warning from 'warning'
 import { isObject } from '../utils/deep-merge'
 import { TAtomize, TSheeter, TCommonStyles, TVariants } from '../d-index'
 import { toVariantParts } from '../sheeter/variants'
-import { isAtomicArray, isAtomizedRuleset, isAtomizedStyleWeb } from './atomize'
+import { isAtomicArray, isAtomizedRuleset } from './atomize'
 
 // platform dependent import
 import { toAtomicArray } from 'reactxx-core'
 
 // if single style without $web prop, then it is modified by setting TypedInterfaceTypes.atomizedStyleWeb flag
-export const atomizeStyleWeb = (st: TSheeter.StyleOrAtomizedWeb) => {
+// export const atomizeStyleWeb = (st: TSheeter.StyleOrAtomizedWeb) => {
 
-    if (isAtomizedStyleWeb(st)) return st
+//     if (isAtomizedStyleWeb(st)) return st
 
-    const processStyle = (s: TSheeter.StyleOrAtomizedWebItem) => {
-        if (!s) return
-        push(s)
-        if (!isAtomizedStyleWeb(s) && s.$web)
-            push(s.$web)
-    }
+//     const processStyle = (s: TSheeter.StyleOrAtomizedWebItem) => {
+//         if (!s) return
+//         push(s)
+//         if (!isAtomizedStyleWeb(s) && s.$web)
+//             push(s.$web)
+//     }
 
-    let res: TAtomize.StyleWeb = null
-    let canModifyRes = false
-    const push = (item) => {
-        if (canModifyRes) { Object.assign(res, item); return } // thirdts and more item
-        if (!res) { res = item; return } // cannotmodify, first
-        res = { ...res, ...item } // cannotmodify, second item
-        canModifyRes = true
-    }
+//     let res: TAtomize.StyleWeb = null
+//     let canModifyRes = false
+//     const push = (item) => {
+//         if (canModifyRes) Object.assign(res, item) // thirdts and more item
+//         else if (!res) res = item // cannotmodify, first
+//         else {
+//             res = { ...res, ...item } // cannotmodify, second item
+//             canModifyRes = true
+//         }
+//     }
 
-    if (Array.isArray(st)) st.forEach(s => processStyle(s))
-    else processStyle(st)
+//     if (Array.isArray(st)) st.forEach(s => processStyle(s))
+//     else processStyle(st)
 
-    res[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomizedStyleWeb
+//     res[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomizedStyleWeb
 
-    return res
-}
+//     return res
+// }
 
 export const atomizeRulesetLow = (ruleset: TSheeter.RulesetOrAtomized /*| TSheeter.RulesetItem[]*/, rulesetName?: string) => {
     if (!ruleset) return null

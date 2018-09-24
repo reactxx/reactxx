@@ -1,10 +1,9 @@
 import React from 'react'
 import { renderer } from 'reactxx-fela'
 
-import { TAtomize, TComponents } from '../d-index'
+import { TAtomize, TComponents, TSheeter } from '../d-index'
 import { toClassNamesWithQuery, deleteSystemProps } from '../sheeter/to-classnames'
-import { mergeStyles } from '../sheeter/merge'
-import { atomizeStyle } from '../sheeter/atomize'
+import { mergeStylesForWebTag } from '../sheeter/merge'
 /******************************************
   EXTEND REACT
 *******************************************/
@@ -30,8 +29,9 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
       else props.className += ' ' + applyLastWinStrategy(compiled)
   }
 
-  if (styleX) 
-      props.style = mergeStyles<'web'>([atomizeStyle(styleX, null)])
+  if (styleX) {
+      props.style = mergeStylesForWebTag(styleX as TSheeter.StyleOrAtomizedWeb)
+  }
 
   deleteSystemProps(props)
   return React.createElement(type, props, ...children)

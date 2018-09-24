@@ -1,21 +1,55 @@
-import { TAtomize } from '../d-index';
-import { isAtomicArray, isAtomizedRuleset } from './atomize'
+import { TAtomize, TSheeter } from '../d-index';
+import { isAtomicArray } from './atomize'
 
-export const mergeStyles = <T extends 'web' | 'native'>(sources: TAtomize.Style[]) => {
-    let all: TAll<T>
+export const mergeStyles = (sources: TSheeter.StyleOrAtomized[]) => {
     if (window.isWeb) {
-        let res: any = {};
-        (sources as TAtomize.StyleWeb[]).forEach(s =>  s && Object.assign(res, s));
-        delete res.$web
-        delete res.$native
-        delete res[TAtomize.TypedInterfaceProp]
-        all = res as TAll<T>
-    } else
-        all = mergeRulesets(sources as TAtomize.StyleNative[]) as TAll<T>
+        let res = null
+        let canModifyRes = false;
+        (sources as TSheeter.StyleOrAtomizedWeb[]).forEach((s:TSheeter.Style[])  =>  {
+            if (!s) return
+            if (canModifyRes) {
+                if (Array.isArray(s)) res = [...res, ...s]
+                else res.push(s)
+            } else if (!res) 
+                res = s
+            else {
+                const sa = Array.isArray(s), resa = Array.isArray(res)
+                res = !resa && !sa ? [res, s] : !resa ? [res, ...s] : !sa ? [...res, s] : [...res, ...s]
+                canModifyRes = true
+            }
+        });
+        // res[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomizedStyleWeb
 
-    return all
+        return res as TSheeter.StyleOrAtomizedWeb
+    } else
+        return mergeRulesets(sources as TAtomize.Ruleset[])
 }
-type TAll<T extends 'web' | 'native'> = T extends 'web' ? React.CSSProperties : TAtomize.Ruleset
+
+export const mergeStylesForWebTag = (sources: TSheeter.StyleOrAtomizedWeb) => {
+    let res = null
+    let canModify = false
+    const processStyle = (st: TSheeter.Style) => {
+        if (!st) return
+        push (st)
+        if (st.$web) push(st.$web as TSheeter.Style)
+    }
+    const push = (st: TSheeter.Style) => {
+        if (canModify) Object.assign(res, st)
+        else if (!res) res = st
+        else {
+            res = {...res, ...st}
+            canModify = true
+        }
+    }
+    if (Array.isArray(sources)) sources.forEach(s => processStyle(s))
+    else processStyle(sources)
+
+    if (!canModify && (res.$web || res.$native)) res = {...res}
+    delete res.$web
+    delete res.$native
+
+    return res as React.CSSProperties
+}
 
 export const mergeRuleset = (target: TAtomize.Ruleset, source: TAtomize.Ruleset) => {
     if (!target) return source

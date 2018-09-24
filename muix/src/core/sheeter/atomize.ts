@@ -3,7 +3,7 @@ import warning from 'warning';
 import { isObject } from '../utils/deep-merge'
 import { TAtomize, TSheeter } from '../d-index'
 import { createWithTheme } from '../utils/create-with-theme'
-import { atomizeRulesetLow, atomizeStyleWeb } from './atomize-low'
+import { atomizeRulesetLow } from './atomize-low'
 
 export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetOrCreator<R>, theme) => {
     if (!sheet) return null
@@ -21,11 +21,9 @@ export const atomizeRuleset = (ruleset: TSheeter.ClassNameOrCreator, theme, rule
 
 export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme) => {
     if (!style) return null
-    if (window.isWeb) {
-        const st = createWithTheme(style, theme) as TSheeter.StyleOrAtomizedWeb
-        if (isAtomizedStyleWeb(st)) return st
-        return atomizeStyleWeb(st)
-    } else
+    if (window.isWeb)
+        return createWithTheme(style, theme) as TSheeter.StyleOrAtomizedWeb
+    else
         return atomizeRuleset(style as TSheeter.ClassNameOrCreator, theme)
 }
 
@@ -36,9 +34,9 @@ export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme) => {
 export function isAtomizedRuleset(obj: Object): obj is TAtomize.AtomizedRuleset {
     return obj && obj[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.atomizedRuleset
 }
-export function isAtomizedStyleWeb(obj: Object): obj is TAtomize.StyleWeb {
-    return obj && obj[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.atomizedStyleWeb
-}
+// export function isAtomizedStyleWeb(obj: Object): obj is TAtomize.StyleWeb {
+//     return obj && obj[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.atomizedStyleWeb
+// }
 
 export function isAtomicArray(obj): obj is TAtomize.AtomicArray {
     return obj && obj[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.atomicArray

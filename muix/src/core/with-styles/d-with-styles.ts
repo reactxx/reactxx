@@ -37,7 +37,7 @@ export namespace TWithStyles {
     codeProps?: TComponents.PropsCode
 
     classNameX?: TAtomize.Ruleset
-    styleX?: TAtomize.Style
+    styleX?: TSheeter.StyleOrAtomized
     classes?: TSheeter.PartialSheet
   }
 

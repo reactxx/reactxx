@@ -46,8 +46,8 @@ export namespace TAtomize {
   //export type RulesetItem = TAtomize.AtomizedRuleset | TAtomize.AtomicArray
   export type Ruleset = TAtomize.AtomizedRuleset | TAtomize.AtomicArray //RulesetItem | RulesetItem[]
 
-  export type Style = StyleNative | StyleWeb
-  export type StyleWeb = React.CSSProperties & {[TypedInterfaceProp]: TypedInterfaceTypes.atomizedStyleWeb}
-  export type StyleNative = Ruleset
+  // export type Style = StyleNative | StyleWeb
+  // export type StyleWeb = React.CSSProperties //& {[TypedInterfaceProp]: TypedInterfaceTypes.atomizedStyleWeb}
+  // export type StyleNative = Ruleset
 
 }

@@ -54,17 +54,16 @@ export namespace TSheeter {
   *******************************************/
 
   export type StyleOrCreator<R extends Shape = Shape> = StyleOrAtomized<R> | ((theme: getTheme<R>) => StyleOrAtomized<R>)
-  //export type StyleOrCreator = any
-
-  export type StyleItem<R extends Shape = Shape> = Style<R> | TAtomize.Style
-
-  export type Style<R extends Shape = Shape> =
-    TCommonStyles.RulesetCommon<getStyle<R>> & StyleLow<R>
 
   export type StyleOrAtomized<R extends Shape = Shape> = StyleItem<R> | StyleItem<R>[]
 
-  export type StyleOrAtomizedWebItem = Style | TAtomize.StyleWeb
-  export type StyleOrAtomizedWeb = StyleOrAtomizedWebItem | StyleOrAtomizedWebItem[]
+  export type StyleItem<R extends Shape = Shape> = Style<R> | TAtomize.Ruleset
+
+  export type StyleOrAtomizedWeb = Style | Style[]
+
+
+  export type Style<R extends Shape = Shape> =
+    TCommonStyles.RulesetCommon<getStyle<R>> & StyleLow<R>
 
   export interface StyleLow<R extends Shape = Shape> {
     $native?: TCommonStyles.RulesetNative<getStyle<R>>
