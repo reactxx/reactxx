@@ -2,52 +2,52 @@ import { TAtomize, TSheeter } from '../d-index';
 import { isAtomicArray } from './atomize'
 import { TComponents } from 'reactxx-core/sheeter/d-components';
 
-export const mergeStyles = (sources: TSheeter.StyleOrAtomized[]) => {
+export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOrAtomized[]) => {
+    if (!sources)
+        return null
     if (window.isWeb) {
         let res = null
-        let canModifyRes = false;
-        (sources as TSheeter.StyleOrAtomizedWeb[]).forEach((s: TSheeter.Style[]) => {
-            if (!s) return
-            if (canModifyRes) {
-                if (Array.isArray(s)) res = [...res, ...s]
-                else res.push(s)
-            } else if (!res)
-                res = s
-            else {
-                const sa = Array.isArray(s), resa = Array.isArray(res)
-                res = !resa && !sa ? [res, s] : !resa ? [res, ...s] : !sa ? [...res, s] : [...res, ...s]
-                canModifyRes = true
-            }
-        });
-        return res as TSheeter.StyleOrAtomizedWeb
-    } else
-        return mergeRulesets(sources as TAtomize.Ruleset[])
-}
-
-export const mergeStylesForWebTag = (sources: TSheeter.StyleOrAtomizedWeb) => {
-    let res = null
-    let canModify = false
-    const processStyle = (st: TSheeter.Style) => {
-        if (!st) return
-        push(st)
-        if (st.$web) push(st.$web as TSheeter.Style)
-    }
-    const push = (st: TSheeter.Style) => {
-        if (canModify) Object.assign(res, st)
-        else if (!res) res = st
-        else {
-            res = { ...res, ...st }
-            canModify = true
+        let canModify = false
+        const processStyle = (st: TSheeter.Style) => {
+            push(st)
+            if (st.$web)
+                push(st.$web as TSheeter.Style)
         }
+        const push = (st: TSheeter.Style) => {
+            if (!res) // first
+                res = st
+            else if (!canModify) { // second
+                res = { ...res, ...st }
+                canModify = true
+            } else // third and more
+                Object.assign(res, st)
+        }
+        const src = sources as TSheeter.Style | TSheeter.Style[] | TSheeter.Style[]
+        if (Array.isArray(src))
+            src.forEach(ss => {
+                if (!ss) return
+                if (Array.isArray(ss))
+                    ss.forEach(s => {
+                        if (!s) return
+                        processStyle(s)
+                    })
+                else
+                    processStyle(ss)
+            })
+        else
+            processStyle(src)
+
+        if (res.$web || res.$native) {
+            if (!canModify)
+                res = { ...res }
+            delete res.$web
+            delete res.$native
+        }
+
+        return res as TSheeter.Style
+    } else {
+        return mergeRulesets(sources as TAtomize.Ruleset[])
     }
-    if (Array.isArray(sources)) sources.forEach(s => processStyle(s))
-    else processStyle(sources)
-
-    if (!canModify && (res.$web || res.$native)) res = { ...res }
-    delete res.$web
-    delete res.$native
-
-    return res as React.CSSProperties
 }
 
 export const mergeRuleset = (target: TAtomize.Ruleset, source: TAtomize.Ruleset) => {
@@ -108,8 +108,8 @@ export const mergeCodeProps = (sources: TComponents.PropsCode[]) => {
     let res: TComponents.PropsCode = null
     let canModifyRes = false
     const push = src => {
-        if (canModifyRes) Object.assign(res, src)
-        else if (!res) res = src
+        if (!res) res = src
+        else if (canModifyRes) Object.assign(res, src)
         else {
             res = { ...res, ...src }
             canModifyRes = true

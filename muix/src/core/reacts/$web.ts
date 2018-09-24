@@ -3,7 +3,7 @@ import { renderer } from 'reactxx-fela'
 
 import { TAtomize, TComponents, TSheeter } from '../d-index'
 import { toClassNamesWithQuery, deleteSystemProps } from '../sheeter/to-classnames'
-import { mergeStylesForWebTag } from '../sheeter/merge'
+import { mergeStyles } from '../sheeter/merge'
 /******************************************
   EXTEND REACT
 *******************************************/
@@ -38,7 +38,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   }
 
   if (styleX) {
-      props.style = mergeStylesForWebTag(styleX as TSheeter.StyleOrAtomizedWeb)
+      props.style = mergeStyles(styleX)
   }
 
   deleteSystemProps(props)
@@ -52,10 +52,9 @@ const applyLastWinStrategy = (values: TAtomize.AtomicArray) => {
   for (let k = values.length - 1; k >= 0; k--) {
     const value = values[k] as TAtomize.AtomicWeb
     const propId = renderer.propIdCache[value]
-    if (!propId) continue
-    if (usedPropIds[propId]) continue
-    usedPropIds[propId] = true
+    if (!propId || usedPropIds[propId]) continue
     res.push(value)
+    usedPropIds[propId] = true
   }
   return res.join(' ')
 }

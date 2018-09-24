@@ -60,14 +60,22 @@ const App: TComponents.SFCCode<Shape> = props => {
     const root = toClassNames(classes.root, { margin: 0 })
     return <div>
         <Inner
-            styleX={theme => ([
+            styleX={[
                 {
                     $web: {},
                     $native: {},
                     margin: 0,
                 },
                 styleX
-            ])}
+            ]}
+            // styleX={theme => ([
+            //     {
+            //         $web: {},
+            //         $native: {},
+            //         margin: 0,
+            //     },
+            //     styleX
+            // ])}
             classes={theme => {
                 const res: typeof Inner['classes'] = {
                     root: [{ margin: 0, $web: [{ cursor: 'pointer' }], $native: [{ margin: 0 }] }],
