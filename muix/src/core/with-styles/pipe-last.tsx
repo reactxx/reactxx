@@ -19,6 +19,8 @@ export const lastPipe: TWithStyles.Pipe = (state, next) => {
       styleX: mergeStyles(pipeStates.map(p => p.styleX)),
     }
     codeProps.toClassNames = toClassNamesForBind.bind(codeProps)
+    delete codeProps.$web
+    delete codeProps.$native
     return <state.CodeComponent {...codeProps} />
   }
 }

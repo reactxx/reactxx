@@ -54,9 +54,9 @@ export namespace TComponents {
   export type PropsCode<R extends Shape = Shape> = PartialOverwrite<
     TSheeter.getProps<R>, CommonPropertiesCode<R> & TEventsX<R>>
 
-  export interface CommonPropertiesCode<R extends TSheeter.Shape = TSheeter.Shape> {
+  export interface CommonPropertiesCode<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
     classNameX?: TAtomize.Ruleset
-    styleX?: TSheeter.StyleItem<R>
+    styleX?: TSheeter.StyleOrAtomized<R>
     children?: React.ReactNode
     sheetQuery?: TVariants.Query<R>
     classes?: TAtomize.Sheet<R>

@@ -16,11 +16,19 @@ declare module 'react' {
   }
 }
 
-export const createElement = (type, props: TComponents.ReactsCommonProperties & { className?, style?}, ...children) => {
+export const createElement = (type, props: TComponents.ReactsCommonProperties & { className?, style?} & TComponents.OnPressAllX, ...children) => {
   
   const isXXComponent = isReactXXComponent(type)
-  if (!props || isXXComponent) return React.createElement(type, props, ...children)
-  
+  if (!props) return React.createElement(type, props, ...children)
+
+  delete props.$native
+
+  consolideEvents(props)
+
+  if (isXXComponent) return React.createElement(type, props, ...children)
+
+  //******* for other than reactxx compnents: 
+
   const { classNameX, styleX } = props
 
   if (classNameX) {
@@ -53,3 +61,23 @@ const applyLastWinStrategy = (values: TAtomize.AtomicArray) => {
 }
 
 const isReactXXComponent = type => type[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.reactxxComponent
+
+const consolideEvents = (props: TComponents.Props & TComponents.OnPressAllX & TComponents.OnPressAllWeb) => {
+    const {onPress, onLongPress, onPressIn, onPressOut, $web} = props
+    if (onPress) {
+      if (!$web || !$web.onClick) props.onClick = onPress
+      delete props.onPress
+    }
+    if (onPressIn) {
+      if (!$web || !$web.onMouseDown) props.onMouseDown = onPress
+      delete props.onPressIn
+    }
+    if (onPressOut) {
+      if (!$web || !$web.onMouseUp) props.onMouseUp = onPress
+      delete props.onPressOut
+    }
+    if (onLongPress) {
+      delete props.onLongPress
+    }
+
+}
