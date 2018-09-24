@@ -4,7 +4,7 @@ import {
     TCommonStyles,
     createElement, TSheeter
 } from 'reactxx-core'
-import { TAtomize } from 'reactxx-core/sheeter/d-atomize';
+import { TAtomize } from '../sheeter/d-atomize';
 
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root'> & TSheeter.ShapeTexts<'label'>

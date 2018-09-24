@@ -3,12 +3,12 @@ import { TSheeter, TAtomize, TVariants, TComponents } from '../d-index'
 import { atomizeRuleset, isAtomizedRuleset, isAtomicArray } from './atomize'
 import { testConditions } from './variants'
 
-export function toClassNamesForBind(...rulesets: TSheeter.ClassNameOrAtomized[]) {
+export function toClassNamesForBind(...rulesets: TSheeter.RulesetItem[]) {
     return toClassNamesWithQuery(this.sheetQuery, this.theme, rulesets)
 }
 
-export const toClassNames = (...rulesets: TSheeter.ClassNameOrAtomized[]) => toClassNamesWithQuery({}, null, rulesets)
-export const toClassNamesWithTheme = (theme, ...rulesets: TSheeter.ClassNameOrAtomized[]) => toClassNamesWithQuery({}, theme, rulesets)
+export const toClassNames = (...rulesets: TSheeter.RulesetItem[]) => toClassNamesWithQuery({}, null, rulesets)
+export const toClassNamesWithTheme = (theme, ...rulesets: TSheeter.RulesetItem[]) => toClassNamesWithQuery({}, theme, rulesets)
 
 export const deleteSystemProps = props => propsToDelete.forEach(p => delete props[p])
 
@@ -17,20 +17,20 @@ export const deleteSystemProps = props => propsToDelete.forEach(p => delete prop
   PRIVATE
 *******************************************/
 
-const propsToDelete: TComponents.CommonPropertiesCodeKeys[] = ['sheetQuery', 'classes', 'toClassNames']
+const propsToDelete: TComponents.CommonPropertiesCodeKeys[] = [
+    'sheetQuery', 'classes', 'toClassNames', 'styleX', 'classNameX', 'theme'
+]
 
 const emptyAtomicArray = [] as TAtomize.AtomicArray
 emptyAtomicArray[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomicArray
 
-// merge rulesets and apply query to ruleset's conditional parts ($whenUed, $mediaq etc.)
-const toClassNamesWithQuery = (query: TVariants.Query, theme, rulesets: TSheeter.ClassNameOrAtomized[]) => {
-    if (!rulesets || rulesets.length === 0) return emptyAtomicArray
+// merge rulesets and apply query to ruleset's conditional parts ($whenFlags, $mediaq etc.)
+export const toClassNamesWithQuery = (query: TVariants.Query, theme, rulesets: TSheeter.ClassNameOrAtomized) => {
+
+    if (!rulesets) return emptyAtomicArray
+
     if (isAtomicArray(rulesets)) return rulesets
 
-    // atomize
-    rulesets.forEach(r => atomizeRuleset(r, theme))
-
-    // process conditions
     const values: TAtomize.AtomicArray[] = []
 
     const processConditions = val => {
@@ -39,7 +39,10 @@ const toClassNamesWithQuery = (query: TVariants.Query, theme, rulesets: TSheeter
             values.push(val)
             return
         }
-        warning(isAtomizedRuleset(val), 'Something wrong here')
+
+        if (!isAtomizedRuleset(val))
+            atomizeRuleset(val, theme)
+
         for (let j = 0; j < val.list.length; j++) {
             const rsi = val.list[j]
             if (!testConditions(rsi.conditions, query)) continue
@@ -47,13 +50,11 @@ const toClassNamesWithQuery = (query: TVariants.Query, theme, rulesets: TSheeter
         }
     }
 
-    for (let i = 0; i < rulesets.length; i++) {
-        const val = rulesets[i] as TAtomize.AtomizedRuleset
-        if (Array.isArray(val))
-            val.forEach(v => processConditions(v))
-        else
-            processConditions(val)
-    }
+    // atomize
+    if (Array.isArray(rulesets))
+        rulesets.forEach(r => processConditions(r))
+    else
+        processConditions(rulesets)
 
     // concat values
     const res = [].concat.apply([], values) as TAtomize.AtomicArray

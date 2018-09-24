@@ -3,11 +3,9 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { createElement, TSheeter, TComponents } from 'reactxx-core'
+import { createElement, TSheeter, TComponents, withStylesCreator } from 'reactxx-core'
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from './sheets'
 import { TPrimitives } from './d-index'
-
-const withStyles = <T extends any>(...args: any[]) => null as any
 
 export const view: TComponents.SFCCode<TPrimitives.ViewShape> = props => {
     const { styleX, classNameX, toClassNames, classes, ...rest } = props
@@ -55,16 +53,16 @@ export const animatedIcon = icon
 export const animatedText = text
 export const animatedScrollView = scrollView
 
-export const View = withStyles<TPrimitives.ViewShape>(viewSheet, view)
+export const View = withStylesCreator<TPrimitives.ViewShape>(viewSheet, view)()
 
-export const Icon = withStyles<TPrimitives.IconShape>(iconSheet, icon, {
+export const Icon = withStylesCreator<TPrimitives.IconShape>(iconSheet, icon, {
     defaultProps: {
         $web: {
             viewBox: '0 0 24 24',
             focusable: 'false'
         }
     }
-})
+})()
 
 
 

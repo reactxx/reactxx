@@ -3,7 +3,7 @@ import warning from 'warning';
 import { TTheme, TAtomize, TSheeter, TWithStyles } from '../d-index';
 import { globalOptions } from './global-state'
 import { atomizeRuleset, atomizeSheet, atomizeStyle } from '../sheeter/atomize';
-import { mergeSheet } from 'reactxx-core/sheeter/merge';
+import { mergeSheet } from '../sheeter/merge';
 import { createWithTheme } from '../utils/create-with-theme';
 
 export const applyTheme = (pipeId: number, theme: TTheme.Theme, state: TWithStyles.InstanceState) => {
@@ -65,8 +65,9 @@ export const defaultThemeName = '*default-theme*'
 const sheetFromThemeCache = (state: TWithStyles.InstanceState) => {
   const { componentId, defaultProps, sheetOrCreator } = state
   const theme = state.theme as TTheme.Theme
+  const cache = theme ? theme.$cache ? theme.$cache  : (theme.$cache = {}) : $cache
 
-  let value: TAtomize.Sheet = theme.$cache && theme.$cache[componentId]
+  let value: TAtomize.Sheet = cache[componentId]
   if (value) return value
 
   value = atomizeSheet(sheetOrCreator, theme)
@@ -75,9 +76,10 @@ const sheetFromThemeCache = (state: TWithStyles.InstanceState) => {
     mergeSheet(value, defaultClasses, true)
   }
 
-  if (!theme.$cache) theme.$cache = {}
-  theme.$cache[componentId] = value
+  cache[componentId] = value
 
   return value
 
 }
+
+const $cache: { [componentId: number]: TSheeter.Sheet } = {}

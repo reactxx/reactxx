@@ -15,8 +15,8 @@ SystemJS.config({
     "reactxx-core/tests/index": "deploy/lib/core/tests/index",
     "reactxx-core": "deploy/lib/core/index",
 
-    "reactxx-primitives": "deploy/lib/primitives2/index",
-    "reactxx-primitives/tests/index": "deploy/lib/primitives2/tests/index",
+    "reactxx-primitives": "deploy/lib/primitives/index",
+    "reactxx-primitives/tests/index": "deploy/lib/primitives/tests/index",
 
     // "reactxx-sheeter": "deploy/lib/sheeter/index",
     // "reactxx-basic": "deploy/lib/basic/index",

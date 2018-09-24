@@ -7,22 +7,32 @@ import { isAtomicArray, isAtomizedRuleset, isAtomizedStyleWeb } from './atomize'
 // platform dependent import
 import { toAtomicArray } from 'reactxx-core'
 
-
+// if single style without $web prop, then it is modified by setting TypedInterfaceTypes.atomizedStyleWeb flag
 export const atomizeStyleWeb = (st: TSheeter.StyleOrAtomizedWeb) => {
 
-    const res: TAtomize.StyleWeb = [] as any
+    if (isAtomizedStyleWeb(st)) return st
+
+    const processStyle = (s: TSheeter.StyleOrAtomizedWebItem) => {
+        if (!s) return
+        push(s)
+        if (!isAtomizedStyleWeb(s) && s.$web)
+            push(s.$web)
+    }
+
+    let res: TAtomize.StyleWeb = null
+    let canModifyRes = false
+    const push = (item) => {
+        if (canModifyRes) { Object.assign(res, item); return } // thirdts and more item
+        if (!res) { res = item; return } // cannotmodify, first
+        res = { ...res, ...item } // cannotmodify, second item
+        canModifyRes = true
+    }
+
+    if (Array.isArray(st)) st.forEach(s => processStyle(s))
+    else processStyle(st)
+
     res[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomizedStyleWeb
 
-    const addParts = (item: TAtomize.StyleWeb | TSheeter.Style) => {
-        if (isAtomizedStyleWeb(item))
-            item.forEach(it => res.push(it))
-        else {
-            res.push(item as React.CSSProperties)
-            if (item.$web) res.push(item.$web)
-        }
-    }
-    if (Array.isArray(st)) st.forEach(s => addParts(s))
-    else addParts(st)
     return res
 }
 
@@ -60,7 +70,8 @@ export const atomizeRulesetLow = (ruleset: TSheeter.RulesetOrAtomized /*| TSheet
         if (isAtomicArray(item)) {
             list.push({ atomicArray: item, conditions: [] })
         } else if (isAtomizedRuleset(item)) {
-            item.list.forEach(l => list.push(l))
+            Array.prototype.push.apply(list, item.list)
+            //item.list.forEach(l => list.push(l))
         } else
             atomizeRulesetInner(
                 list, item,

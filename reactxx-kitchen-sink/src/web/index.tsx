@@ -19,7 +19,7 @@ import ReactDOM from 'react-dom'
 //import App from '../common/basic/pe4'
 //import App from '../common/component/ce3'
 //import App from '../common/mediaq/me1'
-const App: React.SFC = () => null
+//const App: React.SFC = () => null
 
 //import App from '../common/muix-doc/cards/SimpleMediaCard'
 //import App from '../common/mui-doc-app/index'
@@ -33,6 +33,7 @@ const App: React.SFC = () => null
 
 // import { run } from 'reactxx-core'
 // run()
+import App from 'reactxx-primitives/tests/index'
 
 
 ReactDOM.render(<App />, document.getElementById('root')) 

@@ -20,7 +20,7 @@ export const initGlobalState = (options: TWithStyles.GlobalState = null) => {
 
 export const withStylesCreator = <R extends TSheeter.Shape, TStatic extends {} = {}>(
   sheetOrCreator: TSheeter.SheetOrCreator<R>,
-  codeComponent: TComponents.ComponentType<R>,
+  codeComponent: TComponents.ComponentTypeCode<R>,
   componentState?: TWithStyles.ComponentState<R>
 ) => (
   overrideComponentState?: TWithStyles.ComponentState<R>
@@ -59,7 +59,7 @@ const withStyles = (componentState: TWithStyles.ComponentState) => {
 }
 
 const finishComponentState = (
-  sheetOrCreator: TSheeter.SheetOrCreator, CodeComponent: TComponents.ComponentType,
+  sheetOrCreator: TSheeter.SheetOrCreator, CodeComponent: TComponents.ComponentTypeCode,
   componentState: TWithStyles.ComponentState, overrideComponentState: TWithStyles.ComponentState
 ) => {
   const mergedOptions = componentState && overrideComponentState ?
@@ -74,7 +74,7 @@ const finishComponentState = (
     componentId,
     CodeComponent,
     withTheme: typeof mergedOptions.sheetOrCreator === 'function' ? true : mergedOptions.withTheme,
-    displayName: `${mergedOptions.name || mergedOptions.CodeComponent.displayName} (${componentId})`
+    displayName: `${mergedOptions.name || CodeComponent.displayName} (${componentId})`
   }
   return res
 }

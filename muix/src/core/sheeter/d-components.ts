@@ -28,7 +28,7 @@ export namespace TComponents {
   - custom components (e.g. <IconButton classNameX={...})
   */
   export interface ReactsCommonProperties<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
-    classNameX?: TSheeter.RulesetOrAtomized<R>
+    classNameX?: TSheeter.ClassNameOrAtomized<R>
     styleX?: TSheeter.StyleOrAtomized<R>
     classes?: TSheeter.PartialSheet<R> // cross platform sheet
   }

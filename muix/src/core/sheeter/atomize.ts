@@ -22,9 +22,9 @@ export const atomizeRuleset = (ruleset: TSheeter.ClassNameOrCreator, theme, rule
 export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme) => {
     if (!style) return null
     if (window.isWeb) {
-        const st = createWithTheme(style, theme) //as TSheeter.StyleWeb
+        const st = createWithTheme(style, theme) as TSheeter.StyleOrAtomizedWeb
         if (isAtomizedStyleWeb(st)) return st
-        return atomizeStyleWeb(st as TSheeter.StyleOrAtomizedWeb)
+        return atomizeStyleWeb(st)
     } else
         return atomizeRuleset(style as TSheeter.ClassNameOrCreator, theme)
 }

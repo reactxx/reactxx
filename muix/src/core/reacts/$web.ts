@@ -1,8 +1,8 @@
 import React from 'react'
 import { renderer } from 'reactxx-fela'
 
-import { TAtomize, TSheeter, TComponents } from '../d-index'
-import { toClassNames, deleteSystemProps } from '../sheeter/to-classnames'
+import { TAtomize, TComponents } from '../d-index'
+import { toClassNamesWithQuery, deleteSystemProps } from '../sheeter/to-classnames'
 import { mergeStyles } from '../sheeter/merge'
 import { atomizeStyle } from '../sheeter/atomize'
 /******************************************
@@ -18,27 +18,22 @@ declare module 'react' {
 }
 
 export const createElement = (type, props: TComponents.ReactsCommonProperties & { className?, style?}, ...children) => {
-  if (!props) return React.createElement(type, props, ...children)
-  const { classNameX, styleX } = props
+  
   const isXXComponent = isReactXXComponent(type)
+  if (!props || isXXComponent) return React.createElement(type, props, ...children)
+  
+  const { classNameX, styleX } = props
 
   if (classNameX) {
-    const compiled = Array.isArray(classNameX) ? toClassNames(...classNameX as TSheeter.RulesetItem[]) : toClassNames(classNameX)
-    if (isXXComponent)
-      props.classNameX = compiled
-    else {
-      delete props.classNameX
+      const compiled = toClassNamesWithQuery(null, null, classNameX)
       if (!props.className) props.className = applyLastWinStrategy(compiled)
       else props.className += ' ' + applyLastWinStrategy(compiled)
-    }
   }
 
-  if (styleX) {
-    if (!isXXComponent) {
+  if (styleX) 
       props.style = mergeStyles<'web'>([atomizeStyle(styleX, null)])
-    }
-  }
-  if (!isXXComponent) deleteSystemProps(props)
+
+  deleteSystemProps(props)
   return React.createElement(type, props, ...children)
 }
 

@@ -1,19 +1,11 @@
-import { TAtomize } from 'reactxx-core/d-index';
-import { isAtomicArray } from './atomize'
+import { TAtomize } from '../d-index';
+import { isAtomicArray, isAtomizedRuleset } from './atomize'
 
 export const mergeStyles = <T extends 'web' | 'native'>(sources: TAtomize.Style[]) => {
     let all: TAll<T>
     if (window.isWeb) {
-        let res = undefined
-        let counter = 0;
-        (sources as TAtomize.StyleWeb[]).forEach(s => {
-            if (!s) return;
-            switch (counter) {
-                case 0: res = s; counter++; break
-                case 1: res = { ...res, ...s }; counter++; break
-                default: Object.assign(res, s)
-            }
-        })
+        let res: any = {};
+        (sources as TAtomize.StyleWeb[]).forEach(s =>  s && Object.assign(res, s));
         delete res.$web
         delete res.$native
         delete res[TAtomize.TypedInterfaceProp]
@@ -28,10 +20,20 @@ type TAll<T extends 'web' | 'native'> = T extends 'web' ? React.CSSProperties : 
 export const mergeRuleset = (target: TAtomize.Ruleset, source: TAtomize.Ruleset) => {
     if (!target) return source
     if (!source) return target
-    const targeta = isRulesetArray(target), sourcea = isRulesetArray(source)
-    return (
-        !targeta && !sourcea ? [target, source] : !targeta ? [target, ...source] : !sourcea ? [...target, source] : [...target, ...source]
-    ) as TAtomize.Ruleset
+    const targeta = isAtomicArray(target), sourcea = isAtomicArray(source)
+    const res =
+        targeta && sourcea ?
+            [...target, ...source] :
+            {
+                name: target['name'] || source['name'] || 'unknown',
+                list: [
+                    ...targeta ? target : (target as TAtomize.AtomizedRuleset).list,
+                    ...sourcea ? source : (source as TAtomize.AtomizedRuleset).list
+                ],
+
+            }
+    res[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomizedRuleset
+    return res as TAtomize.Ruleset
 }
 
 export const mergeRulesets = (sources: TAtomize.Ruleset[]) => {

@@ -1,5 +1,5 @@
-window.isWeb = true
+// platform dependent exports
+export * from './$web'
 
-export * from './typings/comps'
-export * from './common/comps-sheets'
-export * from './web/comps'
+export * from './d-index'
+

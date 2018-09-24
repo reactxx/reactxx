@@ -26,20 +26,20 @@
     //"noUnusedLocals": true,
     "baseUrl": ".",
     "paths": {
+      "reactxx-fela": [
+        "src/fela/index"
+      ],
       "reactxx-core/*": [
         "src/core/*"
       ],
       "reactxx-core": [
         "src/core"
       ],
-      "reactxx-fela": [
-        "src/fela/index"
-      ],
       "reactxx-primitives/*": [
-        "src/primitives2/*"
+        "src/primitives/*"
       ],
       "reactxx-primitives": [
-        "src/primitives2/index"
+        "src/primitives/index"
       ],
 
       // "reactxx-sheeter": [
@@ -77,7 +77,7 @@
 
     "src/core",
     "src/fela",
-    "src/primitives2",
+    "src/primitives",
     "src/ks/web",
     
     // "src/sheeter",
