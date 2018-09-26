@@ -9,15 +9,6 @@ interface Shape extends TSheeter.ShapeAncestor {
     sheetFlags: TSheeter.ShapeFlags<'disabled' | 'active'>
 }
 
-declare module 'reactxx-typings' {
-    namespace TVariants {
-        interface VariantPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> {
-            $whenFlag2?: TVariants.WhenFlagPart<T, R>
-        }
-    }
-}
-
-
 interface ShapeSimple2 extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
     sheetFlags: TSheeter.ShapeFlags<'disabled'>

@@ -5,8 +5,11 @@ import { lastPipe } from './pipe-last'
 import { firstPipe } from './pipe-first'
 import { defaultThemeName } from './themer'
 import { deepMerges } from '../utils/deep-merge'
+import { initVariant$whenFlag } from '../when-flags/index'
 
 export const initGlobalState = (options: TWithStyles.GlobalState = null) => {
+  initVariant$whenFlag()
+
   globalOptions.createPipeline = context =>
     firstPipe(context,
       lastPipe(context, null)

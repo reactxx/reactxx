@@ -1,7 +1,7 @@
 import warning from 'warning'
 import { TSheeter, TAtomize, TVariants, TComponents } from 'reactxx-typings'
 import { atomizeRuleset, isAtomizedRuleset, isAtomicArray } from './atomize'
-import { testConditions } from './variants'
+import { testConditions } from 'reactxx-core/sheeter/variants'
 
 export function toClassNamesForBind(...rulesets: TSheeter.RulesetItem[]) {
     return toClassNamesWithQuery(this.sheetQuery, this.theme, rulesets)

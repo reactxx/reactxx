@@ -18,8 +18,6 @@
     "react-dom": "^16.4.1",
     "react-number-format": "^3.5.0",
     "react-text-mask": "^5.4.3",
-    "reactxx-mdi": "^0.1.67",
-    "reactxx-typings": "^0.1.3",
     "remark": "^9.0.0",
     "remark-generic-extensions": "^1.3.0",
     "remark-react": "^4.0.3",
