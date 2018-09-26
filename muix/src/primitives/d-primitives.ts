@@ -26,7 +26,8 @@ export namespace TPrimitives {
 
  export interface ViewShape extends TSheeter.ShapeAncestor {
   common: TSheeter.ShapeViews<'root'>
-  web: TSheeter.ShapeWeb<'pressable'>
+  sheetFlags: TSheeter.ShapeFlags<'pressable'>
+  //web: TSheeter.ShapeWeb<'pressable'>
   style: 'View'
   propsWeb: React.HTMLAttributes<HTMLDivElement>
   propsNative: ReactN.ViewProperties
@@ -35,7 +36,6 @@ export namespace TPrimitives {
 
 export interface TextShape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
-    //web: TSheeter.ShapeWeb<'pressable'>
     sheetFlags: TSheeter.ShapeFlags<'pressable' | 'singleLine'>
     style: 'Text'
     props: { singleLine?: boolean; url?: string }
@@ -46,7 +46,8 @@ export interface TextShape extends TSheeter.ShapeAncestor {
 
   export interface IconShape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
-    web: TSheeter.ShapeWeb<'pressable'>
+    sheetFlags: TSheeter.ShapeFlags<'pressable'>
+    //web: TSheeter.ShapeWeb<'pressable'>
     style: 'Text'
     props: { data: string; url?: string }
     propsWeb: React.SVGAttributes<SVGElement>
@@ -56,7 +57,8 @@ export interface TextShape extends TSheeter.ShapeAncestor {
 
   export interface ScrollViewShape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root' | 'container'>
-    web: TSheeter.ShapeWeb<'rootHorizontal' | 'containerHorizontal'>
+    sheetFlags: TSheeter.ShapeFlags<'horizontal'>
+    //web: TSheeter.ShapeWeb<'rootHorizontal' | 'containerHorizontal'>
     style: 'View'
     props: {
       horizontal?: boolean

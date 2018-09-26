@@ -68,17 +68,9 @@ const App: TComponents.SFCCode<Shape> = props => {
                 },
                 styleX
             ]}
-            // styleX={theme => ([
-            //     {
-            //         $web: {},
-            //         $native: {},
-            //         margin: 0,
-            //     },
-            //     styleX
-            // ])}
             classes={theme => {
                 const res: typeof Inner['classes'] = {
-                    root: [{ margin: 0, $web: [{ cursor: 'pointer' }], $native: [{ margin: 0 }] }],
+                    root: [{ $whenFlag:{}, margin: 0, $web: [{$whenFlag:{}, cursor: 'pointer' }], $native: [{$whenFlag:{}, margin: 0 }] }],
                     nativeOnly: { $native: [{ margin: 0 }] },
                     webOnly: { $web: [{ cursor: 'pointer' }] }
                 }
@@ -193,7 +185,7 @@ const sheet3: Partial<SheetCommon<Shape>> = {
         {
             margin: 0,
             $whenFlag: {
-                root: {
+                disabled: {
                     //color: ''
                 }
             }

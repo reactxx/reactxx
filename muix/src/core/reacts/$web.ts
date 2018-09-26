@@ -4,6 +4,7 @@ import { renderer } from 'reactxx-fela'
 import { TAtomize, TComponents, TSheeter } from '../d-index'
 import { toClassNamesWithQuery, deleteSystemProps } from '../sheeter/to-classnames'
 import { mergeStyles } from '../sheeter/merge'
+import { isReactXXComponent} from '../sheeter/atomize'
 /******************************************
   EXTEND REACT
 *******************************************/
@@ -16,18 +17,18 @@ declare module 'react' {
   }
 }
 
-export const createElement = (type, props: TComponents.ReactsCommonProperties & { className?, style?} & TComponents.OnPressAllX, ...children) => {
+export const createElement = (type, props: TComponents.ReactsCommonProperties & { className?, style?} & TComponents.Events, ...children) => {
   
-  const isXXComponent = isReactXXComponent(type)
   if (!props) return React.createElement(type, props, ...children)
 
-  delete props.$native
+  const isXXComponent = isReactXXComponent(type)
 
-  consolideEvents(props)
+  delete props.$native
+  consolidateEvents(props)
 
   if (isXXComponent) return React.createElement(type, props, ...children)
 
-  //******* for other than reactxx compnents: 
+  //******* for non reactxx components: 
 
   const { classNameX, styleX } = props
 
@@ -59,9 +60,7 @@ const applyLastWinStrategy = (values: TAtomize.AtomicArray) => {
   return res.join(' ')
 }
 
-const isReactXXComponent = type => type[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.reactxxComponent
-
-const consolideEvents = (props: TComponents.Props & TComponents.OnPressAllX & TComponents.OnPressAllWeb) => {
+const consolidateEvents = (props: TComponents.Props & TComponents.Events & TComponents.EventsWeb) => {
     const {onPress, onLongPress, onPressIn, onPressOut, $web} = props
     if (onPress) {
       if (!$web || !$web.onClick) props.onClick = onPress

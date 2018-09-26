@@ -22,10 +22,9 @@ export namespace TVariants {
   }
 
   export type WhenFlagPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> = {
-    [P in WhenFlagKeys<R>]?: TSheeter.RulesetOrAtomized<T, R>
+    [P in TSheeter.getFlags<R>]?: TSheeter.RulesetOrAtomized<T, R>
   }
-  export type WhenFlagKeys<R extends TSheeter.Shape> = TSheeter.RulesetNamesAll<R> | TSheeter.getFlags<R>
-
+  
   export type MediaQPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
     Record<string, TSheeter.RulesetOrAtomized<T, R>>
 
@@ -55,7 +54,7 @@ export namespace TVariants {
     opened: boolean
   }
 
-  export type ConditionTypes = 'whenFlag' | 'mediaq' | 'animation' | 'conditional'
+  export type ConditionTypes = 'whenFlag' | 'mediaq' | 'animation'
 
   //*********************************************************
   //  QUERY
@@ -63,13 +62,13 @@ export namespace TVariants {
 
   export interface Query<R extends TSheeter.Shape = TSheeter.Shape> { // 
     whenFlag?: WhenFlagQuery<R> // map of used ruleset names
-    mediaq?: MediaQQuery // actual width
+    mediaq?: MediaQuery // actual width
     animation?: AnimationQuery // animation state: opened x closed
   }
 
-  export type WhenFlagQuery<R extends TSheeter.Shape = TSheeter.Shape> = Record<WhenFlagKeys<R>, boolean>
+  export type WhenFlagQuery<R extends TSheeter.Shape = TSheeter.Shape> = PartialRecord<TSheeter.getFlags<R>, boolean>
 
-  export type MediaQQuery = number
+  export type MediaQuery = number
 
   export type AnimationQuery = 'opened' | 'closed'
 

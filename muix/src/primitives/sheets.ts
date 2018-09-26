@@ -30,11 +30,6 @@ export const textSheet: TSheeter.Sheet<TPrimitives.TextShape> = ({
       },
     },
   },
-  // pressable: { //web only ruleset
-  //   $web: {
-  //     cursor: 'pointer'
-  //   }
-  // },
 })
 
 // mimic React Native view behavior
@@ -50,13 +45,15 @@ const webViewRuleset = {
 
 export const viewSheet: TSheeter.Sheet<TPrimitives.ViewShape> = ({
   root: {
-    $web: webViewRuleset
-  },
-  pressable: {
-    $web: {
-      cursor: 'pointer'
+    $web: webViewRuleset,
+    $whenFlag: {
+      pressable: {
+        $web: {
+          cursor: 'pointer'
+        }
+      }
     }
-  }
+  },
 })
 
 export const iconSheet: TSheeter.Sheet<TPrimitives.IconShape> = ({
@@ -66,11 +63,13 @@ export const iconSheet: TSheeter.Sheet<TPrimitives.IconShape> = ({
     $web: {
       fill: 'currentColor',
       fontSize: 'inherited'
-    }
-  },
-  pressable: { //web only ruleset
-    $web: {
-      cursor: 'pointer'
+    },
+    $whenFlag: {
+      pressable: {
+        $web: {
+          cursor: 'pointer'
+        }
+      }
     }
   },
 })
@@ -95,21 +94,25 @@ export const scrollViewSheet: TSheeter.Sheet<TPrimitives.ScrollViewShape> = ({
     ],
     $native: {
       flexBasis: 0,
+    },
+    $whenFlag: {
+      horizontal: {
+        $web: {
+          flexDirection: 'row',
+          overflowX: 'auto',
+          overflowY: 'hidden'
+        }
+      }
     }
   },
   container: {
     $web: webViewRuleset,
-  },
-  rootHorizontal: {
-    $web: {
-      flexDirection: 'row',
-      overflowX: 'auto',
-      overflowY: 'hidden'
+    $whenFlag: {
+      horizontal: {
+        $web: {
+          flexDirection: 'row'
+        }
+      }
     }
   },
-  containerHorizontal: {
-    $web: {
-      flexDirection: 'row'
-    }
-  }
 })

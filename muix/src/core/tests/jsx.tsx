@@ -1,5 +1,5 @@
 /** @jsx createElement */
-import { TSheeter, traceAtomizedRuleset, atomizeSheet} from 'reactxx-core'
+import { TSheeter, traceAtomizedRuleset, atomizeSheet } from 'reactxx-core'
 
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'> & TSheeter.ShapeViews<'label'>
@@ -95,7 +95,7 @@ const sheet: TSheeter.Sheet<Shape> = {
             ':hover': {
                 $mediaq: {},
                 $whenFlag: {
-                    root: {
+                    disabled: {
                         color: 'label|$whenFlag|root',
                         $web: [
                             {

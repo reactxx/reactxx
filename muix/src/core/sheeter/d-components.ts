@@ -52,7 +52,7 @@ export namespace TComponents {
   //******************** Cross platform component code props
 
   export type PropsCode<R extends Shape = Shape> = PartialOverwrite<
-    TSheeter.getProps<R>, CommonPropertiesCode<R> & TEventsX<R>>
+    TSheeter.getProps<R>, CommonPropertiesCode<R> & EventsNative & EventsWeb>
 
   export interface CommonPropertiesCode<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
     classNameX?: TAtomize.Ruleset
@@ -80,12 +80,19 @@ export namespace TComponents {
   export interface MouseEventPar<R extends Shape = Shape> extends React.MouseEvent<Element> { current?: PropsCode<R> }
   export type MouseEventEx<R extends Shape = Shape> = React.EventHandler<MouseEventPar<R>>// (ev?: MouseEventPar<R>) => void
 
-  export interface OnPressX<R extends Shape = Shape> { onPress?: MouseEventEx<R>; onLongPress?: MouseEventEx<R> }
-  export interface OnPressAllX<R extends Shape = Shape> extends OnPressX<R> { onPressIn?: MouseEventEx<R>; onPressOut?: MouseEventEx<R> }
+  export interface EventsPress<R extends Shape = Shape> { onPress?: MouseEventEx<R>; onLongPress?: MouseEventEx<R> }
+  export interface Events<R extends Shape = Shape> extends EventsPress<R> { onPressIn?: MouseEventEx<R>; onPressOut?: MouseEventEx<R> }
 
-  export interface OnPressAllWeb { onClick?: React.MouseEventHandler<Element>; onMouseDown?: React.MouseEventHandler<Element>; onMouseUp?: React.MouseEventHandler<Element> }
+  export interface EventsWeb { 
+    onClick?: React.MouseEventHandler<Element>
+    onMouseDown?: React.MouseEventHandler<Element>
+    onMouseUp?: React.MouseEventHandler<Element> 
+  }
 
-  export interface NativeEventPar<R extends Shape = Shape> extends ReactN.GestureResponderEvent { current?: PropsCode<R> }
-  export interface OnPressAllNative { onPress?: () => void; onPressIn?: () => void; onPressOut?: () => void; onLongPress?: () => void }
+  //export interface NativeEventPar<R extends Shape = Shape> extends ReactN.GestureResponderEvent { current?: PropsCode<R> }
+  export interface EventsNative { 
+    onPress?: () => void; onPressIn?: () => void
+    onPressOut?: () => void; onLongPress?: () => void 
+  }
 
 } 

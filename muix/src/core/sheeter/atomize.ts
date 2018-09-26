@@ -4,6 +4,7 @@ import { isObject } from '../utils/deep-merge'
 import { TAtomize, TSheeter } from '../d-index'
 import { createWithTheme } from '../utils/create-with-theme'
 import { atomizeRulesetLow } from './atomize-low'
+import { TComponents } from 'reactxx-core/sheeter/d-components';
 
 export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetOrCreator<R>, theme) => {
     if (!sheet) return null
@@ -45,6 +46,10 @@ export function isAtomizedSheet<R extends TSheeter.Shape = TSheeter.Shape>(sheet
     for (const p in sheet)
         return isAtomizedRuleset(sheet[p])
     return true
+}
+
+export function isReactXXComponent (obj): obj is TComponents.ComponentType {
+  return obj[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.reactxxComponent
 }
 
 // export function isRulesetWebArray(obj): obj is TSheeter.RulesetWeb[] {
