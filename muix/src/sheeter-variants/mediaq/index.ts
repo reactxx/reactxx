@@ -1,5 +1,5 @@
 import { TSheeter, TVariants, TCommonStyles } from 'reactxx-typings'
-import { registerVariant } from 'reactxx-core'
+import { registerVariant } from 'reactxx-sheeter'
 
 export const initVariant$mediaq = () => registerVariant({
     name: Consts.name,

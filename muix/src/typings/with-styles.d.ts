@@ -12,7 +12,7 @@ declare namespace TWithStyles {
   }
 
   // component type options
-  export interface ComponentState<R extends TSheeter.Shape = TSheeter.Shape> extends GlobalState {
+  export interface ComponentState<R extends TSheeter.Shape = TSheeter.Shape>  {
     name?: string
     defaultProps?: TComponents.Props<R>
     withTheme?: boolean

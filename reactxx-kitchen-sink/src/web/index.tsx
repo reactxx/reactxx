@@ -33,7 +33,8 @@ import ReactDOM from 'react-dom'
 
 // import { run } from 'reactxx-core'
 // run()
-import App from 'reactxx-primitives/tests/index'
+
+import App from 'reactxx-core/tests/index'
 
 
 ReactDOM.render(<App />, document.getElementById('root')) 

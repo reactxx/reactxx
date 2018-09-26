@@ -1,10 +1,11 @@
 import React from 'react';
 import { TWithStyles, TComponents } from 'reactxx-typings'
 import { toClassNamesForBind } from '../sheeter/to-classnames'
+import { globalOptions } from './global-state'
 import { mergeRulesets, mergeSheets, mergeCodeProps, mergeStyles } from '../sheeter/merge'
 
 export const lastPipe: TWithStyles.Pipe = (state, next) => {
-  const pipeId = state.getPipeCounter()
+  const pipeId = globalOptions.getPipeCounter()
   return () => {
     const { pipeStates } = state
     // UNDO

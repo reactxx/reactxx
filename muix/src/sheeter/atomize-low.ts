@@ -1,11 +1,11 @@
 import warning from 'warning'
-import { isObject } from '../utils/deep-merge'
+import { isObject } from './utils/deep-merge'
 import { TAtomize, TSheeter, TCommonStyles, TVariants } from 'reactxx-typings'
-import { toVariantParts } from 'reactxx-core/sheeter/variants'
+import { toVariantParts } from './variants'
 import { isAtomicArray, isAtomizedRuleset } from './atomize'
 
 // platform dependent import
-import { toAtomicArray } from 'reactxx-core'
+import { toAtomicArray } from 'reactxx-sheeter'
 
 // if single style without $web prop, then it is modified by setting TypedInterfaceTypes.atomizedStyleWeb flag
 // export const atomizeStyleWeb = (st: TSheeter.StyleOrAtomizedWeb) => {

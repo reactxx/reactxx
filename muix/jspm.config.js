@@ -12,6 +12,9 @@ SystemJS.config({
   map: {
     "reactxx-typings": "deploy/lib/typings/index",
     "reactxx-fela": "deploy/lib/fela/index",
+    "reactxx-sheeter": "deploy/lib/sheeter/index",
+    "reactxx-sheeter-variants": "deploy/lib/sheeter-variants/index", 
+    "reactxx-with-styles": "deploy/lib/with-styles/index", 
 
     "reactxx-core/tests/index": "deploy/lib/core/tests/index",
     "reactxx-core": "deploy/lib/core/index",

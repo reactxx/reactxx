@@ -1,5 +1,18 @@
-import { atomizeRuleset } from '../sheeter/atomize'
+import { atomizeRuleset } from 'reactxx-sheeter'
 import { TSheeter } from 'reactxx-typings'
+
+import { initSheeterVariants } from 'reactxx-sheeter-variants'
+import { initWithStyles } from 'reactxx-with-styles'
+import App from './primitives'
+
+const initCore = () => {
+    initSheeterVariants()
+    initWithStyles()
+}
+
+initCore()
+
+export default App
 
 const merging: TSheeter.Ruleset<'root' | 'disabled'> = {
     $before: {

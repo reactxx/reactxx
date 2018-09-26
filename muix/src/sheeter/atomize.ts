@@ -1,7 +1,7 @@
 import warning from 'warning';
 
 import { TAtomize, TSheeter, TComponents } from 'reactxx-typings'
-import { createWithTheme } from '../utils/create-with-theme'
+import { createWithTheme } from './utils/create-with-theme'
 import { atomizeRulesetLow } from './atomize-low'
 
 export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetOrCreator<R>, theme) => {

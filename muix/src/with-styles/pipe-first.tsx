@@ -4,7 +4,7 @@ import { globalOptions } from './global-state'
 import {applyTheme, ThemeContextConsumer, defaultThemeName} from './themer'
 
 export const firstPipe: TWithStyles.Pipe = (state, next) => {
-  const pipeId = state.getPipeCounter()
+  const pipeId = globalOptions.getPipeCounter()
   const render = (theme: TTheme.Theme) => {
     applyTheme(pipeId, theme || globalOptions.namedThemes[defaultThemeName], state)
     return next()

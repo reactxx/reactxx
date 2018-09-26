@@ -32,6 +32,15 @@
       "reactxx-fela": [
         "src/fela/index"
       ],
+      "reactxx-sheeter": [
+        "src/sheeter/index"
+      ],
+      "reactxx-sheeter-variants": [
+        "src/sheeter-variants/index"
+      ],
+      "reactxx-with-styles": [
+        "src/with-styles/index"
+      ],
       "reactxx-core/*": [
         "src/core/*"
       ],
@@ -73,14 +82,17 @@
     ]
   },
   "include": [
-    //"src/**/*",
     "src/typings.d.ts",
     "src/ks/common/ks.d.ts",
+
     "src/typings",
-    "src/core",
     "src/fela",
+    "src/sheeter",
+    "src/sheeter-variants", 
+    "src/with-styles", 
     "src/primitives",
-    "src/ks/web",
+    "src/core",
+    "src/ks/web", 
     // "src/sheeter",
     // "src/basic",
     // "src/mui-web",

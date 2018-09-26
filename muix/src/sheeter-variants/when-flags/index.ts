@@ -1,6 +1,6 @@
 import { TSheeter, TVariants, TCommonStyles } from 'reactxx-typings'
-import { registerVariant } from 'reactxx-core/sheeter/variants'
-import { atomizeRulesetInner } from 'reactxx-core/sheeter/atomize-low'
+import { registerVariant } from '../../sheeter/variants'
+import { atomizeRulesetInner } from '../../sheeter/atomize-low'
 
 export const initVariant$whenFlag = () => registerVariant({
     name: Consts.name,

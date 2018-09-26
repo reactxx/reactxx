@@ -3,10 +3,13 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { createElement, withStylesCreator } from 'reactxx-core'
+import { createElement } from 'reactxx-sheeter'
 import { TComponents } from 'reactxx-typings'
+import { withStylesCreator } from 'reactxx-with-styles'
+
+
 // for "declaration": true
-import { TProvider } from 'reactxx-core'
+import { TProvider } from 'reactxx-with-styles'
 import { TWithStyles, TSheeter } from 'reactxx-typings'
 
 import { textSheet, viewSheet, iconSheet, scrollViewSheet } from './sheets'

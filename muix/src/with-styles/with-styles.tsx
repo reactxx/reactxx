@@ -4,11 +4,9 @@ import { globalOptions } from './global-state'
 import { lastPipe } from './pipe-last'
 import { firstPipe } from './pipe-first'
 import { defaultThemeName } from './themer'
-import { deepMerges } from '../utils/deep-merge'
-import { initVariant$whenFlag } from '../when-flags/index'
+import { deepMerges } from 'reactxx-sheeter'
 
 export const initGlobalState = (options: TWithStyles.GlobalState = null) => {
-  initVariant$whenFlag()
 
   globalOptions.createPipeline = context =>
     firstPipe(context,
@@ -39,6 +37,8 @@ export interface TProvider<R extends TSheeter.Shape> { Provider: React.Component
 
 const withStyles = (componentState: TWithStyles.ComponentState) => {
 
+  //const componentState = componentStateProc()
+
   class Styled extends React.Component<TComponents.Props> {
 
     instanceState: TWithStyles.InstanceState = {
@@ -47,7 +47,7 @@ const withStyles = (componentState: TWithStyles.ComponentState) => {
       props: this.props,
     }
 
-    pipeline = componentState.createPipeline(this.instanceState)
+    pipeline = globalOptions.createPipeline(this.instanceState)
 
     render() {
       return this.pipeline()
@@ -71,7 +71,6 @@ const finishComponentState = (
         overrideComponentState : {}
   const componentId = componentTypeCounter++
   const res: TWithStyles.ComponentState = {
-    ...globalOptions,
     ...mergedOptions,
     sheetOrCreator,
     componentId,
