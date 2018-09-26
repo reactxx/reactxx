@@ -1,5 +1,5 @@
 import { renderer } from 'reactxx-fela'
-import { TAtomize } from '../d-index'
+import { TAtomize } from 'reactxx-typings'
 
 export const toAtomicArray: TAtomize.ToAtomicClassesProc = renderer.renderRuleEx
 

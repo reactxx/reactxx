@@ -1,5 +1,5 @@
 import React from 'react';
-import { TTheme, TSheeter, TWithStyles } from '../d-index';
+import { TTheme, TSheeter, TWithStyles } from 'reactxx-typings';
 import { globalOptions } from './global-state'
 import {applyTheme, ThemeContextConsumer, defaultThemeName} from './themer'
 

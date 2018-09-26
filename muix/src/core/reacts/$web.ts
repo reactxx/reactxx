@@ -1,7 +1,7 @@
 import React from 'react'
 import { renderer } from 'reactxx-fela'
 
-import { TAtomize, TComponents, TSheeter } from '../d-index'
+import { TAtomize, TComponents, TSheeter } from 'reactxx-typings'
 import { toClassNamesWithQuery, deleteSystemProps } from '../sheeter/to-classnames'
 import { mergeStyles } from '../sheeter/merge'
 import { isReactXXComponent} from '../sheeter/atomize'

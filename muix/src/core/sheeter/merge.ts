@@ -1,6 +1,5 @@
-import { TAtomize, TSheeter } from '../d-index';
+import { TComponents,TAtomize, TSheeter } from 'reactxx-typings';
 import { isAtomicArray } from './atomize'
-import { TComponents } from 'reactxx-core/sheeter/d-components';
 
 export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOrAtomized[]) => {
     if (!sources)
@@ -65,7 +64,7 @@ export const mergeRuleset = (target: TAtomize.Ruleset, source: TAtomize.Ruleset)
                 ],
 
             }
-    res[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomizedRuleset
+    res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomizedRuleset
     return res as TAtomize.Ruleset
 }
 

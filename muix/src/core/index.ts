@@ -3,8 +3,6 @@ export * from './sheeter/$web'
 export * from './reacts/$web'
 //export * from './primitives/$web'
 
-export * from './d-index'
-
 export * from './sheeter/atomize'
 export * from './sheeter/trace'
 export * from './with-styles/with-styles'

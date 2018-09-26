@@ -1,13 +1,14 @@
-import { TValue, TSheeter, TVariants } from '../d-index'
+import { TValue, TSheeter, TVariants } from 'reactxx-typings'
 
 export namespace TAtomize {
 
   export type ToAtomicClassesProc = (ruleset: TSheeter.Ruleset, tracePath?: string) => AtomicArray
   export type TraceAtomicClassProc = (value: Atomic) => string
 
-  export const TypedInterfaceProp = '``'
+  //export const TypedInterfaceProp = '``'
 
-  export enum TypedInterfaceTypes {
+  export const enum TypedInterfaceTypes {
+    prop = '``',
     atomizedRuleset = 'c'/*compiled ruleset*/,
     atomicArray = 'v' /*value array*/,
     reactxxComponent = 'x',
@@ -15,13 +16,13 @@ export namespace TAtomize {
   }
 
   export interface TypedInterface {
-    [TypedInterfaceProp]: TypedInterfaceTypes
+    [TypedInterfaceTypes.prop]: TypedInterfaceTypes
   }
 
   export type Sheet<R extends TSheeter.Shape = TSheeter.Shape> = { [P in TSheeter.RulesetNamesAll<R>]: AtomizedRuleset }
 
   export interface AtomizedRuleset extends TypedInterface {
-    [TypedInterfaceProp]: TypedInterfaceTypes.atomizedRuleset
+    [TypedInterfaceTypes.prop]: TypedInterfaceTypes.atomizedRuleset
     name: string
     list: Variants
   }
@@ -31,7 +32,7 @@ export namespace TAtomize {
     conditions?: TVariants.Conditions // conditions (when is ruleset used)
   }
 
-  export type AtomicArray = Atomic[] & { [TypedInterfaceProp]: TypedInterfaceTypes.atomicArray } // last value in array (with the same propId) wins!
+  export type AtomicArray = Atomic[] & { [TypedInterfaceTypes.prop]: TypedInterfaceTypes.atomicArray } // last value in array (with the same propId) wins!
 
   export type Atomic = AtomicNative | AtomicWeb
   export type AtomicWeb = string // fela class name. propId's are cached (propId = fela.renderer.propIdCache[valueWeb])

@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TSheeter, TAtomize, TVariants } from '../d-index'
+import { TSheeter, TAtomize, TVariants } from 'reactxx-typings'
 
 export namespace TComponents {
 

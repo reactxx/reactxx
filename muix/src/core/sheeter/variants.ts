@@ -1,4 +1,4 @@
-import { TSheeter, TVariants } from '../d-index'
+import { TSheeter, TVariants } from 'reactxx-typings'
 
 import { atomizeRulesetInner } from '../sheeter/atomize-low'
 

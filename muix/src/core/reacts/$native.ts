@@ -1,5 +1,5 @@
 import React from 'react'
-import { TComponents, TAtomize } from '../d-index'
+import { TComponents, TAtomize } from 'reactxx-typings'
 /******************************************
   EXTEND REACT NATIVE
 *******************************************/

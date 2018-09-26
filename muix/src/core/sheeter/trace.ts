@@ -1,6 +1,6 @@
 // platform dependent import
 import { getTracePath } from 'reactxx-core';
-import { TAtomize } from '../d-index';
+import { TAtomize } from 'reactxx-typings';
 
 
 export const trace = (values: TAtomize.AtomicArray) => values.map(v => getTracePath(v)).join('\n')

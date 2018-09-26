@@ -1,4 +1,4 @@
-export * from './d-index'
+export * from 'reactxx-typings'
 
 export * from './sheeter/atomize-low'
 export * from 'reactxx-core/sheeter/to-classnames'

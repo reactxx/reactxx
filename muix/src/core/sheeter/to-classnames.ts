@@ -1,5 +1,5 @@
 import warning from 'warning'
-import { TSheeter, TAtomize, TVariants, TComponents } from '../d-index'
+import { TSheeter, TAtomize, TVariants, TComponents } from 'reactxx-typings'
 import { atomizeRuleset, isAtomizedRuleset, isAtomicArray } from './atomize'
 import { testConditions } from './variants'
 
@@ -22,7 +22,7 @@ const propsToDelete: TComponents.CommonPropertiesCodeKeys[] = [
 ]
 
 const emptyAtomicArray = [] as TAtomize.AtomicArray
-emptyAtomicArray[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomicArray
+emptyAtomicArray[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
 
 // merge rulesets and apply query to ruleset's conditional parts ($whenFlags, $mediaq etc.)
 export const toClassNamesWithQuery = (query: TVariants.Query, theme, rulesets: TSheeter.ClassNameOrAtomized) => {
@@ -58,6 +58,6 @@ export const toClassNamesWithQuery = (query: TVariants.Query, theme, rulesets: T
 
     // concat values
     const res = [].concat.apply([], values) as TAtomize.AtomicArray
-    res[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomicArray
+    res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
     return res
 }

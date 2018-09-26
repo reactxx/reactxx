@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TSheeter } from 'reactxx-core'
+import { TSheeter } from 'reactxx-typings'
 import { TPrimitives } from './d-index'
 
 export const textSheet: TSheeter.Sheet<TPrimitives.TextShape> = ({

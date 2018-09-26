@@ -1,10 +1,8 @@
 import warning from 'warning';
 
-import { isObject } from '../utils/deep-merge'
-import { TAtomize, TSheeter } from '../d-index'
+import { TAtomize, TSheeter, TComponents } from 'reactxx-typings'
 import { createWithTheme } from '../utils/create-with-theme'
 import { atomizeRulesetLow } from './atomize-low'
-import { TComponents } from 'reactxx-core/sheeter/d-components';
 
 export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetOrCreator<R>, theme) => {
     if (!sheet) return null
@@ -29,18 +27,18 @@ export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme) => {
 }
 
 // export function isRuleset(obj: Object): obj is TSheeter.Ruleset {
-//     return isObject(obj) && typeof obj[TAtomize.TypedInterfaceProp] === 'undefined'
+//     return isObject(obj) && typeof obj[TAtomize.TypedInterfaceTypes.InterfaceProp] === 'undefined'
 // }
 
 export function isAtomizedRuleset(obj: Object): obj is TAtomize.AtomizedRuleset {
-    return obj && obj[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.atomizedRuleset
+    return obj && obj[TAtomize.TypedInterfaceTypes.prop] === TAtomize.TypedInterfaceTypes.atomizedRuleset
 }
 // export function isAtomizedStyleWeb(obj: Object): obj is TAtomize.StyleWeb {
-//     return obj && obj[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.atomizedStyleWeb
+//     return obj && obj[TAtomize.TypedInterfaceTypes.InterfaceProp] === TAtomize.TypedInterfaceTypes.atomizedStyleWeb
 // }
 
 export function isAtomicArray(obj): obj is TAtomize.AtomicArray {
-    return obj && obj[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.atomicArray
+    return obj && obj[TAtomize.TypedInterfaceTypes.prop] === TAtomize.TypedInterfaceTypes.atomicArray
 }
 export function isAtomizedSheet<R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetX): sheet is TAtomize.Sheet<R> {
     for (const p in sheet)
@@ -49,7 +47,7 @@ export function isAtomizedSheet<R extends TSheeter.Shape = TSheeter.Shape>(sheet
 }
 
 export function isReactXXComponent (obj): obj is TComponents.ComponentType {
-  return obj[TAtomize.TypedInterfaceProp] === TAtomize.TypedInterfaceTypes.reactxxComponent
+  return obj[TAtomize.TypedInterfaceTypes.prop] === TAtomize.TypedInterfaceTypes.reactxxComponent
 }
 
 // export function isRulesetWebArray(obj): obj is TSheeter.RulesetWeb[] {

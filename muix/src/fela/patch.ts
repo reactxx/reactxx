@@ -3,17 +3,11 @@ import { generateCombinedMediaQuery, generateCSSSelector, isMediaQuery, isNested
 import generateClassName from 'fela/lib/generateClassName';
 import isPlainObject from 'isobject';
 import { IRenderer } from 'fela'
+import { TAtomize } from 'reactxx-typings'
 
-namespace TCompiler {
-  export const TypedInterfaceProp = '``'
-  export enum TypedInterfaceTypes {
-    atomicArray = 'v' /*value array*/,
-  }
-
-}
 
 export interface IRendererEx extends IRenderer {
-  renderRuleEx(style: Object, tracePath?: string): string[] & { [TCompiler.TypedInterfaceProp]: TCompiler.TypedInterfaceTypes.atomicArray }
+  renderRuleEx(style: Object, tracePath?: string): string[] & { [TAtomize.TypedInterfaceTypes.prop]: TAtomize.TypedInterfaceTypes.atomicArray }
   propIdCache: {}
   trace: {}
 }
@@ -46,7 +40,7 @@ const concat = <T = any>(arr1: Array<T>, arr2: Array<T>) => arr1.concat(arr2)
 const renderStyleToClassNames = (renderer, tracePath: string, { _className, ...style }: any, pseudo: string = '', media: string = '', support: string = ''): string[] => {
   //let classNames = _className ? ` ${_className}` : ''
   let classNames: string[] = []
-  classNames[TCompiler.TypedInterfaceProp] = TCompiler.TypedInterfaceTypes.atomicArray
+  classNames[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
 
   for (const property in style) {
 

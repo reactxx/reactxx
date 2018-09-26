@@ -26,6 +26,9 @@
     //"noUnusedLocals": true,
     "baseUrl": ".",
     "paths": {
+      "reactxx-typings": [
+        "src/typings/index"
+      ],
       "reactxx-fela": [
         "src/fela/index"
       ],
@@ -75,6 +78,7 @@
     "src/typings.d.ts",
     "src/ks/common/ks.d.ts",
 
+    "src/typings",
     "src/core",
     "src/fela",
     "src/primitives",

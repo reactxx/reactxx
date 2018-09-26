@@ -1,5 +1,5 @@
 import React from 'react';
-import { TWithStyles, TComponents } from '../d-index'
+import { TWithStyles, TComponents } from 'reactxx-typings'
 import { toClassNamesForBind } from '../sheeter/to-classnames'
 import { mergeRulesets, mergeSheets, mergeCodeProps, mergeStyles } from '../sheeter/merge'
 

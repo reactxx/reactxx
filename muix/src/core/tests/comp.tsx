@@ -1,10 +1,6 @@
 /** @jsx createElement */
-import {
-    TComponents,
-    TCommonStyles,
-    createElement, TSheeter
-} from 'reactxx-core'
-import { TAtomize } from '../sheeter/d-atomize';
+import { TAtomize, TComponents, TCommonStyles, TSheeter } from 'reactxx-typings'
+import { createElement } from 'reactxx-core'
 
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root'> & TSheeter.ShapeTexts<'label'>
@@ -70,7 +66,7 @@ const App: TComponents.SFCCode<Shape> = props => {
             ]}
             classes={theme => {
                 const res: typeof Inner['classes'] = {
-                    root: [{ $whenFlag:{}, margin: 0, $web: [{$whenFlag:{}, cursor: 'pointer' }], $native: [{$whenFlag:{}, margin: 0 }] }],
+                    root: [{ $whenFlag: {}, margin: 0, $web: [{ $whenFlag: {}, cursor: 'pointer' }], $native: [{ $whenFlag: {}, margin: 0 }] }],
                     nativeOnly: { $native: [{ margin: 0 }] },
                     webOnly: { $web: [{ cursor: 'pointer' }] }
                 }

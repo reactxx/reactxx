@@ -1,4 +1,4 @@
-import { TSheeter, TAtomize, TCommonStyles } from '../d-index'
+import { TSheeter, TAtomize, TCommonStyles } from 'reactxx-typings'
 
 export namespace TVariants {
 

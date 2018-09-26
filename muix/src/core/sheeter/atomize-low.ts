@@ -1,6 +1,6 @@
 import warning from 'warning'
 import { isObject } from '../utils/deep-merge'
-import { TAtomize, TSheeter, TCommonStyles, TVariants } from '../d-index'
+import { TAtomize, TSheeter, TCommonStyles, TVariants } from 'reactxx-typings'
 import { toVariantParts } from '../sheeter/variants'
 import { isAtomicArray, isAtomizedRuleset } from './atomize'
 
@@ -33,7 +33,7 @@ import { toAtomicArray } from 'reactxx-core'
 //     if (Array.isArray(st)) st.forEach(s => processStyle(s))
 //     else processStyle(st)
 
-//     res[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomizedStyleWeb
+//     res[TAtomize.TypedInterfaceTypes.InterfaceProp] = TAtomize.TypedInterfaceTypes.atomizedStyleWeb
 
 //     return res
 // }
@@ -84,7 +84,7 @@ export const atomizeRulesetLow = (ruleset: TSheeter.RulesetOrAtomized /*| TSheet
     return {
         name,
         list,
-        [TAtomize.TypedInterfaceProp]: TAtomize.TypedInterfaceTypes.atomizedRuleset
+        [TAtomize.TypedInterfaceTypes.prop]: TAtomize.TypedInterfaceTypes.atomizedRuleset
     } as TAtomize.AtomizedRuleset
 }
 

@@ -1,5 +1,5 @@
 import { atomizeRuleset } from '../sheeter/atomize'
-import { TSheeter } from '../sheeter/d-sheeter'
+import { TSheeter } from 'reactxx-typings'
 
 const merging: TSheeter.Ruleset<'root' | 'disabled'> = {
     $before: {

@@ -1,5 +1,5 @@
 /** @jsx createElement */
-import { TSheeter } from 'reactxx-core'
+import { TSheeter } from 'reactxx-typings'
 
 interface Shape1 extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>

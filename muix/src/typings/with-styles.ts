@@ -1,5 +1,5 @@
 import React from 'react';
-import { TAtomize, TComponents, TSheeter, TTheme, TVariants } from '../d-index';
+import { TAtomize, TComponents, TSheeter, TTheme, TVariants } from 'reactxx-typings';
 
 export namespace TWithStyles {
 

@@ -1,8 +1,8 @@
-import { TAtomize, TValue } from '../d-index'
+import { TAtomize, TValue } from 'reactxx-typings'
 
 export const toAtomicArray: TAtomize.ToAtomicClassesProc = (style, tracePath) => {
     const res: TAtomize.AtomicArray = [] as any
-    res[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.atomicArray
+    res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
     if (!style) return res
     for (const propId in style) {
         if (propId.charAt(0) === '$') continue

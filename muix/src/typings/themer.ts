@@ -1,4 +1,4 @@
-import { TSheeter } from '../d-index';
+import { TSheeter } from 'reactxx-typings';
 
 export namespace TTheme {
   export interface Theme {

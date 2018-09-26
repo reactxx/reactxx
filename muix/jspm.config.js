@@ -10,6 +10,7 @@ SystemJS.config({
     },
   },
   map: {
+    "reactxx-typings": "deploy/lib/typings/index",
     "reactxx-fela": "deploy/lib/fela/index",
 
     "reactxx-core/tests/index": "deploy/lib/core/tests/index",

@@ -1,5 +1,5 @@
 import React from 'react'
-import { TWithStyles, TSheeter, TComponents, TAtomize, TTheme, TVariants } from '../d-index'
+import { TWithStyles, TSheeter, TComponents, TAtomize, TTheme, TVariants } from 'reactxx-typings'
 import { globalOptions } from './global-state'
 import { lastPipe } from './pipe-last'
 import { firstPipe } from './pipe-first'
@@ -54,7 +54,7 @@ const withStyles = (componentState: TWithStyles.ComponentState) => {
   }
 
   const styled: TComponents.ComponentClass = Styled
-  styled[TAtomize.TypedInterfaceProp] = TAtomize.TypedInterfaceTypes.reactxxComponent
+  styled[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.reactxxComponent
   return styled
 }
 
