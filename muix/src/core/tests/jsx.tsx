@@ -1,6 +1,6 @@
 /** @jsx createElement */
 import { TSheeter, TCommonStyles } from 'reactxx-typings'
-import { traceAtomizedRuleset, atomizeSheet } from 'reactxx-sheeter'
+import { traceAtomizedRuleset, atomizeSheet } from 'reactxx-core'
 
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'> & TSheeter.ShapeViews<'label'>

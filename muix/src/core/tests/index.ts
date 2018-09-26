@@ -1,14 +1,8 @@
 import { atomizeRuleset } from 'reactxx-sheeter'
 import { TSheeter } from 'reactxx-typings'
 
-import { initSheeterVariants } from 'reactxx-sheeter-variants'
-import { initWithStyles } from 'reactxx-with-styles'
+import { initCore } from 'reactxx-core'
 import App from './primitives'
-
-const initCore = () => {
-    initSheeterVariants()
-    initWithStyles()
-}
 
 initCore()
 
