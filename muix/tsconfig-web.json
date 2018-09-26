@@ -5,15 +5,18 @@
     "target": "es5",
     "module": "system",
     "moduleResolution": "node",
+    "rootDir": "src",
+    //"outDir": "deploy/lib",
+   
     "allowJs": false,
     //"declaration": true,
+    //"outFile": "all.js",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "rootDir": "src",
-    "outDir": "deploy/lib",
     "jsx": "react",
     "inlineSourceMap": true,
-    "inlineSources": true,
+    //"sourceMap": false,
+    //"inlineSources": true,
     "importHelpers": true,
     "strictNullChecks": false,
     "downlevelIteration": true,
@@ -24,33 +27,46 @@
     //"noUnusedLocals": true,
     "baseUrl": ".",
     "paths": {
-      "reactxx-sheeter": [
-        "src/sheeter/index"
+      "reactxx-typings": [
+        "src/typings/index"
       ],
       "reactxx-fela": [
         "src/fela/index"
       ],
-      "reactxx-animation": [
-        "src/animation/index"
+      "reactxx-core/*": [
+        "src/core/*"
       ],
-      "reactxx-basic": [
-        "src/basic/index"
+      "reactxx-core": [
+        "src/core"
+      ],
+      "reactxx-primitives/*": [
+        "src/primitives/*"
       ],
       "reactxx-primitives": [
-        "src/primitives/web/index"
+        "src/primitives/index"
       ],
-      "reactxx-mediaq": [
-        "src/mediaq/web/web"
-      ],
-      "reactxx-icons/*": [
-        "src/icons/*"
-      ],
-      "reactxx-mui-web/*": [
-        "src/mui-web/*"
-      ],
-      "reactxx-muix/*": [
-        "src/muix/*"
-      ]
+
+      // "reactxx-sheeter": [
+      //   "src/sheeter/index"
+      // ],
+      // "reactxx-animation": [
+      //   "src/animation/index"
+      // ],
+      // "reactxx-basic": [
+      //   "src/basic/index"
+      // ],
+      // "reactxx-mediaq": [
+      //   "src/mediaq/index"
+      // ],
+      // "reactxx-icons/*": [
+      //   "src/icons/*"
+      // ],
+      // "reactxx-mui-web/*": [
+      //   "src/mui-web/*"
+      // ],
+      // "reactxx-muix/*": [
+      //   "src/muix/*"
+      // ]
     },
     "lib": [
       "dom",
@@ -60,19 +76,30 @@
   },
   "include": [
     //"src/**/*",
-    "src/sheeter/**/*",
-    "src/fela/**/*",
-    "src/basic/**/*",
-    "src/primitives/**/*",
-    "src/media/**/*",
-    "src/animation/**/*",
-    "src/mui-web/**/*",
-    "src/icons/**/*",
-    "src/muix/**/*",
-    "src/ks/common/muix-doc/**/*",
-    "src/ks/common/mui-doc-app/**/*",
-    "src/ks/web/**/*",
     "src/typings.d.ts",
+    "src/ks/common/ks.d.ts",
+
+    "src/typings",
+    "src/core",
+    "src/fela",
+    "src/primitives",
+    "src/ks/web",
+    
+    // "src/sheeter",
+    // "src/basic",
+    // "src/mui-web",
+    // "src/primitives",
+    // "src/media",
+    // "src/animation",
+    // "src/icons",
+    // "src/muix",
+    // "src/ks/common/muix-doc",
+    // "src/ks/common/mui-doc-app",
+    // "src/ks/common/primitives", 
+    // "src/ks/common/mediaq", 
+    // "src/ks/common/animation", 
+
+    //"src/ks/common/components", 
   ],
   "exclude": [
     "src/*/typings.d.ts",
@@ -81,7 +108,6 @@
     "src/ks/native",
     "src/icons/native",
     "src/test",
-    //"src/muix/reactxx-mui-web"
     "src/muix/reactxx-mui-web"
   ]
 }

@@ -5,13 +5,13 @@
     "target": "es5",
     "module": "system",
     "moduleResolution": "node",
+    "rootDir": "src",
+    "outDir": "deploy/lib",
+    "declaration": true,
     "allowJs": false,
-    //"declaration": true,
     //"outFile": "all.js",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "rootDir": "src",
-    "outDir": "deploy/lib",
     "jsx": "react",
     "inlineSourceMap": true,
     //"sourceMap": false,
@@ -44,7 +44,6 @@
       "reactxx-primitives": [
         "src/primitives/index"
       ],
-
       // "reactxx-sheeter": [
       //   "src/sheeter/index"
       // ],
@@ -77,13 +76,11 @@
     //"src/**/*",
     "src/typings.d.ts",
     "src/ks/common/ks.d.ts",
-
     "src/typings",
     "src/core",
     "src/fela",
     "src/primitives",
     "src/ks/web",
-    
     // "src/sheeter",
     // "src/basic",
     // "src/mui-web",
@@ -97,7 +94,6 @@
     // "src/ks/common/primitives", 
     // "src/ks/common/mediaq", 
     // "src/ks/common/animation", 
-
     //"src/ks/common/components", 
   ],
   "exclude": [
@@ -107,7 +103,6 @@
     "src/ks/native",
     "src/icons/native",
     "src/test",
-    //"src/muix/reactxx-mui-web"
     "src/muix/reactxx-mui-web"
   ]
 }

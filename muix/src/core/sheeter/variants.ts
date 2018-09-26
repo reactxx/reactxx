@@ -31,9 +31,9 @@ export const testConditions = (conditions: TVariants.Conditions, query: TVariant
 //  PRIVATE
 //*********************************************************
 
-const toWhenFlagVariant: TVariants.ToVariantProc = (list, ruleset: TVariants.WhenFlagPart, path, pseudoPrefixes, conditions) => {
-    for (const p in ruleset) {
-        const rules = ruleset[p] as TSheeter.Ruleset
+const toWhenFlagVariant: TVariants.ToVariantProc = (list, whenFlag: TVariants.WhenFlagPart, path, pseudoPrefixes, conditions) => {
+    for (const p in whenFlag) {
+        const rules = whenFlag[p] as TSheeter.Ruleset
         if (Array.isArray(rules))
             rules.forEach((r, idx) =>
                 atomizeRulesetInner(

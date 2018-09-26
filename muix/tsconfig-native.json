@@ -6,30 +6,10 @@
     "rootDir": "src",
     "outDir": "deploy/es",
 
-    "declaration": true,
+    //"declaration": true,
 
     "inlineSourceMap": true,
     "inlineSources": true,
-
-    "baseUrl": ".",
-    "paths": {
-
-      "reactxx-mdi": [ "node_modules/reactxx-mdi/es/index" ],
-
-      "reactxx-sheeter": [ "src/sheeter/index" ],
-      "reactxx-animation": [ "src/animation/native/index" ],
-      "reactxx-primitives": [ "src/primitives/native/index" ],
-      "reactxx-mediaq": [ "src/mediaq/native/index" ],
-      "reactxx-basic": [ "src/basic/index" ],
-      "reactxx-fela": [ "src/fela/index" ],
-      "reactxx-activable": [ "src/activable/web/index" ],
-
-      "reactxx-mui/typings/*": [ "src/mui/typings/*" ],
-
-      "reactxx": [ "src/reactxx/native/index" ],
-
-      "reactxx-mui/*": [ "src/mui/native/*" ]
-    },
 
     "importHelpers": true,
     "allowSyntheticDefaultImports": true,
@@ -42,6 +22,30 @@
     "experimentalDecorators": true,
     "noImplicitAny": false,
     "jsx": "react-native",
+
+    "baseUrl": ".",
+    "paths": {
+
+      "reactxx-typings": [
+        "src/typings/index"
+      ],
+      "reactxx-fela": [
+        "src/fela/index"
+      ],
+      "reactxx-core/*": [
+        "src/core/*"
+      ],
+      "reactxx-core": [
+        "src/core"
+      ],
+      "reactxx-primitives/*": [
+        "src/primitives/*"
+      ],
+      "reactxx-primitives": [
+        "src/primitives/index"
+      ],
+    },
+
     "lib": [
       "dom",
       "es2015",
@@ -49,11 +53,22 @@
     ]
   },
   "include": [
-    "src/**/*"
+    "src/typings.d.ts",
+    "src/ks/common/ks.d.ts",
+
+    "src/typings",
+    "src/core",
+    "src/fela",
+    "src/primitives",
+    "src/ks/web",
   ],
   "exclude": [
-    "src/ks/typings.d.ts",
-    "src/icons/lib",
-    "src/icons/*.tsx"
+    "src/*/typings.d.ts",
+    "src/trash",
+    "src/ks/common/muix",
+    "src/ks/native",
+    "src/icons/native",
+    "src/test",
+    "src/muix/reactxx-mui-web"
   ]
 }

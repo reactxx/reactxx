@@ -1,5 +1,5 @@
 /** @jsx createElement */
-import { TSheeter } from 'reactxx-typings'
+import { TSheeter, TCommonStyles } from 'reactxx-typings'
 import { traceAtomizedRuleset, atomizeSheet } from 'reactxx-core'
 
 interface Shape extends TSheeter.ShapeAncestor {
@@ -9,6 +9,15 @@ interface Shape extends TSheeter.ShapeAncestor {
     sheetFlags: TSheeter.ShapeFlags<'disabled' | 'active'>
 }
 
+declare module 'reactxx-typings' {
+    namespace TVariants {
+        interface VariantPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> {
+            $whenFlag2?: TVariants.WhenFlagPart<T, R>
+        }
+    }
+}
+
+
 interface ShapeSimple2 extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
     sheetFlags: TSheeter.ShapeFlags<'disabled'>
@@ -16,7 +25,10 @@ interface ShapeSimple2 extends TSheeter.ShapeAncestor {
 
 const sheetSimple2: TSheeter.SheetCreator<ShapeSimple2> = theme => ({
     root: [
-        { $whenFlag: {} },
+        {
+            $whenFlag: {},
+            whenFlag2: {}
+        },
         { $web: [] }
     ]
 })
@@ -30,6 +42,7 @@ const sheetSimple: TSheeter.Sheet<ShapeSimple> = {
     root: [
         {
             $whenFlag: { disabled: { color: 'disabled1' } },
+            //$whenFlag2: { disabled: { color: 'disabled1' }},
             $web: [
                 {
                     $whenFlag: { disabled: { color: 'disabled2' } },
@@ -140,16 +153,3 @@ const sheet: TSheeter.Sheet<Shape> = {
     },
 }
 
-// const root = classNames(style, sheet.root, sheet.label, { fontWeight: 'bold' })
-
-// const App: React.SFC = props => <div>
-//     <h1 classNameX={[sheet.root, style, sheet.label]}>HALLO</h1>
-//     <h1 classNameX={root}>HALLO</h1>
-//     <h1 classNameX={style}>HALLO</h1>
-//     <h1 classNameX={[style, { fontWeight: 'normal' }]}>HALLO</h1>
-//     <h1 classNameX={[root, { fontWeight: 'normal' }]}>HALLO</h1>
-//     {/*
-//     */}
-// </div>
-
-// export default App

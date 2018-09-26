@@ -1,7 +1,11 @@
 import { TSheeter, TAtomize, TCommonStyles } from 'reactxx-typings'
 
-export namespace TVariants {
+export interface IVariants {
+  name: string
+}
 
+export namespace TVariants {
+ 
   export type ToVariantProc = (
     list: TAtomize.Variants,
     ruleset: VariantPart | WhenFlagPart | MediaQPart | AnimationPart,
@@ -24,7 +28,7 @@ export namespace TVariants {
   export type WhenFlagPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> = {
     [P in TSheeter.getFlags<R>]?: TSheeter.RulesetOrAtomized<T, R>
   }
-  
+
   export type MediaQPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
     Record<string, TSheeter.RulesetOrAtomized<T, R>>
 

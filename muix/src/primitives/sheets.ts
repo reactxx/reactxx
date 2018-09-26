@@ -33,7 +33,7 @@ export const textSheet: TSheeter.Sheet<TPrimitives.TextShape> = ({
 })
 
 // mimic React Native view behavior
-const webViewRuleset = {
+const webViewRuleset: TSheeter.RulesetWebOrAtomized = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'stretch',
@@ -41,11 +41,11 @@ const webViewRuleset = {
   flexShrink: 0,
   position: 'relative',
   overflow: 'hidden',
-} as TSheeter.RulesetWeb
+}
 
 export const viewSheet: TSheeter.Sheet<TPrimitives.ViewShape> = ({
   root: {
-    $web: webViewRuleset,
+    $web: webViewRuleset as any,
     $whenFlag: {
       pressable: {
         $web: {
@@ -79,7 +79,7 @@ export const iconSheet: TSheeter.Sheet<TPrimitives.IconShape> = ({
 export const scrollViewSheet: TSheeter.Sheet<TPrimitives.ScrollViewShape> = ({
   root: {
     $web: [
-      webViewRuleset,
+      webViewRuleset as any,
       {
         flexBasis: 0,
         flexGrow: 1,
@@ -106,7 +106,7 @@ export const scrollViewSheet: TSheeter.Sheet<TPrimitives.ScrollViewShape> = ({
     }
   },
   container: {
-    $web: webViewRuleset,
+    $web: webViewRuleset as any,
     $whenFlag: {
       horizontal: {
         $web: {
@@ -116,3 +116,4 @@ export const scrollViewSheet: TSheeter.Sheet<TPrimitives.ScrollViewShape> = ({
     }
   },
 })
+

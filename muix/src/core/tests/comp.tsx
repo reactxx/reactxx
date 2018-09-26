@@ -1,5 +1,5 @@
 /** @jsx createElement */
-import { TAtomize, TComponents, TCommonStyles, TSheeter } from 'reactxx-typings'
+import { TVariants, TAtomize, TComponents, TCommonStyles, TSheeter } from 'reactxx-typings'
 import { createElement } from 'reactxx-core'
 
 interface Shape extends TSheeter.ShapeAncestor {
@@ -9,6 +9,15 @@ interface Shape extends TSheeter.ShapeAncestor {
     sheetFlags: TSheeter.ShapeFlags<'disabled' | 'active'>
     style: 'View'
 }
+
+interface Shape3 extends TSheeter.ShapeAncestor {
+    common: TSheeter.ShapeViews<'root'> & TSheeter.ShapeTexts<'label'>
+    native: TSheeter.ShapeViews<'nativeOnly'>
+    web: TSheeter.ShapeWeb<'webOnly'>
+    //sheetFlags: TSheeter.ShapeFlags<'disabled' | 'active'>
+    style: 'View'
+}
+
 
 const sheet: Shape['$SheetOrCreator'] = theme => {
     const res: Shape['$Sheet'] = {
@@ -52,6 +61,43 @@ const sheet: Shape['$SheetOrCreator'] = theme => {
 let Inner: TComponents.ComponentType<Shape>
 
 const App: TComponents.SFCCode<Shape> = props => {
+    const { classNameX, classes, styleX, theme, toClassNames } = props
+    const root = toClassNames(classes.root, { margin: 0 })
+    return <div>
+        <Inner
+            styleX={[
+                {
+                    $web: {},
+                    $native: {},
+                    margin: 0,
+                },
+                styleX
+            ]}
+            classes={theme => {
+                const res: typeof Inner['classes'] = {
+                    root: [{ $whenFlag: {}, margin: 0, $web: [{ $whenFlag: {}, cursor: 'pointer' }], $native: [{ $whenFlag: {}, margin: 0 }] }],
+                    nativeOnly: { $native: [{ margin: 0 }] },
+                    webOnly: { $web: [{ cursor: 'pointer' }] }
+                }
+                return res
+            }}
+            classNameX={theme => {
+                const res: typeof Inner['classNamex'] = [
+                    { margin: 0 }, classNameX, root
+                ]
+                return res
+            }}
+        />
+        <Inner
+            classes={theme => ({ root: [classes.root, { margin: 0 }] })}
+            classNameX={theme => [{ margin: 0 }, root, classes.label, { $web: { cursor: 'pointer' } }]}
+        />
+    </div>
+
+}
+
+
+const App2: TComponents.SFCCode<Shape3> = props => {
     const { classNameX, classes, styleX, theme, toClassNames } = props
     const root = toClassNames(classes.root, { margin: 0 })
     return <div>
@@ -169,7 +215,7 @@ const all: TAll = [
 type RulesetOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
     TSheeter.Ruleset<T, R> | TAtomize.Ruleset
 
-type SheetCommon<R extends Shape> = keyof TSheeter.getCommon<R> extends never ? {} :
+type SheetCommon<R extends Shape> = keyof TSheeter.getCommon<R> extends never ? TSheeter.FakeInterface :
     { [P in keyof TSheeter.getCommon<R>]: RulesetOrAtomized<TSheeter.getCommon<R>[P], R> | RulesetOrAtomized<TSheeter.getCommon<R>[P], R>[] }
 
 const TAtomizeRuleset: TAtomize.Ruleset = null
