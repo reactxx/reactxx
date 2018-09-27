@@ -39,8 +39,8 @@ const sheet3: TSheeter.SheetCreator<Shape1> = ({ color }) => ({
 interface Shape2 extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
     native: TSheeter.ShapeViews<'nativeOnly'>
-    web: TSheeter.ShapeWeb<'webOnly'>
-    sheetFlags: TSheeter.ShapeFlags<'disabled'>
+    web: TSheeter.ShapeMarks<'webOnly'>
+    flags: TSheeter.ShapeMarks<'disabled'>
 }
 
 const style2: TSheeter.Ruleset<'Text', Shape2>[] = [
@@ -48,18 +48,18 @@ const style2: TSheeter.Ruleset<'Text', Shape2>[] = [
         $web: {},
     },
     {
-        $whenFlag: {
+        $sheetFlags: {
         },
         $native: {
-            $whenFlag: {
+            $sheetFlags: {
                 disabled: {
                     $web: {
-                        $mediaq: {},
+                        //$mediaq: {},
                     },
-                    $whenFlag: {},
-                    $mediaq: {},
+                    $sheetFlags: {},
+                    //$mediaq: {},
                     $native: {
-                        $mediaq: {},
+                        //$mediaq: {},
                     }
                 },
             },

@@ -101,12 +101,12 @@ declare namespace TSheeter {
   *******************************************/
 
   // Shape for generic default, e.g. "interface X<R extends Shape = Shape> {} " 
-  export interface Shape {
+  export interface Shape extends TVariants.ShapePart {
     //**** sheet constrains
     common: EmptyInterface // rulesets (and their native type), which are used in both web and native component code. Rule are compatible with web and native.
     native: EmptyInterface // rulesets, which are used only in native code
     web: EmptyInterface // ruleset names, which are used only in web code (its type is always React.CSSProperties)
-    sheetFlags: EmptyInterface
+    //sheetFlags: EmptyInterface
     //******************** style constrain
     style: TCommonStyles.RulesetNativeIds // for web, style has always React.CSSProperties type
     //**** component property constrains
@@ -118,11 +118,10 @@ declare namespace TSheeter {
   }
 
   // ancestor for Shape inheritance
-  export interface ShapeAncestor {
+  export interface ShapeAncestor extends TVariants.ShapePart {
     common: EmptyInterface
     native: EmptyInterface
     web: EmptyInterface
-    sheetFlags: EmptyInterface
     style: unknown
     props: EmptyInterface
     propsNative: ReactN.ViewProperties
@@ -144,17 +143,15 @@ declare namespace TSheeter {
   export type getPropsWeb<R extends Shape> = R['propsWeb']
   export type getPropsNative<R extends Shape> = R['propsNative']
   export type getEvents<R extends Shape = Shape> = keyof R['events']
-  export type getFlags<R extends Shape = Shape> = keyof R['sheetFlags']
   export type getTheme<R extends Shape = Shape> = keyof R['theme'] extends never ? FakeInterface : R['theme']
 
   export type RulesetNamesAll<R extends Shape> = keyof getCommon<R> | keyof getNative<R> | getWeb<R>
 
-  export type ShapeTexts<P extends string> = { [p in P]: 'Text' }
-  export type ShapeViews<P extends string> = { [p in P]: 'View' }
-  export type ShapeImages<P extends string> = { [p in P]: 'Image' }
+  export type ShapeTexts<P extends string> = Record<P, 'Text'>
+  export type ShapeViews<P extends string> = Record<P, 'View'>
+  export type ShapeImages<P extends string> = Record<P, 'Image'>
 
-  export type ShapeWeb<P extends string> = { [p in P]: true }
-  export type ShapeFlags<P extends string> = { [p in P]: true }
+  export type ShapeMarks<P extends string> = Record<P, true>
 
   export interface EmptyInterface { }
   export interface FakeInterface { ['`']?: any }

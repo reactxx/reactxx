@@ -5,15 +5,16 @@ import { createElement } from 'reactxx-core'
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root'> & TSheeter.ShapeTexts<'label'>
     native: TSheeter.ShapeViews<'nativeOnly'>
-    web: TSheeter.ShapeWeb<'webOnly'>
-    sheetFlags: TSheeter.ShapeFlags<'disabled' | 'active'>
+    web: TSheeter.ShapeMarks<'webOnly'>
+    flags: TSheeter.ShapeMarks<'isDisabled' | 'isActive'>
+    breakpoints: TSheeter.ShapeMarks<'isTabletWidth'>
     style: 'View'
 }
 
 interface Shape3 extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root'> & TSheeter.ShapeTexts<'label'>
     native: TSheeter.ShapeViews<'nativeOnly'>
-    web: TSheeter.ShapeWeb<'webOnly'>
+    web: TSheeter.ShapeMarks<'webOnly'>
     //sheetFlags: TSheeter.ShapeFlags<'disabled' | 'active'>
     style: 'View'
 }
@@ -23,15 +24,15 @@ const sheet: Shape['$SheetOrCreator'] = theme => {
     const res: Shape['$Sheet'] = {
         root: {
             margin: 4,
-            $whenFlag: {
-                disabled: [{
-                    //color: '$whenFlag|disabled',
+            $sheetFlags: {
+                isDisabled: [{
+                    //color: '$sheetFlags|disabled',
                 }],
             },
             $web: [{
-                $whenFlag: {
-                    disabled: [{
-                        //color: '$whenFlag|disabled',
+                $sheetFlags: {
+                    isDisabled: [{
+                        //color: '$sheetFlags|disabled',
                     }],
                 },
             }],
@@ -39,9 +40,9 @@ const sheet: Shape['$SheetOrCreator'] = theme => {
         label: {
             $web: {
                 color: 'gray',
-                $whenFlag: {
-                    disabled: [{
-                        color: '$whenFlag|disabled',
+                $sheetFlags: {
+                    isDisabled: [{
+                        color: '$sheetFlags|disabled',
                     }],
                 },
             },
@@ -61,13 +62,14 @@ const sheet: Shape['$SheetOrCreator'] = theme => {
 let Inner: TComponents.ComponentType<Shape>
 
 const App: TComponents.SFCCode<Shape> = props => {
-    const { classNameX, classes, styleX, theme, toClassNames } = props
-    const root = toClassNames(classes.root, { margin: 0 })
+    const { classNameX, classes, styleX, theme, toClassNames, breakpoints } = props
+    //if (breakpoints.isTabletWidth) flags.isTabletWidth = true
+    const root = toClassNames([classes.root, { margin: 0 }])
     return <div>
         <Inner
             styleX={[
                 {
-                    $web: {},
+                   $web: {},
                     $native: {},
                     margin: 0,
                 },
@@ -75,7 +77,9 @@ const App: TComponents.SFCCode<Shape> = props => {
             ]}
             classes={theme => {
                 const res: typeof Inner['classes'] = {
-                    root: [{ $whenFlag: {}, margin: 0, $web: [{ $whenFlag: {}, cursor: 'pointer' }], $native: [{ $whenFlag: {}, margin: 0 }] }],
+                    root: [{ $sheetFlags: {
+                        isDisabled: {}, root: {}, isTabletWidth: {}
+                    }, margin: 0, $web: [{ $sheetFlags: {}, cursor: 'pointer' }], $native: [{ $sheetFlags: {}, margin: 0 }] }],
                     nativeOnly: { $native: [{ margin: 0 }] },
                     webOnly: { $web: [{ cursor: 'pointer' }] }
                 }
@@ -99,7 +103,7 @@ const App: TComponents.SFCCode<Shape> = props => {
 
 const App2: TComponents.SFCCode<Shape3> = props => {
     const { classNameX, classes, styleX, theme, toClassNames } = props
-    const root = toClassNames(classes.root, { margin: 0 })
+    const root = toClassNames([classes.root, { margin: 0 }])
     return <div>
         <Inner
             styleX={[
@@ -112,7 +116,7 @@ const App2: TComponents.SFCCode<Shape3> = props => {
             ]}
             classes={theme => {
                 const res: typeof Inner['classes'] = {
-                    root: [{ $whenFlag: {}, margin: 0, $web: [{ $whenFlag: {}, cursor: 'pointer' }], $native: [{ $whenFlag: {}, margin: 0 }] }],
+                    root: [{ $sheetFlags: {}, margin: 0, $web: [{ $sheetFlags: {}, cursor: 'pointer' }], $native: [{ $sheetFlags: {}, margin: 0 }] }],
                     nativeOnly: { $native: [{ margin: 0 }] },
                     webOnly: { $web: [{ cursor: 'pointer' }] }
                 }
@@ -226,8 +230,8 @@ const sheet3: Partial<SheetCommon<Shape>> = {
         TAtomizeAtomicArray,
         {
             margin: 0,
-            $whenFlag: {
-                disabled: {
+            $sheetFlags: {
+                isDisabled: {
                     //color: ''
                 }
             }

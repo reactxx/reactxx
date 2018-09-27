@@ -5,19 +5,19 @@ import { traceAtomizedRuleset, atomizeSheet } from 'reactxx-core'
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'> & TSheeter.ShapeViews<'label'>
     native: TSheeter.ShapeViews<'nativeOnly'>
-    web: TSheeter.ShapeWeb<'webOnly'>
-    sheetFlags: TSheeter.ShapeFlags<'disabled' | 'active'>
+    web: TSheeter.ShapeMarks<'webOnly'>
+    flags: TSheeter.ShapeMarks<'disabled' | 'active'>
 }
 
 interface ShapeSimple2 extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
-    sheetFlags: TSheeter.ShapeFlags<'disabled'>
+    flags: TSheeter.ShapeMarks<'disabled'>
 }
 
 const sheetSimple2: TSheeter.SheetCreator<ShapeSimple2> = theme => ({
     root: [
         {
-            $whenFlag: {},
+            $sheetFlags: {},
             whenFlag2: {}
         },
         { $web: [] }
@@ -26,20 +26,20 @@ const sheetSimple2: TSheeter.SheetCreator<ShapeSimple2> = theme => ({
 
 interface ShapeSimple extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
-    sheetFlags: TSheeter.ShapeFlags<'disabled'>
+    flags: TSheeter.ShapeMarks<'disabled'>
 }
 
 const sheetSimple: TSheeter.Sheet<ShapeSimple> = {
     root: [
         {
-            $whenFlag: { disabled: { color: 'disabled1' } },
-            //$whenFlag2: { disabled: { color: 'disabled1' }},
+            $sheetFlags: { disabled: { color: 'disabled1' } },
+            //$sheetFlags2: { disabled: { color: 'disabled1' }},
             $web: [
                 {
-                    $whenFlag: { disabled: { color: 'disabled2' } },
+                    $sheetFlags: { disabled: { color: 'disabled2' } },
                     ':hover': {
                         ':active': {
-                            $whenFlag: {
+                            $sheetFlags: {
                                 disabled: [
                                     { color: 'disabled3' },
                                     { margin: 15 }
@@ -55,7 +55,7 @@ const sheetSimple: TSheeter.Sheet<ShapeSimple> = {
                 }
             ],
             // $native: [{
-            //     $whenFlag: { disabled: [
+            //     $sheetFlags: { disabled: [
             //         { color: 'disabled4' },
             //         { margin: 15 }
             //     ] },
@@ -88,9 +88,9 @@ const sheet: TSheeter.Sheet<Shape> = {
             }
         },
         margin: 4,
-        $whenFlag: {
+        $sheetFlags: {
             disabled: {
-                color: '$whenFlag|disabled',
+                color: '$sheetFlags|disabled',
             },
         }
     },
@@ -99,14 +99,14 @@ const sheet: TSheeter.Sheet<Shape> = {
             color: 'gray',
             ':hover': {
                 $mediaq: {},
-                $whenFlag: {
+                $sheetFlags: {
                     disabled: {
-                        color: 'label|$whenFlag|root',
+                        color: 'label|$sheetFlags|root',
                         $web: [
                             {
                                 ':hover':
                                 {
-                                    $whenFlag: {},
+                                    $sheetFlags: {},
                                     ':active': {},
                                     cursor: 'pointer',
                                 }

@@ -26,38 +26,38 @@ export namespace TPrimitives {
 
  export interface ViewShape extends TSheeter.ShapeAncestor {
   common: TSheeter.ShapeViews<'root'>
-  sheetFlags: TSheeter.ShapeFlags<'pressable'>
+  flags: TSheeter.ShapeMarks<'pressable'>
   //web: TSheeter.ShapeWeb<'pressable'>
   style: 'View'
   propsWeb: React.HTMLAttributes<HTMLDivElement>
   propsNative: ReactN.ViewProperties
-  events: TSheeter.ShapeWeb<TComponents.TEventsAll>
+  events: TSheeter.ShapeMarks<TComponents.TEventsAll>
 }
 
 export interface TextShape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
-    sheetFlags: TSheeter.ShapeFlags<'pressable' | 'singleLine'>
+    flags: TSheeter.ShapeMarks<'pressable' | 'singleLine'>
     style: 'Text'
     props: { singleLine?: boolean; url?: string }
     propsWeb: React.HTMLAttributes<HTMLSpanElement>
     propsNative: ReactN.TextProperties
-    events: TSheeter.ShapeWeb<TComponents.TEventsXNames>
+    events: TSheeter.ShapeMarks<TComponents.TEventsXNames>
   }
 
   export interface IconShape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
-    sheetFlags: TSheeter.ShapeFlags<'pressable'>
+    flags: TSheeter.ShapeMarks<'pressable'>
     //web: TSheeter.ShapeWeb<'pressable'>
     style: 'Text'
     props: { data: string; url?: string }
     propsWeb: React.SVGAttributes<SVGElement>
     propsNative: ReactN.TextProperties
-    events: TSheeter.ShapeWeb<TComponents.TEventsXNames>
+    events: TSheeter.ShapeMarks<TComponents.TEventsXNames>
   }
 
   export interface ScrollViewShape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root' | 'container'>
-    sheetFlags: TSheeter.ShapeFlags<'horizontal'>
+    flags: TSheeter.ShapeMarks<'horizontal'>
     //web: TSheeter.ShapeWeb<'rootHorizontal' | 'containerHorizontal'>
     style: 'View'
     props: {

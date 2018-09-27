@@ -1,9 +1,9 @@
-import { initVariant$animation } from './animation/index'
-import { initVariant$mediaq } from './mediaq/index'
-import { initVariant$whenFlag } from './when-flags/index'
+import { initVariant$animation } from 'reactxx-sheet-animation'
+import { initVariant$mediaq } from '.reactxx-sheet-widths'
+import { initVariant$sheetFlags } from 'reactxx-sheet-flags'
 
 export const initSheeterVariants = () => {
     initVariant$animation()
     initVariant$mediaq()
-    initVariant$whenFlag()
+    initVariant$sheetFlags()
 }

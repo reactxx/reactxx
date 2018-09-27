@@ -19,6 +19,7 @@ declare namespace TComponents {
     classNameX?: TSheeter.ClassNameOrCreator<R>
     styleX?: TSheeter.StyleOrCreator<R>
     classes?: TSheeter.PartialSheetOrCreator<R> // cross platform sheet
+    themedProps?: (theme: TSheeter.getTheme<R>) => Props<R>
   }
 
   /* cross platform styling props 
@@ -38,7 +39,9 @@ declare namespace TComponents {
     $native?: Partial<TSheeter.getPropsNative<R>> //native specific props
   }
   export type Props<R extends Shape = Shape> = PartialOverwrite<TSheeter.getProps<R>,
-    CommonProperties<R> & TEventsX<R>>
+    CommonProperties<R> & 
+    TVariants.PropsPart<R> &
+    TEventsX<R>>
 
   export type TEventsX<R extends Shape = Shape> = PartialRecord<TSheeter.getEvents<R>, MouseEventEx<R>>
   export type ComponentType<R extends Shape = Shape> = React.ComponentType<Props<R>> & {
@@ -52,19 +55,21 @@ declare namespace TComponents {
   //******************** Cross platform component code props
 
   export type PropsCode<R extends Shape = Shape> = PartialOverwrite<
-    TSheeter.getProps<R>, CommonPropertiesCode<R> & EventsNative & EventsWeb>
+    TSheeter.getProps<R>, CommonPropertiesCode<R> & 
+    TVariants.PropsCodePart<R> &
+    EventsNative & 
+    EventsWeb>
 
   export interface CommonPropertiesCode<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
     classNameX?: TAtomize.Ruleset
     styleX?: TSheeter.StyleItem
     children?: React.ReactNode
-    sheetQuery?: TVariants.Query<R>
     classes?: TAtomize.Sheet<R>
-    toClassNames?: (...rulesets: TSheeter.RulesetOrAtomized[]) => TAtomize.AtomicArray
+    toClassNames?: (rulesets: TSheeter.RulesetOrAtomized[]) => TAtomize.AtomicArray
     theme?: TSheeter.getTheme<R>
   }
 
-  export type CommonPropertiesCodeKeys = keyof CommonPropertiesCode
+  export type CommonPropertiesCodeKeys = keyof PropsCode
 
   export type SFCCode<R extends Shape = Shape> = React.SFC<PropsCode<R>>
   export type ComponentTypeCode<R extends Shape = Shape> = React.ComponentType<PropsCode<R>>

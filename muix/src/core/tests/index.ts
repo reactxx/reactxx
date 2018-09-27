@@ -28,13 +28,13 @@ const merging: TSheeter.Ruleset<'root' | 'disabled'> = {
 } as any
 
 const whenFlag: TSheeter.Ruleset<'root' | 'disabled'> = {
-    $whenFlag: {
+    $sheetFlags: {
         root: {
             plain: 'plain',
         }
     },
     ':hover': {
-        $whenFlag: {
+        $sheetFlags: {
             root: {
                 hover: 'hover',
             }
@@ -44,10 +44,10 @@ const whenFlag: TSheeter.Ruleset<'root' | 'disabled'> = {
 
 const whenFlagRecursion: TSheeter.Ruleset<'root' | 'disabled'> = {
     rule: 'rule',
-    $whenFlag: {
+    $sheetFlags: {
         root: {
             plainRoot: 'plainRoot',
-            $whenFlag: {
+            $sheetFlags: {
                 disabled: {
                     plainInner: 'plainInner',
                     ':hover': {
@@ -62,17 +62,17 @@ const whenFlagRecursion: TSheeter.Ruleset<'root' | 'disabled'> = {
     },
     ':hover': {
         hover: 'hover',
-        $whenFlag: {
+        $sheetFlags: {
             root: {
                 hoverRoot: 'hoverRoot',
-                $whenFlag: {
+                $sheetFlags: {
                     disabled: {
                         hoverRootInner: 'hoverRootInner',
                     }
                 },
                 ':active': {
                     hoverRootActive: 'hoverRootActive',
-                    $whenFlag: {
+                    $sheetFlags: {
                         disabled: {
                             hoverRootActiveInner: 'hoverRootActiveInner',
                         }

@@ -8,14 +8,14 @@ import { deepMerges } from 'reactxx-sheeter'
 
 export const initGlobalState = (options: TWithStyles.GlobalState = null) => {
 
-  globalOptions.createPipeline = context =>
-    firstPipe(context,
-      lastPipe(context, null)
-    )
+  // globalOptions.createPipeline = context =>
+  //   firstPipe(context,
+  //     lastPipe(context, null)
+  //   )
 
   Object.assign(globalOptions, options)
-  
-  if (globalOptions.getDefaultTheme)
+
+  if (!globalOptions.namedThemes[defaultThemeName] && globalOptions.getDefaultTheme)
     globalOptions.namedThemes[defaultThemeName] = globalOptions.getDefaultTheme()
 }
 
@@ -45,9 +45,18 @@ const withStyles = (componentState: TWithStyles.ComponentState) => {
       ...componentState,
       id: componentState.displayName + ' *' + componentInstaneCounter++,
       props: this.props,
+      pipeCounter: 1,
     }
 
-    pipeline = globalOptions.createPipeline(this.instanceState)
+    pipeline = (() => {
+      if (globalOptions.createPipeline)
+        return firstPipe(this.instanceState,
+          globalOptions.createPipeline(this.instanceState,
+            lastPipe(this.instanceState, null)))
+      else
+        return firstPipe(this.instanceState,
+          lastPipe(this.instanceState, null))
+    })()
 
     render() {
       return this.pipeline()

@@ -10,7 +10,7 @@ export const test = () => {
   }
   const addInRulesetFilters: Sheeter.RulesetPatchGetters = {
     $mediaq: Sheeter.mediaqRulesetPatchGetterCreator(200), // screen width = 200px
-    $whenFlag: Sheeter.whenFlagRulesetFilter
+    $sheetFlags: Sheeter.whenFlagRulesetFilter
   }
   window.isWeb = true
   const mergedWeb = Sheeter.mergeSheetsAndFinish(patchable, [], finishAddIns)
@@ -37,7 +37,7 @@ const root: Sheeter.Sheet = {
           $mediaq: {
             '100-400': {
               a3: 1,
-              $whenFlag: {
+              $sheetFlags: {
                 b: {
                   a4: 1,
                   $after: {
@@ -91,7 +91,7 @@ const _toPatchableAndMergeable = {
   },
   "$addIns": {
     "$mediaq": {
-      "$addIns/$whenFlag/$addIns/$mediaq/root/:active/100-200/b/:hover": {
+      "$addIns/$sheetFlags/$addIns/$mediaq/root/:active/100-200/b/:hover": {
         "300-400": {
           "a8": 1
         },
@@ -100,7 +100,7 @@ const _toPatchableAndMergeable = {
         },
         "#path": [
           "$addIns",
-          "$whenFlag",
+          "$sheetFlags",
           "$addIns/$mediaq/root/:active/100-200",
           "b",
           ":hover"
@@ -116,7 +116,7 @@ const _toPatchableAndMergeable = {
         ]
       }
     },
-    "$whenFlag": {
+    "$sheetFlags": {
       "$addIns/$mediaq/root/:active/100-200": {
         "b": {
           "a4": 1,
@@ -161,7 +161,7 @@ const inGetPatchLow = {
     {
       "path": [
         "$addIns",
-        "$whenFlag",
+        "$sheetFlags",
         "$addIns/$mediaq/root/:active/100-200",
         "b",
         ":hover"

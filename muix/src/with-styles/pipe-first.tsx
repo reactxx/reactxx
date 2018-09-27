@@ -1,10 +1,10 @@
 import React from 'react';
-import { TTheme, TSheeter, TWithStyles } from 'reactxx-typings';
+import { TTheme, TWithStyles } from 'reactxx-typings';
 import { globalOptions } from './global-state'
-import {applyTheme, ThemeContextConsumer, defaultThemeName} from './themer'
+import { applyTheme, ThemeContextConsumer, defaultThemeName } from './themer'
 
 export const firstPipe: TWithStyles.Pipe = (state, next) => {
-  const pipeId = globalOptions.getPipeCounter()
+  const pipeId = state.pipeCounter++
   const render = (theme: TTheme.Theme) => {
     applyTheme(pipeId, theme || globalOptions.namedThemes[defaultThemeName], state)
     return next()
@@ -17,8 +17,8 @@ export const firstPipe: TWithStyles.Pipe = (state, next) => {
       // no theme
       applyTheme(pipeId, null, state)
       return next()
-    } else
-      // theme => listen to theme change
-      return <ThemeContextConsumer>{render}</ThemeContextConsumer>
+    }
+    // theme => listen to theme change
+    return <ThemeContextConsumer>{render}</ThemeContextConsumer>
   }
 }

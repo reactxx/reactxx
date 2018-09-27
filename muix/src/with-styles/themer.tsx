@@ -8,24 +8,24 @@ import { mergeSheet } from '../sheeter/merge'
 export const applyTheme = (pipeId: number, theme: TTheme.Theme, state: TWithStyles.InstanceState) => {
   warning(pipeId > 0, 'pipe-first.pipeId must be greater that zero')
 
-  const { props: { classes, classNameX, styleX, ...propsRest }, defaultProps } = state
+  const { props: { classes, classNameX, styleX, themedProps, ...propsRest }, defaultProps } = state
 
   state.pipeStates = []
-  state.sheetQuery = {}
+  //state.sheetQuery = {}
   state.theme = theme
 
   if (defaultProps) {
-    const { classNameX: defaultClassNameX, styleX: defaultStyleX, ...defaultPropsRest } = defaultProps
+    const { classNameX: defaultClassNameX, styleX: defaultStyleX, themedProps: defaultThemedProps, ...defaultPropsRest } = defaultProps
     // defaultProps.classes is merged with cached sheet in createSheetWithTheme
     state.pipeStates[0] = {
-      codeProps: defaultPropsRest,
+      codeProps: [defaultPropsRest, defaultThemedProps ? defaultThemedProps(theme) : null],
       classNameX: atomizeRuleset(defaultClassNameX, theme),
       styleX: atomizeStyle(defaultStyleX, theme),
     }
   }
 
   state.pipeStates[pipeId] = {
-    codeProps: propsRest,
+    codeProps: [propsRest, themedProps ? themedProps(theme) : null],
     classes: atomizeSheet(classes, theme),
     classNameX: atomizeRuleset(classNameX, theme),
     styleX: atomizeStyle(styleX, theme),

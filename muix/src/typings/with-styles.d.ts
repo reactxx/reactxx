@@ -6,10 +6,12 @@ declare namespace TWithStyles {
   // application options
   export interface GlobalState {
     getDefaultTheme?: () => TTheme.Theme
-    createPipeline?: Pipeline
+    createPipeline?: Pipe
     namedThemes?: { [themeName: string]: TTheme.Theme }
-    getPipeCounter?: () => number
+    finishPropsCode?: FinishPropsCode
   }
+
+  export type FinishPropsCode = (codeProps: TComponents.PropsCode, instanceState: TWithStyles.InstanceState) => void
 
   // component type options
   export interface ComponentState<R extends TSheeter.Shape = TSheeter.Shape>  {
@@ -29,12 +31,13 @@ declare namespace TWithStyles {
     props?: TComponents.Props
     pipeStates?: PipeState[]
     sheet?: TAtomize.Sheet
-    sheetQuery?: TVariants.Query
+    //sheetQuery?: TVariants.Query
     theme?: TSheeter.getTheme
+    pipeCounter?: number
   }
 
-  export interface PipeState {
-    codeProps?: TComponents.PropsCode
+  export interface PipeState extends TVariants.PipeState {
+    codeProps?: TComponents.PropsCode | TComponents.PropsCode[]
 
     classNameX?: TAtomize.Ruleset
     styleX?: TSheeter.StyleOrAtomized

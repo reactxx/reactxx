@@ -1,5 +1,22 @@
-import { TComponents,TAtomize, TSheeter } from 'reactxx-typings';
+import { TComponents, TAtomize, TSheeter } from 'reactxx-typings';
 import { isAtomicArray } from './atomize'
+
+export const mergeFlags = (sources: Record<string, true>[]) => {
+    if (!sources || sources.length === 0)
+        return null
+    let res: Record<string, true> = null
+    let canModify = false
+    if (Array.isArray(sources)) sources.forEach(s => {
+        if (!s) return
+        else if (!res) res = s
+        else if (canModify) Object.assign(res, s)
+        else {
+            res = { ...res, ...s }
+            canModify = true
+        }
+    })
+}
+
 
 export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOrAtomized[]) => {
     if (!sources)
@@ -102,28 +119,33 @@ export const mergeSheets = (target: TAtomize.Sheet, sources: TAtomize.Sheet[]) =
     return res
 }
 
-export const mergeCodeProps = (sources: TComponents.PropsCode[]) => {
+export const mergeCodeProps = (sources: (TComponents.PropsCode | TComponents.PropsCode[])[]) => {
     if (!sources || sources.length === 0) return undefined
     let res: TComponents.PropsCode = null
     let canModifyRes = false
-    const push = src => {
-        if (!res) res = src
-        else if (canModifyRes) Object.assign(res, src)
+    const merge = src => {
+        if (!res)
+            res = src
+        else if (canModifyRes)
+            Object.assign(res, src)
         else {
             res = { ...res, ...src }
             canModifyRes = true
         }
     }
+    const push = src => {
+        if (!src) return
+        merge(src)
+        if (window.isWeb) {
+            if (src.$web) merge(src.$web)
+        } else {
+            if (src.$native) merge(src.$native)
+        }
+    }
     sources.forEach(src => {
         if (!src) return
-        push(src)
-        if (window.isWeb) {
-            if (src.$web) push(src.$web)
-        } else {
-            if (src.$native) push(src.$native)
-        }
+        if (Array.isArray(src)) src.forEach(s => push(s))
+        else push(src)
     })
     return res
 }
-
-//const isRulesetArray = obj => Array.isArray(obj) && !isAtomicArray(obj)

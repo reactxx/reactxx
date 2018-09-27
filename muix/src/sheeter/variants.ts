@@ -1,5 +1,5 @@
 import warning from 'warning'
-import { TVariants } from 'reactxx-typings'
+import { TVariants, TComponents } from 'reactxx-typings'
 
 export interface IRegisterVariant {
     name: string,

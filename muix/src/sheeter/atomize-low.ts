@@ -94,7 +94,7 @@ export const atomizeRulesetInner: TVariants.AtomizeRulesetInner = (list, ruleset
     // push to ruleset list
     if (rulesetToQueue) pushToList(list, rulesetToQueue, conditions, path)
 
-    // process variant part of ruleset: $mediaq, $whenFlag, $animation etc.
+    // process variant part of ruleset: $mediaq, $sheetFlags, $animation etc.
     toVariantParts(ruleset).forEach(part => part.proc(
         list, part.part, path, pseudoPrefixes, conditions)
     )

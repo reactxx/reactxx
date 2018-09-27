@@ -34,7 +34,7 @@ const sheet: Types.SheetX<Shape> = {
     fontSize: 24,
     textAlign: 'center',
     color: 'white',
-    $whenFlag: {
+    $sheetFlags: {
       disabled: {
         backgroundColor: 'lightblue',
         color: 'darkgray',
@@ -43,13 +43,13 @@ const sheet: Types.SheetX<Shape> = {
   },
   label: {
     padding: 10,
-    $whenFlag: {
+    $sheetFlags: {
       disabled: {
         color: 'lightgray',
       }
     }
   },
-  // just flag: when used in 'mergeRuleset', header.$whenFlag.disabled or label.$whenFlag.disabled is used
+  // just flag: when used in 'mergeRuleset', header.$sheetFlags.disabled or label.$sheetFlags.disabled is used
   disabled: {},
 }
 

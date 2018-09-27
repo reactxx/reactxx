@@ -13,7 +13,7 @@ export const textSheet: TSheeter.Sheet<TPrimitives.TextShape> = ({
         display: 'inline',
       },
     },
-    $whenFlag: {
+    $sheetFlags: {
       pressable: {
         $web: {
           cursor: 'pointer'
@@ -46,7 +46,7 @@ const webViewRuleset: TSheeter.RulesetWebOrAtomized = {
 export const viewSheet: TSheeter.Sheet<TPrimitives.ViewShape> = ({
   root: {
     $web: webViewRuleset as any,
-    $whenFlag: {
+    $sheetFlags: {
       pressable: {
         $web: {
           cursor: 'pointer'
@@ -64,7 +64,7 @@ export const iconSheet: TSheeter.Sheet<TPrimitives.IconShape> = ({
       fill: 'currentColor',
       fontSize: 'inherited'
     },
-    $whenFlag: {
+    $sheetFlags: {
       pressable: {
         $web: {
           cursor: 'pointer'
@@ -95,7 +95,7 @@ export const scrollViewSheet: TSheeter.Sheet<TPrimitives.ScrollViewShape> = ({
     $native: {
       flexBasis: 0,
     },
-    $whenFlag: {
+    $sheetFlags: {
       horizontal: {
         $web: {
           flexDirection: 'row',
@@ -107,7 +107,7 @@ export const scrollViewSheet: TSheeter.Sheet<TPrimitives.ScrollViewShape> = ({
   },
   container: {
     $web: webViewRuleset as any,
-    $whenFlag: {
+    $sheetFlags: {
       horizontal: {
         $web: {
           flexDirection: 'row'
