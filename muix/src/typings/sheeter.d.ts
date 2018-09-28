@@ -12,11 +12,10 @@ declare namespace TSheeter {
 
   export type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
-    RulesetLow<T, R> &
-    { name?: string }
+    RulesetLow<T, R>
 
-  export interface RulesetLow<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> extends
-    TVariants.VariantPart<T, R> {
+  export interface RulesetLow<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> extends TVariants.VariantPart<T, R>{
+    name?: string
     $native?: RulesetNativeOrAtomized<T, R>// native specific rules
     $web?: RulesetWebOrAtomized<T, R> // web specific rules
   }

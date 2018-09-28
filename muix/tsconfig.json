@@ -41,8 +41,8 @@
       "reactxx-sheet-flags": [
         "src/sheet-flags/index"
       ],
-      "reactxx-sheet-animation": [
-        "src/sheet-animation/index"
+      "reactxx-sheet-transition": [
+        "src/sheet-transition/index"
       ],
       "reactxx-with-styles": [
         "src/with-styles/index"
@@ -97,7 +97,7 @@
 
     "src/with-styles",
 
-    "src/sheet-animation", 
+    "src/sheet-transition", 
     "src/sheet-flags", 
     "src/sheet-widths",
 

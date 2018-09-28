@@ -6,9 +6,9 @@ export * from './$web'
 import { TSheeter, TVariants, TCommonStyles } from 'reactxx-typings'
 import { registerVariant } from 'reactxx-sheeter'
 
-import { TAnimation } from './d-index'
+import { TTransition } from './d-index'
 
-export const initVariant$animation = () => registerVariant({
+export const initVariant$transition = () => registerVariant({
     name: '$animation',
     toVariantProc,
     testCondition
@@ -23,25 +23,8 @@ export const initVariant$animation = () => registerVariant({
 //*********************************************************
 //  PRIVATE
 //*********************************************************
-const enum Consts {
-    name = '$animation'
-}
 
-declare module 'reactxx-typings' {
-    namespace TVariants {
-
-        interface ShapePart {
-            transitions?: TSheeter.EmptyInterface
-        }
-
-        interface VariantPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> {
-            $transition?: TAnimation.Transition
-        }
-
-    }
-}
-
-const toVariantProc: TVariants.ToVariantProc<TAnimation.Transition> = (list, ruleset, path, pseudoPrefixes, conditions) => {
+const toVariantProc: TVariants.ToVariantProc<TTransition.Transition> = (list, ruleset, path, pseudoPrefixes, conditions) => {
 }
 
 const testCondition = (cond, query) => {
