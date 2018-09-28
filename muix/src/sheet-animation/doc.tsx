@@ -2,14 +2,11 @@ import React from 'react'
 
 const sheet = {
     root: {
-        opacity: 0,
-        $transitions: {
-            t$root: {
-                $duration: 400, // chybi-li, bere se z globalniho default
-                $easing: '',
-                opacity: '-50', // '' or '-50' or '50-' or '30-70' or '300' or '200,100' or ',100' or '200,'
-                transform: ''
-            }
+        opacity: 0.5,
+        $transition: {
+            $groupName: 'root', // allow grouping of $transitions for more elements (the same $duration, the same Animation.Value for native etc.)
+            opacity: '-50', // '-50' or '50-' or '30-70' or '300' or '200,100' or ',100' or '200,'
+            transform: true
         },
         $sheetFlags: {
             active: {
@@ -18,15 +15,14 @@ const sheet = {
         }
     },
     label: {
-        opacity: 0,
+        opacity: 1,
         $transitions: {
-            t$root: {
-                opacity: '50-'
-            }
+            $groupName: 'root',
+            opacity: true,
         },
         $sheetFlags: {
             active: {
-                opacity: 1,
+                opacity: 0,
             }
         }
     },
@@ -34,9 +30,9 @@ const sheet = {
         $web: {
             opacity: 0,
             $transition: {
-                $duration: 400, // chybi-li, bere se z globalni default
+                $duration: 400,
                 $easing: '',
-                opacity: '', // jako $transitions
+                opacity: true, 
             },
             ':hover': {
                 opacity: 1,

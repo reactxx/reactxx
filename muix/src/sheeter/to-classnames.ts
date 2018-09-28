@@ -2,6 +2,9 @@ import { TSheeter, TAtomize, TVariants, TComponents } from 'reactxx-typings'
 import { atomizeRuleset, isAtomizedRuleset, isAtomicArray } from './atomize'
 import { testConditions } from './variants'
 
+// platform dependent import
+import {toReactComponent} from 'reactxx-sheeter'
+
 export const toClassNames = (...rulesets: TSheeter.RulesetItem[]) => toClassNamesWithQuery({}, null, rulesets)
 export const toClassNamesWithTheme = (theme, ...rulesets: TSheeter.RulesetItem[]) => toClassNamesWithQuery({}, theme, rulesets)
 
@@ -16,8 +19,13 @@ const propsToDelete: string[] = [ //TComponents.CommonPropertiesCodeKeys[] = [
     'sheetQuery', 'classes', 'toClassNames', 'styleX', 'classNameX', 'theme'
 ]
 
+const finishAtomicArray = (res: TAtomize.AtomicArray) => {
+    res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
+    res.toReactWebClassName = toReactComponent.toReactWebClassName
+    res.toReactNativeStyle = toReactComponent.toReactNativeStyle
+}
 const emptyAtomicArray = [] as TAtomize.AtomicArray
-emptyAtomicArray[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
+finishAtomicArray(emptyAtomicArray)
 
 export const toClassNamesWithQuery = (query: TVariants.Query, theme, rulesets: TSheeter.ClassNameOrAtomized) => {
     if (!rulesets) return emptyAtomicArray
@@ -50,7 +58,7 @@ export const toClassNamesWithQuery = (query: TVariants.Query, theme, rulesets: T
 
     // concat values
     const res = Array.prototype.concat.apply([], values) as TAtomize.AtomicArray
-    res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
+    finishAtomicArray(res)
     return res
 }
 

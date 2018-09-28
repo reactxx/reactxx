@@ -29,9 +29,9 @@ declare namespace TComponents {
   - custom components (e.g. <IconButton classNameX={...})
   */
   export interface ReactsCommonProperties<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
-    classNameX?: TSheeter.ClassNameOrAtomized<R>
+    classNameX?: TAtomize.AtomicArray // TSheeter.ClassNameOrAtomized<R>
     styleX?: TSheeter.StyleOrAtomized<R>
-    classes?: TSheeter.PartialSheet<R> // cross platform sheet
+    //classes?: TSheeter.PartialSheet<R> // cross platform sheet
   }
 
   export interface PropsLow<R extends Shape> { 
@@ -65,7 +65,7 @@ declare namespace TComponents {
     styleX?: TSheeter.StyleItem
     children?: React.ReactNode
     classes?: TAtomize.Sheet<R>
-    toClassNames?: (rulesets: TSheeter.RulesetOrAtomized[]) => TAtomize.AtomicArray
+    toClassNames?: (rulesets: TSheeter.RulesetOrAtomized) => TAtomize.AtomicArray
     theme?: TSheeter.getTheme<R>
   }
 

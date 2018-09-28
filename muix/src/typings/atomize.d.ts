@@ -1,4 +1,4 @@
-import { TValue, TSheeter, TVariants } from './index'
+import { TNativeRuleValue, TSheeter, TVariants } from './index'
 
 declare namespace TAtomize {
 
@@ -32,18 +32,29 @@ declare namespace TAtomize {
     conditions?: TVariants.Conditions // conditions (when is ruleset used)
   }
 
-  export type AtomicArray = Atomic[] & { [TypedInterfaceTypes.prop]: TypedInterfaceTypes.atomicArray } // last value in array (with the same propId) wins!
+  export type AtomicArray = {
+    [TypedInterfaceTypes.prop]: TypedInterfaceTypes.atomicArray
+  } &
+    ToReactStyling &
+    Atomic[]// last value in array (with the same propId) wins!
+
+  export interface ToReactStyling {
+    toReactWebClassName?: (array: AtomicArray) => string
+    toReactNativeStyle?: (array: AtomicArray) => NativeStyle
+  }
+
+  export type NativeStyle = Record<string, TNativeRuleValue>
 
   export type Atomic = AtomicNative | AtomicWeb
   export type AtomicWeb = string // fela class name. propId's are cached (propId = fela.renderer.propIdCache[valueWeb])
   export interface AtomicNative { //extends TypedInterface {
     propId: string // property name
-    value: TValue // propert value
+    value: TNativeRuleValue // propert value
     tracePath?: string // for Dev: path to class source
   }
   export type AtomicNatives = AtomicNative[]
 
 
-  export type Ruleset = TAtomize.AtomizedRuleset | TAtomize.AtomicArray 
+  export type Ruleset = TAtomize.AtomizedRuleset | TAtomize.AtomicArray
 
 }

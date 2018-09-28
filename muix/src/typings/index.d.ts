@@ -5,7 +5,7 @@ export { TComponents } from './components'
 export { TTheme } from './themer'
 export { TWithStyles } from './with-styles'
 
-export type TValue = number | string
+export type TNativeRuleValue = number | string | /*for native animation*/{}
 
 import { TSheeter, TAtomize, TCommonStyles } from './index'
 

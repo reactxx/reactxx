@@ -11,10 +11,24 @@ export const initVariant$sheetFlags = () => registerVariant({
     testCondition
 })
 
-export const finishPropsCode: TWithStyles.FinishPropsCode = (codeProps, state) => {
+// export const finishPropsCode: TWithStyles.FinishPropsCode = (propsCode, state) => {
+//     const { pipeStates } = state
+//     propsCode.toClassNames = toClassNamesForBind(mergeFlags(pipeStates.map(p => p.flags)), propsCode)
+// }
+
+export const sheetFlags_finishPropsCode1 = (state: TWithStyles.InstanceState) => {
     const { pipeStates } = state
-    codeProps.toClassNames = toClassNamesForBind(mergeFlags(pipeStates.map(p => p.flags)), codeProps)
+    return mergeFlags(pipeStates.map(p => p.flags))
 }
+
+export const sheetFlags_finishPropsCode2 = (pipeFlags: Record<string, true>, propsCode: TComponents.PropsCode) => {
+    const { sheetFlags } = propsCode
+    const sheetQuery: TVariants.Query = {
+        $sheetFlags: pipeFlags && sheetFlags ? { ...pipeFlags, ...sheetFlags } : sheetFlags ? sheetFlags : pipeFlags
+    }
+    return sheetFlags
+}
+
 
 export type getSheetFlags<R extends TSheeter.Shape = TSheeter.Shape> = keyof R['flags']
 
@@ -47,17 +61,17 @@ declare module 'reactxx-typings' {
 //  PRIVATE
 //*********************************************************
 
-const toClassNamesForBind = (pipeFlags: Record<string, true>, propsCode: TComponents.PropsCode) => {
+// const toClassNamesForBind = (pipeFlags: Record<string, true>, propsCode: TComponents.PropsCode) => {
 
-    return (rulesets: TSheeter.RulesetItem[]) => {
-        const {sheetFlags} = propsCode
-        const sheetQuery: TVariants.Query = {
-            $sheetFlags: pipeFlags && sheetFlags ? {...pipeFlags, ...sheetFlags} : sheetFlags ? sheetFlags : pipeFlags
-        }
-        return toClassNamesWithQuery(sheetQuery, propsCode.theme, rulesets)
-    }
+//     return (rulesets: TSheeter.RulesetItem[]) => {
+//         const { sheetFlags } = propsCode
+//         const sheetQuery: TVariants.Query = {
+//             $sheetFlags: pipeFlags && sheetFlags ? { ...pipeFlags, ...sheetFlags } : sheetFlags ? sheetFlags : pipeFlags
+//         }
+//         return toClassNamesWithQuery(sheetQuery, propsCode.theme, rulesets)
+//     }
 
-}
+// }
 
 interface WhenFlagCondition extends TVariants.Condition {
     type: Consts.name

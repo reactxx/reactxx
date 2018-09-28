@@ -1,4 +1,4 @@
-import { TAtomize, TValue } from 'reactxx-typings'
+import { TAtomize, TNativeRuleValue } from 'reactxx-typings'
 
 export const toAtomicArray: TAtomize.ToAtomicClassesProc = (style, tracePath) => {
     const res: TAtomize.AtomicArray = [] as any
@@ -8,7 +8,7 @@ export const toAtomicArray: TAtomize.ToAtomicClassesProc = (style, tracePath) =>
         if (propId.charAt(0) === '$') continue
         res.push({
             propId,
-            value: style[propId] as TValue,
+            value: style[propId] as TNativeRuleValue,
             //[TCompiler.TypedInterfaceProp]: TCompiler.TypedInterfaceTypes.nativeValue,
             ...DEV_MODE ? { tracePath } : null
         })

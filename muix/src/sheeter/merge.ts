@@ -15,6 +15,7 @@ export const mergeFlags = (sources: Record<string, true>[]) => {
             canModify = true
         }
     })
+    return res
 }
 
 

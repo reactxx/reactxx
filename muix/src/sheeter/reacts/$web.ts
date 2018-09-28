@@ -1,10 +1,11 @@
 import React from 'react'
+import warning from 'warning'
 import { renderer } from 'reactxx-fela'
 import { TAtomize, TComponents, TSheeter } from 'reactxx-typings'
 
 import { toClassNamesWithQuery, deleteSystemProps } from '../to-classnames'
 import { mergeStyles } from '../merge'
-import { isReactXXComponent} from '../atomize'
+import { isReactXXComponent } from '../atomize'
 /******************************************
   EXTEND REACT
 *******************************************/
@@ -18,7 +19,7 @@ declare module 'react' {
 }
 
 export const createElement = (type, props: TComponents.ReactsCommonProperties & { className?, style?} & TComponents.Events, ...children) => {
-  
+
   if (!props) return React.createElement(type, props, ...children)
 
   const isXXComponent = isReactXXComponent(type)
@@ -33,13 +34,14 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   const { classNameX, styleX } = props
 
   if (classNameX) {
-      const compiled = toClassNamesWithQuery(null, null, classNameX)
-      if (!props.className) props.className = applyLastWinStrategy(compiled)
-      else props.className += ' ' + applyLastWinStrategy(compiled)
+    //const compiled = toClassNamesWithQuery(null, null, classNameX)
+    warning(classNameX.toReactWebClassName, 'Missing classNameX.toReactComponentWeb')
+    const className = classNameX.toReactWebClassName(classNameX) // applyLastWinStrategy(compiled)
+    props.className = props.className ? props.className + ' ' + className : className
   }
 
   if (styleX) {
-      props.style = mergeStyles(styleX)
+    props.style = mergeStyles(styleX)
   }
 
   deleteSystemProps(props)
@@ -60,22 +62,26 @@ const applyLastWinStrategy = (values: TAtomize.AtomicArray) => {
   return res.join(' ')
 }
 
+export const toReactComponent: TAtomize.ToReactStyling = {
+  toReactWebClassName: applyLastWinStrategy
+}
+
 const consolidateEvents = (props: TComponents.Props & TComponents.Events & TComponents.EventsWeb) => {
-    const {onPress, onLongPress, onPressIn, onPressOut, $web} = props
-    if (onPress) {
-      if (!$web || !$web.onClick) props.onClick = onPress
-      delete props.onPress
-    }
-    if (onPressIn) {
-      if (!$web || !$web.onMouseDown) props.onMouseDown = onPress
-      delete props.onPressIn
-    }
-    if (onPressOut) {
-      if (!$web || !$web.onMouseUp) props.onMouseUp = onPress
-      delete props.onPressOut
-    }
-    if (onLongPress) {
-      delete props.onLongPress
-    }
+  const { onPress, onLongPress, onPressIn, onPressOut, $web } = props
+  if (onPress) {
+    if (!$web || !$web.onClick) props.onClick = onPress
+    delete props.onPress
+  }
+  if (onPressIn) {
+    if (!$web || !$web.onMouseDown) props.onMouseDown = onPress
+    delete props.onPressIn
+  }
+  if (onPressOut) {
+    if (!$web || !$web.onMouseUp) props.onMouseUp = onPress
+    delete props.onPressOut
+  }
+  if (onLongPress) {
+    delete props.onLongPress
+  }
 
 }
