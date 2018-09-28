@@ -19,7 +19,7 @@ declare module 'reactxx-typings' {
             [Consts.name]?: WhenFlagPart<T, R>
         }
         type WhenFlagPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
-            getFlagsAll<R> extends never ? TSheeter.FakeInterface :
+            getFlagsAll<R> extends never ? never :
             PartialRecord<getFlagsAll<R>, TSheeter.RulesetOrAtomized<T, R>>
     }
 }

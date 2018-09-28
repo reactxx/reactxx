@@ -34,9 +34,9 @@ declare namespace TComponents {
     classes?: TSheeter.PartialSheet<R> // cross platform sheet
   }
 
-  export interface PropsLow<R extends Shape> { //extends CommonPropertiesWithTheme<R> {
-    $web?: Partial<TSheeter.getPropsWeb<R>> //web specific props
-    $native?: Partial<TSheeter.getPropsNative<R>> //native specific props
+  export interface PropsLow<R extends Shape> { 
+    $web?: Partial<TSheeter.getPropsWeb<R> & TSheeter.getProps<R>> //web specific props
+    $native?: Partial<TSheeter.getPropsNative<R> & TSheeter.getProps<R>> //native specific props
   }
   export type Props<R extends Shape = Shape> = PartialOverwrite<TSheeter.getProps<R>,
     CommonProperties<R> & 

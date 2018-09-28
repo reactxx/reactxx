@@ -43,6 +43,7 @@ export interface SheetExtension extends AnimationConfig {
   [Consts.data]: AnimationConfig & { useNativeDriver?: boolean }
 }
 
+// opacity: [0, 1, '-50'] or opacity: [0, 1, '30-80'] or opacity: [0, 1] or opacity: [0, 1, '50-']
 type AnimRuleseLow = { [fieldName: string]: [number, number] | [number, number, string] | [string, string] | [string, string, string] }
 
 export type AnimRuleset = AnimRuleseLow & { transform?: AnimTransform }

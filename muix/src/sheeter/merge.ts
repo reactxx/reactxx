@@ -124,6 +124,7 @@ export const mergeCodeProps = (sources: (TComponents.PropsCode | TComponents.Pro
     let res: TComponents.PropsCode = null
     let canModifyRes = false
     const merge = src => {
+        if (!src) return
         if (!res)
             res = src
         else if (canModifyRes)
@@ -146,6 +147,24 @@ export const mergeCodeProps = (sources: (TComponents.PropsCode | TComponents.Pro
         if (!src) return
         if (Array.isArray(src)) src.forEach(s => push(s))
         else push(src)
+    })
+    return res
+}
+
+export const mergeUtil = (objs: {}[]) => {
+    if (!objs || objs.length===0) return null
+    let res: TComponents.PropsCode = null
+    let canModifyRes = false
+    objs.forEach(src => {
+        if (!src) return
+        if (!res)
+            res = src
+        else if (canModifyRes)
+            Object.assign(res, src)
+        else {
+            res = { ...res, ...src }
+            canModifyRes = true
+        }
     })
     return res
 }

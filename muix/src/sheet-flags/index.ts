@@ -1,5 +1,5 @@
 import { TComponents, TSheeter, TVariants, TWithStyles } from 'reactxx-typings'
-import { registerVariant, atomizeRulesetInner, mergeFlags, toClassNamesWithQuery } from 'reactxx-sheeter'
+import { registerVariant, atomizeRulesetInner, mergeFlags, toClassNamesWithQueryEx, toClassNamesWithQuery } from 'reactxx-sheeter'
 
 export const enum Consts {
     name = '$sheetFlags'
@@ -33,8 +33,7 @@ declare module 'reactxx-typings' {
         }
 
         interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> {
-            //toFlagClassNames?: (flags: WhenFlagQuery<R>, rulesets: TSheeter.RulesetOrAtomized[]) => TAtomize.AtomicArray
-            sheetQuery?: Query<R>
+            sheetFlags?: WhenFlagQuery<R> // flags assigned in component code
         }
 
         interface PipeState {
@@ -50,14 +49,13 @@ declare module 'reactxx-typings' {
 
 const toClassNamesForBind = (pipeFlags: Record<string, true>, propsCode: TComponents.PropsCode) => {
 
-    const { sheetQuery, sheetQuery: { $sheetFlags } } = propsCode
-    const flags = $sheetFlags && pipeFlags ? { ...pipeFlags, ...$sheetFlags } : pipeFlags ? pipeFlags : $sheetFlags
-
-    return (rulesets: TSheeter.RulesetItem[]) => toClassNamesWithQuery(rulesetNames => {
-        
-        sheetQuery.$sheetFlags = rulesetNames && flags ? { ...flags, ...rulesetNames } : rulesetNames ? rulesetNames : flags
-        return sheetQuery
-    }, propsCode.theme, rulesets)
+    return (rulesets: TSheeter.RulesetItem[]) => {
+        const {sheetFlags} = propsCode
+        const sheetQuery: TVariants.Query = {
+            $sheetFlags: pipeFlags && sheetFlags ? {...pipeFlags, ...sheetFlags} : sheetFlags ? sheetFlags : pipeFlags
+        }
+        return toClassNamesWithQuery(sheetQuery, propsCode.theme, rulesets)
+    }
 
 }
 
@@ -99,4 +97,16 @@ const wrapPseudoPrefixes = (rules: {}, pseudoPrefixes: string[]) => {
 
 const testCondition = (cond: WhenFlagCondition, query: TVariants.Query) =>
     query.$sheetFlags && query.$sheetFlags[cond.flagName]
+
+// const toClassNamesForBindEx = (pipeFlags: Record<string, true>, propsCode: TComponents.PropsCode) => {
+
+//     return (rulesets: TSheeter.RulesetItem[]) => toClassNamesWithQueryEx(rulesetNames => {
+//         const { sheetQuery, sheetQuery: { $sheetFlags } } = propsCode
+//         const flags = $sheetFlags && pipeFlags ? { ...pipeFlags, ...$sheetFlags } : pipeFlags ? pipeFlags : $sheetFlags
+
+//         sheetQuery.$sheetFlags = rulesetNames && flags ? { ...flags, ...rulesetNames } : rulesetNames ? rulesetNames : flags
+//         return sheetQuery
+//     }, propsCode.theme, rulesets)
+
+// }
 

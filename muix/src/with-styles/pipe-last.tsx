@@ -16,7 +16,6 @@ export const lastPipe: TWithStyles.Pipe = (state, next) => {
       classNameX: mergeRulesets(pipeStates.map(p => p.classNameX)),
       classes: mergeSheets(state.sheet, pipeStates.map(p => p.classes)),
       styleX: mergeStyles(pipeStates.map(p => p.styleX)),
-      sheetQuery: {}
     }
     // state.sheetQuery.$sheetFlags = mergeFlags(pipeStates.map(p => p.flags))
     // codeProps.toClassNames = toClassNamesForBind(state.sheetQuery, state.theme)

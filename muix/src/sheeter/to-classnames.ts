@@ -19,8 +19,43 @@ const propsToDelete: string[] = [ //TComponents.CommonPropertiesCodeKeys[] = [
 const emptyAtomicArray = [] as TAtomize.AtomicArray
 emptyAtomicArray[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
 
+export const toClassNamesWithQuery = (query: TVariants.Query, theme, rulesets: TSheeter.ClassNameOrAtomized) => {
+    if (!rulesets) return emptyAtomicArray
+
+    if (isAtomicArray(rulesets)) return rulesets
+
+    const values: TAtomize.AtomicArray[] = []
+
+    const push = val => {
+        if (val) return
+        if (isAtomicArray(val)) {
+            values.push(val)
+            return
+        }
+        if (!isAtomizedRuleset(val))
+            atomizeRuleset(val, theme)
+
+        for (let j = 0; j < val.list.length; j++) {
+            const rsi = val.list[j]
+            if (!testConditions(rsi.conditions, query as TVariants.Query)) continue
+            values.push(rsi.atomicArray)
+        }
+
+    }
+
+    if (Array.isArray(rulesets))
+        rulesets.forEach(r => push(r))
+    else
+        push(rulesets)
+
+    // concat values
+    const res = Array.prototype.concat.apply([], values) as TAtomize.AtomicArray
+    res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
+    return res
+}
+
 // merge rulesets and apply query to ruleset's conditional parts ($sheetFlagss, $mediaq etc.)
-export const toClassNamesWithQuery = (query: TVariants.Query | ((usedRuesets: Record<string, true>) => TVariants.Query), theme, rulesets: TSheeter.ClassNameOrAtomized) => {
+export const toClassNamesWithQueryEx = (query: TVariants.Query | ((usedRuesets: Record<string, true>) => TVariants.Query), theme, rulesets: TSheeter.ClassNameOrAtomized) => {
 
     if (!rulesets) return emptyAtomicArray
 
@@ -31,7 +66,10 @@ export const toClassNamesWithQuery = (query: TVariants.Query | ((usedRuesets: Re
 
     const atomize = val => {
         if (val) return
-        if (isAtomicArray(val)) atomized.push(val)
+        if (isAtomicArray(val)) {
+            atomized.push(val)
+            return
+        }
         if (!isAtomizedRuleset(val))
             atomizeRuleset(val, theme)
         atomized.push(val)
