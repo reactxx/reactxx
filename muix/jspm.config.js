@@ -13,8 +13,16 @@ SystemJS.config({
     "reactxx-typings": "deploy/lib/typings/index",
     "reactxx-fela": "deploy/lib/fela/index",
     "reactxx-sheeter": "deploy/lib/sheeter/index",
-    "reactxx-sheeter-variants": "deploy/lib/sheeter-variants/index", 
     "reactxx-with-styles": "deploy/lib/with-styles/index", 
+
+    "reactxx-sheet-flags": "deploy/lib/sheet-flags/index", 
+    "reactxx-sheet-flags/tests/index": "deploy/lib/sheet-flags/tests/index", 
+
+    "reactxx-sheet-widths": "deploy/lib/sheet-widths/index", 
+    "reactxx-sheet-widths/tests/index": "deploy/lib/sheet-widths//tests/index", 
+
+    "reactxx-sheet-transition": "deploy/lib/sheet-transition/index", 
+    "reactxx-sheet-transition/tests/index": "deploy/lib/sheet-transition/tests/index", 
 
     "reactxx-core/tests/index": "deploy/lib/core/tests/index",
     "reactxx-core": "deploy/lib/core/index",

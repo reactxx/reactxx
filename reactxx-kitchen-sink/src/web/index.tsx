@@ -34,7 +34,9 @@ import ReactDOM from 'react-dom'
 // import { run } from 'reactxx-core'
 // run()
 
-import App from 'reactxx-core/tests/index'
+//import App from 'reactxx-core/tests/index'
+import App from 'reactxx-sheet-transition/tests/index'
 
+                 
 
 ReactDOM.render(<App />, document.getElementById('root')) 

@@ -41,6 +41,9 @@
       "reactxx-sheet-flags": [
         "src/sheet-flags/index"
       ],
+      "reactxx-sheet-transition/*": [
+        "src/sheet-transition/*"
+      ],
       "reactxx-sheet-transition": [
         "src/sheet-transition/index"
       ],
