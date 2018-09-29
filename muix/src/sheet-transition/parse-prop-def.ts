@@ -1,16 +1,17 @@
 import warning from 'warning'
 
 /* interval: 
-  '': all duration
+  '': duration
   '-50', '50-', '30-70': percent of duration
   7: '300': 0-300 ms 
   2 '200,100': 100ms start, 200ms len
   6',100': from 100ms to duration end
-  5'200,' from 200ms from duration end to duration end
+  5'200,' from 200ms (from duration end) to duration end
 */
 export const parsePropDef = (interval: string, $duration: number) => {
     let leftGap = 0, rightGap = 0, duration = $duration
     warning(typeof interval === 'string', 'Interval must be string')
+
     if (interval === '') return { leftGap, rightGap, duration }
 
     const parsed = regx.exec(interval)

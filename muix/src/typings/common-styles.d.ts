@@ -4,11 +4,29 @@ import CSS from 'csstype';
 
 declare namespace TCommonStyles {
 
+  export interface Transform {
+    perspective?: number
+    rotate?: string
+    rotateX?: string
+    rotateY?: string
+    rotateZ?: string
+    scale?: number
+    scaleX?: number
+    scaleY?: number
+    translateX?: number
+    translateY?: number
+    skewX?: string
+    skewY?: string
+    time?: string
+  }
+  
+
   //React Native styles compatible with Web React.CSSProperties
 
   export type FlexAlignType = "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
 
   export interface FlexStyle {
+    transform?: Transform
     alignContent?: "flex-start" | "flex-end" | "center" | "stretch" | "space-between" | "space-around"
     alignItems?: FlexAlignType
     alignSelf?: "auto" | FlexAlignType

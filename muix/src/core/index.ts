@@ -8,6 +8,7 @@ import { initVariant$transition, transition_finishPropsCode3, TTransition } from
 import { widthsPipe, getBreakpoints } from 'reactxx-sheet-widths'
 import { initVariant$sheetFlags, Consts, getSheetFlags, sheetFlags_finishPropsCode1, sheetFlags_finishPropsCode2 } from 'reactxx-sheet-flags'
 
+// workaround due to https://github.com/Microsoft/TypeScript/issues/27448
 export interface TSBugHelper<R extends TSheeter.Shape> {
     rulesetView?: TSheeter.Ruleset<'View', R>
     rulesetText?: TSheeter.Ruleset<'Text', R>
