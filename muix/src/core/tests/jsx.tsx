@@ -6,12 +6,12 @@ interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'> & TSheeter.ShapeViews<'label'>
     native: TSheeter.ShapeViews<'nativeOnly'>
     web: TSheeter.ShapeMarks<'webOnly'>
-    flags: TSheeter.ShapeMarks<'disabled' | 'active'>
+    sheetFlags: TSheeter.ShapeMarks<'disabled' | 'active'>
 }
 
 interface ShapeSimple2 extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
-    flags: TSheeter.ShapeMarks<'disabled'>
+    sheetFlags: TSheeter.ShapeMarks<'disabled'>
 }
 
 const sheetSimple2: TSheeter.SheetCreator<ShapeSimple2> = theme => ({
@@ -26,7 +26,7 @@ const sheetSimple2: TSheeter.SheetCreator<ShapeSimple2> = theme => ({
 
 interface ShapeSimple extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
-    flags: TSheeter.ShapeMarks<'disabled'>
+    sheetFlags: TSheeter.ShapeMarks<'disabled'>
 }
 
 const sheetSimple: TSheeter.Sheet<ShapeSimple> = {

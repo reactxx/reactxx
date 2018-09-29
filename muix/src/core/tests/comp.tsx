@@ -6,7 +6,7 @@ interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root'> & TSheeter.ShapeTexts<'label'>
     native: TSheeter.ShapeViews<'nativeOnly'>
     web: TSheeter.ShapeMarks<'webOnly'>
-    flags: TSheeter.ShapeMarks<'isDisabled' | 'isActive'>
+    sheetFlags: TSheeter.ShapeMarks<'isDisabled' | 'isActive'>
     breakpoints: TSheeter.ShapeMarks<'isTabletWidth'>
     style: 'View'
 }

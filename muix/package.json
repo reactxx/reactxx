@@ -35,7 +35,7 @@
     "@types/warning": "^3.0.0",
     "fela": "^6.1.3",
     "lite-server": "^2.4.0",
-    "typescript": "^3.1.0-dev.20180829"
+    "typescript": "^3.2.0-dev.20180929"
   },
   "jspm": {
     "name": "reactxx-all",

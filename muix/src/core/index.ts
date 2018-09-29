@@ -4,13 +4,25 @@ export * from 'reactxx-with-styles'
 
 import { TCommonStyles, TSheeter } from 'reactxx-typings'
 import { toClassNamesWithQuery } from 'reactxx-sheeter'
-import { initVariant$transition, transition_finishPropsCode3 } from 'reactxx-sheet-transition'
+import { initVariant$transition, transition_finishPropsCode3, TTransition } from 'reactxx-sheet-transition'
 import { widthsPipe, getBreakpoints } from 'reactxx-sheet-widths'
 import { initVariant$sheetFlags, Consts, getSheetFlags, sheetFlags_finishPropsCode1, sheetFlags_finishPropsCode2 } from 'reactxx-sheet-flags'
 
+export interface TSBugHelper<R extends TSheeter.Shape> {
+    rulesetView?: TSheeter.Ruleset<'View', R>
+    rulesetText?: TSheeter.Ruleset<'Text', R>
+    transitionView?: TTransition.Transition<'View', R>
+    transitionText?: TTransition.Transition<'Text', R>
+    transitionNativeView?: TTransition.RulesetNative<'View'>
+    transitionNativeText?: TTransition.RulesetNative<'Text'>
+    cssProperties?: React.CSSProperties
+    sheet?: TSheeter.Sheet<R>
+}
 
-type getFlagsAll<R extends TSheeter.Shape = TSheeter.Shape> =
-    TSheeter.RulesetNamesAll<R> | getSheetFlags<R> | getBreakpoints<R>
+
+
+export type getFlagsAll<R extends TSheeter.Shape = TSheeter.Shape> =
+    getSheetFlags<R> | getBreakpoints<R> // TSheeter.RulesetNamesAll<R> | 
 
 declare module 'reactxx-typings' {
 

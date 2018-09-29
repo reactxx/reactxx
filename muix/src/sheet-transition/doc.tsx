@@ -1,71 +1,59 @@
 import React from 'react'
 import { TTransition } from './d-index'
 import { TCommonStyles, TVariants, TSheeter } from 'reactxx-typings'
-import { toVariantParts } from 'reactxx-core';
+import { toVariantParts, TSBugHelper, getFlagsAll } from 'reactxx-core';
+import { getSheetFlags } from 'reactxx-sheet-flags';
 
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root' | 'label'>
     transitions: TSheeter.ShapeMarks<'mobile' | 'tablet'>
+    //sheetFlags: TSheeter.ShapeMarks<'disabled'>
 }
 
-const tt: TTransition.RulesetCommon<'View'> = {
-    margin: '',
-    //color: '',
+//https://github.com/Microsoft/TypeScript/issues/27448
+interface Low {
 }
 
-const ttt: TCommonStyles.RulesetCommon<'View'> & TVariants.VariantPart<'View', Shape> = {
-    margin: 0,
-    $transition: {
-        //v:false,
-        $duration: 200,
+interface TransitionLow {
+    native: { 
+        margin: string 
+    }
+}
+
+const testWRONG: TransitionLow & Low = {
+    native: {
         margin: '',
-        $native: {
-            margin: '',
-            color: '', 
-            //padding: '',
-        }
-        //color: '',
-    },
-    //color: ''
+        color: '',  // Object literal may only specify known properties,...ERROR EXPECTED
+    }
 }
 
+const tsBug: TSBugHelper<Shape> = {}
 
-const t: TSheeter.RulesetOrAtomized<'View', Shape> = {
-    //margin: 0,
-    $transition: {
-        $duration: 200,
-        margin: '',
-        color: '',
-    },
-    //color: ''
-}
-t.$transition = {
-    //$duration: 200,
-    margin: '',
-    //color: ''
-    //x:1,
-}
-
-
-//t.$transition.$native
-
-
-const sheet1: TSheeter.Sheet<Shape> = {
-    root: {
-        $transition: {
+const sheet1: Shape['$SheetOrCreator'] = theme => tsBug.sheet = {
+    root: tsBug.rulesetView = {
+        margin: 0,
+        $transition: tsBug.transitionView = {
             $groupName: 'mobile',
             $duration: 400,
-            $native: {
+            $native: tsBug.transitionNativeView = {
                 width: '',
+                //color: '',
             },
-            $web: {
-                cursor: ''
+            $web: tsBug.cssProperties = {
+                cursor: '',
             },
-            //opacity: '',
-            color: '',
-        }
+            opacity: '',
+            //color: '',
+        },
+        //$sheetFlags: {},
+        //$sheetFlags: {
+
+        //disabled:{
+        //color: '',
+        //}
+        //}
     },
-    label: {
+    label: tsBug.rulesetView = {
 
     },
 }
@@ -76,7 +64,7 @@ const sheet = {
         $transition: {
             $groupName: 'root', // allow grouping of $transitions for more elements (the same $duration, the same Animation.Value for native etc.)
             opacity: '-50', // '-50' or '50-' or '30-70' or '300' or '200,100' or ',100' or '200,'
-            transform: true
+            transform: ''
         },
         $sheetFlags: {
             active: {
@@ -102,7 +90,7 @@ const sheet = {
             $transition: {
                 $duration: 400,
                 $easing: '',
-                opacity: '', 
+                opacity: '',
             },
             ':hover': {
                 opacity: 1,

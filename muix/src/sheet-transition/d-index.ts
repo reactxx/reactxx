@@ -5,7 +5,7 @@ declare module 'reactxx-typings' {
     namespace TVariants {
 
         interface ShapePart {
-            transitions?: TSheeter.EmptyInterface
+            transitions: TSheeter.EmptyInterface
         }
 
         interface VariantPart<T extends TCommonStyles.RulesetNativeIds, R extends TSheeter.Shape> {
