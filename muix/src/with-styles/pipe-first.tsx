@@ -1,6 +1,6 @@
 import React from 'react';
 import { TTheme, TWithStyles } from 'reactxx-typings';
-import { globalOptions } from './global-state'
+import { globalOptions } from 'reactxx-sheeter';
 import { applyTheme, ThemeContextConsumer, defaultThemeName } from './themer'
 
 export const firstPipe: TWithStyles.Pipe = (state, next) => {

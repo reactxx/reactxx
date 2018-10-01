@@ -1,5 +1,4 @@
-﻿export * from './wrapper'
-export { TCommonStyles } from './common-styles'
+﻿export { TCommonStyles } from './common-styles'
 export { TAtomize } from './atomize'
 export { TSheeter } from './sheeter'
 export { TComponents } from './components'
@@ -11,6 +10,10 @@ export type TNativeRuleValue = number | string | /*for native animation*/{}
 import { TSheeter, TAtomize, TCommonStyles } from './index'
 
 export namespace TVariants {
+
+    interface Deffered {
+        deffered?: true
+    }
 
     type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
         TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web

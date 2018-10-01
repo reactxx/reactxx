@@ -5,7 +5,7 @@ export const enum Consts {
     name = '$sheetFlags'
 }
 
-export const initVariant$sheetFlags = () => registerVariantHandler({
+export const sheetFlags_initVariant = () => registerVariantHandler({
     name: Consts.name,
     toAtomicRuleset,
     testAtomicRuleset
@@ -16,12 +16,12 @@ export const initVariant$sheetFlags = () => registerVariantHandler({
 //     propsCode.toClassNames = toClassNamesForBind(mergeFlags(pipeStates.map(p => p.flags)), propsCode)
 // }
 
-export const sheetFlags_finishPropsCode1 = (state: TWithStyles.InstanceState) => {
+export const sheetFlags_finalizePropsCode1 = (state: TWithStyles.InstanceState) => {
     const { pipeStates } = state
     return mergeFlags(pipeStates.map(p => p.sheetFlags))
 }
 
-export const sheetFlags_finishPropsCode2 = (pipeFlags: Record<string, boolean>, propsCode: TComponents.PropsCode) => {
+export const sheetFlags_finalizePropsCode2 = (pipeFlags: Record<string, boolean>, propsCode: TComponents.PropsCode) => {
     const { sheetFlags } = propsCode
     const sheetQuery: TVariants.Query = {
         $sheetFlags: pipeFlags && sheetFlags ? { ...pipeFlags, ...sheetFlags } : sheetFlags ? sheetFlags : pipeFlags

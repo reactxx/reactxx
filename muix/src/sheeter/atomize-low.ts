@@ -5,7 +5,7 @@ import { atomizeVariants } from './variants'
 import { isAtomicArray, isAtomizedRuleset } from './atomize'
 
 // platform dependent import
-import { toAtomicArray } from 'reactxx-sheeter'
+import { toPlatformAtomizeRuleset } from 'reactxx-sheeter'
 
 // if single style without $web prop, then it is modified by setting TypedInterfaceTypes.atomizedStyleWeb flag
 // export const atomizeStyleWeb = (st: TSheeter.StyleOrAtomizedWeb) => {
@@ -114,5 +114,5 @@ export const atomizeRulesetInner: TVariants.AtomizeRulesetInner = (list, ruleset
 
 const pushToList = (list: TAtomize.Variants, ruleset: TSheeter.Ruleset, conditions: TVariants.Conditions, path: string) => {
     if (!ruleset) return
-    list.push({ atomicArray: toAtomicArray(ruleset, path), conditions })
+    list.push({ atomicArray: toPlatformAtomizeRuleset(ruleset, path), conditions })
 }

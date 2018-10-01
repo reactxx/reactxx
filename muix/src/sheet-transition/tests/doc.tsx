@@ -6,6 +6,7 @@ import { getSheetFlags } from 'reactxx-sheet-flags';
 
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root' | 'label'> & TSheeter.ShapeTexts<'text'>
+    style: 'View'
     transitionGroups: TSheeter.ShapeMarks<'mobile' | 'tablet'>
     sheetFlags: TSheeter.ShapeMarks<'active'>
 }
@@ -17,15 +18,15 @@ interface Shape2 extends TSheeter.ShapeAncestor {
 const Comp: TComponents.SFC<Shape> = props => null
 const Comp2: TComponents.SFC<Shape2> = props => null
 
-const Test1 = <Comp transitionGroups={{ mobile: { duration: 200 }, tablet: { duration: 200 } }} />
-const Test2 = <Comp2 $web={{}} />
+const Test1 = <Comp  styleX={{margin:0}} />
+const Test2 = <Comp2/>
 
 export type Wrapper<T> = {
     [P in keyof T]: T[P]
 }
 
 type Sht = Record<'root', {
-    $transitionGroup?: TTransition.TransitionGroup<'View', Shape>
+    $transitionGroup?: TTransition.Group<'View', Shape>
 }>
 
 const sht: Sht = {

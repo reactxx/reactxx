@@ -1,6 +1,7 @@
 import { renderer } from 'reactxx-fela'
 import { TAtomize } from 'reactxx-typings'
 
-export const toAtomicArray: TAtomize.ToAtomicClassesProc = renderer.renderRuleEx
+export const toPlatformAtomizeRuleset: TAtomize.ToPlatformAtomizeRuleset = renderer.renderRuleEx
 
-export const getTracePath: TAtomize.TraceAtomicClassProc = (value: TAtomize.AtomicWeb) => renderer.trace[value]
+export const getPlatformTracePath: TAtomize.GetPlatformTracePath = (value: TAtomize.AtomicWeb) =>
+    typeof value === 'string' ? renderer.trace[value] : JSON.stringify(value)

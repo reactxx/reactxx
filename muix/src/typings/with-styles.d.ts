@@ -8,13 +8,14 @@ declare namespace TWithStyles {
     getDefaultTheme?: () => TTheme.Theme
     createPipeline?: Pipe
     namedThemes?: { [themeName: string]: TTheme.Theme }
-    finishPropsCode?: FinishPropsCode
+    finalizePropsCode?: FinishPropsCode
+    toPlatformClassName?: TAtomize.ToPlatformClassName
   }
 
   export type FinishPropsCode = (codeProps: TComponents.PropsCode, instanceState: TWithStyles.InstanceState) => void
 
   // component type options
-  export interface ComponentState<R extends TSheeter.Shape = TSheeter.Shape>  {
+  export interface ComponentState<R extends TSheeter.Shape = TSheeter.Shape> {
     name?: string
     defaultProps?: TComponents.Props<R>
     withTheme?: boolean

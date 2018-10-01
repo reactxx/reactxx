@@ -1,9 +1,10 @@
 // platform dependent exports
-export * from './utils/deep-merge'
 export * from './$web'
 export * from './reacts/$web'
 
+export * from './utils/deep-merge'
 export * from './atomize'
+export * from './global-state'
 export * from './atomize-low'
 export * from './trace'
 export * from './variants'

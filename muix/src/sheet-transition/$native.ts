@@ -9,13 +9,15 @@ import { TTransition } from './d-index'
 // platform dependent export
 export * from './$web'
 
-export const transition_finishPropsCode3 = (atomics: TAtomize.AtomicArray) => {}
-
 export const initVariant$transition = () => registerVariantHandler({
     name: '$transition',
     toAtomicRuleset,
     testAtomicRuleset
 })
+
+export const transition_toPlatformClassName:TAtomize.ToPlatformClassName = array => {
+    return null
+}
 
 //*********************************************************
 //  PRIVATE

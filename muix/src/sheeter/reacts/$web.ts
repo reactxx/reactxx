@@ -3,9 +3,10 @@ import warning from 'warning'
 import { renderer } from 'reactxx-fela'
 import { TAtomize, TComponents, TSheeter } from 'reactxx-typings'
 
-import { toClassNamesWithQuery, deleteSystemProps } from '../to-classnames'
+import { deleteSystemProps } from '../to-classnames'
 import { mergeStyles } from '../merge'
-import { isReactXXComponent } from '../atomize'
+import { isReactXXComponent, isDeffered } from '../atomize'
+import { globalOptions } from '../global-state'
 /******************************************
   EXTEND REACT
 *******************************************/
@@ -34,9 +35,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   const { classNameX, styleX } = props
 
   if (classNameX) {
-    //const compiled = toClassNamesWithQuery(null, null, classNameX)
-    warning(classNameX.toReactWebClassName, 'Missing classNameX.toReactComponentWeb')
-    const className = classNameX.toReactWebClassName(classNameX) // applyLastWinStrategy(compiled)
+    const className = (globalOptions.toPlatformClassName || applyLastWinStrategy)(classNameX) 
     props.className = props.className ? props.className + ' ' + className : className
   }
 
@@ -53,17 +52,14 @@ const applyLastWinStrategy = (values: TAtomize.AtomicArray) => {
   const res: TAtomize.AtomicWeb[] = []
   const usedPropIds: { [propId: string]: boolean } = {}
   for (let k = values.length - 1; k >= 0; k--) {
-    const value = values[k] as TAtomize.AtomicWeb
+    const value = values[k]
+    if (isDeffered(value)) continue
     const propId = renderer.propIdCache[value]
     if (!propId || usedPropIds[propId]) continue
     res.push(value)
     usedPropIds[propId] = true
   }
   return res.join(' ')
-}
-
-export const toReactComponent: TAtomize.ToReactStyling = {
-  toReactWebClassName: applyLastWinStrategy
 }
 
 const consolidateEvents = (props: TComponents.Props & TComponents.Events & TComponents.EventsWeb) => {

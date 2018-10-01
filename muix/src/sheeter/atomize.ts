@@ -1,6 +1,6 @@
 import warning from 'warning';
 
-import { TAtomize, TSheeter, TComponents } from 'reactxx-typings'
+import { TAtomize, TSheeter, TComponents, TVariants } from 'reactxx-typings'
 import { createWithTheme } from './utils/create-with-theme'
 import { atomizeRulesetLow } from './atomize-low'
 
@@ -50,7 +50,11 @@ export function isReactXXComponent (obj): obj is TComponents.ComponentType {
   return obj[TAtomize.TypedInterfaceTypes.prop] === TAtomize.TypedInterfaceTypes.reactxxComponent
 }
 
-// export function isRulesetWebArray(obj): obj is TSheeter.RulesetWeb[] {
+export function isDeffered (obj): obj is TVariants.Deffered {
+    return (obj as TVariants.Deffered).deffered
+  }
+  
+  // export function isRulesetWebArray(obj): obj is TSheeter.RulesetWeb[] {
 //     return Array.isArray(obj) && !isAtomicArray(obj)
 // }
 

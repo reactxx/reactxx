@@ -4,9 +4,9 @@ export * from 'reactxx-with-styles'
 
 import { TCommonStyles, TSheeter, TVariants } from 'reactxx-typings'
 import { toClassNamesWithQuery } from 'reactxx-sheeter'
-import { initVariant$transition, transition_finishPropsCode3, TTransition } from 'reactxx-sheet-transition'
+import { transition_initVariant, transition_toPlatformClassName, TTransition } from 'reactxx-sheet-transition'
 import { widthsPipe, getBreakpoints } from 'reactxx-sheet-widths'
-import { initVariant$sheetFlags, Consts, getSheetFlags, sheetFlags_finishPropsCode1, sheetFlags_finishPropsCode2 } from 'reactxx-sheet-flags'
+import { sheetFlags_initVariant, Consts, getSheetFlags, sheetFlags_finalizePropsCode1, sheetFlags_finalizePropsCode2 } from 'reactxx-sheet-flags'
 
 // workaround due to https://github.com/Microsoft/TypeScript/issues/27448
 export interface TSBugHelper<R extends TSheeter.Shape> {
@@ -14,8 +14,8 @@ export interface TSBugHelper<R extends TSheeter.Shape> {
     rulesetText?: TSheeter.Ruleset<'Text', R>
     transitionView?: TTransition.Transition<'View', R>
     transitionText?: TTransition.Transition<'Text', R>
-    transitionGroupView?: TTransition.TransitionGroup<'View', R>
-    transitionGroupText?: TTransition.TransitionGroup<'Text', R>
+    transitionGroupView?: TTransition.Group<'View', R>
+    transitionGroupText?: TTransition.Group<'Text', R>
     transitionNativeView?: TTransition.RulesetNative<'View'>
     transitionNativeText?: TTransition.RulesetNative<'Text'>
     sheetFlagsView?: TVariants.WhenFlagPart<'View', R>
@@ -47,21 +47,23 @@ export const initCore = () => {
     if (initCoreCalled) return
     initCoreCalled = true
 
-    initVariant$transition()
-    initVariant$sheetFlags()
+    transition_initVariant()
+    sheetFlags_initVariant()
     initGlobalState({
 
         createPipeline: widthsPipe,
 
-        finishPropsCode: (propsCode, state) => {
-            const flags = sheetFlags_finishPropsCode1(state)
+        finalizePropsCode: (propsCode, state) => {
+            const flags = sheetFlags_finalizePropsCode1(state)
             propsCode.toClassNames = rulesets => {
-                const sheetQuery = sheetFlags_finishPropsCode2(flags, propsCode)
+                const sheetQuery = sheetFlags_finalizePropsCode2(flags, propsCode)
                 const res = toClassNamesWithQuery(sheetQuery, propsCode.theme, rulesets)
-                transition_finishPropsCode3(res)
+                res.state = state
                 return res
             }
-        }
+        },
+
+        toPlatformClassName: transition_toPlatformClassName
 
     })
 }

@@ -27,8 +27,8 @@ declare module 'react-native' {
 }
 
   
-  // apply LAST WIN strategy for native style
-export const normalizeValues = (values: TAtomize.AtomicArray) => {
+// apply LAST WIN strategy for native style
+const normalizeValues = (values: TAtomize.AtomicArray) => {
   const res: TAtomize.NativeStyle/*TCompiler.PlatformValuesNative*/ = {}
   for (let k = values.length - 1; k >= 0; k--) {
       const value = values[k] as TAtomize.AtomicNative
@@ -36,9 +36,5 @@ export const normalizeValues = (values: TAtomize.AtomicArray) => {
       res[value.propId] = value.value
   }
   return res
-}
-
-export const toReactComponent: TAtomize.ToReactStyling = {
-  toReactNativeStyle: normalizeValues
 }
 

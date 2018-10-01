@@ -17,10 +17,10 @@ declare namespace TSheeter {
     RULESET - Cross platform ruleset for web and native
   *******************************************/
 
-  export type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> = 
+  export type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
     RulesetLow<T, R>
-    
+
 
   export interface RulesetLow<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape>
     extends TVariants.VariantPart<T, R> {
@@ -42,20 +42,20 @@ declare namespace TSheeter {
     RulesetNativeItem<T, R> | RulesetNativeItem<T, R>[]
   export type RulesetNativeItem<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     RulesetNative<T, R> | TAtomize.Ruleset
-  export type RulesetNative<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> = 
+  export type RulesetNative<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     TCommonStyles.RulesetNative<T> & // native rules which are compatible with web
     TVariants.VariantPart<T, R>
-    
+
 
   export type RulesetWebOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     RulesetWebItem<T, R> | RulesetWebItem<T, R>[]
   export type RulesetWebItem<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     RulesetWeb<T, R> | TAtomize.Ruleset
-  export type RulesetWeb<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> = 
+  export type RulesetWeb<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     React.CSSProperties &
     TVariants.VariantPart<T, R> &
     { [P in CSS.Pseudos]?: RulesetWeb<T, R> }
-    
+
 
   /******************************************
     STYLE

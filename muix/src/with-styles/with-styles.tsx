@@ -1,8 +1,7 @@
 import React from 'react'
 import { TWithStyles, TSheeter, TComponents, TAtomize, TTheme, TVariants } from 'reactxx-typings'
-import { deepMerges } from 'reactxx-sheeter'
+import { deepMerges, globalOptions } from 'reactxx-sheeter'
 
-import { globalOptions } from './global-state'
 import { lastPipe } from './pipe-last'
 import { firstPipe } from './pipe-first'
 import { defaultThemeName } from './themer'

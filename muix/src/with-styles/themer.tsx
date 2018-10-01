@@ -1,8 +1,7 @@
 import React from 'react';
 import warning from 'warning';
 import { TTheme, TAtomize, TSheeter, TWithStyles } from 'reactxx-typings'
-import { globalOptions } from './global-state'
-import { mergeSheet, atomizeRuleset, atomizeSheet, atomizeStyle } from 'reactxx-sheeter'
+import { mergeSheet, globalOptions, atomizeRuleset, atomizeSheet, atomizeStyle } from 'reactxx-sheeter'
 
 export const applyTheme = (pipeId: number, theme: TTheme.Theme, state: TWithStyles.InstanceState) => {
   warning(pipeId > 0, 'pipe-first.pipeId must be greater that zero')
