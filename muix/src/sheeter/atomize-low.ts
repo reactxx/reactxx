@@ -1,7 +1,7 @@
 import warning from 'warning'
 import { isObject } from './utils/deep-merge'
 import { TAtomize, TSheeter, TCommonStyles, TVariants } from 'reactxx-typings'
-import { toVariantParts } from './variants'
+import { atomizeVariants } from './variants'
 import { isAtomicArray, isAtomizedRuleset } from './atomize'
 
 // platform dependent import
@@ -94,10 +94,8 @@ export const atomizeRulesetInner: TVariants.AtomizeRulesetInner = (list, ruleset
     // push to ruleset list
     if (rulesetToQueue) pushToList(list, rulesetToQueue, conditions, path)
 
-    // process variant part of ruleset: $mediaq, $sheetFlags, $animation etc.
-    toVariantParts(ruleset).forEach(part => part.proc(
-        list, part.part, path, pseudoPrefixes, conditions)
-    )
+    // process variant part of ruleset: $transition, $sheetFlags etc.
+    atomizeVariants(list, ruleset, path, pseudoPrefixes, conditions)
 
     // parse pseudo rules (:hover etc.)
     for (const p in ruleset) {

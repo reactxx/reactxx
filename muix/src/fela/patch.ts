@@ -7,7 +7,7 @@ import { TAtomize } from 'reactxx-typings'
 
 
 export interface IRendererEx extends IRenderer {
-  renderRuleEx(style: Object, tracePath?: string): string[] & { [TAtomize.TypedInterfaceTypes.prop]: TAtomize.TypedInterfaceTypes.atomicArray }
+  renderRuleEx(style: {}, tracePath?: string): string[] & { [TAtomize.TypedInterfaceTypes.prop]: TAtomize.TypedInterfaceTypes.atomicArray }
   propIdCache: {}
   trace: {}
 }

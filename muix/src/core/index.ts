@@ -2,7 +2,7 @@ export * from 'reactxx-sheeter'
 export * from 'reactxx-primitives'
 export * from 'reactxx-with-styles'
 
-import { TCommonStyles, TSheeter } from 'reactxx-typings'
+import { TCommonStyles, TSheeter, TVariants } from 'reactxx-typings'
 import { toClassNamesWithQuery } from 'reactxx-sheeter'
 import { initVariant$transition, transition_finishPropsCode3, TTransition } from 'reactxx-sheet-transition'
 import { widthsPipe, getBreakpoints } from 'reactxx-sheet-widths'
@@ -14,8 +14,11 @@ export interface TSBugHelper<R extends TSheeter.Shape> {
     rulesetText?: TSheeter.Ruleset<'Text', R>
     transitionView?: TTransition.Transition<'View', R>
     transitionText?: TTransition.Transition<'Text', R>
+    transitionGroupView?: TTransition.TransitionGroup<'View', R>
+    transitionGroupText?: TTransition.TransitionGroup<'Text', R>
     transitionNativeView?: TTransition.RulesetNative<'View'>
     transitionNativeText?: TTransition.RulesetNative<'Text'>
+    sheetFlagsView?: TVariants.WhenFlagPart<'View', R>
     cssProperties?: React.CSSProperties
     sheet?: TSheeter.Sheet<R>
 }

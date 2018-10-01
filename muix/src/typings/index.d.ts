@@ -1,4 +1,5 @@
-﻿export { TCommonStyles } from './common-styles'
+﻿export * from './wrapper'
+export { TCommonStyles } from './common-styles'
 export { TAtomize } from './atomize'
 export { TSheeter } from './sheeter'
 export { TComponents } from './components'
@@ -11,7 +12,13 @@ import { TSheeter, TAtomize, TCommonStyles } from './index'
 
 export namespace TVariants {
 
-    type ToVariantProc<T> = (
+    type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
+        TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
+        TSheeter.RulesetLow<T, R> &
+        VariantPart<T, R>
+
+
+    type ToAtomicRuleset<T> = (
         list: TAtomize.Variants,
         ruleset: T,
         path: string,
@@ -20,7 +27,7 @@ export namespace TVariants {
         rulesetToQueue?: VariantPart
     ) => void
 
-    type AtomizeRulesetInner= (
+    type AtomizeRulesetInner = (
         list: TAtomize.Variants,
         ruleset: VariantPart,
         path: string,
@@ -39,7 +46,7 @@ export namespace TVariants {
     interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> { }
     interface ShapePart { }
 
-    interface PipeState {}
+    interface PipeState { }
 
 
     //*********************************************************

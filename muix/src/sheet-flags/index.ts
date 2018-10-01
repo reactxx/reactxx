@@ -1,14 +1,14 @@
 import { TComponents, TSheeter, TVariants, TWithStyles } from 'reactxx-typings'
-import { registerVariant, atomizeRulesetInner, mergeFlags, toClassNamesWithQueryEx, toClassNamesWithQuery } from 'reactxx-sheeter'
+import { registerVariantHandler, atomizeRulesetInner, mergeFlags, wrapPseudoPrefixes } from 'reactxx-sheeter'
 
 export const enum Consts {
     name = '$sheetFlags'
 }
 
-export const initVariant$sheetFlags = () => registerVariant({
+export const initVariant$sheetFlags = () => registerVariantHandler({
     name: Consts.name,
-    toVariantProc,
-    testCondition
+    toAtomicRuleset,
+    testAtomicRuleset
 })
 
 // export const finishPropsCode: TWithStyles.FinishPropsCode = (propsCode, state) => {
@@ -79,7 +79,7 @@ interface WhenFlagCondition extends TVariants.Condition {
     flagName: string
 }
 
-const toVariantProc: TVariants.ToVariantProc<Record<string, TSheeter.RulesetOrAtomized>> = (list, whenFlag, path, pseudoPrefixes, conditions) => {
+const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.RulesetOrAtomized>> = (list, whenFlag, path, pseudoPrefixes, conditions) => {
     for (const p in whenFlag) {
         const rules = whenFlag[p] as TSheeter.Ruleset
         if (Array.isArray(rules))
@@ -101,27 +101,7 @@ const toVariantProc: TVariants.ToVariantProc<Record<string, TSheeter.RulesetOrAt
     }
 }
 
-const wrapPseudoPrefixes = (rules: {}, pseudoPrefixes: string[]) => {
-    if (pseudoPrefixes.length === 0) return rules
-    let res = rules
-    for (let i = pseudoPrefixes.length - 1; i >= 0; i--)
-        res = { [pseudoPrefixes[i]]: res }
-    return res
-}
 
-
-const testCondition = (cond: WhenFlagCondition, query: TVariants.Query) =>
+const testAtomicRuleset = (cond: WhenFlagCondition, query: TVariants.Query) =>
     query.$sheetFlags && query.$sheetFlags[cond.flagName]
-
-// const toClassNamesForBindEx = (pipeFlags: Record<string, true>, propsCode: TComponents.PropsCode) => {
-
-//     return (rulesets: TSheeter.RulesetItem[]) => toClassNamesWithQueryEx(rulesetNames => {
-//         const { sheetQuery, sheetQuery: { $sheetFlags } } = propsCode
-//         const flags = $sheetFlags && pipeFlags ? { ...pipeFlags, ...$sheetFlags } : pipeFlags ? pipeFlags : $sheetFlags
-
-//         sheetQuery.$sheetFlags = rulesetNames && flags ? { ...flags, ...rulesetNames } : rulesetNames ? rulesetNames : flags
-//         return sheetQuery
-//     }, propsCode.theme, rulesets)
-
-// }
 

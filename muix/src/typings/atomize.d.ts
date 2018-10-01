@@ -2,7 +2,7 @@ import { TNativeRuleValue, TSheeter, TVariants } from './index'
 
 declare namespace TAtomize {
 
-  export type ToAtomicClassesProc = (ruleset: TSheeter.Ruleset, tracePath?: string) => AtomicArray
+  export type ToAtomicClassesProc = (ruleset: {}, tracePath?: string) => AtomicArray
   export type TraceAtomicClassProc = (value: Atomic) => string
 
   //export const TypedInterfaceProp = '``'
