@@ -28,8 +28,8 @@ declare module 'react-native' {
 
   
 // apply LAST WIN strategy for native style
-const normalizeValues = (values: TAtomize.AtomicArray) => {
-  const res: TAtomize.NativeStyle/*TCompiler.PlatformValuesNative*/ = {}
+const applyLastWinStrategy: TAtomize.ToPlatformClassName = (values, props) => {
+  const res: TAtomize.NativeStyle= {}
   for (let k = values.length - 1; k >= 0; k--) {
       const value = values[k] as TAtomize.AtomicNative
       if (typeof res[value.propId] !== 'undefined') continue

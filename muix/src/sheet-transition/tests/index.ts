@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { parsePropDef } from 'reactxx-sheet-transition/parse-prop-def'
+import { parsePropDef } from '../utils'
 
 const test_parsePropDef = () => {
 

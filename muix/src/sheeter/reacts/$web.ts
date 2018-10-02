@@ -35,8 +35,9 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   const { classNameX, styleX } = props
 
   if (classNameX) {
-    const className = (globalOptions.toPlatformClassName || applyLastWinStrategy)(classNameX) 
-    props.className = props.className ? props.className + ' ' + className : className
+    const oldClassName = props.className
+    (globalOptions.toPlatformClassName || applyLastWinStrategy)(classNameX,props) 
+    if (oldClassName) props.className = props.className + ' ' + oldClassName
   }
 
   if (styleX) {
@@ -48,7 +49,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 }
 
 // apply LAST WIN strategy for web className
-const applyLastWinStrategy = (values: TAtomize.AtomicArray) => {
+const applyLastWinStrategy: TAtomize.ToPlatformClassName = (values, props) => {
   const res: TAtomize.AtomicWeb[] = []
   const usedPropIds: { [propId: string]: boolean } = {}
   for (let k = values.length - 1; k >= 0; k--) {

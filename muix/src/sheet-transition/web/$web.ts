@@ -1,18 +1,15 @@
-export * from './d-index'
-
 import { renderer } from 'reactxx-fela'
 import { TVariants, TAtomize } from 'reactxx-typings'
 import { isDeffered, atomizeRuleset, registerVariantHandler, wrapPseudoPrefixes } from 'reactxx-sheeter'
 
-import { TTransition } from './d-index'
+import { TTransition } from '../d-index'
 //import { parsePropDef } from './parse-prop-def'
 
-
 // platform dependent export
-export * from './$web'
+export * from 'reactxx-sheet-transition/web/$web'
 
 
-export const transition_toPlatformClassName: TAtomize.ToPlatformClassName = array => {
+export const transition_toPlatformClassName: TAtomize.ToPlatformClassName = (array, props) => {
     const { state } = array
     const deffered = []
     const res = applyLastWinStrategy(array, deffered)

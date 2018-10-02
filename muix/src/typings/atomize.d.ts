@@ -6,7 +6,7 @@ declare namespace TAtomize {
 
   export type ToPlatformAtomizeRuleset = (ruleset: {}, tracePath?: string) => AtomicArray
   export type GetPlatformTracePath = (value: Atomic) => string
-  export type ToPlatformClassName = (array: AtomicArray) => string | NativeStyle
+  export type ToPlatformClassName = (array: AtomicArray, propsPlatform: {style, className}) => void
 
   //export const TypedInterfaceProp = '``'
 
@@ -15,11 +15,11 @@ declare namespace TAtomize {
     atomizedRuleset = 'c'/*compiled ruleset*/,
     atomicArray = 'v' /*value array*/,
     reactxxComponent = 'x',
-    atomizedStyleWeb = 'w',
+    //atomizedStyleWeb = 'w',
   }
 
   export interface TypedInterface {
-    [TypedInterfaceTypes.prop]: TypedInterfaceTypes
+    [TypedInterfaceTypes.prop]: string
   }
 
   export type Sheet<R extends TSheeter.Shape = TSheeter.Shape> = { [P in TSheeter.RulesetNamesAll<R>]: AtomizedRuleset }

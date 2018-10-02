@@ -11,7 +11,7 @@ import { TSheeter, TAtomize, TCommonStyles } from './index'
 
 export namespace TVariants {
 
-    interface Deffered {
+    interface Deffered extends TAtomize.TypedInterface {
         deffered?: true
     }
 
