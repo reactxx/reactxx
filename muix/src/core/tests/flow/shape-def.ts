@@ -1,11 +1,11 @@
-import React from 'react'
+// import React from 'react'
+
+// import { atomizeRuleset } from 'reactxx-sheeter'
+// import { TTransition } from 'reactxx-sheet-transition'
+// import { getSheetFlags } from 'reactxx-sheet-flags';
 
 import { TSheeter } from 'reactxx-typings'
-import { atomizeRuleset } from 'reactxx-sheeter'
-import { TTransition } from 'reactxx-sheet-transition'
-import { getSheetFlags } from 'reactxx-sheet-flags';
-
-import { TSBugHelper, getFlagsAll } from 'reactxx-core';
+import { TSBugHelper } from 'reactxx-core'
 
 export interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root'> & TSheeter.ShapeTexts<'label'>
@@ -16,7 +16,7 @@ export interface Shape extends TSheeter.ShapeAncestor {
     theme: typeof Theme
     sheetFlags: TSheeter.ShapeMarks<'isDisabled' | 'isActive'>
     breakpoints: TSheeter.ShapeMarks<'isTabletWidth' | 'isMobileWidth' | 'isDesktopWidth'>
-    transitionGroups: TSheeter.ShapeMarks<'tablet' | 'mobile'>
+    transitionGroups: TSheeter.ShapeMarks<'tabletDrawer' | 'mobileDrawer'>
 }
 
 export const Theme = {
@@ -37,8 +37,9 @@ export const Theme = {
         }
     },
     breakpoints: {
-        mobileEnd: 640,
-        tabletEnd: 1024
+        mobile: '-640',
+        tablet: '640-1024',
+        desktop: '1024-'
     }
 }
 

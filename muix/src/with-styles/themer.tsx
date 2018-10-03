@@ -9,7 +9,6 @@ export const applyTheme = (pipeId: number, theme: TTheme.Theme, state: TWithStyl
   const { props: { classes, classNameX, styleX, themedProps, ...propsRest }, defaultProps } = state
 
   state.pipeStates = []
-  //state.sheetQuery = {}
   state.theme = theme
 
   if (defaultProps) {

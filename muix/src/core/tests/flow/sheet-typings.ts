@@ -1,4 +1,4 @@
-import { ts } from './index'
+import { ts } from './shape-def'
 
 export const sheet = ts.sheetCreator = theme => ts.sheet = {
     root: ts.view = {
@@ -7,6 +7,19 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
         $web: ts.web = {
             cursor: 'pointer',
             //x: 1,
+            ':hover': {
+                ':active': {
+                    $sheetFlags: ts.sheetFlags$Web = {
+                        isDisabled: [{
+                            color: 'red',
+                            //x: 1,
+                        }],
+                    },
+
+                }
+            },
+            // ':active': [{
+            // }],
             $sheetFlags: ts.sheetFlags$Web = {
                 isDisabled: [{
                     color: 'red',
@@ -20,14 +33,14 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
                 }
             },
             $transitionGroup: ts.transitionGroup$Web = {
-                $name: 'mobile', // allow grouping of $transitions for more elements (the same Animation.Value for native etc.)
+                $name: 'tabletDrawer', // allow grouping of $transitions for more elements (the same Animation.Value for native etc.)
                 opacity: [1, 0],
                 color: ['', ''],
                 //x: 1,
             },
         },
         $transitionGroup: ts.transitionGroupView = {
-            $name: 'mobile',
+            $name: 'mobileDrawer',
             //$name: 'xmobile',
             opacity: [1, 0],
             //color: ['', ''],
@@ -50,7 +63,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
             //isMobileWidthx: {},
         },
     },
-    label: ts.text = {
+    label: ts.text = [{
         margin: 0,
         color: theme.primary.color,
         //backgroundColor: theme.primary.backgroundx,
@@ -66,13 +79,13 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
             },
         }],
         $transitionGroup: ts.transitionGroupText = {
-            $name: 'mobile',
+            $name: 'tabletDrawer',
             //$name: 'xmobile',
             opacity: [1, 0],
             color: ['', ''],
             //x1: ['', ''],
         },
-    },
+    }],
     webOnly: {
         //margin: 4,
         $web: ts.web = {
@@ -83,7 +96,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
                     color: 'red',
                     //x: 1,
                     $transitionGroup: ts.transitionGroup$Web = {
-                        $name: 'mobile',
+                        $name: 'tabletDrawer',
                         //$name: 'xmobile'
                         color: ['', ''],
                         //x: [0, 0]
@@ -91,7 +104,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
                 }],
             },
             $transitionGroup: ts.transitionGroup$Web = {
-                $name: 'mobile',
+                $name: 'tabletDrawer',
                 color: ['', ''],
                 //x: [0, 0]
             },
@@ -109,7 +122,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
                 }],
             },
             $transitionGroup: ts.transitionGroupView = {
-                $name: 'mobile',
+                $name: 'tabletDrawer',
                 opacity: [0, 1],
                 left: [0, 200],
                 //color: ['', ''],

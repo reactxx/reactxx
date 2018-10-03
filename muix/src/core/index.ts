@@ -13,8 +13,8 @@ export interface TSBugHelper<R extends TSheeter.Shape> {
     sheet?: TSheeter.Sheet<R>
     sheetCreator?: TSheeter.SheetCreator<R>
 
-    view?: TSheeter.Ruleset<'View', R>
-    text?: TSheeter.Ruleset<'Text', R>
+    view?: TSheeter.RulesetOrAtomized<'View', R>
+    text?: TSheeter.RulesetOrAtomized<'Text', R>
     web?: TSheeter.RulesetWebOrAtomized<'$Web', R>
     nativeView?: TSheeter.RulesetNativeOrAtomized<'View', R>
     nativeText?: TSheeter.RulesetNativeOrAtomized<'Text', R>
