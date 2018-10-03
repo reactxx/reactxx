@@ -1,5 +1,5 @@
 import { renderer } from 'reactxx-fela'
-import { TVariants, TAtomize } from 'reactxx-typings'
+import { TWithStyles, TVariants, TAtomize } from 'reactxx-typings'
 import { isDeffered, atomizeRuleset, registerVariantHandler, wrapPseudoPrefixes } from 'reactxx-sheeter'
 
 import { TTransition } from '../d-index'
@@ -8,6 +8,9 @@ import { TTransition } from '../d-index'
 // platform dependent export
 export * from 'reactxx-sheet-transition/web/$web'
 
+export const transition_finalizePropsCode1 = (state: TWithStyles.InstanceState) => {
+    
+}
 
 export const transition_toPlatformClassName: TAtomize.ToPlatformClassName = (array, props) => {
     const { state } = array
@@ -18,7 +21,7 @@ export const transition_toPlatformClassName: TAtomize.ToPlatformClassName = (arr
     return applyLastWinStrategy(array, null)
 }
 
-export const transition_initVariant = () => {
+export const transition_registerVariantHandler = () => {
     registerVariantHandler({
         name: '$transition',
         toAtomicRuleset,

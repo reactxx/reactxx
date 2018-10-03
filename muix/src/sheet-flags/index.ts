@@ -5,7 +5,7 @@ export const enum Consts {
     name = '$sheetFlags'
 }
 
-export const sheetFlags_initVariant = () => registerVariantHandler({
+export const sheetFlags_registerVariantHandler = () => registerVariantHandler({
     name: Consts.name,
     toAtomicRuleset,
     testAtomicRuleset

@@ -133,7 +133,7 @@ export namespace TSheeter {
     // 
     $Sheet: Sheet<this>
     $PartialSheet: PartialSheet<this>
-    $SheetOrCreator: SheetOrCreator<this>
+    $SheetCreator: SheetCreator<this>
   }
 
   export type getCommon<R extends Shape> = R['common']

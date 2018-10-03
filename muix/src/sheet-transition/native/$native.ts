@@ -1,15 +1,12 @@
 
-import { TSheeter, TVariants, TAtomize, TCommonStyles } from 'reactxx-typings'
+import { TWithStyles, TVariants, TAtomize, TCommonStyles } from 'reactxx-typings'
 import { registerVariantHandler } from 'reactxx-sheeter'
 
-import { NativeAnimated } from './transition-to-animated'
+import { CodeComponentHandler } from './transition-to-animated'
 import { TTransition } from '../d-index'
 
 
-// platform dependent export
-export * from 'reactxx-sheet-transition/web/$web'
-
-export const transition_initVariant = () => {
+export const transition_registerVariantHandler = () => {
     registerVariantHandler({
         name: '$transition',
         toAtomicRuleset,
@@ -23,21 +20,29 @@ export const transition_initVariant = () => {
 
 }
 
+export const transition_finalizePropsCode1 = (state: TWithStyles.InstanceState) => {
+    const st: CodeComponentHandler = state[TTransition.DefferedType.handlerFieldName] || (state[TTransition.DefferedType.handlerFieldName] = new CodeComponentHandler())
+    st.finalizePropsCode(state)
+}
+
 export const transition_toPlatformClassName: TAtomize.ToPlatformClassName = (array, props) => {
+
     // *** first phase
     const firstRes = applyLastWinStrategy(array, ApplyLastWinStrategyMode.first)
     if (firstRes.style) return firstRes.style // no transition group => return merged styles
-    // *** second phase
-    const { state } = array // HOC field
-    const animated: NativeAnimated = state[hocFieldName] || (state[hocFieldName] = new NativeAnimated())
 
-    //const ref= props.ref ? props.ref : (props.ref = React.createRef())
+    // *** second phase
+    const { state } = array
+    // component data
+    const animated: CodeComponentHandler = state[TTransition.DefferedType.handlerFieldName]
 
     if (firstRes.transition) { // simple transition
         const secondRes = applyLastWinStrategy(array, ApplyLastWinStrategyMode.secondTransition, firstRes.transition.usedProps)
-        animated.setTransition(firstRes.transition, firstRes.transitionPropValues)
-        // secondRes.secondUsedPropValues
-        props.style = secondRes.style
+        animated.setTransition(
+            firstRes.transition,
+            firstRes.transitionPropValues,
+            secondRes.style as TTransition.TValues,
+            props)
     } else { // transitionGroup
         const group: TTransition.DefferedNativeGroup = null // merge firstRes.transitionGroups
         const secondRes = applyLastWinStrategy(array, ApplyLastWinStrategyMode.secondTransitionGroup, group.props)
@@ -50,7 +55,6 @@ export const transition_toPlatformClassName: TAtomize.ToPlatformClassName = (arr
 //*********************************************************
 interface HocData { }
 
-const hocFieldName = '$transition'
 // converts VariantPart.$transition to TTransition.DefferedNative
 const toAtomicRuleset: TVariants.ToAtomicRuleset<TTransition.Transition> = (list, ruleset, path, pseudoPrefixes, conditions) => {
 
@@ -80,7 +84,7 @@ const enum ApplyLastWinStrategyMode {
 }
 
 const applyLastWinStrategy = (
-    values: TAtomize.AtomicArray, 
+    values: TAtomize.AtomicArray,
     mode: ApplyLastWinStrategyMode,
     secondIn_usedProps?: {},
 ) => {

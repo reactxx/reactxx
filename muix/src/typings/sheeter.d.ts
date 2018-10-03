@@ -26,7 +26,7 @@ declare namespace TSheeter {
     extends TVariants.VariantPart<T, R> {
     name?: string
     $native?: RulesetNativeOrAtomized<T, R>// native specific rules
-    $web?: RulesetWebOrAtomized<T, R> // web specific rules
+    $web?: RulesetWebOrAtomized<'$Web', R> // web specific rules
   }
 
   export type RulesetItem<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
@@ -97,12 +97,12 @@ declare namespace TSheeter {
 
   export type SheetNative<R extends Shape> = keyof getNative<R> extends never ? FakeInterface :
     { [P in keyof getNative<R>]: {
-      $native?: RulesetNativeOrAtomized<getNative<R>[P]>
+      $native?: RulesetNativeOrAtomized<getNative<R>[P], R>
     } }
 
   export type SheetWeb<R extends Shape> = getWeb<R> extends never ? FakeInterface :
     { [P in getWeb<R>]: {
-      $web?: RulesetWebOrAtomized<'Text', R>
+      $web?: RulesetWebOrAtomized<'$web', R>
     } }
 
 
@@ -142,7 +142,7 @@ declare namespace TSheeter {
     // 
     $Sheet: Sheet<this>
     $PartialSheet: PartialSheet<this>
-    $SheetOrCreator: SheetOrCreator<this>
+    $SheetCreator: SheetCreator<this>
   }
 
   export type getCommon<R extends Shape> = R['common']

@@ -54,6 +54,6 @@ declare namespace TAtomize {
   export type AtomicNatives = AtomicNative[]
 
 
-  export type Ruleset = TAtomize.AtomizedRuleset | TAtomize.AtomicArray
+  export type Ruleset = AtomizedRuleset | AtomicArray
 
 }

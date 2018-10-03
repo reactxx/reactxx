@@ -1,8 +1,10 @@
 import React from 'react'
-import { TTransition } from 'reactxx-sheet-transition/d-index'
+
 import { TCommonStyles, TVariants, TSheeter, TComponents } from 'reactxx-typings'
-import { atomizeVariants, TSBugHelper, getFlagsAll } from 'reactxx-core';
+import { atomizeVariants } from 'reactxx-sheeter'
+import { TTransition } from 'reactxx-sheet-transition'
 import { getSheetFlags } from 'reactxx-sheet-flags';
+import { TSBugHelper, getFlagsAll } from 'reactxx-core';
 
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root' | 'label'> & TSheeter.ShapeTexts<'text'>
@@ -50,7 +52,7 @@ const grp: TSheeter.Ruleset<'View', Shape> = {
 //https://github.com/Microsoft/TypeScript/issues/27448
 const ts: TSBugHelper<Shape> = {}
 
-const sheet2: TSheeter.Sheet<Shape> = {
+const sheet2: TSheeter.Sheet<Shape> = ts.sheet = {
     root: {
         //color: '',
         opacity: 0.5,
@@ -68,7 +70,7 @@ const sheet2: TSheeter.Sheet<Shape> = {
             opacity: [1, 0],
             //color: ['', ''],
         }, 
-        $sheetFlags: ts.sheetFlagsView = {
+        $sheetFlags: {
             active: {
                 //color: '',
                 $transitionGroup: ts.transitionGroupView = {

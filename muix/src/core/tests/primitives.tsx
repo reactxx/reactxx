@@ -1,5 +1,6 @@
 /** @jsx createElement */
-import { createElement, View } from 'reactxx-core'
+import { createElement } from 'reactxx-sheeter'
+import { View } from 'reactxx-primitives'
 
 const App: React.SFC = props => <View
     classes={{ root: [{ backgroundColor: 'green' }] }}

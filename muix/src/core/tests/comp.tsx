@@ -1,6 +1,6 @@
 /** @jsx createElement */
 import { TVariants, TAtomize, TComponents, TCommonStyles, TSheeter } from 'reactxx-typings'
-import { createElement } from 'reactxx-core'
+import { createElement } from 'reactxx-sheeter'
 
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root'> & TSheeter.ShapeTexts<'label'>
@@ -20,7 +20,7 @@ interface Shape3 extends TSheeter.ShapeAncestor {
 }
 
 
-const sheet: Shape['$SheetOrCreator'] = theme => {
+const sheet: Shape['$SheetCreator'] = theme => {
     const res: Shape['$Sheet'] = {
         root: {
             margin: 4,

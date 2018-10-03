@@ -148,11 +148,12 @@ declare namespace TCommonStyles {
     COMMON RULESET
   *******************************************/
 
-  export type RulesetNativeIdsLow = 'Text' | 'View' | 'Image'
+  export type RulesetNativeIdsLow = 'Text' | 'View' | 'Image' | '$Web'
   export type RulesetNativeIds = RulesetNativeIdsLow | unknown
 
   //******************** Native ruleset which are compatible with web
   export type RulesetCommon<T extends RulesetNativeIds> =
+    T extends '$Web' ? RulesetWeb :
     T extends 'View' ? TCommonStyles.ViewStyle :
     T extends 'Image' ? TCommonStyles.ImageStyle :
     TCommonStyles.TextStyle

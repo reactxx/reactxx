@@ -1,26 +1,38 @@
-export * from 'reactxx-sheeter'
-export * from 'reactxx-primitives'
-export * from 'reactxx-with-styles'
+// export * from 'reactxx-sheeter'
+// export * from 'reactxx-primitives'
+// export * from 'reactxx-with-styles'
 
 import { TCommonStyles, TSheeter, TVariants } from 'reactxx-typings'
 import { toClassNamesWithQuery } from 'reactxx-sheeter'
-import { transition_initVariant, transition_toPlatformClassName, TTransition } from 'reactxx-sheet-transition'
+import { transition_registerVariantHandler, transition_toPlatformClassName, transition_finalizePropsCode1, TTransition } from 'reactxx-sheet-transition'
 import { widthsPipe, getBreakpoints } from 'reactxx-sheet-widths'
-import { sheetFlags_initVariant, Consts, getSheetFlags, sheetFlags_finalizePropsCode1, sheetFlags_finalizePropsCode2 } from 'reactxx-sheet-flags'
+import { sheetFlags_registerVariantHandler, Consts, getSheetFlags, sheetFlags_finalizePropsCode1, sheetFlags_finalizePropsCode2 } from 'reactxx-sheet-flags'
 
 // workaround due to https://github.com/Microsoft/TypeScript/issues/27448
 export interface TSBugHelper<R extends TSheeter.Shape> {
-    rulesetView?: TSheeter.Ruleset<'View', R>
-    rulesetText?: TSheeter.Ruleset<'Text', R>
+    sheet?: TSheeter.Sheet<R>
+    sheetCreator?: TSheeter.SheetCreator<R>
+
+    view?: TSheeter.Ruleset<'View', R>
+    text?: TSheeter.Ruleset<'Text', R>
+    web?: TSheeter.RulesetWebOrAtomized<'$Web', R>
+    nativeView?: TSheeter.RulesetNativeOrAtomized<'View', R>
+    nativeText?: TSheeter.RulesetNativeOrAtomized<'Text', R>
+
+    sheetFlagsView?: TVariants.WhenFlagPart<'View', R>
+    sheetFlagsText?: TVariants.WhenFlagPart<'Text', R>
+    sheetFlags$Web?: TVariants.WhenFlagPart<'$Web', R>
+
     transitionView?: TTransition.Transition<'View', R>
     transitionText?: TTransition.Transition<'Text', R>
-    transitionGroupView?: TTransition.Group<'View', R>
-    transitionGroupText?: TTransition.Group<'Text', R>
+
     transitionNativeView?: TTransition.RulesetNative<'View'>
     transitionNativeText?: TTransition.RulesetNative<'Text'>
-    sheetFlagsView?: TVariants.WhenFlagPart<'View', R>
-    cssProperties?: React.CSSProperties
-    sheet?: TSheeter.Sheet<R>
+
+    transitionGroupView?: TTransition.Group<'View', R>
+    transitionGroupText?: TTransition.Group<'Text', R>
+    transitionGroup$Web?: TTransition.Group<'$Web', R>
+
 }
 
 
@@ -47,14 +59,16 @@ export const initCore = () => {
     if (initCoreCalled) return
     initCoreCalled = true
 
-    transition_initVariant()
-    sheetFlags_initVariant()
+    transition_registerVariantHandler()
+    sheetFlags_registerVariantHandler()
+    
     initGlobalState({
 
         createPipeline: widthsPipe,
 
         finalizePropsCode: (propsCode, state) => {
             const flags = sheetFlags_finalizePropsCode1(state)
+            transition_finalizePropsCode1(state)
             propsCode.toClassNames = rulesets => {
                 const sheetQuery = sheetFlags_finalizePropsCode2(flags, propsCode)
                 const res = toClassNamesWithQuery(sheetQuery, propsCode.theme, rulesets)

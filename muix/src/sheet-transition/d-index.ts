@@ -36,13 +36,16 @@ export namespace TTransition {
     }
     export interface DefferedNative extends Deffered {
         [TAtomize.TypedInterfaceTypes.prop]: DefferedType.native
-        usedProps: { [propId: string]: true }
+        usedProps: Record<string,true>
     }
 
     export const enum DefferedType {
         groupWeb = 't$wg',
         groupNative = 't$ng',
-        native = 't$n'
+        native = 't$n',
+        // other contst
+        handlerFieldName = '$transition',
+        platformCompId = '$transition'
     }
 
     export interface Deffered extends TVariants.Deffered {
