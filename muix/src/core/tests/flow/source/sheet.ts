@@ -57,7 +57,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
         ],
         $sheetFlags: ts.sheetFlagsView = {
             mobileWidth: {},
-            isActive: {
+            isDrawerOpened: {
                 //color: 'red',
             },
             //isMobileWidthx: {},

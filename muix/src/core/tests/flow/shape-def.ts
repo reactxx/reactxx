@@ -14,13 +14,13 @@ export interface Shape extends TSheeter.ShapeAncestor {
     style: 'View'
 
     theme: typeof Theme
-    sheetFlags: TSheeter.ShapeMarks<'isDisabled' | 'isActive'>
+    sheetFlags: TSheeter.ShapeMarks<'isDisabled' | 'isDrawerOpened'>
     breakpoints: TSheeter.ShapeMarks<'tabletWidth' | 'mobileWidth' | 'desktopWidth'>
     transitionGroups: TSheeter.ShapeMarks<'tabletDrawer' | 'mobileDrawer'>
 
     props: {
         disabled?: boolean
-        active?: boolean
+        drawerOpened?: boolean
     }
 }
 
