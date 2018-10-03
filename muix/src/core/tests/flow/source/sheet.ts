@@ -1,4 +1,4 @@
-import { ts } from './shape-def'
+import { ts } from '../shape-def'
 
 export const sheet = ts.sheetCreator = theme => ts.sheet = {
     root: ts.view = {

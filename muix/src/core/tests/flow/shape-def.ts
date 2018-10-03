@@ -15,8 +15,13 @@ export interface Shape extends TSheeter.ShapeAncestor {
 
     theme: typeof Theme
     sheetFlags: TSheeter.ShapeMarks<'isDisabled' | 'isActive'>
-    breakpoints: TSheeter.ShapeMarks<'isTabletWidth' | 'isMobileWidth' | 'isDesktopWidth'>
+    breakpoints: TSheeter.ShapeMarks<'tabletWidth' | 'mobileWidth' | 'desktopWidth'>
     transitionGroups: TSheeter.ShapeMarks<'tabletDrawer' | 'mobileDrawer'>
+
+    props: {
+        disabled?: boolean
+        active?: boolean
+    }
 }
 
 export const Theme = {
@@ -45,38 +50,3 @@ export const Theme = {
 
 export const ts: TSBugHelper<Shape> = {}
 
-const sheet: Shape['$SheetCreator'] = theme => ts.sheet = {
-    root: {
-        margin: 4,
-        $sheetFlags: {
-            isDisabled: [{
-                //color: '$sheetFlags|disabled',
-            }],
-        },
-        $web: [{
-            $sheetFlags: {
-                isDisabled: [{
-                    //color: '$sheetFlags|disabled',
-                }],
-            },
-        }],
-    },
-    label: {
-        $web: {
-            color: 'gray',
-            $sheetFlags: {
-                isDisabled: [{
-                    color: '$sheetFlags|disabled',
-                }],
-            },
-        },
-        //margin:0
-    },
-    webOnly: {
-    },
-    nativeOnly: {
-        $native: {
-            margin: 20,
-        }
-    },
-}
