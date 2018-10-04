@@ -7,6 +7,15 @@
 import { TSheeter } from 'reactxx-typings'
 import { TSBugHelper } from 'reactxx-core'
 
+export interface Props {
+    drawerWidths?: [number, number, number] //drawer width for mobile, tablet and desktop
+    animationDuration?: number //drawer animation duration for mobile and tablet
+}
+export interface State {
+    drawerOpened?: boolean
+}
+
+
 export interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root'> & TSheeter.ShapeTexts<'label'>
     native: TSheeter.ShapeViews<'nativeOnly'>
@@ -14,14 +23,12 @@ export interface Shape extends TSheeter.ShapeAncestor {
     style: 'View'
 
     theme: typeof Theme
-    sheetFlags: TSheeter.ShapeMarks<'isDisabled' | 'isDrawerOpened'>
+    codeFlags: TSheeter.ShapeMarks<'isDrawerClosed' | 'isDrawerOpened'>
     breakpoints: TSheeter.ShapeMarks<'tabletWidth' | 'mobileWidth' | 'desktopWidth'>
     transitionGroups: TSheeter.ShapeMarks<'tabletDrawer' | 'mobileDrawer'>
 
-    props: {
-        disabled?: boolean
-        drawerOpened?: boolean
-    }
+    props: Props
+    state: State
 }
 
 export const Theme = {

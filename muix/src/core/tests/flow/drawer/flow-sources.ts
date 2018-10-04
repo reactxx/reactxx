@@ -1,5 +1,5 @@
 import { sheet } from './sheet'
-import { defaultProps, props, cascading, width, propsToFlags } from './props'
+import { defaultProps, props, cascading, width, getFlags } from './props'
 
 export const flowSource = {
     sheet,
@@ -7,5 +7,5 @@ export const flowSource = {
     cascading,
     props, 
     width,
-    propsToFlags
+    getFlags
 }

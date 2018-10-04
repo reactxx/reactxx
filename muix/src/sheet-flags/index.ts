@@ -30,25 +30,28 @@ export const sheetFlags_finalizePropsCode2 = (pipeFlags: Record<string, boolean>
 }
 
 
-export type getSheetFlags<R extends TSheeter.Shape = TSheeter.Shape> = keyof R['sheetFlags']
-    //keyof R['sheetFlags'] extends never ? '``' : keyof R['sheetFlags']
+export type getCodeFlags<R extends TSheeter.Shape = TSheeter.Shape> = keyof R['codeFlags']
 
 declare module 'reactxx-typings' {
 
     namespace TVariants {
 
         interface Query<R extends TSheeter.Shape = TSheeter.Shape> {
-            [Consts.name]?: WhenFlagQuery<R>
+            [Consts.name]?: SheetFlags<R>
         }
-        type WhenFlagQuery<R extends TSheeter.Shape = TSheeter.Shape> = keyof getSheetFlags<R> extends never ? TSheeter.FakeInterface :
-            Record<getSheetFlags<R>, boolean>
+        type SheetFlags<R extends TSheeter.Shape = TSheeter.Shape> = keyof getCodeFlags<R> extends never ? TSheeter.FakeInterface :
+            Record<getCodeFlags<R>, boolean>
 
         interface ShapePart {
-            sheetFlags?: TSheeter.EmptyInterface
+            codeFlags?: TSheeter.EmptyInterface
+        }
+
+        interface PropsPart<R extends TSheeter.Shape = TSheeter.Shape> {
+            getCodeFlags?: (props: TComponents.Props<R>, state?: TComponents.State<R>, theme?: TSheeter.getTheme<R>) => getCodeFlags<R>
         }
 
         interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> {
-            sheetFlags?: WhenFlagQuery<R> // flags assigned in component code
+            sheetFlags?: SheetFlags<R> // flags assigned in component code
         }
 
         interface PipeState {
@@ -101,7 +104,6 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
     }
 }
 
-
-const testAtomicRuleset = (cond: WhenFlagCondition, query: TVariants.Query) =>
+const testAtomicRuleset = (cond: WhenFlagCondition, query) =>
     query.$sheetFlags && query.$sheetFlags[cond.flagName]
 

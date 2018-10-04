@@ -40,7 +40,7 @@ interface Shape2 extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
     native: TSheeter.ShapeViews<'nativeOnly'>
     web: TSheeter.ShapeMarks<'webOnly'>
-    sheetFlags: TSheeter.ShapeMarks<'disabled'>
+    codeFlags: TSheeter.ShapeMarks<'disabled'>
 }
 
 const style2: TSheeter.Ruleset<'Text', Shape2>[] = [

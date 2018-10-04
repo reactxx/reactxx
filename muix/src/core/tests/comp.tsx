@@ -6,7 +6,7 @@ interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root'> & TSheeter.ShapeTexts<'label'>
     native: TSheeter.ShapeViews<'nativeOnly'>
     web: TSheeter.ShapeMarks<'webOnly'>
-    sheetFlags: TSheeter.ShapeMarks<'isDisabled' | 'isActive'>
+    codeFlags: TSheeter.ShapeMarks<'isDrawerClosed' | 'isActive'>
     breakpoints: TSheeter.ShapeMarks<'isTabletWidth'>
     style: 'View'
 }
@@ -25,13 +25,13 @@ const sheet: Shape['$SheetCreator'] = theme => {
         root: {
             margin: 4,
             $sheetFlags: {
-                isDisabled: [{
+                isDrawerClosed: [{
                     //color: '$sheetFlags|disabled',
                 }],
             },
             $web: [{
                 $sheetFlags: {
-                    isDisabled: [{
+                    isDrawerClosed: [{
                         //color: '$sheetFlags|disabled',
                     }],
                 },
@@ -41,7 +41,7 @@ const sheet: Shape['$SheetCreator'] = theme => {
             $web: {
                 color: 'gray',
                 $sheetFlags: {
-                    isDisabled: [{
+                    isDrawerClosed: [{
                         color: '$sheetFlags|disabled',
                     }],
                 },
@@ -78,7 +78,7 @@ const App: TComponents.SFCCode<Shape> = props => {
             classes={theme => {
                 const res: typeof Inner['classes'] = {
                     root: [{ $sheetFlags: {
-                        isDisabled: {}, root: {}, isTabletWidth: {}
+                        isDrawerClosed: {}, root: {}, isTabletWidth: {}
                     }, margin: 0, $web: [{ $sheetFlags: {}, cursor: 'pointer' }], $native: [{ $sheetFlags: {}, margin: 0 }] }],
                     nativeOnly: { $native: [{ margin: 0 }] },
                     webOnly: { $web: [{ cursor: 'pointer' }] }
@@ -231,7 +231,7 @@ const sheet3: Partial<SheetCommon<Shape>> = {
         {
             margin: 0,
             $sheetFlags: {
-                isDisabled: {
+                isDrawerClosed: {
                     //color: ''
                 }
             }

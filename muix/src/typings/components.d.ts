@@ -34,12 +34,12 @@ declare namespace TComponents {
     //classes?: TSheeter.PartialSheet<R> // cross platform sheet
   }
 
-  export interface PropsLow<R extends Shape> { 
+  export interface PropsLow<R extends Shape> {
     $web?: Partial<TSheeter.getPropsWeb<R> & TSheeter.getProps<R>> //web specific props
     $native?: Partial<TSheeter.getPropsNative<R> & TSheeter.getProps<R>> //native specific props
   }
   export type Props<R extends Shape = Shape> = PartialOverwrite<TSheeter.getProps<R>,
-    CommonProperties<R> & 
+    CommonProperties<R> &
     TVariants.PropsPart<R> &
     TEventsX<R>>
 
@@ -49,15 +49,21 @@ declare namespace TComponents {
     classes: TSheeter.PartialSheet<R>
     classNamex: TSheeter.ClassNameOrAtomized<R>
   }
-  export type ComponentClass<R extends Shape = Shape> = React.ComponentClass<Props<R>>
-  export type SFC<R extends Shape = Shape> = React.SFC<Props<R>>
+  export type ComponentClass<R extends Shape = Shape> = ComponentClassLow<Props<R>, State<R>>
+  export interface ComponentClassLow<P = {}, S = {}> extends React.ComponentClass<P> {
+    setState?: <K extends keyof S>(
+      state: ((prevState: Readonly<S>, props: P) => (Pick<S, K> | S | null)) | (Pick<S, K> | S | null),
+      callback?: () => void
+    ) => void
+  }
+  export type State<R extends Shape = Shape> = TSheeter.getState<R>
 
   //******************** Cross platform component code props
 
   export type PropsCode<R extends Shape = Shape> = PartialOverwrite<
-    TSheeter.getProps<R>, CommonPropertiesCode<R> & 
+    TSheeter.getProps<R>, CommonPropertiesCode<R> &
     TVariants.PropsCodePart<R> &
-    EventsNative & 
+    EventsNative &
     EventsWeb>
 
   export interface CommonPropertiesCode<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
@@ -88,16 +94,16 @@ declare namespace TComponents {
   export interface EventsPress<R extends Shape = Shape> { onPress?: MouseEventEx<R>; onLongPress?: MouseEventEx<R> }
   export interface Events<R extends Shape = Shape> extends EventsPress<R> { onPressIn?: MouseEventEx<R>; onPressOut?: MouseEventEx<R> }
 
-  export interface EventsWeb { 
+  export interface EventsWeb {
     onClick?: React.MouseEventHandler<Element>
     onMouseDown?: React.MouseEventHandler<Element>
-    onMouseUp?: React.MouseEventHandler<Element> 
+    onMouseUp?: React.MouseEventHandler<Element>
   }
 
   //export interface NativeEventPar<R extends Shape = Shape> extends ReactN.GestureResponderEvent { current?: PropsCode<R> }
-  export interface EventsNative { 
+  export interface EventsNative {
     onPress?: () => void; onPressIn?: () => void
-    onPressOut?: () => void; onLongPress?: () => void 
+    onPressOut?: () => void; onLongPress?: () => void
   }
 
 } 

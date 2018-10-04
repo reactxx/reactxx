@@ -6,7 +6,7 @@ import { TCommonStyles, TSheeter, TVariants } from 'reactxx-typings'
 import { toClassNamesWithQuery } from 'reactxx-sheeter'
 import { transition_registerVariantHandler, transition_toPlatformClassName, transition_finalizePropsCode1, TTransition } from 'reactxx-sheet-transition'
 import { widthsPipe, getBreakpoints } from 'reactxx-sheet-widths'
-import { sheetFlags_registerVariantHandler, Consts, getSheetFlags, sheetFlags_finalizePropsCode1, sheetFlags_finalizePropsCode2 } from 'reactxx-sheet-flags'
+import { sheetFlags_registerVariantHandler, Consts, getCodeFlags, sheetFlags_finalizePropsCode1, sheetFlags_finalizePropsCode2 } from 'reactxx-sheet-flags'
 
 // workaround due to https://github.com/Microsoft/TypeScript/issues/27448
 export interface TSBugHelper<R extends TSheeter.Shape> {
@@ -38,7 +38,7 @@ export interface TSBugHelper<R extends TSheeter.Shape> {
 
 
 export type getFlagsAll<R extends TSheeter.Shape = TSheeter.Shape> =
-    getSheetFlags<R> | getBreakpoints<R> // TSheeter.RulesetNamesAll<R> | 
+    getCodeFlags<R> | getBreakpoints<R> // TSheeter.RulesetNamesAll<R> | 
 
 declare module 'reactxx-typings' {
 

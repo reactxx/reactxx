@@ -3,22 +3,22 @@ import React from 'react'
 import { TCommonStyles, TVariants, TSheeter, TComponents } from 'reactxx-typings'
 import { atomizeVariants } from 'reactxx-sheeter'
 import { TTransition } from 'reactxx-sheet-transition'
-import { getSheetFlags } from 'reactxx-sheet-flags';
+import { getCodeFlags } from 'reactxx-sheet-flags';
 import { TSBugHelper, getFlagsAll } from 'reactxx-core';
 
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root' | 'label'> & TSheeter.ShapeTexts<'text'>
     style: 'View'
     transitionGroups: TSheeter.ShapeMarks<'mobile' | 'tablet'>
-    sheetFlags: TSheeter.ShapeMarks<'active'>
+    codeFlags: TSheeter.ShapeMarks<'active'>
 }
 
 interface Shape2 extends TSheeter.ShapeAncestor {
 }
 
 
-const Comp: TComponents.SFC<Shape> = props => null
-const Comp2: TComponents.SFC<Shape2> = props => null
+const Comp: TComponents.ComponentClass<Shape> = null
+const Comp2: TComponents.ComponentClass<Shape2> = null
 
 const Test1 = <Comp  styleX={{margin:0}} />
 const Test2 = <Comp2/>

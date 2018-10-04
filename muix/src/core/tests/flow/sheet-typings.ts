@@ -1,4 +1,4 @@
-import { ts } from './shape-def'
+import { ts } from 'reactxx-core/tests/flow/shape'
 
 export const sheet = ts.sheetCreator = theme => ts.sheet = {
     root: ts.view = {
@@ -10,7 +10,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
             ':hover': {
                 ':active': {
                     $sheetFlags: ts.sheetFlags$Web = {
-                        isDisabled: [{
+                        isDrawerClosed: [{
                             color: 'red',
                             //x: 1,
                         }],
@@ -21,7 +21,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
             // ':active': [{
             // }],
             $sheetFlags: ts.sheetFlags$Web = {
-                isDisabled: [{
+                isDrawerClosed: [{
                     color: 'red',
                     cursor: 'pointer',
                     //x: 1,
@@ -72,7 +72,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
             color: 'gray',
             //x: 1,
             $sheetFlags: ts.sheetFlagsText = {
-                isDisabled: [{
+                isDrawerClosed: [{
                     color: 'red',
                     //x: 1,
                 }],
@@ -92,7 +92,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
             color: 'red',
             //x: 1,
             $sheetFlags: ts.sheetFlagsText = {
-                isDisabled: [{
+                isDrawerClosed: [{
                     color: 'red',
                     //x: 1,
                     $transitionGroup: ts.transitionGroup$Web = {
@@ -116,7 +116,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
             margin: 20,
             //color: 'red',
             $sheetFlags: ts.sheetFlagsView = {
-                isDisabled: [{
+                isDrawerClosed: [{
                     margin: 4,
                     //color: 'red',
                 }],
