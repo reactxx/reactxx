@@ -20,7 +20,7 @@ export const transition_registerVariantHandler = () => {
 
 }
 
-export const transition_finalizePropsCode1 = (state: TWithStyles.InstanceState) => {
+export const transition_finalizePropsCode1 = (state: TWithStyles.PipelineState) => {
     const st: CodeComponentHandler = state[TTransition.DefferedType.handlerFieldName] || (state[TTransition.DefferedType.handlerFieldName] = new CodeComponentHandler())
     st.finalizePropsCode(state)
 }

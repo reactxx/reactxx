@@ -8,7 +8,7 @@ export const width: getBreakpoints<Shape> =
     'mobileWidth'
     //'desktopWidth'
 
-export const getFlags = (props: TComponents.Props<Shape>, state: TComponents.State<Shape>) => ({
+export const getFlags = (props: TComponents.Props<Shape>, state: TComponents.InnerState<Shape>) => ({
     isDrawerOpened: state.drawerOpened,
     isDrawerClosed: !state.drawerOpened
 } as TVariants.SheetFlags<Shape>)

@@ -6,7 +6,7 @@ import { TCommonStyles, TSheeter, TVariants } from 'reactxx-typings'
 import { toClassNamesWithQuery } from 'reactxx-sheeter'
 import { transition_registerVariantHandler, transition_toPlatformClassName, transition_finalizePropsCode1, TTransition } from 'reactxx-sheet-transition'
 import { widthsPipe, getBreakpoints } from 'reactxx-sheet-widths'
-import { sheetFlags_registerVariantHandler, Consts, getCodeFlags, sheetFlags_finalizePropsCode1, sheetFlags_finalizePropsCode2 } from 'reactxx-sheet-flags'
+import { sheetFlags_registerVariantHandler, Consts, getCodeFlags } from 'reactxx-sheet-flags'
 
 // workaround due to https://github.com/Microsoft/TypeScript/issues/27448
 export interface TSBugHelper<R extends TSheeter.Shape> {
@@ -66,18 +66,28 @@ export const initCore = () => {
 
         createPipeline: widthsPipe,
 
-        finalizePropsCode: (propsCode, state) => {
-            const flags = sheetFlags_finalizePropsCode1(state)
+        finalizePropsCode: state => {
+            state.withSheetQueryComponent = true
             transition_finalizePropsCode1(state)
-            propsCode.toClassNames = rulesets => {
-                const sheetQuery = sheetFlags_finalizePropsCode2(flags, propsCode)
-                const res = toClassNamesWithQuery(sheetQuery, propsCode.theme, rulesets)
-                res.state = state
-                return res
-            }
+            state.propsCode.toClassNames = rulesets => toClassNamesWithQuery(state, rulesets)
         },
 
-        toPlatformClassName: transition_toPlatformClassName
+        toPlatformClassName: transition_toPlatformClassName,
+
+        mergeSheetQueries: pipelineState => {
+            let cnt = 0
+            let res: Record<string, boolean>
+            pipelineState.pipeStates.forEach(p => {
+                let flags 
+                if (!p || !p.sheetQuery || !(flags = p.sheetQuery.$sheetFlags)) return
+                switch (cnt) { 
+                    case 0: res = flags; break
+                    case 1: res = {...res,...flags}
+                    default: Object.assign(res, flags)
+                }
+            })
+            return res ? {$sheetFlags: res} : null
+        }
 
     })
 }

@@ -8,7 +8,7 @@ export class CodeComponentHandler {
     //platformCompIdCounter = 0
     rendersCount: number
 
-    finalizePropsCode(state: TWithStyles.InstanceState) {
+    finalizePropsCode(state: TWithStyles.PipelineState) {
         this.rendersCount = 0
         //this.elements = {}
     }

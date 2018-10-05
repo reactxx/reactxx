@@ -10,43 +10,58 @@ declare namespace TWithStyles {
     namedThemes?: { [themeName: string]: TTheme.Theme }
     finalizePropsCode?: FinishPropsCode
     toPlatformClassName?: TAtomize.ToPlatformClassName
+    mergeSheetQueries?: (pipelineState: TWithStyles.PipelineState) => TVariants.Query
   }
 
-  export type FinishPropsCode = (codeProps: TComponents.PropsCode, instanceState: TWithStyles.InstanceState) => void
+  export type FinishPropsCode = (instanceState: TWithStyles.PipelineState) => void
 
   // component type options
-  export interface ComponentState<R extends TSheeter.Shape = TSheeter.Shape> {
-    name?: string
+  export interface ComponentOptions<R extends TSheeter.Shape = TSheeter.Shape> {
+    displayName?: string
     defaultProps?: TComponents.Props<R>
     withTheme?: boolean
     sheetOrCreator?: TSheeter.SheetOrCreator
     CodeComponent?: TComponents.ComponentTypeCode<R>
+    //codeHooks?: TVariants.CodeHooks<R>
     // computed props
+    withSheetQueryComponent?: boolean // codeHooks && codeHooks.innerStateToSheetQuer
     componentId?: number
-    displayName?: string
   }
 
   // component instance options
-  export interface InstanceState extends ComponentState<TSheeter.Shape> {
-    id?: string
-    props?: TComponents.Props
+  export interface PipelineState extends ComponentOptions<TSheeter.Shape> {
+    id: string
+    props: TComponents.Props
+    pipeCounter: number
+
+    propsCode?: TComponents.PropsCode
     pipeStates?: PipeState[]
     sheet?: TAtomize.Sheet
-    //sheetQuery?: TVariants.Query
     theme?: TSheeter.getTheme
-    pipeCounter?: number
+
+    sheetQuery?: TVariants.Query
+    sheetQueryComponent?: SheetQueryComponent
   }
+
+  export interface SheetQueryComponentProps {
+    pipelineState: TWithStyles.PipelineState
+    pipeState: PipeState
+  }
+
+  export type SheetQueryComponent = React.Component<SheetQueryComponentProps, TVariants.Query> //{
 
   export interface PipeState extends TVariants.PipeState {
     codeProps?: TComponents.PropsCode | TComponents.PropsCode[]
+    sheetQuery?: TVariants.Query
+    data?: any
 
     classNameX?: TAtomize.Ruleset
     styleX?: TSheeter.StyleOrAtomized
     classes?: TSheeter.PartialSheet
   }
 
-  export type Pipe = (instanceState: TWithStyles.InstanceState, next: ReactNodeCreator) => ReactNodeCreator
-  export type Pipeline = (instanceState: TWithStyles.InstanceState) => ReactNodeCreator
+  export type Pipe = (instanceState: TWithStyles.PipelineState, next: ReactNodeCreator) => ReactNodeCreator
+  export type Pipeline = (instanceState: TWithStyles.PipelineState) => ReactNodeCreator
   export type ReactNodeCreator = () => React.ReactNode
 
 }

@@ -1,25 +1,25 @@
 import React from 'react';
 import { TWithStyles, TComponents } from 'reactxx-typings'
 
-export const widthsPipe: TWithStyles.Pipe = (state, next) => {
-    const pipeId = state.pipeCounter++
+export const widthsPipe: TWithStyles.Pipe = (pipelineState, next) => {
+    const pipeId = pipelineState.pipeCounter++
     const render = (width: number) => {
         const widthName: string = ''
-        state.pipeStates[pipeId] = {
+        pipelineState.pipeStates[pipeId] = {
             codeProps: {
                 breakpoints: {
                     [widthName]: true
                 }
             },
-            sheetFlags: { [widthName]: true }
+            //sheetFlags: { [widthName]: true }
         }
         return next()
     }
     return () => {
-        const { pipeStates } = state
+        const { pipeStates } = pipelineState
         // UNDO
         delete pipeStates[pipeId]
-        if (!state.props.breakpoints) return next()
-        return <div>{render}</div>
+        if (!pipelineState.props.breakpoints) return next()
+        return <div>{render}</div> // TODO width consumer: 
     }
 }

@@ -36,7 +36,7 @@ declare namespace TAtomize {
 
   export type AtomicArray = {
     [TypedInterfaceTypes.prop]: TypedInterfaceTypes.atomicArray
-    state?: TWithStyles.InstanceState
+    state?: TWithStyles.PipelineState
   } &
     Atomic[] // last value in array (with the same propId) wins!
 

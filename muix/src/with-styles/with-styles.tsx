@@ -14,15 +14,15 @@ export const initGlobalState = (options: TWithStyles.GlobalState = null) => {
     globalOptions.namedThemes[defaultThemeName] = globalOptions.getDefaultTheme()
 }
 
-export const withStylesCreator = <R extends TSheeter.Shape, TStatic extends {} = {}>(
+export const withStylesCreator = <R extends TSheeter.Shape>(
   sheetOrCreator: TSheeter.SheetOrCreator<R>,
   codeComponent: TComponents.ComponentTypeCode<R>,
-  componentState?: TWithStyles.ComponentState<R>
+  componentState?: TWithStyles.ComponentOptions<R>
 ) => (
-  overrideComponentState?: TWithStyles.ComponentState<R>
+  overrideComponentState?: TWithStyles.ComponentOptions<R>
 ) => withStyles(
   finishComponentState(sheetOrCreator, codeComponent, componentState, overrideComponentState)
-) as TComponents.ComponentClass<R> & TStatic & TProvider<R>
+) as TComponents.ComponentClass<R> & TSheeter.getStaticProps<R> & TProvider<R>
 
 export interface TProvider<R extends TSheeter.Shape> { Provider: React.ComponentClass<TComponents.Props<R>> }
 
@@ -30,27 +30,40 @@ export interface TProvider<R extends TSheeter.Shape> { Provider: React.Component
 //  PRIVATE
 //*********************************************************
 
-const withStyles = (componentState: TWithStyles.ComponentState) => {
+const withStyles = (componentState: TWithStyles.ComponentOptions) => {
 
   //const componentState = componentStateProc()
 
   class Styled extends React.Component<TComponents.Props> {
 
-    instanceState: TWithStyles.InstanceState = {
+    pipelineState: TWithStyles.PipelineState = {
       ...componentState,
       id: componentState.displayName + ' *' + componentInstaneCounter++,
       props: this.props,
       pipeCounter: 1,
+      // queryComponentRef: React.createRef(),
+      // setQuery: setter => {
+      //   const { pipelineState, pipelineState: { queryComponentRef: { current } } } = this
+      //   if (!current)
+      //     pipelineState.initQuery = setter(pipelineState.initQuery, { pipelineState })
+      //   else
+      //     current.setState(setter)
+      // },
+
+      // setInnerState: (innerState, pipelineState: TWithStyles.PipelineState, propsCode?: TComponents.PropsCode) => {
+      //   if(typeof pipelineState.innerState === 'function') pipelineState.innerState(innerState, propsCode)
+      //   else pipelineState.innerState = pipelineState.innerState ? {...pipelineState.innerState, ...innerState} : innerState
+      // }
     }
 
     pipeline = (() => {
       if (globalOptions.createPipeline)
-        return firstPipe(this.instanceState,
-          globalOptions.createPipeline(this.instanceState,
-            lastPipe(this.instanceState, null)))
+        return firstPipe(this.pipelineState,
+          globalOptions.createPipeline(this.pipelineState,
+            lastPipe(this.pipelineState, null)))
       else
-        return firstPipe(this.instanceState,
-          lastPipe(this.instanceState, null))
+        return firstPipe(this.pipelineState,
+          lastPipe(this.pipelineState, null))
     })()
 
     render() {
@@ -67,21 +80,23 @@ const withStyles = (componentState: TWithStyles.ComponentState) => {
 
 const finishComponentState = (
   sheetOrCreator: TSheeter.SheetOrCreator, CodeComponent: TComponents.ComponentTypeCode,
-  componentState: TWithStyles.ComponentState, overrideComponentState: TWithStyles.ComponentState
+  componentState: TWithStyles.ComponentOptions, overrideComponentState: TWithStyles.ComponentOptions
 ) => {
-  const mergedOptions = componentState && overrideComponentState ?
+  const mergedOptions:TWithStyles.ComponentOptions = componentState && overrideComponentState ?
     deepMerges({}, [componentState, overrideComponentState]) : componentState ?
       componentState : overrideComponentState ?
         overrideComponentState : {}
   const componentId = componentTypeCounter++
-  const res: TWithStyles.ComponentState = {
+  const res: TWithStyles.ComponentOptions = {
     ...mergedOptions,
     sheetOrCreator,
     componentId,
     CodeComponent,
     withTheme: typeof mergedOptions.sheetOrCreator === 'function' ? true : mergedOptions.withTheme,
-    displayName: `${mergedOptions.name || CodeComponent.displayName} (${componentId})`
+    displayName: `${mergedOptions.displayName || CodeComponent.displayName || CodeComponent['name'] || 'unknown'} (${componentId})`,
+    withSheetQueryComponent: !!CodeComponent.fillSheetQuery, // mergedOptions.codeHooks && !!mergedOptions.codeHooks.innerStateToSheetQuery,
   }
+  //if (res.withSheetQueryComponent) mergedOptions.codeHooks.innerStateToSheetQuery(mergedOptions.codeHooks.initInnerState)
   return res
 }
 

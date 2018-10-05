@@ -1,11 +1,13 @@
-import { TSheeter, TAtomize, TVariants, TComponents } from 'reactxx-typings'
+import { TWithStyles, TSheeter, TAtomize, TVariants } from 'reactxx-typings'
 import { atomizeRuleset, isAtomizedRuleset, isAtomicArray } from './atomize'
 import { testConditions } from './variants'
 
-export const toClassNamesWithQuery = (query: TVariants.Query, theme, rulesets: TSheeter.ClassNameOrAtomized) => {
-    if (!rulesets) return emptyAtomicArray
+export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, rulesets: TSheeter.ClassNameOrAtomized) => {
+    if (!rulesets) return finishAtomicArray([] as any, state)
 
-    if (isAtomicArray(rulesets)) return finishAtomicArray (rulesets)
+    if (isAtomicArray(rulesets)) {
+        return rulesets.state === state ? rulesets : finishAtomicArray([...rulesets] as any, state)
+    }
 
     const values: TAtomize.Atomic[][] = []
 
@@ -16,11 +18,11 @@ export const toClassNamesWithQuery = (query: TVariants.Query, theme, rulesets: T
             return
         }
         if (!isAtomizedRuleset(val))
-            atomizeRuleset(val, theme)
+            atomizeRuleset(val, state.theme)
 
         for (let j = 0; j < val.list.length; j++) {
             const rsi = val.list[j]
-            if (!testConditions(rsi.conditions, query as TVariants.Query)) continue
+            if (!testConditions(rsi.conditions, state.sheetQuery)) continue
             values.push(rsi.isDeffered ? [rsi] : rsi.atomicArray)
         }
 
@@ -33,7 +35,7 @@ export const toClassNamesWithQuery = (query: TVariants.Query, theme, rulesets: T
 
     // concat values
     const res = Array.prototype.concat.apply([], values) as TAtomize.AtomicArray
-    return finishAtomicArray(res)
+    return finishAtomicArray(res, state)
 }
 
 // export const toClassNames = (...rulesets: TSheeter.RulesetItem[]) => toClassNamesWithQuery({}, null, rulesets)
@@ -50,12 +52,11 @@ const propsToDelete: string[] = [ //TComponents.CommonPropertiesCodeKeys[] = [
     'sheetQuery', 'classes', 'toClassNames', 'styleX', 'classNameX', 'theme'
 ]
 
-const finishAtomicArray = (res: TAtomize.AtomicArray) => {
+const finishAtomicArray = (res: TAtomize.AtomicArray, state: TWithStyles.PipelineState) => {
     res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
+    res.state = state
     return res
 }
-
-const emptyAtomicArray = finishAtomicArray([] as any)
 
 // merge rulesets and apply query to ruleset's conditional parts ($sheetFlagss, $mediaq etc.)
 // export const toClassNamesWithQueryEx = (query: TVariants.Query | ((usedRuesets: Record<string, true>) => TVariants.Query), theme, rulesets: TSheeter.ClassNameOrAtomized) => {

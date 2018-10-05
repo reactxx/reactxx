@@ -104,3 +104,19 @@ const sheet2: TSheeter.Sheet<Shape> = ts.sheet = {
         },
     }
 }
+
+const innerState = {
+    drawerOpened: true,
+    $sheetFlags: {
+        tabletWidth: false,
+        desktopWidth: false,
+        mobileWidth: true,
+        isDrawerClosed: true,
+        isDrawerOpened: false,
+    },
+    $anyOther: {},
+}
+
+type InnerState = any
+type Query = any
+let setInnerState: (innerState: InnerState, oldQuery: Query) => Query

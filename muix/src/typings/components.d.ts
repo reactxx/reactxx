@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TSheeter, TAtomize, TVariants } from './index'
+import { TSheeter, TAtomize, TVariants, TWithStyles } from './index'
 
 declare namespace TComponents {
 
@@ -49,14 +49,11 @@ declare namespace TComponents {
     classes: TSheeter.PartialSheet<R>
     classNamex: TSheeter.ClassNameOrAtomized<R>
   }
-  export type ComponentClass<R extends Shape = Shape> = ComponentClassLow<Props<R>, State<R>>
-  export interface ComponentClassLow<P = {}, S = {}> extends React.ComponentClass<P> {
-    setState?: <K extends keyof S>(
-      state: ((prevState: Readonly<S>, props: P) => (Pick<S, K> | S | null)) | (Pick<S, K> | S | null),
-      callback?: () => void
-    ) => void
-  }
-  export type State<R extends Shape = Shape> = TSheeter.getState<R>
+  export type ComponentClass<R extends Shape = Shape> = React.ComponentClass<Props<R>>
+
+  export type InnerState<R extends Shape = Shape> =
+    TVariants.Query<R> &
+    TSheeter.getInnerState<R>
 
   //******************** Cross platform component code props
 
@@ -73,12 +70,19 @@ declare namespace TComponents {
     classes?: TAtomize.Sheet<R>
     toClassNames?: (rulesets: TSheeter.RulesetOrAtomized) => TAtomize.AtomicArray
     theme?: TSheeter.getTheme<R>
+    setInnerState?: (setState: (prevState: TSheeter.getInnerState<R>, props: PropsCode<R>) => TSheeter.getInnerState<R>) => void
   }
 
   export type CommonPropertiesCodeKeys = keyof PropsCode
 
-  export type SFCCode<R extends Shape = Shape> = React.SFC<PropsCode<R>>
-  export type ComponentTypeCode<R extends Shape = Shape> = React.ComponentType<PropsCode<R>>
+  export type SFCCode<R extends Shape = Shape> = React.SFC<PropsCode<R>> & { fillSheetQuery?: FillSheetQuery<R> }
+  export type ComponentTypeCode<R extends Shape = Shape> = React.ComponentType<PropsCode<R>> & { fillSheetQuery?: FillSheetQuery<R> }
+  export type FillSheetQuery<R extends Shape> = (props: PropsCode<R>, pipeState?: PipeState<R>) => void
+  export interface PipeState<R extends Shape> {
+    sheetQuery?: TVariants.Query
+    data?: TSheeter.getInnerState<R>
+  }
+
 
   /******************************************
     EVENTS

@@ -11,7 +11,7 @@ export interface Props {
     drawerWidths?: [number, number, number] //drawer width for mobile, tablet and desktop
     animationDuration?: number //drawer animation duration for mobile and tablet
 }
-export interface State {
+export interface InnerState {
     drawerOpened?: boolean
 }
 
@@ -28,7 +28,7 @@ export interface Shape extends TSheeter.ShapeAncestor {
     transitionGroups: TSheeter.ShapeMarks<'tabletDrawer' | 'mobileDrawer'>
 
     props: Props
-    state: State
+    innerState: InnerState
 }
 
 export const Theme = {

@@ -1,5 +1,3 @@
-﻿ruleset
-    name
-    value-list
-classNameX
-    ruleset, compileRuleset, values
+﻿static props to shape (e.g. Drawer.OpenChanged context consumer)
+component codeHooks to options (e.g. innerStateToSheetQuery, onWidthChanged)
+setInnerState(state => sheetQuery) to PropsCode

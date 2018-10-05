@@ -3,32 +3,32 @@ import warning from 'warning';
 import { TTheme, TAtomize, TSheeter, TWithStyles } from 'reactxx-typings'
 import { mergeSheet, globalOptions, atomizeRuleset, atomizeSheet, atomizeStyle } from 'reactxx-sheeter'
 
-export const applyTheme = (pipeId: number, theme: TTheme.Theme, state: TWithStyles.InstanceState) => {
+export const applyTheme = (pipeId: number, theme: TTheme.Theme, pipelineState: TWithStyles.PipelineState) => {
   warning(pipeId > 0, 'pipe-first.pipeId must be greater that zero')
 
-  const { props: { classes, classNameX, styleX, themedProps, ...propsRest }, defaultProps } = state
+  const { props: { classes, classNameX, styleX, themedProps, ...propsRest }, defaultProps } = pipelineState
 
-  state.pipeStates = []
-  state.theme = theme
+  pipelineState.pipeStates = []
+  pipelineState.theme = theme
 
   if (defaultProps) {
     const { classNameX: defaultClassNameX, styleX: defaultStyleX, themedProps: defaultThemedProps, ...defaultPropsRest } = defaultProps
-    // defaultProps.classes is merged with cached sheet in createSheetWithTheme
-    state.pipeStates[0] = {
+    // defaultProps.classes is merged and cached with sheet in createSheetWithTheme
+    pipelineState.pipeStates[0] = {
       codeProps: [defaultPropsRest, defaultThemedProps ? defaultThemedProps(theme) : null],
       classNameX: atomizeRuleset(defaultClassNameX, theme),
       styleX: atomizeStyle(defaultStyleX, theme),
     }
   }
 
-  state.pipeStates[pipeId] = {
+  pipelineState.pipeStates[pipeId] = {
     codeProps: [propsRest, themedProps ? themedProps(theme) : null],
     classes: atomizeSheet(classes, theme),
     classNameX: atomizeRuleset(classNameX, theme),
     styleX: atomizeStyle(styleX, theme),
   }
 
-  state.sheet = sheetFromThemeCache(state)
+  pipelineState.sheet = sheetFromThemeCache(pipelineState)
 }
 
 export const registerTheme = (name: string, theme: TTheme.Theme) => {
@@ -58,7 +58,7 @@ export const defaultThemeName = '*default-theme*'
 //  PRIVATE
 //*********************************************************
 
-const sheetFromThemeCache = (state: TWithStyles.InstanceState) => {
+const sheetFromThemeCache = (state: TWithStyles.PipelineState) => {
   const { componentId, defaultProps, sheetOrCreator } = state
   const theme = state.theme as TTheme.Theme
   const cache = theme ? theme.$cache ? theme.$cache  : (theme.$cache = {}) : $cache

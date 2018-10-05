@@ -16,19 +16,18 @@ import { TWithStyles, TSheeter } from 'reactxx-typings'
 
 export const view: TComponents.SFCCode<TPrimitives.ViewShape> = props => {
     const { styleX, classNameX, toClassNames, classes, ...rest } = props
-    props.sheetFlags = { pressable: hasPlatformEvents(props) }
     return <div classNameX={toClassNames([classes.root, classNameX])} styleX={styleX} {...rest} />
 }
+view.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetFlags: { pressable: hasPlatformEvents(props)  } }
 
-export const hasPlatformEvents = (cpx: TComponents.PropsCode) => !!(
+export const hasPlatformEvents = (propsCode: TComponents.PropsCode) => !!(
     window.isWeb ?
-        cpx.onClick || cpx.onMouseUp || cpx.onMouseDown :
-        cpx.onPress || cpx.onPressIn || cpx.onPressOut || cpx.onLongPress
+        propsCode.onClick || propsCode.onMouseUp || propsCode.onMouseDown :
+        propsCode.onPress || propsCode.onPressIn || propsCode.onPressOut || propsCode.onLongPress
 )
 
 export const icon: TComponents.SFCCode<TPrimitives.IconShape> = props => {
     const { styleX, classNameX, classes, toClassNames, children, data, url/*, onClick*/, ...rest } = props
-    props.sheetFlags = { pressable: hasPlatformEvents(props) }
     const svg = <svg
         classNameX={toClassNames([classes.root, classNameX])}
         styleX={styleX}
@@ -37,23 +36,20 @@ export const icon: TComponents.SFCCode<TPrimitives.IconShape> = props => {
     </svg>
     return url ? <a href={url}>{svg}</a> : svg
 }
+icon.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetFlags: { pressable: hasPlatformEvents(props) } }
 
 export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = props => {
     const { styleX, classNameX, classes, toClassNames, children, horizontal, ...rest } = props
-    props.sheetFlags = { horizontal }
     return <div classNameX={toClassNames([classes.root, classNameX])} styleX={styleX} {...rest}>
         <div classNameX={toClassNames([classes.container])}>
             {children}
         </div>
     </div>
 }
+scrollView.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetFlags: { horizontal: props.horizontal } }
 
 export const text: TComponents.SFCCode<TPrimitives.TextShape> = props => {
     const { classNameX, classes, toClassNames, singleLine, url/*, onClick*/, ...rest } = props
-    props.sheetFlags = {
-        pressable: hasPlatformEvents(props),
-        singleLine,
-    }
     const tagProps = {
         className: TPrimitives.Consts.textClassName,
         classNameX: toClassNames([classes.root, classNameX]),
@@ -62,19 +58,20 @@ export const text: TComponents.SFCCode<TPrimitives.TextShape> = props => {
     }
     return url ? <a href={url} {...tagProps} /> : <div {...tagProps} />
 }
+text.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetFlags: { pressable: hasPlatformEvents(props), singleLine: props.singleLine } }
 
 export const textCreator = withStylesCreator<TPrimitives.TextShape>(textSheet, text, {
-    name: CompNames.Text,
+    displayName: CompNames.Text,
 })
 export const Text = textCreator()
 
 export const viewCreator = withStylesCreator<TPrimitives.ViewShape>(viewSheet, view, {
-    name: CompNames.View,
+    displayName: CompNames.View,
 })
 export const View = viewCreator()
 
 export const iconCreator = withStylesCreator<TPrimitives.IconShape>(iconSheet, icon, {
-    name: CompNames.Icon,
+    displayName: CompNames.Icon,
     defaultProps: {
         $web: {
             viewBox: '0 0 24 24',
@@ -85,22 +82,23 @@ export const iconCreator = withStylesCreator<TPrimitives.IconShape>(iconSheet, i
 export const Icon = iconCreator()
 
 export const scrollViewCreator = withStylesCreator<TPrimitives.ScrollViewShape>(scrollViewSheet, scrollView, {
-    name: CompNames.ScrollView,
+    displayName: CompNames.ScrollView,
+    //codeHooks: {innerStateToSheetQuery: getScrollViewSheetQuery}
 })
 export const ScrollView = scrollViewCreator()
 
 export const animatedTextCreator = withStylesCreator<TPrimitives.TextShape>(textSheet, text, {
-    name: CompNames.AnimatedText,
+    displayName: CompNames.AnimatedText,
 })
 export const AnimatedText = animatedTextCreator()
 
 export const animatedViewCreator = withStylesCreator<TPrimitives.ViewShape>(viewSheet, view, {
-    name: CompNames.AnimatedView,
+    displayName: CompNames.AnimatedView,
 })
 export const AnimatedView = animatedViewCreator()
 
 export const animatedIconCreator = withStylesCreator<TPrimitives.IconShape>(iconSheet, icon, {
-    name: CompNames.AnimatedIcon,
+    displayName: CompNames.AnimatedIcon,
     defaultProps: {
         $web: {
             viewBox: '0 0 24 24',

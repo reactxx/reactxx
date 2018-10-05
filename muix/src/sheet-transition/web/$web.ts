@@ -8,7 +8,7 @@ import { TTransition } from '../d-index'
 // platform dependent export
 export * from 'reactxx-sheet-transition/web/$web'
 
-export const transition_finalizePropsCode1 = (state: TWithStyles.InstanceState) => {
+export const transition_finalizePropsCode1 = (state: TWithStyles.PipelineState) => {
     
 }
 

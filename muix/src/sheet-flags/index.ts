@@ -11,25 +11,6 @@ export const sheetFlags_registerVariantHandler = () => registerVariantHandler({
     testAtomicRuleset
 })
 
-// export const finishPropsCode: TWithStyles.FinishPropsCode = (propsCode, state) => {
-//     const { pipeStates } = state
-//     propsCode.toClassNames = toClassNamesForBind(mergeFlags(pipeStates.map(p => p.flags)), propsCode)
-// }
-
-export const sheetFlags_finalizePropsCode1 = (state: TWithStyles.InstanceState) => {
-    const { pipeStates } = state
-    return mergeFlags(pipeStates.map(p => p.sheetFlags))
-}
-
-export const sheetFlags_finalizePropsCode2 = (pipeFlags: Record<string, boolean>, propsCode: TComponents.PropsCode) => {
-    const { sheetFlags } = propsCode
-    const sheetQuery: TVariants.Query = {
-        $sheetFlags: pipeFlags && sheetFlags ? { ...pipeFlags, ...sheetFlags } : sheetFlags ? sheetFlags : pipeFlags
-    }
-    return sheetFlags
-}
-
-
 export type getCodeFlags<R extends TSheeter.Shape = TSheeter.Shape> = keyof R['codeFlags']
 
 declare module 'reactxx-typings' {
@@ -46,17 +27,13 @@ declare module 'reactxx-typings' {
             codeFlags?: TSheeter.EmptyInterface
         }
 
-        interface PropsPart<R extends TSheeter.Shape = TSheeter.Shape> {
-            getCodeFlags?: (props: TComponents.Props<R>, state?: TComponents.State<R>, theme?: TSheeter.getTheme<R>) => getCodeFlags<R>
-        }
-
         interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> {
-            sheetFlags?: SheetFlags<R> // flags assigned in component code
+            sheetQuery?: Query<R> // flags assigned in component code
         }
 
-        interface PipeState {
-            sheetFlags?: Record<string, true>
-        }
+        // interface PipeState {
+        //     sheetFlags?: Record<string, true>
+        // }
 
     }
 }

@@ -121,7 +121,8 @@ declare namespace TSheeter {
     //******************** style constrain
     style: TCommonStyles.RulesetNativeIds // for web, style has always React.CSSProperties type
     //**** component property constrains
-    state: EmptyInterface // component state
+    innerState: EmptyInterface // inner component state
+    staticProps: EmptyInterface
     props: EmptyInterface // common (web and native) props, excluding events
     propsNative: EmptyInterface // native only props 
     propsWeb: React.HTMLAttributes<Element>// web only props
@@ -135,8 +136,9 @@ declare namespace TSheeter {
     native: EmptyInterface
     web: EmptyInterface
     style: unknown
-    state: EmptyInterface // component state
+    innerState: EmptyInterface // component state
     props: EmptyInterface
+    staticProps: EmptyInterface
     propsNative: ReactN.ViewProperties
     propsWeb: React.DOMAttributes<Element>
     events: EmptyInterface //ShapeWeb<TEventsAll>
@@ -157,7 +159,8 @@ declare namespace TSheeter {
   export type getPropsNative<R extends Shape> = R['propsNative']
   export type getEvents<R extends Shape = Shape> = keyof R['events']
   export type getTheme<R extends Shape = Shape> = keyof R['theme'] extends never ? FakeInterface : R['theme']
-  export type getState<R extends Shape = Shape> = keyof R['state'] extends never ? FakeInterface : R['state']
+  export type getInnerState<R extends Shape = Shape> = keyof R['innerState'] extends never ? FakeInterface : R['innerState']
+  export type getStaticProps<R extends Shape> = keyof R['staticProps'] extends never ? FakeInterface : R['staticProps']
 
   export type RulesetNamesAll<R extends Shape> = keyof getCommon<R> | keyof getNative<R> | getWeb<R>
 
