@@ -38,8 +38,8 @@
       "reactxx-sheet-widths": [
         "src/sheet-widths/index"
       ],
-      "reactxx-sheet-flags": [
-        "src/sheet-flags/index"
+      "reactxx-sheet-switch": [
+        "src/sheet-switch/index"
       ],
       "reactxx-sheet-transition/*": [
         "src/sheet-transition/*"
@@ -101,7 +101,7 @@
     "src/with-styles",
 
     "src/sheet-transition", 
-    "src/sheet-flags", 
+    "src/sheet-switch", 
     "src/sheet-widths",
 
     "src/primitives",

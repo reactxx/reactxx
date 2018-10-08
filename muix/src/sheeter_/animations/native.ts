@@ -66,5 +66,5 @@ const sheetToInterpolate = (inputSheet: AnimSheet) => {
 }
 
 //Allowed native driver props, see https://github.com/facebook/react-native/blob/master/Libraries/Animated/src/NativeAnimatedHelper.js
-const allowedStyles = { opacity: true, transform: true }
 const allowedTransforms = { translateX: true, translateY: true, scale: true, scaleX: true, scaleY: true, rotate: true, rotateX: true, rotateY: true, perspective: true, }
+const allowedStyles = { opacity: true, transform: true }

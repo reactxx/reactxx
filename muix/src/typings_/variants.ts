@@ -20,7 +20,7 @@ export namespace TVariants {
   //*********************************************************
 
   export interface VariantPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> {
-    $sheetFlags?: WhenFlagPart<T, R>
+    $sheetSwitch?: WhenFlagPart<T, R>
     $mediaq?: MediaQPart<T, R> // record key has format eg. '-640' or '640-1024' or '1024-'
     $animation?: AnimationPart
   }

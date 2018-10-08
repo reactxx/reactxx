@@ -11,7 +11,7 @@ export const widthsPipe: TWithStyles.Pipe = (pipelineState, next) => {
                     [widthName]: true
                 }
             },
-            //sheetFlags: { [widthName]: true }
+            //sheetSwitch: { [widthName]: true }
         }
         return next()
     }

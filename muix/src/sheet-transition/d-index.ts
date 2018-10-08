@@ -10,18 +10,26 @@ declare module 'reactxx-typings' {
 
         interface VariantPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> {
             $transition?: TTransition.Transition<T, R>
+            $transitionOpened?: boolean
             $transitionGroup?: TTransition.Group<T, R>
         }
 
-        // interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> {
-        //     transitionGroups?: TTransition.PropsCode<R>
-        // }
+        interface PropsPart<R extends TSheeter.Shape = TSheeter.Shape> {
+            transitionGroups?: TTransition.PropsGroups<R>
+        }
 
 
     }
 }
 
 export namespace TTransition {
+    // work flow
+    export interface Workflow {
+        toAtomicRuleset: TVariants.ToAtomicRuleset<Transition>
+        //abstract applyLastWinStrategy()
+        //abstract afterRender()
+    }
+
 
     //*********************************************************
     // DEFFERED (created during atomize, processed just before putting style to React native STYLE prop)
@@ -30,13 +38,13 @@ export namespace TTransition {
         [TAtomize.TypedInterfaceTypes.prop]: DefferedType.groupWeb
         props: Record<string, boolean> // used props => ignored in applyLastWinStrategy
     }
-    export interface DefferedNativeGroup extends DefferedGroup {
-        [TAtomize.TypedInterfaceTypes.prop]: DefferedType.groupWeb
+    export interface DefferedGroupNative extends DefferedGroup {
+        [TAtomize.TypedInterfaceTypes.prop]: DefferedType.groupNative
         props: GroupProps
     }
     export interface DefferedNative extends Deffered {
         [TAtomize.TypedInterfaceTypes.prop]: DefferedType.native
-        usedProps: Record<string,true>
+        usedProps: Record<string, true>
     }
 
     export const enum DefferedType {
@@ -69,17 +77,31 @@ export namespace TTransition {
 
 
     //*********************************************************
-    // INPUT (transition classNameX and classes typing)
+    // INPUT (transition classNameX, props and classes typing)
     //*********************************************************
 
     export type getTransitionGroups<R extends TSheeter.Shape = TSheeter.Shape> = keyof R['transitionGroups']
 
-    export interface Transition<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> {
+    export type PropsGroups<R extends TSheeter.Shape = TSheeter.Shape> = Record<getTransitionGroups<R>, PropsGroup>
+    export interface PropsGroup {
+        duration: number
+        easing?: string
+        initOpened?: boolean
+    }
+
+    export type Transition<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
+        TransitionLow<T> &
+        RulesetCommon<T>
+
+        // $props: (keyof TCommonStyles.RulesetCommonLow<T>)[]
+        // $propsWeb?: (keyof TCommonStyles.RulesetWeb)[]
+        // $propsNative?: (keyof TCommonStyles.RulesetNative<T>)[]
+    export interface TransitionLow<T extends TCommonStyles.RulesetNativeIds> {
         $duration: number
-        $props: (keyof TCommonStyles.RulesetCommon<T>)[]
+        $initOpened?: boolean,
         $easing?: string
-        $propsWeb?: (keyof TCommonStyles.RulesetWeb)[]
-        $propsNative?: (keyof TCommonStyles.RulesetNative<T>)[]
+        $native?: RulesetNative<T>
+        $web?: RulesetWeb
     }
 
     export type Group<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
@@ -93,17 +115,24 @@ export namespace TTransition {
         $web?: RulesetWeb
     }
 
-    export type GroupValue = [number, number, string?] | [string, string, string?]
+    export type GroupValue<T> = [T, T, string?]
 
-    export type RulesetRecord<T> = PartialRecord<keyof T, GroupValue>
+    export type RulesetRecord<T> = { [P in keyof T]?: GroupValue<T[P]> } 
 
     export type RulesetCommon<T extends TCommonStyles.RulesetNativeIds> =
-        RulesetRecord<TCommonStyles.RulesetCommon<T>>
+        RulesetRecord<TCommonStyles.RulesetCommonLow<T>> &
+        {transform?: TransformProp}
 
     export type RulesetNative<T extends TCommonStyles.RulesetNativeIds> =
         RulesetRecord<TCommonStyles.RulesetNative<T>>
 
     export type RulesetWeb =
         RulesetRecord<React.CSSProperties>
+
+    export type TGroupValue<T> = [T, T]
+
+    export type TRulesetRecord = { [P in keyof TCommonStyles.Transform]?: TGroupValue<TCommonStyles.Transform[P]> }
+
+    export type TransformProp = TRulesetRecord & { $interval?: string }
 
 }

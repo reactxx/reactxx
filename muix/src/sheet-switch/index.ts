@@ -2,29 +2,29 @@ import { TComponents, TSheeter, TVariants, TWithStyles } from 'reactxx-typings'
 import { registerVariantHandler, atomizeRulesetInner, mergeFlags, wrapPseudoPrefixes } from 'reactxx-sheeter'
 
 export const enum Consts {
-    name = '$sheetFlags'
+    name = '$sheetSwitch'
 }
 
-export const sheetFlags_registerVariantHandler = () => registerVariantHandler({
+export const sheetSwitch_registerVariantHandler = () => registerVariantHandler({
     name: Consts.name,
     toAtomicRuleset,
     testAtomicRuleset
 })
 
-export type getCodeFlags<R extends TSheeter.Shape = TSheeter.Shape> = keyof R['codeFlags']
+export type getCases<R extends TSheeter.Shape = TSheeter.Shape> = keyof R['cases']
 
 declare module 'reactxx-typings' {
 
     namespace TVariants {
 
         interface Query<R extends TSheeter.Shape = TSheeter.Shape> {
-            [Consts.name]?: SheetFlags<R>
+            [Consts.name]?: SheetCases<R>
         }
-        type SheetFlags<R extends TSheeter.Shape = TSheeter.Shape> = keyof getCodeFlags<R> extends never ? TSheeter.FakeInterface :
-            Record<getCodeFlags<R>, boolean>
+        type SheetCases<R extends TSheeter.Shape = TSheeter.Shape> = keyof getCases<R> extends never ? TSheeter.FakeInterface :
+            Record<getCases<R>, boolean>
 
         interface ShapePart {
-            codeFlags?: TSheeter.EmptyInterface
+            cases?: TSheeter.EmptyInterface
         }
 
         interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> {
@@ -32,7 +32,7 @@ declare module 'reactxx-typings' {
         }
 
         // interface PipeState {
-        //     sheetFlags?: Record<string, true>
+        //     sheetSwitch?: Record<string, true>
         // }
 
     }
@@ -45,9 +45,9 @@ declare module 'reactxx-typings' {
 // const toClassNamesForBind = (pipeFlags: Record<string, true>, propsCode: TComponents.PropsCode) => {
 
 //     return (rulesets: TSheeter.RulesetItem[]) => {
-//         const { sheetFlags } = propsCode
+//         const { sheetSwitch } = propsCode
 //         const sheetQuery: TVariants.Query = {
-//             $sheetFlags: pipeFlags && sheetFlags ? { ...pipeFlags, ...sheetFlags } : sheetFlags ? sheetFlags : pipeFlags
+//             $sheetSwitch: pipeFlags && sheetSwitch ? { ...pipeFlags, ...sheetSwitch } : sheetSwitch ? sheetSwitch : pipeFlags
 //         }
 //         return toClassNamesWithQuery(sheetQuery, propsCode.theme, rulesets)
 //     }
@@ -66,7 +66,7 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
             rules.forEach((r, idx) =>
                 atomizeRulesetInner(
                     list, r,
-                    `${path}/$sheetFlags.${p}[${idx}]`,
+                    `${path}/$sheetSwitch.${p}[${idx}]`,
                     pseudoPrefixes,
                     [...conditions, { type: Consts.name, flagName: p } as WhenFlagCondition],
                     wrapPseudoPrefixes(r, pseudoPrefixes))
@@ -74,7 +74,7 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
         else
             atomizeRulesetInner(
                 list, rules,
-                `${path}/$sheetFlags.${p}`,
+                `${path}/$sheetSwitch.${p}`,
                 pseudoPrefixes,
                 [...conditions, { type: Consts.name, flagName: p } as WhenFlagCondition],
                 wrapPseudoPrefixes(rules, pseudoPrefixes))
@@ -82,5 +82,5 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
 }
 
 const testAtomicRuleset = (cond: WhenFlagCondition, query) =>
-    query.$sheetFlags && query.$sheetFlags[cond.flagName]
+    query.$sheetSwitch && query.$sheetSwitch[cond.flagName]
 

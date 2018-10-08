@@ -9,7 +9,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
             //x: 1,
             ':hover': {
                 ':active': {
-                    $sheetFlags: ts.sheetFlags$Web = {
+                    $sheetSwitch: ts.sheetSwitch$Web = {
                         isDrawerClosed: [{
                             color: 'red',
                             //x: 1,
@@ -20,7 +20,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
             },
             // ':active': [{
             // }],
-            $sheetFlags: ts.sheetFlags$Web = {
+            $sheetSwitch: ts.sheetSwitch$Web = {
                 isDrawerClosed: [{
                     color: 'red',
                     cursor: 'pointer',
@@ -55,7 +55,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
                 //cursor: 'pointer',
             },
         ],
-        $sheetFlags: ts.sheetFlagsView = {
+        $sheetSwitch: ts.sheetSwitchView = {
             mobileWidth: {},
             isDrawerOpened: {
                 //color: 'red',
@@ -71,7 +71,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
         $web: ts.web = [{
             color: 'gray',
             //x: 1,
-            $sheetFlags: ts.sheetFlagsText = {
+            $sheetSwitch: ts.sheetSwitchText = {
                 isDrawerClosed: [{
                     color: 'red',
                     //x: 1,
@@ -91,7 +91,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
         $web: ts.web = {
             color: 'red',
             //x: 1,
-            $sheetFlags: ts.sheetFlagsText = {
+            $sheetSwitch: ts.sheetSwitchText = {
                 isDrawerClosed: [{
                     color: 'red',
                     //x: 1,
@@ -115,7 +115,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
         $native: ts.nativeView = {
             margin: 20,
             //color: 'red',
-            $sheetFlags: ts.sheetFlagsView = {
+            $sheetSwitch: ts.sheetSwitchView = {
                 isDrawerClosed: [{
                     margin: 4,
                     //color: 'red',

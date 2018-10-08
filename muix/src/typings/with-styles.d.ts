@@ -9,7 +9,7 @@ declare namespace TWithStyles {
     createPipeline?: Pipe
     namedThemes?: { [themeName: string]: TTheme.Theme }
     finalizePropsCode?: FinishPropsCode
-    toPlatformClassName?: TAtomize.ToPlatformClassName
+    applyLastWinStrategy?: TAtomize.ToPlatformClassName
     mergeSheetQueries?: (pipelineState: TWithStyles.PipelineState) => TVariants.Query
   }
 

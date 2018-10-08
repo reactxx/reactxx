@@ -36,7 +36,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 
   if (classNameX) {
     const oldClassName = props.className
-    (globalOptions.toPlatformClassName || applyLastWinStrategy)(classNameX,props) 
+      (globalOptions.applyLastWinStrategy || applyLastWinStrategy)(classNameX, props)
     if (oldClassName) props.className = props.className + ' ' + oldClassName
   }
 

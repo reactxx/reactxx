@@ -12,7 +12,7 @@ export const transition_finalizePropsCode1 = (state: TWithStyles.PipelineState) 
     
 }
 
-export const transition_toPlatformClassName: TAtomize.ToPlatformClassName = (array, props) => {
+export const transition_applyLastWinStrategy: TAtomize.ToPlatformClassName = (array, props) => {
     const { state } = array
     const deffered = []
     const res = applyLastWinStrategy(array, deffered)
@@ -41,22 +41,22 @@ export const transition_registerVariantHandler = () => {
 const applyLastWinStrategy = (values: TAtomize.AtomicArray, outDeffered: TVariants.Deffered[] ) => {
     const res: TAtomize.AtomicWeb[] = []
     const usedPropIds: { [propId: string]: boolean } = {}
-    let getRefferedPhase = false
+    let getDefferedPhase = false
     for (let k = values.length - 1; k >= 0; k--) {
       const value = values[k]
       if (isDeffered(value)) {
         if (!outDeffered) continue // preskakuj, jsem v druhe fazi
         outDeffered.push(value)
-        getRefferedPhase = true
+        getDefferedPhase = true
         continue
-      } else if (getRefferedPhase)
+      } else if (getDefferedPhase)
         continue
       const propId = renderer.propIdCache[value]
       if (!propId || usedPropIds[propId]) continue
       res.push(value)
       usedPropIds[propId] = true
     }
-    return getRefferedPhase ? null : res.join(' ')
+    return getDefferedPhase ? null : res.join(' ')
   }
   
 
@@ -73,8 +73,8 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<TTransition.Transition> = (list
 const testAtomicRuleset = (cond, query) => { throw '' }
 
 const transitionToFela = (src: TTransition.Transition) => {
-    const { $duration, $easing, $propsWeb, $props } = src
-    const trans = $propsWeb && $props ? [...$props, ...$propsWeb] : $props ? $props : $propsWeb
+    const { $duration, $easing, $web, $initOpened, $native, ...$props } = src
+    const trans = $web && $props ? [...$props as any, ...$web as any] : $props ? $props as any : $web
     if (!trans || trans.length === 0) return null
     const res: React.CSSProperties = {
         transitionDuration: `${$duration}ms`,

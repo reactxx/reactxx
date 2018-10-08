@@ -117,7 +117,7 @@ declare namespace TSheeter {
     common: EmptyInterface // rulesets (and their native type), which are used in both web and native component code. Rule are compatible with web and native.
     native: EmptyInterface // rulesets, which are used only in native code
     web: EmptyInterface // ruleset names, which are used only in web code (its type is always React.CSSProperties)
-    //sheetFlags: EmptyInterface
+    //sheetSwitch: EmptyInterface
     //******************** style constrain
     style: TCommonStyles.RulesetNativeIds // for web, style has always React.CSSProperties type
     //**** component property constrains

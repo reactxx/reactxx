@@ -6,18 +6,18 @@ interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'> & TSheeter.ShapeViews<'label'>
     native: TSheeter.ShapeViews<'nativeOnly'>
     web: TSheeter.ShapeMarks<'webOnly'>
-    codeFlags: TSheeter.ShapeMarks<'disabled' | 'active'>
+    cases: TSheeter.ShapeMarks<'disabled' | 'active'>
 }
 
 interface ShapeSimple2 extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
-    codeFlags: TSheeter.ShapeMarks<'disabled'>
+    cases: TSheeter.ShapeMarks<'disabled'>
 }
 
 const sheetSimple2: TSheeter.SheetCreator<ShapeSimple2> = theme => ({
     root: [
         {
-            $sheetFlags: {},
+            $sheetSwitch: {},
             whenFlag2: {}
         },
         { $web: [] }
@@ -26,20 +26,20 @@ const sheetSimple2: TSheeter.SheetCreator<ShapeSimple2> = theme => ({
 
 interface ShapeSimple extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
-    codeFlags: TSheeter.ShapeMarks<'disabled'>
+    cases: TSheeter.ShapeMarks<'disabled'>
 }
 
 const sheetSimple: TSheeter.Sheet<ShapeSimple> = {
     root: [
         {
-            $sheetFlags: { disabled: { color: 'disabled1' } },
-            //$sheetFlags2: { disabled: { color: 'disabled1' }},
+            $sheetSwitch: { disabled: { color: 'disabled1' } },
+            //$sheetSwitch2: { disabled: { color: 'disabled1' }},
             $web: [
                 {
-                    $sheetFlags: { disabled: { color: 'disabled2' } },
+                    $sheetSwitch: { disabled: { color: 'disabled2' } },
                     ':hover': {
                         ':active': {
-                            $sheetFlags: {
+                            $sheetSwitch: {
                                 disabled: [
                                     { color: 'disabled3' },
                                     { margin: 15 }
@@ -55,7 +55,7 @@ const sheetSimple: TSheeter.Sheet<ShapeSimple> = {
                 }
             ],
             // $native: [{
-            //     $sheetFlags: { disabled: [
+            //     $sheetSwitch: { disabled: [
             //         { color: 'disabled4' },
             //         { margin: 15 }
             //     ] },
@@ -88,9 +88,9 @@ const sheet: TSheeter.Sheet<Shape> = {
             }
         },
         margin: 4,
-        $sheetFlags: {
+        $sheetSwitch: {
             disabled: {
-                color: '$sheetFlags|disabled',
+                color: '$sheetSwitch|disabled',
             },
         }
     },
@@ -99,14 +99,14 @@ const sheet: TSheeter.Sheet<Shape> = {
             color: 'gray',
             ':hover': {
                 $mediaq: {},
-                $sheetFlags: {
+                $sheetSwitch: {
                     disabled: {
-                        color: 'label|$sheetFlags|root',
+                        color: 'label|$sheetSwitch|root',
                         $web: [
                             {
                                 ':hover':
                                 {
-                                    $sheetFlags: {},
+                                    $sheetSwitch: {},
                                     ':active': {},
                                     cursor: 'pointer',
                                 }

@@ -14,11 +14,11 @@ import { TPrimitives, CompNames } from './d-index'
 import { TProvider } from 'reactxx-with-styles'
 import { TWithStyles, TSheeter } from 'reactxx-typings'
 
-export const view: TComponents.SFCCode<TPrimitives.ViewShape> = props => {
-    const { styleX, classNameX, toClassNames, classes, ...rest } = props
+export const view: TComponents.SFCCode<TPrimitives.ViewShape> = propsCode => {
+    const { styleX, classNameX, toClassNames, classes, ...rest } = propsCode
     return <div classNameX={toClassNames([classes.root, classNameX])} styleX={styleX} {...rest} />
 }
-view.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetFlags: { pressable: hasPlatformEvents(props)  } }
+view.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetSwitch: { pressable: hasPlatformEvents(props)  } }
 
 export const hasPlatformEvents = (propsCode: TComponents.PropsCode) => !!(
     window.isWeb ?
@@ -26,8 +26,8 @@ export const hasPlatformEvents = (propsCode: TComponents.PropsCode) => !!(
         propsCode.onPress || propsCode.onPressIn || propsCode.onPressOut || propsCode.onLongPress
 )
 
-export const icon: TComponents.SFCCode<TPrimitives.IconShape> = props => {
-    const { styleX, classNameX, classes, toClassNames, children, data, url/*, onClick*/, ...rest } = props
+export const icon: TComponents.SFCCode<TPrimitives.IconShape> = propsCode => {
+    const { styleX, classNameX, classes, toClassNames, children, data, url/*, onClick*/, ...rest } = propsCode
     const svg = <svg
         classNameX={toClassNames([classes.root, classNameX])}
         styleX={styleX}
@@ -36,20 +36,20 @@ export const icon: TComponents.SFCCode<TPrimitives.IconShape> = props => {
     </svg>
     return url ? <a href={url}>{svg}</a> : svg
 }
-icon.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetFlags: { pressable: hasPlatformEvents(props) } }
+icon.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetSwitch: { pressable: hasPlatformEvents(props) } }
 
-export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = props => {
-    const { styleX, classNameX, classes, toClassNames, children, horizontal, ...rest } = props
+export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = propsode => {
+    const { styleX, classNameX, classes, toClassNames, children, horizontal, ...rest } = propsode
     return <div classNameX={toClassNames([classes.root, classNameX])} styleX={styleX} {...rest}>
         <div classNameX={toClassNames([classes.container])}>
             {children}
         </div>
     </div>
 }
-scrollView.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetFlags: { horizontal: props.horizontal } }
+scrollView.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetSwitch: { horizontal: props.horizontal } }
 
-export const text: TComponents.SFCCode<TPrimitives.TextShape> = props => {
-    const { classNameX, classes, toClassNames, singleLine, url/*, onClick*/, ...rest } = props
+export const text: TComponents.SFCCode<TPrimitives.TextShape> = propsCode => {
+    const { classNameX, classes, toClassNames, singleLine, url/*, onClick*/, ...rest } = propsCode
     const tagProps = {
         className: TPrimitives.Consts.textClassName,
         classNameX: toClassNames([classes.root, classNameX]),
@@ -58,7 +58,7 @@ export const text: TComponents.SFCCode<TPrimitives.TextShape> = props => {
     }
     return url ? <a href={url} {...tagProps} /> : <div {...tagProps} />
 }
-text.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetFlags: { pressable: hasPlatformEvents(props), singleLine: props.singleLine } }
+text.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetSwitch: { pressable: hasPlatformEvents(props), singleLine: props.singleLine } }
 
 export const textCreator = withStylesCreator<TPrimitives.TextShape>(textSheet, text, {
     displayName: CompNames.Text,

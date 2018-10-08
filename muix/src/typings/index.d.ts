@@ -39,11 +39,6 @@ export namespace TVariants {
         rulesetToQueue?: VariantPart
     ) => void
 
-    // interface CodeHooks<R extends TSheeter.Shape> {
-    //     innerStateToSheetQuery?: (state: TSheeter.getInnerState<R>) => Query<R>
-    //     initInnerState?: TSheeter.getInnerState<R>
-    // }
-
     //*********************************************************
     //  SHEETER EXTENSION
     //*********************************************************

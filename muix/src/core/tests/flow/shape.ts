@@ -2,7 +2,7 @@
 
 // import { atomizeRuleset } from 'reactxx-sheeter'
 // import { TTransition } from 'reactxx-sheet-transition'
-// import { getSheetFlags } from 'reactxx-sheet-flags';
+// import { getSheetSwitch } from 'reactxx-sheet-switch';
 
 import { TSheeter } from 'reactxx-typings'
 import { TSBugHelper } from 'reactxx-core'
@@ -23,7 +23,7 @@ export interface Shape extends TSheeter.ShapeAncestor {
     style: 'View'
 
     theme: typeof Theme
-    codeFlags: TSheeter.ShapeMarks<'isDrawerClosed' | 'isDrawerOpened'>
+    cases: TSheeter.ShapeMarks<'isDrawerClosed' | 'isDrawerOpened'>
     breakpoints: TSheeter.ShapeMarks<'tabletWidth' | 'mobileWidth' | 'desktopWidth'>
     transitionGroups: TSheeter.ShapeMarks<'tabletDrawer' | 'mobileDrawer'>
 

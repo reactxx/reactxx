@@ -17,7 +17,7 @@ const DEV_MODE = process.env.NODE_ENV === 'development'
 // consts
 export const enum Consts {
   $system = '$system',
-  $sheetFlags = '$sheetFlags',
+  $sheetSwitch = '$sheetSwitch',
   path = '#path',
   rulesetName = '#rulesetName',
   //canModify = '#canModify',
@@ -125,9 +125,9 @@ export const mergeRulesetsForCode = (sheet: SheetWithAddIns, rulesetPatchGetters
   const addIns = sheet.$system
 
   // get used ruleset's (for $whenUses processing)
-  const $sheetFlags = addIns && addIns.$sheetFlags
+  const $sheetSwitch = addIns && addIns.$sheetSwitch
   let usedRulesets: UsedRulesetNames = null
-  if ($sheetFlags) rulesets.forEach(ruleset => {
+  if ($sheetSwitch) rulesets.forEach(ruleset => {
     if (!ruleset || !ruleset[Consts.rulesetName]) return
     (usedRulesets || (usedRulesets = {}))[ruleset[Consts.rulesetName]] = true
   })
@@ -228,13 +228,13 @@ const getPatchLow = (addInsRoot: AddIns /*addInsRoot is not mutated*/, rulesetPa
   let rootPatches: Patch[] = [] // patches of top level sheet rulesets
   let addInPatches: Patch[] = [] // pathes for inner addIns rulesets
   for (const addInName in addInsRoot) {
-    const addInSheets = addInsRoot[addInName] // addInKey is e.g $sheetFlags, $mediaq...
+    const addInSheets = addInsRoot[addInName] // addInKey is e.g $sheetSwitch, $mediaq...
     // get addIn ruleset filter
     const filter = rulesetPatchGetters[addInName]
     if (!filter) continue
     //warning(filter, `Missing filter for ${addInName} addIn`)
     for (const sheetName in addInSheets) {
-      // prepare patch for single patch, patchKey = e.g. "root/:active", "add-ins/$sheetFlags/add-ins/$mediaq/root/:active/480-640/b/:hover", atc
+      // prepare patch for single patch, patchKey = e.g. "root/:active", "add-ins/$sheetSwitch/add-ins/$mediaq/root/:active/480-640/b/:hover", atc
       const addInSheet = addInSheets[sheetName]
       const patchPath = addInSheet[Consts.data].path as any as string[]
       const isAddIn = patchPath[0] === Consts.$system // path starts with addIns/...
@@ -341,7 +341,7 @@ const extractPatches = (node: Node, root: SheetWithAddIns, nodePath: string[]) =
 }
 
 const processAddIn = (addInNode, addInName, parentNode, root, addInNodePath) => {
-  // adjust addIn, e.g. root.addIns.$sheetFlags
+  // adjust addIn, e.g. root.addIns.$sheetSwitch
   const addIns = root.$system || (root.$system = {})
   const addIn = addIns[addInName] || (addIns[addInName] = {})
   // path

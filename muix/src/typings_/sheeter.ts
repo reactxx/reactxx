@@ -106,7 +106,7 @@ export namespace TSheeter {
     common: EmptyInterface // rulesets (and their native type), which are used in both web and native component code. Rule are compatible with web and native.
     native: EmptyInterface // rulesets, which are used only in native code
     web: EmptyInterface // ruleset names, which are used only in web code (its type is always React.CSSProperties)
-    sheetFlags: EmptyInterface
+    sheetSwitch: EmptyInterface
     //******************** style constrain
     style: TCommonStyles.RulesetNativeIds // for web, style has always React.CSSProperties type
     //**** component property constrains
@@ -122,7 +122,7 @@ export namespace TSheeter {
     common: EmptyInterface
     native: EmptyInterface
     web: EmptyInterface
-    sheetFlags: EmptyInterface
+    sheetSwitch: EmptyInterface
     style: unknown
     props: EmptyInterface
     propsNative: ReactN.ViewProperties
@@ -144,7 +144,7 @@ export namespace TSheeter {
   export type getPropsWeb<R extends Shape> = R['propsWeb']
   export type getPropsNative<R extends Shape> = R['propsNative']
   export type getEvents<R extends Shape = Shape> = keyof R['events']
-  export type getFlags<R extends Shape = Shape> = keyof R['sheetFlags']
+  export type getFlags<R extends Shape = Shape> = keyof R['sheetSwitch']
   export type getTheme<R extends Shape = Shape> = R['theme']
 
   export type RulesetNamesAll<R extends Shape> = keyof getCommon<R> | keyof getNative<R> | getWeb<R>

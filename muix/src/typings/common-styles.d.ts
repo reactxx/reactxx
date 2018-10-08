@@ -4,6 +4,8 @@ import CSS from 'csstype';
 
 declare namespace TCommonStyles {
 
+  //React Native styles compatible with Web React.CSSProperties
+
   export interface Transform {
     perspective?: number
     rotate?: string
@@ -17,16 +19,15 @@ declare namespace TCommonStyles {
     translateY?: number
     skewX?: string
     skewY?: string
-    time?: string
+    //time?: string
   }
-  
-
-  //React Native styles compatible with Web React.CSSProperties
+  export interface TransformProp {
+    transform?: Transform
+  }
 
   export type FlexAlignType = "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
 
   export interface FlexStyle {
-    transform?: Transform
     alignContent?: "flex-start" | "flex-end" | "center" | "stretch" | "space-between" | "space-around"
     alignItems?: FlexAlignType
     alignSelf?: "auto" | FlexAlignType
@@ -67,7 +68,9 @@ declare namespace TCommonStyles {
     zIndex?: number
   }
 
-  export interface ViewStyle extends FlexStyle {
+  export interface ViewStyle extends ViewStyleLow, TransformProp { }
+
+  export interface ViewStyleLow extends FlexStyle {
     backfaceVisibility?: "visible" | "hidden"
     backgroundColor?: string;
     opacity?: number;
@@ -117,7 +120,8 @@ declare namespace TCommonStyles {
     borderLeftWidth?: number
   }
 
-  export interface TextStyle extends ViewStyle {
+  export interface TextStyle extends TextStyleLow, TransformProp { }
+  export interface TextStyleLow extends ViewStyleLow {
     color?: string
     fontFamily?: string
     fontSize?: number
@@ -131,7 +135,8 @@ declare namespace TCommonStyles {
     textDecorationColor?: string
   }
 
-  export interface ImageStyle extends FlexStyle {
+  export interface ImageStyle extends ImageStyleLow, TransformProp { }
+  export interface ImageStyleLow extends FlexStyle {
     backfaceVisibility?: "visible" | "hidden"
     borderBottomLeftRadius?: number
     borderBottomRightRadius?: number
@@ -157,6 +162,12 @@ declare namespace TCommonStyles {
     T extends 'View' ? TCommonStyles.ViewStyle :
     T extends 'Image' ? TCommonStyles.ImageStyle :
     TCommonStyles.TextStyle
+
+  export type RulesetCommonLow<T extends RulesetNativeIds> =
+    T extends '$Web' ? RulesetWeb :
+    T extends 'View' ? TCommonStyles.ViewStyleLow :
+    T extends 'Image' ? TCommonStyles.ImageStyleLow :
+    TCommonStyles.TextStyleLow
 
   //******************** Platform specific ruleset
   export type RulesetNative<T extends RulesetNativeIds = unknown> =

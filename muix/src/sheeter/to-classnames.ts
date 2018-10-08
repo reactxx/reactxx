@@ -6,7 +6,7 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, rulesets
     if (!rulesets) return finishAtomicArray([] as any, state)
 
     if (isAtomicArray(rulesets)) {
-        return rulesets.state === state ? rulesets : finishAtomicArray([...rulesets] as any, state)
+        return rulesets.state === state ? rulesets : finishAtomicArray(/*flat copy*/[...rulesets] as any, state)
     }
 
     const values: TAtomize.Atomic[][] = []
@@ -58,7 +58,7 @@ const finishAtomicArray = (res: TAtomize.AtomicArray, state: TWithStyles.Pipelin
     return res
 }
 
-// merge rulesets and apply query to ruleset's conditional parts ($sheetFlagss, $mediaq etc.)
+// merge rulesets and apply query to ruleset's conditional parts ($sheetSwitchs, $mediaq etc.)
 // export const toClassNamesWithQueryEx = (query: TVariants.Query | ((usedRuesets: Record<string, true>) => TVariants.Query), theme, rulesets: TSheeter.ClassNameOrAtomized) => {
 
 //     if (!rulesets) return emptyAtomicArray

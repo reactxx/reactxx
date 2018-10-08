@@ -20,7 +20,7 @@ import { TSheeter, TCommonStyles, TVariants } from 'reactxx-typings'
 interface Shape1 extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
     theme: { color: string }
-    //sheetFlags: TSheeter.ShapeFlags<'disabled'>
+    //sheetSwitch: TSheeter.ShapeFlags<'disabled'>
 }
 const style1: TSheeter.Ruleset<'Text', Shape1> = {
 }
@@ -40,7 +40,7 @@ interface Shape2 extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
     native: TSheeter.ShapeViews<'nativeOnly'>
     web: TSheeter.ShapeMarks<'webOnly'>
-    codeFlags: TSheeter.ShapeMarks<'disabled'>
+    cases: TSheeter.ShapeMarks<'disabled'>
 }
 
 const style2: TSheeter.Ruleset<'Text', Shape2>[] = [
@@ -48,15 +48,15 @@ const style2: TSheeter.Ruleset<'Text', Shape2>[] = [
         $web: {},
     },
     {
-        $sheetFlags: {
+        $sheetSwitch: {
         },
         $native: {
-            $sheetFlags: {
+            $sheetSwitch: {
                 disabled: {
                     $web: {
                         //$mediaq: {},
                     },
-                    $sheetFlags: {},
+                    $sheetSwitch: {},
                     //$mediaq: {},
                     $native: {
                         //$mediaq: {},

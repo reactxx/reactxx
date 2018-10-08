@@ -15,8 +15,8 @@ SystemJS.config({
     "reactxx-sheeter": "deploy/lib/sheeter/index",
     "reactxx-with-styles": "deploy/lib/with-styles/index", 
 
-    "reactxx-sheet-flags": "deploy/lib/sheet-flags/index", 
-    "reactxx-sheet-flags/tests/index": "deploy/lib/sheet-flags/tests/index", 
+    "reactxx-sheet-switch": "deploy/lib/sheet-switch/index", 
+    "reactxx-sheet-switch/tests/index": "deploy/lib/sheet-switch/tests/index", 
 
     "reactxx-sheet-widths": "deploy/lib/sheet-widths/index", 
     "reactxx-sheet-widths/tests/index": "deploy/lib/sheet-widths//tests/index", 

@@ -178,7 +178,7 @@ function modifyRuleset(sheet: {}, rulesetName: string) {
   }
   return
   const ruleset = sheet[rulesetName]
-  let $sheetFlags = null
+  let $sheetSwitch = null
   Object.keys(ruleset).forEach(ruleName => {
     const rule = ruleset[ruleName]
     const pseudoClasses = rx$pseudoClasses.exec(ruleName)
@@ -186,21 +186,21 @@ function modifyRuleset(sheet: {}, rulesetName: string) {
       ruleset[pseudoClasses[1]] = rule
       delete ruleset[ruleName]
     } else {
-      const whenFlag = rx$sheetFlags.exec(ruleName)
+      const whenFlag = rx$sheetSwitch.exec(ruleName)
       if (whenFlag) {
-        ($sheetFlags || ($sheetFlags = {}))[whenFlag[1]] = rule
+        ($sheetSwitch || ($sheetSwitch = {}))[whenFlag[1]] = rule
         delete ruleset[ruleName]
       } else if (rule && typeof rule === 'object') {
         modifyRuleset(ruleset, ruleName)
       }
     }
   })
-  if ($sheetFlags)
-    ruleset['$sheetFlags'] = $sheetFlags
+  if ($sheetSwitch)
+    ruleset['$sheetSwitch'] = $sheetSwitch
 }
 
 const rx$pseudoClasses = /&(:(:)?((\w|-)+))$/
-const rx$sheetFlags = /&\$(\w+)$/
+const rx$sheetSwitch = /&\$(\w+)$/
 
 
 // empty addIn configuration

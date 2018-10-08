@@ -21,7 +21,8 @@ export const transition_registerVariantHandler = () => {
 }
 
 export const transition_finalizePropsCode1 = (state: TWithStyles.PipelineState) => {
-    const st: CodeComponentHandler = state[TTransition.DefferedType.handlerFieldName] || (state[TTransition.DefferedType.handlerFieldName] = new CodeComponentHandler())
+    const st: CodeComponentHandler = state[TTransition.DefferedType.handlerFieldName] ||
+        (state[TTransition.DefferedType.handlerFieldName] = new CodeComponentHandler())
     st.finalizePropsCode(state)
 }
 
@@ -44,7 +45,7 @@ export const transition_toPlatformClassName: TAtomize.ToPlatformClassName = (arr
             secondRes.style as TTransition.TValues,
             props)
     } else { // transitionGroup
-        const group: TTransition.DefferedNativeGroup = null // merge firstRes.transitionGroups
+        const group: TTransition.DefferedGroupNative = null // merge firstRes.transitionGroups
         const secondRes = applyLastWinStrategy(array, ApplyLastWinStrategyMode.secondTransitionGroup, group.props)
         props.style = secondRes.style
     }
@@ -53,15 +54,13 @@ export const transition_toPlatformClassName: TAtomize.ToPlatformClassName = (arr
 //*********************************************************
 //  PRIVATE
 //*********************************************************
-interface HocData { }
-
 // converts VariantPart.$transition to TTransition.DefferedNative
 const toAtomicRuleset: TVariants.ToAtomicRuleset<TTransition.Transition> = (list, ruleset, path, pseudoPrefixes, conditions) => {
 
 }
 
 // converts VariantPart.$transition to TTransition.DefferedNativeGroup
-const toAtomicRulesetGroup: TVariants.ToAtomicRuleset<TTransition.Transition> = (list, ruleset, path, pseudoPrefixes, conditions) => {
+const toAtomicRulesetGroup: TVariants.ToAtomicRuleset<TTransition.Group> = (list, ruleset, path, pseudoPrefixes, conditions) => {
 }
 
 
@@ -73,7 +72,7 @@ const testAtomicRuleset = (cond, query) => { throw '' }
 interface ApplyLastWinStrategyResult {
     style: TAtomize.NativeStyle
     transition?: TTransition.DefferedNative
-    transitionGroups?: TTransition.DefferedNativeGroup[]
+    transitionGroups?: TTransition.DefferedGroupNative[]
     transitionPropValues?: TTransition.TValues
 }
 
@@ -150,6 +149,6 @@ function isDeffered(obj): obj is TTransition.DefferedNative {
     return (obj as TTransition.Deffered).deffered && obj[TAtomize.TypedInterfaceTypes.prop] === TTransition.DefferedType.groupNative
 }
 
-function isDefferedGroup(obj): obj is TTransition.DefferedNativeGroup {
+function isDefferedGroup(obj): obj is TTransition.DefferedGroupNative {
     return (obj as TTransition.Deffered).deffered && obj[TAtomize.TypedInterfaceTypes.prop] === TTransition.DefferedType.native
 }

@@ -11,7 +11,7 @@ export const width: getBreakpoints<Shape> =
 export const getFlags = (props: TComponents.Props<Shape>, state: TComponents.InnerState<Shape>) => ({
     isDrawerOpened: state.drawerOpened,
     isDrawerClosed: !state.drawerOpened
-} as TVariants.SheetFlags<Shape>)
+} as TVariants.SheetCases<Shape>)
 
 export const defaultProps: TComponents.Props<Shape> = {
     classes: theme => ({ root: {}, label: {} }),
