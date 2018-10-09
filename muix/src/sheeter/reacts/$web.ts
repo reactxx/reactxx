@@ -6,7 +6,8 @@ import { TAtomize, TComponents, TSheeter } from 'reactxx-typings'
 import { deleteSystemProps } from '../to-classnames'
 import { mergeStyles } from '../merge'
 import { isReactXXComponent, isDeffered } from '../atomize'
-import { globalOptions } from '../global-state'
+import { applyLastWinStrategy, AttemptType, ApplyLastWinStrategyResult, ApplyLastWinStrategyLow } from '../utils/apply-last-win-strategy'
+
 /******************************************
   EXTEND REACT
 *******************************************/
@@ -35,9 +36,8 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   const { classNameX, styleX } = props
 
   if (classNameX) {
-    const oldClassName = props.className
-      (globalOptions.applyLastWinStrategy || applyLastWinStrategy)(classNameX, props)
-    if (oldClassName) props.className = props.className + ' ' + oldClassName
+    const className = applyLastWinStrategy(classNameX, applyLastWinStrategyLow)
+    props.className = props.className ? className + ' ' + props.className : className
   }
 
   if (styleX) {
@@ -49,18 +49,36 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 }
 
 // apply LAST WIN strategy for web className
-const applyLastWinStrategy: TAtomize.ToPlatformClassName = (values, props) => {
-  const res: TAtomize.AtomicWeb[] = []
+const applyLastWinStrategyLow: ApplyLastWinStrategyLow = (values, attemptType) => {
+  const res: string[] = []
+  let idxs: number[] = []
+  let defferedFound = false
   const usedPropIds: { [propId: string]: boolean } = {}
   for (let k = values.length - 1; k >= 0; k--) {
     const value = values[k]
-    if (isDeffered(value)) continue
-    const propId = renderer.propIdCache[value]
+    if (!value) continue
+    if (attemptType !== AttemptType.second) {
+      if (isDeffered(value)) {
+        if (attemptType !== AttemptType.firstIgnore) {
+          idxs.push(k)
+          defferedFound = true
+        }
+        continue
+      }
+    } else {
+      if (Array.isArray(value)) {
+        Array.prototype.push.apply(res, value)
+        continue
+      }
+    }
+    if (defferedFound) continue // first attempt and deffered found => ignore other values
+    // last win strategy
+    const propId = renderer.propIdCache[value as string]
     if (!propId || usedPropIds[propId]) continue
-    res.push(value)
+    res.push(value as string)
     usedPropIds[propId] = true
   }
-  return res.join(' ')
+  return (attemptType !== AttemptType.second && defferedFound ? { defferedIdxs: idxs } : { style: res.join(' ') }) as ApplyLastWinStrategyResult
 }
 
 const consolidateEvents = (props: TComponents.Props & TComponents.Events & TComponents.EventsWeb) => {

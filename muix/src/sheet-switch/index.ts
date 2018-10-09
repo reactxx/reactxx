@@ -1,5 +1,5 @@
 import { TComponents, TSheeter, TVariants, TWithStyles } from 'reactxx-typings'
-import { registerVariantHandler, atomizeRulesetInner, mergeFlags, wrapPseudoPrefixes } from 'reactxx-sheeter'
+import { registerVariantHandler, atomizeRulesetInner, wrapPseudoPrefixes } from 'reactxx-sheeter'
 
 export const enum Consts {
     name = '$sheetSwitch'
@@ -28,12 +28,8 @@ declare module 'reactxx-typings' {
         }
 
         interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> {
-            sheetQuery?: Query<R> // flags assigned in component code
+            sheetQuery?: Query<R> // merged pipe's sheetQueries 
         }
-
-        // interface PipeState {
-        //     sheetSwitch?: Record<string, true>
-        // }
 
     }
 }
@@ -42,21 +38,9 @@ declare module 'reactxx-typings' {
 //  PRIVATE
 //*********************************************************
 
-// const toClassNamesForBind = (pipeFlags: Record<string, true>, propsCode: TComponents.PropsCode) => {
-
-//     return (rulesets: TSheeter.RulesetItem[]) => {
-//         const { sheetSwitch } = propsCode
-//         const sheetQuery: TVariants.Query = {
-//             $sheetSwitch: pipeFlags && sheetSwitch ? { ...pipeFlags, ...sheetSwitch } : sheetSwitch ? sheetSwitch : pipeFlags
-//         }
-//         return toClassNamesWithQuery(sheetQuery, propsCode.theme, rulesets)
-//     }
-
-// }
-
-interface WhenFlagCondition extends TVariants.Condition {
+interface SheetSwitchCondition extends TVariants.Condition {
     type: Consts.name
-    flagName: string
+    case: string
 }
 
 const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.RulesetOrAtomized>> = (list, whenFlag, path, pseudoPrefixes, conditions) => {
@@ -68,7 +52,7 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
                     list, r,
                     `${path}/$sheetSwitch.${p}[${idx}]`,
                     pseudoPrefixes,
-                    [...conditions, { type: Consts.name, flagName: p } as WhenFlagCondition],
+                    [...conditions, { type: Consts.name, case: p } as SheetSwitchCondition],
                     wrapPseudoPrefixes(r, pseudoPrefixes))
             )
         else
@@ -76,11 +60,11 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
                 list, rules,
                 `${path}/$sheetSwitch.${p}`,
                 pseudoPrefixes,
-                [...conditions, { type: Consts.name, flagName: p } as WhenFlagCondition],
+                [...conditions, { type: Consts.name, case: p } as SheetSwitchCondition],
                 wrapPseudoPrefixes(rules, pseudoPrefixes))
     }
 }
 
-const testAtomicRuleset = (cond: WhenFlagCondition, query) =>
-    query.$sheetSwitch && query.$sheetSwitch[cond.flagName]
+const testAtomicRuleset = (cond: SheetSwitchCondition, query) =>
+    query.$sheetSwitch && query.$sheetSwitch[cond.case]
 

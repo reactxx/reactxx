@@ -211,7 +211,7 @@ const sheetTrasition = {
     },
     drawer: {
         $transitionGroup: {
-            name: 'transRoot',
+            $name: 'transRoot',
             $duration: 300,
             opacity: [0, 1, '5-'],
             transform: {

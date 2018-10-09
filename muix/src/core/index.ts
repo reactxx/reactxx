@@ -4,7 +4,7 @@
 
 import { TCommonStyles, TSheeter, TVariants } from 'reactxx-typings'
 import { toClassNamesWithQuery } from 'reactxx-sheeter'
-import { transition_registerVariantHandler, transition_applyLastWinStrategy, transition_finalizePropsCode1, TTransition } from 'reactxx-sheet-transition'
+import { transition_registerVariantHandler, transition_processDeffereds, transition_finalizePropsCode, TTransition } from 'reactxx-sheet-transition'
 import { widthsPipe, getBreakpoints } from 'reactxx-sheet-widths'
 import { sheetSwitch_registerVariantHandler, Consts, getCases } from 'reactxx-sheet-switch'
 
@@ -26,11 +26,13 @@ export const initCore = () => {
 
         finalizePropsCode: state => {
             state.withSheetQueryComponent = true
-            transition_finalizePropsCode1(state)
+            transition_finalizePropsCode(state)
             state.propsCode.toClassNames = rulesets => toClassNamesWithQuery(state, rulesets)
         },
 
-        applyLastWinStrategy: transition_applyLastWinStrategy,
+        processDeffereds: transition_processDeffereds,
+
+        //applyLastWinStrategy: transition_applyLastWinStrategy,
 
         mergeSheetQueries: pipelineState => {
             let cnt = 0

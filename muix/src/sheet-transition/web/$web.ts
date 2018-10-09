@@ -8,18 +8,22 @@ import { TTransition } from '../d-index'
 // platform dependent export
 export * from 'reactxx-sheet-transition/web/$web'
 
-export const transition_finalizePropsCode1 = (state: TWithStyles.PipelineState) => {
+export const transition_finalizePropsCode: TWithStyles.FinishPropsCode = state => {
     
 }
 
-export const transition_applyLastWinStrategy: TAtomize.ToPlatformClassName = (array, props) => {
-    const { state } = array
-    const deffered = []
-    const res = applyLastWinStrategy(array, deffered)
-    if (deffered.length===0) return res
-    //if (!state.pipeStates) state.pipeStates = []
-    return applyLastWinStrategy(array, null)
+export const transition_processDeffereds: TWithStyles.ProcessDeffereds = (values, defferedIdxs, state) => {
 }
+
+
+// export const transition_applyLastWinStrategy: TAtomize.ToPlatformClassName = (array, props) => {
+//     const { state } = array
+//     const deffered = []
+//     const res = applyLastWinStrategy(array, deffered)
+//     if (deffered.length===0) return res
+//     //if (!state.pipeStates) state.pipeStates = []
+//     return applyLastWinStrategy(array, null)
+// }
 
 export const transition_registerVariantHandler = () => {
     registerVariantHandler({

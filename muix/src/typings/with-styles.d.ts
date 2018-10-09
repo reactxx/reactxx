@@ -9,11 +9,13 @@ declare namespace TWithStyles {
     createPipeline?: Pipe
     namedThemes?: { [themeName: string]: TTheme.Theme }
     finalizePropsCode?: FinishPropsCode
-    applyLastWinStrategy?: TAtomize.ToPlatformClassName
+    //applyLastWinStrategy?: TAtomize.ToPlatformClassName
     mergeSheetQueries?: (pipelineState: TWithStyles.PipelineState) => TVariants.Query
+    processDeffereds?: ProcessDeffereds
   }
 
   export type FinishPropsCode = (instanceState: TWithStyles.PipelineState) => void
+  export type ProcessDeffereds = (values: TAtomize.AtomicArray, defferedIdxs:number[], state: TWithStyles.PipelineState) => void
 
   // component type options
   export interface ComponentOptions<R extends TSheeter.Shape = TSheeter.Shape> {

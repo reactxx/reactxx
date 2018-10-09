@@ -6,7 +6,7 @@ declare namespace TAtomize {
 
   export type ToPlatformAtomizeRuleset = (ruleset: {}, tracePath?: string) => AtomicArray
   export type GetPlatformTracePath = (value: Atomic) => string
-  export type ToPlatformClassName = (array: AtomicArray, propsPlatform: {style, className}) => void
+  //export type ToPlatformClassName = (array: AtomicArray, propsPlatform: {style, className}) => void
 
   export const enum TypedInterfaceTypes {
     prop = '``',
