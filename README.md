@@ -1,3 +1,4 @@
+<!-- 
 # ReactXX
 
 Framework which enables creation of visual components for both **react** and **react-native**
@@ -32,3 +33,4 @@ Web and native kitchensink code differs only in a few lines (see [native](https:
 - [x] single project (and package.json) for web and native
 - [x] format of NPM package which is common for web and native
 
+-->
