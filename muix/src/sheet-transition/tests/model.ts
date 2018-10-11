@@ -15,7 +15,7 @@ const sheetTrasition = {
             },
         },
         PIPE_DATA: {
-            leftDrawer: { // OR NULL IF CURRENTLY NOT ANIMATED (animation finished etc.)
+            leftDrawer: { // OR NULL IF CURRENTLY NOT ANIMATED
                 lastOpened: false,
                 //lastAnimationValue: {}, // Animated.Value
                 lastAnimationHash: {
@@ -137,7 +137,7 @@ const sheetTrasition = {
             },
             {
                 deffered: true,  // last type wins
-                type: '$transitionPointer',
+                type: '$transitionOpened',
                 opened: true,
                 conditions: ['switch: active'],
             }

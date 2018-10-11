@@ -42,7 +42,7 @@ export const transition_registerVariantHandler = () => {
 //*********************************************************
 //  PRIVATE
 //*********************************************************
-const applyLastWinStrategy = (values: TAtomize.AtomicArray, outDeffered: TVariants.Deffered[] ) => {
+const applyLastWinStrategy = (values: TAtomize.AtomicArray, outDeffered: TAtomize.Variants ) => {
     const res: TAtomize.AtomicWeb[] = []
     const usedPropIds: { [propId: string]: boolean } = {}
     let getDefferedPhase = false
@@ -55,7 +55,7 @@ const applyLastWinStrategy = (values: TAtomize.AtomicArray, outDeffered: TVarian
         continue
       } else if (getDefferedPhase)
         continue
-      const propId = renderer.propIdCache[value]
+      const propId = renderer.propIdCache[value as string]
       if (!propId || usedPropIds[propId]) continue
       res.push(value)
       usedPropIds[propId] = true

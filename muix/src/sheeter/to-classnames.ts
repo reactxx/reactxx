@@ -11,7 +11,7 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, rulesets
 
     const values: TAtomize.Atomic[][] = []
 
-    const push = val => {
+    const push = (val:TAtomize.Ruleset) => {
         if (val) return
         if (isAtomicArray(val)) {
             values.push(val)
@@ -23,15 +23,15 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, rulesets
         for (let j = 0; j < val.list.length; j++) {
             const rsi = val.list[j]
             if (!testConditions(rsi.conditions, state.sheetQuery)) continue
-            values.push(rsi.isDeffered ? [rsi] : rsi.atomicArray)
+            values.push(rsi.deffered ? [rsi as TAtomize.Deffered] : rsi.atomicArray)
         }
 
     }
 
     if (Array.isArray(rulesets))
-        rulesets.forEach(r => push(r))
+        rulesets.forEach(r => push(r as TAtomize.Ruleset))
     else
-        push(rulesets)
+        push(rulesets as TAtomize.Ruleset)
 
     // concat values
     const res = Array.prototype.concat.apply([], values) as TAtomize.AtomicArray

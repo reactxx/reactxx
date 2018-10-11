@@ -33,17 +33,19 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
                 }
             },
             $transitionGroup: ts.transitionGroup$Web = {
-                $name: 'tabletDrawer', // allow grouping of $transitions for more elements (the same Animation.Value for native etc.)
-                opacity: [1, 0],
-                color: ['', ''],
-                //x: 1,
-            },
+                leftDrawer: {
+                    opacity: [1, 0],
+                    color: ['', ''],
+                    //x: 1,
+                },
+            }
         },
         $transitionGroup: ts.transitionGroupView = {
-            $name: 'mobileDrawer',
-            //$name: 'xmobile',
-            opacity: [1, 0],
-            //color: ['', ''],
+            leftDrawer: {
+                //$name: 'xmobile',
+                opacity: [1, 0],
+                //color: ['', ''],
+            }
         },
         $native: ts.nativeView = [
             {
@@ -79,11 +81,12 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
             },
         }],
         $transitionGroup: ts.transitionGroupText = {
-            $name: 'tabletDrawer',
-            //$name: 'xmobile',
-            opacity: [1, 0],
-            color: ['', ''],
-            //x1: ['', ''],
+            leftDrawer: {
+                //$name: 'xmobile',
+                opacity: [1, 0],
+                color: ['', ''],
+                //x1: ['', ''],
+            }
         },
     }],
     webOnly: {
@@ -96,17 +99,19 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
                     color: 'red',
                     //x: 1,
                     $transitionGroup: ts.transitionGroup$Web = {
-                        $name: 'tabletDrawer',
-                        //$name: 'xmobile'
-                        color: ['', ''],
-                        //x: [0, 0]
-                    },
+                        leftDrawer: {
+                            //$name: 'xmobile'
+                            color: ['', ''],
+                            //x: [0, 0]
+                        },
+                    }
                 }],
             },
             $transitionGroup: ts.transitionGroup$Web = {
-                $name: 'tabletDrawer',
-                color: ['', ''],
-                //x: [0, 0]
+                leftDrawer: {
+                    color: ['', ''],
+                    //x: [0, 0]
+                }
             },
         },
     },
@@ -122,10 +127,11 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
                 }],
             },
             $transitionGroup: ts.transitionGroupView = {
-                $name: 'tabletDrawer',
-                opacity: [0, 1],
-                left: [0, 200],
-                //color: ['', ''],
+                leftDrawer: {
+                    opacity: [0, 1],
+                    left: [0, 200],
+                    //color: ['', ''],
+                }
             },
         },
     }

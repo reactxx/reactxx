@@ -13,7 +13,7 @@ export class CodeComponentHandler {
         //this.elements = {}
     }
     // unique ID of platform component
-    setTransition(deffered: TTransition.DefferedNative, usedPropsValues: TTransition.TValues, notAnimStyle: TTransition.TValues, platformCompProps) {
+    setTransition(deffered /*: TTransition.DefferedNative*/, usedPropsValues: TTransition.TValues, notAnimStyle: TTransition.TValues, platformCompProps) {
         const compId = 0//platformCompProps[TTransition.DefferedType.platformCompId] || (platformCompProps[TTransition.DefferedType.platformCompId] = (this.+).toString())
         // get or create CompAnimated object
         const { handlers } = this

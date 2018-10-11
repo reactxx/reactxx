@@ -4,10 +4,25 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "runCurrentTest",
+            "type": "shell",
+            "command": ".\\node_modules\\.bin\\jest.cmd",
+            "args": [
+                //"src/core/tests/flow/drawer/__tests__/comp-test"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated"
+            }
+        },
+        {
             "type": "typescript",
             "tsconfig": "tsconfig.json",
             "option": "watch",
-            "problemMatcher": [ 
+            "problemMatcher": [
                 "$tsc-watch"
             ],
             "group": {
@@ -19,17 +34,16 @@
             "label": "TypeScript compile",
             "type": "shell",
             "command": "tsc -b src/ks --verbose --watch",
-            //"command": "tsc -p src/ks",
             "problemMatcher": [
                 "$tsc-watch"
-            ],
+            ]
         },
         {
             "type": "typescript",
             "tsconfig": "tsconfig.json",
             "problemMatcher": [
                 "$tsc-watch"
-            ],
+            ]
         }
     ]
 }

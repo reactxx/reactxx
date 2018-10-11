@@ -1,11 +1,11 @@
-import React from 'react';
-import { createRenderer, IRenderer } from 'fela';
-import { render } from 'fela-dom';
-import pluginExtend from 'fela-plugin-extend';
-import pluginFallbackValue from 'fela-plugin-fallback-value';
-import pluginLvha from 'fela-plugin-lvha';
-import pluginPrefixer from 'fela-plugin-prefixer';
-import pluginUnit from 'fela-plugin-unit';
+import React from 'react'
+import { createRenderer, IRenderer } from 'fela'
+import { render } from 'fela-dom'
+import pluginExtend from 'fela-plugin-extend'
+import pluginFallbackValue from 'fela-plugin-fallback-value'
+//import pluginLvha from 'fela-plugin-lvha'
+import pluginPrefixer from 'fela-plugin-prefixer'
+import pluginUnit from 'fela-plugin-unit'
 
 import patch from './patch';
 
@@ -16,7 +16,7 @@ const plugins = {
     pluginExtend(),
     pluginPrefixer(),
     pluginFallbackValue(),
-    pluginLvha(),
+    //pluginLvha(),
     //pluginRtl(),
   ]
 }
@@ -112,3 +112,4 @@ export const rulesetToClassNamesMUI = (ruleset: React.CSSProperties) => {
 }
 
 const forceRuleName = 'NAME$'
+

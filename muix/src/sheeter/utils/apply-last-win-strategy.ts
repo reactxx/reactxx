@@ -16,7 +16,7 @@ export type ApplyLastWinStrategyLow = (values: TAtomize.AtomicWeb[], attemptType
 export const applyLastWinStrategy = (values: TAtomize.AtomicArray, applyLastWinStrategyLow: ApplyLastWinStrategyLow) => {
     const processDeffereds = globalOptions.processDeffereds
     let res = applyLastWinStrategyLow(values, processDeffereds ? AttemptType.first : AttemptType.firstIgnore)
-    if (res.style) return res.style
+    if (res.style || res.style==='') return res.style
     processDeffereds(values, res.defferedIdxs, values.state)
     res = applyLastWinStrategyLow(values, AttemptType.second)
     return res

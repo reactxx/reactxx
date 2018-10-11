@@ -9,7 +9,7 @@ import { TSBugHelper, getFlagsAll } from 'reactxx-core';
 interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root' | 'label'> & TSheeter.ShapeTexts<'text'>
     style: 'View'
-    transitionGroups: TSheeter.ShapeMarks<'mobile' | 'tablet'>
+    transitionGroups: TSheeter.ShapeMarks<'leftDrawer'>
     cases: TSheeter.ShapeMarks<'active'>
 }
 
@@ -34,16 +34,18 @@ type Sht = Record<'root', {
 const sht: Sht = {
     root: {
         $transitionGroup: {
-            $name: 'mobile',
-            //color: ['', '']
+            leftDrawer: {
+                //color: ['', '']  
+            }
         }
     }
 }
 
 const grp: TSheeter.Ruleset<'View', Shape> = {
     $transitionGroup: {
-        $name: 'mobile',
-        //color: ['', '']
+        leftDrawer: {
+            //color: ['', '']
+        }
     }
 }
 //const grp: TSheeter.Ruleset<'View', Shape> = {
@@ -68,21 +70,22 @@ const sheet2: TSheeter.Sheet<Shape> = ts.sheet = {
             //x:1
         },
         $transitionGroup: ts.transitionGroupView = {
-            $name: 'mobile', // allow grouping of $transitions for more elements (the same Animation.Value for native etc.)
-            opacity: [1, 0],
-            transform: {
-                scale: [1, 1.2],
-                translateX: [-100, 0],
-                $interval: '20-30',
-            },
-            //color: ['', ''],
+            leftDrawer: {
+                //$name: 'mobile', // allow grouping of $transitions for more elements (the same Animation.Value for native etc.)
+                opacity: [1, 0],
+                transform: {
+                    scale: [1, 1.2],
+                    translateX: [-100, 0],
+                    $interval: '20-30',
+                },
+                //color: ['', ''],
+            }
         },
         $sheetSwitch: {
             active: {
                 //color: '',
                 $transitionGroup: ts.transitionGroupView = {
-                    $name: 'mobile',
-                    $open: true,
+                    leftDrawer: {}
                     //color: ['',''],
                 }
             }
@@ -91,8 +94,9 @@ const sheet2: TSheeter.Sheet<Shape> = ts.sheet = {
     label: {
         //color:'',
         $transitionGroup: ts.transitionGroupView = {
-            opacity: [1, 0],
-            $name: 'mobile',
+            leftDrawer: {
+                opacity: [1, 0],
+            }
         },
     },
     text: {

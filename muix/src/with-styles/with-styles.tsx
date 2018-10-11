@@ -38,22 +38,10 @@ const withStyles = (componentState: TWithStyles.ComponentOptions) => {
 
     pipelineState: TWithStyles.PipelineState = {
       ...componentState,
+      // instance props
       id: componentState.displayName + ' *' + componentInstaneCounter++,
       props: this.props,
       pipeCounter: 1,
-      // queryComponentRef: React.createRef(),
-      // setQuery: setter => {
-      //   const { pipelineState, pipelineState: { queryComponentRef: { current } } } = this
-      //   if (!current)
-      //     pipelineState.initQuery = setter(pipelineState.initQuery, { pipelineState })
-      //   else
-      //     current.setState(setter)
-      // },
-
-      // setInnerState: (innerState, pipelineState: TWithStyles.PipelineState, propsCode?: TComponents.PropsCode) => {
-      //   if(typeof pipelineState.innerState === 'function') pipelineState.innerState(innerState, propsCode)
-      //   else pipelineState.innerState = pipelineState.innerState ? {...pipelineState.innerState, ...innerState} : innerState
-      // }
     }
 
     pipeline = (() => {
@@ -87,6 +75,7 @@ const finishComponentState = (
       componentState : overrideComponentState ?
         overrideComponentState : {}
   const componentId = componentTypeCounter++
+
   const res: TWithStyles.ComponentOptions = {
     ...mergedOptions,
     sheetOrCreator,
@@ -96,7 +85,7 @@ const finishComponentState = (
     displayName: `${mergedOptions.displayName || CodeComponent.displayName || CodeComponent['name'] || 'unknown'} (${componentId})`,
     withSheetQueryComponent: !!CodeComponent.fillSheetQuery, // mergedOptions.codeHooks && !!mergedOptions.codeHooks.innerStateToSheetQuery,
   }
-  //if (res.withSheetQueryComponent) mergedOptions.codeHooks.innerStateToSheetQuery(mergedOptions.codeHooks.initInnerState)
+
   return res
 }
 

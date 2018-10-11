@@ -29,10 +29,14 @@ declare namespace TAtomize {
   }
   export type Variants = Variant[]
   export interface Variant {
-    atomicArray: AtomicArray // class names for web, propId-propValue for native
+    atomicArray?: AtomicArray // class names for web, propId-propValue for native
     deffered?: boolean // using of variant is deffered till 'toAtomicArray' phase
     conditions?: TVariants.Conditions // conditions (when is ruleset used)
   }
+  export interface Deffered extends Variant, TypedInterface {
+    
+  }
+
 
   export type AtomicArray = {
     [TypedInterfaceTypes.prop]: TypedInterfaceTypes.atomicArray
@@ -43,8 +47,8 @@ declare namespace TAtomize {
   export type NativeStyle = Record<string, TNativeRuleValue>
 
   export type Atomic = AtomicNative | AtomicWeb
-  export type AtomicWeb = string | TVariants.Deffered // fela class name. propId's are cached (propId = fela.renderer.propIdCache[valueWeb])
-  export interface AtomicNative extends TVariants.Deffered { 
+  export type AtomicWeb = string | Deffered // fela class name. propId's are cached (propId = fela.renderer.propIdCache[valueWeb])
+  export interface AtomicNative extends Deffered { 
     propId: string // property name
     value: TNativeRuleValue // propert value
     tracePath?: string // for Dev: path to class source

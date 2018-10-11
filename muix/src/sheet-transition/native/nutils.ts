@@ -1,0 +1,2 @@
+import warning from 'warning'
+

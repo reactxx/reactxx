@@ -11,9 +11,9 @@ import { TSheeter, TAtomize, TCommonStyles } from './index'
 
 export namespace TVariants {
 
-    interface Deffered extends TAtomize.TypedInterface {
-        deffered?: true
-    }
+    // interface Deffered extends TAtomize.TypedInterface {
+    //     deffered?: true
+    // }
 
     type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
         TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
