@@ -16,16 +16,16 @@
             "type": "node",
             "request": "launch",
             "name": "Jest Tests",
-            "cwd": "${workspaceFolder}",
+            //"cwd": "${workspaceFolder}",
             "program": "${workspaceRoot}\\node_modules\\jest\\bin\\jest.js",
-            "args": [
-                "-i"
-            ],
+            //"args": [
+                //"-i"
+            //],
             //"preLaunchTask": "build",
-            "internalConsoleOptions": "openOnSessionStart",
-            "outFiles": [
-                "${workspaceRoot}/dist/**/*"
-            ],
+            // "internalConsoleOptions": "openOnSessionStart",
+            // "outFiles": [
+            //     "${workspaceRoot}/dist/**/*"
+            // ],
             //"envFile": "${workspaceRoot}/.env"
         },
         {

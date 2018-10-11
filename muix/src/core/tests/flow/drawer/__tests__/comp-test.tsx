@@ -1,14 +1,17 @@
 /** @jsx createElement */
 
-import { createElement } from 'reactxx-sheeter'
+import { createElement, atomizeRuleset, toClassNamesWithQuery } from 'reactxx-sheeter'
 
 import { shallow } from '../../../../../tests/jestsetup'
 
 import Comp from '../comp'
 
+const x = atomizeRuleset({color: 'red'}, null, null)
+const y = toClassNamesWithQuery(null, [{color: 'red'}])
+
 describe('Comp 1', () => {
     it('renders correctly', () => {
-        const wrapper = shallow(<Comp />)
+        const wrapper = shallow(<Comp classNameX={y} />)
         expect(wrapper).toMatchSnapshot()
     })
 })

@@ -1,10 +1,11 @@
 /** @jsx createElement */
 
-import { createElement, atomizeRuleset, toClassNamesWithQuery } from 'reactxx-sheeter'
+import { createElement } from 'reactxx-sheeter'
 
-const x = atomizeRuleset({color: 'red'}, null, null)
-const y = toClassNamesWithQuery(null, [x])
+import { TComponents } from 'reactxx-typings'
 
-const Comp: React.SFC = props => <div classNameX={y}/>
+const Comp: TComponents.SFCCode = ({ classNameX }) => {
+    return <div classNameX={classNameX as any} />
+}
 
 export default Comp
