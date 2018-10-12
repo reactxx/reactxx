@@ -94,4 +94,6 @@ export interface TSBugHelper<R extends TSheeter.Shape> {
     transitionGroupText?: TTransition.Group<'Text', R>
     transitionGroup$Web?: TTransition.Group<'$Web', R>
 
+    query?: TVariants.Query<R>
+
 }

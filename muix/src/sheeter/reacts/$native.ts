@@ -1,7 +1,7 @@
 import React from 'react'
 import { TComponents, TAtomize } from 'reactxx-typings'
 
-import { applyLastWinStrategy, ApplyLastWinStrategyLow, AttemptType, ApplyLastWinStrategyResult } from '../utils/apply-last-win-strategy'
+import { applyLastWinStrategyHigh, ApplyLastWinStrategyLow, AttemptType, ApplyLastWinStrategyResult } from '../utils/apply-last-win-strategy'
 import { isReactXXComponent, isDeffered } from '../atomize'
 
 /******************************************
@@ -20,7 +20,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties, .
   if (!props) return React.createElement(type, props, ...children)
 
   const { classNameX, styleX } = props
-  const style = applyLastWinStrategy(classNameX, applyLastWinStrategyLow)
+  const style = applyLastWinStrategyHigh(classNameX, applyLastWinStrategyLow)
   // const { classNameX, styleX } = props
   // if (classNameX) {
   //     const compiled = Array.isArray(classNameX) ? classNames(...classNameX) : classNames(classNameX)
@@ -32,6 +32,8 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties, .
   // warning(!props.className, `Both "css" and "className" property used, className will be ignored`)
   return React.createElement(type, props, ...children)
 }
+
+export const applyLastWinStrategy = (values: TAtomize.AtomicArray) => applyLastWinStrategyHigh(values, applyLastWinStrategyLow)
 
 const applyLastWinStrategyLow: ApplyLastWinStrategyLow = (values, attemptType) => {
   const res: TAtomize.NativeStyle = {}

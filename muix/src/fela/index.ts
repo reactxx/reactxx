@@ -7,7 +7,7 @@ import pluginFallbackValue from 'fela-plugin-fallback-value'
 import pluginPrefixer from 'fela-plugin-prefixer'
 import pluginUnit from 'fela-plugin-unit'
 
-import patch from './patch';
+import patch, { IRendererEx } from './patch';
 
 
 const plugins = {
@@ -21,7 +21,24 @@ const plugins = {
   ]
 }
 
-export const renderer = patch(createRenderer(plugins))
+export { IRendererEx }
+
+export const rendererCreate = () => patch(createRenderer(plugins))
+
+export const renderer = rendererCreate()
+
+export const dumpAtomized = (renderer: IRendererEx, classNames: string[]) => {
+  const res = {};
+  classNames.forEach(c => {
+    const trace: string = renderer.trace[c];
+    const idx = trace.lastIndexOf("|");
+    const path = trace.substr(0, idx);
+    const rest = trace.substr(idx + 1);
+    const values = rest.split("#");
+    res[`${values[0]}${c}`] = `{${values[1]}} /* path=${path}, propId=${renderer.propIdCache[c]} */`;
+  });
+  return res
+}
 
 // renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html
 //   height: '100%',

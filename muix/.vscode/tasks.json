@@ -8,6 +8,9 @@
             "type": "shell",
             "command": ".\\node_modules\\.bin\\jest.cmd",
             "args": [
+                //"--testPathPattern=fela",
+                "--testPathPattern=applyLastWinStrategy",
+                "-u"
                 //"src/core/tests/flow/drawer/__tests__/comp-test"
             ],
             "group": "test",

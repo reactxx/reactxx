@@ -19,4 +19,8 @@ export const toPlatformAtomizeRuleset: TAtomize.ToPlatformAtomizeRuleset = (styl
 export const getPlatformTracePath: TAtomize.GetPlatformTracePath = (value: TAtomize.AtomicNative) =>
     value.deffered ? JSON.stringify(value) : value.tracePath + '/' + value.propId + ': ' + value.value
 
+export const dumpAtomized = (array) => {
+    return array
+}
+
 const DEV_MODE = process.env.NODE_ENV === 'development'

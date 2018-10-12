@@ -11,22 +11,19 @@
   "jest": {
     "preset": "ts-jest",
     "setupFiles": [
-      "./src/tests/jestsetup.ts"
+      "./src/tests/index.ts"
     ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
-    "testRegex": "/__tests__/.*\\.tsx$",
-    "testMatch": null,
-    "modulePathIgnorePatterns": [
-      "<rootDir>/(jspm_packages|deploy)/"
+    "roots": [
+      "<rootDir>/src/"
     ],
+    "testRegex": "/__tests__/.*\\.(tsx|ts)$",
+    "testMatch": null,
     "moduleNameMapper": {
       "^reactxx-(.*)$": "<rootDir>/src/$1/index"
-    },
-    "testPathIgnorePatterns": [
-      "<rootDir>/(node_modules|jspm_packages|deploy)/"
-    ]
+    }
   },
   "dependencies": {
     "@types/react-event-listener": "^0.4.7",
@@ -49,6 +46,7 @@
   },
   "devDependencies": {
     "@material-ui/core": "^1.2.1",
+    "@types/enzyme": "^3.1.14",
     "@types/expo": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/expo/types-expo-0.1.1.tgz",
     "@types/jest": "^23.3.5",
     "@types/jss": "^9.3.2",
@@ -70,6 +68,7 @@
     "fela-plugin-unit": "^5.1.1",
     "jest": "^23.6.0",
     "lite-server": "^2.4.0",
+    "prettier": "^1.14.3",
     "react-test-renderer": "^16.5.2",
     "ts-jest": "^23.10.4",
     "typescript": "^3.2.0-dev.20180929"

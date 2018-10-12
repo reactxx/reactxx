@@ -18,9 +18,11 @@
             "name": "Jest Tests",
             //"cwd": "${workspaceFolder}",
             "program": "${workspaceRoot}\\node_modules\\jest\\bin\\jest.js",
-            //"args": [
-                //"-i"
-            //],
+            "args": [
+                "--runInBand",  //https://jestjs.io/docs/en/cli.html
+                //"--outputFile=c:\\temp\\test.json",
+                //"--json"
+            ],
             //"preLaunchTask": "build",
             // "internalConsoleOptions": "openOnSessionStart",
             // "outFiles": [

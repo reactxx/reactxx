@@ -33,12 +33,10 @@ export const componentOptions: TWithStyles.ComponentOptions<Shape> = {
 }
 
 export const fillSheetQuery: TComponents.FillSheetQuery<Shape> = (props, state) => {
-    state.sheetQuery = {
+    state.sheetQuery = ts.query = {
         $transitionGroups: {
-            leftDrawer: {
-                opacity: [0, 1, '30-70']
-            }
-        }
+            leftDrawer: state.data.drawerOpened
+        } 
     }
 }
 

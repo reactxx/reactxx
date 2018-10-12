@@ -1,15 +1,7 @@
-// import React from 'react'
-
-// import { atomizeRuleset } from 'reactxx-sheeter'
-// import { TTransition } from 'reactxx-sheet-transition'
-// import { getSheetSwitch } from 'reactxx-sheet-switch';
-
 import { TSheeter } from 'reactxx-typings'
 import { TSBugHelper } from 'reactxx-core'
 
 export interface Props {
-    
-    //drawerWidths?: [number, number, number] //drawer width for mobile, tablet and desktop
 }
 export interface InnerState {
     drawerOpened?: boolean
@@ -56,4 +48,3 @@ export const Theme = {
 }
 
 export const ts: TSBugHelper<Shape> = {}
-

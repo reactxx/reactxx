@@ -75,9 +75,12 @@ declare namespace TComponents {
 
   export type CommonPropertiesCodeKeys = keyof PropsCode
 
-  export type SFCCode<R extends Shape = Shape> = React.SFC<PropsCode<R>> & { fillSheetQuery?: FillSheetQuery<R> }
-  export type ComponentTypeCode<R extends Shape = Shape> = React.ComponentType<PropsCode<R>> & { fillSheetQuery?: FillSheetQuery<R> }
+  export type SFCCode<R extends Shape = Shape> = React.SFC<PropsCode<R>> & FillSheetQueryProp<R>
+  export type ComponentTypeCode<R extends Shape = Shape> = React.ComponentType<PropsCode<R>> & FillSheetQueryProp<R>
   export type FillSheetQuery<R extends Shape> = (props: PropsCode<R>, pipeState?: PipeState<R>) => void
+  export interface FillSheetQueryProp<R extends Shape> {
+    fillSheetQuery?: FillSheetQuery<R>
+  }
   export interface PipeState<R extends Shape> {
     sheetQuery?: TVariants.Query
     data?: TSheeter.getInnerState<R>

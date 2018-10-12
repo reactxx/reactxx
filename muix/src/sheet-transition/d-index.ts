@@ -5,7 +5,7 @@ declare module 'reactxx-typings' {
     namespace TVariants {
 
         interface Query<R extends TSheeter.Shape = TSheeter.Shape> {
-             $transitionGroups?: PartialRecord<TTransition.getTransitionGroups<R>, boolean>
+             $transitionGroups?: TTransition.Query<R>
         }
        interface ShapePart {
             transitionGroups: TSheeter.EmptyInterface
@@ -26,6 +26,8 @@ declare module 'reactxx-typings' {
 }
 
 export namespace TTransition {
+
+    export type Query<R extends TSheeter.Shape> = PartialRecord<getTransitionGroups<R>, boolean>
     // work flow
     export interface Workflow {
         toAtomicRuleset: TVariants.ToAtomicRuleset<Transition>

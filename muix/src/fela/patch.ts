@@ -57,7 +57,7 @@ const renderStyleToClassNames = (renderer, tracePath: string, { _className, ...s
           tracePath,
           value,
           // reactxx HACK
-          (pseudo ? pseudo + '/' : '') + normalizeNestedProperty(property),
+          (pseudo ? pseudo + ' ' : '') + normalizeNestedProperty(property),
           media,
           support
         ))
@@ -119,10 +119,10 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
         renderer.propIdCache[className] = support + media + pseudo + property
         if (DEV_MODE)
           renderer.trace[className] = tracePath + '|' +
-            (support ? support + '/' : '') +
-            (media ? media + '/' : '') +
-            (pseudo ? pseudo + '/' : '') +
-            property + '=' + value
+            (support ? support + ' ' : '') +
+            (media ? media + ' ' : '') +
+            (pseudo ? pseudo + ' ' : '') +
+            '#' + property + ': ' + value
 
         const declaration = cssifyDeclaration(property, value)
         const selector = generateCSSSelector(className, pseudo)

@@ -1,12 +1,12 @@
 import React from 'react'
 import warning from 'warning'
-import { renderer } from 'reactxx-fela'
+import { renderer, IRendererEx } from 'reactxx-fela'
 import { TAtomize, TComponents, TSheeter } from 'reactxx-typings'
 
 import { deleteSystemProps } from '../to-classnames'
 import { mergeStyles } from '../merge'
 import { isReactXXComponent, isDeffered } from '../atomize'
-import { applyLastWinStrategy, AttemptType, ApplyLastWinStrategyResult, ApplyLastWinStrategyLow } from '../utils/apply-last-win-strategy'
+import { applyLastWinStrategyHigh, AttemptType, ApplyLastWinStrategyResult, ApplyLastWinStrategyLow } from '../utils/apply-last-win-strategy'
 
 /******************************************
   EXTEND REACT
@@ -36,7 +36,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   const { classNameX, styleX } = props
 
   if (classNameX) {
-    const className = applyLastWinStrategy(classNameX, applyLastWinStrategyLow)
+    const className = applyLastWinStrategy(classNameX).join(' ')
     props.className = props.className ? className + ' ' + props.className : className
   }
 
@@ -48,8 +48,14 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   return React.createElement(type, props, ...children)
 }
 
+export const applyLastWinStrategyCreator = (renderer: IRendererEx) =>
+  (values: TAtomize.AtomicArray) => applyLastWinStrategyHigh(values, (values2, attemptType) =>
+    applyLastWinStrategyLow(renderer, values2, attemptType))
+
+const applyLastWinStrategy = applyLastWinStrategyCreator(renderer)
+
 // apply LAST WIN strategy for web className
-const applyLastWinStrategyLow: ApplyLastWinStrategyLow = (values, attemptType) => {
+const applyLastWinStrategyLow = (renderer: IRendererEx, values: TAtomize.AtomicWeb[], attemptType: AttemptType) => {
   const res: string[] = []
   let idxs: number[] = []
   let defferedFound = false
@@ -78,7 +84,7 @@ const applyLastWinStrategyLow: ApplyLastWinStrategyLow = (values, attemptType) =
     res.push(value as string)
     usedPropIds[propId] = true
   }
-  return (attemptType !== AttemptType.second && defferedFound ? { defferedIdxs: idxs } : { style: res.join(' ') }) as ApplyLastWinStrategyResult
+  return (attemptType !== AttemptType.second && defferedFound ? { defferedIdxs: idxs } : { style: res }) as ApplyLastWinStrategyResult
 }
 
 const consolidateEvents = (props: TComponents.Props & TComponents.Events & TComponents.EventsWeb) => {

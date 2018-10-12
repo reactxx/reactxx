@@ -2,7 +2,7 @@
 
 import { createElement, atomizeRuleset, toClassNamesWithQuery } from 'reactxx-sheeter'
 
-import { shallow } from '../../../../../tests/jestsetup'
+import { shallow } from 'reactxx-tests'
 
 import Comp from '../comp'
 

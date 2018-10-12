@@ -26,6 +26,9 @@
     //"noUnusedLocals": true,
     "baseUrl": ".",
     "paths": {
+      "reactxx-tests": [
+        "src/tests/index"
+      ],
       "reactxx-typings": [
         "src/typings/index"
       ],
@@ -94,6 +97,7 @@
     "src/typings.d.ts",
     "src/ks/common/ks.d.ts",
 
+    "src/tests", 
     "src/typings",
     "src/fela",
     "src/sheeter",
