@@ -5,26 +5,28 @@ import isPlainObject from 'isobject';
 import { IRenderer } from 'fela'
 import { TAtomize } from 'reactxx-typings'
 
-
 export interface IRendererEx extends IRenderer {
-  renderRuleEx(style: {}, tracePath?: string): string[] & { [TAtomize.TypedInterfaceTypes.prop]: TAtomize.TypedInterfaceTypes.atomicArray }
+  renderRuleEx(style: {}, tracePath?: string): TAtomize.AtomicWebs
   propIdCache: {}
-  trace: {}
+  //trace: {}
+  cache
+  _emitChange
+  filterClassName
+  getNextRuleIdentifier
+  selectorPrefix
 }
 
 const patch = (renderer: IRenderer) => {
   const rendererEx = renderer as IRendererEx
   rendererEx.renderRuleEx = renderRuleEx.bind(rendererEx)
   rendererEx.propIdCache = {}
-  rendererEx.trace = {}
+  //rendererEx.trace = {}
   return rendererEx
 }
 export default patch
 
-const DEV_MODE = process.env.NODE_ENV === 'development'
-
-function renderRuleEx(style: {}, tracePath?: string): string[] {
-  if (!style) return []
+function renderRuleEx(style: {}, tracePath?: string): TAtomize.AtomicWebs {
+  if (!style) return newAtomicWeb()
   const processedStyle = processStyleWithPlugins(
     this,
     style,
@@ -35,12 +37,16 @@ function renderRuleEx(style: {}, tracePath?: string): string[] {
   return renderStyleToClassNames(this, tracePath, processedStyle)//.slice(1)
 }
 
-const concat = <T = any>(arr1: Array<T>, arr2: Array<T>) => arr1.concat(arr2)
+const concat = (arr1: TAtomize.AtomicWebsLow, arr2: TAtomize.AtomicWebsLow) => arr1.concat(arr2)
+const newAtomicWeb = () => {
+  let res: TAtomize.AtomicWebs = [] as any
+  res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
+  return res
+}
 
-const renderStyleToClassNames = (renderer, tracePath: string, { _className, ...style }: any, pseudo: string = '', media: string = '', support: string = ''): string[] => {
+const renderStyleToClassNames = (renderer: IRendererEx, tracePath: string, { _className, ...style }: any, pseudo: string = '', media: string = '', support: string = ''): TAtomize.AtomicWebs => {
   //let classNames = _className ? ` ${_className}` : ''
-  let classNames: string[] = []
-  classNames[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
+  let classNames: TAtomize.AtomicWebsLow = []
 
   for (const property in style) {
 
@@ -57,7 +63,8 @@ const renderStyleToClassNames = (renderer, tracePath: string, { _className, ...s
           tracePath,
           value,
           // reactxx HACK
-          (pseudo ? pseudo + ' ' : '') + normalizeNestedProperty(property),
+          //(pseudo ? pseudo + ' ' : '') + 
+          pseudo + normalizeNestedProperty(property),
           media,
           support
         ))
@@ -108,7 +115,7 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
           /* eslint-enable */
         }
 
-        const className =
+        const className: string =
           renderer.selectorPrefix +
           generateClassName(
             renderer.getNextRuleIdentifier,
@@ -117,17 +124,17 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
 
         // reactxx HACK: cache declarationReference without value
         renderer.propIdCache[className] = support + media + pseudo + property
-        if (DEV_MODE)
-          renderer.trace[className] = tracePath + '|' +
-            (support ? support + ' ' : '') +
-            (media ? media + ' ' : '') +
-            (pseudo ? pseudo + ' ' : '') +
-            '#' + property + ': ' + value
+        // if (window.__DEV__)
+        //   renderer.trace[className] = tracePath + '|' +
+        //     (support ? support + ' ' : '') +
+        //     (media ? media + ' ' : '') +
+        //     (pseudo ? pseudo + ' ' : '') +
+        //     '#' + property + ': ' + value
 
         const declaration = cssifyDeclaration(property, value)
         const selector = generateCSSSelector(className, pseudo)
 
-        const change = {
+        const change: TAtomize.__dev_WebCache = {
           type: RULE_TYPE,
           className,
           selector,
@@ -141,14 +148,27 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
         renderer._emitChange(change)
       }
 
-      const cachedClassName = renderer.cache[declarationReference].className
+      const cache: TAtomize.__dev_WebCache = renderer.cache[declarationReference]
+      //const cachedClassName = renderer.cache[declarationReference].className
 
       // only append if we got a class cached
-      if (cachedClassName)
-        classNames.push(cachedClassName)
+      if (!cache.className) continue
+
+      if (window.__DEV__) {
+        // const path = tracePath + '|' +
+        //   (support ? support + ' ' : '') +
+        //   (media ? media + ' ' : '') +
+        //   (pseudo ? pseudo + ' ' : '') +
+        //   '#' + property + ': ' + value
+        classNames.push({ ...cache, path: tracePath } as TAtomize.__dev_AtomicWeb)
+        continue
+      }
+
+      classNames.push(cache.className)
 
     }
   }
 
-  return classNames
+  classNames[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
+  return classNames as TAtomize.AtomicWebs
 }

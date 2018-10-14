@@ -1,12 +1,12 @@
 import React from 'react'
 import warning from 'warning'
-import { renderer, IRendererEx } from 'reactxx-fela'
+import { getRenderer, IRendererEx } from 'reactxx-fela'
 import { TAtomize, TComponents, TSheeter } from 'reactxx-typings'
 
 import { deleteSystemProps } from '../to-classnames'
 import { mergeStyles } from '../merge'
 import { isReactXXComponent, isDeffered } from '../atomize'
-import { applyLastWinStrategyHigh, AttemptType, ApplyLastWinStrategyResult, ApplyLastWinStrategyLow } from '../utils/apply-last-win-strategy'
+import { applyLastwinsStrategyRoot, AttemptType, ApplyLastWinStrategyResult, ApplyLastWinStrategyLow } from '../utils/apply-last-win-strategy'
 
 /******************************************
   EXTEND REACT
@@ -36,7 +36,12 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   const { classNameX, styleX } = props
 
   if (classNameX) {
-    const className = applyLastWinStrategy(classNameX).join(' ')
+    let reduced = applyLastwinsStrategy(classNameX)
+    if (window.__DEV__) {
+      reduced = reduced.map((r: TAtomize.__dev_AtomicWeb) => r.className) as any
+    }
+
+    const className = reduced.join(' ')
     props.className = props.className ? className + ' ' + props.className : className
   }
 
@@ -48,20 +53,22 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   return React.createElement(type, props, ...children)
 }
 
-export const applyLastWinStrategyCreator = (renderer: IRendererEx) =>
-  (values: TAtomize.AtomicArray) => applyLastWinStrategyHigh(values, (values2, attemptType) =>
-    applyLastWinStrategyLow(renderer, values2, attemptType))
+// export const applyLastwinsStrategyCreator = (renderer: IRendererEx) =>
+//   (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, (values2, attemptType) =>
+//     applyLastwinsStrategyLow(renderer, values2, attemptType))
 
-const applyLastWinStrategy = applyLastWinStrategyCreator(renderer)
+export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastwinsStrategyLow)
 
 // apply LAST WIN strategy for web className
-const applyLastWinStrategyLow = (renderer: IRendererEx, values: TAtomize.AtomicWeb[], attemptType: AttemptType) => {
-  const res: string[] = []
+const applyLastwinsStrategyLow = (values: TAtomize.AtomicWebs, attemptType: AttemptType) => {
+  const renderer = getRenderer()
+
+  const res: TAtomize.AtomicWeb[] = []
   let idxs: number[] = []
   let defferedFound = false
   const usedPropIds: { [propId: string]: boolean } = {}
   for (let k = values.length - 1; k >= 0; k--) {
-    const value = values[k]
+    let value = values[k]
     if (!value) continue
     if (attemptType !== AttemptType.second) {
       if (isDeffered(value)) {
@@ -79,9 +86,14 @@ const applyLastWinStrategyLow = (renderer: IRendererEx, values: TAtomize.AtomicW
     }
     if (defferedFound) continue // first attempt and deffered found => ignore other values
     // last win strategy
-    const propId = renderer.propIdCache[value as string]
-    if (!propId || usedPropIds[propId]) continue
-    res.push(value as string)
+    let propId: string = value as string
+    if (window.__DEV__) {
+      propId = (value as TAtomize.__dev_AtomicWeb).className
+    }
+    propId = renderer.propIdCache[propId]
+    if (!propId || usedPropIds[propId])
+      continue
+    res.push(value)
     usedPropIds[propId] = true
   }
   return (attemptType !== AttemptType.second && defferedFound ? { defferedIdxs: idxs } : { style: res }) as ApplyLastWinStrategyResult

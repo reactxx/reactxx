@@ -7,37 +7,6 @@ import { isAtomicArray, isAtomizedRuleset } from './atomize'
 // platform dependent import
 import { toPlatformAtomizeRuleset } from 'reactxx-sheeter'
 
-// if single style without $web prop, then it is modified by setting TypedInterfaceTypes.atomizedStyleWeb flag
-// export const atomizeStyleWeb = (st: TSheeter.StyleOrAtomizedWeb) => {
-
-//     if (isAtomizedStyleWeb(st)) return st
-
-//     const processStyle = (s: TSheeter.StyleOrAtomizedWebItem) => {
-//         if (!s) return
-//         push(s)
-//         if (!isAtomizedStyleWeb(s) && s.$web)
-//             push(s.$web)
-//     }
-
-//     let res: TAtomize.StyleWeb = null
-//     let canModifyRes = false
-//     const push = (item) => {
-//         if (canModifyRes) Object.assign(res, item) // thirdts and more item
-//         else if (!res) res = item // cannotmodify, first
-//         else {
-//             res = { ...res, ...item } // cannotmodify, second item
-//             canModifyRes = true
-//         }
-//     }
-
-//     if (Array.isArray(st)) st.forEach(s => processStyle(s))
-//     else processStyle(st)
-
-//     res[TAtomize.TypedInterfaceTypes.InterfaceProp] = TAtomize.TypedInterfaceTypes.atomizedStyleWeb
-
-//     return res
-// }
-
 export const atomizeRulesetLow = (ruleset: TSheeter.RulesetOrAtomized /*| TSheeter.RulesetItem[]*/, rulesetName?: string) => {
     if (!ruleset) return null
 

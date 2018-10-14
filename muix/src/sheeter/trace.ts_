@@ -4,7 +4,7 @@ import { TAtomize } from 'reactxx-typings';
 import { getPlatformTracePath } from 'reactxx-sheeter';
 
 
-export const trace = (values: TAtomize.AtomicArray) => values.map(v => getPlatformTracePath(v)).join('\n')
+//export const trace = (values: TAtomize.AtomicArray) => values.map(v => getPlatformTracePath(v)).join('\n')
 export const traceAtomizedRuleset = (rs: TAtomize.AtomizedRuleset) => {
     const res: string[] = [`******************** name: ${rs.name}`]
     rs.list.forEach(v => {

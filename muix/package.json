@@ -19,7 +19,7 @@
     "roots": [
       "<rootDir>/src/"
     ],
-    "testRegex": "/__tests__/.*\\.(tsx|ts)$",
+    "testRegex": "/__tests__/.*\\.test\\.(tsx|ts)$",
     "testMatch": null,
     "moduleNameMapper": {
       "^reactxx-(.*)$": "<rootDir>/src/$1/index"

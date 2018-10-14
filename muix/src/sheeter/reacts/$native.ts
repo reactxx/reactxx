@@ -1,7 +1,7 @@
 import React from 'react'
 import { TComponents, TAtomize } from 'reactxx-typings'
 
-import { applyLastWinStrategyHigh, ApplyLastWinStrategyLow, AttemptType, ApplyLastWinStrategyResult } from '../utils/apply-last-win-strategy'
+import { applyLastwinsStrategyRoot, ApplyLastWinStrategyLow, AttemptType, ApplyLastWinStrategyResult } from '../utils/apply-last-win-strategy'
 import { isReactXXComponent, isDeffered } from '../atomize'
 
 /******************************************
@@ -16,11 +16,24 @@ declare module 'react-native' {
   }
 }
 
-export const createElement = (type, props: TComponents.ReactsCommonProperties, ...children) => {
+export const createElement = (type, props: TComponents.ReactsCommonProperties  & { style?}, ...children) => {
   if (!props) return React.createElement(type, props, ...children)
 
   const { classNameX, styleX } = props
-  const style = applyLastWinStrategyHigh(classNameX, applyLastWinStrategyLow)
+
+  if (classNameX) {
+    let reduced = applyLastwinsStrategy(classNameX)
+    if (window.__DEV__) {
+      const res = {}
+      for (const p in reduced) res[p] = (reduced[p] as TAtomize.__dev_AtomicNative).value
+      reduced = res
+    }
+    props.style = reduced
+  }
+
+
+
+  //const style = applyLastwinsStrategyRoot(classNameX, applyLastWinStrategyLow)
   // const { classNameX, styleX } = props
   // if (classNameX) {
   //     const compiled = Array.isArray(classNameX) ? classNames(...classNameX) : classNames(classNameX)
@@ -33,7 +46,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties, .
   return React.createElement(type, props, ...children)
 }
 
-export const applyLastWinStrategy = (values: TAtomize.AtomicArray) => applyLastWinStrategyHigh(values, applyLastWinStrategyLow)
+export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastWinStrategyLow)
 
 const applyLastWinStrategyLow: ApplyLastWinStrategyLow = (values, attemptType) => {
   const res: TAtomize.NativeStyle = {}

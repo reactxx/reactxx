@@ -20,6 +20,9 @@
             "program": "${workspaceRoot}\\node_modules\\jest\\bin\\jest.js",
             "args": [
                 "--runInBand",  //https://jestjs.io/docs/en/cli.html
+                //"--testPathPattern=fela",
+                "--testPathPattern=applyLastWinStrategy",
+                "-u",
                 //"--outputFile=c:\\temp\\test.json",
                 //"--json"
             ],

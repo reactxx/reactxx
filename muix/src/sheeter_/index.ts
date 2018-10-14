@@ -8,8 +8,6 @@ export * from './animations/index';
 export * from './mediaq';
 export * from './when-used';
 
-const DEV_MODE = process.env.NODE_ENV === 'development'
-
 //****************************
 // TYPINGS
 //****************************
@@ -259,7 +257,7 @@ const getPatchLow = (addInsRoot: AddIns /*addInsRoot is not mutated*/, rulesetPa
     if (patchPlace) deepMerges(patchPlace, p.rulesets)
   })
   // for DUMP
-  if (DEV_MODE) {
+  if (window.__DEV__) {
     const develop = {
       rootPatches,
       addInPatches

@@ -8,7 +8,7 @@ import pluginPrefixer from 'fela-plugin-prefixer'
 import pluginUnit from 'fela-plugin-unit'
 
 import patch, { IRendererEx } from './patch';
-
+import { TAtomize } from 'reactxx-typings';
 
 const plugins = {
   plugins: [
@@ -23,20 +23,37 @@ const plugins = {
 
 export { IRendererEx }
 
-export const rendererCreate = () => patch(createRenderer(plugins))
+export const resetRenderer = () => { renderer = patch(createRenderer(plugins)) }
 
-export const renderer = rendererCreate()
+//export const rendererCreate = () => patch(createRenderer(plugins))
 
-export const dumpAtomized = (renderer: IRendererEx, classNames: string[]) => {
+export let renderer: IRendererEx // = rendererCreate()
+resetRenderer()
+
+export const getRenderer = () => renderer
+
+export const dumpAtomized = (classNames: TAtomize.AtomicWebs) => {
   const res = {};
-  classNames.forEach(c => {
-    const trace: string = renderer.trace[c];
-    const idx = trace.lastIndexOf("|");
-    const path = trace.substr(0, idx);
-    const rest = trace.substr(idx + 1);
-    const values = rest.split("#");
-    res[`${values[0]}${c}`] = `{${values[1]}} /* path=${path}, propId=${renderer.propIdCache[c]} */`;
-  });
+  if (window.__DEV__) {
+    /*
+"{
+  "type": "RULE",
+  "className": "a",
+  "selector": ".a",
+  "declaration": "color:red",
+  "pseudo": "",
+  "media": "",
+  "support": "",
+  "path": "root"
+}"    
+     */
+    classNames.forEach((c: TAtomize.__dev_AtomicWeb) => {
+      const {className, selector, declaration, path, media, support} = c 
+      res[`${support ? '@support' + support : ''}${media ? '@media ' + media : ''}${selector}`] = `${declaration} /* ${path} */`
+    });
+  } else {
+    res['info'] = 'DUMP is available in window.__DEV__ only'
+  }
   return res
 }
 

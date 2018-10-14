@@ -10,8 +10,6 @@ import { TAddIn } from '../typings/add-in';
 // DON'T REMOVE IT (project reference fails)
 type fake = TAddIn.CodeProps
 
-const DEV_MODE = process.env.NODE_ENV === 'development'
-
 /************************
 * TRenderState
 *************************/
@@ -107,7 +105,7 @@ const withStylesLow = <R extends Types.Shape, TStatic extends {} = {}>(sheetCrea
 
     render() {
       //console.log('*** render: ', this.renderState.$developer_id)
-      if (DEV_MODE && options && this.props.$developer_flag) {
+      if (window.__DEV__ && options && this.props.$developer_flag) {
         debugger
       }
       return this.renderPipeline()

@@ -1,4 +1,4 @@
-import { renderer } from 'reactxx-fela'
+import { getRenderer } from 'reactxx-fela'
 import { TWithStyles, TVariants, TAtomize } from 'reactxx-typings'
 import { isDeffered, atomizeRuleset, registerVariantHandler, wrapPseudoPrefixes } from 'reactxx-sheeter'
 
@@ -44,6 +44,7 @@ export const transition_registerVariantHandler = () => {
 //*********************************************************
 const applyLastWinStrategy = (values: TAtomize.AtomicArray, outDeffered: TAtomize.Variants ) => {
     const res: TAtomize.AtomicWeb[] = []
+    const renderer = getRenderer()
     const usedPropIds: { [propId: string]: boolean } = {}
     let getDefferedPhase = false
     for (let k = values.length - 1; k >= 0; k--) {

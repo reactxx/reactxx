@@ -29,7 +29,7 @@ export const getSystemPipes = <R extends Types.Shape>(
 
     render() {
       if (!options.withCascading) {
-        warning(DEV_MODE, `Component.Provider does not exist (component.name=${name}). Use 'C' variant of the component, e.g. <LabelC.Provider><LabelC>. 'C' variant of the component is created by e.g. 'LabelCreator = withStylesCreator<Shape>(Consts.Label, sheet, label); export const LabelC = LabelCreator({ withCascading: true})'`) //`
+        warning(window.__DEV__, `Component.Provider does not exist (component.name=${name}). Use 'C' variant of the component, e.g. <LabelC.Provider><LabelC>. 'C' variant of the component is created by e.g. 'LabelCreator = withStylesCreator<Shape>(Consts.Label, sheet, label); export const LabelC = LabelCreator({ withCascading: true})'`) //`
         return this.props.children
       }
       return <CascadingConsumer>{this.CASCADING}</CascadingConsumer>
@@ -91,7 +91,7 @@ export const getSystemPipes = <R extends Types.Shape>(
     const platformProps = Sheeter.finishProps(mergedProps as Sheeter.Sheet, addIns.finishAddInProps)
 
     // remove developer_flag for non 'development' ENV
-    if (!DEV_MODE && platformProps.$developer_flag) delete platformProps.$developer_flag
+    if (!window.__DEV__ && platformProps.$developer_flag) delete platformProps.$developer_flag
 
     // events
     //if (!platformProps.$system) platformProps.$system = {}
@@ -267,8 +267,6 @@ const separateProps = (props: Types.PropsX) => {
   const { classes, className, style, $themedProps, ...rest } = props
   return { classes, className, style, $themedProps, rest: Object.keys(rest).length === 0 ? null : rest } as Types.SeparatedProps
 }
-
-const DEV_MODE = process.env.NODE_ENV === 'development'
 
 type SeparatedPropsArray = Types.SeparatedProps[]
 

@@ -1,235 +1,329 @@
-import { TAtomize } from "reactxx-typings";
-// WEB imports
-import { rendererCreate } from "reactxx-fela";
-import { applyLastWinStrategyCreator } from "../../index";
-import { dumpAtomized as dumpAtomizedWeb } from "../../$web";
+import { WEB, NATIVE } from "./applyLastWinStrategy.testlib";
 
-// NATIVE imports
-import { applyLastWinStrategy as applyLastWinStrategyNative } from "../../index-native";
-import {
-  dumpAtomized as dumpAtomizedNative,
-  toPlatformAtomizeRuleset as toPlatformAtomizeRulesetNative
-} from "../../$native";
+/*
+    expect(ruleset1).toMatchInlineSnapshot()
+    expect(ruleset2).toMatchInlineSnapshot()
+    expect(ruleset1Wins).toMatchInlineSnapshot()
+    expect(ruleset2Wins).toMatchInlineSnapshot()
+*/
 
-test("applyLastWinStrategy WEB", () => {
-  window.isWeb = true;
-  const renderer = rendererCreate();
-  const applyLastWinStrategyWeb = applyLastWinStrategyCreator(renderer);
-  const toPlatformAtomizeRulesetWeb = renderer.renderRuleEx;
-  /****************
-   * RULESET 1
-   ***************/
-  const ruleset1 = toPlatformAtomizeRulesetWeb(
-    {
-      color: "red",
-      margin: 10,
-      padding: 10,
-      right: 20,
-      ":hover": {
-        margin: 5,
-        ":active": {
-          color: "green"
-        }
-      }
+describe("applyLastwinsStrategy simple", () => {
+  const DATA = {
+    ruleset1: {
+      color: "red", // to override
+      right: 20 // to use
     },
-    "ruleset1"
-  ) as string[];
-  expect(dumpAtomizedWeb(renderer, ruleset1)).toMatchInlineSnapshot(`
-Object {
-  ":hover :active f": "{color: green} /* path=ruleset1, propId=:hover :activecolor */",
-  ":hover e": "{margin: 5px} /* path=ruleset1, propId=:hovermargin */",
-  "a": "{color: red} /* path=ruleset1, propId=color */",
-  "b": "{margin: 10px} /* path=ruleset1, propId=margin */",
-  "c": "{padding: 10px} /* path=ruleset1, propId=padding */",
-  "d": "{right: 20px} /* path=ruleset1, propId=right */",
-}
-`);
-  /****************
-   * RULESET 2
-   */
-  const ruleset2 = toPlatformAtomizeRulesetWeb(
-    {
-      color: "black",
-      margin: 15,
-      left: 10,
-      right: 20,
-      ":hover": {
-        margin: 10,
-        ":active": {
-          color: "blue"
-        }
-      }
-    },
-    "ruleset2"
-  ) as string[];
-  expect(dumpAtomizedWeb(renderer, ruleset2)).toMatchInlineSnapshot(`
-Object {
-  ":hover :active k": "{color: blue} /* path=ruleset2, propId=:hover :activecolor */",
-  ":hover j": "{margin: 10px} /* path=ruleset2, propId=:hovermargin */",
-  "d": "{right: 20px} /* path=ruleset1, propId=right */",
-  "g": "{color: black} /* path=ruleset2, propId=color */",
-  "h": "{margin: 15px} /* path=ruleset2, propId=margin */",
-  "i": "{left: 10px} /* path=ruleset2, propId=left */",
-}
-`);
-  /****************
-   * CONCAT RULESET2 WITH RULESET1 => RULESET1 WINS
-   */
-  const concated1 = ruleset2.concat(ruleset1);
-  const merged_1wins = applyLastWinStrategyWeb(
-    concated1 as TAtomize.AtomicArray
-  );
-  const dump1 = dumpAtomizedWeb(renderer, merged_1wins);
-  dump1[" source"] = concated1.join(" ");
-  dump1[" result"] = merged_1wins.join(" ");
-  expect(dump1).toMatchInlineSnapshot(`
-Object {
-  " result": "f e d c b a i",
-  " source": "g h i d j k a b c d e f",
-  ":hover :active f": "{color: green} /* path=ruleset1, propId=:hover :activecolor */",
-  ":hover e": "{margin: 5px} /* path=ruleset1, propId=:hovermargin */",
-  "a": "{color: red} /* path=ruleset1, propId=color */",
-  "b": "{margin: 10px} /* path=ruleset1, propId=margin */",
-  "c": "{padding: 10px} /* path=ruleset1, propId=padding */",
-  "d": "{right: 20px} /* path=ruleset1, propId=right */",
-  "i": "{left: 10px} /* path=ruleset2, propId=left */",
-}
-`);
-  /****************
-   * CONCAT RULESET1 WITH RULESET2 => RULESET2 WINS
-   */
+    ruleset2: {
+      color: "black", // to override
+      left: 10
+    }
+  };
 
-  const concated2 = ruleset1.concat(ruleset2);
-  const merged_2wins = applyLastWinStrategyWeb(
-    concated2 as TAtomize.AtomicArray
-  );
-  const dump2 = dumpAtomizedWeb(renderer, merged_2wins);
-  dump2[" source"] = concated2.join(" ");
-  dump2[" result"] = merged_2wins.join(" ");
-  expect(dump2).toMatchInlineSnapshot(`
+  //*********************************************************
+  //  WEB DEVELOPMENT
+  //*********************************************************
+
+  it("WEB, development environment", () => {
+    window.__DEV__ = true;
+    window.isWeb = true;
+
+    const {
+      ruleset1,
+      ruleset2,
+      ruleset1Wins,
+      ruleset2Wins
+    } = WEB.defineRulesets(DATA);
+
+    expect(ruleset1).toMatchInlineSnapshot(`
 Object {
-  " result": "k j d i h g c",
-  " source": "a b c d e f g h i d j k",
-  ":hover :active k": "{color: blue} /* path=ruleset2, propId=:hover :activecolor */",
-  ":hover j": "{margin: 10px} /* path=ruleset2, propId=:hovermargin */",
-  "c": "{padding: 10px} /* path=ruleset1, propId=padding */",
-  "d": "{right: 20px} /* path=ruleset1, propId=right */",
-  "g": "{color: black} /* path=ruleset2, propId=color */",
-  "h": "{margin: 15px} /* path=ruleset2, propId=margin */",
-  "i": "{left: 10px} /* path=ruleset2, propId=left */",
+  ".a": "color:red /* ruleset1 */",
+  ".b": "right:20px /* ruleset1 */",
 }
 `);
-});
+    expect(ruleset2).toMatchInlineSnapshot(`
+Object {
+  ".c": "color:black /* ruleset2 */",
+  ".d": "left:10px /* ruleset2 */",
+}
+`);
+    expect(ruleset1Wins).toMatchInlineSnapshot(`
+Object {
+  " result": "b a d",
+  " source": "c d a b",
+  ".a": "color:red /* ruleset1 */",
+  ".b": "right:20px /* ruleset1 */",
+  ".d": "left:10px /* ruleset2 */",
+}
+`);
+    expect(ruleset2Wins).toMatchInlineSnapshot(`
+Object {
+  " result": "d c b",
+  " source": "a b c d",
+  ".b": "right:20px /* ruleset1 */",
+  ".c": "color:black /* ruleset2 */",
+  ".d": "left:10px /* ruleset2 */",
+}
+`);
+  });
+  //*********************************************************
+  //  WEB PRODUCTION
+  //*********************************************************
 
-test("applyLastWinStrategy NATIVE", () => {
-  window.isWeb = false;
-  /****************
-   * RULESET 1
-   ***************/
-  const ruleset1 = toPlatformAtomizeRulesetNative(
-    {
-      color: "red",
-      margin: 10,
-      right: 20,
-      padding: 10
-    },
-    "ruleset1"
-  ) as TAtomize.AtomicNatives;
-  expect(dumpAtomizedNative(ruleset1)).toMatchInlineSnapshot(`
+  it("WEB, production environment", () => {
+    window.__DEV__ = false;
+    window.isWeb = true;
+    const {
+      ruleset1,
+      ruleset2,
+      ruleset1Wins,
+      ruleset2Wins
+    } = WEB.defineRulesets(DATA);
+
+    expect(ruleset1).toMatchInlineSnapshot(`
+Object {
+  "info": "DUMP is available in window.__DEV__ only",
+}
+`);
+    expect(ruleset2).toMatchInlineSnapshot(`
+Object {
+  "info": "DUMP is available in window.__DEV__ only",
+}
+`);
+    expect(ruleset1Wins).toMatchInlineSnapshot(`
+Object {
+  " result": "b a d",
+  " source": "c d a b",
+  "info": "DUMP is available in window.__DEV__ only",
+}
+`);
+    expect(ruleset2Wins).toMatchInlineSnapshot(`
+Object {
+  " result": "d c b",
+  " source": "a b c d",
+  "info": "DUMP is available in window.__DEV__ only",
+}
+`);
+  });
+  //*********************************************************
+  //  NATIVE DEVELOPMENT
+  //*********************************************************
+
+  it("NATIVE, development environment", () => {
+    window.__DEV__ = true;
+    window.isWeb = false;
+
+    const {
+      ruleset1,
+      ruleset2,
+      ruleset1Wins,
+      ruleset2Wins
+    } = NATIVE.defineRulesets(DATA);
+
+    expect(ruleset1).toMatchInlineSnapshot(`
 Array [
   Object {
     "propId": "color",
-    "tracePath": "ruleset1",
-    "value": "red",
-  },
-  Object {
-    "propId": "margin",
-    "tracePath": "ruleset1",
-    "value": 10,
+    "value": Object {
+      "tracePath": "ruleset1",
+      "value": "red",
+    },
   },
   Object {
     "propId": "right",
-    "tracePath": "ruleset1",
-    "value": 20,
-  },
-  Object {
-    "propId": "padding",
-    "tracePath": "ruleset1",
-    "value": 10,
+    "value": Object {
+      "tracePath": "ruleset1",
+      "value": "20px",
+    },
   },
 ]
 `);
-
-  /****************
-   * RULESET 2
-   */
-  const ruleset2 = toPlatformAtomizeRulesetNative(
-    {
-      color: "black",
-      margin: 15,
-      right: 20,
-      left: 10
-    },
-    "ruleset2"
-  ) as TAtomize.AtomicNatives;
-  expect(dumpAtomizedNative(ruleset2)).toMatchInlineSnapshot(`
+    expect(ruleset2).toMatchInlineSnapshot(`
 Array [
   Object {
     "propId": "color",
-    "tracePath": "ruleset2",
-    "value": "black",
-  },
-  Object {
-    "propId": "margin",
-    "tracePath": "ruleset2",
-    "value": 15,
-  },
-  Object {
-    "propId": "right",
-    "tracePath": "ruleset2",
-    "value": 20,
+    "value": Object {
+      "tracePath": "ruleset2",
+      "value": "black",
+    },
   },
   Object {
     "propId": "left",
-    "tracePath": "ruleset2",
-    "value": 10,
+    "value": Object {
+      "tracePath": "ruleset2",
+      "value": "10px",
+    },
   },
 ]
 `);
+    expect(ruleset1Wins).toMatchInlineSnapshot(`
+Object {
+  "color": Object {
+    "tracePath": "ruleset1",
+    "value": "red",
+  },
+  "left": Object {
+    "tracePath": "ruleset2",
+    "value": "10px",
+  },
+  "right": Object {
+    "tracePath": "ruleset1",
+    "value": "20px",
+  },
+}
+`);
+    expect(ruleset2Wins).toMatchInlineSnapshot(`
+Object {
+  "color": Object {
+    "tracePath": "ruleset2",
+    "value": "black",
+  },
+  "left": Object {
+    "tracePath": "ruleset2",
+    "value": "10px",
+  },
+  "right": Object {
+    "tracePath": "ruleset1",
+    "value": "20px",
+  },
+}
+`);
+  });
+  //*********************************************************
+  //  NATIVE PRODUCTION
+  //*********************************************************
 
-  /****************
-   * CONCAT RULESET2 WITH RULESET1 => RULESET1 WINS
-   */
-  const concated1 = ruleset2.concat(ruleset1);
-  const merged_1wins = applyLastWinStrategyNative(
-    concated1 as TAtomize.AtomicArray
-  );
-  const dump1 = dumpAtomizedNative(merged_1wins);
-  expect(dump1).toMatchInlineSnapshot(`
+  it("NATIVE, production environment", () => {
+    window.__DEV__ = false;
+    window.isWeb = false;
+    const {
+      ruleset1,
+      ruleset2,
+      ruleset1Wins,
+      ruleset2Wins
+    } = NATIVE.defineRulesets(DATA);
+
+    expect(ruleset1).toMatchInlineSnapshot(`
+Array [
+  Object {
+    "propId": "color",
+    "value": "red",
+  },
+  Object {
+    "propId": "right",
+    "value": "20px",
+  },
+]
+`);
+    expect(ruleset2).toMatchInlineSnapshot(`
+Array [
+  Object {
+    "propId": "color",
+    "value": "black",
+  },
+  Object {
+    "propId": "left",
+    "value": "10px",
+  },
+]
+`);
+    expect(ruleset1Wins).toMatchInlineSnapshot(`
 Object {
   "color": "red",
-  "left": 10,
-  "margin": 10,
-  "padding": 10,
-  "right": 20,
+  "left": "10px",
+  "right": "20px",
 }
 `);
-  /****************
-   * CONCAT RULESET1 WITH RULESET2 => RULESET2 WINS
-   */
-
-  const concated2 = ruleset1.concat(ruleset2);
-  const merged_2wins = applyLastWinStrategyNative(
-    concated2 as TAtomize.AtomicArray
-  );
-  const dump2 = dumpAtomizedNative(merged_2wins);
-  expect(dump2).toMatchInlineSnapshot(`
+    expect(ruleset2Wins).toMatchInlineSnapshot(`
 Object {
   "color": "black",
-  "left": 10,
-  "margin": 15,
-  "padding": 10,
-  "right": 20,
+  "left": "10px",
+  "right": "20px",
 }
 `);
+  });
+});
+
+describe("applyLastwinsStrategy pseudo WEB", () => {
+  window.isWeb = true;
+
+  const WEB_DATA = {
+    ruleset1: {
+      ":hover": {
+        color: "green",
+        margin: 5,
+        "@media (min-width: 768px)": {
+          color: "red",
+          ":active": {
+            color: "blue"
+          }
+        }
+      }
+    },
+    ruleset2: {
+      ":hover": {
+        color: "red",
+        padding: 10,
+        "@media (min-width: 768px)": {
+          color: "brown",
+          ":active": {
+            color: "maroon"
+          }
+        }
+      }
+    }
+  };
+
+  //*********************************************************
+  //  WEB DEVELOPMENT
+  //*********************************************************
+
+  it("development environment", () => {
+    window.__DEV__ = true;
+
+    const {
+      ruleset1,
+      ruleset2,
+      ruleset1Wins,
+      ruleset2Wins
+    } = WEB.defineRulesets(WEB_DATA);
+
+    expect(ruleset1).toMatchInlineSnapshot(`
+Object {
+  ".a:hover": "color:green /* ruleset1 */",
+  ".b:hover": "margin:5px /* ruleset1 */",
+  "@media (min-width: 768px).c:hover": "color:red /* ruleset1 */",
+  "@media (min-width: 768px).d:hover:active": "color:blue /* ruleset1 */",
+}
+`);
+    expect(ruleset2).toMatchInlineSnapshot(`
+Object {
+  ".e:hover": "color:red /* ruleset2 */",
+  ".f:hover": "padding:10px /* ruleset2 */",
+  "@media (min-width: 768px).g:hover": "color:brown /* ruleset2 */",
+  "@media (min-width: 768px).h:hover:active": "color:maroon /* ruleset2 */",
+}
+`);
+    expect(ruleset1Wins).toMatchInlineSnapshot(`
+Object {
+  " result": "d c b a f",
+  " source": "e f g h a b c d",
+  ".a:hover": "color:green /* ruleset1 */",
+  ".b:hover": "margin:5px /* ruleset1 */",
+  ".f:hover": "padding:10px /* ruleset2 */",
+  "@media (min-width: 768px).c:hover": "color:red /* ruleset1 */",
+  "@media (min-width: 768px).d:hover:active": "color:blue /* ruleset1 */",
+}
+`);
+    expect(ruleset2Wins).toMatchInlineSnapshot(`
+Object {
+  " result": "h g f e b",
+  " source": "a b c d e f g h",
+  ".b:hover": "margin:5px /* ruleset1 */",
+  ".e:hover": "color:red /* ruleset2 */",
+  ".f:hover": "padding:10px /* ruleset2 */",
+  "@media (min-width: 768px).g:hover": "color:brown /* ruleset2 */",
+  "@media (min-width: 768px).h:hover:active": "color:maroon /* ruleset2 */",
+}
+`);
+  });
 });

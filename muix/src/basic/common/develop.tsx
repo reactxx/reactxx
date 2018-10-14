@@ -1,8 +1,6 @@
 import React from 'react'
 // import { Reactxx } from 'reactxx-basic'
 
-const DEV_MODE = process.env.NODE_ENV === 'development'
-
 export const LoremIpsum = (words: 2 | 5 | 10 | 20 | 40 | 80 | 160) => {
   switch (words) {
     case 2: return 'Lorem ipsum. '
