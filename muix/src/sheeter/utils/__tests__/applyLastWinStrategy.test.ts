@@ -1,6 +1,5 @@
-
 import { WEB, NATIVE } from "./applyLastWinStrategy.testlib";
-import { initPlatform } from 'reactxx-tests'
+import { initPlatform } from "reactxx-tests";
 
 /*
     expect(ruleset1).toMatchInlineSnapshot()
@@ -26,7 +25,7 @@ describe("applyLastwinsStrategy simple", () => {
   //*********************************************************
 
   it("WEB, development environment", () => {
-    initPlatform(true)
+    initPlatform(true);
 
     const {
       ruleset1,
@@ -36,34 +35,34 @@ describe("applyLastwinsStrategy simple", () => {
     } = WEB.defineRulesets(DATA);
 
     expect(ruleset1).toMatchInlineSnapshot(`
-Object {
-  ".a": "color:red /* ruleset1 */",
-  ".b": "right:20px /* ruleset1 */",
-}
+Array [
+  ".a { color:red /*ruleset1*/ }",
+  ".b { right:20px /*ruleset1*/ }",
+]
 `);
     expect(ruleset2).toMatchInlineSnapshot(`
-Object {
-  ".c": "color:black /* ruleset2 */",
-  ".d": "left:10px /* ruleset2 */",
-}
+Array [
+  ".c { color:black /*ruleset2*/ }",
+  ".d { left:10px /*ruleset2*/ }",
+]
 `);
     expect(ruleset1Wins).toMatchInlineSnapshot(`
-Object {
-  " result": "b a d",
-  " source": "c d a b",
-  ".a": "color:red /* ruleset1 */",
-  ".b": "right:20px /* ruleset1 */",
-  ".d": "left:10px /* ruleset2 */",
-}
+Array [
+  ".b { right:20px /*ruleset1*/ }",
+  ".a { color:red /*ruleset1*/ }",
+  ".d { left:10px /*ruleset2*/ }",
+  "SOURCE=c d a b",
+  "RESULT=b a d",
+]
 `);
     expect(ruleset2Wins).toMatchInlineSnapshot(`
-Object {
-  " result": "d c b",
-  " source": "a b c d",
-  ".b": "right:20px /* ruleset1 */",
-  ".c": "color:black /* ruleset2 */",
-  ".d": "left:10px /* ruleset2 */",
-}
+Array [
+  ".d { left:10px /*ruleset2*/ }",
+  ".c { color:black /*ruleset2*/ }",
+  ".b { right:20px /*ruleset1*/ }",
+  "SOURCE=a b c d",
+  "RESULT=d c b",
+]
 `);
   });
   //*********************************************************
@@ -71,7 +70,7 @@ Object {
   //*********************************************************
 
   it("WEB, production environment", () => {
-    initPlatform(true, false)
+    initPlatform(true, false);
     const {
       ruleset1,
       ruleset2,
@@ -80,28 +79,28 @@ Object {
     } = WEB.defineRulesets(DATA);
 
     expect(ruleset1).toMatchInlineSnapshot(`
-Object {
-  "info": "DUMP is available in window.__DEV__ only",
-}
+Array [
+  "DUMP is available in window.__DEV__ only",
+]
 `);
     expect(ruleset2).toMatchInlineSnapshot(`
-Object {
-  "info": "DUMP is available in window.__DEV__ only",
-}
+Array [
+  "DUMP is available in window.__DEV__ only",
+]
 `);
     expect(ruleset1Wins).toMatchInlineSnapshot(`
-Object {
-  " result": "b a d",
-  " source": "c d a b",
-  "info": "DUMP is available in window.__DEV__ only",
-}
+Array [
+  "DUMP is available in window.__DEV__ only",
+  "SOURCE=c d a b",
+  "RESULT=b a d",
+]
 `);
     expect(ruleset2Wins).toMatchInlineSnapshot(`
-Object {
-  " result": "d c b",
-  " source": "a b c d",
-  "info": "DUMP is available in window.__DEV__ only",
-}
+Array [
+  "DUMP is available in window.__DEV__ only",
+  "SOURCE=a b c d",
+  "RESULT=d c b",
+]
 `);
   });
   //*********************************************************
@@ -109,7 +108,7 @@ Object {
   //*********************************************************
 
   it("NATIVE, development environment", () => {
-    initPlatform(false)
+    initPlatform(false);
 
     const {
       ruleset1,
@@ -120,38 +119,14 @@ Object {
 
     expect(ruleset1).toMatchInlineSnapshot(`
 Array [
-  Object {
-    "propId": "color",
-    "value": Object {
-      "tracePath": "ruleset1",
-      "value": "red",
-    },
-  },
-  Object {
-    "propId": "right",
-    "value": Object {
-      "tracePath": "ruleset1",
-      "value": "20px",
-    },
-  },
+  "color: red /*ruleset1*/",
+  "right: 20px /*ruleset1*/",
 ]
 `);
     expect(ruleset2).toMatchInlineSnapshot(`
 Array [
-  Object {
-    "propId": "color",
-    "value": Object {
-      "tracePath": "ruleset2",
-      "value": "black",
-    },
-  },
-  Object {
-    "propId": "left",
-    "value": Object {
-      "tracePath": "ruleset2",
-      "value": "10px",
-    },
-  },
+  "color: black /*ruleset2*/",
+  "left: 10px /*ruleset2*/",
 ]
 `);
     expect(ruleset1Wins).toMatchInlineSnapshot(`
@@ -192,7 +167,7 @@ Object {
   //*********************************************************
 
   it("NATIVE, production environment", () => {
-    initPlatform(false, false)
+    initPlatform(false, false);
     const {
       ruleset1,
       ruleset2,
@@ -242,7 +217,6 @@ Object {
 });
 
 describe("applyLastwinsStrategy pseudo WEB", () => {
-
   const WEB_DATA = {
     ruleset1: {
       ":hover": {
@@ -275,7 +249,7 @@ describe("applyLastwinsStrategy pseudo WEB", () => {
   //*********************************************************
 
   it("development environment", () => {
-    initPlatform(true)
+    initPlatform(true);
 
     const {
       ruleset1,
@@ -285,42 +259,42 @@ describe("applyLastwinsStrategy pseudo WEB", () => {
     } = WEB.defineRulesets(WEB_DATA);
 
     expect(ruleset1).toMatchInlineSnapshot(`
-Object {
-  ".a:hover": "color:green /* ruleset1 */",
-  ".b:hover": "margin:5px /* ruleset1 */",
-  "@media (min-width: 768px).c:hover": "color:red /* ruleset1 */",
-  "@media (min-width: 768px).d:hover:active": "color:blue /* ruleset1 */",
-}
+Array [
+  ".a:hover { color:green /*ruleset1*/ }",
+  ".b:hover { margin:5px /*ruleset1*/ }",
+  "@media (min-width: 768px).c:hover { color:red /*ruleset1*/ }",
+  "@media (min-width: 768px).d:hover:active { color:blue /*ruleset1*/ }",
+]
 `);
     expect(ruleset2).toMatchInlineSnapshot(`
-Object {
-  ".e:hover": "color:red /* ruleset2 */",
-  ".f:hover": "padding:10px /* ruleset2 */",
-  "@media (min-width: 768px).g:hover": "color:brown /* ruleset2 */",
-  "@media (min-width: 768px).h:hover:active": "color:maroon /* ruleset2 */",
-}
+Array [
+  ".e:hover { color:red /*ruleset2*/ }",
+  ".f:hover { padding:10px /*ruleset2*/ }",
+  "@media (min-width: 768px).g:hover { color:brown /*ruleset2*/ }",
+  "@media (min-width: 768px).h:hover:active { color:maroon /*ruleset2*/ }",
+]
 `);
     expect(ruleset1Wins).toMatchInlineSnapshot(`
-Object {
-  " result": "d c b a f",
-  " source": "e f g h a b c d",
-  ".a:hover": "color:green /* ruleset1 */",
-  ".b:hover": "margin:5px /* ruleset1 */",
-  ".f:hover": "padding:10px /* ruleset2 */",
-  "@media (min-width: 768px).c:hover": "color:red /* ruleset1 */",
-  "@media (min-width: 768px).d:hover:active": "color:blue /* ruleset1 */",
-}
+Array [
+  "@media (min-width: 768px).d:hover:active { color:blue /*ruleset1*/ }",
+  "@media (min-width: 768px).c:hover { color:red /*ruleset1*/ }",
+  ".b:hover { margin:5px /*ruleset1*/ }",
+  ".a:hover { color:green /*ruleset1*/ }",
+  ".f:hover { padding:10px /*ruleset2*/ }",
+  "SOURCE=e f g h a b c d",
+  "RESULT=d c b a f",
+]
 `);
     expect(ruleset2Wins).toMatchInlineSnapshot(`
-Object {
-  " result": "h g f e b",
-  " source": "a b c d e f g h",
-  ".b:hover": "margin:5px /* ruleset1 */",
-  ".e:hover": "color:red /* ruleset2 */",
-  ".f:hover": "padding:10px /* ruleset2 */",
-  "@media (min-width: 768px).g:hover": "color:brown /* ruleset2 */",
-  "@media (min-width: 768px).h:hover:active": "color:maroon /* ruleset2 */",
-}
+Array [
+  "@media (min-width: 768px).h:hover:active { color:maroon /*ruleset2*/ }",
+  "@media (min-width: 768px).g:hover { color:brown /*ruleset2*/ }",
+  ".f:hover { padding:10px /*ruleset2*/ }",
+  ".e:hover { color:red /*ruleset2*/ }",
+  ".b:hover { margin:5px /*ruleset1*/ }",
+  "SOURCE=a b c d e f g h",
+  "RESULT=h g f e b",
+]
 `);
   });
 });

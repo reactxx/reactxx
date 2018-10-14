@@ -5,16 +5,16 @@ import { TWithStyles } from './with-styles';
 declare namespace TAtomize {
 
   export type ToPlatformAtomizeRulesetProc = (ruleset: {}, tracePath?: string) => AtomicArray
-  export interface ToPlatformAtomizeRuleset {
+  export interface Platform {
     toPlatformAtomizeRuleset: ToPlatformAtomizeRulesetProc
-    dumpAtomized: (classNames: AtomicArrayLow) => {},
+    dumpAtomized: (classNames: AtomicArrayLow) => any[],
     applyLastwinsStrategy: (values: AtomicArrayLow) => AtomicArrayLow
   }
   export type GetPlatformTracePath = (value: Atomic) => string
   //export type ToPlatformClassName = (array: AtomicArray, propsPlatform: {style, className}) => void
 
   export const enum TypedInterfaceTypes {
-    prop = '``',
+    prop = '~',
     atomizedRuleset = 'c'/*compiled ruleset*/,
     atomicArray = 'v' /*value array*/,
     reactxxComponent = 'x',

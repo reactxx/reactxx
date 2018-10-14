@@ -1,22 +1,15 @@
 import { TAtomize } from "reactxx-typings";
-// ******* WEB imports
-import { platform } from "../../index";
+import { platform } from "reactxx-sheeter";
 
 const web$applyLastwinsStrategy = (concated: TAtomize.AtomicWebsLow) => {
   const merged = platform.applyLastwinsStrategy(concated);
-  const dump = platform.dumpAtomized(merged);
-  dump[" source"] = concated
-    .map(
-      (c: TAtomize.__dev_AtomicWeb) =>
-        typeof c === "string" ? c : c.className
-    )
-    .join(" ");
-  dump[" result"] = (merged as TAtomize.AtomicWebsLow)
-    .map(
-      (c: TAtomize.__dev_AtomicWeb) =>
-        typeof c === "string" ? c : c.className
-    )
-    .join(" ");
+  const dump = platform.dumpAtomized(merged) as string[];
+  dump.push('SOURCE=' + concated
+    .map((c: TAtomize.__dev_AtomicWeb) => typeof c === "string" ? c : c.className)
+    .join(" "));
+  dump.push('RESULT=' + (merged as TAtomize.AtomicWebsLow)
+    .map((c: TAtomize.__dev_AtomicWeb) => typeof c === "string" ? c : c.className)
+    .join(" "))
   return dump;
 };
 

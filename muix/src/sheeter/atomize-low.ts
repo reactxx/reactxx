@@ -54,6 +54,7 @@ export const atomizeRulesetLow = (ruleset: TSheeter.RulesetOrAtomized /*| TSheet
         name,
         list,
         [TAtomize.TypedInterfaceTypes.prop]: TAtomize.TypedInterfaceTypes.atomizedRuleset
+        //['~']: TAtomize.TypedInterfaceTypes.atomizedRuleset
     } as TAtomize.AtomizedRuleset
 }
 

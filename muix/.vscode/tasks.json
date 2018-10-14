@@ -8,10 +8,12 @@
             "type": "shell",
             "command": ".\\node_modules\\.bin\\jest.cmd",
             "args": [
+                "--runInBand",
                 //"--testPathPattern=fela",
                 //"--testPathPattern=applyLastWinStrategy",
-                "--testPathPattern=sheet.test",
-                "-u"
+                //"--testPathPattern=atomize-sheet",
+                //"--testPathPattern=to-classname",
+                //"-u"
                 //"src/core/tests/flow/drawer/__tests__/comp-test"
             ],
             "group": "test",
@@ -24,11 +26,11 @@
         },
         {
             "type": "typescript",
-            "tsconfig": "tsconfig.json",
-            "option": "watch",
             "problemMatcher": [
                 "$tsc-watch"
             ],
+            "tsconfig": "tsconfig.json",
+            "option": "watch",
             "group": {
                 "kind": "build",
                 "isDefault": true

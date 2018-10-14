@@ -22,8 +22,9 @@
                 "--runInBand",  //https://jestjs.io/docs/en/cli.html
                 //"--testPathPattern=fela",
                 //"--testPathPattern=applyLastWinStrategy",
-                "--testPathPattern=sheet.test",
-                "-u"
+                //"--testPathPattern=atomize-sheet",
+                "--testPathPattern=to-classname",
+                "-u",
             ],
             //"preLaunchTask": "build",
             // "internalConsoleOptions": "openOnSessionStart",

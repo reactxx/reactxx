@@ -11,7 +11,7 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, rulesets
 
     const values: TAtomize.Atomic[][] = []
 
-    const push = (val:TAtomize.AtomizedRuleset) => {
+    const push = (val: TAtomize.AtomizedRuleset) => {
         if (!val) return
         if (isAtomicArray(val)) {
             values.push(val)
@@ -19,6 +19,7 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, rulesets
         }
         if (!isAtomizedRuleset(val))
             val = atomizeRuleset(val, state && state.theme) as TAtomize.AtomizedRuleset
+        if (!val) return
 
         for (let j = 0; j < val.list.length; j++) {
             const rsi = val.list[j]

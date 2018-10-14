@@ -1,7 +1,7 @@
 import { TAtomize } from 'reactxx-typings'
 import { applyLastwinsStrategy } from './reacts/$native'
 
-export const platform: TAtomize.ToPlatformAtomizeRuleset = {
+export const platform: TAtomize.Platform = {
     toPlatformAtomizeRuleset: (style, tracePath) => {
         const res: TAtomize.AtomicArray = [] as any
         res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
@@ -23,4 +23,4 @@ export const platform: TAtomize.ToPlatformAtomizeRuleset = {
     applyLastwinsStrategy
 }
 
-function toJSON() { return `${this.propId}: ${this.value.value}` }
+function toJSON() { return `${this.propId}: ${this.value.value} /*${this.value.tracePath}*/` }

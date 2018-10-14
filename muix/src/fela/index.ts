@@ -7,7 +7,7 @@ import pluginFallbackValue from 'fela-plugin-fallback-value'
 import pluginPrefixer from 'fela-plugin-prefixer'
 import pluginUnit from 'fela-plugin-unit'
 
-import patch, { IRendererEx } from './patch';
+import patch, { IRendererEx, dump } from './patch';
 import { TAtomize } from 'reactxx-typings';
 
 const plugins = {
@@ -33,16 +33,8 @@ resetRenderer()
 export const getRenderer = () => renderer
 
 export const dumpAtomized = (classNames: TAtomize.AtomicWebsLow) => {
-  const res = {};
-  if (window.__DEV__) {
-    classNames.forEach((c: TAtomize.__dev_AtomicWeb) => {
-      const {className, selector, declaration, path, media, support} = c 
-      res[`${support ? '@support' + support : ''}${media ? '@media ' + media : ''}${selector}`] = `${declaration} /* ${path} */`
-    });
-  } else {
-    res['info'] = 'DUMP is available in window.__DEV__ only'
-  }
-  return res
+  if (!classNames || classNames.length===0) return []
+  return window.__DEV__ ? classNames.map(c => dump(c)) : ['DUMP is available in window.__DEV__ only']
 }
 
 // renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html

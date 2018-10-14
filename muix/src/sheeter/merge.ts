@@ -1,22 +1,22 @@
 import { TComponents, TAtomize, TSheeter } from 'reactxx-typings';
 import { isAtomicArray } from './atomize'
 
-export const mergeFlags = (sources: Record<string, true>[]) => {
-    if (!sources || sources.length === 0)
-        return null
-    let res: Record<string, true> = null
-    let canModify = false
-    if (Array.isArray(sources)) sources.forEach(s => {
-        if (!s) return
-        else if (!res) res = s
-        else if (canModify) Object.assign(res, s)
-        else {
-            res = { ...res, ...s }
-            canModify = true
-        }
-    })
-    return res
-}
+// export const mergeFlags = (sources: Record<string, true>[]) => {
+//     if (!sources || sources.length === 0)
+//         return null
+//     let res: Record<string, true> = null
+//     let canModify = false
+//     if (Array.isArray(sources)) sources.forEach(s => {
+//         if (!s) return
+//         else if (!res) res = s
+//         else if (canModify) Object.assign(res, s)
+//         else {
+//             res = { ...res, ...s }
+//             canModify = true
+//         }
+//     })
+//     return res
+// }
 
 
 export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOrAtomized[]) => {
@@ -152,20 +152,20 @@ export const mergeCodeProps = (sources: (TComponents.PropsCode | TComponents.Pro
     return res
 }
 
-export const mergeUtil = (objs: {}[]) => {
-    if (!objs || objs.length===0) return null
-    let res: TComponents.PropsCode = null
-    let canModifyRes = false
-    objs.forEach(src => {
-        if (!src) return
-        if (!res)
-            res = src
-        else if (canModifyRes)
-            Object.assign(res, src)
-        else {
-            res = { ...res, ...src }
-            canModifyRes = true
-        }
-    })
-    return res
-}
+// export const mergeUtil = (objs: {}[]) => {
+//     if (!objs || objs.length===0) return null
+//     let res: TComponents.PropsCode = null
+//     let canModifyRes = false
+//     objs.forEach(src => {
+//         if (!src) return
+//         if (!res)
+//             res = src
+//         else if (canModifyRes)
+//             Object.assign(res, src)
+//         else {
+//             res = { ...res, ...src }
+//             canModifyRes = true
+//         }
+//     })
+//     return res
+// }

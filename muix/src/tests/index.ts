@@ -20,7 +20,12 @@ const platformWeb = { ...platform }
 export const initPlatform = (isWeb: boolean, __DEV__: boolean = true) => {
     window.isWeb = isWeb
     window.__DEV__ = __DEV__
+    //const p = platform
     Object.assign(platform, isWeb ? platformWeb : platformNative)
+    // if (p != platform)
+    //     throw 'p!=platform'
+    // const _web = platform.toPlatformAtomizeRuleset === platformWeb.toPlatformAtomizeRuleset
+    // const _native = platform.toPlatformAtomizeRuleset === platformNative.toPlatformAtomizeRuleset
     if (isWeb)
         resetRenderer();
 }

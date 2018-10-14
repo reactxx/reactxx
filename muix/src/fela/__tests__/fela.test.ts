@@ -1,8 +1,8 @@
 import { dumpAtomized, getRenderer } from "reactxx-fela";
-import { initPlatform } from 'reactxx-tests'
+import { initPlatform } from "reactxx-tests";
 
 test("fela", () => {
-  initPlatform(true)
+  initPlatform(true);
   const classNames = getRenderer().renderRuleEx(
     {
       color: "red",
@@ -21,11 +21,11 @@ test("fela", () => {
   );
   const res = dumpAtomized(classNames);
   expect(res).toMatchInlineSnapshot(`
-Object {
-  ".a": "color:red /* root */",
-  ".b": "margin:10px /* root */",
-  ".c:hover": "margin:5px /* root */",
-  "@media (min-width: 768px).d:hover:active": "width:700px /* root */",
-}
+Array [
+  ".a { color:red /*root*/ }",
+  ".b { margin:10px /*root*/ }",
+  ".c:hover { margin:5px /*root*/ }",
+  "@media (min-width: 768px).d:hover:active { width:700px /*root*/ }",
+]
 `);
 });

@@ -31,7 +31,7 @@ export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme) => {
 }
 
 export function isAtomizedRuleset(obj: Object): obj is TAtomize.AtomizedRuleset {
-    return obj && obj[TAtomize.TypedInterfaceTypes.prop] === TAtomize.TypedInterfaceTypes.atomizedRuleset
+    return obj && obj['~'] === TAtomize.TypedInterfaceTypes.atomizedRuleset
 }
 
 export function isAtomicArray(obj): obj is TAtomize.AtomicArray {

@@ -38,8 +38,8 @@ function renderRuleEx(style: {}, tracePath?: string): TAtomize.AtomicWebs {
 }
 
 const concat = (arr1: TAtomize.AtomicWebsLow, arr2: TAtomize.AtomicWebsLow) => arr1.concat(arr2)
-const newAtomicWeb = () => {
-  let res: TAtomize.AtomicWebs = [] as any
+const newAtomicWeb = (def?) => {
+  let res: TAtomize.AtomicWebs = def || [] as any
   res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
   return res
 }
@@ -167,8 +167,12 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
   }
 
   if (classNames.length===0) return null
-  classNames[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
-  return classNames as TAtomize.AtomicWebs
+  return newAtomicWeb(classNames)
 }
 
-function toJSON () { return this.className }
+function toJSON () { return dump(this) }
+
+export const dump = c => {
+  const { selector, declaration, path, media, support} = c as TAtomize.__dev_AtomicWeb
+  return `${support ? '@support' + support : ''}${media ? '@media ' + media : ''}${selector} { ${declaration} /*${path}*/ }`
+}
