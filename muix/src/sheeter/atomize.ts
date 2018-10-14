@@ -4,10 +4,14 @@ import { TAtomize, TSheeter, TComponents, TVariants } from 'reactxx-typings'
 import { createWithTheme } from './utils/create-with-theme'
 import { atomizeRulesetLow } from './atomize-low'
 
-export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetOrCreator<R>, theme) => {
+export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetOrCreator<R>, theme?) => {
     if (!sheet) return null
     const sh = createWithTheme(sheet, theme)
-    for (const p in sh) sh[p] = atomizeRuleset(sh[p], theme, p)
+    for (const p in sh) {
+        const at = atomizeRuleset(sh[p], theme, p)
+        if (at) sh[p] = at
+        else delete sh[p]
+    }
     return sh as any as TAtomize.Sheet<R>
 }
 
@@ -26,16 +30,9 @@ export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme) => {
         return atomizeRuleset(style as TSheeter.ClassNameOrCreator, theme)
 }
 
-// export function isRuleset(obj: Object): obj is TSheeter.Ruleset {
-//     return isObject(obj) && typeof obj[TAtomize.TypedInterfaceTypes.InterfaceProp] === 'undefined'
-// }
-
 export function isAtomizedRuleset(obj: Object): obj is TAtomize.AtomizedRuleset {
     return obj && obj[TAtomize.TypedInterfaceTypes.prop] === TAtomize.TypedInterfaceTypes.atomizedRuleset
 }
-// export function isAtomizedStyleWeb(obj: Object): obj is TAtomize.StyleWeb {
-//     return obj && obj[TAtomize.TypedInterfaceTypes.InterfaceProp] === TAtomize.TypedInterfaceTypes.atomizedStyleWeb
-// }
 
 export function isAtomicArray(obj): obj is TAtomize.AtomicArray {
     return obj && obj[TAtomize.TypedInterfaceTypes.prop] === TAtomize.TypedInterfaceTypes.atomicArray
@@ -46,15 +43,10 @@ export function isAtomizedSheet<R extends TSheeter.Shape = TSheeter.Shape>(sheet
     return true
 }
 
-export function isReactXXComponent (obj): obj is TComponents.ComponentType {
-  return obj[TAtomize.TypedInterfaceTypes.prop] === TAtomize.TypedInterfaceTypes.reactxxComponent
+export function isReactXXComponent(obj): obj is TComponents.ComponentType {
+    return obj[TAtomize.TypedInterfaceTypes.prop] === TAtomize.TypedInterfaceTypes.reactxxComponent
 }
 
-export function isDeffered (obj): obj is TAtomize.Variant {
+export function isDeffered(obj): obj is TAtomize.Variant {
     return (obj as TAtomize.Variant).deffered
-  }
-  
-  // export function isRulesetWebArray(obj): obj is TSheeter.RulesetWeb[] {
-//     return Array.isArray(obj) && !isAtomicArray(obj)
-// }
-
+}

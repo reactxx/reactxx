@@ -5,7 +5,7 @@ import { atomizeVariants } from './variants'
 import { isAtomicArray, isAtomizedRuleset } from './atomize'
 
 // platform dependent import
-import { toPlatformAtomizeRuleset } from 'reactxx-sheeter'
+import { platform } from 'reactxx-sheeter'
 
 export const atomizeRulesetLow = (ruleset: TSheeter.RulesetOrAtomized /*| TSheeter.RulesetItem[]*/, rulesetName?: string) => {
     if (!ruleset) return null
@@ -50,7 +50,7 @@ export const atomizeRulesetLow = (ruleset: TSheeter.RulesetOrAtomized /*| TSheet
                 [], [], item
             )
     })
-    return {
+    return list.length===0 ? null : {
         name,
         list,
         [TAtomize.TypedInterfaceTypes.prop]: TAtomize.TypedInterfaceTypes.atomizedRuleset
@@ -83,5 +83,7 @@ export const atomizeRulesetInner: TVariants.AtomizeRulesetInner = (list, ruleset
 
 const pushToList = (list: TAtomize.Variants, ruleset: TSheeter.Ruleset, conditions: TVariants.Conditions, path: string) => {
     if (!ruleset) return
-    list.push({ atomicArray: toPlatformAtomizeRuleset(ruleset, path), conditions })
+    const atomicArray = platform.toPlatformAtomizeRuleset(ruleset, path)
+    if (!atomicArray) return
+    list.push(conditions.length>0 ? { atomicArray, conditions } : { atomicArray })
 }

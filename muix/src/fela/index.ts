@@ -32,21 +32,9 @@ resetRenderer()
 
 export const getRenderer = () => renderer
 
-export const dumpAtomized = (classNames: TAtomize.AtomicWebs) => {
+export const dumpAtomized = (classNames: TAtomize.AtomicWebsLow) => {
   const res = {};
   if (window.__DEV__) {
-    /*
-"{
-  "type": "RULE",
-  "className": "a",
-  "selector": ".a",
-  "declaration": "color:red",
-  "pseudo": "",
-  "media": "",
-  "support": "",
-  "path": "root"
-}"    
-     */
     classNames.forEach((c: TAtomize.__dev_AtomicWeb) => {
       const {className, selector, declaration, path, media, support} = c 
       res[`${support ? '@support' + support : ''}${media ? '@media ' + media : ''}${selector}`] = `${declaration} /* ${path} */`

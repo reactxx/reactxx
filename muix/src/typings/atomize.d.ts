@@ -4,7 +4,12 @@ import { TWithStyles } from './with-styles';
 
 declare namespace TAtomize {
 
-  export type ToPlatformAtomizeRuleset = (ruleset: {}, tracePath?: string) => AtomicArray
+  export type ToPlatformAtomizeRulesetProc = (ruleset: {}, tracePath?: string) => AtomicArray
+  export interface ToPlatformAtomizeRuleset {
+    toPlatformAtomizeRuleset: ToPlatformAtomizeRulesetProc
+    dumpAtomized: (classNames: AtomicArrayLow) => {},
+    applyLastwinsStrategy: (values: AtomicArrayLow) => AtomicArrayLow
+  }
   export type GetPlatformTracePath = (value: Atomic) => string
   //export type ToPlatformClassName = (array: AtomicArray, propsPlatform: {style, className}) => void
 
@@ -46,10 +51,12 @@ declare namespace TAtomize {
     AtomicArrayExtension &
     Atomic[] // last value in array (with the same propId) wins!
 
+  export type AtomicArrayLow = AtomicWebsLow | AtomicNativeLow
+
   export type NativeStyle = Record<string, TNativeRuleValue>
 
   export type Atomic = AtomicNative | AtomicWeb
-  export interface __dev_AtomicWeb extends __dev_WebCache {}// { tracePath?: __dev_WebCache, value: string }
+  export interface __dev_AtomicWeb extends __dev_WebCache { }// { tracePath?: __dev_WebCache, value: string }
   export interface __dev_WebCache {
     type: string
     className: string
@@ -58,7 +65,7 @@ declare namespace TAtomize {
     pseudo: string
     media: string
     support: string
-    path?:string
+    path?: string
   }
   export type AtomicWeb =
     string |
@@ -70,7 +77,7 @@ declare namespace TAtomize {
     //tracePath?: string // for Dev: path to class source
   }
   export type TNativeRuleValue = string | number | __dev_AtomicNative
-  export interface __dev_AtomicNative { 
+  export interface __dev_AtomicNative {
     value: string | number
     tracePath: string
   }
@@ -78,7 +85,7 @@ declare namespace TAtomize {
   export type AtomicNatives = AtomicNative[] & AtomicArrayExtension
   export type AtomicWebs = AtomicWeb[] & AtomicArrayExtension
   export type AtomicWebsLow = AtomicWeb[]
-  export type AtomicNativeLow = Record<string,TNativeRuleValue>
+  export type AtomicNativeLow = Record<string, TNativeRuleValue>
 
 
   export type Ruleset = AtomizedRuleset | AtomicArray

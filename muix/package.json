@@ -22,6 +22,7 @@
     "testRegex": "/__tests__/.*\\.test\\.(tsx|ts)$",
     "testMatch": null,
     "moduleNameMapper": {
+      "^reactxx-sheeter-native$": "<rootDir>/src/sheeter/index-native",
       "^reactxx-(.*)$": "<rootDir>/src/$1/index"
     }
   },

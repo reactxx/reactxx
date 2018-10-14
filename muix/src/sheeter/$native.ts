@@ -1,26 +1,26 @@
 import { TAtomize } from 'reactxx-typings'
+import { applyLastwinsStrategy } from './reacts/$native'
 
-export const toPlatformAtomizeRuleset: TAtomize.ToPlatformAtomizeRuleset = (style, tracePath) => {
-    const res: TAtomize.AtomicArray = [] as any
-    res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
-    if (!style) return res
-    //if ((style as TVariants.Deffered).deffered) { res.push(style)
-    for (const propId in style) {
-        if (propId.charAt(0) === '$') continue
-        res.push({
-            propId,
-            value: window.__DEV__ ? { tracePath, value: style[propId] } : style[propId]
-            //value: style[propId],
-            //...window.__DEV__ ? { tracePath } : null
-        } as TAtomize.AtomicNative)
-    }
-    return res
+export const platform: TAtomize.ToPlatformAtomizeRuleset = {
+    toPlatformAtomizeRuleset: (style, tracePath) => {
+        const res: TAtomize.AtomicArray = [] as any
+        res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
+        if (!style) return res
+        for (const propId in style) {
+            if (propId.charAt(0) === '$') continue
+            const at = {
+                propId,
+                value: window.__DEV__ ? { tracePath, value: style[propId] } : style[propId]
+            } as TAtomize.AtomicNative
+            if (window.__DEV__) {
+                at['toJSON'] = toJSON.bind(at)
+            }
+            res.push(at)
+        }
+        return res.length===0 ? null : res
+    },
+    dumpAtomized: array => array,
+    applyLastwinsStrategy
 }
 
-// export const getPlatformTracePath: TAtomize.GetPlatformTracePath = (value: TAtomize.AtomicNative) =>
-//     value.deffered ? JSON.stringify(value) : value.tracePath + '/' + value.propId + ': ' + value.value
-
-export const dumpAtomized = (array) => {
-    return array
-}
-
+function toJSON() { return `${this.propId}: ${this.value.value}` }

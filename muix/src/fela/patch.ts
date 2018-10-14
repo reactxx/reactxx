@@ -155,12 +155,9 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
       if (!cache.className) continue
 
       if (window.__DEV__) {
-        // const path = tracePath + '|' +
-        //   (support ? support + ' ' : '') +
-        //   (media ? media + ' ' : '') +
-        //   (pseudo ? pseudo + ' ' : '') +
-        //   '#' + property + ': ' + value
-        classNames.push({ ...cache, path: tracePath } as TAtomize.__dev_AtomicWeb)
+        const res = { ...cache, path: tracePath } as TAtomize.__dev_AtomicWeb
+        res['toJSON'] = toJSON.bind(res)
+        classNames.push(res)
         continue
       }
 
@@ -169,6 +166,9 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
     }
   }
 
+  if (classNames.length===0) return null
   classNames[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
   return classNames as TAtomize.AtomicWebs
 }
+
+function toJSON () { return this.className }

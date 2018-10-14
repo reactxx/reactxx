@@ -1,19 +1,14 @@
-import { dumpAtomized, getRenderer, resetRenderer } from "reactxx-fela";
+import { dumpAtomized, getRenderer } from "reactxx-fela";
+import { initPlatform } from 'reactxx-tests'
 
 test("fela", () => {
-  window.isWeb = true;
-  resetRenderer();
+  initPlatform(true)
   const classNames = getRenderer().renderRuleEx(
     {
-      // color: "red",
-      // margin: 10,
-      // ":hover": {
-      //   margin: 5,
-      //   ":active": {
-      //     color: "green"
-      //   }
-      // },
+      color: "red",
+      margin: 10,
       ":hover": {
+        margin: 5,
         "@media (min-width: 768px)": {
           ":active": {
             width: 700
@@ -27,7 +22,10 @@ test("fela", () => {
   const res = dumpAtomized(classNames);
   expect(res).toMatchInlineSnapshot(`
 Object {
-  "@media(min-width: 768px).a:hover:active": "width:700px /* root */",
+  ".a": "color:red /* root */",
+  ".b": "margin:10px /* root */",
+  ".c:hover": "margin:5px /* root */",
+  "@media (min-width: 768px).d:hover:active": "width:700px /* root */",
 }
 `);
 });

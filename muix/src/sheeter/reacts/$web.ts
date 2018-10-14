@@ -1,12 +1,11 @@
 import React from 'react'
-import warning from 'warning'
-import { getRenderer, IRendererEx } from 'reactxx-fela'
-import { TAtomize, TComponents, TSheeter } from 'reactxx-typings'
+import { getRenderer } from 'reactxx-fela'
+import { TAtomize, TComponents } from 'reactxx-typings'
 
 import { deleteSystemProps } from '../to-classnames'
 import { mergeStyles } from '../merge'
 import { isReactXXComponent, isDeffered } from '../atomize'
-import { applyLastwinsStrategyRoot, AttemptType, ApplyLastWinStrategyResult, ApplyLastWinStrategyLow } from '../utils/apply-last-win-strategy'
+import { applyLastwinsStrategyRoot, AttemptType, ApplyLastWinStrategyResult } from '../utils/apply-last-win-strategy'
 
 /******************************************
   EXTEND REACT
@@ -53,11 +52,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   return React.createElement(type, props, ...children)
 }
 
-// export const applyLastwinsStrategyCreator = (renderer: IRendererEx) =>
-//   (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, (values2, attemptType) =>
-//     applyLastwinsStrategyLow(renderer, values2, attemptType))
-
-export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastwinsStrategyLow)
+export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastwinsStrategyLow) as TAtomize.AtomicWebsLow
 
 // apply LAST WIN strategy for web className
 const applyLastwinsStrategyLow = (values: TAtomize.AtomicWebs, attemptType: AttemptType) => {

@@ -9,7 +9,8 @@
             "command": ".\\node_modules\\.bin\\jest.cmd",
             "args": [
                 //"--testPathPattern=fela",
-                "--testPathPattern=applyLastWinStrategy",
+                //"--testPathPattern=applyLastWinStrategy",
+                "--testPathPattern=sheet.test",
                 "-u"
                 //"src/core/tests/flow/drawer/__tests__/comp-test"
             ],

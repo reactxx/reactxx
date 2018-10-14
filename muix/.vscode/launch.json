@@ -21,10 +21,9 @@
             "args": [
                 "--runInBand",  //https://jestjs.io/docs/en/cli.html
                 //"--testPathPattern=fela",
-                "--testPathPattern=applyLastWinStrategy",
-                "-u",
-                //"--outputFile=c:\\temp\\test.json",
-                //"--json"
+                //"--testPathPattern=applyLastWinStrategy",
+                "--testPathPattern=sheet.test",
+                "-u"
             ],
             //"preLaunchTask": "build",
             // "internalConsoleOptions": "openOnSessionStart",

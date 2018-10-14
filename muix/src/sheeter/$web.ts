@@ -1,12 +1,9 @@
 import { renderer, dumpAtomized } from 'reactxx-fela'
 import { TAtomize } from 'reactxx-typings'
+import { applyLastwinsStrategy } from './reacts/$web'
 
-export const toPlatformAtomizeRuleset: TAtomize.ToPlatformAtomizeRuleset = (ruleset: {}, tracePath?: string) => renderer.renderRuleEx(ruleset, tracePath)
-
-// export const getPlatformTracePath: TAtomize.GetPlatformTracePath = (value: TAtomize.AtomicWeb) => 
-//     typeof value === 'string' ? '' : (value as TAtomize.__dev_AtomicWeb).value || JSON.stringify(value)
-    //_.value //renderer.trace[value] : JSON.stringify(value
-    
-
-export { dumpAtomized }
-
+export const platform: TAtomize.ToPlatformAtomizeRuleset = {
+    toPlatformAtomizeRuleset: (ruleset, tracePath) => renderer.renderRuleEx(ruleset, tracePath),
+    dumpAtomized,
+    applyLastwinsStrategy
+}

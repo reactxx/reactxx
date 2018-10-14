@@ -1,4 +1,6 @@
+
 import { WEB, NATIVE } from "./applyLastWinStrategy.testlib";
+import { initPlatform } from 'reactxx-tests'
 
 /*
     expect(ruleset1).toMatchInlineSnapshot()
@@ -24,8 +26,7 @@ describe("applyLastwinsStrategy simple", () => {
   //*********************************************************
 
   it("WEB, development environment", () => {
-    window.__DEV__ = true;
-    window.isWeb = true;
+    initPlatform(true)
 
     const {
       ruleset1,
@@ -70,8 +71,7 @@ Object {
   //*********************************************************
 
   it("WEB, production environment", () => {
-    window.__DEV__ = false;
-    window.isWeb = true;
+    initPlatform(true, false)
     const {
       ruleset1,
       ruleset2,
@@ -109,8 +109,7 @@ Object {
   //*********************************************************
 
   it("NATIVE, development environment", () => {
-    window.__DEV__ = true;
-    window.isWeb = false;
+    initPlatform(false)
 
     const {
       ruleset1,
@@ -193,8 +192,7 @@ Object {
   //*********************************************************
 
   it("NATIVE, production environment", () => {
-    window.__DEV__ = false;
-    window.isWeb = false;
+    initPlatform(false, false)
     const {
       ruleset1,
       ruleset2,
@@ -244,7 +242,6 @@ Object {
 });
 
 describe("applyLastwinsStrategy pseudo WEB", () => {
-  window.isWeb = true;
 
   const WEB_DATA = {
     ruleset1: {
@@ -278,7 +275,7 @@ describe("applyLastwinsStrategy pseudo WEB", () => {
   //*********************************************************
 
   it("development environment", () => {
-    window.__DEV__ = true;
+    initPlatform(true)
 
     const {
       ruleset1,
