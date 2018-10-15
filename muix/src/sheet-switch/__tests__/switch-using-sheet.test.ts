@@ -1,5 +1,5 @@
-import { atomizeSheet, ShapeTest as Shape } from "reactxx-sheeter";
-import { initPlatform, toClassNames } from "reactxx-tests";
+import { atomizeSheet } from "reactxx-sheeter";
+import { initPlatform, toClassNames, Shape } from "reactxx-tests";
 import { createSheet, query } from "./switch-sheet.test";
 
 /*

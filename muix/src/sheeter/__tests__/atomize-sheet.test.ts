@@ -1,6 +1,5 @@
-import { ts, Shape } from "./shape";
 import { atomizeSheet } from "reactxx-sheeter";
-import { initPlatform } from "reactxx-tests";
+import { initPlatform, ts, Shape } from "reactxx-tests";
 
 describe("core sheet simple", () => {
   const createSheet = () =>

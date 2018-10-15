@@ -1,10 +1,8 @@
 import { TVariants } from "reactxx-typings";
 import {
   atomizeSheet,
-  ShapeTest as Shape,
-  tsTest as ts
 } from "reactxx-sheeter";
-import { initPlatform } from "reactxx-tests";
+import { initPlatform, Shape, ts } from "reactxx-tests";
 import { sheetSwitch_registerVariantHandler } from "../index";
 
 sheetSwitch_registerVariantHandler();

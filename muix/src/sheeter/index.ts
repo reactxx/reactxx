@@ -11,6 +11,3 @@ export * from './variants'
 export * from './merge'
 export * from './to-classnames'
 export * from './utils/wrap-pseudo-prefixes'
-
-import { Shape, ts } from './__tests__/shape'
-export { Shape as ShapeTest, ts as tsTest }

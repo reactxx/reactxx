@@ -1,4 +1,5 @@
 export * from './sheet-helper'
+export * from './shape'
 
 import Enzyme, { shallow, render, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
