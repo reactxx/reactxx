@@ -1,7 +1,7 @@
 import { TVariants } from "reactxx-typings";
 import { atomizeSheet } from "reactxx-sheeter";
 import { initPlatform, Shape, ts } from "reactxx-tests";
-import { sheetSwitch_registerVariantHandler } from "../index";
+import { sheetSwitch_registerVariantHandler } from "reactxx-sheet-switch";
 
 sheetSwitch_registerVariantHandler();
 
@@ -9,49 +9,34 @@ export const createSheet = () =>
   (ts.sheet = {
     root: (ts.view = {
       $sheetSwitch: {
-        isOpened: {
-          backgroundColor: "red",
-          $sheetSwitch: {
-            isOpened: {
-              borderColor: "cyan"
-            }
-          }
-        },
-        isClosed: {
+        mobileWidth: {
           backgroundColor: "blue"
+        },
+        tabletWidth: {
+          backgroundColor: "cyan"
+        },
+        desktopWidth: {
+          backgroundColor: "green"
         }
       },
       $web: (ts.web = {
         ":hover": {
           $sheetSwitch: {
-            isClosed: [
-              {
-                backgroundColor: "green"
-              }
-            ]
-          }
-        }
-      }),
-      $native: (ts.nativeView = {
-        $sheetSwitch: {
-          isOpened: {
-            backgroundColor: "brown"
+            mobileWidth: {
+              backgroundColor: "lightblue"
+            },
+            tabletWidth: {
+              backgroundColor: "lightcyan"
+            },
+            desktopWidth: {
+              backgroundColor: "lightblue"
+            }
           }
         }
       })
     }),
     label: {},
-    webOnly: {
-      $web: {
-        ":hover": {
-          $sheetSwitch: {
-            isOpened: {
-              backgroundColor: "yellow"
-            }
-          }
-        }
-      }
-    },
+    webOnly: {},
     nativeOnly: {}
   });
 export const query = (opened: boolean) =>
@@ -113,48 +98,33 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "backgroundColor: red /*root/$sheetSwitch.isOpened*/",
+          "backgroundColor: blue /*root/$sheetSwitch.mobileWidth*/",
         ],
         "conditions": Array [
           Object {
-            "case": "isOpened",
+            "case": "mobileWidth",
             "type": "$sheetSwitch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          "borderColor: cyan /*root/$sheetSwitch.isOpened/$sheetSwitch.isOpened*/",
+          "backgroundColor: cyan /*root/$sheetSwitch.tabletWidth*/",
         ],
         "conditions": Array [
           Object {
-            "case": "isOpened",
-            "type": "$sheetSwitch",
-          },
-          Object {
-            "case": "isOpened",
+            "case": "tabletWidth",
             "type": "$sheetSwitch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          "backgroundColor: blue /*root/$sheetSwitch.isClosed*/",
+          "backgroundColor: green /*root/$sheetSwitch.desktopWidth*/",
         ],
         "conditions": Array [
           Object {
-            "case": "isClosed",
-            "type": "$sheetSwitch",
-          },
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          "backgroundColor: brown /*root/$native/$sheetSwitch.isOpened*/",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "isOpened",
+            "case": "desktopWidth",
             "type": "$sheetSwitch",
           },
         ],
@@ -184,37 +154,33 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".a { background-color:red /*root/$sheetSwitch.isOpened*/ }",
+          ".a { background-color:blue /*root/$sheetSwitch.mobileWidth*/ }",
         ],
         "conditions": Array [
           Object {
-            "case": "isOpened",
+            "case": "mobileWidth",
             "type": "$sheetSwitch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          ".b { border-color:cyan /*root/$sheetSwitch.isOpened/$sheetSwitch.isOpened*/ }",
+          ".b { background-color:cyan /*root/$sheetSwitch.tabletWidth*/ }",
         ],
         "conditions": Array [
           Object {
-            "case": "isOpened",
-            "type": "$sheetSwitch",
-          },
-          Object {
-            "case": "isOpened",
+            "case": "tabletWidth",
             "type": "$sheetSwitch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          ".c { background-color:blue /*root/$sheetSwitch.isClosed*/ }",
+          ".c { background-color:green /*root/$sheetSwitch.desktopWidth*/ }",
         ],
         "conditions": Array [
           Object {
-            "case": "isClosed",
+            "case": "desktopWidth",
             "type": "$sheetSwitch",
           },
         ],
@@ -226,39 +192,39 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          ".d:hover { background-color:green /*root/$web/:hover/$sheetSwitch.isClosed[0]*/ }",
+          ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.mobileWidth*/ }",
         ],
         "conditions": Array [
           Object {
-            "case": "isClosed",
+            "case": "mobileWidth",
+            "type": "$sheetSwitch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".e:hover { background-color:lightcyan /*root/$web/:hover/$sheetSwitch.tabletWidth*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "tabletWidth",
+            "type": "$sheetSwitch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.desktopWidth*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "desktopWidth",
             "type": "$sheetSwitch",
           },
         ],
       },
     ],
     "name": "root",
-    "~": "c",
-  },
-  "webOnly": Object {
-    "list": Array [
-      Object {
-        "atomicArray": Array [
-          null,
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          ".e:hover { background-color:yellow /*webOnly/$web/:hover/$sheetSwitch.isOpened*/ }",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "isOpened",
-            "type": "$sheetSwitch",
-          },
-        ],
-      },
-    ],
-    "name": "webOnly",
     "~": "c",
   },
 }

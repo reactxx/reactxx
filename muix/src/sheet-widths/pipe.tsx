@@ -11,15 +11,19 @@ export const widthsPipe: TWithStyles.Pipe = (pipelineState, next) => {
                     [widthName]: true
                 }
             },
-            //sheetSwitch: { [widthName]: true }
+            sheetQuery: {
+                $sheetSwitch: {
+                    [widthName]: true
+                }
+            }
         }
         return next()
     }
     return () => {
-        const { pipeStates } = pipelineState
+        const { pipeStates, props: { breakpoints } } = pipelineState
         // UNDO
         delete pipeStates[pipeId]
-        if (!pipelineState.props.breakpoints) return next()
+        if (!breakpoints) return next()
         return <div>{render}</div> // TODO width consumer: 
     }
 }

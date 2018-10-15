@@ -10,8 +10,10 @@ test("fela", () => {
       ":hover": {
         margin: 5,
         "@media (min-width: 768px)": {
+          height: 100,
           ":active": {
-            width: 700
+            width: 700,
+            color: "red"
           }
         }
       }
@@ -25,7 +27,9 @@ Array [
   ".a { color:red /*root*/ }",
   ".b { margin:10px /*root*/ }",
   ".c:hover { margin:5px /*root*/ }",
-  "@media (min-width: 768px).d:hover:active { width:700px /*root*/ }",
+  "@media (min-width: 768px).d:hover { height:100px /*root*/ }",
+  "@media (min-width: 768px).e:hover:active { width:700px /*root*/ }",
+  "@media (min-width: 768px).f:hover:active { color:red /*root*/ }",
 ]
 `);
 });

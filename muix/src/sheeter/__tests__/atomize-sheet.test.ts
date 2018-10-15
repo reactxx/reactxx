@@ -1,7 +1,7 @@
 import { atomizeSheet } from "reactxx-sheeter";
 import { initPlatform, ts, Shape } from "reactxx-tests";
 
-describe("core sheet simple", () => {
+describe("ATOMIZE SHEET", () => {
   const createSheet = () =>
     (ts.sheet = {
       root: (ts.view = {

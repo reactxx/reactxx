@@ -6,7 +6,7 @@ export const enum Consts {
 }
 
 export const sheetSwitch_registerVariantHandler = () => {
-    if (notRegistered = !notRegistered) return 
+    if (notRegistered = !notRegistered) return
     registerVariantHandler({
         name: Consts.name,
         toAtomicRuleset,
@@ -47,25 +47,27 @@ interface SheetSwitchCondition extends TVariants.Condition {
     case: string
 }
 
-const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.RulesetOrAtomized>> = (list, whenFlag, path, pseudoPrefixes, conditions) => {
-    for (const p in whenFlag) {
-        const rules = whenFlag[p] as TSheeter.Ruleset
-        if (Array.isArray(rules))
-            rules.forEach((r, idx) =>
+const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.RulesetOrAtomized>> = (
+    list, cases, path, pseudoPrefixes, conditions
+) => {
+    for (const p in cases) {
+        const casep = cases[p] as TSheeter.Ruleset
+        if (Array.isArray(casep))
+            casep.forEach((ruleset, idx) =>
                 atomizeRulesetInner(
-                    list, r,
+                    list, ruleset,
                     `${path}/$sheetSwitch.${p}[${idx}]`,
-                    pseudoPrefixes,
+                    pseudoPrefixes, 
                     [...conditions, { type: Consts.name, case: p } as SheetSwitchCondition],
-                    wrapPseudoPrefixes(r, pseudoPrefixes))
+                    wrapPseudoPrefixes(ruleset, pseudoPrefixes))
             )
         else
             atomizeRulesetInner(
-                list, rules,
+                list, casep,
                 `${path}/$sheetSwitch.${p}`,
                 pseudoPrefixes,
                 [...conditions, { type: Consts.name, case: p } as SheetSwitchCondition],
-                wrapPseudoPrefixes(rules, pseudoPrefixes))
+                wrapPseudoPrefixes(casep, pseudoPrefixes))
     }
 }
 

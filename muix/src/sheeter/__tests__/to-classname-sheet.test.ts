@@ -3,21 +3,23 @@ import { initPlatform, ts, Shape } from "reactxx-tests";
 
 export const createSheet = () =>
   (ts.sheet = {
-    root: (ts.view = {
-      margin: 4,
-      padding: 4,
-      $web: (ts.web = {
-        margin: 10
-      }),
-      $native: (ts.nativeView = {
-        padding: 10
-      })
-    }),
-    label: (ts.text = [
+    root: (ts.view = [
       {
-        color: "blue"
+        margin: 4,
+        padding: 4,
+        $web: (ts.web = {
+          margin: 10
+        })
+      },
+      {
+        $native: (ts.nativeView = {
+          padding: 10
+        })
       }
     ]),
+    label: (ts.text = {
+      color: "blue"
+    }),
     webOnly: {
       $web: (ts.web = {
         color: "red",
@@ -50,7 +52,7 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "color: blue /*label[0]*/",
+          "color: blue /*label*/",
         ],
       },
     ],
@@ -72,13 +74,13 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "margin: 4 /*root*/",
-          "padding: 4 /*root*/",
+          "margin: 4 /*root[0]*/",
+          "padding: 4 /*root[0]*/",
         ],
       },
       Object {
         "atomicArray": Array [
-          "padding: 10 /*root/$native*/",
+          "padding: 10 /*root[1]/$native*/",
         ],
       },
     ],
@@ -106,7 +108,7 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".d { color:blue /*label[0]*/ }",
+          ".d { color:blue /*label*/ }",
         ],
       },
     ],
@@ -117,13 +119,13 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".a { margin:4px /*root*/ }",
-          ".b { padding:4px /*root*/ }",
+          ".a { margin:4px /*root[0]*/ }",
+          ".b { padding:4px /*root[0]*/ }",
         ],
       },
       Object {
         "atomicArray": Array [
-          ".c { margin:10px /*root/$web*/ }",
+          ".c { margin:10px /*root[0]/$web*/ }",
         ],
       },
     ],

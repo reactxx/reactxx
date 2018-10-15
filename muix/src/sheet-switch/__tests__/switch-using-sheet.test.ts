@@ -114,6 +114,7 @@ Array [
 ",
   Array [
     "backgroundColor: red /*root/$sheetSwitch.isOpened*/",
+    "borderColor: cyan /*root/$sheetSwitch.isOpened/$sheetSwitch.isOpened*/",
     "backgroundColor: brown /*root/$native/$sheetSwitch.isOpened*/",
   ],
   "
@@ -126,6 +127,10 @@ Array [
       "tracePath": "root/$native/$sheetSwitch.isOpened",
       "value": "brown",
     },
+    "borderColor": Object {
+      "tracePath": "root/$sheetSwitch.isOpened/$sheetSwitch.isOpened",
+      "value": "cyan",
+    },
   },
   "
 ******************************************
@@ -134,6 +139,7 @@ Array [
 ",
   Object {
     "backgroundColor": "brown",
+    "borderColor": "cyan",
   },
 ]
 `)
@@ -162,9 +168,9 @@ Array [
 ******************************************
 ",
   Array [
-    ".b { background-color:blue /*root/$sheetSwitch.isClosed*/ }",
+    ".c { background-color:blue /*root/$sheetSwitch.isClosed*/ }",
     undefined,
-    ".c:hover { background-color:green /*root/$web/:hover/$sheetSwitch.isClosed*/ }",
+    ".d:hover { background-color:green /*root/$web/:hover/$sheetSwitch.isClosed[0]*/ }",
     undefined,
   ],
   "
@@ -173,15 +179,15 @@ Array [
 ******************************************
 ",
   Array [
-    ".c:hover { background-color:green /*root/$web/:hover/$sheetSwitch.isClosed*/ }",
-    ".b { background-color:blue /*root/$sheetSwitch.isClosed*/ }",
+    ".d:hover { background-color:green /*root/$web/:hover/$sheetSwitch.isClosed[0]*/ }",
+    ".c { background-color:blue /*root/$sheetSwitch.isClosed*/ }",
   ],
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style
 ******************************************
 ",
-  "c b",
+  "d c",
 ]
 `)
     );
@@ -209,9 +215,10 @@ Array [
 ",
   Array [
     ".a { background-color:red /*root/$sheetSwitch.isOpened*/ }",
+    ".b { border-color:cyan /*root/$sheetSwitch.isOpened/$sheetSwitch.isOpened*/ }",
     undefined,
     undefined,
-    ".d:hover { background-color:yellow /*webOnly/$web/:hover/$sheetSwitch.isOpened*/ }",
+    ".e:hover { background-color:yellow /*webOnly/$web/:hover/$sheetSwitch.isOpened*/ }",
   ],
   "
 ******************************************
@@ -219,7 +226,8 @@ Array [
 ******************************************
 ",
   Array [
-    ".d:hover { background-color:yellow /*webOnly/$web/:hover/$sheetSwitch.isOpened*/ }",
+    ".e:hover { background-color:yellow /*webOnly/$web/:hover/$sheetSwitch.isOpened*/ }",
+    ".b { border-color:cyan /*root/$sheetSwitch.isOpened/$sheetSwitch.isOpened*/ }",
     ".a { background-color:red /*root/$sheetSwitch.isOpened*/ }",
   ],
   "
@@ -227,7 +235,7 @@ Array [
 *  FINALIZE FOR for web's className or native's style
 ******************************************
 ",
-  "d a",
+  "e b a",
 ]
 `)
     );

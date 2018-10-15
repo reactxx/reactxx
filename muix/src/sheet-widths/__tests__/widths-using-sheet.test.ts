@@ -1,50 +1,53 @@
 import { atomizeSheet } from "reactxx-sheeter";
 import { initPlatform, toClassNames, Shape } from "reactxx-tests";
-import { createSheet } from "./to-classname-sheet.test";
+import { createSheet, query } from "./widths-sheet.test";
 
 /*
+describe("SWITCH using sheet", () => {
   it("NATIVE", () => {
     initPlatform(false);
 
     const sheet = atomizeSheet<Shape>(createSheet());
 
-    toClassNames('NATIVE: root, label, nativeOnly', null, [
+    toClassNames('NATIVE, OPENED', query(true), [
       sheet.root,
-      sheet.label,
       sheet.nativeOnly
     ], res => res.toMatchInlineSnapshot())
 
-    toClassNames('NATIVE: nativeOnly, root', null, [
-      sheet.nativeOnly, sheet.root
+    toClassNames('NATIVE, CLOSED', query(false), [
+      sheet.root,
+      sheet.nativeOnly
     ], res => res.toMatchInlineSnapshot())
-  });
+  })
   it("WEB", () => {
     initPlatform(true);
 
     const sheet = atomizeSheet<Shape>(createSheet());
 
-    toClassNames('WEB: root, label, webOnly', null, [
+    toClassNames('WEB, OPENED', query(true), [
       sheet.root,
-      sheet.label,
       sheet.webOnly
     ], res => res.toMatchInlineSnapshot())
 
-    toClassNames('WEB: webOnly, root', null, [
-      sheet.webOnly, sheet.root
+    toClassNames('WEB, CLOSED', query(false), [
+      sheet.root,
+      sheet.webOnly
     ], res => res.toMatchInlineSnapshot())
   });
- */
 
-describe("TO CLASSNAMES, using sheet", () => {
+});
+*/
+
+describe("SWITCH using sheet", () => {
   it("NATIVE", () => {
     initPlatform(false);
 
     const sheet = atomizeSheet<Shape>(createSheet());
 
     toClassNames(
-      "NATIVE: root, label, nativeOnly",
-      null,
-      [sheet.root, sheet.label, sheet.nativeOnly],
+      "NATIVE, OPENED",
+      query(true),
+      [sheet.root, sheet.nativeOnly],
       res =>
         res.toMatchInlineSnapshot(`
 Array [
@@ -52,7 +55,7 @@ Array [
 ##########################################
 ##########################################
 #
-#  NATIVE: root, label, nativeOnly
+#  NATIVE, OPENED
 #
 ##########################################
 ##########################################
@@ -63,11 +66,9 @@ Array [
 ******************************************
 ",
   Array [
-    "margin: 4 /*root[0]*/",
-    "padding: 4 /*root[0]*/",
-    "padding: 10 /*root[1]/$native*/",
-    "color: blue /*label*/",
-    "margin: 20 /*nativeOnly/$native*/",
+    "backgroundColor: blue /*root/$sheetSwitch.mobileWidth*/",
+    "backgroundColor: cyan /*root/$sheetSwitch.tabletWidth*/",
+    "backgroundColor: green /*root/$sheetSwitch.desktopWidth*/",
   ],
   "
 ******************************************
@@ -75,17 +76,9 @@ Array [
 ******************************************
 ",
   Object {
-    "color": Object {
-      "tracePath": "label",
-      "value": "blue",
-    },
-    "margin": Object {
-      "tracePath": "nativeOnly/$native",
-      "value": 20,
-    },
-    "padding": Object {
-      "tracePath": "root[1]/$native",
-      "value": 10,
+    "backgroundColor": Object {
+      "tracePath": "root/$sheetSwitch.desktopWidth",
+      "value": "green",
     },
   },
   "
@@ -94,18 +87,16 @@ Array [
 ******************************************
 ",
   Object {
-    "color": "blue",
-    "margin": 20,
-    "padding": 10,
+    "backgroundColor": "green",
   },
 ]
 `)
     );
 
     toClassNames(
-      "NATIVE: nativeOnly, root",
-      null,
-      [sheet.nativeOnly, sheet.root],
+      "NATIVE, CLOSED",
+      query(false),
+      [sheet.root, sheet.nativeOnly],
       res =>
         res.toMatchInlineSnapshot(`
 Array [
@@ -113,7 +104,7 @@ Array [
 ##########################################
 ##########################################
 #
-#  NATIVE: nativeOnly, root
+#  NATIVE, CLOSED
 #
 ##########################################
 ##########################################
@@ -124,10 +115,9 @@ Array [
 ******************************************
 ",
   Array [
-    "margin: 20 /*nativeOnly/$native*/",
-    "margin: 4 /*root[0]*/",
-    "padding: 4 /*root[0]*/",
-    "padding: 10 /*root[1]/$native*/",
+    "backgroundColor: blue /*root/$sheetSwitch.mobileWidth*/",
+    "backgroundColor: cyan /*root/$sheetSwitch.tabletWidth*/",
+    "backgroundColor: green /*root/$sheetSwitch.desktopWidth*/",
   ],
   "
 ******************************************
@@ -135,13 +125,9 @@ Array [
 ******************************************
 ",
   Object {
-    "margin": Object {
-      "tracePath": "root[0]",
-      "value": 4,
-    },
-    "padding": Object {
-      "tracePath": "root[1]/$native",
-      "value": 10,
+    "backgroundColor": Object {
+      "tracePath": "root/$sheetSwitch.desktopWidth",
+      "value": "green",
     },
   },
   "
@@ -150,8 +136,7 @@ Array [
 ******************************************
 ",
   Object {
-    "margin": 4,
-    "padding": 10,
+    "backgroundColor": "green",
   },
 ]
 `)
@@ -162,63 +147,14 @@ Array [
 
     const sheet = atomizeSheet<Shape>(createSheet());
 
-    toClassNames(
-      "WEB: root, label, webOnly",
-      null,
-      [sheet.root, sheet.label, sheet.webOnly],
-      res =>
-        res.toMatchInlineSnapshot(`
-Array [
-  "
-##########################################
-##########################################
-#
-#  WEB: root, label, webOnly
-#
-##########################################
-##########################################
-",
-  "
-******************************************
-*  QUERY TO STHEET
-******************************************
-",
-  Array [
-    ".a { margin:4px /*root[0]*/ }",
-    ".b { padding:4px /*root[0]*/ }",
-    ".c { margin:10px /*root[0]/$web*/ }",
-    ".d { color:blue /*label*/ }",
-    ".e { color:red /*webOnly/$web*/ }",
-    ".f { padding:20px /*webOnly/$web*/ }",
-  ],
-  "
-******************************************
-*  APPLY LASTWINS STRATEGY
-******************************************
-",
-  Array [
-    ".f { padding:20px /*webOnly/$web*/ }",
-    ".e { color:red /*webOnly/$web*/ }",
-    ".c { margin:10px /*root[0]/$web*/ }",
-  ],
-  "
-******************************************
-*  FINALIZE FOR for web's className or native's style
-******************************************
-",
-  "f e c",
-]
-`)
-    );
-
-    toClassNames("WEB: webOnly, root", null, [sheet.webOnly, sheet.root], res =>
+    toClassNames("WEB, OPENED", query(true), [sheet.root, sheet.webOnly], res =>
       res.toMatchInlineSnapshot(`
 Array [
   "
 ##########################################
 ##########################################
 #
-#  WEB: webOnly, root
+#  WEB, OPENED
 #
 ##########################################
 ##########################################
@@ -229,11 +165,13 @@ Array [
 ******************************************
 ",
   Array [
-    ".e { color:red /*webOnly/$web*/ }",
-    ".f { padding:20px /*webOnly/$web*/ }",
-    ".a { margin:4px /*root[0]*/ }",
-    ".b { padding:4px /*root[0]*/ }",
-    ".c { margin:10px /*root[0]/$web*/ }",
+    ".a { background-color:blue /*root/$sheetSwitch.mobileWidth*/ }",
+    ".b { background-color:cyan /*root/$sheetSwitch.tabletWidth*/ }",
+    ".c { background-color:green /*root/$sheetSwitch.desktopWidth*/ }",
+    undefined,
+    ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.mobileWidth*/ }",
+    ".e:hover { background-color:lightcyan /*root/$web/:hover/$sheetSwitch.tabletWidth*/ }",
+    ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.desktopWidth*/ }",
   ],
   "
 ******************************************
@@ -241,16 +179,64 @@ Array [
 ******************************************
 ",
   Array [
-    ".c { margin:10px /*root[0]/$web*/ }",
-    ".b { padding:4px /*root[0]*/ }",
-    ".e { color:red /*webOnly/$web*/ }",
+    ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.desktopWidth*/ }",
+    ".c { background-color:green /*root/$sheetSwitch.desktopWidth*/ }",
   ],
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style
 ******************************************
 ",
-  "c b e",
+  "d c",
+]
+`)
+    );
+
+    toClassNames(
+      "WEB, CLOSED",
+      query(false),
+      [sheet.root, sheet.webOnly],
+      res =>
+        res.toMatchInlineSnapshot(`
+Array [
+  "
+##########################################
+##########################################
+#
+#  WEB, CLOSED
+#
+##########################################
+##########################################
+",
+  "
+******************************************
+*  QUERY TO STHEET
+******************************************
+",
+  Array [
+    ".a { background-color:blue /*root/$sheetSwitch.mobileWidth*/ }",
+    ".b { background-color:cyan /*root/$sheetSwitch.tabletWidth*/ }",
+    ".c { background-color:green /*root/$sheetSwitch.desktopWidth*/ }",
+    undefined,
+    ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.mobileWidth*/ }",
+    ".e:hover { background-color:lightcyan /*root/$web/:hover/$sheetSwitch.tabletWidth*/ }",
+    ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.desktopWidth*/ }",
+  ],
+  "
+******************************************
+*  APPLY LASTWINS STRATEGY
+******************************************
+",
+  Array [
+    ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.desktopWidth*/ }",
+    ".c { background-color:green /*root/$sheetSwitch.desktopWidth*/ }",
+  ],
+  "
+******************************************
+*  FINALIZE FOR for web's className or native's style
+******************************************
+",
+  "d c",
 ]
 `)
     );

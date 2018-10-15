@@ -158,10 +158,8 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
         const res = { cache, tracePath } as TAtomize.__dev_AtomicWeb
         res['toJSON'] = toJSON.bind(res)
         classNames.push(res)
-        continue
-      }
-
-      classNames.push(cache.className)
+      } else
+        classNames.push(cache.className)
 
     }
   }
