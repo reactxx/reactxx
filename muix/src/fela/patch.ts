@@ -173,6 +173,7 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
 function toJSON () { return dump(this) }
 
 export const dump = c => {
+  if (!c) return
   const { selector, declaration, path, media, support} = c as TAtomize.__dev_AtomicWeb
   return `${support ? '@support' + support : ''}${media ? '@media ' + media : ''}${selector} { ${declaration} /*${path}*/ }`
 }

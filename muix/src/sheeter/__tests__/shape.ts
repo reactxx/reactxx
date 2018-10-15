@@ -15,7 +15,7 @@ export interface Shape extends TSheeter.ShapeAncestor {
     style: 'View'
 
     theme: typeof Theme
-    cases: TSheeter.ShapeMarks<'isDrawerClosed' | 'isDrawerOpened'>
+    cases: TSheeter.ShapeMarks<'isClosed' | 'isOpened'>
     breakpoints: TSheeter.ShapeMarks<'tabletWidth' | 'mobileWidth' | 'desktopWidth'>
     transitionGroups: TSheeter.ShapeMarks<'leftDrawer'>
 

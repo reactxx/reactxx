@@ -66,5 +66,5 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
 }
 
 const testAtomicRuleset = (cond: SheetSwitchCondition, query) =>
-    query.$sheetSwitch && query.$sheetSwitch[cond.case]
+    query && query.$sheetSwitch && query.$sheetSwitch[cond.case]
 
