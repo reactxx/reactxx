@@ -9,7 +9,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
             //x: 1,
             ':hover': {
                 ':active': {
-                    $sheetSwitch: ts.sheetSwitch$Web = {
+                    $switch: ts.sheetSwitch$Web = {
                         isDrawerClosed: [{
                             color: 'red',
                             //x: 1,
@@ -20,12 +20,14 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
             },
             // ':active': [{
             // }],
-            $sheetSwitch: ts.sheetSwitch$Web = {
+            $switch: ts.sheetSwitch$Web = {
                 isDrawerClosed: [{
                     color: 'red',
                     cursor: 'pointer',
                     //x: 1,
                 }],
+            },
+            $widths: ts.sheetWidths$Web = {
                 tabletWidth: {
                     color: 'red',
                     cursor: 'pointer',
@@ -57,8 +59,8 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
                 //cursor: 'pointer',
             },
         ],
-        $sheetSwitch: ts.sheetSwitchView = {
-            mobileWidth: {},
+        $switch: ts.sheetSwitchView = {
+            //mobileWidth: {},
             isDrawerOpened: {
                 //color: 'red',
             },
@@ -73,7 +75,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
         $web: ts.web = [{
             color: 'gray',
             //x: 1,
-            $sheetSwitch: ts.sheetSwitchText = {
+            $switch: ts.sheetSwitchText = {
                 isDrawerClosed: [{
                     color: 'red',
                     //x: 1,
@@ -94,7 +96,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
         $web: ts.web = {
             color: 'red',
             //x: 1,
-            $sheetSwitch: ts.sheetSwitchText = {
+            $switch: ts.sheetSwitchText = {
                 isDrawerClosed: [{
                     color: 'red',
                     //x: 1,
@@ -120,7 +122,7 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
         $native: ts.nativeView = {
             margin: 20,
             //color: 'red',
-            $sheetSwitch: ts.sheetSwitchView = {
+            $switch: ts.sheetSwitchView = {
                 isDrawerClosed: [{
                     margin: 4,
                     //color: 'red',

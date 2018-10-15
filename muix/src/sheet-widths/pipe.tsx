@@ -7,12 +7,12 @@ export const widthsPipe: TWithStyles.Pipe = (pipelineState, next) => {
         const widthName: string = ''
         pipelineState.pipeStates[pipeId] = {
             codeProps: {
-                breakpoints: {
+                sheetWidths: {
                     [widthName]: true
                 }
             },
             sheetQuery: {
-                $sheetSwitch: {
+                $switch: {
                     [widthName]: true
                 }
             }
@@ -20,10 +20,10 @@ export const widthsPipe: TWithStyles.Pipe = (pipelineState, next) => {
         return next()
     }
     return () => {
-        const { pipeStates, props: { breakpoints } } = pipelineState
+        const { pipeStates, props: { sheetWidths } } = pipelineState
         // UNDO
         delete pipeStates[pipeId]
-        if (!breakpoints) return next()
+        if (!sheetWidths) return next()
         return <div>{render}</div> // TODO width consumer: 
     }
 }

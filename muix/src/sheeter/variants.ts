@@ -13,7 +13,7 @@ export const registerVariantHandler = (handler: IVariantHandler) => {
     variantHandlersDir[handler.name] = handler
 }
 
-// process variant part of ruleset: $sheetSwitch, $transition etc.
+// process variant part of ruleset: $switch, $transition etc.
 export const atomizeVariants: TVariants.ToAtomicRuleset<TVariants.VariantPart> =
     (list, ruleset, path, pseudoPrefixes, conditions, rulesetToQueue) =>
         variantHandlers.forEach(variantHandler => {

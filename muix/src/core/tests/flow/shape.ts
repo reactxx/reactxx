@@ -1,4 +1,4 @@
-import { TSheeter } from 'reactxx-typings'
+import { TSheeter, TVariants } from 'reactxx-typings'
 import { TSBugHelper } from 'reactxx-core'
 
 export interface Props {
@@ -6,8 +6,6 @@ export interface Props {
 export interface InnerState {
     drawerOpened?: boolean
 }
-
-
 export interface Shape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root'> & TSheeter.ShapeTexts<'label'>
     native: TSheeter.ShapeViews<'nativeOnly'>
@@ -16,7 +14,7 @@ export interface Shape extends TSheeter.ShapeAncestor {
 
     theme: typeof Theme
     cases: TSheeter.ShapeMarks<'isDrawerClosed' | 'isDrawerOpened'>
-    breakpoints: TSheeter.ShapeMarks<'tabletWidth' | 'mobileWidth' | 'desktopWidth'>
+    widths: TSheeter.ShapeMarks<'tabletWidth' | 'mobileWidth' | 'desktopWidth'>
     transitionGroups: TSheeter.ShapeMarks<'leftDrawer'>
 
     props: Props

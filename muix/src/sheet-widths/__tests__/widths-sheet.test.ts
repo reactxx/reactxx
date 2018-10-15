@@ -8,7 +8,7 @@ sheetSwitch_registerVariantHandler();
 export const createSheet = () =>
   (ts.sheet = {
     root: (ts.view = {
-      $sheetSwitch: {
+      $widths: {
         mobileWidth: {
           backgroundColor: "blue"
         },
@@ -21,7 +21,7 @@ export const createSheet = () =>
       },
       $web: (ts.web = {
         ":hover": {
-          $sheetSwitch: {
+          $widths: {
             mobileWidth: {
               backgroundColor: "lightblue"
             },
@@ -41,7 +41,7 @@ export const createSheet = () =>
   });
 export const query = (opened: boolean) =>
   ({
-    $sheetSwitch: {
+    $switch: {
       isOpened: opened,
       isClosed: !opened
     }
@@ -98,34 +98,34 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "backgroundColor: blue /*root/$sheetSwitch.mobileWidth*/",
+          "backgroundColor: blue /*root/$switch.mobileWidth*/",
         ],
         "conditions": Array [
           Object {
             "case": "mobileWidth",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          "backgroundColor: cyan /*root/$sheetSwitch.tabletWidth*/",
+          "backgroundColor: cyan /*root/$switch.tabletWidth*/",
         ],
         "conditions": Array [
           Object {
             "case": "tabletWidth",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          "backgroundColor: green /*root/$sheetSwitch.desktopWidth*/",
+          "backgroundColor: green /*root/$switch.desktopWidth*/",
         ],
         "conditions": Array [
           Object {
             "case": "desktopWidth",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
@@ -154,34 +154,34 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".a { background-color:blue /*root/$sheetSwitch.mobileWidth*/ }",
+          ".a { background-color:blue /*root/$switch.mobileWidth*/ }",
         ],
         "conditions": Array [
           Object {
             "case": "mobileWidth",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          ".b { background-color:cyan /*root/$sheetSwitch.tabletWidth*/ }",
+          ".b { background-color:cyan /*root/$switch.tabletWidth*/ }",
         ],
         "conditions": Array [
           Object {
             "case": "tabletWidth",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          ".c { background-color:green /*root/$sheetSwitch.desktopWidth*/ }",
+          ".c { background-color:green /*root/$switch.desktopWidth*/ }",
         ],
         "conditions": Array [
           Object {
             "case": "desktopWidth",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
@@ -192,34 +192,34 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.mobileWidth*/ }",
+          ".d:hover { background-color:lightblue /*root/$web/:hover/$switch.mobileWidth*/ }",
         ],
         "conditions": Array [
           Object {
             "case": "mobileWidth",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          ".e:hover { background-color:lightcyan /*root/$web/:hover/$sheetSwitch.tabletWidth*/ }",
+          ".e:hover { background-color:lightcyan /*root/$web/:hover/$switch.tabletWidth*/ }",
         ],
         "conditions": Array [
           Object {
             "case": "tabletWidth",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.desktopWidth*/ }",
+          ".d:hover { background-color:lightblue /*root/$web/:hover/$switch.desktopWidth*/ }",
         ],
         "conditions": Array [
           Object {
             "case": "desktopWidth",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },

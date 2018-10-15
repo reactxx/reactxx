@@ -48,15 +48,15 @@ const style2: TSheeter.Ruleset<'Text', Shape2>[] = [
         $web: {},
     },
     {
-        $sheetSwitch: {
+        $switch: {
         },
         $native: {
-            $sheetSwitch: {
+            $switch: {
                 disabled: {
                     $web: {
                         //$mediaq: {},
                     },
-                    $sheetSwitch: {},
+                    $switch: {},
                     //$mediaq: {},
                     $native: {
                         //$mediaq: {},

@@ -46,7 +46,9 @@ export namespace TVariants {
     interface VariantPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> { }
 
     interface PropsPart<R extends TSheeter.Shape = TSheeter.Shape> { }
-    interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> { }
+    interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> { 
+        sheetQuery?: Query<R> // merged pipe's sheetQueries 
+    }
     interface ShapePart { }
 
     interface PipeState { }

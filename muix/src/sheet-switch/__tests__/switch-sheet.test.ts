@@ -8,10 +8,10 @@ sheetSwitch_registerVariantHandler();
 export const createSheet = () =>
   (ts.sheet = {
     root: (ts.view = {
-      $sheetSwitch: {
+      $switch: {
         isOpened: {
           backgroundColor: "red",
-          $sheetSwitch: {
+          $switch: {
             isOpened: {
               borderColor: "cyan"
             }
@@ -23,7 +23,7 @@ export const createSheet = () =>
       },
       $web: (ts.web = {
         ":hover": {
-          $sheetSwitch: {
+          $switch: {
             isClosed: [
               {
                 backgroundColor: "green"
@@ -33,7 +33,7 @@ export const createSheet = () =>
         }
       }),
       $native: (ts.nativeView = {
-        $sheetSwitch: {
+        $switch: {
           isOpened: {
             backgroundColor: "brown"
           }
@@ -44,7 +44,7 @@ export const createSheet = () =>
     webOnly: {
       $web: {
         ":hover": {
-          $sheetSwitch: {
+          $switch: {
             isOpened: {
               backgroundColor: "yellow"
             }
@@ -56,7 +56,7 @@ export const createSheet = () =>
   });
 export const query = (opened: boolean) =>
   ({
-    $sheetSwitch: {
+    $switch: {
       isOpened: opened,
       isClosed: !opened
     }
@@ -113,49 +113,49 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "backgroundColor: red /*root/$sheetSwitch.isOpened*/",
+          "backgroundColor: red /*root/$switch.isOpened*/",
         ],
         "conditions": Array [
           Object {
             "case": "isOpened",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          "borderColor: cyan /*root/$sheetSwitch.isOpened/$sheetSwitch.isOpened*/",
+          "borderColor: cyan /*root/$switch.isOpened/$switch.isOpened*/",
         ],
         "conditions": Array [
           Object {
             "case": "isOpened",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
           Object {
             "case": "isOpened",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          "backgroundColor: blue /*root/$sheetSwitch.isClosed*/",
+          "backgroundColor: blue /*root/$switch.isClosed*/",
         ],
         "conditions": Array [
           Object {
             "case": "isClosed",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          "backgroundColor: brown /*root/$native/$sheetSwitch.isOpened*/",
+          "backgroundColor: brown /*root/$native/$switch.isOpened*/",
         ],
         "conditions": Array [
           Object {
             "case": "isOpened",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
@@ -184,38 +184,38 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".a { background-color:red /*root/$sheetSwitch.isOpened*/ }",
+          ".a { background-color:red /*root/$switch.isOpened*/ }",
         ],
         "conditions": Array [
           Object {
             "case": "isOpened",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          ".b { border-color:cyan /*root/$sheetSwitch.isOpened/$sheetSwitch.isOpened*/ }",
+          ".b { border-color:cyan /*root/$switch.isOpened/$switch.isOpened*/ }",
         ],
         "conditions": Array [
           Object {
             "case": "isOpened",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
           Object {
             "case": "isOpened",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          ".c { background-color:blue /*root/$sheetSwitch.isClosed*/ }",
+          ".c { background-color:blue /*root/$switch.isClosed*/ }",
         ],
         "conditions": Array [
           Object {
             "case": "isClosed",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
@@ -226,12 +226,12 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          ".d:hover { background-color:green /*root/$web/:hover/$sheetSwitch.isClosed[0]*/ }",
+          ".d:hover { background-color:green /*root/$web/:hover/$switch.isClosed[0]*/ }",
         ],
         "conditions": Array [
           Object {
             "case": "isClosed",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },
@@ -248,12 +248,12 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          ".e:hover { background-color:yellow /*webOnly/$web/:hover/$sheetSwitch.isOpened*/ }",
+          ".e:hover { background-color:yellow /*webOnly/$web/:hover/$switch.isOpened*/ }",
         ],
         "conditions": Array [
           Object {
             "case": "isOpened",
-            "type": "$sheetSwitch",
+            "type": "$switch",
           },
         ],
       },

@@ -159,8 +159,8 @@ export const getSystemPipes = <R extends Types.Shape>(
     // **** apply sheet patch to sheet:
     // call sheet creator, merges it with sheet patch
     const codeClasses = getPlatformSheet({ expandCreator, componentId, finishAddInClasses: addIns.finishAddInClasses, createSheetX, $cache: renderState.themeContext.$cache, sheetXPatch, defaultClasses, cacheId })
-    if (codeClasses.$system && codeClasses.$system['$sheetSwitch'])
-      (renderState.getClassesPatches || (renderState.getClassesPatches = {}))['$sheetSwitch'] = Sheeter.whenFlagRulesetFilter
+    if (codeClasses.$system && codeClasses.$system['$switch'])
+      (renderState.getClassesPatches || (renderState.getClassesPatches = {}))['$switch'] = Sheeter.whenFlagRulesetFilter
     renderState.finalProps.classes = codeClasses
   }
 

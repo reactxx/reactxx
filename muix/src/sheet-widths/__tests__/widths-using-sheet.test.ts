@@ -66,9 +66,9 @@ Array [
 ******************************************
 ",
   Array [
-    "backgroundColor: blue /*root/$sheetSwitch.mobileWidth*/",
-    "backgroundColor: cyan /*root/$sheetSwitch.tabletWidth*/",
-    "backgroundColor: green /*root/$sheetSwitch.desktopWidth*/",
+    "backgroundColor: blue /*root/$switch.mobileWidth*/",
+    "backgroundColor: cyan /*root/$switch.tabletWidth*/",
+    "backgroundColor: green /*root/$switch.desktopWidth*/",
   ],
   "
 ******************************************
@@ -77,7 +77,7 @@ Array [
 ",
   Object {
     "backgroundColor": Object {
-      "tracePath": "root/$sheetSwitch.desktopWidth",
+      "tracePath": "root/$switch.desktopWidth",
       "value": "green",
     },
   },
@@ -115,9 +115,9 @@ Array [
 ******************************************
 ",
   Array [
-    "backgroundColor: blue /*root/$sheetSwitch.mobileWidth*/",
-    "backgroundColor: cyan /*root/$sheetSwitch.tabletWidth*/",
-    "backgroundColor: green /*root/$sheetSwitch.desktopWidth*/",
+    "backgroundColor: blue /*root/$switch.mobileWidth*/",
+    "backgroundColor: cyan /*root/$switch.tabletWidth*/",
+    "backgroundColor: green /*root/$switch.desktopWidth*/",
   ],
   "
 ******************************************
@@ -126,7 +126,7 @@ Array [
 ",
   Object {
     "backgroundColor": Object {
-      "tracePath": "root/$sheetSwitch.desktopWidth",
+      "tracePath": "root/$switch.desktopWidth",
       "value": "green",
     },
   },
@@ -165,13 +165,13 @@ Array [
 ******************************************
 ",
   Array [
-    ".a { background-color:blue /*root/$sheetSwitch.mobileWidth*/ }",
-    ".b { background-color:cyan /*root/$sheetSwitch.tabletWidth*/ }",
-    ".c { background-color:green /*root/$sheetSwitch.desktopWidth*/ }",
+    ".a { background-color:blue /*root/$switch.mobileWidth*/ }",
+    ".b { background-color:cyan /*root/$switch.tabletWidth*/ }",
+    ".c { background-color:green /*root/$switch.desktopWidth*/ }",
     undefined,
-    ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.mobileWidth*/ }",
-    ".e:hover { background-color:lightcyan /*root/$web/:hover/$sheetSwitch.tabletWidth*/ }",
-    ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.desktopWidth*/ }",
+    ".d:hover { background-color:lightblue /*root/$web/:hover/$switch.mobileWidth*/ }",
+    ".e:hover { background-color:lightcyan /*root/$web/:hover/$switch.tabletWidth*/ }",
+    ".d:hover { background-color:lightblue /*root/$web/:hover/$switch.desktopWidth*/ }",
   ],
   "
 ******************************************
@@ -179,8 +179,8 @@ Array [
 ******************************************
 ",
   Array [
-    ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.desktopWidth*/ }",
-    ".c { background-color:green /*root/$sheetSwitch.desktopWidth*/ }",
+    ".d:hover { background-color:lightblue /*root/$web/:hover/$switch.desktopWidth*/ }",
+    ".c { background-color:green /*root/$switch.desktopWidth*/ }",
   ],
   "
 ******************************************
@@ -214,13 +214,13 @@ Array [
 ******************************************
 ",
   Array [
-    ".a { background-color:blue /*root/$sheetSwitch.mobileWidth*/ }",
-    ".b { background-color:cyan /*root/$sheetSwitch.tabletWidth*/ }",
-    ".c { background-color:green /*root/$sheetSwitch.desktopWidth*/ }",
+    ".a { background-color:blue /*root/$switch.mobileWidth*/ }",
+    ".b { background-color:cyan /*root/$switch.tabletWidth*/ }",
+    ".c { background-color:green /*root/$switch.desktopWidth*/ }",
     undefined,
-    ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.mobileWidth*/ }",
-    ".e:hover { background-color:lightcyan /*root/$web/:hover/$sheetSwitch.tabletWidth*/ }",
-    ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.desktopWidth*/ }",
+    ".d:hover { background-color:lightblue /*root/$web/:hover/$switch.mobileWidth*/ }",
+    ".e:hover { background-color:lightcyan /*root/$web/:hover/$switch.tabletWidth*/ }",
+    ".d:hover { background-color:lightblue /*root/$web/:hover/$switch.desktopWidth*/ }",
   ],
   "
 ******************************************
@@ -228,8 +228,8 @@ Array [
 ******************************************
 ",
   Array [
-    ".d:hover { background-color:lightblue /*root/$web/:hover/$sheetSwitch.desktopWidth*/ }",
-    ".c { background-color:green /*root/$sheetSwitch.desktopWidth*/ }",
+    ".d:hover { background-color:lightblue /*root/$web/:hover/$switch.desktopWidth*/ }",
+    ".c { background-color:green /*root/$switch.desktopWidth*/ }",
   ],
   "
 ******************************************

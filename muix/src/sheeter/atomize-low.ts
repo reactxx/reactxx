@@ -64,7 +64,7 @@ export const atomizeRulesetInner: TVariants.AtomizeRulesetInner = (list, ruleset
     // push to ruleset list
     if (rulesetToQueue) pushToList(list, rulesetToQueue, conditions, path)
 
-    // process variant part of ruleset: $transition, $sheetSwitch etc.
+    // process variant part of ruleset: $transition, $switch etc.
     atomizeVariants(list, ruleset, path, pseudoPrefixes, conditions)
 
     // parse pseudo rules (:hover etc.)

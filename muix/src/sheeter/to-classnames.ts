@@ -59,7 +59,7 @@ const finishAtomicArray = (res: TAtomize.AtomicArray, state: TWithStyles.Pipelin
     return res
 }
 
-// merge rulesets and apply query to ruleset's conditional parts ($sheetSwitchs, $mediaq etc.)
+// merge rulesets and apply query to ruleset's conditional parts ($switchs, $mediaq etc.)
 // export const toClassNamesWithQueryEx = (query: TVariants.Query | ((usedRuesets: Record<string, true>) => TVariants.Query), theme, rulesets: TSheeter.ClassNameOrAtomized) => {
 
 //     if (!rulesets) return emptyAtomicArray

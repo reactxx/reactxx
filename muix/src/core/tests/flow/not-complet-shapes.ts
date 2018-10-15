@@ -26,16 +26,16 @@ export const sheet2 = ts2.sheetCreator = theme => ts2.sheet = {
         //backgroundColor: theme.x,
         $web: {
             cursor: 'pointer'
-            //$sheetSwitch: ts2.sheetSwitch$Web = { }
+            //$switch: ts2.sheetSwitch$Web = { }
             //$transitionGroup: ts2.transitionGroup$Web = { }
         },
-        //$sheetSwitch: ts2.sheetSwitchView = { }
+        //$switch: ts2.sheetSwitchView = { }
         //$transitionGroup: ts2.transitionGroupView = { }
     }
 }
 export const sheet2_2 = ts2.sheet = {
     root: {
-        //$sheetSwitch: ts2.sheetSwitchView = { }
+        //$switch: ts2.sheetSwitchView = { }
         //$transitionGroup: ts2.transitionGroupView = { }
     }
 }

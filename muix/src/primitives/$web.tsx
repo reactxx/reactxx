@@ -18,7 +18,7 @@ export const view: TComponents.SFCCode<TPrimitives.ViewShape> = propsCode => {
     const { styleX, classNameX, toClassNames, classes, ...rest } = propsCode
     return <div classNameX={toClassNames([classes.root, classNameX])} styleX={styleX} {...rest} />
 }
-view.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetSwitch: { pressable: hasPlatformEvents(props)  } }
+view.fillSheetQuery = (props, state) => state.sheetQuery = { $switch: { pressable: hasPlatformEvents(props)  } }
 
 export const hasPlatformEvents = (propsCode: TComponents.PropsCode) => !!(
     window.isWeb ?
@@ -36,7 +36,7 @@ export const icon: TComponents.SFCCode<TPrimitives.IconShape> = propsCode => {
     </svg>
     return url ? <a href={url}>{svg}</a> : svg
 }
-icon.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetSwitch: { pressable: hasPlatformEvents(props) } }
+icon.fillSheetQuery = (props, state) => state.sheetQuery = { $switch: { pressable: hasPlatformEvents(props) } }
 
 export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = propsode => {
     const { styleX, classNameX, classes, toClassNames, children, horizontal, ...rest } = propsode
@@ -46,7 +46,7 @@ export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = prop
         </div>
     </div>
 }
-scrollView.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetSwitch: { horizontal: props.horizontal } }
+scrollView.fillSheetQuery = (props, state) => state.sheetQuery = { $switch: { horizontal: props.horizontal } }
 
 export const text: TComponents.SFCCode<TPrimitives.TextShape> = propsCode => {
     const { classNameX, classes, toClassNames, singleLine, url/*, onClick*/, ...rest } = propsCode
@@ -58,7 +58,7 @@ export const text: TComponents.SFCCode<TPrimitives.TextShape> = propsCode => {
     }
     return url ? <a href={url} {...tagProps} /> : <div {...tagProps} />
 }
-text.fillSheetQuery = (props, state) => state.sheetQuery = { $sheetSwitch: { pressable: hasPlatformEvents(props), singleLine: props.singleLine } }
+text.fillSheetQuery = (props, state) => state.sheetQuery = { $switch: { pressable: hasPlatformEvents(props), singleLine: props.singleLine } }
 
 export const textCreator = withStylesCreator<TPrimitives.TextShape>(textSheet, text, {
     displayName: CompNames.Text,

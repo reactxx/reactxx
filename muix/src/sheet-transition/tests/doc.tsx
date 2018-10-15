@@ -81,7 +81,7 @@ const sheet2: TSheeter.Sheet<Shape> = ts.sheet = {
                 //color: ['', ''],
             }
         },
-        $sheetSwitch: {
+        $switch: {
             active: {
                 //color: '',
                 $transitionGroup: ts.transitionGroupView = {
@@ -119,7 +119,7 @@ const sheet2: TSheeter.Sheet<Shape> = ts.sheet = {
 
 const innerState = {
     drawerOpened: true,
-    $sheetSwitch: {
+    $switch: {
         tabletWidth: false,
         desktopWidth: false,
         mobileWidth: true,

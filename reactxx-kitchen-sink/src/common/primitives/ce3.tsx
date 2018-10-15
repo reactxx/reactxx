@@ -34,7 +34,7 @@ const sheet: Types.SheetX<Shape> = {
     fontSize: 24,
     textAlign: 'center',
     color: 'white',
-    $sheetSwitch: {
+    $switch: {
       disabled: {
         backgroundColor: 'lightblue',
         color: 'darkgray',
@@ -43,13 +43,13 @@ const sheet: Types.SheetX<Shape> = {
   },
   label: {
     padding: 10,
-    $sheetSwitch: {
+    $switch: {
       disabled: {
         color: 'lightgray',
       }
     }
   },
-  // just flag: when used in 'mergeRuleset', header.$sheetSwitch.disabled or label.$sheetSwitch.disabled is used
+  // just flag: when used in 'mergeRuleset', header.$switch.disabled or label.$switch.disabled is used
   disabled: {},
 }
 

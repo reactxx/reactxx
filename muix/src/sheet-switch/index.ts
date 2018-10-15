@@ -1,8 +1,8 @@
-import { TComponents, TSheeter, TVariants, TWithStyles } from 'reactxx-typings'
+import { TCommonStyles, TComponents, TSheeter, TVariants, TWithStyles } from 'reactxx-typings'
 import { registerVariantHandler, atomizeRulesetInner, wrapPseudoPrefixes } from 'reactxx-sheeter'
 
 export const enum Consts {
-    name = '$sheetSwitch'
+    name = '$switch'
 }
 
 export const sheetSwitch_registerVariantHandler = () => {
@@ -31,9 +31,13 @@ declare module 'reactxx-typings' {
             cases?: TSheeter.EmptyInterface
         }
 
-        interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> {
-            sheetQuery?: Query<R> // merged pipe's sheetQueries 
+        interface VariantPart<T extends TCommonStyles.RulesetNativeIds, R extends TSheeter.Shape> {
+            [Consts.name]?: SheetSwitchPart<T, R>
         }
+        type SheetSwitchPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
+            getCases<R> extends never ? never :
+            PartialRecord<getCases<R>, TSheeter.RulesetOrAtomized<T, R>>
+
 
     }
 }
@@ -56,15 +60,15 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
             casep.forEach((ruleset, idx) =>
                 atomizeRulesetInner(
                     list, ruleset,
-                    `${path}/$sheetSwitch.${p}[${idx}]`,
-                    pseudoPrefixes, 
+                    `${path}/$switch.${p}[${idx}]`,
+                    pseudoPrefixes,
                     [...conditions, { type: Consts.name, case: p } as SheetSwitchCondition],
                     wrapPseudoPrefixes(ruleset, pseudoPrefixes))
             )
         else
             atomizeRulesetInner(
                 list, casep,
-                `${path}/$sheetSwitch.${p}`,
+                `${path}/$switch.${p}`,
                 pseudoPrefixes,
                 [...conditions, { type: Consts.name, case: p } as SheetSwitchCondition],
                 wrapPseudoPrefixes(casep, pseudoPrefixes))
@@ -72,5 +76,5 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
 }
 
 const testAtomicRuleset = (cond: SheetSwitchCondition, query) =>
-    query && query.$sheetSwitch && query.$sheetSwitch[cond.case]
+    query && query.$switch && query.$switch[cond.case]
 

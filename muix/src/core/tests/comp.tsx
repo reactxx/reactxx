@@ -7,7 +7,7 @@ interface Shape extends TSheeter.ShapeAncestor {
     native: TSheeter.ShapeViews<'nativeOnly'>
     web: TSheeter.ShapeMarks<'webOnly'>
     cases: TSheeter.ShapeMarks<'isDrawerClosed' | 'isActive'>
-    breakpoints: TSheeter.ShapeMarks<'isTabletWidth'>
+    widths: TSheeter.ShapeMarks<'isTabletWidth'>
     style: 'View'
 }
 
@@ -24,15 +24,15 @@ const sheet: Shape['$SheetCreator'] = theme => {
     const res: Shape['$Sheet'] = {
         root: {
             margin: 4,
-            $sheetSwitch: {
+            $switch: {
                 isDrawerClosed: [{
-                    //color: '$sheetSwitch|disabled',
+                    //color: '$switch|disabled',
                 }],
             },
             $web: [{
-                $sheetSwitch: {
+                $switch: {
                     isDrawerClosed: [{
-                        //color: '$sheetSwitch|disabled',
+                        //color: '$switch|disabled',
                     }],
                 },
             }],
@@ -40,9 +40,9 @@ const sheet: Shape['$SheetCreator'] = theme => {
         label: {
             $web: {
                 color: 'gray',
-                $sheetSwitch: {
+                $switch: {
                     isDrawerClosed: [{
-                        color: '$sheetSwitch|disabled',
+                        color: '$switch|disabled',
                     }],
                 },
             },
@@ -62,7 +62,7 @@ const sheet: Shape['$SheetCreator'] = theme => {
 let Inner: TComponents.ComponentType<Shape>
 
 const App: TComponents.SFCCode<Shape> = props => {
-    const { classNameX, classes, styleX, theme, toClassNames, breakpoints } = props
+    const { classNameX, classes, styleX, theme, toClassNames, sheetWidths } = props
     //if (breakpoints.isTabletWidth) flags.isTabletWidth = true
     const root = toClassNames([classes.root, { margin: 0 }])
     return <div>
@@ -77,9 +77,9 @@ const App: TComponents.SFCCode<Shape> = props => {
             ]}
             classes={theme => {
                 const res: typeof Inner['classes'] = {
-                    root: [{ $sheetSwitch: {
+                    root: [{ $switch: {
                         isDrawerClosed: {}, root: {}, isTabletWidth: {}
-                    }, margin: 0, $web: [{ $sheetSwitch: {}, cursor: 'pointer' }], $native: [{ $sheetSwitch: {}, margin: 0 }] }],
+                    }, margin: 0, $web: [{ $switch: {}, cursor: 'pointer' }], $native: [{ $switch: {}, margin: 0 }] }],
                     nativeOnly: { $native: [{ margin: 0 }] },
                     webOnly: { $web: [{ cursor: 'pointer' }] }
                 }
@@ -116,7 +116,7 @@ const App2: TComponents.SFCCode<Shape3> = props => {
             ]}
             classes={theme => {
                 const res: typeof Inner['classes'] = {
-                    root: [{ $sheetSwitch: {}, margin: 0, $web: [{ $sheetSwitch: {}, cursor: 'pointer' }], $native: [{ $sheetSwitch: {}, margin: 0 }] }],
+                    root: [{ $switch: {}, margin: 0, $web: [{ $switch: {}, cursor: 'pointer' }], $native: [{ $switch: {}, margin: 0 }] }],
                     nativeOnly: { $native: [{ margin: 0 }] },
                     webOnly: { $web: [{ cursor: 'pointer' }] }
                 }
@@ -230,7 +230,7 @@ const sheet3: Partial<SheetCommon<Shape>> = {
         TAtomizeAtomicArray,
         {
             margin: 0,
-            $sheetSwitch: {
+            $switch: {
                 isDrawerClosed: {
                     //color: ''
                 }

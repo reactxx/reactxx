@@ -1,9 +1,9 @@
 import { TWithStyles, TSheeter, TVariants, TComponents } from 'reactxx-typings'
-import { getBreakpoints } from 'reactxx-sheet-widths'
+//import { getBreakpoints } from 'reactxx-sheet-widths'
 
 import { Shape, ts } from 'reactxx-core/tests/flow/shape'
 
-export const width: getBreakpoints<Shape> =
+export const width: TVariants.getWidths<Shape> =
     //'tabletWidth'
     'mobileWidth'
 //'desktopWidth'
@@ -22,7 +22,7 @@ export const componentOptions: TWithStyles.ComponentOptions<Shape> = {
         classNameX: {},
         styleX: {},
         themedProps: ({ breakpoints: { mobile, tablet, desktop } }) => ({
-            breakpoints: { mobileWidth: mobile, tabletWidth: tablet, desktopWidth: desktop }
+            sheetWidths: { mobileWidth: mobile, tabletWidth: tablet, desktopWidth: desktop }
         }),
         transitionGroups: {
             leftDrawer: {

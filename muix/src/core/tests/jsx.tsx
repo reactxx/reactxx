@@ -17,7 +17,7 @@ interface ShapeSimple2 extends TSheeter.ShapeAncestor {
 const sheetSimple2: TSheeter.SheetCreator<ShapeSimple2> = theme => ({
     root: [
         {
-            $sheetSwitch: {},
+            $switch: {},
             whenFlag2: {}
         },
         { $web: [] }
@@ -32,14 +32,14 @@ interface ShapeSimple extends TSheeter.ShapeAncestor {
 const sheetSimple: TSheeter.Sheet<ShapeSimple> = {
     root: [
         {
-            $sheetSwitch: { disabled: { color: 'disabled1' } },
-            //$sheetSwitch2: { disabled: { color: 'disabled1' }},
+            $switch: { disabled: { color: 'disabled1' } },
+            //$switch2: { disabled: { color: 'disabled1' }},
             $web: [
                 {
-                    $sheetSwitch: { disabled: { color: 'disabled2' } },
+                    $switch: { disabled: { color: 'disabled2' } },
                     ':hover': {
                         ':active': {
-                            $sheetSwitch: {
+                            $switch: {
                                 disabled: [
                                     { color: 'disabled3' },
                                     { margin: 15 }
@@ -55,7 +55,7 @@ const sheetSimple: TSheeter.Sheet<ShapeSimple> = {
                 }
             ],
             // $native: [{
-            //     $sheetSwitch: { disabled: [
+            //     $switch: { disabled: [
             //         { color: 'disabled4' },
             //         { margin: 15 }
             //     ] },
@@ -88,9 +88,9 @@ const sheet: TSheeter.Sheet<Shape> = {
             }
         },
         margin: 4,
-        $sheetSwitch: {
+        $switch: {
             disabled: {
-                color: '$sheetSwitch|disabled',
+                color: '$switch|disabled',
             },
         }
     },
@@ -99,14 +99,14 @@ const sheet: TSheeter.Sheet<Shape> = {
             color: 'gray',
             ':hover': {
                 $mediaq: {},
-                $sheetSwitch: {
+                $switch: {
                     disabled: {
-                        color: 'label|$sheetSwitch|root',
+                        color: 'label|$switch|root',
                         $web: [
                             {
                                 ':hover':
                                 {
-                                    $sheetSwitch: {},
+                                    $switch: {},
                                     ':active': {},
                                     cursor: 'pointer',
                                 }

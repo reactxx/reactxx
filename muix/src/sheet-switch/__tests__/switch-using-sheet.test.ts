@@ -66,7 +66,7 @@ Array [
 ******************************************
 ",
   Array [
-    "backgroundColor: blue /*root/$sheetSwitch.isClosed*/",
+    "backgroundColor: blue /*root/$switch.isClosed*/",
   ],
   "
 ******************************************
@@ -75,7 +75,7 @@ Array [
 ",
   Object {
     "backgroundColor": Object {
-      "tracePath": "root/$sheetSwitch.isClosed",
+      "tracePath": "root/$switch.isClosed",
       "value": "blue",
     },
   },
@@ -113,9 +113,9 @@ Array [
 ******************************************
 ",
   Array [
-    "backgroundColor: red /*root/$sheetSwitch.isOpened*/",
-    "borderColor: cyan /*root/$sheetSwitch.isOpened/$sheetSwitch.isOpened*/",
-    "backgroundColor: brown /*root/$native/$sheetSwitch.isOpened*/",
+    "backgroundColor: red /*root/$switch.isOpened*/",
+    "borderColor: cyan /*root/$switch.isOpened/$switch.isOpened*/",
+    "backgroundColor: brown /*root/$native/$switch.isOpened*/",
   ],
   "
 ******************************************
@@ -124,11 +124,11 @@ Array [
 ",
   Object {
     "backgroundColor": Object {
-      "tracePath": "root/$native/$sheetSwitch.isOpened",
+      "tracePath": "root/$native/$switch.isOpened",
       "value": "brown",
     },
     "borderColor": Object {
-      "tracePath": "root/$sheetSwitch.isOpened/$sheetSwitch.isOpened",
+      "tracePath": "root/$switch.isOpened/$switch.isOpened",
       "value": "cyan",
     },
   },
@@ -168,9 +168,9 @@ Array [
 ******************************************
 ",
   Array [
-    ".c { background-color:blue /*root/$sheetSwitch.isClosed*/ }",
+    ".c { background-color:blue /*root/$switch.isClosed*/ }",
     undefined,
-    ".d:hover { background-color:green /*root/$web/:hover/$sheetSwitch.isClosed[0]*/ }",
+    ".d:hover { background-color:green /*root/$web/:hover/$switch.isClosed[0]*/ }",
     undefined,
   ],
   "
@@ -179,8 +179,8 @@ Array [
 ******************************************
 ",
   Array [
-    ".d:hover { background-color:green /*root/$web/:hover/$sheetSwitch.isClosed[0]*/ }",
-    ".c { background-color:blue /*root/$sheetSwitch.isClosed*/ }",
+    ".d:hover { background-color:green /*root/$web/:hover/$switch.isClosed[0]*/ }",
+    ".c { background-color:blue /*root/$switch.isClosed*/ }",
   ],
   "
 ******************************************
@@ -214,11 +214,11 @@ Array [
 ******************************************
 ",
   Array [
-    ".a { background-color:red /*root/$sheetSwitch.isOpened*/ }",
-    ".b { border-color:cyan /*root/$sheetSwitch.isOpened/$sheetSwitch.isOpened*/ }",
+    ".a { background-color:red /*root/$switch.isOpened*/ }",
+    ".b { border-color:cyan /*root/$switch.isOpened/$switch.isOpened*/ }",
     undefined,
     undefined,
-    ".e:hover { background-color:yellow /*webOnly/$web/:hover/$sheetSwitch.isOpened*/ }",
+    ".e:hover { background-color:yellow /*webOnly/$web/:hover/$switch.isOpened*/ }",
   ],
   "
 ******************************************
@@ -226,9 +226,9 @@ Array [
 ******************************************
 ",
   Array [
-    ".e:hover { background-color:yellow /*webOnly/$web/:hover/$sheetSwitch.isOpened*/ }",
-    ".b { border-color:cyan /*root/$sheetSwitch.isOpened/$sheetSwitch.isOpened*/ }",
-    ".a { background-color:red /*root/$sheetSwitch.isOpened*/ }",
+    ".e:hover { background-color:yellow /*webOnly/$web/:hover/$switch.isOpened*/ }",
+    ".b { border-color:cyan /*root/$switch.isOpened/$switch.isOpened*/ }",
+    ".a { background-color:red /*root/$switch.isOpened*/ }",
   ],
   "
 ******************************************

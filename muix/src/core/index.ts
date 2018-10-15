@@ -5,11 +5,11 @@
 import { TCommonStyles, TSheeter, TVariants } from 'reactxx-typings'
 import { toClassNamesWithQuery } from 'reactxx-sheeter'
 import { transition_registerVariantHandler, transition_processDeffereds, transition_finalizePropsCode, TTransition } from 'reactxx-sheet-transition'
-import { widthsPipe, getBreakpoints } from 'reactxx-sheet-widths'
+import { widthsPipe } from 'reactxx-sheet-widths'
 import { sheetSwitch_registerVariantHandler, Consts, getCases } from 'reactxx-sheet-switch'
 
 export type getFlagsAll<R extends TSheeter.Shape = TSheeter.Shape> =
-    getCases<R> | getBreakpoints<R> // TSheeter.RulesetNamesAll<R> | 
+    getCases<R> //| getBreakpoints<R> // TSheeter.RulesetNamesAll<R> | 
 
 import { initGlobalState } from 'reactxx-with-styles'
 
@@ -35,18 +35,29 @@ export const initCore = () => {
         //applyLastWinStrategy: transition_applyLastWinStrategy,
 
         mergeSheetQueries: pipelineState => {
-            let cnt = 0
-            let res: Record<string, boolean>
+            let switchcnt = 0
+            let switchs: Record<string, boolean>
+            let widthscnt = 0
+            let widths: Record<string, boolean>
             pipelineState.pipeStates.forEach(p => {
+                if (!p || !p.sheetQuery) return
                 let flags
-                if (!p || !p.sheetQuery || !(flags = p.sheetQuery.$sheetSwitch)) return
-                switch (cnt) {
-                    case 0: res = flags; cnt++; break
-                    case 1: res = { ...res, ...flags }; cnt++; break
-                    default: Object.assign(res, flags); break
+                if (flags = p.sheetQuery.$switch) {
+                    switch (switchcnt) {
+                        case 0: switchs = flags; switchcnt++; break
+                        case 1: switchs = { ...switchs, ...flags }; switchcnt++; break
+                        default: Object.assign(switchs, flags); break
+                    }
+                }
+                if (flags = p.sheetQuery.$widths) {
+                    switch (widthscnt) {
+                        case 0: widths = flags; widthscnt++; break
+                        case 1: widths = { ...widths, ...flags }; widthscnt++; break
+                        default: Object.assign(widths, flags); break
+                    }
                 }
             })
-            return res ? { $sheetSwitch: res } : null
+            return !switchs && !widths ? null : !widths ? { $switch: switchs } : !switchs ? {$widths: widths} : {$widths: widths, $switch: switchs}
         }
 
     })
@@ -60,12 +71,12 @@ declare module 'reactxx-typings' {
 
     namespace TVariants {
 
-        interface VariantPart<T extends TCommonStyles.RulesetNativeIds, R extends TSheeter.Shape> {
-            [Consts.name]?: SheetSwitchPart<T, R>
-        }
-        type SheetSwitchPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
-            getFlagsAll<R> extends never ? never :
-            PartialRecord<getFlagsAll<R>, TSheeter.RulesetOrAtomized<T, R>>
+        // interface VariantPart<T extends TCommonStyles.RulesetNativeIds, R extends TSheeter.Shape> {
+        //     [Consts.name]?: SheetSwitchPart<T, R>
+        // }
+        // type SheetSwitchPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
+        //     getFlagsAll<R> extends never ? never :
+        //     PartialRecord<getFlagsAll<R>, TSheeter.RulesetOrAtomized<T, R>>
     }
 }
 
@@ -83,6 +94,10 @@ export interface TSBugHelper<R extends TSheeter.Shape> {
     sheetSwitchView?: TVariants.SheetSwitchPart<'View', R>
     sheetSwitchText?: TVariants.SheetSwitchPart<'Text', R>
     sheetSwitch$Web?: TVariants.SheetSwitchPart<'$Web', R>
+
+    sheetWidthsView?: TVariants.SheetWidthsPart<'View', R>
+    sheetWidthsText?: TVariants.SheetWidthsPart<'Text', R>
+    sheetWidths$Web?: TVariants.SheetWidthsPart<'$Web', R>
 
     transitionView?: TTransition.Transition<'View', R>
     transitionText?: TTransition.Transition<'Text', R>
