@@ -23,12 +23,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties  &
 
   if (classNameX) {
     let reduced = applyLastwinsStrategy(classNameX)
-    if (window.__DEV__) {
-      const res = {}
-      for (const p in reduced) res[p] = (reduced[p] as TAtomize.__dev_AtomicNative).value
-      reduced = res
-    }
-    props.style = reduced
+    props.style = finalClassNameStep(reduced)
   }
 
 
@@ -46,7 +41,16 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties  &
   return React.createElement(type, props, ...children)
 }
 
-export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastWinStrategyLow)
+export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastWinStrategyLow) as TAtomize.AtomicNativeLow
+
+export const finalClassNameStep = (lastWinResult: TAtomize.AtomicNativeLow) => {
+  if (window.__TRACE__) {
+    const res = {}
+    for (const p in lastWinResult) res[p] = (lastWinResult[p] as TAtomize.__dev_AtomicNative).value
+    return res
+  }
+  return lastWinResult
+}
 
 const applyLastWinStrategyLow: ApplyLastWinStrategyLow = (values, attemptType) => {
   const res: TAtomize.NativeStyle = {}

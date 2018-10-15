@@ -6,6 +6,8 @@ import { initPlatform } from "reactxx-tests";
     expect(ruleset2).toMatchInlineSnapshot()
     expect(ruleset1Wins).toMatchInlineSnapshot()
     expect(ruleset2Wins).toMatchInlineSnapshot()
+    expect(final1).toMatchInlineSnapshot()
+    expect(final2).toMatchInlineSnapshot()
 */
 
 describe("applyLastwinsStrategy simple", () => {
@@ -31,7 +33,9 @@ describe("applyLastwinsStrategy simple", () => {
       ruleset1,
       ruleset2,
       ruleset1Wins,
-      ruleset2Wins
+      ruleset2Wins,
+      final1,
+      final2
     } = WEB.defineRulesets(DATA);
 
     expect(ruleset1).toMatchInlineSnapshot(`
@@ -64,6 +68,8 @@ Array [
   "RESULT=d c b",
 ]
 `);
+    expect(final1).toMatchInlineSnapshot(`"b a d"`);
+    expect(final2).toMatchInlineSnapshot(`"d c b"`);
   });
   //*********************************************************
   //  WEB PRODUCTION
@@ -75,7 +81,9 @@ Array [
       ruleset1,
       ruleset2,
       ruleset1Wins,
-      ruleset2Wins
+      ruleset2Wins,
+      final1,
+      final2
     } = WEB.defineRulesets(DATA);
 
     expect(ruleset1).toMatchInlineSnapshot(`
@@ -102,6 +110,8 @@ Array [
   "RESULT=d c b",
 ]
 `);
+    expect(final1).toMatchInlineSnapshot(`"b a d"`);
+    expect(final2).toMatchInlineSnapshot(`"d c b"`);
   });
   //*********************************************************
   //  NATIVE DEVELOPMENT
@@ -114,7 +124,9 @@ Array [
       ruleset1,
       ruleset2,
       ruleset1Wins,
-      ruleset2Wins
+      ruleset2Wins,
+      final1,
+      final2
     } = NATIVE.defineRulesets(DATA);
 
     expect(ruleset1).toMatchInlineSnapshot(`
@@ -161,6 +173,20 @@ Object {
   },
 }
 `);
+    expect(final1).toMatchInlineSnapshot(`
+Object {
+  "color": "red",
+  "left": "10px",
+  "right": "20px",
+}
+`);
+    expect(final2).toMatchInlineSnapshot(`
+Object {
+  "color": "black",
+  "left": "10px",
+  "right": "20px",
+}
+`);
   });
   //*********************************************************
   //  NATIVE PRODUCTION
@@ -172,7 +198,9 @@ Object {
       ruleset1,
       ruleset2,
       ruleset1Wins,
-      ruleset2Wins
+      ruleset2Wins,
+      final1,
+      final2
     } = NATIVE.defineRulesets(DATA);
 
     expect(ruleset1).toMatchInlineSnapshot(`
@@ -207,6 +235,20 @@ Object {
 }
 `);
     expect(ruleset2Wins).toMatchInlineSnapshot(`
+Object {
+  "color": "black",
+  "left": "10px",
+  "right": "20px",
+}
+`);
+    expect(final1).toMatchInlineSnapshot(`
+Object {
+  "color": "red",
+  "left": "10px",
+  "right": "20px",
+}
+`);
+    expect(final2).toMatchInlineSnapshot(`
 Object {
   "color": "black",
   "left": "10px",
@@ -255,7 +297,9 @@ describe("applyLastwinsStrategy pseudo WEB", () => {
       ruleset1,
       ruleset2,
       ruleset1Wins,
-      ruleset2Wins
+      ruleset2Wins,
+      final1,
+      final2
     } = WEB.defineRulesets(WEB_DATA);
 
     expect(ruleset1).toMatchInlineSnapshot(`
@@ -296,5 +340,7 @@ Array [
   "RESULT=h g f e b",
 ]
 `);
+    expect(final1).toMatchInlineSnapshot(`"d c b a f"`);
+    expect(final2).toMatchInlineSnapshot(`"h g f e b"`);
   });
 });

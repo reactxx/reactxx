@@ -154,8 +154,8 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
       // only append if we got a class cached
       if (!cache.className) continue
 
-      if (window.__DEV__) {
-        const res = { ...cache, path: tracePath } as TAtomize.__dev_AtomicWeb
+      if (window.__TRACE__) {
+        const res = { cache, tracePath } as TAtomize.__dev_AtomicWeb
         res['toJSON'] = toJSON.bind(res)
         classNames.push(res)
         continue
@@ -166,14 +166,14 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
     }
   }
 
-  if (classNames.length===0) return null
+  if (classNames.length === 0) return null
   return newAtomicWeb(classNames)
 }
 
-function toJSON () { return dump(this) }
+function toJSON() { return dump(this) }
 
 export const dump = c => {
   if (!c) return
-  const { selector, declaration, path, media, support} = c as TAtomize.__dev_AtomicWeb
-  return `${support ? '@support' + support : ''}${media ? '@media ' + media : ''}${selector} { ${declaration} /*${path}*/ }`
+  const { cache: { selector, declaration, media, support }, tracePath } = c as TAtomize.__dev_AtomicWeb
+  return `${support ? '@support' + support : ''}${media ? '@media ' + media : ''}${selector} { ${declaration} /*${tracePath}*/ }`
 }

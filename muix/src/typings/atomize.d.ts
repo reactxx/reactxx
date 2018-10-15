@@ -7,8 +7,9 @@ declare namespace TAtomize {
   export type ToPlatformAtomizeRulesetProc = (ruleset: {}, tracePath?: string) => AtomicArray
   export interface Platform {
     toPlatformAtomizeRuleset: ToPlatformAtomizeRulesetProc
-    dumpAtomized: (classNames: AtomicArrayLow) => any[],
+    dumpAtomized: (classNames: AtomicArrayLow) => any,
     applyLastwinsStrategy: (values: AtomicArrayLow) => AtomicArrayLow
+    finalClassNameStep: (values: AtomicArrayLow) => string | Record<string, any>
   }
   export type GetPlatformTracePath = (value: Atomic) => string
   //export type ToPlatformClassName = (array: AtomicArray, propsPlatform: {style, className}) => void
@@ -56,7 +57,10 @@ declare namespace TAtomize {
   export type NativeStyle = Record<string, TNativeRuleValue>
 
   export type Atomic = AtomicNative | AtomicWeb
-  export interface __dev_AtomicWeb extends __dev_WebCache { }// { tracePath?: __dev_WebCache, value: string }
+  export interface __dev_AtomicWeb { 
+    tracePath?: string
+    cache?: __dev_WebCache
+  }// { tracePath?: __dev_WebCache, value: string }
   export interface __dev_WebCache {
     type: string
     className: string
@@ -65,7 +69,7 @@ declare namespace TAtomize {
     pseudo: string
     media: string
     support: string
-    path?: string
+    //path?: string
   }
   export type AtomicWeb =
     string |

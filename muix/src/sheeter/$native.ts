@@ -1,5 +1,5 @@
 import { TAtomize } from 'reactxx-typings'
-import { applyLastwinsStrategy } from './reacts/$native'
+import { applyLastwinsStrategy, finalClassNameStep } from './reacts/$native'
 
 export const platform: TAtomize.Platform = {
     toPlatformAtomizeRuleset: (style, tracePath) => {
@@ -10,9 +10,9 @@ export const platform: TAtomize.Platform = {
             if (propId.charAt(0) === '$') continue
             const at = {
                 propId,
-                value: window.__DEV__ ? { tracePath, value: style[propId] } : style[propId]
+                value: window.__TRACE__ ? { tracePath, value: style[propId] } : style[propId]
             } as TAtomize.AtomicNative
-            if (window.__DEV__) {
+            if (window.__TRACE__) {
                 at['toJSON'] = toJSON.bind(at)
             }
             res.push(at)
@@ -20,7 +20,8 @@ export const platform: TAtomize.Platform = {
         return res.length===0 ? null : res
     },
     dumpAtomized: array => array,
-    applyLastwinsStrategy
+    applyLastwinsStrategy,
+    finalClassNameStep
 }
 
 function toJSON() { return `${this.propId}: ${this.value.value} /*${this.value.tracePath}*/` }

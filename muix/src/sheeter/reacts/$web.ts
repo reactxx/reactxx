@@ -35,12 +35,8 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   const { classNameX, styleX } = props
 
   if (classNameX) {
-    let reduced = applyLastwinsStrategy(classNameX)
-    if (window.__DEV__) {
-      reduced = reduced.map((r: TAtomize.__dev_AtomicWeb) => r.className) as any
-    }
-
-    const className = reduced.join(' ')
+    let lastWinResult = applyLastwinsStrategy(classNameX)
+    const className = finalClassNameStep(lastWinResult)
     props.className = props.className ? className + ' ' + props.className : className
   }
 
@@ -50,6 +46,13 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 
   deleteSystemProps(props)
   return React.createElement(type, props, ...children)
+}
+
+export const finalClassNameStep = (lastWinResult: TAtomize.AtomicWebsLow) => {
+  if (window.__TRACE__) {
+    lastWinResult = lastWinResult.map((r: TAtomize.__dev_AtomicWeb) => r.cache.className) as any
+  }
+  return lastWinResult.join(' ')
 }
 
 export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastwinsStrategyLow) as TAtomize.AtomicWebsLow
@@ -82,8 +85,8 @@ const applyLastwinsStrategyLow = (values: TAtomize.AtomicWebs, attemptType: Atte
     if (defferedFound) continue // first attempt and deffered found => ignore other values
     // last win strategy
     let propId: string = value as string
-    if (window.__DEV__) {
-      propId = (value as TAtomize.__dev_AtomicWeb).className
+    if (window.__TRACE__) {
+      propId = (value as TAtomize.__dev_AtomicWeb).cache.className
     }
     propId = renderer.propIdCache[propId]
     if (!propId || usedPropIds[propId])

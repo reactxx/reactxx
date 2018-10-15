@@ -34,7 +34,7 @@ export const getRenderer = () => renderer
 
 export const dumpAtomized = (classNames: TAtomize.AtomicWebsLow) => {
   if (!classNames || classNames.length===0) return []
-  return window.__DEV__ ? classNames.map(c => dump(c)) : ['DUMP is available in window.__DEV__ only']
+  return window.__TRACE__ ? classNames.map(c => dump(c)) : ['DUMP is available in window.__DEV__ only']
 }
 
 // renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html

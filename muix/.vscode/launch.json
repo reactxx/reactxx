@@ -21,10 +21,10 @@
             "args": [
                 "--runInBand",  //https://jestjs.io/docs/en/cli.html
                 //"--testPathPattern=fela",
-                //"--testPathPattern=applyLastWinStrategy",
+                "--testPathPattern=applyLastWinStrategy",
                 //"--testPathPattern=atomize-sheet",
                 //"--testPathPattern=to-classname",
-                "--testPathPattern=sheet-switch",
+                //"--testPathPattern=sheet-switch",
                 "-u"
             ],
             //"preLaunchTask": "build",

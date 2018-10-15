@@ -1,6 +1,6 @@
 ﻿interface Window {
   isWeb:boolean
-  __DEV__:boolean
+  __TRACE__:boolean
 }
 
 declare module 'recompose/toRenderProps' {

@@ -69,6 +69,49 @@ describe("swich", () => {
       sheet.root,
       sheet.nativeOnly
     ]);
+    expect(sheet).toMatchInlineSnapshot(`
+Object {
+  "root": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          "backgroundColor: red /*root/$sheetSwitch.isOpened*/",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isOpened",
+            "type": "$sheetSwitch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "backgroundColor: blue /*root/$sheetSwitch.isClosed*/",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$sheetSwitch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "backgroundColor: brown /*root/$native/$sheetSwitch.isOpened*/",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isOpened",
+            "type": "$sheetSwitch",
+          },
+        ],
+      },
+    ],
+    "name": "root",
+    "~": "c",
+  },
+}
+`);
     expect(platform.dumpAtomized(atomizedSheet)).toMatchInlineSnapshot(`
 Array [
   "backgroundColor: red /*root/$sheetSwitch.isOpened*/",
@@ -103,13 +146,83 @@ Object {
 }
 `);
   });
-  it("WEB DEVELOPMENT", () => {
+  it("WEB", () => {
     initPlatform(true);
     const sheet = atomizeSheet<Shape>(createSheet());
     let atomizedSheet = toClassNamesWithQuery(query(true), [
       sheet.root,
       sheet.webOnly
     ]);
+    expect(sheet).toMatchInlineSnapshot(`
+Object {
+  "root": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          ".a { background-color:red /*root/$sheetSwitch.isOpened*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isOpened",
+            "type": "$sheetSwitch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".b { background-color:blue /*root/$sheetSwitch.isClosed*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$sheetSwitch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          null,
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".c:hover { background-color:green /*root/$web/:hover/$sheetSwitch.isClosed*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$sheetSwitch",
+          },
+        ],
+      },
+    ],
+    "name": "root",
+    "~": "c",
+  },
+  "webOnly": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          null,
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".d:hover { background-color:yellow /*webOnly/$web/:hover/$sheetSwitch.isOpened*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isOpened",
+            "type": "$sheetSwitch",
+          },
+        ],
+      },
+    ],
+    "name": "webOnly",
+    "~": "c",
+  },
+}
+`);
     expect(platform.dumpAtomized(atomizedSheet)).toMatchInlineSnapshot(`
 Array [
   ".a { background-color:red /*root/$sheetSwitch.isOpened*/ }",

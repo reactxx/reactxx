@@ -13,8 +13,8 @@
                 //"--testPathPattern=applyLastWinStrategy",
                 //"--testPathPattern=atomize-sheet",
                 //"--testPathPattern=to-classname",
-                "--testPathPattern=sheet-switch",
-                "-u"
+                //"--testPathPattern=sheet-switch",
+                //"-u"
                 //"src/core/tests/flow/drawer/__tests__/comp-test"
             ],
             "group": "test",
