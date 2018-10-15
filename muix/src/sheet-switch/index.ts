@@ -5,11 +5,15 @@ export const enum Consts {
     name = '$sheetSwitch'
 }
 
-export const sheetSwitch_registerVariantHandler = () => registerVariantHandler({
-    name: Consts.name,
-    toAtomicRuleset,
-    testAtomicRuleset
-})
+export const sheetSwitch_registerVariantHandler = () => {
+    if (notRegistered = !notRegistered) return 
+    registerVariantHandler({
+        name: Consts.name,
+        toAtomicRuleset,
+        testAtomicRuleset
+    })
+}
+let notRegistered = true
 
 export type getCases<R extends TSheeter.Shape = TSheeter.Shape> = keyof R['cases']
 

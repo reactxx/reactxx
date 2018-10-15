@@ -1,7 +1,7 @@
 import { TAtomize } from "reactxx-typings";
 import { platform } from "reactxx-sheeter";
 
-const web$applyLastwinsStrategy = (concated: TAtomize.AtomicWebsLow, merged: TAtomize.AtomicArrayLow) => {
+const web$dumpEx = (concated: TAtomize.AtomicWebsLow, merged: TAtomize.AtomicArrayLow) => {
   const dump = platform.dumpAtomized(merged) as string[];
   dump.push('SOURCE=' + concated
     .map((c: TAtomize.__dev_AtomicWeb) => typeof c === "string" ? c : c.cache.className)
@@ -23,8 +23,8 @@ export const WEB = {
     const res = {
       ruleset1: platform.dumpAtomized(rs1),
       ruleset2: platform.dumpAtomized(rs2),
-      ruleset1Wins: web$applyLastwinsStrategy(concat1, rsWin1),
-      ruleset2Wins: web$applyLastwinsStrategy(concat2, rsWin2),
+      ruleset1Wins: web$dumpEx(concat1, rsWin1),
+      ruleset2Wins: web$dumpEx(concat2, rsWin2),
       final1: platform.finalClassNameStep(rsWin1),
       final2: platform.finalClassNameStep(rsWin2),
     };
@@ -32,7 +32,7 @@ export const WEB = {
   }
 }
 
-const native$applyLastwinsStrategy = (concated: TAtomize.Atomic[], merged: TAtomize.AtomicArrayLow) =>
+const native$dumpEx = (concated: TAtomize.Atomic[], merged: TAtomize.AtomicArrayLow) =>
   platform.dumpAtomized(merged);
 
 export const NATIVE = {
@@ -46,8 +46,8 @@ export const NATIVE = {
     const res = {
       ruleset1: platform.dumpAtomized(rs1),
       ruleset2: platform.dumpAtomized(rs2),
-      ruleset1Wins: native$applyLastwinsStrategy(concat1, rsWin1),
-      ruleset2Wins: native$applyLastwinsStrategy(concat2, rsWin2),
+      ruleset1Wins: native$dumpEx(concat1, rsWin1),
+      ruleset2Wins: native$dumpEx(concat2, rsWin2),
       final1: platform.finalClassNameStep(rsWin1),
       final2: platform.finalClassNameStep(rsWin2),
     };
