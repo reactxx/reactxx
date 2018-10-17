@@ -4,23 +4,25 @@ import { TWithStyles } from 'reactxx-typings';
 
 export const innerStatePipe: TWithStyles.Pipe = (pipelineState, next) => {
   const pipeId = pipelineState.pipeCounter++
+  const render = () => {
+
+  }
   return () => {
     const { pipeStates, propsCode } = pipelineState
     // reset pipe state
     const pipeState: TWithStyles.PipeState = pipeStates[pipeId] = { }
 
     propsCode.setInnerState = setState => {
-      const { innerStateComponent, propsCode } = pipelineState
+      const { propsCode } = pipelineState
       const newState = setState(pipeState.innerState, propsCode)
       pipeState.innerState = pipeState.innerState ? {...pipeState.innerState, ...newState} : newState
-      if (innerStateComponent)
-        innerStateComponent.setState(null) // rerender
+      pipelineState.refreshInnerStateComponent() // rerender
     }
 
     return <InnerStateComponent
       pipelineState={pipelineState}
       pipeState={pipeState}
-      ref={comp => pipelineState.innerStateComponent = comp}>{next}</InnerStateComponent>
+      ref={comp => pipelineState.innerStateComponent = comp}>{render}</InnerStateComponent>
   }
 }
 

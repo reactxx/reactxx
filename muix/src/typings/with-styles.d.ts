@@ -12,10 +12,11 @@ declare namespace TWithStyles {
   export interface GlobalState {
     getDefaultTheme?: () => TTheme.Theme
     getPipes?: (systemPipes: SystemPipes, options: TWithStyles.ComponentOptions) => Pipe[]
+    getInnerStatePipes?: (systemPipes: SystemPipes, options: TWithStyles.ComponentOptions) => Pipe[]
     namedThemes?: { [themeName: string]: TTheme.Theme }
     finalizePropsCode?: FinishPropsCode
     //applyLastWinStrategy?: TAtomize.ToPlatformClassName
-    mergeInnerStates?: (pipelineState: TWithStyles.PipelineState) => TVariants.Query
+    //mergeInnerStates?: (pipelineState: TWithStyles.PipelineState) => TVariants.Query
     processDeffereds?: ProcessDeffereds
   }
 
@@ -30,6 +31,7 @@ declare namespace TWithStyles {
     sheetOrCreator?: TSheeter.SheetOrCreator
     CodeComponent?: TComponents.ComponentTypeCode<R>
     getPipes?: (systemPipes: SystemPipes, options: TWithStyles.ComponentOptions) => Pipe[]
+    getInnerStatePipes?: (systemPipes: SystemPipes, options: TWithStyles.ComponentOptions) => Pipe[]
     //codeHooks?: TVariants.CodeHooks<R>
     // computed props
     //withSheetQueryComponent?: boolean // codeHooks && codeHooks.innerStateToSheetQuer
@@ -50,6 +52,7 @@ declare namespace TWithStyles {
     //setInnerState?: TComponents.SetInnerState
     //innerState?: TComponents.InnerState
     innerStateComponent?: React.Component
+    refreshInnerStateComponent?: () => void
 
     sheetQuery?: TVariants.Query
     //sheetQueryComponent?: React.Component

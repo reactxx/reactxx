@@ -1,12 +1,12 @@
-import React from 'react'
-import { TWithStyles, TSheeter, TComponents, TAtomize, TTheme, TVariants } from 'reactxx-typings'
-import { deepMerges, globalOptions } from 'reactxx-sheeter'
+import React from 'react';
+import { deepMerges, globalOptions } from 'reactxx-sheeter';
+import { TAtomize, TComponents, TSheeter, TWithStyles } from 'reactxx-typings';
+import { codePipe } from './pipe-code';
+import { initPipe } from './pipe-init';
+import { innerStatePipe } from './pipe-inner-state';
+import { propsCodePipe } from './pipe-props-code';
+import { defaultThemeName, themePipe } from './pipe-theme';
 
-import { themePipe } from './pipe-theme'
-import { defaultThemeName, initPipe } from './pipe-init'
-import { propsCodePipe } from './pipe-props-code'
-import { innerStatePipe } from './pipe-inner-state'
-import { codePipe } from './pipe-code'
 
 export const initGlobalState = (options: TWithStyles.GlobalState = null) => {
 
@@ -47,9 +47,10 @@ const withStyles = (componentState: TWithStyles.ComponentOptions) => {
       uniqueId: componentState.displayName + ' *' + componentInstaneCounter++,
       props: this.props,
       pipeCounter: 1,
+      refreshInnerStateComponent: () => this.pipelineState.innerStateComponent && this.pipelineState.innerStateComponent.setState(null)
     } as TWithStyles.PipelineState)
 
-    pipelineState = this.initPipelineState()
+    pipelineState: TWithStyles.PipelineState = this.initPipelineState()
 
     pipeline = createPipeline(
       this.pipelineState,
@@ -94,7 +95,6 @@ const finishComponentState = (
     CodeComponent,
     withTheme: typeof mergedOptions.sheetOrCreator === 'function' ? true : mergedOptions.withTheme,
     displayName: `${mergedOptions.displayName || CodeComponent.displayName || CodeComponent['name'] || 'unknown'} (${componentId})`,
-    //withSheetQueryComponent: !!CodeComponent.fillSheetQuery, // mergedOptions.codeHooks && !!mergedOptions.codeHooks.innerStateToSheetQuery,
   }
 
   return res

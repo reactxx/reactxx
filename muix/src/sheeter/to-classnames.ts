@@ -3,11 +3,10 @@ import { atomizeRuleset, isAtomizedRuleset, isAtomicArray } from './atomize'
 import { testConditions } from './variants'
 
 export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, rulesets: TSheeter.ClassNameOrAtomized) => {
-    if (!rulesets) return finishAtomicArray([] as any, state)
+    if (!rulesets) return signAtomicArray([] as any, state)
 
-    if (isAtomicArray(rulesets)) {
-        return rulesets.state === state ? rulesets : finishAtomicArray(/*flat copy*/[...rulesets] as any, state)
-    }
+    if (isAtomicArray(rulesets))
+        return rulesets.state === state ? rulesets : signAtomicArray(/*flat copy*/[...rulesets] as any, state)
 
     const values: TAtomize.Atomic[][] = []
 
@@ -36,7 +35,7 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, rulesets
 
     // concat values
     const res = Array.prototype.concat.apply([], values) as TAtomize.AtomicArray
-    return finishAtomicArray(res, state)
+    return signAtomicArray(res, state)
 }
 
 export const deleteSystemProps = props => propsToDelete.forEach(p => delete props[p])
@@ -50,7 +49,7 @@ const propsToDelete: string[] = [ //TComponents.CommonPropertiesCodeKeys[] = [
     'sheetQuery', 'classes', 'toClassNames', 'styleX', 'classNameX', 'theme'
 ]
 
-const finishAtomicArray = (res: TAtomize.AtomicArray, state: TWithStyles.PipelineState) => {
+const signAtomicArray = (res: TAtomize.AtomicArray, state: TWithStyles.PipelineState) => {
     res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
     res.state = state
     return res

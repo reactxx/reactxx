@@ -36,34 +36,6 @@ export const initCore = () => {
 
         processDeffereds: transition_processDeffereds,
 
-        //applyLastWinStrategy: transition_applyLastWinStrategy,
-
-        mergeInnerStates: pipelineState => {
-            let switchcnt = 0
-            let switchs: Record<string, boolean>
-            let widthscnt = 0
-            let widths: Record<string, boolean>
-            pipelineState.pipeStates.forEach(p => {
-                if (!p || !p.innerState) return
-                let flags
-                if (flags = p.innerState.$switch) {
-                    switch (switchcnt) {
-                        case 0: switchs = flags; switchcnt++; break
-                        case 1: switchs = { ...switchs, ...flags }; switchcnt++; break
-                        default: Object.assign(switchs, flags); break
-                    }
-                }
-                if (flags = p.innerState.$widths) {
-                    switch (widthscnt) {
-                        case 0: widths = flags; widthscnt++; break
-                        case 1: widths = { ...widths, ...flags }; widthscnt++; break
-                        default: Object.assign(widths, flags); break
-                    }
-                }
-            })
-            return !switchs && !widths ? null : !widths ? { $switch: switchs } : !switchs ? {$widths: widths} : {$widths: widths, $switch: switchs}
-        }
-
     })
 }
 let initCoreCalled = false
