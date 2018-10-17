@@ -7,7 +7,7 @@ import { TComponents } from 'reactxx-typings'
 
 import { Shape } from 'reactxx-core/tests/flow/shape'
 import { sheet } from 'reactxx-core/tests/flow/drawer/sheet'
-import { props, cascading, width, fillSheetQuery, componentOptions, classNameX, styleX } from 'reactxx-core/tests/flow/drawer/props'
+import { props, cascading, width, fillInnerState, componentOptions, classNameX, styleX } from 'reactxx-core/tests/flow/drawer/props'
 
 //https://hackernoon.com/testing-react-components-with-jest-and-enzyme-41d592c174f  
 //https://medium.com/opendoor-labs/testing-react-components-with-jest-a7e8e4d312d8
@@ -17,7 +17,7 @@ export const flowSource = {
     componentOptions,
     sheet,
     width,
-    fillSheetQuery,
+    fillInnerState,
     cascading,
     classNameX,
     styleX,
@@ -25,7 +25,7 @@ export const flowSource = {
 }
 
 const comp: TComponents.SFCCode<Shape> = props => <div></div>
-comp.fillSheetQuery = flowSource.fillSheetQuery
+//comp.fillSheetQuery = flowSource.fillSheetQuery
 
 const Comp = withStylesCreator<Shape>(flowSource.sheet, comp, flowSource.componentOptions)()
 

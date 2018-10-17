@@ -23,7 +23,7 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, rulesets
 
         for (let j = 0; j < val.list.length; j++) {
             const rsi = val.list[j]
-            if (!testConditions(rsi.conditions, state && state.sheetQuery)) continue
+            if (!testConditions(rsi.conditions, state && state.propsCode.mergedInnerState)) continue
             values.push(rsi.deffered ? [rsi as TAtomize.Deffered] : rsi.atomicArray)
         }
 
@@ -38,9 +38,6 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, rulesets
     const res = Array.prototype.concat.apply([], values) as TAtomize.AtomicArray
     return finishAtomicArray(res, state)
 }
-
-// export const toClassNames = (...rulesets: TSheeter.RulesetItem[]) => toClassNamesWithQuery({}, null, rulesets)
-// export const toClassNamesWithTheme = (theme, ...rulesets: TSheeter.RulesetItem[]) => toClassNamesWithQuery({}, theme, rulesets)
 
 export const deleteSystemProps = props => propsToDelete.forEach(p => delete props[p])
 

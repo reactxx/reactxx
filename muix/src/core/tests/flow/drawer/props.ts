@@ -32,13 +32,10 @@ export const componentOptions: TWithStyles.ComponentOptions<Shape> = {
     }
 }
 
-export const fillSheetQuery: TComponents.FillSheetQuery<Shape> = (props, state) => {
-    state.sheetQuery = ts.query = {
-        $transitionGroups: {
-            leftDrawer: state.data.drawerOpened
-        } 
+export const fillInnerState: TComponents.ModifyInnerStateProc<Shape> = (props, innerState) =>
+    innerState.$transitionGroups = {
+        leftDrawer: innerState.drawerOpened
     }
-}
 
 export const cascading: TComponents.Props<Shape> = {
     classes: { root: {}, label: {} },
@@ -52,7 +49,7 @@ export const props: TComponents.Props<Shape> = {
 export const classNameX: TSheeter.RulesetOrAtomized<'View', Shape> = [{
 
 }, {
-    
+
 }]
 
 export const styleX: TSheeter.StyleOrCreator<Shape> = {

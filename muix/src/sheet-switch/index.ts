@@ -45,7 +45,6 @@ declare module 'reactxx-typings' {
 //*********************************************************
 //  PRIVATE
 //*********************************************************
-
 interface SheetSwitchCondition extends TVariants.Condition {
     type: Consts.name
     case: string
@@ -77,4 +76,5 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
 
 const testAtomicRuleset = (cond: SheetSwitchCondition, query) =>
     query && query.$switch && query.$switch[cond.case]
+
 

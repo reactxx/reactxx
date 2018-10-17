@@ -1,23 +1,6 @@
 import { TComponents, TAtomize, TSheeter } from 'reactxx-typings';
 import { isAtomicArray } from './atomize'
-
-// export const mergeFlags = (sources: Record<string, true>[]) => {
-//     if (!sources || sources.length === 0)
-//         return null
-//     let res: Record<string, true> = null
-//     let canModify = false
-//     if (Array.isArray(sources)) sources.forEach(s => {
-//         if (!s) return
-//         else if (!res) res = s
-//         else if (canModify) Object.assign(res, s)
-//         else {
-//             res = { ...res, ...s }
-//             canModify = true
-//         }
-//     })
-//     return res
-// }
-
+import { deepMerge, deepMerges } from './utils/deep-merge'
 
 export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOrAtomized[]) => {
     if (!sources)
@@ -108,14 +91,17 @@ export const mergeSheet = (target: TAtomize.Sheet, source: TAtomize.Sheet, inPla
     return target
 }
 
-export const mergeSheets = (target: TAtomize.Sheet, sources: TAtomize.Sheet[]) => {
-    if (!sources || sources.length === 0) return target
-    let inPlace = false
-    let res = target
+export const mergeSheets = (sources: TAtomize.Sheet[]) => {
+    if (!sources || sources.length === 0) return null
+    let count = 0
+    let res = null
     sources.forEach(src => {
         if (!src) return
-        res = mergeSheet(res, src, inPlace)
-        inPlace = true
+        switch (count) {
+            case 0: res = src; count++; break
+            case 1: res = mergeSheet(res, src, false); count++; break
+            default: res = mergeSheet(res, src, true); count++; break
+        }
     })
     return res
 }
@@ -152,20 +138,18 @@ export const mergeCodeProps = (sources: (TComponents.PropsCode | TComponents.Pro
     return res
 }
 
-// export const mergeUtil = (objs: {}[]) => {
-//     if (!objs || objs.length===0) return null
-//     let res: TComponents.PropsCode = null
-//     let canModifyRes = false
-//     objs.forEach(src => {
-//         if (!src) return
-//         if (!res)
-//             res = src
-//         else if (canModifyRes)
-//             Object.assign(res, src)
-//         else {
-//             res = { ...res, ...src }
-//             canModifyRes = true
-//         }
-//     })
-//     return res
-// }
+export const mergeDeep = (sources: {}[]) => {
+    if (!sources || sources.length === 0) return null
+    let count = 0
+    let res = null
+    sources.forEach(src => {
+        if (!src) return
+        switch (count) {
+            case 0: res = src; count++; break
+            case 1: res = deepMerges({}, [res, src]); count++; break
+            default: res = deepMerge(res, src); count++; break
+        }
+    })
+    return res
+}
+

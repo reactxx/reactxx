@@ -2,9 +2,11 @@ import React from 'react'
 import { TWithStyles, TSheeter, TComponents, TAtomize, TTheme, TVariants } from 'reactxx-typings'
 import { deepMerges, globalOptions } from 'reactxx-sheeter'
 
-import { lastPipe } from './pipe-last'
-import { firstPipe } from './pipe-first'
-import { defaultThemeName } from './themer'
+import { themePipe } from './pipe-theme'
+import { defaultThemeName, initPipe } from './pipe-init'
+import { propsCodePipe } from './pipe-props-code'
+import { innerStatePipe } from './pipe-inner-state'
+import { codePipe } from './pipe-code'
 
 export const initGlobalState = (options: TWithStyles.GlobalState = null) => {
 
@@ -30,31 +32,40 @@ export interface TProvider<R extends TSheeter.Shape> { Provider: React.Component
 //  PRIVATE
 //*********************************************************
 
-const withStyles = (componentState: TWithStyles.ComponentOptions) => {
+const systemPipes: TWithStyles.SystemPipes = {
+  firsts: [themePipe, initPipe],
+  lasts: [propsCodePipe, innerStatePipe, codePipe]
+}
 
-  //const componentState = componentStateProc()
+const withStyles = (componentState: TWithStyles.ComponentOptions) => {
 
   class Styled extends React.Component<TComponents.Props> {
 
-    pipelineState: TWithStyles.PipelineState = {
+    initPipelineState = () => ({
       ...componentState,
       // instance props
-      id: componentState.displayName + ' *' + componentInstaneCounter++,
+      uniqueId: componentState.displayName + ' *' + componentInstaneCounter++,
       props: this.props,
       pipeCounter: 1,
-    }
+    } as TWithStyles.PipelineState)
 
-    pipeline = (() => {
-      if (globalOptions.createPipeline)
-        return firstPipe(this.pipelineState,
-          globalOptions.createPipeline(this.pipelineState,
-            lastPipe(this.pipelineState, null)))
-      else
-        return firstPipe(this.pipelineState,
-          lastPipe(this.pipelineState, null))
-    })()
+    pipelineState = this.initPipelineState()
+
+    pipeline = createPipeline(
+      this.pipelineState,
+      componentState.getPipes
+        ? componentState.getPipes(systemPipes, componentState)
+        : globalOptions.getPipes(systemPipes, componentState)
+          ? globalOptions.getPipes(systemPipes, componentState)
+          : [...systemPipes.firsts, ...systemPipes.lasts]
+    )
 
     render() {
+      // reset pipelineState (must be INPLACE!!!)
+      const { pipelineState } = this
+      for (const p in pipelineState) delete pipelineState[p]
+      Object.assign(pipelineState, this.initPipelineState())
+      // return pipeline result
       return this.pipeline()
     }
 
@@ -70,7 +81,7 @@ const finishComponentState = (
   sheetOrCreator: TSheeter.SheetOrCreator, CodeComponent: TComponents.ComponentTypeCode,
   componentState: TWithStyles.ComponentOptions, overrideComponentState: TWithStyles.ComponentOptions
 ) => {
-  const mergedOptions:TWithStyles.ComponentOptions = componentState && overrideComponentState ?
+  const mergedOptions: TWithStyles.ComponentOptions = componentState && overrideComponentState ?
     deepMerges({}, [componentState, overrideComponentState]) : componentState ?
       componentState : overrideComponentState ?
         overrideComponentState : {}
@@ -83,10 +94,18 @@ const finishComponentState = (
     CodeComponent,
     withTheme: typeof mergedOptions.sheetOrCreator === 'function' ? true : mergedOptions.withTheme,
     displayName: `${mergedOptions.displayName || CodeComponent.displayName || CodeComponent['name'] || 'unknown'} (${componentId})`,
-    withSheetQueryComponent: !!CodeComponent.fillSheetQuery, // mergedOptions.codeHooks && !!mergedOptions.codeHooks.innerStateToSheetQuery,
+    //withSheetQueryComponent: !!CodeComponent.fillSheetQuery, // mergedOptions.codeHooks && !!mergedOptions.codeHooks.innerStateToSheetQuery,
   }
 
   return res
+}
+
+function createPipeline(pipelineState: TWithStyles.PipelineState, pipes: TWithStyles.Pipe[], lastPipeIdx = 0): TWithStyles.ReactNodeCreator {
+  if (lastPipeIdx >= pipes.length) return null
+  const actPipe = pipes[lastPipeIdx]
+  return actPipe
+    ? actPipe(pipelineState, createPipeline(pipelineState, pipes, lastPipeIdx + 1))
+    : createPipeline(pipelineState, pipes, lastPipeIdx + 1)
 }
 
 let componentTypeCounter = 0 // counter of component types

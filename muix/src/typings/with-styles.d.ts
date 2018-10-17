@@ -3,14 +3,19 @@ import { TAtomize, TComponents, TSheeter, TTheme, TVariants } from './index'
 
 declare namespace TWithStyles {
 
+  export interface SystemPipes {
+    firsts: Pipe[]
+    lasts: Pipe[]
+  }
+
   // application options
   export interface GlobalState {
     getDefaultTheme?: () => TTheme.Theme
-    createPipeline?: Pipe
+    getPipes?: (systemPipes: SystemPipes, options: TWithStyles.ComponentOptions) => Pipe[]
     namedThemes?: { [themeName: string]: TTheme.Theme }
     finalizePropsCode?: FinishPropsCode
     //applyLastWinStrategy?: TAtomize.ToPlatformClassName
-    mergeSheetQueries?: (pipelineState: TWithStyles.PipelineState) => TVariants.Query
+    mergeInnerStates?: (pipelineState: TWithStyles.PipelineState) => TVariants.Query
     processDeffereds?: ProcessDeffereds
   }
 
@@ -18,44 +23,41 @@ declare namespace TWithStyles {
   export type ProcessDeffereds = (values: TAtomize.AtomicArray, defferedIdxs:number[], state: TWithStyles.PipelineState) => void
 
   // component type options
-  export interface ComponentOptions<R extends TSheeter.Shape = TSheeter.Shape> {
+  export interface ComponentOptions<R extends TSheeter.Shape = TSheeter.Shape> extends TVariants.ComponentOptions{
     displayName?: string
     defaultProps?: TComponents.Props<R>
     withTheme?: boolean
     sheetOrCreator?: TSheeter.SheetOrCreator
     CodeComponent?: TComponents.ComponentTypeCode<R>
+    getPipes?: (systemPipes: SystemPipes, options: TWithStyles.ComponentOptions) => Pipe[]
     //codeHooks?: TVariants.CodeHooks<R>
     // computed props
-    withSheetQueryComponent?: boolean // codeHooks && codeHooks.innerStateToSheetQuer
+    //withSheetQueryComponent?: boolean // codeHooks && codeHooks.innerStateToSheetQuer
     componentId?: number
   }
 
   // component instance options
   export interface PipelineState extends ComponentOptions<TSheeter.Shape> {
-    id?: string
+    uniqueId?: string
     props?: TComponents.Props
     pipeCounter?: number
 
     propsCode?: TComponents.PropsCode
     pipeStates?: PipeState[]
-    sheet?: TAtomize.Sheet
+    //sheet?: TAtomize.Sheet
     theme?: TSheeter.getTheme
 
+    //setInnerState?: TComponents.SetInnerState
+    //innerState?: TComponents.InnerState
+    innerStateComponent?: React.Component
+
     sheetQuery?: TVariants.Query
-    sheetQueryComponent?: SheetQueryComponent
+    //sheetQueryComponent?: React.Component
   }
-
-  export interface SheetQueryComponentProps {
-    pipelineState: TWithStyles.PipelineState
-    pipeState: PipeState
-  }
-
-  export type SheetQueryComponent = React.Component<SheetQueryComponentProps, TVariants.Query> //{
 
   export interface PipeState extends TVariants.PipeState {
     codeProps?: TComponents.PropsCode | TComponents.PropsCode[]
-    sheetQuery?: TVariants.Query
-    data?: any
+    innerState?: TComponents.InnerState
 
     classNameX?: TAtomize.Ruleset
     styleX?: TSheeter.StyleOrAtomized

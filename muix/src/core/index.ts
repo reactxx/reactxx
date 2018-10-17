@@ -6,7 +6,7 @@ import { TCommonStyles, TSheeter, TVariants } from 'reactxx-typings'
 import { toClassNamesWithQuery } from 'reactxx-sheeter'
 import { transition_registerVariantHandler, transition_processDeffereds, transition_finalizePropsCode, TTransition } from 'reactxx-sheet-transition'
 import { widthsPipe } from 'reactxx-sheet-widths'
-import { sheetSwitch_registerVariantHandler, Consts, getCases } from 'reactxx-sheet-switch'
+import { sheetSwitch_registerVariantHandler, getCases } from 'reactxx-sheet-switch'
 
 export type getFlagsAll<R extends TSheeter.Shape = TSheeter.Shape> =
     getCases<R> //| getBreakpoints<R> // TSheeter.RulesetNamesAll<R> | 
@@ -22,10 +22,14 @@ export const initCore = () => {
 
     initGlobalState({
 
-        createPipeline: widthsPipe,
+        getPipes: (systemPipes, options) => [
+            ...systemPipes.firsts, 
+            widthsPipe, 
+            ...systemPipes.lasts
+        ],
 
         finalizePropsCode: state => {
-            state.withSheetQueryComponent = true
+            //state.withSheetQueryComponent = true
             transition_finalizePropsCode(state)
             state.propsCode.toClassNames = rulesets => toClassNamesWithQuery(state, rulesets)
         },
@@ -34,22 +38,22 @@ export const initCore = () => {
 
         //applyLastWinStrategy: transition_applyLastWinStrategy,
 
-        mergeSheetQueries: pipelineState => {
+        mergeInnerStates: pipelineState => {
             let switchcnt = 0
             let switchs: Record<string, boolean>
             let widthscnt = 0
             let widths: Record<string, boolean>
             pipelineState.pipeStates.forEach(p => {
-                if (!p || !p.sheetQuery) return
+                if (!p || !p.innerState) return
                 let flags
-                if (flags = p.sheetQuery.$switch) {
+                if (flags = p.innerState.$switch) {
                     switch (switchcnt) {
                         case 0: switchs = flags; switchcnt++; break
                         case 1: switchs = { ...switchs, ...flags }; switchcnt++; break
                         default: Object.assign(switchs, flags); break
                     }
                 }
-                if (flags = p.sheetQuery.$widths) {
+                if (flags = p.innerState.$widths) {
                     switch (widthscnt) {
                         case 0: widths = flags; widthscnt++; break
                         case 1: widths = { ...widths, ...flags }; widthscnt++; break

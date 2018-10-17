@@ -11,8 +11,8 @@ export const widthsPipe: TWithStyles.Pipe = (pipelineState, next) => {
                     [widthName]: true
                 }
             },
-            sheetQuery: {
-                $switch: {
+            innerState: {
+                $widths: {
                     [widthName]: true
                 }
             }
@@ -23,7 +23,7 @@ export const widthsPipe: TWithStyles.Pipe = (pipelineState, next) => {
         const { pipeStates, props: { sheetWidths } } = pipelineState
         // UNDO
         delete pipeStates[pipeId]
-        if (!sheetWidths) return next()
+        if (!sheetWidths || (window.isWeb && !pipelineState.withSheetWidthsProp)) return next()
         return <div>{render}</div> // TODO width consumer: 
     }
 }

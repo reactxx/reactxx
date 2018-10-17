@@ -57,35 +57,32 @@ declare namespace TComponents {
 
   //******************** Cross platform component code props
 
-  export type PropsCode<R extends Shape = Shape> = PartialOverwrite<
-    TSheeter.getProps<R>, CommonPropertiesCode<R> &
+  export type PropsCode<R extends Shape = Shape> = PartialOverwrite<TSheeter.getProps<R>,
+    CommonPropertiesCode<R> &
     TVariants.PropsCodePart<R> &
-    EventsNative &
+    EventsNative & 
     EventsWeb>
 
   export interface CommonPropertiesCode<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
     classNameX?: TAtomize.Ruleset
     styleX?: TSheeter.StyleItem
-    children?: React.ReactNode
     classes?: TAtomize.Sheet<R>
     toClassNames?: (rulesets: TSheeter.RulesetOrAtomized) => TAtomize.AtomicArray
     theme?: TSheeter.getTheme<R>
-    setInnerState?: (setState: (prevState: TSheeter.getInnerState<R>, props: PropsCode<R>) => TSheeter.getInnerState<R>) => void
+    setInnerState?: SetInnerState<R> // modify innerStatePipe.pipeState.innerState and call InnerStateComponent.setState
+    mergedInnerState?: TComponents.InnerState<R> // merged all pipe's pipeState.innerState (in InnerStateComponent.render)
   }
+
+  export type SetInnerState<R extends TSheeter.Shape = TSheeter.Shape> = (setState: (prevState: InnerState<R>, props: PropsCode<R>) => InnerState<R>) => void
 
   export type CommonPropertiesCodeKeys = keyof PropsCode
 
-  export type SFCCode<R extends Shape = Shape> = React.SFC<PropsCode<R>> & FillSheetQueryProp<R>
-  export type ComponentTypeCode<R extends Shape = Shape> = React.ComponentType<PropsCode<R>> & FillSheetQueryProp<R>
-  export type FillSheetQuery<R extends Shape> = (props: PropsCode<R>, pipeState?: PipeState<R>) => void
-  export interface FillSheetQueryProp<R extends Shape> {
-    fillSheetQuery?: FillSheetQuery<R>
+  export type SFCCode<R extends Shape = Shape> = React.SFC<PropsCode<R>> & ModifyInnerStateProp<R>
+  export type ComponentTypeCode<R extends Shape = Shape> = React.ComponentType<PropsCode<R>> & ModifyInnerStateProp<R>
+    export type ModifyInnerStateProc<R extends Shape> = (props: PropsCode<R>, pipeState?: InnerState<R>) => void
+  export interface ModifyInnerStateProp<R extends Shape> {
+    modifyInnerState?: ModifyInnerStateProc<R>
   }
-  export interface PipeState<R extends Shape> {
-    sheetQuery?: TVariants.Query
-    data?: TSheeter.getInnerState<R>
-  }
-
 
   /******************************************
     EVENTS

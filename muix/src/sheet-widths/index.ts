@@ -1,6 +1,6 @@
 export * from './pipe'
 
-import { TCommonStyles, TSheeter, TWithStyles } from 'reactxx-typings'
+import { TCommonStyles, TSheeter, TVariants } from 'reactxx-typings'
 import { registerVariantHandler, atomizeRulesetInner, wrapPseudoPrefixes } from 'reactxx-sheeter'
 
 export const enum Consts {
@@ -37,6 +37,10 @@ declare module 'reactxx-typings' {
             sheetWidths?: PropsBreakpoints<R, boolean>
         }
 
+        interface ComponentOptions {
+            withSheetWidthsProp?: boolean // PropsCodePart contains sheetWidths prop (WEB then needs to listen to width change)
+        }
+
         // interface CodeHooks<R extends TSheeter.Shape> {
         //     onWidthChanged?: (oldBreak: getBreakpoints<R>, newBreak: getBreakpoints<R>) => void
         // }
@@ -60,4 +64,37 @@ declare module 'reactxx-typings' {
 //  PRIVATE
 //*********************************************************
 
-let toAtomicRuleset, testAtomicRuleset
+interface SheetSwitchCondition extends TVariants.Condition {
+    type: Consts.name
+    case: string
+}
+
+const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.RulesetOrAtomized>> = (
+    list, widths, path, _pseudoPrefixes, _conditions
+) => {
+    const pseudoPrefixes = window.isWeb ? [..._pseudoPrefixes] : _pseudoPrefixes
+    const conditions = (p: string) =>
+        window.isWeb ? _conditions : [..._conditions, { type: Consts.name, case: p } as SheetSwitchCondition]
+    for (const p in widths) {
+        const casep = widths[p] as TSheeter.Ruleset
+        if (Array.isArray(casep))
+            casep.forEach((ruleset, idx) =>
+                atomizeRulesetInner(
+                    list, ruleset,
+                    `${path}/$switch.${p}[${idx}]`,
+                    pseudoPrefixes,
+                    conditions(p),
+                    wrapPseudoPrefixes(ruleset, pseudoPrefixes))
+            )
+        else
+            atomizeRulesetInner(
+                list, casep,
+                `${path}/$switch.${p}`,
+                pseudoPrefixes,
+                conditions(p),
+                wrapPseudoPrefixes(casep, pseudoPrefixes))
+    }
+}
+
+const testAtomicRuleset = (cond: SheetSwitchCondition, query) =>
+    query && query.$switch && query.$switch[cond.case]

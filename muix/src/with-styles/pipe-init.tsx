@@ -3,21 +3,31 @@ import warning from 'warning';
 import { TTheme, TAtomize, TSheeter, TWithStyles } from 'reactxx-typings'
 import { mergeSheet, globalOptions, atomizeRuleset, atomizeSheet, atomizeStyle } from 'reactxx-sheeter'
 
-export const applyTheme = (pipeId: number, theme: TTheme.Theme, pipelineState: TWithStyles.PipelineState) => {
+export const initPipe: TWithStyles.Pipe = (pipelineState, next) => {
+  const pipeId = pipelineState.pipeCounter++
+  return () => {
+    applyTheme(pipeId, pipelineState)
+    return next()
+  }
+}
+
+
+export const applyTheme = (pipeId: number, pipelineState: TWithStyles.PipelineState) => {
   warning(pipeId > 0, 'pipe-first.pipeId must be greater that zero')
 
-  const { props: { classes, classNameX, styleX, themedProps, ...propsRest }, defaultProps } = pipelineState
-
-  pipelineState.pipeStates = []
-  pipelineState.theme = theme
+  const { props: { classes, classNameX, styleX, themedProps, ...propsRest }, theme, sheetOrCreator, defaultProps, componentId } = pipelineState
 
   if (defaultProps) {
-    const { classNameX: defaultClassNameX, styleX: defaultStyleX, themedProps: defaultThemedProps, ...defaultPropsRest } = defaultProps
-    // defaultProps.classes is merged and cached with sheet in createSheetWithTheme
+    const { classNameX, styleX, themedProps, classes, ...defaultPropsRest } = defaultProps
     pipelineState.pipeStates[0] = {
-      codeProps: [defaultPropsRest, defaultThemedProps ? defaultThemedProps(theme) : null],
-      classNameX: atomizeRuleset(defaultClassNameX, theme),
-      styleX: atomizeStyle(defaultStyleX, theme),
+      codeProps: [defaultPropsRest, themedProps ? themedProps(theme) : null],
+      classes: sheetFromThemeCache(componentId, sheetOrCreator, theme, classes),
+      classNameX: atomizeRuleset(classNameX, theme),
+      styleX: atomizeStyle(styleX, theme),
+    }
+  } else {
+    pipelineState.pipeStates[0] = {
+      classes: sheetFromThemeCache(componentId, sheetOrCreator, theme, null),
     }
   }
 
@@ -28,7 +38,7 @@ export const applyTheme = (pipeId: number, theme: TTheme.Theme, pipelineState: T
     styleX: atomizeStyle(styleX, theme),
   }
 
-  pipelineState.sheet = sheetFromThemeCache(pipelineState)
+  //pipelineState.sheet = sheetFromThemeCache(pipelineState, defaultClasses)
 }
 
 export const registerTheme = (name: string, theme: TTheme.Theme) => {
@@ -58,18 +68,18 @@ export const defaultThemeName = '*default-theme*'
 //  PRIVATE
 //*********************************************************
 
-const sheetFromThemeCache = (state: TWithStyles.PipelineState) => {
-  const { componentId, defaultProps, sheetOrCreator } = state
-  const theme = state.theme as TTheme.Theme
-  const cache = theme ? theme.$cache ? theme.$cache  : (theme.$cache = {}) : $cache
+const sheetFromThemeCache = (
+  componentId: number, sheetOrCreator: TSheeter.SheetOrCreator, theme: TTheme.Theme, defaultClasses: TSheeter.PartialSheetOrCreator
+) => {
+  const cache = theme ? theme.$cache ? theme.$cache : (theme.$cache = {}) : $cache
 
   let value: TAtomize.Sheet = cache[componentId]
   if (value) return value
 
   value = atomizeSheet(sheetOrCreator, theme)
-  if (defaultProps && defaultProps.classes) {
-    const defaultClasses = atomizeSheet(defaultProps.classes, theme)
-    mergeSheet(value, defaultClasses, true)
+  if (defaultClasses) {
+    const _defaultClasses = atomizeSheet(defaultClasses, theme)
+    mergeSheet(value, _defaultClasses, true)
   }
 
   cache[componentId] = value

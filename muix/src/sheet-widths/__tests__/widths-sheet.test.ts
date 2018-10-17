@@ -1,9 +1,9 @@
 import { TVariants } from "reactxx-typings";
 import { atomizeSheet } from "reactxx-sheeter";
 import { initPlatform, Shape, ts } from "reactxx-tests";
-import { sheetSwitch_registerVariantHandler } from "reactxx-sheet-switch";
+import { sheetWidths_registerVariantHandler } from "../index";
 
-sheetSwitch_registerVariantHandler();
+sheetWidths_registerVariantHandler();
 
 export const createSheet = () =>
   (ts.sheet = {
@@ -41,9 +41,9 @@ export const createSheet = () =>
   });
 export const query = (opened: boolean) =>
   ({
-    $switch: {
-      isOpened: opened,
-      isClosed: !opened
+    $widths: {
+      tabletWidth: opened,
+      mobileWidth: !opened
     }
   } as TVariants.Query<Shape>);
 /*
@@ -103,7 +103,7 @@ Object {
         "conditions": Array [
           Object {
             "case": "mobileWidth",
-            "type": "$switch",
+            "type": "$widths",
           },
         ],
       },
@@ -114,7 +114,7 @@ Object {
         "conditions": Array [
           Object {
             "case": "tabletWidth",
-            "type": "$switch",
+            "type": "$widths",
           },
         ],
       },
@@ -125,7 +125,7 @@ Object {
         "conditions": Array [
           Object {
             "case": "desktopWidth",
-            "type": "$switch",
+            "type": "$widths",
           },
         ],
       },
@@ -156,33 +156,15 @@ Object {
         "atomicArray": Array [
           ".a { background-color:blue /*root/$switch.mobileWidth*/ }",
         ],
-        "conditions": Array [
-          Object {
-            "case": "mobileWidth",
-            "type": "$switch",
-          },
-        ],
       },
       Object {
         "atomicArray": Array [
           ".b { background-color:cyan /*root/$switch.tabletWidth*/ }",
         ],
-        "conditions": Array [
-          Object {
-            "case": "tabletWidth",
-            "type": "$switch",
-          },
-        ],
       },
       Object {
         "atomicArray": Array [
           ".c { background-color:green /*root/$switch.desktopWidth*/ }",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "desktopWidth",
-            "type": "$switch",
-          },
         ],
       },
       Object {
@@ -194,33 +176,15 @@ Object {
         "atomicArray": Array [
           ".d:hover { background-color:lightblue /*root/$web/:hover/$switch.mobileWidth*/ }",
         ],
-        "conditions": Array [
-          Object {
-            "case": "mobileWidth",
-            "type": "$switch",
-          },
-        ],
       },
       Object {
         "atomicArray": Array [
           ".e:hover { background-color:lightcyan /*root/$web/:hover/$switch.tabletWidth*/ }",
         ],
-        "conditions": Array [
-          Object {
-            "case": "tabletWidth",
-            "type": "$switch",
-          },
-        ],
       },
       Object {
         "atomicArray": Array [
           ".d:hover { background-color:lightblue /*root/$web/:hover/$switch.desktopWidth*/ }",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "desktopWidth",
-            "type": "$switch",
-          },
         ],
       },
     ],
