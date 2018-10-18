@@ -54,7 +54,7 @@ declare namespace TWithStyles {
     innerStateComponent?: React.Component
     refreshInnerStateComponent?: () => void
 
-    sheetQuery?: TVariants.Query
+    //sheetQuery?: TVariants.Query
     //sheetQueryComponent?: React.Component
   }
 

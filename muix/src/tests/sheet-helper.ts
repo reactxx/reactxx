@@ -13,7 +13,7 @@ export const createSheet = <R extends TSheeter.Shape>(
 
 export const toClassNames = <R extends TSheeter.Shape>(
     descr: string,
-    sheetQuery: TVariants.Query<R>,
+    mergedInnerState: TVariants.Query<R>,
     rulesets: TSheeter.ClassNameOrAtomized,
     call: (res: jest.Matchers<any>) => void,
 ) => {
@@ -22,7 +22,7 @@ export const toClassNames = <R extends TSheeter.Shape>(
 *  ${str}
 ******************************************
 `
-    const atomized = toClassNamesWithQuery({ sheetQuery }, rulesets)
+    const atomized = toClassNamesWithQuery({ propsCode: { mergedInnerState } }, rulesets)
     const lastWin = platform.applyLastwinsStrategy(atomized)
     const final = platform.finalClassNameStep(lastWin)
     const json = [`

@@ -51,13 +51,13 @@ class Component extends React.Component {
         // ********* innerStatePipe
         // in InnerStateComponent.render: 
         // - call CodeComponent.modifyInnerState (e.g. set innerState.$switch conditions)
-        // - merge pipeState's.innerState to propsCode.mergedInnerState
+        // - deepMerge pipeState's.innerState to propsCode.mergedInnerState
         // ####### LISTEN for setInnerState call (from component's code)
         //   => @@@@@@@ InnerStateComponent's rerender
 
         // ********* codePipe
         // in CodeComponent.render:
-        // for every inner NON reactxx CodeComponent's comonent (web or native components): 
+        // for every inner NON reactxx CodeComponent's comonent (i.e. web or native components): 
         // - call toClassNamesWithQuery (propsCode.mergedInnerState, <atomizedRuleset's >)
         //   - evaluate atomicRuleset's conditions
         //   - results to array of atomic values PLUS deffered part

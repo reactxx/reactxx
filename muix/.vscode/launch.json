@@ -25,7 +25,8 @@
                 //"--testPathPattern=atomize-sheet",
                 //"--testPathPattern=to-classname",
                 //"--testPathPattern=sheet-switch",
-                "--testPathPattern=widths-sheet",
+                "--testPathPattern=switch-using-sheet",
+                //"--testPathPattern=to-classname-using-sheet",
                 "-u"
             ],
             //"preLaunchTask": "build",
