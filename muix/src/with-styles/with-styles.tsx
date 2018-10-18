@@ -62,7 +62,7 @@ const withStyles = (componentState: TWithStyles.ComponentOptions) => {
     )
 
     render() {
-      // reset pipelineState (must be INPLACE!!!)
+      // reset pipelineState (must be IN-PLACE!!!)
       const { pipelineState } = this
       for (const p in pipelineState) delete pipelineState[p]
       Object.assign(pipelineState, this.initPipelineState())
@@ -93,7 +93,7 @@ const finishComponentState = (
     sheetOrCreator,
     componentId,
     CodeComponent,
-    withTheme: typeof mergedOptions.sheetOrCreator === 'function' ? true : mergedOptions.withTheme,
+    withTheme: typeof mergedOptions.withTheme === 'boolean' ? mergedOptions.withTheme : typeof mergedOptions.sheetOrCreator === 'function',
     displayName: `${mergedOptions.displayName || CodeComponent.displayName || CodeComponent['name'] || 'unknown'} (${componentId})`,
   }
 

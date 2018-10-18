@@ -16,7 +16,7 @@ export const themePipe: TWithStyles.Pipe = (pipelineState, next) => {
 
 export const registerTheme = (name: string, theme: TTheme.Theme) => {
   warning(!globalOptions.namedThemes[name], `Theme ${name} already registered`)
-  if (!theme.$cache) theme.$cache = {}
+  //if (!theme.$cache) theme.$cache = {}
   globalOptions.namedThemes[name] = theme
 }
 
@@ -38,7 +38,7 @@ export const defaultThemeName = '*default-theme*'
 export const sheetFromThemeCache = (
   componentId: number, sheetOrCreator: TSheeter.SheetOrCreator, theme: TTheme.Theme, defaultClasses: TSheeter.PartialSheetOrCreator
 ) => {
-  const cache = theme ? theme.$cache ? theme.$cache : (theme.$cache = {}) : $cache
+  const cache = !theme ? $cache : (theme.$cache || (theme.$cache = {}))
 
   let value: TAtomize.Sheet = cache[componentId]
   if (value) return value
@@ -52,7 +52,7 @@ export const sheetFromThemeCache = (
   cache[componentId] = value
 
   return value
-
 }
 
+// global 'sheet + defaultProps.classes' cache
 const $cache: { [componentId: number]: TSheeter.Sheet } = {}

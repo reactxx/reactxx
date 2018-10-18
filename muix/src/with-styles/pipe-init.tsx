@@ -1,6 +1,5 @@
 import { atomizeRuleset, atomizeSheet, atomizeStyle } from 'reactxx-sheeter';
-import { TWithStyles, TComponents } from 'reactxx-typings';
-import warning from 'warning';
+import { TWithStyles } from 'reactxx-typings';
 import { sheetFromThemeCache } from './pipe-theme';
 
 export const initPipe: TWithStyles.Pipe = (pipelineState, next) => {
@@ -13,6 +12,7 @@ export const initPipe: TWithStyles.Pipe = (pipelineState, next) => {
 }
 
 const init = (defaultPipeId: number, pipeId: number, pipelineState: TWithStyles.PipelineState) => {
+  
   const { props: { classes, classNameX, styleX, themedProps, ...propsRest },
     defaultProps, theme, sheetOrCreator, componentId } = pipelineState
 
