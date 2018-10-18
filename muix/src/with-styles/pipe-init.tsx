@@ -1,10 +1,10 @@
 import { atomizeRuleset, atomizeSheet, atomizeStyle } from 'reactxx-sheeter';
-import { TWithStyles } from 'reactxx-typings';
+import { TWithStyles, TComponents } from 'reactxx-typings';
 import warning from 'warning';
 import { sheetFromThemeCache } from './pipe-theme';
 
 export const initPipe: TWithStyles.Pipe = (pipelineState, next) => {
-  const defaultPipeId = pipelineState.defaultProps ? pipelineState.pipeCounter++ : -1
+  const defaultPipeId = pipelineState.pipeCounter++
   const pipeId = pipelineState.pipeCounter++
   return () => {
     init(defaultPipeId, pipeId, pipelineState)
@@ -12,8 +12,9 @@ export const initPipe: TWithStyles.Pipe = (pipelineState, next) => {
   }
 }
 
-const init = (defaultPipeId: number, pipeId:number, pipelineState: TWithStyles.PipelineState) => {
-  const { props: { classes, classNameX, styleX, themedProps, ...propsRest }, theme, sheetOrCreator, defaultProps, componentId } = pipelineState
+const init = (defaultPipeId: number, pipeId: number, pipelineState: TWithStyles.PipelineState) => {
+  const { props: { classes, classNameX, styleX, themedProps, ...propsRest },
+    defaultProps, theme, sheetOrCreator, componentId } = pipelineState
 
   // use first pipeId for default props
   if (defaultProps) {
@@ -38,4 +39,3 @@ const init = (defaultPipeId: number, pipeId:number, pipelineState: TWithStyles.P
     styleX: atomizeStyle(styleX, theme),
   }
 }
-
