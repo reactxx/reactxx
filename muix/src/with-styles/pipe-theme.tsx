@@ -4,7 +4,7 @@ import { TAtomize, TSheeter, TTheme, TWithStyles } from 'reactxx-typings';
 import warning from 'warning';
 
 export const themePipe: TWithStyles.Pipe = (pipelineState, next) => {
-  const pipeId = pipelineState.pipeCounter++
+  //const pipeId = pipelineState.pipeCounter++
   const render = (theme: TTheme.Theme) => {
     pipelineState.theme = theme
     return next()

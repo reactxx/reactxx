@@ -47,9 +47,9 @@
       "reactxx-sheet-switch": [
         "src/sheet-switch/index"
       ],
-      "reactxx-sheet-transition/*": [
-        "src/sheet-transition/*"
-      ],
+      // "reactxx-sheet-transition/*": [
+      //   "src/sheet-transition/*"
+      // ],
       "reactxx-sheet-transition": [
         "src/sheet-transition/index"
       ],
@@ -107,7 +107,7 @@
 
     "src/with-styles",
 
-    "src/sheet-transition", 
+    //"src/sheet-transition", 
     "src/sheet-switch", 
     "src/sheet-widths",
 

@@ -24,9 +24,12 @@ class Component extends React.Component {
         // ####### LISTEN for theme change 
         //   => @@@@@@@ reacall all pipes below
 
+        // ********* initPipe
         // set pipelineState.pipeStates[i] for default props and pipeStates[i+1] for component's props:
         // - call atomizeSheet and sheetFromThemeCache
         // - call atomizeRuleset and atomizeStyle
+
+        // ********* switchPipe custom pipe
 
         // ********* custom pipes
         // ####### LISTEN: every pipe can change its pipeState's.innerState and 

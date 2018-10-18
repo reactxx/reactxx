@@ -8,30 +8,33 @@ sheetWidths_registerVariantHandler();
 export const createSheet = () =>
   (ts.sheet = {
     root: (ts.view = {
-      $widths: {
-        mobileWidth: {
-          backgroundColor: "blue"
-        },
-        tabletWidth: {
-          backgroundColor: "cyan"
-        },
-        desktopWidth: {
-          backgroundColor: "green"
-        }
-      },
+      // $widths: [
+      //   {
+      //     $width: [null,640],
+      //     $switch: {
+      //       isClosed:{},
+      //       isOpened:{},
+      //     },
+      //     margin:0,
+      //     //color:''
+      //   },
+      //   {
+      //     $width: [640, null]
+
+      //   },
+      // ],
       $web: (ts.web = {
         ":hover": {
-          $widths: {
-            mobileWidth: {
-              backgroundColor: "lightblue"
-            },
-            tabletWidth: {
-              backgroundColor: "lightcyan"
-            },
-            desktopWidth: {
-              backgroundColor: "lightblue"
-            }
-          }
+          // $widths: [
+          //   {
+          //     $width: [null,640]
+
+          //   },
+          //   {
+          //     $width: [null,640]
+
+          //   },
+          // ],
         }
       })
     }),

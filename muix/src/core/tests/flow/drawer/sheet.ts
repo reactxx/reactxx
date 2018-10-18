@@ -34,21 +34,21 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
                     //x: 1,
                 }
             },
-            $transitionGroup: ts.transitionGroup$Web = {
-                leftDrawer: {
-                    opacity: [1, 0],
-                    color: ['', ''],
-                    //x: 1,
-                },
-            }
+            // $transitionGroup: ts.transitionGroup$Web = {
+            //     leftDrawer: {
+            //         opacity: [1, 0],
+            //         color: ['', ''],
+            //         //x: 1,
+            //     },
+            // }
         },
-        $transitionGroup: ts.transitionGroupView = {
-            leftDrawer: {
-                //$name: 'xmobile',
-                opacity: [1, 0],
-                //color: ['', ''],
-            }
-        },
+        // $transitionGroup: ts.transitionGroupView = {
+        //     leftDrawer: {
+        //         //$name: 'xmobile',
+        //         opacity: [1, 0],
+        //         //color: ['', ''],
+        //     }
+        // },
         $native: ts.nativeView = [
             {
                 margin: 4,
@@ -82,14 +82,14 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
                 }],
             },
         }],
-        $transitionGroup: ts.transitionGroupText = {
-            leftDrawer: {
-                //$name: 'xmobile',
-                opacity: [1, 0],
-                color: ['', ''],
-                //x1: ['', ''],
-            }
-        },
+        // $transitionGroup: ts.transitionGroupText = {
+        //     leftDrawer: {
+        //         //$name: 'xmobile',
+        //         opacity: [1, 0],
+        //         color: ['', ''],
+        //         //x1: ['', ''],
+        //     }
+        // },
     }],
     webOnly: {
         //margin: 4,
@@ -100,21 +100,21 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
                 isDrawerClosed: [{
                     color: 'red',
                     //x: 1,
-                    $transitionGroup: ts.transitionGroup$Web = {
-                        leftDrawer: {
-                            //$name: 'xmobile'
-                            color: ['', ''],
-                            //x: [0, 0]
-                        },
-                    }
+                    // $transitionGroup: ts.transitionGroup$Web = {
+                    //     leftDrawer: {
+                    //         //$name: 'xmobile'
+                    //         color: ['', ''],
+                    //         //x: [0, 0]
+                    //     },
+                    // }
                 }],
             },
-            $transitionGroup: ts.transitionGroup$Web = {
-                leftDrawer: {
-                    color: ['', ''],
-                    //x: [0, 0]
-                }
-            },
+            // $transitionGroup: ts.transitionGroup$Web = {
+            //     leftDrawer: {
+            //         color: ['', ''],
+            //         //x: [0, 0]
+            //     }
+            // },
         },
     },
     nativeOnly: {
@@ -128,13 +128,13 @@ export const sheet = ts.sheetCreator = theme => ts.sheet = {
                     //color: 'red',
                 }],
             },
-            $transitionGroup: ts.transitionGroupView = {
-                leftDrawer: {
-                    opacity: [0, 1],
-                    left: [0, 200],
-                    //color: ['', ''],
-                }
-            },
+            // $transitionGroup: ts.transitionGroupView = {
+            //     leftDrawer: {
+            //         opacity: [0, 1],
+            //         left: [0, 200],
+            //         //color: ['', ''],
+            //     }
+            // },
         },
     }
 

@@ -1,10 +1,10 @@
 import warning from 'warning'
-import { TVariants, TComponents } from 'reactxx-typings'
+import { TVariants, TComponents, TWithStyles } from 'reactxx-typings'
 
 export interface IVariantHandler {
     name: string,
     toAtomicRuleset: TVariants.ToAtomicRuleset<any>,
-    testAtomicRuleset: (conditions: TVariants.Condition, query: TVariants.Query) => boolean
+    testAtomicRuleset: TComponents.TestAtomicRuleset
 }
 
 export const registerVariantHandler = (handler: IVariantHandler) => {
@@ -25,11 +25,11 @@ export const atomizeVariants: TVariants.ToAtomicRuleset<TVariants.VariantPart> =
             variantHandler.toAtomicRuleset(list, rulesetsVariant, path, pseudoPrefixes, conditions, rulesetToQueue)
         })
 
-export const testConditions = (conditions: TVariants.Conditions, query: TVariants.Query) => {
+export const testConditions = (conditions: TVariants.Conditions, state: TWithStyles.PipelineState) => {
     if (!conditions || conditions.length === 0) return true
     return !conditions.find(cond => {
         warning(variantHandlersDir[cond.type], `Missing initVariant${cond.type} call`)
-        return variantHandlersDir[cond.type].testAtomicRuleset(cond, query)
+        return variantHandlersDir[cond.type].testAtomicRuleset(cond, state)
     })
 }
 

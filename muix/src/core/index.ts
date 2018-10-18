@@ -4,7 +4,7 @@
 
 import { TCommonStyles, TSheeter, TVariants } from 'reactxx-typings'
 import { toClassNamesWithQuery } from 'reactxx-sheeter'
-import { transition_registerVariantHandler, transition_processDeffereds, transition_finalizePropsCode, TTransition } from 'reactxx-sheet-transition'
+//import { transition_registerVariantHandler, transition_processDeffereds, transition_finalizePropsCode, TTransition } from 'reactxx-sheet-transition'
 import { widthsPipe } from 'reactxx-sheet-widths'
 import { sheetSwitch_registerVariantHandler, getCases } from 'reactxx-sheet-switch'
 
@@ -17,7 +17,7 @@ export const initCore = () => {
     if (initCoreCalled) return
     initCoreCalled = true
 
-    transition_registerVariantHandler()
+    //transition_registerVariantHandler()
     sheetSwitch_registerVariantHandler()
 
     initGlobalState({
@@ -30,11 +30,11 @@ export const initCore = () => {
 
         finalizePropsCode: state => {
             //state.withSheetQueryComponent = true
-            transition_finalizePropsCode(state)
-            state.propsCode.toClassNames = rulesets => toClassNamesWithQuery(state, rulesets)
+            //transition_finalizePropsCode(state)
+            //state.propsCode.toClassNames = rulesets => toClassNamesWithQuery(state, rulesets)
         },
 
-        processDeffereds: transition_processDeffereds,
+        //processDeffereds: transition_processDeffereds,
 
     })
 }
@@ -75,15 +75,15 @@ export interface TSBugHelper<R extends TSheeter.Shape> {
     sheetWidthsText?: TVariants.SheetWidthsPart<'Text', R>
     sheetWidths$Web?: TVariants.SheetWidthsPart<'$Web', R>
 
-    transitionView?: TTransition.Transition<'View', R>
-    transitionText?: TTransition.Transition<'Text', R>
+    // transitionView?: TTransition.Transition<'View', R>
+    // transitionText?: TTransition.Transition<'Text', R>
 
-    transitionNativeView?: TTransition.RulesetNative<'View'>
-    transitionNativeText?: TTransition.RulesetNative<'Text'>
+    // transitionNativeView?: TTransition.RulesetNative<'View'>
+    // transitionNativeText?: TTransition.RulesetNative<'Text'>
 
-    transitionGroupView?: TTransition.Group<'View', R>
-    transitionGroupText?: TTransition.Group<'Text', R>
-    transitionGroup$Web?: TTransition.Group<'$Web', R>
+    // transitionGroupView?: TTransition.Group<'View', R>
+    // transitionGroupText?: TTransition.Group<'Text', R>
+    // transitionGroup$Web?: TTransition.Group<'$Web', R>
 
     query?: TVariants.Query<R>
 

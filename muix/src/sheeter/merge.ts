@@ -50,7 +50,7 @@ export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOr
     }
 }
 
-export const mergeRuleset = (target: TAtomize.Ruleset, source: TAtomize.Ruleset) => {
+const mergeRuleset = (target: TAtomize.Ruleset, source: TAtomize.Ruleset) => {
     if (!target) return source
     if (!source) return target
     const targeta = isAtomicArray(target), sourcea = isAtomicArray(source)

@@ -13,7 +13,9 @@ export class MediaQ_AppContainer extends React.Component {
     mediaQBreaks = mediaQBreaks || []
   }
   render() {
-    return appContainer !== this ? <React.Fragment>{this.props.children}</React.Fragment> : <context.Provider value={mediaQBreaks.map(b => b.active)}>{this.props.children}</context.Provider>
+    return appContainer !== this
+      ? <React.Fragment>{this.props.children}</React.Fragment>
+      : <context.Provider value={mediaQBreaks.map(b => b.active)}>{this.props.children}</context.Provider>
   }
 
   componentWillUnmount() {
@@ -112,12 +114,14 @@ const getObservedBits = ($mediaq: TMediaQ.NotifyIntervalX) => {
   return data[Sheeter.Consts.dataObservedBits] || 0
 }
 
-const propsPatchGetterCreator: (width: number) => Sheeter.PropsPatchGetter = width => (intervals: TMediaQ.NotifyIntervalX, map) => {
-  const $mediaq: TMediaQ.MediaFlags = {}
-  for (const p in intervals) {
-    if (p.charAt(0) === '#') continue
-    const [beg, end] = intervals[p]
-    $mediaq[p] = (!beg || beg <= width) && (!end || end > width)
-  }
-  map.push({ $mediaq })
-}
+const propsPatchGetterCreator: (width: number) =>
+  Sheeter.PropsPatchGetter = width =>
+    (intervals: TMediaQ.NotifyIntervalX, map) => {
+      const $mediaq: TMediaQ.MediaFlags = {}
+      for (const p in intervals) {
+        if (p.charAt(0) === '#') continue
+        const [beg, end] = intervals[p]
+        $mediaq[p] = (!beg || beg <= width) && (!end || end > width)
+      }
+      map.push({ $mediaq })
+    }

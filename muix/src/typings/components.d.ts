@@ -110,4 +110,5 @@ declare namespace TComponents {
     onPressOut?: () => void; onLongPress?: () => void
   }
 
+  export type TestAtomicRuleset = (conditions: TVariants.Condition, state: TWithStyles.PipelineState) => boolean
 } 

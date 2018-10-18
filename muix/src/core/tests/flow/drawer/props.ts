@@ -22,20 +22,20 @@ export const componentOptions: TWithStyles.ComponentOptions<Shape> = {
         classNameX: {},
         styleX: {},
         themedProps: ({ breakpoints: { mobile, tablet, desktop } }) => ({
-            sheetWidths: { mobileWidth: mobile, tabletWidth: tablet, desktopWidth: desktop }
+            widths: { mobileWidth: mobile, tabletWidth: tablet, desktopWidth: desktop }
         }),
-        transitionGroups: {
-            leftDrawer: {
-                duration: 300
-            }
-        },
+        // transitionGroups: {
+        //     leftDrawer: {
+        //         duration: 300
+        //     }
+        // },
     }
 }
 
-export const fillInnerState: TComponents.ModifyInnerStateProc<Shape> = (props, innerState) =>
-    innerState.$transitionGroups = {
-        leftDrawer: innerState.drawerOpened
-    }
+export const fillInnerState: TComponents.ModifyInnerStateProc<Shape> = (props, innerState) => {}
+    // innerState.$transitionGroups = {
+    //     leftDrawer: innerState.drawerOpened
+    // }
 
 export const cascading: TComponents.Props<Shape> = {
     classes: { root: {}, label: {} },
