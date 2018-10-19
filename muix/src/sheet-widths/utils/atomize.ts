@@ -1,5 +1,5 @@
 import { TComponents, TVariants, TAtomize, TSheeter } from 'reactxx-typings'
-import { registerVariantHandler, atomizeRulesetInner, atomizeRulesetLow, wrapPseudoPrefixes, isAtomicArray } from 'reactxx-sheeter'
+import { registerVariantHandler, atomizeRulesetInner, wrapPseudoPrefixes, isAtomicArray } from 'reactxx-sheeter'
 import { Consts } from '../variants'
 import { intervalToSelector } from './parser'
 

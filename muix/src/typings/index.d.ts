@@ -30,14 +30,14 @@ export namespace TVariants {
         rulesetToQueue?: VariantPart
     ) => void
 
-    type AtomizeRulesetInner = (
-        list: TAtomize.Variants,
-        ruleset: VariantPart,
-        path: string,
-        pseudoPrefixes: string[],
-        conditions: Conditions,
-        rulesetToQueue?: VariantPart
-    ) => void
+    // type AtomizeRulesetInner = (
+    //     list: TAtomize.Variants,
+    //     ruleset: VariantPart,
+    //     path: string,
+    //     pseudoPrefixes: string[],
+    //     conditions: Conditions,
+    //     rulesetToQueue?: VariantPart
+    // ) => void
 
     //*********************************************************
     //  SHEETER EXTENSION

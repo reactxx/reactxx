@@ -6,7 +6,7 @@ import { atomizeRulesetLow } from './atomize-low'
 
 export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetOrCreator<R>, theme?) => {
     if (!sheet) return null
-    const sh = createWithTheme(sheet, theme)
+    const sh: TSheeter.Sheet = createWithTheme(sheet, theme)
     for (const p in sh) {
         const at = atomizeRuleset(sh[p], theme, p)
         if (at) sh[p] = at
@@ -17,12 +17,11 @@ export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: T
 
 export const atomizeRuleset = (ruleset: TSheeter.ClassNameOrCreator, theme?, rulesetName?: string) => {
     if (!ruleset) return null
-    const rs = createWithTheme(ruleset, theme)
-    if (isAtomizedRuleset(rs) || isAtomicArray(rs)) return rs
+    const rs: TSheeter.RulesetOrAtomized = createWithTheme(ruleset, theme)
     return atomizeRulesetLow(rs, rulesetName)
 }
 
-export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme) => {
+export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme?) => {
     if (!style) return null
     if (window.isWeb)
         return createWithTheme(style, theme) as TSheeter.StyleOrAtomizedWeb
