@@ -14,7 +14,7 @@ export const widthsPipe: TWithStyles.Pipe = (pipelineState, next) => {
     const render = (width: number) => {
         pipelineState.pipeStates[pipeId] = {
             codeProps: {
-                sheetWidths: getPropsCodeWidths(intervals, width)
+                isWidth: getPropsCodeWidths(intervals, width)
             }
         }
         return next()

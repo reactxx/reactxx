@@ -8,33 +8,42 @@ sheetWidths_registerVariantHandler();
 export const createSheet = () =>
   (ts.sheet = {
     root: (ts.view = {
-      // $widths: [
-      //   {
-      //     $width: [null,640],
-      //     $switch: {
-      //       isClosed:{},
-      //       isOpened:{},
-      //     },
-      //     margin:0,
-      //     //color:''
-      //   },
-      //   {
-      //     $width: [640, null]
-
-      //   },
-      // ],
+      $widths: {
+        mobileWidth: {
+          margin: 0,
+          $switch: {
+            isClosed: {
+              backgroundColor: "gray"
+            }
+          }
+        },
+        tabletWidth: {
+          margin: 10
+        },
+        desktopWidth: {
+          margin: 20
+        }
+      },
       $web: (ts.web = {
         ":hover": {
-          // $widths: [
-          //   {
-          //     $width: [null,640]
-
-          //   },
-          //   {
-          //     $width: [null,640]
-
-          //   },
-          // ],
+          $switch: {
+            isClosed: {
+              color: "black",
+              $widths: {
+                mobileWidth: {
+                  color: "blue",
+                  padding: 0
+                },
+                tabletWidth: {
+                  color: "red",
+                  padding: 10
+                },
+                desktopWidth: {
+                  padding: 20
+                }
+              }
+            }
+          }
         }
       })
     }),
@@ -82,7 +91,7 @@ describe("SWITCH define sheet", () => {
 });
 */
 
-describe("SWITCH define sheet", () => {
+describe("WIDTHS define sheet", () => {
   it("NATIVE", () => {
     initPlatform(false);
     const sheet = atomizeSheet<Shape>(createSheet());
@@ -101,34 +110,34 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "backgroundColor: blue /*root/$switch.mobileWidth*/",
+          "margin: 0 /*root/$widths.mobileWidth*/",
         ],
         "conditions": Array [
           Object {
-            "case": "mobileWidth",
             "type": "$widths",
+            "widthName": "mobileWidth",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          "backgroundColor: cyan /*root/$switch.tabletWidth*/",
+          "margin: 10 /*root/$widths.tabletWidth*/",
         ],
         "conditions": Array [
           Object {
-            "case": "tabletWidth",
             "type": "$widths",
+            "widthName": "tabletWidth",
           },
         ],
       },
       Object {
         "atomicArray": Array [
-          "backgroundColor: green /*root/$switch.desktopWidth*/",
+          "margin: 20 /*root/$widths.desktopWidth*/",
         ],
         "conditions": Array [
           Object {
-            "case": "desktopWidth",
             "type": "$widths",
+            "widthName": "desktopWidth",
           },
         ],
       },
@@ -157,37 +166,22 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".a { background-color:blue /*root/$switch.mobileWidth*/ }",
+          "@media (min-width: NaNpx) and (max-width: NaNpx).a { margin:0 /*root/$widths.mobileWidth*/ }",
         ],
       },
       Object {
         "atomicArray": Array [
-          ".b { background-color:cyan /*root/$switch.tabletWidth*/ }",
+          "@media (min-width: NaNpx) and (max-width: NaNpx).b { margin:10px /*root/$widths.tabletWidth*/ }",
         ],
       },
       Object {
         "atomicArray": Array [
-          ".c { background-color:green /*root/$switch.desktopWidth*/ }",
+          "@media (min-width: NaNpx) and (max-width: NaNpx).c { margin:20px /*root/$widths.desktopWidth*/ }",
         ],
       },
       Object {
         "atomicArray": Array [
           null,
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          ".d:hover { background-color:lightblue /*root/$web/:hover/$switch.mobileWidth*/ }",
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          ".e:hover { background-color:lightcyan /*root/$web/:hover/$switch.tabletWidth*/ }",
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          ".d:hover { background-color:lightblue /*root/$web/:hover/$switch.desktopWidth*/ }",
         ],
       },
     ],

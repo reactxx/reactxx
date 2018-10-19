@@ -17,7 +17,7 @@ declare module 'reactxx-typings' {
             widths?: PropsBreakpoints<R, string>
         }
         interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> {
-            sheetWidths?: PropsBreakpoints<R, boolean>
+            isWidth?: PropsBreakpoints<R, boolean>
         }
 
         interface ComponentOptions {
@@ -32,8 +32,7 @@ declare module 'reactxx-typings' {
         }
 
         type SheetWidthsPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
-            getWidths<R> extends never ? TSheeter.FakeInterface :
-            PartialRecord<getWidths<R>, TSheeter.RulesetOrAtomized<T, R>>
+            Record<string, TSheeter.RulesetOrAtomized<T, R>>
     }
 
 

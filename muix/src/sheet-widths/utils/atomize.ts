@@ -1,5 +1,5 @@
-import { TComponents, TVariants } from 'reactxx-typings'
-import { registerVariantHandler, atomizeRulesetInner, wrapPseudoPrefixes } from 'reactxx-sheeter'
+import { TComponents, TVariants, TAtomize, TSheeter } from 'reactxx-typings'
+import { registerVariantHandler, atomizeRulesetInner, atomizeRulesetLow, wrapPseudoPrefixes, isAtomicArray } from 'reactxx-sheeter'
 import { Consts } from '../variants'
 import { intervalToSelector } from './parser'
 
@@ -36,10 +36,10 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<TVariants.SheetWidthsPart> = (
     for (const widthName in widths) {
         const casep = widths[widthName]
         if (!casep) continue
-        if (Array.isArray(casep))
+        if (Array.isArray(casep) && !isAtomicArray(casep))
             casep.forEach((ruleset, idx) =>
                 atomizeRulesetInner(
-                    list, ruleset,
+                    list, ruleset as any,
                     `${path}/$switch.${widthName}[${idx}]`,
                     pseudoPrefixes(widthName),
                     conditions(widthName),
@@ -47,7 +47,7 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<TVariants.SheetWidthsPart> = (
             )
         else
             atomizeRulesetInner(
-                list, casep as TVariants.VariantPart,
+                list, casep as any, // as TVariants.VariantPart,
                 `${path}/$widths.${widthName}`,
                 pseudoPrefixes(widthName),
                 conditions(widthName),
@@ -56,7 +56,7 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<TVariants.SheetWidthsPart> = (
 }
 
 const testAtomicRuleset: TComponents.TestAtomicRuleset = (cond: WidthsCondition, state) => {
-    const { propsCode: { sheetWidths } } = state
-    return sheetWidths && sheetWidths[cond.widthName]
+    const { propsCode: { isWidth } } = state
+    return isWidth && isWidth[cond.widthName]
 }
 

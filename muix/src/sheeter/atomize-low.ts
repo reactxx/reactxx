@@ -7,7 +7,7 @@ import { isAtomicArray, isAtomizedRuleset } from './atomize'
 // platform dependent import
 import { platform } from 'reactxx-sheeter'
 
-export const atomizeRulesetLow = (ruleset: TSheeter.RulesetOrAtomized /*| TSheeter.RulesetItem[]*/, rulesetName?: string) => {
+export const atomizeRulesetLow = (ruleset: TSheeter.RulesetOrAtomized /*| TSheeter.RulesetItem[]*/, rulesetName: string) => {
     if (!ruleset) return null
 
     const name = rulesetName || ruleset['name'] || 'unknown'
@@ -38,12 +38,11 @@ export const atomizeRulesetLow = (ruleset: TSheeter.RulesetOrAtomized /*| TSheet
     const list: TAtomize.Variants = []
     parts.forEach(part => {
         const item = part[1]
-        if (isAtomicArray(item)) {
+        if (isAtomicArray(item))
             list.push({ atomicArray: item, conditions: [] })
-        } else if (isAtomizedRuleset(item)) {
+        else if (isAtomizedRuleset(item))
             Array.prototype.push.apply(list, item.list)
-            //item.list.forEach(l => list.push(l))
-        } else
+        else
             atomizeRulesetInner(
                 list, item,
                 `${name}${part[0]}`,

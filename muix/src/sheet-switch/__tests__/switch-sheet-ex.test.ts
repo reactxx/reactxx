@@ -1,5 +1,9 @@
 import { TVariants } from "reactxx-typings";
-import { atomizeSheet, atomizeRuleset, toClassNamesWithQuery } from "reactxx-sheeter";
+import {
+  atomizeSheet,
+  atomizeRuleset,
+  toClassNamesWithQuery
+} from "reactxx-sheeter";
 import { initPlatform, Shape, ts } from "reactxx-tests";
 import { sheetSwitch_registerVariantHandler } from "../index";
 
@@ -8,54 +12,57 @@ sheetSwitch_registerVariantHandler();
 export const createSheet = () =>
   (ts.sheet = {
     root: (ts.view = {
-      $switch: {
-        isOpened: {
-          backgroundColor: "red",
-          $switch: {
-            isOpened: {
-              borderColor: "cyan"
-            }
-          }
-        },
-        isClosed: [{
-          backgroundColor: "blue"
-        }, atomizeRuleset({
-          margin: 11,
-        }), toClassNamesWithQuery(null, {
-          padding: 11,
-        })]
-      },
       $web: (ts.web = {
         ":hover": {
           $switch: {
             isClosed: [
               {
-                backgroundColor: "green"
-              }
+                ":active": {
+                  backgroundColor: "blue"
+                }
+              },
+              atomizeRuleset({
+                margin: 11
+              }),
+              toClassNamesWithQuery(null, {
+                padding: 11
+              })
             ]
-          }
-        }
-      }),
-      $native: (ts.nativeView = {
-        $switch: {
-          isOpened: {
-            backgroundColor: "brown"
           }
         }
       })
     }),
-    label: {},
-    webOnly: {
-      $web: {
-        ":hover": {
-          $switch: {
-            isOpened: {
-              backgroundColor: "yellow"
+    label: (ts.text = {
+      $switch: {
+        isClosed: [
+          {
+            $web: [
+              {
+                ":active": {
+                  backgroundColor: "blue"
+                }
+              }
+            ]
+          },
+          atomizeRuleset([
+            {
+              $native: {
+                margin: 11
+              },
+              $web: {
+                margin: 21
+              }
             }
-          }
-        }
+          ]),
+          toClassNamesWithQuery(null, [
+            {
+              padding: 31
+            }
+          ])
+        ]
       }
-    },
+    }),
+    webOnly: {},
     nativeOnly: {}
   });
 export const query = (opened: boolean) =>
@@ -113,37 +120,13 @@ describe("SWITCH define sheet", () => {
 `;
     expect(sheet).toMatchInlineSnapshot(`
 Object {
-  "root": Object {
+  "label": Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "backgroundColor: red /*root/$switch.isOpened*/",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "isOpened",
-            "type": "$switch",
-          },
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          "borderColor: cyan /*root/$switch.isOpened/$switch.isOpened*/",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "isOpened",
-            "type": "$switch",
-          },
-          Object {
-            "case": "isOpened",
-            "type": "$switch",
-          },
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          "backgroundColor: blue /*root/$switch.isClosed*/",
+          "name: unknown /*label/$switch.isClosed[1]*/",
+          "list: [object Object] /*label/$switch.isClosed[1]*/",
+          "~: c /*label/$switch.isClosed[1]*/",
         ],
         "conditions": Array [
           Object {
@@ -154,17 +137,19 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          "backgroundColor: brown /*root/$native/$switch.isOpened*/",
+          "0: [object Object] /*label/$switch.isClosed[2]*/",
+          "~: v /*label/$switch.isClosed[2]*/",
+          "state: null /*label/$switch.isClosed[2]*/",
         ],
         "conditions": Array [
           Object {
-            "case": "isOpened",
+            "case": "isClosed",
             "type": "$switch",
           },
         ],
       },
     ],
-    "name": "root",
+    "name": "label",
     "~": "c",
   },
 }
@@ -184,37 +169,13 @@ Object {
 `;
     expect(sheet).toMatchInlineSnapshot(`
 Object {
-  "root": Object {
+  "label": Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".a { background-color:red /*root/$switch.isOpened*/ }",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "isOpened",
-            "type": "$switch",
-          },
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          ".b { border-color:cyan /*root/$switch.isOpened/$switch.isOpened*/ }",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "isOpened",
-            "type": "$switch",
-          },
-          Object {
-            "case": "isOpened",
-            "type": "$switch",
-          },
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          ".c { background-color:blue /*root/$switch.isClosed*/ }",
+          ".j { name:unknown /*label/$switch.isClosed[1]*/ }",
+          ".k { list:[object Object] /*label/$switch.isClosed[1]*/ }",
+          ".l { ~:c /*label/$switch.isClosed[1]*/ }",
         ],
         "conditions": Array [
           Object {
@@ -225,12 +186,53 @@ Object {
       },
       Object {
         "atomicArray": Array [
+          ".m { ~:v /*label/$switch.isClosed[2]*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
+        ],
+      },
+    ],
+    "name": "label",
+    "~": "c",
+  },
+  "root": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
           null,
         ],
       },
       Object {
         "atomicArray": Array [
-          ".d:hover { background-color:green /*root/$web/:hover/$switch.isClosed[0]*/ }",
+          ".e:hover:active { background-color:blue /*root/$web/:hover/$switch.isClosed[0]*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".f:hover { name:unknown /*root/$web/:hover/$switch.isClosed[1]*/ }",
+          ".g:hover { list:[object Object] /*root/$web/:hover/$switch.isClosed[1]*/ }",
+          ".h:hover { ~:c /*root/$web/:hover/$switch.isClosed[1]*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".i { :hover:[object Object] /*root/$web/:hover/$switch.isClosed[2]*/ }",
         ],
         "conditions": Array [
           Object {
@@ -241,28 +243,6 @@ Object {
       },
     ],
     "name": "root",
-    "~": "c",
-  },
-  "webOnly": Object {
-    "list": Array [
-      Object {
-        "atomicArray": Array [
-          null,
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          ".e:hover { background-color:yellow /*webOnly/$web/:hover/$switch.isOpened*/ }",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "isOpened",
-            "type": "$switch",
-          },
-        ],
-      },
-    ],
-    "name": "webOnly",
     "~": "c",
   },
 }

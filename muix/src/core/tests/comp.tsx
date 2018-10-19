@@ -62,7 +62,7 @@ const sheet: Shape['$SheetCreator'] = theme => {
 let Inner: TComponents.ComponentType<Shape>
 
 const App: TComponents.SFCCode<Shape> = props => {
-    const { classNameX, classes, styleX, theme, toClassNames, sheetWidths } = props
+    const { classNameX, classes, styleX, theme, toClassNames, isWidth } = props
     //if (breakpoints.isTabletWidth) flags.isTabletWidth = true
     const root = toClassNames([classes.root, { margin: 0 }])
     return <div>
