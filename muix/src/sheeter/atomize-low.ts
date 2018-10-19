@@ -14,38 +14,28 @@ import { platform } from 'reactxx-sheeter'
 //   where PART is PARTITEM | [PARTITEM, ...]
 //   where PARTITEM atomizedRuleset or atomicArray or {}
 // returns:
-// - Atomized Ruleset with parts
-export const atomizeRulesetLow = (ruleset: TSheeter.RulesetOrAtomized, rulesetName: string) => {
-
-    if (!ruleset) return null
-
-    const name = rulesetName || ruleset['name'] || '.'
-
-    const parts = toParts(ruleset)
-
-    const list = toList(parts, name)
-
-    return list.length === 0 ? null : {
-        name,
-        list,
-        [TAtomize.TypedInterfaceTypes.prop]: TAtomize.TypedInterfaceTypes.atomizedRuleset
-    } as TAtomize.AtomizedRuleset
+// - fill list with parts
+export const atomizeRulesetLow = (
+    ruleset: TSheeter.RulesetOrAtomized,
+    list: TAtomize.Variants,
+    path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions,
+) => {
+    const linear = linearize(ruleset)
+    atomize(linear, list, path, pseudoPrefixes, conditions)
 }
 
 // processed:
 // - variants
 // - pseudo
-export const atomizeRulesetInner = (list: TAtomize.Variants,
+const do_Push_Variants_Pseudos = (
     ruleset: TVariants.VariantPart,
-    path: string,
-    pseudoPrefixes: string[],
-    conditions: TVariants.Conditions,
-    rulesetToQueue?: TVariants.VariantPart
+    list: TAtomize.Variants,
+    path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions,
+    isInPseudo?: boolean
 ) => {
 
-    // push to ruleset list
-    //if (rulesetToQueue) pushToList(list, rulesetToQueue, conditions, path)
-    if (rulesetToQueue) pushToList(list, wrapPseudoPrefixes(ruleset, pseudoPrefixes), conditions, path)
+    // push to ruleset list (dont push pseudos)
+    if (!isInPseudo) pushToList(list, wrapPseudoPrefixes(ruleset, pseudoPrefixes), conditions, path)
 
     // process variant part of ruleset: $transition, $switch etc.
     atomizeVariants(list, ruleset, path, pseudoPrefixes, conditions)
@@ -55,7 +45,7 @@ export const atomizeRulesetInner = (list: TAtomize.Variants,
         const value = ruleset[p] as TSheeter.Ruleset
         if (p.charAt(0) === '$') continue
         if (isObject(value))
-            atomizeRulesetInner(list, value, `${path}/${p}`, [...pseudoPrefixes, p], conditions, null)
+            do_Push_Variants_Pseudos(value, list, `${path}/${p}`, [...pseudoPrefixes, p], conditions, true)
         warning(!Array.isArray(value), 'Web pseudo properties cannot contain array')
     }
 
@@ -75,7 +65,7 @@ const pushToList = (
     list.push(conditions.length > 0 ? { atomicArray, conditions } : { atomicArray })
 }
 
-const toParts = (ruleset: TSheeter.RulesetOrAtomized) => {
+const linearize = (ruleset: TSheeter.RulesetOrAtomized) => {
     const parts: [string, TSheeter.RulesetItem][] = []
 
     const addParts = (r: TSheeter.RulesetItem, idxPrefix: string) => {
@@ -103,9 +93,10 @@ const toParts = (ruleset: TSheeter.RulesetOrAtomized) => {
     return parts
 }
 
-const toList = (parts: [string, TSheeter.RulesetItem][], path: string
+const atomize = (
+    parts: [string, TSheeter.RulesetItem][],
+    list: TAtomize.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions,
 ) => {
-    const list: TAtomize.Variants = []
     parts.forEach(part => {
         const item = part[1]
         if (isAtomicArray(item))
@@ -113,10 +104,10 @@ const toList = (parts: [string, TSheeter.RulesetItem][], path: string
         else if (isAtomizedRuleset(item))
             Array.prototype.push.apply(list, item.list)
         else {
-            atomizeRulesetInner(
-                list, item,
+            do_Push_Variants_Pseudos(
+                item, list,
                 `${path}${part[0]}`,
-                [], [], item
+                pseudoPrefixes, conditions
             )
         }
     })

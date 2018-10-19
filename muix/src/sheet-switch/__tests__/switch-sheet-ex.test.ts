@@ -13,18 +13,18 @@ export const createSheet = () =>
   (ts.sheet = {
     root: (ts.view = [
       {
-        $web: [
-          {
-            ":hover": {
-              color: "red",
-              $switch: {
-                isClosed: {
-                  cursor: "pointer"
+        $switch: {
+          isClosed: {
+            cursor: "pointer",
+            $web: [
+              {
+                ":hover": {
+                  color: "red"
                 }
               }
-            }
+            ]
           }
-        ]
+        }
       }
     ]),
     label: {},
@@ -78,7 +78,27 @@ describe("SWITCH define sheet", () => {
 ##########################################
 ##########################################
 `;
-    expect(sheet).toMatchInlineSnapshot(`Object {}`);
+    expect(sheet).toMatchInlineSnapshot(`
+Object {
+  "root": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          "cursor: pointer /*root[0]/$switch.isClosed*/",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
+        ],
+      },
+    ],
+    "name": "root",
+    "~": "c",
+  },
+}
+`);
   });
   it("WEB", () => {
     initPlatform(true);
@@ -98,12 +118,18 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".a:hover { color:red /*root[0]/$web[0]*/ }",
+          ".a { cursor:pointer /*root[0]/$switch.isClosed*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
         ],
       },
       Object {
         "atomicArray": Array [
-          ".b:hover { cursor:pointer /*root[0]/$web[0]/:hover/$switch.isClosed*/ }",
+          ".b:hover { color:red /*root[0]/$switch.isClosed/$web[0]*/ }",
         ],
         "conditions": Array [
           Object {

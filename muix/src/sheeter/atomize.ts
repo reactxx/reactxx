@@ -18,7 +18,22 @@ export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: T
 export const atomizeRuleset = (ruleset: TSheeter.ClassNameOrCreator, theme?, rulesetName?: string) => {
     if (!ruleset) return null
     const rs: TSheeter.RulesetOrAtomized = createWithTheme(ruleset, theme)
-    return atomizeRulesetLow(rs, rulesetName)
+
+    if (!rs) return null
+
+    const name = rulesetName || rs['name'] || '.'
+
+    const list: TAtomize.Variants = []
+    atomizeRulesetLow(rs, list, name, [], [])
+
+    return list.length === 0 ? null : {
+        name,
+        list,
+        [TAtomize.TypedInterfaceTypes.prop]: TAtomize.TypedInterfaceTypes.atomizedRuleset
+    } as TAtomize.AtomizedRuleset
+
+
+    //return atomizeRulesetLow(rs, rulesetName)
 }
 
 export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme?) => {
