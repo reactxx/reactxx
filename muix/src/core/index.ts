@@ -23,9 +23,9 @@ export const initCore = () => {
     initGlobalState({
 
         getPipes: (systemPipes, options) => [
-            ...systemPipes.firsts, 
-            widthsPipe, 
-            ...systemPipes.lasts
+            ...systemPipes.firsts(options), 
+            options.withWidthsRuleset && widthsPipe, 
+            ...systemPipes.lasts(options)
         ],
 
         finalizePropsCode: state => {

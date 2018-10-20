@@ -4,8 +4,8 @@ import { TAtomize, TComponents, TSheeter, TTheme, TVariants } from './index'
 declare namespace TWithStyles {
 
   export interface SystemPipes {
-    firsts: Pipe[]
-    lasts: Pipe[]
+    firsts: (options: TWithStyles.ComponentOptions) => Pipe[]
+    lasts: (options: TWithStyles.ComponentOptions) => Pipe[]
   }
 
   // application options

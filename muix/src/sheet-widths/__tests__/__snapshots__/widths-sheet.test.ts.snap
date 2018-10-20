@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WIDTHS define sheet NATIVE 1`] = `
+Object {
+  "root": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          "margin: 0 /*root/$widths.0-640*/",
+        ],
+        "conditions": Array [
+          Object {
+            "type": "$widths",
+            "widthName": "0-640",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "margin: 10 /*root/$widths.640-1024*/",
+        ],
+        "conditions": Array [
+          Object {
+            "type": "$widths",
+            "widthName": "640-1024",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "margin: 20 /*root/$widths.1024-*/",
+        ],
+        "conditions": Array [
+          Object {
+            "type": "$widths",
+            "widthName": "1024-",
+          },
+        ],
+      },
+    ],
+    "name": "root",
+    "~": "c",
+  },
+}
+`;
+
+exports[`WIDTHS define sheet WEB 1`] = `
+Object {
+  "root": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          "@media (max-width: 639px).a { margin:0 /*root/$widths.0-640*/ }",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "@media (min-width: 640px) and (max-width: 1023px).b { margin:10px /*root/$widths.640-1024*/ }",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "@media (min-width: 1024px).c { margin:20px /*root/$widths.1024-*/ }",
+        ],
+      },
+    ],
+    "name": "root",
+    "~": "c",
+  },
+}
+`;

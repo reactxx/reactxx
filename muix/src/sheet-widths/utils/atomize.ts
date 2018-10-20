@@ -1,7 +1,10 @@
 import { TComponents, TVariants, TAtomize, TSheeter } from 'reactxx-typings'
 import { registerVariantHandler, atomizeRulesetLow, isAtomicArray } from 'reactxx-sheeter'
 import { Consts } from '../variants'
-import { intervalToSelector } from './parser'
+import { intervalToSelector, parse, test } from './parser'
+
+// platform dependent import
+import { actWidth } from 'reactxx-sheet-widths'
 
 export const sheetWidths_registerVariantHandler = () => {
     if (notRegistered = !notRegistered) return
@@ -19,7 +22,7 @@ let notRegistered = true
 
 interface WidthsCondition extends TVariants.Condition {
     type: Consts.name
-    widthName: string
+    interval: [number, number]
 }
 
 const toAtomicRuleset: TVariants.ToAtomicRuleset<TVariants.SheetWidthsPart> = (
@@ -32,14 +35,14 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<TVariants.SheetWidthsPart> = (
     const conditions = (widthName: string) =>
         window.isWeb
             ? _conditions
-            : [..._conditions, { type: Consts.name, widthName } as WidthsCondition]
+            : [..._conditions, { type: Consts.name, interval: parse(widthName) } as WidthsCondition]
     for (const widthName in widths) {
         const casep = widths[widthName]
         if (!casep) continue
         if (Array.isArray(casep) && !isAtomicArray(casep))
             casep.forEach((ruleset, idx) =>
                 atomizeRulesetLow(
-                    ruleset, list, 
+                    ruleset, list,
                     `${path}/$switch.${widthName}[${idx}]`,
                     pseudoPrefixes(widthName),
                     conditions(widthName))
@@ -47,15 +50,13 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<TVariants.SheetWidthsPart> = (
         else
             atomizeRulesetLow(
                 casep,
-                list, 
+                list,
                 `${path}/$widths.${widthName}`,
                 pseudoPrefixes(widthName),
                 conditions(widthName))
     }
 }
 
-const testAtomicRuleset: TComponents.TestAtomicRuleset = (cond: WidthsCondition, state) => {
-    const { propsCode: { isWidth } } = state
-    return isWidth && isWidth[cond.widthName]
-}
+const testAtomicRuleset: TComponents.TestAtomicRuleset = (cond: WidthsCondition, state) =>
+    test(cond.interval, actWidth())
 

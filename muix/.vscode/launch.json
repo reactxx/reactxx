@@ -28,7 +28,7 @@
                 //"--testPathPattern=widths-sheet",
                 //"--testPathPattern=to-classname-using-sheet",
                 //"--testPathPattern=switch-sheet-ex",
-                "--testPathPattern=sheet-ex",
+                "--testPathPattern=widths-sheet",
                 "-u"
             ],
             //"preLaunchTask": "build",

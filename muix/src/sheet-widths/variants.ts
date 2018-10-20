@@ -17,11 +17,11 @@ declare module 'reactxx-typings' {
             widths?: PropsBreakpoints<R, string>
         }
         interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> {
-            isWidth?: PropsBreakpoints<R, boolean>
+            isWidths?: PropsBreakpoints<R, boolean>
         }
 
         interface ComponentOptions {
-            widths_noPropCode?: boolean // PropsCodePart contains sheetWidths prop (WEB then needs to listen to width change)
+            withWidthsRuleset?: boolean // PropsCodePart contains sheetWidths prop (WEB then needs to listen to width change)
         }
 
         type PropsBreakpoints<R extends TSheeter.Shape, T> = keyof getWidths<R> extends never ? TSheeter.FakeInterface :

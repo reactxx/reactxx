@@ -33,8 +33,8 @@ export interface TProvider<R extends TSheeter.Shape> { Provider: React.Component
 //*********************************************************
 
 const systemPipes: TWithStyles.SystemPipes = {
-  firsts: [themePipe, initPipe],
-  lasts: [propsCodePipe, innerStatePipe, codePipe]
+  firsts: options => [options.withTheme && themePipe, initPipe],
+  lasts: options => [propsCodePipe, innerStatePipe, codePipe]
 }
 
 const withStyles = (componentState: TWithStyles.ComponentOptions) => {
@@ -58,7 +58,7 @@ const withStyles = (componentState: TWithStyles.ComponentOptions) => {
         ? componentState.getPipes(systemPipes, componentState)
         : globalOptions.getPipes(systemPipes, componentState)
           ? globalOptions.getPipes(systemPipes, componentState)
-          : [...systemPipes.firsts, ...systemPipes.lasts]
+          : [...systemPipes.firsts(componentState), ...systemPipes.lasts(componentState)]
     )
 
     render() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TWithStyles } from 'reactxx-typings'
 import { Consumer } from './provider'
-import { parse } from './parser'
+import { parse, test } from './parser'
 
 // platform dependent import
 import { addBreakpoint } from 'reactxx-sheet-widths'
@@ -12,9 +12,9 @@ export const widthsPipe: TWithStyles.Pipe = (pipelineState, next) => {
     const intervals: Record<string, [number, number]> = {}
 
     const render = (width: number) => {
-        pipelineState.pipeStates[pipeId] = {
+        if (pipelineState.props.widths) pipelineState.pipeStates[pipeId] = {
             codeProps: {
-                isWidth: getPropsCodeWidths(intervals, width)
+                isWidths: getPropsCodeWidths(intervals, width)
             }
         }
         return next()
@@ -24,7 +24,8 @@ export const widthsPipe: TWithStyles.Pipe = (pipelineState, next) => {
         const { pipeStates, props: { widths } } = pipelineState
         // UNDO
         delete pipeStates[pipeId]
-        if (!widths || (window.isWeb && pipelineState.widths_noPropCode)) return next()
+        const needsConsumer = (pipelineState.withWidthsRuleset && !window.isWeb) || widths
+        if (!needsConsumer) return next()
         // parse and register breakpoints
         for (const p in widths) {
             const [from, to] = intervals[p] = parse(p)
@@ -37,9 +38,6 @@ export const widthsPipe: TWithStyles.Pipe = (pipelineState, next) => {
 
 const getPropsCodeWidths = (intervals: Record<string, [number, number]>, width: number) => {
     const res: Record<string, boolean> = {}
-    for (const p in intervals) {
-        const [from, to] = intervals[p]
-        res[p] = width >= from && width < to
-    }
+    for (const p in intervals) res[p] = test(intervals[p], width)
     return res
 }

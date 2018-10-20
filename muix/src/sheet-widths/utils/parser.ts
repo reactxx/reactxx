@@ -15,4 +15,8 @@ export const intervalToSelector = (encoded: string) => {
     return `@media (min-width: ${from}px) and (max-width: ${to - 1}px)`
 }
 
+export const test = (interval: [number, number], width) => {
+    const [min, max] = interval
+    return min <= width && max < width
+}
 
