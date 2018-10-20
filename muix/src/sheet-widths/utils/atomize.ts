@@ -39,14 +39,14 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<TVariants.SheetWidthsPart> = (
         if (Array.isArray(casep) && !isAtomicArray(casep))
             casep.forEach((ruleset, idx) =>
                 atomizeRulesetLow(
-                    ruleset as any, list, 
+                    ruleset, list, 
                     `${path}/$switch.${widthName}[${idx}]`,
                     pseudoPrefixes(widthName),
                     conditions(widthName))
             )
         else
             atomizeRulesetLow(
-                casep as any, // as TVariants.VariantPart,
+                casep,
                 list, 
                 `${path}/$widths.${widthName}`,
                 pseudoPrefixes(widthName),

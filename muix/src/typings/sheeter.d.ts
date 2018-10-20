@@ -16,6 +16,7 @@ declare namespace TSheeter {
   /******************************************
     RULESET - Cross platform ruleset for web and native
   *******************************************/
+  export type RulesetOrAtomizedCreator = RulesetOrAtomized | ((theme) => RulesetOrAtomized)
 
   export type RulesetOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     RulesetItem<T, R> | RulesetItem<T, R>[]

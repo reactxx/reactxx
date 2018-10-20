@@ -37,7 +37,8 @@ function renderRuleEx(style: {}, tracePath?: string): TAtomize.AtomicWebs {
   return renderStyleToClassNames(this, tracePath, processedStyle)//.slice(1)
 }
 
-const concat = (arr1: TAtomize.AtomicWebsLow, arr2: TAtomize.AtomicWebsLow) => arr1.concat(arr2)
+const concat = (arr1: TAtomize.AtomicWebsLow, arr2: TAtomize.AtomicWebsLow) => arr2 ? arr1.concat(arr2) : arr1
+
 const newAtomicWeb = (def?) => {
   let res: TAtomize.AtomicWebs = def || [] as any
   res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
@@ -164,7 +165,8 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
     }
   }
 
-  if (classNames.length === 0) return null
+  if (classNames.length === 0)
+    return null
   return newAtomicWeb(classNames)
 }
 

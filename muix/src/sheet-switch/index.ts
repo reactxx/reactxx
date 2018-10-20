@@ -30,7 +30,7 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
         if (Array.isArray(casep) && !isAtomicArray(casep))
             casep.forEach((ruleset, idx) =>
                 atomizeRulesetLow(
-                    ruleset as any,
+                    ruleset,
                     list,
                     `${path}/$switch.${p}[${idx}]`,
                     pseudoPrefixes,
@@ -38,7 +38,7 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
             )
         else
             atomizeRulesetLow(
-                casep as any,
+                casep,
                 list,
                 `${path}/$switch.${p}`,
                 pseudoPrefixes,

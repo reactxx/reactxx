@@ -1,3 +1,4 @@
+import { TSheeter } from "reactxx-typings";
 import {
   atomizeSheet,
   atomizeRuleset,
@@ -14,15 +15,52 @@ export const createSheet = () =>
     root: (ts.view = [
       {
         $switch: {
-          isClosed: {
-            cursor: "pointer",
-            $web: [
-              {
-                ":hover": {
-                  color: "red"
+          isClosed: [
+            atomizeRuleset({
+              $switch: {
+                isOpened: {
+                  padding: 11
                 }
+              },
+              padding: 22
+            } as TSheeter.RulesetOrAtomized),
+            toClassNamesWithQuery(null, [
+              {
+                padding: 33
               }
-            ]
+            ])
+          ]
+        }
+      }
+    ]),
+    label: {},
+    webOnly: {},
+    nativeOnly: {}
+  });
+
+export const createSheetWithPseudo = () =>
+  (ts.sheet = {
+    root: (ts.view = [
+      {
+        $web: {
+          ":active": {
+            $switch: {
+              isClosed: [
+                atomizeRuleset({
+                  $switch: {
+                    isOpened: {
+                      padding: 11
+                    }
+                  },
+                  padding: 22
+                } as TSheeter.RulesetOrAtomized),
+                toClassNamesWithQuery(null, [
+                  {
+                    padding: 33
+                  }
+                ])
+              ]
+            }
           }
         }
       }
@@ -32,59 +70,63 @@ export const createSheet = () =>
     nativeOnly: {}
   });
 
-/*
 describe("SWITCH define sheet", () => {
-  it("NATIVE", () => {
-    initPlatform(false);
-    const sheet = atomizeSheet<Shape>(createSheet());
-`
-##########################################
-##########################################
-#
-#  NATIVE
-#
-##########################################
-##########################################
-`    
-    expect(sheet).toMatchInlineSnapshot();
-  });
+  `
+  ##########################################
+  ##########################################
+  #
+  #  WEBS
+  #
+  ##########################################
+  ##########################################
+  `;
   it("WEB", () => {
     initPlatform(true);
     const sheet = atomizeSheet<Shape>(createSheet());
-`
-##########################################
-##########################################
-#
-#  WEB
-#
-##########################################
-##########################################
-`    
-    expect(sheet).toMatchInlineSnapshot();
-  });
-});
-*/
-
-describe("SWITCH define sheet", () => {
-  it("NATIVE", () => {
-    initPlatform(false);
-    const sheet = atomizeSheet<Shape>(createSheet());
-    `
-##########################################
-##########################################
-#
-#  NATIVE
-#
-##########################################
-##########################################
-`;
     expect(sheet).toMatchInlineSnapshot(`
 Object {
   "root": Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "cursor: pointer /*root[0]/$switch.isClosed*/",
+          ".a { padding:22px /*.*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".b { padding:11px /*./$switch.isOpened*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
+          Object {
+            "case": "isOpened",
+            "type": "$switch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".c { padding:33px /*.*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".c { padding:33px /*.*/ }",
         ],
         "conditions": Array [
           Object {
@@ -100,25 +142,16 @@ Object {
 }
 `);
   });
-  it("WEB", () => {
+  it("WEB with pseudo: WRONG RESULT", () => {
     initPlatform(true);
-    const sheet = atomizeSheet<Shape>(createSheet());
-    `
-##########################################
-##########################################
-#
-#  WEB
-#
-##########################################
-##########################################
-`;
+    const sheet = atomizeSheet<Shape>(createSheetWithPseudo());
     expect(sheet).toMatchInlineSnapshot(`
 Object {
   "root": Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".a { cursor:pointer /*root[0]/$switch.isClosed*/ }",
+          ".a { padding:22px /*.*/ }",
         ],
         "conditions": Array [
           Object {
@@ -129,7 +162,104 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          ".b:hover { color:red /*root[0]/$switch.isClosed/$web[0]*/ }",
+          ".b { padding:11px /*./$switch.isOpened*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
+          Object {
+            "case": "isOpened",
+            "type": "$switch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".c { padding:33px /*.*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".c { padding:33px /*.*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
+        ],
+      },
+    ],
+    "name": "root",
+    "~": "c",
+  },
+}
+`);
+  });
+  it("NATIVE", () => {
+    initPlatform(false);
+    const sheet = atomizeSheet<Shape>(createSheet());
+    `
+  ##########################################
+  ##########################################
+  #
+  #  NATIVE
+  #
+  ##########################################
+  ##########################################
+  `;
+    expect(sheet).toMatchInlineSnapshot(`
+Object {
+  "root": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          "padding: 22 /*.*/",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "padding: 11 /*./$switch.isOpened*/",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
+          Object {
+            "case": "isOpened",
+            "type": "$switch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "padding: 33 /*.*/",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "padding: 33 /*.*/",
         ],
         "conditions": Array [
           Object {

@@ -21,7 +21,7 @@ export const atomizeRulesetLow = (
     path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions,
 ) => {
     const linear = linearize(ruleset)
-    atomize(linear, list, path, pseudoPrefixes, conditions)
+    atomizedToList(linear, list, path, pseudoPrefixes, conditions)
 }
 
 // processed:
@@ -60,9 +60,14 @@ const pushToList = (
     conditions: TVariants.Conditions, path: string
 ) => {
     if (!ruleset) return
-    const atomicArray = platform.toPlatformAtomizeRuleset(ruleset, path)
-    if (!atomicArray) return
-    list.push(conditions.length > 0 ? { atomicArray, conditions } : { atomicArray })
+    push(platform.toPlatformAtomizeRuleset(ruleset, path), conditions, list)
+}
+
+const push = (atomicArray: TAtomize.AtomicArray, conditions: TVariants.Conditions, list: TAtomize.Variants) => {
+    if (!atomicArray || atomicArray.length === 0) return
+    if (atomicArray[0] === null)
+        debugger
+    list.push(conditions && conditions.length > 0 ? { atomicArray, conditions } : { atomicArray })
 }
 
 const linearize = (ruleset: TSheeter.RulesetOrAtomized) => {
@@ -93,17 +98,24 @@ const linearize = (ruleset: TSheeter.RulesetOrAtomized) => {
     return parts
 }
 
-const atomize = (
+const atomizedToList = (
     parts: [string, TSheeter.RulesetItem][],
     list: TAtomize.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions,
 ) => {
     parts.forEach(part => {
         const item = part[1]
-        if (isAtomicArray(item))
-            list.push({ atomicArray: item })
-        else if (isAtomizedRuleset(item))
-            Array.prototype.push.apply(list, item.list)
-        else {
+        if (isAtomicArray(item)) {
+            warning(!pseudoPrefixes || pseudoPrefixes.length === 0, 'Incorrect behavior')
+            push(item, conditions, list)
+            list.push({ atomicArray: item, conditions })
+        } else if (isAtomizedRuleset(item)) {
+            warning(!pseudoPrefixes || pseudoPrefixes.length === 0, 'Incorrect behavior')
+            item.list.forEach(it => push(
+                it.atomicArray,
+                conditions && it.conditions ? [...conditions, ...it.conditions] : conditions ? conditions : it.conditions,
+                list
+            ))
+        } else {
             do_Push_Variants_Pseudos(
                 item, list,
                 `${path}${part[0]}`,

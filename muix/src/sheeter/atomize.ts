@@ -15,7 +15,7 @@ export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: T
     return sh as any as TAtomize.Sheet<R>
 }
 
-export const atomizeRuleset = (ruleset: TSheeter.ClassNameOrCreator, theme?, rulesetName?: string) => {
+export const atomizeRuleset = (ruleset: TSheeter.RulesetOrAtomizedCreator, theme?, rulesetName?: string) => {
     if (!ruleset) return null
     const rs: TSheeter.RulesetOrAtomized = createWithTheme(ruleset, theme)
 
