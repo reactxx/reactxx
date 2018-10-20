@@ -1,5 +1,9 @@
 import { TVariants } from "reactxx-typings";
-import { atomizeSheet, atomizeRuleset, toClassNamesWithQuery } from "reactxx-sheeter";
+import {
+  atomizeSheet,
+  atomizeRuleset,
+  toClassNamesWithQuery
+} from "reactxx-sheeter";
 import { initPlatform, Shape, ts } from "reactxx-tests";
 import { sheetSwitch_registerVariantHandler } from "../index";
 
@@ -16,14 +20,7 @@ export const createSheet = () =>
               borderColor: "cyan"
             }
           }
-        },
-        isClosed: [{
-          backgroundColor: "blue"
-        }, atomizeRuleset({
-          margin: 11,
-        }), toClassNamesWithQuery(null, {
-          padding: 11,
-        })]
+        }
       },
       $web: (ts.web = {
         ":hover": {
@@ -143,17 +140,6 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          "backgroundColor: blue /*root/$switch.isClosed*/",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "isClosed",
-            "type": "$switch",
-          },
-        ],
-      },
-      Object {
-        "atomicArray": Array [
           "backgroundColor: brown /*root/$native/$switch.isOpened*/",
         ],
         "conditions": Array [
@@ -214,23 +200,7 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          ".c { background-color:blue /*root/$switch.isClosed*/ }",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "isClosed",
-            "type": "$switch",
-          },
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          null,
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          ".d:hover { background-color:green /*root/$web/:hover/$switch.isClosed[0]*/ }",
+          ".c:hover { background-color:green /*root/$web/:hover/$switch.isClosed[0]*/ }",
         ],
         "conditions": Array [
           Object {
@@ -247,12 +217,7 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          null,
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          ".e:hover { background-color:yellow /*webOnly/$web/:hover/$switch.isOpened*/ }",
+          ".d:hover { background-color:yellow /*webOnly/$web/:hover/$switch.isOpened*/ }",
         ],
         "conditions": Array [
           Object {

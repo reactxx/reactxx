@@ -65,28 +65,19 @@ Array [
 *  QUERY TO STHEET
 ******************************************
 ",
-  Array [
-    "backgroundColor: blue /*root/$switch.isClosed*/",
-  ],
+  Array [],
   "
 ******************************************
 *  APPLY LASTWINS STRATEGY
 ******************************************
 ",
-  Object {
-    "backgroundColor": Object {
-      "tracePath": "root/$switch.isClosed",
-      "value": "blue",
-    },
-  },
+  Object {},
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style
 ******************************************
 ",
-  Object {
-    "backgroundColor": "blue",
-  },
+  Object {},
 ]
 `)
     );
@@ -168,10 +159,7 @@ Array [
 ******************************************
 ",
   Array [
-    ".c { background-color:blue /*root/$switch.isClosed*/ }",
-    undefined,
-    ".d:hover { background-color:green /*root/$web/:hover/$switch.isClosed[0]*/ }",
-    undefined,
+    ".c:hover { background-color:green /*root/$web/:hover/$switch.isClosed[0]*/ }",
   ],
   "
 ******************************************
@@ -179,15 +167,14 @@ Array [
 ******************************************
 ",
   Array [
-    ".d:hover { background-color:green /*root/$web/:hover/$switch.isClosed[0]*/ }",
-    ".c { background-color:blue /*root/$switch.isClosed*/ }",
+    ".c:hover { background-color:green /*root/$web/:hover/$switch.isClosed[0]*/ }",
   ],
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style
 ******************************************
 ",
-  "d c",
+  "c",
 ]
 `)
     );
@@ -216,9 +203,7 @@ Array [
   Array [
     ".a { background-color:red /*root/$switch.isOpened*/ }",
     ".b { border-color:cyan /*root/$switch.isOpened/$switch.isOpened*/ }",
-    undefined,
-    undefined,
-    ".e:hover { background-color:yellow /*webOnly/$web/:hover/$switch.isOpened*/ }",
+    ".d:hover { background-color:yellow /*webOnly/$web/:hover/$switch.isOpened*/ }",
   ],
   "
 ******************************************
@@ -226,7 +211,7 @@ Array [
 ******************************************
 ",
   Array [
-    ".e:hover { background-color:yellow /*webOnly/$web/:hover/$switch.isOpened*/ }",
+    ".d:hover { background-color:yellow /*webOnly/$web/:hover/$switch.isOpened*/ }",
     ".b { border-color:cyan /*root/$switch.isOpened/$switch.isOpened*/ }",
     ".a { background-color:red /*root/$switch.isOpened*/ }",
   ],
@@ -235,7 +220,7 @@ Array [
 *  FINALIZE FOR for web's className or native's style
 ******************************************
 ",
-  "e b a",
+  "d b a",
 ]
 `)
     );

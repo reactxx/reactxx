@@ -107,7 +107,7 @@ const atomizedToList = (
         if (isAtomicArray(item)) {
             warning(!pseudoPrefixes || pseudoPrefixes.length === 0, 'Incorrect behavior')
             push(item, conditions, list)
-            list.push({ atomicArray: item, conditions })
+            list.push(conditions && conditions.length>0 ? { atomicArray: item, conditions } : { atomicArray: item})
         } else if (isAtomizedRuleset(item)) {
             warning(!pseudoPrefixes || pseudoPrefixes.length === 0, 'Incorrect behavior')
             item.list.forEach(it => push(

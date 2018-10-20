@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SWITCH define sheet NATIVE 1`] = `
+Object {
+  "label": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          "paddingTop: 31 /*.*/",
+          "paddingBottom: 31 /*.*/",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "paddingTop: 31 /*.*/",
+          "paddingBottom: 31 /*.*/",
+        ],
+      },
+    ],
+    "name": "label",
+    "~": "c",
+  },
+  "root": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          "backgroundColor: blue /*root[0]*/",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "marginTop: 21 /*.[0]*/",
+          "marginBottom: 21 /*.[0]*/",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "paddingTop: 22 /*.*/",
+          "paddingBottom: 22 /*.*/",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "paddingTop: 22 /*.*/",
+          "paddingBottom: 22 /*.*/",
+        ],
+      },
+    ],
+    "name": "root",
+    "~": "c",
+  },
+}
+`;
+
+exports[`SWITCH define sheet WEB 1`] = `
+Object {
+  "label": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          ".i { padding-top:31px /*.*/ }",
+          ".j { padding-bottom:31px /*.*/ }",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".i { padding-top:31px /*.*/ }",
+          ".j { padding-bottom:31px /*.*/ }",
+        ],
+      },
+    ],
+    "name": "label",
+    "~": "c",
+  },
+  "root": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          ".m { background-color:blue /*root[0]*/ }",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".n:hover { color:red /*root[1]/$web[0]*/ }",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".a:active { margin-top:11px /*.[0]/$web*/ }",
+          ".b:active { margin-bottom:11px /*.[0]/$web*/ }",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".c { padding-top:11px /*.*/ }",
+          ".d { padding-bottom:11px /*.*/ }",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".c { padding-top:11px /*.*/ }",
+          ".d { padding-bottom:11px /*.*/ }",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".e { margin-top:21px /*.[0]*/ }",
+          ".f { margin-bottom:21px /*.[0]*/ }",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".g { padding-top:22px /*.*/ }",
+          ".h { padding-bottom:22px /*.*/ }",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".g { padding-top:22px /*.*/ }",
+          ".h { padding-bottom:22px /*.*/ }",
+        ],
+      },
+    ],
+    "name": "root",
+    "~": "c",
+  },
+  "webOnly": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          ".k { margin-top:41px /*.*/ }",
+          ".l { margin-bottom:41px /*.*/ }",
+        ],
+      },
+    ],
+    "name": "webOnly",
+    "~": "c",
+  },
+}
+`;
