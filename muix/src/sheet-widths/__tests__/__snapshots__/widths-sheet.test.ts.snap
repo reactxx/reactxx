@@ -10,8 +10,11 @@ Object {
         ],
         "conditions": Array [
           Object {
+            "interval": Array [
+              0,
+              640,
+            ],
             "type": "$widths",
-            "widthName": "0-640",
           },
         ],
       },
@@ -21,8 +24,11 @@ Object {
         ],
         "conditions": Array [
           Object {
+            "interval": Array [
+              640,
+              1024,
+            ],
             "type": "$widths",
-            "widthName": "640-1024",
           },
         ],
       },
@@ -32,8 +38,11 @@ Object {
         ],
         "conditions": Array [
           Object {
+            "interval": Array [
+              1024,
+              0,
+            ],
             "type": "$widths",
-            "widthName": "1024-",
           },
         ],
       },
