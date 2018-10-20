@@ -2,7 +2,8 @@ import React from 'react';
 import { deepMerges, globalOptions } from 'reactxx-sheeter';
 import { TAtomize, TComponents, TSheeter, TWithStyles } from 'reactxx-typings';
 import { codePipe } from './pipe-code';
-import { initPipe } from './pipe-init';
+import { propsPipe } from './pipe-props';
+import { defaultPropsPipe } from './pipe-default-props';
 import { innerStatePipe } from './pipe-inner-state';
 import { propsCodePipe } from './pipe-props-code';
 import { defaultThemeName, themePipe } from './pipe-theme';
@@ -33,7 +34,7 @@ export interface TProvider<R extends TSheeter.Shape> { Provider: React.Component
 //*********************************************************
 
 const systemPipes: TWithStyles.SystemPipes = {
-  firsts: options => [options.withTheme && themePipe, initPipe],
+  firsts: options => [options.withTheme && themePipe, options.defaultProps && defaultPropsPipe, propsPipe],
   lasts: options => [propsCodePipe, innerStatePipe, codePipe]
 }
 
@@ -44,6 +45,7 @@ const withStyles = (componentState: TWithStyles.ComponentOptions) => {
     initPipelineState = () => ({
       ...componentState,
       // instance props
+      pipeStates: [],
       uniqueId: componentState.displayName + ' *' + componentInstaneCounter++,
       props: this.props,
       pipeCounter: 1,
@@ -54,11 +56,11 @@ const withStyles = (componentState: TWithStyles.ComponentOptions) => {
 
     pipeline = createPipeline(
       this.pipelineState,
-      componentState.getPipes
+      (componentState.getPipes
         ? componentState.getPipes(systemPipes, componentState)
-        : globalOptions.getPipes(systemPipes, componentState)
+        : globalOptions.getPipes
           ? globalOptions.getPipes(systemPipes, componentState)
-          : [...systemPipes.firsts(componentState), ...systemPipes.lasts(componentState)]
+          : [...systemPipes.firsts(componentState), ...systemPipes.lasts(componentState)]).filter(p => !!p)
     )
 
     render() {
@@ -101,11 +103,9 @@ const finishComponentState = (
 }
 
 function createPipeline(pipelineState: TWithStyles.PipelineState, pipes: TWithStyles.Pipe[], lastPipeIdx = 0): TWithStyles.ReactNodeCreator {
-  if (lastPipeIdx >= pipes.length) return null
-  const actPipe = pipes[lastPipeIdx]
-  return actPipe
-    ? actPipe(pipelineState, createPipeline(pipelineState, pipes, lastPipeIdx + 1))
-    : createPipeline(pipelineState, pipes, lastPipeIdx + 1)
+  return lastPipeIdx >= pipes.length
+    ? null
+    : pipes[lastPipeIdx](pipelineState, lastPipeIdx, createPipeline(pipelineState, pipes, lastPipeIdx + 1))
 }
 
 let componentTypeCounter = 0 // counter of component types

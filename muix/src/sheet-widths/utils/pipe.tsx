@@ -7,8 +7,7 @@ import { parse, test } from './parser'
 import { addBreakpoint } from 'reactxx-sheet-widths'
 
 
-export const widthsPipe: TWithStyles.Pipe = (pipelineState, next) => {
-    const pipeId = pipelineState.pipeCounter++
+export const widthsPipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
     const intervals: Record<string, [number, number]> = {}
 
     const render = (width: number) => {

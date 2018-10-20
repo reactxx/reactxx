@@ -42,7 +42,7 @@ declare namespace TWithStyles {
   export interface PipelineState extends ComponentOptions<TSheeter.Shape> {
     uniqueId?: string
     props?: TComponents.Props
-    pipeCounter?: number
+    //pipeCounter?: number
 
     propsCode?: TComponents.PropsCode
     pipeStates?: PipeState[]
@@ -67,7 +67,7 @@ declare namespace TWithStyles {
     classes?: TSheeter.PartialSheet
   }
 
-  export type Pipe = (instanceState: TWithStyles.PipelineState, next: ReactNodeCreator) => ReactNodeCreator
+  export type Pipe = (instanceState: TWithStyles.PipelineState, pipeId:number, next: ReactNodeCreator) => ReactNodeCreator
   export type Pipeline = (instanceState: TWithStyles.PipelineState) => ReactNodeCreator
   export type ReactNodeCreator = () => React.ReactNode
 

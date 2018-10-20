@@ -2,10 +2,9 @@ import React from 'react';
 import { globalOptions, mergeDeep } from 'reactxx-sheeter';
 import { TWithStyles } from 'reactxx-typings';
 
-export const innerStatePipe: TWithStyles.Pipe = (pipelineState, next) => {
-  const pipeId = pipelineState.pipeCounter++
+export const innerStatePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
   const render = () => {
-
+    return next()
   }
   return () => {
     const { pipeStates, propsCode } = pipelineState
@@ -34,10 +33,11 @@ class InnerStateComponent extends React.Component<InnerStateComponentProps> {
       CodeComponent.modifyInnerState(propsCode, pipeState.innerState)
     }
     propsCode.mergedInnerState = mergeDeep(pipelineState.pipeStates.map(s => s.innerState))
-    return children
+    return children()
   }
 }
 interface InnerStateComponentProps {
   pipelineState: TWithStyles.PipelineState
   pipeState: TWithStyles.PipeState
+  children: () => React.ReactNode
 }

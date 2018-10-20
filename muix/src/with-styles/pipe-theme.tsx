@@ -3,8 +3,7 @@ import { atomizeSheet, globalOptions, mergeSheet } from 'reactxx-sheeter';
 import { TAtomize, TSheeter, TTheme, TWithStyles } from 'reactxx-typings';
 import warning from 'warning';
 
-export const themePipe: TWithStyles.Pipe = (pipelineState, next) => {
-  //const pipeId = pipelineState.pipeCounter++
+export const themePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
   const render = (theme: TTheme.Theme) => {
     pipelineState.theme = theme
     return next()

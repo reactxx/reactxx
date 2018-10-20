@@ -14,9 +14,8 @@
                 //"--testPathPattern=atomize-sheet",
                 //"--testPathPattern=to-classname",
                 //"--testPathPattern=switch-sheet",
-                //"--testPathPattern=widths-sheet",
-                //"-u"
-                //"src/core/tests/flow/drawer/__tests__/comp-test"
+                // "--testPathPattern=with-styles-comp",
+                // "-u"
             ],
             "group": "test",
             "presentation": {

@@ -37,7 +37,7 @@ export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOr
         else
             processStyle(src)
 
-        if (res.$web || res.$native) {
+        if (res && (res.$web || res.$native)) {
             if (!canModify)
                 res = { ...res }
             delete res.$web
