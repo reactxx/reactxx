@@ -1,5 +1,5 @@
 import React from 'react'
-import { TSheeter, TVariants, TComponents } from 'reactxx-typings'
+import { TSheeter, TVariants, TComponents, TWithStyles } from 'reactxx-typings'
 import * as WithStyle from 'reactxx-with-styles'
 import {
     toClassNamesWithQuery,
@@ -8,7 +8,7 @@ import {
 import { initPlatform, mount } from './index'
 import { Shape } from './shape'
 
-export const ReactAny: React.SFC<any> = ({children}) => children || null
+export const ReactAny: React.SFC<any> = ({ children }) => children || null
 ReactAny.displayName = 'ReactAny'
 
 const traceComponent = (isWeb: boolean, node: React.ReactElement<{}>, codeDisplayName?: string) => {
@@ -30,11 +30,12 @@ export const traceComponentEx = (
     traceLevel: number,
     sheet: TSheeter.PartialSheet<Shape>,
     comp: TComponents.SFCCode<Shape>,
-    node: (Comp: TComponents.ComponentClass<Shape>) => React.ReactElement<{}>
+    node: (Comp: TComponents.ComponentClass<Shape>) => React.ReactElement<{}>,
+    componentOptions?: TWithStyles.ComponentOptions<Shape>
 ) => {
     initPlatform(isWeb)
     window.__TRACELEVEL__ = traceLevel as any
-    const Comp = WithStyle.withStylesCreator({ ...defaultSheet, ...sheet }, comp)({ displayName: 'TestComponent' })
+    const Comp = WithStyle.withStylesCreator({ ...defaultSheet, ...sheet }, comp)({ ...componentOptions || {}, displayName: 'TestComponent' })
     traceComponent(isWeb, node(Comp), 'TestComponentCode')
 }
 

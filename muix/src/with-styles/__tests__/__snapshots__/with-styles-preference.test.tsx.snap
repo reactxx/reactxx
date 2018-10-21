@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WITH STYLES DEFAULT PROPS NATIVE 1`] = `
+Array [
+  <ReactAny
+    style={
+      Object {
+        "height": 22,
+        "maxHeight": 22,
+        "maxWidth": 33,
+        "paddingLeft": 11,
+        "paddingTop": 33,
+        "width": 22,
+      }
+    }
+  >
+    toClassNames([classes.root, classNameX])
+  </ReactAny>,
+  <ReactAny
+    style={
+      Object {
+        "height": 11,
+        "maxHeight": 22,
+        "maxWidth": 11,
+        "paddingLeft": 11,
+        "paddingTop": 33,
+        "width": 22,
+      }
+    }
+  >
+    toClassNames([classNameX, classes.root])
+  </ReactAny>,
+]
+`;
+
+exports[`WITH STYLES DEFAULT PROPS WEB 1`] = `
+Array [
+  <ReactAny
+    className="i h g f e c"
+    style={
+      Object {
+        "maxHeight": 22,
+        "paddingTop": 33,
+      }
+    }
+    trace={
+      Array [
+        ".i { max-width:33px /*.*/ }",
+        ".h { height:22px /*.*/ }",
+        ".g { width:22px /*root*/ }",
+        ".f { padding-left:11px /*root*/ }",
+        ".e { padding-top:11px /*root*/ }",
+        ".c { max-height:11px /*root*/ }",
+      ]
+    }
+  >
+    toClassNames([classes.root, classNameX])
+  </ReactAny>,
+  <ReactAny
+    className="g f e d c b"
+    style={
+      Object {
+        "maxHeight": 22,
+        "paddingTop": 33,
+      }
+    }
+    trace={
+      Array [
+        ".g { width:22px /*root*/ }",
+        ".f { padding-left:11px /*root*/ }",
+        ".e { padding-top:11px /*root*/ }",
+        ".d { max-width:11px /*root*/ }",
+        ".c { max-height:11px /*root*/ }",
+        ".b { height:11px /*root*/ }",
+      ]
+    }
+  >
+    toClassNames([classNameX, classes.root])
+  </ReactAny>,
+]
+`;
