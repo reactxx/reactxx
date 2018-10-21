@@ -1,50 +1,78 @@
 import React from 'react'
+import { createSerializer, OutputMapper } from 'enzyme-to-json'
+
+
 import { TSheeter, TVariants, TComponents, TWithStyles } from 'reactxx-typings'
 import * as WithStyle from 'reactxx-with-styles'
 import {
     toClassNamesWithQuery,
     platform,
+    globalOptions,
 } from "reactxx-sheeter";
 import { initPlatform, mount } from './index'
-import { Shape } from './shape'
+import { Shape, theme } from './shape'
+import console = require('console');
 
 export const ReactAny: React.SFC<any> = ({ children }) => children || null
 ReactAny.displayName = 'ReactAny'
 
-const traceComponent = (isWeb: boolean, node: React.ReactElement<{}>, codeDisplayName?: string) => {
-    let comp = mount(node)
-    if (window.__TRACELEVEL__ <= 2)
-        while (true) {
-            if (!comp) break
-            if (comp.name() === codeDisplayName) {
-                comp = comp.children()
-                break
-            }
-            comp = comp.childAt(0)
-        }
-    expect(comp).toMatchSnapshot();
-}
 
 export const traceComponentEx = (
     isWeb: boolean,
     traceLevel: number,
-    sheet: TSheeter.PartialSheet<Shape>,
+    sheet: TSheeter.SheetOrCreator<Shape>,
     comp: TComponents.SFCCode<Shape>,
     node: (Comp: TComponents.ComponentClass<Shape>) => React.ReactElement<{}>,
     componentOptions?: TWithStyles.ComponentOptions<Shape>
 ) => {
     initPlatform(isWeb)
+    globalOptions.namedThemes[WithStyle.defaultThemeName] = theme
     window.__TRACELEVEL__ = traceLevel as any
-    const Comp = WithStyle.withStylesCreator({ ...defaultSheet, ...sheet }, comp)({ ...componentOptions || {}, displayName: 'TestComponent' })
-    traceComponent(isWeb, node(Comp), 'TestComponentCode')
+    const Comp = WithStyle.withStylesCreator(sheet, comp)({ ...componentOptions || {}, displayName: 'TestComponent' })
+    //  JEST and ENZYME:
+    let wrapper = mount(node(Comp))
+    //if (window.__TRACELEVEL__ <= 3)
+    expect.addSnapshotSerializer(createSerializer({ map: filter, noKey: true }) as any);
+    expect(wrapper).toMatchSnapshot();
 }
 
-const defaultSheet: TSheeter.Sheet<Shape> = {
-    root: {},
-    label: {},
-    webOnly: {},
-    nativeOnly: {},
+// https://github.com/adriantoine/enzyme-to-json/issues/110
+const filter: OutputMapper = json => {
 
+    if (json.type === 'InnerStateComponent' || json.type === 'TestComponent' || json.type === 'TestComponentCode') {
+        if (window.__TRACELEVEL__ <= 3)
+            return json.children[0];
+        deleteProps(json)
+        return json
+    }
+    if (json.type === 'ThemeProviderGeneric') {
+        if (json.props['theme']) json.props['theme'] = '...'
+        return json
+    }
+    return json
+}
+
+function deleteProps(node) {
+    if (!node)
+        return
+    if (Array.isArray(node))
+        return
+    if (typeof node === 'object') {
+        ['innerStateComponent', 'CodeComponent', 'setInnerState', 'theme', 'toClassNames',
+            'refreshInnerStateComponent', 'sheetOrCreator', '~']
+            .forEach(p => delete node[p])
+        for (const p in node) {
+            if (p==='node') continue
+            //console.log(p)
+            const val = node[p]
+            if (!val) delete node[p]
+            else if (Array.isArray(val)) {
+                if (p != 'children') continue
+                val.forEach(n => deleteProps(n))
+            } else if (typeof val === 'object')
+                deleteProps(val)
+        }
+    }
 }
 
 export const createSheet = <R extends TSheeter.Shape>(

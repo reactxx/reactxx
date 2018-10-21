@@ -24,12 +24,13 @@ const traceTest = (isWeb: boolean, level: 1 | 2 | 3 | 4 | 5) => {
     {
       root: ts.view = {
         backgroundColor: 'gray'
-      }
+      },
+      label: {}, webOnly: {}, nativeOnly: {},
     },
-    ({ classes, classNameX, toClassNames, styleX, children }) => {
+    ({ classes, classNameX, toClassNames, styleX }) => {
       const root = toClassNames([classes.root, classNameX])
       return <ReactAny classNameX={root} styleX={styleX}>
-        {children}
+        {`traceLevel=${level}`}
       </ReactAny>
     },
     Comp => <Comp classNameX={{ padding: 10 }} styleX={{ margin: 10 }}>

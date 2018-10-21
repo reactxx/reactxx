@@ -5,7 +5,7 @@ import { platform } from 'reactxx-sheeter'
 
 import { ts, traceComponentEx, ReactAny } from "reactxx-tests";
 
-describe("WITH STYLES DEFAULT PROPS", () => {
+describe("WITH STYLE PREFERENCE", () => {
   it("WEB", () => traceTest(true));
   it("NATIVE", () => traceTest(false));
 });
@@ -13,6 +13,7 @@ describe("WITH STYLES DEFAULT PROPS", () => {
 const traceTest = (isWeb: boolean) => {
 
   traceComponentEx(isWeb, 2,
+    // sheet
     {
       root: ts.view = {
         width: 11,
@@ -21,21 +22,23 @@ const traceTest = (isWeb: boolean) => {
         maxWidth: 11,
         paddingTop: 11,
         paddingLeft: 11,
-      }
+      },
+      label: {}, webOnly: {}, nativeOnly: {},
     },
-    ({ classes, classNameX, toClassNames, styleX, children }) => {
-      const root = toClassNames([classes.root, classNameX])
-      const classNameFirst = toClassNames([classNameX, classes.root])
+    // component code
+    ({ classes, classNameX, toClassNames, styleX }) => {
       return <React.Fragment>
-        <ReactAny classNameX={root} styleX={styleX}>
+        <ReactAny classNameX={toClassNames([classes.root, classNameX])} styleX={styleX}>
           toClassNames([classes.root, classNameX])
         </ReactAny>
-        <ReactAny classNameX={classNameFirst} styleX={styleX}>
+        <ReactAny classNameX={toClassNames([classNameX, classes.root])} styleX={styleX}>
           toClassNames([classNameX, classes.root])
         </ReactAny>
       </React.Fragment>
     },
+    // component usage (Comp = withStyle(comp, <withStyle options>)
     Comp => <Comp classNameX={{ maxWidth: 33 }} styleX={{ paddingTop: 33 }} />,
+    // withStyle options
     {
       defaultProps: {
         classes: { root: { width: 22 } },

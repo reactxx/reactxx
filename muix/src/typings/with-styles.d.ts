@@ -10,10 +10,10 @@ declare namespace TWithStyles {
 
   // application options
   export interface GlobalState {
-    getDefaultTheme?: () => TTheme.Theme
+    getDefaultTheme?: () => any
     getPipes?: (systemPipes: SystemPipes, options: TWithStyles.ComponentOptions) => Pipe[]
     getInnerStatePipes?: (systemPipes: SystemPipes, options: TWithStyles.ComponentOptions) => Pipe[]
-    namedThemes?: { [themeName: string]: TTheme.Theme }
+    namedThemes?: { [themeName: string]: any }
     finalizePropsCode?: FinishPropsCode
     //applyLastWinStrategy?: TAtomize.ToPlatformClassName
     //mergeInnerStates?: (pipelineState: TWithStyles.PipelineState) => TVariants.Query

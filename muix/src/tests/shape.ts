@@ -1,7 +1,9 @@
 import { TSheeter } from 'reactxx-typings'
+import { ThemeProviderGeneric } from 'reactxx-with-styles'
 import { TSBugHelper } from 'reactxx-core'
 
 export interface Props {
+    disabled?: boolean
 }
 export interface InnerState {
     drawerOpened?: boolean
@@ -14,8 +16,8 @@ export interface Shape extends TSheeter.ShapeAncestor {
     web: TSheeter.ShapeMarks<'webOnly'>
     style: 'View'
 
-    theme: typeof Theme
-    cases: TSheeter.ShapeMarks<'isClosed' | 'isOpened'>
+    theme: typeof theme
+    cases: TSheeter.ShapeMarks<'isDisabled' | 'isClosed' | 'isOpened'>
     widths: TSheeter.ShapeMarks<'tabletWidth' | 'mobileWidth' | 'desktopWidth'>
     transitionGroups: TSheeter.ShapeMarks<'leftDrawer'>
 
@@ -23,21 +25,28 @@ export interface Shape extends TSheeter.ShapeAncestor {
     innerState: InnerState
 }
 
-export const Theme = {
+type TThemeProvider = new () => ThemeProviderGeneric<Shape>;
+export const ThemeProvider = ThemeProviderGeneric as TThemeProvider
+
+export const theme = {
     primary: {
-        color: 'green',
-        background: 'white',
+        normal: {
+            color: 'darkgreen',
+            background: 'white',
+        },
         disabled: {
             color: 'lightgreen',
             background: 'lightgray',
         }
     },
     secondary: {
-        color: 'red',
-        background: 'white',
+        normal: {
+            color: 'lightblue',
+            background: 'black',
+        },
         disabled: {
-            color: 'lightred',
-            background: 'lightgray',
+            color: 'blue',
+            background: 'darkgray',
         }
     },
     breakpoints: {

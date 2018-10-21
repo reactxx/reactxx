@@ -5,7 +5,7 @@ import warning from 'warning';
 
 export const themePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
   const render = (theme: TTheme.Theme) => {
-    pipelineState.theme = theme
+    pipelineState.theme = theme || globalOptions.namedThemes[defaultThemeName]
     return next()
   }
   return () => pipelineState.withTheme
@@ -21,16 +21,17 @@ export const registerTheme = (name: string, theme: TTheme.Theme) => {
 
 const themeContext = React.createContext<TTheme.Theme>(null)
 
-export class ThemeProvider extends React.Component<TTheme.ThemeProviderProps> {
+// https://github.com/Microsoft/TypeScript/issues/3960#issuecomment-144529141
+export class ThemeProviderGeneric<R extends TSheeter.Shape> extends React.Component<TTheme.ThemeProviderProps<TSheeter.getTheme<R>>> {
 
   render() {
     const { children, theme, registeredThemeName } = this.props
     const actTheme = registeredThemeName ? globalOptions.namedThemes[registeredThemeName] : theme
     warning(actTheme, 'ThemeProvider: missing theme')
-    return <themeContext.Provider value={actTheme}>{children}</themeContext.Provider>
+    return <themeContext.Provider value={actTheme as TTheme.Theme}>{children}</themeContext.Provider>
   }
-
 }
+ThemeProviderGeneric[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.reactxxComponent
 
 export const defaultThemeName = '*default-theme*'
 

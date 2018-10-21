@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WITH STYLES THEME NATIVE 1`] = `
+<ReactAny>
+  <ReactAny
+    style={
+      Object {
+        "background": "black",
+        "color": "lightblue",
+        "fontWeight": "bold",
+      }
+    }
+  >
+    Default Theme
+  </ReactAny>
+  <ThemeProviderGeneric
+    theme="..."
+  >
+    <ReactAny
+      style={
+        Object {
+          "background": "black",
+          "color": "lightcyan",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Custom Theme
+    </ReactAny>
+  </ThemeProviderGeneric>
+</ReactAny>
+`;
+
+exports[`WITH STYLES THEME WEB 1`] = `
+<ReactAny>
+  <ReactAny
+    className="c b a"
+    trace={
+      Array [
+        ".c { font-weight:bold /*label[1]*/ }",
+        ".b { background:black /*label[0]*/ }",
+        ".a { color:lightblue /*label[0]*/ }",
+      ]
+    }
+  >
+    Default Theme
+  </ReactAny>
+  <ThemeProviderGeneric
+    theme="..."
+  >
+    <ReactAny
+      className="c b d"
+      trace={
+        Array [
+          ".c { font-weight:bold /*label[1]*/ }",
+          ".b { background:black /*label[0]*/ }",
+          ".d { color:lightcyan /*label[0]*/ }",
+        ]
+      }
+    >
+      Custom Theme
+    </ReactAny>
+  </ThemeProviderGeneric>
+</ReactAny>
+`;

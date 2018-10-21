@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WITH STYLES DEFAULT PROPS NATIVE 1`] = `
+exports[`WITH STYLE PREFERENCE NATIVE 1`] = `
 Array [
   <ReactAny
     style={
@@ -33,7 +33,7 @@ Array [
 ]
 `;
 
-exports[`WITH STYLES DEFAULT PROPS WEB 1`] = `
+exports[`WITH STYLE PREFERENCE WEB 1`] = `
 Array [
   <ReactAny
     className="i h g f e c"

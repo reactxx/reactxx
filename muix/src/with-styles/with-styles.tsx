@@ -94,8 +94,10 @@ const finishComponentState = (
     sheetOrCreator,
     componentId,
     CodeComponent,
-    withTheme: typeof mergedOptions.withTheme === 'boolean' ? mergedOptions.withTheme : typeof mergedOptions.sheetOrCreator === 'function',
-    displayName: `${mergedOptions.displayName || CodeComponent.displayName || CodeComponent['name'] || 'unknown'}`,
+    withTheme: typeof mergedOptions.withTheme === 'boolean'
+      ? mergedOptions.withTheme
+      : typeof sheetOrCreator === 'function',
+    displayName: `${mergedOptions.displayName || CodeComponent['name'] || 'Noname'}`,
   }
 
   CodeComponent.displayName = CodeComponent.displayName || res.displayName + 'Code'
