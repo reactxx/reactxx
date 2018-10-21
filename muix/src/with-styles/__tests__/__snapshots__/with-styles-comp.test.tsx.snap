@@ -1,22 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`WITH STYLES WEB 1`] = `
-Array [
-  <h2>
-    Hallo world
-  </h2>,
-  <div
-    className="a"
-    trace={
-      Array [
-        ".a { background-color:gray /*root*/ }",
-      ]
-    }
-  >
-    Text
-    <span>
-      text
-    </span>
-  </div>,
-]
+<div
+  className="a"
+  trace={
+    Array [
+      ".a { background-color:gray /*root*/ }",
+    ]
+  }
+>
+  Text
+</div>
 `;

@@ -21,7 +21,7 @@ declare module 'react' {
   }
 }
 
-export const createElement = (type, props: TComponents.ReactsCommonProperties & { className?, style?} & TComponents.Events, ...children) => {
+export const createElement = (type, props: TComponents.ReactsCommonProperties & TComponents.ReactsCommonPropertiesWeb, ...children) => {
 
   if (!props) return React.createElement(type, props, ...children)
 
@@ -44,7 +44,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   }
 
   if (styleX) {
-    props.style = mergeStyles(styleX)
+    props.style = mergeStyles(styleX) as React.CSSProperties
   }
 
   deleteSystemProps(props)

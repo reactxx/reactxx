@@ -8,8 +8,7 @@ import {
 import { initPlatform, mount } from './index'
 import { Shape } from './shape'
 
-export const traceComponent = (isWeb: boolean, node: React.ReactElement<{}>, codeDisplayName?: string) => {
-    initPlatform(true)
+const traceComponent = (isWeb: boolean, node: React.ReactElement<{}>, codeDisplayName?: string) => {
     let comp = mount(node)
     if (window.__TRACELEVEL__ <= 2)
         while (true) {
@@ -29,6 +28,7 @@ export const traceComponentEx = (
     comp: TComponents.SFCCode<Shape>,
     node: (Comp: TComponents.ComponentClass<Shape>) => React.ReactElement<{}>
 ) => {
+    initPlatform(isWeb)
     const Comp = WithStyle.withStylesCreator({ ...defaultSheet, ...sheet }, comp)({ displayName: 'TestComponent' })
     traceComponent(isWeb, node(Comp), 'TestComponentCode')
 }

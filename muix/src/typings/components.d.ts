@@ -28,10 +28,23 @@ declare namespace TComponents {
   - react native build in components (e.g. <Text styleX={...})
   - custom components (e.g. <IconButton classNameX={...})
   */
-  export interface ReactsCommonProperties<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
+  export interface ReactsCommonProperties<R extends TSheeter.Shape = TSheeter.Shape> {
     classNameX?: TAtomize.AtomicArray // TSheeter.ClassNameOrAtomized<R>
-    styleX?: TSheeter.StyleOrAtomized<R>
+    styleX?: TSheeter.StyleItem
     trace?: string
+  }
+
+  export interface ReactsCommonPropertiesWeb {
+    className?: string
+    styleX?: TSheeter.Style
+    style?: React.CSSProperties
+    $native?
+  }
+
+  export interface ReactsCommonPropertiesNative<R extends TSheeter.Shape = TSheeter.Shape> extends ReactsCommonProperties<R> {
+    styleX?: TAtomize.AtomizedRuleset
+    style?: TAtomize.AtomicNativeLow
+    $web?
   }
 
   export interface PropsLow<R extends Shape> {
@@ -60,7 +73,7 @@ declare namespace TComponents {
   export type PropsCode<R extends Shape = Shape> = PartialOverwrite<TSheeter.getProps<R>,
     CommonPropertiesCode<R> &
     TVariants.PropsCodePart<R> &
-    EventsNative & 
+    EventsNative &
     EventsWeb>
 
   export interface CommonPropertiesCode<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
@@ -79,7 +92,7 @@ declare namespace TComponents {
 
   export type SFCCode<R extends Shape = Shape> = React.SFC<PropsCode<R>> & ModifyInnerStateProp<R>
   export type ComponentTypeCode<R extends Shape = Shape> = React.ComponentType<PropsCode<R>> & ModifyInnerStateProp<R>
-    export type ModifyInnerStateProc<R extends Shape> = (props: PropsCode<R>, pipeState?: InnerState<R>) => void
+  export type ModifyInnerStateProc<R extends Shape> = (props: PropsCode<R>, pipeState?: InnerState<R>) => void
   export interface ModifyInnerStateProp<R extends Shape> {
     modifyInnerState?: ModifyInnerStateProc<R>
   }

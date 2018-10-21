@@ -1,0 +1,694 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WITH STYLES TRACE LEVELS trace 1 NATIVE 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "gray",
+      "margin": 10,
+      "padding": 10,
+    }
+  }
+>
+  Text
+</div>
+`;
+
+exports[`WITH STYLES TRACE LEVELS trace 1 WEB 1`] = `
+<div
+  className="b a"
+  style={
+    Object {
+      "margin": 10,
+    }
+  }
+>
+  Text
+</div>
+`;
+
+exports[`WITH STYLES TRACE LEVELS trace 2 NATIVE 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "gray",
+      "margin": 10,
+      "padding": 10,
+    }
+  }
+>
+  Text
+</div>
+`;
+
+exports[`WITH STYLES TRACE LEVELS trace 2 WEB 1`] = `
+<div
+  className="b a"
+  style={
+    Object {
+      "margin": 10,
+    }
+  }
+  trace={
+    Array [
+      ".b { padding:10px /*.*/ }",
+      ".a { background-color:gray /*root*/ }",
+    ]
+  }
+>
+  Text
+</div>
+`;
+
+exports[`WITH STYLES TRACE LEVELS trace 3 NATIVE 1`] = `
+<TestComponent
+  classNameX={
+    Object {
+      "padding": 10,
+    }
+  }
+  styleX={
+    Object {
+      "margin": 10,
+    }
+  }
+>
+  <InnerStateComponent
+    pipeState={"..."}
+    pipelineState={"..."}
+  >
+    <TestComponentCode
+      classNameX={"..."}
+      classes={"..."}
+      mergedInnerState={null}
+      setInnerState={[Function]}
+      styleX={"..."}
+      toClassNames={[Function]}
+    >
+      <div
+        style={
+          Object {
+            "backgroundColor": "gray",
+            "margin": 10,
+            "padding": 10,
+          }
+        }
+      >
+        Text
+      </div>
+    </TestComponentCode>
+  </InnerStateComponent>
+</TestComponent>
+`;
+
+exports[`WITH STYLES TRACE LEVELS trace 3 WEB 1`] = `
+<TestComponent
+  classNameX={
+    Object {
+      "padding": "10px",
+    }
+  }
+  styleX={
+    Object {
+      "margin": 10,
+    }
+  }
+>
+  <InnerStateComponent
+    pipeState={"..."}
+    pipelineState={"..."}
+  >
+    <TestComponentCode
+      classNameX={"..."}
+      classes={"..."}
+      mergedInnerState={null}
+      setInnerState={[Function]}
+      styleX={
+        Object {
+          "margin": 10,
+        }
+      }
+      toClassNames={[Function]}
+    >
+      <div
+        className="b a"
+        style={
+          Object {
+            "margin": 10,
+          }
+        }
+        trace={
+          Array [
+            ".b { padding:10px /*.*/ }",
+            ".a { background-color:gray /*root*/ }",
+          ]
+        }
+      >
+        Text
+      </div>
+    </TestComponentCode>
+  </InnerStateComponent>
+</TestComponent>
+`;
+
+exports[`WITH STYLES TRACE LEVELS trace 4 NATIVE 1`] = `
+<TestComponent
+  classNameX={
+    Object {
+      "padding": 10,
+    }
+  }
+  styleX={
+    Object {
+      "margin": 10,
+    }
+  }
+>
+  <InnerStateComponent
+    pipeState={"..."}
+    pipelineState={"..."}
+  >
+    <TestComponentCode
+      classNameX={
+        Object {
+          "list": Array [
+            Object {
+              "atomicArray": Array [
+                "padding: 10 /*.*/",
+              ],
+            },
+          ],
+          "name": ".",
+          "~": "c",
+        }
+      }
+      classes={
+        Object {
+          "root": Object {
+            "list": Array [
+              Object {
+                "atomicArray": Array [
+                  "backgroundColor: gray /*root*/",
+                ],
+              },
+            ],
+            "name": "root",
+            "~": "c",
+          },
+        }
+      }
+      mergedInnerState={null}
+      setInnerState={[Function]}
+      styleX={
+        Object {
+          "list": Array [
+            Object {
+              "atomicArray": Array [
+                "margin: 10 /*.*/",
+              ],
+            },
+          ],
+          "name": ".",
+          "~": "c",
+        }
+      }
+      toClassNames={[Function]}
+    >
+      <div
+        style={
+          Object {
+            "backgroundColor": "gray",
+            "margin": 10,
+            "padding": 10,
+          }
+        }
+      >
+        Text
+      </div>
+    </TestComponentCode>
+  </InnerStateComponent>
+</TestComponent>
+`;
+
+exports[`WITH STYLES TRACE LEVELS trace 4 WEB 1`] = `
+<TestComponent
+  classNameX={
+    Object {
+      "padding": "10px",
+    }
+  }
+  styleX={
+    Object {
+      "margin": 10,
+    }
+  }
+>
+  <InnerStateComponent
+    pipeState={"..."}
+    pipelineState={"..."}
+  >
+    <TestComponentCode
+      classNameX={
+        Object {
+          "list": Array [
+            Object {
+              "atomicArray": Array [
+                ".b { padding:10px /*.*/ }",
+              ],
+            },
+          ],
+          "name": ".",
+          "~": "c",
+        }
+      }
+      classes={
+        Object {
+          "root": Object {
+            "list": Array [
+              Object {
+                "atomicArray": Array [
+                  ".a { background-color:gray /*root*/ }",
+                ],
+              },
+            ],
+            "name": "root",
+            "~": "c",
+          },
+        }
+      }
+      mergedInnerState={null}
+      setInnerState={[Function]}
+      styleX={
+        Object {
+          "margin": 10,
+        }
+      }
+      toClassNames={[Function]}
+    >
+      <div
+        className="b a"
+        style={
+          Object {
+            "margin": 10,
+          }
+        }
+        trace={
+          Array [
+            ".b { padding:10px /*.*/ }",
+            ".a { background-color:gray /*root*/ }",
+          ]
+        }
+      >
+        Text
+      </div>
+    </TestComponentCode>
+  </InnerStateComponent>
+</TestComponent>
+`;
+
+exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
+<TestComponent
+  classNameX={
+    Object {
+      "padding": 10,
+    }
+  }
+  styleX={
+    Object {
+      "margin": 10,
+    }
+  }
+>
+  <InnerStateComponent
+    pipeState={Object {}}
+    pipelineState={
+      Object {
+        "CodeComponent": [Function],
+        "componentId": 9,
+        "displayName": "TestComponent",
+        "innerStateComponent": "...",
+        "pipeStates": Array [
+          Object {
+            "classes": Object {
+              "root": Object {
+                "list": Array [
+                  Object {
+                    "atomicArray": Array [
+                      "backgroundColor: gray /*root*/",
+                    ],
+                  },
+                ],
+                "name": "root",
+                "~": "c",
+              },
+            },
+          },
+          Object {
+            "classNameX": Object {
+              "list": Array [
+                Object {
+                  "atomicArray": Array [
+                    "padding: 10 /*.*/",
+                  ],
+                },
+              ],
+              "name": ".",
+              "~": "c",
+            },
+            "classes": null,
+            "codeProps": Array [
+              Object {
+                "children": "Text",
+              },
+              null,
+            ],
+            "styleX": Object {
+              "list": Array [
+                Object {
+                  "atomicArray": Array [
+                    "margin: 10 /*.*/",
+                  ],
+                },
+              ],
+              "name": ".",
+              "~": "c",
+            },
+          },
+          undefined,
+          Object {},
+        ],
+        "props": Object {
+          "children": "Text",
+          "classNameX": Object {
+            "padding": 10,
+          },
+          "styleX": Object {
+            "margin": 10,
+          },
+        },
+        "propsCode": Object {
+          "children": "Text",
+          "classNameX": Object {
+            "list": Array [
+              Object {
+                "atomicArray": Array [
+                  "padding: 10 /*.*/",
+                ],
+              },
+            ],
+            "name": ".",
+            "~": "c",
+          },
+          "classes": Object {
+            "root": Object {
+              "list": Array [
+                Object {
+                  "atomicArray": Array [
+                    "backgroundColor: gray /*root*/",
+                  ],
+                },
+              ],
+              "name": "root",
+              "~": "c",
+            },
+          },
+          "mergedInnerState": null,
+          "setInnerState": [Function],
+          "styleX": Object {
+            "list": Array [
+              Object {
+                "atomicArray": Array [
+                  "margin: 10 /*.*/",
+                ],
+              },
+            ],
+            "name": ".",
+            "~": "c",
+          },
+          "theme": undefined,
+          "toClassNames": [Function],
+        },
+        "refreshInnerStateComponent": [Function],
+        "sheetOrCreator": Object {
+          "root": Object {
+            "list": Array [
+              Object {
+                "atomicArray": Array [
+                  "backgroundColor: gray /*root*/",
+                ],
+              },
+            ],
+            "name": "root",
+            "~": "c",
+          },
+        },
+        "uniqueId": "TestComponent *19",
+        "withTheme": false,
+      }
+    }
+  >
+    <TestComponentCode
+      classNameX={
+        Object {
+          "list": Array [
+            Object {
+              "atomicArray": Array [
+                "padding: 10 /*.*/",
+              ],
+            },
+          ],
+          "name": ".",
+          "~": "c",
+        }
+      }
+      classes={
+        Object {
+          "root": Object {
+            "list": Array [
+              Object {
+                "atomicArray": Array [
+                  "backgroundColor: gray /*root*/",
+                ],
+              },
+            ],
+            "name": "root",
+            "~": "c",
+          },
+        }
+      }
+      mergedInnerState={null}
+      setInnerState={[Function]}
+      styleX={
+        Object {
+          "list": Array [
+            Object {
+              "atomicArray": Array [
+                "margin: 10 /*.*/",
+              ],
+            },
+          ],
+          "name": ".",
+          "~": "c",
+        }
+      }
+      toClassNames={[Function]}
+    >
+      <div
+        style={
+          Object {
+            "backgroundColor": "gray",
+            "margin": 10,
+            "padding": 10,
+          }
+        }
+      >
+        Text
+      </div>
+    </TestComponentCode>
+  </InnerStateComponent>
+</TestComponent>
+`;
+
+exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
+<TestComponent
+  classNameX={
+    Object {
+      "padding": "10px",
+    }
+  }
+  styleX={
+    Object {
+      "margin": 10,
+    }
+  }
+>
+  <InnerStateComponent
+    pipeState={Object {}}
+    pipelineState={
+      Object {
+        "CodeComponent": [Function],
+        "componentId": 8,
+        "displayName": "TestComponent",
+        "innerStateComponent": "...",
+        "pipeStates": Array [
+          Object {
+            "classes": Object {
+              "root": Object {
+                "list": Array [
+                  Object {
+                    "atomicArray": Array [
+                      ".a { background-color:gray /*root*/ }",
+                    ],
+                  },
+                ],
+                "name": "root",
+                "~": "c",
+              },
+            },
+          },
+          Object {
+            "classNameX": Object {
+              "list": Array [
+                Object {
+                  "atomicArray": Array [
+                    ".b { padding:10px /*.*/ }",
+                  ],
+                },
+              ],
+              "name": ".",
+              "~": "c",
+            },
+            "classes": null,
+            "codeProps": Array [
+              Object {
+                "children": "Text",
+              },
+              null,
+            ],
+            "styleX": Object {
+              "margin": 10,
+            },
+          },
+          undefined,
+          Object {},
+        ],
+        "props": Object {
+          "children": "Text",
+          "classNameX": Object {
+            "padding": "10px",
+          },
+          "styleX": Object {
+            "margin": 10,
+          },
+        },
+        "propsCode": Object {
+          "children": "Text",
+          "classNameX": Object {
+            "list": Array [
+              Object {
+                "atomicArray": Array [
+                  ".b { padding:10px /*.*/ }",
+                ],
+              },
+            ],
+            "name": ".",
+            "~": "c",
+          },
+          "classes": Object {
+            "root": Object {
+              "list": Array [
+                Object {
+                  "atomicArray": Array [
+                    ".a { background-color:gray /*root*/ }",
+                  ],
+                },
+              ],
+              "name": "root",
+              "~": "c",
+            },
+          },
+          "mergedInnerState": null,
+          "setInnerState": [Function],
+          "styleX": Object {
+            "margin": 10,
+          },
+          "theme": undefined,
+          "toClassNames": [Function],
+        },
+        "refreshInnerStateComponent": [Function],
+        "sheetOrCreator": Object {
+          "root": Object {
+            "list": Array [
+              Object {
+                "atomicArray": Array [
+                  ".a { background-color:gray /*root*/ }",
+                ],
+              },
+            ],
+            "name": "root",
+            "~": "c",
+          },
+        },
+        "uniqueId": "TestComponent *17",
+        "withTheme": false,
+      }
+    }
+  >
+    <TestComponentCode
+      classNameX={
+        Object {
+          "list": Array [
+            Object {
+              "atomicArray": Array [
+                ".b { padding:10px /*.*/ }",
+              ],
+            },
+          ],
+          "name": ".",
+          "~": "c",
+        }
+      }
+      classes={
+        Object {
+          "root": Object {
+            "list": Array [
+              Object {
+                "atomicArray": Array [
+                  ".a { background-color:gray /*root*/ }",
+                ],
+              },
+            ],
+            "name": "root",
+            "~": "c",
+          },
+        }
+      }
+      mergedInnerState={null}
+      setInnerState={[Function]}
+      styleX={
+        Object {
+          "margin": 10,
+        }
+      }
+      toClassNames={[Function]}
+    >
+      <div
+        className="b a"
+        style={
+          Object {
+            "margin": 10,
+          }
+        }
+        trace={
+          Array [
+            ".b { padding:10px /*.*/ }",
+            ".a { background-color:gray /*root*/ }",
+          ]
+        }
+      >
+        Text
+      </div>
+    </TestComponentCode>
+  </InnerStateComponent>
+</TestComponent>
+`;

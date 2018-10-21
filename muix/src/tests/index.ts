@@ -17,6 +17,7 @@ import { platform } from 'reactxx-sheeter'
 import { platform as platformNative } from 'reactxx-sheeter-native'
 
 import { resetRenderer } from "reactxx-fela";
+import { resetTheme } from 'reactxx-with-styles'
 
 const platformWeb = { ...platform }
 
@@ -31,5 +32,6 @@ export const initPlatform = (isWeb: boolean, __DEV__: boolean | 1 | 2 | 3 | 4 | 
     Object.assign(platform, isWeb ? platformWeb : platformNative)
 
     if (isWeb)
-        resetRenderer();
+        resetRenderer()
+    resetTheme()
 }

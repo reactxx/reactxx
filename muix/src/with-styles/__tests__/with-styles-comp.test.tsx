@@ -17,16 +17,12 @@ describe("WITH STYLES", () => {
       },
       ({ classes, classNameX, toClassNames, children }) => {
         const root = toClassNames([classes.root, classNameX])
-        return <React.Fragment>
-          <h2>Hallo world</h2>
-          <div classNameX={root}>
-            {children}
-          </div>
-        </React.Fragment>
+        return <div classNameX={root}>
+          {children}
+        </div>
       },
       Comp => <Comp>
         Text
-        <span>text</span>
       </Comp>)
   });
 });

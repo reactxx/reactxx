@@ -1,5 +1,5 @@
 import { TAtomize } from 'reactxx-typings'
-import { applyLastwinsStrategy, finalClassNameStep } from './reacts/$native'
+import { applyLastwinsStrategy, finalClassNameStep, createElement } from './reacts/$native'
 
 export const platform: TAtomize.Platform = {
     toPlatformAtomizeRuleset: (style, tracePath) => {
@@ -21,7 +21,8 @@ export const platform: TAtomize.Platform = {
     },
     dumpAtomized: array => array,
     applyLastwinsStrategy,
-    finalClassNameStep
+    finalClassNameStep,
+    createElement
 }
 
 function toJSON() { return `${this.propId}: ${this.value.value} /*${this.value.tracePath}*/` }

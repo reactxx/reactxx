@@ -1,5 +1,6 @@
 import React from 'react'
 import { TComponents, TAtomize } from 'reactxx-typings'
+import { deleteSystemProps, toClassNamesWithQuery } from '../to-classnames'
 
 import { applyLastwinsStrategyRoot, ApplyLastWinStrategyLow, AttemptType, ApplyLastWinStrategyResult } from '../utils/apply-last-win-strategy'
 import { isReactXXComponent, isDeffered } from '../atomize'
@@ -16,28 +17,29 @@ declare module 'react-native' {
   }
 }
 
-export const createElement = (type, props: TComponents.ReactsCommonProperties  & { style?}, ...children) => {
+export const createElement = (type, props: TComponents.ReactsCommonProperties & TComponents.ReactsCommonPropertiesNative, ...children) => {
   if (!props) return React.createElement(type, props, ...children)
+
+  const isXXComponent = isReactXXComponent(type)
+
+  delete props.$web
+  //consolidateEvents(props)
+
+  if (isXXComponent) return React.createElement(type, props, ...children)
 
   const { classNameX, styleX } = props
 
-  if (classNameX) {
-    let reduced = applyLastwinsStrategy(classNameX)
+  if (classNameX || styleX) {
+    let style =
+      styleX 
+      ? toClassNamesWithQuery(null,[classNameX, styleX])
+      : classNameX
+    let reduced = applyLastwinsStrategy(style)
     props.style = finalClassNameStep(reduced)
   }
 
+  deleteSystemProps(props)
 
-
-  //const style = applyLastwinsStrategyRoot(classNameX, applyLastWinStrategyLow)
-  // const { classNameX, styleX } = props
-  // if (classNameX) {
-  //     const compiled = Array.isArray(classNameX) ? classNames(...classNameX) : classNames(classNameX)
-  //     delete props.classNameX
-  //     props.className = normalizeValues(compiled)
-  // }
-  // const compiled = Array.isArray(props.css) ? classNames(...props.classNamex) : classNames(props.classNamex)
-  // delete props.css
-  // warning(!props.className, `Both "css" and "className" property used, className will be ignored`)
   return React.createElement(type, props, ...children)
 }
 
@@ -72,7 +74,7 @@ const applyLastWinStrategyLow: ApplyLastWinStrategyLow = (values, attemptType) =
       if (Array.isArray(value)) {
         Array.prototype.push.apply(res, value)
         continue
-      } 
+      }
     }
     if (defferedFound) continue // first attempt and deffered found => ignore other values
     // last win strategy

@@ -54,4 +54,9 @@ export const sheetFromThemeCache = (
 }
 
 // global 'sheet + defaultProps.classes' cache
-const $cache: { [componentId: number]: TSheeter.Sheet } = {}
+let $cache: { [componentId: number]: TSheeter.Sheet } = {}
+
+export const resetTheme = () => {
+  $cache = {}
+  globalOptions.namedThemes = {}
+}

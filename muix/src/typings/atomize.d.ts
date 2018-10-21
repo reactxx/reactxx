@@ -10,6 +10,7 @@ declare namespace TAtomize {
     dumpAtomized: (classNames: AtomicArrayLow) => any,
     applyLastwinsStrategy: (values: AtomicArrayLow) => AtomicArrayLow
     finalClassNameStep: (values: AtomicArrayLow) => string | Record<string, any>
+    createElement
   }
   export type GetPlatformTracePath = (value: Atomic) => string
   //export type ToPlatformClassName = (array: AtomicArray, propsPlatform: {style, className}) => void

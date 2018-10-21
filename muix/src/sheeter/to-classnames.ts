@@ -38,7 +38,10 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, rulesets
     return signAtomicArray(res, state)
 }
 
-export const deleteSystemProps = props => propsToDelete.forEach(p => delete props[p])
+export const deleteSystemProps = props => {
+    propsToDelete.forEach(p => delete props[p])
+    if (props.style) delete props.style.toJSON
+}
 
 
 /******************************************

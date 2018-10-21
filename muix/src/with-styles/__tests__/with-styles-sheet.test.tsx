@@ -18,7 +18,7 @@ describe("WITH STYLES", () => {
     initPlatform(true);
     const comp = shallow(<div
       classNameX={toClassNamesWithQuery(null, { color: 'red' })}
-      styleX={[{ margin: 10 }, { padding: 20 }]}
+      //styleX={{ margin: 10, padding: 20 }]}
     >
       Hallo world
     </div>);
