@@ -29,9 +29,9 @@ export const traceComponentEx = (
     globalOptions.namedThemes[WithStyle.defaultThemeName] = theme
     window.__TRACELEVEL__ = traceLevel as any
     const Comp = WithStyle.withStylesCreator(sheet, comp)({ ...componentOptions || {}, displayName: 'TestComponent' })
+
     //  JEST and ENZYME:
     let wrapper = mount(node(Comp))
-    //if (window.__TRACELEVEL__ <= 3)
     expect.addSnapshotSerializer(createSerializer({ map: filter, noKey: true }) as any);
     expect(wrapper).toMatchSnapshot();
 }
@@ -53,9 +53,7 @@ const filter: OutputMapper = json => {
 }
 
 function deleteProps(node) {
-    if (!node)
-        return
-    if (Array.isArray(node))
+    if (!node || Array.isArray(node))
         return
     if (typeof node === 'object') {
         ['innerStateComponent', 'CodeComponent', 'setInnerState', 'theme', 'toClassNames',
@@ -63,7 +61,6 @@ function deleteProps(node) {
             .forEach(p => delete node[p])
         for (const p in node) {
             if (p==='node') continue
-            //console.log(p)
             const val = node[p]
             if (!val) delete node[p]
             else if (Array.isArray(val)) {

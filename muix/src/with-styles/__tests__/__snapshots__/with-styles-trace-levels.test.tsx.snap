@@ -61,94 +61,36 @@ exports[`WITH STYLES TRACE LEVELS trace 2 WEB 1`] = `
 `;
 
 exports[`WITH STYLES TRACE LEVELS trace 3 NATIVE 1`] = `
-<TestComponent
-  classNameX={
+<ReactAny
+  style={
     Object {
+      "backgroundColor": "gray",
+      "margin": 10,
       "padding": 10,
     }
   }
-  styleX={
-    Object {
-      "margin": 10,
-    }
-  }
 >
-  <InnerStateComponent
-    pipeState={"..."}
-    pipelineState={"..."}
-  >
-    <TestComponentCode
-      classNameX={"..."}
-      classes={"..."}
-      mergedInnerState={null}
-      setInnerState={[Function]}
-      styleX={"..."}
-      toClassNames={[Function]}
-    >
-      <ReactAny
-        style={
-          Object {
-            "backgroundColor": "gray",
-            "margin": 10,
-            "padding": 10,
-          }
-        }
-      >
-        traceLevel=3
-      </ReactAny>
-    </TestComponentCode>
-  </InnerStateComponent>
-</TestComponent>
+  traceLevel=3
+</ReactAny>
 `;
 
 exports[`WITH STYLES TRACE LEVELS trace 3 WEB 1`] = `
-<TestComponent
-  classNameX={
-    Object {
-      "padding": "10px",
-    }
-  }
-  styleX={
+<ReactAny
+  className="b a"
+  style={
     Object {
       "margin": 10,
     }
   }
+  trace={
+    Array [
+      ".b { padding:10px /*.*/ }",
+      ".a { background-color:gray /*root*/ }",
+    ]
+  }
 >
-  <InnerStateComponent
-    pipeState={"..."}
-    pipelineState={"..."}
-  >
-    <TestComponentCode
-      classNameX={"..."}
-      classes={"..."}
-      mergedInnerState={null}
-      setInnerState={[Function]}
-      styleX={
-        Object {
-          "margin": 10,
-        }
-      }
-      toClassNames={[Function]}
-    >
-      <ReactAny
-        className="b a"
-        style={
-          Object {
-            "margin": 10,
-          }
-        }
-        trace={
-          Array [
-            ".b { padding:10px /*.*/ }",
-            ".a { background-color:gray /*root*/ }",
-          ]
-        }
-      >
-        traceLevel=3
-      </ReactAny>
-    </TestComponentCode>
-  </InnerStateComponent>
-</TestComponent>
+  traceLevel=3
+</ReactAny>
 `;
 
 exports[`WITH STYLES TRACE LEVELS trace 4 NATIVE 1`] = `
@@ -179,7 +121,6 @@ exports[`WITH STYLES TRACE LEVELS trace 4 NATIVE 1`] = `
             },
           ],
           "name": ".",
-          "~": "c",
         }
       }
       classes={
@@ -193,12 +134,9 @@ exports[`WITH STYLES TRACE LEVELS trace 4 NATIVE 1`] = `
               },
             ],
             "name": "root",
-            "~": "c",
           },
         }
       }
-      mergedInnerState={null}
-      setInnerState={[Function]}
       styleX={
         Object {
           "list": Array [
@@ -209,10 +147,8 @@ exports[`WITH STYLES TRACE LEVELS trace 4 NATIVE 1`] = `
             },
           ],
           "name": ".",
-          "~": "c",
         }
       }
-      toClassNames={[Function]}
     >
       <ReactAny
         style={
@@ -258,7 +194,6 @@ exports[`WITH STYLES TRACE LEVELS trace 4 WEB 1`] = `
             },
           ],
           "name": ".",
-          "~": "c",
         }
       }
       classes={
@@ -272,18 +207,14 @@ exports[`WITH STYLES TRACE LEVELS trace 4 WEB 1`] = `
               },
             ],
             "name": "root",
-            "~": "c",
           },
         }
       }
-      mergedInnerState={null}
-      setInnerState={[Function]}
       styleX={
         Object {
           "margin": 10,
         }
       }
-      toClassNames={[Function]}
     >
       <ReactAny
         className="b a"
@@ -323,10 +254,8 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
     pipeState={Object {}}
     pipelineState={
       Object {
-        "CodeComponent": [Function],
         "componentId": 9,
         "displayName": "TestComponent",
-        "innerStateComponent": "...",
         "pipeStates": Array [
           Object {
             "classes": Object {
@@ -339,7 +268,6 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
                   },
                 ],
                 "name": "root",
-                "~": "c",
               },
             },
           },
@@ -353,7 +281,6 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
                 },
               ],
               "name": ".",
-              "~": "c",
             },
             "classes": null,
             "codeProps": Array [
@@ -371,7 +298,6 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
                 },
               ],
               "name": ".",
-              "~": "c",
             },
           },
           undefined,
@@ -397,7 +323,6 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
               },
             ],
             "name": ".",
-            "~": "c",
           },
           "classes": Object {
             "root": Object {
@@ -409,11 +334,8 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
                 },
               ],
               "name": "root",
-              "~": "c",
             },
           },
-          "mergedInnerState": null,
-          "setInnerState": [Function],
           "styleX": Object {
             "list": Array [
               Object {
@@ -423,27 +345,9 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
               },
             ],
             "name": ".",
-            "~": "c",
-          },
-          "theme": undefined,
-          "toClassNames": [Function],
-        },
-        "refreshInnerStateComponent": [Function],
-        "sheetOrCreator": Object {
-          "root": Object {
-            "list": Array [
-              Object {
-                "atomicArray": Array [
-                  "backgroundColor: gray /*root*/",
-                ],
-              },
-            ],
-            "name": "root",
-            "~": "c",
           },
         },
         "uniqueId": "TestComponent *19",
-        "withTheme": false,
       }
     }
   >
@@ -458,7 +362,6 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
             },
           ],
           "name": ".",
-          "~": "c",
         }
       }
       classes={
@@ -472,12 +375,9 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
               },
             ],
             "name": "root",
-            "~": "c",
           },
         }
       }
-      mergedInnerState={null}
-      setInnerState={[Function]}
       styleX={
         Object {
           "list": Array [
@@ -488,10 +388,8 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
             },
           ],
           "name": ".",
-          "~": "c",
         }
       }
-      toClassNames={[Function]}
     >
       <ReactAny
         style={
@@ -526,10 +424,8 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
     pipeState={Object {}}
     pipelineState={
       Object {
-        "CodeComponent": [Function],
         "componentId": 8,
         "displayName": "TestComponent",
-        "innerStateComponent": "...",
         "pipeStates": Array [
           Object {
             "classes": Object {
@@ -542,7 +438,6 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
                   },
                 ],
                 "name": "root",
-                "~": "c",
               },
             },
           },
@@ -556,7 +451,6 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
                 },
               ],
               "name": ".",
-              "~": "c",
             },
             "classes": null,
             "codeProps": Array [
@@ -592,7 +486,6 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
               },
             ],
             "name": ".",
-            "~": "c",
           },
           "classes": Object {
             "root": Object {
@@ -604,33 +497,13 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
                 },
               ],
               "name": "root",
-              "~": "c",
             },
           },
-          "mergedInnerState": null,
-          "setInnerState": [Function],
           "styleX": Object {
             "margin": 10,
           },
-          "theme": undefined,
-          "toClassNames": [Function],
-        },
-        "refreshInnerStateComponent": [Function],
-        "sheetOrCreator": Object {
-          "root": Object {
-            "list": Array [
-              Object {
-                "atomicArray": Array [
-                  ".a { background-color:gray /*root*/ }",
-                ],
-              },
-            ],
-            "name": "root",
-            "~": "c",
-          },
         },
         "uniqueId": "TestComponent *17",
-        "withTheme": false,
       }
     }
   >
@@ -645,7 +518,6 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
             },
           ],
           "name": ".",
-          "~": "c",
         }
       }
       classes={
@@ -659,18 +531,14 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
               },
             ],
             "name": "root",
-            "~": "c",
           },
         }
       }
-      mergedInnerState={null}
-      setInnerState={[Function]}
       styleX={
         Object {
           "margin": 10,
         }
       }
-      toClassNames={[Function]}
     >
       <ReactAny
         className="b a"

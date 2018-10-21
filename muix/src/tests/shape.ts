@@ -31,22 +31,22 @@ export const ThemeProvider = ThemeProviderGeneric as TThemeProvider
 export const theme = {
     primary: {
         normal: {
-            color: 'darkgreen',
-            background: 'white',
+            color: 'white',
+            background: 'darkgreen',
         },
         disabled: {
-            color: 'lightgreen',
-            background: 'lightgray',
+            color: 'lightgray',
+            background: 'lightgreen',
         }
     },
     secondary: {
         normal: {
-            color: 'lightblue',
-            background: 'black',
+            color: 'black',
+            background: 'lightblue',
         },
         disabled: {
-            color: 'blue',
-            background: 'darkgray',
+            color: 'darkgray',
+            background: 'blue',
         }
     },
     breakpoints: {

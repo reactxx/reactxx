@@ -16,8 +16,8 @@ const customTheme: TSheeter.getTheme<Shape> = {
   secondary: {
     ...theme.secondary,
     normal: {
-      color: 'lightcyan',
-      background: 'black',
+      color: 'darkgray',
+      background: 'lightcyan',
     },
   },
 }

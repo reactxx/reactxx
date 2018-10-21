@@ -45,9 +45,9 @@ const __SET_TRACING__ = (comp: InnerStateComponent) => {
   const { pipelineState, pipeState, pipelineState: { propsCode: { classes, styleX, classNameX, mergedInnerState } } } = comp.props
   let objs: {}[]
   switch (window.__TRACELEVEL__ || 1) {
-    case 1: // display only childs of ComponentCode
-    case 2: // display childs of ComponentCode with trace attr 
-    case 3: return //objs = [comp, pipelineState, pipeState, styleX, mergedInnerState, classes, classNameX]; break
+    case 1: // display only react components
+    case 2: // display react components with trace attribute 
+    case 3: return //
     case 4: objs = [comp, pipelineState, pipeState]; break
     case 5: objs = [comp ]; break
   }

@@ -5,8 +5,8 @@ exports[`WITH STYLES THEME NATIVE 1`] = `
   <ReactAny
     style={
       Object {
-        "background": "black",
-        "color": "lightblue",
+        "background": "lightblue",
+        "color": "black",
         "fontWeight": "bold",
       }
     }
@@ -19,8 +19,8 @@ exports[`WITH STYLES THEME NATIVE 1`] = `
     <ReactAny
       style={
         Object {
-          "background": "black",
-          "color": "lightcyan",
+          "background": "lightcyan",
+          "color": "darkgray",
           "fontWeight": "bold",
         }
       }
@@ -38,8 +38,8 @@ exports[`WITH STYLES THEME WEB 1`] = `
     trace={
       Array [
         ".c { font-weight:bold /*label[1]*/ }",
-        ".b { background:black /*label[0]*/ }",
-        ".a { color:lightblue /*label[0]*/ }",
+        ".b { background:lightblue /*label[0]*/ }",
+        ".a { color:black /*label[0]*/ }",
       ]
     }
   >
@@ -49,12 +49,12 @@ exports[`WITH STYLES THEME WEB 1`] = `
     theme="..."
   >
     <ReactAny
-      className="c b d"
+      className="c e d"
       trace={
         Array [
           ".c { font-weight:bold /*label[1]*/ }",
-          ".b { background:black /*label[0]*/ }",
-          ".d { color:lightcyan /*label[0]*/ }",
+          ".e { background:lightcyan /*label[0]*/ }",
+          ".d { color:darkgray /*label[0]*/ }",
         ]
       }
     >
