@@ -1,7 +1,7 @@
 /** @jsx createElement */
 
-import React from 'react'
-import ReactN from 'react-native'
+// import React from 'react'
+// import ReactN from 'react-native'
 
 import { createElement } from 'reactxx-sheeter'
 import { TComponents } from 'reactxx-typings'
@@ -83,7 +83,6 @@ export const Icon = iconCreator()
 
 export const scrollViewCreator = withStylesCreator<TPrimitives.ScrollViewShape>(scrollViewSheet, scrollView, {
     displayName: CompNames.ScrollView,
-    //codeHooks: {innerStateToSheetQuery: getScrollViewSheetQuery}
 })
 export const ScrollView = scrollViewCreator()
 
@@ -107,4 +106,3 @@ export const animatedIconCreator = withStylesCreator<TPrimitives.IconShape>(icon
     }
 })
 export const AnimatedIcon = animatedIconCreator()
-

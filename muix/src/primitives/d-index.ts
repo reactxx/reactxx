@@ -7,6 +7,7 @@ export const enum CompNames {
   View = 'reactxx_View',
   Icon = 'reactxx_Icon',
   ScrollView = 'reactxx_ScrollView',
+  
   AnimatedView = 'reactxx_AnimatedView',
   AnimatedIcon = 'reactxx_AnimatedIcon',
   AnimatedText = 'reactxx_AnimatedText',
@@ -27,7 +28,6 @@ export namespace TPrimitives {
  export interface ViewShape extends TSheeter.ShapeAncestor {
   common: TSheeter.ShapeViews<'root'>
   cases: TSheeter.ShapeMarks<'pressable'>
-  //web: TSheeter.ShapeWeb<'pressable'>
   style: 'View'
   propsWeb: React.HTMLAttributes<HTMLDivElement>
   propsNative: ReactN.ViewProperties
@@ -47,7 +47,6 @@ export interface TextShape extends TSheeter.ShapeAncestor {
   export interface IconShape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeTexts<'root'>
     cases: TSheeter.ShapeMarks<'pressable'>
-    //web: TSheeter.ShapeWeb<'pressable'>
     style: 'Text'
     props: { data: string; url?: string }
     propsWeb: React.SVGAttributes<SVGElement>
@@ -58,11 +57,8 @@ export interface TextShape extends TSheeter.ShapeAncestor {
   export interface ScrollViewShape extends TSheeter.ShapeAncestor {
     common: TSheeter.ShapeViews<'root' | 'container'>
     cases: TSheeter.ShapeMarks<'horizontal'>
-    //web: TSheeter.ShapeWeb<'rootHorizontal' | 'containerHorizontal'>
     style: 'View'
-    props: {
-      horizontal?: boolean
-    }
+    props: { horizontal?: boolean }
     propsWeb: React.HTMLAttributes<HTMLDivElement>
     propsNative: ReactN.ScrollViewProperties
   }

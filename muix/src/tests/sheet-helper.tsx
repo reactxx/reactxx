@@ -8,6 +8,9 @@ import {
 import { initPlatform, mount } from './index'
 import { Shape } from './shape'
 
+export const ReactAny: React.SFC<any> = ({children}) => children || null
+ReactAny.displayName = 'ReactAny'
+
 const traceComponent = (isWeb: boolean, node: React.ReactElement<{}>, codeDisplayName?: string) => {
     let comp = mount(node)
     if (window.__TRACELEVEL__ <= 2)
@@ -24,11 +27,13 @@ const traceComponent = (isWeb: boolean, node: React.ReactElement<{}>, codeDispla
 
 export const traceComponentEx = (
     isWeb: boolean,
+    traceLevel: number,
     sheet: TSheeter.PartialSheet<Shape>,
     comp: TComponents.SFCCode<Shape>,
     node: (Comp: TComponents.ComponentClass<Shape>) => React.ReactElement<{}>
 ) => {
     initPlatform(isWeb)
+    window.__TRACELEVEL__ = traceLevel as any
     const Comp = WithStyle.withStylesCreator({ ...defaultSheet, ...sheet }, comp)({ displayName: 'TestComponent' })
     traceComponent(isWeb, node(Comp), 'TestComponentCode')
 }

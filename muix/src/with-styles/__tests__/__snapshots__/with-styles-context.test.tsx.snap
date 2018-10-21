@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WITH STYLES CONTEXT NATIVE, with provider 1`] = `
+Array [
+  <ReactAny>
+    Hallo
+  </ReactAny>,
+  <ReactAny>
+    <ReactAny
+      id="1"
+    />
+  </ReactAny>,
+]
+`;
+
+exports[`WITH STYLES CONTEXT NATIVE, without provider 1`] = `
+Array [
+  <ReactAny>
+    Hallo
+  </ReactAny>,
+  <ReactAny>
+    <ReactAny
+      id="123"
+    />
+  </ReactAny>,
+]
+`;
+
+exports[`WITH STYLES CONTEXT WEB, with provider 1`] = `
+Array [
+  <ReactAny>
+    Hallo
+  </ReactAny>,
+  <ReactAny>
+    <ReactAny
+      id="1"
+    />
+  </ReactAny>,
+]
+`;
+
+exports[`WITH STYLES CONTEXT WEB, without provider 1`] = `
+Array [
+  <ReactAny>
+    Hallo
+  </ReactAny>,
+  <ReactAny>
+    <ReactAny
+      id="123"
+    />
+  </ReactAny>,
+]
+`;

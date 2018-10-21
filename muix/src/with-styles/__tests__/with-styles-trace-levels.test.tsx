@@ -3,7 +3,7 @@ import React from 'react'
 
 import { platform } from 'reactxx-sheeter'
 
-import { ts, traceComponentEx } from "reactxx-tests";
+import { ts, traceComponentEx, ReactAny } from "reactxx-tests";
 
 describe("WITH STYLES TRACE LEVELS", () => {
   it("trace 1 WEB", () => traceTest(true, 1));
@@ -19,8 +19,8 @@ describe("WITH STYLES TRACE LEVELS", () => {
 });
 
 const traceTest = (isWeb: boolean, level: 1 | 2 | 3 | 4 | 5) => {
-  window.__TRACELEVEL__ = level
-  traceComponentEx(isWeb,
+
+  traceComponentEx(isWeb, level,
     {
       root: ts.view = {
         backgroundColor: 'gray'
@@ -28,9 +28,9 @@ const traceTest = (isWeb: boolean, level: 1 | 2 | 3 | 4 | 5) => {
     },
     ({ classes, classNameX, toClassNames, styleX, children }) => {
       const root = toClassNames([classes.root, classNameX])
-      return <div classNameX={root} styleX={styleX}>
+      return <ReactAny classNameX={root} styleX={styleX}>
         {children}
-      </div>
+      </ReactAny>
     },
     Comp => <Comp classNameX={{ padding: 10 }} styleX={{ margin: 10 }}>
       Text
