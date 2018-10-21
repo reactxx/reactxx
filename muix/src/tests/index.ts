@@ -20,15 +20,16 @@ import { resetRenderer } from "reactxx-fela";
 
 const platformWeb = { ...platform }
 
-export const initPlatform = (isWeb: boolean, __DEV__: boolean = true) => {
+export const initPlatform = (isWeb: boolean, __DEV__: boolean | 1 | 2 | 3 | 4 | 5 = true) => {
     window.isWeb = isWeb
-    window.__TRACE__ = __DEV__
-    //const p = platform
+    if (typeof __DEV__ === 'number') {
+        window.__TRACE__ = true
+        window.__TRACELEVEL__ = __DEV__
+    } else
+        window.__TRACE__ = __DEV__
+
     Object.assign(platform, isWeb ? platformWeb : platformNative)
-    // if (p != platform)
-    //     throw 'p!=platform'
-    // const _web = platform.toPlatformAtomizeRuleset === platformWeb.toPlatformAtomizeRuleset
-    // const _native = platform.toPlatformAtomizeRuleset === platformNative.toPlatformAtomizeRuleset
+
     if (isWeb)
         resetRenderer();
 }

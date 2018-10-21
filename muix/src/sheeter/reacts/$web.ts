@@ -6,6 +6,8 @@ import { deleteSystemProps } from '../to-classnames'
 import { mergeStyles } from '../merge'
 import { isReactXXComponent, isDeffered } from '../atomize'
 import { applyLastwinsStrategyRoot, AttemptType, ApplyLastWinStrategyResult } from '../utils/apply-last-win-strategy'
+import { platform } from '../index'
+
 
 /******************************************
   EXTEND REACT
@@ -38,6 +40,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
     let lastWinResult = applyLastwinsStrategy(classNameX)
     const className = finalClassNameStep(lastWinResult)
     props.className = props.className ? className + ' ' + props.className : className
+    if (window.__TRACELEVEL__ >= 2) props.trace = platform.dumpAtomized(lastWinResult)
   }
 
   if (styleX) {

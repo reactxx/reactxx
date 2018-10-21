@@ -34,7 +34,7 @@ export interface TProvider<R extends TSheeter.Shape> { Provider: React.Component
 //*********************************************************
 
 const systemPipes: TWithStyles.SystemPipes = {
-  firsts: options => [options.withTheme && themePipe, options.defaultProps && defaultPropsPipe, propsPipe],
+  firsts: options => [options.withTheme && themePipe, defaultPropsPipe, propsPipe],
   lasts: options => [propsCodePipe, innerStatePipe, codePipe]
 }
 
@@ -48,7 +48,6 @@ const withStyles = (componentState: TWithStyles.ComponentOptions) => {
       pipeStates: [],
       uniqueId: componentState.displayName + ' *' + componentInstaneCounter++,
       props: this.props,
-      pipeCounter: 1,
       refreshInnerStateComponent: () => this.pipelineState.innerStateComponent && this.pipelineState.innerStateComponent.setState(null)
     } as TWithStyles.PipelineState)
 
@@ -96,8 +95,10 @@ const finishComponentState = (
     componentId,
     CodeComponent,
     withTheme: typeof mergedOptions.withTheme === 'boolean' ? mergedOptions.withTheme : typeof mergedOptions.sheetOrCreator === 'function',
-    displayName: `${mergedOptions.displayName || CodeComponent.displayName || CodeComponent['name'] || 'unknown'} (${componentId})`,
+    displayName: `${mergedOptions.displayName || CodeComponent.displayName || CodeComponent['name'] || 'unknown'}`,
   }
+
+  CodeComponent.displayName = CodeComponent.displayName || res.displayName + 'Code'
 
   return res
 }

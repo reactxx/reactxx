@@ -1,6 +1,7 @@
 ﻿interface Window {
-  isWeb:boolean
-  __TRACE__:boolean
+  isWeb: boolean
+  __TRACE__: boolean
+  __TRACELEVEL__: 1 | 2 | 3 | 4 | 5
 }
 
 declare module 'recompose/toRenderProps' {
@@ -60,8 +61,8 @@ declare module 'url-parse' {
 type Diff<T, U> = T extends U ? never : T
 type Omit<T, K> = { [P in Diff<keyof T, K>]: T[P] }
 type OmitPartial<T, K> = { [P in Diff<keyof T, K>]?: T[P] }
-type Overwrite<T, U> = {[P in Diff<keyof T, keyof U>]: T[P]} & U
-type PartialOverwrite<T, U> = {[P in Diff<keyof T, keyof U>]?: T[P]} & Partial<U>
+type Overwrite<T, U> = { [P in Diff<keyof T, keyof U>]: T[P] } & U
+type PartialOverwrite<T, U> = { [P in Diff<keyof T, keyof U>]?: T[P] } & Partial<U>
 type TakeFrom<T, K extends keyof T> = { [P in K]: T[P] }
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends Array<infer U>

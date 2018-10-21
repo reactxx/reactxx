@@ -31,7 +31,7 @@ declare namespace TComponents {
   export interface ReactsCommonProperties<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
     classNameX?: TAtomize.AtomicArray // TSheeter.ClassNameOrAtomized<R>
     styleX?: TSheeter.StyleOrAtomized<R>
-    //classes?: TSheeter.PartialSheet<R> // cross platform sheet
+    trace?: string
   }
 
   export interface PropsLow<R extends Shape> {

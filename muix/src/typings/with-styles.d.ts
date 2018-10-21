@@ -42,7 +42,6 @@ declare namespace TWithStyles {
   export interface PipelineState extends ComponentOptions<TSheeter.Shape> {
     uniqueId?: string
     props?: TComponents.Props
-    //pipeCounter?: number
 
     propsCode?: TComponents.PropsCode
     pipeStates?: PipeState[]

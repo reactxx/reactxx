@@ -2,41 +2,31 @@
 import React from 'react'
 
 import * as Sheeter from 'reactxx-sheeter'
-import * as WithStyle from 'reactxx-with-styles'
-import { createElement, toClassNamesWithQuery } from 'reactxx-sheeter'
-import { TSheeter, TComponents } from 'reactxx-typings'
 
-import { initPlatform, Shape, ts, shallow, mount } from "reactxx-tests";
+import { ts, traceComponentEx } from "reactxx-tests";
 
+window.__TRACELEVEL__ = 2
 
 describe("WITH STYLES", () => {
   it("WEB", () => {
-    initPlatform(true);
-    const comp = mount(<Comp
-    >
-      Hallo world
-    </Comp>);
-    expect(comp).toMatchSnapshot();
+    traceComponentEx(true,
+      {
+        root: ts.view = {
+          backgroundColor: 'gray'
+        }
+      },
+      ({ classes, classNameX, toClassNames, children }) => {
+        const root = toClassNames([classes.root, classNameX])
+        return <React.Fragment>
+          <h2>Hallo world</h2>
+          <div classNameX={root}>
+            {children}
+          </div>
+        </React.Fragment>
+      },
+      Comp => <Comp>
+        Text
+        <span>text</span>
+      </Comp>)
   });
 });
-
-export const createSheet = () =>
-  (ts.sheet = {
-    root: ts.view = {
-      backgroundColor: 'gray'
-    },
-    label: ts.text = {},
-    webOnly: ts.web = {},
-    nativeOnly: ts.nativeText = {},
-  });
-
-
-const comp: TComponents.SFCCode<Shape> = ({classes, classNameX, toClassNames}) => {
-  const root = toClassNames([classes.root, classNameX])
-  return <div classNameX={root}>
-    Hallo world
-  </div>
-}
-
-const Comp = WithStyle.withStylesCreator<Shape>(createSheet(), comp)()
-
