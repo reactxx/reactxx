@@ -143,6 +143,7 @@ exports[`WITH STYLES TRACE LEVELS trace 4 NATIVE 1`] = `
               ],
             },
           ],
+          "name": ".",
         }
       }
       classes={
@@ -155,6 +156,7 @@ exports[`WITH STYLES TRACE LEVELS trace 4 NATIVE 1`] = `
                 ],
               },
             ],
+            "name": "root",
           },
         }
       }
@@ -167,6 +169,7 @@ exports[`WITH STYLES TRACE LEVELS trace 4 NATIVE 1`] = `
               ],
             },
           ],
+          "name": ".",
         }
       }
     >
@@ -217,6 +220,7 @@ exports[`WITH STYLES TRACE LEVELS trace 4 WEB 1`] = `
               ],
             },
           ],
+          "name": ".",
         }
       }
       classes={
@@ -229,6 +233,7 @@ exports[`WITH STYLES TRACE LEVELS trace 4 WEB 1`] = `
                 ],
               },
             ],
+            "name": "root",
           },
         }
       }
@@ -289,6 +294,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
                     ],
                   },
                 ],
+                "name": "root",
               },
             },
           },
@@ -301,6 +307,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
                   ],
                 },
               ],
+              "name": ".",
             },
             "classes": null,
             "codeProps": Array [
@@ -317,6 +324,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
                   ],
                 },
               ],
+              "name": ".",
             },
           },
           undefined,
@@ -341,6 +349,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
                 ],
               },
             ],
+            "name": ".",
           },
           "classes": Object {
             "root": Object {
@@ -351,6 +360,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
                   ],
                 },
               ],
+              "name": "root",
             },
           },
           "styleX": Object {
@@ -361,6 +371,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
                 ],
               },
             ],
+            "name": ".",
           },
         },
         "uniqueId": "TestComponent *19",
@@ -377,6 +388,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
               ],
             },
           ],
+          "name": ".",
         }
       }
       classes={
@@ -389,6 +401,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
                 ],
               },
             ],
+            "name": "root",
           },
         }
       }
@@ -401,6 +414,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
               ],
             },
           ],
+          "name": ".",
         }
       }
     >
@@ -457,6 +471,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
                     ],
                   },
                 ],
+                "name": "root",
               },
             },
           },
@@ -469,6 +484,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
                   ],
                 },
               ],
+              "name": ".",
             },
             "classes": null,
             "codeProps": Array [
@@ -503,6 +519,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
                 ],
               },
             ],
+            "name": ".",
           },
           "classes": Object {
             "root": Object {
@@ -513,6 +530,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
                   ],
                 },
               ],
+              "name": "root",
             },
           },
           "styleX": Object {
@@ -533,6 +551,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
               ],
             },
           ],
+          "name": ".",
         }
       }
       classes={
@@ -545,6 +564,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
                 ],
               },
             ],
+            "name": "root",
           },
         }
       }

@@ -27,7 +27,7 @@ export const createSheet = () =>
                 }
               }
             }
-          ]),
+          ], ''),
           toClassNamesWithQuery(null, [
             {
               paddingTop: 11,
@@ -41,7 +41,7 @@ export const createSheet = () =>
           marginTop: 21,
           marginBottom: 21
         }
-      ]),
+      ], ''),
       toClassNamesWithQuery(null, [
         {
           paddingTop: 22,
@@ -57,7 +57,7 @@ export const createSheet = () =>
       $web: atomizeRuleset({
         marginTop: 41,
         marginBottom: 41
-      })
+      }, '')
     },
     nativeOnly: {}
   });

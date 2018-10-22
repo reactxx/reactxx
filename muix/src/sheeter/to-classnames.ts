@@ -17,7 +17,7 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, rulesets
             return
         }
         if (!isAtomizedRuleset(val))
-            val = atomizeRuleset(val, state && state.theme) as TAtomize.AtomizedRuleset
+            val = atomizeRuleset(val, '', state && state.theme) as TAtomize.AtomizedRuleset
         if (!val) return
 
         for (let j = 0; j < val.list.length; j++) {

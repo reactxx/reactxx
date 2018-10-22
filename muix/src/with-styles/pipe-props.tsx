@@ -16,7 +16,7 @@ const init = (pipeId: number, pipelineState: TWithStyles.PipelineState) => {
   pipelineState.pipeStates[pipeId] = {
     codeProps: [propsRest, themedProps ? themedProps(theme) : null],
     classes: atomizeSheet(classes, theme, 'classes'),
-    classNameX: atomizeRuleset(classNameX, theme, 'classNameX'),
+    classNameX: atomizeRuleset(classNameX, '', theme, 'classNameX'),
     styleX: atomizeStyle(styleX, theme, 'styleX'),
   }
 }

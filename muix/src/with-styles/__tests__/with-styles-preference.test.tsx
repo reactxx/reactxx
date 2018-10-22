@@ -29,12 +29,16 @@ const traceTest = (isWeb: boolean) => {
     // component code
     ({ classes, classNameX, toClassNames, styleX }) => {
       return <React.Fragment>
+
         <ReactAny classNameX={toClassNames([classes.root, classNameX])} styleX={styleX}>
           toClassNames([classes.root, classNameX])
         </ReactAny>
+
+        {/*********** Reverse order in toClassNames's ruleset array *************/}
         <ReactAny classNameX={toClassNames([classNameX, classes.root])} styleX={styleX}>
           toClassNames([classNameX, classes.root])
         </ReactAny>
+        
       </React.Fragment>
     },
     // component usage (Comp = withStyle(comp, <withStyle options>)

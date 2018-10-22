@@ -6,7 +6,7 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "backgroundColor: red /*root/$switch.isOpened*/",
+          "backgroundColor: red /*sheet.root/$switch.isOpened*/",
         ],
         "conditions": Array [
           Object {
@@ -17,7 +17,7 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          "borderColor: cyan /*root/$switch.isOpened/$switch.isOpened*/",
+          "borderColor: cyan /*sheet.root/$switch.isOpened/$switch.isOpened*/",
         ],
         "conditions": Array [
           Object {
@@ -32,7 +32,7 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          "backgroundColor: brown /*root/$native/$switch.isOpened*/",
+          "backgroundColor: brown /*sheet.root/$native/$switch.isOpened*/",
         ],
         "conditions": Array [
           Object {
@@ -42,6 +42,7 @@ Object {
         ],
       },
     ],
+    "name": "root",
     "~": "c",
   },
 }
@@ -53,7 +54,7 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".a { background-color:red /*root/$switch.isOpened*/ }",
+          ".a { background-color:red /*sheet.root/$switch.isOpened*/ }",
         ],
         "conditions": Array [
           Object {
@@ -64,7 +65,7 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          ".b { border-color:cyan /*root/$switch.isOpened/$switch.isOpened*/ }",
+          ".b { border-color:cyan /*sheet.root/$switch.isOpened/$switch.isOpened*/ }",
         ],
         "conditions": Array [
           Object {
@@ -79,7 +80,7 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          ".c:hover { background-color:green /*root/$web/:hover/$switch.isClosed[0]*/ }",
+          ".c:hover { background-color:green /*sheet.root/$web/:hover/$switch.isClosed[0]*/ }",
         ],
         "conditions": Array [
           Object {
@@ -89,13 +90,14 @@ Object {
         ],
       },
     ],
+    "name": "root",
     "~": "c",
   },
   "webOnly": Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".d:hover { background-color:yellow /*webOnly/$web/:hover/$switch.isOpened*/ }",
+          ".d:hover { background-color:yellow /*sheet.webOnly/$web/:hover/$switch.isOpened*/ }",
         ],
         "conditions": Array [
           Object {
@@ -105,6 +107,7 @@ Object {
         ],
       },
     ],
+    "name": "webOnly",
     "~": "c",
   },
 }

@@ -4,30 +4,30 @@ import { TAtomize, TSheeter, TComponents, TVariants } from 'reactxx-typings'
 import { createWithTheme } from './utils/create-with-theme'
 import { atomizeRulesetLow } from './atomize-low'
 
-export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetOrCreator<R>, theme?, path?: string) => {
+export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetOrCreator<R>, theme?, path: string = 'sheet') => {
     if (!sheet) return null
     const sh: TSheeter.Sheet = createWithTheme(sheet, theme)
     for (const p in sh) {
-        const at = atomizeRuleset(sh[p], theme, (path ? path + '.' : '') + p)
+        const at = atomizeRuleset(sh[p], p, theme, (path ? path + '.' : '') + p)
         if (at) sh[p] = at
         else delete sh[p]
     }
     return sh as any as TAtomize.Sheet<R>
 }
 
-export const atomizeRuleset = (ruleset: TSheeter.RulesetOrAtomizedCreator, theme?, path: string = '.') => {
+export const atomizeRuleset = (ruleset: TSheeter.RulesetOrAtomizedCreator, rulesetName: string, theme?, path: string = '.') => {
     if (!ruleset) return null
     const rs: TSheeter.RulesetOrAtomized = createWithTheme(ruleset, theme)
 
     if (!rs) return null
 
-    //const name = path || rs['name'] || '.'
+    const name = rulesetName || rs['name'] || '.'
 
     const list: TAtomize.Variants = []
     atomizeRulesetLow(rs, list, path, [], [])
 
     return list.length === 0 ? null : {
-        //name,
+        name,
         list,
         [TAtomize.TypedInterfaceTypes.prop]: TAtomize.TypedInterfaceTypes.atomizedRuleset
     } as TAtomize.AtomizedRuleset
@@ -36,12 +36,12 @@ export const atomizeRuleset = (ruleset: TSheeter.RulesetOrAtomizedCreator, theme
     //return atomizeRulesetLow(rs, rulesetName)
 }
 
-export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme?, path:string = '.') => {
+export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme?, path: string = '.') => {
     if (!style) return null
     if (window.isWeb)
         return createWithTheme(style, theme) as TSheeter.StyleOrAtomizedWeb
     else
-        return atomizeRuleset(style as TSheeter.ClassNameOrCreator, theme, path)
+        return atomizeRuleset(style as TSheeter.ClassNameOrCreator, '', theme, path)
 }
 
 export function isAtomizedRuleset(obj: Object): obj is TAtomize.AtomizedRuleset {

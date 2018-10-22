@@ -4,6 +4,10 @@ import { TSBugHelper } from 'reactxx-core'
 
 export interface Props {
     disabled?: boolean
+    p1?: string
+    p2?: string
+    p3?: string
+    p4?: string
 }
 export interface InnerState {
     drawerOpened?: boolean

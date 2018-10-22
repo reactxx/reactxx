@@ -17,13 +17,14 @@ Object {
         ],
       },
     ],
+    "name": "label",
     "~": "c",
   },
   "root": Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "backgroundColor: blue /*root[0]*/",
+          "backgroundColor: blue /*sheet.root[0]*/",
         ],
       },
       Object {
@@ -45,6 +46,7 @@ Object {
         ],
       },
     ],
+    "name": "root",
     "~": "c",
   },
 }
@@ -67,18 +69,19 @@ Object {
         ],
       },
     ],
+    "name": "label",
     "~": "c",
   },
   "root": Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".m { background-color:blue /*root[0]*/ }",
+          ".m { background-color:blue /*sheet.root[0]*/ }",
         ],
       },
       Object {
         "atomicArray": Array [
-          ".n:hover { color:red /*root[1]/$web[0]*/ }",
+          ".n:hover { color:red /*sheet.root[1]/$web[0]*/ }",
         ],
       },
       Object {
@@ -118,6 +121,7 @@ Object {
         ],
       },
     ],
+    "name": "root",
     "~": "c",
   },
   "webOnly": Object {
@@ -129,6 +133,7 @@ Object {
         ],
       },
     ],
+    "name": "webOnly",
     "~": "c",
   },
 }

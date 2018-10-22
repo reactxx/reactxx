@@ -6,36 +6,39 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "color: blue /*label[0]*/",
+          "color: blue /*sheet.label[0]*/",
         ],
       },
     ],
+    "name": "label",
     "~": "c",
   },
   "nativeOnly": Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "margin: 20 /*nativeOnly/$native*/",
+          "margin: 20 /*sheet.nativeOnly/$native*/",
         ],
       },
     ],
+    "name": "nativeOnly",
     "~": "c",
   },
   "root": Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "margin: 4 /*root*/",
-          "padding: 4 /*root*/",
+          "margin: 4 /*sheet.root*/",
+          "padding: 4 /*sheet.root*/",
         ],
       },
       Object {
         "atomicArray": Array [
-          "padding: 10 /*root/$native*/",
+          "padding: 10 /*sheet.root/$native*/",
         ],
       },
     ],
+    "name": "root",
     "~": "c",
   },
 }
@@ -54,6 +57,7 @@ Object {
         ],
       },
     ],
+    "name": "label",
     "~": "c",
   },
   "nativeOnly": Object {
@@ -67,6 +71,7 @@ Object {
         ],
       },
     ],
+    "name": "nativeOnly",
     "~": "c",
   },
   "root": Object {
@@ -92,6 +97,7 @@ Object {
         ],
       },
     ],
+    "name": "root",
     "~": "c",
   },
 }
@@ -103,36 +109,39 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".d { color:blue /*label[0]*/ }",
+          ".d { color:blue /*sheet.label[0]*/ }",
         ],
       },
     ],
+    "name": "label",
     "~": "c",
   },
   "root": Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".a { margin:4px /*root*/ }",
-          ".b { padding:4px /*root*/ }",
+          ".a { margin:4px /*sheet.root*/ }",
+          ".b { padding:4px /*sheet.root*/ }",
         ],
       },
       Object {
         "atomicArray": Array [
-          ".c { margin:10px /*root/$web*/ }",
+          ".c { margin:10px /*sheet.root/$web*/ }",
         ],
       },
     ],
+    "name": "root",
     "~": "c",
   },
   "webOnly": Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".e { color:red /*webOnly/$web*/ }",
+          ".e { color:red /*sheet.webOnly/$web*/ }",
         ],
       },
     ],
+    "name": "webOnly",
     "~": "c",
   },
 }
@@ -148,6 +157,7 @@ Object {
         ],
       },
     ],
+    "name": "label",
     "~": "c",
   },
   "root": Object {
@@ -164,6 +174,7 @@ Object {
         ],
       },
     ],
+    "name": "root",
     "~": "c",
   },
   "webOnly": Object {
@@ -174,6 +185,7 @@ Object {
         ],
       },
     ],
+    "name": "webOnly",
     "~": "c",
   },
 }

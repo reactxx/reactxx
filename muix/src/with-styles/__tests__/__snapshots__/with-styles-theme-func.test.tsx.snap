@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WITH STYLES THEME NATIVE 1`] = `
+<ReactAny>
+  <ReactAny
+    style={
+      Object {
+        "background": "lightblue",
+        "backgroundColor": "lightblue",
+        "borderBottomColor": "lightblue",
+        "borderRightColor": "lightblue",
+        "borderTopColor": "lightblue",
+        "color": "lightblue",
+      }
+    }
+    trace={
+      Object {
+        "background": "lightblue /*TestComponent.sheet.label*/",
+        "backgroundColor": "lightblue /*classNameX*/",
+        "borderBottomColor": "lightblue /*styleX*/",
+        "borderRightColor": "lightblue /*TestComponent.option.classNameX*/",
+        "borderTopColor": "lightblue /*TestComponent.option.styleX*/",
+        "color": "lightblue /*classes.label*/",
+      }
+    }
+  >
+    Default Theme
+  </ReactAny>
+  <ThemeProviderGeneric>
+    <ReactAny
+      style={
+        Object {
+          "background": "lightcyan",
+          "backgroundColor": "lightcyan",
+          "borderBottomColor": "lightcyan",
+          "borderRightColor": "lightcyan",
+          "borderTopColor": "lightcyan",
+          "color": "lightcyan",
+        }
+      }
+      trace={
+        Object {
+          "background": "lightcyan /*TestComponent.sheet.label*/",
+          "backgroundColor": "lightcyan /*classNameX*/",
+          "borderBottomColor": "lightcyan /*styleX*/",
+          "borderRightColor": "lightcyan /*TestComponent.option.classNameX*/",
+          "borderTopColor": "lightcyan /*TestComponent.option.styleX*/",
+          "color": "lightcyan /*classes.label*/",
+        }
+      }
+    >
+      Custom Theme
+    </ReactAny>
+  </ThemeProviderGeneric>
+</ReactAny>
+`;
+
+exports[`WITH STYLES THEME WEB 1`] = `
+<ReactAny>
+  <ReactAny
+    className="f d e b"
+    style={
+      Object {
+        "borderBottomColor": "lightblue",
+        "borderTopColor": "lightblue",
+      }
+    }
+    trace={
+      Array [
+        ".f { background-color:lightblue /*classNameX*/ }",
+        ".d { border-right-color:lightblue /*TestComponent.option.classNameX*/ }",
+        ".e { color:lightblue /*classes.label*/ }",
+        ".b { background:lightblue /*TestComponent.sheet.label*/ }",
+      ]
+    }
+  >
+    Default Theme
+  </ReactAny>
+  <ThemeProviderGeneric>
+    <ReactAny
+      className="l j k h"
+      style={
+        Object {
+          "borderBottomColor": "lightcyan",
+          "borderTopColor": "lightcyan",
+        }
+      }
+      trace={
+        Array [
+          ".l { background-color:lightcyan /*classNameX*/ }",
+          ".j { border-right-color:lightcyan /*TestComponent.option.classNameX*/ }",
+          ".k { color:lightcyan /*classes.label*/ }",
+          ".h { background:lightcyan /*TestComponent.sheet.label*/ }",
+        ]
+      }
+    >
+      Custom Theme
+    </ReactAny>
+  </ThemeProviderGeneric>
+</ReactAny>
+`;

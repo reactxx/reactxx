@@ -41,12 +41,12 @@ export const query = (opened: boolean) =>
 describe("WIDTHS+SWITCH define sheet", () => {
   it("WEB", () => {
     initPlatform(true);
-    const sheet = atomizeSheet<Shape>(createSheet(), null, 'sheet');
+    const sheet = atomizeSheet<Shape>(createSheet());
     expect(sheet).toMatchSnapshot();
   });
   it("NATIVE", () => {
     initPlatform(false);
-    const sheet = atomizeSheet<Shape>(createSheet(), null, 'sheet');
+    const sheet = atomizeSheet<Shape>(createSheet());
     expect(sheet).toMatchSnapshot();
   });
 });
