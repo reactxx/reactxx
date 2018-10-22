@@ -82,10 +82,9 @@ export const mergeRulesets = (sources: TAtomize.Ruleset[]) => {
 }
 
 // inPlace===true => target is modified
-export const mergeSheet = (target: TAtomize.Sheet, source: TAtomize.Sheet, inPlace?: boolean) => {
+export const mergeSheet = (target: TAtomize.Sheet, source: TAtomize.Sheet) => {
     if (!source) return target
     if (!target) return source
-    if (!inPlace) target = { ...target }
     for (const p in source)
         target[p] = mergeRuleset(target[p], source[p])
     return target
@@ -93,17 +92,26 @@ export const mergeSheet = (target: TAtomize.Sheet, source: TAtomize.Sheet, inPla
 
 export const mergeSheets = (sources: TAtomize.Sheet[]) => {
     if (!sources || sources.length === 0) return null
-    let count = 0
-    let res = null
+    if (sources.length === 1) return sources[0]
+    const ruleLists: Record<string, Array<any>> = {}
     sources.forEach(src => {
         if (!src) return
-        switch (count) {
-            case 0: res = src; count++; break
-            case 1: res = mergeSheet(res, src, false); count++; break
-            default: res = mergeSheet(res, src, true); count++; break
+        for (const p in src) {
+            const value = src[p]
+            if (!value) continue
+            const arr = ruleLists[p] || (ruleLists[p] = [])
+            arr.push(value)
         }
     })
+    const res = {}
+    for (const p in ruleLists)
+        res[p] = mergeRulesets(ruleLists[p])
     return res
+    // switch (count) {
+    //     case 0: res = src; count++; break
+    //     case 1: res = mergeSheet(res, src, false); count++; break
+    //     default: res = mergeSheet(res, src, true); break
+    // }
 }
 
 export const mergeCodeProps = (sources: (TComponents.PropsCode | TComponents.PropsCode[])[]) => {

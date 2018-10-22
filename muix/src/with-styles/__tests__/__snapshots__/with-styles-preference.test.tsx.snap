@@ -1,55 +1,82 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`WITH STYLE PREFERENCE NATIVE 1`] = `
-<ReactAny
-  style={
-    Object {
-      "height": 22,
-      "maxHeight": 22,
-      "maxWidth": 33,
-      "paddingLeft": 11,
-      "paddingRight": 33,
-      "paddingTop": 33,
-      "width": 22,
+<ReactAny>
+  <ReactAny
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderLeftWidth": 12,
+        "borderRightWidth": 20,
+        "borderTopWidth": 32,
+        "marginBottom": 40,
+        "marginLeft": 52,
+        "marginRight": 60,
+        "marginTop": 72,
+        "maxHeight": 80,
+        "maxWidth": 92,
+        "paddingBottom": 100,
+        "paddingLeft": 112,
+        "paddingRight": 120,
+        "paddingTop": 132,
+      }
     }
-  }
-  trace={
-    Object {
-      "height": "22 /*TestComponent.option.classNameX*/",
-      "maxHeight": "22 /*TestComponent.option.styleX*/",
-      "maxWidth": "33 /*classNameX*/",
-      "paddingLeft": "11 /*TestComponent.sheet.root*/",
-      "paddingRight": "33 /*classes.root*/",
-      "paddingTop": "33 /*styleX*/",
-      "width": "22 /*TestComponent.option.classes.root*/",
+    trace={
+      Object {
+        "borderBottomWidth": " /*TestComponent.sheet.root[0]*/",
+        "borderLeftWidth": "12 /*TestComponent.sheet.root[1]/$native*/",
+        "borderRightWidth": "20 /*TestComponent.option.classes.root[0]*/",
+        "borderTopWidth": "32 /*TestComponent.option.classes.root[1]/$native*/",
+        "marginBottom": "40 /*classes.root[0]*/",
+        "marginLeft": "52 /*classes.root[1]/$native*/",
+        "marginRight": "60 /*TestComponent.option.classNameX[0]*/",
+        "marginTop": "72 /*TestComponent.option.classNameX[1]/$native*/",
+        "maxHeight": "80 /*classNameX[0]*/",
+        "maxWidth": "92 /*classNameX[1]/$native*/",
+        "paddingBottom": "100 /*TestComponent.option.styleX[0]*/",
+        "paddingLeft": "112 /*TestComponent.option.styleX[1]/$native*/",
+        "paddingRight": "120 /*styleX[0]*/",
+        "paddingTop": "132 /*styleX[1]/$native*/",
+      }
     }
-  }
->
-  toClassNames([classes.root, classNameX])
+  >
+    toClassNames([classes.root, classNameX])
+  </ReactAny>
 </ReactAny>
 `;
 
 exports[`WITH STYLE PREFERENCE WEB 1`] = `
-<ReactAny
-  className="k i j h f e c"
-  style={
-    Object {
-      "maxHeight": 22,
-      "paddingTop": 33,
+<ReactAny>
+  <ReactAny
+    className="cs cr cq cp co ci bi ba bz bp ap ac o a"
+    style={
+      Object {
+        "paddingBottom": 100,
+        "paddingLeft": 111,
+        "paddingRight": 120,
+        "paddingTop": 131,
+      }
     }
-  }
-  trace={
-    Array [
-      ".k { max-width:33px /*classNameX*/ }",
-      ".i { height:22px /*TestComponent.option.classNameX*/ }",
-      ".j { padding-right:33px /*classes.root*/ }",
-      ".h { width:22px /*TestComponent.option.classes.root*/ }",
-      ".f { padding-left:11px /*TestComponent.sheet.root*/ }",
-      ".e { padding-top:11px /*TestComponent.sheet.root*/ }",
-      ".c { max-height:11px /*TestComponent.sheet.root*/ }",
-    ]
-  }
->
-  toClassNames([classes.root, classNameX])
+    trace={
+      Array [
+        ".cs { padding-top:91px /*classNameX[1]/$web*/ }",
+        ".cr { padding-right:91px /*classNameX[1]/$web*/ }",
+        ".cq { padding-left:91px /*classNameX[1]/$web*/ }",
+        ".cp { padding-bottom:91px /*classNameX[1]/$web*/ }",
+        ".co { max-width:91px /*classNameX[1]/$web*/ }",
+        ".ci { max-height:80px /*classNameX[0]*/ }",
+        ".bi { margin-top:71px /*TestComponent.option.classNameX[1]/$web*/ }",
+        ".ba { margin-right:60px /*TestComponent.option.classNameX[0]*/ }",
+        ".bz { margin-left:51px /*classes.root[1]/$web*/ }",
+        ".bp { margin-bottom:40px /*classes.root[0]*/ }",
+        ".ap { border-top-width:31px /*TestComponent.option.classes.root[1]/$web*/ }",
+        ".ac { border-right-width:20px /*TestComponent.option.classes.root[0]*/ }",
+        ".o { border-left-width:11px /*TestComponent.sheet.root[1]/$web*/ }",
+        ".a { border-bottom-width:0 /*TestComponent.sheet.root[0]*/ }",
+      ]
+    }
+  >
+    toClassNames([classes.root, classNameX])
+  </ReactAny>
 </ReactAny>
 `;

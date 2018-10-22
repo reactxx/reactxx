@@ -10,45 +10,58 @@ describe("WITH STYLE PREFERENCE", () => {
   it("NATIVE", () => traceTest(false));
 });
 
+const setCSS = (fromNameIdx: number, platform: number = 0) => {
+  const res = {}
+  for (let i = fromNameIdx; i < CSSNames.length; i++)
+    res[CSSNames[i]] = fromNameIdx * 10 + platform
+  return res
+}
+const CSSNames = [
+  'borderBottomWidth', 'borderLeftWidth', 'borderRightWidth', 'borderTopWidth',
+  'marginBottom', 'marginLeft', 'marginRight', 'marginTop',
+  'maxHeight', 'maxWidth',
+  'paddingBottom', 'paddingLeft', 'paddingRight', 'paddingTop',
+]
+
 const traceTest = (isWeb: boolean) => {
 
   traceComponentEx(isWeb, 2,
+    
     // sheet
     {
-      root: ts.view = {
-        width: 11,
-        height: 11,
-        maxHeight: 11,
-        maxWidth: 11,
-        paddingTop: 11,
-        paddingLeft: 11,
-        paddingRight: 11,
-      },
+      root: ts.view = [
+        setCSS(0),
+        {
+          $web: setCSS(1, 1),
+          $native: setCSS(1, 2)
+        },
+      ],
       label: {}, webOnly: {}, nativeOnly: {},
     },
+
     // component code
     ({ classes, classNameX, toClassNames, styleX }) => {
-      return <React.Fragment>
+      return <ReactAny>
 
         <ReactAny classNameX={toClassNames([classes.root, classNameX])} styleX={styleX}>
           toClassNames([classes.root, classNameX])
         </ReactAny>
 
-        {/*********** Reverse order in toClassNames's ruleset array *************/}
-        <ReactAny classNameX={toClassNames([classNameX, classes.root])} styleX={styleX}>
-          toClassNames([classNameX, classes.root])
-        </ReactAny>
-        
-      </React.Fragment>
+      </ReactAny>
     },
+
     // component usage (Comp = withStyle(comp, <withStyle options>)
-    Comp => <Comp classNameX={{ maxWidth: 33 }} classes={{ root: { paddingRight: 33 } }} styleX={{ paddingTop: 33 }} />,
+    Comp => <Comp
+      classes={{ root: [setCSS(4), { $web: setCSS(5, 1), $native: setCSS(5, 2) }] }}
+      classNameX={[setCSS(8), { $web: setCSS(9, 1), $native: setCSS(9, 2) }]}
+      styleX={[setCSS(12), { $web: setCSS(13, 1), $native: setCSS(13, 2) }]} />,
+
     // withStyle options
     {
       defaultProps: {
-        classes: { root: { width: 22 } },
-        classNameX: { height: 22 },
-        styleX: { maxHeight: 22, paddingTop: 22 }
+        classes: { root: [setCSS(2), { $web: setCSS(3, 1), $native: setCSS(3, 2) }] },
+        classNameX: [setCSS(6), { $web: setCSS(7, 1), $native: setCSS(7, 2) }],
+        styleX: [setCSS(10), { $web: setCSS(11, 1), $native: setCSS(11, 2) }]
       }
     })
 }

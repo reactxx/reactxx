@@ -5,8 +5,6 @@ import { TComponents, TWithStyles } from 'reactxx-typings';
 export const propsCodePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
   return () => {
     const { pipeStates } = pipelineState
-    // UNDO and init
-    //const pipeState: TWithStyles.PipeState = pipeStates[pipeId] = {}
     const propsCode: TComponents.PropsCode = pipelineState.propsCode = {
       ...mergeCodeProps(pipeStates.map(p => p && p.codeProps)),
       theme: pipelineState.theme,

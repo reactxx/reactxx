@@ -48,7 +48,7 @@ export const sheetFromThemeCache = (
   value = atomizeSheet(sheetOrCreator, theme, path + '.sheet')
   if (defaultClasses) {
     const _defaultClasses = atomizeSheet(defaultClasses, theme, path + '.option.classes')
-    mergeSheet(value, _defaultClasses, true)
+    mergeSheet(value, _defaultClasses)
   }
 
   cache[componentId] = value
