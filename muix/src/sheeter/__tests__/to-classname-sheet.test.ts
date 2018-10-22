@@ -56,7 +56,6 @@ Object {
         ],
       },
     ],
-    "name": "label",
     "~": "c",
   },
   "nativeOnly": Object {
@@ -67,7 +66,6 @@ Object {
         ],
       },
     ],
-    "name": "nativeOnly",
     "~": "c",
   },
   "root": Object {
@@ -84,7 +82,6 @@ Object {
         ],
       },
     ],
-    "name": "root",
     "~": "c",
   },
 }
@@ -112,7 +109,6 @@ Object {
         ],
       },
     ],
-    "name": "label",
     "~": "c",
   },
   "root": Object {
@@ -129,7 +125,6 @@ Object {
         ],
       },
     ],
-    "name": "root",
     "~": "c",
   },
   "webOnly": Object {
@@ -141,7 +136,6 @@ Object {
         ],
       },
     ],
-    "name": "webOnly",
     "~": "c",
   },
 }

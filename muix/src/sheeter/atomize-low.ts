@@ -16,8 +16,7 @@ import { platform } from 'reactxx-sheeter'
 // returns:
 // - fill list with parts
 export const atomizeRulesetLow = (
-    ruleset: TSheeter.RulesetOrAtomized,
-    list: TAtomize.Variants,
+    ruleset: TSheeter.RulesetOrAtomized, list: TAtomize.Variants,
     path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions,
 ) => {
     const linear = linearize(ruleset)

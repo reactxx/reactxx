@@ -31,7 +31,7 @@ declare namespace TAtomize {
 
   export interface AtomizedRuleset extends TypedInterface {
     [TypedInterfaceTypes.prop]: TypedInterfaceTypes.atomizedRuleset
-    name: string
+    //name: string
     list: Variants
   }
   export type Variants = Variant[]

@@ -9,11 +9,6 @@
             "command": ".\\node_modules\\.bin\\jest.cmd",
             "args": [
                 "--runInBand",
-                //"--testPathPattern=fela",
-                //"--testPathPattern=applyLastWinStrategy",
-                //"--testPathPattern=atomize-sheet",
-                //"--testPathPattern=to-classname",
-                //"--testPathPattern=switch-sheet",
                 //"--testPathPattern=with-styles-comp",
                 "-u"
             ],

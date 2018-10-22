@@ -12,9 +12,9 @@ exports[`WITH STYLES THEME NATIVE 1`] = `
     }
     trace={
       Object {
-        "background": "lightblue /*sheet/label[0]*/",
-        "color": "black /*sheet/label[0]*/",
-        "fontWeight": "bold /*sheet/label[1]*/",
+        "background": "lightblue /*TestComponent.sheet.label[0]*/",
+        "color": "black /*TestComponent.sheet.label[0]*/",
+        "fontWeight": "bold /*TestComponent.sheet.label[1]*/",
       }
     }
   >
@@ -31,9 +31,9 @@ exports[`WITH STYLES THEME NATIVE 1`] = `
       }
       trace={
         Object {
-          "background": "lightcyan /*sheet/label[0]*/",
-          "color": "darkgray /*sheet/label[0]*/",
-          "fontWeight": "bold /*sheet/label[1]*/",
+          "background": "lightcyan /*TestComponent.sheet.label[0]*/",
+          "color": "darkgray /*TestComponent.sheet.label[0]*/",
+          "fontWeight": "bold /*TestComponent.sheet.label[1]*/",
         }
       }
     >
@@ -49,9 +49,9 @@ exports[`WITH STYLES THEME WEB 1`] = `
     className="c b a"
     trace={
       Array [
-        ".c { font-weight:bold /*sheet/label[1]*/ }",
-        ".b { background:lightblue /*sheet/label[0]*/ }",
-        ".a { color:black /*sheet/label[0]*/ }",
+        ".c { font-weight:bold /*TestComponent.sheet.label[1]*/ }",
+        ".b { background:lightblue /*TestComponent.sheet.label[0]*/ }",
+        ".a { color:black /*TestComponent.sheet.label[0]*/ }",
       ]
     }
   >
@@ -62,9 +62,9 @@ exports[`WITH STYLES THEME WEB 1`] = `
       className="c e d"
       trace={
         Array [
-          ".c { font-weight:bold /*sheet/label[1]*/ }",
-          ".e { background:lightcyan /*sheet/label[0]*/ }",
-          ".d { color:darkgray /*sheet/label[0]*/ }",
+          ".c { font-weight:bold /*TestComponent.sheet.label[1]*/ }",
+          ".e { background:lightcyan /*TestComponent.sheet.label[0]*/ }",
+          ".d { color:darkgray /*TestComponent.sheet.label[0]*/ }",
         ]
       }
     >

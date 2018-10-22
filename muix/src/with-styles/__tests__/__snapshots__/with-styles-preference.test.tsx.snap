@@ -15,13 +15,13 @@ exports[`WITH STYLE PREFERENCE NATIVE 1`] = `
   }
   trace={
     Object {
-      "height": "22 /*option.classNameX*/",
-      "maxHeight": "22 /*styleX*/",
+      "height": "22 /*TestComponent.option.classNameX*/",
+      "maxHeight": "22 /*TestComponent.option.styleX*/",
       "maxWidth": "33 /*classNameX*/",
-      "paddingLeft": "11 /*sheet/root*/",
-      "paddingRight": "33 /*classes/root*/",
+      "paddingLeft": "11 /*TestComponent.sheet.root*/",
+      "paddingRight": "33 /*classes.root*/",
       "paddingTop": "33 /*styleX*/",
-      "width": "22 /*option.classes/root*/",
+      "width": "22 /*TestComponent.option.classes.root*/",
     }
   }
 >
@@ -41,12 +41,12 @@ exports[`WITH STYLE PREFERENCE WEB 1`] = `
   trace={
     Array [
       ".k { max-width:33px /*classNameX*/ }",
-      ".i { height:22px /*option.classNameX*/ }",
-      ".j { padding-right:33px /*classes/root*/ }",
-      ".h { width:22px /*option.classes/root*/ }",
-      ".f { padding-left:11px /*sheet/root*/ }",
-      ".e { padding-top:11px /*sheet/root*/ }",
-      ".c { max-height:11px /*sheet/root*/ }",
+      ".i { height:22px /*TestComponent.option.classNameX*/ }",
+      ".j { padding-right:33px /*classes.root*/ }",
+      ".h { width:22px /*TestComponent.option.classes.root*/ }",
+      ".f { padding-left:11px /*TestComponent.sheet.root*/ }",
+      ".e { padding-top:11px /*TestComponent.sheet.root*/ }",
+      ".c { max-height:11px /*TestComponent.sheet.root*/ }",
     ]
   }
 >

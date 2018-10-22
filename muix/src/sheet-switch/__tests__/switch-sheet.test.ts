@@ -150,7 +150,6 @@ Object {
         ],
       },
     ],
-    "name": "root",
     "~": "c",
   },
 }
@@ -210,7 +209,6 @@ Object {
         ],
       },
     ],
-    "name": "root",
     "~": "c",
   },
   "webOnly": Object {
@@ -227,7 +225,6 @@ Object {
         ],
       },
     ],
-    "name": "webOnly",
     "~": "c",
   },
 }

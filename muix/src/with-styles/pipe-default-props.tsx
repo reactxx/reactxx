@@ -11,20 +11,20 @@ export const defaultPropsPipe: TWithStyles.Pipe = (pipelineState, pipeId, next) 
 
 const init = (pipeId: number, pipelineState: TWithStyles.PipelineState) => {
   
-  const { defaultProps, theme, sheetOrCreator, componentId } = pipelineState
+  const { defaultProps, theme, sheetOrCreator, componentId, displayName } = pipelineState
 
   // use first pipeId for default props
   if (defaultProps) {
     const { classNameX, styleX, themedProps, classes, ...defaultPropsRest } = defaultProps
     pipelineState.pipeStates[pipeId] = {
       codeProps: [defaultPropsRest, themedProps ? themedProps(theme) : null],
-      classes: sheetFromThemeCache(componentId, sheetOrCreator, theme, classes),
-      classNameX: atomizeRuleset(classNameX, theme, 'option.classNameX'),
-      styleX: atomizeStyle(styleX, theme),
+      classes: sheetFromThemeCache(componentId, sheetOrCreator, theme, classes, displayName),
+      classNameX: atomizeRuleset(classNameX, theme, `${displayName}.option.classNameX`),
+      styleX: atomizeStyle(styleX, theme, `${displayName}.option.styleX`),
     }
   } else {
     pipelineState.pipeStates[pipeId] = {
-      classes: sheetFromThemeCache(componentId, sheetOrCreator, theme, null),
+      classes: sheetFromThemeCache(componentId, sheetOrCreator, theme, null, displayName),
     }
   }
 

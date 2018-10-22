@@ -37,16 +37,17 @@ export const defaultThemeName = '*default-theme*'
 
 export const sheetFromThemeCache = (
   componentId: number, sheetOrCreator: TSheeter.SheetOrCreator, 
-  theme: TTheme.Theme, defaultClasses: TSheeter.PartialSheetOrCreator
+  theme: TTheme.Theme, defaultClasses: TSheeter.PartialSheetOrCreator,
+  path: string
 ) => {
   const cache = !theme ? $cache : (theme.$cache || (theme.$cache = {}))
 
   let value: TAtomize.Sheet = cache[componentId]
   if (value) return value
 
-  value = atomizeSheet(sheetOrCreator, theme, 'sheet')
+  value = atomizeSheet(sheetOrCreator, theme, path + '.sheet')
   if (defaultClasses) {
-    const _defaultClasses = atomizeSheet(defaultClasses, theme, 'option.classes')
+    const _defaultClasses = atomizeSheet(defaultClasses, theme, path + '.option.classes')
     mergeSheet(value, _defaultClasses, true)
   }
 
