@@ -3,9 +3,6 @@ import { globalOptions, mergeDeep } from 'reactxx-sheeter';
 import { TWithStyles } from 'reactxx-typings';
 
 export const innerStatePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
-  const render = () => {
-    return next()
-  }
   return () => {
     const { pipeStates, propsCode } = pipelineState
     // reset pipe state
@@ -21,37 +18,20 @@ export const innerStatePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) =>
     return <InnerStateComponent
       pipelineState={pipelineState}
       pipeState={pipeState}
-      ref={comp => pipelineState.innerStateComponent = comp}>{render}</InnerStateComponent>
+      ref={comp => pipelineState.innerStateComponent = comp}>{next}</InnerStateComponent>
   }
 }
 
 class InnerStateComponent extends React.Component<InnerStateComponentProps> {
   render() {
-    //this.props['toJSON'] = this.toJSON.bind(this.props)
-    const { pipelineState, pipeState, pipelineState: { CodeComponent, propsCode }, children } = this.props
-    __SET_TRACING__(this)
+    const { pipeState, pipelineState: { pipeStates, CodeComponent, propsCode }, children } = this.props
     if (CodeComponent.modifyInnerState) {
       if (!pipeState.innerState) pipeState.innerState = {}
       CodeComponent.modifyInnerState(propsCode, pipeState.innerState)
     }
-    propsCode.mergedInnerState = mergeDeep(pipelineState.pipeStates.map(s => s.innerState))
+    propsCode.mergedInnerState = mergeDeep(pipeStates.map(s => s.innerState))
     return children()
   }
-  toJSON
-}
-
-const __SET_TRACING__ = (comp: InnerStateComponent) => {
-  if (!window.__TRACE__ && !window.__TRACELEVEL__) return
-  const { pipelineState, pipeState, pipelineState: { propsCode: { classes, styleX, classNameX, mergedInnerState } } } = comp.props
-  let objs: {}[]
-  switch (window.__TRACELEVEL__ || 1) {
-    case 1: // display only react components
-    case 2: // display react components with trace attribute 
-    case 3: return //
-    case 4: objs = [comp, pipelineState, pipeState]; break
-    case 5: objs = [comp ]; break
-  }
-  objs.forEach(obj => obj && (obj['toJSON'] = () => '...'))
 }
 
 interface InnerStateComponentProps {

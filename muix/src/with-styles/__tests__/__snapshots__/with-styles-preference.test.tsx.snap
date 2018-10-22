@@ -8,8 +8,20 @@ exports[`WITH STYLE PREFERENCE NATIVE 1`] = `
       "maxHeight": 22,
       "maxWidth": 33,
       "paddingLeft": 11,
+      "paddingRight": 33,
       "paddingTop": 33,
       "width": 22,
+    }
+  }
+  trace={
+    Object {
+      "height": "22 /*option.classNameX*/",
+      "maxHeight": "22 /*styleX*/",
+      "maxWidth": "33 /*classNameX*/",
+      "paddingLeft": "11 /*sheet/root*/",
+      "paddingRight": "33 /*classes/root*/",
+      "paddingTop": "33 /*styleX*/",
+      "width": "22 /*option.classes/root*/",
     }
   }
 >
@@ -19,7 +31,7 @@ exports[`WITH STYLE PREFERENCE NATIVE 1`] = `
 
 exports[`WITH STYLE PREFERENCE WEB 1`] = `
 <ReactAny
-  className="i h g f e c"
+  className="k i j h f e c"
   style={
     Object {
       "maxHeight": 22,
@@ -28,12 +40,13 @@ exports[`WITH STYLE PREFERENCE WEB 1`] = `
   }
   trace={
     Array [
-      ".i { max-width:33px /*.*/ }",
-      ".h { height:22px /*.*/ }",
-      ".g { width:22px /*root*/ }",
-      ".f { padding-left:11px /*root*/ }",
-      ".e { padding-top:11px /*root*/ }",
-      ".c { max-height:11px /*root*/ }",
+      ".k { max-width:33px /*classNameX*/ }",
+      ".i { height:22px /*option.classNameX*/ }",
+      ".j { padding-right:33px /*classes/root*/ }",
+      ".h { width:22px /*option.classes/root*/ }",
+      ".f { padding-left:11px /*sheet/root*/ }",
+      ".e { padding-top:11px /*sheet/root*/ }",
+      ".c { max-height:11px /*sheet/root*/ }",
     ]
   }
 >

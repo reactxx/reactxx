@@ -17,9 +17,17 @@ export const platform: TAtomize.Platform = {
             }
             res.push(at)
         }
-        return res.length===0 ? null : res
+        return res.length === 0 ? null : res
     },
-    dumpAtomized: array => array,
+    dumpAtomized: array => {
+        if (!array || Array.isArray(array) || !(typeof array === 'object')) return array
+        const res = {}
+        for (const p in array) {
+            const val = array[p] as TAtomize.__dev_AtomicNative
+            res[p] = window.__TRACE__ ? `${val.value || ''} /*${val.tracePath || ''}*/` : val
+        }
+        return res
+    },
     applyLastwinsStrategy,
     finalClassNameStep,
     createElement

@@ -114,14 +114,8 @@ Array [
 ******************************************
 ",
   Object {
-    "backgroundColor": Object {
-      "tracePath": "root/$native/$switch.isOpened",
-      "value": "brown",
-    },
-    "borderColor": Object {
-      "tracePath": "root/$switch.isOpened/$switch.isOpened",
-      "value": "cyan",
-    },
+    "backgroundColor": "brown /*root/$native/$switch.isOpened*/",
+    "borderColor": "cyan /*root/$switch.isOpened/$switch.isOpened*/",
   },
   "
 ******************************************

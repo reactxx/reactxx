@@ -15,7 +15,7 @@
                 //"--testPathPattern=to-classname",
                 //"--testPathPattern=switch-sheet",
                 //"--testPathPattern=with-styles-comp",
-                //"-u"
+                "-u"
             ],
             "group": "test",
             "presentation": {

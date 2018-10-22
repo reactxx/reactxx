@@ -143,34 +143,16 @@ Array [
 `);
     expect(ruleset1Wins).toMatchInlineSnapshot(`
 Object {
-  "color": Object {
-    "tracePath": "ruleset1",
-    "value": "red",
-  },
-  "left": Object {
-    "tracePath": "ruleset2",
-    "value": "10px",
-  },
-  "right": Object {
-    "tracePath": "ruleset1",
-    "value": "20px",
-  },
+  "color": "red /*ruleset1*/",
+  "left": "10px /*ruleset2*/",
+  "right": "20px /*ruleset1*/",
 }
 `);
     expect(ruleset2Wins).toMatchInlineSnapshot(`
 Object {
-  "color": Object {
-    "tracePath": "ruleset2",
-    "value": "black",
-  },
-  "left": Object {
-    "tracePath": "ruleset2",
-    "value": "10px",
-  },
-  "right": Object {
-    "tracePath": "ruleset1",
-    "value": "20px",
-  },
+  "color": "black /*ruleset2*/",
+  "left": "10px /*ruleset2*/",
+  "right": "20px /*ruleset1*/",
 }
 `);
     expect(final1).toMatchInlineSnapshot(`

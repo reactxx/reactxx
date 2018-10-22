@@ -22,6 +22,7 @@ const traceTest = (isWeb: boolean) => {
         maxWidth: 11,
         paddingTop: 11,
         paddingLeft: 11,
+        paddingRight: 11,
       },
       label: {}, webOnly: {}, nativeOnly: {},
     },
@@ -37,7 +38,7 @@ const traceTest = (isWeb: boolean) => {
       </React.Fragment>
     },
     // component usage (Comp = withStyle(comp, <withStyle options>)
-    Comp => <Comp classNameX={{ maxWidth: 33 }} styleX={{ paddingTop: 33 }} />,
+    Comp => <Comp classNameX={{ maxWidth: 33 }} classes={{ root: { paddingRight: 33 } }} styleX={{ paddingTop: 33 }} />,
     // withStyle options
     {
       defaultProps: {

@@ -4,11 +4,11 @@ import { TAtomize, TSheeter, TComponents, TVariants } from 'reactxx-typings'
 import { createWithTheme } from './utils/create-with-theme'
 import { atomizeRulesetLow } from './atomize-low'
 
-export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetOrCreator<R>, theme?) => {
+export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetOrCreator<R>, theme?, path?: string) => {
     if (!sheet) return null
     const sh: TSheeter.Sheet = createWithTheme(sheet, theme)
     for (const p in sh) {
-        const at = atomizeRuleset(sh[p], theme, p)
+        const at = atomizeRuleset(sh[p], theme, (path ? path + '/' : '') + p)
         if (at) sh[p] = at
         else delete sh[p]
     }
@@ -41,7 +41,7 @@ export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme?) => {
     if (window.isWeb)
         return createWithTheme(style, theme) as TSheeter.StyleOrAtomizedWeb
     else
-        return atomizeRuleset(style as TSheeter.ClassNameOrCreator, theme)
+        return atomizeRuleset(style as TSheeter.ClassNameOrCreator, theme, 'styleX')
 }
 
 export function isAtomizedRuleset(obj: Object): obj is TAtomize.AtomizedRuleset {

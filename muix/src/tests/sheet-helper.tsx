@@ -16,7 +16,6 @@ import console = require('console');
 export const ReactAny: React.SFC<any> = ({ children }) => children || null
 ReactAny.displayName = 'ReactAny'
 
-
 export const traceComponentEx = (
     isWeb: boolean,
     traceLevel: number,
@@ -39,14 +38,15 @@ export const traceComponentEx = (
 // https://github.com/adriantoine/enzyme-to-json/issues/110
 const filter: OutputMapper = json => {
 
+    deleteProps(json)
+
     if (json.type === 'InnerStateComponent' || json.type === 'TestComponent' || json.type === 'TestComponentCode') {
-        if (window.__TRACELEVEL__ <= 3)
-            return json.children[0];
-        deleteProps(json)
-        return json
-    }
-    if (json.type === 'ThemeProviderGeneric') {
-        if (json.props['theme']) json.props['theme'] = '...'
+        switch (window.__TRACELEVEL__) {
+            case 3: delete json.props; break
+            case 4: delete json.props.pipelineState; delete json.props.pipeState; break
+            case 5: break
+            default: return json.children[0];
+        }
         return json
     }
     return json
@@ -56,13 +56,11 @@ function deleteProps(node) {
     if (!node || Array.isArray(node))
         return
     if (typeof node === 'object') {
-        ['innerStateComponent', 'CodeComponent', 'setInnerState', 'theme', 'toClassNames',
-            'refreshInnerStateComponent', 'sheetOrCreator', '~']
-            .forEach(p => delete node[p])
         for (const p in node) {
-            if (p==='node') continue
+            if (p === 'node') continue
+            if (deletePropsDir[p]) delete node[p]
             const val = node[p]
-            if (!val) delete node[p]
+            if (!val && val !== '' && val !== 0) delete node[p]
             else if (Array.isArray(val)) {
                 if (p != 'children') continue
                 val.forEach(n => deleteProps(n))
@@ -71,12 +69,9 @@ function deleteProps(node) {
         }
     }
 }
-
-export const createSheet = <R extends TSheeter.Shape>(
-    creator: () => TSheeter.Sheet<R>,
-    call: (res: jest.Matchers<any>) => void,
-) => {
-
+const deletePropsDir = {
+    innerStateComponent: true, CodeComponent: true, setInnerState: true, theme: true,
+    toClassNames: true, refreshInnerStateComponent: true, sheetOrCreator: true, '~': true
 }
 
 export const toClassNames = <R extends TSheeter.Shape>(
@@ -111,11 +106,3 @@ export const toClassNames = <R extends TSheeter.Shape>(
     ]
     call(expect(json))
 }
-
-
-/*
-let { atomized, lastWin, final} = 
-atomized.toMatchInlineSnapshot()
-lastWin.toMatchInlineSnapshot()
-final.toMatchInlineSnapshot()
- */

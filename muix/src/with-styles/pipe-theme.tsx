@@ -36,16 +36,17 @@ ThemeProviderGeneric[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfac
 export const defaultThemeName = '*default-theme*'
 
 export const sheetFromThemeCache = (
-  componentId: number, sheetOrCreator: TSheeter.SheetOrCreator, theme: TTheme.Theme, defaultClasses: TSheeter.PartialSheetOrCreator
+  componentId: number, sheetOrCreator: TSheeter.SheetOrCreator, 
+  theme: TTheme.Theme, defaultClasses: TSheeter.PartialSheetOrCreator
 ) => {
   const cache = !theme ? $cache : (theme.$cache || (theme.$cache = {}))
 
   let value: TAtomize.Sheet = cache[componentId]
   if (value) return value
 
-  value = atomizeSheet(sheetOrCreator, theme)
+  value = atomizeSheet(sheetOrCreator, theme, 'sheet')
   if (defaultClasses) {
-    const _defaultClasses = atomizeSheet(defaultClasses, theme)
+    const _defaultClasses = atomizeSheet(defaultClasses, theme, 'option.classes')
     mergeSheet(value, _defaultClasses, true)
   }
 

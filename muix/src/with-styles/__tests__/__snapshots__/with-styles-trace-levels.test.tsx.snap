@@ -36,6 +36,13 @@ exports[`WITH STYLES TRACE LEVELS trace 2 NATIVE 1`] = `
       "padding": 10,
     }
   }
+  trace={
+    Object {
+      "backgroundColor": "gray /*sheet/root*/",
+      "margin": "10 /*styleX*/",
+      "padding": "10 /*classNameX*/",
+    }
+  }
 >
   traceLevel=2
 </ReactAny>
@@ -51,8 +58,8 @@ exports[`WITH STYLES TRACE LEVELS trace 2 WEB 1`] = `
   }
   trace={
     Array [
-      ".b { padding:10px /*.*/ }",
-      ".a { background-color:gray /*root*/ }",
+      ".b { padding:10px /*classNameX*/ }",
+      ".a { background-color:gray /*sheet/root*/ }",
     ]
   }
 >
@@ -61,36 +68,55 @@ exports[`WITH STYLES TRACE LEVELS trace 2 WEB 1`] = `
 `;
 
 exports[`WITH STYLES TRACE LEVELS trace 3 NATIVE 1`] = `
-<ReactAny
-  style={
-    Object {
-      "backgroundColor": "gray",
-      "margin": 10,
-      "padding": 10,
-    }
-  }
->
-  traceLevel=3
-</ReactAny>
+<TestComponent>
+  <InnerStateComponent>
+    <TestComponentCode>
+      <ReactAny
+        style={
+          Object {
+            "backgroundColor": "gray",
+            "margin": 10,
+            "padding": 10,
+          }
+        }
+        trace={
+          Object {
+            "backgroundColor": "gray /*sheet/root*/",
+            "margin": "10 /*styleX*/",
+            "padding": "10 /*classNameX*/",
+          }
+        }
+      >
+        traceLevel=3
+      </ReactAny>
+    </TestComponentCode>
+  </InnerStateComponent>
+</TestComponent>
 `;
 
 exports[`WITH STYLES TRACE LEVELS trace 3 WEB 1`] = `
-<ReactAny
-  className="b a"
-  style={
-    Object {
-      "margin": 10,
-    }
-  }
-  trace={
-    Array [
-      ".b { padding:10px /*.*/ }",
-      ".a { background-color:gray /*root*/ }",
-    ]
-  }
->
-  traceLevel=3
-</ReactAny>
+<TestComponent>
+  <InnerStateComponent>
+    <TestComponentCode>
+      <ReactAny
+        className="b a"
+        style={
+          Object {
+            "margin": 10,
+          }
+        }
+        trace={
+          Array [
+            ".b { padding:10px /*classNameX*/ }",
+            ".a { background-color:gray /*sheet/root*/ }",
+          ]
+        }
+      >
+        traceLevel=3
+      </ReactAny>
+    </TestComponentCode>
+  </InnerStateComponent>
+</TestComponent>
 `;
 
 exports[`WITH STYLES TRACE LEVELS trace 4 NATIVE 1`] = `
@@ -106,21 +132,18 @@ exports[`WITH STYLES TRACE LEVELS trace 4 NATIVE 1`] = `
     }
   }
 >
-  <InnerStateComponent
-    pipeState={"..."}
-    pipelineState={"..."}
-  >
+  <InnerStateComponent>
     <TestComponentCode
       classNameX={
         Object {
           "list": Array [
             Object {
               "atomicArray": Array [
-                "padding: 10 /*.*/",
+                "padding: 10 /*classNameX*/",
               ],
             },
           ],
-          "name": ".",
+          "name": "classNameX",
         }
       }
       classes={
@@ -129,11 +152,11 @@ exports[`WITH STYLES TRACE LEVELS trace 4 NATIVE 1`] = `
             "list": Array [
               Object {
                 "atomicArray": Array [
-                  "backgroundColor: gray /*root*/",
+                  "backgroundColor: gray /*sheet/root*/",
                 ],
               },
             ],
-            "name": "root",
+            "name": "sheet/root",
           },
         }
       }
@@ -142,11 +165,11 @@ exports[`WITH STYLES TRACE LEVELS trace 4 NATIVE 1`] = `
           "list": Array [
             Object {
               "atomicArray": Array [
-                "margin: 10 /*.*/",
+                "margin: 10 /*styleX*/",
               ],
             },
           ],
-          "name": ".",
+          "name": "styleX",
         }
       }
     >
@@ -156,6 +179,13 @@ exports[`WITH STYLES TRACE LEVELS trace 4 NATIVE 1`] = `
             "backgroundColor": "gray",
             "margin": 10,
             "padding": 10,
+          }
+        }
+        trace={
+          Object {
+            "backgroundColor": "gray /*sheet/root*/",
+            "margin": "10 /*styleX*/",
+            "padding": "10 /*classNameX*/",
           }
         }
       >
@@ -179,21 +209,18 @@ exports[`WITH STYLES TRACE LEVELS trace 4 WEB 1`] = `
     }
   }
 >
-  <InnerStateComponent
-    pipeState={"..."}
-    pipelineState={"..."}
-  >
+  <InnerStateComponent>
     <TestComponentCode
       classNameX={
         Object {
           "list": Array [
             Object {
               "atomicArray": Array [
-                ".b { padding:10px /*.*/ }",
+                ".b { padding:10px /*classNameX*/ }",
               ],
             },
           ],
-          "name": ".",
+          "name": "classNameX",
         }
       }
       classes={
@@ -202,11 +229,11 @@ exports[`WITH STYLES TRACE LEVELS trace 4 WEB 1`] = `
             "list": Array [
               Object {
                 "atomicArray": Array [
-                  ".a { background-color:gray /*root*/ }",
+                  ".a { background-color:gray /*sheet/root*/ }",
                 ],
               },
             ],
-            "name": "root",
+            "name": "sheet/root",
           },
         }
       }
@@ -225,8 +252,8 @@ exports[`WITH STYLES TRACE LEVELS trace 4 WEB 1`] = `
         }
         trace={
           Array [
-            ".b { padding:10px /*.*/ }",
-            ".a { background-color:gray /*root*/ }",
+            ".b { padding:10px /*classNameX*/ }",
+            ".a { background-color:gray /*sheet/root*/ }",
           ]
         }
       >
@@ -263,11 +290,11 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
                 "list": Array [
                   Object {
                     "atomicArray": Array [
-                      "backgroundColor: gray /*root*/",
+                      "backgroundColor: gray /*sheet/root*/",
                     ],
                   },
                 ],
-                "name": "root",
+                "name": "sheet/root",
               },
             },
           },
@@ -276,11 +303,11 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
               "list": Array [
                 Object {
                   "atomicArray": Array [
-                    "padding: 10 /*.*/",
+                    "padding: 10 /*classNameX*/",
                   ],
                 },
               ],
-              "name": ".",
+              "name": "classNameX",
             },
             "classes": null,
             "codeProps": Array [
@@ -293,11 +320,11 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
               "list": Array [
                 Object {
                   "atomicArray": Array [
-                    "margin: 10 /*.*/",
+                    "margin: 10 /*styleX*/",
                   ],
                 },
               ],
-              "name": ".",
+              "name": "styleX",
             },
           },
           undefined,
@@ -318,33 +345,33 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
             "list": Array [
               Object {
                 "atomicArray": Array [
-                  "padding: 10 /*.*/",
+                  "padding: 10 /*classNameX*/",
                 ],
               },
             ],
-            "name": ".",
+            "name": "classNameX",
           },
           "classes": Object {
             "root": Object {
               "list": Array [
                 Object {
                   "atomicArray": Array [
-                    "backgroundColor: gray /*root*/",
+                    "backgroundColor: gray /*sheet/root*/",
                   ],
                 },
               ],
-              "name": "root",
+              "name": "sheet/root",
             },
           },
           "styleX": Object {
             "list": Array [
               Object {
                 "atomicArray": Array [
-                  "margin: 10 /*.*/",
+                  "margin: 10 /*styleX*/",
                 ],
               },
             ],
-            "name": ".",
+            "name": "styleX",
           },
         },
         "uniqueId": "TestComponent *19",
@@ -357,11 +384,11 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
           "list": Array [
             Object {
               "atomicArray": Array [
-                "padding: 10 /*.*/",
+                "padding: 10 /*classNameX*/",
               ],
             },
           ],
-          "name": ".",
+          "name": "classNameX",
         }
       }
       classes={
@@ -370,11 +397,11 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
             "list": Array [
               Object {
                 "atomicArray": Array [
-                  "backgroundColor: gray /*root*/",
+                  "backgroundColor: gray /*sheet/root*/",
                 ],
               },
             ],
-            "name": "root",
+            "name": "sheet/root",
           },
         }
       }
@@ -383,11 +410,11 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
           "list": Array [
             Object {
               "atomicArray": Array [
-                "margin: 10 /*.*/",
+                "margin: 10 /*styleX*/",
               ],
             },
           ],
-          "name": ".",
+          "name": "styleX",
         }
       }
     >
@@ -397,6 +424,13 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
             "backgroundColor": "gray",
             "margin": 10,
             "padding": 10,
+          }
+        }
+        trace={
+          Object {
+            "backgroundColor": "gray /*sheet/root*/",
+            "margin": "10 /*styleX*/",
+            "padding": "10 /*classNameX*/",
           }
         }
       >
@@ -433,11 +467,11 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
                 "list": Array [
                   Object {
                     "atomicArray": Array [
-                      ".a { background-color:gray /*root*/ }",
+                      ".a { background-color:gray /*sheet/root*/ }",
                     ],
                   },
                 ],
-                "name": "root",
+                "name": "sheet/root",
               },
             },
           },
@@ -446,11 +480,11 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
               "list": Array [
                 Object {
                   "atomicArray": Array [
-                    ".b { padding:10px /*.*/ }",
+                    ".b { padding:10px /*classNameX*/ }",
                   ],
                 },
               ],
-              "name": ".",
+              "name": "classNameX",
             },
             "classes": null,
             "codeProps": Array [
@@ -481,22 +515,22 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
             "list": Array [
               Object {
                 "atomicArray": Array [
-                  ".b { padding:10px /*.*/ }",
+                  ".b { padding:10px /*classNameX*/ }",
                 ],
               },
             ],
-            "name": ".",
+            "name": "classNameX",
           },
           "classes": Object {
             "root": Object {
               "list": Array [
                 Object {
                   "atomicArray": Array [
-                    ".a { background-color:gray /*root*/ }",
+                    ".a { background-color:gray /*sheet/root*/ }",
                   ],
                 },
               ],
-              "name": "root",
+              "name": "sheet/root",
             },
           },
           "styleX": Object {
@@ -513,11 +547,11 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
           "list": Array [
             Object {
               "atomicArray": Array [
-                ".b { padding:10px /*.*/ }",
+                ".b { padding:10px /*classNameX*/ }",
               ],
             },
           ],
-          "name": ".",
+          "name": "classNameX",
         }
       }
       classes={
@@ -526,11 +560,11 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
             "list": Array [
               Object {
                 "atomicArray": Array [
-                  ".a { background-color:gray /*root*/ }",
+                  ".a { background-color:gray /*sheet/root*/ }",
                 ],
               },
             ],
-            "name": "root",
+            "name": "sheet/root",
           },
         }
       }
@@ -549,8 +583,8 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
         }
         trace={
           Array [
-            ".b { padding:10px /*.*/ }",
-            ".a { background-color:gray /*root*/ }",
+            ".b { padding:10px /*classNameX*/ }",
+            ".a { background-color:gray /*sheet/root*/ }",
           ]
         }
       >

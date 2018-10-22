@@ -24,7 +24,7 @@ const customTheme: TSheeter.getTheme<Shape> = {
 
 const traceTest = (isWeb: boolean) => {
 
-  traceComponentEx(isWeb, 3,
+  traceComponentEx(isWeb, 2,
 
     theme => ({
       label: [

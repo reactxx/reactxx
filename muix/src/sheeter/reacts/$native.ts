@@ -4,6 +4,7 @@ import { deleteSystemProps, toClassNamesWithQuery } from '../to-classnames'
 
 import { applyLastwinsStrategyRoot, ApplyLastWinStrategyLow, AttemptType, ApplyLastWinStrategyResult } from '../utils/apply-last-win-strategy'
 import { isReactXXComponent, isDeffered } from '../atomize'
+import { platform } from '../index-native'
 
 /******************************************
   EXTEND REACT NATIVE
@@ -31,11 +32,13 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 
   if (classNameX || styleX) {
     let style =
-      styleX 
-      ? toClassNamesWithQuery(null,[classNameX, styleX])
-      : classNameX
+      styleX
+        ? toClassNamesWithQuery(null, [classNameX, styleX])
+        : classNameX
     let reduced = applyLastwinsStrategy(style)
     props.style = finalClassNameStep(reduced)
+    if (window.__TRACELEVEL__ >= 2)
+      props.trace = platform.dumpAtomized(reduced)
   }
 
   deleteSystemProps(props)

@@ -75,18 +75,9 @@ Array [
 ******************************************
 ",
   Object {
-    "color": Object {
-      "tracePath": "label",
-      "value": "blue",
-    },
-    "margin": Object {
-      "tracePath": "nativeOnly/$native",
-      "value": 20,
-    },
-    "padding": Object {
-      "tracePath": "root[1]/$native",
-      "value": 10,
-    },
+    "color": "blue /*label*/",
+    "margin": "20 /*nativeOnly/$native*/",
+    "padding": "10 /*root[1]/$native*/",
   },
   "
 ******************************************
@@ -135,14 +126,8 @@ Array [
 ******************************************
 ",
   Object {
-    "margin": Object {
-      "tracePath": "root[0]",
-      "value": 4,
-    },
-    "padding": Object {
-      "tracePath": "root[1]/$native",
-      "value": 10,
-    },
+    "margin": "4 /*root[0]*/",
+    "padding": "10 /*root[1]/$native*/",
   },
   "
 ******************************************
