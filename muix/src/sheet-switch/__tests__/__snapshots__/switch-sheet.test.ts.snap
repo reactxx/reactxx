@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SWITCH define sheet NATIVE 1`] = `
+Object {
+  "root": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          "backgroundColor: red /*root/$switch.isOpened*/",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isOpened",
+            "type": "$switch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "borderColor: cyan /*root/$switch.isOpened/$switch.isOpened*/",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isOpened",
+            "type": "$switch",
+          },
+          Object {
+            "case": "isOpened",
+            "type": "$switch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "backgroundColor: brown /*root/$native/$switch.isOpened*/",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isOpened",
+            "type": "$switch",
+          },
+        ],
+      },
+    ],
+    "~": "c",
+  },
+}
+`;
+
+exports[`SWITCH define sheet WEB 1`] = `
+Object {
+  "root": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          ".a { background-color:red /*root/$switch.isOpened*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isOpened",
+            "type": "$switch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".b { border-color:cyan /*root/$switch.isOpened/$switch.isOpened*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isOpened",
+            "type": "$switch",
+          },
+          Object {
+            "case": "isOpened",
+            "type": "$switch",
+          },
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".c:hover { background-color:green /*root/$web/:hover/$switch.isClosed[0]*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isClosed",
+            "type": "$switch",
+          },
+        ],
+      },
+    ],
+    "~": "c",
+  },
+  "webOnly": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          ".d:hover { background-color:yellow /*webOnly/$web/:hover/$switch.isOpened*/ }",
+        ],
+        "conditions": Array [
+          Object {
+            "case": "isOpened",
+            "type": "$switch",
+          },
+        ],
+      },
+    ],
+    "~": "c",
+  },
+}
+`;

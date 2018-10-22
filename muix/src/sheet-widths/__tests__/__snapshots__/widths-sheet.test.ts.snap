@@ -6,7 +6,7 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "margin: 0 /*root/$widths.0-640*/",
+          "margin: 0 /*sheet.root/$widths.0-640*/",
         ],
         "conditions": Array [
           Object {
@@ -20,7 +20,7 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          "margin: 10 /*root/$widths.640-1024*/",
+          "margin: 10 /*sheet.root/$widths.640-1024*/",
         ],
         "conditions": Array [
           Object {
@@ -34,7 +34,7 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          "margin: 20 /*root/$widths.1024-*/",
+          "margin: 20 /*sheet.root/$widths.1024-*/",
         ],
         "conditions": Array [
           Object {
@@ -58,17 +58,17 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          "@media (max-width: 639px).a { margin:0 /*root/$widths.0-640*/ }",
+          "@media (max-width: 639px).a { margin:0 /*sheet.root/$widths.0-640*/ }",
         ],
       },
       Object {
         "atomicArray": Array [
-          "@media (min-width: 640px) and (max-width: 1023px).b { margin:10px /*root/$widths.640-1024*/ }",
+          "@media (min-width: 640px) and (max-width: 1023px).b { margin:10px /*sheet.root/$widths.640-1024*/ }",
         ],
       },
       Object {
         "atomicArray": Array [
-          "@media (min-width: 1024px).c { margin:20px /*root/$widths.1024-*/ }",
+          "@media (min-width: 1024px).c { margin:20px /*sheet.root/$widths.1024-*/ }",
         ],
       },
     ],

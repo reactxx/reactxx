@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TO CLASSNAMES, sheet NATIVE 1`] = `
+Object {
+  "label": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          "color: blue /*label*/",
+        ],
+      },
+    ],
+    "~": "c",
+  },
+  "nativeOnly": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          "margin: 20 /*nativeOnly/$native*/",
+        ],
+      },
+    ],
+    "~": "c",
+  },
+  "root": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          "margin: 4 /*root[0]*/",
+          "padding: 4 /*root[0]*/",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "padding: 10 /*root[1]/$native*/",
+        ],
+      },
+    ],
+    "~": "c",
+  },
+}
+`;
+
+exports[`TO CLASSNAMES, sheet WEB 1`] = `
+Object {
+  "label": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          ".d { color:blue /*label*/ }",
+        ],
+      },
+    ],
+    "~": "c",
+  },
+  "root": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          ".a { margin:4px /*root[0]*/ }",
+          ".b { padding:4px /*root[0]*/ }",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          ".c { margin:10px /*root[0]/$web*/ }",
+        ],
+      },
+    ],
+    "~": "c",
+  },
+  "webOnly": Object {
+    "list": Array [
+      Object {
+        "atomicArray": Array [
+          ".e { color:red /*webOnly/$web*/ }",
+          ".f { padding:20px /*webOnly/$web*/ }",
+        ],
+      },
+    ],
+    "~": "c",
+  },
+}
+`;

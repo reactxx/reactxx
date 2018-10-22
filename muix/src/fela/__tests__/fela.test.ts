@@ -22,14 +22,5 @@ test("fela", () => {
     "root"
   );
   const res = dumpAtomized(classNames);
-  expect(res).toMatchInlineSnapshot(`
-Array [
-  ".a { color:red /*root*/ }",
-  ".b { margin:10px /*root*/ }",
-  ".c:hover { margin:5px /*root*/ }",
-  "@media (min-width: 768px).d:hover { height:100px /*root*/ }",
-  "@media (min-width: 768px).e:hover:active { width:700px /*root*/ }",
-  "@media (min-width: 768px).f:hover:active { color:red /*root*/ }",
-]
-`);
+  expect(res).toMatchSnapshot();
 });

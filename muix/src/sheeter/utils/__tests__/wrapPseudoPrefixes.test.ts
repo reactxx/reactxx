@@ -5,13 +5,5 @@ test("wrapPseudoPrefixes", () => {
     ":hover",
     "@media (min-width: 768px)"
   ]);
-  expect(res).toMatchInlineSnapshot(`
-Object {
-  ":hover": Object {
-    "@media (min-width: 768px)": Object {
-      "color": "red",
-    },
-  },
-}
-`);
+  expect(res).toMatchSnapshot();
 });

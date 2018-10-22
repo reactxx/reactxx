@@ -1,15 +1,6 @@
 import { WEB, NATIVE } from "./applyLastWinStrategy.testlib";
 import { initPlatform } from "reactxx-tests";
 
-/*
-    expect(ruleset1).toMatchInlineSnapshot()
-    expect(ruleset2).toMatchInlineSnapshot()
-    expect(ruleset1Wins).toMatchInlineSnapshot()
-    expect(ruleset2Wins).toMatchInlineSnapshot()
-    expect(final1).toMatchInlineSnapshot()
-    expect(final2).toMatchInlineSnapshot()
-*/
-
 describe("applyLastwinsStrategy simple", () => {
   const DATA = {
     ruleset1: {

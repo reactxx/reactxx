@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`wrapPseudoPrefixes 1`] = `
+Object {
+  ":hover": Object {
+    "@media (min-width: 768px)": Object {
+      "color": "red",
+    },
+  },
+}
+`;
