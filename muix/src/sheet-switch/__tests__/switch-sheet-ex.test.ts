@@ -49,14 +49,14 @@ export const createSheetWithPseudo = () =>
                 atomizeRuleset({
                   $switch: {
                     isOpened: {
-                      padding: 11
+                      padding: 44
                     }
                   },
-                  padding: 22
+                  padding: 55
                 } as TSheeter.RulesetOrAtomized, ''),
                 toClassNamesWithQuery(null, [
                   {
-                    padding: 33
+                    padding: 66
                   }
                 ])
               ]
@@ -71,6 +71,11 @@ export const createSheetWithPseudo = () =>
   });
 
 describe("SWITCH define sheet", () => {
+  it("NATIVE", () => {
+    initPlatform(false);
+    const sheet = atomizeSheet<Shape>(createSheet());
+    expect(sheet).toMatchSnapshot();
+  });
   it("WEB", () => {
     initPlatform(true);
     const sheet = atomizeSheet<Shape>(createSheet());
@@ -79,11 +84,6 @@ describe("SWITCH define sheet", () => {
   it("WEB with pseudo: WRONG RESULT", () => {
     initPlatform(true);
     const sheet = atomizeSheet<Shape>(createSheetWithPseudo());
-    expect(sheet).toMatchSnapshot();
-  });
-  it("NATIVE", () => {
-    initPlatform(false);
-    const sheet = atomizeSheet<Shape>(createSheet());
     expect(sheet).toMatchSnapshot();
   });
 });

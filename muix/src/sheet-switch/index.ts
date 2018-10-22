@@ -34,7 +34,8 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
                     list,
                     `${path}/$switch.${p}[${idx}]`,
                     pseudoPrefixes,
-                    [...conditions, { type: Consts.name, case: p } as SwitchCondition])
+                    [...conditions, { type: Consts.name, case: p } as SwitchCondition]
+                )
             )
         else
             atomizeRulesetLow(

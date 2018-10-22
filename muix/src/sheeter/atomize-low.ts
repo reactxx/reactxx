@@ -62,13 +62,6 @@ const pushToList = (
     push(platform.toPlatformAtomizeRuleset(ruleset, path), conditions, list)
 }
 
-const push = (atomicArray: TAtomize.AtomicArray, conditions: TVariants.Conditions, list: TAtomize.Variants) => {
-    if (!atomicArray || atomicArray.length === 0) return
-    if (atomicArray[0] === null)
-        debugger
-    list.push(conditions && conditions.length > 0 ? { atomicArray, conditions } : { atomicArray })
-}
-
 const linearize = (ruleset: TSheeter.RulesetOrAtomized) => {
     const parts: [string, TSheeter.RulesetItem][] = []
 
@@ -89,12 +82,19 @@ const linearize = (ruleset: TSheeter.RulesetOrAtomized) => {
         }
     }
 
-    if (Array.isArray(ruleset) && !isAtomicArray(ruleset))
+    if (isAtomicArray(ruleset))
+        addParts(ruleset, '')
+    else if (Array.isArray(ruleset))
         ruleset.forEach((r, idx) => addParts(r, `[${idx}]`))
     else
-        addParts(ruleset, '')
+        addParts(ruleset, '') // atomicArray or atomicRuleset
 
     return parts
+}
+
+const push = (atomicArray: TAtomize.AtomicArray, conditions: TVariants.Conditions, list: TAtomize.Variants) => {
+    if (!atomicArray || atomicArray.length === 0) return
+    list.push(conditions && conditions.length > 0 ? { atomicArray, conditions } : { atomicArray })
 }
 
 const atomizedToList = (
@@ -106,7 +106,7 @@ const atomizedToList = (
         if (isAtomicArray(item)) {
             warning(!pseudoPrefixes || pseudoPrefixes.length === 0, 'Incorrect behavior')
             push(item, conditions, list)
-            list.push(conditions && conditions.length>0 ? { atomicArray: item, conditions } : { atomicArray: item})
+            //list.push(conditions && conditions.length > 0 ? { atomicArray: item, conditions } : { atomicArray: item })
         } else if (isAtomizedRuleset(item)) {
             warning(!pseudoPrefixes || pseudoPrefixes.length === 0, 'Incorrect behavior')
             item.list.forEach(it => push(

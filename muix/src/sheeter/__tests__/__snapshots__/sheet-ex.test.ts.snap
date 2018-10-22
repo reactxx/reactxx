@@ -10,12 +10,6 @@ Object {
           "paddingBottom: 31 /*.*/",
         ],
       },
-      Object {
-        "atomicArray": Array [
-          "paddingTop: 31 /*.*/",
-          "paddingBottom: 31 /*.*/",
-        ],
-      },
     ],
     "name": "label",
     "~": "c",
@@ -39,12 +33,6 @@ Object {
           "paddingBottom: 22 /*.*/",
         ],
       },
-      Object {
-        "atomicArray": Array [
-          "paddingTop: 22 /*.*/",
-          "paddingBottom: 22 /*.*/",
-        ],
-      },
     ],
     "name": "root",
     "~": "c",
@@ -56,12 +44,6 @@ exports[`SWITCH define sheet WEB 1`] = `
 Object {
   "label": Object {
     "list": Array [
-      Object {
-        "atomicArray": Array [
-          ".i { padding-top:31px /*.*/ }",
-          ".j { padding-bottom:31px /*.*/ }",
-        ],
-      },
       Object {
         "atomicArray": Array [
           ".i { padding-top:31px /*.*/ }",
@@ -98,20 +80,8 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          ".c { padding-top:11px /*.*/ }",
-          ".d { padding-bottom:11px /*.*/ }",
-        ],
-      },
-      Object {
-        "atomicArray": Array [
           ".e { margin-top:21px /*.[0]*/ }",
           ".f { margin-bottom:21px /*.[0]*/ }",
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          ".g { padding-top:22px /*.*/ }",
-          ".h { padding-bottom:22px /*.*/ }",
         ],
       },
       Object {

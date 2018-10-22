@@ -41,17 +41,6 @@ Object {
           },
         ],
       },
-      Object {
-        "atomicArray": Array [
-          "padding: 33 /*.*/",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "isClosed",
-            "type": "$switch",
-          },
-        ],
-      },
     ],
     "name": "root",
     "~": "c",
@@ -100,17 +89,6 @@ Object {
           },
         ],
       },
-      Object {
-        "atomicArray": Array [
-          ".c { padding:33px /*.*/ }",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "isClosed",
-            "type": "$switch",
-          },
-        ],
-      },
     ],
     "name": "root",
     "~": "c",
@@ -124,7 +102,7 @@ Object {
     "list": Array [
       Object {
         "atomicArray": Array [
-          ".a { padding:22px /*.*/ }",
+          ".a { padding:55px /*.*/ }",
         ],
         "conditions": Array [
           Object {
@@ -135,7 +113,7 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          ".b { padding:11px /*./$switch.isOpened*/ }",
+          ".b { padding:44px /*./$switch.isOpened*/ }",
         ],
         "conditions": Array [
           Object {
@@ -150,18 +128,7 @@ Object {
       },
       Object {
         "atomicArray": Array [
-          ".c { padding:33px /*.*/ }",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "isClosed",
-            "type": "$switch",
-          },
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          ".c { padding:33px /*.*/ }",
+          ".c { padding:66px /*.*/ }",
         ],
         "conditions": Array [
           Object {
