@@ -78,7 +78,7 @@ exports[`WITH STYLES THEME WEB 1`] = `
   </ReactAny>
   <ThemeProviderGeneric>
     <ReactAny
-      className="l j k h"
+      className="k i j g"
       style={
         Object {
           "borderBottomColor": "lightcyan",
@@ -87,10 +87,10 @@ exports[`WITH STYLES THEME WEB 1`] = `
       }
       trace={
         Array [
-          ".l { background-color:lightcyan /*classNameX*/ }",
-          ".j { border-right-color:lightcyan /*TestComponent.option.classNameX*/ }",
-          ".k { color:lightcyan /*classes.label*/ }",
-          ".h { background:lightcyan /*TestComponent.sheet.label*/ }",
+          ".k { background-color:lightcyan /*classNameX*/ }",
+          ".i { border-right-color:lightcyan /*TestComponent.option.classNameX*/ }",
+          ".j { color:lightcyan /*classes.label*/ }",
+          ".g { background:lightcyan /*TestComponent.sheet.label*/ }",
         ]
       }
     >

@@ -33,9 +33,8 @@ const traceTest = (isWeb: boolean) => {
       nativeOnly: {},
     }),
 
-    ({ classes, classNameX, toClassNames, styleX, children }) => {
-      return <ReactAny classNameX={toClassNames([classes.label, classNameX])} styleX={styleX}>{children}</ReactAny>
-    },
+    ({ classes, classNameX, toClassNames, styleX, children }) =>
+      <ReactAny classNameX={toClassNames([classes.label, classNameX])} styleX={styleX}>{children}</ReactAny>,
 
     Comp => <ReactAny>
       <Comp
