@@ -6,7 +6,7 @@ export const propsCodePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => 
   return () => {
     const { pipeStates } = pipelineState
     const propsCode: TComponents.PropsCode = pipelineState.propsCode = {
-      ...mergeCodeProps(pipeStates.map(p => p && p.codeProps)),
+      ...mergeCodeProps(pipeStates.map(p => p && p.propsCode)),
       theme: pipelineState.theme,
       classNameX: mergeRulesets(pipeStates.map(p => p && p.classNameX)),
       classes: mergeSheets(pipeStates.map(p => p && p.classes)),

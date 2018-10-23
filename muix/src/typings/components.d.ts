@@ -73,6 +73,7 @@ declare namespace TComponents {
   export type PropsCode<R extends Shape = Shape> = PartialOverwrite<TSheeter.getProps<R>,
     CommonPropertiesCode<R> &
     TVariants.PropsCodePart<R> &
+    TVariants.PropsPart<R> &
     EventsNative &
     EventsWeb>
 

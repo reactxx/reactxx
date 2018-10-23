@@ -15,6 +15,6 @@ export const intervalToSelector = (encoded: string) => {
 
 export const test = (interval: [number, number], width) => {
     const [min, max] = interval
-    return min <= width && (!max || max < width)
+    return min <= width && (!max || max > width)
 }
 

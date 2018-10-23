@@ -22,7 +22,7 @@ export const componentOptions: TWithStyles.ComponentOptions<Shape> = {
         classNameX: {},
         styleX: {},
         themedProps: ({ breakpoints: { mobile, tablet, desktop } }) => ({
-            widths: { mobileWidth: mobile, tabletWidth: tablet, desktopWidth: desktop }
+            widthsDef: { mobileWidth: mobile, tabletWidth: tablet, desktopWidth: desktop }
         }),
         // transitionGroups: {
         //     leftDrawer: {

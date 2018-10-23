@@ -1,3 +1,3 @@
-﻿export * from './pipe-theme'
-export * from './pipe-props-code'
-export * from './with-styles'
+﻿export * from './with-styles'
+
+export {ThemeProviderGeneric, resetTheme, registerTheme, defaultThemeName} from './pipes/pipe-theme'

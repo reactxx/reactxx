@@ -27,7 +27,7 @@ export const atomizeVariants: TVariants.ToAtomicRuleset<TVariants.VariantPart> =
 
 export const testConditions = (conditions: TVariants.Conditions, state: TWithStyles.PipelineState) => {
     if (!conditions || conditions.length === 0) return true
-    return !conditions.find(cond => {
+    return conditions.find(cond => {
         warning(variantHandlersDir[cond.type], `Missing initVariant${cond.type} call`)
         return variantHandlersDir[cond.type].testAtomicRuleset(cond, state)
     })

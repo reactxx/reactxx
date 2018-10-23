@@ -1,13 +1,8 @@
 import React from 'react';
 import { deepMerges, globalOptions } from 'reactxx-sheeter';
 import { TAtomize, TComponents, TSheeter, TWithStyles } from 'reactxx-typings';
-import { codePipe } from './pipe-code';
-import { propsPipe } from './pipe-props';
-import { defaultPropsPipe } from './pipe-default-props';
-import { innerStatePipe } from './pipe-inner-state';
-import { propsCodePipe } from './pipe-props-code';
-import { defaultThemeName, themePipe } from './pipe-theme';
-
+import { defaultThemeName } from './pipes/pipe-theme';
+import { createPipeline } from './utils/create-pipeline'
 
 export const initGlobalState = (options: TWithStyles.GlobalState = null) => {
 
@@ -33,10 +28,6 @@ export interface TProvider<R extends TSheeter.Shape> { Provider: React.Component
 //  PRIVATE
 //*********************************************************
 
-const systemPipes: TWithStyles.SystemPipes = {
-  firsts: options => [options.withTheme && themePipe, defaultPropsPipe, propsPipe],
-  lasts: options => [propsCodePipe, innerStatePipe, codePipe]
-}
 
 const withStyles = (componentState: TWithStyles.ComponentOptions) => {
 
@@ -54,12 +45,8 @@ const withStyles = (componentState: TWithStyles.ComponentOptions) => {
     pipelineState: TWithStyles.PipelineState = this.initPipelineState()
 
     pipeline = createPipeline(
+      componentState.getPipes || globalOptions.getPipes, 
       this.pipelineState,
-      (componentState.getPipes
-        ? componentState.getPipes(systemPipes, componentState)
-        : globalOptions.getPipes
-          ? globalOptions.getPipes(systemPipes, componentState)
-          : [...systemPipes.firsts(componentState), ...systemPipes.lasts(componentState)]).filter(p => !!p)
     )
 
     render() {
@@ -103,12 +90,6 @@ const finishComponentState = (
   CodeComponent.displayName = CodeComponent.displayName || res.displayName + 'Code'
 
   return res
-}
-
-function createPipeline(pipelineState: TWithStyles.PipelineState, pipes: TWithStyles.Pipe[], lastPipeIdx = 0): TWithStyles.ReactNodeCreator {
-  return lastPipeIdx >= pipes.length
-    ? null
-    : pipes[lastPipeIdx](pipelineState, lastPipeIdx, createPipeline(pipelineState, pipes, lastPipeIdx + 1))
 }
 
 let componentTypeCounter = 0 // counter of component types

@@ -12,7 +12,7 @@ describe("WITH STYLE PREFERENCE", () => {
 
 const traceTest = (isWeb: boolean) => {
 
-  traceComponentEx(isWeb, 2,
+  traceComponentEx(isWeb, { traceLevel: 2},
     // sheet
     theme => ({
       root: {},

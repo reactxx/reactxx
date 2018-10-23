@@ -22,11 +22,9 @@ export const initCore = () => {
 
     initGlobalState({
 
-        getPipes: (systemPipes, options) => [
-            ...systemPipes.firsts(options), 
-            options.withWidthsRuleset && widthsPipe, 
-            ...systemPipes.lasts(options)
-        ],
+        getPipes: options => ({
+            afterPropsCode: [widthsPipe]
+        }),
 
         finalizePropsCode: state => {
             //state.withSheetQueryComponent = true

@@ -3,16 +3,17 @@ import { TAtomize, TComponents, TSheeter, TTheme, TVariants } from './index'
 
 declare namespace TWithStyles {
 
-  export interface SystemPipes {
-    firsts: (options: TWithStyles.ComponentOptions) => Pipe[]
-    lasts: (options: TWithStyles.ComponentOptions) => Pipe[]
+  export interface GetPipesResult {
+    beforePropsCode?: Pipe[]
+    afterPropsCode?: Pipe[]
   }
+  export type GetPipes = (options: TWithStyles.ComponentOptions) => GetPipesResult
 
   // application options
   export interface GlobalState {
     getDefaultTheme?: () => any
-    getPipes?: (systemPipes: SystemPipes, options: TWithStyles.ComponentOptions) => Pipe[]
-    getInnerStatePipes?: (systemPipes: SystemPipes, options: TWithStyles.ComponentOptions) => Pipe[]
+    getPipes?: (options: TWithStyles.ComponentOptions) => GetPipesResult
+    getInnerStatePipes?: (options: TWithStyles.ComponentOptions) => Pipe[]
     namedThemes?: { [themeName: string]: any }
     finalizePropsCode?: FinishPropsCode
     //applyLastWinStrategy?: TAtomize.ToPlatformClassName
@@ -30,8 +31,8 @@ declare namespace TWithStyles {
     withTheme?: boolean
     sheetOrCreator?: TSheeter.SheetOrCreator
     CodeComponent?: TComponents.ComponentTypeCode<R>
-    getPipes?: (systemPipes: SystemPipes, options: TWithStyles.ComponentOptions) => Pipe[]
-    getInnerStatePipes?: (systemPipes: SystemPipes, options: TWithStyles.ComponentOptions) => Pipe[]
+    getPipes?: (options: TWithStyles.ComponentOptions) => GetPipesResult
+    //getInnerStatePipes?: (systemPipes: SystemPipes, options: TWithStyles.ComponentOptions) => Pipe[]
     //codeHooks?: TVariants.CodeHooks<R>
     // computed props
     //withSheetQueryComponent?: boolean // codeHooks && codeHooks.innerStateToSheetQuer
@@ -58,7 +59,7 @@ declare namespace TWithStyles {
   }
 
   export interface PipeState extends TVariants.PipeState {
-    codeProps?: TComponents.PropsCode | TComponents.PropsCode[]
+    propsCode?: TComponents.PropsCode | TComponents.PropsCode[]
     innerState?: TComponents.InnerState
 
     classNameX?: TAtomize.Ruleset

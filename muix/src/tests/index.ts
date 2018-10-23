@@ -19,9 +19,11 @@ import { platform as platformNative } from 'reactxx-sheeter-native'
 import { resetRenderer } from "reactxx-fela";
 import { resetTheme } from 'reactxx-with-styles'
 
-const platformWeb = { ...platform }
+let platformWeb
 
 export const initPlatform = (isWeb: boolean, __DEV__: boolean | 1 | 2 | 3 | 4 | 5 = true) => {
+    if (!platformWeb)
+        platformWeb = { ...platform }
     window.isWeb = isWeb
     if (typeof __DEV__ === 'number') {
         window.__TRACE__ = true
@@ -33,5 +35,6 @@ export const initPlatform = (isWeb: boolean, __DEV__: boolean | 1 | 2 | 3 | 4 | 
 
     if (isWeb)
         resetRenderer()
-    resetTheme()
+    resetTheme();
+    (platform as any).resetWidths()
 }

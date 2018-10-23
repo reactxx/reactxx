@@ -3,31 +3,29 @@ import { TWithStyles } from 'reactxx-typings'
 import { Consumer } from './provider'
 import { parse, test } from './parser'
 
+import { platform } from 'reactxx-sheeter'
 // platform dependent import
-import { addBreakpoint } from 'reactxx-sheet-widths'
-
+import { PlatformWidth } from 'reactxx-sheet-widths'
 
 export const widthsPipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
     const intervals: Record<string, [number, number]> = {}
+    const addBreakpoint = (platform as PlatformWidth).addBreakpoint
 
     const render = (width: number) => {
-        if (pipelineState.props.widths) pipelineState.pipeStates[pipeId] = {
-            codeProps: {
-                isWidths: getPropsCodeWidths(intervals, width)
-            }
-        }
+        if (pipelineState.propsCode.widthsDef)
+            pipelineState.propsCode.actWidths = getPropsCodeWidths(intervals, (platform as PlatformWidth).actWidth())
         return next()
     }
 
     return () => {
-        const { pipeStates, props: { widths } } = pipelineState
+        const { pipeStates, propsCode: { widthsDef } } = pipelineState
         // UNDO
         delete pipeStates[pipeId]
-        const needsConsumer = (pipelineState.withWidthsRuleset && !window.isWeb) || widths
+        const needsConsumer = (pipelineState.nativeHasWidthRule && !window.isWeb) || widthsDef
         if (!needsConsumer) return next()
         // parse and register breakpoints
-        for (const p in widths) {
-            const [from, to] = intervals[p] = parse(p)
+        for (const p in widthsDef) {
+            const [from, to] = intervals[p] = parse(widthsDef[p])
             addBreakpoint(from)
             addBreakpoint(to)
         }

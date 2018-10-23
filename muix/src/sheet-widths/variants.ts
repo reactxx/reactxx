@@ -1,7 +1,13 @@
-import { TCommonStyles, TSheeter } from 'reactxx-typings'
+import { TAtomize, TCommonStyles, TSheeter } from 'reactxx-typings'
 
 export const enum Consts {
     name = '$widths'
+}
+
+export interface PlatformWidth extends TAtomize.Platform {
+    resetWidths: () => void
+    actWidth: () => number
+    addBreakpoint: (width: number) => void
 }
 
 declare module 'reactxx-typings' {
@@ -14,14 +20,14 @@ declare module 'reactxx-typings' {
             widths?: TSheeter.EmptyInterface
         }
         interface PropsPart<R extends TSheeter.Shape = TSheeter.Shape> {
-            widths?: PropsBreakpoints<R, string>
+            widthsDef?: PropsBreakpoints<R, string>
         }
         interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> {
-            isWidths?: PropsBreakpoints<R, boolean>
+            actWidths?: PropsBreakpoints<R, boolean>
         }
 
         interface ComponentOptions {
-            withWidthsRuleset?: boolean // PropsCodePart contains sheetWidths prop (WEB then needs to listen to width change)
+            nativeHasWidthRule?: boolean // PropsCodePart contains sheetWidths prop (WEB then needs to listen to width change)
         }
 
         type PropsBreakpoints<R extends TSheeter.Shape, T> = keyof getWidths<R> extends never ? TSheeter.FakeInterface :

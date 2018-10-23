@@ -1,21 +1,24 @@
 import React from 'react'
 import { subscribeWidthChanged } from './subscribe'
 
+import { platform } from 'reactxx-sheeter'
 // platform dependent import
-import { actWidth } from 'reactxx-sheet-widths'
+import { PlatformWidth } from 'reactxx-sheet-widths'
 
 const context = React.createContext<number>(0)
 
 export const Consumer = context.Consumer
 
 export class WidthsProvider extends React.Component {
-    state = { width: actWidth() }
+    state = { width: (platform as PlatformWidth).actWidth() }
     unsubscribe: () => void
     constructor(props) {
         super(props)
         if (activeWidthsProvider) return
         activeWidthsProvider = this
-        this.unsubscribe = subscribeWidthChanged(width => this.setState({ width }))
+        this.unsubscribe = subscribeWidthChanged(width => {
+            this.setState({ width })
+        })
     }
     render() {
         return activeWidthsProvider !== this
@@ -29,5 +32,6 @@ export class WidthsProvider extends React.Component {
         this.unsubscribe()
     }
 }
+let forceRenderCount
 // beware of only single active WidthsProvider component
 let activeWidthsProvider: WidthsProvider

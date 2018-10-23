@@ -18,9 +18,9 @@ describe("WITH STYLES TRACE LEVELS", () => {
   it("trace 5 NATIVE", () => traceTest(false, 5));
 });
 
-const traceTest = (isWeb: boolean, level: 1 | 2 | 3 | 4 | 5) => {
+const traceTest = (isWeb: boolean, traceLevel: 1 | 2 | 3 | 4 | 5) => {
 
-  traceComponentEx(isWeb, level,
+  traceComponentEx(isWeb, { traceLevel },
     {
       root: ts.view = {
         backgroundColor: 'gray'
@@ -30,7 +30,7 @@ const traceTest = (isWeb: boolean, level: 1 | 2 | 3 | 4 | 5) => {
     ({ classes, classNameX, toClassNames, styleX }) => {
       const root = toClassNames([classes.root, classNameX])
       return <ReactAny classNameX={root} styleX={styleX}>
-        {`traceLevel=${level}`}
+        {`traceLevel=${traceLevel}`}
       </ReactAny>
     },
     Comp => <Comp classNameX={{ padding: 10 }} styleX={{ margin: 10 }}>

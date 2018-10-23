@@ -1,7 +1,15 @@
 import { Dimensions } from 'react-native'
-import { onWidthChanged } from './utils/subscribe'
+import { onWidthChanged, resetCallback } from './utils/subscribe'
 
-export const addBreakpoint = (width: number) => {}
-export const actWidth = () => Dimensions.get('window').width
+import { platform } from 'reactxx-sheeter'
+import { PlatformWidth } from './variants'
 
-Dimensions.addEventListener('change', arg => onWidthChanged(actWidth()))
+const pl = platform as PlatformWidth
+
+pl.addBreakpoint = (width: number) => {}
+pl.actWidth = () => Dimensions.get('window').width
+pl.resetWidths = resetCallback // for jest test reset
+
+Dimensions.addEventListener('change', arg => onWidthChanged(pl.actWidth()));
+
+export let $nativeFake

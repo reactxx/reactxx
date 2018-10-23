@@ -10,25 +10,46 @@ import {
     globalOptions,
 } from "reactxx-sheeter";
 import { initPlatform, mount } from './index'
+import { PlatformWidth, onWidthChanged } from 'reactxx-sheet-widths'
 import { Shape, theme } from './shape'
 import console = require('console');
+
 
 export const ReactAny: React.SFC<any> = ({ children }) => children || null
 ReactAny.displayName = 'ReactAny'
 
+const setActWidth = (width: number) => {
+    actWidth = width;
+    (platform as PlatformWidth).actWidth = () => {
+        return actWidth
+    }
+    onWidthChanged(width)
+}
+let actWidth = 1024
+window.matchMedia = jest.fn().mockImplementation(query /*e.g. '(min-width: 123px)'*/ => ({
+    addListener: jest.fn(),
+}))
+
+export interface TraceOptions {
+    traceLevel?: 1 | 2 | 3 | 4 | 5
+    actWidth?: number
+}
+
 export const traceComponentEx = (
     isWeb: boolean,
-    traceLevel: number,
+    traceOptions: TraceOptions,
     sheet: TSheeter.SheetOrCreator<Shape>,
     comp: TComponents.SFCCode<Shape>,
     node: (Comp: TComponents.ComponentClass<Shape>) => React.ReactElement<{}>,
     componentOptions?: TWithStyles.ComponentOptions<Shape>
 ) => {
     initPlatform(isWeb)
+    const { traceLevel = 1, actWidth } = traceOptions as TraceOptions
     globalOptions.namedThemes[WithStyle.defaultThemeName] = theme
-    window.__TRACELEVEL__ = traceLevel as any
+    window.__TRACELEVEL__ = traceLevel
     const Comp = WithStyle.withStylesCreator(sheet, comp)({ ...componentOptions || {}, displayName: 'TestComponent' })
 
+    if (actWidth) setActWidth(actWidth)
     //  JEST and ENZYME:
     let wrapper = mount(node(Comp))
     expect.addSnapshotSerializer(createSerializer({ map: filter, noKey: true }) as any);

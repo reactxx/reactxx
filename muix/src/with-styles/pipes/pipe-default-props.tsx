@@ -17,7 +17,7 @@ const init = (pipeId: number, pipelineState: TWithStyles.PipelineState) => {
   if (defaultProps) {
     const { classNameX, styleX, themedProps, classes, ...defaultPropsRest } = defaultProps
     pipelineState.pipeStates[pipeId] = {
-      codeProps: [defaultPropsRest, themedProps ? themedProps(theme) : null],
+      propsCode: [defaultPropsRest, themedProps ? themedProps(theme) : null],
       classes: sheetFromThemeCache(componentId, sheetOrCreator, theme, classes, displayName),
       classNameX: atomizeRuleset(classNameX, '', theme, `${displayName}.option.classNameX`),
       styleX: atomizeStyle(styleX, theme, `${displayName}.option.styleX`),

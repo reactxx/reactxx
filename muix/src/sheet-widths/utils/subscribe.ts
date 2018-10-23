@@ -11,6 +11,10 @@ export const subscribeWidthChanged = (callback: Callback) => {
 }
 let callbacks: Callback[] = []
 
-export const onWidthChanged = (width: number) => callbacks.forEach(c => c(width))
+export const onWidthChanged = (width: number) => {
+    callbacks.forEach(c => c(width))
+}
+
+export const resetCallback = () => callbacks = []
 
 

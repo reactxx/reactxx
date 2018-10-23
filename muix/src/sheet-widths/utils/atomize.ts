@@ -1,10 +1,10 @@
 import { TComponents, TVariants, TAtomize, TSheeter } from 'reactxx-typings'
-import { registerVariantHandler, atomizeRulesetLow, isAtomicArray } from 'reactxx-sheeter'
+import { registerVariantHandler, atomizeRulesetLow, isAtomicArray, platform } from 'reactxx-sheeter'
 import { Consts } from '../variants'
 import { intervalToSelector, parse, test } from './parser'
 
 // platform dependent import
-import { actWidth } from 'reactxx-sheet-widths'
+import { PlatformWidth } from 'reactxx-sheet-widths'
 
 export const sheetWidths_registerVariantHandler = () => {
     if (notRegistered = !notRegistered) return
@@ -58,5 +58,5 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<TVariants.SheetWidthsPart> = (
 }
 
 const testAtomicRuleset: TComponents.TestAtomicRuleset = (cond: WidthsCondition, state) =>
-    test(cond.interval, actWidth())
+    test(cond.interval, (platform as PlatformWidth).actWidth())
 
