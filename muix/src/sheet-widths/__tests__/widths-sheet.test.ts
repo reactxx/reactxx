@@ -11,11 +11,6 @@ export const createSheet = () =>
       $widths: {
         ['0-640']: {
           margin: 0,
-          $switch: {
-            isClosed: {
-              backgroundColor: "gray"
-            }
-          }
         },
         ['640-1024']: {
           margin: 10
@@ -26,22 +21,17 @@ export const createSheet = () =>
       },
       $web: (ts.web = {
         ":hover": {
-          $switch: {
-            isClosed: {
-              color: "black",
-              $widths: {
-                ['0-640']: {
-                  color: "blue",
-                  padding: 0
-                },
-                ['640-1024']: {
-                  color: "red",
-                  padding: 10
-                },
-                ['1024-']: {
-                  padding: 20
-                }
-              }
+          $widths: {
+            ['0-640']: {
+              color: "blue",
+              padding: 0
+            },
+            ['640-1024']: {
+              color: "red",
+              padding: 10
+            },
+            ['1024-']: {
+              padding: 20
             }
           }
         }

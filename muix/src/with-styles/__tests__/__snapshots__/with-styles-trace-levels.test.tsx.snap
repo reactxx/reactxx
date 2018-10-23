@@ -310,7 +310,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
               "name": ".",
             },
             "classes": null,
-            "codeProps": Array [
+            "propsCode": Array [
               Object {
                 "children": "Text",
               },
@@ -487,7 +487,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
               "name": ".",
             },
             "classes": null,
-            "codeProps": Array [
+            "propsCode": Array [
               Object {
                 "children": "Text",
               },

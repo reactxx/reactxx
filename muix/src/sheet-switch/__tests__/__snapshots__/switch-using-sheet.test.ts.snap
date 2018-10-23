@@ -129,38 +129,6 @@ Array [
 *  QUERY TO STHEET
 ******************************************
 ",
-  Array [],
-  "
-******************************************
-*  APPLY LASTWINS STRATEGY
-******************************************
-",
-  Object {},
-  "
-******************************************
-*  FINALIZE FOR for web's className or native's style
-******************************************
-",
-  Object {},
-]
-`;
-
-exports[`SWITCH using sheet NATIVE 2`] = `
-Array [
-  "
-##########################################
-##########################################
-#
-#  NATIVE, CLOSED
-#
-##########################################
-##########################################
-",
-  "
-******************************************
-*  QUERY TO STHEET
-******************************************
-",
   Array [
     "backgroundColor: red /*sheet.root/$switch.isOpened*/",
     "borderColor: cyan /*sheet.root/$switch.isOpened/$switch.isOpened*/",
@@ -187,13 +155,13 @@ Array [
 ]
 `;
 
-exports[`SWITCH using sheet WEB 1`] = `
+exports[`SWITCH using sheet NATIVE 2`] = `
 Array [
   "
 ##########################################
 ##########################################
 #
-#  WEB, OPENED
+#  NATIVE, CLOSED
 #
 ##########################################
 ##########################################
@@ -203,33 +171,29 @@ Array [
 *  QUERY TO STHEET
 ******************************************
 ",
-  Array [
-    ".c:hover { background-color:green /*sheet.root/$web/:hover/$switch.isClosed[0]*/ }",
-  ],
+  Array [],
   "
 ******************************************
 *  APPLY LASTWINS STRATEGY
 ******************************************
 ",
-  Array [
-    ".c:hover { background-color:green /*sheet.root/$web/:hover/$switch.isClosed[0]*/ }",
-  ],
+  Object {},
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style
 ******************************************
 ",
-  "c",
+  Object {},
 ]
 `;
 
-exports[`SWITCH using sheet WEB 2`] = `
+exports[`SWITCH using sheet WEB 1`] = `
 Array [
   "
 ##########################################
 ##########################################
 #
-#  WEB, CLOSED
+#  WEB, OPENED
 #
 ##########################################
 ##########################################
@@ -260,5 +224,41 @@ Array [
 ******************************************
 ",
   "d b a",
+]
+`;
+
+exports[`SWITCH using sheet WEB 2`] = `
+Array [
+  "
+##########################################
+##########################################
+#
+#  WEB, CLOSED
+#
+##########################################
+##########################################
+",
+  "
+******************************************
+*  QUERY TO STHEET
+******************************************
+",
+  Array [
+    ".c:hover { background-color:green /*sheet.root/$web/:hover/$switch.isClosed[0]*/ }",
+  ],
+  "
+******************************************
+*  APPLY LASTWINS STRATEGY
+******************************************
+",
+  Array [
+    ".c:hover { background-color:green /*sheet.root/$web/:hover/$switch.isClosed[0]*/ }",
+  ],
+  "
+******************************************
+*  FINALIZE FOR for web's className or native's style
+******************************************
+",
+  "c",
 ]
 `;

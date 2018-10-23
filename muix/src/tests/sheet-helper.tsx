@@ -18,7 +18,7 @@ import console = require('console');
 export const ReactAny: React.SFC<any> = ({ children }) => children || null
 ReactAny.displayName = 'ReactAny'
 
-const setActWidth = (width: number) => {
+export const setActWidth = (width: number) => {
     actWidth = width;
     (platform as PlatformWidth).actWidth = () => {
         return actWidth

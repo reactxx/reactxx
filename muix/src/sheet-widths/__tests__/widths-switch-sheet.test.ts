@@ -31,11 +31,11 @@ export const createSheet = () =>
     webOnly: {},
     nativeOnly: {}
   });
-export const query = (opened: boolean) =>
+export const query = (isMobile: boolean) =>
   ({
     $widths: {
-      tabletWidth: opened,
-      mobileWidth: !opened
+      mobileWidth: isMobile,
+      tabletWidth: !isMobile,
     }
   } as TVariants.Query<Shape>);
 describe("WIDTHS+SWITCH define sheet", () => {

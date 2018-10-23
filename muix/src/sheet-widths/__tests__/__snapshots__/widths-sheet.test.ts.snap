@@ -72,6 +72,23 @@ Object {
           "@media (min-width: 1024px).c { margin:20px /*sheet.root/$widths.1024-*/ }",
         ],
       },
+      Object {
+        "atomicArray": Array [
+          "@media (max-width: 639px).d:hover { color:blue /*sheet.root/$web/:hover/$widths.0-640*/ }",
+          "@media (max-width: 639px).e:hover { padding:0 /*sheet.root/$web/:hover/$widths.0-640*/ }",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "@media (min-width: 640px) and (max-width: 1023px).f:hover { color:red /*sheet.root/$web/:hover/$widths.640-1024*/ }",
+          "@media (min-width: 640px) and (max-width: 1023px).g:hover { padding:10px /*sheet.root/$web/:hover/$widths.640-1024*/ }",
+        ],
+      },
+      Object {
+        "atomicArray": Array [
+          "@media (min-width: 1024px).h:hover { padding:20px /*sheet.root/$web/:hover/$widths.1024-*/ }",
+        ],
+      },
     ],
     "name": "root",
     "~": "c",

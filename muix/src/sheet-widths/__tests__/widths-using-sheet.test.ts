@@ -1,5 +1,5 @@
 import { atomizeSheet } from "reactxx-sheeter";
-import { initPlatform, toClassNames, Shape } from "reactxx-tests";
+import { initPlatform, toClassNames, Shape, setActWidth } from "reactxx-tests";
 import { createSheet, query } from "./widths-sheet.test";
 
 describe("SWITCH using sheet", () => {
@@ -8,16 +8,18 @@ describe("SWITCH using sheet", () => {
 
     const sheet = atomizeSheet<Shape>(createSheet());
 
+    setActWidth(300)
     toClassNames(
-      "NATIVE, OPENED",
+      "NATIVE, MOBILE",
       query(true),
       [sheet.root, sheet.nativeOnly],
       res =>
         res.toMatchSnapshot()
     );
 
+    setActWidth(800)
     toClassNames(
-      "NATIVE, CLOSED",
+      "NATIVE, TABLET",
       query(false),
       [sheet.root, sheet.nativeOnly],
       res =>
@@ -29,12 +31,14 @@ describe("SWITCH using sheet", () => {
 
     const sheet = atomizeSheet<Shape>(createSheet());
 
-    toClassNames("WEB, OPENED", query(true), [sheet.root, sheet.webOnly], res =>
+    setActWidth(300)
+    toClassNames("WEB, MOBILE", query(true), [sheet.root, sheet.webOnly], res =>
       res.toMatchSnapshot()
     );
 
+    setActWidth(800)
     toClassNames(
-      "WEB, CLOSED",
+      "WEB, TABLET",
       query(false),
       [sheet.root, sheet.webOnly],
       res =>
