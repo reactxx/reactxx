@@ -1,28 +1,29 @@
-import { platform } from 'reactxx-sheeter'
-import { PlatformWidth } from './variants'
-
 import { onWidthChanged, resetCallback } from './utils/subscribe'
+import {resetProvider} from './utils/provider'
 
-const pl = platform as PlatformWidth
+import { platform as p } from 'reactxx-sheeter'
+import { PlatformWidth } from './variants'
+const platform = p as PlatformWidth
 
-pl.actWidth = () => window.innerWidth
+platform.actWidth = () => window.innerWidth
 
-pl.addBreakpoint = (width: number) => {
+platform.addBreakpoint = (width: number) => {
   if (!width || widthDir[width]) return
   widthDir[width] = true
   const mediaQuery = window.matchMedia(`(min-width: ${width}px)`)
   const onChange = (q) => {
     if (!timer) timer = window.setTimeout(() => {
       timer = 0
-      onWidthChanged(pl.actWidth())
+      onWidthChanged()
     }, 1)
   }
   mediaQuery.addListener(onChange)
 }
 
-pl.resetWidths = () => { // for jest test reset
+platform.resetWidths = () => { // for jest test reset
   widthDir = {} 
   resetCallback()
+  resetProvider()
 }
 
 let timer: number

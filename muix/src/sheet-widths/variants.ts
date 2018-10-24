@@ -20,7 +20,7 @@ declare module 'reactxx-typings' {
             widths?: TSheeter.EmptyInterface
         }
         interface PropsPart<R extends TSheeter.Shape = TSheeter.Shape> {
-            widthsDef?: PropsBreakpoints<R, string>
+            actWidths?: PropsBreakpoints<R, string>
         }
         interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> {
             actWidths?: PropsBreakpoints<R, boolean>

@@ -309,7 +309,6 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
               ],
               "name": ".",
             },
-            "classes": null,
             "propsCode": Array [
               Object {
                 "children": "Text",
@@ -375,6 +374,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
           },
         },
         "uniqueId": "TestComponent *19",
+        "withTheme": false,
       }
     }
   >
@@ -486,7 +486,6 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
               ],
               "name": ".",
             },
-            "classes": null,
             "propsCode": Array [
               Object {
                 "children": "Text",
@@ -538,6 +537,7 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
           },
         },
         "uniqueId": "TestComponent *17",
+        "withTheme": false,
       }
     }
   >

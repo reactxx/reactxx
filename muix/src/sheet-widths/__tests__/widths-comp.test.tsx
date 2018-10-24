@@ -1,10 +1,9 @@
 /** @jsx platform.createElement */
 import React from 'react'
 
-import { platform } from 'reactxx-sheeter'
-
-import { ts, traceComponentEx, ReactAny } from "reactxx-tests";
-import { sheetWidths_registerVariantHandler, WidthsProvider, widthsPipe } from "../index";
+import { ts, traceComponentEx, ReactAny, setActWidth } from "reactxx-tests";
+import { sheetWidths_registerVariantHandler, platform, WidthsProvider, widthsPipe, onWidthChanged } from "../index";
+import { Provider } from 'react-fela';
 
 sheetWidths_registerVariantHandler()
 
@@ -20,6 +19,7 @@ describe("WIDTHS COMPONENT", () => {
 const traceTest = (isWeb: boolean, actWidth: number) => {
 
   traceComponentEx(isWeb, { traceLevel: 2, actWidth },
+
     {
       root: ts.view = {
         $widths: {
@@ -36,27 +36,37 @@ const traceTest = (isWeb: boolean, actWidth: number) => {
       },
       label: {}, webOnly: {}, nativeOnly: {},
     },
+
     ({ classes, toClassNames, actWidths }) => {
-      return <ReactAny classNameX={toClassNames([classes.root])} actWidths={actWidths}>
+      return <ReactAny classNameX={toClassNames([classes.root])} actWidths={actWidths} actWidth={platform.actWidth()}>
         {actWidths.mobileWidth ? 'MOBILE' : actWidths.tabletWidth ? 'TABLET' : 'DESKTOP'}
       </ReactAny>
     },
-    Comp => <WidthsProvider>
-      <Comp>
-        Text
-      </Comp>
-    </WidthsProvider>,
+
+    Comp => <WidthsProvider><Comp /></WidthsProvider>,
+
     {
       nativeHasWidthRule: true,
-      getPipes: (options) => ({
+      getPipes: options => ({
         afterPropsCode: [widthsPipe],
       }),
       defaultProps: {
-        widthsDef: {
+        actWidths: {
           mobileWidth: '-640',
           tabletWidth: '640-1024',
           desktopWidth: '1024-'
         }
       }
-    })
+    },
+
+    (wrapper, Comp) => {
+      // const myComponents = wrapper.find(Comp)
+      // const props = myComponents.instance()
+      setActWidth(platform.actWidth() + 444)
+      onWidthChanged()
+      wrapper.update()
+      //wrapper.setState(st => st)
+      expect(wrapper).toMatchSnapshot();
+    }
+  )
 }

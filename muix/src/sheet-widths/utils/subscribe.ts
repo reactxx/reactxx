@@ -1,7 +1,7 @@
 
-export type Callback = (width: number) => void
+export type Callback = () => void
 
-export const subscribeWidthChanged = (callback: Callback) => {
+export const subscribeWidthChange = (callback: Callback) => {
     callbacks.push(callback)
     return () => {
         const idx = callbacks.findIndex(c => c === callback)
@@ -11,9 +11,9 @@ export const subscribeWidthChanged = (callback: Callback) => {
 }
 let callbacks: Callback[] = []
 
-export const onWidthChanged = (width: number) => {
-    callbacks.forEach(c => c(width))
-}
+export const onWidthChanged = () => callbacks.forEach(c => {
+    c()
+})
 
 export const resetCallback = () => callbacks = []
 

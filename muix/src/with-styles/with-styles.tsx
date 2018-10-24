@@ -39,7 +39,7 @@ const withStyles = (componentState: TWithStyles.ComponentOptions) => {
       pipeStates: [],
       uniqueId: componentState.displayName + ' *' + componentInstaneCounter++,
       props: this.props,
-      refreshInnerStateComponent: () => this.pipelineState.innerStateComponent && this.pipelineState.innerStateComponent.setState(null)
+      refreshInnerStateComponent: () => this.pipelineState.innerStateComponent && this.pipelineState.innerStateComponent.setState(st => st)
     } as TWithStyles.PipelineState)
 
     pipelineState: TWithStyles.PipelineState = this.initPipelineState()
