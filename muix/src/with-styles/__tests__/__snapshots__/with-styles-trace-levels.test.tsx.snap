@@ -69,53 +69,49 @@ exports[`WITH STYLES TRACE LEVELS trace 2 WEB 1`] = `
 
 exports[`WITH STYLES TRACE LEVELS trace 3 NATIVE 1`] = `
 <TestComponent>
-  <InnerStateComponent>
-    <TestComponentCode>
-      <ReactAny
-        style={
-          Object {
-            "backgroundColor": "gray",
-            "margin": 10,
-            "padding": 10,
-          }
+  <TestComponentCode>
+    <ReactAny
+      style={
+        Object {
+          "backgroundColor": "gray",
+          "margin": 10,
+          "padding": 10,
         }
-        trace={
-          Object {
-            "backgroundColor": "gray /*TestComponent.sheet.root*/",
-            "margin": "10 /*styleX*/",
-            "padding": "10 /*classNameX*/",
-          }
+      }
+      trace={
+        Object {
+          "backgroundColor": "gray /*TestComponent.sheet.root*/",
+          "margin": "10 /*styleX*/",
+          "padding": "10 /*classNameX*/",
         }
-      >
-        traceLevel=3
-      </ReactAny>
-    </TestComponentCode>
-  </InnerStateComponent>
+      }
+    >
+      traceLevel=3
+    </ReactAny>
+  </TestComponentCode>
 </TestComponent>
 `;
 
 exports[`WITH STYLES TRACE LEVELS trace 3 WEB 1`] = `
 <TestComponent>
-  <InnerStateComponent>
-    <TestComponentCode>
-      <ReactAny
-        className="b a"
-        style={
-          Object {
-            "margin": 10,
-          }
+  <TestComponentCode>
+    <ReactAny
+      className="b a"
+      style={
+        Object {
+          "margin": 10,
         }
-        trace={
-          Array [
-            ".b { padding:10px /*classNameX*/ }",
-            ".a { background-color:gray /*TestComponent.sheet.root*/ }",
-          ]
-        }
-      >
-        traceLevel=3
-      </ReactAny>
-    </TestComponentCode>
-  </InnerStateComponent>
+      }
+      trace={
+        Array [
+          ".b { padding:10px /*classNameX*/ }",
+          ".a { background-color:gray /*TestComponent.sheet.root*/ }",
+        ]
+      }
+    >
+      traceLevel=3
+    </ReactAny>
+  </TestComponentCode>
 </TestComponent>
 `;
 
@@ -132,67 +128,65 @@ exports[`WITH STYLES TRACE LEVELS trace 4 NATIVE 1`] = `
     }
   }
 >
-  <InnerStateComponent>
-    <TestComponentCode
-      classNameX={
-        Object {
-          "list": Array [
-            Object {
-              "atomicArray": Array [
-                "padding: 10 /*classNameX*/",
-              ],
-            },
-          ],
-          "name": ".",
-        }
-      }
-      classes={
-        Object {
-          "root": Object {
-            "list": Array [
-              Object {
-                "atomicArray": Array [
-                  "backgroundColor: gray /*TestComponent.sheet.root*/",
-                ],
-              },
+  <TestComponentCode
+    classNameX={
+      Object {
+        "list": Array [
+          Object {
+            "atomicArray": Array [
+              "padding: 10 /*classNameX*/",
             ],
-            "name": "root",
           },
-        }
+        ],
+        "name": ".",
       }
-      styleX={
-        Object {
+    }
+    classes={
+      Object {
+        "root": Object {
           "list": Array [
             Object {
               "atomicArray": Array [
-                "margin: 10 /*styleX*/",
+                "backgroundColor: gray /*TestComponent.sheet.root*/",
               ],
             },
           ],
-          "name": ".",
+          "name": "root",
+        },
+      }
+    }
+    styleX={
+      Object {
+        "list": Array [
+          Object {
+            "atomicArray": Array [
+              "margin: 10 /*styleX*/",
+            ],
+          },
+        ],
+        "name": ".",
+      }
+    }
+  >
+    <ReactAny
+      style={
+        Object {
+          "backgroundColor": "gray",
+          "margin": 10,
+          "padding": 10,
+        }
+      }
+      trace={
+        Object {
+          "backgroundColor": "gray /*TestComponent.sheet.root*/",
+          "margin": "10 /*styleX*/",
+          "padding": "10 /*classNameX*/",
         }
       }
     >
-      <ReactAny
-        style={
-          Object {
-            "backgroundColor": "gray",
-            "margin": 10,
-            "padding": 10,
-          }
-        }
-        trace={
-          Object {
-            "backgroundColor": "gray /*TestComponent.sheet.root*/",
-            "margin": "10 /*styleX*/",
-            "padding": "10 /*classNameX*/",
-          }
-        }
-      >
-        traceLevel=4
-      </ReactAny>
-    </TestComponentCode>
-  </InnerStateComponent>
+      traceLevel=4
+    </ReactAny>
+  </TestComponentCode>
 </TestComponent>
 `;
 
@@ -209,58 +203,56 @@ exports[`WITH STYLES TRACE LEVELS trace 4 WEB 1`] = `
     }
   }
 >
-  <InnerStateComponent>
-    <TestComponentCode
-      classNameX={
-        Object {
+  <TestComponentCode
+    classNameX={
+      Object {
+        "list": Array [
+          Object {
+            "atomicArray": Array [
+              ".b { padding:10px /*classNameX*/ }",
+            ],
+          },
+        ],
+        "name": ".",
+      }
+    }
+    classes={
+      Object {
+        "root": Object {
           "list": Array [
             Object {
               "atomicArray": Array [
-                ".b { padding:10px /*classNameX*/ }",
+                ".a { background-color:gray /*TestComponent.sheet.root*/ }",
               ],
             },
           ],
-          "name": ".",
-        }
+          "name": "root",
+        },
       }
-      classes={
-        Object {
-          "root": Object {
-            "list": Array [
-              Object {
-                "atomicArray": Array [
-                  ".a { background-color:gray /*TestComponent.sheet.root*/ }",
-                ],
-              },
-            ],
-            "name": "root",
-          },
-        }
+    }
+    styleX={
+      Object {
+        "margin": 10,
       }
-      styleX={
+    }
+  >
+    <ReactAny
+      className="b a"
+      style={
         Object {
           "margin": 10,
         }
       }
+      trace={
+        Array [
+          ".b { padding:10px /*classNameX*/ }",
+          ".a { background-color:gray /*TestComponent.sheet.root*/ }",
+        ]
+      }
     >
-      <ReactAny
-        className="b a"
-        style={
-          Object {
-            "margin": 10,
-          }
-        }
-        trace={
-          Array [
-            ".b { padding:10px /*classNameX*/ }",
-            ".a { background-color:gray /*TestComponent.sheet.root*/ }",
-          ]
-        }
-      >
-        traceLevel=4
-      </ReactAny>
-    </TestComponentCode>
-  </InnerStateComponent>
+      traceLevel=4
+    </ReactAny>
+  </TestComponentCode>
 </TestComponent>
 `;
 
@@ -277,167 +269,65 @@ exports[`WITH STYLES TRACE LEVELS trace 5 NATIVE 1`] = `
     }
   }
 >
-  <InnerStateComponent
-    pipeState={Object {}}
-    pipelineState={
+  <TestComponentCode
+    classNameX={
       Object {
-        "componentId": 9,
-        "displayName": "TestComponent",
-        "pipeStates": Array [
+        "list": Array [
           Object {
-            "classes": Object {
-              "root": Object {
-                "list": Array [
-                  Object {
-                    "atomicArray": Array [
-                      "backgroundColor: gray /*TestComponent.sheet.root*/",
-                    ],
-                  },
-                ],
-                "name": "root",
-              },
-            },
-          },
-          Object {
-            "classNameX": Object {
-              "list": Array [
-                Object {
-                  "atomicArray": Array [
-                    "padding: 10 /*classNameX*/",
-                  ],
-                },
-              ],
-              "name": ".",
-            },
-            "propsCode": Array [
-              Object {
-                "children": "Text",
-              },
-              null,
+            "atomicArray": Array [
+              "padding: 10 /*classNameX*/",
             ],
-            "styleX": Object {
-              "list": Array [
-                Object {
-                  "atomicArray": Array [
-                    "margin: 10 /*styleX*/",
-                  ],
-                },
-              ],
-              "name": ".",
-            },
           },
-          undefined,
-          Object {},
         ],
-        "props": Object {
-          "children": "Text",
-          "classNameX": Object {
-            "padding": 10,
-          },
-          "styleX": Object {
-            "margin": 10,
-          },
-        },
-        "propsCode": Object {
-          "children": "Text",
-          "classNameX": Object {
-            "list": Array [
-              Object {
-                "atomicArray": Array [
-                  "padding: 10 /*classNameX*/",
-                ],
-              },
-            ],
-            "name": ".",
-          },
-          "classes": Object {
-            "root": Object {
-              "list": Array [
-                Object {
-                  "atomicArray": Array [
-                    "backgroundColor: gray /*TestComponent.sheet.root*/",
-                  ],
-                },
+        "name": ".",
+      }
+    }
+    classes={
+      Object {
+        "root": Object {
+          "list": Array [
+            Object {
+              "atomicArray": Array [
+                "backgroundColor: gray /*TestComponent.sheet.root*/",
               ],
-              "name": "root",
             },
-          },
-          "styleX": Object {
-            "list": Array [
-              Object {
-                "atomicArray": Array [
-                  "margin: 10 /*styleX*/",
-                ],
-              },
-            ],
-            "name": ".",
-          },
+          ],
+          "name": "root",
         },
-        "uniqueId": "TestComponent *19",
-        "withTheme": false,
+      }
+    }
+    styleX={
+      Object {
+        "list": Array [
+          Object {
+            "atomicArray": Array [
+              "margin: 10 /*styleX*/",
+            ],
+          },
+        ],
+        "name": ".",
       }
     }
   >
-    <TestComponentCode
-      classNameX={
+    <ReactAny
+      style={
         Object {
-          "list": Array [
-            Object {
-              "atomicArray": Array [
-                "padding: 10 /*classNameX*/",
-              ],
-            },
-          ],
-          "name": ".",
+          "backgroundColor": "gray",
+          "margin": 10,
+          "padding": 10,
         }
       }
-      classes={
+      trace={
         Object {
-          "root": Object {
-            "list": Array [
-              Object {
-                "atomicArray": Array [
-                  "backgroundColor: gray /*TestComponent.sheet.root*/",
-                ],
-              },
-            ],
-            "name": "root",
-          },
-        }
-      }
-      styleX={
-        Object {
-          "list": Array [
-            Object {
-              "atomicArray": Array [
-                "margin: 10 /*styleX*/",
-              ],
-            },
-          ],
-          "name": ".",
+          "backgroundColor": "gray /*TestComponent.sheet.root*/",
+          "margin": "10 /*styleX*/",
+          "padding": "10 /*classNameX*/",
         }
       }
     >
-      <ReactAny
-        style={
-          Object {
-            "backgroundColor": "gray",
-            "margin": 10,
-            "padding": 10,
-          }
-        }
-        trace={
-          Object {
-            "backgroundColor": "gray /*TestComponent.sheet.root*/",
-            "margin": "10 /*styleX*/",
-            "padding": "10 /*classNameX*/",
-          }
-        }
-      >
-        traceLevel=5
-      </ReactAny>
-    </TestComponentCode>
-  </InnerStateComponent>
+      traceLevel=5
+    </ReactAny>
+  </TestComponentCode>
 </TestComponent>
 `;
 
@@ -454,143 +344,55 @@ exports[`WITH STYLES TRACE LEVELS trace 5 WEB 1`] = `
     }
   }
 >
-  <InnerStateComponent
-    pipeState={Object {}}
-    pipelineState={
+  <TestComponentCode
+    classNameX={
       Object {
-        "componentId": 8,
-        "displayName": "TestComponent",
-        "pipeStates": Array [
+        "list": Array [
           Object {
-            "classes": Object {
-              "root": Object {
-                "list": Array [
-                  Object {
-                    "atomicArray": Array [
-                      ".a { background-color:gray /*TestComponent.sheet.root*/ }",
-                    ],
-                  },
-                ],
-                "name": "root",
-              },
-            },
-          },
-          Object {
-            "classNameX": Object {
-              "list": Array [
-                Object {
-                  "atomicArray": Array [
-                    ".b { padding:10px /*classNameX*/ }",
-                  ],
-                },
-              ],
-              "name": ".",
-            },
-            "propsCode": Array [
-              Object {
-                "children": "Text",
-              },
-              null,
+            "atomicArray": Array [
+              ".b { padding:10px /*classNameX*/ }",
             ],
-            "styleX": Object {
-              "margin": 10,
-            },
           },
-          undefined,
-          Object {},
         ],
-        "props": Object {
-          "children": "Text",
-          "classNameX": Object {
-            "padding": "10px",
-          },
-          "styleX": Object {
-            "margin": 10,
-          },
-        },
-        "propsCode": Object {
-          "children": "Text",
-          "classNameX": Object {
-            "list": Array [
-              Object {
-                "atomicArray": Array [
-                  ".b { padding:10px /*classNameX*/ }",
-                ],
-              },
-            ],
-            "name": ".",
-          },
-          "classes": Object {
-            "root": Object {
-              "list": Array [
-                Object {
-                  "atomicArray": Array [
-                    ".a { background-color:gray /*TestComponent.sheet.root*/ }",
-                  ],
-                },
-              ],
-              "name": "root",
-            },
-          },
-          "styleX": Object {
-            "margin": 10,
-          },
-        },
-        "uniqueId": "TestComponent *17",
-        "withTheme": false,
+        "name": ".",
       }
     }
-  >
-    <TestComponentCode
-      classNameX={
-        Object {
+    classes={
+      Object {
+        "root": Object {
           "list": Array [
             Object {
               "atomicArray": Array [
-                ".b { padding:10px /*classNameX*/ }",
+                ".a { background-color:gray /*TestComponent.sheet.root*/ }",
               ],
             },
           ],
-          "name": ".",
-        }
+          "name": "root",
+        },
       }
-      classes={
-        Object {
-          "root": Object {
-            "list": Array [
-              Object {
-                "atomicArray": Array [
-                  ".a { background-color:gray /*TestComponent.sheet.root*/ }",
-                ],
-              },
-            ],
-            "name": "root",
-          },
-        }
+    }
+    styleX={
+      Object {
+        "margin": 10,
       }
-      styleX={
+    }
+  >
+    <ReactAny
+      className="b a"
+      style={
         Object {
           "margin": 10,
         }
       }
+      trace={
+        Array [
+          ".b { padding:10px /*classNameX*/ }",
+          ".a { background-color:gray /*TestComponent.sheet.root*/ }",
+        ]
+      }
     >
-      <ReactAny
-        className="b a"
-        style={
-          Object {
-            "margin": 10,
-          }
-        }
-        trace={
-          Array [
-            ".b { padding:10px /*classNameX*/ }",
-            ".a { background-color:gray /*TestComponent.sheet.root*/ }",
-          ]
-        }
-      >
-        traceLevel=5
-      </ReactAny>
-    </TestComponentCode>
-  </InnerStateComponent>
+      traceLevel=5
+    </ReactAny>
+  </TestComponentCode>
 </TestComponent>
 `;

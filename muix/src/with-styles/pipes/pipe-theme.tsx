@@ -8,7 +8,7 @@ export const themePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
     pipelineState.theme = theme || globalOptions.namedThemes[defaultThemeName]
     return next()
   }
-  return () => pipelineState.withTheme
+  return () => pipelineState.options.withTheme
     ? <themeContext.Consumer>{render}</themeContext.Consumer>
     : next()
 }

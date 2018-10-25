@@ -18,7 +18,7 @@ export const view: TComponents.SFCCode<TPrimitives.ViewShape> = propsCode => {
     const { styleX, classNameX, toClassNames, classes, ...rest } = propsCode
     return <div classNameX={toClassNames([classes.root, classNameX])} styleX={styleX} {...rest} />
 }
-view.modifyInnerState = (props, innerState) => innerState.$switch = { pressable: hasPlatformEvents(props) }
+view.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { pressable: hasPlatformEvents(props) }
 
 export const hasPlatformEvents = (propsCode: TComponents.PropsCode) => !!(
     window.isWeb ?
@@ -36,7 +36,7 @@ export const icon: TComponents.SFCCode<TPrimitives.IconShape> = propsCode => {
     </svg>
     return url ? <a href={url}>{svg}</a> : svg
 }
-icon.modifyInnerState = (props, innerState) => innerState.$switch = { pressable: hasPlatformEvents(props) }
+icon.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { pressable: hasPlatformEvents(props) }
 
 export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = propsode => {
     const { styleX, classNameX, classes, toClassNames, children, horizontal, ...rest } = propsode
@@ -46,7 +46,7 @@ export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = prop
         </div>
     </div>
 }
-scrollView.modifyInnerState = (props, innerState) => innerState.$switch = { horizontal: props.horizontal }
+scrollView.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { horizontal: props.horizontal }
 
 export const text: TComponents.SFCCode<TPrimitives.TextShape> = propsCode => {
     const { classNameX, classes, toClassNames, singleLine, url/*, onClick*/, ...rest } = propsCode
@@ -58,7 +58,7 @@ export const text: TComponents.SFCCode<TPrimitives.TextShape> = propsCode => {
     }
     return url ? <a href={url} {...tagProps} /> : <div {...tagProps} />
 }
-text.modifyInnerState = (props, innerState) => innerState.$switch = { pressable: hasPlatformEvents(props), singleLine: props.singleLine }
+text.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { pressable: hasPlatformEvents(props), singleLine: props.singleLine }
 
 export const textCreator = withStylesCreator<TPrimitives.TextShape>(textSheet, text, {
     displayName: CompNames.Text,

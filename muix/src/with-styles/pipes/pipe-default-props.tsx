@@ -11,7 +11,7 @@ export const defaultPropsPipe: TWithStyles.Pipe = (pipelineState, pipeId, next) 
 
 const init = (pipeId: number, pipelineState: TWithStyles.PipelineState) => {
   
-  const { defaultProps, theme, sheetOrCreator, componentId, displayName } = pipelineState
+  const { theme, options: {defaultProps, sheetOrCreator, componentId, displayName} } = pipelineState
 
   // use first pipeId for default props
   if (defaultProps) {

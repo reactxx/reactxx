@@ -56,6 +56,9 @@
       "reactxx-with-styles": [
         "src/with-styles/index"
       ],
+      "reactxx-with-state": [
+        "src/with-state/index"
+      ],
       "reactxx-core/*": [
         "src/core/*"
       ],
@@ -106,6 +109,7 @@
     "src/sheeter",
 
     "src/with-styles",
+    "src/with-state",
 
     //"src/sheet-transition", 
     "src/sheet-switch", 
@@ -113,7 +117,7 @@
 
     "src/primitives",
     "src/core",
-    "src/ks/web", 
+    "src/ks/web", "src/with-state/variants.tsx", "src/with-state/index.tsx", 
 
     // "src/basic",
     // "src/mui-web",

@@ -7,6 +7,7 @@ import { toClassNamesWithQuery } from 'reactxx-sheeter'
 //import { transition_registerVariantHandler, transition_processDeffereds, transition_finalizePropsCode, TTransition } from 'reactxx-sheet-transition'
 import { widthsPipe } from 'reactxx-sheet-widths'
 import { sheetSwitch_registerVariantHandler, getCases } from 'reactxx-sheet-switch'
+import { innerStatePipe } from 'reactxx-with-state'
 
 export type getFlagsAll<R extends TSheeter.Shape = TSheeter.Shape> =
     getCases<R> //| getBreakpoints<R> // TSheeter.RulesetNamesAll<R> | 
@@ -23,7 +24,7 @@ export const initCore = () => {
     initGlobalState({
 
         getPipes: options => ({
-            afterPropsCode: [widthsPipe]
+            afterPropsCode: [widthsPipe, innerStatePipe]
         }),
 
         finalizePropsCode: state => {

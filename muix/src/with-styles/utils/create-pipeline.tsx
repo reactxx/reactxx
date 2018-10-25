@@ -2,12 +2,11 @@ import { TWithStyles } from 'reactxx-typings';
 import { codePipe } from '../pipes/pipe-code';
 import { propsPipe } from '../pipes/pipe-props';
 import { defaultPropsPipe } from '../pipes/pipe-default-props';
-import { innerStatePipe } from '../pipes/pipe-inner-state';
 import { propsCodePipe } from '../pipes/pipe-props-code';
 import { themePipe } from '../pipes/pipe-theme';
 
 export const createPipeline = (getPipe: TWithStyles.GetPipes, pipelineState: TWithStyles.PipelineState): TWithStyles.ReactNodeCreator => {
-  const getPipePipes = getPipe ? getPipe(pipelineState) : null
+  const getPipePipes = getPipe ? getPipe(pipelineState.options) : null
   const system = systemPipes(pipelineState)
   const pipes = [
       ...system.firsts,
@@ -19,9 +18,9 @@ export const createPipeline = (getPipe: TWithStyles.GetPipes, pipelineState: TWi
     return createPipelineLow(pipelineState, pipes)
 }
 const systemPipes = (options: TWithStyles.PipelineState) => ({
-  firsts: [options.withTheme && themePipe, defaultPropsPipe, propsPipe],
+  firsts: [options.options.withTheme && themePipe, defaultPropsPipe, propsPipe],
   second: [propsCodePipe],
-  thirds: [innerStatePipe, codePipe]
+  thirds: [codePipe]
 })
 
 function createPipelineLow(pipelineState: TWithStyles.PipelineState, pipes: TWithStyles.Pipe[], lastPipeIdx = 0): TWithStyles.ReactNodeCreator {

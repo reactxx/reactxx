@@ -48,6 +48,6 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
 }
 
 const testAtomicRuleset: TComponents.TestAtomicRuleset = (cond: SwitchCondition, state) => {
-    const { propsCode: { mergedInnerState } } = state
-    return mergedInnerState && mergedInnerState.$switch && mergedInnerState.$switch[cond.case]
+    const { propsCode: { sheetQuery } } = state
+    return sheetQuery && sheetQuery.$switch && sheetQuery.$switch[cond.case]
 }

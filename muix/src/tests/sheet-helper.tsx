@@ -139,7 +139,7 @@ function deleteProps(json) {
                 break
             case 5: break
             default:
-                return deleteProps(json.children[0])
+                return json.children && deleteProps(json.children[0])
         }
     }
 
@@ -179,12 +179,12 @@ function deleteProps_(node) {
 }
 const deletePropsDir = {
     innerStateComponent: true, CodeComponent: true, setInnerState: true, theme: true,
-    toClassNames: true, refreshInnerStateComponent: true, sheetOrCreator: true, '~': true
+    toClassNames: true, updateInnerStateComponent: true, sheetOrCreator: true, '~': true
 }
 
 export const toClassNames = <R extends TSheeter.Shape>(
     descr: string,
-    mergedInnerState: TVariants.Query<R>,
+    sheetQuery: TVariants.Query<R>,
     rulesets: TSheeter.ClassNameOrAtomized,
     call: (res: jest.Matchers<any>) => void,
 ) => {
@@ -193,7 +193,7 @@ export const toClassNames = <R extends TSheeter.Shape>(
 *  ${str}
 ******************************************
 `
-    const atomized = toClassNamesWithQuery({ propsCode: { mergedInnerState } }, rulesets)
+    const atomized = toClassNamesWithQuery({ propsCode: { sheetQuery } }, rulesets)
     const lastWin = platform.applyLastwinsStrategy(atomized)
     const final = platform.finalClassNameStep(lastWin)
     const json = [`

@@ -122,7 +122,6 @@ declare namespace TSheeter {
     //******************** style constrain
     style: TCommonStyles.RulesetNativeIds // for web, style has always React.CSSProperties type
     //**** component property constrains
-    innerState: EmptyInterface // inner component state
     staticProps: EmptyInterface
     props: EmptyInterface // common (web and native) props, excluding events
     propsNative: EmptyInterface // native only props 
@@ -137,7 +136,6 @@ declare namespace TSheeter {
     native: EmptyInterface
     web: EmptyInterface
     style: unknown
-    innerState: EmptyInterface // component state
     props: EmptyInterface
     staticProps: EmptyInterface
     propsNative: ReactN.ViewProperties

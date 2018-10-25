@@ -8,17 +8,16 @@ import { platform } from '../index'
 export const widthsPipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
     const intervals: Record<string, [number, number]> = {}
 
-    const render = (width: number) => {
-        if (pipelineState.propsCode.actWidths)
-            pipelineState.propsCode.actWidths = getPropsCodeWidths(intervals, platform.actWidth())
+    const render = () => {
+        const { propsCode } = pipelineState
+        if (propsCode.actWidths)
+            propsCode.actWidths = getPropsCodeWidths(intervals, platform.actWidth())
         return next()
     }
 
     return () => {
-        const { pipeStates, propsCode: { actWidths } } = pipelineState
-        // UNDO
-        delete pipeStates[pipeId]
-        const needsConsumer = (pipelineState.nativeHasWidthRule && !window.isWeb) || actWidths
+        const { propsCode: { actWidths } } = pipelineState
+        const needsConsumer = (pipelineState.options.nativeHasWidthRule && !window.isWeb) || actWidths
         if (!needsConsumer) return next()
         // parse and register breakpoints
         for (const p in actWidths) {
@@ -26,7 +25,7 @@ export const widthsPipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
             platform.addBreakpoint(from)
             platform.addBreakpoint(to)
         }
-        return <Consumer>{render}</Consumer> // TODO width consumer: 
+        return <Consumer>{render}</Consumer>
     }
 }
 

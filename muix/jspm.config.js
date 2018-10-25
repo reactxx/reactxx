@@ -14,6 +14,7 @@ SystemJS.config({
     "reactxx-fela": "deploy/lib/fela/index",
     "reactxx-sheeter": "deploy/lib/sheeter/index",
     "reactxx-with-styles": "deploy/lib/with-styles/index", 
+    "reactxx-with-state": "deploy/lib/with-state/index", 
 
     "reactxx-sheet-switch": "deploy/lib/sheet-switch/index", 
     "reactxx-sheet-switch/tests/index": "deploy/lib/sheet-switch/tests/index", 

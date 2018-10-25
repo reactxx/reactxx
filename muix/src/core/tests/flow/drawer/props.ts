@@ -32,7 +32,7 @@ export const componentOptions: TWithStyles.ComponentOptions<Shape> = {
     }
 }
 
-export const fillInnerState: TComponents.ModifyInnerStateProc<Shape> = (props, innerState) => {}
+export const fillInnerState = (props, innerState) => {}
     // innerState.$transitionGroups = {
     //     leftDrawer: innerState.drawerOpened
     // }

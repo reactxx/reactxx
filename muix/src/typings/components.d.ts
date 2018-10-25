@@ -64,10 +64,6 @@ declare namespace TComponents {
   }
   export type ComponentClass<R extends Shape = Shape> = React.ComponentClass<Props<R>>
 
-  export type InnerState<R extends Shape = Shape> =
-    TVariants.Query<R> &
-    TSheeter.getInnerState<R>
-
   //******************** Cross platform component code props
 
   export type PropsCode<R extends Shape = Shape> = PartialOverwrite<TSheeter.getProps<R>,
@@ -83,19 +79,16 @@ declare namespace TComponents {
     classes?: TAtomize.Sheet<R>
     toClassNames?: (rulesets: TSheeter.RulesetOrAtomized) => TAtomize.AtomicArray
     theme?: TSheeter.getTheme<R>
-    setInnerState?: SetInnerState<R> // modify innerStatePipe.pipeState.innerState and call InnerStateComponent.setState
-    mergedInnerState?: TComponents.InnerState<R> // merged all pipe's pipeState.innerState (in InnerStateComponent.render)
+    sheetQuery?: TVariants.Query<R> // merged pipe's pipeState.query
   }
-
-  export type SetInnerState<R extends TSheeter.Shape = TSheeter.Shape> = (setState: (prevState: InnerState<R>, props: PropsCode<R>) => InnerState<R>) => void
 
   export type CommonPropertiesCodeKeys = keyof PropsCode
 
   export type SFCCode<R extends Shape = Shape> = React.SFC<PropsCode<R>> & ModifyInnerStateProp<R>
   export type ComponentTypeCode<R extends Shape = Shape> = React.ComponentType<PropsCode<R>> & ModifyInnerStateProp<R>
-  export type ModifyInnerStateProc<R extends Shape> = (props: PropsCode<R>, pipeState?: InnerState<R>) => void
+  export type ModifyInnerStateProc<R extends Shape> = (props: PropsCode<R>, pipeState?: TVariants.Query<R>) => void
   export interface ModifyInnerStateProp<R extends Shape> {
-    modifyInnerState?: ModifyInnerStateProc<R>
+    setSheetQuery?: ModifyInnerStateProc<R>
   }
 
   /******************************************

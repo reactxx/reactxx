@@ -29,6 +29,7 @@ declare namespace TWithStyles {
     displayName?: string
     defaultProps?: TComponents.Props<R>
     withTheme?: boolean
+    withInnerState?: boolean
     sheetOrCreator?: TSheeter.SheetOrCreator
     CodeComponent?: TComponents.ComponentTypeCode<R>
     getPipes?: (options: TWithStyles.ComponentOptions) => GetPipesResult
@@ -40,27 +41,20 @@ declare namespace TWithStyles {
   }
 
   // component instance options
-  export interface PipelineState extends ComponentOptions<TSheeter.Shape> {
+  export interface PipelineState { //extends ComponentOptions<TSheeter.Shape> {
+    options?: ComponentOptions<TSheeter.Shape>
+
     uniqueId?: string
     props?: TComponents.Props
 
     propsCode?: TComponents.PropsCode
     pipeStates?: PipeState[]
-    //sheet?: TAtomize.Sheet
     theme?: TSheeter.getTheme
-
-    //setInnerState?: TComponents.SetInnerState
-    //innerState?: TComponents.InnerState
-    innerStateComponent?: React.Component
-    refreshInnerStateComponent?: () => void
-
-    //sheetQuery?: TVariants.Query
-    //sheetQueryComponent?: React.Component
   }
 
   export interface PipeState extends TVariants.PipeState {
     propsCode?: TComponents.PropsCode | TComponents.PropsCode[]
-    innerState?: TComponents.InnerState
+    sheetQuery?: TVariants.Query
 
     classNameX?: TAtomize.Ruleset
     styleX?: TSheeter.StyleOrAtomized

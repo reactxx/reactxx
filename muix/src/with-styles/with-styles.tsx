@@ -29,23 +29,25 @@ export interface TProvider<R extends TSheeter.Shape> { Provider: React.Component
 //*********************************************************
 
 
-const withStyles = (componentState: TWithStyles.ComponentOptions) => {
+const withStyles = (options: TWithStyles.ComponentOptions) => {
 
   class Styled extends React.Component<TComponents.Props> {
 
+    constPipelineState:TWithStyles.PipelineState = {
+      options,
+      uniqueId: options.displayName + ' *' + componentInstaneCounter++,
+    }
+    
     initPipelineState = () => ({
-      ...componentState,
-      // instance props
+      ...this.constPipelineState,
       pipeStates: [],
-      uniqueId: componentState.displayName + ' *' + componentInstaneCounter++,
       props: this.props,
-      refreshInnerStateComponent: () => this.pipelineState.innerStateComponent && this.pipelineState.innerStateComponent.setState(st => st)
     } as TWithStyles.PipelineState)
 
-    pipelineState: TWithStyles.PipelineState = this.initPipelineState()
+    pipelineState = this.initPipelineState()
 
     pipeline = createPipeline(
-      componentState.getPipes || globalOptions.getPipes, 
+      options.getPipes || globalOptions.getPipes,
       this.pipelineState,
     )
 
@@ -58,7 +60,7 @@ const withStyles = (componentState: TWithStyles.ComponentOptions) => {
       return this.pipeline()
     }
 
-    public static displayName = componentState.displayName
+    public static displayName = options.displayName
   }
 
   const styled: TComponents.ComponentClass = Styled
