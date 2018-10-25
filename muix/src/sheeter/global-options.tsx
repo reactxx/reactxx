@@ -1,5 +1,5 @@
 import { TWithStyles } from 'reactxx-typings'
 
-export const globalOptions: TWithStyles.GlobalState = {
+export const globalOptions: TWithStyles.GlobalOptions = {
     namedThemes: {},
 }

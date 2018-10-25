@@ -10,22 +10,21 @@ declare namespace TWithStyles {
   export type GetPipes = (options: TWithStyles.ComponentOptions) => GetPipesResult
 
   // application options
-  export interface GlobalState {
+  export interface GlobalOptions {
     getDefaultTheme?: () => any
     getPipes?: (options: TWithStyles.ComponentOptions) => GetPipesResult
-    getInnerStatePipes?: (options: TWithStyles.ComponentOptions) => Pipe[]
     namedThemes?: { [themeName: string]: any }
+    // OBSOLETE
     finalizePropsCode?: FinishPropsCode
-    //applyLastWinStrategy?: TAtomize.ToPlatformClassName
-    //mergeInnerStates?: (pipelineState: TWithStyles.PipelineState) => TVariants.Query
+    // OBSOLETE
     processDeffereds?: ProcessDeffereds
   }
 
   export type FinishPropsCode = (instanceState: TWithStyles.PipelineState) => void
-  export type ProcessDeffereds = (values: TAtomize.AtomicArray, defferedIdxs:number[], state: TWithStyles.PipelineState) => void
+  export type ProcessDeffereds = (values: TAtomize.AtomicArray, defferedIdxs: number[], state: TWithStyles.PipelineState) => void
 
   // component type options
-  export interface ComponentOptions<R extends TSheeter.Shape = TSheeter.Shape> extends TVariants.ComponentOptions{
+  export interface ComponentOptions<R extends TSheeter.Shape = TSheeter.Shape> extends TVariants.ComponentOptions {
     displayName?: string
     defaultProps?: TComponents.Props<R>
     withTheme?: boolean
@@ -33,10 +32,6 @@ declare namespace TWithStyles {
     sheetOrCreator?: TSheeter.SheetOrCreator
     CodeComponent?: TComponents.ComponentTypeCode<R>
     getPipes?: (options: TWithStyles.ComponentOptions) => GetPipesResult
-    //getInnerStatePipes?: (systemPipes: SystemPipes, options: TWithStyles.ComponentOptions) => Pipe[]
-    //codeHooks?: TVariants.CodeHooks<R>
-    // computed props
-    //withSheetQueryComponent?: boolean // codeHooks && codeHooks.innerStateToSheetQuer
     componentId?: number
   }
 
@@ -45,9 +40,10 @@ declare namespace TWithStyles {
     options?: ComponentOptions<TSheeter.Shape>
 
     uniqueId?: string
-    props?: TComponents.Props
 
+    props?: TComponents.Props
     propsCode?: TComponents.PropsCode
+
     pipeStates?: PipeState[]
     theme?: TSheeter.getTheme
   }
@@ -61,7 +57,7 @@ declare namespace TWithStyles {
     classes?: TSheeter.PartialSheet
   }
 
-  export type Pipe = (instanceState: TWithStyles.PipelineState, pipeId:number, next: ReactNodeCreator) => ReactNodeCreator
+  export type Pipe = (instanceState: TWithStyles.PipelineState, pipeId: number, next: ReactNodeCreator) => ReactNodeCreator
   export type Pipeline = (instanceState: TWithStyles.PipelineState) => ReactNodeCreator
   export type ReactNodeCreator = () => React.ReactNode
 

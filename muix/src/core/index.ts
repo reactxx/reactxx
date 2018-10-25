@@ -2,58 +2,34 @@
 // export * from 'reactxx-primitives'
 // export * from 'reactxx-with-styles'
 
-import { TCommonStyles, TSheeter, TVariants } from 'reactxx-typings'
-import { toClassNamesWithQuery } from 'reactxx-sheeter'
-//import { transition_registerVariantHandler, transition_processDeffereds, transition_finalizePropsCode, TTransition } from 'reactxx-sheet-transition'
-import { widthsPipe } from 'reactxx-sheet-widths'
-import { sheetSwitch_registerVariantHandler, getCases } from 'reactxx-sheet-switch'
+import { TSheeter, TVariants } from 'reactxx-typings'
+import { widthsPipe, sheetWidths_registerVariantHandler } from 'reactxx-sheet-widths'
+import { sheetSwitch_registerVariantHandler } from 'reactxx-sheet-switch'
 import { innerStatePipe } from 'reactxx-with-state'
 
-export type getFlagsAll<R extends TSheeter.Shape = TSheeter.Shape> =
-    getCases<R> //| getBreakpoints<R> // TSheeter.RulesetNamesAll<R> | 
-
-import { initGlobalState } from 'reactxx-with-styles'
+import { initGlobalOptions } from 'reactxx-with-styles'
 
 export const initCore = () => {
     if (initCoreCalled) return
     initCoreCalled = true
 
-    //transition_registerVariantHandler()
+    sheetWidths_registerVariantHandler()
     sheetSwitch_registerVariantHandler()
 
-    initGlobalState({
+    initGlobalOptions({
 
         getPipes: options => ({
             afterPropsCode: [widthsPipe, innerStatePipe]
         }),
 
-        finalizePropsCode: state => {
-            //state.withSheetQueryComponent = true
-            //transition_finalizePropsCode(state)
-            //state.propsCode.toClassNames = rulesets => toClassNamesWithQuery(state, rulesets)
-        },
-
-        //processDeffereds: transition_processDeffereds,
+        // finalizePropsCode: null,
+        // processDeffereds: null,
 
     })
 }
 let initCoreCalled = false
 
 initCore()
-
-
-declare module 'reactxx-typings' {
-
-    namespace TVariants {
-
-        // interface VariantPart<T extends TCommonStyles.RulesetNativeIds, R extends TSheeter.Shape> {
-        //     [Consts.name]?: SheetSwitchPart<T, R>
-        // }
-        // type SheetSwitchPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
-        //     getFlagsAll<R> extends never ? never :
-        //     PartialRecord<getFlagsAll<R>, TSheeter.RulesetOrAtomized<T, R>>
-    }
-}
 
 // workaround due to https://github.com/Microsoft/TypeScript/issues/27448
 export interface TSBugHelper<R extends TSheeter.Shape> {

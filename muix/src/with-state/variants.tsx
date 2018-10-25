@@ -1,13 +1,13 @@
 import { TComponents, TSheeter } from 'reactxx-typings'
 
-export type getInnerState<R extends TSheeter.Shape = TSheeter.Shape> =
-  keyof R['innerState'] extends never ? TSheeter.FakeInterface : R['innerState']
-
-
 declare module 'reactxx-typings' {
   namespace TVariants {
+
+    type getInnerState<R extends TSheeter.Shape = TSheeter.Shape> =
+      keyof R['innerState'] extends never ? TSheeter.FakeInterface : R['innerState']
+
     interface Query<R extends TSheeter.Shape = TSheeter.Shape> {
-      state?: getInnerState<R>
+      innerState?: getInnerState<R>
     }
 
     interface ShapePart {
@@ -19,7 +19,7 @@ declare module 'reactxx-typings' {
     }
 
     type SetInnerState<R extends TSheeter.Shape = TSheeter.Shape> =
-      (setState: (prevState: Query<R>, props: TComponents.PropsCode<R>) => Query<R>) => void
+      (setInnerState: (prevInnerState: getInnerState<R>, props: TComponents.PropsCode<R>) => getInnerState<R>) => void
 
   }
 

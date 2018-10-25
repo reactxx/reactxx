@@ -1,5 +1,5 @@
 import { TAtomize } from 'reactxx-typings'
-import { globalOptions } from '../global-state'
+import { globalOptions } from '../global-options'
 
 export interface ApplyLastWinStrategyResult {
     style?: TAtomize.AtomicWebsLow | TAtomize.AtomicNativeLow

@@ -4,7 +4,7 @@ import { TAtomize, TComponents, TSheeter, TWithStyles } from 'reactxx-typings';
 import { defaultThemeName } from './pipes/pipe-theme';
 import { createPipeline } from './utils/create-pipeline'
 
-export const initGlobalState = (options: TWithStyles.GlobalState = null) => {
+export const initGlobalOptions = (options: TWithStyles.GlobalOptions = null) => {
 
   Object.assign(globalOptions, options)
 

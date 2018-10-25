@@ -4,11 +4,11 @@ export const enum Consts {
     name = '$switch'
 }
 
-export type getCases<R extends TSheeter.Shape = TSheeter.Shape> = keyof R['cases']
-
 declare module 'reactxx-typings' {
 
     namespace TVariants {
+
+        type getCases<R extends TSheeter.Shape = TSheeter.Shape> = keyof R['cases']
 
         interface Query<R extends TSheeter.Shape = TSheeter.Shape> {
             [Consts.name]?: SheetCases<R>
