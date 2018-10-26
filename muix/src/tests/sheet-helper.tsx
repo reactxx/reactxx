@@ -11,21 +11,24 @@ import { platform } from 'reactxx-sheet-widths'
 import { Shape, theme } from './shape'
 import { ReactWrapper } from 'enzyme';
 
-jest.mock('react-native', () => {
-    const mocked = {
+jest.mock('react-native', () => ({
+    Text: ({ children }) => children,
+    View: ({ children }) => children,
+    ScrollView: ({ children }) => children,
+    Image: ({ children }) => children,
+    Animated: {
         Text: ({ children }) => children,
         View: ({ children }) => children,
         ScrollView: ({ children }) => children,
         Image: ({ children }) => children,
-        Animated: {
-            Text: ({ children }) => children,
-            View: ({ children }) => children,
-            ScrollView: ({ children }) => children,
-            Image: ({ children }) => children,
-        },
-    }
-    return mocked
-})
+        createAnimatedComponent: comp => ({ children }) => children
+    },
+}))
+
+jest.mock('@expo/vector-icons', () => ({
+    MaterialCommunityIcons: ({ children }) => null,
+}))
+
 
 export const ReactAny: React.SFC<any> = ({ children }) => children || null
 ReactAny.displayName = 'ReactAny'
@@ -47,6 +50,9 @@ export interface TraceOptions {
     actWidth?: number
 }
 
+export const adjustSnashotSerializer = () =>
+    expect.addSnapshotSerializer(createSerializer({ map: filter, noKey: true }) as any);
+
 export const traceComponentEx = (
     isWeb: boolean,
     traceOptions: TraceOptions,
@@ -64,7 +70,8 @@ export const traceComponentEx = (
 
     if (actWidth) setActWidth(actWidth)
 
-    expect.addSnapshotSerializer(createSerializer({ map: filter, noKey: true }) as any);
+    adjustSnashotSerializer()
+    //expect.addSnapshotSerializer(createSerializer({ map: filter, noKey: true }) as any);
 
     let wrapper = mount(node(Comp))
     //  JEST and ENZYME:
@@ -76,78 +83,22 @@ export const traceComponentEx = (
     }
 }
 
-let count = 0
-
 // https://github.com/adriantoine/enzyme-to-json/issues/110
-const filter: OutputMapper = json => {
-    count = 0
-    return deleteProps(json)
-
-    if (!json || Array.isArray(json))
-        return json
-
-    if (json.type === 'InnerStateComponent' || json.type === 'TestComponent' || json.type === 'TestComponentCode') {
-        switch (window.__TRACELEVEL__) {
-            case 3: delete json.props; break
-            case 4: delete json.props.pipelineState; delete json.props.pipeState; break
-            case 5: break
-            default: return json.children[0];
-        }
-        return json
-    }
-
-    if (typeof json !== 'object')
-        return json
-
-    const newJSON = { ...json }
-    for (const p in newJSON) {
-        if (p === 'node') continue
-        if (deletePropsDir[p])
-            delete newJSON[p]
-        const val = newJSON[p]
-        if (!val && val !== '' && val !== 0)
-            delete newJSON[p]
-        // else if (Array.isArray(val)) {
-        //     if (p != 'children') continue
-        //     val.forEach(n => deleteProps(n))
-        // } else if (typeof val === 'object')
-        //     deleteProps(val)
-    }
-    return newJSON
-
-
-    // deleteProps(json)
-
-    // if (json.type === 'InnerStateComponent' || json.type === 'TestComponent' || json.type === 'TestComponentCode') {
-    //     switch (window.__TRACELEVEL__) {
-    //         case 3: delete json.props; break
-    //         case 4: delete json.props.pipelineState; delete json.props.pipeState; break
-    //         case 5: break
-    //         default: return json.children[0];
-    //     }
-    // }
-    // return json
-}
+const filter: OutputMapper = json => deleteProps(json)
 
 function deleteProps(json) {
-    count++
     if (!json)
         return json
 
     if (Array.isArray(json))
         return json.map(it => deleteProps(it))
-    //     json.forEach((it, idx) => {
-    //         json[idx] = deleteProps(it)
-    //     })
-    //     return json
-    // }
 
     if (typeof json !== 'object')
         return json
 
     json = { ...json }
 
-    if (json.type === 'InnerStateComponent' || json.type === 'TestComponent' || json.type === 'TestComponentCode') {
+    if (json.type === 'InnerStateComponent' || isHOC(json)) { //}.type === 'TestComponent' || json.type === 'TestComponentCode') {
 
         switch (window.__TRACELEVEL__) {
             case 3: delete json.props; break
@@ -178,23 +129,11 @@ function deleteProps(json) {
     return json
 }
 
-function deleteProps_(node) {
-    if (!node || Array.isArray(node))
-        return
-    if (typeof node === 'object') {
-        for (const p in node) {
-            if (p === 'node') continue
-            if (deletePropsDir[p]) delete node[p]
-            const val = node[p]
-            if (!val && val !== '' && val !== 0 && val !== false) delete node[p]
-            else if (Array.isArray(val)) {
-                if (p != 'children') continue
-                val.forEach(n => deleteProps(n))
-            } else if (typeof val === 'object')
-                deleteProps(val)
-        }
-    }
+const isHOC = json => {
+    const type = json && json.node && json.node.type && json.node.type['~~']
+    return type === 'comp' || type === 'compCode'
 }
+
 const deletePropsDir = {
     innerStateComponent: true, CodeComponent: true, setInnerState: true, theme: true,
     toClassNames: true, updateInnerStateComponent: true, sheetOrCreator: true, '~': true

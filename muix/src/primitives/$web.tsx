@@ -7,7 +7,7 @@ import { createElement } from 'reactxx-sheeter'
 import { TComponents } from 'reactxx-typings'
 import { withStylesCreator } from 'reactxx-with-styles'
 
-import { textSheet, viewSheet, iconSheet, scrollViewSheet } from './sheets'
+import { hasPlatformEvents, textSheet, viewSheet, iconSheet, scrollViewSheet } from './sheets'
 import { TPrimitives, CompNames } from './d-index'
 
 // for "declaration": true
@@ -19,12 +19,6 @@ export const view: TComponents.SFCCode<TPrimitives.ViewShape> = propsCode => {
     return <div classNameX={toClassNames([classes.root, classNameX])} styleX={styleX} {...rest} />
 }
 view.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { pressable: hasPlatformEvents(props) }
-
-export const hasPlatformEvents = (propsCode: TComponents.PropsCode) => !!(
-    window.isWeb ?
-        propsCode.onClick || propsCode.onMouseUp || propsCode.onMouseDown :
-        propsCode.onPress || propsCode.onPressIn || propsCode.onPressOut || propsCode.onLongPress
-)
 
 export const icon: TComponents.SFCCode<TPrimitives.IconShape> = propsCode => {
     const { styleX, classNameX, classes, toClassNames, children, data, url/*, onClick*/, ...rest } = propsCode
@@ -49,10 +43,11 @@ export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = prop
 scrollView.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { horizontal: props.horizontal }
 
 export const text: TComponents.SFCCode<TPrimitives.TextShape> = propsCode => {
-    const { classNameX, classes, toClassNames, singleLine, url/*, onClick*/, ...rest } = propsCode
+    const { classNameX, styleX, classes, toClassNames, singleLine, url/*, onClick*/, ...rest } = propsCode
     const tagProps = {
         className: TPrimitives.Consts.textClassName,
         classNameX: toClassNames([classes.root, classNameX]),
+        styleX,
         ...rest,
         onClick: url ? undefined : undefined /*onClick*/
     }

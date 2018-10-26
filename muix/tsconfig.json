@@ -38,9 +38,6 @@
       "reactxx-sheeter": [
         "src/sheeter/index"
       ],
-      "reactxx-sheeter-native": [
-        "src/sheeter/index-native"
-      ],
       "reactxx-sheet-widths": [
         "src/sheet-widths/index"
       ],
@@ -71,6 +68,15 @@
       "reactxx-primitives": [
         "src/primitives/index"
       ],
+
+      //**** FOR TESTING
+      "reactxx-sheeter-native": [
+        "src/sheeter/index-native"
+      ],
+      "reactxx-primitives-native": [
+        "src/primitives/index-native"
+      ],
+
       // "reactxx-sheeter": [
       //   "src/sheeter/index"
       // ],

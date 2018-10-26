@@ -1,0 +1,209 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PRIMITIVES SIMPLE NATIVE 1`] = `
+<Text
+  style={Array []}
+>
+  Text
+</Text>
+`;
+
+exports[`PRIMITIVES SIMPLE NATIVE 2`] = `
+<Text
+  style={Array []}
+>
+  AnimatedText
+</Text>
+`;
+
+exports[`PRIMITIVES SIMPLE NATIVE 3`] = `
+<View
+  style={Array []}
+>
+  View
+</View>
+`;
+
+exports[`PRIMITIVES SIMPLE NATIVE 4`] = `
+<View
+  style={Array []}
+>
+  AnimatedView
+</View>
+`;
+
+exports[`PRIMITIVES SIMPLE NATIVE 5`] = `
+<MaterialCommunityIcons
+  name="Icon"
+  style={
+    Array [
+      "flexShrink: 0 /*ReactXXIcon.sheet.root*/",
+    ]
+  }
+/>
+`;
+
+exports[`PRIMITIVES SIMPLE NATIVE 6`] = `
+<MaterialCommunityIcons
+  name="AnimatedIcon"
+  style={
+    Array [
+      "flexShrink: 0 /*ReactXXAnimatedIcon.sheet.root*/",
+    ]
+  }
+/>
+`;
+
+exports[`PRIMITIVES SIMPLE NATIVE 7`] = `
+<ScrollView
+  contentContainerStyle={Array []}
+  style={
+    Array [
+      "flexBasis: 0 /*ReactXXScrollView.sheet.root/$native*/",
+    ]
+  }
+>
+  ScrollView
+</ScrollView>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 1`] = `
+<div
+  className="c b a reactxx-text"
+  trace={
+    Array [
+      ".c .reactxx-text { display:inline /*ReactXXText.sheet.root/$web*/ }",
+      ".b { word-wrap:break-word /*ReactXXText.sheet.root/$web*/ }",
+      ".a { white-space:pre-wrap /*ReactXXText.sheet.root/$web*/ }",
+    ]
+  }
+>
+  Text
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 2`] = `
+<div
+  className="c b a reactxx-text"
+  trace={
+    Array [
+      ".c .reactxx-text { display:inline /*ReactXXAnimatedText.sheet.root/$web*/ }",
+      ".b { word-wrap:break-word /*ReactXXAnimatedText.sheet.root/$web*/ }",
+      ".a { white-space:pre-wrap /*ReactXXAnimatedText.sheet.root/$web*/ }",
+    ]
+  }
+>
+  AnimatedText
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 3`] = `
+<div
+  className="j i h g f e d"
+  trace={
+    Array [
+      ".j { overflow:hidden /*ReactXXView.sheet.root/$web*/ }",
+      ".i { position:relative /*ReactXXView.sheet.root/$web*/ }",
+      ".h { flex-shrink:0 /*ReactXXView.sheet.root/$web*/ }",
+      ".g { flex-basis:auto /*ReactXXView.sheet.root/$web*/ }",
+      ".f { align-items:stretch;-webkit-box-align:stretch /*ReactXXView.sheet.root/$web*/ }",
+      ".e { flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal /*ReactXXView.sheet.root/$web*/ }",
+      ".d { display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex /*ReactXXView.sheet.root/$web*/ }",
+    ]
+  }
+>
+  View
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 4`] = `
+<div
+  className="j i h g f e d"
+  trace={
+    Array [
+      ".j { overflow:hidden /*ReactXXAnimatedView.sheet.root/$web*/ }",
+      ".i { position:relative /*ReactXXAnimatedView.sheet.root/$web*/ }",
+      ".h { flex-shrink:0 /*ReactXXAnimatedView.sheet.root/$web*/ }",
+      ".g { flex-basis:auto /*ReactXXAnimatedView.sheet.root/$web*/ }",
+      ".f { align-items:stretch;-webkit-box-align:stretch /*ReactXXAnimatedView.sheet.root/$web*/ }",
+      ".e { flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal /*ReactXXAnimatedView.sheet.root/$web*/ }",
+      ".d { display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex /*ReactXXAnimatedView.sheet.root/$web*/ }",
+    ]
+  }
+>
+  AnimatedView
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 5`] = `
+<svg
+  className="l k h"
+  focusable="false"
+  trace={
+    Array [
+      ".l { font-size:inherited /*ReactXXIcon.sheet.root/$web*/ }",
+      ".k { fill:currentColor /*ReactXXIcon.sheet.root/$web*/ }",
+      ".h { flex-shrink:0 /*ReactXXIcon.sheet.root*/ }",
+    ]
+  }
+  viewBox="0 0 24 24"
+>
+  Icon
+</svg>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 6`] = `
+<svg
+  className="l k h"
+  focusable="false"
+  trace={
+    Array [
+      ".l { font-size:inherited /*ReactXXAnimatedIcon.sheet.root/$web*/ }",
+      ".k { fill:currentColor /*ReactXXAnimatedIcon.sheet.root/$web*/ }",
+      ".h { flex-shrink:0 /*ReactXXAnimatedIcon.sheet.root*/ }",
+    ]
+  }
+  viewBox="0 0 24 24"
+>
+  AnimatedIcon
+</svg>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 7`] = `
+<div
+  className="r q p o n m j i h f e d"
+  trace={
+    Array [
+      ".r { transform:translateZ(0) /*ReactXXScrollView.sheet.root/$web[1]*/ }",
+      ".q { -webkit-overflow-scrolling:touch /*ReactXXScrollView.sheet.root/$web[1]*/ }",
+      ".p { overflow-y:auto /*ReactXXScrollView.sheet.root/$web[1]*/ }",
+      ".o { overflow-x:hidden /*ReactXXScrollView.sheet.root/$web[1]*/ }",
+      ".n { flex-grow:1;-webkit-box-flex:1 /*ReactXXScrollView.sheet.root/$web[1]*/ }",
+      ".m { flex-basis:0 /*ReactXXScrollView.sheet.root/$web[1]*/ }",
+      ".j { overflow:hidden /*ReactXXScrollView.sheet.root/$web[0]*/ }",
+      ".i { position:relative /*ReactXXScrollView.sheet.root/$web[0]*/ }",
+      ".h { flex-shrink:0 /*ReactXXScrollView.sheet.root/$web[0]*/ }",
+      ".f { align-items:stretch;-webkit-box-align:stretch /*ReactXXScrollView.sheet.root/$web[0]*/ }",
+      ".e { flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal /*ReactXXScrollView.sheet.root/$web[0]*/ }",
+      ".d { display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex /*ReactXXScrollView.sheet.root/$web[0]*/ }",
+    ]
+  }
+>
+  <div
+    className="j i h g f e d"
+    trace={
+      Array [
+        ".j { overflow:hidden /*ReactXXScrollView.sheet.container/$web*/ }",
+        ".i { position:relative /*ReactXXScrollView.sheet.container/$web*/ }",
+        ".h { flex-shrink:0 /*ReactXXScrollView.sheet.container/$web*/ }",
+        ".g { flex-basis:auto /*ReactXXScrollView.sheet.container/$web*/ }",
+        ".f { align-items:stretch;-webkit-box-align:stretch /*ReactXXScrollView.sheet.container/$web*/ }",
+        ".e { flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal /*ReactXXScrollView.sheet.container/$web*/ }",
+        ".d { display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex /*ReactXXScrollView.sheet.container/$web*/ }",
+      ]
+    }
+  >
+    ScrollView
+  </div>
+</div>
+`;

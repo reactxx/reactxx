@@ -1,8 +1,15 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TSheeter } from 'reactxx-typings'
+import { TSheeter, TComponents } from 'reactxx-typings'
 import { TPrimitives } from './d-index'
+
+export const hasPlatformEvents = (propsCode: TComponents.PropsCode) => !!(
+  window.isWeb ?
+      propsCode.onClick || propsCode.onMouseUp || propsCode.onMouseDown :
+      propsCode.onPress || propsCode.onPressIn || propsCode.onPressOut || propsCode.onLongPress
+)
+
 
 export const textSheet: TSheeter.Sheet<TPrimitives.TextShape> = ({
   root: {

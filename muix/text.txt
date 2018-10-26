@@ -1,5 +1,5 @@
 cascading pipe
-native primitives
+primitives events
 Tests:
 - switch-comp
 - with-state

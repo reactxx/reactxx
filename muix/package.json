@@ -22,7 +22,7 @@
     "testRegex": "/__tests__/.*\\.test\\.(tsx|ts)$",
     "testMatch": null,
     "moduleNameMapper": {
-      "^reactxx-sheeter-native$": "<rootDir>/src/sheeter/index-native",
+      "^reactxx-(.*)-native$": "<rootDir>/src/$1/index-native",
       "^reactxx-(.*)$": "<rootDir>/src/$1/index"
     }
   },
@@ -47,6 +47,7 @@
     "warning": "^3.0.0"
   },
   "devDependencies": {
+    "@expo/vector-icons": "^8.0.0",
     "@material-ui/core": "^1.2.1",
     "@types/enzyme": "^3.1.14",
     "@types/expo": "https://cdn.rawgit.com/reactxx/reactxx/6054b9d3/types/expo/types-expo-0.1.1.tgz",

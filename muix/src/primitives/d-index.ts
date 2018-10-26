@@ -3,15 +3,15 @@
 import { TSheeter, TComponents } from 'reactxx-typings'
 
 export const enum CompNames {
-  Text = 'reactxx_Text',
-  View = 'reactxx_View',
-  Icon = 'reactxx_Icon',
-  ScrollView = 'reactxx_ScrollView',
+  Text = 'ReactXXText',
+  View = 'ReactXXView',
+  Icon = 'ReactXXIcon',
+  ScrollView = 'ReactXXScrollView',
   
-  AnimatedView = 'reactxx_AnimatedView',
-  AnimatedIcon = 'reactxx_AnimatedIcon',
-  AnimatedText = 'reactxx_AnimatedText',
-  AnimatedScrollView = 'reactxx_AnimatedScrollView',
+  AnimatedView = 'ReactXXAnimatedView',
+  AnimatedIcon = 'ReactXXAnimatedIcon',
+  AnimatedText = 'ReactXXAnimatedText',
+  AnimatedScrollView = 'ReactXXAnimatedScrollView',
 }
 
 export namespace TPrimitives {
