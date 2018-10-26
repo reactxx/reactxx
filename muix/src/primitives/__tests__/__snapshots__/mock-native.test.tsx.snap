@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SWITCH define sheet NATIVE 1`] = `
+<ScrollView
+  color=""
+>
+  <Text
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+  >
+    Halo world
+  </Text>
+</ScrollView>
+`;

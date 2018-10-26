@@ -60,13 +60,15 @@ const traceTest = (isWeb: boolean, actWidth: number) => {
     },
 
     (wrapper, Comp) => {
-      // const myComponents = wrapper.find(Comp)
-      // const props = myComponents.instance()
+      expect(wrapper).toMatchSnapshot()
+
       setActWidth(platform.actWidth() + 444)
       onWidthChanged()
       wrapper.update()
-      //wrapper.setState(st => st)
+
       expect(wrapper).toMatchSnapshot();
     }
   )
 }
+      // const myComponents = wrapper.find(Comp)
+      // const props = myComponents.instance()

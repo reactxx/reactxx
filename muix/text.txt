@@ -3,6 +3,6 @@ native primitives
 Tests:
 - switch-comp
 - with-state
-- primitives: https://hackernoon.com/how-do-you-mock-a-react-component-with-jest-unit-test-javascript-tutorial-example-spy-jest-enzyme-6c681f812a00
+- primitives
 
 

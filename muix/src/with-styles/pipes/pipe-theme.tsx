@@ -13,7 +13,8 @@ export const themePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
     : next()
 }
 
-export const registerTheme = (name: string, theme: TTheme.Theme) => {
+export const registerTheme = (name: string, theme) => {
+  if (!name) name = defaultThemeName
   warning(!globalOptions.namedThemes[name], `Theme ${name} already registered`)
   //if (!theme.$cache) theme.$cache = {}
   globalOptions.namedThemes[name] = theme

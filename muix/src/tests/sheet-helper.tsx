@@ -1,18 +1,31 @@
 import React from 'react'
 import { createSerializer, OutputMapper } from 'enzyme-to-json'
 
-
 import { TSheeter, TVariants, TComponents, TWithStyles } from 'reactxx-typings'
 import * as WithStyle from 'reactxx-with-styles'
 import {
     toClassNamesWithQuery,
-    globalOptions,
 } from "reactxx-sheeter";
 import { initPlatform, mount } from './index'
-import { platform, onWidthChanged } from 'reactxx-sheet-widths'
+import { platform } from 'reactxx-sheet-widths'
 import { Shape, theme } from './shape'
 import { ReactWrapper } from 'enzyme';
 
+jest.mock('react-native', () => {
+    const mocked = {
+        Text: ({ children }) => children,
+        View: ({ children }) => children,
+        ScrollView: ({ children }) => children,
+        Image: ({ children }) => children,
+        Animated: {
+            Text: ({ children }) => children,
+            View: ({ children }) => children,
+            ScrollView: ({ children }) => children,
+            Image: ({ children }) => children,
+        },
+    }
+    return mocked
+})
 
 export const ReactAny: React.SFC<any> = ({ children }) => children || null
 ReactAny.displayName = 'ReactAny'
@@ -44,18 +57,23 @@ export const traceComponentEx = (
     finished?: (wr: ReactWrapper, Comp: React.ComponentType) => void,
 ) => {
     initPlatform(isWeb)
-    const { traceLevel = 1, actWidth } = traceOptions as TraceOptions
-    globalOptions.namedThemes[WithStyle.defaultThemeName] = theme
+    const { traceLevel = 1, actWidth } = traceOptions
+    WithStyle.registerTheme(null, theme)
     window.__TRACELEVEL__ = traceLevel
     const Comp = WithStyle.withStylesCreator(sheet, comp)({ ...componentOptions || {}, displayName: 'TestComponent' })
 
     if (actWidth) setActWidth(actWidth)
-    //  JEST and ENZYME:
-    let wrapper = mount(node(Comp))
 
     expect.addSnapshotSerializer(createSerializer({ map: filter, noKey: true }) as any);
-    expect(wrapper).toMatchSnapshot();
-    if (finished) finished(wrapper, Comp)
+
+    let wrapper = mount(node(Comp))
+    //  JEST and ENZYME:
+    if (finished)
+        finished(wrapper, Comp)
+    else {
+        expect(wrapper).toMatchSnapshot();
+
+    }
 }
 
 let count = 0
@@ -149,11 +167,11 @@ function deleteProps(json) {
             continue
         }
         const val = json[p]
-        if (!val && val !== '' && val !== 0 && val!==false)
+        if (!val && val !== '' && val !== 0 && val !== false)
             delete json[p]
         else if (val && (val._reactInternalFiber || val.stateNode || val.memoizedProps))
             delete json[p]
-        else 
+        else
             json[p] = deleteProps(val)
     }
 
@@ -168,7 +186,7 @@ function deleteProps_(node) {
             if (p === 'node') continue
             if (deletePropsDir[p]) delete node[p]
             const val = node[p]
-            if (!val && val !== '' && val !== 0 && val!==false) delete node[p]
+            if (!val && val !== '' && val !== 0 && val !== false) delete node[p]
             else if (Array.isArray(val)) {
                 if (p != 'children') continue
                 val.forEach(n => deleteProps(n))
