@@ -1,7 +1,7 @@
-import { TAtomize } from 'reactxx-typings'
-import { applyLastwinsStrategy, finalClassNameStep, createElement } from './reacts/$native'
+import { TAtomize, TVariants } from 'reactxx-typings'
+import { applyLastwinsStrategy, finalizeClassName, createElement } from './reacts/$native'
 
-export const platform: TAtomize.Platform = {
+export const platform: TVariants.Platform = {
     toPlatformAtomizeRuleset: (style, tracePath) => {
         const res: TAtomize.AtomicArray = [] as any
         res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
@@ -29,7 +29,7 @@ export const platform: TAtomize.Platform = {
         return res
     },
     applyLastwinsStrategy,
-    finalClassNameStep,
+    finalizeClassName,
     createElement
 }
 

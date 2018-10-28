@@ -38,7 +38,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 
   if (classNameX) {
     let lastWinResult = applyLastwinsStrategy(classNameX)
-    const className = finalClassNameStep(lastWinResult)
+    const className = finalizeClassName(lastWinResult)
     props.className = props.className ? className + ' ' + props.className : className
     if (window.__TRACELEVEL__ >= 2) props.trace = platform.dumpAtomized(lastWinResult)
   }
@@ -51,7 +51,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   return React.createElement(type, props, ...children)
 }
 
-export const finalClassNameStep = (lastWinResult: TAtomize.AtomicWebsLow) => {
+export const finalizeClassName = (lastWinResult: TAtomize.AtomicWebsLow) => {
   if (window.__TRACE__) {
     lastWinResult = lastWinResult.map((r: TAtomize.__dev_AtomicWeb) => r.cache.className) as any
   }

@@ -1,9 +1,10 @@
 import React from 'react';
 import { TWithStyles } from 'reactxx-typings'
+import { platform } from 'reactxx-sheeter'
+
 import { Consumer } from './provider'
 import { parse, test } from './parser'
 
-import { platform } from '../index'
 
 export const widthsPipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
     const intervals: Record<string, [number, number]> = {}

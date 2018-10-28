@@ -4,14 +4,14 @@ import { TWithStyles } from './with-styles';
 
 declare namespace TAtomize {
 
-  export type ToPlatformAtomizeRulesetProc = (ruleset: {}, tracePath?: string) => AtomicArray
-  export interface Platform {
-    toPlatformAtomizeRuleset: ToPlatformAtomizeRulesetProc
-    dumpAtomized: (classNames: AtomicArrayLow) => any,
-    applyLastwinsStrategy: (values: AtomicArrayLow) => AtomicArrayLow
-    finalClassNameStep: (values: AtomicArrayLow) => string | Record<string, any>
-    createElement
-  }
+  // export interface Platform {
+  //   toPlatformAtomizeRuleset: ToPlatformAtomizeRulesetProc
+  //   dumpAtomized: (classNames: AtomicArrayLow) => any,
+  //   applyLastwinsStrategy: (values: AtomicArrayLow) => AtomicArrayLow
+  //   finalClassNameStep: (values: AtomicArrayLow) => string | Record<string, any>
+  //   createElement
+  // }
+  // export type ToPlatformAtomizeRulesetProc = (ruleset: {}, tracePath?: string) => AtomicArray
   export type GetPlatformTracePath = (value: Atomic) => string
   //export type ToPlatformClassName = (array: AtomicArray, propsPlatform: {style, className}) => void
 

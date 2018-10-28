@@ -2,9 +2,7 @@ import { Dimensions } from 'react-native'
 import { onWidthChanged, resetCallback } from './utils/subscribe'
 import {resetProvider} from './utils/provider'
 
-import { platform as p } from 'reactxx-sheeter'
-import { PlatformWidth } from './variants'
-const platform = p as PlatformWidth
+import { platform } from 'reactxx-sheeter-native'
 
 platform.addBreakpoint = (width: number) => {}
 platform.actWidth = () => Dimensions.get('window').width
@@ -15,4 +13,4 @@ platform.resetWidths = () => {
 
 Dimensions.addEventListener('change', arg => onWidthChanged());
 
-export let $nativeFake
+//export let $nativeFake

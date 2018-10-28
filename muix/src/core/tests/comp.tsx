@@ -1,5 +1,5 @@
 /** @jsx createElement */
-import { TVariants, TAtomize, TComponents, TCommonStyles, TSheeter } from 'reactxx-typings'
+import { TAtomize, TComponents, TCommonStyles, TSheeter } from 'reactxx-typings'
 import { createElement } from 'reactxx-sheeter'
 
 interface Shape extends TSheeter.ShapeAncestor {

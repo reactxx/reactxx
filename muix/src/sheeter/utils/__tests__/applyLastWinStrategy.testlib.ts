@@ -25,8 +25,8 @@ export const WEB = {
       ruleset2: platform.dumpAtomized(rs2),
       ruleset1Wins: web$dumpEx(concat1, rsWin1),
       ruleset2Wins: web$dumpEx(concat2, rsWin2),
-      final1: platform.finalClassNameStep(rsWin1),
-      final2: platform.finalClassNameStep(rsWin2),
+      final1: platform.finalizeClassName(rsWin1),
+      final2: platform.finalizeClassName(rsWin2),
     };
     return res
   }
@@ -48,8 +48,8 @@ export const NATIVE = {
       ruleset2: platform.dumpAtomized(rs2),
       ruleset1Wins: native$dumpEx(concat1, rsWin1),
       ruleset2Wins: native$dumpEx(concat2, rsWin2),
-      final1: platform.finalClassNameStep(rsWin1),
-      final2: platform.finalClassNameStep(rsWin2),
+      final1: platform.finalizeClassName(rsWin1),
+      final2: platform.finalizeClassName(rsWin2),
     };
     return res
   }

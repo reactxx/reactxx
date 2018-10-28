@@ -10,9 +10,9 @@ declare namespace TWithStyles {
   export type GetPipes = (options: TWithStyles.ComponentOptions) => GetPipesResult
 
   // application options
-  export interface GlobalOptions {
+  export interface Globals {
     getDefaultTheme?: () => any
-    getPipes?: (options: TWithStyles.ComponentOptions) => GetPipesResult
+    getPipes?: GetPipes
     namedThemes?: { [themeName: string]: any }
     // OBSOLETE
     finalizePropsCode?: FinishPropsCode

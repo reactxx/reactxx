@@ -4,10 +4,11 @@ import { createSerializer, OutputMapper } from 'enzyme-to-json'
 import { TSheeter, TVariants, TComponents, TWithStyles } from 'reactxx-typings'
 import * as WithStyle from 'reactxx-with-styles'
 import {
+    platform,
     toClassNamesWithQuery,
 } from "reactxx-sheeter";
 import { initPlatform, mount } from './index'
-import { platform } from 'reactxx-sheet-widths'
+//import { platform } from 'reactxx-sheet-widths'
 import { Shape, theme } from './shape'
 import { ReactWrapper } from 'enzyme';
 
@@ -152,7 +153,7 @@ export const toClassNames = <R extends TSheeter.Shape>(
 `
     const atomized = toClassNamesWithQuery({ propsCode: { sheetQuery } }, rulesets)
     const lastWin = platform.applyLastwinsStrategy(atomized)
-    const final = platform.finalClassNameStep(lastWin)
+    const final = platform.finalizeClassName(lastWin)
     const json = [`
 ##########################################
 ##########################################

@@ -1,10 +1,10 @@
-import { TAtomize, TCommonStyles, TSheeter } from 'reactxx-typings'
+import { TVariants, TCommonStyles, TSheeter } from 'reactxx-typings'
 
 export const enum Consts {
     name = '$widths'
 }
 
-export interface PlatformWidth extends TAtomize.Platform {
+export interface PlatformWidth extends TVariants.Platform {
     resetWidths: () => void
     actWidth: () => number
     addBreakpoint: (width: number) => void
@@ -39,6 +39,14 @@ declare module 'reactxx-typings' {
 
         type SheetWidthsPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
             Record<string, TSheeter.RulesetOrAtomized<T, R>>
+
+        interface Platform {
+            resetWidths?: () => void
+            actWidth?: () => number
+            addBreakpoint?: (width: number) => void
+        }
+
+
     }
 
 

@@ -1,10 +1,7 @@
 import { TComponents, TVariants } from 'reactxx-typings'
-import { registerVariantHandler, atomizeRulesetLow, isAtomicArray } from 'reactxx-sheeter'
+import { platform, registerVariantHandler, atomizeRulesetLow, isAtomicArray } from 'reactxx-sheeter'
 import { Consts } from '../variants'
 import { intervalToSelector, parse, test } from './parser'
-
-// platform dependent import
-import { platform } from '../index'
 
 export const sheetWidths_registerVariantHandler = () => {
     if (notRegistered = !notRegistered) return

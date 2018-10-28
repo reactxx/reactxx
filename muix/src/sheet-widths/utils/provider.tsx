@@ -1,7 +1,7 @@
 import React from 'react'
-import { subscribeWidthChange } from './subscribe'
+import { platform } from 'reactxx-sheeter'
 
-import { platform } from '../index'
+import { subscribeWidthChange } from './subscribe'
 
 const context = React.createContext<number>(0)
 

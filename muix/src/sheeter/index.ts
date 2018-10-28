@@ -1,12 +1,13 @@
 // platform dependent exports
-export * from './$web'
-export * from './reacts/$web'
+import { platform } from './$web'
+import { createElement, finalizeClassName, applyLastwinsStrategy } from './reacts/$web'
+
+export { createElement, finalizeClassName, applyLastwinsStrategy, platform }
 
 export * from './utils/deep-merge'
 export * from './atomize'
-export * from './global-options'
+export * from './globals'
 export * from './atomize-low'
-//export * from './trace'
 export * from './variants'
 export * from './merge'
 export * from './to-classnames'

@@ -11,10 +11,6 @@ import { TSheeter, TAtomize, TCommonStyles } from './index'
 
 export namespace TVariants {
 
-    // interface Deffered extends TAtomize.TypedInterface {
-    //     deffered?: true
-    // }
-
     type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
         TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
         TSheeter.RulesetLow<T, R> &
@@ -69,5 +65,17 @@ export namespace TVariants {
     //*********************************************************
 
     interface Query<R extends TSheeter.Shape = TSheeter.Shape> { }
+
+    //*********************************************************
+    //  PLATFORM
+    //*********************************************************
+    export interface Platform {
+        toPlatformAtomizeRuleset: ToPlatformAtomizeRulesetProc
+        dumpAtomized: (classNames: TAtomize.AtomicArrayLow) => any,
+        applyLastwinsStrategy: (values: TAtomize.AtomicArrayLow) => TAtomize.AtomicArrayLow
+        finalizeClassName: (values: TAtomize.AtomicArrayLow) => string | Record<string, any>
+        createElement
+      }
+      export type ToPlatformAtomizeRulesetProc = (ruleset: {}, tracePath?: string) => TAtomize.AtomicArray
 
 }

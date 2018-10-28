@@ -1,9 +1,7 @@
 import { onWidthChanged, resetCallback } from './utils/subscribe'
 import { resetProvider } from './utils/provider'
 
-import { platform as p } from 'reactxx-sheeter'
-import { PlatformWidth } from './variants'
-const platform = p as PlatformWidth
+import { platform } from 'reactxx-sheeter'
 
 platform.actWidth = () => window.innerWidth
 
@@ -30,4 +28,4 @@ platform.resetWidths = () => { // for jest test reset
 let timer: number
 let widthDir: { [width: number]: true } = {}
 
-export let $webFake
+//export let $webFake

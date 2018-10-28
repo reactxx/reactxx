@@ -36,7 +36,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
         ? toClassNamesWithQuery(null, [classNameX, styleX])
         : classNameX
     let reduced = applyLastwinsStrategy(style)
-    props.style = finalClassNameStep(reduced)
+    props.style = finalizeClassName(reduced)
     if (window.__TRACELEVEL__ >= 2)
       props.trace = platform.dumpAtomized(reduced)
   }
@@ -48,7 +48,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 
 export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastWinStrategyLow) as TAtomize.AtomicNativeLow
 
-export const finalClassNameStep = (lastWinResult: TAtomize.AtomicNativeLow) => {
+export const finalizeClassName = (lastWinResult: TAtomize.AtomicNativeLow) => {
   if (window.__TRACE__) {
     const res = {}
     for (const p in lastWinResult) res[p] = (lastWinResult[p] as TAtomize.__dev_AtomicNative).value

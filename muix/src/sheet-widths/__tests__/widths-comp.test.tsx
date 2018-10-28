@@ -1,8 +1,9 @@
 /** @jsx platform.createElement */
 import React from 'react'
+import { platform } from "reactxx-sheeter";
 
 import { ts, traceComponentEx, ReactAny, setActWidth } from "reactxx-tests";
-import { sheetWidths_registerVariantHandler, platform, WidthsProvider, widthsPipe, onWidthChanged } from "../index";
+import { sheetWidths_registerVariantHandler, WidthsProvider, widthsPipe, onWidthChanged } from "../index";
 import { Provider } from 'react-fela';
 
 sheetWidths_registerVariantHandler()
