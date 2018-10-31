@@ -76,6 +76,9 @@
       "reactxx-primitives-native": [
         "src/primitives/index-native"
       ],
+      "reactxx-sheet-widths-native": [
+        "src/sheet-widths/index-native"
+      ],
 
       // "reactxx-sheeter": [
       //   "src/sheeter/index"
@@ -123,7 +126,7 @@
 
     "src/primitives",
     "src/core",
-    "src/ks/web", "src/with-state/variants.tsx", "src/with-state/index.tsx", 
+    "src/ks/web", "src/simple-di.d.ts", "src/simpledi/index.ts",
 
     // "src/basic",
     // "src/mui-web",

@@ -1,12 +1,6 @@
 import { TVariants } from "reactxx-typings";
 import { atomizeSheet } from "reactxx-sheeter";
 import { initPlatform, Shape, ts } from "reactxx-tests";
-import { sheetWidths_registerVariantHandler } from "../index";
-import { sheetSwitch_registerVariantHandler } from "reactxx-sheet-switch";
-
-sheetSwitch_registerVariantHandler();
-sheetWidths_registerVariantHandler();
-
 export const createSheet = () =>
   (ts.sheet = {
     root: (ts.view = {

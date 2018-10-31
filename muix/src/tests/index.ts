@@ -12,20 +12,16 @@ process.env.NODE_ENV = 'development'
 export { shallow, mount, render }
 export default Enzyme
 
-import { platform } from 'reactxx-sheeter'
+import { initSheeter$Web, resetPlatform } from 'reactxx-sheeter'
+import { initSheeter$Native } from 'reactxx-sheeter-native'
 
-import { platform as platformNative } from 'reactxx-sheeter-native'
+import { initWidths$Web } from 'reactxx-sheet-widths'
+import { initWidths$Native } from 'reactxx-sheet-widths-native'
 
-import { resetRenderer } from "reactxx-fela"
-import { resetTheme } from 'reactxx-with-styles'
-
-import 'reactxx-sheet-widths'
-
-let platformWeb
+import { initSwitch } from 'reactxx-sheet-switch'
 
 export const initPlatform = (isWeb: boolean, __DEV__: boolean | 1 | 2 | 3 | 4 | 5 = true) => {
-    if (!platformWeb)
-        platformWeb = { ...platform }
+
     window.isWeb = isWeb
     if (typeof __DEV__ === 'number') {
         window.__TRACE__ = true
@@ -33,10 +29,17 @@ export const initPlatform = (isWeb: boolean, __DEV__: boolean | 1 | 2 | 3 | 4 | 
     } else
         window.__TRACE__ = __DEV__
 
-    Object.assign(platform, isWeb ? platformWeb : platformNative)
+    init(isWeb)
+}
 
-    if (isWeb)
-        resetRenderer()
-    resetTheme();
-    platform.resetWidths()
+const init = (isWeb: boolean) => {
+    resetPlatform()
+    if (isWeb) {
+        initSheeter$Web()
+        initWidths$Web()
+    } else {
+        initSheeter$Native()
+        initWidths$Native()
+    }
+    initSwitch()
 }

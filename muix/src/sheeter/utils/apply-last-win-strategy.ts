@@ -1,5 +1,4 @@
 import { TAtomize } from 'reactxx-typings'
-import { globalOptions } from '../globals'
 
 export interface ApplyLastWinStrategyResult {
     style?: TAtomize.AtomicWebsLow | TAtomize.AtomicNativeLow
@@ -14,10 +13,15 @@ export const enum AttemptType {
 export type ApplyLastWinStrategyLow = (values: TAtomize.AtomicWeb[], attemptType: AttemptType) => ApplyLastWinStrategyResult
 
 export const applyLastwinsStrategyRoot = (values: TAtomize.AtomicArray, applyLastWinStrategyLow: ApplyLastWinStrategyLow) => {
-    const processDeffereds = globalOptions.processDeffereds
-    let res = applyLastWinStrategyLow(values, processDeffereds ? AttemptType.first : AttemptType.firstIgnore)
-    if (res.style) return res.style
-    processDeffereds(values, res.defferedIdxs, values.state)
-    res = applyLastWinStrategyLow(values, AttemptType.second)
+    let res = applyLastWinStrategyLow(values, AttemptType.firstIgnore)
     return res.style
 }
+
+// export const applyLastwinsStrategyRoot_ = (values: TAtomize.AtomicArray, applyLastWinStrategyLow: ApplyLastWinStrategyLow) => {
+//     const processDeffereds = globals.processDeffereds
+//     let res = applyLastWinStrategyLow(values, processDeffereds ? AttemptType.first : AttemptType.firstIgnore)
+//     if (res.style) return res.style
+//     processDeffereds(values, res.defferedIdxs, values.state)
+//     res = applyLastWinStrategyLow(values, AttemptType.second)
+//     return res.style
+// }

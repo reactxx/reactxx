@@ -1,6 +1,6 @@
 import { TWithStyles, TSheeter, TAtomize, TVariants } from 'reactxx-typings'
 import { atomizeRuleset, isAtomizedRuleset, isAtomicArray } from './atomize'
-import { testConditions } from './variants'
+import { testConditions } from './conditions'
 
 export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, rulesets: TSheeter.ClassNameOrAtomized) => {
     if (!rulesets) return signAtomicArray([] as any, state)

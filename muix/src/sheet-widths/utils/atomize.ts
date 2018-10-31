@@ -3,15 +3,11 @@ import { platform, registerVariantHandler, atomizeRulesetLow, isAtomicArray } fr
 import { Consts } from '../variants'
 import { intervalToSelector, parse, test } from './parser'
 
-export const sheetWidths_registerVariantHandler = () => {
-    if (notRegistered = !notRegistered) return
-    registerVariantHandler({
-        name: Consts.name,
-        toAtomicRuleset,
-        testAtomicRuleset
-    })
-}
-let notRegistered = true
+export const registerWidthsHandler = () => registerVariantHandler({
+    name: Consts.name,
+    toAtomicRuleset,
+    testAtomicRuleset
+})
 
 //*********************************************************
 //  PRIVATE

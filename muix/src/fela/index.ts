@@ -1,5 +1,5 @@
 import React from 'react'
-import { createRenderer, IRenderer } from 'fela'
+import { createRenderer } from 'fela'
 import { render } from 'fela-dom'
 import pluginExtend from 'fela-plugin-extend'
 import pluginFallbackValue from 'fela-plugin-fallback-value'
@@ -8,7 +8,7 @@ import pluginPrefixer from 'fela-plugin-prefixer'
 import pluginUnit from 'fela-plugin-unit'
 
 import patch, { IRendererEx, dump } from './patch';
-import { TAtomize } from 'reactxx-typings';
+import { TAtomize, TVariants } from 'reactxx-typings';
 
 const plugins = {
   plugins: [
@@ -21,19 +21,50 @@ const plugins = {
   ]
 }
 
-export { IRendererEx }
+const initFela$Web = (platform?: TVariants.Platform) => {
+  
+  if (platform && platform.renderer) return
 
-export const resetRenderer = () => { renderer = patch(createRenderer(plugins)) }
+  renderer = patch(createRenderer(plugins))
+  if (platform) platform.renderer = renderer
 
-//export const rendererCreate = () => patch(createRenderer(plugins))
+  renderer.renderStatic({
+    fontFamily: 'Roboto'
+  }, 'body')
+  //renderer.renderStatic({ boxSizing: 'border-box' }, '*')
+  renderer.renderStatic({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    height: '100%',
+    width: '100%',
+    overflow: 'hidden',
+  }, '#root')
 
-export let renderer: IRendererEx // = rendererCreate()
-resetRenderer()
+  // C:\reactxx\muix\src\mui-web\CssBaseline\CssBaseline.tsx
+  renderer.renderStatic({
+    WebkitFontSmoothing: "antialiased",
+    MozOsxFontSmoothing: "grayscale",
+    boxSizing: "border-box"
+  } as any, 'html')
+  renderer.renderStatic({
+    boxSizing: "inherit"
+  }, '*, *::before, *::after')
+  renderer.renderStatic({
+    // Remove the margin in all browsers.
+    margin: 0,
+    // backgroundColor: theme.palette.background.default,
+    // "@media print": {
+    //   Save printer ink.
+    //   backgroundColor: theme.palette.common.white
+    // }
+  }, 'body')
 
-export const getRenderer = () => renderer
+  render(renderer)
+}
 
-export const dumpAtomized = (classNames: TAtomize.AtomicWebsLow) => {
-  if (!classNames || classNames.length===0) return []
+const dumpAtomized = (classNames: TAtomize.AtomicWebsLow) => {
+  if (!classNames || classNames.length === 0) return []
   return window.__TRACE__ ? classNames.map(c => dump(c)) : ['DUMP is available in window.__DEV__ only']
 }
 
@@ -44,45 +75,12 @@ export const dumpAtomized = (classNames: TAtomize.AtomicWebsLow) => {
 //   padding: 0,
 //   overflow: 'hidden',
 // }, 'html, body, #root')
-renderer.renderStatic({
-  fontFamily: 'Roboto'
-}, 'body')
-//renderer.renderStatic({ boxSizing: 'border-box' }, '*')
-renderer.renderStatic({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'stretch',
-  height: '100%',
-  width: '100%',
-  overflow: 'hidden',
-}, '#root')
-
-// C:\reactxx\muix\src\mui-web\CssBaseline\CssBaseline.tsx
-renderer.renderStatic({
-  WebkitFontSmoothing: "antialiased",
-  MozOsxFontSmoothing: "grayscale",
-  boxSizing: "border-box"
-} as any, 'html')
-renderer.renderStatic({
-  boxSizing: "inherit"
-}, '*, *::before, *::after')
-renderer.renderStatic({
-  // Remove the margin in all browsers.
-  margin: 0,
-  // backgroundColor: theme.palette.background.default,
-  // "@media print": {
-  //   Save printer ink.
-  //   backgroundColor: theme.palette.common.white
-  // }
-}, 'body')
-
-render(renderer)
 
 //Converts ruleset to blank delimited atomic classes
-export const rulesetToClassNames = (ruleset: React.CSSProperties) => {
+const rulesetToClassNames = (ruleset: React.CSSProperties) => {
   return ruleset ? renderer.renderRule(() => ruleset, {}) : ''
 }
-export const rulesetsToClassNames = (...rulesets: React.CSSProperties[]) => {
+const rulesetsToClassNames = (...rulesets: React.CSSProperties[]) => {
   if (!rulesets) return ''
   rulesets = rulesets.filter(r => !!r)
   let res: string
@@ -90,9 +88,9 @@ export const rulesetsToClassNames = (...rulesets: React.CSSProperties[]) => {
   else res = rulesetToClassNames(Object.assign({}, ...rulesets))
   return res
 }
-export const keyFrameToClassNames = (keyFrame: React.CSSProperties) => keyFrame ? renderer.renderKeyframe(() => keyFrame, {}) : ''
+const keyFrameToClassNames = (keyFrame: React.CSSProperties) => keyFrame ? renderer.renderKeyframe(() => keyFrame, {}) : ''
 
-export const rulesetToClassNamesMUI = (ruleset: React.CSSProperties) => {
+const rulesetToClassNamesMUI = (ruleset: React.CSSProperties) => {
   if (!ruleset) return ''
 
   let rs = ruleset
@@ -118,12 +116,28 @@ export const rulesetToClassNamesMUI = (ruleset: React.CSSProperties) => {
   }
 
   const res = classNames + (forceRuleNames ? ' ' + forceRuleNames.join(' ') : '')
-  // const res1 = (empty ? '' : renderer.renderRule(() => rs, {})) + (forceRuleNames ? ' ' + forceRuleNames.join(' ') : '')
-  // if (res1 !== res)
-  //   debugger
 
   return res
 }
 
 const forceRuleName = 'NAME$'
 
+let renderer: IRendererEx
+//initFela$Web()
+
+const Fela = {
+  dumpAtomized, initFela$Web,
+  rulesetToClassNames, rulesetsToClassNames, keyFrameToClassNames, rulesetToClassNamesMUI,
+  getRenderer: () => renderer
+}
+
+export default Fela
+
+declare module 'reactxx-typings' {
+
+  namespace TVariants {
+    interface Platform {
+      renderer?: IRendererEx
+    }
+  }
+}

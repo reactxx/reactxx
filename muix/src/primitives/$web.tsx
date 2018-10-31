@@ -1,9 +1,9 @@
-/** @jsx createElement */
+/** @jsx platform.createElement */
 
 // import React from 'react'
 // import ReactN from 'react-native'
 
-import { createElement } from 'reactxx-sheeter'
+import { platform } from 'reactxx-sheeter'
 import { TComponents } from 'reactxx-typings'
 import { withStylesCreator } from 'reactxx-with-styles'
 

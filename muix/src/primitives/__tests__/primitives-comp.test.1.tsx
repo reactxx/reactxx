@@ -1,4 +1,4 @@
-import React, { useState, useContext, memo } from 'react'
+import React, { useState } from 'react'
 import { initPlatform, mount, adjustSnashotSerializer } from "reactxx-tests"
 import * as Primitives from 'reactxx-primitives'
 import * as PrimitivesN from 'reactxx-primitives-native'
@@ -22,31 +22,10 @@ jest.mock('@expo/vector-icons', () => ({
   MaterialCommunityIcons: props => <svg {...props} />,
 }))
 
-const context = React.createContext(1)
-
-const StateComp: React.SFC = memo(props => {
+const StateComp: React.SFC = props => {
   const [count, setCount] = useState(1)
-  const ctx = useContext(context)
-
-  return <div onClick={() => {
-    setCount(count + ctx)
-  }
-  }>{`Count=${count}, ctx=${ctx}`}</div>
-})
-
-const ContextComp: React.SFC = memo(props => {
-  const [value, setValue] = useState(1)
-
-  return <context.Provider value={value}>
-    <StateComp />
-    <span onClick={() => {
-      setValue(value + 1)
-    }
-    }>Value={value}</span>
-  </context.Provider>
-
-})
-
+  return <div>{count}</div>
+}
 
 describe("PRIMITIVES SIMPLE", () => {
   //it("NATIVE", () => traceTest(false, PrimitivesN))
@@ -54,24 +33,9 @@ describe("PRIMITIVES SIMPLE", () => {
 })
 
 const traceTest = (isWeb: boolean, prim: typeof Primitives | typeof PrimitivesN) => {
-  const component = renderer.create(<ContextComp />)
-  // const tree = component.toTree()
-  // const treeStr = JSON.stringify(tree, null, 2)
-  //expect(tree).toMatchSnapshot()
-  expect(component.toJSON()).toMatchSnapshot()
-  let onClick = (component.root.findByType('div') as any).props.onClick
-  onClick()
-  // const json = component.toJSON()
-  // const jsonStr = JSON.stringify(json, null, 2)
-  expect(component.toJSON()).toMatchSnapshot()
-
-  const onClickSpan = (component.root.findByType('span') as any).props.onClick
-  onClickSpan()
-  expect(component.toJSON()).toMatchSnapshot()
-
-  onClick = (component.root.findByType('div') as any).props.onClick
-  onClick()
-  expect(component.toJSON()).toMatchSnapshot()
+  const component = renderer.create(<StateComp/>)
+  const json = component.toJSON();
+  expect(json).toMatchSnapshot();
 }
 
 const traceTest_ = (isWeb: boolean, prim: typeof Primitives | typeof PrimitivesN) => {

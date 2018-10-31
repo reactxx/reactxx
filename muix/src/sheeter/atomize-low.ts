@@ -2,7 +2,7 @@ import warning from 'warning'
 import { isObject } from './utils/deep-merge'
 import { wrapPseudoPrefixes } from './utils/wrap-pseudo-prefixes'
 import { TAtomize, TSheeter, TCommonStyles, TVariants } from 'reactxx-typings'
-import { atomizeVariants } from './variants'
+import { atomizeVariants } from './conditions'
 import { isAtomicArray, isAtomizedRuleset } from './atomize'
 
 // platform dependent import

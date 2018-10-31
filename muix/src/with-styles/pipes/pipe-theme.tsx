@@ -1,11 +1,11 @@
 import React from 'react';
-import { atomizeSheet, globalOptions, mergeSheet } from 'reactxx-sheeter';
-import { TAtomize, TSheeter, TTheme, TWithStyles } from 'reactxx-typings';
+import { atomizeSheet, platform, mergeSheet } from 'reactxx-sheeter';
+import { TAtomize, TSheeter, TWithStyles } from 'reactxx-typings';
 import warning from 'warning';
 
 export const themePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
-  const render = (theme: TTheme.Theme) => {
-    pipelineState.theme = theme || globalOptions.namedThemes[defaultThemeName]
+  const render = theme => {
+    pipelineState.theme = theme || platform._withStyles.namedThemes[defaultThemeName]
     return next()
   }
   return () => pipelineState.options.withTheme
@@ -15,33 +15,38 @@ export const themePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
 
 export const registerTheme = (name: string, theme) => {
   if (!name) name = defaultThemeName
-  warning(!globalOptions.namedThemes[name], `Theme ${name} already registered`)
-  //if (!theme.$cache) theme.$cache = {}
-  globalOptions.namedThemes[name] = theme
+  const {_withStyles: {namedThemes}} = platform
+  warning(!namedThemes[name], `Theme ${name} already registered`)
+  namedThemes[name] = theme
 }
 
-const themeContext = React.createContext<TTheme.Theme>(null)
+const themeContext = React.createContext<{}>(null)
 
 // https://github.com/Microsoft/TypeScript/issues/3960#issuecomment-144529141
-export class ThemeProviderGeneric<R extends TSheeter.Shape> extends React.Component<TTheme.ThemeProviderProps<TSheeter.getTheme<R>>> {
+export class ThemeProviderGeneric<R extends TSheeter.Shape> extends React.Component<ThemeProviderProps<R>> {
 
   render() {
     const { children, theme, registeredThemeName } = this.props
-    const actTheme = registeredThemeName ? globalOptions.namedThemes[registeredThemeName] : theme
+    const actTheme = registeredThemeName ? platform._withStyles.namedThemes[registeredThemeName] : theme
     warning(actTheme, 'ThemeProvider: missing theme')
-    return <themeContext.Provider value={actTheme as TTheme.Theme}>{children}</themeContext.Provider>
+    return <themeContext.Provider value={actTheme}>{children}</themeContext.Provider>
   }
 }
 ThemeProviderGeneric[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.reactxxComponent
+export interface ThemeProviderProps<R extends TSheeter.Shape> {
+  registeredThemeName?: string
+  theme?: TSheeter.getTheme<R>
+}
+
 
 export const defaultThemeName = '*default-theme*'
 
 export const sheetFromThemeCache = (
   componentId: number, sheetOrCreator: TSheeter.SheetOrCreator, 
-  theme: TTheme.Theme, defaultClasses: TSheeter.PartialSheetOrCreator,
+  theme, defaultClasses: TSheeter.PartialSheetOrCreator,
   path: string
 ) => {
-  const cache = !theme ? $cache : (theme.$cache || (theme.$cache = {}))
+  const cache = !theme ? platform._withStyles.$cache : (theme.$cache || (theme.$cache = {}))
 
   let value: TAtomize.Sheet = cache[componentId]
   if (value) return value
@@ -55,12 +60,4 @@ export const sheetFromThemeCache = (
   cache[componentId] = value
 
   return value
-}
-
-// global 'sheet + defaultProps.classes' cache
-let $cache: { [componentId: number]: TSheeter.Sheet } = {}
-
-export const resetTheme = () => {
-  $cache = {}
-  globalOptions.namedThemes = {}
 }

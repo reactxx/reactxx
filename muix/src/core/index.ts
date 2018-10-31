@@ -1,31 +1,28 @@
-// export * from 'reactxx-sheeter'
-// export * from 'reactxx-primitives'
-// export * from 'reactxx-with-styles'
 
 import { TSheeter, TVariants } from 'reactxx-typings'
-import { widthsPipe, sheetWidths_registerVariantHandler } from 'reactxx-sheet-widths'
-import { sheetSwitch_registerVariantHandler } from 'reactxx-sheet-switch'
+import { widthsPipe, initWidths } from 'reactxx-sheet-widths'
+import { initSwitch } from 'reactxx-sheet-switch'
 import { innerStatePipe } from 'reactxx-with-state'
 
-import { initGlobalOptions } from 'reactxx-with-styles'
+//import { initGlobals } from 'reactxx-with-styles'
 
-export const initCore = () => {
+export const initCore = (force?: boolean) => {
     if (initCoreCalled) return
     initCoreCalled = true
 
-    sheetWidths_registerVariantHandler()
-    sheetSwitch_registerVariantHandler()
+    initWidths(force)
+    initSwitch(force)
 
-    initGlobalOptions({
+    // initGlobals({
 
-        getPipes: options => ({
-            afterPropsCode: [widthsPipe, innerStatePipe]
-        }),
+    //     getPipes: options => ({
+    //         afterPropsCode: [widthsPipe, innerStatePipe]
+    //     }),
 
-        // finalizePropsCode: null,
-        // processDeffereds: null,
+    //     // finalizePropsCode: null,
+    //     // processDeffereds: null,
 
-    })
+    // })
 }
 let initCoreCalled = false
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { getRenderer } from 'reactxx-fela'
 import { TAtomize, TComponents } from 'reactxx-typings'
 
 import { deleteSystemProps } from '../to-classnames'
@@ -7,7 +6,6 @@ import { mergeStyles } from '../merge'
 import { isReactXXComponent, isDeffered } from '../atomize'
 import { applyLastwinsStrategyRoot, AttemptType, ApplyLastWinStrategyResult } from '../utils/apply-last-win-strategy'
 import { platform } from '../index'
-
 
 /******************************************
   EXTEND REACT
@@ -62,7 +60,7 @@ export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLast
 
 // apply LAST WIN strategy for web className
 const applyLastwinsStrategyLow = (values: TAtomize.AtomicWebs, attemptType: AttemptType) => {
-  const renderer = getRenderer()
+  const { renderer } = platform
 
   const res: TAtomize.AtomicWeb[] = []
   let idxs: number[] = []

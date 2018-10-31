@@ -3,9 +3,6 @@ import {
   atomizeSheet,
 } from "reactxx-sheeter";
 import { initPlatform, Shape, ts } from "reactxx-tests";
-import { sheetSwitch_registerVariantHandler } from "../index";
-
-sheetSwitch_registerVariantHandler();
 
 export const createSheet = () =>
   (ts.sheet = {

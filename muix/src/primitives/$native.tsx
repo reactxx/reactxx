@@ -1,11 +1,11 @@
-/** @jsx createElement */
+/** @jsx platform.createElement */
 
 //import React from 'react'
 import { View as ViewRN, Text as TextRN, ScrollView as ScrollViewRN, Animated, TouchableWithoutFeedback, Linking } from 'react-native'
 import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
-import { createElement } from 'reactxx-sheeter'
+import { platform } from 'reactxx-sheeter'
 import { TComponents } from 'reactxx-typings'
 import { withStylesCreator } from 'reactxx-with-styles'
 

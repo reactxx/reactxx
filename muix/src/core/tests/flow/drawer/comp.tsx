@@ -1,6 +1,6 @@
-/** @jsx createElement */
+/** @jsx platform.createElement */
 
-import { createElement } from 'reactxx-sheeter'
+import { platform } from 'reactxx-sheeter'
 
 import { TComponents } from 'reactxx-typings'
 

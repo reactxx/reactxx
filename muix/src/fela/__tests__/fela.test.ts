@@ -1,26 +1,27 @@
-import { dumpAtomized, getRenderer } from "reactxx-fela";
-import { initPlatform } from "reactxx-tests";
+import Fela from "reactxx-fela"
 
 test("fela", () => {
-  initPlatform(true);
-  const classNames = getRenderer().renderRuleEx(
-    {
-      color: "red",
-      margin: 10,
-      ":hover": {
-        margin: 5,
-        "@media (min-width: 768px)": {
-          height: 100,
-          ":active": {
-            width: 700,
-            color: "red"
-          }
+  const classNames = {
+    color: "red",
+    margin: 10,
+    ":hover": {
+      margin: 5,
+      "@media (min-width: 768px)": {
+        height: 100,
+        ":active": {
+          width: 700,
+          color: "red"
         }
       }
-      // }
-    },
-    "root"
-  );
-  const res = dumpAtomized(classNames);
-  expect(res).toMatchSnapshot();
-});
+    }
+  }
+
+  Fela.initFela$Web()
+  let css = Fela.getRenderer().renderRuleEx(classNames, 'root')
+  const res = Fela.dumpAtomized(css)
+  expect(res).toMatchSnapshot()
+
+  Fela.initFela$Web()
+  css = Fela.getRenderer().renderRuleEx(classNames, 'root')
+  expect(Fela.dumpAtomized(css)).toMatchSnapshot()
+})

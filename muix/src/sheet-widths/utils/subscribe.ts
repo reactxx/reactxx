@@ -1,20 +1,16 @@
-
-export type Callback = () => void
+import { Callback } from '../variants'
+import { platform } from 'reactxx-sheeter'
 
 export const subscribeWidthChange = (callback: Callback) => {
+    const {_widths, _widths: {callbacks}} = platform
     callbacks.push(callback)
     return () => {
         const idx = callbacks.findIndex(c => c === callback)
         if (idx === 0) return
-        callbacks = callbacks.splice(idx, 1)
+        _widths.callbacks = callbacks.splice(idx, 1)
     }
 }
-let callbacks: Callback[] = []
+export const onWidthChanged = () => platform._widths.callbacks.forEach(c => c())
 
-export const onWidthChanged = () => callbacks.forEach(c => {
-    c()
-})
-
-export const resetCallback = () => callbacks = []
 
 

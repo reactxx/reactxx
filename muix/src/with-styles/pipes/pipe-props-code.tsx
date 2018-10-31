@@ -1,4 +1,4 @@
-import { globalOptions, mergeCodeProps, mergeRulesets, mergeSheets, mergeStyles, toClassNamesWithQuery } from 'reactxx-sheeter';
+import { mergeCodeProps, mergeRulesets, mergeSheets, mergeStyles, toClassNamesWithQuery } from 'reactxx-sheeter';
 import { TComponents, TWithStyles } from 'reactxx-typings';
 
 // prepare code component props
@@ -14,7 +14,7 @@ export const propsCodePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => 
       toClassNames: rulesets => toClassNamesWithQuery(pipelineState, rulesets),
     }
 
-    if (globalOptions.finalizePropsCode) globalOptions.finalizePropsCode(pipelineState)
+    //if (globals.finalizePropsCode) globals.finalizePropsCode(pipelineState)
 
     delete propsCode.$web; delete propsCode.$native
 

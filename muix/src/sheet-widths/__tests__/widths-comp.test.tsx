@@ -3,10 +3,7 @@ import React from 'react'
 import { platform } from "reactxx-sheeter";
 
 import { ts, traceComponentEx, ReactAny, setActWidth } from "reactxx-tests";
-import { sheetWidths_registerVariantHandler, WidthsProvider, widthsPipe, onWidthChanged } from "../index";
-import { Provider } from 'react-fela';
-
-sheetWidths_registerVariantHandler()
+import { WidthsProvider, widthsPipe, onWidthChanged } from "../index";
 
 describe("WIDTHS COMPONENT", () => {
   it("NATIVE 300", () => traceTest(false, 300))
@@ -71,5 +68,3 @@ const traceTest = (isWeb: boolean, actWidth: number) => {
     }
   )
 }
-      // const myComponents = wrapper.find(Comp)
-      // const props = myComponents.instance()

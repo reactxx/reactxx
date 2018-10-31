@@ -1,7 +1,8 @@
 import { TAtomize, TVariants } from 'reactxx-typings'
 import { applyLastwinsStrategy, finalizeClassName, createElement } from './reacts/$native'
+import { assignPlatform } from 'reactxx-sheeter'
 
-export const platform: TVariants.Platform = {
+export const init = () => assignPlatform({
     toPlatformAtomizeRuleset: (style, tracePath) => {
         const res: TAtomize.AtomicArray = [] as any
         res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
@@ -31,6 +32,6 @@ export const platform: TVariants.Platform = {
     applyLastwinsStrategy,
     finalizeClassName,
     createElement
-}
+})
 
-function toJSON() { return `${this.propId}: ${this.value.value} /*${this.value.tracePath}*/` }
+const toJSON = () => `${this.propId}: ${this.value.value} /*${this.value.tracePath}*/`

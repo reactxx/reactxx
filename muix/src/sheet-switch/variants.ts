@@ -27,6 +27,10 @@ declare module 'reactxx-typings' {
             getCases<R> extends never ? never :
             PartialRecord<getCases<R>, TSheeter.RulesetOrAtomized<T, R>>
 
+        interface Platform {
+            _switch?: boolean
+        }
+
 
     }
 }

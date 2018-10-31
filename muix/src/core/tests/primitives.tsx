@@ -1,5 +1,5 @@
-/** @jsx createElement */
-import { createElement } from 'reactxx-sheeter'
+/** @jsx platform.createElement */
+import { platform } from 'reactxx-sheeter'
 import { View } from 'reactxx-primitives'
 
 const App: React.SFC = props => <View

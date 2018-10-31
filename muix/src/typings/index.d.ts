@@ -2,12 +2,13 @@
 export { TAtomize } from './atomize'
 export { TSheeter } from './sheeter'
 export { TComponents } from './components'
-export { TTheme } from './themer'
 export { TWithStyles } from './with-styles'
 
 export type TNativeRuleValue = number | string | /*for native animation*/{}
 
 import { TSheeter, TAtomize, TCommonStyles } from './index'
+import React from 'react'
+import { TWithStyles } from './with-styles';
 
 export namespace TVariants {
 
@@ -42,14 +43,14 @@ export namespace TVariants {
     interface VariantPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> { }
 
     interface PropsPart<R extends TSheeter.Shape = TSheeter.Shape> { }
- 
+
     interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> { }
- 
+
     interface ShapePart { }
 
     interface PipeState { }
 
-    interface ComponentOptions {}
+    interface ComponentOptions { }
 
     //*********************************************************
     //  CONDITIONS
@@ -69,13 +70,18 @@ export namespace TVariants {
     //*********************************************************
     //  PLATFORM
     //*********************************************************
-    export interface Platform {
-        toPlatformAtomizeRuleset: ToPlatformAtomizeRulesetProc
-        dumpAtomized: (classNames: TAtomize.AtomicArrayLow) => any,
-        applyLastwinsStrategy: (values: TAtomize.AtomicArrayLow) => TAtomize.AtomicArrayLow
-        finalizeClassName: (values: TAtomize.AtomicArrayLow) => string | Record<string, any>
-        createElement
-      }
-      export type ToPlatformAtomizeRulesetProc = (ruleset: {}, tracePath?: string) => TAtomize.AtomicArray
+    export interface Options {
+        getDefaultTheme?: () => any
+        getPipes?: TWithStyles.GetPipes
+    }
+    export interface Platform extends Options, Globals {
+        toPlatformAtomizeRuleset?: ToPlatformAtomizeRulesetProc
+        dumpAtomized?: (classNames: TAtomize.AtomicArrayLow) => any,
+        applyLastwinsStrategy?: (values: TAtomize.AtomicArrayLow) => TAtomize.AtomicArrayLow
+        finalizeClassName?: (values: TAtomize.AtomicArrayLow) => string | Record<string, any>
+        createElement?: (type, props?, ...children) => any
+    }
+    export interface Globals { }
+    export type ToPlatformAtomizeRulesetProc = (ruleset: {}, tracePath?: string) => TAtomize.AtomicArray
 
 }

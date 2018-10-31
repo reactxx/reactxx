@@ -18,10 +18,10 @@ declare module 'fbemitter' {
   export type EventSubscription = any
 }
 
-declare module 'jss-preset-default' {
-  const def: any
-  export default def
-}
+// declare module 'jss-preset-default' {
+//   const def: any
+//   export default def
+// }
 
 declare module 'url-parse' {
   interface Query {
@@ -72,15 +72,3 @@ type DeepPartial<T> = {
 type PartialRecord<K extends keyof any, T> = {
   [P in K]?: T
 }
-
-
-//type XX = Diff<'a' | 'b', 'b' | 'd'>
-
-//https://schneidenbach.gitbooks.io/typescript-cookbook/get-the-return-type-of-a-function.html
-//nameOf, return type of function, 
-
-//type PartialRecord<K extends string, T> = { [P in K]?: T; };
-
-//type OmitFrom<T, K extends string> = {[P in Diff<keyof T, K>]: T[P]}
-
-//type NoPartial<T> = { [P in keyof T]: T[P] }

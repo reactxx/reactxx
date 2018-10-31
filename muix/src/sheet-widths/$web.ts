@@ -1,31 +1,26 @@
-import { onWidthChanged, resetCallback } from './utils/subscribe'
-import { resetProvider } from './utils/provider'
+import { onWidthChanged } from './utils/subscribe'
 
-import { platform } from 'reactxx-sheeter'
+import { assignPlatform, platform } from 'reactxx-sheeter'
 
-platform.actWidth = () => window.innerWidth
+export const init = () => assignPlatform({
 
-platform.addBreakpoint = (width: number) => {
-  if (!width || widthDir[width]) return
-  widthDir[width] = true
-  const mediaQuery = window.matchMedia(`(min-width: ${width}px)`)
-  mediaQuery.addListener(onChange)
-}
+  actWidth: () => window.innerWidth,
+
+  addBreakpoint: (width: number) => {
+    const {_widths: {widthDir}} = platform
+    if (!width || widthDir[width]) return
+    widthDir[width] = true
+    const mediaQuery = window.matchMedia(`(min-width: ${width}px)`)
+    mediaQuery.addListener(onChange)
+  },
+
+})
+
 const onChange = () => {
-  if (timer) return
-  timer = window.setTimeout(() => {
-    timer = 0
+  const {_widths} = platform
+  if (_widths.timer) return
+  _widths.timer = window.setTimeout(() => {
+    _widths.timer = 0
     onWidthChanged()
   }, 1)
 }
-
-platform.resetWidths = () => { // for jest test reset
-  widthDir = {}
-  resetCallback()
-  resetProvider()
-}
-
-let timer: number
-let widthDir: { [width: number]: true } = {}
-
-//export let $webFake

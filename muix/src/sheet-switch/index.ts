@@ -1,18 +1,20 @@
 export * from './variants'
 import { TComponents, TSheeter, TVariants } from 'reactxx-typings'
-import { registerVariantHandler, atomizeRulesetLow, wrapPseudoPrefixes, isAtomicArray } from 'reactxx-sheeter'
+import { registerVariantHandler, atomizeRulesetLow, isAtomicArray, resetPlatform, platform } from 'reactxx-sheeter'
 import { Consts } from './variants'
 
-export const sheetSwitch_registerVariantHandler = () => {
-    if (notRegistered = !notRegistered) return
-    registerVariantHandler({
-        name: Consts.name,
-        toAtomicRuleset,
-        testAtomicRuleset
-    })
+export const initSwitch = (force?: boolean) => {
+    if (force) resetPlatform()
+    if (platform._switch) return
+    platform._switch = true
+    registerSwitchHandler()
 }
-let notRegistered = true
 
+const registerSwitchHandler = () => registerVariantHandler({
+    name: Consts.name,
+    toAtomicRuleset,
+    testAtomicRuleset
+})
 
 //*********************************************************
 //  PRIVATE

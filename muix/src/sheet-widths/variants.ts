@@ -10,6 +10,8 @@ export interface PlatformWidth extends TVariants.Platform {
     addBreakpoint: (width: number) => void
 }
 
+export type Callback = () => void
+
 declare module 'reactxx-typings' {
 
     namespace TVariants {
@@ -44,6 +46,12 @@ declare module 'reactxx-typings' {
             resetWidths?: () => void
             actWidth?: () => number
             addBreakpoint?: (width: number) => void
+            _widths?: {
+                callbacks: Callback[]
+                activeWidthsProvider: React.Component
+                timer: number
+                widthDir: { [width: number]: true }
+            }
         }
 
 

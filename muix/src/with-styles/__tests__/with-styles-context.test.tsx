@@ -1,6 +1,6 @@
-/** @jsx createElement */
+/** @jsx platform.createElement */
 import React from 'react'
-import { createElement } from 'reactxx-sheeter'
+import { platform } from 'reactxx-sheeter'
 
 import { initPlatform, mount, ReactAny } from "reactxx-tests";
 

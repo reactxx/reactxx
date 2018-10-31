@@ -1,25 +1,17 @@
 import React from 'react';
-import { deepMerges, globalOptions } from 'reactxx-sheeter';
-import { TAtomize, TComponents, TSheeter, TWithStyles } from 'reactxx-typings';
+import { deepMerges, platform } from 'reactxx-sheeter';
+import { TAtomize, TComponents, TSheeter, TWithStyles, TVariants } from 'reactxx-typings';
 import { defaultThemeName } from './pipes/pipe-theme';
 import { createPipeline } from './utils/create-pipeline'
-
-export const initGlobalOptions = (options: TWithStyles.Globals = null) => {
-
-  Object.assign(globalOptions, options)
-
-  if (!globalOptions.namedThemes[defaultThemeName] && globalOptions.getDefaultTheme)
-    globalOptions.namedThemes[defaultThemeName] = globalOptions.getDefaultTheme()
-}
 
 export const withStylesCreator = <R extends TSheeter.Shape>(
   sheetOrCreator: TSheeter.SheetOrCreator<R>,
   codeComponent: TComponents.ComponentTypeCode<R>,
-  componentState?: TWithStyles.ComponentOptions<R>
+  options?: TWithStyles.ComponentOptions<R>
 ) => (
-  overrideComponentState?: TWithStyles.ComponentOptions<R>
+  overridedOptions?: TWithStyles.ComponentOptions<R>
 ) => withStyles(
-  finishComponentState(sheetOrCreator, codeComponent, componentState, overrideComponentState)
+  finishComponentState(sheetOrCreator, codeComponent, options, overridedOptions)
 ) as TComponents.ComponentClass<R> & TSheeter.getStaticProps<R> & TProvider<R>
 
 export interface TProvider<R extends TSheeter.Shape> { Provider: React.ComponentClass<TComponents.Props<R>> }
@@ -47,7 +39,7 @@ const withStyles = (options: TWithStyles.ComponentOptions) => {
     pipelineState = this.initPipelineState()
 
     pipeline = createPipeline(
-      options.getPipes || globalOptions.getPipes,
+      options.getPipes || platform.getPipes,
       this.pipelineState,
     )
 
@@ -75,12 +67,12 @@ const withStyles = (options: TWithStyles.ComponentOptions) => {
 
 const finishComponentState = (
   sheetOrCreator: TSheeter.SheetOrCreator, CodeComponent: TComponents.ComponentTypeCode,
-  componentState: TWithStyles.ComponentOptions, overrideComponentState: TWithStyles.ComponentOptions
+  options: TWithStyles.ComponentOptions, overridedOptions: TWithStyles.ComponentOptions
 ) => {
-  const mergedOptions: TWithStyles.ComponentOptions = componentState && overrideComponentState ?
-    deepMerges({}, [componentState, overrideComponentState]) : componentState ?
-      componentState : overrideComponentState ?
-        overrideComponentState : {}
+  const mergedOptions: TWithStyles.ComponentOptions = options && overridedOptions ?
+    deepMerges({}, [options, overridedOptions]) : options ?
+      options : overridedOptions ?
+        overridedOptions : {}
   const componentId = componentTypeCounter++
 
   const res: TWithStyles.ComponentOptions = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TAtomize, TComponents, TSheeter, TTheme, TVariants } from './index'
+import { TAtomize, TComponents, TSheeter, TVariants } from './index'
 
 declare namespace TWithStyles {
 
@@ -8,17 +8,6 @@ declare namespace TWithStyles {
     afterPropsCode?: Pipe[]
   }
   export type GetPipes = (options: TWithStyles.ComponentOptions) => GetPipesResult
-
-  // application options
-  export interface Globals {
-    getDefaultTheme?: () => any
-    getPipes?: GetPipes
-    namedThemes?: { [themeName: string]: any }
-    // OBSOLETE
-    finalizePropsCode?: FinishPropsCode
-    // OBSOLETE
-    processDeffereds?: ProcessDeffereds
-  }
 
   export type FinishPropsCode = (instanceState: TWithStyles.PipelineState) => void
   export type ProcessDeffereds = (values: TAtomize.AtomicArray, defferedIdxs: number[], state: TWithStyles.PipelineState) => void

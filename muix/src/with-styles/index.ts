@@ -1,3 +1,17 @@
 ﻿export * from './with-styles'
 
-export {ThemeProviderGeneric, resetTheme, registerTheme, defaultThemeName} from './pipes/pipe-theme'
+export { ThemeProviderGeneric, registerTheme, defaultThemeName } from './pipes/pipe-theme'
+
+import { platform, resetPlatform } from 'reactxx-sheeter'
+import { defaultThemeName } from './pipes/pipe-theme'
+
+export const initWithStyles = (force?: boolean) => {
+    if (force) resetPlatform()
+    if (platform._withStyles) return
+    platform._withStyles = {
+        $cache: {},
+        namedThemes: {}
+    }
+    if (platform.getDefaultTheme)
+        platform._withStyles.namedThemes[defaultThemeName] = platform.getDefaultTheme()
+}

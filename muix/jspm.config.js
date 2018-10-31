@@ -7,38 +7,24 @@ SystemJS.config({
   packages: {
     "": {
       "defaultExtension": "js"
-    },
+    }
   },
   map: {
     "reactxx-typings": "deploy/lib/typings/index",
     "reactxx-fela": "deploy/lib/fela/index",
     "reactxx-sheeter": "deploy/lib/sheeter/index",
-    "reactxx-with-styles": "deploy/lib/with-styles/index", 
-    "reactxx-with-state": "deploy/lib/with-state/index", 
-
-    "reactxx-sheet-switch": "deploy/lib/sheet-switch/index", 
-    "reactxx-sheet-switch/tests/index": "deploy/lib/sheet-switch/tests/index", 
-
-    "reactxx-sheet-widths": "deploy/lib/sheet-widths/index", 
-    "reactxx-sheet-widths/tests/index": "deploy/lib/sheet-widths//tests/index", 
-
-    "reactxx-sheet-transition": "deploy/lib/sheet-transition/index", 
-    "reactxx-sheet-transition/tests/index": "deploy/lib/sheet-transition/tests/index", 
-
+    "reactxx-with-styles": "deploy/lib/with-styles/index",
+    "reactxx-with-state": "deploy/lib/with-state/index",
+    "reactxx-sheet-switch": "deploy/lib/sheet-switch/index",
+    "reactxx-sheet-switch/tests/index": "deploy/lib/sheet-switch/tests/index",
+    "reactxx-sheet-widths": "deploy/lib/sheet-widths/index",
+    "reactxx-sheet-widths/tests/index": "deploy/lib/sheet-widths//tests/index",
+    "reactxx-sheet-transition": "deploy/lib/sheet-transition/index",
+    "reactxx-sheet-transition/tests/index": "deploy/lib/sheet-transition/tests/index",
     "reactxx-core/tests/index": "deploy/lib/core/tests/index",
     "reactxx-core": "deploy/lib/core/index",
-
     "reactxx-primitives": "deploy/lib/primitives/index",
-    "reactxx-primitives/tests/index": "deploy/lib/primitives/tests/index",
-
-    // "reactxx-sheeter": "deploy/lib/sheeter/index",
-    // "reactxx-basic": "deploy/lib/basic/index",
-    // "reactxx-animation": "deploy/lib/animation/index",
-    // "reactxx-mediaq": "deploy/lib/mediaq/index",
-    // "reactxx": "deploy/lib/reactxx/index",
-    // "reactxx-mui-web": "deploy/lib/mui-web",
-    // "reactxx-icons": "deploy/lib/icons",
-    // "reactxx-muix": "deploy/lib/muix"
+    "reactxx-primitives/tests/index": "deploy/lib/primitives/tests/index"
   }
 });
 
@@ -101,8 +87,8 @@ SystemJS.config({
     "popper.js": "npm:popper.js@1.14.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",
     "prop-types": "npm:prop-types@15.6.2",
-    "react": "npm:react@16.4.1",
-    "react-dom": "npm:react-dom@16.4.1",
+    "react": "npm:react@16.6.0",
+    "react-dom": "npm:react-dom@16.6.0",
     "react-event-listener": "npm:react-event-listener@0.6.2",
     "react-jss": "npm:react-jss@8.6.1",
     "react-popper": "npm:react-popper@0.10.4",
@@ -114,6 +100,7 @@ SystemJS.config({
     "remark-generic-extensions": "npm:remark-generic-extensions@1.3.0",
     "remark-react": "npm:remark-react@4.0.3",
     "scroll": "npm:scroll@2.0.3",
+    "simpledi": "npm:simpledi@1.2.0",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.2",
     "tslib": "npm:tslib@1.9.3",
@@ -182,22 +169,6 @@ SystemJS.config({
         "jss-compose": "npm:jss-compose@5.0.0"
       }
     },
-    "npm:react@16.4.1": {
-      "map": {
-        "prop-types": "npm:prop-types@15.6.2",
-        "loose-envify": "npm:loose-envify@1.4.0",
-        "fbjs": "npm:fbjs@0.8.17",
-        "object-assign": "npm:object-assign@4.1.1"
-      }
-    },
-    "npm:react-dom@16.4.1": {
-      "map": {
-        "prop-types": "npm:prop-types@15.6.2",
-        "loose-envify": "npm:loose-envify@1.4.0",
-        "fbjs": "npm:fbjs@0.8.17",
-        "object-assign": "npm:object-assign@4.1.1"
-      }
-    },
     "npm:warning@3.0.0": {
       "map": {
         "loose-envify": "npm:loose-envify@1.4.0"
@@ -252,7 +223,7 @@ SystemJS.config({
     },
     "npm:jspm-nodelibs-buffer@0.2.3": {
       "map": {
-        "buffer": "npm:buffer@5.2.0"
+        "buffer": "npm:buffer@5.2.1"
       }
     },
     "npm:jspm-nodelibs-crypto@0.2.1": {
@@ -698,12 +669,6 @@ SystemJS.config({
         "csstype": "npm:csstype@2.5.6"
       }
     },
-    "npm:buffer@5.2.0": {
-      "map": {
-        "base64-js": "npm:base64-js@1.3.0",
-        "ieee754": "npm:ieee754@1.1.12"
-      }
-    },
     "npm:react-swipeable-views@0.12.16": {
       "map": {
         "dom-helpers": "npm:dom-helpers@3.3.1",
@@ -997,6 +962,39 @@ SystemJS.config({
         "css-in-js-utils": "npm:css-in-js-utils@2.0.1",
         "string-hash": "npm:string-hash@1.1.3",
         "fast-loops": "npm:fast-loops@1.0.1"
+      }
+    },
+    "npm:react@16.6.0": {
+      "map": {
+        "loose-envify": "npm:loose-envify@1.4.0",
+        "object-assign": "npm:object-assign@4.1.1",
+        "scheduler": "npm:scheduler@0.10.0",
+        "prop-types": "npm:prop-types@15.6.2"
+      }
+    },
+    "npm:scheduler@0.10.0": {
+      "map": {
+        "loose-envify": "npm:loose-envify@1.4.0",
+        "object-assign": "npm:object-assign@4.1.1"
+      }
+    },
+    "npm:buffer@5.2.1": {
+      "map": {
+        "base64-js": "npm:base64-js@1.3.0",
+        "ieee754": "npm:ieee754@1.1.12"
+      }
+    },
+    "npm:react-dom@16.6.0": {
+      "map": {
+        "loose-envify": "npm:loose-envify@1.4.0",
+        "object-assign": "npm:object-assign@4.1.1",
+        "prop-types": "npm:prop-types@15.6.2",
+        "scheduler": "npm:scheduler@0.10.0"
+      }
+    },
+    "npm:simpledi@1.2.0": {
+      "map": {
+        "function-bind": "npm:function-bind@1.1.1"
       }
     }
   }
