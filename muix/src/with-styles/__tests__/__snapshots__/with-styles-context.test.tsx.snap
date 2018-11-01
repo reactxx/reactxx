@@ -1,53 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`WITH STYLES CONTEXT NATIVE, with provider 1`] = `
-Array [
-  <ReactAny>
+<div>
+  <div>
     Hallo
-  </ReactAny>,
-  <ReactAny>
-    <ReactAny
+  </div>
+  <div>
+    <div
       id="1"
     />
-  </ReactAny>,
-]
+  </div>
+</div>
 `;
 
 exports[`WITH STYLES CONTEXT NATIVE, without provider 1`] = `
-Array [
-  <ReactAny>
+<div>
+  <div>
     Hallo
-  </ReactAny>,
-  <ReactAny>
-    <ReactAny
+  </div>
+  <div>
+    <div
       id="123"
     />
-  </ReactAny>,
-]
+  </div>
+</div>
 `;
 
 exports[`WITH STYLES CONTEXT WEB, with provider 1`] = `
-Array [
-  <ReactAny>
+<div>
+  <div>
     Hallo
-  </ReactAny>,
-  <ReactAny>
-    <ReactAny
+  </div>
+  <div>
+    <div
       id="1"
     />
-  </ReactAny>,
-]
+  </div>
+</div>
 `;
 
 exports[`WITH STYLES CONTEXT WEB, without provider 1`] = `
-Array [
-  <ReactAny>
+<div>
+  <div>
     Hallo
-  </ReactAny>,
-  <ReactAny>
-    <ReactAny
+  </div>
+  <div>
+    <div
       id="123"
     />
-  </ReactAny>,
-]
+  </div>
+</div>
 `;

@@ -28,8 +28,8 @@
                 //"--testPathPattern=widths-sheet",
                 //"--testPathPattern=to-classname-using-sheet",
                 //"--testPathPattern=switch-sheet-ex",
-                "--testPathPattern=widths-switch-sheet.test",
-                "-u"
+                "--testPathPattern=with-styles-theme.test",
+                //"-u"
             ],
             //"preLaunchTask": "build",
             // "internalConsoleOptions": "openOnSessionStart",

@@ -65,7 +65,7 @@ const initFela$Web = (platform?: TVariants.Platform) => {
 
 const dumpAtomized = (classNames: TAtomize.AtomicWebsLow) => {
   if (!classNames || classNames.length === 0) return []
-  return window.__TRACE__ ? classNames.map(c => dump(c)) : ['DUMP is available in window.__DEV__ only']
+  return window.__TRACE__ ? (classNames.length>0 ? '\n' : '') + classNames.map(c => dump(c)).join('\n') : 'DUMP is available in window.__DEV__ only'
 }
 
 // renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html

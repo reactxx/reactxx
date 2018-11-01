@@ -1,5 +1,6 @@
 import React from 'react'
 import { createSerializer, OutputMapper } from 'enzyme-to-json'
+import { RenderResult } from 'react-testing-library'
 
 import { TSheeter, TVariants, TComponents, TWithStyles } from 'reactxx-typings'
 import * as WithStyle from 'reactxx-with-styles'
@@ -30,8 +31,7 @@ jest.mock('@expo/vector-icons', () => ({
     MaterialCommunityIcons: ({ children }) => null,
 }))
 
-
-export const ReactAny: React.SFC<any> = ({ children }) => children || null
+export const ReactAny: React.SFC<any> = props => <div {...props}/> //({ children }) => children || null
 ReactAny.displayName = 'ReactAny'
 
 export const setActWidth = (width: number) => {
@@ -61,7 +61,7 @@ export const traceComponentEx = (
     comp: TComponents.SFCCode<Shape>,
     node: (Comp: TComponents.ComponentClass<Shape>) => React.ReactElement<{}>,
     componentOptions?: TWithStyles.ComponentOptions<Shape>,
-    finished?: (wr: ReactWrapper, Comp: React.ComponentType) => void,
+    finished?: (wr: HTMLElement, Comp: React.ComponentType) => void,
 ) => {
     initPlatform(isWeb)
     const { traceLevel = 1, actWidth } = traceOptions

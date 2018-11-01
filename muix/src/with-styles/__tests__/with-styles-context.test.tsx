@@ -13,6 +13,7 @@ describe("WITH STYLES CONTEXT", () => {
 
 const ctx = React.createContext(123)
 const doTest = (isWeb: boolean, withProvider: boolean) => {
+  initPlatform(isWeb)
   const inner = <React.Fragment>
     <ReactAny>Hallo</ReactAny>
     <ReactAny>

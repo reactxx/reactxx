@@ -22,16 +22,16 @@ export const init = () => assignPlatform({
     },
     dumpAtomized: array => {
         if (!array || Array.isArray(array) || !(typeof array === 'object')) return array
-        const res = {}
+        const res = []
         for (const p in array) {
             const val = array[p] as TAtomize.__dev_AtomicNative
-            res[p] = window.__TRACE__ ? `${val.value || ''} /*${val.tracePath || ''}*/` : val
+            res.push(`${p}: ` + (window.__TRACE__ ? `${val.value || ''} /*${val.tracePath || ''}*/` : val))
         }
-        return res
+        return (res.length > 0 ? '\n' : '') + res.join('\n')
     },
     applyLastwinsStrategy,
     finalizeClassName,
     createElement
 })
 
-const toJSON = () => `${this.propId}: ${this.value.value} /*${this.value.tracePath}*/`
+function toJSON() { return `${this.propId}: ${this.value.value} /*${this.value.tracePath}*/` }
