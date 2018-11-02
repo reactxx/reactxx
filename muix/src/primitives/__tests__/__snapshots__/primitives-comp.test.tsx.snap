@@ -1,0 +1,241 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PRIMITIVES SIMPLE NATIVE 1`] = `
+<div>
+  <div
+    data="TEXT"
+    trace=""
+  >
+    Text
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE NATIVE 2`] = `
+<div>
+  <div
+    data="TEXT"
+    trace="
+flexShrink: 1 /*ReactXXText.sheet.root/$switch.singleLine*/"
+  >
+    Text singleLine
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE NATIVE 3`] = `
+<div>
+  <div
+    data="ANIMATEDTEXT"
+    trace=""
+  >
+    AnimatedText
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE NATIVE 4`] = `
+<div>
+  <div
+    data="VIEW"
+    trace=""
+  >
+    View
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE NATIVE 5`] = `
+<div>
+  <div
+    data="ANIMATEDVIEW"
+    trace=""
+  >
+    AnimatedView
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE NATIVE 6`] = `
+<div>
+  <div
+    data="MATERIALCOMMUNITYICONS"
+    name="Icon"
+    trace="
+flexShrink: 0 /*ReactXXIcon.sheet.root*/"
+  />
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE NATIVE 7`] = `
+<div>
+  <div
+    data="ANIMATED"
+    name="AnimatedIcon"
+    trace="
+flexShrink: 0 /*ReactXXAnimatedIcon.sheet.root*/"
+  />
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE NATIVE 8`] = `
+<div>
+  <div
+    contentcontainerstyle=""
+    data="SCROLLVIEW"
+    trace="
+flexBasis: 0 /*ReactXXScrollView.sheet.root/$native*/"
+  >
+    ScrollView
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 1`] = `
+<div>
+  <div
+    class="i h g reactxx-text"
+    trace="
+.i .reactxx-text { display:inline /*ReactXXText.sheet.root/$web*/ }
+.h { word-wrap:break-word /*ReactXXText.sheet.root/$web*/ }
+.g { white-space:pre-wrap /*ReactXXText.sheet.root/$web*/ }"
+  >
+    Text
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 2`] = `
+<div>
+  <div
+    class="i h g e d c b reactxx-text"
+    trace="
+.i .reactxx-text { display:inline /*ReactXXText.sheet.root/$web*/ }
+.h { word-wrap:break-word /*ReactXXText.sheet.root/$web*/ }
+.g { white-space:pre-wrap /*ReactXXText.sheet.root/$web*/ }
+.e { text-overflow:ellipsis /*ReactXXText.sheet.root/$switch.singleLine/$web*/ }
+.d { overflow:hidden /*ReactXXText.sheet.root/$switch.singleLine/$web*/ }
+.c { max-width:100% /*ReactXXText.sheet.root/$switch.singleLine/$web*/ }
+.b { flex-shrink:1 /*ReactXXText.sheet.root/$switch.singleLine*/ }"
+  >
+    Text singleLine
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 3`] = `
+<div>
+  <div
+    class="i h g reactxx-text"
+    trace="
+.i .reactxx-text { display:inline /*ReactXXAnimatedText.sheet.root/$web*/ }
+.h { word-wrap:break-word /*ReactXXAnimatedText.sheet.root/$web*/ }
+.g { white-space:pre-wrap /*ReactXXAnimatedText.sheet.root/$web*/ }"
+  >
+    AnimatedText
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 4`] = `
+<div>
+  <div
+    class="d o n m l k j"
+    trace="
+.d { overflow:hidden /*ReactXXView.sheet.root/$web*/ }
+.o { position:relative /*ReactXXView.sheet.root/$web*/ }
+.n { flex-shrink:0 /*ReactXXView.sheet.root/$web*/ }
+.m { flex-basis:auto /*ReactXXView.sheet.root/$web*/ }
+.l { align-items:stretch;-webkit-box-align:stretch /*ReactXXView.sheet.root/$web*/ }
+.k { flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal /*ReactXXView.sheet.root/$web*/ }
+.j { display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex /*ReactXXView.sheet.root/$web*/ }"
+  >
+    View
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 5`] = `
+<div>
+  <div
+    class="d o n m l k j"
+    trace="
+.d { overflow:hidden /*ReactXXAnimatedView.sheet.root/$web*/ }
+.o { position:relative /*ReactXXAnimatedView.sheet.root/$web*/ }
+.n { flex-shrink:0 /*ReactXXAnimatedView.sheet.root/$web*/ }
+.m { flex-basis:auto /*ReactXXAnimatedView.sheet.root/$web*/ }
+.l { align-items:stretch;-webkit-box-align:stretch /*ReactXXAnimatedView.sheet.root/$web*/ }
+.k { flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal /*ReactXXAnimatedView.sheet.root/$web*/ }
+.j { display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex /*ReactXXAnimatedView.sheet.root/$web*/ }"
+  >
+    AnimatedView
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 6`] = `
+<div>
+  <svg
+    class="q p n"
+    focusable="false"
+    trace="
+.q { font-size:inherited /*ReactXXIcon.sheet.root/$web*/ }
+.p { fill:currentColor /*ReactXXIcon.sheet.root/$web*/ }
+.n { flex-shrink:0 /*ReactXXIcon.sheet.root*/ }"
+    viewBox="0 0 24 24"
+  >
+    Icon
+  </svg>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 7`] = `
+<div>
+  <svg
+    class="q p n"
+    focusable="false"
+    trace="
+.q { font-size:inherited /*ReactXXAnimatedIcon.sheet.root/$web*/ }
+.p { fill:currentColor /*ReactXXAnimatedIcon.sheet.root/$web*/ }
+.n { flex-shrink:0 /*ReactXXAnimatedIcon.sheet.root*/ }"
+    viewBox="0 0 24 24"
+  >
+    AnimatedIcon
+  </svg>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE WEB 8`] = `
+<div>
+  <div
+    class="z y x w v u d o n l k j"
+    trace="
+.z { transform:translateZ(0) /*ReactXXScrollView.sheet.root/$web[1]*/ }
+.y { -webkit-overflow-scrolling:touch /*ReactXXScrollView.sheet.root/$web[1]*/ }
+.x { overflow-y:auto /*ReactXXScrollView.sheet.root/$web[1]*/ }
+.w { overflow-x:hidden /*ReactXXScrollView.sheet.root/$web[1]*/ }
+.v { flex-grow:1;-webkit-box-flex:1 /*ReactXXScrollView.sheet.root/$web[1]*/ }
+.u { flex-basis:0 /*ReactXXScrollView.sheet.root/$web[1]*/ }
+.d { overflow:hidden /*ReactXXScrollView.sheet.root/$web[0]*/ }
+.o { position:relative /*ReactXXScrollView.sheet.root/$web[0]*/ }
+.n { flex-shrink:0 /*ReactXXScrollView.sheet.root/$web[0]*/ }
+.l { align-items:stretch;-webkit-box-align:stretch /*ReactXXScrollView.sheet.root/$web[0]*/ }
+.k { flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal /*ReactXXScrollView.sheet.root/$web[0]*/ }
+.j { display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex /*ReactXXScrollView.sheet.root/$web[0]*/ }"
+  >
+    <div
+      class="d o n m l k j"
+      trace="
+.d { overflow:hidden /*ReactXXScrollView.sheet.container/$web*/ }
+.o { position:relative /*ReactXXScrollView.sheet.container/$web*/ }
+.n { flex-shrink:0 /*ReactXXScrollView.sheet.container/$web*/ }
+.m { flex-basis:auto /*ReactXXScrollView.sheet.container/$web*/ }
+.l { align-items:stretch;-webkit-box-align:stretch /*ReactXXScrollView.sheet.container/$web*/ }
+.k { flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal /*ReactXXScrollView.sheet.container/$web*/ }
+.j { display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex /*ReactXXScrollView.sheet.container/$web*/ }"
+    >
+      ScrollView
+    </div>
+  </div>
+</div>
+`;

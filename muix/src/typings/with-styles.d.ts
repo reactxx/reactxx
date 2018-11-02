@@ -3,6 +3,10 @@ import { TAtomize, TComponents, TSheeter, TVariants } from './index'
 
 declare namespace TWithStyles {
 
+  export type WithStylesCreatorResult<R extends TSheeter.Shape = TSheeter.Shape> = (
+    overridedOptions?: TWithStyles.ComponentOptions<R>
+  ) => TComponents.ComponentClass<R>
+  
   export interface GetPipesResult {
     beforePropsCode?: Pipe[]
     afterPropsCode?: Pipe[]

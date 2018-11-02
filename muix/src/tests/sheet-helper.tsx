@@ -11,35 +11,36 @@ import {
 import { initPlatform, mount } from './index'
 //import { platform } from 'reactxx-sheet-widths'
 import { Shape, theme } from './shape'
-import { ReactWrapper } from 'enzyme';
+//import { ReactWrapper } from 'enzyme';
+
+const doMock = (data:string) => {
+    const res: React.SFC<any> = props => <div data={data.toUpperCase()} {...props} children={(props && props.children) || null} />
+    res.displayName = data
+    return res
+}
 
 jest.mock('react-native', () => ({
-    Text: ({ children }) => children,
-    View: ({ children }) => children,
-    ScrollView: ({ children }) => children,
-    Image: ({ children }) => children,
+    Text: doMock('Text'),
+    View: doMock('View'),
+    ScrollView: doMock('ScrollView'),
+    Image: doMock('Image'),
     Animated: {
-        Text: ({ children }) => children,
-        View: ({ children }) => children,
-        ScrollView: ({ children }) => children,
-        Image: ({ children }) => children,
-        createAnimatedComponent: comp => ({ children }) => children
+        Text: doMock('AnimatedText'),
+        View: doMock('AnimatedView'),
+        Image: doMock('AnimatedImage'),
+        createAnimatedComponent: comp => doMock('Animated')
     },
 }))
 
 jest.mock('@expo/vector-icons', () => ({
-    MaterialCommunityIcons: ({ children }) => null,
+    MaterialCommunityIcons: doMock('MaterialCommunityIcons')
 }))
 
-export const ReactAny: React.SFC<any> = props => {
-    return <div {...props} /> //({ children }) => children || null
-}
-ReactAny.displayName = 'ReactAny'
+export const ReactAny: React.SFC<any> = doMock('ReactAny')
 
 export const setActWidth = (width: number) => {
     actWidth = width;
     platform.actWidth = getActWidth
-    //onWidthChanged()
 }
 let actWidth = 1024
 const getActWidth = () => actWidth

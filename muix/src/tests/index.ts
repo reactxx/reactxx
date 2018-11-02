@@ -23,6 +23,9 @@ import { initSheeter$Native } from 'reactxx-sheeter-native'
 import { initWidths$Web } from 'reactxx-sheet-widths'
 import { initWidths$Native } from 'reactxx-sheet-widths-native'
 
+import { initPrimitives$Web } from 'reactxx-primitives'
+import { initPrimitives$Native } from 'reactxx-primitives-native'
+
 import { initSwitch } from 'reactxx-sheet-switch'
 import { initWithStyles } from 'reactxx-with-styles'
 
@@ -41,9 +44,11 @@ export const initPlatform = (isWeb: boolean, __DEV__: boolean | 1 | 2 | 3 | 4 | 
     if (isWeb) {
         initSheeter$Web()
         initWidths$Web()
+        initPrimitives$Web()
     } else {
         initSheeter$Native()
         initWidths$Native()
+        initPrimitives$Native()
     }
     initSwitch()
     initWithStyles()

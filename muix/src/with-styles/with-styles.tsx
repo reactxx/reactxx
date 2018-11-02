@@ -1,7 +1,7 @@
 import React from 'react';
 import { deepMerges, platform } from 'reactxx-sheeter';
 import { TAtomize, TComponents, TSheeter, TWithStyles, TVariants } from 'reactxx-typings';
-import { defaultThemeName } from './pipes/pipe-theme';
+
 import { createPipeline } from './utils/create-pipeline'
 
 export const withStylesCreator = <R extends TSheeter.Shape>(
@@ -12,9 +12,7 @@ export const withStylesCreator = <R extends TSheeter.Shape>(
   overridedOptions?: TWithStyles.ComponentOptions<R>
 ) => withStyles(
   finishComponentState(sheetOrCreator, codeComponent, options, overridedOptions)
-) as TComponents.ComponentClass<R> & TSheeter.getStaticProps<R> & TProvider<R>
-
-export interface TProvider<R extends TSheeter.Shape> { Provider: React.ComponentClass<TComponents.Props<R>> }
+) as TComponents.ComponentClass<R>
 
 //*********************************************************
 //  PRIVATE
@@ -55,7 +53,7 @@ const withStyles = (options: TWithStyles.ComponentOptions) => {
     public static displayName = options.displayName
   }
 
-  const styled: TComponents.ComponentClass = Styled
+  const styled = Styled as unknown as TComponents.ComponentClass
   styled[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.reactxxComponent
   //if (window.process)
   if (process.env.NODE_ENV === 'development') {

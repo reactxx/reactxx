@@ -2,8 +2,11 @@
 
 exports[`WITH STYLES THEME NATIVE 1`] = `
 <div>
-  <div>
+  <div
+    data="REACTANY"
+  >
     <div
+      data="REACTANY"
       style="font-weight: bold; color: black;"
       trace="
 fontWeight: bold /*TestComponent.sheet.label[1]*/
@@ -13,6 +16,7 @@ color: black /*TestComponent.sheet.label[0]*/"
       Default Theme
     </div>
     <div
+      data="REACTANY"
       style="font-weight: bold; background-color: blue; color: black;"
       trace="
 fontWeight: bold /*TestComponent.sheet.label[1]*/
@@ -27,9 +31,12 @@ color: black /*TestComponent.sheet.label[0]*/"
 
 exports[`WITH STYLES THEME WEB 1`] = `
 <div>
-  <div>
+  <div
+    data="REACTANY"
+  >
     <div
       class="c b a"
+      data="REACTANY"
       trace="
 .c { font-weight:bold /*TestComponent.sheet.label[1]*/ }
 .b { background-color:lightblue /*TestComponent.sheet.label[0]*/ }
@@ -39,6 +46,7 @@ exports[`WITH STYLES THEME WEB 1`] = `
     </div>
     <div
       class="c d a"
+      data="REACTANY"
       trace="
 .c { font-weight:bold /*TestComponent.sheet.label[1]*/ }
 .d { background-color:blue /*TestComponent.sheet.label[0]*/ }

@@ -159,7 +159,7 @@ declare namespace TSheeter {
   export type getEvents<R extends Shape = Shape> = keyof R['events']
   export type getTheme<R extends Shape = Shape> = keyof R['theme'] extends never ? FakeInterface : R['theme']
   export type getInnerState<R extends Shape = Shape> = keyof R['innerState'] extends never ? FakeInterface : R['innerState']
-  export type getStaticProps<R extends Shape> = keyof R['staticProps'] extends never ? FakeInterface : R['staticProps']
+  export type getStaticProps<R extends Shape = Shape> = keyof R['staticProps'] extends never ? FakeInterface : R['staticProps']
 
   export type RulesetNamesAll<R extends Shape> = keyof getCommon<R> | keyof getNative<R> | getWeb<R>
 

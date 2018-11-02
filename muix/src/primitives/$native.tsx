@@ -5,7 +5,7 @@ import { View as ViewRN, Text as TextRN, ScrollView as ScrollViewRN, Animated, T
 import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
-import { platform } from 'reactxx-sheeter'
+import { assignPlatform, platform } from 'reactxx-sheeter'
 import { TComponents } from 'reactxx-typings'
 import { withStylesCreator } from 'reactxx-with-styles'
 
@@ -13,7 +13,6 @@ import { hasPlatformEvents, textSheet, viewSheet, iconSheet, scrollViewSheet } f
 import { TPrimitives, CompNames } from './d-index'
 
 // for "declaration": true
-import { TProvider } from 'reactxx-with-styles'
 import { TWithStyles, TSheeter } from 'reactxx-typings'
 //import { styleX } from 'reactxx-core/tests/flow/drawer/props';
 
@@ -23,7 +22,7 @@ const anyView: (isAnim: boolean) => TComponents.SFCCode<TPrimitives.ViewShape> =
     const { styleX, classNameX, toClassNames, classes, ...rest } = props
     let presses
     const rootStyle = toClassNames([classes.root, classNameX, styleX])
-    const res = <ActView style={rootStyle} {...rest} /> as any
+    const res = <ActView classNameX={rootStyle} styleX={styleX} {...rest} /> as any
     return presses ? <TouchableWithoutFeedback {...presses}>{res}</TouchableWithoutFeedback> : res
   }
   view.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { horizontal: props.horizontal }
@@ -35,14 +34,14 @@ const anyText: (isAnim: boolean) => TComponents.SFCCode<TPrimitives.TextShape> =
     const ActText = isAnim ? Animated.Text : TextRN
     const { classNameX, classes, toClassNames, singleLine, styleX, url/*, onClick*/, ...rest } = props
     let onPress
-    const rootStyle = toClassNames([classes.root, classNameX, styleX])
+    const rootStyle = toClassNames([classes.root, classNameX])
     //Link to URL
     const doPress = !url ? onPress : () => Linking.canOpenURL(url).then(supported => {
       warning(supported, `Can't handle url: ${url}`)
       return Linking.openURL(url);
     }).catch(err => warning(false, `An error occurred: ${err}, ${url}`))
 
-    return <ActText style={rootStyle} {...rest} onPress={doPress} />
+    return <ActText classNameX={rootStyle} styleX={styleX} {...rest} onPress={doPress || undefined} />
   }
   text.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { pressable: hasPlatformEvents(props), singleLine: props.singleLine }
   return text
@@ -54,7 +53,7 @@ const anyScrollView: (isAnim: boolean) => TComponents.SFCCode<TPrimitives.Scroll
     const { styleX, classNameX, classes, toClassNames, horizontal, ...rest } = props
     const rootStyle = toClassNames([classes.root, classNameX, styleX])
     const containerStyle = toClassNames([classes.container])
-    return <ActScrollView style={rootStyle} contentContainerStyle={containerStyle} {...rest} />
+    return <ActScrollView classNameX={rootStyle} styleX={styleX} contentContainerStyle={containerStyle} {...rest} />
   }
   scrollView.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { horizontal: props.horizontal }
   return scrollView
@@ -72,63 +71,97 @@ const anyIcon: (isAnim: boolean) => TComponents.SFCCode<TPrimitives.IconShape> =
       return Linking.openURL(url);
     }).catch(err => warning(false, `An error occurred: ${err}, ${url}`))
 
-    return <ActIcon name={(data || children as string) as MaterialCommunityIconsProps['name']} style={rootStyle} {...rest} onPress={doPress} />
+    return <ActIcon name={(data || children as string) as MaterialCommunityIconsProps['name']} 
+    classNameX={rootStyle} styleX={styleX}
+     {...rest} onPress={doPress || undefined} />
   }
   icon.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { pressable: hasPlatformEvents(props) }
   return icon
 }
 const AnimatedIconLow = Animated.createAnimatedComponent(MaterialCommunityIcons)
 
-export const view = anyView(false)
-export const animatedView = anyView(true)
-export const text = anyText(false)
-export const animatedText = anyText(true)
-export const scrollView = anyScrollView(false)
-export const animatedScrollView = anyScrollView(true)
-export const icon = anyIcon(false)
-export const animatedIcon = anyIcon(true)
+const view = anyView(false)
+const animatedView = anyView(true)
+const text = anyText(false)
+const animatedText = anyText(true)
+const scrollView = anyScrollView(false)
+const animatedScrollView = anyScrollView(true)
+const icon = anyIcon(false)
+const animatedIcon = anyIcon(true)
 
-export const textCreator = withStylesCreator<TPrimitives.TextShape>(textSheet, text, {
+const textCreator = withStylesCreator<TPrimitives.TextShape>(textSheet, text, {
   displayName: CompNames.Text,
 })
-export const Text = textCreator()
+const Text = textCreator()
 
-export const viewCreator = withStylesCreator<TPrimitives.ViewShape>(viewSheet, view, {
+const viewCreator = withStylesCreator<TPrimitives.ViewShape>(viewSheet, view, {
   displayName: CompNames.View,
 })
-export const View = viewCreator()
+const View = viewCreator()
 
-export const iconCreator = withStylesCreator<TPrimitives.IconShape>(iconSheet, icon, {
+const iconCreator = withStylesCreator<TPrimitives.IconShape>(iconSheet, icon, {
   displayName: CompNames.Icon,
 })
-export const Icon = iconCreator()
+const Icon = iconCreator()
 
-export const scrollViewCreator = withStylesCreator<TPrimitives.ScrollViewShape>(scrollViewSheet, scrollView, {
+const scrollViewCreator = withStylesCreator<TPrimitives.ScrollViewShape>(scrollViewSheet, scrollView, {
   displayName: CompNames.ScrollView,
 })
-export const ScrollView = scrollViewCreator()
+const ScrollView = scrollViewCreator()
 
-export const animatedTextCreator = withStylesCreator<TPrimitives.TextShape>(textSheet, text, {
+const animatedTextCreator = withStylesCreator<TPrimitives.TextShape>(textSheet, animatedText, {
   displayName: CompNames.AnimatedText,
 })
-export const AnimatedText = animatedTextCreator()
+const AnimatedText = animatedTextCreator()
 
-export const animatedViewCreator = withStylesCreator<TPrimitives.ViewShape>(viewSheet, view, {
+const animatedViewCreator = withStylesCreator<TPrimitives.ViewShape>(viewSheet, animatedView, {
   displayName: CompNames.AnimatedView,
 })
-export const AnimatedView = animatedViewCreator()
+const AnimatedView = animatedViewCreator()
 
-export const animatedIconCreator = withStylesCreator<TPrimitives.IconShape>(iconSheet, icon, {
+const animatedIconCreator = withStylesCreator<TPrimitives.IconShape>(iconSheet, animatedIcon, {
   displayName: CompNames.AnimatedIcon,
 })
-export const AnimatedIcon = animatedIconCreator()
+const AnimatedIcon = animatedIconCreator()
 
+export {
+  view,
+  text,
+  icon,
+  scrollView,
+  viewCreator,
+  textCreator,
+  iconCreator,
+  View,
+  Text,
+  Icon,
+  ScrollView,
+  scrollViewCreator,
+  animatedViewCreator,
+  animatedTextCreator,
+  animatedIconCreator,
+  AnimatedView,
+  AnimatedText,
+  AnimatedIcon,
+}
 
-// export const Text: Types.ComponentTypeX<TComps.TextShape> = withStylesCreator(textSheet, text as Types.CodeComponentType<TComps.TextShape>, { name: CompNames.Text })()
-// export const AnimatedText: Types.ComponentTypeX<TComps.TextShape> = withStylesCreator(textSheet, animatedText as Types.CodeComponentType<TComps.TextShape>, { name: CompNames.AnimatedText })()
-// export const View: Types.ComponentTypeX<TComps.ViewShape> = withStylesCreator(viewSheet, view as Types.CodeComponentType<TComps.ViewShape>, { name: CompNames.View })()
-// export const AnimatedView: Types.ComponentTypeX<TComps.ViewShape> = withStylesCreator(viewSheet, animatedView as Types.CodeComponentType<TComps.ViewShape>, { name: CompNames.AnimatedView })()
-// export const Icon: Types.ComponentTypeX<TComps.IconShape> = withStylesCreator(iconSheet, icon as Types.CodeComponentType<TComps.IconShape>, { name: CompNames.Icon })()
-// export const AnimatedIcon: Types.ComponentTypeX<TComps.IconShape> = withStylesCreator(iconSheet, animatedIcon as Types.CodeComponentType<TComps.IconShape>, { name: CompNames.AnimatedIcon })()
-// export const ScrollView: Types.ComponentTypeX<TComps.ScrollViewShape> = withStylesCreator(scrollViewSheet, scrollView as Types.CodeComponentType<TComps.ScrollViewShape>, { name: CompNames.ScrollView })()
-// export const AnimatedScrollView: Types.ComponentTypeX<TComps.ScrollViewShape> = withStylesCreator(scrollViewSheet, animatedScrollView as Types.CodeComponentType<TComps.ScrollViewShape>, { name: CompNames.AnimatedScrollView })()
+export const init = () => assignPlatform({
+  view,
+  text,
+  icon,
+  scrollView,
+  viewCreator,
+  textCreator,
+  iconCreator,
+  View,
+  Text,
+  Icon,
+  ScrollView,
+  scrollViewCreator,
+  animatedViewCreator,
+  animatedTextCreator,
+  animatedIconCreator,
+  AnimatedView,
+  AnimatedText,
+  AnimatedIcon,
+})

@@ -2,8 +2,11 @@
 
 exports[`WITH STYLES THEME NATIVE 1`] = `
 <div>
-  <div>
+  <div
+    data="REACTANY"
+  >
     <div
+      data="REACTANY"
       trace="
 borderBottomColor: lightblue /*styleX*/
 borderTopColor: lightblue /*TestComponent.option.styleX*/
@@ -14,6 +17,7 @@ color: lightblue /*classes.label*/"
       Default Theme
     </div>
     <div
+      data="REACTANY"
       trace="
 borderBottomColor: lightcyan /*styleX*/
 borderTopColor: lightcyan /*TestComponent.option.styleX*/
@@ -29,9 +33,12 @@ color: lightcyan /*classes.label*/"
 
 exports[`WITH STYLES THEME WEB 1`] = `
 <div>
-  <div>
+  <div
+    data="REACTANY"
+  >
     <div
       class="b d e"
+      data="REACTANY"
       trace="
 .b { background-color:lightblue /*classNameX*/ }
 .d { border-right-color:lightblue /*TestComponent.option.classNameX*/ }
@@ -41,6 +48,7 @@ exports[`WITH STYLES THEME WEB 1`] = `
     </div>
     <div
       class="f h i"
+      data="REACTANY"
       trace="
 .f { background-color:lightcyan /*classNameX*/ }
 .h { border-right-color:lightcyan /*TestComponent.option.classNameX*/ }

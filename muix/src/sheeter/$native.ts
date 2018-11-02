@@ -25,7 +25,8 @@ export const init = () => assignPlatform({
         const res = []
         for (const p in array) {
             const val = array[p] as TAtomize.__dev_AtomicNative
-            res.push(`${p}: ` + (window.__TRACE__ ? `${val.value || ''} /*${val.tracePath || ''}*/` : val))
+            if (val===undefined) continue
+            res.push(`${p}: ` + (window.__TRACE__ ? `${val.value} /*${val.tracePath || ''}*/` : val))
         }
         return (res.length > 0 ? '\n' : '') + res.join('\n')
     },

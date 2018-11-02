@@ -2,11 +2,16 @@
 
 exports[`WITH STYLES CONTEXT NATIVE, with provider 1`] = `
 <div>
-  <div>
+  <div
+    data="REACTANY"
+  >
     Hallo
   </div>
-  <div>
+  <div
+    data="REACTANY"
+  >
     <div
+      data="REACTANY"
       id="1"
     />
   </div>
@@ -15,11 +20,16 @@ exports[`WITH STYLES CONTEXT NATIVE, with provider 1`] = `
 
 exports[`WITH STYLES CONTEXT NATIVE, without provider 1`] = `
 <div>
-  <div>
+  <div
+    data="REACTANY"
+  >
     Hallo
   </div>
-  <div>
+  <div
+    data="REACTANY"
+  >
     <div
+      data="REACTANY"
       id="123"
     />
   </div>
@@ -28,11 +38,16 @@ exports[`WITH STYLES CONTEXT NATIVE, without provider 1`] = `
 
 exports[`WITH STYLES CONTEXT WEB, with provider 1`] = `
 <div>
-  <div>
+  <div
+    data="REACTANY"
+  >
     Hallo
   </div>
-  <div>
+  <div
+    data="REACTANY"
+  >
     <div
+      data="REACTANY"
       id="1"
     />
   </div>
@@ -41,11 +56,16 @@ exports[`WITH STYLES CONTEXT WEB, with provider 1`] = `
 
 exports[`WITH STYLES CONTEXT WEB, without provider 1`] = `
 <div>
-  <div>
+  <div
+    data="REACTANY"
+  >
     Hallo
   </div>
-  <div>
+  <div
+    data="REACTANY"
+  >
     <div
+      data="REACTANY"
       id="123"
     />
   </div>

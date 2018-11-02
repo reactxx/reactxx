@@ -2,7 +2,15 @@ import React from 'react'
 import ReactN from 'react-native'
 
 import { TSheeter, TComponents } from 'reactxx-typings'
+import { resetPlatform, platform } from 'reactxx-sheeter'
 import { TPrimitives } from './d-index'
+
+export const initGlobals = (force: boolean, initPlatform: () => void) => {
+  if (force) resetPlatform()
+  if (platform.Text) return
+  initPlatform()
+}
+
 
 export const hasPlatformEvents = (propsCode: TComponents.PropsCode) => !!(
   window.isWeb ?

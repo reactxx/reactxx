@@ -25,7 +25,7 @@ Array [
 ******************************************
 ",
   "
-margin:  /*sheet.root/$widths.0-640*/",
+margin: 0 /*sheet.root/$widths.0-640*/",
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style

@@ -1,9 +1,6 @@
 /** @jsx platform.createElement */
 
-// import React from 'react'
-// import ReactN from 'react-native'
-
-import { platform } from 'reactxx-sheeter'
+import { assignPlatform, platform } from 'reactxx-sheeter'
 import { TComponents } from 'reactxx-typings'
 import { withStylesCreator } from 'reactxx-with-styles'
 
@@ -11,16 +8,16 @@ import { hasPlatformEvents, textSheet, viewSheet, iconSheet, scrollViewSheet } f
 import { TPrimitives, CompNames } from './d-index'
 
 // for "declaration": true
-import { TProvider } from 'reactxx-with-styles'
+//import {  } from 'reactxx-with-styles'
 import { TWithStyles, TSheeter } from 'reactxx-typings'
 
-export const view: TComponents.SFCCode<TPrimitives.ViewShape> = propsCode => {
+const view: TComponents.SFCCode<TPrimitives.ViewShape> = propsCode => {
     const { styleX, classNameX, toClassNames, classes, ...rest } = propsCode
     return <div classNameX={toClassNames([classes.root, classNameX])} styleX={styleX} {...rest} />
 }
 view.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { pressable: hasPlatformEvents(props) }
 
-export const icon: TComponents.SFCCode<TPrimitives.IconShape> = propsCode => {
+const icon: TComponents.SFCCode<TPrimitives.IconShape> = propsCode => {
     const { styleX, classNameX, classes, toClassNames, children, data, url/*, onClick*/, ...rest } = propsCode
     const svg = <svg
         classNameX={toClassNames([classes.root, classNameX])}
@@ -32,7 +29,7 @@ export const icon: TComponents.SFCCode<TPrimitives.IconShape> = propsCode => {
 }
 icon.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { pressable: hasPlatformEvents(props) }
 
-export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = propsode => {
+const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = propsode => {
     const { styleX, classNameX, classes, toClassNames, children, horizontal, ...rest } = propsode
     return <div classNameX={toClassNames([classes.root, classNameX])} styleX={styleX} {...rest}>
         <div classNameX={toClassNames([classes.container])}>
@@ -42,7 +39,7 @@ export const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = prop
 }
 scrollView.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { horizontal: props.horizontal }
 
-export const text: TComponents.SFCCode<TPrimitives.TextShape> = propsCode => {
+const text: TComponents.SFCCode<TPrimitives.TextShape> = propsCode => {
     const { classNameX, styleX, classes, toClassNames, singleLine, url/*, onClick*/, ...rest } = propsCode
     const tagProps = {
         className: TPrimitives.Consts.textClassName,
@@ -55,17 +52,17 @@ export const text: TComponents.SFCCode<TPrimitives.TextShape> = propsCode => {
 }
 text.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { pressable: hasPlatformEvents(props), singleLine: props.singleLine }
 
-export const textCreator = withStylesCreator<TPrimitives.TextShape>(textSheet, text, {
+const textCreator = withStylesCreator<TPrimitives.TextShape>(textSheet, text, {
     displayName: CompNames.Text,
 })
-export const Text = textCreator()
+const Text = textCreator()
 
-export const viewCreator = withStylesCreator<TPrimitives.ViewShape>(viewSheet, view, {
+const viewCreator = withStylesCreator<TPrimitives.ViewShape>(viewSheet, view, {
     displayName: CompNames.View,
 })
-export const View = viewCreator()
+const View = viewCreator()
 
-export const iconCreator = withStylesCreator<TPrimitives.IconShape>(iconSheet, icon, {
+const iconCreator = withStylesCreator<TPrimitives.IconShape>(iconSheet, icon, {
     displayName: CompNames.Icon,
     defaultProps: {
         $web: {
@@ -74,24 +71,24 @@ export const iconCreator = withStylesCreator<TPrimitives.IconShape>(iconSheet, i
         }
     }
 })
-export const Icon = iconCreator()
+const Icon = iconCreator()
 
-export const scrollViewCreator = withStylesCreator<TPrimitives.ScrollViewShape>(scrollViewSheet, scrollView, {
+const scrollViewCreator = withStylesCreator<TPrimitives.ScrollViewShape>(scrollViewSheet, scrollView, {
     displayName: CompNames.ScrollView,
 })
-export const ScrollView = scrollViewCreator()
+const ScrollView = scrollViewCreator()
 
-export const animatedTextCreator = withStylesCreator<TPrimitives.TextShape>(textSheet, text, {
+const animatedTextCreator = withStylesCreator<TPrimitives.TextShape>(textSheet, text, {
     displayName: CompNames.AnimatedText,
 })
-export const AnimatedText = animatedTextCreator()
+const AnimatedText = animatedTextCreator()
 
-export const animatedViewCreator = withStylesCreator<TPrimitives.ViewShape>(viewSheet, view, {
+const animatedViewCreator = withStylesCreator<TPrimitives.ViewShape>(viewSheet, view, {
     displayName: CompNames.AnimatedView,
 })
-export const AnimatedView = animatedViewCreator()
+const AnimatedView = animatedViewCreator()
 
-export const animatedIconCreator = withStylesCreator<TPrimitives.IconShape>(iconSheet, icon, {
+const animatedIconCreator = withStylesCreator<TPrimitives.IconShape>(iconSheet, icon, {
     displayName: CompNames.AnimatedIcon,
     defaultProps: {
         $web: {
@@ -100,4 +97,46 @@ export const animatedIconCreator = withStylesCreator<TPrimitives.IconShape>(icon
         }
     }
 })
-export const AnimatedIcon = animatedIconCreator()
+const AnimatedIcon = animatedIconCreator()
+
+export {
+    view,
+    text,
+    icon,
+    scrollView,
+    viewCreator,
+    textCreator,
+    iconCreator,
+    View,
+    Text,
+    Icon,
+    ScrollView,
+    scrollViewCreator,
+    animatedViewCreator,
+    animatedTextCreator,
+    animatedIconCreator,
+    AnimatedView,
+    AnimatedText,
+    AnimatedIcon,
+}
+
+ export const init = () => assignPlatform({
+    view,
+    text,
+    icon,
+    scrollView,
+    viewCreator,
+    textCreator,
+    iconCreator,
+    View,
+    Text,
+    Icon,
+    ScrollView,
+    scrollViewCreator,
+    animatedViewCreator,
+    animatedTextCreator,
+    animatedIconCreator,
+    AnimatedView,
+    AnimatedText,
+    AnimatedIcon,
+ })

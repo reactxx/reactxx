@@ -4,12 +4,6 @@ export const enum Consts {
     name = '$widths'
 }
 
-export interface PlatformWidth extends TVariants.Platform {
-    resetWidths: () => void
-    actWidth: () => number
-    addBreakpoint: (width: number) => void
-}
-
 export type Callback = () => void
 
 declare module 'reactxx-typings' {

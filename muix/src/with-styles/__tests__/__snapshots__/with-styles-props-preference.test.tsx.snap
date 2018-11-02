@@ -3,6 +3,7 @@
 exports[`WITH STYLE PREFERENCE NATIVE 1`] = `
 <div>
   <div
+    data="REACTANY"
     p1="11"
     p2="22"
     p3="33"
@@ -14,6 +15,7 @@ exports[`WITH STYLE PREFERENCE NATIVE 1`] = `
 exports[`WITH STYLE PREFERENCE WEB 1`] = `
 <div>
   <div
+    data="REACTANY"
     p1="11"
     p2="22"
     p3="33"

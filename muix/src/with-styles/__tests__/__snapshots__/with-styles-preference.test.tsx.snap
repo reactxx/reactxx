@@ -2,8 +2,11 @@
 
 exports[`WITH STYLE PREFERENCE NATIVE 1`] = `
 <div>
-  <div>
+  <div
+    data="REACTANY"
+  >
     <div
+      data="REACTANY"
       style="padding: 132px 120px 100px 112px; max-width: 92px; max-height: 80px; margin: 72px 60px 40px 52px; border-top-width: 32px; border-right-width: 20px; border-left-width: 12px; border-bottom-width: 0;"
       trace="
 paddingTop: 132 /*styleX[1]/$native*/
@@ -19,7 +22,7 @@ marginBottom: 40 /*classes.root[0]*/
 borderTopWidth: 32 /*TestComponent.option.classes.root[1]/$native*/
 borderRightWidth: 20 /*TestComponent.option.classes.root[0]*/
 borderLeftWidth: 12 /*TestComponent.sheet.root[1]/$native*/
-borderBottomWidth:  /*TestComponent.sheet.root[0]*/"
+borderBottomWidth: 0 /*TestComponent.sheet.root[0]*/"
     >
       toClassNames([classes.root, classNameX])
     </div>
@@ -29,9 +32,12 @@ borderBottomWidth:  /*TestComponent.sheet.root[0]*/"
 
 exports[`WITH STYLE PREFERENCE WEB 1`] = `
 <div>
-  <div>
+  <div
+    data="REACTANY"
+  >
     <div
       class="cs cr cq cp co ci bi ba bz bp ap ac o a"
+      data="REACTANY"
       style="padding: 131px 120px 100px 111px;"
       trace="
 .cs { padding-top:91px /*classNameX[1]/$web*/ }
