@@ -24,9 +24,8 @@ Array [
 *  APPLY LASTWINS STRATEGY
 ******************************************
 ",
-  Object {
-    "margin": " /*sheet.root/$widths.0-640*/",
-  },
+  "
+margin:  /*sheet.root/$widths.0-640*/",
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style
@@ -62,9 +61,8 @@ Array [
 *  APPLY LASTWINS STRATEGY
 ******************************************
 ",
-  Object {
-    "margin": "10 /*sheet.root/$widths.640-1024*/",
-  },
+  "
+margin: 10 /*sheet.root/$widths.640-1024*/",
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style
@@ -92,31 +90,29 @@ Array [
 *  QUERY TO STHEET
 ******************************************
 ",
-  Array [
-    "@media (max-width: 639px).a { margin:0 /*sheet.root/$widths.0-640*/ }",
-    "@media (min-width: 640px) and (max-width: 1023px).b { margin:10px /*sheet.root/$widths.640-1024*/ }",
-    "@media (min-width: 1024px).c { margin:20px /*sheet.root/$widths.1024-*/ }",
-    "@media (max-width: 639px).d:hover { color:blue /*sheet.root/$web/:hover/$widths.0-640*/ }",
-    "@media (max-width: 639px).e:hover { padding:0 /*sheet.root/$web/:hover/$widths.0-640*/ }",
-    "@media (min-width: 640px) and (max-width: 1023px).f:hover { color:red /*sheet.root/$web/:hover/$widths.640-1024*/ }",
-    "@media (min-width: 640px) and (max-width: 1023px).g:hover { padding:10px /*sheet.root/$web/:hover/$widths.640-1024*/ }",
-    "@media (min-width: 1024px).h:hover { padding:20px /*sheet.root/$web/:hover/$widths.1024-*/ }",
-  ],
+  "
+@media (max-width: 639px).a { margin:0 /*sheet.root/$widths.0-640*/ }
+@media (min-width: 640px) and (max-width: 1023px).b { margin:10px /*sheet.root/$widths.640-1024*/ }
+@media (min-width: 1024px).c { margin:20px /*sheet.root/$widths.1024-*/ }
+@media (max-width: 639px).d:hover { color:blue /*sheet.root/$web/:hover/$widths.0-640*/ }
+@media (max-width: 639px).e:hover { padding:0 /*sheet.root/$web/:hover/$widths.0-640*/ }
+@media (min-width: 640px) and (max-width: 1023px).f:hover { color:red /*sheet.root/$web/:hover/$widths.640-1024*/ }
+@media (min-width: 640px) and (max-width: 1023px).g:hover { padding:10px /*sheet.root/$web/:hover/$widths.640-1024*/ }
+@media (min-width: 1024px).h:hover { padding:20px /*sheet.root/$web/:hover/$widths.1024-*/ }",
   "
 ******************************************
 *  APPLY LASTWINS STRATEGY
 ******************************************
 ",
-  Array [
-    "@media (min-width: 1024px).h:hover { padding:20px /*sheet.root/$web/:hover/$widths.1024-*/ }",
-    "@media (min-width: 640px) and (max-width: 1023px).g:hover { padding:10px /*sheet.root/$web/:hover/$widths.640-1024*/ }",
-    "@media (min-width: 640px) and (max-width: 1023px).f:hover { color:red /*sheet.root/$web/:hover/$widths.640-1024*/ }",
-    "@media (max-width: 639px).e:hover { padding:0 /*sheet.root/$web/:hover/$widths.0-640*/ }",
-    "@media (max-width: 639px).d:hover { color:blue /*sheet.root/$web/:hover/$widths.0-640*/ }",
-    "@media (min-width: 1024px).c { margin:20px /*sheet.root/$widths.1024-*/ }",
-    "@media (min-width: 640px) and (max-width: 1023px).b { margin:10px /*sheet.root/$widths.640-1024*/ }",
-    "@media (max-width: 639px).a { margin:0 /*sheet.root/$widths.0-640*/ }",
-  ],
+  "
+@media (min-width: 1024px).h:hover { padding:20px /*sheet.root/$web/:hover/$widths.1024-*/ }
+@media (min-width: 640px) and (max-width: 1023px).g:hover { padding:10px /*sheet.root/$web/:hover/$widths.640-1024*/ }
+@media (min-width: 640px) and (max-width: 1023px).f:hover { color:red /*sheet.root/$web/:hover/$widths.640-1024*/ }
+@media (max-width: 639px).e:hover { padding:0 /*sheet.root/$web/:hover/$widths.0-640*/ }
+@media (max-width: 639px).d:hover { color:blue /*sheet.root/$web/:hover/$widths.0-640*/ }
+@media (min-width: 1024px).c { margin:20px /*sheet.root/$widths.1024-*/ }
+@media (min-width: 640px) and (max-width: 1023px).b { margin:10px /*sheet.root/$widths.640-1024*/ }
+@media (max-width: 639px).a { margin:0 /*sheet.root/$widths.0-640*/ }",
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style
@@ -142,31 +138,29 @@ Array [
 *  QUERY TO STHEET
 ******************************************
 ",
-  Array [
-    "@media (max-width: 639px).a { margin:0 /*sheet.root/$widths.0-640*/ }",
-    "@media (min-width: 640px) and (max-width: 1023px).b { margin:10px /*sheet.root/$widths.640-1024*/ }",
-    "@media (min-width: 1024px).c { margin:20px /*sheet.root/$widths.1024-*/ }",
-    "@media (max-width: 639px).d:hover { color:blue /*sheet.root/$web/:hover/$widths.0-640*/ }",
-    "@media (max-width: 639px).e:hover { padding:0 /*sheet.root/$web/:hover/$widths.0-640*/ }",
-    "@media (min-width: 640px) and (max-width: 1023px).f:hover { color:red /*sheet.root/$web/:hover/$widths.640-1024*/ }",
-    "@media (min-width: 640px) and (max-width: 1023px).g:hover { padding:10px /*sheet.root/$web/:hover/$widths.640-1024*/ }",
-    "@media (min-width: 1024px).h:hover { padding:20px /*sheet.root/$web/:hover/$widths.1024-*/ }",
-  ],
+  "
+@media (max-width: 639px).a { margin:0 /*sheet.root/$widths.0-640*/ }
+@media (min-width: 640px) and (max-width: 1023px).b { margin:10px /*sheet.root/$widths.640-1024*/ }
+@media (min-width: 1024px).c { margin:20px /*sheet.root/$widths.1024-*/ }
+@media (max-width: 639px).d:hover { color:blue /*sheet.root/$web/:hover/$widths.0-640*/ }
+@media (max-width: 639px).e:hover { padding:0 /*sheet.root/$web/:hover/$widths.0-640*/ }
+@media (min-width: 640px) and (max-width: 1023px).f:hover { color:red /*sheet.root/$web/:hover/$widths.640-1024*/ }
+@media (min-width: 640px) and (max-width: 1023px).g:hover { padding:10px /*sheet.root/$web/:hover/$widths.640-1024*/ }
+@media (min-width: 1024px).h:hover { padding:20px /*sheet.root/$web/:hover/$widths.1024-*/ }",
   "
 ******************************************
 *  APPLY LASTWINS STRATEGY
 ******************************************
 ",
-  Array [
-    "@media (min-width: 1024px).h:hover { padding:20px /*sheet.root/$web/:hover/$widths.1024-*/ }",
-    "@media (min-width: 640px) and (max-width: 1023px).g:hover { padding:10px /*sheet.root/$web/:hover/$widths.640-1024*/ }",
-    "@media (min-width: 640px) and (max-width: 1023px).f:hover { color:red /*sheet.root/$web/:hover/$widths.640-1024*/ }",
-    "@media (max-width: 639px).e:hover { padding:0 /*sheet.root/$web/:hover/$widths.0-640*/ }",
-    "@media (max-width: 639px).d:hover { color:blue /*sheet.root/$web/:hover/$widths.0-640*/ }",
-    "@media (min-width: 1024px).c { margin:20px /*sheet.root/$widths.1024-*/ }",
-    "@media (min-width: 640px) and (max-width: 1023px).b { margin:10px /*sheet.root/$widths.640-1024*/ }",
-    "@media (max-width: 639px).a { margin:0 /*sheet.root/$widths.0-640*/ }",
-  ],
+  "
+@media (min-width: 1024px).h:hover { padding:20px /*sheet.root/$web/:hover/$widths.1024-*/ }
+@media (min-width: 640px) and (max-width: 1023px).g:hover { padding:10px /*sheet.root/$web/:hover/$widths.640-1024*/ }
+@media (min-width: 640px) and (max-width: 1023px).f:hover { color:red /*sheet.root/$web/:hover/$widths.640-1024*/ }
+@media (max-width: 639px).e:hover { padding:0 /*sheet.root/$web/:hover/$widths.0-640*/ }
+@media (max-width: 639px).d:hover { color:blue /*sheet.root/$web/:hover/$widths.0-640*/ }
+@media (min-width: 1024px).c { margin:20px /*sheet.root/$widths.1024-*/ }
+@media (min-width: 640px) and (max-width: 1023px).b { margin:10px /*sheet.root/$widths.640-1024*/ }
+@media (max-width: 639px).a { margin:0 /*sheet.root/$widths.0-640*/ }",
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style

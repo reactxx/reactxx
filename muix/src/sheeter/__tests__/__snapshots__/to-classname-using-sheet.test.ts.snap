@@ -117,11 +117,10 @@ Array [
 *  APPLY LASTWINS STRATEGY
 ******************************************
 ",
-  Object {
-    "color": "blue /*sheet.label*/",
-    "margin": "20 /*sheet.nativeOnly/$native*/",
-    "padding": "10 /*sheet.root[1]/$native*/",
-  },
+  "
+margin: 20 /*sheet.nativeOnly/$native*/
+color: blue /*sheet.label*/
+padding: 10 /*sheet.root[1]/$native*/",
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style
@@ -162,10 +161,9 @@ Array [
 *  APPLY LASTWINS STRATEGY
 ******************************************
 ",
-  Object {
-    "margin": "4 /*sheet.root[0]*/",
-    "padding": "10 /*sheet.root[1]/$native*/",
-  },
+  "
+padding: 10 /*sheet.root[1]/$native*/
+margin: 4 /*sheet.root[0]*/",
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style
@@ -194,24 +192,22 @@ Array [
 *  QUERY TO STHEET
 ******************************************
 ",
-  Array [
-    ".a { margin:4px /*sheet.root[0]*/ }",
-    ".b { padding:4px /*sheet.root[0]*/ }",
-    ".c { margin:10px /*sheet.root[0]/$web*/ }",
-    ".d { color:blue /*sheet.label*/ }",
-    ".e { color:red /*sheet.webOnly/$web*/ }",
-    ".f { padding:20px /*sheet.webOnly/$web*/ }",
-  ],
+  "
+.a { margin:4px /*sheet.root[0]*/ }
+.b { padding:4px /*sheet.root[0]*/ }
+.c { margin:10px /*sheet.root[0]/$web*/ }
+.d { color:blue /*sheet.label*/ }
+.e { color:red /*sheet.webOnly/$web*/ }
+.f { padding:20px /*sheet.webOnly/$web*/ }",
   "
 ******************************************
 *  APPLY LASTWINS STRATEGY
 ******************************************
 ",
-  Array [
-    ".f { padding:20px /*sheet.webOnly/$web*/ }",
-    ".e { color:red /*sheet.webOnly/$web*/ }",
-    ".c { margin:10px /*sheet.root[0]/$web*/ }",
-  ],
+  "
+.f { padding:20px /*sheet.webOnly/$web*/ }
+.e { color:red /*sheet.webOnly/$web*/ }
+.c { margin:10px /*sheet.root[0]/$web*/ }",
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style
@@ -237,23 +233,21 @@ Array [
 *  QUERY TO STHEET
 ******************************************
 ",
-  Array [
-    ".e { color:red /*sheet.webOnly/$web*/ }",
-    ".f { padding:20px /*sheet.webOnly/$web*/ }",
-    ".a { margin:4px /*sheet.root[0]*/ }",
-    ".b { padding:4px /*sheet.root[0]*/ }",
-    ".c { margin:10px /*sheet.root[0]/$web*/ }",
-  ],
+  "
+.e { color:red /*sheet.webOnly/$web*/ }
+.f { padding:20px /*sheet.webOnly/$web*/ }
+.a { margin:4px /*sheet.root[0]*/ }
+.b { padding:4px /*sheet.root[0]*/ }
+.c { margin:10px /*sheet.root[0]/$web*/ }",
   "
 ******************************************
 *  APPLY LASTWINS STRATEGY
 ******************************************
 ",
-  Array [
-    ".c { margin:10px /*sheet.root[0]/$web*/ }",
-    ".b { padding:4px /*sheet.root[0]*/ }",
-    ".e { color:red /*sheet.webOnly/$web*/ }",
-  ],
+  "
+.c { margin:10px /*sheet.root[0]/$web*/ }
+.b { padding:4px /*sheet.root[0]*/ }
+.e { color:red /*sheet.webOnly/$web*/ }",
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style

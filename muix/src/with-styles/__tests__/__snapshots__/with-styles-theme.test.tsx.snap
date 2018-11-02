@@ -1,75 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`WITH STYLES THEME NATIVE 1`] = `
-<ReactAny>
-  <ReactAny
-    style={
-      Object {
-        "background": "lightblue",
-        "color": "black",
-        "fontWeight": "bold",
-      }
-    }
-    trace={
-      Object {
-        "background": "lightblue /*TestComponent.sheet.label[0]*/",
-        "color": "black /*TestComponent.sheet.label[0]*/",
-        "fontWeight": "bold /*TestComponent.sheet.label[1]*/",
-      }
-    }
-  >
-    Default Theme
-  </ReactAny>
-  <ThemeProviderGeneric>
-    <ReactAny
-      style={
-        Object {
-          "background": "lightcyan",
-          "color": "darkgray",
-          "fontWeight": "bold",
-        }
-      }
-      trace={
-        Object {
-          "background": "lightcyan /*TestComponent.sheet.label[0]*/",
-          "color": "darkgray /*TestComponent.sheet.label[0]*/",
-          "fontWeight": "bold /*TestComponent.sheet.label[1]*/",
-        }
-      }
+<div>
+  <div>
+    <div
+      style="font-weight: bold; color: black;"
+      trace="
+fontWeight: bold /*TestComponent.sheet.label[1]*/
+backgroundColor: lightblue /*TestComponent.sheet.label[0]*/
+color: black /*TestComponent.sheet.label[0]*/"
+    >
+      Default Theme
+    </div>
+    <div
+      style="font-weight: bold; background-color: blue; color: black;"
+      trace="
+fontWeight: bold /*TestComponent.sheet.label[1]*/
+backgroundColor: blue /*TestComponent.sheet.label[0]*/
+color: black /*TestComponent.sheet.label[0]*/"
     >
       Custom Theme
-    </ReactAny>
-  </ThemeProviderGeneric>
-</ReactAny>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`WITH STYLES THEME WEB 1`] = `
-<ReactAny>
-  <ReactAny
-    className="c b a"
-    trace={
-      Array [
-        ".c { font-weight:bold /*TestComponent.sheet.label[1]*/ }",
-        ".b { background:lightblue /*TestComponent.sheet.label[0]*/ }",
-        ".a { color:black /*TestComponent.sheet.label[0]*/ }",
-      ]
-    }
-  >
-    Default Theme
-  </ReactAny>
-  <ThemeProviderGeneric>
-    <ReactAny
-      className="c e d"
-      trace={
-        Array [
-          ".c { font-weight:bold /*TestComponent.sheet.label[1]*/ }",
-          ".e { background:lightcyan /*TestComponent.sheet.label[0]*/ }",
-          ".d { color:darkgray /*TestComponent.sheet.label[0]*/ }",
-        ]
-      }
+<div>
+  <div>
+    <div
+      class="c b a"
+      trace="
+.c { font-weight:bold /*TestComponent.sheet.label[1]*/ }
+.b { background-color:lightblue /*TestComponent.sheet.label[0]*/ }
+.a { color:black /*TestComponent.sheet.label[0]*/ }"
+    >
+      Default Theme
+    </div>
+    <div
+      class="c d a"
+      trace="
+.c { font-weight:bold /*TestComponent.sheet.label[1]*/ }
+.d { background-color:blue /*TestComponent.sheet.label[0]*/ }
+.a { color:black /*TestComponent.sheet.label[0]*/ }"
     >
       Custom Theme
-    </ReactAny>
-  </ThemeProviderGeneric>
-</ReactAny>
+    </div>
+  </div>
+</div>
 `;

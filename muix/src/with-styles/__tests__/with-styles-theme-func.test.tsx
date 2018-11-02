@@ -17,7 +17,7 @@ const customTheme: TSheeter.getTheme<Shape> = {
     ...theme.secondary,
     normal: {
       ...theme.secondary.normal,
-      background: 'lightcyan',
+      backgroundColor: 'lightcyan',
     },
   },
 }
@@ -38,24 +38,24 @@ const traceTest = (isWeb: boolean) => {
 
     Comp => <ReactAny>
       <Comp
-        classes={theme => ({ label: { color: theme.secondary.normal.background } })}
-        classNameX={theme => ({ backgroundColor: theme.secondary.normal.background })}
-        styleX={theme => ({ borderBottomColor: theme.secondary.normal.background })}
+        classes={theme => ({ label: { color: theme.secondary.normal.backgroundColor } })}
+        classNameX={theme => ({ backgroundColor: theme.secondary.normal.backgroundColor })}
+        styleX={theme => ({ borderBottomColor: theme.secondary.normal.backgroundColor })}
       >Default Theme</Comp>
       <ThemeProvider theme={customTheme}>
         <Comp
-          classes={theme => ({ label: { color: theme.secondary.normal.background } })}
-          classNameX={theme => ({ backgroundColor: theme.secondary.normal.background })}
-          styleX={theme => ({ borderBottomColor: theme.secondary.normal.background })}
+          classes={theme => ({ label: { color: theme.secondary.normal.backgroundColor } })}
+          classNameX={theme => ({ backgroundColor: theme.secondary.normal.backgroundColor })}
+          styleX={theme => ({ borderBottomColor: theme.secondary.normal.backgroundColor })}
         >Custom Theme</Comp>
       </ThemeProvider>
     </ReactAny>,
 
     {
       defaultProps: {
-        classes: theme => ({ root: { borderLeftColor: theme.secondary.normal.background } }),
-        classNameX: theme => ({ borderRightColor: theme.secondary.normal.background }),
-        styleX: theme => ({ borderTopColor: theme.secondary.normal.background }),
+        classes: theme => ({ root: { borderLeftColor: theme.secondary.normal.backgroundColor } }),
+        classNameX: theme => ({ borderRightColor: theme.secondary.normal.backgroundColor }),
+        styleX: theme => ({ borderTopColor: theme.secondary.normal.backgroundColor }),
       }
     }
   )

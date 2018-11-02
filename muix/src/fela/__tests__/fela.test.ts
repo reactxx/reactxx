@@ -16,6 +16,8 @@ test("fela", () => {
     }
   }
 
+  window.__TRACE__ = true
+
   Fela.initFela$Web()
   let css = Fela.getRenderer().renderRuleEx(classNames, 'root')
   const res = Fela.dumpAtomized(css)

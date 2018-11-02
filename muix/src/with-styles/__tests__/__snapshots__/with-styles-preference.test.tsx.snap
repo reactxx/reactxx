@@ -1,82 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`WITH STYLE PREFERENCE NATIVE 1`] = `
-<ReactAny>
-  <ReactAny
-    style={
-      Object {
-        "borderBottomWidth": 0,
-        "borderLeftWidth": 12,
-        "borderRightWidth": 20,
-        "borderTopWidth": 32,
-        "marginBottom": 40,
-        "marginLeft": 52,
-        "marginRight": 60,
-        "marginTop": 72,
-        "maxHeight": 80,
-        "maxWidth": 92,
-        "paddingBottom": 100,
-        "paddingLeft": 112,
-        "paddingRight": 120,
-        "paddingTop": 132,
-      }
-    }
-    trace={
-      Object {
-        "borderBottomWidth": " /*TestComponent.sheet.root[0]*/",
-        "borderLeftWidth": "12 /*TestComponent.sheet.root[1]/$native*/",
-        "borderRightWidth": "20 /*TestComponent.option.classes.root[0]*/",
-        "borderTopWidth": "32 /*TestComponent.option.classes.root[1]/$native*/",
-        "marginBottom": "40 /*classes.root[0]*/",
-        "marginLeft": "52 /*classes.root[1]/$native*/",
-        "marginRight": "60 /*TestComponent.option.classNameX[0]*/",
-        "marginTop": "72 /*TestComponent.option.classNameX[1]/$native*/",
-        "maxHeight": "80 /*classNameX[0]*/",
-        "maxWidth": "92 /*classNameX[1]/$native*/",
-        "paddingBottom": "100 /*TestComponent.option.styleX[0]*/",
-        "paddingLeft": "112 /*TestComponent.option.styleX[1]/$native*/",
-        "paddingRight": "120 /*styleX[0]*/",
-        "paddingTop": "132 /*styleX[1]/$native*/",
-      }
-    }
-  >
-    toClassNames([classes.root, classNameX])
-  </ReactAny>
-</ReactAny>
+<div>
+  <div>
+    <div
+      style="padding: 132px 120px 100px 112px; max-width: 92px; max-height: 80px; margin: 72px 60px 40px 52px; border-top-width: 32px; border-right-width: 20px; border-left-width: 12px; border-bottom-width: 0;"
+      trace="
+paddingTop: 132 /*styleX[1]/$native*/
+paddingRight: 120 /*styleX[0]*/
+paddingLeft: 112 /*TestComponent.option.styleX[1]/$native*/
+paddingBottom: 100 /*TestComponent.option.styleX[0]*/
+maxWidth: 92 /*classNameX[1]/$native*/
+maxHeight: 80 /*classNameX[0]*/
+marginTop: 72 /*TestComponent.option.classNameX[1]/$native*/
+marginRight: 60 /*TestComponent.option.classNameX[0]*/
+marginLeft: 52 /*classes.root[1]/$native*/
+marginBottom: 40 /*classes.root[0]*/
+borderTopWidth: 32 /*TestComponent.option.classes.root[1]/$native*/
+borderRightWidth: 20 /*TestComponent.option.classes.root[0]*/
+borderLeftWidth: 12 /*TestComponent.sheet.root[1]/$native*/
+borderBottomWidth:  /*TestComponent.sheet.root[0]*/"
+    >
+      toClassNames([classes.root, classNameX])
+    </div>
+  </div>
+</div>
 `;
 
 exports[`WITH STYLE PREFERENCE WEB 1`] = `
-<ReactAny>
-  <ReactAny
-    className="cs cr cq cp co ci bi ba bz bp ap ac o a"
-    style={
-      Object {
-        "paddingBottom": 100,
-        "paddingLeft": 111,
-        "paddingRight": 120,
-        "paddingTop": 131,
-      }
-    }
-    trace={
-      Array [
-        ".cs { padding-top:91px /*classNameX[1]/$web*/ }",
-        ".cr { padding-right:91px /*classNameX[1]/$web*/ }",
-        ".cq { padding-left:91px /*classNameX[1]/$web*/ }",
-        ".cp { padding-bottom:91px /*classNameX[1]/$web*/ }",
-        ".co { max-width:91px /*classNameX[1]/$web*/ }",
-        ".ci { max-height:80px /*classNameX[0]*/ }",
-        ".bi { margin-top:71px /*TestComponent.option.classNameX[1]/$web*/ }",
-        ".ba { margin-right:60px /*TestComponent.option.classNameX[0]*/ }",
-        ".bz { margin-left:51px /*classes.root[1]/$web*/ }",
-        ".bp { margin-bottom:40px /*classes.root[0]*/ }",
-        ".ap { border-top-width:31px /*TestComponent.option.classes.root[1]/$web*/ }",
-        ".ac { border-right-width:20px /*TestComponent.option.classes.root[0]*/ }",
-        ".o { border-left-width:11px /*TestComponent.sheet.root[1]/$web*/ }",
-        ".a { border-bottom-width:0 /*TestComponent.sheet.root[0]*/ }",
-      ]
-    }
-  >
-    toClassNames([classes.root, classNameX])
-  </ReactAny>
-</ReactAny>
+<div>
+  <div>
+    <div
+      class="cs cr cq cp co ci bi ba bz bp ap ac o a"
+      style="padding: 131px 120px 100px 111px;"
+      trace="
+.cs { padding-top:91px /*classNameX[1]/$web*/ }
+.cr { padding-right:91px /*classNameX[1]/$web*/ }
+.cq { padding-left:91px /*classNameX[1]/$web*/ }
+.cp { padding-bottom:91px /*classNameX[1]/$web*/ }
+.co { max-width:91px /*classNameX[1]/$web*/ }
+.ci { max-height:80px /*classNameX[0]*/ }
+.bi { margin-top:71px /*TestComponent.option.classNameX[1]/$web*/ }
+.ba { margin-right:60px /*TestComponent.option.classNameX[0]*/ }
+.bz { margin-left:51px /*classes.root[1]/$web*/ }
+.bp { margin-bottom:40px /*classes.root[0]*/ }
+.ap { border-top-width:31px /*TestComponent.option.classes.root[1]/$web*/ }
+.ac { border-right-width:20px /*TestComponent.option.classes.root[0]*/ }
+.o { border-left-width:11px /*TestComponent.sheet.root[1]/$web*/ }
+.a { border-bottom-width:0 /*TestComponent.sheet.root[0]*/ }"
+    >
+      toClassNames([classes.root, classNameX])
+    </div>
+  </div>
+</div>
 `;

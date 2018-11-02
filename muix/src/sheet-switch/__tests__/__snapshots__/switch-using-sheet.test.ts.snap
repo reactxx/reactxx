@@ -139,10 +139,9 @@ Array [
 *  APPLY LASTWINS STRATEGY
 ******************************************
 ",
-  Object {
-    "backgroundColor": "brown /*sheet.root/$native/$switch.isOpened*/",
-    "borderColor": "cyan /*sheet.root/$switch.isOpened/$switch.isOpened*/",
-  },
+  "
+backgroundColor: brown /*sheet.root/$native/$switch.isOpened*/
+borderColor: cyan /*sheet.root/$switch.isOpened/$switch.isOpened*/",
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style
@@ -177,7 +176,7 @@ Array [
 *  APPLY LASTWINS STRATEGY
 ******************************************
 ",
-  Object {},
+  "",
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style
@@ -203,21 +202,19 @@ Array [
 *  QUERY TO STHEET
 ******************************************
 ",
-  Array [
-    ".a { background-color:red /*sheet.root/$switch.isOpened*/ }",
-    ".b { border-color:cyan /*sheet.root/$switch.isOpened/$switch.isOpened*/ }",
-    ".d:hover { background-color:yellow /*sheet.webOnly/$web/:hover/$switch.isOpened*/ }",
-  ],
+  "
+.a { background-color:red /*sheet.root/$switch.isOpened*/ }
+.b { border-color:cyan /*sheet.root/$switch.isOpened/$switch.isOpened*/ }
+.d:hover { background-color:yellow /*sheet.webOnly/$web/:hover/$switch.isOpened*/ }",
   "
 ******************************************
 *  APPLY LASTWINS STRATEGY
 ******************************************
 ",
-  Array [
-    ".d:hover { background-color:yellow /*sheet.webOnly/$web/:hover/$switch.isOpened*/ }",
-    ".b { border-color:cyan /*sheet.root/$switch.isOpened/$switch.isOpened*/ }",
-    ".a { background-color:red /*sheet.root/$switch.isOpened*/ }",
-  ],
+  "
+.d:hover { background-color:yellow /*sheet.webOnly/$web/:hover/$switch.isOpened*/ }
+.b { border-color:cyan /*sheet.root/$switch.isOpened/$switch.isOpened*/ }
+.a { background-color:red /*sheet.root/$switch.isOpened*/ }",
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style
@@ -243,17 +240,15 @@ Array [
 *  QUERY TO STHEET
 ******************************************
 ",
-  Array [
-    ".c:hover { background-color:green /*sheet.root/$web/:hover/$switch.isClosed[0]*/ }",
-  ],
+  "
+.c:hover { background-color:green /*sheet.root/$web/:hover/$switch.isClosed[0]*/ }",
   "
 ******************************************
 *  APPLY LASTWINS STRATEGY
 ******************************************
 ",
-  Array [
-    ".c:hover { background-color:green /*sheet.root/$web/:hover/$switch.isClosed[0]*/ }",
-  ],
+  "
+.c:hover { background-color:green /*sheet.root/$web/:hover/$switch.isClosed[0]*/ }",
   "
 ******************************************
 *  FINALIZE FOR for web's className or native's style

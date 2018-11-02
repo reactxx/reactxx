@@ -1,7 +1,8 @@
 export * from './sheet-helper'
 export * from './shape'
 
-import { render } from 'react-testing-library'
+// error in https://github.com/jsakas/CSSStyleDeclaration/issues/48
+import { render, cleanup } from 'react-testing-library'
 
 // import Enzyme, { shallow } from 'enzyme'
 // import Adapter from 'enzyme-adapter-react-16.3'
@@ -26,6 +27,8 @@ import { initSwitch } from 'reactxx-sheet-switch'
 import { initWithStyles } from 'reactxx-with-styles'
 
 export const initPlatform = (isWeb: boolean, __DEV__: boolean | 1 | 2 | 3 | 4 | 5 = true) => {
+
+    afterEach(cleanup)
 
     window.isWeb = isWeb
     if (typeof __DEV__ === 'number') {

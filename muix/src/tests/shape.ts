@@ -36,21 +36,21 @@ export const theme = {
     primary: {
         normal: {
             color: 'white',
-            background: 'darkgreen',
+            backgroundColor: 'darkgreen',
         },
         disabled: {
             color: 'lightgray',
-            background: 'lightgreen',
+            backgroundColor: 'lightgreen',
         }
     },
     secondary: {
         normal: {
             color: 'black',
-            background: 'lightblue',
+            backgroundColor: 'lightblue',
         },
         disabled: {
             color: 'darkgray',
-            background: 'blue',
+            backgroundColor: 'blue',
         }
     },
     breakpoints: {

@@ -29,7 +29,7 @@
                 //"--testPathPattern=to-classname-using-sheet",
                 //"--testPathPattern=switch-sheet-ex",
                 "--testPathPattern=with-styles-theme.test",
-                //"-u"
+                "-u"
             ],
             //"preLaunchTask": "build",
             // "internalConsoleOptions": "openOnSessionStart",

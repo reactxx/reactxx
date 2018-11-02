@@ -13,9 +13,8 @@
     "setupFiles": [
       "./src/tests/index.ts"
     ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
+    "snapshotSerializers": [],
+    "verbose": true,
     "roots": [
       "<rootDir>/src/"
     ],
@@ -24,7 +23,16 @@
     "moduleNameMapper": {
       "^reactxx-(.*)-native$": "<rootDir>/src/$1/index-native",
       "^reactxx-(.*)$": "<rootDir>/src/$1/index"
-    }
+    },
+    "reporters": [
+      "default",
+      [
+        "./node_modules/jest-html-reporter",
+        {
+          "pageTitle": "Test Report"
+        }
+      ]
+    ]
   },
   "dependencies": {
     "@types/react-event-listener": "^0.4.7",
@@ -72,6 +80,8 @@
     "fela-plugin-prefixer": "^5.0.20",
     "fela-plugin-unit": "^5.1.1",
     "jest": "^23.6.0",
+    "jest-html-reporter": "^2.4.2",
+    "jsdom": "^13.0.0",
     "lite-server": "^2.4.0",
     "prettier": "^1.14.3",
     "prop-types": "^15.6.2",

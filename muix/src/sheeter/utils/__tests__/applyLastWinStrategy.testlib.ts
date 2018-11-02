@@ -2,14 +2,16 @@ import { TAtomize } from "reactxx-typings";
 import { platform } from "reactxx-sheeter";
 
 const web$dumpEx = (concated: TAtomize.AtomicWebsLow, merged: TAtomize.AtomicArrayLow) => {
-  const dump = platform.dumpAtomized(merged) as string[];
+  const dump = []
+  //const dump = platform.dumpAtomized(merged)
   dump.push('SOURCE=' + concated
     .map((c: TAtomize.__dev_AtomicWeb) => typeof c === "string" ? c : c.cache.className)
     .join(" "));
   dump.push('RESULT=' + (merged as TAtomize.AtomicWebsLow)
     .map((c: TAtomize.__dev_AtomicWeb) => typeof c === "string" ? c : c.cache.className)
     .join(" "))
-  return dump;
+  dump.push('')
+  return dump.join('\n') + platform.dumpAtomized(merged);
 };
 
 export const WEB = {

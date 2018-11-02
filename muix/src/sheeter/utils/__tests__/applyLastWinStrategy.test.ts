@@ -30,34 +30,30 @@ describe("applyLastwinsStrategy simple", () => {
     } = WEB.defineRulesets(DATA);
 
     expect(ruleset1).toMatchInlineSnapshot(`
-Array [
-  ".a { color:red /*ruleset1*/ }",
-  ".b { right:20px /*ruleset1*/ }",
-]
+"
+.a { color:red /*ruleset1*/ }
+.b { right:20px /*ruleset1*/ }"
 `);
     expect(ruleset2).toMatchInlineSnapshot(`
-Array [
-  ".c { color:black /*ruleset2*/ }",
-  ".d { left:10px /*ruleset2*/ }",
-]
+"
+.c { color:black /*ruleset2*/ }
+.d { left:10px /*ruleset2*/ }"
 `);
     expect(ruleset1Wins).toMatchInlineSnapshot(`
-Array [
-  ".b { right:20px /*ruleset1*/ }",
-  ".a { color:red /*ruleset1*/ }",
-  ".d { left:10px /*ruleset2*/ }",
-  "SOURCE=c d a b",
-  "RESULT=b a d",
-]
+"SOURCE=c d a b
+RESULT=b a d
+
+.b { right:20px /*ruleset1*/ }
+.a { color:red /*ruleset1*/ }
+.d { left:10px /*ruleset2*/ }"
 `);
     expect(ruleset2Wins).toMatchInlineSnapshot(`
-Array [
-  ".d { left:10px /*ruleset2*/ }",
-  ".c { color:black /*ruleset2*/ }",
-  ".b { right:20px /*ruleset1*/ }",
-  "SOURCE=a b c d",
-  "RESULT=d c b",
-]
+"SOURCE=a b c d
+RESULT=d c b
+
+.d { left:10px /*ruleset2*/ }
+.c { color:black /*ruleset2*/ }
+.b { right:20px /*ruleset1*/ }"
 `);
     expect(final1).toMatchInlineSnapshot(`"b a d"`);
     expect(final2).toMatchInlineSnapshot(`"d c b"`);
@@ -77,29 +73,21 @@ Array [
       final2
     } = WEB.defineRulesets(DATA);
 
-    expect(ruleset1).toMatchInlineSnapshot(`
-Array [
-  "DUMP is available in window.__DEV__ only",
-]
-`);
-    expect(ruleset2).toMatchInlineSnapshot(`
-Array [
-  "DUMP is available in window.__DEV__ only",
-]
-`);
+    expect(ruleset1).toMatchInlineSnapshot(
+      `"DUMP is available in window.__DEV__ only"`
+    );
+    expect(ruleset2).toMatchInlineSnapshot(
+      `"DUMP is available in window.__DEV__ only"`
+    );
     expect(ruleset1Wins).toMatchInlineSnapshot(`
-Array [
-  "DUMP is available in window.__DEV__ only",
-  "SOURCE=c d a b",
-  "RESULT=b a d",
-]
+"SOURCE=c d a b
+RESULT=b a d
+DUMP is available in window.__DEV__ only"
 `);
     expect(ruleset2Wins).toMatchInlineSnapshot(`
-Array [
-  "DUMP is available in window.__DEV__ only",
-  "SOURCE=a b c d",
-  "RESULT=d c b",
-]
+"SOURCE=a b c d
+RESULT=d c b
+DUMP is available in window.__DEV__ only"
 `);
     expect(final1).toMatchInlineSnapshot(`"b a d"`);
     expect(final2).toMatchInlineSnapshot(`"d c b"`);
@@ -133,18 +121,16 @@ Array [
 ]
 `);
     expect(ruleset1Wins).toMatchInlineSnapshot(`
-Object {
-  "color": "red /*ruleset1*/",
-  "left": "10px /*ruleset2*/",
-  "right": "20px /*ruleset1*/",
-}
+"
+right: 20px /*ruleset1*/
+color: red /*ruleset1*/
+left: 10px /*ruleset2*/"
 `);
     expect(ruleset2Wins).toMatchInlineSnapshot(`
-Object {
-  "color": "black /*ruleset2*/",
-  "left": "10px /*ruleset2*/",
-  "right": "20px /*ruleset1*/",
-}
+"
+left: 10px /*ruleset2*/
+color: black /*ruleset2*/
+right: 20px /*ruleset1*/"
 `);
     expect(final1).toMatchInlineSnapshot(`
 Object {
@@ -201,18 +187,16 @@ Array [
 ]
 `);
     expect(ruleset1Wins).toMatchInlineSnapshot(`
-Object {
-  "color": "red",
-  "left": "10px",
-  "right": "20px",
-}
+"
+right: 20px
+color: red
+left: 10px"
 `);
     expect(ruleset2Wins).toMatchInlineSnapshot(`
-Object {
-  "color": "black",
-  "left": "10px",
-  "right": "20px",
-}
+"
+left: 10px
+color: black
+right: 20px"
 `);
     expect(final1).toMatchInlineSnapshot(`
 Object {
@@ -276,42 +260,38 @@ describe("applyLastwinsStrategy pseudo WEB", () => {
     } = WEB.defineRulesets(WEB_DATA);
 
     expect(ruleset1).toMatchInlineSnapshot(`
-Array [
-  ".a:hover { color:green /*ruleset1*/ }",
-  ".b:hover { margin:5px /*ruleset1*/ }",
-  "@media (min-width: 768px).c:hover { color:red /*ruleset1*/ }",
-  "@media (min-width: 768px).d:hover:active { color:blue /*ruleset1*/ }",
-]
+"
+.a:hover { color:green /*ruleset1*/ }
+.b:hover { margin:5px /*ruleset1*/ }
+@media (min-width: 768px).c:hover { color:red /*ruleset1*/ }
+@media (min-width: 768px).d:hover:active { color:blue /*ruleset1*/ }"
 `);
     expect(ruleset2).toMatchInlineSnapshot(`
-Array [
-  ".e:hover { color:red /*ruleset2*/ }",
-  ".f:hover { padding:10px /*ruleset2*/ }",
-  "@media (min-width: 768px).g:hover { color:brown /*ruleset2*/ }",
-  "@media (min-width: 768px).h:hover:active { color:maroon /*ruleset2*/ }",
-]
+"
+.e:hover { color:red /*ruleset2*/ }
+.f:hover { padding:10px /*ruleset2*/ }
+@media (min-width: 768px).g:hover { color:brown /*ruleset2*/ }
+@media (min-width: 768px).h:hover:active { color:maroon /*ruleset2*/ }"
 `);
     expect(ruleset1Wins).toMatchInlineSnapshot(`
-Array [
-  "@media (min-width: 768px).d:hover:active { color:blue /*ruleset1*/ }",
-  "@media (min-width: 768px).c:hover { color:red /*ruleset1*/ }",
-  ".b:hover { margin:5px /*ruleset1*/ }",
-  ".a:hover { color:green /*ruleset1*/ }",
-  ".f:hover { padding:10px /*ruleset2*/ }",
-  "SOURCE=e f g h a b c d",
-  "RESULT=d c b a f",
-]
+"SOURCE=e f g h a b c d
+RESULT=d c b a f
+
+@media (min-width: 768px).d:hover:active { color:blue /*ruleset1*/ }
+@media (min-width: 768px).c:hover { color:red /*ruleset1*/ }
+.b:hover { margin:5px /*ruleset1*/ }
+.a:hover { color:green /*ruleset1*/ }
+.f:hover { padding:10px /*ruleset2*/ }"
 `);
     expect(ruleset2Wins).toMatchInlineSnapshot(`
-Array [
-  "@media (min-width: 768px).h:hover:active { color:maroon /*ruleset2*/ }",
-  "@media (min-width: 768px).g:hover { color:brown /*ruleset2*/ }",
-  ".f:hover { padding:10px /*ruleset2*/ }",
-  ".e:hover { color:red /*ruleset2*/ }",
-  ".b:hover { margin:5px /*ruleset1*/ }",
-  "SOURCE=a b c d e f g h",
-  "RESULT=h g f e b",
-]
+"SOURCE=a b c d e f g h
+RESULT=h g f e b
+
+@media (min-width: 768px).h:hover:active { color:maroon /*ruleset2*/ }
+@media (min-width: 768px).g:hover { color:brown /*ruleset2*/ }
+.f:hover { padding:10px /*ruleset2*/ }
+.e:hover { color:red /*ruleset2*/ }
+.b:hover { margin:5px /*ruleset1*/ }"
 `);
     expect(final1).toMatchInlineSnapshot(`"d c b a f"`);
     expect(final2).toMatchInlineSnapshot(`"h g f e b"`);

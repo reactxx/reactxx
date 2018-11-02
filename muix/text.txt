@@ -1,8 +1,6 @@
 cascading pipe
 primitives events
 Tests:
-- switch-comp
-- with-state
 - primitives
 
 

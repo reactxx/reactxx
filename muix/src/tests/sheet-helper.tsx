@@ -1,5 +1,5 @@
 import React from 'react'
-import { createSerializer, OutputMapper } from 'enzyme-to-json'
+//import { createSerializer, OutputMapper } from 'enzyme-to-json'
 import { RenderResult } from 'react-testing-library'
 
 import { TSheeter, TVariants, TComponents, TWithStyles } from 'reactxx-typings'
@@ -31,7 +31,9 @@ jest.mock('@expo/vector-icons', () => ({
     MaterialCommunityIcons: ({ children }) => null,
 }))
 
-export const ReactAny: React.SFC<any> = props => <div {...props}/> //({ children }) => children || null
+export const ReactAny: React.SFC<any> = props => {
+    return <div {...props} /> //({ children }) => children || null
+}
 ReactAny.displayName = 'ReactAny'
 
 export const setActWidth = (width: number) => {
@@ -51,8 +53,8 @@ export interface TraceOptions {
     actWidth?: number
 }
 
-export const adjustSnashotSerializer = () =>
-    expect.addSnapshotSerializer(createSerializer({ map: filter, noKey: true }) as any);
+// export const adjustSnashotSerializer = () =>
+//     expect.addSnapshotSerializer(createSerializer({ map: filter, noKey: true }) as any);
 
 export const traceComponentEx = (
     isWeb: boolean,
@@ -71,10 +73,12 @@ export const traceComponentEx = (
 
     if (actWidth) setActWidth(actWidth)
 
-    adjustSnashotSerializer()
+    //adjustSnashotSerializer()
     //expect.addSnapshotSerializer(createSerializer({ map: filter, noKey: true }) as any);
 
-    let wrapper = mount(node(Comp))
+    const nodeComp = node(Comp)
+    let wrapper = mount(nodeComp)
+    let {color, backgroundColor} = (wrapper.firstElementChild as HTMLElement).style
     //  JEST and ENZYME:
     if (finished)
         finished(wrapper, Comp)
@@ -85,7 +89,7 @@ export const traceComponentEx = (
 }
 
 // https://github.com/adriantoine/enzyme-to-json/issues/110
-const filter: OutputMapper = json => deleteProps(json)
+//const filter: OutputMapper = json => deleteProps(json)
 
 function deleteProps(json) {
     if (!json)
