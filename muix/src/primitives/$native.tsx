@@ -16,21 +16,21 @@ import { TPrimitives, CompNames } from './d-index'
 import { TWithStyles, TSheeter } from 'reactxx-typings'
 //import { styleX } from 'reactxx-core/tests/flow/drawer/props';
 
-const anyView: (isAnim: boolean) => TComponents.SFCCode<TPrimitives.ViewShape> = isAnim => {
-  const view = props => {
+const anyView = (isAnim: boolean) => {
+  const view: TComponents.SFCCode<TPrimitives.ViewShape> = props => {
     const ActView = isAnim ? Animated.View : ViewRN
     const { styleX, classNameX, toClassNames, classes, ...rest } = props
-    let presses
+    let presses: boolean
     const rootStyle = toClassNames([classes.root, classNameX, styleX])
     const res = <ActView classNameX={rootStyle} styleX={styleX} {...rest} /> as any
     return presses ? <TouchableWithoutFeedback {...presses}>{res}</TouchableWithoutFeedback> : res
   }
-  view.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { horizontal: props.horizontal }
+  //view.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { pressable: presses }
   return view
 }
 
-const anyText: (isAnim: boolean) => TComponents.SFCCode<TPrimitives.TextShape> = isAnim => {
-  const text = props => {
+const anyText = (isAnim: boolean) => {
+  const text: TComponents.SFCCode<TPrimitives.TextShape> = props => {
     const ActText = isAnim ? Animated.Text : TextRN
     const { classNameX, classes, toClassNames, singleLine, styleX, url/*, onClick*/, ...rest } = props
     let onPress
@@ -43,12 +43,12 @@ const anyText: (isAnim: boolean) => TComponents.SFCCode<TPrimitives.TextShape> =
 
     return <ActText classNameX={rootStyle} styleX={styleX} {...rest} onPress={doPress || undefined} />
   }
-  text.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { pressable: hasPlatformEvents(props), singleLine: props.singleLine }
+  text.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { pressable: false, singleLine: props.singleLine }
   return text
 }
 
-const anyScrollView: (isAnim: boolean) => TComponents.SFCCode<TPrimitives.ScrollViewShape> = isAnim => {
-  const scrollView = props => {
+const anyScrollView = (isAnim: boolean) => {
+  const scrollView: TComponents.SFCCode<TPrimitives.ScrollViewShape> = props => {
     const ActScrollView = isAnim ? Animated.ScrollView : ScrollViewRN
     const { styleX, classNameX, classes, toClassNames, horizontal, ...rest } = props
     const rootStyle = toClassNames([classes.root, classNameX, styleX])
@@ -59,8 +59,8 @@ const anyScrollView: (isAnim: boolean) => TComponents.SFCCode<TPrimitives.Scroll
   return scrollView
 }
 
-const anyIcon: (isAnim: boolean) => TComponents.SFCCode<TPrimitives.IconShape> = isAnim => {
-  const icon = props => {
+const anyIcon = (isAnim: boolean) => {
+  const icon: TComponents.SFCCode<TPrimitives.IconShape> = props => {
     const ActIcon = isAnim ? AnimatedIconLow : MaterialCommunityIcons
     const { styleX, classNameX, classes, toClassNames, children, data, url/*, onClick*/, ...rest } = props
     const rootStyle = toClassNames([classes.root, classNameX, styleX])
@@ -71,11 +71,11 @@ const anyIcon: (isAnim: boolean) => TComponents.SFCCode<TPrimitives.IconShape> =
       return Linking.openURL(url);
     }).catch(err => warning(false, `An error occurred: ${err}, ${url}`))
 
-    return <ActIcon name={(data || children as string) as MaterialCommunityIconsProps['name']} 
-    classNameX={rootStyle} styleX={styleX}
-     {...rest} onPress={doPress || undefined} />
+    return <ActIcon name={(data || children as string) as MaterialCommunityIconsProps['name']}
+      classNameX={rootStyle} styleX={styleX}
+      {...rest} onPress={doPress || undefined} />
   }
-  icon.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { pressable: hasPlatformEvents(props) }
+  icon.setSheetQuery = (props, sheetQuery) => sheetQuery.$switch = { pressable: false }
   return icon
 }
 const AnimatedIconLow = Animated.createAnimatedComponent(MaterialCommunityIcons)
@@ -85,7 +85,7 @@ const animatedView = anyView(true)
 const text = anyText(false)
 const animatedText = anyText(true)
 const scrollView = anyScrollView(false)
-const animatedScrollView = anyScrollView(true)
+//const animatedScrollView = anyScrollView(true)
 const icon = anyIcon(false)
 const animatedIcon = anyIcon(true)
 

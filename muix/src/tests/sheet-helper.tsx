@@ -24,6 +24,7 @@ jest.mock('react-native', () => ({
     View: doMock('View'),
     ScrollView: doMock('ScrollView'),
     Image: doMock('Image'),
+    TouchableWithoutFeedback: doMock('TouchableWithoutFeedback'),
     Animated: {
         Text: doMock('AnimatedText'),
         View: doMock('AnimatedView'),
