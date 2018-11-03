@@ -13,7 +13,7 @@ import { initPlatform, mount } from './index'
 import { Shape, theme } from './shape'
 //import { ReactWrapper } from 'enzyme';
 
-const doMock = (data:string) => {
+const doMock = (data: string) => {
     const res: React.SFC<any> = props => <div data={data.toUpperCase()} {...props} children={(props && props.children) || null} />
     res.displayName = data
     return res
@@ -65,13 +65,16 @@ export const traceComponentEx = (
     comp: TComponents.SFCCode<Shape>,
     node: (Comp: TComponents.ComponentClass<Shape>) => React.ReactElement<{}>,
     componentOptions?: TWithStyles.ComponentOptions<Shape>,
+    overrideOptions?: TWithStyles.ComponentOptions<Shape>,
     finished?: (wr: HTMLElement, Comp: React.ComponentType) => void,
 ) => {
     initPlatform(isWeb)
     const { traceLevel = 1, actWidth } = traceOptions
     WithStyle.registerTheme(null, theme)
     window.__TRACELEVEL__ = traceLevel
-    const Comp = WithStyle.withStylesCreator(sheet, comp)({ ...componentOptions || {}, displayName: 'TestComponent' })
+    const Comp = WithStyle.withStylesCreator
+        (sheet, comp, { ...componentOptions || {}, displayName: 'TestComponent' })
+        (overrideOptions)
 
     if (actWidth) setActWidth(actWidth)
 
@@ -80,7 +83,7 @@ export const traceComponentEx = (
 
     const nodeComp = node(Comp)
     let wrapper = mount(nodeComp)
-    let {color, backgroundColor} = (wrapper.firstElementChild as HTMLElement).style
+    let { color, backgroundColor } = (wrapper.firstElementChild as HTMLElement).style
     //  JEST and ENZYME:
     if (finished)
         finished(wrapper, Comp)
