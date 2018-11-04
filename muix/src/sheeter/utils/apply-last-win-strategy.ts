@@ -10,12 +10,8 @@ export const enum AttemptType {
     second
 }
 
-export type ApplyLastWinStrategyLow = (values: TAtomize.AtomicWeb[], attemptType: AttemptType) => ApplyLastWinStrategyResult
+//export type ApplyLastWinStrategyLow = (values: TAtomize.AtomicWeb[], attemptType: AttemptType) => ApplyLastWinStrategyResult
 
-export const applyLastwinsStrategyRoot = (values: TAtomize.AtomicArray, applyLastWinStrategyLow: ApplyLastWinStrategyLow) => {
-    let res = applyLastWinStrategyLow(values, AttemptType.firstIgnore)
-    return res.style
-}
 
 // export const applyLastwinsStrategyRoot_ = (values: TAtomize.AtomicArray, applyLastWinStrategyLow: ApplyLastWinStrategyLow) => {
 //     const processDeffereds = globals.processDeffereds

@@ -1,9 +1,8 @@
 import React from 'react'
-import { TComponents, TAtomize } from 'reactxx-typings'
+import { TComponents, TAtomize, TVariants } from 'reactxx-typings'
 import { deleteSystemProps, toClassNamesWithQuery } from '../to-classnames'
 
-import { applyLastwinsStrategyRoot, ApplyLastWinStrategyLow, AttemptType, ApplyLastWinStrategyResult } from '../utils/apply-last-win-strategy'
-import { isReactXXComponent, isDeffered } from '../atomize'
+import { isReactXXComponent } from '../atomize'
 import { platform } from '../index-native'
 
 /******************************************
@@ -35,7 +34,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
       styleX
         ? toClassNamesWithQuery(null, [classNameX, styleX])
         : classNameX
-    let reduced = applyLastwinsStrategy(style)
+    let reduced = applyLastwinsStrategy(style) as TAtomize.AtomicNativeLow
     props.style = finalizeClassName(reduced)
     if (window.__TRACELEVEL__ >= 2)
       props.trace = platform.dumpAtomized(reduced)
@@ -46,7 +45,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   return React.createElement(type, props, ...children)
 }
 
-export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastWinStrategyLow) as TAtomize.AtomicNativeLow
+//export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastWinStrategyLow) as TAtomize.AtomicNativeLow
 
 export const finalizeClassName = (lastWinResult: TAtomize.AtomicNativeLow) => {
   if (window.__TRACE__) {
@@ -57,33 +56,21 @@ export const finalizeClassName = (lastWinResult: TAtomize.AtomicNativeLow) => {
   return lastWinResult
 }
 
-const applyLastWinStrategyLow: ApplyLastWinStrategyLow = (values, attemptType) => {
+export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = values => {//(values: TAtomize.AtomicWeb[]) => {
   const res: TAtomize.NativeStyle = {}
   let idxs: number[] = []
-  let defferedFound = false
   const usedPropIds: { [propId: string]: boolean } = {}
   for (let k = values.length - 1; k >= 0; k--) {
     const value = values[k] as TAtomize.AtomicNative
     if (!value) continue
-    if (attemptType !== AttemptType.second) {
-      if (isDeffered(value)) {
-        if (attemptType !== AttemptType.firstIgnore) {
-          idxs.push(k)
-          defferedFound = true
-        }
-        continue
-      }
-    } else {
       if (Array.isArray(value)) {
         Array.prototype.push.apply(res, value)
         continue
-      }
     }
-    if (defferedFound) continue // first attempt and deffered found => ignore other values
     // last win strategy
     if (typeof res[value.propId] !== 'undefined') continue
     res[value.propId] = value.value
   }
-  return (attemptType !== AttemptType.second && defferedFound ? { defferedIdxs: idxs } : { style: res }) as ApplyLastWinStrategyResult
+  return res as TAtomize.AtomicArrayLow
 
 }

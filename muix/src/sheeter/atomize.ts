@@ -61,6 +61,3 @@ export function isReactXXComponent(obj): obj is TComponents.ComponentType {
     return obj[TAtomize.TypedInterfaceTypes.prop] === TAtomize.TypedInterfaceTypes.reactxxComponent
 }
 
-export function isDeffered(obj): obj is TAtomize.Variant {
-    return (obj as TAtomize.Variant).deffered
-}

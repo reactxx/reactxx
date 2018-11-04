@@ -23,7 +23,7 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, rulesets
         for (let j = 0; j < val.list.length; j++) {
             const rsi = val.list[j]
             if (!testConditions(rsi.conditions, state)) continue
-            values.push(rsi.deffered ? [rsi as TAtomize.Deffered] : rsi.atomicArray)
+            values.push(rsi.atomicArray)
         }
 
     }

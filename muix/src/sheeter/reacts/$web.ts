@@ -1,10 +1,9 @@
 import React from 'react'
-import { TAtomize, TComponents } from 'reactxx-typings'
+import { TAtomize, TVariants, TComponents } from 'reactxx-typings'
 
 import { deleteSystemProps } from '../to-classnames'
 import { mergeStyles } from '../merge'
-import { isReactXXComponent, isDeffered } from '../atomize'
-import { applyLastwinsStrategyRoot, AttemptType, ApplyLastWinStrategyResult } from '../utils/apply-last-win-strategy'
+import { isReactXXComponent } from '../atomize'
 import { platform } from '../index'
 
 /******************************************
@@ -35,7 +34,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   const { classNameX, styleX } = props
 
   if (classNameX) {
-    let lastWinResult = applyLastwinsStrategy(classNameX)
+    let lastWinResult = applyLastwinsStrategy(classNameX) as TAtomize.AtomicWebsLow
     const className = finalizeClassName(lastWinResult)
     props.className = props.className ? className + ' ' + props.className : className
     if (window.__TRACELEVEL__ >= 2) props.trace = platform.dumpAtomized(lastWinResult)
@@ -56,34 +55,24 @@ export const finalizeClassName = (lastWinResult: TAtomize.AtomicWebsLow) => {
   return lastWinResult.join(' ')
 }
 
-export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastwinsStrategyLow) as TAtomize.AtomicWebsLow
+//export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastwinsStrategyLow) as TAtomize.AtomicWebsLow
 
 // apply LAST WIN strategy for web className
-const applyLastwinsStrategyLow = (values: TAtomize.AtomicWebs, attemptType: AttemptType) => {
+export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = (values: TAtomize.AtomicWebs) => {//}, attemptType: AttemptType) => {
   const { renderer } = platform
 
   const res: TAtomize.AtomicWeb[] = []
   let idxs: number[] = []
-  let defferedFound = false
+  //let defferedFound = false
   const usedPropIds: { [propId: string]: boolean } = {}
   for (let k = values.length - 1; k >= 0; k--) {
     let value = values[k]
     if (!value) continue
-    if (attemptType !== AttemptType.second) {
-      if (isDeffered(value)) {
-        if (attemptType !== AttemptType.firstIgnore) {
-          idxs.push(k)
-          defferedFound = true
-        }
-        continue
-      }
-    } else {
-      if (Array.isArray(value)) {
-        Array.prototype.push.apply(res, value)
-        continue
-      }
+    if (Array.isArray(value)) {
+      Array.prototype.push.apply(res, value)
+      continue
     }
-    if (defferedFound) continue // first attempt and deffered found => ignore other values
+    //if (defferedFound) continue // first attempt and deffered found => ignore other values
     // last win strategy
     let propId: string = value as string
     if (window.__TRACE__) {
@@ -95,7 +84,7 @@ const applyLastwinsStrategyLow = (values: TAtomize.AtomicWebs, attemptType: Atte
     res.push(value)
     usedPropIds[propId] = true
   }
-  return (attemptType !== AttemptType.second && defferedFound ? { defferedIdxs: idxs } : { style: res }) as ApplyLastWinStrategyResult
+  return res as TAtomize.AtomicArrayLow
 }
 
 const consolidateEvents = (props: TComponents.Props & TComponents.Events & TComponents.EventsWeb) => {

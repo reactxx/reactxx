@@ -76,12 +76,13 @@ export namespace TVariants {
     }
     export interface Platform extends Options, Globals {
         toPlatformAtomizeRuleset?: ToPlatformAtomizeRulesetProc
-        dumpAtomized?: (classNames: TAtomize.AtomicArrayLow) => any,
-        applyLastwinsStrategy?: (values: TAtomize.AtomicArrayLow) => TAtomize.AtomicArrayLow
+        dumpAtomized?: (classNames: TAtomize.AtomicArrayLow | TAtomize.AtomicArray) => any,
+        applyLastwinsStrategy?: ApplyLastwinsStrategy
         finalizeClassName?: (values: TAtomize.AtomicArrayLow) => string | Record<string, any>
         createElement?: (type, props?, ...children) => any
     }
     export interface Globals { }
     export type ToPlatformAtomizeRulesetProc = (ruleset: {}, tracePath?: string) => TAtomize.AtomicArray
+    export type ApplyLastwinsStrategy = (values: TAtomize.Atomic[]) => TAtomize.AtomicArrayLow
 
 }

@@ -25,8 +25,8 @@ export const WEB = {
     const res = {
       ruleset1: platform.dumpAtomized(rs1),
       ruleset2: platform.dumpAtomized(rs2),
-      ruleset1Wins: web$dumpEx(concat1, rsWin1),
-      ruleset2Wins: web$dumpEx(concat2, rsWin2),
+      ruleset1Wins: web$dumpEx(concat1 as TAtomize.AtomicWebsLow, rsWin1),
+      ruleset2Wins: web$dumpEx(concat2 as TAtomize.AtomicWebsLow, rsWin2),
       final1: platform.finalizeClassName(rsWin1),
       final2: platform.finalizeClassName(rsWin2),
     };
