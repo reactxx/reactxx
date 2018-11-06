@@ -19,7 +19,7 @@ const init = (pipeId: number, pipelineState: TWithStyles.PipelineState) => {
     pipelineState.pipeStates[pipeId] = {
       propsCode: [defaultPropsRest, themedProps ? themedProps(theme) : null],
       classes: sheetFromThemeCache(componentId, sheetOrCreator, theme, classes, displayName),
-      classNameX: atomizeRuleset(classNameX, '', theme, `${displayName}.option.classNameX`),
+      classNameX: atomizeRuleset(classNameX, theme, `${displayName}.option.classNameX`),
       styleX: atomizeStyle(styleX, theme, `${displayName}.option.styleX`),
     }
   } else {

@@ -49,6 +49,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 }
 
 export const finalizeClassName = (lastWinResult: TAtomize.AtomicWebsLow) => {
+  if (!lastWinResult) return undefined
   if (window.__TRACE__) {
     lastWinResult = lastWinResult.map((r: TAtomize.__dev_AtomicWeb) => r.cache.className) as any
   }
@@ -58,32 +59,33 @@ export const finalizeClassName = (lastWinResult: TAtomize.AtomicWebsLow) => {
 //export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastwinsStrategyLow) as TAtomize.AtomicWebsLow
 
 // apply LAST WIN strategy for web className
-export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = (values: TAtomize.AtomicWebs) => {//}, attemptType: AttemptType) => {
+export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = (values: TAtomize.Ruleset) => {
+  if (!values) return null
+
   const { renderer } = platform
 
   const res: TAtomize.AtomicWeb[] = []
-  let idxs: number[] = []
-  //let defferedFound = false
   const usedPropIds: { [propId: string]: boolean } = {}
-  for (let k = values.length - 1; k >= 0; k--) {
-    let value = values[k]
-    if (!value) continue
-    if (Array.isArray(value)) {
-      Array.prototype.push.apply(res, value)
-      continue
+
+  for (let i = values.length - 1; i >= 0; i--)
+    for (let k = values[i].length - 1; k >= 0; k--) {
+      let value = values[i] && values[i][k]
+      if (!value) continue
+      if (Array.isArray(value)) {
+        Array.prototype.push.apply(res, value)
+        continue
+      }
+      let propId: string = value as string
+      if (window.__TRACE__) {
+        propId = (value as TAtomize.__dev_AtomicWeb).cache.className
+      }
+      propId = renderer.propIdCache[propId]
+      if (!propId || usedPropIds[propId])
+        continue
+      res.push(value as TAtomize.AtomicWeb)
+      usedPropIds[propId] = true
     }
-    //if (defferedFound) continue // first attempt and deffered found => ignore other values
-    // last win strategy
-    let propId: string = value as string
-    if (window.__TRACE__) {
-      propId = (value as TAtomize.__dev_AtomicWeb).cache.className
-    }
-    propId = renderer.propIdCache[propId]
-    if (!propId || usedPropIds[propId])
-      continue
-    res.push(value)
-    usedPropIds[propId] = true
-  }
+
   return res as TAtomize.AtomicArrayLow
 }
 

@@ -10,9 +10,9 @@ describe("ATOMIZE SHEET", () => {
         $web: (ts.web = {
           margin: 10
         }),
-        $native: (ts.nativeView = {
+        $native: (ts.nativeView = [{
           padding: 10
-        })
+        }])
       }),
       label: (ts.text = [
         {
@@ -20,9 +20,9 @@ describe("ATOMIZE SHEET", () => {
         }
       ]),
       webOnly: {
-        $web: (ts.web = {
+        $web: (ts.web = [{
           color: "red"
-        })
+        }])
       },
       nativeOnly: {
         $native: (ts.nativeView = {

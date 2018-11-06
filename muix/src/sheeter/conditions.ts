@@ -21,6 +21,8 @@ export const atomizeVariants: TVariants.ToAtomicRuleset<TVariants.VariantPart> =
             if (!rulesetsVariant) return
             // ... apply handler proc to ruleset's variant
             variantHandler.toAtomicRuleset(list, rulesetsVariant, path, pseudoPrefixes, conditions, rulesetToQueue)
+            // ... delete $<variant> field
+            delete ruleset[variantHandler.name]
         })
     }
 

@@ -14,7 +14,6 @@ declare namespace TWithStyles {
   export type GetPipes = (options: TWithStyles.ComponentOptions) => GetPipesResult
 
   export type FinishPropsCode = (instanceState: TWithStyles.PipelineState) => void
-  export type ProcessDeffereds = (values: TAtomize.AtomicArray, defferedIdxs: number[], state: TWithStyles.PipelineState) => void
 
   // component type options
   export interface ComponentOptions<R extends TSheeter.Shape = TSheeter.Shape> extends TVariants.ComponentOptions {

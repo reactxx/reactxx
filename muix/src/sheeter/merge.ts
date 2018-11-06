@@ -1,5 +1,4 @@
 import { TComponents, TAtomize, TSheeter } from 'reactxx-typings';
-import { isAtomicArray } from './atomize'
 import { deepMerge, deepMerges } from './utils/deep-merge'
 
 export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOrAtomized[]) => {
@@ -50,35 +49,37 @@ export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOr
     }
 }
 
-const mergeRuleset = (target: TAtomize.Ruleset, source: TAtomize.Ruleset) => {
+const mergeRuleset = (target: TAtomize.Variants, source: TAtomize.Variants) => {
     if (!target) return source
     if (!source) return target
-    const targeta = isAtomicArray(target), sourcea = isAtomicArray(source)
-    const res =
-        targeta && sourcea ?
-            [...target, ...source] : // return plain value arrays
-            { // return AtomizedRuleset
-                name: target['name'] || source['name'] || 'unknown',
-                list: [
-                    ...targeta ? target : (target as TAtomize.AtomizedRuleset).list,
-                    ...sourcea ? source : (source as TAtomize.AtomizedRuleset).list
-                ],
+    return [...source, ...target]
+    //const targeta = isAtomicArray(target), sourcea = isAtomicArray(source)
+    // const res =
+    //     targeta && sourcea ?
+    //         [...target, ...source] : // return plain value arrays
+    //         { // return AtomizedRuleset
+    //             name: target['name'] || source['name'] || 'unknown',
+    //             list: [
+    //                 ...targeta ? target : (target as TAtomize.AtomizedRuleset).list,
+    //                 ...sourcea ? source : (source as TAtomize.AtomizedRuleset).list
+    //             ],
 
-            }
-    res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomizedRuleset
-    return res as TAtomize.Ruleset
+    //         }
+    // res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomizedRuleset
+    // return res as TAtomize.Ruleset
 }
 
 export const mergeRulesets = (sources: TAtomize.Ruleset[]) => {
     if (!sources || sources.length === 0) return null
-    let res: TAtomize.Ruleset = null
+    let res: TAtomize.Variants | TAtomize.Ruleset = null
     let first = true
     sources.forEach(src => {
         if (!src) return
         res = first ? src : mergeRuleset(res, src)
         first = false
-    })
-    return res
+    });
+    (res as TAtomize.Ruleset).type = 'a'
+    return res as TAtomize.Ruleset
 }
 
 // inPlace===true => target is modified

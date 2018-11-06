@@ -20,11 +20,11 @@ export const createSheet = () =>
               },
               padding: 22
             } as TSheeter.RulesetOrAtomized, ''),
-            toClassNamesWithQuery(null, [
+            toClassNamesWithQuery(null, 
               {
                 padding: 33
               }
-            ])
+            )
           ]
         }
       }

@@ -48,6 +48,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 //export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastWinStrategyLow) as TAtomize.AtomicNativeLow
 
 export const finalizeClassName = (lastWinResult: TAtomize.AtomicNativeLow) => {
+  if (!lastWinResult) return undefined
   if (window.__TRACE__) {
     const res = {}
     for (const p in lastWinResult) res[p] = (lastWinResult[p] as TAtomize.__dev_AtomicNative).value
@@ -56,21 +57,22 @@ export const finalizeClassName = (lastWinResult: TAtomize.AtomicNativeLow) => {
   return lastWinResult
 }
 
-export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = values => {//(values: TAtomize.AtomicWeb[]) => {
+export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = values => {
+  if (!values) return null
   const res: TAtomize.NativeStyle = {}
   let idxs: number[] = []
   const usedPropIds: { [propId: string]: boolean } = {}
-  for (let k = values.length - 1; k >= 0; k--) {
-    const value = values[k] as TAtomize.AtomicNative
-    if (!value) continue
+  for (let i = values.length - 1; i >= 0; i--)
+    for (let k = values.length - 1; k >= 0; k--) {
+      let value = values[i] && values[i][k]
+      if (!value) continue
       if (Array.isArray(value)) {
         Array.prototype.push.apply(res, value)
         continue
+      }
+      // last win strategy
+      if (typeof res[value.propId] !== 'undefined') continue
+      res[value.propId] = value.value
     }
-    // last win strategy
-    if (typeof res[value.propId] !== 'undefined') continue
-    res[value.propId] = value.value
-  }
   return res as TAtomize.AtomicArrayLow
-
 }

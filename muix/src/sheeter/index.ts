@@ -1,13 +1,15 @@
 import React from 'react'
 
 export * from './utils/deep-merge'
-export * from './atomize'
 export * from './globals'
-export * from './atomize-low'
 export * from './conditions'
 export * from './merge'
-export * from './to-classnames'
 export * from './utils/wrap-pseudo-prefixes'
+
+export {atomizeSheet, atomizeRuleset, atomizeStyle} from './atomize'
+export {toClassNamesWithQuery} from './to-classnames'
+export {adjustAtomized, isTypedArray} from './atomize-low'
+
 
 import { init } from './$web'
 import { initGlobals } from './globals'

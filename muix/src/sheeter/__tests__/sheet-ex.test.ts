@@ -33,7 +33,7 @@ export const createSheet = () =>
               paddingTop: 11,
               paddingBottom: 11
             }
-          ])
+          ]) as any
         ]
       },
       atomizeRuleset([
@@ -41,23 +41,23 @@ export const createSheet = () =>
           marginTop: 21,
           marginBottom: 21
         }
-      ], ''),
+      ], '') as any,
       toClassNamesWithQuery(null, [
         {
           paddingTop: 22,
           paddingBottom: 22
         }
-      ])
+      ]) as any
     ]),
     label: toClassNamesWithQuery(null, {
       paddingTop: 31,
       paddingBottom: 31
-    }),
+    }) as any,
     webOnly: {
       $web: atomizeRuleset({
         marginTop: 41,
         marginBottom: 41
-      }, '')
+      }, '') as any
     },
     nativeOnly: {}
   });
@@ -65,12 +65,12 @@ export const createSheet = () =>
 describe("SWITCH define sheet", () => {
   it("NATIVE", () => {
     initPlatform(false);
-    const sheet = atomizeSheet<Shape>(createSheet());
+    const sheet = atomizeSheet<Shape>(createSheet() as any);
     expect(sheet).toMatchSnapshot();
   });
   it("WEB", () => {
     initPlatform(true);
-    const sheet = atomizeSheet<Shape>(createSheet());
+    const sheet = atomizeSheet<Shape>(createSheet() as any);
     expect(sheet).toMatchSnapshot();
   });
 });

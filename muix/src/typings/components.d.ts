@@ -29,7 +29,7 @@ declare namespace TComponents {
   - custom components (e.g. <IconButton classNameX={...})
   */
   export interface ReactsCommonProperties<R extends TSheeter.Shape = TSheeter.Shape> {
-    classNameX?: TAtomize.AtomicArray // TSheeter.ClassNameOrAtomized<R>
+    classNameX?: TAtomize.Ruleset // TSheeter.ClassNameOrAtomized<R>
     styleX?: TSheeter.StyleItem
     trace?: string
   }
@@ -42,7 +42,7 @@ declare namespace TComponents {
   }
 
   export interface ReactsCommonPropertiesNative<R extends TSheeter.Shape = TSheeter.Shape> extends ReactsCommonProperties<R> {
-    styleX?: TAtomize.AtomizedRuleset
+    styleX?: TAtomize.Ruleset
     style?: TAtomize.AtomicNativeLow
     $web?
   }
@@ -78,7 +78,7 @@ declare namespace TComponents {
     classNameX?: TAtomize.Ruleset
     styleX?: TSheeter.StyleItem
     classes?: TAtomize.Sheet<R>
-    toClassNames?: (rulesets: TSheeter.RulesetOrAtomized) => TAtomize.AtomicArray
+    toClassNames?: (rulesets: TSheeter.RulesetOrAtomized) => TAtomize.Ruleset
     theme?: TSheeter.getTheme<R>
     sheetQuery?: TVariants.Query<R> // merged pipe's pipeState.query
   }

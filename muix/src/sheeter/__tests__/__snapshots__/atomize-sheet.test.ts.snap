@@ -2,191 +2,111 @@
 
 exports[`ATOMIZE SHEET NATIVE, DEVELOPMENt 1`] = `
 Object {
-  "label": Object {
-    "list": Array [
-      Object {
-        "atomicArray": Array [
-          "color: blue /*sheet.label[0]*/",
-        ],
-      },
+  "label": Array [
+    Array [
+      "color: blue /*sheet.label[0]*/",
     ],
-    "name": "label",
-    "~": "c",
-  },
-  "nativeOnly": Object {
-    "list": Array [
-      Object {
-        "atomicArray": Array [
-          "margin: 20 /*sheet.nativeOnly/$native*/",
-        ],
-      },
+  ],
+  "nativeOnly": Array [
+    Array [
+      "margin: 20 /*sheet.nativeOnly/$native*/",
     ],
-    "name": "nativeOnly",
-    "~": "c",
-  },
-  "root": Object {
-    "list": Array [
-      Object {
-        "atomicArray": Array [
-          "margin: 4 /*sheet.root*/",
-          "padding: 4 /*sheet.root*/",
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          "padding: 10 /*sheet.root/$native*/",
-        ],
-      },
+  ],
+  "root": Array [
+    Array [
+      "margin: 4 /*sheet.root*/",
+      "padding: 4 /*sheet.root*/",
     ],
-    "name": "root",
-    "~": "c",
-  },
+    Array [
+      "padding: 10 /*sheet.root/$native[0]*/",
+    ],
+  ],
 }
 `;
 
 exports[`ATOMIZE SHEET NATIVE, PRODUCTION 1`] = `
 Object {
-  "label": Object {
-    "list": Array [
+  "label": Array [
+    Array [
       Object {
-        "atomicArray": Array [
-          Object {
-            "propId": "color",
-            "value": "blue",
-          },
-        ],
+        "propId": "color",
+        "value": "blue",
       },
     ],
-    "name": "label",
-    "~": "c",
-  },
-  "nativeOnly": Object {
-    "list": Array [
+  ],
+  "nativeOnly": Array [
+    Array [
       Object {
-        "atomicArray": Array [
-          Object {
-            "propId": "margin",
-            "value": 20,
-          },
-        ],
+        "propId": "margin",
+        "value": 20,
       },
     ],
-    "name": "nativeOnly",
-    "~": "c",
-  },
-  "root": Object {
-    "list": Array [
+  ],
+  "root": Array [
+    Array [
       Object {
-        "atomicArray": Array [
-          Object {
-            "propId": "margin",
-            "value": 4,
-          },
-          Object {
-            "propId": "padding",
-            "value": 4,
-          },
-        ],
+        "propId": "margin",
+        "value": 4,
       },
       Object {
-        "atomicArray": Array [
-          Object {
-            "propId": "padding",
-            "value": 10,
-          },
-        ],
+        "propId": "padding",
+        "value": 4,
       },
     ],
-    "name": "root",
-    "~": "c",
-  },
+    Array [
+      Object {
+        "propId": "padding",
+        "value": 10,
+      },
+    ],
+  ],
 }
 `;
 
 exports[`ATOMIZE SHEET WEB DEVELOPMENT 1`] = `
 Object {
-  "label": Object {
-    "list": Array [
-      Object {
-        "atomicArray": Array [
-          ".d { color:blue /*sheet.label[0]*/ }",
-        ],
-      },
+  "label": Array [
+    Array [
+      ".d { color:blue /*sheet.label[0]*/ }",
     ],
-    "name": "label",
-    "~": "c",
-  },
-  "root": Object {
-    "list": Array [
-      Object {
-        "atomicArray": Array [
-          ".a { margin:4px /*sheet.root*/ }",
-          ".b { padding:4px /*sheet.root*/ }",
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          ".c { margin:10px /*sheet.root/$web*/ }",
-        ],
-      },
+  ],
+  "root": Array [
+    Array [
+      ".a { margin:4px /*sheet.root*/ }",
+      ".b { padding:4px /*sheet.root*/ }",
     ],
-    "name": "root",
-    "~": "c",
-  },
-  "webOnly": Object {
-    "list": Array [
-      Object {
-        "atomicArray": Array [
-          ".e { color:red /*sheet.webOnly/$web*/ }",
-        ],
-      },
+    Array [
+      ".c { margin:10px /*sheet.root/$web*/ }",
     ],
-    "name": "webOnly",
-    "~": "c",
-  },
+  ],
+  "webOnly": Array [
+    Array [
+      ".e { color:red /*sheet.webOnly/$web[0]*/ }",
+    ],
+  ],
 }
 `;
 
 exports[`ATOMIZE SHEET WEB PRODUCTION 1`] = `
 Object {
-  "label": Object {
-    "list": Array [
-      Object {
-        "atomicArray": Array [
-          "d",
-        ],
-      },
+  "label": Array [
+    Array [
+      "d",
     ],
-    "name": "label",
-    "~": "c",
-  },
-  "root": Object {
-    "list": Array [
-      Object {
-        "atomicArray": Array [
-          "a",
-          "b",
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          "c",
-        ],
-      },
+  ],
+  "root": Array [
+    Array [
+      "a",
+      "b",
     ],
-    "name": "root",
-    "~": "c",
-  },
-  "webOnly": Object {
-    "list": Array [
-      Object {
-        "atomicArray": Array [
-          "e",
-        ],
-      },
+    Array [
+      "c",
     ],
-    "name": "webOnly",
-    "~": "c",
-  },
+  ],
+  "webOnly": Array [
+    Array [
+      "e",
+    ],
+  ],
 }
 `;

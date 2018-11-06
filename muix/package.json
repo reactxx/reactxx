@@ -23,16 +23,7 @@
     "moduleNameMapper": {
       "^reactxx-(.*)-native$": "<rootDir>/src/$1/index-native",
       "^reactxx-(.*)$": "<rootDir>/src/$1/index"
-    },
-    "reporters": [
-      "default",
-      [
-        "./node_modules/jest-html-reporter",
-        {
-          "pageTitle": "Test Report"
-        }
-      ]
-    ]
+    }
   },
   "dependencies": {
     "@types/react-event-listener": "^0.4.7",

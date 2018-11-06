@@ -1,5 +1,5 @@
-import { TComponents, TVariants } from 'reactxx-typings'
-import { platform, registerVariantHandler, atomizeRulesetLow, isAtomicArray } from 'reactxx-sheeter'
+import { TAtomize, TComponents, TVariants } from 'reactxx-typings'
+import { platform, registerVariantHandler, adjustAtomized, isTypedArray } from 'reactxx-sheeter'
 import { Consts } from '../variants'
 import { intervalToSelector, parse, test } from './parser'
 
@@ -32,18 +32,18 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<TVariants.SheetWidthsPart> = (
     for (const widthName in widths) {
         const casep = widths[widthName]
         if (!casep) continue
-        if (Array.isArray(casep) && !isAtomicArray(casep))
+        if (isTypedArray(casep))
             casep.forEach((ruleset, idx) =>
-                atomizeRulesetLow(
-                    ruleset, list,
+                adjustAtomized(
+                    list, ruleset, 
                     `${path}/$switch.${widthName}[${idx}]`,
                     pseudoPrefixes(widthName),
                     conditions(widthName))
             )
         else
-            atomizeRulesetLow(
-                casep,
+            adjustAtomized(
                 list,
+                casep as TAtomize.Source,
                 `${path}/$widths.${widthName}`,
                 pseudoPrefixes(widthName),
                 conditions(widthName))

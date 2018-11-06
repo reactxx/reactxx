@@ -1,11 +1,10 @@
 import { TAtomize, TVariants } from 'reactxx-typings'
 import { applyLastwinsStrategy, finalizeClassName, createElement } from './reacts/$native'
-import { assignPlatform } from 'reactxx-sheeter'
+import { assignPlatform } from './globals'
 
 export const init = () => assignPlatform({
     toPlatformAtomizeRuleset: (style, tracePath) => {
-        const res: TAtomize.AtomicArray = [] as any
-        res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
+        const res: TAtomize.AtomicNatives = []
         if (!style) return res
         for (const propId in style) {
             if (propId.charAt(0) === '$') continue
@@ -35,4 +34,6 @@ export const init = () => assignPlatform({
     createElement
 })
 
-function toJSON() { return `${this.propId}: ${this.value.value} /*${this.value.tracePath}*/` }
+function toJSON() { 
+    return `${this.propId}: ${this.value.value} /*${this.value.tracePath}*/` 
+}

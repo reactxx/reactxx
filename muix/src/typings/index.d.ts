@@ -75,14 +75,14 @@ export namespace TVariants {
         getPipes?: TWithStyles.GetPipes
     }
     export interface Platform extends Options, Globals {
-        toPlatformAtomizeRuleset?: ToPlatformAtomizeRulesetProc
-        dumpAtomized?: (classNames: TAtomize.AtomicArrayLow | TAtomize.AtomicArray) => any,
+        toPlatformAtomizeRuleset?: ToPlatformAtomizeRuleset
+        dumpAtomized?: (classNames: TAtomize.Variants | TAtomize.AtomicArrayLow) => any,
         applyLastwinsStrategy?: ApplyLastwinsStrategy
         finalizeClassName?: (values: TAtomize.AtomicArrayLow) => string | Record<string, any>
         createElement?: (type, props?, ...children) => any
     }
     export interface Globals { }
-    export type ToPlatformAtomizeRulesetProc = (ruleset: {}, tracePath?: string) => TAtomize.AtomicArray
-    export type ApplyLastwinsStrategy = (values: TAtomize.Atomic[]) => TAtomize.AtomicArrayLow
+    export type ToPlatformAtomizeRuleset = (ruleset: {}, tracePath?: string) => TAtomize.Variant
+    export type ApplyLastwinsStrategy = (values: TAtomize.Variants | TAtomize.AtomicWebs | TAtomize.AtomicNatives) => TAtomize.AtomicArrayLow
 
 }

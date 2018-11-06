@@ -1,9 +1,8 @@
 import warning from 'warning'
 import { isObject } from './utils/deep-merge'
 import { wrapPseudoPrefixes } from './utils/wrap-pseudo-prefixes'
-import { TAtomize, TSheeter, TCommonStyles, TVariants } from 'reactxx-typings'
+import { TSheeter, TVariants, TAtomize } from 'reactxx-typings'
 import { atomizeVariants } from './conditions'
-import { isAtomicArray, isAtomizedRuleset } from './atomize'
 
 // platform dependent import
 import { platform } from 'reactxx-sheeter'
@@ -15,76 +14,98 @@ import { platform } from 'reactxx-sheeter'
 //   where PARTITEM atomizedRuleset or atomicArray or {}
 // returns:
 // - fill list with parts
-export const atomizeRulesetLow = (
-    ruleset: TSheeter.RulesetOrAtomized, list: TAtomize.Variants,
+export const adjustAtomized = (
+    list: TAtomize.Variants, ruleset: TAtomize.Source,
     path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions,
 ) => {
-    const linear = linearize(ruleset)
+    const linear = linearize$web$native(ruleset)
     atomizedToList(linear, list, path, pseudoPrefixes, conditions)
 }
 
 // processed:
 // - variants
 // - pseudo
-const do_Push_Variants_Pseudos = (
-    ruleset: TVariants.VariantPart,
+const processVariantsPseudos = (
     list: TAtomize.Variants,
+    ruleset: TAtomize.ToAtomize,
     path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions,
     isInPseudo?: boolean
 ) => {
 
-    // push to ruleset list (dont push pseudos)
-    if (!isInPseudo) pushToList(list, wrapPseudoPrefixes(ruleset, pseudoPrefixes), conditions, path)
-
-    // process variant part of ruleset: $transition, $switch etc.
-    atomizeVariants(list, ruleset, path, pseudoPrefixes, conditions)
+    const variantList: TAtomize.Variants = []
+    // process variant part of ruleset: $widths, $switch etc.
+    atomizeVariants(variantList, ruleset as any, path, pseudoPrefixes, conditions)
 
     // parse pseudo rules (:hover etc.)
     for (const p in ruleset) {
-        const value = ruleset[p] as TSheeter.Ruleset
-        if (p.charAt(0) === '$') continue
-        if (isObject(value))
-            do_Push_Variants_Pseudos(value, list, `${path}/${p}`, [...pseudoPrefixes, p], conditions, true)
-        warning(!Array.isArray(value), 'Web pseudo properties cannot contain array')
+        const value = ruleset[p] as TAtomize.ToAtomize
+        if (!value || p.charAt(0) === '$' || typeof value !== 'object') continue
+        if (isAtomized(value))
+            warning(false, 'Web pseudo properties cannot contain atomized value')
+        else if (isTypedArray(value))
+            warning(false, 'Web pseudo properties cannot contain array of rulesets')
+        else
+            processVariantsPseudos(list, value, `${path}/${p}`, [...pseudoPrefixes, p], conditions, true)
     }
 
+    // push to ruleset list (dont push when in pseudo definition)
+    if (!isInPseudo) atomizeNonVariantPart(list, wrapPseudoPrefixes(ruleset, pseudoPrefixes), conditions, path)
+
+    if (variantList.length > 0)
+        Array.prototype.push.apply(list, variantList)
 }
 
 //*********************************************************
 //  PRIVATE
 //*********************************************************
 
-const pushToList = (
-    list: TAtomize.Variants, ruleset: TSheeter.Ruleset,
-    conditions: TVariants.Conditions, path: string
-) => {
-    if (!ruleset) return
-    push(platform.toPlatformAtomizeRuleset(ruleset, path), conditions, list)
+const pushToList = (list: TAtomize.Variants, variant: TAtomize.Variant, conditions: TVariants.Conditions) => {
+    if (!variant) return
+    list.push(variant)
+    if (conditions && conditions.length > 0) variant.conditions = conditions
 }
 
-const linearize = (ruleset: TSheeter.RulesetOrAtomized) => {
-    const parts: [string, TSheeter.RulesetItem][] = []
+const atomizeNonVariantPart = (
+    list: TAtomize.Variants, sourceRuleset: TSheeter.Ruleset,
+    conditions: TVariants.Conditions, path: string
+) => {
+    if (!sourceRuleset) return
+    const variant = platform.toPlatformAtomizeRuleset(sourceRuleset, path)
+    pushToList(list, variant, conditions)
+}
 
-    const addParts = (r: TSheeter.RulesetItem, idxPrefix: string) => {
+export function isTypedArray(obj): obj is TAtomize.ItemArray { return obj && !obj.type && Array.isArray(obj) }
+export function isToAtomize(obj): obj is TAtomize.ToAtomize { return obj && !obj.type && !Array.isArray(obj) }
+export function isAtomized(obj): obj is TAtomize.Ruleset { return obj && obj.type }
+export function isQueried(obj): obj is TAtomize.ToAtomize { return !obj || obj.type === 'q' }
+export function isQueriedVarint(obj): obj is TAtomize.Variant { return !obj || !obj.conditions }
+export function toQueryVarint(obj): obj is TAtomize.Variant { return obj && obj.conditions && obj.conditions.length > 0 }
+
+const linearize$web$native = (ruleset: TAtomize.Source) => {
+
+    const parts: [string, TAtomize.Item][] = []
+
+    const addParts = (r: TAtomize.Item, idxPrefix: string) => {
         if (!r) return
         parts.push([idxPrefix, r])
-        const { $web, $native } = r as TSheeter.Ruleset
+        if (!isToAtomize(r)) return
+        const { $web, $native } = r
         if (window.isWeb && $web) {
-            if (!isAtomicArray($web) && Array.isArray($web))
+            if (isTypedArray($web))
                 $web.forEach((r, idx) => parts.push([`${idxPrefix}/$web[${idx}]`, r] as any))
             else
                 parts.push([idxPrefix + '/$web', $web] as any)
         } else if (!window.isWeb && $native) {
-            if (!isAtomicArray($native) && Array.isArray($native))
+            if (isTypedArray($native))
                 $native.forEach((r, idx) => parts.push([`${idxPrefix}/$native[${idx}]`, r] as any))
             else
                 parts.push([idxPrefix + '/$native', $native] as any)
         }
+        if ($web) delete r.$web
+        if ($native) delete r.$native
     }
 
-    if (isAtomicArray(ruleset))
-        addParts(ruleset, '')
-    else if (Array.isArray(ruleset))
+    if (isTypedArray(ruleset))
         ruleset.forEach((r, idx) => addParts(r, `[${idx}]`))
     else
         addParts(ruleset, '') // atomicArray or atomicRuleset
@@ -92,35 +113,28 @@ const linearize = (ruleset: TSheeter.RulesetOrAtomized) => {
     return parts
 }
 
-const push = (atomicArray: TAtomize.AtomicArray, conditions: TVariants.Conditions, list: TAtomize.Variants) => {
-    if (!atomicArray || atomicArray.length === 0) return
-    list.push(conditions && conditions.length > 0 ? { atomicArray, conditions } : { atomicArray })
-}
-
 const atomizedToList = (
-    parts: [string, TSheeter.RulesetItem][],
+    parts: [string, TAtomize.Item][],
     list: TAtomize.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions,
 ) => {
     parts.forEach(part => {
         const item = part[1]
-        if (isAtomicArray(item)) {
+        if (isAtomized(item)) {
             warning(!pseudoPrefixes || pseudoPrefixes.length === 0, 'Incorrect behavior')
-            push(item, conditions, list)
-            //list.push(conditions && conditions.length > 0 ? { atomicArray: item, conditions } : { atomicArray: item })
-        } else if (isAtomizedRuleset(item)) {
-            warning(!pseudoPrefixes || pseudoPrefixes.length === 0, 'Incorrect behavior')
-            item.list.forEach(it => push(
-                it.atomicArray,
-                conditions && it.conditions ? [...conditions, ...it.conditions] : conditions ? conditions : it.conditions,
-                list
-            ))
-        } else {
-            do_Push_Variants_Pseudos(
-                item, list,
+            item.forEach(it => {
+                if (!conditions || conditions.length === 0)
+                    pushToList(list, it, null)
+                else {
+                    pushToList(list, { ...it },
+                        it.conditions ? [...conditions, ...it.conditions] : conditions)
+                }
+            })
+        } else
+            processVariantsPseudos(
+                list, item,
                 `${path}${part[0]}`,
                 pseudoPrefixes, conditions
             )
-        }
+
     })
-    return list
 }

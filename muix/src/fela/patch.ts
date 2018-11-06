@@ -4,6 +4,7 @@ import generateClassName from 'fela/lib/generateClassName';
 import isPlainObject from 'isobject';
 import { IRenderer } from 'fela'
 import { TAtomize } from 'reactxx-typings'
+import warning = require('warning');
 
 export interface IRendererEx extends IRenderer {
   renderRuleEx(style: {}, tracePath?: string): TAtomize.AtomicWebs
@@ -27,6 +28,20 @@ export default patch
 
 function renderRuleEx(style: {}, tracePath?: string): TAtomize.AtomicWebs {
   if (!style) return newAtomicWeb()
+  // const $ = {}
+  // let has$ = false, has = false
+  // for (const p in style) {
+  //   if (p.charAt(0) !== '$') {
+  //     has = true
+  //   } else {
+  //     has$ = true
+  //     $[p] = style[p]
+  //     delete style[p]
+  //   }
+  // }
+  // if (!has)
+  //   return null
+  //try {
   const processedStyle = processStyleWithPlugins(
     this,
     style,
@@ -35,14 +50,18 @@ function renderRuleEx(style: {}, tracePath?: string): TAtomize.AtomicWebs {
   )
 
   return renderStyleToClassNames(this, tracePath, processedStyle)//.slice(1)
+  // } finally {
+  //   if (has$)
+  //     Object.assign(style, $)
+  // }
 }
 
 const concat = (arr1: TAtomize.AtomicWebsLow, arr2: TAtomize.AtomicWebsLow) => arr2 ? arr1.concat(arr2) : arr1
 
 const newAtomicWeb = (def?) => {
-  let res: TAtomize.AtomicWebs = def || [] as any
-  res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
-  return res
+  // let res: TAtomize.AtomicWebs = def || [] as any
+  // res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
+  return def || []
 }
 
 const renderStyleToClassNames = (renderer: IRendererEx, tracePath: string, { _className, ...style }: any, pseudo: string = '', media: string = '', support: string = ''): TAtomize.AtomicWebs => {
@@ -52,8 +71,7 @@ const renderStyleToClassNames = (renderer: IRendererEx, tracePath: string, { _cl
   for (const property in style) {
 
     // reactxx HACK: ignore $... system properties
-    if (property.charAt(0) === '$')
-      continue
+    warning(property.charAt(0) !== '$', 'FELA PATCH: Something wrong')
 
     const value = style[property]
 

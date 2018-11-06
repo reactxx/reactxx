@@ -4,11 +4,15 @@ import { applyLastwinsStrategy, finalizeClassName, createElement } from './react
 
 export const init = () => {
     Fela.initFela$Web(platform)
+    // save 
+    //renderRuleEx = platform.renderer.renderRuleEx
     assignPlatform({
-        toPlatformAtomizeRuleset: (ruleset, tracePath) => platform.renderer.renderRuleEx(ruleset, tracePath),
+        toPlatformAtomizeRuleset: platform.renderer.renderRuleEx,
         dumpAtomized: Fela.dumpAtomized,
         applyLastwinsStrategy,
         finalizeClassName,
         createElement
     })
 }
+
+//let renderRuleEx

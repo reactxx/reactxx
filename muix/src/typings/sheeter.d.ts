@@ -16,12 +16,15 @@ declare namespace TSheeter {
   /******************************************
     RULESET - Cross platform ruleset for web and native
   *******************************************/
-  export type RulesetOrAtomizedCreator = RulesetOrAtomized | ((theme) => RulesetOrAtomized)
+  //export type ClassNameOrCreator = RulesetOrAtomized | ((theme) => RulesetOrAtomized)
 
+  export type RulesetOrAtomizedCreator<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
+    RulesetOrAtomized<T, R> | ((theme: getTheme<R>) => RulesetOrAtomized<T, R>)
   export type RulesetOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     RulesetItem<T, R> | RulesetItem<T, R>[]
   export type RulesetItem<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    Ruleset<T, R> | TAtomize.Ruleset
+    Ruleset<T, R>
+    | TAtomize.Ruleset
 
   export type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
@@ -36,9 +39,9 @@ declare namespace TSheeter {
   }
 
 
+  export type ClassNameOrCreator<R extends Shape = Shape> = ClassNameOrAtomized<R> | ((theme: getTheme<R>) => ClassNameOrAtomized<R>)
   export type ClassNameOrAtomized<R extends Shape = Shape> =
     RulesetItem<getStyle<R>, R> | RulesetItem<getStyle<R>, R>[]
-  export type ClassNameOrCreator<R extends Shape = Shape> = ClassNameOrAtomized<R> | ((theme: getTheme<R>) => ClassNameOrAtomized<R>)
 
   export type RulesetNativeOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     RulesetNativeItem<T, R> | RulesetNativeItem<T, R>[]

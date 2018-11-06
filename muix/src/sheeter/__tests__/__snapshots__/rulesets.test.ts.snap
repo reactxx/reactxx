@@ -1,0 +1,304 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ATOMIZE RULESET ## NATIVE ## 01 (null) 1`] = `null`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 02 ({}) 1`] = `null`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 03 ([null, undefined, {}]) 1`] = `null`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 04 ({ color: 'red', margin: 0 }) 1`] = `
+Array [
+  Array [
+    "color: red /*.*/",
+    "margin: 0 /*.*/",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 05 ([{ color: 'red' }, { margin: 0 }]) 1`] = `
+Array [
+  Array [
+    "color: red /*.[0]*/",
+  ],
+  Array [
+    "margin: 0 /*.[1]*/",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 06 (...$web: { color: 'green' }, $native: { color: 'blue' }) 1`] = `
+Array [
+  Array [
+    "color: red /*.*/",
+  ],
+  Array [
+    "color: blue /*./$native*/",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 07 isOpened: color: 'red', isClosed: color: 'blue' 1`] = `
+Array [
+  Array [
+    "color: red /*./$switch.isOpened*/",
+  ],
+  Array [
+    "color: blue /*./$switch.isClosed*/",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 08 :hover => isOpened => :active => color: 'red' 1`] = `null`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 09 atomizeRuleset(atomizeRuleset({color: 'red' 1`] = `
+Array [
+  Array [
+    "color: red /*.*/",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 10 atomizeRuleset({$web: atomizeRuleset({ color: 'red', $native: atomizeRuleset({ color: 'green' 1`] = `
+Array [
+  Array [
+    "color: green /*.*/",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 11 atomizeRuleset(isOpened => atomizeRuleset(color: 'red), isClosed => atomizeRuleset(color: 'green')) 1`] = `
+Array [
+  Object {
+    "0": "color: red /*.*/",
+    "conditions": Array [
+      Object {
+        "case": "isOpened",
+        "type": "$switch",
+      },
+    ],
+  },
+  Object {
+    "0": "color: green /*.*/",
+    "conditions": Array [
+      Object {
+        "case": "isClosed",
+        "type": "$switch",
+      },
+    ],
+  },
+]
+`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 12 variant's order: black-red-green-yellow-blue-brown 1`] = `
+Array [
+  Array [
+    "color: black /*.*/",
+  ],
+  Array [
+    "color: red /*./$switch.isOpened*/",
+  ],
+  Array [
+    "color: green /*./$switch.isOpened/$switch.isClosed*/",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 13 variant's order with array: $web => brown-blue-yellow-red-black 1`] = `
+Array [
+  Array [
+    "color: red /*.[1]/$switch.isOpened[1]*/",
+  ],
+  Array [
+    "color: black /*.[2]*/",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 13 variant's order with array: brown-blue-yellow-red-black 1`] = `
+Array [
+  Array [
+    "color: red /*.[1]/$switch.isOpened[1]*/",
+  ],
+  Array [
+    "color: black /*.[2]*/",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 14 ERROR for atomizeRuleset({:hover': atomizeRuleset(... 1`] = `null`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 15 ERROR for atomizeRuleset({:hover': [ARRAY] 1`] = `null`;
+
+exports[`ATOMIZE RULESET ## WEB ## 01 (null) 1`] = `null`;
+
+exports[`ATOMIZE RULESET ## WEB ## 02 ({}) 1`] = `null`;
+
+exports[`ATOMIZE RULESET ## WEB ## 03 ([null, undefined, {}]) 1`] = `null`;
+
+exports[`ATOMIZE RULESET ## WEB ## 04 ({ color: 'red', margin: 0 }) 1`] = `
+Array [
+  Array [
+    ".a { color:red /*.*/ }",
+    ".b { margin:0 /*.*/ }",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 05 ([{ color: 'red' }, { margin: 0 }]) 1`] = `
+Array [
+  Array [
+    ".a { color:red /*.[0]*/ }",
+  ],
+  Array [
+    ".b { margin:0 /*.[1]*/ }",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 06 (...$web: { color: 'green' }, $native: { color: 'blue' }) 1`] = `
+Array [
+  Array [
+    ".a { color:red /*.*/ }",
+  ],
+  Array [
+    ".b { color:green /*./$web*/ }",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 07 isOpened: color: 'red', isClosed: color: 'blue' 1`] = `
+Array [
+  Array [
+    ".a { color:red /*./$switch.isOpened*/ }",
+  ],
+  Array [
+    ".b { color:blue /*./$switch.isClosed*/ }",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 08 :hover => isOpened => :active => color: 'red' 1`] = `
+Array [
+  Array [
+    ".a:hover:active { color:red /*./$web/:hover/$switch.isOpened/$web*/ }",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 09 atomizeRuleset(atomizeRuleset({color: 'red' 1`] = `
+Array [
+  Array [
+    ".a { color:red /*.*/ }",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 10 atomizeRuleset({$web: atomizeRuleset({ color: 'red', $native: atomizeRuleset({ color: 'green' 1`] = `
+Array [
+  Array [
+    ".a { color:red /*.*/ }",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 11 atomizeRuleset(isOpened => atomizeRuleset(color: 'red), isClosed => atomizeRuleset(color: 'green')) 1`] = `
+Array [
+  Object {
+    "0": ".a { color:red /*.*/ }",
+    "conditions": Array [
+      Object {
+        "case": "isOpened",
+        "type": "$switch",
+      },
+    ],
+  },
+  Object {
+    "0": ".b { color:green /*.*/ }",
+    "conditions": Array [
+      Object {
+        "case": "isClosed",
+        "type": "$switch",
+      },
+    ],
+  },
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 12 variant's order: black-red-green-yellow-blue-brown 1`] = `
+Array [
+  Array [
+    ".d { color:black /*.*/ }",
+  ],
+  Array [
+    ".b { color:red /*./$switch.isOpened*/ }",
+  ],
+  Array [
+    ".a { color:green /*./$switch.isOpened/$switch.isClosed*/ }",
+  ],
+  Array [
+    ".c { color:yellow /*./$switch.isOpened/$web*/ }",
+  ],
+  Array [
+    ".f { color:blue /*./$web*/ }",
+  ],
+  Array [
+    ".e { color:brown /*./$web/$switch.isOpened*/ }",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 13 variant's order with array: $web => brown-blue-yellow-red-black 1`] = `
+Array [
+  Array [
+    ".a { color:brown /*.[0]/$web[0]/$switch.isOpened*/ }",
+  ],
+  Array [
+    ".b { color:blue /*.[0]/$web[1]*/ }",
+  ],
+  Array [
+    ".c { color:yellow /*.[1]/$switch.isOpened[0]/$web*/ }",
+  ],
+  Array [
+    ".d { color:red /*.[1]/$switch.isOpened[1]*/ }",
+  ],
+  Array [
+    ".e { color:black /*.[2]*/ }",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 13 variant's order with array: brown-blue-yellow-red-black 1`] = `
+Array [
+  Array [
+    ".a { color:brown /*.[0]/$web[0]/$switch.isOpened*/ }",
+  ],
+  Array [
+    ".b { color:blue /*.[0]/$web[1]*/ }",
+  ],
+  Array [
+    ".c { color:yellow /*.[1]/$switch.isOpened[0]/$web*/ }",
+  ],
+  Array [
+    ".d { color:red /*.[1]/$switch.isOpened[1]*/ }",
+  ],
+  Array [
+    ".e { color:black /*.[2]*/ }",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 14 ERROR for atomizeRuleset({:hover': atomizeRuleset(... 1`] = `
+Array [
+  Array [
+    ".b { :hover:[object Object] /*./$web*/ }",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 15 ERROR for atomizeRuleset({:hover': [ARRAY] 1`] = `
+Array [
+  Array [
+    ".a { :hover:[object Object];:hover:[object Object] /*./$web*/ }",
+  ],
+]
+`;

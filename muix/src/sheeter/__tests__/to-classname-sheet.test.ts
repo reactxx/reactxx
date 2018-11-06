@@ -10,8 +10,7 @@ export const createSheet = () =>
         $web: (ts.web = {
           margin: 10
         })
-      },
-      {
+      }, {
         $native: (ts.nativeView = {
           padding: 10
         })

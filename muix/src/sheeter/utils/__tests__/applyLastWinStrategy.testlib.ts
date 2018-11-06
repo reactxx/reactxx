@@ -16,8 +16,8 @@ const web$dumpEx = (concated: TAtomize.AtomicWebsLow, merged: TAtomize.AtomicArr
 
 export const WEB = {
   defineRulesets: ({ ruleset1, ruleset2 }) => {
-    const rs1 = platform.toPlatformAtomizeRuleset(ruleset1, 'ruleset1')
-    const rs2 = platform.toPlatformAtomizeRuleset(ruleset2, 'ruleset2')
+    const rs1 = [platform.toPlatformAtomizeRuleset(ruleset1, 'ruleset1')]
+    const rs2 = [platform.toPlatformAtomizeRuleset(ruleset2, 'ruleset2')]
     const concat1 = rs2.concat(rs1)
     const concat2 = rs1.concat(rs2)
     const rsWin1 = platform.applyLastwinsStrategy(concat1)
@@ -34,13 +34,13 @@ export const WEB = {
   }
 }
 
-const native$dumpEx = (concated: TAtomize.Atomic[], merged: TAtomize.AtomicArrayLow) =>
+const native$dumpEx = (concated: TAtomize.Variants, merged: TAtomize.AtomicArrayLow) =>
   platform.dumpAtomized(merged);
 
 export const NATIVE = {
   defineRulesets: ({ ruleset1, ruleset2 }) => {
-    const rs1 = platform.toPlatformAtomizeRuleset(ruleset1, 'ruleset1')
-    const rs2 = platform.toPlatformAtomizeRuleset(ruleset2, 'ruleset2')
+    const rs1 = [platform.toPlatformAtomizeRuleset(ruleset1, 'ruleset1')]
+    const rs2 = [platform.toPlatformAtomizeRuleset(ruleset2, 'ruleset2')]
     const concat1 = rs2.concat(rs1)
     const concat2 = rs1.concat(rs2)
     const rsWin1 = platform.applyLastwinsStrategy(concat1)

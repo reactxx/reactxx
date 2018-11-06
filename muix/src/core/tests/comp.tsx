@@ -223,7 +223,7 @@ type SheetCommon<R extends Shape> = keyof TSheeter.getCommon<R> extends never ? 
     { [P in keyof TSheeter.getCommon<R>]: RulesetOrAtomized<TSheeter.getCommon<R>[P], R> | RulesetOrAtomized<TSheeter.getCommon<R>[P], R>[] }
 
 const TAtomizeRuleset: TAtomize.Ruleset = null
-const TAtomizeAtomicArray: TAtomize.AtomicArray = null
+const TAtomizeAtomicArray: TAtomize.Ruleset = null
 const sheet3: Partial<SheetCommon<Shape>> = {
     root: [
         TAtomizeRuleset,

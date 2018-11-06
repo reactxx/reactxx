@@ -4,6 +4,31 @@ import { TWithStyles } from './with-styles';
 
 declare namespace TAtomize {
 
+  export type Source = Item | ItemArray
+
+  export interface Typed {
+      type: Types
+  }
+  export type Item = ToAtomize | Ruleset
+  export interface ItemArray extends Array<Item> { }
+
+  export interface ToAtomize extends Typed {
+      type: undefined
+      name?: string // ruleset name
+      $web: Source
+      $native: Source
+  }
+  export interface Ruleset extends Array<Variant>, Typed {
+      type: 'a' | 'q' // a: atomized, q: queried
+  }
+  export interface Variant extends Array<Atomic> {
+      conditions?: TVariants.Conditions
+  }
+  export type Variants = Variant[]
+  //export type Item = ToAtomize /*TSheeter.Ruleset*/ | Ruleset /*already atomized ruleset*/
+  export type Types = undefined | 'a' | 'q'
+
+
   // export interface Platform {
   //   toPlatformAtomizeRuleset: ToPlatformAtomizeRulesetProc
   //   dumpAtomized: (classNames: AtomicArrayLow) => any,
@@ -27,30 +52,27 @@ declare namespace TAtomize {
     [TypedInterfaceTypes.prop]: string
   }
 
-  export type Sheet<R extends TSheeter.Shape = TSheeter.Shape> = { [P in TSheeter.RulesetNamesAll<R>]: AtomizedRuleset }
+  export type Sheet<R extends TSheeter.Shape = TSheeter.Shape> = { [P in TSheeter.RulesetNamesAll<R>]: Ruleset }
 
-  export interface AtomizedRuleset extends TypedInterface {
-    [TypedInterfaceTypes.prop]: TypedInterfaceTypes.atomizedRuleset
-    name: string
-    list: Variants
-  }
-  export type Variants = Variant[]
-  export interface Variant {
-    atomicArray?: AtomicArray // class names for web, propId-propValue for native
-    conditions?: TVariants.Conditions // conditions (when is ruleset used)
-  }
-  export interface Deffered extends Variant, TypedInterface {
+  // export interface AtomizedRuleset extends TypedInterface {
+  //   [TypedInterfaceTypes.prop]: TypedInterfaceTypes.atomizedRuleset
+  //   //name: string
+  //   list: Variants
+  // }
+  // export type Variants = Variant[]
+  // export interface Variant {
+  //   atomicArray?: AtomicArray // class names for web, propId-propValue for native
+  //   conditions?: TVariants.Conditions // conditions (when is ruleset used)
+  // }
 
-  }
+  // export interface AtomicArrayExtension {
+  //   [TypedInterfaceTypes.prop]: TypedInterfaceTypes.atomicArray
+  //   state?: TWithStyles.PipelineState
+  // }
 
-  export interface AtomicArrayExtension {
-    [TypedInterfaceTypes.prop]: TypedInterfaceTypes.atomicArray
-    state?: TWithStyles.PipelineState
-  }
-
-  export type AtomicArray =
-    AtomicArrayExtension &
-    Atomic[] // last value in array (with the same propId) wins!
+  // export type AtomicArray =
+  //   AtomicArrayExtension &
+  //   Atomic[] // last value in array (with the same propId) wins!
 
   export type NativeStyle = Record<string, TNativeRuleValue>
 
@@ -79,13 +101,13 @@ declare namespace TAtomize {
     tracePath: string
   }
 
-  export type AtomicNatives = AtomicNative[] & AtomicArrayExtension
-  export type AtomicWebs = AtomicWeb[] & AtomicArrayExtension
+  export type AtomicNatives = AtomicNative[] //& AtomicArrayExtension
+  export type AtomicWebs = AtomicWeb[] //& AtomicArrayExtension
 
   export type AtomicArrayLow = AtomicWebsLow | AtomicNativeLow
   export type AtomicWebsLow = AtomicWeb[]
   export type AtomicNativeLow = Record<string, TNativeRuleValue>
 
-  export type Ruleset = AtomizedRuleset | AtomicArray
+  //export type Ruleset = AtomizedRuleset | AtomicArray
 
 }

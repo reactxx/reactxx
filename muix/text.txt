@@ -1,3 +1,5 @@
+remova 'name' from AtomizedRuleset
+
 primitives events
 Tests:
 - primitives
