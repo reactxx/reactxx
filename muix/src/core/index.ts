@@ -2,7 +2,6 @@
 import { TSheeter, TVariants } from 'reactxx-typings'
 import { widthsPipe, initWidths } from 'reactxx-sheet-widths'
 import { initSwitch } from 'reactxx-sheet-switch'
-import { innerStatePipe } from 'reactxx-with-state'
 
 //import { initGlobals } from 'reactxx-with-styles'
 

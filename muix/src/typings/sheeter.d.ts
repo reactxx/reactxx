@@ -16,8 +16,6 @@ declare namespace TSheeter {
   /******************************************
     RULESET - Cross platform ruleset for web and native
   *******************************************/
-  //export type ClassNameOrCreator = RulesetOrAtomized | ((theme) => RulesetOrAtomized)
-
   export type RulesetOrAtomizedCreator<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     RulesetOrAtomized<T, R> | ((theme: getTheme<R>) => RulesetOrAtomized<T, R>)
   export type RulesetOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
@@ -161,7 +159,6 @@ declare namespace TSheeter {
   export type getPropsNative<R extends Shape> = R['propsNative']
   export type getEvents<R extends Shape = Shape> = keyof R['events']
   export type getTheme<R extends Shape = Shape> = keyof R['theme'] extends never ? FakeInterface : R['theme']
-  export type getInnerState<R extends Shape = Shape> = keyof R['innerState'] extends never ? FakeInterface : R['innerState']
   export type getStaticProps<R extends Shape = Shape> = keyof R['staticProps'] extends never ? FakeInterface : R['staticProps']
 
   export type RulesetNamesAll<R extends Shape> = keyof getCommon<R> | keyof getNative<R> | getWeb<R>
@@ -174,10 +171,6 @@ declare namespace TSheeter {
 
   export interface EmptyInterface { }
   export interface FakeInterface { ['`']?: any }
-  //export interface EmptyInterface { }
-
-  //export type RulesetItem<R extends Shape = Shape> = Ruleset<getStyle<R>, R> | TAtomize.Ruleset
-  //export type RulesetOrAtomized<R extends Shape = Shape> = ClassNameItem<R> | ClassNameItem<R>[]
 
   export type SheetX<R extends Shape = Shape> = Sheet<R> | TAtomize.Sheet<R>
 
