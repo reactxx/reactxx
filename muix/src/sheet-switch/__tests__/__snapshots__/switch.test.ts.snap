@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SWITCH define sheet ## NATIVE ## 01 isOpened: color: 'red', isClosed: color: 'blue' 1`] = `
+Array [
+  Array [
+    "color: red /*./$switch.isOpened*/",
+  ],
+  Array [
+    "color: blue /*./$switch.isClosed*/",
+  ],
+]
+`;
+
+exports[`SWITCH define sheet ## NATIVE ## 02 :hover => isOpened => :active => color: 'red' 1`] = `null`;
+
+exports[`SWITCH define sheet ## NATIVE ## 03 atomizeRuleset(isOpened => atomizeRuleset(color: 'red), isClosed => atomizeRuleset(color: 'green')) 1`] = `
+Array [
+  Object {
+    "0": "color: red /*.*/",
+    "conditions": Array [
+      Object {
+        "case": "isOpened",
+        "type": "$switch",
+      },
+    ],
+  },
+  Object {
+    "0": "color: green /*.*/",
+    "conditions": Array [
+      Object {
+        "case": "isClosed",
+        "type": "$switch",
+      },
+    ],
+  },
+]
+`;
+
+exports[`SWITCH define sheet ## NATIVE ## 04 variant's order: black-red-green-yellow-blue-brown 1`] = `
+Array [
+  Array [
+    "color: black /*.*/",
+  ],
+  Array [
+    "color: red /*./$switch.isOpened*/",
+  ],
+  Array [
+    "color: green /*./$switch.isOpened/$switch.isClosed*/",
+  ],
+]
+`;
+
+exports[`SWITCH define sheet ## NATIVE ## 05 variant's order with array: $web => brown-blue-yellow-red-black 1`] = `
+Array [
+  Array [
+    "color: red /*.[1]/$switch.isOpened[1]*/",
+  ],
+  Array [
+    "color: black /*.[2]*/",
+  ],
+]
+`;
+
+exports[`SWITCH define sheet ## WEB ## 01 isOpened: color: 'red', isClosed: color: 'blue' 1`] = `
+Array [
+  Array [
+    ".a { color:red /*./$switch.isOpened*/ }",
+  ],
+  Array [
+    ".b { color:blue /*./$switch.isClosed*/ }",
+  ],
+]
+`;
+
+exports[`SWITCH define sheet ## WEB ## 02 :hover => isOpened => :active => color: 'red' 1`] = `
+Array [
+  Array [
+    ".a:hover:active { color:red /*./$web/:hover/$switch.isOpened/$web*/ }",
+  ],
+]
+`;
+
+exports[`SWITCH define sheet ## WEB ## 03 atomizeRuleset(isOpened => atomizeRuleset(color: 'red), isClosed => atomizeRuleset(color: 'green')) 1`] = `
+Array [
+  Object {
+    "0": ".a { color:red /*.*/ }",
+    "conditions": Array [
+      Object {
+        "case": "isOpened",
+        "type": "$switch",
+      },
+    ],
+  },
+  Object {
+    "0": ".b { color:green /*.*/ }",
+    "conditions": Array [
+      Object {
+        "case": "isClosed",
+        "type": "$switch",
+      },
+    ],
+  },
+]
+`;
+
+exports[`SWITCH define sheet ## WEB ## 04 variant's order: black-red-green-yellow-blue-brown 1`] = `
+Array [
+  Array [
+    ".d { color:black /*.*/ }",
+  ],
+  Array [
+    ".b { color:red /*./$switch.isOpened*/ }",
+  ],
+  Array [
+    ".a { color:green /*./$switch.isOpened/$switch.isClosed*/ }",
+  ],
+  Array [
+    ".c { color:yellow /*./$switch.isOpened/$web*/ }",
+  ],
+  Array [
+    ".f { color:blue /*./$web*/ }",
+  ],
+  Array [
+    ".e { color:brown /*./$web/$switch.isOpened*/ }",
+  ],
+]
+`;
+
+exports[`SWITCH define sheet ## WEB ## 05 variant's order with array: $web => brown-blue-yellow-red-black 1`] = `
+Array [
+  Array [
+    ".a { color:brown /*.[0]/$web[0]/$switch.isOpened*/ }",
+  ],
+  Array [
+    ".b { color:blue /*.[0]/$web[1]*/ }",
+  ],
+  Array [
+    ".c { color:yellow /*.[1]/$switch.isOpened[0]/$web*/ }",
+  ],
+  Array [
+    ".d { color:red /*.[1]/$switch.isOpened[1]*/ }",
+  ],
+  Array [
+    ".e { color:black /*.[2]*/ }",
+  ],
+]
+`;

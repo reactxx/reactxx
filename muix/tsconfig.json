@@ -126,7 +126,7 @@
 
     "src/primitives",
     "src/core",
-    "src/ks/web", "src/simple-di.d.ts", "src/simpledi/index.ts",
+    "src/ks/web", 
 
     // "src/basic",
     // "src/mui-web",

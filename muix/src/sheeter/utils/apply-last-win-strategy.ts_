@@ -1,0 +1,12 @@
+import { TAtomize } from 'reactxx-typings'
+
+// export interface ApplyLastWinStrategyResult {
+//     style?: TAtomize.AtomicWebsLow | TAtomize.AtomicNativeLow
+//     defferedIdxs?: number[]
+// }
+// export const enum AttemptType {
+//     first,
+//     firstIgnore,
+//     second
+// }
+

@@ -6,73 +6,32 @@ declare namespace TAtomize {
 
   export type Source = Item | ItemArray
 
-  export interface Typed {
-      type: Types
+  export interface Signed {
+    $r$?: true
   }
   export type Item = ToAtomize | Ruleset
   export interface ItemArray extends Array<Item> { }
 
-  export interface ToAtomize extends Typed {
-      type: undefined
-      name?: string // ruleset name
-      $web: Source
-      $native: Source
+  export interface ToAtomize extends Signed {
+    name?: string // ruleset name
+    $web: Source
+    $native: Source
   }
-  export interface Ruleset extends Array<Variant>, Typed {
-      type: 'a' | 'q' // a: atomized, q: queried
+  export interface Ruleset extends Array<Variant>, Signed {
+    $r$: true // a: atomized, q: queried
   }
   export interface Variant extends Array<Atomic> {
-      conditions?: TVariants.Conditions
+    conditions?: TVariants.Conditions
   }
   export type Variants = Variant[]
-  //export type Item = ToAtomize /*TSheeter.Ruleset*/ | Ruleset /*already atomized ruleset*/
-  export type Types = undefined | 'a' | 'q'
 
-
-  // export interface Platform {
-  //   toPlatformAtomizeRuleset: ToPlatformAtomizeRulesetProc
-  //   dumpAtomized: (classNames: AtomicArrayLow) => any,
-  //   applyLastwinsStrategy: (values: AtomicArrayLow) => AtomicArrayLow
-  //   finalClassNameStep: (values: AtomicArrayLow) => string | Record<string, any>
-  //   createElement
-  // }
-  // export type ToPlatformAtomizeRulesetProc = (ruleset: {}, tracePath?: string) => AtomicArray
   export type GetPlatformTracePath = (value: Atomic) => string
-  //export type ToPlatformClassName = (array: AtomicArray, propsPlatform: {style, className}) => void
 
-  export const enum TypedInterfaceTypes {
-    prop = '~',
-    atomizedRuleset = 'c'/*compiled ruleset*/,
-    atomicArray = 'v' /*value array*/,
-    reactxxComponent = 'x',
-    //atomizedStyleWeb = 'w',
-  }
-
-  export interface TypedInterface {
-    [TypedInterfaceTypes.prop]: string
+  export interface IsReactXXComponent {
+    $c$?: boolean
   }
 
   export type Sheet<R extends TSheeter.Shape = TSheeter.Shape> = { [P in TSheeter.RulesetNamesAll<R>]: Ruleset }
-
-  // export interface AtomizedRuleset extends TypedInterface {
-  //   [TypedInterfaceTypes.prop]: TypedInterfaceTypes.atomizedRuleset
-  //   //name: string
-  //   list: Variants
-  // }
-  // export type Variants = Variant[]
-  // export interface Variant {
-  //   atomicArray?: AtomicArray // class names for web, propId-propValue for native
-  //   conditions?: TVariants.Conditions // conditions (when is ruleset used)
-  // }
-
-  // export interface AtomicArrayExtension {
-  //   [TypedInterfaceTypes.prop]: TypedInterfaceTypes.atomicArray
-  //   state?: TWithStyles.PipelineState
-  // }
-
-  // export type AtomicArray =
-  //   AtomicArrayExtension &
-  //   Atomic[] // last value in array (with the same propId) wins!
 
   export type NativeStyle = Record<string, TNativeRuleValue>
 

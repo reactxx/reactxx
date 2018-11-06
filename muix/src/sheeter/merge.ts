@@ -1,5 +1,7 @@
+import warning from 'warning'
 import { TComponents, TAtomize, TSheeter } from 'reactxx-typings';
 import { deepMerge, deepMerges } from './utils/deep-merge'
+import { isAtomized } from './atomize-low';
 
 export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOrAtomized[]) => {
     if (!sources)
@@ -49,51 +51,22 @@ export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOr
     }
 }
 
-const mergeRuleset = (target: TAtomize.Variants, source: TAtomize.Variants) => {
-    if (!target) return source
-    if (!source) return target
-    return [...source, ...target]
-    //const targeta = isAtomicArray(target), sourcea = isAtomicArray(source)
-    // const res =
-    //     targeta && sourcea ?
-    //         [...target, ...source] : // return plain value arrays
-    //         { // return AtomizedRuleset
-    //             name: target['name'] || source['name'] || 'unknown',
-    //             list: [
-    //                 ...targeta ? target : (target as TAtomize.AtomizedRuleset).list,
-    //                 ...sourcea ? source : (source as TAtomize.AtomizedRuleset).list
-    //             ],
-
-    //         }
-    // res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomizedRuleset
-    // return res as TAtomize.Ruleset
-}
-
 export const mergeRulesets = (sources: TAtomize.Ruleset[]) => {
     if (!sources || sources.length === 0) return null
     let res: TAtomize.Variants | TAtomize.Ruleset = null
     let first = true
     sources.forEach(src => {
         if (!src) return
-        res = first ? src : mergeRuleset(res, src)
+        warning (isAtomized(src), 'All rulesets must be atomized first')
+        res = first ? src : [...res, ...src]
         first = false
     });
-    (res as TAtomize.Ruleset).type = 'a'
+    (res as TAtomize.Ruleset).$r$ = true
     return res as TAtomize.Ruleset
-}
-
-// inPlace===true => target is modified
-export const mergeSheet = (target: TAtomize.Sheet, source: TAtomize.Sheet) => {
-    if (!source) return target
-    if (!target) return source
-    for (const p in source)
-        target[p] = mergeRuleset(target[p], source[p])
-    return target
 }
 
 export const mergeSheets = (sources: TAtomize.Sheet[]) => {
     if (!sources || sources.length === 0) return null
-    if (sources.length === 1) return sources[0]
     const ruleLists: Record<string, Array<any>> = {}
     sources.forEach(src => {
         if (!src) return
@@ -108,11 +81,6 @@ export const mergeSheets = (sources: TAtomize.Sheet[]) => {
     for (const p in ruleLists)
         res[p] = mergeRulesets(ruleLists[p])
     return res
-    // switch (count) {
-    //     case 0: res = src; count++; break
-    //     case 1: res = mergeSheet(res, src, false); count++; break
-    //     default: res = mergeSheet(res, src, true); break
-    // }
 }
 
 export const mergeCodeProps = (sources: (TComponents.PropsCode | TComponents.PropsCode[])[]) => {

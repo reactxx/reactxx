@@ -1,6 +1,6 @@
 export * from './variants'
 import { TComponents, TSheeter, TVariants, TAtomize } from 'reactxx-typings'
-import { registerVariantHandler, adjustAtomized, isTypedArray, resetPlatform, platform } from 'reactxx-sheeter'
+import { registerVariantHandler, adjustAtomized, isToAtomizeArray, resetPlatform, platform } from 'reactxx-sheeter'
 import { Consts } from './variants'
 
 export const initSwitch = (force?: boolean) => {
@@ -29,7 +29,7 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
 ) => {
     for (const p in cases) {
         const casep = cases[p]
-        if (isTypedArray(casep))
+        if (isToAtomizeArray(casep))
             casep.forEach((ruleset, idx) =>
                 adjustAtomized(
                     list,

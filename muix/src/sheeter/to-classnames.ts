@@ -1,13 +1,13 @@
 import { TWithStyles, TSheeter, TAtomize, TVariants } from 'reactxx-typings'
 import { atomizeRuleset } from './atomize'
-import { isToAtomize, isQueried, isTypedArray } from './atomize-low'
+import { isToAtomize, isToAtomizeArray } from './atomize-low'
 import { testConditions } from './conditions'
 
 export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, ruleset: TSheeter.ClassNameOrAtomized) => {
 
     const rs = ruleset as (TAtomize.Ruleset | TAtomize.Ruleset[])
 
-    if (isQueried(rs)) return rs as TAtomize.Ruleset // already done, e.g. single Ruleset without conditions
+    //if (isQueried(rs)) return rs as TAtomize.Ruleset // already done, e.g. single Ruleset without conditions
 
     let values: TAtomize.Variants | TAtomize.Ruleset = null
 
@@ -20,11 +20,6 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, ruleset:
     const process = (val: TAtomize.Variants) => {
         if (!val || val.length === 0) return
 
-        if (isQueried(val)) {
-            if (val) push(val)
-            return
-        }
-
         if (isToAtomize(val)) {
             val = atomizeRuleset(val as any, state && state.theme)
             if (!val || val.length === 0) return
@@ -33,14 +28,14 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, ruleset:
         push(val.filter(variant => variant && testConditions(variant.conditions, state)))
     }
 
-    if (isTypedArray(rs))
+    if (isToAtomizeArray(rs))
         rs.forEach(r => process(r))
     else
         process(rs);
 
     if (!values) return null;
     
-    (values as TAtomize.Ruleset).type = 'q'
+    (values as TAtomize.Ruleset).$r$ = true
     return values as TAtomize.Ruleset
 }
 

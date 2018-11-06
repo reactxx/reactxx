@@ -42,7 +42,7 @@ const processVariantsPseudos = (
         if (!value || p.charAt(0) === '$' || typeof value !== 'object') continue
         if (isAtomized(value))
             warning(false, 'Web pseudo properties cannot contain atomized value')
-        else if (isTypedArray(value))
+        else if (isToAtomizeArray(value))
             warning(false, 'Web pseudo properties cannot contain array of rulesets')
         else
             processVariantsPseudos(list, value, `${path}/${p}`, [...pseudoPrefixes, p], conditions, true)
@@ -74,12 +74,12 @@ const atomizeNonVariantPart = (
     pushToList(list, variant, conditions)
 }
 
-export function isTypedArray(obj): obj is TAtomize.ItemArray { return obj && !obj.type && Array.isArray(obj) }
+export function isToAtomizeArray(obj): obj is TAtomize.ItemArray { return obj && !obj.type && Array.isArray(obj) }
 export function isToAtomize(obj): obj is TAtomize.ToAtomize { return obj && !obj.type && !Array.isArray(obj) }
-export function isAtomized(obj): obj is TAtomize.Ruleset { return obj && obj.type }
-export function isQueried(obj): obj is TAtomize.ToAtomize { return !obj || obj.type === 'q' }
-export function isQueriedVarint(obj): obj is TAtomize.Variant { return !obj || !obj.conditions }
-export function toQueryVarint(obj): obj is TAtomize.Variant { return obj && obj.conditions && obj.conditions.length > 0 }
+export function isAtomized(obj): obj is TAtomize.Ruleset { return !obj || obj.type }
+//export function isQueried(obj): obj is TAtomize.ToAtomize { return !obj || obj.type === 'q' }
+//export function isQueriedVarint(obj): obj is TAtomize.Variant { return !obj || !obj.conditions }
+//export function toQueryVarint(obj): obj is TAtomize.Variant { return obj && obj.conditions && obj.conditions.length > 0 }
 
 const linearize$web$native = (ruleset: TAtomize.Source) => {
 
@@ -91,12 +91,12 @@ const linearize$web$native = (ruleset: TAtomize.Source) => {
         if (!isToAtomize(r)) return
         const { $web, $native } = r
         if (window.isWeb && $web) {
-            if (isTypedArray($web))
+            if (isToAtomizeArray($web))
                 $web.forEach((r, idx) => parts.push([`${idxPrefix}/$web[${idx}]`, r] as any))
             else
                 parts.push([idxPrefix + '/$web', $web] as any)
         } else if (!window.isWeb && $native) {
-            if (isTypedArray($native))
+            if (isToAtomizeArray($native))
                 $native.forEach((r, idx) => parts.push([`${idxPrefix}/$native[${idx}]`, r] as any))
             else
                 parts.push([idxPrefix + '/$native', $native] as any)
@@ -105,7 +105,7 @@ const linearize$web$native = (ruleset: TAtomize.Source) => {
         if ($native) delete r.$native
     }
 
-    if (isTypedArray(ruleset))
+    if (isToAtomizeArray(ruleset))
         ruleset.forEach((r, idx) => addParts(r, `[${idx}]`))
     else
         addParts(ruleset, '') // atomicArray or atomicRuleset

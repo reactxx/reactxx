@@ -57,14 +57,13 @@ declare namespace TComponents {
     TEventsX<R>>
 
   export type TEventsX<R extends Shape = Shape> = PartialRecord<TSheeter.getEvents<R>, MouseEventEx<R>>
-  export type ComponentType<R extends Shape = Shape> = React.ComponentType<Props<R>> & {
-    // 
+  export type ComponentType<R extends Shape = Shape> = React.ComponentType<Props<R>> & TAtomize.IsReactXXComponent & {
     classes: TSheeter.PartialSheet<R>
     classNamex: TSheeter.ClassNameOrAtomized<R>
   }
   export type ComponentClass<R extends Shape = Shape> = React.ComponentClass<Props<R>> & TSheeter.getStaticProps<R> & TProvider<R>
   export interface TProvider<R extends TSheeter.Shape = TSheeter.Shape> { Provider: React.ComponentClass<TComponents.Props<R>> }
-  
+
   //******************** Cross platform component code props
 
   export type PropsCode<R extends Shape = Shape> = PartialOverwrite<TSheeter.getProps<R>,

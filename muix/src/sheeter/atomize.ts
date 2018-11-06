@@ -4,9 +4,9 @@ import { TAtomize, TSheeter, TComponents, TCommonStyles } from 'reactxx-typings'
 import { createWithTheme } from './utils/create-with-theme'
 import { adjustAtomized } from './atomize-low'
 
-export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetOrCreator<R>, theme?, path: string = 'sheet') => {
+export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.PartialSheetOrCreator<R>, theme?, path: string = 'sheet') => {
     if (!sheet) return null
-    const sh: TSheeter.Sheet = createWithTheme(sheet, theme, window.__TRACE__)
+    const sh: TSheeter.Sheet = createWithTheme(sheet, theme)
     for (const p in sh) {
         const at = atomizeRuleset(sh[p], theme, (path ? path + '.' : '') + p)
         if (at) sh[p] = at
@@ -24,10 +24,8 @@ export const atomizeRuleset = <T extends TCommonStyles.RulesetNativeIds = 'Text'
 
     if (!rs) return null
 
-    //const name = rulesetName || rs['name'] || '.'
-
     const list: TAtomize.Ruleset = [] as any
-    list.type = 'q'
+    list.$r$ = true
     adjustAtomized(list, rs, path, [], [])
 
     return list.length === 0 ? null : list
@@ -41,20 +39,7 @@ export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme?, path: strin
         return atomizeRuleset(style as TSheeter.RulesetOrAtomized, theme, path)
 }
 
-// export function isAtomizedRuleset(obj: Object): obj is TAtomize.AtomizedRuleset {
-//     return obj && obj['~'] === TAtomize.TypedInterfaceTypes.atomizedRuleset
-// }
-
-// export function isAtomicArray(obj): obj is TAtomize.AtomicArray {
-//     return obj && obj[TAtomize.TypedInterfaceTypes.prop] === TAtomize.TypedInterfaceTypes.atomicArray
-// }
-// export function isAtomizedSheet<R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.SheetX): sheet is TAtomize.Sheet<R> {
-//     for (const p in sheet)
-//         return isAtomizedRuleset(sheet[p])
-//     return true
-// }
-
 export function isReactXXComponent(obj): obj is TComponents.ComponentType {
-    return obj[TAtomize.TypedInterfaceTypes.prop] === TAtomize.TypedInterfaceTypes.reactxxComponent
+    return (obj as TComponents.ComponentType).$c$
 }
 

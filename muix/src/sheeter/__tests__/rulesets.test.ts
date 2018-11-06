@@ -1,8 +1,7 @@
 import {
-  atomizeRuleset as atomizeRuleset,
-  toClassNamesWithQuery as toClassNamesWithQuery
+  atomizeRuleset,
 } from "reactxx-sheeter"
-import { initPlatform, Shape, ts } from "reactxx-tests"
+import { initPlatform, Shape, theme } from "reactxx-tests"
 
 describe("ATOMIZE RULESET", () => {
 
@@ -44,47 +43,14 @@ describe("ATOMIZE RULESET", () => {
       expect(ruleset).toMatchSnapshot()
     })
 
-    it("07 isOpened: color: 'red', isClosed: color: 'blue'", () => {
-      ruleset = atomizeRuleset<'Text', Shape>({
-        $switch: {
-          isOpened: {
-            color: 'red'
-          },
-          isClosed: {
-            color: 'blue'
-          },
-        }
-      })
-      expect(ruleset).toMatchSnapshot()
-    })
-
-    it("08 :hover => isOpened => :active => color: 'red'", () => {
-      ruleset = atomizeRuleset<'Text', Shape>({
-        $web: {
-          ':hover': {
-            $switch: {
-              isOpened: {
-                $web: {
-                  ':active': {
-                    color: 'red'
-                  }
-                }
-              }
-            }
-          }
-        }
-      })
-      expect(ruleset).toMatchSnapshot()
-    })
-
-    it("09 atomizeRuleset(atomizeRuleset({color: 'red'", () => {
+    it("07 atomizeRuleset(atomizeRuleset({color: 'red'", () => {
       ruleset = atomizeRuleset(atomizeRuleset({
         color: 'red'
       }) as any)
       expect(ruleset).toMatchSnapshot()
     })
 
-    it("10 atomizeRuleset({$web: atomizeRuleset({ color: 'red', $native: atomizeRuleset({ color: 'green'", () => {
+    it("08 atomizeRuleset({$web: atomizeRuleset({ color: 'red', $native: atomizeRuleset({ color: 'green'", () => {
       ruleset = atomizeRuleset({
         $web: atomizeRuleset({ color: 'red' }) as any,
         $native: atomizeRuleset({ color: 'green' }) as any
@@ -92,73 +58,7 @@ describe("ATOMIZE RULESET", () => {
       expect(ruleset).toMatchSnapshot()
     })
 
-    it("11 atomizeRuleset(isOpened => atomizeRuleset(color: 'red), isClosed => atomizeRuleset(color: 'green'))", () => {
-      ruleset = atomizeRuleset<'Text', Shape>({
-        $switch: {
-          isOpened: atomizeRuleset({ color: 'red' }) as any,
-          isClosed: atomizeRuleset({ color: 'green' }) as any,
-        }
-      })
-      expect(ruleset).toMatchSnapshot()
-    })
-
-    it("12 variant's order: black-red-green-yellow-blue-brown", () => {
-      ruleset = atomizeRuleset<'Text', Shape>({
-        $web: {
-          color: 'blue',
-          $switch: {
-            isOpened: {
-              color: 'brown',
-            }
-          }
-        },
-        $switch: {
-          isOpened: {
-            color: 'red',
-            $web: {
-              color: 'yellow'
-            },
-            $switch: {
-              isClosed: {
-                color: 'green',
-              }
-            }
-          },
-        },
-        color: 'black'
-      })
-      expect(ruleset).toMatchSnapshot()
-    })
-
-    it("13 variant's order with array: $web => brown-blue-yellow-red-black", () => {
-      ruleset = atomizeRuleset<'Text', Shape>([{
-        $web: [{
-          $switch: {
-            isOpened: {
-              color: 'brown',
-            }
-          }
-        }, {
-          color: 'blue',
-        }],
-      }, {
-        $switch: {
-          isOpened: [{
-            $web: {
-              color: 'yellow'
-            },
-          }, {
-            color: 'red',
-          }],
-        },
-
-      }, {
-        color: 'black'
-      }])
-      expect(ruleset).toMatchSnapshot()
-    })
-
-    it("14 ERROR for atomizeRuleset({:hover': atomizeRuleset(...", () => {
+    it("09 ERROR for atomizeRuleset({:hover': atomizeRuleset(...", () => {
       ruleset = atomizeRuleset({
         $web: {
           ':hover': atomizeRuleset({ color: 'red' }) as any,
@@ -167,7 +67,7 @@ describe("ATOMIZE RULESET", () => {
       expect(ruleset).toMatchSnapshot()
     })
 
-    it("15 ERROR for atomizeRuleset({:hover': [ARRAY]", () => {
+    it("10 ERROR for atomizeRuleset({:hover': [ARRAY]", () => {
       ruleset = atomizeRuleset({
         $web: {
           ':hover': [
@@ -179,6 +79,26 @@ describe("ATOMIZE RULESET", () => {
       expect(ruleset).toMatchSnapshot()
     })
 
+    it("11 with theme", () => {
+      ruleset = atomizeRuleset<'Text', Shape>(theme => [
+        theme.primary.normal,
+        {
+          $web: theme.secondary.normal,
+        }
+      ], theme)
+      expect(ruleset).toMatchSnapshot()
+    })
+
+    it("12 ATOMIZE modifies source object", () => {
+      const source = {
+        color: 'blue',
+        $web: {color: 'red'},
+        $native: {color: 'green'},
+      }
+      ruleset = atomizeRuleset(source)
+      expect(ruleset).toMatchSnapshot()
+      expect(source).toMatchSnapshot()
+    })
   }
 
   describe("## NATIVE ##", () => doTest(false))

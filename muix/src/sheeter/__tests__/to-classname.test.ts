@@ -17,7 +17,7 @@ describe("TO CLASSNAMES", () => {
     dump(toClassNamesWithQuery(sheetQuery(isOpened), ruleset))
 
   const doTest = (isWeb: boolean) => {
-    beforeEach(() => initPlatform(isWeb))
+    beforeEach(() => initPlatform(isWeb, true))
     let ruleset
     it("01: null", () => dump(toClassNamesWithQuery(null, null)))
     it("02: null, {}, undefined", () => dump(toClassNamesWithQuery(null, [null, {}, undefined])))

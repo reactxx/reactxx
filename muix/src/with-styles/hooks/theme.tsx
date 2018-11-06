@@ -1,6 +1,6 @@
-import React, {useContext} from 'react';
-import { atomizeSheet, platform, mergeSheet } from 'reactxx-sheeter';
-import { TAtomize, TSheeter, TWithStyles } from 'reactxx-typings';
+import React, { useContext } from 'react';
+import { atomizeSheet, platform, mergeSheets } from 'reactxx-sheeter';
+import { TAtomize, TSheeter } from 'reactxx-typings';
 import warning from 'warning';
 //import { ThemeProviderProps } from 'react-fela';
 
@@ -17,13 +17,13 @@ export const registerTheme = (name: string, theme) => {
 }
 
 // https://github.com/Microsoft/TypeScript/issues/3960#issuecomment-144529141
-export const ThemeProviderGeneric: React.SFC<ThemeProviderProps> = props => {
+export const ThemeProviderGeneric: React.SFC<ThemeProviderProps> & TAtomize.IsReactXXComponent = props => {
   const { children, theme, registeredThemeName } = props
   const actTheme = registeredThemeName ? platform._withStyles.namedThemes[registeredThemeName] : theme
   warning(actTheme, 'ThemeProvider: missing theme')
   return <themeContext.Provider value={actTheme}>{children}</themeContext.Provider>
 }
-ThemeProviderGeneric[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.reactxxComponent
+ThemeProviderGeneric.$c$ = true
 
 export interface ThemeProviderProps<R extends TSheeter.Shape = TSheeter.Shape> {
   registeredThemeName?: string
@@ -45,7 +45,7 @@ export const sheetFromThemeCache = (
   value = atomizeSheet(sheetOrCreator, theme, path + '.sheet')
   if (defaultClasses) {
     const _defaultClasses = atomizeSheet(defaultClasses, theme, path + '.option.classes')
-    mergeSheet(value, _defaultClasses)
+    mergeSheets([value, _defaultClasses])
   }
 
   cache[componentId] = value

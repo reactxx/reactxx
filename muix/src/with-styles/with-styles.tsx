@@ -53,8 +53,8 @@ const withStyles = (options: TWithStyles.ComponentOptions) => {
     public static displayName = options.displayName
   }
 
-  const styled = Styled as unknown as TComponents.ComponentClass
-  styled[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.reactxxComponent
+  const styled = Styled as unknown as TComponents.ComponentClass as TAtomize.IsReactXXComponent
+  styled.$c$ = true
   //if (window.process)
   if (process.env.NODE_ENV === 'development') {
     styled['~~'] = 'comp'

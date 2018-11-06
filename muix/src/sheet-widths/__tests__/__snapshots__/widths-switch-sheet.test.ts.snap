@@ -2,108 +2,38 @@
 
 exports[`WIDTHS+SWITCH define sheet NATIVE 1`] = `
 Object {
-  "root": Object {
-    "list": Array [
-      Object {
-        "atomicArray": Array [
-          "margin: 0 /*sheet.root/$widths.0-640*/",
-        ],
-        "conditions": Array [
-          Object {
-            "interval": Array [
-              0,
-              640,
-            ],
-            "type": "$widths",
-          },
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          "backgroundColor: gray /*sheet.root/$widths.0-640/$switch.isClosed*/",
-        ],
-        "conditions": Array [
-          Object {
-            "interval": Array [
-              0,
-              640,
-            ],
-            "type": "$widths",
-          },
-          Object {
-            "case": "isClosed",
-            "type": "$switch",
-          },
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          "margin: 10 /*sheet.root/$widths.640-1024*/",
-        ],
-        "conditions": Array [
-          Object {
-            "interval": Array [
-              640,
-              1024,
-            ],
-            "type": "$widths",
-          },
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          "margin: 20 /*sheet.root/$widths.1024-*/",
-        ],
-        "conditions": Array [
-          Object {
-            "interval": Array [
-              1024,
-              0,
-            ],
-            "type": "$widths",
-          },
-        ],
-      },
+  "root": Array [
+    Array [
+      "margin: 0 /*sheet.root/$widths.0-640*/",
     ],
-    "name": "root",
-    "~": "c",
-  },
+    Array [
+      "backgroundColor: gray /*sheet.root/$widths.0-640/$switch.isClosed*/",
+    ],
+    Array [
+      "margin: 10 /*sheet.root/$widths.640-1024*/",
+    ],
+    Array [
+      "margin: 20 /*sheet.root/$widths.1024-*/",
+    ],
+  ],
 }
 `;
 
 exports[`WIDTHS+SWITCH define sheet WEB 1`] = `
 Object {
-  "root": Object {
-    "list": Array [
-      Object {
-        "atomicArray": Array [
-          "@media (max-width: 639px).a { margin:0 /*sheet.root/$widths.0-640*/ }",
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          "@media (max-width: 639px).b { background-color:gray /*sheet.root/$widths.0-640/$switch.isClosed*/ }",
-        ],
-        "conditions": Array [
-          Object {
-            "case": "isClosed",
-            "type": "$switch",
-          },
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          "@media (min-width: 640px) and (max-width: 1023px).c { margin:10px /*sheet.root/$widths.640-1024*/ }",
-        ],
-      },
-      Object {
-        "atomicArray": Array [
-          "@media (min-width: 1024px).d { margin:20px /*sheet.root/$widths.1024-*/ }",
-        ],
-      },
+  "root": Array [
+    Array [
+      "@media (max-width: 639px).b { margin:0 /*sheet.root/$widths.0-640*/ }",
     ],
-    "name": "root",
-    "~": "c",
-  },
+    Array [
+      "@media (max-width: 639px).a { background-color:gray /*sheet.root/$widths.0-640/$switch.isClosed*/ }",
+    ],
+    Array [
+      "@media (min-width: 640px) and (max-width: 1023px).c { margin:10px /*sheet.root/$widths.640-1024*/ }",
+    ],
+    Array [
+      "@media (min-width: 1024px).d { margin:20px /*sheet.root/$widths.1024-*/ }",
+    ],
+  ],
 }
 `;

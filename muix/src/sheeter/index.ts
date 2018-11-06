@@ -8,7 +8,7 @@ export * from './utils/wrap-pseudo-prefixes'
 
 export {atomizeSheet, atomizeRuleset, atomizeStyle} from './atomize'
 export {toClassNamesWithQuery} from './to-classnames'
-export {adjustAtomized, isTypedArray} from './atomize-low'
+export {adjustAtomized, isToAtomizeArray} from './atomize-low'
 
 
 import { init } from './$web'

@@ -1,5 +1,5 @@
 import React from 'react';
-import { atomizeSheet, platform, mergeSheet } from 'reactxx-sheeter';
+import { atomizeSheet, platform, mergeSheets } from 'reactxx-sheeter';
 import { TAtomize, TSheeter, TWithStyles } from 'reactxx-typings';
 import warning from 'warning';
 
@@ -31,8 +31,8 @@ export class ThemeProviderGeneric<R extends TSheeter.Shape> extends React.Compon
     warning(actTheme, 'ThemeProvider: missing theme')
     return <themeContext.Provider value={actTheme}>{children}</themeContext.Provider>
   }
-}
-ThemeProviderGeneric[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.reactxxComponent
+} 
+(ThemeProviderGeneric as TAtomize.IsReactXXComponent).$c$ = true
 export interface ThemeProviderProps<R extends TSheeter.Shape> {
   registeredThemeName?: string
   theme?: TSheeter.getTheme<R>
@@ -54,7 +54,7 @@ export const sheetFromThemeCache = (
   value = atomizeSheet(sheetOrCreator, theme, path + '.sheet')
   if (defaultClasses) {
     const _defaultClasses = atomizeSheet(defaultClasses, theme, path + '.option.classes')
-    mergeSheet(value, _defaultClasses)
+    mergeSheets([value, _defaultClasses])
   }
 
   cache[componentId] = value

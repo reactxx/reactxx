@@ -114,20 +114,35 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## NATIVE ## 13 variant's order with array: brown-blue-yellow-red-black 1`] = `
+exports[`ATOMIZE RULESET ## NATIVE ## 14 ERROR for atomizeRuleset({:hover': atomizeRuleset(... 1`] = `null`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 15 ERROR for atomizeRuleset({:hover': [ARRAY] 1`] = `null`;
+
+exports[`ATOMIZE RULESET ## NATIVE ## 16 with theme 1`] = `
 Array [
   Array [
-    "color: red /*.[1]/$switch.isOpened[1]*/",
-  ],
-  Array [
-    "color: black /*.[2]*/",
+    "color: white /*.[0]*/",
+    "backgroundColor: darkgreen /*.[0]*/",
   ],
 ]
 `;
 
-exports[`ATOMIZE RULESET ## NATIVE ## 14 ERROR for atomizeRuleset({:hover': atomizeRuleset(... 1`] = `null`;
+exports[`ATOMIZE RULESET ## NATIVE ## 17 ATOMIZE modifies source object 1`] = `
+Array [
+  Array [
+    "color: blue /*.*/",
+  ],
+  Array [
+    "color: green /*./$native*/",
+  ],
+]
+`;
 
-exports[`ATOMIZE RULESET ## NATIVE ## 15 ERROR for atomizeRuleset({:hover': [ARRAY] 1`] = `null`;
+exports[`ATOMIZE RULESET ## NATIVE ## 17 ATOMIZE modifies source object 2`] = `
+Object {
+  "color": "blue",
+}
+`;
 
 exports[`ATOMIZE RULESET ## WEB ## 01 (null) 1`] = `null`;
 
@@ -267,26 +282,6 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## WEB ## 13 variant's order with array: brown-blue-yellow-red-black 1`] = `
-Array [
-  Array [
-    ".a { color:brown /*.[0]/$web[0]/$switch.isOpened*/ }",
-  ],
-  Array [
-    ".b { color:blue /*.[0]/$web[1]*/ }",
-  ],
-  Array [
-    ".c { color:yellow /*.[1]/$switch.isOpened[0]/$web*/ }",
-  ],
-  Array [
-    ".d { color:red /*.[1]/$switch.isOpened[1]*/ }",
-  ],
-  Array [
-    ".e { color:black /*.[2]*/ }",
-  ],
-]
-`;
-
 exports[`ATOMIZE RULESET ## WEB ## 14 ERROR for atomizeRuleset({:hover': atomizeRuleset(... 1`] = `
 Array [
   Array [
@@ -301,4 +296,34 @@ Array [
     ".a { :hover:[object Object];:hover:[object Object] /*./$web*/ }",
   ],
 ]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 16 with theme 1`] = `
+Array [
+  Array [
+    ".a { color:white /*.[0]*/ }",
+    ".b { background-color:darkgreen /*.[0]*/ }",
+  ],
+  Array [
+    ".c { color:black /*.[1]/$web*/ }",
+    ".d { background-color:lightblue /*.[1]/$web*/ }",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 17 ATOMIZE modifies source object 1`] = `
+Array [
+  Array [
+    ".a { color:blue /*.*/ }",
+  ],
+  Array [
+    ".b { color:red /*./$web*/ }",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 17 ATOMIZE modifies source object 2`] = `
+Object {
+  "color": "blue",
+}
 `;
