@@ -46,17 +46,10 @@ Object {
 
 exports[`TO CLASSNAMES ## NATIVE ## 04: query => opened 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      "color: red /*./$switch.isOpened*/",
-    ],
-  },
+  Array [
+    "IF $switch: isOpened",
+    "color: red /*./$switch.isOpened*/",
+  ],
 ]
 `;
 
@@ -77,17 +70,10 @@ Object {
 
 exports[`TO CLASSNAMES ## NATIVE ## 05: query => closed 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isClosed",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      "color: blue /*./$switch.isClosed*/",
-    ],
-  },
+  Array [
+    "IF $switch: isClosed",
+    "color: blue /*./$switch.isClosed*/",
+  ],
 ]
 `;
 
@@ -108,17 +94,10 @@ Object {
 
 exports[`TO CLASSNAMES ## NATIVE ## 06: query => closed => pre-atomized 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isClosed",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      "color: blue /*./$switch.isClosed*/",
-    ],
-  },
+  Array [
+    "IF $switch: isClosed",
+    "color: blue /*./$switch.isClosed*/",
+  ],
 ]
 `;
 
@@ -139,17 +118,10 @@ Object {
 
 exports[`TO CLASSNAMES ## NATIVE ## 07: query => closed => pre-queried 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isClosed",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      "color: blue /*./$switch.isClosed*/",
-    ],
-  },
+  Array [
+    "IF $switch: isClosed",
+    "color: blue /*./$switch.isClosed*/",
+  ],
 ]
 `;
 
@@ -207,17 +179,10 @@ exports[`TO CLASSNAMES ## WEB ## 03: mixed 3`] = `"c"`;
 
 exports[`TO CLASSNAMES ## WEB ## 04: query => opened 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".a { color:red /*./$switch.isOpened*/ }",
-    ],
-  },
+  Array [
+    "IF $switch: isOpened",
+    ".a { color:red /*./$switch.isOpened*/ }",
+  ],
 ]
 `;
 
@@ -231,17 +196,10 @@ exports[`TO CLASSNAMES ## WEB ## 04: query => opened 3`] = `"a"`;
 
 exports[`TO CLASSNAMES ## WEB ## 05: query => closed 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isClosed",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".b { color:blue /*./$switch.isClosed*/ }",
-    ],
-  },
+  Array [
+    "IF $switch: isClosed",
+    ".b { color:blue /*./$switch.isClosed*/ }",
+  ],
 ]
 `;
 
@@ -255,17 +213,10 @@ exports[`TO CLASSNAMES ## WEB ## 05: query => closed 3`] = `"b"`;
 
 exports[`TO CLASSNAMES ## WEB ## 06: query => closed => pre-atomized 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isClosed",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".b { color:blue /*./$switch.isClosed*/ }",
-    ],
-  },
+  Array [
+    "IF $switch: isClosed",
+    ".b { color:blue /*./$switch.isClosed*/ }",
+  ],
 ]
 `;
 
@@ -279,17 +230,10 @@ exports[`TO CLASSNAMES ## WEB ## 06: query => closed => pre-atomized 3`] = `"b"`
 
 exports[`TO CLASSNAMES ## WEB ## 07: query => closed => pre-queried 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isClosed",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".b { color:blue /*./$switch.isClosed*/ }",
-    ],
-  },
+  Array [
+    "IF $switch: isClosed",
+    ".b { color:blue /*./$switch.isClosed*/ }",
+  ],
 ]
 `;
 

@@ -1,10 +1,10 @@
 - replace pipelines with react hooks
-- finish components overrideOptions preference
-- atomize and merge styles: tests
-- rewrite width tests
+- components overrideOptions preference
+- atomize and merge STYLES: tests
 
 primitives events
 Tests:
 - primitives
     - 2x test warnings
-
+- core
+    - combined tests for WIDTHS, SWITCH and PRIMITIVES

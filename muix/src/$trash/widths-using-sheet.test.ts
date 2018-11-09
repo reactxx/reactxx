@@ -1,6 +1,6 @@
 import { atomizeSheet } from "reactxx-sheeter";
 import { initPlatform, toClassNames, Shape, setActWidth } from "reactxx-tests";
-import { createSheet, query } from "./widths-sheet.test";
+import { createSheet, query } from "../sheet-widths/__tests__/widths-sheet.test";
 
 describe("SWITCH using sheet", () => {
   it("NATIVE", () => {

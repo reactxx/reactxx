@@ -20,8 +20,8 @@
             "program": "${workspaceRoot}\\node_modules\\jest\\bin\\jest.js",
             "args": [
                 "--runInBand",  //https://jestjs.io/docs/en/cli.html
-                //"--testPathPattern=sheet.test",
-                "--testPathPattern=/sheeter/|/sheet-switch/",
+                "--testPathPattern=widths-sheet.test",
+                //"--testPathPattern=/sheeter/|/sheet-switch/|/sheet-widths/",
                 "-u"
             ],
             //"preLaunchTask": "build",

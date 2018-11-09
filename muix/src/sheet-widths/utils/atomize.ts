@@ -28,7 +28,7 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<TVariants.SheetWidthsPart> = (
     const conditions = (widthName: string) =>
         window.isWeb
             ? _conditions
-            : [..._conditions, { type: Consts.name, interval: parse(widthName) } as WidthsCondition]
+            : [..._conditions, wrapCondition({ type: Consts.name, interval: parse(widthName) })]
     for (const widthName in widths) {
         const casep = widths[widthName]
         if (!casep) continue
@@ -53,3 +53,16 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<TVariants.SheetWidthsPart> = (
 const testAtomicRuleset: TComponents.TestAtomicRuleset = (cond: WidthsCondition, state) =>
     test(cond.interval, platform.actWidth())
 
+
+    export const wrapCondition = (cond: WidthsCondition) => {
+        if (window.__TRACE__)
+            cond['toJSON'] = toJSON.bind(cond)
+        return cond
+    }
+    
+    function toJSON() {
+        const c = this as WidthsCondition
+        return `IF ${c.type}: <${c.interval[0]},${c.interval[1] || 'MAX'}) )`
+    }
+    
+    

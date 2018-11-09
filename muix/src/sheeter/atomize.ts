@@ -38,11 +38,14 @@ export const wrapRuleset = (ruleset) => {
         ruleset['toJSON'] = toJSON.bind(ruleset)
     return ruleset as TAtomize.Ruleset
 }
-function toJSON() {
+function toJSON_() {
     return (this as TAtomize.Ruleset).map(v => v.conditions ? {
         conditions: v.conditions,
         items: v
     } : v)
+}
+function toJSON() {
+    return (this as TAtomize.Ruleset).map(v => v.conditions ? [...v.conditions, ...v] : v)
 }
 
 // muttable (at least for native)

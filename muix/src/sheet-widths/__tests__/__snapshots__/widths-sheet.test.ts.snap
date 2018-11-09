@@ -1,77 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WIDTHS define sheet NATIVE 1`] = `
-Object {
-  "root": Array [
-    Object {
-      "conditions": Array [
-        Object {
-          "interval": Array [
-            0,
-            640,
-          ],
-          "type": "$widths",
-        },
-      ],
-      "items": Array [
-        "margin: 0 /*sheet.root/$widths.0-640*/",
-      ],
-    },
-    Object {
-      "conditions": Array [
-        Object {
-          "interval": Array [
-            640,
-            1024,
-          ],
-          "type": "$widths",
-        },
-      ],
-      "items": Array [
-        "margin: 10 /*sheet.root/$widths.640-1024*/",
-      ],
-    },
-    Object {
-      "conditions": Array [
-        Object {
-          "interval": Array [
-            1024,
-            0,
-          ],
-          "type": "$widths",
-        },
-      ],
-      "items": Array [
-        "margin: 20 /*sheet.root/$widths.1024-*/",
-      ],
-    },
+exports[`WIDTHS ## NATIVE ## 01 empty 1`] = `null`;
+
+exports[`WIDTHS ## NATIVE ## 02 simple 1`] = `
+Array [
+  Array [
+    "IF $widths: <0,640) )",
+    "margin: 0 /*./$widths.0-640*/",
   ],
-}
+  Array [
+    "IF $widths: <640,1024) )",
+    "margin: 10 /*./$switch.640-1024[0]*/",
+  ],
+  Array [
+    "IF $widths: <1024,MAX) )",
+    "margin: 20 /*./$switch.1024-[0]*/",
+  ],
+  Array [
+    "IF $widths: <1024,MAX) )",
+    "margin: 10 /*./$switch.1024-[1]*/",
+  ],
+]
 `;
 
-exports[`WIDTHS define sheet WEB 1`] = `
-Object {
-  "root": Array [
-    Array [
-      "@media (max-width: 639px).a { margin:0 /*sheet.root/$widths.0-640*/ }",
-    ],
-    Array [
-      "@media (min-width: 640px) and (max-width: 1023px).b { margin:10px /*sheet.root/$widths.640-1024*/ }",
-    ],
-    Array [
-      "@media (min-width: 1024px).c { margin:20px /*sheet.root/$widths.1024-*/ }",
-    ],
-    Array [
-      "@media (max-width: 639px).d:hover { color:blue /*sheet.root/$web/:hover/$widths.0-640*/ }",
-      "@media (max-width: 639px).e:hover { padding:0 /*sheet.root/$web/:hover/$widths.0-640*/ }",
-    ],
-    Array [
-      "@media (min-width: 640px) and (max-width: 1023px).f:hover { color:red /*sheet.root/$web/:hover/$widths.640-1024*/ }",
-      "@media (min-width: 640px) and (max-width: 1023px).g:hover { padding:10px /*sheet.root/$web/:hover/$widths.640-1024*/ }",
-    ],
-    Array [
-      "@media (min-width: 1024px).h:hover { padding:20px /*sheet.root/$web/:hover/$widths.1024-*/ }",
-    ],
+exports[`WIDTHS ## NATIVE ## 03 WEB only: with PSEUDO 1`] = `
+Array [
+  Array [
+    "IF $widths: <640,1024) )",
+    "color: red /*./$widths.640-1024*/",
   ],
-}
+]
+`;
+
+exports[`WIDTHS ## NATIVE ## 04 WEB only: nesting PSEUDO and $widths 1`] = `null`;
+
+exports[`WIDTHS ## WEB ## 01 empty 1`] = `null`;
+
+exports[`WIDTHS ## WEB ## 02 simple 1`] = `
+Array [
+  Array [
+    "@media (max-width: 639px).a { margin:0 /*./$widths.0-640*/ }",
+  ],
+  Array [
+    "@media (min-width: 640px) and (max-width: 1023px).b { margin:10px /*./$switch.640-1024[0]*/ }",
+  ],
+  Array [
+    "@media (min-width: 1024px).c { margin:20px /*./$switch.1024-[0]*/ }",
+  ],
+  Array [
+    "@media (min-width: 1024px).d { margin:10px /*./$switch.1024-[1]*/ }",
+  ],
+]
+`;
+
+exports[`WIDTHS ## WEB ## 03 WEB only: with PSEUDO 1`] = `
+Array [
+  Array [
+    "@media (max-width: 639px).a:hover { margin:10px /*./$widths.0-640/$web*/ }",
+  ],
+  Array [
+    "@media (min-width: 640px) and (max-width: 1023px).b { color:red /*./$widths.640-1024*/ }",
+  ],
+  Array [
+    "@media (min-width: 640px) and (max-width: 1023px).c { background-color:gray /*./$widths.640-1024/$web*/ }",
+    "@media (min-width: 640px) and (max-width: 1023px).d:hover { padding:10px /*./$widths.640-1024/$web*/ }",
+    "@media (min-width: 640px) and (max-width: 1023px).e:hover:active { margin:10px /*./$widths.640-1024/$web*/ }",
+  ],
+]
+`;
+
+exports[`WIDTHS ## WEB ## 04 WEB only: nesting PSEUDO and $widths 1`] = `
+Array [
+  Array [
+    "@media (max-width: 639px).a:hover:active { margin:10px /*./$web/:hover/$widths.0-640/$web*/ }",
+  ],
+]
 `;

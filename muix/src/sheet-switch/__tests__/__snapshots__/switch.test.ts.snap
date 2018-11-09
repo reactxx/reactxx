@@ -2,28 +2,14 @@
 
 exports[`SWITCH ## NATIVE ## 01 isOpened: color: 'red', isClosed: color: 'blue' 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      "color: red /*./$switch.isOpened*/",
-    ],
-  },
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isClosed",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      "color: blue /*./$switch.isClosed*/",
-    ],
-  },
+  Array [
+    "IF $switch: isOpened",
+    "color: red /*./$switch.isOpened*/",
+  ],
+  Array [
+    "IF $switch: isClosed",
+    "color: blue /*./$switch.isClosed*/",
+  ],
 ]
 `;
 
@@ -31,28 +17,14 @@ exports[`SWITCH ## NATIVE ## 02 :hover => isOpened => :active => color: 'red' 1`
 
 exports[`SWITCH ## NATIVE ## 03 atomizeRuleset(isOpened => atomizeRuleset(color: 'red), isClosed => atomizeRuleset(color: 'green')) 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      "color: red /*.*/",
-    ],
-  },
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isClosed",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      "color: green /*.*/",
-    ],
-  },
+  Array [
+    "IF $switch: isOpened",
+    "color: red /*.*/",
+  ],
+  Array [
+    "IF $switch: isClosed",
+    "color: green /*.*/",
+  ],
 ]
 `;
 
@@ -61,121 +33,64 @@ Array [
   Array [
     "color: black /*.*/",
   ],
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      "color: red /*./$switch.isOpened*/",
-    ],
-  },
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-      Object {
-        "case": "isClosed",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      "color: green /*./$switch.isOpened/$switch.isClosed*/",
-    ],
-  },
+  Array [
+    "IF $switch: isOpened",
+    "color: red /*./$switch.isOpened*/",
+  ],
+  Array [
+    "IF $switch: isOpened",
+    "IF $switch: isClosed",
+    "color: green /*./$switch.isOpened/$switch.isClosed*/",
+  ],
 ]
 `;
 
 exports[`SWITCH ## NATIVE ## 05 variant's order with array: $web => brown-blue-yellow-red-black 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      "color: red /*.[1]/$switch.isOpened[1]*/",
-    ],
-  },
+  Array [
+    "IF $switch: isOpened",
+    "color: red /*.[1]/$switch.isOpened[1]*/",
+  ],
   Array [
     "color: black /*.[2]*/",
   ],
 ]
 `;
 
+exports[`SWITCH ## NATIVE ## 06 nesting PSEUDO and $switch 1`] = `null`;
+
 exports[`SWITCH ## WEB ## 01 isOpened: color: 'red', isClosed: color: 'blue' 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".a { color:red /*./$switch.isOpened*/ }",
-    ],
-  },
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isClosed",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".b { color:blue /*./$switch.isClosed*/ }",
-    ],
-  },
+  Array [
+    "IF $switch: isOpened",
+    ".a { color:red /*./$switch.isOpened*/ }",
+  ],
+  Array [
+    "IF $switch: isClosed",
+    ".b { color:blue /*./$switch.isClosed*/ }",
+  ],
 ]
 `;
 
 exports[`SWITCH ## WEB ## 02 :hover => isOpened => :active => color: 'red' 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".a:hover:active { color:red /*./$web/:hover/$switch.isOpened/$web*/ }",
-    ],
-  },
+  Array [
+    "IF $switch: isOpened",
+    ".a:hover:active { color:red /*./$web/:hover/$switch.isOpened/$web*/ }",
+  ],
 ]
 `;
 
 exports[`SWITCH ## WEB ## 03 atomizeRuleset(isOpened => atomizeRuleset(color: 'red), isClosed => atomizeRuleset(color: 'green')) 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".a { color:red /*.*/ }",
-    ],
-  },
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isClosed",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".b { color:green /*.*/ }",
-    ],
-  },
+  Array [
+    "IF $switch: isOpened",
+    ".a { color:red /*.*/ }",
+  ],
+  Array [
+    "IF $switch: isClosed",
+    ".b { color:green /*.*/ }",
+  ],
 ]
 `;
 
@@ -184,100 +99,57 @@ Array [
   Array [
     ".d { color:black /*.*/ }",
   ],
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".b { color:red /*./$switch.isOpened*/ }",
-    ],
-  },
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-      Object {
-        "case": "isClosed",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".a { color:green /*./$switch.isOpened/$switch.isClosed*/ }",
-    ],
-  },
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".c { color:yellow /*./$switch.isOpened/$web*/ }",
-    ],
-  },
+  Array [
+    "IF $switch: isOpened",
+    ".b { color:red /*./$switch.isOpened*/ }",
+  ],
+  Array [
+    "IF $switch: isOpened",
+    "IF $switch: isClosed",
+    ".a { color:green /*./$switch.isOpened/$switch.isClosed*/ }",
+  ],
+  Array [
+    "IF $switch: isOpened",
+    ".c { color:yellow /*./$switch.isOpened/$web*/ }",
+  ],
   Array [
     ".f { color:blue /*./$web*/ }",
   ],
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".e { color:brown /*./$web/$switch.isOpened*/ }",
-    ],
-  },
+  Array [
+    "IF $switch: isOpened",
+    ".e { color:brown /*./$web/$switch.isOpened*/ }",
+  ],
 ]
 `;
 
 exports[`SWITCH ## WEB ## 05 variant's order with array: $web => brown-blue-yellow-red-black 1`] = `
 Array [
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".a { color:brown /*.[0]/$web[0]/$switch.isOpened*/ }",
-    ],
-  },
+  Array [
+    "IF $switch: isOpened",
+    ".a { color:brown /*.[0]/$web[0]/$switch.isOpened*/ }",
+  ],
   Array [
     ".b { color:blue /*.[0]/$web[1]*/ }",
   ],
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".c { color:yellow /*.[1]/$switch.isOpened[0]/$web*/ }",
-    ],
-  },
-  Object {
-    "conditions": Array [
-      Object {
-        "case": "isOpened",
-        "type": "$switch",
-      },
-    ],
-    "items": Array [
-      ".d { color:red /*.[1]/$switch.isOpened[1]*/ }",
-    ],
-  },
+  Array [
+    "IF $switch: isOpened",
+    ".c { color:yellow /*.[1]/$switch.isOpened[0]/$web*/ }",
+  ],
+  Array [
+    "IF $switch: isOpened",
+    ".d { color:red /*.[1]/$switch.isOpened[1]*/ }",
+  ],
   Array [
     ".e { color:black /*.[2]*/ }",
+  ],
+]
+`;
+
+exports[`SWITCH ## WEB ## 06 nesting PSEUDO and $switch 1`] = `
+Array [
+  Array [
+    "IF $switch: isOpened",
+    ".a:hover:active { margin:10px /*./$web/:hover/$switch.isOpened/$web*/ }",
   ],
 ]
 `;

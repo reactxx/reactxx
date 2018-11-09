@@ -1,7 +1,4 @@
-import { TSheeter } from "reactxx-typings";
-import {
-  atomizeRuleset,
-} from "reactxx-sheeter";
+import { atomizeRuleset } from "reactxx-sheeter";
 import { initPlatform, Shape, ts } from "reactxx-tests";
 
 describe("SWITCH", () => {
@@ -108,7 +105,27 @@ describe("SWITCH", () => {
       }])
       expect(ruleset).toMatchSnapshot()
     })
-  }
+
+    it("06 nesting PSEUDO and $switch", () => {
+      ruleset = atomizeRuleset<'Text', Shape>({
+        $web: {
+          ':hover': {
+            $switch: {
+              isOpened: {
+                $web: {
+                  ':active': {
+                    margin: 10
+                  }
+                }
+              },
+            }
+          }
+        }
+      })
+      expect(ruleset).toMatchSnapshot()
+    })
+
+}
 
   describe("## NATIVE ##", () => doTest(false))
   describe("## WEB ##", () => doTest(true))

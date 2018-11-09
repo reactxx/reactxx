@@ -1,60 +1,89 @@
-import { TVariants } from "reactxx-typings";
-import { atomizeSheet } from "reactxx-sheeter";
-import { initPlatform, Shape, ts } from "reactxx-tests";
-import { } from "../index";
+import { atomizeRuleset } from "reactxx-sheeter";
+import { initPlatform, Shape } from "reactxx-tests";
 
-export const createSheet = () =>
-  (ts.sheet = {
-    root: (ts.view = {
-      $widths: {
-        ['0-640']: {
-          margin: 0,
+describe("WIDTHS", () => {
+
+  const doTest = (isWeb: boolean) => {
+    beforeEach(() => initPlatform(isWeb))
+    let ruleset
+
+    it("01 empty", () => {
+      ruleset = atomizeRuleset<'Text', Shape>({
+        $widths: {
+          ['0-640']: null,
+          ['640-1024']: [null, {}, undefined],
+          ['1024-']: {}
         },
-        ['640-1024']: {
-          margin: 10
+      })
+      expect(ruleset).toMatchSnapshot()
+    })
+
+    it("02 simple", () => {
+      ruleset = atomizeRuleset<'Text', Shape>({
+        $widths: {
+          ['0-640']: {
+            margin: 0,
+          },
+          ['640-1024']: [{
+            margin: 10
+          }],
+          ['1024-']: [{
+            margin: 20
+          }, {
+            margin: 10
+          }]
         },
-        ['1024-']: {
-          margin: 20
-        }
-      },
-      $web: (ts.web = {
-        ":hover": {
-          $widths: {
-            ['0-640']: {
-              color: "blue",
-              padding: 0
-            },
-            ['640-1024']: {
-              color: "red",
-              padding: 10
-            },
-            ['1024-']: {
-              padding: 20
+      })
+      expect(ruleset).toMatchSnapshot()
+    })
+
+    it("03 WEB only: with PSEUDO", () => {
+      ruleset = atomizeRuleset<'Text', Shape>({
+        $widths: {
+          ['0-640']: {
+            $web: {
+              ':hover': {
+                margin: 10
+              }
+            }
+          },
+          ['640-1024']: {
+            color: 'red',
+            $web: {
+              backgroundColor: 'gray',
+              ':hover': {
+                padding: 10,
+                ':active': {
+                  margin: 10
+                }
+              }
+            }
+          }
+        },
+      })
+      expect(ruleset).toMatchSnapshot()
+    })
+
+    it("04 WEB only: nesting PSEUDO and $widths", () => {
+      ruleset = atomizeRuleset<'Text', Shape>({
+        $web: {
+          ':hover': {
+            $widths: {
+              ['0-640']: {
+                $web: {
+                  ':active': {
+                    margin: 10
+                  }
+                }
+              },
             }
           }
         }
       })
-    }),
-    label: {},
-    webOnly: {},
-    nativeOnly: {}
-  });
-export const query = (opened: boolean) =>
-  ({
-    $widths: {
-      tabletWidth: opened,
-      mobileWidth: !opened
-    }
-  } as TVariants.Query<Shape>);
-describe("WIDTHS define sheet", () => {
-  it("WEB", () => {
-    initPlatform(true);
-    const sheet = atomizeSheet<Shape>(createSheet());
-    expect(sheet).toMatchSnapshot();
-  });
-  it("NATIVE", () => {
-    initPlatform(false);
-    const sheet = atomizeSheet<Shape>(createSheet());
-    expect(sheet).toMatchSnapshot();
-  });
+      expect(ruleset).toMatchSnapshot()
+    })
+
+  }
+  describe("## NATIVE ##", () => doTest(false))
+  describe("## WEB ##", () => doTest(true))
 });

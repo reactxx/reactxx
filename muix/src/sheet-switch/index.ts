@@ -36,7 +36,7 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
                     ruleset,
                     `${path}/$switch.${p}[${idx}]`,
                     pseudoPrefixes,
-                    [...conditions, { type: Consts.name, case: p } as SwitchCondition]
+                    [...conditions, wrapCondition({ type: Consts.name, case: p })]
                 )
             )
         else
@@ -45,9 +45,21 @@ const toAtomicRuleset: TVariants.ToAtomicRuleset<Record<string, TSheeter.Ruleset
                 casep as TAtomize.Source,
                 `${path}/$switch.${p}`,
                 pseudoPrefixes,
-                [...conditions, { type: Consts.name, case: p } as SwitchCondition])
+                [...conditions, wrapCondition({ type: Consts.name, case: p })])
     }
 }
+
+export const wrapCondition = (cond: SwitchCondition) => {
+    if (window.__TRACE__)
+        cond['toJSON'] = toJSON.bind(cond)
+    return cond
+}
+
+function toJSON() {
+    const c = this as SwitchCondition
+    return `IF ${c.type}: ${c.case}`
+}
+
 
 const testAtomicRuleset: TComponents.TestAtomicRuleset = (cond: SwitchCondition, state) => {
     const { propsCode: { sheetQuery } } = state
