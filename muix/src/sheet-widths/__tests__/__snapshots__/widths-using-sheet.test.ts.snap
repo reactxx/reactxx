@@ -17,9 +17,20 @@ Array [
 ******************************************
 ",
   Array [
-    Array [
-      "margin: 0 /*sheet.root/$widths.0-640*/",
-    ],
+    Object {
+      "conditions": Array [
+        Object {
+          "interval": Array [
+            0,
+            640,
+          ],
+          "type": "$widths",
+        },
+      ],
+      "items": Array [
+        "margin: 0 /*sheet.root/$widths.0-640*/",
+      ],
+    },
   ],
   "
 ******************************************
@@ -56,9 +67,20 @@ Array [
 ******************************************
 ",
   Array [
-    Array [
-      "margin: 10 /*sheet.root/$widths.640-1024*/",
-    ],
+    Object {
+      "conditions": Array [
+        Object {
+          "interval": Array [
+            640,
+            1024,
+          ],
+          "type": "$widths",
+        },
+      ],
+      "items": Array [
+        "margin: 10 /*sheet.root/$widths.640-1024*/",
+      ],
+    },
   ],
   "
 ******************************************
@@ -177,15 +199,48 @@ Array [
 exports[`WIDTHS define sheet NATIVE 1`] = `
 Object {
   "root": Array [
-    Array [
-      "margin: 0 /*sheet.root/$widths.0-640*/",
-    ],
-    Array [
-      "margin: 10 /*sheet.root/$widths.640-1024*/",
-    ],
-    Array [
-      "margin: 20 /*sheet.root/$widths.1024-*/",
-    ],
+    Object {
+      "conditions": Array [
+        Object {
+          "interval": Array [
+            0,
+            640,
+          ],
+          "type": "$widths",
+        },
+      ],
+      "items": Array [
+        "margin: 0 /*sheet.root/$widths.0-640*/",
+      ],
+    },
+    Object {
+      "conditions": Array [
+        Object {
+          "interval": Array [
+            640,
+            1024,
+          ],
+          "type": "$widths",
+        },
+      ],
+      "items": Array [
+        "margin: 10 /*sheet.root/$widths.640-1024*/",
+      ],
+    },
+    Object {
+      "conditions": Array [
+        Object {
+          "interval": Array [
+            1024,
+            0,
+          ],
+          "type": "$widths",
+        },
+      ],
+      "items": Array [
+        "margin: 20 /*sheet.root/$widths.1024-*/",
+      ],
+    },
   ],
 }
 `;

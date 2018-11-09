@@ -1,5 +1,7 @@
 - replace pipelines with react hooks
-- components overrideOptions preference
+- finish components overrideOptions preference
+- atomize and merge styles: tests
+- rewrite width tests
 
 primitives events
 Tests:

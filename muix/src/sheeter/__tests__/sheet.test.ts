@@ -104,7 +104,7 @@ describe("SHEET", () => {
       expect(sheet).toMatchSnapshot()
     })
     it("12 merge ERROR, sheets must be atomized first", () => {
-      sheet = mergeSheets([
+      const fnc = () => mergeSheets([
         {
           root: {backgroundColor: 'red'},
           label: {color: 'red'},
@@ -114,7 +114,7 @@ describe("SHEET", () => {
           webOnly: { $web: {color: 'green'}},
         }),
       ])
-      expect(sheet).toMatchSnapshot()
+      expect(fnc).toThrow(/.*/)
     })
   }
 

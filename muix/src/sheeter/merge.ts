@@ -2,6 +2,7 @@ import warning from 'warning'
 import { TComponents, TAtomize, TSheeter } from 'reactxx-typings';
 import { deepMerge, deepMerges } from './utils/deep-merge'
 import { isAtomized } from './atomize-low';
+import { wrapRuleset } from './atomize';
 
 export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOrAtomized[]) => {
     if (!sources)
@@ -51,20 +52,22 @@ export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOr
     }
 }
 
+// immutable
 export const mergeRulesets = (sources: TAtomize.Ruleset[]) => {
     if (!sources || sources.length === 0) return null
     let res: TAtomize.Variants | TAtomize.Ruleset = null
     let first = true
     sources.forEach(src => {
         if (!src) return
-        warning (isAtomized(src), 'All rulesets must be atomized first')
+        if (!isAtomized(src))
+            throw 'All rulesets must be atomized first'
         res = first ? src : [...res, ...src]
         first = false
-    });
-    (res as TAtomize.Ruleset).$r$ = true
-    return res as TAtomize.Ruleset
+    })
+    return wrapRuleset(res)
 }
 
+// immutable
 export const mergeSheets = (sources: TAtomize.Sheet[]) => {
     if (!sources || sources.length === 0) return null
     const ruleLists: Record<string, Array<any>> = {}

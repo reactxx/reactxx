@@ -1,9 +1,10 @@
-import warning from 'warning'; 
+import warning from 'warning';
 
 import { TAtomize, TSheeter, TComponents, TCommonStyles } from 'reactxx-typings'
 import { createWithTheme } from './utils/create-with-theme'
-import { adjustAtomized } from './atomize-low'
+import { adjustAtomizedLow } from './atomize-low'
 
+// muttable
 export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.PartialSheetOrCreator<R>, theme?, path: string = 'sheet') => {
     if (!sheet) return null
     const sh: TSheeter.Sheet = createWithTheme(sheet, theme)
@@ -15,6 +16,7 @@ export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: T
     return sh as any as TAtomize.Sheet<R>
 }
 
+// muttable
 export const atomizeRuleset = <T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape>(
     ruleset: TSheeter.RulesetOrAtomizedCreator<T, R>, theme?, path: string = '.'
 ) => {
@@ -24,13 +26,26 @@ export const atomizeRuleset = <T extends TCommonStyles.RulesetNativeIds = 'Text'
 
     if (!rs) return null
 
-    const list: TAtomize.Ruleset = [] as any
-    list.$r$ = true
-    adjustAtomized(list, rs, path, [], [])
+    const list = wrapRuleset([])
+    adjustAtomizedLow(list, rs, path, [], [])
 
     return list.length === 0 ? null : list
 }
 
+export const wrapRuleset = (ruleset) => {
+    (ruleset as TAtomize.Ruleset).$r$ = true
+    if (window.__TRACE__)
+        ruleset['toJSON'] = toJSON.bind(ruleset)
+    return ruleset as TAtomize.Ruleset
+}
+function toJSON() {
+    return (this as TAtomize.Ruleset).map(v => v.conditions ? {
+        conditions: v.conditions,
+        items: v
+    } : v)
+}
+
+// muttable (at least for native)
 export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme?, path: string = '.') => {
     if (!style) return null
     if (window.isWeb)
@@ -42,4 +57,3 @@ export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme?, path: strin
 export function isReactXXComponent(obj): obj is TComponents.ComponentType {
     return (obj as TComponents.ComponentType).$c$
 }
-

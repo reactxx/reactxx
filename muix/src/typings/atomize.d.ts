@@ -6,19 +6,16 @@ declare namespace TAtomize {
 
   export type Source = Item | ItemArray
 
-  export interface Signed {
-    $r$?: true
-  }
   export type Item = ToAtomize | Ruleset
   export interface ItemArray extends Array<Item> { }
 
-  export interface ToAtomize extends Signed {
-    name?: string // ruleset name
+  export interface ToAtomize {
+    //name?: string // ruleset name
     $web: Source
     $native: Source
   }
-  export interface Ruleset extends Array<Variant>, Signed {
-    $r$: true // a: atomized, q: queried
+  export interface Ruleset extends Array<Variant> { 
+    $r$?: true
   }
   export interface Variant extends Array<Atomic> {
     conditions?: TVariants.Conditions

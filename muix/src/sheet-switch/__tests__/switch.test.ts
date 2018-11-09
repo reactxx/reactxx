@@ -4,7 +4,7 @@ import {
 } from "reactxx-sheeter";
 import { initPlatform, Shape, ts } from "reactxx-tests";
 
-describe("SWITCH define sheet", () => {
+describe("SWITCH", () => {
 
   const doTest = (isWeb: boolean) => {
     beforeEach(() => initPlatform(isWeb))

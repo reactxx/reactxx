@@ -126,23 +126,6 @@ Object {
 }
 `;
 
-exports[`SHEET ## NATIVE ## 12 merge ERROR, sheets must be atomized first 1`] = `
-Object {
-  "label": Object {
-    "color": "red",
-    "type": "a",
-  },
-  "root": Array [
-    Object {
-      "backgroundColor": "red",
-    },
-    Array [
-      "backgroundColor: green /*sheet.root*/",
-    ],
-  ],
-}
-`;
-
 exports[`SHEET ## WEB ## 01 null 1`] = `null`;
 
 exports[`SHEET ## WEB ## 02 {} 1`] = `Object {}`;
@@ -284,28 +267,6 @@ Object {
     ],
     Array [
       ".b { color:green /*sheet.root/$web*/ }",
-    ],
-  ],
-}
-`;
-
-exports[`SHEET ## WEB ## 12 merge ERROR, sheets must be atomized first 1`] = `
-Object {
-  "label": Object {
-    "color": "red",
-    "type": "a",
-  },
-  "root": Array [
-    Object {
-      "backgroundColor": "red",
-    },
-    Array [
-      ".a { background-color:green /*sheet.root*/ }",
-    ],
-  ],
-  "webOnly": Array [
-    Array [
-      ".b { color:green /*sheet.webOnly/$web*/ }",
     ],
   ],
 }

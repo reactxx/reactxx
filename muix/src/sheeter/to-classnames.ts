@@ -1,5 +1,5 @@
 import { TWithStyles, TSheeter, TAtomize, TVariants } from 'reactxx-typings'
-import { atomizeRuleset } from './atomize'
+import { atomizeRuleset, wrapRuleset } from './atomize'
 import { isToAtomize, isToAtomizeArray } from './atomize-low'
 import { testConditions } from './conditions'
 
@@ -35,8 +35,7 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, ruleset:
 
     if (!values) return null;
     
-    (values as TAtomize.Ruleset).$r$ = true
-    return values as TAtomize.Ruleset
+    return wrapRuleset(values)
 }
 
 export const deleteSystemProps = props => {

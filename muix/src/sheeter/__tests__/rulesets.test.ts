@@ -59,16 +59,18 @@ describe("ATOMIZE RULESET", () => {
     })
 
     it("09 ERROR for atomizeRuleset({:hover': atomizeRuleset(...", () => {
-      ruleset = atomizeRuleset({
-        $web: {
-          ':hover': atomizeRuleset({ color: 'red' }) as any,
-        }
-      })
-      expect(ruleset).toMatchSnapshot()
+      const fnc = () => {
+        window.isWeb && atomizeRuleset({
+          $web: {
+            ':hover': atomizeRuleset({ color: 'red' }) as any,
+          }
+        })
+      }
+      window.isWeb && expect(fnc).toThrow(/.*/)
     })
 
     it("10 ERROR for atomizeRuleset({:hover': [ARRAY]", () => {
-      ruleset = atomizeRuleset({
+      const fnc = () => window.isWeb && atomizeRuleset({
         $web: {
           ':hover': [
             { color: 'red' },
@@ -76,7 +78,7 @@ describe("ATOMIZE RULESET", () => {
           ] as any
         }
       })
-      expect(ruleset).toMatchSnapshot()
+      window.isWeb && expect(fnc).toThrow(/.*/)
     })
 
     it("11 with theme", () => {
@@ -92,8 +94,8 @@ describe("ATOMIZE RULESET", () => {
     it("12 ATOMIZE modifies source object", () => {
       const source = {
         color: 'blue',
-        $web: {color: 'red'},
-        $native: {color: 'green'},
+        $web: { color: 'red' },
+        $native: { color: 'green' },
       }
       ruleset = atomizeRuleset(source)
       expect(ruleset).toMatchSnapshot()

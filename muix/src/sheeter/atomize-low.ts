@@ -14,12 +14,13 @@ import { platform } from 'reactxx-sheeter'
 //   where PARTITEM atomizedRuleset or atomicArray or {}
 // returns:
 // - fill list with parts
-export const adjustAtomized = (
+export const adjustAtomizedLow = (
     list: TAtomize.Variants, ruleset: TAtomize.Source,
     path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions,
 ) => {
+    //if (isAtomized(ruleset)) return ruleset
     const linear = linearize$web$native(ruleset)
-    atomizedToList(linear, list, path, pseudoPrefixes, conditions)
+    atomizedParts(linear, list, path, pseudoPrefixes, conditions)
 }
 
 // processed:
@@ -41,9 +42,9 @@ const processVariantsPseudos = (
         const value = ruleset[p] as TAtomize.ToAtomize
         if (!value || p.charAt(0) === '$' || typeof value !== 'object') continue
         if (isAtomized(value))
-            warning(false, 'Web pseudo properties cannot contain atomized value')
+            throw 'Web pseudo properties cannot contain atomized value'
         else if (isToAtomizeArray(value))
-            warning(false, 'Web pseudo properties cannot contain array of rulesets')
+            throw 'Web pseudo properties cannot contain array of rulesets'
         else
             processVariantsPseudos(list, value, `${path}/${p}`, [...pseudoPrefixes, p], conditions, true)
     }
@@ -74,12 +75,9 @@ const atomizeNonVariantPart = (
     pushToList(list, variant, conditions)
 }
 
-export function isToAtomizeArray(obj): obj is TAtomize.ItemArray { return obj && !obj.type && Array.isArray(obj) }
-export function isToAtomize(obj): obj is TAtomize.ToAtomize { return obj && !obj.type && !Array.isArray(obj) }
-export function isAtomized(obj): obj is TAtomize.Ruleset { return !obj || obj.type }
-//export function isQueried(obj): obj is TAtomize.ToAtomize { return !obj || obj.type === 'q' }
-//export function isQueriedVarint(obj): obj is TAtomize.Variant { return !obj || !obj.conditions }
-//export function toQueryVarint(obj): obj is TAtomize.Variant { return obj && obj.conditions && obj.conditions.length > 0 }
+export function isToAtomizeArray(obj): obj is TAtomize.ItemArray { return obj && !(obj as TAtomize.Ruleset).$r$ && Array.isArray(obj) }
+export function isToAtomize(obj): obj is TAtomize.ToAtomize { return obj && !(obj as TAtomize.Ruleset).$r$ && !Array.isArray(obj) }
+export function isAtomized(obj): obj is TAtomize.Ruleset { return !obj || (obj as TAtomize.Ruleset).$r$ }
 
 const linearize$web$native = (ruleset: TAtomize.Source) => {
 
@@ -113,7 +111,7 @@ const linearize$web$native = (ruleset: TAtomize.Source) => {
     return parts
 }
 
-const atomizedToList = (
+const atomizedParts = (
     parts: [string, TAtomize.Item][],
     list: TAtomize.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions,
 ) => {
@@ -125,7 +123,7 @@ const atomizedToList = (
                 if (!conditions || conditions.length === 0)
                     pushToList(list, it, null)
                 else {
-                    pushToList(list, { ...it },
+                    pushToList(list, [...it],
                         it.conditions ? [...conditions, ...it.conditions] : conditions)
                 }
             })

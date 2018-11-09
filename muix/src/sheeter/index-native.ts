@@ -15,6 +15,6 @@ export const initSheeter = initSheeter$Native
 
 export {atomizeSheet, atomizeRuleset, atomizeStyle} from './atomize'
 export {toClassNamesWithQuery} from './to-classnames'
-export {adjustAtomized} from './atomize-low'
+export {adjustAtomizedLow} from './atomize-low'
 
 initSheeter()
