@@ -124,6 +124,9 @@
     "src/sheet-switch", 
     "src/sheet-widths",
 
+    "src/router",
+    "src/redux",
+
     "src/primitives",
     "src/core",
     "src/ks/web", 

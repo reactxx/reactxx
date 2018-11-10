@@ -79,7 +79,7 @@
     "react-test-renderer": "^16.7.0-alpha.0",
     "react-testing-library": "^5.2.3",
     "ts-jest": "^23.10.4",
-    "typescript": "^3.2.0-dev.20180929"
+    "typescript": "^3.1.6"
   },
   "jspm": {
     "name": "reactxx-all",
@@ -155,8 +155,8 @@
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
-      "react": "npm:react@^16.6.0",
-      "react-dom": "npm:react-dom@^16.6.0",
+      "react": "npm:react@16.7.0-alpha.0",
+      "react-dom": "npm:react-dom@16.7.0-alpha.0",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
       "url": "npm:jspm-nodelibs-url@^0.2.0",

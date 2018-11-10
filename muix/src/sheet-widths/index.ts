@@ -10,4 +10,4 @@ import { initGlobals } from './utils/globals'
 export const initWidths = (force?: boolean) => initGlobals(force, init)
 export const initWidths$Web = initWidths
 
-initWidths()
+//initWidths()

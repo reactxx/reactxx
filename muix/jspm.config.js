@@ -87,8 +87,8 @@ SystemJS.config({
     "popper.js": "npm:popper.js@1.14.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",
     "prop-types": "npm:prop-types@15.6.2",
-    "react": "npm:react@16.6.0",
-    "react-dom": "npm:react-dom@16.6.0",
+    "react": "npm:react@16.7.0-alpha.0",
+    "react-dom": "npm:react-dom@16.7.0-alpha.0",
     "react-event-listener": "npm:react-event-listener@0.6.2",
     "react-jss": "npm:react-jss@8.6.1",
     "react-popper": "npm:react-popper@0.10.4",
@@ -964,37 +964,37 @@ SystemJS.config({
         "fast-loops": "npm:fast-loops@1.0.1"
       }
     },
-    "npm:react@16.6.0": {
-      "map": {
-        "loose-envify": "npm:loose-envify@1.4.0",
-        "object-assign": "npm:object-assign@4.1.1",
-        "scheduler": "npm:scheduler@0.10.0",
-        "prop-types": "npm:prop-types@15.6.2"
-      }
-    },
-    "npm:scheduler@0.10.0": {
-      "map": {
-        "loose-envify": "npm:loose-envify@1.4.0",
-        "object-assign": "npm:object-assign@4.1.1"
-      }
-    },
     "npm:buffer@5.2.1": {
       "map": {
         "base64-js": "npm:base64-js@1.3.0",
         "ieee754": "npm:ieee754@1.1.12"
       }
     },
-    "npm:react-dom@16.6.0": {
+    "npm:simpledi@1.2.0": {
+      "map": {
+        "function-bind": "npm:function-bind@1.1.1"
+      }
+    },
+    "npm:scheduler@0.11.0": {
+      "map": {
+        "object-assign": "npm:object-assign@4.1.1",
+        "loose-envify": "npm:loose-envify@1.4.0"
+      }
+    },
+    "npm:react@16.7.0-alpha.0": {
       "map": {
         "loose-envify": "npm:loose-envify@1.4.0",
         "object-assign": "npm:object-assign@4.1.1",
         "prop-types": "npm:prop-types@15.6.2",
-        "scheduler": "npm:scheduler@0.10.0"
+        "scheduler": "npm:scheduler@0.11.0"
       }
     },
-    "npm:simpledi@1.2.0": {
+    "npm:react-dom@16.7.0-alpha.0": {
       "map": {
-        "function-bind": "npm:function-bind@1.1.1"
+        "loose-envify": "npm:loose-envify@1.4.0",
+        "object-assign": "npm:object-assign@4.1.1",
+        "scheduler": "npm:scheduler@0.11.0",
+        "prop-types": "npm:prop-types@15.6.2"
       }
     }
   }

@@ -17,7 +17,7 @@ import { initGlobals } from './globals'
 export const initSheeter$Web = (force?: boolean) => initGlobals(force, init)
 export const initSheeter = initSheeter$Web
 
-initSheeter()
+//initSheeter()
 
 declare module 'react' {
     function useState<T>(initialState: T | (() => T)): [T, (newState: T) => void];
@@ -35,7 +35,7 @@ declare module 'react' {
         inputs?: ReadonlyArray<unknown>
     ): F;
     function useMemo<T>(create: () => T, inputs?: ReadonlyArray<unknown>): T;
-    function useRef<T extends unknown>(initialValue?: T): React.RefObject<T>;
+    function useRef<T extends unknown>(initialValue?: T): RefObj<T>;
     function useImperativeMethods<T>(
         ref: React.Ref<T>,
         createInstance: () => T,
@@ -44,6 +44,11 @@ declare module 'react' {
     const useMutationEffect: typeof useEffect;
     const useLayoutEffect: typeof useEffect;
     const memo: <T>(comp: T) => T
+
+    interface RefObj<T> {
+        current: T | null;
+    }
+
 }
 declare module 'prop-types' {
     type InferProps<T> = any

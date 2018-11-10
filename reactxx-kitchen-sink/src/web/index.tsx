@@ -35,7 +35,7 @@ import ReactDOM from 'react-dom'
 // run()
 
 
-import App from 'reactxx-core/tests/index'
+import App from '../../redux/index'
 //import App from 'reactxx-sheet-transition/tests/index'
 
 ReactDOM.render(<App />, document.getElementById('root')) 
