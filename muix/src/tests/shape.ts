@@ -1,4 +1,4 @@
-import { TSheeter } from 'reactxx-typings'
+import { TSheeter, TCommonStyles } from 'reactxx-typings'
 import { ThemeProviderGeneric } from 'reactxx-with-styles'
 import { TSBugHelper } from 'reactxx-core'
 
@@ -28,6 +28,11 @@ export interface Shape extends TSheeter.ShapeAncestor {
     props: Props
     innerState: InnerState
 }
+
+type t = TSheeter.Sheet<Shape>['root']
+type tc = TCommonStyles.RulesetCommon<Shape['common']['root']>
+type tn = TCommonStyles.RulesetCommon<Shape['native']['nativeOnly']>
+//type tw = TCommonStyles.RulesetCommon<Shape['native']['nativeOnly']>
 
 type TThemeProvider = new () => ThemeProviderGeneric<Shape>;
 export const ThemeProvider = ThemeProviderGeneric as TThemeProvider
@@ -59,5 +64,7 @@ export const theme = {
         desktop: '1024-'
     }
 }
+
+
 
 export const ts: TSBugHelper<Shape> = {}

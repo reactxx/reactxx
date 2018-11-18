@@ -1,37 +1,140 @@
 import React, { memo } from 'react';
+//import {TextInput} from 'react-native'
 import { deepMerges, platform } from 'reactxx-sheeter';
-import { TAtomize, TComponents, TSheeter, TWithStyles, TVariants } from 'reactxx-typings';
+import { TAtomize, TComponents, TSheeter, TWithStyles, TVariants, TCommonStyles } from 'reactxx-typings';
 
 import { useTheme } from './hooks/theme'
 
-export const useReactxxCreator = <R extends TSheeter.Shape>(
+export const componentCreator = <R extends TSheeter.Shape>(
   sheetOrCreator: TSheeter.SheetOrCreator<R>,
-  CodeComponent: TComponents.ComponentTypeCode<R>,
-  options?: TWithStyles.ComponentOptions<R>
+  options: TWithStyles.ComponentOptions<R>,
+  code: (props) => any,
 ) => (
   overridedOptions?: TWithStyles.ComponentOptions<R>
 ) => {
-    const res = finishComponentState(sheetOrCreator, CodeComponent, options, overridedOptions)
-    return useReactxxCreatorLow(res)
+
+    const res = finishComponentState(sheetOrCreator, options, overridedOptions)
+    return componentCreatorLow(res)
   }
 
-const useComp = useReactxxCreator<TSheeter.Shape>(null, null, null)(null)
-const Comp = memo(props => {
-  const { theme, classes, classNameX, styleX, toClassNames } = useComp(props)
-})
+interface TestShape {
+  sheetExtraProps: {
+    someCond
+    color
+    someWidth
+  }
+}
+
+let $width
+
+const themeDef = {
+  primary: {},
+  secondary: {},
+  breakpoints: (() => {
+    const [mobile, tablet, desktop] = $width.intervals(640, 1024)
+    return { mobile, tablet, desktop }
+  })()
+}
+
+interface Props<T> {
+  $ifelse: <R extends {}>(cond: ($props: T) => boolean, ok: R | R[], wrong: R | R[]) => R
+  $if: <R extends {}>(cond: ($props: T) => boolean, ok: R | R[]) => R
+  $native: <R extends {}>(...args: R[]) => { $native: R}
+  $hot
+  $width: (<R extends {}>(width, ...args: R[]) => R) & { in }
+  $web: (...arg: TCommonStyles.RulesetWeb[]) => { $web: TSheeter.RulesetWeb }
+  $props
+  $theme: typeof themeDef
+}
+
+const createConfig = <T extends {} = {}>(creator: (props: Props<T>) => {}) => {
+
+}
+
+interface TextCommon {
+  tc?: string
+}
+
+interface Text extends TextCommon {
+  t?: string
+}
+
+interface ViewCommon {
+  vc?: string
+}
+
+interface View extends ViewCommon{
+  v?: string
+}
+type W = TSheeter.RulesetWeb
+type TC = TextCommon & { $web?: W; $native?: T}
+type T = Text
+
+const testConfig = createConfig<{ enabled, color }>(({ $theme, $ifelse, $if, $hot, $width, $web, $native }) => ({
+  withTheme: true,
+  defaultProps: {
+
+  },
+  sheet: {
+    root: [
+      $web({
+        ':hover': $width<W>([640, 1024],{
+          margin:0, color: ''
+        })
+      }),
+
+      $width<TC>([640, 1024],
+        $ifelse<TC>($props => $props.enabled && $width.in($theme.breakpoints.mobile),
+          [
+            $native<T>(
+              { t: '' },
+              $if<T>($props => true, { tc: '', t:'' }),
+            ),
+            $web(
+              { },
+              $if<W>($props => true, { color: 'red' }),
+            )
+          ],
+          $if<TC>($props => true, { tc: '' }),
+        ),
+        {tc: ''}
+      ),
+
+      $width<TC>(1024, {
+
+      }, {}),
+      $hot(({ props: { primary, color } }) => [[primary], 
+        primary ? $theme.primary : $theme.secondary,
+        { color }
+      ]),
+    ],
+  })
+  )
+}
+
+
+const Test = props => {
+  const query = useSheeterQuery(testConfig, props)
+  query.$switch.pressable = false
+  const { sheet, propsCode, toClassNames, style /*web only*/ } = useSheeter(testConfig, props)
+
+  return null
+}
+
+let useSheeter, useSheeterQuery
 
 //*********************************************************
 //  PRIVATE
 //*********************************************************
 
 
-const useReactxxCreatorLow = (options: TWithStyles.ComponentOptions) => (props: TComponents.Props) => {
+const componentCreatorLow = (options: TWithStyles.ComponentOptions) => (props: TComponents.Props) => {
   const theme = options.withTheme ? useTheme() : null
-  return { theme } as TComponents.PropsCode
+  return { theme, propsCode: null } as TComponents.PropsCode & { propsCode }
 }
 
 const finishComponentState = (
-  sheetOrCreator: TSheeter.SheetOrCreator, CodeComponent: TComponents.ComponentTypeCode,
+  sheetOrCreator: TSheeter.SheetOrCreator,
   options: TWithStyles.ComponentOptions, overridedOptions: TWithStyles.ComponentOptions
 ) => {
   if (options && options.defaultProps) {
@@ -53,17 +156,14 @@ const finishComponentState = (
     ...mergedOptions,
     sheetOrCreator,
     //componentId,
-    CodeComponent,
     withTheme: typeof mergedOptions.withTheme === 'boolean'
       ? mergedOptions.withTheme
       : typeof sheetOrCreator === 'function',
-    displayName: `${mergedOptions.displayName || CodeComponent['name'] || 'Noname'}`,
+    displayName: `${mergedOptions.displayName || 'Noname'}`,
   }
 
   if (!sheetOrCreator['$cacheId']) sheetOrCreator['$cacheId'] = ++componentTypeCounter
   if (overridedOptions) overridedOptions['$cacheId'] = ++componentTypeCounter
-
-  CodeComponent.displayName = CodeComponent.displayName || res.displayName + 'Code'
 
   return res
 }

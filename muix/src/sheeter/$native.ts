@@ -1,4 +1,4 @@
-import { TAtomize, TVariants } from 'reactxx-typings'
+import { TAtomize } from 'reactxx-typings'
 import { applyLastwinsStrategy, finalizeClassName, createElement } from './reacts/$native'
 import { assignPlatform } from './globals'
 

@@ -4,24 +4,15 @@ import CSS from 'csstype';
 
 import { TCommonStyles, TAtomize, TVariants } from './index'
 
-export type PartialWrapper<T> = {
-  [P in keyof T]?: T[P]
-}
-export type Wrapper<T> = {
-  [P in keyof T]?: T[P]
-}
-
-declare namespace TSheeter {
+declare namespace TSheeter2 {
 
   /******************************************
     RULESET - Cross platform ruleset for web and native
   *******************************************/
   export type RulesetOrAtomizedCreator<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     RulesetOrAtomized<T, R> | ((theme: getTheme<R>) => RulesetOrAtomized<T, R>)
-    
   export type RulesetOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     RulesetItem<T, R> | RulesetItem<T, R>[]
-
   export type RulesetItem<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
     Ruleset<T, R>
     | TAtomize.Ruleset
@@ -87,12 +78,12 @@ declare namespace TSheeter {
       SHEET
   *******************************************/
 
-  export type Sheet<R extends Shape = Shape> = Wrapper<SheetCommon<R> & SheetNative<R> & SheetWeb<R>>
+  export type Sheet<R extends Shape = Shape> = SheetCommon<R> & SheetNative<R> & SheetWeb<R>
   //export type Sheet<R extends Shape = Shape> = SheetCommon2<R>
   export type SheetCreator<R extends Shape = Shape> = (theme: getTheme<R>) => Sheet<R>
   export type SheetOrCreator<R extends Shape = Shape> = SheetCreator<R> | Sheet<R>
 
-  export type PartialSheet<R extends Shape = Shape> = PartialWrapper<SheetCommon<R> & SheetNative<R> & SheetWeb<R>>
+  export type PartialSheet<R extends Shape = Shape> = Partial<SheetCommon<R> & SheetNative<R> & SheetWeb<R>>
   //export type PartialSheet<R extends Shape = Shape> = SheetCommonPartial2<R>
   export type PartialSheetCreator<R extends Shape = Shape> = (theme: getTheme<R>) => PartialSheet<R>
   export type PartialSheetOrCreator<R extends Shape = Shape> = PartialSheet<R> | PartialSheetCreator<R>

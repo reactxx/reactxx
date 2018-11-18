@@ -33,6 +33,43 @@ import ReactDOM from 'react-dom'
 
 // import { run } from 'reactxx-core'
 // run()
+const meth = (a: IObj) => {
+}
+meth({name: 'ss'})
+
+
+interface IObj { name: string }
+const obj: IObj = {
+    name: 'aaa'
+}
+
+
+function ObjMethod (this: IObj, a) {
+    let x = this.name + a
+}
+
+//ObjMethod(null)
+
+
+const binded = ObjMethod.bind(obj, 'zzz')
+binded()
+
+const fnc = () => {
+    debugger
+    return 'x'
+}
+
+const sheet = () => {
+    debugger
+    return {
+        [fnc()]: {
+
+        }
+    }
+}
+
+debugger
+const x = sheet()
 
 
 import App from '../../redux/index'

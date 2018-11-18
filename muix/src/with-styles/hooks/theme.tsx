@@ -4,7 +4,7 @@ import { TAtomize, TSheeter } from 'reactxx-typings';
 import warning from 'warning';
 //import { ThemeProviderProps } from 'react-fela';
 
-const themeContext = React.createContext<{}>(null)
+const themeContext = React.createContext(null)
 
 export const useTheme = () => useContext(themeContext)
 

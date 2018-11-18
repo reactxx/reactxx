@@ -15,7 +15,7 @@ declare namespace TAtomize {
     $native: Source
   }
   export interface Ruleset extends Array<Variant> { 
-    $r$?: true
+    $r$?: true // array signature
   }
   export interface Variant extends Array<Atomic> {
     conditions?: TVariants.Conditions
@@ -25,7 +25,7 @@ declare namespace TAtomize {
   export type GetPlatformTracePath = (value: Atomic) => string
 
   export interface IsReactXXComponent {
-    $c$?: boolean
+    $c$?: boolean // ReactXX component signature
   }
 
   export type Sheet<R extends TSheeter.Shape = TSheeter.Shape> = { [P in TSheeter.RulesetNamesAll<R>]: Ruleset }

@@ -23,6 +23,7 @@
     "strictFunctionTypes": false,
     "noImplicitAny": false,
     "removeComments": true,
+    
     //"noUnusedLocals": true,
     "baseUrl": ".",
     "paths": {
@@ -43,6 +44,9 @@
       ],
       "reactxx-sheet-switch": [
         "src/sheet-switch/index"
+      ],
+      "reactxx-sheet-if": [
+        "src/sheet-if/index"
       ],
       // "reactxx-sheet-transition/*": [
       //   "src/sheet-transition/*"
@@ -122,6 +126,7 @@
 
     //"src/sheet-transition", 
     "src/sheet-switch", 
+    "src/sheet-if", 
     "src/sheet-widths",
 
     "src/router",

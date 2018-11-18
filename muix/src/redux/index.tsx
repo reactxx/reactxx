@@ -1,5 +1,4 @@
 ﻿import React from 'react'
-import warning from 'warning'
 
 export class Store<TState = {}> {
 
@@ -15,30 +14,28 @@ export class Store<TState = {}> {
 
         // remember old state
         const oldState = React.useRef()
-        React.useEffect(() => {
-            oldState.current = { ...state as any }
-        }) // call on every render
+        React.useEffect(() => oldState.current = { ...state as any }) //called on every render
 
-        React.useEffect(() => { // call during mount
+        React.useEffect(() => { // called during mount
             const id = ++self.counter
             self.handlers[id] = {
                 oldState, selector, setState
             }
             return () =>
-                delete self.handlers[id] // call during unmount
+                delete self.handlers[id] // called during unmount
         }, [])
 
         return [state as TSelected, this] // return actual state and dispatcher
     }
 
-    protected setState = (newState: Partial<TState>) => {
-        this.state = Object.assign(this.state, newState)
+    protected setState = (setter: (oldState: TState) => Partial<TState>) => {
+        this.state = Object.assign(this.state, setter(this.state)) // new state
         for (const p in this.handlers) {
             const h = this.handlers[p]
-            const newsState = h.selector ? h.selector(this.state) : this.state
-            if (shallowEqualObjects(h.oldState.current, newsState)) return
+            const newsState = h.selector ? h.selector(this.state) : this.state // new state selection
+            if (shallowEqualObjects(h.oldState.current, newsState)) return // is the same as old one => NOP
             h.oldState.current = newsState
-            h.setState(newsState)
+            h.setState(newsState) // is different => rerender
         }
     }
 
@@ -78,15 +75,17 @@ interface IState {
     lastName: string
 }
 class StoreExapmle extends Store<IState> {
-    setFirstName = (firstName: string) => this.setState({ firstName })
+    // typed procs instead of actions
+    setNames = (firstName: string) => this.setState(st => ({ firstName, lastName: st.lastName + 'x' }))
 }
+// store, used when no Provider exists
 const globalStore = new StoreExapmle({ firstName: 'First', lastName: 'Default' })
 
 const StoreExampleContext = React.createContext<StoreExapmle>(null)
 
 const StoreExampleProvider: React.SFC<{ initState: IState }> = props => {
-    const [store] = React.useState(new StoreExapmle(props.initState))
-    return <StoreExampleContext.Provider value={store}>
+    const store = React.useRef(new StoreExapmle(props.initState))
+    return <StoreExampleContext.Provider value={store.current}>
         {props.children}
     </StoreExampleContext.Provider>
 }
@@ -101,35 +100,38 @@ const UseStoreExample: React.SFC = () => {
     const [state, dispatch] = store.useStore(st => ({ name: st.firstName.charAt(0).toUpperCase() + st.lastName.charAt(0).toUpperCase() }))
     return <p>
         <b>Rendered {renderCount.current} times</b>
-        <div onClick={() => dispatch.setFirstName('Franz')}>Set Franz ({state.name})</div>
-        <div onClick={() => dispatch.setFirstName('Charlie')}>Set Charlie ({state.name})</div>
+        <div onClick={() => dispatch.setNames('Franz')}>Set Franz ({state.name})</div>
+        <div onClick={() => dispatch.setNames('Charlie')}>Set Charlie ({state.name})</div>
     </p>
 }
 const DumpStoreExample: React.SFC = () => {
+    const renderCount = React.useRef(0)
+    renderCount.current += 1
     const store = React.useContext(StoreExampleContext) || globalStore
     const [state] = store.useStore()
     const { firstName, lastName } = state
     return <div><i>
         {firstName}
         {lastName}
+        ({renderCount.current})
     </i></div>
 }
 
 const App: React.SFC = () => {
-    const [, setState] = React.useState(null)
+    const [, setState] = React.useState(null) // forceUpdate
     return <>
         <div onClick={() => setState(null)}>REFRESH</div>
-        <hr/>
+        <hr />
         <DumpStoreExample />
         <UseStoreExample />
         <UseStoreExample />
-        <hr/>
+        <hr />
         <StoreExampleProvider initState={{ firstName: 'First', lastName: 'Last' }}>
             <DumpStoreExample />
             <UseStoreExample />
             <UseStoreExample />
         </StoreExampleProvider>
-        <hr/>
+        <hr />
         <div key={forceCreate++}>
             <StoreExampleProvider initState={{ firstName: 'First', lastName: 'Second' }}>
                 <DumpStoreExample />
