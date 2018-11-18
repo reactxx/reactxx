@@ -18,10 +18,10 @@ Array [
 exports[`ATOMIZE RULESET ## NATIVE ## 05 ([{ color: 'red' }, { margin: 0 }]) 1`] = `
 Array [
   Array [
-    "color: red /*.[0]*/",
+    "color: red /*.*/",
   ],
   Array [
-    "margin: 0 /*.[1]*/",
+    "margin: 0 /*.*/",
   ],
 ]
 `;
@@ -32,7 +32,7 @@ Array [
     "color: red /*.*/",
   ],
   Array [
-    "color: blue /*./$native*/",
+    "color: blue /*.*/",
   ],
 ]
 `;
@@ -56,8 +56,8 @@ Array [
 exports[`ATOMIZE RULESET ## NATIVE ## 11 with theme 1`] = `
 Array [
   Array [
-    "color: white /*.[0]*/",
-    "backgroundColor: darkgreen /*.[0]*/",
+    "color: white /*.*/",
+    "backgroundColor: darkgreen /*.*/",
   ],
 ]
 `;
@@ -67,14 +67,17 @@ Array [
   Array [
     "color: blue /*.*/",
   ],
-  Array [
-    "color: green /*./$native*/",
-  ],
 ]
 `;
 
 exports[`ATOMIZE RULESET ## NATIVE ## 12 ATOMIZE modifies source object 2`] = `
 Object {
+  "$native": Object {
+    "color": "green",
+  },
+  "$web": Object {
+    "color": "red",
+  },
   "color": "blue",
 }
 `;
@@ -97,10 +100,10 @@ Array [
 exports[`ATOMIZE RULESET ## WEB ## 05 ([{ color: 'red' }, { margin: 0 }]) 1`] = `
 Array [
   Array [
-    ".a { color:red /*.[0]*/ }",
+    ".a { color:red /*.*/ }",
   ],
   Array [
-    ".b { margin:0 /*.[1]*/ }",
+    ".b { margin:0 /*.*/ }",
   ],
 ]
 `;
@@ -111,7 +114,7 @@ Array [
     ".a { color:red /*.*/ }",
   ],
   Array [
-    ".b { color:green /*./$web*/ }",
+    ".b { color:green /*.*/ }",
   ],
 ]
 `;
@@ -135,12 +138,12 @@ Array [
 exports[`ATOMIZE RULESET ## WEB ## 11 with theme 1`] = `
 Array [
   Array [
-    ".a { color:white /*.[0]*/ }",
-    ".b { background-color:darkgreen /*.[0]*/ }",
+    ".a { color:white /*.*/ }",
+    ".b { background-color:darkgreen /*.*/ }",
   ],
   Array [
-    ".c { color:black /*.[1]/$web*/ }",
-    ".d { background-color:lightblue /*.[1]/$web*/ }",
+    ".c { color:black /*.*/ }",
+    ".d { background-color:lightblue /*.*/ }",
   ],
 ]
 `;
@@ -150,14 +153,17 @@ Array [
   Array [
     ".a { color:blue /*.*/ }",
   ],
-  Array [
-    ".b { color:red /*./$web*/ }",
-  ],
 ]
 `;
 
 exports[`ATOMIZE RULESET ## WEB ## 12 ATOMIZE modifies source object 2`] = `
 Object {
+  "$native": Object {
+    "color": "green",
+  },
+  "$web": Object {
+    "color": "red",
+  },
   "color": "blue",
 }
 `;

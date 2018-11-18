@@ -27,8 +27,7 @@ export const atomizeRuleset = <N extends string = 'root', R extends TSheeter.Sha
     if (!rs) return null
 
     const list = wrapRuleset([])
-    const ctx: TAtomize.TempCtx = [list, path, [], []]
-    adjustAtomizedLow(rs, ...ctx)
+    adjustAtomizedLow(rs, list, path, [], [])
 
     return list.length === 0 ? null : list
 }

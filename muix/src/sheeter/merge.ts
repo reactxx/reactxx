@@ -12,8 +12,8 @@ export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOr
         let canModify = false
         const processStyle = (st: TSheeter.Style) => {
             push(st)
-            if (st.$web)
-                push(st.$web as TSheeter.Style)
+            // if (st.$web)
+            //     push(st.$web as TSheeter.Style)
         }
         const push = (st: TSheeter.Style) => {
             if (!res) // first

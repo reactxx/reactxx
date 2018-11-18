@@ -1,6 +1,6 @@
 import { TWithStyles, TSheeter, TAtomize, TVariants } from 'reactxx-typings'
 import { atomizeRuleset, wrapRuleset } from './atomize'
-import { isToAtomize, isToAtomizeArray } from './atomize-low'
+import { isToAtomizeArray } from './atomize-low'
 import { testConditions } from './conditions'
 
 export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, ruleset: TSheeter.ClassNameOrAtomized) => {
@@ -20,18 +20,18 @@ export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, ruleset:
     const process = (val: TAtomize.Variants) => {
         if (!val || val.length === 0) return
 
-        if (isToAtomize(val)) {
-            val = atomizeRuleset(val as any, state && state.theme)
-            if (!val || val.length === 0) return
-        }
+        // if (isToAtomize(val)) {
+        //     val = atomizeRuleset(val as any, state && state.theme)
+        //     if (!val || val.length === 0) return
+        // }
 
-        push(val.filter(variant => variant && testConditions(variant.conditions, state)))
+        //push(val.filter(variant => variant && testConditions(variant.conditions, state)))
     }
 
-    if (isToAtomizeArray(rs))
-        rs.forEach(r => process(r))
-    else
-        process(rs);
+    // if (isToAtomizeArray(rs))
+    //     rs.forEach(r => process(r))
+    // else
+    //     process(rs);
 
     if (!values) return null;
     

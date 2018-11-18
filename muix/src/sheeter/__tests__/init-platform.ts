@@ -1,5 +1,3 @@
-//export * from './shape'
-
 import { render, cleanup } from 'react-testing-library'
 
 export const mount = comp => render(comp).container

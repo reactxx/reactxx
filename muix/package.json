@@ -11,7 +11,7 @@
   "jest": {
     "preset": "ts-jest",
     "setupFiles": [
-      "./src/tests/index.ts"
+      "./src/sheeter/__tests__/init-platform.ts"
     ],
     "snapshotSerializers": [],
     "verbose": true,
@@ -22,6 +22,7 @@
     "testMatch": null,
     "moduleNameMapper": {
       "^reactxx-(.*)-native$": "<rootDir>/src/$1/index-native",
+      "^reactxx-(.*)-test/(.*)$": "<rootDir>/src/$1/__tests__/$2",
       "^reactxx-(.*)$": "<rootDir>/src/$1/index"
     }
   },

@@ -9,35 +9,31 @@ import { platform } from 'reactxx-sheeter'
 // result is added to 'atomizedVariants'
 export const adjustAtomizedLow = (
     ruleset: TAtomize.Source,
-    ...ctx: TAtomize.TempCtx
+    atomizedVariants: TAtomize.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions
 ) => {
-    processTree(isToAtomizeArray(ruleset) ? ruleset : [ruleset], ...ctx)
+    processTree(isToAtomizeArray(ruleset) ? ruleset : [ruleset], atomizedVariants, path, pseudoPrefixes, conditions)
 }
 
 export function isToAtomizeArray(obj): obj is TAtomize.Item[] { return obj && !(obj as TAtomize.Ruleset).$r$ && Array.isArray(obj) }
 //export function isToAtomize(obj): obj is TAtomize.ToAtomize { return obj && !(obj as TAtomize.Ruleset).$r$ && !Array.isArray(obj) }
 export function isAtomized(obj): obj is TAtomize.Ruleset { return !obj || (obj as TAtomize.Ruleset).$r$ }
 export function isDeferred(obj): obj is TAtomize.Deferred { return obj && (obj as TAtomize.Deferred).$d$ }
-export function isTemporary(obj): obj is TAtomize.Temporary { return obj && (obj as TAtomize.Temporary).$t$ }
+export function isTemporary(obj): obj is TAtomize.TempProc { return obj && (obj as TAtomize.TempProc).$t$ }
 
 //*********************************************************
 //  PRIVATE
 //*********************************************************
-export const makeTemporary = <T extends TCommonStyles.RulesetNativeIds>(args, process: TAtomize.TempProcess) => {
-    return {
-        $t$: true,
-        process,
-        args,
-    } as TAtomize.Temporary as any as TCommonStyles.RulesetType<T>
+export const makeTemporary = <T extends TCommonStyles.RulesetNativeIds>(proc: TAtomize.TempProc) => {
+    proc.$t$ = true
+    return proc as any as TCommonStyles.RulesetType<T>
 }
 
 
-export const processTree = (items: TAtomize.Item[], ...ctx: TAtomize.TempCtx) => {
-    const [atomizedVariants, path, pseudoPrefixes, conditions] = ctx
+export const processTree = (items: TAtomize.Item[], atomizedVariants: TAtomize.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions) => {
     items.forEach(it => {
         if (!it) return
         if (isTemporary(it)) {
-            it.process(it.args, ...ctx)
+            it(atomizedVariants, path, pseudoPrefixes, conditions)
         } else if (isDeferred(it)) {
             atomizedVariants.push(it)
         } else if (isAtomized(it)) {
@@ -52,11 +48,11 @@ export const processTree = (items: TAtomize.Item[], ...ctx: TAtomize.TempCtx) =>
             })
         } else {
             processAllInnerVariantsAndAtomize(
-                it, 
+                it,
                 atomizedVariants, `${path}`,
                 pseudoPrefixes, conditions
             )
-       }
+        }
     })
 }
 
@@ -139,14 +135,14 @@ export const processTree = (items: TAtomize.Item[], ...ctx: TAtomize.TempCtx) =>
 
 const processAllInnerVariantsAndAtomize = (
     ruleset: TAtomize.ToAtomize,
-    ...ctx: TAtomize.TempCtx
+    atomizedVariants: TAtomize.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions,
+    isInPseudo?: boolean
 ) => {
 
     //const variantList: TAtomize.Variants = []
 
     // process variant part of ruleset: $widths, $switch etc.
     //atomizeVariants(variantList, ruleset as any, path, pseudoPrefixes, conditions)
-    const [atomizedVariants, path, pseudoPrefixes, conditions, isInPseudo] = ctx
 
     if (!isInPseudo)
         atomizeNonVariant(atomizedVariants, wrapPseudoPrefixes(ruleset, pseudoPrefixes), conditions, path)

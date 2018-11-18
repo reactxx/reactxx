@@ -2,7 +2,6 @@ import {
   atomizeRuleset,
   $web, $native,
 } from "reactxx-sheeter"
-import {TSheeter} from "reactxx-typings"
 import { Shape, theme } from "reactxx-typings-test/shape"
 import { initPlatform } from "./init-platform"
 

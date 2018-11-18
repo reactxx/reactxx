@@ -1,9 +1,9 @@
 import { TSheeter, TCommonStyles, TAtomize } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../atomize-low'
 
-function $native<T extends TCommonStyles.RulesetNativeIds = '$NativeText'>(...rulesets: TSheeter.RulesetNativeOrAtomized<T>[]) {
-    return rulesets && !window.isWeb && makeTemporary<T>(arguments, (args: TAtomize.Item[], ...ctx) => {
-        return processTree(args, ...ctx)
+const $native = <T extends TCommonStyles.RulesetNativeIds = '$NativeText'>(...rulesets: TSheeter.RulesetNativeOrAtomized<T>[]) => {
+    return rulesets && !window.isWeb && makeTemporary<T>((atomizedVariants, path, pseudoPrefixes, conditions) => {
+        processTree(rulesets, atomizedVariants, path, pseudoPrefixes, conditions)
     })
 }
 

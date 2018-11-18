@@ -6,17 +6,17 @@ declare namespace TAtomize {
 
   export type Source = Item | Item[]
 
-  export type TempCtx = [TAtomize.Variants, string, string[], TVariants.Conditions, boolean?]
-  export type TempProcess = (args, ...ctx: TempCtx) => void
-  export interface Temporary {
-    $t$: true // signature
-    process: (args, ...ctx: TempCtx) => void
-    args
-    subPath: string
+  export interface TempCtx {
+    atomizedVariants: TAtomize.Variants, path: string,
+    pseudoPrefixes: string[], conditions: TVariants.Conditions
+    isInPseudo?: boolean
   }
+  export type TempProc = (
+    (atomizedVariants: TAtomize.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions
+    ) => void
+  ) & { $t$?: true }
 
-
-  export type Item = ToAtomize | Ruleset | Temporary | Deferred
+  export type Item = ToAtomize | Ruleset | TempProc | Deferred
   export type ToAtomize = {}
 
   export interface Ruleset extends Array<Variant> {
