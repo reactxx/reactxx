@@ -12,12 +12,6 @@ import { TWithStyles } from './with-styles';
 
 export namespace TVariants {
 
-    type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
-        TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
-        TSheeter.RulesetLow<T, R> &
-        VariantPart<T, R>
-
-
     type ToAtomicRuleset<T> = (
         list: TAtomize.Variants,
         ruleset: T,

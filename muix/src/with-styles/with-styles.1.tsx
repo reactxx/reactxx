@@ -108,9 +108,9 @@ const testConfig = createConfig<{ enabled, color }>(({ $theme, $ifelse, $if, $ho
         { color }
       ]),
     ],
-  })
-  )
-}
+  }
+  
+}))
 
 
 const Test = props => {

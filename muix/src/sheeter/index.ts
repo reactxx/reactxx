@@ -1,5 +1,6 @@
 import React from 'react'
 
+export * from './conditions/index'
 export * from './utils/deep-merge'
 export * from './globals'
 export * from './conditions'
@@ -49,8 +50,4 @@ declare module 'react' {
         current: T | null;
     }
 
-}
-declare module 'prop-types' {
-    type InferProps<T> = any
-    let exact
 }

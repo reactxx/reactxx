@@ -17,8 +17,8 @@ export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: T
 }
 
 // muttable
-export const atomizeRuleset = <T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape>(
-    ruleset: TSheeter.RulesetOrAtomizedCreator<T, R>, theme?, path: string = '.'
+export const atomizeRuleset = <N extends string = 'root', R extends TSheeter.Shape = TSheeter.Shape>(
+    ruleset: TSheeter.RulesetOrAtomizedCreator<TSheeter.getRuleset<R, N>, R>, theme?: TSheeter.getTheme<R>, path: string = '.'
 ) => {
     if (!ruleset) return null
 
@@ -27,12 +27,13 @@ export const atomizeRuleset = <T extends TCommonStyles.RulesetNativeIds = 'Text'
     if (!rs) return null
 
     const list = wrapRuleset([])
-    adjustAtomizedLow(list, rs, path, [], [])
+    const ctx: TAtomize.TempCtx = [list, path, [], []]
+    adjustAtomizedLow(rs, ...ctx)
 
     return list.length === 0 ? null : list
 }
 
-export const wrapRuleset = (ruleset) => {
+export const wrapRuleset = ruleset => {
     (ruleset as TAtomize.Ruleset).$r$ = true
     if (window.__TRACE__)
         ruleset['toJSON'] = toJSON.bind(ruleset)

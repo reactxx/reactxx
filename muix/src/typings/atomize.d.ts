@@ -4,23 +4,32 @@ import { TWithStyles } from './with-styles';
 
 declare namespace TAtomize {
 
-  export type Source = Item | ItemArray
+  export type Source = Item | Item[]
 
-  export type Item = ToAtomize | Ruleset
-  export interface ItemArray extends Array<Item> { }
-
-  export interface ToAtomize {
-    //name?: string // ruleset name
-    $web: Source
-    $native: Source
+  export type TempCtx = [TAtomize.Variants, string, string[], TVariants.Conditions, boolean?]
+  export type TempProcess = (args, ...ctx: TempCtx) => void
+  export interface Temporary {
+    $t$: true // signature
+    process: (args, ...ctx: TempCtx) => void
+    args
+    subPath: string
   }
-  export interface Ruleset extends Array<Variant> { 
+
+
+  export type Item = ToAtomize | Ruleset | Temporary | Deferred
+  export type ToAtomize = {}
+
+  export interface Ruleset extends Array<Variant> {
     $r$?: true // array signature
+  }
+  export interface Deferred {
+    $d$: true // signature
+    getToAtmize: (pars) => ToAtomize
   }
   export interface Variant extends Array<Atomic> {
     conditions?: TVariants.Conditions
   }
-  export type Variants = Variant[]
+  export type Variants = (Variant | Deferred)[]
 
   export type GetPlatformTracePath = (value: Atomic) => string
 

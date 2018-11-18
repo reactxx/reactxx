@@ -74,6 +74,9 @@
       ],
 
       //**** FOR TESTING
+      "reactxx-typings-test/*": [
+        "src/typings/__tests__/*"
+      ],
       "reactxx-sheeter-native": [
         "src/sheeter/index-native"
       ],
@@ -116,25 +119,9 @@
     "src/typings.d.ts",
     "src/ks/common/ks.d.ts",
 
-    "src/tests", 
     "src/typings",
     "src/fela",
     "src/sheeter",
-
-    "src/with-styles",
-    "src/with-state",
-
-    //"src/sheet-transition", 
-    "src/sheet-switch", 
-    "src/sheet-if", 
-    "src/sheet-widths",
-
-    "src/router",
-    "src/redux",
-
-    "src/primitives",
-    "src/core",
-    "src/ks/web", 
 
     // "src/basic",
     // "src/mui-web",
@@ -151,6 +138,7 @@
     //"src/ks/common/components", 
   ],
   "exclude": [
+    //"src/sheeter/__tests__",
     "src/*/typings.d.ts",
     "src/trash",
     "src/ks/common/muix",

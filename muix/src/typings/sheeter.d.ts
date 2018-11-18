@@ -4,63 +4,34 @@ import CSS from 'csstype';
 
 import { TCommonStyles, TAtomize, TVariants } from './index'
 
-export type PartialWrapper<T> = {
-  [P in keyof T]?: T[P]
-}
-export type Wrapper<T> = {
-  [P in keyof T]?: T[P]
-}
-
 declare namespace TSheeter {
 
   /******************************************
     RULESET - Cross platform ruleset for web and native
   *******************************************/
   export type RulesetOrAtomizedCreator<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    RulesetOrAtomized<T, R> | ((theme: getTheme<R>) => RulesetOrAtomized<T, R>)
-    
-  export type RulesetOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    RulesetItem<T, R> | RulesetItem<T, R>[]
-
-  export type RulesetItem<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    Ruleset<T, R>
+    RulesetOrAtomized<T> | ((theme: getTheme<R>) => RulesetOrAtomized<T>)
+  export type RulesetOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text'> =
+    RulesetItem<T> | RulesetItem<T>[]
+  export type RulesetItem<T extends TCommonStyles.RulesetNativeIds = 'Text'> =
+    Ruleset<T>
     | TAtomize.Ruleset
 
-  export type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    TCommonStyles.RulesetCommon<T> & // native rules which are compatible with web
-    RulesetLow<T, R>
-
-
-  export interface RulesetLow<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape>
-    extends TVariants.VariantPart<T, R> {
-    name?: string
-    $native?: RulesetNativeOrAtomized<T, R>// native specific rules
-    $web?: RulesetWebOrAtomized<'$Web', R> // web specific rules
-  }
-
+  export type Ruleset<T extends TCommonStyles.RulesetNativeIds = 'Text'> = TCommonStyles.RulesetType<T>
 
   export type ClassNameOrCreator<R extends Shape = Shape> = ClassNameOrAtomized<R> | ((theme: getTheme<R>) => ClassNameOrAtomized<R>)
   export type ClassNameOrAtomized<R extends Shape = Shape> =
-    RulesetItem<getStyle<R>, R> | RulesetItem<getStyle<R>, R>[]
+    RulesetItem<getStyle<R>> | RulesetItem<getStyle<R>>[]
 
-  export type RulesetNativeOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    RulesetNativeItem<T, R> | RulesetNativeItem<T, R>[]
-  export type RulesetNativeItem<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    RulesetNative<T, R> | TAtomize.Ruleset
-  export type RulesetNative<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    TCommonStyles.RulesetNative<T> & // native rules which are compatible with web
-    TVariants.VariantPart<T, R>
+  export type RulesetNativeOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text'> =
+    RulesetNativeItem<T> | RulesetNativeItem<T>[]
+  export type RulesetNativeItem<T extends TCommonStyles.RulesetNativeIds = 'Text'> =
+    TCommonStyles.RulesetTypeNative<T> | TAtomize.Ruleset
 
-
-  export type RulesetWebOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    RulesetWebItem<T, R> | RulesetWebItem<T, R>[]
-  export type RulesetWebItem<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    RulesetWeb<T, R> | TAtomize.Ruleset
-  export type RulesetWeb<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends Shape = Shape> =
-    React.CSSProperties &
-    TVariants.VariantPart<T, R> &
-    { [P in CSS.Pseudos]?: RulesetWeb<T, R> }
-
+  export type RulesetWebOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text'> =
+    RulesetWebItem<T> | RulesetWebItem<T>[]
+  export type RulesetWebItem<T extends TCommonStyles.RulesetNativeIds = 'Text'> =
+    TCommonStyles.RulesetTypeWeb<T> | TAtomize.Ruleset
 
   /******************************************
     STYLE
@@ -75,41 +46,31 @@ declare namespace TSheeter {
   export type StyleOrAtomizedWeb = Style | Style[]
 
 
-  export type Style<R extends Shape = Shape> =
-    TCommonStyles.RulesetCommon<getStyle<R>> & StyleLow<R>
+  export type Style<R extends Shape = Shape> = TCommonStyles.RulesetType<getStyle<R>>
+  //TCommonStyles.RulesetCommon<getStyle<R>> & StyleLow<R>
 
-  export interface StyleLow<R extends Shape = Shape> {
-    $native?: TCommonStyles.RulesetNative<getStyle<R>>
-    $web?: React.CSSProperties
-  }
+  // export interface StyleLow<R extends Shape = Shape> {
+  //   $native?: TCommonStyles.RulesetNative<getStyle<R>>
+  //   $web?: React.CSSProperties
+  // }
 
   /******************************************
       SHEET
   *******************************************/
 
-  export type Sheet<R extends Shape = Shape> = Wrapper<SheetCommon<R> & SheetNative<R> & SheetWeb<R>>
+  export type Sheet<R extends Shape = Shape> = keyof getRulesets<R> extends never ? TSheeter.FakeInterface : {
+    [P in keyof getRulesets<R>]: RulesetOrAtomized<getRulesets<R>[P]>
+  }
   //export type Sheet<R extends Shape = Shape> = SheetCommon2<R>
   export type SheetCreator<R extends Shape = Shape> = (theme: getTheme<R>) => Sheet<R>
   export type SheetOrCreator<R extends Shape = Shape> = SheetCreator<R> | Sheet<R>
 
-  export type PartialSheet<R extends Shape = Shape> = PartialWrapper<SheetCommon<R> & SheetNative<R> & SheetWeb<R>>
+  export type PartialSheet<R extends Shape = Shape> = {
+    [P in keyof getRulesets<R>]?: RulesetOrAtomized<getRulesets<R>[P]>
+  }
   //export type PartialSheet<R extends Shape = Shape> = SheetCommonPartial2<R>
   export type PartialSheetCreator<R extends Shape = Shape> = (theme: getTheme<R>) => PartialSheet<R>
   export type PartialSheetOrCreator<R extends Shape = Shape> = PartialSheet<R> | PartialSheetCreator<R>
-
-  export type SheetCommon<R extends Shape> = keyof getCommon<R> extends never ? FakeInterface :
-    { [P in keyof getCommon<R>]: RulesetOrAtomized<getCommon<R>[P], R> }
-
-  export type SheetNative<R extends Shape> = keyof getNative<R> extends never ? FakeInterface :
-    { [P in keyof getNative<R>]: {
-      $native?: RulesetNativeOrAtomized<getNative<R>[P], R>
-    } }
-
-  export type SheetWeb<R extends Shape> = getWeb<R> extends never ? FakeInterface :
-    { [P in getWeb<R>]: {
-      $web?: RulesetWebOrAtomized<'$web', R>
-    } }
-
 
   /******************************************
     SHAPE
@@ -117,13 +78,14 @@ declare namespace TSheeter {
 
   // Shape for generic default, e.g. "interface X<R extends Shape = Shape> {} " 
   export interface Shape extends TVariants.ShapePart {
+    rulesets: Record<string, TCommonStyles.RulesetNativeIds>
     //**** sheet constrains
-    common: EmptyInterface // rulesets (and their native type), which are used in both web and native component code. Rule are compatible with web and native.
-    native: EmptyInterface // rulesets, which are used only in native code
-    web: EmptyInterface // ruleset names, which are used only in web code (its type is always React.CSSProperties)
+    // common: EmptyInterface // rulesets (and their native type), which are used in both web and native component code. Rule are compatible with web and native.
+    // native: EmptyInterface // rulesets, which are used only in native code
+    // web: EmptyInterface // ruleset names, which are used only in web code (its type is always React.CSSProperties)
     //sheetSwitch: EmptyInterface
     //******************** style constrain
-    style: TCommonStyles.RulesetNativeIds // for web, style has always React.CSSProperties type
+    style: TCommonStyles.RulesetNativeIdsLow // for web, style has always React.CSSProperties type
     //**** component property constrains
     staticProps: EmptyInterface
     props: EmptyInterface // common (web and native) props, excluding events
@@ -135,9 +97,10 @@ declare namespace TSheeter {
 
   // ancestor for Shape inheritance
   export interface ShapeAncestor extends TVariants.ShapePart {
-    common: EmptyInterface
-    native: EmptyInterface
-    web: EmptyInterface
+    rulesets: Record<string, TCommonStyles.RulesetNativeIds>
+    // common: EmptyInterface
+    // native: EmptyInterface
+    // web: EmptyInterface
     style: unknown
     props: EmptyInterface
     staticProps: EmptyInterface
@@ -145,16 +108,13 @@ declare namespace TSheeter {
     propsWeb: React.DOMAttributes<Element>
     events: EmptyInterface //ShapeWeb<TEventsAll>
     theme: EmptyInterface
-
-    // 
-    $Sheet: Sheet<this>
-    $PartialSheet: PartialSheet<this>
-    $SheetCreator: SheetCreator<this>
   }
 
-  export type getCommon<R extends Shape> = R['common']
-  export type getNative<R extends Shape> = R['native']
-  export type getWeb<R extends Shape> = keyof R['web']
+  export type getRulesets<R extends Shape> = R['rulesets']
+  export type getRuleset<R extends Shape, T extends string> = R['rulesets'][T] extends never ? 'Text' : R['rulesets'][T]
+  // export type getCommon<R extends Shape> = R['common']
+  // export type getNative<R extends Shape> = R['native']
+  // export type getWeb<R extends Shape> = keyof R['web']
   export type getStyle<R extends Shape> = R['style']
   export type getProps<R extends Shape> = R['props']
   export type getPropsWeb<R extends Shape> = R['propsWeb']
@@ -163,7 +123,7 @@ declare namespace TSheeter {
   export type getTheme<R extends Shape = Shape> = keyof R['theme'] extends never ? FakeInterface : R['theme']
   export type getStaticProps<R extends Shape = Shape> = keyof R['staticProps'] extends never ? FakeInterface : R['staticProps']
 
-  export type RulesetNamesAll<R extends Shape> = keyof getCommon<R> | keyof getNative<R> | getWeb<R>
+  export type RulesetNamesAll<R extends Shape> = keyof getRulesets<R>
 
   export type ShapeTexts<P extends string> = Record<P, 'Text'>
   export type ShapeViews<P extends string> = Record<P, 'View'>
