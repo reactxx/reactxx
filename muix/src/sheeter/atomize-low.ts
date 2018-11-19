@@ -14,7 +14,7 @@ export const adjustAtomizedLow = (
     ruleset: TAtomize.Source,
     atomizedVariants: TAtomize.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions
 ) => {
-    processTree(isToAtomizeArray(ruleset) ? ruleset : [ruleset], atomizedVariants, path, pseudoPrefixes, conditions)
+    processTree(ruleset, atomizedVariants, path, pseudoPrefixes, conditions)
 }
 
 export function isToAtomizeArray(obj): obj is TAtomize.Item[] { return obj && !(obj as TAtomize.Ruleset).$r$ && Array.isArray(obj) }
@@ -31,7 +31,8 @@ export const makeTemporary = <T extends TCommonStyles.RulesetNativeIds>(proc: TA
 
 //*******************************************************
 //        processTree
-export const processTree = (items: TAtomize.Item[], atomizedVariants: TAtomize.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions) => {
+export const processTree = (value: TAtomize.Item | TAtomize.Item[], atomizedVariants: TAtomize.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions) => {
+    const items = isToAtomizeArray(value) ? value : [value]
     const indexToPath = (idx:number) => items.length<=1 ? '' : `[${idx}]`
     items.forEach((it, idx) => {
         if (!it) return
@@ -81,7 +82,7 @@ const processAllInnerVariantsAndAtomize = (
     for (const p in ruleset) {
         const value = ruleset[p] as TAtomize.ToAtomize
         if (!value || p.charAt(0) === '$' || (typeof value !== 'object' && !isTemporary(value))) continue
-        processTree(isToAtomizeArray(value) ? value : [value], inner, `${path}/${p}`, [...pseudoPrefixes, p], conditions)
+        processTree(value, inner, `${path}/${p}`, [...pseudoPrefixes, p], conditions)
         delete ruleset[p] 
     }
     atomizeNonVariant(atomizedVariants, wrapPseudoPrefixes(ruleset, pseudoPrefixes), conditions, path)

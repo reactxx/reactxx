@@ -24,7 +24,7 @@ declare namespace TAtomize {
   }
   export interface Deferred {
     $d$: true // signature
-    getToAtmize: (pars) => ToAtomize
+    evalProc: (outerPar) => TAtomize.Variants
   }
   export interface Variant extends Array<Atomic> {
     conditions?: TVariants.Conditions

@@ -56,7 +56,7 @@ describe("ATOMIZE RULESET", () => {
       expect(ruleset).toMatchSnapshot()
     })
 
-    it("08 atomizeRuleset({$web: atomizeRuleset({ :hover color: 'red', $native: atomizeRuleset({ color: 'green'", () => {
+    it.only("08 atomizeRuleset({$web: atomizeRuleset({ :hover color: 'red', $native: atomizeRuleset({ color: 'green'", () => {
       ruleset = atomizeRuleset([
         $web(atomizeRuleset({ ':hover': { color: 'red' } })),
         $native(atomizeRuleset({ color: 'green' }))

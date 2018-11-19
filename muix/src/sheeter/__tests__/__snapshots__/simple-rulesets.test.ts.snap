@@ -32,7 +32,7 @@ Array [
     "color: red /*.[0]*/",
   ],
   Array [
-    "color: blue /*.[2]*/",
+    "color: blue /*.[2]/$native*/",
   ],
 ]
 `;
@@ -60,8 +60,8 @@ Array [
     "backgroundColor: darkgreen /*.[0]*/",
   ],
   Array [
-    "color: black /*.[2]*/",
-    "backgroundColor: lightblue /*.[2]*/",
+    "color: black /*.[2]/$native*/",
+    "backgroundColor: lightblue /*.[2]/$native*/",
   ],
 ]
 `;
@@ -118,7 +118,7 @@ Array [
     ".a { color:red /*.[0]*/ }",
   ],
   Array [
-    ".b { color:green /*.[1]*/ }",
+    ".b { color:green /*.[1]/$web*/ }",
   ],
 ]
 `;
@@ -146,8 +146,8 @@ Array [
     ".b { background-color:darkgreen /*.[0]*/ }",
   ],
   Array [
-    ".c { color:black /*.[1]*/ }",
-    ".d { background-color:lightblue /*.[1]*/ }",
+    ".c { color:black /*.[1]/$web*/ }",
+    ".d { background-color:lightblue /*.[1]/$web*/ }",
   ],
 ]
 `;
@@ -175,7 +175,7 @@ Object {
 exports[`ATOMIZE RULESET ## WEB ## 13 condition in pseudo 1`] = `
 Array [
   Array [
-    ".a:hover { color:red /*./:hover*/ }",
+    ".a:hover { color:red /*./$web/:hover/$web*/ }",
   ],
 ]
 `;
@@ -183,13 +183,13 @@ Array [
 exports[`ATOMIZE RULESET ## WEB ## 14 mix in pseudo array 1`] = `
 Array [
   Array [
-    ".c { color:green /*.*/ }",
+    ".c { color:green /*./$web*/ }",
   ],
   Array [
-    ".a:hover { color:blue /*./:hover[0]*/ }",
+    ".a:hover { color:blue /*./$web/:hover[0]*/ }",
   ],
   Array [
-    ".b:hover:active { color:red /*./:hover[1]/:active*/ }",
+    ".b:hover:active { color:red /*./$web/:hover[1]/$web/:active*/ }",
   ],
 ]
 `;
