@@ -56,41 +56,43 @@ describe("ATOMIZE RULESET", () => {
       expect(ruleset).toMatchSnapshot()
     })
 
-    it("08 atomizeRuleset({$web: atomizeRuleset({ color: 'red', $native: atomizeRuleset({ color: 'green'", () => {
+    it("08 atomizeRuleset({$web: atomizeRuleset({ :hover color: 'red', $native: atomizeRuleset({ color: 'green'", () => {
       ruleset = atomizeRuleset([
-        $web(atomizeRuleset({ color: 'red' })),
+        $web(atomizeRuleset({ ':hover': { color: 'red' } })),
         $native(atomizeRuleset({ color: 'green' }))
       ])
       expect(ruleset).toMatchSnapshot()
     })
 
     it("09 ERROR for atomizeRuleset({:hover': atomizeRuleset(...", () => {
+      if (!window.isWeb) return
       const fnc = () => {
-        window.isWeb && atomizeRuleset(
+        atomizeRuleset(
           $web({
-            ':hover': atomizeRuleset({ color: 'red' }) as any,
-          }
-        ))
+            ':hover': atomizeRuleset({ color: 'red' }),
+          }))
       }
-      window.isWeb && expect(fnc).toThrow(/.*/)
+      expect(fnc).toThrow(/.*/)
     })
 
     it("10 ERROR for atomizeRuleset({:hover': [ARRAY]", () => {
-      const fnc = () => window.isWeb && atomizeRuleset(
+      if (!window.isWeb) return
+      const fnc = () => atomizeRuleset(
         $web({
           ':hover': [
-            { color: 'red' },
+            atomizeRuleset({ color: 'red' }),
             { margin: 10 }
-          ] as any
+          ]
         })
       )
-      window.isWeb && expect(fnc).toThrow(/.*/)
+      expect(fnc).toThrow(/.*/)
     })
 
     it("11 with theme", () => {
-      ruleset = atomizeRuleset<'root', Shape>(theme => [
+      ruleset = atomizeRuleset<'label', Shape>(theme => [
         theme.primary.normal,
         $web(theme.secondary.normal),
+        $native(theme.secondary.normal),
       ], theme)
       expect(ruleset).toMatchSnapshot()
     })
@@ -105,6 +107,33 @@ describe("ATOMIZE RULESET", () => {
       expect(ruleset).toMatchSnapshot()
       expect(source).toMatchSnapshot()
     })
+
+    it("13 condition in pseudo", () => {
+      if (!window.isWeb) return
+      ruleset = atomizeRuleset([
+        $web({
+          ':hover': $web<'$Web'>({ color: 'red' }),
+        }),
+      ])
+      expect(ruleset).toMatchSnapshot()
+    })
+
+    it("14 mix in pseudo array", () => {
+      if (!window.isWeb) return
+      ruleset = atomizeRuleset([
+        $web({
+          color: 'green',
+          ':hover': [
+            { color: 'blue' },
+            $web<'$Web'>({ ':active': { color: 'red' } })
+          ],
+        }),
+      ])
+      expect(ruleset).toMatchSnapshot()
+    })
+
+
+
   }
 
   describe("## NATIVE ##", () => doTest(false))

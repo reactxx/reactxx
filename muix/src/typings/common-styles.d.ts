@@ -1,6 +1,7 @@
 ﻿import React from 'React';
 import ReactN from 'react-native';
 import CSS from 'csstype';
+import { TSheeter } from './sheeter';
 
 declare namespace TCommonStyles {
 
@@ -122,17 +123,19 @@ declare namespace TCommonStyles {
 
   export interface TextStyle extends TextStyleLow, TransformProp { }
   export interface TextStyleLow extends ViewStyleLow {
-    color?: string
-    fontFamily?: string
-    fontSize?: number
-    fontStyle?: "normal" | "italic"
-    fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900"
-    letterSpacing?: number
-    lineHeight?: number
-    textAlign?: "auto" | "left" | "right" | "center"
-    textDecorationLine?: "none" | "underline" | "line-through" | "underline line-through"
-    textDecorationStyle?: "solid" | "double" | "dotted" | "dashed"
-    textDecorationColor?: string
+    color?: string;
+    fontFamily?: string;
+    fontSize?: number;
+    fontStyle?: "normal" | "italic";
+    fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
+    letterSpacing?: number;
+    lineHeight?: number;
+    textAlign?: "auto" | "left" | "right" | "center" | "justify";
+    textDecorationLine?: "none" | "underline" | "line-through" | "underline line-through";
+    textDecorationStyle?: "solid" | "double" | "dotted" | "dashed";
+    textDecorationColor?: string;
+    textShadowColor?: string;
+    textShadowRadius?: number;
   }
 
   export interface ImageStyle extends ImageStyleLow, TransformProp { }
@@ -218,7 +221,7 @@ declare namespace TCommonStyles {
     T extends 'Image' ? ReactN.ImageProperties :
     ReactN.TextProperties
 
-  export type RulesetWeb = React.CSSProperties & { [P in CSS.Pseudos]?: RulesetWeb }
+  export type RulesetWeb = React.CSSProperties & { [P in CSS.Pseudos]?: TSheeter.RulesetOrAtomized<'$Web'> }
   export type Ruleset = RulesetWeb | RulesetNative
 
 }

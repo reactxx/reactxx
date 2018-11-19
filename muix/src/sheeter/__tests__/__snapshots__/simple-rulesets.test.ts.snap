@@ -18,10 +18,10 @@ Array [
 exports[`ATOMIZE RULESET ## NATIVE ## 05 ([{ color: 'red' }, { margin: 0 }]) 1`] = `
 Array [
   Array [
-    "color: red /*.*/",
+    "color: red /*.[0]*/",
   ],
   Array [
-    "margin: 0 /*.*/",
+    "margin: 0 /*.[1]*/",
   ],
 ]
 `;
@@ -29,10 +29,10 @@ Array [
 exports[`ATOMIZE RULESET ## NATIVE ## 06 (...$web: { color: 'green' }, $native: { color: 'blue' }) 1`] = `
 Array [
   Array [
-    "color: red /*.*/",
+    "color: red /*.[0]*/",
   ],
   Array [
-    "color: blue /*.*/",
+    "color: blue /*.[2]*/",
   ],
 ]
 `;
@@ -45,7 +45,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## NATIVE ## 08 atomizeRuleset({$web: atomizeRuleset({ color: 'red', $native: atomizeRuleset({ color: 'green' 1`] = `
+exports[`ATOMIZE RULESET ## NATIVE ## 08 atomizeRuleset({$web: atomizeRuleset({ :hover color: 'red', $native: atomizeRuleset({ color: 'green' 1`] = `
 Array [
   Array [
     "color: green /*.*/",
@@ -56,8 +56,12 @@ Array [
 exports[`ATOMIZE RULESET ## NATIVE ## 11 with theme 1`] = `
 Array [
   Array [
-    "color: white /*.*/",
-    "backgroundColor: darkgreen /*.*/",
+    "color: white /*.[0]*/",
+    "backgroundColor: darkgreen /*.[0]*/",
+  ],
+  Array [
+    "color: black /*.[2]*/",
+    "backgroundColor: lightblue /*.[2]*/",
   ],
 ]
 `;
@@ -100,10 +104,10 @@ Array [
 exports[`ATOMIZE RULESET ## WEB ## 05 ([{ color: 'red' }, { margin: 0 }]) 1`] = `
 Array [
   Array [
-    ".a { color:red /*.*/ }",
+    ".a { color:red /*.[0]*/ }",
   ],
   Array [
-    ".b { margin:0 /*.*/ }",
+    ".b { margin:0 /*.[1]*/ }",
   ],
 ]
 `;
@@ -111,10 +115,10 @@ Array [
 exports[`ATOMIZE RULESET ## WEB ## 06 (...$web: { color: 'green' }, $native: { color: 'blue' }) 1`] = `
 Array [
   Array [
-    ".a { color:red /*.*/ }",
+    ".a { color:red /*.[0]*/ }",
   ],
   Array [
-    ".b { color:green /*.*/ }",
+    ".b { color:green /*.[1]*/ }",
   ],
 ]
 `;
@@ -127,10 +131,10 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## WEB ## 08 atomizeRuleset({$web: atomizeRuleset({ color: 'red', $native: atomizeRuleset({ color: 'green' 1`] = `
+exports[`ATOMIZE RULESET ## WEB ## 08 atomizeRuleset({$web: atomizeRuleset({ :hover color: 'red', $native: atomizeRuleset({ color: 'green' 1`] = `
 Array [
   Array [
-    ".a { color:red /*.*/ }",
+    ".a:hover { color:red /*./:hover*/ }",
   ],
 ]
 `;
@@ -138,12 +142,12 @@ Array [
 exports[`ATOMIZE RULESET ## WEB ## 11 with theme 1`] = `
 Array [
   Array [
-    ".a { color:white /*.*/ }",
-    ".b { background-color:darkgreen /*.*/ }",
+    ".a { color:white /*.[0]*/ }",
+    ".b { background-color:darkgreen /*.[0]*/ }",
   ],
   Array [
-    ".c { color:black /*.*/ }",
-    ".d { background-color:lightblue /*.*/ }",
+    ".c { color:black /*.[1]*/ }",
+    ".d { background-color:lightblue /*.[1]*/ }",
   ],
 ]
 `;
@@ -166,4 +170,26 @@ Object {
   },
   "color": "blue",
 }
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 13 condition in pseudo 1`] = `
+Array [
+  Array [
+    ".a:hover { color:red /*./:hover*/ }",
+  ],
+]
+`;
+
+exports[`ATOMIZE RULESET ## WEB ## 14 mix in pseudo array 1`] = `
+Array [
+  Array [
+    ".c { color:green /*.*/ }",
+  ],
+  Array [
+    ".a:hover { color:blue /*./:hover[0]*/ }",
+  ],
+  Array [
+    ".b:hover:active { color:red /*./:hover[1]/:active*/ }",
+  ],
+]
 `;
