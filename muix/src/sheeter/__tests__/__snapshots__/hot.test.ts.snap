@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SHEETER HOT ## NATIVE ## 01 1`] = `
+Array [
+  "DEFFERED",
+]
+`;
+
+exports[`SHEETER HOT ## WEB ## 01 1`] = `
+Array [
+  "DEFFERED",
+]
+`;

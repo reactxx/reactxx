@@ -1,41 +1,58 @@
 import { TWithStyles, TSheeter, TAtomize, TVariants } from 'reactxx-typings'
 import { atomizeRuleset, wrapRuleset } from './atomize'
-import { isToAtomizeArray } from './atomize-low'
-import { testConditions } from './conditions'
+import { isToAtomize, isToAtomizeArray, isDeferred, isTemporary } from './atomize-low'
 
-export const toClassNamesWithQuery = (state: TWithStyles.PipelineState, ruleset: TSheeter.ClassNameOrAtomized) => {
+export interface QueryState {
+    theme?
+}
+export type Item = TAtomize.ToAtomize | TAtomize.Ruleset | TAtomize.TempProc
 
-    const rs = ruleset as (TAtomize.Ruleset | TAtomize.Ruleset[])
+export const toClassNamesWithQuery = <T extends QueryState = any>(state: T, ...items: Item[]) => {
 
-    //if (isQueried(rs)) return rs as TAtomize.Ruleset // already done, e.g. single Ruleset without conditions
+    let values: TAtomize.Variants = []
 
-    let values: TAtomize.Variants | TAtomize.Ruleset = null
-
-    const push = (val: TAtomize.Variants) => {
-        if (!val || val.length === 0) return
-        if (!values) values = val
-        else values = [...values, ...val]
+    const testConditions = (v: TAtomize.Variant, state: TWithStyles.PipelineState) => {
+        if (!v.conditions || v.conditions.length === 0) return true
+        return v.conditions.every(c => c.test(state))
     }
 
-    const process = (val: TAtomize.Variants) => {
-        if (!val || val.length === 0) return
-
-        // if (isToAtomize(val)) {
-        //     val = atomizeRuleset(val as any, state && state.theme)
-        //     if (!val || val.length === 0) return
-        // }
-
-        //push(val.filter(variant => variant && testConditions(variant.conditions, state)))
+    const filterList = (list: TAtomize.Variants) => {
+        list.forEach(v => {
+            if (!v) return
+            if (isDeferred(v)) {
+                const res = v.evalProc(state)
+                res.forEach(r => process(r))
+            } else if (testConditions(v, state))
+                values.push(v)
+        })
     }
 
-    // if (isToAtomizeArray(rs))
-    //     rs.forEach(r => process(r))
-    // else
-    //     process(rs);
+    const process = (val: Item) => {
+        if (!val) return
 
-    if (!values) return null;
-    
-    return wrapRuleset(values)
+        if (isDeferred(val)) {
+            const res = val.evalProc(state)
+            res.forEach(r => process(r))
+            return
+        }
+
+        if (isTemporary(val)) {
+            const list: TAtomize.Variants = []
+            val(list, '', [], [])
+            filterList(list)
+            return
+        }
+
+        const ruleset = isToAtomize(val) ? atomizeRuleset(val, state && state.theme) : val
+        if (!ruleset || ruleset.length === 0) return
+
+        filterList(ruleset)
+
+    }
+
+    items.forEach(r => process(r))
+
+    return values.length === 0 ? null : wrapRuleset(values)
 }
 
 export const deleteSystemProps = props => {

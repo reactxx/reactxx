@@ -1,4 +1,4 @@
-import { TSheeter, TCommonStyles, TAtomize } from 'reactxx-typings'
+import { TSheeter, TCommonStyles, TVariants } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../atomize-low'
 
 const $ifelse = <T extends TCommonStyles.RulesetNativeIds = 'Text'>(
@@ -8,14 +8,14 @@ const $ifelse = <T extends TCommonStyles.RulesetNativeIds = 'Text'>(
 ) => {
     return makeTemporary<T>((atomizedVariants, path, pseudoPrefixes, conditions) => {
         if (ifPart) {
-            const condTrue = {
+            const condTrue: TVariants.Condition = {
                 type: '$ifelse-true',
                 test: outerPar => test(outerPar, null)
             }
             processTree(ifPart, atomizedVariants, path + '/$ifelse-true', pseudoPrefixes, [...conditions, condTrue])
         }
         if (elsePart) {
-            const condFalse = {
+            const condFalse: TVariants.Condition = {
                 type: '$ifelse-false',
                 test: outerPar => !test(outerPar, null)
             }

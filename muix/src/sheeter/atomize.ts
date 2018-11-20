@@ -2,7 +2,7 @@ import warning from 'warning';
 
 import { TAtomize, TSheeter, TComponents, TCommonStyles } from 'reactxx-typings'
 import { createWithTheme } from './utils/create-with-theme'
-import { adjustAtomizedLow } from './atomize-low'
+import { adjustAtomizedLow, isDeferred } from './atomize-low'
 
 // muttable
 export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.PartialSheetOrCreator<R>, theme?, path: string = 'sheet') => {
@@ -38,14 +38,8 @@ export const wrapRuleset = ruleset => {
         ruleset['toJSON'] = toJSON.bind(ruleset)
     return ruleset as TAtomize.Ruleset
 }
-function toJSON_() {
-    return (this as TAtomize.Ruleset).map(v => v.conditions ? {
-        conditions: v.conditions,
-        items: v
-    } : v)
-}
-function toJSON() {
-    return (this as TAtomize.Ruleset).map(v => v.conditions ? [...v.conditions, ...v] : v)
+function toJSON () {
+    return (this as TAtomize.Ruleset).map(v => isDeferred(v) ? 'DEFFERED' : [...v])
 }
 
 // muttable (at least for native)

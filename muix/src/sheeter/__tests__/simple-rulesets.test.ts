@@ -1,13 +1,13 @@
 import {
   atomizeRuleset,
-  $web, $native,
+  $web, $native, $hot,
 } from "reactxx-sheeter"
 import { Shape, theme } from "reactxx-typings-test/shape"
 import { initPlatform } from "./init-platform"
 
 const t = $web({ color: 'green' })
 
-describe("ATOMIZE RULESET", () => {
+describe("SHEETER SIMPLE RULESET", () => {
 
   const doTest = (isWeb: boolean) => {
     beforeEach(() => initPlatform(isWeb))
@@ -132,7 +132,15 @@ describe("ATOMIZE RULESET", () => {
       expect(ruleset).toMatchSnapshot()
     })
 
-
+    it("15 just $hot", () => {
+      ruleset = atomizeRuleset([
+        { color: 'green' },
+        $hot(state => ({
+          color: 'red'
+        })),
+      ])
+      expect(ruleset).toMatchSnapshot()
+    })
 
   }
 

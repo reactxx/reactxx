@@ -21,6 +21,7 @@ export function isToAtomizeArray(obj): obj is TAtomize.Item[] { return obj && !(
 export function isAtomized(obj): obj is TAtomize.Ruleset { return !obj || (obj as TAtomize.Ruleset).$r$ }
 export function isDeferred(obj): obj is TAtomize.Deferred { return obj && (obj as TAtomize.Deferred).$d$ }
 export function isTemporary(obj): obj is TAtomize.TempProc { return obj && (obj as TAtomize.TempProc).$t$ }
+export function isToAtomize(obj): obj is TAtomize.ToAtomize { return obj && !(obj as TAtomize.Ruleset).$r$ && !(obj as TAtomize.Deferred).$d$ && !(obj as TAtomize.TempProc).$t$}
 
 //*******************************************************
 //        makeTemporary
@@ -104,6 +105,10 @@ const atomizeNonVariant = (
     conditions: TVariants.Conditions, path: string
 ) => {
     if (!sourceRuleset) return
+    if (isDeferred(sourceRuleset)) {
+        atomizedVariants.push(sourceRuleset)
+        return
+    }
     // platform specific atomize: e.g. for WEB convert ruleset to list of atomized CSS classes
     const variant = platform.toPlatformAtomizeRuleset(sourceRuleset, path)
     pushToAtomizedVariants(atomizedVariants, variant, conditions)

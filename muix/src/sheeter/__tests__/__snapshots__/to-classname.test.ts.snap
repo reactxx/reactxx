@@ -1,0 +1,238 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TO CLASSNAMES ## NATIVE ## 01: null 1`] = `null`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 01: null 2`] = `null`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 01: null 3`] = `undefined`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 02: null, {}, undefined 1`] = `null`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 02: null, {}, undefined 2`] = `null`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 02: null, {}, undefined 3`] = `undefined`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 03: mixed 1`] = `
+Array [
+  Array [
+    "color: red /*.*/",
+  ],
+  Array [
+    "color: blue /*root[0]*/",
+  ],
+  Array [
+    "color: yellow /*root[1]*/",
+  ],
+  Array [
+    "color: green /*.*/",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 03: mixed 2`] = `
+Object {
+  "color": Object {
+    "tracePath": ".",
+    "value": "green",
+  },
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 03: mixed 3`] = `
+Object {
+  "color": "green",
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 04: query => opened 1`] = `
+Array [
+  Array [
+    "color: red /*/$if*/",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 04: query => opened 2`] = `
+Object {
+  "color": Object {
+    "tracePath": "/$if",
+    "value": "red",
+  },
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 04: query => opened 3`] = `
+Object {
+  "color": "red",
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 05: query => closed 1`] = `
+Array [
+  Array [
+    "color: blue /*/$if*/",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 05: query => closed 2`] = `
+Object {
+  "color": Object {
+    "tracePath": "/$if",
+    "value": "blue",
+  },
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 05: query => closed 3`] = `
+Object {
+  "color": "blue",
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 06: query => closed => pre-atomized 1`] = `
+Array [
+  Array [
+    "color: blue /*.[1]/$if*/",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 06: query => closed => pre-atomized 2`] = `
+Object {
+  "color": Object {
+    "tracePath": ".[1]/$if",
+    "value": "blue",
+  },
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 06: query => closed => pre-atomized 3`] = `
+Object {
+  "color": "blue",
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 07: query => closed => pre-queried 1`] = `
+Array [
+  Array [
+    "color: blue /*/$if*/",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 07: query => closed => pre-queried 2`] = `
+Object {
+  "color": Object {
+    "tracePath": "/$if",
+    "value": "blue",
+  },
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 07: query => closed => pre-queried 3`] = `
+Object {
+  "color": "blue",
+}
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 01: null 1`] = `null`;
+
+exports[`TO CLASSNAMES ## WEB ## 01: null 2`] = `null`;
+
+exports[`TO CLASSNAMES ## WEB ## 01: null 3`] = `undefined`;
+
+exports[`TO CLASSNAMES ## WEB ## 02: null, {}, undefined 1`] = `null`;
+
+exports[`TO CLASSNAMES ## WEB ## 02: null, {}, undefined 2`] = `null`;
+
+exports[`TO CLASSNAMES ## WEB ## 02: null, {}, undefined 3`] = `undefined`;
+
+exports[`TO CLASSNAMES ## WEB ## 03: mixed 1`] = `
+Array [
+  Array [
+    ".d { color:red /*.*/ }",
+  ],
+  Array [
+    ".a { color:blue /*root[0]*/ }",
+  ],
+  Array [
+    ".b { color:yellow /*root[1]*/ }",
+  ],
+  Array [
+    ".c { color:green /*.*/ }",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 03: mixed 2`] = `
+Array [
+  ".c { color:green /*.*/ }",
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 03: mixed 3`] = `"c"`;
+
+exports[`TO CLASSNAMES ## WEB ## 04: query => opened 1`] = `
+Array [
+  Array [
+    ".a { color:red /*/$if*/ }",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 04: query => opened 2`] = `
+Array [
+  ".a { color:red /*/$if*/ }",
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 04: query => opened 3`] = `"a"`;
+
+exports[`TO CLASSNAMES ## WEB ## 05: query => closed 1`] = `
+Array [
+  Array [
+    ".b { color:blue /*/$if*/ }",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 05: query => closed 2`] = `
+Array [
+  ".b { color:blue /*/$if*/ }",
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 05: query => closed 3`] = `"b"`;
+
+exports[`TO CLASSNAMES ## WEB ## 06: query => closed => pre-atomized 1`] = `
+Array [
+  Array [
+    ".b { color:blue /*.[1]/$if*/ }",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 06: query => closed => pre-atomized 2`] = `
+Array [
+  ".b { color:blue /*.[1]/$if*/ }",
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 06: query => closed => pre-atomized 3`] = `"b"`;
+
+exports[`TO CLASSNAMES ## WEB ## 07: query => closed => pre-queried 1`] = `
+Array [
+  Array [
+    ".b { color:blue /*/$if*/ }",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 07: query => closed => pre-queried 2`] = `
+Array [
+  ".b { color:blue /*/$if*/ }",
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 07: query => closed => pre-queried 3`] = `"b"`;

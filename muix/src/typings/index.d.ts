@@ -55,7 +55,7 @@ export namespace TVariants {
     interface Condition {
         type: string
         innerPar?: any
-        test?: (innerPar, outerPar) => boolean
+        test?: (outerPar) => boolean
     }
     //*********************************************************
     //  QUERY
