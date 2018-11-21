@@ -1,3 +1,7 @@
+- HOT and IFELSE test
+- debug class trace to HTML tag
+- style and className
+
 - replace pipelines with react hooks
 - components overrideOptions preference
 - atomize and merge STYLES: tests
