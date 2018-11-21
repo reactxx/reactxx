@@ -1,6 +1,6 @@
 import { TAtomize } from 'reactxx-typings'
 import { applyLastwinsStrategy, finalizeClassName, createElement } from './reacts/$native'
-import { assignPlatform } from './globals'
+import { assignPlatform } from './utils/globals'
 
 export const init = () => assignPlatform({
     toPlatformAtomizeRuleset: (style, tracePath) => {

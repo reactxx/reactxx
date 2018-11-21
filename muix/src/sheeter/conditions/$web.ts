@@ -1,5 +1,5 @@
 import { TSheeter, TCommonStyles, TAtomize } from 'reactxx-typings'
-import { processTree, makeTemporary } from '../atomize-low'
+import { processTree, makeTemporary } from '../utils/atomize-low'
 
 const $web = <T extends TCommonStyles.RulesetNativeIds = 'Text'>(...rulesets: TSheeter.RulesetWebItem<T>[]) => {
     return rulesets && window.isWeb && makeTemporary<T>((atomizedVariants, path, pseudoPrefixes, conditions) => {

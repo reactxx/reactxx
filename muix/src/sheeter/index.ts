@@ -2,18 +2,18 @@ import React from 'react'
 
 export * from './conditions/index'
 export * from './utils/deep-merge'
-export * from './globals'
+export * from './utils/globals'
 //export * from './conditions'
-export * from './merge'
+export * from './utils/merge'
 export * from './utils/wrap-pseudo-prefixes'
 
-export {atomizeSheet, atomizeRuleset, atomizeStyle} from './atomize'
-export {toClassNamesWithQuery} from './to-classnames'
-export {adjustAtomizedLow, isToAtomizeArray} from './atomize-low'
+export {atomizeSheet, atomizeRuleset, atomizeStyle} from './utils/atomize'
+export {toClassNamesWithQuery} from './utils/to-classnames'
+export {adjustAtomizedLow, isToAtomizeArray} from './utils/atomize-low'
 
 
 import { init } from './$web'
-import { initGlobals } from './globals'
+import { initGlobals } from './utils/globals'
 
 export const initSheeter$Web = (force?: boolean) => initGlobals(force, init)
 export const initSheeter = initSheeter$Web

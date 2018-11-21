@@ -1,5 +1,5 @@
 import { TSheeter, TCommonStyles, TVariants } from 'reactxx-typings'
-import { processTree, makeTemporary } from '../atomize-low'
+import { processTree, makeTemporary } from '../utils/atomize-low'
 
 const $ifelse = <T extends TCommonStyles.RulesetNativeIds = 'Text'>(
     test: (outerPar, innerPar) => boolean,

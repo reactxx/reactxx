@@ -44,20 +44,20 @@ describe("SHEETER $WIDTHS", () => {
         $width([640, 1024], { color: 'green' }),
         $width(1024, { color: 'blue' }),
       ]
-      it("01: native, 300", () =>
-        !window.isWeb && dump(toClassNamesWithQuery<$WidthsQuery>({ actWidth: 300 }, ...rulesets))
+      !window.isWeb && it("01: native, 300", () =>
+        dump(toClassNamesWithQuery<$WidthsQuery>({ actWidth: 300 }, ...rulesets))
       )
-      it("02: native, 640", () =>
-        !window.isWeb && dump(toClassNamesWithQuery<$WidthsQuery>({ actWidth: 640 }, ...rulesets))
+      !window.isWeb && it("02: native, 640", () =>
+        dump(toClassNamesWithQuery<$WidthsQuery>({ actWidth: 640 }, ...rulesets))
       )
-      it("03: native, 1024", () =>
-        !window.isWeb && dump(toClassNamesWithQuery<$WidthsQuery>({ actWidth: 1024 }, ...rulesets))
+      !window.isWeb && it("03: native, 1024", () =>
+        dump(toClassNamesWithQuery<$WidthsQuery>({ actWidth: 1024 }, ...rulesets))
       )
-      it("04: native, undefined", () =>
-        !window.isWeb && dump(toClassNamesWithQuery<$WidthsQuery>(undefined, ...rulesets))
+      !window.isWeb && it("04: native, undefined", () =>
+        dump(toClassNamesWithQuery<$WidthsQuery>(undefined, ...rulesets))
       )
-      it("05: web", () =>
-        window.isWeb && dump(toClassNamesWithQuery<$WidthsQuery>(undefined, ...rulesets))
+      window.isWeb && it("05: web", () =>
+        dump(toClassNamesWithQuery<$WidthsQuery>(undefined, ...rulesets))
       )
     })
 
@@ -109,18 +109,10 @@ describe("SHEETER $WIDTHS", () => {
         wrapper.unmount()
       }
 
-      it.only("01 UseWidth", () => test(UseWidthsApp))
-      it.only("02 just styles", () => test(App))
+      it("01 UseWidth", () => test(UseWidthsApp))
+      it("02 just styles", () => test(App))
 
     })
-
-
-    it.only("04 change width", () => {
-
-
-    })
-
-
   }
 
   describe("## NATIVE ##", () => doTest(false))

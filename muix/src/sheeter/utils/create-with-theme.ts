@@ -1,5 +1,5 @@
 import warning from 'warning'
-import {isTemporary} from '../atomize-low'
+import {isTemporary} from './atomize-low'
 
 export const createWithTheme = (valueOrCreator: ((theme) => any) | any, theme) => {
   if (typeof valueOrCreator === 'function' && !isTemporary(valueOrCreator)) {

@@ -1,5 +1,5 @@
 import warning from 'warning'
-import { wrapPseudoPrefixes } from './utils/wrap-pseudo-prefixes'
+import { wrapPseudoPrefixes } from './wrap-pseudo-prefixes'
 import { TCommonStyles, TSheeter, TVariants, TAtomize } from 'reactxx-typings'
 
 // platform dependent 

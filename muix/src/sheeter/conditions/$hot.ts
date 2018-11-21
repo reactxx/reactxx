@@ -1,5 +1,5 @@
 import { TSheeter, TCommonStyles, TAtomize } from 'reactxx-typings'
-import { processTree, makeTemporary } from '../atomize-low'
+import { processTree, makeTemporary } from '../utils/atomize-low'
 
 const $hot = <T extends TCommonStyles.RulesetNativeIds = 'Text'>(evalProc: (outerPar) => TSheeter.RulesetOrAtomized<T>) => {
     return makeTemporary<T>((atomizedVariants, path, pseudoPrefixes, conditions) => {

@@ -1,8 +1,8 @@
 import React from 'react'
 import { TComponents, TAtomize, TVariants } from 'reactxx-typings'
-import { deleteSystemProps, toClassNamesWithQuery } from '../to-classnames'
+import { deleteSystemProps, toClassNamesWithQuery } from '../utils/to-classnames'
 
-import { isReactXXComponent } from '../atomize'
+import { isReactXXComponent } from '../utils/atomize'
 import { platform } from '../index-native'
 
 /******************************************

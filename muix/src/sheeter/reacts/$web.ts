@@ -1,9 +1,9 @@
 import React from 'react'
 import { TAtomize, TVariants, TComponents } from 'reactxx-typings'
 
-import { deleteSystemProps } from '../to-classnames'
-import { mergeStyles } from '../merge'
-import { isReactXXComponent } from '../atomize'
+import { deleteSystemProps } from '../utils/to-classnames'
+import { mergeStyles } from '../utils/merge'
+import { isReactXXComponent } from '../utils/atomize'
 import { platform } from '../index'
 
 /******************************************

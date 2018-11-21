@@ -1,6 +1,6 @@
 import warning from 'warning'
 import { TComponents, TAtomize, TSheeter } from 'reactxx-typings';
-import { deepMerge, deepMerges } from './utils/deep-merge'
+import { deepMerge, deepMerges } from './deep-merge'
 import { isAtomized } from './atomize-low';
 import { wrapRuleset } from './atomize';
 

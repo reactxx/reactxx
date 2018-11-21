@@ -1,8 +1,8 @@
 import React from 'react'
 import { TSheeter, TCommonStyles, TVariants } from 'reactxx-typings'
-import { processTree, makeTemporary } from '../../atomize-low'
+import { processTree, makeTemporary } from '../../utils/atomize-low'
 import { intervalToSelector, test } from './parser'
-import { QueryState } from '../../to-classnames'
+import { QueryState } from '../../utils/to-classnames'
 
 export interface $WidthsQuery extends QueryState {
     actWidth?: number

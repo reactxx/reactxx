@@ -1,7 +1,7 @@
 import warning from 'warning';
 
 import { TAtomize, TSheeter, TComponents, TCommonStyles } from 'reactxx-typings'
-import { createWithTheme } from './utils/create-with-theme'
+import { createWithTheme } from './create-with-theme'
 import { adjustAtomizedLow, isDeferred } from './atomize-low'
 
 // muttable
