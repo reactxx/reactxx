@@ -21,7 +21,8 @@ export const toClassNamesWithQuery = <T extends QueryState = any>(state: T, ...i
             if (!v) return
             if (isDeferred(v)) {
                 const res = v.evalProc(state)
-                res.forEach(r => process(r))
+                filterList(res)
+                //res.forEach(r => process(r))
             } else if (testConditions(v, state))
                 values.push(v)
         })
@@ -32,7 +33,8 @@ export const toClassNamesWithQuery = <T extends QueryState = any>(state: T, ...i
 
         if (isDeferred(val)) {
             const res = val.evalProc(state)
-            res.forEach(r => process(r))
+            filterList(res)
+            //res.forEach(r => process(r))
             return
         }
 

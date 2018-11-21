@@ -8,8 +8,9 @@
             "type": "shell",
             "command": ".\\node_modules\\.bin\\jest.cmd",
             "args": [
-                "--runInBand",
-                "--testPathPattern=\"/sheeter/|/sheet-switch/|/sheet-widths/\"",
+                //"--runInBand",
+                //"--testPathPattern=\"/sheeter/|/sheet-switch/|/sheet-widths/\"",
+                "--testPathPattern=\"/sheeter/\"",
                 //"--testPathPattern=with-styles-comp",
                 //"-u"
             ],

@@ -69,21 +69,22 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 12 ATOMIZE modifies source object 1`] = `
 Array [
   Array [
-    "color: blue /*.*/",
+    "color: blue /*.[0]*/",
+  ],
+  Array [
+    "color: green /*.[2]/$native*/",
   ],
 ]
 `;
 
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 12 ATOMIZE modifies source object 2`] = `
-Object {
-  "$native": Object {
-    "color": "green",
+Array [
+  Object {
+    "color": "blue",
   },
-  "$web": Object {
-    "color": "red",
-  },
-  "color": "blue",
-}
+  false,
+  [Function],
+]
 `;
 
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 15 just $hot 1`] = `
@@ -164,21 +165,22 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## WEB ## 12 ATOMIZE modifies source object 1`] = `
 Array [
   Array [
-    ".a { color:blue /*.*/ }",
+    ".a { color:blue /*.[0]*/ }",
+  ],
+  Array [
+    ".b { color:red /*.[1]/$web*/ }",
   ],
 ]
 `;
 
 exports[`SHEETER SIMPLE RULESET ## WEB ## 12 ATOMIZE modifies source object 2`] = `
-Object {
-  "$native": Object {
-    "color": "green",
+Array [
+  Object {
+    "color": "blue",
   },
-  "$web": Object {
-    "color": "red",
-  },
-  "color": "blue",
-}
+  [Function],
+  false,
+]
 `;
 
 exports[`SHEETER SIMPLE RULESET ## WEB ## 13 condition in pseudo 1`] = `

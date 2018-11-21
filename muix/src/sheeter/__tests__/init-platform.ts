@@ -39,3 +39,8 @@ export const dump = (ruleset: TAtomize.Ruleset) => {
     expect(won).toMatchSnapshot()
     expect(platform.finalizeClassName(won)).toMatchSnapshot()
 }
+
+export const afterLastWin = (ruleset: TAtomize.Ruleset) => {
+    const won = platform.applyLastwinsStrategy(ruleset)
+    expect(won).toMatchSnapshot()
+}

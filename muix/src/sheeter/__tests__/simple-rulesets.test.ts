@@ -98,11 +98,11 @@ describe("SHEETER SIMPLE RULESET", () => {
     })
 
     it("12 ATOMIZE modifies source object", () => {
-      const source = {
-        color: 'blue',
-        $web: { color: 'red' },
-        $native: { color: 'green' },
-      }
+      const source = [
+        {color: 'blue'},
+        $web({ color: 'red' }),
+        $native({ color: 'green' }),
+      ]
       ruleset = atomizeRuleset(source)
       expect(ruleset).toMatchSnapshot()
       expect(source).toMatchSnapshot()
