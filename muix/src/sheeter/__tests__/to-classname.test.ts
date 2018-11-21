@@ -5,6 +5,7 @@ import { TAtomize } from 'reactxx-typings';
 
 describe("TO CLASSNAMES", () => {
 
+  type Par = { opened:boolean, theme: null }
   const sheetQuery = (opened: boolean) => ({ opened, theme: null })
   const query = (opened: boolean, ...ruleset: TAtomize.Item[]) => dump(toClassNamesWithQuery(sheetQuery(opened), ...ruleset))
 
@@ -21,21 +22,21 @@ describe("TO CLASSNAMES", () => {
       toClassNamesWithQuery(null, { color: 'green' }) // atomized ruleset
     )))
     it("04: query => opened", () => query(true,
-      $if(p => p.opened, { color: 'red' }),
-      $if(p => !p.opened, { color: 'blue' }),
+      $if<Par>(p => p.opened, { color: 'red' }),
+      $if<Par>(p => !p.opened, { color: 'blue' }),
     ))
     it("05: query => closed", () => query(false,
-      $if(p => p.opened, { color: 'red' }),
-      $if(p => !p.opened, { color: 'blue' }),
+      $if<Par>(p => p.opened, { color: 'red' }),
+      $if<Par>(p => !p.opened, { color: 'blue' }),
     ))
     it("06: query => closed => pre-atomized", () => query(false, atomizeRuleset([
-      $if(p => p.opened, { color: 'red' }),
-      $if(p => !p.opened, { color: 'blue' }),
+      $if<Par>(p => p.opened, { color: 'red' }),
+      $if<Par>(p => !p.opened, { color: 'blue' }),
     ])))
     it("07: query => closed => pre-queried", () => query(false,
       toClassNamesWithQuery(sheetQuery(false),
-        $if(p => p.opened, { color: 'red' }),
-        $if(p => !p.opened, { color: 'blue' }),
+        $if<Par>(p => p.opened, { color: 'red' }),
+        $if<Par>(p => !p.opened, { color: 'blue' }),
       )
     ))
   }

@@ -2,7 +2,6 @@ import {
   atomizeRuleset,
   $hot, $if, toClassNamesWithQuery
 } from "reactxx-sheeter"
-import { Shape, theme } from "reactxx-typings-test/shape"
 import { initPlatform, dump, afterLastWin } from "./init-platform"
 
 
@@ -56,7 +55,7 @@ describe("SHEETER HOT", () => {
       beforeEach(() => initPlatform(isWeb))
 
       interface Par { color: string; theme?}
-      const ruleset = $hot(({ color }) => ({ color }))
+      const ruleset = $hot<Par>(({ color }) => ({ color }))
 
       it("01: red", () => afterLastWin(toClassNamesWithQuery<Par>({ color: 'red' },
         ruleset
@@ -65,7 +64,7 @@ describe("SHEETER HOT", () => {
         ruleset
       )))
       it("03: with $if", () => afterLastWin(toClassNamesWithQuery<Par>({ color: 'blue' },
-        $if(() => true, ruleset)
+        $if<Par>(({color}) => color==='blue', ruleset)
       )))
     })
 

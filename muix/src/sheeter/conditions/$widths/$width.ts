@@ -9,7 +9,9 @@ export interface $WidthsQuery extends QueryState {
     breakpoints?: Set<number>
 }
 
-const $width = <T extends TCommonStyles.RulesetNativeIds = 'Text'>(interval: number | [number, number], ...rulesets: TSheeter.RulesetNativeOrAtomized<T>[]) => {
+const $width = <T extends TCommonStyles.RulesetIds = 'Text'>(
+    interval: number | [number, number], ...rulesets: TSheeter.RulesetOrAtomized<T>[]
+) => {
     return rulesets && makeTemporary<T>((atomizedVariants, path, pseudoPrefixes, conditions) => {
         if (window.isWeb) {
             // WEB: use media query CSS

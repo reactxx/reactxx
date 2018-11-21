@@ -25,9 +25,9 @@ export function isToAtomize(obj): obj is TAtomize.ToAtomize { return obj && !(ob
 
 //*******************************************************
 //        makeTemporary
-export const makeTemporary = <T extends TCommonStyles.RulesetNativeIds>(proc: TAtomize.TempProc) => {
+export const makeTemporary = <T extends TCommonStyles.RulesetIds>(proc: TAtomize.TempProc) => {
     proc.$t$ = true
-    return proc as any as TCommonStyles.RulesetType<T>
+    return proc as any //as TCommonStyles.RulesetType<'View'>
 }
 
 //*******************************************************
@@ -101,7 +101,7 @@ const pushToAtomizedVariants = (atomizedVariants: TAtomize.Variants, variant: TA
 }
 
 const atomizeNonVariant = (
-    atomizedVariants: TAtomize.Variants, sourceRuleset: TSheeter.Ruleset,
+    atomizedVariants: TAtomize.Variants, sourceRuleset: TCommonStyles.RulesetType,
     conditions: TVariants.Conditions, path: string
 ) => {
     if (!sourceRuleset) return

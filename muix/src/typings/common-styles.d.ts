@@ -7,24 +7,26 @@ declare namespace TCommonStyles {
 
   //React Native styles compatible with Web React.CSSProperties
 
-  export interface Transform {
-    perspective?: number
-    rotate?: string
-    rotateX?: string
-    rotateY?: string
-    rotateZ?: string
-    scale?: number
-    scaleX?: number
-    scaleY?: number
-    translateX?: number
-    translateY?: number
-    skewX?: string
-    skewY?: string
-    //time?: string
-  }
-  export interface TransformProp {
-    transform?: Transform
-  }
+  // export interface Transform {
+  //   perspective?: number
+  //   rotate?: string
+  //   rotateX?: string
+  //   rotateY?: string
+  //   rotateZ?: string
+  //   scale?: number
+  //   scaleX?: number
+  //   scaleY?: number
+  //   translateX?: number
+  //   translateY?: number
+  //   skewX?: string
+  //   skewY?: string
+  //   //time?: string
+  // }
+  // export interface TransformProp {
+  //   transform?: Transform
+  // }
+
+  //type TransformProp = unknown
 
   export type FlexAlignType = "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
 
@@ -69,7 +71,7 @@ declare namespace TCommonStyles {
     zIndex?: number
   }
 
-  export interface ViewStyle extends ViewStyleLow, TransformProp { }
+  export interface ViewStyle extends ViewStyleLow {} //, TransformProp { }
 
   export interface ViewStyleLow extends FlexStyle {
     backfaceVisibility?: "visible" | "hidden"
@@ -121,7 +123,7 @@ declare namespace TCommonStyles {
     borderLeftWidth?: number
   }
 
-  export interface TextStyle extends TextStyleLow, TransformProp { }
+  export interface TextStyle extends TextStyleLow {} //, TransformProp { }
   export interface TextStyleLow extends ViewStyleLow {
     color?: string;
     fontFamily?: string;
@@ -138,7 +140,7 @@ declare namespace TCommonStyles {
     textShadowRadius?: number;
   }
 
-  export interface ImageStyle extends ImageStyleLow, TransformProp { }
+  export interface ImageStyle extends ImageStyleLow {} //, TransformProp { }
   export interface ImageStyleLow extends FlexStyle {
     backfaceVisibility?: "visible" | "hidden"
     borderBottomLeftRadius?: number
@@ -157,20 +159,11 @@ declare namespace TCommonStyles {
   *******************************************/
 
   export type RulesetNativeIdsLow = 'Text' | 'View' | 'Image'
-  export type RulesetNativeIds = RulesetNativeIdsLow | '$NativeText' | '$NativeView' | '$NativeImage' | '$Web'
-  export type RulesetNativeIdsEx = RulesetNativeIds | unknown
+  export type RulesetNativeIds = '$NativeText' | '$NativeView' | '$NativeImage'
+  export type RulesetIds = RulesetNativeIdsLow | RulesetNativeIds | '$Web'
+  export type RulesetNativeIdsEx = RulesetIds | unknown
 
-  // export type RulesetType_<T extends RulesetNativeIds = 'Text'> =
-  //   T extends 'View' ? ViewStyle & { $web?: RulesetWeb; $native?: ReactN.ViewStyle } :
-  //   T extends 'Text' ? TextStyle & { $web?: RulesetWeb; $native?: ReactN.TextStyle } :
-  //   T extends 'Image' ? ImageStyle & { $web?: RulesetWeb; $native?: ReactN.TextStyle } :
-  //   T extends '$Web' ? { $web?: RulesetWeb } :
-  //   T extends '$NativeView' ? { $native?: ReactN.ViewStyle } :
-  //   T extends '$NativeText' ? { $native?: ReactN.TextStyle } :
-  //   T extends '$NativeImage' ? { $native?: ReactN.ImageStyle } :
-  //   never
-
-  export type RulesetType<T extends RulesetNativeIds = 'Text'> =
+  export type RulesetType<T extends RulesetIds = 'Text'> =
     T extends 'View' ? ViewStyle :
     T extends 'Text' ? TextStyle :
     T extends 'Image' ? ImageStyle :
@@ -180,7 +173,7 @@ declare namespace TCommonStyles {
     T extends '$NativeImage' ? ReactN.ImageStyle :
     never
 
-  export type RulesetTypeNative<T extends RulesetNativeIds = 'Text'> =
+  export type RulesetTypeNative<T extends RulesetIds = 'Text'> =
     T extends 'View' ? ReactN.ViewStyle :
     T extends 'Text' ? ReactN.TextStyle :
     T extends 'Image' ? ReactN.ImageStyle :
@@ -189,12 +182,12 @@ declare namespace TCommonStyles {
     T extends '$NativeImage' ? ReactN.ImageStyle :
     never
 
-  export type RulesetTypeWeb<T extends RulesetNativeIds = 'Text'> =
-    T extends 'View' ? RulesetWeb :
-    T extends 'Text' ? RulesetWeb :
-    T extends 'Image' ? RulesetWeb :
-    T extends '$Web' ? RulesetWeb :
-    never
+  export type RulesetTypeWeb = RulesetWeb
+    // T extends 'View' ? RulesetWeb :
+    // T extends 'Text' ? RulesetWeb :
+    // T extends 'Image' ? RulesetWeb :
+    // T extends '$Web' ? RulesetWeb :
+    // never
 
 
   //******************** Native ruleset which are compatible with web

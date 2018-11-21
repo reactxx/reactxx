@@ -34,7 +34,7 @@ export namespace TVariants {
     //  SHEETER EXTENSION
     //*********************************************************
 
-    interface VariantPart<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> { }
+    interface VariantPart<T extends TCommonStyles.RulesetIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> { }
 
     interface PropsPart<R extends TSheeter.Shape = TSheeter.Shape> { }
 

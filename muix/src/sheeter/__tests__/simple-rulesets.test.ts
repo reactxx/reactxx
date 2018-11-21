@@ -112,7 +112,7 @@ describe("SHEETER SIMPLE RULESET", () => {
       if (!window.isWeb) return
       ruleset = atomizeRuleset([
         $web({
-          ':hover': $web<'$Web'>({ color: 'red' }),
+          ':hover': $web({ color: 'red' }),
         }),
       ])
       expect(ruleset).toMatchSnapshot()
@@ -125,7 +125,7 @@ describe("SHEETER SIMPLE RULESET", () => {
           color: 'green',
           ':hover': [
             { color: 'blue' },
-            $web<'$Web'>({ ':active': { color: 'red' } })
+            $web({ ':active': { color: 'red' } })
           ],
         }),
       ])
