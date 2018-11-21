@@ -3,13 +3,13 @@ import { StoreLow, IHandlerLow, useStoreLow } from 'reactxx-use-store'
 import { platform } from 'reactxx-sheeter'
 
 // called first (in useReactxx hook)
-export const useWidthsLow = (allRulesetWidths: Set<number>) => {
+export const useWidthsLow = () => {
     const handler = useStoreLow(store, null)
-    handler.breakpoints = allRulesetWidths
+    handler.breakpoints = new Set()
     handler.actWidth = store.state
     React.useEffect(() => {
         // for web: adjust media query for watched breakpoints
-        allRulesetWidths.forEach(br => platform.addBreakpoint(br))
+        handler.breakpoints.forEach(br => platform.addBreakpoint(br))
     })
     return handler
 }

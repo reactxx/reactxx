@@ -6,7 +6,7 @@ import { QueryState } from '../../utils/to-classnames'
 
 export interface $WidthsQuery extends QueryState {
     actWidth?: number
-    allRulesetWidths?: Set<number>
+    breakpoints?: Set<number>
 }
 
 const $width = <T extends TCommonStyles.RulesetNativeIds = 'Text'>(interval: number | [number, number], ...rulesets: TSheeter.RulesetNativeOrAtomized<T>[]) => {
@@ -18,7 +18,7 @@ const $width = <T extends TCommonStyles.RulesetNativeIds = 'Text'>(interval: num
             // NATIVE: use conditional ruleset
             conditions = [...conditions, {
                 type: '$width',
-                test: ({ actWidth, allRulesetWidths }: $WidthsQuery = {}) => test(interval, actWidth, allRulesetWidths)
+                test: ({ actWidth, breakpoints }: $WidthsQuery = {}) => test(interval, actWidth, breakpoints)
             }]
         }
         processTree(rulesets, atomizedVariants, path + '/$width', pseudoPrefixes, conditions)

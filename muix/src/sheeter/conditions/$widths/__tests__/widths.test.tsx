@@ -72,30 +72,30 @@ describe("SHEETER $WIDTHS", () => {
 
       const useApp = () => {
         // part of useReactXX hook:
-        const allRulesetWidths = new Set<number>()
-        const handler = useWidthsLow(allRulesetWidths)
+        const widthsHandler = useWidthsLow()
+        const query: $WidthsQuery = { 
+          actWidth: widthsHandler.actWidth, breakpoints: widthsHandler.breakpoints 
+        }
         const sheetRoot = React.useMemo(sheet)
-        const query: 
-        $WidthsQuery = { actWidth: handler.actWidth, allRulesetWidths: handler.breakpoints }
         // component code
         const renderCount = React.useRef(0)
         renderCount.current++
         const root = toClassNamesWithQuery<$WidthsQuery>(query, sheetRoot)
-        return { handler, root, renderCount: renderCount.current }
+        return { widthsHandler, root, renderCount: renderCount.current }
       }
 
+      const App: React.SFC = () => {
+        const { root, renderCount } = useApp()
+        return <div classNameX={root}>{`rendered: ${renderCount}x`}</div>
+      }
+      App['$c$'] = true
+
       const UseWidthsApp: React.SFC = () => {
-        const { handler, root, renderCount } = useApp()
-        const [mobile, tablet, desktop] = useWidths(handler, [640, 1024])
+        const { widthsHandler, root, renderCount } = useApp()
+        const [mobile, tablet, desktop] = useWidths(widthsHandler, [640, 1024])
         return <div classNameX={root}>
           {`${mobile ? 'mobile' : ''}${tablet ? 'tablet' : ''}${desktop ? 'desktop' : ''} (rendered: ${renderCount}x)`}
         </div>
-      }
-      UseWidthsApp['$c$'] = true
-
-      const App: React.SFC = () => {
-        const { handler, root, renderCount } = useApp()
-        return <div classNameX={root}>{`rendered: ${renderCount}x`}</div>
       }
       UseWidthsApp['$c$'] = true
 
@@ -110,8 +110,8 @@ describe("SHEETER $WIDTHS", () => {
         wrapper.unmount()
       }
 
-      it("01 UseWidth", () => test(UseWidthsApp))
-      it("02 just styles", () => test(App))
+      it("01 use just width styles", () => test(App))
+      it("02 use width flags and styles", () => test(UseWidthsApp))
 
     })
   }
