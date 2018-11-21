@@ -53,9 +53,7 @@ export const useStore = <TSelected, TState>(store: Store<TState>, selector?: (st
 
 export class Store<TState> extends StoreLow<TState, IHandler> {
 
-    constructor(state: TState) { super(state) }
-
-    applySelector = (st, selector) => selector ? selector(st) : st
+applySelector = (st, selector) => selector ? selector(st) : st
 
     refreshHandler(handler: IHandler, oldState, newState) {
         const newActState = this.applySelector(newState, handler.selector) // new state selection

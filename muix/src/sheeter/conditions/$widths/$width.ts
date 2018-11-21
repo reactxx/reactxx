@@ -12,8 +12,10 @@ export interface $WidthsQuery extends QueryState {
 const $width = <T extends TCommonStyles.RulesetNativeIds = 'Text'>(interval: number | [number, number], ...rulesets: TSheeter.RulesetNativeOrAtomized<T>[]) => {
     return rulesets && makeTemporary<T>((atomizedVariants, path, pseudoPrefixes, conditions) => {
         if (window.isWeb) {
+            // WEB: use media query CSS
             pseudoPrefixes = [...pseudoPrefixes, intervalToSelector(interval)]
         } else {
+            // NATIVE: use conditional ruleset
             conditions = [...conditions, {
                 type: '$width',
                 test: ({ actWidth, allRulesetWidths }: $WidthsQuery = {}) => test(interval, actWidth, allRulesetWidths)

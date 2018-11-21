@@ -1,12 +1,24 @@
 import Fela from 'reactxx-fela'
 import { assignPlatform, platform } from 'reactxx-sheeter'
 import { applyLastwinsStrategy, finalizeClassName, createElement } from './reacts/$web'
+import { setActWidth } from './conditions/$widths/store'
 
 export const init = () => {
     Fela.initFela$Web(platform)
-    // save 
-    //renderRuleEx = platform.renderer.renderRuleEx
+
+    platform._sheeter.widthDir = new Set()
+
     assignPlatform({
+        actWidth: () => window.innerWidth || 0,
+
+        addBreakpoint: (width: number) => {
+            const { _sheeter: { widthDir } } = platform
+            if (!width || widthDir.has(width)) return
+            widthDir.add(width)
+            const mediaQuery = window.matchMedia(`(min-width: ${width}px)`)
+            mediaQuery.addListener(onWidthChanged)
+        },
+
         toPlatformAtomizeRuleset: platform.renderer.renderRuleEx,
         dumpAtomized: Fela.dumpAtomized,
         applyLastwinsStrategy,
@@ -15,4 +27,11 @@ export const init = () => {
     })
 }
 
-//let renderRuleEx
+const onWidthChanged = () => {
+    const { _sheeter } = platform
+    if (_sheeter.widthsTimer) return
+    _sheeter.widthsTimer = window.setTimeout(() => {
+        _sheeter.widthsTimer = 0
+        setActWidth(window.innerWidth)
+    }, 1)
+}

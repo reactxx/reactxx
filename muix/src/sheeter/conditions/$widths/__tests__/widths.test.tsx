@@ -4,7 +4,7 @@ import React from 'react'
 
 import {
   platform, atomizeRuleset, toClassNamesWithQuery,
-  $width, devSetActWidth, useWidths, useWidthsLow, $WidthsQuery
+  $width, setActWidth, useWidths, useWidthsLow, $WidthsQuery
 } from "reactxx-sheeter"
 
 import { initPlatform, dump, mount } from "../../../__tests__/init-platform"
@@ -75,7 +75,8 @@ describe("SHEETER $WIDTHS", () => {
         const allRulesetWidths = new Set<number>()
         const handler = useWidthsLow(allRulesetWidths)
         const sheetRoot = React.useMemo(sheet)
-        const query: $WidthsQuery = { actWidth: handler.actWidth, allRulesetWidths: handler.breakpoints }
+        const query: 
+        $WidthsQuery = { actWidth: handler.actWidth, allRulesetWidths: handler.breakpoints }
         // component code
         const renderCount = React.useRef(0)
         renderCount.current++
@@ -99,12 +100,12 @@ describe("SHEETER $WIDTHS", () => {
       UseWidthsApp['$c$'] = true
 
       const test = (App: React.ComponentType) => {
-        devSetActWidth(300)
+        setActWidth(300)
         const wrapper = mount(<App />)
         expect(wrapper.container).toMatchSnapshot()
-        devSetActWidth(640)
+        setActWidth(640)
         expect(wrapper.container).toMatchSnapshot()
-        devSetActWidth(1024)
+        setActWidth(1024)
         expect(wrapper.container).toMatchSnapshot()
         wrapper.unmount()
       }

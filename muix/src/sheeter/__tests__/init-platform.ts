@@ -6,6 +6,14 @@ export const mount = comp => render(comp)
 import { initSheeter$Web, resetPlatform, platform } from 'reactxx-sheeter'
 import { initSheeter$Native } from 'reactxx-sheeter-native'
 
+jest.mock('react-native', () => ({
+    Dimensions: null,
+}))
+
+window.matchMedia = jest.fn().mockImplementation(query /*e.g. '(min-width: 123px)'*/ => ({
+    addListener: jest.fn(),
+}))
+
 export const initPlatform = (isWeb: boolean, __DEV__: boolean = true) => {
 
     afterEach(cleanup)

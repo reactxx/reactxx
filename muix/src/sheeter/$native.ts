@@ -1,8 +1,15 @@
+import { Dimensions } from 'react-native'
 import { TAtomize } from 'reactxx-typings'
 import { applyLastwinsStrategy, finalizeClassName, createElement } from './reacts/$native'
 import { assignPlatform } from './utils/globals'
+import { setActWidth } from './conditions/$widths/store'
+
+if (Dimensions) Dimensions.addEventListener('change', arg => setActWidth(Dimensions.get('window').width))
 
 export const init = () => assignPlatform({
+    addBreakpoint: (width: number) => { },
+    actWidth: () => Dimensions ? Dimensions.get('window').width : 0,
+
     toPlatformAtomizeRuleset: (style, tracePath) => {
         const res: TAtomize.AtomicNatives = []
         if (!style) return res

@@ -1,17 +1,20 @@
 import React from 'react'
 import { StoreLow, IHandlerLow, useStoreLow } from 'reactxx-use-store'
+import { platform } from 'reactxx-sheeter'
 
+// called first (in useReactxx hook)
 export const useWidthsLow = (allRulesetWidths: Set<number>) => {
     const handler = useStoreLow(store, null)
     handler.breakpoints = allRulesetWidths
     handler.actWidth = store.state
     React.useEffect(() => {
-        allRulesetWidths.forEach(br => {/*register br*/ })
+        // for web: adjust media query for watched breakpoints
+        allRulesetWidths.forEach(br => platform.addBreakpoint(br))
     })
     return handler
 }
 
-// called in component code, after useWidthsLow call
+// called in component code (after useWidthsLow call)
 export const useWidths = (handler: IHandler, breakpoints?: number[]) => {
     if (window.__TRACE__) {
         let last = 0
@@ -20,20 +23,19 @@ export const useWidths = (handler: IHandler, breakpoints?: number[]) => {
             last = b + 1
         })
     }
+    // add breakpoints for change detection
     breakpoints.forEach(b => handler.breakpoints.add(b))
 
     // just single array item is true
     let found = breakpoints.findIndex(b => handler.actWidth < b)
-    if (found<0) found = breakpoints.length
+    if (found < 0) found = breakpoints.length
     const res: boolean[] = []
     res[found] = true
     return res
 
 }
 
-class WidthStore extends StoreLow<number, IHandler> {
-
-    constructor(state: number) { super(state) }
+export class WidthStore extends StoreLow<number, IHandler> {
 
     state: number
 
@@ -47,8 +49,9 @@ class WidthStore extends StoreLow<number, IHandler> {
         handler.forceUpdate(null)
     }
 
-    // called first. allRulesetWidths could be modified in useWidths
 }
+
+export type TWidthStore = typeof WidthStore
 
 const store = new WidthStore(0)
 
@@ -57,4 +60,4 @@ interface IHandler extends IHandlerLow {
     actWidth: number
 }
 
-export const devSetActWidth = (newWidth:number) => store.setState(newWidth)
+export const setActWidth = (newWidth: number) => store.setState(newWidth)

@@ -1,4 +1,5 @@
 import { TVariants } from 'reactxx-typings'
+import { WidthStore } from '../conditions/$widths/store'
 
 export const resetPlatform = () => {
     for (const p in platform) delete platform[p]
@@ -11,9 +12,11 @@ export const platform: TVariants.Platform = {}
 export const initGlobals = (force: boolean, platformDependentInit: () => void) => {
     if (force) resetPlatform()
     if (platform._sheeter) return
-    platform._sheeter = true
-        // variantHandlers: [],
-        // variantHandlersDir: {}
-    //}
+
+    platform._sheeter = {}
+    // fill e.g. actWidth
     platformDependentInit()
+    // init store with act width
+    platform._sheeter.widthsStore = new WidthStore(platform.actWidth())
+
 }
