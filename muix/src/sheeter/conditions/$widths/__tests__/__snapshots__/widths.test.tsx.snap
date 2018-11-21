@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 UseWidth 1`] = `
+<div>
+  <div
+    style="color: red;"
+  >
+    mobile (rendered: 1x)
+  </div>
+</div>
+`;
+
+exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 UseWidth 2`] = `
+<div>
+  <div
+    style="color: green;"
+  >
+    tablet (rendered: 2x)
+  </div>
+</div>
+`;
+
+exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 UseWidth 3`] = `
+<div>
+  <div
+    style="color: blue;"
+  >
+    desktop (rendered: 3x)
+  </div>
+</div>
+`;
+
+exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 just styles 1`] = `
+<div>
+  <div
+    style="color: red;"
+  >
+    rendered: 1x
+  </div>
+</div>
+`;
+
+exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 just styles 2`] = `
+<div>
+  <div
+    style="color: green;"
+  >
+    rendered: 2x
+  </div>
+</div>
+`;
+
+exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 just styles 3`] = `
+<div>
+  <div
+    style="color: blue;"
+  >
+    rendered: 3x
+  </div>
+</div>
+`;
+
+exports[`SHEETER $WIDTHS ## WEB ## 04 change width 01 UseWidth 1`] = `
+<div>
+  <div
+    class="c b a"
+  >
+    mobile (rendered: 1x)
+  </div>
+</div>
+`;
+
+exports[`SHEETER $WIDTHS ## WEB ## 04 change width 01 UseWidth 2`] = `
+<div>
+  <div
+    class="c b a"
+  >
+    tablet (rendered: 2x)
+  </div>
+</div>
+`;
+
+exports[`SHEETER $WIDTHS ## WEB ## 04 change width 01 UseWidth 3`] = `
+<div>
+  <div
+    class="c b a"
+  >
+    desktop (rendered: 3x)
+  </div>
+</div>
+`;
+
+exports[`SHEETER $WIDTHS ## WEB ## 04 change width 02 just styles 1`] = `
+<div>
+  <div
+    class="c b a"
+  >
+    rendered: 1x
+  </div>
+</div>
+`;
+
+exports[`SHEETER $WIDTHS ## WEB ## 04 change width 02 just styles 2`] = `
+<div>
+  <div
+    class="c b a"
+  >
+    rendered: 1x
+  </div>
+</div>
+`;
+
+exports[`SHEETER $WIDTHS ## WEB ## 04 change width 02 just styles 3`] = `
+<div>
+  <div
+    class="c b a"
+  >
+    rendered: 1x
+  </div>
+</div>
+`;

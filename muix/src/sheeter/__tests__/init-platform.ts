@@ -1,11 +1,12 @@
-import { render, cleanup } from 'react-testing-library'
+import { cleanup, render } from 'react-testing-library'
+import { TAtomize } from 'reactxx-typings'
 
-export const mount = comp => render(comp).container
+export const mount = comp => render(comp)
 
-import { initSheeter$Web, resetPlatform } from 'reactxx-sheeter'
+import { initSheeter$Web, resetPlatform, platform } from 'reactxx-sheeter'
 import { initSheeter$Native } from 'reactxx-sheeter-native'
 
-export const initPlatform = (isWeb: boolean, __DEV__: boolean | 1 | 2 | 3 | 4 | 5 = true) => {
+export const initPlatform = (isWeb: boolean, __DEV__: boolean = true) => {
 
     afterEach(cleanup)
 
@@ -22,4 +23,11 @@ export const initPlatform = (isWeb: boolean, __DEV__: boolean | 1 | 2 | 3 | 4 | 
     } else {
         initSheeter$Native()
     }
+}
+
+export const dump = (ruleset: TAtomize.Ruleset) => {
+    expect(ruleset).toMatchSnapshot()
+    const won = platform.applyLastwinsStrategy(ruleset)
+    expect(won).toMatchSnapshot()
+    expect(platform.finalizeClassName(won)).toMatchSnapshot()
 }

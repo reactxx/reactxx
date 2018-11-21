@@ -72,14 +72,15 @@ export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = (values: T
       let value = values[i] && values[i][k]
       if (!value) continue
       if (Array.isArray(value)) {
+        throw 'WHAT IS THIS CODE?'
         Array.prototype.push.apply(res, value)
         continue
       }
-      let propId: string = value as string
+      let className: string = value as string
       if (window.__TRACE__) {
-        propId = (value as TAtomize.__dev_AtomicWeb).cache.className
+        className = (value as TAtomize.__dev_AtomicWeb).cache.className
       }
-      propId = renderer.propIdCache[propId]
+      const propId = renderer.propIdCache[className]
       if (!propId || usedPropIds[propId])
         continue
       res.push(value as TAtomize.AtomicWeb)

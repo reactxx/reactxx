@@ -27,50 +27,17 @@
     //"noUnusedLocals": true,
     "baseUrl": ".",
     "paths": {
-      "reactxx-tests": [
-        "src/tests/index"
-      ],
       "reactxx-typings": [
         "src/typings/index"
       ],
       "reactxx-fela": [
         "src/fela/index"
       ],
+      "reactxx-use-store": [
+        "src/use-store/index"
+      ],
       "reactxx-sheeter": [
         "src/sheeter/index"
-      ],
-      "reactxx-sheet-widths": [
-        "src/sheet-widths/index"
-      ],
-      "reactxx-sheet-switch": [
-        "src/sheet-switch/index"
-      ],
-      "reactxx-sheet-if": [
-        "src/sheet-if/index"
-      ],
-      // "reactxx-sheet-transition/*": [
-      //   "src/sheet-transition/*"
-      // ],
-      "reactxx-sheet-transition": [
-        "src/sheet-transition/index"
-      ],
-      "reactxx-with-styles": [
-        "src/with-styles/index"
-      ],
-      "reactxx-with-state": [
-        "src/with-state/index"
-      ],
-      "reactxx-core/*": [
-        "src/core/*"
-      ],
-      "reactxx-core": [
-        "src/core"
-      ],
-      "reactxx-primitives/*": [
-        "src/primitives/*"
-      ],
-      "reactxx-primitives": [
-        "src/primitives/index"
       ],
 
       //**** FOR TESTING
@@ -80,13 +47,48 @@
       "reactxx-sheeter-native": [
         "src/sheeter/index-native"
       ],
-      "reactxx-primitives-native": [
-        "src/primitives/index-native"
+      "reactxx-sheeter-test/*": [
+        "src/sheeter/__tests__/*"
       ],
-      "reactxx-sheet-widths-native": [
-        "src/sheet-widths/index-native"
-      ],
+      // "reactxx-primitives-native": [
+      //   "src/primitives/index-native"
+      // ],
+      // "reactxx-sheet-widths-native": [
+      //   "src/sheet-widths/index-native"
+      // ],
 
+
+      // "reactxx-sheet-widths": [
+      //   "src/sheet-widths/index"
+      // ],
+      // "reactxx-sheet-switch": [
+      //   "src/sheet-switch/index"
+      // ],
+      // "reactxx-sheet-transition": [
+      //   "src/sheet-transition/index"
+      // ],
+      // "reactxx-with-styles": [
+      //   "src/with-styles/index"
+      // ],
+      // "reactxx-with-state": [
+      //   "src/with-state/index"
+      // ],
+      // "reactxx-core/*": [
+      //   "src/core/*"
+      // ],
+      // "reactxx-core": [
+      //   "src/core"
+      // ],
+      // "reactxx-primitives/*": [
+      //   "src/primitives/*"
+      // ],
+      // "reactxx-primitives": [
+      //   "src/primitives/index"
+      // ],
+
+      // "reactxx-tests": [
+      //   "src/tests/index"
+      // ],
       // "reactxx-sheeter": [
       //   "src/sheeter/index"
       // ],
@@ -122,6 +124,7 @@
     "src/typings",
     "src/fela",
     "src/sheeter",
+    "src/use-store",
 
     // "src/basic",
     // "src/mui-web",

@@ -2,12 +2,12 @@ import { Callback } from '../variants'
 import { platform } from 'reactxx-sheeter'
 
 export const subscribeWidthChange = (callback: Callback) => {
-    const {_widths, _widths: {callbacks}} = platform
+    const { _widths, _widths: { callbacks } } = platform
     callbacks.push(callback)
     return () => {
         const idx = callbacks.findIndex(c => c === callback)
-        if (idx === 0) return
-        _widths.callbacks = callbacks.splice(idx, 1)
+        if (idx !== 0)
+            _widths.callbacks = callbacks.splice(idx, 1)
     }
 }
 export const onWidthChanged = () => platform._widths.callbacks.forEach(c => c())

@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ATOMIZE RULESET ## NATIVE ## 01 (null) 1`] = `null`;
+exports[`SHEETER SIMPLE RULESET ## NATIVE ## 01 (null) 1`] = `null`;
 
-exports[`ATOMIZE RULESET ## NATIVE ## 02 ({}) 1`] = `null`;
+exports[`SHEETER SIMPLE RULESET ## NATIVE ## 02 ({}) 1`] = `null`;
 
-exports[`ATOMIZE RULESET ## NATIVE ## 03 ([null, undefined, {}]) 1`] = `null`;
+exports[`SHEETER SIMPLE RULESET ## NATIVE ## 03 ([null, undefined, {}]) 1`] = `null`;
 
-exports[`ATOMIZE RULESET ## NATIVE ## 04 ({ color: 'red', margin: 0 }) 1`] = `
+exports[`SHEETER SIMPLE RULESET ## NATIVE ## 04 ({ color: 'red', margin: 0 }) 1`] = `
 Array [
   Array [
     "color: red /*.*/",
@@ -15,7 +15,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## NATIVE ## 05 ([{ color: 'red' }, { margin: 0 }]) 1`] = `
+exports[`SHEETER SIMPLE RULESET ## NATIVE ## 05 ([{ color: 'red' }, { margin: 0 }]) 1`] = `
 Array [
   Array [
     "color: red /*.[0]*/",
@@ -26,7 +26,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## NATIVE ## 06 (...$web: { color: 'green' }, $native: { color: 'blue' }) 1`] = `
+exports[`SHEETER SIMPLE RULESET ## NATIVE ## 06 (...$web: { color: 'green' }, $native: { color: 'blue' }) 1`] = `
 Array [
   Array [
     "color: red /*.[0]*/",
@@ -37,7 +37,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## NATIVE ## 07 atomizeRuleset(atomizeRuleset({color: 'red' 1`] = `
+exports[`SHEETER SIMPLE RULESET ## NATIVE ## 07 atomizeRuleset(atomizeRuleset({color: 'red' 1`] = `
 Array [
   Array [
     "color: red /*.*/",
@@ -45,7 +45,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## NATIVE ## 08 atomizeRuleset({$web: atomizeRuleset({ :hover color: 'red', $native: atomizeRuleset({ color: 'green' 1`] = `
+exports[`SHEETER SIMPLE RULESET ## NATIVE ## 08 atomizeRuleset({$web: atomizeRuleset({ :hover color: 'red', $native: atomizeRuleset({ color: 'green' 1`] = `
 Array [
   Array [
     "color: green /*.*/",
@@ -53,7 +53,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## NATIVE ## 11 with theme 1`] = `
+exports[`SHEETER SIMPLE RULESET ## NATIVE ## 11 with theme 1`] = `
 Array [
   Array [
     "color: white /*.[0]*/",
@@ -66,7 +66,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## NATIVE ## 12 ATOMIZE modifies source object 1`] = `
+exports[`SHEETER SIMPLE RULESET ## NATIVE ## 12 ATOMIZE modifies source object 1`] = `
 Array [
   Array [
     "color: blue /*.*/",
@@ -74,7 +74,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## NATIVE ## 12 ATOMIZE modifies source object 2`] = `
+exports[`SHEETER SIMPLE RULESET ## NATIVE ## 12 ATOMIZE modifies source object 2`] = `
 Object {
   "$native": Object {
     "color": "green",
@@ -86,13 +86,22 @@ Object {
 }
 `;
 
-exports[`ATOMIZE RULESET ## WEB ## 01 (null) 1`] = `null`;
+exports[`SHEETER SIMPLE RULESET ## NATIVE ## 15 just $hot 1`] = `
+Array [
+  Array [
+    "color: green /*.[0]*/",
+  ],
+  "DEFFERED",
+]
+`;
 
-exports[`ATOMIZE RULESET ## WEB ## 02 ({}) 1`] = `null`;
+exports[`SHEETER SIMPLE RULESET ## WEB ## 01 (null) 1`] = `null`;
 
-exports[`ATOMIZE RULESET ## WEB ## 03 ([null, undefined, {}]) 1`] = `null`;
+exports[`SHEETER SIMPLE RULESET ## WEB ## 02 ({}) 1`] = `null`;
 
-exports[`ATOMIZE RULESET ## WEB ## 04 ({ color: 'red', margin: 0 }) 1`] = `
+exports[`SHEETER SIMPLE RULESET ## WEB ## 03 ([null, undefined, {}]) 1`] = `null`;
+
+exports[`SHEETER SIMPLE RULESET ## WEB ## 04 ({ color: 'red', margin: 0 }) 1`] = `
 Array [
   Array [
     ".a { color:red /*.*/ }",
@@ -101,7 +110,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## WEB ## 05 ([{ color: 'red' }, { margin: 0 }]) 1`] = `
+exports[`SHEETER SIMPLE RULESET ## WEB ## 05 ([{ color: 'red' }, { margin: 0 }]) 1`] = `
 Array [
   Array [
     ".a { color:red /*.[0]*/ }",
@@ -112,7 +121,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## WEB ## 06 (...$web: { color: 'green' }, $native: { color: 'blue' }) 1`] = `
+exports[`SHEETER SIMPLE RULESET ## WEB ## 06 (...$web: { color: 'green' }, $native: { color: 'blue' }) 1`] = `
 Array [
   Array [
     ".a { color:red /*.[0]*/ }",
@@ -123,7 +132,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## WEB ## 07 atomizeRuleset(atomizeRuleset({color: 'red' 1`] = `
+exports[`SHEETER SIMPLE RULESET ## WEB ## 07 atomizeRuleset(atomizeRuleset({color: 'red' 1`] = `
 Array [
   Array [
     ".a { color:red /*.*/ }",
@@ -131,7 +140,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## WEB ## 08 atomizeRuleset({$web: atomizeRuleset({ :hover color: 'red', $native: atomizeRuleset({ color: 'green' 1`] = `
+exports[`SHEETER SIMPLE RULESET ## WEB ## 08 atomizeRuleset({$web: atomizeRuleset({ :hover color: 'red', $native: atomizeRuleset({ color: 'green' 1`] = `
 Array [
   Array [
     ".a:hover { color:red /*./:hover*/ }",
@@ -139,7 +148,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## WEB ## 11 with theme 1`] = `
+exports[`SHEETER SIMPLE RULESET ## WEB ## 11 with theme 1`] = `
 Array [
   Array [
     ".a { color:white /*.[0]*/ }",
@@ -152,7 +161,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## WEB ## 12 ATOMIZE modifies source object 1`] = `
+exports[`SHEETER SIMPLE RULESET ## WEB ## 12 ATOMIZE modifies source object 1`] = `
 Array [
   Array [
     ".a { color:blue /*.*/ }",
@@ -160,7 +169,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## WEB ## 12 ATOMIZE modifies source object 2`] = `
+exports[`SHEETER SIMPLE RULESET ## WEB ## 12 ATOMIZE modifies source object 2`] = `
 Object {
   "$native": Object {
     "color": "green",
@@ -172,7 +181,7 @@ Object {
 }
 `;
 
-exports[`ATOMIZE RULESET ## WEB ## 13 condition in pseudo 1`] = `
+exports[`SHEETER SIMPLE RULESET ## WEB ## 13 condition in pseudo 1`] = `
 Array [
   Array [
     ".a:hover { color:red /*./$web/:hover/$web*/ }",
@@ -180,7 +189,7 @@ Array [
 ]
 `;
 
-exports[`ATOMIZE RULESET ## WEB ## 14 mix in pseudo array 1`] = `
+exports[`SHEETER SIMPLE RULESET ## WEB ## 14 mix in pseudo array 1`] = `
 Array [
   Array [
     ".c { color:green /*./$web*/ }",
@@ -191,5 +200,14 @@ Array [
   Array [
     ".b:hover:active { color:red /*./$web/:hover[1]/$web/:active*/ }",
   ],
+]
+`;
+
+exports[`SHEETER SIMPLE RULESET ## WEB ## 15 just $hot 1`] = `
+Array [
+  Array [
+    ".a { color:green /*.[0]*/ }",
+  ],
+  "DEFFERED",
 ]
 `;

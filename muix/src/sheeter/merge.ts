@@ -60,7 +60,7 @@ export const mergeRulesets = (sources: TAtomize.Ruleset[]) => {
     sources.forEach(src => {
         if (!src) return
         if (!isAtomized(src))
-            throw 'All rulesets must be atomized first'
+            throw 'All rulesets must be atomized first for mergeRulesets'
         res = first ? src : [...res, ...src]
         first = false
     })

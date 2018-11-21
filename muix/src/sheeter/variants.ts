@@ -10,10 +10,9 @@ declare module 'reactxx-typings' {
 
     namespace TVariants {
         interface Platform {
-            _sheeter?: {
-                variantHandlers?: IVariantHandler[]
-                variantHandlersDir?: Record<string, IVariantHandler>
-            }
+            _sheeter?: true
+                // variantHandlers?: IVariantHandler[]
+                // variantHandlersDir?: Record<string, IVariantHandler>
         }
     }
 }

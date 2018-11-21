@@ -1,13 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SHEETER HOT ## NATIVE ## 01 1`] = `
+exports[`SHEETER HOT ## NATIVE ## 01 just $hot 1`] = `
 Array [
+  Array [
+    "color: green /*.[0]*/",
+  ],
   "DEFFERED",
 ]
 `;
 
-exports[`SHEETER HOT ## WEB ## 01 1`] = `
+exports[`SHEETER HOT ## WEB ## 01 just $hot 1`] = `
 Array [
+  Array [
+    ".a { color:green /*.[0]*/ }",
+  ],
   "DEFFERED",
 ]
 `;

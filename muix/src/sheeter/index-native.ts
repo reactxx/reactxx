@@ -1,7 +1,7 @@
 export * from './conditions/index'
 export * from './utils/deep-merge'
 export * from './globals'
-export * from './conditions'
+//export * from './conditions'
 export * from './merge'
 export * from './utils/wrap-pseudo-prefixes'
 

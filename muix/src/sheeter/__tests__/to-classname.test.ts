@@ -1,30 +1,24 @@
-import { atomizeRuleset, platform, toClassNamesWithQuery, $if } from "reactxx-sheeter"
-import { initPlatform } from "./init-platform"
-import { TSheeter, TAtomize, TVariants } from 'reactxx-typings';
+import { atomizeRuleset, toClassNamesWithQuery, $if } from "reactxx-sheeter"
+import { initPlatform, dump } from "./init-platform"
+import { TAtomize } from 'reactxx-typings';
 
 
 describe("TO CLASSNAMES", () => {
-  const dump = (ruleset: TAtomize.Ruleset) => {
-    expect(ruleset).toMatchSnapshot()
-    const won = platform.applyLastwinsStrategy(ruleset)
-    expect(won).toMatchSnapshot()
-    expect(platform.finalizeClassName(won)).toMatchSnapshot()
-  }
 
   const sheetQuery = (opened: boolean) => ({ opened, theme: null })
-
-  const query = (opened: boolean, ...ruleset: (TSheeter.Ruleset | TAtomize.Ruleset)[]) =>
-    dump(toClassNamesWithQuery(sheetQuery(opened), ...ruleset))
+  const query = (opened: boolean, ...ruleset: TAtomize.Item[]) => dump(toClassNamesWithQuery(sheetQuery(opened), ...ruleset))
 
   const doTest = (isWeb: boolean) => {
-    beforeEach(() => initPlatform(isWeb, true))
+    beforeEach(() => initPlatform(isWeb))
     let ruleset
+
     it("01: null", () => dump(toClassNamesWithQuery(null, null)))
     it("02: null, {}, undefined", () => dump(toClassNamesWithQuery(null, null, {}, undefined)))
     it("03: mixed", () => dump(toClassNamesWithQuery(null,
-      { color: 'red' },
-      atomizeRuleset([{ color: 'blue' }, { color: 'yellow' }], null, 'root'),
-      toClassNamesWithQuery(null, { color: 'green' })
+      { color: 'red' }, // ruleset source
+      atomizeRuleset([{ color: 'blue' }, { color: 'yellow' }], null, 'root'), // atomized ruleset
+      $if(p => true, { color: 'maroon' }), // temporary item
+      toClassNamesWithQuery(null, { color: 'green' }) // atomized ruleset
     )))
     it("04: query => opened", () => query(true,
       $if(p => p.opened, { color: 'red' }),

@@ -8,12 +8,12 @@ export const assignPlatform = (gl: TVariants.Platform) => Object.assign(platform
 
 export const platform: TVariants.Platform = {}
 
-export const initGlobals = (force: boolean, platformInit: () => void) => {
+export const initGlobals = (force: boolean, platformDependentInit: () => void) => {
     if (force) resetPlatform()
     if (platform._sheeter) return
-    platform._sheeter = {
-        variantHandlers: [],
-        variantHandlersDir: {}
-    }
-    platformInit()
+    platform._sheeter = true
+        // variantHandlers: [],
+        // variantHandlersDir: {}
+    //}
+    platformDependentInit()
 }

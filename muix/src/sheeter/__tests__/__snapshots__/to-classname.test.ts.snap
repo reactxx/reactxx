@@ -24,6 +24,9 @@ Array [
     "color: yellow /*root[1]*/",
   ],
   Array [
+    "color: maroon /*/$if*/",
+  ],
+  Array [
     "color: green /*.*/",
   ],
 ]
@@ -158,6 +161,9 @@ Array [
   ],
   Array [
     ".b { color:yellow /*root[1]*/ }",
+  ],
+  Array [
+    ".e { color:maroon /*/$if*/ }",
   ],
   Array [
     ".c { color:green /*.*/ }",

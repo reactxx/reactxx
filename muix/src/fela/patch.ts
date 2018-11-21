@@ -143,12 +143,6 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
 
         // reactxx HACK: cache declarationReference without value
         renderer.propIdCache[className] = support + media + pseudo + property
-        // if (window.__DEV__)
-        //   renderer.trace[className] = tracePath + '|' +
-        //     (support ? support + ' ' : '') +
-        //     (media ? media + ' ' : '') +
-        //     (pseudo ? pseudo + ' ' : '') +
-        //     '#' + property + ': ' + value
 
         const declaration = cssifyDeclaration(property, value)
         const selector = generateCSSSelector(className, pseudo)
