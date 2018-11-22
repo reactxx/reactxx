@@ -3,7 +3,7 @@ import { atomizeRuleset, wrapRuleset } from './atomize'
 import { isToAtomize, isToAtomizeArray, isDeferred, isTemporary } from './atomize-low'
 
 export interface QueryState {
-    theme?
+    $theme?
 }
 export type Item = TAtomize.ToAtomize | TAtomize.Ruleset | TAtomize.TempProc
 
@@ -11,7 +11,7 @@ export const toClassNamesWithQuery = <T extends QueryState = any>(state: T, ...i
 
     let values: TAtomize.Variants = []
 
-    const testConditions = (v: TAtomize.Variant, state: TWithStyles.PipelineState) => {
+    const testConditions = (v: TAtomize.Variant, state: QueryState) => {
         if (!v.conditions || v.conditions.length === 0) return true
         return v.conditions.every(c => c.test(state))
     }
@@ -45,7 +45,7 @@ export const toClassNamesWithQuery = <T extends QueryState = any>(state: T, ...i
             return
         }
 
-        const ruleset = isToAtomize(val) ? atomizeRuleset(val, state && state.theme) : val
+        const ruleset = isToAtomize(val) ? atomizeRuleset(val, state && state.$theme) : val
         if (!ruleset || ruleset.length === 0) return
 
         filterList(ruleset)

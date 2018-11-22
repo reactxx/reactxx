@@ -5,8 +5,10 @@ import { intervalToSelector, test } from './parser'
 import { QueryState } from '../../utils/to-classnames'
 
 export interface $WidthsQuery extends QueryState {
-    actWidth?: number
-    breakpoints?: Set<number>
+    $widths?: {
+        actWidth: number
+        breakpoints?: Set<number>
+    }
 }
 
 const $width = <T extends TCommonStyles.RulesetIds = 'Text'>(
@@ -20,7 +22,7 @@ const $width = <T extends TCommonStyles.RulesetIds = 'Text'>(
             // NATIVE: use conditional ruleset
             conditions = [...conditions, {
                 type: '$width',
-                test: ({ actWidth, breakpoints }: $WidthsQuery = {}) => test(interval, actWidth, breakpoints)
+                test: ({ $widths }: $WidthsQuery = {}) => $widths && test(interval, $widths.actWidth, $widths.breakpoints)
             }]
         }
         processTree(rulesets, atomizedVariants, path + '/$width', pseudoPrefixes, conditions)

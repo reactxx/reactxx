@@ -54,7 +54,7 @@ describe("SHEETER HOT", () => {
     describe("07: use attr", () => {
       beforeEach(() => initPlatform(isWeb))
 
-      interface Par { color: string; theme?}
+      interface Par { color: string; $theme?}
       const ruleset = $hot<Par>(({ color }) => ({ color }))
 
       it("01: red", () => afterLastWin(toClassNamesWithQuery<Par>({ color: 'red' },

@@ -11,6 +11,6 @@ export const codePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
     }
     propsCode.sheetQuery = mergeDeep(pipeStates.map(s => s && s.sheetQuery))
 
-    return <pipelineState.options.CodeComponent {...pipelineState.propsCode} />
+    return <CodeComponent {...pipelineState.propsCode} />
   }
 }

@@ -4,7 +4,7 @@ import React from 'react'
 
 import {
   platform, atomizeRuleset, toClassNamesWithQuery,
-  $width, setActWidth, useWidths, useWidthsLow, $WidthsQuery
+  $width, setActWidth, useWidthsLow, $WidthsQuery
 } from "reactxx-sheeter"
 
 import { initPlatform, dump, mount } from "../../../__tests__/init-platform"
@@ -45,13 +45,13 @@ describe("SHEETER $WIDTHS", () => {
         $width(1024, { color: 'blue' }),
       ]
       !window.isWeb && it("01: native, 300", () =>
-        dump(toClassNamesWithQuery<$WidthsQuery>({ actWidth: 300 }, ...rulesets))
+        dump(toClassNamesWithQuery<$WidthsQuery>({ $widths: { actWidth: 300 } }, ...rulesets))
       )
       !window.isWeb && it("02: native, 640", () =>
-        dump(toClassNamesWithQuery<$WidthsQuery>({ actWidth: 640 }, ...rulesets))
+        dump(toClassNamesWithQuery<$WidthsQuery>({ $widths: { actWidth: 640 } }, ...rulesets))
       )
       !window.isWeb && it("03: native, 1024", () =>
-        dump(toClassNamesWithQuery<$WidthsQuery>({ actWidth: 1024 }, ...rulesets))
+        dump(toClassNamesWithQuery<$WidthsQuery>({ $widths: { actWidth: 1024 } }, ...rulesets))
       )
       !window.isWeb && it("04: native, undefined", () =>
         dump(toClassNamesWithQuery<$WidthsQuery>(undefined, ...rulesets))
@@ -64,7 +64,7 @@ describe("SHEETER $WIDTHS", () => {
     describe("04 change width", () => {
       beforeEach(() => initPlatform(isWeb))
 
-      const sheet = () => atomizeRuleset([
+      const getSheet = () => atomizeRuleset([
         $width([0, 640], { color: 'red' }),
         $width([640, 1024], { color: 'green' }),
         $width(1024, { color: 'blue' }),
@@ -72,17 +72,21 @@ describe("SHEETER $WIDTHS", () => {
 
       const useApp = () => {
         // part of useReactXX hook:
-        const widthsHandler = useWidthsLow()
-        const query: $WidthsQuery = { 
-          actWidth: widthsHandler.actWidth, breakpoints: widthsHandler.breakpoints 
+        const uniqueId = React.useRef(++counter) // unique ID
+        const [, forceUpdate] = React.useState<null>(null) // forceUpdate
+    
+        const { actWidth, getWidthMap, breakpoints } = useWidthsLow(uniqueId.current, forceUpdate)
+        const query: $WidthsQuery = {
+          $widths: { actWidth, breakpoints }
         }
-        const sheetRoot = React.useMemo(sheet)
+        const sheetRoot = React.useMemo(getSheet)
         // component code
         const renderCount = React.useRef(0)
         renderCount.current++
         const root = toClassNamesWithQuery<$WidthsQuery>(query, sheetRoot)
-        return { widthsHandler, root, renderCount: renderCount.current }
+        return { getWidthMap, root, renderCount: renderCount.current }
       }
+      let counter = 0
 
       const App: React.SFC = () => {
         const { root, renderCount } = useApp()
@@ -91,8 +95,8 @@ describe("SHEETER $WIDTHS", () => {
       App['$c$'] = true
 
       const UseWidthsApp: React.SFC = () => {
-        const { widthsHandler, root, renderCount } = useApp()
-        const [mobile, tablet, desktop] = useWidths(widthsHandler, [640, 1024])
+        const { getWidthMap, root, renderCount } = useApp()
+        const [mobile, tablet, desktop] = getWidthMap([640, 1024])
         return <div classNameX={root}>
           {`${mobile ? 'mobile' : ''}${tablet ? 'tablet' : ''}${desktop ? 'desktop' : ''} (rendered: ${renderCount}x)`}
         </div>

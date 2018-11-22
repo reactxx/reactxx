@@ -84,6 +84,8 @@ declare namespace TComponents {
 
   export type CommonPropertiesCodeKeys = keyof PropsCode
 
+  export type SFC<R extends Shape = Shape> = React.SFC<Props<R>>
+
   export type SFCCode<R extends Shape = Shape> = React.SFC<PropsCode<R>> & ModifyInnerStateProp<R>
   export type ComponentTypeCode<R extends Shape = Shape> = React.ComponentType<PropsCode<R>> & ModifyInnerStateProp<R>
   export type ModifyInnerStateProc<R extends Shape> = (props: PropsCode<R>, pipeState?: TVariants.Query<R>) => void

@@ -1,23 +1,27 @@
 ﻿import React from 'react'
 
-export const useStoreLow = <TState, THandler extends IHandlerLow>(store: StoreLow<TState, THandler>, initHandler: (handler: THandler) => void) => {
+export const useStoreLow = <TState, THandler extends IHandlerLow>(
+    store: StoreLow<TState, THandler>,
+    uniqueId: number,
+    forceUpdate: (p) => void,
+    initHandler?: (handler: THandler) => void,
+    dontSaveToStore?: (handler: THandler) => boolean,
+) => {
 
-    const self = store
-
-    const id = React.useRef(++self.counter) // unique ID
-    const [, forceUpdate] = React.useState<null>(null) // forceUpdate
-
-    let handler = self.handlers[id.current]
+    let handler = store.handlers[uniqueId]
+    let inStore = true
     if (!handler) {
-        handler = self.handlers[id.current] = { //first useStore call => add handler and init actState
-            forceUpdate
-        } as THandler
+        inStore = false
+        handler = { forceUpdate } as THandler
         initHandler && initHandler(handler)
     }
 
     React.useEffect(() => {
-        return () => delete self.handlers[id.current] // unmount => remove handler
-    }, []) // [] => call on mount x unmount only
+
+        if (!inStore && (!dontSaveToStore || !dontSaveToStore(handler)))
+            store.handlers[uniqueId] = handler
+        return () => delete store.handlers[uniqueId] // unmount => remove handler
+    }, [])
 
     return handler // return actual state and dispatcher
 }
@@ -36,24 +40,36 @@ export abstract class StoreLow<TState, THandler extends IHandlerLow> {
     abstract refreshHandler(handler: THandler, oldState: TState, newState: TState)
 
     counter = 0
-    handlers: Record<string, THandler> = {}
+    handlers: Record<number, THandler> = {}
 }
 export interface IHandlerLow {
     forceUpdate: (state: null) => void
 }
 
-export const useStore = <TSelected, TState>(store: Store<TState>, selector?: (st: TState) => TSelected) => {
+export const useStore = <TSelected, TState>(
+    store: Store<TState>,
+    uniqueId: number,
+    forceUpdate: (p) => void,
+    selector?: (st: TState) => TSelected,
+    dontSaveToStore?: (handler: IHandler) => boolean,
+) => {
     if (selector === null) return [null, this]
-    const handler = useStoreLow(store, handler => {
-        handler.selector = selector
-        handler.actState = store.applySelector(this.state, selector)
-    })
+    const handler = useStoreLow(
+        store,
+        uniqueId,
+        forceUpdate,
+        handler => {
+            handler.selector = selector
+            handler.actState = store.applySelector(this.state, selector)
+        },
+        dontSaveToStore
+    )
     return [handler.actState, this]
 }
 
 export class Store<TState> extends StoreLow<TState, IHandler> {
 
-applySelector = (st, selector) => selector ? selector(st) : st
+    applySelector = (st, selector) => selector ? selector(st) : st
 
     refreshHandler(handler: IHandler, oldState, newState) {
         const newActState = this.applySelector(newState, handler.selector) // new state selection

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 //import {TextInput} from 'react-native'
 import { deepMerges, platform } from 'reactxx-sheeter';
 import { TAtomize, TComponents, TSheeter, TWithStyles, TVariants, TCommonStyles } from 'reactxx-typings';
@@ -126,6 +126,9 @@ let useSheeter, useSheeterQuery
 //*********************************************************
 //  PRIVATE
 //*********************************************************
+const use = (props: TComponents.Props, options: TWithStyles.ComponentOptions, theme) => {
+  
+}
 
 
 const componentCreatorLow = (options: TWithStyles.ComponentOptions) => (props: TComponents.Props) => {

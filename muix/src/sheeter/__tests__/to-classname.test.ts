@@ -6,7 +6,7 @@ import { TAtomize } from 'reactxx-typings';
 describe("TO CLASSNAMES", () => {
 
   type Par = { opened:boolean, theme: null }
-  const sheetQuery = (opened: boolean) => ({ opened, theme: null })
+  const sheetQuery = (opened: boolean) => ({ opened, $theme: null })
   const query = (opened: boolean, ...ruleset: TAtomize.Item[]) => dump(toClassNamesWithQuery(sheetQuery(opened), ...ruleset))
 
   const doTest = (isWeb: boolean) => {

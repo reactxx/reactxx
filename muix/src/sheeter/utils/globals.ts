@@ -17,6 +17,6 @@ export const initGlobals = (force: boolean, platformDependentInit: () => void) =
     // fill e.g. actWidth
     platformDependentInit()
     // init store with act width
-    platform._sheeter.widthsStore = new WidthStore(platform.actWidth())
+    platform._sheeter.widthsStore = new WidthStore()
 
 }

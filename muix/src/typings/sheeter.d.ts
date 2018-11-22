@@ -14,7 +14,7 @@ declare namespace TSheeter {
   export type RulesetOrAtomized<T extends TCommonStyles.RulesetIds = 'Text'> =
     RulesetItem<T> | RulesetItem<T>[]
   export type RulesetItem<T extends TCommonStyles.RulesetIds = 'Text'> =
-  TCommonStyles.RulesetType<T>
+    TCommonStyles.RulesetType<T>
     | TAtomize.Ruleset
 
   //export type Ruleset<T extends TCommonStyles.RulesetIds = 'Text'> = TCommonStyles.RulesetType<T>
@@ -101,7 +101,7 @@ declare namespace TSheeter {
     // common: EmptyInterface
     // native: EmptyInterface
     // web: EmptyInterface
-    style: unknown
+    style: 'View'
     props: EmptyInterface
     staticProps: EmptyInterface
     propsNative: ReactN.ViewProperties
