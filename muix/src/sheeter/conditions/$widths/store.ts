@@ -2,27 +2,29 @@ import React from 'react'
 import { platform } from 'reactxx-sheeter'
 
 // called first (in useReactxx hook)
-export const useWidthsLow = (
+export const useWidths = (
     uniqueId: number,
     forceUpdate: (p) => void,
 ) => {
-    let handler = widthStore.handlers[uniqueId]
+    const widthStore = platform._sheeter.widthsStore
 
-    const inStore = !!handler
-    if (!inStore) handler = { forceUpdate }
-
+    const handlerRef = React.useRef(null)
+    const handler = handlerRef.current || { forceUpdate }
     const hbreakpoints = handler.breakpoints = new Set()
-
-    const actWidth = platform.actWidth()
-
-    React.useEffect(() => {
-        if (hbreakpoints.size > 0) {
-            if (!inStore) widthStore.handlers[uniqueId] = handler
+    const actWidth = widthStore.state
+    
+    React.useLayoutEffect(() => { // call on every render
+        if (hbreakpoints.size > 0) { // some breakpoints found (or calling getWidthMap or in styles)
+            if (!handlerRef.current)
+                handlerRef.current = widthStore.handlers[uniqueId] = handler
             // for web: adjust media query for watched breakpoints
             hbreakpoints.forEach(br => platform.addBreakpoint(br))
         }
-        return () => delete widthStore.handlers[uniqueId] // unmount => remove handler
     })
+
+    React.useLayoutEffect(() => { // call on unmount only
+        return () => delete widthStore.handlers[uniqueId] // unmount => remove handler
+    }, [])
 
     const getWidthMap = (breakpoints?: number[]) => {
         if (window.__TRACE__) {
@@ -35,7 +37,7 @@ export const useWidthsLow = (
         // add breakpoints for change detection
         breakpoints.forEach(b => hbreakpoints.add(b))
 
-        // just single array item is true
+        // get map (just single array item is true)
         let found = breakpoints.findIndex(b => actWidth < b)
         if (found < 0) found = breakpoints.length
         const res: boolean[] = []
@@ -46,9 +48,7 @@ export const useWidthsLow = (
     return { getWidthMap, breakpoints: hbreakpoints, actWidth }
 }
 
-// called in component code (after useWidthsLow call)
-
-export class WidthStore  {
+export class WidthStore {
 
     state = platform.actWidth()
 
@@ -72,11 +72,11 @@ export class WidthStore  {
 }
 
 // global store for watching width change
-const widthStore = new WidthStore()
+//const widthStore = new WidthStore()
 
 interface IHandler {
     breakpoints?: Set<number>
     forceUpdate: (state: null) => void
 }
 
-export const setActWidth = (newWidth: number) => widthStore.setState(newWidth)
+export const setActWidth = (newWidth: number) => platform._sheeter.widthsStore.setState(newWidth)

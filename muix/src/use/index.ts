@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { TAtomize, TComponents, TSheeter, TWithStyles, TVariants, TCommonStyles } from 'reactxx-typings';
 import { useTheme } from './theme'
-import { useWidthsLow, $WidthsQuery, atomizeSheet, atomizeRuleset, atomizeStyle, mergeSheets } from 'reactxx-sheeter'
+import { useWidths, $WidthsQuery, atomizeSheet, atomizeRuleset, atomizeStyle, mergeSheets } from 'reactxx-sheeter'
 
 const use = <R extends TSheeter.Shape = TSheeter.Shape>(props: TComponents.Props<R>, options: TWithStyles.ComponentOptions<R>) => {
     const uniqueId = React.useRef(++counter) // unique ID
@@ -27,7 +27,7 @@ const use = <R extends TSheeter.Shape = TSheeter.Shape>(props: TComponents.Props
     const styleX = React.useMemo(() => atomizeStyle(_styleX, theme, 'styleX'), [_styleX])
 
     // widths
-    const { actWidth, getWidthMap, breakpoints } = useWidthsLow(uniqueId.current, forceUpdate)
+    const { actWidth, getWidthMap, breakpoints } = useWidths(uniqueId.current, forceUpdate)
 
     const widthsQuery: $WidthsQuery = {
         $widths: { actWidth, breakpoints }

@@ -8,7 +8,7 @@ declare module 'reactxx-typings' {
             _sheeter?: {
                 widthsTimer?: number
                 widthsStore?: WidthStore
-                widthDir?: Set<number>
+                widthDirs?: Set<number>
             }
         }
     }

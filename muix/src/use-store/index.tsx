@@ -16,7 +16,7 @@ export const useStoreLow = <TState, THandler extends IHandlerLow>(
         initHandler && initHandler(handler)
     }
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
 
         if (!inStore && (!dontSaveToStore || !dontSaveToStore(handler)))
             store.handlers[uniqueId] = handler

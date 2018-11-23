@@ -6,15 +6,15 @@ import { setActWidth } from './conditions/$widths/store'
 export const init = () => {
     Fela.initFela$Web(platform)
 
-    platform._sheeter.widthDir = new Set()
+    platform._sheeter.widthDirs = new Set()
 
     assignPlatform({
         actWidth: () => window.innerWidth || 0,
 
         addBreakpoint: (width: number) => {
-            const { _sheeter: { widthDir } } = platform
-            if (!width || widthDir.has(width)) return
-            widthDir.add(width)
+            const { _sheeter: { widthDirs } } = platform
+            if (!width || widthDirs.has(width)) return
+            widthDirs.add(width)
             const mediaQuery = window.matchMedia(`(min-width: ${width}px)`)
             mediaQuery.addListener(onWidthChanged)
         },

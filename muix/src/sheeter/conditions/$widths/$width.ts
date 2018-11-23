@@ -29,6 +29,4 @@ const $width = <T extends TCommonStyles.RulesetIds = 'Text'>(
     })
 }
 
-
-
 export default $width

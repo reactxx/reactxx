@@ -4,7 +4,7 @@ export { default as $hot } from './$hot'
 export { default as $if } from './$if'
 export { default as $ifelse } from './$ifelse'
 export { default as $width, $WidthsQuery } from './$widths/$width'
-export { useWidthsLow, setActWidth } from './$widths/store'
+export { useWidths, setActWidth } from './$widths/store'
 
 
 

@@ -4,13 +4,13 @@ import React from 'react'
 
 import {
   platform, atomizeRuleset, toClassNamesWithQuery,
-  $width, setActWidth, useWidthsLow, $WidthsQuery
+  $width, setActWidth, useWidths, $WidthsQuery
 } from "reactxx-sheeter"
 
 import { initPlatform, dump, mount } from "../../../__tests__/init-platform"
 
 const App: React.SFC = () => {
-  useWidthsLow
+  useWidths
   return null
 }
 
@@ -75,7 +75,7 @@ describe("SHEETER $WIDTHS", () => {
         const uniqueId = React.useRef(++counter) // unique ID
         const [, forceUpdate] = React.useState<null>(null) // forceUpdate
     
-        const { actWidth, getWidthMap, breakpoints } = useWidthsLow(uniqueId.current, forceUpdate)
+        const { actWidth, getWidthMap, breakpoints } = useWidths(uniqueId.current, forceUpdate)
         const query: $WidthsQuery = {
           $widths: { actWidth, breakpoints }
         }

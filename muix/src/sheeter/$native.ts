@@ -4,7 +4,8 @@ import { applyLastwinsStrategy, finalizeClassName, createElement } from './react
 import { assignPlatform } from './utils/globals'
 import { setActWidth } from './conditions/$widths/store'
 
-if (Dimensions) Dimensions.addEventListener('change', arg => setActWidth(Dimensions.get('window').width))
+if (Dimensions)
+    Dimensions.addEventListener('change', arg => setActWidth(Dimensions.get('window').width))
 
 export const init = () => assignPlatform({
     addBreakpoint: (width: number) => { },
@@ -31,7 +32,7 @@ export const init = () => assignPlatform({
         const res = []
         for (const p in array) {
             const val = array[p] as TAtomize.__dev_AtomicNative
-            if (val===undefined) continue
+            if (val === undefined) continue
             res.push(`${p}: ` + (window.__TRACE__ ? `${val.value} /*${val.tracePath || ''}*/` : val))
         }
         return (res.length > 0 ? '\n' : '') + res.join('\n')
@@ -41,6 +42,6 @@ export const init = () => assignPlatform({
     createElement
 })
 
-function toJSON() { 
-    return `${this.propId}: ${this.value.value} /*${this.value.tracePath}*/` 
+function toJSON() {
+    return `${this.propId}: ${this.value.value} /*${this.value.tracePath}*/`
 }
