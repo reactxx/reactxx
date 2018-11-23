@@ -2,9 +2,8 @@ import React from 'react'
 import { TSheeter, TCommonStyles, TVariants } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../../utils/atomize-low'
 import { intervalToSelector, test } from './parser'
-import { QueryState } from '../../utils/to-classnames'
 
-export interface $WidthsQuery extends QueryState {
+export interface $WidthsQuery {
     $widths?: {
         actWidth: number
         breakpoints?: Set<number>

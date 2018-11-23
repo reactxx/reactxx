@@ -1,61 +1,71 @@
 ﻿import React from 'react';
-import { TAtomize, TComponents, TSheeter, TWithStyles, TVariants, TCommonStyles } from 'reactxx-typings';
-import { useTheme } from './theme'
-import { useWidths, $WidthsQuery, atomizeSheet, atomizeRuleset, atomizeStyle, mergeSheets } from 'reactxx-sheeter'
+import { TAtomize, TComponents, TSheeter, TWithStyles } from 'reactxx-typings';
+import {
+    platform, resetPlatform,
+    useWidthsLow,
+    useForceUpdate, useUniqueId,
+    toClassNamesWithQuery,
+    atomizeSheet, atomizeRuleset, atomizeStyle, mergeSheets
+} from 'reactxx-sheeter'
 
-const use = <R extends TSheeter.Shape = TSheeter.Shape>(props: TComponents.Props<R>, options: TWithStyles.ComponentOptions<R>) => {
-    const uniqueId = React.useRef(++counter) // unique ID
-    const [, forceUpdate] = React.useState<null>(null) // forceUpdate
+import { useTheme } from './theme'
+import { useDefaults } from './use-defaults'
+import { useProps } from './use-props'
+
+export const initWithStyles = (force?: boolean) => {
+    if (force) resetPlatform()
+    if (platform._withStyles) return
+    platform._withStyles = {
+        $cache: {},
+        defaultTheme: platform.getDefaultTheme && platform.getDefaultTheme(),
+        uniqueIdCounter: 0,
+        idCounter: 0,
+    }
+}
+
+const useSheeter = <R extends TSheeter.Shape = TSheeter.Shape>(props: TComponents.Props<R>, options: TWithStyles.ComponentOptions<R>) => {
+
+    const { _withStyles } = platform
+
+    if (!options.id) options.id = ++_withStyles.idCounter
 
     // theme
     const [theme] = useTheme()
-    // from config
-    const { sheet, propsDefault, themedPropsDefault } = React.useMemo(() => withStyles(theme, options), [theme, options])
+
+    // from defaults
+    const { sheet, propsDefault, themedPropsDefault } = useDefaults(theme, options)
+
     // from props
-    const { classes: _classes, classNameX: _classNameX, styleX: _styleX, themedProps, ...propsRest } = props as TComponents.Props
-
-    // merge sheet with classes
-    const classes = React.useMemo(() => {
-        const classes = atomizeSheet(_classes, theme, 'classes')
-        return mergeSheets([sheet, classes])
-    }, [options, theme, _classes])
-
-    // classNameX
-    const classNameX = React.useMemo(() => atomizeRuleset(_classNameX, theme, 'classes'), [_classNameX, theme])
-
-    // styleX
-    const styleX = React.useMemo(() => atomizeStyle(_styleX, theme, 'styleX'), [_styleX])
+    const {classes, classNameX, styleX, propsRest, themedProps} = useProps(theme, options, sheet, props)
 
     // widths
-    const { actWidth, getWidthMap, breakpoints } = useWidths(uniqueId.current, forceUpdate)
+    const forceUpdate = useForceUpdate()
+    const uniqueId = useUniqueId(platform._withStyles)
+    const { actWidth, getWidthMap, breakpoints } = useWidthsLow(uniqueId, forceUpdate)
 
-    const widthsQuery: $WidthsQuery = {
-        $widths: { actWidth, breakpoints }
-    }
-    
     // merge propsDefault with props and themeProps
-    const propsCode = mergeCodeProps([
-        propsDefault, themedPropsDefault && themedPropsDefault(theme), propsRest,
-        themedProps && themedProps(theme),
-        widthsQuery])
+    const propsCode = mergeCodeProps<R>([
+        propsDefault, themedPropsDefault && themedPropsDefault(theme),
+        propsRest, themedProps && themedProps(theme),
+        {
+            $widths: { actWidth, breakpoints }
+        } as TComponents.PropsCode])
 
-    return { propsCode, getWidthMap, theme, classes, styleX, classNameX }
+    const toClassNames = (...rulesets: TSheeter.RulesetOrAtomized[]) => toClassNamesWithQuery(propsCode, ...rulesets)
+
+    return { getWidthMap, toClassNames, propsCode, classes, styleX, classNameX }
 }
-
-let counter = 0
-
-let withStyles
 
 interface Shape extends TSheeter.ShapeAncestor { }
 
 const MyComponent: TComponents.SFC<Shape> = props => {
-    const { } = use<Shape>(props, null)
+    const { } = useSheeter<Shape>(props, null)
     return null
 }
 
-const mergeCodeProps = (...props) => {
+const mergeCodeProps = <R extends TSheeter.Shape>(...props: (TComponents.PropsCode & TComponents.Props)[]) => {
     if (!props || props.length === 0) return undefined
-    let res = {}
+    let res: TComponents.PropsCode<R> = {}
     props.forEach(p => {
         if (!p) return
         Object.assign(res, p)

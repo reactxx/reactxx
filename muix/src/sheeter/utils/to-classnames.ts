@@ -1,17 +1,15 @@
+import warning from 'warning'
 import { TWithStyles, TSheeter, TAtomize, TVariants } from 'reactxx-typings'
 import { atomizeRuleset, wrapRuleset } from './atomize'
 import { isToAtomize, isToAtomizeArray, isDeferred, isTemporary } from './atomize-low'
 
-export interface QueryState {
-    $theme?
-}
 export type Item = TAtomize.ToAtomize | TAtomize.Ruleset | TAtomize.TempProc
 
-export const toClassNamesWithQuery = <T extends QueryState = any>(state: T, ...items: Item[]) => {
+export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: Item[]) => {
 
     let values: TAtomize.Variants = []
 
-    const testConditions = (v: TAtomize.Variant, state: QueryState) => {
+    const testConditions = (v: TAtomize.Variant, state) => {
         if (!v.conditions || v.conditions.length === 0) return true
         return v.conditions.every(c => c.test(state))
     }
@@ -20,10 +18,10 @@ export const toClassNamesWithQuery = <T extends QueryState = any>(state: T, ...i
         list.forEach(v => {
             if (!v) return
             if (isDeferred(v)) {
-                const res = v.evalProc(state)
+                const res = v.evalProc(props)
                 filterList(res)
                 //res.forEach(r => process(r))
-            } else if (testConditions(v, state))
+            } else if (testConditions(v, props))
                 values.push(v)
         })
     }
@@ -32,7 +30,7 @@ export const toClassNamesWithQuery = <T extends QueryState = any>(state: T, ...i
         if (!val) return
 
         if (isDeferred(val)) {
-            const res = val.evalProc(state)
+            const res = val.evalProc(props)
             filterList(res)
             //res.forEach(r => process(r))
             return
@@ -45,7 +43,10 @@ export const toClassNamesWithQuery = <T extends QueryState = any>(state: T, ...i
             return
         }
 
-        const ruleset = isToAtomize(val) ? atomizeRuleset(val, state && state.$theme) : val
+        const ruleset = isToAtomize(val) ? (() => {
+            warning (typeof val !== 'function', 'Only ruleset expected in toClassNamesWithQuery (but rulesetCreator found)')
+            return atomizeRuleset(val)
+        })() : val
         if (!ruleset || ruleset.length === 0) return
 
         filterList(ruleset)

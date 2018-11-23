@@ -68,7 +68,6 @@ export namespace TVariants {
     //*********************************************************
     export interface Options {
         getDefaultTheme?: () => any
-        getPipes?: TWithStyles.GetPipes
     }
     export interface Platform extends Options, Globals {
         toPlatformAtomizeRuleset?: ToPlatformAtomizeRuleset

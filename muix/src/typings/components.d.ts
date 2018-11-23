@@ -73,25 +73,25 @@ declare namespace TComponents {
     EventsNative &
     EventsWeb>
 
-  export interface CommonPropertiesCode<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
+  export interface CommonPropertiesCode<R extends TSheeter.Shape = TSheeter.Shape> { //extends PropsLow<R> {
     classNameX?: TAtomize.Ruleset
     styleX?: TSheeter.StyleItem
     classes?: TAtomize.Sheet<R>
-    toClassNames?: (rulesets: TSheeter.RulesetOrAtomized) => TAtomize.Ruleset
-    theme?: TSheeter.getTheme<R>
-    sheetQuery?: TVariants.Query<R> // merged pipe's pipeState.query
+    //toClassNames?: (rulesets: TSheeter.RulesetOrAtomized) => TAtomize.Ruleset
+    //theme?: TSheeter.getTheme<R>
+    //sheetQuery?: TVariants.Query<R> // merged pipe's pipeState.query
   }
 
   export type CommonPropertiesCodeKeys = keyof PropsCode
 
   export type SFC<R extends Shape = Shape> = React.SFC<Props<R>>
 
-  export type SFCCode<R extends Shape = Shape> = React.SFC<PropsCode<R>> & ModifyInnerStateProp<R>
-  export type ComponentTypeCode<R extends Shape = Shape> = React.ComponentType<PropsCode<R>> & ModifyInnerStateProp<R>
-  export type ModifyInnerStateProc<R extends Shape> = (props: PropsCode<R>, pipeState?: TVariants.Query<R>) => void
-  export interface ModifyInnerStateProp<R extends Shape> {
-    setSheetQuery?: ModifyInnerStateProc<R>
-  }
+  export type SFCCode<R extends Shape = Shape> = React.SFC<PropsCode<R>> //& ModifyInnerStateProp<R>
+  export type ComponentTypeCode<R extends Shape = Shape> = React.ComponentType<PropsCode<R>> //& ModifyInnerStateProp<R>
+  // export type ModifyInnerStateProc<R extends Shape> = (props: PropsCode<R>, pipeState?: TVariants.Query<R>) => void
+  // export interface ModifyInnerStateProp<R extends Shape> {
+  //   setSheetQuery?: ModifyInnerStateProc<R>
+  // }
 
   /******************************************
     EVENTS
@@ -119,5 +119,4 @@ declare namespace TComponents {
     onPressOut?: () => void; onLongPress?: () => void
   }
 
-  export type TestAtomicRuleset = (conditions: TVariants.Condition, state: TWithStyles.PipelineState) => boolean
 } 

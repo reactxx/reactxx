@@ -3,36 +3,25 @@ import warning from 'warning';
 import { atomizeSheet, platform, mergeSheets } from 'reactxx-sheeter';
 import { TAtomize, TSheeter } from 'reactxx-typings';
 
-const themeContext = React.createContext(null)
+const themeContext = React.createContext<ThemeContext<any>>(null)
 
-export const useTheme = <T extends any>() => (React.useContext(themeContext) || []) as [T, (newTheme:T) => void]
+export type ThemeContext<T extends any> = [T, (newTheme: T) => void]
+
+export const useTheme = <T extends any>() => {
+  const ctx = React.useContext<ThemeContext<T>>(themeContext)
+  return ctx && [platform._withStyles.defaultTheme, setThemeError] as ThemeContext<T>
+}
+const setThemeError = theme => { throw 'Cannot set default theme' }
 
 // https://github.com/Microsoft/TypeScript/issues/3960#issuecomment-144529141
 export const ThemeProvider = <T extends any>(props: ThemeProviderProps<T>) => {
   const { children, theme: themeInit } = props
-  const [theme, setTheme] = React.useState(themeInit)
-  warning(theme, 'ThemeProvider: missing theme')
-  return <themeContext.Provider value={[theme, setTheme]}>{children}</themeContext.Provider>
+  const state = React.useState<T>(themeInit)
+  warning(state[0], 'ThemeProvider: missing theme')
+  return <themeContext.Provider value={state}>{children}</themeContext.Provider>
 }
 ThemeProvider.$c$ = true
 type ThemeProviderProps<T> = { theme: T; children?: React.ReactNode }
-
-//const x = <ThemeProvider<any> theme={null} />
-
-// export const registerTheme = (name: string, theme) => {
-//   if (!name) name = defaultThemeName
-//   const { _withStyles: { namedThemes } } = platform
-//   warning(theme, 'registerTheme: missing theme')
-//   warning(!namedThemes[name], `Theme ${name} already registered`)
-//   namedThemes[name] = theme
-// }
-
-// export interface ThemeProviderProps<R extends TSheeter.Shape = TSheeter.Shape> {
-//   registeredThemeName?: string
-//   theme?: TSheeter.getTheme<R>
-// }
-
-export const defaultThemeName = '*default-theme*'
 
 export const sheetFromThemeCache = (
   componentId: number, sheetOrCreator: TSheeter.SheetOrCreator,

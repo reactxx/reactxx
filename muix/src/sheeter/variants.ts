@@ -1,4 +1,6 @@
+import { TSheeter } from 'reactxx-typings'
 import { WidthStore } from './conditions/$widths/store'
+import { $WidthsQuery } from './conditions/$widths/$width'
 declare module 'reactxx-typings' {
 
     namespace TVariants {
@@ -11,5 +13,8 @@ declare module 'reactxx-typings' {
                 widthDirs?: Set<number>
             }
         }
+
+        interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> extends $WidthsQuery { }
+
     }
 }

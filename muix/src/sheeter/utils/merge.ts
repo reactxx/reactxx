@@ -83,7 +83,7 @@ export const mergeSheets = (sources: TAtomize.Sheet[]) => {
     const res = {}
     for (const p in ruleLists)
         res[p] = mergeRulesets(ruleLists[p])
-    return res
+    return res as TAtomize.Sheet
 }
 
 export const mergeCodeProps = (sources: (TComponents.PropsCode | TComponents.PropsCode[])[]) => {

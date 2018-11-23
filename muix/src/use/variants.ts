@@ -6,8 +6,10 @@ declare module 'reactxx-typings' {
 
         interface Platform {
             _withStyles?: {
-                namedThemes?: { [themeName: string]: any }
+                defaultTheme?
                 $cache: { [componentId: number]: TSheeter.Sheet }
+                uniqueIdCounter?: number
+                idCounter?: number
             }
         }
 

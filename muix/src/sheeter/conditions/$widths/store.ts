@@ -1,10 +1,17 @@
 import React from 'react'
 import { platform } from 'reactxx-sheeter'
+import {useForceUpdate} from '../../utils/use-force-update'
+import {useUniqueId} from '../../utils/use-unique-id'
 
-// called first (in useReactxx hook)
-export const useWidths = (
+export const useWidths = () => {
+    const forceUpdate = useForceUpdate()
+    const uniqueId = useUniqueId(platform._withStyles)
+    return useWidthsLow(uniqueId, forceUpdate)
+}
+
+export const useWidthsLow = (
     uniqueId: number,
-    forceUpdate: (p) => void,
+    forceUpdate: (p?) => void,
 ) => {
     const widthStore = platform._sheeter.widthsStore
 
