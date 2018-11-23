@@ -36,9 +36,8 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
         : classNameX
     let reduced = applyLastwinsStrategy(style) as TAtomize.AtomicNativeLow
     props.style = finalizeClassName(reduced)
-    //if (window.__TRACELEVEL__ >= 2)
     if (window.__TRACE__)
-      props['data-style-trace'] = platform.dumpAtomized(reduced)
+      props['data-trace'] = platform.dataTrace(reduced, window.__TRACE__.dataTraceFlag)
   }
 
   deleteSystemProps(props)

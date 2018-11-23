@@ -1,14 +1,11 @@
-﻿import React from 'react';
-import { TAtomize, TComponents, TSheeter, TWithStyles } from 'reactxx-typings';
+﻿import { TComponents, TSheeter, TWithStyles } from 'reactxx-typings';
 import {
     platform, resetPlatform,
-    useWidthsLow,
-    useForceUpdate, useUniqueId,
+    useWidthsLow, useForceUpdate, useUniqueId,
     toClassNamesWithQuery,
-    atomizeSheet, atomizeRuleset, atomizeStyle, mergeSheets
 } from 'reactxx-sheeter'
 
-import { useTheme } from './theme'
+import { useTheme } from './use-theme'
 import { useDefaults } from './use-defaults'
 import { useProps } from './use-props'
 
@@ -30,13 +27,13 @@ const useSheeter = <R extends TSheeter.Shape = TSheeter.Shape>(props: TComponent
     if (!options.id) options.id = ++_withStyles.idCounter
 
     // theme
-    const [theme] = useTheme()
+    const [theme] = useTheme<TSheeter.getTheme<R>>()
 
     // from defaults
     const { sheet, propsDefault, themedPropsDefault } = useDefaults(theme, options)
 
     // from props
-    const {classes, classNameX, styleX, propsRest, themedProps} = useProps(theme, options, sheet, props)
+    const {classes, classNameX, styleX, propsRest, themedProps} = useProps<R>(theme, options, sheet, props)
 
     // widths
     const forceUpdate = useForceUpdate()
@@ -53,13 +50,13 @@ const useSheeter = <R extends TSheeter.Shape = TSheeter.Shape>(props: TComponent
 
     const toClassNames = (...rulesets: TSheeter.RulesetOrAtomized[]) => toClassNamesWithQuery(propsCode, ...rulesets)
 
-    return { getWidthMap, toClassNames, propsCode, classes, styleX, classNameX }
+    return { getWidthMap, toClassNames, propsCode, classes, styleX, classNameX, theme, uniqueId, forceUpdate }
 }
 
 interface Shape extends TSheeter.ShapeAncestor { }
 
 const MyComponent: TComponents.SFC<Shape> = props => {
-    const { } = useSheeter<Shape>(props, null)
+    const { getWidthMap, toClassNames, propsCode, classes, styleX, classNameX, theme, uniqueId, forceUpdate } = useSheeter<Shape>(props, null)
     return null
 }
 

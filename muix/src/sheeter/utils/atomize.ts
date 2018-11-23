@@ -18,7 +18,7 @@ export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: T
 
 // muttable
 export const atomizeRuleset = <N extends string = 'root', R extends TSheeter.Shape = TSheeter.Shape>(
-    ruleset: TSheeter.RulesetOrAtomizedCreator<TSheeter.getRuleset<R, N>, R>, theme?: TSheeter.getTheme<R>, path: string = '.'
+    ruleset: TSheeter.RulesetOrAtomizedCreator<TSheeter.getRuleset<R, N>, R>, theme?: TSheeter.getTheme<R>, path: string = ''
 ) => {
     if (!ruleset) return null
 

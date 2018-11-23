@@ -4,16 +4,10 @@ import React from 'react'
 
 import {
   platform, atomizeRuleset, toClassNamesWithQuery,
-  $width, setActWidth, useWidthsLow, $WidthsQuery
+  $width, setActWidth, useWidths, $WidthsQuery
 } from "reactxx-sheeter"
 
 import { initPlatform, dump, mount } from "../../../__tests__/init-platform"
-
-const App: React.SFC = () => {
-  useWidthsLow
-  return null
-}
-
 
 describe("SHEETER $WIDTHS", () => {
 
@@ -62,7 +56,7 @@ describe("SHEETER $WIDTHS", () => {
     })
 
     describe("04 change width", () => {
-      beforeEach(() => initPlatform(isWeb))
+      beforeEach(() => initPlatform(isWeb, {dataTraceFlag: 'short'}))
 
       const getSheet = () => atomizeRuleset([
         $width([0, 640], { color: 'red' }),
@@ -71,11 +65,7 @@ describe("SHEETER $WIDTHS", () => {
       ])
 
       const useApp = () => {
-        // part of useReactXX hook:
-        const uniqueId = React.useRef(++counter) // unique ID
-        const [, forceUpdate] = React.useState<null>(null) // forceUpdate
-    
-        const { actWidth, getWidthMap, breakpoints } = useWidthsLow(uniqueId.current, forceUpdate)
+        const { actWidth, breakpoints, getWidthMap } = useWidths()
         const query: $WidthsQuery = {
           $widths: { actWidth, breakpoints }
         }
@@ -83,10 +73,11 @@ describe("SHEETER $WIDTHS", () => {
         // component code
         const renderCount = React.useRef(0)
         renderCount.current++
-        const root = toClassNamesWithQuery<$WidthsQuery>(query, sheetRoot)
+
+        const root = toClassNamesWithQuery(query, sheetRoot)
+
         return { getWidthMap, root, renderCount: renderCount.current }
       }
-      let counter = 0
 
       const App: React.SFC = () => {
         const { root, renderCount } = useApp()
@@ -94,14 +85,14 @@ describe("SHEETER $WIDTHS", () => {
       }
       App['$c$'] = true
 
-      const UseWidthsApp: React.SFC = () => {
-        const { getWidthMap, root, renderCount } = useApp()
+      const WidthsMapApp: React.SFC = () => {
+        const { root, renderCount, getWidthMap } = useApp()
         const [mobile, tablet, desktop] = getWidthMap([640, 1024])
         return <div classNameX={root}>
           {`${mobile ? 'mobile' : ''}${tablet ? 'tablet' : ''}${desktop ? 'desktop' : ''} (rendered: ${renderCount}x)`}
         </div>
       }
-      UseWidthsApp['$c$'] = true
+      WidthsMapApp['$c$'] = true
 
       const test = (App: React.ComponentType) => {
         setActWidth(300)
@@ -115,7 +106,7 @@ describe("SHEETER $WIDTHS", () => {
       }
 
       it("01 use just width styles", () => test(App))
-      it("02 use width flags and styles", () => test(UseWidthsApp))
+      it("02 use width flags and styles", () => test(WidthsMapApp))
 
     })
   }

@@ -184,8 +184,8 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
 
 function toJSON() { return dump(this) }
 
-export const dump = c => {
+export const dump = (c, short?: boolean) => {
   if (!c) return
   const { cache: { selector, declaration, media, support }, tracePath } = c as TAtomize.__dev_AtomicWeb
-  return `${support ? '@support' + support : ''}${media ? '@media ' + media : ''}${selector} { ${declaration} /*${tracePath}*/ }`
+  return `${support ? '@support' + support : ''}${media ? '@media ' + media : ''}${selector} { ${declaration} }${short ? '' : ` @${tracePath}`}`
 }

@@ -63,18 +63,11 @@ const initFela$Web = (platform?: TVariants.Platform) => {
   render(renderer)
 }
 
-const dumpAtomized = (classNames: TAtomize.AtomicWebsLow) => {
-  if (!classNames || classNames.length === 0) return []
-  return window.__TRACE__ ? (classNames.length>0 ? '\n' : '') + classNames.map(c => dump(c)).join('\n') : 'DUMP is available in window.__DEV__ only'
+const dataTrace = (classNames: TAtomize.AtomicWebsLow, flags: TraceFlags = 'long' ) => {
+  if (!classNames || classNames.length === 0) return ''
+  if (!window.__TRACE__) return ''
+  return '\n' + classNames.map(c => dump(c, flags==='short')).join('\n')
 }
-
-// renderer.renderStatic({ //http://book.mixu.net/css/5-tricks.html
-//   height: '100%',
-//   width: '100%',
-//   margin: 0,
-//   padding: 0,
-//   overflow: 'hidden',
-// }, 'html, body, #root')
 
 //Converts ruleset to blank delimited atomic classes
 const rulesetToClassNames = (ruleset: React.CSSProperties) => {
@@ -126,7 +119,7 @@ let renderer: IRendererEx
 //initFela$Web()
 
 const Fela = {
-  dumpAtomized, initFela$Web,
+  dataTrace, initFela$Web,
   rulesetToClassNames, rulesetsToClassNames, keyFrameToClassNames, rulesetToClassNamesMUI,
   getRenderer: () => renderer
 }

@@ -20,7 +20,7 @@ export const init = () => {
         },
 
         toPlatformAtomizeRuleset: platform.renderer.renderRuleEx,
-        dumpAtomized: Fela.dumpAtomized,
+        dataTrace: Fela.dataTrace,
         applyLastwinsStrategy,
         finalizeClassName,
         createElement

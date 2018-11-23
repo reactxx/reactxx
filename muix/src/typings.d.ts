@@ -1,8 +1,13 @@
 ﻿interface Window {
   isWeb: boolean
-  __TRACE__: boolean
-  __TRACELEVEL__: 1 | 2 | 3 | 4 | 5
+  __TRACE__: Trace
 }
+
+interface Trace {
+  dataTraceFlag?: TraceFlags
+}
+
+type TraceFlags = 'short' | 'long'
 
 declare module 'recompose/toRenderProps' {
   const toRenderProps: any

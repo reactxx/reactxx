@@ -27,15 +27,17 @@ export const init = () => assignPlatform({
         }
         return res.length === 0 ? null : res
     },
-    dumpAtomized: array => {
-        if (!array || Array.isArray(array) || !(typeof array === 'object')) return array
+    dataTrace: (ruleset, flags = 'long') => {
+        //if (!ruleset || Array.isArray(ruleset) || !(typeof ruleset === 'object')) return ruleset
+        if (!ruleset) return ''
         const res = []
-        for (const p in array) {
-            const val = array[p] as TAtomize.__dev_AtomicNative
-            if (val === undefined) continue
-            res.push(`${p}: ` + (window.__TRACE__ ? `${val.value} /*${val.tracePath || ''}*/` : val))
+        for (const p in ruleset) {
+            const val = ruleset[p] as TAtomize.__dev_AtomicNative
+            if (typeof val === 'undefined' || !window.__TRACE__ || flags === 'short') continue
+
+            res.push(`${p} @${val.tracePath}`)
         }
-        return (res.length > 0 ? '\n' : '') + res.join('\n')
+        return res.length > 0 ? '\n'+ res.join('\n') : ''
     },
     applyLastwinsStrategy,
     finalizeClassName,
@@ -43,5 +45,5 @@ export const init = () => assignPlatform({
 })
 
 function toJSON() {
-    return `${this.propId}: ${this.value.value} /*${this.value.tracePath}*/`
+    return `${this.propId}: ${this.value.value} @${this.value.tracePath}`
 }

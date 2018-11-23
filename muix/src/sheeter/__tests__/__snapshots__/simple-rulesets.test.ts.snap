@@ -9,8 +9,8 @@ exports[`SHEETER SIMPLE RULESET ## NATIVE ## 03 ([null, undefined, {}]) 1`] = `n
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 04 ({ color: 'red', margin: 0 }) 1`] = `
 Array [
   Array [
-    "color: red /*.*/",
-    "margin: 0 /*.*/",
+    "color: red @",
+    "margin: 0 @",
   ],
 ]
 `;
@@ -18,10 +18,10 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 05 ([{ color: 'red' }, { margin: 0 }]) 1`] = `
 Array [
   Array [
-    "color: red /*.[0]*/",
+    "color: red @[0]",
   ],
   Array [
-    "margin: 0 /*.[1]*/",
+    "margin: 0 @[1]",
   ],
 ]
 `;
@@ -29,10 +29,10 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 06 (...$web: { color: 'green' }, $native: { color: 'blue' }) 1`] = `
 Array [
   Array [
-    "color: red /*.[0]*/",
+    "color: red @[0]",
   ],
   Array [
-    "color: blue /*.[2]/$native*/",
+    "color: blue @[2]/$native",
   ],
 ]
 `;
@@ -40,7 +40,7 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 07 atomizeRuleset(atomizeRuleset({color: 'red' 1`] = `
 Array [
   Array [
-    "color: red /*.*/",
+    "color: red @",
   ],
 ]
 `;
@@ -48,7 +48,7 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 08 atomizeRuleset({$web: atomizeRuleset({ :hover color: 'red', $native: atomizeRuleset({ color: 'green' 1`] = `
 Array [
   Array [
-    "color: green /*.*/",
+    "color: green @",
   ],
 ]
 `;
@@ -56,12 +56,12 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 11 with theme 1`] = `
 Array [
   Array [
-    "color: white /*.[0]*/",
-    "backgroundColor: darkgreen /*.[0]*/",
+    "color: white @[0]",
+    "backgroundColor: darkgreen @[0]",
   ],
   Array [
-    "color: black /*.[2]/$native*/",
-    "backgroundColor: lightblue /*.[2]/$native*/",
+    "color: black @[2]/$native",
+    "backgroundColor: lightblue @[2]/$native",
   ],
 ]
 `;
@@ -69,10 +69,10 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 12 ATOMIZE modifies source object 1`] = `
 Array [
   Array [
-    "color: blue /*.[0]*/",
+    "color: blue @[0]",
   ],
   Array [
-    "color: green /*.[2]/$native*/",
+    "color: green @[2]/$native",
   ],
 ]
 `;
@@ -90,7 +90,7 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 15 just $hot 1`] = `
 Array [
   Array [
-    "color: green /*.[0]*/",
+    "color: green @[0]",
   ],
   "DEFFERED",
 ]
@@ -105,8 +105,8 @@ exports[`SHEETER SIMPLE RULESET ## WEB ## 03 ([null, undefined, {}]) 1`] = `null
 exports[`SHEETER SIMPLE RULESET ## WEB ## 04 ({ color: 'red', margin: 0 }) 1`] = `
 Array [
   Array [
-    ".a { color:red /*.*/ }",
-    ".b { margin:0 /*.*/ }",
+    ".a { color:red } @",
+    ".b { margin:0 } @",
   ],
 ]
 `;
@@ -114,10 +114,10 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## WEB ## 05 ([{ color: 'red' }, { margin: 0 }]) 1`] = `
 Array [
   Array [
-    ".a { color:red /*.[0]*/ }",
+    ".a { color:red } @[0]",
   ],
   Array [
-    ".b { margin:0 /*.[1]*/ }",
+    ".b { margin:0 } @[1]",
   ],
 ]
 `;
@@ -125,10 +125,10 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## WEB ## 06 (...$web: { color: 'green' }, $native: { color: 'blue' }) 1`] = `
 Array [
   Array [
-    ".a { color:red /*.[0]*/ }",
+    ".a { color:red } @[0]",
   ],
   Array [
-    ".b { color:green /*.[1]/$web*/ }",
+    ".b { color:green } @[1]/$web",
   ],
 ]
 `;
@@ -136,7 +136,7 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## WEB ## 07 atomizeRuleset(atomizeRuleset({color: 'red' 1`] = `
 Array [
   Array [
-    ".a { color:red /*.*/ }",
+    ".a { color:red } @",
   ],
 ]
 `;
@@ -144,7 +144,7 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## WEB ## 08 atomizeRuleset({$web: atomizeRuleset({ :hover color: 'red', $native: atomizeRuleset({ color: 'green' 1`] = `
 Array [
   Array [
-    ".a:hover { color:red /*./:hover*/ }",
+    ".a:hover { color:red } @/:hover",
   ],
 ]
 `;
@@ -152,12 +152,12 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## WEB ## 11 with theme 1`] = `
 Array [
   Array [
-    ".a { color:white /*.[0]*/ }",
-    ".b { background-color:darkgreen /*.[0]*/ }",
+    ".a { color:white } @[0]",
+    ".b { background-color:darkgreen } @[0]",
   ],
   Array [
-    ".c { color:black /*.[1]/$web*/ }",
-    ".d { background-color:lightblue /*.[1]/$web*/ }",
+    ".c { color:black } @[1]/$web",
+    ".d { background-color:lightblue } @[1]/$web",
   ],
 ]
 `;
@@ -165,10 +165,10 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## WEB ## 12 ATOMIZE modifies source object 1`] = `
 Array [
   Array [
-    ".a { color:blue /*.[0]*/ }",
+    ".a { color:blue } @[0]",
   ],
   Array [
-    ".b { color:red /*.[1]/$web*/ }",
+    ".b { color:red } @[1]/$web",
   ],
 ]
 `;
@@ -186,7 +186,7 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## WEB ## 13 condition in pseudo 1`] = `
 Array [
   Array [
-    ".a:hover { color:red /*./$web/:hover/$web*/ }",
+    ".a:hover { color:red } @/$web/:hover/$web",
   ],
 ]
 `;
@@ -194,13 +194,13 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## WEB ## 14 mix in pseudo array 1`] = `
 Array [
   Array [
-    ".c { color:green /*./$web*/ }",
+    ".c { color:green } @/$web",
   ],
   Array [
-    ".a:hover { color:blue /*./$web/:hover[0]*/ }",
+    ".a:hover { color:blue } @/$web/:hover[0]",
   ],
   Array [
-    ".b:hover:active { color:red /*./$web/:hover[1]/$web/:active*/ }",
+    ".b:hover:active { color:red } @/$web/:hover[1]/$web/:active",
   ],
 ]
 `;
@@ -208,7 +208,7 @@ Array [
 exports[`SHEETER SIMPLE RULESET ## WEB ## 15 just $hot 1`] = `
 Array [
   Array [
-    ".a { color:green /*.[0]*/ }",
+    ".a { color:green } @[0]",
   ],
   "DEFFERED",
 ]

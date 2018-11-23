@@ -16,14 +16,14 @@ test("fela", () => {
     }
   }
 
-  window.__TRACE__ = true
+  window.__TRACE__ = {}
 
   Fela.initFela$Web()
   let css = Fela.getRenderer().renderRuleEx(classNames, 'root')
-  const res = Fela.dumpAtomized(css)
+  const res = Fela.dataTrace(css)
   expect(res).toMatchSnapshot()
 
   Fela.initFela$Web()
   css = Fela.getRenderer().renderRuleEx(classNames, 'root')
-  expect(Fela.dumpAtomized(css)).toMatchSnapshot()
+  expect(Fela.dataTrace(css)).toMatchSnapshot()
 })

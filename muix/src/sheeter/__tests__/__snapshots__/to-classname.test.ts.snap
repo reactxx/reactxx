@@ -15,19 +15,19 @@ exports[`TO CLASSNAMES ## NATIVE ## 02: null, {}, undefined 3`] = `undefined`;
 exports[`TO CLASSNAMES ## NATIVE ## 03: mixed 1`] = `
 Array [
   Array [
-    "color: red /*.*/",
+    "color: red @",
   ],
   Array [
-    "color: blue /*root[0]*/",
+    "color: blue @root[0]",
   ],
   Array [
-    "color: yellow /*root[1]*/",
+    "color: yellow @root[1]",
   ],
   Array [
-    "color: maroon /*/$if*/",
+    "color: maroon @/$if",
   ],
   Array [
-    "color: green /*.*/",
+    "color: green @",
   ],
 ]
 `;
@@ -35,7 +35,7 @@ Array [
 exports[`TO CLASSNAMES ## NATIVE ## 03: mixed 2`] = `
 Object {
   "color": Object {
-    "tracePath": ".",
+    "tracePath": "",
     "value": "green",
   },
 }
@@ -50,7 +50,7 @@ Object {
 exports[`TO CLASSNAMES ## NATIVE ## 04: query => opened 1`] = `
 Array [
   Array [
-    "color: red /*/$if*/",
+    "color: red @/$if",
   ],
 ]
 `;
@@ -73,7 +73,7 @@ Object {
 exports[`TO CLASSNAMES ## NATIVE ## 05: query => closed 1`] = `
 Array [
   Array [
-    "color: blue /*/$if*/",
+    "color: blue @/$if",
   ],
 ]
 `;
@@ -96,7 +96,7 @@ Object {
 exports[`TO CLASSNAMES ## NATIVE ## 06: query => closed => pre-atomized 1`] = `
 Array [
   Array [
-    "color: blue /*.[1]/$if*/",
+    "color: blue @[1]/$if",
   ],
 ]
 `;
@@ -104,7 +104,7 @@ Array [
 exports[`TO CLASSNAMES ## NATIVE ## 06: query => closed => pre-atomized 2`] = `
 Object {
   "color": Object {
-    "tracePath": ".[1]/$if",
+    "tracePath": "[1]/$if",
     "value": "blue",
   },
 }
@@ -119,7 +119,7 @@ Object {
 exports[`TO CLASSNAMES ## NATIVE ## 07: query => closed => pre-queried 1`] = `
 Array [
   Array [
-    "color: blue /*/$if*/",
+    "color: blue @/$if",
   ],
 ]
 `;
@@ -154,26 +154,26 @@ exports[`TO CLASSNAMES ## WEB ## 02: null, {}, undefined 3`] = `undefined`;
 exports[`TO CLASSNAMES ## WEB ## 03: mixed 1`] = `
 Array [
   Array [
-    ".d { color:red /*.*/ }",
+    ".d { color:red } @",
   ],
   Array [
-    ".a { color:blue /*root[0]*/ }",
+    ".a { color:blue } @root[0]",
   ],
   Array [
-    ".b { color:yellow /*root[1]*/ }",
+    ".b { color:yellow } @root[1]",
   ],
   Array [
-    ".e { color:maroon /*/$if*/ }",
+    ".e { color:maroon } @/$if",
   ],
   Array [
-    ".c { color:green /*.*/ }",
+    ".c { color:green } @",
   ],
 ]
 `;
 
 exports[`TO CLASSNAMES ## WEB ## 03: mixed 2`] = `
 Array [
-  ".c { color:green /*.*/ }",
+  ".c { color:green } @",
 ]
 `;
 
@@ -182,14 +182,14 @@ exports[`TO CLASSNAMES ## WEB ## 03: mixed 3`] = `"c"`;
 exports[`TO CLASSNAMES ## WEB ## 04: query => opened 1`] = `
 Array [
   Array [
-    ".a { color:red /*/$if*/ }",
+    ".a { color:red } @/$if",
   ],
 ]
 `;
 
 exports[`TO CLASSNAMES ## WEB ## 04: query => opened 2`] = `
 Array [
-  ".a { color:red /*/$if*/ }",
+  ".a { color:red } @/$if",
 ]
 `;
 
@@ -198,14 +198,14 @@ exports[`TO CLASSNAMES ## WEB ## 04: query => opened 3`] = `"a"`;
 exports[`TO CLASSNAMES ## WEB ## 05: query => closed 1`] = `
 Array [
   Array [
-    ".b { color:blue /*/$if*/ }",
+    ".b { color:blue } @/$if",
   ],
 ]
 `;
 
 exports[`TO CLASSNAMES ## WEB ## 05: query => closed 2`] = `
 Array [
-  ".b { color:blue /*/$if*/ }",
+  ".b { color:blue } @/$if",
 ]
 `;
 
@@ -214,14 +214,14 @@ exports[`TO CLASSNAMES ## WEB ## 05: query => closed 3`] = `"b"`;
 exports[`TO CLASSNAMES ## WEB ## 06: query => closed => pre-atomized 1`] = `
 Array [
   Array [
-    ".b { color:blue /*.[1]/$if*/ }",
+    ".b { color:blue } @[1]/$if",
   ],
 ]
 `;
 
 exports[`TO CLASSNAMES ## WEB ## 06: query => closed => pre-atomized 2`] = `
 Array [
-  ".b { color:blue /*.[1]/$if*/ }",
+  ".b { color:blue } @[1]/$if",
 ]
 `;
 
@@ -230,14 +230,14 @@ exports[`TO CLASSNAMES ## WEB ## 06: query => closed => pre-atomized 3`] = `"b"`
 exports[`TO CLASSNAMES ## WEB ## 07: query => closed => pre-queried 1`] = `
 Array [
   Array [
-    ".b { color:blue /*/$if*/ }",
+    ".b { color:blue } @/$if",
   ],
 ]
 `;
 
 exports[`TO CLASSNAMES ## WEB ## 07: query => closed => pre-queried 2`] = `
 Array [
-  ".b { color:blue /*/$if*/ }",
+  ".b { color:blue } @/$if",
 ]
 `;
 

@@ -39,7 +39,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
     props.className = props.className ? className + ' ' + props.className : className
     //if (window.__TRACELEVEL__ >= 2) 
     if (window.__TRACE__)
-      props['data-class-trace'] = platform.dumpAtomized(lastWinResult)
+      props['data-trace'] = platform.dataTrace(lastWinResult, window.__TRACE__.dataTraceFlag)
   }
 
   if (styleX) {

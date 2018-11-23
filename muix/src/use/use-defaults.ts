@@ -2,7 +2,7 @@
 import warning from 'warning'
 
 import { TWithStyles } from 'reactxx-typings';
-import { sheetFromThemeCache } from './theme';
+import { sheetFromThemeCache } from './use-theme';
 
 export const useDefaults = (theme, options: TWithStyles.ComponentOptions) =>
     React.useMemo(() => getDefaults(theme, options), [theme, options])

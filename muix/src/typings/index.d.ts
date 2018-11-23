@@ -71,7 +71,7 @@ export namespace TVariants {
     }
     export interface Platform extends Options, Globals {
         toPlatformAtomizeRuleset?: ToPlatformAtomizeRuleset
-        dumpAtomized?: (classNames: TAtomize.Variants | TAtomize.AtomicArrayLow) => any,
+        dataTrace?: (classNames: TAtomize.AtomicArrayLow, flags?: TraceFlags) => any,
         applyLastwinsStrategy?: ApplyLastwinsStrategy
         finalizeClassName?: (values: TAtomize.AtomicArrayLow) => string | Record<string, any>
         createElement?: (type, props?, ...children) => any

@@ -3,7 +3,7 @@
 exports[`SHEETER $WIDTHS ## NATIVE ## 01 empty 1`] = `
 Array [
   Array [
-    "color: green /*.[0]*/",
+    "color: green @[0]",
   ],
 ]
 `;
@@ -11,7 +11,7 @@ Array [
 exports[`SHEETER $WIDTHS ## NATIVE ## 02 simple 1`] = `
 Array [
   Array [
-    "color: red /*./$width*/",
+    "color: red @/$width",
   ],
 ]
 `;
@@ -19,7 +19,7 @@ Array [
 exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesWithQuery's width change 01: native, 300 1`] = `
 Array [
   Array [
-    "color: red /*/$width*/",
+    "color: red @/$width",
   ],
 ]
 `;
@@ -42,7 +42,7 @@ Object {
 exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesWithQuery's width change 02: native, 640 1`] = `
 Array [
   Array [
-    "color: green /*/$width*/",
+    "color: green @/$width",
   ],
 ]
 `;
@@ -65,7 +65,7 @@ Object {
 exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesWithQuery's width change 03: native, 1024 1`] = `
 Array [
   Array [
-    "color: blue /*/$width*/",
+    "color: blue @/$width",
   ],
 ]
 `;
@@ -94,8 +94,7 @@ exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesWithQuery's width change 04
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 1`] = `
 <div>
   <div
-    data-style-trace="
-color: red /*.[0]/$width*/"
+    data-trace=""
     style="color: red;"
   >
     rendered: 1x
@@ -106,8 +105,7 @@ color: red /*.[0]/$width*/"
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 2`] = `
 <div>
   <div
-    data-style-trace="
-color: green /*.[1]/$width*/"
+    data-trace=""
     style="color: green;"
   >
     rendered: 2x
@@ -118,8 +116,7 @@ color: green /*.[1]/$width*/"
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 3`] = `
 <div>
   <div
-    data-style-trace="
-color: blue /*.[2]/$width*/"
+    data-trace=""
     style="color: blue;"
   >
     rendered: 3x
@@ -130,8 +127,7 @@ color: blue /*.[2]/$width*/"
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 use width flags and styles 1`] = `
 <div>
   <div
-    data-style-trace="
-color: red /*.[0]/$width*/"
+    data-trace=""
     style="color: red;"
   >
     mobile (rendered: 1x)
@@ -142,8 +138,7 @@ color: red /*.[0]/$width*/"
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 use width flags and styles 2`] = `
 <div>
   <div
-    data-style-trace="
-color: green /*.[1]/$width*/"
+    data-trace=""
     style="color: green;"
   >
     tablet (rendered: 2x)
@@ -154,8 +149,7 @@ color: green /*.[1]/$width*/"
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 use width flags and styles 3`] = `
 <div>
   <div
-    data-style-trace="
-color: blue /*.[2]/$width*/"
+    data-trace=""
     style="color: blue;"
   >
     desktop (rendered: 3x)
@@ -166,7 +160,7 @@ color: blue /*.[2]/$width*/"
 exports[`SHEETER $WIDTHS ## WEB ## 01 empty 1`] = `
 Array [
   Array [
-    ".a { color:green /*.[0]*/ }",
+    ".a { color:green } @[0]",
   ],
 ]
 `;
@@ -174,7 +168,7 @@ Array [
 exports[`SHEETER $WIDTHS ## WEB ## 02 simple 1`] = `
 Array [
   Array [
-    "@media (min-width: 640px) and (max-width: 1023px).a { color:red /*./$width*/ }",
+    "@media (min-width: 640px) and (max-width: 1023px).a { color:red } @/$width",
   ],
 ]
 `;
@@ -182,22 +176,22 @@ Array [
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 01: native, 300 1`] = `
 Array [
   Array [
-    "@media (max-width: 639px).a { color:red /*/$width*/ }",
+    "@media (max-width: 639px).a { color:red } @/$width",
   ],
   Array [
-    "@media (min-width: 640px) and (max-width: 1023px).b { color:green /*/$width*/ }",
+    "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
   ],
   Array [
-    "@media (min-width: 1024px).c { color:blue /*/$width*/ }",
+    "@media (min-width: 1024px).c { color:blue } @/$width",
   ],
 ]
 `;
 
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 01: native, 300 2`] = `
 Array [
-  "@media (min-width: 1024px).c { color:blue /*/$width*/ }",
-  "@media (min-width: 640px) and (max-width: 1023px).b { color:green /*/$width*/ }",
-  "@media (max-width: 639px).a { color:red /*/$width*/ }",
+  "@media (min-width: 1024px).c { color:blue } @/$width",
+  "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
+  "@media (max-width: 639px).a { color:red } @/$width",
 ]
 `;
 
@@ -206,22 +200,22 @@ exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 01: n
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 02: native, 640 1`] = `
 Array [
   Array [
-    "@media (max-width: 639px).a { color:red /*/$width*/ }",
+    "@media (max-width: 639px).a { color:red } @/$width",
   ],
   Array [
-    "@media (min-width: 640px) and (max-width: 1023px).b { color:green /*/$width*/ }",
+    "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
   ],
   Array [
-    "@media (min-width: 1024px).c { color:blue /*/$width*/ }",
+    "@media (min-width: 1024px).c { color:blue } @/$width",
   ],
 ]
 `;
 
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 02: native, 640 2`] = `
 Array [
-  "@media (min-width: 1024px).c { color:blue /*/$width*/ }",
-  "@media (min-width: 640px) and (max-width: 1023px).b { color:green /*/$width*/ }",
-  "@media (max-width: 639px).a { color:red /*/$width*/ }",
+  "@media (min-width: 1024px).c { color:blue } @/$width",
+  "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
+  "@media (max-width: 639px).a { color:red } @/$width",
 ]
 `;
 
@@ -230,22 +224,22 @@ exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 02: n
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 03: native, 1024 1`] = `
 Array [
   Array [
-    "@media (max-width: 639px).a { color:red /*/$width*/ }",
+    "@media (max-width: 639px).a { color:red } @/$width",
   ],
   Array [
-    "@media (min-width: 640px) and (max-width: 1023px).b { color:green /*/$width*/ }",
+    "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
   ],
   Array [
-    "@media (min-width: 1024px).c { color:blue /*/$width*/ }",
+    "@media (min-width: 1024px).c { color:blue } @/$width",
   ],
 ]
 `;
 
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 03: native, 1024 2`] = `
 Array [
-  "@media (min-width: 1024px).c { color:blue /*/$width*/ }",
-  "@media (min-width: 640px) and (max-width: 1023px).b { color:green /*/$width*/ }",
-  "@media (max-width: 639px).a { color:red /*/$width*/ }",
+  "@media (min-width: 1024px).c { color:blue } @/$width",
+  "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
+  "@media (max-width: 639px).a { color:red } @/$width",
 ]
 `;
 
@@ -254,22 +248,22 @@ exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 03: n
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 04: native, undefined 1`] = `
 Array [
   Array [
-    "@media (max-width: 639px).a { color:red /*/$width*/ }",
+    "@media (max-width: 639px).a { color:red } @/$width",
   ],
   Array [
-    "@media (min-width: 640px) and (max-width: 1023px).b { color:green /*/$width*/ }",
+    "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
   ],
   Array [
-    "@media (min-width: 1024px).c { color:blue /*/$width*/ }",
+    "@media (min-width: 1024px).c { color:blue } @/$width",
   ],
 ]
 `;
 
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 04: native, undefined 2`] = `
 Array [
-  "@media (min-width: 1024px).c { color:blue /*/$width*/ }",
-  "@media (min-width: 640px) and (max-width: 1023px).b { color:green /*/$width*/ }",
-  "@media (max-width: 639px).a { color:red /*/$width*/ }",
+  "@media (min-width: 1024px).c { color:blue } @/$width",
+  "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
+  "@media (max-width: 639px).a { color:red } @/$width",
 ]
 `;
 
@@ -279,10 +273,10 @@ exports[`SHEETER $WIDTHS ## WEB ## 04 change width 01 use just width styles 1`] 
 <div>
   <div
     class="c b a"
-    data-class-trace="
-@media (min-width: 1024px).c { color:blue /*.[2]/$width*/ }
-@media (min-width: 640px) and (max-width: 1023px).b { color:green /*.[1]/$width*/ }
-@media (max-width: 639px).a { color:red /*.[0]/$width*/ }"
+    data-trace="
+@media (min-width: 1024px).c { color:blue }
+@media (min-width: 640px) and (max-width: 1023px).b { color:green }
+@media (max-width: 639px).a { color:red }"
   >
     rendered: 1x
   </div>
@@ -293,10 +287,10 @@ exports[`SHEETER $WIDTHS ## WEB ## 04 change width 01 use just width styles 2`] 
 <div>
   <div
     class="c b a"
-    data-class-trace="
-@media (min-width: 1024px).c { color:blue /*.[2]/$width*/ }
-@media (min-width: 640px) and (max-width: 1023px).b { color:green /*.[1]/$width*/ }
-@media (max-width: 639px).a { color:red /*.[0]/$width*/ }"
+    data-trace="
+@media (min-width: 1024px).c { color:blue }
+@media (min-width: 640px) and (max-width: 1023px).b { color:green }
+@media (max-width: 639px).a { color:red }"
   >
     rendered: 1x
   </div>
@@ -307,10 +301,10 @@ exports[`SHEETER $WIDTHS ## WEB ## 04 change width 01 use just width styles 3`] 
 <div>
   <div
     class="c b a"
-    data-class-trace="
-@media (min-width: 1024px).c { color:blue /*.[2]/$width*/ }
-@media (min-width: 640px) and (max-width: 1023px).b { color:green /*.[1]/$width*/ }
-@media (max-width: 639px).a { color:red /*.[0]/$width*/ }"
+    data-trace="
+@media (min-width: 1024px).c { color:blue }
+@media (min-width: 640px) and (max-width: 1023px).b { color:green }
+@media (max-width: 639px).a { color:red }"
   >
     rendered: 1x
   </div>
@@ -321,10 +315,10 @@ exports[`SHEETER $WIDTHS ## WEB ## 04 change width 02 use width flags and styles
 <div>
   <div
     class="c b a"
-    data-class-trace="
-@media (min-width: 1024px).c { color:blue /*.[2]/$width*/ }
-@media (min-width: 640px) and (max-width: 1023px).b { color:green /*.[1]/$width*/ }
-@media (max-width: 639px).a { color:red /*.[0]/$width*/ }"
+    data-trace="
+@media (min-width: 1024px).c { color:blue }
+@media (min-width: 640px) and (max-width: 1023px).b { color:green }
+@media (max-width: 639px).a { color:red }"
   >
     mobile (rendered: 1x)
   </div>
@@ -335,10 +329,10 @@ exports[`SHEETER $WIDTHS ## WEB ## 04 change width 02 use width flags and styles
 <div>
   <div
     class="c b a"
-    data-class-trace="
-@media (min-width: 1024px).c { color:blue /*.[2]/$width*/ }
-@media (min-width: 640px) and (max-width: 1023px).b { color:green /*.[1]/$width*/ }
-@media (max-width: 639px).a { color:red /*.[0]/$width*/ }"
+    data-trace="
+@media (min-width: 1024px).c { color:blue }
+@media (min-width: 640px) and (max-width: 1023px).b { color:green }
+@media (max-width: 639px).a { color:red }"
   >
     tablet (rendered: 2x)
   </div>
@@ -349,10 +343,10 @@ exports[`SHEETER $WIDTHS ## WEB ## 04 change width 02 use width flags and styles
 <div>
   <div
     class="c b a"
-    data-class-trace="
-@media (min-width: 1024px).c { color:blue /*.[2]/$width*/ }
-@media (min-width: 640px) and (max-width: 1023px).b { color:green /*.[1]/$width*/ }
-@media (max-width: 639px).a { color:red /*.[0]/$width*/ }"
+    data-trace="
+@media (min-width: 1024px).c { color:blue }
+@media (min-width: 640px) and (max-width: 1023px).b { color:green }
+@media (max-width: 639px).a { color:red }"
   >
     desktop (rendered: 3x)
   </div>
