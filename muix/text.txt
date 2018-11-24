@@ -1,14 +1,10 @@
-- HOT and IFELSE test
-- debug class trace to HTML tag
+- typing styleX and classNameX: remove "as any" in src\use\__tests__\use-sheeter-simple.test.tsx
+
 - style and className
 
-- replace pipelines with react hooks
-- components overrideOptions preference
 - atomize and merge STYLES: tests
 
 primitives events
 Tests:
 - primitives
     - 2x test warnings
-- core
-    - combined tests for WIDTHS, SWITCH and PRIMITIVES

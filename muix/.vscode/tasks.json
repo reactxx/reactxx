@@ -8,13 +8,13 @@
             "type": "shell",
             "command": ".\\node_modules\\.bin\\jest.cmd",
             "args": [
-                //"--runInBand",
-                //"--testPathPattern=\"/sheeter/|/sheet-switch/|/sheet-widths/\"",
-                "--testPathPattern=\"/sheeter/\"",
-                //"--testPathPattern=with-styles-comp",
+                "--testPathPattern=\"/sheeter/|/use/\"",
                 //"-u"
             ],
-            "group": "test",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
             "presentation": {
                 "echo": true,
                 "reveal": "always",

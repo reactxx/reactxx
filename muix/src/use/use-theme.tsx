@@ -9,7 +9,11 @@ export type ThemeContext<T extends any> = [T, (newTheme: T) => void]
 
 export const useTheme = <T extends any>() => {
   const ctx = React.useContext<ThemeContext<T>>(themeContext)
-  return ctx || [platform._withStyles.defaultTheme, setThemeError] as ThemeContext<T>
+  if (ctx) return ctx
+  const {_withStyles, getDefaultTheme } = platform
+  if (!_withStyles.defaultTheme && getDefaultTheme)
+    _withStyles.defaultTheme = getDefaultTheme()
+  return ctx || [_withStyles.defaultTheme, setThemeError] as ThemeContext<T>
 }
 const setThemeError = theme => { throw 'Cannot set default theme' }
 

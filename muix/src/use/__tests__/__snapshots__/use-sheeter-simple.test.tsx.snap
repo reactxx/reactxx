@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`USE SHEETER ## NATIVE ## 01: config NULL 1`] = `
+<div>
+  <div>
+    ERROR
+  </div>
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 02: sheet missing 1`] = `
+<div>
+  <div>
+    ERROR
+  </div>
+</div>
+`;
+
 exports[`USE SHEETER ## NATIVE ## 03: just div 1`] = `
 <div>
   <div />
@@ -141,6 +157,22 @@ exports[`USE SHEETER ## NATIVE ## 19: theme, props 1`] = `
   <div
     p1="themeProp"
   />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 01: config NULL 1`] = `
+<div>
+  <div>
+    ERROR
+  </div>
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 02: sheet missing 1`] = `
+<div>
+  <div>
+    ERROR
+  </div>
 </div>
 `;
 

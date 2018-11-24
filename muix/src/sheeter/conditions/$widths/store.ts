@@ -1,7 +1,7 @@
 import React from 'react'
 import { platform } from 'reactxx-sheeter'
-import {useForceUpdate} from '../../utils/use-force-update'
-import {useUniqueId} from '../../utils/use-unique-id'
+import { useForceUpdate } from '../../utils/use-force-update'
+import { useUniqueId } from '../../utils/use-unique-id'
 
 export const useWidths = () => {
     const forceUpdate = useForceUpdate()
@@ -15,65 +15,73 @@ export const useWidthsLow = (
 ) => {
     const widthStore = platform._sheeter.widthsStore
 
-    const handlerRef = React.useRef(null)
-    const handler = handlerRef.current || { forceUpdate }
-    const hbreakpoints = handler.breakpoints = new Set()
-    const actWidth = widthStore.state
-    
+    const listenerRef = React.useRef(null)
+
+    // handler is registered in widthStore in useLayoutEffect: in useLayoutEffect we already known, if some breakpoints exist
+    const listener = listenerRef.current || { forceUpdate }
+    const breakpoints = listener.breakpoints = new Set() // always new breakpoints for every render
+
     React.useLayoutEffect(() => { // call on every render
-        if (hbreakpoints.size > 0) { // some breakpoints found (or calling getWidthMap or in styles)
-            if (!handlerRef.current)
-                handlerRef.current = widthStore.handlers[uniqueId] = handler
+        if (breakpoints.size > 0) { // some breakpoints found (in rulesets or as a result of getWidthMap call)
+            if (!listenerRef.current) // not aleady registered => register
+                listenerRef.current = widthStore.register(uniqueId, listener)
             // for web: adjust media query for watched breakpoints
-            hbreakpoints.forEach(br => platform.addBreakpoint(br))
+            breakpoints.forEach(br => platform.addBreakpoint(br))
         }
     })
 
     React.useLayoutEffect(() => { // call on unmount only
-        return () => delete widthStore.handlers[uniqueId] // unmount => remove handler
+        return () => widthStore.register(uniqueId) // unmount => unregister
     }, [])
 
-    const getWidthMap = (breakpoints?: number[]) => {
+    const actWidth = widthStore.actWidth
+
+    const getWidthMap = (mapBreakpoints?: number[]) => {
         if (window.__TRACE__) {
             let last = 0
-            breakpoints.forEach(b => {
+            mapBreakpoints.forEach(b => {
                 if (b <= last) throw 'useWidths argument error: array of increasing numbers (greater than zero) expected'
                 last = b + 1
             })
         }
         // add breakpoints for change detection
-        breakpoints.forEach(b => hbreakpoints.add(b))
+        mapBreakpoints.forEach(b => breakpoints.add(b))
 
         // get map (just single array item is true)
-        let found = breakpoints.findIndex(b => actWidth < b)
-        if (found < 0) found = breakpoints.length
+        let found = mapBreakpoints.findIndex(b => actWidth < b)
+        if (found < 0) found = mapBreakpoints.length
         const res: boolean[] = []
         res[found] = true
         return res
 
     }
-    return { getWidthMap, breakpoints: hbreakpoints, actWidth }
+    return { getWidthMap, breakpoints, actWidth }
 }
 
 export class WidthStore {
 
-    state = platform.actWidth()
+    actWidth = platform.actWidth()
+    listeners: Record<number, IListener> = {} // change width listeners
 
-    setState = (newState: number) => {
-        const oldState = this.state
-        this.state = newState
-        for (const p in this.handlers) this.refreshHandler(this.handlers[p], oldState, newState)
+    // width chan
+    setWidth = (newWidth: number) => {
+        if (this.actWidth === newWidth) return
+        const oldWidth = this.actWidth
+        this.actWidth = newWidth
+        for (const p in this.listeners) this.refreshHandler(this.listeners[p], oldWidth, newWidth)
     }
 
-    handlers: Record<number, IHandler> = {}
-
-    refreshHandler(handler: IHandler, oldWidth: number, newWidth: number) {
-        if (oldWidth === newWidth) return
+    refreshHandler(listener: IListener, oldWidth: number, newWidth: number) {
         let noChange = true
-        handler.breakpoints.forEach(br => noChange = noChange &&
+        listener.breakpoints.forEach(br => noChange = noChange &&
             (newWidth >= br && oldWidth >= br || newWidth < br && oldWidth < br))
         if (noChange) return
-        handler.forceUpdate(null)
+        listener.forceUpdate(null)
+    }
+
+    register(id: number, listener?) {
+        if (listener) return this.listeners[id] = listener
+        else delete this.listeners[id]
     }
 
 }
@@ -81,9 +89,9 @@ export class WidthStore {
 // global store for watching width change
 //const widthStore = new WidthStore()
 
-interface IHandler {
+interface IListener {
     breakpoints?: Set<number>
     forceUpdate: (state: null) => void
 }
 
-export const setActWidth = (newWidth: number) => platform._sheeter.widthsStore.setState(newWidth)
+export const setActWidth = (newWidth: number) => platform._sheeter.widthsStore.setWidth(newWidth)

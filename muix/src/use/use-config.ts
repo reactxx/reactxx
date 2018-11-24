@@ -8,7 +8,8 @@ export const useConfig = <R extends TSheeter.Shape = TSheeter.Shape>(
     configOverride?: TWithStyles.ComponentConfigOverride<R>
 ) => {
 
-    if (!configDefault) throw 'Config expected'
+    if (!configDefault)
+        throw 'Config expected'
 
     const useMemoCalled = React.useRef(false)
 

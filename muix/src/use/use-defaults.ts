@@ -13,7 +13,8 @@ const getDefaults = (theme, config: TWithStyles.ComponentConfig & TWithStyles.Co
 
     const { defaultProps, defaultSheet, overrideProps, overrideSheet, id, displayName } = config
 
-    warning(!!defaultSheet, 'Missing config.defaultsheet')
+    if (!defaultSheet)
+        throw 'Missing config.defaultsheet'
 
     const sheet = sheetFromThemeCache(id, defaultSheet, theme, overrideSheet, displayName)
 
