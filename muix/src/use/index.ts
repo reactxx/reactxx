@@ -9,7 +9,7 @@ import { useTheme } from './use-theme'
 import { useDefaults } from './use-defaults'
 import { useProps } from './use-props'
 
-export const initWithStyles = (force?: boolean) => {
+export const initUseReactxx = (force?: boolean) => {
     if (force) resetPlatform()
     if (platform._withStyles) return
     platform._withStyles = {
@@ -20,20 +20,25 @@ export const initWithStyles = (force?: boolean) => {
     }
 }
 
-const useSheeter = <R extends TSheeter.Shape = TSheeter.Shape>(props: TComponents.Props<R>, options: TWithStyles.ComponentOptions<R>) => {
+const useSheeter = <R extends TSheeter.Shape = TSheeter.Shape>(
+    props: TComponents.Props<R>,
+    config: TWithStyles.ComponentConfig<R>,
+    displayName?: string
+) => {
 
     const { _withStyles } = platform
 
-    if (!options.id) options.id = ++_withStyles.idCounter
+    if (!config.id) config.id = ++_withStyles.idCounter
+    config.displayName = displayName
 
     // theme
     const [theme] = useTheme<TSheeter.getTheme<R>>()
 
     // from defaults
-    const { sheet, propsDefault, themedPropsDefault } = useDefaults(theme, options)
+    const { sheet, propsDefault, themedPropsDefault } = useDefaults(theme, config)
 
     // from props
-    const {classes, classNameX, styleX, propsRest, themedProps} = useProps<R>(theme, options, sheet, props)
+    const { classes, classNameX, styleX, propsRest, themedProps } = useProps<R>(theme, config, sheet, props)
 
     // widths
     const forceUpdate = useForceUpdate()
@@ -44,9 +49,8 @@ const useSheeter = <R extends TSheeter.Shape = TSheeter.Shape>(props: TComponent
     const propsCode = mergeCodeProps<R>([
         propsDefault, themedPropsDefault && themedPropsDefault(theme),
         propsRest, themedProps && themedProps(theme),
-        {
-            $widths: { actWidth, breakpoints }
-        } as TComponents.PropsCode])
+        { $widths: { actWidth, breakpoints } } as TComponents.PropsCode
+    ])
 
     const toClassNames = (...rulesets: TSheeter.RulesetOrAtomized[]) => toClassNamesWithQuery(propsCode, ...rulesets)
 
@@ -55,10 +59,20 @@ const useSheeter = <R extends TSheeter.Shape = TSheeter.Shape>(props: TComponent
 
 interface Shape extends TSheeter.ShapeAncestor { }
 
+const myComponentConfig: TWithStyles.ComponentConfig<Shape> = null
+
+const useMyComponent = () => {
+    
+}
+
 const MyComponent: TComponents.SFC<Shape> = props => {
-    const { getWidthMap, toClassNames, propsCode, classes, styleX, classNameX, theme, uniqueId, forceUpdate } = useSheeter<Shape>(props, null)
+    const {
+        getWidthMap, toClassNames, propsCode, classes,
+        styleX, classNameX, theme, uniqueId, forceUpdate
+    } = useSheeter<Shape>(props, myComponentConfig, MyComponent.displayName)
     return null
 }
+MyComponent.displayName = 'xxxx'
 
 const mergeCodeProps = <R extends TSheeter.Shape>(...props: (TComponents.PropsCode & TComponents.Props)[]) => {
     if (!props || props.length === 0) return undefined
