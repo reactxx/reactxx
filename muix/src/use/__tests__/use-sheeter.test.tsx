@@ -6,19 +6,7 @@ import { TSheeter, TWithStyles, TComponents } from 'reactxx-typings'
 import { useSheeter } from "reactxx-use"
 
 import { initPlatform, mount } from "./init-platform"
-
-interface Shape extends TSheeter.ShapeAncestor {
-  rulesets: {
-    root: 'Text'
-  },
-  props: {
-    p1: string
-  },
-  theme: {
-    primaryColor: string
-    p1Prop: string
-  }
-}
+import { compCreator, Theme, Shape } from "./lib"
 
 describe("USE SHEETER", () => {
 
@@ -30,28 +18,6 @@ describe("USE SHEETER", () => {
         p1Prop: 'themeProp'
       })
     })
-
-    const compCreator = (
-      config: TWithStyles.ComponentConfig<Shape>,
-      configOverride: TWithStyles.ComponentConfigOverride<Shape>,
-      displayName?: 'Comp'
-    ) => {
-      const res: TComponents.SFC<Shape> = props => {
-        try {
-          const { toClassNames, propsCode, classes, classNameX, styleX
-          } = useSheeter(props, config, displayName, configOverride)
-          
-          const root = toClassNames(classes.root, classNameX)
-          return <div {...propsCode} classNameX={root} styleX={styleX as any} />
-        } catch {
-          return <div>ERROR</div>
-        }
-      }
-      res.displayName = displayName
-      res['$c$'] = true
-      return res
-    }
-
 
     it('01: config NULL', () => {
       const Comp = compCreator(null, null)

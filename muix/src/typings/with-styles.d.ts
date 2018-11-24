@@ -24,4 +24,6 @@ declare namespace TWithStyles {
     myConfigId?: number // ComponentConfig.id
   }
 
+  export type ThemeContext<T extends any> = [T, (newTheme: T) => void]
+
 }

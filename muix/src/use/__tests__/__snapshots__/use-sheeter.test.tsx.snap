@@ -18,7 +18,9 @@ exports[`USE SHEETER ## NATIVE ## 02: sheet missing 1`] = `
 
 exports[`USE SHEETER ## NATIVE ## 03: just div 1`] = `
 <div>
-  <div />
+  <div>
+    1
+  </div>
 </div>
 `;
 
@@ -27,7 +29,9 @@ exports[`USE SHEETER ## NATIVE ## 04: with sheet 1`] = `
   <div
     data-trace=""
     style="color: red;"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -36,7 +40,9 @@ exports[`USE SHEETER ## NATIVE ## 05: with sheet override 1`] = `
   <div
     data-trace=""
     style="color: green;"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -45,7 +51,9 @@ exports[`USE SHEETER ## NATIVE ## 06: with classes override 1`] = `
   <div
     data-trace=""
     style="color: blue;"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -54,7 +62,9 @@ exports[`USE SHEETER ## NATIVE ## 07: with classNameX override 1`] = `
   <div
     data-trace=""
     style="color: yellow;"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -63,7 +73,9 @@ exports[`USE SHEETER ## NATIVE ## 08: with styleX override 1`] = `
   <div
     data-trace=""
     style="color: maroon;"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -72,7 +84,9 @@ exports[`USE SHEETER ## NATIVE ## 09: theme, with sheet 1`] = `
   <div
     data-trace=""
     style="color: gray;"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -81,7 +95,9 @@ exports[`USE SHEETER ## NATIVE ## 10: theme, with sheet override 1`] = `
   <div
     data-trace=""
     style="color: gray;"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -90,7 +106,9 @@ exports[`USE SHEETER ## NATIVE ## 11: theme, with classes override 1`] = `
   <div
     data-trace=""
     style="color: gray;"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -99,7 +117,9 @@ exports[`USE SHEETER ## NATIVE ## 12: theme, with classNameX override 1`] = `
   <div
     data-trace=""
     style="color: gray;"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -108,7 +128,9 @@ exports[`USE SHEETER ## NATIVE ## 13: theme, with styleX override 1`] = `
   <div
     data-trace=""
     style="color: gray;"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -116,7 +138,9 @@ exports[`USE SHEETER ## NATIVE ## 14: default props 1`] = `
 <div>
   <div
     p1="defaultProp"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -124,7 +148,9 @@ exports[`USE SHEETER ## NATIVE ## 15: override props 1`] = `
 <div>
   <div
     p1="overrideProp"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -132,7 +158,9 @@ exports[`USE SHEETER ## NATIVE ## 16: props 1`] = `
 <div>
   <div
     p1="componentProp"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -140,7 +168,9 @@ exports[`USE SHEETER ## NATIVE ## 17: theme, default props 1`] = `
 <div>
   <div
     p1="themeProp"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -148,7 +178,9 @@ exports[`USE SHEETER ## NATIVE ## 18: theme, override props 1`] = `
 <div>
   <div
     p1="themeProp"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -156,7 +188,9 @@ exports[`USE SHEETER ## NATIVE ## 19: theme, props 1`] = `
 <div>
   <div
     p1="themeProp"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -178,7 +212,9 @@ exports[`USE SHEETER ## WEB ## 02: sheet missing 1`] = `
 
 exports[`USE SHEETER ## WEB ## 03: just div 1`] = `
 <div>
-  <div />
+  <div>
+    1
+  </div>
 </div>
 `;
 
@@ -188,7 +224,9 @@ exports[`USE SHEETER ## WEB ## 04: with sheet 1`] = `
     class="a"
     data-trace="
 .a { color:red }"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -198,7 +236,9 @@ exports[`USE SHEETER ## WEB ## 05: with sheet override 1`] = `
     class="b"
     data-trace="
 .b { color:green }"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -208,7 +248,9 @@ exports[`USE SHEETER ## WEB ## 06: with classes override 1`] = `
     class="c"
     data-trace="
 .c { color:blue }"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -218,7 +260,9 @@ exports[`USE SHEETER ## WEB ## 07: with classNameX override 1`] = `
     class="d"
     data-trace="
 .d { color:yellow }"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -229,7 +273,9 @@ exports[`USE SHEETER ## WEB ## 08: with styleX override 1`] = `
     data-trace="
 .d { color:yellow }"
     style="color: maroon;"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -239,7 +285,9 @@ exports[`USE SHEETER ## WEB ## 09: theme, with sheet 1`] = `
     class="a"
     data-trace="
 .a { color:gray }"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -249,7 +297,9 @@ exports[`USE SHEETER ## WEB ## 10: theme, with sheet override 1`] = `
     class="b"
     data-trace="
 .b { color:gray }"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -259,7 +309,9 @@ exports[`USE SHEETER ## WEB ## 11: theme, with classes override 1`] = `
     class="c"
     data-trace="
 .c { color:gray }"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -269,7 +321,9 @@ exports[`USE SHEETER ## WEB ## 12: theme, with classNameX override 1`] = `
     class="d"
     data-trace="
 .d { color:gray }"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -280,7 +334,9 @@ exports[`USE SHEETER ## WEB ## 13: theme, with styleX override 1`] = `
     data-trace="
 .d { color:yellow }"
     style="color: gray;"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -288,7 +344,9 @@ exports[`USE SHEETER ## WEB ## 14: default props 1`] = `
 <div>
   <div
     p1="defaultProp"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -296,7 +354,9 @@ exports[`USE SHEETER ## WEB ## 15: override props 1`] = `
 <div>
   <div
     p1="overrideProp"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -304,7 +364,9 @@ exports[`USE SHEETER ## WEB ## 16: props 1`] = `
 <div>
   <div
     p1="componentProp"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -312,7 +374,9 @@ exports[`USE SHEETER ## WEB ## 17: theme, default props 1`] = `
 <div>
   <div
     p1="themeProp"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -320,7 +384,9 @@ exports[`USE SHEETER ## WEB ## 18: theme, override props 1`] = `
 <div>
   <div
     p1="themeProp"
-  />
+  >
+    1
+  </div>
 </div>
 `;
 
@@ -328,6 +394,8 @@ exports[`USE SHEETER ## WEB ## 19: theme, props 1`] = `
 <div>
   <div
     p1="themeProp"
-  />
+  >
+    1
+  </div>
 </div>
 `;
