@@ -9,7 +9,7 @@ export type ThemeContext<T extends any> = [T, (newTheme: T) => void]
 
 export const useTheme = <T extends any>() => {
   const ctx = React.useContext<ThemeContext<T>>(themeContext)
-  return ctx && [platform._withStyles.defaultTheme, setThemeError] as ThemeContext<T>
+  return ctx || [platform._withStyles.defaultTheme, setThemeError] as ThemeContext<T>
 }
 const setThemeError = theme => { throw 'Cannot set default theme' }
 
@@ -36,7 +36,7 @@ export const sheetFromThemeCache = (
   value = atomizeSheet(sheetOrCreator, theme, path + '.sheet')
   if (defaultClasses) {
     const _defaultClasses = atomizeSheet(defaultClasses, theme, path + '.option.classes')
-    mergeSheets([value, _defaultClasses])
+    value = mergeSheets([value, _defaultClasses])
   }
 
   cache[componentId] = value

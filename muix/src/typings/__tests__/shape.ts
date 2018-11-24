@@ -7,9 +7,9 @@ export interface Props {
     p3?: string
     p4?: string
 }
-export interface InnerState {
-    drawerOpened?: boolean
-}
+// export interface InnerState {
+//     drawerOpened?: boolean
+// }
 
 
 export interface Shape extends TSheeter.ShapeAncestor {
@@ -23,12 +23,12 @@ export interface Shape extends TSheeter.ShapeAncestor {
     style: 'View'
 
     theme: typeof theme
-    cases: TSheeter.ShapeMarks<'isDisabled' | 'isClosed' | 'isOpened'>
-    widths: TSheeter.ShapeMarks<'tabletWidth' | 'mobileWidth' | 'desktopWidth'>
-    transitionGroups: TSheeter.ShapeMarks<'leftDrawer'>
+    //cases: TSheeter.ShapeMarks<'isDisabled' | 'isClosed' | 'isOpened'>
+    //widths: TSheeter.ShapeMarks<'tabletWidth' | 'mobileWidth' | 'desktopWidth'>
+    //transitionGroups: TSheeter.ShapeMarks<'leftDrawer'>
 
     props: Props
-    innerState: InnerState
+    //innerState: InnerState
 }
 
 export const theme = {

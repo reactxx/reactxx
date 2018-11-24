@@ -1,0 +1,301 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`USE SHEETER ## NATIVE ## 03: just div 1`] = `
+<div>
+  <div />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 04: with sheet 1`] = `
+<div>
+  <div
+    data-trace=""
+    style="color: red;"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 05: with sheet override 1`] = `
+<div>
+  <div
+    data-trace=""
+    style="color: green;"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 06: with classes override 1`] = `
+<div>
+  <div
+    data-trace=""
+    style="color: blue;"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 07: with classNameX override 1`] = `
+<div>
+  <div
+    data-trace=""
+    style="color: yellow;"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 08: with styleX override 1`] = `
+<div>
+  <div
+    data-trace=""
+    style="color: maroon;"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 09: theme, with sheet 1`] = `
+<div>
+  <div
+    data-trace=""
+    style="color: gray;"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 10: theme, with sheet override 1`] = `
+<div>
+  <div
+    data-trace=""
+    style="color: gray;"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 11: theme, with classes override 1`] = `
+<div>
+  <div
+    data-trace=""
+    style="color: gray;"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 12: theme, with classNameX override 1`] = `
+<div>
+  <div
+    data-trace=""
+    style="color: gray;"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 13: theme, with styleX override 1`] = `
+<div>
+  <div
+    data-trace=""
+    style="color: gray;"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 14: default props 1`] = `
+<div>
+  <div
+    p1="defaultProp"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 15: override props 1`] = `
+<div>
+  <div
+    p1="overrideProp"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 16: props 1`] = `
+<div>
+  <div
+    p1="componentProp"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 17: theme, default props 1`] = `
+<div>
+  <div
+    p1="themeProp"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 18: theme, override props 1`] = `
+<div>
+  <div
+    p1="themeProp"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 19: theme, props 1`] = `
+<div>
+  <div
+    p1="themeProp"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 03: just div 1`] = `
+<div>
+  <div />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 04: with sheet 1`] = `
+<div>
+  <div
+    class="a"
+    data-trace="
+.a { color:red }"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 05: with sheet override 1`] = `
+<div>
+  <div
+    class="b"
+    data-trace="
+.b { color:green }"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 06: with classes override 1`] = `
+<div>
+  <div
+    class="c"
+    data-trace="
+.c { color:blue }"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 07: with classNameX override 1`] = `
+<div>
+  <div
+    class="d"
+    data-trace="
+.d { color:yellow }"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 08: with styleX override 1`] = `
+<div>
+  <div
+    class="d"
+    data-trace="
+.d { color:yellow }"
+    style="color: maroon;"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 09: theme, with sheet 1`] = `
+<div>
+  <div
+    class="a"
+    data-trace="
+.a { color:gray }"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 10: theme, with sheet override 1`] = `
+<div>
+  <div
+    class="b"
+    data-trace="
+.b { color:gray }"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 11: theme, with classes override 1`] = `
+<div>
+  <div
+    class="c"
+    data-trace="
+.c { color:gray }"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 12: theme, with classNameX override 1`] = `
+<div>
+  <div
+    class="d"
+    data-trace="
+.d { color:gray }"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 13: theme, with styleX override 1`] = `
+<div>
+  <div
+    class="d"
+    data-trace="
+.d { color:yellow }"
+    style="color: gray;"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 14: default props 1`] = `
+<div>
+  <div
+    p1="defaultProp"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 15: override props 1`] = `
+<div>
+  <div
+    p1="overrideProp"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 16: props 1`] = `
+<div>
+  <div
+    p1="componentProp"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 17: theme, default props 1`] = `
+<div>
+  <div
+    p1="themeProp"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 18: theme, override props 1`] = `
+<div>
+  <div
+    p1="themeProp"
+  />
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 19: theme, props 1`] = `
+<div>
+  <div
+    p1="themeProp"
+  />
+</div>
+`;

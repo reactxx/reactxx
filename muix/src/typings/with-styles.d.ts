@@ -15,12 +15,13 @@ declare namespace TWithStyles {
   // component type options
   export interface ComponentConfig<R extends TSheeter.Shape = TSheeter.Shape> extends TVariants.ComponentOptions, ComponentConfigLow {
     defaultProps?: TComponents.Props<R> // classes, classNameX and styleX ignored
-    sheetOrCreator?: TSheeter.SheetOrCreator<R>
+    defaultSheet?: TSheeter.SheetOrCreator<R>
   }
 
   export interface ComponentConfigOverride<R extends TSheeter.Shape = TSheeter.Shape> extends ComponentConfigLow {
-    props?: TComponents.Props<R> // classes, classNameX and styleX ignored
-    classes?: TSheeter.SheetOrCreator<R> 
+    overrideProps?: TComponents.Props<R> // classes, classNameX and styleX ignored
+    overrideSheet?: TSheeter.SheetOrCreator<R> 
+    myConfigId?: number // ComponentConfig.id
   }
 
 }

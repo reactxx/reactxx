@@ -69,7 +69,7 @@ export const deleteSystemProps = props => {
 *******************************************/
 
 const propsToDelete: string[] = [ //TComponents.CommonPropertiesCodeKeys[] = [
-    'sheetQuery', 'classes', 'toClassNames', 'styleX', 'classNameX', 'theme'
+    'sheetQuery', 'classes', 'toClassNames', 'styleX', 'classNameX', 'theme', '$widths'
 ]
 
 // const signAtomicArray = (res: TAtomize.AtomicArray, state: TWithStyles.PipelineState) => {

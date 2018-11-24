@@ -11,7 +11,7 @@ export const useProps = <R extends TSheeter.Shape = TSheeter.Shape>(theme, optio
     const classes = React.useMemo(() => {
         const classes = atomizeSheet(_classes, theme, 'classes')
         return mergeSheets([sheet, classes])
-    }, [options, theme, _classes]) as TAtomize.Sheet<R>
+    }, [theme, _classes]) as TAtomize.Sheet<R>
 
     // classNameX
     const classNameX = React.useMemo(() => atomizeRuleset(_classNameX, theme, 'classes'), [_classNameX, theme])

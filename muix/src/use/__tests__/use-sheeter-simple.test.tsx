@@ -7,14 +7,7 @@ import {
 
 import { initPlatform, dump, mount } from "./init-platform"
 
-const fnc = () => {
-  let c = this
-  c = null
-}
-
-fnc()
-
-describe("UES SHEETER", () => {
+describe("USE SHEETER", () => {
 
     const doTest = (isWeb: boolean) => {
       beforeEach(() => initPlatform(isWeb))

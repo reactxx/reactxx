@@ -7,7 +7,7 @@ import {
   $width, setActWidth, useWidths, $WidthsQuery
 } from "reactxx-sheeter"
 
-import { initPlatform, dump, mount } from "../../../__tests__/init-platform"
+import { initPlatform, dump, mount } from "./init-platform"
 
 describe("SHEETER $WIDTHS", () => {
 

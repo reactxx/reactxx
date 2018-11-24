@@ -4,30 +4,36 @@ import warning from 'warning'
 import { TWithStyles } from 'reactxx-typings';
 import { sheetFromThemeCache } from './use-theme';
 
-export const useDefaults = (theme, options: TWithStyles.ComponentConfig) =>
+export const useDefaults = (
+    theme, options: TWithStyles.ComponentConfig
+) =>
     React.useMemo(() => getDefaults(theme, options), [theme, options])
 
-const getDefaults = (theme, options: TWithStyles.ComponentConfig) => {
-    const { defaultProps, sheetOrCreator, id, displayName } = options
+const getDefaults = (theme, config: TWithStyles.ComponentConfig & TWithStyles.ComponentConfigOverride) => {
 
-    if (defaultProps) {
-        const { classNameX, styleX, themedProps, classes, ...defaultPropsRest } = defaultProps
+    const { defaultProps, defaultSheet, overrideProps, overrideSheet, id, displayName } = config
 
-        warning(!classNameX && !styleX, 'classNameX and styleX are ignored in defautProps')
+    warning(!!defaultSheet, 'Missing config.defaultsheet')
 
-        const sheet = sheetFromThemeCache(id, sheetOrCreator, theme, classes, displayName)
+    const sheet = sheetFromThemeCache(id, defaultSheet, theme, overrideSheet, displayName)
 
-        return {
-            sheet,
-            propsDefault: defaultPropsRest,
-            themedPropsDefault: themedProps
+    if (window.__TRACE__) {
+        if (defaultProps) {
+            const { classNameX, styleX, classes } = defaultProps
+            warning(!classes && !classNameX && !styleX, 'classes, classNameX and styleX are ignored in defautProps')
         }
-    } else {
-        return {
-            sheet: sheetFromThemeCache(id, sheetOrCreator, theme, null, displayName),
-            propsDefault: null,
-            themedPropsDefault: null
+        if (overrideProps) {
+            const { classNameX, styleX, classes } = overrideProps
+            warning(!classes && !classNameX && !styleX, 'classes, classNameX and styleX are ignored in overrideProps')
         }
+    }
+
+    return {
+        sheet,
+        propsDefault: defaultProps,
+        themedPropsDefault: defaultProps && defaultProps.themedProps,
+        propsOverride: overrideProps,
+        themedPropsOverride: overrideProps && overrideProps.themedProps,
     }
 
 }
