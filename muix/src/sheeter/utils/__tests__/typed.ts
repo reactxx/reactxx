@@ -34,6 +34,7 @@ const rules = T_Rules<Shape, 'View'>($ => [
 ])
 
 const sheet = T_Sheet<Shape>(({ theme, T_Rules }) => ({
+
   root: T_Rules<'root'>($ => [
     { margin: 0 },
     $.if(p => p.disabled,
@@ -46,10 +47,10 @@ const sheet = T_Sheet<Shape>(({ theme, T_Rules }) => ({
           color: theme.primary
         },
         $.wweb(),
-        $.whot(p => [{ ':hover': $.wif(null) }]),
         $.whot(p => []),
         $.whot(p => ({ ':hover': {}, x: '' })),
         $.wif(null),
+        { ':hover': $.wif(null, { ':active': $.wwidth(640, { cursor: 'pointer' }) }) }
       )
     ),
     atomizeRuleset([]),
@@ -70,6 +71,7 @@ const sheet = T_Sheet<Shape>(({ theme, T_Rules }) => ({
 
     // $.if(p => p.disabledx), //ERROR
   ]),
+
   webOnly: T_Rules<'webOnly'>($ => [
     $.wif(null),
     //$.nif(null), //ERROR
@@ -77,21 +79,21 @@ const sheet = T_Sheet<Shape>(({ theme, T_Rules }) => ({
   ]),
   nativeOnly: T_Rules<'nativeOnly'>($ => [
     //$.wif(null), //ERROR
-    $.nif(null, {margin: 0}),
+    $.nif(null, { margin: 0 }),
     //$.if(null), //ERROR
   ])
 
 }))
 
 
-const sheet2 = theme => ({
-  root: [
-    { margin: 0 },
-    $if(p => p.disabled, {
-      opacity: 0.5,
-      color: 'red' // NO ERROR
-    }),
-    $if(p => p.disabledx) // NO ERROR
-  ],
-})
+// const sheet2 = theme => ({
+//   root: [
+//     { margin: 0 },
+//     $if(p => p.disabled, {
+//       opacity: 0.5,
+//       color: 'red' // NO ERROR
+//     }),
+//     $if(p => p.disabledx) // NO ERROR
+//   ],
+// })
 
