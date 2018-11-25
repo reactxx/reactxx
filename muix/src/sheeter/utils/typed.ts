@@ -1,4 +1,6 @@
 import { TSheeter, TComponents, TCommonStyles, TAtomize } from 'reactxx-typings'
+import ReactN from 'react-native';
+import CSS from 'csstype';
 
 import $web from '../conditions/$web'
 import $native from '../conditions/$native'
@@ -49,16 +51,15 @@ const untyped = {
 
 export namespace TTyped {
 
-    type TWebPar = TCommonStyles.RulesetType<'$Web'> | '$Web' | TAtomize.Ruleset
+    type TWebPar = RulesetType<'$Web'> | '$Web' | TAtomize.Ruleset
     type TWebPars = TWebPar[]
 
-    export type TCommonPar<T extends TCommonStyles.RulesetIds> = CommonOnly<T> extends never ? '?' :
-        TCommonStyles.RulesetType<CommonOnly<T>> | CommonOnly<T> | TAtomize.Ruleset
-    export type TCommonPars<T extends TCommonStyles.RulesetIds> = TCommonPar<T>[]
+    type TCommonPar<T extends TCommonStyles.RulesetIds> = CommonOnly<T> extends never ? '?' :
+        RulesetType<CommonOnly<T>> | CommonOnly<T> | TAtomize.Ruleset
+    type TCommonPars<T extends TCommonStyles.RulesetIds> = TCommonPar<T>[]
 
-    type TNativePar<T extends TCommonStyles.RulesetIds> = ToNative<T> extends never ? '?' : TCommonStyles.RulesetTypeNative<ToNative<T>> | ToNative<T> | TAtomize.Ruleset
+    type TNativePar<T extends TCommonStyles.RulesetIds> = ToNative<T> extends never ? '?' : RulesetType<ToNative<T>> | ToNative<T> | TAtomize.Ruleset
     type TNativePars<T extends TCommonStyles.RulesetIds> = TNativePar<T>[]
-
 
     type TCondPar<R extends TSheeter.Shape> = TComponents.Props<R>
     type TCond<R extends TSheeter.Shape> = (p: TCondPar<R>) => boolean
@@ -71,11 +72,25 @@ export namespace TTyped {
         T extends '$NativeText' ? '$NativeText' :
         T extends '$NativeImage' ? '$NativeImage' :
         never
-    export type CommonOnly<T extends TCommonStyles.RulesetIds> =
+
+    type CommonOnly<T extends TCommonStyles.RulesetIds> =
         T extends 'View' ? 'View' :
         T extends 'Text' ? 'Text' :
         T extends 'Image' ? 'Image' :
         never
+
+    type RulesetType<T extends TCommonStyles.RulesetIds> =
+        T extends 'View' ? TCommonStyles.ViewStyle :
+        T extends 'Text' ? TCommonStyles.TextStyle :
+        T extends 'Image' ? TCommonStyles.ImageStyle :
+        T extends '$Web' ? RulesetWeb :
+        T extends '$NativeView' ? ReactN.ViewStyle :
+        T extends '$NativeText' ? ReactN.TextStyle :
+        T extends '$NativeImage' ? ReactN.ImageStyle :
+        never
+
+    type RulesetWeb = React.CSSProperties & { [P in CSS.Pseudos]?: TWebPars | TWebPar }
+
     type ToNativeResult<T extends TCommonStyles.RulesetIds> = ToNative<T> extends never ? '?' : ToNative<T>
     type ToCommonResult<T extends TCommonStyles.RulesetIds> = CommonOnly<T> extends never ? '?' : CommonOnly<T>
 
@@ -103,13 +118,13 @@ export namespace TTyped {
         nwidth: (c: number | [number, number], ...r: TNativePars<T>) => ToNativeResult<T>,
     }
 
-    export type TRulesetProcRes<T extends TCommonStyles.RulesetIds> = TCommonStyles.RulesetType<T> | T | TAtomize.Ruleset
-    export type TRulesetProcRess<T extends TCommonStyles.RulesetIds> = TRulesetProcRes<T>[]
+    type TRulesetProcRes<T extends TCommonStyles.RulesetIds> = RulesetType<T> | T | TAtomize.Ruleset
+    type TRulesetProcRess<T extends TCommonStyles.RulesetIds> = TRulesetProcRes<T>[]
 
     export type TRulesetProcArg<R extends TSheeter.Shape, T extends TCommonStyles.RulesetIds> =
         (p: TRulesetPar<R, T>, res) => TRulesetProcRess<T> | TRulesetProcRes<T>
 
-    export type TRulesProc<R extends TSheeter.Shape> =
+    type TRulesProc<R extends TSheeter.Shape> =
         <T extends keyof TSheeter.getRulesets<R>>(arg: TRulesetProcArg<R, TSheeter.getRuleset<R, T>>) => any
 
     interface TSheetPar<R extends TSheeter.Shape> {

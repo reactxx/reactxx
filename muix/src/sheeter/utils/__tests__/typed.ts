@@ -46,7 +46,7 @@ const sheet = T_Sheet<Shape>(({ theme, T_Rules }) => ({
           color: theme.primary
         },
         $.wweb(),
-        $.whot(p => [{ ':hover': {} }]),
+        $.whot(p => [{ ':hover': $.wif(null) }]),
         $.whot(p => []),
         $.whot(p => ({ ':hover': {}, x: '' })),
         $.wif(null),
