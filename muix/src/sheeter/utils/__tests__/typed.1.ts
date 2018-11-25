@@ -4,7 +4,13 @@ import CSS from 'csstype';
 
 type RulesetWeb = React.CSSProperties & { [P in CSS.Pseudos]?: any }
 
-const T_Rules = <R extends RulesetIds>(...pars: TAllowed<R>[]) => pars[0]
+const $rules = <R extends RulesetIds>(...pars: TAllowedInput<R>[]) => null as TAllowed<R>
+
+const $if = <R extends RulesetIds>(...r: TAllowedInput<R>[]) => null as TAllowed<R>
+const $web = <R extends RulesetIds>(...r: TAllowedInput<$W>[]) => null as R
+const $native = <R extends CommonIds>(...r: TAllowedInput<TNative<R>>[]) => null as R
+
+const toClassNames = <R extends RulesetIds>(...rules: R[]) => rules[0]
 
 type $W = '$W'; type $T = '$T'; type $V = '$V'; type $I = '$I'; type V = 'V'; type T = 'T'; type I = 'I';
 
@@ -36,12 +42,6 @@ type TNative<R extends T | V | I> =
   R extends I ? $I :
   never
 
-const $if = <T extends RulesetIds>(...r: TAllowedInput<T>[]) => null as TAllowed<T>
-const $web = <T extends RulesetIds>(...r: TAllowedInput<$W>[]) => null as T
-const $native = <R extends CommonIds>(...r: TAllowedInput<TNative<R>>[]) => null as R
-
-const toClassNames = <T extends RulesetIds>(...rules: T[]) => rules[0]
-
 // classNameX definition for Web, Native and Components
 
 type TPlatformAllowed<R extends RulesetIds> =
@@ -55,34 +55,45 @@ type TComponentAllowed<R extends T | V | I> =
 
 // COMPONENT example
 
+
+
 const sheet3 = {
-  root: T_Rules<V>(
+  root: $rules<V>(
+    {
+      margin: 0
+    },
     $web<V>(
       $if<$W>(),
+      {
+        cursor: ''
+      }
     ),
     $native<V>(),
   ),
-  label: T_Rules<T>(
+  label: $rules<T>(
     $if<T>({ color: '' }),
     $if<V>(),
     $web<T>()
   ),
-  image: T_Rules<I>(
+  image: $rules<I>(
     $if<I>(),
     $web<I>()
   ),
-  webOnly: T_Rules<$W>(
+  webOnly: $rules<$W>(
     $if<$W>(),
   ),
-  nativeOnly: T_Rules<$V>(
-    $if<$V>({transform:[]}),
+  nativeOnly: $rules<$V>(
+    {
+      transform: []
+    },
+    $if<$V>({ transform: [] }),
     $if<V>(),
   ),
-  nativeOnlyImage: T_Rules<$I>(
+  nativeOnlyImage: $rules<$I>(
     $if<$I>(),
     $if<I>(),
   ),
-  nativeOnlyText: T_Rules<$T>(
+  nativeOnlyText: $rules<$T>(
     $if<$V>({}),
     $if<V>(),
     $if<$T>({ color: '' }),
