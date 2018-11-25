@@ -1,51 +1,60 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TSheeter, TComponents } from 'reactxx-typings'
+import { TSheeter, TComponents, TCommonStyles } from 'reactxx-typings'
 import { resetPlatform, platform } from 'reactxx-sheeter'
 import { TPrimitives } from './d-index'
 
-export const initGlobals = (force: boolean, initPlatform: () => void) => {
-  if (force) resetPlatform()
-  if (platform.Text) return
-  initPlatform()
-}
-
-
 export const hasPlatformEvents = (propsCode: TComponents.PropsCode) => !!(
-  window.isWeb ?
-      propsCode.onClick || propsCode.onMouseUp || propsCode.onMouseDown :
-      propsCode.onPress || propsCode.onPressIn || propsCode.onPressOut || propsCode.onLongPress
+  true
+  // window.isWeb ?
+  //     propsCode.onClick || propsCode.onMouseUp || propsCode.onMouseDown :
+  //     propsCode.onPress || propsCode.onPressIn || propsCode.onPressOut || propsCode.onLongPress
 )
 
+type TPars<R extends TSheeter.Shape> = TCommonStyles.RulesetType<'$Web'>[]
 
-export const textSheet: TSheeter.Sheet<TPrimitives.TextShape> = ({
-  root: {
-    $web: {
-      whiteSpace: 'pre-wrap',
-      wordWrap: 'break-word',
-      [`& .${TPrimitives.Consts.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. Consts.textClassName is className for Text component div.
-        display: 'inline',
-      },
-    },
-    $switch: {
-      pressable: {
-        $web: {
-          cursor: 'pointer'
+type TRulesProc<R extends TSheeter.Shape> = <T extends keyof TSheeter.getRulesets<R>>(arg: (p: {
+  $web: (...r: TPars<R>) => any,
+  $native, 
+  $wif, 
+  $nif, 
+  $if: (c, ...r: TCommonStyles.RulesetType<TSheeter.getRulesets<R>[T]>[]) => any, 
+}) => any) => any
+const TSheet = <R extends TSheeter.Shape>(par: (TRules: TRulesProc<R>, theme: TSheeter.getTheme<R>, props) => any) => null
+
+//const { $if, $web } = Typed<TPrimitives.TextShape>()
+
+//type T = TPrimitives.TextShape
+export const textSheet = TSheet<TPrimitives.TextShape>((TRules, theme, props) => ({
+//export const textSheet = TSheet<TPrimitives.TextShape>((TRules, theme) => ({
+  root: TRules<'root'>(({ $web, $native, $wif, $nif, $if}) => [
+    $web(
+      {
+        whiteSpace: 'pre-wrap',
+        wordWrap: 'break-word',
+        [`& .${TPrimitives.Consts.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. Consts.textClassName is className for Text component div.
+          display: 'inline',
         },
       },
-      singleLine: {
+      $wif(p => p.pressable), {
+        cursor: 'pointer'
+      }
+    ),
+
+    $if(p => p.singleLine,
+      {
         flexShrink: 1,
-        $web: {
-          maxWidth: '100%',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap'
-        },
       },
-    },
-  },
-})
+      $web({
+        maxWidth: '100%',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap'
+      }),
+    )
+  ]),
+}))
 
 // mimic React Native view behavior
 const webViewRuleset: TSheeter.RulesetWebOrAtomized = {

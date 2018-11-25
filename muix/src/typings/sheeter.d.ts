@@ -3,6 +3,7 @@ import ReactN from 'react-native'
 import CSS from 'csstype';
 
 import { TCommonStyles, TAtomize, TVariants } from './index'
+import { TComponents } from './components';
 
 declare namespace TSheeter {
 
@@ -110,8 +111,11 @@ declare namespace TSheeter {
     theme: EmptyInterface
   }
 
+  type T = keyof ShapeAncestor['rulesets']
+  type TT = ShapeAncestor['rulesets']['xxx']
+
   export type getRulesets<R extends Shape> = R['rulesets']
-  export type getRuleset<R extends Shape, T extends string> = R['rulesets'][T] extends never ? 'Text' : R['rulesets'][T]
+  export type getRuleset<R extends Shape, T extends keyof TSheeter.getRulesets<R>> = R['rulesets'][T] extends never ? 'Text' : R['rulesets'][T]
   // export type getCommon<R extends Shape> = R['common']
   // export type getNative<R extends Shape> = R['native']
   // export type getWeb<R extends Shape> = keyof R['web']

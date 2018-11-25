@@ -7,7 +7,7 @@ export const enum CompNames {
   View = 'ReactXXView',
   Icon = 'ReactXXIcon',
   ScrollView = 'ReactXXScrollView',
-  
+
   AnimatedView = 'ReactXXAnimatedView',
   AnimatedIcon = 'ReactXXAnimatedIcon',
   AnimatedText = 'ReactXXAnimatedText',
@@ -16,7 +16,6 @@ export const enum CompNames {
 
 export namespace TPrimitives {
 
- 
   export const enum Consts {
     textClassName = 'reactxx-text'
   }
@@ -25,16 +24,22 @@ export namespace TPrimitives {
     PRIMITIVE'S SHAPES
   *******************************************/
 
- export interface ViewShape extends TSheeter.ShapeAncestor {
-  common: TSheeter.ShapeViews<'root'>
-  cases: TSheeter.ShapeMarks<'pressable'>
-  style: 'View'
-  propsWeb: React.HTMLAttributes<HTMLDivElement>
-  propsNative: ReactN.ViewProperties
-  events: TSheeter.ShapeMarks<TComponents.TEventsAll>
-}
+  export interface ViewShape extends TSheeter.ShapeAncestor {
 
-export interface TextShape extends TSheeter.ShapeAncestor {
+    common: TSheeter.ShapeViews<'root'>
+    cases: TSheeter.ShapeMarks<'pressable'>
+    style: 'View'
+    propsWeb: React.HTMLAttributes<HTMLDivElement>
+    propsNative: ReactN.ViewProperties
+    events: TSheeter.ShapeMarks<TComponents.TEventsAll>
+  }
+
+  export interface TextShape extends TSheeter.ShapeAncestor {
+    rulesets: {
+      root: 'Text',
+    },
+
+
     common: TSheeter.ShapeTexts<'root'>
     cases: TSheeter.ShapeMarks<'pressable' | 'singleLine'>
     style: 'Text'

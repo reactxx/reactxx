@@ -2,11 +2,8 @@
 
 import { platform } from "reactxx-sheeter"
 
-import { TSheeter, TWithStyles, TComponents } from 'reactxx-typings'
-import { useSheeter } from "reactxx-use"
-
 import { initPlatform, render } from "./init-platform"
-import { compCreator, Theme, Shape } from "./lib"
+import { compCreator } from "./lib"
 
 describe("USE SHEETER", () => {
 

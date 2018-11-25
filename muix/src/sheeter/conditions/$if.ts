@@ -1,7 +1,7 @@
 import { TSheeter, TCommonStyles, TVariants } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../utils/atomize-low'
 
-const $if = <TPar extends {} = {}, T extends TCommonStyles.RulesetIds = 'Text'>(
+const $if = <TPar extends {} = any, T extends TCommonStyles.RulesetIds = 'Text'>(
     test: (outerPar: TPar) => boolean,
     ...rulesets: TSheeter.RulesetItem<T>[]
 ) => {
