@@ -2,10 +2,8 @@ import React from 'react'
 
 export const useUniqueId = (counterHolder?: { uniqueIdCounter?: number }) => {
     const uniqueId = React.useRef(0) // unique ID
-    if (uniqueId.current) return uniqueId.current
-
-    uniqueId.current = counterHolder ? ++counterHolder.uniqueIdCounter : ++uniqueIdCounter
-    return uniqueId.current
+    counterHolder && !counterHolder.uniqueIdCounter && (counterHolder.uniqueIdCounter = 0)
+    return uniqueId.current = counterHolder ? ++counterHolder.uniqueIdCounter : ++uniqueIdCounter
 }
 
 let uniqueIdCounter = 0

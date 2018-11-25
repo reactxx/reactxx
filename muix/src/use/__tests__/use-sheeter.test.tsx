@@ -5,7 +5,7 @@ import { platform } from "reactxx-sheeter"
 import { TSheeter, TWithStyles, TComponents } from 'reactxx-typings'
 import { useSheeter } from "reactxx-use"
 
-import { initPlatform, mount } from "./init-platform"
+import { initPlatform, render } from "./init-platform"
 import { compCreator, Theme, Shape } from "./lib"
 
 describe("USE SHEETER", () => {
@@ -21,28 +21,28 @@ describe("USE SHEETER", () => {
 
     it('01: config NULL', () => {
       const Comp = compCreator(null, null)
-      const wrapper = mount(<Comp />)
+      const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
 
     it('02: sheet missing', () => {
       const Comp = compCreator({}, null)
-      const wrapper = mount(<Comp />)
+      const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
 
     it('03: just div', () => {
       const Comp = compCreator({ defaultSheet: { root: {} } }, null)
-      const wrapper = mount(<Comp />)
+      const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
 
     it('04: with sheet', () => {
       const Comp = compCreator({ defaultSheet: { root: { color: 'red' } } }, null)
-      const wrapper = mount(<Comp />)
+      const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -52,7 +52,7 @@ describe("USE SHEETER", () => {
         { defaultSheet: { root: { color: 'red' } } },
         { overrideSheet: { root: { color: 'green' } } }
       )
-      const wrapper = mount(<Comp />)
+      const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -62,7 +62,7 @@ describe("USE SHEETER", () => {
         { defaultSheet: { root: { color: 'red' } } },
         { overrideSheet: { root: { color: 'green' } } }
       )
-      const wrapper = mount(<Comp classes={{ root: { color: 'blue' } }} />)
+      const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -72,7 +72,7 @@ describe("USE SHEETER", () => {
         { defaultSheet: { root: { color: 'red' } } },
         { overrideSheet: { root: { color: 'green' } } }
       )
-      const wrapper = mount(<Comp classes={{ root: { color: 'blue' } }} classNameX={{ color: 'yellow' } as any} />)
+      const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} classNameX={{ color: 'yellow' }} />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -82,14 +82,14 @@ describe("USE SHEETER", () => {
         { defaultSheet: { root: { color: 'red' } } },
         { overrideSheet: { root: { color: 'green' } } }
       )
-      const wrapper = mount(<Comp classes={{ root: { color: 'blue' } }} classNameX={{ color: 'yellow' } as any} styleX={{ color: 'maroon' } as any} />)
+      const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} classNameX={{ color: 'yellow' }} styleX={{ color: 'maroon' }} />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
 
     it('09: theme, with sheet', () => {
       const Comp = compCreator({ defaultSheet: theme => ({ root: { color: theme.primaryColor } }) }, null)
-      const wrapper = mount(<Comp />)
+      const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -99,7 +99,7 @@ describe("USE SHEETER", () => {
         { defaultSheet: { root: { color: 'red' } } },
         { overrideSheet: theme => ({ root: { color: theme.primaryColor } }) }
       )
-      const wrapper = mount(<Comp />)
+      const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -109,7 +109,7 @@ describe("USE SHEETER", () => {
         { defaultSheet: { root: { color: 'red' } } },
         { overrideSheet: { root: { color: 'green' } } }
       )
-      const wrapper = mount(<Comp classes={theme => ({ root: { color: theme.primaryColor } })} />)
+      const wrapper = render(<Comp classes={theme => ({ root: { color: theme.primaryColor } })} />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -119,7 +119,7 @@ describe("USE SHEETER", () => {
         { defaultSheet: { root: { color: 'red' } } },
         { overrideSheet: { root: { color: 'green' } } }
       )
-      const wrapper = mount(<Comp classes={{ root: { color: 'blue' } }} classNameX={theme => ({ color: theme.primaryColor }) as any} />)
+      const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} classNameX={theme => ({ color: theme.primaryColor })} />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -129,7 +129,7 @@ describe("USE SHEETER", () => {
         { defaultSheet: { root: { color: 'red' } } },
         { overrideSheet: { root: { color: 'green' } } }
       )
-      const wrapper = mount(<Comp classes={{ root: { color: 'blue' } }} classNameX={{ color: 'yellow' } as any} styleX={theme => ({ color: theme.primaryColor }) as any} />)
+      const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} classNameX={{ color: 'yellow' }} styleX={theme => ({ color: theme.primaryColor })} />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -143,7 +143,7 @@ describe("USE SHEETER", () => {
         },
         null
       )
-      const wrapper = mount(<Comp />)
+      const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -156,7 +156,7 @@ describe("USE SHEETER", () => {
         },
         { overrideProps: { p1: 'overrideProp' } }
       )
-      const wrapper = mount(<Comp />)
+      const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -169,7 +169,7 @@ describe("USE SHEETER", () => {
         },
         { overrideProps: { p1: 'overrideProp' } }
       )
-      const wrapper = mount(<Comp p1='componentProp' />)
+      const wrapper = render(<Comp p1='componentProp' />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -182,7 +182,7 @@ describe("USE SHEETER", () => {
         },
         null
       )
-      const wrapper = mount(<Comp />)
+      const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -195,7 +195,7 @@ describe("USE SHEETER", () => {
         },
         { overrideProps: { p1: 'overrideProp', themedProps: theme => ({ p1: theme.p1Prop }) } }
       )
-      const wrapper = mount(<Comp />)
+      const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -208,7 +208,7 @@ describe("USE SHEETER", () => {
         },
         { overrideProps: { p1: 'overrideProp' } }
       )
-      const wrapper = mount(<Comp p1='componentProp' themedProps={theme => ({ p1: theme.p1Prop })} />)
+      const wrapper = render(<Comp p1='componentProp' themedProps={theme => ({ p1: theme.p1Prop })} />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })

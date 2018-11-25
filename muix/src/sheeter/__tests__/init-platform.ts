@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { cleanup, render } from 'react-testing-library'
+import { cleanup } from 'react-testing-library'
 import { TAtomize } from 'reactxx-typings'
 
-export const mount = comp => render(comp)
+export { render } from 'react-testing-library'
 
 import { initSheeter$Web, resetPlatform, platform } from 'reactxx-sheeter'
 import { initSheeter$Native } from 'reactxx-sheeter-native'

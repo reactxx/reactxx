@@ -6,13 +6,13 @@ import { fireEvent } from 'react-testing-library'
 
 import { ThemeProvider, useTheme } from "reactxx-use"
 
-import { initPlatform, mount } from "./init-platform"
-import { compCreator, Theme, Shape } from "./lib"
+import { initPlatform, render } from "./init-platform"
+import { compCreator, Theme } from "./lib"
 
 const secondThemeCreator = () => ({
   primaryColor: 'red',
   p1Prop: 'secondThemeProp'
-})
+} as Theme)
 
 describe("THEME PROVIDER", () => {
 
@@ -43,14 +43,13 @@ describe("THEME PROVIDER", () => {
 
     it('01: ', () => {
       const Comp = compCreator({ defaultSheet: { root: {} } }, null)
-      const {getByTestId, container, unmount} = mount(<App>
-        <Comp themedProps={theme => ({ p1: theme.p1Prop })} classNameX={theme => ({ color: theme.primaryColor }) as any} />
+      const {getByTestId, container, unmount} = render(<App>
+        <Comp themedProps={theme => ({ p1: theme.p1Prop })} classNameX={theme => ({ color: theme.primaryColor })} />
       </App>)
       const toggle = getByTestId('toggle')
       
       expect(container).toMatchSnapshot()
       fireEvent.click(toggle)
-      //toggle.click()
       expect(container).toMatchSnapshot()
       fireEvent.click(toggle)
       expect(container).toMatchSnapshot()

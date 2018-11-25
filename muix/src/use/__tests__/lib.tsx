@@ -13,6 +13,7 @@ export interface Shape extends TSheeter.ShapeAncestor {
     props: {
       p1: string
     },
+    style: 'Text'
     theme: Theme
   }
 

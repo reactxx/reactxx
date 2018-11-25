@@ -7,7 +7,7 @@ import {
   $width, setActWidth, useWidths, $WidthsQuery
 } from "reactxx-sheeter"
 
-import { initPlatform, dump, mount } from "./init-platform"
+import { initPlatform, dump, render } from "./init-platform"
 
 describe("SHEETER $WIDTHS", () => {
 
@@ -96,7 +96,7 @@ describe("SHEETER $WIDTHS", () => {
 
       const test = (App: React.ComponentType) => {
         setActWidth(300)
-        const wrapper = mount(<App />)
+        const wrapper = render(<App />)
         expect(wrapper.container).toMatchSnapshot()
         setActWidth(640)
         expect(wrapper.container).toMatchSnapshot()
