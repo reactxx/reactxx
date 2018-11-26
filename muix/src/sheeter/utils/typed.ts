@@ -1,4 +1,4 @@
-import { Utils } from 'reactxx-typings'
+import { TTyped } from 'reactxx-typings'
 
 import $web from '../conditions/$web'
 import $native from '../conditions/$native'
@@ -13,7 +13,7 @@ import {mergeSheets, mergeRulesets} from './merge'
 // export const atomizeRulesetTyped = atomizeRuleset
 // export const atomizeSheetTyped = atomizeSheet as any as AtomizeSheet
 
-export const getTypedUtils = <P extends {}, Theme extends {} = {}>() => untyped as Utils<P, Theme>
+export const getTypedUtils = <P extends {}, Theme extends {} = {}>() => untyped as TTyped.Utils<P, Theme>
 
 const untyped = {
     $web,
@@ -28,4 +28,4 @@ const untyped = {
     $mergeSheets: mergeSheets as any,
     $atomizeRuleset: atomizeRuleset as any,
     $mergeRulesets: mergeRulesets as any,
-} as Utils<never, never>
+} as TTyped.Utils<never, never>

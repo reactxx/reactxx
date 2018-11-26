@@ -1,9 +1,9 @@
-import { $W, $T, $V, $I, V, T, I, RulesetIds, TAllowed, TAllowedInput, TPlatformAllowed, TComponentAllowed } from 'reactxx-typings'
+import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 import { getTypedUtils } from 'reactxx-sheeter'
 
 const toClassNames = <R>(...rules: R[]) => null as R
 
-const atomizeRuleset = <R extends RulesetIds>(...r: TAllowedInput<R>[]) => null as TAllowed<R>
+const atomizeRuleset = <R extends TTyped.RulesetIds>(...r: TTyped.TAllowedInput<R>[]) => null as TTyped.TAllowed<R>
 
 const { $themed, $if, $web, $native, $rules } = getTypedUtils<{ enabled }, { primary }>()
 
@@ -72,14 +72,14 @@ const webOnly2 = toClassNames(sheet3.root, sheet3.webOnly)
 const label = toClassNames(sheet3.label, atomizeRuleset<V>({}))
 const image = toClassNames(sheet3.image)
 
-const Text: TPlatformAllowed<T> = root
-const View: TPlatformAllowed<V> = webOnly2
-const View3: TPlatformAllowed<V> = nativeOnly
-const Image: TPlatformAllowed<I> = image
+const Text: TTyped.TPlatformAllowed<T> = root
+const View: TTyped.TPlatformAllowed<V> = webOnly2
+const View3: TTyped.TPlatformAllowed<V> = nativeOnly
+const Image: TTyped.TPlatformAllowed<I> = image
 //const View2: TPlatformAllowed<V> = label // ERROR
-const div: TPlatformAllowed<$W> = root
+const div: TTyped.TPlatformAllowed<$W> = root
 //const span: TPlatformAllowed<$W> = nativeOnly // ERROR
-const i: TPlatformAllowed<$W> = webOnly
+const i: TTyped.TPlatformAllowed<$W> = webOnly
 
-const C: TComponentAllowed<T> = label
+const C: TTyped.TComponentAllowed<T> = label
 
