@@ -9,7 +9,7 @@ export const useProps = <R extends TSheeter.Shape = TSheeter.Shape>(theme, optio
 
     // merge sheet with classes
     const classes = React.useMemo(() => {
-        const classes = atomizeSheet(_classes, theme, 'classes')
+        const classes = atomizeSheet(_classes as TAtomize.SheetOrCreator, theme, 'classes')
         return mergeSheets([sheet, classes])
     }, [theme, _classes]) as TAtomize.Sheet<R>
 

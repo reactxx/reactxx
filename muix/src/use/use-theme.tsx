@@ -1,7 +1,7 @@
 import React from 'react';
 import warning from 'warning';
 import { atomizeSheet, platform, mergeSheets } from 'reactxx-sheeter';
-import { TAtomize, TSheeter, TUseSheeter } from 'reactxx-typings';
+import { TTyped, TAtomize, TSheeter, TUseSheeter } from 'reactxx-typings';
 
 const themeContext = React.createContext<TUseSheeter.ThemeContext<any>>(null)
 
@@ -29,8 +29,8 @@ ThemeProvider.$c$ = true
 type ThemeProviderProps<T> = { theme: T; children?: React.ReactNode }
 
 export const sheetFromThemeCache = (
-  componentId: number, sheetOrCreator: TSheeter.SheetOrCreator,
-  theme, defaultClasses: TSheeter.PartialSheetOrCreator,
+  componentId: number, sheetOrCreator: TAtomize.SheetOrCreator,
+  theme, defaultClasses: TAtomize.SheetOrCreator,
   path: string
 ) => {
   const cache = !theme ? platform._withStyles.$cache : (theme.$cache || (theme.$cache = {}))

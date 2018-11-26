@@ -59,19 +59,19 @@ declare namespace TSheeter {
       SHEET
   *******************************************/
 
-  export type Sheet<R extends Shape = Shape> = keyof getRulesets<R> extends never ? TSheeter.FakeInterface : {
-    [P in keyof getRulesets<R>]: RulesetOrAtomized<getRulesets<R>[P]>
-  }
-  //export type Sheet<R extends Shape = Shape> = SheetCommon2<R>
-  export type SheetCreator<R extends Shape = Shape> = (theme: getTheme<R>) => Sheet<R>
-  export type SheetOrCreator<R extends Shape = Shape> = SheetCreator<R> | Sheet<R>
+  // export type Sheet<R extends Shape = Shape> = keyof getRulesets<R> extends never ? TSheeter.FakeInterface : {
+  //   [P in keyof getRulesets<R>]: RulesetOrAtomized<getRulesets<R>[P]>
+  // }
+  // //export type Sheet<R extends Shape = Shape> = SheetCommon2<R>
+  // export type SheetCreator<R extends Shape = Shape> = (theme: getTheme<R>) => Sheet<R>
+  // export type SheetOrCreator<R extends Shape = Shape> = SheetCreator<R> | Sheet<R>
 
-  export type PartialSheet<R extends Shape = Shape> = {
-    [P in keyof getRulesets<R>]?: RulesetOrAtomized<getRulesets<R>[P]>
-  }
-  //export type PartialSheet<R extends Shape = Shape> = SheetCommonPartial2<R>
-  export type PartialSheetCreator<R extends Shape = Shape> = (theme: getTheme<R>) => PartialSheet<R>
-  export type PartialSheetOrCreator<R extends Shape = Shape> = PartialSheet<R> | PartialSheetCreator<R>
+  // export type PartialSheet<R extends Shape = Shape> = {
+  //   [P in keyof getRulesets<R>]?: RulesetOrAtomized<getRulesets<R>[P]>
+  // }
+  // //export type PartialSheet<R extends Shape = Shape> = SheetCommonPartial2<R>
+  // export type PartialSheetCreator<R extends Shape = Shape> = (theme: getTheme<R>) => PartialSheet<R>
+  // export type PartialSheetOrCreator<R extends Shape = Shape> = PartialSheet<R> | PartialSheetCreator<R>
 
   /******************************************
     SHAPE
@@ -127,6 +127,6 @@ declare namespace TSheeter {
   export interface EmptyInterface { }
   export interface FakeInterface { ['`']?: any }
 
-  export type SheetX<R extends Shape = Shape> = Sheet<R> | TAtomize.Sheet<R>
+  //export type SheetX<R extends Shape = Shape> = Sheet<R> | TAtomize.Sheet<R>
 
 } 

@@ -61,7 +61,7 @@ export interface TraceOptions {
 export const traceComponentEx = (
     isWeb: boolean,
     traceOptions: TraceOptions,
-    sheet: TSheeter.SheetOrCreator<Shape>,
+    sheet: TTyped.SheetOrCreator<Shape>,
     comp: TComponents.SFCCode<Shape>,
     node: (Comp: TComponents.ComponentClass<Shape>) => React.ReactElement<{}>,
     componentOptions?: TWithStyles.ComponentOptions<Shape>,

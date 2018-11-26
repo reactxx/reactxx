@@ -1,4 +1,4 @@
-import { TVariants, TSheeter } from 'reactxx-typings'
+import { TAtomize} from 'reactxx-typings'
 
 declare module 'reactxx-typings' {
 
@@ -7,7 +7,7 @@ declare module 'reactxx-typings' {
         interface Platform {
             _withStyles?: {
                 defaultTheme?
-                $cache: { [componentId: number]: TSheeter.Sheet }
+                $cache: { [componentId: number]: TAtomize.Sheet }
                 uniqueIdCounter?: number
                 idCounter?: number
             }

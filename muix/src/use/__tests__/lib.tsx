@@ -10,6 +10,9 @@ export interface Shape extends TSheeter.ShapeAncestor {
     rulesets: {
       root: 'Text'
     },
+    sheet: {
+      root: 'T'
+    },
     props: {
       p1: string
     },

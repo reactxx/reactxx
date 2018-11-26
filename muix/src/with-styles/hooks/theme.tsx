@@ -33,8 +33,8 @@ export interface ThemeProviderProps<R extends TSheeter.Shape = TSheeter.Shape> {
 export const defaultThemeName = '*default-theme*'
 
 export const sheetFromThemeCache = (
-  componentId: number, sheetOrCreator: TSheeter.SheetOrCreator,
-  theme, defaultClasses: TSheeter.PartialSheetOrCreator,
+  componentId: number, sheetOrCreator: TTyped.SheetOrCreator,
+  theme, defaultClasses: TTyped.PartialSheetOrCreator,
   path: string
 ) => {
   const cache = !theme ? platform._withStyles.$cache : (theme.$cache || (theme.$cache = {}))

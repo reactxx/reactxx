@@ -1,28 +1,28 @@
 import warning from 'warning';
 
-import { TAtomize, TSheeter, TComponents, TCommonStyles } from 'reactxx-typings'
+import { TAtomize, TTyped, TSheeter, TComponents, TCommonStyles } from 'reactxx-typings'
 import { createWithTheme } from './create-with-theme'
 import { adjustAtomizedLow, isDeferred } from './atomize-low'
 
 // muttable
-export const atomizeSheet = <R extends TSheeter.Shape = TSheeter.Shape>(sheet: TSheeter.PartialSheetOrCreator<R>, theme?, path: string = 'sheet') => {
+export const atomizeSheet = (sheet: TAtomize.SheetOrCreator, theme?, path: string = 'sheet') => {
     if (!sheet) return null
-    const sh: TSheeter.Sheet = createWithTheme(sheet, theme)
+    const sh: TAtomize.Sheet = createWithTheme(sheet, theme)
     for (const p in sh) {
         const at = atomizeRuleset(sh[p], theme, (path ? path + '.' : '') + p)
         if (at) sh[p] = at
         else delete sh[p]
     }
-    return sh as any as TAtomize.Sheet<R>
+    return sh
 }
 
 // muttable
-export const atomizeRuleset = <N extends string = 'root', R extends TSheeter.Shape = TSheeter.Shape>(
-    ruleset: TSheeter.RulesetOrAtomizedCreator<TSheeter.getRuleset<R, N>, R>, theme?: TSheeter.getTheme<R>, path: string = ''
+export const atomizeRuleset = (
+    ruleset: TAtomize.RulesetOrCreator, theme?, path: string = ''
 ) => {
     if (!ruleset) return null
 
-    const rs = createWithTheme(ruleset, theme) as TAtomize.Ruleset
+    const rs = createWithTheme(ruleset, theme)
 
     if (!rs) return null
 

@@ -9,7 +9,7 @@ declare namespace TComponents {
   /******************************************
      COMPONENT TYPING
   *******************************************/
-  export type WithStyles<R extends TSheeter.Shape = TSheeter.Shape> = (sheet: TSheeter.SheetX<R>, defaultProps?: Props<R>) => ComponentType<R>
+  //export type WithStyles<R extends TSheeter.Shape = TSheeter.Shape> = (sheet: TSheeter.SheetX<R>, defaultProps?: Props<R>) => ComponentType<R>
 
   //export type StylesXCreator<R extends Shape = Shape> = (theme: TSheeter.getTheme<R>) => TSheeter.StylesX<R>
 
@@ -17,7 +17,7 @@ declare namespace TComponents {
   export interface CommonProperties<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
     classNameX?: TSheeter.ClassNameOrCreator<R>
     styleX?: TSheeter.StyleOrCreator<R>
-    classes?: TSheeter.PartialSheetOrCreator<R> // cross platform sheet
+    classes?: TTyped.PartialSheetOrCreator<R> // cross platform sheet
     themedProps?: (theme: TSheeter.getTheme<R>) => Props<R>
   }
 
@@ -57,7 +57,7 @@ declare namespace TComponents {
 
   export type TEventsX<R extends TSheeter.Shape = TSheeter.Shape> = PartialRecord<TSheeter.getEvents<R>, MouseEventEx<R>>
   export type ComponentType<R extends TSheeter.Shape = TSheeter.Shape> = React.ComponentType<Props<R>> & TAtomize.IsReactXXComponent & {
-    classes: TSheeter.PartialSheet<R>
+    classes: TTyped.PartialSheet<R>
     classNamex: TSheeter.ClassNameOrCreator<R>
   }
   export type ComponentClass<R extends TSheeter.Shape = TSheeter.Shape> = React.ComponentClass<Props<R>> & TSheeter.getStaticProps<R> & TProvider<R>

@@ -72,9 +72,9 @@ declare namespace TAtomize {
   export type AtomicWebsLow = AtomicWeb[]
   export type AtomicNativeLow = Record<string, TNativeRuleValue>
 
-  type ValueOrCreator<T, Theme> = T | ((theme:Theme) => T)
+  type ValueOrCreator<T> = T | ((theme) => T)
   
-  export type RulesetOrCreator<Theme> = ValueOrCreator<Ruleset, Theme>
-  export type SheetOrCreator<Theme = any> = ValueOrCreator<Sheet, Theme>
+  export type RulesetOrCreator = ValueOrCreator<Ruleset>
+  export type SheetOrCreator = ValueOrCreator<Sheet>
 
 }

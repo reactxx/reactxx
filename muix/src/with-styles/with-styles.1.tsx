@@ -6,7 +6,7 @@ import { TAtomize, TComponents, TSheeter, TWithStyles, TVariants, TCommonStyles 
 import { useTheme } from './hooks/theme'
 
 export const componentCreator = <R extends TSheeter.Shape>(
-  sheetOrCreator: TSheeter.SheetOrCreator<R>,
+  sheetOrCreator: TTyped.SheetOrCreator<R>,
   options: TWithStyles.ComponentOptions<R>,
   code: (props) => any,
 ) => (
@@ -137,7 +137,7 @@ const componentCreatorLow = (options: TWithStyles.ComponentOptions) => (props: T
 }
 
 const finishComponentState = (
-  sheetOrCreator: TSheeter.SheetOrCreator,
+  sheetOrCreator: TTyped.SheetOrCreator,
   options: TWithStyles.ComponentOptions, overridedOptions: TWithStyles.ComponentOptions
 ) => {
   if (options && options.defaultProps) {

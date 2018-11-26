@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import warning from 'warning'
 
-import { TUseSheeter } from 'reactxx-typings';
+import { TUseSheeter, TAtomize } from 'reactxx-typings';
 import { sheetFromThemeCache } from './use-theme';
 
 export const useDefaults = (
@@ -16,7 +16,7 @@ const getDefaults = (theme, config: TUseSheeter.ComponentConfig & TUseSheeter.Co
     if (!defaultSheet)
         throw 'Missing config.defaultsheet'
 
-    const sheet = sheetFromThemeCache(id, defaultSheet, theme, overrideSheet, displayName)
+    const sheet = sheetFromThemeCache(id, defaultSheet as TAtomize.SheetOrCreator, theme, overrideSheet as TAtomize.SheetOrCreator, displayName)
 
     if (window.__TRACE__) {
         if (defaultProps) {

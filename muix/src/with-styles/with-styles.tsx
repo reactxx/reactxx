@@ -5,7 +5,7 @@ import { TAtomize, TComponents, TSheeter, TWithStyles, TVariants } from 'reactxx
 import { createPipeline } from './utils/create-pipeline'
 
 export const withStylesCreator = <R extends TSheeter.Shape>(
-  sheetOrCreator: TSheeter.SheetOrCreator<R>,
+  sheetOrCreator: TTyped.SheetOrCreator<R>,
   codeComponent: TComponents.ComponentTypeCode<R>,
   options?: TWithStyles.ComponentOptions<R>
 ) => (
@@ -64,7 +64,7 @@ const withStyles = (options: TWithStyles.ComponentOptions) => {
 }
 
 const finishComponentState = (
-  sheetOrCreator: TSheeter.SheetOrCreator, CodeComponent: TComponents.ComponentTypeCode,
+  sheetOrCreator: TTyped.SheetOrCreator, CodeComponent: TComponents.ComponentTypeCode,
   options: TWithStyles.ComponentOptions, overridedOptions: TWithStyles.ComponentOptions
 ) => {
   const mergedOptions: TWithStyles.ComponentOptions = options && overridedOptions ?

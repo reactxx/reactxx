@@ -93,9 +93,16 @@ export namespace TTyped {
 
   type ValueOrCreator<T, Theme> = T | ((theme:Theme) => T)
 
-  export type Sheet = Record<string, RulesetIds>
+  export type Sheet<R extends TVariants.ShapePart = TVariants.ShapePart> = {
+    [P in keyof TVariants.getSheet<R>]: Ruleset<TVariants.getSheet<R>[P]>
+  }
+  export type PartialSheet<R extends TVariants.ShapePart = TVariants.ShapePart> = {
+    [P in keyof TVariants.getSheet<R>]?: Ruleset<TVariants.getSheet<R>[P]>
+  }
 
-  export type SheetOrCreator<R extends TVariants.ShapePart> = ValueOrCreator<Sheet, TVariants.getTheme<R>>
+  export type SheetOrCreator<R extends TVariants.ShapePart = TVariants.ShapePart> = ValueOrCreator<Sheet<R>, TVariants.getTheme<R>>
+  export type PartialSheetOrCreator<R extends TVariants.ShapePart = TVariants.ShapePart> = ValueOrCreator<PartialSheet<R>, TVariants.getTheme<R>>
+  
   export type RulesetOrCreator<Id extends RulesetIds, R extends TVariants.ShapePart> = ValueOrCreator<Ruleset<Id>[], TVariants.getTheme<R>>
 
 }
