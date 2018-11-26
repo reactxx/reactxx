@@ -5,7 +5,7 @@ export * from './utils/deep-merge'
 export * from './utils/globals'
 export * from './utils/use-force-update'
 export * from './utils/use-unique-id'
-//export * from './conditions'
+export * from './utils/typed'
 export * from './utils/merge'
 export * from './utils/wrap-pseudo-prefixes'
 

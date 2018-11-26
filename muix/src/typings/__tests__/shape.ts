@@ -10,8 +10,6 @@ export interface Props {
 // export interface InnerState {
 //     drawerOpened?: boolean
 // }
-
-
 export interface Shape extends TSheeter.ShapeAncestor {
     rulesets: {
         root: 'View',

@@ -3,7 +3,6 @@ import { TAtomize, TComponents, TSheeter, TVariants } from './index'
 
 declare namespace TWithStyles {
 
-
   export interface ComponentConfigLow {
     withoutTheme?: boolean
     withCascaing?: boolean

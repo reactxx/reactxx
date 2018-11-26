@@ -1,99 +1,86 @@
-import { TSheeter, TComponents, TCommonStyles, TAtomize } from 'reactxx-typings'
-import { atomizeRuleset } from 'reactxx-sheeter'
-import { T_Sheet, T_Rules, TTyped } from '../typed'
+import { $W, $T, $V, $I, V, T, I, Utils, RulesetIds, TAllowed, TAllowedInput, TPlatformAllowed, TComponentAllowed } from 'reactxx-typings'
+import { getTypedUtils } from 'reactxx-sheeter'
 
-import $if from '../../conditions/$if'
 
-export interface Shape extends TSheeter.ShapeAncestor {
-  rulesets: {
-    root: 'View',
-    webOnly: '$Web',
-    nativeOnly: '$NativeView',
-  },
-  props: {
-    disabled: boolean
-  },
-  theme: {
-    primary: string
-  }
-}
+const toClassNames = <R>(...rules: R[]) => null as R
 
-const hot = <T extends any>(arg: (prop) => T) => {
-  return prop => arg(prop)
-}
+const atomizeRuleset = <R extends RulesetIds>(...r: TAllowedInput<R>[]) => null as TAllowed<R>
 
-const hotPar = <T extends any>(par: T) => par
+const { $themed, $if, $web, $native, $rules } = getTypedUtils<{ enabled }, { primary }>()
 
-let d: { x }
+// COMPONENT example
 
-hot<{ x }>(p => hotPar({ x: 0, y: 0 }))
-
-const rules = T_Rules<Shape, 'View'>($ => [
-  { margin: 0 },
-  $.if(p => p.disabled)
-])
-
-const sheet = T_Sheet<Shape>(({ theme, T_Rules }) => ({
-
-  root: T_Rules<'root'>($ => [
-    { margin: 0 },
-    $.if(p => p.disabled,
-      {
-        opacity: 0.5,
-        //color: 'red' //ERROR
-      },
-      $.web(
-        {
-          color: theme.primary
-        },
-        $.wweb(),
-        $.whot(p => []),
-        $.whot(p => ({ ':hover': {}, x: '' })),
-        $.wif(null),
-        { ':hover': $.wif(null, { ':active': $.wwidth(640, { cursor: 'pointer' }) }) }
-      )
-    ),
-    atomizeRuleset([]),
-    // transform: [], //ERROR
-    $.native(
-      {
-        margin: 0,
-        transform: [],
-        // color: 'red' //ERRR
-      },
-      $.nhot(p => ({
-        color: 'red', // ????? 
-        transform: [],
-      })),
-      $.nif(null),
-    ),
-    $.if(null),
-
-    // $.if(p => p.disabledx), //ERROR
-  ]),
-
-  webOnly: T_Rules<'webOnly'>($ => [
-    $.wif(null),
-    //$.nif(null), //ERROR
-    //$.if(null), //ERROR
-  ]),
-  nativeOnly: T_Rules<'nativeOnly'>($ => [
-    //$.wif(null), //ERROR
-    $.nif(null, { margin: 0 }),
-    //$.if(null), //ERROR
-  ])
-
+const sheet4 = $themed(theme => ({
+  root: $rules<V>(
+    $if<V>(p => p.enabled, { backgroundColor: theme.primary })
+  )
 }))
 
+const sheet3 = {
+  root: $rules<V>(
+    {
+      margin: 0,
 
-// const sheet2 = theme => ({
-//   root: [
-//     { margin: 0 },
-//     $if(p => p.disabled, {
-//       opacity: 0.5,
-//       color: 'red' // NO ERROR
-//     }),
-//     $if(p => p.disabledx) // NO ERROR
-//   ],
-// })
+    },
+    $web<V>(
+      {},
+      $if<$W>(null),
+      {
+        cursor: '',
+        ':hover': $if<$W>(null),
+        ':active': [
+          $if<$W>(null),
+        ]
+      }
+    ),
+    $native<V>(),
+  ),
+  label: $rules<T>(
+    $if<T>(null, { color: '' }),
+    $if<V>(null),
+    $web<T>()
+  ),
+  image: $rules<I>(
+    $if<I>(null),
+    $web<I>()
+  ),
+  webOnly: $rules<$W>(
+    $if<$W>(null),
+  ),
+  nativeOnly: $rules<$V>(
+    {
+      transform: []
+    },
+    $if<$V>(null, { transform: [] }),
+    $if<V>(null),
+  ),
+  nativeOnlyImage: $rules<$I>(
+    $if<$I>(null),
+    $if<I>(null),
+  ),
+  nativeOnlyText: $rules<$T>(
+    $if<$V>(null, {}),
+    $if<V>(null),
+    $if<$T>(null, { color: '' }),
+    $if<T>(null),
+  ),
+}
+
+const root = toClassNames(sheet3.root, sheet3.webOnly)
+const nativeOnly = toClassNames(sheet3.root, sheet3.nativeOnly)
+const webOnly = toClassNames(sheet3.root, sheet3.webOnly)
+const webOnly2 = toClassNames(sheet3.root, sheet3.webOnly)
+const label = toClassNames(sheet3.label, atomizeRuleset<V>({}))
+const image = toClassNames(sheet3.image)
+
+const Text: TPlatformAllowed<T> = root
+const View: TPlatformAllowed<V> = webOnly2
+const View3: TPlatformAllowed<V> = nativeOnly
+const Image: TPlatformAllowed<I> = image
+//const View2: TPlatformAllowed<V> = label // ERROR
+const div: TPlatformAllowed<$W> = root
+//const span: TPlatformAllowed<$W> = nativeOnly // ERROR
+const i: TPlatformAllowed<$W> = webOnly
+
+const C: TComponentAllowed<T> = label
 

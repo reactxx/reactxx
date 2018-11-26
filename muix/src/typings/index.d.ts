@@ -3,6 +3,7 @@ export { TAtomize } from './atomize'
 export { TSheeter } from './sheeter'
 export { TComponents } from './components'
 export { TWithStyles } from './with-styles'
+export * from './typed'
 
 export type TNativeRuleValue = number | string | /*for native animation*/{}
 
