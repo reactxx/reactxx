@@ -1,9 +1,9 @@
 ﻿import React from 'react';
 
-import { TAtomize, TComponents, TWithStyles, TSheeter } from 'reactxx-typings';
+import { TAtomize, TComponents, TUseSheeter, TSheeter } from 'reactxx-typings';
 import { atomizeSheet, atomizeRuleset, atomizeStyle, mergeSheets } from 'reactxx-sheeter'
 
-export const useProps = <R extends TSheeter.Shape = TSheeter.Shape>(theme, options: TWithStyles.ComponentConfig, sheet: TAtomize.Sheet, props: TComponents.Props) => {
+export const useProps = <R extends TSheeter.Shape = TSheeter.Shape>(theme, options: TUseSheeter.ComponentConfig, sheet: TAtomize.Sheet, props: TComponents.Props) => {
     // from props
     const { classes: _classes, classNameX: _classNameX, styleX: _styleX, themedProps, ...propsRest } = props as TComponents.Props
 

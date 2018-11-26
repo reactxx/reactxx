@@ -2,14 +2,13 @@
 export { TAtomize } from './atomize'
 export { TSheeter } from './sheeter'
 export { TComponents } from './components'
-export { TWithStyles } from './with-styles'
+export { TUseSheeter } from './use-sheeter'
 export * from './typed'
 
 export type TNativeRuleValue = number | string | /*for native animation*/{}
 
 import { TSheeter, TAtomize, TCommonStyles } from './index'
 import React from 'react'
-import { TWithStyles } from './with-styles';
 
 export namespace TVariants {
 

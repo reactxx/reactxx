@@ -1,7 +1,7 @@
 import React from 'react';
 import { TAtomize, TComponents, TSheeter, TVariants } from './index'
 
-declare namespace TWithStyles {
+declare namespace TUseSheeter {
 
   export interface ComponentConfigLow {
     withoutTheme?: boolean

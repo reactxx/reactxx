@@ -3,7 +3,7 @@
 import React from 'react'
 import { platform } from "reactxx-sheeter"
 
-import { TSheeter, TWithStyles, TComponents } from 'reactxx-typings'
+import { TSheeter, TUseSheeter, TComponents } from 'reactxx-typings'
 import { useSheeter } from "reactxx-use"
 
 export interface Shape extends TSheeter.ShapeAncestor {
@@ -23,8 +23,8 @@ export interface Shape extends TSheeter.ShapeAncestor {
 }
   
   export const compCreator = (
-    config: TWithStyles.ComponentConfig<Shape>,
-    configOverride: TWithStyles.ComponentConfigOverride<Shape>,
+    config: TUseSheeter.ComponentConfig<Shape>,
+    configOverride: TUseSheeter.ComponentConfigOverride<Shape>,
     displayName?: 'Comp'
   ) => {
     const res: TComponents.SFC<Shape> = props => {

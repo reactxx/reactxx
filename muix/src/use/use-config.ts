@@ -1,11 +1,11 @@
 ﻿import React from 'react'
-import { TSheeter, TWithStyles } from 'reactxx-typings';
+import { TSheeter, TUseSheeter } from 'reactxx-typings';
 import { platform } from 'reactxx-sheeter'
 
 export const useConfig = <R extends TSheeter.Shape = TSheeter.Shape>(
-    configDefault: TWithStyles.ComponentConfig<R>,
+    configDefault: TUseSheeter.ComponentConfig<R>,
     displayName?: string,
-    configOverride?: TWithStyles.ComponentConfigOverride<R>
+    configOverride?: TUseSheeter.ComponentConfigOverride<R>
 ) => {
 
     if (!configDefault)

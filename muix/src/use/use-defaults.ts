@@ -1,15 +1,15 @@
 ﻿import React from 'react';
 import warning from 'warning'
 
-import { TWithStyles } from 'reactxx-typings';
+import { TUseSheeter } from 'reactxx-typings';
 import { sheetFromThemeCache } from './use-theme';
 
 export const useDefaults = (
-    theme, options: TWithStyles.ComponentConfig
+    theme, options: TUseSheeter.ComponentConfig
 ) =>
     React.useMemo(() => getDefaults(theme, options), [theme, options])
 
-const getDefaults = (theme, config: TWithStyles.ComponentConfig & TWithStyles.ComponentConfigOverride) => {
+const getDefaults = (theme, config: TUseSheeter.ComponentConfig & TUseSheeter.ComponentConfigOverride) => {
 
     const { defaultProps, defaultSheet, overrideProps, overrideSheet, id, displayName } = config
 

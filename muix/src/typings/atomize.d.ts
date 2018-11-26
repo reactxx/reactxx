@@ -1,6 +1,5 @@
 import { TNativeRuleValue, TSheeter, TVariants } from './index'
 import { TComponents } from './components';
-import { TWithStyles } from './with-styles';
 
 declare namespace TAtomize {
 

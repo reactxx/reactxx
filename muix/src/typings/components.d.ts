@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TSheeter, TTyped, TAtomize, TVariants, TWithStyles } from './index'
+import { TSheeter, TTyped, TAtomize, TVariants, TUseSheeter } from './index'
 
 declare namespace TComponents {
 

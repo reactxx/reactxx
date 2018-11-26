@@ -1,5 +1,5 @@
 import warning from 'warning'
-import { TWithStyles, TSheeter, TAtomize, TVariants } from 'reactxx-typings'
+import { TUseSheeter, TSheeter, TAtomize, TVariants } from 'reactxx-typings'
 import { atomizeRuleset, wrapRuleset } from './atomize'
 import { isToAtomize, isToAtomizeArray, isDeferred, isTemporary } from './atomize-low'
 
@@ -20,7 +20,6 @@ export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: It
             if (isDeferred(v)) {
                 const res = v.evalProc(props)
                 filterList(res)
-                //res.forEach(r => process(r))
             } else if (testConditions(v, props))
                 values.push(v)
         })
@@ -32,7 +31,6 @@ export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: It
         if (isDeferred(val)) {
             const res = val.evalProc(props)
             filterList(res)
-            //res.forEach(r => process(r))
             return
         }
 

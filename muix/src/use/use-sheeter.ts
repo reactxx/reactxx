@@ -1,6 +1,6 @@
 ﻿import warning from 'warning'
 
-import { TComponents, TSheeter, TWithStyles } from 'reactxx-typings';
+import { TComponents, TSheeter, TUseSheeter } from 'reactxx-typings';
 import {
     platform, toClassNamesWithQuery,
     useWidthsLow, useForceUpdate, useUniqueId,
@@ -13,9 +13,9 @@ import { useConfig } from './use-config'
 
 const useSheeter = <R extends TSheeter.Shape = TSheeter.Shape>(
     props: TComponents.Props<R>,
-    configDefault: TWithStyles.ComponentConfig<R>,
+    configDefault: TUseSheeter.ComponentConfig<R>,
     displayName?: string,
-    configOverride?: TWithStyles.ComponentConfigOverride<R>
+    configOverride?: TUseSheeter.ComponentConfigOverride<R>
 ) => {
 
     const config = useConfig(configDefault, displayName, configOverride)
