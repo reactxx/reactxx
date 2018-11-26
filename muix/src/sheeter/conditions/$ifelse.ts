@@ -1,4 +1,4 @@
-import { TSheeter, TCommonStyles, TVariants } from 'reactxx-typings'
+import { TSheeter, TCommonStyles, TTyped, TVariants } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../utils/atomize-low'
 
 const $ifelse = <TPar extends {} = {}, T extends TCommonStyles.RulesetIds = 'Text'>(

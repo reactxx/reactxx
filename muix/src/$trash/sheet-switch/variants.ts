@@ -1,4 +1,4 @@
-import { TCommonStyles, TSheeter } from 'reactxx-typings'
+import { TCommonStyles, TTyped, TSheeter } from 'reactxx-typings'
 
 export const enum Consts {
     name = '$switch'

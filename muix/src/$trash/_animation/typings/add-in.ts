@@ -1,4 +1,4 @@
-﻿import { TCommonStyles, TCommon, TAddIn as TAddInBasic, Types as TypesBasic } from 'reactxx-basic'
+﻿import { TCommonStyles, TTyped, TCommon, TAddIn as TAddInBasic, Types as TypesBasic } from 'reactxx-basic'
 import { TAnimation } from 'reactxx-animation'
 import { Types } from './types'
 

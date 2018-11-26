@@ -1,5 +1,5 @@
 import React from 'react'
-import { TSheeter, TCommonStyles, TVariants } from 'reactxx-typings'
+import { TSheeter, TCommonStyles, TTyped, TVariants } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../../utils/atomize-low'
 import { intervalToSelector, test } from './parser'
 

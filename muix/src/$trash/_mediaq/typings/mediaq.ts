@@ -1,4 +1,4 @@
-﻿import { TCommonStyles, Types } from 'reactxx-basic';
+﻿import { TCommonStyles, TTyped, Types } from 'reactxx-basic';
 import { AddIns as SheeterAddIns, PropsPatchGetters as SheeterPropsPatchGetters, Ruleset as SheeterRuleset } from 'reactxx-sheeter';
 
 export namespace TMediaQ {

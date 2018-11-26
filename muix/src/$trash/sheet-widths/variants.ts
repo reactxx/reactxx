@@ -1,4 +1,4 @@
-import { TVariants, TCommonStyles, TSheeter } from 'reactxx-typings'
+import { TVariants, TCommonStyles, TTyped, TSheeter } from 'reactxx-typings'
 
 export const enum Consts {
     name = '$widths'

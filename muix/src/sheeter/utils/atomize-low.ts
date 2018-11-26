@@ -1,6 +1,6 @@
 import warning from 'warning'
 import { wrapPseudoPrefixes } from './wrap-pseudo-prefixes'
-import { TCommonStyles, TSheeter, TVariants, TAtomize } from 'reactxx-typings'
+import { TCommonStyles, TTyped, TSheeter, TVariants, TAtomize } from 'reactxx-typings'
 
 // platform dependent 
 import { platform } from 'reactxx-sheeter'

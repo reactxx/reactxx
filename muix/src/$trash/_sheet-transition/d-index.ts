@@ -1,4 +1,4 @@
-import { TSheeter, TCommonStyles, TVariants, TAtomize } from 'reactxx-typings'
+import { TSheeter, TCommonStyles, TTyped, TVariants, TAtomize } from 'reactxx-typings'
 import ReactN from 'react-native';
 
 declare module 'reactxx-typings' {

@@ -1,4 +1,4 @@
-import { TCommonStyles, TSheeter, TComponents } from 'reactxx-typings'
+import { TCommonStyles, TTyped, TSheeter, TComponents } from 'reactxx-typings'
 
 export const enum Consts {
     name = '$IF'

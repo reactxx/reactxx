@@ -1,4 +1,4 @@
-import { TSheeter, TCommonStyles, TAtomize } from 'reactxx-typings'
+import { TSheeter, TCommonStyles, TTyped, TAtomize } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../utils/atomize-low'
 
 const $hot = <TPar extends {} = {}, T extends TCommonStyles.RulesetIds = 'Text'>(evalProc: (outerPar: TPar) => TSheeter.RulesetOrAtomized<T>) => {

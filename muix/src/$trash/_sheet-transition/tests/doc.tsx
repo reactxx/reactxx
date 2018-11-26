@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { TCommonStyles, TVariants, TSheeter, TComponents } from 'reactxx-typings'
+import { TCommonStyles, TTyped, TVariants, TSheeter, TComponents } from 'reactxx-typings'
 import { atomizeVariants } from 'reactxx-sheeter'
 import { TTransition } from 'reactxx-sheet-transition'
 import { getCases } from 'reactxx-sheet-switch';

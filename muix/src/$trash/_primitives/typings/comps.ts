@@ -1,6 +1,6 @@
 ﻿import ReactN from 'react-native'
 
-import { Types, TCommonStyles, TCommon } from 'reactxx-basic'
+import { Types, TCommonStyles, TTyped, TCommon } from 'reactxx-basic'
 
 export const enum CompNames {
   Text = 'ReactXX$Text',
