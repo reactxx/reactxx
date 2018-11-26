@@ -37,7 +37,14 @@ export interface Utils<P extends {}, Theme extends {}> {
   $ifelse: <R extends RulesetIds>(cond: (p: P) => boolean, ifPart: TAllowedInput<R>[], elsePart: TAllowedInput<R>[]) => TAllowed<R>
   $width: <R extends RulesetIds>(interval: number | [number, number], ...r: TAllowedInput<R>[]) => TAllowed<R>
   $hot: <R extends RulesetIds>(cond: (p: P) => TAllowedInput<R> | TAllowedInput<R>[]) => TAllowed<R>
+
+  $atomizeSheet: (sheet: Sheet, theme?: Theme, path?: string) => Sheet
+  $mergeSheets: (sources: Sheet[]) => Sheet
+  $atomizeRuleset: <R extends RulesetIds>(r: TAllowedInput<R>[], theme?: Theme, path?: string) => TAllowed<R>
+  $mergeRulesets: <R extends RulesetIds>(r: TAllowedInput<R>[]) => TAllowed<R>
 }
+
+export type Sheet = Record<string, RulesetIds>
 
 namespace TTyped {
 

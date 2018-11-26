@@ -3,10 +3,11 @@ import React from 'react'
 import { cleanup } from 'react-testing-library'
 import { TAtomize } from 'reactxx-typings'
 
-export { render } from 'react-testing-library'
-
 import { initSheeter$Web, resetPlatform, platform } from 'reactxx-sheeter'
 import { initSheeter$Native } from 'reactxx-sheeter-native'
+
+export { render } from 'react-testing-library'
+export { theme, Shape } from 'reactxx-typings-test/shape'
 
 jest.mock('react-native', () => ({
     Dimensions: null,
