@@ -1,5 +1,5 @@
-import { $W, $T, $V, $I, V, T, I, TTyped, TVariants } from 'reactxx-typings'
-import { getTypedUtils } from 'reactxx-sheeter'
+import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
+import { getSheetUtils } from 'reactxx-sheeter'
 
 interface Shape {
   theme: {primary}
@@ -7,7 +7,7 @@ interface Shape {
 }
 
 const { $themed, $if, $web, $native, $rules, $toClassNames, $atomizeRuleset
-} = getTypedUtils<Shape>()
+} = getSheetUtils<Shape>()
 
 const sheet4 = $themed(theme => ({
   root: $rules<V>(

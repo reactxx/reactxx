@@ -11,7 +11,7 @@ import { atomizeRuleset, atomizeSheet } from './atomize'
 import { mergeSheets, mergeRulesets } from './merge'
 import { toClassNamesWithQuery } from './to-classnames'
 
-export const getTypedUtils = <R extends TVariants.ShapePart>() => untyped as TTyped.Utils<R>
+export const getSheetUtils = <R extends TVariants.ShapePart>() => untyped as TTyped.Utils<R>
 
 const untyped = {
     $web,

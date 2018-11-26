@@ -1,5 +1,5 @@
-import { TVariants, $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
-import { getTypedUtils } from 'reactxx-sheeter'
+import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
+import { getSheetUtils } from 'reactxx-sheeter'
 
 //let $atomizeRuleset, $toClassNames
 import { initPlatform, dump, afterLastWin } from "./init-platform"
@@ -12,7 +12,7 @@ interface Shape {
 }
 
 const { $themed, $if, $web, $hot, $native, $rules, $toClassNames, $atomizeRuleset, $ifelse, $mergeRulesets, $width
-} = getTypedUtils<Shape>()
+} = getSheetUtils<Shape>()
 
 
 describe("SHEETER HOT", () => {

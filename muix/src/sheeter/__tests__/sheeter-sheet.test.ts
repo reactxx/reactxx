@@ -1,5 +1,5 @@
 import { $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
-import { getTypedUtils } from 'reactxx-sheeter'
+import { getSheetUtils } from 'reactxx-sheeter'
 
 //import {  } from "reactxx-sheeter"
 import { initPlatform, dump, Shape as ShapeLow, theme } from "./init-platform"
@@ -12,7 +12,7 @@ interface Shape extends ShapeLow {
 const {
   $themed, $if, $web, $native, $rules,
   $atomizeSheet, $mergeSheets, $atomizeRuleset
-} = getTypedUtils<Shape>()
+} = getSheetUtils<Shape>()
 
 describe("SHEET", () => {
   const doTest = (isWeb: boolean) => {
