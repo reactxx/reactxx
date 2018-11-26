@@ -1,11 +1,18 @@
-import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
+import { $W, $T, $V, $I, V, T, I, TTyped, TVariants } from 'reactxx-typings'
 import { getTypedUtils } from 'reactxx-sheeter'
 
 import { theme, Theme } from "reactxx-typings-test/shape"
 import { initPlatform } from "./init-platform"
 
+
+interface Shape {
+  theme: Theme
+  sheetQuery: {opened: boolean}  
+}
+
+
 const { $themed, $if, $web, $hot, $native, $rules, $toClassNames, $atomizeRuleset
-} = getTypedUtils<{ opened: boolean }, Theme>()
+} = getTypedUtils<Shape>()
 
 
 

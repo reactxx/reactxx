@@ -1,4 +1,4 @@
-import { TCommonStyles, TSheeter } from 'reactxx-typings'
+import { TCommonStyles, TSheeter, TVariants } from 'reactxx-typings'
 import ReactN from 'react-native';
 import CSS from 'csstype';
 
@@ -10,13 +10,19 @@ declare module 'reactxx-typings' {
   namespace TVariants {
 
     interface ShapePart {
-      sheet: Record<string, TTyped.RulesetIds>
-      className: TTyped.CommonIds
+      sheet?: Record<string, TTyped.RulesetIds>
+      className?: TTyped.CommonIds
+      props?: TSheeter.EmptyInterface // common (web and native) props, excluding events
+      theme?: TSheeter.EmptyInterface
+      sheetQuery?: TSheeter.EmptyInterface
     }
-    interface PropsPart { 
-      query: TSheeter.EmptyInterface
-    }
+    type getTheme<R extends ShapePart = ShapePart> = keyof R['theme'] extends never ? any : R['theme']
+    type getProps<R extends ShapePart> = R['props']
+    type getClassName<R extends ShapePart> = R['className']
+    type getSheet<R extends ShapePart> = R['sheet']
+    type getSheetQuery<R extends ShapePart> = R['sheetQuery']
 
+    type SheetPar<R extends ShapePart> = getSheetQuery<R> & getProps<R>
   }
 }
 
@@ -66,30 +72,30 @@ export namespace TTyped {
     R extends T ? T | V | $W : R | $W
 
 
-  export interface Utils<P extends {}, Theme extends {}> {
-    $themed: <R extends any>(p: (t: Theme) => R) => R
+  export interface Utils<S extends TVariants.ShapePart> {
+    $themed: <R extends any>(p: (t: TVariants.getTheme<S>) => R) => R
     $rules: <R extends RulesetIds>(...pars: Ruleset<R>[]) => TAllowed<R>
 
     $web: <R extends RulesetIds>(...r: Ruleset<$W>[]) => R
     $native: <R extends CommonIds>(...r: Ruleset<TNative<R>>[]) => R
 
-    $if: <R extends RulesetIds>(cond: (p: P) => boolean, ...r: Ruleset<R>[]) => TAllowed<R>
-    $ifelse: <R extends RulesetIds>(cond: (p: P) => boolean, ifPart: Ruleset<R>[], elsePart: Ruleset<R>[]) => TAllowed<R>
+    $if: <R extends RulesetIds>(cond: (p: TVariants.getSheetQuery<S>) => boolean, ...r: Ruleset<R>[]) => TAllowed<R>
+    $ifelse: <R extends RulesetIds>(cond: (p: TVariants.getSheetQuery<S>) => boolean, ifPart: Ruleset<R>[], elsePart: Ruleset<R>[]) => TAllowed<R>
     $width: <R extends RulesetIds>(interval: number | [number, number], ...r: Ruleset<R>[]) => TAllowed<R>
-    $hot: <R extends RulesetIds>(cond: (p: P) => Ruleset<R> | Ruleset<R>[]) => TAllowed<R>
+    $hot: <R extends RulesetIds>(cond: (p: TVariants.getSheetQuery<S>) => Ruleset<R> | Ruleset<R>[]) => TAllowed<R>
 
-    $atomizeSheet: (sheet: Sheet, theme?: Theme, path?: string) => Sheet
+    $atomizeSheet: (sheet: Sheet, theme?: TVariants.getTheme<S>, path?: string) => Sheet
     $mergeSheets: (sources: Sheet[]) => Sheet
-    $atomizeRuleset: <R extends RulesetIds>(r: RulesetOrCreator<R, Theme>, theme?: Theme, path?: string) => TAllowed<R>
+    $atomizeRuleset: <R extends RulesetIds>(r: RulesetOrCreator<R, TVariants.getTheme<S>>, theme?: TVariants.getTheme<S>, path?: string) => TAllowed<R>
     $mergeRulesets: <R extends RulesetIds>(r: Ruleset<R>[]) => TAllowed<R>
-    $toClassNames: <R extends RulesetIds>(query: P, ...rules: Ruleset<R>[]) => TAllowed<R>
+    $toClassNames: <R extends RulesetIds>(query: TVariants.getSheetQuery<S>, ...rules: Ruleset<R>[]) => TAllowed<R>
   }
 
   type ValueOrCreator<T, Theme> = T | ((theme:Theme) => T)
 
   export type Sheet = Record<string, RulesetIds>
 
-  export type SheetOrCreator<Theme = any> = ValueOrCreator<Sheet, Theme>
-  export type RulesetOrCreator<R extends RulesetIds, Theme> = ValueOrCreator<Ruleset<R>[], Theme>
+  export type SheetOrCreator<R extends TVariants.ShapePart> = ValueOrCreator<Sheet, TVariants.getTheme<R>>
+  export type RulesetOrCreator<Id extends RulesetIds, R extends TVariants.ShapePart> = ValueOrCreator<Ruleset<Id>[], TVariants.getTheme<R>>
 
 }

@@ -1,4 +1,4 @@
-import { TTyped } from 'reactxx-typings'
+import { TTyped, TVariants } from 'reactxx-typings'
 
 import $web from '../conditions/$web'
 import $native from '../conditions/$native'
@@ -7,14 +7,11 @@ import $if from '../conditions/$if'
 import $ifelse from '../conditions/$ifelse'
 import $width from '../conditions/$widths/$width'
 
-import {atomizeRuleset, atomizeSheet} from './atomize'
-import {mergeSheets, mergeRulesets} from './merge'
-import {toClassNamesWithQuery} from './to-classnames'
+import { atomizeRuleset, atomizeSheet } from './atomize'
+import { mergeSheets, mergeRulesets } from './merge'
+import { toClassNamesWithQuery } from './to-classnames'
 
-// export const atomizeRulesetTyped = atomizeRuleset
-// export const atomizeSheetTyped = atomizeSheet as any as AtomizeSheet
-
-export const getTypedUtils = <P extends {}, Theme extends {} = {}>() => untyped as TTyped.Utils<P, Theme>
+export const getTypedUtils = <R extends TVariants.ShapePart>() => untyped as TTyped.Utils<R>
 
 const untyped = {
     $web,
@@ -30,4 +27,4 @@ const untyped = {
     $atomizeRuleset: atomizeRuleset as any,
     $mergeRulesets: mergeRulesets as any,
     $toClassNames: toClassNamesWithQuery as any
-} as TTyped.Utils<never, never>
+} as TTyped.Utils<TVariants.ShapePart>

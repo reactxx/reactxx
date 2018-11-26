@@ -5,29 +5,6 @@ import { TSheeter } from './sheeter';
 
 declare namespace TCommonStyles {
 
-  //React Native styles compatible with Web React.CSSProperties
-
-  // export interface Transform {
-  //   perspective?: number
-  //   rotate?: string
-  //   rotateX?: string
-  //   rotateY?: string
-  //   rotateZ?: string
-  //   scale?: number
-  //   scaleX?: number
-  //   scaleY?: number
-  //   translateX?: number
-  //   translateY?: number
-  //   skewX?: string
-  //   skewY?: string
-  //   //time?: string
-  // }
-  // export interface TransformProp {
-  //   transform?: Transform
-  // }
-
-  //type TransformProp = unknown
-
   export type FlexAlignType = "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
 
   export interface FlexStyle {

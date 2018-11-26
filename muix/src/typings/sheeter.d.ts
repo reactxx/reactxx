@@ -80,35 +80,24 @@ declare namespace TSheeter {
   // Shape for generic default, e.g. "interface X<R extends Shape = Shape> {} " 
   export interface Shape extends TVariants.ShapePart {
     rulesets: Record<string, TCommonStyles.RulesetIds>
-    //**** sheet constrains
-    // common: EmptyInterface // rulesets (and their native type), which are used in both web and native component code. Rule are compatible with web and native.
-    // native: EmptyInterface // rulesets, which are used only in native code
-    // web: EmptyInterface // ruleset names, which are used only in web code (its type is always React.CSSProperties)
-    //sheetSwitch: EmptyInterface
-    //******************** style constrain
     style: TCommonStyles.RulesetIdsCommon // for web, style has always React.CSSProperties type
+
     //**** component property constrains
     staticProps: EmptyInterface
-    props: EmptyInterface // common (web and native) props, excluding events
     propsNative: EmptyInterface // native only props 
     propsWeb: React.HTMLAttributes<Element>// web only props
     events: EmptyInterface // common events
-    theme: EmptyInterface
   }
 
   // ancestor for Shape inheritance
   export interface ShapeAncestor extends TVariants.ShapePart {
     rulesets: Record<string, TCommonStyles.RulesetIds>
-    // common: EmptyInterface
-    // native: EmptyInterface
-    // web: EmptyInterface
     style: TCommonStyles.RulesetIdsCommon
-    props: EmptyInterface
+
     staticProps: EmptyInterface
     propsNative: ReactN.ViewProperties
     propsWeb: React.DOMAttributes<Element>
     events: EmptyInterface //ShapeWeb<TEventsAll>
-    theme: EmptyInterface
   }
 
   type T = keyof ShapeAncestor['rulesets']
