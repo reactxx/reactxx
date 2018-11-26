@@ -1,13 +1,28 @@
-import { TCommonStyles } from 'reactxx-typings'
+import { TCommonStyles, TSheeter } from 'reactxx-typings'
 import ReactN from 'react-native';
 import CSS from 'csstype';
 
 export type $W = '$W'; export type $T = '$T'; export type $V = '$V';
 export type $I = '$I'; export type V = 'V'; export type T = 'T'; export type I = 'I';
 
+declare module 'reactxx-typings' {
+
+  namespace TVariants {
+
+    interface ShapePart {
+      sheet: Record<string, TTyped.RulesetIds>
+      className: TTyped.CommonIds
+    }
+    interface PropsPart { 
+      query: TSheeter.EmptyInterface
+    }
+
+  }
+}
+
 export namespace TTyped {
 
-  type CommonIds = V | T | I
+  export type CommonIds = V | T | I
 
   type WebStyle = React.CSSProperties & { [P in CSS.Pseudos]?: Ruleset<$W> | Ruleset<$W>[] }
 
@@ -65,12 +80,16 @@ export namespace TTyped {
 
     $atomizeSheet: (sheet: Sheet, theme?: Theme, path?: string) => Sheet
     $mergeSheets: (sources: Sheet[]) => Sheet
-    $atomizeRuleset: <R extends RulesetIds>(r: RulesetCreator<R, Theme> | Ruleset<R>[], theme?: Theme, path?: string) => TAllowed<R>
+    $atomizeRuleset: <R extends RulesetIds>(r: RulesetOrCreator<R, Theme>, theme?: Theme, path?: string) => TAllowed<R>
     $mergeRulesets: <R extends RulesetIds>(r: Ruleset<R>[]) => TAllowed<R>
     $toClassNames: <R extends RulesetIds>(query: P, ...rules: Ruleset<R>[]) => TAllowed<R>
   }
 
+  type ValueOrCreator<T, Theme> = T | ((theme:Theme) => T)
+
   export type Sheet = Record<string, RulesetIds>
-  export type RulesetCreator<R extends RulesetIds, Theme> = (t:Theme) => Ruleset<R>[]
+
+  export type SheetOrCreator<Theme = any> = ValueOrCreator<Sheet, Theme>
+  export type RulesetOrCreator<R extends RulesetIds, Theme> = ValueOrCreator<Ruleset<R>[], Theme>
 
 }
