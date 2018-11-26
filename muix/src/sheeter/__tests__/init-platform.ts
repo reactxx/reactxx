@@ -32,14 +32,14 @@ export const initPlatform = (isWeb: boolean, trace: Trace = {}) => {
     }
 }
 
-export const dump = (ruleset: TAtomize.Ruleset) => {
+export const dump = (ruleset: TAtomize.Ruleset | any) => {
     expect(ruleset).toMatchSnapshot()
     const won = platform.applyLastwinsStrategy(ruleset)
     expect(won).toMatchSnapshot()
     expect(platform.finalizeClassName(won)).toMatchSnapshot()
 }
 
-export const afterLastWin = (ruleset: TAtomize.Ruleset) => {
+export const afterLastWin = (ruleset) => {
     const won = platform.applyLastwinsStrategy(ruleset)
     expect(won).toMatchSnapshot()
 }

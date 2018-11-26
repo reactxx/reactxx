@@ -9,6 +9,7 @@ import $width from '../conditions/$widths/$width'
 
 import {atomizeRuleset, atomizeSheet} from './atomize'
 import {mergeSheets, mergeRulesets} from './merge'
+import {toClassNamesWithQuery} from './to-classnames'
 
 // export const atomizeRulesetTyped = atomizeRuleset
 // export const atomizeSheetTyped = atomizeSheet as any as AtomizeSheet
@@ -28,4 +29,5 @@ const untyped = {
     $mergeSheets: mergeSheets as any,
     $atomizeRuleset: atomizeRuleset as any,
     $mergeRulesets: mergeRulesets as any,
+    $toClassNames: toClassNamesWithQuery as any
 } as TTyped.Utils<never, never>

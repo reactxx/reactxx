@@ -1,17 +1,14 @@
-
-import {
-  $W, $T, $V, $I, V, T, I,
-} from 'reactxx-typings'
+import { $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
 import { getTypedUtils } from 'reactxx-sheeter'
 
 //import {  } from "reactxx-sheeter"
 import { initPlatform, dump, Shape, theme } from "./init-platform"
 import { TSheeter } from 'reactxx-typings';
 
-const { 
+const {
   $themed, $if, $web, $native, $rules,
-  $atomizeSheet, $mergeSheets,  $atomizeRuleset
- } = getTypedUtils<{ enabled }, TSheeter.getTheme<Shape>>()
+  $atomizeSheet, $mergeSheets, $atomizeRuleset
+} = getTypedUtils<{ enabled }, TSheeter.getTheme<Shape>>()
 
 describe("SHEET", () => {
   const doTest = (isWeb: boolean) => {

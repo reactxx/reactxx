@@ -9,7 +9,7 @@ export namespace TTyped {
 
   type CommonIds = V | T | I
 
-  type WebStyle = React.CSSProperties & { [P in CSS.Pseudos]?: TAllowedInput<$W> | TAllowedInput<$W>[] }
+  type WebStyle = React.CSSProperties & { [P in CSS.Pseudos]?: Ruleset<$W> | Ruleset<$W>[] }
 
   type RulesetType<R extends RulesetIds> =
     R extends V ? TCommonStyles.ViewStyle :
@@ -39,7 +39,7 @@ export namespace TTyped {
     R extends $I ? $I | I :
     R
 
-  export type TAllowedInput<R extends RulesetIds> = RulesetType<R> | TAllowed<R>
+  export type Ruleset<R extends RulesetIds = RulesetIds> = RulesetType<R> | TAllowed<R>
 
   export type TPlatformAllowed<R extends RulesetIds> =
     R extends $W ? $W | V | T | I :
@@ -52,23 +52,25 @@ export namespace TTyped {
 
 
   export interface Utils<P extends {}, Theme extends {}> {
-    $themed: <R extends any = any>(p: (t: Theme) => R) => R
-    $rules: <R extends RulesetIds>(...pars: TAllowedInput<R>[]) => TAllowed<R>
+    $themed: <R extends any>(p: (t: Theme) => R) => R
+    $rules: <R extends RulesetIds>(...pars: Ruleset<R>[]) => TAllowed<R>
 
-    $web: <R extends RulesetIds>(...r: TAllowedInput<$W>[]) => R
-    $native: <R extends CommonIds>(...r: TAllowedInput<TNative<R>>[]) => R
+    $web: <R extends RulesetIds>(...r: Ruleset<$W>[]) => R
+    $native: <R extends CommonIds>(...r: Ruleset<TNative<R>>[]) => R
 
-    $if: <R extends RulesetIds>(cond: (p: P) => boolean, ...r: TAllowedInput<R>[]) => TAllowed<R>
-    $ifelse: <R extends RulesetIds>(cond: (p: P) => boolean, ifPart: TAllowedInput<R>[], elsePart: TAllowedInput<R>[]) => TAllowed<R>
-    $width: <R extends RulesetIds>(interval: number | [number, number], ...r: TAllowedInput<R>[]) => TAllowed<R>
-    $hot: <R extends RulesetIds>(cond: (p: P) => TAllowedInput<R> | TAllowedInput<R>[]) => TAllowed<R>
+    $if: <R extends RulesetIds>(cond: (p: P) => boolean, ...r: Ruleset<R>[]) => TAllowed<R>
+    $ifelse: <R extends RulesetIds>(cond: (p: P) => boolean, ifPart: Ruleset<R>[], elsePart: Ruleset<R>[]) => TAllowed<R>
+    $width: <R extends RulesetIds>(interval: number | [number, number], ...r: Ruleset<R>[]) => TAllowed<R>
+    $hot: <R extends RulesetIds>(cond: (p: P) => Ruleset<R> | Ruleset<R>[]) => TAllowed<R>
 
     $atomizeSheet: (sheet: Sheet, theme?: Theme, path?: string) => Sheet
     $mergeSheets: (sources: Sheet[]) => Sheet
-    $atomizeRuleset: <R extends RulesetIds>(r: TAllowedInput<R>[], theme?: Theme, path?: string) => TAllowed<R>
-    $mergeRulesets: <R extends RulesetIds>(r: TAllowedInput<R>[]) => TAllowed<R>
+    $atomizeRuleset: <R extends RulesetIds>(r: RulesetCreator<R, Theme> | Ruleset<R>[], theme?: Theme, path?: string) => TAllowed<R>
+    $mergeRulesets: <R extends RulesetIds>(r: Ruleset<R>[]) => TAllowed<R>
+    $toClassNames: <R extends RulesetIds>(query: P, ...rules: Ruleset<R>[]) => TAllowed<R>
   }
 
   export type Sheet = Record<string, RulesetIds>
+  export type RulesetCreator<R extends RulesetIds, Theme> = (t:Theme) => Ruleset<R>[]
 
 }

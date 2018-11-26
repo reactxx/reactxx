@@ -29,6 +29,8 @@ export interface Shape extends TSheeter.ShapeAncestor {
     //innerState: InnerState
 }
 
+export type Theme = TSheeter.getTheme<Shape>
+
 export const theme = {
     primary: {
         normal: {

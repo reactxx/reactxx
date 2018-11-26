@@ -1,0 +1,94 @@
+import { TCommonStyles } from 'reactxx-typings'
+import ReactN from 'react-native';
+import CSS from 'csstype';
+
+export type $W = '$W'; export type $T = '$T'; export type $V = '$V';
+export type $I = '$I'; export type V = 'V'; export type T = 'T'; export type I = 'I';
+
+export namespace TTyped {
+
+  type CommonIds = V | T | I
+
+  type WebStyle = React.CSSProperties & { [P in CSS.Pseudos]?: Ruleset<$W> | Ruleset<$W>[] }
+
+  type RulesetType<R extends RulesetIds> =
+    R extends V ? TCommonStyles.ViewStyle :
+    R extends T ? TCommonStyles.TextStyle :
+    R extends I ? TCommonStyles.ImageStyle :
+    R extends $W ? WebStyle :
+    R extends $T ? ReactN.TextStyle :
+    R extends $V ? ReactN.ViewStyle :
+    R extends $I ? ReactN.ImageStyle :
+    never
+
+
+  type TNative<R extends T | V | I> =
+    R extends T ? $T :
+    R extends V ? $V :
+    R extends I ? $I :
+    never
+
+  // classNameX definition for Web, Native and Components
+
+  export type RulesetIds = $W | $T | $V | $I | CommonIds
+
+  export type TAllowed<R extends RulesetIds> =
+    R extends T ? T | V :
+    R extends $T ? $T | $V | T | V :
+    R extends $V ? $V | V :
+    R extends $I ? $I | I :
+    R
+
+  export type Ruleset<R extends RulesetIds = RulesetIds> = RulesetType<R> | TAllowed<R>
+
+  export type TPlatformAllowed<R extends RulesetIds> =
+    R extends $W ? $W | V | T | I :
+    R extends T ? T | V | $W | $T | $V :
+    R extends V ? V | $W | $V :
+    R | $W
+
+  export type TComponentAllowed<R extends T | V | I> =
+    R extends T ? T | V | $W : R | $W
+
+
+  export interface Utils<P extends {}, Theme extends {}> {
+    $themed: T$themed<P, Theme>
+    $rules: T$rules<P, Theme>
+
+    $web: T$web<P, Theme>
+    $native: T$native<P, Theme>
+
+    $if: T$if<P, Theme>
+    $ifelse: T$ifelse<P, Theme>
+    $width: T$width<P, Theme>
+    $hot: T$hot<P, Theme>
+
+    $atomizeSheet: (sheet: Sheet, theme?: Theme, path?: string) => Sheet
+    $mergeSheets: (sources: Sheet[]) => Sheet
+    $atomizeRuleset: T$atomizeRuleset<P, Theme>
+    $mergeRulesets: T$mergeRulesets<P, Theme>
+    $toClassNames: T$toClassNames<P, Theme>
+  }
+
+  export type Sheet = Record<string, RulesetIds>
+  export type RulesetCreator<R extends RulesetIds, Theme> = (t: Theme) => Ruleset<R>[]
+
+  type T$hot<P, Theme> = 
+  <R extends RulesetIds = 'T'>(cond: (p: P) => Ruleset<R> | Ruleset<R>[])=> TAllowed<R>
+  
+  //type T$hotProc<P, Theme, R extends RulesetIds = 'T'> = (cond: (p: P) => Ruleset<R> | Ruleset<R>[]) => TAllowed<R>
+  type T$web<P, Theme, R extends RulesetIds = 'T'> = (...r: Ruleset<$W>[]) => R
+  type T$native<P, Theme, R extends RulesetIds = 'T'> = (...r: Ruleset<TNative<R>>[]) => R
+  type T$if<P, Theme, R extends RulesetIds = 'T'> = (cond: (p: P) => boolean, ...r: Ruleset<R>[]) => TAllowed<R>
+  type T$ifelse<P, Theme, R extends RulesetIds = 'T'> = (cond: (p: P) => boolean, ifPart: Ruleset<R>[], elsePart: Ruleset<R>[]) => TAllowed<R>
+  type T$width<P, Theme, R extends RulesetIds = 'T'> = (interval: number | [number, number], ...r: Ruleset<R>[]) => TAllowed<R>
+
+  type T$themed<P, Theme, R extends RulesetIds = 'T'> = (p: (t: Theme) => R) => R
+  type T$rules<P, Theme, R extends RulesetIds = 'T'> = (...pars: Ruleset<R>[]) => TAllowed<R>
+  type T$atomizeRuleset<P, Theme, R extends RulesetIds = 'T'> = (r: RulesetCreator<R, Theme> | Ruleset<R>[], theme?: Theme, path?: string) => TAllowed<R>
+  type T$mergeRulesets<P, Theme, R extends RulesetIds = 'T'> = (r: Ruleset<R>[]) => TAllowed<R>
+  type T$toClassNames<P, Theme, R extends RulesetIds = 'T'> = (query: P, ...rules: Ruleset<R>[]) => TAllowed<R>
+
+  //type TWeb<P, Theme, R extends RulesetIds = 'T'> = any
+  //type TWeb<P, Theme, R extends RulesetIds = 'T'> = any
+}

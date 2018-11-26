@@ -1,13 +1,8 @@
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 import { getTypedUtils } from 'reactxx-sheeter'
 
-const toClassNames = <R>(...rules: R[]) => null as R
-
-const atomizeRuleset = <R extends TTyped.RulesetIds>(...r: TTyped.TAllowedInput<R>[]) => null as TTyped.TAllowed<R>
-
-const { $themed, $if, $web, $native, $rules } = getTypedUtils<{ enabled }, { primary }>()
-
-// COMPONENT example
+const { $themed, $if, $web, $native, $rules, $toClassNames, $atomizeRuleset
+} = getTypedUtils<{ enabled }, { primary }>()
 
 const sheet4 = $themed(theme => ({
   root: $rules<V>(
@@ -65,12 +60,12 @@ const sheet3 = {
   ),
 }
 
-const root = toClassNames(sheet3.root, sheet3.webOnly)
-const nativeOnly = toClassNames(sheet3.root, sheet3.nativeOnly)
-const webOnly = toClassNames(sheet3.root, sheet3.webOnly)
-const webOnly2 = toClassNames(sheet3.root, sheet3.webOnly)
-const label = toClassNames(sheet3.label, atomizeRuleset<V>({}))
-const image = toClassNames(sheet3.image)
+const root = $toClassNames(null, sheet3.root, sheet3.webOnly)
+const nativeOnly = $toClassNames(null, sheet3.root, sheet3.nativeOnly)
+const webOnly = $toClassNames(null, sheet3.root, sheet3.webOnly)
+const webOnly2 = $toClassNames(null, sheet3.root, sheet3.webOnly)
+const label = $toClassNames<T>(null, sheet3.label, $atomizeRuleset<V>([{}]))
+const image = $toClassNames(null, sheet3.image)
 
 const Text: TTyped.TPlatformAllowed<T> = root
 const View: TTyped.TPlatformAllowed<V> = webOnly2
