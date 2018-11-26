@@ -11,17 +11,17 @@ import { platform } from 'reactxx-sheeter'
 // linearize and atomize "ruleset" and its $web, $native and variants ($if, $widths,...)
 // result is added to 'atomizedVariants'
 export const adjustAtomizedLow = (
-    ruleset: TAtomize.Source,
+    ruleset: TAtomize.Ruleset,
     atomizedVariants: TAtomize.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions
 ) => {
     processTree(ruleset, atomizedVariants, path, pseudoPrefixes, conditions)
 }
 
-export function isToAtomizeArray(obj): obj is TAtomize.Item[] { return obj && !(obj as TAtomize.Ruleset).$r$ && Array.isArray(obj) }
-export function isAtomized(obj): obj is TAtomize.Ruleset { return !obj || (obj as TAtomize.Ruleset).$r$ }
+export function isToAtomizeArray(obj): obj is TAtomize.Item[] { return obj && !(obj as TAtomize.AtomizedRuleset).$r$ && Array.isArray(obj) }
+export function isAtomized(obj): obj is TAtomize.AtomizedRuleset { return !obj || (obj as TAtomize.AtomizedRuleset).$r$ }
 export function isDeferred(obj): obj is TAtomize.Deferred { return obj && (obj as TAtomize.Deferred).$d$ }
 export function isTemporary(obj): obj is TAtomize.TempProc { return obj && (obj as TAtomize.TempProc).$t$ }
-export function isToAtomize(obj): obj is TAtomize.ToAtomize { return obj && !(obj as TAtomize.Ruleset).$r$ && !(obj as TAtomize.Deferred).$d$ && !(obj as TAtomize.TempProc).$t$}
+export function isToAtomize(obj): obj is TAtomize.ToAtomize { return obj && !(obj as TAtomize.AtomizedRuleset).$r$ && !(obj as TAtomize.Deferred).$d$ && !(obj as TAtomize.TempProc).$t$}
 
 //*******************************************************
 //        makeTemporary

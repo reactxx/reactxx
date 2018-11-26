@@ -62,7 +62,7 @@ const s2: TSheeter.PartialSheet<Shape> = {
   ]
 }
 
-const classNames: TAtomize.Ruleset = null
+const classNames: TAtomize.AtomizedRuleset = null
 
 const s3: TSheeter.PartialSheet<Shape> = {
   root: classNames

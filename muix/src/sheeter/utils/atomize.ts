@@ -22,7 +22,7 @@ export const atomizeRuleset = <N extends string = 'root', R extends TSheeter.Sha
 ) => {
     if (!ruleset) return null
 
-    const rs = createWithTheme(ruleset, theme) as TAtomize.Source
+    const rs = createWithTheme(ruleset, theme) as TAtomize.Ruleset
 
     if (!rs) return null
 
@@ -33,13 +33,13 @@ export const atomizeRuleset = <N extends string = 'root', R extends TSheeter.Sha
 }
 
 export const wrapRuleset = ruleset => {
-    (ruleset as TAtomize.Ruleset).$r$ = true
+    (ruleset as TAtomize.AtomizedRuleset).$r$ = true
     if (window.__TRACE__)
         ruleset['toJSON'] = toJSON.bind(ruleset)
-    return ruleset as TAtomize.Ruleset
+    return ruleset as TAtomize.AtomizedRuleset
 }
 function toJSON () {
-    return (this as TAtomize.Ruleset).map(v => isDeferred(v) ? 'DEFFERED' : [...v])
+    return (this as TAtomize.AtomizedRuleset).map(v => isDeferred(v) ? 'DEFFERED' : [...v])
 }
 
 // muttable (at least for native)

@@ -16,7 +16,7 @@ declare namespace TSheeter {
     RulesetItem<T> | RulesetItem<T>[]
   export type RulesetItem<T extends TCommonStyles.RulesetIds = 'Text'> =
     TCommonStyles.RulesetType<T>
-    | TAtomize.Ruleset
+    | TAtomize.AtomizedRuleset
 
   //export type Ruleset<T extends TCommonStyles.RulesetIds = 'Text'> = TCommonStyles.RulesetType<T>
 
@@ -27,12 +27,12 @@ declare namespace TSheeter {
   export type RulesetNativeOrAtomized<T extends TCommonStyles.RulesetIds = 'Text'> =
     RulesetNativeItem<T> | RulesetNativeItem<T>[]
   export type RulesetNativeItem<T extends TCommonStyles.RulesetIds = 'Text'> =
-    TCommonStyles.RulesetTypeNative<T> | TAtomize.Ruleset
+    TCommonStyles.RulesetTypeNative<T> | TAtomize.AtomizedRuleset
 
   export type RulesetWebOrAtomized<T extends TCommonStyles.RulesetIds = 'Text'> =
     RulesetWebItem | RulesetWebItem[]
   export type RulesetWebItem<T extends TCommonStyles.RulesetIds = 'Text'> =
-    TCommonStyles.RulesetTypeWeb | TAtomize.Ruleset
+    TCommonStyles.RulesetTypeWeb | TAtomize.AtomizedRuleset
 
   /******************************************
     STYLE
@@ -42,7 +42,7 @@ declare namespace TSheeter {
 
   export type StyleOrAtomized<R extends Shape = Shape> = StyleItem<R> | StyleItem<R>[]
 
-  export type StyleItem<R extends Shape = Shape> = Style<R> | TAtomize.Ruleset
+  export type StyleItem<R extends Shape = Shape> = Style<R> | TAtomize.AtomizedRuleset
 
   export type StyleOrAtomizedWeb = Style | Style[]
 

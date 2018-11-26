@@ -3,7 +3,7 @@ import { TWithStyles, TSheeter, TAtomize, TVariants } from 'reactxx-typings'
 import { atomizeRuleset, wrapRuleset } from './atomize'
 import { isToAtomize, isToAtomizeArray, isDeferred, isTemporary } from './atomize-low'
 
-export type Item = TAtomize.ToAtomize | TAtomize.Ruleset | TAtomize.TempProc
+export type Item = TAtomize.ToAtomize | TAtomize.AtomizedRuleset | TAtomize.TempProc
 
 export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: Item[]) => {
 

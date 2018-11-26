@@ -48,14 +48,14 @@ export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOr
 
         return res as TSheeter.Style
     } else {
-        return mergeRulesets(sources as TAtomize.Ruleset[])
+        return mergeRulesets(sources as TAtomize.AtomizedRuleset[])
     }
 }
 
 // immutable
-export const mergeRulesets = (sources: TAtomize.Ruleset[]) => {
+export const mergeRulesets = (sources: TAtomize.AtomizedRuleset[]) => {
     if (!sources || sources.length === 0) return null
-    let res: TAtomize.Ruleset = null
+    let res: TAtomize.AtomizedRuleset = null
     let first = true
     sources.forEach(src => {
         if (!src) return

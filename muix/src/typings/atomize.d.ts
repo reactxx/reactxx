@@ -4,7 +4,7 @@ import { TWithStyles } from './with-styles';
 
 declare namespace TAtomize {
 
-  export type Source = Item | Item[]
+  export type Ruleset = Item | Item[]
 
   export interface TempCtx {
     atomizedVariants: TAtomize.Variants, path: string,
@@ -16,10 +16,10 @@ declare namespace TAtomize {
     ) => void
   ) & { $t$?: true }
 
-  export type Item = ToAtomize | Ruleset | TempProc | Deferred
+  export type Item = ToAtomize | AtomizedRuleset | TempProc | Deferred
   export type ToAtomize = {}
 
-  export interface Ruleset extends Array<Variant> {
+  export interface AtomizedRuleset extends Array<Variant> {
     $r$?: true // array signature
   }
   export interface Deferred {
@@ -37,7 +37,7 @@ declare namespace TAtomize {
     $c$?: boolean // ReactXX component signature
   }
 
-  export type Sheet<R extends TSheeter.Shape = TSheeter.Shape> = { [P in TSheeter.RulesetNamesAll<R>]: Ruleset }
+  export type Sheet<R extends TSheeter.Shape = TSheeter.Shape> = { [P in TSheeter.RulesetNamesAll<R>]: AtomizedRuleset }
 
   export type NativeStyle = Record<string, TNativeRuleValue>
 
@@ -75,7 +75,7 @@ declare namespace TAtomize {
 
   type ValueOrCreator<T, Theme> = T | ((theme:Theme) => T)
   
-  export type SourceOrCreator<Theme> = ValueOrCreator<Source, Theme>
+  export type RulesetOrCreator<Theme> = ValueOrCreator<Ruleset, Theme>
   export type SheetOrCreator<Theme = any> = ValueOrCreator<Sheet, Theme>
 
 }

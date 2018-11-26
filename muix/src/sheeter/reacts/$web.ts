@@ -61,7 +61,7 @@ export const finalizeClassName = (lastWinResult: TAtomize.AtomicWebsLow) => {
 //export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastwinsStrategyLow) as TAtomize.AtomicWebsLow
 
 // apply LAST WIN strategy for web className
-export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = (values: TAtomize.Ruleset) => {
+export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = (values: TAtomize.AtomizedRuleset) => {
   if (!values) return null
 
   const { renderer } = platform
