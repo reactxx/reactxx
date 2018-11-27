@@ -74,8 +74,12 @@ Object {
 
 exports[`SHEETER HOT ## NATIVE ## 07: use attr 03: with $if 1`] = `
 Object {
+  "borderColor": Object {
+    "tracePath": "/$hot[0]",
+    "value": "blue",
+  },
   "color": Object {
-    "tracePath": "/$if/$hot",
+    "tracePath": "/$hot[1]/$if/$hot",
     "value": "blue",
   },
 }
@@ -137,6 +141,7 @@ Array [
 
 exports[`SHEETER HOT ## WEB ## 07: use attr 03: with $if 1`] = `
 Array [
-  ".a { color:blue } @/$if/$hot",
+  ".b { color:blue } @/$hot[1]/$if/$hot",
+  ".a { border-color:blue } @/$hot[0]",
 ]
 `;

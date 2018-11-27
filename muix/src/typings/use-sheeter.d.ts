@@ -12,7 +12,7 @@ declare namespace TUseSheeter {
   }
 
   // component type options
-  export interface ComponentConfig<R extends TSheeter.Shape = TSheeter.Shape> extends TVariants.ComponentOptions, ComponentConfigLow {
+  export interface ComponentConfig<R extends TSheeter.Shape = TSheeter.Shape> extends ComponentConfigLow {
     defaultProps?: TComponents.Props<R> // classes, classNameX and styleX ignored
     defaultSheet?: TTyped.SheetOrCreator<R>
   }

@@ -50,18 +50,12 @@ export namespace TTyped {
     R extends I ? $I :
     R
 
-  // classNameX definition for Web, Native and Components
-
-
   export type TAllowed<R extends RulesetIds> =
     R extends T ? T | V :
     R extends $T ? $T | $V | T | V :
     R extends $V ? $V | V :
     R extends $I ? $I | I :
     R
-
-  export type Ruleset<R extends RulesetIds = RulesetIds> = RulesetType<R> | TAllowed<R>
-  export type Rulesets<R extends RulesetIds = RulesetIds> = Ruleset<R> | Ruleset<R>[]
 
   export type TPlatformAllowed<R extends RulesetIds> =
     R extends $W ? $W | V | T | I :
@@ -73,6 +67,10 @@ export namespace TTyped {
     R extends T ? T | V | $W : R | $W
 
 
+  export type Ruleset<R extends RulesetIds = RulesetIds> = RulesetType<R> | TAllowed<R>
+  export type Rulesets<R extends RulesetIds = RulesetIds> = Ruleset<R> | Ruleset<R>[]
+
+
   export interface Utils<S extends TVariants.ShapePart> {
     $themed: <R extends any>(p: (t: TVariants.getTheme<S>) => R) => R
     $rules: <R extends RulesetIds>(...pars: Ruleset<R>[]) => R
@@ -80,15 +78,17 @@ export namespace TTyped {
     $web: <R extends RulesetIds>(...r: Ruleset<$W>[]) => R
     $native: <R extends RulesetIds>(...r: Ruleset<TNative<R>>[]) => R
 
-    $if: <R extends RulesetIds>(cond: boolean | ((p: TVariants.getSheetQuery<S>) => boolean), ...r: Ruleset<R>[]) => R
-    $ifelse: <R extends RulesetIds>(cond: (p: TVariants.getSheetQuery<S>) => boolean, ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
+    $if: <R extends RulesetIds>(cond: (p: TVariants.SheetPar<S>) => boolean, ...r: Ruleset<R>[]) => R
+    $ifelse: <R extends RulesetIds>(cond: (p: TVariants.SheetPar<S>) => boolean, ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
+    $sif: <R extends RulesetIds>(cond: boolean, ...r: Ruleset<R>[]) => R
+    $sifelse: <R extends RulesetIds>(cond: boolean, ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
     $width: <R extends RulesetIds>(interval: number | [number, number], ...r: Ruleset<R>[]) => R
-    $hot: <R extends RulesetIds>(cond: (p: TVariants.getSheetQuery<S>) => Ruleset<R> | Ruleset<R>[]) => R
+    $hot: <R extends RulesetIds>(cond: (p: TVariants.SheetPar<S>) => Ruleset<R> | Ruleset<R>[]) => R
 
     $atomizeRuleset: <R extends RulesetIds>(r: RulesetOrCreator<S, R>, theme?: TVariants.getTheme<S>, path?: string) => R
     $atomize: <R extends RulesetIds>(...r: Ruleset<R>[]) => R
     $mergeRulesets: <R extends RulesetIds>(r: Ruleset<R>[]) => R
-    $toClassNames: <R extends RulesetIds>(query: TVariants.getSheetQuery<S>, ...rules: RulesetSimple<R>[]) => R
+    $toClassNames: <R extends RulesetIds>(query: TVariants.SheetPar<S>, ...rules: RulesetSimple<R>[]) => R
 
     $atomizeSheet: (sheet: PartialSheet<S>, theme?: TVariants.getTheme<S>, path?: string) => PartialSheet<S>
     $mergeSheets: (sources: PartialSheet<S>[]) => PartialSheet<S>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export * from './conditions/index'
+export * from './queryable/index'
 export * from './utils/deep-merge'
 export * from './utils/globals'
 export * from './utils/use-force-update'

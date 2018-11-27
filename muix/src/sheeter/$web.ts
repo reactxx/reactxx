@@ -1,7 +1,7 @@
 import Fela from 'reactxx-fela'
 import { assignPlatform, platform } from 'reactxx-sheeter'
 import { applyLastwinsStrategy, finalizeClassName, createElement } from './reacts/$web'
-import { setActWidth } from './conditions/$widths/store'
+import { setActWidth } from './queryable/$widths/store'
 
 export const init = () => {
     Fela.initFela$Web(platform)

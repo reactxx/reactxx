@@ -2,7 +2,7 @@ import { Dimensions } from 'react-native'
 import { TEngine } from 'reactxx-typings'
 import { applyLastwinsStrategy, finalizeClassName, createElement } from './reacts/$native'
 import { assignPlatform } from './utils/globals'
-import { setActWidth } from './conditions/$widths/store'
+import { setActWidth } from './queryable/$widths/store'
 
 if (Dimensions)
     Dimensions.addEventListener('change', arg => setActWidth(Dimensions.get('window').width))

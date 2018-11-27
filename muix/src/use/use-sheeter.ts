@@ -39,7 +39,9 @@ const useSheeter = <R extends TSheeter.Shape = TSheeter.Shape>(
     const { actWidth, getWidthMap, breakpoints } = useWidthsLow(uniqueId, forceUpdate)
 
     // merge props with default's
-    const propsCode: TComponents.PropsCode = { $widths: { actWidth, breakpoints } }
+    const propsCode: TComponents.PropsCode<R> = { 
+        $widths: { actWidth, breakpoints },
+    }
     mergeCodeProps(propsCode, [
         propsDefault, themedPropsDefault && themedPropsDefault(theme),
         propsOverride, themedPropsOverride && themedPropsOverride(theme),
@@ -48,7 +50,7 @@ const useSheeter = <R extends TSheeter.Shape = TSheeter.Shape>(
 
     const toClassNames = (...rulesets: TTyped.Ruleset[]) => toClassNamesWithQuery(propsCode, ...rulesets)
 
-    return { getWidthMap, toClassNames, propsCode, classes, styleX, classNameX, theme, uniqueId, forceUpdate }
+    return { getWidthMap, toClassNames, propsCode, classes, styleX, classNameX, uniqueId, forceUpdate }
 }
 
 const mergeCodeProps = (target, props: TComponents.Props[]) => {

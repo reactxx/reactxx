@@ -8,7 +8,7 @@ interface Shape {
   sheetQuery: { opened: boolean }
 }
 
-const { $themed, $if, $web, $native, $rules, $toClassNames, $atomize
+const { $themed, $sif, $sifelse, $if, $web, $native, $rules, $toClassNames, $atomize
 } = getSheetUtils<Shape>()
 
 // let t = () => null as T | $W
@@ -56,6 +56,15 @@ describe("TO CLASSNAMES", () => {
         $if<T>(p => !p.opened, { color: 'blue' }),
       )
     ))
+    it("08: sif, sifelse", () => {
+      const inRender = (disabled: boolean) =>
+        dump($toClassNames<T>(sheetQuery(false),
+          $sif<T>(disabled, { color: 'grey' }),
+          $sifelse<T>(disabled, { backgroundColor: 'blue' }, { backgroundColor: 'green' }),
+        ))
+        inRender(true)
+        inRender(false)
+    })
   }
 
   describe("## NATIVE ##", () => doTest(false))

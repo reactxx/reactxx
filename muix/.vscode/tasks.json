@@ -9,7 +9,7 @@
             "command": ".\\node_modules\\.bin\\jest.cmd",
             "args": [
                 "--testPathPattern=\"/sheeter/|/use/\"",
-                //"-u"
+                "-u"
             ],
             "group": {
                 "kind": "test",

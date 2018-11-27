@@ -1,5 +1,5 @@
 import { TVariants } from 'reactxx-typings'
-import { WidthStore } from '../conditions/$widths/store'
+import { WidthStore } from '../queryable/$widths/store'
 
 export const resetPlatform = () => {
     for (const p in platform) delete platform[p]

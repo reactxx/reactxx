@@ -5,16 +5,15 @@ import { TSheeter, TTyped, TEngine, TVariants, TUseSheeter } from './index'
 
 declare namespace TComponents {
 
-  
-  /******************************************
-     COMPONENT TYPING
-  *******************************************/
-  //export type WithStyles<R extends TSheeter.Shape = TSheeter.Shape> = (sheet: TSheeter.SheetX<R>, defaultProps?: Props<R>) => ComponentType<R>
-
-  //export type StylesXCreator<R extends Shape = Shape> = (theme: TSheeter.getTheme<R>) => TSheeter.StylesX<R>
-
   //******************** Cross platform component props
-  export interface CommonProperties<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
+  export type Props<R extends TSheeter.Shape = TSheeter.Shape> =
+    CommonProperties<R> &
+    TVariants.getProps<R> &
+    TEventsX<R>
+
+  export interface CommonProperties<R extends TSheeter.Shape = TSheeter.Shape> {
+    $web?: Partial<TSheeter.getPropsWeb<R> & TVariants.getProps<R>> //web specific props
+    $native?: Partial<TSheeter.getPropsNative<R> & TVariants.getProps<R>> //native specific props
     classNameX?: TTyped.RulesetOrCreator<R>
     styleX?: TSheeter.StyleOrCreator<R>
     classes?: TTyped.PartialSheetOrCreator<R> // cross platform sheet
@@ -28,73 +27,30 @@ declare namespace TComponents {
   - custom components (e.g. <IconButton classNameX={...})
   */
   export interface ReactsCommonProperties<R extends TSheeter.Shape = TSheeter.Shape> {
-    classNameX?: TEngine.Queryables // TSheeter.ClassNameOrAtomized<R>
+    classNameX?: TEngine.Queryables
     styleX?: TSheeter.StyleItem
     trace?: string
   }
 
-  export interface ReactsCommonPropertiesWeb {
-    className?: string
-    styleX?: TSheeter.Style
-    style?: React.CSSProperties
-    $native?
-  }
-
-  export interface ReactsCommonPropertiesNative<R extends TSheeter.Shape = TSheeter.Shape> extends ReactsCommonProperties<R> {
-    styleX?: TEngine.Queryables
-    style?: TEngine.AtomicNativeLow
-    $web?
-  }
-
-  export interface PropsLow<R extends TSheeter.Shape> {
-    $web?: Partial<TSheeter.getPropsWeb<R> & TVariants.getProps<R>> //web specific props
-    $native?: Partial<TSheeter.getPropsNative<R> & TVariants.getProps<R>> //native specific props
-  }
-  export type Props<R extends TSheeter.Shape = TSheeter.Shape> = PartialOverwrite<TVariants.getProps<R>,
-    CommonProperties<R> &
-    TVariants.PropsPart<R> &
-    TEventsX<R>>
-
-  export type TEventsX<R extends TSheeter.Shape = TSheeter.Shape> = PartialRecord<TSheeter.getEvents<R>, MouseEventEx<R>>
-  export type ComponentType<R extends TSheeter.Shape = TSheeter.Shape> = React.ComponentType<Props<R>> & TEngine.IsReactXXComponent & {
-    classes: TTyped.PartialSheet<R>
-    classNamex: TTyped.RulesetOrCreator<R>
-  }
-  export type ComponentClass<R extends TSheeter.Shape = TSheeter.Shape> = React.ComponentClass<Props<R>> & TSheeter.getStaticProps<R> & TProvider<R>
-  export interface TProvider<R extends TSheeter.Shape = TSheeter.Shape> { Provider: React.ComponentClass<TComponents.Props<R>> }
-
-  //******************** Cross platform component code props
-
-  export type PropsCode<R extends TSheeter.Shape = TSheeter.Shape> = PartialOverwrite<TVariants.getProps<R>,
-    CommonPropertiesCode<R> &
-    TVariants.PropsCodePart<R> &
-    TVariants.PropsPart<R> &
-    EventsNative &
-    EventsWeb>
-
-  export interface CommonPropertiesCode<R extends TSheeter.Shape = TSheeter.Shape> { //extends PropsLow<R> {
-    // classNameX?: TAtomize.Ruleset
-    // styleX?: TSheeter.StyleItem
-    // classes?: TAtomize.Sheet<R>
-    //toClassNames?: (rulesets: TSheeter.RulesetOrAtomized) => TAtomize.Ruleset
-    //theme?: TSheeter.getTheme<R>
-    //sheetQuery?: TVariants.Query<R> // merged pipe's pipeState.query
-  }
-
-  export type CommonPropertiesCodeKeys = keyof PropsCode
+  export type ComponentType<R extends TSheeter.Shape = TSheeter.Shape> =
+    React.ComponentType<Props<R>> &
+    TEngine.IsReactXXComponent
 
   export type SFC<R extends TSheeter.Shape = TSheeter.Shape> = React.SFC<Props<R>>
 
-  export type SFCCode<R extends TSheeter.Shape = TSheeter.Shape> = React.SFC<PropsCode<R>> //& ModifyInnerStateProp<R>
-  export type ComponentTypeCode<R extends TSheeter.Shape = TSheeter.Shape> = React.ComponentType<PropsCode<R>> //& ModifyInnerStateProp<R>
-  // export type ModifyInnerStateProc<R extends Shape> = (props: PropsCode<R>, pipeState?: TVariants.Query<R>) => void
-  // export interface ModifyInnerStateProp<R extends Shape> {
-  //   setSheetQuery?: ModifyInnerStateProc<R>
-  // }
+  //******************** Cross platform component code props
+
+  export type PropsCode<R extends TSheeter.Shape = TSheeter.Shape> = //PartialOverwrite<TVariants.getProps<R>,
+    TVariants.getProps<R> &
+    TVariants.PropsCodePart<R> &
+    EventsNative &
+    EventsWeb
 
   /******************************************
     EVENTS
   *******************************************/
+  export type TEventsX<R extends TSheeter.Shape = TSheeter.Shape> = PartialRecord<TSheeter.getEvents<R>, MouseEventEx<R>>
+
   export type TEventOnPress = 'onPress'
   export type TEventsAll = 'onPress' | 'onLongPress' | 'onPressIn' | 'onPressOut'
   export type TEventsXNames = 'onPress' | 'onLongPress'

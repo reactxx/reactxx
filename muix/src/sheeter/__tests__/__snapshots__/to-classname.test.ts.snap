@@ -139,6 +139,60 @@ Object {
 }
 `;
 
+exports[`TO CLASSNAMES ## NATIVE ## 08: sif, sifelse 1`] = `
+Array [
+  Array [
+    "color: grey @/$sif",
+  ],
+  Array [
+    "backgroundColor: blue @/$sifelse-true",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 08: sif, sifelse 2`] = `
+Object {
+  "backgroundColor": Object {
+    "tracePath": "/$sifelse-true",
+    "value": "blue",
+  },
+  "color": Object {
+    "tracePath": "/$sif",
+    "value": "grey",
+  },
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 08: sif, sifelse 3`] = `
+Object {
+  "backgroundColor": "blue",
+  "color": "grey",
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 08: sif, sifelse 4`] = `
+Array [
+  Array [
+    "backgroundColor: blue @/$sifelse-false",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 08: sif, sifelse 5`] = `
+Object {
+  "backgroundColor": Object {
+    "tracePath": "/$sifelse-false",
+    "value": "blue",
+  },
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 08: sif, sifelse 6`] = `
+Object {
+  "backgroundColor": "blue",
+}
+`;
+
 exports[`TO CLASSNAMES ## WEB ## 01: null 1`] = `null`;
 
 exports[`TO CLASSNAMES ## WEB ## 01: null 2`] = `null`;
@@ -242,3 +296,39 @@ Array [
 `;
 
 exports[`TO CLASSNAMES ## WEB ## 07: query => closed => pre-queried 3`] = `"b"`;
+
+exports[`TO CLASSNAMES ## WEB ## 08: sif, sifelse 1`] = `
+Array [
+  Array [
+    ".a { color:grey } @/$sif",
+  ],
+  Array [
+    ".b { background-color:blue } @/$sifelse-true",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 08: sif, sifelse 2`] = `
+Array [
+  ".b { background-color:blue } @/$sifelse-true",
+  ".a { color:grey } @/$sif",
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 08: sif, sifelse 3`] = `"b a"`;
+
+exports[`TO CLASSNAMES ## WEB ## 08: sif, sifelse 4`] = `
+Array [
+  Array [
+    ".b { background-color:blue } @/$sifelse-false",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 08: sif, sifelse 5`] = `
+Array [
+  ".b { background-color:blue } @/$sifelse-false",
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 08: sif, sifelse 6`] = `"b"`;

@@ -13,7 +13,7 @@ export const registerWidthsHandler = () => registerVariantHandler({
 //  PRIVATE
 //*********************************************************
 
-interface WidthsCondition extends TVariants.Condition {
+interface WidthsCondition extends TEngine.Condition{
     type: Consts.name
     interval: [number, number]
 }

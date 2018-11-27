@@ -1,5 +1,5 @@
 import React from 'react'
-import { TEngine, TVariants, TComponents } from 'reactxx-typings'
+import { TSheeter, TEngine, TVariants, TComponents } from 'reactxx-typings'
 
 import { deleteSystemProps } from '../utils/to-classnames'
 import { mergeStyles } from '../utils/merge'
@@ -18,7 +18,7 @@ declare module 'react' {
   }
 }
 
-export const createElement = (type, props: TComponents.ReactsCommonProperties & TComponents.ReactsCommonPropertiesWeb, ...children) => {
+export const createElement = (type, props: TComponents.ReactsCommonProperties & ReactsCommonPropertiesWeb, ...children) => {
 
   if (!props) return React.createElement(type, props, ...children)
 
@@ -91,6 +91,15 @@ export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = (values: T
 
   return res as TEngine.AtomicArrayLow
 }
+
+interface ReactsCommonPropertiesWeb {
+  className?: string
+  styleX?: TSheeter.Style
+  style?: React.CSSProperties
+  $native?
+}
+
+
 
 const consolidateEvents = (props: TComponents.Props & TComponents.Events & TComponents.EventsWeb) => {
   const { onPress, onLongPress, onPressIn, onPressOut, $web } = props

@@ -12,12 +12,18 @@ declare namespace TEngine {
     $r$?: true // array signature
   }
 
+
   export interface Queryable extends Array<Atom> {
-    conditions?: TVariants.Conditions
+    conditions?: Conditions
   }
+  export interface Condition  {
+    type: string
+    test?: (outerPar) => boolean
+  }
+  export type Conditions = Condition[]
 
   export type TempProc = (
-    (atomizedVariants: QueryableItems, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions
+    (atomizedVariants: QueryableItems, path: string, pseudoPrefixes: string[], conditions: Conditions
     ) => void
   ) & { $t$?: true }
 
@@ -38,6 +44,12 @@ declare namespace TEngine {
   export type NativeStyle = Record<string, TNativeRuleValue>
 
   export type Atom = AtomicNative | AtomicWeb
+  export type AtomicWeb = string | __dev_AtomicWeb
+  export interface AtomicNative {
+    propId: string // property name
+    value: TNativeRuleValue // propert value
+  }
+
   export interface __dev_AtomicWeb {
     tracePath?: string
     cache?: __dev_WebCache
@@ -50,11 +62,6 @@ declare namespace TEngine {
     pseudo: string
     media: string
     support: string
-  }
-  export type AtomicWeb = string | __dev_AtomicWeb
-  export interface AtomicNative {
-    propId: string // property name
-    value: TNativeRuleValue // propert value
   }
   export type TNativeRuleValue = string | number | __dev_AtomicNative
   export interface __dev_AtomicNative {

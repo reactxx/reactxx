@@ -1,6 +1,19 @@
 import { TEngine, TVariants } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../utils/atomize-low'
 
+const $if = (
+    test: (outerPar) => boolean,
+    ...rulesets: TEngine.Rulesets[]
+) => {
+    return rulesets && makeTemporary((atomizedVariants, path, pseudoPrefixes, conditions) => {
+        const cond: TEngine.Condition= {
+            type: '$if',
+            test
+        }
+        processTree(rulesets, atomizedVariants, path + '/$if', pseudoPrefixes, [...conditions, cond])
+    })
+}
+
 const $ifelse = (
     test: (outerPar) => boolean,
     ifPart: TEngine.Rulesets,
@@ -8,14 +21,14 @@ const $ifelse = (
 ) => {
     return makeTemporary((atomizedVariants, path, pseudoPrefixes, conditions) => {
         if (ifPart) {
-            const condTrue: TVariants.Condition = {
+            const condTrue: TEngine.Condition= {
                 type: '$ifelse-true',
                 test
             }
             processTree(ifPart, atomizedVariants, path + '/$ifelse-true', pseudoPrefixes, [...conditions, condTrue])
         }
         if (elsePart) {
-            const condFalse: TVariants.Condition = {
+            const condFalse: TEngine.Condition= {
                 type: '$ifelse-false',
                 test: outerPar => !test(outerPar)
             }
@@ -24,4 +37,4 @@ const $ifelse = (
     })
 }
 
-export default $ifelse
+export {$if, $ifelse}

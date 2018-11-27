@@ -1,6 +1,6 @@
 import { TSheeter } from 'reactxx-typings'
-import { WidthStore } from './conditions/$widths/store'
-import { $WidthsQuery } from './conditions/$widths/$width'
+import { WidthStore } from './queryable/$widths/store'
+import { $WidthsQuery } from './queryable/$widths/$width'
 declare module 'reactxx-typings' {
 
     namespace TVariants {

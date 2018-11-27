@@ -1,11 +1,11 @@
 import { TTyped, TVariants, TEngine } from 'reactxx-typings'
 
-import $web from '../conditions/$web'
-import $native from '../conditions/$native'
-import $hot from '../conditions/$hot'
-import $if from '../conditions/$if'
-import $ifelse from '../conditions/$ifelse'
-import $width from '../conditions/$widths/$width'
+import $web from '../queryable/$web'
+import $native from '../queryable/$native'
+import $hot from '../queryable/$hot'
+import { $if, $ifelse} from '../queryable/$if'
+import { $sif, $sifelse} from '../queryable/$sif'
+import $width from '../queryable/$widths/$width'
 
 import { atomizeRuleset, atomizeSheet } from './atomize'
 import { mergeSheets, mergeRulesets } from './merge'
@@ -19,6 +19,8 @@ const untyped = {
     $hot,
     $if,
     $ifelse,
+    $sif, 
+    $sifelse,
     $width,
     $themed: p => p,
     $rules: p => p,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { TComponents, TEngine, TVariants } from 'reactxx-typings'
+import { TSheeter, TComponents, TEngine, TVariants } from 'reactxx-typings'
 import { deleteSystemProps, toClassNamesWithQuery } from '../utils/to-classnames'
 
 import { isReactXXComponent } from '../utils/atomize'
@@ -17,7 +17,7 @@ declare module 'react-native' {
   }
 }
 
-export const createElement = (type, props: TComponents.ReactsCommonProperties & TComponents.ReactsCommonPropertiesNative, ...children) => {
+export const createElement = (type, props: TComponents.ReactsCommonProperties & ReactsCommonPropertiesNative, ...children) => {
   if (!props) return React.createElement(type, props, ...children)
 
   const isXXComponent = isReactXXComponent(type)
@@ -44,8 +44,6 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 
   return React.createElement(type, props, ...children)
 }
-
-//export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastWinStrategyLow) as TAtomize.AtomicNativeLow
 
 export const finalizeClassName = (lastWinResult: TEngine.AtomicNativeLow) => {
   if (!lastWinResult) return undefined
@@ -76,3 +74,10 @@ export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = values => 
     }
   return res as TEngine.AtomicArrayLow
 }
+
+interface ReactsCommonPropertiesNative {
+  styleX?: TEngine.Queryables
+  style?: TEngine.AtomicNativeLow
+  $web?
+}
+

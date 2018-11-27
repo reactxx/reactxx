@@ -1,34 +1,28 @@
 import warning from 'warning'
-import { TUseSheeter, TSheeter, TEngine, TVariants } from 'reactxx-typings'
+import { TEngine } from 'reactxx-typings'
 import { atomizeRuleset, wrapRuleset } from './atomize'
-import { isToAtomize, isToAtomizeArray, isDeferred, isTemporary } from './atomize-low'
+import { isToAtomize, isDeferred, isTemporary } from './atomize-low'
 
-export type Item = TEngine.ToAtomize | TEngine.Queryables | TEngine.TempProc
-
-export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: Item[]) => {
+export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: TEngine.Ruleset[]) => {
 
     let values: TEngine.QueryableItems = []
 
-    const testConditions = (v: TEngine.Queryable, state) => {
-        if (!v.conditions || v.conditions.length === 0) return true
-        return v.conditions.every(c => c.test(state))
-    }
+    const testConditions = (v: TEngine.Queryable, state) =>
+        !v.conditions || v.conditions.length === 0 || v.conditions.every(c => c.test(state))
 
-    const filterList = (list: TEngine.QueryableItems) => {
-        list.forEach(v => {
-            if (!v) return
-            if (isDeferred(v)) {
-                const res = v.evalProc(props)
-                filterList(res)
-            } else if (testConditions(v, props))
-                values.push(v)
-        })
-    }
+    const filterList = (list: TEngine.QueryableItems) => list.forEach(v => {
+        if (!v) return
+        if (isDeferred(v)) {
+            const res = v.evalProc(props)
+            filterList(res)
+        } else if (testConditions(v, props))
+            values.push(v)
+    })
 
-    const process = (val: Item) => {
+    const process = (val: TEngine.Ruleset) => {
         if (!val) return
 
-        if (isDeferred(val)) {
+        if (isDeferred(val)) { // toClassNamesWithQuery(null, $hot())
             const res = val.evalProc(props)
             filterList(res)
             return
@@ -42,9 +36,10 @@ export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: It
         }
 
         const ruleset = isToAtomize(val) ? (() => {
-            warning (typeof val !== 'function', 'Only ruleset expected in toClassNamesWithQuery (but rulesetCreator found)')
+            warning(typeof val !== 'function', 'Only ruleset expected in toClassNamesWithQuery (but rulesetCreator found)')
             return atomizeRuleset(val)
         })() : val
+        
         if (!ruleset || ruleset.length === 0) return
 
         filterList(ruleset)
@@ -66,12 +61,7 @@ export const deleteSystemProps = props => {
   PRIVATE
 *******************************************/
 
-const propsToDelete: string[] = [ //TComponents.CommonPropertiesCodeKeys[] = [
+const propsToDelete: string[] = [
     'sheetQuery', 'classes', 'toClassNames', 'styleX', 'classNameX', 'theme', '$widths'
 ]
 
-// const signAtomicArray = (res: TAtomize.AtomicArray, state: TWithStyles.PipelineState) => {
-//     res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
-//     res.state = state
-//     return res
-// }

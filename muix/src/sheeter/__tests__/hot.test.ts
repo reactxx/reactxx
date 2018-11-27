@@ -8,7 +8,7 @@ import { theme, Theme } from "reactxx-typings-test/shape"
 
 interface Shape {
   theme: Theme
-  sheetQuery: {color: string}  
+  sheetQuery: {primary: string}  
 }
 
 const { $themed, $if, $web, $hot, $native, $rules, $toClassNames, $atomizeRuleset, $ifelse, $mergeRulesets, $width
@@ -64,16 +64,20 @@ describe("SHEETER HOT", () => {
     describe("07: use attr", () => {
       beforeEach(() => initPlatform(isWeb))
 
-      const ruleset = $hot<T>(({ color }) => ({ color }))
+      // '{ color: queryPar.primary }' is processet very late (during $toClassNames processing)
+      const ruleset = $hot<T>(queryPar => ({ color: queryPar.primary }))
 
-      it("01: red", () => afterLastWin($toClassNames<T>({ color: 'red' },
-        ruleset
+      it("01: red", () => afterLastWin($toClassNames<T>({ primary: 'red' },
+        ruleset // color is red
       )))
-      it("02: green", () => afterLastWin($toClassNames<T>({ color: 'green' },
-        ruleset
+      it("02: green", () => afterLastWin($toClassNames<T>({ primary: 'green' },
+        ruleset // color is green
       )))
-      it("03: with $if", () => afterLastWin($toClassNames<T>({ color: 'blue' },
-        $if<T>(({color}) => color==='blue', ruleset)
+      it("03: with $if", () => afterLastWin($toClassNames<T>({ primary: 'blue' },
+        $hot<T>(queryPar => [
+          { borderColor: queryPar.primary },
+          $if<T>(({primary}) => primary==='blue', ruleset),
+        ])
       )))
     })
 

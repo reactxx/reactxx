@@ -1,5 +1,3 @@
-- rozdelit $if na $if a $iff
-- prejmenovat TAtomized na TEngine, TTyped na ??
 - TSheeter, k cemu je? TVariant.ShapePart, k cemu je?
 - styleX: osetrit
 

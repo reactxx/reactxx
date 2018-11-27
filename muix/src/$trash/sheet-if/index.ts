@@ -24,7 +24,7 @@ const registerIFHandler = () => registerVariantHandler({
 //*********************************************************
 //  PRIVATE
 //*********************************************************
-interface IFCondition extends TVariants.Condition {
+interface IFCondition extends TEngine.Condition{
     type: Consts.name
     conditionId: string
 }

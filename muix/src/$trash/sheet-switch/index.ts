@@ -19,7 +19,7 @@ const registerSwitchHandler = () => registerVariantHandler({
 //*********************************************************
 //  PRIVATE
 //*********************************************************
-interface SwitchCondition extends TVariants.Condition {
+interface SwitchCondition extends TEngine.Condition{
     type: Consts.name
     case: string
 }
