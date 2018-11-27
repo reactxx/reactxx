@@ -3,7 +3,7 @@ import { WidthStore } from './queryable/$widths/store'
 import { $WidthsQuery } from './queryable/$widths/$width'
 declare module 'reactxx-typings' {
 
-    namespace TVariants {
+    namespace TExtensions {
         interface Platform {
             actWidth?: () => number
             addBreakpoint?: (width: number) => void

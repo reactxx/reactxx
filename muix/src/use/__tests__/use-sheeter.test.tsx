@@ -2,8 +2,8 @@
 
 import { platform } from "reactxx-sheeter"
 
-import { initPlatform, render } from "./init-platform"
-import { compCreator } from "./lib"
+import { initPlatform, render } from "./init-platform.t"
+import { compCreator } from "./lib.t"
 
 describe("USE SHEETER", () => {
 

@@ -2,7 +2,7 @@ import { TEngine} from 'reactxx-typings'
 
 declare module 'reactxx-typings' {
 
-    namespace TVariants {
+    namespace TExtensions {
 
         interface Platform {
             _withStyles?: {

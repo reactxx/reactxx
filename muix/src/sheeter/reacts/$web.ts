@@ -1,6 +1,6 @@
 import React from 'react';
-import { TComponents, TEngine, TTyped, TVariants } from 'reactxx-typings';
-import { platform } from '../index';
+import { TComponents, TEngine, TTyped } from 'reactxx-typings';
+import { platform, ApplyLastwinsStrategy } from '../index';
 import { isReactXXComponent } from '../utils/atomize';
 import { mergeStyles } from '../utils/merge';
 import { deleteSystemProps } from '../utils/to-classnames';
@@ -61,7 +61,7 @@ export const finalizeClassName = (lastWinResult: TEngine.AtomicWebsLow) => {
 //export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastwinsStrategyLow) as TAtomize.AtomicWebsLow
 
 // apply LAST WIN strategy for web className
-export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = (values: TEngine.Queryables) => {
+export const applyLastwinsStrategy: ApplyLastwinsStrategy = (values: TEngine.Queryables) => {
   if (!values) return null
 
   const { renderer } = platform

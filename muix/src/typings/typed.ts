@@ -153,15 +153,14 @@ export namespace TTyped {
     STYLE
   *******************************************/
 
-  export type StyleOrCreator<R extends TTyped.Shape = TTyped.Shape> = any //StyleOrAtomized<R> | ((theme: getTheme<R>) => StyleOrAtomized<R>)
+  export type StyleOrCreator<R extends Shape = Shape> = any //StyleOrAtomized<R> | ((theme: getTheme<R>) => StyleOrAtomized<R>)
 
-  export type StyleOrAtomized<R extends TTyped.Shape = TTyped.Shape> = any //StyleItem<R> | StyleItem<R>[]
+  export type StyleOrAtomized<R extends Shape = Shape> = any //StyleItem<R> | StyleItem<R>[]
 
-  export type StyleItem<R extends TTyped.Shape = TTyped.Shape> = any //Style<R> | TAtomize.AtomizedRuleset
+  export type StyleItem<R extends Shape = Shape> = any //Style<R> | TAtomize.AtomizedRuleset
 
   export type StyleOrAtomizedWeb = any //Style | Style[]
 
-
-  export type Style<R extends TTyped.Shape = TTyped.Shape> = any/*TODO*/ //TCommonStyles.RulesetType<getStyle<R>>
+  export type Style<R extends Shape = Shape> = any/*TODO*/ //TCommonStyles.RulesetType<getStyle<R>>
 
 }

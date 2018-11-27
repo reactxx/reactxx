@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { TEngine, TTyped, TVariants } from './index';
+import { TEngine, TTyped, TExtensions } from './index';
 
 
 declare namespace TComponents {
@@ -41,7 +41,7 @@ declare namespace TComponents {
 
   export type PropsCode<R extends TTyped.Shape = TTyped.Shape> = //PartialOverwrite<TTyped.getProps<R>,
     TTyped.getProps<R> &
-    TVariants.PropsCodePart<R> &
+    TExtensions.PropsCodePart<R> &
     EventsNative &
     EventsWeb
 

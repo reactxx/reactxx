@@ -6,8 +6,8 @@ import { fireEvent } from 'react-testing-library'
 
 import { ThemeProvider, useTheme } from "reactxx-use"
 
-import { initPlatform, render } from "./init-platform"
-import { compCreator, Theme } from "./lib"
+import { initPlatform, render } from "./init-platform.t"
+import { compCreator, Theme } from "./lib.t"
 
 const secondThemeCreator = () => ({
   primaryColor: 'red',

@@ -6,7 +6,7 @@ import pluginFallbackValue from 'fela-plugin-fallback-value';
 import pluginPrefixer from 'fela-plugin-prefixer';
 import pluginUnit from 'fela-plugin-unit';
 import React from 'react';
-import { TEngine, TVariants } from 'reactxx-typings';
+import { TEngine, TExtensions } from 'reactxx-typings';
 import patch, { dump, IRendererEx } from './patch';
 
 
@@ -21,7 +21,7 @@ const plugins = {
   ]
 }
 
-const initFela$Web = (platform?: TVariants.Platform) => {
+const initFela$Web = (platform?: TExtensions.Platform) => {
   
   if (platform && platform.renderer) return
 
@@ -128,7 +128,7 @@ export default Fela
 
 declare module 'reactxx-typings' {
 
-  namespace TVariants {
+  namespace TExtensions {
     interface Platform {
       renderer?: IRendererEx
     }

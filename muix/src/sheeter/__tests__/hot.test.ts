@@ -2,9 +2,9 @@ import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 import { getTypedEngine } from 'reactxx-sheeter'
 
 //let $atomizeRuleset, $toClassNames
-import { initPlatform, dump, afterLastWin } from "./init-platform"
+import { initPlatform, dump, afterLastWin } from "./init-platform.t"
 
-import { theme, Theme } from "reactxx-typings-test/shape"
+import { theme, Theme } from "reactxx-typings-test/shape.t"
 
 interface Shape {
   theme: Theme

@@ -7,7 +7,7 @@ import { initSheeter$Web, resetPlatform, platform } from 'reactxx-sheeter'
 import { initSheeter$Native } from 'reactxx-sheeter-native'
 
 export { render } from 'react-testing-library'
-export { theme, Shape } from 'reactxx-typings-test/shape'
+export { theme, Shape } from 'reactxx-typings-test/shape.t'
 
 jest.mock('react-native', () => ({
     Dimensions: null,

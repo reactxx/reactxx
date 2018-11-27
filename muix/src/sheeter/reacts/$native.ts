@@ -1,6 +1,6 @@
 import React from 'react';
-import { TComponents, TEngine, TVariants } from 'reactxx-typings';
-import { platform } from '../index-native';
+import { TComponents, TEngine } from 'reactxx-typings';
+import { platform, ApplyLastwinsStrategy } from '../index-native';
 import { isReactXXComponent } from '../utils/atomize';
 import { deleteSystemProps, toClassNamesWithQuery } from '../utils/to-classnames';
 
@@ -55,7 +55,7 @@ export const finalizeClassName = (lastWinResult: TEngine.AtomicNativeLow) => {
   return lastWinResult
 }
 
-export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = values => {
+export const applyLastwinsStrategy: ApplyLastwinsStrategy = values => {
   if (!values) return null
   const res: TEngine.NativeStyle = {}
   let idxs: number[] = []

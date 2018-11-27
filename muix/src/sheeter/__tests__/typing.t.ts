@@ -1,4 +1,4 @@
-import { Shape as ShapeLow, theme } from 'reactxx-typings-test/shape'
+import { Shape as ShapeLow, theme } from 'reactxx-typings-test/shape.t'
 
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 
