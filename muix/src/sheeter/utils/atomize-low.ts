@@ -1,5 +1,5 @@
 import { wrapPseudoPrefixes } from './wrap-pseudo-prefixes'
-import { TTyped, TEngine } from 'reactxx-typings'
+import { TEngine } from 'reactxx-typings'
 
 // platform dependent 
 import { platform } from 'reactxx-sheeter'

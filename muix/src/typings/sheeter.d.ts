@@ -26,7 +26,7 @@ declare namespace TSheeter {
     SHAPE
   *******************************************/
 
-  // Shape for generic default, e.g. "interface X<R extends Shape = Shape> {} " 
+  // component shape
   export interface Shape extends TVariants.ShapePart {
     staticProps: EmptyInterface
     propsNative: EmptyInterface // native only props 

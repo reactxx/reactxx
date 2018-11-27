@@ -1,7 +1,7 @@
 import { initPlatform, dump } from "./init-platform"
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 
-import { getSheetUtils } from 'reactxx-sheeter'
+import { getTypedEngine } from 'reactxx-sheeter'
 
 interface Shape {
   theme: { primary }
@@ -9,7 +9,7 @@ interface Shape {
 }
 
 const { $themed, $sif, $sifelse, $if, $web, $native, $rules, $toClassNames, $atomize
-} = getSheetUtils<Shape>()
+} = getTypedEngine<Shape>()
 
 // let t = () => null as T | $W
 // let tt: '$V'

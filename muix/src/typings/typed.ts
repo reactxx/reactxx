@@ -28,6 +28,10 @@ declare module 'reactxx-typings' {
 
 export namespace TTyped {
 
+  //******************************************************
+  //** RULESET ID ARITMETICS
+  //******************************************************
+
   export type CommonIds = V | T | I
   export type RulesetIds = $W | $T | $V | $I | CommonIds
 
@@ -71,7 +75,7 @@ export namespace TTyped {
   export type Rulesets<R extends RulesetIds = RulesetIds> = Ruleset<R> | Ruleset<R>[]
 
 
-  export interface Utils<S extends TVariants.ShapePart> {
+  export interface TypedEngine<S extends TVariants.ShapePart> {
     $themed: <R extends any>(p: (t: TVariants.getTheme<S>) => R) => R
     $rules: <R extends RulesetIds>(...pars: Ruleset<R>[]) => R
 
@@ -93,6 +97,10 @@ export namespace TTyped {
     $atomizeSheet: (sheet: PartialSheet<S>, theme?: TVariants.getTheme<S>, path?: string) => PartialSheet<S>
     $mergeSheets: (sources: PartialSheet<S>[]) => PartialSheet<S>
   }
+
+  //******************************************************
+  //** RULESET ID ARITMETICS
+  //******************************************************
 
   type ValueOrCreator<T, Theme> = T | ((theme: Theme) => T)
 

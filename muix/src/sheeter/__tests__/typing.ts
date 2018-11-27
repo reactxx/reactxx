@@ -2,7 +2,7 @@ import { Shape as ShapeLow, theme } from 'reactxx-typings-test/shape'
 
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 
-import { getSheetUtils } from 'reactxx-sheeter'
+import { getTypedEngine } from 'reactxx-sheeter'
 
 interface Shape extends ShapeLow {
   sheetQuery: {
@@ -12,7 +12,7 @@ interface Shape extends ShapeLow {
 }
 
 const { $themed, $web, $native, $if, $hot, $ifelse, $width, $rules, $toClassNames, $atomizeRuleset 
-} = getSheetUtils<Shape>()
+} = getTypedEngine<Shape>()
 
 
 const r1: TTyped.Rulesets<'V'> = {

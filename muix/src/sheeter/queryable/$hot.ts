@@ -1,4 +1,4 @@
-import { TSheeter, TCommonStyles, TTyped, TEngine } from 'reactxx-typings'
+import { TEngine } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../utils/atomize-low'
 
 const $hot = (evalProc: (outerPar) => TEngine.Rulesets) => {

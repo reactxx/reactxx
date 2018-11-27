@@ -7,17 +7,13 @@ import { TSheeter, TUseSheeter, TComponents } from 'reactxx-typings'
 import { useSheeter } from "reactxx-use"
 
 export interface Shape extends TSheeter.ShapeAncestor {
-    rulesets: {
-      root: 'Text'
-    },
     sheet: {
       root: 'T'
     },
     className: 'T',
     props: {
-      p1: string
+      p1?: string
     },
-    style: 'Text'
     theme: Theme
   }
 

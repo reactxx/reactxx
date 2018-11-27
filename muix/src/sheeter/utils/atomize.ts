@@ -1,8 +1,8 @@
-import warning from 'warning';
+import { TComponents, TEngine, TSheeter } from 'reactxx-typings';
+import { adjustAtomizedLow, isDeferred } from './atomize-low';
+import { createWithTheme } from './create-with-theme';
 
-import { TEngine, TTyped, TSheeter, TComponents, TCommonStyles } from 'reactxx-typings'
-import { createWithTheme } from './create-with-theme'
-import { adjustAtomizedLow, isDeferred } from './atomize-low'
+
 
 // muttable
 export const atomizeSheet = (sheet: TEngine.SheetOrCreator, theme?, path: string = 'sheet') => {

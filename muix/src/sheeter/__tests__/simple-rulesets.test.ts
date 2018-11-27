@@ -1,5 +1,5 @@
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
-import { getSheetUtils } from 'reactxx-sheeter'
+import { getTypedEngine } from 'reactxx-sheeter'
 
 import { theme, Theme } from "reactxx-typings-test/shape"
 import { initPlatform } from "./init-platform"
@@ -12,7 +12,7 @@ interface Shape {
 
 
 const { $themed, $if, $web, $hot, $native, $rules, $toClassNames, $atomizeRuleset
-} = getSheetUtils<Shape>()
+} = getTypedEngine<Shape>()
 
 
 

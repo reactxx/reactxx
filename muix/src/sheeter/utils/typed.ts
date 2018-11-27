@@ -1,19 +1,17 @@
-import { TTyped, TVariants, TEngine } from 'reactxx-typings'
+import { TEngine, TTyped, TVariants } from 'reactxx-typings';
+import $hot from '../queryable/$hot';
+import { $if, $ifelse } from '../queryable/$if';
+import $native from '../queryable/$native';
+import { $sif, $sifelse } from '../queryable/$sif';
+import $web from '../queryable/$web';
+import $width from '../queryable/$widths/$width';
+import { atomizeRuleset, atomizeSheet } from './atomize';
+import { mergeRulesets, mergeSheets } from './merge';
+import { toClassNamesWithQuery } from './to-classnames';
 
-import $web from '../queryable/$web'
-import $native from '../queryable/$native'
-import $hot from '../queryable/$hot'
-import { $if, $ifelse} from '../queryable/$if'
-import { $sif, $sifelse} from '../queryable/$sif'
-import $width from '../queryable/$widths/$width'
+export const getTypedEngine = <R extends TVariants.ShapePart>() => untypedEngine as TTyped.TypedEngine<R>
 
-import { atomizeRuleset, atomizeSheet } from './atomize'
-import { mergeSheets, mergeRulesets } from './merge'
-import { toClassNamesWithQuery } from './to-classnames'
-
-export const getSheetUtils = <R extends TVariants.ShapePart>() => untyped as TTyped.Utils<R>
-
-const untyped = {
+const untypedEngine = {
     $web,
     $native,
     $hot,
@@ -30,7 +28,7 @@ const untyped = {
     $atomize: (...pars:any[]) => atomizeRuleset(pars, null, '$atomize'),
     $mergeRulesets: mergeRulesets as any,
     $toClassNames: toClassNamesWithQuery as any
-} as TTyped.Utils<TVariants.ShapePart>
+} as TTyped.TypedEngine<TVariants.ShapePart>
 
 export const fromEngineClassName = <R extends TVariants.ShapePart>(r: TEngine.RulesetOrCreator) => r as TTyped.ClassNameSimple<R>
 export const toEngineClassName = (r: TTyped.RulesetOrCreator) => r as TEngine.RulesetOrCreator
