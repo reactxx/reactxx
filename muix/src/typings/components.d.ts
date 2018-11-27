@@ -1,7 +1,6 @@
-﻿import React from 'react'
-import ReactN from 'react-native'
+﻿import React from 'react';
+import { TEngine, TTyped, TVariants } from './index';
 
-import { TVariants, TTyped, TEngine, TUseSheeter } from './index'
 
 declare namespace TComponents {
 

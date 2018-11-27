@@ -1,5 +1,5 @@
-import { TEngine, TVariants } from 'reactxx-typings'
-import { processTree, makeTemporary } from '../utils/atomize-low'
+import { TEngine } from 'reactxx-typings';
+import { makeTemporary, processTree } from '../utils/atomize-low';
 
 const $if = (
     test: (outerPar) => boolean,
@@ -37,4 +37,5 @@ const $ifelse = (
     })
 }
 
-export {$if, $ifelse}
+export { $if, $ifelse };
+

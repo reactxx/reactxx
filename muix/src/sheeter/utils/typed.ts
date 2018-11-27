@@ -1,4 +1,4 @@
-import { TEngine, TTyped, TVariants } from 'reactxx-typings';
+import { TEngine, TTyped } from 'reactxx-typings';
 import $hot from '../queryable/$hot';
 import { $if, $ifelse } from '../queryable/$if';
 import $native from '../queryable/$native';

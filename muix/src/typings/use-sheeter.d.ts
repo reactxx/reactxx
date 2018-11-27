@@ -1,5 +1,4 @@
-import React from 'react';
-import { TTyped, TEngine, TComponents, TVariants } from './index'
+import { TComponents, TTyped } from './index';
 
 declare namespace TUseSheeter {
 

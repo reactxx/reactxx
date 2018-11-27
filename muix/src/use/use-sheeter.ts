@@ -1,15 +1,10 @@
-﻿import warning from 'warning'
-
-import { TTyped, TComponents, TUseSheeter, TVariants } from 'reactxx-typings';
-import {
-    platform, toClassNamesWithQuery,
-    useWidthsLow, useForceUpdate, useUniqueId, fromEngineClassName,
-} from 'reactxx-sheeter'
-
-import { useTheme } from './use-theme'
-import { useDefaults } from './use-defaults'
-import { useProps } from './use-props'
-import { useConfig } from './use-config'
+﻿import { platform, toClassNamesWithQuery, useForceUpdate, useUniqueId, useWidthsLow } from 'reactxx-sheeter';
+import { TComponents, TTyped, TUseSheeter } from 'reactxx-typings';
+import warning from 'warning';
+import { useConfig } from './use-config';
+import { useDefaults } from './use-defaults';
+import { useProps } from './use-props';
+import { useTheme } from './use-theme';
 
 const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     props: TComponents.Props<R>,

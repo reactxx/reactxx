@@ -1,4 +1,4 @@
-import { TTyped, TVariants } from 'reactxx-typings'
+import { TTyped } from 'reactxx-typings';
 
 export interface Props {
     disabled?: boolean

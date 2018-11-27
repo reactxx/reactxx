@@ -1,5 +1,5 @@
-import { TEngine, TVariants } from 'reactxx-typings'
-import { processTree, makeTemporary } from '../utils/atomize-low'
+import { TEngine } from 'reactxx-typings';
+import { makeTemporary, processTree } from '../utils/atomize-low';
 
 const $sif = (
     test: boolean,
@@ -25,4 +25,5 @@ const $sifelse = (
         })
 }
 
-export { $sif, $sifelse }
+export { $sif, $sifelse };
+

@@ -1,14 +1,14 @@
-import React from 'react'
-import { createRenderer } from 'fela'
-import { render } from 'fela-dom'
-import pluginExtend from 'fela-plugin-extend'
-import pluginFallbackValue from 'fela-plugin-fallback-value'
+import { createRenderer } from 'fela';
+import { render } from 'fela-dom';
+import pluginExtend from 'fela-plugin-extend';
+import pluginFallbackValue from 'fela-plugin-fallback-value';
 //import pluginLvha from 'fela-plugin-lvha'
-import pluginPrefixer from 'fela-plugin-prefixer'
-import pluginUnit from 'fela-plugin-unit'
-
-import patch, { IRendererEx, dump } from './patch';
+import pluginPrefixer from 'fela-plugin-prefixer';
+import pluginUnit from 'fela-plugin-unit';
+import React from 'react';
 import { TEngine, TVariants } from 'reactxx-typings';
+import patch, { dump, IRendererEx } from './patch';
+
 
 const plugins = {
   plugins: [

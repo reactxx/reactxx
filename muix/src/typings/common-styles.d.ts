@@ -1,8 +1,4 @@
-﻿import React from 'React';
-import ReactN from 'react-native';
-import CSS from 'csstype';
-import { TSheeter } from './sheeter';
-
+﻿import React from 'react'
 declare namespace TCommonStyles {
 
   export type FlexAlignType = "flex-start" | "flex-end" | "center" | "stretch" | "baseline";

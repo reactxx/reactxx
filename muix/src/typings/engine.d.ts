@@ -1,4 +1,4 @@
-import { TVariants } from './index'
+import React from 'react'
 
 declare namespace TEngine {
 

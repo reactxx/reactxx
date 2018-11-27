@@ -1,9 +1,9 @@
-import React from 'react'
-import { TTyped, TComponents, TEngine, TVariants } from 'reactxx-typings'
-import { deleteSystemProps, toClassNamesWithQuery } from '../utils/to-classnames'
+import React from 'react';
+import { TComponents, TEngine, TVariants } from 'reactxx-typings';
+import { platform } from '../index-native';
+import { isReactXXComponent } from '../utils/atomize';
+import { deleteSystemProps, toClassNamesWithQuery } from '../utils/to-classnames';
 
-import { isReactXXComponent } from '../utils/atomize'
-import { platform } from '../index-native'
 
 /******************************************
   EXTEND REACT NATIVE

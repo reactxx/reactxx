@@ -1,4 +1,4 @@
-import { TCommonStyles, TTyped, TVariants } from 'reactxx-typings'
+import { TCommonStyles, TTyped } from 'reactxx-typings'
 import ReactN from 'react-native';
 import CSS from 'csstype';
 

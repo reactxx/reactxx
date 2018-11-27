@@ -1,10 +1,10 @@
-import React from 'react'
-import { TTyped, TEngine, TVariants, TComponents } from 'reactxx-typings'
+import React from 'react';
+import { TComponents, TEngine, TTyped, TVariants } from 'reactxx-typings';
+import { platform } from '../index';
+import { isReactXXComponent } from '../utils/atomize';
+import { mergeStyles } from '../utils/merge';
+import { deleteSystemProps } from '../utils/to-classnames';
 
-import { deleteSystemProps } from '../utils/to-classnames'
-import { mergeStyles } from '../utils/merge'
-import { isReactXXComponent } from '../utils/atomize'
-import { platform } from '../index'
 
 /******************************************
   EXTEND REACT
