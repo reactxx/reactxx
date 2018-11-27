@@ -65,9 +65,6 @@ Object {
       "backgroundColor: red @sheet.root",
     ],
     Array [
-      "color: green @sheet.root",
-    ],
-    Array [
       "backgroundColor: blue @sheet.root",
     ],
   ],
@@ -202,7 +199,7 @@ Object {
       ".a { background-color:red } @sheet.root",
     ],
     Array [
-      ".b { color:green } @sheet.root",
+      ".b { color:green } @sheet.root/$web",
     ],
     Array [
       ".c { background-color:blue } @sheet.root",

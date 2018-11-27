@@ -74,10 +74,10 @@ describe("SHEET", () => {
           root: $rules<V>({ backgroundColor: 'red' }),
         }),
         $atomizeSheet({
-          root: $rules<$W>({ color: 'green' }),
+          root: $rules<V>($web<V>({ color: 'green' })),
         }),
         $atomizeSheet({
-          root: $rules<$V>({ backgroundColor: 'blue' }),
+          root: $rules<V>({ backgroundColor: 'blue' }),
         }),
       ])
       expect(sheet).toMatchSnapshot()
@@ -90,7 +90,8 @@ describe("SHEET", () => {
           }),
           label: $rules<T>(
             theme.primary.normal,
-            { margin: 10 }
+            { margin: 10 },
+            $if<V>(null)
           ),
           webOnly: $rules<$W>(
             $atomizeRuleset<$W>([theme.secondary.disabled], null, 'theme.secondary.disabled')

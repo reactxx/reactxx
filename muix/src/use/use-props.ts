@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 
 import { TTyped, TAtomize, TComponents, TUseSheeter, TSheeter, TVariants } from 'reactxx-typings';
-import { atomizeSheet, atomizeRuleset, atomizeStyle, mergeSheets, typeSheetCreator, typeClassNameCreator, untypeSheetCreator, untypeClassNameCreator } from 'reactxx-sheeter'
+import { atomizeSheet, atomizeRuleset, atomizeStyle, mergeSheets, fromEngineSheet, toEngineClassName, toEngineSheet, fromEngineClassName } from 'reactxx-sheeter'
 
 export const useProps = <R extends TSheeter.Shape = TSheeter.Shape>(theme, options: TUseSheeter.ComponentConfig, atomizedSheet: TAtomize.Sheet, props: TComponents.Props) => {
     // from props
@@ -9,12 +9,19 @@ export const useProps = <R extends TSheeter.Shape = TSheeter.Shape>(theme, optio
 
     // merge sheet with classes
     const classes = React.useMemo(() => {
-        const classes = atomizeSheet(untypeSheetCreator(_classes), theme, 'classes')
-        return typeSheetCreator<R>(mergeSheets([atomizedSheet, classes]))
+        const classes = atomizeSheet(toEngineSheet(_classes), theme, 'classes')
+        return fromEngineSheet<R>(mergeSheets([atomizedSheet, classes]))
     }, [theme, _classes])
 
     // classNameX
-    const classNameX = React.useMemo(() => typeClassNameCreator<R>(atomizeRuleset(untypeClassNameCreator( _classNameX), theme, 'classes')), [_classNameX, theme])
+    const classNameX = React.useMemo(
+        () => fromEngineClassName<R>
+            (atomizeRuleset(
+                toEngineClassName(_classNameX),
+                theme,
+                'classes'
+            )),
+        [_classNameX, theme])
 
     // styleX
     const styleX = React.useMemo(() => atomizeStyle(_styleX, theme, 'styleX'), [_styleX])

@@ -1,8 +1,7 @@
-- typing styleX and classNameX: remove "as any" in src\use\__tests__\use-sheeter-simple.test.tsx
-
-- style and className
-
-- atomize and merge STYLES: tests
+- rozdelit $if na $if a $iff
+- prejmenovat TAtomized na TEngine, TTyped na ??
+- TSheeter, k cemu je? TVariant.ShapePart, k cemu je?
+- styleX: osetrit
 
 primitives events
 Tests:

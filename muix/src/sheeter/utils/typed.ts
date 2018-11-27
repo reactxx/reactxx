@@ -10,7 +10,6 @@ import $width from '../conditions/$widths/$width'
 import { atomizeRuleset, atomizeSheet } from './atomize'
 import { mergeSheets, mergeRulesets } from './merge'
 import { toClassNamesWithQuery } from './to-classnames'
-import { Task } from 'react-native';
 
 export const getSheetUtils = <R extends TVariants.ShapePart>() => untyped as TTyped.Utils<R>
 
@@ -26,12 +25,13 @@ const untyped = {
     $atomizeSheet: atomizeSheet as any,
     $mergeSheets: mergeSheets as any,
     $atomizeRuleset: atomizeRuleset as any,
+    $atomize: (...pars:any[]) => atomizeRuleset(pars, null, '$atomize'),
     $mergeRulesets: mergeRulesets as any,
     $toClassNames: toClassNamesWithQuery as any
 } as TTyped.Utils<TVariants.ShapePart>
 
-export const typeClassNameCreator = <R extends TVariants.ShapePart>(r: TAtomize.RulesetOrCreator) => r as TTyped.RulesetOrCreator<R>
-export const untypeClassNameCreator = (r: TTyped.RulesetOrCreator) => r as TAtomize.RulesetOrCreator
+export const fromEngineClassName = <R extends TVariants.ShapePart>(r: TAtomize.RulesetOrCreator) => r as TTyped.ClassNameSimple<R>
+export const toEngineClassName = (r: TTyped.RulesetOrCreator) => r as TAtomize.RulesetOrCreator
 
-export const typeSheetCreator = <R extends TVariants.ShapePart>(r: TAtomize.SheetOrCreator) => r as any as TTyped.Sheet<R>
-export const untypeSheetCreator = (r: TTyped.SheetOrCreator) => r as TAtomize.Sheet
+export const fromEngineSheet = <R extends TVariants.ShapePart>(r: TAtomize.SheetOrCreator) => r as any as TTyped.SheetSimple<R>
+export const toEngineSheet = (r: TTyped.SheetOrCreator) => r as TAtomize.Sheet

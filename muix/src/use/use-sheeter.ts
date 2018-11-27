@@ -3,7 +3,7 @@
 import { TTyped, TComponents, TSheeter, TUseSheeter, TVariants } from 'reactxx-typings';
 import {
     platform, toClassNamesWithQuery,
-    useWidthsLow, useForceUpdate, useUniqueId,
+    useWidthsLow, useForceUpdate, useUniqueId, fromEngineClassName,
 } from 'reactxx-sheeter'
 
 import { useTheme } from './use-theme'

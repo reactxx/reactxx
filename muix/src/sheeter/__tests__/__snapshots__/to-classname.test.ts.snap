@@ -154,30 +154,30 @@ exports[`TO CLASSNAMES ## WEB ## 02: null, {}, undefined 3`] = `undefined`;
 exports[`TO CLASSNAMES ## WEB ## 03: mixed 1`] = `
 Array [
   Array [
-    ".d { color:red } @",
+    ".a { color:red } @",
   ],
   Array [
-    ".a { color:blue } @root[0]",
+    ".b { color:blue } @root[0]",
   ],
   Array [
-    ".b { color:yellow } @root[1]",
+    ".c { color:yellow } @root[1]",
   ],
   Array [
     ".e { color:maroon } @/$if",
   ],
   Array [
-    ".c { color:green } @",
+    ".d { color:green } @",
   ],
 ]
 `;
 
 exports[`TO CLASSNAMES ## WEB ## 03: mixed 2`] = `
 Array [
-  ".c { color:green } @",
+  ".d { color:green } @",
 ]
 `;
 
-exports[`TO CLASSNAMES ## WEB ## 03: mixed 3`] = `"c"`;
+exports[`TO CLASSNAMES ## WEB ## 03: mixed 3`] = `"d"`;
 
 exports[`TO CLASSNAMES ## WEB ## 04: query => opened 1`] = `
 Array [

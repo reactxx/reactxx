@@ -3,33 +3,40 @@ import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 
 import { getSheetUtils } from 'reactxx-sheeter'
 
-interface Shape  {
-  theme: {primary}
-  sheetQuery: {opened: boolean}  
+interface Shape {
+  theme: { primary }
+  sheetQuery: { opened: boolean }
 }
 
-const { $themed, $if, $web, $native, $rules, $toClassNames, $atomizeRuleset 
+const { $themed, $if, $web, $native, $rules, $toClassNames, $atomize
 } = getSheetUtils<Shape>()
 
-
+// let t = () => null as T | $W
+// let tt: '$V'
+// let x = false
+// let xx: 'T'
+// const res = $toClassNames(null, $atomizeRuleset<V>(() => [{}]),
+//   $if(true, xx),
+//   $toClassNames(null, null as $T)
+// )//, $atomizeRuleset<$I>(() => [{}]))
 
 describe("TO CLASSNAMES", () => {
 
-  type Par = { opened:boolean, theme: null }
+  type Par = { opened: boolean, theme: null }
   const sheetQuery = (opened: boolean) => ({ opened })
-  const query = (opened: boolean, ...ruleset: TTyped.Ruleset[]) => dump($toClassNames(sheetQuery(opened), ...ruleset))
+  const query = (opened: boolean, ...ruleset: TTyped.RulesetSimple[]) => dump($toClassNames<TTyped.RulesetIds>(sheetQuery(opened), ...ruleset))
 
   const doTest = (isWeb: boolean) => {
     beforeEach(() => initPlatform(isWeb))
     let ruleset
 
     it("01: null", () => dump($toClassNames(null, null)))
-    it("02: null, {}, undefined", () => dump($toClassNames(null, null, {}, undefined)))
-    it("03: mixed", () => dump($toClassNames<T>(null,
-      { color: 'red' }, // ruleset source
-      $atomizeRuleset<T>([{ color: 'blue' }, { color: 'yellow' }], null, 'root'), // atomized ruleset
+    it("02: null, {}, undefined", () => dump($toClassNames(null, undefined)))
+    it("03: mixed", () => dump($toClassNames(null,
+      $atomize<T>({ color: 'red' }), // ruleset source
+      $atomize<T>({ color: 'blue' }, { color: 'yellow' }), // atomized ruleset
       $if<T>(p => true, { color: 'maroon' }), // temporary item
-      $toClassNames<T>(null, { color: 'green' }) // atomized ruleset
+      $toClassNames<T>(null, $atomize<T>({ color: 'green' })) // atomized ruleset
     )))
     it("04: query => opened", () => query(true,
       $if(p => p.opened, { color: 'red' }),
@@ -39,10 +46,10 @@ describe("TO CLASSNAMES", () => {
       $if(p => p.opened, { color: 'red' }),
       $if(p => !p.opened, { color: 'blue' }),
     ))
-    it("06: query => closed => pre-atomized", () => query(false, $atomizeRuleset<T>([
+    it("06: query => closed => pre-atomized", () => query(false, $atomize<T>(
       $if<T>(p => p.opened, { color: 'red' }),
       $if<T>(p => !p.opened, { color: 'blue' }),
-    ])))
+    )))
     it("07: query => closed => pre-queried", () => query(false,
       $toClassNames<T>(sheetQuery(false),
         $if<T>(p => p.opened, { color: 'red' }),
