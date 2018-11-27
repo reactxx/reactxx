@@ -15,10 +15,10 @@ declare namespace TComponents {
 
   //******************** Cross platform component props
   export interface CommonProperties<R extends TSheeter.Shape = TSheeter.Shape> extends PropsLow<R> {
-    classNameX?: TSheeter.ClassNameOrCreator<R>
+    classNameX?: TTyped.RulesetOrCreator<R>
     styleX?: TSheeter.StyleOrCreator<R>
     classes?: TTyped.PartialSheetOrCreator<R> // cross platform sheet
-    themedProps?: (theme: TSheeter.getTheme<R>) => Props<R>
+    themedProps?: (theme: TVariants.getTheme<R>) => Props<R>
   }
 
   /* cross platform styling props 
@@ -47,10 +47,10 @@ declare namespace TComponents {
   }
 
   export interface PropsLow<R extends TSheeter.Shape> {
-    $web?: Partial<TSheeter.getPropsWeb<R> & TSheeter.getProps<R>> //web specific props
-    $native?: Partial<TSheeter.getPropsNative<R> & TSheeter.getProps<R>> //native specific props
+    $web?: Partial<TSheeter.getPropsWeb<R> & TVariants.getProps<R>> //web specific props
+    $native?: Partial<TSheeter.getPropsNative<R> & TVariants.getProps<R>> //native specific props
   }
-  export type Props<R extends TSheeter.Shape = TSheeter.Shape> = PartialOverwrite<TSheeter.getProps<R>,
+  export type Props<R extends TSheeter.Shape = TSheeter.Shape> = PartialOverwrite<TVariants.getProps<R>,
     CommonProperties<R> &
     TVariants.PropsPart<R> &
     TEventsX<R>>
@@ -58,14 +58,14 @@ declare namespace TComponents {
   export type TEventsX<R extends TSheeter.Shape = TSheeter.Shape> = PartialRecord<TSheeter.getEvents<R>, MouseEventEx<R>>
   export type ComponentType<R extends TSheeter.Shape = TSheeter.Shape> = React.ComponentType<Props<R>> & TAtomize.IsReactXXComponent & {
     classes: TTyped.PartialSheet<R>
-    classNamex: TSheeter.ClassNameOrCreator<R>
+    classNamex: TTyped.RulesetOrCreator<R>
   }
   export type ComponentClass<R extends TSheeter.Shape = TSheeter.Shape> = React.ComponentClass<Props<R>> & TSheeter.getStaticProps<R> & TProvider<R>
   export interface TProvider<R extends TSheeter.Shape = TSheeter.Shape> { Provider: React.ComponentClass<TComponents.Props<R>> }
 
   //******************** Cross platform component code props
 
-  export type PropsCode<R extends TSheeter.Shape = TSheeter.Shape> = PartialOverwrite<TSheeter.getProps<R>,
+  export type PropsCode<R extends TSheeter.Shape = TSheeter.Shape> = PartialOverwrite<TVariants.getProps<R>,
     CommonPropertiesCode<R> &
     TVariants.PropsCodePart<R> &
     TVariants.PropsPart<R> &

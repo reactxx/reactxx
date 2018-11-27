@@ -1,19 +1,18 @@
-import React from 'react'
-import { TSheeter, TCommonStyles, TTyped, TVariants } from 'reactxx-typings'
+import { TAtomize } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../../utils/atomize-low'
 import { intervalToSelector, test } from './parser'
 
-export interface $WidthsQuery {
+export interface $WidthsQuery { 
     $widths?: {
         actWidth: number
         breakpoints?: Set<number>
     }
 }
 
-const $width = <T extends TCommonStyles.RulesetIds = 'Text'>(
-    interval: number | [number, number], ...rulesets: TSheeter.RulesetOrAtomized<T>[]
+const $width = (
+    interval: number | [number, number], ...rulesets: TAtomize.Ruleset[]
 ) => {
-    return rulesets && makeTemporary<T>((atomizedVariants, path, pseudoPrefixes, conditions) => {
+    return rulesets && makeTemporary((atomizedVariants, path, pseudoPrefixes, conditions) => {
         if (window.isWeb) {
             // WEB: use media query CSS
             pseudoPrefixes = [...pseudoPrefixes, intervalToSelector(interval)]

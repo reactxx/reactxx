@@ -13,6 +13,7 @@ export interface Shape extends TSheeter.ShapeAncestor {
     sheet: {
       root: 'T'
     },
+    className: 'T',
     props: {
       p1: string
     },
@@ -33,11 +34,11 @@ export interface Shape extends TSheeter.ShapeAncestor {
     const res: TComponents.SFC<Shape> = props => {
       try {
         const { toClassNames, propsCode, classes, classNameX, styleX
-        } = useSheeter(props, config, displayName, configOverride)
+        } = useSheeter<Shape>(props, config, displayName, configOverride)
         
         const renderCount = React.useRef(0)
         renderCount.current++
-        const root = toClassNames(classes.root, classNameX)
+        const root = toClassNames(classes.root as any/*TODO*/, classNameX)
         return <div {...propsCode} classNameX={root} styleX={styleX as any}>{renderCount.current}</div>
       } catch {
         return <div>ERROR</div>

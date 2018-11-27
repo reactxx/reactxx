@@ -1,60 +1,72 @@
-import { TAtomize, TSheeter, TCommonStyles } from "reactxx-typings"
-import { Shape, theme } from 'reactxx-typings-test/shape'
+import { Shape as ShapeLow, theme } from 'reactxx-typings-test/shape'
 
-import { $web, $native, $if, $hot, $ifelse, $width } from 'reactxx-sheeter'
+import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 
-const r1: TSheeter.RulesetOrAtomized<'View'> = {
+import { getSheetUtils } from 'reactxx-sheeter'
+
+interface Shape extends ShapeLow {
+  sheetQuery: {
+    backgroundColor    
+    color
+  }
+}
+
+const { $themed, $web, $native, $if, $hot, $ifelse, $width, $rules, $toClassNames, $atomizeRuleset 
+} = getSheetUtils<Shape>()
+
+
+const r1: TTyped.Rulesets<'V'> = {
   // color: 'red' // ERROR
 }
-const r2: TSheeter.RulesetOrAtomized<'View'> = [
+const r2: TTyped.Rulesets<'V'> = [
   {
     // color: 'red' // ERROR
   }
 ]
 
-const r3: TSheeter.Sheet<Shape>['root'] = {
+const r3: TTyped.Sheet<Shape>['root'] = {
   // color: 'red' // ERROR
 }
 
-const r4: TSheeter.Sheet<Shape>['root'] = [
+const r4: TTyped.Sheet<Shape>['root'] = [
   {
     // color: 'red' // ERROR
   }
 ]
 
-const r5: TSheeter.RulesetOrAtomized<'View'> = [
+const r5: TTyped.Rulesets<V> = [
   // color: 'red' // ERROR
-  $if<null, 'View'>(null, {
+  $if<V>(null, {
     // color: 'red' // ERROR
   }),
-  $ifelse<null, 'View'>(null, {
+  $ifelse<V>(null, {
     // color: 'red' // ERROR
   }, [{
     // color: 'red' // ERROR
   }]),
-  $web(null, {
+  $web<V>(null, {
     color: 'red'
   }),
-  $native<'$NativeView'>(null, {
+  $native<V>(null, {
     // color: 'red' // ERROR
     transform: []
   }),
-  $hot<{backgroundColor:string}, 'View'>(({backgroundColor}) => ({
+  $hot<V>(({backgroundColor}) => ({
     // color: 'red' // ERROR
     backgroundColor
   })),
-  $width<'View'>(1024, {
+  $width<V>(1024, {
     // color: 'red' // ERROR
   }),
 ]
 
-const s1: TSheeter.PartialSheet<Shape> = {
+const s1: TTyped.PartialSheet<Shape> = {
   root: {
     // color: 'red' // error
   }
 }
 
-const s2: TSheeter.PartialSheet<Shape> = {
+const s2: TTyped.PartialSheet<Shape> = {
   root: [
     {
       // color: 'red' // error
@@ -62,16 +74,17 @@ const s2: TSheeter.PartialSheet<Shape> = {
   ]
 }
 
-const classNames: TAtomize.AtomizedRuleset = null
+const classNames: TTyped.Ruleset<'V'> = null
+const classNamesW: TTyped.Ruleset<'$W'> = null
 
-const s3: TSheeter.PartialSheet<Shape> = {
+const s3: TTyped.PartialSheet<Shape> = {
   root: classNames
 }
 
-const s4: TSheeter.Sheet<Shape> = {
+const s4: TTyped.Sheet<Shape> = {
   root: [
     classNames,
-    $if<{ color: string }, 'View'>(({ color }) => true,
+    $if<V>(({ color }) => true,
       {
         // color: 'red' // error
         // transform: [] // error
@@ -81,7 +94,7 @@ const s4: TSheeter.Sheet<Shape> = {
       // color: 'red' // error
       // transform: [] // error
     },
-    $web(
+    $web<V>(
       {
         color: 'red',
         ':hover': {
@@ -91,15 +104,15 @@ const s4: TSheeter.Sheet<Shape> = {
           }
         }
       },
-      $if<{}, '$Web'>(null, { ':hover': { color: 'red' } }, classNames),
+      $if<$W>(null, { ':hover': { color: 'red' } }, classNamesW),
     ),
-    $native<'$NativeView'>(
+    $native<V>(
       {
         transform: [],
         // color: 'red' // error
       },
       classNames,
-      $if<{}, '$NativeView'>(null, {transform: []}), // error
+      $if<$V>(null, {transform: []}), // error
     ),
   ],
   label: [
@@ -107,10 +120,10 @@ const s4: TSheeter.Sheet<Shape> = {
       color: 'red' // error
       // transform: [] // error
     },
-    $web({
+    $web<T>({
       color: 'red',
     }),
-    $native({
+    $native<T>({
       transform: [],
       color: 'red'
     }),
@@ -125,18 +138,18 @@ const s4: TSheeter.Sheet<Shape> = {
         }
       }
     },
-    $web({
+    $web<$W>({
       color: 'red'
     }),
-    $if<null, '$Web'>(null, { ':hover': {} }),
+    $if<$W>(null, { ':hover': {} }),
   ],
   nativeOnly: [
     {
       transform: []
       // color: 'red' // error
     },
-    classNames,
-    $native<'$NativeView'>({
+    //classNames,
+    $native<$T>({
       transform: [],
       // color: 'red' // error
     }),

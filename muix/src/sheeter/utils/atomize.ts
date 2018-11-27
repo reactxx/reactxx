@@ -48,7 +48,7 @@ export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme?, path: strin
     if (window.isWeb)
         return createWithTheme(style, theme) as TSheeter.StyleOrAtomizedWeb
     else
-        return atomizeRuleset(style as TSheeter.RulesetOrAtomized, theme, path)
+        return atomizeRuleset(style as TAtomize.Ruleset, theme, path)
 }
 
 export function isReactXXComponent(obj): obj is TComponents.ComponentType {

@@ -1,4 +1,4 @@
-import { TSheeter } from 'reactxx-typings'
+import { TSheeter, TVariants } from 'reactxx-typings'
 
 export interface Props {
     disabled?: boolean
@@ -17,6 +17,12 @@ export interface Shape extends TSheeter.ShapeAncestor {
         nativeOnly: '$NativeText',
         webOnly: '$Web'
     },
+    sheet: {
+        root: 'V',
+        label: 'T',
+        nativeOnly: '$T',
+        webOnly: '$W'
+    },
 
     style: 'View'
 
@@ -29,7 +35,7 @@ export interface Shape extends TSheeter.ShapeAncestor {
     //innerState: InnerState
 }
 
-export type Theme = TSheeter.getTheme<Shape>
+export type Theme = TVariants.getTheme<Shape>
 
 export const theme = {
     primary: {

@@ -140,26 +140,26 @@ declare namespace TCommonStyles {
   export type RulesetIds = RulesetIdsCommon | RulesetNativeIds | '$Web'
   export type RulesetNativeIdsEx = RulesetIds | unknown
 
-  export type RulesetType<T extends RulesetIds = 'Text'> =
-    T extends 'View' ? ViewStyle :
-    T extends 'Text' ? TextStyle :
-    T extends 'Image' ? ImageStyle :
-    T extends '$Web' ? RulesetWeb :
-    T extends '$NativeView' ? ReactN.ViewStyle :
-    T extends '$NativeText' ? ReactN.TextStyle :
-    T extends '$NativeImage' ? ReactN.ImageStyle :
-    never
+  // export type RulesetType<T extends RulesetIds = 'Text'> =
+  //   T extends 'View' ? ViewStyle :
+  //   T extends 'Text' ? TextStyle :
+  //   T extends 'Image' ? ImageStyle :
+  //   T extends '$Web' ? RulesetWeb :
+  //   T extends '$NativeView' ? ReactN.ViewStyle :
+  //   T extends '$NativeText' ? ReactN.TextStyle :
+  //   T extends '$NativeImage' ? ReactN.ImageStyle :
+  //   never
 
-  export type RulesetTypeNative<T extends RulesetIds = 'Text'> =
-    T extends 'View' ? ReactN.ViewStyle :
-    T extends 'Text' ? ReactN.TextStyle :
-    T extends 'Image' ? ReactN.ImageStyle :
-    T extends '$NativeView' ? ReactN.ViewStyle :
-    T extends '$NativeText' ? ReactN.TextStyle :
-    T extends '$NativeImage' ? ReactN.ImageStyle :
-    never
+  // export type RulesetTypeNative<T extends RulesetIds = 'Text'> =
+  //   T extends 'View' ? ReactN.ViewStyle :
+  //   T extends 'Text' ? ReactN.TextStyle :
+  //   T extends 'Image' ? ReactN.ImageStyle :
+  //   T extends '$NativeView' ? ReactN.ViewStyle :
+  //   T extends '$NativeText' ? ReactN.TextStyle :
+  //   T extends '$NativeImage' ? ReactN.ImageStyle :
+  //   never
 
-  export type RulesetTypeWeb = RulesetWeb
+  // export type RulesetTypeWeb = RulesetWeb
     // T extends 'View' ? RulesetWeb :
     // T extends 'Text' ? RulesetWeb :
     // T extends 'Image' ? RulesetWeb :
@@ -181,17 +181,17 @@ declare namespace TCommonStyles {
   //   TextStyleLow
 
   //******************** Platform specific ruleset
-  export type RulesetNative<T extends RulesetNativeIdsEx = unknown> =
-    T extends 'View' ? ReactN.ViewStyle :
-    T extends 'Image' ? ReactN.ImageStyle :
-    ReactN.TextStyle
+  // export type RulesetNative<T extends RulesetNativeIdsEx = unknown> =
+  //   T extends 'View' ? ReactN.ViewStyle :
+  //   T extends 'Image' ? ReactN.ImageStyle :
+  //   ReactN.TextStyle
 
-  export type NativeProperties<T extends RulesetNativeIdsEx = unknown> =
-    T extends 'View' ? ReactN.ViewProperties :
-    T extends 'Image' ? ReactN.ImageProperties :
-    ReactN.TextProperties
+  // export type NativeProperties<T extends RulesetNativeIdsEx = unknown> =
+  //   T extends 'View' ? ReactN.ViewProperties :
+  //   T extends 'Image' ? ReactN.ImageProperties :
+  //   ReactN.TextProperties
 
-  export type RulesetWeb = React.CSSProperties & { [P in CSS.Pseudos]?: TSheeter.RulesetOrAtomized<'$Web'> }
-  export type Ruleset = RulesetWeb | RulesetNative
+  // export type RulesetWeb = React.CSSProperties & { [P in CSS.Pseudos]?: TSheeter.RulesetOrAtomized<'$Web'> }
+  // export type Ruleset = RulesetWeb | RulesetNative
 
 }

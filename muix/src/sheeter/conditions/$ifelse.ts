@@ -1,12 +1,12 @@
-import { TSheeter, TCommonStyles, TTyped, TVariants } from 'reactxx-typings'
+import { TAtomize, TVariants } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../utils/atomize-low'
 
-const $ifelse = <TPar extends {} = {}, T extends TCommonStyles.RulesetIds = 'Text'>(
-    test: (outerPar: TPar) => boolean,
-    ifPart: TSheeter.RulesetOrAtomized<T>,
-    elsePart: TSheeter.RulesetOrAtomized<T>
+const $ifelse = (
+    test: (outerPar) => boolean,
+    ifPart: TAtomize.Ruleset,
+    elsePart: TAtomize.Ruleset
 ) => {
-    return makeTemporary<T>((atomizedVariants, path, pseudoPrefixes, conditions) => {
+    return makeTemporary((atomizedVariants, path, pseudoPrefixes, conditions) => {
         if (ifPart) {
             const condTrue: TVariants.Condition = {
                 type: '$ifelse-true',

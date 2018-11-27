@@ -29,6 +29,7 @@ declare module 'reactxx-typings' {
 export namespace TTyped {
 
   export type CommonIds = V | T | I
+  export type RulesetIds = $W | $T | $V | $I | CommonIds
 
   type WebStyle = React.CSSProperties & { [P in CSS.Pseudos]?: Ruleset<$W> | Ruleset<$W>[] }
 
@@ -43,15 +44,14 @@ export namespace TTyped {
     never
 
 
-  type TNative<R extends T | V | I> =
+  type TNative<R extends RulesetIds> =
     R extends T ? $T :
     R extends V ? $V :
     R extends I ? $I :
-    never
+    R
 
   // classNameX definition for Web, Native and Components
 
-  export type RulesetIds = $W | $T | $V | $I | CommonIds
 
   export type TAllowed<R extends RulesetIds> =
     R extends T ? T | V :
@@ -61,6 +61,7 @@ export namespace TTyped {
     R
 
   export type Ruleset<R extends RulesetIds = RulesetIds> = RulesetType<R> | TAllowed<R>
+  export type Rulesets<R extends RulesetIds = RulesetIds> = Ruleset<R> | Ruleset<R>[]
 
   export type TPlatformAllowed<R extends RulesetIds> =
     R extends $W ? $W | V | T | I :
@@ -77,32 +78,35 @@ export namespace TTyped {
     $rules: <R extends RulesetIds>(...pars: Ruleset<R>[]) => TAllowed<R>
 
     $web: <R extends RulesetIds>(...r: Ruleset<$W>[]) => R
-    $native: <R extends CommonIds>(...r: Ruleset<TNative<R>>[]) => R
+    $native: <R extends RulesetIds>(...r: Ruleset<TNative<R>>[]) => R
 
     $if: <R extends RulesetIds>(cond: (p: TVariants.getSheetQuery<S>) => boolean, ...r: Ruleset<R>[]) => TAllowed<R>
-    $ifelse: <R extends RulesetIds>(cond: (p: TVariants.getSheetQuery<S>) => boolean, ifPart: Ruleset<R>[], elsePart: Ruleset<R>[]) => TAllowed<R>
+    $ifelse: <R extends RulesetIds>(cond: (p: TVariants.getSheetQuery<S>) => boolean, ifPart: Rulesets<R>, elsePart: Rulesets<R>) => TAllowed<R>
     $width: <R extends RulesetIds>(interval: number | [number, number], ...r: Ruleset<R>[]) => TAllowed<R>
     $hot: <R extends RulesetIds>(cond: (p: TVariants.getSheetQuery<S>) => Ruleset<R> | Ruleset<R>[]) => TAllowed<R>
 
     $atomizeSheet: (sheet: Sheet, theme?: TVariants.getTheme<S>, path?: string) => Sheet
     $mergeSheets: (sources: Sheet[]) => Sheet
-    $atomizeRuleset: <R extends RulesetIds>(r: RulesetOrCreator<R, TVariants.getTheme<S>>, theme?: TVariants.getTheme<S>, path?: string) => TAllowed<R>
+    $atomizeRuleset: <R extends RulesetIds>(r: RulesetOrCreator<S, R>, theme?: TVariants.getTheme<S>, path?: string) => TAllowed<R>
     $mergeRulesets: <R extends RulesetIds>(r: Ruleset<R>[]) => TAllowed<R>
     $toClassNames: <R extends RulesetIds>(query: TVariants.getSheetQuery<S>, ...rules: Ruleset<R>[]) => TAllowed<R>
   }
 
-  type ValueOrCreator<T, Theme> = T | ((theme:Theme) => T)
+  type ValueOrCreator<T, Theme> = T | ((theme: Theme) => T)
 
   export type Sheet<R extends TVariants.ShapePart = TVariants.ShapePart> = {
-    [P in keyof TVariants.getSheet<R>]: Ruleset<TVariants.getSheet<R>[P]>
+    [P in keyof TVariants.getSheet<R>]: Rulesets<TVariants.getSheet<R>[P]>
   }
   export type PartialSheet<R extends TVariants.ShapePart = TVariants.ShapePart> = {
-    [P in keyof TVariants.getSheet<R>]?: Ruleset<TVariants.getSheet<R>[P]>
+    [P in keyof TVariants.getSheet<R>]?: Rulesets<TVariants.getSheet<R>[P]>
   }
 
-  export type SheetOrCreator<R extends TVariants.ShapePart = TVariants.ShapePart> = ValueOrCreator<Sheet<R>, TVariants.getTheme<R>>
-  export type PartialSheetOrCreator<R extends TVariants.ShapePart = TVariants.ShapePart> = ValueOrCreator<PartialSheet<R>, TVariants.getTheme<R>>
-  
-  export type RulesetOrCreator<Id extends RulesetIds, R extends TVariants.ShapePart> = ValueOrCreator<Ruleset<Id>[], TVariants.getTheme<R>>
+  export type SheetOrCreator<R extends TVariants.ShapePart = TVariants.ShapePart> =
+    ValueOrCreator<Sheet<R>, TVariants.getTheme<R>>
+  export type PartialSheetOrCreator<R extends TVariants.ShapePart = TVariants.ShapePart> =
+    ValueOrCreator<PartialSheet<R>, TVariants.getTheme<R>>
+
+  export type RulesetOrCreator<R extends TVariants.ShapePart = TVariants.ShapePart, Id extends RulesetIds =
+    TVariants.getClassName<R>> = ValueOrCreator<Rulesets<Id>, TVariants.getTheme<R>>
 
 }

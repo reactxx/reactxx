@@ -36,7 +36,8 @@ declare namespace TAtomize {
     $c$?: boolean // ReactXX component signature
   }
 
-  export type Sheet<R extends TSheeter.Shape = TSheeter.Shape> = { [P in TSheeter.RulesetNamesAll<R>]: AtomizedRuleset }
+  export type Sheet = Record<string, AtomizedRuleset>
+  //<R extends TSheeter.Shape = TSheeter.Shape> = { [P in TSheeter.RulesetNamesAll<R>]: AtomizedRuleset }
 
   export type NativeStyle = Record<string, TNativeRuleValue>
 
