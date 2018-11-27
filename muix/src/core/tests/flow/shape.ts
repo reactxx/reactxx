@@ -1,4 +1,4 @@
-import { TSheeter, TVariants } from 'reactxx-typings'
+import { TVariants } from 'reactxx-typings'
 import { TSBugHelper } from 'reactxx-core'
 
 export interface Props {

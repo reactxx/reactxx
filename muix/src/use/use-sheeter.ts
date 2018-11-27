@@ -1,6 +1,6 @@
 ﻿import warning from 'warning'
 
-import { TTyped, TComponents, TSheeter, TUseSheeter, TVariants } from 'reactxx-typings';
+import { TTyped, TComponents, TUseSheeter, TVariants } from 'reactxx-typings';
 import {
     platform, toClassNamesWithQuery,
     useWidthsLow, useForceUpdate, useUniqueId, fromEngineClassName,
@@ -11,7 +11,7 @@ import { useDefaults } from './use-defaults'
 import { useProps } from './use-props'
 import { useConfig } from './use-config'
 
-const useSheeter = <R extends TSheeter.Shape = TSheeter.Shape>(
+const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     props: TComponents.Props<R>,
     configDefault: TUseSheeter.ComponentConfig<R>,
     displayName?: string,
@@ -23,7 +23,7 @@ const useSheeter = <R extends TSheeter.Shape = TSheeter.Shape>(
     warning(config === configDefault || config === configOverride, '!(config===configDefault || configDefault===configOverride)')
 
     // theme
-    const [theme] = useTheme<TVariants.getTheme<R>>()
+    const [theme] = useTheme<TTyped.getTheme<R>>()
 
     // from defaults
     const { sheet, propsDefault, themedPropsDefault, propsOverride, themedPropsOverride

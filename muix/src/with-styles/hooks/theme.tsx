@@ -25,7 +25,7 @@ export const ThemeProviderGeneric: React.SFC<ThemeProviderProps> & TAtomize.IsRe
 }
 ThemeProviderGeneric.$c$ = true
 
-export interface ThemeProviderProps<R extends TSheeter.Shape = TSheeter.Shape> {
+export interface ThemeProviderProps<R extends TTyped.Shape = TTyped.Shape> {
   registeredThemeName?: string
   theme?: TSheeter.getTheme<R>
 }

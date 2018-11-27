@@ -216,7 +216,7 @@ const all: TAll = [
     },
 ]
 
-type RulesetOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TSheeter.Shape = TSheeter.Shape> =
+type RulesetOrAtomized<T extends TCommonStyles.RulesetNativeIds = 'Text', R extends TTyped.Shape = TTyped.Shape> =
     TSheeter.Ruleset<T, R> | TAtomize.Ruleset
 
 type SheetCommon<R extends Shape> = keyof TSheeter.getCommon<R> extends never ? TSheeter.FakeInterface :

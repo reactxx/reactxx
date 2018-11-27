@@ -1,4 +1,4 @@
-import { TSheeter, TCommonStyles } from 'reactxx-typings'
+import { TCommonStyles } from 'reactxx-typings'
 import { ThemeProviderGeneric } from 'reactxx-with-styles'
 import { TSBugHelper } from 'reactxx-core'
 

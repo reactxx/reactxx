@@ -1,4 +1,4 @@
-import { TComponents, TEngine, TSheeter } from 'reactxx-typings';
+import { TComponents, TEngine, TTyped } from 'reactxx-typings';
 import { adjustAtomizedLow, isDeferred } from './atomize-low';
 import { createWithTheme } from './create-with-theme';
 
@@ -43,10 +43,10 @@ function toJSON () {
 }
 
 // muttable (at least for native)
-export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme?, path: string = '.') => {
+export const atomizeStyle = (style: TTyped.StyleOrCreator, theme?, path: string = '.') => {
     if (!style) return null
     if (window.isWeb)
-        return createWithTheme(style, theme) as TSheeter.StyleOrAtomizedWeb
+        return createWithTheme(style, theme) as TTyped.StyleOrAtomizedWeb
     else
         return atomizeRuleset(style as TEngine.Rulesets, theme, path)
 }

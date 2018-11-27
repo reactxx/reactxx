@@ -1,11 +1,11 @@
 import React from 'react';
 //import {TextInput} from 'react-native'
 import { deepMerges, platform } from 'reactxx-sheeter';
-import { TAtomize, TComponents, TSheeter, TWithStyles, TVariants, TCommonStyles } from 'reactxx-typings';
+import { TAtomize, TComponents, TWithStyles, TVariants, TCommonStyles } from 'reactxx-typings';
 
 import { useTheme } from './hooks/theme'
 
-export const componentCreator = <R extends TSheeter.Shape>(
+export const componentCreator = <R extends TTyped.Shape>(
   sheetOrCreator: TTyped.SheetOrCreator<R>,
   options: TWithStyles.ComponentOptions<R>,
   code: (props) => any,

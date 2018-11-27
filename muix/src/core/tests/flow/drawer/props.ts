@@ -1,9 +1,9 @@
-import { TWithStyles, TSheeter, TVariants, TComponents } from 'reactxx-typings'
+import { TWithStyles, TVariants, TComponents } from 'reactxx-typings'
 //import { getBreakpoints } from 'reactxx-sheet-widths'
 
 import { Shape, ts } from 'reactxx-core/tests/flow/shape'
 
-export const width: TVariants.getWidths<Shape> =
+export const width: TTyped.getWidths<Shape> =
     //'tabletWidth'
     'mobileWidth'
 //'desktopWidth'

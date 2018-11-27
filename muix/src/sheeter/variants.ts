@@ -1,4 +1,4 @@
-import { TSheeter } from 'reactxx-typings'
+import { TTyped } from 'reactxx-typings'
 import { WidthStore } from './queryable/$widths/store'
 import { $WidthsQuery } from './queryable/$widths/$width'
 declare module 'reactxx-typings' {
@@ -14,7 +14,7 @@ declare module 'reactxx-typings' {
             }
         }
 
-        interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> extends $WidthsQuery { }
+        interface PropsCodePart<R extends TTyped.Shape = TTyped.Shape> extends $WidthsQuery { }
 
     }
 }

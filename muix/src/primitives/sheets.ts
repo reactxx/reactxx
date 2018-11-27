@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactN from 'react-native'
 
-import { TSheeter, TComponents, TCommonStyles } from 'reactxx-typings'
+import { TComponents, TCommonStyles } from 'reactxx-typings'
 import { resetPlatform, platform } from 'reactxx-sheeter'
 import { TPrimitives } from './d-index'
 
@@ -12,16 +12,16 @@ export const hasPlatformEvents = (propsCode: TComponents.PropsCode) => !!(
   //     propsCode.onPress || propsCode.onPressIn || propsCode.onPressOut || propsCode.onLongPress
 )
 
-type TPars<R extends TSheeter.Shape> = TCommonStyles.RulesetType<'$Web'>[]
+type TPars<R extends TTyped.Shape> = TCommonStyles.RulesetType<'$Web'>[]
 
-type TRulesProc<R extends TSheeter.Shape> = <T extends keyof TSheeter.getRulesets<R>>(arg: (p: {
+type TRulesProc<R extends TTyped.Shape> = <T extends keyof TSheeter.getRulesets<R>>(arg: (p: {
   $web: (...r: TPars<R>) => any,
   $native, 
   $wif, 
   $nif, 
   $if: (c, ...r: TCommonStyles.RulesetType<TSheeter.getRulesets<R>[T]>[]) => any, 
 }) => any) => any
-const TSheet = <R extends TSheeter.Shape>(par: (TRules: TRulesProc<R>, theme: TSheeter.getTheme<R>, props) => any) => null
+const TSheet = <R extends TTyped.Shape>(par: (TRules: TRulesProc<R>, theme: TSheeter.getTheme<R>, props) => any) => null
 
 //const { $if, $web } = Typed<TPrimitives.TextShape>()
 

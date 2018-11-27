@@ -1,11 +1,10 @@
 ﻿export { TCommonStyles } from './common-styles'
 export { TEngine } from './engine'
-export { TSheeter } from './sheeter'
 export { TComponents } from './components'
 export { TUseSheeter } from './use-sheeter'
 export * from './typed'
 
-import { TSheeter, TEngine, TCommonStyles } from './index'
+import { TTyped, TEngine, TCommonStyles } from './index'
 import React from 'react'
 
 export namespace TVariants {
@@ -14,7 +13,7 @@ export namespace TVariants {
     //  SHEETER EXTENSION
     //*********************************************************
 
-    interface PropsCodePart<R extends TSheeter.Shape = TSheeter.Shape> { }
+    interface PropsCodePart<R extends TTyped.Shape = TTyped.Shape> { }
 
     interface ShapePart { }
 

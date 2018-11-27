@@ -1,21 +1,21 @@
 import warning from 'warning'
-import { TComponents, TEngine, TSheeter } from 'reactxx-typings';
+import { TComponents, TEngine, TTyped } from 'reactxx-typings';
 import { deepMerge, deepMerges } from './deep-merge'
 import { isAtomized } from './atomize-low';
 import { wrapRuleset } from './atomize';
 
-export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOrAtomized[]) => {
+export const mergeStyles = (sources: TTyped.StyleOrAtomized | TTyped.StyleOrAtomized[]) => {
     if (!sources)
         return null
     if (window.isWeb) {
         let res = null
         let canModify = false
-        const processStyle = (st: TSheeter.Style) => {
+        const processStyle = (st: TTyped.Style) => {
             push(st)
             // if (st.$web)
             //     push(st.$web as TSheeter.Style)
         }
-        const push = (st: TSheeter.Style) => {
+        const push = (st: TTyped.Style) => {
             if (!res) // first
                 res = st
             else if (!canModify) { // second
@@ -24,7 +24,7 @@ export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOr
             } else // third and more
                 Object.assign(res, st)
         }
-        const src = sources as TSheeter.Style | TSheeter.Style[] | TSheeter.Style[]
+        const src = sources as TTyped.Style | TTyped.Style[] | TTyped.Style[]
         if (Array.isArray(src))
             src.forEach(ss => {
                 if (!ss) return
@@ -46,7 +46,7 @@ export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOr
             delete res.$native
         }
 
-        return res as TSheeter.Style
+        return res as TTyped.Style
     } else {
         return mergeRulesets(sources as TEngine.Queryables[])
     }

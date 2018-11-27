@@ -1,6 +1,6 @@
 ﻿import ReactN from 'react-native'
 
-import { TSheeter, TComponents } from 'reactxx-typings'
+import { TComponents } from 'reactxx-typings'
 
 export const enum CompNames {
   Text = 'ReactXXText',

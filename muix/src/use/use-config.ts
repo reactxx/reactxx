@@ -1,8 +1,8 @@
 ﻿import React from 'react'
-import { TSheeter, TUseSheeter } from 'reactxx-typings';
+import { TTyped, TUseSheeter } from 'reactxx-typings';
 import { platform } from 'reactxx-sheeter'
 
-export const useConfig = <R extends TSheeter.Shape = TSheeter.Shape>(
+export const useConfig = <R extends TTyped.Shape = TTyped.Shape>(
     configDefault: TUseSheeter.ComponentConfig<R>,
     displayName?: string,
     configOverride?: TUseSheeter.ComponentConfigOverride<R>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { TSheeter, TEngine, TVariants, TComponents } from 'reactxx-typings'
+import { TTyped, TEngine, TVariants, TComponents } from 'reactxx-typings'
 
 import { deleteSystemProps } from '../utils/to-classnames'
 import { mergeStyles } from '../utils/merge'
@@ -94,7 +94,7 @@ export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = (values: T
 
 interface ReactsCommonPropertiesWeb {
   className?: string
-  styleX?: TSheeter.Style
+  styleX?: TTyped.Style
   style?: React.CSSProperties
   $native?
 }

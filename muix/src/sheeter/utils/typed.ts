@@ -9,7 +9,7 @@ import { atomizeRuleset, atomizeSheet } from './atomize';
 import { mergeRulesets, mergeSheets } from './merge';
 import { toClassNamesWithQuery } from './to-classnames';
 
-export const getTypedEngine = <R extends TVariants.ShapePart>() => untypedEngine as TTyped.TypedEngine<R>
+export const getTypedEngine = <R extends TTyped.Shape>() => untypedEngine as TTyped.TypedEngine<R>
 
 const untypedEngine = {
     $web,
@@ -28,10 +28,10 @@ const untypedEngine = {
     $atomize: (...pars:any[]) => atomizeRuleset(pars, null, '$atomize'),
     $mergeRulesets: mergeRulesets as any,
     $toClassNames: toClassNamesWithQuery as any
-} as TTyped.TypedEngine<TVariants.ShapePart>
+} as TTyped.TypedEngine<TTyped.Shape>
 
-export const fromEngineClassName = <R extends TVariants.ShapePart>(r: TEngine.RulesetOrCreator) => r as TTyped.ClassNameSimple<R>
+export const fromEngineClassName = <R extends TTyped.Shape>(r: TEngine.RulesetOrCreator) => r as TTyped.ClassNameSimple<R>
 export const toEngineClassName = (r: TTyped.RulesetOrCreator) => r as TEngine.RulesetOrCreator
 
-export const fromEngineSheet = <R extends TVariants.ShapePart>(r: TEngine.SheetOrCreator) => r as any as TTyped.SheetSimple<R>
+export const fromEngineSheet = <R extends TTyped.Shape>(r: TEngine.SheetOrCreator) => r as any as TTyped.SheetSimple<R>
 export const toEngineSheet = (r: TTyped.SheetOrCreator) => r as TEngine.Sheet

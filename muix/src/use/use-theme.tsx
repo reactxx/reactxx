@@ -1,7 +1,7 @@
 import React from 'react';
 import warning from 'warning';
 import { atomizeSheet, platform, mergeSheets } from 'reactxx-sheeter';
-import { TTyped, TEngine, TSheeter, TUseSheeter } from 'reactxx-typings';
+import { TEngine, TTyped, TUseSheeter } from 'reactxx-typings';
 
 const themeContext = React.createContext<TUseSheeter.ThemeContext<any>>(null)
 

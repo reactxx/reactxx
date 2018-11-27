@@ -1,6 +1,6 @@
 import React from 'react';
 import { atomizeSheet, platform, mergeSheets } from 'reactxx-sheeter';
-import { TAtomize, TSheeter, TWithStyles } from 'reactxx-typings';
+import { TAtomize, TWithStyles } from 'reactxx-typings';
 import warning from 'warning';
 
 export const themePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {
@@ -23,7 +23,7 @@ export const registerTheme = (name: string, theme) => {
 const themeContext = React.createContext<{}>(null)
 
 // https://github.com/Microsoft/TypeScript/issues/3960#issuecomment-144529141
-export class ThemeProviderGeneric<R extends TSheeter.Shape> extends React.Component<ThemeProviderProps<R>> {
+export class ThemeProviderGeneric<R extends TTyped.Shape> extends React.Component<ThemeProviderProps<R>> {
 
   render() {
     const { children, theme, registeredThemeName } = this.props
@@ -33,7 +33,7 @@ export class ThemeProviderGeneric<R extends TSheeter.Shape> extends React.Compon
   }
 } 
 (ThemeProviderGeneric as TAtomize.IsReactXXComponent).$c$ = true
-export interface ThemeProviderProps<R extends TSheeter.Shape> {
+export interface ThemeProviderProps<R extends TTyped.Shape> {
   registeredThemeName?: string
   theme?: TSheeter.getTheme<R>
 }

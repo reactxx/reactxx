@@ -1,35 +1,14 @@
-import { TCommonStyles, TSheeter, TVariants } from 'reactxx-typings'
+import { TCommonStyles, TTyped, TVariants } from 'reactxx-typings'
 import ReactN from 'react-native';
 import CSS from 'csstype';
 
 export type $W = '$W'; export type $T = '$T'; export type $V = '$V';
 export type $I = '$I'; export type V = 'V'; export type T = 'T'; export type I = 'I';
 
-declare module 'reactxx-typings' {
-
-  namespace TVariants {
-
-    interface ShapePart {
-      sheet?: Record<string, TTyped.RulesetIds>
-      className?: TTyped.CommonIds
-      props?: TSheeter.EmptyInterface // common (web and native) props, excluding events
-      theme?: TSheeter.EmptyInterface
-      sheetQuery?: TSheeter.EmptyInterface
-    }
-    type getTheme<R extends ShapePart = ShapePart> = keyof R['theme'] extends never ? any : R['theme']
-    type getProps<R extends ShapePart> = R['props']
-    type getClassName<R extends ShapePart> = R['className']
-    type getSheet<R extends ShapePart> = R['sheet']
-    type getSheetQuery<R extends ShapePart> = R['sheetQuery']
-
-    type SheetPar<R extends ShapePart> = getSheetQuery<R> & getProps<R>
-  }
-}
-
 export namespace TTyped {
 
   //******************************************************
-  //** RULESET ID ARITMETICS
+  //* RULESET ID ARITMETICS
   //******************************************************
 
   export type CommonIds = V | T | I
@@ -75,54 +54,114 @@ export namespace TTyped {
   export type Rulesets<R extends RulesetIds = RulesetIds> = Ruleset<R> | Ruleset<R>[]
 
 
-  export interface TypedEngine<S extends TVariants.ShapePart> {
-    $themed: <R extends any>(p: (t: TVariants.getTheme<S>) => R) => R
+  export interface TypedEngine<S extends Shape> {
+    $themed: <R extends any>(p: (t: getTheme<S>) => R) => R
     $rules: <R extends RulesetIds>(...pars: Ruleset<R>[]) => R
 
     $web: <R extends RulesetIds>(...r: Ruleset<$W>[]) => R
     $native: <R extends RulesetIds>(...r: Ruleset<TNative<R>>[]) => R
 
-    $if: <R extends RulesetIds>(cond: (p: TVariants.SheetPar<S>) => boolean, ...r: Ruleset<R>[]) => R
-    $ifelse: <R extends RulesetIds>(cond: (p: TVariants.SheetPar<S>) => boolean, ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
+    $if: <R extends RulesetIds>(cond: (p: SheetPar<S>) => boolean, ...r: Ruleset<R>[]) => R
+    $ifelse: <R extends RulesetIds>(cond: (p: SheetPar<S>) => boolean, ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
     $sif: <R extends RulesetIds>(cond: boolean, ...r: Ruleset<R>[]) => R
     $sifelse: <R extends RulesetIds>(cond: boolean, ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
     $width: <R extends RulesetIds>(interval: number | [number, number], ...r: Ruleset<R>[]) => R
-    $hot: <R extends RulesetIds>(cond: (p: TVariants.SheetPar<S>) => Ruleset<R> | Ruleset<R>[]) => R
+    $hot: <R extends RulesetIds>(cond: (p: SheetPar<S>) => Ruleset<R> | Ruleset<R>[]) => R
 
-    $atomizeRuleset: <R extends RulesetIds>(r: RulesetOrCreator<S, R>, theme?: TVariants.getTheme<S>, path?: string) => R
+    $atomizeRuleset: <R extends RulesetIds>(r: RulesetOrCreator<S, R>, theme?: getTheme<S>, path?: string) => R
     $atomize: <R extends RulesetIds>(...r: Ruleset<R>[]) => R
     $mergeRulesets: <R extends RulesetIds>(r: Ruleset<R>[]) => R
-    $toClassNames: <R extends RulesetIds>(query: TVariants.SheetPar<S>, ...rules: RulesetSimple<R>[]) => R
+    $toClassNames: <R extends RulesetIds>(query: SheetPar<S>, ...rules: RulesetSimple<R>[]) => R
 
-    $atomizeSheet: (sheet: PartialSheet<S>, theme?: TVariants.getTheme<S>, path?: string) => PartialSheet<S>
+    $atomizeSheet: (sheet: PartialSheet<S>, theme?: getTheme<S>, path?: string) => PartialSheet<S>
     $mergeSheets: (sources: PartialSheet<S>[]) => PartialSheet<S>
   }
 
   //******************************************************
-  //** RULESET ID ARITMETICS
+  //* SHEET AND CREATORS
   //******************************************************
 
   type ValueOrCreator<T, Theme> = T | ((theme: Theme) => T)
 
-  export type SheetSimple<R extends TVariants.ShapePart> = {
-    [P in keyof TVariants.getSheet<R>]: TVariants.getSheet<R>[P]
+  export type SheetSimple<R extends Shape> = {
+    [P in keyof getSheet<R>]: getSheet<R>[P]
   }
-  export type ClassNameSimple<R extends TVariants.ShapePart> = TAllowed<TVariants.getClassName<R>>
+  export type ClassNameSimple<R extends Shape> = TAllowed<getClassName<R>>
   export type RulesetSimple<Id extends RulesetIds = RulesetIds> = TAllowed<Id>
 
-  export type Sheet<R extends TVariants.ShapePart = TVariants.ShapePart> = {
-    [P in keyof TVariants.getSheet<R>]: Rulesets<TVariants.getSheet<R>[P]>
+  export type Sheet<R extends Shape = Shape> = {
+    [P in keyof getSheet<R>]: Rulesets<getSheet<R>[P]>
   }
-  export type PartialSheet<R extends TVariants.ShapePart = TVariants.ShapePart> = {
-    [P in keyof TVariants.getSheet<R>]?: Rulesets<TVariants.getSheet<R>[P]>
+  export type PartialSheet<R extends Shape = Shape> = {
+    [P in keyof getSheet<R>]?: Rulesets<getSheet<R>[P]>
   }
 
-  export type SheetOrCreator<R extends TVariants.ShapePart = TVariants.ShapePart> =
-    ValueOrCreator<Sheet<R>, TVariants.getTheme<R>>
-  export type PartialSheetOrCreator<R extends TVariants.ShapePart = TVariants.ShapePart> =
-    ValueOrCreator<PartialSheet<R>, TVariants.getTheme<R>>
+  export type SheetOrCreator<R extends Shape = Shape> =
+    ValueOrCreator<Sheet<R>, getTheme<R>>
+  export type PartialSheetOrCreator<R extends Shape = Shape> =
+    ValueOrCreator<PartialSheet<R>, getTheme<R>>
 
-  export type RulesetOrCreator<R extends TVariants.ShapePart = TVariants.ShapePart, Id extends RulesetIds = TVariants.getClassName<R>> =
-    ValueOrCreator<Rulesets<Id>, TVariants.getTheme<R>>
+  export type RulesetOrCreator<R extends Shape = Shape, Id extends RulesetIds = getClassName<R>> =
+    ValueOrCreator<Rulesets<Id>, getTheme<R>>
+
+  //******************************************************
+  //* SHAPE
+  //******************************************************
+
+  // component shape
+  export interface Shape {
+    sheet?: Record<string, RulesetIds>
+    className?: CommonIds
+    props?: EmptyInterface // common (web and native) props, excluding events
+    propsNative?: EmptyInterface // native only props 
+    propsWeb?: React.HTMLAttributes<Element>// web only props
+    theme?: EmptyInterface
+    sheetQuery?: EmptyInterface
+    staticProps?: EmptyInterface
+    events?: EmptyInterface // common events
+  }
+
+  // ancestor for Shape inheritance
+  export interface ShapeAncestor {
+    sheet?: Record<string, RulesetIds>
+    className?: CommonIds
+    props?: EmptyInterface // common (web and native) props, excluding events
+    propsNative?: ReactN.ViewProperties
+    propsWeb?: React.DOMAttributes<Element>
+    theme?: EmptyInterface
+    sheetQuery?: EmptyInterface
+    staticProps: EmptyInterface
+    events?: EmptyInterface // common events
+  }
+
+  export type getPropsWeb<R extends Shape> = R['propsWeb']
+  export type getPropsNative<R extends Shape> = R['propsNative']
+  export type getEvents<R extends Shape = Shape> = keyof R['events']
+  export type getStaticProps<R extends Shape = Shape> = keyof R['staticProps'] extends never ? FakeInterface : R['staticProps']
+  export type getTheme<R extends Shape = Shape> = keyof R['theme'] extends never ? any : R['theme']
+  export type getProps<R extends Shape> = R['props']
+  export type getClassName<R extends Shape> = R['className']
+  export type getSheet<R extends Shape> = R['sheet']
+  export type getSheetQuery<R extends Shape> = R['sheetQuery']
+
+  export type SheetPar<R extends Shape> = getSheetQuery<R> & getProps<R>
+
+  export interface EmptyInterface { }
+  export interface FakeInterface { ['`']?: any }
+
+  /******************************************
+    STYLE
+  *******************************************/
+
+  export type StyleOrCreator<R extends TTyped.Shape = TTyped.Shape> = any //StyleOrAtomized<R> | ((theme: getTheme<R>) => StyleOrAtomized<R>)
+
+  export type StyleOrAtomized<R extends TTyped.Shape = TTyped.Shape> = any //StyleItem<R> | StyleItem<R>[]
+
+  export type StyleItem<R extends TTyped.Shape = TTyped.Shape> = any //Style<R> | TAtomize.AtomizedRuleset
+
+  export type StyleOrAtomizedWeb = any //Style | Style[]
+
+
+  export type Style<R extends TTyped.Shape = TTyped.Shape> = any/*TODO*/ //TCommonStyles.RulesetType<getStyle<R>>
 
 }

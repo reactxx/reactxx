@@ -3,10 +3,10 @@
 import React from 'react'
 import { platform } from "reactxx-sheeter"
 
-import { TSheeter, TUseSheeter, TComponents } from 'reactxx-typings'
+import { TTyped, TUseSheeter, TComponents } from 'reactxx-typings'
 import { useSheeter } from "reactxx-use"
 
-export interface Shape extends TSheeter.ShapeAncestor {
+export interface Shape extends TTyped.ShapeAncestor { 
     sheet: {
       root: 'T'
     },

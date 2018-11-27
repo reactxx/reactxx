@@ -1,5 +1,5 @@
 /** @jsx createElement */
-import { TSheeter, TCommonStyles, TTyped, TVariants } from 'reactxx-typings'
+import { TCommonStyles, TTyped, TVariants } from 'reactxx-typings'
 
 
 // const v: TVariants.VariantPart = {

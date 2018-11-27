@@ -2,7 +2,7 @@ import React from 'react'
 //import { createSerializer, OutputMapper } from 'enzyme-to-json'
 import { RenderResult } from 'react-testing-library'
 
-import { TSheeter, TVariants, TComponents, TWithStyles } from 'reactxx-typings'
+import { TVariants, TComponents, TWithStyles } from 'reactxx-typings'
 import * as WithStyle from 'reactxx-with-styles'
 import {
     platform,
@@ -149,7 +149,7 @@ const deletePropsDir = {
     toClassNames: true, updateInnerStateComponent: true, sheetOrCreator: true, '~': true
 }
 
-export const toClassNames = <R extends TSheeter.Shape>(
+export const toClassNames = <R extends TTyped.Shape>(
     descr: string,
     sheetQuery: TVariants.Query<R>,
     rulesets: TSheeter.ClassNameOrAtomized,

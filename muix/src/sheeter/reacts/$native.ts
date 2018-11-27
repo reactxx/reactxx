@@ -1,5 +1,5 @@
 import React from 'react'
-import { TSheeter, TComponents, TEngine, TVariants } from 'reactxx-typings'
+import { TTyped, TComponents, TEngine, TVariants } from 'reactxx-typings'
 import { deleteSystemProps, toClassNamesWithQuery } from '../utils/to-classnames'
 
 import { isReactXXComponent } from '../utils/atomize'

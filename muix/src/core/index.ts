@@ -1,5 +1,5 @@
 
-import { TSheeter, TVariants } from 'reactxx-typings'
+import { TVariants } from 'reactxx-typings'
 import { widthsPipe, initWidths } from 'reactxx-sheet-widths'
 import { initSwitch } from 'reactxx-sheet-switch'
 
@@ -28,7 +28,7 @@ let initCoreCalled = false
 initCore()
 
 // workaround due to https://github.com/Microsoft/TypeScript/issues/27448
-export interface TSBugHelper<R extends TSheeter.Shape> {
+export interface TSBugHelper<R extends TTyped.Shape> {
     sheet?: TSheeter.Sheet<R>
     sheetCreator?: TSheeter.SheetCreator<R>
 

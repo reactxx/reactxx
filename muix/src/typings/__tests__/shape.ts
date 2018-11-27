@@ -1,4 +1,4 @@
-import { TSheeter, TVariants } from 'reactxx-typings'
+import { TTyped, TVariants } from 'reactxx-typings'
 
 export interface Props {
     disabled?: boolean
@@ -10,7 +10,7 @@ export interface Props {
 // export interface InnerState {
 //     drawerOpened?: boolean
 // }
-export interface Shape extends TSheeter.ShapeAncestor {
+export interface Shape extends TTyped.ShapeAncestor {
     rulesets: {
         root: 'View',
         label: 'Text',
@@ -35,7 +35,7 @@ export interface Shape extends TSheeter.ShapeAncestor {
     //innerState: InnerState
 }
 
-export type Theme = TVariants.getTheme<Shape>
+export type Theme = TTyped.getTheme<Shape>
 
 export const theme = {
     primary: {

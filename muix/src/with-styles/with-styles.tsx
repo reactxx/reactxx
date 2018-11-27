@@ -1,10 +1,10 @@
 import React from 'react';
 import { deepMerges, platform } from 'reactxx-sheeter';
-import { TAtomize, TComponents, TSheeter, TWithStyles, TVariants } from 'reactxx-typings';
+import { TAtomize, TComponents, TWithStyles, TVariants } from 'reactxx-typings';
 
 import { createPipeline } from './utils/create-pipeline'
 
-export const withStylesCreator = <R extends TSheeter.Shape>(
+export const withStylesCreator = <R extends TTyped.Shape>(
   sheetOrCreator: TTyped.SheetOrCreator<R>,
   codeComponent: TComponents.ComponentTypeCode<R>,
   options?: TWithStyles.ComponentOptions<R>

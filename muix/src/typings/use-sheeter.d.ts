@@ -1,5 +1,5 @@
 import React from 'react';
-import { TTyped, TEngine, TComponents, TSheeter, TVariants } from './index'
+import { TTyped, TEngine, TComponents, TVariants } from './index'
 
 declare namespace TUseSheeter {
 
@@ -12,12 +12,12 @@ declare namespace TUseSheeter {
   }
 
   // component type options
-  export interface ComponentConfig<R extends TSheeter.Shape = TSheeter.Shape> extends ComponentConfigLow {
+  export interface ComponentConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
     defaultProps?: TComponents.Props<R> // classes, classNameX and styleX ignored
     defaultSheet?: TTyped.SheetOrCreator<R>
   }
 
-  export interface ComponentConfigOverride<R extends TSheeter.Shape = TSheeter.Shape> extends ComponentConfigLow {
+  export interface ComponentConfigOverride<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
     overrideProps?: TComponents.Props<R> // classes, classNameX and styleX ignored
     overrideSheet?: TTyped.SheetOrCreator<R> 
     myConfigId?: number // ComponentConfig.id
