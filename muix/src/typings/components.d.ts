@@ -28,7 +28,7 @@ declare namespace TComponents {
   - custom components (e.g. <IconButton classNameX={...})
   */
   export interface ReactsCommonProperties<R extends TSheeter.Shape = TSheeter.Shape> {
-    classNameX?: TEngine.AtomizedRuleset // TSheeter.ClassNameOrAtomized<R>
+    classNameX?: TEngine.Queryables // TSheeter.ClassNameOrAtomized<R>
     styleX?: TSheeter.StyleItem
     trace?: string
   }
@@ -41,7 +41,7 @@ declare namespace TComponents {
   }
 
   export interface ReactsCommonPropertiesNative<R extends TSheeter.Shape = TSheeter.Shape> extends ReactsCommonProperties<R> {
-    styleX?: TEngine.AtomizedRuleset
+    styleX?: TEngine.Queryables
     style?: TEngine.AtomicNativeLow
     $web?
   }

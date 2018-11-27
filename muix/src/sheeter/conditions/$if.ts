@@ -3,7 +3,7 @@ import { processTree, makeTemporary } from '../utils/atomize-low'
 
 const $if = (
     test: boolean | ((outerPar) => boolean),
-    ...rulesets: TEngine.Ruleset[]
+    ...rulesets: TEngine.Rulesets[]
 ) => {
     if (!rulesets)
         return false

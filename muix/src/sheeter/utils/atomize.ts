@@ -33,13 +33,13 @@ export const atomizeRuleset = (
 }
 
 export const wrapRuleset = ruleset => {
-    (ruleset as TEngine.AtomizedRuleset).$r$ = true
+    (ruleset as TEngine.Queryables).$r$ = true
     if (window.__TRACE__)
         ruleset['toJSON'] = toJSON.bind(ruleset)
-    return ruleset as TEngine.AtomizedRuleset
+    return ruleset as TEngine.Queryables
 }
 function toJSON () {
-    return (this as TEngine.AtomizedRuleset).map(v => isDeferred(v) ? 'DEFFERED' : [...v])
+    return (this as TEngine.Queryables).map(v => isDeferred(v) ? 'DEFFERED' : [...v])
 }
 
 // muttable (at least for native)
@@ -48,7 +48,7 @@ export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme?, path: strin
     if (window.isWeb)
         return createWithTheme(style, theme) as TSheeter.StyleOrAtomizedWeb
     else
-        return atomizeRuleset(style as TEngine.Ruleset, theme, path)
+        return atomizeRuleset(style as TEngine.Rulesets, theme, path)
 }
 
 export function isReactXXComponent(obj): obj is TComponents.ComponentType {

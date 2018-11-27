@@ -3,8 +3,8 @@ import { processTree, makeTemporary } from '../utils/atomize-low'
 
 const $ifelse = (
     test: (outerPar) => boolean,
-    ifPart: TEngine.Ruleset,
-    elsePart: TEngine.Ruleset
+    ifPart: TEngine.Rulesets,
+    elsePart: TEngine.Rulesets
 ) => {
     return makeTemporary((atomizedVariants, path, pseudoPrefixes, conditions) => {
         if (ifPart) {

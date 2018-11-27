@@ -1,13 +1,13 @@
 import { TSheeter, TCommonStyles, TTyped, TEngine } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../utils/atomize-low'
 
-const $hot = (evalProc: (outerPar) => TEngine.Ruleset) => {
+const $hot = (evalProc: (outerPar) => TEngine.Rulesets) => {
     return makeTemporary((atomizedVariants, path, pseudoPrefixes, conditions) => {
         atomizedVariants.push({
             $d$: true,
             evalProc: (outerPar) => {
                 if (!evalProc) return null
-                const list: TEngine.Variants = []
+                const list: TEngine.QueryableItems = []
                 processTree(evalProc(outerPar), list, path + '/$hot', pseudoPrefixes, conditions)
                 return list
             }

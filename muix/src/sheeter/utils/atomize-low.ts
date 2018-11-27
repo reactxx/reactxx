@@ -1,6 +1,5 @@
-import warning from 'warning'
 import { wrapPseudoPrefixes } from './wrap-pseudo-prefixes'
-import { TCommonStyles, TTyped, TSheeter, TVariants, TEngine } from 'reactxx-typings'
+import { TVariants, TEngine } from 'reactxx-typings'
 
 // platform dependent 
 import { platform } from 'reactxx-sheeter'
@@ -8,20 +7,20 @@ import { platform } from 'reactxx-sheeter'
 //*******************************************************
 //        adjustAtomizedLow
 
-// linearize and atomize "ruleset" and its $web, $native and variants ($if, $widths,...)
+// linearize and atomize "ruleset"
 // result is added to 'atomizedVariants'
 export const adjustAtomizedLow = (
-    ruleset: TEngine.Ruleset,
-    atomizedVariants: TEngine.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions
+    ruleset: TEngine.Rulesets,
+    atomizedVariants: TEngine.QueryableItems, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions
 ) => {
     processTree(ruleset, atomizedVariants, path, pseudoPrefixes, conditions)
 }
 
-export function isToAtomizeArray(obj): obj is TEngine.RulesetItem[] { return obj && !(obj as TEngine.AtomizedRuleset).$r$ && Array.isArray(obj) }
-export function isAtomized(obj): obj is TEngine.AtomizedRuleset { return !obj || (obj as TEngine.AtomizedRuleset).$r$ }
+export function isToAtomizeArray(obj): obj is TEngine.Ruleset[] { return obj && !(obj as TEngine.Queryables).$r$ && Array.isArray(obj) }
+export function isAtomized(obj): obj is TEngine.Queryables { return !obj || (obj as TEngine.Queryables).$r$ }
 export function isDeferred(obj): obj is TEngine.Deferred { return obj && (obj as TEngine.Deferred).$d$ }
 export function isTemporary(obj): obj is TEngine.TempProc { return obj && (obj as TEngine.TempProc).$t$ }
-export function isToAtomize(obj): obj is TEngine.ToAtomize { return obj && !(obj as TEngine.AtomizedRuleset).$r$ && !(obj as TEngine.Deferred).$d$ && !(obj as TEngine.TempProc).$t$}
+export function isToAtomize(obj): obj is TEngine.ToAtomize { return obj && !(obj as TEngine.Queryables).$r$ && !(obj as TEngine.Deferred).$d$ && !(obj as TEngine.TempProc).$t$}
 
 //*******************************************************
 //        makeTemporary
@@ -32,7 +31,7 @@ export const makeTemporary = (proc: TEngine.TempProc) => {
 
 //*******************************************************
 //        processTree
-export const processTree = (value: TEngine.RulesetItem | TEngine.RulesetItem[], atomizedVariants: TEngine.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions) => {
+export const processTree = (value: TEngine.Ruleset | TEngine.Ruleset[], atomizedVariants: TEngine.QueryableItems, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions) => {
     const items = isToAtomizeArray(value) ? value : [value]
     const indexToPath = (idx:number) => items.length<=1 ? '' : `[${idx}]`
     items.forEach((it, idx) => {
@@ -52,8 +51,8 @@ export const processTree = (value: TEngine.RulesetItem | TEngine.RulesetItem[], 
                         it.conditions ? [...conditions, ...it.conditions] : conditions)
                 }
             })
-        } else {
-            processAllInnerVariantsAndAtomize(
+        } else { // it: toAtomize
+            processPseudosAndAtomize(
                 it,
                 atomizedVariants, path + indexToPath(idx),
                 pseudoPrefixes, conditions
@@ -69,24 +68,29 @@ export const processTree = (value: TEngine.RulesetItem | TEngine.RulesetItem[], 
 //*******************************************************
 //        processAllInnerVariants
 
-// recursivelly process variants in rulesets and in web pseudos (:hover, :active) 
-// than atomize result
+// recursivelly process web pseudos (:hover, :active) and its queryable parts
 
-const processAllInnerVariantsAndAtomize = (
+const processPseudosAndAtomize = (
     ruleset: TEngine.ToAtomize,
-    atomizedVariants: TEngine.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions,
+    atomizedVariants: TEngine.QueryableItems, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions,
 ) => {
 
-    const inner: TEngine.Variants = []
+    const inner: TEngine.QueryableItems = []
 
-    // process variant's in pseudo rules (in :hover etc.)
+    // process and remove conditional parts of self and web pseudo (e.g. :hover etc.)
+    // push them to 'inner'
     for (const p in ruleset) {
         const value = ruleset[p] as TEngine.ToAtomize
         if (!value || p.charAt(0) === '$' || (typeof value !== 'object' && !isTemporary(value))) continue
         processTree(value, inner, `${path}/${p}`, [...pseudoPrefixes, p], conditions)
         delete ruleset[p] 
     }
+
+    // atomize pure ruleset tree with pseudo (and without all conditions, deffer's etc.),
+    // then push to result
     atomizeNonVariant(atomizedVariants, wrapPseudoPrefixes(ruleset, pseudoPrefixes), conditions, path)
+
+    // push 'inner' to result
     if (inner.length>0)
         Array.prototype.push.apply(atomizedVariants, inner)
 
@@ -94,14 +98,14 @@ const processAllInnerVariantsAndAtomize = (
 
 // *********** utils
 
-const pushToAtomizedVariants = (atomizedVariants: TEngine.Variants, variant: TEngine.Variant, conditions: TVariants.Conditions) => {
+const pushToAtomizedVariants = (atomizedVariants: TEngine.QueryableItems, variant: TEngine.Queryable, conditions: TVariants.Conditions) => {
     if (!variant) return
     if (conditions && conditions.length > 0) variant.conditions = conditions
     atomizedVariants.push(variant)
 }
 
 const atomizeNonVariant = (
-    atomizedVariants: TEngine.Variants, sourceRuleset: TEngine.Ruleset,
+    atomizedVariants: TEngine.QueryableItems, sourceRuleset: TEngine.Rulesets,
     conditions: TVariants.Conditions, path: string
 ) => {
     if (!sourceRuleset) return

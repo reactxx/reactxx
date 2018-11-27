@@ -2,47 +2,42 @@ import { TVariants } from './index'
 
 declare namespace TEngine {
 
-  export type Ruleset = RulesetItem | RulesetItem[]
+  export type Rulesets = Ruleset | Ruleset[]
 
-  export type RulesetItem = ToAtomize | AtomizedRuleset | TempProc | Deferred
-
-  export interface TempCtx {
-    atomizedVariants: Variants
-    path: string,
-    pseudoPrefixes: string[]
-    conditions: TVariants.Conditions
-    isInPseudo?: boolean
-  }
-  export type TempProc = (
-    (atomizedVariants: Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions
-    ) => void
-  ) & { $t$?: true }
+  export type Ruleset = ToAtomize | Queryables | TempProc | Deferred
 
   export type ToAtomize = {}
 
-  export interface AtomizedRuleset extends Array<Variant> {
+  export interface Queryables extends Array<Queryable> {
     $r$?: true // array signature
   }
-  export interface Deferred {
-    $d$: true // signature
-    evalProc: (outerPar) => Variants
-  }
-  export interface Variant extends Array<Atomic> {
+
+  export interface Queryable extends Array<Atom> {
     conditions?: TVariants.Conditions
   }
-  export type Variants = (Variant | Deferred)[]
 
-  export type GetPlatformTracePath = (value: Atomic) => string
+  export type TempProc = (
+    (atomizedVariants: QueryableItems, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions
+    ) => void
+  ) & { $t$?: true }
+
+  export interface Deferred {
+    $d$: true // signature
+    evalProc: (outerPar) => QueryableItems
+  }
+  export type QueryableItems = (Queryable | Deferred)[]
+
+  export type GetPlatformTracePath = (value: Atom) => string
 
   export interface IsReactXXComponent {
     $c$?: boolean // ReactXX component signature
   }
 
-  export type Sheet = Record<string, AtomizedRuleset>
+  export type Sheet = Record<string, Queryables>
 
   export type NativeStyle = Record<string, TNativeRuleValue>
 
-  export type Atomic = AtomicNative | AtomicWeb
+  export type Atom = AtomicNative | AtomicWeb
   export interface __dev_AtomicWeb {
     tracePath?: string
     cache?: __dev_WebCache
@@ -76,7 +71,7 @@ declare namespace TEngine {
 
   type ValueOrCreator<T> = T | ((theme) => T)
 
-  export type RulesetOrCreator = ValueOrCreator<Ruleset>
+  export type RulesetOrCreator = ValueOrCreator<Rulesets>
   export type SheetOrCreator = ValueOrCreator<Sheet>
 
 }

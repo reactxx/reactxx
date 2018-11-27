@@ -3,18 +3,18 @@ import { TUseSheeter, TSheeter, TEngine, TVariants } from 'reactxx-typings'
 import { atomizeRuleset, wrapRuleset } from './atomize'
 import { isToAtomize, isToAtomizeArray, isDeferred, isTemporary } from './atomize-low'
 
-export type Item = TEngine.ToAtomize | TEngine.AtomizedRuleset | TEngine.TempProc
+export type Item = TEngine.ToAtomize | TEngine.Queryables | TEngine.TempProc
 
 export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: Item[]) => {
 
-    let values: TEngine.Variants = []
+    let values: TEngine.QueryableItems = []
 
-    const testConditions = (v: TEngine.Variant, state) => {
+    const testConditions = (v: TEngine.Queryable, state) => {
         if (!v.conditions || v.conditions.length === 0) return true
         return v.conditions.every(c => c.test(state))
     }
 
-    const filterList = (list: TEngine.Variants) => {
+    const filterList = (list: TEngine.QueryableItems) => {
         list.forEach(v => {
             if (!v) return
             if (isDeferred(v)) {
@@ -35,7 +35,7 @@ export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: It
         }
 
         if (isTemporary(val)) {
-            const list: TEngine.Variants = []
+            const list: TEngine.QueryableItems = []
             val(list, '', [], [])
             filterList(list)
             return

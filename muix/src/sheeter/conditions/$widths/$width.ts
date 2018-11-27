@@ -10,7 +10,7 @@ export interface $WidthsQuery {
 }
 
 const $width = (
-    interval: number | [number, number], ...rulesets: TEngine.Ruleset[]
+    interval: number | [number, number], ...rulesets: TEngine.Rulesets[]
 ) => {
     return rulesets && makeTemporary((atomizedVariants, path, pseudoPrefixes, conditions) => {
         if (window.isWeb) {

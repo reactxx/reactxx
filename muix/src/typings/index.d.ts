@@ -1,5 +1,5 @@
 ﻿export { TCommonStyles } from './common-styles'
-export { TEngine } from './atomize'
+export { TEngine } from './engine'
 export { TSheeter } from './sheeter'
 export { TComponents } from './components'
 export { TUseSheeter } from './use-sheeter'
@@ -13,7 +13,7 @@ import React from 'react'
 export namespace TVariants {
 
     type ToAtomicRuleset<T> = (
-        list: TEngine.Variants,
+        list: TEngine.QueryableItems,
         ruleset: T,
         path: string,
         pseudoPrefixes: string[],
@@ -77,7 +77,7 @@ export namespace TVariants {
         createElement?: (type, props?, ...children) => any
     }
     export interface Globals { }
-    export type ToPlatformAtomizeRuleset = (ruleset: {}, tracePath?: string) => TEngine.Variant
-    export type ApplyLastwinsStrategy = (values: TEngine.Variants | TEngine.AtomicWebs | TEngine.AtomicNatives) => TEngine.AtomicArrayLow
+    export type ToPlatformAtomizeRuleset = (ruleset: {}, tracePath?: string) => TEngine.Queryable
+    export type ApplyLastwinsStrategy = (values: TEngine.QueryableItems | TEngine.AtomicWebs | TEngine.AtomicNatives) => TEngine.AtomicArrayLow
 
 }
