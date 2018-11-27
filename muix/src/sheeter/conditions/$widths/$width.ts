@@ -1,4 +1,4 @@
-import { TAtomize } from 'reactxx-typings'
+import { TEngine } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../../utils/atomize-low'
 import { intervalToSelector, test } from './parser'
 
@@ -10,7 +10,7 @@ export interface $WidthsQuery {
 }
 
 const $width = (
-    interval: number | [number, number], ...rulesets: TAtomize.Ruleset[]
+    interval: number | [number, number], ...rulesets: TEngine.Ruleset[]
 ) => {
     return rulesets && makeTemporary((atomizedVariants, path, pseudoPrefixes, conditions) => {
         if (window.isWeb) {

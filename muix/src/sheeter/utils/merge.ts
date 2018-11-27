@@ -1,5 +1,5 @@
 import warning from 'warning'
-import { TComponents, TAtomize, TSheeter } from 'reactxx-typings';
+import { TComponents, TEngine, TSheeter } from 'reactxx-typings';
 import { deepMerge, deepMerges } from './deep-merge'
 import { isAtomized } from './atomize-low';
 import { wrapRuleset } from './atomize';
@@ -48,14 +48,14 @@ export const mergeStyles = (sources: TSheeter.StyleOrAtomized | TSheeter.StyleOr
 
         return res as TSheeter.Style
     } else {
-        return mergeRulesets(sources as TAtomize.AtomizedRuleset[])
+        return mergeRulesets(sources as TEngine.AtomizedRuleset[])
     }
 }
 
 // immutable
-export const mergeRulesets = (sources: TAtomize.AtomizedRuleset[]) => {
+export const mergeRulesets = (sources: TEngine.AtomizedRuleset[]) => {
     if (!sources || sources.length === 0) return null
-    let res: TAtomize.AtomizedRuleset = null
+    let res: TEngine.AtomizedRuleset = null
     let first = true
     sources.forEach(src => {
         if (!src) return
@@ -68,7 +68,7 @@ export const mergeRulesets = (sources: TAtomize.AtomizedRuleset[]) => {
 }
 
 // immutable
-export const mergeSheets = (sources: TAtomize.Sheet[]) => {
+export const mergeSheets = (sources: TEngine.Sheet[]) => {
     if (!sources || sources.length === 0) return null
     const ruleLists: Record<string, Array<any>> = {}
     sources.forEach(src => {
@@ -83,7 +83,7 @@ export const mergeSheets = (sources: TAtomize.Sheet[]) => {
     const res = {}
     for (const p in ruleLists)
         res[p] = mergeRulesets(ruleLists[p])
-    return res as TAtomize.Sheet
+    return res as TEngine.Sheet
 }
 
 export const mergeCodeProps = (sources: (TComponents.PropsCode | TComponents.PropsCode[])[]) => {

@@ -3,11 +3,11 @@ import { generateCombinedMediaQuery, generateCSSSelector, isMediaQuery, isNested
 import generateClassName from 'fela/lib/generateClassName';
 import isPlainObject from 'isobject';
 import { IRenderer } from 'fela'
-import { TAtomize } from 'reactxx-typings'
+import { TEngine } from 'reactxx-typings'
 import warning = require('warning');
 
 export interface IRendererEx extends IRenderer {
-  renderRuleEx(style: {}, tracePath?: string): TAtomize.AtomicWebs
+  renderRuleEx(style: {}, tracePath?: string): TEngine.AtomicWebs
   propIdCache: {}
   //trace: {}
   cache
@@ -26,7 +26,7 @@ const patch = (renderer: IRenderer) => {
 }
 export default patch
 
-function renderRuleEx(style: {}, tracePath?: string): TAtomize.AtomicWebs {
+function renderRuleEx(style: {}, tracePath?: string): TEngine.AtomicWebs {
   if (!style) return newAtomicWeb()
   // const $ = {}
   // let has$ = false, has = false
@@ -56,7 +56,7 @@ function renderRuleEx(style: {}, tracePath?: string): TAtomize.AtomicWebs {
   // }
 }
 
-const concat = (arr1: TAtomize.AtomicWebsLow, arr2: TAtomize.AtomicWebsLow) => arr2 ? arr1.concat(arr2) : arr1
+const concat = (arr1: TEngine.AtomicWebsLow, arr2: TEngine.AtomicWebsLow) => arr2 ? arr1.concat(arr2) : arr1
 
 const newAtomicWeb = (def?) => {
   // let res: TAtomize.AtomicWebs = def || [] as any
@@ -64,9 +64,9 @@ const newAtomicWeb = (def?) => {
   return def || []
 }
 
-const renderStyleToClassNames = (renderer: IRendererEx, tracePath: string, { _className, ...style }: any, pseudo: string = '', media: string = '', support: string = ''): TAtomize.AtomicWebs => {
+const renderStyleToClassNames = (renderer: IRendererEx, tracePath: string, { _className, ...style }: any, pseudo: string = '', media: string = '', support: string = ''): TEngine.AtomicWebs => {
   //let classNames = _className ? ` ${_className}` : ''
-  let classNames: TAtomize.AtomicWebsLow = []
+  let classNames: TEngine.AtomicWebsLow = []
 
   for (const property in style) {
 
@@ -147,7 +147,7 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
         const declaration = cssifyDeclaration(property, value)
         const selector = generateCSSSelector(className, pseudo)
 
-        const change: TAtomize.__dev_WebCache = {
+        const change: TEngine.__dev_WebCache = {
           type: RULE_TYPE,
           className,
           selector,
@@ -161,14 +161,14 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
         renderer._emitChange(change)
       }
 
-      const cache: TAtomize.__dev_WebCache = renderer.cache[declarationReference]
+      const cache: TEngine.__dev_WebCache = renderer.cache[declarationReference]
       //const cachedClassName = renderer.cache[declarationReference].className
 
       // only append if we got a class cached
       if (!cache.className) continue
 
       if (window.__TRACE__) {
-        const res = { cache, tracePath } as TAtomize.__dev_AtomicWeb
+        const res = { cache, tracePath } as TEngine.__dev_AtomicWeb
         res['toJSON'] = toJSON.bind(res)
         classNames.push(res)
       } else
@@ -186,6 +186,6 @@ function toJSON() { return dump(this) }
 
 export const dump = (c, short?: boolean) => {
   if (!c) return
-  const { cache: { selector, declaration, media, support }, tracePath } = c as TAtomize.__dev_AtomicWeb
+  const { cache: { selector, declaration, media, support }, tracePath } = c as TEngine.__dev_AtomicWeb
   return `${support ? '@support' + support : ''}${media ? '@media ' + media : ''}${selector} { ${declaration} }${short ? '' : ` @${tracePath}`}`
 }

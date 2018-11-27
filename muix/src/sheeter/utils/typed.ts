@@ -1,4 +1,4 @@
-import { TTyped, TVariants, TAtomize } from 'reactxx-typings'
+import { TTyped, TVariants, TEngine } from 'reactxx-typings'
 
 import $web from '../conditions/$web'
 import $native from '../conditions/$native'
@@ -30,8 +30,8 @@ const untyped = {
     $toClassNames: toClassNamesWithQuery as any
 } as TTyped.Utils<TVariants.ShapePart>
 
-export const fromEngineClassName = <R extends TVariants.ShapePart>(r: TAtomize.RulesetOrCreator) => r as TTyped.ClassNameSimple<R>
-export const toEngineClassName = (r: TTyped.RulesetOrCreator) => r as TAtomize.RulesetOrCreator
+export const fromEngineClassName = <R extends TVariants.ShapePart>(r: TEngine.RulesetOrCreator) => r as TTyped.ClassNameSimple<R>
+export const toEngineClassName = (r: TTyped.RulesetOrCreator) => r as TEngine.RulesetOrCreator
 
-export const fromEngineSheet = <R extends TVariants.ShapePart>(r: TAtomize.SheetOrCreator) => r as any as TTyped.SheetSimple<R>
-export const toEngineSheet = (r: TTyped.SheetOrCreator) => r as TAtomize.Sheet
+export const fromEngineSheet = <R extends TVariants.ShapePart>(r: TEngine.SheetOrCreator) => r as any as TTyped.SheetSimple<R>
+export const toEngineSheet = (r: TTyped.SheetOrCreator) => r as TEngine.Sheet

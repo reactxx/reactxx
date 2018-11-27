@@ -1,21 +1,23 @@
-import { TNativeRuleValue, TSheeter, TVariants } from './index'
-import { TComponents } from './components';
+import { TVariants } from './index'
 
-declare namespace TAtomize {
+declare namespace TEngine {
 
-  export type Ruleset = Item | Item[]
+  export type Ruleset = RulesetItem | RulesetItem[]
+
+  export type RulesetItem = ToAtomize | AtomizedRuleset | TempProc | Deferred
 
   export interface TempCtx {
-    atomizedVariants: TAtomize.Variants, path: string,
-    pseudoPrefixes: string[], conditions: TVariants.Conditions
+    atomizedVariants: Variants
+    path: string,
+    pseudoPrefixes: string[]
+    conditions: TVariants.Conditions
     isInPseudo?: boolean
   }
   export type TempProc = (
-    (atomizedVariants: TAtomize.Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions
+    (atomizedVariants: Variants, path: string, pseudoPrefixes: string[], conditions: TVariants.Conditions
     ) => void
   ) & { $t$?: true }
 
-  export type Item = ToAtomize | AtomizedRuleset | TempProc | Deferred
   export type ToAtomize = {}
 
   export interface AtomizedRuleset extends Array<Variant> {
@@ -23,7 +25,7 @@ declare namespace TAtomize {
   }
   export interface Deferred {
     $d$: true // signature
-    evalProc: (outerPar) => TAtomize.Variants
+    evalProc: (outerPar) => Variants
   }
   export interface Variant extends Array<Atomic> {
     conditions?: TVariants.Conditions
@@ -37,7 +39,6 @@ declare namespace TAtomize {
   }
 
   export type Sheet = Record<string, AtomizedRuleset>
-  //<R extends TSheeter.Shape = TSheeter.Shape> = { [P in TSheeter.RulesetNamesAll<R>]: AtomizedRuleset }
 
   export type NativeStyle = Record<string, TNativeRuleValue>
 
@@ -74,7 +75,7 @@ declare namespace TAtomize {
   export type AtomicNativeLow = Record<string, TNativeRuleValue>
 
   type ValueOrCreator<T> = T | ((theme) => T)
-  
+
   export type RulesetOrCreator = ValueOrCreator<Ruleset>
   export type SheetOrCreator = ValueOrCreator<Sheet>
 

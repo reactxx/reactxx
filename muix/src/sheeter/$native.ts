@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native'
-import { TAtomize } from 'reactxx-typings'
+import { TEngine } from 'reactxx-typings'
 import { applyLastwinsStrategy, finalizeClassName, createElement } from './reacts/$native'
 import { assignPlatform } from './utils/globals'
 import { setActWidth } from './conditions/$widths/store'
@@ -12,14 +12,14 @@ export const init = () => assignPlatform({
     actWidth: () => Dimensions ? Dimensions.get('window').width : 0,
 
     toPlatformAtomizeRuleset: (style, tracePath) => {
-        const res: TAtomize.AtomicNatives = []
+        const res: TEngine.AtomicNatives = []
         if (!style) return res
         for (const propId in style) {
             if (propId.charAt(0) === '$') continue
             const at = {
                 propId,
                 value: window.__TRACE__ ? { tracePath, value: style[propId] } : style[propId]
-            } as TAtomize.AtomicNative
+            } as TEngine.AtomicNative
             if (window.__TRACE__) {
                 at['toJSON'] = toJSON.bind(at)
             }
@@ -32,7 +32,7 @@ export const init = () => assignPlatform({
         if (!ruleset) return ''
         const res = []
         for (const p in ruleset) {
-            const val = ruleset[p] as TAtomize.__dev_AtomicNative
+            const val = ruleset[p] as TEngine.__dev_AtomicNative
             if (typeof val === 'undefined' || !window.__TRACE__ || flags === 'short') continue
 
             res.push(`${p} @${val.tracePath}`)

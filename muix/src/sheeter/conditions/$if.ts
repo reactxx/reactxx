@@ -1,9 +1,9 @@
-import { TAtomize, TVariants } from 'reactxx-typings'
+import { TEngine, TVariants } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../utils/atomize-low'
 
 const $if = (
     test: boolean | ((outerPar) => boolean),
-    ...rulesets: TAtomize.Ruleset[]
+    ...rulesets: TEngine.Ruleset[]
 ) => {
     if (!rulesets)
         return false

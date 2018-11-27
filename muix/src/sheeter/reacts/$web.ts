@@ -1,5 +1,5 @@
 import React from 'react'
-import { TAtomize, TVariants, TComponents } from 'reactxx-typings'
+import { TEngine, TVariants, TComponents } from 'reactxx-typings'
 
 import { deleteSystemProps } from '../utils/to-classnames'
 import { mergeStyles } from '../utils/merge'
@@ -34,7 +34,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   const { classNameX, styleX } = props
 
   if (classNameX) {
-    let lastWinResult = applyLastwinsStrategy(classNameX) as TAtomize.AtomicWebsLow
+    let lastWinResult = applyLastwinsStrategy(classNameX) as TEngine.AtomicWebsLow
     const className = finalizeClassName(lastWinResult)
     props.className = props.className ? className + ' ' + props.className : className
     //if (window.__TRACELEVEL__ >= 2) 
@@ -50,10 +50,10 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   return React.createElement(type, props, ...children)
 }
 
-export const finalizeClassName = (lastWinResult: TAtomize.AtomicWebsLow) => {
+export const finalizeClassName = (lastWinResult: TEngine.AtomicWebsLow) => {
   if (!lastWinResult) return undefined
   if (window.__TRACE__) {
-    lastWinResult = lastWinResult.map((r: TAtomize.__dev_AtomicWeb) => r.cache.className) as any
+    lastWinResult = lastWinResult.map((r: TEngine.__dev_AtomicWeb) => r.cache.className) as any
   }
   return lastWinResult.join(' ')
 }
@@ -61,12 +61,12 @@ export const finalizeClassName = (lastWinResult: TAtomize.AtomicWebsLow) => {
 //export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastwinsStrategyLow) as TAtomize.AtomicWebsLow
 
 // apply LAST WIN strategy for web className
-export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = (values: TAtomize.AtomizedRuleset) => {
+export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = (values: TEngine.AtomizedRuleset) => {
   if (!values) return null
 
   const { renderer } = platform
 
-  const res: TAtomize.AtomicWeb[] = []
+  const res: TEngine.AtomicWeb[] = []
   const usedPropIds: { [propId: string]: boolean } = {}
 
   for (let i = values.length - 1; i >= 0; i--)
@@ -80,16 +80,16 @@ export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = (values: T
       }
       let className: string = value as string
       if (window.__TRACE__) {
-        className = (value as TAtomize.__dev_AtomicWeb).cache.className
+        className = (value as TEngine.__dev_AtomicWeb).cache.className
       }
       const propId = renderer.propIdCache[className]
       if (!propId || usedPropIds[propId])
         continue
-      res.push(value as TAtomize.AtomicWeb)
+      res.push(value as TEngine.AtomicWeb)
       usedPropIds[propId] = true
     }
 
-  return res as TAtomize.AtomicArrayLow
+  return res as TEngine.AtomicArrayLow
 }
 
 const consolidateEvents = (props: TComponents.Props & TComponents.Events & TComponents.EventsWeb) => {

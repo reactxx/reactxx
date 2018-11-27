@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { cleanup } from 'react-testing-library'
-import { TAtomize } from 'reactxx-typings'
+import { TEngine } from 'reactxx-typings'
 
 import { initSheeter$Web, resetPlatform, platform } from 'reactxx-sheeter'
 import { initSheeter$Native } from 'reactxx-sheeter-native'
@@ -32,7 +32,7 @@ export const initPlatform = (isWeb: boolean, trace: Trace = {}) => {
     }
 }
 
-export const dump = (ruleset: TAtomize.AtomizedRuleset | any) => {
+export const dump = (ruleset: TEngine.AtomizedRuleset | any) => {
     expect(ruleset).toMatchSnapshot()
     const won = platform.applyLastwinsStrategy(ruleset)
     expect(won).toMatchSnapshot()

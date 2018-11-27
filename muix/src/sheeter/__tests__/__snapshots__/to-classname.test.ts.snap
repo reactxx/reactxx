@@ -15,19 +15,19 @@ exports[`TO CLASSNAMES ## NATIVE ## 02: null, {}, undefined 3`] = `undefined`;
 exports[`TO CLASSNAMES ## NATIVE ## 03: mixed 1`] = `
 Array [
   Array [
-    "color: red @",
+    "color: red @$atomize",
   ],
   Array [
-    "color: blue @root[0]",
+    "color: blue @$atomize[0]",
   ],
   Array [
-    "color: yellow @root[1]",
+    "color: yellow @$atomize[1]",
   ],
   Array [
     "color: maroon @/$if",
   ],
   Array [
-    "color: green @",
+    "color: green @$atomize",
   ],
 ]
 `;
@@ -35,7 +35,7 @@ Array [
 exports[`TO CLASSNAMES ## NATIVE ## 03: mixed 2`] = `
 Object {
   "color": Object {
-    "tracePath": "",
+    "tracePath": "$atomize",
     "value": "green",
   },
 }
@@ -96,7 +96,7 @@ Object {
 exports[`TO CLASSNAMES ## NATIVE ## 06: query => closed => pre-atomized 1`] = `
 Array [
   Array [
-    "color: blue @[1]/$if",
+    "color: blue @$atomize[1]/$if",
   ],
 ]
 `;
@@ -104,7 +104,7 @@ Array [
 exports[`TO CLASSNAMES ## NATIVE ## 06: query => closed => pre-atomized 2`] = `
 Object {
   "color": Object {
-    "tracePath": "[1]/$if",
+    "tracePath": "$atomize[1]/$if",
     "value": "blue",
   },
 }
@@ -154,26 +154,26 @@ exports[`TO CLASSNAMES ## WEB ## 02: null, {}, undefined 3`] = `undefined`;
 exports[`TO CLASSNAMES ## WEB ## 03: mixed 1`] = `
 Array [
   Array [
-    ".a { color:red } @",
+    ".a { color:red } @$atomize",
   ],
   Array [
-    ".b { color:blue } @root[0]",
+    ".b { color:blue } @$atomize[0]",
   ],
   Array [
-    ".c { color:yellow } @root[1]",
+    ".c { color:yellow } @$atomize[1]",
   ],
   Array [
     ".e { color:maroon } @/$if",
   ],
   Array [
-    ".d { color:green } @",
+    ".d { color:green } @$atomize",
   ],
 ]
 `;
 
 exports[`TO CLASSNAMES ## WEB ## 03: mixed 2`] = `
 Array [
-  ".d { color:green } @",
+  ".d { color:green } @$atomize",
 ]
 `;
 
@@ -214,14 +214,14 @@ exports[`TO CLASSNAMES ## WEB ## 05: query => closed 3`] = `"b"`;
 exports[`TO CLASSNAMES ## WEB ## 06: query => closed => pre-atomized 1`] = `
 Array [
   Array [
-    ".b { color:blue } @[1]/$if",
+    ".b { color:blue } @$atomize[1]/$if",
   ],
 ]
 `;
 
 exports[`TO CLASSNAMES ## WEB ## 06: query => closed => pre-atomized 2`] = `
 Array [
-  ".b { color:blue } @[1]/$if",
+  ".b { color:blue } @$atomize[1]/$if",
 ]
 `;
 

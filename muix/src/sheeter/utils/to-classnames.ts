@@ -1,20 +1,20 @@
 import warning from 'warning'
-import { TUseSheeter, TSheeter, TAtomize, TVariants } from 'reactxx-typings'
+import { TUseSheeter, TSheeter, TEngine, TVariants } from 'reactxx-typings'
 import { atomizeRuleset, wrapRuleset } from './atomize'
 import { isToAtomize, isToAtomizeArray, isDeferred, isTemporary } from './atomize-low'
 
-export type Item = TAtomize.ToAtomize | TAtomize.AtomizedRuleset | TAtomize.TempProc
+export type Item = TEngine.ToAtomize | TEngine.AtomizedRuleset | TEngine.TempProc
 
 export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: Item[]) => {
 
-    let values: TAtomize.Variants = []
+    let values: TEngine.Variants = []
 
-    const testConditions = (v: TAtomize.Variant, state) => {
+    const testConditions = (v: TEngine.Variant, state) => {
         if (!v.conditions || v.conditions.length === 0) return true
         return v.conditions.every(c => c.test(state))
     }
 
-    const filterList = (list: TAtomize.Variants) => {
+    const filterList = (list: TEngine.Variants) => {
         list.forEach(v => {
             if (!v) return
             if (isDeferred(v)) {
@@ -35,7 +35,7 @@ export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: It
         }
 
         if (isTemporary(val)) {
-            const list: TAtomize.Variants = []
+            const list: TEngine.Variants = []
             val(list, '', [], [])
             filterList(list)
             return

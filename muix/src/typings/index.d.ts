@@ -1,5 +1,5 @@
 ﻿export { TCommonStyles } from './common-styles'
-export { TAtomize } from './atomize'
+export { TEngine } from './atomize'
 export { TSheeter } from './sheeter'
 export { TComponents } from './components'
 export { TUseSheeter } from './use-sheeter'
@@ -7,13 +7,13 @@ export * from './typed'
 
 export type TNativeRuleValue = number | string | /*for native animation*/{}
 
-import { TSheeter, TAtomize, TCommonStyles } from './index'
+import { TSheeter, TEngine, TCommonStyles } from './index'
 import React from 'react'
 
 export namespace TVariants {
 
     type ToAtomicRuleset<T> = (
-        list: TAtomize.Variants,
+        list: TEngine.Variants,
         ruleset: T,
         path: string,
         pseudoPrefixes: string[],
@@ -71,13 +71,13 @@ export namespace TVariants {
     }
     export interface Platform extends Options, Globals {
         toPlatformAtomizeRuleset?: ToPlatformAtomizeRuleset
-        dataTrace?: (classNames: TAtomize.AtomicArrayLow, flags?: TraceFlags) => any,
+        dataTrace?: (classNames: TEngine.AtomicArrayLow, flags?: TraceFlags) => any,
         applyLastwinsStrategy?: ApplyLastwinsStrategy
-        finalizeClassName?: (values: TAtomize.AtomicArrayLow) => string | Record<string, any>
+        finalizeClassName?: (values: TEngine.AtomicArrayLow) => string | Record<string, any>
         createElement?: (type, props?, ...children) => any
     }
     export interface Globals { }
-    export type ToPlatformAtomizeRuleset = (ruleset: {}, tracePath?: string) => TAtomize.Variant
-    export type ApplyLastwinsStrategy = (values: TAtomize.Variants | TAtomize.AtomicWebs | TAtomize.AtomicNatives) => TAtomize.AtomicArrayLow
+    export type ToPlatformAtomizeRuleset = (ruleset: {}, tracePath?: string) => TEngine.Variant
+    export type ApplyLastwinsStrategy = (values: TEngine.Variants | TEngine.AtomicWebs | TEngine.AtomicNatives) => TEngine.AtomicArrayLow
 
 }

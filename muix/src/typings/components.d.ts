@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import ReactN from 'react-native'
 
-import { TSheeter, TTyped, TAtomize, TVariants, TUseSheeter } from './index'
+import { TSheeter, TTyped, TEngine, TVariants, TUseSheeter } from './index'
 
 declare namespace TComponents {
 
@@ -28,7 +28,7 @@ declare namespace TComponents {
   - custom components (e.g. <IconButton classNameX={...})
   */
   export interface ReactsCommonProperties<R extends TSheeter.Shape = TSheeter.Shape> {
-    classNameX?: TAtomize.AtomizedRuleset // TSheeter.ClassNameOrAtomized<R>
+    classNameX?: TEngine.AtomizedRuleset // TSheeter.ClassNameOrAtomized<R>
     styleX?: TSheeter.StyleItem
     trace?: string
   }
@@ -41,8 +41,8 @@ declare namespace TComponents {
   }
 
   export interface ReactsCommonPropertiesNative<R extends TSheeter.Shape = TSheeter.Shape> extends ReactsCommonProperties<R> {
-    styleX?: TAtomize.AtomizedRuleset
-    style?: TAtomize.AtomicNativeLow
+    styleX?: TEngine.AtomizedRuleset
+    style?: TEngine.AtomicNativeLow
     $web?
   }
 
@@ -56,7 +56,7 @@ declare namespace TComponents {
     TEventsX<R>>
 
   export type TEventsX<R extends TSheeter.Shape = TSheeter.Shape> = PartialRecord<TSheeter.getEvents<R>, MouseEventEx<R>>
-  export type ComponentType<R extends TSheeter.Shape = TSheeter.Shape> = React.ComponentType<Props<R>> & TAtomize.IsReactXXComponent & {
+  export type ComponentType<R extends TSheeter.Shape = TSheeter.Shape> = React.ComponentType<Props<R>> & TEngine.IsReactXXComponent & {
     classes: TTyped.PartialSheet<R>
     classNamex: TTyped.RulesetOrCreator<R>
   }

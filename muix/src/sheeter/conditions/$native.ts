@@ -1,7 +1,7 @@
-import { TAtomize } from 'reactxx-typings'
+import { TEngine } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../utils/atomize-low'
 
-const $native = (...rulesets: TAtomize.Ruleset[]) => {
+const $native = (...rulesets: TEngine.Ruleset[]) => {
     return rulesets && !window.isWeb && makeTemporary((atomizedVariants, path, pseudoPrefixes, conditions) => {
         processTree(rulesets, atomizedVariants, path + '/$native', pseudoPrefixes, conditions)
     })

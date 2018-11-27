@@ -1,10 +1,10 @@
-import { TAtomize, TVariants } from 'reactxx-typings'
+import { TEngine, TVariants } from 'reactxx-typings'
 import { processTree, makeTemporary } from '../utils/atomize-low'
 
 const $ifelse = (
     test: (outerPar) => boolean,
-    ifPart: TAtomize.Ruleset,
-    elsePart: TAtomize.Ruleset
+    ifPart: TEngine.Ruleset,
+    elsePart: TEngine.Ruleset
 ) => {
     return makeTemporary((atomizedVariants, path, pseudoPrefixes, conditions) => {
         if (ifPart) {

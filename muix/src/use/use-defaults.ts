@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import warning from 'warning'
 
-import { TUseSheeter, TAtomize } from 'reactxx-typings';
+import { TUseSheeter, TEngine } from 'reactxx-typings';
 import { sheetFromThemeCache } from './use-theme';
 import { toEngineSheet } from 'reactxx-sheeter';
 

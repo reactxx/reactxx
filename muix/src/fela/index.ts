@@ -8,7 +8,7 @@ import pluginPrefixer from 'fela-plugin-prefixer'
 import pluginUnit from 'fela-plugin-unit'
 
 import patch, { IRendererEx, dump } from './patch';
-import { TAtomize, TVariants } from 'reactxx-typings';
+import { TEngine, TVariants } from 'reactxx-typings';
 
 const plugins = {
   plugins: [
@@ -63,7 +63,7 @@ const initFela$Web = (platform?: TVariants.Platform) => {
   render(renderer)
 }
 
-const dataTrace = (classNames: TAtomize.AtomicWebsLow, flags: TraceFlags = 'long' ) => {
+const dataTrace = (classNames: TEngine.AtomicWebsLow, flags: TraceFlags = 'long' ) => {
   if (!classNames || classNames.length === 0) return ''
   if (!window.__TRACE__) return ''
   return '\n' + classNames.map(c => dump(c, flags==='short')).join('\n')

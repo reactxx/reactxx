@@ -1,5 +1,5 @@
 import React from 'react'
-import { TComponents, TAtomize, TVariants } from 'reactxx-typings'
+import { TComponents, TEngine, TVariants } from 'reactxx-typings'
 import { deleteSystemProps, toClassNamesWithQuery } from '../utils/to-classnames'
 
 import { isReactXXComponent } from '../utils/atomize'
@@ -34,7 +34,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
       styleX
         ? toClassNamesWithQuery(null, [classNameX, styleX])
         : classNameX
-    let reduced = applyLastwinsStrategy(style) as TAtomize.AtomicNativeLow
+    let reduced = applyLastwinsStrategy(style) as TEngine.AtomicNativeLow
     props.style = finalizeClassName(reduced)
     if (window.__TRACE__)
       props['data-trace'] = platform.dataTrace(reduced, window.__TRACE__.dataTraceFlag)
@@ -47,11 +47,11 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 
 //export const applyLastwinsStrategy = (values: TAtomize.AtomicArray) => applyLastwinsStrategyRoot(values, applyLastWinStrategyLow) as TAtomize.AtomicNativeLow
 
-export const finalizeClassName = (lastWinResult: TAtomize.AtomicNativeLow) => {
+export const finalizeClassName = (lastWinResult: TEngine.AtomicNativeLow) => {
   if (!lastWinResult) return undefined
   if (window.__TRACE__) {
     const res = {}
-    for (const p in lastWinResult) res[p] = (lastWinResult[p] as TAtomize.__dev_AtomicNative).value
+    for (const p in lastWinResult) res[p] = (lastWinResult[p] as TEngine.__dev_AtomicNative).value
     return res
   }
   return lastWinResult
@@ -59,7 +59,7 @@ export const finalizeClassName = (lastWinResult: TAtomize.AtomicNativeLow) => {
 
 export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = values => {
   if (!values) return null
-  const res: TAtomize.NativeStyle = {}
+  const res: TEngine.NativeStyle = {}
   let idxs: number[] = []
   const usedPropIds: { [propId: string]: boolean } = {}
   for (let i = values.length - 1; i >= 0; i--)
@@ -74,5 +74,5 @@ export const applyLastwinsStrategy: TVariants.ApplyLastwinsStrategy = values => 
       if (typeof res[value.propId] !== 'undefined') continue
       res[value.propId] = value.value
     }
-  return res as TAtomize.AtomicArrayLow
+  return res as TEngine.AtomicArrayLow
 }

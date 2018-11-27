@@ -1,13 +1,13 @@
 import warning from 'warning';
 
-import { TAtomize, TTyped, TSheeter, TComponents, TCommonStyles } from 'reactxx-typings'
+import { TEngine, TTyped, TSheeter, TComponents, TCommonStyles } from 'reactxx-typings'
 import { createWithTheme } from './create-with-theme'
 import { adjustAtomizedLow, isDeferred } from './atomize-low'
 
 // muttable
-export const atomizeSheet = (sheet: TAtomize.SheetOrCreator, theme?, path: string = 'sheet') => {
+export const atomizeSheet = (sheet: TEngine.SheetOrCreator, theme?, path: string = 'sheet') => {
     if (!sheet) return null
-    const sh: TAtomize.Sheet = createWithTheme(sheet, theme)
+    const sh: TEngine.Sheet = createWithTheme(sheet, theme)
     for (const p in sh) {
         const at = atomizeRuleset(sh[p], theme, (path ? path + '.' : '') + p)
         if (at) sh[p] = at
@@ -18,7 +18,7 @@ export const atomizeSheet = (sheet: TAtomize.SheetOrCreator, theme?, path: strin
 
 // muttable
 export const atomizeRuleset = (
-    ruleset: TAtomize.RulesetOrCreator, theme?, path: string = ''
+    ruleset: TEngine.RulesetOrCreator, theme?, path: string = ''
 ) => {
     if (!ruleset) return null
 
@@ -33,13 +33,13 @@ export const atomizeRuleset = (
 }
 
 export const wrapRuleset = ruleset => {
-    (ruleset as TAtomize.AtomizedRuleset).$r$ = true
+    (ruleset as TEngine.AtomizedRuleset).$r$ = true
     if (window.__TRACE__)
         ruleset['toJSON'] = toJSON.bind(ruleset)
-    return ruleset as TAtomize.AtomizedRuleset
+    return ruleset as TEngine.AtomizedRuleset
 }
 function toJSON () {
-    return (this as TAtomize.AtomizedRuleset).map(v => isDeferred(v) ? 'DEFFERED' : [...v])
+    return (this as TEngine.AtomizedRuleset).map(v => isDeferred(v) ? 'DEFFERED' : [...v])
 }
 
 // muttable (at least for native)
@@ -48,7 +48,7 @@ export const atomizeStyle = (style: TSheeter.StyleOrCreator, theme?, path: strin
     if (window.isWeb)
         return createWithTheme(style, theme) as TSheeter.StyleOrAtomizedWeb
     else
-        return atomizeRuleset(style as TAtomize.Ruleset, theme, path)
+        return atomizeRuleset(style as TEngine.Ruleset, theme, path)
 }
 
 export function isReactXXComponent(obj): obj is TComponents.ComponentType {

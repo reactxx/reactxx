@@ -2,7 +2,7 @@
 import ReactN from 'react-native'
 import CSS from 'csstype';
 
-import { TCommonStyles, TTyped, TAtomize, TVariants } from './index'
+import { TCommonStyles, TTyped, TEngine, TVariants } from './index'
 import { TComponents } from './components';
 
 declare namespace TSheeter {
