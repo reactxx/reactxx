@@ -9,6 +9,9 @@ const {
     scrollViewCreator, ScrollView,
     iconCreator, Icon,
     textCreator, Text,
+    animatedViewCreator, AnimatedView, 
+    animatedIconCreator, AnimatedIcon, 
+    animatedTextCreator, AnimatedText, 
 } = inits(getView, getIcon, getScrollView, getText)
 
 export {
@@ -17,5 +20,8 @@ export {
     scrollViewCreator, ScrollView, getScrollView,
     iconCreator, Icon, getIcon,
     textCreator, Text, getText,
+    animatedViewCreator, AnimatedView, 
+    animatedIconCreator, AnimatedIcon, 
+    animatedTextCreator, AnimatedText, 
 }
 export const initPrimitives$Web = initPrimitives

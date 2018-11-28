@@ -20,7 +20,7 @@ declare module 'reactxx-typings' {
             scrollViewCreator?: TUseSheeter.ComponentCreator<TPrimitives.ScrollViewShape>
             animatedViewCreator?: TUseSheeter.ComponentCreator<TPrimitives.ViewShape>
             animatedTextCreator?: TUseSheeter.ComponentCreator<TPrimitives.TextShape>
-            animatedIconv?: TUseSheeter.ComponentCreator<TPrimitives.IconShape>
+            animatedIconCreator?: TUseSheeter.ComponentCreator<TPrimitives.IconShape>
 
             getView?: TUseSheeter.GetComponent<TPrimitives.ViewShape>
             getText?: TUseSheeter.GetComponent<TPrimitives.TextShape>

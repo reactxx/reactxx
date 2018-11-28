@@ -1,24 +1,8 @@
-import React from 'react'
-import ReactN from 'react-native'
-
-import { TComponents, TTyped, TUseSheeter } from 'reactxx-typings'
+import { TTyped, TUseSheeter } from 'reactxx-typings'
 import { TPrimitives } from './shapes'
 import { getTypedEngine } from 'reactxx-sheeter'
 
 import { $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
-
-export const enum CompNames {
-  Text = 'ReactXXText',
-  View = 'ReactXXView',
-  Icon = 'ReactXXIcon',
-  ScrollView = 'ReactXXScrollView',
-
-  AnimatedView = 'ReactXXAnimatedView',
-  AnimatedIcon = 'ReactXXAnimatedIcon',
-  AnimatedText = 'ReactXXAnimatedText',
-  AnimatedScrollView = 'ReactXXAnimatedScrollView',
-}
-
 
 export const hasPlatformEvents = (propsCode: TTyped.PropsCode) => !!(
   true

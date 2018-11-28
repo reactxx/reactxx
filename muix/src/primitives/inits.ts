@@ -3,7 +3,19 @@ import { Platform, platform, resetPlatform } from 'reactxx-sheeter'
 import { TUseSheeter } from 'reactxx-typings'
 
 import { TPrimitives } from './shapes'
-import { CompNames, textConfig, viewConfig, iconConfig, scrollViewConfig } from './configs'
+import { textConfig, viewConfig, iconConfig, scrollViewConfig } from './configs'
+
+const enum CompNames {
+    Text = 'ReactXXText',
+    View = 'ReactXXView',
+    Icon = 'ReactXXIcon',
+    ScrollView = 'ReactXXScrollView',
+
+    AnimatedView = 'ReactXXAnimatedView',
+    AnimatedIcon = 'ReactXXAnimatedIcon',
+    AnimatedText = 'ReactXXAnimatedText',
+    AnimatedScrollView = 'ReactXXAnimatedScrollView',
+}
 
 export const inits = (
     getView: TUseSheeter.GetComponent<TPrimitives.ViewShape>,
@@ -32,9 +44,6 @@ export const inits = (
     const scrollViewCreator = getComponentCreator(CompNames.ScrollView, scrollViewConfig, getScrollView, false)
     const ScrollView = scrollViewCreator()
 
-    const animatedScrollViewCreator = getComponentCreator(CompNames.AnimatedScrollView, scrollViewConfig, getScrollView, true)
-    const AnimatedScrollView = animatedViewCreator()
-
     const initPrimitives = (force?: boolean) => {
         if (force) resetPlatform()
         if (platform.View) return
@@ -43,15 +52,21 @@ export const inits = (
             scrollViewCreator, ScrollView, getScrollView,
             iconCreator, Icon, getIcon,
             textCreator, Text, getText,
+            animatedViewCreator, AnimatedView, 
+            animatedIconCreator, AnimatedIcon, 
+            animatedTextCreator, AnimatedText, 
         }
         Object.assign(platform, primitivies)
     }
 
     return {
         initPrimitives,
-        viewCreator, View, 
-        scrollViewCreator, ScrollView, 
-        iconCreator, Icon, 
-        textCreator, Text, 
-    }
+        viewCreator, View,
+        scrollViewCreator, ScrollView,
+        iconCreator, Icon,
+        textCreator, Text,
+        animatedViewCreator, AnimatedView, 
+        animatedIconCreator, AnimatedIcon, 
+        animatedTextCreator, AnimatedText, 
+}
 }
