@@ -3,25 +3,33 @@ import { TComponents, TTyped } from './index';
 declare namespace TUseSheeter {
 
   export interface ComponentConfigLow {
-    // withoutTheme?: boolean
     // withCascaing?: boolean
     //------
-    displayName?: string // assigned in useSheeter
     id?: number // generated in useSheeter
   }
 
   // component type options
-  export interface ComponentConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
-    defaultProps?: TComponents.Props<R> // classes, classNameX and styleX ignored
+  export interface AuthorConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
+    defaultProps?: Partial<TComponents.Props<R>> // classes, classNameX and styleX ignored
     defaultSheet?: TTyped.SheetOrCreator<R>
   }
 
-  export interface ComponentConfigOverride<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
+  export interface UserConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
     overrideProps?: TComponents.Props<R> // classes, classNameX and styleX ignored
-    overrideSheet?: TTyped.SheetOrCreator<R> 
+    overrideSheet?: TTyped.SheetOrCreator<R>
     myConfigId?: number // ComponentConfig.id
   }
 
   export type ThemeContext<T extends any> = [T, (newTheme: T) => void]
 
+  export type ComponentCreator<R extends TTyped.Shape = TTyped.Shape> = (
+    userDisplayName?: string, userConfig?: TUseSheeter.UserConfig<R>
+  ) => React.SFC<TComponents.Props<R>>
+
+  export type GetComponent<R extends TTyped.Shape> = (
+    authorConfig: TUseSheeter.AuthorConfig<R>,
+    displayName: string,
+    userConfig: TUseSheeter.UserConfig<R>,
+    par?
+  ) => TComponents.SFC<R>
 }

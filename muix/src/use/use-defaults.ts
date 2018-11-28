@@ -6,13 +6,13 @@ import { sheetFromThemeCache } from './use-theme';
 import { toEngineSheet } from 'reactxx-sheeter';
 
 export const useDefaults = (
-    theme, options: TUseSheeter.ComponentConfig
+    theme, options: TUseSheeter.AuthorConfig, displayName: string,
 ) =>
-    React.useMemo(() => getDefaults(theme, options), [theme, options])
+    React.useMemo(() => getDefaults(theme, options, displayName), [theme, options, displayName])
 
-const getDefaults = (theme, config: TUseSheeter.ComponentConfig & TUseSheeter.ComponentConfigOverride) => {
+const getDefaults = (theme, config: TUseSheeter.AuthorConfig & TUseSheeter.UserConfig, displayName: string) => {
 
-    const { defaultProps, defaultSheet, overrideProps, overrideSheet, id, displayName } = config
+    const { defaultProps, defaultSheet, overrideProps, overrideSheet, id} = config
 
     if (!defaultSheet)
         throw 'Missing config.defaultsheet'

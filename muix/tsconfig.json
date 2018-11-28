@@ -129,7 +129,10 @@
     "src/sheeter",
     "src/use",
     //"src/primitives/sheets.ts",
-    //"src/primitives/d-index.ts",
+    "src/primitives/shapes.ts",
+    "src/primitives/variants.ts",
+    "src/primitives/configs.ts",
+    "src/primitives/$web.tsx", "src/primitives/inits.ts",
 
     // "src/basic",
     // "src/mui-web",

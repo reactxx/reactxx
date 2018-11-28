@@ -11,15 +11,6 @@ interface Shape {
 const { $themed, $if, $ifelse, $web, $native, $rules, $toClassNames, $atomize
 } = getTypedEngine<Shape>()
 
-// let t = () => null as T | $W
-// let tt: '$V'
-// let x = false
-// let xx: 'T'
-// const res = $toClassNames(null, $atomizeRuleset<V>(() => [{}]),
-//   $if(true, xx),
-//   $toClassNames(null, null as $T)
-// )//, $atomizeRuleset<$I>(() => [{}]))
-
 describe("TO CLASSNAMES", () => {
 
   type Par = { opened: boolean, theme: null }

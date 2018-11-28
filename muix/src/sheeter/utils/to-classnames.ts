@@ -39,7 +39,7 @@ export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: TE
             warning(typeof val !== 'function', 'Only ruleset expected in toClassNamesWithQuery (but rulesetCreator found)')
             return atomizeRuleset(val)
         })() : val
-        
+
         if (!ruleset || ruleset.length === 0) return
 
         filterList(ruleset)
@@ -52,8 +52,10 @@ export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: TE
 }
 
 export const deleteSystemProps = props => {
-    propsToDelete.forEach(p => delete props[p])
-    if (props.style) delete props.style.toJSON
+    for (const p in props)
+        if (p.charAt(0) === '$') delete props[p]
+    // propsToDelete.forEach(p => delete props[p])
+    // if (props.style) delete props.style.toJSON
 }
 
 

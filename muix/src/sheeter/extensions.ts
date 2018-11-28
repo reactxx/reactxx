@@ -1,6 +1,5 @@
-import { TTyped } from 'reactxx-typings'
+import { TTyped, TEngine } from 'reactxx-typings'
 import { WidthStore } from './queryable/$widths/store'
-import { $WidthsQuery } from './queryable/$widths/$width'
 declare module 'reactxx-typings' {
 
     namespace TExtensions {
@@ -13,8 +12,6 @@ declare module 'reactxx-typings' {
                 widthDirs?: Set<number>
             }
         }
-
-        interface PropsCodePart<R extends TTyped.Shape = TTyped.Shape> extends $WidthsQuery { }
 
     }
 }

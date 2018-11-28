@@ -6,11 +6,11 @@ declare namespace TComponents {
 
   //******************** Cross platform component props
   export type Props<R extends TTyped.Shape = TTyped.Shape> =
-    CommonProperties<R> &
+    PropsLow<R> &
     TTyped.getProps<R> &
     TEventsX<R>
 
-  export interface CommonProperties<R extends TTyped.Shape = TTyped.Shape> {
+  export interface PropsLow<R extends TTyped.Shape> {
     $web?: Partial<TTyped.getPropsWeb<R> & TTyped.getProps<R>> //web specific props
     $native?: Partial<TTyped.getPropsNative<R> & TTyped.getProps<R>> //native specific props
     classNameX?: TTyped.RulesetOrCreator<R>
@@ -27,7 +27,7 @@ declare namespace TComponents {
   */
   export interface ReactsCommonProperties<R extends TTyped.Shape = TTyped.Shape> {
     classNameX?: TEngine.Queryables
-    styleX?: TTyped.Style
+    styleX?: TTyped.RulesetIds
     trace?: string
   }
 
@@ -36,14 +36,6 @@ declare namespace TComponents {
     TEngine.IsReactXXComponent
 
   export type SFC<R extends TTyped.Shape = TTyped.Shape> = React.SFC<Props<R>>
-
-  //******************** Cross platform component code props
-
-  export type PropsCode<R extends TTyped.Shape = TTyped.Shape> = //PartialOverwrite<TTyped.getProps<R>,
-    TTyped.getProps<R> &
-    TExtensions.PropsCodePart<R> &
-    EventsNative &
-    EventsWeb
 
   /******************************************
     EVENTS
@@ -55,7 +47,7 @@ declare namespace TComponents {
   export type TEventsXNames = 'onPress' | 'onLongPress'
   //export type TEvents = TEventsAll
 
-  export interface MouseEventPar<R extends TTyped.Shape = TTyped.Shape> extends React.MouseEvent<Element> { current?: PropsCode<R> }
+  export interface MouseEventPar<R extends TTyped.Shape = TTyped.Shape> extends React.MouseEvent<Element> { current?: TTyped.PropsCode<R> }
   export type MouseEventEx<R extends TTyped.Shape = TTyped.Shape> = React.EventHandler<MouseEventPar<R>>// (ev?: MouseEventPar<R>) => void
 
   export interface EventsPress<R extends TTyped.Shape = TTyped.Shape> { onPress?: MouseEventEx<R>; onLongPress?: MouseEventEx<R> }

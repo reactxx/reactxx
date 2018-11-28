@@ -1,5 +1,6 @@
 ﻿export { default as useSheeter } from './use-sheeter'
 export { ThemeProvider, useTheme } from './use-theme'
+export * from './creator'
 
 import { platform, resetPlatform } from 'reactxx-sheeter'
 

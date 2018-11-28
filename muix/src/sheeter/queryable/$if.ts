@@ -29,11 +29,11 @@ const $ifelse = (
     if (typeof test === 'boolean') {
         if (test)
             return ifPart && makeTemporary((atomizedVariants, path, pseudoPrefixes, conditions) => {
-                processTree(ifPart, atomizedVariants, path + '/$sifelse-true', pseudoPrefixes, conditions)
+                processTree(ifPart, atomizedVariants, path + '/$ifelse-true', pseudoPrefixes, conditions)
             })
 
         return elsePart && makeTemporary((atomizedVariants, path, pseudoPrefixes, conditions) => {
-            processTree(elsePart, atomizedVariants, path + '/$sifelse-false', pseudoPrefixes, conditions)
+            processTree(elsePart, atomizedVariants, path + '/$ifelse-false', pseudoPrefixes, conditions)
         })
     }
 
@@ -43,14 +43,14 @@ const $ifelse = (
                 type: '$ifelse-true',
                 test
             }
-            processTree(ifPart, atomizedVariants, path + '/$ifelse-true', pseudoPrefixes, [...conditions, condTrue])
+            processTree(ifPart, atomizedVariants, path + '/ifelse-true', pseudoPrefixes, [...conditions, condTrue])
         }
         if (elsePart) {
             const condFalse: TEngine.Condition = {
                 type: '$ifelse-false',
                 test: outerPar => !test(outerPar)
             }
-            processTree(elsePart, atomizedVariants, path + '/$ifelse-false', pseudoPrefixes, [...conditions, condFalse])
+            processTree(elsePart, atomizedVariants, path + '/ifelse-false', pseudoPrefixes, [...conditions, condFalse])
         }
     })
 }

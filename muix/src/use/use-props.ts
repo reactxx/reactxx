@@ -7,7 +7,7 @@ import {
 import { TComponents, TEngine, TTyped, TUseSheeter } from 'reactxx-typings';
 
 
-export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, options: TUseSheeter.ComponentConfig, atomizedSheet: TEngine.Sheet, props: TComponents.Props) => {
+export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, options: TUseSheeter.AuthorConfig, atomizedSheet: TEngine.Sheet, props: TComponents.Props) => {
     // from props
     const { classes: _classes, classNameX: _classNameX, styleX: _styleX, themedProps, ...propsRest } = props as TComponents.Props
 

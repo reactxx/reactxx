@@ -1,13 +1,11 @@
 // platform dependent exports
 export * from './$web'
+export * from './shapes'
 
-export * from './d-index'
+import { getView, getIcon, getScrollView, getText} from './$web'
+import {inits} from './inits'
 
-import {initGlobals} from './sheets'
-import { init } from './$web'
+const { initPrimitives, viewCreator, View } = inits(getView, getIcon, getScrollView, getText)
 
-export const initPrimitives = (force?: boolean) => initGlobals(force, init)
+export {initPrimitives, viewCreator, View}
 export const initPrimitives$Web = initPrimitives
-
-initPrimitives$Web()
-

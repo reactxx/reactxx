@@ -2,7 +2,7 @@ import React from 'react';
 import ReactN from 'react-native';
 import CSS from 'csstype';
 
-import { TCommonStyles, TTyped } from 'reactxx-typings'
+import { TCommonStyles, TEngine } from 'reactxx-typings'
 
 export type $W = '$W'; export type $T = '$T'; export type $V = '$V';
 export type $I = '$I'; export type V = 'V'; export type T = 'T'; export type I = 'I';
@@ -40,6 +40,7 @@ export namespace TTyped {
     R extends $T ? $T | $V | T | V :
     R extends $V ? $V | V :
     R extends $I ? $I | I :
+    R extends $W ? $W | T | V :
     R
 
   export type TPlatformAllowed<R extends RulesetIds> =
@@ -63,15 +64,15 @@ export namespace TTyped {
     $web: <R extends RulesetIds>(...r: Ruleset<$W>[]) => R
     $native: <R extends RulesetIds>(...r: Ruleset<TNative<R>>[]) => R
 
-    $if: <R extends RulesetIds>(cond: boolean | ((p: SheetPar<S>) => boolean), ...r: Ruleset<R>[]) => R
-    $ifelse: <R extends RulesetIds>(cond: boolean | ((p: SheetPar<S>) => boolean), ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
-    $width: <R extends RulesetIds>(interval: number | [number, number], ...r: Ruleset<R>[]) => R
-    $hot: <R extends RulesetIds>(cond: (p: SheetPar<S>) => Ruleset<R> | Ruleset<R>[]) => R
+    $if: <R extends RulesetIds>(cond: boolean | ((p: PropsCode<S>) => boolean), ...r: Ruleset<R>[]) => R
+    $ifelse: <R extends RulesetIds>(cond: boolean | ((p: PropsCode<S>) => boolean), ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
+    $width: <R extends RulesetIds>(interval: TEngine.WidthInterval, ...r: Ruleset<R>[]) => R
+    $hot: <R extends RulesetIds>(cond: (p: PropsCode<S>) => Ruleset<R> | Ruleset<R>[]) => R
 
     $atomizeRuleset: <R extends RulesetIds>(r: RulesetOrCreator<S, R>, theme?: getTheme<S>, path?: string) => R
     $atomize: <R extends RulesetIds>(...r: Ruleset<R>[]) => R
     $mergeRulesets: <R extends RulesetIds>(r: Ruleset<R>[]) => R
-    $toClassNames: <R extends RulesetIds>(query: SheetPar<S>, ...rules: RulesetSimple<R>[]) => R
+    $toClassNames: <R extends RulesetIds>(query: PropsCode<S>, ...rules: RulesetSimple<R>[]) => R
 
     $atomizeSheet: (sheet: PartialSheet<S>, theme?: getTheme<S>, path?: string) => PartialSheet<S>
     $mergeSheets: (sources: PartialSheet<S>[]) => PartialSheet<S>
@@ -144,7 +145,14 @@ export namespace TTyped {
   export type getSheet<R extends Shape> = R['sheet']
   export type getSheetQuery<R extends Shape> = R['sheetQuery']
 
-  export type SheetPar<R extends Shape> = getSheetQuery<R> & getProps<R>
+  export type PropsCode<R extends TTyped.Shape = TTyped.Shape> = 
+    PropsCodeLow<R> &
+    getProps<R>
+
+  export interface PropsCodeLow<R extends TTyped.Shape> extends TEngine.WidthsQuery {
+    $sheetQuery?: getSheetQuery<R>
+  }
+
 
   export interface EmptyInterface { }
   export interface FakeInterface { ['`']?: any }

@@ -8,8 +8,6 @@ import { TTyped } from './index';
 
 export namespace TExtensions {
 
-    interface PropsCodePart<R extends TTyped.Shape = TTyped.Shape> { }
-
     interface Platform  { }
 
 }

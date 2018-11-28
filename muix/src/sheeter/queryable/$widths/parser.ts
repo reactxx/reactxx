@@ -1,4 +1,5 @@
 import warning = require('warning');
+import { TEngine } from 'reactxx-typings'
 
 export const parse = (encoded: string) => {
     warning(regx.test(encoded), `Found '${encoded}, expected e.g '-640' or '1024-' or '640-1024'`)
@@ -7,14 +8,14 @@ export const parse = (encoded: string) => {
 }
 const regx = /^\d+-\d+|-\d+|\d+-$/
 
-export const intervalToSelector = (interval: number | [number, number]) => {
+export const intervalToSelector = (interval: TEngine.WidthInterval) => {
     if (typeof interval === 'number') return `@media (min-width: ${interval}px)`
     const [from, to] = interval
     if (!from) return `@media (max-width: ${to - 1}px)`
     return `@media (min-width: ${from}px) and (max-width: ${to - 1}px)`
 }
 
-export const test = (interval: number | [number, number], actWidth: number, registerDir?: Set<number>) => {
+export const test = (interval: TEngine.WidthInterval, actWidth: number, registerDir?: Set<number>) => {
     if (registerDir) {
         if (typeof interval === 'number') registerDir.add(interval)
         else {

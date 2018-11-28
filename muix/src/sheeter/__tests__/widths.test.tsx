@@ -2,10 +2,8 @@
 
 import React from 'react'
 
-import {
-  platform, atomizeRuleset, toClassNamesWithQuery,
-  $width, setActWidth, useWidths, $WidthsQuery
-} from "reactxx-sheeter"
+import { TEngine } from 'reactxx-typings'
+import { platform, atomizeRuleset, toClassNamesWithQuery, $width, setActWidth, useWidths } from "reactxx-sheeter"
 
 import { initPlatform, dump, render } from "./init-platform.t"
 
@@ -39,24 +37,24 @@ describe("SHEETER $WIDTHS", () => {
         $width(1024, { color: 'blue' }),
       ]
       !window.isWeb && it("01: native, 300", () =>
-        dump(toClassNamesWithQuery<$WidthsQuery>({ $widths: { actWidth: 300 } }, ...rulesets))
+        dump(toClassNamesWithQuery<TEngine.WidthsQuery>({ $widths: { actWidth: 300 } }, ...rulesets))
       )
       !window.isWeb && it("02: native, 640", () =>
-        dump(toClassNamesWithQuery<$WidthsQuery>({ $widths: { actWidth: 640 } }, ...rulesets))
+        dump(toClassNamesWithQuery<TEngine.WidthsQuery>({ $widths: { actWidth: 640 } }, ...rulesets))
       )
       !window.isWeb && it("03: native, 1024", () =>
-        dump(toClassNamesWithQuery<$WidthsQuery>({ $widths: { actWidth: 1024 } }, ...rulesets))
+        dump(toClassNamesWithQuery<TEngine.WidthsQuery>({ $widths: { actWidth: 1024 } }, ...rulesets))
       )
       !window.isWeb && it("04: native, undefined", () =>
-        dump(toClassNamesWithQuery<$WidthsQuery>(undefined, ...rulesets))
+        dump(toClassNamesWithQuery<TEngine.WidthsQuery>(undefined, ...rulesets))
       )
       window.isWeb && it("05: web", () =>
-        dump(toClassNamesWithQuery<$WidthsQuery>(undefined, ...rulesets))
+        dump(toClassNamesWithQuery<TEngine.WidthsQuery>(undefined, ...rulesets))
       )
     })
 
     describe("04 change width", () => {
-      beforeEach(() => initPlatform(isWeb, {dataTraceFlag: 'short'}))
+      beforeEach(() => initPlatform(isWeb, { dataTraceFlag: 'short' }))
 
       const getSheet = () => atomizeRuleset([
         $width([0, 640], { color: 'red' }),
@@ -66,7 +64,7 @@ describe("SHEETER $WIDTHS", () => {
 
       const useApp = () => {
         const { actWidth, breakpoints, getWidthMap } = useWidths()
-        const query: $WidthsQuery = {
+        const query: TEngine.WidthsQuery = {
           $widths: { actWidth, breakpoints }
         }
         const sheetRoot = React.useMemo(getSheet)

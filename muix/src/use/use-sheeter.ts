@@ -8,12 +8,12 @@ import { useTheme } from './use-theme';
 
 const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     props: TComponents.Props<R>,
-    configDefault: TUseSheeter.ComponentConfig<R>,
-    displayName?: string,
-    configOverride?: TUseSheeter.ComponentConfigOverride<R>
+    configDefault: TUseSheeter.AuthorConfig<R>,
+    displayName: string,
+    configOverride?: TUseSheeter.UserConfig<R>
 ) => {
 
-    const config = useConfig(configDefault, displayName, configOverride)
+    const config = useConfig(configDefault, configOverride)
 
     warning(config === configDefault || config === configOverride, '!(config===configDefault || configDefault===configOverride)')
 
@@ -22,7 +22,7 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
 
     // from defaults
     const { sheet, propsDefault, themedPropsDefault, propsOverride, themedPropsOverride
-    } = useDefaults(theme, config)
+    } = useDefaults(theme, config, displayName)
 
     // from props
     const { classes, classNameX, styleX, propsRest, themedProps
@@ -34,7 +34,7 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     const { actWidth, getWidthMap, breakpoints } = useWidthsLow(uniqueId, forceUpdate)
 
     // merge props with default's
-    const propsCode: TComponents.PropsCode<R> = { 
+    const propsCode: TTyped.PropsCode<R> = {
         $widths: { actWidth, breakpoints },
     }
     mergeCodeProps(propsCode, [
@@ -43,9 +43,11 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
         propsRest, themedProps && themedProps(theme),
     ])
 
+    propsCode.$sheetQuery = {}
+
     const toClassNames = (...rulesets: TTyped.Ruleset[]) => toClassNamesWithQuery(propsCode, ...rulesets)
 
-    return { getWidthMap, toClassNames, propsCode, classes, styleX, classNameX, uniqueId, forceUpdate }
+    return { getWidthMap, toClassNames, propsCode, $sheetQuery: propsCode.$sheetQuery, classes, styleX, classNameX, uniqueId, forceUpdate }
 }
 
 const mergeCodeProps = (target, props: TComponents.Props[]) => {

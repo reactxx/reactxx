@@ -81,6 +81,15 @@ declare namespace TEngine {
     $native: {}
   }
 
+  type WidthInterval = number | [number, number]
+  interface WidthsQuery { 
+    $widths?: {
+        actWidth: number
+        breakpoints?: Set<number>
+    }
+  }
+
+
   type ValueOrCreator<T> = T | ((theme) => T)
 
   export type StyleOrCreator = ValueOrCreator<Style>

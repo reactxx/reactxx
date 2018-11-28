@@ -1,43 +1,35 @@
-import { TComponents, TWithStyles } from 'reactxx-typings'
-import { TPrimitives } from './d-index'
+import { TComponents, TUseSheeter } from 'reactxx-typings'
+import { TPrimitives } from './shapes'
 
 declare module 'reactxx-typings' {
 
-    namespace TVariants {
+    namespace TExtensions {
 
         interface Platform {
-            view?: TComponents.SFCCode<TPrimitives.ViewShape>
-            viewCreator?: TWithStyles.WithStylesCreatorResult<TPrimitives.ViewShape>
-            View?: TComponents.ComponentClass<TPrimitives.ViewShape>
+            View?: TComponents.SFC<TPrimitives.ViewShape>
+            Text?: TComponents.SFC<TPrimitives.TextShape>
+            Icon?: TComponents.SFC<TPrimitives.IconShape>
+            ScrollView?: TComponents.SFC<TPrimitives.ScrollViewShape>
+            AnimatedView?: TComponents.SFC<TPrimitives.ViewShape>
+            AnimatedText?: TComponents.SFC<TPrimitives.TextShape>
+            AnimatedIcon?: TComponents.SFC<TPrimitives.IconShape>
 
-            text?: TComponents.SFCCode<TPrimitives.TextShape>
-            textCreator?: TWithStyles.WithStylesCreatorResult<TPrimitives.TextShape>
-            Text?: TComponents.ComponentClass<TPrimitives.TextShape>
+            viewCreator?: TUseSheeter.ComponentCreator<TPrimitives.ViewShape>
+            textCreator?: TUseSheeter.ComponentCreator<TPrimitives.TextShape>
+            iconCreator?: TUseSheeter.ComponentCreator<TPrimitives.IconShape>
+            scrollViewCreator?: TUseSheeter.ComponentCreator<TPrimitives.ScrollViewShape>
+            animatedViewCreator?: TUseSheeter.ComponentCreator<TPrimitives.ViewShape>
+            animatedTextCreator?: TUseSheeter.ComponentCreator<TPrimitives.TextShape>
+            animatedIconv?: TUseSheeter.ComponentCreator<TPrimitives.IconShape>
 
-            icon?: TComponents.SFCCode<TPrimitives.IconShape>
-            iconCreator?: TWithStyles.WithStylesCreatorResult<TPrimitives.IconShape>
-            Icon?: TComponents.ComponentClass<TPrimitives.IconShape>
-
-            scrollView?: TComponents.SFCCode<TPrimitives.ScrollViewShape>
-            scrollViewCreator?: TWithStyles.WithStylesCreatorResult<TPrimitives.ScrollViewShape>
-            ScrollView?: TComponents.ComponentClass<TPrimitives.ScrollViewShape>
-
-            animatedView?: TComponents.SFCCode<TPrimitives.ViewShape>
-            animatedViewCreator?: TWithStyles.WithStylesCreatorResult<TPrimitives.ViewShape>
-            AnimatedView?: TComponents.ComponentClass<TPrimitives.ViewShape>
-
-            animatedText?: TComponents.SFCCode<TPrimitives.TextShape>
-            animatedTextCreator?: TWithStyles.WithStylesCreatorResult<TPrimitives.TextShape>
-            AnimatedText?: TComponents.ComponentClass<TPrimitives.TextShape>
-
-            animatedIcon?: TComponents.SFCCode<TPrimitives.IconShape>
-            animatedIconCreator?: TWithStyles.WithStylesCreatorResult<TPrimitives.IconShape>
-            AnimatedIcon?: TComponents.ComponentClass<TPrimitives.IconShape>
+            getView?: TUseSheeter.GetComponent<TPrimitives.ViewShape>
+            getText?: TUseSheeter.GetComponent<TPrimitives.TextShape>
+            getIcon?: TUseSheeter.GetComponent<TPrimitives.IconShape>
+            getScrollView?: TUseSheeter.GetComponent<TPrimitives.ScrollViewShape>
+            getAnimatedView?: TUseSheeter.GetComponent<TPrimitives.ViewShape>
+            getAnimatedText?: TUseSheeter.GetComponent<TPrimitives.TextShape>
+            getAnimatedIcon?: TUseSheeter.GetComponent<TPrimitives.IconShape>
 
         }
-
-
     }
-
-
 }
