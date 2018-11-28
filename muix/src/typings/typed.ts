@@ -63,10 +63,8 @@ export namespace TTyped {
     $web: <R extends RulesetIds>(...r: Ruleset<$W>[]) => R
     $native: <R extends RulesetIds>(...r: Ruleset<TNative<R>>[]) => R
 
-    $if: <R extends RulesetIds>(cond: (p: SheetPar<S>) => boolean, ...r: Ruleset<R>[]) => R
-    $ifelse: <R extends RulesetIds>(cond: (p: SheetPar<S>) => boolean, ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
-    $sif: <R extends RulesetIds>(cond: boolean, ...r: Ruleset<R>[]) => R
-    $sifelse: <R extends RulesetIds>(cond: boolean, ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
+    $if: <R extends RulesetIds>(cond: boolean | ((p: SheetPar<S>) => boolean), ...r: Ruleset<R>[]) => R
+    $ifelse: <R extends RulesetIds>(cond: boolean | ((p: SheetPar<S>) => boolean), ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
     $width: <R extends RulesetIds>(interval: number | [number, number], ...r: Ruleset<R>[]) => R
     $hot: <R extends RulesetIds>(cond: (p: SheetPar<S>) => Ruleset<R> | Ruleset<R>[]) => R
 

@@ -193,6 +193,60 @@ Object {
 }
 `;
 
+exports[`TO CLASSNAMES ## NATIVE ## 08: static if and ifelse 1`] = `
+Array [
+  Array [
+    "color: grey @/$sif",
+  ],
+  Array [
+    "backgroundColor: blue @/$sifelse-true",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 08: static if and ifelse 2`] = `
+Object {
+  "backgroundColor": Object {
+    "tracePath": "/$sifelse-true",
+    "value": "blue",
+  },
+  "color": Object {
+    "tracePath": "/$sif",
+    "value": "grey",
+  },
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 08: static if and ifelse 3`] = `
+Object {
+  "backgroundColor": "blue",
+  "color": "grey",
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 08: static if and ifelse 4`] = `
+Array [
+  Array [
+    "backgroundColor: green @/$sifelse-false",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 08: static if and ifelse 5`] = `
+Object {
+  "backgroundColor": Object {
+    "tracePath": "/$sifelse-false",
+    "value": "green",
+  },
+}
+`;
+
+exports[`TO CLASSNAMES ## NATIVE ## 08: static if and ifelse 6`] = `
+Object {
+  "backgroundColor": "green",
+}
+`;
+
 exports[`TO CLASSNAMES ## WEB ## 01: null 1`] = `null`;
 
 exports[`TO CLASSNAMES ## WEB ## 01: null 2`] = `null`;
@@ -332,3 +386,39 @@ Array [
 `;
 
 exports[`TO CLASSNAMES ## WEB ## 08: sif, sifelse 6`] = `"b"`;
+
+exports[`TO CLASSNAMES ## WEB ## 08: static if and ifelse 1`] = `
+Array [
+  Array [
+    ".a { color:grey } @/$sif",
+  ],
+  Array [
+    ".b { background-color:blue } @/$sifelse-true",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 08: static if and ifelse 2`] = `
+Array [
+  ".b { background-color:blue } @/$sifelse-true",
+  ".a { color:grey } @/$sif",
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 08: static if and ifelse 3`] = `"b a"`;
+
+exports[`TO CLASSNAMES ## WEB ## 08: static if and ifelse 4`] = `
+Array [
+  Array [
+    ".c { background-color:green } @/$sifelse-false",
+  ],
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 08: static if and ifelse 5`] = `
+Array [
+  ".c { background-color:green } @/$sifelse-false",
+]
+`;
+
+exports[`TO CLASSNAMES ## WEB ## 08: static if and ifelse 6`] = `"c"`;

@@ -2,7 +2,6 @@ import { TEngine, TTyped } from 'reactxx-typings';
 import $hot from '../queryable/$hot';
 import { $if, $ifelse } from '../queryable/$if';
 import $native from '../queryable/$native';
-import { $sif, $sifelse } from '../queryable/$sif';
 import $web from '../queryable/$web';
 import $width from '../queryable/$widths/$width';
 import { atomizeRuleset, atomizeSheet } from './atomize';
@@ -17,8 +16,6 @@ const untypedEngine = {
     $hot,
     $if,
     $ifelse,
-    $sif, 
-    $sifelse,
     $width,
     $themed: p => p,
     $rules: p => p,

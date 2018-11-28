@@ -8,7 +8,7 @@ interface Shape {
   sheetQuery: { opened: boolean }
 }
 
-const { $themed, $sif, $sifelse, $if, $web, $native, $rules, $toClassNames, $atomize
+const { $themed, $if, $ifelse, $web, $native, $rules, $toClassNames, $atomize
 } = getTypedEngine<Shape>()
 
 // let t = () => null as T | $W
@@ -56,11 +56,11 @@ describe("TO CLASSNAMES", () => {
         $if<T>(p => !p.opened, { color: 'blue' }),
       )
     ))
-    it("08: sif, sifelse", () => {
+    it("08: static if and ifelse", () => {
       const inRender = (disabled: boolean) =>
         dump($toClassNames<T>(sheetQuery(false),
-          $sif<T>(disabled, { color: 'grey' }),
-          $sifelse<T>(disabled, { backgroundColor: 'blue' }, { backgroundColor: 'green' }),
+          $if<T>(disabled, { color: 'grey' }),
+          $ifelse<T>(disabled, { backgroundColor: 'blue' }, { backgroundColor: 'green' }),
         ))
         inRender(true)
         inRender(false)

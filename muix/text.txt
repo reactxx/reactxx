@@ -1,7 +1,5 @@
-- TSheeter, k cemu je? TVariant.ShapePart, k cemu je?
-- styleX: osetrit
-
-primitives events
+- events
+- split sheeter, use to core and sheeter. Move typing's use-sheeter, typed and components to sheeter.
 Tests:
 - primitives
     - 2x test warnings
