@@ -8,14 +8,14 @@ import { useTheme } from './use-theme';
 
 const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     props: TComponents.Props<R>,
-    configDefault: TUseSheeter.AuthorConfig<R>,
+    authorConfig: TUseSheeter.AuthorConfig<R>,
     displayName: string,
-    configOverride?: TUseSheeter.UserConfig<R>
+    userConfig?: TUseSheeter.UserConfig<R>
 ) => {
 
-    const config = useConfig(configDefault, configOverride)
+    const config = useConfig(authorConfig, userConfig)
 
-    warning(config === configDefault || config === configOverride, '!(config===configDefault || configDefault===configOverride)')
+    warning(config === authorConfig || config === userConfig, '!(config===authorConfig || authorConfig===userConfig)')
 
     // theme
     const [theme] = useTheme<TTyped.getTheme<R>>()

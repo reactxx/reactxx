@@ -24,13 +24,13 @@ export interface Shape extends TTyped.ShapeAncestor {
   
   export const compCreator = (
     config: TUseSheeter.AuthorConfig<Shape>,
-    configOverride?: TUseSheeter.UserConfig<Shape>,
+    userConfig?: TUseSheeter.UserConfig<Shape>,
     displayName?: 'Comp'
   ) => {
     const res: TComponents.SFC<Shape> = props => {
       try {
         const { toClassNames, propsCode, classes, classNameX, styleX
-        } = useSheeter<Shape>(props, config, displayName, configOverride)
+        } = useSheeter<Shape>(props, config, displayName, userConfig)
         
         const renderCount = React.useRef(0)
         renderCount.current++

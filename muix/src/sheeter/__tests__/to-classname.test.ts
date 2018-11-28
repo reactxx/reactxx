@@ -14,7 +14,7 @@ const { $themed, $if, $ifelse, $web, $native, $rules, $toClassNames, $atomize
 describe("TO CLASSNAMES", () => {
 
   type Par = { opened: boolean, theme: null }
-  const sheetQuery = (opened: boolean) => ({ opened })
+  const sheetQuery = (opened: boolean) => ({ $sheetQuery: { opened } })
   const query = (opened: boolean, ...ruleset: TTyped.RulesetSimple[]) => dump($toClassNames<TTyped.RulesetIds>(sheetQuery(opened), ...ruleset))
 
   const doTest = (isWeb: boolean) => {
@@ -30,21 +30,21 @@ describe("TO CLASSNAMES", () => {
       $toClassNames<T>(null, $atomize<T>({ color: 'green' })) // atomized ruleset
     )))
     it("04: query => opened", () => query(true,
-      $if(p => p.opened, { color: 'red' }),
-      $if(p => !p.opened, { color: 'blue' }),
+      $if(p => p.$sheetQuery.opened, { color: 'red' }),
+      $if(p => !p.$sheetQuery.opened, { color: 'blue' }),
     ))
     it("05: query => closed", () => query(false,
-      $if(p => p.opened, { color: 'red' }),
-      $if(p => !p.opened, { color: 'blue' }),
+      $if(p => p.$sheetQuery.opened, { color: 'red' }),
+      $if(p => !p.$sheetQuery.opened, { color: 'blue' }),
     ))
     it("06: query => closed => pre-atomized", () => query(false, $atomize<T>(
-      $if<T>(p => p.opened, { color: 'red' }),
-      $if<T>(p => !p.opened, { color: 'blue' }),
+      $if<T>(p => p.$sheetQuery.opened, { color: 'red' }),
+      $if<T>(p => !p.$sheetQuery.opened, { color: 'blue' }),
     )))
     it("07: query => closed => pre-queried", () => query(false,
       $toClassNames<T>(sheetQuery(false),
-        $if<T>(p => p.opened, { color: 'red' }),
-        $if<T>(p => !p.opened, { color: 'blue' }),
+        $if<T>(p => p.$sheetQuery.opened, { color: 'red' }),
+        $if<T>(p => !p.$sheetQuery.opened, { color: 'blue' }),
       )
     ))
     it("08: static if and ifelse", () => {
@@ -53,8 +53,8 @@ describe("TO CLASSNAMES", () => {
           $if<T>(disabled, { color: 'grey' }),
           $ifelse<T>(disabled, { backgroundColor: 'blue' }, { backgroundColor: 'green' }),
         ))
-        inRender(true)
-        inRender(false)
+      inRender(true)
+      inRender(false)
     })
   }
 

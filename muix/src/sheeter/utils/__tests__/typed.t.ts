@@ -11,7 +11,7 @@ const { $themed, $if, $web, $native, $rules, $toClassNames, $atomizeRuleset
 
 const sheet4 = $themed(theme => ({
   root: $rules<V>(
-    $if<V>(p => p.enabled, { backgroundColor: theme.primary })
+    $if<V>(p => p.$sheetQuery.enabled, { backgroundColor: theme.primary })
   )
 }))
 

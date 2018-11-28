@@ -6,12 +6,12 @@ import { getTypedEngine } from 'reactxx-sheeter'
 
 interface Shape extends ShapeLow {
   sheetQuery: {
-    backgroundColor    
+    backgroundColor
     color
   }
 }
 
-const { $themed, $web, $native, $if, $hot, $ifelse, $width, $rules, $toClassNames, $atomizeRuleset 
+const { $themed, $web, $native, $if, $hot, $ifelse, $width, $rules, $toClassNames, $atomizeRuleset
 } = getTypedEngine<Shape>()
 
 
@@ -51,7 +51,7 @@ const r5: TTyped.Rulesets<V> = [
     // color: 'red' // ERROR
     transform: []
   }),
-  $hot<V>(({backgroundColor}) => ({
+  $hot<V>(({ $sheetQuery: { backgroundColor } }) => ({
     // color: 'red' // ERROR
     backgroundColor
   })),
@@ -84,7 +84,7 @@ const s3: TTyped.PartialSheet<Shape> = {
 const s4: TTyped.Sheet<Shape> = {
   root: [
     classNames,
-    $if<V>(({ color }) => true,
+    $if<V>(({ $sheetQuery: { color } }) => true,
       {
         // color: 'red' // error
         // transform: [] // error
@@ -112,7 +112,7 @@ const s4: TTyped.Sheet<Shape> = {
         // color: 'red' // error
       },
       classNames,
-      $if<$V>(null, {transform: []}), // error
+      $if<$V>(null, { transform: [] }), // error
     ),
   ],
   label: [

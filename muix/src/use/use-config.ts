@@ -4,43 +4,34 @@ import { TTyped, TUseSheeter } from 'reactxx-typings';
 import { platform } from 'reactxx-sheeter'
 
 export const useConfig = <R extends TTyped.Shape = TTyped.Shape>(
-    configDefault: TUseSheeter.AuthorConfig<R>,
-    configOverride?: TUseSheeter.UserConfig<R>
+    authorConfig: TUseSheeter.AuthorConfig<R>,
+    userConfig?: TUseSheeter.UserConfig<R>
 ) => {
 
-    if (!configDefault)
-        throw 'ConfigDefault expected'
+    // configs check
+    if (!authorConfig)
+        throw 'authorConfig expected'
 
-    const useMemoCalled = React.useRef(false)
+    const authorConfigRef = React.useRef(authorConfig)
+    const userConfigRef = React.useRef(userConfig)
+    if (authorConfigRef.current !== authorConfig || userConfigRef.current != userConfig)
+        warning(false, 'authorConfig or userConfig changed. Last version will be ignored.')
 
-    const config = React.useMemo(() => {
+    const { _withStyles } = platform
 
-        // only single useMemo call allowed
-        if (useMemoCalled.current) {
-            warning(false, 'ConfigDefault or configOverride changed! New value will be ignored.')
-            return
-        }
-        useMemoCalled.current = true
+    if (!authorConfig.id)
+        authorConfig.id = ++_withStyles.idCounter
 
-        const { _withStyles } = platform
+    if (userConfig) {
+        if (!userConfig.id) {
+            userConfig.id = ++_withStyles.idCounter
+            userConfig.myConfigId = authorConfig.id
+            // keep userConfig pointer, change its content
+            const value = Object.assign({}, authorConfig, userConfig)
+            Object.assign(userConfig, value)
+        } else if (userConfig.myConfigId != authorConfig.id)
+            warning(false, 'userConfig already inherited from different authorConfig. Last authorConfig ignored.')
+    }
 
-        if (!configDefault.id)
-            configDefault.id = ++_withStyles.idCounter
-
-        if (configOverride) {
-            if (!configOverride.id) {
-                configOverride.id = ++_withStyles.idCounter
-                configOverride.myConfigId = configDefault.id
-                // keep configOverride pointer, change its content
-                const value = Object.assign({}, configDefault, configOverride)
-                Object.assign(configOverride, value)
-            } else if (configOverride.myConfigId != configDefault.id)
-                throw 'configOverride already inherited from another configDefault'
-        }
-
-        return configOverride || configDefault
-
-    }, [configDefault, configOverride])
-
-    return config
+    return userConfig || authorConfig
 }
