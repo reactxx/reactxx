@@ -16,6 +16,7 @@ export const enum CompNames {
   AnimatedView = 'ReactXXAnimatedView',
   AnimatedIcon = 'ReactXXAnimatedIcon',
   AnimatedText = 'ReactXXAnimatedText',
+  AnimatedScrollView = 'ReactXXAnimatedScrollView',
 }
 
 

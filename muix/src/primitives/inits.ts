@@ -17,14 +17,41 @@ export const inits = (
     const animatedViewCreator = getComponentCreator(CompNames.AnimatedView, viewConfig, getView, true)
     const AnimatedView = animatedViewCreator()
 
+    const iconCreator = getComponentCreator(CompNames.Icon, iconConfig, getIcon, false)
+    const Icon = iconCreator()
+
+    const animatedIconCreator = getComponentCreator(CompNames.AnimatedIcon, iconConfig, getIcon, true)
+    const AnimatedIcon = animatedIconCreator()
+
+    const textCreator = getComponentCreator(CompNames.Text, textConfig, getText, false)
+    const Text = textCreator()
+
+    const animatedTextCreator = getComponentCreator(CompNames.AnimatedText, textConfig, getText, true)
+    const AnimatedText = animatedTextCreator()
+
+    const scrollViewCreator = getComponentCreator(CompNames.ScrollView, scrollViewConfig, getScrollView, false)
+    const ScrollView = scrollViewCreator()
+
+    const animatedScrollViewCreator = getComponentCreator(CompNames.AnimatedScrollView, scrollViewConfig, getScrollView, true)
+    const AnimatedScrollView = animatedViewCreator()
+
     const initPrimitives = (force?: boolean) => {
         if (force) resetPlatform()
         if (platform.View) return
         const primitivies: Platform = {
             viewCreator, View, getView,
+            scrollViewCreator, ScrollView, getScrollView,
+            iconCreator, Icon, getIcon,
+            textCreator, Text, getText,
         }
         Object.assign(platform, primitivies)
     }
 
-    return { initPrimitives, viewCreator, View }
+    return {
+        initPrimitives,
+        viewCreator, View, 
+        scrollViewCreator, ScrollView, 
+        iconCreator, Icon, 
+        textCreator, Text, 
+    }
 }

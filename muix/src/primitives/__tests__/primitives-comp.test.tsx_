@@ -1,4 +1,4 @@
-import React, { useState, useContext, memo } from 'react'
+import React from 'react'
 import { initPlatform, mount } from "reactxx-tests"
 import { platform } from 'reactxx-sheeter'
 
@@ -9,7 +9,7 @@ describe("PRIMITIVES SIMPLE", () => {
 
 const traceTest = (isWeb: boolean) => {
   initPlatform(isWeb)
-  window.__TRACELEVEL__ = 2
+  //window.__TRACELEVEL__ = 2
 
   let
   // wrapper = mount(<platform.Icon>Icon</platform.Icon>)
