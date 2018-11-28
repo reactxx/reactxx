@@ -1,4 +1,4 @@
-import { TEngine, TTyped } from 'reactxx-typings';
+import { TEngine } from 'reactxx-typings';
 import { deepMerge, deepMerges } from './deep-merge'
 import { isAtomized } from './atomize-low';
 import { wrapRuleset } from './atomize';

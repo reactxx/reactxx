@@ -1,6 +1,6 @@
 ﻿import ReactN from 'react-native'
 
-import { TComponents, TTyped } from 'reactxx-typings'
+import { TTyped } from 'reactxx-typings'
 import { $W, $T, $V, $I, V, T, I } from 'reactxx-typings'
 
 

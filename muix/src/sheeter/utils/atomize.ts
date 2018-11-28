@@ -1,4 +1,4 @@
-import { TComponents, TEngine, TTyped } from 'reactxx-typings';
+import { TEngine } from 'reactxx-typings';
 import { adjustAtomizedLow, isDeferred } from './atomize-low';
 import { createWithTheme } from './create-with-theme';
 
@@ -63,6 +63,3 @@ export const atomizeStyle = (style: TEngine.Style, theme?) => {
     return style
 }
 
-export function isReactXXComponent(obj): obj is TComponents.ComponentType {
-    return (obj as TComponents.ComponentType).$c$
-}

@@ -1,4 +1,4 @@
-import { TTyped, TEngine } from 'reactxx-typings'
+import { TEngine } from 'reactxx-typings'
 import { WidthStore } from './queryable/$widths/store'
 declare module 'reactxx-typings' {
 

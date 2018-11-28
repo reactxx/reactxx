@@ -1,4 +1,4 @@
-import { TEngine, TTyped } from 'reactxx-typings';
+import { TEngine, TTyped, TComponents } from 'reactxx-typings';
 import $hot from '../queryable/$hot';
 import { $if, $ifelse } from '../queryable/$if';
 import $native from '../queryable/$native';
@@ -35,3 +35,7 @@ export const toEngineSheet = (r: TTyped.SheetOrCreator) => r as TEngine.Sheet
 
 export const fromEngineStyle = <R extends TTyped.Shape>(r: TEngine.StyleOrCreator) => r as any as TTyped.StyleSimple<R>
 export const toEngineStyle = (r: TTyped.StyleOrCreator) => r as TEngine.Style
+
+export function isReactXXComponent(obj): obj is TComponents.ComponentType {
+    return (obj as TComponents.ComponentType).$c$
+}

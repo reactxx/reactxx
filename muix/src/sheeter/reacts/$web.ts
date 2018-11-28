@@ -1,7 +1,7 @@
 import React from 'react';
 import { TComponents, TEngine, TTyped } from 'reactxx-typings';
 import { platform, ApplyLastwinsStrategy } from '../index';
-import { isReactXXComponent } from '../utils/atomize';
+import { isReactXXComponent } from '../utils/typed';
 import { deleteSystemProps } from '../utils/to-classnames';
 
 
