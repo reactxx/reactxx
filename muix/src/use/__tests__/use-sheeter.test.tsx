@@ -210,6 +210,20 @@ describe("USE SHEETER", () => {
       wrapper.unmount()
     })
 
+    it('20: style', () => {
+      const Comp = compCreator({ defaultSheet: { root: {} } })
+      const wrapper = render(<Comp styleX={{color: 'red', margin: 5, $web: {margin: 10}, $native: {margin: 20}}}/>)
+      expect(wrapper.container).toMatchSnapshot()
+      wrapper.unmount()
+    })
+
+    it('21: style with classes', () => {
+      const Comp = compCreator({ defaultSheet: { root: { color: 'red'} } })
+      const wrapper = render(<Comp classNameX={{margin: 20}} styleX={{color: 'blue', $web: {margin: 30}, $native: {margin: 40}}}/>)
+      expect(wrapper.container).toMatchSnapshot()
+      wrapper.unmount()
+    })
+
   }
 
   describe("## NATIVE ##", () => doTest(false))

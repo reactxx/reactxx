@@ -1,5 +1,9 @@
 ﻿import React from 'react';
-import { atomizeRuleset, atomizeSheet, atomizeStyle, fromEngineClassName, fromEngineSheet, mergeSheets, toEngineClassName, toEngineSheet } from 'reactxx-sheeter';
+import { 
+    atomizeRuleset, atomizeSheet, atomizeStyle, mergeSheets, 
+    fromEngineClassName, fromEngineSheet, toEngineClassName, toEngineSheet,
+    fromEngineStyle, toEngineStyle
+ } from 'reactxx-sheeter';
 import { TComponents, TEngine, TTyped, TUseSheeter } from 'reactxx-typings';
 
 
@@ -24,7 +28,7 @@ export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, options: 
         [_classNameX, theme])
 
     // styleX
-    const styleX = React.useMemo(() => atomizeStyle(_styleX, theme, 'styleX'), [_styleX])
+    const styleX = React.useMemo(() => fromEngineStyle<R>(atomizeStyle(toEngineStyle(_styleX), theme)), [_styleX])
 
     return { classes, classNameX, styleX, propsRest, themedProps }
 

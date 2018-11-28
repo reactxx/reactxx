@@ -1,6 +1,8 @@
-import { TCommonStyles, TTyped } from 'reactxx-typings'
+import React from 'react';
 import ReactN from 'react-native';
 import CSS from 'csstype';
+
+import { TCommonStyles, TTyped } from 'reactxx-typings'
 
 export type $W = '$W'; export type $T = '$T'; export type $V = '$V';
 export type $I = '$I'; export type V = 'V'; export type T = 'T'; export type I = 'I';
@@ -16,11 +18,11 @@ export namespace TTyped {
 
   type WebStyle = React.CSSProperties & { [P in CSS.Pseudos]?: Ruleset<$W> | Ruleset<$W>[] }
 
-  type RulesetType<R extends RulesetIds> =
+  type RulesetType<R extends RulesetIds, ForStyle extends boolean = false> =
     R extends V ? TCommonStyles.ViewStyle :
     R extends T ? TCommonStyles.TextStyle :
     R extends I ? TCommonStyles.ImageStyle :
-    R extends $W ? WebStyle :
+    R extends $W ? (ForStyle extends false ? WebStyle : React.CSSProperties) :
     R extends $T ? ReactN.TextStyle :
     R extends $V ? ReactN.ViewStyle :
     R extends $I ? ReactN.ImageStyle :
@@ -86,7 +88,7 @@ export namespace TTyped {
   export type SheetSimple<R extends Shape> = {
     [P in keyof getSheet<R>]: getSheet<R>[P]
   }
-  export type ClassNameSimple<R extends Shape> = TAllowed<getClassName<R>>
+  export type ClassNameSimple<R extends Shape> = getClassName<R>
   export type RulesetSimple<Id extends RulesetIds = RulesetIds> = TAllowed<Id>
 
   export type Sheet<R extends Shape = Shape> = {
@@ -153,14 +155,14 @@ export namespace TTyped {
     STYLE
   *******************************************/
 
-  export type StyleOrCreator<R extends Shape = Shape> = any //StyleOrAtomized<R> | ((theme: getTheme<R>) => StyleOrAtomized<R>)
+  export type Style<R extends RulesetIds = CommonIds> =
+    RulesetType<R, true> &
+    {
+      $web?: RulesetType<$W, true>
+      $native?: RulesetType<TNative<R>>
+    }
+    export type StyleSimple<R extends Shape = Shape> = getClassName<R>
 
-  export type StyleOrAtomized<R extends Shape = Shape> = any //StyleItem<R> | StyleItem<R>[]
-
-  export type StyleItem<R extends Shape = Shape> = any //Style<R> | TAtomize.AtomizedRuleset
-
-  export type StyleOrAtomizedWeb = any //Style | Style[]
-
-  export type Style<R extends Shape = Shape> = any/*TODO*/ //TCommonStyles.RulesetType<getStyle<R>>
-
+  export type StyleOrCreator<R extends Shape = Shape> =
+    ValueOrCreator<Style<getClassName<R>>, getTheme<R>>
 }

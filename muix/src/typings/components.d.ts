@@ -27,7 +27,7 @@ declare namespace TComponents {
   */
   export interface ReactsCommonProperties<R extends TTyped.Shape = TTyped.Shape> {
     classNameX?: TEngine.Queryables
-    styleX?: TTyped.StyleItem
+    styleX?: TTyped.Style
     trace?: string
   }
 

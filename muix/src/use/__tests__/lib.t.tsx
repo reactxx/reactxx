@@ -24,7 +24,7 @@ export interface Shape extends TTyped.ShapeAncestor {
   
   export const compCreator = (
     config: TUseSheeter.ComponentConfig<Shape>,
-    configOverride: TUseSheeter.ComponentConfigOverride<Shape>,
+    configOverride?: TUseSheeter.ComponentConfigOverride<Shape>,
     displayName?: 'Comp'
   ) => {
     const res: TComponents.SFC<Shape> = props => {

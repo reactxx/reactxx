@@ -194,6 +194,28 @@ exports[`USE SHEETER ## NATIVE ## 19: theme, props 1`] = `
 </div>
 `;
 
+exports[`USE SHEETER ## NATIVE ## 20: style 1`] = `
+<div>
+  <div
+    data-trace=""
+    style="margin: 20px; color: red;"
+  >
+    1
+  </div>
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 21: style with classes 1`] = `
+<div>
+  <div
+    data-trace=""
+    style="margin: 40px; color: blue;"
+  >
+    1
+  </div>
+</div>
+`;
+
 exports[`USE SHEETER ## WEB ## 01: config NULL 1`] = `
 <div>
   <div>
@@ -394,6 +416,30 @@ exports[`USE SHEETER ## WEB ## 19: theme, props 1`] = `
 <div>
   <div
     p1="themeProp"
+  >
+    1
+  </div>
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 20: style 1`] = `
+<div>
+  <div
+    style="color: red; margin: 10px;"
+  >
+    1
+  </div>
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 21: style with classes 1`] = `
+<div>
+  <div
+    class="b a"
+    data-trace="
+.b { margin:20px }
+.a { color:red }"
+    style="color: blue; margin: 30px;"
   >
     1
   </div>

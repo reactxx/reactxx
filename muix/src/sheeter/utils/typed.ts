@@ -35,3 +35,6 @@ export const toEngineClassName = (r: TTyped.RulesetOrCreator) => r as TEngine.Ru
 
 export const fromEngineSheet = <R extends TTyped.Shape>(r: TEngine.SheetOrCreator) => r as any as TTyped.SheetSimple<R>
 export const toEngineSheet = (r: TTyped.SheetOrCreator) => r as TEngine.Sheet
+
+export const fromEngineStyle = <R extends TTyped.Shape>(r: TEngine.StyleOrCreator) => r as any as TTyped.StyleSimple<R>
+export const toEngineStyle = (r: TTyped.StyleOrCreator) => r as TEngine.Style

@@ -38,17 +38,29 @@ export const wrapRuleset = ruleset => {
         ruleset['toJSON'] = toJSON.bind(ruleset)
     return ruleset as TEngine.Queryables
 }
-function toJSON () {
+function toJSON() {
     return (this as TEngine.Queryables).map(v => isDeferred(v) ? 'DEFFERED' : [...v])
 }
 
 // muttable (at least for native)
-export const atomizeStyle = (style: TTyped.StyleOrCreator, theme?, path: string = '.') => {
+export const atomizeStyle = (style: TEngine.Style, theme?) => {
     if (!style) return null
-    if (window.isWeb)
-        return createWithTheme(style, theme) as TTyped.StyleOrAtomizedWeb
-    else
-        return atomizeRuleset(style as TEngine.Rulesets, theme, path)
+
+    style = createWithTheme(style, theme)
+
+    const { $web, $native } = style
+
+    if ($web || $native) style = { ...style }
+
+    if (window.isWeb && $web)
+        Object.assign(style, $web)
+    else if (!window.isWeb && $native)
+        Object.assign(style, $native)
+
+    delete style.$web
+    delete style.$native
+    
+    return style
 }
 
 export function isReactXXComponent(obj): obj is TComponents.ComponentType {

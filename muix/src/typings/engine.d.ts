@@ -76,8 +76,14 @@ declare namespace TEngine {
   export type AtomicWebsLow = AtomicWeb[]
   export type AtomicNativeLow = Record<string, TNativeRuleValue>
 
+  export interface Style {
+    $web: {}
+    $native: {}
+  }
+
   type ValueOrCreator<T> = T | ((theme) => T)
 
+  export type StyleOrCreator = ValueOrCreator<Style>
   export type RulesetOrCreator = ValueOrCreator<Rulesets>
   export type SheetOrCreator = ValueOrCreator<Sheet>
 

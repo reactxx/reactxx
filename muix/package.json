@@ -10,9 +10,6 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "setupFiles": [
-      "./src/sheeter/__tests__/init-platform.ts"
-    ],
     "snapshotSerializers": [],
     "verbose": true,
     "roots": [

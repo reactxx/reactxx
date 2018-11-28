@@ -2,7 +2,6 @@ import React from 'react';
 import { TComponents, TEngine, TTyped } from 'reactxx-typings';
 import { platform, ApplyLastwinsStrategy } from '../index';
 import { isReactXXComponent } from '../utils/atomize';
-import { mergeStyles } from '../utils/merge';
 import { deleteSystemProps } from '../utils/to-classnames';
 
 
@@ -25,7 +24,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   const isXXComponent = isReactXXComponent(type)
 
   delete props.$native
-  consolidateEvents(props)
+  //consolidateEvents(props)
 
   if (isXXComponent) return React.createElement(type, props, ...children)
 
@@ -43,7 +42,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   }
 
   if (styleX) {
-    props.style = mergeStyles(styleX) as React.CSSProperties
+    props.style = styleX as React.CSSProperties
   }
 
   deleteSystemProps(props)
@@ -94,7 +93,7 @@ export const applyLastwinsStrategy: ApplyLastwinsStrategy = (values: TEngine.Que
 
 interface ReactsCommonPropertiesWeb {
   className?: string
-  styleX?: TTyped.Style
+  styleX?: TTyped.StyleSimple
   style?: React.CSSProperties
   $native?
 }

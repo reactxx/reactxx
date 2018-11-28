@@ -32,7 +32,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   if (classNameX || styleX) {
     let style =
       styleX
-        ? toClassNamesWithQuery(null, [classNameX, styleX])
+        ? toClassNamesWithQuery(null, classNameX, styleX)
         : classNameX
     let reduced = applyLastwinsStrategy(style) as TEngine.AtomicNativeLow
     props.style = finalizeClassName(reduced)
@@ -58,11 +58,11 @@ export const finalizeClassName = (lastWinResult: TEngine.AtomicNativeLow) => {
 export const applyLastwinsStrategy: ApplyLastwinsStrategy = values => {
   if (!values) return null
   const res: TEngine.NativeStyle = {}
-  let idxs: number[] = []
-  const usedPropIds: { [propId: string]: boolean } = {}
-  for (let i = values.length - 1; i >= 0; i--)
-    for (let k = values.length - 1; k >= 0; k--) {
-      let value = values[i] && values[i][k]
+  for (let i = values.length - 1; i >= 0; i--) {
+    const vals = values[i] as any[]
+    if (!vals) continue
+    for (let k = vals.length - 1; k >= 0; k--) {
+      let value = vals[k]
       if (!value) continue
       if (Array.isArray(value)) {
         Array.prototype.push.apply(res, value)
@@ -72,6 +72,7 @@ export const applyLastwinsStrategy: ApplyLastwinsStrategy = values => {
       if (typeof res[value.propId] !== 'undefined') continue
       res[value.propId] = value.value
     }
+  }
   return res as TEngine.AtomicArrayLow
 }
 
