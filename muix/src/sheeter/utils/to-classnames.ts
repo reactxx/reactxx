@@ -54,6 +54,8 @@ export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: TE
 export const deleteSystemProps = props => {
     for (const p in props)
         if (p.charAt(0) === '$') delete props[p]
+    delete props.classNameX
+    delete props.styleX
     // propsToDelete.forEach(p => delete props[p])
     // if (props.style) delete props.style.toJSON
 }
