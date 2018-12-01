@@ -3,11 +3,11 @@ import { RenderAddIn, TCommon, ThemeProviderUntyped, TProvider, Types, withStyle
 import { renderer, rulesetToClassNamesMUI } from 'reactxx-fela';
 import { Theme as MuiTheme } from './createMuiTheme'
 import { default as createMuiTheme } from './createMuiTheme';
-import {classNamesStrMUI} from 'reactxx-basic';
+import { classNamesStrMUI } from 'reactxx-basic';
 
 const old: any = React.createElement
 React.createElement = (tag, props, ...children) => {
-  if (!props || typeof tag !== 'string' || !props.className || typeof props.className === 'string') 
+  if (!props || typeof tag !== 'string' || !props.className || typeof props.className === 'string')
     return old(tag, props, ...children)
   props.className = classNamesStrMUI(props.className)
   return old(tag, props, ...children)
@@ -179,7 +179,7 @@ function modifyRuleset(sheet: {}, rulesetName: string) {
   return
   const ruleset = sheet[rulesetName]
   let $switch = null
-  Object.keys(ruleset).forEach(ruleName => {
+  for (const ruleName in Object.keys(ruleset)) {
     const rule = ruleset[ruleName]
     const pseudoClasses = rx$pseudoClasses.exec(ruleName)
     if (false && pseudoClasses) {
@@ -194,7 +194,7 @@ function modifyRuleset(sheet: {}, rulesetName: string) {
         modifyRuleset(ruleset, ruleName)
       }
     }
-  })
+  }
   if ($switch)
     ruleset['$switch'] = $switch
 }

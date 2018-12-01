@@ -10,14 +10,16 @@ export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: TE
     const testConditions = (v: TEngine.Queryable, state) =>
         !v.conditions || v.conditions.length === 0 || v.conditions.every(c => c.test(state))
 
-    const filterList = (list: TEngine.QueryableItems) => list.forEach(v => {
-        if (!v) return
-        if (isDeferred(v)) {
-            const res = v.evalProc(props)
-            filterList(res)
-        } else if (testConditions(v, props))
-            values.push(v)
-    })
+    const filterList = (list: TEngine.QueryableItems) => {
+        for (const v of list) {
+            if (!v) continue
+            if (isDeferred(v)) {
+                const res = v.evalProc(props)
+                filterList(res)
+            } else if (testConditions(v, props))
+                values.push(v)
+        }
+    }
 
     const process = (val: TEngine.Ruleset) => {
         if (!val) return
@@ -46,7 +48,8 @@ export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: TE
 
     }
 
-    items.forEach(r => process(r))
+    for (const r of items) process(r)
+    //items.forEach(r => process(r))
 
     return values.length === 0 ? null : wrapRuleset(values)
 }

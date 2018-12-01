@@ -26,7 +26,8 @@ export const useWidthsLow = (
             if (!listenerRef.current) // not aleady registered => register
                 listenerRef.current = widthStore.register(uniqueId, listener)
             // for web: adjust media query for watched breakpoints
-            breakpoints.forEach(br => platform.addBreakpoint(br))
+            for (const br of breakpoints) platform.addBreakpoint(br)
+            //breakpoints.forEach(br => platform.addBreakpoint(br))
         }
     })
 
@@ -39,13 +40,13 @@ export const useWidthsLow = (
     const getWidthMap = (mapBreakpoints?: number[]) => {
         if (window.__TRACE__) {
             let last = 0
-            mapBreakpoints.forEach(b => {
+            for (const b of mapBreakpoints) {
                 if (b <= last) throw 'useWidths argument error: array of increasing numbers (greater than zero) expected'
                 last = b + 1
-            })
+            }
         }
         // add breakpoints for change detection
-        mapBreakpoints.forEach(b => breakpoints.add(b))
+        for (const b of mapBreakpoints) breakpoints.add(b)
 
         // get map (just single array item is true)
         let found = mapBreakpoints.findIndex(b => actWidth < b)
@@ -73,8 +74,8 @@ export class WidthStore {
 
     refreshHandler(listener: IListener, oldWidth: number, newWidth: number) {
         let noChange = true
-        listener.breakpoints.forEach(br => noChange = noChange &&
-            (newWidth >= br && oldWidth >= br || newWidth < br && oldWidth < br))
+        for (const br of listener.breakpoints)
+            noChange = noChange && (newWidth >= br && oldWidth >= br || newWidth < br && oldWidth < br)
         if (noChange) return
         listener.forceUpdate(null)
     }

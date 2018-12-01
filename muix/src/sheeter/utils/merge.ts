@@ -56,13 +56,13 @@ export const mergeRulesets = (sources: TEngine.Queryables[]) => {
     if (!sources || sources.length === 0) return null
     let res: TEngine.Queryables = null
     let first = true
-    sources.forEach(src => {
-        if (!src) return
+    for (const src of sources) {
+        if (!src) continue
         if (!isAtomized(src))
             throw 'All rulesets must be atomized first for mergeRulesets'
         res = first ? src : [...res, ...src]
         first = false
-    })
+    }
     return wrapRuleset(res)
 }
 
@@ -70,65 +70,33 @@ export const mergeRulesets = (sources: TEngine.Queryables[]) => {
 export const mergeSheets = (sources: TEngine.Sheet[]) => {
     if (!sources || sources.length === 0) return null
     const ruleLists: Record<string, Array<any>> = {}
-    sources.forEach(src => {
-        if (!src) return
+    for (const src of sources) {
+        if (!src) continue
         for (const p in src) {
             const value = src[p]
             if (!value) continue
             const arr = ruleLists[p] || (ruleLists[p] = [])
             arr.push(value)
         }
-    })
+    }
     const res = {}
     for (const p in ruleLists)
         res[p] = mergeRulesets(ruleLists[p])
     return res as TEngine.Sheet
 }
 
-// export const mergeCodeProps = (sources: (TComponents.PropsCode | TComponents.PropsCode[])[]) => {
-//     if (!sources || sources.length === 0) return undefined
-//     let res: TComponents.PropsCode = null
-//     let canModifyRes = false
-//     const merge = src => {
-//         if (!src) return
-//         if (!res)
-//             res = src
-//         else if (canModifyRes)
-//             Object.assign(res, src)
-//         else {
-//             res = { ...res, ...src }
-//             canModifyRes = true
-//         }
-//     }
-//     const push = src => {
-//         if (!src) return
-//         merge(src)
-//         if (window.isWeb) {
-//             if (src.$web) merge(src.$web)
-//         } else {
-//             if (src.$native) merge(src.$native)
-//         }
-//     }
-//     sources.forEach(src => {
-//         if (!src) return
-//         if (Array.isArray(src)) src.forEach(s => push(s))
-//         else push(src)
-//     })
-//     return res
-// }
-
 export const mergeDeep = (sources: {}[]) => {
     if (!sources || sources.length === 0) return null
     let count = 0
     let res = null
-    sources.forEach(src => {
-        if (!src) return
+    for (const src of sources) {
+        if (!src) continue
         switch (count) {
             case 0: res = src; count++; break
             case 1: res = deepMerges({}, [res, src]); count++; break
             default: res = deepMerge(res, src); count++; break
         }
-    })
+    }
     return res
 }
 

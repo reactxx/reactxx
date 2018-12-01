@@ -3,7 +3,7 @@ import warning from 'warning'
 // !!! modify target !!!
 export const deepMerges = (target, sources: Array<{}>) => {
     if (!sources || sources.length === 0) return target
-    sources.forEach(source => deepMerge(target, source))
+    for (const source of sources) deepMerge(target, source)
     return target
   }
   

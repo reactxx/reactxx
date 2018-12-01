@@ -10,7 +10,7 @@ describe("PRIMITIVES SIMPLE", () => {
       initPlatform(isWeb, { dataTraceFlag: 'short' })
       //doMock()
     })
-    it.only('01: Text', () => {
+    it('01: Text', () => {
       const wrapper = render(<platform.Text>Text</platform.Text>)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
@@ -58,6 +58,6 @@ describe("PRIMITIVES SIMPLE", () => {
   }
 
   describe("## NATIVE ##", () => doTest(false))
-  //describe("## WEB ##", () => doTest(true))
+  describe("## WEB ##", () => doTest(true))
 
 })

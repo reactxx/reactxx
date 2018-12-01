@@ -47,14 +47,14 @@ export const processTree = (
         } else if (isAtomized(it)) {
             if (pseudoPrefixes && pseudoPrefixes.length > 0)
                 throw 'Web pseudo properties cannot contain already atomized value'
-            it.forEach(it => {
+            for (const itt of it) {
                 if (!conditions || conditions.length === 0) //... and no conditions => done
-                    pushToAtomizedVariants(atomizedVariants, it, null)
+                    pushToAtomizedVariants(atomizedVariants, itt, null)
                 else { // ... and conditions => merge conditions
-                    pushToAtomizedVariants(atomizedVariants, [...it],
-                        it.conditions ? [...conditions, ...it.conditions] : conditions)
+                    pushToAtomizedVariants(atomizedVariants, [...itt],
+                        itt.conditions ? [...conditions, ...itt.conditions] : conditions)
                 }
-            })
+            }
         } else { // it: toAtomize
             processPseudosAndAtomize(
                 it,
@@ -103,9 +103,9 @@ const processPseudosAndAtomize = (
 // *********** utils
 
 const pushToAtomizedVariants = (
-    atomizedVariants: TEngine.QueryableItems, 
+    atomizedVariants: TEngine.QueryableItems,
     variant: TEngine.Queryable, conditions: TEngine.Conditions
-    ) => {
+) => {
     if (!variant) return
     if (conditions && conditions.length > 0) variant.conditions = conditions
     atomizedVariants.push(variant)

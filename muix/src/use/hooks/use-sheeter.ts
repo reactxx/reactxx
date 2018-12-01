@@ -52,13 +52,13 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
 
 const mergeCodeProps = (target, props: TComponents.Props[]) => {
     if (!props || props.length === 0) return
-    props.forEach(p => {
-        if (!p) return
+    for (const p of props) {
+        if (!p) continue
         Object.assign(target, p)
         const { $web, $native } = p
         const platform = window.isWeb ? $web : $native
         if (platform) Object.assign(target, platform)
-    })
+    }
     delete target.$web; delete target.$native; delete target.themedProps
 }
 
