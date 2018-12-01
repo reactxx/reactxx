@@ -11,10 +11,11 @@ export { theme, Shape } from 'reactxx-typings-test/shape.t'
 
 function mockComponent(data: string) {
     const res: React.SFC<any> = props => {
-        const newProps = { }
+        const newProps = {}
         for (const p in props)
             if (p === 'style' || p === 'children' || p.startsWith('data-')) newProps[p] = props[p]
             else newProps['data-' + p.toLowerCase()] = props[p]
+        //else newProps[p.toLowerCase()] = props[p]
         return <div data-type={data.toUpperCase()} {...newProps} />
     }
     res.displayName = data
@@ -39,6 +40,21 @@ jest.mock('react-native', () => ({
         createAnimatedComponent: comp => mockComponent('Animated')
     },
 }))
+
+export const doMock = () => {
+    jest.doMock('react-native', () => ({
+        Text: mockComponent('Text'),
+        View: mockComponent('View'),
+        ScrollView: mockComponent('ScrollView'),
+        Image: mockComponent('Image'),
+        TouchableWithoutFeedback: mockComponent('TouchableWithoutFeedback'),
+        Animated: {
+            Text: mockComponent('AnimatedText'),
+            View: mockComponent('AnimatedView'),
+            Image: mockComponent('AnimatedImage'),
+        },
+    }))
+}
 
 window.matchMedia = jest.fn().mockImplementation(query /*e.g. '(min-width: 123px)'*/ => ({
     addListener: jest.fn(),

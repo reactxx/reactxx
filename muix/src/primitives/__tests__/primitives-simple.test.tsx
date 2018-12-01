@@ -1,6 +1,6 @@
 /** @jsx platform.createElement */
 
-import { initPlatform, render } from "reactxx-primitives-test/init-platform.t"
+import { initPlatform, render, doMock } from "reactxx-primitives-test/init-platform.t"
 import { platform } from 'reactxx-sheeter'
 
 describe("PRIMITIVES SIMPLE", () => {
@@ -8,8 +8,9 @@ describe("PRIMITIVES SIMPLE", () => {
   const doTest = (isWeb: boolean) => {
     beforeEach(() => {
       initPlatform(isWeb, { dataTraceFlag: 'short' })
+      //doMock()
     })
-    it('01: Text', () => {
+    it.only('01: Text', () => {
       const wrapper = render(<platform.Text>Text</platform.Text>)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
@@ -57,6 +58,6 @@ describe("PRIMITIVES SIMPLE", () => {
   }
 
   describe("## NATIVE ##", () => doTest(false))
-  describe("## WEB ##", () => doTest(true))
+  //describe("## WEB ##", () => doTest(true))
 
 })
