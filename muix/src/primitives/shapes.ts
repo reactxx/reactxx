@@ -36,8 +36,8 @@ export namespace TPrimitives {
   export interface IconShape extends TTyped.ShapeAncestor {
     sheet: { root: T },
     className: T
+    props: { data?: string; url?: string, children?: string }
     sheetQuery: { pressable: boolean }
-    props: { data: string; url?: string }
     propsWeb: React.SVGAttributes<SVGElement>
     propsNative: ReactN.TextProperties
     //events: TTyped.ShapeMarks<TComponents.TEventsXNames>

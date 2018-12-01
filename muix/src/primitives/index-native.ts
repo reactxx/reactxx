@@ -9,7 +9,7 @@ const {
     scrollViewCreator, ScrollView,
     iconCreator, Icon,
     textCreator, Text,
-} = inits(getView, getIcon, getScrollView, getText)
+} = inits(getView, getIcon, getText, getScrollView)
 
 export {
     initPrimitives,
@@ -18,4 +18,4 @@ export {
     iconCreator, Icon, getIcon,
     textCreator, Text, getText,
 }
-export const initPrimitives$Web = initPrimitives
+export const initPrimitives$Native = initPrimitives

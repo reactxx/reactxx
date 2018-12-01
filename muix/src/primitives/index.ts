@@ -2,6 +2,7 @@ export * from './shapes'
 
 import { getView, getIcon, getScrollView, getText } from './$web'
 import { inits } from './inits'
+import './configs'
 
 const {
     initPrimitives,
@@ -12,7 +13,7 @@ const {
     animatedViewCreator, AnimatedView, 
     animatedIconCreator, AnimatedIcon, 
     animatedTextCreator, AnimatedText, 
-} = inits(getView, getIcon, getScrollView, getText)
+} = inits(getView, getIcon, getText, getScrollView)
 
 export {
     initPrimitives,

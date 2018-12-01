@@ -35,7 +35,7 @@ declare namespace TComponents {
     React.ComponentType<Props<R>> &
     TEngine.IsReactXXComponent
 
-  export type SFC<R extends TTyped.Shape = TTyped.Shape> = React.SFC<Props<R>>
+  export type SFC<R extends TTyped.Shape = TTyped.Shape> = React.SFC<Props<R>> & TEngine.IsReactXXComponent
 
   /******************************************
     EVENTS

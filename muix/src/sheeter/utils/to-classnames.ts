@@ -56,6 +56,7 @@ export const deleteSystemProps = props => {
         if (p.charAt(0) === '$') delete props[p]
     delete props.classNameX
     delete props.styleX
+    if (!props['data-trace']) delete props['data-trace']
     // propsToDelete.forEach(p => delete props[p])
     // if (props.style) delete props.style.toJSON
 }

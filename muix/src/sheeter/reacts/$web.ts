@@ -36,7 +36,6 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
     let lastWinResult = applyLastwinsStrategy(classNameX) as TEngine.AtomicWebsLow
     const className = finalizeClassName(lastWinResult)
     props.className = props.className ? className + ' ' + props.className : className
-    //if (window.__TRACELEVEL__ >= 2) 
     if (window.__TRACE__)
       props['data-trace'] = platform.dataTrace(lastWinResult, window.__TRACE__.dataTraceFlag)
   }

@@ -42,6 +42,9 @@
       "reactxx-use": [
         "src/use/index"
       ],
+      "reactxx-primitives": [
+        "src/primitives/index"
+      ],
 
       //**** FOR TESTING
       "reactxx-typings-test/*": [
@@ -52,6 +55,15 @@
       ],
       "reactxx-sheeter-test/*": [
         "src/sheeter/__tests__/*"
+      ],
+      "reactxx-use-test/*": [
+        "src/use/__tests__/*"
+      ],
+      "reactxx-primitives-test/*": [
+        "src/primitives/__tests__/*"
+      ],
+      "reactxx-primitives-native": [
+        "src/primitives/index-native"
       ],
       // "reactxx-primitives-native": [
       //   "src/primitives/index-native"
@@ -128,11 +140,10 @@
     "src/fela",
     "src/sheeter",
     "src/use",
-    //"src/primitives/sheets.ts",
     "src/primitives",
 
     // "src/basic",
-    // "src/mui-web",
+    // "src/mui-web",, "src/primitives/__tests__/primitives-comp.test.tsx"
     // "src/primitives",
     // "src/media",
     // "src/animation",

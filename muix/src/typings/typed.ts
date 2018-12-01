@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import ReactN from 'react-native';
 import CSS from 'csstype';
 
@@ -151,6 +151,7 @@ export namespace TTyped {
 
   export interface PropsCodeLow<R extends TTyped.Shape> extends TEngine.WidthsQuery {
     $sheetQuery?: getSheetQuery<R>
+    children?: React.ReactNode
   }
 
 

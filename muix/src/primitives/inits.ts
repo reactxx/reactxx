@@ -1,4 +1,4 @@
-import { useSheeter, getComponentCreator } from "reactxx-use"
+import { getComponentCreator } from "reactxx-use"
 import { Platform, platform, resetPlatform } from 'reactxx-sheeter'
 import { TUseSheeter } from 'reactxx-typings'
 

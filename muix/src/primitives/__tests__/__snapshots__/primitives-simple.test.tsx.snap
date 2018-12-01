@@ -1,0 +1,275 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PRIMITIVES SIMPLE ## NATIVE ## 01: Text 1`] = `
+<div>
+  <div
+    data-type="TEXT"
+  />
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## NATIVE ## 02: Text singleLine 1`] = `
+<div>
+  <div
+    data-type="TEXT"
+    numberoflines="1"
+  />
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## NATIVE ## 03: AnimatedText 1`] = `
+<div>
+  <div
+    data-type="ANIMATEDTEXT"
+  />
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## NATIVE ## 04: View 1`] = `
+<div>
+  <div
+    data-type="TOUCHABLEWITHOUTFEEDBACK"
+  >
+    <div
+      data-type="VIEW"
+    />
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## NATIVE ## 05: AnimatedView 1`] = `
+<div>
+  <div
+    data-type="TOUCHABLEWITHOUTFEEDBACK"
+  >
+    <div
+      data-type="ANIMATEDVIEW"
+    />
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## NATIVE ## 06: Icon 1`] = `
+<div>
+  <div
+    data-type="MATERIALCOMMUNITYICONS"
+    name="Icon"
+  />
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## NATIVE ## 07: AnimatedIcon 1`] = `
+<div>
+  <div
+    data-type="ANIMATED"
+    name="AnimatedIcon"
+  />
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## NATIVE ## 08: ScrollView 1`] = `
+<div>
+  <div
+    data-type="SCROLLVIEW"
+  />
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## NATIVE ## 09: ScrollView horizontal 1`] = `
+<div>
+  <div
+    data-type="SCROLLVIEW"
+  />
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## WEB ## 01: Text 1`] = `
+<div>
+  <div
+    class="d a c b reactxx-text"
+    data-trace="
+.d { cursor:pointer }
+.a .reactxx-text { display:inline }
+.c { word-wrap:break-word }
+.b { white-space:pre-wrap }"
+  >
+    Text
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## WEB ## 02: Text singleLine 1`] = `
+<div>
+  <div
+    class="i h g f e d a c reactxx-text"
+    data-trace="
+.i { white-space:nowrap }
+.h { text-overflow:ellipsis }
+.g { overflow:hidden }
+.f { max-width:100% }
+.e { flex-shrink:1 }
+.d { cursor:pointer }
+.a .reactxx-text { display:inline }
+.c { word-wrap:break-word }"
+  >
+    Text singleLine
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## WEB ## 03: AnimatedText 1`] = `
+<div>
+  <div
+    class="d a c b reactxx-text"
+    data-trace="
+.d { cursor:pointer }
+.a .reactxx-text { display:inline }
+.c { word-wrap:break-word }
+.b { white-space:pre-wrap }"
+  >
+    AnimatedText
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## WEB ## 04: View 1`] = `
+<div>
+  <div
+    class="h g f e d c b a"
+    data-trace="
+.h { cursor:pointer }
+.g { overflow:hidden }
+.f { position:relative }
+.e { flex-shrink:0 }
+.d { flex-basis:auto }
+.c { align-items:stretch;-webkit-box-align:stretch }
+.b { flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal }
+.a { display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex }"
+  >
+    View
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## WEB ## 05: AnimatedView 1`] = `
+<div>
+  <div
+    class="h g f e d c b a"
+    data-trace="
+.h { cursor:pointer }
+.g { overflow:hidden }
+.f { position:relative }
+.e { flex-shrink:0 }
+.d { flex-basis:auto }
+.c { align-items:stretch;-webkit-box-align:stretch }
+.b { flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal }
+.a { display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex }"
+  >
+    AnimatedView
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## WEB ## 06: Icon 1`] = `
+<div>
+  <svg
+    class="d c b a"
+    data-trace="
+.d { cursor:pointer }
+.c { font-size:inherited }
+.b { fill:currentColor }
+.a { flex-shrink:0 }"
+    focusable="false"
+    viewBox="0 0 24 24"
+  >
+    Icon
+  </svg>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## WEB ## 07: AnimatedIcon 1`] = `
+<div>
+  <svg
+    class="d c b a"
+    data-trace="
+.d { cursor:pointer }
+.c { font-size:inherited }
+.b { fill:currentColor }
+.a { flex-shrink:0 }"
+    focusable="false"
+    viewBox="0 0 24 24"
+  >
+    AnimatedIcon
+  </svg>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## WEB ## 08: ScrollView 1`] = `
+<div>
+  <div
+    class="m l k j i h g f e d c b"
+    data-trace="
+.m { transform:translateZ(0) }
+.l { -webkit-overflow-scrolling:touch }
+.k { overflow-y:auto }
+.j { overflow-x:hidden }
+.i { flex-grow:1;-webkit-box-flex:1 }
+.h { overflow:hidden }
+.g { position:relative }
+.f { flex-shrink:0 }
+.e { flex-basis:auto }
+.d { align-items:stretch;-webkit-box-align:stretch }
+.c { flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal }
+.b { display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex }"
+  >
+    <div
+      class="h g f e d c b"
+      data-trace="
+.h { overflow:hidden }
+.g { position:relative }
+.f { flex-shrink:0 }
+.e { flex-basis:auto }
+.d { align-items:stretch;-webkit-box-align:stretch }
+.c { flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal }
+.b { display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex }"
+    >
+      ScrollView
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PRIMITIVES SIMPLE ## WEB ## 09: ScrollView horizontal 1`] = `
+<div>
+  <div
+    class="p o n m l i h g f e d b"
+    data-trace="
+.p { overflow-y:hidden }
+.o { overflow-x:auto }
+.n { flex-direction:row;-webkit-box-orient:horizontal;-webkit-box-direction:normal }
+.m { transform:translateZ(0) }
+.l { -webkit-overflow-scrolling:touch }
+.i { flex-grow:1;-webkit-box-flex:1 }
+.h { overflow:hidden }
+.g { position:relative }
+.f { flex-shrink:0 }
+.e { flex-basis:auto }
+.d { align-items:stretch;-webkit-box-align:stretch }
+.b { display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex }"
+  >
+    <div
+      class="n h g f e d b"
+      data-trace="
+.n { flex-direction:row;-webkit-box-orient:horizontal;-webkit-box-direction:normal }
+.h { overflow:hidden }
+.g { position:relative }
+.f { flex-shrink:0 }
+.e { flex-basis:auto }
+.d { align-items:stretch;-webkit-box-align:stretch }
+.b { display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex }"
+    >
+      ScrollView
+    </div>
+  </div>
+</div>
+`;

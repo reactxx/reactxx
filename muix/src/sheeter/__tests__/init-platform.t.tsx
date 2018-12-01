@@ -9,8 +9,29 @@ import { initSheeter$Native } from 'reactxx-sheeter-native'
 export { render } from 'react-testing-library'
 export { theme, Shape } from 'reactxx-typings-test/shape.t'
 
+function mockComponent(data: string) {
+    const res: React.SFC<any> = props => <div data-type={data.toUpperCase()} {...props}/>
+    res.displayName = data
+    return res
+}
+
+jest.mock('@expo/vector-icons', () => ({
+    MaterialCommunityIcons: mockComponent('MaterialCommunityIcons')
+}))
+
 jest.mock('react-native', () => ({
     Dimensions: null,
+    Text: mockComponent('Text'),
+    View: mockComponent('View'),
+    ScrollView: mockComponent('ScrollView'),
+    Image: mockComponent('Image'),
+    TouchableWithoutFeedback: mockComponent('TouchableWithoutFeedback'),
+    Animated: {
+        Text: mockComponent('AnimatedText'),
+        View: mockComponent('AnimatedView'),
+        Image: mockComponent('AnimatedImage'),
+        createAnimatedComponent: comp => mockComponent('Animated')
+    },
 }))
 
 window.matchMedia = jest.fn().mockImplementation(query /*e.g. '(min-width: 123px)'*/ => ({

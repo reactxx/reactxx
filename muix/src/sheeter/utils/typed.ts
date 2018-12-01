@@ -18,11 +18,11 @@ const untypedEngine = {
     $ifelse,
     $width,
     $themed: p => p,
-    $rules: p => p,
+    $rules: (...p) => p,
     $atomizeSheet: atomizeSheet as any,
     $mergeSheets: mergeSheets as any,
     $atomizeRuleset: atomizeRuleset as any,
-    $atomize: (...pars:any[]) => atomizeRuleset(pars, null, '$atomize'),
+    $atomize: (...pars: any[]) => atomizeRuleset(pars, null, '$atomize'),
     $mergeRulesets: mergeRulesets as any,
     $toClassNames: toClassNamesWithQuery as any
 } as TTyped.TypedEngine<TTyped.Shape>

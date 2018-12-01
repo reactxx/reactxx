@@ -14,7 +14,7 @@ export const hasPlatformEvents = (propsCode: TTyped.PropsCode) => !!(
 const t = getTypedEngine<TPrimitives.TextShape>()
 
 export const textConfig: TUseSheeter.AuthorConfig<TPrimitives.TextShape> = {
-  defaultSheet: {
+  defaultSheet: () => ({
     root: t.$rules<T>(
       t.$web<T>(
         {
@@ -24,9 +24,9 @@ export const textConfig: TUseSheeter.AuthorConfig<TPrimitives.TextShape> = {
             display: 'inline',
           },
         },
-        t.$if<$W>(p => p.$sheetQuery.pressable), {
+        t.$if<$W>(p => p.$sheetQuery.pressable, {
           cursor: 'pointer'
-        }
+        })
       ),
       t.$if<T>(p => p.singleLine,
         {
@@ -40,7 +40,7 @@ export const textConfig: TUseSheeter.AuthorConfig<TPrimitives.TextShape> = {
         }),
       )
     ),
-  }
+  })
 }
 
 // mimic React Native view behavior
@@ -57,7 +57,7 @@ const webViewRuleset: TTyped.Ruleset<V> = {
 const v = getTypedEngine<TPrimitives.ViewShape>()
 
 export const viewConfig: TUseSheeter.AuthorConfig<TPrimitives.ViewShape> = {
-  defaultSheet: {
+  defaultSheet: () => ({
     root: v.$rules<V>(
       v.$web<V>(
         webViewRuleset,
@@ -66,7 +66,7 @@ export const viewConfig: TUseSheeter.AuthorConfig<TPrimitives.ViewShape> = {
         })
       )
     ),
-  }
+  })
 }
 
 const i = getTypedEngine<TPrimitives.IconShape>()
@@ -78,7 +78,7 @@ export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
       focusable: 'false'
     }
   },
-  defaultSheet: {
+  defaultSheet: () => ({
     root: i.$rules<T>(
       {
         flexShrink: 0,
@@ -93,7 +93,7 @@ export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
         })
       )
     )
-  }
+  })
 }
 
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
@@ -102,7 +102,7 @@ export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
 const s = getTypedEngine<TPrimitives.ScrollViewShape>()
 
 export const scrollViewConfig: TUseSheeter.AuthorConfig<TPrimitives.ScrollViewShape> = {
-  defaultSheet: {
+  defaultSheet: () => ({
     root: s.$rules<V>(
       {
         flexBasis: 0,
@@ -134,7 +134,7 @@ export const scrollViewConfig: TUseSheeter.AuthorConfig<TPrimitives.ScrollViewSh
         })
       ),
     )
-  }
+  })
 }
 
 

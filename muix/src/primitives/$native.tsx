@@ -1,7 +1,7 @@
 /** @jsx platform.createElement */
 
 //import React from 'react'
-import { View as ViewRN, Text as TextRN, ScrollView as ScrollViewRN, Animated, TouchableWithoutFeedback, Linking } from 'react-native'
+import ReactN, { View, Text, ScrollView, Animated, TouchableWithoutFeedback, Linking } from 'react-native'
 import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
@@ -14,10 +14,65 @@ import { useSheeter } from "reactxx-use"
 import { hasPlatformEvents } from './configs'
 import { TPrimitives } from './shapes'
 
-export const getView: TUseSheeter.GetComponent<TPrimitives.ViewShape> = null
-export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> =null
-export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> =null
-export const getScrollView: TUseSheeter.GetComponent<TPrimitives.ScrollViewShape> =null
+export const getView: TUseSheeter.GetComponent<TPrimitives.ViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
+    const ActView = isAnimated ? Animated.View : View
+    const { toClassNames, propsCode: { children, ...rest }, classes, classNameX, styleX, $sheetQuery }
+        = useSheeter<TPrimitives.ViewShape>(props, authorConfig, displayName, userConfig)
+    $sheetQuery.pressable = hasPlatformEvents(rest)
+    const rootStyle = toClassNames(classes.root, classNameX)
+    const res = <ActView classNameX={rootStyle} styleX={styleX} {...rest} /> as any
+    return $sheetQuery.pressable ? <TouchableWithoutFeedback {...{/*events*/ }}>{res}</TouchableWithoutFeedback> : res
+}
+
+export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
+    const ActIcon = isAnimated ? AnimatedIconLow : MaterialCommunityIcons
+    const { toClassNames, propsCode: { data, url, children, ...rest }, classes, classNameX, styleX, $sheetQuery }
+        = useSheeter<TPrimitives.IconShape>(props, authorConfig, displayName, userConfig)
+
+    $sheetQuery.pressable = hasPlatformEvents(rest)
+    //Link to URL
+    let onPress
+    const doPress = !url ? onPress : () => Linking.canOpenURL(url).then(supported => {
+        warning(supported, `Can't handle url: ${url}`)
+        return Linking.openURL(url);
+    }).catch(err => warning(false, `An error occurred: ${err}, ${url}`))
+
+    return <ActIcon
+        name={(data || children as string) as MaterialCommunityIconsProps['name']}
+        classNameX={toClassNames(classes.root, classNameX, styleX)}
+        styleX={styleX}
+        onPress={doPress || undefined}
+        {...rest} />
+}
+const AnimatedIconLow = Animated.createAnimatedComponent(MaterialCommunityIcons)
+
+export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
+    const ActText = isAnimated ? Animated.Text : ReactN.Text
+    const { toClassNames, propsCode: { url, children, singleLine, ...rest }, classes, classNameX, styleX, $sheetQuery }
+        = useSheeter<TPrimitives.TextShape>(props, authorConfig, displayName, userConfig)
+    $sheetQuery.pressable = hasPlatformEvents(rest)
+    let doPress
+    const otherProps: ReactN.TextProperties = {
+        onPress: !url ? doPress : () => Linking.canOpenURL(url).then(supported => {
+            warning(supported, `Can't handle url: ${url}`)
+            return Linking.openURL(url);
+        }).catch(err => warning(false, `An error occurred: ${err}, ${url}`))
+    }
+    if (singleLine) {
+        otherProps.numberOfLines = 1
+    }
+
+    return <ActText classNameX={toClassNames(classes.root, classNameX)} styleX={styleX} {...rest} {...otherProps} />
+}
+
+export const getScrollView: TUseSheeter.GetComponent<TPrimitives.ScrollViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
+    const ActScrollView = isAnimated ? Animated.ScrollView : ScrollView
+    const { toClassNames, propsCode: { children, ...rest }, classes, classNameX, styleX, $sheetQuery }
+        = useSheeter<TPrimitives.ScrollViewShape>(props, authorConfig, displayName, userConfig)
+    return <ActScrollView
+        classNameX={toClassNames(classes.root, classNameX)} styleX={styleX}
+        contentContainerStyle={toClassNames(classes.container)} {...rest} />
+}
 
 
 // const anyView = (isAnim: boolean) => {
