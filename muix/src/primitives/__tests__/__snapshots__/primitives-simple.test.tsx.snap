@@ -11,8 +11,8 @@ exports[`PRIMITIVES SIMPLE ## NATIVE ## 01: Text 1`] = `
 exports[`PRIMITIVES SIMPLE ## NATIVE ## 02: Text singleLine 1`] = `
 <div>
   <div
+    data-numberoflines="1"
     data-type="TEXT"
-    numberoflines="1"
   />
 </div>
 `;
@@ -52,8 +52,8 @@ exports[`PRIMITIVES SIMPLE ## NATIVE ## 05: AnimatedView 1`] = `
 exports[`PRIMITIVES SIMPLE ## NATIVE ## 06: Icon 1`] = `
 <div>
   <div
+    data-name="Icon"
     data-type="MATERIALCOMMUNITYICONS"
-    name="Icon"
   />
 </div>
 `;
@@ -61,8 +61,8 @@ exports[`PRIMITIVES SIMPLE ## NATIVE ## 06: Icon 1`] = `
 exports[`PRIMITIVES SIMPLE ## NATIVE ## 07: AnimatedIcon 1`] = `
 <div>
   <div
+    data-name="AnimatedIcon"
     data-type="ANIMATED"
-    name="AnimatedIcon"
   />
 </div>
 `;
@@ -78,6 +78,7 @@ exports[`PRIMITIVES SIMPLE ## NATIVE ## 08: ScrollView 1`] = `
 exports[`PRIMITIVES SIMPLE ## NATIVE ## 09: ScrollView horizontal 1`] = `
 <div>
   <div
+    data-horizontal="true"
     data-type="SCROLLVIEW"
   />
 </div>

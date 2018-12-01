@@ -10,7 +10,13 @@ export { render } from 'react-testing-library'
 export { theme, Shape } from 'reactxx-typings-test/shape.t'
 
 function mockComponent(data: string) {
-    const res: React.SFC<any> = props => <div data-type={data.toUpperCase()} {...props}/>
+    const res: React.SFC<any> = props => {
+        const newProps = { }
+        for (const p in props)
+            if (p === 'style' || p === 'children' || p.startsWith('data-')) newProps[p] = props[p]
+            else newProps['data-' + p.toLowerCase()] = props[p]
+        return <div data-type={data.toUpperCase()} {...newProps} />
+    }
     res.displayName = data
     return res
 }

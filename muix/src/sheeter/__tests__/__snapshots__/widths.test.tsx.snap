@@ -94,7 +94,6 @@ exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesWithQuery's width change 04
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 1`] = `
 <div>
   <div
-    data-trace=""
     style="color: red;"
   >
     rendered: 1x
@@ -105,7 +104,6 @@ exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 1
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 2`] = `
 <div>
   <div
-    data-trace=""
     style="color: green;"
   >
     rendered: 2x
@@ -116,7 +114,6 @@ exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 2
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 3`] = `
 <div>
   <div
-    data-trace=""
     style="color: blue;"
   >
     rendered: 3x
@@ -127,7 +124,6 @@ exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 3
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 use width flags and styles 1`] = `
 <div>
   <div
-    data-trace=""
     style="color: red;"
   >
     mobile (rendered: 1x)
@@ -138,7 +134,6 @@ exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 use width flags and sty
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 use width flags and styles 2`] = `
 <div>
   <div
-    data-trace=""
     style="color: green;"
   >
     tablet (rendered: 2x)
@@ -149,7 +144,6 @@ exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 use width flags and sty
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 use width flags and styles 3`] = `
 <div>
   <div
-    data-trace=""
     style="color: blue;"
   >
     desktop (rendered: 3x)

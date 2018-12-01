@@ -6,7 +6,6 @@ exports[`THEME PROVIDER ## NATIVE ## 01:  1`] = `
     data-testid="toggle"
   />
   <div
-    data-trace=""
     p1="themeProp"
     style="color: gray;"
   >
@@ -21,7 +20,6 @@ exports[`THEME PROVIDER ## NATIVE ## 01:  2`] = `
     data-testid="toggle"
   />
   <div
-    data-trace=""
     p1="secondThemeProp"
     style="color: red;"
   >
@@ -36,7 +34,6 @@ exports[`THEME PROVIDER ## NATIVE ## 01:  3`] = `
     data-testid="toggle"
   />
   <div
-    data-trace=""
     p1="themeProp"
     style="color: gray;"
   >

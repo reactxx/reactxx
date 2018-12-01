@@ -27,7 +27,6 @@ exports[`USE SHEETER ## NATIVE ## 03: just div 1`] = `
 exports[`USE SHEETER ## NATIVE ## 04: with sheet 1`] = `
 <div>
   <div
-    data-trace=""
     style="color: red;"
   >
     1
@@ -38,7 +37,6 @@ exports[`USE SHEETER ## NATIVE ## 04: with sheet 1`] = `
 exports[`USE SHEETER ## NATIVE ## 05: with sheet override 1`] = `
 <div>
   <div
-    data-trace=""
     style="color: green;"
   >
     1
@@ -49,7 +47,6 @@ exports[`USE SHEETER ## NATIVE ## 05: with sheet override 1`] = `
 exports[`USE SHEETER ## NATIVE ## 06: with classes override 1`] = `
 <div>
   <div
-    data-trace=""
     style="color: blue;"
   >
     1
@@ -60,7 +57,6 @@ exports[`USE SHEETER ## NATIVE ## 06: with classes override 1`] = `
 exports[`USE SHEETER ## NATIVE ## 07: with classNameX override 1`] = `
 <div>
   <div
-    data-trace=""
     style="color: yellow;"
   >
     1
@@ -71,7 +67,6 @@ exports[`USE SHEETER ## NATIVE ## 07: with classNameX override 1`] = `
 exports[`USE SHEETER ## NATIVE ## 08: with styleX override 1`] = `
 <div>
   <div
-    data-trace=""
     style="color: maroon;"
   >
     1
@@ -82,7 +77,6 @@ exports[`USE SHEETER ## NATIVE ## 08: with styleX override 1`] = `
 exports[`USE SHEETER ## NATIVE ## 09: theme, with sheet 1`] = `
 <div>
   <div
-    data-trace=""
     style="color: gray;"
   >
     1
@@ -93,7 +87,6 @@ exports[`USE SHEETER ## NATIVE ## 09: theme, with sheet 1`] = `
 exports[`USE SHEETER ## NATIVE ## 10: theme, with sheet override 1`] = `
 <div>
   <div
-    data-trace=""
     style="color: gray;"
   >
     1
@@ -104,7 +97,6 @@ exports[`USE SHEETER ## NATIVE ## 10: theme, with sheet override 1`] = `
 exports[`USE SHEETER ## NATIVE ## 11: theme, with classes override 1`] = `
 <div>
   <div
-    data-trace=""
     style="color: gray;"
   >
     1
@@ -115,7 +107,6 @@ exports[`USE SHEETER ## NATIVE ## 11: theme, with classes override 1`] = `
 exports[`USE SHEETER ## NATIVE ## 12: theme, with classNameX override 1`] = `
 <div>
   <div
-    data-trace=""
     style="color: gray;"
   >
     1
@@ -126,7 +117,6 @@ exports[`USE SHEETER ## NATIVE ## 12: theme, with classNameX override 1`] = `
 exports[`USE SHEETER ## NATIVE ## 13: theme, with styleX override 1`] = `
 <div>
   <div
-    data-trace=""
     style="color: gray;"
   >
     1
@@ -197,7 +187,6 @@ exports[`USE SHEETER ## NATIVE ## 19: theme, props 1`] = `
 exports[`USE SHEETER ## NATIVE ## 20: style 1`] = `
 <div>
   <div
-    data-trace=""
     style="margin: 20px; color: red;"
   >
     1
@@ -208,7 +197,6 @@ exports[`USE SHEETER ## NATIVE ## 20: style 1`] = `
 exports[`USE SHEETER ## NATIVE ## 21: style with classes 1`] = `
 <div>
   <div
-    data-trace=""
     style="margin: 40px; color: blue;"
   >
     1

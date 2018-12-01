@@ -75,8 +75,11 @@ exports[`SHEET ## NATIVE ## 10 with theme 1`] = `
 Object {
   "label": Array [
     Array [
-      "color: white @sheet.label",
-      "backgroundColor: darkgreen @sheet.label",
+      "color: white @sheet.label[0]",
+      "backgroundColor: darkgreen @sheet.label[0]",
+    ],
+    Array [
+      "margin: 10 @sheet.label[1]",
     ],
   ],
   "root": Array [
@@ -212,8 +215,11 @@ exports[`SHEET ## WEB ## 10 with theme 1`] = `
 Object {
   "label": Array [
     Array [
-      ".d { color:white } @sheet.label",
-      ".c { background-color:darkgreen } @sheet.label",
+      ".d { color:white } @sheet.label[0]",
+      ".c { background-color:darkgreen } @sheet.label[0]",
+    ],
+    Array [
+      ".e { margin:10px } @sheet.label[1]",
     ],
   ],
   "root": Array [

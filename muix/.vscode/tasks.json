@@ -8,7 +8,7 @@
             "type": "shell",
             "command": ".\\node_modules\\.bin\\jest.cmd",
             "args": [
-                "--testPathPattern=\"/sheeter/|/use/\"",
+                "--testPathPattern=\"/sheeter/|/use/|/primitives/\"",
                 //"-u"
             ],
             "group": {

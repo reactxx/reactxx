@@ -71,7 +71,8 @@ const renderStyleToClassNames = (renderer: IRendererEx, tracePath: string, { _cl
   for (const property in style) {
 
     // reactxx HACK: ignore $... system properties
-    warning(property.charAt(0) !== '$', 'FELA PATCH: Something wrong')
+    //warning(property.charAt(0) !== '$', 'FELA PATCH: Something wrong')
+    if (property.charAt(0) === '$') continue
 
     const value = style[property]
 
