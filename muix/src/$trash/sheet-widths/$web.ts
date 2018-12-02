@@ -1,6 +1,6 @@
 import { onWidthChanged } from './utils/subscribe'
 
-import { assignPlatform, platform } from 'reactxx-sheeter'
+import { assignPlatform, platform } from 'reactxx-styler'
 
 export const init = () => assignPlatform({
 

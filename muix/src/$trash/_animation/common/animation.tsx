@@ -1,6 +1,6 @@
 import React from 'react';
 import warning from 'warning';
-import * as Sheeter from 'reactxx-sheeter';
+import * as Sheeter from 'reactxx-styler';
 import { AnimationDriver } from 'reactxx-animation';
 
 /************************

@@ -2,7 +2,7 @@ import { Shape as ShapeLow, theme } from 'reactxx-typings-test/shape.t'
 
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 
-import { getTypedEngine } from 'reactxx-sheeter'
+import { getTypedEngine } from '../utils/typed'
 
 interface Shape extends ShapeLow {
   sheetQuery: {

@@ -1,6 +1,6 @@
 import ReactN from 'react-native'
 
-import * as Sheeter from 'reactxx-sheeter'
+import * as Sheeter from 'reactxx-styler'
 import { Types, TCommonStyles } from 'reactxx-basic'
 import { SheetsRegistry } from 'jss';
 

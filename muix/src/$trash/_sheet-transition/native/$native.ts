@@ -1,6 +1,6 @@
 
 import { TWithStyles, TVariants, TAtomize, TCommonStyles } from 'reactxx-typings'
-import { registerVariantHandler, isAtomicArray } from 'reactxx-sheeter'
+import { registerVariantHandler, isAtomicArray } from 'reactxx-styler'
 
 import { CodeComponentHandler } from './transition-to-animated'
 import { TTransition } from '../d-index'

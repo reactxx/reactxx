@@ -1,4 +1,4 @@
-import { atomizeRuleset, atomizeSheet, atomizeStyle } from 'reactxx-sheeter'
+import { atomizeRuleset, atomizeSheet, atomizeStyle } from 'reactxx-styler'
 import { TWithStyles } from 'reactxx-typings'
 
 export const propsPipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {

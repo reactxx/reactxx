@@ -1,20 +1,13 @@
-export * from './queryable/index'
-export * from './utils/deep-merge'
-export * from './utils/globals'
-export * from '../use/hooks/use-force-update'
-export * from '../use/hooks/use-unique-id'
-export * from './utils/merge'
-export * from '../use/utils/typed'
-export * from './utils/wrap-pseudo-prefixes'
+﻿export { default as useSheeter } from './hooks/use-sheeter'
+export { ThemeProvider, useTheme } from './hooks/use-theme'
+export * from './utils/get-component-creator'
+export * from './utils/typed'
 
-import { init } from './$native'
+import { platform } from 'reactxx-styler'
+import { createElement } from './$native'
+
 import { initGlobals } from './utils/globals'
 
-export const initSheeter$Native = (force?:boolean) => initGlobals(force, init)
-export const initSheeter = initSheeter$Native
+export const initUse$Native = (force?: boolean) => initGlobals(force, () => platform.createElement = createElement)
+export const initUse = initUse$Native
 
-export {atomizeSheet, atomizeRuleset, atomizeStyle} from './utils/atomize'
-export {toClassNamesWithQuery} from './utils/to-classnames'
-export {adjustAtomizedLow} from './utils/atomize-low'
-
-initSheeter()

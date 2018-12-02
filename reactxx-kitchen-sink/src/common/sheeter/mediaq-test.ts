@@ -1,5 +1,5 @@
 
-import * as Sheeter from 'reactxx-sheeter'
+import * as Sheeter from 'reactxx-styler'
 
 //****************************
 // CODE

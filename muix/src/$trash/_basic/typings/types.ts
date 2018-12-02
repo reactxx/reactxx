@@ -2,9 +2,9 @@
 import ReactN from 'react-native';
 import { TCommonStyles } from 'reactxx-basic';
 import { TCommon } from 'reactxx-basic';
-import { Ruleset as SheeterRuleset } from 'reactxx-sheeter';
+import { Ruleset as SheeterRuleset } from 'reactxx-styler';
 import { TAddIn } from './add-in';
-import * as Sheeter from 'reactxx-sheeter';
+import * as Sheeter from 'reactxx-styler';
 
 export namespace Types {
 

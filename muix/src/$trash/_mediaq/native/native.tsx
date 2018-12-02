@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
-import * as Sheeter from 'reactxx-sheeter';
+import * as Sheeter from 'reactxx-styler';
 import { TMediaQ } from '../typings/mediaq';
 
 

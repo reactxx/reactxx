@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Sheeter from 'reactxx-sheeter';
+import * as Sheeter from 'reactxx-styler';
 import warning from 'warning';
 import { TMediaQ } from '../typings/mediaq';
 

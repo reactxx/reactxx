@@ -1,5 +1,5 @@
 import { TVariants } from "reactxx-typings";
-import { atomizeSheet } from "reactxx-sheeter";
+import { atomizeSheet } from "reactxx-styler";
 import { initPlatform, Shape, ts } from "reactxx-tests";
 export const createSheet = () =>
   (ts.sheet = {

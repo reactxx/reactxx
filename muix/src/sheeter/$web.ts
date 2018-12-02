@@ -1,78 +1,67 @@
-import Fela from 'reactxx-fela'
-import { assignPlatform, platform } from 'reactxx-sheeter'
-import{TEngine} from 'reactxx-typings'
-import { setActWidth } from './queryable/$widths/store'
+import React from 'react';
 
-export const init = () => {
-    Fela.initFela$Web(platform)
+import { TComponents, TEngine, TTyped } from 'reactxx-typings';
+import { deleteSystemProps, platform } from 'reactxx-styler';
 
-    platform._sheeter.widthDirs = new Set()
+import { isReactXXComponent } from './utils/typed';
 
-    assignPlatform({
-        actWidth: () => window.innerWidth || 0,
 
-        addBreakpoint: (width: number) => {
-            const { _sheeter: { widthDirs } } = platform
-            if (!width || widthDirs.has(width)) return
-            widthDirs.add(width)
-            const mediaQuery = window.matchMedia(`(min-width: ${width}px)`)
-            mediaQuery.addListener(onWidthChanged)
-        },
+export const createElement = (type, props: TComponents.ReactsCommonProperties & ReactsCommonPropertiesWeb, ...children) => {
 
-        toPlatformAtomizeRuleset: platform.renderer.renderRuleEx,
-        dataTrace: Fela.dataTrace,
-        applyLastwinsStrategy,
-        finalizeClassName,
-    })
+  if (!props) return React.createElement(type, props, ...children)
+
+  const isXXComponent = isReactXXComponent(type)
+
+  delete props.$native
+  //consolidateEvents(props)
+
+  if (isXXComponent) return React.createElement(type, props, ...children)
+
+  //******* for non reactxx components: 
+
+  const { classNameX, styleX } = props
+
+  if (classNameX) {
+    let lastWinResult = platform.applyLastwinsStrategy(classNameX) as TEngine.AtomicWebsLow
+    const className = platform.finalizeClassName(lastWinResult) as string
+    props.className = props.className ? className + ' ' + props.className : className
+    if (window.__TRACE__)
+      props['data-trace'] = platform.dataTrace(lastWinResult, window.__TRACE__.dataTraceFlag)
+  }
+
+  if (styleX) {
+    props.style = styleX as React.CSSProperties
+  }
+
+  deleteSystemProps(props)
+  return React.createElement(type, props, ...children)
 }
 
-const onWidthChanged = () => {
-    const { _sheeter: s } = platform
-    if (s.widthsTimer) return
-    s.widthsTimer = window.setTimeout(() => {
-        s.widthsTimer = 0
-        setActWidth(window.innerWidth)
-    }, 1)
+interface ReactsCommonPropertiesWeb {
+  className?: string
+  styleX?: TTyped.StyleSimple
+  style?: React.CSSProperties
+  $native?
 }
 
-const finalizeClassName = (lastWinResult: TEngine.AtomicWebsLow) => {
-    if (!lastWinResult) return undefined
-    if (window.__TRACE__) {
-      lastWinResult = lastWinResult.map((r: TEngine.__dev_AtomicWeb) => r.cache.className) as any
-    }
-    return lastWinResult.join(' ')
+
+
+const consolidateEvents = (props: TComponents.Props & TComponents.Events & TComponents.EventsWeb) => {
+  const { onPress, onLongPress, onPressIn, onPressOut, $web } = props
+  if (onPress) {
+    if (!$web || !$web.onClick) props.onClick = onPress
+    delete props.onPress
   }
-  
-  // apply LAST WIN strategy for web className
-  const applyLastwinsStrategy: TEngine.ApplyLastwinsStrategy = (values: TEngine.Queryables) => {
-    if (!values) return null
-  
-    const { renderer } = platform
-  
-    const res: TEngine.AtomicWeb[] = []
-    const usedPropIds: { [propId: string]: boolean } = {}
-  
-    for (let i = values.length - 1; i >= 0; i--)
-      for (let k = values[i].length - 1; k >= 0; k--) {
-        let value = values[i] && values[i][k]
-        if (!value) continue
-        if (Array.isArray(value)) {
-          throw 'WHAT IS THIS CODE?'
-          Array.prototype.push.apply(res, value)
-          continue
-        }
-        let className: string = value as string
-        if (window.__TRACE__) {
-          className = (value as TEngine.__dev_AtomicWeb).cache.className
-        }
-        const propId = renderer.propIdCache[className]
-        if (!propId || usedPropIds[propId])
-          continue
-        res.push(value as TEngine.AtomicWeb)
-        usedPropIds[propId] = true
-      }
-  
-    return res as TEngine.AtomicArrayLow
+  if (onPressIn) {
+    if (!$web || !$web.onMouseDown) props.onMouseDown = onPress
+    delete props.onPressIn
   }
-  
-  
+  if (onPressOut) {
+    if (!$web || !$web.onMouseUp) props.onMouseUp = onPress
+    delete props.onPressOut
+  }
+  if (onLongPress) {
+    delete props.onLongPress
+  }
+
+}

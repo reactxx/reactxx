@@ -1,7 +1,7 @@
 import { Dimensions } from 'react-native'
 import { onWidthChanged } from './utils/subscribe'
 
-import { assignPlatform } from 'reactxx-sheeter'
+import { assignPlatform } from 'reactxx-styler'
 
 export const init = () => {
     assignPlatform({

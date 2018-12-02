@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeDeep } from 'reactxx-sheeter';
+import { mergeDeep } from 'reactxx-styler';
 import { TWithStyles } from 'reactxx-typings';
 
 export const codePipe: TWithStyles.Pipe = (pipelineState, pipeId, next) => {

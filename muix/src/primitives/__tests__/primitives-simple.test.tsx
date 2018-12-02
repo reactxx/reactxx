@@ -1,7 +1,7 @@
 /** @jsx platform.createElement */
 
 import { initPlatform, render, doMock } from "reactxx-primitives-test/init-platform.t"
-import { platform } from 'reactxx-sheeter'
+import { platform } from 'reactxx-styler'
 
 describe("PRIMITIVES SIMPLE", () => {
 

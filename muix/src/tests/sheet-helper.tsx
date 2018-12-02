@@ -7,7 +7,7 @@ import * as WithStyle from 'reactxx-with-styles'
 import {
     platform,
     toClassNamesWithQuery,
-} from "reactxx-sheeter";
+} from "reactxx-styler";
 import { initPlatform, mount } from './index'
 //import { platform } from 'reactxx-sheet-widths'
 import { Shape, theme } from './shape'

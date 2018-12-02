@@ -1,4 +1,4 @@
-import { Consts, FinishAddIn, RulesetPatchGetter } from 'reactxx-sheeter';
+import { Consts, FinishAddIn, RulesetPatchGetter } from 'reactxx-styler';
 
 const maxBreakpoint = 10000000
 

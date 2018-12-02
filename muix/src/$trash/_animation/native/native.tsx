@@ -1,6 +1,6 @@
 import { Animated } from 'react-native';
 import { DriverLow } from '../common/animation';
-import * as Sheeter from 'reactxx-sheeter';
+import * as Sheeter from 'reactxx-styler';
 
 
 export class Driver extends DriverLow {

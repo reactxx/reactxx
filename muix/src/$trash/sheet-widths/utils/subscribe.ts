@@ -1,5 +1,5 @@
 import { Callback } from '../variants'
-import { platform } from 'reactxx-sheeter'
+import { platform } from 'reactxx-styler'
 
 export const subscribeWidthChange = (callback: Callback) => {
     const { _widths, _widths: { callbacks } } = platform

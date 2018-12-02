@@ -1,6 +1,6 @@
 import React from 'react';
 //import {TextInput} from 'react-native'
-import { deepMerges, platform } from 'reactxx-sheeter';
+import { deepMerges, platform } from 'reactxx-styler';
 import { TAtomize, TComponents, TWithStyles, TVariants, TCommonStyles } from 'reactxx-typings';
 
 import { useTheme } from './hooks/theme'

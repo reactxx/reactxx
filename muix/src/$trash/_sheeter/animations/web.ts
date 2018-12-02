@@ -1,6 +1,6 @@
 import React from 'react';
 import { AnimationConfig, AnimSheet } from './index';
-import { Consts, getGaps, Sheets } from 'reactxx-sheeter';
+import { Consts, getGaps, Sheets } from 'reactxx-styler';
 
 export const $animationsToCSS = ($animations: Sheets) => {
   for (const sheetName in $animations) $animations[sheetName] = sheetToCSS($animations[sheetName])

@@ -1,4 +1,4 @@
-import { atomizeRuleset } from 'reactxx-sheeter'
+import { atomizeRuleset } from 'reactxx-styler'
 import { TSheeter } from 'reactxx-typings'
 
 import { initCore } from 'reactxx-core'

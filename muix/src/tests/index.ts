@@ -17,8 +17,8 @@ export const mount = comp => render(comp).container
 export { render }
 //export default Enzyme
 
-import { initSheeter$Web, resetPlatform } from 'reactxx-sheeter'
-import { initSheeter$Native } from 'reactxx-sheeter-native'
+import { initSheeter$Web, resetPlatform } from 'reactxx-styler'
+import { initSheeter$Native } from 'reactxx-styler-native'
 
 import { initWidths$Web } from 'reactxx-sheet-widths'
 import { initWidths$Native } from 'reactxx-sheet-widths-native'

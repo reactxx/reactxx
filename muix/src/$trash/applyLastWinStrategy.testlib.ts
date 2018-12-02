@@ -1,5 +1,5 @@
 import { TAtomize } from "reactxx-typings";
-import { platform } from "reactxx-sheeter";
+import { platform } from "reactxx-styler";
 
 const web$dumpEx = (concated: TAtomize.AtomicWebsLow, merged: TAtomize.AtomicArrayLow) => {
   const dump = []

@@ -1,4 +1,4 @@
-import { atomizeSheet } from "reactxx-sheeter";
+import { atomizeSheet } from "reactxx-styler";
 import { initPlatform, toClassNames, Shape } from "reactxx-tests";
 import { createSheet, query } from "./switch-sheet.test";
 

@@ -1,7 +1,7 @@
 /** @jsx platform.createElement */
 
 import TestRenderer from 'react-test-renderer'
-import { platform } from 'reactxx-sheeter'
+import { platform } from 'reactxx-styler'
 import { withStylesCreator } from 'reactxx-with-styles'
 import { TComponents } from 'reactxx-typings'
 

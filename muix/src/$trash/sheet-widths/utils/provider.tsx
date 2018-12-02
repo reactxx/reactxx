@@ -1,5 +1,5 @@
 import React from 'react'
-import { platform } from 'reactxx-sheeter'
+import { platform } from 'reactxx-styler'
 
 import { subscribeWidthChange } from './subscribe'
 

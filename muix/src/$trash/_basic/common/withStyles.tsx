@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import * as Sheeter from 'reactxx-sheeter';
+import * as Sheeter from 'reactxx-styler';
 import { TCommon } from '../typings/common';
 import { Types } from '../typings/types';
 import { renderCounterPipe } from './develop';

@@ -1,5 +1,5 @@
 import { TAtomize, TComponents, TVariants } from 'reactxx-typings'
-import { platform, registerVariantHandler, adjustAtomizedLow, isToAtomizeArray } from 'reactxx-sheeter'
+import { platform, registerVariantHandler, adjustAtomizedLow, isToAtomizeArray } from 'reactxx-styler'
 import { Consts } from '../variants'
 import { intervalToSelector, parse, test } from './parser'
 

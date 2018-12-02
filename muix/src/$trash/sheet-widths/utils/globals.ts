@@ -1,4 +1,4 @@
-import { resetPlatform, platform } from 'reactxx-sheeter'
+import { resetPlatform, platform } from 'reactxx-styler'
 
 import { registerWidthsHandler } from './atomize'
 
