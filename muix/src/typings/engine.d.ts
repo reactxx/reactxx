@@ -96,4 +96,8 @@ declare namespace TEngine {
   export type RulesetOrCreator = ValueOrCreator<Rulesets>
   export type SheetOrCreator = ValueOrCreator<Sheet>
 
+  export type ToPlatformAtomizeRuleset = (ruleset: {}, tracePath?: string) => Queryable
+  export type ApplyLastwinsStrategy = (values: QueryableItems | AtomicWebs | AtomicNatives) => AtomicArrayLow
+  
+
 }

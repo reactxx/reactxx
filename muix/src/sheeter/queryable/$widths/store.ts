@@ -1,7 +1,7 @@
 import React from 'react'
 import { platform } from 'reactxx-sheeter'
-import { useForceUpdate } from '../../utils/use-force-update'
-import { useUniqueId } from '../../utils/use-unique-id'
+import { useForceUpdate } from '../../../use/hooks/use-force-update'
+import { useUniqueId } from '../../../use/hooks/use-unique-id'
 
 export const useWidths = () => {
     const forceUpdate = useForceUpdate()

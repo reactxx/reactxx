@@ -1,6 +1,5 @@
 import { Dimensions } from 'react-native'
 import { TEngine } from 'reactxx-typings'
-import { applyLastwinsStrategy, finalizeClassName, createElement } from './reacts/$native'
 import { assignPlatform } from './utils/globals'
 import { setActWidth } from './queryable/$widths/store'
 
@@ -41,9 +40,41 @@ export const init = () => assignPlatform({
     },
     applyLastwinsStrategy,
     finalizeClassName,
-    createElement
 })
 
 function toJSON() {
     return `${this.propId}: ${this.value.value} @${this.value.tracePath}`
 }
+
+const finalizeClassName = (lastWinResult: TEngine.AtomicNativeLow) => {
+    if (!lastWinResult) return undefined
+    if (window.__TRACE__) {
+      const res = {}
+      for (const p in lastWinResult) res[p] = (lastWinResult[p] as TEngine.__dev_AtomicNative).value
+      return res
+    }
+    return lastWinResult
+  }
+  
+  const applyLastwinsStrategy: TEngine.ApplyLastwinsStrategy = values => {
+    if (!values) return null
+    const res: TEngine.NativeStyle = {}
+    for (let i = values.length - 1; i >= 0; i--) {
+      const vals = values[i] as any[]
+      if (!vals) continue
+      for (let k = vals.length - 1; k >= 0; k--) {
+        let value = vals[k]
+        if (!value) continue
+        if (Array.isArray(value)) {
+          Array.prototype.push.apply(res, value)
+          continue
+        }
+        // last win strategy
+        if (typeof res[value.propId] !== 'undefined') continue
+        res[value.propId] = value.value
+      }
+    }
+    return res as TEngine.AtomicArrayLow
+  }
+  
+  

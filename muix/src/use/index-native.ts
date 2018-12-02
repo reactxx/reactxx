@@ -3,10 +3,10 @@ export { ThemeProvider, useTheme } from './hooks/use-theme'
 export * from './utils/get-component-creator'
 
 import { platform } from 'reactxx-sheeter'
-import { createElement } from './$web'
+import { createElement } from './$native'
 
 import { initGlobals } from './utils/globals'
 
-export const initUse$Web = (force?: boolean) => initGlobals(force, () => platform.createElement = createElement)
-export const initUse = initUse$Web
+export const initUse$Native = (force?: boolean) => initGlobals(force, () => platform.createElement = createElement)
+export const initUse = initUse$Native
 

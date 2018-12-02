@@ -2,8 +2,7 @@ import { $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
 import { getTypedEngine } from 'reactxx-sheeter'
 
 //import {  } from "reactxx-sheeter"
-import { initPlatform, dump, Shape as ShapeLow, theme } from "./init-platform.t"
-import { TTyped } from 'reactxx-typings';
+import { initPlatform, Shape as ShapeLow, theme } from "./init-platform.t"
 
 interface Shape extends ShapeLow {
   sheetQuery: {color: string}  

@@ -1,10 +1,10 @@
 export * from './queryable/index'
 export * from './utils/deep-merge'
 export * from './utils/globals'
-export * from './utils/use-force-update'
-export * from './utils/use-unique-id'
+export * from '../use/hooks/use-force-update'
+export * from '../use/hooks/use-unique-id'
 export * from './utils/merge'
-export * from './utils/typed'
+export * from '../use/utils/typed'
 export * from './utils/wrap-pseudo-prefixes'
 
 import { init } from './$native'

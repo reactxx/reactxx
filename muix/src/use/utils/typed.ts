@@ -1,12 +1,12 @@
 import { TEngine, TTyped, TComponents } from 'reactxx-typings';
-import $hot from '../queryable/$hot';
-import { $if, $ifelse } from '../queryable/$if';
-import $native from '../queryable/$native';
-import $web from '../queryable/$web';
-import $width from '../queryable/$widths/$width';
-import { atomizeRuleset, atomizeSheet } from './atomize';
-import { mergeRulesets, mergeSheets } from './merge';
-import { toClassNamesWithQuery } from './to-classnames';
+import $hot from '../../sheeter/queryable/$hot';
+import { $if, $ifelse } from '../../sheeter/queryable/$if';
+import $native from '../../sheeter/queryable/$native';
+import $web from '../../sheeter/queryable/$web';
+import $width from '../../sheeter/queryable/$widths/$width';
+import { atomizeRuleset, atomizeSheet } from '../../sheeter/utils/atomize';
+import { mergeRulesets, mergeSheets } from '../../sheeter/utils/merge';
+import { toClassNamesWithQuery } from '../../sheeter/utils/to-classnames';
 
 export const getTypedEngine = <R extends TTyped.Shape>() => untypedEngine as TTyped.TypedEngine<R>
 
@@ -36,6 +36,6 @@ export const toEngineSheet = (r: TTyped.SheetOrCreator) => r as TEngine.Sheet
 export const fromEngineStyle = <R extends TTyped.Shape>(r: TEngine.StyleOrCreator) => r as any as TTyped.StyleSimple<R>
 export const toEngineStyle = (r: TTyped.StyleOrCreator) => r as TEngine.Style
 
-export function isReactXXComponent(obj): obj is TComponents.ComponentType {
-    return (obj as TComponents.ComponentType).$c$
+export function isReactXXComponent(obj): obj is TEngine.IsReactXXComponent {
+    return (obj as TEngine.IsReactXXComponent).$c$
 }

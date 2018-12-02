@@ -59,6 +59,9 @@
       "reactxx-use-test/*": [
         "src/use/__tests__/*"
       ],
+      "reactxx-use-native": [
+        "src/use/index-native"
+      ],
       "reactxx-primitives-test/*": [
         "src/primitives/__tests__/*"
       ],

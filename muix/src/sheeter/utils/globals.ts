@@ -2,15 +2,12 @@ import { TExtensions, TEngine } from 'reactxx-typings';
 import { WidthStore } from '../queryable/$widths/store';
 
 export interface Platform extends TExtensions.Platform {
-    toPlatformAtomizeRuleset?: ToPlatformAtomizeRuleset
+    toPlatformAtomizeRuleset?: TEngine.ToPlatformAtomizeRuleset
     dataTrace?: (classNames: TEngine.AtomicArrayLow, flags?: TraceFlags) => any,
-    applyLastwinsStrategy?: ApplyLastwinsStrategy
+    applyLastwinsStrategy?: TEngine.ApplyLastwinsStrategy
     finalizeClassName?: (values: TEngine.AtomicArrayLow) => string | Record<string, any>
-    createElement?: (type, props?, ...children) => any
     getDefaultTheme?: () => any
 }
-export type ToPlatformAtomizeRuleset = (ruleset: {}, tracePath?: string) => TEngine.Queryable
-export type ApplyLastwinsStrategy = (values: TEngine.QueryableItems | TEngine.AtomicWebs | TEngine.AtomicNatives) => TEngine.AtomicArrayLow
 
 export const resetPlatform = () => {
     for (const p in platform) delete platform[p]

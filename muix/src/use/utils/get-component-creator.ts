@@ -1,5 +1,4 @@
 ﻿import { TTyped, TUseSheeter } from 'reactxx-typings';
-import {isReactXXComponent} from 'reactxx-sheeter'
 
 export const getComponentCreator = <R extends TTyped.Shape>(
     authorDisplayName: string, authorConfig: TUseSheeter.AuthorConfig<R>, getComp: TUseSheeter.GetComponent<R>, par?
