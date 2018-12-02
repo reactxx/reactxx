@@ -28,7 +28,7 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
 
     // from props
     const { classes, classNameX, styleX, propsRest, themedProps
-    } = useProps<R>(theme, config, sheet, props)
+    } = useProps<R>(theme, sheet, props)
 
     // widths
     const forceUpdate = useForceUpdate()

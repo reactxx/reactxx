@@ -1,5 +1,5 @@
 import { TTyped, $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
-import { getTypedEngine } from 'reactxx-sheeter'
+import { getEngine } from 'reactxx-sheeter'
 import { TUseSheeter } from 'reactxx-use-sheeter'
 
 import { TPrimitives } from './shapes'
@@ -12,7 +12,7 @@ export const hasPlatformEvents = (propsCode: TTyped.PropsCode) => !!(
   //     propsCode.onPress || propsCode.onPressIn || propsCode.onPressOut || propsCode.onLongPress
 )
 
-const t = getTypedEngine<TPrimitives.TextShape>()
+const t = getEngine<TPrimitives.TextShape>()
 
 export const textConfig: TUseSheeter.AuthorConfig<TPrimitives.TextShape> = {
   defaultSheet: () => ({
@@ -55,7 +55,7 @@ const webViewRuleset: TTyped.Ruleset<V> = {
   overflow: 'hidden',
 }
 
-const v = getTypedEngine<TPrimitives.ViewShape>()
+const v = getEngine<TPrimitives.ViewShape>()
 
 export const viewConfig: TUseSheeter.AuthorConfig<TPrimitives.ViewShape> = {
   defaultSheet: () => ({
@@ -70,7 +70,7 @@ export const viewConfig: TUseSheeter.AuthorConfig<TPrimitives.ViewShape> = {
   })
 }
 
-const i = getTypedEngine<TPrimitives.IconShape>()
+const i = getEngine<TPrimitives.IconShape>()
 
 export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
   defaultProps: {
@@ -100,7 +100,7 @@ export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
 
-const s = getTypedEngine<TPrimitives.ScrollViewShape>()
+const s = getEngine<TPrimitives.ScrollViewShape>()
 
 export const scrollViewConfig: TUseSheeter.AuthorConfig<TPrimitives.ScrollViewShape> = {
   defaultSheet: () => ({

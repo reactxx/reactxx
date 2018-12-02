@@ -1,5 +1,5 @@
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
-import { getTypedEngine } from '../../utils/get-engine'
+import { getEngine } from '../../utils/get-engine'
 
 interface Shape {
   theme: {primary}
@@ -7,7 +7,7 @@ interface Shape {
 }
 
 const { $themed, $if, $web, $native, $rules, $toClassNames, $atomizeRuleset
-} = getTypedEngine<Shape>()
+} = getEngine<Shape>()
 
 const sheet4 = $themed(theme => ({
   root: $rules<V>(

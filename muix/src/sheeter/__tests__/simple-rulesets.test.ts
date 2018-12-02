@@ -1,5 +1,5 @@
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
-import { getTypedEngine } from '../utils/get-engine'
+import { getEngine } from '../utils/get-engine'
 
 import { theme, Theme } from "reactxx-typings-test/shape.t"
 import { initPlatform } from "./init-platform.t"
@@ -10,7 +10,7 @@ interface Shape {
 }
 
 const { $web, $hot, $native, $atomizeRuleset
-} = getTypedEngine<Shape>()
+} = getEngine<Shape>()
 
 const t = $web({ color: 'green' })
 

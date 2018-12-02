@@ -1,7 +1,7 @@
 import { initPlatform, dump } from "./init-platform.t"
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 
-import { getTypedEngine } from '../utils/get-engine'
+import { getEngine } from '../utils/get-engine'
 
 interface Shape {
   theme: { primary }
@@ -9,7 +9,7 @@ interface Shape {
 }
 
 const { $themed, $if, $ifelse, $web, $native, $rules, $toClassNames, $atomize
-} = getTypedEngine<Shape>()
+} = getEngine<Shape>()
 
 describe("TO CLASSNAMES", () => {
 

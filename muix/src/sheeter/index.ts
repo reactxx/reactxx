@@ -1,18 +1,17 @@
 import React from 'react'
 
-export * from './queryable/index'
+export {$width, useWidths, setActWidth, useWidthsLow} from './queryable/index'
 export * from './utils/deep-merge'
 export * from './utils/globals'
 export * from './utils/use-force-update'
 export * from './utils/use-unique-id'
 export * from './utils/merge'
-export * from './utils/wrap-pseudo-prefixes'
+//export * from './utils/wrap-pseudo-prefixes'
 
 export { atomizeSheet, atomizeRuleset, atomizeStyle } from './utils/atomize'
 export { toClassNamesWithQuery, deleteSystemProps } from './utils/to-classnames'
 export { adjustAtomizedLow, isToAtomizeArray } from './utils/atomize-low'
-export { getTypedEngine } from './utils/get-engine'
-
+export { getEngine } from './utils/get-engine'
 
 import { init } from './$web'
 import { initGlobals } from './utils/globals'

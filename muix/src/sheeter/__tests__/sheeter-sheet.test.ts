@@ -1,5 +1,5 @@
 import { $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
-import { getTypedEngine } from '../utils/get-engine'
+import { getEngine } from '../utils/get-engine'
 
 //import {  } from "reactxx-sheeter"
 import { initPlatform, Shape as ShapeLow, theme } from "./init-platform.t"
@@ -11,7 +11,7 @@ interface Shape extends ShapeLow {
 const {
   $themed, $if, $web, $native, $rules,
   $atomizeSheet, $mergeSheets, $atomizeRuleset
-} = getTypedEngine<Shape>()
+} = getEngine<Shape>()
 
 describe("SHEET", () => {
   const doTest = (isWeb: boolean) => {

@@ -1,10 +1,10 @@
-import { TEngine, TTyped } from 'reactxx-typings';
+import { TTyped } from 'reactxx-typings';
 import { $width, $web, $native, $hot, $if, $ifelse } from '../queryable/index'
 import { toClassNamesWithQuery } from '../utils/to-classnames'
 import { mergeRulesets, mergeSheets } from '../utils/merge'
 import { atomizeRuleset, atomizeSheet } from '../utils/atomize'
 
-export const getTypedEngine = <R extends TTyped.Shape>() => untypedEngine as TTyped.TypedEngine<R>
+export const getEngine = <R extends TTyped.Shape>() => untypedEngine as TTyped.TypedEngine<R>
 
 const untypedEngine = {
     $web,

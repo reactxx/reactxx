@@ -1,5 +1,4 @@
 import React from 'react';
-import warning from 'warning';
 import { atomizeSheet, platform, mergeSheets } from 'reactxx-sheeter';
 import { TEngine } from 'reactxx-typings';
 import { TUseSheeter } from '../typings/use-sheeter'
