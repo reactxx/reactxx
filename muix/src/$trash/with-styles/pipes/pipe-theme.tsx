@@ -1,5 +1,5 @@
 import React from 'react';
-import { atomizeSheet, platform, mergeSheets } from 'reactxx-styler';
+import { atomizeSheet, platform, mergeSheets } from 'reactxx-sheeter';
 import { TAtomize, TWithStyles } from 'reactxx-typings';
 import warning from 'warning';
 

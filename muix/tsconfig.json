@@ -27,7 +27,7 @@
     //"noUnusedLocals": true,
     "baseUrl": ".",
     "paths": {
-      "reactxx-typings": [
+      "reactxx-typings": [ 
         "src/typings/index"
       ],
       "reactxx-fela": [
@@ -36,11 +36,11 @@
       // "reactxx-use-store": [
       //   "src/use-store/index"
       // ],
-      "reactxx-styler": [
-        "src/styler/index"
-      ],
       "reactxx-sheeter": [
         "src/sheeter/index"
+      ],
+      "reactxx-use-sheeter": [
+        "src/use-sheeter/index"
       ],
       "reactxx-primitives": [
         "src/primitives/index"
@@ -50,17 +50,17 @@
       "reactxx-typings-test/*": [
         "src/typings/__tests__/*"
       ],
-      "reactxx-styler-native": [
-        "src/styler/index-native"
-      ],
-      "reactxx-styler-test/*": [
-        "src/styler/__tests__/*"
+      "reactxx-sheeter-native": [
+        "src/sheeter/index-native"
       ],
       "reactxx-sheeter-test/*": [
         "src/sheeter/__tests__/*"
       ],
-      "reactxx-sheeter-native": [
-        "src/sheeter/index-native"
+      "reactxx-use-sheeter-test/*": [
+        "src/use-sheeter/__tests__/*"
+      ],
+      "reactxx-use-sheeter-native": [
+        "src/use-sheeter/index-native"
       ],
       "reactxx-primitives-test/*": [
         "src/primitives/__tests__/*"
@@ -107,8 +107,8 @@
       // "reactxx-tests": [
       //   "src/tests/index"
       // ],
-      // "reactxx-styler": [
-      //   "src/styler/index"
+      // "reactxx-sheeter": [
+      //   "src/sheeter/index"
       // ],
       // "reactxx-animation": [
       //   "src/animation/index"
@@ -141,8 +141,8 @@
 
     "src/typings",
     "src/fela",
-    "src/styler",
     "src/sheeter",
+    "src/use-sheeter",
     "src/primitives",
 
     // "src/basic",
@@ -160,7 +160,7 @@
     //"src/ks/common/components", 
   ],
   "exclude": [
-    //"src/styler/__tests__",
+    //"src/sheeter/__tests__",
     "src/*/typings.d.ts",
     "src/trash",
     "src/ks/common/muix",

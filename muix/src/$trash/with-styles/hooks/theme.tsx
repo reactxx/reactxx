@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { atomizeSheet, platform, mergeSheets } from 'reactxx-styler';
+import { atomizeSheet, platform, mergeSheets } from 'reactxx-sheeter';
 import { TAtomize, TSheeter } from 'reactxx-typings';
 import warning from 'warning';
 //import { ThemeProviderProps } from 'react-fela';

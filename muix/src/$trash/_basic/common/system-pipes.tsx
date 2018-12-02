@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import * as Sheeter from 'reactxx-styler';
+import * as Sheeter from 'reactxx-sheeter';
 import warning from 'warning';
 import { TCommon } from '../typings/common';
 import { Types } from '../typings/types';

@@ -1,4 +1,4 @@
-import { atomizeRuleset, atomizeStyle } from 'reactxx-styler';
+import { atomizeRuleset, atomizeStyle } from 'reactxx-sheeter';
 import { TWithStyles } from 'reactxx-typings';
 import { sheetFromThemeCache } from './pipe-theme';
 

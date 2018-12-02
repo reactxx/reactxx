@@ -1,4 +1,4 @@
-import { atomizeRuleset } from "reactxx-styler";
+import { atomizeRuleset } from "reactxx-sheeter";
 import { initPlatform, Shape, ts } from "reactxx-tests";
 import {$C} from 'reactxx-sheet-if'
 

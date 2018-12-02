@@ -1,5 +1,5 @@
 /** @jsx platform.createElement */
-import { platform } from 'reactxx-styler'
+import { platform } from 'reactxx-sheeter'
 import { View } from 'reactxx-primitives'
 
 const App: React.SFC = props => <View

@@ -1,5 +1,5 @@
 import warning from 'warning';
-import { Consts, FinishAddIn, Sheets } from 'reactxx-styler';
+import { Consts, FinishAddIn, Sheets } from 'reactxx-sheeter';
 import { $animationsToInterpolate, NativeAnimationAddIn } from './native';
 import { $animationsToCSS, WebAnimationAddIn } from './web';
 

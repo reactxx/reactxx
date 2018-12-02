@@ -1,5 +1,5 @@
 import React from 'react';
-import { deepMerges, platform } from 'reactxx-styler';
+import { deepMerges, platform } from 'reactxx-sheeter';
 import { TAtomize, TComponents, TWithStyles, TVariants } from 'reactxx-typings';
 
 import { createPipeline } from './utils/create-pipeline'

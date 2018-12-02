@@ -2,7 +2,7 @@
 
 export { ThemeProviderGeneric, registerTheme, defaultThemeName } from './pipes/pipe-theme'
 
-import { platform, resetPlatform } from 'reactxx-styler'
+import { platform, resetPlatform } from 'reactxx-sheeter'
 import { defaultThemeName } from './pipes/pipe-theme'
 
 export const initWithStyles = (force?: boolean) => {

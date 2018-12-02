@@ -1,5 +1,5 @@
 
-import * as Sheeter from 'reactxx-styler'
+import * as Sheeter from 'reactxx-sheeter'
 
 export const test = () => {
 

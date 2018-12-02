@@ -1,4 +1,4 @@
-import { atomizeSheet } from "reactxx-styler";
+import { atomizeSheet } from "reactxx-sheeter";
 import { initPlatform, ts, Shape } from "reactxx-tests";
 
 export const createSheet = () =>

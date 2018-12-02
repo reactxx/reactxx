@@ -1,4 +1,4 @@
-import { atomizeSheet } from "reactxx-styler";
+import { atomizeSheet } from "reactxx-sheeter";
 import { initPlatform, toClassNames, Shape, setActWidth } from "reactxx-tests";
 import { createSheet, query } from "../sheet-widths/__tests__/widths-sheet.test";
 

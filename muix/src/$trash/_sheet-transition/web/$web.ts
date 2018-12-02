@@ -1,6 +1,6 @@
 import { getRenderer } from 'reactxx-fela'
 import { TWithStyles, TVariants, TAtomize } from 'reactxx-typings'
-import { isDeffered, atomizeRuleset, registerVariantHandler, wrapPseudoPrefixes } from 'reactxx-styler'
+import { isDeffered, atomizeRuleset, registerVariantHandler, wrapPseudoPrefixes } from 'reactxx-sheeter'
 
 import { TTransition } from '../d-index'
 //import { parsePropDef } from './parse-prop-def'

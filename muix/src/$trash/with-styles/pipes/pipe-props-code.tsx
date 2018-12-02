@@ -1,4 +1,4 @@
-import { mergeCodeProps, mergeRulesets, mergeSheets, mergeStyles, toClassNamesWithQuery } from 'reactxx-styler';
+import { mergeCodeProps, mergeRulesets, mergeSheets, mergeStyles, toClassNamesWithQuery } from 'reactxx-sheeter';
 import { TComponents, TWithStyles } from 'reactxx-typings';
 
 // prepare code component props

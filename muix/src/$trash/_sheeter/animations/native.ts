@@ -1,6 +1,6 @@
 import ReactN from 'react-native'
 import warning from 'warning'
-import { Consts, Sheets, getGaps } from 'reactxx-styler'
+import { Consts, Sheets, getGaps } from 'reactxx-sheeter'
 import { AnimSheet, AnimationConfig } from '.'
 
 export const $animationsToInterpolate = ($animations: Sheets) => {

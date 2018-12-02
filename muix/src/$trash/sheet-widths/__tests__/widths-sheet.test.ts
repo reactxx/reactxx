@@ -1,4 +1,4 @@
-import { atomizeRuleset } from "reactxx-styler";
+import { atomizeRuleset } from "reactxx-sheeter";
 import { initPlatform, Shape } from "reactxx-tests";
 
 describe("WIDTHS", () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TWithStyles } from 'reactxx-typings'
-import { platform } from 'reactxx-styler'
+import { platform } from 'reactxx-sheeter'
 
 import { Consumer } from './provider'
 import { parse, test } from './parser'

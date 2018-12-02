@@ -1,7 +1,7 @@
 /** @jsx platform.createElement */
 import React from 'react'
 
-import { platform } from 'reactxx-styler'
+import { platform } from 'reactxx-sheeter'
 
 import { ts, traceComponentEx, ReactAny } from "reactxx-tests";
 

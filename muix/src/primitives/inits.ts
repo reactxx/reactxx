@@ -1,5 +1,5 @@
-import { getComponentCreator } from "reactxx-sheeter"
-import { Platform, platform, resetPlatform } from 'reactxx-styler'
+import { getComponentCreator } from "reactxx-use-sheeter"
+import { Platform, platform, resetPlatform } from 'reactxx-sheeter'
 import { TUseSheeter } from 'reactxx-typings'
 
 import { TPrimitives } from './shapes'

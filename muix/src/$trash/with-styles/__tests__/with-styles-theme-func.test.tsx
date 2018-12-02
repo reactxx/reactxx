@@ -2,7 +2,7 @@
 import React from 'react'
 
 import { TSheeter } from 'reactxx-typings'
-import { platform } from 'reactxx-styler'
+import { platform } from 'reactxx-sheeter'
 
 import { ts, traceComponentEx, Shape, ReactAny, theme, ThemeProvider } from "reactxx-tests"
 

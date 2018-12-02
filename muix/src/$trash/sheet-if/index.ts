@@ -1,6 +1,6 @@
 export * from './variants'
 import { TComponents, TSheeter, TVariants, TAtomize } from 'reactxx-typings'
-import { registerVariantHandler, adjustAtomizedLow, isToAtomizeArray, resetPlatform, platform } from 'reactxx-styler'
+import { registerVariantHandler, adjustAtomizedLow, isToAtomizeArray, resetPlatform, platform } from 'reactxx-sheeter'
 import { Consts } from './variants'
 
 export const initIF = (force?: boolean) => {
