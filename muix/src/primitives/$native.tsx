@@ -18,8 +18,8 @@ export const getView: TUseSheeter.GetComponent<TPrimitives.ViewShape> = (authorC
     const { toClassNames, propsCode: { children, ...rest }, classes, css, styles, $sheetQuery }
         = useSheeter<TPrimitives.ViewShape>(props, authorConfig, displayName, userConfig)
     $sheetQuery.pressable = hasPlatformEvents(rest)
-    const rootStyle = toClassNames(classes.root, css)
-    const res = <ActView css={rootStyle} styles={styles} {...rest} /> as any
+    const rootStyle = toClassNames(classes.root, css, styles)
+    const res = <ActView css={rootStyle} {...rest} /> as any
     return $sheetQuery.pressable ? <TouchableWithoutFeedback {...{/*events*/ }}>{res}</TouchableWithoutFeedback> : res
 }
 
@@ -39,7 +39,6 @@ export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> = (authorC
     return <ActIcon
         name={(data || children as string) as MaterialCommunityIconsProps['name']}
         css={toClassNames(classes.root, css, styles)}
-        styles={styles}
         onPress={doPress || undefined}
         {...rest} />
 }
@@ -61,7 +60,7 @@ export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> = (authorC
         otherProps.numberOfLines = 1
     }
 
-    return <ActText css={toClassNames(classes.root, css)} styles={styles} {...rest} {...otherProps} />
+    return <ActText css={toClassNames(classes.root, css, styles)} {...rest} {...otherProps} />
 }
 
 export const getScrollView: TUseSheeter.GetComponent<TPrimitives.ScrollViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
@@ -69,7 +68,7 @@ export const getScrollView: TUseSheeter.GetComponent<TPrimitives.ScrollViewShape
     const { toClassNames, propsCode: { children, ...rest }, classes, css, styles, $sheetQuery }
         = useSheeter<TPrimitives.ScrollViewShape>(props, authorConfig, displayName, userConfig)
     return <ActScrollView
-        css={toClassNames(classes.root, css)} styles={styles}
+        css={toClassNames(classes.root, css, styles)}
         contentContainerStyle={toClassNames(classes.container) as any} {...rest} />
 }
 

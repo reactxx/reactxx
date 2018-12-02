@@ -7,7 +7,7 @@ if (Dimensions)
     Dimensions.addEventListener('change', arg => setActWidth(Dimensions.get('window').width))
 
 export const init = () => assignPlatform({
-    addBreakpoint: (width: number) => { },
+    addBreakpoint: null,
     actWidth: () => Dimensions ? Dimensions.get('window').width : 0,
 
     toPlatformAtomizeRuleset: (style, tracePath) => {

@@ -6,10 +6,13 @@ import { useSheeter, TUseSheeter, TComponents } from "reactxx-use-sheeter"
 import { hasPlatformEvents } from './configs'
 import { TPrimitives } from './shapes'
 
+let useCSS
+
 export const getView: TUseSheeter.GetComponent<TPrimitives.ViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const { toClassNames, propsCode, classes, css, styles, $sheetQuery }
         = useSheeter<TPrimitives.ViewShape>(props, authorConfig, displayName, userConfig)
     $sheetQuery.pressable = hasPlatformEvents(props)
+    const root = useCSS(classes.root, css, [classes.root, css, $sheetQuery.pressable, ])
     return <div css={toClassNames(classes.root, css)} styles={styles} {...propsCode} />
 }
 

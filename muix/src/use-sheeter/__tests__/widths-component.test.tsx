@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { TEngine } from 'reactxx-typings'
+import { TEngine, V } from 'reactxx-typings'
 import { platform, atomizeRuleset, toClassNamesWithQuery, $width, useWidths, setActWidth } from "reactxx-sheeter"
 
 import { initPlatform, render } from "./init-platform.t"
@@ -16,23 +16,25 @@ describe("SHEETER $WIDTHS", () => {
     describe("04 change width", () => {
       beforeEach(() => initPlatform(isWeb, { dataTraceFlag: 'short' }))
 
-      const getSheet = () => atomizeRuleset([
+      const getSheetRoot = () => atomizeRuleset([
         $width([0, 640], { color: 'red' }),
         $width([640, 1024], { color: 'green' }),
         $width(1024, { color: 'blue' }),
       ])
 
       const useApp = () => {
+        // part of useSheeter
         const { actWidth, breakpoints, getWidthMap } = useWidths()
         const query: TEngine.WidthsQuery = {
           $widths: { actWidth, breakpoints }
         }
-        const sheetRoot = React.useMemo(getSheet)
+        const sheetRoot = React.useMemo(getSheetRoot)
+
         // component code
         const renderCount = React.useRef(0)
         renderCount.current++
 
-        const root = toClassNamesWithQuery(query, sheetRoot)
+        const root = toClassNamesWithQuery(query, sheetRoot) as any as V
 
         return { getWidthMap, root, renderCount: renderCount.current }
       }

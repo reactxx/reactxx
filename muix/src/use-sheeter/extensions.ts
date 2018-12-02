@@ -1,4 +1,4 @@
-import { TEngine } from 'reactxx-typings'
+import { TEngine, V, T, I, $W } from 'reactxx-typings'
 import { TComponents } from './typings/components'
 import { TextProperties } from 'react-native'
 
@@ -9,9 +9,9 @@ import { TextProperties } from 'react-native'
 // https://stackoverflow.com/questions/40093655/how-do-i-add-attributes-to-existing-html-elements-in-typescript-jsx
 // https://github.com/Microsoft/TypeScript/issues/10859
 declare module 'react' {
-    interface HTMLAttributes<T> extends TComponents.ReactsCommonProperties {
+    interface HTMLAttributes<T> extends TComponents.ReactsCommonProperties<$W> {
     }
-    interface SVGAttributes<T> extends TComponents.ReactsCommonProperties {
+    interface SVGAttributes<T> extends TComponents.ReactsCommonProperties<$W> {
     }
 }
 
@@ -19,11 +19,11 @@ declare module 'react' {
   EXTEND REACT NATIVE
 *******************************************/
 declare module 'react-native' {
-    interface ViewProperties extends TComponents.ReactsCommonProperties {
+    interface ViewProperties extends TComponents.ReactsCommonPropertiesLow<V> {
     }
-    interface TextProperties extends TComponents.ReactsCommonProperties {
+    interface TextProperties extends TComponents.ReactsCommonPropertiesLow<T> {
     }
-    interface ImageProperties extends TComponents.ReactsCommonProperties {
+    interface ImageProperties extends TComponents.ReactsCommonPropertiesLow<I> {
     }
 }
 
@@ -31,7 +31,7 @@ declare module 'react-native' {
   EXTEND 
 *******************************************/
 declare module '@expo/vector-icons' {
-    interface BaseIconProps extends TComponents.ReactsCommonProperties, TextProperties {
+    interface BaseIconProps extends TComponents.ReactsCommonPropertiesLow<T>, TextProperties {
     }
 }
 

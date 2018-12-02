@@ -47,7 +47,7 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
 
     propsCode.$sheetQuery = {}
 
-    const toClassNames = (...rulesets: TTyped.Ruleset[]) => toClassNamesWithQuery(propsCode, ...rulesets)
+    const toClassNames = <T extends TTyped.RulesetIds>(...rulesets: TTyped.Ruleset<T>[]) => toClassNamesWithQuery(propsCode, ...rulesets) as any as T
 
     return { getWidthMap, toClassNames, propsCode, $sheetQuery: propsCode.$sheetQuery, classes, styles, css, uniqueId, forceUpdate }
 }

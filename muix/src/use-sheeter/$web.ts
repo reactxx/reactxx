@@ -24,7 +24,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   const { css, styles } = props
 
   if (css) {
-    let lastWinResult = platform.applyLastwinsStrategy(css) as TEngine.AtomicWebsLow
+    let lastWinResult = platform.applyLastwinsStrategy(css as any) as TEngine.AtomicWebsLow
     const className = platform.finalizeClassName(lastWinResult) as string
     props.className = props.className ? className + ' ' + props.className : className
     if (window.__TRACE__)

@@ -16,7 +16,7 @@ declare module 'reactxx-typings' {
     type getPropsNative<R extends Shape> = R['propsNative']
     type getEvents<R extends Shape = Shape> = keyof R['events']
     type getStaticProps<R extends Shape = Shape> = keyof R['staticProps'] extends never ? TTyped.FakeInterface : R['staticProps']
-  
+
   }
 }
 
@@ -43,10 +43,13 @@ export namespace TComponents {
   - react native build in components (e.g. <Text styles={...})
   - custom components (e.g. <IconButton css={...})
   */
-  export interface ReactsCommonProperties<R extends TTyped.Shape = TTyped.Shape> {
-    css?: TEngine.Queryables
-    styles?: TTyped.RulesetIds
+  export interface ReactsCommonPropertiesLow<Id extends TTyped.RulesetIds = TTyped.RulesetIds> {
+    css?: TTyped.TPlatformAllowed<Id>
     trace?: string
+  }
+
+  export interface ReactsCommonProperties<Id extends TTyped.RulesetIds = TTyped.RulesetIds> extends ReactsCommonPropertiesLow<Id> {
+    styles?: TTyped.TPlatformAllowed<Id>
   }
 
   export type ComponentType<R extends TTyped.Shape = TTyped.Shape> =

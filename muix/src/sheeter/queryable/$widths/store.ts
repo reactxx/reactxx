@@ -17,17 +17,23 @@ export const useWidthsLow = (
 
     const listenerRef = React.useRef(null)
 
-    // handler is registered in widthStore in useLayoutEffect: in useLayoutEffect we already known, if some breakpoints exist
+    // get registered listener or create new listener (for registration)
+    // created listener is registered in useLayoutEffect (when we already know when registration is necessary)
     const listener = listenerRef.current || { forceUpdate }
-    const breakpoints = listener.breakpoints = new Set() // always new breakpoints for every render
+
+    // create new breakpoints-set in every render start
+    // breakpoints-set is filled during render when:
+    // - some breakpoint conditions found in used rulesets
+    // - component call getWidthMap
+    const breakpoints = listener.breakpoints = new Set()
 
     React.useLayoutEffect(() => { // call on every render
-        if (breakpoints.size > 0) { // some breakpoints found (in rulesets or as a result of getWidthMap call)
+        if (breakpoints.size > 0) { // some breakpoints filled
             if (!listenerRef.current) // not aleady registered => register
                 listenerRef.current = widthStore.register(uniqueId, listener)
             // for web: adjust media query for watched breakpoints
-            for (const br of breakpoints) platform.addBreakpoint(br)
-            //breakpoints.forEach(br => platform.addBreakpoint(br))
+            if (window.isWeb)
+                for (const br of breakpoints) platform.addBreakpoint(br)
         }
     })
 
@@ -48,7 +54,7 @@ export const useWidthsLow = (
         // add breakpoints for change detection
         for (const b of mapBreakpoints) breakpoints.add(b)
 
-        // get map (just single array item is true)
+        // get map (just single item is true)
         let found = mapBreakpoints.findIndex(b => actWidth < b)
         if (found < 0) found = mapBreakpoints.length
         const res: boolean[] = []
@@ -62,33 +68,32 @@ export const useWidthsLow = (
 export class WidthStore {
 
     actWidth = platform.actWidth()
-    listeners: Record<number, IListener> = {} // change width listeners
+    listeners: Record<number, IListener> = {} // width change listeners
 
-    // width chan
+    // width change
     setWidth = (newWidth: number) => {
         if (this.actWidth === newWidth) return
         const oldWidth = this.actWidth
         this.actWidth = newWidth
-        for (const p in this.listeners) this.refreshHandler(this.listeners[p], oldWidth, newWidth)
+        // notify listeners when some of its breakpoint changed 
+        for (const p in this.listeners)
+            this.refreshListener(this.listeners[p], oldWidth, newWidth)
     }
 
-    refreshHandler(listener: IListener, oldWidth: number, newWidth: number) {
-        let noChange = true
+    refreshListener(listener: IListener, oldWidth: number, newWidth: number) {
+        let theSame = true
         for (const br of listener.breakpoints)
-            noChange = noChange && (newWidth >= br && oldWidth >= br || newWidth < br && oldWidth < br)
-        if (noChange) return
+            theSame = theSame && (newWidth >= br && oldWidth >= br || newWidth < br && oldWidth < br)
+        if (theSame) return
         listener.forceUpdate(null)
     }
 
     register(id: number, listener?) {
-        if (listener) return this.listeners[id] = listener
-        else delete this.listeners[id]
+        if (listener) return this.listeners[id] = listener // REGISTER
+        else delete this.listeners[id] // UNREGISTER
     }
 
 }
-
-// global store for watching width change
-//const widthStore = new WidthStore()
 
 interface IListener {
     breakpoints?: Set<number>
