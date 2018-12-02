@@ -1,7 +1,7 @@
 /** @jsx platform.createElement */
 
 //import React from 'react'
-import ReactN, { View, Text, ScrollView, Animated, TouchableWithoutFeedback, Linking } from 'react-native'
+import { View, Text, ScrollView, Animated, TouchableWithoutFeedback, Linking, TextProperties } from 'react-native'
 import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
@@ -15,17 +15,17 @@ import { TPrimitives } from './shapes'
 
 export const getView: TUseSheeter.GetComponent<TPrimitives.ViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActView = isAnimated ? Animated.View : View
-    const { toClassNames, propsCode: { children, ...rest }, classes, classNameX, styleX, $sheetQuery }
+    const { toClassNames, propsCode: { children, ...rest }, classes, css, styles, $sheetQuery }
         = useSheeter<TPrimitives.ViewShape>(props, authorConfig, displayName, userConfig)
     $sheetQuery.pressable = hasPlatformEvents(rest)
-    const rootStyle = toClassNames(classes.root, classNameX)
-    const res = <ActView classNameX={rootStyle} styleX={styleX} {...rest} /> as any
+    const rootStyle = toClassNames(classes.root, css)
+    const res = <ActView css={rootStyle} styles={styles} {...rest} /> as any
     return $sheetQuery.pressable ? <TouchableWithoutFeedback {...{/*events*/ }}>{res}</TouchableWithoutFeedback> : res
 }
 
 export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActIcon = isAnimated ? AnimatedIconLow : MaterialCommunityIcons
-    const { toClassNames, propsCode: { data, url, children, ...rest }, classes, classNameX, styleX, $sheetQuery }
+    const { toClassNames, propsCode: { data, url, children, ...rest }, classes, css, styles, $sheetQuery }
         = useSheeter<TPrimitives.IconShape>(props, authorConfig, displayName, userConfig)
 
     $sheetQuery.pressable = hasPlatformEvents(rest)
@@ -38,20 +38,20 @@ export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> = (authorC
 
     return <ActIcon
         name={(data || children as string) as MaterialCommunityIconsProps['name']}
-        classNameX={toClassNames(classes.root, classNameX, styleX)}
-        styleX={styleX}
+        css={toClassNames(classes.root, css, styles)}
+        styles={styles}
         onPress={doPress || undefined}
         {...rest} />
 }
-const AnimatedIconLow = Animated.createAnimatedComponent(MaterialCommunityIcons)
+const AnimatedIconLow: typeof MaterialCommunityIcons = Animated.createAnimatedComponent(MaterialCommunityIcons)
 
 export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
-    const ActText = isAnimated ? Animated.Text : ReactN.Text
-    const { toClassNames, propsCode: { url, children, singleLine, ...rest }, classes, classNameX, styleX, $sheetQuery }
+    const ActText = isAnimated ? Animated.Text : Text
+    const { toClassNames, propsCode: { url, children, singleLine, ...rest }, classes, css, styles, $sheetQuery }
         = useSheeter<TPrimitives.TextShape>(props, authorConfig, displayName, userConfig)
     $sheetQuery.pressable = hasPlatformEvents(rest)
     let doPress
-    const otherProps: ReactN.TextProperties = {
+    const otherProps: TextProperties = {
         onPress: !url ? doPress : () => Linking.canOpenURL(url).then(supported => {
             warning(supported, `Can't handle url: ${url}`)
             return Linking.openURL(url);
@@ -61,15 +61,15 @@ export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> = (authorC
         otherProps.numberOfLines = 1
     }
 
-    return <ActText classNameX={toClassNames(classes.root, classNameX)} styleX={styleX} {...rest} {...otherProps} />
+    return <ActText classNameX={toClassNames(classes.root, css)} styleX={styles} {...rest} {...otherProps} />
 }
 
 export const getScrollView: TUseSheeter.GetComponent<TPrimitives.ScrollViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActScrollView = isAnimated ? Animated.ScrollView : ScrollView
-    const { toClassNames, propsCode: { children, ...rest }, classes, classNameX, styleX, $sheetQuery }
+    const { toClassNames, propsCode: { children, ...rest }, classes, css, styles, $sheetQuery }
         = useSheeter<TPrimitives.ScrollViewShape>(props, authorConfig, displayName, userConfig)
     return <ActScrollView
-        classNameX={toClassNames(classes.root, classNameX)} styleX={styleX}
+        classNameX={toClassNames(classes.root, css)} styleX={styles}
         contentContainerStyle={toClassNames(classes.container)} {...rest} />
 }
 

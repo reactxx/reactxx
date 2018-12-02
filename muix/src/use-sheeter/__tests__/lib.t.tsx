@@ -29,13 +29,13 @@ export interface Shape extends TTyped.ShapeAncestor {
   ) => {
     const res: TComponents.SFC<Shape> = props => {
       try {
-        const { toClassNames, propsCode, classes, classNameX, styleX
+        const { toClassNames, propsCode, classes, css, styles
         } = useSheeter<Shape>(props, config, displayName, userConfig)
         
         const renderCount = React.useRef(0)
         renderCount.current++
-        const root = toClassNames(classes.root as any/*TODO*/, classNameX)
-        return <div {...propsCode} classNameX={root} styleX={styleX as any}>{renderCount.current}</div>
+        const root = toClassNames(classes.root as any/*TODO*/, css)
+        return <div {...propsCode} css={root} styles={styles as any}>{renderCount.current}</div>
       } catch {
         return <div>ERROR</div>
       }

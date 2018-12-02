@@ -21,18 +21,18 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 
   //******* for non reactxx components: 
 
-  const { classNameX, styleX } = props
+  const { css, styles } = props
 
-  if (classNameX) {
-    let lastWinResult = platform.applyLastwinsStrategy(classNameX) as TEngine.AtomicWebsLow
+  if (css) {
+    let lastWinResult = platform.applyLastwinsStrategy(css) as TEngine.AtomicWebsLow
     const className = platform.finalizeClassName(lastWinResult) as string
     props.className = props.className ? className + ' ' + props.className : className
     if (window.__TRACE__)
       props['data-trace'] = platform.dataTrace(lastWinResult, window.__TRACE__.dataTraceFlag)
   }
 
-  if (styleX) {
-    props.style = styleX as React.CSSProperties
+  if (styles) {
+    props.style = styles as React.CSSProperties
   }
 
   deleteSystemProps(props)

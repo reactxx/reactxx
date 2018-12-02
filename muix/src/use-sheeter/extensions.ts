@@ -1,5 +1,6 @@
 import { TEngine } from 'reactxx-typings'
 import { TComponents } from './typings/components'
+import { TextProperties } from 'react-native'
 
 
 /************************************TComponents******
@@ -23,6 +24,14 @@ declare module 'react-native' {
     interface TextProperties extends TComponents.ReactsCommonProperties {
     }
     interface ImageProperties extends TComponents.ReactsCommonProperties {
+    }
+}
+
+/******************************************
+  EXTEND 
+*******************************************/
+declare module '@expo/vector-icons' {
+    interface BaseIconProps extends TComponents.ReactsCommonProperties, TextProperties {
     }
 }
 

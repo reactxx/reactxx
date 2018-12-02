@@ -20,7 +20,7 @@ export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, atomizedS
     }, [theme, _classes])
 
     // classNameX
-    const classNameX = React.useMemo(
+    const css = React.useMemo(
         () => fromEngineClassName<R>
             (atomizeRuleset(
                 toEngineClassName(_classNameX),
@@ -30,9 +30,9 @@ export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, atomizedS
         [_classNameX, theme])
 
     // styleX
-    const styleX = React.useMemo(() => fromEngineStyle<R>(atomizeStyle(toEngineStyle(_styleX), theme)), [_styleX])
+    const styles = React.useMemo(() => fromEngineStyle<R>(atomizeStyle(toEngineStyle(_styleX), theme)), [_styleX])
 
-    return { classes, classNameX, styleX, propsRest, themedProps }
+    return { classes, css, styles, propsRest, themedProps }
 
 }
 

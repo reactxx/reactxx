@@ -1,7 +1,8 @@
 import warning from 'warning'
-import { TEngine } from 'reactxx-typings'
+import { TEngine, TTyped } from 'reactxx-typings'
 import { atomizeRuleset, wrapRuleset } from './atomize'
 import { isToAtomize, isDeferred, isTemporary } from './atomize-low'
+import { TComponents } from 'reactxx-use-sheeter';
 
 export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: TEngine.Ruleset[]) => {
 
@@ -54,11 +55,11 @@ export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: TE
     return values.length === 0 ? null : wrapRuleset(values)
 }
 
-export const deleteSystemProps = props => {
+export const deleteSystemProps = (props: TComponents.ReactsCommonProperties & TTyped.PropsCode) => {
     for (const p in props)
         if (p.charAt(0) === '$') delete props[p]
-    delete props.classNameX
-    delete props.styleX
+    delete props.css
+    delete props.styles
     if (!props['data-trace']) delete props['data-trace']
     // propsToDelete.forEach(p => delete props[p])
     // if (props.style) delete props.style.toJSON

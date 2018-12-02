@@ -44,8 +44,8 @@ export namespace TComponents {
   - custom components (e.g. <IconButton classNameX={...})
   */
   export interface ReactsCommonProperties<R extends TTyped.Shape = TTyped.Shape> {
-    classNameX?: TEngine.Queryables
-    styleX?: TTyped.RulesetIds
+    css?: TEngine.Queryables
+    styles?: TTyped.RulesetIds
     trace?: string
   }
 

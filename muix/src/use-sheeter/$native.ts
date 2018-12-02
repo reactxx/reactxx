@@ -17,13 +17,13 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 
   if (isXXComponent) return React.createElement(type, props, ...children)
 
-  const { classNameX, styleX } = props
+  const { css, styles } = props
 
-  if (classNameX || styleX) {
+  if (css || styles) {
     let style =
-      styleX
-        ? toClassNamesWithQuery(null, classNameX, styleX)
-        : classNameX
+      styles
+        ? toClassNamesWithQuery(null, css, styles)
+        : css
     let reduced = platform.applyLastwinsStrategy(style) as TEngine.AtomicNativeLow
     props.style = platform.finalizeClassName(reduced) as TEngine.AtomicNativeLow
     if (window.__TRACE__)

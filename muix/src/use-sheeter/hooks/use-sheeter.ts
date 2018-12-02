@@ -27,7 +27,7 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     } = useDefaults(theme, config, displayName)
 
     // from props
-    const { classes, classNameX, styleX, propsRest, themedProps
+    const { classes, css, styles, propsRest, themedProps
     } = useProps<R>(theme, sheet, props)
 
     // widths
@@ -49,7 +49,7 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
 
     const toClassNames = (...rulesets: TTyped.Ruleset[]) => toClassNamesWithQuery(propsCode, ...rulesets)
 
-    return { getWidthMap, toClassNames, propsCode, $sheetQuery: propsCode.$sheetQuery, classes, styleX, classNameX, uniqueId, forceUpdate }
+    return { getWidthMap, toClassNames, propsCode, $sheetQuery: propsCode.$sheetQuery, classes, styles, css, uniqueId, forceUpdate }
 }
 
 const mergeCodeProps = (target, props: TComponents.Props[]) => {
