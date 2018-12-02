@@ -14,7 +14,7 @@ import { hasPlatformEvents } from './configs'
 import { TPrimitives } from './shapes'
 
 export const getView: TUseSheeter.GetComponent<TPrimitives.ViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
-    const ActView = isAnimated ? Animated.View : View
+    const ActView: typeof View = isAnimated ? Animated.View : View
     const { toClassNames, propsCode: { children, ...rest }, classes, css, styles, $sheetQuery }
         = useSheeter<TPrimitives.ViewShape>(props, authorConfig, displayName, userConfig)
     $sheetQuery.pressable = hasPlatformEvents(rest)
@@ -24,7 +24,7 @@ export const getView: TUseSheeter.GetComponent<TPrimitives.ViewShape> = (authorC
 }
 
 export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
-    const ActIcon = isAnimated ? AnimatedIconLow : MaterialCommunityIcons
+    const ActIcon: typeof MaterialCommunityIcons = isAnimated ? AnimatedIconLow : MaterialCommunityIcons
     const { toClassNames, propsCode: { data, url, children, ...rest }, classes, css, styles, $sheetQuery }
         = useSheeter<TPrimitives.IconShape>(props, authorConfig, displayName, userConfig)
 
@@ -46,7 +46,7 @@ export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> = (authorC
 const AnimatedIconLow: typeof MaterialCommunityIcons = Animated.createAnimatedComponent(MaterialCommunityIcons)
 
 export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
-    const ActText = isAnimated ? Animated.Text : Text
+    const ActText: typeof Text = isAnimated ? Animated.Text : Text
     const { toClassNames, propsCode: { url, children, singleLine, ...rest }, classes, css, styles, $sheetQuery }
         = useSheeter<TPrimitives.TextShape>(props, authorConfig, displayName, userConfig)
     $sheetQuery.pressable = hasPlatformEvents(rest)
@@ -61,16 +61,16 @@ export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> = (authorC
         otherProps.numberOfLines = 1
     }
 
-    return <ActText classNameX={toClassNames(classes.root, css)} styleX={styles} {...rest} {...otherProps} />
+    return <ActText css={toClassNames(classes.root, css)} styles={styles} {...rest} {...otherProps} />
 }
 
 export const getScrollView: TUseSheeter.GetComponent<TPrimitives.ScrollViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
-    const ActScrollView = isAnimated ? Animated.ScrollView : ScrollView
+    const ActScrollView: typeof ScrollView = isAnimated ? Animated.ScrollView : ScrollView
     const { toClassNames, propsCode: { children, ...rest }, classes, css, styles, $sheetQuery }
         = useSheeter<TPrimitives.ScrollViewShape>(props, authorConfig, displayName, userConfig)
     return <ActScrollView
-        classNameX={toClassNames(classes.root, css)} styleX={styles}
-        contentContainerStyle={toClassNames(classes.container)} {...rest} />
+        css={toClassNames(classes.root, css)} styles={styles}
+        contentContainerStyle={toClassNames(classes.container) as any} {...rest} />
 }
 
 

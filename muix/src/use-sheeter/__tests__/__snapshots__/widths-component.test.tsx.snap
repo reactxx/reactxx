@@ -3,7 +3,7 @@
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 1`] = `
 <div>
   <div
-    classnamex="[object Object]"
+    style="color: red;"
   >
     rendered: 1x
   </div>
@@ -13,7 +13,7 @@ exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 1
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 2`] = `
 <div>
   <div
-    classnamex="[object Object]"
+    style="color: green;"
   >
     rendered: 2x
   </div>
@@ -23,7 +23,7 @@ exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 2
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 3`] = `
 <div>
   <div
-    classnamex="[object Object]"
+    style="color: blue;"
   >
     rendered: 3x
   </div>
@@ -33,7 +33,7 @@ exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 01 use just width styles 3
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 use width flags and styles 1`] = `
 <div>
   <div
-    classnamex="[object Object]"
+    style="color: red;"
   >
     mobile (rendered: 1x)
   </div>
@@ -43,7 +43,7 @@ exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 use width flags and sty
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 use width flags and styles 2`] = `
 <div>
   <div
-    classnamex="[object Object]"
+    style="color: green;"
   >
     tablet (rendered: 2x)
   </div>
@@ -53,7 +53,7 @@ exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 use width flags and sty
 exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 use width flags and styles 3`] = `
 <div>
   <div
-    classnamex="[object Object]"
+    style="color: blue;"
   >
     desktop (rendered: 3x)
   </div>
@@ -63,7 +63,11 @@ exports[`SHEETER $WIDTHS ## NATIVE ## 04 change width 02 use width flags and sty
 exports[`SHEETER $WIDTHS ## WEB ## 04 change width 01 use just width styles 1`] = `
 <div>
   <div
-    classnamex="[object Object],[object Object],[object Object]"
+    class="c b a"
+    data-trace="
+@media (min-width: 1024px).c { color:blue }
+@media (min-width: 640px) and (max-width: 1023px).b { color:green }
+@media (max-width: 639px).a { color:red }"
   >
     rendered: 1x
   </div>
@@ -73,7 +77,11 @@ exports[`SHEETER $WIDTHS ## WEB ## 04 change width 01 use just width styles 1`] 
 exports[`SHEETER $WIDTHS ## WEB ## 04 change width 01 use just width styles 2`] = `
 <div>
   <div
-    classnamex="[object Object],[object Object],[object Object]"
+    class="c b a"
+    data-trace="
+@media (min-width: 1024px).c { color:blue }
+@media (min-width: 640px) and (max-width: 1023px).b { color:green }
+@media (max-width: 639px).a { color:red }"
   >
     rendered: 1x
   </div>
@@ -83,7 +91,11 @@ exports[`SHEETER $WIDTHS ## WEB ## 04 change width 01 use just width styles 2`] 
 exports[`SHEETER $WIDTHS ## WEB ## 04 change width 01 use just width styles 3`] = `
 <div>
   <div
-    classnamex="[object Object],[object Object],[object Object]"
+    class="c b a"
+    data-trace="
+@media (min-width: 1024px).c { color:blue }
+@media (min-width: 640px) and (max-width: 1023px).b { color:green }
+@media (max-width: 639px).a { color:red }"
   >
     rendered: 1x
   </div>
@@ -93,7 +105,11 @@ exports[`SHEETER $WIDTHS ## WEB ## 04 change width 01 use just width styles 3`] 
 exports[`SHEETER $WIDTHS ## WEB ## 04 change width 02 use width flags and styles 1`] = `
 <div>
   <div
-    classnamex="[object Object],[object Object],[object Object]"
+    class="c b a"
+    data-trace="
+@media (min-width: 1024px).c { color:blue }
+@media (min-width: 640px) and (max-width: 1023px).b { color:green }
+@media (max-width: 639px).a { color:red }"
   >
     mobile (rendered: 1x)
   </div>
@@ -103,7 +119,11 @@ exports[`SHEETER $WIDTHS ## WEB ## 04 change width 02 use width flags and styles
 exports[`SHEETER $WIDTHS ## WEB ## 04 change width 02 use width flags and styles 2`] = `
 <div>
   <div
-    classnamex="[object Object],[object Object],[object Object]"
+    class="c b a"
+    data-trace="
+@media (min-width: 1024px).c { color:blue }
+@media (min-width: 640px) and (max-width: 1023px).b { color:green }
+@media (max-width: 639px).a { color:red }"
   >
     tablet (rendered: 2x)
   </div>
@@ -113,7 +133,11 @@ exports[`SHEETER $WIDTHS ## WEB ## 04 change width 02 use width flags and styles
 exports[`SHEETER $WIDTHS ## WEB ## 04 change width 02 use width flags and styles 3`] = `
 <div>
   <div
-    classnamex="[object Object],[object Object],[object Object]"
+    class="c b a"
+    data-trace="
+@media (min-width: 1024px).c { color:blue }
+@media (min-width: 640px) and (max-width: 1023px).b { color:green }
+@media (max-width: 639px).a { color:red }"
   >
     desktop (rendered: 3x)
   </div>

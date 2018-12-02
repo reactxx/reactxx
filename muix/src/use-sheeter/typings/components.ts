@@ -31,17 +31,17 @@ export namespace TComponents {
   export interface PropsLow<R extends TTyped.Shape> {
     $web?: Partial<TExtensions.getPropsWeb<R> & TTyped.getProps<R>> //web specific props
     $native?: Partial<TExtensions.getPropsNative<R> & TTyped.getProps<R>> //native specific props
-    classNameX?: TTyped.RulesetOrCreator<R>
-    styleX?: TTyped.StyleOrCreator<R>
+    css?: TTyped.RulesetOrCreator<R>
+    styles?: TTyped.StyleOrCreator<R>
     classes?: TTyped.PartialSheetOrCreator<R> // cross platform sheet
     themedProps?: (theme: TTyped.getTheme<R>) => Props<R>
   }
 
   /* cross platform styling props 
   the same props has: 
-  - react web HTML elements (e.g. <div classNameX={....}), 
-  - react native build in components (e.g. <Text styleX={...})
-  - custom components (e.g. <IconButton classNameX={...})
+  - react web HTML elements (e.g. <div css={....}), 
+  - react native build in components (e.g. <Text styles={...})
+  - custom components (e.g. <IconButton css={...})
   */
   export interface ReactsCommonProperties<R extends TTyped.Shape = TTyped.Shape> {
     css?: TEngine.Queryables

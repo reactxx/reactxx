@@ -11,7 +11,7 @@ import {
 
 export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, atomizedSheet: TEngine.Sheet, props: TComponents.Props) => {
     // from props
-    const { classes: _classes, classNameX: _classNameX, styleX: _styleX, themedProps, ...propsRest } = props as TComponents.Props
+    const { classes: _classes, css: _classNameX, styles: _styleX, themedProps, ...propsRest } = props as TComponents.Props
 
     // merge sheet with classes
     const classes = React.useMemo(() => {

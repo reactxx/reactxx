@@ -54,7 +54,7 @@ exports[`USE SHEETER ## NATIVE ## 06: with classes override 1`] = `
 </div>
 `;
 
-exports[`USE SHEETER ## NATIVE ## 07: with classNameX override 1`] = `
+exports[`USE SHEETER ## NATIVE ## 07: with css override 1`] = `
 <div>
   <div
     style="color: yellow;"
@@ -64,7 +64,7 @@ exports[`USE SHEETER ## NATIVE ## 07: with classNameX override 1`] = `
 </div>
 `;
 
-exports[`USE SHEETER ## NATIVE ## 08: with styleX override 1`] = `
+exports[`USE SHEETER ## NATIVE ## 08: with style override 1`] = `
 <div>
   <div
     style="color: maroon;"
@@ -264,7 +264,7 @@ exports[`USE SHEETER ## WEB ## 06: with classes override 1`] = `
 </div>
 `;
 
-exports[`USE SHEETER ## WEB ## 07: with classNameX override 1`] = `
+exports[`USE SHEETER ## WEB ## 07: with css override 1`] = `
 <div>
   <div
     class="d"
@@ -276,7 +276,7 @@ exports[`USE SHEETER ## WEB ## 07: with classNameX override 1`] = `
 </div>
 `;
 
-exports[`USE SHEETER ## WEB ## 08: with styleX override 1`] = `
+exports[`USE SHEETER ## WEB ## 08: with style override 1`] = `
 <div>
   <div
     class="d"

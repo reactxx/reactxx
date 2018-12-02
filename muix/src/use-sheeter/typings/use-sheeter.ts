@@ -12,12 +12,12 @@ export namespace TUseSheeter {
 
   // component type options
   export interface AuthorConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
-    defaultProps?: Partial<TComponents.Props<R>> // classes, classNameX and styleX ignored
+    defaultProps?: Partial<TComponents.Props<R>> // classes, css and styles are  ignored
     defaultSheet?: TTyped.SheetOrCreator<R>
   }
 
   export interface UserConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
-    overrideProps?: TComponents.Props<R> // classes, classNameX and styleX ignored
+    overrideProps?: TComponents.Props<R> // classes, css and styles are ignored
     overrideSheet?: TTyped.SheetOrCreator<R>
     myConfigId?: number // ComponentConfig.id
   }

@@ -1,9 +1,9 @@
-///** @jsx platform.createElement */
+/** @jsx platform.createElement */
 
 import React from 'react'
 
 import { TEngine } from 'reactxx-typings'
-import { atomizeRuleset, toClassNamesWithQuery, $width, useWidths, setActWidth } from "reactxx-sheeter"
+import { platform, atomizeRuleset, toClassNamesWithQuery, $width, useWidths, setActWidth } from "reactxx-sheeter"
 
 import { initPlatform, render } from "./init-platform.t"
 
