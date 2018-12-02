@@ -1,7 +1,7 @@
 import { initPlatform, dump } from "./init-platform.t"
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 
-import { getTypedEngine } from '../../use-sheeter/utils/typed'
+import { getTypedEngine } from '../utils/get-engine'
 
 interface Shape {
   theme: { primary }

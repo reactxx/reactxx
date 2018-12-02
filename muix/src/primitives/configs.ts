@@ -1,8 +1,9 @@
-import { TTyped, TUseSheeter } from 'reactxx-typings'
-import { TPrimitives } from './shapes'
-import { getTypedEngine } from 'reactxx-use-sheeter'
+import { TTyped, $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
+import { getTypedEngine } from 'reactxx-sheeter'
+import { TUseSheeter } from 'reactxx-use-sheeter'
 
-import { $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
+import { TPrimitives } from './shapes'
+
 
 export const hasPlatformEvents = (propsCode: TTyped.PropsCode) => !!(
   true

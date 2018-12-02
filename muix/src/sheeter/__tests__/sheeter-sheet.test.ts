@@ -1,5 +1,5 @@
 import { $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
-import { getTypedEngine } from '../../use-sheeter/utils/typed'
+import { getTypedEngine } from '../utils/get-engine'
 
 //import {  } from "reactxx-sheeter"
 import { initPlatform, Shape as ShapeLow, theme } from "./init-platform.t"

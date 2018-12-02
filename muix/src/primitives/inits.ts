@@ -1,6 +1,5 @@
-import { getComponentCreator } from "reactxx-use-sheeter"
+import { TUseSheeter, getComponentCreator } from "reactxx-use-sheeter"
 import { Platform, platform, resetPlatform } from 'reactxx-sheeter'
-import { TUseSheeter } from 'reactxx-typings'
 
 import { TPrimitives } from './shapes'
 import { textConfig, viewConfig, iconConfig, scrollViewConfig } from './configs'

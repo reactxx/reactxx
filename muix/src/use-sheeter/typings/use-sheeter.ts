@@ -1,6 +1,8 @@
-import { TComponents, TTyped } from './index';
+import { TTyped } from 'reactxx-typings';
+import { TComponents } from '../typings/components'
 
-declare namespace TUseSheeter {
+
+export namespace TUseSheeter {
 
   export interface ComponentConfigLow {
     // withCascaing?: boolean

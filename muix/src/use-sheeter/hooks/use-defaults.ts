@@ -1,9 +1,10 @@
 ﻿import React from 'react';
 import warning from 'warning'
 
-import { TUseSheeter, TEngine } from 'reactxx-typings';
 import { sheetFromThemeCache } from './use-theme';
-import { toEngineSheet } from '../utils/typed';
+import { toEngineSheet } from '../utils/from-engine';
+import { TUseSheeter } from '../typings/use-sheeter'
+
 
 export const useDefaults = (
     theme, options: TUseSheeter.AuthorConfig, displayName: string,

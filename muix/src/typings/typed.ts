@@ -1,8 +1,8 @@
-import React, { Children } from 'react';
+import React from 'react';
 import ReactN from 'react-native';
 import CSS from 'csstype';
 
-import { TCommonStyles, TEngine } from 'reactxx-typings'
+import { TCommonStyles, TEngine, TExtensions } from 'reactxx-typings'
 
 export type $W = '$W'; export type $T = '$T'; export type $V = '$V';
 export type $I = '$I'; export type V = 'V'; export type T = 'T'; export type I = 'I';
@@ -110,35 +110,23 @@ export namespace TTyped {
   //******************************************************
 
   // component shape
-  export interface Shape {
+  export interface Shape extends TExtensions.Shape {
     sheet?: Record<string, RulesetIds>
     className?: CommonIds
-    props?: EmptyInterface // common (web and native) props, excluding events
-    propsNative?: EmptyInterface // native only props 
-    propsWeb?: React.HTMLAttributes<Element>// web only props
     theme?: EmptyInterface
     sheetQuery?: EmptyInterface
-    staticProps?: EmptyInterface
-    events?: EmptyInterface // common events
+    props?: EmptyInterface // common (web and native) props, excluding events
   }
 
   // ancestor for Shape inheritance
-  export interface ShapeAncestor {
+  export interface ShapeAncestor extends TExtensions.Shape {
     sheet?: Record<string, RulesetIds>
     className?: CommonIds
     props?: EmptyInterface // common (web and native) props, excluding events
-    propsNative?: ReactN.ViewProperties
-    propsWeb?: React.DOMAttributes<Element>
     theme?: EmptyInterface
     sheetQuery?: EmptyInterface
-    staticProps: EmptyInterface
-    events?: EmptyInterface // common events
   }
 
-  export type getPropsWeb<R extends Shape> = R['propsWeb']
-  export type getPropsNative<R extends Shape> = R['propsNative']
-  export type getEvents<R extends Shape = Shape> = keyof R['events']
-  export type getStaticProps<R extends Shape = Shape> = keyof R['staticProps'] extends never ? FakeInterface : R['staticProps']
   export type getTheme<R extends Shape = Shape> = keyof R['theme'] extends never ? any : R['theme']
   export type getProps<R extends Shape> = R['props']
   export type getClassName<R extends Shape> = R['className']
@@ -153,7 +141,6 @@ export namespace TTyped {
     $sheetQuery?: getSheetQuery<R>
     children?: React.ReactNode
   }
-
 
   export interface EmptyInterface { }
   export interface FakeInterface { ['`']?: any }

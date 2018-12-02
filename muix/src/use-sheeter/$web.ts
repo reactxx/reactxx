@@ -1,9 +1,11 @@
 import React from 'react';
 
-import { TComponents, TEngine, TTyped } from 'reactxx-typings';
+import { TEngine, TTyped } from 'reactxx-typings';
 import { deleteSystemProps, platform } from 'reactxx-sheeter';
 
-import { isReactXXComponent } from './utils/typed';
+import { TComponents } from './typings/components'
+
+import { isReactXXComponent } from './utils/from-engine';
 
 
 export const createElement = (type, props: TComponents.ReactsCommonProperties & ReactsCommonPropertiesWeb, ...children) => {

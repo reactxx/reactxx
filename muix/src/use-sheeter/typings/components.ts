@@ -1,8 +1,26 @@
 ﻿import React from 'react';
-import { TEngine, TTyped, TExtensions } from './index';
+import { TEngine, TTyped, TExtensions } from 'reactxx-typings';
 
+declare module 'reactxx-typings' {
 
-declare namespace TComponents {
+  namespace TExtensions {
+
+    interface Shape {
+      propsNative?: TTyped.EmptyInterface // native only props 
+      propsWeb?: React.HTMLAttributes<Element>// web only props
+      staticProps?: TTyped.EmptyInterface
+      events?: TTyped.EmptyInterface // common events
+    }
+
+    type getPropsWeb<R extends Shape> = R['propsWeb']
+    type getPropsNative<R extends Shape> = R['propsNative']
+    type getEvents<R extends Shape = Shape> = keyof R['events']
+    type getStaticProps<R extends Shape = Shape> = keyof R['staticProps'] extends never ? TTyped.FakeInterface : R['staticProps']
+  
+  }
+}
+
+export namespace TComponents {
 
   //******************** Cross platform component props
   export type Props<R extends TTyped.Shape = TTyped.Shape> =
@@ -11,8 +29,8 @@ declare namespace TComponents {
     TEventsX<R>
 
   export interface PropsLow<R extends TTyped.Shape> {
-    $web?: Partial<TTyped.getPropsWeb<R> & TTyped.getProps<R>> //web specific props
-    $native?: Partial<TTyped.getPropsNative<R> & TTyped.getProps<R>> //native specific props
+    $web?: Partial<TExtensions.getPropsWeb<R> & TTyped.getProps<R>> //web specific props
+    $native?: Partial<TExtensions.getPropsNative<R> & TTyped.getProps<R>> //native specific props
     classNameX?: TTyped.RulesetOrCreator<R>
     styleX?: TTyped.StyleOrCreator<R>
     classes?: TTyped.PartialSheetOrCreator<R> // cross platform sheet
@@ -40,7 +58,7 @@ declare namespace TComponents {
   /******************************************
     EVENTS
   *******************************************/
-  export type TEventsX<R extends TTyped.Shape = TTyped.Shape> = PartialRecord<TTyped.getEvents<R>, MouseEventEx<R>>
+  export type TEventsX<R extends TTyped.Shape = TTyped.Shape> = PartialRecord<TExtensions.getEvents<R>, MouseEventEx<R>>
 
   export type TEventOnPress = 'onPress'
   export type TEventsAll = 'onPress' | 'onLongPress' | 'onPressIn' | 'onPressOut'

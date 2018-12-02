@@ -59,7 +59,7 @@ describe("USE SHEETER", () => {
         { defaultSheet: { root: { color: 'red' } } },
         { overrideSheet: { root: { color: 'green' } } }
       )
-      const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} />)
+      const wrapper = render(<Comp classes={{  }} />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })

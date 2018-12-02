@@ -1,7 +1,10 @@
 ﻿import React from 'react'
 import warning from 'warning'
-import { TTyped, TUseSheeter } from 'reactxx-typings';
+
 import { platform } from 'reactxx-sheeter'
+
+import { TTyped } from 'reactxx-typings';
+import { TUseSheeter } from '../typings/use-sheeter'
 
 export const useConfig = <R extends TTyped.Shape = TTyped.Shape>(
     authorConfig: TUseSheeter.AuthorConfig<R>,

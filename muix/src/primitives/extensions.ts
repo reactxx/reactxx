@@ -1,4 +1,4 @@
-import { TComponents, TUseSheeter } from 'reactxx-typings'
+import { TComponents, TUseSheeter } from 'reactxx-use-sheeter'
 import { TPrimitives } from './shapes'
 
 declare module 'reactxx-typings' {

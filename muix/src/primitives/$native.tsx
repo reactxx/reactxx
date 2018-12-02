@@ -8,8 +8,7 @@ import warning from 'warning'
 /** @jsx platform.createElement */
 
 import { platform } from 'reactxx-sheeter'
-import { TUseSheeter } from 'reactxx-typings'
-import { useSheeter } from "reactxx-use-sheeter"
+import { useSheeter, TUseSheeter } from "reactxx-use-sheeter"
 
 import { hasPlatformEvents } from './configs'
 import { TPrimitives } from './shapes'

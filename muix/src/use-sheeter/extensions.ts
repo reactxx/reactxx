@@ -1,4 +1,6 @@
-import { TEngine, TComponents } from 'reactxx-typings'
+import { TEngine } from 'reactxx-typings'
+import { TComponents } from './typings/components'
+
 
 /************************************TComponents******
   EXTEND REACT

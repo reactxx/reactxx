@@ -1,5 +1,7 @@
 ﻿import { platform, toClassNamesWithQuery, useForceUpdate, useUniqueId, useWidthsLow } from 'reactxx-sheeter';
-import { TComponents, TTyped, TUseSheeter } from 'reactxx-typings';
+import { TTyped } from 'reactxx-typings';
+import { TComponents } from '../typings/components'
+import { TUseSheeter } from '../typings/use-sheeter'
 import warning from 'warning';
 import { useConfig } from './use-config';
 import { useDefaults } from './use-defaults';

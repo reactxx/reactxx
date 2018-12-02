@@ -8,9 +8,10 @@ export * from './utils/use-unique-id'
 export * from './utils/merge'
 export * from './utils/wrap-pseudo-prefixes'
 
-export {atomizeSheet, atomizeRuleset, atomizeStyle} from './utils/atomize'
-export {toClassNamesWithQuery, deleteSystemProps} from './utils/to-classnames'
-export {adjustAtomizedLow, isToAtomizeArray} from './utils/atomize-low'
+export { atomizeSheet, atomizeRuleset, atomizeStyle } from './utils/atomize'
+export { toClassNamesWithQuery, deleteSystemProps } from './utils/to-classnames'
+export { adjustAtomizedLow, isToAtomizeArray } from './utils/atomize-low'
+export { getTypedEngine } from './utils/get-engine'
 
 
 import { init } from './$web'

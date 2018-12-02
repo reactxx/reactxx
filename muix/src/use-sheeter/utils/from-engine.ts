@@ -1,27 +1,4 @@
 import { TEngine, TTyped } from 'reactxx-typings';
-import { 
-    toClassNamesWithQuery, mergeRulesets, mergeSheets,atomizeRuleset, atomizeSheet, 
-    $width, $web, $native, $hot, $if, $ifelse 
-} from 'reactxx-sheeter'
-
-export const getTypedEngine = <R extends TTyped.Shape>() => untypedEngine as TTyped.TypedEngine<R>
-
-const untypedEngine = {
-    $web,
-    $native,
-    $hot,
-    $if,
-    $ifelse,
-    $width,
-    $themed: p => p,
-    $rules: (...p) => p,
-    $atomizeSheet: atomizeSheet as any,
-    $mergeSheets: mergeSheets as any,
-    $atomizeRuleset: atomizeRuleset as any,
-    $atomize: (...pars: any[]) => atomizeRuleset(pars, null, '$atomize'),
-    $mergeRulesets: mergeRulesets as any,
-    $toClassNames: toClassNamesWithQuery as any
-} as TTyped.TypedEngine<TTyped.Shape>
 
 export const fromEngineClassName = <R extends TTyped.Shape>(r: TEngine.RulesetOrCreator) => r as TTyped.ClassNameSimple<R>
 export const toEngineClassName = (r: TTyped.RulesetOrCreator) => r as TEngine.RulesetOrCreator

@@ -1,11 +1,14 @@
 ﻿import React from 'react';
 import { atomizeRuleset, atomizeSheet, atomizeStyle, mergeSheets, } from 'reactxx-sheeter';
-import { TComponents, TEngine, TTyped, TUseSheeter } from 'reactxx-typings';
+import { TEngine, TTyped } from 'reactxx-typings';
+import { TComponents } from '../typings/components'
+import { TUseSheeter } from '../typings/use-sheeter'
+
 
 import {
     fromEngineClassName, fromEngineSheet, toEngineClassName, toEngineSheet,
     fromEngineStyle, toEngineStyle
-} from '../utils/typed'
+} from '../utils/from-engine'
 
 export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, options: TUseSheeter.AuthorConfig, atomizedSheet: TEngine.Sheet, props: TComponents.Props) => {
     // from props

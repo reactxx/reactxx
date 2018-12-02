@@ -1,7 +1,7 @@
 ﻿export { default as useSheeter } from './hooks/use-sheeter'
 export { ThemeProvider, useTheme } from './hooks/use-theme'
 export * from './utils/get-component-creator'
-export * from './utils/typed'
+export * from './utils/from-engine'
 
 import { platform } from 'reactxx-sheeter'
 import { createElement } from './$native'
