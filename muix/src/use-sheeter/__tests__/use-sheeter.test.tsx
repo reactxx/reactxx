@@ -16,9 +16,9 @@ describe("USE SHEETER", () => {
       })
     })
 
-    it('01: config NULL', () => {
-      const Comp = compCreator(null, null)
-      const wrapper = render(<Comp />)
+    it('01: missing configs', () => {
+      const Comp = compCreator(null)
+      const wrapper = render(<Comp css={{margin: 20}}/>)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -29,7 +29,6 @@ describe("USE SHEETER", () => {
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
-
     it('03: just div', () => {
       const Comp = compCreator({ defaultSheet: { root: {} } }, null)
       const wrapper = render(<Comp />)
@@ -224,16 +223,9 @@ describe("USE SHEETER", () => {
       wrapper.unmount()
     })
 
-    it('22: missing configs', () => {
-      const Comp = compCreator(null)
-      const wrapper = render(<Comp css={{margin: 20}} styles={{color: 'blue', $web: {margin: 30}, $native: {margin: 40}}}/>)
-      expect(wrapper.container).toMatchSnapshot()
-      wrapper.unmount()
-    })
-
-    it.only('23: user config only', () => {
+    it('22: user config only', () => {
       const Comp = compCreator(null, { overrideSheet: { root: { color: 'red'} } })
-      const wrapper = render(<Comp css={{margin: 20}} styles={{$web: {margin: 30}, $native: {margin: 40}}}/>)
+      const wrapper = render(<Comp/>)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
