@@ -57,8 +57,10 @@ declare namespace TEngine {
   // Queryable item
   export type AtomicNative = string | number | __dev_AtomicNative
   export type AtomicNatives = Record<string, AtomicNative>
+
   // after applyLastWindowStrategy
   export type AtomicNativeLows = AtomicNatives
+
   // after finalizeClassNames
   export type AtomicNativeFinal = string | number
   export type AtomicNativeFinals = Record<string, AtomicNativeFinal>
@@ -72,28 +74,31 @@ declare namespace TEngine {
   // WEB
 
   // Queryable item
-  export type AtomicWeb = FelaWebCacheItem | __dev_AtomicWeb
+  export type AtomicWeb = FelaCacheItem | __dev_AtomicWeb
   export type AtomicWebs = AtomicWeb[]
+
   // after applyLastWindowStrategy
   export type AtomicWebLow = string | __dev_AtomicWeb
   export type AtomicWebLows = AtomicWebLow[]
+
   // after finalizeClassNames
   export type AtomicWebFinals = string
 
   export interface __dev_AtomicWeb {
     tracePath?: string
-    cache?: FelaWebCacheItem
+    cache?: FelaCacheItem
   }
-  export interface FelaWebCacheItem {
+  export interface FelaCacheItem {
     type: string
     className: string
-    id: number // unique integer ID
-    propId?: number
     selector: string
     declaration: string
     pseudo: string
     media: string
     support: string
+    // LM to FELA hack
+    id: number // unique integer ID
+    propId?: number
   }
 
 
