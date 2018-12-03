@@ -247,11 +247,14 @@ const lastWin = (_item: TEngine.AtomicWeb, res: { items?: TEngine.AtomicWebLow[]
     item = item.cache
 
   if (!item || !item.className) return
+
   if (!res.items) {
     res.items = []
     res.usedPropIds = []
   }
+
   if (res.usedPropIds[item.propId]) return
+  
   res.usedPropIds[item.propId] = true
   if (window.__TRACE__)
     res.items.push(_item as TEngine.__dev_AtomicWeb)

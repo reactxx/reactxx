@@ -2,39 +2,6 @@
 
 exports[`FELA ## NO TRACE ## 01  1`] = `
 "
-.a { color:red } @root
-.b { margin:10px } @root
-.c:hover { margin:5px } @root
-@media (min-width: 768px).d:hover { height:100px } @root
-@media (min-width: 768px).e:hover:active { width:700px } @root
-@media (min-width: 768px).f:hover:active { color:red } @root"
-`;
-
-exports[`FELA ## NO TRACE ## 02  1`] = `
-"
-.a { color:red } @root
-.b:hover { çolor:green } @root
-.c:hover:active { color:blue } @root"
-`;
-
-exports[`FELA ## NO TRACE ## 02  2`] = `
-"
-.d { color:maroon } @root
-.e:hover { çolor:black } @root
-.f:hover:active { color:white } @root"
-`;
-
-exports[`FELA ## NO TRACE ## 02  3`] = `
-"
-.a { color:red } @root
-.b:hover { çolor:green } @root
-.c:hover:active { color:blue } @root"
-`;
-
-exports[`FELA ## NO TRACE ## 02  4`] = `"a b c"`;
-
-exports[`FELA ## TRACE ## 01  1`] = `
-"
 a
 b
 c
@@ -43,25 +10,72 @@ e
 f"
 `;
 
-exports[`FELA ## TRACE ## 02  1`] = `
+exports[`FELA ## NO TRACE ## 02  1`] = `
 "
 a
 b
 c"
 `;
 
-exports[`FELA ## TRACE ## 02  2`] = `
+exports[`FELA ## NO TRACE ## 02  2`] = `
 "
 d
 e
 f"
 `;
 
-exports[`FELA ## TRACE ## 02  3`] = `
+exports[`FELA ## NO TRACE ## 02  3`] = `
 "
-a
-b
-c"
+f
+e
+d"
 `;
 
-exports[`FELA ## TRACE ## 02  4`] = `"a b c"`;
+exports[`FELA ## NO TRACE ## 02  4`] = `
+"
+c
+b
+a"
+`;
+
+exports[`FELA ## NO TRACE ## 02  5`] = `"c b a"`;
+
+exports[`FELA ## TRACE ## 01  1`] = `
+"
+.a { color:red } @root
+.b { margin:10px } @root
+.c:hover { margin:5px } @root
+@media (min-width: 768px).d:hover { height:100px } @root
+@media (min-width: 768px).e:hover:active { width:700px } @root
+@media (min-width: 768px).f:hover:active { color:red } @root"
+`;
+
+exports[`FELA ## TRACE ## 02  1`] = `
+"
+.a { color:red } @red-variant
+.b:hover { çolor:green } @red-variant
+.c:hover:active { color:blue } @red-variant"
+`;
+
+exports[`FELA ## TRACE ## 02  2`] = `
+"
+.d { color:maroon } @maroon-variant
+.e:hover { çolor:black } @maroon-variant
+.f:hover:active { color:white } @maroon-variant"
+`;
+
+exports[`FELA ## TRACE ## 02  3`] = `
+"
+.f:hover:active { color:white } @maroon-variant
+.e:hover { çolor:black } @maroon-variant
+.d { color:maroon } @maroon-variant"
+`;
+
+exports[`FELA ## TRACE ## 02  4`] = `
+"
+.c:hover:active { color:blue } @red-variant
+.b:hover { çolor:green } @red-variant
+.a { color:red } @red-variant"
+`;
+
+exports[`FELA ## TRACE ## 02  5`] = `"c b a"`;
