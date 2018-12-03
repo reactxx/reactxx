@@ -4,9 +4,8 @@ import { toEngineClassName } from 'reactxx-use-sheeter';
 
 export interface Platform extends TExtensions.Platform {
     toPlatformAtomizeRuleset?: TEngine.ToPlatformAtomizeRuleset
-    dataTrace?: (classNames: TEngine.AtomicArrayAll, flags?: TraceFlags) => any,
     applyLastwinsStrategy?: TEngine.ApplyLastwinsStrategy
-    finalizeClassName?: (values: TEngine.AtomicArrayLow) => TEngine.AtomicFinal
+    finalizeClassName?: (values: TEngine.AtomicLow) => TEngine.AtomicFinal
     getDefaultTheme?: () => any
 }
 

@@ -52,7 +52,7 @@ export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: TE
     for (const r of items) process(r)
     //items.forEach(r => process(r))
 
-    return values.length === 0 ? null : wrapRuleset(values)
+    return values.length === 0 ? null : wrapRuleset(values) as TEngine.WithConflicts
 }
 
 export const deleteSystemProps = (props: TComponents.ReactsCommonProperties & TTyped.PropsCode) => {

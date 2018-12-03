@@ -16,9 +16,9 @@ Array [
 
 exports[`SHEETER HOT ## NATIVE ## 03 just $hot 1`] = `
 Array [
-  Array [
-    "color: green @[0]",
-  ],
+  Object {
+    "color": "green @[0]",
+  },
   "DEFFERED",
 ]
 `;

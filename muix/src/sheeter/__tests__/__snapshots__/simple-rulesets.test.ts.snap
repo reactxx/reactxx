@@ -8,72 +8,72 @@ exports[`SHEETER SIMPLE RULESET ## NATIVE ## 03 ([null, undefined, {}]) 1`] = `n
 
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 04 ({ color: 'red', margin: 0 }) 1`] = `
 Array [
-  Array [
-    "color: red @",
-    "margin: 0 @",
-  ],
+  Object {
+    "color": "red @",
+    "margin": "0 @",
+  },
 ]
 `;
 
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 05 ([{ color: 'red' }, { margin: 0 }]) 1`] = `
 Array [
-  Array [
-    "color: red @[0]",
-  ],
-  Array [
-    "margin: 0 @[1]",
-  ],
+  Object {
+    "color": "red @[0]",
+  },
+  Object {
+    "margin": "0 @[1]",
+  },
 ]
 `;
 
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 06 (...$web: { color: 'green' }, $native: { color: 'blue' }) 1`] = `
 Array [
-  Array [
-    "color: red @[0]",
-  ],
-  Array [
-    "color: blue @[2]/$native",
-  ],
+  Object {
+    "color": "red @[0]",
+  },
+  Object {
+    "color": "blue @[2]/$native",
+  },
 ]
 `;
 
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 07 atomizeRuleset(atomizeRuleset({color: 'red' 1`] = `
 Array [
-  Array [
-    "color: red @",
-  ],
+  Object {
+    "color": "red @",
+  },
 ]
 `;
 
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 08 atomizeRuleset({$web: atomizeRuleset({ :hover color: 'red', $native: atomizeRuleset({ color: 'green' 1`] = `
 Array [
-  Array [
-    "color: green @",
-  ],
+  Object {
+    "color": "green @",
+  },
 ]
 `;
 
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 11 with theme 1`] = `
 Array [
-  Array [
-    "color: white @[0]",
-    "backgroundColor: darkgreen @[0]",
-  ],
-  Array [
-    "color: black @[2]/$native",
-    "backgroundColor: lightblue @[2]/$native",
-  ],
+  Object {
+    "backgroundColor": "darkgreen @[0]",
+    "color": "white @[0]",
+  },
+  Object {
+    "backgroundColor": "lightblue @[2]/$native",
+    "color": "black @[2]/$native",
+  },
 ]
 `;
 
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 12 ATOMIZE modifies source object 1`] = `
 Array [
-  Array [
-    "color: blue @[0]",
-  ],
-  Array [
-    "color: green @[2]/$native",
-  ],
+  Object {
+    "color": "blue @[0]",
+  },
+  Object {
+    "color": "green @[2]/$native",
+  },
 ]
 `;
 
@@ -89,9 +89,9 @@ Array [
 
 exports[`SHEETER SIMPLE RULESET ## NATIVE ## 15 just $hot 1`] = `
 Array [
-  Array [
-    "color: green @[0]",
-  ],
+  Object {
+    "color": "green @[0]",
+  },
   "DEFFERED",
 ]
 `;

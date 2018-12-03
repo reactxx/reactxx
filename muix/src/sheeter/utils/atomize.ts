@@ -39,7 +39,10 @@ export const wrapRuleset = ruleset => {
     return ruleset as TEngine.Queryables
 }
 function toJSON() {
-    return (this as TEngine.Queryables).map(v => isDeferred(v) ? 'DEFFERED' : [...v])
+    return (this as TEngine.Queryables).map(v => {
+        if (isDeferred(v)) return 'DEFFERED'
+        return v
+    })
 }
 
 // muttable (at least for native)

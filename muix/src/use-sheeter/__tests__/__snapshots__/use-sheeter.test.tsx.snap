@@ -197,7 +197,7 @@ exports[`USE SHEETER ## NATIVE ## 20: style 1`] = `
 exports[`USE SHEETER ## NATIVE ## 21: style with classes 1`] = `
 <div>
   <div
-    style="margin: 40px; color: blue;"
+    style="color: blue; margin: 40px;"
   >
     1
   </div>

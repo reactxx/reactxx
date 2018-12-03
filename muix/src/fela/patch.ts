@@ -9,7 +9,7 @@ import warning = require('warning');
 export interface IRendererEx extends IRenderer {
   renderRuleEx(style: {}, tracePath?: string): TEngine.AtomicWebs
   lastWin(item: TEngine.AtomicWeb, res: { items?: TEngine.AtomicWebLow[] })
-  finalizeClassName: (lastWinResult: TEngine.AtomicWebsLow) => TEngine.AtomicWebFinal
+  finalizeClassName: (lastWinResult: TEngine.AtomicWebLows) => TEngine.AtomicWebFinals
   //propIdCache: {}
   //trace: {}
   cache: Cache
@@ -214,7 +214,7 @@ interface Values {
 let valueIdCounter = 0
 let itemIdCounter = 0
 
-export const dump = (c: TEngine.AtomicWebAll, short?: boolean) => {
+export const dump = (c: TEngine.AtomicWeb | TEngine.AtomicWebLow, short?: boolean) => {
   if (!c) return
   if (window.__TRACE__) {
     const { cache: { selector, declaration, media, support }, tracePath } = c as TEngine.__dev_AtomicWeb
@@ -262,10 +262,10 @@ const lastWin = (_item: TEngine.AtomicWeb, res: { items?: TEngine.AtomicWebLow[]
     res.items.push(item.className)
 }
 
-const finalizeClassName = (lastWinResult: TEngine.AtomicWebsLow) => {
+const finalizeClassName = (lastWinResult: TEngine.AtomicWebLows) => {
   if (!lastWinResult) return undefined
   if (window.__TRACE__) {
     lastWinResult = lastWinResult.map((r: TEngine.__dev_AtomicWeb) => r.cache.className) as any
   }
-  return lastWinResult.join(' ') as TEngine.AtomicWebFinal
+  return lastWinResult.join(' ') as TEngine.AtomicWebFinals
 }

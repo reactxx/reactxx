@@ -20,7 +20,6 @@ export const init = () => {
     },
 
     toPlatformAtomizeRuleset: platform.renderer.renderRuleEx,
-    dataTrace: Fela.dataTrace,
     applyLastwinsStrategy,
     finalizeClassName: platform.renderer.finalizeClassName,
   })
@@ -35,45 +34,19 @@ const onWidthChanged = () => {
   }, 1)
 }
 
-// const finalizeClassName = (lastWinResult: TEngine.AtomicWebsLow) => {
-//     if (!lastWinResult) return undefined
-//     if (window.__TRACE__) {
-//       lastWinResult = lastWinResult.map((r: TEngine.__dev_AtomicWeb) => r.cache.className) as any
-//     }
-//     return lastWinResult.join(' ')
-//   }
-
 // apply LAST WIN strategy for web className
-const applyLastwinsStrategy: TEngine.ApplyLastwinsStrategy = (values: TEngine.Queryables) => {
+const applyLastwinsStrategy: TEngine.ApplyLastwinsStrategy = (values: TEngine.AtomicWebs[]) => {
+
   if (!values) return null
-
   const { renderer } = platform
-
-  const res: { items?: TEngine.AtomicWebLow[] } = {}
-  const usedPropIds: { [propId: string]: boolean } = {}
+  const res: { items?: TEngine.AtomicWebLows } = {}
 
   for (let i = values.length - 1; i >= 0; i--) {
-    const valuesi = values[i] as TEngine.AtomicWebs
+    const valuesi = values[i]
     if (!valuesi) continue
     for (let k = valuesi.length - 1; k >= 0; k--)
       renderer.lastWin(valuesi[k], res)
-    //   let value = values[i] && values[i][k]
-    //   if (!value) continue
-    //   if (Array.isArray(value)) {
-    //     throw 'WHAT IS THIS CODE?'
-    //     Array.prototype.push.apply(res, value)
-    //     continue
-    //   }
-    //   let className: string = value as string
-    //   if (window.__TRACE__) {
-    //     className = (value as TEngine.__dev_AtomicWeb).cache.className
-    //   }
-    //   const propId = renderer.propIdCache[className]
-    //   if (!propId || usedPropIds[propId])
-    //     continue
-    //   res.push(value as TEngine.AtomicWeb)
-    //   usedPropIds[propId] = true
   }
 
-  return res.items as TEngine.AtomicArrayLow
+  return res.items as TEngine.AtomicLow
 }

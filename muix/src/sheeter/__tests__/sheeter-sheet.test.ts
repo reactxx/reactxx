@@ -100,10 +100,10 @@ describe("SHEET", () => {
     })
     it("11 sheet source mutated", () => {
       const sheetSource: any = {
-        root: {
-          backgroundColor: 'red',
-          $web: { color: 'green' }
-        }
+        root: [
+          { backgroundColor: 'red' },
+          $web<V>({ color: 'green' })
+        ]
       }
       expect(sheetSource).toMatchSnapshot()
       sheet = $atomizeSheet(sheetSource)

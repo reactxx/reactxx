@@ -33,11 +33,13 @@ export const makeTemporary = (proc: TEngine.TempProc) => {
 //*******************************************************
 //        processTree
 export const processTree = (
-    value: TEngine.Ruleset | TEngine.Ruleset[], atomizedVariants: TEngine.QueryableItems,
+    value: TEngine.Rulesets, atomizedVariants: TEngine.QueryableItems,
     path: string, pseudoPrefixes: string[], conditions: TEngine.Conditions
 ) => {
-    const items = isToAtomizeArray(value) ? value : [value]
+
     const indexToPath = (idx: number) => items.length <= 1 ? '' : `[${idx}]`
+
+    const items = isToAtomizeArray(value) ? value : [value]
     items.forEach((it, idx) => {
         if (!it) return
         if (isTemporary(it)) {
@@ -48,10 +50,13 @@ export const processTree = (
             if (pseudoPrefixes && pseudoPrefixes.length > 0)
                 throw 'Web pseudo properties cannot contain already atomized value'
             for (const itt of it) {
+                if (isDeferred(itt))
+                    throw 'isDeferred(itt)'
                 if (!conditions || conditions.length === 0) //... and no conditions => done
                     pushToAtomizedVariants(atomizedVariants, itt, null)
                 else { // ... and conditions => merge conditions
-                    pushToAtomizedVariants(atomizedVariants, [...itt],
+                    const ittCopy = Array.isArray(itt) ? [...itt] : {...itt}
+                    pushToAtomizedVariants(atomizedVariants, ittCopy,
                         itt.conditions ? [...conditions, ...itt.conditions] : conditions)
                 }
             }
@@ -84,15 +89,17 @@ const processPseudosAndAtomize = (
     // process and remove conditional parts of self and web pseudo (e.g. :hover etc.)
     // push them to 'inner'
     for (const p in ruleset) {
-        const value = ruleset[p] as TEngine.ToAtomize
-        if (!value || p.charAt(0) === '$' || (typeof value !== 'object' && !isTemporary(value))) continue
-        processTree(value, inner, `${path}/${p}`, [...pseudoPrefixes, p], conditions)
-        delete ruleset[p]
+        const value = ruleset[p] as TEngine.Rulesets
+        if (!value || p.charAt(0) === '$') continue
+        if (typeof value === 'object' || isTemporary(value)) { // temporary, deffered, toAtomize, atomized
+            processTree(value, inner, `${path}/${p}`, [...pseudoPrefixes, p], conditions)
+            delete ruleset[p]
+        }
     }
 
-    // atomize pure ruleset tree with pseudo (and without all conditions, deffer's etc.),
+    // atomize pure ruleset tree with pseudo (and without temporary, deffer's etc.),
     // then push to result
-    atomizeNonVariant(atomizedVariants, wrapPseudoPrefixes(ruleset, pseudoPrefixes), conditions, path)
+    atomizePure(atomizedVariants, wrapPseudoPrefixes(ruleset, pseudoPrefixes), conditions, path)
 
     // push 'inner' to result
     if (inner.length > 0)
@@ -111,17 +118,18 @@ const pushToAtomizedVariants = (
     atomizedVariants.push(variant)
 }
 
-const atomizeNonVariant = (
-    atomizedVariants: TEngine.QueryableItems, sourceRuleset: TEngine.Rulesets,
+const atomizePure = (
+    atomizedVariants: TEngine.QueryableItems, pureRuleset: TEngine.ToAtomize,
     conditions: TEngine.Conditions, path: string
 ) => {
-    if (!sourceRuleset) return
-    if (isDeferred(sourceRuleset)) {
-        atomizedVariants.push(sourceRuleset)
+    if (!pureRuleset) return
+    if (isDeferred(pureRuleset)) {
+        throw 'something wrong'
+        atomizedVariants.push(pureRuleset)
         return
     }
     // platform specific atomize: e.g. for WEB convert ruleset to list of atomized CSS classes
-    const variant = platform.toPlatformAtomizeRuleset(sourceRuleset, path)
+    const variant = platform.toPlatformAtomizeRuleset(pureRuleset, path)
     pushToAtomizedVariants(atomizedVariants, variant, conditions)
 }
 

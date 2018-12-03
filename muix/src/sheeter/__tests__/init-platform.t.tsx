@@ -79,7 +79,8 @@ export const dump = (ruleset: TEngine.Queryables | any) => {
     expect(ruleset).toMatchSnapshot()
     const won = platform.applyLastwinsStrategy(ruleset)
     expect(won).toMatchSnapshot()
-    expect(platform.finalizeClassName(won)).toMatchSnapshot()
+    const final = platform.finalizeClassName(won)
+    expect(final).toMatchSnapshot()
 }
 
 export const afterLastWin = (ruleset) => {

@@ -2,25 +2,25 @@
 
 exports[`SHEETER $WIDTHS ## NATIVE ## 01 empty 1`] = `
 Array [
-  Array [
-    "color: green @[0]",
-  ],
+  Object {
+    "color": "green @[0]",
+  },
 ]
 `;
 
 exports[`SHEETER $WIDTHS ## NATIVE ## 02 simple 1`] = `
 Array [
-  Array [
-    "color: red @/$width",
-  ],
+  Object {
+    "color": "red @/$width",
+  },
 ]
 `;
 
 exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesWithQuery's width change 01: native, 300 1`] = `
 Array [
-  Array [
-    "color: red @/$width",
-  ],
+  Object {
+    "color": "red @/$width",
+  },
 ]
 `;
 
@@ -41,9 +41,9 @@ Object {
 
 exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesWithQuery's width change 02: native, 640 1`] = `
 Array [
-  Array [
-    "color: green @/$width",
-  ],
+  Object {
+    "color": "green @/$width",
+  },
 ]
 `;
 
@@ -64,9 +64,9 @@ Object {
 
 exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesWithQuery's width change 03: native, 1024 1`] = `
 Array [
-  Array [
-    "color: blue @/$width",
-  ],
+  Object {
+    "color": "blue @/$width",
+  },
 ]
 `;
 

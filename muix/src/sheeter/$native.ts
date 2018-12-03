@@ -11,70 +11,62 @@ export const init = () => assignPlatform({
     actWidth: () => Dimensions ? Dimensions.get('window').width : 0,
 
     toPlatformAtomizeRuleset: (style, tracePath) => {
-        const res: TEngine.AtomicNatives = []
-        if (!style) return res
-        for (const propId in style) {
-            if (propId.charAt(0) === '$') continue
-            const at = {
-                propId,
-                value: window.__TRACE__ ? { tracePath, value: style[propId] } : style[propId]
-            } as TEngine.AtomicNative
-            if (window.__TRACE__) {
-                at['toJSON'] = toJSON.bind(at)
+        if (!style) return null
+        if (window.__TRACE__) {
+            const res = { ...style } as TEngine.AtomicNatives
+            let empty = true
+            for (const p in res) {
+                if (p.charAt(0) === '$') continue
+                empty = false
+                res[p] = { tracePath, value: style[p] }
             }
-            res.push(at)
-        }
-        return res.length === 0 ? null : res
-    },
-    dataTrace: (ruleset, flags = 'long') => {
-        //if (!ruleset || Array.isArray(ruleset) || !(typeof ruleset === 'object')) return ruleset
-        if (!ruleset) return ''
-        const res = []
-        for (const p in ruleset) {
-            const val = ruleset[p] as TEngine.__dev_AtomicNative
-            if (typeof val === 'undefined' || !window.__TRACE__ || flags === 'short') continue
-
-            res.push(`${p} @${val.tracePath}`)
-        }
-        return res.length > 0 ? '\n'+ res.join('\n') : ''
+            if (empty) return null
+            res['toJSON'] = toJSON.bind(res)
+            return res
+        } else
+            return style as TEngine.AtomicNatives
     },
     applyLastwinsStrategy,
     finalizeClassName,
 })
 
 function toJSON() {
-    return `${this.propId}: ${this.value.value} @${this.value.tracePath}`
+    const res = { ...this }
+    delete res['toJSON']
+    delete res['conditions']
+    for (const p in res) {
+        const val = this[p] as TEngine.__dev_AtomicNative
+        res[p] = `${val.value} @${val.tracePath}`
+    }
+    return res
 }
 
-const finalizeClassName = (lastWinResult: TEngine.AtomicNativeLow) => {
+const finalizeClassName = (lastWinResult: TEngine.AtomicNativeLows) => {
     if (!lastWinResult) return undefined
     if (window.__TRACE__) {
-      const res = {}
-      for (const p in lastWinResult) res[p] = (lastWinResult[p] as TEngine.__dev_AtomicNative).value
-      return res
-    }
-    return lastWinResult
-  }
-  
-  const applyLastwinsStrategy: TEngine.ApplyLastwinsStrategy = values => {
-    if (!values) return null
-    const res: TEngine.NativeStyle = {}
-    for (let i = values.length - 1; i >= 0; i--) {
-      const vals = values[i] as any[]
-      if (!vals) continue
-      for (let k = vals.length - 1; k >= 0; k--) {
-        let value = vals[k]
-        if (!value) continue
-        if (Array.isArray(value)) {
-          Array.prototype.push.apply(res, value)
-          continue
+        const res = {}
+        for (const p in lastWinResult) {
+            if (p === 'conditions' || p === 'toJSON') continue
+            const val = lastWinResult[p] as TEngine.__dev_AtomicNative
+            res[p] = val.value
         }
-        // last win strategy
-        if (typeof res[value.propId] !== 'undefined') continue
-        res[value.propId] = value.value
-      }
+        return res
     }
-    return res as TEngine.AtomicArrayLow
-  }
-  
-  
+    // TODO
+    return lastWinResult as any as TEngine.AtomicWebFinals
+}
+
+function toJSON2() {
+    const {conditions, toJSON, ...rest} = this
+    return rest
+}
+
+const applyLastwinsStrategy: TEngine.ApplyLastwinsStrategy = (values: TEngine.AtomicNatives[]) => {
+    if (!values) return null
+    const res = Object.assign.apply({}, values) as TEngine.AtomicLow
+    if (window.__TRACE__)
+        for (const p in res) delete res['toJSON']
+    res['toJSON'] = toJSON2.bind(res)
+    return res
+}
+

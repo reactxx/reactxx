@@ -14,21 +14,21 @@ exports[`TO CLASSNAMES ## NATIVE ## 02: null, {}, undefined 3`] = `undefined`;
 
 exports[`TO CLASSNAMES ## NATIVE ## 03: mixed 1`] = `
 Array [
-  Array [
-    "color: red @$atomize",
-  ],
-  Array [
-    "color: blue @$atomize[0]",
-  ],
-  Array [
-    "color: yellow @$atomize[1]",
-  ],
-  Array [
-    "color: maroon @/$if",
-  ],
-  Array [
-    "color: green @$atomize",
-  ],
+  Object {
+    "color": "red @$atomize",
+  },
+  Object {
+    "color": "blue @$atomize[0]",
+  },
+  Object {
+    "color": "yellow @$atomize[1]",
+  },
+  Object {
+    "color": "maroon @/$if",
+  },
+  Object {
+    "color": "green @$atomize",
+  },
 ]
 `;
 
@@ -49,9 +49,9 @@ Object {
 
 exports[`TO CLASSNAMES ## NATIVE ## 04: query => opened 1`] = `
 Array [
-  Array [
-    "color: red @/$if",
-  ],
+  Object {
+    "color": "red @/$if",
+  },
 ]
 `;
 
@@ -72,9 +72,9 @@ Object {
 
 exports[`TO CLASSNAMES ## NATIVE ## 05: query => closed 1`] = `
 Array [
-  Array [
-    "color: blue @/$if",
-  ],
+  Object {
+    "color": "blue @/$if",
+  },
 ]
 `;
 
@@ -95,9 +95,9 @@ Object {
 
 exports[`TO CLASSNAMES ## NATIVE ## 06: query => closed => pre-atomized 1`] = `
 Array [
-  Array [
-    "color: blue @$atomize[1]/$if",
-  ],
+  Object {
+    "color": "blue @$atomize[1]/$if",
+  },
 ]
 `;
 
@@ -118,9 +118,9 @@ Object {
 
 exports[`TO CLASSNAMES ## NATIVE ## 07: query => closed => pre-queried 1`] = `
 Array [
-  Array [
-    "color: blue @/$if",
-  ],
+  Object {
+    "color": "blue @/$if",
+  },
 ]
 `;
 
@@ -141,12 +141,12 @@ Object {
 
 exports[`TO CLASSNAMES ## NATIVE ## 08: static if and ifelse 1`] = `
 Array [
-  Array [
-    "color: grey @/$sif",
-  ],
-  Array [
-    "backgroundColor: blue @/$ifelse-true",
-  ],
+  Object {
+    "color": "grey @/$sif",
+  },
+  Object {
+    "backgroundColor": "blue @/$ifelse-true",
+  },
 ]
 `;
 
@@ -172,9 +172,9 @@ Object {
 
 exports[`TO CLASSNAMES ## NATIVE ## 08: static if and ifelse 4`] = `
 Array [
-  Array [
-    "backgroundColor: green @/$ifelse-false",
-  ],
+  Object {
+    "backgroundColor": "green @/$ifelse-false",
+  },
 ]
 `;
 

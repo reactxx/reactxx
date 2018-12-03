@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Fela from 'reactxx-fela'
 import { TEngine, TTyped } from 'reactxx-typings';
 import { deleteSystemProps, platform } from 'reactxx-sheeter';
 
@@ -24,11 +25,11 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   const { css, styles } = props
 
   if (css) {
-    let lastWinResult = platform.applyLastwinsStrategy(css as any) as TEngine.AtomicWebsLow
+    let lastWinResult = platform.applyLastwinsStrategy(css as any) as TEngine.AtomicWebLows
     const className = platform.finalizeClassName(lastWinResult) as string
     props.className = props.className ? className + ' ' + props.className : className
     if (window.__TRACE__)
-      props['data-trace'] = platform.dataTrace(lastWinResult, window.__TRACE__.dataTraceFlag)
+      props['data-trace'] = dataTrace(lastWinResult, window.__TRACE__.dataTraceFlag)
   }
 
   if (styles) {
@@ -39,6 +40,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
   return React.createElement(type, props, ...children)
 }
 
+const dataTrace = Fela.dataTrace
 interface ReactsCommonPropertiesWeb {
   className?: string
   styleX?: TTyped.StyleSimple
