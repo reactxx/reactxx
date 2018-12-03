@@ -6,6 +6,7 @@ import { TComponents } from './typings/components'
 import { toEngineClassName, fromEngineStyle } from './utils/from-engine'
 import { isReactXXComponent } from './utils/from-engine';
 import warning = require('warning');
+import { isObject } from 'util';
 
 
 export const createElement = (type, props: TComponents.ReactsCommonProperties & ReactsCommonPropertiesNative, ...children) => {
@@ -20,7 +21,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 
   const { css, styles } = props
 
-  warning(!styles, 'Use styles prop during component rendering (in native component is ignored)')
+  //warning(!styles, 'Use styles prop during component rendering (in native component is ignored)')
 
   if (css) {
     // let style =
@@ -29,6 +30,7 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
     //     : css
     let reduced = platform.applyLastwinsStrategy(css as any) as TEngine.AtomicNativeLow
     props.style = platform.finalizeClassName(reduced) as TEngine.AtomicNativeLow
+    if (styles) Object.assign(props.style, styles)
     if (window.__TRACE__)
       props['data-trace'] = platform.dataTrace(reduced, window.__TRACE__.dataTraceFlag)
   }

@@ -38,7 +38,7 @@ export const useWidthsLow = (
     })
 
     React.useLayoutEffect(() => { // call on unmount only
-        return () => widthStore.register(uniqueId) // unmount => unregister
+        return () => widthStore.register(uniqueId, null) // unmount => unregister
     }, [])
 
     const actWidth = widthStore.actWidth
@@ -47,7 +47,7 @@ export const useWidthsLow = (
         if (window.__TRACE__) {
             let last = 0
             for (const b of mapBreakpoints) {
-                if (b <= last) throw 'useWidths argument error: array of increasing numbers (greater than zero) expected'
+                if (b <= last) throw 'getWidthMap argument error: array of increasing numbers (greater than zero) expected'
                 last = b + 1
             }
         }
@@ -60,7 +60,6 @@ export const useWidthsLow = (
         const res: boolean[] = []
         res[found] = true
         return res
-
     }
     return { getWidthMap, breakpoints, actWidth }
 }
@@ -88,7 +87,7 @@ export class WidthStore {
         listener.forceUpdate(null)
     }
 
-    register(id: number, listener?) {
+    register(id: number, listener) {
         if (listener) return this.listeners[id] = listener // REGISTER
         else delete this.listeners[id] // UNREGISTER
     }

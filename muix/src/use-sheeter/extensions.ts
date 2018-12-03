@@ -19,11 +19,11 @@ declare module 'react' {
   EXTEND REACT NATIVE
 *******************************************/
 declare module 'react-native' {
-    interface ViewProperties extends TComponents.ReactsCommonPropertiesLow<V> {
+    interface ViewProperties extends TComponents.ReactsCommonProperties<V> {
     }
-    interface TextProperties extends TComponents.ReactsCommonPropertiesLow<T> {
+    interface TextProperties extends TComponents.ReactsCommonProperties<T> {
     }
-    interface ImageProperties extends TComponents.ReactsCommonPropertiesLow<I> {
+    interface ImageProperties extends TComponents.ReactsCommonProperties<I> {
     }
 }
 
@@ -31,7 +31,7 @@ declare module 'react-native' {
   EXTEND 
 *******************************************/
 declare module '@expo/vector-icons' {
-    interface BaseIconProps extends TComponents.ReactsCommonPropertiesLow<T>, TextProperties {
+    interface BaseIconProps extends TComponents.ReactsCommonProperties<T>, TextProperties {
     }
 }
 

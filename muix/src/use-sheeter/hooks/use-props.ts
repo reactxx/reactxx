@@ -9,28 +9,28 @@ import {
     fromEngineStyle, toEngineStyle
 } from '../utils/from-engine'
 
-export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, atomizedSheet: TEngine.Sheet, props: TComponents.Props) => {
+export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, sheet: TEngine.Sheet, props: TComponents.Props) => {
     // from props
-    const { classes: _classes, css: _classNameX, styles: _styleX, themedProps, ...propsRest } = props as TComponents.Props
+    const { classes: _classes, css: _css, styles: _styles, themedProps, ...propsRest } = props as TComponents.Props
 
     // merge sheet with classes
     const classes = React.useMemo(() => {
         const classes = atomizeSheet(toEngineSheet(_classes), theme, 'classes')
-        return fromEngineSheet<R>(mergeSheets([atomizedSheet, classes]))
+        return fromEngineSheet<R>(mergeSheets([sheet, classes]))
     }, [theme, _classes])
 
-    // classNameX
+    // css
     const css = React.useMemo(
         () => fromEngineClassName<R>
             (atomizeRuleset(
-                toEngineClassName(_classNameX),
+                toEngineClassName(_css),
                 theme,
                 'classes'
             )),
-        [_classNameX, theme])
+        [_css, theme])
 
-    // styleX
-    const styles = React.useMemo(() => fromEngineStyle<R>(atomizeStyle(toEngineStyle(_styleX), theme)), [_styleX])
+    // styles
+    const styles = React.useMemo(() => fromEngineStyle<R>(atomizeStyle(toEngineStyle(_styles), theme)), [_styles])
 
     return { classes, css, styles, propsRest, themedProps }
 

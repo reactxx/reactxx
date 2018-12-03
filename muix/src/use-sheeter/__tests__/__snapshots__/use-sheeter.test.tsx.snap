@@ -204,6 +204,26 @@ exports[`USE SHEETER ## NATIVE ## 21: style with classes 1`] = `
 </div>
 `;
 
+exports[`USE SHEETER ## NATIVE ## 22: missing configs 1`] = `
+<div>
+  <div
+    style="margin: 40px; color: blue;"
+  >
+    1
+  </div>
+</div>
+`;
+
+exports[`USE SHEETER ## NATIVE ## 23: user config only 1`] = `
+<div>
+  <div
+    style="margin: 40px; color: red;"
+  >
+    1
+  </div>
+</div>
+`;
+
 exports[`USE SHEETER ## WEB ## 01: config NULL 1`] = `
 <div>
   <div>
@@ -428,6 +448,33 @@ exports[`USE SHEETER ## WEB ## 21: style with classes 1`] = `
 .b { margin:20px }
 .a { color:red }"
     style="color: blue; margin: 30px;"
+  >
+    1
+  </div>
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 22: missing configs 1`] = `
+<div>
+  <div
+    class="a"
+    data-trace="
+.a { margin:20px }"
+    style="color: blue; margin: 30px;"
+  >
+    1
+  </div>
+</div>
+`;
+
+exports[`USE SHEETER ## WEB ## 23: user config only 1`] = `
+<div>
+  <div
+    class="b a"
+    data-trace="
+.b { margin:20px }
+.a { color:red }"
+    style="margin: 30px;"
   >
     1
   </div>

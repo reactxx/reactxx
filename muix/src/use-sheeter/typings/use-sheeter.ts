@@ -7,7 +7,7 @@ export namespace TUseSheeter {
   export interface ComponentConfigLow {
     // withCascaing?: boolean
     //------
-    id?: number // generated in useSheeter
+    id?: number // unique component id. Generated in useSheeter
   }
 
   // component type options

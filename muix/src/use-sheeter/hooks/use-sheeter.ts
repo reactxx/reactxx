@@ -1,4 +1,5 @@
-﻿import { platform, toClassNamesWithQuery, useForceUpdate, useUniqueId, useWidthsLow } from 'reactxx-sheeter';
+﻿import React from 'react'
+import { platform, toClassNamesWithQuery, useForceUpdate, useUniqueId, useWidthsLow } from 'reactxx-sheeter';
 import { TTyped } from 'reactxx-typings';
 import { TComponents } from '../typings/components'
 import { TUseSheeter } from '../typings/use-sheeter'
@@ -17,8 +18,6 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
 
     const config = useConfig(authorConfig, userConfig)
 
-    warning(config === authorConfig || config === userConfig, '!(config===authorConfig || authorConfig===userConfig)')
-
     // theme
     const [theme] = useTheme<TTyped.getTheme<R>>()
 
@@ -31,6 +30,8 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     } = useProps<R>(theme, sheet, props)
 
     // widths
+    const uniqueIdRef = React.useRef(0) // unique ID
+    if (!uniqueIdRef.current) uniqueIdRef.current = ++platform._withStyles.uniqueIdCounter
     const forceUpdate = useForceUpdate()
     const uniqueId = useUniqueId(platform._withStyles)
     const { actWidth, getWidthMap, breakpoints } = useWidthsLow(uniqueId, forceUpdate)

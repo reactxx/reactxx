@@ -15,10 +15,10 @@ const getDefaults = (theme, config: TUseSheeter.AuthorConfig & TUseSheeter.UserC
 
     const { defaultProps, defaultSheet, overrideProps, overrideSheet, id} = config
 
-    if (!defaultSheet)
-        throw 'Missing config.defaultsheet'
+    // if (!defaultSheet)
+    //     throw 'Missing config.defaultsheet'
 
-    const sheet = sheetFromThemeCache(id, toEngineSheet(defaultSheet), theme, toEngineSheet(overrideSheet), displayName)
+    const sheet = sheetFromThemeCache(id, toEngineSheet(defaultSheet), theme, toEngineSheet(overrideSheet), displayName) || {}
 
     if (window.__TRACE__) {
         if (defaultProps) {
