@@ -1,11 +1,12 @@
 import { TExtensions, TEngine } from 'reactxx-typings';
 import { WidthStore } from '../queryable/$widths/store';
+import { toEngineClassName } from 'reactxx-use-sheeter';
 
 export interface Platform extends TExtensions.Platform {
     toPlatformAtomizeRuleset?: TEngine.ToPlatformAtomizeRuleset
-    dataTrace?: (classNames: TEngine.AtomicArrayLow, flags?: TraceFlags) => any,
+    dataTrace?: (classNames: TEngine.AtomicArrayAll, flags?: TraceFlags) => any,
     applyLastwinsStrategy?: TEngine.ApplyLastwinsStrategy
-    finalizeClassName?: (values: TEngine.AtomicArrayLow) => string | Record<string, any>
+    finalizeClassName?: (values: TEngine.AtomicArrayLow) => TEngine.AtomicFinal
     getDefaultTheme?: () => any
 }
 

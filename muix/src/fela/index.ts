@@ -63,9 +63,9 @@ const initFela$Web = (platform?: TExtensions.Platform) => {
   render(renderer)
 }
 
-const dataTrace = (classNames: TEngine.AtomicWebsLow, flags: TraceFlags = 'long' ) => {
+const dataTrace = (classNames: TEngine.AtomicWebAll[], flags: TraceFlags = 'long' ) => {
   if (!classNames || classNames.length === 0) return ''
-  if (!window.__TRACE__) return ''
+  //if (!window.__TRACE__) return ''
   return '\n' + classNames.map(c => dump(c, flags==='short')).join('\n')
 }
 

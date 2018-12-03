@@ -8,9 +8,11 @@ import warning = require('warning');
 
 export interface IRendererEx extends IRenderer {
   renderRuleEx(style: {}, tracePath?: string): TEngine.AtomicWebs
-  propIdCache: {}
+  lastWin(item: TEngine.AtomicWeb, res: { items?: TEngine.AtomicWebLow[] })
+  finalizeClassName: (lastWinResult: TEngine.AtomicWebsLow) => TEngine.AtomicWebFinal
+  //propIdCache: {}
   //trace: {}
-  cache
+  cache: Cache
   _emitChange
   filterClassName
   getNextRuleIdentifier
@@ -20,7 +22,10 @@ export interface IRendererEx extends IRenderer {
 const patch = (renderer: IRenderer) => {
   const rendererEx = renderer as IRendererEx
   rendererEx.renderRuleEx = renderRuleEx.bind(rendererEx)
-  rendererEx.propIdCache = {}
+  rendererEx.cache = {propIds: {}, classNames: []}
+  //rendererEx.propIdCache = {}
+  rendererEx.lastWin = lastWin
+  rendererEx.finalizeClassName = finalizeClassName
   //rendererEx.trace = {}
   return rendererEx
 }
@@ -56,7 +61,7 @@ function renderRuleEx(style: {}, tracePath?: string): TEngine.AtomicWebs {
   // }
 }
 
-const concat = (arr1: TEngine.AtomicWebsLow, arr2: TEngine.AtomicWebsLow) => arr2 ? arr1.concat(arr2) : arr1
+const concat = (arr1: TEngine.AtomicWebs, arr2: TEngine.AtomicWebs) => arr2 ? arr1.concat(arr2) : arr1
 
 const newAtomicWeb = (def?) => {
   // let res: TAtomize.AtomicWebs = def || [] as any
@@ -66,7 +71,7 @@ const newAtomicWeb = (def?) => {
 
 const renderStyleToClassNames = (renderer: IRendererEx, tracePath: string, { _className, ...style }: any, pseudo: string = '', media: string = '', support: string = ''): TEngine.AtomicWebs => {
   //let classNames = _className ? ` ${_className}` : ''
-  let classNames: TEngine.AtomicWebsLow = []
+  let classNames: TEngine.AtomicWebs = []
 
   for (const property in style) {
 
@@ -121,15 +126,22 @@ Maybe you forgot to add a plugin to resolve it?
 Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information.`)
       }
     } else {
-      const declarationReference =
-        support + media + pseudo + property + value
-      if (!renderer.cache.hasOwnProperty(declarationReference)) {
+
+      const propReference = support + media + pseudo + property
+      //const declarationReference = propReference + value
+
+      let cacheItem = getFromCache(renderer.cache, propReference, value)
+
+      if (!cacheItem) { //renderer.cache.hasOwnProperty(declarationReference)) {
         // we remove undefined values to enable
         // usage of optional props without side-effects
         if (isUndefinedValue(value)) {
-          renderer.cache[declarationReference] = {
+          putToCache(renderer.cache, propReference, value, {
             className: '',
-          }
+          } as any)
+          // renderer.cache[declarationReference] = {
+          //   className: '',
+          // }
           /* eslint-disable no-continue */
           continue
           /* eslint-enable */
@@ -143,13 +155,14 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
           )
 
         // reactxx HACK: cache declarationReference without value
-        renderer.propIdCache[className] = support + media + pseudo + property
+        //renderer.propIdCache[className] = support + media + pseudo + property
 
         const declaration = cssifyDeclaration(property, value)
         const selector = generateCSSSelector(className, pseudo)
 
-        const change: TEngine.__dev_WebCache = {
+        cacheItem = {
           type: RULE_TYPE,
+          id: ++itemIdCounter,
           className,
           selector,
           declaration,
@@ -158,22 +171,23 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
           support,
         }
 
-        renderer.cache[declarationReference] = change
-        renderer._emitChange(change)
+        putToCache(renderer.cache, propReference, value, cacheItem)
+        //renderer.cache[declarationReference] = change
+        renderer._emitChange(cacheItem)
       }
 
-      const cache: TEngine.__dev_WebCache = renderer.cache[declarationReference]
+      //const cache: TEngine.FelaWebCacheItem = renderer.cache[declarationReference]
       //const cachedClassName = renderer.cache[declarationReference].className
 
       // only append if we got a class cached
-      if (!cache.className) continue
+      if (!cacheItem.className) continue
 
       if (window.__TRACE__) {
-        const res = { cache, tracePath } as TEngine.__dev_AtomicWeb
+        const res = { cache: cacheItem, tracePath } as TEngine.__dev_AtomicWeb
         res['toJSON'] = toJSON.bind(res)
         classNames.push(res)
       } else
-        classNames.push(cache.className)
+        classNames.push(cacheItem)
 
     }
   }
@@ -185,8 +199,70 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
 
 function toJSON() { return dump(this) }
 
-export const dump = (c, short?: boolean) => {
+interface Cache {
+  propIds: {
+    [propId: string]: Values
+  }
+  classNames: TEngine.AtomicWeb[]
+}
+
+interface Values {
+  propId: number
+  values: { [value: string]: TEngine.FelaWebCacheItem }
+}
+
+let valueIdCounter = 0
+let itemIdCounter = 0
+
+export const dump = (c: TEngine.AtomicWebAll, short?: boolean) => {
   if (!c) return
-  const { cache: { selector, declaration, media, support }, tracePath } = c as TEngine.__dev_AtomicWeb
-  return `${support ? '@support' + support : ''}${media ? '@media ' + media : ''}${selector} { ${declaration} }${short ? '' : ` @${tracePath}`}`
+  if (window.__TRACE__) {
+    const { cache: { selector, declaration, media, support }, tracePath } = c as TEngine.__dev_AtomicWeb
+    return `${support ? '@support' + support : ''}${media ? '@media ' + media : ''}${selector} { ${declaration} }${short ? '' : ` @${tracePath}`}`
+  } else {
+    if (typeof c === 'string')
+      return c
+    else
+      return (c as TEngine.FelaWebCacheItem).className
+  }
+}
+
+const getFromCache = (cache: Cache, propId: string, value: string) => {
+  const values = cache.propIds[propId]
+  return values && values.values[value]
+}
+
+const putToCache = (cache: Cache, propId: string, value: string, item: TEngine.FelaWebCacheItem) => {
+  const values = cache.propIds[propId] || (cache.propIds[propId] = { propId: ++valueIdCounter, values: {} })
+  item.propId = values.propId
+  values.values[value] = item
+  if (item.id) cache.classNames[item.id] = item
+}
+
+function isTrace(obj): obj is TEngine.__dev_AtomicWeb { return !!window.__TRACE__ }
+
+const lastWin = (_item: TEngine.AtomicWeb, res: { items?: TEngine.AtomicWebLow[], usedPropIds: boolean[] }) => {
+  let item = _item
+  if (isTrace(item))
+    item = item.cache
+
+  if (!item || !item.className) return
+  if (!res.items) {
+    res.items = []
+    res.usedPropIds = []
+  }
+  if (res.usedPropIds[item.propId]) return
+  res.usedPropIds[item.propId] = true
+  if (window.__TRACE__)
+    res.items.push(_item as TEngine.__dev_AtomicWeb)
+  else
+    res.items.push(item.className)
+}
+
+const finalizeClassName = (lastWinResult: TEngine.AtomicWebsLow) => {
+  if (!lastWinResult) return undefined
+  if (window.__TRACE__) {
+    lastWinResult = lastWinResult.map((r: TEngine.__dev_AtomicWeb) => r.cache.className) as any
+  }
+  return lastWinResult.join(' ') as TEngine.AtomicWebFinal
 }

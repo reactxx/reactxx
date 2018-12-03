@@ -44,7 +44,7 @@ declare namespace TEngine {
   export type NativeStyle = Record<string, TNativeRuleValue>
 
   export type Atom = AtomicNative | AtomicWeb
-  export type AtomicWeb = string | __dev_AtomicWeb
+
   export interface AtomicNative {
     propId: string // property name
     value: TNativeRuleValue // propert value
@@ -52,11 +52,13 @@ declare namespace TEngine {
 
   export interface __dev_AtomicWeb {
     tracePath?: string
-    cache?: __dev_WebCache
+    cache?: FelaWebCacheItem
   }
-  export interface __dev_WebCache {
+  export interface FelaWebCacheItem {
     type: string
     className: string
+    id: number // unique integer ID
+    propId?: number
     selector: string
     declaration: string
     pseudo: string
@@ -69,11 +71,26 @@ declare namespace TEngine {
     tracePath: string
   }
 
-  export type AtomicNatives = AtomicNative[] //& AtomicArrayExtension
-  export type AtomicWebs = AtomicWeb[] //& AtomicArrayExtension
+  //********* WEB
+  // Queryable item
+  export type AtomicWeb = FelaWebCacheItem | __dev_AtomicWeb
+  export type AtomicWebs = AtomicWeb[]
+  // after applyLastWindowStrategy
+  export type AtomicWebLow = string | __dev_AtomicWeb 
+  export type AtomicWebsLow = AtomicWebLow[]
+  // after finalizeClassNames
+  export type AtomicWebFinal = string
+  // for tracing: can trace or before or after applyLastWindowStrategy
+  export type AtomicWebAll = string | FelaWebCacheItem | __dev_AtomicWeb 
+  export type AtomicWebAlls = AtomicWebAll[]
 
+  //********* BOTH
   export type AtomicArrayLow = AtomicWebsLow | AtomicNativeLow
-  export type AtomicWebsLow = AtomicWeb[]
+  export type AtomicArrayAll = AtomicWebAlls | AtomicNativeLow
+  export type AtomicFinal = AtomicWebFinal | AtomicNativeLow
+
+  export type AtomicNatives = AtomicNative[]
+
   export type AtomicNativeLow = Record<string, TNativeRuleValue>
 
   export interface Style {

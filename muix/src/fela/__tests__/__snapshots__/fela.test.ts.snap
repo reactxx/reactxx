@@ -1,21 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fela 1`] = `
+exports[`FELA ## NO TRACE ## 01  1`] = `
 "
-.a { color:red /*root*/ }
-.b { margin:10px /*root*/ }
-.c:hover { margin:5px /*root*/ }
-@media (min-width: 768px).d:hover { height:100px /*root*/ }
-@media (min-width: 768px).e:hover:active { width:700px /*root*/ }
-@media (min-width: 768px).f:hover:active { color:red /*root*/ }"
+.a { color:red } @root
+.b { margin:10px } @root
+.c:hover { margin:5px } @root
+@media (min-width: 768px).d:hover { height:100px } @root
+@media (min-width: 768px).e:hover:active { width:700px } @root
+@media (min-width: 768px).f:hover:active { color:red } @root"
 `;
 
-exports[`fela 2`] = `
+exports[`FELA ## NO TRACE ## 02  1`] = `
 "
-.a { color:red /*root*/ }
-.b { margin:10px /*root*/ }
-.c:hover { margin:5px /*root*/ }
-@media (min-width: 768px).d:hover { height:100px /*root*/ }
-@media (min-width: 768px).e:hover:active { width:700px /*root*/ }
-@media (min-width: 768px).f:hover:active { color:red /*root*/ }"
+.a { color:red } @root
+.b:hover { çolor:green } @root
+.c:hover:active { color:blue } @root"
 `;
+
+exports[`FELA ## NO TRACE ## 02  2`] = `
+"
+.d { color:maroon } @root
+.e:hover { çolor:black } @root
+.f:hover:active { color:white } @root"
+`;
+
+exports[`FELA ## NO TRACE ## 02  3`] = `
+"
+.a { color:red } @root
+.b:hover { çolor:green } @root
+.c:hover:active { color:blue } @root"
+`;
+
+exports[`FELA ## NO TRACE ## 02  4`] = `"a b c"`;
+
+exports[`FELA ## TRACE ## 01  1`] = `
+"
+a
+b
+c
+d
+e
+f"
+`;
+
+exports[`FELA ## TRACE ## 02  1`] = `
+"
+a
+b
+c"
+`;
+
+exports[`FELA ## TRACE ## 02  2`] = `
+"
+d
+e
+f"
+`;
+
+exports[`FELA ## TRACE ## 02  3`] = `
+"
+a
+b
+c"
+`;
+
+exports[`FELA ## TRACE ## 02  4`] = `"a b c"`;
