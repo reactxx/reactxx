@@ -7,9 +7,6 @@ declare namespace TEngine {
 
   export type ToAtomize = {}
 
-  // export interface Queryable extends Array<Atom> {
-  //   conditions?: Conditions
-  // }
   export interface Condition {
     type: string
     test?: (outerPar) => boolean
@@ -33,7 +30,7 @@ declare namespace TEngine {
   export type Sheet = Record<string, Queryables>
 
   // **********************************************
-  // BOTH
+  // CROSSPLATFORM
 
   // Before toClassNames
   export type Queryable = Atomic & { conditions?: Conditions }
@@ -42,15 +39,17 @@ declare namespace TEngine {
     $r$?: true // array signature
   }
 
-  // input to applyLastwinsStrategy
-  export interface WithConflicts extends Array<Atomic> {
-    $r$?: true // array signature
-  }
-
   // After toClassNames, before applyLastWindowStrategy
   export type Atomic = AtomicWebs | AtomicNatives
+
+  // input to applyLastwinsStrategy
+  export interface WithConflicts extends Array<Atomic> { $r$?: true }
+  // output from applyLastWindowStrategy
   export type AtomicLow = AtomicWebLows | AtomicNativeLows
+
+  // after finalizeClassNames
   export type AtomicFinal = AtomicWebFinals | AtomicNativeFinals
+
 
   // **********************************************
   // NATIVE
@@ -97,6 +96,10 @@ declare namespace TEngine {
     support: string
   }
 
+
+  // **********************************************
+  // STYLE, CREATORS, WIDTHS etc.
+  // **********************************************
 
   export interface Style {
     $web: {}
