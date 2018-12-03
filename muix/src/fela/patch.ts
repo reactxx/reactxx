@@ -208,7 +208,7 @@ interface Cache {
 
 interface Values {
   propId: number
-  values: { [value: string]: TEngine.FelaWebCacheItem }
+  values: { [value: string]: TEngine.FelaCacheItem }
 }
 
 let valueIdCounter = 0
@@ -223,7 +223,7 @@ export const dump = (c: TEngine.AtomicWeb | TEngine.AtomicWebLow, short?: boolea
     if (typeof c === 'string')
       return c
     else
-      return (c as TEngine.FelaWebCacheItem).className
+      return (c as TEngine.FelaCacheItem).className
   }
 }
 
@@ -232,7 +232,7 @@ const getFromCache = (cache: Cache, propId: string, value: string) => {
   return values && values.values[value]
 }
 
-const putToCache = (cache: Cache, propId: string, value: string, item: TEngine.FelaWebCacheItem) => {
+const putToCache = (cache: Cache, propId: string, value: string, item: TEngine.FelaCacheItem) => {
   const values = cache.propIds[propId] || (cache.propIds[propId] = { propId: ++valueIdCounter, values: {} })
   item.propId = values.propId
   values.values[value] = item
