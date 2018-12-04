@@ -1,7 +1,4 @@
 - make copy of sheet for testing (instead of using sheet creator)
 // - memoize sheet queries, sheet query selector. Remove useForceUpdate, useUniqueId
 - events
-
-Tests:
-- primitives
-    - 2x test warnings
+- primitives, visual test
