@@ -102,7 +102,7 @@ Array [
 exports[`SHEETER $WIDTHS ## WEB ## 02 simple 1`] = `
 Array [
   Array [
-    "@media (min-width: 640px) and (max-width: 1023px).a { color:red } @/$width",
+    "@media (min-width: 641px) and (max-width: 1024px).a { color:red } @/$width",
   ],
 ]
 `;
@@ -110,22 +110,22 @@ Array [
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 01: native, 300 1`] = `
 Array [
   Array [
-    "@media (max-width: 639px).a { color:red } @/$width",
+    "@media (max-width: 640px).a { color:red } @/$width",
   ],
   Array [
-    "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
+    "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
   ],
   Array [
-    "@media (min-width: 1024px).c { color:blue } @/$width",
+    "@media (min-width: 1025px).c { color:blue } @/$width",
   ],
 ]
 `;
 
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 01: native, 300 2`] = `
 Array [
-  "@media (min-width: 1024px).c { color:blue } @/$width",
-  "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
-  "@media (max-width: 639px).a { color:red } @/$width",
+  "@media (min-width: 1025px).c { color:blue } @/$width",
+  "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
+  "@media (max-width: 640px).a { color:red } @/$width",
 ]
 `;
 
@@ -134,22 +134,22 @@ exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 01: n
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 02: native, 640 1`] = `
 Array [
   Array [
-    "@media (max-width: 639px).a { color:red } @/$width",
+    "@media (max-width: 640px).a { color:red } @/$width",
   ],
   Array [
-    "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
+    "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
   ],
   Array [
-    "@media (min-width: 1024px).c { color:blue } @/$width",
+    "@media (min-width: 1025px).c { color:blue } @/$width",
   ],
 ]
 `;
 
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 02: native, 640 2`] = `
 Array [
-  "@media (min-width: 1024px).c { color:blue } @/$width",
-  "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
-  "@media (max-width: 639px).a { color:red } @/$width",
+  "@media (min-width: 1025px).c { color:blue } @/$width",
+  "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
+  "@media (max-width: 640px).a { color:red } @/$width",
 ]
 `;
 
@@ -158,22 +158,22 @@ exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 02: n
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 03: native, 1024 1`] = `
 Array [
   Array [
-    "@media (max-width: 639px).a { color:red } @/$width",
+    "@media (max-width: 640px).a { color:red } @/$width",
   ],
   Array [
-    "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
+    "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
   ],
   Array [
-    "@media (min-width: 1024px).c { color:blue } @/$width",
+    "@media (min-width: 1025px).c { color:blue } @/$width",
   ],
 ]
 `;
 
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 03: native, 1024 2`] = `
 Array [
-  "@media (min-width: 1024px).c { color:blue } @/$width",
-  "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
-  "@media (max-width: 639px).a { color:red } @/$width",
+  "@media (min-width: 1025px).c { color:blue } @/$width",
+  "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
+  "@media (max-width: 640px).a { color:red } @/$width",
 ]
 `;
 
@@ -182,22 +182,22 @@ exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 03: n
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 04: native, undefined 1`] = `
 Array [
   Array [
-    "@media (max-width: 639px).a { color:red } @/$width",
+    "@media (max-width: 640px).a { color:red } @/$width",
   ],
   Array [
-    "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
+    "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
   ],
   Array [
-    "@media (min-width: 1024px).c { color:blue } @/$width",
+    "@media (min-width: 1025px).c { color:blue } @/$width",
   ],
 ]
 `;
 
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesWithQuery's width change 04: native, undefined 2`] = `
 Array [
-  "@media (min-width: 1024px).c { color:blue } @/$width",
-  "@media (min-width: 640px) and (max-width: 1023px).b { color:green } @/$width",
-  "@media (max-width: 639px).a { color:red } @/$width",
+  "@media (min-width: 1025px).c { color:blue } @/$width",
+  "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
+  "@media (max-width: 640px).a { color:red } @/$width",
 ]
 `;
 

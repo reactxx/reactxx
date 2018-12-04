@@ -19,21 +19,20 @@ export const useWidthsLow = (
 
     // get registered listener or create new listener (for registration)
     // created listener is registered in useLayoutEffect (when we already know when registration is necessary)
-    const listener = listenerRef.current || { forceUpdate }
+    const listener = listenerRef.current || { forceUpdate, breakpoints: new Set() }
 
-    // create new breakpoints-set in every render start
-    // breakpoints-set is filled during render when:
-    // - some breakpoint conditions found in used rulesets
-    // - component call getWidthMap
-    const breakpoints = listener.breakpoints = new Set()
+    // breakpoints-set is filled during render:
+    // - when some breakpoint conditions found in rulesets
+    // - when component calls getWidthMap
+    const breakpoints = listener.breakpoints
 
     React.useLayoutEffect(() => { // call on every render
         if (breakpoints.size > 0) { // some breakpoints filled
             if (!listenerRef.current) // not aleady registered => register
                 listenerRef.current = widthStore.register(uniqueId, listener)
-            // for web: adjust media query for watched breakpoints
+            // for web: adjust media query for watching breakpoints
             if (window.isWeb)
-                for (const br of breakpoints) platform.addBreakpoint(br)
+                for (const br of breakpoints) platform.watchBreakpointChange(br)
         }
     })
 
@@ -55,7 +54,9 @@ export const useWidthsLow = (
         for (const b of mapBreakpoints) breakpoints.add(b)
 
         // get map (just single item is true)
-        let found = mapBreakpoints.findIndex(b => actWidth < b)
+
+        //**WIDHT**
+        let found = mapBreakpoints.findIndex(b => actWidth <= b)
         if (found < 0) found = mapBreakpoints.length
         const res: boolean[] = []
         res[found] = true
@@ -82,10 +83,14 @@ export class WidthStore {
     refreshListener(listener: IListener, oldWidth: number, newWidth: number) {
         let theSame = true
         for (const br of listener.breakpoints)
-            theSame = theSame && (newWidth >= br && oldWidth >= br || newWidth < br && oldWidth < br)
+            //**WIDHT**
+            theSame = theSame && (newWidth > br && oldWidth > br || newWidth <= br && oldWidth <= br)
         if (theSame) return
+        // const os = widthState(oldWidth, listener.breakpoints), ns = widthState(newWidth, listener.breakpoints)
+        // if (os === ns) return
         listener.forceUpdate(null)
     }
+
 
     register(id: number, listener) {
         if (listener) return this.listeners[id] = listener // REGISTER
@@ -93,6 +98,17 @@ export class WidthStore {
     }
 
 }
+// const widthState = (actWidth: number, breakpoints: Set<number>) => {
+//     let minDiff = 1000000, minValue = -1
+//     breakpoints.forEach(v => {
+//         //**WIDHT**
+//         if (actWidth > v) return
+//         const mv = v - actWidth
+//         if (mv >= minDiff) return
+//         minDiff = mv, minValue = v
+//     })
+//     return minValue
+// }
 
 interface IListener {
     breakpoints?: Set<number>

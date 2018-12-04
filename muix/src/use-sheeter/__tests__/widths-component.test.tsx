@@ -55,12 +55,12 @@ describe("SHEETER $WIDTHS", () => {
       WidthsMapApp['$c$'] = true
 
       const test = (App: React.ComponentType) => {
-        setActWidth(300)
+        setActWidth(640)
         const wrapper = render(<App />)
         expect(wrapper.container).toMatchSnapshot()
-        setActWidth(640)
-        expect(wrapper.container).toMatchSnapshot()
         setActWidth(1024)
+        expect(wrapper.container).toMatchSnapshot()
+        setActWidth(1025)
         expect(wrapper.container).toMatchSnapshot()
         wrapper.unmount()
       }

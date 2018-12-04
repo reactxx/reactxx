@@ -6,16 +6,17 @@ import { setActWidth } from './queryable/$widths/store'
 export const init = () => {
   Fela.initFela$Web(platform)
 
-  platform._sheeter.widthDirs = new Set()
+  platform._sheeter.breakpointSet = new Set()
 
   assignPlatform({
     actWidth: () => window.innerWidth || 0,
 
-    addBreakpoint: (width: number) => {
-      const { _sheeter: { widthDirs } } = platform
-      if (!width || widthDirs.has(width)) return
-      widthDirs.add(width)
-      const mediaQuery = window.matchMedia(`(min-width: ${width}px)`)
+    watchBreakpointChange: (breakpoint: number) => {
+      const { _sheeter: { breakpointSet } } = platform
+      if (!breakpoint || breakpointSet.has(breakpoint)) return
+      breakpointSet.add(breakpoint)
+      //**WIDHT**
+      const mediaQuery = window.matchMedia(`(min-width: ${breakpoint + 1}px)`)
       mediaQuery.addListener(onWidthChanged)
     },
 

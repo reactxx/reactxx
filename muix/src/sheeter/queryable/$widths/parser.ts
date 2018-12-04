@@ -9,20 +9,11 @@ export const parse = (encoded: string) => {
 const regx = /^\d+-\d+|-\d+|\d+-$/
 
 export const intervalToSelector = (interval: TEngine.WidthInterval) => {
-    if (typeof interval === 'number') return `@media (min-width: ${interval}px)`
+    //**WIDHT**
+    if (typeof interval === 'number')
+        return `@media (min-width: ${interval + 1}px)`
     const [from, to] = interval
-    if (!from) return `@media (max-width: ${to - 1}px)`
-    return `@media (min-width: ${from}px) and (max-width: ${to - 1}px)`
-}
-
-export const test = (interval: TEngine.WidthInterval, actWidth: number, registerDir?: Set<number>) => {
-    if (registerDir) {
-        if (typeof interval === 'number') registerDir.add(interval)
-        else {
-            registerDir.add(interval[1])
-            if (interval[0]) registerDir.add(interval[0])
-        }
-    }
-    return typeof actWidth === 'number' && (typeof interval === 'number' ? actWidth >= interval : actWidth >= interval[0] && actWidth < interval[1])
+    if (!from) return `@media (max-width: ${to}px)`
+    return `@media (min-width: ${from + 1}px) and (max-width: ${to}px)`
 }
 
