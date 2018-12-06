@@ -1,3 +1,4 @@
+import React from 'react'
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 import { getEngine } from '../utils/get-engine'
 
@@ -91,3 +92,88 @@ describe("SHEETER HOT", () => {
   describe("## WEB ##", () => doTest(true))
 
 })
+
+type ReturnType<T extends (...args: any[]) => any> =
+  T extends (...args: any[]) => infer R ? R : never
+
+type FirstParType<T extends (par) => any> =
+  T extends (par: infer R) => any ? R : never
+
+const f = (idx: string) => 12
+type TT = ReturnType<typeof f>
+type FT = FirstParType<typeof f>
+
+interface PropsConfig { default, code }
+type Props<T extends PropsConfig> = T['default'] & T['code']
+type Pars<Config extends PropsConfig> = Record<string, (p: Props<Config>) => boolean>
+
+type SheetPars<Config extends PropsConfig, Par extends Pars<Config>> = Par & { theme, $if }
+
+const propsConfig = {
+  default: {
+    disabled: false
+  },
+  code: {
+    computed: false
+  },
+  props:null,
+  propsCode: null,
+
+  root: null as Shape,
+  root2: null as ['T', React.AnchorHTMLAttributes<HTMLAnchorElement>],
+
+}
+
+let ddd: React.AnchorHTMLAttributes<any>
+
+type TCfg = Props<typeof propsConfig>
+
+const c: Partial<TCfg> = {
+  //disabled: true,
+  //computed: false
+}
+
+const sheetPars = {
+  getDisabled: (p: TCfg) => p.disabled,
+}
+
+const sheet = ({ theme, $if }: SheetPars<typeof propsConfig, typeof sheetPars>) => {
+  const getDisabled = (p: TCfg) => p.disabled
+  return {
+    root: null as V,
+    label: $if(getDisabled, {})
+  }
+}
+
+interface getShape<Config extends PropsConfig, Sheet extends Function> {
+  sheet: GetReturnType<Sheet>
+  props: Config['default']
+  sheetQuery: Config['code']
+}
+
+interface Shape2 extends getShape<typeof propsConfig, typeof sheet> { }
+
+type TTT = Shape2['sheet']
+
+type TSheet = GetReturnType<typeof sheet>
+
+type GetReturnType<original extends Function> =
+  original extends (...x: any[]) => infer returnType ? returnType : never
+
+let $map, $hoot2
+const sheet_ = ({ theme, getDisabled, getVariant, $if }) => {
+  root: [
+    $if(getDisabled, {}),
+    $width([0, 640], {}),
+    $map(getVariant, {
+
+    }),
+    $hot(({ $sheetQuery: { primary } }) => ({}))
+  ]
+}
+
+type TIf<Id extends TTyped.RulesetIds> = (...par: Id[]) => Id
+
+const IF = <T extends TTyped.RulesetIds>(...rulesets: TTyped.Ruleset<T>[]) => null as T
+
+const root = [null as $V] as (V | $V)[]
