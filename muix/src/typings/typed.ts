@@ -6,6 +6,7 @@ import { TCommonStyles, TEngine, TExtensions } from 'reactxx-typings'
 
 export type $W = '$W'; export type $T = '$T'; export type $V = '$V';
 export type $I = '$I'; export type V = 'V'; export type T = 'T'; export type I = 'I';
+export type O = ''
 
 export namespace TTyped {
 
@@ -15,9 +16,20 @@ export namespace TTyped {
 
   export type CommonIds = V | T | I
   export type NativeIds = $V | $T | $I
-  export type RulesetIds = $W | NativeIds | CommonIds
+  export type RulesetIds = $W | NativeIds | CommonIds | O
+  export type PlatformIds = $W | NativeIds
 
   type WebStyle = React.CSSProperties & { [P in CSS.Pseudos]?: Ruleset<$W> | Ruleset<$W>[] }
+
+  export type TNativeProps = ReactN.TextProperties | ReactN.ViewProperties | ReactN.TextInputProperties | ReactN.ImageProperties
+    | {} //TODO
+
+  export type TNativePropsToStyle<TT extends TNativeProps> =
+    TT extends ReactN.ViewProperties ? V :
+    TT extends ReactN.ImageProperties ? I :
+    TT extends ReactN.TextProperties ? T :
+    TT extends ReactN.TextInputProperties ? T :
+    V
 
   type RulesetType<R extends RulesetIds, ForStyle extends boolean = false> =
     R extends V ? TCommonStyles.ViewStyle :
@@ -29,7 +41,6 @@ export namespace TTyped {
     R extends $I ? ReactN.ImageStyle :
     never
 
-
   type TNative<R extends RulesetIds> =
     R extends T ? $T :
     R extends V ? $V :
@@ -37,41 +48,39 @@ export namespace TTyped {
     R
 
   export type TAllowed<R extends RulesetIds> =
-    R extends T ? T | V :
-    R extends $T ? $T | $V | T | V :
-    R extends $V ? $V | V :
-    R extends $I ? $I | I :
-    R extends $W ? $W | T | V :
-    R
+    R extends V ? V | I | O :
+    R extends T ? T | V | I | O :
+    R extends $T ? $T | $V | T | V | I | O :
+    R extends $V ? $V | V | I | O :
+    R extends $I ? $I | I | O :
+    R extends $W ? $W | T | V | I | O :
+    R | O
 
-  export type TPlatformAllowed<R extends RulesetIds> =
-    R extends $W ? $W | V | T | I :
-    R extends T ? T | V | $W | $T | $V :
-    R extends V ? V | $W | $V :
-    R | $W
-
-  export type TComponentAllowed<R extends T | V | I> =
-    R extends T ? T | V | $W : R | $W
-
+  export type TPlatformAllowed<R extends PlatformIds> =
+    TAllowed<R> | $W
+  // R extends $W ? $W | V | T | I | O :
+  // R extends T ? T | V | $W | $T | $V | O :
+  // R extends V ? V | $W | $V | O :
+  // R extends I ? I | $W| O :
+  // never
 
   export type Ruleset<R extends RulesetIds = RulesetIds> = RulesetType<R> | TAllowed<R>
   export type Rulesets<R extends RulesetIds = RulesetIds> = Ruleset<R> | Ruleset<R>[]
 
-
   export interface TypedEngine<S extends Shape> {
     THEMED: <R extends any>(p: (t: getTheme<S>) => R) => R
-    STYLE: <R extends RulesetIds = V>(...pars: Ruleset<R>[]) => R
 
-    WEB: <R extends RulesetIds = V>(...r: Ruleset<$W>[]) => V
-    NATIVE: <R extends NativeIds = $V>(...r: Ruleset<TNative<R>>[]) => R
+    WEB: (...r: Ruleset<$W>[]) => I
+    NATIVE: <R extends NativeIds = $V>(...r: Ruleset<TNative<R>>[]) => I
 
     IF: <R extends RulesetIds>(cond: boolean | ((p: PropsCode<S>) => boolean), ...r: Ruleset<R>[]) => R
     IFELSE: <R extends RulesetIds = V>(cond: boolean | ((p: PropsCode<S>) => boolean), ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
     WIDTH: <R extends RulesetIds = V>(interval: TEngine.WidthInterval, ...r: Ruleset<R>[]) => R
     HOT: <R extends RulesetIds = V>(cond: (p: PropsCode<S>) => Ruleset<R> | Ruleset<R>[]) => R
-
-    $atomizeRuleset: <R extends RulesetIds = V>(r: RulesetOrCreator<S, R>, theme?: getTheme<S>, path?: string) => R
+    STYLE: <R extends RulesetIds>(...pars: Ruleset<R>[]) => R
     ATOMIZE: <R extends RulesetIds = V>(...r: Ruleset<R>[]) => R
+
+    //ATOMIZE: <R extends RulesetIds = V>(r: RulesetOrCreator<S, R>, theme?: getTheme<S>, path?: string) => R
     $mergeRulesets: <R extends RulesetIds = V>(r: Ruleset<R>[]) => R
     $toClassNames: <R extends RulesetIds = V>(query: PropsCode<S>, ...rules: RulesetSimple<R>[]) => R
 

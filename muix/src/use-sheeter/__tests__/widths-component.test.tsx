@@ -3,7 +3,7 @@
 import React from 'react'
 
 import { TEngine, V } from 'reactxx-typings'
-import { platform, atomizeRuleset, toClassNamesWithQuery, $width, useWidths, setActWidth } from "reactxx-sheeter"
+import { platform, atomizeRuleset, toClassNamesWithQuery, WIDTH, useWidths, setActWidth } from "reactxx-sheeter"
 
 import { initPlatform, render } from "./init-platform.t"
 
@@ -17,9 +17,9 @@ describe("SHEETER $WIDTHS", () => {
       beforeEach(() => initPlatform(isWeb, { dataTraceFlag: 'short' }))
 
       const getSheetRoot = () => atomizeRuleset([
-        $width([0, 640], { color: 'red' }),
-        $width([640, 1024], { color: 'green' }),
-        $width(1024, { color: 'blue' }),
+        WIDTH([0, 640], { color: 'red' }),
+        WIDTH([640, 1024], { color: 'green' }),
+        WIDTH(1024, { color: 'blue' }),
       ])
 
       const useApp = () => {

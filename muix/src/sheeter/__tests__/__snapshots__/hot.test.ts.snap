@@ -17,7 +17,7 @@ Array [
 exports[`SHEETER HOT ## NATIVE ## 03 just $hot 1`] = `
 Array [
   Object {
-    "color": "green @[0]",
+    "color": "green @$atomize[0]",
   },
   "DEFFERED",
 ]
@@ -129,7 +129,7 @@ Array [
 exports[`SHEETER HOT ## WEB ## 03 just $hot 1`] = `
 Array [
   Array [
-    ".a { color:green } @[0]",
+    ".a { color:green } @$atomize[0]",
   ],
   "DEFFERED",
 ]

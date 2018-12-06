@@ -89,8 +89,8 @@ Object {
   ],
   "webOnly": Array [
     Object {
-      "backgroundColor": "blue @theme.secondary.disabled",
-      "color": "darkgray @theme.secondary.disabled",
+      "backgroundColor": "blue @$atomize",
+      "color": "darkgray @$atomize",
     },
   ],
 }
@@ -229,8 +229,8 @@ Object {
   ],
   "webOnly": Array [
     Array [
-      ".a { color:darkgray } @theme.secondary.disabled",
-      ".b { background-color:blue } @theme.secondary.disabled",
+      ".a { color:darkgray } @$atomize",
+      ".b { background-color:blue } @$atomize",
     ],
   ],
 }

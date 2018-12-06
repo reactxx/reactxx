@@ -1,5 +1,6 @@
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 import { getEngine } from '../utils/get-engine'
+import {atomizeRuleset} from '../utils/atomize'
 
 import { theme, Theme } from "reactxx-typings-test/shape.t"
 import { initPlatform } from "./init-platform.t"
@@ -9,7 +10,7 @@ interface Shape {
   sheetQuery: {opened: boolean}  
 }
 
-const { WEB, HOT, NATIVE, $atomizeRuleset
+const { WEB, HOT, NATIVE, ATOMIZE
 } = getEngine<Shape>()
 
 const t = WEB({ color: 'green' })
@@ -21,88 +22,89 @@ describe("SHEETER SIMPLE RULESET", () => {
     let ruleset
 
     it("01 (null)", () => {
-      ruleset = $atomizeRuleset(null)
+      ruleset = ATOMIZE(null)
       expect(ruleset).toMatchSnapshot()
     })
 
     it("02 ({})", () => {
-      ruleset = $atomizeRuleset([{}])
+      ruleset = ATOMIZE({})
       expect(ruleset).toMatchSnapshot()
     })
 
     it("03 ([null, undefined, {}])", () => {
-      ruleset = $atomizeRuleset([null, undefined, {}])
+      ruleset = ATOMIZE(null, undefined, {})
       expect(ruleset).toMatchSnapshot()
     })
 
     it("04 ({ color: 'red', margin: 0 })", () => {
-      ruleset = $atomizeRuleset([{ color: 'red', margin: 0 }])
+      ruleset = ATOMIZE({ color: 'red', margin: 0 })
       expect(ruleset).toMatchSnapshot()
     })
 
     it("05 ([{ color: 'red' }, { margin: 0 }])", () => {
-      ruleset = $atomizeRuleset([{ color: 'red' }, { margin: 0 }])
+      ruleset = ATOMIZE({ color: 'red' }, { margin: 0 })
       expect(ruleset).toMatchSnapshot()
     })
 
     it("06 (...$web: { color: 'green' }, $native: { color: 'blue' })", () => {
-      ruleset = $atomizeRuleset([
+      ruleset = ATOMIZE<T>(
         {
           color: 'red',
         },
-        WEB<T>({ color: 'green' }),
-        NATIVE<T>({ color: 'blue' }),
-      ])
+        WEB({ color: 'green' }),
+        NATIVE<$T>({ color: 'blue' }),
+        NATIVE({ color: 'blue' }),
+      )
       expect(ruleset).toMatchSnapshot()
     })
 
     it("07 atomizeRuleset(atomizeRuleset({color: 'red'", () => {
-      ruleset = $atomizeRuleset<T>([$atomizeRuleset<T>([{
+      ruleset = ATOMIZE<T>(ATOMIZE<T>({
         color: 'red'
-      }])])
+      }))
       expect(ruleset).toMatchSnapshot()
     })
 
     it("08 atomizeRuleset({$web: atomizeRuleset({ :hover color: 'red', $native: atomizeRuleset({ color: 'green'", () => {
-      ruleset = $atomizeRuleset<T>([
-        WEB<T>($atomizeRuleset<$W>([{ ':hover': { color: 'red' } }])),
-        NATIVE<T>($atomizeRuleset<T>([{ color: 'green' }]))
-      ])
+      ruleset = ATOMIZE<T>(
+        WEB(ATOMIZE<$W>({ ':hover': { color: 'red' } })),
+        NATIVE<$T>(ATOMIZE<T>({ color: 'green' }))
+      )
       expect(ruleset).toMatchSnapshot()
     })
 
     it("09 ERROR for atomizeRuleset({:hover': atomizeRuleset(...", () => {
       if (!window.isWeb) return
       const fnc = () => {
-        $atomizeRuleset<V>([
-          WEB<V>({
-            ':hover': $atomizeRuleset<$W>([
+        ATOMIZE<V>(
+          WEB({
+            ':hover': ATOMIZE<$W>(
               { color: 'red' }
-            ]),
-          })])
+            ),
+          }))
       }
       expect(fnc).toThrow(/.*/)
     })
 
     it("10 ERROR for atomizeRuleset({:hover': [ARRAY]", () => {
       if (!window.isWeb) return
-      const fnc = () => $atomizeRuleset<V>([
-        WEB<V>({
+      const fnc = () => ATOMIZE<V>(
+        WEB({
           ':hover': [
             {},
-            $atomizeRuleset<$W>([{ color: 'red' }]),
+            ATOMIZE<$W>({ color: 'red' }),
             { margin: 10 }
           ]
         })
-      ])
+      )
       expect(fnc).toThrow(/.*/)
     })
 
     it("11 with theme", () => {
-      ruleset = $atomizeRuleset<T>(theme => [
+      ruleset = atomizeRuleset((theme: any) => [
         theme.primary.normal,
-        WEB<T>(theme.secondary.normal),
-        NATIVE<T>(theme.secondary.normal),
+        WEB(theme.secondary.normal),
+        NATIVE<$T>(theme.secondary.normal),
       ], theme)
       expect(ruleset).toMatchSnapshot()
     })
@@ -113,42 +115,42 @@ describe("SHEETER SIMPLE RULESET", () => {
         WEB({ color: 'red' }),
         NATIVE({ color: 'green' }),
       ]
-      ruleset = $atomizeRuleset(source)
+      ruleset = ATOMIZE(...source)
       expect(ruleset).toMatchSnapshot()
       expect(source).toMatchSnapshot()
     })
 
     it("13 condition in pseudo", () => {
       if (!window.isWeb) return
-      ruleset = $atomizeRuleset<V>([
-        WEB<V>({
-          ':hover': WEB<$W>({ color: 'red' }),
+      ruleset = ATOMIZE<V>(
+        WEB({
+          ':hover': WEB({ color: 'red' }),
         }),
-      ])
+      )
       expect(ruleset).toMatchSnapshot()
     })
 
     it("14 mix in pseudo array", () => {
       if (!window.isWeb) return
-      ruleset = $atomizeRuleset<V>([
-        WEB<V>({
+      ruleset = ATOMIZE(
+        WEB({
           color: 'green',
           ':hover': [
             { color: 'blue' },
-            WEB<$W>({ ':active': { color: 'red' } })
+            WEB({ ':active': { color: 'red' } })
           ],
         }),
-      ])
-      expect(ruleset).toMatchSnapshot()
+      )
+      expect(ruleset).toMatchSnapshot() 
     })
 
     it("15 just $hot", () => {
-      ruleset = $atomizeRuleset([
+      ruleset = ATOMIZE<T>(
         { color: 'green' },
-        HOT(state => ({
+        HOT<T>(state => ({
           color: 'red'
         })),
-      ])
+      )
       expect(ruleset).toMatchSnapshot()
     })
 

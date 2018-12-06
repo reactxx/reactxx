@@ -10,7 +10,7 @@ interface Shape extends ShapeLow {
 
 const {
   THEMED, IF, WEB, NATIVE, STYLE,
-  $atomizeSheet, $mergeSheets, $atomizeRuleset
+  $atomizeSheet, $mergeSheets, ATOMIZE
 } = getEngine<Shape>()
 
 describe("SHEET", () => {
@@ -73,7 +73,7 @@ describe("SHEET", () => {
           root: STYLE<V>({ backgroundColor: 'red' }),
         }),
         $atomizeSheet({
-          root: STYLE<V>(WEB<V>({ color: 'green' })),
+          root: STYLE<V>(WEB({ color: 'green' })),
         }),
         $atomizeSheet({
           root: STYLE<V>({ backgroundColor: 'blue' }),
@@ -93,7 +93,7 @@ describe("SHEET", () => {
             IF<V>(null)
           ),
           webOnly: STYLE<$W>(
-            $atomizeRuleset<$W>([theme.secondary.disabled], null, 'theme.secondary.disabled')
+            ATOMIZE<$W>(theme.secondary.disabled)
           )
         })), theme)
       expect(sheet).toMatchSnapshot()
@@ -102,7 +102,7 @@ describe("SHEET", () => {
       const sheetSource: any = {
         root: [
           { backgroundColor: 'red' },
-          WEB<V>({ color: 'green' })
+          WEB({ color: 'green' })
         ]
       }
       expect(sheetSource).toMatchSnapshot()

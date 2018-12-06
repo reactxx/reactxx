@@ -1,6 +1,6 @@
 import { Shape as ShapeLow, theme } from 'reactxx-typings-test/shape.t'
 
-import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
+import { $W, $T, $V, $I, V, T, I, O, TTyped } from 'reactxx-typings'
 
 import { getEngine } from '../utils/get-engine'
 
@@ -11,14 +11,14 @@ interface Shape extends ShapeLow {
   }
 }
 
-const { THEMED, WEB, NATIVE, IF, HOT, IFELSE, WIDTH, STYLE, $toClassNames, $atomizeRuleset
+const { THEMED, WEB, NATIVE, IF, HOT, IFELSE, WIDTH, STYLE, ATOMIZE
 } = getEngine<Shape>()
 
 
 const r1: TTyped.Rulesets<'V'> = {
   // color: 'red' // ERROR
 }
-const r2: TTyped.Rulesets<'V'> = [
+const r2: TTyped.Rulesets<'$V'> = [
   {
     // color: 'red' // ERROR
   }
@@ -28,13 +28,13 @@ const r3: TTyped.Sheet<Shape>['root'] = {
   // color: 'red' // ERROR
 }
 
-const r4: TTyped.Sheet<Shape>['root'] = [
+const r4: TTyped.Sheet<Shape>['label'] = [
   {
-    // color: 'red' // ERROR
+    color: 'red'
   }
 ]
 
-const r5: TTyped.Rulesets<V> = [
+const r5 = STYLE<V>(
   // color: 'red' // ERROR
   IF<V>(null, {
     // color: 'red' // ERROR
@@ -44,10 +44,10 @@ const r5: TTyped.Rulesets<V> = [
   }, [{
     // color: 'red' // ERROR
   }]),
-  WEB<V>(null, {
+  WEB(null, {
     color: 'red'
   }),
-  NATIVE<V>(null, {
+  NATIVE<$V>(null, {
     // color: 'red' // ERROR
     transform: []
   }),
@@ -58,7 +58,7 @@ const r5: TTyped.Rulesets<V> = [
   WIDTH<V>(1024, {
     // color: 'red' // ERROR
   }),
-]
+)
 
 const s1: TTyped.PartialSheet<Shape> = {
   root: {
@@ -94,7 +94,7 @@ const s4: TTyped.Sheet<Shape> = {
       // color: 'red' // error
       // transform: [] // error
     },
-    WEB<V>(
+    WEB(
       {
         color: 'red',
         ':hover': {
@@ -104,30 +104,31 @@ const s4: TTyped.Sheet<Shape> = {
           }
         }
       },
+      IF<V>(null),
       IF<$W>(null, { ':hover': { color: 'red' } }, classNamesW),
     ),
-    NATIVE<V>(
+    NATIVE<$V>(
       {
         transform: [],
         // color: 'red' // error
       },
       classNames,
-      IF<$V>(null, { transform: [] }), // error
+      IF<$V>(null, { transform: [] }), 
     ),
   ],
-  label: [
+  label: STYLE<T>(
     {
       color: 'red' // error
       // transform: [] // error
     },
-    WEB<T>({
+    WEB({
       color: 'red',
     }),
-    NATIVE<T>({
+    NATIVE<$T>({
       transform: [],
       color: 'red'
     }),
-  ],
+  ),
   webOnly: [
     {
       color: 'red',
@@ -138,7 +139,7 @@ const s4: TTyped.Sheet<Shape> = {
         }
       }
     },
-    WEB<$W>({
+    WEB({
       color: 'red'
     }),
     IF<$W>(null, { ':hover': {} }),
@@ -156,3 +157,8 @@ const s4: TTyped.Sheet<Shape> = {
   ]
 }
 
+// let b = null
+// let tt: T = 'T'
+// let ttt = i && !getEngine && tt
+// const x = i && b && tt
+// const xx = IF<$T>(null, null as T, null as V, i && !getEngine && tt)

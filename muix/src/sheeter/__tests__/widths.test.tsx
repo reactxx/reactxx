@@ -3,7 +3,7 @@
 import React from 'react'
 
 import { TEngine } from 'reactxx-typings'
-import { atomizeRuleset, toClassNamesWithQuery, $width } from "reactxx-sheeter"
+import { atomizeRuleset, toClassNamesWithQuery, WIDTH } from "reactxx-sheeter"
 
 import { initPlatform, dump } from "./init-platform.t"
 
@@ -16,14 +16,14 @@ describe("SHEETER $WIDTHS", () => {
     it("01 empty", () => {
       ruleset = atomizeRuleset([
         { color: 'green' },
-        $width([640, 1024], null, {}, undefined),
+        WIDTH([640, 1024], null, {}, undefined),
       ])
       expect(ruleset).toMatchSnapshot()
     })
 
     it("02 simple", () => {
       ruleset = atomizeRuleset([
-        $width([640, 1024], { color: 'red' }),
+        WIDTH([640, 1024], { color: 'red' }),
       ])
       expect(ruleset).toMatchSnapshot()
     })
@@ -32,9 +32,9 @@ describe("SHEETER $WIDTHS", () => {
       beforeEach(() => initPlatform(isWeb))
 
       const rulesets = [
-        $width([0, 640], { color: 'red' }),
-        $width([640, 1024], { color: 'green' }),
-        $width(1024, { color: 'blue' }),
+        WIDTH([0, 640], { color: 'red' }),
+        WIDTH([640, 1024], { color: 'green' }),
+        WIDTH(1024, { color: 'blue' }),
       ]
       !window.isWeb && it("01: native, 300", () =>
         //**WIDHT**

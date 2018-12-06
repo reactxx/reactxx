@@ -1,7 +1,7 @@
 import { TEngine } from 'reactxx-typings';
 import { makeTemporary, processTree } from '../utils/atomize-low';
 
-const $if = (
+const     IF = (
     test: boolean | ((outerPar) => boolean),
     ...rulesets: TEngine.Rulesets[]
 ) => {
@@ -21,7 +21,7 @@ const $if = (
     })
 }
 
-const $ifelse = (
+const IFELSE = (
     test: boolean | ((outerPar) => boolean),
     ifPart: TEngine.Rulesets,
     elsePart: TEngine.Rulesets
@@ -55,5 +55,5 @@ const $ifelse = (
     })
 }
 
-export { $if, $ifelse };
+export {     IF, IFELSE };
 

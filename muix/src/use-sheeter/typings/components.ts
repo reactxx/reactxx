@@ -43,10 +43,10 @@ export namespace TComponents {
   - react native build in components (e.g. <Text styles={...})
   - custom components (e.g. <IconButton css={...})
   */
-  export interface ReactsCommonProperties<Id extends TTyped.RulesetIds = TTyped.RulesetIds> {
+  export interface ReactsCommonProperties<Id extends TTyped.PlatformIds = TTyped.PlatformIds> {
     css?: TTyped.TPlatformAllowed<Id>
-    trace?: string
     styles?: TTyped.TPlatformAllowed<Id>
+    trace?: string
   }
 
   export type ComponentType<R extends TTyped.Shape = TTyped.Shape> =

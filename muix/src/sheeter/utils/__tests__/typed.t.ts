@@ -9,7 +9,7 @@ interface Shape {
   sheetQuery: {enabled}  
 }
 
-const { THEMED, IF, WEB, NATIVE, STYLE, $toClassNames, $atomizeRuleset
+const { THEMED, IF, WEB, NATIVE, STYLE, $toClassNames, ATOMIZE
 } = getEngine<Shape>()
 
 // type TT<R extends TTyped.RulesetIds = V> = (...r: TTyped.Ruleset<R>[]) => R
@@ -29,7 +29,7 @@ const sheet3 = {
       margin: 0,
 
     },
-    WEB<V>(
+    WEB(
       {},
       IF<$W>(null),
       {
@@ -40,16 +40,16 @@ const sheet3 = {
         ]
       }
     ),
-    NATIVE<V>(),
+    NATIVE<$V>(),
   ),
   label: STYLE<T>(
     IF<T>(null, { color: '' }),
     IF<V>(null),
-    WEB<T>()
+    WEB()
   ),
   image: STYLE<I>(
     IF<I>(null),
-    WEB<I>()
+    WEB()
   ),
   webOnly: STYLE<$W>(
     IF<$W>(null),
@@ -77,17 +77,18 @@ const root = $toClassNames(null, sheet3.root, sheet3.webOnly)
 const nativeOnly = $toClassNames(null, sheet3.root, sheet3.nativeOnly)
 const webOnly = $toClassNames(null, sheet3.root, sheet3.webOnly)
 const webOnly2 = $toClassNames(null, sheet3.root, sheet3.webOnly)
-const label = $toClassNames<T>(null, sheet3.label, $atomizeRuleset<V>([{}]))
+const label = $toClassNames<T>(null, sheet3.label, ATOMIZE<V>({}))
 const image = $toClassNames(null, sheet3.image)
 
-const Text: TTyped.TPlatformAllowed<T> = root
-const View: TTyped.TPlatformAllowed<V> = webOnly2
-const View3: TTyped.TPlatformAllowed<V> = nativeOnly
-const Image: TTyped.TPlatformAllowed<I> = image
+const Text: TTyped.TPlatformAllowed<$T> = root
+const View4: TTyped.TPlatformAllowed<$V> = root
+const View: TTyped.TPlatformAllowed<$V> = webOnly2
+const View3: TTyped.TPlatformAllowed<$V> = nativeOnly
+const Image: TTyped.TPlatformAllowed<$I> = image
 //const View2: TPlatformAllowed<V> = label // ERROR
 const div: TTyped.TPlatformAllowed<$W> = root
 //const span: TPlatformAllowed<$W> = nativeOnly // ERROR
 const i: TTyped.TPlatformAllowed<$W> = webOnly
 
-const C: TTyped.TComponentAllowed<T> = label
+//const C: TTyped.TComponentAllowed<T> = label
 

@@ -17,7 +17,7 @@ const t = getEngine<TPrimitives.TextShape>()
 export const textConfig: TUseSheeter.AuthorConfig<TPrimitives.TextShape> = {
   defaultSheet: () => ({
     root: t.STYLE<T>(
-      t.WEB<T>(
+      t.WEB(
         {
           whiteSpace: 'pre-wrap',
           wordWrap: 'break-word',
@@ -33,7 +33,7 @@ export const textConfig: TUseSheeter.AuthorConfig<TPrimitives.TextShape> = {
         {
           flexShrink: 1,
         },
-        t.WEB<T>({
+        t.WEB({
           maxWidth: '100%',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
@@ -60,7 +60,7 @@ const v = getEngine<TPrimitives.ViewShape>()
 export const viewConfig: TUseSheeter.AuthorConfig<TPrimitives.ViewShape> = {
   defaultSheet: () => ({
     root: v.STYLE<V>(
-      v.WEB<V>(
+      v.WEB(
         webViewRuleset,
         v.IF<$W>(p => p.$sheetQuery.pressable, {
           cursor: 'pointer'
@@ -84,7 +84,7 @@ export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
       {
         flexShrink: 0,
       },
-      i.WEB<T>(
+      i.WEB(
         {
           fill: 'currentColor',
           fontSize: 'inherited'
@@ -108,7 +108,7 @@ export const scrollViewConfig: TUseSheeter.AuthorConfig<TPrimitives.ScrollViewSh
       {
         flexBasis: 0,
       },
-      s.WEB<V>(
+      s.WEB(
         webViewRuleset,
         {
           flexGrow: 1,
@@ -128,7 +128,7 @@ export const scrollViewConfig: TUseSheeter.AuthorConfig<TPrimitives.ScrollViewSh
         )),
     ),
     container: s.STYLE<V>(
-      s.WEB<V>(
+      s.WEB(
         webViewRuleset,
         s.IF<$W>(p => p.horizontal, {
           flexDirection: 'row'
