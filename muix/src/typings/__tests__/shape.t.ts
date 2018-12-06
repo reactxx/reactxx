@@ -11,20 +11,12 @@ export interface Props {
 //     drawerOpened?: boolean
 // }
 export interface Shape extends TTyped.ShapeAncestor {
-    rulesets: {
-        root: 'View',
-        label: 'Text',
-        nativeOnly: '$NativeText',
-        webOnly: '$Web'
-    },
     sheet: {
         root: 'V',
         label: 'T',
         nativeOnly: '$T',
         webOnly: '$W'
     },
-
-    style: 'View'
 
     theme: typeof theme
     //cases: TSheeter.ShapeMarks<'isDisabled' | 'isClosed' | 'isOpened'>

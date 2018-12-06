@@ -7,18 +7,18 @@ import { atomizeRuleset, atomizeSheet } from '../utils/atomize'
 export const getEngine = <R extends TTyped.Shape>() => untypedEngine as TTyped.TypedEngine<R>
 
 const untypedEngine = {
-    $web,
-    $native,
-    $hot,
-    $if,
-    $ifelse,
-    $width,
-    $themed: p => p,
-    $rules: (...p) => p,
+    WEB: $web,
+    NATIVE: $native,
+    HOT: $hot,
+    IF: $if,
+    IFELSE: $ifelse,
+    WIDTH: $width,
+    THEMED: p => p,
+    STYLE: (...p) => p,
     $atomizeSheet: atomizeSheet as any,
     $mergeSheets: mergeSheets as any,
     $atomizeRuleset: atomizeRuleset as any,
-    $atomize: (...pars: any[]) => atomizeRuleset(pars, null, '$atomize'),
+    ATOMIZE: (...pars: any[]) => atomizeRuleset(pars, null, '$atomize'),
     $mergeRulesets: mergeRulesets as any,
     $toClassNames: toClassNamesWithQuery as any
 } as TTyped.TypedEngine<TTyped.Shape>

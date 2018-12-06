@@ -1,67 +1,75 @@
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 import { getEngine } from '../../utils/get-engine'
 
+
+
+
 interface Shape {
   theme: {primary}
   sheetQuery: {enabled}  
 }
 
-const { $themed, $if, $web, $native, $rules, $toClassNames, $atomizeRuleset
+const { THEMED, IF, WEB, NATIVE, STYLE, $toClassNames, $atomizeRuleset
 } = getEngine<Shape>()
 
-const sheet4 = $themed(theme => ({
-  root: $rules<V>(
-    $if<V>(p => p.$sheetQuery.enabled, { backgroundColor: theme.primary })
+// type TT<R extends TTyped.RulesetIds = V> = (...r: TTyped.Ruleset<R>[]) => R
+// let iff: TT
+
+// const r = iff<T>({},iff('V'))
+
+const sheet4 = THEMED(theme => ({
+  root: STYLE<V>(
+    IF<V>(p => p.$sheetQuery.enabled, { backgroundColor: theme.primary })
   )
 }))
 
 const sheet3 = {
-  root: $rules<V>(
+  root: STYLE<V>(
     {
       margin: 0,
 
     },
-    $web<V>(
+    WEB<V>(
       {},
-      $if<$W>(null),
+      IF<$W>(null),
       {
         cursor: '',
-        ':hover': $if<$W>(null),
+        ':hover': IF<$W>(null),
         ':active': [
-          $if<$W>(null),
+          IF<$W>(null),
         ]
       }
     ),
-    $native<V>(),
+    NATIVE<V>(),
   ),
-  label: $rules<T>(
-    $if<T>(null, { color: '' }),
-    $if<V>(null),
-    $web<T>()
+  label: STYLE<T>(
+    IF<T>(null, { color: '' }),
+    IF<V>(null),
+    WEB<T>()
   ),
-  image: $rules<I>(
-    $if<I>(null),
-    $web<I>()
+  image: STYLE<I>(
+    IF<I>(null),
+    WEB<I>()
   ),
-  webOnly: $rules<$W>(
-    $if<$W>(null),
+  webOnly: STYLE<$W>(
+    IF<$W>(null),
   ),
-  nativeOnly: $rules<$V>(
+  nativeOnly: STYLE<$V>(
     {
       transform: []
     },
-    $if<$V>(null, { transform: [] }),
-    $if<V>(null),
+    IF<$V>(null, { transform: [] }),
+    IF<V>(null),
   ),
-  nativeOnlyImage: $rules<$I>(
-    $if<$I>(null),
-    $if<I>(null),
+  nativeOnlyImage: STYLE<$I>(
+    IF<$I>(null),
+    IF<I>(null),
   ),
-  nativeOnlyText: $rules<$T>(
-    $if<$V>(null, {}),
-    $if<V>(null),
-    $if<$T>(null, { color: '' }),
-    $if<T>(null),
+  nativeOnlyText: STYLE<$T>(
+    IF<$V>(null, {}),
+    IF<V>(null),
+    IF<$T>(null, { color: '' }),
+    IF<T>(null),
   ),
 }
 

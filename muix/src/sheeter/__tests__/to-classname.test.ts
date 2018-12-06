@@ -8,7 +8,7 @@ interface Shape {
   sheetQuery: { opened: boolean }
 }
 
-const { $themed, $if, $ifelse, $web, $native, $rules, $toClassNames, $atomize
+const { THEMED, IF, IFELSE, WEB, NATIVE, STYLE, $toClassNames, ATOMIZE
 } = getEngine<Shape>()
 
 describe("TO CLASSNAMES", () => {
@@ -24,34 +24,34 @@ describe("TO CLASSNAMES", () => {
     it("01: null", () => dump($toClassNames(null, null)))
     it("02: null, {}, undefined", () => dump($toClassNames(null, undefined)))
     it("03: mixed", () => dump($toClassNames(null,
-      $atomize<T>({ color: 'red' }), // ruleset source
-      $atomize<T>({ color: 'blue' }, { color: 'yellow' }), // atomized ruleset
-      $if<T>(p => true, { color: 'maroon' }), // temporary item
-      $toClassNames<T>(null, $atomize<T>({ color: 'green' })) // atomized ruleset
+      ATOMIZE<T>({ color: 'red' }), // ruleset source
+      ATOMIZE<T>({ color: 'blue' }, { color: 'yellow' }), // atomized ruleset
+      IF<T>(p => true, { color: 'maroon' }), // temporary item
+      $toClassNames<T>(null, ATOMIZE<T>({ color: 'green' })) // atomized ruleset
     )))
     it("04: query => opened", () => query(true,
-      $if(p => p.$sheetQuery.opened, { color: 'red' }),
-      $if(p => !p.$sheetQuery.opened, { color: 'blue' }),
+      IF(p => p.$sheetQuery.opened, { color: 'red' }),
+      IF(p => !p.$sheetQuery.opened, { color: 'blue' }),
     ))
     it("05: query => closed", () => query(false,
-      $if(p => p.$sheetQuery.opened, { color: 'red' }),
-      $if(p => !p.$sheetQuery.opened, { color: 'blue' }),
+      IF(p => p.$sheetQuery.opened, { color: 'red' }),
+      IF(p => !p.$sheetQuery.opened, { color: 'blue' }),
     ))
-    it("06: query => closed => pre-atomized", () => query(false, $atomize<T>(
-      $if<T>(p => p.$sheetQuery.opened, { color: 'red' }),
-      $if<T>(p => !p.$sheetQuery.opened, { color: 'blue' }),
+    it("06: query => closed => pre-atomized", () => query(false, ATOMIZE<T>(
+      IF<T>(p => p.$sheetQuery.opened, { color: 'red' }),
+      IF<T>(p => !p.$sheetQuery.opened, { color: 'blue' }),
     )))
     it("07: query => closed => pre-queried", () => query(false,
       $toClassNames<T>(sheetQuery(false),
-        $if<T>(p => p.$sheetQuery.opened, { color: 'red' }),
-        $if<T>(p => !p.$sheetQuery.opened, { color: 'blue' }),
+        IF<T>(p => p.$sheetQuery.opened, { color: 'red' }),
+        IF<T>(p => !p.$sheetQuery.opened, { color: 'blue' }),
       )
     ))
     it("08: static if and ifelse", () => {
       const inRender = (disabled: boolean) =>
         dump($toClassNames<T>(sheetQuery(false),
-          $if<T>(disabled, { color: 'grey' }),
-          $ifelse<T>(disabled, { backgroundColor: 'blue' }, { backgroundColor: 'green' }),
+          IF<T>(disabled, { color: 'grey' }),
+          IFELSE<T>(disabled, { backgroundColor: 'blue' }, { backgroundColor: 'green' }),
         ))
       inRender(true)
       inRender(false)

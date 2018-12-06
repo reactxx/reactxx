@@ -16,8 +16,8 @@ const t = getEngine<TPrimitives.TextShape>()
 
 export const textConfig: TUseSheeter.AuthorConfig<TPrimitives.TextShape> = {
   defaultSheet: () => ({
-    root: t.$rules<T>(
-      t.$web<T>(
+    root: t.STYLE<T>(
+      t.WEB<T>(
         {
           whiteSpace: 'pre-wrap',
           wordWrap: 'break-word',
@@ -25,15 +25,15 @@ export const textConfig: TUseSheeter.AuthorConfig<TPrimitives.TextShape> = {
             display: 'inline',
           },
         },
-        t.$if<$W>(p => p.$sheetQuery.pressable, {
+        t.IF<$W>(p => p.$sheetQuery.pressable, {
           cursor: 'pointer'
         })
       ),
-      t.$if<T>(p => p.singleLine,
+      t.IF<T>(p => p.singleLine,
         {
           flexShrink: 1,
         },
-        t.$web<T>({
+        t.WEB<T>({
           maxWidth: '100%',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
@@ -59,10 +59,10 @@ const v = getEngine<TPrimitives.ViewShape>()
 
 export const viewConfig: TUseSheeter.AuthorConfig<TPrimitives.ViewShape> = {
   defaultSheet: () => ({
-    root: v.$rules<V>(
-      v.$web<V>(
+    root: v.STYLE<V>(
+      v.WEB<V>(
         webViewRuleset,
-        v.$if<$W>(p => p.$sheetQuery.pressable, {
+        v.IF<$W>(p => p.$sheetQuery.pressable, {
           cursor: 'pointer'
         })
       )
@@ -80,16 +80,16 @@ export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
     }
   },
   defaultSheet: () => ({
-    root: i.$rules<T>(
+    root: i.STYLE<T>(
       {
         flexShrink: 0,
       },
-      i.$web<T>(
+      i.WEB<T>(
         {
           fill: 'currentColor',
           fontSize: 'inherited'
         },
-        i.$if<$W>(p => p.$sheetQuery.pressable, {
+        i.IF<$W>(p => p.$sheetQuery.pressable, {
           cursor: 'pointer'
         })
       )
@@ -104,11 +104,11 @@ const s = getEngine<TPrimitives.ScrollViewShape>()
 
 export const scrollViewConfig: TUseSheeter.AuthorConfig<TPrimitives.ScrollViewShape> = {
   defaultSheet: () => ({
-    root: s.$rules<V>(
+    root: s.STYLE<V>(
       {
         flexBasis: 0,
       },
-      s.$web<V>(
+      s.WEB<V>(
         webViewRuleset,
         {
           flexGrow: 1,
@@ -120,17 +120,17 @@ export const scrollViewConfig: TUseSheeter.AuthorConfig<TPrimitives.ScrollViewSh
           // improve scroll performance.
           transform: 'translateZ(0)'
         },
-        s.$if<$W>(p => p.horizontal, {
+        s.IF<$W>(p => p.horizontal, {
           flexDirection: 'row',
           overflowX: 'auto',
           overflowY: 'hidden'
         }
         )),
     ),
-    container: s.$rules<V>(
-      s.$web<V>(
+    container: s.STYLE<V>(
+      s.WEB<V>(
         webViewRuleset,
-        s.$if<$W>(p => p.horizontal, {
+        s.IF<$W>(p => p.horizontal, {
           flexDirection: 'row'
         })
       ),

@@ -11,7 +11,7 @@ interface Shape extends ShapeLow {
   }
 }
 
-const { $themed, $web, $native, $if, $hot, $ifelse, $width, $rules, $toClassNames, $atomizeRuleset
+const { THEMED, WEB, NATIVE, IF, HOT, IFELSE, WIDTH, STYLE, $toClassNames, $atomizeRuleset
 } = getEngine<Shape>()
 
 
@@ -36,26 +36,26 @@ const r4: TTyped.Sheet<Shape>['root'] = [
 
 const r5: TTyped.Rulesets<V> = [
   // color: 'red' // ERROR
-  $if<V>(null, {
+  IF<V>(null, {
     // color: 'red' // ERROR
   }),
-  $ifelse<V>(null, {
+  IFELSE<V>(null, {
     // color: 'red' // ERROR
   }, [{
     // color: 'red' // ERROR
   }]),
-  $web<V>(null, {
+  WEB<V>(null, {
     color: 'red'
   }),
-  $native<V>(null, {
+  NATIVE<V>(null, {
     // color: 'red' // ERROR
     transform: []
   }),
-  $hot<V>(({ $sheetQuery: { backgroundColor } }) => ({
+  HOT<V>(({ $sheetQuery: { backgroundColor } }) => ({
     // color: 'red' // ERROR
     backgroundColor
   })),
-  $width<V>(1024, {
+  WIDTH<V>(1024, {
     // color: 'red' // ERROR
   }),
 ]
@@ -84,7 +84,7 @@ const s3: TTyped.PartialSheet<Shape> = {
 const s4: TTyped.Sheet<Shape> = {
   root: [
     classNames,
-    $if<V>(({ $sheetQuery: { color } }) => true,
+    IF<V>(({ $sheetQuery: { color } }) => true,
       {
         // color: 'red' // error
         // transform: [] // error
@@ -94,7 +94,7 @@ const s4: TTyped.Sheet<Shape> = {
       // color: 'red' // error
       // transform: [] // error
     },
-    $web<V>(
+    WEB<V>(
       {
         color: 'red',
         ':hover': {
@@ -104,15 +104,15 @@ const s4: TTyped.Sheet<Shape> = {
           }
         }
       },
-      $if<$W>(null, { ':hover': { color: 'red' } }, classNamesW),
+      IF<$W>(null, { ':hover': { color: 'red' } }, classNamesW),
     ),
-    $native<V>(
+    NATIVE<V>(
       {
         transform: [],
         // color: 'red' // error
       },
       classNames,
-      $if<$V>(null, { transform: [] }), // error
+      IF<$V>(null, { transform: [] }), // error
     ),
   ],
   label: [
@@ -120,10 +120,10 @@ const s4: TTyped.Sheet<Shape> = {
       color: 'red' // error
       // transform: [] // error
     },
-    $web<T>({
+    WEB<T>({
       color: 'red',
     }),
-    $native<T>({
+    NATIVE<T>({
       transform: [],
       color: 'red'
     }),
@@ -138,10 +138,10 @@ const s4: TTyped.Sheet<Shape> = {
         }
       }
     },
-    $web<$W>({
+    WEB<$W>({
       color: 'red'
     }),
-    $if<$W>(null, { ':hover': {} }),
+    IF<$W>(null, { ':hover': {} }),
   ],
   nativeOnly: [
     {
@@ -149,7 +149,7 @@ const s4: TTyped.Sheet<Shape> = {
       // color: 'red' // error
     },
     //classNames,
-    $native<$T>({
+    NATIVE<$T>({
       transform: [],
       // color: 'red' // error
     }),

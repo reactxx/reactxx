@@ -14,7 +14,8 @@ export namespace TTyped {
   //******************************************************
 
   export type CommonIds = V | T | I
-  export type RulesetIds = $W | $T | $V | $I | CommonIds
+  export type NativeIds = $V | $T | $I
+  export type RulesetIds = $W | NativeIds | CommonIds
 
   type WebStyle = React.CSSProperties & { [P in CSS.Pseudos]?: Ruleset<$W> | Ruleset<$W>[] }
 
@@ -58,26 +59,25 @@ export namespace TTyped {
 
 
   export interface TypedEngine<S extends Shape> {
-    $themed: <R extends any>(p: (t: getTheme<S>) => R) => R
-    $rules: <R extends RulesetIds = V>(...pars: Ruleset<R>[]) => R
+    THEMED: <R extends any>(p: (t: getTheme<S>) => R) => R
+    STYLE: <R extends RulesetIds = V>(...pars: Ruleset<R>[]) => R
 
-    $web: <R extends RulesetIds = V>(...r: Ruleset<$W>[]) => R
-    $native: <R extends RulesetIds = V>(...r: Ruleset<TNative<R>>[]) => R
+    WEB: <R extends RulesetIds = V>(...r: Ruleset<$W>[]) => V
+    NATIVE: <R extends NativeIds = $V>(...r: Ruleset<TNative<R>>[]) => R
 
-    $if: <R extends RulesetIds = V>(cond: boolean | ((p: PropsCode<S>) => boolean), ...r: Ruleset<R>[]) => R
-    $ifelse: <R extends RulesetIds = V>(cond: boolean | ((p: PropsCode<S>) => boolean), ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
-    $width: <R extends RulesetIds = V>(interval: TEngine.WidthInterval, ...r: Ruleset<R>[]) => R
-    $hot: <R extends RulesetIds = V>(cond: (p: PropsCode<S>) => Ruleset<R> | Ruleset<R>[]) => R
+    IF: <R extends RulesetIds>(cond: boolean | ((p: PropsCode<S>) => boolean), ...r: Ruleset<R>[]) => R
+    IFELSE: <R extends RulesetIds = V>(cond: boolean | ((p: PropsCode<S>) => boolean), ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
+    WIDTH: <R extends RulesetIds = V>(interval: TEngine.WidthInterval, ...r: Ruleset<R>[]) => R
+    HOT: <R extends RulesetIds = V>(cond: (p: PropsCode<S>) => Ruleset<R> | Ruleset<R>[]) => R
 
     $atomizeRuleset: <R extends RulesetIds = V>(r: RulesetOrCreator<S, R>, theme?: getTheme<S>, path?: string) => R
-    $atomize: <R extends RulesetIds = V>(...r: Ruleset<R>[]) => R
+    ATOMIZE: <R extends RulesetIds = V>(...r: Ruleset<R>[]) => R
     $mergeRulesets: <R extends RulesetIds = V>(r: Ruleset<R>[]) => R
     $toClassNames: <R extends RulesetIds = V>(query: PropsCode<S>, ...rules: RulesetSimple<R>[]) => R
 
     $atomizeSheet: (sheet: PartialSheet<S>, theme?: getTheme<S>, path?: string) => PartialSheet<S>
     $mergeSheets: (sources: PartialSheet<S>[]) => PartialSheet<S>
   }
-
   //******************************************************
   //* SHEET AND CREATORS
   //******************************************************
@@ -133,7 +133,7 @@ export namespace TTyped {
   export type getSheet<R extends Shape> = R['sheet']
   export type getSheetQuery<R extends Shape> = R['sheetQuery']
 
-  export type PropsCode<R extends TTyped.Shape = TTyped.Shape> = 
+  export type PropsCode<R extends TTyped.Shape = TTyped.Shape> =
     PropsCodeLow<R> &
     getProps<R>
 
@@ -155,7 +155,7 @@ export namespace TTyped {
       $web?: RulesetType<$W, true>
       $native?: RulesetType<TNative<R>>
     }
-    export type StyleSimple<R extends Shape = Shape> = getClassName<R>
+  export type StyleSimple<R extends Shape = Shape> = getClassName<R>
 
   export type StyleOrCreator<R extends Shape = Shape> =
     ValueOrCreator<Style<getClassName<R>>, getTheme<R>>
