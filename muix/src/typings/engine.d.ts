@@ -27,7 +27,7 @@ declare namespace TEngine {
     $c$?: boolean // ReactXX component signature
   }
 
-  export type Sheet = Record<string, Queryables>
+  export type Sheet = Record<string, Rulesets>
 
   // **********************************************
   // CROSSPLATFORM

@@ -1,6 +1,6 @@
 import React from 'react'
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
-import { getEngine } from '../utils/get-engine'
+import { getEngine, toClassNamesWithQuery } from 'reactxx-sheeter'
 
 //let $atomizeRuleset, $toClassNames
 import { initPlatform, dump, afterLastWin } from "./init-platform.t"

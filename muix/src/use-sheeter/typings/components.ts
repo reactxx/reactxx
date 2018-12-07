@@ -6,16 +6,16 @@ declare module 'reactxx-typings' {
   namespace TExtensions {
 
     interface Shape {
-      propsNative?: TTyped.EmptyInterface // native only props 
-      propsWeb?: React.HTMLAttributes<Element>// web only props
-      staticProps?: TTyped.EmptyInterface
+      //propsNative?: TTyped.EmptyInterface // native only props 
+      //propsWeb?: React.HTMLAttributes<Element>// web only props
+      //staticProps?: TTyped.EmptyInterface
       events?: TTyped.EmptyInterface // common events
     }
 
-    type getPropsWeb<R extends Shape> = R['propsWeb']
-    type getPropsNative<R extends Shape> = R['propsNative']
+    //type getPropsWeb<R extends Shape> = R['propsWeb']
+    //type getPropsNative<R extends Shape> = R['propsNative']
     type getEvents<R extends Shape = Shape> = keyof R['events']
-    type getStaticProps<R extends Shape = Shape> = keyof R['staticProps'] extends never ? TTyped.FakeInterface : R['staticProps']
+    //type getStaticProps<R extends Shape = Shape> = keyof R['staticProps'] extends never ? TTyped.FakeInterface : R['staticProps']
 
   }
 }
@@ -29,8 +29,8 @@ export namespace TComponents {
     TEventsX<R>
 
   export interface PropsLow<R extends TTyped.Shape> {
-    $web?: Partial<TExtensions.getPropsWeb<R> & TTyped.getProps<R>> //web specific props
-    $native?: Partial<TExtensions.getPropsNative<R> & TTyped.getProps<R>> //native specific props
+    $web?: TTyped.getRootWeb<R> // Partial<TExtensions.getPropsWeb<R> & TTyped.getProps<R>> //web specific props
+    $native?: TTyped.getRootNative<R> //Partial<TExtensions.getPropsNative<R> & TTyped.getProps<R>> //native specific props
     css?: TTyped.RulesetOrCreator<R>
     styles?: TTyped.StyleOrCreator<R>
     classes?: TTyped.PartialSheetOrCreator<R> // cross platform sheet

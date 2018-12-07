@@ -42,7 +42,7 @@ describe("THEME PROVIDER", () => {
     })
 
     it('01: ', () => {
-      const Comp = compCreator({ defaultSheet: { root: {} } }, null)
+      const Comp = compCreator(null)
       const {getByTestId, container, unmount} = render(<App>
         <Comp themedProps={theme => ({ p1: theme.p1Prop })} css={theme => ({ color: theme.primaryColor })} />
       </App>)

@@ -1,5 +1,5 @@
 import { $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
-import { getEngine } from '../utils/get-engine'
+import { getEngine, atomizeSheet, mergeSheets } from 'reactxx-sheeter'
 
 //import {  } from "reactxx-sheeter"
 import { initPlatform, Shape as ShapeLow, theme } from "./init-platform.t"
@@ -9,8 +9,7 @@ interface Shape extends ShapeLow {
 }
 
 const {
-  THEMED, IF, WEB, NATIVE, STYLE,
-  $atomizeSheet, $mergeSheets, ATOMIZE
+  THEMED, IF, WEB, NATIVE, STYLE, ATOMIZE
 } = getEngine<Shape>()
 
 describe("SHEET", () => {
@@ -19,35 +18,35 @@ describe("SHEET", () => {
     let sheet
 
     it("01 null", () => {
-      const sheet = $atomizeSheet(null)
+      const sheet = atomizeSheet(null)
       expect(sheet).toMatchSnapshot()
     })
     it("02 {}", () => {
-      const sheet = $atomizeSheet({})
+      const sheet = atomizeSheet({})
       expect(sheet).toMatchSnapshot()
     })
     it("03 backgroundColor: 'red'", () => {
-      const sheet = $atomizeSheet({
-        root: STYLE<V>({ backgroundColor: 'red' })
+      const sheet = atomizeSheet({
+        root: { backgroundColor: 'red' }
       })
       expect(sheet).toMatchSnapshot()
     })
     it("04 merge", () => {
-      const sheet = $mergeSheets(null)
+      const sheet = mergeSheets(null)
       expect(sheet).toMatchSnapshot()
     })
     it("05 merge", () => {
-      const sheet = $mergeSheets([])
+      const sheet = mergeSheets([])
       expect(sheet).toMatchSnapshot()
     })
     it("06 merge", () => {
-      const sheet = $mergeSheets([null, {}, undefined])
+      const sheet = mergeSheets([null, {}, undefined])
       expect(sheet).toMatchSnapshot()
     })
     it("07 merge", () => {
-      const sheet = $mergeSheets([
+      const sheet = mergeSheets([
         null, {}, undefined,
-        $atomizeSheet({
+        atomizeSheet({
           root: STYLE<V>({ backgroundColor: 'green' }),
           label: STYLE<T>({ color: 'green' }),
         }) as any,
@@ -55,12 +54,12 @@ describe("SHEET", () => {
       expect(sheet).toMatchSnapshot()
     })
     it("08 merge", () => {
-      sheet = $mergeSheets([
-        $atomizeSheet({
+      sheet = mergeSheets([
+        atomizeSheet({
           root: STYLE<V>({ backgroundColor: 'red' }),
           label: STYLE<T>({ color: 'red' }),
         }),
-        $atomizeSheet({
+        atomizeSheet({
           root: STYLE<V>({ backgroundColor: 'green' }),
           webOnly: STYLE<$W>({ color: 'green' }),
         }),
@@ -68,21 +67,21 @@ describe("SHEET", () => {
       expect(sheet).toMatchSnapshot()
     })
     it("09 merge", () => {
-      sheet = $mergeSheets([
-        $atomizeSheet({
+      sheet = mergeSheets([
+        atomizeSheet({
           root: STYLE<V>({ backgroundColor: 'red' }),
         }),
-        $atomizeSheet({
+        atomizeSheet({
           root: STYLE<V>(WEB({ color: 'green' })),
         }),
-        $atomizeSheet({
+        atomizeSheet({
           root: STYLE<V>({ backgroundColor: 'blue' }),
         }),
       ])
       expect(sheet).toMatchSnapshot()
     })
     it("10 with theme", () => {
-      sheet = $atomizeSheet(
+      sheet = atomizeSheet(
         THEMED(theme => ({
           root: STYLE<V>({
             backgroundColor: theme.primary.normal.backgroundColor
@@ -106,19 +105,19 @@ describe("SHEET", () => {
         ]
       }
       expect(sheetSource).toMatchSnapshot()
-      sheet = $atomizeSheet(sheetSource)
+      sheet = atomizeSheet(sheetSource)
       expect(sheetSource).toMatchSnapshot()
       expect(sheet).toMatchSnapshot()
-      sheet = $atomizeSheet(sheet)
+      sheet = atomizeSheet(sheet)
       expect(sheet).toMatchSnapshot()
     })
     it("12 merge ERROR, sheets must be atomized first", () => {
-      const fnc = () => $mergeSheets([
+      const fnc = () => mergeSheets([
         {
           root: STYLE<V>({ backgroundColor: 'red' }),
           label: STYLE<T>({ color: 'red' }),
         },
-        $atomizeSheet({
+        atomizeSheet({
           root: STYLE<V>({ backgroundColor: 'green' }),
           webOnly: STYLE<$W>({ color: 'green' }),
         }),

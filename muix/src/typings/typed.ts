@@ -72,6 +72,7 @@ export namespace TTyped {
 
     WEB: (...r: Ruleset<$W>[]) => I
     NATIVE: <R extends NativeIds = $V>(...r: Ruleset<TNative<R>>[]) => I
+    ROOT: (...pars: Ruleset<getClassName<S>>[]) => getClassName<S>
 
     IF: <R extends RulesetIds>(cond: boolean | ((p: PropsCode<S>) => boolean), ...r: Ruleset<R>[]) => R
     IFELSE: <R extends RulesetIds = V>(cond: boolean | ((p: PropsCode<S>) => boolean), ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
@@ -84,8 +85,8 @@ export namespace TTyped {
     $mergeRulesets: <R extends RulesetIds = V>(r: Ruleset<R>[]) => R
     $toClassNames: <R extends RulesetIds = V>(query: PropsCode<S>, ...rules: RulesetSimple<R>[]) => R
 
-    $atomizeSheet: (sheet: PartialSheet<S>, theme?: getTheme<S>, path?: string) => PartialSheet<S>
-    $mergeSheets: (sources: PartialSheet<S>[]) => PartialSheet<S>
+    //$atomizeSheet: (sheet: PartialSheet<S>, theme?: getTheme<S>, path?: string) => PartialSheet<S>
+    //$mergeSheets: (sources: PartialSheet<S>[]) => PartialSheet<S>
   }
   //******************************************************
   //* SHEET AND CREATORS
@@ -93,9 +94,12 @@ export namespace TTyped {
 
   type ValueOrCreator<T, Theme> = T | ((theme: Theme) => T)
 
-  export type SheetSimple<R extends Shape> = {
-    [P in keyof getSheet<R>]: getSheet<R>[P]
-  }
+  // export type SheetSimple<R extends Shape> = {
+  //   [P in keyof getSheet<R>]: getSheet<R>[P]
+  // }
+
+  export type SheetSimple<R extends Shape> = getSheet<R>
+
   export type ClassNameSimple<R extends Shape> = getClassName<R>
   export type RulesetSimple<Id extends RulesetIds = RulesetIds> = TAllowed<Id>
 
@@ -120,8 +124,12 @@ export namespace TTyped {
 
   // component shape
   export interface Shape extends TExtensions.Shape {
+    root?: {
+      web: React.DOMAttributes<Element>
+      native: TTyped.TNativeProps
+    }
     sheet?: Record<string, RulesetIds>
-    className?: CommonIds
+    //className?: CommonIds
     theme?: EmptyInterface
     sheetQuery?: EmptyInterface
     props?: EmptyInterface // common (web and native) props, excluding events
@@ -129,8 +137,12 @@ export namespace TTyped {
 
   // ancestor for Shape inheritance
   export interface ShapeAncestor extends TExtensions.Shape {
+    root?: {
+      web: React.HTMLAttributes<Element>
+      native: TTyped.TNativeProps
+    }
     sheet?: Record<string, RulesetIds>
-    className?: CommonIds
+    //className?: CommonIds
     props?: EmptyInterface // common (web and native) props, excluding events
     theme?: EmptyInterface
     sheetQuery?: EmptyInterface
@@ -138,9 +150,17 @@ export namespace TTyped {
 
   export type getTheme<R extends Shape = Shape> = keyof R['theme'] extends never ? any : R['theme']
   export type getProps<R extends Shape> = R['props']
-  export type getClassName<R extends Shape> = R['className']
+  //export type getClassName<R extends Shape> = R['className']
   export type getSheet<R extends Shape> = R['sheet']
   export type getSheetQuery<R extends Shape> = R['sheetQuery']
+
+  type getRoot<R extends Shape> = R['root']
+  export type getRootWeb<R extends Shape> = getRoot<R>['web']
+  export type getRootNative<R extends Shape> = getRoot<R>['native']
+
+  type getRootProps<R extends Shape> = { web: getRootWeb<R>; native: getRootNative<R> }
+  export type getClassName<R extends Shape> = TTyped.TNativePropsToStyle<getRootNative<R>>
+
 
   export type PropsCode<R extends TTyped.Shape = TTyped.Shape> =
     PropsCodeLow<R> &

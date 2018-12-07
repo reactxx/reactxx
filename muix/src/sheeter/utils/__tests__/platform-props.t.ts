@@ -4,10 +4,10 @@ import { TTyped, V } from 'reactxx-typings'
 
 interface Shape {
   root: {
-    web: React.HTMLAttributes<Element>
+    web: React.DOMAttributes<Element>
     native: TTyped.TNativeProps
   }
-  className: getRootClassName<this>
+  //className: getRootClassName<this>
 }
 
 type getRoot<R extends Shape> = R['root']
@@ -15,10 +15,10 @@ type getRootWeb<R extends Shape> = getRoot<R>['web']
 type getRootNative<R extends Shape> = getRoot<R>['native']
 
 type getRootProps<R extends Shape> = { web: getRootWeb<R>; native: getRootNative<R> }
-type getRootPropsWeb<R extends Shape> = getRootProps<R>['web']
-type getRootPropsNative<R extends Shape> = getRootProps<R>['native']
-type getRootClassName<R extends Shape> = TTyped.TNativePropsToStyle<getRootPropsNative<R>>
-type getClassName<R extends Shape> = R['className']
+type getClassName<R extends Shape> = TTyped.TNativePropsToStyle<getRootNative<R>>
+//type getClassName<R extends Shape> = R['className']
+// type getRootPropsWeb<R extends Shape> = getRootProps<R>['web']
+// type getRootPropsNative<R extends Shape> = getRootProps<R>['native']
 
 
 interface Shape1 extends Shape {

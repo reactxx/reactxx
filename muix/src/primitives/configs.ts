@@ -12,36 +12,39 @@ export const hasPlatformEvents = (propsCode: TTyped.PropsCode) => !!(
   //     propsCode.onPress || propsCode.onPressIn || propsCode.onPressOut || propsCode.onLongPress
 )
 
-const t = getEngine<TPrimitives.TextShape>()
+const t = getEngine<TPrimitives.TextShapeLow>()
+
+export const tsheet = {
+  root: t.ROOT(
+    t.WEB(
+      {
+        whiteSpace: 'pre-wrap',
+        wordWrap: 'break-word',
+        [`& .${TPrimitives.Consts.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. Consts.textClassName is className for Text component div.
+          display: 'inline',
+        },
+      },
+      t.IF<$W>(p => p.$sheetQuery.pressable, {
+        cursor: 'pointer'
+      })
+    ),
+    t.IF<V>(p => p.singleLine,
+      {
+        flexShrink: 1,
+      },
+      t.WEB({
+        maxWidth: '100%',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap'
+      }),
+    )
+  ),
+
+}
 
 export const textConfig: TUseSheeter.AuthorConfig<TPrimitives.TextShape> = {
-  defaultSheet: () => ({
-    root: t.STYLE<T>(
-      t.WEB(
-        {
-          whiteSpace: 'pre-wrap',
-          wordWrap: 'break-word',
-          [`& .${TPrimitives.Consts.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. Consts.textClassName is className for Text component div.
-            display: 'inline',
-          },
-        },
-        t.IF<$W>(p => p.$sheetQuery.pressable, {
-          cursor: 'pointer'
-        })
-      ),
-      t.IF<T>(p => p.singleLine,
-        {
-          flexShrink: 1,
-        },
-        t.WEB({
-          maxWidth: '100%',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap'
-        }),
-      )
-    ),
-  })
+  defaultSheet: tsheet
 }
 
 // mimic React Native view behavior
@@ -59,7 +62,7 @@ const v = getEngine<TPrimitives.ViewShape>()
 
 export const viewConfig: TUseSheeter.AuthorConfig<TPrimitives.ViewShape> = {
   defaultSheet: () => ({
-    root: v.STYLE<V>(
+    root: v.ROOT(
       v.WEB(
         webViewRuleset,
         v.IF<$W>(p => p.$sheetQuery.pressable, {
@@ -80,7 +83,7 @@ export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
     }
   },
   defaultSheet: () => ({
-    root: i.STYLE<T>(
+    root: i.ROOT(
       {
         flexShrink: 0,
       },
@@ -104,7 +107,7 @@ const s = getEngine<TPrimitives.ScrollViewShape>()
 
 export const scrollViewConfig: TUseSheeter.AuthorConfig<TPrimitives.ScrollViewShape> = {
   defaultSheet: () => ({
-    root: s.STYLE<V>(
+    root: s.ROOT(
       {
         flexBasis: 0,
       },
