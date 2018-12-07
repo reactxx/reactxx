@@ -48,21 +48,17 @@ export namespace TTyped {
     R
 
   export type TAllowed<R extends RulesetIds> =
-    R extends V ? V | I | O :
-    R extends T ? T | V | I | O :
-    R extends $T ? $T | $V | T | V | I | O :
-    R extends $V ? $V | V | I | O :
+    R extends V ? V | O :
+    R extends T ? T | V | O :
+    R extends $T ? $T | $V | T | V | O :
+    R extends $V ? $V | V | O :
     R extends $I ? $I | I | O :
-    R extends $W ? $W | T | V | I | O :
+    R extends $W ? $W | T | V | O :
+    R extends I ? I | O :
     R | O
 
   export type TPlatformAllowed<R extends PlatformIds> =
     TAllowed<R> | $W
-  // R extends $W ? $W | V | T | I | O :
-  // R extends T ? T | V | $W | $T | $V | O :
-  // R extends V ? V | $W | $V | O :
-  // R extends I ? I | $W| O :
-  // never
 
   export type Ruleset<R extends RulesetIds = RulesetIds> = RulesetType<R> | TAllowed<R>
   export type Rulesets<R extends RulesetIds = RulesetIds> = Ruleset<R> | Ruleset<R>[]
@@ -70,8 +66,8 @@ export namespace TTyped {
   export interface TypedEngine<S extends Shape> {
     THEMED: <R extends any>(p: (t: getTheme<S>) => R) => R
 
-    WEB: (...r: Ruleset<$W>[]) => I
-    NATIVE: <R extends NativeIds = $V>(...r: Ruleset<TNative<R>>[]) => I
+    WEB: (...r: Ruleset<$W>[]) => O
+    NATIVE: <R extends NativeIds = $V>(...r: Ruleset<TNative<R>>[]) => O
     ROOT: (...pars: Ruleset<getClassName<S>>[]) => getClassName<S>
 
     IF: <R extends RulesetIds>(cond: boolean | ((p: PropsCode<S>) => boolean), ...r: Ruleset<R>[]) => R

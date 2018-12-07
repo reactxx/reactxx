@@ -27,8 +27,7 @@ export namespace TPrimitives {
     //events: TTyped.ShapeMarks<TComponents.TEventsAll>
   }
 
-  export interface TextShape extends TextShapeLow {
-    sheet: typeof tsheet,
+  export interface TextShape extends TextShapeLow {   sheet: typeof tsheet,
   }
   export interface TextShapeLow extends TTyped.ShapeAncestor {
     root: {

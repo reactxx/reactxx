@@ -12,10 +12,6 @@ export interface Shape extends TTyped.ShapeAncestor {
     web: React.AnchorHTMLAttributes<HTMLAnchorElement>
     native: ReactN.TextProperties
   }
-  // sheet: {
-  //   root: 'T'
-  // },
-  //className: 'T',
   props: {
     p1?: string
   },
