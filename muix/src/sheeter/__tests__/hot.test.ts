@@ -66,18 +66,18 @@ describe("SHEETER HOT", () => {
       beforeEach(() => initPlatform(isWeb))
 
       // '{ color: queryPar.primary }' is processet very late (during $toClassNames processing)
-      const RS1 = HOT<T>(queryPar => ({ color: queryPar.$sheetQuery.primary }))
-      const RS2 = HOT<T>(queryPar => IF<T>(true, { color: queryPar.$sheetQuery.primary }))
+      const RS1 = HOT<T>(queryPar => ({ color: queryPar.primary }))
+      const RS2 = HOT<T>(queryPar => IF<T>(true, { color: queryPar.primary }))
       const RS3 = HOT<T>(queryPar => [
-        IF<T>(queryPar => queryPar.$sheetQuery.primary === 'red', { color: queryPar.$sheetQuery.primary }),
-        HOT<T>(queryPar => ({ backgroundColor: queryPar.$sheetQuery.primary }))
+        IF<T>(queryPar => queryPar.primary === 'red', { color: queryPar.primary }),
+        HOT<T>(queryPar => ({ backgroundColor: queryPar.primary }))
       ])
 
       const test = (msg: string, ruleset: T) => {
-        it("01: red " + msg, () => afterLastWin($toClassNames<T>({ $sheetQuery: { primary: 'red' } },
+        it("01: red " + msg, () => afterLastWin($toClassNames<T>({ primary: 'red' },
           ruleset // color is red
         )))
-        it("02: green " + msg, () => afterLastWin($toClassNames<T>({ $sheetQuery: { primary: 'green' } },
+        it("02: green " + msg, () => afterLastWin($toClassNames<T>({ primary: 'green' },
           ruleset // color is green
         )))
       }
@@ -169,7 +169,7 @@ const sheet_ = ({ theme, getDisabled, getVariant, $if }) => {
     $map(getVariant, {
 
     }),
-    HOT(({ $sheetQuery: { primary } }) => ({}))
+    HOT(( { primary }) => ({}))
   ]
 }
 

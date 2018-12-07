@@ -19,7 +19,7 @@ const { THEMED, IF, WEB, NATIVE, STYLE, $toClassNames, ATOMIZE
 
 const sheet4 = THEMED(theme => ({
   root: STYLE<V>(
-    IF<V>(p => p.$sheetQuery.enabled, { backgroundColor: theme.primary })
+    IF<V>(p => p.enabled, { backgroundColor: theme.primary })
   )
 }))
 

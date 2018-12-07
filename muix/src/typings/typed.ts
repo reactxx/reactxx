@@ -160,10 +160,11 @@ export namespace TTyped {
 
   export type PropsCode<R extends TTyped.Shape = TTyped.Shape> =
     PropsCodeLow<R> &
+    getSheetQuery<R> &
     getProps<R>
 
   export interface PropsCodeLow<R extends TTyped.Shape> extends TEngine.WidthsQuery {
-    $sheetQuery?: getSheetQuery<R>
+    //$sheetQuery?: getSheetQuery<R>
     children?: React.ReactNode
   }
 

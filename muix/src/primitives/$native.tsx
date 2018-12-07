@@ -15,20 +15,20 @@ import { TPrimitives } from './shapes'
 
 export const getView: TUseSheeter.GetComponent<TPrimitives.ViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActView: typeof View = isAnimated ? Animated.View : View
-    const { toClassNames, propsCode: { children, ...rest }, classes, css, styles, $sheetQuery }
+    const { toClassNames, propsCode, propsCode: { children, ...rest }, classes, css, styles }
         = useSheeter<TPrimitives.ViewShape>(props, authorConfig, displayName, userConfig)
-    $sheetQuery.pressable = hasPlatformEvents(rest)
+    propsCode.pressable = hasPlatformEvents(rest)
     const rootStyle = toClassNames(classes.root, css)
     const res = <ActView css={rootStyle} styles={styles} {...rest} /> as any
-    return $sheetQuery.pressable ? <TouchableWithoutFeedback {...{/*events*/ }}>{res}</TouchableWithoutFeedback> : res
+    return propsCode.pressable ? <TouchableWithoutFeedback {...{/*events*/ }}>{res}</TouchableWithoutFeedback> : res
 }
 
 export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActIcon: typeof MaterialCommunityIcons = isAnimated ? AnimatedIconLow : MaterialCommunityIcons
-    const { toClassNames, propsCode: { data, url, children, ...rest }, classes, css, styles, $sheetQuery }
+    const { toClassNames, propsCode, propsCode: { data, url, children, ...rest }, classes, css, styles }
         = useSheeter<TPrimitives.IconShape>(props, authorConfig, displayName, userConfig)
 
-    $sheetQuery.pressable = hasPlatformEvents(rest)
+    propsCode.pressable = hasPlatformEvents(rest)
     //Link to URL
     let onPress
     const doPress = !url ? onPress : () => Linking.canOpenURL(url).then(supported => {
@@ -47,9 +47,9 @@ const AnimatedIconLow: typeof MaterialCommunityIcons = Animated.createAnimatedCo
 
 export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActText: typeof Text = isAnimated ? Animated.Text : Text
-    const { toClassNames, propsCode: { url, children, singleLine, ...rest }, classes, css, styles, $sheetQuery }
+    const { toClassNames, propsCode, propsCode: { url, children, singleLine, ...rest }, classes, css, styles }
         = useSheeter<TPrimitives.TextShape>(props, authorConfig, displayName, userConfig)
-    $sheetQuery.pressable = hasPlatformEvents(rest)
+    propsCode.pressable = hasPlatformEvents(rest)
     let doPress
     const otherProps: TextProperties = {
         onPress: !url ? doPress : () => Linking.canOpenURL(url).then(supported => {
@@ -66,7 +66,7 @@ export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> = (authorC
 
 export const getScrollView: TUseSheeter.GetComponent<TPrimitives.ScrollViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActScrollView: typeof ScrollView = isAnimated ? Animated.ScrollView : ScrollView
-    const { toClassNames, propsCode: { children, ...rest }, classes, css, styles, $sheetQuery }
+    const { toClassNames, propsCode: { children, ...rest }, classes, css, styles }
         = useSheeter<TPrimitives.ScrollViewShape>(props, authorConfig, displayName, userConfig)
     return <ActScrollView
         css={toClassNames(classes.root, css)}

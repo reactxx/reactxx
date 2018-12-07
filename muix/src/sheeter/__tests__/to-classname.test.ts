@@ -14,7 +14,7 @@ const { THEMED, IF, IFELSE, WEB, NATIVE, STYLE, $toClassNames, ATOMIZE
 describe("TO CLASSNAMES", () => {
 
   type Par = { opened: boolean, theme: null }
-  const sheetQuery = (opened: boolean) => ({ $sheetQuery: { opened } })
+  const sheetQuery = (opened: boolean) => ({ opened })
   const query = (opened: boolean, ...ruleset: TTyped.RulesetSimple[]) => dump($toClassNames<TTyped.RulesetIds>(sheetQuery(opened), ...ruleset))
 
   const doTest = (isWeb: boolean) => {
@@ -30,21 +30,21 @@ describe("TO CLASSNAMES", () => {
       $toClassNames<T>(null, ATOMIZE<T>({ color: 'green' })) // atomized ruleset
     )))
     it("04: query => opened", () => query(true,
-      IF(p => p.$sheetQuery.opened, { color: 'red' }),
-      IF(p => !p.$sheetQuery.opened, { color: 'blue' }),
+      IF(p => p.opened, { color: 'red' }),
+      IF(p => !p.opened, { color: 'blue' }),
     ))
     it("05: query => closed", () => query(false,
-      IF(p => p.$sheetQuery.opened, { color: 'red' }),
-      IF(p => !p.$sheetQuery.opened, { color: 'blue' }),
+      IF(p => p.opened, { color: 'red' }),
+      IF(p => !p.opened, { color: 'blue' }),
     ))
     it("06: query => closed => pre-atomized", () => query(false, ATOMIZE<T>(
-      IF<T>(p => p.$sheetQuery.opened, { color: 'red' }),
-      IF<T>(p => !p.$sheetQuery.opened, { color: 'blue' }),
+      IF<T>(p => p.opened, { color: 'red' }),
+      IF<T>(p => !p.opened, { color: 'blue' }),
     )))
     it("07: query => closed => pre-queried", () => query(false,
       $toClassNames<T>(sheetQuery(false),
-        IF<T>(p => p.$sheetQuery.opened, { color: 'red' }),
-        IF<T>(p => !p.$sheetQuery.opened, { color: 'blue' }),
+        IF<T>(p => p.opened, { color: 'red' }),
+        IF<T>(p => !p.opened, { color: 'blue' }),
       )
     ))
     it("08: static if and ifelse", () => {

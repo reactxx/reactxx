@@ -51,7 +51,7 @@ const r5 = STYLE<V>(
     // color: 'red' // ERROR
     transform: []
   }),
-  HOT<V>(({ $sheetQuery: { backgroundColor } }) => ({
+  HOT<V>(({ backgroundColor  }) => ({
     // color: 'red' // ERROR
     backgroundColor
   })),
@@ -84,7 +84,7 @@ const s3: TTyped.PartialSheet<Shape> = {
 const s4: TTyped.Sheet<Shape> = {
   root: [
     classNames,
-    IF<V>(({ $sheetQuery: { color } }) => true,
+    IF<V>(({ color }) => true,
       {
         // color: 'red' // error
         // transform: [] // error

@@ -46,12 +46,10 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
         propsRest, themedProps && themedProps(theme),
     ])
 
-    propsCode.$sheetQuery = {}
-
     const toClassNames = <T extends TTyped.RulesetIds>(...rulesets: TTyped.Ruleset<T>[]) =>
         toClassNamesWithQuery(propsCode, ...rulesets) as any as T
 
-    return { getWidthMap, toClassNames, propsCode, $sheetQuery: propsCode.$sheetQuery, classes, styles, css, uniqueId, forceUpdate }
+    return { getWidthMap, toClassNames, propsCode, classes, styles, css, uniqueId, forceUpdate }
 }
 
 const mergeCodeProps = (target, props: TComponents.Props[]) => {

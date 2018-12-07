@@ -24,7 +24,7 @@ export const tsheet = {
           display: 'inline',
         },
       },
-      t.IF<$W>(p => p.$sheetQuery.pressable, {
+      t.IF<$W>(p => p.pressable, {
         cursor: 'pointer'
       })
     ),
@@ -65,7 +65,7 @@ export const viewConfig: TUseSheeter.AuthorConfig<TPrimitives.ViewShape> = {
     root: v.ROOT(
       v.WEB(
         webViewRuleset,
-        v.IF<$W>(p => p.$sheetQuery.pressable, {
+        v.IF<$W>(p => p.pressable, {
           cursor: 'pointer'
         })
       )
@@ -92,7 +92,7 @@ export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
           fill: 'currentColor',
           fontSize: 'inherited'
         },
-        i.IF<$W>(p => p.$sheetQuery.pressable, {
+        i.IF<$W>(p => p.pressable, {
           cursor: 'pointer'
         })
       )

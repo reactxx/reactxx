@@ -30,7 +30,7 @@ export const tsheet = {
           display: 'inline',
         },
       },
-      IF<$W>(p => p.$sheetQuery.pressable, {
+      IF<$W>(p => p.pressable, {
         cursor: 'pointer'
       })
     ),
