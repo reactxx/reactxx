@@ -4,13 +4,15 @@ import React from 'react'
 import ReactN from 'react-native'
 import { platform } from "reactxx-sheeter"
 
-import { TTyped } from 'reactxx-typings'
+import { TTyped, T } from 'reactxx-typings'
 import { useSheeter, TUseSheeter, TComponents } from "reactxx-use-sheeter"
 
 export interface Shape extends TTyped.ShapeAncestor {
-  root: {
-    web: React.AnchorHTMLAttributes<HTMLAnchorElement>
-    native: ReactN.TextProperties
+  //rootStyle: T
+  rootWebProps: React.AnchorHTMLAttributes<HTMLAnchorElement>
+  rootNativeProps: ReactN.TextProperties
+  sheet: {
+    root: T
   }
   props: {
     p1?: string

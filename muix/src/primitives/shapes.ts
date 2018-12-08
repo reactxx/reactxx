@@ -14,52 +14,48 @@ export namespace TPrimitives {
   *******************************************/
 
   export interface ViewShape extends TTyped.ShapeAncestor {
-    root: {
-      web: React.HTMLAttributes<HTMLDivElement>
-      native: ReactN.ViewProperties
+    sheet: {
+      root: V
     }
-    sheet: { root: V }
-    //className: V
     sheetQuery: { pressable: boolean }
-    //propsWeb: React.HTMLAttributes<HTMLDivElement>
-    //propsNative: ReactN.ViewProperties
+
+    rootWebProps: React.HTMLAttributes<HTMLDivElement>
+    rootNativeProps: ReactN.ViewProperties
     //events: TTyped.ShapeMarks<TComponents.TEventsAll>
   }
 
   export interface TextShape extends TTyped.ShapeAncestor {
-    root: {
-      web: React.HTMLAttributes<HTMLSpanElement>
-      native: ReactN.TextProperties
+    sheet: {
+      root: T
     }
-    sheet: { root: T },
-    sheetQuery: { pressable: boolean }
     props: { singleLine?: boolean; url?: string }
+    sheetQuery: { pressable: boolean }
+
+    rootWebProps: React.HTMLAttributes<HTMLSpanElement>
+    rootNativeProps: ReactN.TextProperties
     //events: TTyped.ShapeMarks<TComponents.TEventsXNames>
   }
 
   export interface IconShape extends TTyped.ShapeAncestor {
-    root: {
-      web: React.SVGAttributes<SVGElement>
-      native: ReactN.TextProperties
+    sheet: {
+      root: T
     }
-    sheet: { root: T },
-    //className: T
     props: { data?: string; url?: string, children?: string }
     sheetQuery: { pressable: boolean }
-    //propsWeb: React.SVGAttributes<SVGElement>
-    //propsNative: ReactN.TextProperties
+
+    rootWebProps: React.SVGAttributes<SVGElement>
+    rootNativeProps: ReactN.TextProperties
     //events: TTyped.ShapeMarks<TComponents.TEventsXNames>
   }
 
   export interface ScrollViewShape extends TTyped.ShapeAncestor {
-    root: {
-      web: React.HTMLAttributes<HTMLDivElement>
-      native: ReactN.ViewProperties
+    sheet: {
+      root: V
+      container: V
     }
-    sheet: { root: V; container: V }
-    //className: V
     props: { horizontal?: boolean }
-    //propsWeb: React.HTMLAttributes<HTMLDivElement>
-    //propsNative: ReactN.ScrollViewProperties
+
+    rootWebProps: React.HTMLAttributes<HTMLDivElement>
+    rootNativeProps: ReactN.ViewProperties
   }
 }

@@ -14,6 +14,8 @@ export const getView: TUseSheeter.GetComponent<TPrimitives.ViewShape> = (authorC
     return <div css={toClassNames(classes.root, css)} styles={styles} {...$rootWebProps} children={children} />
 }
 
+type TT = TPrimitives.ViewShape['sheet']//['root']
+
 export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const { toClassNames, propsCode, propsCode: { data, url, children, $rootWebProps }, classes, css, styles }
         = useSheeter<TPrimitives.IconShape>(props, authorConfig, displayName, userConfig)

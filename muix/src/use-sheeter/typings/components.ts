@@ -6,17 +6,10 @@ declare module 'reactxx-typings' {
   namespace TExtensions {
 
     interface Shape {
-      //propsNative?: TTyped.EmptyInterface // native only props 
-      //propsWeb?: React.HTMLAttributes<Element>// web only props
-      //staticProps?: TTyped.EmptyInterface
       events?: TTyped.EmptyInterface // common events
     }
 
-    //type getPropsWeb<R extends Shape> = R['propsWeb']
-    //type getPropsNative<R extends Shape> = R['propsNative']
     type getEvents<R extends Shape = Shape> = keyof R['events']
-    //type getStaticProps<R extends Shape = Shape> = keyof R['staticProps'] extends never ? TTyped.FakeInterface : R['staticProps']
-
   }
 }
 

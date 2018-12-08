@@ -60,7 +60,7 @@ const v = getEngine<TPrimitives.ViewShape>()
 
 export const viewConfig: TUseSheeter.AuthorConfig<TPrimitives.ViewShape> = {
   defaultSheet: () => ({
-    root: v.ROOT(
+    root: v.STYLE<V>(
       v.WEB(
         webViewRuleset,
         v.IF<$W>(p => p.pressable, {
@@ -81,7 +81,7 @@ export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
     }
   },
   defaultSheet: () => ({
-    root: i.ROOT(
+    root: i.STYLE<T>(
       {
         flexShrink: 0,
       },
@@ -98,6 +98,8 @@ export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
   })
 }
 
+//type XX = TTyped.getRootStyle<TPrimitives.IconShape>
+//
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
 
@@ -105,7 +107,7 @@ const s = getEngine<TPrimitives.ScrollViewShape>()
 
 export const scrollViewConfig: TUseSheeter.AuthorConfig<TPrimitives.ScrollViewShape> = {
   defaultSheet: () => ({
-    root: s.ROOT(
+    root: s.STYLE<V>(
       {
         flexBasis: 0,
       },
