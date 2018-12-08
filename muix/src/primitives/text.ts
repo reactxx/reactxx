@@ -3,6 +3,14 @@ import { TTyped, $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
 import { getEngine } from 'reactxx-sheeter'
 import { TUseSheeter } from 'reactxx-use-sheeter'
 
+interface TextProps {
+  singleLine?: boolean; url?: string
+}
+
+interface TextPropsCode extends TextProps {
+  pressable: boolean
+}
+
 interface TextShapeLow extends TTyped.ShapeAncestor {
   root: {
     web: React.HTMLAttributes<HTMLSpanElement>

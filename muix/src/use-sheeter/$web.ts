@@ -51,21 +51,21 @@ interface ReactsCommonPropertiesWeb {
 
 
 const consolidateEvents = (props: TComponents.Props & TComponents.Events & TComponents.EventsWeb) => {
-  const { onPress, onLongPress, onPressIn, onPressOut, $web } = props
-  if (onPress) {
-    if (!$web || !$web.onClick) props.onClick = onPress
-    delete props.onPress
-  }
-  if (onPressIn) {
-    if (!$web || !$web.onMouseDown) props.onMouseDown = onPress
-    delete props.onPressIn
-  }
-  if (onPressOut) {
-    if (!$web || !$web.onMouseUp) props.onMouseUp = onPress
-    delete props.onPressOut
-  }
-  if (onLongPress) {
-    delete props.onLongPress
-  }
+  // const { onPress, onLongPress, onPressIn, onPressOut, $web } = props
+  // if (onPress) {
+  //   if (!$web || !$web.onClick) props.onClick = onPress
+  //   delete props.onPress
+  // }
+  // if (onPressIn) {
+  //   if (!$web || !$web.onMouseDown) props.onMouseDown = onPress
+  //   delete props.onPressIn
+  // }
+  // if (onPressOut) {
+  //   if (!$web || !$web.onMouseUp) props.onMouseUp = onPress
+  //   delete props.onPressOut
+  // }
+  // if (onLongPress) {
+  //   delete props.onLongPress
+  // }
 
 }

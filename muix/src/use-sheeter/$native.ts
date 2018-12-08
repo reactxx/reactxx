@@ -3,7 +3,7 @@ import { TEngine } from 'reactxx-typings';
 import { deleteSystemProps, platform } from 'reactxx-sheeter';
 
 import { TComponents } from './typings/components'
-import { toEngineClassName, fromEngineStyle } from './utils/from-engine'
+import { TAsTypedClassName, TAsEngineStyle } from './utils/from-engine'
 import { isReactXXComponent } from './utils/from-engine';
 import warning = require('warning');
 import { isObject } from 'util';

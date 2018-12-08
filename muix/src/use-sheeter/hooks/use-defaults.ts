@@ -2,7 +2,7 @@
 import warning from 'warning'
 
 import { sheetFromThemeCache } from './use-theme';
-import { toEngineSheet } from '../utils/from-engine';
+import { TAsTypedSheet } from '../utils/from-engine';
 import { TUseSheeter } from '../typings/use-sheeter'
 
 
@@ -18,7 +18,7 @@ const getDefaults = (theme, config: TUseSheeter.AuthorConfig & TUseSheeter.UserC
     // if (!defaultSheet)
     //     throw 'Missing config.defaultsheet'
 
-    const sheet = sheetFromThemeCache(id, toEngineSheet(defaultSheet), theme, toEngineSheet(overrideSheet), displayName) || {}
+    const sheet = sheetFromThemeCache(id, TAsTypedSheet(defaultSheet), theme, TAsTypedSheet(overrideSheet), displayName) || {}
 
     if (window.__TRACE__) {
         if (defaultProps) {

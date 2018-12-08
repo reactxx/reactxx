@@ -24,13 +24,11 @@ export namespace TComponents {
 
   //******************** Cross platform component props
   export type Props<R extends TTyped.Shape = TTyped.Shape> =
-    PropsLow<R> &
     TTyped.getProps<R> &
+    PropsLow<R> &
     TEventsX<R>
 
-  export interface PropsLow<R extends TTyped.Shape> {
-    $web?: TTyped.getRootWeb<R> // Partial<TExtensions.getPropsWeb<R> & TTyped.getProps<R>> //web specific props
-    $native?: TTyped.getRootNative<R> //Partial<TExtensions.getPropsNative<R> & TTyped.getProps<R>> //native specific props
+  export interface PropsLow<R extends TTyped.Shape> extends TTyped.RootProps<R> {
     css?: TTyped.RulesetOrCreator<R>
     styles?: TTyped.StyleOrCreator<R>
     classes?: TTyped.PartialSheetOrCreator<R> // cross platform sheet

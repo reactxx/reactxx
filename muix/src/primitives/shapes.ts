@@ -1,7 +1,6 @@
 ﻿import ReactN from 'react-native'
 
 import { TTyped, $W, $T, $V, $I, V, T, I } from 'reactxx-typings'
-import { tsheet } from './configs'
 
 
 export namespace TPrimitives {
@@ -27,13 +26,12 @@ export namespace TPrimitives {
     //events: TTyped.ShapeMarks<TComponents.TEventsAll>
   }
 
-  export interface TextShape extends TextShapeLow {   sheet: typeof tsheet,
-  }
-  export interface TextShapeLow extends TTyped.ShapeAncestor {
+  export interface TextShape extends TTyped.ShapeAncestor {
     root: {
       web: React.HTMLAttributes<HTMLSpanElement>
       native: ReactN.TextProperties
     }
+    sheet: { root: T },
     sheetQuery: { pressable: boolean }
     props: { singleLine?: boolean; url?: string }
     //events: TTyped.ShapeMarks<TComponents.TEventsXNames>

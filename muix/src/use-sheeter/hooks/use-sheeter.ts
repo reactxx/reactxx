@@ -52,16 +52,21 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     return { getWidthMap, toClassNames, propsCode, classes, styles, css, uniqueId, forceUpdate }
 }
 
-const mergeCodeProps = (target, props: TComponents.Props[]) => {
+const mergeCodeProps = (propsCode: TTyped.PropsCode, props: TComponents.Props[]) => {
     if (!props || props.length === 0) return
+    let rootWebProps, rootNativeProps, rootProps
     for (const p of props) {
         if (!p) continue
-        Object.assign(target, p)
-        const { $web, $native } = p
-        const platform = window.isWeb ? $web : $native
-        if (platform) Object.assign(target, platform)
+        Object.assign(propsCode, p)
+        // merge child component root props
+        const { $rootWebProps, $rootNativeProps, $rootProps } = p
+        $rootWebProps && Object.assign(rootWebProps || (rootWebProps = {}), $rootWebProps)
+        $rootNativeProps && Object.assign(rootNativeProps || (rootNativeProps = {}), $rootNativeProps)
+        $rootProps && Object.assign(rootProps || (rootProps = {}), $rootProps)
     }
-    delete target.$web; delete target.$native; delete target.themedProps
+    if (rootWebProps) propsCode.$rootWebProps = rootWebProps
+    if (rootNativeProps) propsCode.$rootNativeProps = rootNativeProps
+    if (rootProps) propsCode.$rootProps = rootProps
 }
 
 export default useSheeter

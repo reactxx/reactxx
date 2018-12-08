@@ -12,39 +12,37 @@ export const hasPlatformEvents = (propsCode: TTyped.PropsCode) => !!(
   //     propsCode.onPress || propsCode.onPressIn || propsCode.onPressOut || propsCode.onLongPress
 )
 
-const t = getEngine<TPrimitives.TextShapeLow>()
-
-export const tsheet = {
-  root: t.ROOT(
-    t.WEB(
-      {
-        whiteSpace: 'pre-wrap',
-        wordWrap: 'break-word',
-        [`& .${TPrimitives.Consts.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. Consts.textClassName is className for Text component div.
-          display: 'inline',
-        },
-      },
-      t.IF<$W>(p => p.pressable, {
-        cursor: 'pointer'
-      })
-    ),
-    t.IF<V>(p => p.singleLine,
-      {
-        flexShrink: 1,
-      },
-      t.WEB({
-        maxWidth: '100%',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap'
-      }),
-    )
-  ),
-
-}
+const t = getEngine<TPrimitives.TextShape>()
 
 export const textConfig: TUseSheeter.AuthorConfig<TPrimitives.TextShape> = {
-  defaultSheet: tsheet
+  defaultSheet: () => ({
+    root: t.STYLE<T>(
+      t.WEB(
+        {
+          whiteSpace: 'pre-wrap',
+          wordWrap: 'break-word',
+          [`& .${TPrimitives.Consts.textClassName}`]: { //high level Text is block element, inner Texts are inline elements. Consts.textClassName is className for Text component div.
+            display: 'inline',
+          },
+        },
+        t.IF<$W>(p => p.pressable, {
+          cursor: 'pointer'
+        })
+      ),
+      t.IF<T>(p => p.singleLine,
+        {
+          flexShrink: 1,
+        },
+        t.WEB({
+          maxWidth: '100%',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap'
+        }),
+      )
+    ),
+  
+  })
 }
 
 // mimic React Native view behavior
@@ -77,7 +75,7 @@ const i = getEngine<TPrimitives.IconShape>()
 
 export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
   defaultProps: {
-    $web: {
+    $rootWebProps: {
       viewBox: '0 0 24 24',
       focusable: 'false'
     }

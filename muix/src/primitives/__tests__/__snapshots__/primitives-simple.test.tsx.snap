@@ -4,7 +4,9 @@ exports[`PRIMITIVES SIMPLE ## NATIVE ## 01: Text 1`] = `
 <div>
   <div
     data-type="TEXT"
-  />
+  >
+    Text
+  </div>
 </div>
 `;
 
@@ -13,7 +15,9 @@ exports[`PRIMITIVES SIMPLE ## NATIVE ## 02: Text singleLine 1`] = `
   <div
     data-numberoflines="1"
     data-type="TEXT"
-  />
+  >
+    Text singleLine
+  </div>
 </div>
 `;
 
@@ -21,7 +25,9 @@ exports[`PRIMITIVES SIMPLE ## NATIVE ## 03: AnimatedText 1`] = `
 <div>
   <div
     data-type="ANIMATEDTEXT"
-  />
+  >
+    AnimatedText
+  </div>
 </div>
 `;
 
@@ -32,7 +38,9 @@ exports[`PRIMITIVES SIMPLE ## NATIVE ## 04: View 1`] = `
   >
     <div
       data-type="VIEW"
-    />
+    >
+      View
+    </div>
   </div>
 </div>
 `;
@@ -44,7 +52,9 @@ exports[`PRIMITIVES SIMPLE ## NATIVE ## 05: AnimatedView 1`] = `
   >
     <div
       data-type="ANIMATEDVIEW"
-    />
+    >
+      AnimatedView
+    </div>
   </div>
 </div>
 `;
@@ -71,16 +81,19 @@ exports[`PRIMITIVES SIMPLE ## NATIVE ## 08: ScrollView 1`] = `
 <div>
   <div
     data-type="SCROLLVIEW"
-  />
+  >
+    ScrollView
+  </div>
 </div>
 `;
 
 exports[`PRIMITIVES SIMPLE ## NATIVE ## 09: ScrollView horizontal 1`] = `
 <div>
   <div
-    data-horizontal="true"
     data-type="SCROLLVIEW"
-  />
+  >
+    ScrollView
+  </div>
 </div>
 `;
 
