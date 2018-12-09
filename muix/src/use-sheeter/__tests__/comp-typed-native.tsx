@@ -1,6 +1,8 @@
 /** @jsx platform.createElement */
 
 import React from 'react'
+import {Text, View} from 'react-native'
+
 import { platform, getEngine } from "reactxx-sheeter"
 import { TTyped, T, V } from 'reactxx-typings'
 import { useSheeter, TUseSheeter, getComponentCreator } from "reactxx-use-sheeter"
@@ -30,19 +32,14 @@ const config: TUseSheeter.AuthorConfig<Shape> = {
 }
 
 const getComp: TUseSheeter.GetComponent<Shape> = (authorConfig, displayName) => props => {
-  const {
-    toClassNames,
-    classes,
-    classNames,
-    styles,
-    propsCode: { children }
-  } = useSheeter<Shape>(props, authorConfig, displayName)
+  const { toClassNames, classes, classNames, styles, propsCode: { children } }
+    = useSheeter<Shape>(props, authorConfig, displayName)
 
-  return <div classNames={toClassNames(classes.root, classNames)} styles={styles}>
-    <span classNames={toClassNames(classes.label)}>
+  return <View classNames={toClassNames(classes.root, classNames /* ERROR: , classes.label*/)} styles={styles}>
+    <Text classNames={toClassNames(classes.label)}>
       {children}
-    </span>
-  </div>
+    </Text>
+  </View>
 }
 
 const compCreator = getComponentCreator('CompDisplayName', config, getComp)
