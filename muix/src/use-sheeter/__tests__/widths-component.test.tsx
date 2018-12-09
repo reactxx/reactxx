@@ -41,14 +41,14 @@ describe("SHEETER $WIDTHS", () => {
 
       const App: React.SFC = () => {
         const { root, renderCount } = useApp()
-        return <div css={root}>{`rendered: ${renderCount}x`}</div>
+        return <div classNames={root}>{`rendered: ${renderCount}x`}</div>
       }
       App['$c$'] = true
 
       const WidthsMapApp: React.SFC = () => {
         const { root, renderCount, getWidthMap } = useApp()
         const [mobile, tablet, desktop] = getWidthMap([640, 1024])
-        return <div css={root}>
+        return <div classNames={root}>
           {`${mobile ? 'mobile' : ''}${tablet ? 'tablet' : ''}${desktop ? 'desktop' : ''} (rendered: ${renderCount}x)`}
         </div>
       }

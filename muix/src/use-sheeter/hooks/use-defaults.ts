@@ -22,11 +22,11 @@ const getDefaults = (theme, config: TUseSheeter.AuthorConfig & TUseSheeter.UserC
 
     if (window.__TRACE__) {
         if (defaultProps) {
-            const { css, styles, classes } = defaultProps
+            const { classNames: css, styles, classes } = defaultProps
             warning(!classes && !css && !styles, 'classes, css and styles are ignored in defautProps')
         }
         if (overrideProps) {
-            const { css, styles, classes } = overrideProps
+            const { classNames: css, styles, classes } = overrideProps
             warning(!classes && !css && !styles, 'classes, css and styles are ignored in overrideProps')
         }
     }

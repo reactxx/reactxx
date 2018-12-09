@@ -1,4 +1,4 @@
-﻿export { default as useSheeter } from './hooks/use-sheeter'
+﻿export { default as useSheeter, useSheeterUntyped } from './hooks/use-sheeter'
 export { ThemeProvider, useTheme } from './hooks/use-theme'
 export * from './utils/get-component-creator'
 export * from './utils/from-engine'

@@ -1,31 +1,25 @@
 import React from 'react';
 
 import Fela from 'reactxx-fela'
-import { TEngine, TTyped } from 'reactxx-typings';
+import { TEngine } from 'reactxx-typings';
 import { deleteSystemProps, platform } from 'reactxx-sheeter';
 
 import { TComponents } from './typings/components'
+import { isReactXXComponent, TAsEngineClassName } from './utils/from-engine';
 
-import { isReactXXComponent } from './utils/from-engine';
-
+interface ReactsCommonPropertiesWeb {
+  className?: string
+  style?: React.CSSProperties
+}
 
 export const createElement = (type, props: TComponents.ReactsCommonProperties & ReactsCommonPropertiesWeb, ...children) => {
 
-  if (!props) return React.createElement(type, props, ...children)
+  if (!props || isReactXXComponent(type)) return React.createElement(type, props, ...children)
 
-  const isXXComponent = isReactXXComponent(type)
+  const { classNames, styles } = props
 
-  delete props.$native
-  //consolidateEvents(props)
-
-  if (isXXComponent) return React.createElement(type, props, ...children)
-
-  //******* for non reactxx components: 
-
-  const { css, styles } = props
-
-  if (css) {
-    let lastWinResult = platform.applyLastwinsStrategy(css as any) as TEngine.AtomicWebLows
+  if (classNames) {
+    let lastWinResult = platform.applyLastwinsStrategy(TAsEngineClassName(classNames)) as TEngine.AtomicWebLows
     const className = platform.finalizeClassName(lastWinResult) as string
     props.className = props.className ? className + ' ' + props.className : className
     if (window.__TRACE__)
@@ -41,15 +35,6 @@ export const createElement = (type, props: TComponents.ReactsCommonProperties & 
 }
 
 const dataTrace = Fela.dataTrace
-interface ReactsCommonPropertiesWeb {
-  className?: string
-  styleX?: TTyped.StyleSimple
-  style?: React.CSSProperties
-  $native?
-}
-
-
-
 const consolidateEvents = (props: TComponents.Props & TComponents.Events & TComponents.EventsWeb) => {
   // const { onPress, onLongPress, onPressIn, onPressOut, $web } = props
   // if (onPress) {

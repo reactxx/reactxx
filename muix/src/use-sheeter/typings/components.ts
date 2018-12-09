@@ -22,7 +22,7 @@ export namespace TComponents {
     TEventsX<R>
 
   export interface PropsLow<R extends TTyped.Shape> extends TTyped.RootProps<R> {
-    css?: TTyped.RulesetOrCreator<R>
+    classNames?: TTyped.RulesetOrCreator<R>
     styles?: TTyped.StyleOrCreator<R>
     classes?: TTyped.PartialSheetOrCreator<R> // cross platform sheet
     themedProps?: (theme: TTyped.getTheme<R>) => Props<R>
@@ -35,7 +35,7 @@ export namespace TComponents {
   - custom components (e.g. <IconButton css={...})
   */
   export interface ReactsCommonProperties<Id extends TTyped.PlatformIds = TTyped.PlatformIds> {
-    css?: TTyped.TPlatformAllowed<Id>
+    classNames?: TTyped.TPlatformAllowed<Id>
     styles?: TTyped.TPlatformAllowed<Id>
     trace?: string
   }

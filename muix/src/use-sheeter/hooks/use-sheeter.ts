@@ -9,6 +9,8 @@ import { useDefaults } from './use-defaults';
 import { useProps } from './use-props';
 import { useTheme } from './use-theme';
 
+export const useSheeterUntyped = (props, authorConfig, displayName, userConfig?) => useSheeter(props, authorConfig, displayName, userConfig) as any
+
 const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     props: TComponents.Props<R>,
     authorConfig: TUseSheeter.AuthorConfig<R>,
@@ -26,7 +28,7 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     } = useDefaults(theme, config, displayName)
 
     // from props
-    const { classes, css, styles, propsRest, themedProps
+    const { classes, classNames, styles, propsRest, themedProps
     } = useProps<R>(theme, sheet, props)
 
     // widths
@@ -49,7 +51,7 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     const toClassNames = <T extends TTyped.RulesetIds>(...rulesets: TTyped.Ruleset<T>[]) =>
         toClassNamesWithQuery(propsCode, ...rulesets) as any as T
 
-    return { getWidthMap, toClassNames, propsCode, classes, styles, css, uniqueId, forceUpdate }
+    return { getWidthMap, toClassNames, propsCode, classes, styles, classNames, uniqueId, forceUpdate }
 }
 
 const mergeCodeProps = (propsCode: TTyped.PropsCode | any, props: TComponents.Props[]) => {

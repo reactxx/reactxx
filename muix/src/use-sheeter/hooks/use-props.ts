@@ -11,7 +11,7 @@ import {
 
 export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, sheet: TEngine.Sheet, props: TComponents.Props) => {
     // from props
-    const { classes: _classes, css: _css, styles: _styles, themedProps, ...propsRest } = props as TComponents.Props
+    const { classes: _classes, classNames: _classNames, styles: _styles, themedProps, ...propsRest } = props as TComponents.Props
 
     // merge sheet with classes
     const classes = React.useMemo(() => {
@@ -20,19 +20,19 @@ export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, sheet: TE
     }, [theme, _classes])
 
     // css
-    const css = React.useMemo(
+    const classNames = React.useMemo(
         () => TAsEngineClassName<R>
             (atomizeRuleset(
-                TAsTypedClassName(_css),
+                TAsTypedClassName(_classNames),
                 theme,
                 'classes'
             )),
-        [_css, theme])
+        [_classNames, theme])
 
     // styles
     const styles = React.useMemo(() => TAsEngineStyle<R>(atomizeStyle(TAsTypedStyle(_styles), theme)), [_styles])
 
-    return { classes, css, styles, propsRest, themedProps }
+    return { classes, classNames, styles, propsRest, themedProps }
 
 }
 

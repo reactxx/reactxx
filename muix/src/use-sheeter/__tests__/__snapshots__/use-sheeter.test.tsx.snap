@@ -128,60 +128,48 @@ exports[`USE SHEETER ## NATIVE ## 13: theme, with styleX override 1`] = `
 
 exports[`USE SHEETER ## NATIVE ## 14: default props 1`] = `
 <div>
-  <div
-    p1="defaultProp"
-  >
-    1
+  <div>
+    defaultProp: 1
   </div>
 </div>
 `;
 
 exports[`USE SHEETER ## NATIVE ## 15: override props 1`] = `
 <div>
-  <div
-    p1="overrideProp"
-  >
-    1
+  <div>
+    overrideProp: 1
   </div>
 </div>
 `;
 
 exports[`USE SHEETER ## NATIVE ## 16: props 1`] = `
 <div>
-  <div
-    p1="componentProp"
-  >
-    1
+  <div>
+    componentProp: 1
   </div>
 </div>
 `;
 
 exports[`USE SHEETER ## NATIVE ## 17: theme, default props 1`] = `
 <div>
-  <div
-    p1="themeProp"
-  >
-    1
+  <div>
+    themeProp: 1
   </div>
 </div>
 `;
 
 exports[`USE SHEETER ## NATIVE ## 18: theme, override props 1`] = `
 <div>
-  <div
-    p1="themeProp"
-  >
-    1
+  <div>
+    themeProp: 1
   </div>
 </div>
 `;
 
 exports[`USE SHEETER ## NATIVE ## 19: theme, props 1`] = `
 <div>
-  <div
-    p1="themeProp"
-  >
-    1
+  <div>
+    themeProp: 1
   </div>
 </div>
 `;
@@ -366,60 +354,48 @@ exports[`USE SHEETER ## WEB ## 13: theme, with styleX override 1`] = `
 
 exports[`USE SHEETER ## WEB ## 14: default props 1`] = `
 <div>
-  <div
-    p1="defaultProp"
-  >
-    1
+  <div>
+    defaultProp: 1
   </div>
 </div>
 `;
 
 exports[`USE SHEETER ## WEB ## 15: override props 1`] = `
 <div>
-  <div
-    p1="overrideProp"
-  >
-    1
+  <div>
+    overrideProp: 1
   </div>
 </div>
 `;
 
 exports[`USE SHEETER ## WEB ## 16: props 1`] = `
 <div>
-  <div
-    p1="componentProp"
-  >
-    1
+  <div>
+    componentProp: 1
   </div>
 </div>
 `;
 
 exports[`USE SHEETER ## WEB ## 17: theme, default props 1`] = `
 <div>
-  <div
-    p1="themeProp"
-  >
-    1
+  <div>
+    themeProp: 1
   </div>
 </div>
 `;
 
 exports[`USE SHEETER ## WEB ## 18: theme, override props 1`] = `
 <div>
-  <div
-    p1="themeProp"
-  >
-    1
+  <div>
+    themeProp: 1
   </div>
 </div>
 `;
 
 exports[`USE SHEETER ## WEB ## 19: theme, props 1`] = `
 <div>
-  <div
-    p1="themeProp"
-  >
-    1
+  <div>
+    themeProp: 1
   </div>
 </div>
 `;

@@ -15,17 +15,17 @@ import { TPrimitives } from './shapes'
 
 export const getView: TUseSheeter.GetComponent<TPrimitives.ViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActView: typeof View = isAnimated ? Animated.View : View
-    const { toClassNames, propsCode, propsCode: { children, $rootNativeProps }, classes, css, styles }
+    const { toClassNames, propsCode, propsCode: { children, $rootNativeProps }, classes, classNames, styles }
         = useSheeter<TPrimitives.ViewShape>(props, authorConfig, displayName, userConfig)
     propsCode.pressable = hasPlatformEvents($rootNativeProps)
-    const rootStyle = toClassNames(classes.root, css)
-    const res = <ActView css={rootStyle} styles={styles} {...$rootNativeProps} children={children} /> as any
+    const rootStyle = toClassNames(classes.root, classNames)
+    const res = <ActView classNames={rootStyle} styles={styles} {...$rootNativeProps} children={children} /> as any
     return propsCode.pressable ? <TouchableWithoutFeedback {...{/*events*/ }}>{res}</TouchableWithoutFeedback> : res
 }
 
 export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActIcon: typeof MaterialCommunityIcons = isAnimated ? AnimatedIconLow : MaterialCommunityIcons
-    const { toClassNames, propsCode, propsCode: { data, url, children, $rootNativeProps }, classes, css, styles }
+    const { toClassNames, propsCode, propsCode: { data, url, children, $rootNativeProps }, classes, classNames, styles }
         = useSheeter<TPrimitives.IconShape>(props, authorConfig, displayName, userConfig)
 
     propsCode.pressable = hasPlatformEvents($rootNativeProps)
@@ -38,7 +38,7 @@ export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> = (authorC
 
     return <ActIcon
         name={(data || children as string) as MaterialCommunityIconsProps['name']}
-        css={toClassNames(classes.root, css)}
+        classNames={toClassNames(classes.root, classNames)}
         styles={styles}
         onPress={doPress || undefined}
         {...$rootNativeProps} />
@@ -47,7 +47,7 @@ const AnimatedIconLow: typeof MaterialCommunityIcons = Animated.createAnimatedCo
 
 export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActText: typeof Text = isAnimated ? Animated.Text : Text
-    const { toClassNames, propsCode, propsCode: { url, children, singleLine, $rootNativeProps }, classes, css, styles }
+    const { toClassNames, propsCode, propsCode: { url, children, singleLine, $rootNativeProps }, classes, classNames, styles }
         = useSheeter<TPrimitives.TextShape>(props, authorConfig, displayName, userConfig)
     propsCode.pressable = hasPlatformEvents($rootNativeProps)
     let doPress
@@ -61,15 +61,15 @@ export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> = (authorC
         otherProps.numberOfLines = 1
     }
 
-    return <ActText css={toClassNames(classes.root, css)} styles={styles} {...$rootNativeProps} {...otherProps} children={children} />
+    return <ActText classNames={toClassNames(classes.root, classNames)} styles={styles} {...$rootNativeProps} {...otherProps} children={children} />
 }
 
 export const getScrollView: TUseSheeter.GetComponent<TPrimitives.ScrollViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActScrollView: typeof ScrollView = isAnimated ? Animated.ScrollView : ScrollView
-    const { toClassNames, propsCode: { children, $rootNativeProps }, classes, css, styles }
+    const { toClassNames, propsCode: { children, $rootNativeProps }, classes, classNames, styles }
         = useSheeter<TPrimitives.ScrollViewShape>(props, authorConfig, displayName, userConfig)
     return <ActScrollView
-        css={toClassNames(classes.root, css)}
+        classNames={toClassNames(classes.root, classNames)}
         styles={styles}
         contentContainerStyle={toClassNames(classes.container) as any} {...$rootNativeProps} children={children} />
 }

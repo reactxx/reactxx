@@ -58,7 +58,7 @@ export namespace TTyped {
     R | O
 
   export type TPlatformAllowed<R extends PlatformIds> =
-    TAllowed<R> | $W
+    TAllowed<R> | $W | (TAllowed<R> | $W)[]
 
   export type Ruleset<R extends RulesetIds = RulesetIds> = RulesetType<R> | TAllowed<R>
   export type Rulesets<R extends RulesetIds = RulesetIds> = Ruleset<R> | Ruleset<R>[]

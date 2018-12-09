@@ -18,7 +18,7 @@ describe("USE SHEETER", () => {
 
     it('01: missing configs', () => {
       const Comp = compCreator(null)
-      const wrapper = render(<Comp css={{margin: 20}}/>)
+      const wrapper = render(<Comp classNames={{margin: 20}}/>)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -68,7 +68,7 @@ describe("USE SHEETER", () => {
         { defaultSheet: { root: { color: 'red' } } },
         { overrideSheet: { root: { color: 'green' } } }
       )
-      const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} css={{ color: 'yellow' }} />)
+      const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} classNames={{ color: 'yellow' }} />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -78,7 +78,7 @@ describe("USE SHEETER", () => {
         { defaultSheet: { root: { color: 'red' } } },
         { overrideSheet: { root: { color: 'green' } } }
       )
-      const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} css={{ color: 'yellow' }} styles={{ color: 'maroon' }} />)
+      const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} classNames={{ color: 'yellow' }} styles={{ color: 'maroon' }} />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -115,7 +115,7 @@ describe("USE SHEETER", () => {
         { defaultSheet: { root: { color: 'red' } } },
         { overrideSheet: { root: { color: 'green' } } }
       )
-      const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} css={theme => ({ color: theme.primaryColor })} />)
+      const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} classNames={theme => ({ color: theme.primaryColor })} />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -125,7 +125,7 @@ describe("USE SHEETER", () => {
         { defaultSheet: { root: { color: 'red' } } },
         { overrideSheet: { root: { color: 'green' } } }
       )
-      const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} css={{ color: 'yellow' }} styles={theme => ({ color: theme.primaryColor })} />)
+      const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} classNames={{ color: 'yellow' }} styles={theme => ({ color: theme.primaryColor })} />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
@@ -218,7 +218,7 @@ describe("USE SHEETER", () => {
 
     it('21: style with classes', () => {
       const Comp = compCreator({ defaultSheet: { root: { color: 'red'} } })
-      const wrapper = render(<Comp css={{margin: 20}} styles={{color: 'blue', $web: {margin: 30}, $native: {margin: 40}}}/>)
+      const wrapper = render(<Comp classNames={{margin: 20}} styles={{color: 'blue', $web: {margin: 30}, $native: {margin: 40}}}/>)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })

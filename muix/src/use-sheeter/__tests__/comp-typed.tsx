@@ -31,11 +31,11 @@ const config: TUseSheeter.AuthorConfig<Shape> = {
 }
 
 const getComp: TUseSheeter.GetComponent<Shape> = (authorConfig, displayName) => props => {
-  const { propsCode: { children }, classes, css, styles }
+  const { propsCode: { children }, classes, classNames, styles }
     = useSheeter<Shape>(props, authorConfig, displayName)
 
-  return <div css={[classes.root, css]} styles={styles}>
-    <span css={classes.label}>
+  return <div classNames={[classes.root, classNames] as any} styles={styles}>
+    <span classNames={classes.label}>
       {children}
     </span>
   </div>

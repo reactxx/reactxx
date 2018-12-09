@@ -32,13 +32,13 @@ export const compCreator = (
 ) => {
   const res: TComponents.SFC<Shape> = props => {
     try {
-      const { toClassNames, propsCode, classes, css, styles
+      const { toClassNames, propsCode: { p1 }, classes, classNames, styles
       } = useSheeter<Shape>(props, config, displayName, userConfig)
 
       const renderCount = React.useRef(0)
       renderCount.current++
-      const root = toClassNames(classes.root as any/*TODO*/, css)
-      return <div {...propsCode} css={root} styles={styles as any}>{renderCount.current}</div>
+      const root = toClassNames(classes.root as any/*TODO*/, classNames)
+      return <div classNames={root} styles={styles as any}>{`${p1 ? p1 + ': ' : ''}${renderCount.current}`}</div>
     } catch {
       return <div>ERROR</div>
     }

@@ -6,10 +6,9 @@ exports[`THEME PROVIDER ## NATIVE ## 01:  1`] = `
     data-testid="toggle"
   />
   <div
-    p1="themeProp"
     style="color: gray;"
   >
-    1
+    themeProp: 1
   </div>
 </div>
 `;
@@ -20,10 +19,9 @@ exports[`THEME PROVIDER ## NATIVE ## 01:  2`] = `
     data-testid="toggle"
   />
   <div
-    p1="secondThemeProp"
     style="color: red;"
   >
-    2
+    secondThemeProp: 2
   </div>
 </div>
 `;
@@ -34,10 +32,9 @@ exports[`THEME PROVIDER ## NATIVE ## 01:  3`] = `
     data-testid="toggle"
   />
   <div
-    p1="themeProp"
     style="color: gray;"
   >
-    3
+    themeProp: 3
   </div>
 </div>
 `;
@@ -51,9 +48,8 @@ exports[`THEME PROVIDER ## WEB ## 01:  1`] = `
     class="a"
     data-trace="
 .a { color:gray }"
-    p1="themeProp"
   >
-    1
+    themeProp: 1
   </div>
 </div>
 `;
@@ -67,9 +63,8 @@ exports[`THEME PROVIDER ## WEB ## 01:  2`] = `
     class="b"
     data-trace="
 .b { color:red }"
-    p1="secondThemeProp"
   >
-    2
+    secondThemeProp: 2
   </div>
 </div>
 `;
@@ -83,9 +78,8 @@ exports[`THEME PROVIDER ## WEB ## 01:  3`] = `
     class="a"
     data-trace="
 .a { color:gray }"
-    p1="themeProp"
   >
-    3
+    themeProp: 3
   </div>
 </div>
 `;
