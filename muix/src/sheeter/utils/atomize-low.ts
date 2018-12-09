@@ -55,12 +55,14 @@ export const processTree = (
                 if (!conditions || conditions.length === 0) //... and no conditions => done
                     pushToAtomizedVariants(atomizedVariants, itt, null)
                 else { // ... and conditions => merge conditions
-                    const ittCopy = Array.isArray(itt) ? [...itt] : {...itt}
+                    const ittCopy = Array.isArray(itt) ? [...itt] : { ...itt }
                     pushToAtomizedVariants(atomizedVariants, ittCopy,
                         itt.conditions ? [...conditions, ...itt.conditions] : conditions)
                 }
             }
         } else { // it: toAtomize
+            // if (window.__TRACE__)
+            //     it = deepClone(it)
             processPseudosAndAtomize(
                 it,
                 atomizedVariants, path + indexToPath(idx),
@@ -86,20 +88,26 @@ const processPseudosAndAtomize = (
 
     const inner: TEngine.QueryableItems = []
 
+    const toAtomize = {}
+    let empty = true
     // process and remove conditional parts of self and web pseudo (e.g. :hover etc.)
     // push them to 'inner'
     for (const p in ruleset) {
+        if (p.charAt(0) === '$') continue
         const value = ruleset[p] as TEngine.Rulesets
-        if (!value || p.charAt(0) === '$') continue
         if (typeof value === 'object' || isTemporary(value)) { // temporary, deffered, toAtomize, atomized
             processTree(value, inner, `${path}/${p}`, [...pseudoPrefixes, p], conditions)
-            delete ruleset[p]
+        } else {
+            empty = false
+            toAtomize[p] = value
         }
     }
 
     // atomize pure ruleset tree with pseudo (and without temporary, deffer's etc.),
     // then push to result
-    atomizePure(atomizedVariants, wrapPseudoPrefixes(ruleset, pseudoPrefixes), conditions, path)
+    //atomizePure(atomizedVariants, wrapPseudoPrefixes(ruleset, pseudoPrefixes), conditions, path)
+    if (!empty)
+        atomizePure(atomizedVariants, wrapPseudoPrefixes(toAtomize, pseudoPrefixes), conditions, path)
 
     // push 'inner' to result
     if (inner.length > 0)
@@ -133,3 +141,23 @@ const atomizePure = (
     pushToAtomizedVariants(atomizedVariants, variant, conditions)
 }
 
+export function deepClone(obj) {
+    if (
+        obj === undefined || obj === null || typeof obj === 'string' || typeof obj === 'undefined' ||
+        typeof obj === 'function' || typeof obj === 'number' || typeof obj === 'boolean'
+    ) return obj
+
+    if (Array.isArray(obj)) {
+        const res = obj.map(o => deepClone(o))
+        if (obj['$r$']) res['$r$'] = true
+        return res
+    }
+
+    if (typeof obj === 'object') {
+        const res = {}
+        for (const p in obj) res[p] = deepClone(obj[p])
+        return res
+    }
+
+    throw 'something wrong'
+}

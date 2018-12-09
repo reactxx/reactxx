@@ -85,7 +85,7 @@ Array [
   Object {
     "color": "blue",
   },
-  false,
+  [Function],
   [Function],
 ]
 `;
@@ -182,7 +182,7 @@ Array [
     "color": "blue",
   },
   [Function],
-  false,
+  [Function],
 ]
 `;
 

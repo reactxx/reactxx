@@ -60,6 +60,8 @@ window.matchMedia = jest.fn().mockImplementation(query /*e.g. '(min-width: 123px
     addListener: jest.fn(),
 }))
 
+window.__TRACE__ = {}
+
 export const initPlatform = (isWeb: boolean, trace: Trace = {}) => {
 
     afterEach(cleanup)

@@ -15,7 +15,7 @@ export const hasPlatformEvents = (propsCode: TTyped.PropsCode) => !!(
 const t = getEngine<TPrimitives.TextShape>()
 
 export const textConfig: TUseSheeter.AuthorConfig<TPrimitives.TextShape> = {
-  defaultSheet: () => ({
+  defaultSheet: {
     root: t.STYLE<T>(
       t.WEB(
         {
@@ -42,7 +42,7 @@ export const textConfig: TUseSheeter.AuthorConfig<TPrimitives.TextShape> = {
       )
     ),
   
-  })
+  }
 }
 
 // mimic React Native view behavior
@@ -59,7 +59,7 @@ const webViewRuleset: TTyped.Ruleset<V> = {
 const v = getEngine<TPrimitives.ViewShape>()
 
 export const viewConfig: TUseSheeter.AuthorConfig<TPrimitives.ViewShape> = {
-  defaultSheet: () => ({
+  defaultSheet: {
     root: v.STYLE<V>(
       v.WEB(
         webViewRuleset,
@@ -68,7 +68,7 @@ export const viewConfig: TUseSheeter.AuthorConfig<TPrimitives.ViewShape> = {
         })
       )
     ),
-  })
+  }
 }
 
 const i = getEngine<TPrimitives.IconShape>()
@@ -80,7 +80,7 @@ export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
       focusable: 'false'
     }
   },
-  defaultSheet: () => ({
+  defaultSheet: {
     root: i.STYLE<T>(
       {
         flexShrink: 0,
@@ -95,7 +95,7 @@ export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
         })
       )
     )
-  })
+  }
 }
 
 //type XX = TTyped.getRootStyle<TPrimitives.IconShape>
@@ -106,7 +106,7 @@ export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
 const s = getEngine<TPrimitives.ScrollViewShape>()
 
 export const scrollViewConfig: TUseSheeter.AuthorConfig<TPrimitives.ScrollViewShape> = {
-  defaultSheet: () => ({
+  defaultSheet: {
     root: s.STYLE<V>(
       {
         flexBasis: 0,
@@ -138,7 +138,7 @@ export const scrollViewConfig: TUseSheeter.AuthorConfig<TPrimitives.ScrollViewSh
         })
       ),
     )
-  })
+  }
 }
 
 

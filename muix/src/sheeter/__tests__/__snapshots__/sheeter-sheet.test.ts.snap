@@ -102,7 +102,7 @@ Object {
     Object {
       "backgroundColor": "red",
     },
-    false,
+    [Function],
   ],
 }
 `;
@@ -111,8 +111,9 @@ exports[`SHEET ## NATIVE ## 11 sheet source mutated 2`] = `
 Object {
   "root": Array [
     Object {
-      "backgroundColor": "red @sheet.root[0]",
+      "backgroundColor": "red",
     },
+    [Function],
   ],
 }
 `;
@@ -250,12 +251,10 @@ Object {
 exports[`SHEET ## WEB ## 11 sheet source mutated 2`] = `
 Object {
   "root": Array [
-    Array [
-      ".a { background-color:red } @sheet.root[0]",
-    ],
-    Array [
-      ".b { color:green } @sheet.root[1]/$web",
-    ],
+    Object {
+      "backgroundColor": "red",
+    },
+    [Function],
   ],
 }
 `;

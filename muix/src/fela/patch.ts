@@ -22,7 +22,12 @@ export interface IRendererEx extends IRenderer {
 const patch = (renderer: IRenderer) => {
   const rendererEx = renderer as IRendererEx
   rendererEx.renderRuleEx = renderRuleEx.bind(rendererEx)
-  rendererEx.cache = {propIds: {}, classNames: []}
+  rendererEx.cache = {
+    propIds: {},
+    classNames: [],
+    valueIdCounter: 0,
+    itemIdCounter: 0,
+  }
   //rendererEx.propIdCache = {}
   rendererEx.lastWin = lastWin
   rendererEx.finalizeClassName = finalizeClassName
@@ -76,8 +81,8 @@ const renderStyleToClassNames = (renderer: IRendererEx, tracePath: string, { _cl
   for (const property in style) {
 
     // reactxx HACK: ignore $... system properties
-    //warning(property.charAt(0) !== '$', 'FELA PATCH: Something wrong')
-    if (property.charAt(0) === '$') continue
+    warning(property.charAt(0) !== '$', 'FELA PATCH: Something wrong')
+    //if (property.charAt(0) === '$') continue
 
     const value = style[property]
 
@@ -123,7 +128,9 @@ const renderStyleToClassNames = (renderer: IRendererEx, tracePath: string, { _cl
       } else {
         console.warn(`The object key "${property}" is not a valid nested key in Fela. 
 Maybe you forgot to add a plugin to resolve it? 
-Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information.`)
+Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information.
+${JSON.stringify(style)}`)
+        //return []
       }
     } else {
 
@@ -162,7 +169,7 @@ Check http://fela.js.org/docs/basics/Rules.html#styleobject for more information
 
         cacheItem = {
           type: RULE_TYPE,
-          id: ++itemIdCounter,
+          id: ++renderer.cache.itemIdCounter,
           className,
           selector,
           declaration,
@@ -204,15 +211,14 @@ interface Cache {
     [propId: string]: Values
   }
   classNames: TEngine.AtomicWeb[]
+  valueIdCounter: number
+  itemIdCounter: number
 }
 
 interface Values {
   propId: number
   values: { [value: string]: TEngine.FelaCacheItem }
 }
-
-let valueIdCounter = 0
-let itemIdCounter = 0
 
 export const dump = (c: TEngine.AtomicWeb | TEngine.AtomicWebLow, short?: boolean) => {
   if (!c) return
@@ -233,7 +239,7 @@ const getFromCache = (cache: Cache, propId: string, value: string) => {
 }
 
 const putToCache = (cache: Cache, propId: string, value: string, item: TEngine.FelaCacheItem) => {
-  const values = cache.propIds[propId] || (cache.propIds[propId] = { propId: ++valueIdCounter, values: {} })
+  const values = cache.propIds[propId] || (cache.propIds[propId] = { propId: ++cache.valueIdCounter, values: {} })
   item.propId = values.propId
   values.values[value] = item
   if (item.id) cache.classNames[item.id] = item
@@ -254,7 +260,7 @@ const lastWin = (_item: TEngine.AtomicWeb, res: { items?: TEngine.AtomicWebLow[]
   }
 
   if (res.usedPropIds[item.propId]) return
-  
+
   res.usedPropIds[item.propId] = true
   if (window.__TRACE__)
     res.items.push(_item as TEngine.__dev_AtomicWeb)

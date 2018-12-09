@@ -1,13 +1,14 @@
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 import { getEngine } from '../utils/get-engine'
-import {atomizeRuleset} from '../utils/atomize'
+import { atomizeRuleset } from '../utils/atomize'
+import { toClassNamesWithQuery } from '../utils/to-classnames'
 
 import { theme, Theme } from "reactxx-typings-test/shape.t"
 import { initPlatform } from "./init-platform.t"
 
 interface Shape {
   theme: Theme
-  sheetQuery: {opened: boolean}  
+  sheetQuery: { opened: boolean }
 }
 
 const { WEB, HOT, NATIVE, ATOMIZE
@@ -76,27 +77,32 @@ describe("SHEETER SIMPLE RULESET", () => {
     it("09 ERROR for atomizeRuleset({:hover': atomizeRuleset(...", () => {
       if (!window.isWeb) return
       const fnc = () => {
-        ATOMIZE<V>(
-          WEB({
-            ':hover': ATOMIZE<$W>(
-              { color: 'red' }
-            ),
-          }))
+        //toClassNamesWithQuery(null,
+          ATOMIZE<V>(
+            WEB({
+              ':hover': ATOMIZE<$W>(
+                { color: 'red' }
+              ),
+            }))
+        //)
       }
       expect(fnc).toThrow(/.*/)
     })
 
     it("10 ERROR for atomizeRuleset({:hover': [ARRAY]", () => {
       if (!window.isWeb) return
-      const fnc = () => ATOMIZE<V>(
-        WEB({
-          ':hover': [
-            {},
-            ATOMIZE<$W>({ color: 'red' }),
-            { margin: 10 }
-          ]
-        })
-      )
+      const fnc = () =>
+        //toClassNamesWithQuery(null,
+          ATOMIZE<V>(
+            WEB({
+              ':hover': [
+                {},
+                ATOMIZE<$W>({ color: 'red' }),
+                { margin: 10 }
+              ]
+            })
+          )
+        //)
       expect(fnc).toThrow(/.*/)
     })
 
@@ -141,7 +147,7 @@ describe("SHEETER SIMPLE RULESET", () => {
           ],
         }),
       )
-      expect(ruleset).toMatchSnapshot() 
+      expect(ruleset).toMatchSnapshot()
     })
 
     it("15 just $hot", () => {

@@ -37,7 +37,7 @@ export const compCreator = (
 
       const renderCount = React.useRef(0)
       renderCount.current++
-      const root = toClassNames(classes.root as any/*TODO*/, classNames)
+      const root = toClassNames(classes.root, classNames)
       return <div classNames={root} styles={styles as any}>{`${p1 ? p1 + ': ' : ''}${renderCount.current}`}</div>
     } catch {
       return <div>ERROR</div>

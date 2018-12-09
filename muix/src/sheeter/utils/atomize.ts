@@ -1,12 +1,12 @@
 import { TEngine } from 'reactxx-typings';
-import { adjustAtomizedLow, isDeferred } from './atomize-low';
+import { adjustAtomizedLow, isDeferred, deepClone } from './atomize-low';
 import { createWithTheme } from './create-with-theme';
 
-
-
-// muttable
+// mutable
 export const atomizeSheet = (sheet: TEngine.SheetOrCreator, theme?, path: string = 'sheet') => {
     if (!sheet) return null
+    if (window.__TRACE__)
+        sheet = deepClone(sheet)
     const sh: TEngine.Sheet = createWithTheme(sheet, theme)
     for (const p in sh) {
         const at = atomizeRuleset(sh[p], theme, (path ? path + '.' : '') + p)
@@ -16,7 +16,7 @@ export const atomizeSheet = (sheet: TEngine.SheetOrCreator, theme?, path: string
     return sh
 }
 
-// muttable
+// mutable
 export const atomizeRuleset = (
     ruleset: TEngine.RulesetOrCreator, theme?, path: string = ''
 ) => {
@@ -62,7 +62,6 @@ export const atomizeStyle = (style: TEngine.Style, theme?) => {
 
     delete style.$web
     delete style.$native
-    
+
     return style
 }
-
