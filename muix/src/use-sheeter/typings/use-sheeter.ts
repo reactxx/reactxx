@@ -19,7 +19,7 @@ export namespace TUseSheeter {
   export interface UserConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
     overrideProps?: TComponents.Props<R> // classes, css and styles are ignored
     overrideSheet?: TTyped.SheetOrCreator<R>
-    myConfigId?: number // ComponentConfig.id
+    myAuthorConfigId?: number // ComponentConfig.id
   }
 
   export type ThemeContext<T extends any> = [T, (newTheme: T) => void]

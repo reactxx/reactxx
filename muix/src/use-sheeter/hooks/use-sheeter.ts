@@ -52,7 +52,7 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     return { getWidthMap, toClassNames, propsCode, classes, styles, css, uniqueId, forceUpdate }
 }
 
-const mergeCodeProps = (propsCode: TTyped.PropsCode, props: TComponents.Props[]) => {
+const mergeCodeProps = (propsCode: TTyped.PropsCode | any, props: TComponents.Props[]) => {
     if (!props || props.length === 0) return
     let rootWebProps, rootNativeProps, rootProps
     for (const p of props) {

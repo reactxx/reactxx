@@ -30,11 +30,11 @@ export const useConfig = <R extends TTyped.Shape = TTyped.Shape>(
         const authorConfigId = authorConfig ? authorConfig.id : -1
         if (!userConfig.id) { // first userConfigussage
             userConfig.id = ++_withStyles.idCounter
-            userConfig.myConfigId = authorConfigId // connect it to authorConfig
+            userConfig.myAuthorConfigId = authorConfigId // connect it to authorConfig
             // config merging: keep userConfig pointer, change its content
             const value = Object.assign({}, authorConfig, userConfig)
             Object.assign(userConfig, value)
-        } else if (userConfig.myConfigId != authorConfigId)
+        } else if (userConfig.myAuthorConfigId != authorConfigId)
             warning(false, 'userConfig already inherited from different authorConfig. Last authorConfig ignored.')
     }
 

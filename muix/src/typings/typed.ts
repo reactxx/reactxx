@@ -137,14 +137,20 @@ export namespace TTyped {
 
   export type getSheetQuery<R extends Shape> = R['sheetQuery']
   export type getProps<R extends Shape> = R['props']
+
   export type getSheet<R extends Shape> =
     string extends keyof R['sheet'] ? never : R['sheet']
-  export type getTheme<R extends Shape = Shape> =
-    keyof R['theme'] extends never ? any : R['theme']
 
-  export type getRootWebProps<R extends Shape> = R['rootWebProps']
-  export type getRootNativeProps<R extends Shape> = R['rootNativeProps']
-  export type getRootProps<R extends Shape> = R['rootProps']
+  export type getTheme<R extends Shape = Shape> =
+    string extends keyof R['theme'] ? any : R['theme']
+
+  export type getRootWebProps<R extends Shape> =
+    keyof R['rootWebProps'] extends never ? never : R['rootWebProps']
+  export type getRootNativeProps<R extends Shape> =
+    keyof R['rootNativeProps'] extends never ? never : R['rootNativeProps']
+  export type getRootProps<R extends Shape> =
+    keyof R['rootProps'] extends never ? never : R['rootProps']
+
   export type getRootStyle<R extends Shape> =
     unknown extends getSheet<R>['root'] ? never : getSheet<R>['root']
 
@@ -157,9 +163,9 @@ export namespace TTyped {
     children?: React.ReactNode
   }
   export interface RootProps<R extends TTyped.Shape> {
-    $rootWebProps?: TTyped.getRootWebProps<R>
-    $rootNativeProps?: TTyped.getRootNativeProps<R>
-    $rootProps?: TTyped.getRootProps<R>
+    $rootWebProps?: getRootWebProps<R>
+    $rootNativeProps?: getRootNativeProps<R>
+    $rootProps?: getRootProps<R>
   }
 
   export interface EmptyInterface { }

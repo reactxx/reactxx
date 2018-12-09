@@ -18,13 +18,10 @@ export interface Shape extends TTyped.ShapeAncestor {
         webOnly: '$W'
     },
 
-    theme: typeof theme
-    //cases: TSheeter.ShapeMarks<'isDisabled' | 'isClosed' | 'isOpened'>
-    //widths: TSheeter.ShapeMarks<'tabletWidth' | 'mobileWidth' | 'desktopWidth'>
-    //transitionGroups: TSheeter.ShapeMarks<'leftDrawer'>
-
     props: Props
-    //innerState: InnerState
+    sheetQuery: {}
+
+    theme: typeof theme
 }
 
 export type Theme = TTyped.getTheme<Shape>

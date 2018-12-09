@@ -1,4 +1,5 @@
 import { TTyped, T, V } from 'reactxx-typings'
+import { TAsTypedClassName } from 'reactxx-use-sheeter';
 
 interface ShapeX extends TTyped.ShapeAncestor {
     sheet: {
@@ -36,3 +37,16 @@ type Tb3 = TTyped.Sheet<ShapeX3>
 type Tc1 = TTyped.getSheet<ShapeX4>
 type Tc2 = TTyped.getRootStyle<ShapeX4>
 type Tc3 = TTyped.Sheet<ShapeX4>
+
+type Code3 = keyof ShapeX4['rootWebProps'] //string extends keyof ShapeX4['rootWebProps'] ? 'A' : 'B'
+type Code2 = TTyped.getRootWebProps<ShapeX4>
+type Code1 = TTyped.PropsCodeLow<ShapeX4>
+type Code4 = TTyped.PropsCode<ShapeX4>
+const code1: Code1 = {
+    $widths: null,
+}
+const code4: Code4 = {
+    $widths: null,
+    // x:1 // ERROR
+    // $rootNativeProps:null // ERROR
+}

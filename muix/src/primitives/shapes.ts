@@ -28,8 +28,13 @@ export namespace TPrimitives {
     sheet: {
       root: T
     }
-    props: { singleLine?: boolean; url?: string }
-    sheetQuery: { pressable: boolean }
+    props: {
+      singleLine?: boolean
+      url?: string
+    }
+    sheetQuery: {
+      pressable: boolean
+    }
 
     rootWebProps: React.HTMLAttributes<HTMLSpanElement>
     rootNativeProps: ReactN.TextProperties
