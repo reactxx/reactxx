@@ -1,3 +1,5 @@
 - make copy of sheet for testing (instead of using sheet creator)
 - events
 - primitives, visual test
+- navigation
+- animation

@@ -88,7 +88,7 @@ const processPseudosAndAtomize = (
 
     const inner: TEngine.QueryableItems = []
 
-    const toAtomize = {}
+    const toAtomizePure = {}
     let empty = true
     // process and remove conditional parts of self and web pseudo (e.g. :hover etc.)
     // push them to 'inner'
@@ -99,17 +99,16 @@ const processPseudosAndAtomize = (
             processTree(value, inner, `${path}/${p}`, [...pseudoPrefixes, p], conditions)
         } else {
             empty = false
-            toAtomize[p] = value
+            toAtomizePure[p] = value
         }
     }
 
     // atomize pure ruleset tree with pseudo (and without temporary, deffer's etc.),
     // then push to result
-    //atomizePure(atomizedVariants, wrapPseudoPrefixes(ruleset, pseudoPrefixes), conditions, path)
     if (!empty)
-        atomizePure(atomizedVariants, wrapPseudoPrefixes(toAtomize, pseudoPrefixes), conditions, path)
+        atomizePure(atomizedVariants, wrapPseudoPrefixes(toAtomizePure, pseudoPrefixes), conditions, path)
 
-    // push 'inner' to result
+    // push 'inner' to result AFTER toAtomizePure
     if (inner.length > 0)
         Array.prototype.push.apply(atomizedVariants, inner)
 

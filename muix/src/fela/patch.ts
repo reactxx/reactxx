@@ -38,20 +38,7 @@ export default patch
 
 function renderRuleEx(style: {}, tracePath?: string): TEngine.AtomicWebs {
   if (!style) return newAtomicWeb()
-  // const $ = {}
-  // let has$ = false, has = false
-  // for (const p in style) {
-  //   if (p.charAt(0) !== '$') {
-  //     has = true
-  //   } else {
-  //     has$ = true
-  //     $[p] = style[p]
-  //     delete style[p]
-  //   }
-  // }
-  // if (!has)
-  //   return null
-  //try {
+
   const processedStyle = processStyleWithPlugins(
     this,
     style,
@@ -59,28 +46,21 @@ function renderRuleEx(style: {}, tracePath?: string): TEngine.AtomicWebs {
     {}
   )
 
-  return renderStyleToClassNames(this, tracePath, processedStyle)//.slice(1)
-  // } finally {
-  //   if (has$)
-  //     Object.assign(style, $)
-  // }
+  return renderStyleToClassNames(this, tracePath, processedStyle)
 }
 
 const concat = (arr1: TEngine.AtomicWebs, arr2: TEngine.AtomicWebs) => arr2 ? arr1.concat(arr2) : arr1
 
 const newAtomicWeb = (def?) => {
-  // let res: TAtomize.AtomicWebs = def || [] as any
-  // res[TAtomize.TypedInterfaceTypes.prop] = TAtomize.TypedInterfaceTypes.atomicArray
   return def || []
 }
 
 const renderStyleToClassNames = (renderer: IRendererEx, tracePath: string, { _className, ...style }: any, pseudo: string = '', media: string = '', support: string = ''): TEngine.AtomicWebs => {
-  //let classNames = _className ? ` ${_className}` : ''
+
   let classNames: TEngine.AtomicWebs = []
 
   for (const property in style) {
 
-    // reactxx HACK: ignore $... system properties
     warning(property.charAt(0) !== '$', 'FELA PATCH: Something wrong')
     //if (property.charAt(0) === '$') continue
 
@@ -92,8 +72,6 @@ const renderStyleToClassNames = (renderer: IRendererEx, tracePath: string, { _cl
           renderer,
           tracePath,
           value,
-          // reactxx HACK
-          //(pseudo ? pseudo + ' ' : '') + 
           pseudo + normalizeNestedProperty(property),
           media,
           support
@@ -146,12 +124,7 @@ ${JSON.stringify(style)}`)
           putToCache(renderer.cache, propReference, value, {
             className: '',
           } as any)
-          // renderer.cache[declarationReference] = {
-          //   className: '',
-          // }
-          /* eslint-disable no-continue */
           continue
-          /* eslint-enable */
         }
 
         const className: string =
@@ -160,9 +133,6 @@ ${JSON.stringify(style)}`)
             renderer.getNextRuleIdentifier,
             renderer.filterClassName
           )
-
-        // reactxx HACK: cache declarationReference without value
-        //renderer.propIdCache[className] = support + media + pseudo + property
 
         const declaration = cssifyDeclaration(property, value)
         const selector = generateCSSSelector(className, pseudo)
@@ -179,12 +149,9 @@ ${JSON.stringify(style)}`)
         }
 
         putToCache(renderer.cache, propReference, value, cacheItem)
-        //renderer.cache[declarationReference] = change
+
         renderer._emitChange(cacheItem)
       }
-
-      //const cache: TEngine.FelaWebCacheItem = renderer.cache[declarationReference]
-      //const cachedClassName = renderer.cache[declarationReference].className
 
       // only append if we got a class cached
       if (!cacheItem.className) continue
