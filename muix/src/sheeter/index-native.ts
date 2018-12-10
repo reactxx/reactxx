@@ -6,6 +6,8 @@ export * from './utils/use-unique-id'
 export * from './utils/merge'
 export * from './utils/wrap-pseudo-prefixes'
 
+export { View, Text, Image, ScrollView } from './$native'
+
 import { init } from './$native'
 import { initGlobals } from './utils/globals'
 

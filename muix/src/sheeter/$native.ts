@@ -1,7 +1,9 @@
 import { Dimensions } from 'react-native'
-import { TEngine } from 'reactxx-typings'
+import { TEngine, TTypedNative } from 'reactxx-typings'
 import { assignPlatform } from './utils/globals'
 import { setActWidth } from './queryable/$widths/store'
+
+import { View as View_, Text as Text_, Image as Image_, ScrollView as ScrollView_ } from 'react-native'
 
 if (Dimensions)
     Dimensions.addEventListener('change', arg => setActWidth(Dimensions.get('window').width))
@@ -70,3 +72,7 @@ const applyLastwinsStrategy: TEngine.ApplyLastwinsStrategy = (values: TEngine.At
     return res
 }
 
+export const View: TTypedNative.ViewStatic = View_ as any
+export const Text: TTypedNative.TextStatic = Text_ as any
+export const ScrollView: TTypedNative.ScrollViewStatic = ScrollView_ as any
+export const Image: TTypedNative.ImageStatic = Image_ as any

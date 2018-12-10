@@ -51,7 +51,9 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     const toClassNames = <T extends TTyped.RulesetIds>(...rulesets: TTyped.Ruleset<T>[]) =>
         toClassNamesWithQuery(propsCode, ...rulesets) as any as T
 
-    return { getWidthMap, toClassNames, propsCode, classes, styles, classNames, uniqueId, forceUpdate }
+    const toStyles = toClassNames
+
+    return { getWidthMap, toStyles, toClassNames, propsCode, classes, styles, classNames, uniqueId, forceUpdate }
 }
 
 const mergeCodeProps = (propsCode: TTyped.PropsCode | any, props: TComponents.Props[]) => {

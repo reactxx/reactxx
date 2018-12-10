@@ -1,31 +1,35 @@
-/** @jsx platform.createElement */
+///** @jsx platform.createElement */
 
-//import React from 'react'
-import { View, Text, ScrollView, Animated, TouchableWithoutFeedback, Linking, TextProperties } from 'react-native'
+import React from 'react'
+import { Animated, TouchableWithoutFeedback, Linking } from 'react-native'
 import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
-/** @jsx platform.createElement */
-
-import { platform } from 'reactxx-sheeter'
+//import { platform } from 'reactxx-sheeter'
+import { Text, View, ScrollView} from 'reactxx-sheeter-native'
 import { useSheeter, TUseSheeter } from "reactxx-use-sheeter"
+import { TTypedNative } from "reactxx-typings"
+
 
 import { hasPlatformEvents } from './configs'
 import { TPrimitives } from './shapes'
 
 export const getView: TUseSheeter.GetComponent<TPrimitives.ViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActView: typeof View = isAnimated ? Animated.View : View
-    const { toClassNames, propsCode, propsCode: { children, $rootNativeProps }, classes, classNames, styles }
+
+    const { toStyles, propsCode, propsCode: { children, $rootNativeProps }, classes, classNames, styles }
         = useSheeter<TPrimitives.ViewShape>(props, authorConfig, displayName, userConfig)
+
     propsCode.pressable = hasPlatformEvents($rootNativeProps)
-    const rootStyle = toClassNames(classes.root, classNames)
-    const res = <ActView classNames={rootStyle} styles={styles} {...$rootNativeProps} children={children} /> as any
+    const res = <ActView styles={toStyles(classes.root, classNames, styles)} {...$rootNativeProps} children={children} /> as any
+    
     return propsCode.pressable ? <TouchableWithoutFeedback {...{/*events*/ }}>{res}</TouchableWithoutFeedback> : res
 }
 
 export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActIcon: typeof MaterialCommunityIcons = isAnimated ? AnimatedIconLow : MaterialCommunityIcons
-    const { toClassNames, propsCode, propsCode: { data, url, children, $rootNativeProps }, classes, classNames, styles }
+
+    const { toStyles, propsCode, propsCode: { data, url, children, $rootNativeProps }, classes, classNames, styles }
         = useSheeter<TPrimitives.IconShape>(props, authorConfig, displayName, userConfig)
 
     propsCode.pressable = hasPlatformEvents($rootNativeProps)
@@ -38,8 +42,7 @@ export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> = (authorC
 
     return <ActIcon
         name={(data || children as string) as MaterialCommunityIconsProps['name']}
-        classNames={toClassNames(classes.root, classNames)}
-        styles={styles}
+        styles={toStyles(classes.root, classNames, styles)}
         onPress={doPress || undefined}
         {...$rootNativeProps} />
 }
@@ -47,11 +50,13 @@ const AnimatedIconLow: typeof MaterialCommunityIcons = Animated.createAnimatedCo
 
 export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActText: typeof Text = isAnimated ? Animated.Text : Text
-    const { toClassNames, propsCode, propsCode: { url, children, singleLine, $rootNativeProps }, classes, classNames, styles }
+
+    const { toStyles, propsCode, propsCode: { url, children, singleLine, $rootNativeProps }, classes, classNames, styles }
         = useSheeter<TPrimitives.TextShape>(props, authorConfig, displayName, userConfig)
+
     propsCode.pressable = hasPlatformEvents($rootNativeProps)
     let doPress
-    const otherProps: TextProperties = {
+    const otherProps: TTypedNative.TextProperties = {
         onPress: !url ? doPress : () => Linking.canOpenURL(url).then(supported => {
             warning(supported, `Can't handle url: ${url}`)
             return Linking.openURL(url);
@@ -61,15 +66,18 @@ export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> = (authorC
         otherProps.numberOfLines = 1
     }
 
-    return <ActText classNames={toClassNames(classes.root, classNames)} styles={styles} {...$rootNativeProps} {...otherProps} children={children} />
+    return <ActText styles={toStyles(classes.root, classNames, styles)} {...$rootNativeProps} {...otherProps} children={children} />
 }
 
 export const getScrollView: TUseSheeter.GetComponent<TPrimitives.ScrollViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const ActScrollView: typeof ScrollView = isAnimated ? Animated.ScrollView : ScrollView
-    const { toClassNames, propsCode: { children, $rootNativeProps }, classes, classNames, styles }
+
+    const { toStyles, propsCode: { children, $rootNativeProps }, classes, classNames, styles }
         = useSheeter<TPrimitives.ScrollViewShape>(props, authorConfig, displayName, userConfig)
+
     return <ActScrollView
-        classNames={toClassNames(classes.root, classNames)}
-        styles={styles}
-        contentContainerStyle={toClassNames(classes.container) as any} {...$rootNativeProps} children={children} />
+        styles={toStyles(classes.root, classNames, styles)}
+        contentContainerStyle={toStyles(classes.container)} 
+        {...$rootNativeProps} 
+        children={children} />
 }

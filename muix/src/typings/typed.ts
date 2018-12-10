@@ -31,6 +31,12 @@ export namespace TTyped {
     TT extends ReactN.TextInputProperties ? T :
     V
 
+  export type TNativeIdToProps<TT extends CommonIds> =
+    TT extends V ? ReactN.ViewProperties :
+    TT extends I ? ReactN.ImageProperties :
+    TT extends T ? ReactN.TextProperties :
+    never
+
   type RulesetType<R extends RulesetIds, ForStyle extends boolean = false> =
     R extends V ? TCommonStyles.ViewStyle :
     R extends T ? TCommonStyles.TextStyle :
@@ -184,5 +190,27 @@ export namespace TTyped {
 
   export type StyleOrCreator<R extends Shape = Shape> =
     ValueOrCreator<Style<getRootStyle<R>>, getTheme<R>>
+
+  //******************************************************
+  //* PLATFORM PROPS
+  //******************************************************
+
+  interface PropsPlatform {
+    'data-trace'?: string
+  }
+
+  export interface PropsWeb extends PropsPlatform {
+    className?: string
+    style?: React.CSSProperties
+  }
+
+  export interface PropsNative<TT extends CommonIds> extends PropsPlatform {
+    style?: 
+    TT extends T ? Required<ReactN.TextStyle> :
+    TT extends V ? Required<ReactN.ViewStyle> :
+    TT extends I ? Required<ReactN.ImageStyle> :
+    never
+  }
+
 }
 

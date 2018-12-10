@@ -1,6 +1,6 @@
 import { TEngine, $V, $T, $I, $W } from 'reactxx-typings'
 import { TComponents } from './typings/components'
-import { TextProperties } from 'react-native'
+import { TextProperties, ViewStyle } from 'react-native'
 
 
 /************************************TComponents******
