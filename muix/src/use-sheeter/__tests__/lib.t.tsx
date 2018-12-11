@@ -4,8 +4,8 @@ import React from 'react'
 import ReactN from 'react-native'
 import { platform } from "reactxx-sheeter"
 
-import { TTyped, T } from 'reactxx-typings'
-import { useSheeter, TUseSheeter, TComponents } from "reactxx-use-sheeter"
+import { TTyped, T, TComponents } from 'reactxx-typings'
+import { useSheeter } from "reactxx-use-sheeter"
 
 export interface Shape extends TTyped.ShapeAncestor {
   //rootStyle: T
@@ -26,8 +26,8 @@ export interface Theme {
 }
 
 export const compCreator = (
-  config: TUseSheeter.AuthorConfig<Shape>,
-  userConfig?: TUseSheeter.UserConfig<Shape>,
+  config: TComponents.AuthorConfig<Shape>,
+  userConfig?: TComponents.UserConfig<Shape>,
   displayName?: 'Comp'
 ) => {
   const res: TComponents.SFC<Shape> = props => {

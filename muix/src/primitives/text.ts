@@ -1,9 +1,8 @@
 import ReactN from 'react-native'
 
-import { TTyped, $W, $T, $V, $I, V, T, I, O } from 'reactxx-typings'
+import { TComponents, TTyped, $W, $T, $V, $I, V, T, I, O } from 'reactxx-typings'
 
 import { getEngine } from 'reactxx-sheeter'
-import { TUseSheeter } from 'reactxx-use-sheeter'
 
 //----------------------------------------
 // PRIVATE
@@ -58,6 +57,6 @@ export interface TextShape extends TextShapeLow {
   sheet: ReturnType<typeof defaultSheet>
 }
 
-export const textConfig: TUseSheeter.AuthorConfig<TextShape> = {
+export const textConfig: TComponents.AuthorConfig<TextShape> = {
   defaultSheet  
 }

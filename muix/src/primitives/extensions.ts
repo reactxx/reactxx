@@ -1,4 +1,4 @@
-import { TComponents, TUseSheeter } from 'reactxx-use-sheeter'
+import { TComponents } from 'reactxx-typings'
 import { TPrimitives } from './shapes'
 
 declare module 'reactxx-typings' {
@@ -14,21 +14,21 @@ declare module 'reactxx-typings' {
             AnimatedText?: TComponents.SFC<TPrimitives.TextShape>
             AnimatedIcon?: TComponents.SFC<TPrimitives.IconShape>
 
-            viewCreator?: TUseSheeter.ComponentCreator<TPrimitives.ViewShape>
-            textCreator?: TUseSheeter.ComponentCreator<TPrimitives.TextShape>
-            iconCreator?: TUseSheeter.ComponentCreator<TPrimitives.IconShape>
-            scrollViewCreator?: TUseSheeter.ComponentCreator<TPrimitives.ScrollViewShape>
-            animatedViewCreator?: TUseSheeter.ComponentCreator<TPrimitives.ViewShape>
-            animatedTextCreator?: TUseSheeter.ComponentCreator<TPrimitives.TextShape>
-            animatedIconCreator?: TUseSheeter.ComponentCreator<TPrimitives.IconShape>
+            viewCreator?: TComponents.ComponentCreator<TPrimitives.ViewShape>
+            textCreator?: TComponents.ComponentCreator<TPrimitives.TextShape>
+            iconCreator?: TComponents.ComponentCreator<TPrimitives.IconShape>
+            scrollViewCreator?: TComponents.ComponentCreator<TPrimitives.ScrollViewShape>
+            animatedViewCreator?: TComponents.ComponentCreator<TPrimitives.ViewShape>
+            animatedTextCreator?: TComponents.ComponentCreator<TPrimitives.TextShape>
+            animatedIconCreator?: TComponents.ComponentCreator<TPrimitives.IconShape>
 
-            getView?: TUseSheeter.GetComponent<TPrimitives.ViewShape>
-            getText?: TUseSheeter.GetComponent<TPrimitives.TextShape>
-            getIcon?: TUseSheeter.GetComponent<TPrimitives.IconShape>
-            getScrollView?: TUseSheeter.GetComponent<TPrimitives.ScrollViewShape>
-            getAnimatedView?: TUseSheeter.GetComponent<TPrimitives.ViewShape>
-            getAnimatedText?: TUseSheeter.GetComponent<TPrimitives.TextShape>
-            getAnimatedIcon?: TUseSheeter.GetComponent<TPrimitives.IconShape>
+            getView?: TComponents.GetComponent<TPrimitives.ViewShape>
+            getText?: TComponents.GetComponent<TPrimitives.TextShape>
+            getIcon?: TComponents.GetComponent<TPrimitives.IconShape>
+            getScrollView?: TComponents.GetComponent<TPrimitives.ScrollViewShape>
+            getAnimatedView?: TComponents.GetComponent<TPrimitives.ViewShape>
+            getAnimatedText?: TComponents.GetComponent<TPrimitives.TextShape>
+            getAnimatedIcon?: TComponents.GetComponent<TPrimitives.IconShape>
 
         }
     }

@@ -3,15 +3,15 @@ import warning from 'warning'
 
 import { sheetFromThemeCache } from './use-theme';
 import { TAsTypedSheet } from 'reactxx-sheeter';
-import { TUseSheeter } from '../typings/use-sheeter'
+import { TComponents } from 'reactxx-typings'
 
 
 export const useDefaults = (
-    theme, options: TUseSheeter.AuthorConfig, displayName: string,
+    theme, options: TComponents.AuthorConfig, displayName: string,
 ) =>
     React.useMemo(() => getDefaults(theme, options, displayName), [theme, options, displayName])
 
-const getDefaults = (theme, config: TUseSheeter.AuthorConfig & TUseSheeter.UserConfig, displayName: string) => {
+const getDefaults = (theme, config: TComponents.AuthorConfig & TComponents.UserConfig, displayName: string) => {
 
     const { defaultProps, defaultSheet, overrideProps, overrideSheet, id} = config
 

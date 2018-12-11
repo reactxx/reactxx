@@ -1,6 +1,5 @@
-import { TTyped, $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
+import { TComponents, TTyped, $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
 import { getEngine } from 'reactxx-sheeter'
-import { TUseSheeter } from 'reactxx-use-sheeter'
 
 import { TPrimitives } from './shapes'
 
@@ -14,7 +13,7 @@ export const hasPlatformEvents = (propsCode: TTyped.PropsCode) => !!(
 
 const t = getEngine<TPrimitives.TextShape>()
 
-export const textConfig: TUseSheeter.AuthorConfig<TPrimitives.TextShape> = {
+export const textConfig: TComponents.AuthorConfig<TPrimitives.TextShape> = {
   defaultSheet: {
     root: t.STYLE<T>(
       t.WEB(
@@ -58,7 +57,7 @@ const webViewRuleset: TTyped.Ruleset<V> = {
 
 const v = getEngine<TPrimitives.ViewShape>()
 
-export const viewConfig: TUseSheeter.AuthorConfig<TPrimitives.ViewShape> = {
+export const viewConfig: TComponents.AuthorConfig<TPrimitives.ViewShape> = {
   defaultSheet: {
     root: v.STYLE<V>(
       v.WEB(
@@ -73,7 +72,7 @@ export const viewConfig: TUseSheeter.AuthorConfig<TPrimitives.ViewShape> = {
 
 const i = getEngine<TPrimitives.IconShape>()
 
-export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
+export const iconConfig: TComponents.AuthorConfig<TPrimitives.IconShape> = {
   defaultProps: {
     $rootWebProps: {
       viewBox: '0 0 24 24',
@@ -105,7 +104,7 @@ export const iconConfig: TUseSheeter.AuthorConfig<TPrimitives.IconShape> = {
 
 const s = getEngine<TPrimitives.ScrollViewShape>()
 
-export const scrollViewConfig: TUseSheeter.AuthorConfig<TPrimitives.ScrollViewShape> = {
+export const scrollViewConfig: TComponents.AuthorConfig<TPrimitives.ScrollViewShape> = {
   defaultSheet: {
     root: s.STYLE<V>(
       {

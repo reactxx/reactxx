@@ -3,12 +3,11 @@ import warning from 'warning'
 
 import { platform } from 'reactxx-sheeter'
 
-import { TTyped } from 'reactxx-typings';
-import { TUseSheeter } from '../typings/use-sheeter'
+import { TTyped, TComponents } from 'reactxx-typings';
 
 export const useConfig = <R extends TTyped.Shape = TTyped.Shape>(
-    authorConfig: TUseSheeter.AuthorConfig<R>,
-    userConfig?: TUseSheeter.UserConfig<R>
+    authorConfig: TComponents.AuthorConfig<R>,
+    userConfig?: TComponents.UserConfig<R>
 ) => {
 
     // configs check

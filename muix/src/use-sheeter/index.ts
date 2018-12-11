@@ -1,8 +1,6 @@
 ﻿export { default as useSheeter, useSheeterUntyped } from './hooks/use-sheeter'
 export { ThemeProvider, useTheme } from './hooks/use-theme'
 export * from './utils/get-component-creator'
-export { TComponents } from './typings/components'
-export { TUseSheeter } from './typings/use-sheeter'
 
 import { platform, resetPlatform } from 'reactxx-sheeter'
 

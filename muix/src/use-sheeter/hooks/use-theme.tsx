@@ -1,13 +1,12 @@
 import React from 'react';
 import { atomizeSheet, platform, mergeSheets } from 'reactxx-sheeter';
-import { TEngine } from 'reactxx-typings';
-import { TUseSheeter } from '../typings/use-sheeter'
+import { TEngine, TComponents } from 'reactxx-typings';
 
 
-const themeContext = React.createContext<TUseSheeter.ThemeContext<any>>(null)
+const themeContext = React.createContext<TComponents.ThemeContext<any>>(null)
 
 export const useTheme = <T extends any>() => {
-  const ctx = React.useContext<TUseSheeter.ThemeContext<T>>(themeContext)
+  const ctx = React.useContext<TComponents.ThemeContext<T>>(themeContext)
   return ctx || defaultTheme<T>()
 }
 
@@ -15,7 +14,7 @@ const defaultTheme = <T extends any>(setState: any = setThemeError) => {
   const { _useSheeter, getDefaultTheme } = platform
   if (!_useSheeter.defaultTheme && getDefaultTheme)
     _useSheeter.defaultTheme = getDefaultTheme()
-  return [_useSheeter.defaultTheme, setState] as TUseSheeter.ThemeContext<T>
+  return [_useSheeter.defaultTheme, setState] as TComponents.ThemeContext<T>
 }
 const setThemeError = theme => { throw 'Cannot set default theme' }
 

@@ -75,4 +75,41 @@ export namespace TComponents {
     onPressOut?: () => void; onLongPress?: () => void
   }
 
+  
+
+
+
+
+
+  export interface ComponentConfigLow {
+    // withCascaing?: boolean
+    //------
+    id?: number // unique component id. Generated in useSheeter
+  }
+
+  // component type options
+  export interface AuthorConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
+    defaultProps?: Partial<TComponents.Props<R>> // classes, css and styles are  ignored
+    defaultSheet?: TTyped.SheetOrCreator<R>
+  }
+
+  export interface UserConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
+    overrideProps?: TComponents.Props<R> // classes, css and styles are ignored
+    overrideSheet?: TTyped.SheetOrCreator<R>
+    myAuthorConfigId?: number // ComponentConfig.id
+  }
+
+  export type ThemeContext<T extends any> = [T, (newTheme: T) => void]
+
+  export type ComponentCreator<R extends TTyped.Shape = TTyped.Shape> = (
+    userDisplayName?: string, userConfig?: TComponents.UserConfig<R>
+  ) => React.SFC<TComponents.Props<R>>
+
+  export type GetComponent<R extends TTyped.Shape> = (
+    authorConfig: TComponents.AuthorConfig<R>,
+    displayName: string,
+    userConfig: TComponents.UserConfig<R>,
+    par?
+  ) => TComponents.SFC<R>
+
 } 

@@ -5,8 +5,7 @@ import {
     TAsEngineSheet, TAsTypedSheet,
     TAsEngineStyle, TAsTypedStyle
 } from 'reactxx-sheeter';
-import { TEngine, TTyped } from 'reactxx-typings';
-import { TComponents } from '../typings/components'
+import { TEngine, TTyped, TComponents } from 'reactxx-typings';
 
 export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, sheet: TEngine.Sheet, props: TComponents.Props) => {
     // from props

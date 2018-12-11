@@ -1,5 +1,6 @@
-import { TUseSheeter, getComponentCreator } from "reactxx-use-sheeter"
+import { getComponentCreator } from "reactxx-use-sheeter"
 import { Platform, platform, resetPlatform } from 'reactxx-sheeter'
+import { TComponents } from 'reactxx-typings'
 
 import { TPrimitives } from './shapes'
 import { textConfig, viewConfig, iconConfig, scrollViewConfig } from './configs'
@@ -17,10 +18,10 @@ const enum CompNames {
 }
 
 export const inits = (
-    getView: TUseSheeter.GetComponent<TPrimitives.ViewShape>,
-    getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape>,
-    getText: TUseSheeter.GetComponent<TPrimitives.TextShape>,
-    getScrollView: TUseSheeter.GetComponent<TPrimitives.ScrollViewShape>
+    getView: TComponents.GetComponent<TPrimitives.ViewShape>,
+    getIcon: TComponents.GetComponent<TPrimitives.IconShape>,
+    getText: TComponents.GetComponent<TPrimitives.TextShape>,
+    getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape>
 ) => {
     const viewCreator = getComponentCreator(CompNames.View, viewConfig, getView, false)
     const View = viewCreator()

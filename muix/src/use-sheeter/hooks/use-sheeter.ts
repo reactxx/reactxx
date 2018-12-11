@@ -1,9 +1,6 @@
 ﻿import React from 'react'
 import { platform, useForceUpdate, useUniqueId, useWidthsLow } from 'reactxx-sheeter';
-import { TTyped, O} from 'reactxx-typings';
-import { TComponents } from '../typings/components'
-import { TUseSheeter } from '../typings/use-sheeter'
-import warning from 'warning';
+import { TTyped, TComponents, O} from 'reactxx-typings';
 import { useConfig } from './use-config';
 import { useDefaults } from './use-defaults';
 import { useProps } from './use-props';
@@ -13,9 +10,9 @@ export const useSheeterUntyped = (props, authorConfig, displayName, userConfig?)
 
 const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     props: TComponents.Props<R>,
-    authorConfig: TUseSheeter.AuthorConfig<R>,
+    authorConfig: TComponents.AuthorConfig<R>,
     displayName: string,
-    userConfig?: TUseSheeter.UserConfig<R>
+    userConfig?: TComponents.UserConfig<R>
 ) => {
 
     const config = useConfig(authorConfig, userConfig)

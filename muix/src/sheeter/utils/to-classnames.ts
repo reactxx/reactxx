@@ -1,8 +1,7 @@
 import warning from 'warning'
-import { TEngine, TTyped } from 'reactxx-typings'
+import { TComponents, TEngine } from 'reactxx-typings'
 import { atomizeRuleset, wrapRuleset } from './atomize'
 import { isToAtomize, isDeferred, isTemporary } from './atomize-low'
-import { TComponents } from 'reactxx-use-sheeter';
 
 export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: TEngine.Ruleset[]) => {
 

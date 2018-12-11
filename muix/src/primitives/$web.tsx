@@ -1,19 +1,19 @@
 import React from 'react'
 
-import { platform } from 'reactxx-sheeter'
-import { useSheeter, TUseSheeter } from "reactxx-use-sheeter"
+import { useSheeter } from "reactxx-use-sheeter"
+import { TComponents } from "reactxx-typings"
 
 import { hasPlatformEvents } from './configs'
 import { TPrimitives } from './shapes'
 
-export const getView: TUseSheeter.GetComponent<TPrimitives.ViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
+export const getView: TComponents.GetComponent<TPrimitives.ViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const { styleRootWeb, propsCode, propsCode: { $rootWebProps, children }, classes }
         = useSheeter<TPrimitives.ViewShape>(props, authorConfig, displayName, userConfig)
     propsCode.pressable = hasPlatformEvents($rootWebProps)
     return <div {...styleRootWeb()} {...$rootWebProps} children={children} />
 }
 
-export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
+export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
     const { styleRootWeb, propsCode, propsCode: { data, url, children, $rootWebProps }, classes }
         = useSheeter<TPrimitives.IconShape>(props, authorConfig, displayName, userConfig)
     propsCode.pressable = hasPlatformEvents($rootWebProps)
@@ -27,7 +27,7 @@ export const getIcon: TUseSheeter.GetComponent<TPrimitives.IconShape> = (authorC
 
 }
 
-export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> = (
+export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (
     authorConfig, displayName, userConfig, isAnimated: boolean
 ) => props => {
     const { styleRootWeb, propsCode, propsCode: { children, url, $rootWebProps }, classes }
@@ -43,7 +43,7 @@ export const getText: TUseSheeter.GetComponent<TPrimitives.TextShape> = (
     return url ? <a href={url} {...tagProps} /> : <div {...tagProps} children={children} />
 }
 
-export const getScrollView: TUseSheeter.GetComponent<TPrimitives.ScrollViewShape> =
+export const getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape> =
     (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
         const { styleRootWeb, styleWeb, propsCode: { horizontal, children, $rootWebProps }, classes }
             = useSheeter<TPrimitives.ScrollViewShape>(props, authorConfig, displayName, userConfig)

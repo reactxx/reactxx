@@ -1,9 +1,9 @@
 
 
 import React from 'react'
-import { platform, getEngine } from "reactxx-sheeter"
-import { TTyped, T, V } from 'reactxx-typings'
-import { useSheeter, TUseSheeter, getComponentCreator } from "reactxx-use-sheeter"
+import { getEngine } from "reactxx-sheeter"
+import { TComponents, TTyped, T, V } from 'reactxx-typings'
+import { useSheeter, getComponentCreator } from "reactxx-use-sheeter"
 
 interface ShapeLow extends TTyped.ShapeAncestor {
   props: { disabled?: boolean },
@@ -25,11 +25,11 @@ interface Shape extends ShapeLow {
   sheet: typeof defaultSheet
 }
 
-const config: TUseSheeter.AuthorConfig<Shape> = {
+const config: TComponents.AuthorConfig<Shape> = {
   defaultSheet
 }
 
-const getComp: TUseSheeter.GetComponent<Shape> = (authorConfig, displayName) => props => {
+const getComp: TComponents.GetComponent<Shape> = (authorConfig, displayName) => props => {
   const {
     styleRootWeb,
     styleWeb,

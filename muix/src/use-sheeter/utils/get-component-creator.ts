@@ -1,12 +1,10 @@
 ﻿//import React from 'react'
-import { TTyped } from 'reactxx-typings';
-
-import { TUseSheeter } from '../typings/use-sheeter'
+import { TTyped, TComponents } from 'reactxx-typings';
 
 
 export const getComponentCreator = <R extends TTyped.Shape>(
-    authorDisplayName: string, authorConfig: TUseSheeter.AuthorConfig<R>, getComp: TUseSheeter.GetComponent<R>, par?
-) => (userDisplayName?: string, userConfig?: TUseSheeter.UserConfig<R>) => {
+    authorDisplayName: string, authorConfig: TComponents.AuthorConfig<R>, getComp: TComponents.GetComponent<R>, par?
+) => (userDisplayName?: string, userConfig?: TComponents.UserConfig<R>) => {
     const displayName = userDisplayName || authorDisplayName
     const Comp = getComp(authorConfig, displayName, userConfig, par)
     Comp.displayName = displayName
