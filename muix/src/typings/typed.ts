@@ -2,6 +2,14 @@ import React from 'react';
 import ReactN from 'react-native';
 import CSS from 'csstype';
 
+import {
+  NativeMethodsMixin, StyleProp,
+  ViewStyle as ViewStyle_, TextStyle as TextStyle_, ImageStyle as ImageStyle_,
+  ViewProperties as ViewProperties_, TextProperties as TextProperties_, ImageProperties as ImageProperties_,
+  ScrollViewProperties as ScrollViewProperties_
+} from 'react-native'
+
+
 import { TCommonStyles, TEngine, TExtensions } from 'reactxx-typings'
 
 export type $W = '$W'; export type $T = '$T'; export type $V = '$V';
@@ -74,7 +82,7 @@ export namespace TTyped {
 
     WEB: (...r: Ruleset<$W>[]) => O
     NATIVE: <R extends NativeIds = $V>(...r: Ruleset<TNative<R>>[]) => O
-    ROOT: (...pars: Ruleset<getRootStyle<S>>[]) => getRootStyle<S>
+    //ROOT: (...pars: Ruleset<getRootStyle<S>>[]) => getRootStyle<S>
 
     IF: <R extends RulesetIds>(cond: boolean | ((p: PropsCode<S>) => boolean), ...r: Ruleset<R>[]) => R
     IFELSE: <R extends RulesetIds>(cond: boolean | ((p: PropsCode<S>) => boolean), ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
@@ -118,7 +126,7 @@ export namespace TTyped {
     ValueOrCreator<PartialSheet<R>, getTheme<R>>
 
   export type RulesetOrCreator<R extends Shape = Shape, Id extends RulesetIds = getRootStyle<R>> =
-    ValueOrCreator<Rulesets<Id>, getTheme<R>>
+    ValueOrCreator<Rulesets<Id>, getTheme<R>> | TAllowed<getRootStyle<R>>
 
   //******************************************************
   //* SHAPE
@@ -189,28 +197,58 @@ export namespace TTyped {
   export type StyleSimple<R extends Shape = Shape> = getRootStyle<R>
 
   export type StyleOrCreator<R extends Shape = Shape> =
-    ValueOrCreator<Style<getRootStyle<R>>, getTheme<R>>
+    ValueOrCreator<Style<getRootStyle<R>>, getTheme<R>> | TAllowed<getRootStyle<R>>
 
   //******************************************************
   //* PLATFORM PROPS
   //******************************************************
 
-  interface PropsPlatform {
+  interface StylePropsPlatform {
     'data-trace'?: string
   }
 
-  export interface PropsWeb extends PropsPlatform {
+  export interface StylePropsWeb extends StylePropsPlatform {
     className?: string
     style?: React.CSSProperties
   }
 
-  export interface PropsNative<TT extends CommonIds> extends PropsPlatform {
-    style?: 
-    TT extends T ? Required<ReactN.TextStyle> :
-    TT extends V ? Required<ReactN.ViewStyle> :
-    TT extends I ? Required<ReactN.ImageStyle> :
-    never
+  // export interface StyleProps<TT extends CommonIds> extends StylePropsPlatform {
+  //   classNames?: TAllowed<TT>
+  //   styles?: TAllowed<TT>
+  // }
+
+  export interface StylePropsNative<TT extends RulesetIds> extends StylePropsPlatform {
+    style?: NativeRuleset<TT>
   }
+
+  type PropsOverride<T, S> = T & { style?: S }
+
+  interface Static<P> extends NativeMethodsMixin, React.ClassicComponentClass<P> { }
+
+  export type ViewStyle = StyleProp<ViewStyle_> | TTyped.TAllowed<$V>
+  export type TextStyle = StyleProp<TextStyle_> | TTyped.TAllowed<$T>
+  export type ImageStyle = StyleProp<ImageStyle_> | TTyped.TAllowed<$I>
+
+  export type ViewProperties = PropsOverride<ViewProperties_, ViewStyle>
+  export type TextProperties = PropsOverride<TextProperties_, TextStyle>
+  export type ScrollViewProperties = PropsOverride<ScrollViewProperties_, ViewStyle> & { contentContainerStyle?: ViewStyle }
+  export type ImageProperties = PropsOverride<ImageProperties_, ImageStyle>
+
+  export type ViewStatic = Static<ViewProperties>
+  export type ScrollViewStatic = Static<ScrollViewProperties>
+  export type TextStatic = Static<TextProperties>
+  export type ImageStatic = Static<ImageProperties>
+
+  export type NativeRuleset<TT extends RulesetIds> =
+    TT extends T ? TextStyle :
+    TT extends V ? ViewStyle :
+    TT extends I ? ImageStyle :
+    TT extends $T ? TextStyle :
+    TT extends $V ? ViewStyle :
+    TT extends $I ? ImageStyle :
+    O
+
+  export type StyleProps = (propsCode: PropsCode, rulesets: TTyped.Ruleset[], classNames?: RulesetIds, style?: RulesetIds) => StylePropsWeb | StylePropsNative<RulesetIds>
 
 }
 

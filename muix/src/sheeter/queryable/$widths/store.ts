@@ -5,7 +5,7 @@ import { useUniqueId } from '../../utils/use-unique-id'
 
 export const useWidths = () => {
     const forceUpdate = useForceUpdate()
-    const uniqueId = useUniqueId(platform._withStyles)
+    const uniqueId = useUniqueId(platform._useSheeter)
     return useWidthsLow(uniqueId, forceUpdate)
 }
 

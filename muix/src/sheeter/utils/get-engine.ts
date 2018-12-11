@@ -15,7 +15,7 @@ const untypedEngine = {
     WIDTH,
     THEMED: p => p,
     STYLE: (...p) => p,
-    ROOT: ((...p) => p) as any,
+    //ROOT: ((...p) => p) as any,
     //$atomizeSheet: atomizeSheet as any,
     //$mergeSheets: mergeSheets as any,
     //ATOMIZE: atomizeRuleset as any,

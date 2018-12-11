@@ -1,4 +1,4 @@
-/** @jsx platform.createElement */
+
 
 import React from 'react'
 import { platform, getEngine } from "reactxx-sheeter"
@@ -31,15 +31,14 @@ const config: TUseSheeter.AuthorConfig<Shape> = {
 
 const getComp: TUseSheeter.GetComponent<Shape> = (authorConfig, displayName) => props => {
   const {
-    toClassNames,
+    styleRootWeb,
+    styleWeb,
     classes,
-    classNames,
-    styles,
     propsCode: { children }
   } = useSheeter<Shape>(props, authorConfig, displayName)
 
-  return <div classNames={toClassNames(classes.root, classNames)} styles={styles}>
-    <span classNames={toClassNames(classes.label)}>
+  return <div {...styleRootWeb()}>
+    <span {...styleWeb(classes.label)}>
       {children}
     </span>
   </div>

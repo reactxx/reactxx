@@ -1,5 +1,3 @@
-/** @jsx platform.createElement */
-
 import React from 'react'
 import { platform, IF } from "reactxx-sheeter"
 import { useSheeterUntyped as useSheeter, getComponentCreatorUntyped as getComponentCreator } from "reactxx-use-sheeter"
@@ -19,10 +17,10 @@ const config = {
 
 const getComp = (authorConfig, displayName) => props => {
   
-  const { toClassNames, propsCode: { children }, classes, classNames, styles } = useSheeter(props, authorConfig, displayName)
+  const { toClassNameRoot, toClassName, propsCode: { children }, classes, classNames, styles } = useSheeter(props, authorConfig, displayName)
 
-  return <div classNames={toClassNames(classes.root, classNames)} styles={styles}>
-    <span classNames={toClassNames(classes.label)}>
+  return <div {...toClassNameRoot(classes.root)} >
+    <span className={toClassName(classes.label)}>
       {children}
     </span>
   </div>

@@ -1,4 +1,4 @@
-/** @jsx platform.createElement */
+import React from 'react'
 
 import { initPlatform, render } from "reactxx-primitives-test/init-platform.t"
 import { platform } from 'reactxx-sheeter'

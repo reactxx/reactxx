@@ -1,4 +1,4 @@
-/** @jsx platform.createElement */
+
 
 import { platform } from 'reactxx-sheeter'
 

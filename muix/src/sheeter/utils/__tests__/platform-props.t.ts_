@@ -1,6 +1,6 @@
 import ReactN from 'react-native'
 import React from 'react'
-import { TTyped, V } from 'reactxx-typings'
+import { TTyped, V, T } from 'reactxx-typings'
 
 interface Shape {
   root: {
@@ -50,6 +50,9 @@ interface Shape4 extends Shape {
     web: React.AnchorHTMLAttributes<HTMLAnchorElement>
     native: ReactN.TextProperties
     //native: ReactN.ViewProperties // ERROR
+  },
+  shape: {
+    'root': T
   }
 }
 

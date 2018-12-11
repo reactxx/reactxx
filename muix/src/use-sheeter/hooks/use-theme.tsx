@@ -12,10 +12,10 @@ export const useTheme = <T extends any>() => {
 }
 
 const defaultTheme = <T extends any>(setState: any = setThemeError) => {
-  const { _withStyles, getDefaultTheme } = platform
-  if (!_withStyles.defaultTheme && getDefaultTheme)
-    _withStyles.defaultTheme = getDefaultTheme()
-  return [_withStyles.defaultTheme, setState] as TUseSheeter.ThemeContext<T>
+  const { _useSheeter, getDefaultTheme } = platform
+  if (!_useSheeter.defaultTheme && getDefaultTheme)
+    _useSheeter.defaultTheme = getDefaultTheme()
+  return [_useSheeter.defaultTheme, setState] as TUseSheeter.ThemeContext<T>
 }
 const setThemeError = theme => { throw 'Cannot set default theme' }
 
@@ -34,7 +34,7 @@ export const sheetFromThemeCache = (
   theme, defaultClasses: TEngine.SheetOrCreator,
   path: string
 ) => {
-  const cache = !theme ? platform._withStyles.$cache : (theme.$cache || (theme.$cache = {}))
+  const cache = !theme ? platform._useSheeter.$cache : (theme.$cache || (theme.$cache = {}))
 
   let value: TEngine.Sheet = cache[componentId]
   if (value) return value

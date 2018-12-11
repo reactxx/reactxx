@@ -1,6 +1,6 @@
 ﻿import React from 'react'
-import { platform, toClassNamesWithQuery, useForceUpdate, useUniqueId, useWidthsLow } from 'reactxx-sheeter';
-import { TTyped } from 'reactxx-typings';
+import { platform, useForceUpdate, useUniqueId, useWidthsLow } from 'reactxx-sheeter';
+import { TTyped, O} from 'reactxx-typings';
 import { TComponents } from '../typings/components'
 import { TUseSheeter } from '../typings/use-sheeter'
 import warning from 'warning';
@@ -33,9 +33,9 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
 
     // widths
     const uniqueIdRef = React.useRef(0) // unique ID
-    if (!uniqueIdRef.current) uniqueIdRef.current = ++platform._withStyles.uniqueIdCounter
+    if (!uniqueIdRef.current) uniqueIdRef.current = ++platform._useSheeter.uniqueIdCounter
     const forceUpdate = useForceUpdate()
-    const uniqueId = useUniqueId(platform._withStyles)
+    const uniqueId = useUniqueId(platform._useSheeter)
     const { actWidth, getWidthMap, breakpoints } = useWidthsLow(uniqueId, forceUpdate)
 
     // merge props with default's
@@ -48,12 +48,20 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
         propsRest, themedProps && themedProps(theme),
     ])
 
-    const toClassNames = <T extends TTyped.RulesetIds>(...rulesets: TTyped.Ruleset<T>[]) =>
-        toClassNamesWithQuery(propsCode, ...rulesets) as any as T
+    // const toClassNames = <T extends TTyped.RulesetIds>(...rulesets: TTyped.Ruleset<T>[]) =>
+    //     toClassNamesWithQuery(propsCode, ...rulesets) as any as T
 
-    const toStyles = toClassNames
+    const styleWeb = (...rulesets: TTyped.RulesetSimple[]) =>
+        platform.styleProps(propsCode, rulesets) as TTyped.StylePropsWeb
+    const styleRootWeb = (...rulesets: TTyped.RulesetSimple[]) =>
+        platform.styleProps(propsCode, rulesets || [classes['root']], classNames, styles) as TTyped.StylePropsWeb
 
-    return { getWidthMap, toStyles, toClassNames, propsCode, classes, styles, classNames, uniqueId, forceUpdate }
+    const styleNative = <R extends TTyped.RulesetIds>(...rulesets: TTyped.RulesetSimple<R>[]) =>
+        platform.styleProps(propsCode, rulesets) as TTyped.StylePropsNative<R>
+    const styleRootNative = <R extends TTyped.RulesetIds = O>(...rulesets: TTyped.RulesetSimple<R>[]) =>
+        platform.styleProps(propsCode, rulesets || [classes['root']], classNames, styles) as TTyped.StylePropsNative<R>
+
+    return { getWidthMap, styleNative, styleRootNative, styleWeb, styleRootWeb, propsCode, classes, styles, classNames, uniqueId, forceUpdate }
 }
 
 const mergeCodeProps = (propsCode: TTyped.PropsCode | any, props: TComponents.Props[]) => {

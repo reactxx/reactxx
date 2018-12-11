@@ -1,6 +1,8 @@
 import { Dimensions } from 'react-native'
-import { TEngine, TTypedNative } from 'reactxx-typings'
-import { assignPlatform } from './utils/globals'
+import { TEngine, TTyped } from 'reactxx-typings'
+import { platform, assignPlatform } from './utils/globals'
+import { toClassNamesWithQuery } from './utils/to-classnames'
+import { TAsEngineClassName } from './utils/from-engine'
 import { setActWidth } from './queryable/$widths/store'
 
 import { View as View_, Text as Text_, Image as Image_, ScrollView as ScrollView_ } from 'react-native'
@@ -28,8 +30,20 @@ export const init = () => assignPlatform({
         } else
             return style as TEngine.AtomicNatives
     },
+
     applyLastwinsStrategy,
     finalizeClassName,
+
+    styleProps: (propsCode, rulesets, classNames, style) => {
+        const css = toClassNamesWithQuery(propsCode, ...rulesets, classNames, style)
+        let reduced = platform.applyLastwinsStrategy(TAsEngineClassName(css)) as TEngine.AtomicNativeLows
+        const res: TTyped.StylePropsNative<TTyped.RulesetIds> = {
+            style: platform.finalizeClassName(reduced) as TEngine.AtomicNativeLows
+        }
+        if (window.__TRACE__)
+            res['data-trace'] = dataTrace(reduced, window.__TRACE__.dataTraceFlag)
+        return res
+    }
 })
 
 function toJSON() {
@@ -59,7 +73,7 @@ const finalizeClassName = (lastWinResult: TEngine.AtomicNativeLows) => {
 }
 
 function toJSON2() {
-    const {conditions, toJSON, ...rest} = this
+    const { conditions, toJSON, ...rest } = this
     return rest
 }
 
@@ -72,7 +86,19 @@ const applyLastwinsStrategy: TEngine.ApplyLastwinsStrategy = (values: TEngine.At
     return res
 }
 
-export const View: TTypedNative.ViewStatic = View_ as any
-export const Text: TTypedNative.TextStatic = Text_ as any
-export const ScrollView: TTypedNative.ScrollViewStatic = ScrollView_ as any
-export const Image: TTypedNative.ImageStatic = Image_ as any
+const dataTrace = (ruleset, flags = 'long') => {
+    if (!ruleset) return ''
+    const res = []
+    for (const p in ruleset) {
+        const val = ruleset[p] as TEngine.__dev_AtomicNative
+        if (typeof val === 'undefined' || !window.__TRACE__ || flags === 'short') continue
+
+        res.push(`${p} @${val.tracePath}`)
+    }
+    return res.length > 0 ? '\n' + res.join('\n') : ''
+}
+
+export const View: TTyped.ViewStatic = View_ as any
+export const Text: TTyped.TextStatic = Text_ as any
+export const ScrollView: TTyped.ScrollViewStatic = ScrollView_ as any
+export const Image: TTyped.ImageStatic = Image_ as any

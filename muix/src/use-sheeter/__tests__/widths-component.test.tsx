@@ -1,8 +1,8 @@
-/** @jsx platform.createElement */
+
 
 import React from 'react'
 
-import { TEngine, V } from 'reactxx-typings'
+import { TEngine, V, TTyped } from 'reactxx-typings'
 import { platform, atomizeRuleset, toClassNamesWithQuery, WIDTH, useWidths, setActWidth } from "reactxx-sheeter"
 
 import { initPlatform, render } from "./init-platform.t"
@@ -34,21 +34,21 @@ describe("SHEETER $WIDTHS", () => {
         const renderCount = React.useRef(0)
         renderCount.current++
 
-        const root = toClassNamesWithQuery(query, sheetRoot) as any as V
+        const root = platform.styleProps(query, [sheetRoot as any as V]) as TTyped.StylePropsWeb// toClassNamesWithQuery(query, sheetRoot) as any as V
 
         return { getWidthMap, root, renderCount: renderCount.current }
       }
 
       const App: React.SFC = () => {
         const { root, renderCount } = useApp()
-        return <div classNames={root}>{`rendered: ${renderCount}x`}</div>
+        return <div {...root}>{`rendered: ${renderCount}x`}</div>
       }
       App['$c$'] = true
 
       const WidthsMapApp: React.SFC = () => {
         const { root, renderCount, getWidthMap } = useApp()
         const [mobile, tablet, desktop] = getWidthMap([640, 1024])
-        return <div classNames={root}>
+        return <div {...root}>
           {`${mobile ? 'mobile' : ''}${tablet ? 'tablet' : ''}${desktop ? 'desktop' : ''} (rendered: ${renderCount}x)`}
         </div>
       }

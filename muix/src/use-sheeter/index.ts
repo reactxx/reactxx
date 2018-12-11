@@ -5,11 +5,11 @@ export * from './utils/from-engine'
 export { TComponents } from './typings/components'
 export { TUseSheeter } from './typings/use-sheeter'
 
-import { platform } from 'reactxx-sheeter'
-import { createElement } from './$web'
+//import { platform } from 'reactxx-sheeter'
+//import { createElement } from './$web'
 
 import { initGlobals } from './utils/globals'
 
-export const initUse$Web = (force?: boolean) => initGlobals(force, () => platform.createElement = createElement)
-export const initUse = initUse$Web
+//export const initUse$Web = (force?: boolean) => initGlobals(force)
+export const initUse = (force?: boolean) => initGlobals(force)
 

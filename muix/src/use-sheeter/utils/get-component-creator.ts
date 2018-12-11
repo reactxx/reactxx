@@ -9,7 +9,7 @@ export const getComponentCreator = <R extends TTyped.Shape>(
 ) => (userDisplayName?: string, userConfig?: TUseSheeter.UserConfig<R>) => {
     const displayName = userDisplayName || authorDisplayName
     const Comp = getComp(authorConfig, displayName, userConfig, par)
-    Comp.displayName = userDisplayName || authorDisplayName
+    Comp.displayName = displayName
     Comp.$c$ = true
     return Comp
 }

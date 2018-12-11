@@ -1,4 +1,4 @@
-import { TExtensions, TEngine } from 'reactxx-typings';
+import { TExtensions, TEngine, TTyped } from 'reactxx-typings';
 import { WidthStore } from '../queryable/$widths/store';
 import { TAsTypedClassName } from 'reactxx-use-sheeter';
 
@@ -7,6 +7,7 @@ export interface Platform extends TExtensions.Platform {
     applyLastwinsStrategy?: TEngine.ApplyLastwinsStrategy
     finalizeClassName?: (values: TEngine.AtomicLow) => TEngine.AtomicFinal
     getDefaultTheme?: () => any
+    styleProps?: TTyped.StyleProps
 }
 
 export const resetPlatform = () => {

@@ -1,4 +1,4 @@
-/** @jsx platform.createElement */
+
 
 import TestRenderer from 'react-test-renderer'
 import { platform } from 'reactxx-sheeter'

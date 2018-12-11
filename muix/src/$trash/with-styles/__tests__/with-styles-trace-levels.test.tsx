@@ -1,4 +1,4 @@
-/** @jsx platform.createElement */
+
 import React from 'react'
 
 import { platform } from 'reactxx-sheeter'

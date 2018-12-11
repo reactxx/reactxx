@@ -1,4 +1,4 @@
-/** @jsx platform.createElement */
+
 
 import React from 'react'
 import ReactN from 'react-native'
@@ -32,13 +32,13 @@ export const compCreator = (
 ) => {
   const res: TComponents.SFC<Shape> = props => {
     try {
-      const { toClassNames, propsCode: { p1 }, classes, classNames, styles
+      const { styleRootWeb, propsCode: { p1 }, classes, classNames, styles
       } = useSheeter<Shape>(props, config, displayName, userConfig)
 
       const renderCount = React.useRef(0)
       renderCount.current++
-      const root = toClassNames(classes.root, classNames)
-      return <div classNames={root} styles={styles as any}>{`${p1 ? p1 + ': ' : ''}${renderCount.current}`}</div>
+
+      return <div {...styleRootWeb()} >{`${p1 ? p1 + ': ' : ''}${renderCount.current}`}</div>
     } catch {
       return <div>ERROR</div>
     }

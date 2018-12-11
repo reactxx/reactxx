@@ -20,16 +20,16 @@ export const useConfig = <R extends TTyped.Shape = TTyped.Shape>(
     if (authorConfigRef.current !== authorConfig || userConfigRef.current != userConfig)
         warning(false, 'authorConfig or userConfig changed. Last version will be ignored.')
 
-    const { _withStyles } = platform
+    const { _useSheeter } = platform
 
     if (authorConfig && !authorConfig.id)
-        authorConfig.id = ++_withStyles.idCounter
+        authorConfig.id = ++_useSheeter.idCounter
 
 
     if (userConfig) {
         const authorConfigId = authorConfig ? authorConfig.id : -1
         if (!userConfig.id) { // first userConfigussage
-            userConfig.id = ++_withStyles.idCounter
+            userConfig.id = ++_useSheeter.idCounter
             userConfig.myAuthorConfigId = authorConfigId // connect it to authorConfig
             // config merging: keep userConfig pointer, change its content
             const value = Object.assign({}, authorConfig, userConfig)

@@ -1,7 +1,9 @@
 import Fela from 'reactxx-fela'
 import { assignPlatform, platform } from 'reactxx-sheeter'
-import { TEngine } from 'reactxx-typings'
+import { TEngine, TTyped } from 'reactxx-typings'
 import { setActWidth } from './queryable/$widths/store'
+import { toClassNamesWithQuery } from './utils/to-classnames'
+import { TAsEngineClassName } from './utils/from-engine'
 
 export const init = () => {
   Fela.initFela$Web(platform)
@@ -23,7 +25,19 @@ export const init = () => {
     toPlatformAtomizeRuleset: platform.renderer.renderRuleEx,
     applyLastwinsStrategy,
     finalizeClassName: platform.renderer.finalizeClassName,
-  })
+
+    styleProps: (propsCode, rulesets, classNames, style) => {
+      const css = toClassNamesWithQuery(propsCode, ...rulesets, classNames)
+      let reduced = platform.applyLastwinsStrategy(TAsEngineClassName(css)) as TEngine.AtomicWebLows
+      const res: TTyped.StylePropsWeb = {
+          style: style as React.CSSProperties,
+          className: platform.finalizeClassName(reduced) as string
+      }
+      if (window.__TRACE__)
+          res['data-trace'] = Fela.dataTrace(reduced, window.__TRACE__.dataTraceFlag)
+      return res
+  }
+})
 }
 
 const onWidthChanged = () => {
@@ -50,4 +64,8 @@ const applyLastwinsStrategy: TEngine.ApplyLastwinsStrategy = (values: TEngine.At
   }
 
   return res.items as TEngine.AtomicLow
+}
+
+const styleProps = () => {
+  
 }
