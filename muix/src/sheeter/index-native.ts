@@ -11,11 +11,11 @@ export { View, Text, Image, ScrollView } from './$native'
 import { init } from './$native'
 import { initGlobals } from './utils/globals'
 
-export const initSheeter$Native = (force?:boolean) => initGlobals(force, init)
+export const initSheeter$Native = (force?: boolean) => initGlobals(force, init)
 export const initSheeter = initSheeter$Native
 
-export {atomizeSheet, atomizeRuleset, atomizeStyle} from './utils/atomize'
-export {toClassNamesWithQuery, deleteSystemProps} from './utils/to-classnames'
-export {adjustAtomizedLow} from './utils/atomize-low'
+export { atomizeSheet, atomizeRuleset, atomizeStyle } from './utils/atomize'
+export { toClassNamesWithQuery } from './utils/to-classnames'
+export { adjustAtomizedLow } from './utils/atomize-low'
 
 initSheeter()

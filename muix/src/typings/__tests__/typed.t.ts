@@ -1,5 +1,4 @@
 import { TTyped, T, V } from 'reactxx-typings'
-import { TAsTypedClassName } from 'reactxx-use-sheeter';
 
 interface ShapeX extends TTyped.ShapeAncestor {
     sheet: {

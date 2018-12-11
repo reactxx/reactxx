@@ -2,7 +2,7 @@
 import warning from 'warning'
 
 import { sheetFromThemeCache } from './use-theme';
-import { TAsTypedSheet } from '../utils/from-engine';
+import { TAsTypedSheet } from 'reactxx-sheeter';
 import { TUseSheeter } from '../typings/use-sheeter'
 
 

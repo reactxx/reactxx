@@ -55,16 +55,16 @@ export const toClassNamesWithQuery = <T extends {} = any>(props: T, ...items: TE
     return values.length === 0 ? null : wrapRuleset(values) as TEngine.WithConflicts
 }
 
-export const deleteSystemProps = (props: TComponents.ReactsCommonProperties & TTyped.PropsCode) => {
-    // for (const p in props)
-    //     if (p.charAt(0) === '$') delete props[p]
-    delete props.classNames
-    delete props.styles
-    //delete props['data-trace']
-    if (!props['data-trace']) delete props['data-trace']
-    // propsToDelete.forEach(p => delete props[p])
-    // if (props.style) delete props.style.toJSON
-}
+// export const deleteSystemProps = (props: TComponents.ReactsCommonProperties & TTyped.PropsCode) => {
+//     // for (const p in props)
+//     //     if (p.charAt(0) === '$') delete props[p]
+//     delete props.classNames
+//     delete props.styles
+//     //delete props['data-trace']
+//     if (!props['data-trace']) delete props['data-trace']
+//     // propsToDelete.forEach(p => delete props[p])
+//     // if (props.style) delete props.style.toJSON
+// }
 
 
 /******************************************

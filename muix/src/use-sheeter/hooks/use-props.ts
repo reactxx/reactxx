@@ -1,13 +1,12 @@
 ﻿import React from 'react';
-import { atomizeRuleset, atomizeSheet, atomizeStyle, mergeSheets, } from 'reactxx-sheeter';
-import { TEngine, TTyped } from 'reactxx-typings';
-import { TComponents } from '../typings/components'
-
-import {
+import { 
+    atomizeRuleset, atomizeSheet, atomizeStyle, mergeSheets, 
     TAsEngineClassName, TAsTypedClassName, 
     TAsEngineSheet, TAsTypedSheet,
     TAsEngineStyle, TAsTypedStyle
-} from '../utils/from-engine'
+} from 'reactxx-sheeter';
+import { TEngine, TTyped } from 'reactxx-typings';
+import { TComponents } from '../typings/components'
 
 export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, sheet: TEngine.Sheet, props: TComponents.Props) => {
     // from props

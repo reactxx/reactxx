@@ -6,10 +6,11 @@ export * from './utils/globals'
 export * from './utils/use-force-update'
 export * from './utils/use-unique-id'
 export * from './utils/merge'
+export * from './utils/from-engine'
 //export * from './utils/wrap-pseudo-prefixes'
 
 export { atomizeSheet, atomizeRuleset, atomizeStyle } from './utils/atomize'
-export { toClassNamesWithQuery, deleteSystemProps } from './utils/to-classnames'
+export { toClassNamesWithQuery } from './utils/to-classnames'
 export { adjustAtomizedLow, isToAtomizeArray } from './utils/atomize-low'
 export { getEngine } from './utils/get-engine'
 

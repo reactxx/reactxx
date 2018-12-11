@@ -34,17 +34,18 @@ export namespace TComponents {
   - react native build in components (e.g. <Text styles={...})
   - custom components (e.g. <IconButton css={...})
   */
-  export interface ReactsCommonProperties<Id extends TTyped.PlatformIds = TTyped.PlatformIds> {
-    classNames?: TTyped.TPlatformAllowed<Id>
-    styles?: TTyped.TPlatformAllowed<Id>
-    trace?: string
-  }
+  // export interface ReactsCommonProperties<Id extends TTyped.PlatformIds = TTyped.PlatformIds> {
+  //   classNames?: TTyped.TPlatformAllowed<Id>
+  //   styles?: TTyped.TPlatformAllowed<Id>
+  //   trace?: string
+  // }
 
-  export type ComponentType<R extends TTyped.Shape = TTyped.Shape> =
-    React.ComponentType<Props<R>> &
-    TEngine.IsReactXXComponent
+  // export type ComponentType<R extends TTyped.Shape = TTyped.Shape> =
+  //   React.ComponentType<Props<R>>
+    //  &
+    // TEngine.IsReactXXComponent
 
-  export type SFC<R extends TTyped.Shape = TTyped.Shape> = React.SFC<Props<R>> & TEngine.IsReactXXComponent
+  export type SFC<R extends TTyped.Shape = TTyped.Shape> = React.SFC<Props<R>> //& TEngine.IsReactXXComponent
 
   /******************************************
     EVENTS

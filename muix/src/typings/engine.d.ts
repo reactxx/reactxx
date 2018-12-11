@@ -23,9 +23,9 @@ declare namespace TEngine {
     evalProc: (outerPar) => QueryableItems
   }
 
-  export interface IsReactXXComponent {
-    $c$?: boolean // ReactXX component signature
-  }
+  // export interface IsReactXXComponent {
+  //   $c$?: boolean // ReactXX component signature
+  // }
 
   export type Sheet = Record<string, Rulesets>
 

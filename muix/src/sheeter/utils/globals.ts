@@ -1,6 +1,5 @@
 import { TExtensions, TEngine, TTyped } from 'reactxx-typings';
-import { WidthStore } from '../queryable/$widths/store';
-import { TAsTypedClassName } from 'reactxx-use-sheeter';
+import { WidthStore } from '../queryable/$widths/store'
 
 export interface Platform extends TExtensions.Platform {
     toPlatformAtomizeRuleset?: TEngine.ToPlatformAtomizeRuleset

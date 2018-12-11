@@ -1,15 +1,21 @@
 ﻿export { default as useSheeter, useSheeterUntyped } from './hooks/use-sheeter'
 export { ThemeProvider, useTheme } from './hooks/use-theme'
 export * from './utils/get-component-creator'
-export * from './utils/from-engine'
 export { TComponents } from './typings/components'
 export { TUseSheeter } from './typings/use-sheeter'
 
-//import { platform } from 'reactxx-sheeter'
-//import { createElement } from './$web'
+import { platform, resetPlatform } from 'reactxx-sheeter'
 
-import { initGlobals } from './utils/globals'
+export const initUse = (force?: boolean) => {
+    if (force) resetPlatform()
+    if (platform._useSheeter) return
+    platform._useSheeter = {
+        $cache: {},
+        defaultTheme: platform.getDefaultTheme && platform.getDefaultTheme(),
+        uniqueIdCounter: 0,
+        idCounter: 0,
+    }
+}
 
-//export const initUse$Web = (force?: boolean) => initGlobals(force)
-export const initUse = (force?: boolean) => initGlobals(force)
+
 

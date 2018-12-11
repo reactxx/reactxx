@@ -9,6 +9,6 @@ export const TAsTypedSheet = (r: TTyped.PartialSheetOrCreator) => r as any as TE
 export const TAsEngineStyle = <R extends TTyped.Shape>(r: TEngine.StyleOrCreator) => r as any as TTyped.StyleSimple<R>
 export const TAsTypedStyle = (r: TTyped.StyleOrCreator) => r as any as TEngine.Style
 
-export function isReactXXComponent(obj): obj is TEngine.IsReactXXComponent {
-    return (obj as TEngine.IsReactXXComponent).$c$
-}
+// export function isReactXXComponent(obj): obj is TEngine.IsReactXXComponent {
+//     return (obj as TEngine.IsReactXXComponent).$c$
+// }
