@@ -40,8 +40,10 @@ export const init = () => assignPlatform({
         const res: TTyped.StylePropsNative<TTyped.RulesetIds> = {
             style: platform.finalizeClassName(reduced) as TEngine.AtomicNativeLows
         }
-        if (window.__TRACE__)
-            res['data-trace'] = dataTrace(reduced, window.__TRACE__.dataTraceFlag)
+        if (window.__TRACE__) {
+            const trace = dataTrace(reduced, window.__TRACE__.dataTraceFlag)
+            if (trace) res['data-trace'] = trace
+        }
         return res
     }
 })

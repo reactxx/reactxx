@@ -33,8 +33,10 @@ export const init = () => {
           style: style as React.CSSProperties,
           className: platform.finalizeClassName(reduced) as string
       }
-      if (window.__TRACE__)
-          res['data-trace'] = Fela.dataTrace(reduced, window.__TRACE__.dataTraceFlag)
+      if (window.__TRACE__) {
+        const trace =  Fela.dataTrace(reduced, window.__TRACE__.dataTraceFlag)
+        if (trace) res['data-trace'] = trace
+      }
       return res
   }
 })

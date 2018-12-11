@@ -39,7 +39,7 @@ export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (
         ...$rootWebProps,
         onClick: url ? undefined : undefined /*onClick*/
     }
-    tagProps.className = TPrimitives.Consts.textClassName + ' ' + tagProps.className
+    tagProps.className += ' ' + TPrimitives.Consts.textClassName 
     return url ? <a href={url} {...tagProps} /> : <div {...tagProps} children={children} />
 }
 

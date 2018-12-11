@@ -176,7 +176,9 @@ exports[`USE SHEETER ## NATIVE ## 19: theme, props 1`] = `
 
 exports[`USE SHEETER ## NATIVE ## 20: style 1`] = `
 <div>
-  <div>
+  <div
+    style="color: red; margin: 20px;"
+  >
     1
   </div>
 </div>

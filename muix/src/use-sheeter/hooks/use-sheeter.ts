@@ -51,12 +51,12 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     const styleWeb = (...rulesets: TTyped.RulesetSimple[]) =>
         platform.styleProps(propsCode, rulesets) as TTyped.StylePropsWeb
     const styleRootWeb = (...rulesets: TTyped.RulesetSimple[]) =>
-        platform.styleProps(propsCode, rulesets || [classes['root']], classNames, styles) as TTyped.StylePropsWeb
+        platform.styleProps(propsCode, rulesets.length>0 ? rulesets : [classes['root']], classNames, styles) as TTyped.StylePropsWeb
 
     const styleNative = <R extends TTyped.RulesetIds>(...rulesets: TTyped.RulesetSimple<R>[]) =>
         platform.styleProps(propsCode, rulesets) as TTyped.StylePropsNative<R>
     const styleRootNative = <R extends TTyped.RulesetIds = O>(...rulesets: TTyped.RulesetSimple<R>[]) =>
-        platform.styleProps(propsCode, rulesets || [classes['root']], classNames, styles) as TTyped.StylePropsNative<R>
+        platform.styleProps(propsCode, rulesets.length>0 ? rulesets : [classes['root']], classNames, styles) as TTyped.StylePropsNative<R>
 
     return { getWidthMap, styleNative, styleRootNative, styleWeb, styleRootWeb, propsCode, classes, styles, classNames, uniqueId, forceUpdate }
 }

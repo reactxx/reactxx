@@ -1,7 +1,6 @@
 ﻿//import React from 'react'
 import { TTyped, TComponents } from 'reactxx-typings';
 
-
 export const getComponentCreator = <R extends TTyped.Shape>(
     authorDisplayName: string, authorConfig: TComponents.AuthorConfig<R>, getComp: TComponents.GetComponent<R>, par?
 ) => (userDisplayName?: string, userConfig?: TComponents.UserConfig<R>) => {

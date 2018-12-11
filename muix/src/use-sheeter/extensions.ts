@@ -1,4 +1,4 @@
-import { TEngine, $V, $T, $I, $W } from 'reactxx-typings'
+import { TEngine } from 'reactxx-typings'
 
 
 /************************************TComponents******
@@ -41,7 +41,6 @@ declare module 'reactxx-typings' {
     namespace TExtensions {
 
         interface Platform {
-            //createElement?: (type, props?, ...children) => any
             _useSheeter?: {
                 defaultTheme?
                 $cache: { [componentId: number]: TEngine.Sheet }
