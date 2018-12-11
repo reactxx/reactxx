@@ -22,12 +22,12 @@ const getDefaults = (theme, config: TComponents.AuthorConfig & TComponents.UserC
 
     if (window.__TRACE__) {
         if (defaultProps) {
-            const { classNames: css, styles, classes } = defaultProps
-            warning(!classes && !css && !styles, 'classes, css and styles are ignored in defautProps')
+            const { className: css, style, classes } = defaultProps
+            warning(!classes && !css && !style, 'classes, css and styles are ignored in defautProps')
         }
         if (overrideProps) {
-            const { classNames: css, styles, classes } = overrideProps
-            warning(!classes && !css && !styles, 'classes, css and styles are ignored in overrideProps')
+            const { className: css, style, classes } = overrideProps
+            warning(!classes && !css && !style, 'classes, css and styles are ignored in overrideProps')
         }
     }
 

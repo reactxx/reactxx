@@ -9,7 +9,7 @@ import { TEngine, TTyped, TComponents } from 'reactxx-typings';
 
 export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, sheet: TEngine.Sheet, props: TComponents.Props) => {
     // from props
-    const { classes: _classes, classNames: _classNames, styles: _styles, themedProps, ...propsRest } = props as TComponents.Props
+    const { classes: _classes, className: _classNames, style: _styles, themedProps, ...propsRest } = props as TComponents.Props
 
     // merge sheet with classes
     const classes = React.useMemo(() => {

@@ -26,8 +26,8 @@ export const init = () => {
     applyLastwinsStrategy,
     finalizeClassName: platform.renderer.finalizeClassName,
 
-    styleProps: (propsCode, rulesets, classNames, style) => {
-      const css = toClassNamesWithQuery(propsCode, ...rulesets, classNames)
+    styleProps: (propsCode, rulesets, className, style) => {
+      const css = toClassNamesWithQuery(propsCode, ...rulesets, className)
       let reduced = platform.applyLastwinsStrategy(TAsEngineClassName(css)) as TEngine.AtomicWebLows
       const res: TTyped.StylePropsWeb = {
           style: style as React.CSSProperties,

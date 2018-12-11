@@ -44,7 +44,7 @@ describe("THEME PROVIDER", () => {
     it('01: ', () => {
       const Comp = compCreator(null)
       const {getByTestId, container, unmount} = render(<App>
-        <Comp themedProps={theme => ({ p1: theme.p1Prop })} classNames={theme => ({ color: theme.primaryColor })} />
+        <Comp themedProps={theme => ({ p1: theme.p1Prop })} className={theme => ({ color: theme.primaryColor })} />
       </App>)
       const toggle = getByTestId('toggle')
       

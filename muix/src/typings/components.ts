@@ -22,28 +22,11 @@ export namespace TComponents {
     TEventsX<R>
 
   export interface PropsLow<R extends TTyped.Shape> extends TTyped.RootProps<R> {
-    classNames?: TTyped.RulesetOrCreator<R>
-    styles?: TTyped.StyleOrCreator<R>
+    className?: TTyped.RulesetOrCreator<R>
+    style?: TTyped.StyleOrCreator<R>
     classes?: TTyped.PartialSheetOrCreator<R> // cross platform sheet
     themedProps?: (theme: TTyped.getTheme<R>) => Props<R>
   }
-
-  /* cross platform styling props 
-  the same props has: 
-  - react web HTML elements (e.g. <div css={....}), 
-  - react native build in components (e.g. <Text styles={...})
-  - custom components (e.g. <IconButton css={...})
-  */
-  // export interface ReactsCommonProperties<Id extends TTyped.PlatformIds = TTyped.PlatformIds> {
-  //   classNames?: TTyped.TPlatformAllowed<Id>
-  //   styles?: TTyped.TPlatformAllowed<Id>
-  //   trace?: string
-  // }
-
-  // export type ComponentType<R extends TTyped.Shape = TTyped.Shape> =
-  //   React.ComponentType<Props<R>>
-    //  &
-    // TEngine.IsReactXXComponent
 
   export type SFC<R extends TTyped.Shape = TTyped.Shape> = React.SFC<Props<R>> //& TEngine.IsReactXXComponent
 
@@ -75,11 +58,9 @@ export namespace TComponents {
     onPressOut?: () => void; onLongPress?: () => void
   }
 
-  
-
-
-
-
+  //*************************************** */  
+  // CONFIGS
+  //*************************************** */  
 
   export interface ComponentConfigLow {
     // withCascaing?: boolean

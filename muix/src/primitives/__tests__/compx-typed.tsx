@@ -38,8 +38,8 @@ const getComp: TComponents.GetComponent<Shape> = (authorConfig, displayName) => 
     propsCode: { children }
   } = useSheeter<Shape>(props, authorConfig, displayName)
 
-  return <View classNames={[classes.root, classNames]} styles={styles}>
-    <Text classNames={classes.label}>
+  return <View className={[classes.root, classNames]} style={styles}>
+    <Text className={classes.label}>
       {children}
     </Text>
   </View>
