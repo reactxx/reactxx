@@ -4,7 +4,6 @@ import React from 'react'
 import { getEngine } from "reactxx-styles"
 import { TComponents, TTyped, T, V } from 'reactxx-typings'
 import { useSheeter, getComponentCreator } from "reactxx-styles"
-import { View, Text } from 'reactxx-primitives'
 
 interface ShapeLow extends TTyped.ShapeAncestor {
   props: { disabled?: boolean },
@@ -32,17 +31,17 @@ const config: TComponents.AuthorConfig<Shape> = {
 
 const getComp: TComponents.GetComponent<Shape> = (authorConfig, displayName) => props => {
   const {
-    styles,
-    classNames,
+    styleRootWeb,
+    styleWeb,
     classes,
     propsCode: { children }
   } = useSheeter<Shape>(props, authorConfig, displayName)
 
-  return <View className={[classes.root, classNames]} style={styles}>
-    <Text className={classes.label}>
+  return <div {...styleRootWeb()}>
+    <span {...styleWeb(classes.label)}>
       {children}
-    </Text>
-  </View>
+    </span>
+  </div>
 }
 
 const compCreator = getComponentCreator('CompDisplayName', config, getComp)

@@ -1,15 +1,15 @@
 import React from 'react'
 
-import { initPlatform as initPlatformUse } from 'reactxx-use-sheeter-test/init-platform.t'
+import { initPlatform as initPlatformSheeter } from 'reactxx-styles-test/init-platform.t'
 import { initPrimitives$Web } from 'reactxx-primitives'
 
 import { initPrimitives$Native } from 'reactxx-primitives-native'
 
 
-export { render, dump, doMock } from 'reactxx-sheeter-test/init-platform.t'
+export { render, dump, doMock } from 'reactxx-styles-test/init-platform.t'
 
 export const initPlatform = (isWeb: boolean, trace: Trace = {}) => {
-    initPlatformUse(isWeb, trace)
+    initPlatformSheeter(isWeb, trace)
     if (isWeb) {
         initPrimitives$Web()
     } else {

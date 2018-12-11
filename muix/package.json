@@ -21,7 +21,11 @@
       "^reactxx-(.*)-native$": "<rootDir>/src/$1/index-native",
       "^reactxx-(.*)-test/(.*)$": "<rootDir>/src/$1/__tests__/$2",
       "^reactxx-(.*)$": "<rootDir>/src/$1/index"
-    }
+    },
+    "testPathIgnorePatterns": [
+      "src/\\$trash/",
+      "deploy/"
+    ]
   },
   "dependencies": {
     "@types/react-event-listener": "^0.4.7",

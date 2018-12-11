@@ -1,4 +1,5 @@
-- events
+- merge useSheeter to sheeter, rename to reactxx-styles
+- events, cascading, active state, style map
 - primitives, visual test
 - navigation
 - animation

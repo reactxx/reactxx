@@ -1,10 +1,11 @@
 
 
 import React from 'react'
-import { getEngine } from "reactxx-styles"
+import {Text, View} from 'reactxx-styles-native'
+
+import {  getEngine } from "reactxx-styles"
 import { TComponents, TTyped, T, V } from 'reactxx-typings'
 import { useSheeter, getComponentCreator } from "reactxx-styles"
-import { View, Text } from 'reactxx-primitives'
 
 interface ShapeLow extends TTyped.ShapeAncestor {
   props: { disabled?: boolean },
@@ -31,15 +32,11 @@ const config: TComponents.AuthorConfig<Shape> = {
 }
 
 const getComp: TComponents.GetComponent<Shape> = (authorConfig, displayName) => props => {
-  const {
-    styles,
-    classNames,
-    classes,
-    propsCode: { children }
-  } = useSheeter<Shape>(props, authorConfig, displayName)
+  const { styleNative, styleRootNative, classes, propsCode: { children } }
+    = useSheeter<Shape>(props, authorConfig, displayName)
 
-  return <View className={[classes.root, classNames]} style={styles}>
-    <Text className={classes.label}>
+  return <View {...styleRootNative()}>
+    <Text {...styleNative(classes.label)}>
       {children}
     </Text>
   </View>

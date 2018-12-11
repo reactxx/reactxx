@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useSheeter } from "reactxx-use-sheeter"
+import { useSheeter } from "reactxx-styles"
 import { TComponents } from "reactxx-typings"
 
 import { hasPlatformEvents } from './configs'

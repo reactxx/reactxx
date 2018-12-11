@@ -1,4 +1,4 @@
-import * as Sheeter from 'reactxx-sheeter'
+import * as Sheeter from 'reactxx-styles'
 
 //****************************
 // CODE

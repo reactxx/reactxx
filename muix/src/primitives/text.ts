@@ -2,7 +2,7 @@ import ReactN from 'react-native'
 
 import { TComponents, TTyped, $W, $T, $V, $I, V, T, I, O } from 'reactxx-typings'
 
-import { getEngine } from 'reactxx-sheeter'
+import { getEngine } from 'reactxx-styles'
 
 //----------------------------------------
 // PRIVATE

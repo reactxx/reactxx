@@ -3,9 +3,9 @@ import { Animated, TouchableWithoutFeedback, Linking } from 'react-native'
 import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vector-icons'
 import warning from 'warning'
 
-//import { platform } from 'reactxx-sheeter'
-import { Text, View, ScrollView } from 'reactxx-sheeter-native'
-import { useSheeter } from "reactxx-use-sheeter"
+//import { platform } from 'reactxx-styles'
+import { Text, View, ScrollView } from 'reactxx-styles-native'
+import { useSheeter } from "reactxx-styles"
 import { TTyped, TComponents } from "reactxx-typings"
 
 

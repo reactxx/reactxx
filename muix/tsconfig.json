@@ -36,11 +36,8 @@
       // "reactxx-use-store": [
       //   "src/use-store/index"
       // ],
-      "reactxx-sheeter": [
-        "src/sheeter/index"
-      ],
-      "reactxx-use-sheeter": [
-        "src/use-sheeter/index"
+      "reactxx-styles": [
+        "src/styles/index"
       ],
       "reactxx-primitives": [
         "src/primitives/index"
@@ -50,17 +47,11 @@
       "reactxx-typings-test/*": [
         "src/typings/__tests__/*"
       ],
-      "reactxx-sheeter-native": [
-        "src/sheeter/index-native"
+      "reactxx-styles-native": [
+        "src/styles/index-native"
       ],
-      "reactxx-sheeter-test/*": [
-        "src/sheeter/__tests__/*"
-      ],
-      "reactxx-use-sheeter-test/*": [
-        "src/use-sheeter/__tests__/*"
-      ],
-      "reactxx-use-sheeter-native": [
-        "src/use-sheeter/index-native"
+      "reactxx-styles-test/*": [
+        "src/styles/__tests__/*"
       ],
       "reactxx-primitives-test/*": [
         "src/primitives/__tests__/*"
@@ -141,8 +132,7 @@
 
     "src/typings",
     "src/fela",
-    "src/sheeter",
-    "src/use-sheeter",
+    "src/styles",
     "src/primitives",
 
     // "src/basic",
@@ -160,9 +150,8 @@
     //"src/ks/common/components", 
   ],
   "exclude": [
-    //"src/sheeter/__tests__",
     "src/*/typings.d.ts",
-    "src/trash",
+    "src/$trash",
     "src/ks/common/muix",
     "src/ks/native",
     "src/icons/native",

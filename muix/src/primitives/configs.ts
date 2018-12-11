@@ -1,5 +1,5 @@
 import { TComponents, TTyped, $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
-import { getEngine } from 'reactxx-sheeter'
+import { getEngine } from 'reactxx-styles'
 
 import { TPrimitives } from './shapes'
 

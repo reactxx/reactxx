@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`THEME PROVIDER ## NATIVE ## 01:  1`] = `
+<div>
+  <span
+    data-testid="toggle"
+  />
+  <div
+    style="color: gray;"
+  >
+    themeProp: 1
+  </div>
+</div>
+`;
+
+exports[`THEME PROVIDER ## NATIVE ## 01:  2`] = `
+<div>
+  <span
+    data-testid="toggle"
+  />
+  <div
+    style="color: red;"
+  >
+    secondThemeProp: 2
+  </div>
+</div>
+`;
+
+exports[`THEME PROVIDER ## NATIVE ## 01:  3`] = `
+<div>
+  <span
+    data-testid="toggle"
+  />
+  <div
+    style="color: gray;"
+  >
+    themeProp: 3
+  </div>
+</div>
+`;
+
+exports[`THEME PROVIDER ## WEB ## 01:  1`] = `
+<div>
+  <span
+    data-testid="toggle"
+  />
+  <div
+    class="a"
+    data-trace="
+.a { color:gray }"
+  >
+    themeProp: 1
+  </div>
+</div>
+`;
+
+exports[`THEME PROVIDER ## WEB ## 01:  2`] = `
+<div>
+  <span
+    data-testid="toggle"
+  />
+  <div
+    class="b"
+    data-trace="
+.b { color:red }"
+  >
+    secondThemeProp: 2
+  </div>
+</div>
+`;
+
+exports[`THEME PROVIDER ## WEB ## 01:  3`] = `
+<div>
+  <span
+    data-testid="toggle"
+  />
+  <div
+    class="a"
+    data-trace="
+.a { color:gray }"
+  >
+    themeProp: 3
+  </div>
+</div>
+`;
