@@ -1,6 +1,6 @@
 ﻿//import React from 'react'
 import { TTyped, TComponents } from 'reactxx-typings';
-import { platform, useStyles } from 'reactxx-styles'
+import { useStyles } from 'reactxx-styles'
 
 export const getComponentCreator = <R extends TTyped.Shape>(
     getComp: TComponents.GetComponent<R>, authorDisplayName?: string, authorConfig?: TComponents.AuthorConfig<R>, par?
@@ -8,8 +8,8 @@ export const getComponentCreator = <R extends TTyped.Shape>(
     userDisplayName?: string, userConfig?: TComponents.UserConfig<R>
 ) => {
         const config: TComponents.Config<R> = {
-            componentId: ++platform._styles.componentIdCounter,
-            displayName: userDisplayName || authorDisplayName || `Comp${platform._styles.componentIdCounter}`
+            displayName: userDisplayName || authorDisplayName
+            //componentId: 0 - platform is not initialized yet
         }
         const cfg = userConfig && authorConfig ? Object.assign({}, authorConfig, userConfig) : userConfig || authorConfig
         if (cfg) Object.assign(config, cfg)

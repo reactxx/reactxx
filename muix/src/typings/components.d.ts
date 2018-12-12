@@ -106,10 +106,10 @@ declare namespace TComponents {
     className: TTyped.getRootStyle<R>
     style: TTyped.getRootStyle<R>
     getWidthMap: (mapBreakpoints?: number[]) => boolean[]
-    getStylePropsNative: <R extends TTyped.RulesetIds>(...rulesets: TTyped.TAllowed<R>[]) => TTyped.StylePropsNative<R>
-    getStylePropsRootNative: <R extends TTyped.RulesetIds = "">(...rulesets: TTyped.TAllowed<R>[]) => TTyped.StylePropsNative<R>
-    getStylePropsWeb: (...rulesets: TTyped.RulesetIds[]) => TTyped.StylePropsWeb
-    getStylePropsRootWeb: (...rulesets: TTyped.RulesetIds[]) => TTyped.StylePropsWeb
+    getNativeStyleProps: <R extends TTyped.RulesetIds>(...rulesets: TTyped.TAllowed<R>[]) => TTyped.StylePropsNative<R>
+    getRootNativeStyleProps: <R extends TTyped.RulesetIds = "">(...rulesets: TTyped.TAllowed<R>[]) => TTyped.StylePropsNative<R>
+    getWebStyleProps: (...rulesets: TTyped.RulesetIds[]) => TTyped.StylePropsWeb
+    getRootWebStyleProps: (...rulesets: TTyped.RulesetIds[]) => TTyped.StylePropsWeb
   }
 
 } 

@@ -36,19 +36,19 @@ export const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
     ])
 
     // typed helpers for styling platform components (web's div, span etc, native Text, View etc)
-    const getStylePropsWeb = (...rulesets: TTyped.RulesetSimple[]) =>
-        platform.styleProps(propsCode, rulesets) as TTyped.StylePropsWeb
-    const getStylePropsRootWeb = (...rulesets: TTyped.RulesetSimple[]) =>
-        platform.styleProps(propsCode, rulesets.length > 0 ? rulesets : [classes['root']], className, style) as TTyped.StylePropsWeb
+    const getWebStyleProps = (...rulesets: TTyped.RulesetSimple[]) =>
+        platform.getStyleProps(propsCode, rulesets) as TTyped.StylePropsWeb
+    const getRootWebStyleProps = (...rulesets: TTyped.RulesetSimple[]) =>
+        platform.getStyleProps(propsCode, rulesets.length > 0 ? rulesets : [classes['root']], className, style) as TTyped.StylePropsWeb
 
-    const getStylePropsNative = <R extends TTyped.RulesetIds>(...rulesets: TTyped.RulesetSimple<R>[]) =>
-        platform.styleProps(propsCode, rulesets) as TTyped.StylePropsNative<R>
-    const getStylePropsRootNative = <R extends TTyped.RulesetIds = O>(...rulesets: TTyped.RulesetSimple<R>[]) =>
-        platform.styleProps(propsCode, rulesets.length > 0 ? rulesets : [classes['root']], className, style) as TTyped.StylePropsNative<R>
+    const getNativeStyleProps = <R extends TTyped.RulesetIds>(...rulesets: TTyped.RulesetSimple<R>[]) =>
+        platform.getStyleProps(propsCode, rulesets) as TTyped.StylePropsNative<R>
+    const getRootNativeStyleProps = <R extends TTyped.RulesetIds = O>(...rulesets: TTyped.RulesetSimple<R>[]) =>
+        platform.getStyleProps(propsCode, rulesets.length > 0 ? rulesets : [classes['root']], className, style) as TTyped.StylePropsNative<R>
 
     return {
         propsCode, classes, className, style, 
         getWidthMap, // width helper
-        getStylePropsNative, getStylePropsRootNative, getStylePropsWeb, getStylePropsRootWeb
-    }
+        getNativeStyleProps, getRootNativeStyleProps, getWebStyleProps, getRootWebStyleProps
+    } as TComponents.UseStylesResult<R>
 }

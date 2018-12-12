@@ -38,21 +38,21 @@ describe("SHEETER $WIDTHS", () => {
       ]
       !window.isWeb && it("01: native, 300", () =>
         //**WIDHT**
-        dump(toClassNamesWithQuery<TEngine.WidthsQuery>({ $widths: { actWidth: 300 } }, ...rulesets))
+        dump(toClassNamesWithQuery({ $widths: { actWidth: 300 } }, ...rulesets))
       )
       !window.isWeb && it("02: native, 640", () =>
         //**WIDHT**
-        dump(toClassNamesWithQuery<TEngine.WidthsQuery>({ $widths: { actWidth: 641 } }, ...rulesets))
+        dump(toClassNamesWithQuery({ $widths: { actWidth: 641 } }, ...rulesets))
       )
       !window.isWeb && it("03: native, 1024", () =>
         //**WIDHT**
-        dump(toClassNamesWithQuery<TEngine.WidthsQuery>({ $widths: { actWidth: 1025 } }, ...rulesets))
+        dump(toClassNamesWithQuery({ $widths: { actWidth: 1025 } }, ...rulesets))
       )
       !window.isWeb && it("04: native, undefined", () =>
-        dump(toClassNamesWithQuery<TEngine.WidthsQuery>(undefined, ...rulesets))
+        dump(toClassNamesWithQuery(undefined, ...rulesets))
       )
       window.isWeb && it("05: web", () =>
-        dump(toClassNamesWithQuery<TEngine.WidthsQuery>(undefined, ...rulesets))
+        dump(toClassNamesWithQuery(undefined, ...rulesets))
       )
     })
 

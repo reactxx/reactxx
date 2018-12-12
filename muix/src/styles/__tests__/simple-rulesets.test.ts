@@ -1,7 +1,6 @@
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
-import { getEngine } from '../utils/get-engine'
+import { getTypedEngine } from '../utils/get-engine'
 import { atomizeRuleset } from '../utils/atomize'
-import { toClassNamesWithQuery } from '../utils/to-classnames'
 
 import { theme, Theme } from "reactxx-typings-test/shape.t"
 import { initPlatform } from "./init-platform.t"
@@ -11,8 +10,8 @@ interface Shape {
   sheetQuery: { opened: boolean }
 }
 
-const { WEB, HOT, NATIVE, ATOMIZE
-} = getEngine<Shape>()
+const { WEB, HOT, NATIVE, COMPILE
+} = getTypedEngine<Shape>()
 
 const t = WEB({ color: 'green' })
 
@@ -23,32 +22,32 @@ describe("SHEETER SIMPLE RULESET", () => {
     let ruleset
 
     it("01 (null)", () => {
-      ruleset = ATOMIZE(null)
+      ruleset = COMPILE(null)
       expect(ruleset).toMatchSnapshot()
     })
 
     it("02 ({})", () => {
-      ruleset = ATOMIZE({})
+      ruleset = COMPILE({})
       expect(ruleset).toMatchSnapshot()
     })
 
     it("03 ([null, undefined, {}])", () => {
-      ruleset = ATOMIZE(null, undefined, {})
+      ruleset = COMPILE(null, undefined, {})
       expect(ruleset).toMatchSnapshot()
     })
 
     it("04 ({ color: 'red', margin: 0 })", () => {
-      ruleset = ATOMIZE({ color: 'red', margin: 0 })
+      ruleset = COMPILE({ color: 'red', margin: 0 })
       expect(ruleset).toMatchSnapshot()
     })
 
     it("05 ([{ color: 'red' }, { margin: 0 }])", () => {
-      ruleset = ATOMIZE({ color: 'red' }, { margin: 0 })
+      ruleset = COMPILE({ color: 'red' }, { margin: 0 })
       expect(ruleset).toMatchSnapshot()
     })
 
     it("06 (...$web: { color: 'green' }, $native: { color: 'blue' })", () => {
-      ruleset = ATOMIZE<T>(
+      ruleset = COMPILE<T>(
         {
           color: 'red',
         },
@@ -60,16 +59,16 @@ describe("SHEETER SIMPLE RULESET", () => {
     })
 
     it("07 atomizeRuleset(atomizeRuleset({color: 'red'", () => {
-      ruleset = ATOMIZE<T>(ATOMIZE<T>({
+      ruleset = COMPILE<T>(COMPILE<T>({
         color: 'red'
       }))
       expect(ruleset).toMatchSnapshot()
     })
 
     it("08 atomizeRuleset({$web: atomizeRuleset({ :hover color: 'red', $native: atomizeRuleset({ color: 'green'", () => {
-      ruleset = ATOMIZE<T>(
-        WEB(ATOMIZE<$W>({ ':hover': { color: 'red' } })),
-        NATIVE<$T>(ATOMIZE<T>({ color: 'green' }))
+      ruleset = COMPILE<T>(
+        WEB(COMPILE<$W>({ ':hover': { color: 'red' } })),
+        NATIVE<$T>(COMPILE<T>({ color: 'green' }))
       )
       expect(ruleset).toMatchSnapshot()
     })
@@ -78,9 +77,9 @@ describe("SHEETER SIMPLE RULESET", () => {
       if (!window.isWeb) return
       const fnc = () => {
         //toClassNamesWithQuery(null,
-          ATOMIZE<V>(
+          COMPILE<V>(
             WEB({
-              ':hover': ATOMIZE<$W>(
+              ':hover': COMPILE<$W>(
                 { color: 'red' }
               ),
             }))
@@ -93,11 +92,11 @@ describe("SHEETER SIMPLE RULESET", () => {
       if (!window.isWeb) return
       const fnc = () =>
         //toClassNamesWithQuery(null,
-          ATOMIZE<V>(
+          COMPILE<V>(
             WEB({
               ':hover': [
                 {},
-                ATOMIZE<$W>({ color: 'red' }),
+                COMPILE<$W>({ color: 'red' }),
                 { margin: 10 }
               ]
             })
@@ -121,14 +120,14 @@ describe("SHEETER SIMPLE RULESET", () => {
         WEB({ color: 'red' }),
         NATIVE({ color: 'green' }),
       ]
-      ruleset = ATOMIZE(...source)
+      ruleset = COMPILE(...source)
       expect(ruleset).toMatchSnapshot()
       expect(source).toMatchSnapshot()
     })
 
     it("13 condition in pseudo", () => {
       if (!window.isWeb) return
-      ruleset = ATOMIZE<V>(
+      ruleset = COMPILE<V>(
         WEB({
           ':hover': WEB({ color: 'red' }),
         }),
@@ -138,7 +137,7 @@ describe("SHEETER SIMPLE RULESET", () => {
 
     it("14 mix in pseudo array", () => {
       if (!window.isWeb) return
-      ruleset = ATOMIZE(
+      ruleset = COMPILE(
         WEB({
           color: 'green',
           ':hover': [
@@ -151,7 +150,7 @@ describe("SHEETER SIMPLE RULESET", () => {
     })
 
     it("15 just $hot", () => {
-      ruleset = ATOMIZE<T>(
+      ruleset = COMPILE<T>(
         { color: 'green' },
         HOT<T>(state => ({
           color: 'red'

@@ -34,7 +34,7 @@ export const init = () => assignPlatform({
     applyLastwinsStrategy,
     finalizeClassName,
 
-    styleProps: (propsCode, rulesets, classNames, style) => {
+    getStyleProps: (propsCode, rulesets, classNames, style) => {
         const css = toClassNamesWithQuery(propsCode, ...rulesets, classNames, style)
         let reduced = platform.applyLastwinsStrategy(TAsEngineClassName(css)) as TEngine.AtomicNativeLows
         const res: TTyped.StylePropsNative<TTyped.RulesetIds> = {

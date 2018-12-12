@@ -1,14 +1,14 @@
 
 
 import React from 'react'
-import { getEngine } from "reactxx-styles"
+import { getTypedEngine } from "reactxx-styles"
 import { TComponents, TTyped, T, V } from 'reactxx-typings'
 import { getComponentCreator } from "reactxx-styles"
 
 interface ShapeLow extends TTyped.ShapeAncestor {
   props: { disabled?: boolean },
 }
-const { STYLE, IF } = getEngine<ShapeLow>()
+const { STYLE, IF } = getTypedEngine<ShapeLow>()
 
 const defaultSheet = {
   root: STYLE<V>(
@@ -31,14 +31,14 @@ const config: TComponents.AuthorConfig<Shape> = {
 
 const getComp: TComponents.GetComponent<Shape> = useStyles => props => {
   const {
-    getStylePropsRootWeb,
-    getStylePropsWeb,
+    getRootWebStyleProps,
+    getWebStyleProps,
     classes,
     propsCode: { children }
   } = useStyles(props)
 
-  return <div {...getStylePropsRootWeb()}>
-    <span {...getStylePropsWeb(classes.label)}>
+  return <div {...getRootWebStyleProps()}>
+    <span {...getWebStyleProps(classes.label)}>
       {children}
     </span>
   </div>

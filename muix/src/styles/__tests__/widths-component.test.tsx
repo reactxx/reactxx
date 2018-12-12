@@ -35,7 +35,7 @@ describe("SHEETER $WIDTHS", () => {
         const renderCount = React.useRef(0)
         renderCount.current++
 
-        const root = platform.styleProps(query, [sheetRoot as any as V]) as TTyped.StylePropsWeb// toClassNamesWithQuery(query, sheetRoot) as any as V
+        const root = platform.getStyleProps(query, [sheetRoot as any as V]) as TTyped.StylePropsWeb// toClassNamesWithQuery(query, sheetRoot) as any as V
 
         return { getWidthMap, root, renderCount: renderCount.current }
       }

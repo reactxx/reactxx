@@ -1,6 +1,6 @@
 import React from 'react'
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
-import { getEngine, toClassNamesWithQuery } from 'reactxx-styles'
+import { getTypedEngine, WEB, NATIVE, STYLE, COMPILE, WIDTH } from 'reactxx-styles'
 
 //let $atomizeRuleset, $toClassNames
 import { initPlatform, dump, afterLastWin } from "./init-platform.t"
@@ -12,8 +12,7 @@ interface Shape {
   sheetQuery: { primary: string }
 }
 
-const { THEMED, IF, WEB, HOT, NATIVE, STYLE, $toClassNames, ATOMIZE, IFELSE, $mergeRulesets, WIDTH
-} = getEngine<Shape>()
+const { THEMED, IF, HOT, IFELSE, QUERY } = getTypedEngine<Shape>()
 
 
 describe("SHEETER HOT", () => {
@@ -23,14 +22,14 @@ describe("SHEETER HOT", () => {
     let ruleset
 
     it("01 null", () => {
-      ruleset = ATOMIZE<V>(
+      ruleset = COMPILE<V>(
         HOT<V>(null),
       )
       expect(ruleset).toMatchSnapshot()
     })
 
     it("02 empty", () => {
-      ruleset = ATOMIZE(
+      ruleset = COMPILE(
         HOT(null),
         HOT(() => null),
         HOT(() => [null, {}, undefined]),
@@ -39,7 +38,7 @@ describe("SHEETER HOT", () => {
     })
 
     it("03 just $hot", () => {
-      ruleset = ATOMIZE<T>(
+      ruleset = COMPILE<T>(
         { color: 'green' },
         HOT<T>(state => ({
           color: 'red'
@@ -48,17 +47,17 @@ describe("SHEETER HOT", () => {
       expect(ruleset).toMatchSnapshot()
     })
 
-    it("04: color: 'red'", () => afterLastWin($toClassNames<T>(null,
+    it("04: color: 'red'", () => afterLastWin(QUERY(null,
       HOT<T>(state => ({
         color: 'red'
       }))
     )))
 
-    it("05: nested", () => afterLastWin($toClassNames<T>(null,
+    it("05: nested", () => afterLastWin(QUERY(null,
       HOT<T>(state => HOT<T>(state => ({ color: 'red' })))
     )))
 
-    it("06: nested", () => afterLastWin($toClassNames<T>(null,
+    it("06: nested", () => afterLastWin(QUERY(null,
       HOT<T>(state => [{ margin: 0 }, HOT<T>(state => ({ color: 'red' }))])
     )))
 
@@ -74,10 +73,10 @@ describe("SHEETER HOT", () => {
       ])
 
       const test = (msg: string, ruleset: T) => {
-        it("01: red " + msg, () => afterLastWin($toClassNames<T>({ primary: 'red' },
+        it("01: red " + msg, () => afterLastWin(QUERY({ primary: 'red' },
           ruleset // color is red
         )))
-        it("02: green " + msg, () => afterLastWin($toClassNames<T>({ primary: 'green' },
+        it("02: green " + msg, () => afterLastWin(QUERY({ primary: 'green' },
           ruleset // color is green
         )))
       }
@@ -169,7 +168,7 @@ const sheet_ = ({ theme, getDisabled, getVariant, $if }) => {
     $map(getVariant, {
 
     }),
-    HOT(( { primary }) => ({}))
+    HOT(({ primary }) => ({}))
   ]
 }
 

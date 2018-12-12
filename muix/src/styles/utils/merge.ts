@@ -11,8 +11,8 @@ export const mergeCodeProps = (propsCode: TTyped.PropsCode | any, props: TCompon
         Object.assign(propsCode, p)
         // merge child component root props
         const { $rootWebProps, $rootNativeProps, $rootProps } = p
-        $rootWebProps && Object.assign(rootWebProps || (rootWebProps = {}), $rootWebProps)
-        $rootNativeProps && Object.assign(rootNativeProps || (rootNativeProps = {}), $rootNativeProps)
+        window.isWeb && $rootWebProps && Object.assign(rootWebProps || (rootWebProps = {}), $rootWebProps)
+        !window.isWeb && $rootNativeProps && Object.assign(rootNativeProps || (rootNativeProps = {}), $rootNativeProps)
         $rootProps && Object.assign(rootProps || (rootProps = {}), $rootProps)
     }
     if (rootWebProps) propsCode.$rootWebProps = rootWebProps

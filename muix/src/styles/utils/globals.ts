@@ -6,7 +6,7 @@ export interface Platform extends TExtensions.Platform {
     applyLastwinsStrategy?: TEngine.ApplyLastwinsStrategy
     finalizeClassName?: (values: TEngine.AtomicLow) => TEngine.AtomicFinal
     getDefaultTheme?: () => any
-    styleProps?: TTyped.StyleProps
+    getStyleProps?: TTyped.StyleProps
 }
 
 export const resetPlatform = () => {

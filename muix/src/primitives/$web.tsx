@@ -7,37 +7,20 @@ import { TPrimitives } from './shapes'
 
 export const getView: TComponents.GetComponent<TPrimitives.ViewShape> = (useStyles, isAnimated: boolean) => props => {
 
-    const { getStylePropsRootWeb, propsCode, propsCode: { $rootWebProps, children } } = useStyles(props)
+    const { getRootWebStyleProps, propsCode, propsCode: { $rootWebProps, children } } = useStyles(props)
 
     propsCode.pressable = hasPlatformEvents($rootWebProps)
-    return <div {...getStylePropsRootWeb()} {...$rootWebProps} children={children} />
-}
-
-export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (useStyles, isAnimated: boolean) => props => {
-
-    const { getStylePropsRootWeb, propsCode, propsCode: { data, url, children, $rootWebProps } } = useStyles(props)
-
-    propsCode.pressable = hasPlatformEvents($rootWebProps)
-
-    const svg = <svg
-        {...getStylePropsRootWeb()}
-        {...$rootWebProps}
-        onClick={url ? undefined : undefined /*onClick*/}>
-        {data ? <path d={data} /> : children}
-    </svg>
-    
-    return url ? <a href={url}>{svg}</a> : svg
-
+    return <div {...getRootWebStyleProps()} {...$rootWebProps} children={children} />
 }
 
 export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (useStyles, isAnimated: boolean) => props => {
 
-    const { getStylePropsRootWeb, propsCode, propsCode: { children, url, $rootWebProps } } = useStyles(props)
+    const { getRootWebStyleProps, propsCode, propsCode: { children, url, $rootWebProps } } = useStyles(props)
 
     propsCode.pressable = hasPlatformEvents($rootWebProps)
 
     const tagProps: React.HTMLAttributes<HTMLElement> = {
-        ...getStylePropsRootWeb(),
+        ...getRootWebStyleProps(),
         ...$rootWebProps,
         onClick: url ? undefined : undefined /*onClick*/
     }
@@ -47,12 +30,29 @@ export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (useStyl
     return url ? <a href={url} {...tagProps} /> : <div {...tagProps} children={children} />
 }
 
+export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (useStyles, isAnimated: boolean) => props => {
+
+    const { getRootWebStyleProps, propsCode, propsCode: { data, url, children, $rootWebProps } } = useStyles(props)
+
+    propsCode.pressable = hasPlatformEvents($rootWebProps)
+
+    const svg = <svg
+        {...getRootWebStyleProps()}
+        {...$rootWebProps}
+        onClick={url ? undefined : undefined /*onClick*/}>
+        {data ? <path d={data} /> : children}
+    </svg>
+    
+    return url ? <a href={url}>{svg}</a> : svg
+
+}
+
 export const getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape> = (useStyles, isAnimated: boolean) => props => {
 
-    const { getStylePropsRootWeb, getStylePropsWeb, propsCode: { horizontal, children, $rootWebProps }, classes } = useStyles(props)
+    const { getRootWebStyleProps, getWebStyleProps, propsCode: { horizontal, children, $rootWebProps }, classes } = useStyles(props)
 
-    return <div {...getStylePropsRootWeb()} {...$rootWebProps}>
-        <div {...getStylePropsWeb(classes.container)}>
+    return <div {...getRootWebStyleProps()} {...$rootWebProps}>
+        <div {...getWebStyleProps(classes.container)}>
             {children}
         </div>
     </div>

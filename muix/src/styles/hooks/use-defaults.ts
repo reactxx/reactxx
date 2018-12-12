@@ -4,6 +4,7 @@ import warning from 'warning'
 import { sheetFromThemeCache } from './use-theme';
 import { TAsTypedSheet } from 'reactxx-styles';
 import { TComponents } from 'reactxx-typings'
+import { platform } from '../utils/globals';
 
 
 export const useDefaults = (theme, options: TComponents.Config) =>
@@ -11,9 +12,15 @@ export const useDefaults = (theme, options: TComponents.Config) =>
 
 const getDefaults = (theme, config: TComponents.Config) => {
 
-    const { defaultProps, defaultSheet, overrideProps, overrideSheet, componentId } = config
+    //on demand componentId initialization and missing displayName fix
+    if (!config.componentId) config.componentId = ++platform._styles.componentIdCounter
+    if (!config.displayName) config.displayName = `Comp${config.componentId}`
 
-    const sheet = sheetFromThemeCache(componentId, TAsTypedSheet(defaultSheet), theme, TAsTypedSheet(overrideSheet), config.displayName) || {}
+    const { defaultProps, defaultSheet, overrideProps, overrideSheet, componentId, displayName } = config
+
+    const sheet = sheetFromThemeCache(
+        componentId, TAsTypedSheet(defaultSheet), theme, TAsTypedSheet(overrideSheet), displayName
+    ) || {}
 
     if (window.__TRACE__) {
         if (defaultProps) {

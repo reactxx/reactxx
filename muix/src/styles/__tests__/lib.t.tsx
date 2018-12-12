@@ -33,13 +33,13 @@ export const compCreator = (
   displayName?: 'Comp'
 ) => getComponentCreator(useStyles => props => {
   try {
-    const { getStylePropsRootWeb, propsCode: { p1 }
+    const { getRootWebStyleProps, propsCode: { p1 }
     } = useStyles(props)
 
     const renderCount = React.useRef(0)
     renderCount.current++
 
-    return <div {...getStylePropsRootWeb()} >{`${p1 ? p1 + ': ' : ''}${renderCount.current}`}</div>
+    return <div {...getRootWebStyleProps()} >{`${p1 ? p1 + ': ' : ''}${renderCount.current}`}</div>
   } catch {
     return <div>ERROR</div>
   }

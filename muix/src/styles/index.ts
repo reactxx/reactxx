@@ -15,7 +15,7 @@ export { useProps } from './hooks/use-props'
 export { atomizeSheet, atomizeRuleset, atomizeStyle } from './utils/atomize'
 export { toClassNamesWithQuery } from './utils/to-classnames'
 export { adjustAtomizedLow, isToAtomizeArray } from './utils/atomize-low'
-export { getEngine } from './utils/get-engine'
+export { getTypedEngine } from './utils/get-engine'
 
 import { init } from './$web'
 import { initGlobals } from './utils/globals'

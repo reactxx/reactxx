@@ -1,5 +1,5 @@
 import { TComponents, TTyped, $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
-import { getEngine } from 'reactxx-styles'
+import { getTypedEngine } from 'reactxx-styles'
 
 import { TPrimitives } from './shapes'
 
@@ -11,7 +11,7 @@ export const hasPlatformEvents = (propsCode: TTyped.PropsCode) => !!(
   //     propsCode.onPress || propsCode.onPressIn || propsCode.onPressOut || propsCode.onLongPress
 )
 
-const t = getEngine<TPrimitives.TextShape>()
+const t = getTypedEngine<TPrimitives.TextShape>()
 
 export const textConfig: TComponents.AuthorConfig<TPrimitives.TextShape> = {
   defaultSheet: {
@@ -55,7 +55,7 @@ const webViewRuleset: TTyped.Ruleset<V> = {
   overflow: 'hidden',
 }
 
-const v = getEngine<TPrimitives.ViewShape>()
+const v = getTypedEngine<TPrimitives.ViewShape>()
 
 export const viewConfig: TComponents.AuthorConfig<TPrimitives.ViewShape> = {
   defaultSheet: {
@@ -70,7 +70,7 @@ export const viewConfig: TComponents.AuthorConfig<TPrimitives.ViewShape> = {
   }
 }
 
-const i = getEngine<TPrimitives.IconShape>()
+const i = getTypedEngine<TPrimitives.IconShape>()
 
 export const iconConfig: TComponents.AuthorConfig<TPrimitives.IconShape> = {
   defaultProps: {
@@ -102,7 +102,7 @@ export const iconConfig: TComponents.AuthorConfig<TPrimitives.IconShape> = {
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
 
-const s = getEngine<TPrimitives.ScrollViewShape>()
+const s = getTypedEngine<TPrimitives.ScrollViewShape>()
 
 export const scrollViewConfig: TComponents.AuthorConfig<TPrimitives.ScrollViewShape> = {
   defaultSheet: {

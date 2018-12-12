@@ -1,5 +1,5 @@
 import { $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
-import { getEngine, atomizeSheet, mergeSheets } from 'reactxx-styles'
+import { getTypedEngine, atomizeSheet, mergeSheets } from 'reactxx-styles'
 
 //import {  } from "reactxx-styles"
 import { initPlatform, Shape as ShapeLow, theme } from "./init-platform.t"
@@ -9,8 +9,8 @@ interface Shape extends ShapeLow {
 }
 
 const {
-  THEMED, IF, WEB, NATIVE, STYLE, ATOMIZE
-} = getEngine<Shape>()
+  THEMED, IF, WEB, NATIVE, STYLE, COMPILE
+} = getTypedEngine<Shape>()
 
 describe("SHEET", () => {
   const doTest = (isWeb: boolean) => {
@@ -92,7 +92,7 @@ describe("SHEET", () => {
             IF<V>(null)
           ),
           webOnly: STYLE<$W>(
-            ATOMIZE<$W>(theme.secondary.disabled)
+            COMPILE<$W>(theme.secondary.disabled)
           )
         })), theme)
       expect(sheet).toMatchSnapshot()

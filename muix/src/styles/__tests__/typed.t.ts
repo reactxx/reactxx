@@ -1,5 +1,5 @@
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
-import { getEngine } from '../../utils/get-engine'
+import { getTypedEngine, toClassNamesWithQuery } from 'reactxx-styles'
 
 
 
@@ -9,8 +9,8 @@ interface Shape {
   sheetQuery: {enabled}  
 }
 
-const { THEMED, IF, WEB, NATIVE, STYLE, $toClassNames, ATOMIZE
-} = getEngine<Shape>()
+const { THEMED, IF, WEB, NATIVE, STYLE, COMPILE
+} = getTypedEngine<Shape>()
 
 // type TT<R extends TTyped.RulesetIds = V> = (...r: TTyped.Ruleset<R>[]) => R
 // let iff: TT
@@ -72,23 +72,4 @@ const sheet3 = {
     IF<T>(null),
   ),
 }
-
-const root = $toClassNames(null, sheet3.root, sheet3.webOnly)
-const nativeOnly = $toClassNames(null, sheet3.root, sheet3.nativeOnly)
-const webOnly = $toClassNames(null, sheet3.root, sheet3.webOnly)
-const webOnly2 = $toClassNames(null, sheet3.root, sheet3.webOnly)
-const label = $toClassNames<T>(null, sheet3.label, ATOMIZE<V>({}))
-const image = $toClassNames(null, sheet3.image)
-
-const Text: TTyped.TPlatformAllowed<$T> = root
-const View4: TTyped.TPlatformAllowed<$V> = root
-const View: TTyped.TPlatformAllowed<$V> = webOnly2
-const View3: TTyped.TPlatformAllowed<$V> = nativeOnly
-const Image: TTyped.TPlatformAllowed<$I> = image
-//const View2: TPlatformAllowed<V> = label // ERROR
-const div: TTyped.TPlatformAllowed<$W> = root
-//const span: TPlatformAllowed<$W> = nativeOnly // ERROR
-const i: TTyped.TPlatformAllowed<$W> = webOnly
-
-//const C: TTyped.TComponentAllowed<T> = label
 

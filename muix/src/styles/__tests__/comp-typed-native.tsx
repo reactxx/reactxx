@@ -1,16 +1,14 @@
-
-
 import React from 'react'
-import {Text, View} from 'reactxx-styles-native'
+import { Text, View } from 'reactxx-styles-native'
 
-import {  getEngine } from "reactxx-styles"
+import { getTypedEngine } from "reactxx-styles"
 import { TComponents, TTyped, T, V } from 'reactxx-typings'
 import { getComponentCreator } from "reactxx-styles"
 
 interface ShapeLow extends TTyped.ShapeAncestor {
   props: { disabled?: boolean },
 }
-const { STYLE, IF } = getEngine<ShapeLow>()
+const { STYLE, IF } = getTypedEngine<ShapeLow>()
 
 const defaultSheet = {
   root: STYLE<V>(
@@ -32,11 +30,11 @@ const config: TComponents.AuthorConfig<Shape> = {
 }
 
 const getComp: TComponents.GetComponent<Shape> = useStyles => props => {
-  const { getStylePropsNative, getStylePropsRootNative, classes, propsCode: { children } }
-    = useStyles(props)
 
-  return <View {...getStylePropsRootNative()}>
-    <Text {...getStylePropsNative(classes.label)}>
+  const { getNativeStyleProps, getRootNativeStyleProps, classes, propsCode: { children } } = useStyles(props)
+
+  return <View {...getRootNativeStyleProps()}>
+    <Text {...getNativeStyleProps(classes.label)}>
       {children}
     </Text>
   </View>

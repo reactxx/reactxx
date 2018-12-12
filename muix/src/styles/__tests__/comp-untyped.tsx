@@ -1,16 +1,16 @@
 import React from 'react'
-import { platform, IF } from "reactxx-styles"
-import { useStylesUntyped as useSheeter, getComponentCreatorUntyped as getComponentCreator } from "reactxx-styles"
+import { $if } from "reactxx-styles"
+import { getComponentCreatorUntyped as getComponentCreator } from "reactxx-styles"
 
 const config = {
   defaultSheet: {
     root: [
       { backgroundColor: 'lightblue', margin: 10 },
-      IF(p => p.disabled, { backgroundColor: 'lightgray' })
+      $if(p => p.disabled, { backgroundColor: 'lightgray' })
     ],
     label: [
       { color: 'darkblue' },
-      IF(p => p.disabled, { color: 'darkgray' })
+      $if(p => p.disabled, { color: 'darkgray' })
     ]
   }
 }

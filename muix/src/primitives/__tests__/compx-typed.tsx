@@ -1,15 +1,15 @@
 
 
 import React from 'react'
-import { getEngine } from "reactxx-styles"
+import { getTypedEngine } from "reactxx-styles"
 import { TComponents, TTyped, T, V } from 'reactxx-typings'
-import { getComponentCreator } from "reactxx-styles"
-import { View, Text } from 'reactxx-primitives'
+import { getComponentCreator, STYLE } from "reactxx-styles"
+import { View, Text, TPrimitives } from 'reactxx-primitives'
 
 interface ShapeLow extends TTyped.ShapeAncestor {
   props: { disabled?: boolean },
 }
-const { STYLE, IF } = getEngine<ShapeLow>()
+const { IF } = getTypedEngine<ShapeLow>()
 
 const defaultSheet = {
   root: STYLE<V>(
@@ -24,6 +24,7 @@ const defaultSheet = {
 
 interface Shape extends ShapeLow {
   sheet: typeof defaultSheet
+  rootProps: TComponents.Props<TPrimitives.ViewShape>
 }
 
 const config: TComponents.AuthorConfig<Shape> = {
@@ -35,10 +36,10 @@ const getComp: TComponents.GetComponent<Shape> = useStyles => props => {
     style,
     className,
     classes,
-    propsCode: { children }
+    propsCode: { children, $rootProps }
   } = useStyles(props)
 
-  return <View className={[classes.root, className]} style={style}>
+  return <View className={[classes.root, className]} style={style} {...$rootProps} >
     <Text className={classes.label}>
       {children}
     </Text>
@@ -50,7 +51,12 @@ const compCreator = getComponentCreator(getComp, 'CompDisplayName', config)
 const Comp = compCreator()
 
 const App: React.SFC = props => <React.Fragment>
-  <Comp>Hallo Comp!</Comp>
+  <Comp
+    $rootProps={{ style: STYLE<V>({ marginTop: 10 }) }}
+    classes={{ root: STYLE<V>({ margin: 10 }) }}
+  >
+    Hallo Comp!
+  </Comp>
   <Comp disabled>Hallo Comp (disabled)!</Comp>
 </React.Fragment>
 
