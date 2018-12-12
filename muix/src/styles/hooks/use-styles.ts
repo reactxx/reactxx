@@ -1,13 +1,14 @@
-﻿import React from 'react'
-import { platform, useWidths } from 'reactxx-styles';
-import { TTyped, TComponents, O } from 'reactxx-typings';
-import { useDefaults } from './use-defaults';
-import { useProps } from './use-props';
-import { useTheme } from './use-theme';
+﻿import { TTyped, TComponents, O } from 'reactxx-typings'
+import { platform, useWidths } from 'reactxx-styles'
+
+import { useDefaults } from './use-defaults'
+import { useProps } from './use-props'
+import { useTheme } from './use-theme'
+import { mergeCodeProps } from '../utils/merge'
 
 export const useStylesUntyped = (props, config?) => useStyles(props, config) as any
 
-const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
+export const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
     props: TComponents.Props<R>,
     config: TComponents.Config
 ) => {
@@ -34,6 +35,7 @@ const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
         propsRest, themedProps && themedProps(theme),
     ])
 
+    // typed helpers for styling platform components (web's div, span etc, native Text, View etc)
     const getStylePropsWeb = (...rulesets: TTyped.RulesetSimple[]) =>
         platform.styleProps(propsCode, rulesets) as TTyped.StylePropsWeb
     const getStylePropsRootWeb = (...rulesets: TTyped.RulesetSimple[]) =>
@@ -45,26 +47,8 @@ const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
         platform.styleProps(propsCode, rulesets.length > 0 ? rulesets : [classes['root']], className, style) as TTyped.StylePropsNative<R>
 
     return {
-        propsCode, classes, className, style, getWidthMap,
+        propsCode, classes, className, style, 
+        getWidthMap, // width helper
         getStylePropsNative, getStylePropsRootNative, getStylePropsWeb, getStylePropsRootWeb
     }
 }
-
-const mergeCodeProps = (propsCode: TTyped.PropsCode | any, props: TComponents.Props[]) => {
-    if (!props || props.length === 0) return
-    let rootWebProps, rootNativeProps, rootProps
-    for (const p of props) {
-        if (!p) continue
-        Object.assign(propsCode, p)
-        // merge child component root props
-        const { $rootWebProps, $rootNativeProps, $rootProps } = p
-        $rootWebProps && Object.assign(rootWebProps || (rootWebProps = {}), $rootWebProps)
-        $rootNativeProps && Object.assign(rootNativeProps || (rootNativeProps = {}), $rootNativeProps)
-        $rootProps && Object.assign(rootProps || (rootProps = {}), $rootProps)
-    }
-    if (rootWebProps) propsCode.$rootWebProps = rootWebProps
-    if (rootNativeProps) propsCode.$rootNativeProps = rootNativeProps
-    if (rootProps) propsCode.$rootProps = rootProps
-}
-
-export default useStyles

@@ -7,8 +7,10 @@ export * from './utils/merge'
 export * from './utils/from-engine'
 export * from './utils/get-component-creator'
 
-export { default as useStyles, useStylesUntyped } from './hooks/use-styles'
+export { useStyles, useStylesUntyped } from './hooks/use-styles'
 export { ThemeProvider, useTheme } from './hooks/use-theme'
+export { useDefaults } from './hooks/use-defaults'
+export { useProps } from './hooks/use-props'
 
 export { atomizeSheet, atomizeRuleset, atomizeStyle } from './utils/atomize'
 export { toClassNamesWithQuery } from './utils/to-classnames'

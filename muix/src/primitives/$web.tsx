@@ -18,12 +18,14 @@ export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (useStyl
     const { getStylePropsRootWeb, propsCode, propsCode: { data, url, children, $rootWebProps } } = useStyles(props)
 
     propsCode.pressable = hasPlatformEvents($rootWebProps)
+
     const svg = <svg
         {...getStylePropsRootWeb()}
-        onClick={url ? undefined : undefined /*onClick*/}
-        {...$rootWebProps}>
+        {...$rootWebProps}
+        onClick={url ? undefined : undefined /*onClick*/}>
         {data ? <path d={data} /> : children}
     </svg>
+    
     return url ? <a href={url}>{svg}</a> : svg
 
 }
@@ -33,13 +35,15 @@ export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (useStyl
     const { getStylePropsRootWeb, propsCode, propsCode: { children, url, $rootWebProps } } = useStyles(props)
 
     propsCode.pressable = hasPlatformEvents($rootWebProps)
+
     const tagProps: React.HTMLAttributes<HTMLElement> = {
-        //className: TPrimitives.Consts.textClassName, // HACK
         ...getStylePropsRootWeb(),
         ...$rootWebProps,
         onClick: url ? undefined : undefined /*onClick*/
     }
+
     tagProps.className += ' ' + TPrimitives.Consts.textClassName
+    
     return url ? <a href={url} {...tagProps} /> : <div {...tagProps} children={children} />
 }
 

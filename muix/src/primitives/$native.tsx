@@ -17,6 +17,7 @@ export const getView: TComponents.GetComponent<TPrimitives.ViewShape> = (useStyl
     const { getStylePropsRootNative, propsCode, propsCode: { children, $rootNativeProps } } = useStyles(props)
 
     propsCode.pressable = hasPlatformEvents($rootNativeProps)
+
     const res = <ActView {...getStylePropsRootNative()} {...$rootNativeProps} children={children} /> as any
 
     return propsCode.pressable ? <TouchableWithoutFeedback {...{/*events*/ }}>{res}</TouchableWithoutFeedback> : res
@@ -29,6 +30,7 @@ export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (useStyl
     const { getStylePropsRootNative, propsCode, propsCode: { data, url, children, $rootNativeProps } } = useStyles(props)
 
     propsCode.pressable = hasPlatformEvents($rootNativeProps)
+
     //Link to URL
     let onPress
     const doPress = !url ? onPress : () => Linking.canOpenURL(url).then(supported => {
@@ -51,6 +53,7 @@ export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (useStyl
     const { getStylePropsRootNative, propsCode, propsCode: { url, children, singleLine, $rootNativeProps } } = useStyles(props)
 
     propsCode.pressable = hasPlatformEvents($rootNativeProps)
+
     let doPress
     const otherProps: TTyped.TextProperties = {
         onPress: !url ? doPress : () => Linking.canOpenURL(url).then(supported => {
@@ -58,9 +61,8 @@ export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (useStyl
             return Linking.openURL(url);
         }).catch(err => warning(false, `An error occurred: ${err}, ${url}`))
     }
-    if (singleLine) {
+    if (singleLine)
         otherProps.numberOfLines = 1
-    }
 
     return <ActText {...getStylePropsRootNative()} {...$rootNativeProps} {...otherProps} children={children} />
 }

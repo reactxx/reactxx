@@ -1,55 +1,24 @@
-import { TEngine } from 'reactxx-typings';
+import { TEngine, TTyped, TComponents } from 'reactxx-typings';
 import { deepMerge, deepMerges } from './deep-merge'
 import { isAtomized } from './atomize-low';
 import { wrapRuleset } from './atomize';
 
-// export const mergeStyles = (sources: TTyped.StyleOrAtomized | TTyped.StyleOrAtomized[]) => {
-//     if (!sources)
-//         return null
-//     if (window.isWeb) {
-//         let res = null
-//         let canModify = false
-//         const processStyle = (st: TTyped.Style) => {
-//             push(st)
-//             // if (st.$web)
-//             //     push(st.$web as TSheeter.Style)
-//         }
-//         const push = (st: TTyped.Style) => {
-//             if (!res) // first
-//                 res = st
-//             else if (!canModify) { // second
-//                 res = { ...res, ...st }
-//                 canModify = true
-//             } else // third and more
-//                 Object.assign(res, st)
-//         }
-//         const src = sources as TTyped.Style | TTyped.Style[] | TTyped.Style[]
-//         if (Array.isArray(src))
-//             src.forEach(ss => {
-//                 if (!ss) return
-//                 if (Array.isArray(ss))
-//                     ss.forEach(s => {
-//                         if (!s) return
-//                         processStyle(s)
-//                     })
-//                 else
-//                     processStyle(ss)
-//             })
-//         else
-//             processStyle(src)
-
-//         if (res && (res.$web || res.$native)) {
-//             if (!canModify)
-//                 res = { ...res }
-//             delete res.$web
-//             delete res.$native
-//         }
-
-//         return res as TTyped.Style
-//     } else {
-//         return mergeRulesets(sources as TEngine.Queryables[])
-//     }
-// }
+export const mergeCodeProps = (propsCode: TTyped.PropsCode | any, props: TComponents.Props[]) => {
+    if (!props || props.length === 0) return
+    let rootWebProps, rootNativeProps, rootProps
+    for (const p of props) {
+        if (!p) continue
+        Object.assign(propsCode, p)
+        // merge child component root props
+        const { $rootWebProps, $rootNativeProps, $rootProps } = p
+        $rootWebProps && Object.assign(rootWebProps || (rootWebProps = {}), $rootWebProps)
+        $rootNativeProps && Object.assign(rootNativeProps || (rootNativeProps = {}), $rootNativeProps)
+        $rootProps && Object.assign(rootProps || (rootProps = {}), $rootProps)
+    }
+    if (rootWebProps) propsCode.$rootWebProps = rootWebProps
+    if (rootNativeProps) propsCode.$rootNativeProps = rootNativeProps
+    if (rootProps) propsCode.$rootProps = rootProps
+}
 
 // immutable
 export const mergeRulesets = (sources: TEngine.Queryables[]) => {
