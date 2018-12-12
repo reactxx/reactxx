@@ -24,7 +24,7 @@ export const inits = (
     getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape>
 ) => {
     const viewCreator = getComponentCreator(CompNames.View, viewConfig, getView, false)
-    const View = viewCreator()
+    const View = viewCreator(/*userName, userConfig*/)
 
     const animatedViewCreator = getComponentCreator(CompNames.AnimatedView, viewConfig, getView, true)
     const AnimatedView = animatedViewCreator()

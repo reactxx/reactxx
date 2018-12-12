@@ -7,9 +7,12 @@ export const getComponentCreator = <R extends TTyped.Shape>(
     const displayName = userDisplayName || authorDisplayName
     const Comp = getComp(authorConfig, displayName, userConfig, par)
     Comp.displayName = displayName
-    //Comp.$c$ = true
     return Comp
 }
 
 export const getComponentCreatorUntyped = (authorDisplayName, authorConfig, getComp, par?) =>
     getComponentCreator(authorDisplayName, authorConfig, getComp, par) as any
+
+export const getUseStyle = () => {
+    
+}

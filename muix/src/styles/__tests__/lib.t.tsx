@@ -32,7 +32,7 @@ export const compCreator = (
 ) => {
   const res: TComponents.SFC<Shape> = props => {
     try {
-      const { styleRootWeb, propsCode: { p1 }, classes, classNames, styles
+      const { styleRootWeb, propsCode: { p1 }
       } = useSheeter<Shape>(props, config, displayName, userConfig)
 
       const renderCount = React.useRef(0)
@@ -44,7 +44,6 @@ export const compCreator = (
     }
   }
   res.displayName = displayName
-  res['$c$'] = true
   return res
 }
 

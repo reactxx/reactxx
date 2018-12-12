@@ -46,7 +46,6 @@ describe("SHEETER $WIDTHS", () => {
         const { root, renderCount } = useApp()
         return <div {...root}>{`rendered: ${renderCount}x`}</div>
       }
-      App['$c$'] = true
 
       const WidthsMapApp: React.SFC = () => {
         const { root, renderCount, getWidthMap } = useApp()
@@ -55,7 +54,6 @@ describe("SHEETER $WIDTHS", () => {
           {`${mobile ? 'mobile' : ''}${tablet ? 'tablet' : ''}${desktop ? 'desktop' : ''} (rendered: ${renderCount}x)`}
         </div>
       }
-      WidthsMapApp['$c$'] = true
 
       const test = (App: React.ComponentType) => {
         setActWidth(640)

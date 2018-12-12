@@ -7,27 +7,24 @@ import { TComponents } from 'reactxx-typings'
 
 
 export const useDefaults = (
-    theme, options: TComponents.AuthorConfig, displayName: string,
+    theme, options: TComponents.Config, displayName: string,
 ) =>
     React.useMemo(() => getDefaults(theme, options, displayName), [theme, options, displayName])
 
 const getDefaults = (theme, config: TComponents.AuthorConfig & TComponents.UserConfig, displayName: string) => {
 
-    const { defaultProps, defaultSheet, overrideProps, overrideSheet, id} = config
+    const { defaultProps, defaultSheet, overrideProps, overrideSheet, componentId} = config
 
-    // if (!defaultSheet)
-    //     throw 'Missing config.defaultsheet'
-
-    const sheet = sheetFromThemeCache(id, TAsTypedSheet(defaultSheet), theme, TAsTypedSheet(overrideSheet), displayName) || {}
+    const sheet = sheetFromThemeCache(componentId, TAsTypedSheet(defaultSheet), theme, TAsTypedSheet(overrideSheet), displayName) || {}
 
     if (window.__TRACE__) {
         if (defaultProps) {
-            const { className: css, style, classes } = defaultProps
-            warning(!classes && !css && !style, 'classes, css and styles are ignored in defautProps')
+            const { className, style, classes } = defaultProps
+            warning(!classes && !className && !style, 'classes, className and styles are ignored in defautProps')
         }
         if (overrideProps) {
-            const { className: css, style, classes } = overrideProps
-            warning(!classes && !css && !style, 'classes, css and styles are ignored in overrideProps')
+            const { className, style, classes } = overrideProps
+            warning(!classes && !className && !style, 'classes, className and styles are ignored in overrideProps')
         }
     }
 

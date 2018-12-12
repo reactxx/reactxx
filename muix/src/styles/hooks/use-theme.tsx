@@ -25,7 +25,7 @@ export const ThemeProvider = <T extends any>(props: ThemeProviderProps<T>) => {
   if (!theme) [theme, setTheme] = defaultTheme<T>(setTheme)
   return <themeContext.Provider value={[theme, setTheme] }>{children}</themeContext.Provider>
 }
-ThemeProvider.$c$ = true
+
 type ThemeProviderProps<T> = { theme: T; children?: React.ReactNode }
 
 export const sheetFromThemeCache = (

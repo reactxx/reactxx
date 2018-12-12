@@ -9,28 +9,28 @@ import { TEngine, TTyped, TComponents } from 'reactxx-typings';
 
 export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, sheet: TEngine.Sheet, props: TComponents.Props) => {
     // from props
-    const { classes: _classes, className: _classNames, style: _styles, themedProps, ...propsRest } = props as TComponents.Props
+    const { classes: _classes, className: _className, style: _style, themedProps, ...propsRest } = props as TComponents.Props
 
     // merge sheet with classes
     const classes = React.useMemo(() => {
         const classes = atomizeSheet(TAsTypedSheet(_classes), theme, 'classes')
         return TAsEngineSheet<R>(mergeSheets([sheet, classes]))
-    }, [theme, _classes])
+    }, [_classes, theme])
 
-    // css
-    const classNames = React.useMemo(
+    // className
+    const className = React.useMemo(
         () => TAsEngineClassName<R>
             (atomizeRuleset(
-                TAsTypedClassName(_classNames),
+                TAsTypedClassName(_className),
                 theme,
                 'classes'
             )),
-        [_classNames, theme])
+        [_className, theme])
 
     // styles
-    const styles = React.useMemo(() => TAsEngineStyle<R>(atomizeStyle(TAsTypedStyle(_styles), theme)), [_styles])
+    const style = React.useMemo(() => TAsEngineStyle<R>(atomizeStyle(TAsTypedStyle(_style), theme)), [_style, theme])
 
-    return { classes, classNames, styles, propsRest, themedProps }
+    return { classes, className, style, propsRest, themedProps }
 
 }
 

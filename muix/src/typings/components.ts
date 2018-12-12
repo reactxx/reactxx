@@ -65,7 +65,7 @@ export namespace TComponents {
   export interface ComponentConfigLow {
     // withCascaing?: boolean
     //------
-    id?: number // unique component id. Generated in useSheeter
+    componentId?: number // unique component id. Generated in useSheeter
   }
 
   // component type options
@@ -79,6 +79,12 @@ export namespace TComponents {
     overrideSheet?: TTyped.SheetOrCreator<R>
     myAuthorConfigId?: number // ComponentConfig.id
   }
+  export interface Config<R extends TTyped.Shape = TTyped.Shape> extends AuthorConfig<R> {
+    overrideProps?: TComponents.Props<R>
+    overrideSheet?: TTyped.SheetOrCreator<R>
+    displayName?: string
+  }
+
 
   export type ThemeContext<T extends any> = [T, (newTheme: T) => void]
 

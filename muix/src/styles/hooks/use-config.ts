@@ -10,10 +10,6 @@ export const useConfig = <R extends TTyped.Shape = TTyped.Shape>(
     userConfig?: TComponents.UserConfig<R>
 ) => {
 
-    // configs check
-    //if (!authorConfig)
-        //throw 'authorConfig expected'
-
     const authorConfigRef = React.useRef(authorConfig)
     const userConfigRef = React.useRef(userConfig)
     if (authorConfigRef.current !== authorConfig || userConfigRef.current != userConfig)
@@ -21,20 +17,20 @@ export const useConfig = <R extends TTyped.Shape = TTyped.Shape>(
 
     const { _styles } = platform
 
-    if (authorConfig && !authorConfig.id)
-        authorConfig.id = ++_styles.configIdCounter
+    if (authorConfig && !authorConfig.componentId)
+        authorConfig.componentId = ++_styles.componentIdCounter
 
     if (userConfig) {
-        const authorConfigId = authorConfig ? authorConfig.id : -1
-        if (!userConfig.id) { // first userConfigussage
-            userConfig.id = ++_styles.configIdCounter
+        const authorConfigId = authorConfig ? authorConfig.componentId : -1
+        if (!userConfig.componentId) { // first userConfig ussage
+            userConfig.componentId = ++_styles.componentIdCounter
             userConfig.myAuthorConfigId = authorConfigId // connect it to authorConfig
             // config merging: keep userConfig pointer, change its content
             const value = Object.assign({}, authorConfig, userConfig)
             Object.assign(userConfig, value)
         } else if (userConfig.myAuthorConfigId != authorConfigId)
-            warning(false, 'userConfig already inherited from different authorConfig. Last authorConfig ignored.')
+            warning(false, 'userConfig already inherited from different authorConfig. Last authorConfig inheritance ignored.')
     }
 
-    return userConfig || authorConfig || {}
+    return (userConfig || authorConfig || {}) as TComponents.Config<R>
 }

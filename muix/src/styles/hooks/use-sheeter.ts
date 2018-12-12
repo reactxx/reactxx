@@ -25,7 +25,7 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
     } = useDefaults(theme, config, displayName)
 
     // from props
-    const { classes, classNames, styles, propsRest, themedProps
+    const { classes, className, style, propsRest, themedProps
     } = useProps<R>(theme, sheet, props)
 
     // this component isntance unique ID
@@ -46,20 +46,17 @@ const useSheeter = <R extends TTyped.Shape = TTyped.Shape>(
         propsRest, themedProps && themedProps(theme),
     ])
 
-    // const toClassNames = <T extends TTyped.RulesetIds>(...rulesets: TTyped.Ruleset<T>[]) =>
-    //     toClassNamesWithQuery(propsCode, ...rulesets) as any as T
-
     const styleWeb = (...rulesets: TTyped.RulesetSimple[]) =>
         platform.styleProps(propsCode, rulesets) as TTyped.StylePropsWeb
     const styleRootWeb = (...rulesets: TTyped.RulesetSimple[]) =>
-        platform.styleProps(propsCode, rulesets.length>0 ? rulesets : [classes['root']], classNames, styles) as TTyped.StylePropsWeb
+        platform.styleProps(propsCode, rulesets.length>0 ? rulesets : [classes['root']], className, style) as TTyped.StylePropsWeb
 
     const styleNative = <R extends TTyped.RulesetIds>(...rulesets: TTyped.RulesetSimple<R>[]) =>
         platform.styleProps(propsCode, rulesets) as TTyped.StylePropsNative<R>
     const styleRootNative = <R extends TTyped.RulesetIds = O>(...rulesets: TTyped.RulesetSimple<R>[]) =>
-        platform.styleProps(propsCode, rulesets.length>0 ? rulesets : [classes['root']], classNames, styles) as TTyped.StylePropsNative<R>
+        platform.styleProps(propsCode, rulesets.length>0 ? rulesets : [classes['root']], className, style) as TTyped.StylePropsNative<R>
 
-    return { getWidthMap, styleNative, styleRootNative, styleWeb, styleRootWeb, propsCode, classes, styles, classNames }
+    return { propsCode, classes, className, style, getWidthMap, styleNative, styleRootNative, styleWeb, styleRootWeb,  }
 }
 
 const mergeCodeProps = (propsCode: TTyped.PropsCode | any, props: TComponents.Props[]) => {

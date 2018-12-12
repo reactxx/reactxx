@@ -14,7 +14,7 @@ declare module 'reactxx-typings' {
                 defaultTheme?
                 $cache?: { [componentId: number]: TEngine.Sheet }
                 instanceIdCounter?: number
-                configIdCounter?: number
+                componentIdCounter?: number
             }
     }
 

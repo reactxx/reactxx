@@ -25,7 +25,7 @@ export const initGlobals = (force: boolean, platformDependentInit: () => void) =
         $cache: {},
         defaultTheme: platform.getDefaultTheme && platform.getDefaultTheme(),
         instanceIdCounter: 0,
-        configIdCounter: 0,
+        componentIdCounter: 0,
     }
     // fill e.g. actWidth
     platformDependentInit()
