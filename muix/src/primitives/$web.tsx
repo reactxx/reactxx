@@ -1,24 +1,25 @@
 import React from 'react'
 
-import { useSheeter } from "reactxx-styles"
 import { TComponents } from "reactxx-typings"
 
 import { hasPlatformEvents } from './configs'
 import { TPrimitives } from './shapes'
 
-export const getView: TComponents.GetComponent<TPrimitives.ViewShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
-    const { styleRootWeb, propsCode, propsCode: { $rootWebProps, children }, classes }
-        = useSheeter<TPrimitives.ViewShape>(props, authorConfig, displayName, userConfig)
+export const getView: TComponents.GetComponent<TPrimitives.ViewShape> = (useStyles, isAnimated: boolean) => props => {
+
+    const { getStylePropsRootWeb, propsCode, propsCode: { $rootWebProps, children } } = useStyles(props)
+
     propsCode.pressable = hasPlatformEvents($rootWebProps)
-    return <div {...styleRootWeb()} {...$rootWebProps} children={children} />
+    return <div {...getStylePropsRootWeb()} {...$rootWebProps} children={children} />
 }
 
-export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
-    const { styleRootWeb, propsCode, propsCode: { data, url, children, $rootWebProps }, classes }
-        = useSheeter<TPrimitives.IconShape>(props, authorConfig, displayName, userConfig)
+export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (useStyles, isAnimated: boolean) => props => {
+
+    const { getStylePropsRootWeb, propsCode, propsCode: { data, url, children, $rootWebProps } } = useStyles(props)
+
     propsCode.pressable = hasPlatformEvents($rootWebProps)
     const svg = <svg
-        {...styleRootWeb()}
+        {...getStylePropsRootWeb()}
         onClick={url ? undefined : undefined /*onClick*/}
         {...$rootWebProps}>
         {data ? <path d={data} /> : children}
@@ -27,29 +28,28 @@ export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (authorC
 
 }
 
-export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (
-    authorConfig, displayName, userConfig, isAnimated: boolean
-) => props => {
-    const { styleRootWeb, propsCode, propsCode: { children, url, $rootWebProps }, classes }
-        = useSheeter<TPrimitives.TextShape>(props, authorConfig, displayName, userConfig)
+export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (useStyles, isAnimated: boolean) => props => {
+
+    const { getStylePropsRootWeb, propsCode, propsCode: { children, url, $rootWebProps } } = useStyles(props)
+
     propsCode.pressable = hasPlatformEvents($rootWebProps)
     const tagProps: React.HTMLAttributes<HTMLElement> = {
         //className: TPrimitives.Consts.textClassName, // HACK
-        ...styleRootWeb(),
+        ...getStylePropsRootWeb(),
         ...$rootWebProps,
         onClick: url ? undefined : undefined /*onClick*/
     }
-    tagProps.className += ' ' + TPrimitives.Consts.textClassName 
+    tagProps.className += ' ' + TPrimitives.Consts.textClassName
     return url ? <a href={url} {...tagProps} /> : <div {...tagProps} children={children} />
 }
 
-export const getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape> =
-    (authorConfig, displayName, userConfig, isAnimated: boolean) => props => {
-        const { styleRootWeb, styleWeb, propsCode: { horizontal, children, $rootWebProps }, classes }
-            = useSheeter<TPrimitives.ScrollViewShape>(props, authorConfig, displayName, userConfig)
-        return <div {...styleRootWeb()} {...$rootWebProps}>
-            <div {...styleWeb(classes.container)}>
-                {children}
-            </div>
+export const getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape> = (useStyles, isAnimated: boolean) => props => {
+
+    const { getStylePropsRootWeb, getStylePropsWeb, propsCode: { horizontal, children, $rootWebProps }, classes } = useStyles(props)
+
+    return <div {...getStylePropsRootWeb()} {...$rootWebProps}>
+        <div {...getStylePropsWeb(classes.container)}>
+            {children}
         </div>
-    }
+    </div>
+}

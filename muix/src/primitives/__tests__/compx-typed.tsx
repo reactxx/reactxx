@@ -3,7 +3,7 @@
 import React from 'react'
 import { getEngine } from "reactxx-styles"
 import { TComponents, TTyped, T, V } from 'reactxx-typings'
-import { useSheeter, getComponentCreator } from "reactxx-styles"
+import { getComponentCreator } from "reactxx-styles"
 import { View, Text } from 'reactxx-primitives'
 
 interface ShapeLow extends TTyped.ShapeAncestor {
@@ -30,13 +30,13 @@ const config: TComponents.AuthorConfig<Shape> = {
   defaultSheet
 }
 
-const getComp: TComponents.GetComponent<Shape> = (authorConfig, displayName) => props => {
+const getComp: TComponents.GetComponent<Shape> = useStyles => props => {
   const {
     style,
     className,
     classes,
     propsCode: { children }
-  } = useSheeter<Shape>(props, authorConfig, displayName)
+  } = useStyles(props)
 
   return <View className={[classes.root, className]} style={style}>
     <Text className={classes.label}>
@@ -45,7 +45,7 @@ const getComp: TComponents.GetComponent<Shape> = (authorConfig, displayName) => 
   </View>
 }
 
-const compCreator = getComponentCreator('CompDisplayName', config, getComp)
+const compCreator = getComponentCreator(getComp, 'CompDisplayName', config)
 
 const Comp = compCreator()
 

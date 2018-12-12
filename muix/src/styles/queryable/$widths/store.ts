@@ -8,10 +8,12 @@ import { platform } from 'reactxx-styles'
 //     return useWidthsLow(uniqueId, forceUpdate)
 // }
 
-export const useWidths = (
-    uniqueId: number,
-    forceUpdate: (p?) => void,
-) => {
+export const useWidths = () => {
+
+    const uniqueIdRef = React.useRef(0) // unique ID
+    if (!uniqueIdRef.current) uniqueIdRef.current = ++platform._styles.instanceIdCounter
+    const [, forceUpdate] = React.useState<never>(null)
+
     const widthStore = platform._styles.widthsStore
 
     const listenerRef = React.useRef(null)
@@ -28,7 +30,7 @@ export const useWidths = (
     React.useLayoutEffect(() => { // call on every render
         if (breakpoints.size > 0) { // some breakpoints filled
             if (!listenerRef.current) // not aleady registered => register
-                listenerRef.current = widthStore.register(uniqueId, listener)
+                listenerRef.current = widthStore.register(uniqueIdRef.current, listener)
             // for web: adjust media query for watching breakpoints
             if (window.isWeb)
                 for (const br of breakpoints) platform.watchBreakpointChange(br)
@@ -36,7 +38,7 @@ export const useWidths = (
     })
 
     React.useLayoutEffect(() => { // call on unmount only
-        return () => widthStore.register(uniqueId, null) // unmount => unregister
+        return () => widthStore.register(uniqueIdRef.current, null) // unmount => unregister
     }, [])
 
     const actWidth = widthStore.actWidth

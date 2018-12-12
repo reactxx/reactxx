@@ -1,6 +1,6 @@
 import React from 'react'
 import { platform, IF } from "reactxx-styles"
-import { useSheeterUntyped as useSheeter, getComponentCreatorUntyped as getComponentCreator } from "reactxx-styles"
+import { useStylesUntyped as useSheeter, getComponentCreatorUntyped as getComponentCreator } from "reactxx-styles"
 
 const config = {
   defaultSheet: {
@@ -15,9 +15,9 @@ const config = {
   }
 }
 
-const getComp = (authorConfig, displayName) => props => {
+const getComp = useStyles => props => {
   
-  const { toClassNameRoot, toClassName, propsCode: { children }, classes, classNames, styles } = useSheeter(props, authorConfig, displayName)
+  const { toClassNameRoot, toClassName, propsCode: { children }, classes } = useStyles(props)
 
   return <div {...toClassNameRoot(classes.root)} >
     <span className={toClassName(classes.label)}>
@@ -26,7 +26,7 @@ const getComp = (authorConfig, displayName) => props => {
   </div>
 }
 
-const compCreator = getComponentCreator('CompUntypedDisplayName', config, getComp)
+const compCreator = getComponentCreator(getComp, 'CompUntypedDisplayName', config)
 const Comp = compCreator()
 
 const App = props => <React.Fragment>

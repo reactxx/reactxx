@@ -23,11 +23,9 @@ describe("SHEETER $WIDTHS", () => {
       ])
 
       const useApp = () => {
-        // part of useSheeter
-        const [, forceUpdate] = React.useState<never>(null)
-        const uniqueIdRef = React.useRef(0) // unique ID
-        if (!uniqueIdRef.current) uniqueIdRef.current = ++platform._styles.instanceIdCounter
-        const { actWidth, breakpoints, getWidthMap } = useWidths(uniqueIdRef.current, forceUpdate)
+
+        const { actWidth, breakpoints, getWidthMap } = useWidths()
+        
         const query: TEngine.WidthsQuery = {
           $widths: { actWidth, breakpoints }
         }

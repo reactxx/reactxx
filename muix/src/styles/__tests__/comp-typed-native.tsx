@@ -5,7 +5,7 @@ import {Text, View} from 'reactxx-styles-native'
 
 import {  getEngine } from "reactxx-styles"
 import { TComponents, TTyped, T, V } from 'reactxx-typings'
-import { useSheeter, getComponentCreator } from "reactxx-styles"
+import { getComponentCreator } from "reactxx-styles"
 
 interface ShapeLow extends TTyped.ShapeAncestor {
   props: { disabled?: boolean },
@@ -31,18 +31,18 @@ const config: TComponents.AuthorConfig<Shape> = {
   defaultSheet
 }
 
-const getComp: TComponents.GetComponent<Shape> = (authorConfig, displayName) => props => {
-  const { styleNative, styleRootNative, classes, propsCode: { children } }
-    = useSheeter<Shape>(props, authorConfig, displayName)
+const getComp: TComponents.GetComponent<Shape> = useStyles => props => {
+  const { getStylePropsNative, getStylePropsRootNative, classes, propsCode: { children } }
+    = useStyles(props)
 
-  return <View {...styleRootNative()}>
-    <Text {...styleNative(classes.label)}>
+  return <View {...getStylePropsRootNative()}>
+    <Text {...getStylePropsNative(classes.label)}>
       {children}
     </Text>
   </View>
 }
 
-const compCreator = getComponentCreator('CompDisplayName', config, getComp)
+const compCreator = getComponentCreator(getComp, 'CompDisplayName', config)
 
 const Comp = compCreator()
 

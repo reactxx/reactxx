@@ -23,25 +23,25 @@ export const inits = (
     getText: TComponents.GetComponent<TPrimitives.TextShape>,
     getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape>
 ) => {
-    const viewCreator = getComponentCreator(CompNames.View, viewConfig, getView, false)
+    const viewCreator = getComponentCreator(getView, CompNames.View, viewConfig, false)
     const View = viewCreator(/*userName, userConfig*/)
 
-    const animatedViewCreator = getComponentCreator(CompNames.AnimatedView, viewConfig, getView, true)
+    const animatedViewCreator = getComponentCreator(getView, CompNames.AnimatedView, viewConfig, true)
     const AnimatedView = animatedViewCreator()
 
-    const iconCreator = getComponentCreator(CompNames.Icon, iconConfig, getIcon, false)
+    const iconCreator = getComponentCreator(getIcon, CompNames.Icon, iconConfig, false)
     const Icon = iconCreator()
 
-    const animatedIconCreator = getComponentCreator(CompNames.AnimatedIcon, iconConfig, getIcon, true)
+    const animatedIconCreator = getComponentCreator(getIcon, CompNames.AnimatedIcon, iconConfig, true)
     const AnimatedIcon = animatedIconCreator()
 
-    const textCreator = getComponentCreator(CompNames.Text, textConfig, getText, false)
+    const textCreator = getComponentCreator(getText, CompNames.Text, textConfig, false)
     const Text = textCreator()
 
-    const animatedTextCreator = getComponentCreator(CompNames.AnimatedText, textConfig, getText, true)
+    const animatedTextCreator = getComponentCreator( getText, CompNames.AnimatedText, textConfig,true)
     const AnimatedText = animatedTextCreator()
 
-    const scrollViewCreator = getComponentCreator(CompNames.ScrollView, scrollViewConfig, getScrollView, false)
+    const scrollViewCreator = getComponentCreator(getScrollView, CompNames.ScrollView, scrollViewConfig, false)
     const ScrollView = scrollViewCreator()
 
     const initPrimitives = (force?: boolean) => {

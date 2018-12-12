@@ -6,16 +6,14 @@ import { TAsTypedSheet } from 'reactxx-styles';
 import { TComponents } from 'reactxx-typings'
 
 
-export const useDefaults = (
-    theme, options: TComponents.Config, displayName: string,
-) =>
-    React.useMemo(() => getDefaults(theme, options, displayName), [theme, options, displayName])
+export const useDefaults = (theme, options: TComponents.Config) =>
+    React.useMemo(() => getDefaults(theme, options), [theme, options])
 
-const getDefaults = (theme, config: TComponents.AuthorConfig & TComponents.UserConfig, displayName: string) => {
+const getDefaults = (theme, config: TComponents.Config) => {
 
-    const { defaultProps, defaultSheet, overrideProps, overrideSheet, componentId} = config
+    const { defaultProps, defaultSheet, overrideProps, overrideSheet, componentId } = config
 
-    const sheet = sheetFromThemeCache(componentId, TAsTypedSheet(defaultSheet), theme, TAsTypedSheet(overrideSheet), displayName) || {}
+    const sheet = sheetFromThemeCache(componentId, TAsTypedSheet(defaultSheet), theme, TAsTypedSheet(overrideSheet), config.displayName) || {}
 
     if (window.__TRACE__) {
         if (defaultProps) {

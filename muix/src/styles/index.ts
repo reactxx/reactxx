@@ -7,7 +7,7 @@ export * from './utils/merge'
 export * from './utils/from-engine'
 export * from './utils/get-component-creator'
 
-export { default as useSheeter, useSheeterUntyped } from './hooks/use-sheeter'
+export { default as useStyles, useStylesUntyped } from './hooks/use-styles'
 export { ThemeProvider, useTheme } from './hooks/use-theme'
 
 export { atomizeSheet, atomizeRuleset, atomizeStyle } from './utils/atomize'

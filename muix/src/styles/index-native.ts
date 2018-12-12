@@ -5,7 +5,7 @@ export * from './utils/merge'
 export * from './utils/wrap-pseudo-prefixes'
 export * from './utils/get-component-creator'
 
-export { default as useSheeter, useSheeterUntyped } from './hooks/use-sheeter'
+export { default as useStyles, useStylesUntyped } from './hooks/use-styles'
 export { ThemeProvider, useTheme } from './hooks/use-theme'
 
 export { View, Text, Image, ScrollView } from './$native'

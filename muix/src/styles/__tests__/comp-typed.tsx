@@ -3,7 +3,7 @@
 import React from 'react'
 import { getEngine } from "reactxx-styles"
 import { TComponents, TTyped, T, V } from 'reactxx-typings'
-import { useSheeter, getComponentCreator } from "reactxx-styles"
+import { getComponentCreator } from "reactxx-styles"
 
 interface ShapeLow extends TTyped.ShapeAncestor {
   props: { disabled?: boolean },
@@ -29,22 +29,22 @@ const config: TComponents.AuthorConfig<Shape> = {
   defaultSheet
 }
 
-const getComp: TComponents.GetComponent<Shape> = (authorConfig, displayName) => props => {
+const getComp: TComponents.GetComponent<Shape> = useStyles => props => {
   const {
-    styleRootWeb,
-    styleWeb,
+    getStylePropsRootWeb,
+    getStylePropsWeb,
     classes,
     propsCode: { children }
-  } = useSheeter<Shape>(props, authorConfig, displayName)
+  } = useStyles(props)
 
-  return <div {...styleRootWeb()}>
-    <span {...styleWeb(classes.label)}>
+  return <div {...getStylePropsRootWeb()}>
+    <span {...getStylePropsWeb(classes.label)}>
       {children}
     </span>
   </div>
 }
 
-const compCreator = getComponentCreator('CompDisplayName', config, getComp)
+const compCreator = getComponentCreator(getComp, 'CompDisplayName', config)
 
 const Comp = compCreator()
 

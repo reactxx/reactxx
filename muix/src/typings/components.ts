@@ -64,8 +64,6 @@ export namespace TComponents {
 
   export interface ComponentConfigLow {
     // withCascaing?: boolean
-    //------
-    componentId?: number // unique component id. Generated in useSheeter
   }
 
   // component type options
@@ -77,14 +75,15 @@ export namespace TComponents {
   export interface UserConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
     overrideProps?: TComponents.Props<R> // classes, css and styles are ignored
     overrideSheet?: TTyped.SheetOrCreator<R>
-    myAuthorConfigId?: number // ComponentConfig.id
   }
-  export interface Config<R extends TTyped.Shape = TTyped.Shape> extends AuthorConfig<R> {
+  export interface Config<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
+    componentId?: number // unique component id. Generated in useSheeter
+    defaultProps?: Partial<TComponents.Props<R>> // classes, css and styles are  ignored
+    defaultSheet?: TTyped.SheetOrCreator<R>
     overrideProps?: TComponents.Props<R>
     overrideSheet?: TTyped.SheetOrCreator<R>
     displayName?: string
   }
-
 
   export type ThemeContext<T extends any> = [T, (newTheme: T) => void]
 
@@ -93,10 +92,24 @@ export namespace TComponents {
   ) => React.SFC<TComponents.Props<R>>
 
   export type GetComponent<R extends TTyped.Shape> = (
-    authorConfig: TComponents.AuthorConfig<R>,
-    displayName: string,
-    userConfig: TComponents.UserConfig<R>,
+    useStyles: UseStyles<R>,
     par?
   ) => TComponents.SFC<R>
+
+  export type UseStyles<R extends TTyped.Shape = TTyped.Shape> = (
+    props: TComponents.Props<R>
+  ) => UseStylesResult<R>
+
+  export interface UseStylesResult<R extends TTyped.Shape> {
+    propsCode: TTyped.PropsCode<R>
+    classes: TTyped.getSheet<R>
+    className: TTyped.getRootStyle<R>
+    style: TTyped.getRootStyle<R>
+    getWidthMap: (mapBreakpoints?: number[]) => boolean[]
+    getStylePropsNative: <R extends TTyped.RulesetIds>(...rulesets: TTyped.TAllowed<R>[]) => TTyped.StylePropsNative<R>
+    getStylePropsRootNative: <R extends TTyped.RulesetIds = "">(...rulesets: TTyped.TAllowed<R>[]) => TTyped.StylePropsNative<R>
+    getStylePropsWeb: (...rulesets: TTyped.RulesetIds[]) => TTyped.StylePropsWeb
+    getStylePropsRootWeb: (...rulesets: TTyped.RulesetIds[]) => TTyped.StylePropsWeb
+  }
 
 } 
