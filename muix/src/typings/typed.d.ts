@@ -10,13 +10,15 @@ import {
 } from 'react-native'
 
 
-import { TCommonStyles, TEngine, TExtensions } from 'reactxx-typings'
+import { TCommonStyles } from './common-styles'
+import { TEngine } from './engine'
+import { TExtensions } from './index'
 
 export type $W = '$W'; export type $T = '$T'; export type $V = '$V';
 export type $I = '$I'; export type V = 'V'; export type T = 'T'; export type I = 'I';
 export type O = ''
 
-export namespace TTyped {
+declare namespace TTyped {
 
   //******************************************************
   //* RULESET ID ARITMETICS

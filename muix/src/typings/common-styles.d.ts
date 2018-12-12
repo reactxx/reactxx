@@ -1,9 +1,9 @@
 ﻿import React from 'react'
 declare namespace TCommonStyles {
 
-  export type FlexAlignType = "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
+  type FlexAlignType = "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
 
-  export interface FlexStyle {
+  interface FlexStyle {
     alignContent?: "flex-start" | "flex-end" | "center" | "stretch" | "space-between" | "space-around"
     alignItems?: FlexAlignType
     alignSelf?: "auto" | FlexAlignType
@@ -44,9 +44,9 @@ declare namespace TCommonStyles {
     zIndex?: number
   }
 
-  export interface ViewStyle extends ViewStyleLow {} //, TransformProp { }
+  interface ViewStyle extends ViewStyleLow {} //, TransformProp { }
 
-  export interface ViewStyleLow extends FlexStyle {
+  interface ViewStyleLow extends FlexStyle {
     backfaceVisibility?: "visible" | "hidden"
     backgroundColor?: string;
     opacity?: number;
@@ -71,7 +71,7 @@ declare namespace TCommonStyles {
     borderStyle?: "solid" | "dotted" | "dashed"
   }
 
-  export interface ScrollViewStyle extends FlexStyle {
+  interface ScrollViewStyle extends FlexStyle {
     backfaceVisibility?: "visible" | "hidden"
     backgroundColor?: string
     opacity?: number
@@ -96,8 +96,8 @@ declare namespace TCommonStyles {
     borderLeftWidth?: number
   }
 
-  export interface TextStyle extends TextStyleLow {} //, TransformProp { }
-  export interface TextStyleLow extends ViewStyleLow {
+  interface TextStyle extends TextStyleLow {} //, TransformProp { }
+  interface TextStyleLow extends ViewStyleLow {
     color?: string;
     fontFamily?: string;
     fontSize?: number;
@@ -113,8 +113,8 @@ declare namespace TCommonStyles {
     textShadowRadius?: number;
   }
 
-  export interface ImageStyle extends ImageStyleLow {} //, TransformProp { }
-  export interface ImageStyleLow extends FlexStyle {
+  interface ImageStyle extends ImageStyleLow {} //, TransformProp { }
+  interface ImageStyleLow extends FlexStyle {
     backfaceVisibility?: "visible" | "hidden"
     borderBottomLeftRadius?: number
     borderBottomRightRadius?: number
@@ -131,12 +131,12 @@ declare namespace TCommonStyles {
     COMMON RULESET
   *******************************************/
 
-  export type RulesetIdsCommon = 'Text' | 'View' | 'Image'
-  export type RulesetNativeIds = '$NativeText' | '$NativeView' | '$NativeImage'
-  export type RulesetIds = RulesetIdsCommon | RulesetNativeIds | '$Web'
-  export type RulesetNativeIdsEx = RulesetIds | unknown
+  type RulesetIdsCommon = 'Text' | 'View' | 'Image'
+  type RulesetNativeIds = '$NativeText' | '$NativeView' | '$NativeImage'
+  type RulesetIds = RulesetIdsCommon | RulesetNativeIds | '$Web'
+  type RulesetNativeIdsEx = RulesetIds | unknown
 
-  // export type RulesetType<T extends RulesetIds = 'Text'> =
+  // type RulesetType<T extends RulesetIds = 'Text'> =
   //   T extends 'View' ? ViewStyle :
   //   T extends 'Text' ? TextStyle :
   //   T extends 'Image' ? ImageStyle :
@@ -146,7 +146,7 @@ declare namespace TCommonStyles {
   //   T extends '$NativeImage' ? ReactN.ImageStyle :
   //   never
 
-  // export type RulesetTypeNative<T extends RulesetIds = 'Text'> =
+  // type RulesetTypeNative<T extends RulesetIds = 'Text'> =
   //   T extends 'View' ? ReactN.ViewStyle :
   //   T extends 'Text' ? ReactN.TextStyle :
   //   T extends 'Image' ? ReactN.ImageStyle :
@@ -155,7 +155,7 @@ declare namespace TCommonStyles {
   //   T extends '$NativeImage' ? ReactN.ImageStyle :
   //   never
 
-  // export type RulesetTypeWeb = RulesetWeb
+  // type RulesetTypeWeb = RulesetWeb
     // T extends 'View' ? RulesetWeb :
     // T extends 'Text' ? RulesetWeb :
     // T extends 'Image' ? RulesetWeb :
@@ -164,30 +164,30 @@ declare namespace TCommonStyles {
 
 
   //******************** Native ruleset which are compatible with web
-  // export type RulesetCommon<T extends RulesetNativeIdsLow> =
+  // type RulesetCommon<T extends RulesetNativeIdsLow> =
   //   T extends '$Web' ? RulesetWeb :
   //   T extends 'View' ? ViewStyle :
   //   T extends 'Image' ? ImageStyle :
   //   TextStyle
 
-  // export type RulesetCommonLow<T extends RulesetNativeIdsLow> =
+  // type RulesetCommonLow<T extends RulesetNativeIdsLow> =
   //   T extends '$Web' ? RulesetWeb :
   //   T extends 'View' ? ViewStyleLow :
   //   T extends 'Image' ? ImageStyleLow :
   //   TextStyleLow
 
   //******************** Platform specific ruleset
-  // export type RulesetNative<T extends RulesetNativeIdsEx = unknown> =
+  // type RulesetNative<T extends RulesetNativeIdsEx = unknown> =
   //   T extends 'View' ? ReactN.ViewStyle :
   //   T extends 'Image' ? ReactN.ImageStyle :
   //   ReactN.TextStyle
 
-  // export type NativeProperties<T extends RulesetNativeIdsEx = unknown> =
+  // type NativeProperties<T extends RulesetNativeIdsEx = unknown> =
   //   T extends 'View' ? ReactN.ViewProperties :
   //   T extends 'Image' ? ReactN.ImageProperties :
   //   ReactN.TextProperties
 
-  // export type RulesetWeb = React.CSSProperties & { [P in CSS.Pseudos]?: TSheeter.RulesetOrAtomized<'$Web'> }
-  // export type Ruleset = RulesetWeb | RulesetNative
+  // type RulesetWeb = React.CSSProperties & { [P in CSS.Pseudos]?: TSheeter.RulesetOrAtomized<'$Web'> }
+  // type Ruleset = RulesetWeb | RulesetNative
 
 }

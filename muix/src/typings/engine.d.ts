@@ -2,66 +2,66 @@ import React from 'react'
 
 declare namespace TEngine {
 
-  export type Rulesets = Ruleset | Ruleset[]
-  export type Ruleset = ToAtomize | Queryables | TempProc | Deferred
+  type Rulesets = Ruleset | Ruleset[]
+  type Ruleset = ToAtomize | Queryables | TempProc | Deferred
 
-  export type ToAtomize = {}
+  type ToAtomize = {}
 
-  export interface Condition {
+  interface Condition {
     type: string
     test?: (outerPar) => boolean
   }
-  export type Conditions = Condition[]
+  type Conditions = Condition[]
 
-  export type TempProc = (
+  type TempProc = (
     (atomizedVariants: QueryableItems, path: string, pseudoPrefixes: string[], conditions: Conditions
     ) => void
   ) & { $t$?: true }
 
-  export interface Deferred {
+  interface Deferred {
     $d$: true // signature
     evalProc: (outerPar) => QueryableItems
   }
 
-  export type Sheet = Record<string, Rulesets>
+  type Sheet = Record<string, Rulesets>
 
   // **********************************************
   // CROSSPLATFORM
 
   // Before toClassNames
-  export type Queryable = Atomic & { conditions?: Conditions }
-  export type QueryableItems = Array<Queryable | Deferred>
-  export interface Queryables extends Array<Queryable> {
+  type Queryable = Atomic & { conditions?: Conditions }
+  type QueryableItems = Array<Queryable | Deferred>
+  interface Queryables extends Array<Queryable> {
     $r$?: true // array signature
   }
 
   // After toClassNames, before applyLastWindowStrategy
-  export type Atomic = AtomicWebs | AtomicNatives
+  type Atomic = AtomicWebs | AtomicNatives
 
   // input to applyLastwinsStrategy
-  export interface WithConflicts extends Array<Atomic> { $r$?: true }
+  interface WithConflicts extends Array<Atomic> { $r$?: true }
   // output from applyLastWindowStrategy
-  export type AtomicLow = AtomicWebLows | AtomicNativeLows
+  type AtomicLow = AtomicWebLows | AtomicNativeLows
 
   // after finalizeClassNames
-  export type AtomicFinal = AtomicWebFinals | AtomicNativeFinals
+  type AtomicFinal = AtomicWebFinals | AtomicNativeFinals
 
 
   // **********************************************
   // NATIVE
 
   // Queryable item
-  export type AtomicNative = string | number | __dev_AtomicNative
-  export type AtomicNatives = Record<string, AtomicNative>
+  type AtomicNative = string | number | __dev_AtomicNative
+  type AtomicNatives = Record<string, AtomicNative>
 
   // after applyLastWindowStrategy
-  export type AtomicNativeLows = AtomicNatives
+  type AtomicNativeLows = AtomicNatives
 
   // after finalizeClassNames
-  export type AtomicNativeFinal = string | number
-  export type AtomicNativeFinals = Record<string, AtomicNativeFinal>
+  type AtomicNativeFinal = string | number
+  type AtomicNativeFinals = Record<string, AtomicNativeFinal>
 
-  export interface __dev_AtomicNative {
+  interface __dev_AtomicNative {
     value: string | number
     tracePath: string
   }
@@ -70,21 +70,21 @@ declare namespace TEngine {
   // WEB
 
   // Queryable item
-  export type AtomicWeb = FelaCacheItem | __dev_AtomicWeb
-  export type AtomicWebs = AtomicWeb[]
+  type AtomicWeb = FelaCacheItem | __dev_AtomicWeb
+  type AtomicWebs = AtomicWeb[]
 
   // after applyLastWindowStrategy
-  export type AtomicWebLow = string | __dev_AtomicWeb
-  export type AtomicWebLows = AtomicWebLow[]
+  type AtomicWebLow = string | __dev_AtomicWeb
+  type AtomicWebLows = AtomicWebLow[]
 
   // after finalizeClassNames
-  export type AtomicWebFinals = string
+  type AtomicWebFinals = string
 
-  export interface __dev_AtomicWeb {
+  interface __dev_AtomicWeb {
     tracePath?: string
     cache?: FelaCacheItem
   }
-  export interface FelaCacheItem {
+  interface FelaCacheItem {
     type: string
     className: string
     selector: string
@@ -102,7 +102,7 @@ declare namespace TEngine {
   // STYLE, CREATORS, WIDTHS etc.
   // **********************************************
 
-  export interface Style {
+  interface Style {
     $web: {}
     $native: {}
   }
@@ -118,12 +118,12 @@ declare namespace TEngine {
 
   type ValueOrCreator<T> = T | ((theme) => T)
 
-  export type StyleOrCreator = ValueOrCreator<Style>
-  export type RulesetOrCreator = ValueOrCreator<Rulesets>
-  export type SheetOrCreator = ValueOrCreator<Sheet>
+  type StyleOrCreator = ValueOrCreator<Style>
+  type RulesetOrCreator = ValueOrCreator<Rulesets>
+  type SheetOrCreator = ValueOrCreator<Sheet>
 
-  export type ToPlatformAtomizeRuleset = (ruleset: TEngine.ToAtomize, tracePath?: string) => Atomic
-  export type ApplyLastwinsStrategy = (values: TEngine.WithConflicts) => AtomicLow
+  type ToPlatformAtomizeRuleset = (ruleset: TEngine.ToAtomize, tracePath?: string) => Atomic
+  type ApplyLastwinsStrategy = (values: TEngine.WithConflicts) => AtomicLow
 
 
 }
