@@ -1,7 +1,8 @@
 ﻿import ReactN from 'react-native'
 
-import { TTyped, $W, $T, $V, $I, V, T, I } from 'reactxx-typings'
+import { TTyped, V, T } from 'reactxx-typings'
 
+import { TEvents } from './events'
 
 export namespace TPrimitives {
 
@@ -18,39 +19,35 @@ export namespace TPrimitives {
       root: V
     }
     sheetQuery: { pressable: boolean }
+    props: { url?: string } & TEvents.Events<TEvents.TEventsAll>
 
     rootWebProps: React.HTMLAttributes<HTMLDivElement>
-    rootNativeProps: ReactN.ViewProperties
-    //events: TTyped.ShapeMarks<TComponents.TEventsAll>
+    rootNativeProps: ReactN.ViewProperties & TEvents.EventsNativeView
   }
 
   export interface TextShape extends TTyped.ShapeAncestor {
     sheet: {
       root: T
     }
-    props: {
-      singleLine?: boolean
-      url?: string
-    }
+    props: { singleLine?: boolean; url?: string } & TEvents.Events<TEvents.TEventsSimple>
+
     sheetQuery: {
       pressable: boolean
     }
 
     rootWebProps: React.HTMLAttributes<HTMLSpanElement>
-    rootNativeProps: ReactN.TextProperties
-    //events: TTyped.ShapeMarks<TComponents.TEventsXNames>
+    rootNativeProps: ReactN.TextProperties & TEvents.EventsNativeText
   }
 
   export interface IconShape extends TTyped.ShapeAncestor {
     sheet: {
       root: T
     }
-    props: { data?: string; url?: string, children?: string }
+    props: { data?: string; url?: string, children?: string } & TEvents.Events<TEvents.TEventsSimple>
     sheetQuery: { pressable: boolean }
 
     rootWebProps: React.SVGAttributes<SVGElement>
-    rootNativeProps: ReactN.TextProperties
-    //events: TTyped.ShapeMarks<TComponents.TEventsXNames>
+    rootNativeProps: ReactN.TextProperties & TEvents.EventsNativeText
   }
 
   export interface ScrollViewShape extends TTyped.ShapeAncestor {
@@ -63,4 +60,5 @@ export namespace TPrimitives {
     rootWebProps: React.HTMLAttributes<HTMLDivElement>
     rootNativeProps: ReactN.ViewProperties
   }
+
 }

@@ -40,31 +40,35 @@ export const processTree = (
     const indexToPath = (idx: number) => items.length <= 1 ? '' : `[${idx}]`
 
     const items = isToAtomizeArray(value) ? value : [value]
-    items.forEach((it, idx) => {
-        if (!it) return
-        if (isTemporary(it)) {
-            it(atomizedVariants, path + indexToPath(idx), pseudoPrefixes, conditions)
-        } else if (isDeferred(it)) {
-            atomizedVariants.push(it)
-        } else if (isAtomized(it)) {
+    items.forEach((item, idx) => {
+        if (!item) return
+        if (isTemporary(item)) {
+            item(atomizedVariants, path + indexToPath(idx), pseudoPrefixes, conditions)
+        } else if (isDeferred(item)) {
+            atomizedVariants.push(item)
+        } else if (isAtomized(item)) {
             if (pseudoPrefixes && pseudoPrefixes.length > 0)
                 throw 'Web pseudo properties cannot contain already atomized value'
-            for (const itt of it) {
+            for (const itt of item) {
+                if (!itt)
+                    continue
                 if (isDeferred(itt))
                     throw 'isDeferred(itt)'
-                if (!conditions || conditions.length === 0) //... and no conditions => done
-                    pushToAtomizedVariants(atomizedVariants, itt, null)
-                else { // ... and conditions => merge conditions
-                    const ittCopy = Array.isArray(itt) ? [...itt] : { ...itt }
-                    pushToAtomizedVariants(atomizedVariants, ittCopy,
-                        itt.conditions ? [...conditions, ...itt.conditions] : conditions)
-                }
+                // if (!conditions || conditions.length === 0) //... and no conditions => done
+                //     pushToAtomizedVariants(atomizedVariants, itt, null)
+                // else { // ... and conditions => merge conditions
+                //const ittCopy = Array.isArray(itt) ? [...itt] : { ...itt } // array for web, object for native
+                //const ittCopy = window.isWeb ? [...itt] : { ...itt } // array for web, object for native
+                // pushToAtomizedVariants(atomizedVariants, ittCopy,
+                //     itt.conditions ? [...conditions, ...itt.conditions] : conditions)
+                pushToAtomizedVariants(atomizedVariants, itt,
+                    itt.conditions && conditions ? [...conditions, ...itt.conditions] : itt.conditions || conditions)
             }
         } else { // it: toAtomize
             // if (window.__TRACE__)
             //     it = deepClone(it)
             processPseudosAndAtomize(
-                it,
+                item,
                 atomizedVariants, path + indexToPath(idx),
                 pseudoPrefixes, conditions
             )
@@ -121,7 +125,8 @@ const pushToAtomizedVariants = (
     variant: TEngine.Queryable, conditions: TEngine.Conditions
 ) => {
     if (!variant) return
-    if (conditions && conditions.length > 0) variant.conditions = conditions
+    variant.conditions = conditions
+    if (conditions && conditions.length === 0) delete variant.conditions
     atomizedVariants.push(variant)
 }
 
@@ -136,7 +141,7 @@ const atomizePure = (
         return
     }
     // platform specific atomize: e.g. for WEB convert ruleset to list of atomized CSS classes
-    const variant = platform.toPlatformAtomizeRuleset(pureRuleset, path)
+    const variant: TEngine.Queryable = platform.toPlatformAtomizeRuleset(pureRuleset, path)
     pushToAtomizedVariants(atomizedVariants, variant, conditions)
 }
 

@@ -9,7 +9,7 @@ export const getComponentCreator = <R extends TTyped.Shape>(
 ) => {
         const config: TComponents.Config<R> = {
             displayName: userDisplayName || authorDisplayName
-            //componentId: 0 - platform is not initialized yet
+            //componentId: platform is not initialized yet, fill during first ussage
         }
         const cfg = userConfig && authorConfig ? Object.assign({}, authorConfig, userConfig) : userConfig || authorConfig
         if (cfg) Object.assign(config, cfg)

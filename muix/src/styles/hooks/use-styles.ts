@@ -4,7 +4,7 @@ import { platform, useWidths } from 'reactxx-styles'
 import { useDefaults } from './use-defaults'
 import { useProps } from './use-props'
 import { useTheme } from './use-theme'
-import { mergeCodeProps } from '../utils/merge'
+import { mergePropsCode } from '../utils/merge'
 
 export const useStylesUntyped = (props, config?) => useStyles(props, config) as any
 
@@ -29,7 +29,7 @@ export const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
     const propsCode: TTyped.PropsCode<R> = {
         $widths: { actWidth, breakpoints },
     }
-    mergeCodeProps(propsCode, [
+    mergePropsCode(propsCode, [
         propsDefault, themedPropsDefault && themedPropsDefault(theme),
         propsOverride, themedPropsOverride && themedPropsOverride(theme),
         propsRest, themedProps && themedProps(theme),
@@ -46,9 +46,13 @@ export const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
     const getRootNativeStyleProps = <R extends TTyped.RulesetIds = O>(...rulesets: TTyped.RulesetSimple<R>[]) =>
         platform.getStyleProps(propsCode, rulesets.length > 0 ? rulesets : [classes['root']], className, style) as TTyped.StylePropsNative<R>
 
+    // platform events
+
+
     return {
-        propsCode, classes, className, style, 
+        propsCode, classes, className, style,
         getWidthMap, // width helper
         getNativeStyleProps, getRootNativeStyleProps, getWebStyleProps, getRootWebStyleProps
     } as TComponents.UseStylesResult<R>
 }
+

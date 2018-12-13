@@ -11,6 +11,7 @@ export const toClassNamesWithQuery = (props, ...items: TEngine.Ruleset[]) => {
         !v.conditions || v.conditions.length === 0 || v.conditions.every(c => c.test(state))
 
     const filterList = (list: TEngine.QueryableItems) => {
+        if (!list || list.length === 0) return
         for (const v of list) {
             if (!v) continue
             if (isDeferred(v)) {
@@ -24,7 +25,7 @@ export const toClassNamesWithQuery = (props, ...items: TEngine.Ruleset[]) => {
     const process = (val: TEngine.Ruleset) => {
         if (!val) return
 
-        if (isDeferred(val)) { // toClassNamesWithQuery(null, $hot())
+        if (isDeferred(val)) { 
             const res = val.evalProc(props)
             filterList(res)
             return
@@ -42,14 +43,11 @@ export const toClassNamesWithQuery = (props, ...items: TEngine.Ruleset[]) => {
             return atomizeRuleset(val)
         })() : val
 
-        if (!ruleset || ruleset.length === 0) return
-
         filterList(ruleset)
 
     }
 
     for (const r of items) process(r)
-    //items.forEach(r => process(r))
 
     return values.length === 0 ? null : wrapRuleset(values) as TEngine.WithConflicts
 }

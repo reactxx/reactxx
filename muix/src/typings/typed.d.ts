@@ -34,12 +34,12 @@ declare namespace TTyped {
   type TNativeProps = ReactN.TextProperties | ReactN.ViewProperties | ReactN.TextInputProperties | ReactN.ImageProperties
     | {} //TODO
 
-  type TNativePropsToStyle<TT extends TNativeProps> =
-    TT extends ReactN.ViewProperties ? V :
-    TT extends ReactN.ImageProperties ? I :
-    TT extends ReactN.TextProperties ? T :
-    TT extends ReactN.TextInputProperties ? T :
-    V
+  // type TNativePropsToStyle<TT extends TNativeProps> =
+  //   TT extends ReactN.ViewProperties ? V :
+  //   TT extends ReactN.ImageProperties ? I :
+  //   TT extends ReactN.TextProperties ? T :
+  //   TT extends ReactN.TextInputProperties ? T :
+  //   V
 
   type TNativeIdToProps<TT extends CommonIds> =
     TT extends V ? ReactN.ViewProperties :

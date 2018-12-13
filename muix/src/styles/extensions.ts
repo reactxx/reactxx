@@ -1,4 +1,4 @@
-import { TEngine } from 'reactxx-typings'
+import { TTyped, TEngine } from 'reactxx-typings'
 import { WidthStore } from './queryable/$widths/store'
 
 declare module 'reactxx-typings' {
@@ -16,7 +16,8 @@ declare module 'reactxx-typings' {
                 instanceIdCounter?: number
                 componentIdCounter?: number
             }
-    }
+        }
 
     }
+
 }

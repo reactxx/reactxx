@@ -1,4 +1,4 @@
-import { TComponents, TTyped, $W, $T, $V, $I, V, T, I, } from 'reactxx-typings'
+import { TComponents, TTyped, $W, V, T } from 'reactxx-typings'
 import { getTypedEngine } from 'reactxx-styles'
 
 import { TPrimitives } from './shapes'
@@ -97,8 +97,6 @@ export const iconConfig: TComponents.AuthorConfig<TPrimitives.IconShape> = {
   }
 }
 
-//type XX = TTyped.getRootStyle<TPrimitives.IconShape>
-//
 //https://stackoverflow.com/questions/35395691/understanding-the-difference-between-the-flex-and-flex-grow-properties
 //https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af
 
@@ -139,6 +137,3 @@ export const scrollViewConfig: TComponents.AuthorConfig<TPrimitives.ScrollViewSh
     )
   }
 }
-
-
-

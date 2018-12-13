@@ -2,27 +2,30 @@ import React from 'react'
 
 import { TComponents } from "reactxx-typings"
 
-import { hasPlatformEvents } from './configs'
 import { TPrimitives } from './shapes'
+import {getWebEvents} from './events'
 
 export const getView: TComponents.GetComponent<TPrimitives.ViewShape> = (useStyles, isAnimated: boolean) => props => {
 
-    const { getRootWebStyleProps, propsCode, propsCode: { $rootWebProps, children } } = useStyles(props)
+    const { getRootWebStyleProps, propsCode, propsCode: { $rootWebProps, url, children } } = useStyles(props)
 
-    propsCode.pressable = hasPlatformEvents($rootWebProps)
-    return <div {...getRootWebStyleProps()} {...$rootWebProps} children={children} />
+    const [hasEvent, events] = getWebEvents(props, url)
+    propsCode.pressable = hasEvent
+
+    return <div {...getRootWebStyleProps()} {...$rootWebProps} children={children} {...events} />
 }
 
 export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (useStyles, isAnimated: boolean) => props => {
 
     const { getRootWebStyleProps, propsCode, propsCode: { children, url, $rootWebProps } } = useStyles(props)
 
-    propsCode.pressable = hasPlatformEvents($rootWebProps)
-
+    const [hasEvent, events] = getWebEvents(props, url)
+    propsCode.pressable = hasEvent
+    
     const tagProps: React.HTMLAttributes<HTMLElement> = {
         ...getRootWebStyleProps(),
         ...$rootWebProps,
-        onClick: url ? undefined : undefined /*onClick*/
+        ...events
     }
 
     tagProps.className += ' ' + TPrimitives.Consts.textClassName
@@ -34,12 +37,13 @@ export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (useStyl
 
     const { getRootWebStyleProps, propsCode, propsCode: { data, url, children, $rootWebProps } } = useStyles(props)
 
-    propsCode.pressable = hasPlatformEvents($rootWebProps)
-
+    const [hasEvent, events] = getWebEvents(props as any, url)
+    propsCode.pressable = hasEvent
+    
     const svg = <svg
         {...getRootWebStyleProps()}
         {...$rootWebProps}
-        onClick={url ? undefined : undefined /*onClick*/}>
+        {...events}>
         {data ? <path d={data} /> : children}
     </svg>
     
@@ -49,7 +53,7 @@ export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (useStyl
 
 export const getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape> = (useStyles, isAnimated: boolean) => props => {
 
-    const { getRootWebStyleProps, getWebStyleProps, propsCode: { horizontal, children, $rootWebProps }, classes } = useStyles(props)
+    const { getRootWebStyleProps, getWebStyleProps, propsCode: { children, $rootWebProps }, classes } = useStyles(props)
 
     return <div {...getRootWebStyleProps()} {...$rootWebProps}>
         <div {...getWebStyleProps(classes.container)}>

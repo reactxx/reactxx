@@ -3,7 +3,7 @@ import { deepMerge, deepMerges } from './deep-merge'
 import { isAtomized } from './atomize-low';
 import { wrapRuleset } from './atomize';
 
-export const mergeCodeProps = (propsCode: TTyped.PropsCode | any, props: TComponents.Props[]) => {
+export const mergePropsCode = (propsCode: TTyped.PropsCode | any, props: TComponents.Props[]) => {
     if (!props || props.length === 0) return
     let rootWebProps, rootNativeProps, rootProps
     for (const p of props) {

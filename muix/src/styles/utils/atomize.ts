@@ -45,7 +45,7 @@ function toJSON() {
     })
 }
 
-// muttable (at least for native)
+// mutable
 export const atomizeStyle = (style: TEngine.Style, theme?) => {
     if (!style) return null
 

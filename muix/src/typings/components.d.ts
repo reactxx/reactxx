@@ -1,25 +1,12 @@
 ﻿import React from 'react';
 import { TEngine, TTyped, TExtensions } from 'reactxx-typings';
 
-declare module 'reactxx-typings' {
-
-  namespace TExtensions {
-
-    interface Shape {
-      events?: TTyped.EmptyInterface // common events
-    }
-
-    type getEvents<R extends Shape = Shape> = keyof R['events']
-  }
-}
-
 declare namespace TComponents {
 
   //******************** Cross platform component props
   type Props<R extends TTyped.Shape = TTyped.Shape> =
     TTyped.getProps<R> &
-    PropsLow<R> &
-    TEventsX<R>
+    PropsLow<R> 
 
   interface PropsLow<R extends TTyped.Shape> extends TTyped.RootProps<R> {
     className?: TTyped.RulesetOrCreator<R>
@@ -29,34 +16,6 @@ declare namespace TComponents {
   }
 
   type SFC<R extends TTyped.Shape = TTyped.Shape> = React.SFC<Props<R>> //& TEngine.IsReactXXComponent
-
-  /******************************************
-    EVENTS
-  *******************************************/
-  type TEventsX<R extends TTyped.Shape = TTyped.Shape> = PartialRecord<TExtensions.getEvents<R>, MouseEventEx<R>>
-
-  type TEventOnPress = 'onPress'
-  type TEventsAll = 'onPress' | 'onLongPress' | 'onPressIn' | 'onPressOut'
-  type TEventsXNames = 'onPress' | 'onLongPress'
-  //type TEvents = TEventsAll
-
-  interface MouseEventPar<R extends TTyped.Shape = TTyped.Shape> extends React.MouseEvent<Element> { current?: TTyped.PropsCode<R> }
-  type MouseEventEx<R extends TTyped.Shape = TTyped.Shape> = React.EventHandler<MouseEventPar<R>>// (ev?: MouseEventPar<R>) => void
-
-  interface EventsPress<R extends TTyped.Shape = TTyped.Shape> { onPress?: MouseEventEx<R>; onLongPress?: MouseEventEx<R> }
-  interface Events<R extends TTyped.Shape = TTyped.Shape> extends EventsPress<R> { onPressIn?: MouseEventEx<R>; onPressOut?: MouseEventEx<R> }
-
-  interface EventsWeb {
-    onClick?: React.MouseEventHandler<Element>
-    onMouseDown?: React.MouseEventHandler<Element>
-    onMouseUp?: React.MouseEventHandler<Element>
-  }
-
-  //interface NativeEventPar<R extends Shape = Shape> extends ReactN.GestureResponderEvent { current?: PropsCode<R> }
-  interface EventsNative {
-    onPress?: () => void; onPressIn?: () => void
-    onPressOut?: () => void; onLongPress?: () => void
-  }
 
   //*************************************** */  
   // CONFIGS
@@ -76,12 +35,9 @@ declare namespace TComponents {
     overrideProps?: TComponents.Props<R> // classes, css and styles are ignored
     overrideSheet?: TTyped.SheetOrCreator<R>
   }
-  interface Config<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
-    componentId?: number // unique component id. Generated in useSheeter
-    defaultProps?: Partial<TComponents.Props<R>> // classes, css and styles are  ignored
-    defaultSheet?: TTyped.SheetOrCreator<R>
-    overrideProps?: TComponents.Props<R>
-    overrideSheet?: TTyped.SheetOrCreator<R>
+
+  interface Config<R extends TTyped.Shape = TTyped.Shape> extends AuthorConfig<R>, UserConfig<R> {
+    componentId?: number // generated unique component type Id
     displayName?: string
   }
 
@@ -107,7 +63,7 @@ declare namespace TComponents {
     style: TTyped.getRootStyle<R>
     getWidthMap: (mapBreakpoints?: number[]) => boolean[]
     getNativeStyleProps: <R extends TTyped.RulesetIds>(...rulesets: TTyped.TAllowed<R>[]) => TTyped.StylePropsNative<R>
-    getRootNativeStyleProps: <R extends TTyped.RulesetIds = "">(...rulesets: TTyped.TAllowed<R>[]) => TTyped.StylePropsNative<R>
+    getRootNativeStyleProps: <R extends TTyped.CommonIds = "">(...rulesets: TTyped.TAllowed<R>[]) => TTyped.TNativeIdToProps<R>
     getWebStyleProps: (...rulesets: TTyped.RulesetIds[]) => TTyped.StylePropsWeb
     getRootWebStyleProps: (...rulesets: TTyped.RulesetIds[]) => TTyped.StylePropsWeb
   }

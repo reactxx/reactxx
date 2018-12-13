@@ -6,15 +6,15 @@ import { TPrimitives } from './shapes'
 import { textConfig, viewConfig, iconConfig, scrollViewConfig } from './configs'
 
 const enum CompNames {
-    Text = 'ReactXXText',
-    View = 'ReactXXView',
-    Icon = 'ReactXXIcon',
-    ScrollView = 'ReactXXScrollView',
+    Text = 'reactxx-text',
+    View = 'reactxx-view',
+    Icon = 'reactxx-icon',
+    ScrollView = 'reactxx-scrollview',
 
-    AnimatedView = 'ReactXXAnimatedView',
-    AnimatedIcon = 'ReactXXAnimatedIcon',
-    AnimatedText = 'ReactXXAnimatedText',
-    AnimatedScrollView = 'ReactXXAnimatedScrollView',
+    AnimatedView = 'reactxx-animatedview',
+    AnimatedIcon = 'reactxx-animatedicon',
+    AnimatedText = 'reactxx-animatedtext',
+    AnimatedScrollView = 'reactxx-animatedscrollview',
 }
 
 export const inits = (
@@ -38,7 +38,7 @@ export const inits = (
     const textCreator = getComponentCreator(getText, CompNames.Text, textConfig, false)
     const Text = textCreator()
 
-    const animatedTextCreator = getComponentCreator( getText, CompNames.AnimatedText, textConfig,true)
+    const animatedTextCreator = getComponentCreator(getText, CompNames.AnimatedText, textConfig, true)
     const AnimatedText = animatedTextCreator()
 
     const scrollViewCreator = getComponentCreator(getScrollView, CompNames.ScrollView, scrollViewConfig, false)
@@ -52,9 +52,9 @@ export const inits = (
             scrollViewCreator, ScrollView, getScrollView,
             iconCreator, Icon, getIcon,
             textCreator, Text, getText,
-            animatedViewCreator, AnimatedView, 
-            animatedIconCreator, AnimatedIcon, 
-            animatedTextCreator, AnimatedText, 
+            animatedViewCreator, AnimatedView,
+            animatedIconCreator, AnimatedIcon,
+            animatedTextCreator, AnimatedText,
         }
         Object.assign(platform, primitivies)
     }
@@ -65,8 +65,8 @@ export const inits = (
         scrollViewCreator, ScrollView,
         iconCreator, Icon,
         textCreator, Text,
-        animatedViewCreator, AnimatedView, 
-        animatedIconCreator, AnimatedIcon, 
-        animatedTextCreator, AnimatedText, 
-}
+        animatedViewCreator, AnimatedView,
+        animatedIconCreator, AnimatedIcon,
+        animatedTextCreator, AnimatedText,
+    }
 }

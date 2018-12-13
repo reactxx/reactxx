@@ -4,23 +4,26 @@ import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vecto
 import warning from 'warning'
 
 //import { platform } from 'reactxx-styles'
-import { Text, View, ScrollView } from 'reactxx-styles-native'
-import { TTyped, TComponents } from "reactxx-typings"
+import { Text,  View, ScrollView } from 'reactxx-styles-native'
+import { TTyped, TComponents, V, T } from "reactxx-typings"
 
-import { hasPlatformEvents } from './configs'
+import { getViewEvents, getTextEvents } from './events'
+
+
 import { TPrimitives } from './shapes'
 
 export const getView: TComponents.GetComponent<TPrimitives.ViewShape> = (useStyles, isAnimated: boolean) => props => {
 
     const ActView: TTyped.ViewStatic = isAnimated ? Animated.View : View
 
-    const { getRootNativeStyleProps, propsCode, propsCode: { children, $rootNativeProps } } = useStyles(props)
+    const { getRootNativeStyleProps, propsCode, propsCode: { url, children, $rootNativeProps } } = useStyles(props)
 
-    propsCode.pressable = hasPlatformEvents($rootNativeProps)
+    const [hasEvent, events] = getViewEvents(props, url)
+    propsCode.pressable = hasEvent
 
-    const res = <ActView {...getRootNativeStyleProps()} {...$rootNativeProps} children={children} /> as any
+    const res = <ActView {...getRootNativeStyleProps()} {...$rootNativeProps} children={children} />
 
-    return propsCode.pressable ? <TouchableWithoutFeedback {...{/*events*/ }}>{res}</TouchableWithoutFeedback> : res
+    return propsCode.pressable ? <TouchableWithoutFeedback {...events}>{res}</TouchableWithoutFeedback> : res
 }
 
 export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (useStyles, isAnimated: boolean) => props => {
@@ -29,20 +32,17 @@ export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (useStyl
 
     const { getRootNativeStyleProps, propsCode, propsCode: { data, url, children, $rootNativeProps } } = useStyles(props)
 
-    propsCode.pressable = hasPlatformEvents($rootNativeProps)
+    const [hasEvent, events] = getTextEvents(props as any, url)
+    propsCode.pressable = hasEvent
 
-    //Link to URL
-    let onPress
-    const doPress = !url ? onPress : () => Linking.canOpenURL(url).then(supported => {
-        warning(supported, `Can't handle url: ${url}`)
-        return Linking.openURL(url);
-    }).catch(err => warning(false, `An error occurred: ${err}, ${url}`))
+    const iconProps: MaterialCommunityIconsProps = {...getRootNativeStyleProps() as any}
+    if ($rootNativeProps) Object.assign(iconProps, $rootNativeProps)
+    if (events)Object.assign(iconProps, events)
 
     return <ActIcon
         name={(data || children as string) as MaterialCommunityIconsProps['name']}
-        {...getRootNativeStyleProps() as any as MaterialCommunityIconsProps}
-        {...{ onPress: doPress || undefined }}
-        {...$rootNativeProps} />
+        {...iconProps}
+    />
 }
 const AnimatedIconLow: typeof MaterialCommunityIcons = Animated.createAnimatedComponent(MaterialCommunityIcons)
 
@@ -52,19 +52,18 @@ export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (useStyl
 
     const { getRootNativeStyleProps, propsCode, propsCode: { url, children, singleLine, $rootNativeProps } } = useStyles(props)
 
-    propsCode.pressable = hasPlatformEvents($rootNativeProps)
+    const [hasEvent, events] = getTextEvents(props, url)
+    propsCode.pressable = hasEvent
 
-    let doPress
-    const otherProps: TTyped.TextProperties = {
-        onPress: !url ? doPress : () => Linking.canOpenURL(url).then(supported => {
-            warning(supported, `Can't handle url: ${url}`)
-            return Linking.openURL(url);
-        }).catch(err => warning(false, `An error occurred: ${err}, ${url}`))
-    }
-    if (singleLine)
-        otherProps.numberOfLines = 1
+    const textProps: TTyped.TextProperties = {...getRootNativeStyleProps<T>()}
+    if (singleLine) textProps.numberOfLines = 1
+    if (events) Object.assign(textProps, events)
+    if ($rootNativeProps) Object.assign(textProps, $rootNativeProps)
 
-    return <ActText {...getRootNativeStyleProps()} {...$rootNativeProps} {...otherProps} children={children} />
+    return <ActText
+        {...textProps}
+        children={children}
+    />
 }
 
 export const getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape> = (useStyles, isAnimated: boolean) => props => {
@@ -73,9 +72,11 @@ export const getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape
 
     const { getRootNativeStyleProps, getNativeStyleProps, propsCode: { children, $rootNativeProps }, classes } = useStyles(props)
 
+    const scrollViewProps: TTyped.ScrollViewProperties = {...getRootNativeStyleProps<V>()}
+    if ($rootNativeProps) Object.assign(scrollViewProps, $rootNativeProps)
+
     return <ActScrollView
-        {...getRootNativeStyleProps()}
+        {...scrollViewProps}
         contentContainerStyle={getNativeStyleProps(classes.container).style}
-        {...$rootNativeProps}
         children={children} />
 }
