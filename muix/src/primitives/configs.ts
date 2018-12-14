@@ -13,8 +13,8 @@ export const hasPlatformEvents = (propsCode: TTyped.PropsCode) => !!(
 
 const t = getTypedEngine<TPrimitives.TextShape>()
 
-export const textConfig: TComponents.AuthorConfig<TPrimitives.TextShape> = {
-  defaultSheet: {
+export const textConfig: TComponents.ComponentConfig<TPrimitives.TextShape> = {
+  sheet: {
     root: t.STYLE<T>(
       t.WEB(
         {
@@ -57,8 +57,8 @@ const webViewRuleset: TTyped.Ruleset<V> = {
 
 const v = getTypedEngine<TPrimitives.ViewShape>()
 
-export const viewConfig: TComponents.AuthorConfig<TPrimitives.ViewShape> = {
-  defaultSheet: {
+export const viewConfig: TComponents.ComponentConfig<TPrimitives.ViewShape> = {
+  sheet: {
     root: v.STYLE<V>(
       v.WEB(
         webViewRuleset,
@@ -72,14 +72,14 @@ export const viewConfig: TComponents.AuthorConfig<TPrimitives.ViewShape> = {
 
 const i = getTypedEngine<TPrimitives.IconShape>()
 
-export const iconConfig: TComponents.AuthorConfig<TPrimitives.IconShape> = {
-  defaultProps: {
+export const iconConfig: TComponents.ComponentConfig<TPrimitives.IconShape> = {
+  props: {
     $rootWebProps: {
       viewBox: '0 0 24 24',
       focusable: 'false'
     }
   },
-  defaultSheet: {
+  sheet: {
     root: i.STYLE<T>(
       {
         flexShrink: 0,
@@ -102,8 +102,8 @@ export const iconConfig: TComponents.AuthorConfig<TPrimitives.IconShape> = {
 
 const s = getTypedEngine<TPrimitives.ScrollViewShape>()
 
-export const scrollViewConfig: TComponents.AuthorConfig<TPrimitives.ScrollViewShape> = {
-  defaultSheet: {
+export const scrollViewConfig: TComponents.ComponentConfig<TPrimitives.ScrollViewShape> = {
+  sheet: {
     root: s.STYLE<V>(
       {
         flexBasis: 0,

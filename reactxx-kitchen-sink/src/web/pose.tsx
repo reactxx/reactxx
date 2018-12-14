@@ -18,7 +18,7 @@ interface Shape extends TTyped.ShapeAncestor {
 
 const { STYLE, WEB } = getTypedEngine<Shape>()
 
-const config: TComponents.AuthorConfig<Shape> = {
+const config: TComponents.ComponentConfig<Shape> = {
     defaultPose: {
         root: {
             closed: {
@@ -47,7 +47,7 @@ const config: TComponents.AuthorConfig<Shape> = {
             }
         }
     },
-    defaultSheet: {
+    sheet: {
         root: STYLE<T>(
             {
                 display: 'flex',

@@ -16,29 +16,31 @@ const getDefaults = (theme, config: TComponents.Config) => {
     if (!config.componentId) config.componentId = ++platform._styles.componentIdCounter
     if (!config.displayName) config.displayName = `Comp${config.componentId}`
 
-    const { defaultProps, defaultSheet, overrideProps, overrideSheet, componentId, displayName } = config
+    const { props, sheet: _sheet, componentId, displayName } = config
+    const [authorProps, userProps] = props
+    const [authorSheet, userSheet] = _sheet
 
     const sheet = sheetFromThemeCache(
-        componentId, TAsTypedSheet(defaultSheet), theme, TAsTypedSheet(overrideSheet), displayName
+        componentId, TAsTypedSheet(authorSheet), theme, TAsTypedSheet(userSheet), displayName
     ) || {}
 
     if (window.__TRACE__) {
-        if (defaultProps) {
-            const { className, style, classes } = defaultProps
+        if (authorProps) {
+            const { className, style, classes } = authorProps
             warning(!classes && !className && !style, 'classes, className and styles are ignored in defautProps')
         }
-        if (overrideProps) {
-            const { className, style, classes } = overrideProps
+        if (userProps) {
+            const { className, style, classes } = userProps
             warning(!classes && !className && !style, 'classes, className and styles are ignored in overrideProps')
         }
     }
 
     return {
         sheet,
-        propsDefault: defaultProps,
-        themedPropsDefault: defaultProps && defaultProps.themedProps,
-        propsOverride: overrideProps,
-        themedPropsOverride: overrideProps && overrideProps.themedProps,
+        propsDefault: authorProps,
+        themedPropsDefault: authorProps && authorProps.themedProps,
+        propsOverride: userProps,
+        themedPropsOverride: userProps && userProps.themedProps,
     }
 
 }

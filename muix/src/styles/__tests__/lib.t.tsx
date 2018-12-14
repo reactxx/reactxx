@@ -28,8 +28,8 @@ export interface Theme {
 
 
 export const compCreator = (
-  config: TComponents.AuthorConfig<Shape>,
-  userConfig?: TComponents.UserConfig<Shape>,
+  config: TComponents.ComponentConfig<Shape>,
+  userConfig?: TComponents.ComponentConfig<Shape>,
   displayName?: 'Comp'
 ) => getComponentCreator(useStyles => props => {
   try {

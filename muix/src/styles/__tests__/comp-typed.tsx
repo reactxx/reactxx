@@ -10,7 +10,7 @@ interface ShapeLow extends TTyped.ShapeAncestor {
 }
 const { STYLE, IF } = getTypedEngine<ShapeLow>()
 
-const defaultSheet = {
+const sheet = {
   root: STYLE<V>(
     { backgroundColor: 'lightblue', margin: 10 },
     IF<V>(p => p.disabled, { backgroundColor: 'lightgray', /* ERROR: color: 'red'*/ })
@@ -22,11 +22,11 @@ const defaultSheet = {
 }
 
 interface Shape extends ShapeLow {
-  sheet: typeof defaultSheet
+  sheet: typeof sheet
 }
 
-const config: TComponents.AuthorConfig<Shape> = {
-  defaultSheet
+const config: TComponents.ComponentConfig<Shape> = {
+  sheet
 }
 
 const getComp: TComponents.GetComponent<Shape> = useStyles => props => {

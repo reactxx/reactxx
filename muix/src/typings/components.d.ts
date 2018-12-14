@@ -21,30 +21,34 @@ declare namespace TComponents {
   // CONFIGS
   //*************************************** */  
 
-  interface ComponentConfigLow extends TExtensions.Config {
+  interface ComponentConfig<R extends TTyped.Shape = TTyped.Shape> extends TExtensions.Config {
     // withCascaing?: boolean
+    props?: Partial<TComponents.Props<R>> // classes, css and styles are  ignored
+    sheet?: TTyped.SheetOrCreator<R>
   }
 
   // component type options
-  interface AuthorConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
-    defaultProps?: Partial<TComponents.Props<R>> // classes, css and styles are  ignored
-    defaultSheet?: TTyped.SheetOrCreator<R>
-  }
+  // interface ComponentConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfig<R> {
+  //   props?: Partial<TComponents.Props<R>> // classes, css and styles are  ignored
+  //   sheet?: TTyped.SheetOrCreator<R>
+  // }
 
-  interface UserConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfigLow {
-    overrideProps?: TComponents.Props<R> // classes, css and styles are ignored
-    overrideSheet?: TTyped.SheetOrCreator<R>
-  }
+  // interface ComponentConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfig<R> {
+  //   props?: TComponents.Props<R> // classes, css and styles are ignored
+  //   sheet?: TTyped.SheetOrCreator<R>
+  // }
 
-  interface Config<R extends TTyped.Shape = TTyped.Shape> extends AuthorConfig<R>, UserConfig<R> {
+  interface Config<R extends TTyped.Shape = TTyped.Shape> {
     componentId?: number // generated unique component type Id
     displayName?: string
+    props?: [Partial<TComponents.Props<R>>, Partial<TComponents.Props<R>>] // classes, css and styles are  ignored
+    sheet?: [TTyped.SheetOrCreator<R>,TTyped.SheetOrCreator<R>]
   }
 
   type ThemeContext<T extends any> = [T, (newTheme: T) => void]
 
   type ComponentCreator<R extends TTyped.Shape = TTyped.Shape> = (
-    userDisplayName?: string, userConfig?: TComponents.UserConfig<R>
+    userDisplayName?: string, userConfig?: TComponents.ComponentConfig<R>
   ) => React.SFC<TComponents.Props<R>>
 
   type GetComponent<R extends TTyped.Shape> = (
