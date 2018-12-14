@@ -21,7 +21,7 @@ declare namespace TComponents {
   // CONFIGS
   //*************************************** */  
 
-  interface ComponentConfigLow {
+  interface ComponentConfigLow extends TExtensions.Config {
     // withCascaing?: boolean
   }
 

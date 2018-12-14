@@ -12,19 +12,8 @@ SystemJS.config({
   map: {
     "reactxx-typings": "deploy/lib/typings/index",
     "reactxx-fela": "deploy/lib/fela/index",
-    "reactxx-sheeter": "deploy/lib/sheeter/index",
-    "reactxx-with-styles": "deploy/lib/with-styles/index",
-    "reactxx-with-state": "deploy/lib/with-state/index",
-    "reactxx-sheet-switch": "deploy/lib/sheet-switch/index",
-    "reactxx-sheet-switch/tests/index": "deploy/lib/sheet-switch/tests/index",
-    "reactxx-sheet-widths": "deploy/lib/sheet-widths/index",
-    "reactxx-sheet-widths/tests/index": "deploy/lib/sheet-widths//tests/index",
-    "reactxx-sheet-transition": "deploy/lib/sheet-transition/index",
-    "reactxx-sheet-transition/tests/index": "deploy/lib/sheet-transition/tests/index",
-    "reactxx-core/tests/index": "deploy/lib/core/tests/index",
-    "reactxx-core": "deploy/lib/core/index",
-    "reactxx-primitives": "deploy/lib/primitives/index",
-    "reactxx-primitives/tests/index": "deploy/lib/primitives/tests/index"
+    "reactxx-styles": "deploy/lib/styles/index",
+    "reactxx-primitives": "deploy/lib/primitives/index"
   }
 });
 
@@ -34,6 +23,7 @@ SystemJS.config({
     "npm:*.json"
   ],
   map: {
+    "react-pose": "npm:react-pose@4.0.4",
     "css-in-js-utils": "npm:css-in-js-utils@2.0.1",
     "isobject": "npm:isobject@3.0.1",
     "fela-utils": "npm:fela-utils@8.1.0",
@@ -87,8 +77,8 @@ SystemJS.config({
     "popper.js": "npm:popper.js@1.14.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",
     "prop-types": "npm:prop-types@15.6.2",
-    "react": "npm:react@16.7.0-alpha.0",
-    "react-dom": "npm:react-dom@16.7.0-alpha.0",
+    "react": "npm:react@16.7.0-alpha.2",
+    "react-dom": "npm:react-dom@16.7.0-alpha.2",
     "react-event-listener": "npm:react-event-listener@0.6.2",
     "react-jss": "npm:react-jss@8.6.1",
     "react-popper": "npm:react-popper@0.10.4",
@@ -107,7 +97,7 @@ SystemJS.config({
     "url": "npm:jspm-nodelibs-url@0.2.1",
     "util": "npm:jspm-nodelibs-util@0.2.2",
     "vm": "npm:jspm-nodelibs-vm@0.2.1",
-    "warning": "npm:warning@3.0.0",
+    "warning": "npm:warning@4.0.1",
     "zlib": "npm:jspm-nodelibs-zlib@0.2.3"
   },
   packages: {
@@ -975,26 +965,88 @@ SystemJS.config({
         "function-bind": "npm:function-bind@1.1.1"
       }
     },
-    "npm:scheduler@0.11.0": {
+    "npm:react-pose@4.0.4": {
       "map": {
-        "object-assign": "npm:object-assign@4.1.1",
-        "loose-envify": "npm:loose-envify@1.4.0"
+        "tslib": "npm:tslib@1.9.3",
+        "hey-listen": "npm:hey-listen@1.0.5",
+        "popmotion-pose": "npm:popmotion-pose@3.4.0",
+        "@emotion/is-prop-valid": "npm:@emotion/is-prop-valid@0.7.3"
       }
     },
-    "npm:react@16.7.0-alpha.0": {
+    "npm:popmotion-pose@3.4.0": {
+      "map": {
+        "tslib": "npm:tslib@1.9.3",
+        "hey-listen": "npm:hey-listen@1.0.5",
+        "pose-core": "npm:pose-core@2.0.2",
+        "popmotion": "npm:popmotion@8.5.4",
+        "style-value-types": "npm:style-value-types@3.0.7",
+        "@popmotion/easing": "npm:@popmotion/easing@1.0.1"
+      }
+    },
+    "npm:@emotion/is-prop-valid@0.7.3": {
+      "map": {
+        "@emotion/memoize": "npm:@emotion/memoize@0.7.1"
+      }
+    },
+    "npm:pose-core@2.0.2": {
+      "map": {
+        "hey-listen": "npm:hey-listen@1.0.5",
+        "tslib": "npm:tslib@1.9.3",
+        "@types/invariant": "npm:@types/invariant@2.2.29",
+        "@types/node": "npm:@types/node@10.12.15"
+      }
+    },
+    "npm:popmotion@8.5.4": {
+      "map": {
+        "hey-listen": "npm:hey-listen@1.0.5",
+        "tslib": "npm:tslib@1.9.3",
+        "style-value-types": "npm:style-value-types@3.0.7",
+        "@popmotion/easing": "npm:@popmotion/easing@1.0.1",
+        "framesync": "npm:framesync@4.0.1",
+        "stylefire": "npm:stylefire@2.3.3",
+        "@popmotion/popcorn": "npm:@popmotion/popcorn@0.3.1"
+      }
+    },
+    "npm:framesync@4.0.1": {
+      "map": {
+        "hey-listen": "npm:hey-listen@1.0.5"
+      }
+    },
+    "npm:stylefire@2.3.3": {
+      "map": {
+        "hey-listen": "npm:hey-listen@1.0.5",
+        "framesync": "npm:framesync@4.0.1",
+        "style-value-types": "npm:style-value-types@3.0.7"
+      }
+    },
+    "npm:@popmotion/popcorn@0.3.1": {
+      "map": {
+        "hey-listen": "npm:hey-listen@1.0.5",
+        "@popmotion/easing": "npm:@popmotion/easing@1.0.1",
+        "framesync": "npm:framesync@4.0.1",
+        "style-value-types": "npm:style-value-types@3.0.7"
+      }
+    },
+    "npm:scheduler@0.12.0-alpha.3": {
+      "map": {
+        "loose-envify": "npm:loose-envify@1.4.0",
+        "object-assign": "npm:object-assign@4.1.1"
+      }
+    },
+    "npm:react@16.7.0-alpha.2": {
       "map": {
         "loose-envify": "npm:loose-envify@1.4.0",
         "object-assign": "npm:object-assign@4.1.1",
         "prop-types": "npm:prop-types@15.6.2",
-        "scheduler": "npm:scheduler@0.11.0"
+        "scheduler": "npm:scheduler@0.12.0-alpha.3"
       }
     },
-    "npm:react-dom@16.7.0-alpha.0": {
+    "npm:react-dom@16.7.0-alpha.2": {
       "map": {
         "loose-envify": "npm:loose-envify@1.4.0",
+        "prop-types": "npm:prop-types@15.6.2",
         "object-assign": "npm:object-assign@4.1.1",
-        "scheduler": "npm:scheduler@0.11.0",
-        "prop-types": "npm:prop-types@15.6.2"
+        "scheduler": "npm:scheduler@0.12.0-alpha.3"
       }
     }
   }

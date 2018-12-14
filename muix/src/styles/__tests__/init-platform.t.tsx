@@ -66,14 +66,11 @@ export const initPlatform = (isWeb: boolean, trace: Trace = {}) => {
 
     afterEach(cleanup)
 
-    window.isWeb = isWeb
-    window.__TRACE__ = trace
-
     resetPlatform()
     if (isWeb) {
-        initSheeter$Web()
+        initSheeter$Web(trace)
     } else {
-        initSheeter$Native()
+        initSheeter$Native(trace)
     }
 }
 

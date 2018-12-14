@@ -1,9 +1,19 @@
-import { TComponents } from 'reactxx-typings'
+import { TComponents, TTyped } from 'reactxx-typings'
 import { TPrimitives } from './shapes'
+
+import {DomPopmotionConfig} from 'popmotion-pose' 
 
 declare module 'reactxx-typings' {
 
     namespace TExtensions {
+
+        interface Shape { 
+            sheet?: Record<string, TTyped.RulesetIds>
+        }
+
+        interface Config { 
+            defaultPose?: DomPopmotionConfig
+        }
 
         interface Platform {
             View?: TComponents.SFC<TPrimitives.ViewShape>

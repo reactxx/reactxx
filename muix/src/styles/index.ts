@@ -20,7 +20,10 @@ export { getTypedEngine } from './utils/get-engine'
 import { init } from './$web'
 import { initGlobals } from './utils/globals'
 
-export const initSheeter$Web = (force?: boolean) => initGlobals(force, init)
+export const initSheeter$Web = (trace: Trace = {}, force?: boolean) => {
+    window.isWeb = true
+    initGlobals(trace, force, init)
+}
 export const initSheeter = initSheeter$Web
 
 //initSheeter()

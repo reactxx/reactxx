@@ -20,5 +20,8 @@ export { View, Text, Image, ScrollView } from './$native'
 import { init } from './$native'
 import { initGlobals } from './utils/globals'
 
-export const initSheeter$Native = (force?: boolean) => initGlobals(force, init)
+export const initSheeter$Native = (trace: Trace = {}, force?: boolean) => {
+    window.isWeb = false
+    initGlobals(trace, force, init)
+}
 export const initSheeter = initSheeter$Native

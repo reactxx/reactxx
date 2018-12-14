@@ -12,6 +12,7 @@
     //"outFile": "all.js",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+
     "jsx": "react",
     "inlineSourceMap": true,
     //"sourceMap": false,
@@ -129,6 +130,7 @@
   "include": [
     "src/typings.d.ts",
     "src/ks/common/ks.d.ts",
+    "src/ks/web",
 
     "src/typings",
     "src/fela",

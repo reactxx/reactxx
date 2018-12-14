@@ -17,8 +17,9 @@ export const assignPlatform = (gl: Platform) => Object.assign(platform, gl)
 
 export const platform: Platform = {}
 
-export const initGlobals = (force: boolean, platformDependentInit: () => void) => {
+export const initGlobals = (trace: Trace = {}, force: boolean, platformDependentInit: () => void) => {
     if (force) resetPlatform()
+    window.__TRACE__ = trace
     if (platform._styles) return
 
     platform._styles = {

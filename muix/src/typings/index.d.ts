@@ -9,5 +9,6 @@ export namespace TExtensions {
 
     interface Platform { }
     interface Shape { }
+    interface Config { }
 
 }

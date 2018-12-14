@@ -6,6 +6,7 @@ import { toClassNamesWithQuery } from './utils/to-classnames'
 import { TAsEngineClassName } from './utils/from-engine'
 
 export const init = () => {
+  
   Fela.initFela$Web(platform)
 
   platform._styles.breakpointSet = new Set()

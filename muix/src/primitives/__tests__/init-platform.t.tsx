@@ -18,9 +18,9 @@ export const initPlatform = (isWeb: boolean, trace: Trace = {}) => {
 
 }
 
-function mockComponent(data: string, props, ...children: any[]) {
-        return <div data-type={data.toUpperCase()} {...props} children={children} />
-}
+// function mockComponent(data: string, props, ...children: any[]) {
+//         return <div data-type={data.toUpperCase()} {...props} children={children} />
+// }
 
 
 

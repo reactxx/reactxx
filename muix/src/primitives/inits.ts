@@ -1,5 +1,5 @@
 import { getComponentCreator } from "reactxx-styles"
-import { Platform, platform, resetPlatform } from 'reactxx-styles'
+import { Platform, platform, resetPlatform, initSheeter } from 'reactxx-styles'
 import { TComponents } from 'reactxx-typings'
 
 import { TPrimitives } from './shapes'
@@ -44,8 +44,7 @@ export const inits = (
     const scrollViewCreator = getComponentCreator(getScrollView, CompNames.ScrollView, scrollViewConfig, false)
     const ScrollView = scrollViewCreator()
 
-    const initPrimitives = (force?: boolean) => {
-        if (force) resetPlatform()
+    const initPlatform = () => {
         if (platform.View) return
         const primitivies: Platform = {
             viewCreator, View, getView,
@@ -60,7 +59,7 @@ export const inits = (
     }
 
     return {
-        initPrimitives,
+        initPlatform,
         viewCreator, View,
         scrollViewCreator, ScrollView,
         iconCreator, Icon,

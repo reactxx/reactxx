@@ -4,7 +4,7 @@ import generateClassName from 'fela/lib/generateClassName';
 import isPlainObject from 'isobject';
 import { IRenderer } from 'fela'
 import { TEngine } from 'reactxx-typings'
-import warning = require('warning');
+import warning from 'warning'
 
 export interface IRendererEx extends IRenderer {
   renderRuleEx(style: {}, tracePath?: string): TEngine.AtomicWebs
