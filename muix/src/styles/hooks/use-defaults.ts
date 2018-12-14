@@ -14,7 +14,7 @@ const getDefaults = (theme, config: TComponents.Config) => {
 
     //on demand componentId initialization and missing displayName fix
     if (!config.componentId) config.componentId = ++platform._styles.componentIdCounter
-    if (!config.displayName) config.displayName = `Comp${config.componentId}`
+    if (!config.displayName) config.displayName = `comp-${config.componentId}`
 
     const { props, sheet: _sheet, componentId, displayName } = config
     const [authorProps, userProps] = props

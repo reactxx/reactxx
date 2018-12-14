@@ -25,24 +25,15 @@ declare namespace TComponents {
     // withCascaing?: boolean
     props?: Partial<TComponents.Props<R>> // classes, css and styles are  ignored
     sheet?: TTyped.SheetOrCreator<R>
+    pose?
   }
-
-  // component type options
-  // interface ComponentConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfig<R> {
-  //   props?: Partial<TComponents.Props<R>> // classes, css and styles are  ignored
-  //   sheet?: TTyped.SheetOrCreator<R>
-  // }
-
-  // interface ComponentConfig<R extends TTyped.Shape = TTyped.Shape> extends ComponentConfig<R> {
-  //   props?: TComponents.Props<R> // classes, css and styles are ignored
-  //   sheet?: TTyped.SheetOrCreator<R>
-  // }
 
   interface Config<R extends TTyped.Shape = TTyped.Shape> {
     componentId?: number // generated unique component type Id
     displayName?: string
-    props?: [Partial<TComponents.Props<R>>, Partial<TComponents.Props<R>>] // classes, css and styles are  ignored
-    sheet?: [TTyped.SheetOrCreator<R>,TTyped.SheetOrCreator<R>]
+    props?: Partial<TComponents.Props<R>>[] // classes, css and styles are  ignored
+    sheet?: TTyped.SheetOrCreator<R>[]
+    pose?:any[]
   }
 
   type ThemeContext<T extends any> = [T, (newTheme: T) => void]

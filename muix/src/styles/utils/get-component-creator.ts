@@ -10,21 +10,22 @@ export const getComponentCreator = <R extends TTyped.Shape>(
         const config: TComponents.Config<R> = {
             displayName: userDisplayName || authorDisplayName,
             props:[null, null],
-            sheet:[null, null]
+            sheet:[null, null],
+            pose:[null, null]
             //componentId: platform is not initialized yet, fill during first ussage
         }
-        if (authorConfig) {
-            const {props, sheet,...rest} = authorConfig
-            config.props[0] = props
-            config.sheet[0] = sheet
+
+        const addCfg = (cfg: TComponents.ComponentConfig<R>, idx: number) => {
+            if (!cfg) return
+            const {props, sheet, pose, ...rest} = cfg
+            config.props[idx] = props
+            config.sheet[idx] = sheet
+            config.pose[idx] = pose
             Object.assign(config, rest)
         }
-        if (userConfig) {
-            const {props, sheet,...rest} = userConfig
-            config.props[1] = props
-            config.sheet[1] = sheet
-            Object.assign(config, rest)
-        }
+        addCfg(authorConfig, 0)
+        addCfg(userConfig, 1)
+
         const _useStyles = (props: TComponents.Props<R>) => useStyles<R>(props, config)
         const Comp = getComp(_useStyles, par)
         Comp.displayName = config.displayName

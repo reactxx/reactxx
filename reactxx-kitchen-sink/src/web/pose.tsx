@@ -19,8 +19,8 @@ interface Shape extends TTyped.ShapeAncestor {
 const { STYLE, WEB } = getTypedEngine<Shape>()
 
 const config: TComponents.ComponentConfig<Shape> = {
-    defaultPose: {
-        root: {
+    pose: {
+        ripple: {
             closed: {
                 opacity: 0,
                 scale: 0,

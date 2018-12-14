@@ -8,11 +8,11 @@ declare module 'reactxx-typings' {
     namespace TExtensions {
 
         interface Shape { 
-            sheet?: Record<string, TTyped.RulesetIds>
+            pose?: Record<string, TTyped.RulesetIds>
         }
 
         interface Config { 
-            defaultPose?: DomPopmotionConfig
+            pose?: DomPopmotionConfig
         }
 
         interface Platform {
