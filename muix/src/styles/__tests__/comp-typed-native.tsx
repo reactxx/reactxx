@@ -26,7 +26,8 @@ interface Shape extends ShapeLow {
 }
 
 const config: TComponents.ComponentConfig<Shape> = {
-  sheet
+  displayName: 'CompDisplayName',
+  $sheet: sheet
 }
 
 const getComp: TComponents.GetComponent<Shape> = useStyles => props => {
@@ -40,7 +41,7 @@ const getComp: TComponents.GetComponent<Shape> = useStyles => props => {
   </View>
 }
 
-const compCreator = getComponentCreator(getComp, 'CompDisplayName', config)
+const compCreator = getComponentCreator(getComp, config)
 
 const Comp = compCreator()
 

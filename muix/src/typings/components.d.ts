@@ -6,7 +6,7 @@ declare namespace TComponents {
   //******************** Cross platform component props
   type Props<R extends TTyped.Shape = TTyped.Shape> =
     TTyped.getProps<R> &
-    PropsLow<R> 
+    PropsLow<R>
 
   interface PropsLow<R extends TTyped.Shape> extends TTyped.RootProps<R> {
     className?: TTyped.RulesetOrCreator<R>
@@ -21,25 +21,26 @@ declare namespace TComponents {
   // CONFIGS
   //*************************************** */  
 
-  interface ComponentConfig<R extends TTyped.Shape = TTyped.Shape> extends TExtensions.Config {
+  interface ComponentConfig<R extends TTyped.Shape = TTyped.Shape> extends TExtensions.ComponentConfig {
     // withCascaing?: boolean
-    props?: Partial<TComponents.Props<R>> // classes, css and styles are  ignored
-    sheet?: TTyped.SheetOrCreator<R>
-    pose?
+    displayName?: string
+    $props?: Partial<TComponents.Props<R>> // classes, css and styles are  ignored
+    $sheet?: TTyped.SheetOrCreator<R>
   }
 
-  interface Config<R extends TTyped.Shape = TTyped.Shape> {
+  type ComponentConfigs<R extends TTyped.Shape = TTyped.Shape> = ComponentConfig<R> | ComponentConfig<R>[]
+
+  interface Config<R extends TTyped.Shape = TTyped.Shape> extends TExtensions.Config {
     componentId?: number // generated unique component type Id
     displayName?: string
-    props?: Partial<TComponents.Props<R>>[] // classes, css and styles are  ignored
-    sheet?: TTyped.SheetOrCreator<R>[]
-    pose?:any[]
+    $props?: Partial<TComponents.Props<R>>[] // classes, css and styles are  ignored
+    $sheet?: TEngine.Sheet[]
   }
 
   type ThemeContext<T extends any> = [T, (newTheme: T) => void]
 
   type ComponentCreator<R extends TTyped.Shape = TTyped.Shape> = (
-    userDisplayName?: string, userConfig?: TComponents.ComponentConfig<R>
+    userConfig?: TComponents.ComponentConfigs<R>
   ) => React.SFC<TComponents.Props<R>>
 
   type GetComponent<R extends TTyped.Shape> = (

@@ -43,7 +43,7 @@ export const compCreator = (
   } catch {
     return <div>ERROR</div>
   }
-}, null, config)(displayName, userConfig) 
+}, config)(userConfig) 
 
 // {
 //   const res: TComponents.SFC<Shape> = props => {

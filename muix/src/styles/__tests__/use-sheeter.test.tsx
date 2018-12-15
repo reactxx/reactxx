@@ -30,14 +30,14 @@ describe("USE SHEETER", () => {
       wrapper.unmount()
     })
     it('03: just div', () => {
-      const Comp = compCreator({ sheet: { root: {} } }, null)
+      const Comp = compCreator({ $sheet: { root: {} } }, null)
       const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
 
     it('04: with sheet', () => {
-      const Comp = compCreator({ sheet: { root: { color: 'red' } } }, null)
+      const Comp = compCreator({ $sheet: { root: { color: 'red' } } }, null)
       const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
@@ -45,8 +45,8 @@ describe("USE SHEETER", () => {
 
     it('05: with sheet override', () => {
       const Comp = compCreator(
-        { sheet: { root: { color: 'red' } } },
-        { sheet: { root: { color: 'green' } } }
+        { $sheet: { root: { color: 'red' } } },
+        { $sheet: { root: { color: 'green' } } }
       )
       const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
@@ -55,8 +55,8 @@ describe("USE SHEETER", () => {
 
     it('06: with classes override', () => {
       const Comp = compCreator(
-        { sheet: { root: { color: 'red' } } },
-        { sheet: { root: { color: 'green' } } }
+        { $sheet: { root: { color: 'red' } } },
+        { $sheet: { root: { color: 'green' } } }
       )
       const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} />)
       expect(wrapper.container).toMatchSnapshot()
@@ -65,8 +65,8 @@ describe("USE SHEETER", () => {
 
     it('07: with css override', () => {
       const Comp = compCreator(
-        { sheet: { root: { color: 'red' } } },
-        { sheet: { root: { color: 'green' } } }
+        { $sheet: { root: { color: 'red' } } },
+        { $sheet: { root: { color: 'green' } } }
       )
       const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} className={{ color: 'yellow' }} />)
       expect(wrapper.container).toMatchSnapshot()
@@ -75,8 +75,8 @@ describe("USE SHEETER", () => {
 
     it('08: with style override', () => {
       const Comp = compCreator(
-        { sheet: { root: { color: 'red' } } },
-        { sheet: { root: { color: 'green' } } }
+        { $sheet: { root: { color: 'red' } } },
+        { $sheet: { root: { color: 'green' } } }
       )
       const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} className={{ color: 'yellow' }} style={{ color: 'maroon' }} />)
       expect(wrapper.container).toMatchSnapshot()
@@ -84,7 +84,7 @@ describe("USE SHEETER", () => {
     })
 
     it('09: theme, with sheet', () => {
-      const Comp = compCreator({ sheet: theme => ({ root: { color: theme.primaryColor } }) }, null)
+      const Comp = compCreator({ $sheet: theme => ({ root: { color: theme.primaryColor } }) }, null)
       const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
@@ -92,8 +92,8 @@ describe("USE SHEETER", () => {
 
     it('10: theme, with sheet override', () => {
       const Comp = compCreator(
-        { sheet: { root: { color: 'red' } } },
-        { sheet: theme => ({ root: { color: theme.primaryColor } }) }
+        { $sheet: { root: { color: 'red' } } },
+        { $sheet: theme => ({ root: { color: theme.primaryColor } }) }
       )
       const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
@@ -102,8 +102,8 @@ describe("USE SHEETER", () => {
 
     it('11: theme, with classes override', () => {
       const Comp = compCreator(
-        { sheet: { root: { color: 'red' } } },
-        { sheet: { root: { color: 'green' } } }
+        { $sheet: { root: { color: 'red' } } },
+        { $sheet: { root: { color: 'green' } } }
       )
       const wrapper = render(<Comp classes={theme => ({ root: { color: theme.primaryColor } })} />)
       expect(wrapper.container).toMatchSnapshot()
@@ -112,8 +112,8 @@ describe("USE SHEETER", () => {
 
     it('12: theme, with classNameX override', () => {
       const Comp = compCreator(
-        { sheet: { root: { color: 'red' } } },
-        { sheet: { root: { color: 'green' } } }
+        { $sheet: { root: { color: 'red' } } },
+        { $sheet: { root: { color: 'green' } } }
       )
       const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} className={theme => ({ color: theme.primaryColor })} />)
       expect(wrapper.container).toMatchSnapshot()
@@ -122,8 +122,8 @@ describe("USE SHEETER", () => {
 
     it('13: theme, with styleX override', () => {
       const Comp = compCreator(
-        { sheet: { root: { color: 'red' } } },
-        { sheet: { root: { color: 'green' } } }
+        { $sheet: { root: { color: 'red' } } },
+        { $sheet: { root: { color: 'green' } } }
       )
       const wrapper = render(<Comp classes={{ root: { color: 'blue' } }} className={{ color: 'yellow' }} style={theme => ({ color: theme.primaryColor })} />)
       expect(wrapper.container).toMatchSnapshot()
@@ -134,8 +134,8 @@ describe("USE SHEETER", () => {
     it('14: default props', () => {
       const Comp = compCreator(
         {
-          sheet: { root: {} },
-          props: { p1: 'defaultProp' }
+          $sheet: { root: {} },
+          $props: { p1: 'defaultProp' }
         },
         null
       )
@@ -147,10 +147,10 @@ describe("USE SHEETER", () => {
     it('15: override props', () => {
       const Comp = compCreator(
         {
-          sheet: { root: {} },
-          props: { p1: 'defaultProp' }
+          $sheet: { root: {} },
+          $props: { p1: 'defaultProp' }
         },
-        { props: { p1: 'overrideProp' } }
+        { $props: { p1: 'overrideProp' } }
       )
       const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
@@ -160,10 +160,10 @@ describe("USE SHEETER", () => {
     it('16: props', () => {
       const Comp = compCreator(
         {
-          sheet: { root: {} },
-          props: { p1: 'defaultProp' }
+          $sheet: { root: {} },
+          $props: { p1: 'defaultProp' }
         },
-        { props: { p1: 'overrideProp' } }
+        { $props: { p1: 'overrideProp' } }
       )
       const wrapper = render(<Comp p1='componentProp' />)
       expect(wrapper.container).toMatchSnapshot()
@@ -173,8 +173,8 @@ describe("USE SHEETER", () => {
     it('17: theme, default props', () => {
       const Comp = compCreator(
         {
-          sheet: { root: {} },
-          props: { p1: 'defaultProp', themedProps: theme => ({ p1: theme.p1Prop }) }
+          $sheet: { root: {} },
+          $props: { p1: 'defaultProp', themedProps: theme => ({ p1: theme.p1Prop }) }
         },
         null
       )
@@ -186,10 +186,10 @@ describe("USE SHEETER", () => {
     it('18: theme, override props', () => {
       const Comp = compCreator(
         {
-          sheet: { root: {} },
-          props: { p1: 'defaultProp' }
+          $sheet: { root: {} },
+          $props: { p1: 'defaultProp' }
         },
-        { props: { p1: 'overrideProp', themedProps: theme => ({ p1: theme.p1Prop }) } }
+        { $props: { p1: 'overrideProp', themedProps: theme => ({ p1: theme.p1Prop }) } }
       )
       const wrapper = render(<Comp />)
       expect(wrapper.container).toMatchSnapshot()
@@ -199,10 +199,10 @@ describe("USE SHEETER", () => {
     it('19: theme, props', () => {
       const Comp = compCreator(
         {
-          sheet: { root: {} },
-          props: { p1: 'defaultProp' }
+          $sheet: { root: {} },
+          $props: { p1: 'defaultProp' }
         },
-        { props: { p1: 'overrideProp' } }
+        { $props: { p1: 'overrideProp' } }
       )
       const wrapper = render(<Comp p1='componentProp' themedProps={theme => ({ p1: theme.p1Prop })} />)
       expect(wrapper.container).toMatchSnapshot()
@@ -210,21 +210,21 @@ describe("USE SHEETER", () => {
     })
 
     it('20: style', () => {
-      const Comp = compCreator({ sheet: { root: {} } })
+      const Comp = compCreator({ $sheet: { root: {} } })
       const wrapper = render(<Comp style={{color: 'red', margin: 5, $web: {margin: 10}, $native: {margin: 20}}}/>)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
 
     it('21: style with classes', () => {
-      const Comp = compCreator({ sheet: { root: { color: 'red'} } })
+      const Comp = compCreator({ $sheet: { root: { color: 'red'} } })
       const wrapper = render(<Comp className={{margin: 20}} style={{color: 'blue', $web: {margin: 30}, $native: {margin: 40}}}/>)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()
     })
 
     it('22: user config only', () => {
-      const Comp = compCreator(null, { sheet: { root: { color: 'red'} } })
+      const Comp = compCreator(null, { $sheet: { root: { color: 'red'} } })
       const wrapper = render(<Comp/>)
       expect(wrapper.container).toMatchSnapshot()
       wrapper.unmount()

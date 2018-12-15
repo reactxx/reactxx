@@ -20,7 +20,8 @@ interface Shape extends TTyped.ShapeAncestor {
 const { STYLE, WEB } = getTypedEngine<Shape>()
 
 const config: TComponents.ComponentConfig<Shape> = {
-    pose: {
+    displayName: 'pose-example',
+    $pose: {
         ripple: {
             closed: {
                 opacity: 0.1,
@@ -48,7 +49,7 @@ const config: TComponents.ComponentConfig<Shape> = {
             }
         }
     },
-    sheet: {
+    $sheet: {
         root: STYLE<T>(
             {
                 display: 'flex',
@@ -111,6 +112,8 @@ const Box = posed.div({
     }
 })
 
+
+
 const getExample: TComponents.GetComponent<Shape> = useStyles => props => {
 
     const
@@ -119,18 +122,20 @@ const getExample: TComponents.GetComponent<Shape> = useStyles => props => {
         { isActive, event } = activeState,
         boxEl = React.useRef(null)
 
-    if (isActive && event) {
+    React.useMemo(() => {
+        if (!isActive) return
         const
             { currentTarget: { clientHeight, clientWidth }, clientX, clientY } = event,
             mw = Math.max(clientWidth - clientX, clientX),
             mh = Math.max(clientHeight - clientY, clientY),
-            diameter = Math.sqrt(mh * mh + mw * mw) * 2,
-            style = boxEl.current.style
+            diameter = Math.sqrt(mh * mh + mw * mw) * 2
 
+        const style = boxEl.current.style
         style.width = style.height = diameter + "px"
         style.top = clientY - diameter / 2 + "px"
         style.left = clientX - diameter / 2 + "px"
-    }
+
+    }, [isActive])
 
     return <div
         {...getRootWebStyleProps()}
@@ -147,6 +152,6 @@ const getExample: TComponents.GetComponent<Shape> = useStyles => props => {
 
 }
 
-const Example = getComponentCreator(getExample, 'pose-example', config)()
+const Example = getComponentCreator(getExample, config)()
 
 export default Example

@@ -23,14 +23,14 @@ export const ThemeProvider = <T extends any>(props: ThemeProviderProps<T>) => {
   const { children, theme: themeInit } = props
   let [theme, setTheme] = React.useState<T>(themeInit)
   if (!theme) [theme, setTheme] = defaultTheme<T>(setTheme)
-  return <themeContext.Provider value={[theme, setTheme] }>{children}</themeContext.Provider>
+  return <themeContext.Provider value={[theme, setTheme]}>{children}</themeContext.Provider>
 }
 
 type ThemeProviderProps<T> = { theme: T; children?: React.ReactNode }
 
 export const sheetFromThemeCache = (
-  componentId: number, sheetOrCreator: TEngine.SheetOrCreator,
-  theme, defaultClasses: TEngine.SheetOrCreator,
+  componentId: number, sheetOrCreators: TEngine.SheetOrCreator[],
+  theme,
   path: string
 ) => {
   const cache = !theme ? platform._styles.$cache : (theme.$cache || (theme.$cache = {}))
@@ -38,10 +38,14 @@ export const sheetFromThemeCache = (
   let value: TEngine.Sheet = cache[componentId]
   if (value) return value
 
-  value = atomizeSheet(sheetOrCreator, theme, path + '.sheet')
-  if (defaultClasses) {
-    const _defaultClasses = atomizeSheet(defaultClasses, theme, path + '.option.classes')
-    value = mergeSheets([value, _defaultClasses])
+  if (!sheetOrCreators || sheetOrCreators.length === 0) value = {}
+  else {
+    const sheets:TEngine.Sheet[] = []
+    sheetOrCreators.forEach((sheet, idx) => {
+      if (!sheet) return
+      sheets.push(atomizeSheet(sheet, theme, path + (idx===0 ? '.sheet' : '.sheetOverride')))
+    })
+    value = mergeSheets(sheets)
   }
 
   cache[componentId] = value

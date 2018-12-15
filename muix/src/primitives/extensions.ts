@@ -11,9 +11,13 @@ declare module 'reactxx-typings' {
             pose?: Record<string, TTyped.RulesetIds>
         }
 
-        interface Config { 
-            pose?: DomPopmotionConfig
+        interface ComponentConfig { 
+            $pose?: DomPopmotionConfig
         }
+        interface Config { 
+            pose?: DomPopmotionConfig[]
+        }
+
 
         interface Platform {
             View?: TComponents.SFC<TPrimitives.ViewShape>

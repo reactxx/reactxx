@@ -4,37 +4,31 @@ interface ActiveState {
     isActive?: boolean
     event?: React.MouseEvent
 }
-type SetActiveState = (isActive: boolean) => (event: React.MouseEvent) => void
 type UseActive = [ActiveState, React.MouseEventHandler<Element>, React.MouseEventHandler<Element>]
 
 export const useActive = () => {
-    const [activeStateLow, setActiveStateLow] = React.useState<ActiveState>({})
-    const { isActive, event } = activeStateLow
 
-    // usePrevious
-    const oldIsActive = React.useRef(false)
-    React.useEffect(() => { oldIsActive.current = isActive })
+    const [activeState, setActiveState] = React.useState<ActiveState>({})
 
-    const activeState: ActiveState = {
-        isActive,
-        event: oldIsActive.current === isActive ? null : event // event is valid only for just changed active state
-    }
-    const setActiveState = (isActive: boolean) => (event: React.MouseEvent) => {
-        setActiveStateLow({ isActive, event: {...event} })
+    const setActiveStateCreator = (isActive: boolean) => (event: React.MouseEvent) => {
+        setActiveState({ isActive, event: {...event} })
     }
 
-    return [activeState, setActiveState(true), setActiveState(false)] as UseActive
+    return [activeState, setActiveStateCreator(true), setActiveStateCreator(false)] as UseActive
 }
 
-const ripple: React.SFC<{ activeState: ActiveState }> = ({ activeState: { isActive, event } }) => {
-    if (isActive && event) {
+const ripple: React.SFC<{ activeState: ActiveState }> = ({ activeState: {isActive, event} }) => {
+    const poseElement = React.useRef(null)
+    React.useMemo(() => {
+        if (!isActive) return
         // set div top, left, width, height
-    }
-    return <div data-pose={isActive ? 'opened' : 'closed'} />
+    }, [isActive])
+    return <div ref={poseElement} data-pose={isActive ? 'opened' : 'closed'} />
 }
 const Ripple = React.memo(ripple)
 
 const Comp: React.SFC = () => {
+
     const [activeState, activeStart, activeEnd] = useActive()
 
     return <div
