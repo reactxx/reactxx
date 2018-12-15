@@ -1,4 +1,5 @@
 export * from './shapes'
+export { useActive } from './use-active'
 
 import { initSheeter } from 'reactxx-styles'
 

@@ -15,7 +15,7 @@ declare namespace TComponents {
     themedProps?: (theme: TTyped.getTheme<R>) => Props<R>
   }
 
-  type SFC<R extends TTyped.Shape = TTyped.Shape> = React.SFC<Props<R>> //& TEngine.IsReactXXComponent
+  type SFC<R extends TTyped.Shape = TTyped.Shape> = React.SFC<Props<R>>
 
   //*************************************** */  
   // CONFIGS
