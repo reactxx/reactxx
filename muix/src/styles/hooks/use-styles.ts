@@ -8,9 +8,9 @@ import { mergePropsCode } from '../utils/merge'
 
 export const useStylesUntyped = (props, config?) => useStyles(props, config) as any
 
-export const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
+const useStylesLow = <R extends TTyped.Shape = TTyped.Shape>(
     props: TComponents.Props<R>,
-    config: TComponents.Config
+    config: TComponents.Config,
 ) => {
 
     // theme
@@ -52,3 +52,13 @@ export const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
     } as TComponents.UseStylesResult<R>
 }
 
+const extensions: TComponents.UseStylesExtension[] = []
+
+export const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
+    props: TComponents.Props<R>,
+    config: TComponents.Config,
+) => {
+    let res = useStylesLow(props, config)
+    extensions.forEach(ext => res = ext(props, config, res))
+    return res
+}

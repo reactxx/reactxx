@@ -1,5 +1,6 @@
 export * from './shapes'
 export { useActive } from './use-active'
+export { default as Ripple } from './ripple'
 
 import { initSheeter } from 'reactxx-styles'
 

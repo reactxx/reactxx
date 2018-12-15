@@ -15,7 +15,7 @@ declare module 'reactxx-typings' {
             $pose?: DomPopmotionConfig
         }
         interface Config { 
-            pose?: DomPopmotionConfig[]
+            $pose?: DomPopmotionConfig[]
         }
 
 

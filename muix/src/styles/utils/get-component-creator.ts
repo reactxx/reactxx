@@ -18,7 +18,18 @@ export const getComponentCreator = <R extends TTyped.Shape>(
         return Comp
     }
 
-export const mergeConfig = <R extends TTyped.Shape>(input: TComponents.ComponentConfig<R>, config?: TComponents.Config<R>) => {
+export const getComponent = <R extends TTyped.Shape>(
+    getComp: TComponents.GetComponent<R>, configs?: TComponents.ComponentConfigs<R>, par?
+) => {
+    const config = mergeConfigs(Array.isArray(configs) ? configs : [configs])
+    const _useStyles = (props: TComponents.Props<R>) => useStyles<R>(props, config)
+    const Comp = getComp(_useStyles, par)
+    Comp.displayName = config.displayName
+    return Comp
+}
+
+
+const mergeConfig = <R extends TTyped.Shape>(input: TComponents.ComponentConfig<R>, config?: TComponents.Config<R>) => {
     if (!config) config = {}
     if (!input) return config
     for (const p in input) {
@@ -33,19 +44,9 @@ export const mergeConfig = <R extends TTyped.Shape>(input: TComponents.Component
 }
 
 const mergeConfigs = <R extends TTyped.Shape>(inputs: TComponents.ComponentConfig<R>[]) => {
-    const config:TComponents.Config<R> = {}
+    const config: TComponents.Config<R> = {}
     for (const input of inputs) input && mergeConfig(input, config)
     return config
-}
-
-export const getComponent = <R extends TTyped.Shape>(
-    getComp: TComponents.GetComponent<R>, input?: TComponents.ComponentConfig<R>, par?
-) => {
-    const config = mergeConfig(input)
-    const _useStyles = (props: TComponents.Props<R>) => useStyles<R>(props, config)
-    const Comp = getComp(_useStyles, par)
-    Comp.displayName = config.displayName
-    return Comp
 }
 
 export const getComponentCreatorUntyped = (authorDisplayName, authorConfig, getComp, par?) =>

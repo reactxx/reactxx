@@ -24,7 +24,7 @@ declare namespace TComponents {
   interface ComponentConfig<R extends TTyped.Shape = TTyped.Shape> extends TExtensions.ComponentConfig {
     // withCascaing?: boolean
     displayName?: string
-    $props?: Partial<TComponents.Props<R>> // classes, css and styles are  ignored
+    $props?: Partial<Props<R>> // classes, css and styles are  ignored
     $sheet?: TTyped.SheetOrCreator<R>
   }
 
@@ -33,24 +33,31 @@ declare namespace TComponents {
   interface Config<R extends TTyped.Shape = TTyped.Shape> extends TExtensions.Config {
     componentId?: number // generated unique component type Id
     displayName?: string
-    $props?: Partial<TComponents.Props<R>>[] // classes, css and styles are  ignored
+    $props?: Partial<Props<R>>[] // classes, css and styles are  ignored
     $sheet?: TEngine.Sheet[]
   }
 
   type ThemeContext<T extends any> = [T, (newTheme: T) => void]
 
   type ComponentCreator<R extends TTyped.Shape = TTyped.Shape> = (
-    userConfig?: TComponents.ComponentConfigs<R>
-  ) => React.SFC<TComponents.Props<R>>
+    userConfig?: ComponentConfigs<R>
+  ) => React.SFC<Props<R>>
 
   type GetComponent<R extends TTyped.Shape> = (
     useStyles: UseStyles<R>,
     par?
-  ) => TComponents.SFC<R>
+  ) => SFC<R>
 
   type UseStyles<R extends TTyped.Shape = TTyped.Shape> = (
-    props: TComponents.Props<R>
+    props: Props<R>,
   ) => UseStylesResult<R>
+
+  type UseStylesExtension<R extends TTyped.Shape = TTyped.Shape> = (
+    props: Props<R>,
+    config: Config,
+    oldResult: UseStylesResult<R>
+  ) => UseStylesResult<R>
+
 
   interface UseStylesResult<R extends TTyped.Shape> {
     propsCode: TTyped.PropsCode<R>
