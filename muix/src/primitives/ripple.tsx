@@ -4,6 +4,7 @@ import warning from "warning"
 
 import { TComponents, TTyped, T } from 'reactxx-typings'
 import { getTypedEngine, getComponent } from 'reactxx-styles'
+import { useStyles } from "reactxx-styles"
 
 import { ActiveState } from './use-active'
 
@@ -86,10 +87,10 @@ const Box = posed.div({
   }
 })
 
-const ripple: TComponents.GetComponent<Shape> = useStyles => props => {
+const ripple: TComponents.GetComponent<Shape> = config => props => {
 
   const
-    { getRootWebStyleProps, propsCode: { $rootWebProps, activeState: { isActive, event } } } = useStyles(props),
+    { getRootWebStyleProps, propsCode: { $rootWebProps, activeState: { isActive, event } } } = useStyles<Shape>(props, config),
     poseElement = React.useRef(null)
 
   React.useMemo(() => {

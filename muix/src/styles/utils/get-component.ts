@@ -1,23 +1,19 @@
-﻿//import React from 'react'
-import { TTyped, TComponents } from 'reactxx-typings';
-import { useStyles } from 'reactxx-styles'
-
-export const getComponentCreator = <R extends TTyped.Shape>(
-    getComp: TComponents.GetComponent<R>, authorConfigs?: TComponents.ComponentConfigs<R>, par?
-) => (
-    userConfig?: TComponents.ComponentConfigs<R>
-) => getComponent(getComp, [authorConfigs, userConfig], par)
+﻿import { TTyped, TComponents } from 'reactxx-typings';
 
 export const getComponent = <R extends TTyped.Shape>(
-    getComp: TComponents.GetComponent<R>, configss?: TComponents.ComponentConfigss<R>, par?
+    getComp: TComponents.GetComponent<R>, configss?: TComponents.ComponentConfigss<R>
 ) => {
     const config = mergeConfig(configss)
-    const _useStyles = (props: TComponents.Props<R>) => useStyles<R>(props, config)
-    const Comp = getComp(_useStyles, par)
+    config.getComponent = getComp
+
+    const Comp = getComp(config)
     Comp.displayName = config.displayName
+    Comp.config = config
+
     return Comp
 }
 
+export const getComponentUntyped = getComponent as any
 
 const mergeConfig = <R extends TTyped.Shape>(inputss: TComponents.ComponentConfigss<R>, config?: TComponents.Config<R>) => {
     if (!config) config = {}
@@ -44,7 +40,3 @@ const mergeConfig = <R extends TTyped.Shape>(inputss: TComponents.ComponentConfi
         doMerge(inputss)
     return config
 }
-
-export const getComponentCreatorUntyped = (authorDisplayName, authorConfig, getComp, par?) =>
-    getComponentCreator(getComp, authorConfig, par) as any
-

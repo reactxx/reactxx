@@ -5,7 +5,7 @@ export * from './utils/deep-merge'
 export * from './utils/globals'
 export * from './utils/merge'
 export * from './utils/from-engine'
-export * from './utils/get-component-creator'
+export * from './utils/get-component'
 
 export { useStyles, useStylesUntyped } from './hooks/use-styles'
 export { ThemeProvider, useTheme } from './hooks/use-theme'

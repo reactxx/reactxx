@@ -2,10 +2,9 @@
 
 import React from 'react'
 import ReactN from 'react-native'
-import { platform } from "reactxx-styles"
 
 import { TTyped, T, TComponents } from 'reactxx-typings'
-import { useStyles, getComponentCreator } from "reactxx-styles"
+import { useStyles, getComponent } from "reactxx-styles"
 
 export interface Shape extends TTyped.ShapeAncestor {
   //rootStyle: T
@@ -28,13 +27,13 @@ export interface Theme {
 
 
 export const compCreator = (
-  config: TComponents.ComponentConfig<Shape>,
+  authorConfig: TComponents.ComponentConfig<Shape>,
   userConfig?: TComponents.ComponentConfig<Shape>,
   displayName?: 'Comp'
-) => getComponentCreator(useStyles => props => {
+) => getComponent(config => props => {
   try {
     const { getRootWebStyleProps, propsCode: { p1 }
-    } = useStyles(props)
+    } = useStyles(props, config)
 
     const renderCount = React.useRef(0)
     renderCount.current++
@@ -43,23 +42,4 @@ export const compCreator = (
   } catch {
     return <div>ERROR</div>
   }
-}, config)(userConfig) 
-
-// {
-//   const res: TComponents.SFC<Shape> = props => {
-//     try {
-//       const { styleRootWeb, propsCode: { p1 }
-//       } = useStyles<Shape>(props, config, displayName, userConfig)
-
-//       const renderCount = React.useRef(0)
-//       renderCount.current++
-
-//       return <div {...styleRootWeb()} >{`${p1 ? p1 + ': ' : ''}${renderCount.current}`}</div>
-//     } catch {
-//       return <div>ERROR</div>
-//     }
-//   }
-//   res.displayName = displayName
-//   return res
-// }
-
+}, [authorConfig, userConfig, {displayName}]) 

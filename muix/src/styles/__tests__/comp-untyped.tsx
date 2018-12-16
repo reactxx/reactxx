@@ -1,6 +1,6 @@
 import React from 'react'
 import { $if } from "reactxx-styles"
-import { getComponentCreatorUntyped as getComponentCreator } from "reactxx-styles"
+import { getComponentUntyped as getComponent } from "reactxx-styles"
 
 const config = {
   defaultSheet: {
@@ -26,8 +26,7 @@ const getComp = useStyles => props => {
   </div>
 }
 
-const compCreator = getComponentCreator(getComp, 'CompUntypedDisplayName', config)
-const Comp = compCreator()
+const Comp = getComponent(getComp, config)
 
 const App = props => <React.Fragment>
   <Comp>Hallo Comp!</Comp>

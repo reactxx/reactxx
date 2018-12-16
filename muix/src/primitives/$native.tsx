@@ -1,7 +1,7 @@
 import React from 'react'
 import { Animated, TouchableWithoutFeedback, Linking } from 'react-native'
 import { MaterialCommunityIcons, MaterialCommunityIconsProps } from '@expo/vector-icons'
-import warning from 'warning'
+import { useStyles } from "reactxx-styles"
 
 //import { platform } from 'reactxx-styles'
 import { Text,  View, ScrollView } from 'reactxx-styles-native'
@@ -12,11 +12,11 @@ import { getViewEvents, getTextEvents } from './events'
 
 import { TPrimitives } from './shapes'
 
-export const getView: TComponents.GetComponent<TPrimitives.ViewShape> = (useStyles, isAnimated: boolean) => props => {
+export const getView: TComponents.GetComponent<TPrimitives.ViewShape> = config => props => {
 
-    const ActView: TTyped.ViewStatic = isAnimated ? Animated.View : View
+    const ActView: TTyped.ViewStatic = config.isAnimated ? Animated.View : View
 
-    const { getRootNativeStyleProps, propsCode, propsCode: { url, children, $rootNativeProps } } = useStyles(props)
+    const { getRootNativeStyleProps, propsCode, propsCode: { url, children, $rootNativeProps } } = useStyles<TPrimitives.ViewShape>(props, config)
 
     const [hasEvent, events] = getViewEvents(props, url)
     propsCode.pressable = hasEvent
@@ -26,11 +26,11 @@ export const getView: TComponents.GetComponent<TPrimitives.ViewShape> = (useStyl
     return propsCode.pressable ? <TouchableWithoutFeedback {...events}>{res}</TouchableWithoutFeedback> : res
 }
 
-export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (useStyles, isAnimated: boolean) => props => {
+export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = config => props => {
 
-    const ActIcon: typeof MaterialCommunityIcons = isAnimated ? AnimatedIconLow : MaterialCommunityIcons
+    const ActIcon: typeof MaterialCommunityIcons = config.isAnimated ? AnimatedIconLow : MaterialCommunityIcons
 
-    const { getRootNativeStyleProps, propsCode, propsCode: { data, url, children, $rootNativeProps } } = useStyles(props)
+    const { getRootNativeStyleProps, propsCode, propsCode: { data, url, children, $rootNativeProps } } = useStyles<TPrimitives.IconShape>(props, config)
 
     const [hasEvent, events] = getTextEvents(props as any, url)
     propsCode.pressable = hasEvent
@@ -46,11 +46,11 @@ export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (useStyl
 }
 const AnimatedIconLow: typeof MaterialCommunityIcons = Animated.createAnimatedComponent(MaterialCommunityIcons)
 
-export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (useStyles, isAnimated: boolean) => props => {
+export const getText: TComponents.GetComponent<TPrimitives.TextShape> = config => props => {
 
-    const ActText: TTyped.TextStatic = isAnimated ? Animated.Text : Text
+    const ActText: TTyped.TextStatic = config.isAnimated ? Animated.Text : Text
 
-    const { getRootNativeStyleProps, propsCode, propsCode: { url, children, singleLine, $rootNativeProps } } = useStyles(props)
+    const { getRootNativeStyleProps, propsCode, propsCode: { url, children, singleLine, $rootNativeProps } } = useStyles<TPrimitives.TextShape>(props, config)
 
     const [hasEvent, events] = getTextEvents(props, url)
     propsCode.pressable = hasEvent
@@ -66,11 +66,11 @@ export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (useStyl
     />
 }
 
-export const getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape> = (useStyles, isAnimated: boolean) => props => {
+export const getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape> = config => props => {
 
-    const ActScrollView: TTyped.ScrollViewStatic = isAnimated ? Animated.ScrollView : ScrollView
+    const ActScrollView: TTyped.ScrollViewStatic = config.isAnimated ? Animated.ScrollView : ScrollView
 
-    const { getRootNativeStyleProps, getNativeStyleProps, propsCode: { children, $rootNativeProps }, classes } = useStyles(props)
+    const { getRootNativeStyleProps, getNativeStyleProps, propsCode: { children, $rootNativeProps }, classes } = useStyles<TPrimitives.ScrollViewShape>(props, config)
 
     const scrollViewProps: TTyped.ScrollViewProperties = {...getRootNativeStyleProps<V>()}
     if ($rootNativeProps) Object.assign(scrollViewProps, $rootNativeProps)

@@ -5,6 +5,7 @@ import posed from "react-pose"
 import { getTypedEngine, getComponent } from 'reactxx-styles'
 import { TComponents, TTyped, T } from 'reactxx-typings'
 import { useActive, Ripple } from 'reactxx-primitives'
+import { useStyles } from "reactxx-styles"
 
 
 interface Shape extends TTyped.ShapeAncestor {
@@ -38,10 +39,10 @@ const config: TComponents.ComponentConfig<Shape> = {
     }
 }
 
-const getExample: TComponents.GetComponent<Shape> = useStyles => props => {
+const getExample: TComponents.GetComponent<Shape> = config => props => {
 
     const
-        { getRootWebStyleProps } = useStyles(props),
+        { getRootWebStyleProps } = useStyles(props, config),
         [activeState, activeStart, activeEnd] = useActive()
 
     return <div

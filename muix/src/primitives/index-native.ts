@@ -7,17 +7,11 @@ import { inits } from './inits'
 
 const {
     initPlatform,
-    viewCreator, View,
-    scrollViewCreator, ScrollView,
-    iconCreator, Icon,
-    textCreator, Text,
+    View, ScrollView, Icon, Text, AnimatedView, AnimatedIcon, AnimatedText,
 } = inits(getView, getIcon, getText, getScrollView)
 
 export {
-    viewCreator, View, getView,
-    scrollViewCreator, ScrollView, getScrollView,
-    iconCreator, Icon, getIcon,
-    textCreator, Text, getText,
+    View, ScrollView, Icon, Text, AnimatedView, AnimatedIcon, AnimatedText,
 }
 
 export const initPrimitives$Native = initPlatform

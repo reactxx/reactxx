@@ -12,12 +12,11 @@ declare module 'reactxx-typings' {
         }
 
         interface ComponentConfig {
-            isAnim?: boolean
-            $pose?: DomPopmotionConfig
+            isAnimated?: boolean
         }
-        interface Config {
-            isAnim?: boolean
-            $pose?: DomPopmotionConfig[]
+        interface Config<R extends TTyped.Shape = TTyped.Shape> {
+            isAnimated?: boolean
+            getComponent?: TComponents.GetComponent<R>
         }
 
 
@@ -29,23 +28,6 @@ declare module 'reactxx-typings' {
             AnimatedView?: TComponents.SFC<TPrimitives.ViewShape>
             AnimatedText?: TComponents.SFC<TPrimitives.TextShape>
             AnimatedIcon?: TComponents.SFC<TPrimitives.IconShape>
-
-            viewCreator?: TComponents.ComponentCreator<TPrimitives.ViewShape>
-            textCreator?: TComponents.ComponentCreator<TPrimitives.TextShape>
-            iconCreator?: TComponents.ComponentCreator<TPrimitives.IconShape>
-            scrollViewCreator?: TComponents.ComponentCreator<TPrimitives.ScrollViewShape>
-            animatedViewCreator?: TComponents.ComponentCreator<TPrimitives.ViewShape>
-            animatedTextCreator?: TComponents.ComponentCreator<TPrimitives.TextShape>
-            animatedIconCreator?: TComponents.ComponentCreator<TPrimitives.IconShape>
-
-            getView?: TComponents.GetComponent<TPrimitives.ViewShape>
-            getText?: TComponents.GetComponent<TPrimitives.TextShape>
-            getIcon?: TComponents.GetComponent<TPrimitives.IconShape>
-            getScrollView?: TComponents.GetComponent<TPrimitives.ScrollViewShape>
-            getAnimatedView?: TComponents.GetComponent<TPrimitives.ViewShape>
-            getAnimatedText?: TComponents.GetComponent<TPrimitives.TextShape>
-            getAnimatedIcon?: TComponents.GetComponent<TPrimitives.IconShape>
-
         }
     }
 }

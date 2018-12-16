@@ -1,4 +1,4 @@
-import { getComponentCreator } from "reactxx-styles"
+import { getComponent } from "reactxx-styles"
 import { Platform, platform } from 'reactxx-styles'
 import { TComponents } from 'reactxx-typings'
 
@@ -23,49 +23,24 @@ export const inits = (
     getText: TComponents.GetComponent<TPrimitives.TextShape>,
     getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape>
 ) => {
-    const viewCreator = getComponentCreator(getView, [viewConfig, { displayName: CompNames.View }], false)
-    const View = viewCreator(/*userName, userConfig*/)
-
-    const animatedViewCreator = getComponentCreator(getView, [viewConfig, { displayName: CompNames.AnimatedView, isAnim: true  }], true)
-    const AnimatedView = animatedViewCreator()
-
-    const iconCreator = getComponentCreator(getIcon, [iconConfig, { displayName: CompNames.Icon  }], false)
-    const Icon = iconCreator()
-
-    const animatedIconCreator = getComponentCreator(getIcon, [iconConfig, { displayName: CompNames.AnimatedIcon, isAnim: true }], true)
-    const AnimatedIcon = animatedIconCreator()
-
-    const textCreator = getComponentCreator(getText, [textConfig, { displayName: CompNames.Text}], false)
-    const Text = textCreator()
-
-    const animatedTextCreator = getComponentCreator(getText, [textConfig, { displayName: CompNames.AnimatedText, isAnim: true }], true)
-    const AnimatedText = animatedTextCreator()
-
-    const scrollViewCreator = getComponentCreator(getScrollView, [scrollViewConfig, { displayName: CompNames.ScrollView }], false)
-    const ScrollView = scrollViewCreator()
+    const View = getComponent(getView, [viewConfig, { displayName: CompNames.View }])
+    const AnimatedView = getComponent(getView, [viewConfig, { displayName: CompNames.AnimatedView, isAnimated: true }])
+    const Icon = getComponent(getIcon, [iconConfig, { displayName: CompNames.Icon }])
+    const AnimatedIcon = getComponent(getIcon, [iconConfig, { displayName: CompNames.AnimatedIcon, isAnimated: true }])
+    const Text = getComponent(getText, [textConfig, { displayName: CompNames.Text }])
+    const AnimatedText = getComponent(getText, [textConfig, { displayName: CompNames.AnimatedText, isAnimated: true }])
+    const ScrollView = getComponent(getScrollView, [scrollViewConfig, { displayName: CompNames.ScrollView }])
 
     const initPlatform = () => {
         if (platform.View) return
         const primitivies: Platform = {
-            viewCreator, View, getView,
-            scrollViewCreator, ScrollView, getScrollView,
-            iconCreator, Icon, getIcon,
-            textCreator, Text, getText,
-            animatedViewCreator, AnimatedView,
-            animatedIconCreator, AnimatedIcon,
-            animatedTextCreator, AnimatedText,
+            View, ScrollView, Icon, Text, AnimatedView, AnimatedIcon, AnimatedText,
         }
         Object.assign(platform, primitivies)
     }
 
     return {
         initPlatform,
-        viewCreator, View,
-        scrollViewCreator, ScrollView,
-        iconCreator, Icon,
-        textCreator, Text,
-        animatedViewCreator, AnimatedView,
-        animatedIconCreator, AnimatedIcon,
-        animatedTextCreator, AnimatedText,
+        View, ScrollView, Icon, Text, AnimatedView, AnimatedIcon, AnimatedText,
     }
 }

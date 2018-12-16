@@ -3,7 +3,8 @@
 import React from 'react'
 import { getTypedEngine } from "reactxx-styles"
 import { TComponents, TTyped, T, V } from 'reactxx-typings'
-import { getComponentCreator } from "reactxx-styles"
+import { getComponent } from "reactxx-styles"
+import { useStyles } from "reactxx-styles"
 
 interface ShapeLow extends TTyped.ShapeAncestor {
   props: { disabled?: boolean },
@@ -30,13 +31,13 @@ const config: TComponents.ComponentConfig<Shape> = {
   $sheet: sheet
 }
 
-const getComp: TComponents.GetComponent<Shape> = useStyles => props => {
+const getComp: TComponents.GetComponent<Shape> = config => props => {
   const {
     getRootWebStyleProps,
     getWebStyleProps,
     classes,
     propsCode: { children }
-  } = useStyles(props)
+  } = useStyles<Shape>(props, config)
 
   return <div {...getRootWebStyleProps()}>
     <span {...getWebStyleProps(classes.label)}>
@@ -45,9 +46,7 @@ const getComp: TComponents.GetComponent<Shape> = useStyles => props => {
   </div>
 }
 
-const compCreator = getComponentCreator(getComp, config)
-
-const Comp = compCreator()
+const Comp = getComponent(getComp, config)
 
 const App: React.SFC = props => <React.Fragment>
   <Comp>Hallo Comp!</Comp>

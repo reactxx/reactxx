@@ -15,7 +15,7 @@ declare namespace TComponents {
     themedProps?: (theme: TTyped.getTheme<R>) => Props<R>
   }
 
-  type SFC<R extends TTyped.Shape = TTyped.Shape> = React.SFC<Props<R>>
+  type SFC<R extends TTyped.Shape = TTyped.Shape> = React.SFC<Props<R>> & { config?: Config<R> }
 
   //*************************************** */  
   // CONFIGS
@@ -46,8 +46,9 @@ declare namespace TComponents {
   ) => React.SFC<Props<R>>
 
   type GetComponent<R extends TTyped.Shape> = (
-    useStyles: UseStyles<R>,
-    par?
+    config: Config<R>,
+    //useStyles: UseStyles<R>,
+    //par?
   ) => SFC<R>
 
   type UseStyles<R extends TTyped.Shape = TTyped.Shape> = (

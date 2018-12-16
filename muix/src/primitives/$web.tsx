@@ -1,13 +1,14 @@
 import React from 'react'
 
 import { TComponents } from "reactxx-typings"
+import { useStyles } from "reactxx-styles"
 
 import { TPrimitives } from './shapes'
 import {getWebEvents} from './events'
 
-export const getView: TComponents.GetComponent<TPrimitives.ViewShape> = (useStyles, isAnimated: boolean) => props => {
+export const getView: TComponents.GetComponent<TPrimitives.ViewShape> = config => props => {
 
-    const { getRootWebStyleProps, propsCode, propsCode: { $rootWebProps, url, children } } = useStyles(props)
+    const { getRootWebStyleProps, propsCode, propsCode: { $rootWebProps, url, children } } = useStyles<TPrimitives.ViewShape>(props, config)
 
     const [hasEvent, events] = getWebEvents(props, url)
     propsCode.pressable = hasEvent
@@ -15,9 +16,9 @@ export const getView: TComponents.GetComponent<TPrimitives.ViewShape> = (useStyl
     return <div {...getRootWebStyleProps()} {...$rootWebProps} children={children} {...events} />
 }
 
-export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (useStyles, isAnimated: boolean) => props => {
+export const getText: TComponents.GetComponent<TPrimitives.TextShape> = config => props => {
 
-    const { getRootWebStyleProps, propsCode, propsCode: { children, url, $rootWebProps } } = useStyles(props)
+    const { getRootWebStyleProps, propsCode, propsCode: { children, url, $rootWebProps } } = useStyles<TPrimitives.TextShape>(props, config)
 
     const [hasEvent, events] = getWebEvents(props, url)
     propsCode.pressable = hasEvent
@@ -33,9 +34,9 @@ export const getText: TComponents.GetComponent<TPrimitives.TextShape> = (useStyl
     return url ? <a href={url} {...tagProps} /> : <div {...tagProps} children={children} />
 }
 
-export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (useStyles, isAnimated: boolean) => props => {
+export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = config => props => {
 
-    const { getRootWebStyleProps, propsCode, propsCode: { data, url, children, $rootWebProps } } = useStyles(props)
+    const { getRootWebStyleProps, propsCode, propsCode: { data, url, children, $rootWebProps } } = useStyles<TPrimitives.IconShape>(props, config)
 
     const [hasEvent, events] = getWebEvents(props as any, url)
     propsCode.pressable = hasEvent
@@ -51,9 +52,9 @@ export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = (useStyl
 
 }
 
-export const getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape> = (useStyles, isAnimated: boolean) => props => {
+export const getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape> = config => props => {
 
-    const { getRootWebStyleProps, getWebStyleProps, propsCode: { children, $rootWebProps }, classes } = useStyles(props)
+    const { getRootWebStyleProps, getWebStyleProps, propsCode: { children, $rootWebProps }, classes } = useStyles<TPrimitives.ScrollViewShape>(props, config)
 
     return <div {...getRootWebStyleProps()} {...$rootWebProps}>
         <div {...getWebStyleProps(classes.container)}>

@@ -3,7 +3,8 @@ import { Text, View } from 'reactxx-styles-native'
 
 import { getTypedEngine } from "reactxx-styles"
 import { TComponents, TTyped, T, V } from 'reactxx-typings'
-import { getComponentCreator } from "reactxx-styles"
+import { getComponent } from "reactxx-styles"
+import { useStyles } from "reactxx-styles"
 
 interface ShapeLow extends TTyped.ShapeAncestor {
   props: { disabled?: boolean },
@@ -30,9 +31,9 @@ const config: TComponents.ComponentConfig<Shape> = {
   $sheet: sheet
 }
 
-const getComp: TComponents.GetComponent<Shape> = useStyles => props => {
+const getComp: TComponents.GetComponent<Shape> = config => props => {
 
-  const { getNativeStyleProps, getRootNativeStyleProps, classes, propsCode: { children } } = useStyles(props)
+  const { getNativeStyleProps, getRootNativeStyleProps, classes, propsCode: { children } } = useStyles<Shape>(props, config)
 
   return <View {...getRootNativeStyleProps()}>
     <Text {...getNativeStyleProps(classes.label)}>
@@ -41,9 +42,7 @@ const getComp: TComponents.GetComponent<Shape> = useStyles => props => {
   </View>
 }
 
-const compCreator = getComponentCreator(getComp, config)
-
-const Comp = compCreator()
+const Comp = getComponent(getComp, config)
 
 const App: React.SFC = props => <React.Fragment>
   <Comp>Hallo Comp!</Comp>
