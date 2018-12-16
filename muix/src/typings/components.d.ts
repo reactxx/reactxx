@@ -29,6 +29,7 @@ declare namespace TComponents {
   }
 
   type ComponentConfigs<R extends TTyped.Shape = TTyped.Shape> = ComponentConfig<R> | ComponentConfig<R>[]
+  type ComponentConfigss<R extends TTyped.Shape = TTyped.Shape> = ComponentConfigs<R> | ComponentConfigs<R>[]
 
   interface Config<R extends TTyped.Shape = TTyped.Shape> extends TExtensions.Config {
     componentId?: number // generated unique component type Id
