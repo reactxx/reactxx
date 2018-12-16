@@ -2,7 +2,7 @@ import React from 'react'
 import posed from "react-pose"
 //import posedN from "react-native-pose"
 
-import { getTypedEngine, getComponentCreator } from 'reactxx-styles'
+import { getTypedEngine, getComponent } from 'reactxx-styles'
 import { TComponents, TTyped, T } from 'reactxx-typings'
 import { useActive, Ripple } from 'reactxx-primitives'
 
@@ -55,6 +55,6 @@ const getExample: TComponents.GetComponent<Shape> = useStyles => props => {
 
 }
 
-const Example = getComponentCreator(getExample, config)()
+const Example = getComponent(getExample, config)
 
 export default Example

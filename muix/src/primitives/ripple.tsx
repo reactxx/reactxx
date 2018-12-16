@@ -33,32 +33,32 @@ const config: TComponents.ComponentConfig<Shape> = {
         borderRadius: '100%',
       })),
   },
-  $pose: {
-    Root: {
-      closed: {
-        opacity: 0,
-        scale: 0,
-        transition: {
-          scale: {
-            type: "keyframes",
-            duration: 250,
-            times: [0, 0.99, 1],
-            values: [1, 1, 0]
-          },
-          opacity: {
-            duration: 250
-          }
-        }
-      },
-      opened: {
-        opacity: 0.2,
-        scale: 1,
-        transition: {
-          duration: 250
-        }
-      }
-    }
-  }
+  // $pose: {
+  //   Root: {
+  //     closed: {
+  //       opacity: 0,
+  //       scale: 0,
+  //       transition: {
+  //         scale: {
+  //           type: "keyframes",
+  //           duration: 250,
+  //           times: [0, 0.99, 1],
+  //           values: [1, 1, 0]
+  //         },
+  //         opacity: {
+  //           duration: 250
+  //         }
+  //       }
+  //     },
+  //     opened: {
+  //       opacity: 0.2,
+  //       scale: 1,
+  //       transition: {
+  //         duration: 250
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 const Box = posed.div({
@@ -102,7 +102,7 @@ const ripple: TComponents.GetComponent<Shape> = useStyles => props => {
 
     if (window.__TRACE__) {
       const pstyle = getComputedStyle(currentTarget)
-      warning(pstyle.position==='relative' && pstyle.overflow==='hidden', `Ripple owner must position==='relative' and pstyle.overflow==='hidden'`)
+      warning(pstyle.position==='relative' && pstyle.overflow==='hidden', `Ripple owner must have position==='relative' and pstyle.overflow==='hidden'`)
     }
 
     const style = poseElement.current.style

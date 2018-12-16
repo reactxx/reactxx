@@ -26,6 +26,7 @@ declare namespace TComponents {
     displayName?: string
     $props?: Partial<Props<R>> // classes, css and styles are  ignored
     $sheet?: TTyped.SheetOrCreator<R>
+    getComponent?: GetComponent<R>
   }
 
   type ComponentConfigs<R extends TTyped.Shape = TTyped.Shape> = ComponentConfig<R> | ComponentConfig<R>[]

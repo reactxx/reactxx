@@ -1,20 +1,22 @@
 import { TComponents, TTyped } from 'reactxx-typings'
 import { TPrimitives } from './shapes'
 
-import {DomPopmotionConfig} from 'popmotion-pose' 
+import { DomPopmotionConfig } from 'popmotion-pose'
 
 declare module 'reactxx-typings' {
 
     namespace TExtensions {
 
-        interface Shape { 
+        interface Shape {
             pose?: Record<string, TTyped.RulesetIds>
         }
 
-        interface ComponentConfig { 
+        interface ComponentConfig {
+            isAnim?: boolean
             $pose?: DomPopmotionConfig
         }
-        interface Config { 
+        interface Config {
+            isAnim?: boolean
             $pose?: DomPopmotionConfig[]
         }
 
