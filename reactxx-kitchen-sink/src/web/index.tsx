@@ -38,7 +38,7 @@ import {initPrimitives} from 'reactxx-primitives'
 
 initPrimitives({ dataTraceFlag: 'long' })
 
-import App from './pose'
-//import App from 'reactxx-sheet-transition/tests/index'
+//import App from './pose'
+import App from './styled-component'
 
 ReactDOM.render(<App />, document.getElementById('root')) 

@@ -1,7 +1,7 @@
 ﻿import React from 'react';
-import { 
-    atomizeRuleset, atomizeSheet, atomizeStyle, mergeSheets, 
-    TAsEngineClassName, TAsTypedClassName, 
+import {
+    atomizeRuleset, atomizeSheet, atomizeStyle, mergeSheets,
+    TAsEngineClassName, TAsTypedClassName,
     TAsEngineSheet, TAsTypedSheet,
     TAsEngineStyle, TAsTypedStyle
 } from 'reactxx-styles';
@@ -9,26 +9,31 @@ import { TEngine, TTyped, TComponents } from 'reactxx-typings';
 
 export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, sheet: TEngine.Sheet, props: TComponents.Props) => {
     // from props
-    const { classes: _classes, className: _className, style: _style, themedProps, ...propsRest } = props as TComponents.Props
+    const { classes: classes_, className: className_, style: style_, themedProps, ...propsRest } = props as TComponents.Props
 
     // merge sheet with classes
     const classes = React.useMemo(() => {
-        const classes = atomizeSheet(TAsTypedSheet(_classes), theme, 'classes')
-        return TAsEngineSheet<R>(mergeSheets([sheet, classes]))
-    }, [_classes, theme])
+        if (!classes_) return TAsEngineSheet<R>(sheet)
+        const classes = atomizeSheet(TAsTypedSheet(classes_), theme, 'classes')
+        const res = TAsEngineSheet<R>(mergeSheets([sheet, classes]))
+        return res
+    }, [classes_, theme])
 
     // className
     const className = React.useMemo(
-        () => TAsEngineClassName<R>
-            (atomizeRuleset(
-                TAsTypedClassName(_className),
-                theme,
-                'classes'
-            )),
-        [_className, theme])
+        () => !className_ ? null : TAsEngineClassName<R>(atomizeRuleset(
+            TAsTypedClassName(className_),
+            theme,
+            'classes'
+        )),
+        [className_, theme]
+    )
 
     // styles
-    const style = React.useMemo(() => TAsEngineStyle<R>(atomizeStyle(TAsTypedStyle(_style), theme)), [_style, theme])
+    const style = React.useMemo(
+        () => !style_ ? null : TAsEngineStyle<R>(atomizeStyle(TAsTypedStyle(style_), theme)),
+        [style_, theme]
+    )
 
     return { classes, className, style, propsRest, themedProps }
 

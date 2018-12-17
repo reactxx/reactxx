@@ -1,6 +1,4 @@
 import React from 'react'
-import posed from "react-pose"
-//import posedN from "react-native-pose"
 
 import { getTypedEngine, getComponent } from 'reactxx-styles'
 import { TComponents, TTyped, T } from 'reactxx-typings'

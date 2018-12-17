@@ -4,11 +4,12 @@ import { platform, useWidths } from 'reactxx-styles'
 import { useDefaults } from './use-defaults'
 import { useProps } from './use-props'
 import { useTheme } from './use-theme'
+import { useStyledComponents } from './use-styled-components'
 import { mergePropsCode } from '../utils/merge'
 
 export const useStylesUntyped = (props, config?) => useStyles(props, config) as any
 
-const useStylesLow = <R extends TTyped.Shape = TTyped.Shape>(
+export const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
     props: TComponents.Props<R>,
     config: TComponents.Config,
 ) => {
@@ -29,7 +30,9 @@ const useStylesLow = <R extends TTyped.Shape = TTyped.Shape>(
     const propsCode: TTyped.PropsCode<R> = {
         $widths: { actWidth, breakpoints },
     }
-    mergePropsCode(propsCode, [propsDefault, propsRest, themedProps && themedProps(theme),])
+    mergePropsCode(propsCode, [propsDefault, propsRest, themedProps && themedProps(theme)])
+
+    useStyledComponents(sheet, classes, propsCode)
 
     // typed helpers for styling platform components (web's div, span etc, native Text, View etc)
     const getWebStyleProps = (...rulesets: TTyped.RulesetSimple[]) =>
@@ -52,13 +55,13 @@ const useStylesLow = <R extends TTyped.Shape = TTyped.Shape>(
     } as TComponents.UseStylesResult<R>
 }
 
-const extensions: TComponents.UseStylesExtension[] = []
+// const extensions: TComponents.UseStylesExtension[] = []
 
-export const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
-    props: TComponents.Props<R>,
-    config: TComponents.Config,
-) => {
-    let res = useStylesLow(props, config)
-    extensions.forEach(ext => res = ext(props, config, res))
-    return res
-}
+// export const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
+//     props: TComponents.Props<R>,
+//     config: TComponents.Config,
+// ) => {
+//     let res = useStylesLow(props, config)
+//     extensions.forEach(ext => res = ext(props, config, res))
+//     return res
+// }

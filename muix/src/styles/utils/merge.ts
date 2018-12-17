@@ -1,7 +1,9 @@
 import { TEngine, TTyped, TComponents } from 'reactxx-typings';
 import { deepMerge, deepMerges } from './deep-merge'
-import { isAtomized } from './atomize-low';
+import { isAtomized, isDeferred } from './atomize-low';
 import { wrapRuleset } from './atomize';
+import { isStyledComponentData } from '../queryable/$styled-component'
+import warning = require('warning');
 
 export const mergePropsCode = (propsCode: TTyped.PropsCode | any, props: TComponents.Props[]) => {
     if (!props || props.length === 0) return
@@ -25,14 +27,22 @@ export const mergeRulesets = (sources: TEngine.Queryables[]) => {
     if (!sources || sources.length === 0) return null
     let res: TEngine.Queryables = null
     let first = true
+    let noArray = false
     for (const src of sources) {
         if (!src) continue
-        if (!isAtomized(src))
-            throw 'All rulesets must be atomized first for mergeRulesets'
-        res = first ? src : [...res, ...src]
-        first = false
+        if (isAtomized(src)) {
+            res = noArray || first ? src : [...res, ...src]
+            first = noArray = false
+            continue
+        }
+        if (isStyledComponentData(src) || isDeferred(src)) {
+            res = src
+            noArray = true
+            continue
+        }
+        throw 'All rulesets must be atomized first for mergeRulesets'
     }
-    return wrapRuleset(res)
+    return noArray ? res : wrapRuleset(res)
 }
 
 // immutable

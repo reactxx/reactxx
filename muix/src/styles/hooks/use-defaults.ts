@@ -6,10 +6,10 @@ import { sheetFromThemeCache } from './use-theme';
 import { platform } from '../utils/globals';
 
 
-export const useDefaults = (theme, options: TComponents.Config) =>
-    React.useMemo(() => getDefaults(theme, options), [theme, options])
+// export const useDefaults = (theme, options: TComponents.Config) =>
+//     React.useMemo(() => getDefaults(theme, options), [theme, options])
 
-const getDefaults = (theme, config: TComponents.Config) => {
+export const useDefaults = (theme, config: TComponents.Config) => {
 
     //on demand componentId initialization and missing displayName fix
     if (!config.componentId) config.componentId = ++platform._styles.componentIdCounter

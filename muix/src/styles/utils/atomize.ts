@@ -1,6 +1,10 @@
-import { TEngine } from 'reactxx-typings';
-import { adjustAtomizedLow, isDeferred, deepClone } from './atomize-low';
-import { createWithTheme } from './create-with-theme';
+import warning from 'warning'
+
+import { TEngine } from 'reactxx-typings'
+
+import { adjustAtomizedLow, isDeferred, deepClone } from './atomize-low'
+import { createWithTheme } from './create-with-theme'
+import { isStyledComponentTemp } from '../queryable/$styled-component'
 
 // mutable
 export const atomizeSheet = (sheet: TEngine.SheetOrCreator, theme?, path: string = 'sheet') => {
@@ -9,9 +13,16 @@ export const atomizeSheet = (sheet: TEngine.SheetOrCreator, theme?, path: string
         sheet = deepClone(sheet)
     const sh: TEngine.Sheet = createWithTheme(sheet, theme)
     for (const p in sh) {
-        const at = atomizeRuleset(sh[p], theme, (path ? path + '.' : '') + p)
-        if (at) sh[p] = at
-        else delete sh[p]
+        const value = sh[p]
+        const subPath = (path ? path + '.' : '') + p
+        if (isStyledComponentTemp(value)) {
+            warning(p.charAt(0)===p.charAt(0).toUpperCase(), 'Component definition name must start with uppercase letter')
+            sh[p] = value(sh, p, subPath)
+        } else {
+            const at = atomizeRuleset(sh[p], theme, subPath)
+            if (at) sh[p] = at
+            else delete sh[p]
+        }
     }
     return sh
 }

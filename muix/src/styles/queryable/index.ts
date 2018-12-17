@@ -5,6 +5,7 @@ export { default as $native } from './$native'
 export { default as $hot } from './$hot'
 export { $if, $ifelse } from './$if'
 export { default as $width } from './$widths/$width'
+export { default as $component } from './$styled-component'
 
 import { TEngine, TTyped, $W, O } from 'reactxx-typings'
 import { atomizeRuleset } from '../utils/atomize'
@@ -15,6 +16,7 @@ import $native from './$native'
 import $hot from './$hot'
 import { $if, $ifelse } from './$if'
 import $width from './$widths/$width'
+import { $component } from './$styled-component'
 
 export const WEB:
     (...r: TTyped.Ruleset<$W>[]) => O =
@@ -55,3 +57,5 @@ export const HOT:
 export const QUERY:
     <S extends TTyped.Shape, R extends TTyped.RulesetIds>(query: TTyped.PropsCode<S>, ...rules: TTyped.RulesetSimple<R>[]) => R =
     toClassNamesWithQuery as any
+
+export const COMPONENT = $component as any

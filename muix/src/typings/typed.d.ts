@@ -13,6 +13,7 @@ import {
 import { TCommonStyles } from './common-styles'
 import { TEngine } from './engine'
 import { TExtensions } from './index'
+import { TComponents } from './components'
 
 export type $W = '$W'; export type $T = '$T'; export type $V = '$V';
 export type $I = '$I'; export type V = 'V'; export type T = 'T'; export type I = 'I';
@@ -26,7 +27,7 @@ declare namespace TTyped {
 
   type CommonIds = V | T | I | O
   type NativeIds = $V | $T | $I
-  type RulesetIds = $W | NativeIds | CommonIds
+  type RulesetIds = $W | NativeIds | CommonIds | TComponents.SFC
   type PlatformIds = $W | NativeIds
 
   type WebStyle = React.CSSProperties & { [P in CSS.Pseudos]?: Ruleset<$W> | Ruleset<$W>[] }
@@ -55,7 +56,7 @@ declare namespace TTyped {
     R extends $T ? ReactN.TextStyle :
     R extends $V ? ReactN.ViewStyle :
     R extends $I ? ReactN.ImageStyle :
-    never
+    TComponents.SFC
 
   type TNative<R extends RulesetIds> =
     R extends T ? $T :
@@ -97,6 +98,12 @@ declare namespace TTyped {
 
     QUERY: <R extends RulesetIds>(query: PropsCode<S>, ...rules: RulesetSimple<R>[]) => R
 
+    COMPONENT: <S extends Shape>(
+      Comp: TComponents.SFC<S>,
+      sheet: TTyped.Sheet<S>,
+      defaultProps?: TComponents.Props<S>
+    ) => TComponents.SFC<S>
+
   }
   //******************************************************
   //* SHEET AND CREATORS
@@ -134,7 +141,7 @@ declare namespace TTyped {
 
   // component shape
   interface Shape extends TExtensions.Shape {
-    sheet?: Record<string, RulesetIds>
+    sheet?: Record<string, RulesetIds | TComponents.SFC>
     props?: EmptyInterface // common (web and native) props, excluding events
     sheetQuery?: EmptyInterface
     theme?: EmptyInterface

@@ -3,9 +3,13 @@ import React from 'react'
 declare namespace TEngine {
 
   type Rulesets = Ruleset | Ruleset[]
-  type Ruleset = ToAtomize | Queryables | TempProc | Deferred
+  type Ruleset = ToAtomize | Queryables | TempProc | Deferred | StyledComponent
 
   type ToAtomize = {}
+
+  interface StyledComponent {
+    $sdata$: true
+  }
 
   interface Condition {
     type: string

@@ -1,6 +1,5 @@
-
-
 import React from 'react'
+
 import { getTypedEngine } from "reactxx-styles"
 import { TComponents, TTyped, T, V } from 'reactxx-typings'
 import { getComponent } from "reactxx-styles"
@@ -14,7 +13,9 @@ const { IF, STYLE } = getTypedEngine<ShapeLow>()
 
 let PRIMITIVE = <T extends any = any>(type: T, ...pars: any[]) => null
 let POSE = <T extends any = any>(type: T, ...pars: any[]) => null
-let COMPONENT = <T extends TTyped.Shape = any>(type: TComponents.Config<T>, ...pars: any[]) => null
+let COMPONENT = <R extends TTyped.Shape = any>(type: TComponents.SFC<R>, sheet: TTyped.PartialSheet<R>, props: TComponents.Props<R>) => null
+
+let STYLED
 
 const sheet = {
 
@@ -46,13 +47,21 @@ const sheet = {
     }
   ),
 
-  Comp: COMPONENT(Text.config, 
+  Comp: COMPONENT(Text,
     {
       root: {}
     }, {
       singleLine: true
     }
   ),
+
+  Comp2: STYLED.Text(
+    {
+
+    }, {
+
+    }),
+
 }
 
 interface Shape extends ShapeLow {
@@ -79,6 +88,19 @@ const getComp: TComponents.GetComponent<Shape> = config => props => {
     </Text>
   </View>
 }
+
+const getComp2: TComponents.GetComponent<Shape> = config => props => {
+  const {
+    classes,
+    propsCode: { children, $rootProps }
+  } = useStyles<Shape>(props, config)
+
+
+  return <classes.Root>
+    {children}
+  </classes.Root>
+}
+
 
 const Comp = getComponent(getComp, config)
 
