@@ -3,24 +3,56 @@
 import React from 'react'
 import { getTypedEngine } from "reactxx-styles"
 import { TComponents, TTyped, T, V } from 'reactxx-typings'
-import { getComponent, STYLE } from "reactxx-styles"
+import { getComponent } from "reactxx-styles"
 import { View, Text, TPrimitives } from 'reactxx-primitives'
 import { useStyles } from "reactxx-styles"
 
 interface ShapeLow extends TTyped.ShapeAncestor {
   props: { disabled?: boolean },
 }
-const { IF } = getTypedEngine<ShapeLow>()
+const { IF, STYLE } = getTypedEngine<ShapeLow>()
+
+let PRIMITIVE = <T extends any = any>(type: T, ...pars: any[]) => null
+let POSE = <T extends any = any>(type: T, ...pars: any[]) => null
+let COMPONENT = <T extends TTyped.Shape = any>(type: TComponents.Config<T>, ...pars: any[]) => null
 
 const sheet = {
+
   root: STYLE<V>(
     { backgroundColor: 'lightblue', margin: 10 },
     IF<V>(p => p.disabled, { backgroundColor: 'lightgray', /* ERROR: color: 'red'*/ })
   ),
+
   label: STYLE<T>(
     { color: 'darkblue' },
     IF<T>(p => p.disabled, { color: 'darkgray' })
-  )
+  ),
+
+  Root: PRIMITIVE<V>('V',
+    {
+      root: {}
+    }, {
+      singleLine: true
+    }
+  ),
+
+  Anim: POSE<V>('V',
+    {
+
+    }, {
+      root: {}
+    }, {
+      singleLine: true
+    }
+  ),
+
+  Comp: COMPONENT(Text.config, 
+    {
+      root: {}
+    }, {
+      singleLine: true
+    }
+  ),
 }
 
 interface Shape extends ShapeLow {

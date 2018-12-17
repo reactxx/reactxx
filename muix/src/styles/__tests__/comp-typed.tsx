@@ -19,7 +19,7 @@ const sheet = {
   label: STYLE<T>(
     { color: 'darkblue' },
     IF<T>(p => p.disabled, { color: 'darkgray' })
-  )
+  ),
 }
 
 interface Shape extends ShapeLow {
@@ -27,7 +27,7 @@ interface Shape extends ShapeLow {
 }
 
 const config: TComponents.ComponentConfig<Shape> = {
-  displayName:'CompDisplayName', 
+  displayName: 'CompDisplayName',
   $sheet: sheet
 }
 
