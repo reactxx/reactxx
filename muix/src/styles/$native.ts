@@ -36,6 +36,7 @@ export const init = () => assignPlatform({
 
     getStyleProps: (propsCode, rulesets, classNames, style) => {
         const css = toClassNamesWithQuery(propsCode, ...rulesets, classNames, style)
+        if (!css) return undefined
         let reduced = platform.applyLastwinsStrategy(TAsTypedClassName(css)) as TEngine.AtomicNativeLows
         const res: TTyped.StylePropsNative<TTyped.RulesetIds> = {
             style: platform.finalizeClassName(reduced) as TEngine.AtomicNativeLows
@@ -81,7 +82,7 @@ function toJSON2() {
 
 const applyLastwinsStrategy: TEngine.ApplyLastwinsStrategy = (values: TEngine.AtomicNatives[]) => {
     if (!values) return null
-    const res = Object.assign.apply({}, values) as TEngine.AtomicLow
+    const res = Object.assign({}, ...values) as TEngine.AtomicLow
     if (window.__TRACE__)
         for (const p in res) delete res['toJSON']
     res['toJSON'] = toJSON2.bind(res)
@@ -92,6 +93,7 @@ const dataTrace = (ruleset, flags = 'long') => {
     if (!ruleset) return ''
     const res = []
     for (const p in ruleset) {
+        if (p==='toJSON' || p==='conditions') continue
         const val = ruleset[p] as TEngine.__dev_AtomicNative
         if (typeof val === 'undefined' || !window.__TRACE__ || flags === 'short') continue
 

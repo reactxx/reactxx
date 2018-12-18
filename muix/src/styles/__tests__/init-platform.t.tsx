@@ -6,7 +6,7 @@ import { TEngine } from 'reactxx-typings'
 import { initSheeter$Web, resetPlatform, platform } from 'reactxx-styles'
 import { initSheeter$Native } from 'reactxx-styles-native'
 
-export { render } from 'react-testing-library'
+export { render, cleanup } from 'react-testing-library'
 export { theme, Shape } from 'reactxx-typings-test/shape.t'
 
 function mockComponent(data: string) {

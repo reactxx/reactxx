@@ -100,7 +100,7 @@ declare namespace TTyped {
 
     COMPONENT: <S extends Shape>(
       Comp: TComponents.SFC<S>,
-      sheet: TTyped.Sheet<S>,
+      sheet: TTyped.PartialSheet<S>,
       defaultProps?: TComponents.Props<S>
     ) => TComponents.SFC<S>
 

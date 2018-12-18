@@ -26,25 +26,25 @@ export const mergePropsCode = (propsCode: TTyped.PropsCode | any, props: TCompon
 export const mergeRulesets = (sources: TEngine.Queryables[]) => {
     if (!sources || sources.length === 0) return null
     if (sources.length === 1) return sources[0] || null
-    
+
     let res: TEngine.Queryables = null
     let first = true
-    let noArray = false
+    let noAtomized = false
     for (const src of sources) {
         if (!src) continue
         if (isAtomized(src)) {
-            res = noArray || first ? src : [...res, ...src]
-            first = noArray = false
+            res = noAtomized || first ? src : [...res, ...src]
+            first = noAtomized = false
             continue
         }
         if (isStyledComponentData(src) || isDeferred(src) || isStyledComponent(src)) {
             res = src
-            noArray = true
+            noAtomized = true
             continue
         }
         throw 'All rulesets must be atomized first for mergeRulesets'
     }
-    return noArray ? res : wrapRuleset(res)
+    return noAtomized ? res : wrapRuleset(res)
 }
 
 // immutable

@@ -1,10 +1,10 @@
 ﻿import React from 'react'
-import warning from 'warning'
 
 import { TEngine, TComponents, TTyped } from 'reactxx-typings'
 
 import { toClassNamesWithQuery } from '../utils/to-classnames'
 import { atomizeRuleset } from '../utils/atomize'
+import { removeConditions } from '../utils/remove-conditions'
 
 //********* HOOK ************ */
 // finish styled component definition
@@ -16,13 +16,14 @@ export const useStyledComponents = <T extends TEngine.Sheet>(
     const propsRef = React.useRef(null) // closure with actual props for rendering
     propsRef.current = props
 
-    const createComp =
+    const createStyledComp =
         ({ Comp, sheetMap, defaultProps }: $StyleComponentData) => // data from $component(...)(...)
             innerProps => {
                 const props = propsRef.current // get actual props from closure
                 // create actual sheet for styled component
                 const res: any = {}
-                for (const p in sheetMap) res[p] = toClassNamesWithQuery(props, classes[sheetMap[p]])
+                for (const p in sheetMap)
+                    res[p] = removeConditions(toClassNamesWithQuery(props, classes[sheetMap[p]]))
                 // render styled component
                 const mergedProps = { ...defaultProps, ...innerProps, classes: res } // merge props
                 return React.createElement(Comp, mergedProps)
@@ -31,12 +32,13 @@ export const useStyledComponents = <T extends TEngine.Sheet>(
 
     const classesNew = React.useMemo(() => {
 
-        const res: T = classes
+        let res: T = classes
         for (const p in classes) {
             const sheetComp = classes[p]
             if (!isStyledComponentData(sheetComp)) continue
-            if (res === classes) res === { ...classes as any }
-            const comp = res[p] = createComp(sheetComp)
+            if (res === classes)
+                res = { ...classes as TEngine.Sheet } as T
+            const comp = res[p] = createStyledComp(sheetComp)
             comp['displayName'] = 'styled-' + sheetComp.path
             comp['$s$'] = true
         }
@@ -73,15 +75,15 @@ export const $component = (
 }
 
 export function isStyledComponentTemp(obj): obj is $StyleComponent {
-    return (obj as $StyleComponent).$stemp$
+    return obj && (obj as $StyleComponent).$stemp$
 }
 
 export function isStyledComponentData(obj): obj is $StyleComponentData {
-    return (obj as $StyleComponentData).$sdata$
+    return obj && (obj as $StyleComponentData).$sdata$
 }
 
 export function isStyledComponent(obj): obj is {} {
-    return obj.$s$
+    return obj && obj.$s$
 }
 
 export type $StyleComponent = ReturnType<typeof $component>

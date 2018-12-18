@@ -1,4 +1,6 @@
-﻿import { TTyped, TComponents } from 'reactxx-typings';
+﻿import warning from 'warning'
+
+import { TTyped, TComponents } from 'reactxx-typings';
 
 export const getComponent = <R extends TTyped.Shape>(
     getComp: TComponents.GetComponent<R>, configss?: TComponents.ComponentConfigss<R>
@@ -6,7 +8,7 @@ export const getComponent = <R extends TTyped.Shape>(
     const config = mergeConfig(configss)
     config.getComponent = getComp
 
-    const Comp = getComp(config)
+    const Comp = config.Comp = getComp(config)
     Comp.displayName = config.displayName
     Comp.config = config
 

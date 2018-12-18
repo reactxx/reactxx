@@ -1,8 +1,6 @@
 import { TComponents, TTyped } from 'reactxx-typings'
 import { TPrimitives } from './shapes'
 
-import { DomPopmotionConfig } from 'popmotion-pose'
-
 declare module 'reactxx-typings' {
 
     namespace TExtensions {
@@ -17,6 +15,7 @@ declare module 'reactxx-typings' {
         interface Config<R extends TTyped.Shape = TTyped.Shape> {
             isAnimated?: boolean
             getComponent?: TComponents.GetComponent<R>
+            Comp?: TComponents.SFC<R>
         }
 
 

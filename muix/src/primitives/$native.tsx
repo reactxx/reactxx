@@ -74,9 +74,10 @@ export const getScrollView: TComponents.GetComponent<TPrimitives.ScrollViewShape
 
     const scrollViewProps: TTyped.ScrollViewProperties = {...getRootNativeStyleProps<V>()}
     if ($rootNativeProps) Object.assign(scrollViewProps, $rootNativeProps)
+    const contStyle = getNativeStyleProps(classes.container)
+    if (contStyle) scrollViewProps.contentContainerStyle = contStyle.style
 
     return <ActScrollView
         {...scrollViewProps}
-        contentContainerStyle={getNativeStyleProps(classes.container).style}
         children={children} />
 }

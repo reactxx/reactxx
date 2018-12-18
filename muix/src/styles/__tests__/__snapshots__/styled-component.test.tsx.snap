@@ -1,0 +1,483 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`STYLED COMPONENT ## NATIVE ## 01: Outer 1`] = `
+<div>
+  <div
+    data-testid="toggle"
+    data-trace="
+padding @outer-component.sheet.root/ifelse-false"
+    style="padding: 10px;"
+  >
+    OUTER 
+    CLOSED
+    : 
+    <span
+      data-trace="
+backgroundColor @inner-component.sheet.root[0]
+color @inner-component.sheet.root[1]/ifelse-false
+borderColor @outer-component.sheet.Left/inner-component.root[0]
+fontWeight @outer-component.sheet.Left/inner-component.root[1]/ifelse-false"
+      style="background-color: yellow; color: gray; border-color: red; font-weight: 300;"
+    >
+      INNER  
+      DISABLED
+      : 
+      LEFT
+    </span>
+    <span
+      data-trace="
+backgroundColor @inner-component.sheet.root[0]
+color @inner-component.sheet.root[1]/ifelse-true
+borderColor @outer-component.sheet.Right/inner-component.root"
+      style="background-color: yellow; color: red; border-color: green;"
+    >
+      INNER  
+      ENABLED
+      : 
+      RIGHT
+    </span>
+  </div>
+</div>
+`;
+
+exports[`STYLED COMPONENT ## NATIVE ## 02: Outer opened 1`] = `
+<div>
+  <div
+    data-testid="toggle"
+    data-trace="
+padding @outer-component.sheet.root/ifelse-true"
+    style="padding: 0px;"
+  >
+    OUTER 
+    OPENED
+    : 
+    <span
+      data-trace="
+backgroundColor @inner-component.sheet.root[0]
+color @inner-component.sheet.root[1]/ifelse-false
+borderColor @outer-component.sheet.Left/inner-component.root[0]
+fontWeight @outer-component.sheet.Left/inner-component.root[1]/ifelse-true"
+      style="background-color: yellow; color: gray; border-color: red; font-weight: 500;"
+    >
+      INNER  
+      DISABLED
+      : 
+      LEFT
+    </span>
+    <span
+      data-trace="
+backgroundColor @inner-component.sheet.root[0]
+color @inner-component.sheet.root[1]/ifelse-true
+borderColor @outer-component.sheet.Right/inner-component.root"
+      style="background-color: yellow; color: red; border-color: green;"
+    >
+      INNER  
+      ENABLED
+      : 
+      RIGHT
+    </span>
+  </div>
+</div>
+`;
+
+exports[`STYLED COMPONENT ## NATIVE ## 03: Outer both 1`] = `
+<div>
+  <div>
+    <div
+      data-testid="toggle"
+      data-trace="
+padding @outer-component.sheet.root/ifelse-true"
+      style="padding: 0px;"
+    >
+      OUTER 
+      OPENED
+      : 
+      <span
+        data-trace="
+backgroundColor @inner-component.sheet.root[0]
+color @inner-component.sheet.root[1]/ifelse-false
+borderColor @outer-component.sheet.Left/inner-component.root[0]
+fontWeight @outer-component.sheet.Left/inner-component.root[1]/ifelse-true"
+        style="background-color: yellow; color: gray; border-color: red; font-weight: 500;"
+      >
+        INNER  
+        DISABLED
+        : 
+        LEFT
+      </span>
+      <span
+        data-trace="
+backgroundColor @inner-component.sheet.root[0]
+color @inner-component.sheet.root[1]/ifelse-true
+borderColor @outer-component.sheet.Right/inner-component.root"
+        style="background-color: yellow; color: red; border-color: green;"
+      >
+        INNER  
+        ENABLED
+        : 
+        RIGHT
+      </span>
+    </div>
+    <div
+      data-testid="toggle"
+      data-trace="
+padding @outer-component.sheet.root/ifelse-false"
+      style="padding: 10px;"
+    >
+      OUTER 
+      CLOSED
+      : 
+      <span
+        data-trace="
+backgroundColor @inner-component.sheet.root[0]
+color @inner-component.sheet.root[1]/ifelse-false
+borderColor @outer-component.sheet.Left/inner-component.root[0]
+fontWeight @outer-component.sheet.Left/inner-component.root[1]/ifelse-false"
+        style="background-color: yellow; color: gray; border-color: red; font-weight: 300;"
+      >
+        INNER  
+        DISABLED
+        : 
+        LEFT
+      </span>
+      <span
+        data-trace="
+backgroundColor @inner-component.sheet.root[0]
+color @inner-component.sheet.root[1]/ifelse-true
+borderColor @outer-component.sheet.Right/inner-component.root"
+        style="background-color: yellow; color: red; border-color: green;"
+      >
+        INNER  
+        ENABLED
+        : 
+        RIGHT
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`STYLED COMPONENT ## NATIVE ## 04: change open with click 1`] = `
+<div>
+  <div>
+    <div
+      data-testid="toggle"
+      data-trace="
+padding @outer-component.sheet.root/ifelse-false"
+      style="padding: 10px;"
+    >
+      OUTER 
+      CLOSED
+      : 
+      <span
+        data-trace="
+backgroundColor @inner-component.sheet.root[0]
+color @inner-component.sheet.root[1]/ifelse-false
+borderColor @outer-component.sheet.Left/inner-component.root[0]
+fontWeight @outer-component.sheet.Left/inner-component.root[1]/ifelse-false"
+        style="background-color: yellow; color: gray; border-color: red; font-weight: 300;"
+      >
+        INNER  
+        DISABLED
+        : 
+        LEFT
+      </span>
+      <span
+        data-trace="
+backgroundColor @inner-component.sheet.root[0]
+color @inner-component.sheet.root[1]/ifelse-true
+borderColor @outer-component.sheet.Right/inner-component.root"
+        style="background-color: yellow; color: red; border-color: green;"
+      >
+        INNER  
+        ENABLED
+        : 
+        RIGHT
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`STYLED COMPONENT ## NATIVE ## 04: change open with click 2`] = `
+<div>
+  <div>
+    <div
+      data-testid="toggle"
+      data-trace="
+padding @outer-component.sheet.root/ifelse-true"
+      style="padding: 0px;"
+    >
+      OUTER 
+      OPENED
+      : 
+      <span
+        data-trace="
+backgroundColor @inner-component.sheet.root[0]
+color @inner-component.sheet.root[1]/ifelse-false
+borderColor @outer-component.sheet.Left/inner-component.root[0]
+fontWeight @outer-component.sheet.Left/inner-component.root[1]/ifelse-true"
+        style="background-color: yellow; color: gray; border-color: red; font-weight: 500;"
+      >
+        INNER  
+        DISABLED
+        : 
+        LEFT
+      </span>
+      <span
+        data-trace="
+backgroundColor @inner-component.sheet.root[0]
+color @inner-component.sheet.root[1]/ifelse-true
+borderColor @outer-component.sheet.Right/inner-component.root"
+        style="background-color: yellow; color: red; border-color: green;"
+      >
+        INNER  
+        ENABLED
+        : 
+        RIGHT
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`STYLED COMPONENT ## WEB ## 01: Outer 1`] = `
+<div>
+  <div
+    class="b"
+    data-testid="toggle"
+    data-trace="
+.b { padding:10px } @outer-component.sheet.root/ifelse-false"
+  >
+    OUTER 
+    CLOSED
+    : 
+    <span
+      class="e c i g"
+      data-trace="
+.e { font-weight:300 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-false
+.c { border-color:red } @outer-component.sheet.Left/inner-component.root[0]
+.i { color:gray } @inner-component.sheet.root[1]/ifelse-false
+.g { background-color:yellow } @inner-component.sheet.root[0]"
+    >
+      INNER  
+      DISABLED
+      : 
+      LEFT
+    </span>
+    <span
+      class="f h g"
+      data-trace="
+.f { border-color:green } @outer-component.sheet.Right/inner-component.root
+.h { color:red } @inner-component.sheet.root[1]/ifelse-true
+.g { background-color:yellow } @inner-component.sheet.root[0]"
+    >
+      INNER  
+      ENABLED
+      : 
+      RIGHT
+    </span>
+  </div>
+</div>
+`;
+
+exports[`STYLED COMPONENT ## WEB ## 02: Outer opened 1`] = `
+<div>
+  <div
+    class="a"
+    data-testid="toggle"
+    data-trace="
+.a { padding:0 } @outer-component.sheet.root/ifelse-true"
+  >
+    OUTER 
+    OPENED
+    : 
+    <span
+      class="d c i g"
+      data-trace="
+.d { font-weight:500 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-true
+.c { border-color:red } @outer-component.sheet.Left/inner-component.root[0]
+.i { color:gray } @inner-component.sheet.root[1]/ifelse-false
+.g { background-color:yellow } @inner-component.sheet.root[0]"
+    >
+      INNER  
+      DISABLED
+      : 
+      LEFT
+    </span>
+    <span
+      class="f h g"
+      data-trace="
+.f { border-color:green } @outer-component.sheet.Right/inner-component.root
+.h { color:red } @inner-component.sheet.root[1]/ifelse-true
+.g { background-color:yellow } @inner-component.sheet.root[0]"
+    >
+      INNER  
+      ENABLED
+      : 
+      RIGHT
+    </span>
+  </div>
+</div>
+`;
+
+exports[`STYLED COMPONENT ## WEB ## 03: Outer both 1`] = `
+<div>
+  <div>
+    <div
+      class="a"
+      data-testid="toggle"
+      data-trace="
+.a { padding:0 } @outer-component.sheet.root/ifelse-true"
+    >
+      OUTER 
+      OPENED
+      : 
+      <span
+        class="d c i g"
+        data-trace="
+.d { font-weight:500 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-true
+.c { border-color:red } @outer-component.sheet.Left/inner-component.root[0]
+.i { color:gray } @inner-component.sheet.root[1]/ifelse-false
+.g { background-color:yellow } @inner-component.sheet.root[0]"
+      >
+        INNER  
+        DISABLED
+        : 
+        LEFT
+      </span>
+      <span
+        class="f h g"
+        data-trace="
+.f { border-color:green } @outer-component.sheet.Right/inner-component.root
+.h { color:red } @inner-component.sheet.root[1]/ifelse-true
+.g { background-color:yellow } @inner-component.sheet.root[0]"
+      >
+        INNER  
+        ENABLED
+        : 
+        RIGHT
+      </span>
+    </div>
+    <div
+      class="b"
+      data-testid="toggle"
+      data-trace="
+.b { padding:10px } @outer-component.sheet.root/ifelse-false"
+    >
+      OUTER 
+      CLOSED
+      : 
+      <span
+        class="e c i g"
+        data-trace="
+.e { font-weight:300 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-false
+.c { border-color:red } @outer-component.sheet.Left/inner-component.root[0]
+.i { color:gray } @inner-component.sheet.root[1]/ifelse-false
+.g { background-color:yellow } @inner-component.sheet.root[0]"
+      >
+        INNER  
+        DISABLED
+        : 
+        LEFT
+      </span>
+      <span
+        class="f h g"
+        data-trace="
+.f { border-color:green } @outer-component.sheet.Right/inner-component.root
+.h { color:red } @inner-component.sheet.root[1]/ifelse-true
+.g { background-color:yellow } @inner-component.sheet.root[0]"
+      >
+        INNER  
+        ENABLED
+        : 
+        RIGHT
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`STYLED COMPONENT ## WEB ## 04: change open with click 1`] = `
+<div>
+  <div>
+    <div
+      class="b"
+      data-testid="toggle"
+      data-trace="
+.b { padding:10px } @outer-component.sheet.root/ifelse-false"
+    >
+      OUTER 
+      CLOSED
+      : 
+      <span
+        class="e c i g"
+        data-trace="
+.e { font-weight:300 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-false
+.c { border-color:red } @outer-component.sheet.Left/inner-component.root[0]
+.i { color:gray } @inner-component.sheet.root[1]/ifelse-false
+.g { background-color:yellow } @inner-component.sheet.root[0]"
+      >
+        INNER  
+        DISABLED
+        : 
+        LEFT
+      </span>
+      <span
+        class="f h g"
+        data-trace="
+.f { border-color:green } @outer-component.sheet.Right/inner-component.root
+.h { color:red } @inner-component.sheet.root[1]/ifelse-true
+.g { background-color:yellow } @inner-component.sheet.root[0]"
+      >
+        INNER  
+        ENABLED
+        : 
+        RIGHT
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`STYLED COMPONENT ## WEB ## 04: change open with click 2`] = `
+<div>
+  <div>
+    <div
+      class="a"
+      data-testid="toggle"
+      data-trace="
+.a { padding:0 } @outer-component.sheet.root/ifelse-true"
+    >
+      OUTER 
+      OPENED
+      : 
+      <span
+        class="d c i g"
+        data-trace="
+.d { font-weight:500 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-true
+.c { border-color:red } @outer-component.sheet.Left/inner-component.root[0]
+.i { color:gray } @inner-component.sheet.root[1]/ifelse-false
+.g { background-color:yellow } @inner-component.sheet.root[0]"
+      >
+        INNER  
+        DISABLED
+        : 
+        LEFT
+      </span>
+      <span
+        class="f h g"
+        data-trace="
+.f { border-color:green } @outer-component.sheet.Right/inner-component.root
+.h { color:red } @inner-component.sheet.root[1]/ifelse-true
+.g { background-color:yellow } @inner-component.sheet.root[0]"
+      >
+        INNER  
+        ENABLED
+        : 
+        RIGHT
+      </span>
+    </div>
+  </div>
+</div>
+`;
