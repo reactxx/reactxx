@@ -26,12 +26,13 @@ export const getText: TComponents.GetComponent<TPrimitives.TextShape> = config =
     const tagProps: React.HTMLAttributes<HTMLElement> = {
         ...getRootWebStyleProps(),
         ...$rootWebProps,
-        ...events
+        ...events,
+        children
     }
 
     tagProps.className += ' ' + TPrimitives.Consts.textClassName
     
-    return url ? <a href={url} {...tagProps} /> : <div {...tagProps} children={children} />
+    return url ? <a href={url} {...tagProps} /> : <div {...tagProps}/>
 }
 
 export const getIcon: TComponents.GetComponent<TPrimitives.IconShape> = config => props => {

@@ -4,7 +4,7 @@ import { TEngine } from 'reactxx-typings'
 
 import { adjustAtomizedLow, isDeferred, deepClone } from './atomize-low'
 import { createWithTheme } from './create-with-theme'
-import { isStyledComponentTemp } from '../queryable/$styled-component'
+import { isStyledComponentTemp } from '../hooks/use-styled-components'
 
 // mutable
 export const atomizeSheet = (sheet: TEngine.SheetOrCreator, theme?, path: string = 'sheet') => {

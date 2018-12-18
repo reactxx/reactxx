@@ -2,7 +2,7 @@ import { TEngine, TTyped, TComponents } from 'reactxx-typings';
 import { deepMerge, deepMerges } from './deep-merge'
 import { isAtomized, isDeferred } from './atomize-low';
 import { wrapRuleset } from './atomize';
-import { isStyledComponentData } from '../queryable/$styled-component'
+import { isStyledComponentData, isStyledComponent } from '../hooks/use-styled-components'
 import warning = require('warning');
 
 export const mergePropsCode = (propsCode: TTyped.PropsCode | any, props: TComponents.Props[]) => {
@@ -25,6 +25,8 @@ export const mergePropsCode = (propsCode: TTyped.PropsCode | any, props: TCompon
 // immutable
 export const mergeRulesets = (sources: TEngine.Queryables[]) => {
     if (!sources || sources.length === 0) return null
+    if (sources.length === 1) return sources[0] || null
+    
     let res: TEngine.Queryables = null
     let first = true
     let noArray = false
@@ -35,7 +37,7 @@ export const mergeRulesets = (sources: TEngine.Queryables[]) => {
             first = noArray = false
             continue
         }
-        if (isStyledComponentData(src) || isDeferred(src)) {
+        if (isStyledComponentData(src) || isDeferred(src) || isStyledComponent(src)) {
             res = src
             noArray = true
             continue
@@ -48,6 +50,8 @@ export const mergeRulesets = (sources: TEngine.Queryables[]) => {
 // immutable
 export const mergeSheets = (sources: TEngine.Sheet[]) => {
     if (!sources || sources.length === 0) return null
+    if (sources.length===1) return sources[0] || null
+
     const ruleLists: Record<string, Array<any>> = {}
     for (const src of sources) {
         if (!src) continue

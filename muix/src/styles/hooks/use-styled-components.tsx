@@ -1,48 +1,88 @@
 ﻿import React from 'react'
 import warning from 'warning'
 
-import { TEngine, TComponents, O, TTyped } from 'reactxx-typings'
-import { platform, useWidths } from 'reactxx-styles'
+import { TEngine, TComponents, TTyped } from 'reactxx-typings'
 
-import { useDefaults } from './use-defaults'
-import { useProps } from './use-props'
-import { useTheme } from './use-theme'
-import { mergePropsCode } from '../utils/merge'
 import { toClassNamesWithQuery } from '../utils/to-classnames'
-import { isStyledComponentData, $StyleComponentData } from '../queryable/$styled-component'
+import { atomizeRuleset } from '../utils/atomize'
 
-export const useStyledComponents = (
-    sheet: TEngine.Sheet,
-    classes: TEngine.Sheet,
+//********* HOOK ************ */
+// finish styled component definition
+export const useStyledComponents = <T extends TEngine.Sheet>(
+    classes: T,
     props: TTyped.PropsCode,
 ) => {
-    // constant sheet check
-    const sheetRef = React.useRef<{ classes?, props?}>(sheet)
-    warning(sheetRef.current === sheet, 'Something wrong: sheetRef.current!==sheet')
 
-    const parentPars = React.useRef<{ classes?, props?}>(null)
-    const firstRender = parentPars.current === null
-    parentPars.current = { classes, props }
+    const propsRef = React.useRef(null) // closure with actual props for rendering
+    propsRef.current = props
 
-    // init components on first render
-    if (firstRender) {
-        
-        const createComp = ({Comp, sheetMap, defaultProps}: $StyleComponentData) => innerProps => {
-            const { classes, props } = parentPars.current
-            const mergedProps = { ...props, ...defaultProps || null, ...innerProps }
-            const res: any = {}
-            for (const p in sheetMap) res[p] = toClassNamesWithQuery(mergedProps, classes[sheetMap[p]])
-            return <Comp classes={res} {...innerProps} />
-        }
+    const createComp =
+        ({ Comp, sheetMap, defaultProps }: $StyleComponentData) => // data from $component(...)(...)
+            innerProps => {
+                const props = propsRef.current // get actual props from closure
+                // create actual sheet for styled component
+                const res: any = {}
+                for (const p in sheetMap) res[p] = toClassNamesWithQuery(props, classes[sheetMap[p]])
+                // render styled component
+                const mergedProps = { ...defaultProps, ...innerProps, classes: res } // merge props
+                return React.createElement(Comp, mergedProps)
+            }
 
-        for (const p in sheet) {
-            const sheetComp = sheet[p]
+
+    const classesNew = React.useMemo(() => {
+
+        const res: T = classes
+        for (const p in classes) {
+            const sheetComp = classes[p]
             if (!isStyledComponentData(sheetComp)) continue
-            const comp = sheet[p] = createComp(sheetComp)
+            if (res === classes) res === { ...classes as any }
+            const comp = res[p] = createComp(sheetComp)
             comp['displayName'] = 'styled-' + sheetComp.path
             comp['$s$'] = true
         }
-    }
 
+        return res
+
+    }, [classes])
+
+    return classesNew
 }
 
+//********* ENGINE ************ */
+
+// called in sheet definition, results used in atomizeSheet
+export const $component = (
+    Comp: TComponents.SFC,
+    sheet: TEngine.Sheet,
+    defaultProps: TComponents.Props
+) => {
+    // called in atomizeSheet, result sits in sheet till the useStyledComponents is called
+    const res = (parentSheet: TEngine.Sheet, parentSheetProp: string, path: string) => {
+        const sheetMap: Record<string, string> = {}
+        if (sheet) {
+            for (const p in sheet) {
+                const newName = `${parentSheetProp}.${p}`
+                parentSheet[newName] = atomizeRuleset(sheet[p], null, path + '/' + Comp.displayName + '.' + p)
+                sheetMap[p] = newName
+            }
+        }
+        return { Comp, sheetMap, defaultProps, path, $sdata$: true }
+    }
+    res.$stemp$ = true
+    return res
+}
+
+export function isStyledComponentTemp(obj): obj is $StyleComponent {
+    return (obj as $StyleComponent).$stemp$
+}
+
+export function isStyledComponentData(obj): obj is $StyleComponentData {
+    return (obj as $StyleComponentData).$sdata$
+}
+
+export function isStyledComponent(obj): obj is {} {
+    return obj.$s$
+}
+
+export type $StyleComponent = ReturnType<typeof $component>
+export type $StyleComponentData = ReturnType<$StyleComponent>

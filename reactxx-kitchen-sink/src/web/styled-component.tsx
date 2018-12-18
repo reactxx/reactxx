@@ -8,16 +8,23 @@ import { Text } from "reactxx-primitives"
 interface ShapeLow extends TTyped.ShapeAncestor {
 }
 
-const { COMPONENT } = getTypedEngine<ShapeLow>()
+const { COMPONENT, STYLE } = getTypedEngine<ShapeLow>()
 
 const $sheet = {
+    root: STYLE<T>(
+        {color: 'white'}
+    ),
     Root: COMPONENT(Text, {
         root: {
             backgroundColor: 'red',
             width: 200,
             height: 100,
+            textAlign: 'center',
+            marginTop: 10
         }
-    })
+    }, {
+            singleLine: true
+        })
 }
 
 interface Shape extends ShapeLow {
@@ -33,12 +40,22 @@ const getExample: TComponents.GetComponent<Shape> = config => props => {
 
     const { classes } = useStyles<Shape>(props, config)
 
-    return <classes.Root>
-        Hallo world
-    </classes.Root>
+    return <>
+        <classes.Root className={classes.root}>
+            Hallo world, Hallo world, Hallo world
+        </classes.Root>
+        <classes.Root singleLine={false}>
+            Hallo world, Hallo world, Hallo world
+        </classes.Root>
+    </>
 
 }
 
 const Example = getComponent(getExample, config)
 
-export default Example
+const App = () => <>
+    <Example/>
+    <Example classes={{root: {color: 'yellow'}}}/>
+</>
+
+export default App

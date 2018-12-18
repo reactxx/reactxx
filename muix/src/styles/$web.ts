@@ -3,7 +3,7 @@ import { assignPlatform, platform } from 'reactxx-styles'
 import { TEngine, TTyped } from 'reactxx-typings'
 import { setActWidth } from './queryable/$widths/store'
 import { toClassNamesWithQuery } from './utils/to-classnames'
-import { TAsEngineClassName } from './utils/from-engine'
+import { TAsTypedClassName } from './utils/from-engine'
 
 export const init = () => {
   
@@ -29,7 +29,7 @@ export const init = () => {
 
     getStyleProps: (propsCode, rulesets, className, style) => {
       const css = toClassNamesWithQuery(propsCode, ...rulesets, className)
-      let reduced = platform.applyLastwinsStrategy(TAsEngineClassName(css)) as TEngine.AtomicWebLows
+      let reduced = platform.applyLastwinsStrategy(TAsTypedClassName(css)) as TEngine.AtomicWebLows
       const res: TTyped.StylePropsWeb = {
           style: style as React.CSSProperties,
           className: platform.finalizeClassName(reduced) as string

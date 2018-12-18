@@ -21,7 +21,7 @@ export const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
     const { sheet, propsDefault } = useDefaults(theme, config)
 
     // from props
-    const { classes, className, style, propsRest, themedProps } = useProps<R>(theme, sheet, props)
+    const { classes: propsClasses, className, style, propsRest, themedProps } = useProps<R>(theme, sheet, props)
 
     // widths
     const { actWidth, getWidthMap, breakpoints } = useWidths()
@@ -32,7 +32,7 @@ export const useStyles = <R extends TTyped.Shape = TTyped.Shape>(
     }
     mergePropsCode(propsCode, [propsDefault, propsRest, themedProps && themedProps(theme)])
 
-    useStyledComponents(sheet, classes, propsCode)
+    const classes = useStyledComponents(propsClasses, propsCode)
 
     // typed helpers for styling platform components (web's div, span etc, native Text, View etc)
     const getWebStyleProps = (...rulesets: TTyped.RulesetSimple[]) =>

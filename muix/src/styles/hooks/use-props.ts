@@ -1,9 +1,9 @@
 ﻿import React from 'react';
 import {
     atomizeRuleset, atomizeSheet, atomizeStyle, mergeSheets,
-    TAsEngineClassName, TAsTypedClassName,
-    TAsEngineSheet, TAsTypedSheet,
-    TAsEngineStyle, TAsTypedStyle
+    TAsTypedClassName, TAsEngineClassName,
+    TAsTypedSheet, TAsEngineSheet,
+    TAsTypedStyle, TAsEngineStyle
 } from 'reactxx-styles';
 import { TEngine, TTyped, TComponents } from 'reactxx-typings';
 
@@ -13,16 +13,16 @@ export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, sheet: TE
 
     // merge sheet with classes
     const classes = React.useMemo(() => {
-        if (!classes_) return TAsEngineSheet<R>(sheet)
-        const classes = atomizeSheet(TAsTypedSheet(classes_), theme, 'classes')
-        const res = TAsEngineSheet<R>(mergeSheets([sheet, classes]))
+        if (!classes_) return TAsTypedSheet<R>(sheet)
+        const classes = atomizeSheet(TAsEngineSheet(classes_), theme, 'classes')
+        const res = TAsTypedSheet<R>(mergeSheets([sheet, classes]))
         return res
     }, [classes_, theme])
 
     // className
     const className = React.useMemo(
-        () => !className_ ? null : TAsEngineClassName<R>(atomizeRuleset(
-            TAsTypedClassName(className_),
+        () => !className_ ? null : TAsTypedClassName<R>(atomizeRuleset(
+            TAsEngineClassName(className_),
             theme,
             'classes'
         )),
@@ -31,7 +31,7 @@ export const useProps = <R extends TTyped.Shape = TTyped.Shape>(theme, sheet: TE
 
     // styles
     const style = React.useMemo(
-        () => !style_ ? null : TAsEngineStyle<R>(atomizeStyle(TAsTypedStyle(style_), theme)),
+        () => !style_ ? null : TAsTypedStyle<R>(atomizeStyle(TAsEngineStyle(style_), theme)),
         [style_, theme]
     )
 

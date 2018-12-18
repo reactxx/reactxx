@@ -2,7 +2,7 @@ import { Dimensions } from 'react-native'
 import { TEngine, TTyped } from 'reactxx-typings'
 import { platform, assignPlatform } from './utils/globals'
 import { toClassNamesWithQuery } from './utils/to-classnames'
-import { TAsEngineClassName } from './utils/from-engine'
+import { TAsTypedClassName } from './utils/from-engine'
 import { setActWidth } from './queryable/$widths/store'
 
 import { View as View_, Text as Text_, Image as Image_, ScrollView as ScrollView_ } from 'react-native'
@@ -36,7 +36,7 @@ export const init = () => assignPlatform({
 
     getStyleProps: (propsCode, rulesets, classNames, style) => {
         const css = toClassNamesWithQuery(propsCode, ...rulesets, classNames, style)
-        let reduced = platform.applyLastwinsStrategy(TAsEngineClassName(css)) as TEngine.AtomicNativeLows
+        let reduced = platform.applyLastwinsStrategy(TAsTypedClassName(css)) as TEngine.AtomicNativeLows
         const res: TTyped.StylePropsNative<TTyped.RulesetIds> = {
             style: platform.finalizeClassName(reduced) as TEngine.AtomicNativeLows
         }
