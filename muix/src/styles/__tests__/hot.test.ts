@@ -1,8 +1,8 @@
 import React from 'react'
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
-import { getTypedEngine, WEB, NATIVE, STYLE, COMPILE, WIDTH, toClassNamesRuleset } from 'reactxx-styles'
+import { getTypedEngine, WEB, NATIVE, STYLE, COMPILE, WIDTH, toClassNames } from 'reactxx-styles'
 
-//let $atomizeRuleset, $toClassNamesRuleset
+//let $atomizeRuleset, $toClassNames
 import { initPlatform, toMatchSnapshot } from "./init-platform.t"
 
 import { theme, Theme } from "reactxx-typings-test/shape.t"
@@ -47,24 +47,24 @@ describe("SHEETER HOT", () => {
       expect(ruleset).toMatchSnapshot()
     })
 
-    it("04: color: 'red'", () => toMatchSnapshot(toClassNamesRuleset(null,
+    it("04: color: 'red'", () => toMatchSnapshot(toClassNames(null,
       HOT<T>(state => ({
         color: 'red'
       }))
     )))
 
-    it("05: nested", () => toMatchSnapshot(toClassNamesRuleset(null,
+    it("05: nested", () => toMatchSnapshot(toClassNames(null,
       HOT<T>(state => HOT<T>(state => ({ color: 'red' })))
     )))
 
-    it("06: nested", () => toMatchSnapshot(toClassNamesRuleset(null,
+    it("06: nested", () => toMatchSnapshot(toClassNames(null,
       HOT<T>(state => [{ margin: 0 }, HOT<T>(state => ({ color: 'red' }))])
     )))
 
     describe("07: use attr", () => {
       beforeEach(() => initPlatform(isWeb))
 
-      // '{ color: queryPar.primary }' is processet very late (during $toClassNamesRuleset processing)
+      // '{ color: queryPar.primary }' is processet very late (during $toClassNames processing)
       const RS1 = HOT<T>(queryPar => ({ color: queryPar.primary }))
       const RS2 = HOT<T>(queryPar => IF<T>(true, { color: queryPar.primary }))
       const RS3 = HOT<T>(queryPar => [
@@ -73,10 +73,10 @@ describe("SHEETER HOT", () => {
       ])
 
       const test = (msg: string, ruleset: T) => {
-        it("01: red " + msg, () => toMatchSnapshot(toClassNamesRuleset({ primary: 'red' },
+        it("01: red " + msg, () => toMatchSnapshot(toClassNames({ primary: 'red' },
           ruleset // color is red
         )))
-        it("02: green " + msg, () => toMatchSnapshot(toClassNamesRuleset({ primary: 'green' },
+        it("02: green " + msg, () => toMatchSnapshot(toClassNames({ primary: 'green' },
           ruleset // color is green
         )))
       }
