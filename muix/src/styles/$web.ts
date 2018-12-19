@@ -2,7 +2,7 @@ import Fela from 'reactxx-fela'
 import { assignPlatform, platform } from 'reactxx-styles'
 import { TEngine, TTyped } from 'reactxx-typings'
 import { setActWidth } from './queryable/$widths/store'
-import { toClassNamesWithQuery } from './utils/to-classnames'
+import { toClassNames } from './utils/to-classnames'
 import { TAsTypedClassName } from './utils/from-engine'
 
 export const init = () => {
@@ -28,14 +28,13 @@ export const init = () => {
     finalizeClassName: platform.renderer.finalizeClassName,
 
     getStyleProps: (propsCode, rulesets, className, style) => {
-      const css = toClassNamesWithQuery(propsCode, ...rulesets, className)
-      let reduced = platform.applyLastwinsStrategy(TAsTypedClassName(css)) as TEngine.AtomicWebLows
+      const reduced = toClassNames(propsCode, ...rulesets, className)
       const res: TTyped.StylePropsWeb = {
           style: style as React.CSSProperties,
-          className: platform.finalizeClassName(reduced) as string
+          className: reduced && platform.finalizeClassName(reduced) as string
       }
       if (window.__TRACE__) {
-        const trace =  Fela.dataTrace(reduced, window.__TRACE__.dataTraceFlag)
+        const trace =  Fela.dataTrace(reduced as TEngine.AtomicWeb[], window.__TRACE__.dataTraceFlag)
         if (trace) res['data-trace'] = trace
       }
       return res

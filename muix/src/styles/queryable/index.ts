@@ -8,7 +8,6 @@ export { default as $width } from './$widths/$width'
 
 import { TEngine, TTyped, $W, O } from 'reactxx-typings'
 import { atomizeRuleset } from '../utils/atomize'
-import { toClassNamesWithQuery } from '../utils/to-classnames'
 
 import $web from './$web'
 import $native from './$native'
@@ -53,8 +52,8 @@ export const HOT:
     <S extends TTyped.Shape, R extends TTyped.RulesetIds>(cond: (p: TTyped.PropsCode<S>) => TTyped.Ruleset<R> | TTyped.Ruleset<R>[]) => R =
     $hot
 
-export const QUERY:
-    <S extends TTyped.Shape, R extends TTyped.RulesetIds>(query: TTyped.PropsCode<S>, ...rules: TTyped.RulesetSimple<R>[]) => R =
-    toClassNamesWithQuery as any
+// export const QUERY:
+//     <S extends TTyped.Shape, R extends TTyped.RulesetIds>(query: TTyped.PropsCode<S>, ...rules: TTyped.RulesetSimple<R>[]) => R =
+//     toClassNamesWithQuery as any
 
 export const COMPONENT = $component as any

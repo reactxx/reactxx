@@ -11,7 +11,7 @@ export { useDefaults } from './hooks/use-defaults'
 export { useProps } from './hooks/use-props'
 
 export { atomizeSheet, atomizeRuleset, atomizeStyle } from './utils/atomize'
-export { toClassNamesWithQuery } from './utils/to-classnames'
+export { toClassNamesWithQuery, toClassNames } from './utils/to-classnames'
 export { adjustAtomizedLow, isToAtomizeArray } from './utils/atomize-low'
 export { getTypedEngine } from './utils/get-engine'
 

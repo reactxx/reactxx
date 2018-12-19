@@ -96,7 +96,7 @@ declare namespace TTyped {
     IFELSE: <R extends RulesetIds>(cond: boolean | ((p: PropsCode<S>) => boolean), ifPart: Rulesets<R>, elsePart: Rulesets<R>) => R
     HOT: <R extends RulesetIds>(cond: (p: PropsCode<S>) => Ruleset<R> | Ruleset<R>[]) => R
 
-    QUERY: <R extends RulesetIds>(query: PropsCode<S>, ...rules: RulesetSimple<R>[]) => R
+    //QUERY: <R extends RulesetIds>(query: PropsCode<S>, ...rules: RulesetSimple<R>[]) => R
 
     COMPONENT: <S extends Shape>(
       Comp: TComponents.SFC<S>,

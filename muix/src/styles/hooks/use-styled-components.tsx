@@ -17,8 +17,9 @@ export const useStyledComponents = <T extends TEngine.Sheet>(
     propsRef.current = props
 
     const createStyledComp =
-        ({ Comp, sheetMap, defaultProps }: $StyleComponentData) => // data from $component(...)(...)
-            innerProps => {
+        ({ Comp, sheetMap, defaultProps, path }: $StyleComponentData) => {// data from $component(...)(...)
+
+            const comp: $StyleComponent = innerProps => {
                 const props = propsRef.current // get actual props from closure
                 // create actual sheet for styled component
                 const res: any = {}
@@ -29,6 +30,12 @@ export const useStyledComponents = <T extends TEngine.Sheet>(
                 return React.createElement(Comp, mergedProps)
             }
 
+            comp.displayName = 'styled-' + path
+            comp.$s$ = true
+            
+            return comp
+        }
+
 
     const classesNew = React.useMemo(() => {
 
@@ -38,9 +45,7 @@ export const useStyledComponents = <T extends TEngine.Sheet>(
             if (!isStyledComponentData(sheetComp)) continue
             if (res === classes)
                 res = { ...classes as TEngine.Sheet } as T
-            const comp = res[p] = createStyledComp(sheetComp)
-            comp['displayName'] = 'styled-' + sheetComp.path
-            comp['$s$'] = true
+            res[p] = createStyledComp(sheetComp)
         }
 
         return res
@@ -52,14 +57,14 @@ export const useStyledComponents = <T extends TEngine.Sheet>(
 
 //********* ENGINE ************ */
 
-// called in sheet definition, results used in atomizeSheet
+// called in sheet definition, result function is used in atomizeSheet
 export const $component = (
     Comp: TComponents.SFC,
     sheet: TEngine.Sheet,
     defaultProps: TComponents.Props
 ) => {
     // called in atomizeSheet, result sits in sheet till the useStyledComponents is called
-    const res = (parentSheet: TEngine.Sheet, parentSheetProp: string, path: string) => {
+    const result = (parentSheet: TEngine.Sheet, parentSheetProp: string, path: string) => {
         const sheetMap: Record<string, string> = {}
         if (sheet) {
             for (const p in sheet) {
@@ -70,21 +75,24 @@ export const $component = (
         }
         return { Comp, sheetMap, defaultProps, path, $sdata$: true }
     }
-    res.$stemp$ = true
-    return res
+    result.$stemp$ = true
+    return result
 }
 
-export function isStyledComponentTemp(obj): obj is $StyleComponent {
-    return obj && (obj as $StyleComponent).$stemp$
+export function isStyledComponentTemp(obj): obj is $StyleComponentTemp {
+    return obj && (obj as $StyleComponentTemp).$stemp$
 }
 
 export function isStyledComponentData(obj): obj is $StyleComponentData {
     return obj && (obj as $StyleComponentData).$sdata$
 }
 
-export function isStyledComponent(obj): obj is {} {
-    return obj && obj.$s$
+export function isStyledComponent(obj): obj is $StyleComponent {
+    return obj && (obj as $StyleComponent).$s$
 }
 
-export type $StyleComponent = ReturnType<typeof $component>
-export type $StyleComponentData = ReturnType<$StyleComponent>
+type $StyleComponentTemp = ReturnType<typeof $component>
+type $StyleComponentData = ReturnType<$StyleComponentTemp>
+type $StyleComponent = React.SFC<any> & {
+    $s$?: boolean
+}

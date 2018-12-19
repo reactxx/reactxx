@@ -1,7 +1,7 @@
 import { Dimensions } from 'react-native'
 import { TEngine, TTyped } from 'reactxx-typings'
 import { platform, assignPlatform } from './utils/globals'
-import { toClassNamesWithQuery } from './utils/to-classnames'
+import { toClassNames } from './utils/to-classnames'
 import { TAsTypedClassName } from './utils/from-engine'
 import { setActWidth } from './queryable/$widths/store'
 
@@ -35,9 +35,8 @@ export const init = () => assignPlatform({
     finalizeClassName,
 
     getStyleProps: (propsCode, rulesets, classNames, style) => {
-        const css = toClassNamesWithQuery(propsCode, ...rulesets, classNames, style)
-        if (!css) return undefined
-        let reduced = platform.applyLastwinsStrategy(TAsTypedClassName(css)) as TEngine.AtomicNativeLows
+        const reduced = toClassNames(propsCode, ...rulesets, classNames, style)
+        if (!reduced) return undefined
         const res: TTyped.StylePropsNative<TTyped.RulesetIds> = {
             style: platform.finalizeClassName(reduced) as TEngine.AtomicNativeLows
         }

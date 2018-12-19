@@ -1,6 +1,6 @@
 import React from 'react'
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
-import { getTypedEngine, WEB, NATIVE, STYLE, COMPILE, WIDTH } from 'reactxx-styles'
+import { getTypedEngine, WEB, NATIVE, STYLE, COMPILE, WIDTH, toClassNamesWithQuery } from 'reactxx-styles'
 
 //let $atomizeRuleset, $toClassNames
 import { initPlatform, dump, afterLastWin } from "./init-platform.t"
@@ -12,7 +12,7 @@ interface Shape {
   sheetQuery: { primary: string }
 }
 
-const { THEMED, IF, HOT, IFELSE, QUERY } = getTypedEngine<Shape>()
+const { THEMED, IF, HOT, IFELSE } = getTypedEngine<Shape>()
 
 
 describe("SHEETER HOT", () => {
@@ -47,17 +47,17 @@ describe("SHEETER HOT", () => {
       expect(ruleset).toMatchSnapshot()
     })
 
-    it("04: color: 'red'", () => afterLastWin(QUERY(null,
+    it("04: color: 'red'", () => afterLastWin(toClassNamesWithQuery(null,
       HOT<T>(state => ({
         color: 'red'
       }))
     )))
 
-    it("05: nested", () => afterLastWin(QUERY(null,
+    it("05: nested", () => afterLastWin(toClassNamesWithQuery(null,
       HOT<T>(state => HOT<T>(state => ({ color: 'red' })))
     )))
 
-    it("06: nested", () => afterLastWin(QUERY(null,
+    it("06: nested", () => afterLastWin(toClassNamesWithQuery(null,
       HOT<T>(state => [{ margin: 0 }, HOT<T>(state => ({ color: 'red' }))])
     )))
 
@@ -73,10 +73,10 @@ describe("SHEETER HOT", () => {
       ])
 
       const test = (msg: string, ruleset: T) => {
-        it("01: red " + msg, () => afterLastWin(QUERY({ primary: 'red' },
+        it("01: red " + msg, () => afterLastWin(toClassNamesWithQuery({ primary: 'red' },
           ruleset // color is red
         )))
-        it("02: green " + msg, () => afterLastWin(QUERY({ primary: 'green' },
+        it("02: green " + msg, () => afterLastWin(toClassNamesWithQuery({ primary: 'green' },
           ruleset // color is green
         )))
       }
@@ -92,83 +92,83 @@ describe("SHEETER HOT", () => {
 
 })
 
-type ReturnType<T extends (...args: any[]) => any> =
-  T extends (...args: any[]) => infer R ? R : never
+// type ReturnType<T extends (...args: any[]) => any> =
+//   T extends (...args: any[]) => infer R ? R : never
 
-type FirstParType<T extends (par) => any> =
-  T extends (par: infer R) => any ? R : never
+// type FirstParType<T extends (par) => any> =
+//   T extends (par: infer R) => any ? R : never
 
-const f = (idx: string) => 12
-type TT = ReturnType<typeof f>
-type FT = FirstParType<typeof f>
+// const f = (idx: string) => 12
+// type TT = ReturnType<typeof f>
+// type FT = FirstParType<typeof f>
 
-interface PropsConfig { default, code }
-type Props<T extends PropsConfig> = T['default'] & T['code']
-type Pars<Config extends PropsConfig> = Record<string, (p: Props<Config>) => boolean>
+// interface PropsConfig { default, code }
+// type Props<T extends PropsConfig> = T['default'] & T['code']
+// type Pars<Config extends PropsConfig> = Record<string, (p: Props<Config>) => boolean>
 
-type SheetPars<Config extends PropsConfig, Par extends Pars<Config>> = Par & { theme, $if }
+// type SheetPars<Config extends PropsConfig, Par extends Pars<Config>> = Par & { theme, $if }
 
-const propsConfig = {
-  default: {
-    disabled: false
-  },
-  code: {
-    computed: false
-  },
-  props: null,
-  propsCode: null,
+// const propsConfig = {
+//   default: {
+//     disabled: false
+//   },
+//   code: {
+//     computed: false
+//   },
+//   props: null,
+//   propsCode: null,
 
-  root: null as Shape,
-  root2: null as ['T', React.AnchorHTMLAttributes<HTMLAnchorElement>],
+//   root: null as Shape,
+//   root2: null as ['T', React.AnchorHTMLAttributes<HTMLAnchorElement>],
 
-}
+// }
 
 
-let ddd: React.AnchorHTMLAttributes<any>
+// let ddd: React.AnchorHTMLAttributes<any>
 
-type TCfg = Props<typeof propsConfig>
+// type TCfg = Props<typeof propsConfig>
 
-const c: Partial<TCfg> = {
-  //disabled: true,
-  //computed: false
-}
+// const c: Partial<TCfg> = {
+//   //disabled: true,
+//   //computed: false
+// }
 
-const sheetPars = {
-  getDisabled: (p: TCfg) => p.disabled,
-}
+// const sheetPars = {
+//   getDisabled: (p: TCfg) => p.disabled,
+// }
 
-const sheet = ({ theme, $if }: SheetPars<typeof propsConfig, typeof sheetPars>) => {
-  const getDisabled = (p: TCfg) => p.disabled
-  return {
-    root: null as V,
-    label: $if(getDisabled, {})
-  }
-}
+// const sheet = ({ theme, $if }: SheetPars<typeof propsConfig, typeof sheetPars>) => {
+//   const getDisabled = (p: TCfg) => p.disabled
+//   return {
+//     root: null as V,
+//     label: $if(getDisabled, {})
+//   }
+// }
 
-interface getShape<Config extends PropsConfig, Sheet extends Function> {
-  sheet: GetReturnType<Sheet>
-  props: Config['default']
-  sheetQuery: Config['code']
-}
+// interface getShape<Config extends PropsConfig, Sheet extends Function> {
+//   sheet: GetReturnType<Sheet>
+//   props: Config['default']
+//   sheetQuery: Config['code']
+// }
 
-interface Shape2 extends getShape<typeof propsConfig, typeof sheet> { }
+// interface Shape2 extends getShape<typeof propsConfig, typeof sheet> { }
 
-type TTT = Shape2['sheet']
+// type TTT = Shape2['sheet']
 
-type TSheet = GetReturnType<typeof sheet>
+// type TSheet = GetReturnType<typeof sheet>
 
-type GetReturnType<original extends Function> =
-  original extends (...x: any[]) => infer returnType ? returnType : never
+// type GetReturnType<original extends Function> =
+//   original extends (...x: any[]) => infer returnType ? returnType : never
 
-let $map, $hoot2
-const sheet_ = ({ theme, getDisabled, getVariant, $if }) => {
-  root: [
-    $if(getDisabled, {}),
-    WIDTH([0, 640], {}),
-    $map(getVariant, {
+// let $map, $hoot2
+// const sheet_ = ({ theme, getDisabled, getVariant, $if }) => {
+//   root: [
+//     $if(getDisabled, {}),
+//     WIDTH([0, 640], {}),
+//     $map(getVariant, {
 
-    }),
-    HOT(({ primary }) => ({}))
-  ]
-}
+//     }),
+//     HOT(({ primary }) => ({}))
+//   ]
+// }
 

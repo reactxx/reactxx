@@ -20,7 +20,7 @@
             "program": "${workspaceRoot}\\node_modules\\jest\\bin\\jest.js",
             "args": [
                 "--runInBand",  //https://jestjs.io/docs/en/cli.html
-                "--testPathPattern=primitives-simple.test",
+                "--testPathPattern=hot.test",
                 //"-u"
             ],
             //"preLaunchTask": "build",

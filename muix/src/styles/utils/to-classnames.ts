@@ -1,7 +1,15 @@
 import warning from 'warning'
-import { TComponents, TEngine, TTyped } from 'reactxx-typings'
+import { TEngine } from 'reactxx-typings'
 import { atomizeRuleset, wrapRuleset } from './atomize'
 import { isToAtomize, isDeferred, isTemporary } from './atomize-low'
+import { platform } from './globals'
+import { TAsTypedClassName } from './from-engine'
+
+export const toClassNames = (props, ...items: TEngine.Ruleset[]) => {
+    const css = toClassNamesWithQuery(props, ...items)
+    if (!css) return undefined
+    return platform.applyLastwinsStrategy(TAsTypedClassName(css))
+}
 
 export const toClassNamesWithQuery = (props, ...items: TEngine.Ruleset[]) => {
 

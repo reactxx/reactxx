@@ -55,13 +55,6 @@ const sheet = {
     }
   ),
 
-  Comp2: STYLED.Text(
-    {
-
-    }, {
-
-    }),
-
 }
 
 interface Shape extends ShapeLow {

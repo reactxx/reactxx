@@ -1,5 +1,5 @@
 import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
-import { getTypedEngine, toClassNamesWithQuery } from 'reactxx-styles'
+import { getTypedEngine } from 'reactxx-styles'
 
 
 
