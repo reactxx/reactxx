@@ -1,17 +1,25 @@
 import warning from 'warning'
 import { TEngine } from 'reactxx-typings'
-import { atomizeRuleset, wrapRuleset } from './atomize'
+import { atomizeRuleset, wrapAtomicLow, wrapQueryables } from './atomize'
 import { isToAtomize, isDeferred, isTemporary } from './atomize-low'
 import { platform } from './globals'
 import { TAsTypedClassName } from './from-engine'
 
+// main export: query plus 
 export const toClassNames = (props, ...items: TEngine.Ruleset[]) => {
-    const css = toClassNamesWithQuery(props, ...items)
+    const css = toClassNamesWithQuery(props, items)
     if (!css) return undefined
     return platform.applyLastwinsStrategy(TAsTypedClassName(css))
 }
 
-export const toClassNamesWithQuery = (props, ...items: TEngine.Ruleset[]) => {
+// for test and for very rare case (styled components)
+export const toClassNamesRuleset = (props, ...items: TEngine.Ruleset[]) =>
+    wrapAtomicLow(toClassNames(props, ...items))
+
+// export for test only
+export const toClassNamesWithQuery = (props, items: TEngine.Ruleset[]) => {
+
+    if (!items || items.length===0) return null
 
     let values: TEngine.QueryableItems = []
 
@@ -33,7 +41,7 @@ export const toClassNamesWithQuery = (props, ...items: TEngine.Ruleset[]) => {
     const process = (val: TEngine.Ruleset) => {
         if (!val) return
 
-        if (isDeferred(val)) { 
+        if (isDeferred(val)) {
             const res = val.evalProc(props)
             filterList(res)
             return
@@ -57,7 +65,7 @@ export const toClassNamesWithQuery = (props, ...items: TEngine.Ruleset[]) => {
 
     for (const r of items) process(r)
 
-    return values.length === 0 ? null : wrapRuleset(values) as TEngine.WithConflicts
+    return values.length === 0 ? null : wrapQueryables(values) as TEngine.WithConflicts
 }
 
 // export const deleteSystemProps = (props: TComponents.ReactsCommonProperties & TTyped.PropsCode) => {

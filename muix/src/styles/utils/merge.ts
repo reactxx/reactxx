@@ -1,7 +1,7 @@
 import { TEngine, TTyped, TComponents } from 'reactxx-typings';
 import { deepMerge, deepMerges } from './deep-merge'
 import { isAtomized, isDeferred } from './atomize-low';
-import { wrapRuleset } from './atomize';
+import { wrapQueryables } from './atomize';
 import { isStyledComponentData, isStyledComponent } from '../hooks/use-styled-components'
 import warning = require('warning');
 
@@ -44,7 +44,7 @@ export const mergeRulesets = (sources: TEngine.Queryables[]) => {
         }
         throw 'All rulesets must be atomized first for mergeRulesets'
     }
-    return noAtomized ? res : wrapRuleset(res)
+    return noAtomized ? res : wrapQueryables(res)
 }
 
 // immutable

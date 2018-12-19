@@ -82,8 +82,10 @@ function toJSON2() {
 const applyLastwinsStrategy: TEngine.ApplyLastwinsStrategy = (values: TEngine.AtomicNatives[]) => {
     if (!values) return null
     const res = Object.assign({}, ...values) as TEngine.AtomicLow
-    if (window.__TRACE__)
+    if (window.__TRACE__) {
+        delete res['conditions']
         for (const p in res) delete res['toJSON']
+    }
     res['toJSON'] = toJSON2.bind(res)
     return res
 }

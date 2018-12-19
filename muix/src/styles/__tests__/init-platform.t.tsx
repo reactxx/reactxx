@@ -74,7 +74,7 @@ export const initPlatform = (isWeb: boolean, trace: Trace = {}) => {
     }
 }
 
-export const dump = (ruleset: TEngine.Queryables | any) => {
+export const dumpLow = (ruleset: TEngine.Queryables | any) => {
     expect(ruleset).toMatchSnapshot()
     const won = platform.applyLastwinsStrategy(ruleset)
     expect(won).toMatchSnapshot()
@@ -82,7 +82,16 @@ export const dump = (ruleset: TEngine.Queryables | any) => {
     expect(final).toMatchSnapshot()
 }
 
-export const afterLastWin = (ruleset) => {
-    const won = platform.applyLastwinsStrategy(ruleset)
-    expect(won).toMatchSnapshot()
+
+export const dump = (ruleset: TEngine.Queryables | any) => {
+    expect(ruleset).toMatchSnapshot()
+    //const won = platform.applyLastwinsStrategy(ruleset)
+    expect(ruleset).toMatchSnapshot()
+    const final = platform.finalizeClassName(ruleset)
+    expect(final).toMatchSnapshot()
+}
+
+export const toMatchSnapshot = ruleset => {
+    //const won = platform.applyLastwinsStrategy(ruleset)
+    expect(ruleset).toMatchSnapshot()
 }

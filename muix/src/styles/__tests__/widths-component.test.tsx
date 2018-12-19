@@ -3,7 +3,7 @@
 import React from 'react'
 
 import { TEngine, V, TTyped } from 'reactxx-typings'
-import { platform, atomizeRuleset, toClassNamesWithQuery, WIDTH, useWidths, setActWidth } from "reactxx-styles"
+import { platform, atomizeRuleset,  WIDTH, useWidths, setActWidth } from "reactxx-styles"
 
 import { initPlatform, render } from "./init-platform.t"
 

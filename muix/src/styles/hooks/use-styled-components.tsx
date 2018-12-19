@@ -2,9 +2,8 @@
 
 import { TEngine, TComponents, TTyped } from 'reactxx-typings'
 
-import { toClassNamesWithQuery } from '../utils/to-classnames'
+import { toClassNamesRuleset } from '../utils/to-classnames'
 import { atomizeRuleset } from '../utils/atomize'
-import { removeConditions } from '../utils/remove-conditions'
 
 //********* HOOK ************ */
 // finish styled component definition
@@ -24,7 +23,7 @@ export const useStyledComponents = <T extends TEngine.Sheet>(
                 // create actual sheet for styled component
                 const res: any = {}
                 for (const p in sheetMap)
-                    res[p] = removeConditions(toClassNamesWithQuery(props, classes[sheetMap[p]]))
+                    res[p] = toClassNamesRuleset(props, classes[sheetMap[p]])
                 // render styled component
                 const mergedProps = { ...defaultProps, ...innerProps, classes: res } // merge props
                 return React.createElement(Comp, mergedProps)

@@ -24,92 +24,110 @@ Array [
 `;
 
 exports[`SHEETER HOT ## NATIVE ## 04: color: 'red' 1`] = `
-Object {
-  "color": Object {
-    "tracePath": "/$hot",
-    "value": "red",
+Array [
+  Object {
+    "color": Object {
+      "tracePath": "/$hot",
+      "value": "red",
+    },
   },
-}
+]
 `;
 
 exports[`SHEETER HOT ## NATIVE ## 05: nested 1`] = `
-Object {
-  "color": Object {
-    "tracePath": "/$hot/$hot",
-    "value": "red",
+Array [
+  Object {
+    "color": Object {
+      "tracePath": "/$hot/$hot",
+      "value": "red",
+    },
   },
-}
+]
 `;
 
 exports[`SHEETER HOT ## NATIVE ## 06: nested 1`] = `
-Object {
-  "color": Object {
-    "tracePath": "/$hot[1]/$hot",
-    "value": "red",
+Array [
+  Object {
+    "color": Object {
+      "tracePath": "/$hot[1]/$hot",
+      "value": "red",
+    },
+    "margin": Object {
+      "tracePath": "/$hot[0]",
+      "value": 0,
+    },
   },
-  "margin": Object {
-    "tracePath": "/$hot[0]",
-    "value": 0,
-  },
-}
+]
 `;
 
 exports[`SHEETER HOT ## NATIVE ## 07: use attr 01: red RS1 1`] = `
-Object {
-  "color": Object {
-    "tracePath": "/$hot",
-    "value": "red",
+Array [
+  Object {
+    "color": Object {
+      "tracePath": "/$hot",
+      "value": "red",
+    },
   },
-}
+]
 `;
 
 exports[`SHEETER HOT ## NATIVE ## 07: use attr 01: red RS2 1`] = `
-Object {
-  "color": Object {
-    "tracePath": "/$hot/$sif",
-    "value": "red",
+Array [
+  Object {
+    "color": Object {
+      "tracePath": "/$hot/$sif",
+      "value": "red",
+    },
   },
-}
+]
 `;
 
 exports[`SHEETER HOT ## NATIVE ## 07: use attr 01: red RS3 1`] = `
-Object {
-  "backgroundColor": Object {
-    "tracePath": "/$hot[1]/$hot",
-    "value": "red",
+Array [
+  Object {
+    "backgroundColor": Object {
+      "tracePath": "/$hot[1]/$hot",
+      "value": "red",
+    },
+    "color": Object {
+      "tracePath": "/$hot[0]/$if",
+      "value": "red",
+    },
   },
-  "color": Object {
-    "tracePath": "/$hot[0]/$if",
-    "value": "red",
-  },
-}
+]
 `;
 
 exports[`SHEETER HOT ## NATIVE ## 07: use attr 02: green RS1 1`] = `
-Object {
-  "color": Object {
-    "tracePath": "/$hot",
-    "value": "green",
+Array [
+  Object {
+    "color": Object {
+      "tracePath": "/$hot",
+      "value": "green",
+    },
   },
-}
+]
 `;
 
 exports[`SHEETER HOT ## NATIVE ## 07: use attr 02: green RS2 1`] = `
-Object {
-  "color": Object {
-    "tracePath": "/$hot/$sif",
-    "value": "green",
+Array [
+  Object {
+    "color": Object {
+      "tracePath": "/$hot/$sif",
+      "value": "green",
+    },
   },
-}
+]
 `;
 
 exports[`SHEETER HOT ## NATIVE ## 07: use attr 02: green RS3 1`] = `
-Object {
-  "backgroundColor": Object {
-    "tracePath": "/$hot[1]/$hot",
-    "value": "green",
+Array [
+  Object {
+    "backgroundColor": Object {
+      "tracePath": "/$hot[1]/$hot",
+      "value": "green",
+    },
   },
-}
+]
 `;
 
 exports[`SHEETER HOT ## WEB ## 01 null 1`] = `
@@ -137,56 +155,74 @@ Array [
 
 exports[`SHEETER HOT ## WEB ## 04: color: 'red' 1`] = `
 Array [
-  ".a { color:red } @/$hot",
+  Array [
+    ".a { color:red } @/$hot",
+  ],
 ]
 `;
 
 exports[`SHEETER HOT ## WEB ## 05: nested 1`] = `
 Array [
-  ".a { color:red } @/$hot/$hot",
+  Array [
+    ".a { color:red } @/$hot/$hot",
+  ],
 ]
 `;
 
 exports[`SHEETER HOT ## WEB ## 06: nested 1`] = `
 Array [
-  ".b { color:red } @/$hot[1]/$hot",
-  ".a { margin:0 } @/$hot[0]",
+  Array [
+    ".b { color:red } @/$hot[1]/$hot",
+    ".a { margin:0 } @/$hot[0]",
+  ],
 ]
 `;
 
 exports[`SHEETER HOT ## WEB ## 07: use attr 01: red RS1 1`] = `
 Array [
-  ".a { color:red } @/$hot",
+  Array [
+    ".a { color:red } @/$hot",
+  ],
 ]
 `;
 
 exports[`SHEETER HOT ## WEB ## 07: use attr 01: red RS2 1`] = `
 Array [
-  ".a { color:red } @/$hot/$sif",
+  Array [
+    ".a { color:red } @/$hot/$sif",
+  ],
 ]
 `;
 
 exports[`SHEETER HOT ## WEB ## 07: use attr 01: red RS3 1`] = `
 Array [
-  ".b { background-color:red } @/$hot[1]/$hot",
-  ".a { color:red } @/$hot[0]/$if",
+  Array [
+    ".b { background-color:red } @/$hot[1]/$hot",
+    ".a { color:red } @/$hot[0]/$if",
+  ],
 ]
 `;
 
 exports[`SHEETER HOT ## WEB ## 07: use attr 02: green RS1 1`] = `
 Array [
-  ".a { color:green } @/$hot",
+  Array [
+    ".a { color:green } @/$hot",
+  ],
 ]
 `;
 
 exports[`SHEETER HOT ## WEB ## 07: use attr 02: green RS2 1`] = `
 Array [
-  ".a { color:green } @/$hot/$sif",
+  Array [
+    ".a { color:green } @/$hot/$sif",
+  ],
 ]
 `;
 
 exports[`SHEETER HOT ## WEB ## 07: use attr 02: green RS3 1`] = `
 Array [
-  ".b { background-color:green } @/$hot[1]/$hot",
+  Array [
+    ".b { background-color:green } @/$hot[1]/$hot",
+  ],
 ]
 `;

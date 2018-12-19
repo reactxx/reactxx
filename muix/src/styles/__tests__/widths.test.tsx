@@ -3,7 +3,7 @@
 import React from 'react'
 
 import { TEngine } from 'reactxx-typings'
-import { atomizeRuleset, toClassNamesWithQuery, WIDTH } from "reactxx-styles"
+import { atomizeRuleset, toClassNamesRuleset, WIDTH } from "reactxx-styles"
 
 import { initPlatform, dump } from "./init-platform.t"
 
@@ -28,7 +28,7 @@ describe("SHEETER $WIDTHS", () => {
       expect(ruleset).toMatchSnapshot()
     })
 
-    describe("03 toClassNamesWithQuery's width change", () => {
+    describe("03 toClassNamesRuleset's width change", () => {
       beforeEach(() => initPlatform(isWeb))
 
       const rulesets = [
@@ -38,21 +38,21 @@ describe("SHEETER $WIDTHS", () => {
       ]
       !window.isWeb && it("01: native, 300", () =>
         //**WIDHT**
-        dump(toClassNamesWithQuery({ $widths: { actWidth: 300 } }, ...rulesets))
+        dump(toClassNamesRuleset({ $widths: { actWidth: 300 } }, ...rulesets))
       )
       !window.isWeb && it("02: native, 640", () =>
         //**WIDHT**
-        dump(toClassNamesWithQuery({ $widths: { actWidth: 641 } }, ...rulesets))
+        dump(toClassNamesRuleset({ $widths: { actWidth: 641 } }, ...rulesets))
       )
       !window.isWeb && it("03: native, 1024", () =>
         //**WIDHT**
-        dump(toClassNamesWithQuery({ $widths: { actWidth: 1025 } }, ...rulesets))
+        dump(toClassNamesRuleset({ $widths: { actWidth: 1025 } }, ...rulesets))
       )
       !window.isWeb && it("04: native, undefined", () =>
-        dump(toClassNamesWithQuery(undefined, ...rulesets))
+        dump(toClassNamesRuleset(undefined, ...rulesets))
       )
       window.isWeb && it("05: web", () =>
-        dump(toClassNamesWithQuery(undefined, ...rulesets))
+        dump(toClassNamesRuleset(undefined, ...rulesets))
       )
     })
 

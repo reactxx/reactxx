@@ -37,17 +37,30 @@ export const atomizeRuleset = (
 
     if (!rs) return null
 
-    const list = wrapRuleset([])
+    const list = wrapQueryables([])
     adjustAtomizedLow(rs, list, path, [], [])
 
     return list.length === 0 ? null : list
 }
 
-export const wrapRuleset = ruleset => {
-    (ruleset as TEngine.Queryables).$r$ = true
+export const wrapAtomicLow = (atomicLow: TEngine.AtomicLow) => {
+    const res = [
+        atomicLow
+    ] as TEngine.Queryables
+    res.$r$ = true
+    return res
+    // (queryables as TEngine.Queryables).$r$ = true
+    // if (window.__TRACE__)
+    //     queryables['toJSON'] = toJSON.bind(queryables)
+    // return queryables as TEngine.Queryables
+}
+
+
+export const wrapQueryables = (queryables: TEngine.QueryableItems) => {
+    (queryables as TEngine.Queryables).$r$ = true
     if (window.__TRACE__)
-        ruleset['toJSON'] = toJSON.bind(ruleset)
-    return ruleset as TEngine.Queryables
+        queryables['toJSON'] = toJSON.bind(queryables)
+    return queryables as TEngine.Queryables
 }
 function toJSON() {
     return (this as TEngine.Queryables).map(v => {

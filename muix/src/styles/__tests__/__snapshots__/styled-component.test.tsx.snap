@@ -253,10 +253,10 @@ exports[`STYLED COMPONENT ## WEB ## 01: Outer 1`] = `
     CLOSED
     : 
     <span
-      class="e c i g"
+      class="c e i g"
       data-trace="
-.e { font-weight:300 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-false
 .c { border-color:red } @outer-component.sheet.Left/inner-component.root[0]
+.e { font-weight:300 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-false
 .i { color:gray } @inner-component.sheet.root[1]/ifelse-false
 .g { background-color:yellow } @inner-component.sheet.root[0]"
     >
@@ -293,10 +293,10 @@ exports[`STYLED COMPONENT ## WEB ## 02: Outer opened 1`] = `
     OPENED
     : 
     <span
-      class="d c i g"
+      class="c d i g"
       data-trace="
-.d { font-weight:500 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-true
 .c { border-color:red } @outer-component.sheet.Left/inner-component.root[0]
+.d { font-weight:500 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-true
 .i { color:gray } @inner-component.sheet.root[1]/ifelse-false
 .g { background-color:yellow } @inner-component.sheet.root[0]"
     >
@@ -334,10 +334,10 @@ exports[`STYLED COMPONENT ## WEB ## 03: Outer both 1`] = `
       OPENED
       : 
       <span
-        class="d c i g"
+        class="c d i g"
         data-trace="
-.d { font-weight:500 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-true
 .c { border-color:red } @outer-component.sheet.Left/inner-component.root[0]
+.d { font-weight:500 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-true
 .i { color:gray } @inner-component.sheet.root[1]/ifelse-false
 .g { background-color:yellow } @inner-component.sheet.root[0]"
       >
@@ -369,10 +369,10 @@ exports[`STYLED COMPONENT ## WEB ## 03: Outer both 1`] = `
       CLOSED
       : 
       <span
-        class="e c i g"
+        class="c e i g"
         data-trace="
-.e { font-weight:300 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-false
 .c { border-color:red } @outer-component.sheet.Left/inner-component.root[0]
+.e { font-weight:300 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-false
 .i { color:gray } @inner-component.sheet.root[1]/ifelse-false
 .g { background-color:yellow } @inner-component.sheet.root[0]"
       >
@@ -411,10 +411,10 @@ exports[`STYLED COMPONENT ## WEB ## 04: change open with click 1`] = `
       CLOSED
       : 
       <span
-        class="e c i g"
+        class="c e i g"
         data-trace="
-.e { font-weight:300 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-false
 .c { border-color:red } @outer-component.sheet.Left/inner-component.root[0]
+.e { font-weight:300 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-false
 .i { color:gray } @inner-component.sheet.root[1]/ifelse-false
 .g { background-color:yellow } @inner-component.sheet.root[0]"
       >
@@ -453,10 +453,10 @@ exports[`STYLED COMPONENT ## WEB ## 04: change open with click 2`] = `
       OPENED
       : 
       <span
-        class="d c i g"
+        class="c d i g"
         data-trace="
-.d { font-weight:500 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-true
 .c { border-color:red } @outer-component.sheet.Left/inner-component.root[0]
+.d { font-weight:500 } @outer-component.sheet.Left/inner-component.root[1]/ifelse-true
 .i { color:gray } @inner-component.sheet.root[1]/ifelse-false
 .g { background-color:yellow } @inner-component.sheet.root[0]"
       >
