@@ -20,8 +20,8 @@
             "program": "${workspaceRoot}\\node_modules\\jest\\bin\\jest.js",
             "args": [
                 "--runInBand",  //https://jestjs.io/docs/en/cli.html
-                "--testPathPattern=styled-component.test",
-                //"-u"
+                "--testPathPattern=widths.test",
+                "-u"
             ],
             //"preLaunchTask": "build",
             // "internalConsoleOptions": "openOnSessionStart",

@@ -3,7 +3,7 @@
 import React from 'react'
 
 import { TEngine } from 'reactxx-typings'
-import { atomizeRuleset, toClassNamesRuleset, WIDTH } from "reactxx-styles"
+import { atomizeRuleset, toClassNames, WIDTH } from "reactxx-styles"
 
 import { initPlatform, dump } from "./init-platform.t"
 
@@ -38,21 +38,21 @@ describe("SHEETER $WIDTHS", () => {
       ]
       !window.isWeb && it("01: native, 300", () =>
         //**WIDHT**
-        dump(toClassNamesRuleset({ $widths: { actWidth: 300 } }, ...rulesets))
+        dump(toClassNames({ $widths: { actWidth: 300 } }, ...rulesets))
       )
       !window.isWeb && it("02: native, 640", () =>
         //**WIDHT**
-        dump(toClassNamesRuleset({ $widths: { actWidth: 641 } }, ...rulesets))
+        dump(toClassNames({ $widths: { actWidth: 641 } }, ...rulesets))
       )
       !window.isWeb && it("03: native, 1024", () =>
         //**WIDHT**
-        dump(toClassNamesRuleset({ $widths: { actWidth: 1025 } }, ...rulesets))
+        dump(toClassNames({ $widths: { actWidth: 1025 } }, ...rulesets))
       )
       !window.isWeb && it("04: native, undefined", () =>
-        dump(toClassNamesRuleset(undefined, ...rulesets))
+        dump(toClassNames(undefined, ...rulesets))
       )
       window.isWeb && it("05: web", () =>
-        dump(toClassNamesRuleset(undefined, ...rulesets))
+        dump(toClassNames(undefined, ...rulesets))
       )
     })
 

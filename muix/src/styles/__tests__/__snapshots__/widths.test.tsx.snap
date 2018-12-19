@@ -17,17 +17,6 @@ Array [
 `;
 
 exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 01: native, 300 1`] = `
-Array [
-  Object {
-    "color": Object {
-      "tracePath": "/$width",
-      "value": "red",
-    },
-  },
-]
-`;
-
-exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 01: native, 300 2`] = `
 Object {
   "color": Object {
     "tracePath": "/$width",
@@ -36,24 +25,13 @@ Object {
 }
 `;
 
-exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 01: native, 300 3`] = `
+exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 01: native, 300 2`] = `
 Object {
   "color": "red",
 }
 `;
 
 exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 02: native, 640 1`] = `
-Array [
-  Object {
-    "color": Object {
-      "tracePath": "/$width",
-      "value": "green",
-    },
-  },
-]
-`;
-
-exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 02: native, 640 2`] = `
 Object {
   "color": Object {
     "tracePath": "/$width",
@@ -62,24 +40,13 @@ Object {
 }
 `;
 
-exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 02: native, 640 3`] = `
+exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 02: native, 640 2`] = `
 Object {
   "color": "green",
 }
 `;
 
 exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 03: native, 1024 1`] = `
-Array [
-  Object {
-    "color": Object {
-      "tracePath": "/$width",
-      "value": "blue",
-    },
-  },
-]
-`;
-
-exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 03: native, 1024 2`] = `
 Object {
   "color": Object {
     "tracePath": "/$width",
@@ -88,21 +55,15 @@ Object {
 }
 `;
 
-exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 03: native, 1024 3`] = `
+exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 03: native, 1024 2`] = `
 Object {
   "color": "blue",
 }
 `;
 
-exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 04: native, undefined 1`] = `
-Array [
-  undefined,
-]
-`;
+exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 04: native, undefined 1`] = `undefined`;
 
-exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 04: native, undefined 2`] = `Object {}`;
-
-exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 04: native, undefined 3`] = `Object {}`;
+exports[`SHEETER $WIDTHS ## NATIVE ## 03 toClassNamesRuleset's width change 04: native, undefined 2`] = `undefined`;
 
 exports[`SHEETER $WIDTHS ## WEB ## 01 empty 1`] = `
 Array [
@@ -122,80 +83,40 @@ Array [
 
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 01: native, 300 1`] = `
 Array [
-  Array [
-    "@media (min-width: 1025px).c { color:blue } @/$width",
-    "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
-    "@media (max-width: 640px).a { color:red } @/$width",
-  ],
-]
-`;
-
-exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 01: native, 300 2`] = `
-Array [
-  "@media (max-width: 640px).a { color:red } @/$width",
-  "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
   "@media (min-width: 1025px).c { color:blue } @/$width",
+  "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
+  "@media (max-width: 640px).a { color:red } @/$width",
 ]
 `;
 
-exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 01: native, 300 3`] = `"a b c"`;
+exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 01: native, 300 2`] = `"c b a"`;
 
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 02: native, 640 1`] = `
 Array [
-  Array [
-    "@media (min-width: 1025px).c { color:blue } @/$width",
-    "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
-    "@media (max-width: 640px).a { color:red } @/$width",
-  ],
-]
-`;
-
-exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 02: native, 640 2`] = `
-Array [
-  "@media (max-width: 640px).a { color:red } @/$width",
-  "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
   "@media (min-width: 1025px).c { color:blue } @/$width",
+  "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
+  "@media (max-width: 640px).a { color:red } @/$width",
 ]
 `;
 
-exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 02: native, 640 3`] = `"a b c"`;
+exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 02: native, 640 2`] = `"c b a"`;
 
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 03: native, 1024 1`] = `
 Array [
-  Array [
-    "@media (min-width: 1025px).c { color:blue } @/$width",
-    "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
-    "@media (max-width: 640px).a { color:red } @/$width",
-  ],
-]
-`;
-
-exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 03: native, 1024 2`] = `
-Array [
-  "@media (max-width: 640px).a { color:red } @/$width",
-  "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
   "@media (min-width: 1025px).c { color:blue } @/$width",
+  "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
+  "@media (max-width: 640px).a { color:red } @/$width",
 ]
 `;
 
-exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 03: native, 1024 3`] = `"a b c"`;
+exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 03: native, 1024 2`] = `"c b a"`;
 
 exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 04: native, undefined 1`] = `
 Array [
-  Array [
-    "@media (min-width: 1025px).c { color:blue } @/$width",
-    "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
-    "@media (max-width: 640px).a { color:red } @/$width",
-  ],
-]
-`;
-
-exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 04: native, undefined 2`] = `
-Array [
-  "@media (max-width: 640px).a { color:red } @/$width",
-  "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
   "@media (min-width: 1025px).c { color:blue } @/$width",
+  "@media (min-width: 641px) and (max-width: 1024px).b { color:green } @/$width",
+  "@media (max-width: 640px).a { color:red } @/$width",
 ]
 `;
 
-exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 04: native, undefined 3`] = `"a b c"`;
+exports[`SHEETER $WIDTHS ## WEB ## 03 toClassNamesRuleset's width change 04: native, undefined 2`] = `"c b a"`;

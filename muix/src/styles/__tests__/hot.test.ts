@@ -3,7 +3,7 @@ import { $W, $T, $V, $I, V, T, I, TTyped } from 'reactxx-typings'
 import { getTypedEngine, WEB, NATIVE, STYLE, COMPILE, WIDTH, toClassNamesRuleset } from 'reactxx-styles'
 
 //let $atomizeRuleset, $toClassNamesRuleset
-import { initPlatform, dump, toMatchSnapshot } from "./init-platform.t"
+import { initPlatform, toMatchSnapshot } from "./init-platform.t"
 
 import { theme, Theme } from "reactxx-typings-test/shape.t"
 

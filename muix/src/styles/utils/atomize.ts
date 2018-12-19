@@ -44,6 +44,7 @@ export const atomizeRuleset = (
 }
 
 export const wrapAtomicLow = (atomicLow: TEngine.AtomicLow) => {
+    if (!atomicLow) return null
     const res = [
         atomicLow
     ] as TEngine.Queryables
